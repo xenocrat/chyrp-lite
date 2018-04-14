@@ -21,7 +21,7 @@
 
         # Boolean: $clean
         # Does this controller support clean URLs?
-        public $clean = true;
+        public $clean = false;
 
         # Boolean: $feed
         # Is the current page a feed?
@@ -82,22 +82,11 @@
 
         /**
          * Function: parse
-         * Route constructor calls this to interpret clean URLs and determine the action.
+         * Route constructor calls this to determine the action based on user privileges.
          */
         public function parse($route) {
             $visitor = Visitor::current();
             $config = Config::current();
-
-            # Interpret clean URLs.
-            if (!empty($route->arg[0]) and strpos($route->arg[0], "?") !== 0) {
-                $route->action = $route->arg[0];
-
-                if (!empty($route->arg[1]) and !empty($route->arg[2]))
-                    $_GET[$route->arg[1]] = $route->arg[2];
-
-                if (!empty($route->arg[3]) and !empty($route->arg[4]))
-                    $_GET[$route->arg[3]] = $route->arg[4];
-            }
 
             if (empty($route->action) or $route->action == "write") {
                 # "Write > Post", if they can add posts or drafts and at least one feather is enabled.
