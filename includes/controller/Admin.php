@@ -583,12 +583,7 @@
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
-            if (empty($_POST['login']))
-                error(__("Error"), __("Please enter a username for the account."), null, 422);
-
-            $_POST['login'] = strip_tags($_POST['login']);
-
-            if (empty($_POST['login']))
+            if (empty($_POST['login']) or derezz($_POST['login']))
                 error(__("Error"), __("Please enter a username for the account."), null, 422);
 
             $check = new User(array("login" => $_POST['login']));
@@ -685,12 +680,7 @@
             if (!$visitor->group->can("edit_user"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit users."));
 
-            if (empty($_POST['login']))
-                error(__("Error"), __("Please enter a username for the account."), null, 422);
-
-            $_POST['login'] = strip_tags($_POST['login']);
-
-            if (empty($_POST['login']))
+            if (empty($_POST['login']) or derezz($_POST['login']))
                 error(__("Error"), __("Please enter a username for the account."), null, 422);
 
             $check = new User(null, array("where" => array("login" => $_POST['login'],
@@ -879,12 +869,7 @@
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
-            if (empty($_POST['name']))
-                error(__("Error"), __("Please enter a name for the group."), null, 422);
-
-            $_POST['name'] = strip_tags($_POST['name']);
-
-            if (empty($_POST['name']))
+            if (empty($_POST['name']) or derezz($_POST['name']))
                 error(__("Error"), __("Please enter a name for the group."), null, 422);
 
             fallback($_POST['permissions'], array());
@@ -934,12 +919,7 @@
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a group."), null, 400);
 
-            if (empty($_POST['name']))
-                error(__("Error"), __("Please enter a name for the group."), null, 422);
-
-            $_POST['name'] = strip_tags($_POST['name']);
-
-            if (empty($_POST['name']))
+            if (empty($_POST['name']) or derezz($_POST['name']))
                 error(__("Error"), __("Please enter a name for the group."), null, 422);
 
             fallback($_POST['permissions'], array());
