@@ -38,11 +38,11 @@
 
     # Constant: CHYRP_VERSION
     # Version number for this release.
-    define('CHYRP_VERSION', "2018.02");
+    define('CHYRP_VERSION', "2018.03");
 
     # Constant: CHYRP_CODENAME
     # The codename for this version.
-    define('CHYRP_CODENAME', "Shelley");
+    define('CHYRP_CODENAME', "Sind");
 
     # Constant: CHYRP_IDENTITY
     # The string identifying this version.
