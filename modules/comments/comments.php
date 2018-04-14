@@ -94,12 +94,7 @@
             if (empty($_POST['body']))
                 return array($post, false, __("Message can't be blank.", "comments"));
 
-            if (empty($_POST['author']))
-                return array($post, false, __("Author can't be blank.", "comments"));
-
-            $_POST['author'] = strip_tags($_POST['author']);
-
-            if (empty($_POST['author']))
+            if (empty($_POST['author']) or derezz($_POST['author']))
                 return array($post, false, __("Author can't be blank.", "comments"));
 
             if (empty($_POST['author_email']))
@@ -158,7 +153,7 @@
             if (empty($_POST['body']))
                 return array($comment, false, __("Message can't be blank.", "comments"));
 
-            if (empty($_POST['author']))
+            if (empty($_POST['author']) or derezz($_POST['author']))
                 return array($comment, false, __("Author can't be blank.", "comments"));
 
             if (empty($_POST['author_email']) and $_POST['status'] != "pingback")
