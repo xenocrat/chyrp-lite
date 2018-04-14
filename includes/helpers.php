@@ -493,6 +493,25 @@
     }
 
     /**
+     * Function: derezz
+     * Strips tags from the supplied variable and tests it.
+     *
+     * Parameters:
+     *     &$variable - The variable, supplied by reference.
+     *
+     * Returns:
+     *     Whether or not the sanitized variable is empty.
+     *
+     * Notes:
+     *     Useful for data that will be stripped by its model
+     *     but which needs to be tested for uniqueness first.
+     */
+    function derezz(&$variable) {
+        $variable = strip_tags($variable);
+        return empty($variable);
+    }
+
+    /**
      * Function: token
      * Salt and hash a unique token using the supplied data.
      *
