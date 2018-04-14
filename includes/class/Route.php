@@ -60,7 +60,7 @@
             $regex = "~^".preg_quote(oneof(parse_url($base, PHP_URL_PATH), ""), "~")."((/)index.php)?~";
 
             # Extract the request.
-            $this->request = preg_replace($regex, "$2", $_SERVER['REQUEST_URI']);
+            $this->request = preg_replace($regex, '$2', $_SERVER['REQUEST_URI']);
 
             # Decompose clean URLs.
             $this->arg = array_map("urldecode", explode("/", trim($this->request, "/")));
