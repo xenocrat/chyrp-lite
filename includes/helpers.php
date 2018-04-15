@@ -1278,7 +1278,7 @@
 
         # Search for 301 or 302 header and recurse with new location unless redirects are exhausted.
         if ($redirects > 0 and preg_match("~^HTTP/[0-9]\.[0-9] 30[1-2]~m", $remote_headers)
-                           and preg_match("~^Location:(.+)$~mi", $remote_headers, $matches)) {
+                           and preg_match("~^Location: (.+)$~mi", $remote_headers, $matches)) {
 
             $location = trim($matches[1]);
 
@@ -1308,7 +1308,7 @@
      */
     function grab_urls($string) {
         # These expressions capture hyperlinks in HTML and unfiltered Markdown.
-        $expressions = array("/<a[^>]+href=(\"[^\"]+\"|\'[^\']+\')[^>]*>[^<]+<\/a>/i",
+        $expressions = array("/<a[^>]* href=(\"[^\"]+\"|\'[^\']+\')[^>]*>[^<]+<\/a>/i",
                              "/\[[^\]]+\]\(([^\)]+)\)/");
 
         # Modules can support other syntaxes.
@@ -1400,14 +1400,14 @@
             $line = fgets($connect);
             $remote_headers.= $line;
 
-            if (preg_match("/^X-Pingback:(.+)/i", $line, $header)) {
+            if (preg_match("/^X-Pingback: (.+)/i", $line, $header)) {
                 fclose($connect);
                 return trim($header[1]);
             }
         }
 
         # Check <link> elements if the content can be parsed.
-        if (preg_match("~^Content-Type:\s+(text/html|text/sgml|text/xml|text/plain)~im", $remote_headers)) {
+        if (preg_match("~^Content-Type: text/(html|sgml|xml|plain)~im", $remote_headers)) {
             while (!feof($connect) and strlen($remote_content) < 2048) {
                 $line = fgets($connect);
                 $remote_content.= $line;
