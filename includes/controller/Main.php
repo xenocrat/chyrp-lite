@@ -264,14 +264,11 @@
          * Grabs the posts for a search query.
          */
         public function search() {
-            $config = Config::current();
-            fallback($_GET['query'], "");
+            # Redirect searches to a clean URL or dirty GET depending on configuration.
+            if (isset($_POST['query']))
+                redirect("search/".str_ireplace("%2F", "", urlencode($_POST['query']))."/");
 
-            # Redirect search form submissions to a clean URL, removing "%2F" to avoid a server 404.
-            if ($config->clean_urls and substr_count($_SERVER['REQUEST_URI'], "?"))
-                redirect("search/".str_ireplace("%2F", "", urlencode($_GET['query']))."/");
-
-            if (empty($_GET['query']))
+            if (!isset($_GET['query']))
                 Flash::warning(__("Please enter a search term."), "/");
 
             list($where, $params) = keywords($_GET['query'], "post_attributes.value LIKE :query OR url LIKE :query", "posts");
