@@ -1257,8 +1257,10 @@
         $prefix  = ($scheme == "https") ? "tls://" : "tcp://" ;
         $connect = @fsockopen($prefix.$host, $port, $errno, $errstr, $timeout);
 
-        if (!$connect)
+        if (!$connect) {
+            trigger_error(_f("Socket error: %s", fix($errstr, false, true)), E_USER_NOTICE);
             return false;
+        }
 
         $remote_headers = "";
         $remote_content = "";
@@ -1378,8 +1380,10 @@
         $prefix  = ($scheme == "https") ? "tls://" : "tcp://" ;
         $connect = @fsockopen($prefix.$host, $port, $errno, $errstr, 3);
 
-        if (!$connect)
+        if (!$connect) {
+            trigger_error(_f("Socket error: %s", fix($errstr, false, true)), E_USER_NOTICE);
             return false;
+        }
 
         $remote_headers = "";
         $remote_content = "";
