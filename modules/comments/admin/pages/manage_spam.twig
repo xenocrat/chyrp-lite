@@ -3,9 +3,8 @@
 {% block title %}{{ "Manage Spam" | translate("comments") }}{% endblock %}
 
 {% block content %}
-<form class="filters" action="{{ url('/') }}" method="get" accept-charset="UTF-8">
+<form class="filters" action="{{ url('manage_spam') }}" method="post" accept-charset="UTF-8">
 <fieldset>
-<input type="hidden" name="action" value="manage_comments">
 <div role="search" class="filter_item">
 <h3>
 {{ "Search&hellip;" | translate }}

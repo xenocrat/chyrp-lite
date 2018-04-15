@@ -319,11 +319,12 @@
             if (!Post::any_editable() and !Post::any_deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage any posts."));
 
+            # Redirect searches to a clean URL or dirty GET depending on configuration.
+            if (isset($_POST['query']))
+                redirect("manage_posts/query/".str_ireplace("%2F", "", urlencode($_POST['query']))."/");
+
             fallback($_GET['query'], "");
             list($where, $params) = keywords($_GET['query'], "post_attributes.value LIKE :query OR url LIKE :query", "posts");
-
-            if (!empty($_GET['month']))
-                $where["created_at LIKE"] = when("Y-m-%", $_GET['month']);
 
             $visitor = Visitor::current();
 
@@ -555,6 +556,10 @@
 
             if (!$visitor->group->can("edit_page", "delete_page"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage pages."));
+
+            # Redirect searches to a clean URL or dirty GET depending on configuration.
+            if (isset($_POST['query']))
+                redirect("manage_pages/query/".str_ireplace("%2F", "", urlencode($_POST['query']))."/");
 
             fallback($_GET['query'], "");
             list($where, $params) = keywords($_GET['query'], "title LIKE :query OR body LIKE :query", "pages");
@@ -846,6 +851,10 @@
             if (!$visitor->group->can("add_user", "edit_user", "delete_user"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage users."));
 
+            # Redirect searches to a clean URL or dirty GET depending on configuration.
+            if (isset($_POST['query']))
+                redirect("manage_users/query/".str_ireplace("%2F", "", urlencode($_POST['query']))."/");
+
             fallback($_GET['query'], "");
             list($where, $params) = keywords($_GET['query'],
                 "login LIKE :query OR full_name LIKE :query OR email LIKE :query OR website LIKE :query", "users");
@@ -1068,6 +1077,10 @@
 
             if (!$visitor->group->can("add_group", "edit_group", "delete_group"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage groups."));
+
+            # Redirect searches to a clean URL or dirty GET depending on configuration.
+            if (isset($_POST['search']))
+                redirect("manage_groups/search/".str_ireplace("%2F", "", urlencode($_POST['search']))."/");
 
             if (!empty($_GET['search'])) {
                 $user = new User(array("login" => $_GET['search']));

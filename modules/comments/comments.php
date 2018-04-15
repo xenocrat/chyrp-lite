@@ -262,6 +262,10 @@
             if (!Visitor::current()->group->can("edit_comment", "delete_comment", true))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage any comments.", "comments"));
 
+            # Redirect searches to a clean URL or dirty GET depending on configuration.
+            if (isset($_POST['query']))
+                redirect("manage_spam/query/".str_ireplace("%2F", "", urlencode($_POST['query']))."/");
+
             fallback($_GET['query'], "");
             list($where, $params) = keywords($_GET['query'], "body LIKE :query", "comments");
 
@@ -449,6 +453,10 @@
         public function admin_manage_comments($admin) {
             if (!Comment::any_editable() and !Comment::any_deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage any comments.", "comments"));
+
+            # Redirect searches to a clean URL or dirty GET depending on configuration.
+            if (isset($_POST['query']))
+                redirect("manage_comments/query/".str_ireplace("%2F", "", urlencode($_POST['query']))."/");
 
             fallback($_GET['query'], "");
             list($where, $params) = keywords($_GET['query'], "body LIKE :query", "comments");

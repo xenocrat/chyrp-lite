@@ -118,6 +118,10 @@
             if (!Visitor::current()->group->can("edit_pingback", "delete_pingback"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage pingbacks.", "pingable"));
 
+            # Redirect searches to a clean URL or dirty GET depending on configuration.
+            if (isset($_POST['query']))
+                redirect("manage_pingbacks/query/".str_ireplace("%2F", "", urlencode($_POST['query']))."/");
+
             fallback($_GET['query'], "");
             list($where, $params) = keywords($_GET['query'], "title LIKE :query", "pingbacks");
 

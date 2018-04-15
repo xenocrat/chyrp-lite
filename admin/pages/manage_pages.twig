@@ -3,9 +3,8 @@
 {% block title %}{{ "Manage Pages" | translate }}{% endblock %}
 
 {% block content %}
-<form class="filters" action="{{ url('/') }}" method="get" accept-charset="UTF-8">
+<form class="filters" action="{{ url('manage_pages') }}" method="post" accept-charset="UTF-8">
 <fieldset>
-<input type="hidden" name="action" value="manage_pages">
 <div role="search" class="filter_item">
 <h3>
 {{ "Search&hellip;" | translate }}
