@@ -152,7 +152,7 @@
 
     /**
      * Function: htaccess_conf
-     * Creates the .htaccess file for Chyrp Lite or appends to an existing file.
+     * Creates the .htaccess file for Chyrp Lite or overwrites an existing file.
      *
      * Parameters:
      *     $url_path - The URL path to MAIN_DIR for the RewriteBase directive.
@@ -179,7 +179,7 @@
             return false;
 
         if (!preg_match("~".preg_quote($template, "~")."~", file_get_contents($filepath)))
-            return @file_put_contents($filepath, "\n\n".$template, FILE_APPEND);
+            return @file_put_contents($filepath, $template);
 
         return true;
     }
