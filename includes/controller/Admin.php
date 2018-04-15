@@ -21,7 +21,7 @@
 
         # Boolean: $clean
         # Does this controller support clean URLs?
-        public $clean = false;
+        public $clean = true;
 
         # Boolean: $feed
         # Is the current page a feed?
@@ -82,56 +82,67 @@
 
         /**
          * Function: parse
-         * Route constructor calls this to determine the action based on user privileges.
+         * Route constructor calls this to interpret clean URLs and determine the action.
          */
         public function parse($route) {
             $visitor = Visitor::current();
             $config = Config::current();
 
+            # Interpret clean URLs.
+            if (!empty($route->arg[0]) and strpos($route->arg[0], "?") !== 0) {
+                $route->action = $route->arg[0];
+
+                if (!empty($route->arg[1]) and !empty($route->arg[2]))
+                    $_GET[$route->arg[1]] = $route->arg[2];
+
+                if (!empty($route->arg[3]) and !empty($route->arg[4]))
+                    $_GET[$route->arg[3]] = $route->arg[4];
+            }
+
             if (empty($route->action) or $route->action == "write") {
-                # "Write > Post", if they can add posts or drafts and at least one feather is enabled.
+                # Can they add posts or drafts and is at least one feather enabled?
                 if (!empty($config->enabled_feathers) and $visitor->group->can("add_post", "add_draft"))
                     return $route->action = "write_post";
 
-                # "Write > Page", if they can add pages.
+                # Can they add pages?
                 if ($visitor->group->can("add_page"))
                     return $route->action = "write_page";
             }
 
             if (empty($route->action) or $route->action == "manage") {
-                # "Manage > Posts", if they can manage any posts.
+                # Can they manage any posts?
                 if (Post::any_editable() or Post::any_deletable())
                     return $route->action = "manage_posts";
 
-                # "Manage > Pages", if they can manage pages.
+                # Can they manage pages?
                 if ($visitor->group->can("edit_page", "delete_page"))
                     return $route->action = "manage_pages";
 
-                # "Manage > Users", if they can manage users.
+                # Can they manage users?
                 if ($visitor->group->can("add_user", "edit_user", "delete_user"))
                     return $route->action = "manage_users";
 
-                # "Manage > Groups", if they can manage groups.
+                # Can they manage groups?
                 if ($visitor->group->can("add_group", "edit_group", "delete_group"))
                     return $route->action = "manage_groups";
 
-                # "Manage > Import", if they can import content.
+                # Can they import content?
                 if ($visitor->group->can("add_post", "add_page", "add_group", "add_user"))
                     return $route->action = "import";
 
-                # "Manage > Export", if they can export content.
+                # Can they export content?
                 if ($visitor->group->can("export_content"))
                     return $route->action = "export";
             }
 
             if (empty($route->action) or $route->action == "settings") {
-                # "General Settings", if they can configure the installation.
+                # Can they change settings?
                 if ($visitor->group->can("change_settings"))
                     return $route->action = "general_settings";
             }
 
             if (empty($route->action) or $route->action == "extend") {
-                # "Modules", if they can can enable/disable extensions.
+                # Can they enable/disable extensions?
                 if ($visitor->group->can("toggle_extensions"))
                     return $route->action = "modules";
             }
