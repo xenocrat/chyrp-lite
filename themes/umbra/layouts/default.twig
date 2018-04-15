@@ -78,8 +78,7 @@
 {% endif %}
 </ul>
 <div role="search" class="search_box">
-<form action="{{ url('/') }}" method="get" accept-charset="UTF-8">
-<input type="hidden" name="action" value="search">
+<form action="{{ url('search') }}" method="post" accept-charset="UTF-8">
 <input type="text" id="search_field" name="query" value="{{ search is defined ? search | fix(true) : '' }}" placeholder="{{ 'Search&hellip;' | translate }}" aria-label="{{ 'Search this blog' | translate }}">
 <button type="submit" id="search_submit">{{ "Search" | translate }}</button>
 </form>

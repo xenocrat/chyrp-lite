@@ -1,8 +1,7 @@
 <div id="sidebar" role="navigation">
 <h1 class="banner"><a href="{{ url('/') }}">{{ site.name }}</a></h1>
 <div role="search" class="search_box">
-<form action="{{ url('/') }}" method="get" accept-charset="UTF-8">
-<input type="hidden" name="action" value="search">
+<form action="{{ url('search') }}" method="post" accept-charset="UTF-8">
 <input type="text" id="sidebar_search_field" name="query" value="{{ search is defined ? search | fix(true) : '' }}" placeholder="{{ 'Search&hellip;' | translate }}" title="{{ 'Search this blog' | translate }}">
 <button type="submit" id="sidebar_search_submit">{{ "Search" | translate }}</button>
 </form>
