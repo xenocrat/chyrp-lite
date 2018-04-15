@@ -164,10 +164,8 @@
         if (!INSTALLING)
             $url_path = oneof($url_path, parse_url(Config::current()->chyrp_url, PHP_URL_PATH), "/");
 
-        # The trim operation guarantees a string with leading and trailing slashes,
-        # but it also avoids doubling up slashes if $url_path consists of only "/".
         $template = preg_replace("~%\\{CHYRP_PATH\\}~",
-                                 rtrim("/".ltrim($url_path, "/"), "/")."/",
+                                 ltrim($url_path."/", "/"),
                                  file_get_contents(INCLUDES_DIR.DIR."htaccess.conf"));
 
         $filepath = MAIN_DIR.DIR.".htaccess";
