@@ -204,6 +204,21 @@
             error(__("Error"), __("Could not write the configuration file."));
     }
 
+    /**
+     * Function: update_htaccess
+     * Updates the .htaccess file to ensure all features are supported.
+     *
+     * Versions: 2018.02 => 2018.03
+     */
+    function update_htaccess() {
+        global $errors;
+
+        $set = htaccess_conf();
+
+        if ($set === false)
+            $errors[] = __("The <em>.htaccess</em> file cannot be configured.");
+    }
+
     #---------------------------------------------
     # Output Starts
     #---------------------------------------------
@@ -418,6 +433,7 @@
         add_feed_format();
         remove_captcha();
         disable_recaptcha();
+        update_htaccess();
 
         # Perform module upgrades.
         foreach ($config->enabled_modules as $module)
