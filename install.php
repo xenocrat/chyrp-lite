@@ -1,7 +1,7 @@
 <?php
     /**
      * File: install
-     * Builds the site configuration, creates the SQL tables, and configures the .htaccess file.
+     * Creates the SQL tables and builds the site configuration.
      */
 
     header("Content-Type: text/html; charset=UTF-8");
