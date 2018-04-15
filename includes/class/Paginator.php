@@ -65,7 +65,10 @@
 
             $this->per_page = $per_page;
             $this->name = $name;
-            $this->model = fallback($model, (count($this->array) == 2 and is_array($this->array[0]) and is_string($this->array[1]) and class_exists($this->array[1])));
+            $this->model = fallback($model, (count($this->array) == 2 and
+                                            is_array($this->array[0]) and
+                                            is_string($this->array[1]) and
+                                            class_exists($this->array[1])));
 
             if ($model)
                 list($this->array, $model_name) = $this->array;
@@ -140,9 +143,8 @@
                 $anchor = '#'.$anchor;
 
             fallback($text, __("Next &rarr;"));
-            return '<a rel="next" class="'.$class.'" id="pagination_next_'.$this->name.'" href="'.$this->next_page_url($page).$anchor.'">'.
-                    $text.
-                    '</a>';
+            return '<a rel="next" class="'.$class.'" id="pagination_next_'.$this->name.
+                '" href="'.$this->next_page_url($page).$anchor.'">'.$text.'</a>';
         }
 
         /**
@@ -163,9 +165,8 @@
                 $anchor = '#'.$anchor;
 
             fallback($text, __("&larr; Previous"));
-            return '<a rel="prev" class="'.$class.'" id="pagination_prev_'.$this->name.'" href="'.$this->prev_page_url($page).$anchor.'">'.
-                    $text.
-                    '</a>';
+            return '<a rel="prev" class="'.$class.'" id="pagination_prev_'.$this->name.
+                '" href="'.$this->prev_page_url($page).$anchor.'">'.$text.'</a>';
         }
 
         /**
@@ -185,9 +186,8 @@
                 $anchor = '#'.$anchor;
 
             fallback($text, __("Final &rarr;"));
-            return '<a rel="next" class="'.$class.'" id="pagination_final_'.$this->name.'" href="'.$this->next_page_url($this->pages).$anchor.'">'.
-                    $text.
-                    '</a>';
+            return '<a rel="next" class="'.$class.'" id="pagination_final_'.$this->name.
+                '" href="'.$this->next_page_url($this->pages).$anchor.'">'.$text.'</a>';
         }
 
         /**
@@ -207,9 +207,8 @@
                 $anchor = '#'.$anchor;
 
             fallback($text, __("&larr; First"));
-            return '<a rel="prev" class="'.$class.'" id="pagination_first_'.$this->name.'" href="'.$this->prev_page_url(1).$anchor.'">'.
-                    $text.
-                    '</a>';
+            return '<a rel="prev" class="'.$class.'" id="pagination_first_'.$this->name.
+                '" href="'.$this->prev_page_url(1).$anchor.'">'.$text.'</a>';
         }
 
         /**
