@@ -99,6 +99,12 @@
                     $_GET[$route->arg[3]] = $route->arg[4];
             }
 
+            # Discover pagination.
+            if (preg_match_all("/\/((([^_\/]+)_)?page)\/([0-9]+)/", $route->request, $pages)) {
+                foreach ($pages[1] as $index => $variable)
+                    $_GET[$variable] = (int) $pages[4][$index];
+            }
+
             if (empty($route->action) or $route->action == "write") {
                 # Can they add posts or drafts and is at least one feather enabled?
                 if (!empty($config->enabled_feathers) and $visitor->group->can("add_post", "add_draft"))
