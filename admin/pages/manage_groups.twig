@@ -36,7 +36,7 @@
 {{ group.name }}
 </td>
 <td class="group_size value">
-<a href="{{ url('manage_users/query/group:' ~ (group.name | url_encode)) }}">{{ group.size }}</a>
+<a href="{{ url('manage_users/query/' ~ (('group:' ~ group.name) | url_encode)) }}">{{ group.size }}</a>
 </td>
 <td class="group_default emblem">
 {% if group.id == site.default_group %}
