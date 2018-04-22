@@ -361,7 +361,7 @@ msgstr "删除这个页面？"
 
 #: admin/pages/delete_page.twig:8 admin/pages/delete_post.twig:8
 #: admin/pages/edit_page.twig:6 admin/pages/edit_post.twig:6
-#: admin/pages/manage_pages.twig:37 admin/pages/manage_posts.twig:48
+#: admin/pages/manage_pages.twig:36 admin/pages/manage_posts.twig:34
 msgid "[Untitled]"
 msgstr "[无标题]"
 
@@ -458,8 +458,8 @@ msgstr "登陆"
 msgid "Email"
 msgstr "电子邮件"
 
-#: admin/pages/edit_user.twig:18 admin/pages/manage_groups.twig:25
-#: admin/pages/manage_users.twig:29 admin/pages/new_user.twig:18
+#: admin/pages/edit_user.twig:18 admin/pages/manage_groups.twig:24
+#: admin/pages/manage_users.twig:28 admin/pages/new_user.twig:18
 msgid "Group"
 msgstr "组"
 
@@ -482,7 +482,7 @@ msgstr "全名"
 msgid "(optional)"
 msgstr "(可选)"
 
-#: admin/pages/edit_user.twig:42 admin/pages/manage_users.twig:31
+#: admin/pages/edit_user.twig:42 admin/pages/manage_users.twig:30
 #: admin/pages/new_user.twig:43
 msgid "Website"
 msgstr "网站"
@@ -499,19 +499,19 @@ msgstr "想要导出什么？"
 msgid "filter (optional)"
 msgstr "过滤（可选）"
 
-#: admin/pages/export.twig:11 admin/pages/manage_posts.twig:32
+#: admin/pages/export.twig:11 admin/pages/manage_posts.twig:18
 msgid "Posts"
 msgstr "所有帖子"
 
-#: admin/pages/export.twig:17 admin/pages/manage_pages.twig:19
+#: admin/pages/export.twig:17 admin/pages/manage_pages.twig:18
 msgid "Pages"
 msgstr "所有页面"
 
-#: admin/pages/export.twig:23 admin/pages/manage_groups.twig:21
+#: admin/pages/export.twig:23 admin/pages/manage_groups.twig:20
 msgid "Groups"
 msgstr "所有组"
 
-#: admin/pages/export.twig:29 admin/pages/manage_users.twig:24
+#: admin/pages/export.twig:29 admin/pages/manage_users.twig:23
 msgid "Users"
 msgstr "用户设置"
 
@@ -626,60 +626,60 @@ msgstr "一般类似于 <code>%s/uploads/</code>."
 msgid "Manage Groups"
 msgstr "管理所有组"
 
-#: admin/pages/manage_groups.twig:10
+#: admin/pages/manage_groups.twig:9
 msgid "Search all groups for user&hellip;"
 msgstr "搜索所有用户组&hellip;"
 
-#: admin/pages/manage_groups.twig:12 admin/pages/manage_pages.twig:15
-#: admin/pages/manage_posts.twig:15 admin/pages/manage_users.twig:15
+#: admin/pages/manage_groups.twig:11 admin/pages/manage_pages.twig:14
+#: admin/pages/manage_posts.twig:14 admin/pages/manage_users.twig:14
 msgid "Search"
 msgstr "搜索"
 
-#: admin/pages/manage_groups.twig:15 admin/pages/new_group.twig:3
+#: admin/pages/manage_groups.twig:14 admin/pages/new_group.twig:3
 #: admin/pages/new_group.twig:6
 msgid "New Group"
 msgstr "新组"
 
-#: admin/pages/manage_groups.twig:21 admin/pages/manage_pages.twig:19
-#: admin/pages/manage_posts.twig:32 admin/pages/manage_users.twig:24
+#: admin/pages/manage_groups.twig:20 admin/pages/manage_pages.twig:18
+#: admin/pages/manage_posts.twig:18 admin/pages/manage_users.twig:23
 msgid "Search Results"
 msgstr "搜索结果"
 
-#: admin/pages/manage_groups.twig:26
+#: admin/pages/manage_groups.twig:25
 msgid "Members"
 msgstr "成员"
 
-#: admin/pages/manage_groups.twig:27
+#: admin/pages/manage_groups.twig:26
 msgid "Default?"
 msgstr "默认？"
 
-#: admin/pages/manage_groups.twig:28
+#: admin/pages/manage_groups.twig:27
 msgid "Guests?"
 msgstr "访问者？"
 
-#: admin/pages/manage_groups.twig:30 admin/pages/manage_pages.twig:30
-#: admin/pages/manage_posts.twig:41 admin/pages/manage_users.twig:34
+#: admin/pages/manage_groups.twig:29 admin/pages/manage_pages.twig:29
+#: admin/pages/manage_posts.twig:27 admin/pages/manage_users.twig:33
 msgid "Controls"
 msgstr "操作"
 
-#: admin/pages/manage_groups.twig:44 admin/pages/manage_groups.twig:49
-#: admin/pages/manage_pages.twig:47 admin/pages/manage_pages.twig:52
-#: admin/pages/manage_users.twig:55
+#: admin/pages/manage_groups.twig:43 admin/pages/manage_groups.twig:48
+#: admin/pages/manage_pages.twig:46 admin/pages/manage_pages.twig:51
+#: admin/pages/manage_users.twig:54
 msgid "yes"
 msgstr ""
 
-#: admin/pages/manage_groups.twig:54 admin/pages/manage_pages.twig:60
-#: admin/pages/manage_posts.twig:61 admin/pages/manage_users.twig:60
+#: admin/pages/manage_groups.twig:53 admin/pages/manage_pages.twig:59
+#: admin/pages/manage_posts.twig:47 admin/pages/manage_users.twig:59
 msgid "edit"
 msgstr ""
 
-#: admin/pages/manage_groups.twig:57 admin/pages/manage_pages.twig:63
-#: admin/pages/manage_posts.twig:64 admin/pages/manage_users.twig:63
+#: admin/pages/manage_groups.twig:56 admin/pages/manage_pages.twig:62
+#: admin/pages/manage_posts.twig:50 admin/pages/manage_users.twig:62
 msgid "delete"
 msgstr ""
 
-#: admin/pages/manage_groups.twig:65 admin/pages/manage_pages.twig:75
-#: admin/pages/manage_posts.twig:76 admin/pages/manage_users.twig:75
+#: admin/pages/manage_groups.twig:64 admin/pages/manage_pages.twig:74
+#: admin/pages/manage_posts.twig:62 admin/pages/manage_users.twig:74
 #, php-format
 msgid "Page %d of %s"
 msgstr "%d of %s 的页面"
@@ -688,42 +688,42 @@ msgstr "%d of %s 的页面"
 msgid "Manage Pages"
 msgstr "管理所有也米娜"
 
-#: admin/pages/manage_pages.twig:11 admin/pages/manage_posts.twig:11
-#: admin/pages/manage_users.twig:11
+#: admin/pages/manage_pages.twig:10 admin/pages/manage_posts.twig:10
+#: admin/pages/manage_users.twig:10
 msgid "Search&hellip;"
 msgstr "搜索&hellip;"
 
-#: admin/pages/manage_pages.twig:23 admin/pages/manage_posts.twig:36
+#: admin/pages/manage_pages.twig:22 admin/pages/manage_posts.twig:22
 #: admin/partials/page_fields.twig:4
 msgid "Title"
 msgstr "标题"
 
-#: admin/pages/manage_pages.twig:24
+#: admin/pages/manage_pages.twig:23
 msgid "Created"
 msgstr "创建时间"
 
-#: admin/pages/manage_pages.twig:25
+#: admin/pages/manage_pages.twig:24
 msgid "Last Updated"
 msgstr "上一次更新时间"
 
-#: admin/pages/manage_pages.twig:26
+#: admin/pages/manage_pages.twig:25
 msgid "Public?"
 msgstr "发布？"
 
-#: admin/pages/manage_pages.twig:27
+#: admin/pages/manage_pages.twig:26
 msgid "Listed?"
 msgstr "已列出？"
 
-#: admin/pages/manage_pages.twig:28 admin/pages/manage_posts.twig:39
+#: admin/pages/manage_pages.twig:27 admin/pages/manage_posts.twig:25
 msgid "Author"
 msgstr "作者"
 
-#: admin/pages/manage_pages.twig:43
+#: admin/pages/manage_pages.twig:42
 msgid "never"
 msgstr "从不"
 
-#: admin/pages/manage_pages.twig:68 admin/pages/manage_posts.twig:69
-#: admin/pages/manage_users.twig:68
+#: admin/pages/manage_pages.twig:67 admin/pages/manage_posts.twig:55
+#: admin/pages/manage_users.twig:67
 msgid "(none)"
 msgstr "(空)"
 
@@ -731,19 +731,11 @@ msgstr "(空)"
 msgid "Manage Posts"
 msgstr "管理所有帖子"
 
-#: admin/pages/manage_posts.twig:19
-msgid "Browse by month:"
-msgstr "按月浏览："
-
-#: admin/pages/manage_posts.twig:21
-msgid "[All]"
-msgstr "[所有]"
-
-#: admin/pages/manage_posts.twig:37
+#: admin/pages/manage_posts.twig:23
 msgid "Posted"
 msgstr "已发布的"
 
-#: admin/pages/manage_posts.twig:38 admin/partials/page_fields.twig:26
+#: admin/pages/manage_posts.twig:24 admin/partials/page_fields.twig:26
 #: admin/partials/post_fields.twig:52
 msgid "Status"
 msgstr "状态"
@@ -752,19 +744,19 @@ msgstr "状态"
 msgid "Manage Users"
 msgstr "管理所有用户"
 
-#: admin/pages/manage_users.twig:18 admin/pages/new_user.twig:6
+#: admin/pages/manage_users.twig:17 admin/pages/new_user.twig:6
 msgid "New User"
 msgstr "新用户"
 
-#: admin/pages/manage_users.twig:28
+#: admin/pages/manage_users.twig:27
 msgid "Login (name)"
 msgstr "登陆（名称）"
 
-#: admin/pages/manage_users.twig:30
+#: admin/pages/manage_users.twig:29
 msgid "Joined"
 msgstr "加入时间"
 
-#: admin/pages/manage_users.twig:32
+#: admin/pages/manage_users.twig:31
 msgid "Activated?"
 msgstr "激活？"
 

@@ -53,13 +53,13 @@ Called from:
 manage_groups_column_header
 ---------------------------
 Called from:
-	admin/pages/manage_groups.twig on line 29
+	admin/pages/manage_groups.twig on line 28
 
 
 manage_groups_column
 --------------------
 Called from:
-	admin/pages/manage_groups.twig on line 52
+	admin/pages/manage_groups.twig on line 51
 Arguments:
 	groups
 
@@ -67,13 +67,13 @@ Arguments:
 manage_pages_column_header
 --------------------------
 Called from:
-	admin/pages/manage_pages.twig on line 29
+	admin/pages/manage_pages.twig on line 28
 
 
 manage_pages_column
 -------------------
 Called from:
-	admin/pages/manage_pages.twig on line 58
+	admin/pages/manage_pages.twig on line 57
 Arguments:
 	page
 
@@ -81,13 +81,13 @@ Arguments:
 manage_posts_column_header
 --------------------------
 Called from:
-	admin/pages/manage_posts.twig on line 40
+	admin/pages/manage_posts.twig on line 26
 
 
 manage_posts_column
 -------------------
 Called from:
-	admin/pages/manage_posts.twig on line 59
+	admin/pages/manage_posts.twig on line 45
 Arguments:
 	post
 
@@ -95,13 +95,13 @@ Arguments:
 manage_users_column_header
 --------------------------
 Called from:
-	admin/pages/manage_users.twig on line 33
+	admin/pages/manage_users.twig on line 32
 
 
 manage_users_column
 -------------------
 Called from:
-	admin/pages/manage_users.twig on line 58
+	admin/pages/manage_users.twig on line 57
 Arguments:
 	user
 
@@ -228,13 +228,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 1114
+	includes/controller/Admin.php on line 1124
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1374
+	includes/controller/Admin.php on line 1384
 Arguments:
 	$group
 
@@ -242,7 +242,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1398
+	includes/controller/Admin.php on line 1408
 Arguments:
 	$user
 
@@ -250,7 +250,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1436
+	includes/controller/Admin.php on line 1446
 Arguments:
 	$entry, $post
 
@@ -258,7 +258,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1465
+	includes/controller/Admin.php on line 1475
 Arguments:
 	$entry, $page
 
@@ -266,7 +266,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1469
+	includes/controller/Admin.php on line 1479
 Arguments:
 	$imports
 
@@ -274,31 +274,31 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1743
+	includes/controller/Admin.php on line 1753
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1751
+	includes/controller/Admin.php on line 1761
 
 
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 372
+	includes/controller/Main.php on line 369
 
 
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 587
+	includes/controller/Main.php on line 583
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 598
+	includes/controller/Main.php on line 594
 Arguments:
 	$user
 
@@ -306,7 +306,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 773
+	includes/controller/Main.php on line 771
 Arguments:
 	$post, $feed
 
@@ -314,13 +314,13 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 1882
+	includes/helpers.php on line 1902
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 1899
+	includes/helpers.php on line 1919
 
 
 javascript
@@ -444,9 +444,9 @@ Arguments:
 manage_comments_column_header
 -----------------------------
 Called from:
-	modules/categorize/admin/pages/manage_category.twig on line 30
-	modules/comments/admin/pages/manage_comments.twig on line 29
-	modules/comments/admin/pages/manage_spam.twig on line 28
+	modules/categorize/admin/pages/manage_category.twig on line 29
+	modules/comments/admin/pages/manage_comments.twig on line 28
+	modules/comments/admin/pages/manage_spam.twig on line 27
 
 
 add_category
@@ -484,8 +484,8 @@ Arguments:
 manage_comments_column
 ----------------------
 Called from:
-	modules/comments/admin/pages/manage_comments.twig on line 54
-	modules/comments/admin/pages/manage_spam.twig on line 47
+	modules/comments/admin/pages/manage_comments.twig on line 53
+	modules/comments/admin/pages/manage_spam.twig on line 46
 Arguments:
 	comment
 
@@ -493,7 +493,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 674
+	modules/comments/comments.php on line 682
 Arguments:
 	$comment, $feed
 
@@ -589,13 +589,13 @@ Arguments:
 manage_pingbacks_column_header
 ------------------------------
 Called from:
-	modules/pingable/admin/pages/manage_pingbacks.twig on line 26
+	modules/pingable/admin/pages/manage_pingbacks.twig on line 25
 
 
 manage_pingbacks_column
 -----------------------
 Called from:
-	modules/pingable/admin/pages/manage_pingbacks.twig on line 46
+	modules/pingable/admin/pages/manage_pingbacks.twig on line 45
 Arguments:
 	pingback
 
@@ -655,10 +655,10 @@ Called from:
 end_content
 -----------
 Called from:
-	themes/blossom/layouts/default.twig on line 120
-	themes/sparrow/layouts/default.twig on line 106
-	themes/topaz/layouts/default.twig on line 119
-	themes/umbra/layouts/default.twig on line 106
+	themes/blossom/layouts/default.twig on line 119
+	themes/sparrow/layouts/default.twig on line 105
+	themes/topaz/layouts/default.twig on line 118
+	themes/umbra/layouts/default.twig on line 105
 
 
 
@@ -751,7 +751,7 @@ admin_determine_action
 Target:
 	$route->action
 Called from:
-	includes/controller/Admin.php on line 139
+	includes/controller/Admin.php on line 156
 
 
 posts_export
@@ -759,7 +759,7 @@ posts_export
 Target:
 	$posts_atom
 Called from:
-	includes/controller/Admin.php on line 1178
+	includes/controller/Admin.php on line 1188
 Arguments:
 	$post
 
@@ -769,7 +769,7 @@ pages_export
 Target:
 	$pages_atom
 Called from:
-	includes/controller/Admin.php on line 1225
+	includes/controller/Admin.php on line 1235
 Arguments:
 	$page
 
@@ -779,7 +779,7 @@ export
 Target:
 	$exports
 Called from:
-	includes/controller/Admin.php on line 1280
+	includes/controller/Admin.php on line 1290
 
 
 before_import
@@ -787,7 +787,7 @@ before_import
 Target:
 	$imports
 Called from:
-	includes/controller/Admin.php on line 1344
+	includes/controller/Admin.php on line 1354
 
 
 write_nav
@@ -795,7 +795,7 @@ write_nav
 Target:
 	$write
 Called from:
-	includes/controller/Admin.php on line 2030
+	includes/controller/Admin.php on line 2040
 
 
 manage_nav
@@ -803,7 +803,7 @@ manage_nav
 Target:
 	$manage
 Called from:
-	includes/controller/Admin.php on line 2059
+	includes/controller/Admin.php on line 2069
 
 
 settings_nav
@@ -811,7 +811,7 @@ settings_nav
 Target:
 	$settings
 Called from:
-	includes/controller/Admin.php on line 2084
+	includes/controller/Admin.php on line 2094
 
 
 extend_nav
@@ -819,7 +819,7 @@ extend_nav
 Target:
 	$extend
 Called from:
-	includes/controller/Admin.php on line 2102
+	includes/controller/Admin.php on line 2112
 
 
 twig_context_admin
@@ -827,7 +827,7 @@ twig_context_admin
 Target:
 	$this->context
 Called from:
-	includes/controller/Admin.php on line 2154
+	includes/controller/Admin.php on line 2164
 
 
 twig_context_main
@@ -835,7 +835,7 @@ twig_context_main
 Target:
 	$this->context
 Called from:
-	includes/controller/Main.php on line 837
+	includes/controller/Main.php on line 835
 
 
 keyword_search
@@ -843,7 +843,7 @@ keyword_search
 Target:
 	$search
 Called from:
-	includes/helpers.php on line 762
+	includes/helpers.php on line 779
 Arguments:
 	$query, $plain
 
@@ -853,7 +853,7 @@ link_regexp
 Target:
 	$expressions
 Called from:
-	includes/helpers.php on line 1297
+	includes/helpers.php on line 1315
 
 
 send_mail
@@ -861,7 +861,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 2013
+	includes/helpers.php on line 2033
 
 
 xmlrpc_methods

@@ -305,27 +305,27 @@ msgstr "写作"
 msgid "Log out"
 msgstr "退出登陆"
 
-#: themes/sparrow/layouts/default.twig:83
+#: themes/sparrow/layouts/default.twig:82
 msgid "Search&hellip;"
 msgstr "搜索&hellip;"
 
-#: themes/sparrow/layouts/default.twig:83
+#: themes/sparrow/layouts/default.twig:82
 msgid "Search this blog"
 msgstr "搜索"
 
-#: themes/sparrow/layouts/default.twig:84
+#: themes/sparrow/layouts/default.twig:83
 msgid "Search"
 msgstr "搜索"
 
-#: themes/sparrow/layouts/default.twig:92
+#: themes/sparrow/layouts/default.twig:91
 msgid "&larr; Newer posts"
 msgstr "&larr; 较新的帖子"
 
-#: themes/sparrow/layouts/default.twig:102
+#: themes/sparrow/layouts/default.twig:101
 msgid "Older posts &rarr;"
 msgstr "较旧的帖子 &rarr;"
 
-#: themes/sparrow/layouts/default.twig:113
+#: themes/sparrow/layouts/default.twig:112
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "调用 %s 在行 %d 在 %s 秒."
