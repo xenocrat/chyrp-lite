@@ -222,7 +222,7 @@
         if ($set === false)
             $errors[] = __("The <em>.htaccess</em> file cannot be configured.");
 
-        if (is_int($set) and $config->url != $config->chyrp_url)
+        if (!is_bool($set) and $config->url != $config->chyrp_url)
             $errors[] = __("The <em>.htaccess</em> file has been reconfigured.")."\n".
                         __("Please update <em>.htaccess</em> in your canonical URL's destination directory.");
     }
