@@ -47,7 +47,7 @@ var ChyrpLightbox = {
         $.extend(ChyrpLightbox.styles.bg, ChyrpLightbox.styles[ChyrpLightbox.background]);
 
         $("section img").not(".suppress_lightbox").each(function() {
-            $(this).on("click", ChyrpLightbox.load).css(ChyrpLightbox.styles.image)            
+            $(this).on("click", ChyrpLightbox.load).css(ChyrpLightbox.styles.image);
 
             if (ChyrpLightbox.protect && !$(this).hasClass("suppress_protect"))
                 $(this).on("contextmenu", ChyrpLightbox.prevent);
@@ -74,7 +74,7 @@ var ChyrpLightbox = {
                     for (var i = 0; i < mutation.addedNodes.length; ++i) {
                         var item = mutation.addedNodes[i];
                         $(item).find("section img").not(".suppress_lightbox").each(function() {
-                            $(this).on("click", ChyrpLightbox.load).css(ChyrpLightbox.styles.image)            
+                            $(this).on("click", ChyrpLightbox.load).css(ChyrpLightbox.styles.image);
 
                             if (ChyrpLightbox.protect && !$(this).hasClass("suppress_protect"))
                                 $(this).on("contextmenu", ChyrpLightbox.prevent);
