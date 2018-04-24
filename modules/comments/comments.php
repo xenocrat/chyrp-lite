@@ -279,9 +279,6 @@
         }
 
         public function post_options($fields, $post = null) {
-            if ($post)
-                $post->comment_status = oneof(@$post->comment_status, "open");
-
             $statuses = array(array("name" => __("Open", "comments"),
                                     "value" => "open",
                                     "selected" => ($post ? $post->comment_status == "open" : true)),
