@@ -1,6 +1,8 @@
 <?php
     class Uploader extends Feathers implements Feather {
         public function __init() {
+            $maximum = Config::current()->uploads_limit;
+
             $this->setField(array("attr" => "title",
                                   "type"=> "text",
                                   "label" => __("Title", "uploader"),
@@ -9,7 +11,7 @@
                                   "type" => "file",
                                   "label" => __("Files", "uploader"),
                                   "multiple" => true,
-                                  "note" => _f("(Max. file size: %d Megabytes)", Config::current()->uploads_limit, "uploader")));
+                                  "note" => _f("(Max. file size: %d Megabytes)", $maximum, "uploader")));
             $this->setField(array("attr" => "caption",
                                   "type" => "text_block",
                                   "label" => __("Caption", "uploader"),

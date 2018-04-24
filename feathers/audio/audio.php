@@ -1,6 +1,8 @@
 <?php
     class Audio extends Feathers implements Feather {
         public function __init() {
+            $maximum = Config::current()->uploads_limit;
+
             $this->setField(array("attr" => "title",
                                   "type" => "text",
                                   "label" => __("Title", "audio"),
@@ -9,7 +11,7 @@
                                   "type" => "file",
                                   "label" => __("Audio File", "audio"),
                                   "multiple" => false,
-                                  "note" => _f("(Max. file size: %d Megabytes)", Config::current()->uploads_limit, "audio")));
+                                  "note" => _f("(Max. file size: %d Megabytes)", $maximum, "audio")));
             $this->setField(array("attr" => "description",
                                   "type" => "text_block",
                                   "label" => __("Description", "audio"),
@@ -107,8 +109,8 @@
 
             return '<audio controls>'."\n".
                    __("Your web browser does not support the <code>audio</code> element.", "audio")."\n".
-                   '<source src="'.uploaded($post->filename).'" type="'.self::audio_type($post->filename).'">'."\n".
-                   '</audio>'."\n";
+                   '<source src="'.uploaded($post->filename).'" type="'.self::audio_type($post->filename).
+                   '">'."\n".'</audio>'."\n";
         }
 
         private function audio_type($filename) {

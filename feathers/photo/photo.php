@@ -1,6 +1,8 @@
 <?php
     class Photo extends Feathers implements Feather {
         public function __init() {
+            $maximum = Config::current()->uploads_limit;
+
             $this->setField(array("attr" => "title",
                                   "type" => "text",
                                   "label" => __("Title", "photo"),
@@ -9,7 +11,7 @@
                                   "type" => "file",
                                   "label" => __("Photo", "photo"),
                                   "multiple" => false,
-                                  "note" => _f("(Max. file size: %d Megabytes)", Config::current()->uploads_limit, "photo")));
+                                  "note" => _f("(Max. file size: %d Megabytes)", $maximum, "photo")));
             $this->setField(array("attr" => "caption",
                                   "type" => "text_block",
                                   "label" => __("Caption", "photo"),
@@ -68,7 +70,8 @@
         }
 
         public function feed_content($post) {
-            $content = '<img src="'.Config::current()->chyrp_url."/includes/thumb.php?file=".urlencode($post->filename).
+            $content = '<img src="'.Config::current()->chyrp_url.
+                       "/includes/thumb.php?file=".urlencode($post->filename).
                        '" alt="'.fix(oneof($post->alt_text, $post->filename), true).'">';
 
             if (!empty($post->caption))
