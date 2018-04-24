@@ -92,11 +92,8 @@
             }
         }
 
-        public function add_option($options, $post = null) {
-            if (isset($post) and $post->feather != "photo")
-                return;
-
-            if (Route::current()->action == "write_post" and $_GET['feather'] != "photo")
+        public function add_option($options, $post = null, $feather = null) {
+            if (isset($feather) and $feather != "photo")
                 return;
 
             $options[] = array("attr" => "option[alt_text]",

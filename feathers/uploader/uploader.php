@@ -169,11 +169,8 @@
             return $list;
         }
 
-        public function add_option($options, $post = null) {
-            if (isset($post) and $post->feather != "uploader")
-                return;
-
-            if (Route::current()->action == "write_post" and $_GET['feather'] != "uploader")
+        public function add_option($options, $post = null, $feather = null) {
+            if (isset($feather) and $feather != "uploader")
                 return;
 
             $options[] = array("attr" => "option[source]",
