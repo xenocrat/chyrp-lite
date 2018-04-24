@@ -181,7 +181,7 @@
 
             $_SESSION['latest_feather'] = $_GET['feather'];
 
-            Trigger::current()->filter($options, array("write_post_options", "post_options"));
+            Trigger::current()->filter($options, array("write_post_options", "post_options"), null, $_GET['feather']);
 
             $this->display("pages".DIR."write_post",
                            array("groups" => Group::find(array("order" => "id ASC")),
@@ -230,7 +230,7 @@
             if (!$post->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this post."));
 
-            Trigger::current()->filter($options, array("edit_post_options", "post_options"), $post);
+            Trigger::current()->filter($options, array("edit_post_options", "post_options"), $post, $post->feather);
 
             $this->display("pages".DIR."edit_post",
                            array("post" => $post,
