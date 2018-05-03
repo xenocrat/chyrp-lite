@@ -319,7 +319,7 @@ msgid "Compose blog content using Markdown text formatting."
 msgstr "使用Markdown语法撰写博客内容。"
 
 #: admin/pages/content_settings.twig:87 admin/pages/edit_group.twig:24
-#: admin/pages/edit_user.twig:49 admin/pages/general_settings.twig:67
+#: admin/pages/edit_user.twig:49 admin/pages/general_settings.twig:61
 #: admin/pages/route_settings.twig:85 admin/pages/user_settings.twig:41
 msgid "Update"
 msgstr "更新"
@@ -577,17 +577,9 @@ msgstr "语言"
 msgid "Notify Visitors About Cookies?"
 msgstr "通知来访者有关于Cookies的使用？"
 
-#: admin/pages/general_settings.twig:56
-msgid "EU Directive 2002/58 on Privacy and Electronic Communications."
-msgstr "关于隐私和电子通信的欧盟指令2002/58。"
-
-#: admin/pages/general_settings.twig:60
+#: admin/pages/general_settings.twig:57
 msgid "Check for Updates?"
 msgstr "检查更新？"
-
-#: admin/pages/general_settings.twig:63
-msgid "Check for the availability of new Chyrp Lite versions."
-msgstr "检查可用的新版本。"
 
 #: admin/pages/import.twig:3 admin/pages/import.twig:44
 msgid "Import"

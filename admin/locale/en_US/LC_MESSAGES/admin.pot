@@ -280,7 +280,7 @@ msgstr ""
 #: admin/pages/content_settings.twig:87
 #: admin/pages/edit_group.twig:24
 #: admin/pages/edit_user.twig:49
-#: admin/pages/general_settings.twig:67
+#: admin/pages/general_settings.twig:61
 #: admin/pages/route_settings.twig:85
 #: admin/pages/user_settings.twig:41
 msgid "Update"
@@ -573,16 +573,8 @@ msgstr ""
 msgid "Notify Visitors About Cookies?"
 msgstr ""
 
-#: admin/pages/general_settings.twig:56
-msgid "EU Directive 2002/58 on Privacy and Electronic Communications."
-msgstr ""
-
-#: admin/pages/general_settings.twig:60
+#: admin/pages/general_settings.twig:57
 msgid "Check for Updates?"
-msgstr ""
-
-#: admin/pages/general_settings.twig:63
-msgid "Check for the availability of new Chyrp Lite versions."
 msgstr ""
 
 #: admin/pages/import.twig:3

@@ -157,10 +157,10 @@ Arguments:
 delete_upload
 -------------
 Called from:
-	feathers/audio/audio.php on line 89
-	feathers/photo/photo.php on line 89
-	feathers/uploader/uploader.php on line 130
-	feathers/video/video.php on line 89
+	feathers/audio/audio.php on line 91
+	feathers/photo/photo.php on line 92
+	feathers/uploader/uploader.php on line 132
+	feathers/video/video.php on line 91
 Arguments:
 	$post->filename
 
@@ -168,7 +168,7 @@ Arguments:
 audio_player
 ------------
 Called from:
-	feathers/audio/audio.php on line 106
+	feathers/audio/audio.php on line 108
 Arguments:
 	$post
 
@@ -176,7 +176,7 @@ Arguments:
 video_player
 ------------
 Called from:
-	feathers/video/video.php on line 106
+	feathers/video/video.php on line 108
 Arguments:
 	$post
 
@@ -493,7 +493,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 682
+	modules/comments/comments.php on line 679
 Arguments:
 	$comment, $feed
 
