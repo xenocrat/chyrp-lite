@@ -45,17 +45,23 @@
      * Returns whether or not the request was referred from another resource on this site.
      */
     function same_origin() {
-        $parsed = parse_url(Config::current()->url);
-        $origin = fallback($parsed["scheme"], "http")."://".fallback($parsed["host"], $_SERVER['SERVER_NAME']);
+        $config = Config::current();
 
-        if (isset($parsed["port"]))
-            $origin.= ":".$parsed["port"];
+        foreach (array($config->url, $config->chyrp_url) as $url) {
+            $parsed = parse_url($url);
+            $origin = fallback($parsed["scheme"], "http")."://".fallback($parsed["host"], $_SERVER['SERVER_NAME']);
 
-        if (isset($_SERVER['HTTP_ORIGIN']) and strpos($_SERVER['HTTP_ORIGIN'], $origin) === 0)
-            return true;
+            if (isset($parsed["port"]))
+                $origin.= ":".$parsed["port"];
 
-        if (isset($_SERVER['HTTP_REFERER']) and strpos($_SERVER['HTTP_REFERER'], $origin) === 0)
-            return true;
+            $quoted = preg_quote($origin, '~');
+
+            if (isset($_SERVER['HTTP_ORIGIN']) and preg_match('~^'.$quoted.'$~', $_SERVER['HTTP_ORIGIN']))
+                return true;
+
+            if (isset($_SERVER['HTTP_REFERER']) and preg_match('~^'.$quoted.'($|/)~', $_SERVER['HTTP_REFERER']))
+                return true;
+        }
 
         return false;
     }
