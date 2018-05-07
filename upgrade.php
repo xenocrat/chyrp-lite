@@ -92,7 +92,6 @@
             $errors[] = __("Please CHMOD or CHOWN the <em>caches</em> directory to make it writable.");
     }
 
-
     /**
      * Function: add_markdown
      * Adds the enable_markdown config setting.
