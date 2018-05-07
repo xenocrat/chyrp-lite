@@ -85,18 +85,18 @@ msgstr "路由启动了一个无效的控制器。"
 #: includes/controller/Admin.php:1791 includes/controller/Admin.php:1794
 #: includes/controller/Admin.php:1842 includes/controller/Admin.php:1997
 #: includes/controller/Ajax.php:32 includes/download.php:12
-#: includes/download.php:15 includes/error.php:144 includes/helpers.php:1623
-#: includes/helpers.php:1629 includes/helpers.php:1632
-#: includes/helpers.php:1635 includes/helpers.php:1661
-#: includes/helpers.php:1664 includes/helpers.php:1667
-#: includes/helpers.php:1729 includes/helpers.php:1732
+#: includes/download.php:15 includes/error.php:144 includes/helpers.php:1629
+#: includes/helpers.php:1635 includes/helpers.php:1638
+#: includes/helpers.php:1641 includes/helpers.php:1667
+#: includes/helpers.php:1670 includes/helpers.php:1673
 #: includes/helpers.php:1735 includes/helpers.php:1738
 #: includes/helpers.php:1741 includes/helpers.php:1744
-#: includes/helpers.php:1747 includes/helpers.php:1752 includes/thumb.php:15
+#: includes/helpers.php:1747 includes/helpers.php:1750
+#: includes/helpers.php:1753 includes/helpers.php:1758 includes/thumb.php:15
 #: includes/thumb.php:18 includes/thumb.php:47 includes/thumb.php:202
-#: install.php:737 upgrade.php:85 upgrade.php:98 upgrade.php:111
-#: upgrade.php:124 upgrade.php:137 upgrade.php:151 upgrade.php:177
-#: upgrade.php:190 upgrade.php:204
+#: install.php:737 upgrade.php:105 upgrade.php:118 upgrade.php:131
+#: upgrade.php:144 upgrade.php:157 upgrade.php:171 upgrade.php:197
+#: upgrade.php:210 upgrade.php:224
 msgid "Error"
 msgstr "错误"
 
@@ -144,7 +144,7 @@ msgstr "无效动作。"
 #: includes/controller/Ajax.php:90 includes/controller/Ajax.php:125
 #: includes/controller/Ajax.php:128 includes/controller/Main.php:306
 #: includes/controller/Main.php:370 includes/download.php:18
-#: includes/helpers.php:1626 includes/thumb.php:21
+#: includes/helpers.php:1632 includes/thumb.php:21
 msgid "Access Denied"
 msgstr "访问被拒绝"
 
@@ -212,7 +212,7 @@ msgstr "您必须启用至少一个羽毛才能撰写帖子。"
 #: includes/controller/Admin.php:1014 includes/controller/Admin.php:1656
 #: includes/controller/Admin.php:1700 includes/controller/Ajax.php:49
 #: includes/controller/Ajax.php:75 includes/download.php:24
-#: includes/helpers.php:116 includes/thumb.php:44
+#: includes/helpers.php:122 includes/thumb.php:44
 msgid "Not Found"
 msgstr "未找到"
 
@@ -963,163 +963,163 @@ msgstr "回溯"
 msgid "%s on line %d"
 msgstr "%s 在行 %d"
 
-#: includes/helpers.php:92
+#: includes/helpers.php:98
 msgid "Forbidden"
 msgstr "被禁止"
 
-#: includes/helpers.php:93
+#: includes/helpers.php:99
 msgid "You do not have permission to access this resource."
 msgstr "您没有权限访问这个资源。"
 
-#: includes/helpers.php:117
+#: includes/helpers.php:123
 msgid "The requested resource was not found."
 msgstr "请求的资源未找到。"
 
-#: includes/helpers.php:1261 includes/helpers.php:1384
+#: includes/helpers.php:1267 includes/helpers.php:1390
 #, php-format
 msgid "Socket error: %s"
 msgstr "套接字错误： %s"
 
-#: includes/helpers.php:1462
+#: includes/helpers.php:1468
 msgid "Please create the uploads directory."
 msgstr "请创建上传目录。"
 
-#: includes/helpers.php:1464
+#: includes/helpers.php:1470
 msgid "Please make the uploads directory writable."
 msgstr "请确保上传目录科协。"
 
-#: includes/helpers.php:1482
+#: includes/helpers.php:1488
 #, php-format
 msgid "%s module is missing."
 msgstr "找不到模块 %s 。"
 
-#: includes/helpers.php:1491
+#: includes/helpers.php:1497
 #, php-format
 msgid "%s module is damaged."
 msgstr "模块 %s 破损。"
 
-#: includes/helpers.php:1505
+#: includes/helpers.php:1511
 #, php-format
 msgid "%s feather is missing."
 msgstr "找不到羽毛 %s 。"
 
-#: includes/helpers.php:1514
+#: includes/helpers.php:1520
 #, php-format
 msgid "%s feather is damaged."
 msgstr "羽毛 %s 破损。"
 
-#: includes/helpers.php:1574 includes/helpers.php:1595
+#: includes/helpers.php:1580 includes/helpers.php:1601
 #, php-format
 msgid "Execution of %s has been cancelled."
 msgstr "执行 %s 已被取消。"
 
-#: includes/helpers.php:1623
+#: includes/helpers.php:1629
 msgid "Uploaded file is of an unsupported type."
 msgstr "上传的文件是不支持的类型。"
 
-#: includes/helpers.php:1626
+#: includes/helpers.php:1632
 msgid "Only uploaded files are accepted."
 msgstr "只有上传的文件被接受。"
 
-#: includes/helpers.php:1629 includes/helpers.php:1661
+#: includes/helpers.php:1635 includes/helpers.php:1667
 #: includes/lib/XMLRPC.php:195
 msgid "Upload path does not exist."
 msgstr "上传路径不存在。"
 
-#: includes/helpers.php:1632 includes/helpers.php:1664
+#: includes/helpers.php:1638 includes/helpers.php:1670
 #: includes/lib/XMLRPC.php:198
 msgid "Upload path is not writable."
 msgstr "上传路径不可写。"
 
-#: includes/helpers.php:1635 includes/helpers.php:1667
-#: includes/helpers.php:1742 includes/lib/XMLRPC.php:201
+#: includes/helpers.php:1641 includes/helpers.php:1673
+#: includes/helpers.php:1748 includes/lib/XMLRPC.php:201
 msgid "Failed to write file to disk."
 msgstr "写入文件到磁盘失败。"
 
-#: includes/helpers.php:1730
+#: includes/helpers.php:1736
 msgid ""
 "The uploaded file exceeds the <code>upload_max_filesize</code> directive in "
 "php.ini."
 msgstr "上传的文件超过 php.ini 中<code>upload_max_filesize</code>的大小。"
 
-#: includes/helpers.php:1733
+#: includes/helpers.php:1739
 msgid ""
 "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the "
 "HTML form."
 msgstr "上传的文件超过 php.ini 中<code>MAX_FILE_SIZE</code>的大小。"
 
-#: includes/helpers.php:1736
+#: includes/helpers.php:1742
 msgid "The uploaded file was only partially uploaded."
 msgstr "上传文件仅部分上传。"
 
-#: includes/helpers.php:1739
+#: includes/helpers.php:1745
 msgid "Missing a temporary folder."
 msgstr "缺少临时文件夹。"
 
-#: includes/helpers.php:1745
+#: includes/helpers.php:1751
 msgid "File upload was stopped by a PHP extension."
 msgstr "文件上传已被PHP扩展停止。"
 
-#: includes/helpers.php:1748
+#: includes/helpers.php:1754
 #, php-format
 msgid "File upload failed with error %d."
 msgstr "上传文件失败，错误：%d."
 
-#: includes/helpers.php:1753
+#: includes/helpers.php:1759
 #, php-format
 msgid ""
 "The uploaded file exceeds the maximum size of %d Megabytes allowed by this "
 "site."
 msgstr "上传的文件超过本站点允许的 %d M。"
 
-#: includes/helpers.php:1969
+#: includes/helpers.php:1975
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr "JSON编码错误：%s"
 
-#: includes/helpers.php:1990
+#: includes/helpers.php:1996
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr "JSON解码错误：%s"
 
-#: includes/helpers.php:2063
+#: includes/helpers.php:2069
 #, php-format
 msgid "Activate your account at %s"
 msgstr "在 %s 上激活您的账户"
 
-#: includes/helpers.php:2064 includes/helpers.php:2074
-#: includes/helpers.php:2084
+#: includes/helpers.php:2070 includes/helpers.php:2080
+#: includes/helpers.php:2090
 #, php-format
 msgid "Hello, %s."
 msgstr "您好，%s."
 
-#: includes/helpers.php:2066
+#: includes/helpers.php:2072
 msgid "You are receiving this message because you registered a new account."
 msgstr "您收到此邮件因为您已经注册了新账户。"
 
-#: includes/helpers.php:2068
+#: includes/helpers.php:2074
 msgid "Visit this link to activate your account:"
 msgstr "访问这个链接激活您的账户："
 
-#: includes/helpers.php:2073
+#: includes/helpers.php:2079
 #, php-format
 msgid "Reset your password at %s"
 msgstr "在 %s上重置您的密码"
 
-#: includes/helpers.php:2076
+#: includes/helpers.php:2082
 msgid "You are receiving this message because you requested a new password."
 msgstr "您收到此消息是因为您请求了新密码。"
 
-#: includes/helpers.php:2078
+#: includes/helpers.php:2084
 msgid "Visit this link to reset your password:"
 msgstr "访问这个链接重置您的密码："
 
-#: includes/helpers.php:2083
+#: includes/helpers.php:2089
 #, php-format
 msgid "Your new password for %s"
 msgstr "您的新密码为 %s"
 
-#: includes/helpers.php:2086
+#: includes/helpers.php:2092
 #, php-format
 msgid "Your new password is: %s"
 msgstr "您的新密码: %s"
@@ -1323,16 +1323,16 @@ msgstr "最大尺寸不能为0."
 msgid "Failed to create image thumbnail."
 msgstr "无法创建图片缩略图。"
 
-#: install.php:97
+#: install.php:97 upgrade.php:84
 msgid "Please CHMOD or CHOWN the installation directory to make it writable."
 msgstr "请对安装目录使用CHMOD 或者 CHOWN 确保其可写。"
 
-#: install.php:101
+#: install.php:101 upgrade.php:88
 msgid ""
 "Please CHMOD or CHOWN the <em>includes</em> directory to make it writable."
 msgstr "请对<em>includes</em>目录使用CHMOD 或者 CHOWN 确保其可写。"
 
-#: install.php:105
+#: install.php:105 upgrade.php:92
 msgid ""
 "Please CHMOD or CHOWN the <em>caches</em> directory to make it writable."
 msgstr "请对<em>caches</em>目录使用CHMOD 或者 CHOWN 确保其可写。"
@@ -1373,9 +1373,9 @@ msgstr "请确保您的SQLite数据库在这个服务器上可写。"
 msgid "Please enter a username and password for the MySQL database."
 msgstr "请输入MySQL数据的用户名和密码。"
 
-#: install.php:737 upgrade.php:85 upgrade.php:98 upgrade.php:111
-#: upgrade.php:124 upgrade.php:137 upgrade.php:151 upgrade.php:177
-#: upgrade.php:190 upgrade.php:204
+#: install.php:737 upgrade.php:105 upgrade.php:118 upgrade.php:131
+#: upgrade.php:144 upgrade.php:157 upgrade.php:171 upgrade.php:197
+#: upgrade.php:210 upgrade.php:224
 msgid "Could not write the configuration file."
 msgstr "不能写入配置文件。"
 
@@ -1469,7 +1469,7 @@ msgstr "安装！"
 msgid "Installation Complete"
 msgstr "安装完成"
 
-#: install.php:849 upgrade.php:480
+#: install.php:849 upgrade.php:499
 msgid "What now?"
 msgstr "现在做什么？"
 
@@ -1481,60 +1481,54 @@ msgstr "删除 <em>install.php</em>，您不再需要它。"
 msgid "Log in to your site and configure things to your liking."
 msgstr "登陆您的站点并且配置您喜欢的东西。"
 
-#: install.php:854 upgrade.php:486
+#: install.php:854 upgrade.php:505
 msgid "Take me to my site!"
 msgstr "前往我的站点！"
 
-#: upgrade.php:223
+#: upgrade.php:241
 msgid "The <em>.htaccess</em> file cannot be configured."
 msgstr ""
 
-#: upgrade.php:226
-msgid "The <em>.htaccess</em> file has been reconfigured."
+#: upgrade.php:245
+msgid "You might need to update your canonical URL's <em>.htaccess</em> file."
 msgstr ""
 
-#: upgrade.php:227
-msgid ""
-"Please update <em>.htaccess</em> in your canonical URL's destination "
-"directory."
-msgstr ""
-
-#: upgrade.php:238
+#: upgrade.php:256
 msgid "Chyrp Lite Upgrader"
 msgstr "Chyrp Lite升级程序"
 
-#: upgrade.php:469
+#: upgrade.php:488
 msgid "Halt!"
 msgstr "等一下！"
 
-#: upgrade.php:470
+#: upgrade.php:489
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr "升级前请采取以下预防措施："
 
-#: upgrade.php:472
+#: upgrade.php:491
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr "<strong>开始前备份您的数据库！</strong>"
 
-#: upgrade.php:473
+#: upgrade.php:492
 msgid "Tell your users that your site is offline for maintenance."
 msgstr "告知您的用户站点处于离线状态以进行维护。"
 
-#: upgrade.php:476
+#: upgrade.php:495
 msgid "Upgrade me!"
 msgstr "升级！"
 
-#: upgrade.php:479
+#: upgrade.php:498
 msgid "Upgrade Complete"
 msgstr "升级完成"
 
-#: upgrade.php:482
+#: upgrade.php:501
 msgid "Take action to resolve any errors reported on this page."
 msgstr "采取措施解决此页面上报告的任何错误。"
 
-#: upgrade.php:483
+#: upgrade.php:502
 msgid "Run this upgrader again if you need to."
 msgstr "如果需要，再次运行此升级程序。"
 
-#: upgrade.php:484
+#: upgrade.php:503
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr "删除 <em>upgrade.php</em> 一旦您升级完成后。"
