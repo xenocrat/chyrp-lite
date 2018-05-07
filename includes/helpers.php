@@ -498,17 +498,17 @@
 
     /**
      * Function: derezz
-     * Strips tags from the supplied variable and tests it.
+     * Strips tags from the supplied variable and tests it for emptiness.
      *
      * Parameters:
      *     &$variable - The variable, supplied by reference.
      *
      * Returns:
-     *     Whether or not the sanitized variable is empty.
+     *     Whether or not the stripped variable is empty.
      *
      * Notes:
-     *     Useful for data that will be stripped by its model
-     *     but which needs to be tested for uniqueness first.
+     *     Useful for data that will be stripped later on by its model
+     *     but which needs to be tested for uniqueness/emptiness first.
      */
     function derezz(&$variable) {
         $variable = strip_tags($variable);
