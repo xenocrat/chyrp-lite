@@ -73,6 +73,27 @@
     load_translator("chyrp", INCLUDES_DIR.DIR."locale");
 
     /**
+     * Function: test_directories
+     * Tests whether or not the directories that need write access have it.
+     */
+    function test_directories() {
+        global $errors;
+
+        # Test if we can write to MAIN_DIR (needed for the .htaccess file).
+        if (!is_writable(MAIN_DIR))
+            $errors[] = __("Please CHMOD or CHOWN the installation directory to make it writable.");
+
+        # Test if we can write to INCLUDES_DIR (needed for config.json.php).
+        if (!is_writable(INCLUDES_DIR))
+            $errors[] = __("Please CHMOD or CHOWN the <em>includes</em> directory to make it writable.");
+
+        # Test if we can write to CACHES_DIR (needed by some extensions).
+        if (!is_writable(CACHES_DIR))
+            $errors[] = __("Please CHMOD or CHOWN the <em>caches</em> directory to make it writable.");
+    }
+
+
+    /**
      * Function: add_markdown
      * Adds the enable_markdown config setting.
      *
@@ -214,17 +235,15 @@
         global $errors;
         $config = Config::current();
 
-        if (!file_exists(MAIN_DIR.DIR.".htaccess"))
-            return;
+        if (file_exists(MAIN_DIR.DIR.".htaccess")) {
+            $set = htaccess_conf();
 
-        $set = htaccess_conf();
+            if ($set === false)
+                $errors[] = __("The <em>.htaccess</em> file cannot be configured.");
+        }
 
-        if ($set === false)
-            $errors[] = __("The <em>.htaccess</em> file cannot be configured.");
-
-        if (!is_bool($set) and $config->url != $config->chyrp_url)
-            $errors[] = __("The <em>.htaccess</em> file has been reconfigured.")."\n".
-                        __("Please update <em>.htaccess</em> in your canonical URL's destination directory.");
+        if ($config->url != $config->chyrp_url)
+            $errors[] = __("You might need to update your canonical URL's <em>.htaccess</em> file.");
     }
 
     #---------------------------------------------
@@ -431,6 +450,7 @@
 
     if ((isset($_POST['upgrade']) and $_POST['upgrade'] == "yes")) {
         # Perform core upgrade tasks.
+        test_directories();
         add_markdown();
         add_homepage();
         add_uploads_limit();
