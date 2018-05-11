@@ -170,20 +170,24 @@
         if (!INSTALLING)
             $url_path = oneof($url_path, parse_url(Config::current()->chyrp_url, PHP_URL_PATH), "/");
 
-        $template = preg_replace("~%\\{CHYRP_PATH\\}~",
-                                 ltrim($url_path."/", "/"),
-                                 file_get_contents(INCLUDES_DIR.DIR."htaccess.conf"));
-
         $filepath = MAIN_DIR.DIR.".htaccess";
+        $template = INCLUDES_DIR.DIR."htaccess.conf";
+
+        if (!is_file($template) or !is_readable($template))
+            return false;
+
+        $htaccess = preg_replace("~%\\{CHYRP_PATH\\}~",
+                                 ltrim($url_path."/", "/"),
+                                 file_get_contents($template));
 
         if (!file_exists($filepath))
-            return @file_put_contents($filepath, $template);
+            return @file_put_contents($filepath, $htaccess);
 
         if (!is_file($filepath) or !is_readable($filepath))
             return false;
 
-        if (!preg_match("~".preg_quote($template, "~")."~", file_get_contents($filepath)))
-            return @file_put_contents($filepath, $template);
+        if (!preg_match("~".preg_quote($htaccess, "~")."~", file_get_contents($filepath)))
+            return @file_put_contents($filepath, $htaccess);
 
         return true;
     }
