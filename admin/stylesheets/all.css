@@ -120,8 +120,7 @@ small li code, .small li code {                 line-height: 2 }
 p {                                             margin: 0em 0em 1em 0em }
 a:link, a:visited {                             color: #4a4747;
                                                 text-decoration: underline }
-a:hover, a:focus, a:active {                    outline: none;
-                                                color: #1e57ba;
+a:hover, a:focus, a:active {                    color: #2f61c4;
                                                 text-decoration: underline }
 small a, .small a, .sub a {                     color: #b3b5b5 }
 div.clear {                                     visibility: hidden;
@@ -177,14 +176,13 @@ div.clear {                                     visibility: hidden;
 
 #header #navigation li a:link,
 #header #navigation li a:visited {              background-color: #cfcfcf;
-                                                color: #5f5f5f;
-                                                text-decoration: none }
+                                                color: #5f5f5f }
 #header #navigation li.selected a:link,
 #header #navigation li.selected a:visited,
 #header #navigation li a:hover,
-#header #navigation li a:focus {                background-color: #efefef;
-                                                color: #4a4747;
-                                                text-decoration: none }
+#header #navigation li a:focus {                outline: none;
+                                                background-color: #efefef;
+                                                color: #4a4747 }
 
 /**
  *---------------------------------------------
@@ -231,11 +229,10 @@ div.clear {                                     visibility: hidden;
 #sub_nav li.selected a:link,
 #sub_nav li.selected a:visited,
 #sub_nav li a:hover,
-#sub_nav li a:focus {                           background-color: #ffffff;
+#sub_nav li a:focus {                           outline: none;
+                                                background-color: #ffffff;
                                                 color: #4a4747;
-                                                text-decoration: none;
-                                                border: 1px solid #dfdfdf;
-                                                border-bottom: none }
+                                                border-color: #dfdfdf }
 
 /**
  *---------------------------------------------
@@ -330,12 +327,7 @@ li.feather div.controls button {                float: right }
  *---------------------------------------------
  */
 
-input::-webkit-input-placeholder,
-input:-moz-placeholder,
-input::-moz-placeholder,
-input:-ms-input-placeholder,
-input::-ms-input-placeholder,
-input:input-placeholder {                       color: #ddd;
+input:placeholder {                             color: #dddddd;
                                                 opacity: 1 }
 label {                                         line-height: 2 }
 input[type="text"],
@@ -476,19 +468,14 @@ p.flash {                                       padding: 0.6rem;
                                                 color: #ffffff;
                                                 border: none;
                                                 border-radius: 0.4em }
-p.flash.notice {                                background-color: #76b362;
-                                                color: #ffffff }
-p.flash.warning {                               background-color: #d94c4c;
-                                                color: #ffffff }
-p.flash a {                                     display: inline-block;
-                                                position: relative;
-                                                top: 0px;
-                                                color: #ffffff }
+p.flash.notice {                                background-color: #76b362 }
+p.flash.warning {                               background-color: #d94c4c }
+p.flash a {                                     color: #ffffff;
+                                                font-weight: bold;
+                                                text-decoration: none }
 p.flash a:hover,
 p.flash a:focus,
-p.flash a:active {                              top: 1px;
-                                                color: #ffffff }
-
+p.flash a:active {                              text-decoration: underline }
 
 /**
  *---------------------------------------------
@@ -521,6 +508,7 @@ button:focus,
 a.button:focus,
 a.next_page:focus,
 a.prev_page:focus,
+button:active,
 a.button:active,
 a.next_page:active,
 a.prev_page:active {                            border-color: #1e57ba;
@@ -636,7 +624,7 @@ div.confirmation {                              text-align: center;
                                                 margin-top: 1rem }
 hr {                                            border: none;
                                                 clear: both;
-                                                border-top: 1px solid #ddd;
+                                                border-top: 1px solid #dddddd;
                                                 margin: 2rem 0rem }
 a.emblem {                                      text-decoration: none }
 a.emblem > img,
@@ -683,7 +671,7 @@ img.emblem.preview {                            cursor: pointer;
                                                 overflow-x: hidden;
                                                 overflow-y: auto;
                                                 border: none;
-                                                background-color: #fff;
+                                                background-color: #ffffff;
                                                 box-shadow: 0px 4px 16px 2px rgba(79, 79, 79, 0.5) }
 .iframe_close_gadget {                          display: block;
                                                 position: absolute;
