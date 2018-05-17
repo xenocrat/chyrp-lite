@@ -480,12 +480,14 @@ p.flash.notice {                                background-color: #76b362;
                                                 color: #ffffff }
 p.flash.warning {                               background-color: #d94c4c;
                                                 color: #ffffff }
-p.flash a:link,
-p.flash a:visited,
+p.flash a {                                     display: inline-block;
+                                                position: relative;
+                                                top: 0px;
+                                                color: #ffffff }
 p.flash a:hover,
 p.flash a:focus,
-p.flash a:active {                              color: #ffffff;
-                                                text-decoration: underline }
+p.flash a:active {                              top: 1px;
+                                                color: #ffffff }
 
 
 /**
