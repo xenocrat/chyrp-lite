@@ -118,16 +118,10 @@ small, .small {                                 font-size: 0.8em;
                                                 line-height: 1.25 }
 small li code, .small li code {                 line-height: 2 }
 p {                                             margin: 0em 0em 1em 0em }
-a:link {                                        color: #4a4747;
+a:link, a:visited {                             color: #4a4747;
                                                 text-decoration: underline }
-a:visited {                                     color: #4a4747;
-                                                text-decoration: underline }
-a:hover {                                       color: #1e57ba;
-                                                text-decoration: underline }
-a:focus {                                       outline: none;
+a:hover, a:focus, a:active {                    outline: none;
                                                 color: #1e57ba;
-                                                text-decoration: underline }
-a:active {                                      color: #1e57ba;
                                                 text-decoration: underline }
 small a, .small a, .sub a {                     color: #b3b5b5 }
 div.clear {                                     visibility: hidden;
@@ -490,7 +484,7 @@ p.flash a:link,
 p.flash a:visited,
 p.flash a:hover,
 p.flash a:focus,
-p.flash a:active {                            color: #ffffff;
+p.flash a:active {                              color: #ffffff;
                                                 text-decoration: underline }
 
 
