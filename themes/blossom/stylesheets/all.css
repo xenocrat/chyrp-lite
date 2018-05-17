@@ -234,23 +234,6 @@ input#sidebar_search_field {                    display: inline;
                                                 margin: 0em;
                                                 padding-right: 34px }
 div.search_box input[type='text'] {             width: 100% }
-button#search_submit,
-button#sidebar_search_submit {                  display: block;
-                                                position: absolute;
-                                                width: 34px;
-                                                top: 1px;
-                                                bottom: 1px;
-                                                right: 1px;
-                                                border: none;
-                                                border-radius: 0em;
-                                                margin: 0em;
-                                                padding: 0em;
-                                                background: transparent url(../images/search.svg) no-repeat center;
-                                                overflow: hidden;
-                                                color: transparent }
-button#search_submit:focus,
-button#sidebar_search_submit:focus {            background-color: #c6ccc8;
-                                                outline: none }
 select {                                        box-sizing: border-box;
                                                 display: block;
                                                 width: 320px;
@@ -278,6 +261,23 @@ button {                                        font: inherit;
                                                 cursor: pointer;
                                                 transition-property: color, background-color, border;
                                                 transition-duration: 250ms }
+button:focus {                                  outline: none }
+button#search_submit,
+button#sidebar_search_submit {                  display: block;
+                                                position: absolute;
+                                                width: 34px;
+                                                top: 1px;
+                                                bottom: 1px;
+                                                right: 1px;
+                                                border: none;
+                                                border-radius: 0em;
+                                                margin: 0em;
+                                                padding: 0em;
+                                                background: transparent url(../images/search.svg) no-repeat center;
+                                                overflow: hidden;
+                                                color: transparent }
+button#search_submit:focus,
+button#sidebar_search_submit:focus {            background-color: #c6ccc8 }
 label {                                         display: block;
                                                 margin-top: 1em }
 div.shim {                                      margin-top: 2em }
@@ -426,16 +426,10 @@ article.audio audio {                           width: 100%;
 a {                                             border-bottom: 1px transparent solid;
                                                 transition-property: color, background-color, border;
                                                 transition-duration: 250ms }
-a:link {                                        color: #5c6773;
+a:link, a:visited {                             color: #5c6773;
                                                 text-decoration: none }
-a:visited {                                     color: #5c6773;
-                                                text-decoration: none }
-a:hover {                                       color: #d94c7b;
-                                                text-decoration: none }
-a:focus {                                       outline: none;
+a:hover, a:focus, a:active {                    outline: none;
                                                 color: #d94c7b;
-                                                text-decoration: none }
-a:active {                                      color: #d94c7b;
                                                 text-decoration: none }
 h3.ribbon a {                                   color: #ffffff;
                                                 border-bottom: 1px #ffffff solid;
@@ -445,7 +439,7 @@ h3.ribbon a {                                   color: #ffffff;
 h3.ribbon a:hover,
 h3.ribbon a:focus,
 h3.ribbon a:active {                            top: 1px;
-                                                color: inherit }
+                                                color: #ffffff }
 div.traversal a {                               display: inline-block;
                                                 padding: 0.4em 0.8em;
                                                 min-width: 8em;
@@ -457,15 +451,11 @@ div.traversal a:hover,
 div.traversal a:focus,
 div.traversal a:active {                        color: #ffffff;
                                                 background-color: #1d914b }
-section a:link, p a:link {                      color: #5c6773;
-                                                border-bottom: 1px #9ea8a8 solid }
+section a:link, p a:link,
 section a:visited, p a:visited {                color: #5c6773;
                                                 border-bottom: 1px #9ea8a8 solid }
-section a:hover, p a:hover {                    color: #d94c7b;
-                                                border-bottom: 1px #d94c7b solid }
-section a:focus, p a:focus {                    outline: none;
-                                                color: #d94c7b;
-                                                border-bottom: 1px #d94c7b solid }
+section a:hover, p a:hover,
+section a:focus, p a:focus,
 section a:active, p a:active {                  color: #d94c7b;
                                                 border-bottom: 1px #d94c7b solid }
 div.tags a {                                    display: inline-block;
@@ -493,8 +483,7 @@ div.doaction a, button {                        display: inline-block;
                                                 background-color: #39434d }
 div.doaction a:hover, button:hover,
 div.doaction a:focus, button:focus,
-div.doaction a:active, button:active {          outline: none;
-                                                color: #ffffff;
+div.doaction a:active, button:active {          color: #ffffff;
                                                 background-color: #000000 }
 div.doaction a.post_delete_link,
 div.doaction a.delete_link {                    background-color: #cc5252 }

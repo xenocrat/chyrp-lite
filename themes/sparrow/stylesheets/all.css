@@ -256,6 +256,7 @@ button {                                        font: inherit;
                                                 cursor: pointer;
                                                 transition-property: color, background-color, border;
                                                 transition-duration: 250ms }
+button:focus {                                  outline: none }
 label {                                         display: block;
                                                 margin-top: 1em }
 div.clear {                                     visibility: hidden;
@@ -375,18 +376,12 @@ article.audio audio {                           width: 100%;
 a {                                             border-bottom: 1px transparent solid;
                                                 transition-property: color, background-color, border;
                                                 transition-duration: 250ms }
-a:link {                                        color: #4e5a66;
+a:link, a:visited {                             color: #4e5a66;
                                                 text-decoration: none }
-a:visited {                                     color: #4e5a66;
-                                                text-decoration: none }
-a:hover {                                       color: #99726d;
-                                                text-decoration: none }
-a:focus {                                       outline: none;
+a:hover, a:focus, a:active {                    outline: none;
                                                 color: #99726d;
                                                 text-decoration: none;
                                                 border-bottom: 1px #99726d solid }
-a:active {                                      color: #99726d;
-                                                text-decoration: none }
 ul.navigation li > a {                          display: inline-block;
                                                 margin: 0em 1em 1em 0em }
 h3.flash a {                                    color: #ffffff;
@@ -397,16 +392,12 @@ h3.flash a {                                    color: #ffffff;
 h3.flash a:hover,
 h3.flash a:focus,
 h3.flash a:active {                             top: 1px;
-                                                color: inherit }
-section a:link, p a:link {                      color: #5c6773;
-                                                border-bottom: 1px #9ea8a8 solid }
+                                                color: #ffffff }
+section a:link, p a:link,
 section a:visited, p a:visited {                color: #5c6773;
                                                 border-bottom: 1px #9ea8a8 solid }
-section a:hover, p a:hover {                    color: #99726d;
-                                                border-bottom: 1px #99726d solid }
-section a:focus, p a:focus {                    outline: none;
-                                                color: #99726d;
-                                                border-bottom: 1px #99726d solid }
+section a:hover, p a:hover,
+section a:focus, p a:focus,
 section a:active, p a:active {                  color: #99726d;
                                                 border-bottom: 1px #99726d solid }
 div.category a.category {                       display: inline-block;
@@ -443,8 +434,7 @@ div.doaction a, button {                        display: inline-block;
                                                 border: none }
 div.doaction a:hover, button:hover,
 div.doaction a:focus, button:focus,
-div.doaction a:active, button:active {          outline: none;
-                                                background-color: #99726d;
+div.doaction a:active, button:active {          background-color: #99726d;
                                                 border: none }
 div.doaction a.post_delete_link,
 div.doaction a.delete_link {                    font-weight: bold }
