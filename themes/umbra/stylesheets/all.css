@@ -85,7 +85,8 @@ h3 {                                            font-size: 1em;
                                                 margin: 1em 0em;
                                                 padding: 0em;
                                                 line-height: 1.2 }
-h3.flash {                                      margin: 0em }
+h3.flash {                                      font-weight: normal;
+                                                margin: 0em }
 h3.filter {                                     box-sizing: border-box;
                                                 width: 100%;
                                                 text-align: center;
@@ -368,7 +369,7 @@ article > footer:last-child {                   margin: 0em }
 article.video video {                           width: 100%;
                                                 max-width: 1280px }
 article.audio audio {                           width: 100%;
-                                                max-width: 800px }                  
+                                                max-width: 800px }
 a {                                             border-bottom: 1px transparent solid }
 a:link, a:visited {                             color: #999491;
                                                 text-decoration: none }
@@ -378,15 +379,11 @@ a:hover, a:focus, a:active {                    outline: none;
                                                 border-bottom: 1px #ffffff solid }
 ul.navigation li > a {                          display: inline-block;
                                                 margin: 0em 1em 1em 0em }
-h3.flash a {                                    display: inline-block;
-                                                position: relative;
-                                                top: 0px;
-                                                color: #ffffff;
-                                                border-bottom: 1px #ffffff solid }
+h3.flash a {                                    color: #ffffff;
+                                                font-weight: bold }
 h3.flash a:hover,
 h3.flash a:focus,
-h3.flash a:active {                             top: 1px;
-                                                color: #ffffff }
+h3.flash a:active {                             border-bottom: 1px #ffffff solid }
 div.traversal a {                               display: inline-block;
                                                 position: relative;
                                                 padding: 2.5em 0em;

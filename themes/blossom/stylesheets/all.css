@@ -422,8 +422,9 @@ article > footer:last-child {                   margin: 0em }
 article.video video {                           width: 100%;
                                                 max-width: 1280px }
 article.audio audio {                           width: 100%;
-                                                max-width: 960px }                  
-a {                                             border-bottom: 1px transparent solid;
+                                                max-width: 960px }
+a {                                             text-decoration: none;
+                                                border-bottom: 1px transparent solid;
                                                 transition-property: color, background-color, border;
                                                 transition-duration: 250ms }
 a:link, a:visited {                             color: #5c6773;
@@ -431,15 +432,11 @@ a:link, a:visited {                             color: #5c6773;
 a:hover, a:focus, a:active {                    outline: none;
                                                 color: #d94c7b;
                                                 text-decoration: none }
-h3.ribbon a {                                   display: inline-block;
-                                                position: relative;
-                                                top: 0px;
-                                                color: #ffffff;
-                                                border-bottom: 1px #ffffff solid }
+h3.ribbon a {                                   color: #ffffff;
+                                                font-weight: bold }
 h3.ribbon a:hover,
 h3.ribbon a:focus,
-h3.ribbon a:active {                            top: 1px;
-                                                color: #ffffff }
+h3.ribbon a:active {                            border-bottom: 1px #ffffff solid }
 div.traversal a {                               display: inline-block;
                                                 padding: 0.4em 0.8em;
                                                 min-width: 8em;
@@ -483,8 +480,7 @@ div.doaction a, button {                        display: inline-block;
                                                 background-color: #39434d }
 div.doaction a:hover, button:hover,
 div.doaction a:focus, button:focus,
-div.doaction a:active, button:active {          color: #ffffff;
-                                                background-color: #000000 }
+div.doaction a:active, button:active {          background-color: #000000 }
 div.doaction a.post_delete_link,
 div.doaction a.delete_link {                    background-color: #cc5252 }
 div.doaction a.post_delete_link:hover,

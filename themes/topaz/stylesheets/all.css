@@ -89,7 +89,8 @@ h3 {                                            font-size: 1em;
                                                 margin: 1em 0em;
                                                 padding: 0em;
                                                 line-height: 1.2 }
-h3.ribbon {                                     margin: 0em }
+h3.ribbon {                                     font-weight: normal;
+                                                margin: 0em }
 h3.archive {                                    margin-top: 1em;
                                                 clear: both }
 h4, h5, h6 {                                    font-size: 1em;
@@ -425,7 +426,7 @@ article > footer:last-child {                   margin: 0em }
 article.video video {                           width: 100%;
                                                 max-width: 1280px }
 article.audio audio {                           width: 100%;
-                                                max-width: 960px }                  
+                                                max-width: 960px }
 a {                                             border-bottom: 1px transparent solid;
                                                 transition-property: color, background-color, border;
                                                 transition-duration: 250ms }
@@ -435,15 +436,11 @@ a:hover, a:focus, a:active {                    outline: none;
                                                 color: #000000;
                                                 text-decoration: none;
                                                 border-bottom: 1px #000000 solid }
-h3.ribbon a {                                   display: inline-block;
-                                                position: relative;
-                                                top: 0px;
-                                                color: #ffffff;
-                                                border-bottom: 1px #ffffff solid }
+h3.ribbon a {                                   color: #ffffff;
+                                                font-weight: bold }
 h3.ribbon a:hover,
 h3.ribbon a:focus,
-h3.ribbon a:active {                            top: 1px;
-                                                color: #ffffff }
+h3.ribbon a:active {                            border-bottom: 1px #ffffff solid }
 div.traversal a {                               display: inline-block;
                                                 padding: 0.4em 1.2em;
                                                 margin: 0em 0.5rem;
