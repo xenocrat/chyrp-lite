@@ -216,12 +216,13 @@ input {                                         box-sizing: border-box;
                                                 font-size: inherit;
                                                 color: #c6ccc8;
                                                 background-color: #464647;
-                                                border: none;
+                                                border: 1px #464647 solid;
                                                 border-radius: 0.2em;
 /* Removes shadow from Mobile Safari -> */      background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%) }
 input:focus {                                   outline: none;
                                                 color: #999491;
-                                                background-color: #ffffff }
+                                                background-color: #ffffff;
+                                                border-color: #ffffff }
 input:placeholder {                             color: #999491;
                                                 opacity: 1 }
 input[type='checkbox'] {                        width: auto }
@@ -290,7 +291,6 @@ div.flash {                                     box-sizing: border-box;
                                                 border-bottom: 1px solid #464647 }
 div.metadata {                                  font-weight: normal;
                                                 font-size: 0.75em;
-                                                color: #999491;
                                                 display: block;
                                                 width: 100%;
                                                 line-height: 2em;
@@ -401,11 +401,11 @@ div.traversal a {                               display: inline-block;
                                                 color: #ffffff;
                                                 line-height: 1;
                                                 border-radius: 50%;
-                                                border: 1px #464647 solid;
-                                                transition: top 250ms cubic-bezier(0.5, -8, 0.2, 4) }
+                                                border: 1px #464647 solid }
 div.traversal a:hover,
 div.traversal a:focus,
-div.traversal a:active {                        background-color: #464647 }
+div.traversal a:active {                        background-color: #464647;
+                                                transition: top 250ms cubic-bezier(0.5, -8, 0.2, 4) }
 div.prev a:hover, div.prev a:active {           top: -1px }
 div.next a:hover, div.next a:active {           top: 1px }
 section a:link, p a:link {                      color: #999491;
@@ -442,11 +442,6 @@ div.category a.category {                       display: inline-block;
 div.category a.category:hover,
 div.category a.category:focus,
 div.category a.category:active {                background-color: #464647 }
-div.metadata a {                                color: #999491 }
-div.metadata a:hover {                          color: #ffffff }
-div.metadata a:focus {                          color: #ffffff;
-                                                border-bottom: 1px #ffffff solid }
-div.metadata a:active {                         color: #ffffff }
 div.doaction a, button {                        display: inline-block;
                                                 line-height: normal;
                                                 white-space: nowrap;

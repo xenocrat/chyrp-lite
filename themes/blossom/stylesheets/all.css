@@ -332,6 +332,7 @@ div.metadata {                                  font-weight: normal;
                                                 border-top: 1px solid #c6ccc8;
                                                 border-bottom-left-radius: 6px;
                                                 border-bottom-right-radius: 6px }
+article.post.pinned div.metadata {              background-color: #fffddd }
 div.comments_pagination {                       width: 100%;
                                                 clear: both;
                                                 text-align: center }

@@ -364,12 +364,13 @@ div#main > article, div.standalone {            display: block;
                                                 width: 100%;
                                                 max-width: 1024px;
                                                 clear: both;
-                                                background-color: #fffefd;
+                                                background-color: #ffffff;
                                                 margin: 0rem auto 2rem auto;
                                                 padding: 2rem 2rem 0rem 2rem;
                                                 border: 1px solid #c6ccc8;
                                                 border-radius: 0.4em }
 div#main > article:last-child {                 margin-bottom: 0rem }
+div#main > article.post.pinned {                border-color: #2ea8e5 }
 div#main > article.discourse {                  padding: 2rem 2rem 1rem 2rem;
                                                 margin-top: 2rem }
 div#main > article.commentary {                 padding: 0rem;
