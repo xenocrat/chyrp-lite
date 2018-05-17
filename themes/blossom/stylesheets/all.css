@@ -431,11 +431,11 @@ a:link, a:visited {                             color: #5c6773;
 a:hover, a:focus, a:active {                    outline: none;
                                                 color: #d94c7b;
                                                 text-decoration: none }
-h3.ribbon a {                                   color: #ffffff;
-                                                border-bottom: 1px #ffffff solid;
-                                                display: inline-block;
+h3.ribbon a {                                   display: inline-block;
                                                 position: relative;
-                                                top: 0px }
+                                                top: 0px;
+                                                color: #ffffff;
+                                                border-bottom: 1px #ffffff solid }
 h3.ribbon a:hover,
 h3.ribbon a:focus,
 h3.ribbon a:active {                            top: 1px;

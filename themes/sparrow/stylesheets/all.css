@@ -384,11 +384,11 @@ a:hover, a:focus, a:active {                    outline: none;
                                                 border-bottom: 1px #99726d solid }
 ul.navigation li > a {                          display: inline-block;
                                                 margin: 0em 1em 1em 0em }
-h3.flash a {                                    color: #ffffff;
-                                                border-bottom: 1px #ffffff solid;
-                                                display: inline-block;
+h3.flash a {                                    display: inline-block;
                                                 position: relative;
-                                                top: 0px }
+                                                top: 0px;
+                                                color: #ffffff;
+                                                border-bottom: 1px #ffffff solid }
 h3.flash a:hover,
 h3.flash a:focus,
 h3.flash a:active {                             top: 1px;

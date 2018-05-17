@@ -435,11 +435,11 @@ a:hover, a:focus, a:active {                    outline: none;
                                                 color: #000000;
                                                 text-decoration: none;
                                                 border-bottom: 1px #000000 solid }
-h3.ribbon a {                                   color: #ffffff;
-                                                border-bottom: 1px #ffffff solid;
-                                                display: inline-block;
+h3.ribbon a {                                   display: inline-block;
                                                 position: relative;
-                                                top: 0px }
+                                                top: 0px;
+                                                color: #ffffff;
+                                                border-bottom: 1px #ffffff solid }
 h3.ribbon a:hover,
 h3.ribbon a:focus,
 h3.ribbon a:active {                            top: 1px;
