@@ -433,7 +433,8 @@ a:hover, a:focus, a:active {                    outline: none;
                                                 color: #d94c7b;
                                                 text-decoration: none }
 h3.ribbon a {                                   color: #ffffff;
-                                                font-weight: bold }
+                                                font-weight: bold;
+                                                font-style: italic }
 h3.ribbon a:hover,
 h3.ribbon a:focus,
 h3.ribbon a:active {                            border-bottom: 1px #ffffff solid }

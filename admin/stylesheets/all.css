@@ -472,6 +472,7 @@ p.flash.notice {                                background-color: #76b362 }
 p.flash.warning {                               background-color: #d94c4c }
 p.flash a {                                     color: #ffffff;
                                                 font-weight: bold;
+                                                font-style: italic;
                                                 text-decoration: none }
 p.flash a:hover,
 p.flash a:focus,
