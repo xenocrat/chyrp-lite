@@ -45,7 +45,7 @@ msgstr ""
 #: includes/class/Query.php:203
 #: includes/class/SQL.php:96
 #: includes/class/SQL.php:107
-#: install.php:543
+#: install.php:555
 #, php-format
 msgid "Database error: %s"
 msgstr ""
@@ -115,7 +115,7 @@ msgstr ""
 #: includes/thumb.php:18
 #: includes/thumb.php:47
 #: includes/thumb.php:202
-#: install.php:737
+#: install.php:749
 #: upgrade.php:105
 #: upgrade.php:118
 #: upgrade.php:131
@@ -512,7 +512,7 @@ msgstr ""
 
 #: includes/controller/Admin.php:617
 #: includes/controller/Main.php:463
-#: install.php:493
+#: install.php:505
 msgid "Passwords cannot be blank."
 msgstr ""
 
@@ -520,8 +520,8 @@ msgstr ""
 #: includes/controller/Admin.php:721
 #: includes/controller/Main.php:465
 #: includes/controller/Main.php:638
-#: install.php:438
-#: install.php:495
+#: install.php:450
+#: install.php:507
 msgid "Passwords do not match."
 msgstr ""
 
@@ -535,7 +535,7 @@ msgstr ""
 #: includes/controller/Admin.php:1782
 #: includes/controller/Main.php:470
 #: includes/controller/Main.php:643
-#: install.php:498
+#: install.php:510
 msgid "Email address cannot be blank."
 msgstr ""
 
@@ -544,7 +544,7 @@ msgstr ""
 #: includes/controller/Admin.php:1785
 #: includes/controller/Main.php:472
 #: includes/controller/Main.php:645
-#: install.php:500
+#: install.php:512
 msgid "Invalid email address."
 msgstr ""
 
@@ -844,12 +844,12 @@ msgid "Preview started."
 msgstr ""
 
 #: includes/controller/Admin.php:1788
-#: install.php:476
+#: install.php:488
 msgid "Chyrp URL cannot be blank."
 msgstr ""
 
 #: includes/controller/Admin.php:1791
-#: install.php:478
+#: install.php:490
 msgid "Invalid Chyrp URL."
 msgstr ""
 
@@ -1032,7 +1032,7 @@ msgid "You cannot register an account because you are already logged in."
 msgstr ""
 
 #: includes/controller/Main.php:455
-#: install.php:490
+#: install.php:502
 msgid "Please enter a username for your account."
 msgstr ""
 
@@ -1095,7 +1095,7 @@ msgid "Logged in."
 msgstr ""
 
 #: includes/controller/Main.php:603
-#: includes/error.php:346
+#: includes/error.php:358
 msgid "Log in"
 msgstr ""
 
@@ -1145,11 +1145,11 @@ msgstr ""
 msgid "An unspecified error has occurred."
 msgstr ""
 
-#: includes/error.php:338
+#: includes/error.php:350
 msgid "Backtrace"
 msgstr ""
 
-#: includes/error.php:341
+#: includes/error.php:353
 #, php-format
 msgid "%s on line %d"
 msgstr ""
@@ -1532,39 +1532,39 @@ msgstr ""
 msgid "Chyrp Lite Installer"
 msgstr ""
 
-#: install.php:473
+#: install.php:485
 msgid "Database cannot be blank."
 msgstr ""
 
-#: install.php:481
+#: install.php:493
 msgid "Please enter a name for your website."
 msgstr ""
 
-#: install.php:484
+#: install.php:496
 msgid "Time zone cannot be blank."
 msgstr ""
 
-#: install.php:487
+#: install.php:499
 msgid "Language cannot be blank."
 msgstr ""
 
-#: install.php:503
+#: install.php:515
 msgid "MySQLi or PDO is required for database access."
 msgstr ""
 
-#: install.php:509
+#: install.php:521
 msgid "Could not determine the absolute path to the SQLite database."
 msgstr ""
 
-#: install.php:516
+#: install.php:528
 msgid "Please make the SQLite database writable by the server."
 msgstr ""
 
-#: install.php:520
+#: install.php:532
 msgid "Please enter a username and password for the MySQL database."
 msgstr ""
 
-#: install.php:737
+#: install.php:749
 #: upgrade.php:105
 #: upgrade.php:118
 #: upgrade.php:131
@@ -1577,112 +1577,112 @@ msgstr ""
 msgid "Could not write the configuration file."
 msgstr ""
 
-#: install.php:754
+#: install.php:766
 msgid "Database Setup"
 msgstr ""
 
-#: install.php:756
+#: install.php:768
 msgid "Adapter"
 msgstr ""
 
-#: install.php:767
+#: install.php:779
 msgid "Host"
 msgstr ""
 
-#: install.php:771
-#: install.php:830
+#: install.php:783
+#: install.php:842
 msgid "Username"
 msgstr ""
 
-#: install.php:775
-#: install.php:834
-#: install.php:838
+#: install.php:787
+#: install.php:846
+#: install.php:850
 msgid "Password"
 msgstr ""
 
-#: install.php:779
+#: install.php:791
 msgid "Database"
 msgstr ""
 
-#: install.php:781
+#: install.php:793
 msgid "(absolute or relative path)"
 msgstr ""
 
-#: install.php:787
+#: install.php:799
 msgid "Be sure to put your SQLite database outside the document root directory, otherwise visitors will be able to download it."
 msgstr ""
 
-#: install.php:790
+#: install.php:802
 msgid "Table Prefix"
 msgstr ""
 
-#: install.php:790
+#: install.php:802
 msgid "(optional)"
 msgstr ""
 
-#: install.php:794
+#: install.php:806
 msgid "Website Setup"
 msgstr ""
 
-#: install.php:796
+#: install.php:808
 msgid "Chyrp URL"
 msgstr ""
 
-#: install.php:800
+#: install.php:812
 msgid "Site Name"
 msgstr ""
 
-#: install.php:801
+#: install.php:813
 msgid "My Awesome Site"
 msgstr ""
 
-#: install.php:804
+#: install.php:816
 msgid "Description"
 msgstr ""
 
-#: install.php:808
+#: install.php:820
 msgid "Time Zone"
 msgstr ""
 
-#: install.php:818
+#: install.php:830
 msgid "Language"
 msgstr ""
 
-#: install.php:828
+#: install.php:840
 msgid "Admin Account"
 msgstr ""
 
-#: install.php:838
+#: install.php:850
 msgid "(again)"
 msgstr ""
 
-#: install.php:842
+#: install.php:854
 msgid "Email Address"
 msgstr ""
 
-#: install.php:845
+#: install.php:857
 msgid "Install me!"
 msgstr ""
 
-#: install.php:848
+#: install.php:860
 msgid "Installation Complete"
 msgstr ""
 
-#: install.php:849
-#: upgrade.php:499
+#: install.php:861
+#: upgrade.php:511
 msgid "What now?"
 msgstr ""
 
-#: install.php:851
+#: install.php:863
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr ""
 
-#: install.php:852
+#: install.php:864
 msgid "Log in to your site and configure things to your liking."
 msgstr ""
 
-#: install.php:854
-#: upgrade.php:505
+#: install.php:866
+#: upgrade.php:517
 msgid "Take me to my site!"
 msgstr ""
 
@@ -1698,39 +1698,39 @@ msgstr ""
 msgid "Chyrp Lite Upgrader"
 msgstr ""
 
-#: upgrade.php:488
+#: upgrade.php:500
 msgid "Halt!"
 msgstr ""
 
-#: upgrade.php:489
+#: upgrade.php:501
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr ""
 
-#: upgrade.php:491
+#: upgrade.php:503
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr ""
 
-#: upgrade.php:492
+#: upgrade.php:504
 msgid "Tell your users that your site is offline for maintenance."
 msgstr ""
 
-#: upgrade.php:495
+#: upgrade.php:507
 msgid "Upgrade me!"
 msgstr ""
 
-#: upgrade.php:498
+#: upgrade.php:510
 msgid "Upgrade Complete"
 msgstr ""
 
-#: upgrade.php:501
+#: upgrade.php:513
 msgid "Take action to resolve any errors reported on this page."
 msgstr ""
 
-#: upgrade.php:502
+#: upgrade.php:514
 msgid "Run this upgrader again if you need to."
 msgstr ""
 
-#: upgrade.php:503
+#: upgrade.php:515
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr ""
 
