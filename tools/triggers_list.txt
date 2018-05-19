@@ -15,7 +15,7 @@ Arguments:
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 325
+	admin/javascripts/admin.js.php on line 341
 
 
 admin_head
