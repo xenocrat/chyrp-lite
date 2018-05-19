@@ -15,7 +15,7 @@
 {{ module.name }}{# translation is done in the controller #}
 </h3>
 {% if module.help %}
-<a href="{{ url('help/id/' ~ (module.help | url_encode)) }}" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="Help"></a>
+<a href="{{ url('help/id/' ~ (module.help | url_encode)) }}" rel="help" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="Help"></a>
 {% endif %}
 <p class="module_description">
 {{ module.description }}{# translation is done in the controller #}
@@ -71,7 +71,7 @@
 {{ module.name }}{# translation is done in the controller #}
 </h3>
 {% if module.help %}
-<a href="{{ url('help/id/' ~ (module.help | url_encode)) }}" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="Help"></a>
+<a href="{{ url('help/id/' ~ (module.help | url_encode)) }}" rel="help" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="Help"></a>
 {% endif %}
 <p class="module_description">
 {{ module.description }}{# translation is done in the controller #}

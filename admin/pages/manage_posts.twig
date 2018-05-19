@@ -8,7 +8,7 @@
 <div role="search" class="filter_item">
 <h3>
 {{ "Search&hellip;" | translate }}
-<a href="{{ url('help/id/filtering_results') }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+<a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 </h3>
 <input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true) }}" id="query">
 <button type="submit">{{ "Search" | translate }}</button>
