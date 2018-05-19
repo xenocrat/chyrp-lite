@@ -96,7 +96,9 @@ var ChyrpLightbox = {
 
             $("<div>", {
                 "id": "ChyrpLightbox-bg",
-                "role": "presentation"
+                "role": "button",
+                "accesskey": "x",
+                "aria-label": '<?php echo __("Close", "lightbox"); ?>'
             }).css(ChyrpLightbox.styles.bg).on("click", function(e) {
                 if (e.target === e.currentTarget)
                     ChyrpLightbox.hide();
