@@ -37,7 +37,9 @@ function toggle_all() {
         });
 
         parent.append(
-            [$("<label>").attr("for", master).text('<?php echo __("Toggle All", "admin"); ?>'),
+            [$("<label>", {
+                "for": master
+            }).text('<?php echo __("Toggle All", "admin"); ?>'),
             $("<input>", {
                 "type": "checkbox",
                 "name": "toggle",
