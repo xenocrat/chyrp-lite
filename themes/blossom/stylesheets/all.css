@@ -451,7 +451,7 @@ div.traversal a {                               display: inline-block;
 div.traversal a:hover,
 div.traversal a:focus,
 div.traversal a:active {                        color: #ffffff;
-                                                background-color: #1d914b }
+                                                background-color: #1d8546 }
 section a:link, p a:link,
 section a:visited, p a:visited {                color: #5c6773;
                                                 border-bottom: 1px #c6ccc8 solid }
@@ -469,7 +469,7 @@ div.tags a {                                    display: inline-block;
 div.tags a:hover,
 div.tags a:focus,
 div.tags a:active {                             color: #ffffff;
-                                                background-color: #1d914b }
+                                                background-color: #1d8546 }
 div.metadata a {                                color: #9ea8a8 }
 div.metadata a:hover,
 div.metadata a:focus,

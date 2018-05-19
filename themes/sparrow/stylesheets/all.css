@@ -381,9 +381,9 @@ a {                                             border-bottom: 1px transparent s
 a:link, a:visited {                             color: #4e5a66;
                                                 text-decoration: none }
 a:hover, a:focus, a:active {                    outline: none;
-                                                color: #99726d;
+                                                color: #cc5252;
                                                 text-decoration: none;
-                                                border-bottom: 1px #99726d solid }
+                                                border-bottom: 1px #cc5252 solid }
 ul.navigation li > a {                          display: inline-block;
                                                 margin: 0em 1em 1em 0em }
 h3.flash a {                                    color: #ffffff;
@@ -397,11 +397,9 @@ section a:visited, p a:visited {                color: #5c6773;
                                                 border-bottom: 1px #c2bcb8 solid }
 section a:hover, p a:hover,
 section a:focus, p a:focus,
-section a:active, p a:active {                  color: #99726d;
-                                                border-bottom: 1px #99726d solid }
+section a:active, p a:active {                  color: #cc5252;
+                                                border-bottom: 1px #cc5252 solid }
 div.category a.category {                       display: inline-block;
-                                                position: relative;
-                                                top: 0px;
                                                 padding: 0.2em 0.4em;
                                                 margin: 2px 0em;
                                                 border: 1px #99726d solid;
@@ -410,7 +408,7 @@ div.category a.category {                       display: inline-block;
                                                 background-color: #99726d }
 div.category a.category:hover,
 div.category a.category:focus,
-div.category a.category:active {                top: 1px }
+div.category a.category:active {                background-color: #744640 }
 div.tags a.tag {                                display: inline-block;
                                                 position: relative;
                                                 top: 0px;
@@ -422,7 +420,8 @@ div.tags a.tag {                                display: inline-block;
                                                 background-color: #fffecd }
 div.tags a.tag:hover,
 div.tags a.tag:focus,
-div.tags a.tag:active {                         top: 1px }
+div.tags a.tag:active {                         top: 1px;
+                                                color: #000000; }
 div.doaction a, button {                        display: inline-block;
                                                 line-height: normal;
                                                 white-space: nowrap;
