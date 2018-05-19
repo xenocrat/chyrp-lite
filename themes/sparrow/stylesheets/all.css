@@ -223,12 +223,12 @@ input:focus {                                   outline: none;
                                                 border: 1px solid #99726d }
 input:placeholder {                             color: #c6ccc8;
                                                 opacity: 1 }
-input[type='checkbox'] {                        width: auto }
+input[type="checkbox"] {                        width: auto }
 input.error {                                   background-color: #ff8080 }
 input#search_field {                            display: inline;
                                                 margin: 0em;
                                                 padding-right: 34px }
-div.search_box input[type='text'] {             width: 10em;
+div.search_box input[type="text"] {             width: 10em;
                                                 display: inline-block }
 select {                                        box-sizing: border-box;
                                                 display: block;
@@ -258,6 +258,7 @@ button {                                        font: inherit;
                                                 transition-property: color, background-color, border;
                                                 transition-duration: 250ms }
 button:focus {                                  outline: none }
+button::-moz-focus-inner {                      border: none }
 label {                                         display: block;
                                                 margin-top: 1em }
 div.clear {                                     visibility: hidden;

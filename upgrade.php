@@ -369,7 +369,7 @@
             }
             pre.pane {
                 height: 15rem;
-                overflow-y: auto;
+                overflow: auto;
                 margin: 1rem -2rem 1rem -2rem;
                 padding: 2rem;
                 background: #4a4747;

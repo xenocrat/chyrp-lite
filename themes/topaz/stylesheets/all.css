@@ -239,13 +239,13 @@ input:focus {                                   outline: none;
                                                 border: 1px solid #4e5a66 }
 input:placeholder {                             color: #c6ccc8;
                                                 opacity: 1 }
-input[type='checkbox'] {                        width: auto }
+input[type="checkbox"] {                        width: auto }
 input.error {                                   background-color: #ffb2b2 }
 input#search_field,
 input#sidebar_search_field {                    display: inline;
                                                 margin: 0em;
                                                 padding-right: 34px }
-div.search_box input[type='text'] {             width: 100% }
+div.search_box input[type="text"] {             width: 100% }
 select {                                        box-sizing: border-box;
                                                 display: block;
                                                 width: 320px;
@@ -274,22 +274,26 @@ button {                                        font: inherit;
                                                 transition-property: color, background-color, border;
                                                 transition-duration: 250ms }
 button:focus {                                  outline: none }
+button::-moz-focus-inner {                      border: none }
 button#search_submit,
 button#sidebar_search_submit {                  display: block;
                                                 position: absolute;
-                                                width: 34px;
-                                                top: 1px;
-                                                bottom: 1px;
-                                                right: 1px;
+                                                width: 32px;
+                                                height: 32px;
+                                                top: 0px;
+                                                right: 0px;
                                                 border: none;
                                                 border-radius: 0em;
                                                 margin: 0em;
                                                 padding: 0em;
-                                                background: transparent url(../images/search.svg) no-repeat center;
+                                                background: transparent url(../images/search.svg) center no-repeat;
+                                                background-size: 60%;
                                                 overflow: hidden;
                                                 color: transparent }
 button#search_submit:focus,
 button#sidebar_search_submit:focus {            background-color: #c6ccc8 }
+button#search_submit:hover,
+button#sidebar_search_submit:hover {            background-size: 70% }
 label {                                         display: block;
                                                 margin-top: 1em }
 div.clear {                                     visibility: hidden;
