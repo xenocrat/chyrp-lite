@@ -108,8 +108,7 @@ strong {                                        font: inherit;
 cite {                                          font: inherit;
                                                 color: #9ea8a8 }
 small {                                         font-weight: normal;
-                                                font-size: 0.6em;
-                                                text-transform: uppercase }
+                                                font-size: 0.75em }
 blockquote {                                    font-size: 1em;
                                                 font-style: italic;
                                                 padding: 0em 2em;
@@ -259,7 +258,7 @@ article.commentary textarea {                   max-width: none }
 button {                                        font: inherit;
                                                 font-size: inherit;
                                                 cursor: pointer;
-                                                transition-property: color, background-color, border;
+                                                transition-property: background-color, border;
                                                 transition-duration: 250ms }
 button:focus {                                  outline: none }
 button::-moz-focus-inner {                      border: none }
@@ -320,8 +319,7 @@ div.ribbon {                                    box-sizing: border-box;
                                                 border-radius: 0.2em }
 div.flash {                                     background-color: #d94c7b }
 div.metadata {                                  font-weight: normal;
-                                                font-size: 0.6em;
-                                                text-transform: uppercase;
+                                                font-size: 0.75em;
                                                 text-align: center;
                                                 color: #9ea8a8;
                                                 display: block;
@@ -429,13 +427,14 @@ article.audio audio {                           width: 100%;
                                                 max-width: 960px }
 a {                                             text-decoration: none;
                                                 border-bottom: 1px transparent solid;
-                                                transition-property: color, background-color, border;
+                                                transition-property: background-color, border;
                                                 transition-duration: 250ms }
 a:link, a:visited {                             color: #5c6773;
                                                 text-decoration: none }
 a:hover, a:focus, a:active {                    outline: none;
                                                 color: #d94c7b;
-                                                text-decoration: none }
+                                                text-decoration: none;
+                                                border-bottom: 1px #d94c7b solid }
 h3.ribbon a {                                   color: #ffffff;
                                                 font-weight: bold;
                                                 font-style: italic }
@@ -455,7 +454,7 @@ div.traversal a:active {                        color: #ffffff;
                                                 background-color: #1d914b }
 section a:link, p a:link,
 section a:visited, p a:visited {                color: #5c6773;
-                                                border-bottom: 1px #9ea8a8 solid }
+                                                border-bottom: 1px #c6ccc8 solid }
 section a:hover, p a:hover,
 section a:focus, p a:focus,
 section a:active, p a:active {                  color: #d94c7b;

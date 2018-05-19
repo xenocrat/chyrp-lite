@@ -120,6 +120,7 @@ small li code, .small li code {                 line-height: 2 }
 p {                                             margin: 0em 0em 1em 0em }
 a:link, a:visited {                             color: #4a4747;
                                                 text-decoration: underline }
+a:focus {                                       outline: #ff7f00 dashed 2px }
 a:hover, a:focus, a:active {                    color: #2f61c4;
                                                 text-decoration: underline }
 small a, .small a, .sub a {                     color: #b3b5b5 }
@@ -636,8 +637,7 @@ img.emblem {                                    display: inline;
                                                 width: 16px;
                                                 height: 16px }
 a.emblem.markdown > img {                       width: 26px }
-img.emblem.preview {                            cursor: pointer;
-                                                float: right }
+a.emblem.preview {                              float: right }
 .filters .filter_item {                         box-sizing: border-box;
                                                 float: left;
                                                 max-width: 50%;

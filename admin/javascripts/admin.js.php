@@ -169,11 +169,7 @@ var Write = {
                 var target = $(this);
 
                 $("label[for='" + target.attr("id") + "']").append(
-                    $("<img>", {
-                        "src": Site.chyrp_url + '/admin/images/icons/magnifier.svg',
-                        "alt": '(<?php echo __("Preview this field", "admin"); ?>)',
-                        "title": '<?php echo __("Preview this field", "admin"); ?>',
-                    }).addClass("emblem preview").click(function(e) {
+                    $("<a>", {"href": "#"}).addClass("emblem preview").click(function(e) {
                         var content  = target.val();
                         var field    = target.attr("name");
                         var safename = $("input#feather").val() || "page";
@@ -183,7 +179,13 @@ var Write = {
                             e.preventDefault();
                             Write.show(action, safename, field, content);
                         }
-                    })
+                    }).append(
+                        $("<img>", {
+                            "src": Site.chyrp_url + '/admin/images/icons/magnifier.svg',
+                            "alt": '(<?php echo __("Preview this field", "admin"); ?>)',
+                            "title": '<?php echo __("Preview this field", "admin"); ?>'
+                        })
+                    )
                 );
             });
     },
