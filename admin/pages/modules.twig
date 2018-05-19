@@ -11,8 +11,8 @@
 <h3>
 <a class="emblem module_url" href="{{ module.url }}" target="_blank">
 <img src="{{ site.chyrp_url }}/admin/images/icons/info.svg" alt="{{ module.url | fix(true) }}">
-</a>
 {{ module.name }}{# translation is done in the controller #}
+</a>
 </h3>
 {% if module.help %}
 <a href="{{ url('help/id/' ~ (module.help | url_encode)) }}" rel="help" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="Help"></a>
@@ -67,8 +67,8 @@
 <h3>
 <a class="emblem module_url" href="{{ module.url }}" target="_blank">
 <img src="{{ site.chyrp_url }}/admin/images/icons/info.svg" alt="{{ module.url | fix(true) }}">
-</a>
 {{ module.name }}{# translation is done in the controller #}
+</a>
 </h3>
 {% if module.help %}
 <a href="{{ url('help/id/' ~ (module.help | url_encode)) }}" rel="help" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="Help"></a>
