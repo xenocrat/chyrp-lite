@@ -679,11 +679,11 @@ a.emblem.preview {                              float: right }
                                                 position: absolute;
                                                 width: 16px;
                                                 height: 16px;
-                                                top: 10%;
-                                                right: 10%;
-                                                padding-top: 13px;
-                                                padding-right: 13px;
+                                                top: calc(10% + 13px);
+                                                right: calc(10% + 13px);
                                                 cursor: pointer }
+.iframe_close_gadget img {                      width: 16px;
+                                                height: 16px }
 .ajax_loading {                                 background-size: 30px 30px;
                                                 background-image: linear-gradient(-45deg,
                                                                                   #fbfbfb 25%,

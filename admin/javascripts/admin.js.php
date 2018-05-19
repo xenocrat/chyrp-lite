@@ -147,14 +147,19 @@ var Help = {
             }).addClass("iframe_foreground").loader().on("load", function() {
                 $(this).loader(true);
             }),
-            $("<img>", {
-                "src": Site.chyrp_url + '/admin/images/icons/close.svg',
-                "alt": '<?php echo __("Close", "admin"); ?>',
-                "role": 'button',
+            $("<a>", {
+                "href": "#",
+                "accesskey": "x",
                 "aria-label": '<?php echo __("Close", "admin"); ?>'
-            }).addClass("iframe_close_gadget").click(function() {
+            }).addClass("iframe_close_gadget").click(function(e) {
+                e.preventDefault();
                 $(this).parent().remove();
-            })]
+            }).append(
+                $("<img>", {
+                    "src": Site.chyrp_url + '/admin/images/icons/close.svg',
+                    "alt": '<?php echo __("Close", "admin"); ?>',
+                })
+            )]
         ).click(function(e) {
             if (e.target === e.currentTarget)
                 $(this).remove();
@@ -169,7 +174,10 @@ var Write = {
                 var target = $(this);
 
                 $("label[for='" + target.attr("id") + "']").append(
-                    $("<a>", {"href": "#"}).addClass("emblem preview").click(function(e) {
+                    $("<a>", {
+                        "href": "#",
+                        "aria-label": '<?php echo __("Preview this field", "admin"); ?>'
+                    }).addClass("emblem preview").click(function(e) {
                         var content  = target.val();
                         var field    = target.attr("name");
                         var safename = $("input#feather").val() || "page";
@@ -183,7 +191,6 @@ var Write = {
                         $("<img>", {
                             "src": Site.chyrp_url + '/admin/images/icons/magnifier.svg',
                             "alt": '(<?php echo __("Preview this field", "admin"); ?>)',
-                            "title": '<?php echo __("Preview this field", "admin"); ?>'
                         })
                     )
                 );
@@ -239,14 +246,19 @@ var Write = {
                 if (!!this.contentWindow.location && this.contentWindow.location != "about:blank")
                     $(this).loader(true);
             }),
-            $("<img>", {
-                "src": Site.chyrp_url + '/admin/images/icons/close.svg',
-                "alt": '<?php echo __("Close", "admin"); ?>',
-                "role": 'button',
+            $("<a>", {
+                "href": "#",
+                "accesskey": "x",
                 "aria-label": '<?php echo __("Close", "admin"); ?>'
-            }).addClass("iframe_close_gadget").click(function() {
+            }).addClass("iframe_close_gadget").click(function(e) {
+                e.preventDefault();
                 $(this).parent().remove();
-            })]
+            }).append(
+                $("<img>", {
+                    "src": Site.chyrp_url + '/admin/images/icons/close.svg',
+                    "alt": '<?php echo __("Close", "admin"); ?>',
+                })
+            )]
         ).click(function(e) {
             if (e.target === e.currentTarget)
                 $(this).remove();
