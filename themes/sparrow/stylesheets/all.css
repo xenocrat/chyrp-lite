@@ -461,7 +461,7 @@ a.archive_post_link {                           display: block;
                                                 transition: all 0s }
 a.archive_post_link:hover,
 a.archive_post_link:focus,
-a.archive_post_link:active {                    background-color: #c2b9b4;
+a.archive_post_link:active {                    background-color: #cc5252;
                                                 opacity: 0.8 }
 img {                                           border-style: none;
                                                 margin: 0em;
