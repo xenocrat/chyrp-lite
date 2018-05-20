@@ -206,7 +206,7 @@ form.comment_edit {                             width: 100%;
                                                 margin-bottom: 0em;
                                                 padding: 0rem 0rem 2rem 0rem;
                                                 border: none }
-input {                                         box-sizing: border-box;
+select, input {                                 box-sizing: border-box;
                                                 display: block;
                                                 width: 320px;
                                                 max-width: 960px;
@@ -221,7 +221,7 @@ input {                                         box-sizing: border-box;
                                                 border: 1px solid #c6ccc8;
                                                 border-radius: 0em;
 /* Removes shadow from Mobile Safari -> */      background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%) }
-input:focus {                                   outline: none;
+select:focus, input:focus {                     outline: none;
                                                 background-color: #ffffff;
                                                 border: 1px solid #d94c7b }
 input:placeholder {                             color: #c6ccc8;
@@ -233,11 +233,6 @@ input#sidebar_search_field {                    display: inline;
                                                 margin: 0em;
                                                 padding-right: 34px }
 div.search_box input[type="text"] {             width: 100% }
-select {                                        box-sizing: border-box;
-                                                display: block;
-                                                width: 320px;
-                                                max-width: 960px;
-                                                margin: 0.5em 0em }
 textarea {                                      box-sizing: border-box;
                                                 display: block;
                                                 width: 100%;

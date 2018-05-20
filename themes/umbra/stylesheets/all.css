@@ -205,7 +205,7 @@ form.comment_edit {                             width: 100%;
                                                 margin-bottom: 0em;
                                                 padding: 0em;
                                                 border: none }
-input {                                         box-sizing: border-box;
+select, input {                                 box-sizing: border-box;
                                                 display: block;
                                                 width: 320px;
                                                 max-width: 800px;
@@ -220,8 +220,8 @@ input {                                         box-sizing: border-box;
                                                 border: 1px #666667 solid;
                                                 border-radius: 0.2em;
 /* Removes shadow from Mobile Safari -> */      background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%) }
-input:focus {                                   outline: none;
-                                                color: #adafae;
+select:focus, input:focus {                     outline: none;
+                                                color: #202021;
                                                 background-color: #ffffff;
                                                 border-color: #ffffff }
 input:placeholder {                             color: #adafae;
@@ -233,11 +233,6 @@ input#search_field {                            display: inline;
                                                 padding-right: 34px }
 div.search_box input[type="text"] {             width: 10em;
                                                 display: inline-block }
-select {                                        box-sizing: border-box;
-                                                display: block;
-                                                width: 320px;
-                                                max-width: 800px;
-                                                margin: 0.5em 0em }
 textarea {                                      box-sizing: border-box;
                                                 display: block;
                                                 width: 100%;
