@@ -331,18 +331,21 @@ li.feather div.controls button {                float: right }
 input:placeholder {                             color: #dddddd;
                                                 opacity: 1 }
 label {                                         line-height: 2 }
+select,
+textarea,
 input[type="text"],
 input[type="email"],
 input[type="url"],
 input[type="number"],
-input[type="password"],
-textarea {                                      box-sizing: border-box;
+input[type="password"] {                        box-sizing: border-box;
                                                 width: 10em;
                                                 font-size: 1.25rem;
                                                 padding: 0.25rem;
+                                                border-radius: 0em;
                                                 border: 1px solid #dfdfdf;
                                                 background-color: #ffffff;
 /* Removes shadow from Mobile Safari -> */      background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%) }
+select:focus,
 textarea:focus,
 input[type="text"]:focus,
 input[type="email"]:focus,
