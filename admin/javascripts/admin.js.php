@@ -159,7 +159,7 @@ var Help = {
             }).append(
                 $("<img>", {
                     "src": Site.chyrp_url + '/admin/images/icons/close.svg',
-                    "alt": '<?php echo __("Close", "admin"); ?>',
+                    "alt": '<?php echo __("Close", "admin"); ?>'
                 })
             )]
         ).click(function(e) {
@@ -192,7 +192,7 @@ var Write = {
                     }).append(
                         $("<img>", {
                             "src": Site.chyrp_url + '/admin/images/icons/magnifier.svg',
-                            "alt": '(<?php echo __("Preview this field", "admin"); ?>)',
+                            "alt": '(<?php echo __("Preview this field", "admin"); ?>)'
                         })
                     )
                 );
@@ -258,7 +258,7 @@ var Write = {
             }).append(
                 $("<img>", {
                     "src": Site.chyrp_url + '/admin/images/icons/close.svg',
-                    "alt": '<?php echo __("Close", "admin"); ?>',
+                    "alt": '<?php echo __("Close", "admin"); ?>'
                 })
             )]
         ).click(function(e) {
