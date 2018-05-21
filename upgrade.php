@@ -241,7 +241,7 @@
                 $errors[] = __("The <em>.htaccess</em> file cannot be configured.");
         }
 
-        if (CHYRP_VERSION == "2018.03" and $config->url != $config->chyrp_url)
+        if ($config->url != $config->chyrp_url)
             $errors[] = __("You might need to update your canonical URL's <em>.htaccess</em> file.");
     }
 
