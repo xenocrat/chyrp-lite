@@ -3,9 +3,9 @@
 {% block title %}{{ "Manage Pages" | translate }}{% endblock %}
 
 {% block content %}
-<form class="filters" action="{{ url('manage_pages') }}" method="post" accept-charset="UTF-8">
+<form class="filters" action="{{ url('manage_pages') }}" method="post" accept-charset="UTF-8" role="search">
 <fieldset>
-<div role="search" class="filter_item">
+<div class="filter_item">
 <h3>
 {{ "Search&hellip;" | translate }}
 <a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
