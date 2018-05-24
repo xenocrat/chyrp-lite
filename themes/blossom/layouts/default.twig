@@ -38,8 +38,8 @@
 {% if not ["login", "controls", "register", "lost_password"] | contains(route.action) %}
 <div id="mast" role="banner">
 <h1 class="banner"><a href="{{ url('/') }}">{{ site.name }}</a></h1>
-<div role="search" class="search_box">
-<form action="{{ url('search') }}" method="post" accept-charset="UTF-8">
+<div class="search_box">
+<form action="{{ url('search') }}" method="post" accept-charset="UTF-8" role="search">
 <input type="text" id="search_field" name="query" value="{{ search is defined ? search | fix(true) : '' }}" placeholder="{{ 'Search&hellip;' | translate }}" title="{{ 'Search this blog' | translate }}">
 <button type="submit" id="search_submit">{{ "Search" | translate }}</button>
 </form>
