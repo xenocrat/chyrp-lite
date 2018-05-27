@@ -151,6 +151,7 @@ var Help = {
             }),
             $("<a>", {
                 "href": "#",
+                "role": "button",
                 "accesskey": "x",
                 "aria-label": '<?php echo __("Close", "admin"); ?>'
             }).addClass("iframe_close_gadget").click(function(e) {
@@ -178,6 +179,7 @@ var Write = {
                 $("label[for='" + target.attr("id") + "']").append(
                     $("<a>", {
                         "href": "#",
+                        "role": "button",
                         "aria-label": '<?php echo __("Preview this field", "admin"); ?>'
                     }).addClass("emblem preview").click(function(e) {
                         var content  = target.val();
@@ -185,10 +187,12 @@ var Write = {
                         var safename = $("input#feather").val() || "page";
                         var action   = (safename == "page") ? "preview_page" : "preview_post" ;
 
-                        if (content != "") {
-                            e.preventDefault();
+                        e.preventDefault();
+
+                        if (content != "")
                             Write.show(action, safename, field, content);
-                        }
+                        else
+                            target.focus();
                     }).append(
                         $("<img>", {
                             "src": Site.chyrp_url + '/admin/images/icons/magnifier.svg',
@@ -250,6 +254,7 @@ var Write = {
             }),
             $("<a>", {
                 "href": "#",
+                "role": "button",
                 "accesskey": "x",
                 "aria-label": '<?php echo __("Close", "admin"); ?>'
             }).addClass("iframe_close_gadget").click(function(e) {
