@@ -257,11 +257,11 @@
                 return $url;
 
             $count = 1;
-            $unique = $url;
+            $unique = substr($url, 0, 128);
 
             while (SQL::current()->count("pages", array("url" => $unique))) {
                 $count++;
-                $unique = $url."-".$count;
+                $unique = substr($url, 0, (127 - strlen($count)))."-".$count;
             }
 
             return $unique;
