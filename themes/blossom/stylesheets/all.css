@@ -272,6 +272,8 @@ button#sidebar_search_submit {                  display: block;
                                                 background-size: 60%;
                                                 overflow: hidden;
                                                 color: transparent }
+button#search_submit {                          width: 38px;
+                                                height: 38px }
 button#search_submit:focus,
 button#sidebar_search_submit:focus {            background-color: #c6ccc8 }
 button#search_submit:hover,
