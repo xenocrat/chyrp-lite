@@ -217,16 +217,16 @@ msgstr "确定继续？"
 msgid "Help"
 msgstr "帮助"
 
-#: admin/javascripts/admin.js.php:155 admin/javascripts/admin.js.php:162
-#: admin/javascripts/admin.js.php:254 admin/javascripts/admin.js.php:261
+#: admin/javascripts/admin.js.php:156 admin/javascripts/admin.js.php:163
+#: admin/javascripts/admin.js.php:259 admin/javascripts/admin.js.php:266
 msgid "Close"
 msgstr "关闭"
 
-#: admin/javascripts/admin.js.php:181 admin/javascripts/admin.js.php:195
+#: admin/javascripts/admin.js.php:183 admin/javascripts/admin.js.php:199
 msgid "Preview this field"
 msgstr "预览这个字段"
 
-#: admin/javascripts/admin.js.php:246 admin/pages/themes.twig:25
+#: admin/javascripts/admin.js.php:250 admin/pages/themes.twig:25
 msgid "Preview"
 msgstr "预览"
 
