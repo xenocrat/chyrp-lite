@@ -888,7 +888,7 @@
                                  "\r\n".
                                  unfix($post->url()).
                                  "\r\n"."\r\n".
-                                 strip_tags($params["body"]);
+                                 truncate(strip_tags($params["body"]), 60);
             return $params;
         }
 
