@@ -191,6 +191,10 @@ msgstr "%B %Y"
 msgid "Written by %s"
 msgstr "由%s撰写"
 
+#: themes/topaz/feathers/missing.twig:4
+msgid "The post cannot be displayed because the theme does not support it."
+msgstr "这篇帖子无法显示，因为主题不支持。"
+
 #: themes/topaz/feathers/uploader.twig:22
 msgid "File attachment:"
 msgstr "文件附件："

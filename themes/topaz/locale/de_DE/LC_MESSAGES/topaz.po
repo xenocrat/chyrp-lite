@@ -193,6 +193,12 @@ msgstr "%B %Y"
 msgid "Written by %s"
 msgstr "Publiziert von %s"
 
+#: themes/topaz/feathers/missing.twig:4
+msgid "The post cannot be displayed because the theme does not support it."
+msgstr ""
+"Der Post kann nicht angezeigt werden, weil dies vom Theme nicht unterstützt "
+"wird."
+
 #: themes/topaz/feathers/uploader.twig:22
 msgid "File attachment:"
 msgstr "Dateianhänge:"

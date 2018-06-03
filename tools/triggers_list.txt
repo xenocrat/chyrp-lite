@@ -286,19 +286,19 @@ Called from:
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 369
+	includes/controller/Main.php on line 366
 
 
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 583
+	includes/controller/Main.php on line 580
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 594
+	includes/controller/Main.php on line 591
 Arguments:
 	$user
 
@@ -306,7 +306,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 771
+	includes/controller/Main.php on line 768
 Arguments:
 	$post, $feed
 
@@ -835,7 +835,7 @@ twig_context_main
 Target:
 	$this->context
 Called from:
-	includes/controller/Main.php on line 835
+	includes/controller/Main.php on line 832
 
 
 keyword_search

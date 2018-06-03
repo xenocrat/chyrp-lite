@@ -193,6 +193,10 @@ msgstr ""
 msgid "%B %Y"
 msgstr ""
 
+#: themes/blossom/feathers/missing.twig:4
+msgid "The post cannot be displayed because the theme does not support it."
+msgstr ""
+
 #: themes/blossom/feathers/uploader.twig:21
 msgid "File attachment:"
 msgstr ""

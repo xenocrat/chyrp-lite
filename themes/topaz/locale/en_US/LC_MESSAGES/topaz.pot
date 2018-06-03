@@ -204,6 +204,10 @@ msgstr ""
 msgid "Written by %s"
 msgstr ""
 
+#: themes/topaz/feathers/missing.twig:4
+msgid "The post cannot be displayed because the theme does not support it."
+msgstr ""
+
 #: themes/topaz/feathers/uploader.twig:22
 msgid "File attachment:"
 msgstr ""

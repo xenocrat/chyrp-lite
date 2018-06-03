@@ -75,6 +75,12 @@ msgstr "&copy; %s, %s."
 msgid "&copy; %s."
 msgstr "&copy; %s."
 
+#: themes/umbra/feathers/missing.twig:4
+msgid "The post cannot be displayed because the theme does not support it."
+msgstr ""
+"Der Post kann nicht angezeigt werden, weil dies vom Theme nicht unterstützt "
+"wird."
+
 #: themes/umbra/feathers/uploader.twig:21
 msgid "File attachment:"
 msgstr "Dateianhänge:"
