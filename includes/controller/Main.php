@@ -331,9 +331,6 @@
             if (!isset($_GET['feed']) and !(count($arg) > count($attrs) and end($arg) == "feed"))
                 $this->feed = false;
 
-            if (!$post->theme_exists())
-                Flash::warning(__("The post cannot be displayed because the theme does not support it."), "/");
-
             if ($post->status == "draft")
                 Flash::message(__("This post is not published."));
 
