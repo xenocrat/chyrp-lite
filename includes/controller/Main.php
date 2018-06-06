@@ -268,7 +268,7 @@
             if (isset($_POST['query']))
                 redirect("search/".str_ireplace("%2F", "", urlencode($_POST['query']))."/");
 
-            if (!isset($_GET['query']))
+            if (empty($_GET['query']))
                 Flash::warning(__("Please enter a search term."), "/");
 
             list($where, $params) = keywords($_GET['query'], "post_attributes.value LIKE :query OR url LIKE :query", "posts");
