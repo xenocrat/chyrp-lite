@@ -19,6 +19,13 @@
          *     <Model::grab>
          */
         public function __construct($comment_id, $options = array()) {
+            $skip_where = (ADMIN or (isset($options["skip_where"]) and $options["skip_where"]));
+
+            if (!$skip_where) {
+                $options["where"]["status not"] = "spam";
+                $options["where"][] = self::redactions();
+            }
+
             parent::grab($this, $comment_id, $options);
 
             if ($this->no_results)
@@ -38,6 +45,14 @@
          *     <Model::search>
          */
         static function find($options = array(), $options_for_object = array()) {
+            $skip_where = (ADMIN or (isset($options["skip_where"]) and $options["skip_where"]));
+
+            if (!$skip_where) {
+                $options["where"]["status not"] = "spam";
+                $options["where"][] = self::redactions();
+            }
+
+            fallback($options["order"], "created_at ASC");
             return parent::search(get_class(), $options, $options_for_object);
         }
 
@@ -195,15 +210,21 @@
             Trigger::current()->call("add_comment", $new);
 
             if ($new->status == "approved") {
-                $comments = self::find(array("where" => array("post_id"    => $new->post_id,
-                                                              "user_id !=" => $new->user_id,
-                                                              "status"     => "approved",
-                                                              "notify"     => 1)),
+                $comments = self::find(array("skip_where" => true,
+                                             "where"      => array("post_id"    => $new->post_id,
+                                                                   "user_id !=" => $new->user_id,
+                                                                   "status"     => "approved",
+                                                                   "notify"     => 1)),
                                        array("filter" => false));
 
+                $notifications = array();
+
                 foreach ($comments as $comment)
-                    correspond("comment", array("to"      => $comment->author_email,
-                                                "user_id" => $comment->user_id,
+                    $notifications[$comment->author_email] = $comment->user_id;
+
+                foreach ($notifications as $to => $id)
+                    correspond("comment", array("to"      => $to,
+                                                "user_id" => $id,
                                                 "post_id" => $new->post_id,
                                                 "author"  => $new->author,
                                                 "body"    => $new->body));
@@ -342,6 +363,33 @@
         }
 
         /**
+         * Function: creatable
+         * Checks if the <Visitor> can comment on a post.
+         */
+        static function creatable($post) {
+            $visitor = Visitor::current();
+            
+            if (!$visitor->group->can("add_comment"))
+                return false;
+
+            # Assume allowed comments by default.
+            return empty($post->comment_status) or
+                       !($post->comment_status == "closed" or
+                        ($post->comment_status == "registered_only" and !logged_in()) or
+                        ($post->comment_status == "private" and !$visitor->group->can("add_comment_private")));
+        }
+
+        /**
+         * Function: redactions
+         * Returns a SQL query "chunk" that hides some comments from the <Visitor>.
+         */
+        static function redactions() {
+            $list = empty($_SESSION['comments']) ? "(0)" : QueryBuilder::build_list($_SESSION['comments']) ;
+            $user_id = (int) Visitor::current()->id;
+            return "status != 'denied' OR ((user_id != 0 AND user_id = ".$user_id.") OR (id IN ".$list."))";
+        }
+
+        /**
          * Function: author_link
          * Returns the commenter's name enclosed in a hyperlink to their website.
          */
@@ -356,23 +404,6 @@
                 return '<a href="'.fix($this->author_url, true).'">'.$this->author.'</a>';
             else
                 return $this->author;
-        }
-
-        /**
-         * Function: user_can
-         * Checks if the <Visitor> can comment on a post.
-         */
-        static function user_can($post) {
-            $visitor = Visitor::current();
-            
-            if (!$visitor->group->can("add_comment"))
-                return false;
-
-            # Assume allowed comments by default.
-            return empty($post->comment_status) or
-                       !($post->comment_status == "closed" or
-                        ($post->comment_status == "registered_only" and !logged_in()) or
-                        ($post->comment_status == "private" and !$visitor->group->can("add_comment_private")));
         }
 
         /**
