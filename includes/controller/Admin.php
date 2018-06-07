@@ -654,11 +654,12 @@
                               ($config->email_activation) ? false : true);
 
             if (!$user->approved)
-                correspond("activate", array("login" => $user->login,
-                                             "to"    => $user->email,
-                                             "link"  => fix($config->url, true).
-                                                        "/?action=activate&amp;login=".urlencode($user->login).
-                                                        "&amp;token=".token(array($user->login, $user->email))));
+                correspond("activate", array("to"      => $user->email,
+                                             "user_id" => $user->id,
+                                             "login"   => $user->login,
+                                             "link"    => fix($config->url, true).
+                                                          "/?action=activate&amp;login=".urlencode($user->login).
+                                                          "&amp;token=".token(array($user->login, $user->email))));
 
             Flash::notice(__("User added."), "manage_users");
         }
@@ -755,11 +756,12 @@
                                   (!$user->approved and $config->email_activation) ? false : true);
 
             if (!$user->approved)
-                correspond("activate", array("login" => $user->login,
-                                             "to"    => $user->email,
-                                             "link"  => fix($config->url, true).
-                                                        "/?action=activate&amp;login=".urlencode($user->login).
-                                                        "&amp;token=".token(array($user->login, $user->email))));
+                correspond("activate", array("to"      => $user->email,
+                                             "user_id" => $user->id,
+                                             "login"   => $user->login,
+                                             "link"    => fix($config->url, true).
+                                                          "/?action=activate&amp;login=".urlencode($user->login).
+                                                          "&amp;token=".token(array($user->login, $user->email))));
 
             Flash::notice(__("User updated."), "manage_users");
         }
