@@ -2035,14 +2035,12 @@
 
     /**
      * Function: email
-     * Send an email. Function arguments are exactly the same as the PHP mail() function.
-     * This is intended so that modules can provide an email method if the server cannot use mail().
+     * Send an email using PHP's mail() function or an alternative.
      */
     function email() {
         $function = "mail";
         Trigger::current()->filter($function, "send_mail");
-        $args = func_get_args(); # Looks redundant, but it must be so in order to meet PHP's retardation requirements.
-        return call_user_func_array($function, $args);
+        return call_user_func_array($function, func_get_args());
     }
 
     /**
@@ -2062,7 +2060,7 @@
             return false;
 
         $params["headers"] = "From: ".$config->email."\r\n".
-                             "Reply-To: ".$config->email. "\r\n".
+                             "Reply-To: ".$config->email."\r\n".
                              "X-Mailer: ".CHYRP_IDENTITY;
 
         fallback($params["subject"], "");
@@ -2096,11 +2094,11 @@
                                      _f("Your new password is: %s", $params["password"]);
                 break;
             default:
-                if ($trigger->exists("correspond_".$action))
-                    $trigger->filter($params, "correspond_".$action);
-                else
-                    return false;
+                $trigger->filter($params, "correspond_".$action);
         }
 
-        return email($params["to"], $params["subject"], $params["message"], $params["headers"]);
+        if ($trigger->exists("send_correspondence"))
+            return $trigger->call("send_correspondence", $params);
+        else
+            return email($params["to"], $params["subject"], $params["message"], $params["headers"]);
     }
