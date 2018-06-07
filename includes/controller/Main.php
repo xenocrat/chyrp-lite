@@ -490,13 +490,14 @@
                                       ($config->email_activation) ? false : true);
 
                     if (!$user->approved) {
-                        correspond("activate", array("login" => $user->login,
-                                                     "to"    => $user->email,
-                                                     "link"  => fix($config->url, true).
-                                                                "/?action=activate&amp;login=".
-                                                                urlencode($user->login).
-                                                                "&amp;token=".
-                                                                token(array($user->login, $user->email))));
+                        correspond("activate", array("to"      => $user->email,
+                                                     "user_id" => $user->id,
+                                                     "login"   => $user->login,
+                                                     "link"    => fix($config->url, true).
+                                                                  "/?action=activate&amp;login=".
+                                                                  urlencode($user->login).
+                                                                  "&amp;token=".
+                                                                  token(array($user->login, $user->email))));
 
                         Flash::notice(__("We have emailed you an activation link."), "/");
                     }
@@ -550,8 +551,9 @@
 
             $new_password = random(8);
 
-            correspond("password", array("login"    => $user->login,
-                                         "to"       => $user->email,
+            correspond("password", array("to"       => $user->email,
+                                         "user_id"  => $user->id,
+                                         "login"    => $user->login,
                                          "password" => $new_password));
 
             $user = $user->update(null, User::hashPassword($new_password));
@@ -692,13 +694,14 @@
                     $user = new User(array("login" => $_POST['login']));
 
                     if (!$user->no_results)
-                        correspond("reset", array("login" => $user->login,
-                                                  "to"    => $user->email,
-                                                  "link"  => fix($config->url, true).
-                                                             "/?action=reset&amp;login=".
-                                                             urlencode($user->login).
-                                                             "&amp;token=".
-                                                             token(array($user->login, $user->email))));
+                        correspond("reset", array("to"      => $user->email,
+                                                  "user_id" => $user->id,
+                                                  "login"   => $user->login,
+                                                  "link"    => fix($config->url, true).
+                                                               "/?action=reset&amp;login=".
+                                                               urlencode($user->login).
+                                                               "&amp;token=".
+                                                               token(array($user->login, $user->email))));
 
                     Flash::notice(__("If that username is in our database, we will email you a password reset link."), "/");
                 }
