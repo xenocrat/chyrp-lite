@@ -194,19 +194,20 @@
             $new = new self($sql->latest("comments"));
             Trigger::current()->call("add_comment", $new);
 
-            if ($new->status == "approved")
-                foreach ($sql->select("comments",
-                                      "author_email",
-                                      array("post_id"    => $new->post_id,
-                                            "user_id !=" => $new->user_id,
-                                            "status"     => "approved",
-                                            "notify"     => 1))->fetchAll() as $notification) {
+            if ($new->status == "approved") {
+                $comments = self::find(array("where" => array("post_id"    => $new->post_id,
+                                                              "user_id !=" => $new->user_id,
+                                                              "status"     => "approved",
+                                                              "notify"     => 1)),
+                                       array("filter" => false));
 
-                    correspond("comment", array("post_id" => $new->post_id,
+                foreach ($comments as $comment)
+                    correspond("comment", array("to"      => $comment->author_email,
+                                                "user_id" => $comment->user_id,
+                                                "post_id" => $new->post_id,
                                                 "author"  => $new->author,
-                                                "body"    => $new->body,
-                                                "to"      => $notification["author_email"]));
-                }
+                                                "body"    => $new->body));
+            }
 
             return $new;
         }
