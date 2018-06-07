@@ -228,13 +228,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 1124
+	includes/controller/Admin.php on line 1126
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1384
+	includes/controller/Admin.php on line 1386
 Arguments:
 	$group
 
@@ -242,7 +242,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1408
+	includes/controller/Admin.php on line 1410
 Arguments:
 	$user
 
@@ -250,7 +250,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1446
+	includes/controller/Admin.php on line 1448
 Arguments:
 	$entry, $post
 
@@ -258,7 +258,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1475
+	includes/controller/Admin.php on line 1477
 Arguments:
 	$entry, $page
 
@@ -266,7 +266,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1479
+	includes/controller/Admin.php on line 1481
 Arguments:
 	$imports
 
@@ -274,13 +274,13 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1753
+	includes/controller/Admin.php on line 1755
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1761
+	includes/controller/Admin.php on line 1763
 
 
 can_not_view_page
@@ -292,13 +292,13 @@ Called from:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 580
+	includes/controller/Main.php on line 582
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 591
+	includes/controller/Main.php on line 593
 Arguments:
 	$user
 
@@ -306,7 +306,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 768
+	includes/controller/Main.php on line 771
 Arguments:
 	$post, $feed
 
@@ -321,6 +321,14 @@ before_check_captcha
 --------------------
 Called from:
 	includes/helpers.php on line 1929
+
+
+send_correspondence
+-------------------
+Called from:
+	includes/helpers.php on line 2101
+Arguments:
+	$params
 
 
 javascript
@@ -493,7 +501,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 679
+	modules/comments/comments.php on line 617
 Arguments:
 	$comment, $feed
 
@@ -501,7 +509,7 @@ Arguments:
 add_comment
 -----------
 Called from:
-	modules/comments/model/Comment.php on line 195
+	modules/comments/model/Comment.php on line 210
 Arguments:
 	$new
 
@@ -509,7 +517,7 @@ Arguments:
 update_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 263
+	modules/comments/model/Comment.php on line 285
 Arguments:
 	$comment, $this
 
@@ -759,7 +767,7 @@ posts_export
 Target:
 	$posts_atom
 Called from:
-	includes/controller/Admin.php on line 1188
+	includes/controller/Admin.php on line 1190
 Arguments:
 	$post
 
@@ -769,7 +777,7 @@ pages_export
 Target:
 	$pages_atom
 Called from:
-	includes/controller/Admin.php on line 1235
+	includes/controller/Admin.php on line 1237
 Arguments:
 	$page
 
@@ -779,7 +787,7 @@ export
 Target:
 	$exports
 Called from:
-	includes/controller/Admin.php on line 1290
+	includes/controller/Admin.php on line 1292
 
 
 before_import
@@ -787,7 +795,7 @@ before_import
 Target:
 	$imports
 Called from:
-	includes/controller/Admin.php on line 1354
+	includes/controller/Admin.php on line 1356
 
 
 write_nav
@@ -795,7 +803,7 @@ write_nav
 Target:
 	$write
 Called from:
-	includes/controller/Admin.php on line 2040
+	includes/controller/Admin.php on line 2042
 
 
 manage_nav
@@ -803,7 +811,7 @@ manage_nav
 Target:
 	$manage
 Called from:
-	includes/controller/Admin.php on line 2069
+	includes/controller/Admin.php on line 2071
 
 
 settings_nav
@@ -811,7 +819,7 @@ settings_nav
 Target:
 	$settings
 Called from:
-	includes/controller/Admin.php on line 2094
+	includes/controller/Admin.php on line 2096
 
 
 extend_nav
@@ -819,7 +827,7 @@ extend_nav
 Target:
 	$extend
 Called from:
-	includes/controller/Admin.php on line 2112
+	includes/controller/Admin.php on line 2114
 
 
 twig_context_admin
@@ -827,7 +835,7 @@ twig_context_admin
 Target:
 	$this->context
 Called from:
-	includes/controller/Admin.php on line 2164
+	includes/controller/Admin.php on line 2166
 
 
 twig_context_main
@@ -835,7 +843,7 @@ twig_context_main
 Target:
 	$this->context
 Called from:
-	includes/controller/Main.php on line 832
+	includes/controller/Main.php on line 835
 
 
 keyword_search
@@ -861,7 +869,7 @@ send_mail
 Target:
 	$function
 Called from:
-	includes/helpers.php on line 2043
+	includes/helpers.php on line 2042
 
 
 xmlrpc_methods
@@ -1102,7 +1110,7 @@ comment
 Target:
 	$this
 Called from:
-	modules/comments/model/Comment.php on line 29
+	modules/comments/model/Comment.php on line 36
 
 
 filter_comment
@@ -1110,4 +1118,4 @@ filter_comment
 Target:
 	$this
 Called from:
-	modules/comments/model/Comment.php on line 383
+	modules/comments/model/Comment.php on line 415
