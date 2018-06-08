@@ -81,8 +81,8 @@
                                     "approved" :
                                     $config->module_comments["default_comment_status"]);
 
-            if (!logged_in())
-                $notify = 0; # Only logged-in users can request notifications.
+            if (!logged_in() or !$config->email_correspondence)
+                $notify = 0;
 
             $HTTP_REFERER = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : "" ;
             $HTTP_USER_AGENT = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "" ;
@@ -98,52 +98,24 @@
                 $akismet->setReferrer($HTTP_REFERER);
                 $akismet->setUserIP($_SERVER['REMOTE_ADDR']);
 
-                if ($akismet->isCommentSpam()) {
-                    $comment = self::add($body,
-                                         $author,
-                                         $author_url,
-                                         $author_email,
-                                         $_SERVER['REMOTE_ADDR'],
-                                         $HTTP_USER_AGENT,
-                                         "spam",
-                                         $post->id,
-                                         $visitor->id,
-                                         $parent,
-                                         $notify);
-
-                    return $comment;
-                } else {
-                    $comment = self::add($body,
-                                         $author,
-                                         $author_url,
-                                         $author_email,
-                                         $_SERVER['REMOTE_ADDR'],
-                                         $HTTP_USER_AGENT,
-                                         $status,
-                                         $post->id,
-                                         $visitor->id,
-                                         $parent,
-                                         $notify);
-
-                    $_SESSION['comments'][] = $comment->id;
-                    return $comment;
-                }
-            } else {
-                $comment = self::add($body,
-                                     $author,
-                                     $author_url,
-                                     $author_email,
-                                     $_SERVER['REMOTE_ADDR'],
-                                     $HTTP_USER_AGENT,
-                                     $status,
-                                     $post->id,
-                                     $visitor->id,
-                                     $parent,
-                                     $notify);
-
-                $_SESSION['comments'][] = $comment->id;
-                return $comment;
+                if ($akismet->isCommentSpam())
+                    $status = "spam";
             }
+
+            $comment = self::add($body,
+                                 $author,
+                                 $author_url,
+                                 $author_email,
+                                 $_SERVER['REMOTE_ADDR'],
+                                 $HTTP_USER_AGENT,
+                                 $status,
+                                 $post->id,
+                                 $visitor->id,
+                                 $parent,
+                                 $notify);
+
+            $_SESSION['comments'][] = $comment->id;
+            return $comment;
         }
 
         /**

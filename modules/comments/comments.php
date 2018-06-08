@@ -507,7 +507,7 @@
                 show_404(__("Not Found"), __("Post not found."));
 
             $last = (empty($_POST['last_comment'])) ? $post->created_at : $_POST['last_comment'] ;
-            $text = when(__("Comments added since %I:%M %p on %B %d, %Y", "comments"), $last, true);
+            $text = _f("Comments added since %s", when("%c", $last, true), "comments");
 
             $ids = array();
 
