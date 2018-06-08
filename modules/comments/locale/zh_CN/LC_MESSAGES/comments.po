@@ -328,8 +328,9 @@ msgid "An ID is required to reload comments."
 msgstr "重新加载评论必须要一个ID。"
 
 #: modules/comments/comments.php:510
-msgid "Comments added since %I:%M %p on %B %d, %Y"
-msgstr "自 %I:%M %p 在 %B %d, %Y 添加了评论"
+#, php-format
+msgid "Comments added since %s"
+msgstr "自 %s 添加了评论"
 
 #: modules/comments/comments.php:534
 msgid "An ID is required to show a comment."
@@ -405,6 +406,6 @@ msgid ""
 "credentials."
 msgstr "该评论无法删除，因为您的网络浏览器未发送正确的凭证。"
 
-#: modules/comments/model/Comment.php:401
+#: modules/comments/model/Comment.php:373
 msgid "Anon"
 msgstr "不久"

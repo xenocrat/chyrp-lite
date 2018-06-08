@@ -331,7 +331,8 @@ msgid "An ID is required to reload comments."
 msgstr ""
 
 #: modules/comments/comments.php:510
-msgid "Comments added since %I:%M %p on %B %d, %Y"
+#, php-format
+msgid "Comments added since %s"
 msgstr ""
 
 #: modules/comments/comments.php:534
@@ -404,7 +405,7 @@ msgstr ""
 msgid "The comment cannot be deleted because your web browser did not send proper credentials."
 msgstr ""
 
-#: modules/comments/model/Comment.php:401
+#: modules/comments/model/Comment.php:373
 msgid "Anon"
 msgstr ""
 
