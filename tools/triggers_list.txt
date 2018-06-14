@@ -501,7 +501,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 617
+	modules/comments/comments.php on line 619
 Arguments:
 	$comment, $feed
 
@@ -509,7 +509,7 @@ Arguments:
 add_comment
 -----------
 Called from:
-	modules/comments/model/Comment.php on line 182
+	modules/comments/model/Comment.php on line 204
 Arguments:
 	$new
 
@@ -517,7 +517,7 @@ Arguments:
 update_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 257
+	modules/comments/model/Comment.php on line 258
 Arguments:
 	$comment, $this
 
@@ -1118,4 +1118,4 @@ filter_comment
 Target:
 	$this
 Called from:
-	modules/comments/model/Comment.php on line 387
+	modules/comments/model/Comment.php on line 388
