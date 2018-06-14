@@ -293,7 +293,8 @@
             $admin->display("pages".DIR."manage_comments",
                             array("comments" => new Paginator(Comment::find(array("placeholders" => true,
                                                                                   "where" => $where,
-                                                                                  "params" => $params)),
+                                                                                  "params" => $params,
+                                                                                  "order" => "post_id DESC, created_at ASC")),
                                                               $admin->post_limit)));
         }
 
@@ -313,7 +314,8 @@
             $admin->display("pages".DIR."manage_spam",
                             array("comments" => new Paginator(Comment::find(array("placeholders" => true,
                                                                                   "where" => $where,
-                                                                                  "params" => $params)),
+                                                                                  "params" => $params,
+                                                                                  "order" => "post_id DESC, created_at ASC")),
                                                               $admin->post_limit)));
         }
 
