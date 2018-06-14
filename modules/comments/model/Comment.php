@@ -178,8 +178,7 @@
                                "created_at"   => fallback($created_at, datetime()),
                                "updated_at"   => fallback($updated_at, "0000-00-00 00:00:00")));
 
-            $new = new self($sql->latest("comments"));
-            Trigger::current()->call("add_comment", $new);
+            $new = new self($sql->latest("comments"), array("skip_where" => true));
 
             if ($new->status == "approved") {
                 $comments = self::find(array("skip_where" => true,
@@ -201,6 +200,8 @@
                                                 "author"  => $new->author,
                                                 "body"    => $new->body));
             }
+
+            Trigger::current()->call("add_comment", $new);
 
             return $new;
         }
@@ -267,7 +268,7 @@
          *     <Model::destroy>
          */
         static function delete($comment_id) {
-            parent::destroy(get_class(), $comment_id);
+            parent::destroy(get_class(), $comment_id, array("skip_where" => true));
         }
 
         /**
