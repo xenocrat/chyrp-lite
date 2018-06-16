@@ -950,11 +950,11 @@
 
     /**
      * Function: truncate
-     * Truncates a string to ensure it is no longer than the requested length.
+     * Truncates a string to the requested number of characters or less.
      *
      * Parameters:
      *     $text - The string to be truncated.
-     *     $length - The truncated length.
+     *     $length - Truncate the string to this number of characters.
      *     $ellipsis - A string to place at the truncation point.
      *     $exact - Split words to return the exact length requested?
      *     $encoding - The character encoding of the string and ellipsis.
