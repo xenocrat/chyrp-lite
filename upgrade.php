@@ -514,7 +514,7 @@
                 <li><?php echo __("Run this upgrader again if you need to."); ?></li>
                 <li><?php echo __("Delete <em>upgrade.php</em> once you are finished upgrading."); ?></li>
             </ol>
-            <a class="big" href="<?php echo $config->url; ?>"><?php echo __("Take me to my site!"); ?></a>
+            <a class="big" href="<?php echo $config->url.'/'; ?>"><?php echo __("Take me to my site!"); ?></a>
 <?php endif; ?>
         </div>
     </body>

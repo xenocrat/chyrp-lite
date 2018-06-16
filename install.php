@@ -863,7 +863,7 @@
                 <li><?php echo __("Delete <em>install.php</em>, you won't need it anymore."); ?></li>
                 <li><?php echo __("Log in to your site and configure things to your liking."); ?></a></li>
             </ol>
-            <a class="big" href="<?php echo $config->chyrp_url; ?>"><?php echo __("Take me to my site!"); ?></a>
+            <a class="big" href="<?php echo $config->url.'/'; ?>"><?php echo __("Take me to my site!"); ?></a>
 <?php endif; ?>
         </div>
     </body>
