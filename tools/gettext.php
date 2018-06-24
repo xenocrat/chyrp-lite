@@ -177,7 +177,8 @@
         global $strings;
         global $str_reg;
 
-        $dom_reg = ($domain == "chyrp") ? '' : ',\s*(\"'.$domain.'\"|\''.$domain.'\')' ;
+        $escaped = preg_quote($domain, "/");
+        $dom_reg = ($domain == "chyrp") ? '' : ',\s*(\"'.$escaped.'\"|\''.$escaped.'\')' ;
 
         if (preg_match_all("/__\($str_reg$dom_reg\)/",
                            $text, $matches, PREG_SET_ORDER)) {
@@ -204,7 +205,8 @@
         global $strings;
         global $str_reg;
 
-        $dom_reg = ($domain == "chyrp") ? '.+?' : '.+?,\s*(\"'.$domain.'\"|\''.$domain.'\')' ;
+        $escaped = preg_quote($domain, "/");
+        $dom_reg = ($domain == "chyrp") ? '.+?' : '.+?,\s*(\"'.$escaped.'\"|\''.$escaped.'\')' ;
 
         if (preg_match_all("/_f\($str_reg$dom_reg\)/",
                            $text, $matches, PREG_SET_ORDER)) {
@@ -231,7 +233,8 @@
         global $strings;
         global $str_reg;
 
-        $dom_reg = ($domain == "chyrp") ? '.+?' : '.+?,\s*(\"'.$domain.'\"|\''.$domain.'\')' ;
+        $escaped = preg_quote($domain, "/");
+        $dom_reg = ($domain == "chyrp") ? '.+?' : '.+?,\s*(\"'.$escaped.'\"|\''.$escaped.'\')' ;
 
         if (preg_match_all("/_p\($str_reg,\s*$str_reg$dom_reg\)/",
                            $text, $matches, PREG_SET_ORDER)) {
@@ -259,7 +262,8 @@
         global $strings;
         global $str_reg;
 
-        $dom_reg = '(\(\s*(\"'.$domain.'\"|\''.$domain.'\')\s*\))?' ;
+        $escaped = preg_quote($domain, "/");
+        $dom_reg = '(\(\s*(\"'.$escaped.'\"|\''.$escaped.'\')\s*\))?' ;
 
         if (preg_match_all("/$str_reg\s*\|\s*translate(?!_plural)$dom_reg(?!\s*\|\s*format)/",
                            $text, $matches, PREG_SET_ORDER)) {
@@ -286,7 +290,8 @@
         global $strings;
         global $str_reg;
 
-        $dom_reg = '(\(\s*(\"'.$domain.'\"|\''.$domain.'\')\s*\))?' ;
+        $escaped = preg_quote($domain, "/");
+        $dom_reg = '(\(\s*(\"'.$escaped.'\"|\''.$escaped.'\')\s*\))?' ;
 
         if (preg_match_all("/$str_reg\s*\|\s*translate$dom_reg\s*\|\s*format/",
                            $text, $matches, PREG_SET_ORDER)) {
@@ -313,7 +318,8 @@
         global $strings;
         global $str_reg;
 
-        $dom_reg = '(,\s*(\"'.$domain.'\"|\''.$domain.'\'))?' ;
+        $escaped = preg_quote($domain, "/");
+        $dom_reg = '(,\s*(\"'.$escaped.'\"|\''.$escaped.'\'))?' ;
 
         if (preg_match_all("/$str_reg\s*\|\s*translate_plural\(\s*$str_reg\s*,.+?$dom_reg\s*\)\s*\|\s*format/",
                            $text, $matches, PREG_SET_ORDER)) {
