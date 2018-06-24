@@ -17,7 +17,7 @@
     define('XML_RPC',        false);
     define('UPGRADING',      false);
     define('INSTALLING',     false);
-    define('TESTER',         isset($_SERVER['HTTP_USER_AGENT']) and $_SERVER['HTTP_USER_AGENT'] == "TESTER");
+    define('TESTER',         false);
     define('DIR',            DIRECTORY_SEPARATOR);
     define('MAIN_DIR',       dirname(dirname(__FILE__)));
     define('INCLUDES_DIR',   MAIN_DIR.DIR."includes");
@@ -39,14 +39,6 @@
     # File: helpers
     # Various functions used throughout the codebase.
     require_once INCLUDES_DIR.DIR."helpers.php";
-
-    # File: Config
-    # See Also:
-    #     <Config>
-    require_once INCLUDES_DIR.DIR."class".DIR."Config.php";
-
-    # Register our autoloader.
-    spl_autoload_register("autoload");
 
     # Array: $domains
     # An associative array of domains and their paths.
@@ -607,9 +599,6 @@
     #---------------------------------------------
     # Processing Ends
     #---------------------------------------------
-
-    foreach ($errors as $error)
-        echo '<span role="alert">'.sanitize_html($error).'</span>'."\n";
 
             ?></pre>
         </div>
