@@ -45,21 +45,6 @@
     #     <Config>
     require_once INCLUDES_DIR.DIR."class".DIR."Config.php";
 
-    # File: SQL
-    # See Also:
-    #     <SQL>
-    require INCLUDES_DIR.DIR."class".DIR."SQL.php";
-
-    # File: Model
-    # See Also:
-    #     <Model>
-    require_once INCLUDES_DIR.DIR."class".DIR."Model.php";
-
-    # File: User
-    # See Also:
-    #     <User>
-    require_once INCLUDES_DIR.DIR."model".DIR."User.php";
-
     # Register our autoloader.
     spl_autoload_register("autoload");
 

@@ -45,21 +45,6 @@
     #     <Config>
     require_once INCLUDES_DIR.DIR."class".DIR."Config.php";
 
-    # File: SQL
-    # See Also:
-    #     <SQL>
-    require INCLUDES_DIR.DIR."class".DIR."SQL.php";
-
-    # File: Model
-    # See Also:
-    #     <Model>
-    require_once INCLUDES_DIR.DIR."class".DIR."Model.php";
-
-    # File: User
-    # See Also:
-    #     <User>
-    require_once INCLUDES_DIR.DIR."model".DIR."User.php";
-
     # Register our autoloader.
     spl_autoload_register("autoload");
 
@@ -130,13 +115,16 @@
 
         foreach ($dir as $item) {
             if (!$item->isDot()) {
+                $item_path = $item->getPathname();
+                $extension = $item->getExtension();
+
                 switch ($item->getType()) {
                     case "file":
-                        scan_file($domain, $item->getPathname(), $item->getExtension());
+                        scan_file($domain, $item_path, $extension);
                         break;
                     case "dir":
-                        if (!in_array($item->getPathname(), $exclude))
-                            scan_dir($domain, $item->getPathname());
+                        if (!in_array($item_path, $exclude))
+                            scan_dir($domain, $item_path);
 
                         break;
                 }
@@ -390,9 +378,9 @@
 
             $result = @file_put_contents($pot_file, $contents);
 
-            echo $filename.".pot"."... ".
-                (($result === false) ? '<span style="color:#d94c4c;">Boo!</span>' :
-                                       '<span style="color:#76b362;">Yay!</span>')."\n";
+            echo $filename.".pot ".(($result === false) ?
+                                    '<span style="color:#d94c4c;">Boo!</span>' :
+                                    '<span style="color:#76b362;">Yay!</span>')."\n";
         }
     }
 
