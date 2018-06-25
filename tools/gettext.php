@@ -52,6 +52,8 @@
                      MAIN_DIR.DIR."feathers",
                      MAIN_DIR.DIR."themes",
                      MAIN_DIR.DIR."tools",
+                     MAIN_DIR.DIR."uploads",
+                     MAIN_DIR.DIR."includes".DIR."caches",
                      MAIN_DIR.DIR."includes".DIR."lib".DIR."Twig",
                      MAIN_DIR.DIR."includes".DIR."lib".DIR."IXR");
 
