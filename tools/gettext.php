@@ -169,6 +169,14 @@
     }
 
     /**
+     * Function: is_theme
+     * Checks if a pathname is part of a theme.
+     */
+    function is_theme($pathname) {
+        return (strpos($pathname, THEMES_DIR) === 0 or strpos($pathname, MAIN_DIR.DIR."admin") === 0);
+    }
+
+    /**
      * Function: scan__
      * Scans text for occurrences of the __() function.
      */
@@ -247,7 +255,7 @@
                     $strings[$domain][$string]["places"][] = make_place($pathname, $line);
                 else
                     $strings[$domain][$string] = array("places" => array(make_place($pathname, $line)),
-                                                       "filter" => false,
+                                                       "filter" => true,
                                                        "plural" => $plural);
             }
         }
@@ -263,7 +271,10 @@
         global $str_reg;
 
         $escaped = preg_quote($domain, "/");
-        $dom_reg = '(\(\s*(\"'.$escaped.'\"|\''.$escaped.'\')\s*\))?' ;
+        $dom_reg = '(\(\s*(\"'.$escaped.'\"|\''.$escaped.'\')\s*\))';
+
+        if (is_theme($pathname))
+            $dom_reg.= '?';
 
         if (preg_match_all("/$str_reg\s*\|\s*translate(?!_plural)$dom_reg(?!\s*\|\s*format)/",
                            $text, $matches, PREG_SET_ORDER)) {
@@ -291,7 +302,10 @@
         global $str_reg;
 
         $escaped = preg_quote($domain, "/");
-        $dom_reg = '(\(\s*(\"'.$escaped.'\"|\''.$escaped.'\')\s*\))?' ;
+        $dom_reg = '(\(\s*(\"'.$escaped.'\"|\''.$escaped.'\')\s*\))';
+
+        if (is_theme($pathname))
+            $dom_reg.= '?';
 
         if (preg_match_all("/$str_reg\s*\|\s*translate$dom_reg\s*\|\s*format/",
                            $text, $matches, PREG_SET_ORDER)) {
@@ -319,7 +333,10 @@
         global $str_reg;
 
         $escaped = preg_quote($domain, "/");
-        $dom_reg = '(,\s*(\"'.$escaped.'\"|\''.$escaped.'\'))?' ;
+        $dom_reg = '(,\s*(\"'.$escaped.'\"|\''.$escaped.'\'))';
+
+        if (is_theme($pathname))
+            $dom_reg.= '?';
 
         if (preg_match_all("/$str_reg\s*\|\s*translate_plural\(\s*$str_reg\s*,.+?$dom_reg\s*\)\s*\|\s*format/",
                            $text, $matches, PREG_SET_ORDER)) {

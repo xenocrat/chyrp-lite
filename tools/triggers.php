@@ -131,7 +131,7 @@
         global $trigger;
         global $str_reg;
 
-        if (preg_match_all("/(\$trigger|Trigger::current\(\))->call\($str_reg(,\s*(.+))?\)/",
+        if (preg_match_all("/(\\\$trigger|Trigger::current\(\))->call\($str_reg(,\s*(.+))?\)/",
                            $text, $matches, PREG_SET_ORDER)) {
 
             foreach ($matches as $match) {
@@ -154,7 +154,7 @@
         global $trigger;
         global $str_reg;
 
-        if (preg_match_all("/(\$trigger|Trigger::current\(\))->filter\(([^,]+),\s*$str_reg(,\s*(.+))?\)/",
+        if (preg_match_all("/(\\\$trigger|Trigger::current\(\))->filter\(([^,]+),\s*$str_reg(,\s*(.+))?\)/",
                            $text, $matches, PREG_SET_ORDER)) {
 
             foreach ($matches as $match) {
@@ -211,7 +211,7 @@
             $contents.= "Called from:\n";
 
             foreach ($attributes["places"] as $place)
-                $contents.= $place."\n";
+                $contents.= "\t".$place."\n";
 
             if (!empty($attributes["arguments"])) {
                 $contents.= "\nArguments:\n";
@@ -231,7 +231,7 @@
             $contents.= "Called from:\n";
 
             foreach ($attributes["places"] as $place)
-                $contents.= $place."\n";
+                $contents.= "\t".$place."\n";
 
             $contents.= "\nTarget:\n";
             $contents.= "\t".$attributes["target"]."\n";
