@@ -1,7 +1,7 @@
 <?php
     /**
      * File: upgrade
-     * A task-based gerneral purpose upgrader for Chyrp Lite, enabled modules and enabled feathers.
+     * A task-based general purpose upgrader for Chyrp Lite, enabled modules and enabled feathers.
      */
 
     header("Content-Type: text/html; charset=UTF-8");
