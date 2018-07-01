@@ -857,7 +857,7 @@
     function depluralize($string, $number = null) {
         $uncountable = array("news", "series", "species");
 
-        if (in_array($string, $uncountable) or isset($number) and $number != 1)
+        if (in_array($string, $uncountable) or (isset($number) and $number != 1))
             return $string;
 
         $replacements = array(
