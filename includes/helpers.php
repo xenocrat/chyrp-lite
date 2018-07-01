@@ -800,48 +800,47 @@
      * Pluralizes a word.
      *
      * Parameters:
-     *     $string - The string to pluralize.
-     *     $number - If passed, and this number is 1, it will not pluralize.
+     *     $string - The lowercase string to pluralize.
+     *     $number - If supplied, and this number is 1, it will not pluralize.
      *
      * Returns:
      *     The supplied word with a trailing "s" added, or a non-normative pluralization.
      */
     function pluralize($string, $number = null) {
-        $uncountable = array("moose", "sheep", "fish", "series", "species", "audio",
-                             "rice", "money", "information", "equipment", "piss");
+        $uncountable = array("audio", "equipment", "fish", "information", "money",
+                             "moose", "news", "rice", "series", "sheep", "species");
 
         if (in_array($string, $uncountable) or $number == 1)
             return $string;
 
-        $replacements = array("/person/i" => "people",
-                              "/man/i" => "men",
-                              "/child/i" => "children",
-                              "/cow/i" => "kine",
-                              "/goose/i" => "geese",
-                              "/datum$/i" => "data",
-                              "/(penis)$/i" => "\\1es",
-                              "/(ax|test)is$/i" => "\\1es",
-                              "/(octop|vir)us$/i" => "\\1ii",
-                              "/(cact)us$/i" => "\\1i",
-                              "/(alias|status)$/i" => "\\1es",
-                              "/(bu)s$/i" => "\\1ses",
-                              "/(buffal|tomat)o$/i" => "\\1oes",
-                              "/([ti])um$/i" => "\\1a",
-                              "/sis$/i" => "ses",
-                              "/(hive)$/i" => "\\1s",
-                              "/([^aeiouy]|qu)y$/i" => "\\1ies",
-                              "/^(ox)$/i" => "\\1en",
-                              "/(matr|vert|ind)(?:ix|ex)$/i" => "\\1ices",
-                              "/(x|ch|ss|sh)$/i" => "\\1es",
-                              "/([m|l])ouse$/i" => "\\1ice",
-                              "/(quiz)$/i" => "\\1zes");
+        $replacements = array(
+            "/person/i"                    => "people",
+            "/^(wom|m)an$/i"               => "\\1en",
+            "/child/i"                     => "children",
+            "/cow/i"                       => "kine",
+            "/goose/i"                     => "geese",
+            "/datum$/i"                    => "data",
+            "/(penis)$/i"                  => "\\1es",
+            "/(ax|test)is$/i"              => "\\1es",
+            "/(octop|vir)us$/i"            => "\\1ii",
+            "/(cact)us$/i"                 => "\\1i",
+            "/(alias|status)$/i"           => "\\1es",
+            "/(bu)s$/i"                    => "\\1ses",
+            "/(buffal|tomat)o$/i"          => "\\1oes",
+            "/([ti])um$/i"                 => "\\1a",
+            "/sis$/i"                      => "ses",
+            "/(hive)$/i"                   => "\\1s",
+            "/([^aeiouy]|qu)y$/i"          => "\\1ies",
+            "/^(ox)$/i"                    => "\\1en",
+            "/(matr|vert|ind)(?:ix|ex)$/i" => "\\1ices",
+            "/(x|ch|ss|sh)$/i"             => "\\1es",
+            "/([m|l])ouse$/i"              => "\\1ice",
+            "/(quiz)$/i"                   => "\\1zes"
+        );
 
         $replaced = preg_replace(array_keys($replacements), array_values($replacements), $string, 1);
 
-        if ($replaced == $string)
-            return $string."s";
-        else
-            return $replaced;
+        return ($replaced == $string) ? $string."s" : $replaced ;
     }
 
     /**
@@ -849,45 +848,46 @@
      * Singularizes a word.
      *
      * Parameters:
-     *     $string - The string to depluralize.
-     *     $number - If passed, and this number is not 1, it will not depluralize.
+     *     $string - The lowercase string to depluralize.
+     *     $number - If supplied, and this number is not 1, it will not depluralize.
      *
      * Returns:
      *     The supplied word with trailing "s" removed, or a non-normative singularization.
      */
     function depluralize($string, $number = null) {
-        if (isset($number) and $number != 1)
+        $uncountable = array("news", "series", "species");
+
+        if (in_array($string, $uncountable) or isset($number) and $number != 1)
             return $string;
 
-        $replacements = array("/people/i" => "person",
-                              "/^men/i" => "man",
-                              "/children/i" => "child",
-                              "/kine/i" => "cow",
-                              "/geese/i" => "goose",
-                              "/data$/i" => "datum",
-                              "/(penis)es$/i" => "\\1",
-                              "/(ax|test)es$/i" => "\\1is",
-                              "/(octopi|viri|cact)i$/i" => "\\1us",
-                              "/(alias|status)es$/i" => "\\1",
-                              "/(bu)ses$/i" => "\\1s",
-                              "/(buffal|tomat)oes$/i" => "\\1o",
-                              "/([ti])a$/i" => "\\1um",
-                              "/ses$/i" => "sis",
-                              "/(hive)s$/i" => "\\1",
-                              "/([^aeiouy]|qu)ies$/i" => "\\1y",
-                              "/^(ox)en$/i" => "\\1",
-                              "/(vert|ind)ices$/i" => "\\1ex",
-                              "/(matr)ices$/i" => "\\1ix",
-                              "/(x|ch|ss|sh)es$/i" => "\\1",
-                              "/([ml])ice$/i" => "\\1ouse",
-                              "/(quiz)zes$/i" => "\\1");
+        $replacements = array(
+            "/people/i"               => "person",
+            "/^(wom|m)en$/i"          => "\\1an",
+            "/children/i"             => "child",
+            "/kine/i"                 => "cow",
+            "/geese/i"                => "goose",
+            "/data$/i"                => "datum",
+            "/(penis)es$/i"           => "\\1",
+            "/(ax|test)es$/i"         => "\\1is",
+            "/(octopi|viri|cact)i$/i" => "\\1us",
+            "/(alias|status)es$/i"    => "\\1",
+            "/(bu)ses$/i"             => "\\1s",
+            "/(buffal|tomat)oes$/i"   => "\\1o",
+            "/([ti])a$/i"             => "\\1um",
+            "/ses$/i"                 => "sis",
+            "/(hive)s$/i"             => "\\1",
+            "/([^aeiouy]|qu)ies$/i"   => "\\1y",
+            "/^(ox)en$/i"             => "\\1",
+            "/(vert|ind)ices$/i"      => "\\1ex",
+            "/(matr)ices$/i"          => "\\1ix",
+            "/(x|ch|ss|sh)es$/i"      => "\\1",
+            "/([ml])ice$/i"           => "\\1ouse",
+            "/(quiz)zes$/i"           => "\\1"
+        );
 
         $replaced = preg_replace(array_keys($replacements), array_values($replacements), $string, 1);
 
-        if ($replaced == $string and substr($string, -1) == "s")
-            return substr($string, 0, -1);
-        else
-            return $replaced;
+        return ($replaced == $string and substr($string, -1) == "s") ? substr($string, 0, -1) : $replaced ;
     }
 
     /**
@@ -898,11 +898,9 @@
      *     The normalized string.
      */
     function normalize($string) {
-        $trimmed = trim($string);
-        $newlines = str_replace("\n\n", " ", $trimmed);
-        $newlines = str_replace("\n", "", $newlines);
-        $normalized = preg_replace("/[\s\n\r\t]+/", " ", $newlines);
-        return $normalized;
+        $newlines = str_replace(array("\n\n", "\n"), array(" ", ""), $string);
+        $whitespace = preg_replace("/[\s\n\r\t]+/", " ", $newlines);
+        return trim($whitespace);
     }
 
     /**
@@ -920,15 +918,15 @@
      *     <decamelize>
      */
     function camelize($string, $keep_spaces = false) {
-        $lower = strtolower($string);
-        $deunderscore = str_replace("_", " ", $lower);
+        $lowercase = strtolower($string);
+        $deunderscore = str_replace("_", " ", $lowercase);
         $dehyphen = str_replace("-", " ", $deunderscore);
-        $final = ucwords($dehyphen);
+        $camelized = ucwords($dehyphen);
 
         if (!$keep_spaces)
-            $final = str_replace(" ", "", $final);
+            $camelized = str_replace(" ", "", $camelized);
 
-        return $final;
+        return $camelized;
     }
 
     /**
@@ -994,6 +992,9 @@
      *
      * Returns:
      *     The text with Markdown formatting applied.
+     *
+     * Se Also:
+     *     https://github.com/commonmark/CommonMark
      */
     function markdown($text) {
         return Parsedown::instance()->setStrictMode(true)->text($text);
@@ -1043,9 +1044,8 @@
             ":-x"     => "&#x1f636;"
         );
 
-        foreach($emoji as $key => $value) {
+        foreach ($emoji as $key => $value)
             $text = str_replace($key, '<span class="emoji">'.$value.'</span>', $text);
-        }
 
         return $text;
     }
