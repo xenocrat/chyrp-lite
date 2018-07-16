@@ -21,7 +21,7 @@
 <thead>
 <tr class="head">
 <th class="toggler"></th>
-<th class="comment_post title">{{ "Post" | translate("comments") }}</th>
+<th class="comment_post title main">{{ "Post" | translate("comments") }}</th>
 <th class="comment_author vale">{{ "Author" | translate("comments") }}</th>
 <th class="comment_date date">{{ "Added" | translate("comments") }}</th>
 <th class="comment_status status">{{ "Status" | translate("comments") }}</th>
@@ -59,7 +59,7 @@
 </td>
 </tr>
 <tr class="comment_excerpt">
-<td colspan="6">{{ comment.body | striptags | truncate(100, "&hellip;") }}</td>
+<td class="main" colspan="6">{{ comment.body | striptags | truncate(100, "&hellip;") }}</td>
 </tr>
 {% else %}
 <tr>

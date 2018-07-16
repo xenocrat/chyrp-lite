@@ -771,26 +771,16 @@ a.emblem.preview {                              float: right }
                                                 font-size: 16px !important;
                                                 padding-top: 0.5rem;
                                                 padding-bottom: 0.5rem }
-    textarea {                                  -webkit-overflow-scrolling: touch }
     select {                                    width: 100% }
-    #content table {                            display: block;
-                                                box-sizing: border-box;
-                                                width: 100%;
-                                                overflow-x: scroll;
-                                                border: 1px solid #ddd;
-                                                -webkit-overflow-scrolling: touch }
-    #content table tbody tr td {                min-width: 10em;
-                                                padding-top: 1rem;
-                                                padding-bottom: 1rem }
+    #content table thead tr th:not(.main):not(.controls):not(.toggler),
+    #content table tbody tr td:not(.main):not(.controls):not(.checkbox) {
+                                                display: none }
+    #content table tbody tr td {                padding: 1em 0.5rem }
+    #content table tbody tr td.main {           min-width: 4rem }
     #content table tbody tr td.controls,
     #content table tbody tr td.checkbox,
-    #content table tbody tr td.show_on_home {   min-width: 64px }
-    #content table tbody tr td.main {           min-width: 240px }
-    #content table tbody tr:last-child td,
-    #content table tbody tr td[rowspan="2"] {   border-bottom: none }
-    #content table tbody tr td:first-child {    border-left: none }
-    #content table tbody tr td:last-child {     border-right: none }
-    table.interactive + div.controls {          padding: 4rem }
+    #content table tbody tr td.emblem {         min-width: 32px }
+    table.interactive + div.controls {          padding: 2rem }
     button, a.button,
     a.prev_page, a.next_page {                  float: none !important;
                                                 clear: both !important;
