@@ -16,11 +16,11 @@
 </fieldset>
 </form>
 <h2>{{ GET.query is not empty ? "Search Results" | translate : "Comments" | translate("comments") }}</h2>
-<form action="{{ url('bulk_comments') }}" method="post">
+<form action="{{ url('bulk_comments') }}" method="post" accept-charset="UTF-8" data-toggler="comment_toggler">
 <table class="interactive">
 <thead>
 <tr class="head">
-<th class="toggler"></th>
+<th class="toggler" id="comment_toggler"></th>
 <th class="comment_post title main">{{ "Post" | translate("comments") }}</th>
 <th class="comment_author vale">{{ "Author" | translate("comments") }}</th>
 <th class="comment_date date">{{ "Added" | translate("comments") }}</th>

@@ -4,7 +4,7 @@
 
 {% block content %}
 <h2>{{ "Cache Settings" | translate("cacher") }}</h2>
-<form id="cache_settings" class="split" action="{{ url('cache_settings') }}" method="post">
+<form id="cache_settings" class="split" action="{{ url('cache_settings') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <fieldset>
 <p>
 <label for="cache_expire">{{ "Expire Cache After&hellip;" | translate("cacher") }}</label>
