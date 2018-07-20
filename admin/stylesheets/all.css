@@ -359,6 +359,7 @@ input[type="email"].error,
 input[type="url"].error,
 input[type="number"].error,
 input[type="password"].error,
+input:invalid,
 textarea.error {                                background-color: #faebe4;
                                                 border: 1px solid #d51800 }
 input[type="password"].strong {                 background-color: #ebfae4;
