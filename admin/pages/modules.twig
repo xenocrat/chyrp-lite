@@ -41,7 +41,7 @@
 </ol>
 {% endif %}
 <div class="controls">
-<form class="module_disabler" action="{{ url('disable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<form class="module_disabler" action="{{ url('disable') }}" method="post" accept-charset="UTF-8">
 <input type="hidden" name="extension" value="{{ safename }}">
 <input type="hidden" name="type" value="module">
 <input type="hidden" name="hash" value="{{ authenticate() }}">
@@ -98,7 +98,7 @@
 {% endif %}
 {% if module.classes is defined and not (module.classes | contains("missing_dependency")) %}
 <div class="controls">
-<form class="module_enabler" action="{{ url('enable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<form class="module_enabler" action="{{ url('enable') }}" method="post" accept-charset="UTF-8">
 <input type="hidden" name="extension" value="{{ safename }}">
 <input type="hidden" name="type" value="module">
 <input type="hidden" name="hash" value="{{ authenticate() }}">

@@ -21,7 +21,7 @@
 {{ feather.description }}{# translation is done in the controller #}
 </p>
 <div class="controls">
-<form class="feather_disabler" action="{{ url('disable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<form class="feather_disabler" action="{{ url('disable') }}" method="post" accept-charset="UTF-8">
 <input type="hidden" name="extension" value="{{ safename }}">
 <input type="hidden" name="type" value="feather">
 <input type="hidden" name="hash" value="{{ authenticate() }}">
@@ -57,7 +57,7 @@
 {{ feather.description }}{# translation is done in the controller #}
 </p>
 <div class="controls">
-<form class="feather_enabler" action="{{ url('enable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<form class="feather_enabler" action="{{ url('enable') }}" method="post" accept-charset="UTF-8">
 <input type="hidden" name="extension" value="{{ safename }}">
 <input type="hidden" name="type" value="feather">
 <input type="hidden" name="hash" value="{{ authenticate() }}">

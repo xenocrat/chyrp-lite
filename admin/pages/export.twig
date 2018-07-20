@@ -4,7 +4,7 @@
 
 {% block content %}
 <h2>{{ "What would you like to export?" | translate }}</h2>
-<form id="export_form" class="split" action="{{ url('export') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<form id="export_form" class="split" action="{{ url('export') }}" method="post" accept-charset="UTF-8">
 <fieldset>
 {% set field_aria = "filter (optional)" | translate %}
 <p>
