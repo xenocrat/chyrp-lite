@@ -227,7 +227,7 @@ select:focus, input:focus {                     outline: none;
 input:placeholder {                             color: #adafae;
                                                 opacity: 1 }
 input[type="radio"], input[type="checkbox"] {   width: auto }
-input.error {                                   background-color: #ff8080 }
+input.error, input:invalid {                    background-color: #ff8080 }
 input#search_field {                            display: inline;
                                                 margin: 0em;
                                                 padding-right: 34px }

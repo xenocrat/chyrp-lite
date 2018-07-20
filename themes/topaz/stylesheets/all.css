@@ -240,7 +240,7 @@ select:focus, input:focus {                     outline: none;
 input:placeholder {                             color: #c6ccc8;
                                                 opacity: 1 }
 input[type="radio"], input[type="checkbox"] {   width: auto }
-input.error {                                   background-color: #ffb2b2 }
+input.error, input:invalid {                    background-color: #ffb2b2 }
 input#search_field,
 input#sidebar_search_field {                    display: inline;
                                                 margin: 0em;
