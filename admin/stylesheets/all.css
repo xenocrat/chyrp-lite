@@ -361,9 +361,16 @@ input[type="number"].error,
 input[type="password"].error,
 input:invalid,
 textarea.error {                                background-color: #faebe4;
-                                                border: 1px solid #d51800 }
-input[type="password"].strong {                 background-color: #ebfae4;
-                                                border: 1px solid #189100 }
+                                                box-shadow: none }
+input[type="text"].error:focus,
+input[type="email"].error:focus,
+input[type="url"].error:focus,
+input[type="number"].error:focus,
+input[type="password"].error:focus,
+input:invalid:focus,
+textarea.error:focus {                          border: 1px solid #d51800 }
+input[type="password"].strong {                 background-color: #ebfae4 }
+input[type="password"].strong:focus {           border: 1px solid #189100 }
 input[type="file"] {                            border: none }
 input[disabled],
 input.disabled {                                cursor: not-allowed }
