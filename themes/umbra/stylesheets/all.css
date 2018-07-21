@@ -226,8 +226,10 @@ select:focus, input:focus {                     outline: none;
                                                 border-color: #ffffff }
 input:placeholder {                             color: #adafae;
                                                 opacity: 1 }
+input.error, input:invalid {                    color: #202021;
+                                                background-color: #ff8080;
+                                                box-shadow: none }
 input[type="radio"], input[type="checkbox"] {   width: auto }
-input.error, input:invalid {                    background-color: #ff8080 }
 input#search_field {                            display: inline;
                                                 margin: 0em;
                                                 padding-right: 34px }

@@ -239,8 +239,9 @@ select:focus, input:focus {                     outline: none;
                                                 border: 1px solid #4e5a66 }
 input:placeholder {                             color: #c6ccc8;
                                                 opacity: 1 }
+input.error, input:invalid {                    background-color: #ffb2b2;
+                                                box-shadow: none }
 input[type="radio"], input[type="checkbox"] {   width: auto }
-input.error, input:invalid {                    background-color: #ffb2b2 }
 input#search_field,
 input#sidebar_search_field {                    display: inline;
                                                 margin: 0em;
