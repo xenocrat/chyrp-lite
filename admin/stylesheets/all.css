@@ -382,7 +382,6 @@ code {                                          background-color: #efefef;
                                                 padding: 0px 2px;
                                                 color: #4f4f4f;
                                                 border: 1px solid #dfdfdf }
-select {                                        box-sizing: border-box }
 form.split > fieldset > * {                     line-height: 2;
                                                 clear: both }
 form.split > fieldset > * > label {             box-sizing: border-box;
