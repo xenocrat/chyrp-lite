@@ -11,11 +11,11 @@
 <h3>
 <a class="emblem module_author" href="{{ theme.url }}" target="_blank">
 <img src="{{ site.chyrp_url }}/admin/images/icons/info.svg" alt="{{ theme.url | fix }}">
-</a>
 {{ theme.name }}{# translation is done in the controller #}
+</a>
 </h3>
 <div class="controls">
-<form action="{{ url('change_theme') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<form action="{{ url('change_theme') }}" method="post" accept-charset="UTF-8">
 <input type="hidden" name="theme" value="{{ safename }}">
 <input type="hidden" name="hash" value="{{ authenticate() }}">
 <button name="change" value="indubitably" type="submit"{{ safename == site.theme ? " disabled" : "" }}>

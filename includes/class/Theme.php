@@ -335,7 +335,7 @@
          */
         public function cookies_notification() {
             if (Config::current()->cookies_notification and empty($_SESSION['cookies_notified']))
-                Flash::notice(__("By browsing this website you are agreeing to our use of cookies."));
+                Flash::notice(__("This website uses cookies only for the purpose of user authentication."));
 
             $_SESSION['cookies_notified'] = true;
         }

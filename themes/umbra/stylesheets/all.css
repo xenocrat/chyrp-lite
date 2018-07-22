@@ -59,7 +59,7 @@ html {                                          font-size: 16px }
                                                 background-color: #47b347 }
 body {                                          font-family: "Open Sans webfont", sans-serif;
                                                 font-size: 1rem;
-                                                color: #999491;
+                                                color: #adafae;
                                                 line-height: 1.5;
                                                 background-color: #202021;
                                                 margin: 0em 0em 4rem 0em;
@@ -85,7 +85,8 @@ h3 {                                            font-size: 1em;
                                                 margin: 1em 0em;
                                                 padding: 0em;
                                                 line-height: 1.2 }
-h3.flash {                                      margin: 0em }
+h3.flash {                                      font-weight: normal;
+                                                margin: 0em }
 h3.filter {                                     box-sizing: border-box;
                                                 width: 100%;
                                                 text-align: center;
@@ -133,15 +134,15 @@ code {                                          font-family: "Hack webfont", mon
                                                 font-size: 0.75em;
                                                 font-style: normal;
                                                 color: #fffefd;
-                                                background-color: #464647;
+                                                background-color: #666667;
                                                 padding: 0.2em 0.4em;
                                                 margin: 0.2em 0em;
                                                 display: inline-block }
-pre > code {                                    border: 1px solid #464647 }
+pre > code {                                    border: 1px solid #666667 }
 hr {                                            width: 100%;
                                                 border: none;
                                                 clear: both;
-                                                border-top: 1px solid #464647;
+                                                border-top: 1px solid #666667;
                                                 margin: 2em 0em }
 hr.post {                                       margin: 0em }
 hr:last-child, hr.post:last-of-type, hr + hr {  display: none }
@@ -167,14 +168,14 @@ ul.archive li {                                 margin: 0em }
 ol.comments {                                   list-style: none;
                                                 padding: 0em;
                                                 margin: 0em;
-                                                border-bottom: 1px solid #464647 }
+                                                border-bottom: 1px solid #666667 }
 ol.comments li {                                box-sizing: border-box;
                                                 display: block;
                                                 position: relative;
                                                 width: 100%;
                                                 margin: 0em;
                                                 padding: 2rem 2rem 2rem 96px;
-                                                border: 1px solid #464647;
+                                                border: 1px solid #666667;
                                                 border-bottom: none }
 ol.comments li#comment_shim {                   display: none }
 ol.comments li.comment_form {                   padding: 1rem 2rem 2rem 2rem }
@@ -185,13 +186,13 @@ table {                                         border-collapse: collapse;
                                                 overflow-x: scroll;
                                                 -webkit-overflow-scrolling: touch }
 table:last-child {                              margin-bottom: 0em }
-table thead tr {                                background-color: #464647;
+table thead tr {                                background-color: #666667;
                                                 color: #fffefd;
-                                                border: 1px solid #464647 }
+                                                border: 1px solid #666667 }
 table thead tr th {                             padding: 0.5em;
                                                 font-weight: bold }
 table tbody tr td {                             padding: 0.5em;
-                                                border: 1px solid #464647;
+                                                border: 1px solid #666667;
                                                 vertical-align: middle }
 form, fieldset {                                margin: 0em;
                                                 padding: 0em;
@@ -204,7 +205,7 @@ form.comment_edit {                             width: 100%;
                                                 margin-bottom: 0em;
                                                 padding: 0em;
                                                 border: none }
-input {                                         box-sizing: border-box;
+select, input {                                 box-sizing: border-box;
                                                 display: block;
                                                 width: 320px;
                                                 max-width: 800px;
@@ -215,27 +216,25 @@ input {                                         box-sizing: border-box;
                                                 font: inherit;
                                                 font-size: inherit;
                                                 color: #c6ccc8;
-                                                background-color: #464647;
-                                                border: none;
+                                                background-color: #666667;
+                                                border: 1px #666667 solid;
                                                 border-radius: 0.2em;
 /* Removes shadow from Mobile Safari -> */      background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%) }
-input:focus {                                   outline: none;
-                                                color: #999491;
-                                                background-color: #ffffff }
-input:placeholder {                             color: #999491;
+select:focus, input:focus {                     outline: none;
+                                                color: #202021;
+                                                background-color: #ffffff;
+                                                border-color: #ffffff }
+input:placeholder {                             color: #adafae;
                                                 opacity: 1 }
-input[type='checkbox'] {                        width: auto }
-input.error {                                   background-color: #ff8080 }
+input.error, input:invalid {                    color: #202021;
+                                                background-color: #ff8080;
+                                                box-shadow: none }
+input[type="radio"], input[type="checkbox"] {   width: auto }
 input#search_field {                            display: inline;
                                                 margin: 0em;
                                                 padding-right: 34px }
-div.search_box input[type='text'] {             width: 10em;
+div.search_box input[type="text"] {             width: 10em;
                                                 display: inline-block }
-select {                                        box-sizing: border-box;
-                                                display: block;
-                                                width: 320px;
-                                                max-width: 800px;
-                                                margin: 0.5em 0em }
 textarea {                                      box-sizing: border-box;
                                                 display: block;
                                                 width: 100%;
@@ -243,10 +242,10 @@ textarea {                                      box-sizing: border-box;
                                                 max-width: 800px;
                                                 font: inherit;
                                                 font-size: inherit;
-                                                color: #999491;
+                                                color: #adafae;
                                                 margin: 0.5em 0em;
                                                 padding: 2px 4px;
-                                                background-color: #464647;
+                                                background-color: #666667;
                                                 border: none;
                                                 border-radius: 0.2em;
 /* Removes shadow from Mobile Safari -> */      background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%) }
@@ -257,12 +256,14 @@ article.commentary textarea {                   max-width: none }
 button {                                        font: inherit;
                                                 font-size: inherit;
                                                 cursor: pointer }
+button:focus {                                  outline: none }
+button::-moz-focus-inner {                      border: none }
 label {                                         display: block;
                                                 margin-top: 1em }
 div.clear {                                     visibility: hidden;
                                                 clear: both }
 div#mast {                                      width: 100%;
-                                                border-bottom: 1px solid #464647 }
+                                                border-bottom: 1px solid #666667 }
 div#mast_box {                                  box-sizing: border-box;
                                                 width: 100%;
                                                 max-width: 1024px;
@@ -287,10 +288,9 @@ div.flash {                                     box-sizing: border-box;
                                                 color: #ffffff;
                                                 background-color: #cc5252;
                                                 padding: 0.5em;
-                                                border-bottom: 1px solid #464647 }
+                                                border-bottom: 1px solid #666667 }
 div.metadata {                                  font-weight: normal;
                                                 font-size: 0.75em;
-                                                color: #999491;
                                                 display: block;
                                                 width: 100%;
                                                 line-height: 2em;
@@ -327,7 +327,7 @@ div#main > article.discourse > div {            box-sizing: border-box;
                                                 width: 100%;
                                                 margin: 0em;
                                                 padding: 2rem 2rem 1rem 2rem;
-                                                border: 1px solid #464647 }
+                                                border: 1px solid #666667 }
 div.tags.standalone {                           line-height: 2 }
 ul.archive article.post.archive {               display: block;
                                                 position: relative;
@@ -367,31 +367,22 @@ article > footer:last-child {                   margin: 0em }
 article.video video {                           width: 100%;
                                                 max-width: 1280px }
 article.audio audio {                           width: 100%;
-                                                max-width: 800px }                  
+                                                max-width: 800px }
 a {                                             border-bottom: 1px transparent solid }
-a:link {                                        color: #999491;
+a:link, a:visited {                             color: #adafae;
                                                 text-decoration: none }
-a:visited {                                     color: #999491;
-                                                text-decoration: none }
-a:hover {                                       color: #ffffff;
-                                                text-decoration: none }
-a:focus {                                       outline: none;
+a:hover, a:focus, a:active {                    outline: none;
                                                 color: #ffffff;
                                                 text-decoration: none;
                                                 border-bottom: 1px #ffffff solid }
-a:active {                                      color: #ffffff;
-                                                text-decoration: none }
 ul.navigation li > a {                          display: inline-block;
                                                 margin: 0em 1em 1em 0em }
 h3.flash a {                                    color: #ffffff;
-                                                border-bottom: 1px #ffffff solid;
-                                                display: inline-block;
-                                                position: relative;
-                                                top: 0px }
+                                                font-weight: bold;
+                                                font-style: italic }
 h3.flash a:hover,
 h3.flash a:focus,
-h3.flash a:active {                             top: 1px;
-                                                color: inherit }
+h3.flash a:active {                             border-bottom: 1px #ffffff solid }
 div.traversal a {                               display: inline-block;
                                                 position: relative;
                                                 padding: 2.5em 0em;
@@ -401,22 +392,18 @@ div.traversal a {                               display: inline-block;
                                                 color: #ffffff;
                                                 line-height: 1;
                                                 border-radius: 50%;
-                                                border: 1px #464647 solid;
-                                                transition: top 250ms cubic-bezier(0.5, -8, 0.2, 4) }
+                                                border: 1px #666667 solid }
 div.traversal a:hover,
 div.traversal a:focus,
-div.traversal a:active {                        background-color: #464647 }
+div.traversal a:active {                        background-color: #666667;
+                                                transition: top 250ms cubic-bezier(0.5, -8, 0.2, 4) }
 div.prev a:hover, div.prev a:active {           top: -1px }
 div.next a:hover, div.next a:active {           top: 1px }
-section a:link, p a:link {                      color: #999491;
-                                                border-bottom: 1px #999491 solid }
-section a:visited, p a:visited {                color: #999491;
-                                                border-bottom: 1px #999491 solid }
-section a:hover, p a:hover {                    color: #ffffff;
-                                                border-bottom: 1px #ffffff solid }
-section a:focus, p a:focus {                    outline: none;
-                                                color: #ffffff;
-                                                border-bottom: 1px #ffffff solid }
+section a:link, p a:link,
+section a:visited, p a:visited {                color: #adafae;
+                                                border-bottom: 1px #adafae solid }
+section a:hover, p a:hover,
+section a:focus, p a:focus,
 section a:active, p a:active {                  color: #ffffff;
                                                 border-bottom: 1px #ffffff solid }
 div.tags a.tag {                                display: inline-block;
@@ -426,10 +413,10 @@ div.tags a.tag {                                display: inline-block;
                                                 margin: 2px 0em;
                                                 border-radius: 0.2em;
                                                 color: #fffefd;
-                                                border: 1px solid #464647 }
+                                                border: 1px solid #666667 }
 div.tags a.tag:hover,
 div.tags a.tag:focus,
-div.tags a.tag:active {                         background-color: #464647 }
+div.tags a.tag:active {                         background-color: #666667 }
 div.category a.category {                       display: inline-block;
                                                 position: absolute;
                                                 top: 0px;
@@ -437,16 +424,11 @@ div.category a.category {                       display: inline-block;
                                                 padding: 0.2em 0.6em;
                                                 margin: 0em;
                                                 color: #fffefd;
-                                                border: 1px solid #464647;
+                                                border: 1px solid #666667;
                                                 border-top: none }
 div.category a.category:hover,
 div.category a.category:focus,
-div.category a.category:active {                background-color: #464647 }
-div.metadata a {                                color: #999491 }
-div.metadata a:hover {                          color: #ffffff }
-div.metadata a:focus {                          color: #ffffff;
-                                                border-bottom: 1px #ffffff solid }
-div.metadata a:active {                         color: #ffffff }
+div.category a.category:active {                background-color: #666667 }
 div.doaction a, button {                        display: inline-block;
                                                 line-height: normal;
                                                 white-space: nowrap;
@@ -454,12 +436,11 @@ div.doaction a, button {                        display: inline-block;
                                                 border-radius: 0.2em;
                                                 color: #fffefd;
                                                 background-color: transparent;
-                                                border: 1px solid #464647 }
+                                                border: 1px solid #666667 }
 div.doaction a:hover, button:hover,
 div.doaction a:focus, button:focus,
-div.doaction a:active, button:active {          outline: none;
-                                                background-color: #464647;
-                                                border: 1px solid #464647 }
+div.doaction a:active, button:active {          background-color: #666667;
+                                                border: 1px solid #666667 }
 div.doaction a.post_delete_link,
 div.doaction a.delete_link {                    font-weight: bold }
 article > section.photo > a {                   border-bottom: none }

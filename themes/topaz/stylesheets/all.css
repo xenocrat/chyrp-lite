@@ -89,7 +89,8 @@ h3 {                                            font-size: 1em;
                                                 margin: 1em 0em;
                                                 padding: 0em;
                                                 line-height: 1.2 }
-h3.ribbon {                                     margin: 0em }
+h3.ribbon {                                     font-weight: normal;
+                                                margin: 0em }
 h3.archive {                                    margin-top: 1em;
                                                 clear: both }
 h4, h5, h6 {                                    font-size: 1em;
@@ -218,7 +219,7 @@ form.comment_edit {                             width: 100%;
                                                 margin-bottom: 0em;
                                                 padding: 0rem 0rem 2rem 0rem;
                                                 border: none }
-input {                                         box-sizing: border-box;
+select, input {                                 box-sizing: border-box;
                                                 display: block;
                                                 width: 320px;
                                                 max-width: 960px;
@@ -233,40 +234,19 @@ input {                                         box-sizing: border-box;
                                                 border: 1px solid #c6ccc8;
                                                 border-radius: 0em;
 /* Removes shadow from Mobile Safari -> */      background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%) }
-input:focus {                                   outline: none;
+select:focus, input:focus {                     outline: none;
                                                 background-color: #ffffff;
                                                 border: 1px solid #4e5a66 }
 input:placeholder {                             color: #c6ccc8;
                                                 opacity: 1 }
-input[type='checkbox'] {                        width: auto }
-input.error {                                   background-color: #ffb2b2 }
+input.error, input:invalid {                    background-color: #ffb2b2;
+                                                box-shadow: none }
+input[type="radio"], input[type="checkbox"] {   width: auto }
 input#search_field,
 input#sidebar_search_field {                    display: inline;
                                                 margin: 0em;
                                                 padding-right: 34px }
-div.search_box input[type='text'] {             width: 100% }
-button#search_submit,
-button#sidebar_search_submit {                  display: block;
-                                                position: absolute;
-                                                width: 34px;
-                                                top: 1px;
-                                                bottom: 1px;
-                                                right: 1px;
-                                                border: none;
-                                                border-radius: 0em;
-                                                margin: 0em;
-                                                padding: 0em;
-                                                background: transparent url(../images/search.svg) no-repeat center;
-                                                overflow: hidden;
-                                                color: transparent }
-button#search_submit:focus,
-button#sidebar_search_submit:focus {            background-color: #c6ccc8;
-                                                outline: none }
-select {                                        box-sizing: border-box;
-                                                display: block;
-                                                width: 320px;
-                                                max-width: 960px;
-                                                margin: 0.5em 0em }
+div.search_box input[type="text"] {             width: 100% }
 textarea {                                      box-sizing: border-box;
                                                 display: block;
                                                 width: 100%;
@@ -287,8 +267,31 @@ article.commentary textarea {                   max-width: none }
 button {                                        font: inherit;
                                                 font-size: inherit;
                                                 cursor: pointer;
-                                                transition-property: color, background-color, border;
+                                                transition-property: background-color, border;
                                                 transition-duration: 250ms }
+button:focus {                                  outline: none }
+button::-moz-focus-inner {                      border: none }
+button#search_submit,
+button#sidebar_search_submit {                  display: block;
+                                                position: absolute;
+                                                width: 32px;
+                                                height: 32px;
+                                                top: 0px;
+                                                right: 0px;
+                                                border: none;
+                                                border-radius: 0em;
+                                                margin: 0em;
+                                                padding: 0em;
+                                                background: transparent url(../images/search.svg) center no-repeat;
+                                                background-size: 60%;
+                                                overflow: hidden;
+                                                color: transparent }
+button#search_submit {                          width: 38px;
+                                                height: 38px }
+button#search_submit:focus,
+button#sidebar_search_submit:focus {            background-color: #c6ccc8 }
+button#search_submit:hover,
+button#sidebar_search_submit:hover {            background-size: 70% }
 label {                                         display: block;
                                                 margin-top: 1em }
 div.clear {                                     visibility: hidden;
@@ -364,12 +367,13 @@ div#main > article, div.standalone {            display: block;
                                                 width: 100%;
                                                 max-width: 1024px;
                                                 clear: both;
-                                                background-color: #fffefd;
+                                                background-color: #ffffff;
                                                 margin: 0rem auto 2rem auto;
                                                 padding: 2rem 2rem 0rem 2rem;
                                                 border: 1px solid #c6ccc8;
                                                 border-radius: 0.4em }
 div#main > article:last-child {                 margin-bottom: 0rem }
+div#main > article.post.pinned {                border-color: #2ea8e5 }
 div#main > article.discourse {                  padding: 2rem 2rem 1rem 2rem;
                                                 margin-top: 2rem }
 div#main > article.commentary {                 padding: 0rem;
@@ -424,31 +428,22 @@ article > footer:last-child {                   margin: 0em }
 article.video video {                           width: 100%;
                                                 max-width: 1280px }
 article.audio audio {                           width: 100%;
-                                                max-width: 960px }                  
+                                                max-width: 960px }
 a {                                             border-bottom: 1px transparent solid;
-                                                transition-property: color, background-color, border;
+                                                transition-property: background-color, border;
                                                 transition-duration: 250ms }
-a:link {                                        color: #5c6773;
+a:link, a:visited {                             color: #5c6773;
                                                 text-decoration: none }
-a:visited {                                     color: #5c6773;
-                                                text-decoration: none }
-a:hover {                                       color: #000000;
-                                                text-decoration: none }
-a:focus {                                       outline: none;
-                                                color: #000000;
+a:hover, a:focus, a:active {                    outline: none;
+                                                color: #0084c8;
                                                 text-decoration: none;
-                                                border-bottom: 1px #000000 solid }
-a:active {                                      color: #000000;
-                                                text-decoration: none }
+                                                border-bottom: 1px #0084c8 solid }
 h3.ribbon a {                                   color: #ffffff;
-                                                border-bottom: 1px #ffffff solid;
-                                                display: inline-block;
-                                                position: relative;
-                                                top: 0px }
+                                                font-weight: bold;
+                                                font-style: italic }
 h3.ribbon a:hover,
 h3.ribbon a:focus,
-h3.ribbon a:active {                            top: 1px;
-                                                color: inherit }
+h3.ribbon a:active {                            border-bottom: 1px #ffffff solid }
 div.traversal a {                               display: inline-block;
                                                 padding: 0.4em 1.2em;
                                                 margin: 0em 0.5rem;
@@ -465,17 +460,13 @@ div.traversal a:first-child {                   border-top-left-radius: 2em;
                                                 border-bottom-left-radius: 2em }
 div.traversal a:last-child {                    border-top-right-radius: 2em;
                                                 border-bottom-right-radius: 2em }
-section a:link, p a:link {                      color: #5c6773;
-                                                border-bottom: 1px #9ea8a8 solid }
+section a:link, p a:link,
 section a:visited, p a:visited {                color: #5c6773;
-                                                border-bottom: 1px #9ea8a8 solid }
-section a:hover, p a:hover {                    color: #000000;
-                                                border-bottom: 1px #000000 solid }
-section a:focus, p a:focus {                    outline: none;
-                                                color: #000000;
-                                                border-bottom: 1px #000000 solid }
-section a:active, p a:active {                  color: #000000;
-                                                border-bottom: 1px #000000 solid }
+                                                border-bottom: 1px #c6ccc8 solid }
+section a:hover, p a:hover,
+section a:focus, p a:focus,
+section a:active, p a:active {                  color: #0084c8;
+                                                border-bottom: 1px #0084c8 solid }
 div.tags a {                                    display: inline-block;
                                                 padding: 0.2em 0.4em;
                                                 margin-bottom: 4px;
@@ -486,12 +477,13 @@ div.tags a {                                    display: inline-block;
 div.tags a:hover,
 div.tags a:focus,
 div.tags a:active {                             color: #000000;
-                                                border: 1px #4e5a66 solid }
+                                                background-color: #7ac2e5;
+                                                border: 1px #7ac2e5 solid }
 div.metadata a {                                color: #9ea8a8 }
-div.metadata a:hover {                          color: #000000 }
-div.metadata a:focus {                          color: #000000;
-                                                border-bottom: 1px #000000 solid }
-div.metadata a:active {                         color: #000000 }
+div.metadata a:hover,
+div.metadata a:focus,
+div.metadata a:active {                         color: #0084c8;
+                                                border-bottom: 1px #0084c8 solid }
 div.doaction a, button {                        display: inline-block;
                                                 line-height: normal;
                                                 white-space: nowrap;
@@ -502,9 +494,9 @@ div.doaction a, button {                        display: inline-block;
                                                 border: 1px #c6ccc8 solid }
 div.doaction a:hover, button:hover,
 div.doaction a:focus, button:focus,
-div.doaction a:active, button:active {          outline: none;
-                                                color: #000000;
-                                                border: 1px #4e5a66 solid }
+div.doaction a:active, button:active {          color: #000000;
+                                                background-color: #7ac2e5;
+                                                border: 1px #7ac2e5 solid }
 div.doaction a.post_delete_link,
 div.doaction a.delete_link {                    font-weight: bold }
 article > section.photo > a {                   border-bottom: none }

@@ -48,12 +48,12 @@
             $fields[] = array("attr" => "option[rights_title]",
                               "label" => __("Original Work", "rights"),
                               "type" => "text",
-                              "value" => oneof(@$post->rights_title, ""));
+                              "value" => (isset($post->rights_title) ? $post->rights_title : ""));
 
             $fields[] = array("attr" => "option[rights_holder]",
                               "label" => __("Rights Holder", "rights"),
                               "type" => "text",
-                              "value" => oneof(@$post->rights_holder, ""));
+                              "value" => (isset($post->rights_holder) ? $post->rights_holder : ""));
 
             $fields[] = array("attr" => "option[rights_licence]",
                               "label" => __("License", "rights"),

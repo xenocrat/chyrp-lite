@@ -108,8 +108,7 @@ strong {                                        font: inherit;
 cite {                                          font: inherit;
                                                 color: #9ea8a8 }
 small {                                         font-weight: normal;
-                                                font-size: 0.6em;
-                                                text-transform: uppercase }
+                                                font-size: 0.75em }
 blockquote {                                    font-size: 1em;
                                                 font-style: italic;
                                                 padding: 0em 2em;
@@ -207,7 +206,7 @@ form.comment_edit {                             width: 100%;
                                                 margin-bottom: 0em;
                                                 padding: 0rem 0rem 2rem 0rem;
                                                 border: none }
-input {                                         box-sizing: border-box;
+select, input {                                 box-sizing: border-box;
                                                 display: block;
                                                 width: 320px;
                                                 max-width: 960px;
@@ -222,40 +221,19 @@ input {                                         box-sizing: border-box;
                                                 border: 1px solid #c6ccc8;
                                                 border-radius: 0em;
 /* Removes shadow from Mobile Safari -> */      background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%) }
-input:focus {                                   outline: none;
+select:focus, input:focus {                     outline: none;
                                                 background-color: #ffffff;
                                                 border: 1px solid #d94c7b }
 input:placeholder {                             color: #c6ccc8;
                                                 opacity: 1 }
-input[type='checkbox'] {                        width: auto }
-input.error {                                   background-color: #ffb2b2 }
+input.error, input:invalid {                    background-color: #ffb2b2;
+                                                box-shadow: none }
+input[type="radio"], input[type="checkbox"] {   width: auto }
 input#search_field,
 input#sidebar_search_field {                    display: inline;
                                                 margin: 0em;
                                                 padding-right: 34px }
-div.search_box input[type='text'] {             width: 100% }
-button#search_submit,
-button#sidebar_search_submit {                  display: block;
-                                                position: absolute;
-                                                width: 34px;
-                                                top: 1px;
-                                                bottom: 1px;
-                                                right: 1px;
-                                                border: none;
-                                                border-radius: 0em;
-                                                margin: 0em;
-                                                padding: 0em;
-                                                background: transparent url(../images/search.svg) no-repeat center;
-                                                overflow: hidden;
-                                                color: transparent }
-button#search_submit:focus,
-button#sidebar_search_submit:focus {            background-color: #c6ccc8;
-                                                outline: none }
-select {                                        box-sizing: border-box;
-                                                display: block;
-                                                width: 320px;
-                                                max-width: 960px;
-                                                margin: 0.5em 0em }
+div.search_box input[type="text"] {             width: 100% }
 textarea {                                      box-sizing: border-box;
                                                 display: block;
                                                 width: 100%;
@@ -276,8 +254,31 @@ article.commentary textarea {                   max-width: none }
 button {                                        font: inherit;
                                                 font-size: inherit;
                                                 cursor: pointer;
-                                                transition-property: color, background-color, border;
+                                                transition-property: background-color, border;
                                                 transition-duration: 250ms }
+button:focus {                                  outline: none }
+button::-moz-focus-inner {                      border: none }
+button#search_submit,
+button#sidebar_search_submit {                  display: block;
+                                                position: absolute;
+                                                width: 32px;
+                                                height: 32px;
+                                                top: 0px;
+                                                right: 0px;
+                                                border: none;
+                                                border-radius: 0em;
+                                                margin: 0em;
+                                                padding: 0em;
+                                                background: transparent url(../images/search.svg) center no-repeat;
+                                                background-size: 60%;
+                                                overflow: hidden;
+                                                color: transparent }
+button#search_submit {                          width: 38px;
+                                                height: 38px }
+button#search_submit:focus,
+button#sidebar_search_submit:focus {            background-color: #c6ccc8 }
+button#search_submit:hover,
+button#sidebar_search_submit:hover {            background-size: 70% }
 label {                                         display: block;
                                                 margin-top: 1em }
 div.shim {                                      margin-top: 2em }
@@ -316,8 +317,7 @@ div.ribbon {                                    box-sizing: border-box;
                                                 border-radius: 0.2em }
 div.flash {                                     background-color: #d94c7b }
 div.metadata {                                  font-weight: normal;
-                                                font-size: 0.6em;
-                                                text-transform: uppercase;
+                                                font-size: 0.75em;
                                                 text-align: center;
                                                 color: #9ea8a8;
                                                 display: block;
@@ -332,6 +332,7 @@ div.metadata {                                  font-weight: normal;
                                                 border-top: 1px solid #c6ccc8;
                                                 border-bottom-left-radius: 6px;
                                                 border-bottom-right-radius: 6px }
+article.post.pinned div.metadata {              background-color: #fffddd }
 div.comments_pagination {                       width: 100%;
                                                 clear: both;
                                                 text-align: center }
@@ -421,30 +422,23 @@ article > footer:last-child {                   margin: 0em }
 article.video video {                           width: 100%;
                                                 max-width: 1280px }
 article.audio audio {                           width: 100%;
-                                                max-width: 960px }                  
-a {                                             border-bottom: 1px transparent solid;
-                                                transition-property: color, background-color, border;
+                                                max-width: 960px }
+a {                                             text-decoration: none;
+                                                border-bottom: 1px transparent solid;
+                                                transition-property: background-color, border;
                                                 transition-duration: 250ms }
-a:link {                                        color: #5c6773;
+a:link, a:visited {                             color: #5c6773;
                                                 text-decoration: none }
-a:visited {                                     color: #5c6773;
-                                                text-decoration: none }
-a:hover {                                       color: #d94c7b;
-                                                text-decoration: none }
-a:focus {                                       outline: none;
+a:hover, a:focus, a:active {                    outline: none;
                                                 color: #d94c7b;
-                                                text-decoration: none }
-a:active {                                      color: #d94c7b;
-                                                text-decoration: none }
+                                                text-decoration: none;
+                                                border-bottom: 1px #d94c7b solid }
 h3.ribbon a {                                   color: #ffffff;
-                                                border-bottom: 1px #ffffff solid;
-                                                display: inline-block;
-                                                position: relative;
-                                                top: 0px }
+                                                font-weight: bold;
+                                                font-style: italic }
 h3.ribbon a:hover,
 h3.ribbon a:focus,
-h3.ribbon a:active {                            top: 1px;
-                                                color: inherit }
+h3.ribbon a:active {                            border-bottom: 1px #ffffff solid }
 div.traversal a {                               display: inline-block;
                                                 padding: 0.4em 0.8em;
                                                 min-width: 8em;
@@ -455,16 +449,12 @@ div.traversal a {                               display: inline-block;
 div.traversal a:hover,
 div.traversal a:focus,
 div.traversal a:active {                        color: #ffffff;
-                                                background-color: #1d914b }
-section a:link, p a:link {                      color: #5c6773;
-                                                border-bottom: 1px #9ea8a8 solid }
+                                                background-color: #1d8546 }
+section a:link, p a:link,
 section a:visited, p a:visited {                color: #5c6773;
-                                                border-bottom: 1px #9ea8a8 solid }
-section a:hover, p a:hover {                    color: #d94c7b;
-                                                border-bottom: 1px #d94c7b solid }
-section a:focus, p a:focus {                    outline: none;
-                                                color: #d94c7b;
-                                                border-bottom: 1px #d94c7b solid }
+                                                border-bottom: 1px #c6ccc8 solid }
+section a:hover, p a:hover,
+section a:focus, p a:focus,
 section a:active, p a:active {                  color: #d94c7b;
                                                 border-bottom: 1px #d94c7b solid }
 div.tags a {                                    display: inline-block;
@@ -477,7 +467,7 @@ div.tags a {                                    display: inline-block;
 div.tags a:hover,
 div.tags a:focus,
 div.tags a:active {                             color: #ffffff;
-                                                background-color: #1d914b }
+                                                background-color: #1d8546 }
 div.metadata a {                                color: #9ea8a8 }
 div.metadata a:hover,
 div.metadata a:focus,
@@ -492,9 +482,7 @@ div.doaction a, button {                        display: inline-block;
                                                 background-color: #39434d }
 div.doaction a:hover, button:hover,
 div.doaction a:focus, button:focus,
-div.doaction a:active, button:active {          outline: none;
-                                                color: #ffffff;
-                                                background-color: #000000 }
+div.doaction a:active, button:active {          background-color: #000000 }
 div.doaction a.post_delete_link,
 div.doaction a.delete_link {                    background-color: #cc5252 }
 div.doaction a.post_delete_link:hover,

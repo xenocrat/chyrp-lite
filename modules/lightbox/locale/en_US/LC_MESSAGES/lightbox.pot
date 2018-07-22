@@ -52,3 +52,7 @@ msgstr ""
 msgid "A lightbox for your images."
 msgstr ""
 
+#: modules/lightbox/javascript.php:101
+msgid "Close"
+msgstr ""
+

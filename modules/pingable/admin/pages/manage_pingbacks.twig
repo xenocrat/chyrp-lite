@@ -3,13 +3,12 @@
 {% block title %}{{ "Manage Pingbacks" | translate("pingable") }}{% endblock %}
 
 {% block content %}
-<form class="filters" action="{{ url('/') }}" method="get" accept-charset="UTF-8">
+<form class="filters" action="{{ url('manage_pingbacks') }}" method="post" accept-charset="UTF-8" role="search">
 <fieldset>
-<input type="hidden" name="action" value="manage_pingbacks">
-<div role="search" class="filter_item">
+<div class="filter_item">
 <h3>
 {{ "Search&hellip;" | translate }}
-<a href="{{ url('help/id/filtering_results') }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+<a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 </h3>
 <input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true) }}" id="query">
 <button type="submit" class="inline">{{ "Search" | translate }}</button>
@@ -20,7 +19,7 @@
 <table class="interactive">
 <thead>
 <tr class="head">
-<th class="pingback_source title">{{ "Source" | translate("pingable") }}</th>
+<th class="pingback_source title main">{{ "Source" | translate("pingable") }}</th>
 <th class="pingback_post title">{{ "Post" | translate("pingable") }}</th>
 <th class="pingback_date date">{{ "Added" | translate("pingable") }}</th>
 {{ trigger.call("manage_pingbacks_column_header") }}

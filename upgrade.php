@@ -1,14 +1,14 @@
 <?php
     /**
      * File: upgrade
-     * A task-based gerneral purpose upgrader for Chyrp Lite, enabled modules and enabled feathers.
+     * A task-based general purpose upgrader for Chyrp Lite, enabled modules and enabled feathers.
      */
 
     header("Content-Type: text/html; charset=UTF-8");
 
     define('DEBUG',          true);
-    define('CHYRP_VERSION',  "2018.02");
-    define('CHYRP_CODENAME', "Shelley");
+    define('CHYRP_VERSION',  "2018.03");
+    define('CHYRP_CODENAME', "Sind");
     define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
     define('JAVASCRIPT',     false);
     define('MAIN',           false);
@@ -71,6 +71,26 @@
 
     # Load the translation engine.
     load_translator("chyrp", INCLUDES_DIR.DIR."locale");
+
+    /**
+     * Function: test_directories
+     * Tests whether or not the directories that need write access have it.
+     */
+    function test_directories() {
+        global $errors;
+
+        # Test if we can write to MAIN_DIR (needed for the .htaccess file).
+        if (!is_writable(MAIN_DIR))
+            $errors[] = __("Please CHMOD or CHOWN the installation directory to make it writable.");
+
+        # Test if we can write to INCLUDES_DIR (needed for config.json.php).
+        if (!is_writable(INCLUDES_DIR))
+            $errors[] = __("Please CHMOD or CHOWN the <em>includes</em> directory to make it writable.");
+
+        # Test if we can write to CACHES_DIR (needed by some extensions).
+        if (!is_writable(CACHES_DIR))
+            $errors[] = __("Please CHMOD or CHOWN the <em>caches</em> directory to make it writable.");
+    }
 
     /**
      * Function: add_markdown
@@ -204,6 +224,27 @@
             error(__("Error"), __("Could not write the configuration file."));
     }
 
+    /**
+     * Function: update_htaccess
+     * Updates the .htaccess file to ensure all features are supported.
+     *
+     * Versions: 2018.02 => 2018.03
+     */
+    function update_htaccess() {
+        global $errors;
+        $config = Config::current();
+
+        if (file_exists(MAIN_DIR.DIR.".htaccess")) {
+            $set = htaccess_conf();
+
+            if ($set === false)
+                $errors[] = __("The <em>.htaccess</em> file cannot be configured.");
+        }
+
+        if ($config->url != $config->chyrp_url)
+            $errors[] = __("You might need to update your canonical URL's <em>.htaccess</em> file.");
+    }
+
     #---------------------------------------------
     # Output Starts
     #---------------------------------------------
@@ -328,7 +369,7 @@
             }
             pre.pane {
                 height: 15rem;
-                overflow-y: auto;
+                overflow: auto;
                 margin: 1rem -2rem 1rem -2rem;
                 padding: 2rem;
                 background: #4a4747;
@@ -343,16 +384,29 @@
             a:link,
             a:visited {
                 color: #4a4747;
+                text-decoration: underline;
             }
             a:hover,
-            a:focus {
-                color: #1e57ba;
+            a:focus,
+            a:active {
+                color: #2f61c4;
+                text-decoration: underline;
+            }
+            pre.pane a {
+                color: #ffffff;
+                font-weight: bold;
+                font-style: italic;
+                text-decoration: none;
+            }
+            pre.pane a:hover,
+            pre.pane a:focus,
+            pre.pane a:active {
+                text-decoration: underline;
             }
             a.big,
             button {
                 box-sizing: border-box;
                 display: block;
-                font-family: inherit;
                 font-size: 1.25em;
                 text-align: center;
                 color: #4a4747;
@@ -364,7 +418,6 @@
                 border: 1px solid #b8cdd9;
                 border-radius: 0.3em;
                 cursor: pointer;
-                text-decoration: none;
             }
             button {
                 width: 100%;
@@ -408,6 +461,7 @@
 
     if ((isset($_POST['upgrade']) and $_POST['upgrade'] == "yes")) {
         # Perform core upgrade tasks.
+        test_directories();
         add_markdown();
         add_homepage();
         add_uploads_limit();
@@ -418,6 +472,7 @@
         add_feed_format();
         remove_captcha();
         disable_recaptcha();
+        update_htaccess();
 
         # Perform module upgrades.
         foreach ($config->enabled_modules as $module)
@@ -459,7 +514,7 @@
                 <li><?php echo __("Run this upgrader again if you need to."); ?></li>
                 <li><?php echo __("Delete <em>upgrade.php</em> once you are finished upgrading."); ?></li>
             </ol>
-            <a class="big" href="<?php echo $config->url; ?>"><?php echo __("Take me to my site!"); ?></a>
+            <a class="big" href="<?php echo $config->url.'/'; ?>"><?php echo __("Take me to my site!"); ?></a>
 <?php endif; ?>
         </div>
     </body>

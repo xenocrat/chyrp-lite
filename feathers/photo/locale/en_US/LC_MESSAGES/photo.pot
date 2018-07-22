@@ -22,7 +22,7 @@ msgid "This can be a URL that will take visitors to the original resource or it 
 msgstr ""
 
 #: feathers/photo/info.php:3
-#: feathers/photo/photo.php:10
+#: feathers/photo/photo.php:12
 msgid "Photo"
 msgstr ""
 
@@ -30,20 +30,20 @@ msgstr ""
 msgid "Upload and display an image with a caption."
 msgstr ""
 
-#: feathers/photo/photo.php:6
+#: feathers/photo/photo.php:8
 msgid "Title"
 msgstr ""
 
-#: feathers/photo/photo.php:12
+#: feathers/photo/photo.php:14
 #, php-format
 msgid "(Max. file size: %d Megabytes)"
 msgstr ""
 
-#: feathers/photo/photo.php:15
+#: feathers/photo/photo.php:17
 msgid "Caption"
 msgstr ""
 
-#: feathers/photo/photo.php:30
+#: feathers/photo/photo.php:32
 msgid "You did not select a photo to upload."
 msgstr ""
 

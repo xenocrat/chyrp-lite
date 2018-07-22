@@ -1,14 +1,14 @@
 <?php
     /**
      * File: install
-     * Builds the site configuration, creates the SQL tables, and configures the .htaccess file.
+     * Creates the SQL tables and builds the site configuration.
      */
 
     header("Content-Type: text/html; charset=UTF-8");
 
     define('DEBUG',          true);
-    define('CHYRP_VERSION',  "2018.02");
-    define('CHYRP_CODENAME', "Shelley");
+    define('CHYRP_VERSION',  "2018.03");
+    define('CHYRP_CODENAME', "Sind");
     define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
     define('JAVASCRIPT',     false);
     define('MAIN',           false);
@@ -278,30 +278,25 @@
             input[type="url"],
             input[type="number"],
             input[type="password"],
-            textarea {
-                font-size: 1.25em;
-                padding: 0.2em;
-                border: 1px solid #dfdfdf;
-                background-color: #ffffff;
-                background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%);
-            }
-            input[type="text"],
-            input[type="email"],
-            input[type="url"],
-            input[type="number"],
-            input[type="password"],
             textarea,
             select {
                 box-sizing: border-box;
                 width: 100%;
                 margin: 0em;
+                font-size: 1.25em;
+                padding: 0.2em;
+                border-radius: 0em;
+                border: 1px solid #dfdfdf;
+                background-color: #ffffff;
+                background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%);
             }
             input[type="text"]:focus,
             input[type="email"]:focus,
             input[type="url"]:focus,
             input[type="number"]:focus,
             input[type="password"]:focus,
-            textarea:focus {
+            textarea:focus,
+            select:focus {
                 border-color: #1e57ba;
                 outline: none;
             }
@@ -310,18 +305,30 @@
             input[type="url"].error,
             input[type="number"].error,
             input[type="password"].error,
+            input:invalid,
             textarea.error {
                 background-color: #faebe4;
+                box-shadow: none;
+            }
+            input[type="text"].error:focus,
+            input[type="email"].error:focus,
+            input[type="url"].error:focus,
+            input[type="number"].error:focus,
+            input[type="password"].error:focus,
+            input:invalid:focus,
+            textarea.error:focus {
                 border: 1px solid #d51800;
             }
             input[type="password"].strong {
                 background-color: #ebfae4;
+            }
+            input[type="password"].strong:focus {
                 border: 1px solid #189100;
             }
             form hr {
                 border: none;
                 clear: both;
-                border-top: 1px solid #ddd;
+                border-top: 1px solid #dddddd;
                 margin: 2rem 0rem;
             }
             form p {
@@ -329,7 +336,7 @@
             }
             pre.pane {
                 height: 15rem;
-                overflow-y: auto;
+                overflow: auto;
                 margin: 1rem -2rem 1rem -2rem;
                 padding: 2rem;
                 background: #4a4747;
@@ -344,17 +351,30 @@
             a:link,
             a:visited {
                 color: #4a4747;
+                text-decoration: underline;
             }
             a:hover,
-            a:focus {
-                color: #1e57ba;
+            a:focus,
+            a:active {
+                color: #2f61c4;
+                text-decoration: underline;
+            }
+            pre.pane a {
+                color: #ffffff;
+                font-weight: bold;
+                font-style: italic;
+                text-decoration: none;
+            }
+            pre.pane a:hover,
+            pre.pane a:focus,
+            pre.pane a:active {
+                text-decoration: underline;
             }
             a.big,
             button {
                 box-sizing: border-box;
                 display: block;
                 clear: both;
-                font-family: inherit;
                 font-size: 1.25em;
                 text-align: center;
                 color: #4a4747;
@@ -366,7 +386,6 @@
                 border: 1px solid #b8cdd9;
                 border-radius: 0.3em;
                 cursor: pointer;
-                text-decoration: none;
             }
             button {
                 width: 100%;
@@ -851,7 +870,7 @@
                 <li><?php echo __("Delete <em>install.php</em>, you won't need it anymore."); ?></li>
                 <li><?php echo __("Log in to your site and configure things to your liking."); ?></a></li>
             </ol>
-            <a class="big" href="<?php echo $config->chyrp_url; ?>"><?php echo __("Take me to my site!"); ?></a>
+            <a class="big" href="<?php echo $config->url.'/'; ?>"><?php echo __("Take me to my site!"); ?></a>
 <?php endif; ?>
         </div>
     </body>

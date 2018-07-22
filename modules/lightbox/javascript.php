@@ -45,14 +45,21 @@ var ChyrpLightbox = {
     },
     init: function() {
         $.extend(ChyrpLightbox.styles.bg, ChyrpLightbox.styles[ChyrpLightbox.background]);
-        $("section img").not(".suppress_lightbox").click(ChyrpLightbox.load).css(ChyrpLightbox.styles.image);
-        if (ChyrpLightbox.protect)
-            $("section img").not(".suppress_lightbox").on("contextmenu", ChyrpLightbox.prevent);
+
+        $("section img").not(".suppress_lightbox").each(function() {
+            $(this).on("click", ChyrpLightbox.load).css(ChyrpLightbox.styles.image);
+
+            if (ChyrpLightbox.protect && !$(this).hasClass("suppress_protect"))
+                $(this).on("contextmenu", ChyrpLightbox.prevent);
+        });
+
         $(window).on({
             resize: ChyrpLightbox.hide,
             scroll: ChyrpLightbox.hide,
             orientationchange: ChyrpLightbox.hide,
-            popstate: ChyrpLightbox.hide });
+            popstate: ChyrpLightbox.hide
+        });
+
         ChyrpLightbox.watch();
     },
     prevent: function(e) {
@@ -66,9 +73,12 @@ var ChyrpLightbox = {
                 mutations.forEach(function(mutation) {
                     for (var i = 0; i < mutation.addedNodes.length; ++i) {
                         var item = mutation.addedNodes[i];
-                        $(item).find("section img").not(".suppress_lightbox").click(ChyrpLightbox.load).css(ChyrpLightbox.styles.image);
-                        if (ChyrpLightbox.protect)
-                            $(item).find("section img").not(".suppress_lightbox").on("contextmenu", ChyrpLightbox.prevent);
+                        $(item).find("section img").not(".suppress_lightbox").each(function() {
+                            $(this).on("click", ChyrpLightbox.load).css(ChyrpLightbox.styles.image);
+
+                            if (ChyrpLightbox.protect && !$(this).hasClass("suppress_protect"))
+                                $(this).on("contextmenu", ChyrpLightbox.prevent);
+                        });
                     }
                 });
             });
@@ -83,10 +93,13 @@ var ChyrpLightbox = {
             var src = $(this).attr("src");
             var alt = $(this).attr("alt");
             var ref = $(this).parent("a.image_link").attr("href");
+
             $("<div>", {
                 "id": "ChyrpLightbox-bg",
-                "role": "presentation"
-            }).css(ChyrpLightbox.styles.bg).click(function(e) {
+                "role": "button",
+                "accesskey": "x",
+                "aria-label": '<?php echo __("Close", "lightbox"); ?>'
+            }).css(ChyrpLightbox.styles.bg).on("click", function(e) {
                 if (e.target === e.currentTarget)
                     ChyrpLightbox.hide();
             }).append($("<img>", {
@@ -94,12 +107,13 @@ var ChyrpLightbox = {
                 "src": src,
                 "alt": alt,
                 "title": alt
-            }).css(ChyrpLightbox.styles.fg).click(function(e) {
-                if (e.target === e.currentTarget)
+            }).css(ChyrpLightbox.styles.fg).on("click", function(e) {
+                if (e.target === e.currentTarget) {
                     if (ref && ChyrpLightbox.protect == false)
                         window.location.assign(ref);
                     else
                         ChyrpLightbox.hide();
+                }
             }).on("load", ChyrpLightbox.show)).appendTo("body");
 
             ChyrpLightbox.active = true;
@@ -108,14 +122,18 @@ var ChyrpLightbox = {
     show: function() {
         var fg = $("#ChyrpLightbox-fg"), fgWidth = fg.outerWidth(), fgHeight = fg.outerHeight();
         var bg = $("#ChyrpLightbox-bg"), bgWidth = bg.outerWidth(), bgHeight = bg.outerHeight();
+        var sp = ChyrpLightbox.spacing * 2;
+
         if (ChyrpLightbox.protect)
             $(fg).on({
                 contextmenu: function() { return false; }
             });
-        while (((bgWidth - (ChyrpLightbox.spacing * 2)) < fgWidth) || ((bgHeight - (ChyrpLightbox.spacing * 2)) < fgHeight)) {
+
+        while (((bgWidth - sp) < fgWidth) || ((bgHeight - sp) < fgHeight)) {
             Math.round(fgWidth = fgWidth * 0.99);
             Math.round(fgHeight = fgHeight * 0.99);
         }
+
         fg.css({
             "top": Math.round((bgHeight - fgHeight) / 2) + "px",
             "left": Math.round((bgWidth - fgWidth) / 2) + "px",

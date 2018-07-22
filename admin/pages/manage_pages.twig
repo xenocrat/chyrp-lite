@@ -3,13 +3,12 @@
 {% block title %}{{ "Manage Pages" | translate }}{% endblock %}
 
 {% block content %}
-<form class="filters" action="{{ url('/') }}" method="get" accept-charset="UTF-8">
+<form class="filters" action="{{ url('manage_pages') }}" method="post" accept-charset="UTF-8" role="search">
 <fieldset>
-<input type="hidden" name="action" value="manage_pages">
-<div role="search" class="filter_item">
+<div class="filter_item">
 <h3>
 {{ "Search&hellip;" | translate }}
-<a href="{{ url('help/id/filtering_results') }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+<a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 </h3>
 <input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true) }}" id="query">
 <button type="submit">{{ "Search" | translate }}</button>
@@ -20,7 +19,7 @@
 <table>
 <thead>
 <tr class="head">
-<th class="page_title title">{{ "Title" | translate }}</th>
+<th class="page_title title main">{{ "Title" | translate }}</th>
 <th class="page_created date">{{ "Created" | translate }}</th>
 <th class="page_updated date">{{ "Last Updated" | translate }}</th>
 <th class="page_public emblem">{{ "Public?" | translate }}</th>

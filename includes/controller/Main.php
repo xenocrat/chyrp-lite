@@ -99,8 +99,8 @@
 
             # Discover pagination.
             if (preg_match_all("/\/((([^_\/]+)_)?page)\/([0-9]+)/", $route->request, $pages)) {
-                foreach ($pages[1] as $key => $page_var)
-                    $_GET[$page_var] = (int) $pages[4][$key];
+                foreach ($pages[1] as $index => $variable)
+                    $_GET[$variable] = (int) $pages[4][$index];
 
                 # Looks like pagination of the index.
                 if ($route->arg[0] == $pages[1][0])
@@ -264,12 +264,9 @@
          * Grabs the posts for a search query.
          */
         public function search() {
-            $config = Config::current();
-            fallback($_GET['query'], "");
-
-            # Redirect search form submissions to a clean URL, removing "%2F" to avoid a server 404.
-            if ($config->clean_urls and substr_count($_SERVER['REQUEST_URI'], "?"))
-                redirect("search/".str_ireplace("%2F", "", urlencode($_GET['query']))."/");
+            # Redirect searches to a clean URL or dirty GET depending on configuration.
+            if (isset($_POST['query']))
+                redirect("search/".str_ireplace("%2F", "", urlencode($_POST['query']))."/");
 
             if (empty($_GET['query']))
                 Flash::warning(__("Please enter a search term."), "/");
@@ -333,9 +330,6 @@
             # Don't fool ourselves into thinking a feed was requested because of a "feed" attribute.
             if (!isset($_GET['feed']) and !(count($arg) > count($attrs) and end($arg) == "feed"))
                 $this->feed = false;
-
-            if (!$post->theme_exists())
-                Flash::warning(__("The post cannot be displayed because the theme does not support it."), "/");
 
             if ($post->status == "draft")
                 Flash::message(__("This post is not published."));
@@ -454,12 +448,7 @@
                 if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                     Flash::warning(__("Invalid authentication token."));
 
-                if (empty($_POST['login']))
-                    Flash::warning(__("Please enter a username for your account."));
-
-                $_POST['login'] = strip_tags($_POST['login']);
-
-                if (empty($_POST['login']))
+                if (empty($_POST['login']) or derezz($_POST['login']))
                     Flash::warning(__("Please enter a username for your account."));
 
                 $check = new User(array("login" => $_POST['login']));
@@ -501,11 +490,14 @@
                                       ($config->email_activation) ? false : true);
 
                     if (!$user->approved) {
-                        correspond("activate", array("login" => $user->login,
-                                                     "to"    => $user->email,
-                                                     "link"  => fix($config->url, true).
-                                                                "/?action=activate&amp;login=".urlencode($user->login).
-                                                                "&amp;token=".token(array($user->login, $user->email))));
+                        correspond("activate", array("to"      => $user->email,
+                                                     "user_id" => $user->id,
+                                                     "login"   => $user->login,
+                                                     "link"    => fix($config->url, true).
+                                                                  "/?action=activate&amp;login=".
+                                                                  urlencode($user->login).
+                                                                  "&amp;token=".
+                                                                  token(array($user->login, $user->email))));
 
                         Flash::notice(__("We have emailed you an activation link."), "/");
                     }
@@ -527,9 +519,10 @@
             if (logged_in())
                 Flash::notice(__("You cannot activate an account because you are already logged in."), "/");
 
-            $user = new User(array("login" => strip_tags(urldecode(fallback($_GET['login'])))));
+            $user = new User(array("login" => urldecode(fallback($_GET['login']))));
 
-            if ($user->no_results or empty($_GET['token']) or $_GET['token'] != token(array($user->login, $user->email)))
+            if ($user->no_results or empty($_GET['token']) or
+                $_GET['token'] != token(array($user->login, $user->email)))
                 Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
 
             if ($user->approved)
@@ -550,15 +543,17 @@
             if (logged_in())
                 Flash::notice(__("You cannot reset your password because you are already logged in."), "/");
 
-            $user = new User(array("login" => strip_tags(urldecode(fallback($_GET['login'])))));
+            $user = new User(array("login" => urldecode(fallback($_GET['login']))));
 
-            if ($user->no_results or empty($_GET['token']) or $_GET['token'] != token(array($user->login, $user->email)))
+            if ($user->no_results or empty($_GET['token']) or
+                $_GET['token'] != token(array($user->login, $user->email)))
                 Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
 
             $new_password = random(8);
 
-            correspond("password", array("login"    => $user->login,
-                                         "to"       => $user->email,
+            correspond("password", array("to"       => $user->email,
+                                         "user_id"  => $user->id,
+                                         "login"    => $user->login,
                                          "password" => $new_password));
 
             $user = $user->update(null, User::hashPassword($new_password));
@@ -699,11 +694,14 @@
                     $user = new User(array("login" => $_POST['login']));
 
                     if (!$user->no_results)
-                        correspond("reset", array("login" => $user->login,
-                                                  "to"    => $user->email,
-                                                  "link"  => fix($config->url, true).
-                                                             "/?action=reset&amp;login=".urlencode($user->login).
-                                                             "&amp;token=".token(array($user->login, $user->email))));
+                        correspond("reset", array("to"      => $user->email,
+                                                  "user_id" => $user->id,
+                                                  "login"   => $user->login,
+                                                  "link"    => fix($config->url, true).
+                                                               "/?action=reset&amp;login=".
+                                                               urlencode($user->login).
+                                                               "&amp;token=".
+                                                               token(array($user->login, $user->email))));
 
                     Flash::notice(__("If that username is in our database, we will email you a password reset link."), "/");
                 }

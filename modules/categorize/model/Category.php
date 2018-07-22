@@ -153,11 +153,11 @@
                 return $clean;
 
             $count = 1;
-            $unique = $clean;
+            $unique = substr($clean, 0, 128);
 
             while (SQL::current()->count("categorize", array("clean" => $unique))) {
                 $count++;
-                $unique = $clean."-".$count;
+                $unique = substr($clean, 0, (127 - strlen($count)))."-".$count;
             }
 
             return $unique;

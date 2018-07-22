@@ -38,11 +38,11 @@
 
     # Constant: CHYRP_VERSION
     # Version number for this release.
-    define('CHYRP_VERSION', "2018.02");
+    define('CHYRP_VERSION', "2018.03");
 
     # Constant: CHYRP_CODENAME
     # The codename for this version.
-    define('CHYRP_CODENAME', "Shelley");
+    define('CHYRP_CODENAME', "Sind");
 
     # Constant: CHYRP_IDENTITY
     # The string identifying this version.
@@ -373,11 +373,13 @@
     if (JAVASCRIPT) {
         header("Content-Type: application/javascript; charset=UTF-8");
         header("Referrer-Policy: no-referrer");
-        header("Cache-Control: no-cache, must-revalidate");
+        header("Vary: Accept-Encoding, Cookie, Origin, Referer");
+        header("Cache-Control: no-store, no-cache, must-revalidate");
         header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
     } else {
         header("Content-Type: text/html; charset=UTF-8");
         header("Referrer-Policy: strict-origin-when-cross-origin");
+        header("Vary: Accept-Encoding, Cookie");
         header("X-Pingback: ".$config->chyrp_url."/includes/rpc.php");
     }
 

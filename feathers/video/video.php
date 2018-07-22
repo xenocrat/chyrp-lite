@@ -1,6 +1,8 @@
 <?php
     class Video extends Feathers implements Feather {
         public function __init() {
+            $maximum = Config::current()->uploads_limit;
+
             $this->setField(array("attr" => "title",
                                   "type" => "text",
                                   "label" => __("Title", "video"),
@@ -9,7 +11,7 @@
                                   "type" => "file",
                                   "label" => __("Video File", "video"),
                                   "multiple" => false,
-                                  "note" => _f("(Max. file size: %d Megabytes)", Config::current()->uploads_limit, "video")));
+                                  "note" => _f("(Max. file size: %d Megabytes)", $maximum, "video")));
             $this->setField(array("attr" => "description",
                                   "type" => "text_block",
                                   "label" => __("Description", "video"),
@@ -107,8 +109,8 @@
 
             return '<video controls>'."\n".
                    __("Your web browser does not support the <code>video</code> element.", "video")."\n".
-                   '<source src="'.uploaded($post->filename).'" type="'.self::video_type($post->filename).'">'."\n".
-                   '</video>'."\n";
+                   '<source src="'.uploaded($post->filename).'" type="'.self::video_type($post->filename).
+                   '">'."\n".'</video>'."\n";
         }
 
         private function video_type($filename) {

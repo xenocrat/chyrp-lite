@@ -3,37 +3,23 @@
 {% block title %}{{ "Manage Posts" | translate }}{% endblock %}
 
 {% block content %}
-<form class="filters" action="{{ url('/') }}" method="get" accept-charset="UTF-8">
+<form class="filters" action="{{ url('manage_posts') }}" method="post" accept-charset="UTF-8" role="search">
 <fieldset>
-<input type="hidden" name="action" value="manage_posts">
-<div role="search" class="filter_item">
+<div class="filter_item">
 <h3>
 {{ "Search&hellip;" | translate }}
-<a href="{{ url('help/id/filtering_results') }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+<a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 </h3>
 <input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true) }}" id="query">
 <button type="submit">{{ "Search" | translate }}</button>
 </div>
-{% if theme.archives_list() is not empty %}
-<div class="filter_item">
-<h3>{{ "Browse by month:" | translate }}</h3>
-<select name="month" data-submit>
-<option value="0">{{ "[All]" | translate }}</option>
-{% for archive in theme.archives_list() %}
-{% set option_selected = GET.month is defined ? GET.month | selected(archive.when) : "" %}
-{% set option_contents = (archive.when | strftimeformat("%B %Y")) %}
-<option value="{{ archive.when }}"{{ option_selected }}>{{ option_contents }}</option>
-{% endfor %}
-</select>
-</div>
-{% endif %}
 </fieldset>
 </form>
-<h2>{{ GET.query is not empty or GET.month is defined ? "Search Results" | translate : "Posts" | translate }}</h2>
+<h2>{{ GET.query is not empty ? "Search Results" | translate : "Posts" | translate }}</h2>
 <table>
 <thead>
 <tr class="head">
-<th class="post_title title">{{ "Title" | translate }}</th>
+<th class="post_title title main">{{ "Title" | translate }}</th>
 <th class="post_date date">{{ "Posted" | translate }}</th>
 <th class="post_status status">{{ "Status" | translate }}</th>
 <th class="post_author value">{{ "Author" | translate }}</th>

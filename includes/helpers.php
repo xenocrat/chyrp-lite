@@ -45,17 +45,23 @@
      * Returns whether or not the request was referred from another resource on this site.
      */
     function same_origin() {
-        $parsed = parse_url(Config::current()->url);
-        $origin = fallback($parsed["scheme"], "http")."://".fallback($parsed["host"], $_SERVER['SERVER_NAME']);
+        $config = Config::current();
 
-        if (isset($parsed["port"]))
-            $origin.= ":".$parsed["port"];
+        foreach (array($config->url, $config->chyrp_url) as $url) {
+            $parsed = parse_url($url);
+            $origin = fallback($parsed["scheme"], "http")."://".fallback($parsed["host"], $_SERVER['SERVER_NAME']);
 
-        if (isset($_SERVER['HTTP_ORIGIN']) and strpos($_SERVER['HTTP_ORIGIN'], $origin) === 0)
-            return true;
+            if (isset($parsed["port"]))
+                $origin.= ":".$parsed["port"];
 
-        if (isset($_SERVER['HTTP_REFERER']) and strpos($_SERVER['HTTP_REFERER'], $origin) === 0)
-            return true;
+            $quoted = preg_quote($origin, '~');
+
+            if (isset($_SERVER['HTTP_ORIGIN']) and preg_match('~^'.$quoted.'$~', $_SERVER['HTTP_ORIGIN']))
+                return true;
+
+            if (isset($_SERVER['HTTP_REFERER']) and preg_match('~^'.$quoted.'($|/)~', $_SERVER['HTTP_REFERER']))
+                return true;
+        }
 
         return false;
     }
@@ -152,7 +158,7 @@
 
     /**
      * Function: htaccess_conf
-     * Creates the .htaccess file for Chyrp Lite or appends to an existing file.
+     * Creates the .htaccess file for Chyrp Lite or overwrites an existing file.
      *
      * Parameters:
      *     $url_path - The URL path to MAIN_DIR for the RewriteBase directive.
@@ -164,22 +170,24 @@
         if (!INSTALLING)
             $url_path = oneof($url_path, parse_url(Config::current()->chyrp_url, PHP_URL_PATH), "/");
 
-        # The trim operation guarantees a string with leading and trailing slashes,
-        # but it also avoids doubling up slashes if $url_path consists of only "/".
-        $template = preg_replace("~%\\{CHYRP_PATH\\}~",
-                                 rtrim("/".ltrim($url_path, "/"), "/")."/",
-                                 file_get_contents(INCLUDES_DIR.DIR."htaccess.conf"));
-
         $filepath = MAIN_DIR.DIR.".htaccess";
+        $template = INCLUDES_DIR.DIR."htaccess.conf";
+
+        if (!is_file($template) or !is_readable($template))
+            return false;
+
+        $htaccess = preg_replace("~%\\{CHYRP_PATH\\}~",
+                                 ltrim($url_path."/", "/"),
+                                 file_get_contents($template));
 
         if (!file_exists($filepath))
-            return @file_put_contents($filepath, $template);
+            return @file_put_contents($filepath, $htaccess);
 
         if (!is_file($filepath) or !is_readable($filepath))
             return false;
 
-        if (!preg_match("~".preg_quote($template, "~")."~", file_get_contents($filepath)))
-            return @file_put_contents($filepath, "\n\n".$template, FILE_APPEND);
+        if (!preg_match("~".preg_quote($htaccess, "~")."~", file_get_contents($filepath)))
+            return @file_put_contents($filepath, $htaccess);
 
         return true;
     }
@@ -493,6 +501,25 @@
     }
 
     /**
+     * Function: derezz
+     * Strips tags from the supplied variable and tests it for emptiness.
+     *
+     * Parameters:
+     *     &$variable - The variable, supplied by reference.
+     *
+     * Returns:
+     *     Whether or not the stripped variable is empty.
+     *
+     * Notes:
+     *     Useful for data that will be stripped later on by its model
+     *     but which needs to be tested for uniqueness/emptiness first.
+     */
+    function derezz(&$variable) {
+        $variable = strip_tags($variable);
+        return empty($variable);
+    }
+
+    /**
      * Function: token
      * Salt and hash a unique token using the supplied data.
      *
@@ -773,48 +800,47 @@
      * Pluralizes a word.
      *
      * Parameters:
-     *     $string - The string to pluralize.
-     *     $number - If passed, and this number is 1, it will not pluralize.
+     *     $string - The lowercase string to pluralize.
+     *     $number - If supplied, and this number is 1, it will not pluralize.
      *
      * Returns:
      *     The supplied word with a trailing "s" added, or a non-normative pluralization.
      */
     function pluralize($string, $number = null) {
-        $uncountable = array("moose", "sheep", "fish", "series", "species", "audio",
-                             "rice", "money", "information", "equipment", "piss");
+        $uncountable = array("audio", "equipment", "fish", "information", "money",
+                             "moose", "news", "rice", "series", "sheep", "species");
 
         if (in_array($string, $uncountable) or $number == 1)
             return $string;
 
-        $replacements = array("/person/i" => "people",
-                              "/man/i" => "men",
-                              "/child/i" => "children",
-                              "/cow/i" => "kine",
-                              "/goose/i" => "geese",
-                              "/datum$/i" => "data",
-                              "/(penis)$/i" => "\\1es",
-                              "/(ax|test)is$/i" => "\\1es",
-                              "/(octop|vir)us$/i" => "\\1ii",
-                              "/(cact)us$/i" => "\\1i",
-                              "/(alias|status)$/i" => "\\1es",
-                              "/(bu)s$/i" => "\\1ses",
-                              "/(buffal|tomat)o$/i" => "\\1oes",
-                              "/([ti])um$/i" => "\\1a",
-                              "/sis$/i" => "ses",
-                              "/(hive)$/i" => "\\1s",
-                              "/([^aeiouy]|qu)y$/i" => "\\1ies",
-                              "/^(ox)$/i" => "\\1en",
-                              "/(matr|vert|ind)(?:ix|ex)$/i" => "\\1ices",
-                              "/(x|ch|ss|sh)$/i" => "\\1es",
-                              "/([m|l])ouse$/i" => "\\1ice",
-                              "/(quiz)$/i" => "\\1zes");
+        $replacements = array(
+            "/person/i"                    => "people",
+            "/^(wom|m)an$/i"               => "\\1en",
+            "/child/i"                     => "children",
+            "/cow/i"                       => "kine",
+            "/goose/i"                     => "geese",
+            "/datum$/i"                    => "data",
+            "/(penis)$/i"                  => "\\1es",
+            "/(ax|test)is$/i"              => "\\1es",
+            "/(octop|vir)us$/i"            => "\\1ii",
+            "/(cact)us$/i"                 => "\\1i",
+            "/(alias|status)$/i"           => "\\1es",
+            "/(bu)s$/i"                    => "\\1ses",
+            "/(buffal|tomat)o$/i"          => "\\1oes",
+            "/([ti])um$/i"                 => "\\1a",
+            "/sis$/i"                      => "ses",
+            "/(hive)$/i"                   => "\\1s",
+            "/([^aeiouy]|qu)y$/i"          => "\\1ies",
+            "/^(ox)$/i"                    => "\\1en",
+            "/(matr|vert|ind)(?:ix|ex)$/i" => "\\1ices",
+            "/(x|ch|ss|sh)$/i"             => "\\1es",
+            "/([m|l])ouse$/i"              => "\\1ice",
+            "/(quiz)$/i"                   => "\\1zes"
+        );
 
         $replaced = preg_replace(array_keys($replacements), array_values($replacements), $string, 1);
 
-        if ($replaced == $string)
-            return $string."s";
-        else
-            return $replaced;
+        return ($replaced == $string) ? $string."s" : $replaced ;
     }
 
     /**
@@ -822,45 +848,46 @@
      * Singularizes a word.
      *
      * Parameters:
-     *     $string - The string to depluralize.
-     *     $number - If passed, and this number is not 1, it will not depluralize.
+     *     $string - The lowercase string to depluralize.
+     *     $number - If supplied, and this number is not 1, it will not depluralize.
      *
      * Returns:
      *     The supplied word with trailing "s" removed, or a non-normative singularization.
      */
     function depluralize($string, $number = null) {
-        if (isset($number) and $number != 1)
+        $uncountable = array("news", "series", "species");
+
+        if (in_array($string, $uncountable) or (isset($number) and $number != 1))
             return $string;
 
-        $replacements = array("/people/i" => "person",
-                              "/^men/i" => "man",
-                              "/children/i" => "child",
-                              "/kine/i" => "cow",
-                              "/geese/i" => "goose",
-                              "/data$/i" => "datum",
-                              "/(penis)es$/i" => "\\1",
-                              "/(ax|test)es$/i" => "\\1is",
-                              "/(octopi|viri|cact)i$/i" => "\\1us",
-                              "/(alias|status)es$/i" => "\\1",
-                              "/(bu)ses$/i" => "\\1s",
-                              "/(buffal|tomat)oes$/i" => "\\1o",
-                              "/([ti])a$/i" => "\\1um",
-                              "/ses$/i" => "sis",
-                              "/(hive)s$/i" => "\\1",
-                              "/([^aeiouy]|qu)ies$/i" => "\\1y",
-                              "/^(ox)en$/i" => "\\1",
-                              "/(vert|ind)ices$/i" => "\\1ex",
-                              "/(matr)ices$/i" => "\\1ix",
-                              "/(x|ch|ss|sh)es$/i" => "\\1",
-                              "/([ml])ice$/i" => "\\1ouse",
-                              "/(quiz)zes$/i" => "\\1");
+        $replacements = array(
+            "/people/i"               => "person",
+            "/^(wom|m)en$/i"          => "\\1an",
+            "/children/i"             => "child",
+            "/kine/i"                 => "cow",
+            "/geese/i"                => "goose",
+            "/data$/i"                => "datum",
+            "/(penis)es$/i"           => "\\1",
+            "/(ax|test)es$/i"         => "\\1is",
+            "/(octopi|viri|cact)i$/i" => "\\1us",
+            "/(alias|status)es$/i"    => "\\1",
+            "/(bu)ses$/i"             => "\\1s",
+            "/(buffal|tomat)oes$/i"   => "\\1o",
+            "/([ti])a$/i"             => "\\1um",
+            "/ses$/i"                 => "sis",
+            "/(hive)s$/i"             => "\\1",
+            "/([^aeiouy]|qu)ies$/i"   => "\\1y",
+            "/^(ox)en$/i"             => "\\1",
+            "/(vert|ind)ices$/i"      => "\\1ex",
+            "/(matr)ices$/i"          => "\\1ix",
+            "/(x|ch|ss|sh)es$/i"      => "\\1",
+            "/([ml])ice$/i"           => "\\1ouse",
+            "/(quiz)zes$/i"           => "\\1"
+        );
 
         $replaced = preg_replace(array_keys($replacements), array_values($replacements), $string, 1);
 
-        if ($replaced == $string and substr($string, -1) == "s")
-            return substr($string, 0, -1);
-        else
-            return $replaced;
+        return ($replaced == $string and substr($string, -1) == "s") ? substr($string, 0, -1) : $replaced ;
     }
 
     /**
@@ -871,11 +898,9 @@
      *     The normalized string.
      */
     function normalize($string) {
-        $trimmed = trim($string);
-        $newlines = str_replace("\n\n", " ", $trimmed);
-        $newlines = str_replace("\n", "", $newlines);
-        $normalized = preg_replace("/[\s\n\r\t]+/", " ", $newlines);
-        return $normalized;
+        $newlines = str_replace(array("\n\n", "\n"), array(" ", ""), $string);
+        $whitespace = preg_replace("/[\s\n\r\t]+/", " ", $newlines);
+        return trim($whitespace);
     }
 
     /**
@@ -893,15 +918,15 @@
      *     <decamelize>
      */
     function camelize($string, $keep_spaces = false) {
-        $lower = strtolower($string);
-        $deunderscore = str_replace("_", " ", $lower);
+        $lowercase = strtolower($string);
+        $deunderscore = str_replace("_", " ", $lowercase);
         $dehyphen = str_replace("-", " ", $deunderscore);
-        $final = ucwords($dehyphen);
+        $camelized = ucwords($dehyphen);
 
         if (!$keep_spaces)
-            $final = str_replace(" ", "", $final);
+            $camelized = str_replace(" ", "", $camelized);
 
-        return $final;
+        return $camelized;
     }
 
     /**
@@ -923,11 +948,11 @@
 
     /**
      * Function: truncate
-     * Truncates a string to ensure it is no longer than the requested length.
+     * Truncates a string to the requested number of characters or less.
      *
      * Parameters:
      *     $text - The string to be truncated.
-     *     $length - The truncated length.
+     *     $length - Truncate the string to this number of characters.
      *     $ellipsis - A string to place at the truncation point.
      *     $exact - Split words to return the exact length requested?
      *     $encoding - The character encoding of the string and ellipsis.
@@ -967,10 +992,12 @@
      *
      * Returns:
      *     The text with Markdown formatting applied.
+     *
+     * Se Also:
+     *     https://github.com/commonmark/CommonMark
      */
     function markdown($text) {
-        $parsedown = new Parsedown();
-        return $parsedown->text($text);
+        return Parsedown::instance()->setStrictMode(true)->text($text);
     }
 
     /**
@@ -1017,9 +1044,8 @@
             ":-x"     => "&#x1f636;"
         );
 
-        foreach($emoji as $key => $value) {
+        foreach ($emoji as $key => $value)
             $text = str_replace($key, '<span class="emoji">'.$value.'</span>', $text);
-        }
 
         return $text;
     }
@@ -1241,8 +1267,10 @@
         $prefix  = ($scheme == "https") ? "tls://" : "tcp://" ;
         $connect = @fsockopen($prefix.$host, $port, $errno, $errstr, $timeout);
 
-        if (!$connect)
+        if (!$connect) {
+            trigger_error(_f("Socket error: %s", fix($errstr, false, true)), E_USER_NOTICE);
             return false;
+        }
 
         $remote_headers = "";
         $remote_content = "";
@@ -1260,7 +1288,7 @@
 
         # Search for 301 or 302 header and recurse with new location unless redirects are exhausted.
         if ($redirects > 0 and preg_match("~^HTTP/[0-9]\.[0-9] 30[1-2]~m", $remote_headers)
-                           and preg_match("~^Location:(.+)$~mi", $remote_headers, $matches)) {
+                           and preg_match("~^Location: (.+)$~mi", $remote_headers, $matches)) {
 
             $location = trim($matches[1]);
 
@@ -1290,7 +1318,7 @@
      */
     function grab_urls($string) {
         # These expressions capture hyperlinks in HTML and unfiltered Markdown.
-        $expressions = array("/<a[^>]+href=(\"[^\"]+\"|\'[^\']+\')[^>]*>[^<]+<\/a>/i",
+        $expressions = array("/<a[^>]* href=(\"[^\"]+\"|\'[^\']+\')[^>]*>[^<]+<\/a>/i",
                              "/\[[^\]]+\]\(([^\)]+)\)/");
 
         # Modules can support other syntaxes.
@@ -1362,8 +1390,10 @@
         $prefix  = ($scheme == "https") ? "tls://" : "tcp://" ;
         $connect = @fsockopen($prefix.$host, $port, $errno, $errstr, 3);
 
-        if (!$connect)
+        if (!$connect) {
+            trigger_error(_f("Socket error: %s", fix($errstr, false, true)), E_USER_NOTICE);
             return false;
+        }
 
         $remote_headers = "";
         $remote_content = "";
@@ -1380,14 +1410,14 @@
             $line = fgets($connect);
             $remote_headers.= $line;
 
-            if (preg_match("/^X-Pingback:(.+)/i", $line, $header)) {
+            if (preg_match("/^X-Pingback: (.+)/i", $line, $header)) {
                 fclose($connect);
                 return trim($header[1]);
             }
         }
 
         # Check <link> elements if the content can be parsed.
-        if (preg_match("~^Content-Type:\s+(text/html|text/sgml|text/xml|text/plain)~im", $remote_headers)) {
+        if (preg_match("~^Content-Type: text/(html|sgml|xml|plain)~im", $remote_headers)) {
             while (!feof($connect) and strlen($remote_content) < 2048) {
                 $line = fgets($connect);
                 $remote_content.= $line;
@@ -2005,14 +2035,12 @@
 
     /**
      * Function: email
-     * Send an email. Function arguments are exactly the same as the PHP mail() function.
-     * This is intended so that modules can provide an email method if the server cannot use mail().
+     * Send an email using PHP's mail() function or an alternative.
      */
     function email() {
         $function = "mail";
         Trigger::current()->filter($function, "send_mail");
-        $args = func_get_args(); # Looks redundant, but it must be so in order to meet PHP's retardation requirements.
-        return call_user_func_array($function, $args);
+        return call_user_func_array($function, func_get_args());
     }
 
     /**
@@ -2032,7 +2060,7 @@
             return false;
 
         $params["headers"] = "From: ".$config->email."\r\n".
-                             "Reply-To: ".$config->email. "\r\n".
+                             "Reply-To: ".$config->email."\r\n".
                              "X-Mailer: ".CHYRP_IDENTITY;
 
         fallback($params["subject"], "");
@@ -2066,11 +2094,11 @@
                                      _f("Your new password is: %s", $params["password"]);
                 break;
             default:
-                if ($trigger->exists("correspond_".$action))
-                    $trigger->filter($params, "correspond_".$action);
-                else
-                    return false;
+                $trigger->filter($params, "correspond_".$action);
         }
 
-        return email($params["to"], $params["subject"], $params["message"], $params["headers"]);
+        if ($trigger->exists("send_correspondence"))
+            return $trigger->call("send_correspondence", $params);
+        else
+            return email($params["to"], $params["subject"], $params["message"], $params["headers"]);
     }

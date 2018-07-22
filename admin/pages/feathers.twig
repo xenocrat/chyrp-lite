@@ -11,17 +11,17 @@
 <h3>
 <a class="emblem feather_url" href="{{ feather.url }}" target="_blank">
 <img src="{{ site.chyrp_url }}/admin/images/icons/info.svg" alt="{{ feather.url | fix(true) }}">
-</a>
 {{ feather.name }}{# translation is done in the controller #}
+</a>
 </h3>
 {% if feather.help %}
-<a href="{{ url('help/id/' ~ (feather.help | url_encode)) }}" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="Help"></a>
+<a href="{{ url('help/id/' ~ (feather.help | url_encode)) }}" rel="help" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="Help"></a>
 {% endif %}
 <p class="feather_description">
 {{ feather.description }}{# translation is done in the controller #}
 </p>
 <div class="controls">
-<form class="feather_disabler" action="{{ url('disable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<form class="feather_disabler" action="{{ url('disable') }}" method="post" accept-charset="UTF-8">
 <input type="hidden" name="extension" value="{{ safename }}">
 <input type="hidden" name="type" value="feather">
 <input type="hidden" name="hash" value="{{ authenticate() }}">
@@ -47,17 +47,17 @@
 <h3>
 <a class="emblem feather_url" href="{{ feather.url }}" target="_blank">
 <img src="{{ site.chyrp_url }}/admin/images/icons/info.svg" alt="{{ feather.url | fix(true) }}">
-</a>
 {{ feather.name }}{# translation is done in the controller #}
+</a>
 </h3>
 {% if feather.help %}
-<a href="{{ url('help/id/' ~ (feather.help | url_encode)) }}" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="Help"></a>
+<a href="{{ url('help/id/' ~ (feather.help | url_encode)) }}" rel="help" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="Help"></a>
 {% endif %}
 <p class="feather_description">
 {{ feather.description }}{# translation is done in the controller #}
 </p>
 <div class="controls">
-<form class="feather_enabler" action="{{ url('enable') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<form class="feather_enabler" action="{{ url('enable') }}" method="post" accept-charset="UTF-8">
 <input type="hidden" name="extension" value="{{ safename }}">
 <input type="hidden" name="type" value="feather">
 <input type="hidden" name="hash" value="{{ authenticate() }}">

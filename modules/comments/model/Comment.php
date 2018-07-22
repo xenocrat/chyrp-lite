@@ -19,6 +19,13 @@
          *     <Model::grab>
          */
         public function __construct($comment_id, $options = array()) {
+            $skip_where = (ADMIN or (isset($options["skip_where"]) and $options["skip_where"]));
+
+            if (!$skip_where) {
+                $options["where"]["status not"] = "spam";
+                $options["where"][] = self::redactions();
+            }
+
             parent::grab($this, $comment_id, $options);
 
             if ($this->no_results)
@@ -38,6 +45,14 @@
          *     <Model::search>
          */
         static function find($options = array(), $options_for_object = array()) {
+            $skip_where = (ADMIN or (isset($options["skip_where"]) and $options["skip_where"]));
+
+            if (!$skip_where) {
+                $options["where"]["status not"] = "spam";
+                $options["where"][] = self::redactions();
+            }
+
+            fallback($options["order"], "created_at ASC");
             return parent::search(get_class(), $options, $options_for_object);
         }
 
@@ -66,8 +81,8 @@
                                     "approved" :
                                     $config->module_comments["default_comment_status"]);
 
-            if (!logged_in())
-                $notify = 0; # Only logged-in users can request notifications.
+            if (!logged_in() or !$config->email_correspondence)
+                $notify = 0;
 
             $HTTP_REFERER = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : "" ;
             $HTTP_USER_AGENT = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "" ;
@@ -83,52 +98,24 @@
                 $akismet->setReferrer($HTTP_REFERER);
                 $akismet->setUserIP($_SERVER['REMOTE_ADDR']);
 
-                if ($akismet->isCommentSpam()) {
-                    $comment = self::add($body,
-                                         $author,
-                                         $author_url,
-                                         $author_email,
-                                         $_SERVER['REMOTE_ADDR'],
-                                         $HTTP_USER_AGENT,
-                                         "spam",
-                                         $post->id,
-                                         $visitor->id,
-                                         $parent,
-                                         $notify);
-
-                    return $comment;
-                } else {
-                    $comment = self::add($body,
-                                         $author,
-                                         $author_url,
-                                         $author_email,
-                                         $_SERVER['REMOTE_ADDR'],
-                                         $HTTP_USER_AGENT,
-                                         $status,
-                                         $post->id,
-                                         $visitor->id,
-                                         $parent,
-                                         $notify);
-
-                    $_SESSION['comments'][] = $comment->id;
-                    return $comment;
-                }
-            } else {
-                $comment = self::add($body,
-                                     $author,
-                                     $author_url,
-                                     $author_email,
-                                     $_SERVER['REMOTE_ADDR'],
-                                     $HTTP_USER_AGENT,
-                                     $status,
-                                     $post->id,
-                                     $visitor->id,
-                                     $parent,
-                                     $notify);
-
-                $_SESSION['comments'][] = $comment->id;
-                return $comment;
+                if ($akismet->isCommentSpam())
+                    $status = "spam";
             }
+
+            $comment = self::add($body,
+                                 $author,
+                                 $author_url,
+                                 $author_email,
+                                 $_SERVER['REMOTE_ADDR'],
+                                 $HTTP_USER_AGENT,
+                                 $status,
+                                 $post->id,
+                                 $visitor->id,
+                                 $parent,
+                                 $notify);
+
+            $_SESSION['comments'][] = $comment->id;
+            return $comment;
         }
 
         /**
@@ -177,7 +164,7 @@
             $sql = SQL::current();
 
             $sql->insert("comments",
-                         array("body"         => sanitize_html($body),
+                         array("body"         => $body,
                                "author"       => strip_tags($author),
                                "author_url"   => strip_tags($author_url),
                                "author_email" => strip_tags($author_email),
@@ -191,22 +178,30 @@
                                "created_at"   => fallback($created_at, datetime()),
                                "updated_at"   => fallback($updated_at, "0000-00-00 00:00:00")));
 
-            $new = new self($sql->latest("comments"));
-            Trigger::current()->call("add_comment", $new);
+            $new = new self($sql->latest("comments"), array("skip_where" => true));
 
-            if ($new->status == "approved")
-                foreach ($sql->select("comments",
-                                      "author_email",
-                                      array("post_id"    => $new->post_id,
-                                            "user_id !=" => $new->user_id,
-                                            "status"     => "approved",
-                                            "notify"     => 1))->fetchAll() as $notification) {
+            if ($new->status == "approved") {
+                $comments = self::find(array("skip_where" => true,
+                                             "where"      => array("post_id"    => $new->post_id,
+                                                                   "user_id !=" => $new->user_id,
+                                                                   "status"     => "approved",
+                                                                   "notify"     => 1)),
+                                       array("filter" => false));
 
-                    correspond("comment", array("post_id" => $new->post_id,
+                $notifications = array();
+
+                foreach ($comments as $comment)
+                    $notifications[$comment->author_email] = $comment->user_id;
+
+                foreach ($notifications as $to => $id)
+                    correspond("comment", array("to"      => $to,
+                                                "user_id" => $id,
+                                                "post_id" => $new->post_id,
                                                 "author"  => $new->author,
-                                                "body"    => $new->body,
-                                                "to"      => $notification["author_email"]));
-                }
+                                                "body"    => $new->body));
+            }
+
+            Trigger::current()->call("add_comment", $new);
 
             return $new;
         }
@@ -239,7 +234,7 @@
             if ($this->no_results)
                 return false;
 
-            $new_values = array("body"         => sanitize_html($body),
+            $new_values = array("body"         => $body,
                                 "author"       => strip_tags($author),
                                 "author_url"   => strip_tags($author_url),
                                 "author_email" => strip_tags($author_email),
@@ -273,7 +268,7 @@
          *     <Model::destroy>
          */
         static function delete($comment_id) {
-            parent::destroy(get_class(), $comment_id);
+            parent::destroy(get_class(), $comment_id, array("skip_where" => true));
         }
 
         /**
@@ -341,6 +336,33 @@
         }
 
         /**
+         * Function: creatable
+         * Checks if the <Visitor> can comment on a post.
+         */
+        static function creatable($post) {
+            $visitor = Visitor::current();
+            
+            if (!$visitor->group->can("add_comment"))
+                return false;
+
+            # Assume allowed comments by default.
+            return empty($post->comment_status) or
+                       !($post->comment_status == "closed" or
+                        ($post->comment_status == "registered_only" and !logged_in()) or
+                        ($post->comment_status == "private" and !$visitor->group->can("add_comment_private")));
+        }
+
+        /**
+         * Function: redactions
+         * Returns a SQL query "chunk" that hides some comments from the <Visitor>.
+         */
+        static function redactions() {
+            $list = empty($_SESSION['comments']) ? "(0)" : QueryBuilder::build_list($_SESSION['comments']) ;
+            $user_id = (int) Visitor::current()->id;
+            return "status != 'denied' OR ((user_id != 0 AND user_id = ".$user_id.") OR (id IN ".$list."))";
+        }
+
+        /**
          * Function: author_link
          * Returns the commenter's name enclosed in a hyperlink to their website.
          */
@@ -355,23 +377,6 @@
                 return '<a href="'.fix($this->author_url, true).'">'.$this->author.'</a>';
             else
                 return $this->author;
-        }
-
-        /**
-         * Function: user_can
-         * Checks if the <Visitor> can comment on a post.
-         */
-        static function user_can($post) {
-            $visitor = Visitor::current();
-            
-            if (!$visitor->group->can("add_comment"))
-                return false;
-
-            # Assume allowed comments by default.
-            return empty($post->comment_status) or
-                       !($post->comment_status == "closed" or
-                        ($post->comment_status == "registered_only" and !logged_in()) or
-                        ($post->comment_status == "private" and !$visitor->group->can("add_comment_private")));
         }
 
         /**
@@ -391,8 +396,12 @@
                 $this->user->group :
                 new Group($config->guest_group) ;
 
-            if ($this->status != "pingback" and !$group->can("code_in_comments"))
-                $this->body = strip_tags($this->body, "<".implode("><", $config->module_comments["allowed_comment_html"]).">");
+            if ($this->status != "pingback" and !$group->can("code_in_comments")) {
+                $allowed = $config->module_comments["allowed_comment_html"];
+                $this->body = strip_tags($this->body, "<".implode("><", $allowed).">");
+            }
+
+            $this->body = sanitize_html($this->body);
         }
 
         /**

@@ -21,7 +21,7 @@
 
         # Boolean: $clean
         # Does this controller support clean URLs?
-        public $clean = false;
+        public $clean = true;
 
         # Boolean: $feed
         # Is the current page a feed?
@@ -82,56 +82,73 @@
 
         /**
          * Function: parse
-         * Route constructor calls this to determine the action based on user privileges.
+         * Route constructor calls this to interpret clean URLs and determine the action.
          */
         public function parse($route) {
             $visitor = Visitor::current();
             $config = Config::current();
 
+            # Interpret clean URLs.
+            if (!empty($route->arg[0]) and strpos($route->arg[0], "?") !== 0) {
+                $route->action = $route->arg[0];
+
+                if (!empty($route->arg[1]) and !empty($route->arg[2]))
+                    $_GET[$route->arg[1]] = $route->arg[2];
+
+                if (!empty($route->arg[3]) and !empty($route->arg[4]))
+                    $_GET[$route->arg[3]] = $route->arg[4];
+            }
+
+            # Discover pagination.
+            if (preg_match_all("/\/((([^_\/]+)_)?page)\/([0-9]+)/", $route->request, $pages)) {
+                foreach ($pages[1] as $index => $variable)
+                    $_GET[$variable] = (int) $pages[4][$index];
+            }
+
             if (empty($route->action) or $route->action == "write") {
-                # "Write > Post", if they can add posts or drafts and at least one feather is enabled.
+                # Can they add posts or drafts and is at least one feather enabled?
                 if (!empty($config->enabled_feathers) and $visitor->group->can("add_post", "add_draft"))
                     return $route->action = "write_post";
 
-                # "Write > Page", if they can add pages.
+                # Can they add pages?
                 if ($visitor->group->can("add_page"))
                     return $route->action = "write_page";
             }
 
             if (empty($route->action) or $route->action == "manage") {
-                # "Manage > Posts", if they can manage any posts.
+                # Can they manage any posts?
                 if (Post::any_editable() or Post::any_deletable())
                     return $route->action = "manage_posts";
 
-                # "Manage > Pages", if they can manage pages.
+                # Can they manage pages?
                 if ($visitor->group->can("edit_page", "delete_page"))
                     return $route->action = "manage_pages";
 
-                # "Manage > Users", if they can manage users.
+                # Can they manage users?
                 if ($visitor->group->can("add_user", "edit_user", "delete_user"))
                     return $route->action = "manage_users";
 
-                # "Manage > Groups", if they can manage groups.
+                # Can they manage groups?
                 if ($visitor->group->can("add_group", "edit_group", "delete_group"))
                     return $route->action = "manage_groups";
 
-                # "Manage > Import", if they can import content.
+                # Can they import content?
                 if ($visitor->group->can("add_post", "add_page", "add_group", "add_user"))
                     return $route->action = "import";
 
-                # "Manage > Export", if they can export content.
+                # Can they export content?
                 if ($visitor->group->can("export_content"))
                     return $route->action = "export";
             }
 
             if (empty($route->action) or $route->action == "settings") {
-                # "General Settings", if they can configure the installation.
+                # Can they change settings?
                 if ($visitor->group->can("change_settings"))
                     return $route->action = "general_settings";
             }
 
             if (empty($route->action) or $route->action == "extend") {
-                # "Modules", if they can can enable/disable extensions.
+                # Can they enable/disable extensions?
                 if ($visitor->group->can("toggle_extensions"))
                     return $route->action = "modules";
             }
@@ -164,7 +181,7 @@
 
             $_SESSION['latest_feather'] = $_GET['feather'];
 
-            Trigger::current()->filter($options, array("write_post_options", "post_options"));
+            Trigger::current()->filter($options, array("write_post_options", "post_options"), null, $_GET['feather']);
 
             $this->display("pages".DIR."write_post",
                            array("groups" => Group::find(array("order" => "id ASC")),
@@ -213,7 +230,7 @@
             if (!$post->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this post."));
 
-            Trigger::current()->filter($options, array("edit_post_options", "post_options"), $post);
+            Trigger::current()->filter($options, array("edit_post_options", "post_options"), $post, $post->feather);
 
             $this->display("pages".DIR."edit_post",
                            array("post" => $post,
@@ -308,11 +325,12 @@
             if (!Post::any_editable() and !Post::any_deletable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage any posts."));
 
+            # Redirect searches to a clean URL or dirty GET depending on configuration.
+            if (isset($_POST['query']))
+                redirect("manage_posts/query/".str_ireplace("%2F", "", urlencode($_POST['query']))."/");
+
             fallback($_GET['query'], "");
             list($where, $params) = keywords($_GET['query'], "post_attributes.value LIKE :query OR url LIKE :query", "posts");
-
-            if (!empty($_GET['month']))
-                $where["created_at LIKE"] = when("Y-m-%", $_GET['month']);
 
             $visitor = Visitor::current();
 
@@ -545,6 +563,10 @@
             if (!$visitor->group->can("edit_page", "delete_page"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage pages."));
 
+            # Redirect searches to a clean URL or dirty GET depending on configuration.
+            if (isset($_POST['query']))
+                redirect("manage_pages/query/".str_ireplace("%2F", "", urlencode($_POST['query']))."/");
+
             fallback($_GET['query'], "");
             list($where, $params) = keywords($_GET['query'], "title LIKE :query OR body LIKE :query", "pages");
 
@@ -583,12 +605,7 @@
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
-            if (empty($_POST['login']))
-                error(__("Error"), __("Please enter a username for the account."), null, 422);
-
-            $_POST['login'] = strip_tags($_POST['login']);
-
-            if (empty($_POST['login']))
+            if (empty($_POST['login']) or derezz($_POST['login']))
                 error(__("Error"), __("Please enter a username for the account."), null, 422);
 
             $check = new User(array("login" => $_POST['login']));
@@ -637,11 +654,12 @@
                               ($config->email_activation) ? false : true);
 
             if (!$user->approved)
-                correspond("activate", array("login" => $user->login,
-                                             "to"    => $user->email,
-                                             "link"  => fix($config->url, true).
-                                                        "/?action=activate&amp;login=".urlencode($user->login).
-                                                        "&amp;token=".token(array($user->login, $user->email))));
+                correspond("activate", array("to"      => $user->email,
+                                             "user_id" => $user->id,
+                                             "login"   => $user->login,
+                                             "link"    => fix($config->url, true).
+                                                          "/?action=activate&amp;login=".urlencode($user->login).
+                                                          "&amp;token=".token(array($user->login, $user->email))));
 
             Flash::notice(__("User added."), "manage_users");
         }
@@ -685,12 +703,7 @@
             if (!$visitor->group->can("edit_user"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit users."));
 
-            if (empty($_POST['login']))
-                error(__("Error"), __("Please enter a username for the account."), null, 422);
-
-            $_POST['login'] = strip_tags($_POST['login']);
-
-            if (empty($_POST['login']))
+            if (empty($_POST['login']) or derezz($_POST['login']))
                 error(__("Error"), __("Please enter a username for the account."), null, 422);
 
             $check = new User(null, array("where" => array("login" => $_POST['login'],
@@ -743,11 +756,12 @@
                                   (!$user->approved and $config->email_activation) ? false : true);
 
             if (!$user->approved)
-                correspond("activate", array("login" => $user->login,
-                                             "to"    => $user->email,
-                                             "link"  => fix($config->url, true).
-                                                        "/?action=activate&amp;login=".urlencode($user->login).
-                                                        "&amp;token=".token(array($user->login, $user->email))));
+                correspond("activate", array("to"      => $user->email,
+                                             "user_id" => $user->id,
+                                             "login"   => $user->login,
+                                             "link"    => fix($config->url, true).
+                                                          "/?action=activate&amp;login=".urlencode($user->login).
+                                                          "&amp;token=".token(array($user->login, $user->email))));
 
             Flash::notice(__("User updated."), "manage_users");
         }
@@ -845,6 +859,10 @@
             if (!$visitor->group->can("add_user", "edit_user", "delete_user"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage users."));
 
+            # Redirect searches to a clean URL or dirty GET depending on configuration.
+            if (isset($_POST['query']))
+                redirect("manage_users/query/".str_ireplace("%2F", "", urlencode($_POST['query']))."/");
+
             fallback($_GET['query'], "");
             list($where, $params) = keywords($_GET['query'],
                 "login LIKE :query OR full_name LIKE :query OR email LIKE :query OR website LIKE :query", "users");
@@ -879,12 +897,7 @@
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
-            if (empty($_POST['name']))
-                error(__("Error"), __("Please enter a name for the group."), null, 422);
-
-            $_POST['name'] = strip_tags($_POST['name']);
-
-            if (empty($_POST['name']))
+            if (empty($_POST['name']) or derezz($_POST['name']))
                 error(__("Error"), __("Please enter a name for the group."), null, 422);
 
             fallback($_POST['permissions'], array());
@@ -934,12 +947,7 @@
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a group."), null, 400);
 
-            if (empty($_POST['name']))
-                error(__("Error"), __("Please enter a name for the group."), null, 422);
-
-            $_POST['name'] = strip_tags($_POST['name']);
-
-            if (empty($_POST['name']))
+            if (empty($_POST['name']) or derezz($_POST['name']))
                 error(__("Error"), __("Please enter a name for the group."), null, 422);
 
             fallback($_POST['permissions'], array());
@@ -1077,6 +1085,10 @@
 
             if (!$visitor->group->can("add_group", "edit_group", "delete_group"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage groups."));
+
+            # Redirect searches to a clean URL or dirty GET depending on configuration.
+            if (isset($_POST['search']))
+                redirect("manage_groups/search/".str_ireplace("%2F", "", urlencode($_POST['search']))."/");
 
             if (!empty($_GET['search'])) {
                 $user = new User(array("login" => $_GET['search']));

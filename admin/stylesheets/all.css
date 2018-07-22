@@ -118,16 +118,10 @@ small, .small {                                 font-size: 0.8em;
                                                 line-height: 1.25 }
 small li code, .small li code {                 line-height: 2 }
 p {                                             margin: 0em 0em 1em 0em }
-a:link {                                        color: #4a4747;
+a:link, a:visited {                             color: #4a4747;
                                                 text-decoration: underline }
-a:visited {                                     color: #4a4747;
-                                                text-decoration: underline }
-a:hover {                                       color: #1e57ba;
-                                                text-decoration: underline }
-a:focus {                                       outline: none;
-                                                color: #1e57ba;
-                                                text-decoration: underline }
-a:active {                                      color: #1e57ba;
+a:focus {                                       outline: #ff7f00 dashed 2px }
+a:hover, a:focus, a:active {                    color: #2f61c4;
                                                 text-decoration: underline }
 small a, .small a, .sub a {                     color: #b3b5b5 }
 div.clear {                                     visibility: hidden;
@@ -183,14 +177,13 @@ div.clear {                                     visibility: hidden;
 
 #header #navigation li a:link,
 #header #navigation li a:visited {              background-color: #cfcfcf;
-                                                color: #5f5f5f;
-                                                text-decoration: none }
+                                                color: #5f5f5f }
 #header #navigation li.selected a:link,
 #header #navigation li.selected a:visited,
 #header #navigation li a:hover,
-#header #navigation li a:focus {                background-color: #efefef;
-                                                color: #4a4747;
-                                                text-decoration: none }
+#header #navigation li a:focus {                outline: none;
+                                                background-color: #efefef;
+                                                color: #4a4747 }
 
 /**
  *---------------------------------------------
@@ -237,11 +230,10 @@ div.clear {                                     visibility: hidden;
 #sub_nav li.selected a:link,
 #sub_nav li.selected a:visited,
 #sub_nav li a:hover,
-#sub_nav li a:focus {                           background-color: #ffffff;
+#sub_nav li a:focus {                           outline: none;
+                                                background-color: #ffffff;
                                                 color: #4a4747;
-                                                text-decoration: none;
-                                                border: 1px solid #dfdfdf;
-                                                border-bottom: none }
+                                                border-color: #dfdfdf }
 
 /**
  *---------------------------------------------
@@ -336,26 +328,24 @@ li.feather div.controls button {                float: right }
  *---------------------------------------------
  */
 
-input::-webkit-input-placeholder,
-input:-moz-placeholder,
-input::-moz-placeholder,
-input:-ms-input-placeholder,
-input::-ms-input-placeholder,
-input:input-placeholder {                       color: #ddd;
+input:placeholder {                             color: #dddddd;
                                                 opacity: 1 }
 label {                                         line-height: 2 }
+select,
+textarea,
 input[type="text"],
 input[type="email"],
 input[type="url"],
 input[type="number"],
-input[type="password"],
-textarea {                                      box-sizing: border-box;
+input[type="password"] {                        box-sizing: border-box;
                                                 width: 10em;
                                                 font-size: 1.25rem;
                                                 padding: 0.25rem;
+                                                border-radius: 0em;
                                                 border: 1px solid #dfdfdf;
                                                 background-color: #ffffff;
 /* Removes shadow from Mobile Safari -> */      background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%) }
+select:focus,
 textarea:focus,
 input[type="text"]:focus,
 input[type="email"]:focus,
@@ -369,10 +359,18 @@ input[type="email"].error,
 input[type="url"].error,
 input[type="number"].error,
 input[type="password"].error,
+input:invalid,
 textarea.error {                                background-color: #faebe4;
-                                                border: 1px solid #d51800 }
-input[type="password"].strong {                 background-color: #ebfae4;
-                                                border: 1px solid #189100 }
+                                                box-shadow: none }
+input[type="text"].error:focus,
+input[type="email"].error:focus,
+input[type="url"].error:focus,
+input[type="number"].error:focus,
+input[type="password"].error:focus,
+input:invalid:focus,
+textarea.error:focus {                          border: 1px solid #d51800 }
+input[type="password"].strong {                 background-color: #ebfae4 }
+input[type="password"].strong:focus {           border: 1px solid #189100 }
 input[type="file"] {                            border: none }
 input[disabled],
 input.disabled {                                cursor: not-allowed }
@@ -384,7 +382,6 @@ code {                                          background-color: #efefef;
                                                 padding: 0px 2px;
                                                 color: #4f4f4f;
                                                 border: 1px solid #dfdfdf }
-select {                                        box-sizing: border-box }
 form.split > fieldset > * {                     line-height: 2;
                                                 clear: both }
 form.split > fieldset > * > label {             box-sizing: border-box;
@@ -482,17 +479,15 @@ p.flash {                                       padding: 0.6rem;
                                                 color: #ffffff;
                                                 border: none;
                                                 border-radius: 0.4em }
-p.flash.notice {                                background-color: #76b362;
-                                                color: #ffffff }
-p.flash.warning {                               background-color: #d94c4c;
-                                                color: #ffffff }
-p.flash a:link,
-p.flash a:visited,
+p.flash.notice {                                background-color: #76b362 }
+p.flash.warning {                               background-color: #d94c4c }
+p.flash a {                                     color: #ffffff;
+                                                font-weight: bold;
+                                                font-style: italic;
+                                                text-decoration: none }
 p.flash a:hover,
 p.flash a:focus,
-p.flash a:active {                            color: #ffffff;
-                                                text-decoration: underline }
-
+p.flash a:active {                              text-decoration: underline }
 
 /**
  *---------------------------------------------
@@ -525,10 +520,12 @@ button:focus,
 a.button:focus,
 a.next_page:focus,
 a.prev_page:focus,
+button:active,
 a.button:active,
 a.next_page:active,
 a.prev_page:active {                            border-color: #1e57ba;
                                                 outline: none }
+button::-moz-focus-inner {                      border: none }
 div.pagination a.prev_page + a.next_page {      margin-left: 1rem }
 button.boo,
 a.button.boo {                                  color: #3e3634;
@@ -640,7 +637,7 @@ div.confirmation {                              text-align: center;
                                                 margin-top: 1rem }
 hr {                                            border: none;
                                                 clear: both;
-                                                border-top: 1px solid #ddd;
+                                                border-top: 1px solid #dddddd;
                                                 margin: 2rem 0rem }
 a.emblem {                                      text-decoration: none }
 a.emblem > img,
@@ -650,8 +647,7 @@ img.emblem {                                    display: inline;
                                                 width: 16px;
                                                 height: 16px }
 a.emblem.markdown > img {                       width: 26px }
-img.emblem.preview {                            cursor: pointer;
-                                                float: right }
+a.emblem.preview {                              float: right }
 .filters .filter_item {                         box-sizing: border-box;
                                                 float: left;
                                                 max-width: 50%;
@@ -687,17 +683,17 @@ img.emblem.preview {                            cursor: pointer;
                                                 overflow-x: hidden;
                                                 overflow-y: auto;
                                                 border: none;
-                                                background-color: #fff;
+                                                background-color: #ffffff;
                                                 box-shadow: 0px 4px 16px 2px rgba(79, 79, 79, 0.5) }
 .iframe_close_gadget {                          display: block;
                                                 position: absolute;
                                                 width: 16px;
                                                 height: 16px;
-                                                top: 10%;
-                                                right: 10%;
-                                                padding-top: 13px;
-                                                padding-right: 13px;
+                                                top: calc(10% + 13px);
+                                                right: calc(10% + 13px);
                                                 cursor: pointer }
+.iframe_close_gadget img {                      width: 16px;
+                                                height: 16px }
 .ajax_loading {                                 background-size: 30px 30px;
                                                 background-image: linear-gradient(-45deg,
                                                                                   #fbfbfb 25%,
@@ -782,26 +778,16 @@ img.emblem.preview {                            cursor: pointer;
                                                 font-size: 16px !important;
                                                 padding-top: 0.5rem;
                                                 padding-bottom: 0.5rem }
-    textarea {                                  -webkit-overflow-scrolling: touch }
     select {                                    width: 100% }
-    #content table {                            display: block;
-                                                box-sizing: border-box;
-                                                width: 100%;
-                                                overflow-x: scroll;
-                                                border: 1px solid #ddd;
-                                                -webkit-overflow-scrolling: touch }
-    #content table tbody tr td {                min-width: 10em;
-                                                padding-top: 1rem;
-                                                padding-bottom: 1rem }
+    #content table thead tr th:not(.main):not(.controls):not(.toggler),
+    #content table tbody tr td:not(.main):not(.controls):not(.checkbox) {
+                                                display: none }
+    #content table tbody tr td {                padding: 1em 0.5rem }
+    #content table tbody tr td.main {           min-width: 4rem }
     #content table tbody tr td.controls,
     #content table tbody tr td.checkbox,
-    #content table tbody tr td.show_on_home {   min-width: 64px }
-    #content table tbody tr td.main {           min-width: 240px }
-    #content table tbody tr:last-child td,
-    #content table tbody tr td[rowspan="2"] {   border-bottom: none }
-    #content table tbody tr td:first-child {    border-left: none }
-    #content table tbody tr td:last-child {     border-right: none }
-    table.interactive + div.controls {          padding: 4rem }
+    #content table tbody tr td.emblem {         min-width: 32px }
+    table.interactive + div.controls {          padding: 2rem }
     button, a.button,
     a.prev_page, a.next_page {                  float: none !important;
                                                 clear: both !important;

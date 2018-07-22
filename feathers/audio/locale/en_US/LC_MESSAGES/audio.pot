@@ -2,28 +2,28 @@
 #. Copyright 2018 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 
-#: feathers/audio/audio.php:6
+#: feathers/audio/audio.php:8
 msgid "Title"
 msgstr ""
 
-#: feathers/audio/audio.php:10
+#: feathers/audio/audio.php:12
 msgid "Audio File"
 msgstr ""
 
-#: feathers/audio/audio.php:12
+#: feathers/audio/audio.php:14
 #, php-format
 msgid "(Max. file size: %d Megabytes)"
 msgstr ""
 
-#: feathers/audio/audio.php:15
+#: feathers/audio/audio.php:17
 msgid "Description"
 msgstr ""
 
-#: feathers/audio/audio.php:31
+#: feathers/audio/audio.php:33
 msgid "You did not select any audio to upload."
 msgstr ""
 
-#: feathers/audio/audio.php:109
+#: feathers/audio/audio.php:111
 msgid "Your web browser does not support the <code>audio</code> element."
 msgstr ""
 

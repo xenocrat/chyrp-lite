@@ -4,7 +4,7 @@
 
 {% block content %}
 <h2>{{ "Content Settings" | translate }}</h2>
-<form id="content_settings" class="split" action="{{ url('content_settings') }}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+<form id="content_settings" class="split" action="{{ url('content_settings') }}" method="post" accept-charset="utf-8">
 <fieldset>
 <p>
 <label for="posts_per_page">{{ "Posts Per Blog Page" | translate }}</label>
@@ -69,7 +69,7 @@
 <p>
 <label for="enable_emoji">{{ "Unicode Emoticons" | translate }}</label>
 <input class="checkbox" type="checkbox" name="enable_emoji" id="enable_emoji"{{ site.enable_emoji | checked }}>
-<a href="{{ url('help/id/unicode_emoticons') }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+<a href="{{ url('help/id/unicode_emoticons') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 <small>
 {{ "Display emoticons as Unicode emoji." | translate }}
 </small>
@@ -77,7 +77,7 @@
 <p>
 <label for="enable_markdown">{{ "Markdown" | translate }}</label>
 <input class="checkbox" type="checkbox" name="enable_markdown" id="enable_markdown"{{ site.enable_markdown | checked }}>
-<a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+<a href="{{ url('help/id/markdown') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 <small>
 {{ "Compose blog content using Markdown text formatting." | translate }}
 </small>

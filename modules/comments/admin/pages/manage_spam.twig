@@ -3,13 +3,12 @@
 {% block title %}{{ "Manage Spam" | translate("comments") }}{% endblock %}
 
 {% block content %}
-<form class="filters" action="{{ url('/') }}" method="get" accept-charset="UTF-8">
+<form class="filters" action="{{ url('manage_spam') }}" method="post" accept-charset="UTF-8" role="search">
 <fieldset>
-<input type="hidden" name="action" value="manage_comments">
-<div role="search" class="filter_item">
+<div class="filter_item">
 <h3>
 {{ "Search&hellip;" | translate }}
-<a href="{{ url('help/id/filtering_results') }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+<a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
 </h3>
 <input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true) }}" id="query">
 <button type="submit" class="inline">{{ "Search" | translate }}</button>
@@ -17,12 +16,12 @@
 </fieldset>
 </form>
 <h2>{{ GET.query is not empty ? "Search Results" | translate : "Spam" | translate("comments") }}</h2>
-<form action="{{ url('bulk_comments') }}" method="post">
+<form action="{{ url('bulk_comments') }}" method="post" accept-charset="UTF-8" data-toggler="spam_toggler">
 <table class="interactive">
 <thead>
 <tr class="head">
-<th class="toggler"></th>
-<th class="comment_post title">{{ "Post" | translate("comments") }}</th>
+<th class="toggler" id="spam_toggler"></th>
+<th class="comment_post title main">{{ "Post" | translate("comments") }}</th>
 <th class="comment_author value">{{ "Author" | translate("comments") }}</th>
 <th class="comment_date date">{{ "Added" | translate("comments") }}</th>
 {{ trigger.call("manage_comments_column_header") }}
@@ -53,7 +52,7 @@
 </td>
 </tr>
 <tr class="comment_excerpt">
-<td colspan="5">{{ comment.body | striptags | truncate(100, "&hellip;") }}</td>
+<td class="main" colspan="5">{{ comment.body | striptags | truncate(100, "&hellip;") }}</td>
 </tr>
 {% else %}
 <tr>

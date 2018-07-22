@@ -2,12 +2,14 @@
  Trigger Calls
 ==============================================
 
+
 end
 ---
 Called from:
 	admin/index.php on line 15
 	ajax/index.php on line 15
 	index.php on line 15
+
 Arguments:
 	$route
 
@@ -15,7 +17,7 @@ Arguments:
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 325
+	admin/javascripts/admin.js.php on line 346
 
 
 admin_head
@@ -34,6 +36,7 @@ edit_user_fields
 ----------------
 Called from:
 	admin/pages/edit_user.twig on line 47
+
 Arguments:
 	user
 
@@ -53,13 +56,14 @@ Called from:
 manage_groups_column_header
 ---------------------------
 Called from:
-	admin/pages/manage_groups.twig on line 29
+	admin/pages/manage_groups.twig on line 28
 
 
 manage_groups_column
 --------------------
 Called from:
-	admin/pages/manage_groups.twig on line 52
+	admin/pages/manage_groups.twig on line 51
+
 Arguments:
 	groups
 
@@ -67,13 +71,14 @@ Arguments:
 manage_pages_column_header
 --------------------------
 Called from:
-	admin/pages/manage_pages.twig on line 29
+	admin/pages/manage_pages.twig on line 28
 
 
 manage_pages_column
 -------------------
 Called from:
-	admin/pages/manage_pages.twig on line 58
+	admin/pages/manage_pages.twig on line 57
+
 Arguments:
 	page
 
@@ -81,13 +86,14 @@ Arguments:
 manage_posts_column_header
 --------------------------
 Called from:
-	admin/pages/manage_posts.twig on line 40
+	admin/pages/manage_posts.twig on line 26
 
 
 manage_posts_column
 -------------------
 Called from:
-	admin/pages/manage_posts.twig on line 59
+	admin/pages/manage_posts.twig on line 45
+
 Arguments:
 	post
 
@@ -95,13 +101,14 @@ Arguments:
 manage_users_column_header
 --------------------------
 Called from:
-	admin/pages/manage_users.twig on line 33
+	admin/pages/manage_users.twig on line 32
 
 
 manage_users_column
 -------------------
 Called from:
-	admin/pages/manage_users.twig on line 58
+	admin/pages/manage_users.twig on line 57
+
 Arguments:
 	user
 
@@ -134,6 +141,7 @@ edit_page_options
 -----------------
 Called from:
 	admin/partials/page_fields.twig on line 63
+
 Arguments:
 	page
 
@@ -142,6 +150,7 @@ before_post_fields
 ------------------
 Called from:
 	admin/partials/post_fields.twig on line 1
+
 Arguments:
 	feather
 
@@ -150,6 +159,7 @@ after_post_fields
 -----------------
 Called from:
 	admin/partials/post_fields.twig on line 48
+
 Arguments:
 	feather
 
@@ -157,10 +167,11 @@ Arguments:
 delete_upload
 -------------
 Called from:
-	feathers/audio/audio.php on line 89
-	feathers/photo/photo.php on line 89
-	feathers/uploader/uploader.php on line 130
-	feathers/video/video.php on line 89
+	feathers/audio/audio.php on line 91
+	feathers/photo/photo.php on line 92
+	feathers/uploader/uploader.php on line 132
+	feathers/video/video.php on line 91
+
 Arguments:
 	$post->filename
 
@@ -168,7 +179,8 @@ Arguments:
 audio_player
 ------------
 Called from:
-	feathers/audio/audio.php on line 106
+	feathers/audio/audio.php on line 108
+
 Arguments:
 	$post
 
@@ -176,7 +188,8 @@ Arguments:
 video_player
 ------------
 Called from:
-	feathers/video/video.php on line 106
+	feathers/video/video.php on line 108
+
 Arguments:
 	$post
 
@@ -185,6 +198,7 @@ change_setting
 --------------
 Called from:
 	includes/class/Config.php on line 76
+
 Arguments:
 	$setting, $value
 
@@ -193,6 +207,7 @@ parse_route
 -----------
 Called from:
 	includes/class/Route.php on line 71
+
 Arguments:
 	$this
 
@@ -201,6 +216,7 @@ route_init
 ----------
 Called from:
 	includes/class/Route.php on line 88
+
 Arguments:
 	$this
 
@@ -215,6 +231,7 @@ route_done
 ----------
 Called from:
 	includes/class/Route.php on line 152
+
 Arguments:
 	$this
 
@@ -228,13 +245,14 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 1114
+	includes/controller/Admin.php on line 1126
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1374
+	includes/controller/Admin.php on line 1386
+
 Arguments:
 	$group
 
@@ -242,7 +260,8 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1398
+	includes/controller/Admin.php on line 1410
+
 Arguments:
 	$user
 
@@ -250,7 +269,8 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1436
+	includes/controller/Admin.php on line 1448
+
 Arguments:
 	$entry, $post
 
@@ -258,7 +278,8 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1465
+	includes/controller/Admin.php on line 1477
+
 Arguments:
 	$entry, $page
 
@@ -266,7 +287,8 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1469
+	includes/controller/Admin.php on line 1481
+
 Arguments:
 	$imports
 
@@ -274,31 +296,32 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1743
+	includes/controller/Admin.php on line 1755
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1751
+	includes/controller/Admin.php on line 1763
 
 
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 372
+	includes/controller/Main.php on line 366
 
 
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 587
+	includes/controller/Main.php on line 582
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 598
+	includes/controller/Main.php on line 593
+
 Arguments:
 	$user
 
@@ -306,7 +329,8 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 773
+	includes/controller/Main.php on line 771
+
 Arguments:
 	$post, $feed
 
@@ -314,13 +338,22 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 1882
+	includes/helpers.php on line 1912
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 1899
+	includes/helpers.php on line 1929
+
+
+send_correspondence
+-------------------
+Called from:
+	includes/helpers.php on line 2101
+
+Arguments:
+	$params
 
 
 javascript
@@ -333,6 +366,7 @@ pingback
 --------
 Called from:
 	includes/lib/XMLRPC.php on line 110
+
 Arguments:
 	$post, $target, $source, $title, $excerpt
 
@@ -341,6 +375,7 @@ metaWeblog_newPost_preQuery
 ---------------------------
 Called from:
 	includes/lib/XMLRPC.php on line 283
+
 Arguments:
 	$args[3]
 
@@ -349,6 +384,7 @@ metaWeblog_newPost
 ------------------
 Called from:
 	includes/lib/XMLRPC.php on line 297
+
 Arguments:
 	$args[3], $post
 
@@ -357,6 +393,7 @@ metaWeblog_editPost_preQuery
 ----------------------------
 Called from:
 	includes/lib/XMLRPC.php on line 354
+
 Arguments:
 	$args[3], $post
 
@@ -365,6 +402,7 @@ metaWeblog_editPost
 -------------------
 Called from:
 	includes/lib/XMLRPC.php on line 365
+
 Arguments:
 	$args[3], $post
 
@@ -373,6 +411,7 @@ add_group
 ---------
 Called from:
 	includes/model/Group.php on line 130
+
 Arguments:
 	$group
 
@@ -381,6 +420,7 @@ update_group
 ------------
 Called from:
 	includes/model/Group.php on line 189
+
 Arguments:
 	$group, $this
 
@@ -389,6 +429,7 @@ add_page
 --------
 Called from:
 	includes/model/Page.php on line 119
+
 Arguments:
 	$page
 
@@ -397,6 +438,7 @@ update_page
 -----------
 Called from:
 	includes/model/Page.php on line 204
+
 Arguments:
 	$page, $this
 
@@ -405,6 +447,7 @@ add_post
 --------
 Called from:
 	includes/model/Post.php on line 246
+
 Arguments:
 	$post, $options
 
@@ -413,6 +456,7 @@ update_post
 -----------
 Called from:
 	includes/model/Post.php on line 353
+
 Arguments:
 	$post, $this, $options
 
@@ -421,6 +465,7 @@ publish_post
 ------------
 Called from:
 	includes/model/Post.php on line 884
+
 Arguments:
 	$post
 
@@ -429,6 +474,7 @@ add_user
 --------
 Called from:
 	includes/model/User.php on line 108
+
 Arguments:
 	$user
 
@@ -437,6 +483,7 @@ update_user
 -----------
 Called from:
 	includes/model/User.php on line 165
+
 Arguments:
 	$user, $this
 
@@ -444,15 +491,16 @@ Arguments:
 manage_comments_column_header
 -----------------------------
 Called from:
-	modules/categorize/admin/pages/manage_category.twig on line 30
-	modules/comments/admin/pages/manage_comments.twig on line 29
-	modules/comments/admin/pages/manage_spam.twig on line 28
+	modules/categorize/admin/pages/manage_category.twig on line 29
+	modules/comments/admin/pages/manage_comments.twig on line 28
+	modules/comments/admin/pages/manage_spam.twig on line 27
 
 
 add_category
 ------------
 Called from:
 	modules/categorize/model/Category.php on line 59
+
 Arguments:
 	$new
 
@@ -461,6 +509,7 @@ update_category
 ---------------
 Called from:
 	modules/categorize/model/Category.php on line 90
+
 Arguments:
 	$category, $this
 
@@ -469,6 +518,7 @@ delete_category
 ---------------
 Called from:
 	modules/categorize/model/Category.php on line 105
+
 Arguments:
 	$category
 
@@ -477,6 +527,7 @@ edit_comment_options
 --------------------
 Called from:
 	modules/comments/admin/pages/edit_comment.twig on line 53
+
 Arguments:
 	comment
 
@@ -484,8 +535,9 @@ Arguments:
 manage_comments_column
 ----------------------
 Called from:
-	modules/comments/admin/pages/manage_comments.twig on line 54
-	modules/comments/admin/pages/manage_spam.twig on line 47
+	modules/comments/admin/pages/manage_comments.twig on line 53
+	modules/comments/admin/pages/manage_spam.twig on line 46
+
 Arguments:
 	comment
 
@@ -493,7 +545,8 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 674
+	modules/comments/comments.php on line 619
+
 Arguments:
 	$comment, $feed
 
@@ -501,7 +554,8 @@ Arguments:
 add_comment
 -----------
 Called from:
-	modules/comments/model/Comment.php on line 195
+	modules/comments/model/Comment.php on line 204
+
 Arguments:
 	$new
 
@@ -509,7 +563,8 @@ Arguments:
 update_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 263
+	modules/comments/model/Comment.php on line 258
+
 Arguments:
 	$comment, $this
 
@@ -518,6 +573,7 @@ add_like
 --------
 Called from:
 	modules/likes/model/Like.php on line 65
+
 Arguments:
 	$new
 
@@ -526,6 +582,7 @@ like_post
 ---------
 Called from:
 	modules/likes/model/Like.php on line 123
+
 Arguments:
 	$post_id
 
@@ -534,6 +591,7 @@ unlike_post
 -----------
 Called from:
 	modules/likes/model/Like.php on line 142
+
 Arguments:
 	$post_id
 
@@ -542,6 +600,7 @@ import_wordpress_post
 ---------------------
 Called from:
 	modules/migrator/migrator.php on line 137
+
 Arguments:
 	$post, $new_post
 
@@ -550,6 +609,7 @@ import_wordpress_page
 ---------------------
 Called from:
 	modules/migrator/migrator.php on line 150
+
 Arguments:
 	$post, $new_page
 
@@ -558,6 +618,7 @@ import_tumble
 -------------
 Called from:
 	modules/migrator/migrator.php on line 285
+
 Arguments:
 	$post, $new_post
 
@@ -566,6 +627,7 @@ import_textpattern_post
 -----------------------
 Called from:
 	modules/migrator/migrator.php on line 384
+
 Arguments:
 	$post, $new_post
 
@@ -574,6 +636,7 @@ import_movabletype_post
 -----------------------
 Called from:
 	modules/migrator/migrator.php on line 493
+
 Arguments:
 	$post, $new_post
 
@@ -582,6 +645,7 @@ import_movabletype_page
 -----------------------
 Called from:
 	modules/migrator/migrator.php on line 507
+
 Arguments:
 	$post, $new_page
 
@@ -589,13 +653,14 @@ Arguments:
 manage_pingbacks_column_header
 ------------------------------
 Called from:
-	modules/pingable/admin/pages/manage_pingbacks.twig on line 26
+	modules/pingable/admin/pages/manage_pingbacks.twig on line 25
 
 
 manage_pingbacks_column
 -----------------------
 Called from:
-	modules/pingable/admin/pages/manage_pingbacks.twig on line 46
+	modules/pingable/admin/pages/manage_pingbacks.twig on line 45
+
 Arguments:
 	pingback
 
@@ -604,6 +669,7 @@ add_pingback
 ------------
 Called from:
 	modules/pingable/model/Pingback.php on line 56
+
 Arguments:
 	$new
 
@@ -612,6 +678,7 @@ update_pingback
 ---------------
 Called from:
 	modules/pingable/model/Pingback.php on line 86
+
 Arguments:
 	$pingback, $this
 
@@ -655,10 +722,11 @@ Called from:
 end_content
 -----------
 Called from:
-	themes/blossom/layouts/default.twig on line 120
-	themes/sparrow/layouts/default.twig on line 106
-	themes/topaz/layouts/default.twig on line 119
-	themes/umbra/layouts/default.twig on line 106
+	themes/blossom/layouts/default.twig on line 119
+	themes/sparrow/layouts/default.twig on line 105
+	themes/topaz/layouts/default.twig on line 118
+	themes/umbra/layouts/default.twig on line 105
+
 
 
 
@@ -666,448 +734,513 @@ Called from:
  Trigger Filters
 ==============================================
 
+
 flash_message
 -------------
-Target:
-	$message
 Called from:
 	includes/class/Flash.php on line 63
+
+Target:
+	$message
+
 Arguments:
 	$redirect_to
 
 
 flash_notice_message
 --------------------
-Target:
-	$message
 Called from:
 	includes/class/Flash.php on line 80
+
+Target:
+	$message
+
 Arguments:
 	$redirect_to
 
 
 flash_warning_message
 ---------------------
-Target:
-	$message
 Called from:
 	includes/class/Flash.php on line 100
+
+Target:
+	$message
+
 Arguments:
 	$redirect_to
 
 
 parse_urls
 ----------
-Target:
-	$urls
 Called from:
 	includes/class/Route.php on line 194
+
+Target:
+	$urls
 
 
 related_posts
 -------------
-Target:
-	$ids
 Called from:
 	includes/class/Theme.php on line 168
+
+Target:
+	$ids
+
 Arguments:
 	$post, $limit
 
 
 stylesheets
 -----------
-Target:
-	$stylesheets
 Called from:
 	includes/class/Theme.php on line 207
+
+Target:
+	$stylesheets
 
 
 scripts
 -------
-Target:
-	$scripts
 Called from:
 	includes/class/Theme.php on line 248
+
+Target:
+	$scripts
 
 
 links
 -----
-Target:
-	$links
 Called from:
 	includes/class/Theme.php on line 303
+
+Target:
+	$links
 
 
 visitor
 -------
-Target:
-	$visitor
 Called from:
 	includes/common.php on line 363
+
+Target:
+	$visitor
 
 
 admin_determine_action
 ----------------------
+Called from:
+	includes/controller/Admin.php on line 156
+
 Target:
 	$route->action
-Called from:
-	includes/controller/Admin.php on line 139
 
 
 posts_export
 ------------
+Called from:
+	includes/controller/Admin.php on line 1190
+
 Target:
 	$posts_atom
-Called from:
-	includes/controller/Admin.php on line 1178
+
 Arguments:
 	$post
 
 
 pages_export
 ------------
+Called from:
+	includes/controller/Admin.php on line 1237
+
 Target:
 	$pages_atom
-Called from:
-	includes/controller/Admin.php on line 1225
+
 Arguments:
 	$page
 
 
 export
 ------
+Called from:
+	includes/controller/Admin.php on line 1292
+
 Target:
 	$exports
-Called from:
-	includes/controller/Admin.php on line 1280
 
 
 before_import
 -------------
+Called from:
+	includes/controller/Admin.php on line 1356
+
 Target:
 	$imports
-Called from:
-	includes/controller/Admin.php on line 1344
 
 
 write_nav
 ---------
+Called from:
+	includes/controller/Admin.php on line 2042
+
 Target:
 	$write
-Called from:
-	includes/controller/Admin.php on line 2030
 
 
 manage_nav
 ----------
+Called from:
+	includes/controller/Admin.php on line 2071
+
 Target:
 	$manage
-Called from:
-	includes/controller/Admin.php on line 2059
 
 
 settings_nav
 ------------
+Called from:
+	includes/controller/Admin.php on line 2096
+
 Target:
 	$settings
-Called from:
-	includes/controller/Admin.php on line 2084
 
 
 extend_nav
 ----------
+Called from:
+	includes/controller/Admin.php on line 2114
+
 Target:
 	$extend
-Called from:
-	includes/controller/Admin.php on line 2102
 
 
 twig_context_admin
 ------------------
+Called from:
+	includes/controller/Admin.php on line 2166
+
 Target:
 	$this->context
-Called from:
-	includes/controller/Admin.php on line 2154
 
 
 twig_context_main
 -----------------
+Called from:
+	includes/controller/Main.php on line 835
+
 Target:
 	$this->context
-Called from:
-	includes/controller/Main.php on line 837
 
 
 keyword_search
 --------------
+Called from:
+	includes/helpers.php on line 789
+
 Target:
 	$search
-Called from:
-	includes/helpers.php on line 762
+
 Arguments:
 	$query, $plain
 
 
 link_regexp
 -----------
+Called from:
+	includes/helpers.php on line 1325
+
 Target:
 	$expressions
-Called from:
-	includes/helpers.php on line 1297
 
 
 send_mail
 ---------
+Called from:
+	includes/helpers.php on line 2042
+
 Target:
 	$function
-Called from:
-	includes/helpers.php on line 2013
 
 
 xmlrpc_methods
 --------------
-Target:
-	$methods
 Called from:
 	includes/lib/XMLRPC.php on line 30
+
+Target:
+	$methods
 
 
 metaWeblog_getPost
 ------------------
-Target:
-	$struct
 Called from:
 	includes/lib/XMLRPC.php on line 158
 	includes/lib/XMLRPC.php on line 235
+
+Target:
+	$struct
+
 Arguments:
 	$post
 
 
 metaWeblog_getCategories
 ------------------------
-Target:
-	$categories
 Called from:
 	includes/lib/XMLRPC.php on line 172
+
+Target:
+	$categories
 
 
 group
 -----
-Target:
-	$this
 Called from:
 	includes/model/Group.php on line 30
+
+Target:
+	$this
 
 
 before_group_add_name
 ---------------------
-Target:
-	$name
 Called from:
 	includes/model/Group.php on line 102
+
+Target:
+	$name
 
 
 before_group_add_permissions
 ----------------------------
-Target:
-	$permissions
 Called from:
 	includes/model/Group.php on line 103
+
+Target:
+	$permissions
 
 
 before_group_update_name
 ------------------------
-Target:
-	$name
 Called from:
 	includes/model/Group.php on line 156
+
+Target:
+	$name
 
 
 before_group_update_permissions
 -------------------------------
-Target:
-	$permissions
 Called from:
 	includes/model/Group.php on line 157
+
+Target:
+	$permissions
 
 
 list_permissions
 ----------------
-Target:
-	$names
 Called from:
 	includes/model/Group.php on line 278
+
+Target:
+	$names
 
 
 page
 ----
-Target:
-	$this
 Called from:
 	includes/model/Page.php on line 32
+
+Target:
+	$this
 
 
 before_add_page
 ---------------
-Target:
-	$new_values
 Called from:
 	includes/model/Page.php on line 113
+
+Target:
+	$new_values
 
 
 before_update_page
 ------------------
-Target:
-	$new_values
 Called from:
 	includes/model/Page.php on line 195
+
+Target:
+	$new_values
 
 
 filter_page
 -----------
-Target:
-	$this
 Called from:
 	includes/model/Page.php on line 276
+
+Target:
+	$this
 
 
 post
 ----
-Target:
-	$this
 Called from:
 	includes/model/Post.php on line 94
+
+Target:
+	$this
 
 
 before_add_post
 ---------------
-Target:
-	$new_values
 Called from:
 	includes/model/Post.php on line 221
+
+Target:
+	$new_values
 
 
 before_update_post
 ------------------
-Target:
-	$new_values
 Called from:
 	includes/model/Post.php on line 323
+
+Target:
+	$new_values
 
 
 title_from_excerpt
 ------------------
-Target:
-	$excerpt
 Called from:
 	includes/model/Post.php on line 554
+
+Target:
+	$excerpt
 
 
 title
 -----
-Target:
-	$title
 Called from:
 	includes/model/Post.php on line 579
+
+Target:
+	$title
+
 Arguments:
 	$post
 
 
 excerpt
 -------
-Target:
-	$excerpt
 Called from:
 	includes/model/Post.php on line 596
+
+Target:
+	$excerpt
+
 Arguments:
 	$post
 
 
 feed_content
 ------------
-Target:
-	$feed_content
 Called from:
 	includes/model/Post.php on line 613
+
+Target:
+	$feed_content
+
 Arguments:
 	$post
 
 
 filter_post
 -----------
-Target:
-	$this
 Called from:
 	includes/model/Post.php on line 671
+
+Target:
+	$this
 
 
 user
 ----
-Target:
-	$this
 Called from:
 	includes/model/User.php on line 24
+
+Target:
+	$this
 
 
 before_add_user
 ---------------
-Target:
-	$new_values
 Called from:
 	includes/model/User.php on line 102
+
+Target:
+	$new_values
 
 
 before_update_user
 ------------------
-Target:
-	$new_values
 Called from:
 	includes/model/User.php on line 156
+
+Target:
+	$new_values
 
 
 cacher_regenerate_triggers
 --------------------------
-Target:
-	$regenerate
 Called from:
 	modules/cacher/cacher.php on line 48
+
+Target:
+	$regenerate
 
 
 cacher_regenerate_users_triggers
 --------------------------------
-Target:
-	$regenerate_users
 Called from:
 	modules/cacher/cacher.php on line 59
+
+Target:
+	$regenerate_users
 
 
 cacher_regenerate_posts_triggers
 --------------------------------
-Target:
-	$regenerate_posts
 Called from:
 	modules/cacher/cacher.php on line 66
+
+Target:
+	$regenerate_posts
 
 
 cacher_exclude_urls_triggers
 ----------------------------
-Target:
-	$exclude_urls
 Called from:
 	modules/cacher/cacher.php on line 73
+
+Target:
+	$exclude_urls
 
 
 comment
 -------
+Called from:
+	modules/comments/model/Comment.php on line 36
+
 Target:
 	$this
-Called from:
-	modules/comments/model/Comment.php on line 29
 
 
 filter_comment
 --------------
+Called from:
+	modules/comments/model/Comment.php on line 388
+
 Target:
 	$this
-Called from:
-	modules/comments/model/Comment.php on line 383

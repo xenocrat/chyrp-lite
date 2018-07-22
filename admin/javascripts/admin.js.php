@@ -37,7 +37,9 @@ function toggle_all() {
         });
 
         parent.append(
-            [$("<label>").attr("for", master).text('<?php echo __("Toggle All", "admin"); ?>'),
+            [$("<label>", {
+                "for": master
+            }).text('<?php echo __("Toggle All", "admin"); ?>'),
             $("<input>", {
                 "type": "checkbox",
                 "name": "toggle",
@@ -147,14 +149,20 @@ var Help = {
             }).addClass("iframe_foreground").loader().on("load", function() {
                 $(this).loader(true);
             }),
-            $("<img>", {
-                "src": Site.chyrp_url + '/admin/images/icons/close.svg',
-                "alt": '<?php echo __("Close", "admin"); ?>',
-                "role": 'button',
+            $("<a>", {
+                "href": "#",
+                "role": "button",
+                "accesskey": "x",
                 "aria-label": '<?php echo __("Close", "admin"); ?>'
-            }).addClass("iframe_close_gadget").click(function() {
+            }).addClass("iframe_close_gadget").click(function(e) {
+                e.preventDefault();
                 $(this).parent().remove();
-            })]
+            }).append(
+                $("<img>", {
+                    "src": Site.chyrp_url + '/admin/images/icons/close.svg',
+                    "alt": '<?php echo __("Close", "admin"); ?>'
+                })
+            )]
         ).click(function(e) {
             if (e.target === e.currentTarget)
                 $(this).remove();
@@ -169,21 +177,28 @@ var Write = {
                 var target = $(this);
 
                 $("label[for='" + target.attr("id") + "']").append(
-                    $("<img>", {
-                        "src": Site.chyrp_url + '/admin/images/icons/magnifier.svg',
-                        "alt": '(<?php echo __("Preview this field", "admin"); ?>)',
-                        "title": '<?php echo __("Preview this field", "admin"); ?>',
+                    $("<a>", {
+                        "href": "#",
+                        "role": "button",
+                        "aria-label": '<?php echo __("Preview this field", "admin"); ?>'
                     }).addClass("emblem preview").click(function(e) {
                         var content  = target.val();
                         var field    = target.attr("name");
                         var safename = $("input#feather").val() || "page";
                         var action   = (safename == "page") ? "preview_page" : "preview_post" ;
 
-                        if (content != "") {
-                            e.preventDefault();
+                        e.preventDefault();
+
+                        if (content != "")
                             Write.show(action, safename, field, content);
-                        }
-                    })
+                        else
+                            target.focus();
+                    }).append(
+                        $("<img>", {
+                            "src": Site.chyrp_url + '/admin/images/icons/magnifier.svg',
+                            "alt": '(<?php echo __("Preview this field", "admin"); ?>)'
+                        })
+                    )
                 );
             });
     },
@@ -237,14 +252,20 @@ var Write = {
                 if (!!this.contentWindow.location && this.contentWindow.location != "about:blank")
                     $(this).loader(true);
             }),
-            $("<img>", {
-                "src": Site.chyrp_url + '/admin/images/icons/close.svg',
-                "alt": '<?php echo __("Close", "admin"); ?>',
-                "role": 'button',
+            $("<a>", {
+                "href": "#",
+                "role": "button",
+                "accesskey": "x",
                 "aria-label": '<?php echo __("Close", "admin"); ?>'
-            }).addClass("iframe_close_gadget").click(function() {
+            }).addClass("iframe_close_gadget").click(function(e) {
+                e.preventDefault();
                 $(this).parent().remove();
-            })]
+            }).append(
+                $("<img>", {
+                    "src": Site.chyrp_url + '/admin/images/icons/close.svg',
+                    "alt": '<?php echo __("Close", "admin"); ?>'
+                })
+            )]
         ).click(function(e) {
             if (e.target === e.currentTarget)
                 $(this).remove();

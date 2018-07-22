@@ -206,6 +206,10 @@
             if (!Visitor::current()->group->can("manage_categorize"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to manage categories.", "categorize"));
 
+            # Redirect searches to a clean URL or dirty GET depending on configuration.
+            if (isset($_POST['query']))
+                redirect("manage_category/query/".str_ireplace("%2F", "", urlencode($_POST['query']))."/");
+
             fallback($_GET['query'], "");
             list($where, $params) = keywords($_GET['query'], "name LIKE :query", "categorize");
 

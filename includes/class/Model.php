@@ -458,11 +458,11 @@
 
             $name = strtolower(get_class($this));
 
-            # url() is safer but we can cheat because we know the inner workings of AdminController.
-            $url = Config::current()->chyrp_url.'/admin/?action=edit_'.$name.'&amp;id='.$this->id;
+            $url = url("edit_".$name."/id/".$this->id, AdminController::current());
             $classes = $classes.' '.$name.'_edit_link edit_link';
 
-            echo $before.'<a href="'.$url.'" class="'.trim($classes).'" id="'.$name.'_edit_'.$this->id.'">'.$text.'</a>'.$after;
+            echo $before.'<a href="'.$url.'" class="'.trim($classes).
+                '" id="'.$name.'_edit_'.$this->id.'">'.$text.'</a>'.$after;
         }
 
         /**
@@ -483,10 +483,10 @@
 
             $name = strtolower(get_class($this));
 
-            # url() is safer but we can cheat because we know the inner workings of AdminController.
-            $url = Config::current()->chyrp_url.'/admin/?action=delete_'.$name.'&amp;id='.$this->id;
+            $url = url("delete_".$name."/id/".$this->id, AdminController::current());
             $classes = $classes.' '.$name.'_delete_link delete_link';
 
-            echo $before.'<a href="'.$url.'" class="'.trim($classes).'" id="'.$name.'_delete_'.$this->id.'">'.$text.'</a>'.$after;
+            echo $before.'<a href="'.$url.'" class="'.trim($classes).
+                '" id="'.$name.'_delete_'.$this->id.'">'.$text.'</a>'.$after;
         }
     }
