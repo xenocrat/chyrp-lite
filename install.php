@@ -278,30 +278,25 @@
             input[type="url"],
             input[type="number"],
             input[type="password"],
-            textarea {
-                font-size: 1.25em;
-                padding: 0.2em;
-                border: 1px solid #dfdfdf;
-                background-color: #ffffff;
-                background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%);
-            }
-            input[type="text"],
-            input[type="email"],
-            input[type="url"],
-            input[type="number"],
-            input[type="password"],
             textarea,
             select {
                 box-sizing: border-box;
                 width: 100%;
                 margin: 0em;
+                font-size: 1.25em;
+                padding: 0.2em;
+                border-radius: 0em;
+                border: 1px solid #dfdfdf;
+                background-color: #ffffff;
+                background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%);
             }
             input[type="text"]:focus,
             input[type="email"]:focus,
             input[type="url"]:focus,
             input[type="number"]:focus,
             input[type="password"]:focus,
-            textarea:focus {
+            textarea:focus,
+            select:focus {
                 border-color: #1e57ba;
                 outline: none;
             }
@@ -310,18 +305,30 @@
             input[type="url"].error,
             input[type="number"].error,
             input[type="password"].error,
+            input:invalid,
             textarea.error {
                 background-color: #faebe4;
+                box-shadow: none;
+            }
+            input[type="text"].error:focus,
+            input[type="email"].error:focus,
+            input[type="url"].error:focus,
+            input[type="number"].error:focus,
+            input[type="password"].error:focus,
+            input:invalid:focus,
+            textarea.error:focus {
                 border: 1px solid #d51800;
             }
             input[type="password"].strong {
                 background-color: #ebfae4;
+            }
+            input[type="password"].strong:focus {
                 border: 1px solid #189100;
             }
             form hr {
                 border: none;
                 clear: both;
-                border-top: 1px solid #ddd;
+                border-top: 1px solid #dddddd;
                 margin: 2rem 0rem;
             }
             form p {
