@@ -172,7 +172,7 @@
         }
 
         public function add_option($options, $post = null, $feather = null) {
-            if (isset($feather) and $feather != "uploader")
+            if ($feather != "uploader")
                 return;
 
             $options[] = array("attr" => "option[source]",
