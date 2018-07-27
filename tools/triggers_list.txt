@@ -837,6 +837,43 @@ Target:
 	$route->action
 
 
+write_post_options
+------------------
+Called from:
+	includes/controller/Admin.php on line 184
+
+Target:
+	$options
+
+Arguments:
+	null, $_GET['feather']
+
+
+post_options
+------------
+Called from:
+	includes/controller/Admin.php on line 184
+	includes/controller/Admin.php on line 233
+
+Target:
+	$options
+
+Arguments:
+	null, $_GET['feather']
+
+
+edit_post_options
+-----------------
+Called from:
+	includes/controller/Admin.php on line 233
+
+Target:
+	$options
+
+Arguments:
+	$post, $post->feather
+
+
 posts_export
 ------------
 Called from:
@@ -922,6 +959,47 @@ Called from:
 
 Target:
 	$this->context
+
+
+markup_page_title
+-----------------
+Called from:
+	includes/controller/Ajax.php on line 138
+	includes/model/Page.php on line 281
+
+Target:
+	$content
+
+
+markup_title
+------------
+Called from:
+	includes/controller/Ajax.php on line 138
+	includes/model/Page.php on line 281
+
+Target:
+	$content
+
+
+markup_page_text
+----------------
+Called from:
+	includes/controller/Ajax.php on line 142
+	includes/model/Page.php on line 282
+
+Target:
+	$content
+
+
+markup_text
+-----------
+Called from:
+	includes/controller/Ajax.php on line 142
+	includes/model/Page.php on line 282
+	modules/comments/model/Comment.php on line 391
+
+Target:
+	$content
 
 
 twig_context_main
@@ -1244,3 +1322,12 @@ Called from:
 
 Target:
 	$this
+
+
+markup_comment_text
+-------------------
+Called from:
+	modules/comments/model/Comment.php on line 391
+
+Target:
+	$this->body
