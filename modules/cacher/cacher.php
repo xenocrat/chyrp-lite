@@ -42,7 +42,9 @@
                 "delete_post",
                 "delete_page",
                 "publish_post",
-                "change_setting"
+                "change_setting",
+                "import_chyrp_post",
+                "import_chyrp_page"
             );
 
             $trigger->filter($regenerate, "cacher_regenerate_triggers");
@@ -68,7 +70,10 @@
             foreach ($regenerate_posts as $action)
                 $this->addAlias($action, "regenerate_posts");
 
-            $exclude_urls = array("before_generate_captcha");
+            $exclude_urls = array(
+                "before_authenticate",
+                "before_generate_captcha"
+            );
 
             $trigger->filter($exclude_urls, "cacher_exclude_urls_triggers");
 
