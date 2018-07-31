@@ -780,7 +780,7 @@ a.emblem.preview {                              float: right }
                                                 padding-bottom: 0.5rem }
     select {                                    width: 100% }
     #content table thead tr th:not(.main):not(.controls):not(.toggler),
-    #content table tbody tr td:not(.main):not(.controls):not(.checkbox) {
+    #content table tbody tr td:not(.main):not(.controls):not(.checkbox):not(.placeholder) {
                                                 display: none }
     #content table tbody tr td {                padding: 1em 0.5rem }
     #content table tbody tr td.main {           min-width: 4rem }

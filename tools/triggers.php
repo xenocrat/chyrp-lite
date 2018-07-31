@@ -56,6 +56,10 @@
     # Regular expression representing a string.
     $str_reg = '(\"[^\"]+\"|\'[^\']+\')';
 
+    # String: $arr_reg
+    # Regular expression representing an array construct.
+    $arr_reg = 'array\(([^\)]+)\)';
+
     /**
      * Function: scan_dir
      * Scans a directory in search of files or subdirectories.
@@ -104,7 +108,9 @@
             switch ($extension) {
                 case "php":
                     scan_call($pathname, $line, $text);
+                    scan_call_array($pathname, $line, $text);
                     scan_filter($pathname, $line, $text);
+                    scan_filter_array($pathname, $line, $text);
                     break;
                 case "twig":
                     scan_twig($pathname, $line, $text);
@@ -149,6 +155,36 @@
     }
 
     /**
+     * Function: scan_call_array
+     * Scans text for trigger call arrays.
+     */
+    function scan_call_array($pathname, $line, $text) {
+        global $trigger;
+        global $arr_reg;
+
+        if (preg_match_all("/(\\\$trigger|Trigger::current\(\))->call\($arr_reg(,\s*(.+))?\)/",
+                           $text, $matches, PREG_SET_ORDER)) {
+
+            foreach ($matches as $match) {
+                $calls = explode(",", $match[2]);
+
+                foreach ($calls as $call) {
+                    $call = trim($call, "'\" ");
+
+                    if (empty($call) or preg_match('/[^A-Za-z0-9_]/', $call))
+                        continue;
+
+                    if (isset($trigger["call"][$call]))
+                        $trigger["call"][$call]["places"][] = make_place($pathname, $line);
+                    else
+                        $trigger["call"][$call] = array("places"    => array(make_place($pathname, $line)),
+                                                        "arguments" => trim(fallback($match[4]), ", "));
+                }
+            }
+        }
+    }
+
+    /**
      * Function: scan_filter
      * Scans text for trigger filters.
      */
@@ -168,6 +204,37 @@
                     $trigger["filter"][$filter] = array("places"    => array(make_place($pathname, $line)),
                                                         "target"    => trim($match[2], ", "),
                                                         "arguments" => trim(fallback($match[5]), ", "));
+            }
+        }
+    }
+
+    /**
+     * Function: scan_filter_array
+     * Scans text for trigger filter arrays.
+     */
+    function scan_filter_array($pathname, $line, $text) {
+        global $trigger;
+        global $arr_reg;
+
+        if (preg_match_all("/(\\\$trigger|Trigger::current\(\))->filter\(([^,]+),\s*$arr_reg(,\s*(.+))?\)/",
+                           $text, $matches, PREG_SET_ORDER)) {
+
+            foreach ($matches as $match) {
+                $filters = explode(",", $match[3]);
+
+                foreach ($filters as $filter) {
+                    $filter = trim($filter, "'\" ");
+
+                    if (empty($filter) or preg_match('/[^A-Za-z0-9_]/', $filter))
+                        continue;
+
+                    if (isset($trigger["filter"][$filter]))
+                        $trigger["filter"][$filter]["places"][] = make_place($pathname, $line);
+                    else
+                        $trigger["filter"][$filter] = array("places"    => array(make_place($pathname, $line)),
+                                                            "target"    => trim($match[2], ", "),
+                                                            "arguments" => trim(fallback($match[5]), ", "));
+                }
             }
         }
     }

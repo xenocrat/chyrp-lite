@@ -96,7 +96,7 @@
         }
 
         public function add_option($options, $post = null, $feather = null) {
-            if (isset($feather) and $feather != "photo")
+            if ($feather != "photo")
                 return;
 
             $options[] = array("attr" => "option[alt_text]",
