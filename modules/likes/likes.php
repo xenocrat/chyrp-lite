@@ -338,9 +338,9 @@
             return $atom;
         }
 
-        public function cacher_regenerate_triggers($regenerate) {
-            $triggers = array("like_post", "unlike_post");
-            return array_merge($regenerate, $triggers);
+        public function cacher_regenerate_posts_triggers($regenerate_posts) {
+            $triggers = array("add_like", "delete_like");
+            return array_merge($regenerate_posts, $triggers);
         }
 
         public function user_logged_in($user) {
