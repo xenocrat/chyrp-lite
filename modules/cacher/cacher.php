@@ -31,7 +31,7 @@
                     $cacher->set($route);
         }
 
-        public function prepare_cache_regenerators() {
+        private function prepare_cache_regenerators() {
             $trigger = Trigger::current();
 
             $regenerate = array(
