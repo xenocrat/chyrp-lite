@@ -334,9 +334,12 @@
          * Flashes a notification about cookies to new visitors.
          */
         public function cookies_notification() {
-            if (Config::current()->cookies_notification and empty($_SESSION['cookies_notified']))
-                Flash::notice(__("This website uses cookies only for the purpose of user authentication."));
+            if (!Config::current()->cookies_notification or !empty($_SESSION['cookies_notified']))
+                return;
 
+            $notice = __("This website uses cookies only for the purpose of user authentication.");
+            Trigger::current()->filter($notice, "cookies_notice");
+            Flash::notice($notice);
             $_SESSION['cookies_notified'] = true;
         }
 
