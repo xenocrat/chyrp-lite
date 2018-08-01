@@ -152,7 +152,7 @@
                                 "dateCreated" => new IXR_Date(when("Ymd\TH:i:se", $post->created_at)),
                                 "description" => $post->$description,
                                 "link"        => $post->url(),
-                                "permaLink"   => $post->url(),
+                                "permaLink"   => url("id/post/".$post->id, MainController::current()),
                                 "mt_basename" => $post->clean);
 
                 $array[] = $trigger->filter($struct, "metaWeblog_getPost", $post);
@@ -229,7 +229,7 @@
                             "dateCreated" => new IXR_Date(when("Ymd\TH:i:se", $post->created_at)),
                             "description" => $post->$description,
                             "link"        => $post->url(),
-                            "permaLink"   => $post->url(),
+                            "permaLink"   => url("id/post/".$post->id, MainController::current()),
                             "mt_basename" => $post->clean);
 
             Trigger::current()->filter($struct, "metaWeblog_getPost", $post);
