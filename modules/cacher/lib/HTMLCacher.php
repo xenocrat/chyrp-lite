@@ -1,7 +1,7 @@
 <?php
-    class PageCacher {
+    class HTMLCacher {
         public function __construct($url) {
-            $this->base = CACHES_DIR.DIR."pages";
+            $this->base = CACHES_DIR.DIR."html";
             $this->life = Config::current()->module_cacher["cache_expire"];
             $this->url  = $url;
             $this->user = Visitor::current()->id;
@@ -35,7 +35,7 @@
         public function get($route) {
             if (self::available($route)) {
                 if (DEBUG)
-                    error_log("SERVING page cache for ".$this->url);
+                    error_log("SERVING HTML cache for ".$this->url);
 
                 $contents = @file_get_contents($this->file);
 
@@ -50,7 +50,7 @@
         public function set($route) {
             if (self::cacheable($route)) {
                 if (DEBUG)
-                    error_log("GENERATING page cache for ".$this->url);
+                    error_log("GENERATING HTML cache for ".$this->url);
 
                 $contents = ob_get_contents();
 
@@ -61,7 +61,7 @@
 
         public function regenerate() {
             if (DEBUG)
-                error_log("REGENERATING page caches");
+                error_log("REGENERATING HTML caches");
 
             foreach ((array) glob($this->base.DIR."*".DIR."*.html") as $file)
                 @unlink($file);
@@ -71,7 +71,7 @@
             fallback($user, $this->user);
 
             if (DEBUG)
-                error_log("REGENERATING page caches for user ID ".$user);
+                error_log("REGENERATING HTML caches for user ID ".$user);
 
             foreach ((array) glob($this->base.DIR.$user.DIR."*.html") as $file)
                 @unlink($file);
@@ -81,7 +81,7 @@
             fallback($url, $this->url);
 
             if (DEBUG)
-                error_log("REGENERATING page caches for URL ".$url);
+                error_log("REGENERATING HTML caches for URL ".$url);
 
             foreach ((array) glob($this->base.DIR."*".DIR.token($url).".html") as $file)
                 @unlink($file);

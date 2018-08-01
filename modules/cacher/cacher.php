@@ -3,7 +3,7 @@
         public function __init() {
             $this->exclude = Config::current()->module_cacher["cache_exclude"];
             $this->url     = rawurldecode(self_url());
-            $this->cachers = array(new PageCacher($this->url),
+            $this->cachers = array(new HTMLCacher($this->url),
                                    new FeedCacher($this->url));
 
             $this->prepare_cache_regenerators();
@@ -54,6 +54,7 @@
 
             $regenerate_users = array(
                 "update_user",
+                "delete_user",
                 "preview_theme_started",
                 "preview_theme_stopped"
             );
