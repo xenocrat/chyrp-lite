@@ -1176,13 +1176,13 @@
 
     /**
      * Function: sanitize_html
-     * Sanitize HTML to disable scripts and obnoxious attributes.
+     * Sanitizes HTML to disable scripts and obnoxious attributes.
      *
      * Parameters:
-     *     $string - String to sanitize.
+     *     $string - String containing HTML to sanitize.
      *
      * Returns:
-     *     A sanitized version of the string.
+     *     A version of the string containing only valid tags and whitelisted attributes.
      */
     function sanitize_html($text) {
         # Strip invalid tags.
