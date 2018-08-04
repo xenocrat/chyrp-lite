@@ -70,7 +70,7 @@
          *     $uri - URI of the author (optional).
          *     $email - Email address of the author (optional).
          */
-        public function entry($title, $id, $content, $link, $published, $updated = 0, $name = "", $uri = "", $email = "") {
+        public function entry($title, $id, $content, $link, $published, $updated = null, $name = "", $uri = "", $email = "") {
             $this->count++;
 
             $item = array(

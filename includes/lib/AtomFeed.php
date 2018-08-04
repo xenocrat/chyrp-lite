@@ -71,7 +71,7 @@
          * Notes:
          *     The entry remains open to allow triggered insertions.
          */
-        public function entry($title, $id, $content, $link, $published, $updated = 0, $name = "", $uri = "", $email = "") {
+        public function entry($title, $id, $content, $link, $published, $updated = null, $name = "", $uri = "", $email = "") {
             self::split();
 
             echo '<entry>'."\n";
