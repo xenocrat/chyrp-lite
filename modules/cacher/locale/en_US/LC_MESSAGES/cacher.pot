@@ -31,11 +31,11 @@ msgstr ""
 msgid "A list of URLs that will not be cached; enter one at a time."
 msgstr ""
 
-#: modules/cacher/cacher.php:109
+#: modules/cacher/cacher.php:115
 msgid "Cache"
 msgstr ""
 
-#: modules/cacher/cacher.php:146
+#: modules/cacher/cacher.php:152
 msgid "Cache cleared."
 msgstr ""
 
@@ -48,7 +48,7 @@ msgid "Caches pages, drastically reducing server load."
 msgstr ""
 
 #: modules/cacher/lib/FeedCacher.php:14
-#: modules/cacher/lib/PageCacher.php:14
+#: modules/cacher/lib/HTMLCacher.php:14
 msgid "Cacher module cannot write caches to disk."
 msgstr ""
 

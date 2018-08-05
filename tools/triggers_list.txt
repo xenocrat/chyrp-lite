@@ -335,25 +335,31 @@ Arguments:
 	$post, $feed
 
 
+visitor_authenticate
+--------------------
+Called from:
+	includes/helpers.php on line 561
+
+
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 1912
+	includes/helpers.php on line 1914
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 1929
+	includes/helpers.php on line 1931
 
 
 send_correspondence
 -------------------
 Called from:
-	includes/helpers.php on line 2101
+	includes/helpers.php on line 2103
 
 Arguments:
-	$params
+	$action, $params
 
 
 javascript
@@ -819,6 +825,15 @@ Target:
 	$links
 
 
+cookies_notice
+--------------
+Called from:
+	includes/class/Theme.php on line 341
+
+Target:
+	$notice
+
+
 visitor
 -------
 Called from:
@@ -1014,7 +1029,7 @@ Target:
 keyword_search
 --------------
 Called from:
-	includes/helpers.php on line 789
+	includes/helpers.php on line 791
 
 Target:
 	$search
@@ -1026,7 +1041,7 @@ Arguments:
 link_regexp
 -----------
 Called from:
-	includes/helpers.php on line 1325
+	includes/helpers.php on line 1327
 
 Target:
 	$expressions
@@ -1035,7 +1050,7 @@ Target:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 2042
+	includes/helpers.php on line 2044
 
 Target:
 	$function
@@ -1273,7 +1288,7 @@ Target:
 cacher_regenerate_triggers
 --------------------------
 Called from:
-	modules/cacher/cacher.php on line 48
+	modules/cacher/cacher.php on line 50
 
 Target:
 	$regenerate
@@ -1282,7 +1297,7 @@ Target:
 cacher_regenerate_users_triggers
 --------------------------------
 Called from:
-	modules/cacher/cacher.php on line 59
+	modules/cacher/cacher.php on line 62
 
 Target:
 	$regenerate_users
@@ -1291,7 +1306,7 @@ Target:
 cacher_regenerate_posts_triggers
 --------------------------------
 Called from:
-	modules/cacher/cacher.php on line 66
+	modules/cacher/cacher.php on line 69
 
 Target:
 	$regenerate_posts
@@ -1300,7 +1315,7 @@ Target:
 cacher_exclude_urls_triggers
 ----------------------------
 Called from:
-	modules/cacher/cacher.php on line 73
+	modules/cacher/cacher.php on line 79
 
 Target:
 	$exclude_urls
