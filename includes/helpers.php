@@ -2100,7 +2100,7 @@
         }
 
         if ($trigger->exists("send_correspondence"))
-            return $trigger->call("send_correspondence", $params);
-        else
-            return email($params["to"], $params["subject"], $params["message"], $params["headers"]);
+            return $trigger->call("send_correspondence", $action, $params);
+
+        return email($params["to"], $params["subject"], $params["message"], $params["headers"]);
     }
