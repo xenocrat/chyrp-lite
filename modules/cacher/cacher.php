@@ -72,7 +72,7 @@
                 $this->addAlias($action, "regenerate_posts");
 
             $exclude_urls = array(
-                "before_authenticate",
+                "visitor_authenticate",
                 "before_generate_captcha"
             );
 

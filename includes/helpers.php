@@ -558,7 +558,7 @@
      *     An authentication token, or the validity of the supplied token.
      */
     function authenticate($hash = null) {
-        Trigger::current()->call("before_authenticate");
+        Trigger::current()->call("visitor_authenticate");
 
         $id = session_id();
         return isset($hash) ? (token($id) == $hash) : (($id == "") ? "" : token($id)) ;
