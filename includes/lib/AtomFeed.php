@@ -37,7 +37,7 @@
          *     $id - Feed ID (optional).
          *     $updated - Time of update (optional).
          */
-        public function open($title, $subtitle = "", $id = "", $updated = 0) {
+        public function open($title, $subtitle = "", $id = "", $updated = null) {
             $language = preg_replace("/[\-_].*$/", "", Config::current()->locale);
 
             echo '<?xml version="1.0" encoding="UTF-8"?>'."\n";

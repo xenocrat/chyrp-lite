@@ -41,7 +41,7 @@
          *     $id - Feed ID (optional).
          *     $updated - Time of update (optional).
          */
-        public function open($title, $subtitle = "", $id = "", $updated = 0) {
+        public function open($title, $subtitle = "", $id = "", $updated = null) {
             $this->json = array(
                 "version"       => "https://jsonfeed.org/version/1",
                 "title"         => strip_tags($title),
