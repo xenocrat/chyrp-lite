@@ -591,7 +591,7 @@
             $post = $context["post"];
             $comments = $post->comments;
             $latest_timestamp = 0;
-            $subtitle = _f("Comments on &#8220;%s&#8221;", oneof($post->title(), ucfirst($post->feather)), "comments");
+            $title = _f("Comments on &#8220;%s&#8221;", oneof($post->title(), ucfirst($post->feather)), "comments");
 
             foreach ($comments as $comment)
                 if (strtotime($comment->created_at) > $latest_timestamp)
@@ -599,8 +599,8 @@
 
             $feed = new BlogFeed();
 
-            $feed->open(Config::current()->name,
-                        $subtitle,
+            $feed->open($title,
+                        Config::current()->description,
                         null,
                         $latest_timestamp);
 
