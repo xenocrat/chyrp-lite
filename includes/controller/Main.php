@@ -751,8 +751,8 @@
 
             $feed = new BlogFeed();
 
-            $feed->open($config->name,
-                        oneof($theme->title, $config->description),
+            $feed->open(oneof($theme->title, $config->name),
+                        $config->description,
                         null,
                         $latest_timestamp);
 
