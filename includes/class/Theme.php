@@ -289,7 +289,7 @@
                                  "title" => $config->name));
 
             # Generate a page feed if it seems appropriate.
-            if ($route->action != "index" and array_key_exists("posts", $main->context)) {
+            if ($route->action != "index" and !empty($main->context["posts"])) {
                 $page_url = ($main->context["posts"] instanceof Paginator) ?
                     $main->context["posts"]->prev_page_url(1) :
                     $config->url.$route->request ;
