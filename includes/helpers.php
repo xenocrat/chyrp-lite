@@ -1696,7 +1696,7 @@
         $config = Config::current();
 
         return ($url) ?
-                $config->chyrp_url.str_replace(DIR, "/", $config->uploads_path).urlencode($file) :
+                fix($config->chyrp_url.str_replace(DIR, "/", $config->uploads_path).urlencode($file), true) :
                 MAIN_DIR.$config->uploads_path.$file ;
     }
 
