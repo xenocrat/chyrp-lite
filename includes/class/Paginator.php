@@ -234,8 +234,8 @@
                        $request.$mark.$this->name."=".$page ;
 
             return ($config->clean_urls and !empty(Route::current()->controller->clean)) ?
-                   preg_replace("/(\/{$this->name}\/([0-9]+)|$)/", "/".$this->name."/".$page, $request, 1) :
-                   preg_replace("/((\?|&){$this->name}=([0-9]+)|$)/", "\\2".$this->name."=".$page, $request, 1) ;
+                preg_replace("/(\/{$this->name}\/([0-9]+)|$)/", "/".$this->name."/".$page, $request, 1) :
+                preg_replace("/((\?|&){$this->name}=([0-9]+)|$)/", "\\2".$this->name."=".$page, $request, 1) ;
         }
 
         /**
@@ -261,7 +261,7 @@
                        $request.$mark.$this->name."=".$page ;
 
             return ($config->clean_urls and !empty(Route::current()->controller->clean)) ?
-                   preg_replace("/(\/{$this->name}\/([0-9]+)|$)/", "/".$this->name."/".$page, $request, 1) :
-                   preg_replace("/((\?|&){$this->name}=([0-9]+)|$)/", "\\2".$this->name."=".$page, $request, 1) ;
+                preg_replace("/(\/{$this->name}\/([0-9]+)|$)/", "/".$this->name."/".$page, $request, 1) :
+                preg_replace("/((\?|&){$this->name}=([0-9]+)|$)/", "\\2".$this->name."=".$page, $request, 1) ;
         }
     }
