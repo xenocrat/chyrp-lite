@@ -223,7 +223,7 @@
             $request = self_url();
 
             # Determine how we should append the page to dirty URLs.
-            $mark = (substr_count($request, "?")) ? "&amp;" : "?" ;
+            $mark = (substr_count($request, "?")) ? "&" : "?" ;
 
             fallback($page, $this->page + 1);
 
@@ -233,9 +233,11 @@
                        rtrim($request, "/")."/".$this->name."/".$page."/" :
                        $request.$mark.$this->name."=".$page ;
 
-            return ($config->clean_urls and !empty(Route::current()->controller->clean)) ?
+            $url = ($config->clean_urls and !empty(Route::current()->controller->clean)) ?
                 preg_replace("/(\/{$this->name}\/([0-9]+)|$)/", "/".$this->name."/".$page, $request, 1) :
                 preg_replace("/((\?|&){$this->name}=([0-9]+)|$)/", "\\2".$this->name."=".$page, $request, 1) ;
+
+            return fix($url, true);
         }
 
         /**
@@ -250,7 +252,7 @@
             $request = self_url();
 
             # Determine how we should append the page to dirty URLs.
-            $mark = (substr_count($request, "?")) ? "&amp;" : "?" ;
+            $mark = (substr_count($request, "?")) ? "&" : "?" ;
 
             fallback($page, $this->page - 1);
 
@@ -260,8 +262,10 @@
                        rtrim($request, "/")."/".$this->name."/".$page :
                        $request.$mark.$this->name."=".$page ;
 
-            return ($config->clean_urls and !empty(Route::current()->controller->clean)) ?
+            $url = ($config->clean_urls and !empty(Route::current()->controller->clean)) ?
                 preg_replace("/(\/{$this->name}\/([0-9]+)|$)/", "/".$this->name."/".$page, $request, 1) :
                 preg_replace("/((\?|&){$this->name}=([0-9]+)|$)/", "\\2".$this->name."=".$page, $request, 1) ;
+
+            return fix($url, true);
         }
     }
