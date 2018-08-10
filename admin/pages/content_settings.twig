@@ -19,13 +19,6 @@
 <input class="text digits" type="number" min="0" name="admin_per_page" value="{{ site.admin_per_page | fix(true) }}" size="2" id="admin_per_page">
 </p>
 <p>
-<label for="feed_url">{{ "Feed URL" | translate }}</label>
-<input class="text" type="url" name="feed_url" value="{{ site.feed_url | fix(true) }}" id="feed_url">
-<small>
-{{ "Allows you to set an alternative URL for <code>%s</code>." | translate | format(site.clean_urls ? "/feed/" : "/?feed") }}
-</small>
-</p>
-<p>
 <label for="uploads_path">{{ "Uploads Path" | translate }}</label>
 <input class="text" type="text" name="uploads_path" value="{{ site.uploads_path | fix(true) }}" id="uploads_path">
 <small>

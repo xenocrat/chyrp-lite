@@ -245,6 +245,19 @@
             $errors[] = __("You might need to update your canonical URL's <em>.htaccess</em> file.");
     }
 
+    /**
+     * Function: remove_trackbacking
+     * Removes the feed_url config setting.
+     *
+     * Versions: 2018.03 => 2018.04
+     */
+    function remove_feed_url() {
+        $set = Config::current()->remove("feed_url");
+
+        if ($set === false)
+            error(__("Error"), __("Could not write the configuration file."));
+    }
+
     #---------------------------------------------
     # Output Starts
     #---------------------------------------------
@@ -473,6 +486,7 @@
         remove_captcha();
         disable_recaptcha();
         update_htaccess();
+        remove_feed_url();
 
         # Perform module upgrades.
         foreach ($config->enabled_modules as $module)

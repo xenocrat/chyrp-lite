@@ -1840,9 +1840,6 @@
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
-            if (!empty($_POST['feed_url']) and !is_url($_POST['feed_url']))
-                error(__("Error"), __("Invalid feed URL."), null, 422);
-
             if (!empty($_POST['enable_markdown']) and !extension_loaded("mbstring")) {
                 Flash::warning(__("Markdown is disabled because multibyte string support is not available."));
                 unset($_POST['enable_markdown']);
@@ -1851,7 +1848,6 @@
             fallback($_POST['posts_per_page'], 5);
             fallback($_POST['admin_per_page'], 25);
             fallback($_POST['feed_items'], 20);
-            fallback($_POST['feed_url'], "");
             fallback($_POST['feed_format'], "AtomFeed");
             fallback($_POST['uploads_path'], "");
             fallback($_POST['uploads_limit'], 10);
@@ -1867,7 +1863,6 @@
             $config->set("posts_per_page", (int) $_POST['posts_per_page']);
             $config->set("admin_per_page", (int) $_POST['admin_per_page']);
             $config->set("feed_items", (int) $_POST['feed_items']);
-            $config->set("feed_url", $_POST['feed_url']);
             $config->set("feed_format", $_POST['feed_format']);
             $config->set("uploads_path", $matches[1].$matches[2].$matches[3]);
             $config->set("uploads_limit", (int) $_POST['uploads_limit']);
