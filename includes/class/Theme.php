@@ -305,7 +305,7 @@
 
             # Ask extensions to provide additional links.
             Trigger::current()->filter($links, "links");
-            
+
             # Generate <link> tags:
             $tags = array();
 
