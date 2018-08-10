@@ -75,7 +75,7 @@ msgstr ""
 "显示2016年由Foo创建的帖子。"
 
 #: admin/help/markdown.twig:3 admin/help/markdown.twig:6
-#: admin/help/markdown.twig:13 admin/pages/content_settings.twig:78
+#: admin/help/markdown.twig:13 admin/pages/content_settings.twig:71
 msgid "Markdown"
 msgstr "Markdown"
 
@@ -184,7 +184,7 @@ msgstr ""
 "时自动生成。 一个slug 只能包含字母a-z，数字0-9和连字符减号（“ - ”）。"
 
 #: admin/help/unicode_emoticons.twig:3 admin/help/unicode_emoticons.twig:6
-#: admin/pages/content_settings.twig:70
+#: admin/pages/content_settings.twig:63
 msgid "Unicode Emoticons"
 msgstr "Unicode表情符号"
 
@@ -256,69 +256,60 @@ msgid "Items Per Admin Page"
 msgstr "每个管理员的页面"
 
 #: admin/pages/content_settings.twig:22
-msgid "Feed URL"
-msgstr "订阅URL"
-
-#: admin/pages/content_settings.twig:25
-#, php-format
-msgid "Allows you to set an alternative URL for <code>%s</code>."
-msgstr "允许您为 <code>%s</code> 设置替代网址。"
-
-#: admin/pages/content_settings.twig:29
 msgid "Uploads Path"
 msgstr "上传路径"
 
-#: admin/pages/content_settings.twig:32
+#: admin/pages/content_settings.twig:25
 msgid ""
 "The directory to which files are uploaded, relative to your installation "
 "directory."
 msgstr "相对于您安装目录的上传文件的目录。"
 
-#: admin/pages/content_settings.twig:36
+#: admin/pages/content_settings.twig:29
 msgid "Upload Size Limit"
 msgstr "上传大小限制"
 
-#: admin/pages/content_settings.twig:38
+#: admin/pages/content_settings.twig:31
 msgid "(Megabytes)"
 msgstr "(M)"
 
-#: admin/pages/content_settings.twig:41
+#: admin/pages/content_settings.twig:34
 msgid "Feed Format"
 msgstr "订阅格式"
 
-#: admin/pages/content_settings.twig:49
+#: admin/pages/content_settings.twig:42
 msgid "Send Pingbacks"
 msgstr "发送引用"
 
-#: admin/pages/content_settings.twig:52
+#: admin/pages/content_settings.twig:45
 msgid "Attempts to notify sites to which your posts link."
 msgstr "尝试您帖子链接到的站点。"
 
-#: admin/pages/content_settings.twig:56
+#: admin/pages/content_settings.twig:49
 msgid "XML-RPC Support"
 msgstr "XML-RPC支持"
 
-#: admin/pages/content_settings.twig:59
+#: admin/pages/content_settings.twig:52
 msgid "XML-RPC support allows you to manipulate your blog content remotely."
 msgstr "XML-RPC支持允许您远程操作您的博客内容。"
 
-#: admin/pages/content_settings.twig:63
+#: admin/pages/content_settings.twig:56
 msgid "Ajax"
 msgstr "Ajax"
 
-#: admin/pages/content_settings.twig:66
+#: admin/pages/content_settings.twig:59
 msgid "Ajax enhances your blog with additional interactive features."
 msgstr "Ajax使用其他交互功能增强了您的博客。"
 
-#: admin/pages/content_settings.twig:74
+#: admin/pages/content_settings.twig:67
 msgid "Display emoticons as Unicode emoji."
 msgstr "将表情符号显示为Unicode表情符号。"
 
-#: admin/pages/content_settings.twig:82
+#: admin/pages/content_settings.twig:75
 msgid "Compose blog content using Markdown text formatting."
 msgstr "使用Markdown语法撰写博客内容。"
 
-#: admin/pages/content_settings.twig:87 admin/pages/edit_group.twig:24
+#: admin/pages/content_settings.twig:80 admin/pages/edit_group.twig:24
 #: admin/pages/edit_user.twig:49 admin/pages/general_settings.twig:61
 #: admin/pages/route_settings.twig:85 admin/pages/user_settings.twig:41
 msgid "Update"

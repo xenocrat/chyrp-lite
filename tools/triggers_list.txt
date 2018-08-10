@@ -819,7 +819,7 @@ Target:
 links
 -----
 Called from:
-	includes/class/Theme.php on line 303
+	includes/class/Theme.php on line 307
 
 Target:
 	$links
@@ -828,7 +828,7 @@ Target:
 cookies_notice
 --------------
 Called from:
-	includes/class/Theme.php on line 341
+	includes/class/Theme.php on line 345
 
 Target:
 	$notice
@@ -934,7 +934,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 2042
+	includes/controller/Admin.php on line 2037
 
 Target:
 	$write
@@ -943,7 +943,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2071
+	includes/controller/Admin.php on line 2066
 
 Target:
 	$manage
@@ -952,7 +952,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 2096
+	includes/controller/Admin.php on line 2091
 
 Target:
 	$settings
@@ -961,7 +961,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2114
+	includes/controller/Admin.php on line 2109
 
 Target:
 	$extend
@@ -970,7 +970,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2166
+	includes/controller/Admin.php on line 2161
 
 Target:
 	$this->context

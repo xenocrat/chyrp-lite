@@ -40,7 +40,7 @@ msgstr ""
 #: admin/help/markdown.twig:3
 #: admin/help/markdown.twig:6
 #: admin/help/markdown.twig:13
-#: admin/pages/content_settings.twig:78
+#: admin/pages/content_settings.twig:71
 msgid "Markdown"
 msgstr ""
 
@@ -145,7 +145,7 @@ msgstr ""
 
 #: admin/help/unicode_emoticons.twig:3
 #: admin/help/unicode_emoticons.twig:6
-#: admin/pages/content_settings.twig:70
+#: admin/pages/content_settings.twig:63
 msgid "Unicode Emoticons"
 msgstr ""
 
@@ -217,67 +217,58 @@ msgid "Items Per Admin Page"
 msgstr ""
 
 #: admin/pages/content_settings.twig:22
-msgid "Feed URL"
-msgstr ""
-
-#: admin/pages/content_settings.twig:25
-#, php-format
-msgid "Allows you to set an alternative URL for <code>%s</code>."
-msgstr ""
-
-#: admin/pages/content_settings.twig:29
 msgid "Uploads Path"
 msgstr ""
 
-#: admin/pages/content_settings.twig:32
+#: admin/pages/content_settings.twig:25
 msgid "The directory to which files are uploaded, relative to your installation directory."
 msgstr ""
 
-#: admin/pages/content_settings.twig:36
+#: admin/pages/content_settings.twig:29
 msgid "Upload Size Limit"
 msgstr ""
 
-#: admin/pages/content_settings.twig:38
+#: admin/pages/content_settings.twig:31
 msgid "(Megabytes)"
 msgstr ""
 
-#: admin/pages/content_settings.twig:41
+#: admin/pages/content_settings.twig:34
 msgid "Feed Format"
 msgstr ""
 
-#: admin/pages/content_settings.twig:49
+#: admin/pages/content_settings.twig:42
 msgid "Send Pingbacks"
 msgstr ""
 
-#: admin/pages/content_settings.twig:52
+#: admin/pages/content_settings.twig:45
 msgid "Attempts to notify sites to which your posts link."
 msgstr ""
 
-#: admin/pages/content_settings.twig:56
+#: admin/pages/content_settings.twig:49
 msgid "XML-RPC Support"
 msgstr ""
 
-#: admin/pages/content_settings.twig:59
+#: admin/pages/content_settings.twig:52
 msgid "XML-RPC support allows you to manipulate your blog content remotely."
 msgstr ""
 
-#: admin/pages/content_settings.twig:63
+#: admin/pages/content_settings.twig:56
 msgid "Ajax"
 msgstr ""
 
-#: admin/pages/content_settings.twig:66
+#: admin/pages/content_settings.twig:59
 msgid "Ajax enhances your blog with additional interactive features."
 msgstr ""
 
-#: admin/pages/content_settings.twig:74
+#: admin/pages/content_settings.twig:67
 msgid "Display emoticons as Unicode emoji."
 msgstr ""
 
-#: admin/pages/content_settings.twig:82
+#: admin/pages/content_settings.twig:75
 msgid "Compose blog content using Markdown text formatting."
 msgstr ""
 
-#: admin/pages/content_settings.twig:87
+#: admin/pages/content_settings.twig:80
 #: admin/pages/edit_group.twig:24
 #: admin/pages/edit_user.twig:49
 #: admin/pages/general_settings.twig:61

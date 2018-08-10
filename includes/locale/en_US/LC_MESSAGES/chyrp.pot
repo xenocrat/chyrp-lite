@@ -90,8 +90,7 @@ msgstr ""
 #: includes/controller/Admin.php:1790
 #: includes/controller/Admin.php:1793
 #: includes/controller/Admin.php:1796
-#: includes/controller/Admin.php:1844
-#: includes/controller/Admin.php:1999
+#: includes/controller/Admin.php:1994
 #: includes/controller/Ajax.php:32
 #: includes/download.php:12
 #: includes/download.php:15
@@ -115,7 +114,7 @@ msgstr ""
 #: includes/thumb.php:18
 #: includes/thumb.php:47
 #: includes/thumb.php:202
-#: install.php:756
+#: install.php:755
 #: upgrade.php:105
 #: upgrade.php:118
 #: upgrade.php:131
@@ -125,6 +124,7 @@ msgstr ""
 #: upgrade.php:197
 #: upgrade.php:210
 #: upgrade.php:224
+#: upgrade.php:258
 msgid "Error"
 msgstr ""
 
@@ -197,10 +197,10 @@ msgstr ""
 #: includes/controller/Admin.php:1781
 #: includes/controller/Admin.php:1828
 #: includes/controller/Admin.php:1841
-#: includes/controller/Admin.php:1889
-#: includes/controller/Admin.php:1896
-#: includes/controller/Admin.php:1929
-#: includes/controller/Admin.php:1935
+#: includes/controller/Admin.php:1884
+#: includes/controller/Admin.php:1891
+#: includes/controller/Admin.php:1924
+#: includes/controller/Admin.php:1930
 #: includes/controller/Ajax.php:41
 #: includes/controller/Ajax.php:52
 #: includes/controller/Ajax.php:64
@@ -231,7 +231,7 @@ msgstr ""
 msgid "PDO driver is unavailable for this database."
 msgstr ""
 
-#: includes/class/Theme.php:340
+#: includes/class/Theme.php:344
 msgid "This website uses cookies only for the purpose of user authentication."
 msgstr ""
 
@@ -327,8 +327,8 @@ msgstr ""
 #: includes/controller/Admin.php:1760
 #: includes/controller/Admin.php:1781
 #: includes/controller/Admin.php:1841
-#: includes/controller/Admin.php:1896
-#: includes/controller/Admin.php:1935
+#: includes/controller/Admin.php:1891
+#: includes/controller/Admin.php:1930
 #: includes/controller/Ajax.php:41
 #: includes/controller/Ajax.php:67
 #: includes/controller/Ajax.php:87
@@ -468,7 +468,7 @@ msgid "Page updated."
 msgstr ""
 
 #: includes/controller/Admin.php:493
-#: includes/controller/Admin.php:1957
+#: includes/controller/Admin.php:1952
 msgid "View page &rarr;"
 msgstr ""
 
@@ -608,8 +608,8 @@ msgstr ""
 #: includes/controller/Admin.php:1024
 #: includes/controller/Admin.php:1044
 #: includes/controller/Admin.php:1056
+#: includes/controller/Admin.php:1899
 #: includes/controller/Admin.php:1904
-#: includes/controller/Admin.php:1909
 msgid "Gone"
 msgstr ""
 
@@ -686,7 +686,7 @@ msgid "New member group must be specified."
 msgstr ""
 
 #: includes/controller/Admin.php:1044
-#: includes/controller/Admin.php:1904
+#: includes/controller/Admin.php:1899
 msgid "New default group does not exist."
 msgstr ""
 
@@ -695,7 +695,7 @@ msgid "New default group must be specified."
 msgstr ""
 
 #: includes/controller/Admin.php:1056
-#: includes/controller/Admin.php:1909
+#: includes/controller/Admin.php:1904
 msgid "New guest group does not exist."
 msgstr ""
 
@@ -772,8 +772,8 @@ msgstr ""
 #: includes/controller/Admin.php:1749
 #: includes/controller/Admin.php:1773
 #: includes/controller/Admin.php:1828
-#: includes/controller/Admin.php:1889
-#: includes/controller/Admin.php:1929
+#: includes/controller/Admin.php:1884
+#: includes/controller/Admin.php:1924
 msgid "You do not have sufficient privileges to change settings."
 msgstr ""
 
@@ -858,118 +858,114 @@ msgid "Invalid canonical URL."
 msgstr ""
 
 #: includes/controller/Admin.php:1819
-#: includes/controller/Admin.php:1880
-#: includes/controller/Admin.php:1920
-#: includes/controller/Admin.php:1970
+#: includes/controller/Admin.php:1875
+#: includes/controller/Admin.php:1915
+#: includes/controller/Admin.php:1965
 msgid "Settings updated."
 msgstr ""
 
 #: includes/controller/Admin.php:1844
-msgid "Invalid feed URL."
-msgstr ""
-
-#: includes/controller/Admin.php:1847
 msgid "Markdown is disabled because multibyte string support is not available."
 msgstr ""
 
-#: includes/controller/Admin.php:1941
+#: includes/controller/Admin.php:1936
 msgid "Clean URLs are disabled because the <em>.htaccess</em> file cannot be configured."
 msgstr ""
 
-#: includes/controller/Admin.php:1949
+#: includes/controller/Admin.php:1944
 msgid "My Awesome Homepage"
 msgstr ""
 
-#: includes/controller/Admin.php:1950
+#: includes/controller/Admin.php:1945
 msgid "Nothing here yet!"
 msgstr ""
 
-#: includes/controller/Admin.php:1957
+#: includes/controller/Admin.php:1952
 msgid "Page created."
 msgstr ""
 
-#: includes/controller/Admin.php:1979
+#: includes/controller/Admin.php:1974
 #: includes/controller/Main.php:572
 msgid "You are already logged in."
 msgstr ""
 
-#: includes/controller/Admin.php:1999
+#: includes/controller/Admin.php:1994
 #: includes/controller/Ajax.php:32
 #: includes/download.php:15
 #: includes/thumb.php:18
 msgid "Missing argument."
 msgstr ""
 
-#: includes/controller/Admin.php:2003
+#: includes/controller/Admin.php:1998
 msgid "Help"
 msgstr ""
 
-#: includes/controller/Admin.php:2016
+#: includes/controller/Admin.php:2011
 msgid "Write"
 msgstr ""
 
-#: includes/controller/Admin.php:2017
+#: includes/controller/Admin.php:2012
 msgid "Manage"
 msgstr ""
 
-#: includes/controller/Admin.php:2018
+#: includes/controller/Admin.php:2013
 msgid "Settings"
 msgstr ""
 
-#: includes/controller/Admin.php:2019
+#: includes/controller/Admin.php:2014
 msgid "Extend"
 msgstr ""
 
-#: includes/controller/Admin.php:2029
+#: includes/controller/Admin.php:2024
 msgid "Page"
 msgstr ""
 
-#: includes/controller/Admin.php:2056
+#: includes/controller/Admin.php:2051
 msgid "Posts"
 msgstr ""
 
-#: includes/controller/Admin.php:2060
+#: includes/controller/Admin.php:2055
 msgid "Pages"
 msgstr ""
 
-#: includes/controller/Admin.php:2064
-#: includes/controller/Admin.php:2092
+#: includes/controller/Admin.php:2059
+#: includes/controller/Admin.php:2087
 msgid "Users"
 msgstr ""
 
-#: includes/controller/Admin.php:2068
+#: includes/controller/Admin.php:2063
 msgid "Groups"
 msgstr ""
 
-#: includes/controller/Admin.php:2074
+#: includes/controller/Admin.php:2069
 msgid "Import"
 msgstr ""
 
-#: includes/controller/Admin.php:2077
+#: includes/controller/Admin.php:2072
 msgid "Export"
 msgstr ""
 
-#: includes/controller/Admin.php:2090
+#: includes/controller/Admin.php:2085
 msgid "General"
 msgstr ""
 
-#: includes/controller/Admin.php:2091
+#: includes/controller/Admin.php:2086
 msgid "Content"
 msgstr ""
 
-#: includes/controller/Admin.php:2093
+#: includes/controller/Admin.php:2088
 msgid "Routes"
 msgstr ""
 
-#: includes/controller/Admin.php:2109
+#: includes/controller/Admin.php:2104
 msgid "Modules"
 msgstr ""
 
-#: includes/controller/Admin.php:2110
+#: includes/controller/Admin.php:2105
 msgid "Feathers"
 msgstr ""
 
-#: includes/controller/Admin.php:2111
+#: includes/controller/Admin.php:2106
 msgid "Themes"
 msgstr ""
 
@@ -1560,7 +1556,7 @@ msgstr ""
 msgid "Please enter a username and password for the MySQL database."
 msgstr ""
 
-#: install.php:756
+#: install.php:755
 #: upgrade.php:105
 #: upgrade.php:118
 #: upgrade.php:131
@@ -1570,115 +1566,116 @@ msgstr ""
 #: upgrade.php:197
 #: upgrade.php:210
 #: upgrade.php:224
+#: upgrade.php:258
 msgid "Could not write the configuration file."
 msgstr ""
 
-#: install.php:773
+#: install.php:772
 msgid "Database Setup"
 msgstr ""
 
-#: install.php:775
+#: install.php:774
 msgid "Adapter"
 msgstr ""
 
-#: install.php:786
+#: install.php:785
 msgid "Host"
 msgstr ""
 
-#: install.php:790
-#: install.php:849
+#: install.php:789
+#: install.php:848
 msgid "Username"
 msgstr ""
 
-#: install.php:794
-#: install.php:853
-#: install.php:857
+#: install.php:793
+#: install.php:852
+#: install.php:856
 msgid "Password"
 msgstr ""
 
-#: install.php:798
+#: install.php:797
 msgid "Database"
 msgstr ""
 
-#: install.php:800
+#: install.php:799
 msgid "(absolute or relative path)"
 msgstr ""
 
-#: install.php:806
+#: install.php:805
 msgid "Be sure to put your SQLite database outside the document root directory, otherwise visitors will be able to download it."
 msgstr ""
 
-#: install.php:809
+#: install.php:808
 msgid "Table Prefix"
 msgstr ""
 
-#: install.php:809
+#: install.php:808
 msgid "(optional)"
 msgstr ""
 
-#: install.php:813
+#: install.php:812
 msgid "Website Setup"
 msgstr ""
 
-#: install.php:815
+#: install.php:814
 msgid "Chyrp URL"
 msgstr ""
 
-#: install.php:819
+#: install.php:818
 msgid "Site Name"
 msgstr ""
 
-#: install.php:820
+#: install.php:819
 msgid "My Awesome Site"
 msgstr ""
 
-#: install.php:823
+#: install.php:822
 msgid "Description"
 msgstr ""
 
-#: install.php:827
+#: install.php:826
 msgid "Time Zone"
 msgstr ""
 
-#: install.php:837
+#: install.php:836
 msgid "Language"
 msgstr ""
 
-#: install.php:847
+#: install.php:846
 msgid "Admin Account"
 msgstr ""
 
-#: install.php:857
+#: install.php:856
 msgid "(again)"
 msgstr ""
 
-#: install.php:861
+#: install.php:860
 msgid "Email Address"
 msgstr ""
 
-#: install.php:864
+#: install.php:863
 msgid "Install me!"
 msgstr ""
 
-#: install.php:867
+#: install.php:866
 msgid "Installation Complete"
 msgstr ""
 
-#: install.php:868
-#: upgrade.php:511
+#: install.php:867
+#: upgrade.php:525
 msgid "What now?"
 msgstr ""
 
-#: install.php:870
+#: install.php:869
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr ""
 
-#: install.php:871
+#: install.php:870
 msgid "Log in to your site and configure things to your liking."
 msgstr ""
 
-#: install.php:873
-#: upgrade.php:517
+#: install.php:872
+#: upgrade.php:531
 msgid "Take me to my site!"
 msgstr ""
 
@@ -1690,43 +1687,43 @@ msgstr ""
 msgid "You might need to update your canonical URL's <em>.htaccess</em> file."
 msgstr ""
 
-#: upgrade.php:256
+#: upgrade.php:269
 msgid "Chyrp Lite Upgrader"
 msgstr ""
 
-#: upgrade.php:500
+#: upgrade.php:514
 msgid "Halt!"
 msgstr ""
 
-#: upgrade.php:501
+#: upgrade.php:515
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr ""
 
-#: upgrade.php:503
+#: upgrade.php:517
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr ""
 
-#: upgrade.php:504
+#: upgrade.php:518
 msgid "Tell your users that your site is offline for maintenance."
 msgstr ""
 
-#: upgrade.php:507
+#: upgrade.php:521
 msgid "Upgrade me!"
 msgstr ""
 
-#: upgrade.php:510
+#: upgrade.php:524
 msgid "Upgrade Complete"
 msgstr ""
 
-#: upgrade.php:513
+#: upgrade.php:527
 msgid "Take action to resolve any errors reported on this page."
 msgstr ""
 
-#: upgrade.php:514
+#: upgrade.php:528
 msgid "Run this upgrader again if you need to."
 msgstr ""
 
-#: upgrade.php:515
+#: upgrade.php:529
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr ""
 
