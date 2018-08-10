@@ -229,8 +229,8 @@
 
             if (!isset($_GET[$this->name])) {
                 $url = ($config->clean_urls and !empty(Route::current()->controller->clean)) ?
-                       rtrim($request, "/")."/".$this->name."/".$page."/" :
-                       $request.$mark.$this->name."=".$page ;
+                    rtrim($request, "/")."/".$this->name."/".$page."/" :
+                    $request.$mark.$this->name."=".$page ;
             } else {
                 $url = ($config->clean_urls and !empty(Route::current()->controller->clean)) ?
                     preg_replace("/(\/{$this->name}\/([0-9]+)|$)/", "/".$this->name."/".$page, $request, 1) :
@@ -258,8 +258,8 @@
 
             if (!isset($_GET[$this->name])) {
                 $url = ($config->clean_urls and !empty(Route::current()->controller->clean)) ?
-                       rtrim($request, "/")."/".$this->name."/".$page :
-                       $request.$mark.$this->name."=".$page ;
+                    rtrim($request, "/")."/".$this->name."/".$page :
+                    $request.$mark.$this->name."=".$page ;
             } else {
                 $url = ($config->clean_urls and !empty(Route::current()->controller->clean)) ?
                     preg_replace("/(\/{$this->name}\/([0-9]+)|$)/", "/".$this->name."/".$page, $request, 1) :
