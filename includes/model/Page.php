@@ -315,7 +315,7 @@
             $config = Config::current();
 
             if (!$config->clean_urls)
-                return $config->url."/?action=page&amp;url=".urlencode($this->url);
+                return fix($config->url."/?action=page&url=".urlencode($this->url), true);
 
             $url = array("", urlencode($this->url));
 
