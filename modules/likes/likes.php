@@ -224,7 +224,7 @@
             if (!Like::discover($post->id)) {
                 if ($visitor->group->can("like_post")) {
                     $html.= '<a class="likes like" href="'.
-                                url("/?action=like&amp;post_id=".$post->id, $main).
+                                url("/?action=like&post_id=".$post->id, $main).
                                 '" data-post_id="'.$post->id.'">';
 
                     if (!empty($settings["like_image"]))
@@ -250,7 +250,7 @@
             } else {
                 if ($visitor->group->can("unlike_post")) {
                     $html.= '<a class="likes liked" href="'.
-                                url("/?action=unlike&amp;post_id=".$post->id, $main).
+                                url("/?action=unlike&post_id=".$post->id, $main).
                                 '" data-post_id="'.$post->id.'">';
 
                     if (!empty($settings["like_image"]))
