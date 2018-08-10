@@ -281,23 +281,27 @@
         public function feeds() {
             $config = Config::current();
             $route = Route::current();
+            $main = MainController::current();
 
-            # Generate site and page feeds.
-            $mainfeedurl = oneof($config->feed_url, url("feed"));
-            $pagefeedurl = ($config->clean_urls) ?
-                $config->url.rtrim($route->request, "/")."/feed/" :
-                $config->url.$route->request.(substr_count($route->request, "?") ? "&amp;feed" : "?feed") ;
-
-            # Add the site feed.
-            $links = array(array("href" => $mainfeedurl,
+            # Generate the main feed that appears everywhere.
+            $links = array(array("href" => url("feed", $main),
                                  "type" => BlogFeed::type(),
                                  "title" => $config->name));
 
-            # Add the page feed if it's different from the site feed and there are posts in MainController's context.
-            if (($pagefeedurl != $mainfeedurl) and array_key_exists("posts", MainController::current()->context))
-                $links[] = array("href" => $pagefeedurl,
-                                 "type" => BlogFeed::type(),
-                                 "title" => $config->name);
+            # Generate a page feed if it seems appropriate.
+            if ($route->action != "index" and array_key_exists("posts", $main->context)) {
+                $page_url = ($main->context["posts"] instanceof Paginator) ?
+                    $main->context["posts"]->prev_page_url(1) :
+                    $config->url.$route->request ;
+
+                $feed_url = ($config->clean_urls) ?
+                    rtrim($page_url, "/")."/feed/" :
+                    $page_url.(substr_count($page_url, "?") ? "&amp;feed" : "?feed") ;
+
+                    $links[] = array("href" => $feed_url,
+                                     "type" => BlogFeed::type(),
+                                     "title" => oneof($this->title, $config->name));
+            }
 
             # Ask extensions to provide additional links.
             Trigger::current()->filter($links, "links");
