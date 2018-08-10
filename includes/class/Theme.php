@@ -296,7 +296,7 @@
 
                 $feed_url = ($config->clean_urls) ?
                     rtrim($page_url, "/")."/feed/" :
-                    $page_url.(substr_count($page_url, "?") ? "&amp;feed" : "?feed") ;
+                    $page_url.(substr_count($page_url, "?") ? "&feed" : "?feed") ;
 
                     $links[] = array("href" => $feed_url,
                                      "type" => BlogFeed::type(),
@@ -314,8 +314,8 @@
                     continue;
 
                 fallback($link["rel"], "alternate");
-                fallback($link["type"], false);
-                fallback($link["title"], false);
+                fallback($link["type"]);
+                fallback($link["title"]);
 
                 $tags[] = '<link rel="'.fix($link["rel"], true).'" href="'.fix($link["href"], true).'"'.
                             (!empty($link["type"]) ? ' type="'.fix($link["type"], true).'"' : "").
