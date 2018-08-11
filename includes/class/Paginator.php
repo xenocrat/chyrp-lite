@@ -143,6 +143,7 @@
                 $anchor = '#'.$anchor;
 
             fallback($text, __("Next &rarr;"));
+
             return '<a rel="next" class="'.fix($class, true).'" id="pagination_next_'.$this->name.
                    '" href="'.$this->next_page_url($page).fix($anchor, true).'">'.$text.'</a>';
         }
@@ -165,6 +166,7 @@
                 $anchor = '#'.$anchor;
 
             fallback($text, __("&larr; Previous"));
+
             return '<a rel="prev" class="'.fix($class, true).'" id="pagination_prev_'.$this->name.
                    '" href="'.$this->prev_page_url($page).fix($anchor, true).'">'.$text.'</a>';
         }
@@ -186,6 +188,7 @@
                 $anchor = '#'.$anchor;
 
             fallback($text, __("Final &rarr;"));
+
             return '<a rel="next" class="'.fix($class, true).'" id="pagination_final_'.$this->name.
                    '" href="'.$this->next_page_url($this->pages).fix($anchor, true).'">'.$text.'</a>';
         }
@@ -207,6 +210,7 @@
                 $anchor = '#'.$anchor;
 
             fallback($text, __("&larr; First"));
+
             return '<a rel="prev" class="'.fix($class, true).'" id="pagination_first_'.$this->name.
                    '" href="'.$this->prev_page_url(1).fix($anchor, true).'">'.$text.'</a>';
         }
@@ -227,6 +231,7 @@
 
             fallback($page, (($this->page < $this->pages) ? $this->page + 1 : $this->pages));
 
+            # Generate a URL with the page number appended or replaced.
             $url = !isset($_GET[$this->name]) ?
                 (($config->clean_urls and !empty(Route::current()->controller->clean)) ?
                     rtrim($request, "/")."/".$this->name."/".$page."/" :
@@ -254,6 +259,7 @@
 
             fallback($page, (($this->page > 1) ? $this->page - 1 : 1));
 
+            # Generate a URL with the page number appended or replaced.
             $url = !isset($_GET[$this->name]) ?
                 (($config->clean_urls and !empty(Route::current()->controller->clean)) ?
                     rtrim($request, "/")."/".$this->name."/".$page."/" :
