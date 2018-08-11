@@ -531,7 +531,7 @@
                           urlencode($this->feather),
                           urlencode(pluralize($this->feather)));
 
-            return $config->url."/".str_replace(array_keys(self::$url_attrs), $vals, $config->post_url);
+            return fix($config->url."/".str_replace(array_keys(self::$url_attrs), $vals, $config->post_url), true);
         }
 
         /**

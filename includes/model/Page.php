@@ -326,7 +326,7 @@
                 $page = $page->parent;
             }
 
-            return $config->url."/".implode("/", array_reverse($url));
+            return fix($config->url."/".implode("/", array_reverse($url)), true);
         }
 
         /**
