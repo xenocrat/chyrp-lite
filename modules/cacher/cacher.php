@@ -2,7 +2,7 @@
     class Cacher extends Modules {
         public function __init() {
             $this->exclude = Config::current()->module_cacher["cache_exclude"];
-            $this->url     = rawurldecode(self_url());
+            $this->url     = rawurldecode(unfix(self_url()));
             $this->cachers = array(new HTMLCacher($this->url),
                                    new FeedCacher($this->url));
 
@@ -107,7 +107,7 @@
         }
 
         public function exclude_urls($url = null) {
-            $this->exclude[] = rawurldecode(is_url($url) ? $url : self_url());
+            $this->exclude[] = rawurldecode(unfix(is_url($url) ? $url : self_url()));
         }
 
         public function settings_nav($navs) {
