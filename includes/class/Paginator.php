@@ -224,7 +224,7 @@
          */
         public function next_page_url($page = null) {
             $config = Config::current();
-            $request = self_url();
+            $request = unfix(self_url());
 
             # Determine how we should append the page to dirty URLs.
             $mark = (substr_count($request, "?")) ? "&" : "?" ;
@@ -252,7 +252,7 @@
          */
         public function prev_page_url($page = null) {
             $config = Config::current();
-            $request = self_url();
+            $request = unfix(self_url());
 
             # Determine how we should append the page to dirty URLs.
             $mark = (substr_count($request, "?")) ? "&" : "?" ;
