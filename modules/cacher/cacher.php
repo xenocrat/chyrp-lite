@@ -100,7 +100,7 @@
             if ($post->no_results)
                 return;
 
-            $url = rawurldecode($post->url());
+            $url = rawurldecode(unfix($post->url()));
 
             foreach ($this->cachers as $cacher)
                 $cacher->regenerate_url($url);
