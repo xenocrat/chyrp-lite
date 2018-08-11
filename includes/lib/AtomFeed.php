@@ -41,7 +41,7 @@
             $language = preg_replace("/[\-_].*$/", "", Config::current()->locale);
 
             echo '<?xml version="1.0" encoding="UTF-8"?>'."\n";
-            echo '<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="'.$language.'">'."\n";
+            echo '<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="'.fix($language, true).'">'."\n";
             echo '<title>'.fix($title).'</title>'."\n";
 
             if (!empty($subtitle))
@@ -49,7 +49,7 @@
 
             echo '<id>'.fix(oneof($id, self_url())).'</id>'."\n";
             echo '<updated>'.when("c", oneof($updated, time())).'</updated>'."\n";
-            echo '<link href="'.fix(self_url(), true).'" rel="self" type="application/atom+xml" />'."\n";
+            echo '<link href="'.self_url().'" rel="self" type="application/atom+xml" />'."\n";
             echo '<generator uri="http://chyrplite.net/" version="'.CHYRP_VERSION.'">'.CHYRP_IDENTITY.'</generator>'."\n";
         }
 

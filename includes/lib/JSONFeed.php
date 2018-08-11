@@ -46,7 +46,7 @@
                 "version"       => "https://jsonfeed.org/version/1",
                 "title"         => strip_tags($title),
                 "home_page_url" => url("/", MainController::current()),
-                "feed_url"      => self_url()
+                "feed_url"      => unfix(self_url());
             );
 
             if (!empty($subtitle))
