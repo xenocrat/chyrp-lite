@@ -43,7 +43,7 @@
             echo '<?xml version="1.0" encoding="UTF-8"?>'."\n";
             echo '<rss version="2.0">'."\n";
             echo '<channel>'."\n";
-            echo '<language>'.$language.'</language>'."\n";
+            echo '<language>'.fix($language).'</language>'."\n";
             echo '<title>'.strip_tags($title).'</title>'."\n";
 
             if (!empty($subtitle))
