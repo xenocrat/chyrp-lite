@@ -94,7 +94,7 @@
             $xml.= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'."\n";
 
             $xml.= '<url>'."\n".
-                   '<loc>'.$config->url.'/</loc>'."\n".
+                   '<loc>'.fix($config->url).'/</loc>'."\n".
                    '<lastmod>'.when("c", time()).'</lastmod>'."\n".
                    '<changefreq>'.$settings["blog_changefreq"].'</changefreq>'."\n".
                    '</url>'."\n";
