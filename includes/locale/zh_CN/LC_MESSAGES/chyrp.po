@@ -31,15 +31,15 @@ msgstr "删除"
 msgid "Next &rarr;"
 msgstr "下一篇 &rarr;"
 
-#: includes/class/Paginator.php:167
+#: includes/class/Paginator.php:168
 msgid "&larr; Previous"
 msgstr "&larr;  上一篇"
 
-#: includes/class/Paginator.php:188
+#: includes/class/Paginator.php:190
 msgid "Final &rarr;"
 msgstr "最后 &rarr;"
 
-#: includes/class/Paginator.php:209
+#: includes/class/Paginator.php:212
 msgid "&larr; First"
 msgstr "&larr; 开始"
 
@@ -142,8 +142,8 @@ msgstr "无效动作。"
 #: includes/controller/Ajax.php:52 includes/controller/Ajax.php:64
 #: includes/controller/Ajax.php:67 includes/controller/Ajax.php:87
 #: includes/controller/Ajax.php:90 includes/controller/Ajax.php:125
-#: includes/controller/Ajax.php:128 includes/controller/Main.php:306
-#: includes/controller/Main.php:367 includes/download.php:18
+#: includes/controller/Ajax.php:128 includes/controller/Main.php:305
+#: includes/controller/Main.php:361 includes/download.php:18
 #: includes/helpers.php:1638 includes/thumb.php:21
 msgid "Access Denied"
 msgstr "访问被拒绝"
@@ -233,8 +233,8 @@ msgstr "羽毛未找到。"
 #: includes/controller/Admin.php:1891 includes/controller/Admin.php:1930
 #: includes/controller/Ajax.php:41 includes/controller/Ajax.php:67
 #: includes/controller/Ajax.php:87 includes/controller/Ajax.php:125
-#: includes/controller/Main.php:449 includes/controller/Main.php:576
-#: includes/controller/Main.php:633 includes/controller/Main.php:688
+#: includes/controller/Main.php:443 includes/controller/Main.php:570
+#: includes/controller/Main.php:627 includes/controller/Main.php:682
 msgid "Invalid authentication token."
 msgstr "无效的认证令牌。"
 
@@ -371,17 +371,17 @@ msgid "Please enter a username for the account."
 msgstr "请输入账户的用户名。"
 
 #: includes/controller/Admin.php:614 includes/controller/Admin.php:713
-#: includes/controller/Main.php:457
+#: includes/controller/Main.php:451
 msgid "That username is already in use."
 msgstr "用户名已被使用。"
 
-#: includes/controller/Admin.php:617 includes/controller/Main.php:460
+#: includes/controller/Admin.php:617 includes/controller/Main.php:454
 #: install.php:512
 msgid "Passwords cannot be blank."
 msgstr "密码不能为空。"
 
 #: includes/controller/Admin.php:620 includes/controller/Admin.php:722
-#: includes/controller/Main.php:462 includes/controller/Main.php:637
+#: includes/controller/Main.php:456 includes/controller/Main.php:631
 #: install.php:457 install.php:514
 msgid "Passwords do not match."
 msgstr "密码不匹配。"
@@ -391,19 +391,19 @@ msgid "Please consider setting a stronger password for this user."
 msgstr "请考虑为这个用户设置一个更强的密码。"
 
 #: includes/controller/Admin.php:626 includes/controller/Admin.php:730
-#: includes/controller/Admin.php:1784 includes/controller/Main.php:467
-#: includes/controller/Main.php:642 install.php:517
+#: includes/controller/Admin.php:1784 includes/controller/Main.php:461
+#: includes/controller/Main.php:636 install.php:517
 msgid "Email address cannot be blank."
 msgstr "邮件地址不能为空。"
 
 #: includes/controller/Admin.php:629 includes/controller/Admin.php:733
-#: includes/controller/Admin.php:1787 includes/controller/Main.php:469
-#: includes/controller/Main.php:644 install.php:519
+#: includes/controller/Admin.php:1787 includes/controller/Main.php:463
+#: includes/controller/Main.php:638 install.php:519
 msgid "Invalid email address."
 msgstr "无效的邮件地址。"
 
 #: includes/controller/Admin.php:632 includes/controller/Admin.php:736
-#: includes/controller/Main.php:475 includes/controller/Main.php:647
+#: includes/controller/Main.php:469 includes/controller/Main.php:641
 msgid "Invalid website URL."
 msgstr "无效的网站URL。"
 
@@ -706,7 +706,7 @@ msgstr "然而这里什么也没有！"
 msgid "Page created."
 msgstr "页面已创建。"
 
-#: includes/controller/Admin.php:1974 includes/controller/Main.php:572
+#: includes/controller/Admin.php:1974 includes/controller/Main.php:566
 msgid "You are already logged in."
 msgstr "您已登陆。"
 
@@ -791,146 +791,146 @@ msgstr "主题"
 msgid "Preview"
 msgstr "预览"
 
-#: includes/controller/Main.php:206 includes/controller/Main.php:214
-#: includes/controller/Main.php:222
+#: includes/controller/Main.php:205 includes/controller/Main.php:213
+#: includes/controller/Main.php:221
 #, php-format
 msgid "Archive of %s"
 msgstr "%s的档案"
 
-#: includes/controller/Main.php:272
+#: includes/controller/Main.php:271
 msgid "Please enter a search term."
 msgstr "请输入搜索项。"
 
-#: includes/controller/Main.php:295
+#: includes/controller/Main.php:294
 #, php-format
 msgid "Search results for &#8220;%s&#8221;"
 msgstr "&#8220;%s&#8221; 的搜索结果"
 
-#: includes/controller/Main.php:306
+#: includes/controller/Main.php:305
 msgid "You do not have sufficient privileges to view drafts."
 msgstr "您没有足够的权限查看草稿。"
 
-#: includes/controller/Main.php:315
+#: includes/controller/Main.php:312
 msgid "Drafts"
 msgstr "草稿"
 
-#: includes/controller/Main.php:335
+#: includes/controller/Main.php:332
 msgid "This post is not published."
 msgstr "帖子没有被发布。"
 
-#: includes/controller/Main.php:338
+#: includes/controller/Main.php:335
 #, php-format
 msgid "This post is scheduled to be published %s."
 msgstr "这篇帖子计划被公开于 %s。"
 
-#: includes/controller/Main.php:367
+#: includes/controller/Main.php:361
 msgid "You are not allowed to view this page."
 msgstr "您不允许查看这个页面。"
 
-#: includes/controller/Main.php:431
+#: includes/controller/Main.php:425
 msgid "There aren't enough posts for random selection."
 msgstr "没有足够的帖子来随机选择。"
 
-#: includes/controller/Main.php:442
+#: includes/controller/Main.php:436
 msgid "This site does not allow registration."
 msgstr "站点不允许注册。"
 
-#: includes/controller/Main.php:445
+#: includes/controller/Main.php:439
 msgid "You cannot register an account because you are already logged in."
 msgstr "您不能注册账户，因为您已登陆。"
 
-#: includes/controller/Main.php:452 install.php:509
+#: includes/controller/Main.php:446 install.php:509
 msgid "Please enter a username for your account."
 msgstr "请输入账户的用户名。"
 
-#: includes/controller/Main.php:464 includes/controller/Main.php:639
+#: includes/controller/Main.php:458 includes/controller/Main.php:633
 msgid "Please consider setting a stronger password for your account."
 msgstr "请考虑为您的账户设置个更强大的密码。"
 
-#: includes/controller/Main.php:472
+#: includes/controller/Main.php:466
 msgid "Incorrect captcha response."
 msgstr "错误的验证码。"
 
-#: includes/controller/Main.php:502
+#: includes/controller/Main.php:496
 msgid "We have emailed you an activation link."
 msgstr "我们已经通过电子邮件发送您的激活链接。"
 
-#: includes/controller/Main.php:507 includes/controller/Main.php:535
+#: includes/controller/Main.php:501 includes/controller/Main.php:529
 msgid "Your account is now active."
 msgstr "您的账户现已激活。"
 
-#: includes/controller/Main.php:511
+#: includes/controller/Main.php:505
 msgid "Register"
 msgstr "注册"
 
-#: includes/controller/Main.php:520
+#: includes/controller/Main.php:514
 msgid "You cannot activate an account because you are already logged in."
 msgstr "您不能激活账户，因为您已登陆。"
 
-#: includes/controller/Main.php:526 includes/controller/Main.php:550
-#: includes/controller/Main.php:684
+#: includes/controller/Main.php:520 includes/controller/Main.php:544
+#: includes/controller/Main.php:678
 msgid "Please contact the blog administrator for help with your account."
 msgstr "请联系博客管理员以获取有关您帐户的帮助。"
 
-#: includes/controller/Main.php:529
+#: includes/controller/Main.php:523
 msgid "Your account has already been activated."
 msgstr "您的账户已经被激活过。"
 
-#: includes/controller/Main.php:544 includes/controller/Main.php:681
+#: includes/controller/Main.php:538 includes/controller/Main.php:675
 msgid "You cannot reset your password because you are already logged in."
 msgstr "您不能重设密码，因为您已登陆。"
 
-#: includes/controller/Main.php:561
+#: includes/controller/Main.php:555
 msgid "We have emailed you a new password."
 msgstr "我们已经通过电子邮件发送给您新密码。"
 
-#: includes/controller/Main.php:585 includes/lib/XMLRPC.php:422
+#: includes/controller/Main.php:579 includes/lib/XMLRPC.php:422
 msgid "Incorrect username and/or password."
 msgstr "不正确的用户名或者密码。"
 
-#: includes/controller/Main.php:591
+#: includes/controller/Main.php:585
 msgid "You must activate your account before you log in."
 msgstr "在登陆前必须激活您的账户。"
 
-#: includes/controller/Main.php:598
+#: includes/controller/Main.php:592
 msgid "Logged in."
 msgstr "已登陆。"
 
-#: includes/controller/Main.php:602 includes/error.php:358
+#: includes/controller/Main.php:596 includes/error.php:358
 msgid "Log in"
 msgstr "登陆"
 
-#: includes/controller/Main.php:611
+#: includes/controller/Main.php:605
 msgid "You aren't logged in."
 msgstr "您没有登陆。"
 
-#: includes/controller/Main.php:617
+#: includes/controller/Main.php:611
 msgid "Logged out."
 msgstr "退出登陆。"
 
-#: includes/controller/Main.php:629
+#: includes/controller/Main.php:623
 msgid "You must be logged in to access user controls."
 msgstr "您必须登陆才能访问用户操作。"
 
-#: includes/controller/Main.php:666
+#: includes/controller/Main.php:660
 msgid "Your profile has been updated."
 msgstr "您的配置文件已经更新。"
 
-#: includes/controller/Main.php:670
+#: includes/controller/Main.php:664
 msgid "Controls"
 msgstr "操作"
 
-#: includes/controller/Main.php:691
+#: includes/controller/Main.php:685
 msgid "Please enter your username."
 msgstr "请在下面输入您的用户名，我们会通过电子邮件向您发送新帐户的密码。"
 
-#: includes/controller/Main.php:706
+#: includes/controller/Main.php:700
 msgid ""
 "If that username is in our database, we will email you a password reset link."
 msgstr ""
 "如果您的用户名在我们的数据中，我们将会用电子邮件发送重置密码的链接给您。"
 
-#: includes/controller/Main.php:710
+#: includes/controller/Main.php:704
 msgid "Lost password"
 msgstr "忘记密码"
 
@@ -1144,17 +1144,17 @@ msgstr "该页面无法被删除，因为您的浏览器没有发送正确的凭
 msgid "Guest"
 msgstr "访问者"
 
-#: includes/lib/Leaf.php:265
+#: includes/lib/Leaf.php:267
 #, php-format
 msgid "%s GB"
 msgstr "%s GB"
 
-#: includes/lib/Leaf.php:270
+#: includes/lib/Leaf.php:272
 #, php-format
 msgid "%s MB"
 msgstr "%s MB"
 
-#: includes/lib/Leaf.php:274
+#: includes/lib/Leaf.php:276
 #, php-format
 msgid "%s KB"
 msgstr "%s KB"

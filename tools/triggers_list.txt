@@ -308,19 +308,19 @@ Called from:
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 366
+	includes/controller/Main.php on line 360
 
 
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 582
+	includes/controller/Main.php on line 576
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 593
+	includes/controller/Main.php on line 587
 
 Arguments:
 	$user
@@ -329,7 +329,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 771
+	includes/controller/Main.php on line 765
 
 Arguments:
 	$post, $feed
@@ -551,7 +551,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 619
+	modules/comments/comments.php on line 641
 
 Arguments:
 	$comment, $feed
@@ -1020,7 +1020,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 835
+	includes/controller/Main.php on line 829
 
 Target:
 	$this->context

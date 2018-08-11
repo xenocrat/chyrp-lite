@@ -31,15 +31,15 @@ msgstr "Löschen"
 msgid "Next &rarr;"
 msgstr "Nächste &rarr;"
 
-#: includes/class/Paginator.php:167
+#: includes/class/Paginator.php:168
 msgid "&larr; Previous"
 msgstr "&larr; Vorherige"
 
-#: includes/class/Paginator.php:188
+#: includes/class/Paginator.php:190
 msgid "Final &rarr;"
 msgstr "Letzte &rarr;"
 
-#: includes/class/Paginator.php:209
+#: includes/class/Paginator.php:212
 msgid "&larr; First"
 msgstr "&larr; Erste"
 
@@ -142,8 +142,8 @@ msgstr "Aktion nicht gültig."
 #: includes/controller/Ajax.php:52 includes/controller/Ajax.php:64
 #: includes/controller/Ajax.php:67 includes/controller/Ajax.php:87
 #: includes/controller/Ajax.php:90 includes/controller/Ajax.php:125
-#: includes/controller/Ajax.php:128 includes/controller/Main.php:306
-#: includes/controller/Main.php:367 includes/download.php:18
+#: includes/controller/Ajax.php:128 includes/controller/Main.php:305
+#: includes/controller/Main.php:361 includes/download.php:18
 #: includes/helpers.php:1638 includes/thumb.php:21
 msgid "Access Denied"
 msgstr "Zugriff verweigert"
@@ -235,8 +235,8 @@ msgstr "Feather nicht gefunden."
 #: includes/controller/Admin.php:1891 includes/controller/Admin.php:1930
 #: includes/controller/Ajax.php:41 includes/controller/Ajax.php:67
 #: includes/controller/Ajax.php:87 includes/controller/Ajax.php:125
-#: includes/controller/Main.php:449 includes/controller/Main.php:576
-#: includes/controller/Main.php:633 includes/controller/Main.php:688
+#: includes/controller/Main.php:443 includes/controller/Main.php:570
+#: includes/controller/Main.php:627 includes/controller/Main.php:682
 msgid "Invalid authentication token."
 msgstr "Authentifizierungstoken ungültig."
 
@@ -373,17 +373,17 @@ msgid "Please enter a username for the account."
 msgstr "Gib bitte einen Benutzernamen für den Account ein."
 
 #: includes/controller/Admin.php:614 includes/controller/Admin.php:713
-#: includes/controller/Main.php:457
+#: includes/controller/Main.php:451
 msgid "That username is already in use."
 msgstr "Dieser Benutzername ist schon belegt."
 
-#: includes/controller/Admin.php:617 includes/controller/Main.php:460
+#: includes/controller/Admin.php:617 includes/controller/Main.php:454
 #: install.php:512
 msgid "Passwords cannot be blank."
 msgstr "Passwörter kann nicht leer sein."
 
 #: includes/controller/Admin.php:620 includes/controller/Admin.php:722
-#: includes/controller/Main.php:462 includes/controller/Main.php:637
+#: includes/controller/Main.php:456 includes/controller/Main.php:631
 #: install.php:457 install.php:514
 msgid "Passwords do not match."
 msgstr "Passwörter stimmen nicht überein."
@@ -393,19 +393,19 @@ msgid "Please consider setting a stronger password for this user."
 msgstr "Wähle bitte ein stärkeres Passwort für diesen Benutzer."
 
 #: includes/controller/Admin.php:626 includes/controller/Admin.php:730
-#: includes/controller/Admin.php:1784 includes/controller/Main.php:467
-#: includes/controller/Main.php:642 install.php:517
+#: includes/controller/Admin.php:1784 includes/controller/Main.php:461
+#: includes/controller/Main.php:636 install.php:517
 msgid "Email address cannot be blank."
 msgstr "E-Mail Addresse kann nicht leer sein."
 
 #: includes/controller/Admin.php:629 includes/controller/Admin.php:733
-#: includes/controller/Admin.php:1787 includes/controller/Main.php:469
-#: includes/controller/Main.php:644 install.php:519
+#: includes/controller/Admin.php:1787 includes/controller/Main.php:463
+#: includes/controller/Main.php:638 install.php:519
 msgid "Invalid email address."
 msgstr "E-Mail Adresse ungültig."
 
 #: includes/controller/Admin.php:632 includes/controller/Admin.php:736
-#: includes/controller/Main.php:475 includes/controller/Main.php:647
+#: includes/controller/Main.php:469 includes/controller/Main.php:641
 msgid "Invalid website URL."
 msgstr "Ungültige Website URL."
 
@@ -713,7 +713,7 @@ msgstr "Hier ist noch nichts!"
 msgid "Page created."
 msgstr "Eite erstellt."
 
-#: includes/controller/Admin.php:1974 includes/controller/Main.php:572
+#: includes/controller/Admin.php:1974 includes/controller/Main.php:566
 msgid "You are already logged in."
 msgstr "Du bist bereits eingeloggt."
 
@@ -798,151 +798,151 @@ msgstr "Themes"
 msgid "Preview"
 msgstr "Vorschau"
 
-#: includes/controller/Main.php:206 includes/controller/Main.php:214
-#: includes/controller/Main.php:222
+#: includes/controller/Main.php:205 includes/controller/Main.php:213
+#: includes/controller/Main.php:221
 #, php-format
 msgid "Archive of %s"
 msgstr "Archiv von %s"
 
-#: includes/controller/Main.php:272
+#: includes/controller/Main.php:271
 msgid "Please enter a search term."
 msgstr "Itte gib einen Suchbegriff ein."
 
-#: includes/controller/Main.php:295
+#: includes/controller/Main.php:294
 #, php-format
 msgid "Search results for &#8220;%s&#8221;"
 msgstr "Suchergebnisse für &#8220;%s&#8221;"
 
-#: includes/controller/Main.php:306
+#: includes/controller/Main.php:305
 msgid "You do not have sufficient privileges to view drafts."
 msgstr "Du verfügst nicht über die Berechtigung Entwürfe anzusehen."
 
-#: includes/controller/Main.php:315
+#: includes/controller/Main.php:312
 msgid "Drafts"
 msgstr "Entwürfe"
 
-#: includes/controller/Main.php:335
+#: includes/controller/Main.php:332
 msgid "This post is not published."
 msgstr "Dieser Post ist nicht veröffentlicht."
 
-#: includes/controller/Main.php:338
+#: includes/controller/Main.php:335
 #, php-format
 msgid "This post is scheduled to be published %s."
 msgstr "Dieser Post ist vorgemerkt zur Veröffentlichung %s."
 
-#: includes/controller/Main.php:367
+#: includes/controller/Main.php:361
 msgid "You are not allowed to view this page."
 msgstr "Du darfst diese Seite nicht ansehen."
 
-#: includes/controller/Main.php:431
+#: includes/controller/Main.php:425
 msgid "There aren't enough posts for random selection."
 msgstr "Es gibt nicht genug Posts für eine zufällige Auswahl."
 
-#: includes/controller/Main.php:442
+#: includes/controller/Main.php:436
 msgid "This site does not allow registration."
 msgstr "Diese Seite erlaubt keine Registrierung."
 
-#: includes/controller/Main.php:445
+#: includes/controller/Main.php:439
 msgid "You cannot register an account because you are already logged in."
 msgstr ""
 "Du kannst keinen Account registrieren, weil Du zur Zeit eingeloggt bist."
 
-#: includes/controller/Main.php:452 install.php:509
+#: includes/controller/Main.php:446 install.php:509
 msgid "Please enter a username for your account."
 msgstr "Bitte gib einen Benutzernamen für Deinen Account ein."
 
-#: includes/controller/Main.php:464 includes/controller/Main.php:639
+#: includes/controller/Main.php:458 includes/controller/Main.php:633
 msgid "Please consider setting a stronger password for your account."
 msgstr "Bitte ziehe ein stärkeres Passwort in Betracht."
 
-#: includes/controller/Main.php:472
+#: includes/controller/Main.php:466
 msgid "Incorrect captcha response."
 msgstr "Falscher Captchacode."
 
-#: includes/controller/Main.php:502
+#: includes/controller/Main.php:496
 msgid "We have emailed you an activation link."
 msgstr "Wir haben Dir einen Aktivierungslink geschickt."
 
-#: includes/controller/Main.php:507 includes/controller/Main.php:535
+#: includes/controller/Main.php:501 includes/controller/Main.php:529
 msgid "Your account is now active."
 msgstr "Dein Account ist nun aktiviert."
 
-#: includes/controller/Main.php:511
+#: includes/controller/Main.php:505
 msgid "Register"
 msgstr "Registrieren"
 
-#: includes/controller/Main.php:520
+#: includes/controller/Main.php:514
 msgid "You cannot activate an account because you are already logged in."
 msgstr "Du kannst keinen Account aktivieren, weil Du bereits eingeloggt bist."
 
-#: includes/controller/Main.php:526 includes/controller/Main.php:550
-#: includes/controller/Main.php:684
+#: includes/controller/Main.php:520 includes/controller/Main.php:544
+#: includes/controller/Main.php:678
 msgid "Please contact the blog administrator for help with your account."
 msgstr ""
 "Bitte kontaktiere den Blogadministrator, wenn Du Hilfe mit deinem Account "
 "benötigst."
 
-#: includes/controller/Main.php:529
+#: includes/controller/Main.php:523
 msgid "Your account has already been activated."
 msgstr "Dein Account wurde bereits aktiviert."
 
-#: includes/controller/Main.php:544 includes/controller/Main.php:681
+#: includes/controller/Main.php:538 includes/controller/Main.php:675
 msgid "You cannot reset your password because you are already logged in."
 msgstr ""
 "Du kannst dein Passwort nicht zurücksetzen, weil Du bereits eingeloggt bist."
 
-#: includes/controller/Main.php:561
+#: includes/controller/Main.php:555
 msgid "We have emailed you a new password."
 msgstr "Wir haben Dir ein neues Passwort geschickt."
 
-#: includes/controller/Main.php:585 includes/lib/XMLRPC.php:422
+#: includes/controller/Main.php:579 includes/lib/XMLRPC.php:422
 msgid "Incorrect username and/or password."
 msgstr "Benutzername und/oder Passwort nicht korrekt."
 
-#: includes/controller/Main.php:591
+#: includes/controller/Main.php:585
 msgid "You must activate your account before you log in."
 msgstr "Du musst Deinen Account aktivieren bevor Du Dich einloggen kannst."
 
-#: includes/controller/Main.php:598
+#: includes/controller/Main.php:592
 msgid "Logged in."
 msgstr "Eingeloggt."
 
-#: includes/controller/Main.php:602 includes/error.php:358
+#: includes/controller/Main.php:596 includes/error.php:358
 msgid "Log in"
 msgstr "Einloggen"
 
-#: includes/controller/Main.php:611
+#: includes/controller/Main.php:605
 msgid "You aren't logged in."
 msgstr "Du bist nicht eingeloggt."
 
-#: includes/controller/Main.php:617
+#: includes/controller/Main.php:611
 msgid "Logged out."
 msgstr "Ausgeloggt."
 
-#: includes/controller/Main.php:629
+#: includes/controller/Main.php:623
 msgid "You must be logged in to access user controls."
 msgstr "Du musst eingeloggt sein, um auf die Controls zugreifen zu können."
 
-#: includes/controller/Main.php:666
+#: includes/controller/Main.php:660
 msgid "Your profile has been updated."
 msgstr "Dein Profil wurde aktualisiert."
 
-#: includes/controller/Main.php:670
+#: includes/controller/Main.php:664
 msgid "Controls"
 msgstr "Controls"
 
-#: includes/controller/Main.php:691
+#: includes/controller/Main.php:685
 msgid "Please enter your username."
 msgstr "Gib bitte deinen Benutzernamen ein."
 
-#: includes/controller/Main.php:706
+#: includes/controller/Main.php:700
 msgid ""
 "If that username is in our database, we will email you a password reset link."
 msgstr ""
 "Wenn dieser Benutzernamen in unserer Datenbank ist, werden wir Dir einen "
 "Link zum Zurücksetzen deines Passworts zuschicken."
 
-#: includes/controller/Main.php:710
+#: includes/controller/Main.php:704
 msgid "Lost password"
 msgstr "Passwort vergessen"
 
@@ -1169,17 +1169,17 @@ msgstr ""
 msgid "Guest"
 msgstr "Gast"
 
-#: includes/lib/Leaf.php:265
+#: includes/lib/Leaf.php:267
 #, php-format
 msgid "%s GB"
 msgstr "%s GB"
 
-#: includes/lib/Leaf.php:270
+#: includes/lib/Leaf.php:272
 #, php-format
 msgid "%s MB"
 msgstr "%s MB"
 
-#: includes/lib/Leaf.php:274
+#: includes/lib/Leaf.php:276
 #, php-format
 msgid "%s KB"
 msgstr "%s KB"

@@ -336,45 +336,45 @@ msgstr "自 %s 添加了评论"
 msgid "An ID is required to show a comment."
 msgstr "显示评论必须要一个ID。"
 
-#: modules/comments/comments.php:594
+#: modules/comments/comments.php:597 modules/comments/comments.php:616
 #, php-format
 msgid "Comments on &#8220;%s&#8221;"
 msgstr "对 #8220;%s&#8221; 的评论"
 
-#: modules/comments/comments.php:610
+#: modules/comments/comments.php:632
 #, php-format
 msgid "Comment #%d"
 msgstr "评论 #%d"
 
-#: modules/comments/comments.php:644
+#: modules/comments/comments.php:666
 msgid "A ping from your URL is already registered."
 msgstr "您的URL中的ping已被注册。"
 
-#: modules/comments/comments.php:647
+#: modules/comments/comments.php:669
 msgid "Your URL is too long to be stored in our database."
 msgstr "您的网址太长，无法存储在我们的数据库中。"
 
-#: modules/comments/comments.php:658
+#: modules/comments/comments.php:680
 msgid "Pingback registered!"
 msgstr "Pingback已注册！"
 
-#: modules/comments/comments.php:667
+#: modules/comments/comments.php:689
 msgid "Open"
 msgstr "打开"
 
-#: modules/comments/comments.php:670
+#: modules/comments/comments.php:692
 msgid "Closed"
 msgstr "已关闭"
 
-#: modules/comments/comments.php:673
+#: modules/comments/comments.php:695
 msgid "Private"
 msgstr "私人"
 
-#: modules/comments/comments.php:676
+#: modules/comments/comments.php:698
 msgid "Registered Only"
 msgstr "仅注册"
 
-#: modules/comments/comments.php:681
+#: modules/comments/comments.php:703
 msgid "Comment Status"
 msgstr "评论状态"
 

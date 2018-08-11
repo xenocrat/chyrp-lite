@@ -339,45 +339,46 @@ msgstr ""
 msgid "An ID is required to show a comment."
 msgstr ""
 
-#: modules/comments/comments.php:594
+#: modules/comments/comments.php:597
+#: modules/comments/comments.php:616
 #, php-format
 msgid "Comments on &#8220;%s&#8221;"
 msgstr ""
 
-#: modules/comments/comments.php:610
+#: modules/comments/comments.php:632
 #, php-format
 msgid "Comment #%d"
 msgstr ""
 
-#: modules/comments/comments.php:644
+#: modules/comments/comments.php:666
 msgid "A ping from your URL is already registered."
 msgstr ""
 
-#: modules/comments/comments.php:647
+#: modules/comments/comments.php:669
 msgid "Your URL is too long to be stored in our database."
 msgstr ""
 
-#: modules/comments/comments.php:658
+#: modules/comments/comments.php:680
 msgid "Pingback registered!"
 msgstr ""
 
-#: modules/comments/comments.php:667
+#: modules/comments/comments.php:689
 msgid "Open"
 msgstr ""
 
-#: modules/comments/comments.php:670
+#: modules/comments/comments.php:692
 msgid "Closed"
 msgstr ""
 
-#: modules/comments/comments.php:673
+#: modules/comments/comments.php:695
 msgid "Private"
 msgstr ""
 
-#: modules/comments/comments.php:676
+#: modules/comments/comments.php:698
 msgid "Registered Only"
 msgstr ""
 
-#: modules/comments/comments.php:681
+#: modules/comments/comments.php:703
 msgid "Comment Status"
 msgstr ""
 
