@@ -151,8 +151,8 @@
                                 "title"       => $post->$title,
                                 "dateCreated" => new IXR_Date(when("Ymd\TH:i:se", $post->created_at)),
                                 "description" => $post->$description,
-                                "link"        => $post->url(),
-                                "permaLink"   => url("id/post/".$post->id, MainController::current()),
+                                "link"        => unfix($post->url()),
+                                "permaLink"   => unfix(url("id/post/".$post->id, MainController::current())),
                                 "mt_basename" => $post->clean);
 
                 $array[] = $trigger->filter($struct, "metaWeblog_getPost", $post);
@@ -228,8 +228,8 @@
                             "title"       => $post->$title,
                             "dateCreated" => new IXR_Date(when("Ymd\TH:i:se", $post->created_at)),
                             "description" => $post->$description,
-                            "link"        => $post->url(),
-                            "permaLink"   => url("id/post/".$post->id, MainController::current()),
+                            "link"        => unfix($post->url()),
+                            "permaLink"   => unfix(url("id/post/".$post->id, MainController::current())),
                             "mt_basename" => $post->clean);
 
             Trigger::current()->filter($struct, "metaWeblog_getPost", $post);
@@ -394,7 +394,7 @@
         public function metaWeblog_getUsersBlogs($args) {
             $this->auth(fallback($args[1]), fallback($args[2]));
 
-            return array(array("url"      => url("/", MainController::current()),
+            return array(array("url"      => unfix(url("/", MainController::current())),
                                "blogName" => Config::current()->name,
                                "blogid"   => "1"));
         }
