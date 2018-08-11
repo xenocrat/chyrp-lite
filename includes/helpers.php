@@ -1334,7 +1334,7 @@
         }
 
         foreach ($urls as &$url)
-            $url = trim($url, " \"'");
+            $url = unfix(trim($url, " \"'"));
 
         return array_filter(array_unique($urls), "is_url");
     }
