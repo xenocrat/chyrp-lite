@@ -1164,7 +1164,7 @@
                     $updated = ($post->updated) ? $post->updated_at : $post->created_at ;
                     $title = oneof($post->title(), ucfirst($post->feather));
 
-                    $posts_atom.= '<entry xml:base="'.fix($post->url(), true).'">'."\n";
+                    $posts_atom.= '<entry xml:base="'.$post->url().'">'."\n";
                     $posts_atom.= '<title type="html">'.fix($title, false, true).'</title>'."\n";
                     $posts_atom.= '<id>'.fix(url("id/post/".$post->id, MainController::current())).'</id>'."\n";
                     $posts_atom.= '<updated>'.when("c", $updated).'</updated>'."\n";
@@ -1215,7 +1215,7 @@
                 foreach ($pages as $page) {
                     $updated = ($page->updated) ? $page->updated_at : $page->created_at ;
 
-                    $pages_atom.= '<entry xml:base="'.fix($page->url(), true).'" chyrp:parent_id="'.$page->parent_id.'">'."\n";
+                    $pages_atom.= '<entry xml:base="'.$page->url().'" chyrp:parent_id="'.$page->parent_id.'">'."\n";
                     $pages_atom.= '<title type="html">'.fix($page->title, false, true).'</title>'."\n";
                     $pages_atom.= '<id>'.fix(url("id/page/".$page->id, MainController::current())).'</id>'."\n";
                     $pages_atom.= '<updated>'.when("c", $updated).'</updated>'."\n";
