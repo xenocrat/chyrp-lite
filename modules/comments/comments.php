@@ -582,6 +582,28 @@
             json_response(__("Comment deleted.", "comments"), true);
         }
 
+        public function links($links) {
+            $config = Config::current();
+            $route = Route::current();
+            $main = MainController::current();
+
+            if ($route->action == "view" and !empty($main->context["post"])) {
+                $post = $main->context["post"];
+
+                if ($post->no_results)
+                    continue;
+
+                $feed_url = ($config->clean_urls) ? rtrim($post->url(), "/")."/feed/" : $post->url()."&feed" ;
+                $title = _f("Comments on &#8220;%s&#8221;", oneof($post->title(), ucfirst($post->feather)), "comments");
+
+                $links[] = array("href" => $feed_url,
+                                 "type" => BlogFeed::type(),
+                                 "title" => $title);
+            }
+
+            return $links;
+        }
+
         public function view_feed($context) {
             $trigger = Trigger::current();
 
