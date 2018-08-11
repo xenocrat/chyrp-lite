@@ -1359,7 +1359,7 @@
 
                 $client->timeout = 3;
                 $client->useragent = CHYRP_IDENTITY;
-                $client->query("pingback.ping", $post->url(), $url);
+                $client->query("pingback.ping", unfix($post->url()), $url);
             }
         }
     }
