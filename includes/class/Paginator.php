@@ -143,8 +143,8 @@
                 $anchor = '#'.$anchor;
 
             fallback($text, __("Next &rarr;"));
-            return '<a rel="next" class="'.$class.'" id="pagination_next_'.$this->name.
-                '" href="'.$this->next_page_url($page).$anchor.'">'.$text.'</a>';
+            return '<a rel="next" class="'.fix($class, true).'" id="pagination_next_'.$this->name.
+                   '" href="'.$this->next_page_url($page).fix($anchor, true).'">'.$text.'</a>';
         }
 
         /**
@@ -165,8 +165,8 @@
                 $anchor = '#'.$anchor;
 
             fallback($text, __("&larr; Previous"));
-            return '<a rel="prev" class="'.$class.'" id="pagination_prev_'.$this->name.
-                '" href="'.$this->prev_page_url($page).$anchor.'">'.$text.'</a>';
+            return '<a rel="prev" class="'.fix($class, true).'" id="pagination_prev_'.$this->name.
+                   '" href="'.$this->prev_page_url($page).fix($anchor, true).'">'.$text.'</a>';
         }
 
         /**
@@ -186,8 +186,8 @@
                 $anchor = '#'.$anchor;
 
             fallback($text, __("Final &rarr;"));
-            return '<a rel="next" class="'.$class.'" id="pagination_final_'.$this->name.
-                '" href="'.$this->next_page_url($this->pages).$anchor.'">'.$text.'</a>';
+            return '<a rel="next" class="'.fix($class, true).'" id="pagination_final_'.$this->name.
+                   '" href="'.$this->next_page_url($this->pages).fix($anchor, true).'">'.$text.'</a>';
         }
 
         /**
@@ -207,8 +207,8 @@
                 $anchor = '#'.$anchor;
 
             fallback($text, __("&larr; First"));
-            return '<a rel="prev" class="'.$class.'" id="pagination_first_'.$this->name.
-                '" href="'.$this->prev_page_url(1).$anchor.'">'.$text.'</a>';
+            return '<a rel="prev" class="'.fix($class, true).'" id="pagination_first_'.$this->name.
+                   '" href="'.$this->prev_page_url(1).fix($anchor, true).'">'.$text.'</a>';
         }
 
         /**
@@ -225,17 +225,15 @@
             # Determine how we should append the page to dirty URLs.
             $mark = (substr_count($request, "?")) ? "&" : "?" ;
 
-            fallback($page, $this->page + 1);
+            fallback($page, (($this->page < $this->pages) ? $this->page + 1 : $this->pages));
 
-            if (!isset($_GET[$this->name])) {
-                $url = ($config->clean_urls and !empty(Route::current()->controller->clean)) ?
+            $url = !isset($_GET[$this->name]) ?
+                (($config->clean_urls and !empty(Route::current()->controller->clean)) ?
                     rtrim($request, "/")."/".$this->name."/".$page."/" :
-                    $request.$mark.$this->name."=".$page ;
-            } else {
-                $url = ($config->clean_urls and !empty(Route::current()->controller->clean)) ?
+                    $request.$mark.$this->name."=".$page) : 
+                (($config->clean_urls and !empty(Route::current()->controller->clean)) ?
                     preg_replace("/(\/{$this->name}\/([0-9]+)|$)/", "/".$this->name."/".$page, $request, 1) :
-                    preg_replace("/((\?|&){$this->name}=([0-9]+)|$)/", "\\2".$this->name."=".$page, $request, 1) ;
-            }
+                    preg_replace("/((\?|&){$this->name}=([0-9]+)|$)/", "\\2".$this->name."=".$page, $request, 1)) ;
 
             return fix($url, true);
         }
@@ -254,17 +252,15 @@
             # Determine how we should append the page to dirty URLs.
             $mark = (substr_count($request, "?")) ? "&" : "?" ;
 
-            fallback($page, $this->page - 1);
+            fallback($page, (($this->page > 1) ? $this->page - 1 : 1));
 
-            if (!isset($_GET[$this->name])) {
-                $url = ($config->clean_urls and !empty(Route::current()->controller->clean)) ?
-                    rtrim($request, "/")."/".$this->name."/".$page :
-                    $request.$mark.$this->name."=".$page ;
-            } else {
-                $url = ($config->clean_urls and !empty(Route::current()->controller->clean)) ?
+            $url = !isset($_GET[$this->name]) ?
+                (($config->clean_urls and !empty(Route::current()->controller->clean)) ?
+                    rtrim($request, "/")."/".$this->name."/".$page."/" :
+                    $request.$mark.$this->name."=".$page) :
+                (($config->clean_urls and !empty(Route::current()->controller->clean)) ?
                     preg_replace("/(\/{$this->name}\/([0-9]+)|$)/", "/".$this->name."/".$page, $request, 1) :
-                    preg_replace("/((\?|&){$this->name}=([0-9]+)|$)/", "\\2".$this->name."=".$page, $request, 1) ;
-            }
+                    preg_replace("/((\?|&){$this->name}=([0-9]+)|$)/", "\\2".$this->name."=".$page, $request, 1)) ;
 
             return fix($url, true);
         }
