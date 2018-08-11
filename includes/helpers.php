@@ -153,7 +153,7 @@
         if (isset($parsed["port"]))
             $origin.= ":".$parsed["port"];
 
-        return $origin.$_SERVER['REQUEST_URI'];
+        return fix($origin.$_SERVER['REQUEST_URI'], true);
     }
 
     /**
@@ -1696,8 +1696,8 @@
         $config = Config::current();
 
         return ($url) ?
-                fix($config->chyrp_url.str_replace(DIR, "/", $config->uploads_path).urlencode($file), true) :
-                MAIN_DIR.$config->uploads_path.$file ;
+            fix($config->chyrp_url.str_replace(DIR, "/", $config->uploads_path).urlencode($file), true) :
+            MAIN_DIR.$config->uploads_path.$file ;
     }
 
     /**
