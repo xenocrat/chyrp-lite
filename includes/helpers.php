@@ -82,7 +82,7 @@
         if (file_exists(INCLUDES_DIR.DIR."config.json.php") and class_exists("Route") and !substr_count($url, "://"))
             $url = url($url);
 
-        header("Location: ".html_entity_decode($url));
+        header("Location: ".html_entity_decode($url, ENT_QUOTES | ENT_HTML5, "UTF-8"));
         exit;
     }
 
