@@ -593,7 +593,7 @@
                 if ($post->no_results)
                     continue;
 
-                $feed_url = ($config->clean_urls) ? rtrim($post->url(), "/")."/feed/" : $post->url()."&feed" ;
+                $feed_url = ($config->clean_urls) ? rtrim($post->url(), "/")."/feed/" : $post->url()."&amp;feed" ;
                 $title = _f("Comments on &#8220;%s&#8221;", oneof($post->title(), ucfirst($post->feather)), "comments");
 
                 $links[] = array("href" => $feed_url,
