@@ -164,8 +164,7 @@
          */
         public function index() {
             $this->display("pages".DIR."index",
-                           array("posts" => new Paginator(Post::find(array("placeholders" => true)),
-                                                          $this->post_limit)));
+                           array("posts" => new Paginator(Post::find(array("placeholders" => true)), $this->post_limit)));
         }
 
         /**
@@ -310,9 +309,7 @@
                                                                      "user_id" => $visitor->id))),
                                    $this->post_limit);
 
-            $this->display(array("pages".DIR."drafts", "pages".DIR."index"),
-                           array("posts" => $posts),
-                           __("Drafts"));
+            $this->display(array("pages".DIR."drafts", "pages".DIR."index"), array("posts" => $posts), __("Drafts"));
         }
 
         /**
@@ -337,10 +334,7 @@
             if ($post->status == "scheduled")
                 Flash::message(_f("This post is scheduled to be published %s.", when("%c", $post->created_at, true)));
 
-            $this->display(array("pages".DIR."view", "pages".DIR."index"),
-                           array("post" => $post,
-                                 "posts" => array($post)),
-                           $post->title());
+            $this->display(array("pages".DIR."view", "pages".DIR."index"), array("post" => $post), $post->title());
         }
 
         /**
