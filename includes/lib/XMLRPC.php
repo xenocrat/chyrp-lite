@@ -37,12 +37,9 @@
         */
         public function pingback_ping($args) {
             $trigger    = Trigger::current();
-            $source     = add_scheme(str_replace("&amp;", "&", fallback($args[0], "")));
-            $target     = add_scheme(str_replace("&amp;", "&", fallback($args[1], "")));
-            $chyrp_host = str_replace(array("http://www.",
-                                            "http://",
-                                            "https://www.",
-                                            "https://"), "", Config::current()->url);
+            $source     = add_scheme(unfix(fallback($args[0], "")));
+            $target     = add_scheme(unfix(fallback($args[1], "")));
+            $url_host   = parse_url(Config::current()->url, PHP_URL_HOST);
 
             # No need to continue without a responder for the pingback trigger.
             if (!$trigger->exists("pingback"))
@@ -51,7 +48,7 @@
             if ($target == $source)
                 return new IXR_Error(0, __("The from and to URLs cannot be the same."));
 
-            if (!is_url($target) or !substr_count($target, $chyrp_host))
+            if (!is_url($target) or !substr_count($target, $url_host))
                 return new IXR_Error(32, __("The URL for our page is not valid."));
 
             if (!is_url($source))
@@ -65,13 +62,13 @@
             if ($post->no_results)
                 return new IXR_Error(33, __("We have not published at that URL."));
 
-            # Grab the page that linked here.
+            # Retrieve the page that linked here.
             $content = get_remote($source);
 
             if (empty($content))
                 return new IXR_Error(16, __("You have not published at that URL."));
 
-            # Get the title and body of the page.
+            # Get the title, body, and charset of the page.
             preg_match("/<title[^>]*>([^<]+)<\/title>/i", $content, $title);
             preg_match("/<body[^>]*>(.+)<\/body>/is", $content, $body);
             preg_match("/<meta charset=[\"\']?([^ \"\'\/>]+)/i", $content, $charset);
@@ -81,7 +78,7 @@
 
             $title = trim(fix($title[1]));
             $body = strip_tags($body[1], "<a>");
-            $charset = oneof($charset[1], "UTF-8");
+            $charset = fallback($charset[1], "UTF-8");
             $url = preg_quote($target, "/");
 
             # Convert the source encoding to UTF-8 if possible to ensure we render it correctly.
