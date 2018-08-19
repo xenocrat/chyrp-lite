@@ -1427,7 +1427,7 @@
                 if (preg_match("/<link[^>]* href=(\"[^\"]+\"|\'[^\']+\')[^>]*>/i", $line, $link))
                     if (preg_match("/ rel=(\"pingback\"|\'pingback\')/i", $link[0])) {
                         fclose($connect);
-                        return trim($link[1], "\"'");
+                        return unfix(trim($link[1], "\"'"));
                     }
             }
         }
