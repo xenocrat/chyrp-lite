@@ -1334,7 +1334,7 @@
         }
 
         foreach ($urls as &$url)
-            $url = html_entity_decode(trim($url, " \"'"), ENT_QUOTES | ENT_HTML5, "UTF-8");
+            $url = unfix(trim($url, " \"'"));
 
         return array_filter(array_unique($urls), "is_url");
     }
