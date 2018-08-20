@@ -284,7 +284,7 @@
                 }
             }
 
-            if (!count($read) or !$read)
+            if (!$read or !count($read))
                 return $model->no_results = true;
             else
                 $model->no_results = false;

@@ -316,8 +316,8 @@
          * Function: view
          * Handles post viewing via dirty URL or clean URL e.g. /year/month/day/url/.
          */
-        public function view($attrs = null, $arg = array()) {
-            $post = (isset($attrs)) ?
+        public function view($attrs = array(), $arg = array()) {
+            $post = (!empty($attrs)) ?
                 Post::from_url($attrs, null, array("drafts" => true)) :
                 new Post(array("url" => fallback($_GET['url'])), array("drafts" => true)) ;
 
