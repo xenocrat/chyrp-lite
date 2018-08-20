@@ -76,10 +76,10 @@
             if (empty($title[1]) or empty($body[1]))
                 return new IXR_Error(0, __("Your page could not be parsed."));
 
-            $title = trim(fix($title[1]));
-            $body = strip_tags($body[1], "<a>");
+            $title   = trim(fix($title[1]));
+            $body    = strip_tags($body[1], "<a>");
             $charset = fallback($charset[1], "UTF-8");
-            $url = preg_quote($target, "/");
+            $url     = preg_quote($args[1], "/");
 
             # Convert the source encoding to UTF-8 if possible to ensure we render it correctly.
             if (function_exists("mb_convert_encoding")) {
@@ -87,12 +87,12 @@
                 $body = mb_convert_encoding($body, "UTF-8", $charset);
             }
 
-            # Search the page for our link.
+            # Search the page for our link. Try fixed and unfixed variants if it fails.
             if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]+)<\/a>/i", $body, $context)) {
-                $url = preg_quote(str_replace("&", "&amp;", $target), "/");
+                $url = preg_quote(fix($args[1], true), "/");
 
                 if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]+)<\/a>/i", $body, $context)) {
-                    $url = preg_quote(str_replace("&", "&#038;", $target), "/");
+                    $url = preg_quote(unfix($args[1]), "/");
 
                     if (!preg_match("/<a[^>]*{$url}[^>]*>([^>]+)<\/a>/i", $body, $context))
                         return new IXR_Error(17, __("Your page does not link to our page."));
