@@ -1334,7 +1334,7 @@
         }
 
         foreach ($urls as &$url)
-            $url = unfix(trim($url, " \"'"));
+            $url = trim($url, " \"'");
 
         return array_filter(array_unique($urls), "is_url");
     }
@@ -1349,7 +1349,7 @@
      */
     function send_pingbacks($string, $post) {
         foreach (grab_urls($string) as $url) {
-            $ping_url = pingback_url($url);
+            $ping_url = pingback_url(unfix($url));
 
             if ($ping_url !== false and is_url($ping_url)) {
                 $client = new IXR_Client(add_scheme($ping_url));
