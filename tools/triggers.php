@@ -323,7 +323,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title><?php echo "Gettext"; ?></title>
+        <title><?php echo "Triggers"; ?></title>
         <meta name="viewport" content="width = 520, user-scalable = no">
         <style type="text/css">
             @font-face {
