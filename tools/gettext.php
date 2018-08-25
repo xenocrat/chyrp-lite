@@ -7,8 +7,8 @@
     header("Content-Type: text/html; charset=UTF-8");
 
     define('DEBUG',          true);
-    define('CHYRP_VERSION',  "2018.03");
-    define('CHYRP_CODENAME', "Sind");
+    define('CHYRP_VERSION',  "2018.04");
+    define('CHYRP_CODENAME', "Zarudny");
     define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
     define('JAVASCRIPT',     false);
     define('MAIN',           false);
