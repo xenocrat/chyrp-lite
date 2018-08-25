@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.1.1\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Content-Type: text/plain; charset=UTF-8
@@ -195,7 +195,7 @@ msgstr "您没有足够的权限查看此区域。"
 
 #: includes/controller/Admin.php:169 includes/controller/Admin.php:201
 #: includes/controller/Admin.php:1417 includes/controller/Ajax.php:90
-#: includes/lib/XMLRPC.php:184 includes/lib/XMLRPC.php:248
+#: includes/lib/XMLRPC.php:181 includes/lib/XMLRPC.php:245
 msgid "You do not have sufficient privileges to add posts."
 msgstr "您没有足够的权限增加帖子。"
 
@@ -260,13 +260,13 @@ msgstr "编辑帖子需要ID。"
 
 #: includes/controller/Admin.php:228 includes/controller/Admin.php:264
 #: includes/controller/Admin.php:285 includes/controller/Admin.php:310
-#: includes/controller/Ajax.php:49 includes/lib/XMLRPC.php:218
-#: includes/lib/XMLRPC.php:331 includes/lib/XMLRPC.php:381
+#: includes/controller/Ajax.php:49 includes/lib/XMLRPC.php:215
+#: includes/lib/XMLRPC.php:328 includes/lib/XMLRPC.php:378
 msgid "Post not found."
 msgstr "帖子未找到。"
 
 #: includes/controller/Admin.php:231 includes/controller/Admin.php:267
-#: includes/lib/XMLRPC.php:221 includes/lib/XMLRPC.php:334
+#: includes/lib/XMLRPC.php:218 includes/lib/XMLRPC.php:331
 msgid "You do not have sufficient privileges to edit this post."
 msgstr "您没有足够的权限编辑这个帖子。"
 
@@ -288,7 +288,7 @@ msgid "An ID is required to delete a post."
 msgstr "删除帖子需要ID。"
 
 #: includes/controller/Admin.php:288 includes/controller/Admin.php:313
-#: includes/controller/Ajax.php:52 includes/lib/XMLRPC.php:384
+#: includes/controller/Ajax.php:52 includes/lib/XMLRPC.php:381
 msgid "You do not have sufficient privileges to delete this post."
 msgstr "您没有足够的权限删除这个帖子。"
 
@@ -884,7 +884,7 @@ msgstr "您不能重设密码，因为您已登陆。"
 msgid "We have emailed you a new password."
 msgstr "我们已经通过电子邮件发送给您新密码。"
 
-#: includes/controller/Main.php:579 includes/lib/XMLRPC.php:422
+#: includes/controller/Main.php:579 includes/lib/XMLRPC.php:419
 msgid "Incorrect username and/or password."
 msgstr "不正确的用户名或者密码。"
 
@@ -1014,17 +1014,17 @@ msgid "Only uploaded files are accepted."
 msgstr "只有上传的文件被接受。"
 
 #: includes/helpers.php:1641 includes/helpers.php:1673
-#: includes/lib/XMLRPC.php:195
+#: includes/lib/XMLRPC.php:192
 msgid "Upload path does not exist."
 msgstr "上传路径不存在。"
 
 #: includes/helpers.php:1644 includes/helpers.php:1676
-#: includes/lib/XMLRPC.php:198
+#: includes/lib/XMLRPC.php:195
 msgid "Upload path is not writable."
 msgstr "上传路径不可写。"
 
 #: includes/helpers.php:1647 includes/helpers.php:1679
-#: includes/helpers.php:1754 includes/lib/XMLRPC.php:201
+#: includes/helpers.php:1754 includes/lib/XMLRPC.php:198
 msgid "Failed to write file to disk."
 msgstr "写入文件到磁盘失败。"
 
@@ -1159,39 +1159,39 @@ msgstr "%s MB"
 msgid "%s KB"
 msgstr "%s KB"
 
-#: includes/lib/XMLRPC.php:49
+#: includes/lib/XMLRPC.php:46
 msgid "Pingback support is disabled for this site."
 msgstr "此站点禁用Pingback支持。"
 
-#: includes/lib/XMLRPC.php:52
+#: includes/lib/XMLRPC.php:49
 msgid "The from and to URLs cannot be the same."
 msgstr "from和to的URL不能相同。"
 
-#: includes/lib/XMLRPC.php:55
+#: includes/lib/XMLRPC.php:52
 msgid "The URL for our page is not valid."
 msgstr "我们的页面链接无效。"
 
-#: includes/lib/XMLRPC.php:58
+#: includes/lib/XMLRPC.php:55
 msgid "The URL for your page is not valid."
 msgstr "您的页面链接无效。"
 
-#: includes/lib/XMLRPC.php:66
+#: includes/lib/XMLRPC.php:63
 msgid "We have not published at that URL."
 msgstr "我们没有公开这个链接。"
 
-#: includes/lib/XMLRPC.php:72
+#: includes/lib/XMLRPC.php:69
 msgid "You have not published at that URL."
 msgstr "您尚未在该链接上公开。"
 
-#: includes/lib/XMLRPC.php:80
+#: includes/lib/XMLRPC.php:77
 msgid "Your page could not be parsed."
 msgstr "您的页面不能被解析。"
 
-#: includes/lib/XMLRPC.php:101
+#: includes/lib/XMLRPC.php:98
 msgid "Your page does not link to our page."
 msgstr "您的页面没有链接到我们的页面。"
 
-#: includes/lib/XMLRPC.php:419
+#: includes/lib/XMLRPC.php:416
 msgid "XML-RPC support is disabled for this site."
 msgstr "这个站点禁用XML-RPC支持。"
 
