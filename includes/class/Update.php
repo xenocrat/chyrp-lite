@@ -14,11 +14,16 @@
             if (!Visitor::current()->group->can("change_settings"))
                 return;
 
-            if (!$config->check_updates or !((time() - $config->check_updates_last) > UPDATE_INTERVAL))
+            if (!$config->check_updates)
                 return;
 
-            $xml = simplexml_load_string(get_remote(UPDATE_XML, 3));
+            if (!((time() - $config->check_updates_last) > UPDATE_INTERVAL))
+                return;
+
             $config->set("check_updates_last", time());
+
+            $rss = get_remote(UPDATE_XML, 3);
+            $xml = @simplexml_load_string($rss);
 
             if (!self::validate($xml))
                 return Flash::warning(__("Unable to check for new Chyrp Lite versions.").
