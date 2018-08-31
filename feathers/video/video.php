@@ -45,8 +45,9 @@
             if (isset($_FILES['video']) and upload_tester($_FILES['video'])) {
                 $this->delete_file($post);
                 $filename = upload($_FILES['video'], array("mp4", "ogv", "webm", "3gp", "mkv", "mov"));
-            } else
+            } else {
                 $filename = $post->filename;
+            }
 
             fallback($_POST['title'], "");
             fallback($_POST['description'], "");

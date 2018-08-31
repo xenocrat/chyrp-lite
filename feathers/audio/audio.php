@@ -45,8 +45,9 @@
             if (isset($_FILES['audio']) and upload_tester($_FILES['audio'])) {
                 $this->delete_file($post);
                 $filename = upload($_FILES['audio'], array("mp3", "m4a", "mp4", "oga", "ogg", "webm", "mka"));
-            } else
+            } else {
                 $filename = $post->filename;
+            }
 
             fallback($_POST['title'], "");
             fallback($_POST['description'], "");

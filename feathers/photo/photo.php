@@ -47,8 +47,9 @@
             if (isset($_FILES['photo']) and upload_tester($_FILES['photo'])) {
                 $this->delete_file($post);
                 $filename = upload($_FILES['photo'], array("jpg", "jpeg", "png", "gif", "tif", "tiff", "bmp"));
-            } else
+            } else {
                 $filename = $post->filename;
+            }
 
             if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
                 $_POST['option']['source'] = add_scheme($_POST['option']['source']);

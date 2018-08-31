@@ -49,8 +49,9 @@
                                                     'size' => $_FILES['uploads']['size'][$i]));
                 else
                     $filenames[] = upload($_FILES['uploads']);
-            } else
+            } else {
                 error(__("Error"), __("You did not select any files to upload.", "uploader"), null, 422);
+            }
 
             if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
                 $_POST['option']['source'] = add_scheme($_POST['option']['source']);
@@ -78,8 +79,9 @@
                                                     'size' => $_FILES['uploads']['size'][$i]));
                 else
                     $filenames[] = upload($_FILES['uploads']);
-            } else
+            } else {
                 $filenames = $post->filenames;
+            }
 
             if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
                 $_POST['option']['source'] = add_scheme($_POST['option']['source']);
