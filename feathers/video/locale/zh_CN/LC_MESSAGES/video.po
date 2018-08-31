@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.1.1\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Content-Type: text/plain; charset=UTF-8
@@ -44,6 +44,6 @@ msgstr "描述"
 msgid "You did not select a video to upload."
 msgstr "您没有选择上传的视频。"
 
-#: feathers/video/video.php:111
+#: feathers/video/video.php:112
 msgid "Your web browser does not support the <code>video</code> element."
 msgstr "您的浏览器不支持 <code>video</code> 元素。"

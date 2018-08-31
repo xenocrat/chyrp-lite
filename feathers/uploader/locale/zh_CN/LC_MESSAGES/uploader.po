@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.1.1\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Content-Type: text/plain; charset=UTF-8
@@ -55,6 +55,6 @@ msgstr "说明"
 msgid "You did not select any files to upload."
 msgstr "您没有选择任何文件上传。"
 
-#: feathers/uploader/uploader.php:179
+#: feathers/uploader/uploader.php:181
 msgid "Source"
 msgstr "来源"
