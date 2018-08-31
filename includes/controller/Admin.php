@@ -1335,23 +1335,33 @@
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
-            if (isset($_FILES['posts_file']) and upload_tester($_FILES['posts_file']))
-                if (!$imports["posts"] = simplexml_load_file($_FILES['posts_file']['tmp_name']) or
-                     $imports["posts"]->generator != "Chyrp")
+            if (isset($_FILES['posts_file']) and upload_tester($_FILES['posts_file'])) {
+                $imports["posts"] = simplexml_load_file($_FILES['posts_file']['tmp_name']);
+
+                if ($imports["posts"]->generator != "Chyrp")
                     Flash::warning(__("Posts export file is invalid."), "import");
+            }
 
-            if (isset($_FILES['pages_file']) and upload_tester($_FILES['pages_file']))
-                if (!$imports["pages"] = simplexml_load_file($_FILES['pages_file']['tmp_name']) or
-                     $imports["pages"]->generator != "Chyrp")
+            if (isset($_FILES['pages_file']) and upload_tester($_FILES['pages_file'])) {
+                $imports["pages"] = simplexml_load_file($_FILES['pages_file']['tmp_name']);
+
+                if ($imports["pages"]->generator != "Chyrp")
                     Flash::warning(__("Pages export file is invalid."), "import");
+            }
 
-            if (isset($_FILES['groups_file']) and upload_tester($_FILES['groups_file']))
-                if (!is_array($imports["groups"] = json_get(file_get_contents($_FILES['groups_file']['tmp_name']), true)))
+            if (isset($_FILES['groups_file']) and upload_tester($_FILES['groups_file'])) {
+                $imports["groups"] = json_get(file_get_contents($_FILES['groups_file']['tmp_name']), true);
+
+                if (!is_array($imports["groups"]))
                     Flash::warning(__("Groups export file is invalid."), "import");
+            }
 
-            if (isset($_FILES['users_file']) and upload_tester($_FILES['users_file']))
-                if (!is_array($imports["users"] = json_get(file_get_contents($_FILES['users_file']['tmp_name']), true)))
+            if (isset($_FILES['users_file']) and upload_tester($_FILES['users_file'])) {
+                $imports["users"] = json_get(file_get_contents($_FILES['users_file']['tmp_name']), true);
+
+                if (!is_array($imports["users"]))
                     Flash::warning(__("Users export file is invalid."), "import");
+            }
 
             $trigger->filter($imports, "before_import");
 
