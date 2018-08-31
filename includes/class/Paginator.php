@@ -87,8 +87,9 @@
                 for ($i = $offset; $i < ($offset + $this->per_page); $i++)
                     if (isset($this->array[$i]))
                         $this->result[] = new $model_name(null, array("read_from" => $this->array[$i]));
-            } else
+            } else {
                 $this->result = array_slice($this->array, $offset, $this->per_page);
+            }
 
             $this->paginated = $this->paginate = $this->list =& $this->result;
         }

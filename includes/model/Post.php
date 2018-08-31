@@ -729,8 +729,9 @@
                     if (isset(self::$url_attrs[$part])) {
                         $regex .= self::$url_attrs[$part];
                         $attrs[] = trim($part, "()");
-                    } else
+                    } else {
                         $regex .= preg_quote($part, "|");
+                    }
 
                 # Test the request and return false if it isn't valid.
                 if (!preg_match("|^$regex|", ltrim(str_replace($config->url, "/", $request), "/"), $matches))

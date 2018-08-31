@@ -279,8 +279,9 @@
                                           $column[0] :
                                           $column ;
                         }
-                    } else
+                    } else {
                         $read = false;
+                    }
                 }
             }
 

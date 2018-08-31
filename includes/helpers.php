@@ -447,8 +447,9 @@
                 if (isset($arg) and (!is_string($arg) or (is_string($arg) and trim($arg) !== "")) and $arg !== array())
                     break;
             }
-        } else
+        } else {
             $fallback = isset($args[0]) ? $args[0] : null ;
+        }
 
         if ($set)
             $variable = $fallback;

@@ -825,9 +825,10 @@
                         $sql->update("posts",
                                      array("id" => $post->id),
                                      array("user_id" => $posts_user->id));
-                } else
+                } else {
                     foreach ($user->posts as $post)
                         Post::delete($post->id);
+                }
 
             if (!empty($user->pages))
                 if (!empty($_POST['move_pages'])) {
@@ -840,9 +841,10 @@
                         $sql->update("pages",
                                      array("id" => $page->id),
                                      array("user_id" => $pages_user->id));
-                } else
+                } else {
                     foreach ($user->pages as $page)
                         Page::delete($page->id);
+                }
 
             User::delete($user->id);
 
@@ -1030,8 +1032,9 @@
                                       $user->full_name,
                                       $user->website,
                                       $member_group->id);
-                } else
+                } else {
                     error(__("Error"), __("New member group must be specified."), null, 422);
+                }
 
             $config = Config::current();
 
@@ -1044,8 +1047,9 @@
                         error(__("Gone"), __("New default group does not exist."), null, 410);
 
                     $config->set("default_group", $default_group->id);
-                } else
+                } else {
                     error(__("Error"), __("New default group must be specified."), null, 422);
+                }
 
             # Set new guest group.
             if ($config->guest_group == $group->id)
@@ -1056,8 +1060,9 @@
                         error(__("Gone"), __("New guest group does not exist."), null, 410);
 
                     $config->set("guest_group", $guest_group->id);
-                } else
+                } else {
                     error(__("Error"), __("New guest group must be specified."), null, 422);
+                }
 
             $sql = SQL::current();
 
@@ -1097,9 +1102,10 @@
                     $groups = new Paginator(array($user->group));
                 else
                     $groups = new Paginator(array());
-            } else
+            } else {
                 $groups = new Paginator(Group::find(array("placeholders" => true, "order" => "id ASC")),
                                         $this->post_limit);
+            }
 
             $this->display("pages".DIR."manage_groups", array("groups" => $groups));
         }
@@ -1279,11 +1285,12 @@
                 foreach ($users as $user) {
                     $users_json[$user->login] = array();
 
-                    foreach ($user as $name => $attr)
+                    foreach ($user as $name => $attr) {
                         if (!in_array($name, $exclude))
                             $users_json[$user->login][$name] = $attr;
                         elseif ($name == "group_id")
                             $users_json[$user->login]["group"] = $user->group->name;
+                    }
                 }
 
                 $exports["users.json"] = json_set($users_json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
@@ -1311,8 +1318,10 @@
                 $bitstream = file_get_contents($filepath);
                 unlink($filepath);
                 file_attachment($bitstream, $filename.".zip");
-            } else
-                file_attachment(reset($exports), key($exports)); # ZipArchive not installed: send the first export item.
+            } else {
+                # ZipArchive not installed: send the first export item.
+                file_attachment(reset($exports), key($exports));
+            }
         }
 
         /**
