@@ -82,7 +82,7 @@
         if (file_exists(INCLUDES_DIR.DIR."config.json.php") and class_exists("Route") and !substr_count($url, "://"))
             $url = url($url);
 
-        header("Location: ".html_entity_decode($url, ENT_QUOTES | ENT_HTML5, "UTF-8"));
+        header("Location: ".unfix($url, true));
         exit;
     }
 
@@ -1076,12 +1076,15 @@
      *
      * Parameters:
      *     $string - String to unfix.
+     *     $all - Decode all entities?
      *
      * Returns:
      *     An unsanitary version of the string.
      */
-    function unfix($string) {
-        return htmlspecialchars_decode($string, ENT_QUOTES | ENT_HTML5);
+    function unfix($string, $all = false) {
+        return ($all) ?
+            html_entity_decode($string, ENT_QUOTES | ENT_HTML5, "UTF-8") :
+            htmlspecialchars_decode($string, ENT_QUOTES | ENT_HTML5) ;
     }
 
     /**
@@ -1350,7 +1353,7 @@
      */
     function send_pingbacks($string, $post) {
         foreach (grab_urls($string) as $url) {
-            $ping_url = pingback_url(unfix($url));
+            $ping_url = pingback_url(unfix($url, true));
 
             if ($ping_url !== false and is_url($ping_url)) {
                 $client = new IXR_Client(add_scheme($ping_url));
