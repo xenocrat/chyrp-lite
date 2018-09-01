@@ -37,8 +37,8 @@
         */
         public function pingback_ping($args) {
             $trigger    = Trigger::current();
-            $source     = add_scheme(unfix(fallback($args[0], "")));
-            $target     = add_scheme(unfix(fallback($args[1], "")));
+            $source     = add_scheme(unfix(fallback($args[0], ""), true));
+            $target     = add_scheme(unfix(fallback($args[1], ""), true));
             $url_host   = parse_url(Config::current()->url, PHP_URL_HOST);
 
             # No need to continue without a responder for the pingback trigger.
