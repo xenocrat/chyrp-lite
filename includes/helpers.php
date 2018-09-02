@@ -901,9 +901,7 @@
      *     The normalized string.
      */
     function normalize($string) {
-        $newlines = str_replace(array("\n\n", "\n"), array(" ", ""), $string);
-        $whitespace = preg_replace("/[\s\n\r\t]+/", " ", $newlines);
-        return trim($whitespace);
+        return trim(preg_replace("/[\s\n\r\t]+/", " ", $string));
     }
 
     /**
