@@ -344,19 +344,19 @@ Called from:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 1915
+	includes/helpers.php on line 1935
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 1932
+	includes/helpers.php on line 1952
 
 
 send_correspondence
 -------------------
 Called from:
-	includes/helpers.php on line 2104
+	includes/helpers.php on line 2124
 
 Arguments:
 	$action, $params
@@ -461,7 +461,7 @@ Arguments:
 update_post
 -----------
 Called from:
-	includes/model/Post.php on line 353
+	includes/model/Post.php on line 354
 
 Arguments:
 	$post, $this, $options
@@ -470,7 +470,7 @@ Arguments:
 publish_post
 ------------
 Called from:
-	includes/model/Post.php on line 885
+	includes/model/Post.php on line 886
 
 Arguments:
 	$post
@@ -1041,7 +1041,7 @@ Arguments:
 link_regexp
 -----------
 Called from:
-	includes/helpers.php on line 1328
+	includes/helpers.php on line 1348
 
 Target:
 	$expressions
@@ -1050,7 +1050,7 @@ Target:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 2045
+	includes/helpers.php on line 2065
 
 Target:
 	$function
@@ -1207,7 +1207,7 @@ Target:
 title_from_excerpt
 ------------------
 Called from:
-	includes/model/Post.php on line 554
+	includes/model/Post.php on line 555
 
 Target:
 	$excerpt
@@ -1216,7 +1216,7 @@ Target:
 title
 -----
 Called from:
-	includes/model/Post.php on line 579
+	includes/model/Post.php on line 580
 
 Target:
 	$title
@@ -1228,7 +1228,7 @@ Arguments:
 excerpt
 -------
 Called from:
-	includes/model/Post.php on line 596
+	includes/model/Post.php on line 597
 
 Target:
 	$excerpt
@@ -1240,7 +1240,7 @@ Arguments:
 feed_content
 ------------
 Called from:
-	includes/model/Post.php on line 613
+	includes/model/Post.php on line 614
 
 Target:
 	$feed_content
@@ -1252,7 +1252,7 @@ Arguments:
 filter_post
 -----------
 Called from:
-	includes/model/Post.php on line 671
+	includes/model/Post.php on line 672
 
 Target:
 	$this
