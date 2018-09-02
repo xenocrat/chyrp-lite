@@ -338,11 +338,12 @@
                                     "name" => $name,
                                     "value" => $value));
 
-            $post = new self(null, array("read_from" => array_merge($new_values,
-                                                                    array("id"               => $this->id,
-                                                                          "feather"          => $this->feather,
-                                                                          "attribute_names"  => $attribute_names,
-                                                                          "attribute_values" => $attribute_values))));
+            $post = new self(null,
+                             array("read_from" => array_merge($new_values,
+                                                              array("id"               => $this->id,
+                                                                    "feather"          => $this->feather,
+                                                                    "attribute_names"  => $attribute_names,
+                                                                    "attribute_values" => $attribute_values))));
 
             # Attempt to send pingbacks to URLs discovered in post attribute values.
             if ($config->send_pingbacks and $pingbacks and $this->status == "public")
@@ -548,7 +549,7 @@
 
             # Excerpts are likely to have some sort of markup module applied to them;
             # if the current instantiation is not filtered, make one that is.
-            $post = ($this->filtered) ? $this : new Post($this->id) ;
+            $post = ($this->filtered) ? $this : new self($this->id, array("skip_where" => true)) ;
 
             $excerpt = $post->excerpt();
             Trigger::current()->filter($excerpt, "title_from_excerpt");
@@ -556,9 +557,9 @@
             $split_lines = explode("\n", $excerpt);
             $first_line = $split_lines[0];
 
-            $stripped = strip_tags($first_line); # Strip all HTML
-            $truncated = truncate($stripped, 75); # Truncate the excerpt to 75 characters
-            $normalized = normalize($truncated); # Trim and normalize whitespace
+            $stripped = strip_tags($first_line); # Strip tags from the first line.
+            $truncated = truncate($stripped, 75); # Truncate the line to 75 characters.
+            $normalized = normalize($truncated); # Trim and normalize whitespace.
 
             return $normalized;
         }
@@ -573,7 +574,7 @@
 
             # Excerpts are likely to have some sort of markup module applied to them;
             # if the current instantiation is not filtered, make one that is.
-            $post = ($this->filtered) ? $this : new Post($this->id) ;
+            $post = ($this->filtered) ? $this : new self($this->id, array("skip_where" => true)) ;
 
             $title = Feathers::$instances[$this->feather]->title($post);
             return Trigger::current()->filter($title, "title", $post);
@@ -590,7 +591,7 @@
 
             # Excerpts are likely to have some sort of markup module applied to them;
             # if the current instantiation is not filtered, make one that is.
-            $post = ($this->filtered) ? $this : new Post($this->id) ;
+            $post = ($this->filtered) ? $this : new self($this->id, array("skip_where" => true)) ;
 
             $excerpt = Feathers::$instances[$this->feather]->excerpt($post);
             return Trigger::current()->filter($excerpt, "excerpt", $post);
@@ -599,7 +600,7 @@
 
         /**
          * Function: feed_content
-         * Returns the given post's Feed content, provided by its Feather.
+         * Returns the given post's feed content, provided by its Feather.
          */
         public function feed_content() {
             if ($this->no_results)
@@ -607,7 +608,7 @@
 
             # Excerpts are likely to have some sort of markup module applied to them;
             # if the current instantiation is not filtered, make one that is.
-            $post = ($this->filtered) ? $this : new Post($this->id) ;
+            $post = ($this->filtered) ? $this : new self($this->id, array("skip_where" => true)) ;
 
             $feed_content = Feathers::$instances[$this->feather]->feed_content($post);
             return Trigger::current()->filter($feed_content, "feed_content", $post);
