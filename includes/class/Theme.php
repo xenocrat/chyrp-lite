@@ -288,11 +288,11 @@
                                  "type" => BlogFeed::type(),
                                  "title" => $config->name));
 
-            # Generate a page feed if it seems appropriate.
-            if ($route->action != "index" and !empty($main->context["posts"])) {
+            # Generate a feed for this route action if it seems appropriate.
+            if ($route->action != "index" and !$main->feed and !empty($main->context["posts"])) {
+                # Rewind to page 1 (most recent) if the posts are paginated.
                 $page_url = ($main->context["posts"] instanceof Paginator) ?
-                    $main->context["posts"]->prev_page_url(1) :
-                    $config->url.$route->request ;
+                    $main->context["posts"]->prev_page_url(1) : self_url() ;
 
                 $feed_url = ($config->clean_urls) ?
                     rtrim($page_url, "/")."/feed/" :
