@@ -77,7 +77,6 @@ h1 {
     text-transform: none;
     margin: 0.5em 0em;
     padding: 0em;
-    line-height: 1.2;
 }
 h2, h1.banner {
     font-size: 1.5em;
@@ -85,7 +84,6 @@ h2, h1.banner {
     text-transform: none;
     margin: 0.67em 0em;
     padding: 0em;
-    line-height: 1.2;
 }
 h3 {
     font-size: 1em;
@@ -93,7 +91,6 @@ h3 {
     text-transform: none;
     margin: 1em 0em;
     padding: 0em;
-    line-height: 1.2;
 }
 h3.flash {
     font-weight: normal;
@@ -118,7 +115,6 @@ h4 {
     text-transform: none;
     margin: 1em 0em;
     padding: 0em;
-    line-height: 1.2;
 }
 h4.archive {
     font-size: 1.33em;
@@ -130,7 +126,6 @@ h5, h6 {
     text-transform: none;
     margin: 1em 0em;
     padding: 0em;
-    line-height: 1.2;
 }
 h1:first-child, h2:first-child,
 h3:first-child, h4:first-child,
@@ -456,7 +451,6 @@ div.tags {
 }
 div.doaction {
     font-family: inherit;
-    line-height: 2;
     margin-bottom: 1em;
 }
 div.doaction:last-child {

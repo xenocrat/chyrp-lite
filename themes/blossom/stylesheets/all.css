@@ -77,7 +77,6 @@ h1 {
     font-weight: bold;
     margin: 0.5em 0em;
     padding: 0em;
-    line-height: 1.2;
 }
 h1.banner {
     font-size: 1em;
@@ -88,14 +87,12 @@ h2 {
     font-weight: bold;
     margin: 0.67em 0em;
     padding: 0em;
-    line-height: 1.2;
 }
 h3 {
     font-size: 1em;
     font-weight: bold;
     margin: 1em 0em;
     padding: 0em;
-    line-height: 1.2;
 }
 h3.ribbon {
     font-weight: normal;
@@ -110,7 +107,6 @@ h4, h5, h6 {
     font-weight: bold;
     margin: 1em 0em;
     padding: 0em;
-    line-height: 1.2;
 }
 h4.archive {
     font-size: 1.33em;
@@ -346,7 +342,7 @@ input#search_field,
 input#sidebar_search_field {
     display: inline;
     margin: 0em;
-    padding-right: 34px;
+    padding-right: 38px;
 }
 div.search_box input[type="text"] {
     width: 100%;
@@ -392,8 +388,8 @@ button#search_submit,
 button#sidebar_search_submit {
     display: block;
     position: absolute;
-    width: 32px;
-    height: 32px;
+    width: 38px;
+    height: 38px;
     top: 0px;
     right: 0px;
     border: none;
@@ -404,10 +400,6 @@ button#sidebar_search_submit {
     background-size: 60%;
     overflow: hidden;
     color: transparent;
-}
-button#search_submit {
-    width: 38px;
-    height: 38px;
 }
 button#search_submit:focus,
 button#sidebar_search_submit:focus {
@@ -447,7 +439,6 @@ div#sidebar {
     top: 2rem;
     left: 2rem;
     width: 12rem;
-    line-height: 1.2;
 }
 div.prev {
     width: 100%;
@@ -506,7 +497,6 @@ div.tags {
 }
 div.doaction {
     font-family: inherit;
-    line-height: 2;
     margin-bottom: 1em;
 }
 div.doaction:last-child {
