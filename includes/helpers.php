@@ -503,7 +503,7 @@
 
     /**
      * Function: derezz
-     * Strips tags from the supplied variable and tests it for emptiness.
+     * Strips tags and junk from the supplied variable and tests it for emptiness.
      *
      * Parameters:
      *     &$variable - The variable, supplied by reference.
@@ -516,7 +516,7 @@
      *     but which needs to be tested for uniqueness/emptiness first.
      */
     function derezz(&$variable) {
-        $variable = strip_tags($variable);
+        $variable = str_replace(array("\n", "\r", "\0"), "", strip_tags($variable));
         return empty($variable);
     }
 
