@@ -475,8 +475,7 @@ div.metadata {
     bottom: 0em;
     left: -2rem;
     width: 100%;
-    line-height: 2em;
-    padding: 0rem 2rem;
+    padding: 0.25rem 2rem;
     margin-top: 2rem;
     background-color: #ffffff;
     border-top: 1px solid #c6ccc8;
