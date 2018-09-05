@@ -129,12 +129,11 @@ strong {
     font: inherit;
     font-weight: bold;
 }
-small , .small, .sub {
+small, .small, .sub {
     color: #b3b5b5;
 }
 small, .small {
     font-size: 0.8em;
-    line-height: 1.25;
 }
 small li code, .small li code {
     line-height: 2;
@@ -669,7 +668,6 @@ a.prev_page {
     font-family: inherit;
     font-size: 1.25rem;
     color: #4a4747;
-    line-height: 1.25;
     margin: 0em;
     padding: 0.4em 0.6em;
     background-color: #f2fbff;
