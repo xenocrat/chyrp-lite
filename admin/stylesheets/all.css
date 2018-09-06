@@ -668,6 +668,7 @@ a.prev_page {
     font-family: inherit;
     font-size: 1.25rem;
     color: #4a4747;
+    line-height: 1.5;
     margin: 0em;
     padding: 0.4em 0.6em;
     background-color: #f2fbff;
