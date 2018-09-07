@@ -590,15 +590,14 @@
             if ($route->action == "view" and !empty($main->context["post"])) {
                 $post = $main->context["post"];
 
-                if ($post->no_results)
-                    continue;
+                if (!$post->no_results) {
+                    $feed_url = ($config->clean_urls) ? rtrim($post->url(), "/")."/feed/" : $post->url()."&amp;feed" ;
+                    $title = _f("Comments on &#8220;%s&#8221;", oneof($post->title(), ucfirst($post->feather)), "comments");
 
-                $feed_url = ($config->clean_urls) ? rtrim($post->url(), "/")."/feed/" : $post->url()."&amp;feed" ;
-                $title = _f("Comments on &#8220;%s&#8221;", oneof($post->title(), ucfirst($post->feather)), "comments");
-
-                $links[] = array("href" => $feed_url,
+                    $links[] = array("href" => $feed_url,
                                  "type" => BlogFeed::type(),
                                  "title" => $title);
+                }
             }
 
             return $links;
