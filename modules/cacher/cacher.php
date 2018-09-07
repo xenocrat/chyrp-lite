@@ -131,11 +131,9 @@
                 $this->admin_clear_cache();
 
             fallback($_POST['cache_expire'], 3600);
-            fallback($_POST['cache_exclude'], array());
 
             Config::current()->set("module_cacher",
-                                   array("cache_expire" => (int) $_POST['cache_expire'],
-                                         "cache_exclude" => array_filter($_POST['cache_exclude'])));
+                                   array("cache_expire" => (int) $_POST['cache_expire']));
 
             Flash::notice(__("Settings updated."), "cache_settings");
         }
