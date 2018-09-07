@@ -514,10 +514,10 @@ form.split .small {
 }
 form.split p.buttons {
     display: block;
-    margin: 2rem 0rem 0rem 45%;
+    margin: 1rem 0rem 0rem 45%;
 }
 form.split div.confirmation {
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 /* Group: Tables */
