@@ -492,7 +492,6 @@ form.split label {
     display: inline-block;
     width: 45%;
     clear: both;
-    color: #7f7f7f;
     text-align: right;
     padding: 0rem 1rem 0rem 0rem;
 }
@@ -515,7 +514,6 @@ form.split .small {
 }
 form.split p.buttons {
     display: block;
-    /*text-align: center;*/
     margin: 2rem 0rem 0rem 45%;
 }
 form.split div.confirmation {
