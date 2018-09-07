@@ -410,9 +410,6 @@ input:placeholder {
     color: #dddddd;
     opacity: 1;
 }
-label {
-    line-height: 2;
-}
 select,
 textarea,
 input[type="text"],
@@ -488,39 +485,16 @@ code {
     border: 1px solid #dfdfdf;
 }
 form.split > fieldset > * {
-    line-height: 2;
     clear: both;
 }
-form.split > fieldset > * > label {
+form.split label {
     box-sizing: border-box;
+    display: inline-block;
     width: 45%;
     clear: both;
-    float: left;
     color: #7f7f7f;
     text-align: right;
-    padding: 0.25rem 1rem 0rem 0rem;
-}
-form.split > fieldset > div.confirmation {
-    margin-top: 2rem;
-}
-form.split small,
-form.split .small,
-form.split .buttons {
-    display: block;
-    margin: 0em 0em 0rem 45%;
-}
-form.split ul, form.split ol {
-    margin-bottom: 1rem;
-}
-form.split input,
-form.split textarea,
-form.split select,
-form.split label + button {
-    margin-bottom: 0.5rem;
-}
-form.split input + input:not(.filter_text) {
-    display: block;
-    margin-left: 45%;
+    padding: 0rem 1rem 0rem 0rem;
 }
 form.split input[type="text"],
 form.split input[type="email"],
@@ -530,8 +504,22 @@ form.split input[type="password"],
 form.split textarea {
     width: 33%;
 }
-form.detail input {
-    padding: 0.3em;
+form.split ul,
+form.split ol {
+    margin-bottom: 1rem;
+}
+form.split small,
+form.split .small {
+    display: block;
+    margin: 0.25rem 0rem 0rem 45%;
+}
+form.split p.buttons {
+    display: block;
+    /*text-align: center;*/
+    margin: 2rem 0rem 0rem 45%;
+}
+form.split div.confirmation {
+    margin-top: 2rem;
 }
 
 /* Group: Tables */
@@ -1011,7 +999,7 @@ a.emblem.preview {
     label {
         display: block;
     }
-    form.split > fieldset > * > label {
+    form.split label {
         width: 100%;
         float: none;
         text-align: left;
@@ -1019,7 +1007,7 @@ a.emblem.preview {
     }
     form.split small,
     form.split .small,
-    form.split .buttons {
+    form.split p.buttons {
         margin-left: 0em;
     }
     input.text,
