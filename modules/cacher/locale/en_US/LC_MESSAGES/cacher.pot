@@ -15,27 +15,15 @@ msgstr ""
 msgid "(seconds)"
 msgstr ""
 
-#: modules/cacher/admin/pages/cache_settings.twig:15
-msgid "Cache Control"
-msgstr ""
-
 #: modules/cacher/admin/pages/cache_settings.twig:17
 msgid "Clear Cache"
-msgstr ""
-
-#: modules/cacher/admin/pages/cache_settings.twig:21
-msgid "Exclude URLs"
-msgstr ""
-
-#: modules/cacher/admin/pages/cache_settings.twig:27
-msgid "A list of URLs that will not be cached; enter one at a time."
 msgstr ""
 
 #: modules/cacher/cacher.php:115
 msgid "Cache"
 msgstr ""
 
-#: modules/cacher/cacher.php:152
+#: modules/cacher/cacher.php:150
 msgid "Cache cleared."
 msgstr ""
 

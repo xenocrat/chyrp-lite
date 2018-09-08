@@ -551,7 +551,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 641
+	modules/comments/comments.php on line 640
 
 Arguments:
 	$comment, $feed

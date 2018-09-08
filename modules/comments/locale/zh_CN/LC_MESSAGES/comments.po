@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.1.1\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Content-Type: text/plain; charset=UTF-8
@@ -336,45 +336,45 @@ msgstr "自 %s 添加了评论"
 msgid "An ID is required to show a comment."
 msgstr "显示评论必须要一个ID。"
 
-#: modules/comments/comments.php:597 modules/comments/comments.php:616
+#: modules/comments/comments.php:595 modules/comments/comments.php:615
 #, php-format
 msgid "Comments on &#8220;%s&#8221;"
 msgstr "对 #8220;%s&#8221; 的评论"
 
-#: modules/comments/comments.php:632
+#: modules/comments/comments.php:631
 #, php-format
 msgid "Comment #%d"
 msgstr "评论 #%d"
 
-#: modules/comments/comments.php:666
+#: modules/comments/comments.php:665
 msgid "A ping from your URL is already registered."
 msgstr "您的URL中的ping已被注册。"
 
-#: modules/comments/comments.php:669
+#: modules/comments/comments.php:668
 msgid "Your URL is too long to be stored in our database."
 msgstr "您的网址太长，无法存储在我们的数据库中。"
 
-#: modules/comments/comments.php:680
+#: modules/comments/comments.php:679
 msgid "Pingback registered!"
 msgstr "Pingback已注册！"
 
-#: modules/comments/comments.php:689
+#: modules/comments/comments.php:688
 msgid "Open"
 msgstr "打开"
 
-#: modules/comments/comments.php:692
+#: modules/comments/comments.php:691
 msgid "Closed"
 msgstr "已关闭"
 
-#: modules/comments/comments.php:695
+#: modules/comments/comments.php:694
 msgid "Private"
 msgstr "私人"
 
-#: modules/comments/comments.php:698
+#: modules/comments/comments.php:697
 msgid "Registered Only"
 msgstr "仅注册"
 
-#: modules/comments/comments.php:703
+#: modules/comments/comments.php:702
 msgid "Comment Status"
 msgstr "评论状态"
 
