@@ -45,8 +45,8 @@
 <thead>
 <tr class="head">
 <th class="toggler" id="tag_toggler"></th>
-<th class="post_title title">{{ "Post" | translate }}</th>
-<th class="post_tags list main">{{ "Tags" | translate("tags") }}</th>
+<th class="post_title title main">{{ "Post" | translate }}</th>
+<th class="post_tags list">{{ "Tags" | translate("tags") }}</th>
 <th class="controls">{{ "Controls" | translate }}</th>
 </tr>
 </thead>
@@ -56,10 +56,10 @@
 <td class="checkbox">
 <input type="checkbox" name="post[{{ loop.index0 }}]" value="{{ post.id }}" id="post_checkbox_{{ post.id }}">
 </td>
-<td class="post_title title">
+<td class="post_title title main">
 <a class="edit_tag" href="{{ post.url() }}">{{ post.title() | striptags | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
 </td>
-<td class="post_tags list main">
+<td class="post_tags list">
 {% for name, clean in post.tags %}
 <a class="tag" href="{{ url('manage_tags/query/' ~ (clean | url_encode)) }}">{{ name }}</a>
 {% endfor %}
