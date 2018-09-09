@@ -190,11 +190,7 @@ msgstr ""
 msgid "Preview"
 msgstr ""
 
-#: admin/layouts/default.twig:58
-msgid "Log out"
-msgstr ""
-
-#: admin/layouts/default.twig:66
+#: admin/layouts/default.twig:63
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr ""
@@ -273,7 +269,7 @@ msgstr ""
 #: admin/pages/edit_user.twig:49
 #: admin/pages/general_settings.twig:61
 #: admin/pages/route_settings.twig:85
-#: admin/pages/user_settings.twig:41
+#: admin/pages/user_settings.twig:47
 msgid "Update"
 msgstr ""
 
@@ -943,31 +939,31 @@ msgstr ""
 msgid "Registration"
 msgstr ""
 
-#: admin/pages/user_settings.twig:12
+#: admin/pages/user_settings.twig:13
 msgid "Allow people to register."
 msgstr ""
 
-#: admin/pages/user_settings.twig:15
+#: admin/pages/user_settings.twig:17
 msgid "Email Correspondence"
 msgstr ""
 
-#: admin/pages/user_settings.twig:17
+#: admin/pages/user_settings.twig:20
 msgid "Allow the site to send email correspondence to users?"
 msgstr ""
 
-#: admin/pages/user_settings.twig:20
+#: admin/pages/user_settings.twig:24
 msgid "Activate by Email"
 msgstr ""
 
-#: admin/pages/user_settings.twig:22
+#: admin/pages/user_settings.twig:27
 msgid "Should users activate by email?"
 msgstr ""
 
-#: admin/pages/user_settings.twig:25
+#: admin/pages/user_settings.twig:31
 msgid "Default User Group"
 msgstr ""
 
-#: admin/pages/user_settings.twig:33
+#: admin/pages/user_settings.twig:39
 msgid "&#8220;Guest&#8221; Group"
 msgstr ""
 
