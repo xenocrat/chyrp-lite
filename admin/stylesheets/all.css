@@ -225,20 +225,10 @@ div.clear {
     color: #4a4747;
 }
 
-/* Group: Footer */
-
-#footer {
-    box-sizing: border-box;
-    width: 100%;
-    margin: 2rem auto;
-    padding: 0rem 2rem;
-    text-align: center;
-}
-
 /* Group: Sub-Navigation */
 
 #sub_nav {
-    margin: 4em 4em 0em 4em;
+    margin: 4rem 4rem 0rem 4rem;
     height: 3rem;
     overflow: hidden;
 }
@@ -285,7 +275,7 @@ div.clear {
     clear: both;
     background-color: #ffffff;
     padding: 1em;
-    margin: 0rem 4rem 1rem 4rem;
+    margin: 0rem 4rem 4rem 4rem;
     border: 1px solid #dfdfdf;
     border-top: none;
     position: relative;
@@ -965,6 +955,9 @@ a.emblem.preview {
     #sub_nav, #content {
         margin-left: 1rem;
         margin-right: 1rem;
+    }
+    #content {
+        margin-bottom: 1rem;
     }
     #sub_nav li {
         box-sizing: border-box;

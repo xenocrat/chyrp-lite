@@ -54,9 +54,6 @@
 {% endfor %}
 {% block content %}{% endblock %}
 </div>
-<div id="footer" role="navigation">
-{% if visitor.logged_in %}<a id="logout" class="button" href="{{ url('logout') }}">{{ "Log out" | translate }}</a>{% endif %}
-</div>
 </body>
 <!-- Queries: {{ sql_queries }} | Load Time: {{ theme.load_time() }} -->
 {% if debug %}
