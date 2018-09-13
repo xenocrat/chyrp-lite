@@ -351,7 +351,7 @@ li.module ol.module_dependencies_list {
 li.module:not(.error) .module_dependencies_message,
 li.module:not(.error) .module_dependencies_list,
 li.module:not(.error) .module_conflicts_message,
-li.module:not(.error) .module_conflicts_list { 
+li.module:not(.error) .module_conflicts_list {
     display: none;
 }
 li.module div.controls,
@@ -518,7 +518,8 @@ table {
     overflow-x: scroll;
     -webkit-overflow-scrolling: touch;
 }
-table:last-child, table.interactive {
+table:last-child,
+table.interactive {
     margin-bottom: 0em;
 }
 table thead tr {
@@ -610,7 +611,7 @@ p.flash {
     background-color: #7a9acc;
     color: #ffffff;
     border: none;
-    border-radius: 0.4em;
+    border-radius: 0.3em;
 }
 p.flash.notice {
     background-color: #76b362;
