@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.1.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Content-Type: text/plain; charset=UTF-8
@@ -33,19 +33,15 @@ msgstr "Dieser Kommentar wartet auf die Freigabe durch die Moderation."
 msgid "%d %B, %Y, at %I:%M %p"
 msgstr "%d %B, %Y, um %I:%M %p"
 
-#: themes/sparrow/content/post.twig:7
-msgid "Category"
-msgstr "Kategorien"
-
-#: themes/sparrow/content/post.twig:8 themes/sparrow/pages/view.twig:21
+#: themes/sparrow/content/post.twig:7 themes/sparrow/pages/view.twig:21
 msgid "[Untitled]"
 msgstr "[Unbenannt]"
 
-#: themes/sparrow/content/post.twig:11
+#: themes/sparrow/content/post.twig:10
 msgid "Tags"
 msgstr "Tags"
 
-#: themes/sparrow/content/post.twig:21 themes/sparrow/feathers/audio.twig:6
+#: themes/sparrow/content/post.twig:20 themes/sparrow/feathers/audio.twig:6
 #: themes/sparrow/feathers/photo.twig:6 themes/sparrow/feathers/quote.twig:6
 #: themes/sparrow/feathers/text.twig:6 themes/sparrow/feathers/uploader.twig:6
 #: themes/sparrow/feathers/video.twig:6 themes/sparrow/pages/archive.twig:36
@@ -53,54 +49,54 @@ msgstr "Tags"
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "Permanentlink zu &#8220;%s&#8221;"
 
-#: themes/sparrow/content/post.twig:23 themes/sparrow/layouts/default.twig:59
+#: themes/sparrow/content/post.twig:22 themes/sparrow/layouts/default.twig:59
 msgid "Draft"
 msgstr "Entwurf"
 
-#: themes/sparrow/content/post.twig:25
+#: themes/sparrow/content/post.twig:24
 msgid "Scheduled"
 msgstr "Geplant"
 
-#: themes/sparrow/content/post.twig:27
+#: themes/sparrow/content/post.twig:26
 msgid "Pinned"
 msgstr "Angepinnt"
 
-#: themes/sparrow/content/post.twig:29
+#: themes/sparrow/content/post.twig:28
 msgid "%d %b, %Y"
 msgstr "%d %b, %Y"
 
-#: themes/sparrow/content/post.twig:37
+#: themes/sparrow/content/post.twig:36
 msgid "View pingbacks"
 msgstr "Pingbacks anzeigen"
 
-#: themes/sparrow/content/post.twig:38
+#: themes/sparrow/content/post.twig:37
 #, php-format
 msgid "%s pingback"
 msgid_plural "%s pingbacks"
 msgstr[0] "%s Pingback"
 msgstr[1] "%s Pingbacks"
 
-#: themes/sparrow/content/post.twig:43
+#: themes/sparrow/content/post.twig:42
 msgid "Comments closed"
 msgstr "Kommentare geschlossen"
 
-#: themes/sparrow/content/post.twig:46
+#: themes/sparrow/content/post.twig:45
 msgid "View comments"
 msgstr "Kommentare ansehen"
 
-#: themes/sparrow/content/post.twig:47
+#: themes/sparrow/content/post.twig:46
 #, php-format
 msgid "%s comment"
 msgid_plural "%s comments"
 msgstr[0] "%s Kommentar"
 msgstr[1] "%s Kommentare"
 
-#: themes/sparrow/content/post.twig:54
+#: themes/sparrow/content/post.twig:53
 #, php-format
 msgid "&copy; %s, %s."
 msgstr "&copy; %s, %s."
 
-#: themes/sparrow/content/post.twig:56
+#: themes/sparrow/content/post.twig:55
 #, php-format
 msgid "&copy; %s."
 msgstr "&copy; %s."
