@@ -698,7 +698,6 @@ section a:hover, p a:hover,
 section a:focus, p a:focus,
 section a:active, p a:active {
     color: #0084c8;
-    border-bottom: 1px #0084c8 solid;
 }
 div.tags a {
     display: inline-block;
