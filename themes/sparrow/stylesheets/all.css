@@ -598,17 +598,13 @@ section a:active, p a:active {
 }
 div.category a.category {
     display: inline-block;
-    padding: 0.2em 0.4em;
-    margin: 2px 0em;
-    border: 1px #99726d solid;
-    border-radius: 0.2em;
-    color: #fffefd;
-    background-color: #99726d;
-}
-div.category a.category:hover,
-div.category a.category:focus,
-div.category a.category:active {
-    background-color: #744640;
+    position: absolute;
+    top: 0px;
+    right: 4rem;
+    padding: 0.2em 0.6em;
+    margin: 0em;
+    border: 1px solid #c2bcb8;
+    border-top: none;
 }
 div.tags a.tag {
     display: inline-block;
@@ -799,6 +795,9 @@ img.gravatar {
     div#main > article.commentary {
         padding: 0rem 2rem;
     }
+    div.category a.category {
+        right: 2rem;
+    }
     ol.comments li {
         padding: 2rem;
     }
@@ -839,6 +838,9 @@ img.gravatar {
     div#main > article.discourse,
     div#main > article.commentary {
         padding: 0rem 8rem;
+    }
+    div.category a.category {
+        right: 8rem;
     }
     iframe.video_embed {
         max-height: 432px;

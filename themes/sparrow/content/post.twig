@@ -4,7 +4,6 @@
 {% if (module_enabled("tags") and post.tags_link is not empty) or (module_enabled("categorize") and post.category is defined) %}
 <div role="note" class="category tags">
 {% if module_enabled("categorize") and post.category is defined %}
-{{ "Category" | translate }}:
 <a class="category category_{{ post.category.id }}" href="{{ post.category.url }}" rel="tag">{{ post.category.name | oneof("[Untitled]" | translate) }}</a>
 {% endif %}
 {% if (module_enabled("tags") and post.tags_link is not empty) %}
