@@ -604,6 +604,9 @@ div.category a.category {
     padding: 0.2em 0.6em;
     margin: 0em;
     border: 1px solid #c2bcb8;
+}
+hr + article div.category a.category,
+article:first-child div.category a.category {
     border-top: none;
 }
 div.tags a.tag {
