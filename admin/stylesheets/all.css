@@ -410,7 +410,7 @@ input[type="password"] {
     box-sizing: border-box;
     width: 10em;
     font-size: 1.25rem;
-    padding: 0.25rem;
+    padding: 0.4em;
     border-radius: 0em;
     border: 1px solid #dfdfdf;
     background-color: #ffffff;
@@ -1010,13 +1010,9 @@ a.emblem.preview {
     input[type="password"],
     input[type="file"],
     textarea {
-        box-sizing: border-box;
         margin-left: 0em !important;
         margin-right: 0em !important;
         width: 100% !important;
-        font-size: 16px !important;
-        padding-top: 0.5rem;
-        padding-bottom: 0.5rem;
     }
     select {
         width: 100%;
@@ -1026,7 +1022,7 @@ a.emblem.preview {
         display: none;
     }
     #content table tbody tr td {
-        padding: 1em 0.5rem;
+        padding: 1rem 0.5rem;
     }
     #content table tbody tr td.main {
         min-width: 4rem;
@@ -1046,7 +1042,6 @@ a.emblem.preview {
         display: block !important;
         width: 100% !important;
         margin: 1em 0em 0em 0em !important;
-        padding: 1em !important;
         text-align: center !important;
         box-sizing: border-box !important;
     }
