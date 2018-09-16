@@ -327,7 +327,7 @@ select, input {
     width: 320px;
     max-width: 960px;
     margin: 0.5em 0em;
-    padding: 6px 4px;
+    padding: 0.4em;
     background: none;
     text-align: left;
     font: inherit;
@@ -358,11 +358,9 @@ input[type="radio"], input[type="checkbox"] {
 input#search_field,
 input#sidebar_search_field {
     display: inline;
+    width: 100%;
     margin: 0em;
     padding-right: 38px;
-}
-div.search_box input[type="text"] {
-    width: 100%;
 }
 textarea {
     box-sizing: border-box;
@@ -374,7 +372,7 @@ textarea {
     font-size: inherit;
     color: #4e5a66;
     margin: 0.5em 0em;
-    padding: 2px 4px;
+    padding: 0.4em;
     background-color: #ffffff;
     border: 1px solid #c6ccc8;
     border-radius: 0em;
@@ -406,7 +404,7 @@ button#sidebar_search_submit {
     display: block;
     position: absolute;
     width: 38px;
-    height: 38px;
+    height: 100%;
     top: 0px;
     right: 0px;
     border: none;
@@ -722,11 +720,9 @@ div.metadata a:hover,
 div.metadata a:focus,
 div.metadata a:active {
     color: #0084c8;
-    border-bottom: 1px #0084c8 solid;
 }
 div.doaction a, button {
     display: inline-block;
-    line-height: normal;
     white-space: nowrap;
     padding: 0.4em 1.2em;
     border-radius: 2em;
@@ -865,6 +861,10 @@ article img {
     }
     input, select {
         width: 100%;
+    }
+    input#search_field,
+    input#sidebar_search_field {
+        width: 12em;
     }
     ol.comments li {
         margin: 0em;

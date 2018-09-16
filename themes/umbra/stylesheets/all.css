@@ -306,7 +306,7 @@ select, input {
     width: 320px;
     max-width: 800px;
     margin: 0.5em 0em;
-    padding: 6px 8px;
+    padding: 0.4em;
     background: none;
     text-align: left;
     font: inherit;
@@ -338,12 +338,8 @@ input[type="radio"], input[type="checkbox"] {
 }
 input#search_field {
     display: inline;
-    margin: 0em;
-    padding-right: 34px;
-}
-div.search_box input[type="text"] {
     width: 10em;
-    display: inline-block;
+    margin: 0em;
 }
 textarea {
     box-sizing: border-box;
@@ -355,7 +351,7 @@ textarea {
     font-size: inherit;
     color: #adafae;
     margin: 0.5em 0em;
-    padding: 2px 4px;
+    padding: 0.4em;
     background-color: #666667;
     border: none;
     border-radius: 0.2em;
@@ -646,7 +642,6 @@ div.category a.category:active {
 }
 div.doaction a, button {
     display: inline-block;
-    line-height: normal;
     white-space: nowrap;
     padding: 0.4em 1.2em;
     border-radius: 0.2em;
@@ -795,9 +790,6 @@ img.gravatar {
     ul.navigation li > a {
         display: inline-block;
         margin: 0em 0.5em 2em 0.5em;
-    }
-    div.search_box {
-        margin-top: 0em;
     }
     button#search_submit {
         display: none;
