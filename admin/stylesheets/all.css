@@ -892,8 +892,8 @@ a.emblem.preview {
     position: absolute;
     width: 16px;
     height: 16px;
-    top: calc(10% + 13px);
-    right: calc(10% + 13px);
+    top: calc(10% + 8px);
+    right: calc(10% + 8px);
     cursor: pointer;
 }
 .iframe_close_gadget img {
@@ -1104,7 +1104,7 @@ a.emblem.preview {
         left: 5%;
     }
     .iframe_close_gadget {
-        top: calc(5% + 13px);
-        right: calc(5% + 13px);
+        top: calc(5% + 8px);
+        right: calc(5% + 8px);
     }
 }
