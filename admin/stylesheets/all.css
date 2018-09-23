@@ -1104,7 +1104,7 @@ a.emblem.preview {
         left: 5%;
     }
     .iframe_close_gadget {
-        top: 5%;
-        right: 5%;
+        top: calc(5% + 13px);
+        right: calc(5% + 13px);
     }
 }
