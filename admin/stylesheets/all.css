@@ -77,7 +77,8 @@ ul {
     list-style: none;
 }
 ol {
-    list-style: decimal inside}
+    list-style: decimal inside;
+}
 input, textarea, select {
     font-family: inherit;
     font-size: inherit;
@@ -1096,7 +1097,6 @@ a.emblem.preview {
     #content ul.themes img.screenshot {
         width: 192px;
     }
-
     .iframe_foreground {
         width: 90%;
         height: 90%;
