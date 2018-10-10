@@ -99,9 +99,9 @@
                 }
             }
 
-            # Build an excerpt of up to 200 characters. Tries to start with the sentence containing the link.
-            $regex = "/.*?([^\n\.>]{0,100}".preg_quote($context[0], "/")."[^<]*)/s";
-            $excerpt = truncate(normalize(strip_tags(preg_replace($regex, "$1", $body))), 200);
+            # Build an excerpt of up to 200 characters from the text block containing the link.
+            $regex = "/.*?([^\.\r\n]{0,100}".preg_quote($context[0], "/")."[^\r\n]*).*/s";
+            $excerpt = truncate(normalize(strip_tags(preg_replace($regex, "$1", $body, 1))), 200);
 
             # Pingback responder must return a single string on success or IXR_Error on failure.
             return $trigger->call("pingback", $post, $target, $source, $title, $excerpt);
