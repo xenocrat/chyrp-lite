@@ -158,7 +158,7 @@ Arguments:
 after_post_fields
 -----------------
 Called from:
-	admin/partials/post_fields.twig on line 48
+	admin/partials/post_fields.twig on line 49
 
 Arguments:
 	feather
@@ -167,10 +167,10 @@ Arguments:
 delete_upload
 -------------
 Called from:
-	feathers/audio/audio.php on line 92
-	feathers/photo/photo.php on line 93
+	feathers/audio/audio.php on line 93
+	feathers/photo/photo.php on line 94
 	feathers/uploader/uploader.php on line 134
-	feathers/video/video.php on line 92
+	feathers/video/video.php on line 93
 
 Arguments:
 	$post->filename
@@ -179,7 +179,7 @@ Arguments:
 audio_player
 ------------
 Called from:
-	feathers/audio/audio.php on line 109
+	feathers/audio/audio.php on line 110
 
 Arguments:
 	$post
@@ -188,7 +188,7 @@ Arguments:
 video_player
 ------------
 Called from:
-	feathers/video/video.php on line 109
+	feathers/video/video.php on line 110
 
 Arguments:
 	$post

@@ -23,20 +23,20 @@ msgstr "标题"
 msgid "Audio File"
 msgstr "音频文件"
 
-#: feathers/audio/audio.php:14
+#: feathers/audio/audio.php:15
 #, php-format
 msgid "(Max. file size: %d Megabytes)"
 msgstr "（最大文件大小：%d M）"
 
-#: feathers/audio/audio.php:17
+#: feathers/audio/audio.php:18
 msgid "Description"
 msgstr "描述"
 
-#: feathers/audio/audio.php:33
+#: feathers/audio/audio.php:34
 msgid "You did not select any audio to upload."
 msgstr "你灭有选择任何上传的音频文件。"
 
-#: feathers/audio/audio.php:112
+#: feathers/audio/audio.php:113
 msgid "Your web browser does not support the <code>audio</code> element."
 msgstr "你的浏览器不支持 <code>audio</code> 元素。"
 

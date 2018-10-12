@@ -31,19 +31,19 @@ msgstr "标题"
 msgid "Video File"
 msgstr "视频文件"
 
-#: feathers/video/video.php:14
+#: feathers/video/video.php:15
 #, php-format
 msgid "(Max. file size: %d Megabytes)"
 msgstr "（最大文件大小：%d M）"
 
-#: feathers/video/video.php:17
+#: feathers/video/video.php:18
 msgid "Description"
 msgstr "描述"
 
-#: feathers/video/video.php:33
+#: feathers/video/video.php:34
 msgid "You did not select a video to upload."
 msgstr "您没有选择上传的视频。"
 
-#: feathers/video/video.php:112
+#: feathers/video/video.php:113
 msgid "Your web browser does not support the <code>video</code> element."
 msgstr "您的浏览器不支持 <code>video</code> 元素。"

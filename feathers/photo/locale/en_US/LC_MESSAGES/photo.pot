@@ -4,7 +4,7 @@
 
 #: feathers/photo/admin/help/photo_alt_text.twig:3
 #: feathers/photo/admin/help/photo_alt_text.twig:6
-#: feathers/photo/photo.php:104
+#: feathers/photo/photo.php:105
 msgid "Alternative Text"
 msgstr ""
 
@@ -34,20 +34,20 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: feathers/photo/photo.php:14
+#: feathers/photo/photo.php:15
 #, php-format
 msgid "(Max. file size: %d Megabytes)"
 msgstr ""
 
-#: feathers/photo/photo.php:17
+#: feathers/photo/photo.php:18
 msgid "Caption"
 msgstr ""
 
-#: feathers/photo/photo.php:32
+#: feathers/photo/photo.php:33
 msgid "You did not select a photo to upload."
 msgstr ""
 
-#: feathers/photo/photo.php:110
+#: feathers/photo/photo.php:111
 msgid "Source"
 msgstr ""
 
