@@ -11,6 +11,7 @@
                                   "type" => "file",
                                   "label" => __("Video File", "video"),
                                   "multiple" => false,
+                                  "accept" => ".".implode(",.", self::video_extensions()),
                                   "note" => _f("(Max. file size: %d Megabytes)", $maximum, "video")));
             $this->setField(array("attr" => "description",
                                   "type" => "text_block",
@@ -28,7 +29,7 @@
 
         public function submit() {
             if (isset($_FILES['video']) and upload_tester($_FILES['video']))
-                $filename = upload($_FILES['video'], array("mp4", "ogv", "webm", "3gp", "mkv", "mov"));
+                $filename = upload($_FILES['video'], self::video_extensions());
             else
                 error(__("Error"), __("You did not select a video to upload.", "video"), null, 422);
 
@@ -44,7 +45,7 @@
         public function update($post) {
             if (isset($_FILES['video']) and upload_tester($_FILES['video'])) {
                 $this->delete_file($post);
-                $filename = upload($_FILES['video'], array("mp4", "ogv", "webm", "3gp", "mkv", "mov"));
+                $filename = upload($_FILES['video'], self::video_extensions());
             } else {
                 $filename = $post->filename;
             }
@@ -133,5 +134,9 @@
                 default:
                     return "application/octet-stream";
             }
+        }
+
+        private function video_extensions() {
+            return array("mp4", "ogv", "webm", "3gp", "mkv", "mov");
         }
     }

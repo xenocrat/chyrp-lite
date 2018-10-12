@@ -11,6 +11,7 @@
                                   "type" => "file",
                                   "label" => __("Photo", "photo"),
                                   "multiple" => false,
+                                  "accept" => ".".implode(",.", self::photo_extensions()),
                                   "note" => _f("(Max. file size: %d Megabytes)", $maximum, "photo")));
             $this->setField(array("attr" => "caption",
                                   "type" => "text_block",
@@ -27,7 +28,7 @@
 
         public function submit() {
             if (isset($_FILES['photo']) and upload_tester($_FILES['photo']))
-                $filename = upload($_FILES['photo'], array("jpg", "jpeg", "png", "gif", "tif", "tiff", "bmp"));
+                $filename = upload($_FILES['photo'], self::photo_extensions());
             else
                 error(__("Error"), __("You did not select a photo to upload.", "photo"), null, 422);
                 
@@ -46,7 +47,7 @@
         public function update($post) {
             if (isset($_FILES['photo']) and upload_tester($_FILES['photo'])) {
                 $this->delete_file($post);
-                $filename = upload($_FILES['photo'], array("jpg", "jpeg", "png", "gif", "tif", "tiff", "bmp"));
+                $filename = upload($_FILES['photo'], self::photo_extensions());
             } else {
                 $filename = $post->filename;
             }
@@ -113,5 +114,9 @@
                                "value" => (isset($post) ? $post->source : ""));
 
             return $options;
+        }
+
+        private function photo_extensions() {
+            return array("jpg", "jpeg", "png", "gif", "tif", "tiff", "bmp");
         }
     }

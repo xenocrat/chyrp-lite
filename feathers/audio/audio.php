@@ -11,12 +11,13 @@
                                   "type" => "file",
                                   "label" => __("Audio File", "audio"),
                                   "multiple" => false,
+                                  "accept" => ".".implode(",.", self::audio_extensions()),
                                   "note" => _f("(Max. file size: %d Megabytes)", $maximum, "audio")));
             $this->setField(array("attr" => "description",
                                   "type" => "text_block",
                                   "label" => __("Description", "audio"),
                                   "optional" => true,
-                                  "preview" => true));
+                                  "preview"  => true));
 
             $this->setFilter("title", array("markup_post_title", "markup_title"));
             $this->setFilter("description", array("markup_post_text", "markup_text"));
@@ -28,7 +29,7 @@
 
         public function submit() {
             if (isset($_FILES['audio']) and upload_tester($_FILES['audio']))
-                $filename = upload($_FILES['audio'], array("mp3", "m4a", "mp4", "oga", "ogg", "webm", "mka"));
+                $filename = upload($_FILES['audio'], self::audio_extensions());
             else
                 error(__("Error"), __("You did not select any audio to upload.", "audio"), null, 422);
 
@@ -44,7 +45,7 @@
         public function update($post) {
             if (isset($_FILES['audio']) and upload_tester($_FILES['audio'])) {
                 $this->delete_file($post);
-                $filename = upload($_FILES['audio'], array("mp3", "m4a", "mp4", "oga", "ogg", "webm", "mka"));
+                $filename = upload($_FILES['audio'], self::audio_extensions());
             } else {
                 $filename = $post->filename;
             }
@@ -135,5 +136,9 @@
                 default:
                     return "application/octet-stream";
             }
+        }
+
+        private function audio_extensions() {
+            return array("mp3", "m4a", "mp4", "oga", "ogg", "webm", "mka");
         }
     }
