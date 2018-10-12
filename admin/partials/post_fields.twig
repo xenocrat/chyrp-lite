@@ -3,6 +3,7 @@
 {% set field_value = attribute(post, field.attr) is defined ? attribute(post, field.attr) : field.value is defined ? field.value : "" %}
 {% set field_preview = field.preview is defined and field.preview ? " data-preview" : "" %}
 {% set field_multiple = field.multiple is defined and field.multiple ? " multiple" : "" %}
+{% set field_accept = field.accept is defined ? ' accept="' ~ (field.accept | fix(true)) ~ '"' : "" %}
 {% set field_markdown = site.enable_markdown and field.filters is defined and (field.filters | contains("markup_text")) ? " data-markdown" : "" %}
 {% set field_id = (field.attr ~ "_field") | fix(true) %}
 {% set field_name = (field_multiple is not empty ? field.attr ~ "[]" : field.attr) | fix(true) %}
@@ -27,7 +28,7 @@
 {% if field.type == "text" %}
 <input id="{{ field_id }}" class="text" type="text" name="{{ field_name }}"{{ field_preview ~ field_markdown }} value="{{ field_value | fix(true, true) }}">
 {% elseif field.type == "file" %}
-<input id="{{ field_id }}" type="file" name="{{ field_name }}"{{ field_multiple }} value="">
+<input id="{{ field_id }}" type="file" name="{{ field_name }}"{{ field_accept ~ field_multiple }} value="">
 {% elseif field.type == "text_block" %}
 <textarea id="{{ field_id }}" name="{{ field_name }}" rows="12"{{ field_preview ~ field_markdown }}>{{ field_value | fix(false, true) }}</textarea>
 {% elseif field.type == "checkbox" %}
@@ -94,6 +95,7 @@
 {% for field in options %}
 {% set field_value = field.value is defined ? field.value : "" %}
 {% set field_multiple = field.multiple is defined and field.multiple ? " multiple" : "" %}
+{% set field_accept = field.accept is defined ? ' accept="' ~ (field.accept | fix(true)) ~ '"' : "" %}
 {% set field_id = ((field.attr | replace({"[": "_", "]": ''})) ~ "_field") | fix(true) %}
 {% set field_name = (field_multiple is not empty ? field.attr ~ "[]" : field.attr) | fix(true) %}
 <p class="more_options_option">
@@ -111,7 +113,7 @@
 {% if field.type == "text" %}
 <input id="{{ field_id }}" class="text" type="text" name="{{ field_name }}" value="{{ field_value | fix(true, true) }}">
 {% elseif field.type == "file" %}
-<input id="{{ field_id }}" type="file" name="{{ field_name }}"{{ field_multiple }} value="">
+<input id="{{ field_id }}" type="file" name="{{ field_name }}"{{ field_accept ~ field_multiple }} value="">
 {% elseif field.type == "text_block" %}
 <textarea id="{{ field_id }}" name="{{ field_name }}" rows="12">{{ field_value | fix(false, true) }}</textarea>
 {% elseif field.type == "checkbox" %}
