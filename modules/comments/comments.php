@@ -174,8 +174,6 @@
             $status = ($editor) ? $_POST['status'] : $comment->status ;
             $created_at = ($editor) ? datetime($_POST['created_at']) : $comment->created_at ;
 
-
-
             $comment = $comment->update($_POST['body'],
                                         $_POST['author'],
                                         $_POST['author_url'],
@@ -185,12 +183,6 @@
                                         $created_at);
 
             return array($comment, true, __("Comment updated.", "comments"));
-        }
-
-        public function main_add_comment() {
-            list($post, $success, $message) = self::add_comment();
-            $type = ($success) ? "notice" : "warning" ;
-            Flash::$type($message, $post->url());
         }
 
         public function main_update_comment() {
@@ -601,6 +593,23 @@
             }
 
             return $links;
+        }
+
+        public function main_view() {
+            if (isset($_POST['action']) and $_POST['action'] == "add_comment") {
+                list($post, $success, $message) = self::add_comment();
+                $type = ($success) ? "notice" : "warning" ;
+                Flash::$type($message);
+
+                if ($success) {
+                    unset($_POST['body']);
+                    unset($_POST['author']);
+                    unset($_POST['author_email']);
+                    unset($_POST['author_url']);
+                }
+            }
+
+            return false;
         }
 
         public function view_feed($context) {

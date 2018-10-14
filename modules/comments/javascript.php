@@ -11,7 +11,7 @@ var ChyrpComment = {
             if (ChyrpComment.reload && ChyrpComment.delay > 0)
                 ChyrpComment.interval = setInterval(ChyrpComment.fetch, ChyrpComment.delay);
 
-            $("#add_comment:not(.no_ajax)").on("submit.validator", function(e) {
+            $("#add_comment:not(.no_ajax)").on("submit", function(e) {
                 if (!ChyrpComment.failed && !!window.FormData) {
                     e.preventDefault();
                     $("#comments .comment_form").loader();
