@@ -500,13 +500,14 @@ div.doaction:last-child {
     margin-bottom: 0em;
 }
 div.speak {
+    margin-top: 1em;
     margin-bottom: 0em;
 }
 div.admin, div.downloads {
     margin: 1em 0em 0em 0em;
 }
 input + div.doaction, textarea + div.doaction {
-    padding-top: 0.5em;
+    margin-top: 1em;
 }
 div.search_box {
     text-align: center;
