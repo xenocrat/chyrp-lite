@@ -246,7 +246,7 @@
     }
 
     /**
-     * Function: remove_trackbacking
+     * Function: remove_feed_url
      * Removes the feed_url config setting.
      *
      * Versions: 2018.03 => 2018.04
