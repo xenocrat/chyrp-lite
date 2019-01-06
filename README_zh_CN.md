@@ -95,6 +95,6 @@ Chyrp Lite由以下人员创建:
 
 ## Licenses
 
-Chyrp Lite is Copyright 2008-2018 Alex Suraci, Arian Xhezairi, Daniel Pimley, and other contributors,
+Chyrp Lite is Copyright 2008-2019 Alex Suraci, Arian Xhezairi, Daniel Pimley, and other contributors,
 distributed under the [BSD license](https://raw.githubusercontent.com/xenocrat/chyrp-lite/master/LICENSE.md).
 Please see the [licenses](licenses) directory for the full license text of all software packages distributed with Chyrp Lite.
