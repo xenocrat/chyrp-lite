@@ -1,7 +1,7 @@
 <?php
    /**
     * Class: XMLRPC
-    * Extensible XML-RPC interface for remotely controlling your Chyrp install.
+    * Extensible XML-RPC interface for remotely managing posts.
     */
     class XMLRPC extends IXR_Server {
        /**
