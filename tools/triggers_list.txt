@@ -344,19 +344,19 @@ Called from:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 1935
+	includes/helpers.php on line 1937
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 1952
+	includes/helpers.php on line 1954
 
 
 send_correspondence
 -------------------
 Called from:
-	includes/helpers.php on line 2124
+	includes/helpers.php on line 2126
 
 Arguments:
 	$action, $params
@@ -934,7 +934,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 2056
+	includes/controller/Admin.php on line 2051
 
 Target:
 	$write
@@ -943,7 +943,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2085
+	includes/controller/Admin.php on line 2080
 
 Target:
 	$manage
@@ -952,7 +952,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 2110
+	includes/controller/Admin.php on line 2105
 
 Target:
 	$settings
@@ -961,7 +961,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2128
+	includes/controller/Admin.php on line 2123
 
 Target:
 	$extend
@@ -970,7 +970,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2180
+	includes/controller/Admin.php on line 2175
 
 Target:
 	$this->context
@@ -1041,7 +1041,7 @@ Arguments:
 link_regexp
 -----------
 Called from:
-	includes/helpers.php on line 1348
+	includes/helpers.php on line 1350
 
 Target:
 	$expressions
@@ -1050,7 +1050,7 @@ Target:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 2065
+	includes/helpers.php on line 2067
 
 Target:
 	$function
