@@ -996,9 +996,11 @@
      *
      * Se Also:
      *     https://github.com/commonmark/CommonMark
+     *     https://github.github.com/gfm/
      */
     function markdown($text) {
-        return Parsedown::instance()->setStrictMode(true)->text($text);
+        $parser = new \cebe\markdown\GithubMarkdown();
+        return $parser->parse($text);
     }
 
     /**
