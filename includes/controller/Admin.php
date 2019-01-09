@@ -1859,11 +1859,6 @@
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
-            if (!empty($_POST['enable_markdown']) and !extension_loaded("mbstring")) {
-                Flash::warning(__("Markdown is disabled because multibyte string support is not available."));
-                unset($_POST['enable_markdown']);
-            }
-
             fallback($_POST['posts_per_page'], 5);
             fallback($_POST['admin_per_page'], 25);
             fallback($_POST['feed_items'], 20);
