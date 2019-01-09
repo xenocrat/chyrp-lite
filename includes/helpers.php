@@ -1000,6 +1000,8 @@
      */
     function markdown($text) {
         $parser = new \cebe\markdown\GithubMarkdown();
+        $parser->html5 = true;
+        $parser->keepListStartNumber = true;
         return $parser->parse($text);
     }
 
