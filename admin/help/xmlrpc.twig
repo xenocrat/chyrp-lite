@@ -1,0 +1,13 @@
+{% extends "layouts" ~ DIR ~ "help.twig" %}
+
+{% block title %}{{ "XML-RPC Support" | translate }}{% endblock %}
+
+{% block content %}
+<h1>{{ "XML-RPC Support" | translate }}</h1>
+<p>
+{{ "Chyrp Lite implements a complete WordPress-compatible MetaWeblog XML-RPC API that allows you to do many blogging tasks remotely without having to visit your blog's website." | translate }}
+</p>
+<p>
+{{ "Your blog's XML-RPC URL is <code>%s/includes/rpc.php</code>." | translate | format(site.chyrp_url) }}
+</p>
+{% endblock %}
