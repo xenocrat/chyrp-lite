@@ -9,11 +9,11 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.1.1\n"
+"X-Generator: Poedit 2.2\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Content-Type: text/plain; charset=UTF-8
-#. Copyright 2018 Daniel Pimley and other contributors.
+#. Copyright 2019 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: admin/help/canonical_url.twig:3 admin/help/canonical_url.twig:6
 #: admin/pages/general_settings.twig:23
@@ -75,7 +75,7 @@ msgstr ""
 "显示2016年由Foo创建的帖子。"
 
 #: admin/help/markdown.twig:3 admin/help/markdown.twig:6
-#: admin/help/markdown.twig:13 admin/pages/content_settings.twig:71
+#: admin/help/markdown.twig:13 admin/pages/content_settings.twig:72
 msgid "Markdown"
 msgstr "Markdown"
 
@@ -184,7 +184,7 @@ msgstr ""
 "时自动生成。 一个slug 只能包含字母a-z，数字0-9和连字符减号（“ - ”）。"
 
 #: admin/help/unicode_emoticons.twig:3 admin/help/unicode_emoticons.twig:6
-#: admin/pages/content_settings.twig:63
+#: admin/pages/content_settings.twig:64
 msgid "Unicode Emoticons"
 msgstr "Unicode表情符号"
 
@@ -204,6 +204,26 @@ msgstr "表情"
 #: admin/help/unicode_emoticons.twig:14
 msgid "Emoji"
 msgstr "表情符号"
+
+#: admin/help/xmlrpc.twig:3 admin/help/xmlrpc.twig:6
+#: admin/pages/content_settings.twig:49
+msgid "XML-RPC Support"
+msgstr "XML-RPC支持"
+
+#: admin/help/xmlrpc.twig:8
+msgid ""
+"Chyrp Lite implements a complete WordPress-compatible MetaWeblog XML-RPC API "
+"that allows you to do many blogging tasks remotely without having to visit "
+"your blog's website."
+msgstr ""
+"Chyrp Lite实现了一个完整的与WordPress兼容的MetaWeblog XML-RPC API，可以让您轻"
+"松实现\n"
+"远程执行许多博客任务，而无需访问您博客的网站。"
+
+#: admin/help/xmlrpc.twig:11
+#, php-format
+msgid "Your blog's XML-RPC URL is <code>%s/includes/rpc.php</code>."
+msgstr "您的博客的XML-RPC URL是 <code>%s/includes/rpc.php</code>。"
 
 #: admin/javascripts/admin.js.php:42
 msgid "Toggle All"
@@ -281,31 +301,27 @@ msgstr "发送引用"
 msgid "Attempts to notify sites to which your posts link."
 msgstr "尝试您帖子链接到的站点。"
 
-#: admin/pages/content_settings.twig:49
-msgid "XML-RPC Support"
-msgstr "XML-RPC支持"
-
-#: admin/pages/content_settings.twig:52
+#: admin/pages/content_settings.twig:53
 msgid "XML-RPC support allows you to manipulate your blog content remotely."
 msgstr "XML-RPC支持允许您远程操作您的博客内容。"
 
-#: admin/pages/content_settings.twig:56
+#: admin/pages/content_settings.twig:57
 msgid "Ajax"
 msgstr "Ajax"
 
-#: admin/pages/content_settings.twig:59
+#: admin/pages/content_settings.twig:60
 msgid "Ajax enhances your blog with additional interactive features."
 msgstr "Ajax使用其他交互功能增强了您的博客。"
 
-#: admin/pages/content_settings.twig:67
+#: admin/pages/content_settings.twig:68
 msgid "Display emoticons as Unicode emoji."
 msgstr "将表情符号显示为Unicode表情符号。"
 
-#: admin/pages/content_settings.twig:75
+#: admin/pages/content_settings.twig:76
 msgid "Compose blog content using Markdown text formatting."
 msgstr "使用Markdown语法撰写博客内容。"
 
-#: admin/pages/content_settings.twig:80 admin/pages/edit_group.twig:24
+#: admin/pages/content_settings.twig:81 admin/pages/edit_group.twig:24
 #: admin/pages/edit_user.twig:49 admin/pages/general_settings.twig:61
 #: admin/pages/route_settings.twig:85 admin/pages/user_settings.twig:47
 msgid "Update"

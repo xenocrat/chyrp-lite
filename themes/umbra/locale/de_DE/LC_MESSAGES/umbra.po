@@ -9,11 +9,11 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Content-Type: text/plain; charset=UTF-8
-#. Copyright 2018 Daniel Pimley and other contributors.
+#. Copyright 2019 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/umbra/content/comment.twig:3
 #, php-format
@@ -49,7 +49,7 @@ msgstr "Tags"
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "Permanentlink zu &#8220;%s&#8221;"
 
-#: themes/umbra/content/post.twig:22 themes/umbra/layouts/default.twig:59
+#: themes/umbra/content/post.twig:22 themes/umbra/layouts/default.twig:56
 msgid "Draft"
 msgstr "Entwurf"
 
@@ -178,7 +178,7 @@ msgstr "Benachrichtige mich, wenn andere kommentieren"
 msgid "Speak"
 msgstr "Sprich"
 
-#: themes/umbra/forms/user/controls.twig:5 themes/umbra/layouts/default.twig:64
+#: themes/umbra/forms/user/controls.twig:5 themes/umbra/layouts/default.twig:61
 msgid "Controls"
 msgstr "Details"
 
@@ -188,7 +188,7 @@ msgstr "Voller Name"
 
 #: themes/umbra/forms/user/controls.twig:9
 #: themes/umbra/forms/user/register.twig:13
-#: themes/umbra/layouts/default.twig:41
+#: themes/umbra/layouts/default.twig:38
 msgid "Email"
 msgstr "E-Mail"
 
@@ -209,7 +209,7 @@ msgid "Update"
 msgstr "Aktualisieren"
 
 #: themes/umbra/forms/user/login.twig:5 themes/umbra/forms/user/login.twig:14
-#: themes/umbra/layouts/default.twig:76
+#: themes/umbra/layouts/default.twig:73
 msgid "Log in"
 msgstr "Einloggen"
 
@@ -246,7 +246,7 @@ msgstr "Absenden"
 
 #: themes/umbra/forms/user/register.twig:5
 #: themes/umbra/forms/user/register.twig:19
-#: themes/umbra/layouts/default.twig:72
+#: themes/umbra/layouts/default.twig:69
 msgid "Register"
 msgstr "Registrieren"
 
@@ -262,44 +262,44 @@ msgstr "Umbra"
 msgid "A dark tumbleblog theme for Chyrp Lite."
 msgstr "Ein dunkler Tumbleblog thema für Chyrp Lite."
 
-#: themes/umbra/layouts/default.twig:44
+#: themes/umbra/layouts/default.twig:41
 msgid "Feed"
 msgstr "Feed"
 
-#: themes/umbra/layouts/default.twig:47
+#: themes/umbra/layouts/default.twig:44
 msgid "Archive"
 msgstr "Archiv"
 
-#: themes/umbra/layouts/default.twig:51
+#: themes/umbra/layouts/default.twig:48
 msgid "Admin"
 msgstr "Administration"
 
-#: themes/umbra/layouts/default.twig:55
+#: themes/umbra/layouts/default.twig:52
 msgid "Write"
 msgstr "Schreiben"
 
-#: themes/umbra/layouts/default.twig:67
+#: themes/umbra/layouts/default.twig:64
 msgid "Log out"
 msgstr "Ausloggen"
 
-#: themes/umbra/layouts/default.twig:82
+#: themes/umbra/layouts/default.twig:79
 msgid "Search&hellip;"
 msgstr "Suchen&hellip;"
 
-#: themes/umbra/layouts/default.twig:82
+#: themes/umbra/layouts/default.twig:79
 msgid "Search this blog"
 msgstr "Suchen"
 
-#: themes/umbra/layouts/default.twig:83
+#: themes/umbra/layouts/default.twig:80
 msgid "Search"
 msgstr "Suchen"
 
-#: themes/umbra/layouts/default.twig:91 themes/umbra/layouts/default.twig:101
+#: themes/umbra/layouts/default.twig:88 themes/umbra/layouts/default.twig:98
 #, php-format
 msgid "Page %d"
 msgstr "Seite %d"
 
-#: themes/umbra/layouts/default.twig:112
+#: themes/umbra/layouts/default.twig:109
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "Aufgerufen von %s in Zeile %d in %s Sekunden."

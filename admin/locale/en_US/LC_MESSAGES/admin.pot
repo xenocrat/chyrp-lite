@@ -40,7 +40,7 @@ msgstr ""
 #: admin/help/markdown.twig:3
 #: admin/help/markdown.twig:6
 #: admin/help/markdown.twig:13
-#: admin/pages/content_settings.twig:71
+#: admin/pages/content_settings.twig:72
 msgid "Markdown"
 msgstr ""
 
@@ -145,7 +145,7 @@ msgstr ""
 
 #: admin/help/unicode_emoticons.twig:3
 #: admin/help/unicode_emoticons.twig:6
-#: admin/pages/content_settings.twig:63
+#: admin/pages/content_settings.twig:64
 msgid "Unicode Emoticons"
 msgstr ""
 
@@ -159,6 +159,21 @@ msgstr ""
 
 #: admin/help/unicode_emoticons.twig:14
 msgid "Emoji"
+msgstr ""
+
+#: admin/help/xmlrpc.twig:3
+#: admin/help/xmlrpc.twig:6
+#: admin/pages/content_settings.twig:49
+msgid "XML-RPC Support"
+msgstr ""
+
+#: admin/help/xmlrpc.twig:8
+msgid "Chyrp Lite implements a complete WordPress-compatible MetaWeblog XML-RPC API that allows you to do many blogging tasks remotely without having to visit your blog's website."
+msgstr ""
+
+#: admin/help/xmlrpc.twig:11
+#, php-format
+msgid "Your blog's XML-RPC URL is <code>%s/includes/rpc.php</code>."
 msgstr ""
 
 #: admin/javascripts/admin.js.php:42
@@ -240,31 +255,27 @@ msgstr ""
 msgid "Attempts to notify sites to which your posts link."
 msgstr ""
 
-#: admin/pages/content_settings.twig:49
-msgid "XML-RPC Support"
-msgstr ""
-
-#: admin/pages/content_settings.twig:52
+#: admin/pages/content_settings.twig:53
 msgid "XML-RPC support allows you to manipulate your blog content remotely."
 msgstr ""
 
-#: admin/pages/content_settings.twig:56
+#: admin/pages/content_settings.twig:57
 msgid "Ajax"
 msgstr ""
 
-#: admin/pages/content_settings.twig:59
+#: admin/pages/content_settings.twig:60
 msgid "Ajax enhances your blog with additional interactive features."
 msgstr ""
 
-#: admin/pages/content_settings.twig:67
+#: admin/pages/content_settings.twig:68
 msgid "Display emoticons as Unicode emoji."
 msgstr ""
 
-#: admin/pages/content_settings.twig:75
+#: admin/pages/content_settings.twig:76
 msgid "Compose blog content using Markdown text formatting."
 msgstr ""
 
-#: admin/pages/content_settings.twig:80
+#: admin/pages/content_settings.twig:81
 #: admin/pages/edit_group.twig:24
 #: admin/pages/edit_user.twig:49
 #: admin/pages/general_settings.twig:61
