@@ -23,4 +23,3 @@
     $server = new XMLRPC();
 
     ob_end_flush();
-    
