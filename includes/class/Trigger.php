@@ -71,14 +71,11 @@
             $return = null;
             $this->called[$name] = array();
 
-            if (isset($this->priorities[$name])) { # Predefined priorities?
-                usort($this->priorities[$name], array($this, "cmp"));
-
+            if (isset($this->priorities[$name]) and usort($this->priorities[$name], array($this, "cmp")))
                 foreach ($this->priorities[$name] as $action) {
                     $return = call_user_func_array($action["function"], $arguments);
                     $this->called[$name][] = $action["function"];
                 }
-            }
 
             foreach (Modules::$instances as $module)
                 if (!in_array(array($module, $name), $this->called[$name]) and is_callable(array($module, $name)))
@@ -125,8 +122,9 @@
 
             if (isset($this->priorities[$name]) and usort($this->priorities[$name], array($this, "cmp")))
                 foreach ($this->priorities[$name] as $action) {
-                    $call = call_user_func_array($this->called[$name][] = $action["function"],
+                    $call = call_user_func_array($action["function"],
                                                  array_merge(array(&$target), $arguments));
+                    $this->called[$name][] = $action["function"];
                     $target = fallback($call, $target);
                 }
 
