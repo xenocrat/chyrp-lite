@@ -67,47 +67,34 @@
          *     $author_email - The commenter's email.
          *     $post - The <Post> they're commenting on.
          *     $parent - The id of the <Comment> they're replying to.
-         *     $notify - Send correspondence if additional comments are added (1 or 0).
+         *     $notify - Send correspondence if additional comments are added?
          *     $status - A string describing the comment status (optional).
-         *
-         * Note:
-         *     The Akismet service will be used for spam detection if the API key is present.
          */
         static function create($body, $author, $author_url, $author_email, $post, $parent, $notify, $status = null) {
             $config = Config::current();
             $visitor = Visitor::current();
+            $trigger = Trigger::current();
+            $values = array("body"         => $body,
+                            "author"       => $author,
+                            "author_url"   => $author_url,
+                            "author_email" => $author_email);
 
             fallback($status, ($post->user_id == $visitor->id) ?
                                     "approved" :
                                     $config->module_comments["default_comment_status"]);
 
+            if ($trigger->call("comment_is_spam", $values))
+                $status = "spam";
+
             if (!logged_in() or !$config->email_correspondence)
-                $notify = 0;
-
-            $HTTP_REFERER = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : "" ;
-            $HTTP_USER_AGENT = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "" ;
-
-            if (!empty($config->module_comments["akismet_api_key"])) {
-                $akismet = new Akismet($config->url, $config->module_comments["akismet_api_key"]);
-                $akismet->setCommentContent($body);
-                $akismet->setCommentAuthor($author);
-                $akismet->setCommentAuthorURL($author_url);
-                $akismet->setCommentAuthorEmail($author_email);
-                $akismet->setPermalink($post->url());
-                $akismet->setCommentType($status);
-                $akismet->setReferrer($HTTP_REFERER);
-                $akismet->setUserIP($_SERVER['REMOTE_ADDR']);
-
-                if ($akismet->isCommentSpam())
-                    $status = "spam";
-            }
+                $notify = false;
 
             $comment = self::add($body,
                                  $author,
                                  $author_url,
                                  $author_email,
-                                 $_SERVER['REMOTE_ADDR'],
-                                 $HTTP_USER_AGENT,
+                                 crc32($_SERVER['REMOTE_ADDR']),
+                                 isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "",
                                  $status,
                                  $post->id,
                                  $visitor->id,
@@ -156,11 +143,6 @@
                             $notify,
                             $created_at = null,
                             $updated_at = null) {
-            $ip = ip2long($ip);
-
-            if ($ip === false)
-                $ip = 0;
-
             $sql = SQL::current();
 
             $sql->insert("comments",
@@ -185,7 +167,7 @@
                                              "where"      => array("post_id"    => $new->post_id,
                                                                    "user_id !=" => $new->user_id,
                                                                    "status"     => "approved",
-                                                                   "notify"     => 1)),
+                                                                   "notify"     => true)),
                                        array("filter" => false));
 
                 $notifications = array();
@@ -421,7 +403,7 @@
                                        post_id INTEGER DEFAULT 0,
                                        user_id INTEGER DEFAULT 0,
                                        parent_id INTEGER DEFAULT 0,
-                                       notify INTEGER DEFAULT 0,
+                                       notify BOOLEAN DEFAULT '0',
                                        created_at DATETIME DEFAULT NULL,
                                        updated_at DATETIME DEFAULT NULL
                                    ) DEFAULT CHARSET=utf8");

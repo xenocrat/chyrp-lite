@@ -15,7 +15,6 @@
                                    array("default_comment_status" => "denied",
                                          "allowed_comment_html" => array("strong", "em", "blockquote", "code", "pre", "a"),
                                          "comments_per_page" => 25,
-                                         "akismet_api_key" => null,
                                          "auto_reload_comments" => 30,
                                          "enable_reload_comments" => false));
 
@@ -113,7 +112,7 @@
 
             fallback($_POST['author_url'], "");
             fallback($parent, (int) $_POST['parent_id'], 0);
-            fallback($notify, (int) (!empty($_POST['notify']) and logged_in()));
+            fallback($notify, (!empty($_POST['notify']) and logged_in()));
 
             $comment = Comment::create($_POST['body'],
                                        $_POST['author'],
@@ -147,7 +146,7 @@
             fallback($_POST['status'], $comment->status);
             fallback($_POST['author_email'], "");
             fallback($_POST['author_url'], "");
-            fallback($notify, (int) (!empty($_POST['notify']) and logged_in()));
+            fallback($notify, (!empty($_POST['notify']) and logged_in()));
 
             if (empty($_POST['body']))
                 return array($comment, false, __("Message can't be blank.", "comments"));
@@ -315,10 +314,8 @@
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
-            $from = (isset($_POST['from'])) ? $_POST['from'] : "manage_comments" ;
-
             if (!isset($_POST['comment']))
-                Flash::warning(__("No comments selected."), $from);
+                Flash::warning(__("No comments selected."), "manage_comments");
 
             $comments = array_keys($_POST['comment']);
 
@@ -385,15 +382,15 @@
                 Flash::notice(__("Selected comments marked as spam.", "comments"));
             }
 
-            if (!empty(Config::current()->module_comments["akismet_api_key"])) {
-                if (!empty($false_positives))
-                    self::reportHam($false_positives);
+            $trigger = Trigger::current();
 
-                if (!empty($false_negatives))
-                    self::reportSpam($false_negatives);
-            }
+            if (!empty($false_positives))
+                $trigger->call("comments_false_positives", $false_positives);
 
-            redirect($from);
+            if (!empty($false_negatives))
+                $trigger->call("comments_false_negatives", $false_negatives);
+
+            redirect("manage_comments");
         }
 
         public function admin_comment_settings($admin) {
@@ -424,22 +421,10 @@
             $allowed_comment_html = array_diff($allowed_comment_html, array(""));
 
             $config = Config::current();
-
-            if (!empty($_POST['akismet_api_key'])) {
-                $akismet_api_key = trim($_POST['akismet_api_key']);
-                $akismet = new Akismet($config->url, $akismet_api_key);
-
-                if (!$akismet->isKeyValid()) {
-                    Flash::warning(__("Invalid Akismet API key."));
-                    unset($akismet_api_key);
-                }
-            }
-
             $config->set("module_comments",
                          array("default_comment_status" => $_POST['default_comment_status'],
                                "allowed_comment_html" => $allowed_comment_html,
                                "comments_per_page" => (int) $_POST['comments_per_page'],
-                               "akismet_api_key" => (isset($akismet_api_key) ? $akismet_api_key : null),
                                "auto_reload_comments" => (int) $_POST['auto_reload_comments'],
                                "enable_reload_comments" => isset($_POST['enable_reload_comments'])));
 
@@ -804,38 +789,6 @@
             return ($visitor->id == 0) ? count($_SESSION['comments']) : self::user_comment_count_attr($attr, $visitor) ;
         }
 
-        private function reportHam($comments) {
-            $config = Config::current();
-
-            foreach($comments as $comment) {
-                $akismet = new Akismet($config->url, $config->module_comments["akismet_api_key"]);
-                $akismet->setCommentAuthor($comment->author);
-                $akismet->setCommentAuthorEmail($comment->author_email);
-                $akismet->setCommentAuthorURL($comment->author_url);
-                $akismet->setCommentContent($comment->body);
-                $akismet->setPermalink($comment->post_id);
-                $akismet->setReferrer($comment->author_agent);
-                $akismet->setUserIP($comment->author_ip);
-                $akismet->submitHam();
-            }
-        }
-
-        private function reportSpam($comments) {
-            $config = Config::current();
-
-            foreach($comments as $comment) {
-                $akismet = new Akismet($config->url, $config->module_comments["akismet_api_key"]);
-                $akismet->setCommentAuthor($comment->author);
-                $akismet->setCommentAuthorEmail($comment->author_email);
-                $akismet->setCommentAuthorURL($comment->author_url);
-                $akismet->setCommentContent($comment->body);
-                $akismet->setPermalink($comment->post_id);
-                $akismet->setReferrer($comment->author_agent);
-                $akismet->setUserIP($comment->author_ip);
-                $akismet->submitSpam();
-            }
-        }
-
         public function import_chyrp_post($entry, $post) {
             $chyrp = $entry->children("http://chyrp.net/export/1.0/");
 
@@ -855,13 +808,13 @@
                              unfix((string) $comment->author->name),
                              unfix((string) $comment->author->uri),
                              unfix((string) $comment->author->email),
-                             unfix((string) $chyrp->author->ip),
-                             unfix((string) $chyrp->author->agent),
+                             0,
+                             "",
                              unfix((string) $chyrp->status),
                              $post->id,
                              (!$user->no_results) ? $user->id : 0,
                              0,
-                             0,
+                             false,
                              datetime((string) $comment->published),
                              ($updated) ? datetime((string) $comment->updated) : null);
             }
@@ -884,8 +837,6 @@
                         '<chyrp:login>'.($comment->user->no_results ?
                             "" :
                             fix($comment->user->login, false, true)).'</chyrp:login>'."\n".
-                        '<chyrp:ip>'.fix(long2ip($comment->author_ip), false, true).'</chyrp:ip>'."\n".
-                        '<chyrp:agent>'.fix($comment->author_agent, false, true).'</chyrp:agent>'."\n".
                         '</author>'."\n".
                         '<content type="html">'.fix($comment->body, false, true).'</content>'."\n".
                         '<chyrp:status>'.fix($comment->status, false, true).'</chyrp:status>'."\n".
