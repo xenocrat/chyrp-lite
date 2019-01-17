@@ -7,11 +7,6 @@
 <form id="comment_settings" class="split" action="{{ url('comment_settings') }}" method="post" accept-charset="UTF-8">
 <fieldset>
 <p>
-<label for="akismet_api_key">{{ "Akismet API Key" | translate("comments") }}</label>
-<input class="text" type="text" name="akismet_api_key" value="{{ site.module_comments.akismet_api_key | fix(true) }}" id="akismet_api_key">
-<small><a href="http://akismet.com/">akismet.com</a></small>
-</p>
-<p>
 <label for="allowed_comment_html">{{ "Allowed HTML Tags" | translate("comments") }}</label>
 <input class="text code" type="text" name="allowed_comment_html" value="{{ site.module_comments.allowed_comment_html | join(", ") | fix(true) }}" id="allowed_comment_html">
 <small>{{ "Format: <code>strong, blockquote, em</code>" | translate("comments") }}</small>
