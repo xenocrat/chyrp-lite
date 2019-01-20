@@ -114,7 +114,7 @@
          *     $author - The name of the commenter.
          *     $author_url - The commenter's website.
          *     $author_email - The commenter's email.
-         *     $ip - The commenter's IP address.
+         *     $ip - CRC32 polynomial of the commenter's IP address.
          *     $agent - The commenter's user agent.
          *     $status - The new comment's status.
          *     $post_id - The ID of the <Post> they're commenting on.
@@ -397,7 +397,7 @@
                                        author VARCHAR(250) DEFAULT '',
                                        author_url VARCHAR(2048) DEFAULT '',
                                        author_email VARCHAR(128) DEFAULT '',
-                                       author_ip INTEGER DEFAULT '0',
+                                       author_ip INTEGER DEFAULT 0,
                                        author_agent VARCHAR(255) DEFAULT '',
                                        status VARCHAR(32) default 'denied',
                                        post_id INTEGER DEFAULT 0,
