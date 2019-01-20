@@ -307,7 +307,6 @@
 
             foreach ($chyrp->like as $like) {
                 $timestamp = $like->children("http://www.w3.org/2005/Atom")->published;
-                $session_hash = $like->children("http://chyrp.net/export/1.0/")->hash;
                 $login = $like->children("http://chyrp.net/export/1.0/")->login;
 
                 $user = new User(array("login" => unfix((string) $login)));
@@ -315,7 +314,7 @@
                 Like::add($post->id,
                           ((!$user->no_results) ? $user->id : 0),
                           datetime((string) $timestamp),
-                          oneof(unfix((string) $session_hash), md5("import_chyrp_post")));
+                          uniqid("imported_", true));
             }
         }
 
@@ -331,7 +330,6 @@
                 $atom.= '<chyrp:like>'."\n";
                 $atom.= '<chyrp:login>'.fix($login, false, true).'</chyrp:login>'."\n";
                 $atom.= '<published>'.when("c", $like["timestamp"]).'</published>'."\n";
-                $atom.= '<chyrp:hash>'.fix($like["session_hash"], false, true).'</chyrp:hash>'."\n";
                 $atom.= '</chyrp:like>'."\n";
             }
 
