@@ -548,19 +548,46 @@ Arguments:
 	comment
 
 
+comments_false_positives
+------------------------
+Called from:
+	modules/comments/comments.php on line 388
+
+Arguments:
+	$false_positives
+
+
+comments_false_negatives
+------------------------
+Called from:
+	modules/comments/comments.php on line 391
+
+Arguments:
+	$false_negatives
+
+
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 649
+	modules/comments/comments.php on line 634
 
 Arguments:
 	$comment, $feed
 
 
+comment_is_spam
+---------------
+Called from:
+	modules/comments/model/Comment.php on line 86
+
+Arguments:
+	$values)
+
+
 add_comment
 -----------
 Called from:
-	modules/comments/model/Comment.php on line 204
+	modules/comments/model/Comment.php on line 186
 
 Arguments:
 	$new
@@ -569,7 +596,7 @@ Arguments:
 update_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 258
+	modules/comments/model/Comment.php on line 240
 
 Arguments:
 	$comment, $this
@@ -1011,7 +1038,7 @@ markup_text
 Called from:
 	includes/controller/Ajax.php on line 142
 	includes/model/Page.php on line 282
-	modules/comments/model/Comment.php on line 391
+	modules/comments/model/Comment.php on line 373
 
 Target:
 	$content
@@ -1333,7 +1360,7 @@ Target:
 filter_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 388
+	modules/comments/model/Comment.php on line 370
 
 Target:
 	$this
@@ -1342,7 +1369,7 @@ Target:
 markup_comment_text
 -------------------
 Called from:
-	modules/comments/model/Comment.php on line 391
+	modules/comments/model/Comment.php on line 373
 
 Target:
 	$this->body
