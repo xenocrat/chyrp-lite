@@ -192,7 +192,7 @@
             $xml = simplexml_load_string($api);
 
             if (!isset($xml->tumblelog))
-                Flash::warning(__("Could not retrieve content from the Tumblr URL. ", "migrator"), "manage_migration");
+                Flash::warning(__("Could not retrieve content from the Tumblr URL.", "migrator"), "manage_migration");
 
             $already_in = $posts = array();
 
