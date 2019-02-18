@@ -111,7 +111,7 @@ msgid "Invalid URL."
 msgstr ""
 
 #: modules/migrator/migrator.php:195
-msgid "Could not retrieve content from the Tumblr URL. "
+msgid "Could not retrieve content from the Tumblr URL."
 msgstr ""
 
 #: modules/migrator/migrator.php:288
