@@ -9,25 +9,25 @@
 {% if visitor.group.can("add_post") %}
 <p>
 <label for="posts_file">{{ "Posts .atom File" | translate }}</label>
-<input type="file" name="posts_file" value="" id="posts_file">
+<input type="file" name="posts_file" value="" id="posts_file" accept=".atom,.xml">
 </p>
 {% endif %}
 {% if visitor.group.can("add_page") %}
 <p>
 <label for="pages_file">{{ "Pages .atom File" | translate }}</label>
-<input type="file" name="pages_file" value="" id="pages_file">
+<input type="file" name="pages_file" value="" id="pages_file" accept=".atom,.xml">
 </p>
 {% endif %}
 {% if visitor.group.can("add_group") %}
 <p>
 <label for="groups_file">{{ "Groups .json File" | translate }}</label>
-<input type="file" name="groups_file" value="" id="groups_file">
+<input type="file" name="groups_file" value="" id="groups_file" accept=".json,.js">
 </p>
 {% endif %}
 {% if visitor.group.can("add_user") %}
 <p>
 <label for="users_file">{{ "Users .json File" | translate }}</label>
-<input type="file" name="users_file" value="" id="users_file">
+<input type="file" name="users_file" value="" id="users_file" accept=".json,.js">
 </p>
 {% endif %}
 <p>
