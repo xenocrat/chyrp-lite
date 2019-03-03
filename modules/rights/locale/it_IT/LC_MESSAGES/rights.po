@@ -1,0 +1,169 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: Marina Colucci\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: it_IT\n"
+
+#. Content-Type: text/plain; charset=UTF-8
+#. Copyright 2019 Daniel Pimley and other contributors.
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/rights/admin/help/choosing_a_licence.twig:3
+msgid "Filtering Results"
+msgstr "Filtro per i risultati"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:6
+msgid "Choosing a License"
+msgstr "Scelta della licenza per il copyright"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:8
+msgid ""
+"When you create a piece of content for your blog, you get to decide whether "
+"or not you want your name associated with it, and whether or not it can be "
+"reproduced and reused by other people. As the &#8220;rights holder&#8221;, "
+"the license you choose to apply to your work determines which of those "
+"rights you retain and which of them you waive."
+msgstr ""
+"Quando crei un contenuto per il tuo blog, puoi decidere se vuoi o meno che "
+"il tuo nome sia associato ad esso e se può essere riprodotto e riutilizzato "
+"da altri. In qualità di &#8220;detentore dei diritti di autore&#8221;, la "
+"tipologia della licenza di copyright applicata al tuo lavoro determina quali "
+"di questi diritti conservi e a quali di essi rinunci."
+
+#: modules/rights/admin/help/choosing_a_licence.twig:11
+msgid ""
+"Creative Commons is a family of licenses that you can use to donate your "
+"work to &#8220;the commons&#8221; — the body of work freely available for "
+"legal use, sharing, repurposing, and remixing. With a Creative Commons "
+"license, you can give other people permission to reproduce or reuse your "
+"work with certain restrictions. Here is a chart comparing the licenses:"
+msgstr ""
+"Creative Commons è una famiglia di licenze che puoi utilizzare per donare il "
+"tuo lavoro come &#8220;bene comune&#8221; — Il contenuto dell'opera é "
+"liberamente disponibile per uso legale, condivisione, ridestinazione e "
+"remix. Con una licenza Creative Commons, puoi concedere ad altre persone il "
+"permesso di riprodurre o riutilizzare il tuo lavoro con determinate "
+"restrizioni. Ecco un grafico che confronta le licenze:"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:17
+#: modules/rights/rights.php:59
+msgid "License"
+msgstr "Licenza"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:19
+msgid "Others who use your work in any way must give you credit."
+msgstr ""
+"Altri che usano il tuo lavoro in qualsiasi modo devono dartene credito."
+
+#: modules/rights/admin/help/choosing_a_licence.twig:20
+msgid "Attribution"
+msgstr "Attribuzione"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:22
+msgid "Derivative works must be licensed under the same terms."
+msgstr ""
+"I contenuti di opere derivate devono essere concessi in licenza secondo le "
+"stesse condizioni."
+
+#: modules/rights/admin/help/choosing_a_licence.twig:23
+msgid "ShareAlike"
+msgstr "ShareAlike"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:25
+msgid "Your work may not be reproduced or reused for commercial gain."
+msgstr ""
+"Il tuo lavoro non può essere riprodotto o riutilizzato per guadagno "
+"commerciale."
+
+#: modules/rights/admin/help/choosing_a_licence.twig:26
+msgid "NonCommercial"
+msgstr "NonCommercial"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:28
+msgid "Your work may be reproduced but it may not be modified."
+msgstr "Il tuo lavoro può essere riprodotto ma non può essere modificato."
+
+#: modules/rights/admin/help/choosing_a_licence.twig:29
+msgid "NoDerivatives"
+msgstr "NoDerivatives"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:37
+#: modules/rights/rights.php:17 modules/rights/rights.php:77
+msgid "Creative Commons BY"
+msgstr "Creative Commons BY"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:48
+#: modules/rights/rights.php:20 modules/rights/rights.php:83
+msgid "Creative Commons BY-ND"
+msgstr "Creative Commons BY-ND"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:63
+#: modules/rights/rights.php:23 modules/rights/rights.php:89
+msgid "Creative Commons BY-SA"
+msgstr "Creative Commons BY-SA"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:78
+#: modules/rights/rights.php:26 modules/rights/rights.php:95
+msgid "Creative Commons BY-NC"
+msgstr "Creative Commons BY-NC"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:93
+#: modules/rights/rights.php:29 modules/rights/rights.php:101
+msgid "Creative Commons BY-NC-ND"
+msgstr "Creative Commons BY-NC-ND"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:110
+#: modules/rights/rights.php:32 modules/rights/rights.php:107
+msgid "Creative Commons BY-NC-SA"
+msgstr "Creative Commons BY-NC-SA"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:127
+#: modules/rights/rights.php:35 modules/rights/rights.php:113
+msgid "Creative Commons CC0"
+msgstr "Creative Commons CC0"
+
+#: modules/rights/info.php:3
+msgid "Rights"
+msgstr "Diritti di copyright"
+
+#: modules/rights/info.php:6
+msgid ""
+"Adds post options for attribution and assigning intellectual property rights."
+msgstr ""
+"Aggiunge opzioni ai post per l'attribuzione e l'assegnazione dei diritti di "
+"proprietà intellettuale."
+
+#: modules/rights/info.php:10
+msgid "Do you want to remove rights data from the database?"
+msgstr "Si desidera rimuovere i dati dei diritti di copyright dal database?"
+
+#: modules/rights/rights.php:14 modules/rights/rights.php:123
+msgid "All rights reserved"
+msgstr "Tutti i diritti riservati"
+
+#: modules/rights/rights.php:38
+msgid "Orphan Work"
+msgstr "Opere orfane"
+
+#: modules/rights/rights.php:41 modules/rights/rights.php:119
+msgid "Public Domain"
+msgstr "Dominio pubblico"
+
+#: modules/rights/rights.php:44
+msgid "Crown Copyright"
+msgstr "Crown Copyright"
+
+#: modules/rights/rights.php:49
+msgid "Original Work"
+msgstr "Opera originale"
+
+#: modules/rights/rights.php:54
+msgid "Rights Holder"
+msgstr "Titolare dei diritti"

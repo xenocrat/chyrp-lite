@@ -1,0 +1,367 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: Marina Colucci\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: it_IT\n"
+
+#. Content-Type: text/plain; charset=UTF-8
+#. Copyright 2019 Daniel Pimley and other contributors.
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: themes/umbra/content/comment.twig:3
+#, php-format
+msgid "%s:"
+msgstr "%s:"
+
+#: themes/umbra/content/comment.twig:5
+#, php-format
+msgid "%s said:"
+msgstr "%s:"
+
+#: themes/umbra/content/comment.twig:9
+msgid "This comment is awaiting moderation."
+msgstr "Questo commento è in attesa di verifica da un moderatore."
+
+#: themes/umbra/content/comment.twig:23
+msgid "%d %B, %Y, at %I:%M %p"
+msgstr "%d %B, %Y, %I:%M %p"
+
+#: themes/umbra/content/post.twig:7 themes/umbra/pages/view.twig:11
+msgid "[Untitled]"
+msgstr "[Senza titolo]"
+
+#: themes/umbra/content/post.twig:10
+msgid "Tags"
+msgstr "Tag"
+
+#: themes/umbra/content/post.twig:20 themes/umbra/feathers/audio.twig:6
+#: themes/umbra/feathers/photo.twig:6 themes/umbra/feathers/quote.twig:6
+#: themes/umbra/feathers/text.twig:6 themes/umbra/feathers/uploader.twig:6
+#: themes/umbra/feathers/video.twig:6 themes/umbra/pages/archive.twig:36
+#, php-format
+msgid "Permanent link to &#8220;%s&#8221;"
+msgstr "Link permanente &#8220;%s&#8221;"
+
+#: themes/umbra/content/post.twig:22 themes/umbra/layouts/default.twig:56
+msgid "Draft"
+msgstr "Bozza"
+
+#: themes/umbra/content/post.twig:24
+msgid "Scheduled"
+msgstr "Programmato"
+
+#: themes/umbra/content/post.twig:26
+msgid "Pinned"
+msgstr "Pinned"
+
+#: themes/umbra/content/post.twig:28
+msgid "%d %b, %Y"
+msgstr "%d %b, %Y"
+
+#: themes/umbra/content/post.twig:37
+#, php-format
+msgid "&copy; %s, %s."
+msgstr "&copy; %s, %s."
+
+#: themes/umbra/content/post.twig:39
+#, php-format
+msgid "&copy; %s."
+msgstr "&copy; %s."
+
+#: themes/umbra/feathers/missing.twig:4
+msgid "The post cannot be displayed because the theme does not support it."
+msgstr "Il post non può essere visualizzato perché il tema non lo supporta."
+
+#: themes/umbra/feathers/uploader.twig:21
+msgid "File attachment:"
+msgstr "Allegato:"
+
+#: themes/umbra/forms/comment/edit.twig:2
+msgid "Comment"
+msgstr "Commento"
+
+#: themes/umbra/forms/comment/edit.twig:5
+msgid "Author"
+msgstr "Autore"
+
+#: themes/umbra/forms/comment/edit.twig:7
+msgid "Author's website"
+msgstr "Sito dell'autore"
+
+#: themes/umbra/forms/comment/edit.twig:9
+msgid "Author's email"
+msgstr "Email dell'autore"
+
+#: themes/umbra/forms/comment/edit.twig:13
+msgid "Timestamp"
+msgstr "Date e ora"
+
+#: themes/umbra/forms/comment/edit.twig:15
+msgid "Status"
+msgstr "Stato"
+
+#: themes/umbra/forms/comment/edit.twig:17
+msgid "Approved"
+msgstr "Approvato"
+
+#: themes/umbra/forms/comment/edit.twig:18
+msgid "Denied"
+msgstr "Negato"
+
+#: themes/umbra/forms/comment/edit.twig:19
+msgid "Spam"
+msgstr "Spam"
+
+#: themes/umbra/forms/comment/edit.twig:20
+msgid "Pingback"
+msgstr "Pingback"
+
+#: themes/umbra/forms/comment/edit.twig:24
+msgid "Email Notifications"
+msgstr "Notifiche email"
+
+#: themes/umbra/forms/comment/edit.twig:32
+msgid "Save"
+msgstr "Salva"
+
+#: themes/umbra/forms/comment/edit.twig:33
+msgid "Cancel"
+msgstr "Annulla"
+
+#: themes/umbra/forms/comment/new.twig:3
+#, php-format
+msgid "%s's comment"
+msgstr "Commento di %s"
+
+#: themes/umbra/forms/comment/new.twig:5
+msgid "Your name"
+msgstr "Il tuo nome"
+
+#: themes/umbra/forms/comment/new.twig:7
+msgid "Your email"
+msgstr "La tua email"
+
+#: themes/umbra/forms/comment/new.twig:9
+msgid "Your website"
+msgstr "Il tuo sito web"
+
+#: themes/umbra/forms/comment/new.twig:12
+msgid "Your comment"
+msgstr "Il tuo commento"
+
+#: themes/umbra/forms/comment/new.twig:16
+msgid "Markdown is allowed."
+msgstr "Markdown è consentito."
+
+#: themes/umbra/forms/comment/new.twig:18
+msgid "HTML tags allowed:"
+msgstr "Tag HTML consentiti:"
+
+#: themes/umbra/forms/comment/new.twig:20
+msgid "HTML is not allowed."
+msgstr "HTML non è consentito."
+
+#: themes/umbra/forms/comment/new.twig:24
+msgid "Notify me when others comment"
+msgstr "Avvisami quando altri commentano"
+
+#: themes/umbra/forms/comment/new.twig:37
+msgid "Speak"
+msgstr "Invia"
+
+#: themes/umbra/forms/user/controls.twig:5 themes/umbra/layouts/default.twig:61
+msgid "Controls"
+msgstr "Controlli"
+
+#: themes/umbra/forms/user/controls.twig:7
+msgid "Full name"
+msgstr "Nome completo"
+
+#: themes/umbra/forms/user/controls.twig:9
+#: themes/umbra/forms/user/register.twig:13
+#: themes/umbra/layouts/default.twig:38
+msgid "Email"
+msgstr "Email"
+
+#: themes/umbra/forms/user/controls.twig:11
+msgid "Website"
+msgstr "Sito web"
+
+#: themes/umbra/forms/user/controls.twig:13
+msgid "New password?"
+msgstr "Nuova password?"
+
+#: themes/umbra/forms/user/controls.twig:15
+msgid "Confirm"
+msgstr "Conferma"
+
+#: themes/umbra/forms/user/controls.twig:20
+msgid "Update"
+msgstr "Aggiorna"
+
+#: themes/umbra/forms/user/login.twig:5 themes/umbra/forms/user/login.twig:14
+#: themes/umbra/layouts/default.twig:73
+msgid "Log in"
+msgstr "Accedi"
+
+#: themes/umbra/forms/user/login.twig:7
+#: themes/umbra/forms/user/lost_password.twig:8
+#: themes/umbra/forms/user/register.twig:7
+msgid "Username"
+msgstr "Nome utente"
+
+#: themes/umbra/forms/user/login.twig:9 themes/umbra/forms/user/register.twig:9
+#: themes/umbra/forms/user/register.twig:11
+msgid "Password"
+msgstr "Password"
+
+#: themes/umbra/forms/user/login.twig:15
+msgid "Help!"
+msgstr "Aiuto!"
+
+#: themes/umbra/forms/user/lost_password.twig:5
+msgid "Lost password"
+msgstr "Password dimenticata"
+
+#: themes/umbra/forms/user/lost_password.twig:7
+msgid ""
+"Please enter your username below and we will email you a new password for "
+"your account."
+msgstr ""
+"Inserisci il tuo nome utente qui sotto e ti invieremo una nuova password per "
+"il tuo account."
+
+#: themes/umbra/forms/user/lost_password.twig:12
+msgid "Submit"
+msgstr "Invia"
+
+#: themes/umbra/forms/user/register.twig:5
+#: themes/umbra/forms/user/register.twig:19
+#: themes/umbra/layouts/default.twig:69
+msgid "Register"
+msgstr "Registrati"
+
+#: themes/umbra/forms/user/register.twig:11
+msgid "(again)"
+msgstr "(ripeti)"
+
+#: themes/umbra/info.php:3
+msgid "Umbra"
+msgstr "Umbra"
+
+#: themes/umbra/info.php:6
+msgid "A dark tumbleblog theme for Chyrp Lite."
+msgstr "Un tema tumbleblog scuro per Chyrp Lite."
+
+#: themes/umbra/layouts/default.twig:41
+msgid "Feed"
+msgstr "Feed"
+
+#: themes/umbra/layouts/default.twig:44
+msgid "Archive"
+msgstr "Archivio"
+
+#: themes/umbra/layouts/default.twig:48
+msgid "Admin"
+msgstr "Amministratore"
+
+#: themes/umbra/layouts/default.twig:52
+msgid "Write"
+msgstr "Scrivi"
+
+#: themes/umbra/layouts/default.twig:64
+msgid "Log out"
+msgstr "Esci"
+
+#: themes/umbra/layouts/default.twig:79
+msgid "Search&hellip;"
+msgstr "Cerca&hellip;"
+
+#: themes/umbra/layouts/default.twig:79
+msgid "Search this blog"
+msgstr "Cerca questo blog"
+
+#: themes/umbra/layouts/default.twig:80
+msgid "Search"
+msgstr "Cerca"
+
+#: themes/umbra/layouts/default.twig:88 themes/umbra/layouts/default.twig:98
+#, php-format
+msgid "Page %d"
+msgstr "Pagina %d"
+
+#: themes/umbra/layouts/default.twig:109
+#, php-format
+msgid "Called from %s on line %d at %s seconds."
+msgstr "Chiamato da %s sulla riga %d a %s secondi."
+
+#: themes/umbra/pages/403.twig:4
+msgid "Forbidden."
+msgstr "Negato."
+
+#: themes/umbra/pages/404.twig:4
+msgid "Not found."
+msgstr "Non trovato."
+
+#: themes/umbra/pages/archive.twig:18
+msgid "%B %Y"
+msgstr "%B %Y"
+
+#: themes/umbra/pages/archive.twig:57
+#, php-format
+msgid "Archive of %s"
+msgstr "Archivio %s"
+
+#: themes/umbra/pages/archive.twig:66
+msgid "There aren't any posts in the timeframe you specified."
+msgstr "Non ci sono post nell'intervallo di tempo specificato."
+
+#: themes/umbra/pages/category.twig:5
+#, php-format
+msgid "Posts in category &#8220;%s&#8221;"
+msgstr "Post nella categoria &#8220;%s&#8221;"
+
+#: themes/umbra/pages/drafts.twig:5
+msgid "Drafts"
+msgstr "Bozze"
+
+#: themes/umbra/pages/drafts.twig:10
+msgid "You don't have any drafts"
+msgstr "Non hai bozze"
+
+#: themes/umbra/pages/index.twig:8
+msgid "No posts"
+msgstr "Nessun post"
+
+#: themes/umbra/pages/search.twig:5
+#, php-format
+msgid "Search results for &#8220;%s&#8221;"
+msgstr "Risultati della ricerca per &#8220;%s&#8221;"
+
+#: themes/umbra/pages/search.twig:10
+msgid "Your search did not return any results."
+msgstr "La ricerca non ha restituito alcun risultato."
+
+#: themes/umbra/pages/tag.twig:5
+#, php-format
+msgid "Posts tagged with &#8220;%s&#8221;"
+msgstr "Post contrassegnati con &#8220;%s&#8221;"
+
+#: themes/umbra/pages/tags.twig:6
+msgid "Tag cloud"
+msgstr "Tag cloud"
+
+#: themes/umbra/pages/tags.twig:12
+msgid "Nothing here yet!"
+msgstr "Non c'è ancora niente!"
+
+#: themes/umbra/pages/view.twig:8
+msgid "Pingbacks"
+msgstr "Pingback"

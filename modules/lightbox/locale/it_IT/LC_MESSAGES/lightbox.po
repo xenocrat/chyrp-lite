@@ -1,0 +1,69 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: Marina Colucci\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: it_IT\n"
+
+#. Content-Type: text/plain; charset=UTF-8
+#. Copyright 2019 Daniel Pimley and other contributors.
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/lightbox/admin/pages/lightbox_settings.twig:3
+#: modules/lightbox/admin/pages/lightbox_settings.twig:6
+msgid "Lightbox Settings"
+msgstr "Impostazioni del tavolo luminoso"
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:10
+msgid "Background"
+msgstr "Sfondo"
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:12
+msgid "Black"
+msgstr "Nero"
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:13
+msgid "Grey"
+msgstr "Grigio"
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:14
+msgid "White"
+msgstr "Bianco"
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:15
+msgid "Inherit"
+msgstr "Sfondo riprodotto"
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:19
+msgid "Edge Spacing"
+msgstr "Spaziatura del bordo"
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:21
+msgid "(pixels)"
+msgstr "(pixel)"
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:24
+msgid "Protect Images"
+msgstr "Proteggi immagini"
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:26
+msgid "Prevent visitors from saving images?"
+msgstr "Impedire ai visitatori di salvare le immagini?"
+
+#: modules/lightbox/info.php:3 modules/lightbox/lightbox.php:37
+msgid "Lightbox"
+msgstr "Tavolo luminoso"
+
+#: modules/lightbox/info.php:6
+msgid "A lightbox for your images."
+msgstr "Un tavolo luminoso per le tue immagini."
+
+#: modules/lightbox/javascript.php:101
+msgid "Close"
+msgstr "Chiudi"

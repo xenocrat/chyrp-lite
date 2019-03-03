@@ -1,0 +1,179 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: Marina Colucci\n"
+"Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Content-Type: text/plain; charset=UTF-8
+#. Copyright 2019 Daniel Pimley and other contributors.
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/migrator/admin/pages/manage_migration.twig:10
+msgid "eXtended .XML File"
+msgstr "eXtended .XML File"
+
+#: modules/migrator/admin/pages/manage_migration.twig:14
+#: modules/migrator/admin/pages/manage_migration.twig:73
+#: modules/migrator/admin/pages/manage_migration.twig:108
+msgid "URL for Embedded Media"
+msgstr "URL per i Media incorporati"
+
+#: modules/migrator/admin/pages/manage_migration.twig:19
+#, php-format
+msgid "Usually something like <code>%s/wp-content/uploads/</code>."
+msgstr "Di solito appare come <code>%s/wp-content/upload/</code>."
+
+#: modules/migrator/admin/pages/manage_migration.twig:33
+msgid "Your Tumblr URL"
+msgstr "Il tuo URL Tumblr"
+
+#: modules/migrator/admin/pages/manage_migration.twig:36
+#, php-format
+msgid "Something like <code>http://%s.tumblr.com/</code>."
+msgstr "Appare come <code> http://%s.tumblr.com/</code>."
+
+#: modules/migrator/admin/pages/manage_migration.twig:37
+msgid "Audio and Video cannot be imported."
+msgstr "Non è possibile importare audio e video."
+
+#: modules/migrator/admin/pages/manage_migration.twig:51
+#: modules/migrator/admin/pages/manage_migration.twig:92
+msgid "Host"
+msgstr "Host"
+
+#: modules/migrator/admin/pages/manage_migration.twig:55
+#: modules/migrator/admin/pages/manage_migration.twig:96
+msgid "Username"
+msgstr "Nome utente"
+
+#: modules/migrator/admin/pages/manage_migration.twig:59
+#: modules/migrator/admin/pages/manage_migration.twig:100
+msgid "Password"
+msgstr "Password"
+
+#: modules/migrator/admin/pages/manage_migration.twig:63
+#: modules/migrator/admin/pages/manage_migration.twig:104
+msgid "Database"
+msgstr "Database"
+
+#: modules/migrator/admin/pages/manage_migration.twig:67
+msgid "Table Prefix"
+msgstr "Prefisso tabella"
+
+#: modules/migrator/admin/pages/manage_migration.twig:78
+#: modules/migrator/admin/pages/manage_migration.twig:113
+#, php-format
+msgid "Usually something like <code>%s/images/</code>."
+msgstr "Di solito appare come <code>%s/images/</code>."
+
+#: modules/migrator/info.php:3
+msgid "Migration Assistant"
+msgstr "Assistente per la migrazione"
+
+#: modules/migrator/info.php:6
+msgid "Enables import from Wordpress, MovableType, TextPattern, and Tumblr."
+msgstr ""
+"Abilita l'importazione da Wordpress, MovableType, TextPattern e Tumblr."
+
+#: modules/migrator/migrator.php:12
+msgid "Migration"
+msgstr "Migrazione"
+
+#: modules/migrator/migrator.php:27 modules/migrator/migrator.php:166
+#: modules/migrator/migrator.php:300 modules/migrator/migrator.php:400
+msgid "You do not have sufficient privileges to import content."
+msgstr "Non si dispone di privilegi sufficienti per importare contenuti."
+
+#: modules/migrator/migrator.php:36 modules/migrator/migrator.php:175
+#: modules/migrator/migrator.php:309 modules/migrator/migrator.php:409
+msgid "Missing Feather"
+msgstr "Feather mancante"
+
+#: modules/migrator/migrator.php:37
+msgid "Text feather must be enabled to import from WordPress."
+msgstr ""
+"La Feather di Testo deve essere abilitata per l'importazione da WordPress."
+
+#: modules/migrator/migrator.php:40
+msgid "You must select a WordPress export file."
+msgstr "È necessario selezionare un file di esportazione WordPress."
+
+#: modules/migrator/migrator.php:87
+msgid "The file does not seem to be a valid WordPress export file."
+msgstr "Il file non sembra essere un file di esportazione WordPress valido."
+
+#: modules/migrator/migrator.php:154
+msgid "WordPress content successfully imported!"
+msgstr "Contenuti WordPress importati con successo!"
+
+#: modules/migrator/migrator.php:176
+msgid ""
+"Text, Photo, Quote, and Link feathers must be enabled to import from Tumblr."
+msgstr ""
+"La Feather di Testo, Foto, Citazione e Link devono essere abilitate per "
+"l'importazione da Tumblr."
+
+#: modules/migrator/migrator.php:179
+msgid "Invalid URL."
+msgstr "URL non valido."
+
+#: modules/migrator/migrator.php:195
+msgid "Could not retrieve content from the Tumblr URL."
+msgstr "Impossibile recuperare il contenuto dall'URL di Tumblr."
+
+#: modules/migrator/migrator.php:288
+msgid "Tumblr content successfully imported!"
+msgstr "Contenuti Tumblr importati con successo!"
+
+#: modules/migrator/migrator.php:310
+msgid "Text feather must be enabled to import from TextPattern."
+msgstr ""
+"La Feather di Testo deve essere abilitata per l'importazione da TextPattern."
+
+#: modules/migrator/migrator.php:313 modules/migrator/migrator.php:413
+msgid "Host cannot be empty."
+msgstr "L'Host non può essere vuoto."
+
+#: modules/migrator/migrator.php:316 modules/migrator/migrator.php:416
+msgid "Username cannot be empty."
+msgstr "Il nome utente non può essere vuoto."
+
+#: modules/migrator/migrator.php:319 modules/migrator/migrator.php:419
+msgid "Password cannot be empty."
+msgstr "Inserire la password."
+
+#: modules/migrator/migrator.php:322 modules/migrator/migrator.php:422
+msgid "Database cannot be empty."
+msgstr "Il database non può essere vuoto."
+
+#: modules/migrator/migrator.php:333
+msgid "Could not connect to the TextPattern database."
+msgstr "Impossibile connettersi al database TextPattern."
+
+#: modules/migrator/migrator.php:341 modules/migrator/migrator.php:440
+msgid "Database Error"
+msgstr "Errore di database"
+
+#: modules/migrator/migrator.php:387
+msgid "TextPattern content successfully imported!"
+msgstr "Contenuto TextPattern importato con successo!"
+
+#: modules/migrator/migrator.php:410
+msgid "Text feather must be enabled to import from MovableType."
+msgstr ""
+"La Feather di Testo deve essere abilitata per l'importazione da MovableType."
+
+#: modules/migrator/migrator.php:433
+msgid "Could not connect to the MovableType database."
+msgstr "Impossibile connettersi al database MovableType."
+
+#: modules/migrator/migrator.php:511
+msgid "MovableType content successfully imported!"
+msgstr "Il contenuto di MovableType è stato importato con successo!"

@@ -1,0 +1,62 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: Marina Colucci\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: it_IT\n"
+
+#. Content-Type: text/plain; charset=UTF-8
+#. Copyright 2019 Daniel Pimley and other contributors.
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: feathers/uploader/admin/help/uploader_source.twig:3
+#: feathers/uploader/admin/help/uploader_source.twig:6
+msgid "Upload Source"
+msgstr "Carica fonte"
+
+#: feathers/uploader/admin/help/uploader_source.twig:8
+msgid ""
+"This can be a URL that will take visitors to the original resource or it can "
+"be a human-readable description of the upload's origin."
+msgstr ""
+"Questo può essere un URL che porterà i visitatori alla risorsa originale o "
+"può essere una descrizione leggibile dell'origine del file caricato."
+
+#: feathers/uploader/info.php:3
+msgid "Uploader"
+msgstr "Caricamento dati"
+
+#: feathers/uploader/info.php:6
+msgid "Upload files and make them available for visitors to download."
+msgstr "Carica i file li rende disponibili da scaricare per i visitatori."
+
+#: feathers/uploader/uploader.php:8
+msgid "Title"
+msgstr "Titolo"
+
+#: feathers/uploader/uploader.php:12
+msgid "Files"
+msgstr "File"
+
+#: feathers/uploader/uploader.php:14
+#, php-format
+msgid "(Max. file size: %d Megabytes)"
+msgstr "(Dimensione massima del file:%d megabyte)"
+
+#: feathers/uploader/uploader.php:17
+msgid "Caption"
+msgstr "Didascalia"
+
+#: feathers/uploader/uploader.php:53
+msgid "You did not select any files to upload."
+msgstr "Non è stato selezionato alcun file da caricare."
+
+#: feathers/uploader/uploader.php:181
+msgid "Source"
+msgstr "Sorgente"

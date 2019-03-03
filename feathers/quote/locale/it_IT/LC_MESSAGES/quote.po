@@ -1,0 +1,32 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: Marina Colucci\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: it_IT\n"
+
+#. Content-Type: text/plain; charset=UTF-8
+#. Copyright 2019 Daniel Pimley and other contributors.
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: feathers/quote/info.php:3 feathers/quote/quote.php:7
+msgid "Quote"
+msgstr "Citazione"
+
+#: feathers/quote/info.php:6
+msgid "Post quotes and cite sources."
+msgstr "Pubblicare una citazione e citare fonti."
+
+#: feathers/quote/quote.php:12
+msgid "Source"
+msgstr "Sorgente"
+
+#: feathers/quote/quote.php:22
+msgid "Quote can't be empty."
+msgstr "La citazione non può essere vuota."
