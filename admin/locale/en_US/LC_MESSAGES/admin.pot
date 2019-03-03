@@ -810,7 +810,7 @@ msgid "(recommended)"
 msgstr ""
 
 #: admin/pages/route_settings.twig:14
-msgid "Gives your site prettier urls."
+msgid "Gives your site prettier URLs."
 msgstr ""
 
 #: admin/pages/route_settings.twig:14
