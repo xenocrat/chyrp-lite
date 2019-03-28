@@ -9,12 +9,14 @@
  * file that was distributed with this source code.
  */
 
+namespace Twig;
+
 /**
  * Marks a content as safe.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class Twig_Markup implements Countable
+class Markup implements \Countable
 {
     protected $content;
     protected $charset;
@@ -32,8 +34,8 @@ class Twig_Markup implements Countable
 
     public function count()
     {
-        return function_exists('mb_get_info') ? mb_strlen($this->content, $this->charset) : strlen($this->content);
+        return \function_exists('mb_get_info') ? mb_strlen($this->content, $this->charset) : \strlen($this->content);
     }
 }
 
-class_alias('Twig_Markup', 'Twig\Markup', false);
+class_alias('Twig\Markup', 'Twig_Markup');

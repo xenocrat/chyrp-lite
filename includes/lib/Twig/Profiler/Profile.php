@@ -9,12 +9,14 @@
  * file that was distributed with this source code.
  */
 
+namespace Twig\Profiler;
+
 /**
  * @author Fabien Potencier <fabien@symfony.com>
  *
  * @final
  */
-class Twig_Profiler_Profile implements IteratorAggregate, Serializable
+class Profile implements \IteratorAggregate, \Serializable
 {
     const ROOT = 'ROOT';
     const BLOCK = 'block';
@@ -153,7 +155,7 @@ class Twig_Profiler_Profile implements IteratorAggregate, Serializable
 
     public function getIterator()
     {
-        return new ArrayIterator($this->profiles);
+        return new \ArrayIterator($this->profiles);
     }
 
     public function serialize()
@@ -167,4 +169,4 @@ class Twig_Profiler_Profile implements IteratorAggregate, Serializable
     }
 }
 
-class_alias('Twig_Profiler_Profile', 'Twig\Profiler\Profile', false);
+class_alias('Twig\Profiler\Profile', 'Twig_Profiler_Profile');

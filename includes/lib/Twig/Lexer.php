@@ -10,12 +10,16 @@
  * file that was distributed with this source code.
  */
 
+namespace Twig;
+
+use Twig\Error\SyntaxError;
+
 /**
  * Lexes a template string.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class Twig_Lexer implements Twig_LexerInterface
+class Lexer implements \Twig_LexerInterface
 {
     protected $tokens;
     protected $code;
@@ -49,7 +53,7 @@ class Twig_Lexer implements Twig_LexerInterface
     const REGEX_DQ_STRING_PART = '/[^#"\\\\]*(?:(?:\\\\.|#(?!\{))[^#"\\\\]*)*/As';
     const PUNCTUATION = '()[]{}?:.,|';
 
-    public function __construct(Twig_Environment $env, array $options = [])
+    public function __construct(Environment $env, array $options = [])
     {
         $this->env = $env;
 
@@ -77,9 +81,9 @@ class Twig_Lexer implements Twig_LexerInterface
 
     public function tokenize($code, $name = null)
     {
-        if (!$code instanceof Twig_Source) {
-            @trigger_error(sprintf('Passing a string as the $code argument of %s() is deprecated since version 1.27 and will be removed in 2.0. Pass a Twig_Source instance instead.', __METHOD__), E_USER_DEPRECATED);
-            $this->source = new Twig_Source($code, $name);
+        if (!$code instanceof Source) {
+            @trigger_error(sprintf('Passing a string as the $code argument of %s() is deprecated since version 1.27 and will be removed in 2.0. Pass a \Twig\Source instance instead.', __METHOD__), E_USER_DEPRECATED);
+            $this->source = new Source($code, $name);
         } else {
             $this->source = $code;
         }
@@ -88,7 +92,7 @@ class Twig_Lexer implements Twig_LexerInterface
             @trigger_error('Support for having "mbstring.func_overload" different from 0 is deprecated version 1.29 and will be removed in 2.0.', E_USER_DEPRECATED);
         }
 
-        if (function_exists('mb_internal_encoding') && ((int) ini_get('mbstring.func_overload')) & 2) {
+        if (\function_exists('mb_internal_encoding') && ((int) ini_get('mbstring.func_overload')) & 2) {
             $mbEncoding = mb_internal_encoding();
             mb_internal_encoding('ASCII');
         } else {
@@ -99,7 +103,7 @@ class Twig_Lexer implements Twig_LexerInterface
         $this->filename = $this->source->getName();
         $this->cursor = 0;
         $this->lineno = 1;
-        $this->end = strlen($this->code);
+        $this->end = \strlen($this->code);
         $this->tokens = [];
         $this->state = self::STATE_DATA;
         $this->states = [];
@@ -136,25 +140,25 @@ class Twig_Lexer implements Twig_LexerInterface
             }
         }
 
-        $this->pushToken(Twig_Token::EOF_TYPE);
+        $this->pushToken(Token::EOF_TYPE);
 
         if (!empty($this->brackets)) {
             list($expect, $lineno) = array_pop($this->brackets);
-            throw new Twig_Error_Syntax(sprintf('Unclosed "%s".', $expect), $lineno, $this->source);
+            throw new SyntaxError(sprintf('Unclosed "%s".', $expect), $lineno, $this->source);
         }
 
         if ($mbEncoding) {
             mb_internal_encoding($mbEncoding);
         }
 
-        return new Twig_TokenStream($this->tokens, $this->source);
+        return new TokenStream($this->tokens, $this->source);
     }
 
     protected function lexData()
     {
         // if no matches are left we return the rest of the template as simple text token
-        if ($this->position == count($this->positions[0]) - 1) {
-            $this->pushToken(Twig_Token::TEXT_TYPE, substr($this->code, $this->cursor));
+        if ($this->position == \count($this->positions[0]) - 1) {
+            $this->pushToken(Token::TEXT_TYPE, substr($this->code, $this->cursor));
             $this->cursor = $this->end;
 
             return;
@@ -163,7 +167,7 @@ class Twig_Lexer implements Twig_LexerInterface
         // Find the first token after the current cursor
         $position = $this->positions[0][++$this->position];
         while ($position[1] < $this->cursor) {
-            if ($this->position == count($this->positions[0]) - 1) {
+            if ($this->position == \count($this->positions[0]) - 1) {
                 return;
             }
             $position = $this->positions[0][++$this->position];
@@ -174,7 +178,7 @@ class Twig_Lexer implements Twig_LexerInterface
         if (isset($this->positions[2][$this->position][0])) {
             $text = rtrim($text);
         }
-        $this->pushToken(Twig_Token::TEXT_TYPE, $text);
+        $this->pushToken(Token::TEXT_TYPE, $text);
         $this->moveCursor($textContent.$position[0]);
 
         switch ($this->positions[1][$this->position][0]) {
@@ -192,14 +196,14 @@ class Twig_Lexer implements Twig_LexerInterface
                     $this->moveCursor($match[0]);
                     $this->lineno = (int) $match[1];
                 } else {
-                    $this->pushToken(Twig_Token::BLOCK_START_TYPE);
+                    $this->pushToken(Token::BLOCK_START_TYPE);
                     $this->pushState(self::STATE_BLOCK);
                     $this->currentVarBlockLine = $this->lineno;
                 }
                 break;
 
             case $this->options['tag_variable'][0]:
-                $this->pushToken(Twig_Token::VAR_START_TYPE);
+                $this->pushToken(Token::VAR_START_TYPE);
                 $this->pushState(self::STATE_VAR);
                 $this->currentVarBlockLine = $this->lineno;
                 break;
@@ -209,7 +213,7 @@ class Twig_Lexer implements Twig_LexerInterface
     protected function lexBlock()
     {
         if (empty($this->brackets) && preg_match($this->regexes['lex_block'], $this->code, $match, null, $this->cursor)) {
-            $this->pushToken(Twig_Token::BLOCK_END_TYPE);
+            $this->pushToken(Token::BLOCK_END_TYPE);
             $this->moveCursor($match[0]);
             $this->popState();
         } else {
@@ -220,7 +224,7 @@ class Twig_Lexer implements Twig_LexerInterface
     protected function lexVar()
     {
         if (empty($this->brackets) && preg_match($this->regexes['lex_var'], $this->code, $match, null, $this->cursor)) {
-            $this->pushToken(Twig_Token::VAR_END_TYPE);
+            $this->pushToken(Token::VAR_END_TYPE);
             $this->moveCursor($match[0]);
             $this->popState();
         } else {
@@ -235,18 +239,18 @@ class Twig_Lexer implements Twig_LexerInterface
             $this->moveCursor($match[0]);
 
             if ($this->cursor >= $this->end) {
-                throw new Twig_Error_Syntax(sprintf('Unclosed "%s".', self::STATE_BLOCK === $this->state ? 'block' : 'variable'), $this->currentVarBlockLine, $this->source);
+                throw new SyntaxError(sprintf('Unclosed "%s".', self::STATE_BLOCK === $this->state ? 'block' : 'variable'), $this->currentVarBlockLine, $this->source);
             }
         }
 
         // operators
         if (preg_match($this->regexes['operator'], $this->code, $match, null, $this->cursor)) {
-            $this->pushToken(Twig_Token::OPERATOR_TYPE, preg_replace('/\s+/', ' ', $match[0]));
+            $this->pushToken(Token::OPERATOR_TYPE, preg_replace('/\s+/', ' ', $match[0]));
             $this->moveCursor($match[0]);
         }
         // names
         elseif (preg_match(self::REGEX_NAME, $this->code, $match, null, $this->cursor)) {
-            $this->pushToken(Twig_Token::NAME_TYPE, $match[0]);
+            $this->pushToken(Token::NAME_TYPE, $match[0]);
             $this->moveCursor($match[0]);
         }
         // numbers
@@ -255,7 +259,7 @@ class Twig_Lexer implements Twig_LexerInterface
             if (ctype_digit($match[0]) && $number <= PHP_INT_MAX) {
                 $number = (int) $match[0]; // integers lower than the maximum
             }
-            $this->pushToken(Twig_Token::NUMBER_TYPE, $number);
+            $this->pushToken(Token::NUMBER_TYPE, $number);
             $this->moveCursor($match[0]);
         }
         // punctuation
@@ -267,21 +271,21 @@ class Twig_Lexer implements Twig_LexerInterface
             // closing bracket
             elseif (false !== strpos(')]}', $this->code[$this->cursor])) {
                 if (empty($this->brackets)) {
-                    throw new Twig_Error_Syntax(sprintf('Unexpected "%s".', $this->code[$this->cursor]), $this->lineno, $this->source);
+                    throw new SyntaxError(sprintf('Unexpected "%s".', $this->code[$this->cursor]), $this->lineno, $this->source);
                 }
 
                 list($expect, $lineno) = array_pop($this->brackets);
                 if ($this->code[$this->cursor] != strtr($expect, '([{', ')]}')) {
-                    throw new Twig_Error_Syntax(sprintf('Unclosed "%s".', $expect), $lineno, $this->source);
+                    throw new SyntaxError(sprintf('Unclosed "%s".', $expect), $lineno, $this->source);
                 }
             }
 
-            $this->pushToken(Twig_Token::PUNCTUATION_TYPE, $this->code[$this->cursor]);
+            $this->pushToken(Token::PUNCTUATION_TYPE, $this->code[$this->cursor]);
             ++$this->cursor;
         }
         // strings
         elseif (preg_match(self::REGEX_STRING, $this->code, $match, null, $this->cursor)) {
-            $this->pushToken(Twig_Token::STRING_TYPE, stripcslashes(substr($match[0], 1, -1)));
+            $this->pushToken(Token::STRING_TYPE, stripcslashes(substr($match[0], 1, -1)));
             $this->moveCursor($match[0]);
         }
         // opening double quoted string
@@ -292,7 +296,7 @@ class Twig_Lexer implements Twig_LexerInterface
         }
         // unlexable
         else {
-            throw new Twig_Error_Syntax(sprintf('Unexpected character "%s".', $this->code[$this->cursor]), $this->lineno, $this->source);
+            throw new SyntaxError(sprintf('Unexpected character "%s".', $this->code[$this->cursor]), $this->lineno, $this->source);
         }
     }
 
@@ -303,7 +307,7 @@ class Twig_Lexer implements Twig_LexerInterface
         }
 
         if (!preg_match(str_replace('%s', $tag, $this->regexes['lex_raw_data']), $this->code, $match, PREG_OFFSET_CAPTURE, $this->cursor)) {
-            throw new Twig_Error_Syntax(sprintf('Unexpected end of file: Unclosed "%s" block.', $tag), $this->lineno, $this->source);
+            throw new SyntaxError(sprintf('Unexpected end of file: Unclosed "%s" block.', $tag), $this->lineno, $this->source);
         }
 
         $text = substr($this->code, $this->cursor, $match[0][1] - $this->cursor);
@@ -313,13 +317,13 @@ class Twig_Lexer implements Twig_LexerInterface
             $text = rtrim($text);
         }
 
-        $this->pushToken(Twig_Token::TEXT_TYPE, $text);
+        $this->pushToken(Token::TEXT_TYPE, $text);
     }
 
     protected function lexComment()
     {
         if (!preg_match($this->regexes['lex_comment'], $this->code, $match, PREG_OFFSET_CAPTURE, $this->cursor)) {
-            throw new Twig_Error_Syntax('Unclosed comment.', $this->lineno, $this->source);
+            throw new SyntaxError('Unclosed comment.', $this->lineno, $this->source);
         }
 
         $this->moveCursor(substr($this->code, $this->cursor, $match[0][1] - $this->cursor).$match[0][0]);
@@ -329,23 +333,23 @@ class Twig_Lexer implements Twig_LexerInterface
     {
         if (preg_match($this->regexes['interpolation_start'], $this->code, $match, null, $this->cursor)) {
             $this->brackets[] = [$this->options['interpolation'][0], $this->lineno];
-            $this->pushToken(Twig_Token::INTERPOLATION_START_TYPE);
+            $this->pushToken(Token::INTERPOLATION_START_TYPE);
             $this->moveCursor($match[0]);
             $this->pushState(self::STATE_INTERPOLATION);
-        } elseif (preg_match(self::REGEX_DQ_STRING_PART, $this->code, $match, null, $this->cursor) && strlen($match[0]) > 0) {
-            $this->pushToken(Twig_Token::STRING_TYPE, stripcslashes($match[0]));
+        } elseif (preg_match(self::REGEX_DQ_STRING_PART, $this->code, $match, null, $this->cursor) && \strlen($match[0]) > 0) {
+            $this->pushToken(Token::STRING_TYPE, stripcslashes($match[0]));
             $this->moveCursor($match[0]);
         } elseif (preg_match(self::REGEX_DQ_STRING_DELIM, $this->code, $match, null, $this->cursor)) {
             list($expect, $lineno) = array_pop($this->brackets);
             if ('"' != $this->code[$this->cursor]) {
-                throw new Twig_Error_Syntax(sprintf('Unclosed "%s".', $expect), $lineno, $this->source);
+                throw new SyntaxError(sprintf('Unclosed "%s".', $expect), $lineno, $this->source);
             }
 
             $this->popState();
             ++$this->cursor;
         } else {
             // unlexable
-            throw new Twig_Error_Syntax(sprintf('Unexpected character "%s".', $this->code[$this->cursor]), $this->lineno, $this->source);
+            throw new SyntaxError(sprintf('Unexpected character "%s".', $this->code[$this->cursor]), $this->lineno, $this->source);
         }
     }
 
@@ -354,7 +358,7 @@ class Twig_Lexer implements Twig_LexerInterface
         $bracket = end($this->brackets);
         if ($this->options['interpolation'][0] === $bracket[0] && preg_match($this->regexes['interpolation_end'], $this->code, $match, null, $this->cursor)) {
             array_pop($this->brackets);
-            $this->pushToken(Twig_Token::INTERPOLATION_END_TYPE);
+            $this->pushToken(Token::INTERPOLATION_END_TYPE);
             $this->moveCursor($match[0]);
             $this->popState();
         } else {
@@ -365,16 +369,16 @@ class Twig_Lexer implements Twig_LexerInterface
     protected function pushToken($type, $value = '')
     {
         // do not push empty text tokens
-        if (Twig_Token::TEXT_TYPE === $type && '' === $value) {
+        if (Token::TEXT_TYPE === $type && '' === $value) {
             return;
         }
 
-        $this->tokens[] = new Twig_Token($type, $value, $this->lineno);
+        $this->tokens[] = new Token($type, $value, $this->lineno);
     }
 
     protected function moveCursor($text)
     {
-        $this->cursor += strlen($text);
+        $this->cursor += \strlen($text);
         $this->lineno += substr_count($text, "\n");
     }
 
@@ -416,12 +420,12 @@ class Twig_Lexer implements Twig_LexerInterface
 
     protected function popState()
     {
-        if (0 === count($this->states)) {
-            throw new Exception('Cannot pop state without a previous state.');
+        if (0 === \count($this->states)) {
+            throw new \LogicException('Cannot pop state without a previous state.');
         }
 
         $this->state = array_pop($this->states);
     }
 }
 
-class_alias('Twig_Lexer', 'Twig\Lexer', false);
+class_alias('Twig\Lexer', 'Twig_Lexer');

@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+namespace Twig;
+
 /**
  * Holds information about a non-compiled Twig template.
  *
@@ -16,7 +18,7 @@
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class Twig_Source
+class Source
 {
     private $code;
     private $name;
@@ -50,4 +52,4 @@ class Twig_Source
     }
 }
 
-class_alias('Twig_Source', 'Twig\Source', false);
+class_alias('Twig\Source', 'Twig_Source');

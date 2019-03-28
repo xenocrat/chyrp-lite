@@ -9,16 +9,18 @@
  * file that was distributed with this source code.
  */
 
+namespace Twig\Sandbox;
+
 /**
  * Exception thrown when a not allowed function is used in a template.
  *
  * @author Martin Hasoň <martin.hason@gmail.com>
  */
-class Twig_Sandbox_SecurityNotAllowedFunctionError extends Twig_Sandbox_SecurityError
+class SecurityNotAllowedFunctionError extends SecurityError
 {
     private $functionName;
 
-    public function __construct($message, $functionName, $lineno = -1, $filename = null, Exception $previous = null)
+    public function __construct($message, $functionName, $lineno = -1, $filename = null, \Exception $previous = null)
     {
         parent::__construct($message, $lineno, $filename, $previous);
         $this->functionName = $functionName;
@@ -30,4 +32,4 @@ class Twig_Sandbox_SecurityNotAllowedFunctionError extends Twig_Sandbox_Security
     }
 }
 
-class_alias('Twig_Sandbox_SecurityNotAllowedFunctionError', 'Twig\Sandbox\SecurityNotAllowedFunctionError', false);
+class_alias('Twig\Sandbox\SecurityNotAllowedFunctionError', 'Twig_Sandbox_SecurityNotAllowedFunctionError');

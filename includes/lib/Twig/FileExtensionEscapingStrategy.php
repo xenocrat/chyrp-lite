@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+namespace Twig;
+
 /**
  * Default autoescaping strategy based on file names.
  *
@@ -20,7 +22,7 @@
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class Twig_FileExtensionEscapingStrategy
+class FileExtensionEscapingStrategy
 {
     /**
      * Guesses the best autoescaping strategy based on the file name.
@@ -31,7 +33,7 @@ class Twig_FileExtensionEscapingStrategy
      */
     public static function guess($name)
     {
-        if (in_array(substr($name, -1), ['/', '\\'])) {
+        if (\in_array(substr($name, -1), ['/', '\\'])) {
             return 'html'; // return html for directories
         }
 
@@ -57,4 +59,4 @@ class Twig_FileExtensionEscapingStrategy
     }
 }
 
-class_alias('Twig_FileExtensionEscapingStrategy', 'Twig\FileExtensionEscapingStrategy', false);
+class_alias('Twig\FileExtensionEscapingStrategy', 'Twig_FileExtensionEscapingStrategy');

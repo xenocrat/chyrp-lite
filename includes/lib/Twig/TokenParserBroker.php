@@ -10,6 +10,8 @@
  * file that was distributed with this source code.
  */
 
+use Twig\TokenParser\TokenParserInterface;
+
 /**
  * Default implementation of a token parser broker.
  *
@@ -24,9 +26,9 @@ class Twig_TokenParserBroker implements Twig_TokenParserBrokerInterface
     protected $brokers = [];
 
     /**
-     * @param array|Traversable $parsers                 A Traversable of Twig_TokenParserInterface instances
-     * @param array|Traversable $brokers                 A Traversable of Twig_TokenParserBrokerInterface instances
-     * @param bool              $triggerDeprecationError
+     * @param array|\Traversable $parsers                 A \Traversable of Twig_TokenParserInterface instances
+     * @param array|\Traversable $brokers                 A \Traversable of Twig_TokenParserBrokerInterface instances
+     * @param bool               $triggerDeprecationError
      */
     public function __construct($parsers = [], $brokers = [], $triggerDeprecationError = true)
     {
@@ -35,25 +37,25 @@ class Twig_TokenParserBroker implements Twig_TokenParserBrokerInterface
         }
 
         foreach ($parsers as $parser) {
-            if (!$parser instanceof Twig_TokenParserInterface) {
-                throw new LogicException('$parsers must a an array of Twig_TokenParserInterface.');
+            if (!$parser instanceof TokenParserInterface) {
+                throw new \LogicException('$parsers must a an array of Twig_TokenParserInterface.');
             }
             $this->parsers[$parser->getTag()] = $parser;
         }
         foreach ($brokers as $broker) {
             if (!$broker instanceof Twig_TokenParserBrokerInterface) {
-                throw new LogicException('$brokers must a an array of Twig_TokenParserBrokerInterface.');
+                throw new \LogicException('$brokers must a an array of Twig_TokenParserBrokerInterface.');
             }
             $this->brokers[] = $broker;
         }
     }
 
-    public function addTokenParser(Twig_TokenParserInterface $parser)
+    public function addTokenParser(TokenParserInterface $parser)
     {
         $this->parsers[$parser->getTag()] = $parser;
     }
 
-    public function removeTokenParser(Twig_TokenParserInterface $parser)
+    public function removeTokenParser(TokenParserInterface $parser)
     {
         $name = $parser->getTag();
         if (isset($this->parsers[$name]) && $parser === $this->parsers[$name]) {
@@ -80,7 +82,7 @@ class Twig_TokenParserBroker implements Twig_TokenParserBrokerInterface
      *
      * @param string $tag A tag name
      *
-     * @return Twig_TokenParserInterface|null A Twig_TokenParserInterface or null if no suitable TokenParser was found
+     * @return TokenParserInterface|null A Twig_TokenParserInterface or null if no suitable TokenParser was found
      */
     public function getTokenParser($tag)
     {

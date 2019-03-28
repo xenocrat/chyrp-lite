@@ -9,8 +9,12 @@
  * file that was distributed with this source code.
  */
 
+namespace Twig;
+
+use Twig\NodeVisitor\NodeVisitorInterface;
+
 /**
- * Twig_NodeTraverser is a node traverser.
+ * A node traverser.
  *
  * It visits all nodes and their children and calls the given visitor for each.
  *
@@ -18,16 +22,15 @@
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class Twig_NodeTraverser
+class NodeTraverser
 {
     protected $env;
     protected $visitors = [];
 
     /**
-     * @param Twig_Environment            $env
-     * @param Twig_NodeVisitorInterface[] $visitors
+     * @param NodeVisitorInterface[] $visitors
      */
-    public function __construct(Twig_Environment $env, array $visitors = [])
+    public function __construct(Environment $env, array $visitors = [])
     {
         $this->env = $env;
         foreach ($visitors as $visitor) {
@@ -35,21 +38,17 @@ class Twig_NodeTraverser
         }
     }
 
-    public function addVisitor(Twig_NodeVisitorInterface $visitor)
+    public function addVisitor(NodeVisitorInterface $visitor)
     {
-        if (!isset($this->visitors[$visitor->getPriority()])) {
-            $this->visitors[$visitor->getPriority()] = [];
-        }
-
         $this->visitors[$visitor->getPriority()][] = $visitor;
     }
 
     /**
      * Traverses a node and calls the registered visitors.
      *
-     * @return Twig_NodeInterface
+     * @return \Twig_NodeInterface
      */
-    public function traverse(Twig_NodeInterface $node)
+    public function traverse(\Twig_NodeInterface $node)
     {
         ksort($this->visitors);
         foreach ($this->visitors as $visitors) {
@@ -61,7 +60,7 @@ class Twig_NodeTraverser
         return $node;
     }
 
-    protected function traverseForVisitor(Twig_NodeVisitorInterface $visitor, Twig_NodeInterface $node = null)
+    protected function traverseForVisitor(NodeVisitorInterface $visitor, \Twig_NodeInterface $node = null)
     {
         if (null === $node) {
             return;
@@ -83,4 +82,4 @@ class Twig_NodeTraverser
     }
 }
 
-class_alias('Twig_NodeTraverser', 'Twig\NodeTraverser', false);
+class_alias('Twig\NodeTraverser', 'Twig_NodeTraverser');

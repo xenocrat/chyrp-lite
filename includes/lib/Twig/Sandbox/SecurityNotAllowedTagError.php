@@ -9,16 +9,18 @@
  * file that was distributed with this source code.
  */
 
+namespace Twig\Sandbox;
+
 /**
  * Exception thrown when a not allowed tag is used in a template.
  *
  * @author Martin Hasoň <martin.hason@gmail.com>
  */
-class Twig_Sandbox_SecurityNotAllowedTagError extends Twig_Sandbox_SecurityError
+class SecurityNotAllowedTagError extends SecurityError
 {
     private $tagName;
 
-    public function __construct($message, $tagName, $lineno = -1, $filename = null, Exception $previous = null)
+    public function __construct($message, $tagName, $lineno = -1, $filename = null, \Exception $previous = null)
     {
         parent::__construct($message, $lineno, $filename, $previous);
         $this->tagName = $tagName;
@@ -30,4 +32,4 @@ class Twig_Sandbox_SecurityNotAllowedTagError extends Twig_Sandbox_SecurityError
     }
 }
 
-class_alias('Twig_Sandbox_SecurityNotAllowedTagError', 'Twig\Sandbox\SecurityNotAllowedTagError', false);
+class_alias('Twig\Sandbox\SecurityNotAllowedTagError', 'Twig_Sandbox_SecurityNotAllowedTagError');

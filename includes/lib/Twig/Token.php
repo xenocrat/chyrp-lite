@@ -10,6 +10,8 @@
  * file that was distributed with this source code.
  */
 
+namespace Twig;
+
 /**
  * Represents a Token.
  *
@@ -17,7 +19,7 @@
  *
  * @final
  */
-class Twig_Token
+class Token
 {
     protected $value;
     protected $type;
@@ -69,14 +71,14 @@ class Twig_Token
      */
     public function test($type, $values = null)
     {
-        if (null === $values && !is_int($type)) {
+        if (null === $values && !\is_int($type)) {
             $values = $type;
             $type = self::NAME_TYPE;
         }
 
         return ($this->type === $type) && (
             null === $values ||
-            (is_array($values) && in_array($this->value, $values)) ||
+            (\is_array($values) && \in_array($this->value, $values)) ||
             $this->value == $values
         );
     }
@@ -156,10 +158,10 @@ class Twig_Token
                 $name = 'INTERPOLATION_END_TYPE';
                 break;
             default:
-                throw new LogicException(sprintf('Token of type "%s" does not exist.', $type));
+                throw new \LogicException(sprintf('Token of type "%s" does not exist.', $type));
         }
 
-        return $short ? $name : 'Twig_Token::'.$name;
+        return $short ? $name : 'Twig\Token::'.$name;
     }
 
     /**
@@ -199,9 +201,9 @@ class Twig_Token
             case self::INTERPOLATION_END_TYPE:
                 return 'end of string interpolation';
             default:
-                throw new LogicException(sprintf('Token of type "%s" does not exist.', $type));
+                throw new \LogicException(sprintf('Token of type "%s" does not exist.', $type));
         }
     }
 }
 
-class_alias('Twig_Token', 'Twig\Token', false);
+class_alias('Twig\Token', 'Twig_Token');
