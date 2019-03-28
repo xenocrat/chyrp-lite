@@ -5,34 +5,26 @@
      */
     class Leaf extends Twig_Extension {
         /**
-         * Function: getName
-         * Returns the name of the extension.
-         */
-        public function getName() {
-            return "Leaf";
-        }
-
-        /**
          * Function: getFunctions
          * Returns a list of operators to add to the existing list.
          */
         public function getFunctions() {
             return array(
                 # Helpers:
-                new Twig_SimpleFunction("url",               "url"),
-                new Twig_SimpleFunction("self_url",          "self_url"),
-                new Twig_SimpleFunction("authenticate",      "authenticate"),
-                new Twig_SimpleFunction("module_enabled",    "module_enabled"),
-                new Twig_SimpleFunction("feather_enabled",   "feather_enabled"),
-                new Twig_SimpleFunction("password_strength", "password_strength"),
-                new Twig_SimpleFunction("is_url",            "is_url"),
-                new Twig_SimpleFunction("is_email",          "is_email"),
-                new Twig_SimpleFunction("generate_captcha",  "generate_captcha"),
+                new \Twig\TwigFunction("url",               "url"),
+                new \Twig\TwigFunction("self_url",          "self_url"),
+                new \Twig\TwigFunction("authenticate",      "authenticate"),
+                new \Twig\TwigFunction("module_enabled",    "module_enabled"),
+                new \Twig\TwigFunction("feather_enabled",   "feather_enabled"),
+                new \Twig\TwigFunction("password_strength", "password_strength"),
+                new \Twig\TwigFunction("is_url",            "is_url"),
+                new \Twig\TwigFunction("is_email",          "is_email"),
+                new \Twig\TwigFunction("generate_captcha",  "generate_captcha"),
 
                 # Custom functions:
-                new Twig_SimpleFunction("paginate",          "twig_function_paginate"),
-                new Twig_SimpleFunction("posted",            "twig_function_posted"),
-                new Twig_SimpleFunction("mailto",            "twig_function_mailto")
+                new \Twig\TwigFunction("paginate",          "twig_function_paginate"),
+                new \Twig\TwigFunction("posted",            "twig_function_posted"),
+                new \Twig\TwigFunction("mailto",            "twig_function_mailto")
             );
         }
 
@@ -43,40 +35,40 @@
         public function getFilters() {
             return array(
                 # Internal:
-                new Twig_SimpleFilter("repeat",              "str_repeat"),
+                new \Twig\TwigFilter("repeat",              "str_repeat"),
 
                 # Helpers:
-                new Twig_SimpleFilter("camelize",            "camelize"),
-                new Twig_SimpleFilter("decamelize",          "decamelize"),
-                new Twig_SimpleFilter("normalize",           "normalize"),
-                new Twig_SimpleFilter("truncate",            "truncate"),
-                new Twig_SimpleFilter("pluralize",           "pluralize"),
-                new Twig_SimpleFilter("depluralize",         "depluralize"),
-                new Twig_SimpleFilter("markdown",            "markdown"),
-                new Twig_SimpleFilter("emote",               "emote"),
-                new Twig_SimpleFilter("oneof",               "oneof"),
-                new Twig_SimpleFilter("fix",                 "fix"),
-                new Twig_SimpleFilter("unfix",               "unfix"),
-                new Twig_SimpleFilter("sanitize",            "sanitize"),
-                new Twig_SimpleFilter("sanitize_html",       "sanitize_html"),
-                new Twig_SimpleFilter("token",               "token"),
-                new Twig_SimpleFilter("uploaded",            "uploaded"),
-                new Twig_SimpleFilter("gravatar",            "get_gravatar"),
-                new Twig_SimpleFilter("add_scheme",          "add_scheme"),
+                new \Twig\TwigFilter("camelize",            "camelize"),
+                new \Twig\TwigFilter("decamelize",          "decamelize"),
+                new \Twig\TwigFilter("normalize",           "normalize"),
+                new \Twig\TwigFilter("truncate",            "truncate"),
+                new \Twig\TwigFilter("pluralize",           "pluralize"),
+                new \Twig\TwigFilter("depluralize",         "depluralize"),
+                new \Twig\TwigFilter("markdown",            "markdown"),
+                new \Twig\TwigFilter("emote",               "emote"),
+                new \Twig\TwigFilter("oneof",               "oneof"),
+                new \Twig\TwigFilter("fix",                 "fix"),
+                new \Twig\TwigFilter("unfix",               "unfix"),
+                new \Twig\TwigFilter("sanitize",            "sanitize"),
+                new \Twig\TwigFilter("sanitize_html",       "sanitize_html"),
+                new \Twig\TwigFilter("token",               "token"),
+                new \Twig\TwigFilter("uploaded",            "uploaded"),
+                new \Twig\TwigFilter("gravatar",            "get_gravatar"),
+                new \Twig\TwigFilter("add_scheme",          "add_scheme"),
 
                 # Custom filters:
-                new Twig_SimpleFilter("translate",           "twig_filter_translate"),
-                new Twig_SimpleFilter("translate_plural",    "twig_filter_translate_plural"),
-                new Twig_SimpleFilter("strftimeformat",      "twig_filter_strftime_format"),
-                new Twig_SimpleFilter("filesizeformat",      "twig_filter_filesize_format"),
-                new Twig_SimpleFilter("preg_match",          "twig_filter_preg_match"),
-                new Twig_SimpleFilter("preg_replace",        "twig_filter_preg_replace"),
-                new Twig_SimpleFilter("contains",            "twig_filter_contains"),
-                new Twig_SimpleFilter("inspect",             "twig_filter_inspect"),
-                new Twig_SimpleFilter("selected",            "twig_filter_selected"),
-                new Twig_SimpleFilter("checked",             "twig_filter_checked"),
-                new Twig_SimpleFilter("download",            "twig_filter_download"),
-                new Twig_SimpleFilter("thumbnail",           "twig_filter_thumbnail")
+                new \Twig\TwigFilter("translate",           "twig_filter_translate"),
+                new \Twig\TwigFilter("translate_plural",    "twig_filter_translate_plural"),
+                new \Twig\TwigFilter("strftimeformat",      "twig_filter_strftime_format"),
+                new \Twig\TwigFilter("filesizeformat",      "twig_filter_filesize_format"),
+                new \Twig\TwigFilter("preg_match",          "twig_filter_preg_match"),
+                new \Twig\TwigFilter("preg_replace",        "twig_filter_preg_replace"),
+                new \Twig\TwigFilter("contains",            "twig_filter_contains"),
+                new \Twig\TwigFilter("inspect",             "twig_filter_inspect"),
+                new \Twig\TwigFilter("selected",            "twig_filter_selected"),
+                new \Twig\TwigFilter("checked",             "twig_filter_checked"),
+                new \Twig\TwigFilter("download",            "twig_filter_download"),
+                new \Twig\TwigFilter("thumbnail",           "twig_filter_thumbnail")
             );
         }
     }
@@ -88,7 +80,7 @@
     function twig_callback_missing_function($name) {
         foreach (Modules::$instances as $module)
             if (is_callable(array($module, "twig_function_".$name)))
-                return new Twig_SimpleFunction($name, array($module, "twig_function_".$name));
+                return new \Twig\TwigFunction($name, array($module, "twig_function_".$name));
 
         return false;
     }
@@ -100,7 +92,7 @@
     function twig_callback_missing_filter($name) {
         foreach (Modules::$instances as $module)
             if (is_callable(array($module, "twig_filter_".$name)))
-                return new Twig_SimpleFilter($name, array($module, "twig_filter_".$name));
+                return new \Twig\TwigFilter($name, array($module, "twig_filter_".$name));
 
         return false;
     }
