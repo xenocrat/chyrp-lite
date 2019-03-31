@@ -152,7 +152,7 @@ msgstr "访问被拒绝"
 msgid "You are not allowed to view this site."
 msgstr "您不允许访问这个站点。"
 
-#: includes/class/Route.php:300
+#: includes/class/Route.php:301
 msgid "Route was initiated without a Controller."
 msgstr ""
 
@@ -230,7 +230,7 @@ msgstr "羽毛未找到。"
 #: includes/controller/Ajax.php:41 includes/controller/Ajax.php:67
 #: includes/controller/Ajax.php:87 includes/controller/Ajax.php:125
 #: includes/controller/Main.php:443 includes/controller/Main.php:570
-#: includes/controller/Main.php:628 includes/controller/Main.php:683
+#: includes/controller/Main.php:627 includes/controller/Main.php:682
 msgid "Invalid authentication token."
 msgstr "无效的认证令牌。"
 
@@ -377,7 +377,7 @@ msgid "Passwords cannot be blank."
 msgstr "密码不能为空。"
 
 #: includes/controller/Admin.php:620 includes/controller/Admin.php:722
-#: includes/controller/Main.php:456 includes/controller/Main.php:632
+#: includes/controller/Main.php:456 includes/controller/Main.php:631
 #: install.php:457 install.php:514
 msgid "Passwords do not match."
 msgstr "密码不匹配。"
@@ -388,18 +388,18 @@ msgstr "请考虑为这个用户设置一个更强的密码。"
 
 #: includes/controller/Admin.php:626 includes/controller/Admin.php:730
 #: includes/controller/Admin.php:1803 includes/controller/Main.php:461
-#: includes/controller/Main.php:637 install.php:517
+#: includes/controller/Main.php:636 install.php:517
 msgid "Email address cannot be blank."
 msgstr "邮件地址不能为空。"
 
 #: includes/controller/Admin.php:629 includes/controller/Admin.php:733
 #: includes/controller/Admin.php:1806 includes/controller/Main.php:463
-#: includes/controller/Main.php:639 install.php:519
+#: includes/controller/Main.php:638 install.php:519
 msgid "Invalid email address."
 msgstr "无效的邮件地址。"
 
 #: includes/controller/Admin.php:632 includes/controller/Admin.php:736
-#: includes/controller/Main.php:469 includes/controller/Main.php:642
+#: includes/controller/Main.php:469 includes/controller/Main.php:641
 msgid "Invalid website URL."
 msgstr "无效的网站URL。"
 
@@ -835,7 +835,7 @@ msgstr "您不能注册账户，因为您已登陆。"
 msgid "Please enter a username for your account."
 msgstr "请输入账户的用户名。"
 
-#: includes/controller/Main.php:458 includes/controller/Main.php:634
+#: includes/controller/Main.php:458 includes/controller/Main.php:633
 msgid "Please consider setting a stronger password for your account."
 msgstr "请考虑为您的账户设置个更强大的密码。"
 
@@ -860,7 +860,7 @@ msgid "You cannot activate an account because you are already logged in."
 msgstr "您不能激活账户，因为您已登陆。"
 
 #: includes/controller/Main.php:520 includes/controller/Main.php:544
-#: includes/controller/Main.php:679
+#: includes/controller/Main.php:678
 msgid "Please contact the blog administrator for help with your account."
 msgstr "请联系博客管理员以获取有关您帐户的帮助。"
 
@@ -868,7 +868,7 @@ msgstr "请联系博客管理员以获取有关您帐户的帮助。"
 msgid "Your account has already been activated."
 msgstr "您的账户已经被激活过。"
 
-#: includes/controller/Main.php:538 includes/controller/Main.php:676
+#: includes/controller/Main.php:538 includes/controller/Main.php:675
 msgid "You cannot reset your password because you are already logged in."
 msgstr "您不能重设密码，因为您已登陆。"
 
@@ -900,29 +900,29 @@ msgstr "您没有登陆。"
 msgid "Logged out."
 msgstr "退出登陆。"
 
-#: includes/controller/Main.php:624
+#: includes/controller/Main.php:623
 msgid "You must be logged in to access user controls."
 msgstr "您必须登陆才能访问用户操作。"
 
-#: includes/controller/Main.php:661
+#: includes/controller/Main.php:660
 msgid "Your profile has been updated."
 msgstr "您的配置文件已经更新。"
 
-#: includes/controller/Main.php:665
+#: includes/controller/Main.php:664
 msgid "Controls"
 msgstr "操作"
 
-#: includes/controller/Main.php:686
+#: includes/controller/Main.php:685
 msgid "Please enter your username."
 msgstr "请在下面输入您的用户名，我们会通过电子邮件向您发送新帐户的密码。"
 
-#: includes/controller/Main.php:701
+#: includes/controller/Main.php:700
 msgid ""
 "If that username is in our database, we will email you a password reset link."
 msgstr ""
 "如果您的用户名在我们的数据中，我们将会用电子邮件发送重置密码的链接给您。"
 
-#: includes/controller/Main.php:705
+#: includes/controller/Main.php:704
 msgid "Lost password"
 msgstr "忘记密码"
 
