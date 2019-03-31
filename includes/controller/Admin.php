@@ -1831,7 +1831,6 @@
             $config->set("email", $_POST['email']);
             $config->set("timezone", $_POST['timezone']);
             $config->set("locale", $_POST['locale']);
-            $config->set("cookies_notification", !empty($_POST['cookies_notification']));
             $config->set("check_updates", !empty($_POST['check_updates']));
             $config->set("check_updates_last", $check_updates_last);
 
@@ -2172,10 +2171,9 @@
             $this->context["sql_queries"]        =& SQL::current()->queries;
             $this->context["sql_debug"]          =& SQL::current()->debug;
 
-            $trigger->filter($this->context, "twig_context_admin");
-
             Update::check();
 
+            $trigger->filter($this->context, "twig_context_admin");
             $this->twig->display($template.".twig", $this->context);
         }
 

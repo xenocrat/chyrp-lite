@@ -723,7 +723,6 @@
                          $config->set("email", $_POST['email']),
                          $config->set("timezone", $_POST['timezone']),
                          $config->set("locale", $_POST['locale']),
-                         $config->set("cookies_notification", true),
                          $config->set("check_updates", true),
                          $config->set("check_updates_last", 0),
                          $config->set("theme", "blossom"),

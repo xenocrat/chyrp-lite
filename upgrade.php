@@ -258,6 +258,19 @@
             error(__("Error"), __("Could not write the configuration file."));
     }
 
+    /**
+     * Function: remove_cookies_notification
+     * Removes the cookies_notification config setting.
+     *
+     * Versions: 2019.01 => 2019.02
+     */
+    function remove_cookies_notification() {
+        $set = Config::current()->remove("cookies_notification");
+
+        if ($set === false)
+            error(__("Error"), __("Could not write the configuration file."));
+    }
+
     #---------------------------------------------
     # Output Starts
     #---------------------------------------------
@@ -487,6 +500,7 @@
         disable_recaptcha();
         update_htaccess();
         remove_feed_url();
+        remove_cookies_notification();
 
         # Perform module upgrades.
         foreach ($config->enabled_modules as $module)

@@ -584,10 +584,8 @@
                     if (!$user->approved)
                         Flash::notice(__("You must activate your account before you log in."), "/");
 
-                    $trigger->call("user_logged_in", $user);
-
                     $_SESSION['user_id'] = $user->id;
-                    $_SESSION['cookies_notified'] = true;
+                    $trigger->call("user_logged_in", $user);
 
                     Flash::notice(__("Logged in."), fallback($_SESSION['redirect_to'], "/"));
                 }
@@ -601,13 +599,16 @@
          * Logs out the current user.
          */
         public function logout() {
+            $trigger = Trigger::current();
+
             if (!logged_in())
                 Flash::notice(__("You aren't logged in."), "/");
 
+            $user = new User($_SESSION['user_id']);
             session_destroy();
             session();
+            $trigger->call("user_logged_out", $user);
 
-            $_SESSION['cookies_notified'] = true;
             Flash::notice(__("Logged out."), "/");
         }
 
@@ -827,9 +828,6 @@
             $this->context["sql_debug"]          =& SQL::current()->debug;
 
             $trigger->filter($this->context, "twig_context_main");
-
-            $theme->cookies_notification();
-
             $this->twig->display($template.".twig", $this->context);
         }
 
