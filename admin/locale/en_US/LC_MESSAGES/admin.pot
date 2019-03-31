@@ -278,7 +278,7 @@ msgstr ""
 #: admin/pages/content_settings.twig:81
 #: admin/pages/edit_group.twig:24
 #: admin/pages/edit_user.twig:49
-#: admin/pages/general_settings.twig:61
+#: admin/pages/general_settings.twig:57
 #: admin/pages/route_settings.twig:85
 #: admin/pages/user_settings.twig:47
 msgid "Update"
@@ -568,10 +568,6 @@ msgid "Language"
 msgstr ""
 
 #: admin/pages/general_settings.twig:53
-msgid "Notify Visitors About Cookies?"
-msgstr ""
-
-#: admin/pages/general_settings.twig:57
 msgid "Check for Updates?"
 msgstr ""
 

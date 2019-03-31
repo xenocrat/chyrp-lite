@@ -343,7 +343,7 @@ msgstr ""
 "tramite Markdown."
 
 #: admin/pages/content_settings.twig:81 admin/pages/edit_group.twig:24
-#: admin/pages/edit_user.twig:49 admin/pages/general_settings.twig:61
+#: admin/pages/edit_user.twig:49 admin/pages/general_settings.twig:57
 #: admin/pages/route_settings.twig:85 admin/pages/user_settings.twig:47
 msgid "Update"
 msgstr "Aggiorna"
@@ -602,10 +602,6 @@ msgid "Language"
 msgstr "Lingua"
 
 #: admin/pages/general_settings.twig:53
-msgid "Notify Visitors About Cookies?"
-msgstr "Notifica i visitatori sui cookie?"
-
-#: admin/pages/general_settings.twig:57
 msgid "Check for Updates?"
 msgstr "Verificare la disponibilità di aggiornamenti?"
 
@@ -945,9 +941,8 @@ msgid "Blog Themes"
 msgstr "Temi del blog"
 
 #: admin/pages/themes.twig:22
-#, fuzzy
 msgid "Select"
-msgstr "Non è stato specificato quale tema selezionare."
+msgstr "Seleziona"
 
 #: admin/pages/user_settings.twig:3 admin/pages/user_settings.twig:6
 msgid "User Settings"
@@ -1068,9 +1063,8 @@ msgid "All registered users"
 msgstr "Tutti gli utenti registrati"
 
 #: admin/partials/post_fields.twig:78
-#, fuzzy
 msgid "Pinned?"
-msgstr "Pinned"
+msgstr "Pinned?"
 
 #: admin/partials/post_fields.twig:79
 msgid "(shows this post above all others)"

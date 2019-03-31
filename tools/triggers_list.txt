@@ -320,7 +320,16 @@ Called from:
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 587
+	includes/controller/Main.php on line 588
+
+Arguments:
+	$user
+
+
+user_logged_out
+---------------
+Called from:
+	includes/controller/Main.php on line 610
 
 Arguments:
 	$user
@@ -329,7 +338,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 765
+	includes/controller/Main.php on line 766
 
 Arguments:
 	$post, $feed
@@ -852,15 +861,6 @@ Target:
 	$links
 
 
-cookies_notice
---------------
-Called from:
-	includes/class/Theme.php on line 345
-
-Target:
-	$notice
-
-
 visitor
 -------
 Called from:
@@ -961,7 +961,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 2051
+	includes/controller/Admin.php on line 2050
 
 Target:
 	$write
@@ -970,7 +970,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2080
+	includes/controller/Admin.php on line 2079
 
 Target:
 	$manage
@@ -979,7 +979,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 2105
+	includes/controller/Admin.php on line 2104
 
 Target:
 	$settings
@@ -988,7 +988,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2123
+	includes/controller/Admin.php on line 2122
 
 Target:
 	$extend
@@ -997,7 +997,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2175
+	includes/controller/Admin.php on line 2176
 
 Target:
 	$this->context
@@ -1047,7 +1047,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 829
+	includes/controller/Main.php on line 830
 
 Target:
 	$this->context
