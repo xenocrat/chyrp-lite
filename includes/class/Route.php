@@ -146,8 +146,9 @@
                 show_404();
 
             # Set redirect_to so that visitors will come back here after login.
-            if (!in_array($this->action, $this->controller->permitted))
-                $_SESSION['redirect_to'] = self_url();
+            if (!in_array($this->action, $this->controller->permitted) and
+                !$this->controller->feed and $this->controller->displayed)
+                    $_SESSION['redirect_to'] = self_url();
 
             $trigger->call("route_done", $this);
 
