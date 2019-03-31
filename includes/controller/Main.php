@@ -618,7 +618,6 @@
          */
         public function controls() {
             $visitor = Visitor::current();
-            $_SESSION['redirect_to'] = "controls"; # They'll come here after login if necessary.
 
             if (!logged_in())
                 Flash::notice(__("You must be logged in to access user controls."), "login");
