@@ -1,7 +1,7 @@
 <?php
     class Highlighter extends Modules {
         public function scripts($scripts) {
-            $scripts[] = Config::current()->chyrp_url."/modules/highlighter/highlight.js";
+            $scripts[] = Config::current()->chyrp_url."/modules/highlighter/highlight.min.js";
             return $scripts;
         }
 
@@ -10,7 +10,7 @@
         }
 
         public function stylesheets($stylesheets) {
-            $stylesheets[] = Config::current()->chyrp_url."/modules/highlighter/highlight.css";
+            $stylesheets[] = Config::current()->chyrp_url."/modules/highlighter/highlight.min.css";
             return $stylesheets;
         }
     }
