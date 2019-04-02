@@ -347,7 +347,7 @@
         }
 
         public function stylesheets($styles) {
-            $styles[] = Config::current()->chyrp_url."/modules/likes/style.css";
+            $styles[] = Config::current()->chyrp_url."/modules/likes/likes.css";
             return $styles;
         }
 
