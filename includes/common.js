@@ -4,11 +4,11 @@
 // Ajax loading overlay.
 $.fn.loader = function(remove) {
     if (remove)
-		$(this).removeClass("ajax_loading");
-  	else
-  		$(this).addClass("ajax_loading");
+        $(this).removeClass("ajax_loading");
+    else
+        $(this).addClass("ajax_loading");
 
-  return this;
+    return this;
 }
 
 // Award a numeric score for the strength of a password.
@@ -23,7 +23,7 @@ function passwordStrength(password) {
     for (var i = 0; i < password.length; i++)
         frequency[password[i]] = (frequency[password[i]] || 0) + 1;
 
-	// Award each unique char and punish more than 10 occurrences.
+    // Award each unique char and punish more than 10 occurrences.
     for (var item in frequency)
         score += (11 - frequency[item]);
 
@@ -33,7 +33,7 @@ function passwordStrength(password) {
         lower: /[a-z]/.test(password),
         upper: /[A-Z]/.test(password),
         nonWords: /\W/.test(password)
-    }
+    };
 
     variationCount = 0;
 
@@ -47,19 +47,19 @@ function passwordStrength(password) {
 
 // Does the string look like a web URL?
 function isURL(text) {
-	return (/^(https?:\/\/)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)(:[0-9]{1,5})?($|\/)/i.test(text) ||
-			/^(https?:\/\/)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(:[0-9]{1,5})?($|\/)/.test(text) ||
-			/^(https?:\/\/)?(\[[a-f0-9\:]{3,39}\])(:[0-9]{1,5})?($|\/)/i.test(text));
+    return (/^(https?:\/\/)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)(:[0-9]{1,5})?($|\/)/i.test(text) ||
+            /^(https?:\/\/)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(:[0-9]{1,5})?($|\/)/.test(text) ||
+            /^(https?:\/\/)?(\[[a-f0-9\:]{3,39}\])(:[0-9]{1,5})?($|\/)/i.test(text));
 }
 
 // Does the string look like an email address?
 function isEmail(text) {
-	return (/^[^ <>@]+@([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)$/i.test(text) ||
-			/^[^ <>@]+@([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$/.test(text) ||
-			/^[^ <>@]+@(\[[a-f0-9\:]{3,39}\])$/i.test(text));
+    return (/^[^ <>@]+@([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)$/i.test(text) ||
+            /^[^ <>@]+@([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$/.test(text) ||
+            /^[^ <>@]+@(\[[a-f0-9\:]{3,39}\])$/i.test(text));
 }
 
 // Escape strings for regular expressions.
 function escapeRegExp(text) {
-	return text.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+    return text.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
 }
