@@ -59,6 +59,19 @@ function isEmail(text) {
             /^[^ <>@]+@(\[[a-f0-9\:]{3,39}\])$/i.test(text));
 }
 
+// Prefixes a URL with a scheme if none was detected.
+function addScheme(url, scheme) {
+	var regexp = /^([a-z]+:\/\/)?(.+)/i;
+
+	if (!scheme)
+		scheme = url.replace(regexp, "$1");
+
+	if (!scheme)
+		scheme = "http://";
+
+	return url = scheme + url.replace(regexp, "$2");
+}
+
 // Escape strings for regular expressions.
 function escapeRegExp(text) {
     return text.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
