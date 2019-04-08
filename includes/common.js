@@ -61,15 +61,15 @@ function isEmail(text) {
 
 // Prefixes a URL with a scheme if none was detected.
 function addScheme(url, scheme) {
-	var regexp = /^([a-z]+:\/\/)?(.+)/i;
+    var regexp = /^([a-z]+:\/\/)?(.+)/i;
 
-	if (!scheme)
-		scheme = url.replace(regexp, "$1");
+    if (!scheme)
+        scheme = url.replace(regexp, "$1");
 
-	if (!scheme)
-		scheme = "http://";
+    if (!scheme)
+        scheme = "http://";
 
-	return url = scheme + url.replace(regexp, "$2");
+    return url = scheme + url.replace(regexp, "$2");
 }
 
 // Escape strings for regular expressions.
