@@ -2,7 +2,7 @@
 {% set field_markdown = site.enable_markdown ? " data-markdown" : "" %}
 <p class="main_options">
 <label for="title">{{ "Title" | translate }}</label>
-<input class="text" type="text" name="title" value="{{ page is defined ? page.title | fix(true, true) : '' }}" id="title">
+<input class="text" type="text" name="title" value="{{ page is defined ? page.title | fix(true, true) : '' }}" id="title" required>
 </p>
 <p class="main_options">
 <label for="body">
@@ -11,7 +11,7 @@
 {% endif %}
 {{ "Body" | translate }}
 </label>
-<textarea rows="12" name="body" id="body" data-preview{{ field_markdown }}>{{ page is defined ? page.body | fix(false, true) : "" }}</textarea>
+<textarea rows="12" name="body" id="body" data-preview{{ field_markdown }} required>{{ page is defined ? page.body | fix(false, true) : "" }}</textarea>
 </p>
 {{ trigger.call("after_page_fields") }}
 <div id="more_options" class="more_options">

@@ -418,6 +418,11 @@ input[type="password"] {
     /* Removes shadow from Mobile Safari */
     background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%);
 }
+input:invalid,
+textarea:invalid {
+    border-color: #e5d7a1;
+    box-shadow: none;
+}
 select:focus,
 textarea:focus,
 input[type="text"]:focus,
@@ -436,17 +441,14 @@ input[type="email"].error,
 input[type="url"].error,
 input[type="number"].error,
 input[type="password"].error,
-input:invalid,
 textarea.error {
     background-color: #faebe4;
-    box-shadow: none;
 }
 input[type="text"].error:focus,
 input[type="email"].error:focus,
 input[type="url"].error:focus,
 input[type="number"].error:focus,
 input[type="password"].error:focus,
-input:invalid:focus,
 textarea.error:focus {
     border: 1px solid #d51800;
 }

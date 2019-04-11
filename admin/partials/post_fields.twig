@@ -1,10 +1,23 @@
 {{ trigger.call("before_post_fields", feather) }}
 {% for field in feather.fields %}
-{% set field_value = attribute(post, field.attr) is defined ? attribute(post, field.attr) : field.value is defined ? field.value : "" %}
+{% if attribute(post, field.attr) is defined %}
+{% set field_value = attribute(post, field.attr) %}
+{% else %}
+{% set field_value = field.value is defined ? field.value : "" %}
+{% endif %}
 {% set field_preview = field.preview is defined and field.preview ? " data-preview" : "" %}
 {% set field_multiple = field.multiple is defined and field.multiple ? " multiple" : "" %}
 {% set field_accept = field.accept is defined ? ' accept="' ~ (field.accept | fix(true)) ~ '"' : "" %}
-{% set field_markdown = site.enable_markdown and field.filters is defined and (field.filters | contains("markup_text")) ? " data-markdown" : "" %}
+{% if site.enable_markdown %}
+{% set field_markdown = field.filters is defined and (field.filters | contains("markup_text")) ? " data-markdown" : "" %}
+{% else %}
+{% set field_markdown = "" %}
+{% endif %}
+{% if post is not defined %}
+{% set field_required = field.optional is defined and field.optional ? "" : " required" %}
+{% else %}
+{% set field_required = field.type == "file" or field.optional is defined and field.optional ? "" : " required" %}
+{% endif %}
 {% set field_id = (field.attr ~ "_field") | fix(true) %}
 {% set field_name = (field_multiple is not empty ? field.attr ~ "[]" : field.attr) | fix(true) %}
 <p class="main_options">
@@ -26,11 +39,11 @@
 {% endif %}
 </label>
 {% if field.type == "text" %}
-<input id="{{ field_id }}" class="text" type="text" name="{{ field_name }}"{{ field_preview ~ field_markdown }} value="{{ field_value | fix(true, true) }}">
+<input id="{{ field_id }}" class="text" type="text" name="{{ field_name }}"{{ field_preview ~ field_markdown ~ field_required }} value="{{ field_value | fix(true, true) }}">
 {% elseif field.type == "file" %}
-<input id="{{ field_id }}" type="file" name="{{ field_name }}"{{ field_accept ~ field_multiple }} value="">
+<input id="{{ field_id }}" type="file" name="{{ field_name }}"{{ field_accept ~ field_multiple ~ field_required }} value="">
 {% elseif field.type == "text_block" %}
-<textarea id="{{ field_id }}" name="{{ field_name }}" rows="12"{{ field_preview ~ field_markdown }}>{{ field_value | fix(false, true) }}</textarea>
+<textarea id="{{ field_id }}" name="{{ field_name }}" rows="12"{{ field_preview ~ field_markdown ~ field_required }}>{{ field_value | fix(false, true) }}</textarea>
 {% elseif field.type == "checkbox" %}
 <input id="{{ field_id }}" type="checkbox" name="{{ field_name }}"{{ field.checked | checked }}>
 {% elseif field.type == "select" %}
