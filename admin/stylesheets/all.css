@@ -736,23 +736,19 @@ div.confirmation button + button {
     margin-left: 1rem;
 }
 a.tag {
-    position: relative;
-    margin: 2px 0px;
+    display: inline-block;
+    margin-top: 0.5rem;
+    padding: 0px 2px;
     text-decoration: none;
-    line-height: 2;
     padding: 0em 0.25em;
     white-space: nowrap;
-    border: 1px solid #e5d7a1;
-    border-radius: 0.25em;
+    border: 1px solid #dfdfdf;
+    background-color: #efefef;
+}
+a.tag_added,
+code.tag_added {
     background-color: #fffecd;
-}
-span.tags_select a.tag_added {
-    top: 2px;
-    border-color: #ccb68f;
-}
-code.yay {
-    background-color: #ebfae4;
-    border: 1px solid #bdd6b5;
+    border-color: #e5d7a1;
 }
 
 /* Group: Options */

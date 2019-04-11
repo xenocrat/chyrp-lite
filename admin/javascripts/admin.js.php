@@ -287,37 +287,14 @@ var Settings = {
                 $("#email_correspondence").prop("checked", true);
         });
 
-        $("form#route_settings code.syntax").on("click", function(e) {
-            var name = $(e.target).text();
-            var post_url = $("form#route_settings input[name='post_url']");
-            var regexp = new RegExp("(^|\\/)" + escapeRegExp(name) + "([\\/]|$)", "g");
-
-            if (regexp.test(post_url.val())) {
-                post_url.val(post_url.val().replace(regexp, function(match, before, after) {
-                    if (before == "/" && after == "/")
-                        return "/";
-                    else
-                        return "";
-                }));
-                $(e.target).removeClass("yay");
-            } else {
-                if (post_url.val() == "")
-                    post_url.val(name);
-                else
-                    post_url.val(post_url.val().replace(/(\/?)?$/, "\/" + name));
-
-                $(e.target).addClass("yay");
-            }
-        }).css("cursor", "pointer");
-
         $("form#route_settings input[name='post_url']").on("keyup", function(e) {
             $("form#route_settings code.syntax").each(function(){
                 regexp = new RegExp("(/?|^)" + $(this).text() + "(/?|$)", "g");
 
                 if ($(e.target).val().match(regexp))
-                    $(this).addClass("yay");
+                    $(this).addClass("tag_added");
                 else
-                    $(this).removeClass("yay");
+                    $(this).removeClass("tag_added");
             });
         }).trigger("keyup");
     }
