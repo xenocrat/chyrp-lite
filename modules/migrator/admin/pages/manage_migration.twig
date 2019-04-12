@@ -8,7 +8,7 @@
 <fieldset>
 <p>
 <label for="xml_file">{{ "eXtended .XML File" | translate("migrator") }}</label>
-<input type="file" name="xml_file" value="" id="xml_file" accept=".xml">
+<input type="file" name="xml_file" value="" id="xml_file" accept=".xml" required>
 </p>
 <p>
 <label for="media_url">{{ "URL for Embedded Media" | translate("migrator") }}
@@ -31,7 +31,7 @@
 <fieldset>
 <p>
 <label for="tumblr_url">{{ "Your Tumblr URL" | translate("migrator") }}</label>
-<input class="text" type="url" name="tumblr_url" value="" id="tumblr_url">
+<input class="text" type="url" name="tumblr_url" value="" id="tumblr_url" required>
 <small>
 {{ "Something like <code>http://%s.tumblr.com/</code>." | translate("migrator") | format(visitor.login) }}
 {{ "Audio and Video cannot be imported." | translate("migrator") }}
@@ -49,19 +49,19 @@
 <fieldset>
 <p>
 <label for="host">{{ "Host" | translate("migrator") }}</label>
-<input class="text" type="text" name="host" value="localhost" id="host">
+<input class="text" type="text" name="host" value="localhost" id="host" required>
 </p>
 <p>
 <label for="username">{{ "Username" | translate("migrator") }}</label>
-<input class="text" type="text" name="username" value="" id="username">
+<input class="text" type="text" name="username" value="" id="username" required>
 </p>
 <p>
 <label for="password">{{ "Password" | translate("migrator") }}</label>
-<input class="text" type="password" name="password" value="" id="password">
+<input class="text" type="password" name="password" value="" id="password" required>
 </p>
 <p>
 <label for="database">{{ "Database" | translate("migrator") }}</label>
-<input class="text" type="text" name="database" value="" id="database">
+<input class="text" type="text" name="database" value="" id="database" required>
 </p>
 <p>
 <label for="prefix">{{ "Table Prefix" | translate("migrator") }}
@@ -90,19 +90,19 @@
 <fieldset>
 <p>
 <label for="host">{{ "Host" | translate("migrator") }}</label>
-<input class="text" type="text" name="host" value="localhost" id="host">
+<input class="text" type="text" name="host" value="localhost" id="host" required>
 </p>
 <p>
 <label for="username">{{ "Username" | translate("migrator") }}</label>
-<input class="text" type="text" name="username" value="" id="username">
+<input class="text" type="text" name="username" value="" id="username" required>
 </p>
 <p>
 <label for="password">{{ "Password" | translate("migrator") }}</label>
-<input class="text" type="password" name="password" value="" id="password">
+<input class="text" type="password" name="password" value="" id="password" required>
 </p>
 <p>
 <label for="database">{{ "Database" | translate("migrator") }}</label>
-<input class="text" type="text" name="database" value="" id="database">
+<input class="text" type="text" name="database" value="" id="database" required>
 </p>
 <p>
 <label for="media_url">{{ "URL for Embedded Media" | translate("migrator") }}

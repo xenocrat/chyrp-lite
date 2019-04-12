@@ -8,11 +8,11 @@
 <fieldset>
 <p>
 <label for="login">{{ "Login" | translate }}</label>
-<input class="text" type="text" name="login" value="{{ user.login | fix(true) }}" id="full_name" maxlength="64">
+<input class="text" type="text" name="login" value="{{ user.login | fix(true) }}" id="full_name" maxlength="64" required>
 </p>
 <p>
 <label for="email">{{ "Email" | translate }}</label>
-<input class="text" type="email" name="email" value="{{ user.email | fix(true) }}" id="email" maxlength="128">
+<input class="text" type="email" name="email" value="{{ user.email | fix(true) }}" id="email" maxlength="128" required>
 </p>
 <p>
 <label for="group">{{ "Group" | translate }}</label>

@@ -16,7 +16,7 @@
 </p>
 <p>
 <label for="chyrp_url">{{ "Chyrp URL" | translate }}</label>
-<input class="text" type="url" name="chyrp_url" value="{{ site.chyrp_url | fix(true) }}" id="chyrp_url">
+<input class="text" type="url" name="chyrp_url" value="{{ site.chyrp_url | fix(true) }}" id="chyrp_url" required>
 </p>
 <p>
 <label for="url">
@@ -31,7 +31,7 @@
 </p>
 <p>
 <label for="email">{{ "Contact Email Address" | translate }}</label>
-<input class="text" type="email" name="email" value="{{ site.email | fix(true) }}" id="email">
+<input class="text" type="email" name="email" value="{{ site.email | fix(true) }}" id="email" required>
 </p>
 <p>
 <label for="timezone">{{ "Time Zone" | translate }}</label>

@@ -13,12 +13,12 @@
 {% endif %}
 {{ "Body" | translate("comments") }}
 </label>
-<textarea rows="12" name="body" id="body_field"{{ site.enable_markdown ? ' data-markdown' : '' }}>{{ comment.body | fix(false, true) }}</textarea>
+<textarea rows="12" name="body" id="body_field"{{ site.enable_markdown ? ' data-markdown' : '' }} required>{{ comment.body | fix(false, true) }}</textarea>
 </p>
 <div id="more_options" class="more_options">
 <p class="more_options_option">
 <label for="author_field">{{ "Author" | translate("comments") }}</label>
-<input class="text" type="text" name="author" value="{{ comment.author | fix(true) }}" id="author_field" maxlength="250">
+<input class="text" type="text" name="author" value="{{ comment.author | fix(true) }}" id="author_field" maxlength="250" required>
 </p>
 <p class="more_options_option">
 <label for="author_email_field">{{ "Author Email" | translate("comments") }}</label>

@@ -8,7 +8,7 @@
 <fieldset>
 <p>
 <label for="name">{{ "Name" | translate("tags") }}</label>
-<input type="text" name="name" value="{{ tag.name | fix(true, true) }}" id="name">
+<input type="text" name="name" value="{{ tag.name | fix(true, true) }}" id="name" required>
 </p>
 <p class="buttons">
 <button type="submit" class="yay">
