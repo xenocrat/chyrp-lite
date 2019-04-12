@@ -744,6 +744,7 @@ a.tag {
     text-decoration: none;
     padding: 0em 0.25em;
     white-space: nowrap;
+    border-radius: 0.25em;
     border: 1px solid #dfdfdf;
     background-color: #efefef;
 }
