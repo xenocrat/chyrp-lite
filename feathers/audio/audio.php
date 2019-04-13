@@ -89,10 +89,8 @@
             $filepath = uploaded($post->filename, false);
 
             if (file_exists($filepath)) {
-                if ($trigger->exists("delete_upload"))
-                    $trigger->call("delete_upload", $post->filename);
-                else
-                    unlink($filepath);
+                $trigger->call("delete_upload", $post->filename);
+                unlink($filepath);
             }
         }
 

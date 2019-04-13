@@ -130,10 +130,8 @@
                 $filepath = uploaded($filename, false);
 
                 if (file_exists($filepath)) {
-                    if ($trigger->exists("delete_upload"))
-                        $trigger->call("delete_upload", $filename);
-                    else
-                        unlink($filepath);
+                    $trigger->call("delete_upload", $filename);
+                    unlink($filepath);
                 }
             }
         }
