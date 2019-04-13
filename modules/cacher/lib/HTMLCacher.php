@@ -11,7 +11,7 @@
             # If the directories do not exist and cannot be created, or are not writable, cancel execution.
             if (((!is_dir($this->base) and !@mkdir($this->base)) or !is_writable($this->base)) or
                 ((!is_dir($this->path) and !@mkdir($this->path)) or !is_writable($this->path)))
-                cancel_module("cacher", __("Cacher module cannot write caches to disk.", "cacher"));
+                    cancel_module("cacher", __("Cacher module cannot write caches to disk.", "cacher"));
         }
 
         private function available($route) {
