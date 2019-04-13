@@ -20,13 +20,15 @@
 <label for="author_field">{{ "Author" | translate("comments") }}</label>
 <input class="text" type="text" name="author" value="{{ comment.author | fix(true) }}" id="author_field" maxlength="250" required>
 </p>
+{% if comment.status != "pingback" %}
 <p class="more_options_option">
 <label for="author_email_field">{{ "Author Email" | translate("comments") }}</label>
-<input class="text" type="text" name="author_email" value="{{ comment.author_email | fix(true) }}" id="author_email_field" maxlength="128">
+<input class="text" type="email" name="author_email" value="{{ comment.author_email | fix(true) }}" id="author_email_field" maxlength="128" required>
 </p>
+{% endif %}
 <p class="more_options_option">
 <label for="author_url_field">{{ "Author Website" | translate("comments") }}</label>
-<input class="text" type="text" name="author_url" value="{{ comment.author_url | fix(true) }}" id="author_url_field" maxlength="128">
+<input class="text" type="url" name="author_url" value="{{ comment.author_url | fix(true) }}" id="author_url_field" maxlength="128">
 </p>
 {% if visitor.group.can("edit_comment") %}
 {# If they can edit all comments, not just this one. #}
@@ -34,15 +36,16 @@
 <label for="created_at_field">{{ "Timestamp" | translate("comments") }}</label>
 <input class="text" type="text" name="created_at" value="{{ comment.created_at | strftimeformat('%Y-%m-%d %H:%M:%S') | fix(true) }}" id="created_at_field">
 </p>
+{% if comment.status != "pingback" %}
 <p class="more_options_option">
 <label for="status_field">{{ "Status" | translate("comments") }}</label>
 <select name="status" id="status_field">
 <option value="approved"{{ comment.status | selected("approved") }}>{{ "Approved" | translate("comments") }}</option>
 <option value="denied"{{ comment.status | selected("denied") }}>{{ "Denied" | translate("comments") }}</option>
 <option value="spam"{{ comment.status | selected("spam") }}>{{ "Spam" | translate("comments") }}</option>
-<option value="pingback"{{ comment.status | selected("pingback") }}>{{ "Pingback" | translate("comments") }}</option>
 </select>
 </p>
+{% endif %}
 {% endif %}
 {% if site.email_correspondence %}
 <p class="more_options_option">
