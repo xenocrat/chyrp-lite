@@ -28,7 +28,7 @@
             $xml = @simplexml_load_string($rss);
 
             if (!self::validate($xml)) {
-                trigger_error(__("Update check failed to validate the RSS feed."), E_USER_NOTICE);
+                trigger_error(__("Unable to check for new Chyrp Lite versions."), E_USER_NOTICE);
                 return self::warning();
             }
 
