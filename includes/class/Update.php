@@ -10,27 +10,27 @@
          */
         public static function check() {
             $config = Config::current();
-
-            if (!Visitor::current()->group->can("change_settings"))
-                return;
+            $visitor = Visitor::current();
 
             if (!$config->check_updates)
                 return;
 
+            if (!$visitor->group->can("change_settings"))
+                return;
+
+            # Return unless elapsed time is greater than the update interval.
             if (!((time() - $config->check_updates_last) > UPDATE_INTERVAL))
                 return;
 
             $config->set("check_updates_last", time());
 
             $rss = get_remote(UPDATE_XML, 3);
-
-            if ($rss === false)
-                return self::warning();
-
             $xml = @simplexml_load_string($rss);
 
-            if (!self::validate($xml))
+            if (!self::validate($xml)) {
+                trigger_error(__("Update check failed to validate the RSS feed."), E_USER_NOTICE);
                 return self::warning();
+            }
 
             foreach ($xml->channel->item as $item)
                 if (version_compare(CHYRP_VERSION, $item->guid, "<"))
