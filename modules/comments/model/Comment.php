@@ -83,7 +83,10 @@
                                     "approved" :
                                     $config->module_comments["default_comment_status"]);
 
-            if ($trigger->call("comment_is_spam", $values))
+            $spam = ($status == "spam") ? true : false ;
+            $trigger->filter($spam, "comment_is_spam", $values);
+
+            if ($spam)
                 $status = "spam";
 
             if (!logged_in() or !$config->email_correspondence)
