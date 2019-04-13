@@ -10,10 +10,13 @@
                 return $text;
 
             $route = Route::current();
-            $controller = $route->controller;
 
-            if (!isset($post) or $route->action == "view" or $controller->feed)
-                return preg_replace("/<!-- *more([^>]*)?-->/i", "", $text);
+            if (!isset($post) or
+                !isset($route) or
+                !($route->controller instanceof MainController) or
+                $route->controller->feed or
+                $route->action == "view")
+                    return preg_replace("/<!-- *more([^>]*)?-->/i", "", $text);
 
             $more = oneof(trim(fallback($matches[1])), __("&hellip;more", "read_more"));
             $url = (!$post->no_results) ? $post->url() : "#" ;
