@@ -253,6 +253,9 @@
          *     The / path strictly requires no request args.
          */
         public function custom() {
+            if (!$this->controller instanceof MainController)
+                return;
+
             $config = Config::current();
 
             foreach ($config->routes as $path => $action) {
@@ -298,7 +301,7 @@
             static $instance = null;
 
             if (!isset($controller) and empty($instance))
-                trigger_error(__("Route was initiated without a Controller."), E_USER_ERROR);
+                return $instance;
 
             $instance = (empty($instance)) ? new self($controller) : $instance ;
             return $instance;
