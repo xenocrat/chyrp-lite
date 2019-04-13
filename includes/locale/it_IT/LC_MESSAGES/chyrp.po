@@ -160,18 +160,18 @@ msgstr "Il percorso è stato avviato senza un Controller."
 msgid "PDO driver is unavailable for this database."
 msgstr "Il driver PDO non è disponibile per questo database."
 
-#: includes/class/Update.php:29
-msgid "Unable to check for new Chyrp Lite versions."
-msgstr "Impossibile controllare le nuove versioni di Chyrp Lite."
-
-#: includes/class/Update.php:31 includes/class/Update.php:37
-msgid "Go to GitHub &rarr;"
-msgstr "Vai a GitHub &rarr;"
-
-#: includes/class/Update.php:35
+#: includes/class/Update.php:62
 #, php-format
 msgid "Chyrp Lite &#8220;%s&#8221; is available."
 msgstr "Chyrp Lite &#8220;%s&#8221; è disponibile."
+
+#: includes/class/Update.php:64 includes/class/Update.php:74
+msgid "Go to GitHub &rarr;"
+msgstr "Vai a GitHub &rarr;"
+
+#: includes/class/Update.php:72
+msgid "Unable to check for new Chyrp Lite versions."
+msgstr "Impossibile controllare le nuove versioni di Chyrp Lite."
 
 #: includes/common.php:297 includes/common.php:302
 msgid "Service Unavailable"
@@ -819,9 +819,8 @@ msgid "This post is not published."
 msgstr "Questo post non è pubblicato."
 
 #: includes/controller/Main.php:335
-#, php-format
-msgid "This post is scheduled to be published %s."
-msgstr "Questo post è programmato per essere pubblicato %s."
+msgid "This post is scheduled to be published."
+msgstr "Questo post è programmato per essere pubblicato."
 
 #: includes/controller/Main.php:361
 msgid "You are not allowed to view this page."

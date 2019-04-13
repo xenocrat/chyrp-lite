@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
+"Last-Translator: \n"
 "Language-Team: Marina Colucci\n"
+"Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.2.1\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: it_IT\n"
 
 #. Content-Type: text/plain; charset=UTF-8
 #. Copyright 2019 Daniel Pimley and other contributors.
@@ -33,17 +33,17 @@ msgid "Default Comment Status"
 msgstr "Stato commento predefinito"
 
 #: modules/comments/admin/pages/comment_settings.twig:18
-#: modules/comments/admin/pages/edit_comment.twig:40
+#: modules/comments/admin/pages/edit_comment.twig:43
 msgid "Approved"
 msgstr "Approvato"
 
 #: modules/comments/admin/pages/comment_settings.twig:19
-#: modules/comments/admin/pages/edit_comment.twig:41
+#: modules/comments/admin/pages/edit_comment.twig:44
 msgid "Denied"
 msgstr "Negato"
 
 #: modules/comments/admin/pages/comment_settings.twig:20
-#: modules/comments/admin/pages/edit_comment.twig:42
+#: modules/comments/admin/pages/edit_comment.twig:45
 #: modules/comments/admin/pages/manage_spam.twig:18
 msgid "Spam"
 msgstr "Spam"
@@ -62,8 +62,7 @@ msgstr "Ricarica nuovi commenti"
 
 #: modules/comments/admin/pages/comment_settings.twig:31
 msgid "Show newly added comments (up to the maximum number per page)."
-msgstr ""
-"Mostra i commenti appena aggiunti (fino al numero massimo per pagina)."
+msgstr "Mostra i commenti appena aggiunti (fino al numero massimo per pagina)."
 
 #: modules/comments/admin/pages/comment_settings.twig:34
 msgid "Reload interval"
@@ -102,36 +101,32 @@ msgstr "Testo"
 msgid "Author"
 msgstr "Autore"
 
-#: modules/comments/admin/pages/edit_comment.twig:24
+#: modules/comments/admin/pages/edit_comment.twig:25
 msgid "Author Email"
 msgstr "Email dell'autore"
 
-#: modules/comments/admin/pages/edit_comment.twig:28
+#: modules/comments/admin/pages/edit_comment.twig:30
 msgid "Author Website"
 msgstr "Sito dell'autore"
 
-#: modules/comments/admin/pages/edit_comment.twig:34
+#: modules/comments/admin/pages/edit_comment.twig:36
 msgid "Timestamp"
 msgstr "Date e ora"
 
-#: modules/comments/admin/pages/edit_comment.twig:38
+#: modules/comments/admin/pages/edit_comment.twig:41
 #: modules/comments/admin/pages/manage_comments.twig:27
 msgid "Status"
 msgstr "Stato"
 
-#: modules/comments/admin/pages/edit_comment.twig:43
-msgid "Pingback"
-msgstr "Pingback"
-
-#: modules/comments/admin/pages/edit_comment.twig:49
+#: modules/comments/admin/pages/edit_comment.twig:52
 msgid "Email Notifications"
 msgstr "Notifiche email"
 
-#: modules/comments/admin/pages/edit_comment.twig:60
+#: modules/comments/admin/pages/edit_comment.twig:63
 msgid "Save"
 msgstr "Salva"
 
-#: modules/comments/admin/pages/edit_comment.twig:62
+#: modules/comments/admin/pages/edit_comment.twig:65
 #: modules/comments/admin/pages/manage_comments.twig:84
 #: modules/comments/admin/pages/manage_spam.twig:73
 msgid "Delete"
@@ -285,8 +280,7 @@ msgstr "Per eliminare un commento è necessario un ID."
 #: modules/comments/comments.php:237 modules/comments/comments.php:258
 #: modules/comments/comments.php:556
 msgid "You do not have sufficient privileges to delete this comment."
-msgstr ""
-"Non si dispone di privilegi sufficienti per eliminare questo commento."
+msgstr "Non si dispone di privilegi sufficienti per eliminare questo commento."
 
 #: modules/comments/comments.php:262 modules/comments/comments.php:559
 msgid "Comment deleted."
@@ -352,8 +346,7 @@ msgstr "Un ping dall'URL è già registrato."
 
 #: modules/comments/comments.php:662
 msgid "Your URL is too long to be stored in our database."
-msgstr ""
-"Il tuo URL è troppo lungo per essere memorizzato nel nostro database."
+msgstr "Il tuo URL è troppo lungo per essere memorizzato nel nostro database."
 
 #: modules/comments/comments.php:673
 msgid "Pingback registered!"
@@ -381,8 +374,7 @@ msgstr "Stato del commento"
 
 #: modules/comments/info.php:6
 msgid "Adds commenting functionality to your posts, with pingback support."
-msgstr ""
-"Aggiunge funzionalità di commento ai tuoi post, con supporto Pingback."
+msgstr "Aggiunge funzionalità di commento ai tuoi post, con supporto Pingback."
 
 #: modules/comments/info.php:11
 msgid "Please remember to update the permission settings for each group."
@@ -411,8 +403,8 @@ msgid ""
 "The comment cannot be deleted because your web browser did not send proper "
 "credentials."
 msgstr ""
-"Il commento non può essere eliminato perché il browser Web non ha inviato "
-"le credenziali appropriate."
+"Il commento non può essere eliminato perché il browser Web non ha inviato le "
+"credenziali appropriate."
 
 #: modules/comments/model/Comment.php:356
 msgid "Anon"

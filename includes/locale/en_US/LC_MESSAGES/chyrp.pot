@@ -232,18 +232,18 @@ msgstr ""
 msgid "PDO driver is unavailable for this database."
 msgstr ""
 
-#: includes/class/Update.php:29
-msgid "Unable to check for new Chyrp Lite versions."
+#: includes/class/Update.php:62
+#, php-format
+msgid "Chyrp Lite &#8220;%s&#8221; is available."
 msgstr ""
 
-#: includes/class/Update.php:31
-#: includes/class/Update.php:37
+#: includes/class/Update.php:64
+#: includes/class/Update.php:74
 msgid "Go to GitHub &rarr;"
 msgstr ""
 
-#: includes/class/Update.php:35
-#, php-format
-msgid "Chyrp Lite &#8220;%s&#8221; is available."
+#: includes/class/Update.php:72
+msgid "Unable to check for new Chyrp Lite versions."
 msgstr ""
 
 #: includes/common.php:297
@@ -996,8 +996,7 @@ msgid "This post is not published."
 msgstr ""
 
 #: includes/controller/Main.php:335
-#, php-format
-msgid "This post is scheduled to be published %s."
+msgid "This post is scheduled to be published."
 msgstr ""
 
 #: includes/controller/Main.php:361

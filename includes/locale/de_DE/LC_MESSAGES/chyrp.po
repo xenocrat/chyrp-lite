@@ -160,18 +160,18 @@ msgstr "Route wurde ohne einen Controller initiiert."
 msgid "PDO driver is unavailable for this database."
 msgstr "PDO Treiber ist für diese Datenbank nicht verfügbar."
 
-#: includes/class/Update.php:29
-msgid "Unable to check for new Chyrp Lite versions."
-msgstr "Prüfen auf neue Chyrp Lite Versionen fehlgeschlagen."
-
-#: includes/class/Update.php:31 includes/class/Update.php:37
-msgid "Go to GitHub &rarr;"
-msgstr "Zu GitHub gehen &rarr;"
-
-#: includes/class/Update.php:35
+#: includes/class/Update.php:62
 #, php-format
 msgid "Chyrp Lite &#8220;%s&#8221; is available."
 msgstr "Chyrp Lite &#8220;%s&#8221; ist verfügbar."
+
+#: includes/class/Update.php:64 includes/class/Update.php:74
+msgid "Go to GitHub &rarr;"
+msgstr "Zu GitHub gehen &rarr;"
+
+#: includes/class/Update.php:72
+msgid "Unable to check for new Chyrp Lite versions."
+msgstr "Prüfen auf neue Chyrp Lite Versionen fehlgeschlagen."
 
 #: includes/common.php:297 includes/common.php:302
 msgid "Service Unavailable"
@@ -816,9 +816,8 @@ msgid "This post is not published."
 msgstr "Dieser Post ist nicht veröffentlicht."
 
 #: includes/controller/Main.php:335
-#, php-format
-msgid "This post is scheduled to be published %s."
-msgstr "Dieser Post ist vorgemerkt zur Veröffentlichung %s."
+msgid "This post is scheduled to be published."
+msgstr "Dieser Post ist vorgemerkt zur Veröffentlichung."
 
 #: includes/controller/Main.php:361
 msgid "You are not allowed to view this page."

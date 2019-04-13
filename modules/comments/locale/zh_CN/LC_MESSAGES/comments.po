@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.1\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Content-Type: text/plain; charset=UTF-8
@@ -33,17 +33,17 @@ msgid "Default Comment Status"
 msgstr "默认评论状态"
 
 #: modules/comments/admin/pages/comment_settings.twig:18
-#: modules/comments/admin/pages/edit_comment.twig:40
+#: modules/comments/admin/pages/edit_comment.twig:43
 msgid "Approved"
 msgstr "已批准的"
 
 #: modules/comments/admin/pages/comment_settings.twig:19
-#: modules/comments/admin/pages/edit_comment.twig:41
+#: modules/comments/admin/pages/edit_comment.twig:44
 msgid "Denied"
 msgstr "已否决的"
 
 #: modules/comments/admin/pages/comment_settings.twig:20
-#: modules/comments/admin/pages/edit_comment.twig:42
+#: modules/comments/admin/pages/edit_comment.twig:45
 #: modules/comments/admin/pages/manage_spam.twig:18
 msgid "Spam"
 msgstr "垃圾评论"
@@ -101,36 +101,32 @@ msgstr "正文"
 msgid "Author"
 msgstr "作者"
 
-#: modules/comments/admin/pages/edit_comment.twig:24
+#: modules/comments/admin/pages/edit_comment.twig:25
 msgid "Author Email"
 msgstr "作者的电子邮件"
 
-#: modules/comments/admin/pages/edit_comment.twig:28
+#: modules/comments/admin/pages/edit_comment.twig:30
 msgid "Author Website"
 msgstr "作者的网站"
 
-#: modules/comments/admin/pages/edit_comment.twig:34
+#: modules/comments/admin/pages/edit_comment.twig:36
 msgid "Timestamp"
 msgstr "时间戳"
 
-#: modules/comments/admin/pages/edit_comment.twig:38
+#: modules/comments/admin/pages/edit_comment.twig:41
 #: modules/comments/admin/pages/manage_comments.twig:27
 msgid "Status"
 msgstr "状态"
 
-#: modules/comments/admin/pages/edit_comment.twig:43
-msgid "Pingback"
-msgstr ""
-
-#: modules/comments/admin/pages/edit_comment.twig:49
+#: modules/comments/admin/pages/edit_comment.twig:52
 msgid "Email Notifications"
 msgstr "邮件通知"
 
-#: modules/comments/admin/pages/edit_comment.twig:60
+#: modules/comments/admin/pages/edit_comment.twig:63
 msgid "Save"
 msgstr "保存"
 
-#: modules/comments/admin/pages/edit_comment.twig:62
+#: modules/comments/admin/pages/edit_comment.twig:65
 #: modules/comments/admin/pages/manage_comments.twig:84
 #: modules/comments/admin/pages/manage_spam.twig:73
 msgid "Delete"

@@ -481,7 +481,7 @@ msgstr "全名"
 #: admin/pages/edit_user.twig:36 admin/pages/edit_user.twig:43
 #: admin/pages/general_settings.twig:24 admin/pages/import.twig:35
 #: admin/pages/new_user.twig:37 admin/pages/new_user.twig:44
-#: admin/partials/post_fields.twig:17
+#: admin/partials/post_fields.twig:30
 msgid "(optional)"
 msgstr "(可选)"
 
@@ -727,7 +727,7 @@ msgid "Posted"
 msgstr "已发布的"
 
 #: admin/pages/manage_posts.twig:24 admin/partials/page_fields.twig:26
-#: admin/partials/post_fields.twig:53
+#: admin/partials/post_fields.twig:66
 msgid "Status"
 msgstr "状态"
 
@@ -967,7 +967,7 @@ msgstr "写作"
 msgid "Body"
 msgstr "正文"
 
-#: admin/partials/page_fields.twig:20 admin/partials/post_fields.twig:85
+#: admin/partials/page_fields.twig:20 admin/partials/post_fields.twig:98
 msgid "Slug"
 msgstr ""
 
@@ -975,7 +975,7 @@ msgstr ""
 msgid "Public and visible in pages list"
 msgstr "公开并在页面列表中显示"
 
-#: admin/partials/page_fields.twig:31 admin/partials/post_fields.twig:58
+#: admin/partials/page_fields.twig:31 admin/partials/post_fields.twig:71
 msgid "Public"
 msgstr "公开"
 
@@ -983,7 +983,7 @@ msgstr "公开"
 msgid "Private and visible in pages list"
 msgstr "隐藏并在页面列表中显示"
 
-#: admin/partials/page_fields.twig:35 admin/partials/post_fields.twig:60
+#: admin/partials/page_fields.twig:35 admin/partials/post_fields.twig:73
 msgid "Private"
 msgstr "隐藏"
 
@@ -1011,40 +1011,40 @@ msgstr "父级"
 msgid "[None]"
 msgstr "[空]"
 
-#: admin/partials/page_fields.twig:70 admin/partials/post_fields.twig:140
-#: admin/partials/post_fields.twig:149
+#: admin/partials/page_fields.twig:70 admin/partials/post_fields.twig:153
+#: admin/partials/post_fields.twig:162
 msgid "Publish"
 msgstr "公开"
 
-#: admin/partials/page_fields.twig:74 admin/partials/post_fields.twig:144
-#: admin/partials/post_fields.twig:153
+#: admin/partials/page_fields.twig:74 admin/partials/post_fields.twig:157
+#: admin/partials/post_fields.twig:166
 msgid "Save"
 msgstr "保存"
 
-#: admin/partials/post_fields.twig:56
+#: admin/partials/post_fields.twig:69
 msgid "Draft"
 msgstr "草稿"
 
-#: admin/partials/post_fields.twig:62
+#: admin/partials/post_fields.twig:75
 msgid "Scheduled"
 msgstr "定时发布"
 
-#: admin/partials/post_fields.twig:63
+#: admin/partials/post_fields.twig:76
 msgid "Visible only to a group of users:"
 msgstr "仅可见于一组用户："
 
-#: admin/partials/post_fields.twig:65
+#: admin/partials/post_fields.twig:78
 msgid "All registered users"
 msgstr "所有注册的用户"
 
-#: admin/partials/post_fields.twig:78
+#: admin/partials/post_fields.twig:91
 msgid "Pinned?"
 msgstr "置顶？"
 
-#: admin/partials/post_fields.twig:79
+#: admin/partials/post_fields.twig:92
 msgid "(shows this post above all others)"
 msgstr "（置顶显示）"
 
-#: admin/partials/post_fields.twig:91
+#: admin/partials/post_fields.twig:104
 msgid "Timestamp"
 msgstr "时间戳"

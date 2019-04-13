@@ -300,7 +300,7 @@ msgstr ""
 
 #: admin/pages/content_settings.twig:29
 msgid "Upload Size Limit"
-msgstr "Limite delle dimensioni per il caricamento dati."
+msgstr "Limite delle dimensioni per il caricamento dati"
 
 #: admin/pages/content_settings.twig:31
 msgid "(Megabytes)"
@@ -502,7 +502,7 @@ msgstr "Nome completo"
 #: admin/pages/edit_user.twig:36 admin/pages/edit_user.twig:43
 #: admin/pages/general_settings.twig:24 admin/pages/import.twig:35
 #: admin/pages/new_user.twig:37 admin/pages/new_user.twig:44
-#: admin/partials/post_fields.twig:17
+#: admin/partials/post_fields.twig:30
 msgid "(optional)"
 msgstr "(opzionale)"
 
@@ -591,7 +591,7 @@ msgstr ""
 
 #: admin/pages/general_settings.twig:33
 msgid "Contact Email Address"
-msgstr "Contatto di Indirizzo email "
+msgstr "Contatto di Indirizzo email"
 
 #: admin/pages/general_settings.twig:37
 msgid "Time Zone"
@@ -682,17 +682,17 @@ msgstr "Controlli"
 #: admin/pages/manage_pages.twig:46 admin/pages/manage_pages.twig:51
 #: admin/pages/manage_users.twig:54
 msgid "yes"
-msgstr "Sì"
+msgstr "sì"
 
 #: admin/pages/manage_groups.twig:53 admin/pages/manage_pages.twig:59
 #: admin/pages/manage_posts.twig:47 admin/pages/manage_users.twig:59
 msgid "edit"
-msgstr "Modifica"
+msgstr "modifica"
 
 #: admin/pages/manage_groups.twig:56 admin/pages/manage_pages.twig:62
 #: admin/pages/manage_posts.twig:50 admin/pages/manage_users.twig:62
 msgid "delete"
-msgstr "Elimina"
+msgstr "elimina"
 
 #: admin/pages/manage_groups.twig:64 admin/pages/manage_pages.twig:74
 #: admin/pages/manage_posts.twig:62 admin/pages/manage_users.twig:74
@@ -752,7 +752,7 @@ msgid "Posted"
 msgstr "Pubblicato"
 
 #: admin/pages/manage_posts.twig:24 admin/partials/page_fields.twig:26
-#: admin/partials/post_fields.twig:53
+#: admin/partials/post_fields.twig:66
 msgid "Status"
 msgstr "Stato"
 
@@ -992,7 +992,7 @@ msgstr "Scrivi"
 msgid "Body"
 msgstr "Testo"
 
-#: admin/partials/page_fields.twig:20 admin/partials/post_fields.twig:85
+#: admin/partials/page_fields.twig:20 admin/partials/post_fields.twig:98
 msgid "Slug"
 msgstr "Slug"
 
@@ -1000,7 +1000,7 @@ msgstr "Slug"
 msgid "Public and visible in pages list"
 msgstr "Pubblico e visibile nell'elenco delle pagine"
 
-#: admin/partials/page_fields.twig:31 admin/partials/post_fields.twig:58
+#: admin/partials/page_fields.twig:31 admin/partials/post_fields.twig:71
 msgid "Public"
 msgstr "Pubblico"
 
@@ -1008,7 +1008,7 @@ msgstr "Pubblico"
 msgid "Private and visible in pages list"
 msgstr "Privato e visibile nell'elenco delle pagine"
 
-#: admin/partials/page_fields.twig:35 admin/partials/post_fields.twig:60
+#: admin/partials/page_fields.twig:35 admin/partials/post_fields.twig:73
 msgid "Private"
 msgstr "Privato"
 
@@ -1036,40 +1036,40 @@ msgstr "Principale"
 msgid "[None]"
 msgstr "[Nessuno]"
 
-#: admin/partials/page_fields.twig:70 admin/partials/post_fields.twig:140
-#: admin/partials/post_fields.twig:149
+#: admin/partials/page_fields.twig:70 admin/partials/post_fields.twig:153
+#: admin/partials/post_fields.twig:162
 msgid "Publish"
 msgstr "Pubblica"
 
-#: admin/partials/page_fields.twig:74 admin/partials/post_fields.twig:144
-#: admin/partials/post_fields.twig:153
+#: admin/partials/page_fields.twig:74 admin/partials/post_fields.twig:157
+#: admin/partials/post_fields.twig:166
 msgid "Save"
 msgstr "Salva"
 
-#: admin/partials/post_fields.twig:56
+#: admin/partials/post_fields.twig:69
 msgid "Draft"
 msgstr "Bozza"
 
-#: admin/partials/post_fields.twig:62
+#: admin/partials/post_fields.twig:75
 msgid "Scheduled"
 msgstr "Programmato"
 
-#: admin/partials/post_fields.twig:63
+#: admin/partials/post_fields.twig:76
 msgid "Visible only to a group of users:"
 msgstr "Visibile solo per un gruppo di utenti:"
 
-#: admin/partials/post_fields.twig:65
+#: admin/partials/post_fields.twig:78
 msgid "All registered users"
 msgstr "Tutti gli utenti registrati"
 
-#: admin/partials/post_fields.twig:78
+#: admin/partials/post_fields.twig:91
 msgid "Pinned?"
 msgstr "Pinned?"
 
-#: admin/partials/post_fields.twig:79
+#: admin/partials/post_fields.twig:92
 msgid "(shows this post above all others)"
 msgstr "(mostra questo post sopra tutti gli altri)"
 
-#: admin/partials/post_fields.twig:91
+#: admin/partials/post_fields.twig:104
 msgid "Timestamp"
 msgstr "Date e ora"
