@@ -332,7 +332,7 @@
                 Flash::message(__("This post is not published."));
 
             if ($post->status == "scheduled")
-                Flash::message(_f("This post is scheduled to be published %s.", when("%c", $post->created_at, true)));
+                Flash::message(__("This post is scheduled to be published."));
 
             $this->display(array("pages".DIR."view", "pages".DIR."index"), array("post" => $post), $post->title());
         }
