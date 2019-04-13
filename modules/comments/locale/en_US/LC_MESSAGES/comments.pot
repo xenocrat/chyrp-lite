@@ -398,7 +398,7 @@ msgstr ""
 msgid "The comment cannot be deleted because your web browser did not send proper credentials."
 msgstr ""
 
-#: modules/comments/model/Comment.php:356
+#: modules/comments/model/Comment.php:359
 msgid "Anon"
 msgstr ""
 

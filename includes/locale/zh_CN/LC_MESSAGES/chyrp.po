@@ -152,13 +152,13 @@ msgstr "访问被拒绝"
 msgid "You are not allowed to view this site."
 msgstr "您不允许访问这个站点。"
 
-#: includes/class/Route.php:301
-msgid "Route was initiated without a Controller."
-msgstr ""
-
 #: includes/class/SQL.php:76
 msgid "PDO driver is unavailable for this database."
 msgstr ""
+
+#: includes/class/Update.php:31 includes/class/Update.php:72
+msgid "Unable to check for new Chyrp Lite versions."
+msgstr "无法检查新的Chyrp Lite版本。"
 
 #: includes/class/Update.php:62
 #, php-format
@@ -168,10 +168,6 @@ msgstr "Chyrp Lite &#8220;%s&#8221; 现已可用。"
 #: includes/class/Update.php:64 includes/class/Update.php:74
 msgid "Go to GitHub &rarr;"
 msgstr "前往 GitHub &rarr;"
-
-#: includes/class/Update.php:72
-msgid "Unable to check for new Chyrp Lite versions."
-msgstr "无法检查新的Chyrp Lite版本。"
 
 #: includes/common.php:297 includes/common.php:302
 msgid "Service Unavailable"

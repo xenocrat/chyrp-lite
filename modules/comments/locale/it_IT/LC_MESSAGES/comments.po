@@ -406,6 +406,6 @@ msgstr ""
 "Il commento non può essere eliminato perché il browser Web non ha inviato le "
 "credenziali appropriate."
 
-#: modules/comments/model/Comment.php:356
+#: modules/comments/model/Comment.php:359
 msgid "Anon"
 msgstr "Anonimo"

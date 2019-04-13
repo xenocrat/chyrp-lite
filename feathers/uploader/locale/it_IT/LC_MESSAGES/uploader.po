@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
+"Last-Translator: \n"
 "Language-Team: Marina Colucci\n"
+"Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.2.1\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: it_IT\n"
 
 #. Content-Type: text/plain; charset=UTF-8
 #. Copyright 2019 Daniel Pimley and other contributors.
@@ -57,6 +57,6 @@ msgstr "Didascalia"
 msgid "You did not select any files to upload."
 msgstr "Non è stato selezionato alcun file da caricare."
 
-#: feathers/uploader/uploader.php:181
+#: feathers/uploader/uploader.php:179
 msgid "Source"
 msgstr "Sorgente"

@@ -152,13 +152,13 @@ msgstr "Zugriff verweigert"
 msgid "You are not allowed to view this site."
 msgstr "Du hast keinen Zugriff auf diese Seite."
 
-#: includes/class/Route.php:301
-msgid "Route was initiated without a Controller."
-msgstr "Route wurde ohne einen Controller initiiert."
-
 #: includes/class/SQL.php:76
 msgid "PDO driver is unavailable for this database."
 msgstr "PDO Treiber ist für diese Datenbank nicht verfügbar."
+
+#: includes/class/Update.php:31 includes/class/Update.php:72
+msgid "Unable to check for new Chyrp Lite versions."
+msgstr "Prüfen auf neue Chyrp Lite Versionen fehlgeschlagen."
 
 #: includes/class/Update.php:62
 #, php-format
@@ -168,10 +168,6 @@ msgstr "Chyrp Lite &#8220;%s&#8221; ist verfügbar."
 #: includes/class/Update.php:64 includes/class/Update.php:74
 msgid "Go to GitHub &rarr;"
 msgstr "Zu GitHub gehen &rarr;"
-
-#: includes/class/Update.php:72
-msgid "Unable to check for new Chyrp Lite versions."
-msgstr "Prüfen auf neue Chyrp Lite Versionen fehlgeschlagen."
 
 #: includes/common.php:297 includes/common.php:302
 msgid "Service Unavailable"
