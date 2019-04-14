@@ -541,7 +541,7 @@ Arguments:
 edit_comment_options
 --------------------
 Called from:
-	modules/comments/admin/pages/edit_comment.twig on line 56
+	modules/comments/admin/pages/edit_comment.twig on line 61
 
 Arguments:
 	comment
@@ -578,7 +578,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 634
+	modules/comments/comments.php on line 641
 
 Arguments:
 	$comment, $feed

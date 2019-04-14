@@ -11,40 +11,24 @@ msgstr ""
 msgid "Background"
 msgstr ""
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:12
-msgid "Black"
-msgstr ""
-
-#: modules/lightbox/admin/pages/lightbox_settings.twig:13
-msgid "Grey"
-msgstr ""
-
-#: modules/lightbox/admin/pages/lightbox_settings.twig:14
-msgid "White"
-msgstr ""
-
-#: modules/lightbox/admin/pages/lightbox_settings.twig:15
-msgid "Inherit"
-msgstr ""
-
-#: modules/lightbox/admin/pages/lightbox_settings.twig:19
+#: modules/lightbox/admin/pages/lightbox_settings.twig:18
 msgid "Edge Spacing"
 msgstr ""
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:21
+#: modules/lightbox/admin/pages/lightbox_settings.twig:20
 msgid "(pixels)"
 msgstr ""
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:24
+#: modules/lightbox/admin/pages/lightbox_settings.twig:23
 msgid "Protect Images"
 msgstr ""
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:26
+#: modules/lightbox/admin/pages/lightbox_settings.twig:25
 msgid "Prevent visitors from saving images?"
 msgstr ""
 
 #: modules/lightbox/info.php:3
-#: modules/lightbox/lightbox.php:37
+#: modules/lightbox/lightbox.php:41
 msgid "Lightbox"
 msgstr ""
 
@@ -54,5 +38,21 @@ msgstr ""
 
 #: modules/lightbox/javascript.php:101
 msgid "Close"
+msgstr ""
+
+#: modules/lightbox/lightbox.php:20
+msgid "Black"
+msgstr ""
+
+#: modules/lightbox/lightbox.php:21
+msgid "Gray"
+msgstr ""
+
+#: modules/lightbox/lightbox.php:22
+msgid "White"
+msgstr ""
+
+#: modules/lightbox/lightbox.php:23
+msgid "Inherit"
 msgstr ""
 

@@ -9,11 +9,11 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.2.1\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Content-Type: text/plain; charset=UTF-8
-#. Copyright 2018 Daniel Pimley and other contributors.
+#. Copyright 2019 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/lightbox/admin/pages/lightbox_settings.twig:3
 #: modules/lightbox/admin/pages/lightbox_settings.twig:6
@@ -24,39 +24,23 @@ msgstr "灯箱设置"
 msgid "Background"
 msgstr "背景"
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:12
-msgid "Black"
-msgstr "黑色"
-
-#: modules/lightbox/admin/pages/lightbox_settings.twig:13
-msgid "Grey"
-msgstr "灰色"
-
-#: modules/lightbox/admin/pages/lightbox_settings.twig:14
-msgid "White"
-msgstr "白色"
-
-#: modules/lightbox/admin/pages/lightbox_settings.twig:15
-msgid "Inherit"
-msgstr "继承"
-
-#: modules/lightbox/admin/pages/lightbox_settings.twig:19
+#: modules/lightbox/admin/pages/lightbox_settings.twig:18
 msgid "Edge Spacing"
 msgstr "边缘间距"
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:21
+#: modules/lightbox/admin/pages/lightbox_settings.twig:20
 msgid "(pixels)"
 msgstr "（像素）"
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:24
+#: modules/lightbox/admin/pages/lightbox_settings.twig:23
 msgid "Protect Images"
 msgstr "保护图像"
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:26
+#: modules/lightbox/admin/pages/lightbox_settings.twig:25
 msgid "Prevent visitors from saving images?"
 msgstr "防止访问者保存图像？"
 
-#: modules/lightbox/info.php:3 modules/lightbox/lightbox.php:37
+#: modules/lightbox/info.php:3 modules/lightbox/lightbox.php:41
 msgid "Lightbox"
 msgstr ""
 
@@ -67,3 +51,19 @@ msgstr "为您的图片提供灯箱。"
 #: modules/lightbox/javascript.php:101
 msgid "Close"
 msgstr "关闭"
+
+#: modules/lightbox/lightbox.php:20
+msgid "Black"
+msgstr "黑色"
+
+#: modules/lightbox/lightbox.php:21
+msgid "Gray"
+msgstr "灰色"
+
+#: modules/lightbox/lightbox.php:22
+msgid "White"
+msgstr "白色"
+
+#: modules/lightbox/lightbox.php:23
+msgid "Inherit"
+msgstr "继承"

@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
+"Last-Translator: \n"
 "Language-Team: Marina Colucci\n"
+"Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.2.1\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: it_IT\n"
 
 #. Content-Type: text/plain; charset=UTF-8
 #. Copyright 2019 Daniel Pimley and other contributors.
@@ -24,39 +24,23 @@ msgstr "Impostazioni del tavolo luminoso"
 msgid "Background"
 msgstr "Sfondo"
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:12
-msgid "Black"
-msgstr "Nero"
-
-#: modules/lightbox/admin/pages/lightbox_settings.twig:13
-msgid "Grey"
-msgstr "Grigio"
-
-#: modules/lightbox/admin/pages/lightbox_settings.twig:14
-msgid "White"
-msgstr "Bianco"
-
-#: modules/lightbox/admin/pages/lightbox_settings.twig:15
-msgid "Inherit"
-msgstr "Sfondo riprodotto"
-
-#: modules/lightbox/admin/pages/lightbox_settings.twig:19
+#: modules/lightbox/admin/pages/lightbox_settings.twig:18
 msgid "Edge Spacing"
 msgstr "Spaziatura del bordo"
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:21
+#: modules/lightbox/admin/pages/lightbox_settings.twig:20
 msgid "(pixels)"
 msgstr "(pixel)"
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:24
+#: modules/lightbox/admin/pages/lightbox_settings.twig:23
 msgid "Protect Images"
 msgstr "Proteggi immagini"
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:26
+#: modules/lightbox/admin/pages/lightbox_settings.twig:25
 msgid "Prevent visitors from saving images?"
 msgstr "Impedire ai visitatori di salvare le immagini?"
 
-#: modules/lightbox/info.php:3 modules/lightbox/lightbox.php:37
+#: modules/lightbox/info.php:3 modules/lightbox/lightbox.php:41
 msgid "Lightbox"
 msgstr "Tavolo luminoso"
 
@@ -67,3 +51,19 @@ msgstr "Un tavolo luminoso per le tue immagini."
 #: modules/lightbox/javascript.php:101
 msgid "Close"
 msgstr "Chiudi"
+
+#: modules/lightbox/lightbox.php:20
+msgid "Black"
+msgstr "Nero"
+
+#: modules/lightbox/lightbox.php:21
+msgid "Gray"
+msgstr "Grigio"
+
+#: modules/lightbox/lightbox.php:22
+msgid "White"
+msgstr "Bianco"
+
+#: modules/lightbox/lightbox.php:23
+msgid "Inherit"
+msgstr "Sfondo riprodotto"
