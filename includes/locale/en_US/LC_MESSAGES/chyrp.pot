@@ -228,19 +228,18 @@ msgstr ""
 msgid "PDO driver is unavailable for this database."
 msgstr ""
 
-#: includes/class/Update.php:31
-#: includes/class/Update.php:72
-msgid "Unable to check for new Chyrp Lite versions."
-msgstr ""
-
-#: includes/class/Update.php:62
+#: includes/class/Update.php:60
 #, php-format
 msgid "Chyrp Lite &#8220;%s&#8221; is available."
 msgstr ""
 
-#: includes/class/Update.php:64
-#: includes/class/Update.php:74
+#: includes/class/Update.php:62
+#: includes/class/Update.php:72
 msgid "Go to GitHub &rarr;"
+msgstr ""
+
+#: includes/class/Update.php:70
+msgid "Unable to check for new Chyrp Lite versions."
 msgstr ""
 
 #: includes/common.php:297

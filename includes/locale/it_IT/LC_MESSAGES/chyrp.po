@@ -156,18 +156,18 @@ msgstr "Non è consentito visualizzare questo sito."
 msgid "PDO driver is unavailable for this database."
 msgstr "Il driver PDO non è disponibile per questo database."
 
-#: includes/class/Update.php:31 includes/class/Update.php:72
-msgid "Unable to check for new Chyrp Lite versions."
-msgstr "Impossibile controllare le nuove versioni di Chyrp Lite."
-
-#: includes/class/Update.php:62
+#: includes/class/Update.php:60
 #, php-format
 msgid "Chyrp Lite &#8220;%s&#8221; is available."
 msgstr "Chyrp Lite &#8220;%s&#8221; è disponibile."
 
-#: includes/class/Update.php:64 includes/class/Update.php:74
+#: includes/class/Update.php:62 includes/class/Update.php:72
 msgid "Go to GitHub &rarr;"
 msgstr "Vai a GitHub &rarr;"
+
+#: includes/class/Update.php:70
+msgid "Unable to check for new Chyrp Lite versions."
+msgstr "Impossibile controllare le nuove versioni di Chyrp Lite."
 
 #: includes/common.php:297 includes/common.php:302
 msgid "Service Unavailable"
