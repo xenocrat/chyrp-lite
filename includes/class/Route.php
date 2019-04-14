@@ -307,4 +307,3 @@
             return $instance;
         }
     }
-
