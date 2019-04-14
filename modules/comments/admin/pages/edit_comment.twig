@@ -6,6 +6,8 @@
 <h1>{{ "Editing Comment on &#8220;%s&#8221;" | translate("comments") | format(comment.post.title() | striptags | oneof("[Untitled]" | translate)) }}</h1>
 <form id="edit_form" action="{{ url('update_comment') }}" method="post" accept-charset="UTF-8">
 <fieldset>
+{% set comment_markdown = site.enable_markdown ? " data-markdown" : "" %}
+{% set comment_readonly = comment.status == "pingback" ? " readonly" : "" %}
 <p class="main_options">
 <label for="body_field">
 {% if site.enable_markdown %}
@@ -13,7 +15,7 @@
 {% endif %}
 {{ "Body" | translate("comments") }}
 </label>
-<textarea rows="12" name="body" id="body_field"{{ site.enable_markdown ? ' data-markdown' : '' }} required>{{ comment.body | fix(false, true) }}</textarea>
+<textarea rows="12" name="body" id="body_field"{{ comment_markdown }} required>{{ comment.body | fix(false, true) }}</textarea>
 </p>
 <div id="more_options" class="more_options">
 <p class="more_options_option">
@@ -28,10 +30,10 @@
 {% endif %}
 <p class="more_options_option">
 <label for="author_url_field">{{ "Author Website" | translate("comments") }}</label>
-<input class="text" type="url" name="author_url" value="{{ comment.author_url | fix(true) }}" id="author_url_field" maxlength="128">
+<input class="text" type="url" name="author_url" value="{{ comment.author_url | fix(true) }}" id="author_url_field" maxlength="128"{{ comment_readonly }}>
 </p>
 {% if visitor.group.can("edit_comment") %}
-{# If they can edit all comments, not just this one. #}
+{# User can edit all comments, not just their own. #}
 <p class="more_options_option">
 <label for="created_at_field">{{ "Timestamp" | translate("comments") }}</label>
 <input class="text" type="text" name="created_at" value="{{ comment.created_at | strftimeformat('%Y-%m-%d %H:%M:%S') | fix(true) }}" id="created_at_field">
@@ -40,9 +42,12 @@
 <p class="more_options_option">
 <label for="status_field">{{ "Status" | translate("comments") }}</label>
 <select name="status" id="status_field">
-<option value="approved"{{ comment.status | selected("approved") }}>{{ "Approved" | translate("comments") }}</option>
-<option value="denied"{{ comment.status | selected("denied") }}>{{ "Denied" | translate("comments") }}</option>
-<option value="spam"{{ comment.status | selected("spam") }}>{{ "Spam" | translate("comments") }}</option>
+{% set comment_status = comment.status | selected("approved") %}
+<option value="approved"{{ comment_status }}>{{ "Approved" | translate("comments") }}</option>
+{% set comment_status = comment.status | selected("denied") %}
+<option value="denied"{{ comment_status }}>{{ "Denied" | translate("comments") }}</option>
+{% set comment_status = comment.status | selected("spam") %}
+<option value="spam"{{ comment_status }}>{{ "Spam" | translate("comments") }}</option>
 </select>
 </p>
 {% endif %}
