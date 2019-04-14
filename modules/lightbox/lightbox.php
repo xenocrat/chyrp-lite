@@ -16,8 +16,12 @@
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
     
             if (empty($_POST))
-                return $admin->display("pages".DIR."lightbox_settings");
-    
+                return $admin->display("pages".DIR."lightbox_settings",
+                                       array("lightbox_background" => array("black"   => __("Black", "lightbox"),
+                                                                            "grey"    => __("Gray", "lightbox"),
+                                                                            "white"   => __("White", "lightbox"),
+                                                                            "inherit" => __("Inherit", "lightbox"))));
+
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 

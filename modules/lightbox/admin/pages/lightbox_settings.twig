@@ -9,10 +9,9 @@
 <p>
 <label for="background">{{ "Background" | translate("lightbox") }}</label>
 <select name="background">
-<option value="black"{{ "black" | selected(site.module_lightbox['background']) }}>{{ "Black" | translate("lightbox") }}</option>
-<option value="grey"{{ "grey" | selected(site.module_lightbox['background']) }}>{{ "Grey" | translate("lightbox") }}</option>
-<option value="white"{{ "white" | selected(site.module_lightbox['background']) }}>{{ "White" | translate("lightbox") }}</option>
-<option value="inherit"{{ "inherit" | selected(site.module_lightbox['background']) }}>{{ "Inherit" | translate("lightbox") }}</option>
+{% for key, val in lightbox_background %}
+<option value="{{ key }}"{{ key | selected(site.module_lightbox['background']) }}>{{ val }}</option>
+{% endfor %}
 </select>
 </p>
 <p>

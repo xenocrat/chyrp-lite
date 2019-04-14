@@ -397,8 +397,15 @@
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
+            $config = Config::current();
+            $allowed_comment_html = implode(", ", $config->module_comments["allowed_comment_html"]);
+
             if (empty($_POST))
-                return $admin->display("pages".DIR."comment_settings");
+                return $admin->display("pages".DIR."comment_settings",
+                                       array("comments_html" => $allowed_comment_html,
+                                             "comments_status" => array("approved" => __("Approved", "comments"),
+                                                                        "denied"   => __("Denied", "comments"),
+                                                                        "spam"     => __("Spam", "comments"))));
 
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));

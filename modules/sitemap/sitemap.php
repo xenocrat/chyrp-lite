@@ -39,12 +39,12 @@
 
             if (empty($_POST))
                 return $admin->display("pages".DIR."sitemap_settings",
-                                       array("changefreq" => array("hourly"  => __("Hourly", "sitemap"),
-                                                                   "daily"   => __("Daily", "sitemap"),
-                                                                   "weekly"  => __("Weekly", "sitemap"),
-                                                                   "monthly" => __("Monthly", "sitemap"),
-                                                                   "yearly"  => __("Yearly", "sitemap"),
-                                                                   "never"   => __("Never", "sitemap"))));
+                                       array("sitemap_changefreq" => array("hourly"  => __("Hourly", "sitemap"),
+                                                                           "daily"   => __("Daily", "sitemap"),
+                                                                           "weekly"  => __("Weekly", "sitemap"),
+                                                                           "monthly" => __("Monthly", "sitemap"),
+                                                                           "yearly"  => __("Yearly", "sitemap"),
+                                                                           "never"   => __("Never", "sitemap"))));
 
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));

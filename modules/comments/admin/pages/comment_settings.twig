@@ -8,16 +8,16 @@
 <fieldset>
 <p>
 <label for="allowed_comment_html">{{ "Allowed HTML Tags" | translate("comments") }}</label>
-<input class="text code" type="text" name="allowed_comment_html" value="{{ site.module_comments.allowed_comment_html | join(", ") | fix(true) }}" id="allowed_comment_html">
+<input class="text code" type="text" name="allowed_comment_html" value="{{ comments_html | fix(true) }}" id="allowed_comment_html">
 <small>{{ "Format: <code>strong, blockquote, em</code>" | translate("comments") }}</small>
 </p>
 <p>
 <label for="default_comment_status">{{ "Default Comment Status" | translate("comments") }}</label>
 <select name="default_comment_status">
 {% set default_comment_status = site.module_comments.default_comment_status %}
-<option value="approved"{{ "approved" | selected(default_comment_status) }}>{{ "Approved" | translate("comments") }}</option>
-<option value="denied"{{ "denied" | selected(default_comment_status) }}>{{ "Denied" | translate("comments") }}</option>
-<option value="spam"{{ "spam" | selected(default_comment_status) }}>{{ "Spam" | translate("comments") }}</option>
+{% for key, val in comments_status %}
+<option value="{{ key }}"{{ key | selected(default_comment_status) }}>{{ val }}</option>
+{% endfor %}
 </select>
 </p>
 <p>
@@ -36,7 +36,9 @@
 <span class="sub">{{ "(seconds)" | translate("comments") }}</span>
 </p>
 <p class="buttons">
-<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Update" | translate }}</button>
+<button type="submit" class="yay">
+<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Update" | translate }}
+</button>
 </p>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
 </fieldset>

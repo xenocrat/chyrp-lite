@@ -23,7 +23,7 @@
 <p class="main_options">
 <label for="{{ field_id }}">
 {% if field_markdown is not empty %}
-<a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="Markdown help"></a>
+<a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="{{ 'Markdown' | translate }}"></a>
 {% endif %}
 {{ field.label }}
 {% if field.optional is defined and field.optional %}
