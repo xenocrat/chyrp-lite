@@ -27,10 +27,8 @@
             $rss = get_remote(UPDATE_XML, 3);
             $xml = @simplexml_load_string($rss);
 
-            if (!self::validate($xml)) {
-                trigger_error(__("Unable to check for new Chyrp Lite versions."), E_USER_NOTICE);
+            if (!self::validate($xml))
                 return self::warning();
-            }
 
             foreach ($xml->channel->item as $item)
                 if (version_compare(CHYRP_VERSION, $item->guid, "<"))
