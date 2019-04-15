@@ -302,6 +302,19 @@ msgstr "发送引用"
 msgid "Attempts to notify sites to which your posts link."
 msgstr "尝试您帖子链接到的站点。"
 
+#: admin/pages/content_settings.twig:51 admin/pages/content_settings.twig:66
+#: admin/pages/content_settings.twig:74 admin/pages/export.twig:14
+#: admin/pages/export.twig:20 admin/pages/export.twig:26
+#: admin/pages/export.twig:32 admin/pages/feathers.twig:18
+#: admin/pages/feathers.twig:54 admin/pages/general_settings.twig:27
+#: admin/pages/manage_pages.twig:11 admin/pages/manage_posts.twig:11
+#: admin/pages/manage_users.twig:11 admin/pages/modules.twig:18
+#: admin/pages/modules.twig:74 admin/partials/page_fields.twig:21
+#: admin/partials/post_fields.twig:34 admin/partials/post_fields.twig:99
+#: admin/partials/post_fields.twig:119
+msgid "help"
+msgstr "帮助"
+
 #: admin/pages/content_settings.twig:53
 msgid "XML-RPC support allows you to manipulate your blog content remotely."
 msgstr "XML-RPC支持允许您远程操作您的博客内容。"
@@ -532,6 +545,12 @@ msgstr "羽毛"
 #: admin/pages/feathers.twig:8 admin/pages/modules.twig:8
 msgid "Enabled"
 msgstr "已启用"
+
+#: admin/pages/feathers.twig:13 admin/pages/feathers.twig:49
+#: admin/pages/modules.twig:13 admin/pages/modules.twig:69
+#: admin/pages/themes.twig:13
+msgid "info"
+msgstr "信息"
 
 #: admin/pages/feathers.twig:29 admin/pages/modules.twig:49
 msgid "Disable"

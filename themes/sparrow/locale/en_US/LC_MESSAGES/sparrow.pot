@@ -110,47 +110,43 @@ msgstr ""
 msgid "Author"
 msgstr ""
 
-#: themes/sparrow/forms/comment/edit.twig:7
+#: themes/sparrow/forms/comment/edit.twig:8
 msgid "Author's website"
 msgstr ""
 
-#: themes/sparrow/forms/comment/edit.twig:9
+#: themes/sparrow/forms/comment/edit.twig:10
 msgid "Author's email"
 msgstr ""
 
-#: themes/sparrow/forms/comment/edit.twig:13
+#: themes/sparrow/forms/comment/edit.twig:15
 msgid "Timestamp"
 msgstr ""
 
-#: themes/sparrow/forms/comment/edit.twig:15
+#: themes/sparrow/forms/comment/edit.twig:18
 msgid "Status"
 msgstr ""
 
-#: themes/sparrow/forms/comment/edit.twig:17
+#: themes/sparrow/forms/comment/edit.twig:20
 msgid "Approved"
 msgstr ""
 
-#: themes/sparrow/forms/comment/edit.twig:18
+#: themes/sparrow/forms/comment/edit.twig:21
 msgid "Denied"
 msgstr ""
 
-#: themes/sparrow/forms/comment/edit.twig:19
+#: themes/sparrow/forms/comment/edit.twig:22
 msgid "Spam"
 msgstr ""
 
-#: themes/sparrow/forms/comment/edit.twig:20
-msgid "Pingback"
-msgstr ""
-
-#: themes/sparrow/forms/comment/edit.twig:24
+#: themes/sparrow/forms/comment/edit.twig:27
 msgid "Email Notifications"
 msgstr ""
 
-#: themes/sparrow/forms/comment/edit.twig:32
+#: themes/sparrow/forms/comment/edit.twig:35
 msgid "Save"
 msgstr ""
 
-#: themes/sparrow/forms/comment/edit.twig:33
+#: themes/sparrow/forms/comment/edit.twig:36
 msgid "Cancel"
 msgstr ""
 

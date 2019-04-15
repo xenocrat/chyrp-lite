@@ -75,58 +75,58 @@ msgstr "Modifica commento"
 msgid "Editing Comment on &#8220;%s&#8221;"
 msgstr "Modifica del commento &#8220;%s&#8221;"
 
-#: modules/comments/admin/pages/edit_comment.twig:16
+#: modules/comments/admin/pages/edit_comment.twig:15
 msgid "Body"
 msgstr "Testo"
 
-#: modules/comments/admin/pages/edit_comment.twig:22
+#: modules/comments/admin/pages/edit_comment.twig:21
 #: modules/comments/admin/pages/manage_comments.twig:25
 #: modules/comments/admin/pages/manage_spam.twig:25
 msgid "Author"
 msgstr "Autore"
 
-#: modules/comments/admin/pages/edit_comment.twig:27
+#: modules/comments/admin/pages/edit_comment.twig:26
 msgid "Author Email"
 msgstr "Email dell'autore"
 
-#: modules/comments/admin/pages/edit_comment.twig:32
+#: modules/comments/admin/pages/edit_comment.twig:30
 msgid "Author Website"
 msgstr "Sito dell'autore"
 
-#: modules/comments/admin/pages/edit_comment.twig:38
+#: modules/comments/admin/pages/edit_comment.twig:37
 msgid "Timestamp"
 msgstr "Date e ora"
 
-#: modules/comments/admin/pages/edit_comment.twig:43
+#: modules/comments/admin/pages/edit_comment.twig:42
 #: modules/comments/admin/pages/manage_comments.twig:27
 msgid "Status"
 msgstr "Stato"
 
-#: modules/comments/admin/pages/edit_comment.twig:46
+#: modules/comments/admin/pages/edit_comment.twig:45
 #: modules/comments/comments.php:406
 msgid "Approved"
 msgstr "Approvato"
 
-#: modules/comments/admin/pages/edit_comment.twig:48
+#: modules/comments/admin/pages/edit_comment.twig:47
 #: modules/comments/comments.php:407
 msgid "Denied"
 msgstr "Negato"
 
-#: modules/comments/admin/pages/edit_comment.twig:50
+#: modules/comments/admin/pages/edit_comment.twig:49
 #: modules/comments/admin/pages/manage_spam.twig:18
 #: modules/comments/comments.php:408
 msgid "Spam"
 msgstr "Spam"
 
-#: modules/comments/admin/pages/edit_comment.twig:57
+#: modules/comments/admin/pages/edit_comment.twig:56
 msgid "Email Notifications"
 msgstr "Notifiche email"
 
-#: modules/comments/admin/pages/edit_comment.twig:68
+#: modules/comments/admin/pages/edit_comment.twig:67
 msgid "Save"
 msgstr "Salva"
 
-#: modules/comments/admin/pages/edit_comment.twig:70
+#: modules/comments/admin/pages/edit_comment.twig:69
 #: modules/comments/admin/pages/manage_comments.twig:84
 #: modules/comments/admin/pages/manage_spam.twig:73
 msgid "Delete"
