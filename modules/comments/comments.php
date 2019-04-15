@@ -144,8 +144,8 @@
 
             fallback($_POST['created_at']);
             fallback($_POST['status'], $comment->status);
-            fallback($_POST['author_email'], "");
-            fallback($_POST['author_url'], "");
+            fallback($_POST['author_email'], $comment->author_email);
+            fallback($_POST['author_url'], $comment->author_url);
             fallback($notify, (!empty($_POST['notify']) and logged_in()));
 
             if (empty($_POST['body']))

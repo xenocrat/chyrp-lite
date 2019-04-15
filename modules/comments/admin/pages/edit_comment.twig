@@ -7,7 +7,6 @@
 <form id="edit_form" action="{{ url('update_comment') }}" method="post" accept-charset="UTF-8">
 <fieldset>
 {% set comment_markdown = site.enable_markdown ? " data-markdown" : "" %}
-{% set comment_readonly = comment.status == "pingback" ? " readonly" : "" %}
 <p class="main_options">
 <label for="body_field">
 {% if site.enable_markdown %}
@@ -27,11 +26,11 @@
 <label for="author_email_field">{{ "Author Email" | translate("comments") }}</label>
 <input class="text" type="email" name="author_email" value="{{ comment.author_email | fix(true) }}" id="author_email_field" maxlength="128" required>
 </p>
-{% endif %}
 <p class="more_options_option">
 <label for="author_url_field">{{ "Author Website" | translate("comments") }}</label>
-<input class="text" type="url" name="author_url" value="{{ comment.author_url | fix(true) }}" id="author_url_field" maxlength="128"{{ comment_readonly }}>
+<input class="text" type="url" name="author_url" value="{{ comment.author_url | fix(true) }}" id="author_url_field" maxlength="2048">
 </p>
+{% endif %}
 {% if visitor.group.can("edit_comment") %}
 {# User can edit all comments, not just their own. #}
 <p class="more_options_option">
@@ -65,9 +64,9 @@
 <input type="hidden" name="id" value="{{ comment.id }}" id="id_field">
 <div class="buttons confirmation">
 <button type="submit" class="yay">
-<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Save" | translate("comments") }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Save" | translate("comments") }}
 </button>
-{{ comment.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="icon">' ~ ("Delete" | translate("comments")), null, null, "button boo") }}
+{{ comment.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="">' ~ ("Delete" | translate("comments")), null, null, "button boo") }}
 </div>
 </fieldset>
 </form>
