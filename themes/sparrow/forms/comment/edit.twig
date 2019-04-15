@@ -11,7 +11,7 @@
 <input class="text" type="email" name="author_email" value="{{ comment.author_email | fix(true) }}" id="comment_author_email_{{ comment.id }}" maxlength="128">
 {% endif %}
 {% if visitor.group.can("edit_comment") %}
-{# If they can edit all comments, not just this one. #}
+{# User can edit all comments, not just their own. #}
 <label for="comment_created_at_{{ comment.id }}">{{ "Timestamp" | translate }}</label>
 <input class="text" type="text" name="created_at" value="{{ comment.created_at | strftimeformat('%Y-%m-%d %H:%M:%S') | fix(true) }}" id="comment_created_at_{{ comment.id }}">
 {% if comment.status != "pingback" %}
