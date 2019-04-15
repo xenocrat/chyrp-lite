@@ -48,7 +48,7 @@
 <p>
 <label for="enable_xmlrpc">{{ "XML-RPC Support" | translate }}</label>
 <input class="checkbox" type="checkbox" name="enable_xmlrpc" id="enable_xmlrpc"{{ site.enable_xmlrpc | checked }}>
-<a href="{{ url('help/id/xmlrpc') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+<a href="{{ url('help/id/xmlrpc') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
 <small>
 {{ "XML-RPC support allows you to manipulate your blog content remotely." | translate }}
 </small>
@@ -63,7 +63,7 @@
 <p>
 <label for="enable_emoji">{{ "Unicode Emoticons" | translate }}</label>
 <input class="checkbox" type="checkbox" name="enable_emoji" id="enable_emoji"{{ site.enable_emoji | checked }}>
-<a href="{{ url('help/id/unicode_emoticons') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+<a href="{{ url('help/id/unicode_emoticons') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
 <small>
 {{ "Display emoticons as Unicode emoji." | translate }}
 </small>
@@ -71,14 +71,14 @@
 <p>
 <label for="enable_markdown">{{ "Markdown" | translate }}</label>
 <input class="checkbox" type="checkbox" name="enable_markdown" id="enable_markdown"{{ site.enable_markdown | checked }}>
-<a href="{{ url('help/id/markdown') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+<a href="{{ url('help/id/markdown') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
 <small>
 {{ "Compose blog content using Markdown text formatting." | translate }}
 </small>
 </p>
 <p class="buttons">
 <button type="submit" class="yay">
-<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Update" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Update" | translate }}
 </button>
 </p>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">

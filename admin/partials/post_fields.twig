@@ -31,7 +31,7 @@
 {% endif %}
 {% if field.help is defined %}
 <span class="sub">
-<a href="{{ url('help/id/' ~ (field.help | url_encode)) }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+<a href="{{ url('help/id/' ~ (field.help | url_encode)) }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
 </span>
 {% endif %}
 {% if field.note is defined %}
@@ -96,7 +96,7 @@
 <p class="more_options_option">
 <label for="slug">
 {{ "Slug" | translate }}
-<a href="{{ url('help/id/slugs') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+<a href="{{ url('help/id/slugs') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
 </label>
 <input id="slug" class="text" type="text" name="slug" value="{{ post is defined ? post.clean | fix(true) : '' }}" maxlength="80">
 </p>
@@ -116,7 +116,7 @@
 {{ field.label }}
 {% if field.help is defined %}
 <span class="sub">
-<a href="{{ url('help/id/' ~ (field.help | url_encode)) }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+<a href="{{ url('help/id/' ~ (field.help | url_encode)) }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
 </span>
 {% endif %}
 {% if field.note is defined %}
@@ -150,20 +150,20 @@
 {% if route.action == "edit_post" %}
 {% if visitor.group.can("add_post") and post.status == "draft" %}
 <button type="submit" class="yay" name="publish" value="true">
-<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Publish" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Publish" | translate }}
 </button>
 {% endif %}
 <button type="submit">
-<img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="icon">{{ "Save" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="">{{ "Save" | translate }}
 </button>
 {% else %}
 {% if visitor.group.can("add_post") %}
 <button type="submit" class="yay">
-<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Publish" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Publish" | translate }}
 </button>
 {% endif %}
 <button type="submit" name="draft" value="true">
-<img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="icon">{{ "Save" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="">{{ "Save" | translate }}
 </button>
 {% endif %}
 </div>

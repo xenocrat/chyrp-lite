@@ -8,7 +8,7 @@
 <div class="filter_item">
 <h3>
 {{ "Search&hellip;" | translate }}
-<a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="help"></a>
+<a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
 </h3>
 <input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true) }}" id="query">
 <button type="submit" class="inline">{{ "Search" | translate }}</button>
@@ -64,13 +64,13 @@
 <div class="controls">
 <h4>{{ "With selected:" | translate("comments") }}</h4>
 <button name="deny">
-<img src="{{ site.chyrp_url }}/admin/images/icons/deny.svg" alt="icon">{{ "Deny" | translate("comments") }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/deny.svg" alt="">{{ "Deny" | translate("comments") }}
 </button>
 <button class="yay" name="approve">
-<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="icon">{{ "Approve" | translate("comments") }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Approve" | translate("comments") }}
 </button>
 <button class="boo" name="delete">
-<img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg" alt="icon">{{ "Delete" | translate("comments") }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg" alt="">{{ "Delete" | translate("comments") }}
 </button>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
 </div>

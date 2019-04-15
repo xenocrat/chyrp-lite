@@ -10,12 +10,12 @@
 <li class="module{{ module.classes is defined ? ' ' ~ module.classes | join(" ") : '' }}" id="module_{{ safename }}">
 <h3>
 <a class="emblem module_url" href="{{ module.url }}" target="_blank">
-<img src="{{ site.chyrp_url }}/admin/images/icons/info.svg" alt="{{ module.url | fix(true) }}">
+<img src="{{ site.chyrp_url }}/admin/images/icons/info.svg" alt="{{ 'info' | translate }}">
 {{ module.name }}{# translation is done in the controller #}
 </a>
 </h3>
 {% if module.help %}
-<a href="{{ url('help/id/' ~ (module.help | url_encode)) }}" rel="help" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="Help"></a>
+<a href="{{ url('help/id/' ~ (module.help | url_encode)) }}" rel="help" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
 {% endif %}
 <p class="module_description">
 {{ module.description }}{# translation is done in the controller #}
@@ -46,7 +46,7 @@
 <input type="hidden" name="type" value="module">
 <input type="hidden" name="hash" value="{{ authenticate() }}">
 <button type="submit">
-<img src="{{ site.chyrp_url }}/admin/images/icons/deny.svg" alt="icon">{{ "Disable" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/deny.svg" alt="">{{ "Disable" | translate }}
 </button>
 {% if module.confirm is not empty %}
 <p class="module_disabler_confirm">
@@ -66,12 +66,12 @@
 <li class="module{{ module.classes is defined ? ' ' ~ module.classes | join(" ") : '' }}" id="module_{{ safename }}">
 <h3>
 <a class="emblem module_url" href="{{ module.url }}" target="_blank">
-<img src="{{ site.chyrp_url }}/admin/images/icons/info.svg" alt="{{ module.url | fix(true) }}">
+<img src="{{ site.chyrp_url }}/admin/images/icons/info.svg" alt="{{ 'info' | translate }}">
 {{ module.name }}{# translation is done in the controller #}
 </a>
 </h3>
 {% if module.help %}
-<a href="{{ url('help/id/' ~ (module.help | url_encode)) }}" rel="help" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="Help"></a>
+<a href="{{ url('help/id/' ~ (module.help | url_encode)) }}" rel="help" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
 {% endif %}
 <p class="module_description">
 {{ module.description }}{# translation is done in the controller #}
@@ -103,7 +103,7 @@
 <input type="hidden" name="type" value="module">
 <input type="hidden" name="hash" value="{{ authenticate() }}">
 <button type="submit">
-<img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="icon">{{ "Enable" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="">{{ "Enable" | translate }}
 </button>
 </form>
 <div class="clear"></div>
