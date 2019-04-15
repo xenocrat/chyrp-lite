@@ -3,11 +3,11 @@
 <label for="body">{{ "%s's comment" | translate | format(visitor.full_name | oneof(visitor.login)) }}</label>
 {% else %}
 <label for="comment_author_field">{{ "Your name" | translate }}</label>
-<input type="text" name="author" value="{{ posted('author') | fix(true) }}" id="comment_author_field" class="text">
+<input type="text" name="author" value="{{ posted('author') | fix(true) }}" id="comment_author_field" class="text" maxlength="250">
 <label for="comment_author_email_field">{{ "Your email" | translate }}</label>
-<input type="email" name="author_email" value="{{ posted('author_email') | fix(true) }}" id="comment_author_email_field" class="text">
+<input type="email" name="author_email" value="{{ posted('author_email') | fix(true) }}" id="comment_author_email_field" class="text" maxlength="128">
 <label for="comment_author_url_field">{{ "Your website" | translate }}</label>
-<input type="url" name="author_url" value="{{ posted('author_url') | fix(true) }}" id="comment_author_url_field" class="text">
+<input type="url" name="author_url" value="{{ posted('author_url') | fix(true) }}" id="comment_author_url_field" class="text" maxlength="2048">
 {{ generate_captcha() }}
 <label for="comment_body_field">{{ "Your comment" | translate }}</label>
 {% endif %}
