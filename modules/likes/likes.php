@@ -213,7 +213,7 @@
             $visitor = Visitor::current();
             $settings = $config->module_likes;
 
-            if ($post->no_results)
+            if ($post->no_results or !isset($route))
                 return;
 
             if ($settings["show_on_index"] == false and $route->action == "index")
@@ -228,7 +228,7 @@
                                 '" data-post_id="'.$post->id.'">';
 
                     if (!empty($settings["like_image"]))
-                        $html.= '<img src="'.$settings["like_image"].'" alt="Likes icon">';
+                        $html.= '<img src="'.$settings["like_image"].'" alt="&#x2764;">';
 
                     if ($settings["like_with_text"]) {
                         $html.= ' <span class="like">'.__("Like!", "likes").'</span>';
@@ -254,7 +254,7 @@
                                 '" data-post_id="'.$post->id.'">';
 
                     if (!empty($settings["like_image"]))
-                        $html.= '<img src="'.$settings["like_image"].'" alt="Likes icon">';
+                        $html.= '<img src="'.$settings["like_image"].'" alt="&#x2764;">';
 
                     if ($settings["like_with_text"]) {
                         $html.= ' <span class="like">'.__("Like!", "likes").'</span>';
