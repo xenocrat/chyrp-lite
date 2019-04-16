@@ -238,14 +238,21 @@ msgstr "确定继续？"
 msgid "Help"
 msgstr "帮助"
 
-#: admin/javascripts/admin.js.php:156 admin/javascripts/admin.js.php:163
-#: admin/javascripts/admin.js.php:259 admin/javascripts/admin.js.php:266
+#: admin/javascripts/admin.js.php:156 admin/javascripts/admin.js.php:259
 msgid "Close"
 msgstr "关闭"
 
-#: admin/javascripts/admin.js.php:183 admin/javascripts/admin.js.php:199
+#: admin/javascripts/admin.js.php:163 admin/javascripts/admin.js.php:266
+msgid "close"
+msgstr "关闭"
+
+#: admin/javascripts/admin.js.php:183
 msgid "Preview this field"
 msgstr "预览这个字段"
+
+#: admin/javascripts/admin.js.php:199
+msgid "preview"
+msgstr "预览"
 
 #: admin/javascripts/admin.js.php:250 admin/pages/themes.twig:25
 msgid "Preview"
@@ -677,17 +684,17 @@ msgstr "操作"
 #: admin/pages/manage_pages.twig:46 admin/pages/manage_pages.twig:51
 #: admin/pages/manage_users.twig:54
 msgid "yes"
-msgstr ""
+msgstr "是"
 
 #: admin/pages/manage_groups.twig:53 admin/pages/manage_pages.twig:59
 #: admin/pages/manage_posts.twig:47 admin/pages/manage_users.twig:59
 msgid "edit"
-msgstr ""
+msgstr "编辑"
 
 #: admin/pages/manage_groups.twig:56 admin/pages/manage_pages.twig:62
 #: admin/pages/manage_posts.twig:50 admin/pages/manage_users.twig:62
 msgid "delete"
-msgstr ""
+msgstr "删除"
 
 #: admin/pages/manage_groups.twig:64 admin/pages/manage_pages.twig:74
 #: admin/pages/manage_posts.twig:62 admin/pages/manage_users.twig:74

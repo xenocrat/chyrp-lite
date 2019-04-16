@@ -191,15 +191,21 @@ msgid "Help"
 msgstr ""
 
 #: admin/javascripts/admin.js.php:156
-#: admin/javascripts/admin.js.php:163
 #: admin/javascripts/admin.js.php:259
-#: admin/javascripts/admin.js.php:266
 msgid "Close"
 msgstr ""
 
+#: admin/javascripts/admin.js.php:163
+#: admin/javascripts/admin.js.php:266
+msgid "close"
+msgstr ""
+
 #: admin/javascripts/admin.js.php:183
-#: admin/javascripts/admin.js.php:199
 msgid "Preview this field"
+msgstr ""
+
+#: admin/javascripts/admin.js.php:199
+msgid "preview"
 msgstr ""
 
 #: admin/javascripts/admin.js.php:250
