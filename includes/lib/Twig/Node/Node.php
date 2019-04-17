@@ -13,6 +13,7 @@
 namespace Twig\Node;
 
 use Twig\Compiler;
+use Twig\Source;
 
 /**
  * Represents a node in the AST.
@@ -27,13 +28,9 @@ class Node implements \Twig_NodeInterface
     protected $tag;
 
     private $name;
+    private $sourceContext;
 
     /**
-     * Constructor.
-     *
-     * The nodes are automatically made available as properties ($this->node).
-     * The attributes are automatically made available as array items ($this['name']).
-     *
      * @param array  $nodes      An array of named nodes
      * @param array  $attributes An array of attributes (should not be nodes)
      * @param int    $lineno     The line number
@@ -233,6 +230,21 @@ class Node implements \Twig_NodeInterface
     public function getTemplateName()
     {
         return $this->name;
+    }
+
+    public function setSourceContext(Source $source)
+    {
+        $this->sourceContext = $source;
+        foreach ($this->nodes as $node) {
+            if ($node instanceof Node) {
+                $node->setSourceContext($source);
+            }
+        }
+    }
+
+    public function getSourceContext()
+    {
+        return $this->sourceContext;
     }
 
     /**
