@@ -144,8 +144,7 @@ var Help = {
             "role": "region",
         }).addClass("iframe_background").append(
             [$("<iframe>", {
-                "src": href,
-                "aria-label": '<?php echo __("Help", "admin"); ?>'
+                "src": href
             }).addClass("iframe_foreground").loader().on("load", function() {
                 $(this).loader(true);
             }),
@@ -180,7 +179,7 @@ var Write = {
                     $("<a>", {
                         "href": "#",
                         "role": "button",
-                        "aria-label": '<?php echo __("Preview this field", "admin"); ?>'
+                        "aria-label": '<?php echo __("Preview", "admin"); ?>'
                     }).addClass("emblem preview").click(function(e) {
                         var content  = target.val();
                         var field    = target.attr("name");
@@ -246,8 +245,7 @@ var Write = {
             "role": "region",
         }).addClass("iframe_background").append(
             [$("<iframe>", {
-                "name": uid,
-                "aria-label": '<?php echo __("Preview", "admin"); ?>'
+                "name": uid
             }).addClass("iframe_foreground").loader().on("load", function() {
                 if (!!this.contentWindow.location && this.contentWindow.location != "about:blank")
                     $(this).loader(true);
