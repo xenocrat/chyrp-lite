@@ -186,31 +186,23 @@ msgstr ""
 msgid "Are you sure you want to proceed?"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:148
-msgid "Help"
-msgstr ""
-
-#: admin/javascripts/admin.js.php:156
-#: admin/javascripts/admin.js.php:259
+#: admin/javascripts/admin.js.php:155
+#: admin/javascripts/admin.js.php:257
 msgid "Close"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:163
-#: admin/javascripts/admin.js.php:266
+#: admin/javascripts/admin.js.php:162
+#: admin/javascripts/admin.js.php:264
 msgid "close"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:183
-msgid "Preview this field"
-msgstr ""
-
-#: admin/javascripts/admin.js.php:199
-msgid "preview"
-msgstr ""
-
-#: admin/javascripts/admin.js.php:250
+#: admin/javascripts/admin.js.php:182
 #: admin/pages/themes.twig:25
 msgid "Preview"
+msgstr ""
+
+#: admin/javascripts/admin.js.php:198
+msgid "preview"
 msgstr ""
 
 #: admin/layouts/default.twig:63

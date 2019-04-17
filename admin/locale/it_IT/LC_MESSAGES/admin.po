@@ -249,29 +249,21 @@ msgstr "Spunta tutto"
 msgid "Are you sure you want to proceed?"
 msgstr "Sei sicuro di volere procedere?"
 
-#: admin/javascripts/admin.js.php:148
-msgid "Help"
-msgstr "Aiuto"
-
-#: admin/javascripts/admin.js.php:156 admin/javascripts/admin.js.php:259
+#: admin/javascripts/admin.js.php:155 admin/javascripts/admin.js.php:257
 msgid "Close"
 msgstr "Chiudi"
 
-#: admin/javascripts/admin.js.php:163 admin/javascripts/admin.js.php:266
+#: admin/javascripts/admin.js.php:162 admin/javascripts/admin.js.php:264
 msgid "close"
 msgstr "chiudi"
 
-#: admin/javascripts/admin.js.php:183
-msgid "Preview this field"
-msgstr "Anteprima di questo campo"
-
-#: admin/javascripts/admin.js.php:199
-msgid "preview"
-msgstr "anteprima"
-
-#: admin/javascripts/admin.js.php:250 admin/pages/themes.twig:25
+#: admin/javascripts/admin.js.php:182 admin/pages/themes.twig:25
 msgid "Preview"
 msgstr "Anteprima"
+
+#: admin/javascripts/admin.js.php:198
+msgid "preview"
+msgstr "anteprima"
 
 #: admin/layouts/default.twig:63
 #, php-format
