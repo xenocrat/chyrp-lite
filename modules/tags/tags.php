@@ -134,7 +134,7 @@
 
             foreach ($cloud as $tag) {
                 $selected = (in_array($tag["name"], $names)) ? " tag_added" : "" ;
-                $selector.= '<a class="tag'.$selected.'" href="#tags">'.$tag["name"].'</a>'."\n";
+                $selector.= '<a class="tag'.$selected.'" href="#" role="button">'.$tag["name"].'</a>'."\n";
             }
 
             $selector.= "</span>"."\n";
