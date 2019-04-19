@@ -195,7 +195,7 @@ var Write = {
                     }).append(
                         $("<img>", {
                             "src": Site.chyrp_url + '/admin/images/icons/magnifier.svg',
-                            "alt": '(<?php echo __("preview", "admin"); ?>)'
+                            "alt": '<?php echo __("preview", "admin"); ?>'
                         })
                     )
                 );
