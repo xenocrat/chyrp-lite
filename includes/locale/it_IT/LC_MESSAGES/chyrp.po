@@ -55,8 +55,8 @@ msgstr "Stringa di ricerca"
 msgid "Parameters"
 msgstr "Parametri"
 
-#: includes/class/Query.php:203 includes/class/SQL.php:96
-#: includes/class/SQL.php:107 install.php:562
+#: includes/class/Query.php:203 includes/class/SQL.php:98
+#: includes/class/SQL.php:109 install.php:562
 #, php-format
 msgid "Database error: %s"
 msgstr "Errore di database: %s"
@@ -152,7 +152,7 @@ msgstr "Accesso negato"
 msgid "You are not allowed to view this site."
 msgstr "Non è consentito visualizzare questo sito."
 
-#: includes/class/SQL.php:76
+#: includes/class/SQL.php:78
 msgid "PDO driver is unavailable for this database."
 msgstr "Il driver PDO non è disponibile per questo database."
 
@@ -1208,115 +1208,115 @@ msgstr "La tua pagina non si collega alla nostra pagina."
 msgid "XML-RPC support is disabled for this site."
 msgstr "Il supporto XML-RPC è disabilitato per questo sito."
 
-#: includes/model/Group.php:249
+#: includes/model/Group.php:253
 msgid "Change Settings"
 msgstr "Modifica impostazioni"
 
-#: includes/model/Group.php:250
+#: includes/model/Group.php:254
 msgid "Toggle Extensions"
 msgstr "Attiva/Disattiva estensioni"
 
-#: includes/model/Group.php:251
+#: includes/model/Group.php:255
 msgid "View Site"
 msgstr "Visualizza sito"
 
-#: includes/model/Group.php:252
+#: includes/model/Group.php:256
 msgid "View Private Posts"
 msgstr "Visualizza messaggi privati"
 
-#: includes/model/Group.php:253
+#: includes/model/Group.php:257
 msgid "View Scheduled Posts"
 msgstr "Visualizza i post programmati"
 
-#: includes/model/Group.php:254
+#: includes/model/Group.php:258
 msgid "View Drafts"
 msgstr "Visualizza bozze"
 
-#: includes/model/Group.php:255
+#: includes/model/Group.php:259
 msgid "View Own Drafts"
 msgstr "Visualizza bozze proprie"
 
-#: includes/model/Group.php:256
+#: includes/model/Group.php:260
 msgid "Add Posts"
 msgstr "Aggiungi post"
 
-#: includes/model/Group.php:257
+#: includes/model/Group.php:261
 msgid "Add Drafts"
 msgstr "Aggiungi bozze"
 
-#: includes/model/Group.php:258
+#: includes/model/Group.php:262
 msgid "Edit Posts"
 msgstr "Modificare post"
 
-#: includes/model/Group.php:259
+#: includes/model/Group.php:263
 msgid "Edit Drafts"
 msgstr "Modifica bozze"
 
-#: includes/model/Group.php:260
+#: includes/model/Group.php:264
 msgid "Edit Own Posts"
 msgstr "Modificare i propri post"
 
-#: includes/model/Group.php:261
+#: includes/model/Group.php:265
 msgid "Edit Own Drafts"
 msgstr "Modifica bozze proprie"
 
-#: includes/model/Group.php:262
+#: includes/model/Group.php:266
 msgid "Delete Posts"
 msgstr "Elimina post"
 
-#: includes/model/Group.php:263
+#: includes/model/Group.php:267
 msgid "Delete Drafts"
 msgstr "Elimina bozze"
 
-#: includes/model/Group.php:264
+#: includes/model/Group.php:268
 msgid "Delete Own Posts"
 msgstr "Eliminare i propri post"
 
-#: includes/model/Group.php:265
+#: includes/model/Group.php:269
 msgid "Delete Own Drafts"
 msgstr "Elimina bozze proprie"
 
-#: includes/model/Group.php:266
+#: includes/model/Group.php:270
 msgid "View Pages"
 msgstr "Visualizza pagine"
 
-#: includes/model/Group.php:267
+#: includes/model/Group.php:271
 msgid "Add Pages"
 msgstr "Aggiungi pagine"
 
-#: includes/model/Group.php:268
+#: includes/model/Group.php:272
 msgid "Edit Pages"
 msgstr "Modifica pagine"
 
-#: includes/model/Group.php:269
+#: includes/model/Group.php:273
 msgid "Delete Pages"
 msgstr "Elimina pagine"
 
-#: includes/model/Group.php:270
+#: includes/model/Group.php:274
 msgid "Add Users"
 msgstr "Aggiungi utenti"
 
-#: includes/model/Group.php:271
+#: includes/model/Group.php:275
 msgid "Edit Users"
 msgstr "Modifica utenti"
 
-#: includes/model/Group.php:272
+#: includes/model/Group.php:276
 msgid "Delete Users"
 msgstr "Eliminare utenti"
 
-#: includes/model/Group.php:273
+#: includes/model/Group.php:277
 msgid "Add Groups"
 msgstr "Aggiungi gruppi"
 
-#: includes/model/Group.php:274
+#: includes/model/Group.php:278
 msgid "Edit Groups"
 msgstr "Modifica gruppi"
 
-#: includes/model/Group.php:275
+#: includes/model/Group.php:279
 msgid "Delete Groups"
 msgstr "Cancella gruppi"
 
-#: includes/model/Group.php:276
+#: includes/model/Group.php:280
 msgid "Export Content"
 msgstr "Esporta contenuto"
 

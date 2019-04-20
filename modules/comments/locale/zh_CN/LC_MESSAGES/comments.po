@@ -398,6 +398,6 @@ msgid ""
 "credentials."
 msgstr "该评论无法删除，因为您的网络浏览器未发送正确的凭证。"
 
-#: modules/comments/model/Comment.php:359
+#: modules/comments/model/Comment.php:368
 msgid "Anon"
 msgstr "不久"

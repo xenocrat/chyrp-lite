@@ -55,8 +55,8 @@ msgstr "查询语句"
 msgid "Parameters"
 msgstr "参数"
 
-#: includes/class/Query.php:203 includes/class/SQL.php:96
-#: includes/class/SQL.php:107 install.php:562
+#: includes/class/Query.php:203 includes/class/SQL.php:98
+#: includes/class/SQL.php:109 install.php:562
 #, php-format
 msgid "Database error: %s"
 msgstr "数据库错误： %s"
@@ -152,7 +152,7 @@ msgstr "访问被拒绝"
 msgid "You are not allowed to view this site."
 msgstr "您不允许访问这个站点。"
 
-#: includes/class/SQL.php:76
+#: includes/class/SQL.php:78
 msgid "PDO driver is unavailable for this database."
 msgstr ""
 
@@ -1182,115 +1182,115 @@ msgstr "您的页面没有链接到我们的页面。"
 msgid "XML-RPC support is disabled for this site."
 msgstr "这个站点禁用XML-RPC支持。"
 
-#: includes/model/Group.php:249
+#: includes/model/Group.php:253
 msgid "Change Settings"
 msgstr "改变设置"
 
-#: includes/model/Group.php:250
+#: includes/model/Group.php:254
 msgid "Toggle Extensions"
 msgstr "切换扩展"
 
-#: includes/model/Group.php:251
+#: includes/model/Group.php:255
 msgid "View Site"
 msgstr "查看站点"
 
-#: includes/model/Group.php:252
+#: includes/model/Group.php:256
 msgid "View Private Posts"
 msgstr "查看私人帖子"
 
-#: includes/model/Group.php:253
+#: includes/model/Group.php:257
 msgid "View Scheduled Posts"
 msgstr "查看定时发布的帖子"
 
-#: includes/model/Group.php:254
+#: includes/model/Group.php:258
 msgid "View Drafts"
 msgstr "查看草稿"
 
-#: includes/model/Group.php:255
+#: includes/model/Group.php:259
 msgid "View Own Drafts"
 msgstr "查看自己的草稿"
 
-#: includes/model/Group.php:256
+#: includes/model/Group.php:260
 msgid "Add Posts"
 msgstr "增加帖子"
 
-#: includes/model/Group.php:257
+#: includes/model/Group.php:261
 msgid "Add Drafts"
 msgstr "增加草稿"
 
-#: includes/model/Group.php:258
+#: includes/model/Group.php:262
 msgid "Edit Posts"
 msgstr "编辑帖子"
 
-#: includes/model/Group.php:259
+#: includes/model/Group.php:263
 msgid "Edit Drafts"
 msgstr "编辑草稿"
 
-#: includes/model/Group.php:260
+#: includes/model/Group.php:264
 msgid "Edit Own Posts"
 msgstr "编辑自己的帖子"
 
-#: includes/model/Group.php:261
+#: includes/model/Group.php:265
 msgid "Edit Own Drafts"
 msgstr "编辑自己的草稿"
 
-#: includes/model/Group.php:262
+#: includes/model/Group.php:266
 msgid "Delete Posts"
 msgstr "删除帖子"
 
-#: includes/model/Group.php:263
+#: includes/model/Group.php:267
 msgid "Delete Drafts"
 msgstr "删除草稿"
 
-#: includes/model/Group.php:264
+#: includes/model/Group.php:268
 msgid "Delete Own Posts"
 msgstr "删除自己的帖子"
 
-#: includes/model/Group.php:265
+#: includes/model/Group.php:269
 msgid "Delete Own Drafts"
 msgstr "删除自己的草稿"
 
-#: includes/model/Group.php:266
+#: includes/model/Group.php:270
 msgid "View Pages"
 msgstr "查看页面"
 
-#: includes/model/Group.php:267
+#: includes/model/Group.php:271
 msgid "Add Pages"
 msgstr "增加页面"
 
-#: includes/model/Group.php:268
+#: includes/model/Group.php:272
 msgid "Edit Pages"
 msgstr "编辑页面"
 
-#: includes/model/Group.php:269
+#: includes/model/Group.php:273
 msgid "Delete Pages"
 msgstr "删除页面"
 
-#: includes/model/Group.php:270
+#: includes/model/Group.php:274
 msgid "Add Users"
 msgstr "增加用户"
 
-#: includes/model/Group.php:271
+#: includes/model/Group.php:275
 msgid "Edit Users"
 msgstr "编辑用户"
 
-#: includes/model/Group.php:272
+#: includes/model/Group.php:276
 msgid "Delete Users"
 msgstr "删除用户"
 
-#: includes/model/Group.php:273
+#: includes/model/Group.php:277
 msgid "Add Groups"
 msgstr "增加组"
 
-#: includes/model/Group.php:274
+#: includes/model/Group.php:278
 msgid "Edit Groups"
 msgstr "编辑组"
 
-#: includes/model/Group.php:275
+#: includes/model/Group.php:279
 msgid "Delete Groups"
 msgstr "删除组"
 
-#: includes/model/Group.php:276
+#: includes/model/Group.php:280
 msgid "Export Content"
 msgstr "导出内容"
 
