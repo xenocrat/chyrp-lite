@@ -1,7 +1,8 @@
 <?php
     /**
      * Class: Visitor
-     * The model for the currently browsing <User>. Group falls back to whatever group is set as the "Guest Group".
+     * The model for the currently browsing <User>.
+     * Group falls back to whatever group is set as the "Guest Group".
      *
      * See Also:
      *     <User>
@@ -29,12 +30,14 @@
                 return isset($this->group_id) ?
                     new Group($this->group_id) :
                     new Group(Config::current()->guest_group) ;
-            } else
+            } else {
                 return parent::__get($name);
+            }
         }
 
         /**
          * Function: find
+         *
          * See Also:
          *     <Model::search>
          */

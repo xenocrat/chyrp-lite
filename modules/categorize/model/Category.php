@@ -9,6 +9,7 @@
     class Category extends Model {
         /**
          * Function: __construct
+         *
          * See Also:
          *     <Model::grab>
          */
@@ -24,6 +25,7 @@
 
         /**
          * Function: find
+         *
          * See Also:
          *     <Model::search>
          */
@@ -85,7 +87,7 @@
                                    $new_values);
 
             $category = new self(null, array("read_from" => array_merge($new_values,
-                                                                        array("id" => $this->id))));
+                                                            array("id" => $this->id))));
 
             Trigger::current()->call("update_category", $category, $this);
 

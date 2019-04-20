@@ -25,6 +25,7 @@
 
         /**
          * Function: close
+         *
          * Returns: @true@
          */
         static function close() {

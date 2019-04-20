@@ -11,6 +11,7 @@
 
         /**
          * Function: __construct
+         *
          * See Also:
          *     <Model::grab>
          */
@@ -32,6 +33,7 @@
 
         /**
          * Function: find
+         *
          * See Also:
          *     <Model::search>
          */
@@ -49,11 +51,13 @@
          * Checks if the group can perform the specified actions.
          *
          * Parameters:
-         *     *$permissions - However many permissions to check for.
-         *                     If the last argument is <true>, it will act as "and", otherwise it will act as "or".
+         *     *$permissions - Permissions to check, as separate args.
          *
          * Returns:
          *     @true@ or @false@
+         *
+         * Notes:
+         *     If the last arg is <true>, logic is "and", otherwise "or".
          */
         public function can() {
             if ($this->no_results)
@@ -193,7 +197,7 @@
 
         /**
          * Function: delete
-         * Deletes a given group and its permissions. Calls the @delete_group@ trigger and passes the <Group> as an argument.
+         * Deletes a given group and its permissions.
          *
          * See Also:
          *     <Model::destroy>
@@ -210,8 +214,8 @@
          * Adds a permission to the Groups table.
          *
          * Parameters:
-         *     $id - The ID for the permission, like "can_do_something".
-         *     $name - The name for the permission, like "Can Do Something". Defaults to the camelized ID.
+         *     $id - The ID for the permission, e.g "can_do_something".
+         *     $name - The name for the permission, e.g. "Can Do Something".
          */
         static function add_permission($id, $name = null) {
             $sql = SQL::current();

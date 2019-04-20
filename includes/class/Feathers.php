@@ -77,7 +77,8 @@
          */
         protected function respondTo($name, $function = null, $priority = 10) {
             fallback($function, $name);
-            Trigger::current()->priorities[$name][] = array("priority" => $priority, "function" => array($this, $function));
+            Trigger::current()->priorities[$name][] = array("priority" => $priority,
+                                                            "function" => array($this, $function));
         }
 
         /**

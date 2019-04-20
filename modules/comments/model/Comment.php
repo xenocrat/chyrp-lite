@@ -15,6 +15,7 @@
 
         /**
          * Function: __construct
+         *
          * See Also:
          *     <Model::grab>
          */
@@ -41,6 +42,7 @@
 
         /**
          * Function: find
+         *
          * See Also:
          *     <Model::search>
          */
@@ -70,7 +72,14 @@
          *     $notify - Send correspondence if additional comments are added?
          *     $status - A string describing the comment status (optional).
          */
-        static function create($body, $author, $author_url, $author_email, $post, $parent, $notify, $status = null) {
+        static function create($body,
+                               $author,
+                               $author_url,
+                               $author_email,
+                               $post,
+                               $parent,
+                               $notify,
+                               $status = null) {
             $config = Config::current();
             $visitor = Visitor::current();
             $trigger = Trigger::current();
@@ -233,12 +242,12 @@
                                    $new_values);
 
             $comment = new self(null, array("read_from" => array_merge($new_values,
-                                                                       array("id"           => $this->id,
-                                                                             "author_ip"    => $this->author_ip,
-                                                                             "author_agent" => $this->author_agent,
-                                                                             "post_id"      => $this->post_id,
-                                                                             "user_id"      => $this->user_id,
-                                                                             "parent_id"    => $this->parent_id))));
+                                                           array("id"           => $this->id,
+                                                                 "author_ip"    => $this->author_ip,
+                                                                 "author_agent" => $this->author_agent,
+                                                                 "post_id"      => $this->post_id,
+                                                                 "user_id"      => $this->user_id,
+                                                                 "parent_id"    => $this->parent_id))));
 
             Trigger::current()->call("update_comment", $comment, $this);
 

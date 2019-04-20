@@ -25,7 +25,8 @@
          *     $priority - Priority of the response.
          */
         protected function setPriority($name, $priority) {
-            Trigger::current()->priorities[$name][] = array("priority" => $priority, "function" => array($this, $name));
+            Trigger::current()->priorities[$name][] = array("priority" => $priority,
+                                                            "function" => array($this, $name));
         }
 
         /**
@@ -38,6 +39,7 @@
          *     $priority - Priority of the response.
          */
         protected function addAlias($name, $function, $priority = 10) {
-            Trigger::current()->priorities[$name][] = array("priority" => $priority, "function" => array($this, $function));
+            Trigger::current()->priorities[$name][] = array("priority" => $priority,
+                                                            "function" => array($this, $function));
         }
     }

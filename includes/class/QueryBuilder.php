@@ -34,7 +34,8 @@
                      "FROM ".self::build_from($tables)."\n";
 
             foreach ($left_join as $join)
-                $query.= "LEFT JOIN __".$join["table"]." ON ".self::build_where($join["where"], $join["table"], $params)."\n";
+                $query.= "LEFT JOIN __".$join["table"]." ON ".
+                         self::build_where($join["where"], $join["table"], $params)."\n";
 
             $query.= ($conds ? "WHERE ".self::build_where($conds, $tables, $params)."\n" : "").
                      ($group ? "GROUP BY ".self::build_group($group, $tables)."\n" : "").

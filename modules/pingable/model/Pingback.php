@@ -11,6 +11,7 @@
 
         /**
          * Function: __construct
+         *
          * See Also:
          *     <Model::grab>
          */
@@ -23,6 +24,7 @@
 
         /**
          * Function: find
+         *
          * See Also:
          *     <Model::search>
          */
@@ -77,11 +79,12 @@
                                    array("id"    => $this->id),
                                    array("title" => $title));
 
-            $pingback = new self(null, array("read_from" => array("id"         => $this->id,
-                                                                  "post_id"    => $this->post_id,
-                                                                  "source"     => $this->source,
-                                                                  "title"      => $title,
-                                                                  "created_at" => $this->created_at)));
+            $pingback = new self(null,
+                                 array("read_from" => array("id"         => $this->id,
+                                                            "post_id"    => $this->post_id,
+                                                            "source"     => $this->source,
+                                                            "title"      => $title,
+                                                            "created_at" => $this->created_at)));
 
             Trigger::current()->call("update_pingback", $pingback, $this);
 

@@ -51,13 +51,17 @@
 
                 if (!$has_status) {
                     $visitor = Visitor::current();
-                    $private = (isset($options["drafts"]) and $options["drafts"] and $visitor->group->can("view_draft")) ?
+                    $private = (isset($options["drafts"]) and
+                                $options["drafts"] and
+                                $visitor->group->can("view_draft")) ?
                                    self::statuses(array("draft")) :
                                    self::statuses() ;
 
-                    if (isset($options["drafts"]) and $options["drafts"] and $visitor->group->can("view_own_draft")) {
-                        $private.= " OR (status = 'draft' AND user_id = :visitor_id)";
-                        $options["params"][":visitor_id"] = $visitor->id;
+                    if (isset($options["drafts"]) and
+                        $options["drafts"] and
+                        $visitor->group->can("view_own_draft")) {
+                            $private.= " OR (status = 'draft' AND user_id = :visitor_id)";
+                            $options["params"][":visitor_id"] = $visitor->id;
                     }
 
                     $options["where"][] = $private;
@@ -124,13 +128,17 @@
 
                 if (!$has_status) {
                     $visitor = Visitor::current();
-                    $private = (isset($options["drafts"]) and $options["drafts"] and $visitor->group->can("view_draft")) ?
+                    $private = (isset($options["drafts"]) and
+                                $options["drafts"] and
+                                $visitor->group->can("view_draft")) ?
                                    self::statuses(array("draft")) :
                                    self::statuses() ;
 
-                    if (isset($options["drafts"]) and $options["drafts"] and $visitor->group->can("view_own_draft")) {
-                        $private.= " OR (status = 'draft' AND user_id = :visitor_id)";
-                        $options["params"][":visitor_id"] = $visitor->id;
+                    if (isset($options["drafts"]) and
+                        $options["drafts"] and
+                        $visitor->group->can("view_own_draft")) {
+                            $private.= " OR (status = 'draft' AND user_id = :visitor_id)";
+                            $options["params"][":visitor_id"] = $visitor->id;
                     }
 
                     $options["where"][] = $private;
@@ -340,10 +348,10 @@
 
             $post = new self(null,
                              array("read_from" => array_merge($new_values,
-                                                              array("id"               => $this->id,
-                                                                    "feather"          => $this->feather,
-                                                                    "attribute_names"  => $attribute_names,
-                                                                    "attribute_values" => $attribute_values))));
+                                                  array("id"               => $this->id,
+                                                        "feather"          => $this->feather,
+                                                        "attribute_names"  => $attribute_names,
+                                                        "attribute_values" => $attribute_values))));
 
             # Attempt to send pingbacks to URLs discovered in post attribute values.
             if ($config->send_pingbacks and $pingbacks and $this->status == "public")
@@ -383,7 +391,8 @@
 
             return ($this->status == "draft" and $user->group->can("delete_draft")) or
                    ($user->group->can("delete_own_post") and $this->user_id == $user->id) or
-                   (($user->group->can("delete_own_draft") and $this->status == "draft") and $this->user_id == $user->id);
+                   (($user->group->can("delete_own_draft") and $this->status == "draft") and
+                    $this->user_id == $user->id);
         }
 
         /**
@@ -401,7 +410,8 @@
 
             return ($this->status == "draft" and $user->group->can("edit_draft")) or
                    ($user->group->can("edit_own_post") and $this->user_id == $user->id) or
-                   (($user->group->can("edit_own_draft") and $this->status == "draft") and $this->user_id == $user->id);
+                   (($user->group->can("edit_own_draft") and $this->status == "draft") and
+                    $this->user_id == $user->id);
         }
 
         /**
@@ -449,17 +459,17 @@
             # Can they delete drafts?
             if ($visitor->group->can("delete_draft") and
                 $sql->count("posts", array("status" => "draft")))
-                return true;
+                    return true;
 
             # Can they delete their own posts, and do they have any?
             if ($visitor->group->can("delete_own_post") and
                 $sql->count("posts", array("user_id" => $visitor->id)))
-                return true;
+                    return true;
 
             # Can they delete their own drafts, and do they have any?
             if ($visitor->group->can("delete_own_draft") and
                 $sql->count("posts", array("status" => "draft", "user_id" => $visitor->id)))
-                return true;
+                    return true;
 
             return false;
         }
@@ -532,7 +542,8 @@
                           urlencode($this->feather),
                           urlencode(pluralize($this->feather)));
 
-            return fix($config->url."/".str_replace(array_keys(self::$url_attrs), $vals, $config->post_url), true);
+            return fix($config->url."/".
+                       str_replace(array_keys(self::$url_attrs), $vals, $config->post_url), true);
         }
 
         /**
@@ -616,6 +627,7 @@
 
         /**
          * Function: next
+         *
          * Returns:
          *     The next post (the post made before this one).
          */
@@ -626,15 +638,17 @@
             if (isset($this->next))
                 return $this->next;
 
-            return $this->next = new self(null, array("where" => array("created_at <" => $this->created_at,
-                                                                       $this->status == "draft" ?
-                                                                           self::statuses(array("draft")) :
-                                                                           self::statuses()),
-                                                      "order" => "created_at DESC, id DESC"));
+            return $this->next = new self(null,
+                                          array("where" => array("created_at <" => $this->created_at,
+                                                                 ($this->status == "draft" ?
+                                                                    self::statuses(array("draft")) :
+                                                                    self::statuses())),
+                                                "order" => "created_at DESC, id DESC"));
         }
 
         /**
          * Function: prev
+         *
          * Returns:
          *     The previous post (the post made after this one).
          */
@@ -645,11 +659,12 @@
             if (isset($this->prev))
                 return $this->prev;
 
-            return $this->prev = new self(null, array("where" => array("created_at >" => $this->created_at,
-                                                                       ($this->status == "draft" ?
-                                                                           self::statuses(array("draft")) :
-                                                                           self::statuses())),
-                                                      "order" => "created_at ASC, id ASC"));
+            return $this->prev = new self(null,
+                                          array("where" => array("created_at >" => $this->created_at,
+                                                                ($this->status == "draft" ?
+                                                                    self::statuses(array("draft")) :
+                                                                    self::statuses())),
+                                                "order" => "created_at ASC, id ASC"));
         }
 
         /**

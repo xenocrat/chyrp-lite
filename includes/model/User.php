@@ -12,6 +12,7 @@
 
         /**
          * Function: __construct
+         *
          * See Also:
          *     <Model::grab>
          */
@@ -26,6 +27,7 @@
 
         /**
          * Function: find
+         *
          * See Also:
          *     <Model::search>
          */
@@ -215,5 +217,4 @@
             $try = crypt($password, $stored);
             return (function_exists("hash_equals")) ? hash_equals($try, $stored) : ($try == $stored) ;
         }
-
     }

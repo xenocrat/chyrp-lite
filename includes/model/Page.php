@@ -13,6 +13,7 @@
 
         /**
          * Function: __construct
+         *
          * See Also:
          *     <Model::grab>
          */
@@ -37,6 +38,7 @@
 
         /**
          * Function: find
+         *
          * See Also:
          *     <Model::search>
          */
