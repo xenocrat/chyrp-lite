@@ -39,14 +39,14 @@
 
 class IXR_Base64
 {
-    var $data;
+    public $data;
 
-    function __construct($data)
+    public function __construct($data)
     {
         $this->data = $data;
     }
 
-    function getXml()
+    public function getXml()
     {
         return '<base64>'.base64_encode($this->data).'</base64>';
     }

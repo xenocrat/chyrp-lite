@@ -39,10 +39,10 @@
 
 class IXR_Value
 {
-    var $data;
-    var $type;
+    public $data;
+    public $type;
 
-    function __construct($data, $type = false)
+    public function __construct($data, $type = false)
     {
         $this->data = $data;
         if (!$type) {
@@ -62,44 +62,7 @@ class IXR_Value
         }
     }
 
-    function calculateType()
-    {
-        if ($this->data === true || $this->data === false) {
-            return 'boolean';
-        }
-        if (is_integer($this->data)) {
-            return 'int';
-        }
-        if (is_double($this->data)) {
-            return 'double';
-        }
-
-        // Deal with IXR object types base64 and date
-        if (is_object($this->data) && is_a($this->data, 'IXR_Date')) {
-            return 'date';
-        }
-        if (is_object($this->data) && is_a($this->data, 'IXR_Base64')) {
-            return 'base64';
-        }
-
-        // If it is a normal PHP object convert it in to a struct
-        if (is_object($this->data)) {
-            $this->data = get_object_vars($this->data);
-            return 'struct';
-        }
-        if (!is_array($this->data)) {
-            return 'string';
-        }
-
-        // We have an array - is it an array or a struct?
-        if ($this->isStruct($this->data)) {
-            return 'struct';
-        } else {
-            return 'array';
-        }
-    }
-
-    function getXml()
+    public function getXml()
     {
         // Return XML for this value
         switch ($this->type) {
@@ -140,13 +103,50 @@ class IXR_Value
         return false;
     }
 
+    protected function calculateType()
+    {
+        if ($this->data === true || $this->data === false) {
+            return 'boolean';
+        }
+        if (is_integer($this->data)) {
+            return 'int';
+        }
+        if (is_double($this->data)) {
+            return 'double';
+        }
+
+        // Deal with IXR object types base64 and date
+        if (is_object($this->data) && is_a($this->data, 'IXR_Date')) {
+            return 'date';
+        }
+        if (is_object($this->data) && is_a($this->data, 'IXR_Base64')) {
+            return 'base64';
+        }
+
+        // If it is a normal PHP object convert it in to a struct
+        if (is_object($this->data)) {
+            $this->data = get_object_vars($this->data);
+            return 'struct';
+        }
+        if (!is_array($this->data)) {
+            return 'string';
+        }
+
+        // We have an array - is it an array or a struct?
+        if ($this->isStruct($this->data)) {
+            return 'struct';
+        } else {
+            return 'array';
+        }
+    }
+
     /**
      * Checks whether or not the supplied array is a struct or not
      *
      * @param unknown_type $array
      * @return boolean
      */
-    function isStruct($array)
+    protected function isStruct($array)
     {
         $expected = 0;
         foreach ($array as $key => $value) {

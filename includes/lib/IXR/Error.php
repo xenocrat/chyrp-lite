@@ -39,16 +39,16 @@
 
 class IXR_Error
 {
-    var $code;
-    var $message;
+    public $code;
+    public $message;
 
-    function __construct($code, $message)
+    public function __construct($code, $message)
     {
         $this->code = $code;
         $this->message = htmlspecialchars($message);
     }
 
-    function getXml()
+    public function getXml()
     {
         $xml = <<<EOD
 <methodResponse>

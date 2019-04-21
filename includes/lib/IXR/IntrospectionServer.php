@@ -39,10 +39,10 @@
 
 class IXR_IntrospectionServer extends IXR_Server
 {
-    var $signatures;
-    var $help;
+    public $signatures;
+    public $help;
 
-    function __construct()
+    public function __construct()
     {
         $this->setCallbacks();
         $this->setCapabilities();
@@ -76,14 +76,14 @@ class IXR_IntrospectionServer extends IXR_Server
         );
     }
 
-    function addCallback($method, $callback, $args, $help)
+    protected function addCallback($method, $callback, $args, $help)
     {
         $this->callbacks[$method] = $callback;
         $this->signatures[$method] = $args;
         $this->help[$method] = $help;
     }
 
-    function call($methodname, $args)
+    public function call($methodname, $args)
     {
         // Make sure it's in an array
         if ($args && !is_array($args)) {
@@ -148,7 +148,7 @@ class IXR_IntrospectionServer extends IXR_Server
         return parent::call($methodname, $argsbackup);
     }
 
-    function methodSignature($method)
+    public function methodSignature($method)
     {
         if (!$this->hasMethod($method)) {
             return new IXR_Error(-32601, 'server error. requested method "'.$method.'" not specified.');
@@ -188,7 +188,7 @@ class IXR_IntrospectionServer extends IXR_Server
         return $return;
     }
 
-    function methodHelp($method)
+    public function methodHelp($method)
     {
         return $this->help[$method];
     }

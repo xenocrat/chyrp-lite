@@ -39,12 +39,12 @@
 
 class IXR_Server
 {
-    var $data;
-    var $callbacks = array();
-    var $message;
-    var $capabilities;
+    public $data;
+    public $callbacks = array();
+    public $message;
+    public $capabilities;
 
-    function __construct($callbacks = false, $data = false, $wait = false)
+    public function __construct($callbacks = false, $data = false, $wait = false)
     {
         $this->setCapabilities();
         if ($callbacks) {
@@ -56,7 +56,7 @@ class IXR_Server
         }
     }
 
-    function serve($data = false)
+    public function serve($data = false)
     {
         if (!$data) {
             if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -102,7 +102,7 @@ EOD;
       $this->output($xml);
     }
 
-    function call($methodname, $args)
+    public function call($methodname, $args)
     {
         if (!$this->hasMethod($methodname)) {
             return new IXR_Error(-32601, 'server error. requested method '.$methodname.' does not exist.');
@@ -141,7 +141,7 @@ EOD;
         return $result;
     }
 
-    function error($error, $message = false)
+    public function error($error, $message = false)
     {
         // Accepts either an error object or an error code and message
         if ($message && !is_object($error)) {
@@ -150,7 +150,7 @@ EOD;
         $this->output($error->getXml());
     }
 
-    function output($xml)
+    protected function output($xml)
     {
         $xml = '<?xml version="1.0"?>'."\n".$xml;
         $length = strlen($xml);
@@ -162,12 +162,19 @@ EOD;
         exit;
     }
 
-    function hasMethod($method)
+    protected function hasMethod($method)
     {
         return in_array($method, array_keys($this->callbacks));
     }
 
-    function setCapabilities()
+    protected function setCallbacks()
+    {
+        $this->callbacks['system.getCapabilities'] = 'this:getCapabilities';
+        $this->callbacks['system.listMethods'] = 'this:listMethods';
+        $this->callbacks['system.multicall'] = 'this:multiCall';
+    }
+
+    protected function setCapabilities()
     {
         // Initialises capabilities array
         $this->capabilities = array(
@@ -186,26 +193,19 @@ EOD;
         );
     }
 
-    function getCapabilities($args)
+    public function getCapabilities($args)
     {
         return $this->capabilities;
     }
 
-    function setCallbacks()
-    {
-        $this->callbacks['system.getCapabilities'] = 'this:getCapabilities';
-        $this->callbacks['system.listMethods'] = 'this:listMethods';
-        $this->callbacks['system.multicall'] = 'this:multiCall';
-    }
-
-    function listMethods($args)
+    public function listMethods($args)
     {
         // Returns a list of methods - uses array_reverse to ensure user defined
         // methods are listed before server defined methods
         return array_reverse(array_keys($this->callbacks));
     }
 
-    function multiCall($methodcalls)
+    public function multiCall($methodcalls)
     {
         $return = array();
         foreach ($methodcalls as $call) {

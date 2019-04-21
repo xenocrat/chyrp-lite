@@ -39,30 +39,28 @@
 
 class IXR_Message
 {
-    var $message;
-    var $messageType;  // methodCall / methodResponse / fault
-    var $faultCode;
-    var $faultString;
-    var $methodName;
-    var $params;
+    public $message;
+    public $messageType;                    // methodCall / methodResponse / fault
+    public $faultCode;
+    public $faultString;
+    public $methodName;
+    public $params;
 
-    // Current variable stacks
-    var $_arraystructs = array();       // The stack used to keep track of the current array/struct
-    var $_arraystructstypes = array();  // Stack keeping track of if things are structs or array
-    var $_currentStructName = array();  // A stack as well
-    var $_param;
-    var $_value;
-    var $_currentTag;
-    var $_currentTagContents;
-    // The XML parser
-    var $_parser;
+    protected $_arraystructs = array();       // The stack used to keep track of the current array/struct
+    protected $_arraystructstypes = array();  // Stack keeping track of if things are structs or array
+    protected $_currentStructName = array();  // A stack as well
+    protected $_param;
+    protected $_value;
+    protected $_currentTag;
+    protected $_currentTagContents;
+    protected $_parser;                       // The XML parser
 
-    function __construct($message)
+    public function __construct($message)
     {
         $this->message =& $message;
     }
 
-    function parse()
+    public function parse()
     {
         // first remove the XML declaration
         // merged from WP #10698 - this method avoids the RAM usage of preg_replace on very large messages
@@ -102,7 +100,7 @@ class IXR_Message
         return true;
     }
 
-    function tag_open($parser, $tag, $attr)
+    protected function tag_open($parser, $tag, $attr)
     {
         $this->_currentTagContents = '';
         $this->currentTag = $tag;
@@ -124,12 +122,12 @@ class IXR_Message
         }
     }
 
-    function cdata($parser, $cdata)
+    protected function cdata($parser, $cdata)
     {
         $this->_currentTagContents .= $cdata;
     }
 
-    function tag_close($parser, $tag)
+    protected function tag_close($parser, $tag)
     {
         $valueFlag = false;
         switch($tag) {

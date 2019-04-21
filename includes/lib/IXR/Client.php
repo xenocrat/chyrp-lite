@@ -39,20 +39,20 @@
 
 class IXR_Client
 {
-    var $transport;
-    var $server;
-    var $port;
-    var $path;
-    var $useragent;
-    var $response;
-    var $message = false;
-    var $debug = false;
-    var $timeout;
+    public $transport;
+    public $server;
+    public $port;
+    public $path;
+    public $useragent;
+    public $response;
+    public $message = false;
+    public $debug = false;
+    public $timeout;
 
     // Storage place for an error message
-    var $error = false;
+    public $error = false;
 
-    function __construct($server, $path = false, $port = 80, $timeout = 15)
+    public function __construct($server, $path = false, $port = 80, $timeout = 15)
     {
         if (!$path) {
             // Assume we have been given a URL instead
@@ -87,7 +87,7 @@ class IXR_Client
         $this->timeout = $timeout;
     }
 
-    function query()
+    public function query()
     {
         $args = func_get_args();
         $method = array_shift($args);
@@ -172,23 +172,23 @@ class IXR_Client
         return true;
     }
 
-    function getResponse()
+    public function getResponse()
     {
         // methodResponses can only have one param - return that
         return $this->message->params[0];
     }
 
-    function isError()
+    public function isError()
     {
         return (is_object($this->error));
     }
 
-    function getErrorCode()
+    public function getErrorCode()
     {
         return $this->error->code;
     }
 
-    function getErrorMessage()
+    public function getErrorMessage()
     {
         return $this->error->message;
     }
