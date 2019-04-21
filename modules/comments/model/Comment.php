@@ -241,13 +241,14 @@
                                    array("id" => $this->id),
                                    $new_values);
 
-            $comment = new self(null, array("read_from" => array_merge($new_values,
-                                                           array("id"           => $this->id,
-                                                                 "author_ip"    => $this->author_ip,
-                                                                 "author_agent" => $this->author_agent,
-                                                                 "post_id"      => $this->post_id,
-                                                                 "user_id"      => $this->user_id,
-                                                                 "parent_id"    => $this->parent_id))));
+            $comment = new self(null,
+                                array("read_from" => array_merge($new_values,
+                                                     array("id"           => $this->id,
+                                                           "author_ip"    => $this->author_ip,
+                                                           "author_agent" => $this->author_agent,
+                                                           "post_id"      => $this->post_id,
+                                                           "user_id"      => $this->user_id,
+                                                           "parent_id"    => $this->parent_id))));
 
             Trigger::current()->call("update_comment", $comment, $this);
 

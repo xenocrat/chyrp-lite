@@ -161,8 +161,9 @@
                          array("id" => $this->id),
                          $new_values);
 
-            $user = new self(null, array("read_from" => array_merge($new_values,
-                                                                    array("id" => $this->id))));
+            $user = new self(null,
+                             array("read_from" => array_merge($new_values,
+                                                  array("id" => $this->id))));
 
             $trigger->call("update_user", $user, $this);
 

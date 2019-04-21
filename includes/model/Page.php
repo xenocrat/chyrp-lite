@@ -200,8 +200,9 @@
                          array("id" => $this->id),
                          $new_values);
 
-            $page = new self(null, array("read_from" => array_merge($new_values,
-                                                                    array("id" => $this->id))));
+            $page = new self(null,
+                             array("read_from" => array_merge($new_values,
+                                                  array("id" => $this->id))));
 
             $trigger->call("update_page", $page, $this);
 

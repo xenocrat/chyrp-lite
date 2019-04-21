@@ -86,8 +86,9 @@
                                    array("id" => $this->id),
                                    $new_values);
 
-            $category = new self(null, array("read_from" => array_merge($new_values,
-                                                            array("id" => $this->id))));
+            $category = new self(null,
+                                 array("read_from" => array_merge($new_values,
+                                                      array("id" => $this->id))));
 
             Trigger::current()->call("update_category", $category, $this);
 

@@ -186,9 +186,10 @@
                                    "name" => $valid_permissions[$id],
                                    "group_id" => $this->id));
  
-            $group = new self(null, array("read_from" => array("id" => $this->id,
-                                                               "name" => $name,
-                                                               "permissions" => $permissions)));
+            $group = new self(null,
+                              array("read_from" => array("id" => $this->id,
+                                                         "name" => $name,
+                                                         "permissions" => $permissions)));
 
             $trigger->call("update_group", $group, $this);
 
