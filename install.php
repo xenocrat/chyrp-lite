@@ -114,7 +114,7 @@
         if (isset($message))
             $log[] = (string) $message;
 
-        return empty($log) ? false : $log ;
+        return empty($log) ? null : $log ;
     }
 
     /**
@@ -775,8 +775,7 @@
     # Installation Ends
     #---------------------------------------------
 
-    if (alert())
-        foreach (alert() as $message)
+        foreach ((array) alert() as $message)
             echo '<span role="alert">'.sanitize_html($message).'</span>'."\n";
 
           ?></pre>

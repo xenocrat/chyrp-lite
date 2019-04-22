@@ -80,9 +80,9 @@
         static $log = array();
 
         if (isset($message))
-            $log[] = (string) $message;
+            $log[] = $message;
 
-        return empty($log) ? false : $log ;
+        return empty($log) ? null : $log ;
     }
 
     /**
@@ -533,8 +533,7 @@
     # Upgrading Ends
     #---------------------------------------------
 
-    if (alert())
-        foreach (alert() as $message)
+        foreach ((array) alert() as $message)
             echo '<span role="alert">'.sanitize_html($message).'</span>'."\n";
 
             ?></pre>
