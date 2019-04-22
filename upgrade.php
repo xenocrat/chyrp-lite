@@ -73,6 +73,19 @@
     load_translator("chyrp", INCLUDES_DIR.DIR."locale");
 
     /**
+     * Function: alert
+     * Logs an alert message and returns the log to date.
+     */
+    function alert($message = null) {
+        static $log = array();
+
+        if (isset($message))
+            $log[] = (string) $message;
+
+        return empty($log) ? false : $log ;
+    }
+
+    /**
      * Function: test_directories
      * Tests whether or not the directories that need write access have it.
      */
@@ -81,15 +94,15 @@
 
         # Test if we can write to MAIN_DIR (needed for the .htaccess file).
         if (!is_writable(MAIN_DIR))
-            $errors[] = __("Please CHMOD or CHOWN the installation directory to make it writable.");
+            alert(__("Please CHMOD or CHOWN the installation directory to make it writable."));
 
         # Test if we can write to INCLUDES_DIR (needed for config.json.php).
         if (!is_writable(INCLUDES_DIR))
-            $errors[] = __("Please CHMOD or CHOWN the <em>includes</em> directory to make it writable.");
+            alert(__("Please CHMOD or CHOWN the <em>includes</em> directory to make it writable."));
 
         # Test if we can write to CACHES_DIR (needed by some extensions).
         if (!is_writable(CACHES_DIR))
-            $errors[] = __("Please CHMOD or CHOWN the <em>caches</em> directory to make it writable.");
+            alert(__("Please CHMOD or CHOWN the <em>caches</em> directory to make it writable."));
     }
 
     /**
@@ -238,11 +251,11 @@
             $set = htaccess_conf();
 
             if ($set === false)
-                $errors[] = __("The <em>.htaccess</em> file cannot be configured.");
+                alert(__("The <em>.htaccess</em> file cannot be configured."));
         }
 
         if ($config->url != $config->chyrp_url)
-            $errors[] = __("You might need to update your canonical URL's <em>.htaccess</em> file.");
+            alert(__("You might need to update your canonical URL's <em>.htaccess</em> file."));
     }
 
     /**
@@ -520,8 +533,9 @@
     # Upgrading Ends
     #---------------------------------------------
 
-    foreach ($errors as $error)
-        echo '<span role="alert">'.sanitize_html($error).'</span>'."\n";
+    if (alert())
+        foreach (alert() as $message)
+            echo '<span role="alert">'.sanitize_html($message).'</span>'."\n";
 
             ?></pre>
 <?php if (!$upgraded): ?>

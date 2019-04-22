@@ -94,15 +94,28 @@
 
     # Test if we can write to MAIN_DIR (needed for the .htaccess file).
     if (!is_writable(MAIN_DIR))
-        $errors[] = __("Please CHMOD or CHOWN the installation directory to make it writable.");
+        alert(__("Please CHMOD or CHOWN the installation directory to make it writable."));
 
     # Test if we can write to INCLUDES_DIR (needed for config.json.php).
     if (!is_writable(INCLUDES_DIR))
-        $errors[] = __("Please CHMOD or CHOWN the <em>includes</em> directory to make it writable.");
+        alert(__("Please CHMOD or CHOWN the <em>includes</em> directory to make it writable."));
 
     # Test if we can write to CACHES_DIR (needed by some extensions).
     if (!is_writable(CACHES_DIR))
-        $errors[] = __("Please CHMOD or CHOWN the <em>caches</em> directory to make it writable.");
+        alert(__("Please CHMOD or CHOWN the <em>caches</em> directory to make it writable."));
+
+    /**
+     * Function: alert
+     * Logs an alert message and returns the log to date.
+     */
+    function alert($message = null) {
+        static $log = array();
+
+        if (isset($message))
+            $log[] = (string) $message;
+
+        return empty($log) ? false : $log ;
+    }
 
     /**
      * Function: guess_url
@@ -489,56 +502,56 @@
 
     if (!empty($_POST)) {
         if (empty($_POST['database']))
-            $errors[] = __("Database cannot be blank.");
+            alert(__("Database cannot be blank."));
 
         if (empty($_POST['url']))
-            $errors[] = __("Chyrp URL cannot be blank.");
+            alert(__("Chyrp URL cannot be blank."));
         elseif (!is_url($_POST['url']))
-            $errors[] = __("Invalid Chyrp URL.");
+            alert(__("Invalid Chyrp URL."));
 
         if (empty($_POST['name']))
-            $errors[] = __("Please enter a name for your website.");
+            alert(__("Please enter a name for your website."));
 
         if (empty($_POST['timezone']))
-            $errors[] = __("Time zone cannot be blank.");
+            alert(__("Time zone cannot be blank."));
 
         if (empty($_POST['locale']))
-            $errors[] = __("Language cannot be blank.");
+            alert(__("Language cannot be blank."));
 
         if (empty($_POST['login']))
-            $errors[] = __("Please enter a username for your account.");
+            alert(__("Please enter a username for your account."));
 
         if (empty($_POST['password1']) or empty($_POST['password2']))
-            $errors[] = __("Passwords cannot be blank.");
+            alert(__("Passwords cannot be blank."));
         elseif ($_POST['password1'] != $_POST['password2'])
-            $errors[] = __("Passwords do not match.");
+            alert(__("Passwords do not match."));
 
         if (empty($_POST['email']))
-            $errors[] = __("Email address cannot be blank.");
+            alert(__("Email address cannot be blank."));
         elseif (!is_email($_POST['email']))
-            $errors[] = __("Invalid email address.");
+            alert(__("Invalid email address."));
 
         if (!class_exists("MySQLi") and !class_exists("PDO"))
-            $errors[] = __("MySQLi or PDO is required for database access.");
+            alert(__("MySQLi or PDO is required for database access."));
 
-        if (empty($errors) and $_POST['adapter'] == "sqlite") {
+        if (!alert()) and $_POST['adapter'] == "sqlite") {
             $realpath = realpath(dirname($_POST['database']));
 
             if ($realpath === false)
-                $errors[] = __("Could not determine the absolute path to the SQLite database.");
+                alert(__("Could not determine the absolute path to the SQLite database."));
             else
                 $_POST['database'] = $realpath.DIR.basename($_POST['database']);
         }
 
-        if (empty($errors) and $_POST['adapter'] == "sqlite")
+        if (!alert()) and $_POST['adapter'] == "sqlite")
             if (!is_writable(dirname($_POST['database'])))
-                $errors[] = __("Please make the SQLite database writable by the server.");
+                alert(__("Please make the SQLite database writable by the server."));
 
-        if (empty($errors) and $_POST['adapter'] == "mysql")
+        if (!alert()) and $_POST['adapter'] == "mysql")
             if (empty($_POST['username']) or empty($_POST['password']))
-                $errors[] = __("Please enter a username and password for the MySQL database.");
+                alert(__("Please enter a username and password for the MySQL database."));
 
-        if (empty($errors)) {
+        if (!alert())) {
             # Build the SQL settings based on user input.
             $settings = ($_POST['adapter'] == "sqlite") ?
                 array("host"     => "",
@@ -559,10 +572,10 @@
 
             # Test the database connection.
             if (!$sql->connect(true))
-                $errors[] = _f("Database error: %s", fix($sql->error, false, true));
+                alert(_f("Database error: %s", fix($sql->error, false, true)));
         }
 
-        if (empty($errors)) {
+        if (!alert()) {
             # Reconnect to the database.
             $sql->connect();
 
@@ -762,8 +775,9 @@
     # Installation Ends
     #---------------------------------------------
 
-    foreach ($errors as $error)
-        echo '<span role="alert">'.sanitize_html($error).'</span>'."\n";
+    if (alert())
+        foreach (alert() as $message)
+            echo '<span role="alert">'.sanitize_html($message).'</span>'."\n";
 
           ?></pre>
 <?php if (!$installed): ?>
