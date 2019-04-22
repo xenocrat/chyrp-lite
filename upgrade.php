@@ -533,8 +533,8 @@
     # Upgrading Ends
     #---------------------------------------------
 
-        foreach ((array) alert() as $message)
-            echo '<span role="alert">'.sanitize_html($message).'</span>'."\n";
+    foreach ((array) alert() as $message)
+        echo '<span role="alert">'.sanitize_html($message).'</span>'."\n";
 
             ?></pre>
 <?php if (!$upgraded): ?>
