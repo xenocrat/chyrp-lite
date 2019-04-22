@@ -56,7 +56,7 @@ msgid "Parameters"
 msgstr "Parameter"
 
 #: includes/class/Query.php:203 includes/class/SQL.php:98
-#: includes/class/SQL.php:109 install.php:562
+#: includes/class/SQL.php:109 install.php:575
 #, php-format
 msgid "Database error: %s"
 msgstr "Datenbankfehler: %s"
@@ -84,7 +84,7 @@ msgstr "Route wurde mit einem ungültigen Controller initiiert."
 #: includes/controller/Admin.php:1806 includes/controller/Admin.php:1809
 #: includes/controller/Admin.php:1812 includes/controller/Admin.php:1815
 #: includes/controller/Admin.php:2007 includes/controller/Ajax.php:32
-#: includes/download.php:12 includes/download.php:15 includes/error.php:144
+#: includes/download.php:12 includes/download.php:15 includes/error.php:140
 #: includes/helpers.php:1660 includes/helpers.php:1666
 #: includes/helpers.php:1669 includes/helpers.php:1672
 #: includes/helpers.php:1698 includes/helpers.php:1701
@@ -93,10 +93,10 @@ msgstr "Route wurde mit einem ungültigen Controller initiiert."
 #: includes/helpers.php:1775 includes/helpers.php:1778
 #: includes/helpers.php:1781 includes/helpers.php:1784
 #: includes/helpers.php:1789 includes/thumb.php:15 includes/thumb.php:18
-#: includes/thumb.php:47 includes/thumb.php:202 install.php:754 upgrade.php:105
-#: upgrade.php:118 upgrade.php:131 upgrade.php:144 upgrade.php:157
-#: upgrade.php:171 upgrade.php:197 upgrade.php:210 upgrade.php:224
-#: upgrade.php:258 upgrade.php:271
+#: includes/thumb.php:47 includes/thumb.php:202 install.php:767 upgrade.php:118
+#: upgrade.php:131 upgrade.php:144 upgrade.php:157 upgrade.php:170
+#: upgrade.php:184 upgrade.php:210 upgrade.php:223 upgrade.php:237
+#: upgrade.php:271 upgrade.php:284
 msgid "Error"
 msgstr "Fehler"
 
@@ -370,13 +370,13 @@ msgid "That username is already in use."
 msgstr "Dieser Benutzername ist schon belegt."
 
 #: includes/controller/Admin.php:617 includes/controller/Main.php:454
-#: install.php:512
+#: install.php:525
 msgid "Passwords cannot be blank."
 msgstr "Passwörter kann nicht leer sein."
 
 #: includes/controller/Admin.php:620 includes/controller/Admin.php:722
 #: includes/controller/Main.php:456 includes/controller/Main.php:631
-#: install.php:457 install.php:514
+#: install.php:470 install.php:527
 msgid "Passwords do not match."
 msgstr "Passwörter stimmen nicht überein."
 
@@ -386,13 +386,13 @@ msgstr "Wähle bitte ein stärkeres Passwort für diesen Benutzer."
 
 #: includes/controller/Admin.php:626 includes/controller/Admin.php:730
 #: includes/controller/Admin.php:1803 includes/controller/Main.php:461
-#: includes/controller/Main.php:636 install.php:517
+#: includes/controller/Main.php:636 install.php:530
 msgid "Email address cannot be blank."
 msgstr "E-Mail Addresse kann nicht leer sein."
 
 #: includes/controller/Admin.php:629 includes/controller/Admin.php:733
 #: includes/controller/Admin.php:1806 includes/controller/Main.php:463
-#: includes/controller/Main.php:638 install.php:519
+#: includes/controller/Main.php:638 install.php:532
 msgid "Invalid email address."
 msgstr "E-Mail Adresse ungültig."
 
@@ -662,11 +662,11 @@ msgstr "Preview gestoppt."
 msgid "Preview started."
 msgstr "Preview gestartet."
 
-#: includes/controller/Admin.php:1809 install.php:495
+#: includes/controller/Admin.php:1809 install.php:508
 msgid "Chyrp URL cannot be blank."
 msgstr "Chyrp URL kann nicht leer sein."
 
-#: includes/controller/Admin.php:1812 install.php:497
+#: includes/controller/Admin.php:1812 install.php:510
 msgid "Invalid Chyrp URL."
 msgstr "Ungültige Chyrp URL."
 
@@ -832,7 +832,7 @@ msgid "You cannot register an account because you are already logged in."
 msgstr ""
 "Du kannst keinen Account registrieren, weil Du zur Zeit eingeloggt bist."
 
-#: includes/controller/Main.php:446 install.php:509
+#: includes/controller/Main.php:446 install.php:522
 msgid "Please enter a username for your account."
 msgstr "Bitte gib einen Benutzernamen für Deinen Account ein."
 
@@ -892,7 +892,7 @@ msgstr "Du musst Deinen Account aktivieren bevor Du Dich einloggen kannst."
 msgid "Logged in."
 msgstr "Eingeloggt."
 
-#: includes/controller/Main.php:594 includes/error.php:358
+#: includes/controller/Main.php:594 includes/error.php:354
 msgid "Log in"
 msgstr "Einloggen"
 
@@ -939,15 +939,15 @@ msgstr "Diese Ressource akzeptiert nur GET Anfragen."
 msgid "File not found."
 msgstr "Datei nicht gefunden."
 
-#: includes/error.php:145
+#: includes/error.php:141
 msgid "An unspecified error has occurred."
 msgstr "Ein unbekannter Fehler ist aufgetreten."
 
-#: includes/error.php:350
+#: includes/error.php:346
 msgid "Backtrace"
 msgstr "Backtrace"
 
-#: includes/error.php:353
+#: includes/error.php:349
 #, php-format
 msgid "%s on line %d"
 msgstr "%s in Zeile %d"
@@ -1205,115 +1205,115 @@ msgstr "Deine Seite verlinkt nicht auf unsere."
 msgid "XML-RPC support is disabled for this site."
 msgstr "XML-RPC Unterstützung ist auf dieser Seite deaktiviert."
 
-#: includes/model/Group.php:253
+#: includes/model/Group.php:254
 msgid "Change Settings"
 msgstr "Einstellungen verändern"
 
-#: includes/model/Group.php:254
+#: includes/model/Group.php:255
 msgid "Toggle Extensions"
 msgstr "Extensions verwalten"
 
-#: includes/model/Group.php:255
+#: includes/model/Group.php:256
 msgid "View Site"
 msgstr "Blog anzeigen"
 
-#: includes/model/Group.php:256
+#: includes/model/Group.php:257
 msgid "View Private Posts"
 msgstr "Private Posts anzeigen"
 
-#: includes/model/Group.php:257
+#: includes/model/Group.php:258
 msgid "View Scheduled Posts"
 msgstr "Vorgemerkte Posts anzeigen"
 
-#: includes/model/Group.php:258
+#: includes/model/Group.php:259
 msgid "View Drafts"
 msgstr "Entwürfe anzeigen"
 
-#: includes/model/Group.php:259
+#: includes/model/Group.php:260
 msgid "View Own Drafts"
 msgstr "Eigene Entwürfe anzeigen"
 
-#: includes/model/Group.php:260
+#: includes/model/Group.php:261
 msgid "Add Posts"
 msgstr "Posts hinzufügen"
 
-#: includes/model/Group.php:261
+#: includes/model/Group.php:262
 msgid "Add Drafts"
 msgstr "Entwürfe hinzufügen"
 
-#: includes/model/Group.php:262
+#: includes/model/Group.php:263
 msgid "Edit Posts"
 msgstr "Posts bearbeiten"
 
-#: includes/model/Group.php:263
+#: includes/model/Group.php:264
 msgid "Edit Drafts"
 msgstr "Entwürfe bearbeiten"
 
-#: includes/model/Group.php:264
+#: includes/model/Group.php:265
 msgid "Edit Own Posts"
 msgstr "Eigene Posts bearbeiten"
 
-#: includes/model/Group.php:265
+#: includes/model/Group.php:266
 msgid "Edit Own Drafts"
 msgstr "Eigene Entwürfe bearbeiten"
 
-#: includes/model/Group.php:266
+#: includes/model/Group.php:267
 msgid "Delete Posts"
 msgstr "Posts löschen"
 
-#: includes/model/Group.php:267
+#: includes/model/Group.php:268
 msgid "Delete Drafts"
 msgstr "Entwürfe löschen"
 
-#: includes/model/Group.php:268
+#: includes/model/Group.php:269
 msgid "Delete Own Posts"
 msgstr "Eigene Posts löschen"
 
-#: includes/model/Group.php:269
+#: includes/model/Group.php:270
 msgid "Delete Own Drafts"
 msgstr "Eigene Entwürfe löschen"
 
-#: includes/model/Group.php:270
+#: includes/model/Group.php:271
 msgid "View Pages"
 msgstr "Seiten anzeigen"
 
-#: includes/model/Group.php:271
+#: includes/model/Group.php:272
 msgid "Add Pages"
 msgstr "Seiten hinzufügen"
 
-#: includes/model/Group.php:272
+#: includes/model/Group.php:273
 msgid "Edit Pages"
 msgstr "Seiten bearbeiten"
 
-#: includes/model/Group.php:273
+#: includes/model/Group.php:274
 msgid "Delete Pages"
 msgstr "Seiten löschen"
 
-#: includes/model/Group.php:274
+#: includes/model/Group.php:275
 msgid "Add Users"
 msgstr "Benutzer hinzufügen"
 
-#: includes/model/Group.php:275
+#: includes/model/Group.php:276
 msgid "Edit Users"
 msgstr "Benutzer bearbeiten"
 
-#: includes/model/Group.php:276
+#: includes/model/Group.php:277
 msgid "Delete Users"
 msgstr "Benutzer löschen"
 
-#: includes/model/Group.php:277
+#: includes/model/Group.php:278
 msgid "Add Groups"
 msgstr "Gruppen hinzufügen"
 
-#: includes/model/Group.php:278
+#: includes/model/Group.php:279
 msgid "Edit Groups"
 msgstr "Gruppen bearbeiten"
 
-#: includes/model/Group.php:279
+#: includes/model/Group.php:280
 msgid "Delete Groups"
 msgstr "Gruppen löschen"
 
-#: includes/model/Group.php:280
+#: includes/model/Group.php:281
 msgid "Export Content"
 msgstr "Inhalte exportieren"
 
@@ -1325,99 +1325,99 @@ msgstr "Maximale Größe kann nicht null sein."
 msgid "Failed to create image thumbnail."
 msgstr "Vorschaubild konnte erstellt werden."
 
-#: install.php:97 upgrade.php:84
+#: install.php:97 upgrade.php:97
 msgid "Please CHMOD or CHOWN the installation directory to make it writable."
 msgstr ""
 "Bitte führe CHMOD oder CHOWN auf dem Installationspfad aus um es "
 "beschreibbar zu machen."
 
-#: install.php:101 upgrade.php:88
+#: install.php:101 upgrade.php:101
 msgid ""
 "Please CHMOD or CHOWN the <em>includes</em> directory to make it writable."
 msgstr ""
 "Bitte führe CHMOD oder CHOWN auf dem <em>includes</em> Ordner aus um es "
 "beschreibbar zu machene."
 
-#: install.php:105 upgrade.php:92
+#: install.php:105 upgrade.php:105
 msgid ""
 "Please CHMOD or CHOWN the <em>caches</em> directory to make it writable."
 msgstr ""
 "Bitte führe CHMOD oder CHOWN auf dem <em>caches</em> Ordner aus um es "
 "beschreibbar zu machen."
 
-#: install.php:151
+#: install.php:164
 msgid "Chyrp Lite Installer"
 msgstr "Chyrp Lite Installer"
 
-#: install.php:492
+#: install.php:505
 msgid "Database cannot be blank."
 msgstr "Datenbank kann nicht leer sein."
 
-#: install.php:500
+#: install.php:513
 msgid "Please enter a name for your website."
 msgstr "Gib bitte einen Namen für den Blog ein."
 
-#: install.php:503
+#: install.php:516
 msgid "Time zone cannot be blank."
 msgstr "Die Zeitzone kann nicht leer sein."
 
-#: install.php:506
+#: install.php:519
 msgid "Language cannot be blank."
 msgstr "Sprache kann nicht leer sein."
 
-#: install.php:522
+#: install.php:535
 msgid "MySQLi or PDO is required for database access."
 msgstr "MySQLi oder PDO wird für den Datenbankzugriff benötigt."
 
-#: install.php:528
+#: install.php:541
 msgid "Could not determine the absolute path to the SQLite database."
 msgstr ""
 "Der absolute Pfad zur SQLite Datenbank konnte nicht festgestellt werden."
 
-#: install.php:535
+#: install.php:548
 msgid "Please make the SQLite database writable by the server."
 msgstr "Bitte mache die SQLite Datenbank vom Server beschreibbar."
 
-#: install.php:539
+#: install.php:552
 msgid "Please enter a username and password for the MySQL database."
 msgstr ""
 "Bitte gib einen Benutzernamen und ein Passwort für die MySQL Datenbank ein."
 
-#: install.php:754 upgrade.php:105 upgrade.php:118 upgrade.php:131
-#: upgrade.php:144 upgrade.php:157 upgrade.php:171 upgrade.php:197
-#: upgrade.php:210 upgrade.php:224 upgrade.php:258 upgrade.php:271
+#: install.php:767 upgrade.php:118 upgrade.php:131 upgrade.php:144
+#: upgrade.php:157 upgrade.php:170 upgrade.php:184 upgrade.php:210
+#: upgrade.php:223 upgrade.php:237 upgrade.php:271 upgrade.php:284
 msgid "Could not write the configuration file."
 msgstr "Konfigurationsdatei konnte nicht geschrieben werden."
 
-#: install.php:771
+#: install.php:784
 msgid "Database Setup"
 msgstr "Datenbank Setup"
 
-#: install.php:773
+#: install.php:786
 msgid "Adapter"
 msgstr "Adapter"
 
-#: install.php:784
+#: install.php:797
 msgid "Host"
 msgstr "Host"
 
-#: install.php:788 install.php:847
+#: install.php:801 install.php:860
 msgid "Username"
 msgstr "Benutzername"
 
-#: install.php:792 install.php:851 install.php:855
+#: install.php:805 install.php:864 install.php:868
 msgid "Password"
 msgstr "Passwort"
 
-#: install.php:796
+#: install.php:809
 msgid "Database"
 msgstr "Datenbank"
 
-#: install.php:798
+#: install.php:811
 msgid "(absolute or relative path)"
 msgstr "(absoluter oder relativer Pfad)"
 
-#: install.php:804
+#: install.php:817
 msgid ""
 "Be sure to put your SQLite database outside the document root directory, "
 "otherwise visitors will be able to download it."
@@ -1425,124 +1425,124 @@ msgstr ""
 "Bitte stelle sicher, dass die SQLite Datenbank außerhalb des "
 "Webserververzeichnisses ist, so dass Benutzer sie nicht herunterladen können."
 
-#: install.php:807
+#: install.php:820
 msgid "Table Prefix"
 msgstr "Tabellenpräfix"
 
-#: install.php:807
+#: install.php:820
 msgid "(optional)"
 msgstr "(optional)"
 
-#: install.php:811
+#: install.php:824
 msgid "Website Setup"
 msgstr "Website Setup"
 
-#: install.php:813
+#: install.php:826
 msgid "Chyrp URL"
 msgstr "Chyrp URL"
 
-#: install.php:817
+#: install.php:830
 msgid "Site Name"
 msgstr "Blogname"
 
-#: install.php:818
+#: install.php:831
 msgid "My Awesome Site"
 msgstr "Meine coole Seite"
 
-#: install.php:821
+#: install.php:834
 msgid "Description"
 msgstr "Beschreibung"
 
-#: install.php:825
+#: install.php:838
 msgid "Time Zone"
 msgstr "Zeitzone"
 
-#: install.php:835
+#: install.php:848
 msgid "Language"
 msgstr "Sprache"
 
-#: install.php:845
+#: install.php:858
 msgid "Admin Account"
 msgstr "Admin Account"
 
-#: install.php:855
+#: install.php:868
 msgid "(again)"
 msgstr "(nochmal)"
 
-#: install.php:859
+#: install.php:872
 msgid "Email Address"
 msgstr "E-Mail Addresse"
 
-#: install.php:862
+#: install.php:875
 msgid "Install me!"
 msgstr "Installieren!"
 
-#: install.php:865
+#: install.php:878
 msgid "Installation Complete"
 msgstr "Installation vollständig"
 
-#: install.php:866 upgrade.php:539
+#: install.php:879 upgrade.php:552
 msgid "What now?"
 msgstr "Und weiter?"
 
-#: install.php:868
+#: install.php:881
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr "Lösche die <em>install.php</em>. Die brauchst Du nicht mehr."
 
-#: install.php:869
+#: install.php:882
 msgid "Log in to your site and configure things to your liking."
 msgstr ""
 "Logge Dich auf deiner Seite ein und passe die Dinge deiner Vorstellung an."
 
-#: install.php:871 upgrade.php:545
+#: install.php:884 upgrade.php:558
 msgid "Take me to my site!"
 msgstr "Bring mich zur Seite!"
 
-#: upgrade.php:241
+#: upgrade.php:254
 msgid "The <em>.htaccess</em> file cannot be configured."
 msgstr ""
 
-#: upgrade.php:245
+#: upgrade.php:258
 msgid "You might need to update your canonical URL's <em>.htaccess</em> file."
 msgstr ""
 
-#: upgrade.php:282
+#: upgrade.php:295
 msgid "Chyrp Lite Upgrader"
 msgstr "Chyrp Lite Upgrader"
 
-#: upgrade.php:528
+#: upgrade.php:541
 msgid "Halt!"
 msgstr "Halt!"
 
-#: upgrade.php:529
+#: upgrade.php:542
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr "Bitte beachte diese Vorsichtsmaßnahmen bevor Du das Upgrade ausführst:"
 
-#: upgrade.php:531
+#: upgrade.php:544
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr ""
 "<strong>Erstelle ein Backup Deiner Datenbank bevor Du fortfährst!</strong>"
 
-#: upgrade.php:532
+#: upgrade.php:545
 msgid "Tell your users that your site is offline for maintenance."
 msgstr "Sag Deinen Besuchern Bescheid, dass diese Seite offline sein wird."
 
-#: upgrade.php:535
+#: upgrade.php:548
 msgid "Upgrade me!"
 msgstr "Upgrade!"
 
-#: upgrade.php:538
+#: upgrade.php:551
 msgid "Upgrade Complete"
 msgstr "Upgrade vollständig"
 
-#: upgrade.php:541
+#: upgrade.php:554
 msgid "Take action to resolve any errors reported on this page."
 msgstr "Bitte löse alle auf dieser Seite stehenden Fehler."
 
-#: upgrade.php:542
+#: upgrade.php:555
 msgid "Run this upgrader again if you need to."
 msgstr "Führe diesen Upgrader erneut aus, wenn es benötigt wird."
 
-#: upgrade.php:543
+#: upgrade.php:556
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr "Lösche <em>upgrade.php</em>, wenn du fertig mit dem Upgraden bist."

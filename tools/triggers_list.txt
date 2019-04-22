@@ -434,7 +434,7 @@ Arguments:
 update_group
 ------------
 Called from:
-	includes/model/Group.php on line 193
+	includes/model/Group.php on line 194
 
 Arguments:
 	$group, $this
@@ -452,7 +452,7 @@ Arguments:
 update_page
 -----------
 Called from:
-	includes/model/Page.php on line 206
+	includes/model/Page.php on line 207
 
 Arguments:
 	$page, $this
@@ -497,7 +497,7 @@ Arguments:
 update_user
 -----------
 Called from:
-	includes/model/User.php on line 167
+	includes/model/User.php on line 168
 
 Arguments:
 	$user, $this
@@ -523,7 +523,7 @@ Arguments:
 update_category
 ---------------
 Called from:
-	modules/categorize/model/Category.php on line 92
+	modules/categorize/model/Category.php on line 93
 
 Arguments:
 	$category, $this
@@ -532,7 +532,7 @@ Arguments:
 delete_category
 ---------------
 Called from:
-	modules/categorize/model/Category.php on line 107
+	modules/categorize/model/Category.php on line 108
 
 Arguments:
 	$category
@@ -596,7 +596,7 @@ Arguments:
 update_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 252
+	modules/comments/model/Comment.php on line 253
 
 Arguments:
 	$comment, $this
@@ -998,7 +998,7 @@ markup_page_title
 -----------------
 Called from:
 	includes/controller/Ajax.php on line 138
-	includes/model/Page.php on line 283
+	includes/model/Page.php on line 284
 
 Target:
 	$content
@@ -1008,7 +1008,7 @@ markup_title
 ------------
 Called from:
 	includes/controller/Ajax.php on line 138
-	includes/model/Page.php on line 283
+	includes/model/Page.php on line 284
 
 Target:
 	$content
@@ -1018,7 +1018,7 @@ markup_page_text
 ----------------
 Called from:
 	includes/controller/Ajax.php on line 142
-	includes/model/Page.php on line 284
+	includes/model/Page.php on line 285
 
 Target:
 	$content
@@ -1028,8 +1028,8 @@ markup_text
 -----------
 Called from:
 	includes/controller/Ajax.php on line 142
-	includes/model/Page.php on line 284
-	modules/comments/model/Comment.php on line 385
+	includes/model/Page.php on line 285
+	modules/comments/model/Comment.php on line 386
 
 Target:
 	$content
@@ -1153,7 +1153,7 @@ Target:
 list_permissions
 ----------------
 Called from:
-	includes/model/Group.php on line 282
+	includes/model/Group.php on line 283
 
 Target:
 	$names
@@ -1189,7 +1189,7 @@ Target:
 filter_page
 -----------
 Called from:
-	includes/model/Page.php on line 278
+	includes/model/Page.php on line 279
 
 Target:
 	$this
@@ -1363,7 +1363,7 @@ Arguments:
 filter_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 382
+	modules/comments/model/Comment.php on line 383
 
 Target:
 	$this
@@ -1372,7 +1372,7 @@ Target:
 markup_comment_text
 -------------------
 Called from:
-	modules/comments/model/Comment.php on line 385
+	modules/comments/model/Comment.php on line 386
 
 Target:
 	$this->body
