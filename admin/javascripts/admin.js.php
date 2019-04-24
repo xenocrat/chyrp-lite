@@ -80,7 +80,7 @@ function validate_url() {
 }
 // Tests the strength of #password1 and compares #password1 to #password2.
 function validate_passwords() {
-    passwords = $("input[type='password']").filter(function(index) {
+    var passwords = $("input[type='password']").filter(function(index) {
         var id = $(this).attr("id");
         return (!!id) ? id.match(/password[1-2]$/) : false ;
     });
@@ -287,7 +287,8 @@ var Settings = {
 
         $("form#route_settings input[name='post_url']").on("keyup", function(e) {
             $("form#route_settings code.syntax").each(function(){
-                regexp = new RegExp("(/?|^)" + $(this).text() + "(/?|$)", "g");
+                var syntax = $(this).html();
+                var regexp = new RegExp("(/?|^)" + escapeRegExp(syntax) + "(/?|$)", "g");
 
                 if ($(e.target).val().match(regexp))
                     $(this).addClass("tag_added");

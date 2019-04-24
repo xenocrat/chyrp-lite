@@ -737,19 +737,21 @@ div.confirmation a.button + button,
 div.confirmation button + button {
     margin-left: 1rem;
 }
-a.tag {
+*.tag {
     display: inline-block;
     margin-top: 0.5rem;
     padding: 0px 2px;
-    text-decoration: none;
     padding: 0em 0.25em;
     white-space: nowrap;
     border-radius: 0.25em;
     border: 1px solid #dfdfdf;
     background-color: #efefef;
 }
-a.tag_added,
-code.tag_added {
+*.tag:link,
+*.tag:visited {
+    text-decoration: none;
+}
+*.tag_added {
     background-color: #fffecd;
     border-color: #e5d7a1;
 }
