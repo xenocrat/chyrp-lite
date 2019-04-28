@@ -138,9 +138,19 @@ final class TemplateWrapper
     /**
      * @return string
      */
-    public function getTemplatename()
+    public function getTemplateName()
     {
         return $this->template->getTemplateName();
+    }
+
+    /**
+     * @internal
+     *
+     * @return Template
+     */
+    public function unwrap()
+    {
+        return $this->template;
     }
 }
 
