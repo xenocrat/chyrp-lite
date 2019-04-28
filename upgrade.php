@@ -80,7 +80,7 @@
         static $log = array();
 
         if (isset($message))
-            $log[] = $message;
+            $log[] = (string) $message;
 
         return empty($log) ? null : $log ;
     }
