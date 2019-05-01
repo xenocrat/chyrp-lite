@@ -887,7 +887,9 @@ article img {
         margin: 0em;
         padding: 0em;
         background-color: #fcfbfa;
+        border-right: none;
         border-bottom: none;
+        border-left: none;
         border-radius: 0em;
     }
     ul.tail_nav.mobile_nav li {
