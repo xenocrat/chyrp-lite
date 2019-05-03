@@ -245,7 +245,8 @@ var Write = {
             "role": "region",
         }).addClass("iframe_background").append(
             [$("<iframe>", {
-                "name": uid
+                "name": uid,
+                "sandbox": "allow-same-origin"
             }).addClass("iframe_foreground").loader().on("load", function() {
                 if (!!this.contentWindow.location && this.contentWindow.location != "about:blank")
                     $(this).loader(true);
