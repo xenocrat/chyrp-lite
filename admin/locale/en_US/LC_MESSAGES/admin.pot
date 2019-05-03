@@ -187,12 +187,12 @@ msgid "Are you sure you want to proceed?"
 msgstr ""
 
 #: admin/javascripts/admin.js.php:155
-#: admin/javascripts/admin.js.php:257
+#: admin/javascripts/admin.js.php:258
 msgid "Close"
 msgstr ""
 
 #: admin/javascripts/admin.js.php:162
-#: admin/javascripts/admin.js.php:264
+#: admin/javascripts/admin.js.php:265
 msgid "close"
 msgstr ""
 
