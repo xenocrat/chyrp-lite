@@ -144,7 +144,8 @@ var Help = {
             "role": "region",
         }).addClass("iframe_background").append(
             [$("<iframe>", {
-                "src": href
+                "src": href,
+                "sandbox": "allow-same-origin allow-popups allow-popups-to-escape-sandbox"
             }).addClass("iframe_foreground").loader().on("load", function() {
                 $(this).loader(true);
             }),
@@ -246,7 +247,7 @@ var Write = {
         }).addClass("iframe_background").append(
             [$("<iframe>", {
                 "name": uid,
-                "sandbox": "allow-same-origin"
+                "sandbox": "allow-same-origin allow-popups allow-popups-to-escape-sandbox"
             }).addClass("iframe_foreground").loader().on("load", function() {
                 if (!!this.contentWindow.location && this.contentWindow.location != "about:blank")
                     $(this).loader(true);
