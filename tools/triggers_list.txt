@@ -347,25 +347,25 @@ Arguments:
 visitor_authenticate
 --------------------
 Called from:
-	includes/helpers.php on line 562
+	includes/helpers.php on line 568
 
 
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 1939
+	includes/helpers.php on line 1945
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 1956
+	includes/helpers.php on line 1962
 
 
 send_correspondence
 -------------------
 Called from:
-	includes/helpers.php on line 2128
+	includes/helpers.php on line 2134
 
 Arguments:
 	$action, $params
@@ -1047,7 +1047,7 @@ Target:
 keyword_search
 --------------
 Called from:
-	includes/helpers.php on line 792
+	includes/helpers.php on line 798
 
 Target:
 	$search
@@ -1059,7 +1059,7 @@ Arguments:
 link_regexp
 -----------
 Called from:
-	includes/helpers.php on line 1352
+	includes/helpers.php on line 1358
 
 Target:
 	$expressions
@@ -1068,7 +1068,7 @@ Target:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 2069
+	includes/helpers.php on line 2075
 
 Target:
 	$function
