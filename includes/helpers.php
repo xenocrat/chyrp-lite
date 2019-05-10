@@ -14,8 +14,10 @@
      *
      * Parameters:
      *     $domain - The cookie domain (optional).
+     *     $secure - Tell the user agent to send the cookie only over HTTPS?
+     *     $lifetime - The lifetime of the cookie in seconds (optional).
      */
-    function session($domain = "") {
+    function session($domain = "", $secure = null, $lifetime = 2592000) {
         session_set_save_handler(array("Session", "open"),
                                  array("Session", "close"),
                                  array("Session", "read"),
@@ -23,10 +25,14 @@
                                  array("Session", "destroy"),
                                  array("Session", "gc"));
 
-        $parsed = parse_url(Config::current()->url, PHP_URL_HOST);
-        $domain = oneof($domain, $parsed, $_SERVER['SERVER_NAME']);
+        $parsed = parse_url(Config::current()->url);
+        fallback($parsed["scheme"], "http");
+        fallback($parsed["host"], $_SERVER['SERVER_NAME']);
 
-        session_set_cookie_params(60 * 60 * 24 * 30, "/", $domain, false, true);
+        if (!is_bool($secure))
+            $secure = ($parsed["scheme"] == "https");
+
+        session_set_cookie_params($lifetime, "/", oneof($domain, $parsed["host"]), $secure, true);
         session_name("ChyrpSession");
         session_register_shutdown();
         session_start();
