@@ -1,4 +1,6 @@
-[English](README.md)
+#### README:
+* [English](README.md)
+* [Italiano](README_it_IT.md)
 
 ## Chyrp Lite能为我做什么？
 
