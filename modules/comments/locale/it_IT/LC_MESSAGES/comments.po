@@ -140,7 +140,7 @@ msgstr "Gestisci commenti"
 #: modules/comments/comments.php:448 modules/comments/comments.php:471
 #: modules/comments/comments.php:479 modules/comments/info.php:3
 msgid "Comments"
-msgstr "%s commenti"
+msgstr "Commenti"
 
 #: modules/comments/admin/pages/manage_comments.twig:24
 #: modules/comments/admin/pages/manage_spam.twig:24
