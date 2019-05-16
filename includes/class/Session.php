@@ -9,7 +9,7 @@
         static $data = "";
 
         # Boolean: $deny
-        # Deny this session?
+        # Deny session storage?
         static $deny = false;
 
         /**
