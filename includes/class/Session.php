@@ -1,23 +1,23 @@
 <?php
     /**
      * Class: Session
-     * Handles their session.
+     * Handles visitor sessions.
      */
-    class Session {
+    class Session implements SessionHandlerInterface {
         # Variable: $data
         # Caches session data.
-        static $data = "";
+        public $data = "";
 
         # Boolean: $deny
         # Deny session storage?
-        static $deny = false;
+        public $deny = false;
 
         /**
          * Function: open
-         * Decides if the session should be denied.
+         * Opens the session and decides if session storage should be denied.
          */
-        static function open() {
-            self::$deny = (isset($_SERVER['HTTP_USER_AGENT']) and
+        public function open($path, $name) {
+            $this->deny = (isset($_SERVER['HTTP_USER_AGENT']) and
                            preg_match("/(bot|crawler|slurp|spider)\b/i", $_SERVER['HTTP_USER_AGENT']));
 
             return true;
@@ -25,39 +25,38 @@
 
         /**
          * Function: close
-         *
-         * Returns: @true@
+         * Executed when the session is closed.
          */
-        static function close() {
+        public function close() {
             return true;
         }
 
         /**
          * Function: read
-         * Reads their session from the database.
+         * Reads a session from the database.
          *
          * Parameters:
          *     $id - Session ID.
          */
-        static function read($id) {
-            self::$data = SQL::current()->select("sessions",
+        public function read($id) {
+            $this->data = SQL::current()->select("sessions",
                                                  "data",
                                                  array("id" => $id),
                                                  "id")->fetchColumn();
 
-            return !empty(self::$data) ? self::$data : "" ;
+            return !empty($this->data) ? $this->data : "" ;
         }
 
         /**
          * Function: write
-         * Writes their session to the database.
+         * Writes a session to the database.
          *
          * Parameters:
          *     $id - Session ID.
          *     $data - Data to write.
          */
-        static function write($id, $data) {
-            if (!self::$deny and !empty($data) and $data != self::$data)
+        public function write($id, $data) {
+            if (!$this->deny and !empty($data) and $data != $this->data)
                 SQL::current()->replace("sessions",
                                         array("id"),
                                         array("id" => $id,
@@ -70,21 +69,21 @@
 
         /**
          * Function: destroy
-         * Destroys their session.
+         * Destroys a session in the database.
          *
          * Parameters:
          *     $id - Session ID.
          */
-        static function destroy($id) {
+        public function destroy($id) {
             SQL::current()->delete("sessions", array("id" => $id));
             return true;
         }
 
         /**
          * Function: gc
-         * Garbage collector. Removes sessions older than 30 days and sessions with no stored data.
+         * Removes sessions older than 30 days and sessions with no stored data.
          */
-        static function gc() {
+        public function gc($lifetime) {
             SQL::current()->delete("sessions",
                                    "created_at <= :thirty_days OR data = '' OR data IS NULL",
                                    array(":thirty_days" => datetime(strtotime("-30 days"))));
