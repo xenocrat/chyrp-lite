@@ -13,17 +13,11 @@
      * Begins Chyrp's custom session storage whatnots.
      *
      * Parameters:
-     *     $domain - The cookie domain (optional).
-     *     $secure - Tell the user agent to send the cookie only over HTTPS?
-     *     $lifetime - The lifetime of the cookie in seconds (optional).
+     *     $secure - Send the cookie only over HTTPS?
      */
-    function session($domain = "", $secure = null, $lifetime = 2592000) {
-        session_set_save_handler(array("Session", "open"),
-                                 array("Session", "close"),
-                                 array("Session", "read"),
-                                 array("Session", "write"),
-                                 array("Session", "destroy"),
-                                 array("Session", "gc"));
+    function session($secure = null) {
+        $handler = new Session();
+        session_set_save_handler($handler, true);
 
         $parsed = parse_url(Config::current()->url);
         fallback($parsed["scheme"], "http");
@@ -32,9 +26,8 @@
         if (!is_bool($secure))
             $secure = ($parsed["scheme"] == "https");
 
-        session_set_cookie_params($lifetime, "/", oneof($domain, $parsed["host"]), $secure, true);
+        session_set_cookie_params(2592000, "/", $parsed["host"], $secure, true);
         session_name("ChyrpSession");
-        session_register_shutdown();
         session_start();
     }
 
