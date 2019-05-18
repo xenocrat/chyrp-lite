@@ -6,15 +6,15 @@
     class Session implements SessionHandlerInterface {
         # Variable: $data
         # Caches session data.
-        public $data = "";
+        private $data = "";
 
         # Boolean: $deny
         # Deny session storage?
-        public $deny = false;
+        private $deny = false;
 
         /**
          * Function: open
-         * Opens the session and decides if session storage should be denied.
+         * Opens the session and decides if session storage will be denied.
          */
         public function open($path, $name) {
             $this->deny = (isset($_SERVER['HTTP_USER_AGENT']) and
