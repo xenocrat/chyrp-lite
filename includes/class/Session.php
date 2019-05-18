@@ -6,7 +6,11 @@
     class Session implements SessionHandlerInterface {
         # Variable: $data
         # Caches session data.
-        private $data = "";
+        private $data = null;
+
+        # Variable: $created_at
+        # Session creation date.
+        private $created_at = null;
 
         # Boolean: $deny
         # Deny session storage?
@@ -15,6 +19,10 @@
         /**
          * Function: open
          * Opens the session and decides if session storage will be denied.
+         *
+         * Parameters:
+         *     $path - Filesystem path.
+         *     $name - The session name.
          */
         public function open($path, $name) {
             $this->deny = (isset($_SERVER['HTTP_USER_AGENT']) and
@@ -39,12 +47,16 @@
          *     $id - Session ID.
          */
         public function read($id) {
-            $this->data = SQL::current()->select("sessions",
-                                                 "data",
-                                                 array("id" => $id),
-                                                 "id")->fetchColumn();
+            $result = SQL::current()->select("sessions",
+                                             "data, created_at",
+                                             array("id" => $id))->fetch();
 
-            return !empty($this->data) ? $this->data : "" ;
+            if (!empty($result)) {
+                $this->data = $result["data"];
+                $this->created_at = $result["created_at"];
+            }
+
+            return isset($this->data) ? $this->data : "" ;
         }
 
         /**
@@ -56,20 +68,24 @@
          *     $data - Data to write.
          */
         public function write($id, $data) {
-            if (!$this->deny and !empty($data) and $data != $this->data)
-                SQL::current()->replace("sessions",
-                                        array("id"),
-                                        array("id" => $id,
-                                              "data" => $data,
-                                              "user_id" => Visitor::current()->id,
-                                              "updated_at" => datetime()));
+            $sql = SQL::current();
+            $visitor = Visitor::current();
+
+            if (!$this->deny and isset($data) and $data != $this->data)
+                $sql->replace("sessions",
+                              array("id"),
+                              array("id" => $id,
+                                    "data" => $data,
+                                    "user_id" => $visitor->id,
+                                    "created_at" => fallback($this->created_at, datetime()),
+                                    "updated_at" => datetime()));
 
             return true;
         }
 
         /**
          * Function: destroy
-         * Destroys a session in the database.
+         * Deletes a session from the database.
          *
          * Parameters:
          *     $id - Session ID.
@@ -81,11 +97,14 @@
 
         /**
          * Function: gc
-         * Removes sessions older than 30 days and sessions with no stored data.
+         * Deletes sessions not updated for 30+ days, or with no stored data.
+         *
+         * Parameters:
+         *     $lifetime - The configured maximum session lifetime in seconds.
          */
         public function gc($lifetime) {
             SQL::current()->delete("sessions",
-                                   "created_at <= :thirty_days OR data = '' OR data IS NULL",
+                                   "updated_at <= :thirty_days OR data = '' OR data IS NULL",
                                    array(":thirty_days" => datetime(strtotime("-30 days"))));
 
             return true;
