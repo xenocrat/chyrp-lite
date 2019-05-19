@@ -25,6 +25,7 @@
          *     $name - The session name.
          */
         public function open($path, $name) {
+            $this->created_at = datetime();
             $this->deny = (isset($_SERVER['HTTP_USER_AGENT']) and
                            preg_match("/(bot|crawler|slurp|spider)\b/i", $_SERVER['HTTP_USER_AGENT']));
 
@@ -77,7 +78,7 @@
                               array("id" => $id,
                                     "data" => $data,
                                     "user_id" => $visitor->id,
-                                    "created_at" => fallback($this->created_at, datetime()),
+                                    "created_at" => $this->created_at,
                                     "updated_at" => datetime()));
 
             return true;
