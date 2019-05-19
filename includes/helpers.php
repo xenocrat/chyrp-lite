@@ -29,6 +29,7 @@
         session_set_cookie_params(2592000, "/", $parsed["host"], $secure, true);
         session_name("ChyrpSession");
         session_start();
+        setcookie(session_name(), session_id(), time() + 2592000, "/", $parsed["host"], $secure, true);
     }
 
     /**
@@ -77,8 +78,7 @@
      *     $url - The absolute or relative URL to redirect to.
      */
     function redirect($url) {
-        # Ask the current controller to translate relative URLs.
-        if (file_exists(INCLUDES_DIR.DIR."config.json.php") and class_exists("Route") and !substr_count($url, "://"))
+        if (class_exists("Route") and !substr_count($url, "://"))
             $url = url($url);
 
         header("Location: ".unfix($url, true));
