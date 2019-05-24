@@ -534,7 +534,7 @@
         if (!class_exists("MySQLi") and !class_exists("PDO"))
             alert(__("MySQLi or PDO is required for database access."));
 
-        if (!alert()) and $_POST['adapter'] == "sqlite") {
+        if (!alert() and $_POST['adapter'] == "sqlite") {
             $realpath = realpath(dirname($_POST['database']));
 
             if ($realpath === false)
@@ -543,15 +543,15 @@
                 $_POST['database'] = $realpath.DIR.basename($_POST['database']);
         }
 
-        if (!alert()) and $_POST['adapter'] == "sqlite")
+        if (!alert() and $_POST['adapter'] == "sqlite")
             if (!is_writable(dirname($_POST['database'])))
                 alert(__("Please make the SQLite database writable by the server."));
 
-        if (!alert()) and $_POST['adapter'] == "mysql")
+        if (!alert() and $_POST['adapter'] == "mysql")
             if (empty($_POST['username']) or empty($_POST['password']))
                 alert(__("Please enter a username and password for the MySQL database."));
 
-        if (!alert())) {
+        if (!alert()) {
             # Build the SQL settings based on user input.
             $settings = ($_POST['adapter'] == "sqlite") ?
                 array("host"     => "",
