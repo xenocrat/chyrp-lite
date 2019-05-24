@@ -29,7 +29,9 @@
         session_set_cookie_params(2592000, "/", $parsed["host"], $secure, true);
         session_name("ChyrpSession");
         session_start();
-        setcookie(session_name(), session_id(), time() + 2592000, "/", $parsed["host"], $secure, true);
+
+        if (isset($_COOKIE['ChyrpSession']))
+            setcookie(session_name(), session_id(), time() + 2592000, "/", $parsed["host"], $secure, true);
     }
 
     /**
