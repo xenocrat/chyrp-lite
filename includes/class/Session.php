@@ -26,8 +26,8 @@
          */
         public function open($path, $name) {
             $this->created_at = datetime();
-            $this->deny = (isset($_SERVER['HTTP_USER_AGENT']) and
-                           preg_match("/(bot|crawler|slurp|spider)\b/i", $_SERVER['HTTP_USER_AGENT']));
+            $this->deny = (XML_RPC or (isset($_SERVER['HTTP_USER_AGENT']) and
+                           preg_match("/(bot|crawler|slurp|spider)\b/i", $_SERVER['HTTP_USER_AGENT'])));
 
             return true;
         }
