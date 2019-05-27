@@ -382,7 +382,3 @@
         header("Vary: Accept-Encoding, Cookie");
         header("X-Pingback: ".$config->chyrp_url."/includes/rpc.php");
     }
-
-    # Upgrade future requests if the canonical URL is HTTPS.
-    if (substr_count($config->url, "https://"))
-        header("Strict-Transport-Security: max-age=31536000");
