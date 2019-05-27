@@ -1273,11 +1273,12 @@
      *     $url - The URL of the resource to be retrieved.
      *     $redirects - The maximum number of redirects to follow.
      *     $timeout - The maximum number of seconds to wait.
+     *     $headers - Include response headers with the content?
      *
      * Returns:
      *     The response content from the remote site.
      */
-    function get_remote($url, $redirects = 0, $timeout = 10) {
+    function get_remote($url, $redirects = 0, $timeout = 10, $headers = false) {
         extract(parse_url(add_scheme($url)), EXTR_SKIP);
         fallback($path, "/");
         fallback($scheme, "http");
@@ -1322,7 +1323,7 @@
 
             if (is_url($location)) {
                 fclose($connect);
-                return get_remote($location, $redirects - 1, $timeout);
+                return get_remote($location, $redirects - 1, $timeout, $headers);
             }
         }
 
@@ -1331,7 +1332,7 @@
             $remote_content.= fgets($connect);
 
         fclose($connect);
-        return $remote_content;
+        return ($headers) ? $remote_headers.$remote_content : $remote_content ;
     }
 
     /**
