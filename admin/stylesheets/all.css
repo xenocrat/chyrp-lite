@@ -652,7 +652,7 @@ a.prev_page {
     margin: 0em;
     padding: 0.4em 0.6em;
     background-color: #f2fbff;
-    border: 1px solid #b8cdd9;
+    border: 2px solid #b8cdd9;
     border-radius: 0.3em;
     cursor: pointer;
     text-decoration: none;
@@ -682,7 +682,7 @@ button.boo,
 a.button.boo {
     color: #3e3634;
     background-color: #faebe4;
-    border: 1px solid #d6bdb5;
+    border: 2px solid #d6bdb5;
 }
 button.boo:hover,
 a.button.boo:hover,
@@ -696,7 +696,7 @@ button.yay,
 a.button.yay {
     color: #363e34;
     background-color: #ebfae4;
-    border: 1px solid #bdd6b5;
+    border: 2px solid #bdd6b5;
 }
 button.yay:hover,
 a.button.yay:hover,
