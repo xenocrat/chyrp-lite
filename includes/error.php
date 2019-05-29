@@ -308,7 +308,7 @@
                 margin: 1rem 0rem;
                 padding: 0.4em 0.6em;
                 background-color: #f2fbff;
-                border: 1px solid #b8cdd9;
+                border: 2px solid #b8cdd9;
                 border-radius: 0.3em;
                 cursor: pointer;
             }
