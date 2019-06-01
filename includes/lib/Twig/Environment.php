@@ -41,10 +41,10 @@ use Twig\TokenParser\TokenParserInterface;
  */
 class Environment
 {
-    const VERSION = '1.41.0';
-    const VERSION_ID = 14100;
+    const VERSION = '1.42.0';
+    const VERSION_ID = 14200;
     const MAJOR_VERSION = 1;
-    const MINOR_VERSION = 41;
+    const MINOR_VERSION = 42;
     const RELEASE_VERSION = 0;
     const EXTRA_VERSION = '';
 

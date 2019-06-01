@@ -1696,11 +1696,8 @@ function twig_array_filter($array, $arrow)
         return array_filter($array, $arrow);
     }
 
-    while ($array instanceof \IteratorAggregate) {
-        $array = $array->getIterator();
-    }
-
-    return new \CallbackFilterIterator($array, $arrow);
+    // the IteratorIterator wrapping is needed as some internal PHP classes are \Traversable but do not implement \Iterator
+    return new \CallbackFilterIterator(new \IteratorIterator($array), $arrow);
 }
 
 function twig_array_map($array, $arrow)
