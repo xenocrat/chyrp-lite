@@ -40,7 +40,10 @@
          * Validates the XML dataset.
          */
         private static function validate($xml) {
-            if ($xml === false or !isset($xml->channel->item))
+            if (!$xml instanceof SimpleXMLElement)
+                return false;
+
+            if (!isset($xml->channel->item))
                 return false;
 
             foreach ($xml->channel->item as $item)
