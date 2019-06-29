@@ -9,7 +9,7 @@
 {% if visitor.group.can("add_post", "add_draft", "add_page") %}
 <p>
 <label for="uploads">{{ "Bulk File Upload" | translate }}</label>
-<input type="file" name="uploads" value="" id="uploads" multiple>
+<input type="file" name="uploads[]" multiple value="" id="uploads">
 </p>
 {% endif %}
 {% if visitor.group.can("add_post") %}
