@@ -1812,8 +1812,9 @@
      *     A sanitized unique version of the supplied filename.
      */
     function upload_filename($filename, $filter = array()) {
-        foreach ($filter as &$entry)
-            $entry = preg_quote($entry, "/");
+        if (!empty($filter))
+            foreach ($filter as &$entry)
+                $entry = preg_quote($entry, "/");
 
         $patterns = !empty($filter) ? implode("|", $filter) : "tar\.[a-z0-9]+|[a-z0-9]+" ;
         $disallow = "htaccess|php|php3|php4|php5|php7|phps|phtml|shtml|shtm|stm|cgi|asp|aspx";
@@ -1850,8 +1851,9 @@
         $config = Config::current();
         $uploads = array();
 
-        foreach ($filter as &$entry)
-            $entry = preg_quote($entry, "/");
+        if (!empty($filter))
+            foreach ($filter as &$entry)
+                $entry = preg_quote($entry, "/");
 
         $patterns = !empty($filter) ? implode("|", $filter) : ".*" ;
         $dir = new DirectoryIterator(MAIN_DIR.$config->uploads_path);
