@@ -217,7 +217,7 @@
 
                 if (preg_match("/^[a-z]{2}(_|-)[a-z]{2}$/i", $dirname))
                     $locales[] = array("code" => $dirname,
-                                       "name" => lang_code($dirname));      
+                                       "name" => lang_code($dirname));
             }
         }
 
@@ -1812,9 +1812,10 @@
      *     A sanitized unique version of the supplied filename.
      */
     function upload_filename($filename, $filter = array()) {
-        $patterns = !empty($filter) ?
-            implode("|", array_map("preg_quote", $filter)) : "tar\.[a-z0-9]+|[a-z0-9]+" ;
+        foreach ($filter as &$entry)
+            $entry = preg_quote($entry, "/");
 
+        $patterns = !empty($filter) ? implode("|", $filter) : "tar\.[a-z0-9]+|[a-z0-9]+" ;
         $disallow = "htaccess|php|php3|php4|php5|php7|phps|phtml|shtml|shtm|stm|cgi|asp|aspx";
 
         # Extract the file's basename and extension, disallow harmful extensions.
