@@ -319,7 +319,7 @@
 
         /**
          * Function: manage_posts
-         * Post managing.
+         * Post management.
          */
         public function manage_posts() {
             if (!Post::any_editable() and !Post::any_deletable())
@@ -555,7 +555,7 @@
 
         /**
          * Function: manage_pages
-         * Page managing.
+         * Page management.
          */
         public function manage_pages() {
             $visitor = Visitor::current();
@@ -853,7 +853,7 @@
 
         /**
          * Function: manage_users
-         * User managing.
+         * User management.
          */
         public function manage_users() {
             $visitor = Visitor::current();
@@ -1083,7 +1083,7 @@
 
         /**
          * Function: manage_groups
-         * Group managing.
+         * Group management.
          */
         public function manage_groups() {
             $visitor = Visitor::current();
@@ -1370,6 +1370,21 @@
 
                 if (!is_array($imports["users"]))
                     Flash::warning(__("Users export file is invalid."), "import");
+            }
+
+            if (isset($_FILES['uploads']) and upload_tester($_FILES['uploads'])) {
+                $imports["uploads"] = array();
+
+                if (is_array($_FILES['uploads']['name'])) {
+                    for ($i = 0; $i < count($_FILES['uploads']['name']); $i++)
+                        $imports["uploads"][] = upload(array('name' => $_FILES['uploads']['name'][$i],
+                                                             'type' => $_FILES['uploads']['type'][$i],
+                                                             'tmp_name' => $_FILES['uploads']['tmp_name'][$i],
+                                                             'error' => $_FILES['uploads']['error'][$i],
+                                                             'size' => $_FILES['uploads']['size'][$i]));
+                } else {
+                    $imports["uploads"][] = upload($_FILES['uploads']);
+                }
             }
 
             $trigger->filter($imports, "before_import");
