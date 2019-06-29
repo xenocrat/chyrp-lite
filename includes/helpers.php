@@ -1753,7 +1753,7 @@
 
         # Recurse to test multiple uploads file by file using a one-dimensional array.
         if (is_array($file['name'])) {
-            for ($i=0; $i < count($file['name']); $i++)
+            for ($i = 0; $i < count($file['name']); $i++)
                 $results[] = upload_tester(array('name' => $file['name'][$i],
                                                  'type' => $file['type'][$i],
                                                  'tmp_name' => $file['tmp_name'][$i],
