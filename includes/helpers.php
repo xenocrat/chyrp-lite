@@ -206,13 +206,19 @@
         $locales = array(array("code" => "en_US",
                                "name" => lang_code("en_US")));
 
-        if ($open = opendir(INCLUDES_DIR.DIR."locale")) {
-             while (($folder = readdir($open)) !== false)
-                if ($folder != "en_US" and preg_match("/^[a-z]{2}(_|-)[a-z]{2}$/i", $folder))
-                    $locales[] = array("code" => $folder,
-                                       "name" => lang_code($folder));
+        $dir = new DirectoryIterator(INCLUDES_DIR.DIR."locale");
 
-            closedir($open);
+        foreach ($dir as $item) {
+            if (!$item->isDot() and $item->isDir()) {
+                $dirname = $item->getFilename();
+
+                if ($dirname == "en_US")
+                    continue;
+
+                if (preg_match("/^[a-z]{2}(_|-)[a-z]{2}$/i", $dirname))
+                    $locales[] = array("code" => $dirname,
+                                       "name" => lang_code($dirname));      
+            }
         }
 
         return $locales;
