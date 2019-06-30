@@ -34,6 +34,11 @@
 {{ "Users export file will contain the hashed password for each user – keep it safe!" | translate }}
 </small>
 </p>
+<p>
+<label for="uploads">{{ "Uploads Manifest" | translate }}</label>
+<input class="checkbox" type="checkbox" name="uploads" value="" id="uploads" checked="checked">
+<input class="text filter_text" type="text" name="filter_uploads" value="" id="filter_uploads" aria-label="{{ field_aria }}" placeholder="{{ field_aria }}">
+</p>
 {{ trigger.call("export_choose") }}
 <p class="buttons">
 <button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Export" | translate }}</button>

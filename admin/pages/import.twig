@@ -6,12 +6,6 @@
 <h2>{{ "What would you like to import?" | translate }}</h2>
 <form id="import_chyrp_form" class="split" action="{{ url('import') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <fieldset>
-{% if visitor.group.can("add_post", "add_draft", "add_page") %}
-<p>
-<label for="uploads">{{ "Bulk File Upload" | translate }}</label>
-<input type="file" name="uploads[]" multiple value="" id="uploads">
-</p>
-{% endif %}
 {% if visitor.group.can("add_post") %}
 <p>
 <label for="posts_file">{{ "Posts .atom File" | translate }}</label>
@@ -34,6 +28,12 @@
 <p>
 <label for="users_file">{{ "Users .json File" | translate }}</label>
 <input type="file" name="users_file" value="" id="users_file" accept=".json,.js">
+</p>
+{% endif %}
+{% if visitor.group.can("add_post", "add_draft", "add_page") %}
+<p>
+<label for="uploads">{{ "Bulk File Upload" | translate }}</label>
+<input type="file" name="uploads[]" multiple value="" id="uploads">
 </p>
 {% endif %}
 <p>

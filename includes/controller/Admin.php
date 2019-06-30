@@ -1296,6 +1296,13 @@
                 $exports["users.json"] = json_set($users_json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
             }
 
+            if (isset($_POST['uploads'])) {
+                fallback($_POST['filter_uploads'], "");
+
+                $uploads = uploaded_search($_POST['filter_uploads']);
+                $exports["uploads.json"] = json_set($uploads, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+            }
+
             $trigger->filter($exports, "export");
 
             if (empty($exports))
