@@ -127,7 +127,7 @@
         }
 
         public function post_options($fields, $post = null) {
-            $cloud = self::tag_cloud();
+            $cloud = self::tag_cloud(false, "name_asc");
             $names = isset($post->tags) ? array_keys($post->tags) : array();
 
             $selector = "\n".'<span class="tags_select">'."\n";
