@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
+"Last-Translator: \n"
 "Language-Team: Marina Colucci\n"
+"Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
-"Last-Translator: \n"
+"X-Generator: Poedit 2.2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: it_IT\n"
 
 #. Content-Type: text/plain; charset=UTF-8
 #. Copyright 2019 Daniel Pimley and other contributors.
@@ -62,7 +62,7 @@ msgid "Editing Category &#8220;%s&#8221;"
 msgstr "Modifica della categoria &#8220;%s&#8221;"
 
 #: modules/categorize/admin/pages/edit_category.twig:10
-#: modules/categorize/admin/pages/manage_category.twig:27
+#: modules/categorize/admin/pages/manage_category.twig:26
 #: modules/categorize/admin/pages/new_category.twig:10
 msgid "Name"
 msgstr "Titolo"
@@ -79,7 +79,7 @@ msgstr ""
 "Slug è il nome di identificazione URL-compatibile per questa categoria."
 
 #: modules/categorize/admin/pages/edit_category.twig:24
-#: modules/categorize/admin/pages/manage_category.twig:26
+#: modules/categorize/admin/pages/manage_category.twig:25
 #: modules/categorize/admin/pages/new_category.twig:24
 msgid "Listed?"
 msgstr "Elencare?"
@@ -94,7 +94,7 @@ msgid "Update"
 msgstr "Aggiorna"
 
 #: modules/categorize/admin/pages/manage_category.twig:3
-#: modules/categorize/admin/pages/manage_category.twig:22
+#: modules/categorize/admin/pages/manage_category.twig:21
 #: modules/categorize/categorize.php:25
 msgid "Manage Categories"
 msgstr "Gestisci categorie"
@@ -103,7 +103,7 @@ msgstr "Gestisci categorie"
 msgid "Add Category"
 msgstr "Aggiungi categoria"
 
-#: modules/categorize/admin/pages/manage_category.twig:28
+#: modules/categorize/admin/pages/manage_category.twig:27
 msgid "Posts"
 msgstr "Post"
 

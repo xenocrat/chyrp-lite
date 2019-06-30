@@ -44,13 +44,13 @@ Arguments:
 export_choose
 -------------
 Called from:
-	admin/pages/export.twig on line 37
+	admin/pages/export.twig on line 42
 
 
 import_choose
 -------------
 Called from:
-	admin/pages/import.twig on line 42
+	admin/pages/import.twig on line 48
 
 
 manage_groups_column_header
@@ -169,7 +169,7 @@ delete_upload
 Called from:
 	feathers/audio/audio.php on line 92
 	feathers/photo/photo.php on line 93
-	feathers/uploader/uploader.php on line 133
+	feathers/uploader/uploader.php on line 134
 	feathers/video/video.php on line 92
 
 Arguments:
@@ -251,7 +251,7 @@ Called from:
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1405
+	includes/controller/Admin.php on line 1427
 
 Arguments:
 	$group
@@ -260,7 +260,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1429
+	includes/controller/Admin.php on line 1451
 
 Arguments:
 	$user
@@ -269,7 +269,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1467
+	includes/controller/Admin.php on line 1489
 
 Arguments:
 	$entry, $post
@@ -278,7 +278,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1496
+	includes/controller/Admin.php on line 1518
 
 Arguments:
 	$entry, $page
@@ -287,7 +287,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1500
+	includes/controller/Admin.php on line 1522
 
 Arguments:
 	$imports
@@ -296,13 +296,13 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1774
+	includes/controller/Admin.php on line 1796
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1782
+	includes/controller/Admin.php on line 1804
 
 
 can_not_view_page
@@ -347,25 +347,25 @@ Arguments:
 visitor_authenticate
 --------------------
 Called from:
-	includes/helpers.php on line 563
+	includes/helpers.php on line 569
 
 
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 1940
+	includes/helpers.php on line 1985
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 1957
+	includes/helpers.php on line 2002
 
 
 send_correspondence
 -------------------
 Called from:
-	includes/helpers.php on line 2129
+	includes/helpers.php on line 2174
 
 Arguments:
 	$action, $params
@@ -506,7 +506,7 @@ Arguments:
 manage_comments_column_header
 -----------------------------
 Called from:
-	modules/categorize/admin/pages/manage_category.twig on line 29
+	modules/categorize/admin/pages/manage_category.twig on line 28
 	modules/comments/admin/pages/manage_comments.twig on line 28
 	modules/comments/admin/pages/manage_spam.twig on line 27
 
@@ -934,7 +934,7 @@ Arguments:
 export
 ------
 Called from:
-	includes/controller/Admin.php on line 1299
+	includes/controller/Admin.php on line 1306
 
 Target:
 	$exports
@@ -943,7 +943,7 @@ Target:
 before_import
 -------------
 Called from:
-	includes/controller/Admin.php on line 1375
+	includes/controller/Admin.php on line 1397
 
 Target:
 	$imports
@@ -952,7 +952,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 2050
+	includes/controller/Admin.php on line 2072
 
 Target:
 	$write
@@ -961,7 +961,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2079
+	includes/controller/Admin.php on line 2101
 
 Target:
 	$manage
@@ -970,7 +970,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 2104
+	includes/controller/Admin.php on line 2126
 
 Target:
 	$settings
@@ -979,7 +979,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2122
+	includes/controller/Admin.php on line 2144
 
 Target:
 	$extend
@@ -988,7 +988,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2176
+	includes/controller/Admin.php on line 2198
 
 Target:
 	$this->context
@@ -1047,7 +1047,7 @@ Target:
 keyword_search
 --------------
 Called from:
-	includes/helpers.php on line 793
+	includes/helpers.php on line 799
 
 Target:
 	$search
@@ -1059,7 +1059,7 @@ Arguments:
 link_regexp
 -----------
 Called from:
-	includes/helpers.php on line 1353
+	includes/helpers.php on line 1360
 
 Target:
 	$expressions
@@ -1068,7 +1068,7 @@ Target:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 2070
+	includes/helpers.php on line 2115
 
 Target:
 	$function

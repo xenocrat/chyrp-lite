@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Content-Type: text/plain; charset=UTF-8
@@ -513,7 +513,7 @@ msgid "Full Name"
 msgstr "Nome completo"
 
 #: admin/pages/edit_user.twig:36 admin/pages/edit_user.twig:43
-#: admin/pages/general_settings.twig:24 admin/pages/import.twig:35
+#: admin/pages/general_settings.twig:24 admin/pages/import.twig:41
 #: admin/pages/new_user.twig:37 admin/pages/new_user.twig:44
 #: admin/partials/post_fields.twig:30
 msgid "(optional)"
@@ -524,7 +524,7 @@ msgstr "(opzionale)"
 msgid "Website"
 msgstr "Sito web"
 
-#: admin/pages/export.twig:3 admin/pages/export.twig:39
+#: admin/pages/export.twig:3 admin/pages/export.twig:44
 msgid "Export"
 msgstr "Esporta"
 
@@ -559,6 +559,10 @@ msgid ""
 msgstr ""
 "Il file degli utenti conterrà la password contrassegnata da hash per ogni "
 "utente. Tieni il file al sicuro!"
+
+#: admin/pages/export.twig:38
+msgid "Uploads Manifest"
+msgstr "Manifesto per i caricamenti dati"
 
 #: admin/pages/feathers.twig:3 admin/pages/feathers.twig:6
 msgid "Feathers"
@@ -624,7 +628,7 @@ msgstr "Lingua"
 msgid "Check for Updates?"
 msgstr "Verificare la disponibilità di aggiornamenti?"
 
-#: admin/pages/import.twig:3 admin/pages/import.twig:44
+#: admin/pages/import.twig:3 admin/pages/import.twig:50
 msgid "Import"
 msgstr "Importa"
 
@@ -648,11 +652,15 @@ msgstr "File gruppi .json"
 msgid "Users .json File"
 msgstr "File Utenti .json"
 
-#: admin/pages/import.twig:34
+#: admin/pages/import.twig:35
+msgid "Bulk File Upload"
+msgstr "Caricamento dati in blocco"
+
+#: admin/pages/import.twig:40
 msgid "URL for Embedded Media"
 msgstr "URL per I Media incorporati"
 
-#: admin/pages/import.twig:39
+#: admin/pages/import.twig:45
 #, php-format
 msgid "Usually something like <code>%s/uploads/</code>."
 msgstr "Di solito appare come <code>%s/uploads/</code>."

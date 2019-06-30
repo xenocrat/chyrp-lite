@@ -9,11 +9,11 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.2.3\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Content-Type: text/plain; charset=UTF-8
-#. Copyright 2018 Daniel Pimley and other contributors.
+#. Copyright 2019 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/categorize/admin/help/categorizing_posts.twig:3
 #: modules/categorize/admin/help/categorizing_posts.twig:6
@@ -59,7 +59,7 @@ msgid "Editing Category &#8220;%s&#8221;"
 msgstr "编辑类别 &#8220;%s&#8221;"
 
 #: modules/categorize/admin/pages/edit_category.twig:10
-#: modules/categorize/admin/pages/manage_category.twig:27
+#: modules/categorize/admin/pages/manage_category.twig:26
 #: modules/categorize/admin/pages/new_category.twig:10
 msgid "Name"
 msgstr "姓名"
@@ -75,7 +75,7 @@ msgid "The slug is the URL-friendly identifying name for this category."
 msgstr "slug是此类别的URL友好标识名称。"
 
 #: modules/categorize/admin/pages/edit_category.twig:24
-#: modules/categorize/admin/pages/manage_category.twig:26
+#: modules/categorize/admin/pages/manage_category.twig:25
 #: modules/categorize/admin/pages/new_category.twig:24
 msgid "Listed?"
 msgstr "已列出？"
@@ -90,7 +90,7 @@ msgid "Update"
 msgstr "更新"
 
 #: modules/categorize/admin/pages/manage_category.twig:3
-#: modules/categorize/admin/pages/manage_category.twig:22
+#: modules/categorize/admin/pages/manage_category.twig:21
 #: modules/categorize/categorize.php:25
 msgid "Manage Categories"
 msgstr "管理类别"
@@ -99,7 +99,7 @@ msgstr "管理类别"
 msgid "Add Category"
 msgstr "添加类别"
 
-#: modules/categorize/admin/pages/manage_category.twig:28
+#: modules/categorize/admin/pages/manage_category.twig:27
 msgid "Posts"
 msgstr "所有帖子"
 

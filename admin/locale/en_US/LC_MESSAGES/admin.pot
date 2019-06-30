@@ -481,7 +481,7 @@ msgstr ""
 #: admin/pages/edit_user.twig:36
 #: admin/pages/edit_user.twig:43
 #: admin/pages/general_settings.twig:24
-#: admin/pages/import.twig:35
+#: admin/pages/import.twig:41
 #: admin/pages/new_user.twig:37
 #: admin/pages/new_user.twig:44
 #: admin/partials/post_fields.twig:30
@@ -495,7 +495,7 @@ msgid "Website"
 msgstr ""
 
 #: admin/pages/export.twig:3
-#: admin/pages/export.twig:39
+#: admin/pages/export.twig:44
 msgid "Export"
 msgstr ""
 
@@ -529,6 +529,10 @@ msgstr ""
 
 #: admin/pages/export.twig:34
 msgid "Users export file will contain the hashed password for each user – keep it safe!"
+msgstr ""
+
+#: admin/pages/export.twig:38
+msgid "Uploads Manifest"
 msgstr ""
 
 #: admin/pages/feathers.twig:3
@@ -602,7 +606,7 @@ msgid "Check for Updates?"
 msgstr ""
 
 #: admin/pages/import.twig:3
-#: admin/pages/import.twig:44
+#: admin/pages/import.twig:50
 msgid "Import"
 msgstr ""
 
@@ -626,11 +630,15 @@ msgstr ""
 msgid "Users .json File"
 msgstr ""
 
-#: admin/pages/import.twig:34
+#: admin/pages/import.twig:35
+msgid "Bulk File Upload"
+msgstr ""
+
+#: admin/pages/import.twig:40
 msgid "URL for Embedded Media"
 msgstr ""
 
-#: admin/pages/import.twig:39
+#: admin/pages/import.twig:45
 #, php-format
 msgid "Usually something like <code>%s/uploads/</code>."
 msgstr ""
