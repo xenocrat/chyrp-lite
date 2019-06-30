@@ -1734,6 +1734,42 @@
     }
 
     /**
+     * Function: uploaded_search
+     * Returns an array of files discovered in the uploads directory.
+     *
+     * Parameters:
+     *     $search - A search term.
+     *     $filter - An array of valid extensions (case insensitive).
+     */
+    function uploaded_search($search = "", $filter = array()) {
+        $config = Config::current();
+        $results = array();
+
+        if (!empty($filter))
+            foreach ($filter as &$entry)
+                $entry = preg_quote($entry, "/");
+
+        $patterns = !empty($filter) ? implode("|", $filter) : ".*" ;
+        $dir = new DirectoryIterator(MAIN_DIR.$config->uploads_path);
+
+        foreach ($dir as $item) {
+            if ($item->isFile()) {
+                $filename = $item->getFilename();
+
+                if (!preg_match("/.+\.($patterns)$/i", $filename))
+                    continue;
+
+                if (!($search == "") and stripos($filename, $search) === false)
+                    continue;
+
+                $results[] = $filename;
+            }
+        }
+
+        return $results;
+    }
+
+    /**
      * Function: upload_tester
      * Tests uploaded file information to determine if the upload was successful.
      *
@@ -1837,42 +1873,6 @@
         }
 
         return $unique;
-    }
-
-    /**
-     * Function: uploads
-     * Returns an array of files discovered in the uploads directory.
-     *
-     * Parameters:
-     *     $search - A search term.
-     *     $filter - An array of valid extensions (case insensitive).
-     */
-    function uploads($search = "", $filter = array()) {
-        $config = Config::current();
-        $uploads = array();
-
-        if (!empty($filter))
-            foreach ($filter as &$entry)
-                $entry = preg_quote($entry, "/");
-
-        $patterns = !empty($filter) ? implode("|", $filter) : ".*" ;
-        $dir = new DirectoryIterator(MAIN_DIR.$config->uploads_path);
-
-        foreach ($dir as $item) {
-            if ($item->isFile()) {
-                $filename = $item->getFilename();
-
-                if (!preg_match("/.+\.($patterns)$/i", $filename))
-                    continue;
-
-                if (!($search == "") and stripos($filename, $search) === false)
-                    continue;
-
-                $uploads[] = $filename;
-            }
-        }
-
-        return $uploads;
     }
 
     #---------------------------------------------
