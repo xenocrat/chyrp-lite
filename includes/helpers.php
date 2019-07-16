@@ -1243,20 +1243,28 @@
                                                   "img",
                                                   "source",
                                                   "track",
-                                                  "video")) and is_url($content))
+                                                  "video")) and is_url($content)) {
+
                             $whitelist.= $attribute[0];
+                        }
 
                         break;
+
                     case "href":
                         if (in_array($name, array("a",
-                                                  "area")) and is_url($content))
+                                                  "area")) and is_url($content)) {
+
                             $whitelist.= $attribute[0];
+                        }
 
                         break;
+
                     case "alt":
                         if (in_array($name, array("area",
-                                                  "img")))
+                                                  "img"))) {
+
                             $whitelist.= $attribute[0];
+                        }
 
                         break;
                 }
@@ -2149,7 +2157,9 @@
                                      __("Visit this link to activate your account:").
                                      "\r\n".
                                      unfix($params["link"]);
+
                 break;
+
             case "reset":
                 $params["subject"] = _f("Reset your password at %s", $config->name);
                 $params["message"] = _f("Hello, %s.", $params["login"]).
@@ -2159,13 +2169,17 @@
                                      __("Visit this link to reset your password:").
                                      "\r\n".
                                      unfix($params["link"]);
+
                 break;
+
             case "password":
                 $params["subject"] = _f("Your new password for %s", $config->name);
                 $params["message"] = _f("Hello, %s.", $params["login"]).
                                      "\r\n"."\r\n".
                                      _f("Your new password is: %s", $params["password"]);
+
                 break;
+
             default:
                 $trigger->filter($params, "correspond_".$action);
         }
