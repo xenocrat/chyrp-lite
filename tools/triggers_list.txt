@@ -353,19 +353,19 @@ Called from:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 1985
+	includes/helpers.php on line 1993
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 2002
+	includes/helpers.php on line 2010
 
 
 send_correspondence
 -------------------
 Called from:
-	includes/helpers.php on line 2174
+	includes/helpers.php on line 2188
 
 Arguments:
 	$action, $params
@@ -1059,7 +1059,7 @@ Arguments:
 link_regexp
 -----------
 Called from:
-	includes/helpers.php on line 1360
+	includes/helpers.php on line 1368
 
 Target:
 	$expressions
@@ -1068,7 +1068,7 @@ Target:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 2115
+	includes/helpers.php on line 2123
 
 Target:
 	$function
