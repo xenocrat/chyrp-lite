@@ -99,6 +99,7 @@
                     }
 
                     break;
+
                 case "mysqli":
                     $this->db = @new MySQLi($this->host, $this->username, $this->password, $this->database);
                     $this->error = $this->db->connect_error;
@@ -296,11 +297,9 @@
             switch($this->method) {
                 case "pdo":
                     return $this->db->lastInsertId($this->prefix.$table."_".$seq);
-                    break;
 
                 case "mysqli":
                     return $this->db->insert_id;
-                    break;
             }
         }
 
