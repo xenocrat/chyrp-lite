@@ -30,7 +30,7 @@
 <input type="file" name="users_file" value="" id="users_file" accept=".json,.js">
 </p>
 {% endif %}
-{% if visitor.group.can("add_post", "add_draft", "add_page") %}
+{% if visitor.group.can("add_post", "add_page") %}
 <p>
 <label for="uploads">{{ "Bulk File Upload" | translate }}</label>
 <input type="file" name="uploads[]" multiple value="" id="uploads">
