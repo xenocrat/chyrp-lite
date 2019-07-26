@@ -1154,17 +1154,17 @@ msgstr ""
 msgid "Guest"
 msgstr "Gast"
 
-#: includes/lib/Leaf.php:259
+#: includes/lib/Leaf.php:271
 #, php-format
 msgid "%s GB"
 msgstr "%s GB"
 
-#: includes/lib/Leaf.php:264
+#: includes/lib/Leaf.php:276
 #, php-format
 msgid "%s MB"
 msgstr "%s MB"
 
-#: includes/lib/Leaf.php:268
+#: includes/lib/Leaf.php:280
 #, php-format
 msgid "%s KB"
 msgstr "%s KB"

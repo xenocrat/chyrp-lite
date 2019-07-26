@@ -163,6 +163,23 @@ msgstr ""
 msgid "Emoji"
 msgstr ""
 
+#: admin/help/uploads_manifest.twig:3
+#: admin/help/uploads_manifest.twig:7
+#: admin/pages/export.twig:38
+msgid "Uploads Manifest"
+msgstr ""
+
+#: admin/help/uploads_manifest.twig:11
+msgid "Filename"
+msgstr ""
+
+#: admin/help/uploads_manifest.twig:23
+#: admin/pages/manage_pages.twig:67
+#: admin/pages/manage_posts.twig:55
+#: admin/pages/manage_users.twig:67
+msgid "(none)"
+msgstr ""
+
 #: admin/help/xmlrpc.twig:3
 #: admin/help/xmlrpc.twig:6
 #: admin/pages/content_settings.twig:49
@@ -262,6 +279,7 @@ msgstr ""
 #: admin/pages/export.twig:20
 #: admin/pages/export.twig:26
 #: admin/pages/export.twig:32
+#: admin/pages/export.twig:41
 #: admin/pages/feathers.twig:18
 #: admin/pages/feathers.twig:54
 #: admin/pages/general_settings.twig:27
@@ -495,7 +513,7 @@ msgid "Website"
 msgstr ""
 
 #: admin/pages/export.twig:3
-#: admin/pages/export.twig:44
+#: admin/pages/export.twig:45
 msgid "Export"
 msgstr ""
 
@@ -529,10 +547,6 @@ msgstr ""
 
 #: admin/pages/export.twig:34
 msgid "Users export file will contain the hashed password for each user – keep it safe!"
-msgstr ""
-
-#: admin/pages/export.twig:38
-msgid "Uploads Manifest"
 msgstr ""
 
 #: admin/pages/feathers.twig:3
@@ -759,12 +773,6 @@ msgstr ""
 
 #: admin/pages/manage_pages.twig:42
 msgid "never"
-msgstr ""
-
-#: admin/pages/manage_pages.twig:67
-#: admin/pages/manage_posts.twig:55
-#: admin/pages/manage_users.twig:67
-msgid "(none)"
 msgstr ""
 
 #: admin/pages/manage_posts.twig:3

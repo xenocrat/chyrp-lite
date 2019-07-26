@@ -1322,17 +1322,17 @@ msgstr ""
 msgid "Guest"
 msgstr ""
 
-#: includes/lib/Leaf.php:259
+#: includes/lib/Leaf.php:271
 #, php-format
 msgid "%s GB"
 msgstr ""
 
-#: includes/lib/Leaf.php:264
+#: includes/lib/Leaf.php:276
 #, php-format
 msgid "%s MB"
 msgstr ""
 
-#: includes/lib/Leaf.php:268
+#: includes/lib/Leaf.php:280
 #, php-format
 msgid "%s KB"
 msgstr ""

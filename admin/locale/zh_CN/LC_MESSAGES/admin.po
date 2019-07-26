@@ -88,7 +88,7 @@ msgstr "Markdown是用纯文本编写结构化文档的语法。 以下是让您
 
 #: admin/help/markdown.twig:14
 msgid "Result"
-msgstr "Result"
+msgstr "结果"
 
 #: admin/help/markdown.twig:19
 msgid "## Heading"
@@ -206,6 +206,20 @@ msgstr "表情"
 msgid "Emoji"
 msgstr "表情符号"
 
+#: admin/help/uploads_manifest.twig:3 admin/help/uploads_manifest.twig:7
+#: admin/pages/export.twig:38
+msgid "Uploads Manifest"
+msgstr "上传清单"
+
+#: admin/help/uploads_manifest.twig:11
+msgid "Filename"
+msgstr "文件名"
+
+#: admin/help/uploads_manifest.twig:23 admin/pages/manage_pages.twig:67
+#: admin/pages/manage_posts.twig:55 admin/pages/manage_users.twig:67
+msgid "(none)"
+msgstr "(空)"
+
 #: admin/help/xmlrpc.twig:3 admin/help/xmlrpc.twig:6
 #: admin/pages/content_settings.twig:49
 msgid "XML-RPC Support"
@@ -304,13 +318,13 @@ msgstr "尝试您帖子链接到的站点。"
 #: admin/pages/content_settings.twig:51 admin/pages/content_settings.twig:66
 #: admin/pages/content_settings.twig:74 admin/pages/export.twig:14
 #: admin/pages/export.twig:20 admin/pages/export.twig:26
-#: admin/pages/export.twig:32 admin/pages/feathers.twig:18
-#: admin/pages/feathers.twig:54 admin/pages/general_settings.twig:27
-#: admin/pages/manage_pages.twig:11 admin/pages/manage_posts.twig:11
-#: admin/pages/manage_users.twig:11 admin/pages/modules.twig:18
-#: admin/pages/modules.twig:74 admin/partials/page_fields.twig:21
-#: admin/partials/post_fields.twig:34 admin/partials/post_fields.twig:99
-#: admin/partials/post_fields.twig:119
+#: admin/pages/export.twig:32 admin/pages/export.twig:41
+#: admin/pages/feathers.twig:18 admin/pages/feathers.twig:54
+#: admin/pages/general_settings.twig:27 admin/pages/manage_pages.twig:11
+#: admin/pages/manage_posts.twig:11 admin/pages/manage_users.twig:11
+#: admin/pages/modules.twig:18 admin/pages/modules.twig:74
+#: admin/partials/page_fields.twig:21 admin/partials/post_fields.twig:34
+#: admin/partials/post_fields.twig:99 admin/partials/post_fields.twig:119
 msgid "help"
 msgstr "帮助"
 
@@ -503,7 +517,7 @@ msgstr "(可选)"
 msgid "Website"
 msgstr "网站"
 
-#: admin/pages/export.twig:3 admin/pages/export.twig:44
+#: admin/pages/export.twig:3 admin/pages/export.twig:45
 msgid "Export"
 msgstr "导出"
 
@@ -536,10 +550,6 @@ msgid ""
 "Users export file will contain the hashed password for each user – keep it "
 "safe!"
 msgstr "用户导出文件将包含每个用户的哈希密码 - 请保证安全！"
-
-#: admin/pages/export.twig:38
-msgid "Uploads Manifest"
-msgstr "上传清单"
 
 #: admin/pages/feathers.twig:3 admin/pages/feathers.twig:6
 msgid "Feathers"
@@ -739,11 +749,6 @@ msgstr "作者"
 #: admin/pages/manage_pages.twig:42
 msgid "never"
 msgstr "从不"
-
-#: admin/pages/manage_pages.twig:67 admin/pages/manage_posts.twig:55
-#: admin/pages/manage_users.twig:67
-msgid "(none)"
-msgstr "(空)"
 
 #: admin/pages/manage_posts.twig:3
 msgid "Manage Posts"
