@@ -1,0 +1,29 @@
+{% extends "layouts" ~ DIR ~ "help.twig" %}
+
+{% block title %}{{ "Uploads Manifest" | translate }}{% endblock %}
+
+{% block content %}
+{% if visitor.group.can("export_content") %}
+<h1>{{ "Uploads Manifest" | translate }}</h1>
+<table>
+<thead>
+<tr>
+<th>{{ "Filename" | translate }}</th>
+</tr>
+</thead>
+<tbody>
+{% for filename in uploaded_search() %}
+<tr>
+<td>
+<a  target="_blank" href="{{ site.chyrp_url ~ '/uploads/' ~ (filename | fix(true)) }}">{{ filename | fix }}</a>
+</td>
+</tr>
+{% else %}
+<tr>
+<td>{{ "(none)" | translate }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endif %}
+{% endblock %}

@@ -38,6 +38,7 @@
 <label for="uploads">{{ "Uploads Manifest" | translate }}</label>
 <input class="checkbox" type="checkbox" name="uploads" value="" id="uploads" checked="checked">
 <input class="text filter_text" type="text" name="filter_uploads" value="" id="filter_uploads" aria-label="{{ field_aria }}" placeholder="{{ field_aria }}">
+<a href="{{ url('help/id/uploads_manifest') }}" target="_blank" class="help emblem info"><img src="{{ site.chyrp_url }}/admin/images/icons/info.svg" alt="{{ 'help' | translate }}"></a>
 </p>
 {{ trigger.call("export_choose") }}
 <p class="buttons">
