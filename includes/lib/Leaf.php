@@ -24,7 +24,8 @@
                 # Custom functions:
                 new \Twig\TwigFunction("paginate",          "twig_function_paginate"),
                 new \Twig\TwigFunction("posted",            "twig_function_posted"),
-                new \Twig\TwigFunction("mailto",            "twig_function_mailto")
+                new \Twig\TwigFunction("mailto",            "twig_function_mailto"),
+                new \Twig\TwigFunction("uploaded_search",   "twig_function_uploaded_search")
             );
         }
 
@@ -211,6 +212,17 @@
             $char = preg_replace(array_keys($double_encode), array_values($double_encode), $char);
 
         return $mailto.implode("", $chars);
+    }
+
+    /**
+     * Function: twig_function_uploaded_search
+     * Returns an array of matches, if the visitor has the "export_content" privilege.
+     */
+    function twig_function_uploaded_search($search = "", $filter = array()) {
+        if (!Visitor::current()->group->can("export_content"))
+            return array();
+
+        return uploaded_search($search, $filter);
     }
 
     /**
