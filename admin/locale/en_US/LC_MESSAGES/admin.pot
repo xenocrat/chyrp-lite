@@ -164,16 +164,16 @@ msgid "Emoji"
 msgstr ""
 
 #: admin/help/uploads_manifest.twig:3
-#: admin/help/uploads_manifest.twig:7
+#: admin/help/uploads_manifest.twig:6
 #: admin/pages/export.twig:38
 msgid "Uploads Manifest"
 msgstr ""
 
-#: admin/help/uploads_manifest.twig:11
+#: admin/help/uploads_manifest.twig:10
 msgid "Filename"
 msgstr ""
 
-#: admin/help/uploads_manifest.twig:23
+#: admin/help/uploads_manifest.twig:22
 #: admin/pages/manage_pages.twig:67
 #: admin/pages/manage_posts.twig:55
 #: admin/pages/manage_users.twig:67
