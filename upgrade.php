@@ -345,7 +345,7 @@
             }
             *::selection {
                 color: #ffffff;
-                background-color: #4f4f4f;
+                background-color: #ff7f00;
             }
             html {
                 font-size: 14px;
