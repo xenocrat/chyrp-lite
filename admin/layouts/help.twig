@@ -5,166 +5,262 @@
 <title>{{ site.name }}: {% block title %}{{ title }}{% endblock %}</title>
 <style type="text/css">
 @font-face {
-                                    font-family: 'Open Sans webfont';
-                                    src: url('{{ site.chyrp_url }}/fonts/OpenSans-Regular.woff') format('woff');
-                                    font-weight: normal;
-                                    font-style: normal;
+    font-family: 'Open Sans webfont';
+    src: url('{{ site.chyrp_url }}/fonts/OpenSans-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
 @font-face {
-                                    font-family: 'Open Sans webfont';
-                                    src: url('{{ site.chyrp_url }}/fonts/OpenSans-Semibold.woff') format('woff');
-                                    font-weight: bold;
-                                    font-style: normal;
+    font-family: 'Open Sans webfont';
+    src: url('{{ site.chyrp_url }}/fonts/OpenSans-Semibold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
 }
 
 @font-face {
-                                    font-family: 'Open Sans webfont';
-                                    src: url('{{ site.chyrp_url }}/fonts/OpenSans-Italic.woff') format('woff');
-                                    font-weight: normal;
-                                    font-style: italic;
+    font-family: 'Open Sans webfont';
+    src: url('{{ site.chyrp_url }}/fonts/OpenSans-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
 }
 
 @font-face {
-                                    font-family: 'Open Sans webfont';
-                                    src: url('{{ site.chyrp_url }}/fonts/OpenSans-SemiboldItalic.woff') format('woff');
-                                    font-weight: bold;
-                                    font-style: italic;
+    font-family: 'Open Sans webfont';
+    src: url('{{ site.chyrp_url }}/fonts/OpenSans-SemiboldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
 }
 
 @font-face {
-                                    font-family: 'Hack webfont';
-                                    src: url('{{ site.chyrp_url }}/fonts/Hack-Regular.woff') format('woff');
-                                    font-weight: normal;
-                                    font-style: normal;
+    font-family: 'Hack webfont';
+    src: url('{{ site.chyrp_url }}/fonts/Hack-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
 @font-face {
-                                    font-family: 'Hack webfont';
-                                    src: url('{{ site.chyrp_url }}/fonts/Hack-Bold.woff') format('woff');
-                                    font-weight: bold;
-                                    font-style: normal;
+    font-family: 'Hack webfont';
+    src: url('{{ site.chyrp_url }}/fonts/Hack-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
 }
 
 @font-face {
-                                    font-family: 'Hack webfont';
-                                    src: url('{{ site.chyrp_url }}/fonts/Hack-Italic.woff') format('woff');
-                                    font-weight: normal;
-                                    font-style: italic;
+    font-family: 'Hack webfont';
+    src: url('{{ site.chyrp_url }}/fonts/Hack-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
 }
 
 @font-face {
-                                    font-family: 'Hack webfont';
-                                    src: url('{{ site.chyrp_url }}/fonts/Hack-BoldItalic.woff') format('woff');
-                                    font-weight: bold;
-                                    font-style: italic;
+    font-family: 'Hack webfont';
+    src: url('{{ site.chyrp_url }}/fonts/Hack-BoldItalic.woff') format('woff');
+    font-weight: bold;
+    font-style: italic;
 }
-html {                              font-size: 14px }
+html {
+    font-size: 14px;
+}
 body, div, dl, dt, dd, ul, ol, li,
 h1, h2, h3, h4, h5, h6, th, td,
 pre, code, form, fieldset, legend,
-input, textarea, p, blockquote {    margin: 0em;
-                                    padding: 0em }
-table {                             border-collapse: collapse;
-                                    border-spacing: 0em }
-fieldset, img {                     border: 0em }
+input, textarea, p, blockquote {
+    margin: 0em;
+    padding: 0em;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0em;
+}
+fieldset, img {
+    border: 0em;
+}
 address, caption, cite, code, 
-dfn, em, strong, th, var {          font-style: normal;
-                                    font-weight: normal }
-ul {                                list-style: none }
-ol {                                list-style: decimal inside}
-input, textarea, select {           font-family: inherit;
-                                    font-size: inherit;
-                                    font-weight: inherit }
-*::selection {                      color: #ffffff;
-                                    background-color: #4f4f4f }
-body {                              font-family: "Open Sans webfont", sans-serif;
-                                    font-size: 1rem;
-                                    line-height: 1.5;
-                                    color: #4a4747;
-                                    margin: 2rem;
-                                    background-color: #ffffff }
-h1, h2, h3, h4, h5, h6 {            font-weight: bold;
-                                    font-style: normal;
-                                    font-variant: normal;
-                                    margin: 1rem 0em;
-                                    padding: 0em }
-h1 {                                font-size: 2em }
-h2 {                                font-size: 1.5em }
-h3 {                                font-size: 1em }
-h4 {                                font-size: 0.9em }
-h5 {                                font-size: 0.8em }
-h6 {                                font-size: 0.7em }
+dfn, em, strong, th, var {
+    font-style: normal;
+    font-weight: normal;
+}
+ul {
+    list-style: none;
+}
+ol {
+    list-style: decimal inside;
+}
+input, textarea, select {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+*::selection {
+    color: #ffffff;
+    background-color: #ff7f00;
+}
+body {
+    font-family: "Open Sans webfont", sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #4a4747;
+    margin: 2rem;
+    background-color: #ffffff;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    font-style: normal;
+    font-variant: normal;
+    margin: 1rem 0em;
+    padding: 0em;
+}
+h1 {
+    font-size: 2em;
+}
+h2 {
+    font-size: 1.5em;
+}
+h3 {
+    font-size: 1em;
+}
+h4 {
+    font-size: 0.9em;
+}
+h5 {
+    font-size: 0.8em;
+}
+h6 {
+    font-size: 0.7em;
+}
 h1:first-child, h2:first-child,
 h3:first-child, h4:first-child,
-h5:first-child, h6:first-child {    margin-top: 0em }
+h5:first-child, h6:first-child {
+    margin-top: 0em;
+}
 h1:last-child, h2:last-child,
 h3:last-child, h4:last-child,
-h5:last-child, h6:last-child {      margin-bottom: 0em }
-sup {                               vertical-align: super;
-                                    font-size: 0.5em }
-em {                                font: inherit;
-                                    font-style: italic }
-strong {                            font: inherit;
-                                    font-weight: bold }
-small {                             color: #b3b5b5;
-                                    font-size: 0.8em;
-                                    line-height: 1.25 }
-p {                                 margin: 0em 0em 1em 0em }
-p:last-child, p:empty {             margin-bottom: 0em }
-ul {                                list-style: disc outside;
-                                    margin: 1em 0em 1em 2em;
-                                    padding: 0em }
-ul li > ul {                        list-style-type: circle }
-ol {                                list-style: decimal outside;
-                                    margin: 1em 0em 1em 2em;
-                                    padding: 0em }
-ol li > ol {                        list-style-type: lower-roman }
-dl {                                list-style: none }
-dl dt {                             font-weight: bold }
-dl dd {                             margin-left: 1em }
-pre {                               font-family: "Hack webfont", monospace;
-                                    margin: 2em }
-code {                              font-family: "Hack webfont", monospace;
-                                    font-size: 0.75em;
-                                    background-color: #efefef;
-                                    padding: 2px;
-                                    color: #4f4f4f;
-                                    border: 1px solid #dfdfdf }
-pre code {                          background-color: transparent;
-                                    border: none }
-blockquote {                        margin: 2em;
-                                    font-style: italic }
-blockquote em {                     font-style: normal }
-img {                               max-width: 100% }
-hr {                                border: none;
-                                    clear: both;
-                                    border-top: 1px solid #ddd;
-                                    margin: 2em 0em }
-table {                             width: 100%;
-                                    margin: 0em 0em 1em 0em;
-                                    overflow-x: scroll }
-table thead tr {                    background-color: #4f4f4f;
-                                    color: #ffffff;
-                                    border: 1px solid #4f4f4f }
-table thead tr th {                 padding: 0.5em;
-                                    font-weight: bold;
-                                    text-align: center }
-table tbody tr td {                 padding: 0.5em;
-                                    border: 1px solid #dfdfdf;
-                                    vertical-align: middle }
-table tbody tr td.emblem {          text-align: center }
-a:link, a:visited {                 color: #4a4747;
-                                    text-decoration: underline }
-a:focus {                           outline: #ff7f00 dashed 2px }
-a:hover, a:focus, a:active {        color: #2f61c4;
-                                    text-decoration: underline }
+h5:last-child, h6:last-child {
+    margin-bottom: 0em;
+}
+sup {
+    vertical-align: super;
+    font-size: 0.5em;
+}
+em {
+    font: inherit;
+    font-style: italic;
+}
+strong {
+    font: inherit;
+    font-weight: bold;
+}
+small {
+    color: #b3b5b5;
+    font-size: 0.8em;
+    line-height: 1.25;
+}
+p {
+    margin: 0em 0em 1em 0em;
+}
+p:last-child, p:empty {
+    margin-bottom: 0em;
+}
+ul {
+    list-style: disc outside;
+    margin: 1em 0em 1em 2em;
+    padding: 0em;
+}
+ul li > ul {
+    list-style-type: circle;
+}
+ol {
+    list-style: decimal outside;
+    margin: 1em 0em 1em 2em;
+    padding: 0em;
+}
+ol li > ol {
+    list-style-type: lower-roman;
+}
+dl {
+    list-style: none;
+}
+dl dt {
+    font-weight: bold;
+}
+dl dd {
+    margin-left: 1em;
+}
+pre {
+    font-family: "Hack webfont", monospace;
+    margin: 2em;
+}
+code {
+    font-family: "Hack webfont", monospace;
+    font-size: 0.75em;
+    background-color: #efefef;
+    padding: 2px;
+    color: #4f4f4f;
+    border: 1px solid #dfdfdf;
+}
+pre code {
+    background-color: transparent;
+    border: none;
+}
+blockquote {
+    margin: 2em;
+    font-style: italic;
+}
+blockquote em {
+    font-style: normal;
+}
+img {
+    max-width: 100%;
+}
+hr {
+    border: none;
+    clear: both;
+    border-top: 1px solid #dddddd;
+    margin: 2em 0em;
+}
+table {
+    width: 100%;
+    margin: 0em 0em 1em 0em;
+    overflow-x: scroll;
+}
+table thead tr {
+    background-color: #4f4f4f;
+    color: #ffffff;
+    border: 1px solid #4f4f4f;
+}
+table thead tr th {
+    padding: 0.5em;
+    font-weight: bold;
+    text-align: center;
+}
+table tbody tr td {
+    padding: 0.5em;
+    border: 1px solid #dfdfdf;
+    vertical-align: middle;
+}
+table tbody tr td.emblem {
+    text-align: center;
+}
+a:link, a:visited {
+    color: #4a4747;
+    text-decoration: underline;
+}
+a:focus {
+    outline: #ff7f00 dashed 2px;
+}
+a:hover, a:focus, a:active {
+    color: #2f61c4;
+    text-decoration: underline;
+}
 a.emblem > img,
-img.emblem {                        display: inline;
-                                    position: relative;
-                                    top: 4px;
-                                    width: 16px;
-                                    height: 16px }
+img.emblem {
+    display: inline;
+    position: relative;
+    top: 4px;
+    width: 16px;
+    height: 16px;
+}
 </style>
 </head>
 <body>
