@@ -169,15 +169,15 @@ msgstr "Zu GitHub gehen &rarr;"
 msgid "Unable to check for new Chyrp Lite versions."
 msgstr "Prüfen auf neue Chyrp Lite Versionen fehlgeschlagen."
 
-#: includes/common.php:297 includes/common.php:302
+#: includes/common.php:309 includes/common.php:314
 msgid "Service Unavailable"
 msgstr "Dienst nicht verfügbar"
 
-#: includes/common.php:298
+#: includes/common.php:310
 msgid "This resource is temporarily unable to serve your request."
 msgstr "Diese Ressource kann Deine Anfrage momentan nicht bearbeiten."
 
-#: includes/common.php:303
+#: includes/common.php:315
 msgid "This resource cannot respond because it is not configured."
 msgstr ""
 "Diese Ressource kann nicht antworten, weil sie nicht konfiguriert wurde."

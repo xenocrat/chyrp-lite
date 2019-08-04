@@ -239,7 +239,7 @@ Arguments:
 runtime
 -------
 Called from:
-	includes/common.php on line 366
+	includes/common.php on line 378
 
 
 before_export
@@ -855,7 +855,7 @@ Target:
 visitor
 -------
 Called from:
-	includes/common.php on line 363
+	includes/common.php on line 375
 
 Target:
 	$visitor
