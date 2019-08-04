@@ -133,6 +133,18 @@
     # URL to the list of releases.
     define('UPDATE_PAGE', "https://github.com/xenocrat/chyrp-lite/releases");
 
+    # Constant: SESSION_DENY_BOT
+    # Deny session storage to robots?
+    define('SESSION_DENY_BOT', true);
+
+    # Constant: SESSION_DENY_RPC
+    # Deny session storage to XML-RPC?
+    define('SESSION_DENY_RPC', true);
+
+    # Constant: SESSION_DENY_TESTER
+    # Deny session storage when testing?
+    define('SESSION_DENY_TESTER', true);
+
     # Constant: USE_OB
     # Use output buffering?
     if (!defined('USE_OB'))
