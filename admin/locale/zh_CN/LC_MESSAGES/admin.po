@@ -75,7 +75,7 @@ msgstr ""
 "显示2016年由Foo创建的帖子。"
 
 #: admin/help/markdown.twig:3 admin/help/markdown.twig:6
-#: admin/help/markdown.twig:13 admin/pages/content_settings.twig:72
+#: admin/help/markdown.twig:13 admin/pages/content_settings.twig:65
 #: admin/partials/page_fields.twig:10 admin/partials/post_fields.twig:26
 msgid "Markdown"
 msgstr "Markdown"
@@ -185,7 +185,7 @@ msgstr ""
 "时自动生成。 一个slug 只能包含字母a-z，数字0-9和连字符减号（“ - ”）。"
 
 #: admin/help/unicode_emoticons.twig:3 admin/help/unicode_emoticons.twig:6
-#: admin/pages/content_settings.twig:64
+#: admin/pages/content_settings.twig:57
 msgid "Unicode Emoticons"
 msgstr "Unicode表情符号"
 
@@ -248,19 +248,19 @@ msgstr "全部切换"
 msgid "Are you sure you want to proceed?"
 msgstr "确定继续？"
 
-#: admin/javascripts/admin.js.php:156 admin/javascripts/admin.js.php:259
+#: admin/javascripts/admin.js.php:155 admin/javascripts/admin.js.php:258
 msgid "Close"
 msgstr "关闭"
 
-#: admin/javascripts/admin.js.php:163 admin/javascripts/admin.js.php:266
+#: admin/javascripts/admin.js.php:162 admin/javascripts/admin.js.php:265
 msgid "close"
 msgstr "关闭"
 
-#: admin/javascripts/admin.js.php:183 admin/pages/themes.twig:25
+#: admin/javascripts/admin.js.php:182 admin/pages/themes.twig:25
 msgid "Preview"
 msgstr "预览"
 
-#: admin/javascripts/admin.js.php:199
+#: admin/javascripts/admin.js.php:198
 msgid "preview"
 msgstr "预览"
 
@@ -315,8 +315,8 @@ msgstr "发送引用"
 msgid "Attempts to notify sites to which your posts link."
 msgstr "尝试您帖子链接到的站点。"
 
-#: admin/pages/content_settings.twig:51 admin/pages/content_settings.twig:66
-#: admin/pages/content_settings.twig:74 admin/pages/export.twig:14
+#: admin/pages/content_settings.twig:51 admin/pages/content_settings.twig:59
+#: admin/pages/content_settings.twig:67 admin/pages/export.twig:14
 #: admin/pages/export.twig:20 admin/pages/export.twig:26
 #: admin/pages/export.twig:32 admin/pages/export.twig:41
 #: admin/pages/feathers.twig:18 admin/pages/feathers.twig:54
@@ -332,23 +332,15 @@ msgstr "帮助"
 msgid "XML-RPC support allows you to manipulate your blog content remotely."
 msgstr "XML-RPC支持允许您远程操作您的博客内容。"
 
-#: admin/pages/content_settings.twig:57
-msgid "Ajax"
-msgstr "Ajax"
-
-#: admin/pages/content_settings.twig:60
-msgid "Ajax enhances your blog with additional interactive features."
-msgstr "Ajax使用其他交互功能增强了您的博客。"
-
-#: admin/pages/content_settings.twig:68
+#: admin/pages/content_settings.twig:61
 msgid "Display emoticons as Unicode emoji."
 msgstr "将表情符号显示为Unicode表情符号。"
 
-#: admin/pages/content_settings.twig:76
+#: admin/pages/content_settings.twig:69
 msgid "Compose blog content using Markdown text formatting."
 msgstr "使用Markdown语法撰写博客内容。"
 
-#: admin/pages/content_settings.twig:81 admin/pages/edit_group.twig:24
+#: admin/pages/content_settings.twig:74 admin/pages/edit_group.twig:24
 #: admin/pages/edit_user.twig:49 admin/pages/general_settings.twig:57
 #: admin/pages/route_settings.twig:85 admin/pages/user_settings.twig:47
 msgid "Update"

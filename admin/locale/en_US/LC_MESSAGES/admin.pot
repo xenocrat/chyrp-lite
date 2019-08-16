@@ -40,7 +40,7 @@ msgstr ""
 #: admin/help/markdown.twig:3
 #: admin/help/markdown.twig:6
 #: admin/help/markdown.twig:13
-#: admin/pages/content_settings.twig:72
+#: admin/pages/content_settings.twig:65
 #: admin/partials/page_fields.twig:10
 #: admin/partials/post_fields.twig:26
 msgid "Markdown"
@@ -147,7 +147,7 @@ msgstr ""
 
 #: admin/help/unicode_emoticons.twig:3
 #: admin/help/unicode_emoticons.twig:6
-#: admin/pages/content_settings.twig:64
+#: admin/pages/content_settings.twig:57
 msgid "Unicode Emoticons"
 msgstr ""
 
@@ -203,22 +203,22 @@ msgstr ""
 msgid "Are you sure you want to proceed?"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:156
-#: admin/javascripts/admin.js.php:259
+#: admin/javascripts/admin.js.php:155
+#: admin/javascripts/admin.js.php:258
 msgid "Close"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:163
-#: admin/javascripts/admin.js.php:266
+#: admin/javascripts/admin.js.php:162
+#: admin/javascripts/admin.js.php:265
 msgid "close"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:183
+#: admin/javascripts/admin.js.php:182
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:199
+#: admin/javascripts/admin.js.php:198
 msgid "preview"
 msgstr ""
 
@@ -273,8 +273,8 @@ msgid "Attempts to notify sites to which your posts link."
 msgstr ""
 
 #: admin/pages/content_settings.twig:51
-#: admin/pages/content_settings.twig:66
-#: admin/pages/content_settings.twig:74
+#: admin/pages/content_settings.twig:59
+#: admin/pages/content_settings.twig:67
 #: admin/pages/export.twig:14
 #: admin/pages/export.twig:20
 #: admin/pages/export.twig:26
@@ -299,23 +299,15 @@ msgstr ""
 msgid "XML-RPC support allows you to manipulate your blog content remotely."
 msgstr ""
 
-#: admin/pages/content_settings.twig:57
-msgid "Ajax"
-msgstr ""
-
-#: admin/pages/content_settings.twig:60
-msgid "Ajax enhances your blog with additional interactive features."
-msgstr ""
-
-#: admin/pages/content_settings.twig:68
+#: admin/pages/content_settings.twig:61
 msgid "Display emoticons as Unicode emoji."
 msgstr ""
 
-#: admin/pages/content_settings.twig:76
+#: admin/pages/content_settings.twig:69
 msgid "Compose blog content using Markdown text formatting."
 msgstr ""
 
-#: admin/pages/content_settings.twig:81
+#: admin/pages/content_settings.twig:74
 #: admin/pages/edit_group.twig:24
 #: admin/pages/edit_user.twig:49
 #: admin/pages/general_settings.twig:57

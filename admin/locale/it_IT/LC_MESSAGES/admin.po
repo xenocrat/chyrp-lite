@@ -84,7 +84,7 @@ msgstr ""
 "visualizzare solo i post creati da Foo in 2016."
 
 #: admin/help/markdown.twig:3 admin/help/markdown.twig:6
-#: admin/help/markdown.twig:13 admin/pages/content_settings.twig:72
+#: admin/help/markdown.twig:13 admin/pages/content_settings.twig:65
 #: admin/partials/page_fields.twig:10 admin/partials/post_fields.twig:26
 msgid "Markdown"
 msgstr "Markdown"
@@ -198,7 +198,7 @@ msgstr ""
 "numeri 0-9 e trattino-meno (&#8220;-&#8221;)."
 
 #: admin/help/unicode_emoticons.twig:3 admin/help/unicode_emoticons.twig:6
-#: admin/pages/content_settings.twig:64
+#: admin/pages/content_settings.twig:57
 msgid "Unicode Emoticons"
 msgstr "Emoticon Unicode"
 
@@ -263,19 +263,19 @@ msgstr "Spunta tutto"
 msgid "Are you sure you want to proceed?"
 msgstr "Sei sicuro di volere procedere?"
 
-#: admin/javascripts/admin.js.php:156 admin/javascripts/admin.js.php:259
+#: admin/javascripts/admin.js.php:155 admin/javascripts/admin.js.php:258
 msgid "Close"
 msgstr "Chiudi"
 
-#: admin/javascripts/admin.js.php:163 admin/javascripts/admin.js.php:266
+#: admin/javascripts/admin.js.php:162 admin/javascripts/admin.js.php:265
 msgid "close"
 msgstr "chiudi"
 
-#: admin/javascripts/admin.js.php:183 admin/pages/themes.twig:25
+#: admin/javascripts/admin.js.php:182 admin/pages/themes.twig:25
 msgid "Preview"
 msgstr "Anteprima"
 
-#: admin/javascripts/admin.js.php:199
+#: admin/javascripts/admin.js.php:198
 msgid "preview"
 msgstr "anteprima"
 
@@ -332,8 +332,8 @@ msgstr "Invia Pingback"
 msgid "Attempts to notify sites to which your posts link."
 msgstr "Tenta di notificare i siti a cui si collegano i tuoi post."
 
-#: admin/pages/content_settings.twig:51 admin/pages/content_settings.twig:66
-#: admin/pages/content_settings.twig:74 admin/pages/export.twig:14
+#: admin/pages/content_settings.twig:51 admin/pages/content_settings.twig:59
+#: admin/pages/content_settings.twig:67 admin/pages/export.twig:14
 #: admin/pages/export.twig:20 admin/pages/export.twig:26
 #: admin/pages/export.twig:32 admin/pages/export.twig:41
 #: admin/pages/feathers.twig:18 admin/pages/feathers.twig:54
@@ -351,25 +351,17 @@ msgstr ""
 "Il supporto XML-RPC consente di manipolare il contenuto del blog in modalitá "
 "remota."
 
-#: admin/pages/content_settings.twig:57
-msgid "Ajax"
-msgstr "Ajax"
-
-#: admin/pages/content_settings.twig:60
-msgid "Ajax enhances your blog with additional interactive features."
-msgstr "Ajax migliora il tuo blog con funzionalità interattive aggiuntive."
-
-#: admin/pages/content_settings.twig:68
+#: admin/pages/content_settings.twig:61
 msgid "Display emoticons as Unicode emoji."
 msgstr "Visualizza emoticon come emoji Unicode."
 
-#: admin/pages/content_settings.twig:76
+#: admin/pages/content_settings.twig:69
 msgid "Compose blog content using Markdown text formatting."
 msgstr ""
 "Comporre il contenuto del blog utilizzando la formattazione del testo "
 "tramite Markdown."
 
-#: admin/pages/content_settings.twig:81 admin/pages/edit_group.twig:24
+#: admin/pages/content_settings.twig:74 admin/pages/edit_group.twig:24
 #: admin/pages/edit_user.twig:49 admin/pages/general_settings.twig:57
 #: admin/pages/route_settings.twig:85 admin/pages/user_settings.twig:47
 msgid "Update"

@@ -17,7 +17,7 @@ Arguments:
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 324
+	admin/javascripts/admin.js.php on line 323
 
 
 admin_head
@@ -374,7 +374,7 @@ Arguments:
 javascript
 ----------
 Called from:
-	includes/javascript.php on line 111
+	includes/javascript.php on line 108
 
 
 pingback
@@ -952,7 +952,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 2072
+	includes/controller/Admin.php on line 2071
 
 Target:
 	$write
@@ -961,7 +961,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2101
+	includes/controller/Admin.php on line 2100
 
 Target:
 	$manage
@@ -970,7 +970,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 2126
+	includes/controller/Admin.php on line 2125
 
 Target:
 	$settings
@@ -979,7 +979,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2144
+	includes/controller/Admin.php on line 2143
 
 Target:
 	$extend
@@ -988,7 +988,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2198
+	includes/controller/Admin.php on line 2197
 
 Target:
 	$this->context

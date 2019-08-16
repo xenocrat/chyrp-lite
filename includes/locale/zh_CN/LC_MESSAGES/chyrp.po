@@ -83,7 +83,7 @@ msgstr "路由启动了一个无效的控制器。"
 #: includes/controller/Admin.php:1740 includes/controller/Admin.php:1825
 #: includes/controller/Admin.php:1828 includes/controller/Admin.php:1831
 #: includes/controller/Admin.php:1834 includes/controller/Admin.php:1837
-#: includes/controller/Admin.php:2029 includes/controller/Ajax.php:32
+#: includes/controller/Admin.php:2028 includes/controller/Ajax.php:32
 #: includes/download.php:12 includes/download.php:15 includes/error.php:140
 #: includes/helpers.php:1676 includes/helpers.php:1682
 #: includes/helpers.php:1685 includes/helpers.php:1688
@@ -93,10 +93,10 @@ msgstr "路由启动了一个无效的控制器。"
 #: includes/helpers.php:1827 includes/helpers.php:1830
 #: includes/helpers.php:1833 includes/helpers.php:1836
 #: includes/helpers.php:1841 includes/thumb.php:15 includes/thumb.php:18
-#: includes/thumb.php:47 includes/thumb.php:202 install.php:767 upgrade.php:118
+#: includes/thumb.php:47 includes/thumb.php:202 install.php:766 upgrade.php:118
 #: upgrade.php:131 upgrade.php:144 upgrade.php:157 upgrade.php:170
 #: upgrade.php:184 upgrade.php:210 upgrade.php:223 upgrade.php:237
-#: upgrade.php:271 upgrade.php:284
+#: upgrade.php:271 upgrade.php:284 upgrade.php:297
 msgid "Error"
 msgstr "错误"
 
@@ -136,9 +136,9 @@ msgstr "无效动作。"
 #: includes/controller/Admin.php:1765 includes/controller/Admin.php:1790
 #: includes/controller/Admin.php:1801 includes/controller/Admin.php:1814
 #: includes/controller/Admin.php:1822 includes/controller/Admin.php:1868
-#: includes/controller/Admin.php:1881 includes/controller/Admin.php:1919
-#: includes/controller/Admin.php:1926 includes/controller/Admin.php:1959
-#: includes/controller/Admin.php:1965 includes/controller/Ajax.php:41
+#: includes/controller/Admin.php:1881 includes/controller/Admin.php:1918
+#: includes/controller/Admin.php:1925 includes/controller/Admin.php:1958
+#: includes/controller/Admin.php:1964 includes/controller/Ajax.php:41
 #: includes/controller/Ajax.php:52 includes/controller/Ajax.php:64
 #: includes/controller/Ajax.php:67 includes/controller/Ajax.php:87
 #: includes/controller/Ajax.php:90 includes/controller/Ajax.php:125
@@ -222,7 +222,7 @@ msgstr "羽毛未找到。"
 #: includes/controller/Admin.php:1684 includes/controller/Admin.php:1728
 #: includes/controller/Admin.php:1765 includes/controller/Admin.php:1801
 #: includes/controller/Admin.php:1822 includes/controller/Admin.php:1881
-#: includes/controller/Admin.php:1926 includes/controller/Admin.php:1965
+#: includes/controller/Admin.php:1925 includes/controller/Admin.php:1964
 #: includes/controller/Ajax.php:41 includes/controller/Ajax.php:67
 #: includes/controller/Ajax.php:87 includes/controller/Ajax.php:125
 #: includes/controller/Main.php:443 includes/controller/Main.php:570
@@ -331,7 +331,7 @@ msgstr "您没有足够的权限编辑页面。"
 msgid "Page updated."
 msgstr "页面已更新。"
 
-#: includes/controller/Admin.php:493 includes/controller/Admin.php:1987
+#: includes/controller/Admin.php:493 includes/controller/Admin.php:1986
 msgid "View page &rarr;"
 msgstr "查看页面 &rarr;"
 
@@ -440,8 +440,8 @@ msgstr "您不能删除您自己的账户。"
 
 #: includes/controller/Admin.php:822 includes/controller/Admin.php:838
 #: includes/controller/Admin.php:1026 includes/controller/Admin.php:1047
-#: includes/controller/Admin.php:1060 includes/controller/Admin.php:1934
-#: includes/controller/Admin.php:1939
+#: includes/controller/Admin.php:1060 includes/controller/Admin.php:1933
+#: includes/controller/Admin.php:1938
 msgid "Gone"
 msgstr "前往"
 
@@ -510,7 +510,7 @@ msgstr "新成员组不存在。"
 msgid "New member group must be specified."
 msgstr "新成员组必须被自定。"
 
-#: includes/controller/Admin.php:1047 includes/controller/Admin.php:1934
+#: includes/controller/Admin.php:1047 includes/controller/Admin.php:1933
 msgid "New default group does not exist."
 msgstr "新的默认组不存在。"
 
@@ -518,7 +518,7 @@ msgstr "新的默认组不存在。"
 msgid "New default group must be specified."
 msgstr "新的默认组必须被指定。"
 
-#: includes/controller/Admin.php:1060 includes/controller/Admin.php:1939
+#: includes/controller/Admin.php:1060 includes/controller/Admin.php:1938
 msgid "New guest group does not exist."
 msgstr "新的访问组不存在。"
 
@@ -590,8 +590,8 @@ msgstr "不能读取羽毛目录。"
 
 #: includes/controller/Admin.php:1648 includes/controller/Admin.php:1762
 #: includes/controller/Admin.php:1790 includes/controller/Admin.php:1814
-#: includes/controller/Admin.php:1868 includes/controller/Admin.php:1919
-#: includes/controller/Admin.php:1959
+#: includes/controller/Admin.php:1868 includes/controller/Admin.php:1918
+#: includes/controller/Admin.php:1958
 msgid "You do not have sufficient privileges to change settings."
 msgstr "您没有足够的权限改变设置。"
 
@@ -671,107 +671,107 @@ msgstr "无效的Chyrp URL。"
 msgid "Invalid canonical URL."
 msgstr "无效的规范URL。"
 
-#: includes/controller/Admin.php:1859 includes/controller/Admin.php:1910
-#: includes/controller/Admin.php:1950 includes/controller/Admin.php:2000
+#: includes/controller/Admin.php:1859 includes/controller/Admin.php:1909
+#: includes/controller/Admin.php:1949 includes/controller/Admin.php:1999
 msgid "Settings updated."
 msgstr "设置已更新。"
 
-#: includes/controller/Admin.php:1971
+#: includes/controller/Admin.php:1970
 msgid ""
 "Clean URLs are disabled because the <em>.htaccess</em> file cannot be "
 "configured."
 msgstr "清洁URL被禁用因为<em>.htaccess</em>文件未配置。"
 
-#: includes/controller/Admin.php:1979
+#: includes/controller/Admin.php:1978
 msgid "My Awesome Homepage"
 msgstr "我最棒的主页"
 
-#: includes/controller/Admin.php:1980
+#: includes/controller/Admin.php:1979
 msgid "Nothing here yet!"
 msgstr "然而这里什么也没有！"
 
-#: includes/controller/Admin.php:1987
+#: includes/controller/Admin.php:1986
 msgid "Page created."
 msgstr "页面已创建。"
 
-#: includes/controller/Admin.php:2009 includes/controller/Main.php:566
+#: includes/controller/Admin.php:2008 includes/controller/Main.php:566
 msgid "You are already logged in."
 msgstr "您已登陆。"
 
-#: includes/controller/Admin.php:2029 includes/controller/Ajax.php:32
+#: includes/controller/Admin.php:2028 includes/controller/Ajax.php:32
 #: includes/download.php:15 includes/thumb.php:18
 msgid "Missing argument."
 msgstr "缺少参数。"
 
-#: includes/controller/Admin.php:2033
+#: includes/controller/Admin.php:2032
 msgid "Help"
 msgstr "帮助"
 
-#: includes/controller/Admin.php:2046
+#: includes/controller/Admin.php:2045
 msgid "Write"
 msgstr "写作"
 
-#: includes/controller/Admin.php:2047
+#: includes/controller/Admin.php:2046
 msgid "Manage"
 msgstr "管理所有"
 
-#: includes/controller/Admin.php:2048
+#: includes/controller/Admin.php:2047
 msgid "Settings"
 msgstr "设置"
 
-#: includes/controller/Admin.php:2049
+#: includes/controller/Admin.php:2048
 msgid "Extend"
 msgstr "扩展"
 
-#: includes/controller/Admin.php:2059
+#: includes/controller/Admin.php:2058
 msgid "Page"
 msgstr "页面"
 
-#: includes/controller/Admin.php:2086
+#: includes/controller/Admin.php:2085
 msgid "Posts"
 msgstr "所有帖子"
 
-#: includes/controller/Admin.php:2090
+#: includes/controller/Admin.php:2089
 msgid "Pages"
 msgstr "所有页面"
 
-#: includes/controller/Admin.php:2094 includes/controller/Admin.php:2122
+#: includes/controller/Admin.php:2093 includes/controller/Admin.php:2121
 msgid "Users"
 msgstr "用户"
 
-#: includes/controller/Admin.php:2098
+#: includes/controller/Admin.php:2097
 msgid "Groups"
 msgstr "所有组"
 
-#: includes/controller/Admin.php:2104
+#: includes/controller/Admin.php:2103
 msgid "Import"
 msgstr "导入"
 
-#: includes/controller/Admin.php:2107
+#: includes/controller/Admin.php:2106
 msgid "Export"
 msgstr "导出"
 
-#: includes/controller/Admin.php:2120
+#: includes/controller/Admin.php:2119
 msgid "General"
 msgstr "通用"
 
-#: includes/controller/Admin.php:2121
+#: includes/controller/Admin.php:2120
 msgid "Content"
 msgstr "内容"
 
-#: includes/controller/Admin.php:2123
+#: includes/controller/Admin.php:2122
 msgid "Routes"
 msgstr "路由"
 
-#: includes/controller/Admin.php:2139
+#: includes/controller/Admin.php:2138
 msgid "Modules"
 msgstr "模块"
 
-#: includes/controller/Admin.php:2140
+#: includes/controller/Admin.php:2139
 msgid "Feathers"
 msgstr "羽毛"
 
-#: includes/controller/Admin.php:2141
+#: includes/controller/Admin.php:2140
 msgid "Themes"
 msgstr "主题"
 
@@ -1103,25 +1103,25 @@ msgstr "您的新密码为 %s"
 msgid "Your new password is: %s"
 msgstr "您的新密码: %s"
 
-#: includes/javascript.php:34
+#: includes/javascript.php:31
 msgid "Are you sure you want to delete this post?"
 msgstr "您确定您想删除这篇帖子？"
 
-#: includes/javascript.php:46
+#: includes/javascript.php:43
 msgid ""
 "The post cannot be deleted because your web browser did not send proper "
 "credentials."
 msgstr "该帖子无法被删除，因为您的浏览器没有发送正确的凭证。"
 
-#: includes/javascript.php:64 includes/javascript.php:105
+#: includes/javascript.php:61 includes/javascript.php:102
 msgid "Oops! Something went wrong on this web page."
 msgstr "哎呀！这个网页出了点问题。"
 
-#: includes/javascript.php:77
+#: includes/javascript.php:74
 msgid "Are you sure you want to delete this page and its child pages?"
 msgstr "您确定您想要删除这个页面以及它的子页面？"
 
-#: includes/javascript.php:89
+#: includes/javascript.php:86
 msgid ""
 "The page cannot be deleted because your web browser did not send proper "
 "credentials."
@@ -1352,115 +1352,116 @@ msgstr "请确保您的SQLite数据库在这个服务器上可写。"
 msgid "Please enter a username and password for the MySQL database."
 msgstr "请输入MySQL数据的用户名和密码。"
 
-#: install.php:767 upgrade.php:118 upgrade.php:131 upgrade.php:144
+#: install.php:766 upgrade.php:118 upgrade.php:131 upgrade.php:144
 #: upgrade.php:157 upgrade.php:170 upgrade.php:184 upgrade.php:210
 #: upgrade.php:223 upgrade.php:237 upgrade.php:271 upgrade.php:284
+#: upgrade.php:297
 msgid "Could not write the configuration file."
 msgstr "不能写入配置文件。"
 
-#: install.php:784
+#: install.php:783
 msgid "Database Setup"
 msgstr "数据库设置"
 
-#: install.php:786
+#: install.php:785
 msgid "Adapter"
 msgstr "适配器"
 
-#: install.php:797
+#: install.php:796
 msgid "Host"
 msgstr "主机"
 
-#: install.php:801 install.php:860
+#: install.php:800 install.php:859
 msgid "Username"
 msgstr "用户名"
 
-#: install.php:805 install.php:864 install.php:868
+#: install.php:804 install.php:863 install.php:867
 msgid "Password"
 msgstr "密码"
 
-#: install.php:809
+#: install.php:808
 msgid "Database"
 msgstr "数据库"
 
-#: install.php:811
+#: install.php:810
 msgid "(absolute or relative path)"
 msgstr "（相对或者绝对路径）"
 
-#: install.php:817
+#: install.php:816
 msgid ""
 "Be sure to put your SQLite database outside the document root directory, "
 "otherwise visitors will be able to download it."
 msgstr "请务必将您的SQLite数据库放在网站根目录之外，否则访问者将能够下载它。"
 
-#: install.php:820
+#: install.php:819
 msgid "Table Prefix"
 msgstr "表前缀"
 
-#: install.php:820
+#: install.php:819
 msgid "(optional)"
 msgstr "(可选)"
 
-#: install.php:824
+#: install.php:823
 msgid "Website Setup"
 msgstr "网站设置"
 
-#: install.php:826
+#: install.php:825
 msgid "Chyrp URL"
 msgstr ""
 
-#: install.php:830
+#: install.php:829
 msgid "Site Name"
 msgstr "站点名"
 
-#: install.php:831
+#: install.php:830
 msgid "My Awesome Site"
 msgstr "我最棒的站点"
 
-#: install.php:834
+#: install.php:833
 msgid "Description"
 msgstr "描述"
 
-#: install.php:838
+#: install.php:837
 msgid "Time Zone"
 msgstr "时区"
 
-#: install.php:848
+#: install.php:847
 msgid "Language"
 msgstr "语言"
 
-#: install.php:858
+#: install.php:857
 msgid "Admin Account"
 msgstr "管理员账号"
 
-#: install.php:868
+#: install.php:867
 msgid "(again)"
 msgstr "(确认)"
 
-#: install.php:872
+#: install.php:871
 msgid "Email Address"
 msgstr "联系的邮件地址"
 
-#: install.php:875
+#: install.php:874
 msgid "Install me!"
 msgstr "安装！"
 
-#: install.php:878
+#: install.php:877
 msgid "Installation Complete"
 msgstr "安装完成"
 
-#: install.php:879 upgrade.php:552
+#: install.php:878 upgrade.php:566
 msgid "What now?"
 msgstr "现在做什么？"
 
-#: install.php:881
+#: install.php:880
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr "删除 <em>install.php</em>，您不再需要它。"
 
-#: install.php:882
+#: install.php:881
 msgid "Log in to your site and configure things to your liking."
 msgstr "登陆您的站点并且配置您喜欢的东西。"
 
-#: install.php:884 upgrade.php:558
+#: install.php:883 upgrade.php:572
 msgid "Take me to my site!"
 msgstr "前往我的站点！"
 
@@ -1472,42 +1473,42 @@ msgstr ""
 msgid "You might need to update your canonical URL's <em>.htaccess</em> file."
 msgstr ""
 
-#: upgrade.php:295
+#: upgrade.php:308
 msgid "Chyrp Lite Upgrader"
 msgstr "Chyrp Lite升级程序"
 
-#: upgrade.php:541
+#: upgrade.php:555
 msgid "Halt!"
 msgstr "等一下！"
 
-#: upgrade.php:542
+#: upgrade.php:556
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr "升级前请采取以下预防措施："
 
-#: upgrade.php:544
+#: upgrade.php:558
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr "<strong>开始前备份您的数据库！</strong>"
 
-#: upgrade.php:545
+#: upgrade.php:559
 msgid "Tell your users that your site is offline for maintenance."
 msgstr "告知您的用户站点处于离线状态以进行维护。"
 
-#: upgrade.php:548
+#: upgrade.php:562
 msgid "Upgrade me!"
 msgstr "升级！"
 
-#: upgrade.php:551
+#: upgrade.php:565
 msgid "Upgrade Complete"
 msgstr "升级完成"
 
-#: upgrade.php:554
+#: upgrade.php:568
 msgid "Take action to resolve any errors reported on this page."
 msgstr "采取措施解决此页面上报告的任何错误。"
 
-#: upgrade.php:555
+#: upgrade.php:569
 msgid "Run this upgrader again if you need to."
 msgstr "如果需要，再次运行此升级程序。"
 
-#: upgrade.php:556
+#: upgrade.php:570
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr "删除 <em>upgrade.php</em> 一旦您升级完成后。"
