@@ -8,10 +8,8 @@
     require_once "common.php";
 ?>
 $(function() {
-    if (Site.ajax) {
-        Post.init();
-        Page.init();
-    }
+    Post.init();
+    Page.init();
 });
 var Route = {
     action: '<?php if (isset($_GET['action'])) echo addslashes($_GET['action']); ?>'
@@ -21,8 +19,7 @@ var Visitor = {
 }
 var Site = {
     url: '<?php echo addslashes($config->url); ?>',
-    chyrp_url: '<?php echo addslashes($config->chyrp_url); ?>',
-    ajax: <?php echo($config->enable_ajax ? "true" : "false"); ?> 
+    chyrp_url: '<?php echo addslashes($config->chyrp_url); ?>'
 }
 var Post = {
     failed: false,

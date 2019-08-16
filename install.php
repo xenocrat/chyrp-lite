@@ -747,7 +747,6 @@
                          $config->set("uploads_limit", 10),
                          $config->set("send_pingbacks", false),
                          $config->set("enable_xmlrpc", true),
-                         $config->set("enable_ajax", true),
                          $config->set("enable_emoji", true),
                          $config->set("enable_markdown", true),
                          $config->set("can_register", false),

@@ -2,15 +2,13 @@ var ChyrpLikes = {
     failed: false,
     busy: false,
     init: function() {
-        if (Site.ajax) {
-            $("div.likes a.likes").click(function(e) {
-                if (!ChyrpLikes.failed) {
-                    e.preventDefault();
-                    ChyrpLikes.toggle($(this).attr("data-post_id"));
-                }
-            });
-            ChyrpLikes.watch();
-        }
+        $("div.likes a.likes").click(function(e) {
+            if (!ChyrpLikes.failed) {
+                e.preventDefault();
+                ChyrpLikes.toggle($(this).attr("data-post_id"));
+            }
+        });
+        ChyrpLikes.watch();
     },
     watch: function() {
         // Watch for DOM additions on blog pages.

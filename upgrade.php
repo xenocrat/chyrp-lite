@@ -284,6 +284,19 @@
             error(__("Error"), __("Could not write the configuration file."));
     }
 
+    /**
+     * Function: remove_ajax
+     * Removes the enable_ajax config setting.
+     *
+     * Versions: 2019.02 => 2019.03
+     */
+    function remove_ajax() {
+        $set = Config::current()->remove("enable_ajax");
+
+        if ($set === false)
+            error(__("Error"), __("Could not write the configuration file."));
+    }
+
     #---------------------------------------------
     # Output Starts
     #---------------------------------------------
@@ -514,6 +527,7 @@
         update_htaccess();
         remove_feed_url();
         remove_cookies_notification();
+        remove_ajax();
 
         # Perform module upgrades.
         foreach ($config->enabled_modules as $module)

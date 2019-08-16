@@ -129,8 +129,7 @@ var Visitor = {
 }
 var Site = {
     url: '<?php echo addslashes($config->url); ?>',
-    chyrp_url: '<?php echo addslashes($config->chyrp_url); ?>',
-    ajax: <?php echo($config->enable_ajax ? "true" : "false"); ?> 
+    chyrp_url: '<?php echo addslashes($config->chyrp_url); ?>'
 }
 var Help = {
     init: function() {

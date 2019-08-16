@@ -1903,7 +1903,6 @@
             $config->set("uploads_limit", (int) $_POST['uploads_limit']);
             $config->set("send_pingbacks", !empty($_POST['send_pingbacks']));
             $config->set("enable_xmlrpc", !empty($_POST['enable_xmlrpc']));
-            $config->set("enable_ajax", !empty($_POST['enable_ajax']));
             $config->set("enable_emoji", !empty($_POST['enable_emoji']));
             $config->set("enable_markdown", !empty($_POST['enable_markdown']));
 
