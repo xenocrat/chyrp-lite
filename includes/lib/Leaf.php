@@ -22,6 +22,7 @@
                 new \Twig\TwigFunction("generate_captcha",  "generate_captcha"),
 
                 # Custom functions:
+                new \Twig\TwigFunction("javascripts",       "twig_function_javascripts"),
                 new \Twig\TwigFunction("paginate",          "twig_function_paginate"),
                 new \Twig\TwigFunction("posted",            "twig_function_posted"),
                 new \Twig\TwigFunction("mailto",            "twig_function_mailto"),
@@ -96,6 +97,26 @@
                 return new \Twig\TwigFilter($name, array($module, "twig_filter_".$name));
 
         return false;
+    }
+
+    /**
+     * Function: twig_function_javascripts
+     * Returns inline JavaScript for core functionality and extensions.
+     */
+    function twig_function_javascripts() {
+        $config = Config::current();
+        $route = Route::current();
+        $theme = Theme::current();
+        $trigger = Trigger::current();
+
+        $script = (ADMIN) ?
+            MAIN_DIR.DIR."admin".DIR."javascripts".DIR."admin.js.php" :
+            INCLUDES_DIR.DIR."javascript.php" ;
+
+        ob_start();
+        include $script;
+
+        return "<script>\n".ob_get_clean()."</script>\n";
     }
 
     /**

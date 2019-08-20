@@ -241,8 +241,7 @@
             $config = Config::current();
             $route = Route::current();
 
-            $scripts = array($config->chyrp_url."/includes/common.js",
-                             $config->chyrp_url."/includes/javascript.php?action=".$route->action);
+            $scripts = array($config->chyrp_url."/includes/common.js");
 
             # Ask extensions to provide additional scripts.
             Trigger::current()->filter($scripts, "scripts");

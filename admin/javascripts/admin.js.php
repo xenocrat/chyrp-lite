@@ -1,6 +1,8 @@
 <?php
-    define('JAVASCRIPT', true);
-    require_once dirname(dirname(dirname(__FILE__))).DIRECTORY_SEPARATOR."includes".DIRECTORY_SEPARATOR."common.php";
+    /**
+     * File: admin.js.php
+     * JavaScript for core functionality and extensions.
+     */
 ?>
 $(function() {
     toggle_all();
@@ -122,10 +124,10 @@ function auto_submit() {
     });
 }
 var Route = {
-    action: '<?php if (isset($_GET['action'])) echo addslashes($_GET['action']); ?>'
+    action: '<?php echo $route->action; ?>'
 }
 var Visitor = {
-    token: '<?php if (same_origin()) echo authenticate(); ?>'
+    token: '<?php echo authenticate(); ?>'
 }
 var Site = {
     url: '<?php echo addslashes($config->url); ?>',

@@ -3,19 +3,16 @@
      * File: javascript
      * JavaScript for core functionality and extensions.
      */
-
-    define('JAVASCRIPT', true);
-    require_once "common.php";
 ?>
 $(function() {
     Post.init();
     Page.init();
 });
 var Route = {
-    action: '<?php if (isset($_GET['action'])) echo addslashes($_GET['action']); ?>'
+    action: '<?php echo $route->action; ?>'
 }
 var Visitor = {
-    token: '<?php if (same_origin()) echo authenticate(); ?>'
+    token: '<?php echo authenticate(); ?>'
 }
 var Site = {
     url: '<?php echo addslashes($config->url); ?>',
