@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.3\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Content-Type: text/plain; charset=UTF-8
@@ -46,7 +46,7 @@ msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "永久链接至 &#8220;%s&#8221;"
 
 #: themes/topaz/content/post.twig:17 themes/topaz/content/sidebar.twig:29
-#: themes/topaz/layouts/default.twig:93
+#: themes/topaz/layouts/default.twig:121
 msgid "Draft"
 msgstr "草稿"
 
@@ -101,15 +101,15 @@ msgstr "&copy; %s, %s."
 msgid "&copy; %s."
 msgstr "&copy; %s."
 
-#: themes/topaz/content/sidebar.twig:5 themes/topaz/layouts/default.twig:40
+#: themes/topaz/content/sidebar.twig:5 themes/topaz/layouts/default.twig:68
 msgid "Search&hellip;"
 msgstr "搜索&hellip;"
 
-#: themes/topaz/content/sidebar.twig:5 themes/topaz/layouts/default.twig:40
+#: themes/topaz/content/sidebar.twig:5 themes/topaz/layouts/default.twig:68
 msgid "Search this blog"
 msgstr "搜索"
 
-#: themes/topaz/content/sidebar.twig:6 themes/topaz/layouts/default.twig:41
+#: themes/topaz/content/sidebar.twig:6 themes/topaz/layouts/default.twig:69
 msgid "Search"
 msgstr "搜索"
 
@@ -117,45 +117,45 @@ msgstr "搜索"
 msgid "Links"
 msgstr "链接"
 
-#: themes/topaz/content/sidebar.twig:11 themes/topaz/layouts/default.twig:63
+#: themes/topaz/content/sidebar.twig:11 themes/topaz/layouts/default.twig:91
 msgid "Blog"
 msgstr "博客"
 
 #: themes/topaz/content/sidebar.twig:14 themes/topaz/forms/user/controls.twig:9
 #: themes/topaz/forms/user/register.twig:13
-#: themes/topaz/layouts/default.twig:75
+#: themes/topaz/layouts/default.twig:103
 msgid "Email"
 msgstr "邮件"
 
-#: themes/topaz/content/sidebar.twig:17 themes/topaz/layouts/default.twig:78
+#: themes/topaz/content/sidebar.twig:17 themes/topaz/layouts/default.twig:106
 msgid "Feed"
 msgstr "订阅"
 
-#: themes/topaz/content/sidebar.twig:21 themes/topaz/layouts/default.twig:85
+#: themes/topaz/content/sidebar.twig:21 themes/topaz/layouts/default.twig:113
 msgid "Admin"
 msgstr "管理"
 
-#: themes/topaz/content/sidebar.twig:25 themes/topaz/layouts/default.twig:89
+#: themes/topaz/content/sidebar.twig:25 themes/topaz/layouts/default.twig:117
 msgid "Write"
 msgstr "写作"
 
 #: themes/topaz/content/sidebar.twig:34 themes/topaz/forms/user/controls.twig:5
-#: themes/topaz/layouts/default.twig:98
+#: themes/topaz/layouts/default.twig:126
 msgid "Controls"
 msgstr "操作"
 
-#: themes/topaz/content/sidebar.twig:37 themes/topaz/layouts/default.twig:101
+#: themes/topaz/content/sidebar.twig:37 themes/topaz/layouts/default.twig:129
 msgid "Log out"
 msgstr "退出登陆"
 
 #: themes/topaz/content/sidebar.twig:42 themes/topaz/forms/user/register.twig:5
 #: themes/topaz/forms/user/register.twig:19
-#: themes/topaz/layouts/default.twig:106
+#: themes/topaz/layouts/default.twig:134
 msgid "Register"
 msgstr "注册"
 
 #: themes/topaz/content/sidebar.twig:46 themes/topaz/forms/user/login.twig:5
-#: themes/topaz/forms/user/login.twig:14 themes/topaz/layouts/default.twig:110
+#: themes/topaz/forms/user/login.twig:14 themes/topaz/layouts/default.twig:138
 msgid "Log in"
 msgstr "登陆"
 
@@ -175,7 +175,7 @@ msgstr "相关帖子"
 msgid "Recent Posts"
 msgstr "最近的帖子"
 
-#: themes/topaz/content/sidebar.twig:91 themes/topaz/layouts/default.twig:81
+#: themes/topaz/content/sidebar.twig:91 themes/topaz/layouts/default.twig:109
 msgid "Archive"
 msgstr "档案"
 
@@ -349,20 +349,19 @@ msgstr ""
 msgid "A minimalist responsive theme for Chyrp Lite."
 msgstr ""
 
-#: themes/topaz/javascripts/theme.js.php:14
-#: themes/topaz/javascripts/theme.js.php:22
+#: themes/topaz/layouts/default.twig:25 themes/topaz/layouts/default.twig:33
 msgid "Menu"
 msgstr "菜单"
 
-#: themes/topaz/layouts/default.twig:55
+#: themes/topaz/layouts/default.twig:83
 msgid "Newer posts"
 msgstr "较新的帖子"
 
-#: themes/topaz/layouts/default.twig:56
+#: themes/topaz/layouts/default.twig:84
 msgid "Older posts"
 msgstr "较旧的帖子"
 
-#: themes/topaz/layouts/default.twig:122
+#: themes/topaz/layouts/default.twig:150
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "调用 %s 在行 %d 在 %s 秒."

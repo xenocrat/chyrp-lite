@@ -17,13 +17,13 @@ Arguments:
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 323
+	admin/javascripts/admin.js.php on line 325
 
 
 admin_head
 ----------
 Called from:
-	admin/layouts/default.twig on line 15
+	admin/layouts/default.twig on line 13
 
 
 delete_user_form
@@ -347,25 +347,25 @@ Arguments:
 visitor_authenticate
 --------------------
 Called from:
-	includes/helpers.php on line 569
+	includes/helpers.php on line 543
 
 
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 1993
+	includes/helpers.php on line 1967
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 2010
+	includes/helpers.php on line 1984
 
 
 send_correspondence
 -------------------
 Called from:
-	includes/helpers.php on line 2188
+	includes/helpers.php on line 2162
 
 Arguments:
 	$action, $params
@@ -374,7 +374,7 @@ Arguments:
 javascript
 ----------
 Called from:
-	includes/javascript.php on line 108
+	includes/javascript.php on line 105
 
 
 pingback
@@ -746,19 +746,19 @@ Called from:
 end_head
 --------
 Called from:
-	themes/blossom/layouts/default.twig on line 14
-	themes/sparrow/layouts/default.twig on line 14
-	themes/topaz/layouts/default.twig on line 14
-	themes/umbra/layouts/default.twig on line 14
+	themes/blossom/layouts/default.twig on line 42
+	themes/sparrow/layouts/default.twig on line 15
+	themes/topaz/layouts/default.twig on line 42
+	themes/umbra/layouts/default.twig on line 15
 
 
 end_content
 -----------
 Called from:
-	themes/blossom/layouts/default.twig on line 116
-	themes/sparrow/layouts/default.twig on line 102
-	themes/topaz/layouts/default.twig on line 115
-	themes/umbra/layouts/default.twig on line 102
+	themes/blossom/layouts/default.twig on line 144
+	themes/sparrow/layouts/default.twig on line 103
+	themes/topaz/layouts/default.twig on line 143
+	themes/umbra/layouts/default.twig on line 103
 
 
 
@@ -837,7 +837,7 @@ Target:
 scripts
 -------
 Called from:
-	includes/class/Theme.php on line 248
+	includes/class/Theme.php on line 245
 
 Target:
 	$scripts
@@ -846,7 +846,7 @@ Target:
 links
 -----
 Called from:
-	includes/class/Theme.php on line 307
+	includes/class/Theme.php on line 302
 
 Target:
 	$links
@@ -1047,7 +1047,7 @@ Target:
 keyword_search
 --------------
 Called from:
-	includes/helpers.php on line 799
+	includes/helpers.php on line 773
 
 Target:
 	$search
@@ -1059,7 +1059,7 @@ Arguments:
 link_regexp
 -----------
 Called from:
-	includes/helpers.php on line 1368
+	includes/helpers.php on line 1342
 
 Target:
 	$expressions
@@ -1068,7 +1068,7 @@ Target:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 2123
+	includes/helpers.php on line 2097
 
 Target:
 	$function
