@@ -42,32 +42,6 @@
         return (class_exists("Visitor") and isset(Visitor::current()->id) and Visitor::current()->id != 0);
     }
 
-    /**
-     * Function: same_origin
-     * Returns whether or not the request was referred from another resource on this site.
-     */
-    function same_origin() {
-        $config = Config::current();
-
-        foreach (array($config->url, $config->chyrp_url) as $url) {
-            $parsed = parse_url($url);
-            $origin = fallback($parsed["scheme"], "http")."://".fallback($parsed["host"], $_SERVER['SERVER_NAME']);
-
-            if (isset($parsed["port"]))
-                $origin.= ":".$parsed["port"];
-
-            $quoted = preg_quote($origin, '~');
-
-            if (isset($_SERVER['HTTP_ORIGIN']) and preg_match('~^'.$quoted.'$~', $_SERVER['HTTP_ORIGIN']))
-                return true;
-
-            if (isset($_SERVER['HTTP_REFERER']) and preg_match('~^'.$quoted.'($|/)~', $_SERVER['HTTP_REFERER']))
-                return true;
-        }
-
-        return false;
-    }
-
     #---------------------------------------------
     # Routing
     #---------------------------------------------
