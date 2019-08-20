@@ -214,9 +214,7 @@
 
             if (is_dir(THEME_DIR.DIR."stylesheets") or is_dir(THEME_DIR.DIR."css")) {
                 foreach(array_merge((array) glob(THEME_DIR.DIR."stylesheets".DIR."*.css"),
-                                    (array) glob(THEME_DIR.DIR."stylesheets".DIR."*.css.php"),
-                                    (array) glob(THEME_DIR.DIR."css".DIR."*.css"),
-                                    (array) glob(THEME_DIR.DIR."css".DIR."*.css.php")) as $filepath) {
+                                    (array) glob(THEME_DIR.DIR."css".DIR."*.css")) as $filepath) {
 
                     $filename = basename($filepath);
 
@@ -254,9 +252,7 @@
 
             if (is_dir(THEME_DIR.DIR."javascripts") or is_dir(THEME_DIR.DIR."js")) {
                 foreach(array_merge((array) glob(THEME_DIR.DIR."javascripts".DIR."*.js"),
-                                    (array) glob(THEME_DIR.DIR."javascripts".DIR."*.js.php"),
-                                    (array) glob(THEME_DIR.DIR."js".DIR."*.js"),
-                                    (array) glob(THEME_DIR.DIR."js".DIR."*.js.php")) as $filepath) {
+                                    (array) glob(THEME_DIR.DIR."js".DIR."*.js")) as $filepath) {
 
                     $filename = basename($filepath);
 
