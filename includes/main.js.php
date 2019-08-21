@@ -36,11 +36,6 @@ var Post = {
     destroy: function(id) {
         var thisPost = $("#post_" + id).loader();
 
-        if (Visitor.token == "") {
-            Post.panic('<?php echo __("The post cannot be deleted because your web browser did not send proper credentials."); ?>');
-            return;
-        }
-
         $.post(Site.chyrp_url + "/ajax/", {
             action: "destroy_post",
             id: id,
@@ -78,11 +73,6 @@ var Page = {
     },
     destroy: function(id) {
         var thisPage = $("#page_" + id).loader();
-
-        if (Visitor.token == "") {
-            Page.panic('<?php echo __("The page cannot be deleted because your web browser did not send proper credentials."); ?>');
-            return;
-        }
 
         $.post(Site.chyrp_url + "/ajax/", {
             action: "destroy_page",

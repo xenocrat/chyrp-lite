@@ -98,11 +98,6 @@ var ChyrpComment = {
 
         var thisItem = $("#comment_" + id).loader();
 
-        if (Visitor.token == "") {
-            ChyrpComment.panic('<?php echo __("The comment cannot be edited because your web browser did not send proper credentials.", "comments"); ?>');
-            return;
-        }
-
         $.post(Site.chyrp_url + "/ajax/", {
             action: "edit_comment",
             comment_id: id,
@@ -171,11 +166,6 @@ var ChyrpComment = {
     },
     destroy: function(id) {
         var thisItem = $("#comment_" + id).loader();
-
-        if (Visitor.token == "") {
-            ChyrpComment.panic('<?php echo __("The comment cannot be deleted because your web browser did not send proper credentials.", "comments"); ?>');
-            return;
-        }
 
         $.post(Site.chyrp_url + "/ajax/", {
             action: "destroy_comment",
