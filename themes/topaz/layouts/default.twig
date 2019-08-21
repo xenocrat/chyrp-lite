@@ -21,11 +21,11 @@ $(document).ready(function() {
         }).append($("<a>", {
             "id": "mobile_toggle_link",
             "href": "#",
-            "role": "menuitem",
-            "aria-label": "{{ 'Menu' | translate }}"
+            "role": "menuitem"
         }).on("click", function(e) {
             e.preventDefault();
-            if ( $(".mobile_nav").hasClass("on") ) {
+
+            if ($(".mobile_nav").hasClass("on")) {
                 $(".mobile_nav").removeClass("on");
             } else {
                 $(".mobile_nav").addClass("on");
