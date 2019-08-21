@@ -111,7 +111,7 @@
 
         $script = (ADMIN) ?
             MAIN_DIR.DIR."admin".DIR."javascripts".DIR."admin.js.php" :
-            INCLUDES_DIR.DIR."javascript.php" ;
+            INCLUDES_DIR.DIR."main.js.php" ;
 
         ob_start();
         include $script;
