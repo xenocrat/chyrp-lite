@@ -23,7 +23,7 @@ Called from:
 admin_head
 ----------
 Called from:
-	admin/layouts/default.twig on line 13
+	admin/layouts/default.twig on line 12
 
 
 delete_user_form
@@ -239,7 +239,7 @@ Arguments:
 runtime
 -------
 Called from:
-	includes/common.php on line 378
+	includes/common.php on line 382
 
 
 before_export
@@ -371,12 +371,6 @@ Arguments:
 	$action, $params
 
 
-javascript
-----------
-Called from:
-	includes/javascript.php on line 105
-
-
 pingback
 --------
 Called from:
@@ -420,6 +414,12 @@ Called from:
 
 Arguments:
 	$args[3], $post
+
+
+javascript
+----------
+Called from:
+	includes/main.js.php on line 95
 
 
 add_group
@@ -746,19 +746,19 @@ Called from:
 end_head
 --------
 Called from:
-	themes/blossom/layouts/default.twig on line 42
-	themes/sparrow/layouts/default.twig on line 15
-	themes/topaz/layouts/default.twig on line 42
-	themes/umbra/layouts/default.twig on line 15
+	themes/blossom/layouts/default.twig on line 41
+	themes/sparrow/layouts/default.twig on line 14
+	themes/topaz/layouts/default.twig on line 41
+	themes/umbra/layouts/default.twig on line 14
 
 
 end_content
 -----------
 Called from:
-	themes/blossom/layouts/default.twig on line 144
-	themes/sparrow/layouts/default.twig on line 103
-	themes/topaz/layouts/default.twig on line 143
-	themes/umbra/layouts/default.twig on line 103
+	themes/blossom/layouts/default.twig on line 143
+	themes/sparrow/layouts/default.twig on line 102
+	themes/topaz/layouts/default.twig on line 142
+	themes/umbra/layouts/default.twig on line 102
 
 
 
@@ -855,7 +855,7 @@ Target:
 visitor
 -------
 Called from:
-	includes/common.php on line 375
+	includes/common.php on line 379
 
 Target:
 	$visitor

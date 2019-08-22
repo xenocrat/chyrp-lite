@@ -38,7 +38,7 @@ msgstr ""
 
 #: themes/topaz/content/post.twig:17
 #: themes/topaz/content/sidebar.twig:29
-#: themes/topaz/layouts/default.twig:121
+#: themes/topaz/layouts/default.twig:120
 msgid "Draft"
 msgstr ""
 
@@ -97,17 +97,17 @@ msgid "&copy; %s."
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:5
-#: themes/topaz/layouts/default.twig:68
+#: themes/topaz/layouts/default.twig:67
 msgid "Search&hellip;"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:5
-#: themes/topaz/layouts/default.twig:68
+#: themes/topaz/layouts/default.twig:67
 msgid "Search this blog"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:6
-#: themes/topaz/layouts/default.twig:69
+#: themes/topaz/layouts/default.twig:68
 msgid "Search"
 msgstr ""
 
@@ -116,54 +116,54 @@ msgid "Links"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:11
-#: themes/topaz/layouts/default.twig:91
+#: themes/topaz/layouts/default.twig:90
 msgid "Blog"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:14
 #: themes/topaz/forms/user/controls.twig:9
 #: themes/topaz/forms/user/register.twig:13
-#: themes/topaz/layouts/default.twig:103
+#: themes/topaz/layouts/default.twig:102
 msgid "Email"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:17
-#: themes/topaz/layouts/default.twig:106
+#: themes/topaz/layouts/default.twig:105
 msgid "Feed"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:21
-#: themes/topaz/layouts/default.twig:113
+#: themes/topaz/layouts/default.twig:112
 msgid "Admin"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:25
-#: themes/topaz/layouts/default.twig:117
+#: themes/topaz/layouts/default.twig:116
 msgid "Write"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:34
 #: themes/topaz/forms/user/controls.twig:5
-#: themes/topaz/layouts/default.twig:126
+#: themes/topaz/layouts/default.twig:125
 msgid "Controls"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:37
-#: themes/topaz/layouts/default.twig:129
+#: themes/topaz/layouts/default.twig:128
 msgid "Log out"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:42
 #: themes/topaz/forms/user/register.twig:5
 #: themes/topaz/forms/user/register.twig:19
-#: themes/topaz/layouts/default.twig:134
+#: themes/topaz/layouts/default.twig:133
 msgid "Register"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:46
 #: themes/topaz/forms/user/login.twig:5
 #: themes/topaz/forms/user/login.twig:14
-#: themes/topaz/layouts/default.twig:138
+#: themes/topaz/layouts/default.twig:137
 msgid "Log in"
 msgstr ""
 
@@ -184,7 +184,7 @@ msgid "Recent Posts"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:91
-#: themes/topaz/layouts/default.twig:109
+#: themes/topaz/layouts/default.twig:108
 msgid "Archive"
 msgstr ""
 
@@ -361,20 +361,19 @@ msgstr ""
 msgid "A minimalist responsive theme for Chyrp Lite."
 msgstr ""
 
-#: themes/topaz/layouts/default.twig:25
-#: themes/topaz/layouts/default.twig:33
+#: themes/topaz/layouts/default.twig:32
 msgid "Menu"
 msgstr ""
 
-#: themes/topaz/layouts/default.twig:83
+#: themes/topaz/layouts/default.twig:82
 msgid "Newer posts"
 msgstr ""
 
-#: themes/topaz/layouts/default.twig:84
+#: themes/topaz/layouts/default.twig:83
 msgid "Older posts"
 msgstr ""
 
-#: themes/topaz/layouts/default.twig:150
+#: themes/topaz/layouts/default.twig:149
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr ""

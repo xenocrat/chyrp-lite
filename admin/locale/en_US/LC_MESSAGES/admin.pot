@@ -222,7 +222,7 @@ msgstr ""
 msgid "preview"
 msgstr ""
 
-#: admin/layouts/default.twig:61
+#: admin/layouts/default.twig:60
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr ""

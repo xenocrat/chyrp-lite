@@ -390,22 +390,6 @@ msgstr "Si desidera rimuovere i commenti dal database?"
 msgid "Are you sure you want to permanently delete this comment?"
 msgstr "Sei sicuro di voler eliminare definitivamente questo commento?"
 
-#: modules/comments/javascript.php:102
-msgid ""
-"The comment cannot be edited because your web browser did not send proper "
-"credentials."
-msgstr ""
-"Il commento non può essere modificato perché il browser Web non ha inviato "
-"le credenziali appropriate."
-
-#: modules/comments/javascript.php:176
-msgid ""
-"The comment cannot be deleted because your web browser did not send proper "
-"credentials."
-msgstr ""
-"Il commento non può essere eliminato perché il browser Web non ha inviato le "
-"credenziali appropriate."
-
 #: modules/comments/model/Comment.php:369
 msgid "Anon"
 msgstr "Anonimo"

@@ -279,7 +279,7 @@ msgstr "Anteprima"
 msgid "preview"
 msgstr "anteprima"
 
-#: admin/layouts/default.twig:61
+#: admin/layouts/default.twig:60
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "Chiamato da %s sulla riga %d a %s secondi."

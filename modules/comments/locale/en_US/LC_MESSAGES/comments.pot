@@ -390,14 +390,6 @@ msgstr ""
 msgid "Are you sure you want to permanently delete this comment?"
 msgstr ""
 
-#: modules/comments/javascript.php:102
-msgid "The comment cannot be edited because your web browser did not send proper credentials."
-msgstr ""
-
-#: modules/comments/javascript.php:176
-msgid "The comment cannot be deleted because your web browser did not send proper credentials."
-msgstr ""
-
 #: modules/comments/model/Comment.php:369
 msgid "Anon"
 msgstr ""

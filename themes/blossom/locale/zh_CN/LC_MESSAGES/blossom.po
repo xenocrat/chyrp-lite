@@ -46,7 +46,7 @@ msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "永久链接至 &#8220;%s&#8221;"
 
 #: themes/blossom/content/post.twig:17 themes/blossom/content/sidebar.twig:29
-#: themes/blossom/layouts/default.twig:122
+#: themes/blossom/layouts/default.twig:121
 msgid "Draft"
 msgstr "草稿"
 
@@ -101,15 +101,15 @@ msgstr "&copy; %s, %s."
 msgid "&copy; %s."
 msgstr "&copy; %s."
 
-#: themes/blossom/content/sidebar.twig:5 themes/blossom/layouts/default.twig:68
+#: themes/blossom/content/sidebar.twig:5 themes/blossom/layouts/default.twig:67
 msgid "Search&hellip;"
 msgstr "搜索&hellip;"
 
-#: themes/blossom/content/sidebar.twig:5 themes/blossom/layouts/default.twig:68
+#: themes/blossom/content/sidebar.twig:5 themes/blossom/layouts/default.twig:67
 msgid "Search this blog"
 msgstr "搜索"
 
-#: themes/blossom/content/sidebar.twig:6 themes/blossom/layouts/default.twig:69
+#: themes/blossom/content/sidebar.twig:6 themes/blossom/layouts/default.twig:68
 msgid "Search"
 msgstr "搜索"
 
@@ -118,54 +118,54 @@ msgid "Links"
 msgstr "链接"
 
 #: themes/blossom/content/sidebar.twig:11
-#: themes/blossom/layouts/default.twig:92
+#: themes/blossom/layouts/default.twig:91
 msgid "Blog"
 msgstr "博客"
 
 #: themes/blossom/content/sidebar.twig:14
 #: themes/blossom/forms/user/controls.twig:9
 #: themes/blossom/forms/user/register.twig:13
-#: themes/blossom/layouts/default.twig:104
+#: themes/blossom/layouts/default.twig:103
 msgid "Email"
 msgstr "邮件"
 
 #: themes/blossom/content/sidebar.twig:17
-#: themes/blossom/layouts/default.twig:107
+#: themes/blossom/layouts/default.twig:106
 msgid "Feed"
 msgstr "订阅"
 
 #: themes/blossom/content/sidebar.twig:21
-#: themes/blossom/layouts/default.twig:114
+#: themes/blossom/layouts/default.twig:113
 msgid "Admin"
 msgstr "管理"
 
 #: themes/blossom/content/sidebar.twig:25
-#: themes/blossom/layouts/default.twig:118
+#: themes/blossom/layouts/default.twig:117
 msgid "Write"
 msgstr "写作"
 
 #: themes/blossom/content/sidebar.twig:34
 #: themes/blossom/forms/user/controls.twig:5
-#: themes/blossom/layouts/default.twig:127
+#: themes/blossom/layouts/default.twig:126
 msgid "Controls"
 msgstr "操作"
 
 #: themes/blossom/content/sidebar.twig:37
-#: themes/blossom/layouts/default.twig:130
+#: themes/blossom/layouts/default.twig:129
 msgid "Log out"
 msgstr "退出登陆"
 
 #: themes/blossom/content/sidebar.twig:42
 #: themes/blossom/forms/user/register.twig:5
 #: themes/blossom/forms/user/register.twig:19
-#: themes/blossom/layouts/default.twig:135
+#: themes/blossom/layouts/default.twig:134
 msgid "Register"
 msgstr "注册"
 
 #: themes/blossom/content/sidebar.twig:46
 #: themes/blossom/forms/user/login.twig:5
 #: themes/blossom/forms/user/login.twig:14
-#: themes/blossom/layouts/default.twig:139
+#: themes/blossom/layouts/default.twig:138
 msgid "Log in"
 msgstr "登陆"
 
@@ -186,7 +186,7 @@ msgid "Recent Posts"
 msgstr "最近的帖子"
 
 #: themes/blossom/content/sidebar.twig:91
-#: themes/blossom/layouts/default.twig:110
+#: themes/blossom/layouts/default.twig:109
 msgid "Archive"
 msgstr "档案"
 
@@ -353,20 +353,19 @@ msgstr "Blossom"
 msgid "The default theme provided with Chyrp Lite."
 msgstr "这是Chyrp Lite默认提供的主题。"
 
-#: themes/blossom/layouts/default.twig:25
-#: themes/blossom/layouts/default.twig:33
+#: themes/blossom/layouts/default.twig:32
 msgid "Menu"
 msgstr "菜单"
 
-#: themes/blossom/layouts/default.twig:78
+#: themes/blossom/layouts/default.twig:77
 msgid "Newer posts"
 msgstr "较新的帖子"
 
-#: themes/blossom/layouts/default.twig:86
+#: themes/blossom/layouts/default.twig:85
 msgid "Older posts"
 msgstr "较旧的帖子"
 
-#: themes/blossom/layouts/default.twig:151
+#: themes/blossom/layouts/default.twig:150
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "调用 %s 在行 %d 在 %s 秒."
