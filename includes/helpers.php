@@ -2178,8 +2178,9 @@
             MAIN_DIR.DIR."admin".DIR."javascripts".DIR."admin.js.php" :
             INCLUDES_DIR.DIR."main.js.php" ;
 
-        $common = $config->chyrp_url."/includes/common.js";
-        $common = '<script src="'.fix($common, true).'" type="text/javascript" charset="UTF-8"></script>';
+        $common = '<script src="'.
+                  fix($config->chyrp_url."/includes/common.js", true).
+                  '" type="text/javascript" charset="UTF-8"></script>';
 
         ob_start();
         include $script;
