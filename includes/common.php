@@ -180,6 +180,10 @@
             ob_start();
         }
 
+    # Constant: OB_BASE_LEVEL
+    # The base level of output buffering.
+    define('OB_BASE_LEVEL', ob_get_level());
+
     # File: error
     # Functions for handling and reporting errors.
     require_once INCLUDES_DIR.DIR."error.php";
