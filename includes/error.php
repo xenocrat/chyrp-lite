@@ -62,6 +62,10 @@
      *     $code - Numeric HTTP status code to set.
      */
     function error($title = "", $body = "", $backtrace = array(), $code = 500) {
+        # Discard any additional output buffers.
+        while (OB_BASE_LEVEL < ob_get_level())
+            ob_end_clean();
+
         # Clean the output buffer before we begin.
         if (ob_get_contents() !== false)
             ob_clean();
