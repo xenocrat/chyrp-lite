@@ -228,7 +228,7 @@
                 }
             }
 
-            return !empty($tags) ? "<!-- StyleSheets -->\n".implode("\n", $tags) : "" ;
+            return implode("\n", $tags);
         }
 
         /**
@@ -239,7 +239,7 @@
             $config = Config::current();
             $route = Route::current();
 
-            $scripts = array($config->chyrp_url."/includes/common.js");
+            $scripts = array();
 
             # Ask extensions to provide additional scripts.
             Trigger::current()->filter($scripts, "scripts");
@@ -266,7 +266,7 @@
                 }
             }
 
-            return !empty($tags) ? "<!-- JavaScripts -->\n".implode("\n", $tags) : "" ;
+            return javascripts().implode("\n", $tags);
         }
 
         /**
@@ -317,7 +317,7 @@
                             (!empty($link["title"]) ? ' title="'.fix($link["title"], true).'"' : "").'>';
             }
 
-            return !empty($tags) ? "<!-- Feeds -->\n".implode("\n", $tags) : "" ;
+            return implode("\n", $tags);
         }
 
         /**
