@@ -2163,3 +2163,27 @@
 
         return email($params["to"], $params["subject"], $params["message"], $params["headers"]);
     }
+
+    /**
+     * Function: javascripts
+     * Returns inline JavaScript for core functionality and extensions.
+     */
+    function javascripts() {
+        $config = Config::current();
+        $route = Route::current();
+        $theme = Theme::current();
+        $trigger = Trigger::current();
+
+        $script = (ADMIN) ?
+            MAIN_DIR.DIR."admin".DIR."javascripts".DIR."admin.js.php" :
+            INCLUDES_DIR.DIR."main.js.php" ;
+
+        $common = $config->chyrp_url."/includes/common.js";
+        $common = '<script src="'.fix($common, true).'" type="text/javascript" charset="UTF-8"></script>';
+
+        ob_start();
+        include $script;
+        $ob = ob_get_clean();
+
+        return $common."\n<script>\n".$ob."</script>\n";
+    }
