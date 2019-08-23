@@ -31,6 +31,7 @@
     define('USE_ZLIB',       false);
 
     ob_start();
+    define('OB_BASE_LEVEL', ob_get_level());
 
     # File: error
     # Functions for handling and reporting errors.

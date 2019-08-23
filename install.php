@@ -31,6 +31,7 @@
         exit("Chyrp Lite requires PHP 5.4 or greater. Installation cannot continue.");
 
     ob_start();
+    define('OB_BASE_LEVEL', ob_get_level());
 
     # File: error
     # Functions for handling and reporting errors.
