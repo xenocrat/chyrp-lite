@@ -50,6 +50,8 @@
                 "publish_post",
                 "import_chyrp_post",
                 "import_chyrp_page",
+                "user_logged_in",
+                "user_logged_out",
                 "change_setting"
             );
 
