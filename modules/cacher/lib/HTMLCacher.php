@@ -1,47 +1,51 @@
 <?php
     class HTMLCacher {
+        private $base;
+        private $life;
+        private $file;
+        private $path;
+
         public function __construct($url) {
             $this->base = CACHES_DIR.DIR."html";
             $this->life = Config::current()->module_cacher["cache_expire"];
-            $this->url  = $url;
-            $this->user = Visitor::current()->id;
-            $this->path = $this->base.DIR.$this->user;
-            $this->file = $this->path.DIR.token($this->url).".html";
+            $this->file = token(array($url, session_id())).".html";
+            $this->path = $this->base.DIR.$this->file;
 
-            # If the directories do not exist and cannot be created, or are not writable, cancel execution.
-            if (((!is_dir($this->base) and !@mkdir($this->base)) or !is_writable($this->base)) or
-                ((!is_dir($this->path) and !@mkdir($this->path)) or !is_writable($this->path)))
-                    cancel_module("cacher", __("Cacher module cannot write caches to disk.", "cacher"));
+            # Cancel execution if cache files cannot be written.
+            if ((!is_dir($this->base) and !@mkdir($this->base)) or !is_writable($this->base))
+                cancel_module("cacher", __("Cacher module cannot write caches to disk.", "cacher"));
         }
 
         private function available($route) {
-            return (MAIN and
+            return (MAIN and !PREVIEWING and
                 ($route->controller instanceof MainController) and
                 empty($_POST) and
                 !$route->controller->feed and
                 !Flash::exists() and
-                (file_exists($this->file) and filemtime($this->file) + $this->life >= time()));
+                (file_exists($this->path) and
+                filemtime($this->path) + $this->life >= time()));
         }
 
         private function cacheable($route) {
-            return (MAIN and
+            return (MAIN and !PREVIEWING and
                 ($route->controller instanceof MainController) and
                 empty($_POST) and
                 !$route->controller->feed and
                 !Flash::exists() and
-                (!file_exists($this->file) or filemtime($this->file) + $this->life < time()));
+                (!file_exists($this->path) or
+                filemtime($this->path) + $this->life < time()));
         }
 
         public function get($route) {
             if (self::available($route)) {
                 if (DEBUG)
-                    error_log("SERVING HTML cache for ".$this->url);
+                    error_log("SERVING HTML cache file ".$this->file);
 
-                $contents = @file_get_contents($this->file);
+                $contents = @file_get_contents($this->path);
 
                 if ($contents !== false and $contents !== "") {
                     header("Content-Type: text/html; charset=UTF-8");
-                    header("Last-Modified: ".date("r", filemtime($this->file)));
+                    header("Last-Modified: ".date("r", filemtime($this->path)));
                     exit($contents);
                 }
             }
@@ -50,12 +54,12 @@
         public function set($route) {
             if (self::cacheable($route)) {
                 if (DEBUG)
-                    error_log("GENERATING HTML cache for ".$this->url);
+                    error_log("GENERATING HTML cache file ".$this->file);
 
                 $contents = ob_get_contents();
 
                 if ($contents !== false and $contents !== "")
-                    @file_put_contents($this->file, $contents);
+                    @file_put_contents($this->path, $contents);
             }
         }
 
@@ -63,27 +67,7 @@
             if (DEBUG)
                 error_log("REGENERATING HTML caches");
 
-            foreach ((array) glob($this->base.DIR."*".DIR."*.html") as $file)
-                @unlink($file);
-        }
-
-        public function regenerate_user($user = null) {
-            fallback($user, $this->user);
-
-            if (DEBUG)
-                error_log("REGENERATING HTML caches for user ID ".$user);
-
-            foreach ((array) glob($this->base.DIR.$user.DIR."*.html") as $file)
-                @unlink($file);
-        }
-
-        public function regenerate_url($url = null) {
-            fallback($url, $this->url);
-
-            if (DEBUG)
-                error_log("REGENERATING HTML caches for URL ".$url);
-
-            foreach ((array) glob($this->base.DIR."*".DIR.token($url).".html") as $file)
+            foreach ((array) glob($this->base.DIR."*.html") as $file)
                 @unlink($file);
         }
     }

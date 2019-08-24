@@ -1,10 +1,14 @@
 <?php
     class Cacher extends Modules {
+        private $exclude;
+        private $url;
+        public $cachers;
+
         public function __init() {
             $this->exclude = Config::current()->module_cacher["cache_exclude"];
             $this->url     = rawurldecode(unfix(self_url()));
             $this->cachers = array(new HTMLCacher($this->url),
-                                   new FeedCacher($this->url));
+                                           new FeedCacher($this->url));
 
             $this->prepare_cache_regenerators();
         }
@@ -39,74 +43,37 @@
                 "add_page",
                 "update_post",
                 "update_page",
+                "update_user",
                 "delete_post",
                 "delete_page",
+                "delete_user",
                 "publish_post",
-                "change_setting",
                 "import_chyrp_post",
-                "import_chyrp_page"
+                "import_chyrp_page",
+                "change_setting"
             );
 
-            $trigger->filter($regenerate, "cacher_regenerate_triggers");
+            $trigger->filter($regenerate, "cache_regenerate_triggers");
 
             foreach ($regenerate as $action)
-                $this->addAlias($action, "regenerate");
-
-            $regenerate_users = array(
-                "update_user",
-                "delete_user",
-                "preview_theme_started",
-                "preview_theme_stopped"
-            );
-
-            $trigger->filter($regenerate_users, "cacher_regenerate_users_triggers");
-
-            foreach ($regenerate_users as $action)
-                $this->addAlias($action, "regenerate_users");
-
-            $regenerate_posts = array();
-
-            $trigger->filter($regenerate_posts, "cacher_regenerate_posts_triggers");
-
-            foreach ($regenerate_posts as $action)
-                $this->addAlias($action, "regenerate_posts");
+                $this->addAlias($action, "cache_regenerate");
 
             $exclude_urls = array(
-                "visitor_authenticate",
                 "before_generate_captcha"
             );
 
-            $trigger->filter($exclude_urls, "cacher_exclude_urls_triggers");
+            $trigger->filter($exclude_urls, "cache_exclude_url_triggers");
 
             foreach ($exclude_urls as $action)
-                $this->addAlias($action, "exclude_urls");
+                $this->addAlias($action, "cache_exclude_url");
         }
 
-        public function regenerate() {
+        public function cache_regenerate() {
             foreach ($this->cachers as $cacher)
                 $cacher->regenerate();
         }
 
-        public function regenerate_users($user = null) {
-            $id = (($user instanceof User) and !$user->no_results) ? $user->id : Visitor::current()->id ;
-
-            foreach ($this->cachers as $cacher)
-                $cacher->regenerate_user($id);
-        }
-
-        public function regenerate_posts($model) {
-            $post = ($model instanceof Post) ? $model : new Post($model->post_id, array("skip_where" => true)) ;
-
-            if ($post->no_results)
-                return;
-
-            $url = rawurldecode(unfix($post->url()));
-
-            foreach ($this->cachers as $cacher)
-                $cacher->regenerate_url($url);
-        }
-
-        public function exclude_urls($url = null) {
+        public function cache_exclude_url($url = null) {
             $this->exclude[] = rawurldecode(unfix(is_url($url) ? $url : self_url()));
         }
 
