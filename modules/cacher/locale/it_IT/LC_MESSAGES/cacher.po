@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
+"Last-Translator: \n"
 "Language-Team: Marina Colucci\n"
+"Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
-"Last-Translator: \n"
+"X-Generator: Poedit 2.2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: it_IT\n"
 
 #. Content-Type: text/plain; charset=UTF-8
 #. Copyright 2019 Daniel Pimley and other contributors.
@@ -32,11 +32,11 @@ msgstr "(secondi)"
 msgid "Clear Cache"
 msgstr "Cancella Cache"
 
-#: modules/cacher/cacher.php:115
+#: modules/cacher/cacher.php:84
 msgid "Cache"
 msgstr "Cache"
 
-#: modules/cacher/cacher.php:150
+#: modules/cacher/cacher.php:119
 msgid "Cache cleared."
 msgstr "Cache cancellati."
 
@@ -48,6 +48,6 @@ msgstr "Cacher"
 msgid "Caches pages, drastically reducing server load."
 msgstr "Cache delle pagine web, riduce drasticamente il carico del server."
 
-#: modules/cacher/lib/FeedCacher.php:14 modules/cacher/lib/HTMLCacher.php:14
+#: modules/cacher/lib/FeedCacher.php:16 modules/cacher/lib/HTMLCacher.php:16
 msgid "Cacher module cannot write caches to disk."
 msgstr "Il modulo cacher non può trascrivere i cache su disco."

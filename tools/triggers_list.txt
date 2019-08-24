@@ -1303,37 +1303,19 @@ Target:
 	$new_values
 
 
-cacher_regenerate_triggers
---------------------------
+cache_regenerate_triggers
+-------------------------
 Called from:
-	modules/cacher/cacher.php on line 50
+	modules/cacher/cacher.php on line 58
 
 Target:
 	$regenerate
 
 
-cacher_regenerate_users_triggers
---------------------------------
+cache_exclude_url_triggers
+--------------------------
 Called from:
-	modules/cacher/cacher.php on line 62
-
-Target:
-	$regenerate_users
-
-
-cacher_regenerate_posts_triggers
---------------------------------
-Called from:
-	modules/cacher/cacher.php on line 69
-
-Target:
-	$regenerate_posts
-
-
-cacher_exclude_urls_triggers
-----------------------------
-Called from:
-	modules/cacher/cacher.php on line 79
+	modules/cacher/cacher.php on line 67
 
 Target:
 	$exclude_urls
