@@ -94,7 +94,7 @@
                 return $route->action = "index";
 
             # Discover feed requests.
-            if (preg_match("/\/feed\/?$/", $route->request))
+            if ($route->action == "feed" or preg_match("/\/feed\/?$/", $route->request))
                 $this->feed = true;
 
             # Discover pagination.
