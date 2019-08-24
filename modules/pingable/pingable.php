@@ -13,6 +13,7 @@
             if ($confirm)
                 Pingback::uninstall();
 
+            Group::remove_permission("edit_pingback");
             Group::remove_permission("delete_pingback");
         }
 
@@ -218,8 +219,8 @@
             return $atom;
         }
 
-        public function cacher_regenerate_posts_triggers($regenerate_posts) {
+        public function cache_regenerate_triggers($regenerate) {
             $triggers = array("add_pingback", "update_pingback", "delete_pingback");
-            return array_merge($regenerate_posts, $triggers);
+            return array_merge($regenerate, $triggers);
         }
     }
