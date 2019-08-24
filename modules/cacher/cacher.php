@@ -8,7 +8,7 @@
             $this->exclude = Config::current()->module_cacher["cache_exclude"];
             $this->url     = rawurldecode(unfix(self_url()));
             $this->cachers = array(new HTMLCacher($this->url),
-                                           new FeedCacher($this->url));
+                                   new FeedCacher($this->url));
 
             $this->prepare_cache_regenerators();
         }
