@@ -865,8 +865,8 @@
             return $params;
         }
 
-        public function cacher_regenerate_posts_triggers($regenerate_posts) {
+        public function cache_regenerate_triggers($regenerate) {
             $triggers = array("add_comment", "update_comment", "delete_comment");
-            return array_merge($regenerate_posts, $triggers);
+            return array_merge($regenerate, $triggers);
         }
     }
