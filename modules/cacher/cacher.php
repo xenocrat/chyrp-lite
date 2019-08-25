@@ -2,13 +2,15 @@
     class Cacher extends Modules {
         private $exclude;
         private $url;
-        public $cachers;
+        protected $id;
+        protected $cachers;
 
         public function __init() {
             $this->exclude = Config::current()->module_cacher["cache_exclude"];
             $this->url     = rawurldecode(unfix(self_url()));
-            $this->cachers = array(new HTMLCacher($this->url),
-                                   new FeedCacher($this->url));
+            $this->id      = token(array($this->url, session_id()));
+            $this->cachers = array(new HTMLCacher($this->id),
+                                   new FeedCacher($this->id));
 
             $this->prepare_cache_regenerators();
         }

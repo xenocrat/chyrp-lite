@@ -5,10 +5,10 @@
         private $file;
         private $path;
 
-        public function __construct($url) {
+        public function __construct($id) {
             $this->base = CACHES_DIR.DIR."feeds";
             $this->life = Config::current()->module_cacher["cache_expire"];
-            $this->file = token(array($url, session_id())).".feed";
+            $this->file = $id.".feed";
             $this->path = $this->base.DIR.$this->file;
 
             # Cancel execution if cache files cannot be written.
@@ -64,10 +64,14 @@
         }
 
         public function regenerate() {
-            if (DEBUG)
-                error_log("REGENERATING feed caches");
+            $files = (array) glob($this->base.DIR."*.feed");
 
-            foreach ((array) glob($this->base.DIR."*.feed") as $file)
-                @unlink($file);
+            if (!empty($files)) {
+                if (DEBUG)
+                    error_log("REGENERATING feed caches");
+
+                foreach ($files as $file)
+                    @unlink($file);
+            }
         }
     }
