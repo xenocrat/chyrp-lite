@@ -2173,6 +2173,7 @@
         $route = Route::current();
         $theme = Theme::current();
         $trigger = Trigger::current();
+        $nonce = base64_encode(token("nonce"));
 
         $script = (ADMIN) ?
             MAIN_DIR.DIR."admin".DIR."javascripts".DIR."admin.js.php" :
@@ -2186,5 +2187,8 @@
         include $script;
         $ob = ob_get_clean();
 
-        return $common."\n<script>\n".$ob."</script>\n";
+        $trigger->call("javascripts_hash", $ob);
+        $trigger->filter($nonce, "javascripts_nonce");
+
+        return $common."\n<script nonce=\"".$nonce."\">".$ob."</script>\n";
     }
