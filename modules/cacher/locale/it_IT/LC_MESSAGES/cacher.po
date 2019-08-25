@@ -32,11 +32,11 @@ msgstr "(secondi)"
 msgid "Clear Cache"
 msgstr "Cancella Cache"
 
-#: modules/cacher/cacher.php:84
+#: modules/cacher/cacher.php:86
 msgid "Cache"
 msgstr "Cache"
 
-#: modules/cacher/cacher.php:119
+#: modules/cacher/cacher.php:121
 msgid "Cache cleared."
 msgstr "Cache cancellati."
 

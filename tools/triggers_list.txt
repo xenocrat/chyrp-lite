@@ -1306,7 +1306,7 @@ Target:
 cache_regenerate_triggers
 -------------------------
 Called from:
-	modules/cacher/cacher.php on line 58
+	modules/cacher/cacher.php on line 60
 
 Target:
 	$regenerate
@@ -1315,7 +1315,7 @@ Target:
 cache_exclude_url_triggers
 --------------------------
 Called from:
-	modules/cacher/cacher.php on line 67
+	modules/cacher/cacher.php on line 69
 
 Target:
 	$exclude_urls
