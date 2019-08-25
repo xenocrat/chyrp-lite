@@ -8,7 +8,12 @@
         public function __init() {
             $this->exclude = Config::current()->module_cacher["cache_exclude"];
             $this->url     = rawurldecode(unfix(self_url()));
-            $this->id      = token(array($this->url, session_id()));
+            $this->id      = token(array(USE_ZLIB,
+                                         HTTP_ACCEPT_DEFLATE,
+                                         HTTP_ACCEPT_GZIP,
+                                         session_id(),
+                                         $this->url));
+
             $this->cachers = array(new HTMLCacher($this->id),
                                    new FeedCacher($this->id));
 
@@ -26,12 +31,18 @@
         }
 
         public function route_init($route) {
+            if (!(USE_OB and OB_BASE_LEVEL == ob_get_level()))
+                return;
+
             if (!$this->cancelled and !in_array($this->url, $this->exclude))
                 foreach ($this->cachers as $cacher)
                     $cacher->get($route);
         }
 
         public function end($route) {
+            if (!(USE_OB and OB_BASE_LEVEL == ob_get_level()))
+                return;
+
             if (!$this->cancelled and !in_array($this->url, $this->exclude))
                 foreach ($this->cachers as $cacher)
                     $cacher->set($route);
