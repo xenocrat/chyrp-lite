@@ -371,6 +371,15 @@ Arguments:
 	$action, $params
 
 
+javascripts_hash
+----------------
+Called from:
+	includes/helpers.php on line 2190
+
+Arguments:
+	$ob
+
+
 pingback
 --------
 Called from:
@@ -1072,6 +1081,15 @@ Called from:
 
 Target:
 	$function
+
+
+javascripts_nonce
+-----------------
+Called from:
+	includes/helpers.php on line 2191
+
+Target:
+	$nonce
 
 
 xmlrpc_methods
