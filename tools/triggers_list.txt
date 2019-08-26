@@ -755,18 +755,18 @@ Called from:
 end_head
 --------
 Called from:
-	themes/blossom/layouts/default.twig on line 41
+	themes/blossom/layouts/default.twig on line 14
 	themes/sparrow/layouts/default.twig on line 14
-	themes/topaz/layouts/default.twig on line 41
+	themes/topaz/layouts/default.twig on line 14
 	themes/umbra/layouts/default.twig on line 14
 
 
 end_content
 -----------
 Called from:
-	themes/blossom/layouts/default.twig on line 143
+	themes/blossom/layouts/default.twig on line 119
 	themes/sparrow/layouts/default.twig on line 102
-	themes/topaz/layouts/default.twig on line 142
+	themes/topaz/layouts/default.twig on line 118
 	themes/umbra/layouts/default.twig on line 102
 
 
