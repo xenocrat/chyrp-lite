@@ -48,11 +48,6 @@
     # The string identifying this version.
     define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
 
-    # Constant: JAVASCRIPT
-    # Are we serving a JavaScript file?
-    if (!defined('JAVASCRIPT'))
-        define('JAVASCRIPT', false);
-
     # Constant: MAIN
     # Is <MainController> the route controller?
     if (!defined('MAIN'))
@@ -164,12 +159,10 @@
 
     # Constant: USE_ZLIB
     # Use zlib to provide content compression?
-    # See Also:
-    #     http://bugs.php.net/55544
     if (!defined('USE_ZLIB'))
         define('USE_ZLIB',
-            (HTTP_ACCEPT_DEFLATE or HTTP_ACCEPT_GZIP) and extension_loaded("zlib") and
-            !ini_get("zlib.output_compression") and version_compare(PHP_VERSION, "5.4.6", ">="));
+            (HTTP_ACCEPT_DEFLATE or HTTP_ACCEPT_GZIP) and
+            extension_loaded("zlib") and !ini_get("zlib.output_compression"));
 
     # Start output buffering and set header.
     if (USE_OB)
@@ -385,16 +378,8 @@
     if (MAIN or ADMIN)
         Post::publish_scheduled();
 
-    # Set appropriate headers.
-    if (JAVASCRIPT) {
-        header("Content-Type: application/javascript; charset=UTF-8");
-        header("Referrer-Policy: no-referrer");
-        header("Vary: Accept-Encoding, Cookie, Origin, Referer");
-        header("Cache-Control: no-store, no-cache, must-revalidate");
-        header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
-    } else {
-        header("Content-Type: text/html; charset=UTF-8");
-        header("Referrer-Policy: strict-origin-when-cross-origin");
-        header("Vary: Accept-Encoding, Cookie");
-        header("X-Pingback: ".$config->chyrp_url."/includes/rpc.php");
-    }
+    # Set headers.
+    header("Content-Type: text/html; charset=UTF-8");
+    header("Referrer-Policy: strict-origin-when-cross-origin");
+    header("Vary: Accept-Encoding, Cookie");
+    header("X-Pingback: ".$config->chyrp_url."/includes/rpc.php");

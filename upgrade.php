@@ -10,7 +10,6 @@
     define('CHYRP_VERSION',  "2019.03");
     define('CHYRP_CODENAME', "Sudan");
     define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
-    define('JAVASCRIPT',     false);
     define('MAIN',           false);
     define('ADMIN',          false);
     define('AJAX',           false);

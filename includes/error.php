@@ -122,7 +122,7 @@
         }
 
         # Report in plain text if desirable or necessary because of a deep error.
-        if (TESTER or XML_RPC or AJAX or JAVASCRIPT or
+        if (TESTER or XML_RPC or AJAX or
             !function_exists("__") or
             !function_exists("_f") or
             !function_exists("fallback") or
