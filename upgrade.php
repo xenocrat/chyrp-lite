@@ -90,8 +90,6 @@
      * Tests whether or not the directories that need write access have it.
      */
     function test_directories() {
-        global $errors;
-
         # Test if we can write to MAIN_DIR (needed for the .htaccess file).
         if (!is_writable(MAIN_DIR))
             alert(__("Please CHMOD or CHOWN the installation directory to make it writable."));
@@ -244,18 +242,14 @@
      * Versions: 2018.02 => 2018.03
      */
     function update_htaccess() {
-        global $errors;
         $config = Config::current();
 
         if (file_exists(MAIN_DIR.DIR.".htaccess")) {
             $set = htaccess_conf();
 
             if ($set === false)
-                alert(__("The <em>.htaccess</em> file cannot be configured."));
+                alert(__("Failed to write file to disk."));
         }
-
-        if ($config->url != $config->chyrp_url)
-            alert(__("You might need to update your canonical URL's <em>.htaccess</em> file."));
     }
 
     /**
