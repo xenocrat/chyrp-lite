@@ -1966,10 +1966,9 @@
             $route = Route::current();
             $config = Config::current();
 
-            if (!empty($_POST['clean_urls']) and htaccess_conf() === false) {
-                Flash::warning(__("Clean URLs are disabled because the <em>.htaccess</em> file cannot be configured."));
-                unset($_POST['clean_urls']);
-            }
+            if (!empty($_POST['clean_urls']) and
+                (htaccess_conf() === false or caddyfile_conf() === false))
+                    unset($_POST['clean_urls']);
 
             if (!empty($_POST['enable_homepage']) and !$config->enable_homepage) {
                 $route->add("/", "page;url=home");

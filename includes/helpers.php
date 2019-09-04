@@ -142,8 +142,7 @@
      *     True if no action was needed, bytes written on success, false on failure.
      */
     function htaccess_conf($url_path = null) {
-        if (!INSTALLING)
-            $url_path = oneof($url_path, parse_url(Config::current()->chyrp_url, PHP_URL_PATH), "/");
+        $url_path = oneof($url_path, parse_url(Config::current()->chyrp_url, PHP_URL_PATH), "/");
 
         $filepath = MAIN_DIR.DIR.".htaccess";
         $template = INCLUDES_DIR.DIR."htaccess.conf";
@@ -163,6 +162,41 @@
 
         if (!preg_match("~".preg_quote($htaccess, "~")."~", file_get_contents($filepath)))
             return @file_put_contents($filepath, $htaccess);
+
+        return true;
+    }
+
+    /**
+     * Function: caddyfile_conf
+     * Creates the caddyfile for Chyrp Lite or overwrites an existing file.
+     *
+     * Parameters:
+     *     $url_path - The URL path to MAIN_DIR for the rewrite directive.
+     *
+     * Returns:
+     *     True if no action was needed, bytes written on success, false on failure.
+     */
+    function caddyfile_conf($url_path = null) {
+        $url_path = oneof($url_path, parse_url(Config::current()->chyrp_url, PHP_URL_PATH), "/");
+
+        $filepath = MAIN_DIR.DIR."caddyfile";
+        $template = INCLUDES_DIR.DIR."caddyfile.conf";
+
+        if (!is_file($template) or !is_readable($template))
+            return false;
+
+        $caddyfile = preg_replace("~\\{\\{CHYRP_PATH\\}\\}~",
+                                 ltrim($url_path."/", "/"),
+                                 file_get_contents($template));
+
+        if (!file_exists($filepath))
+            return @file_put_contents($filepath, $caddyfile);
+
+        if (!is_file($filepath) or !is_readable($filepath))
+            return false;
+
+        if (!preg_match("~".preg_quote($caddyfile, "~")."~", file_get_contents($filepath)))
+            return @file_put_contents($filepath, $caddyfile);
 
         return true;
     }
