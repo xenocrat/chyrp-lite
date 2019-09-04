@@ -1536,73 +1536,74 @@
 
             $this->context["enabled_modules"]  = array();
             $this->context["disabled_modules"] = array();
-
-            if (!$open = @opendir(MODULES_DIR))
-                error(__("Error"), __("Could not read modules directory."));
-
+            $iterate = new DirectoryIterator(MODULES_DIR);
             $classes = array();
 
-            while (($folder = readdir($open)) !== false) {
-                if (strpos($folder, ".") === 0 or !is_file(MODULES_DIR.DIR.$folder.DIR.$folder.".php"))
+            foreach ($iterate as $item) {
+                if ($item->isDot() or !$item->isDir())
                     continue;
 
-                load_translator($folder, MODULES_DIR.DIR.$folder.DIR."locale");
+                $name = $item->getFilename();
 
-                if (!isset($classes[$folder]))
-                    $classes[$folder] = array($folder);
+                if (!is_file(MODULES_DIR.DIR.$name.DIR.$name.".php"))
+                    continue;
+
+                load_translator($name, MODULES_DIR.DIR.$name.DIR."locale");
+
+                if (!isset($classes[$name]))
+                    $classes[$name] = array($name);
                 else
-                    array_unshift($classes[$folder], $folder);
+                    array_unshift($classes[$name], $name);
 
-                $info = load_info(MODULES_DIR.DIR.$folder.DIR."info.php");
+                $info = load_info(MODULES_DIR.DIR.$name.DIR."info.php");
 
                 # List of modules conflicting with this one (installed or not).
 
                 if (!empty($info["conflicts"])) {
-                    $classes[$folder][] = "conflicts";
+                    $classes[$name][] = "conflicts";
 
                     foreach ($info["conflicts"] as $conflict)
                         if (file_exists(MODULES_DIR.DIR.$conflict.DIR.$conflict.".php")) {
-                            $classes[$folder][] = "conflict_".$conflict;
+                            $classes[$name][] = "conflict_".$conflict;
 
                             if (module_enabled($conflict))
-                                if (!in_array("error", $classes[$folder]))
-                                    $classes[$folder][] = "error";
+                                if (!in_array("error", $classes[$name]))
+                                    $classes[$name][] = "error";
                         }
                 }
 
                 # List of modules depended on by this one (installed or not).
 
                 if (!empty($info["dependencies"])) {
-                    $classes[$folder][] = "dependencies";
+                    $classes[$name][] = "dependencies";
 
                     foreach ($info["dependencies"] as $dependency) {
                         if (!file_exists(MODULES_DIR.DIR.$dependency.DIR.$dependency.".php")) {
-                            if (!in_array("missing_dependency", $classes[$folder]))
-                                $classes[$folder][] = "missing_dependency";
+                            if (!in_array("missing_dependency", $classes[$name]))
+                                $classes[$name][] = "missing_dependency";
 
-                            if (!in_array("error", $classes[$folder]))
-                                $classes[$folder][] = "error";
+                            if (!in_array("error", $classes[$name]))
+                                $classes[$name][] = "error";
                         } else {
                             if (!module_enabled($dependency))
-                                if (!in_array("error", $classes[$folder]))
-                                    $classes[$folder][] = "error";
+                                if (!in_array("error", $classes[$name]))
+                                    $classes[$name][] = "error";
 
                             fallback($classes[$dependency], array());
-                            $classes[$dependency][] = "needed_by_".$folder;
+                            $classes[$dependency][] = "needed_by_".$name;
                         }
 
-                        $classes[$folder][] = "needs_".$dependency;
+                        $classes[$name][] = "needs_".$dependency;
                     }
                 }
 
                 # We don't use the module_enabled() helper function to allow for disabling cancelled modules.
-                $category = (in_array($folder, $config->enabled_modules)) ?
+                $category = (in_array($name, $config->enabled_modules)) ?
                     "enabled_modules" : "disabled_modules" ;
 
-                $this->context[$category][$folder] = array_merge($info, array("classes" => $classes[$folder]));
+                $this->context[$category][$name] = array_merge($info, array("classes" => $classes[$name]));
             }
 
-            closedir($open);
             $this->display("pages".DIR."modules");
         }
 
@@ -1618,24 +1619,26 @@
 
             $this->context["enabled_feathers"]  = array();
             $this->context["disabled_feathers"] = array();
+            $iterate = new DirectoryIterator(FEATHERS_DIR);
 
-            if (!$open = @opendir(FEATHERS_DIR))
-                error(__("Error"), __("Could not read feathers directory."));
-
-            while (($folder = readdir($open)) !== false) {
-                if (strpos($folder, ".") === 0 or !is_file(FEATHERS_DIR.DIR.$folder.DIR.$folder.".php"))
+            foreach ($iterate as $item) {
+                if ($item->isDot() or !$item->isDir())
                     continue;
 
-                load_translator($folder, FEATHERS_DIR.DIR.$folder.DIR."locale");
+                $name = $item->getFilename();
+
+                if (!is_file(FEATHERS_DIR.DIR.$name.DIR.$name.".php"))
+                    continue;
+
+                load_translator($name, FEATHERS_DIR.DIR.$name.DIR."locale");
 
                 # We don't use the feather_enabled() helper function to allow for disabling cancelled feathers.
-                $category = (in_array($folder, $config->enabled_feathers)) ?
+                $category = (in_array($name, $config->enabled_feathers)) ?
                     "enabled_feathers" : "disabled_feathers" ;
 
-                $this->context[$category][$folder] = load_info(FEATHERS_DIR.DIR.$folder.DIR."info.php");
+                $this->context[$category][$name] = load_info(FEATHERS_DIR.DIR.$name.DIR."info.php");
             }
 
-            closedir($open);
             $this->display("pages".DIR."feathers");
         }
 
@@ -1652,20 +1655,19 @@
                                  ' <a href="'.url("preview_theme").'">'.__("Stop &rarr;").'</a>');
 
             $this->context["themes"] = array();
+            $iterate = new DirectoryIterator(THEMES_DIR);
 
-            if (!$open = @opendir(THEMES_DIR))
-                error(__("Error"), __("Could not read themes directory."));
-
-            while (($folder = readdir($open)) !== false) {
-                if (strpos($folder, ".") === 0 or !is_dir(THEMES_DIR.DIR.$folder))
+            foreach ($iterate as $item) {
+                if ($item->isDot() or !$item->isDir())
                     continue;
 
-                load_translator($folder, THEMES_DIR.DIR.$folder.DIR."locale");
+                $name = $item->getFilename();
 
-                $this->context["themes"][$folder] = load_info(THEMES_DIR.DIR.$folder.DIR."info.php");
+                load_translator($name, THEMES_DIR.DIR.$name.DIR."locale");
+
+                $this->context["themes"][$name] = load_info(THEMES_DIR.DIR.$name.DIR."info.php");
             }
 
-            closedir($open);
             $this->display("pages".DIR."themes");
         }
 
