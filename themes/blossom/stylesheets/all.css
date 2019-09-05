@@ -395,7 +395,7 @@ button#sidebar_search_submit {
     margin: 0em;
     padding: 0em;
     background: transparent url(../images/search.svg) center no-repeat;
-    background-size: 60%;
+    background-size: 50%;
     overflow: hidden;
     color: transparent;
 }
@@ -405,7 +405,7 @@ button#sidebar_search_submit:focus {
 }
 button#search_submit:hover,
 button#sidebar_search_submit:hover {
-    background-size: 70%;
+    background-size: 60%;
 }
 label {
     display: block;
