@@ -105,6 +105,9 @@ h3.filter {
     margin: 0rem;
     padding: 0.5em;
 }
+div.traversal + div#main > h3.filter {
+    margin-top: 2rem;
+}
 h3.archive {
     margin-top: 1em;
     clear: both;
@@ -412,7 +415,7 @@ div.traversal {
     padding: 0rem 2rem;;
 }
 div.prev {
-    margin: 4rem auto 0rem auto;
+    margin: 2rem auto 0rem auto;
 }
 div.next {
     margin: 0rem auto 0rem auto;
@@ -794,9 +797,6 @@ img.gravatar {
     }
     button#search_submit {
         display: none;
-    }
-    div.prev {
-        margin-top: 2rem;
     }
     div#main > article, div.standalone {
         margin: 0em auto 2rem auto;
