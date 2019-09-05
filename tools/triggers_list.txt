@@ -239,7 +239,7 @@ Arguments:
 runtime
 -------
 Called from:
-	includes/common.php on line 382
+	includes/common.php on line 375
 
 
 before_export
@@ -296,13 +296,13 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1796
+	includes/controller/Admin.php on line 1798
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1804
+	includes/controller/Admin.php on line 1806
 
 
 can_not_view_page
@@ -347,25 +347,25 @@ Arguments:
 visitor_authenticate
 --------------------
 Called from:
-	includes/helpers.php on line 543
+	includes/helpers.php on line 577
 
 
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 1967
+	includes/helpers.php on line 2001
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 1984
+	includes/helpers.php on line 2018
 
 
 send_correspondence
 -------------------
 Called from:
-	includes/helpers.php on line 2162
+	includes/helpers.php on line 2196
 
 Arguments:
 	$action, $params
@@ -374,7 +374,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 2190
+	includes/helpers.php on line 2224
 
 Arguments:
 	$ob
@@ -864,7 +864,7 @@ Target:
 visitor
 -------
 Called from:
-	includes/common.php on line 379
+	includes/common.php on line 372
 
 Target:
 	$visitor
@@ -961,7 +961,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 2071
+	includes/controller/Admin.php on line 2072
 
 Target:
 	$write
@@ -970,7 +970,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2100
+	includes/controller/Admin.php on line 2101
 
 Target:
 	$manage
@@ -979,7 +979,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 2125
+	includes/controller/Admin.php on line 2126
 
 Target:
 	$settings
@@ -988,7 +988,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2143
+	includes/controller/Admin.php on line 2144
 
 Target:
 	$extend
@@ -997,7 +997,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2197
+	includes/controller/Admin.php on line 2198
 
 Target:
 	$this->context
@@ -1056,7 +1056,7 @@ Target:
 keyword_search
 --------------
 Called from:
-	includes/helpers.php on line 773
+	includes/helpers.php on line 807
 
 Target:
 	$search
@@ -1068,7 +1068,7 @@ Arguments:
 link_regexp
 -----------
 Called from:
-	includes/helpers.php on line 1342
+	includes/helpers.php on line 1376
 
 Target:
 	$expressions
@@ -1077,7 +1077,7 @@ Target:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 2097
+	includes/helpers.php on line 2131
 
 Target:
 	$function
@@ -1086,7 +1086,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 2191
+	includes/helpers.php on line 2225
 
 Target:
 	$nonce

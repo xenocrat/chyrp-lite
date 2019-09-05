@@ -40,12 +40,8 @@ msgstr "使用以下内容在目标目录中创建一个<em> index.php </ em>文
 
 #: admin/help/canonical_url.twig:18
 msgid ""
-"Copy the <em>.htaccess</em> file from Chyrp Lite's install directory to the "
-"destination directory, and change the <code>RewriteBase</code> line to "
-"reflect the new location."
-msgstr ""
-"将Chyrp Lite的安装目录中的<em> .htaccess </ em>文件复制到目标目录，并更改"
-"<code> RewriteBase </ code>行以反映新位置。"
+"Modify your URL rewrite directives to reflect the new destination directory."
+msgstr "修改 URL rewrite 指令以反映新的目标目录。"
 
 #: admin/help/filtering_results.twig:3 admin/help/filtering_results.twig:6
 msgid "Filtering Results"
@@ -816,8 +812,8 @@ msgid "Gives your site prettier URLs."
 msgstr "为您的网站提供更漂亮的URL。"
 
 #: admin/pages/route_settings.twig:14
-msgid "Requires .htaccess support."
-msgstr "需要 .htaccess  支持。"
+msgid "Requires URL rewrite support."
+msgstr "需要 URL rewrite 支持。"
 
 #: admin/pages/route_settings.twig:18
 msgid "Homepage"

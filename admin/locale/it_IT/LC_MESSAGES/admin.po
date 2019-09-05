@@ -44,13 +44,10 @@ msgstr ""
 
 #: admin/help/canonical_url.twig:18
 msgid ""
-"Copy the <em>.htaccess</em> file from Chyrp Lite's install directory to the "
-"destination directory, and change the <code>RewriteBase</code> line to "
-"reflect the new location."
+"Modify your URL rewrite directives to reflect the new destination directory."
 msgstr ""
-"Copiare il file <em>.htaccess</em> dalla directory di installazione di Chyrp "
-"Lite nella directory di destinazione e modificare la riga <code>RewriteBase</"
-"code> per riflettere la nuova posizione."
+"Modificare le direttive di URL Rewrite per riflettere la nuova directory di "
+"destinazione."
 
 #: admin/help/filtering_results.twig:3 admin/help/filtering_results.twig:6
 msgid "Filtering Results"
@@ -841,8 +838,8 @@ msgid "Gives your site prettier URLs."
 msgstr "Fornisce il sito di URL piú ordinati e migliori."
 
 #: admin/pages/route_settings.twig:14
-msgid "Requires .htaccess support."
-msgstr "Richiede il supporto .htaccess."
+msgid "Requires URL rewrite support."
+msgstr "Richiede il supporto URL Rewrite."
 
 #: admin/pages/route_settings.twig:18
 msgid "Homepage"
