@@ -50,8 +50,8 @@ html {
     font-size: 16px;
 }
 *::selection {
-    color: #fffefd;
-    background-color: #47b347;
+    color: #000000;
+    background-color: #fffefd;
 }
 body {
     font-family: "Open Sans webfont", sans-serif;
