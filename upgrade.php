@@ -104,6 +104,40 @@
     }
 
     /**
+     * Function: update_htaccess
+     * Updates the .htaccess file to ensure all features are supported.
+     *
+     * Versions: 2018.02 => 2018.03
+     */
+    function update_htaccess() {
+        $config = Config::current();
+
+        if (file_exists(MAIN_DIR.DIR.".htaccess")) {
+            $set = htaccess_conf();
+
+            if ($set === false)
+                alert(__("Failed to write file to disk."));
+        }
+    }
+
+    /**
+     * Function: update_caddyfile
+     * Updates the caddyfile to ensure all features are supported.
+     *
+     * Versions: 2019.03 => 2019.04
+     */
+    function update_caddyfile() {
+        $config = Config::current();
+
+        if (file_exists(MAIN_DIR.DIR."caddyfile")) {
+            $set = caddyfile_conf();
+
+            if ($set === false)
+                alert(__("Failed to write file to disk."));
+        }
+    }
+
+    /**
      * Function: add_markdown
      * Adds the enable_markdown config setting.
      *
@@ -233,23 +267,6 @@
 
         if ($set === false)
             error(__("Error"), __("Could not write the configuration file."));
-    }
-
-    /**
-     * Function: update_htaccess
-     * Updates the .htaccess file to ensure all features are supported.
-     *
-     * Versions: 2018.02 => 2018.03
-     */
-    function update_htaccess() {
-        $config = Config::current();
-
-        if (file_exists(MAIN_DIR.DIR.".htaccess")) {
-            $set = htaccess_conf();
-
-            if ($set === false)
-                alert(__("Failed to write file to disk."));
-        }
     }
 
     /**
@@ -508,6 +525,8 @@
     if ((isset($_POST['upgrade']) and $_POST['upgrade'] == "yes")) {
         # Perform core upgrade tasks.
         test_directories();
+        update_htaccess();
+        update_caddyfile();
         add_markdown();
         add_homepage();
         add_uploads_limit();
@@ -518,7 +537,6 @@
         add_feed_format();
         remove_captcha();
         disable_recaptcha();
-        update_htaccess();
         remove_feed_url();
         remove_cookies_notification();
         remove_ajax();
