@@ -1536,10 +1536,10 @@
 
             $this->context["enabled_modules"]  = array();
             $this->context["disabled_modules"] = array();
-            $iterate = new DirectoryIterator(MODULES_DIR);
+            $folder = new DirectoryIterator(MODULES_DIR);
             $classes = array();
 
-            foreach ($iterate as $item) {
+            foreach ($folder as $item) {
                 if ($item->isDot() or !$item->isDir())
                     continue;
 
@@ -1619,9 +1619,9 @@
 
             $this->context["enabled_feathers"]  = array();
             $this->context["disabled_feathers"] = array();
-            $iterate = new DirectoryIterator(FEATHERS_DIR);
+            $folder = new DirectoryIterator(FEATHERS_DIR);
 
-            foreach ($iterate as $item) {
+            foreach ($folder as $item) {
                 if ($item->isDot() or !$item->isDir())
                     continue;
 
@@ -1655,9 +1655,9 @@
                                  ' <a href="'.url("preview_theme").'">'.__("Stop &rarr;").'</a>');
 
             $this->context["themes"] = array();
-            $iterate = new DirectoryIterator(THEMES_DIR);
+            $folder = new DirectoryIterator(THEMES_DIR);
 
-            foreach ($iterate as $item) {
+            foreach ($folder as $item) {
                 if ($item->isDot() or !$item->isDir())
                     continue;
 
