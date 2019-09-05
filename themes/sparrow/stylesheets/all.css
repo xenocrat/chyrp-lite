@@ -100,7 +100,7 @@ h3.filter {
     box-sizing: border-box;
     max-width: 1024px;
     margin: 0rem auto;
-    padding: 4rem 0rem 0rem 2rem;
+    padding: 2rem 0rem 0rem 2rem;
 }
 h3.archive {
     margin-top: 1em;
@@ -408,12 +408,12 @@ div.traversal {
 }
 div.prev {
     padding-left: 2rem;
-    margin: 4rem auto 0rem auto;
+    margin: 2rem auto 0rem auto;
 }
 div.next {
     text-align: right;
     padding-right: 2rem;
-    margin: 0rem auto 4rem auto;
+    margin: 0rem auto 2rem auto;
 }
 div.next:last-child {
     margin-bottom: 0rem;
@@ -766,9 +766,6 @@ img.gravatar {
     }
     h1.banner {
         margin-bottom: 2rem;
-    }
-    h3.filter {
-        padding-top: 2rem;
     }
     div#mast_box {
         padding: 2rem 1rem;
