@@ -138,6 +138,23 @@
     }
 
     /**
+     * Function: update_nginx
+     * Updates the nginx configuration to ensure all features are supported.
+     *
+     * Versions: 2019.03 => 2019.04
+     */
+    function update_nginx() {
+        $config = Config::current();
+
+        if (file_exists(MAIN_DIR.DIR."include.conf")) {
+            $set = nginx_conf();
+
+            if ($set === false)
+                alert(__("Failed to write file to disk."));
+        }
+    }
+
+    /**
      * Function: add_markdown
      * Adds the enable_markdown config setting.
      *
@@ -527,6 +544,7 @@
         test_directories();
         update_htaccess();
         update_caddyfile();
+        update_nginx();
         add_markdown();
         add_homepage();
         add_uploads_limit();

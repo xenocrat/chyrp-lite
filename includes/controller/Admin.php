@@ -1969,7 +1969,7 @@
             $config = Config::current();
 
             if (!empty($_POST['clean_urls']) and
-                (htaccess_conf() === false or caddyfile_conf() === false))
+                (htaccess_conf() === false or caddyfile_conf() === false or nginx_conf() === false))
                     unset($_POST['clean_urls']);
 
             if (!empty($_POST['enable_homepage']) and !$config->enable_homepage) {
