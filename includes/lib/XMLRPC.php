@@ -63,7 +63,7 @@
                 return new IXR_Error(33, __("We have not published at that URL."));
 
             # Retrieve the page that linked here.
-            $content = get_remote($source);
+            $content = get_remote($source, 0, 10, true);
 
             if (empty($content))
                 return new IXR_Error(16, __("You have not published at that URL."));
@@ -71,14 +71,18 @@
             # Get the title, body, and charset of the page.
             preg_match("/<title[^>]*>([^<]+)<\/title>/i", $content, $title);
             preg_match("/<body[^>]*>(.+)<\/body>/is", $content, $body);
-            preg_match("/<meta charset=[\"\']?([^ \"\'\/>]+)/i", $content, $charset);
+            preg_match("/Content-Type: .+; charset=(.+)\r\n/i", $content, $head_charset);
+            preg_match("/<meta charset=[\"\']([^ \"\'\/>]+)/i", $content, $meta_charset);
 
             if (empty($title[1]) or empty($body[1]))
                 return new IXR_Error(0, __("Your page could not be parsed."));
 
+            fallback($head_charset[1]);
+            fallback($meta_charset[1]);
+
+            $charset = oneof($meta_charset[1], $head_charset[1], "UTF-8");
             $title   = trim(fix($title[1]));
             $body    = strip_tags($body[1], "<a>");
-            $charset = fallback($charset[1], "UTF-8");
             $url     = preg_quote($args[1], "/");
 
             # Convert the source encoding to UTF-8 if possible to ensure we render it correctly.
