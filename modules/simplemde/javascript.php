@@ -1,3 +1,7 @@
+<?php
+    if (!defined('CHYRP_VERSION'))
+        exit;
+?>
 var ChyrpSimpleMDE = {
     init: function() {
         $("textarea[data-markdown]").each(function() {

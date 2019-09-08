@@ -1,3 +1,7 @@
+<?php
+    if (!defined('CHYRP_VERSION'))
+        exit;
+?>
 var ChyrpAjaxScroll = {
     busy: false,
     failed: false,

@@ -1,3 +1,7 @@
+<?php
+    if (!defined('CHYRP_VERSION'))
+        exit;
+?>
 var ChyrpHighlighter = {
     init: function() {
         $("pre > code").each(function(index, block) {

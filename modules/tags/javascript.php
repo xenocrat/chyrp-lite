@@ -1,3 +1,7 @@
+<?php
+    if (!defined('CHYRP_VERSION'))
+        exit;
+?>
 var ChyrpTags = {
     init: function() {
         $("form input[name='tags']").on("keyup", ChyrpTags.scan).trigger("keyup");

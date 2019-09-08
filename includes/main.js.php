@@ -3,6 +3,8 @@
      * File: javascript
      * JavaScript for core functionality and extensions.
      */
+    if (!defined('CHYRP_VERSION'))
+        exit;
 ?>
 $(function() {
     Post.init();

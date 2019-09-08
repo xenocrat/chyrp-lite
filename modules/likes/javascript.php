@@ -1,3 +1,7 @@
+<?php
+    if (!defined('CHYRP_VERSION'))
+        exit;
+?>
 var ChyrpLikes = {
     failed: false,
     busy: false,

@@ -3,6 +3,8 @@
      * File: admin.js.php
      * JavaScript for core functionality and extensions.
      */
+    if (!defined('CHYRP_VERSION'))
+        exit;
 ?>
 $(function() {
     toggle_all();

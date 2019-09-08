@@ -1,3 +1,7 @@
+<?php
+    if (!defined('CHYRP_VERSION'))
+        exit;
+?>
 var ChyrpLightbox = {
     background: "<?php echo $config->module_lightbox["background"]; ?>",
     spacing: Math.abs("<?php echo $config->module_lightbox["spacing"]; ?>"),
