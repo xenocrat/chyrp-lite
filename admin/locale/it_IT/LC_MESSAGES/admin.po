@@ -252,27 +252,27 @@ msgstr ""
 msgid "Your blog's XML-RPC URL is <code>%s/includes/rpc.php</code>."
 msgstr "L'URL XML-RPC del tuo blog è <code>%s/includes/RPC.php</code>."
 
-#: admin/javascripts/admin.js.php:44
+#: admin/javascripts/admin.js.php:46
 msgid "Toggle All"
 msgstr "Spunta tutto"
 
-#: admin/javascripts/admin.js.php:114
+#: admin/javascripts/admin.js.php:116
 msgid "Are you sure you want to proceed?"
 msgstr "Sei sicuro di volere procedere?"
 
-#: admin/javascripts/admin.js.php:157 admin/javascripts/admin.js.php:260
+#: admin/javascripts/admin.js.php:159 admin/javascripts/admin.js.php:262
 msgid "Close"
 msgstr "Chiudi"
 
-#: admin/javascripts/admin.js.php:164 admin/javascripts/admin.js.php:267
+#: admin/javascripts/admin.js.php:166 admin/javascripts/admin.js.php:269
 msgid "close"
 msgstr "chiudi"
 
-#: admin/javascripts/admin.js.php:184 admin/pages/themes.twig:25
+#: admin/javascripts/admin.js.php:186 admin/pages/themes.twig:25
 msgid "Preview"
 msgstr "Anteprima"
 
-#: admin/javascripts/admin.js.php:200
+#: admin/javascripts/admin.js.php:202
 msgid "preview"
 msgstr "anteprima"
 
