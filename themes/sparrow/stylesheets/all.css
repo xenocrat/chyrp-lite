@@ -554,8 +554,7 @@ article.audio audio {
     max-width: 800px;
 }
 a {
-    border-bottom: 1px transparent solid;
-    transition-property: background-color, border;
+    transition-property: background-color;
     transition-duration: 250ms;
 }
 a:link, a:visited {
@@ -566,7 +565,6 @@ a:hover, a:focus, a:active {
     outline: none;
     color: #cc5252;
     text-decoration: none;
-    border-bottom: 1px #cc5252 solid;
 }
 ul.navigation li > a {
     display: inline-block;
