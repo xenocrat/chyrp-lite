@@ -551,9 +551,6 @@ article.audio audio {
     width: 100%;
     max-width: 800px;
 }
-a {
-    border-bottom: 1px transparent solid;
-}
 a:link, a:visited {
     color: #adafae;
     text-decoration: none;
@@ -562,7 +559,6 @@ a:hover, a:focus, a:active {
     outline: none;
     color: #ffffff;
     text-decoration: none;
-    border-bottom: 1px #ffffff solid;
 }
 ul.navigation li > a {
     display: inline-block;
