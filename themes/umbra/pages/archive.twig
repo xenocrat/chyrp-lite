@@ -4,13 +4,6 @@
 
 {# Months? (For yearly archives) #}
 {% if months is not empty %}
-{% if archive.prev is not empty %}
-<div role="navigation" class="prev traversal">
-<a href="{{ url('archive/%s/' | format(archive.prev | strftimeformat('%Y'))) }}">
-{{ archive.prev | strftimeformat("%Y") }}
-</a>
-</div>
-{% endif %}
 <div class="archive standalone">
 {% for when, month in months %}
 <h3 id="label_{{ when }}_archive" class="archive">

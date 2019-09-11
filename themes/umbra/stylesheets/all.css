@@ -100,13 +100,9 @@ h3.filter {
     box-sizing: border-box;
     width: 100%;
     text-align: center;
-    color: #ffffff;
-    background-color: #47b347;
     margin: 0rem;
-    padding: 0.5em;
-}
-div.traversal + div#main > h3.filter {
-    margin-top: 2rem;
+    padding: 2rem 0.5em;
+    border-bottom: 1px solid #666667;
 }
 h3.archive {
     margin-top: 1em;
@@ -412,12 +408,7 @@ div.traversal {
     box-sizing: border-box;
     max-width: 1024px;
     text-align: center;
-    padding: 0rem 2rem;;
-}
-div.prev {
-    margin: 2rem auto 0rem auto;
-}
-div.next {
+    padding: 0rem 2rem;
     margin: 0rem auto 0rem auto;
 }
 div.flash {
@@ -592,9 +583,6 @@ div.traversal a:active {
     background-color: #666667;
     transition: top 250ms cubic-bezier(0.5, -8, 0.2, 4);
 }
-div.prev a:hover, div.prev a:active {
-    top: -1px;
-}
 div.next a:hover, div.next a:active {
     top: 1px;
 }
@@ -756,7 +744,7 @@ img.gravatar {
     body {
         margin: 2rem;
     }
-    div.prev, div.next {
+    div.next {
         display: none;
     }
     div.main > article,

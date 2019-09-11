@@ -82,12 +82,6 @@
 </div>
 </div>
 </div>
-{% if posts.paginated is defined and posts.prev_page() %}
-<!-- Navigation -->
-<div role="navigation" class="prev traversal">
-{{ posts.prev_link("Page %d" | translate | format(posts.page - 1)) }}
-</div>
-{% endif %}
 <!-- Content -->
 <div id="main" role="main">
 {% block content %}{% endblock %}
