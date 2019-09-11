@@ -98,9 +98,15 @@ h3.flash {
 }
 h3.filter {
     box-sizing: border-box;
-    max-width: 1024px;
-    margin: 0rem auto;
-    padding: 2rem 0rem 0rem 2rem;
+    text-align: center;
+    margin: 0rem 1rem;
+    padding: 0.5rem 0rem;
+    background-color: #f5f4f0;
+    border: 1px solid #c2bcb8;
+    border-radius: 1.5rem;
+}
+div#main > h3.filter:first-child {
+    margin-top: 2rem;
 }
 h3.archive {
     margin-top: 1em;
@@ -599,10 +605,11 @@ div.category a.category {
     padding: 0.2em 0.6em;
     margin: 0em;
     border: 1px solid #c2bcb8;
-}
-hr + article div.category a.category,
-article:first-child div.category a.category {
     border-top: none;
+}
+div.traversal + div#main > article:first-child div.category a.category,
+div#main > div.traversal + article div.category a.category {
+    border-top: 1px solid #c2bcb8;
 }
 div.tags a.tag {
     display: inline-block;
@@ -775,6 +782,9 @@ img.gravatar {
     button#search_submit {
         display: none;
     }
+    h3.filter {
+        margin: 0rem 0.5rem;
+    }
     div.prev {
         margin-top: 2rem;
     }
@@ -821,6 +831,11 @@ img.gravatar {
     }
     div.search_box {
         display: inline-block;
+    }
+    h3.filter {
+        max-width: 960px;
+        margin-left: auto;
+        margin-right: auto;
     }
     div#main > article, div.standalone {
         padding-left: 8rem;
