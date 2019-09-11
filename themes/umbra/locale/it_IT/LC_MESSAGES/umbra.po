@@ -44,7 +44,7 @@ msgstr "Tag"
 #: themes/umbra/content/post.twig:20 themes/umbra/feathers/audio.twig:6
 #: themes/umbra/feathers/photo.twig:6 themes/umbra/feathers/quote.twig:6
 #: themes/umbra/feathers/text.twig:6 themes/umbra/feathers/uploader.twig:6
-#: themes/umbra/feathers/video.twig:6 themes/umbra/pages/archive.twig:36
+#: themes/umbra/feathers/video.twig:6 themes/umbra/pages/archive.twig:29
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "Link permanente &#8220;%s&#8221;"
@@ -288,12 +288,12 @@ msgstr "Cerca questo blog"
 msgid "Search"
 msgstr "Cerca"
 
-#: themes/umbra/layouts/default.twig:88 themes/umbra/layouts/default.twig:98
+#: themes/umbra/layouts/default.twig:92
 #, php-format
 msgid "Page %d"
 msgstr "Pagina %d"
 
-#: themes/umbra/layouts/default.twig:109
+#: themes/umbra/layouts/default.twig:103
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "Chiamato da %s sulla riga %d a %s secondi."
@@ -306,16 +306,16 @@ msgstr "Negato."
 msgid "Not found."
 msgstr "Non trovato."
 
-#: themes/umbra/pages/archive.twig:18
+#: themes/umbra/pages/archive.twig:11
 msgid "%B %Y"
 msgstr "%B %Y"
 
-#: themes/umbra/pages/archive.twig:57
+#: themes/umbra/pages/archive.twig:50
 #, php-format
 msgid "Archive of %s"
 msgstr "Archivio %s"
 
-#: themes/umbra/pages/archive.twig:66
+#: themes/umbra/pages/archive.twig:59
 msgid "There aren't any posts in the timeframe you specified."
 msgstr "Non ci sono post nell'intervallo di tempo specificato."
 

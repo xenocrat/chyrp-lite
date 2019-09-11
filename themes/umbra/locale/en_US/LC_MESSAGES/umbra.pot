@@ -36,7 +36,7 @@ msgstr ""
 #: themes/umbra/feathers/text.twig:6
 #: themes/umbra/feathers/uploader.twig:6
 #: themes/umbra/feathers/video.twig:6
-#: themes/umbra/pages/archive.twig:36
+#: themes/umbra/pages/archive.twig:29
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr ""
@@ -280,13 +280,12 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
-#: themes/umbra/layouts/default.twig:88
-#: themes/umbra/layouts/default.twig:98
+#: themes/umbra/layouts/default.twig:92
 #, php-format
 msgid "Page %d"
 msgstr ""
 
-#: themes/umbra/layouts/default.twig:109
+#: themes/umbra/layouts/default.twig:103
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr ""
@@ -299,16 +298,16 @@ msgstr ""
 msgid "Not found."
 msgstr ""
 
-#: themes/umbra/pages/archive.twig:18
+#: themes/umbra/pages/archive.twig:11
 msgid "%B %Y"
 msgstr ""
 
-#: themes/umbra/pages/archive.twig:57
+#: themes/umbra/pages/archive.twig:50
 #, php-format
 msgid "Archive of %s"
 msgstr ""
 
-#: themes/umbra/pages/archive.twig:66
+#: themes/umbra/pages/archive.twig:59
 msgid "There aren't any posts in the timeframe you specified."
 msgstr ""
 

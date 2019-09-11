@@ -44,7 +44,7 @@ msgstr "标签"
 #: themes/umbra/content/post.twig:20 themes/umbra/feathers/audio.twig:6
 #: themes/umbra/feathers/photo.twig:6 themes/umbra/feathers/quote.twig:6
 #: themes/umbra/feathers/text.twig:6 themes/umbra/feathers/uploader.twig:6
-#: themes/umbra/feathers/video.twig:6 themes/umbra/pages/archive.twig:36
+#: themes/umbra/feathers/video.twig:6 themes/umbra/pages/archive.twig:29
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "永久链接至 &#8220;%s&#8221;"
@@ -286,12 +286,12 @@ msgstr "搜索"
 msgid "Search"
 msgstr "搜索"
 
-#: themes/umbra/layouts/default.twig:88 themes/umbra/layouts/default.twig:98
+#: themes/umbra/layouts/default.twig:92
 #, php-format
 msgid "Page %d"
 msgstr "第%d页"
 
-#: themes/umbra/layouts/default.twig:109
+#: themes/umbra/layouts/default.twig:103
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "调用 %s 在行 %d 在 %s 秒."
@@ -304,16 +304,16 @@ msgstr "被禁止."
 msgid "Not found."
 msgstr "未找到."
 
-#: themes/umbra/pages/archive.twig:18
+#: themes/umbra/pages/archive.twig:11
 msgid "%B %Y"
 msgstr "%B %Y"
 
-#: themes/umbra/pages/archive.twig:57
+#: themes/umbra/pages/archive.twig:50
 #, php-format
 msgid "Archive of %s"
 msgstr "%s的档案"
 
-#: themes/umbra/pages/archive.twig:66
+#: themes/umbra/pages/archive.twig:59
 msgid "There aren't any posts in the timeframe you specified."
 msgstr "在指定的时间范围内没有任何帖子。"
 
