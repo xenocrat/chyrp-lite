@@ -51,7 +51,7 @@ html {
 }
 *::selection {
     color: #000000;
-    background-color: #fffefd;
+    background-color: #cc5252;
 }
 body {
     font-family: "Open Sans webfont", sans-serif;
@@ -683,7 +683,7 @@ a.archive_post_link {
 a.archive_post_link:hover,
 a.archive_post_link:focus,
 a.archive_post_link:active {
-    background-color: #47b347;
+    background-color: #cc5252;
     opacity: 0.8;
 }
 iframe {
