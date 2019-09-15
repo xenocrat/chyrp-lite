@@ -497,9 +497,6 @@ div#main > article.discourse > div {
     background-color: #f5f4f0;
     border: 1px solid #c2bcb8;
 }
-div.tags.standalone {
-    line-height: 2;
-}
 ul.archive article.post.archive {
     display: block;
     position: relative;
@@ -611,7 +608,8 @@ div.traversal + div#main > article:first-child div.category a.category,
 div#main > div.traversal + article div.category a.category {
     border-top: 1px solid #c2bcb8;
 }
-div.tags a.tag {
+div.tags a.tag,
+div.tag_cloud a.tag {
     display: inline-block;
     position: relative;
     top: 0px;
@@ -624,7 +622,10 @@ div.tags a.tag {
 }
 div.tags a.tag:hover,
 div.tags a.tag:focus,
-div.tags a.tag:active {
+div.tags a.tag:active,
+div.tag_cloud a.tag:hover,
+div.tag_cloud a.tag:focus,
+div.tag_cloud a.tag:active {
     top: 1px;
     color: #000000;;
 }

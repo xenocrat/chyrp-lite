@@ -480,9 +480,6 @@ div#main > article.discourse > div {
     padding: 2rem 2rem 1rem 2rem;
     border: 1px solid #666667;
 }
-div.tags.standalone {
-    line-height: 2;
-}
 ul.archive article.post.archive {
     display: block;
     position: relative;
@@ -597,7 +594,8 @@ section a:active, p a:active {
     color: #ffffff;
     border-bottom: 1px #ffffff solid;
 }
-div.tags a.tag {
+div.tags a.tag,
+div.tag_cloud a.tag {
     display: inline-block;
     position: relative;
     top: 0px;
@@ -609,7 +607,10 @@ div.tags a.tag {
 }
 div.tags a.tag:hover,
 div.tags a.tag:focus,
-div.tags a.tag:active {
+div.tags a.tag:active,
+div.tag_cloud a.tag:hover,
+div.tag_cloud a.tag:focus,
+div.tag_cloud a.tag:active {
     background-color: #666667;
 }
 div.category a.category {

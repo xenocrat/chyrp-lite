@@ -554,9 +554,6 @@ div.standalone {
     margin-bottom: 0rem;
     padding-bottom: 2rem;
 }
-div.tags.standalone {
-    line-height: 2;
-}
 div.user_controls.standalone,
 div.user_login.standalone,
 div.lost_password.standalone,
@@ -681,7 +678,8 @@ section a:active, p a:active {
     color: #d94c7b;
     border-bottom: 1px #d94c7b solid;
 }
-div.tags a {
+div.tags a,
+div.tag_cloud a {
     display: inline-block;
     padding: 0.2em 0.4em;
     margin-bottom: 4px;
@@ -692,7 +690,10 @@ div.tags a {
 }
 div.tags a:hover,
 div.tags a:focus,
-div.tags a:active {
+div.tags a:active,
+div.tag_cloud a:hover,
+div.tag_cloud a:focus,
+div.tag_cloud a:active {
     color: #ffffff;
     background-color: #1d8546;
 }
