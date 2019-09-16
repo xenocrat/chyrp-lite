@@ -13,11 +13,11 @@
 {% endif %}
 <div class="archive standalone">
 {% for when, month in months %}
-<h3 id="label_{{ when }}_archive" class="archive">
+<h2 id="label_{{ when }}_archive" class="archive">
 <a href="{{ url('archive/%s/' | format(when | strftimeformat('%Y/%m'))) }}">
 {{ when | strftimeformat("%B %Y" | translate) }}
 </a>
-</h3>
+</h2>
 <ul aria-labelledby="label_{{ when }}_archive" class="archive">
 {% for post in month %}
 <li>

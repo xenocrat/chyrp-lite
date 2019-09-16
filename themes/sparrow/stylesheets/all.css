@@ -108,7 +108,7 @@ h3.filter {
 div#main > h3.filter:first-child {
     margin-top: 2rem;
 }
-h3.archive {
+h2.archive {
     margin-top: 1em;
     clear: both;
 }
