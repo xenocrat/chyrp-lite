@@ -16,7 +16,7 @@
         # The feather's non-camelized name.
         public $safename = "";
 
-        # Array: $custom_filters
+        # Array: $filters
         # Manages named Trigger filters for Feather fields.
         static $filters = array();
 
@@ -50,12 +50,11 @@
          * Parameters:
          *     $field - Attribute of the post to filter.
          *     $name - Name of the class function to use as the filter.
-         *     $priority - Priority of the filter.
          *
          * See Also:
          *     <Trigger.filter>
          */
-        protected function customFilter($field, $name, $priority = 10) {
+        protected function customFilter($field, $name) {
             self::$custom_filters[get_class($this)][] = array("field" => $field, "name" => $name);
 
             if (isset($this->fields[$field]))
