@@ -81,6 +81,13 @@ function validate_url() {
         else
             $(this).removeClass("error");
     });
+
+    $("input[type='url']").on("change", function(e) {
+        var text = $(this).val();
+
+        if (isURL(text))
+            $(this).val(addScheme(text));
+    });
 }
 // Tests the strength of #password1 and compares #password1 to #password2.
 function validate_passwords() {
