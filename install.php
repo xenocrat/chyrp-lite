@@ -478,6 +478,13 @@
                         $(this).removeClass("error");
                 });
 
+                $("input[type='url']").on("change", function(e) {
+                    var text = $(this).val();
+
+                    if (isURL(text))
+                        $(this).val(addScheme(text));
+                });
+
                 $("#email").keyup(function(e) {
                     if ($(this).val() != "" && !isEmail($(this).val()))
                         $(this).addClass("error");
