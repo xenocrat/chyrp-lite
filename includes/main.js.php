@@ -52,7 +52,10 @@ var Post = {
         }, "json").fail(Post.panic);
     },
     panic: function(message) {
-        message = (typeof message === "string") ? message : '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;
+        message = (typeof message === "string") ?
+            message :
+            '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;
+
         Post.failed = true;
         alert(message);
         $(".ajax_loading").loader(true);
@@ -88,7 +91,10 @@ var Page = {
         }, "json").fail(Page.panic);
     },
     panic: function(message) {
-        message = (typeof message === "string") ? message : '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;
+        message = (typeof message === "string") ?
+            message :
+            '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;
+
         Page.failed = true;
         alert(message);
         $(".ajax_loading").loader(true);

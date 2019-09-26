@@ -58,7 +58,9 @@ function toggle_all() {
 // Validates slug fields.
 function validate_slug() {
     $("input[name='slug']").keyup(function(e) {
-        if (/^([a-z0-9\-]*)$/.test($(this).val()))
+        var slug = $(this).val();
+
+        if (/^([a-z0-9\-]*)$/.test(slug))
             $(this).removeClass("error");
         else
             $(this).addClass("error");
@@ -67,7 +69,9 @@ function validate_slug() {
 // Validates email fields.
 function validate_email() {
     $("input[type='email']").keyup(function(e) {
-        if ($(this).val() != "" && !isEmail($(this).val()))
+        var text = $(this).val();
+
+        if (text != "" && !isEmail(text))
             $(this).addClass("error");
         else
             $(this).removeClass("error");
@@ -76,7 +80,9 @@ function validate_email() {
 // Validates URL fields.
 function validate_url() {
     $("input[type='url']").keyup(function(e) {
-        if ($(this).val() != "" && !isURL($(this).val()))
+        var text = $(this).val();
+
+        if (text != "" && !isURL(text))
             $(this).addClass("error");
         else
             $(this).removeClass("error");
@@ -97,21 +103,29 @@ function validate_passwords() {
     });
 
     passwords.first().keyup(function(e) {
-        if (passwordStrength($(this).val()) > 99)
+        var password = $(this).val();
+
+        if (passwordStrength(password) > 99)
             $(this).addClass("strong");
         else
             $(this).removeClass("strong");
     });
 
     passwords.keyup(function(e) {
-        if (passwords.first().val() != "" && passwords.first().val() != passwords.last().val())
+        var password1 = passwords.first().val();
+        var password2 = passwords.last().val();
+
+        if (password1 != "" && password1 != password2)
             passwords.last().addClass("error");
         else
             passwords.last().removeClass("error");
     });
 
     passwords.parents("form").on("submit", function(e) {
-        if (passwords.first().val() != passwords.last().val()) {
+        var password1 = passwords.first().val();
+        var password2 = passwords.last().val();
+
+        if (password1 != password2) {
             e.preventDefault();
             alert('<?php echo __("Passwords do not match."); ?>');
         }
@@ -120,7 +134,8 @@ function validate_passwords() {
 // Asks the user to confirm form submission.
 function confirm_submit() {
     $("form[data-confirm]").submit(function(e) {
-        var text = $(this).attr("data-confirm") || '<?php echo __("Are you sure you want to proceed?", "admin"); ?>' ;
+        var text = $(this).attr("data-confirm") ||
+                   '<?php echo __("Are you sure you want to proceed?", "admin"); ?>' ;
 
         if (!confirm(text.replace(/<[^>]+>/g, "")))
             e.preventDefault();

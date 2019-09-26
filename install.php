@@ -451,34 +451,44 @@
                 $("#adapter").change(toggle_adapter).trigger("change");
 
                 $("#password1").keyup(function(e) {
-                    if (passwordStrength($(this).val()) > 99)
+                    var password = $(this).val();
+
+                    if (passwordStrength(password) > 99)
                         $(this).addClass("strong");
                     else
                         $(this).removeClass("strong");
                 });
 
                 $("#password1, #password2").keyup(function(e) {
-                    if ($("#password1").val() != "" && $("#password1").val() != $("#password2").val())
+                    var password1 = $("#password1").val();
+                    var password2 = $("#password2").val();
+
+                    if (password1 != "" && password1 != password2)
                         $("#password2").addClass("error");
                     else
                         $("#password2").removeClass("error");
                 });
 
                 $("#installer").on("submit", function(e) {
-                    if ($("#password1").val() != $("#password2").val()) {
+                    var password1 = $("#password1").val();
+                    var password2 = $("#password2").val();
+
+                    if (password1 != password2) {
                         e.preventDefault();
                         alert('<?php echo __("Passwords do not match."); ?>');
                     }
                 });
 
                 $("#url").keyup(function(e) {
-                    if ($(this).val() != "" && !isURL($(this).val()))
+                    var text = $(this).val();
+
+                    if (text != "" && !isURL(text))
                         $(this).addClass("error");
                     else
                         $(this).removeClass("error");
                 });
 
-                $("input[type='url']").on("change", function(e) {
+                $("#url").on("change", function(e) {
                     var text = $(this).val();
 
                     if (isURL(text))
@@ -486,7 +496,9 @@
                 });
 
                 $("#email").keyup(function(e) {
-                    if ($(this).val() != "" && !isEmail($(this).val()))
+                    var text = $(this).val();
+
+                    if (text != "" && !isEmail(text))
                         $(this).addClass("error");
                     else
                         $(this).removeClass("error");
