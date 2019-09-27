@@ -56,7 +56,7 @@ msgid "Parameters"
 msgstr "Parametri"
 
 #: includes/class/Query.php:203 includes/class/SQL.php:98
-#: includes/class/SQL.php:110 install.php:575
+#: includes/class/SQL.php:110 install.php:594
 #, php-format
 msgid "Database error: %s"
 msgstr "Errore di database: %s"
@@ -92,7 +92,7 @@ msgstr "Il percorso è stato avviato con un Controller non valido."
 #: includes/helpers.php:1879 includes/helpers.php:1882
 #: includes/helpers.php:1885 includes/helpers.php:1890 includes/thumb.php:15
 #: includes/thumb.php:18 includes/thumb.php:47 includes/thumb.php:202
-#: install.php:766 upgrade.php:167 upgrade.php:180 upgrade.php:193
+#: install.php:785 upgrade.php:167 upgrade.php:180 upgrade.php:193
 #: upgrade.php:206 upgrade.php:219 upgrade.php:233 upgrade.php:259
 #: upgrade.php:272 upgrade.php:286 upgrade.php:299 upgrade.php:312
 #: upgrade.php:325
@@ -368,13 +368,13 @@ msgid "That username is already in use."
 msgstr "Il nome utente è già in uso."
 
 #: includes/controller/Admin.php:617 includes/controller/Main.php:454
-#: install.php:525
+#: install.php:544
 msgid "Passwords cannot be blank."
 msgstr "La casella della Password non puó essere vuota."
 
 #: includes/controller/Admin.php:620 includes/controller/Admin.php:722
 #: includes/controller/Main.php:456 includes/controller/Main.php:631
-#: install.php:470 install.php:527
+#: install.php:478 install.php:546
 msgid "Passwords do not match."
 msgstr "Le Password non corrispondono."
 
@@ -386,13 +386,13 @@ msgstr ""
 
 #: includes/controller/Admin.php:626 includes/controller/Admin.php:730
 #: includes/controller/Admin.php:1827 includes/controller/Main.php:461
-#: includes/controller/Main.php:636 install.php:530
+#: includes/controller/Main.php:636 install.php:549
 msgid "Email address cannot be blank."
 msgstr "La casella dell'indirizzo email non può essere vuota."
 
 #: includes/controller/Admin.php:629 includes/controller/Admin.php:733
 #: includes/controller/Admin.php:1830 includes/controller/Main.php:463
-#: includes/controller/Main.php:638 install.php:532
+#: includes/controller/Main.php:638 install.php:551
 msgid "Invalid email address."
 msgstr "Indirizzo email non valido."
 
@@ -652,11 +652,11 @@ msgstr "Anteprima interrotta."
 msgid "Preview started."
 msgstr "Anteprima avviata."
 
-#: includes/controller/Admin.php:1833 install.php:508
+#: includes/controller/Admin.php:1833 install.php:527
 msgid "Chyrp URL cannot be blank."
 msgstr "L'URL di Chyrp non può essere vuoto."
 
-#: includes/controller/Admin.php:1836 install.php:510
+#: includes/controller/Admin.php:1836 install.php:529
 msgid "Invalid Chyrp URL."
 msgstr "URL di Chyrp non valido."
 
@@ -813,7 +813,7 @@ msgstr "Questo sito non consente la registrazione."
 msgid "You cannot register an account because you are already logged in."
 msgstr "Non è possibile registrare un account perché si è già registrati."
 
-#: includes/controller/Main.php:446 install.php:522
+#: includes/controller/Main.php:446 install.php:541
 msgid "Please enter a username for your account."
 msgstr "Inserisci un nome utente per il tuo account."
 
@@ -1163,11 +1163,11 @@ msgstr "Il supporto XML-RPC è disabilitato per questo sito."
 msgid "Are you sure you want to delete this post?"
 msgstr "Sei sicuro di voler rimuovere questo post?"
 
-#: includes/main.js.php:55 includes/main.js.php:91
+#: includes/main.js.php:57 includes/main.js.php:96
 msgid "Oops! Something went wrong on this web page."
 msgstr "Oops! Qualcosa è andato storto su questa pagina web."
 
-#: includes/main.js.php:68
+#: includes/main.js.php:71
 msgid "Are you sure you want to delete this page and its child pages?"
 msgstr ""
 "Sei sicuro di voler eliminare questa pagina e le sue pagine secondarie?"
@@ -1316,74 +1316,74 @@ msgstr ""
 msgid "Chyrp Lite Installer"
 msgstr "Chyrp Lite Installer"
 
-#: install.php:505
+#: install.php:524
 msgid "Database cannot be blank."
 msgstr "Il database non può essere vuoto."
 
-#: install.php:513
+#: install.php:532
 msgid "Please enter a name for your website."
 msgstr "Inserisci un nome per il tuo sito web."
 
-#: install.php:516
+#: install.php:535
 msgid "Time zone cannot be blank."
 msgstr "La selezione del fuso orario non può essere vuoto."
 
-#: install.php:519
+#: install.php:538
 msgid "Language cannot be blank."
 msgstr "La selezione della lingua non può essere vuota."
 
-#: install.php:535
+#: install.php:554
 msgid "MySQLi or PDO is required for database access."
 msgstr "MySQLi o PDO è necessario per l'accesso al database."
 
-#: install.php:541
+#: install.php:560
 msgid "Could not determine the absolute path to the SQLite database."
 msgstr "Impossibile determinare il percorso assoluto del database SQLite."
 
-#: install.php:548
+#: install.php:567
 msgid "Please make the SQLite database writable by the server."
 msgstr "Si prega di rendere il database SQLite scrivibile dal server."
 
-#: install.php:552
+#: install.php:571
 msgid "Please enter a username and password for the MySQL database."
 msgstr "Inserisci un nome utente e una password per il database MySQL."
 
-#: install.php:766 upgrade.php:167 upgrade.php:180 upgrade.php:193
+#: install.php:785 upgrade.php:167 upgrade.php:180 upgrade.php:193
 #: upgrade.php:206 upgrade.php:219 upgrade.php:233 upgrade.php:259
 #: upgrade.php:272 upgrade.php:286 upgrade.php:299 upgrade.php:312
 #: upgrade.php:325
 msgid "Could not write the configuration file."
 msgstr "Impossibile scrivere il file di configurazione."
 
-#: install.php:783
+#: install.php:802
 msgid "Database Setup"
 msgstr "Impostazione database"
 
-#: install.php:785
+#: install.php:804
 msgid "Adapter"
 msgstr "Adattatore"
 
-#: install.php:796
+#: install.php:815
 msgid "Host"
 msgstr "Host"
 
-#: install.php:800 install.php:859
+#: install.php:819 install.php:878
 msgid "Username"
 msgstr "Nome utente"
 
-#: install.php:804 install.php:863 install.php:867
+#: install.php:823 install.php:882 install.php:886
 msgid "Password"
 msgstr "Password"
 
-#: install.php:808
+#: install.php:827
 msgid "Database"
 msgstr "Database"
 
-#: install.php:810
+#: install.php:829
 msgid "(absolute or relative path)"
 msgstr "(percorso assoluto o relativo)"
 
-#: install.php:816
+#: install.php:835
 msgid ""
 "Be sure to put your SQLite database outside the document root directory, "
 "otherwise visitors will be able to download it."
@@ -1392,75 +1392,75 @@ msgstr ""
 "directory principale del documento, altrimenti altri utenti saranno in grado "
 "di scaricarlo."
 
-#: install.php:819
+#: install.php:838
 msgid "Table Prefix"
 msgstr "Prefisso tabella"
 
-#: install.php:819
+#: install.php:838
 msgid "(optional)"
 msgstr "(opzionale)"
 
-#: install.php:823
+#: install.php:842
 msgid "Website Setup"
 msgstr "Configurazione del sito web"
 
-#: install.php:825
+#: install.php:844
 msgid "Chyrp URL"
 msgstr "URL Chyrp"
 
-#: install.php:829
+#: install.php:848
 msgid "Site Name"
 msgstr "Nome del sito"
 
-#: install.php:830
+#: install.php:849
 msgid "My Awesome Site"
 msgstr "Il mio favoloso sito"
 
-#: install.php:833
+#: install.php:852
 msgid "Description"
 msgstr "Descrizione"
 
-#: install.php:837
+#: install.php:856
 msgid "Time Zone"
 msgstr "Fuso orario"
 
-#: install.php:847
+#: install.php:866
 msgid "Language"
 msgstr "Lingua"
 
-#: install.php:857
+#: install.php:876
 msgid "Admin Account"
 msgstr "Amministratore"
 
-#: install.php:867
+#: install.php:886
 msgid "(again)"
 msgstr "(ripeti)"
 
-#: install.php:871
+#: install.php:890
 msgid "Email Address"
 msgstr "Indirizzo email"
 
-#: install.php:874
+#: install.php:893
 msgid "Install me!"
 msgstr "Installami!"
 
-#: install.php:877
+#: install.php:896
 msgid "Installation Complete"
 msgstr "Installazione completata"
 
-#: install.php:878 upgrade.php:596
+#: install.php:897 upgrade.php:596
 msgid "What now?"
 msgstr "E adesso?"
 
-#: install.php:880
+#: install.php:899
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr "Elimina <em>install.php</em>, non ne avrai più bisogno."
 
-#: install.php:881
+#: install.php:900
 msgid "Log in to your site and configure things to your liking."
 msgstr "Accedi al tuo sito e configura a tuo piacimento."
 
-#: install.php:883 upgrade.php:602
+#: install.php:902 upgrade.php:602
 msgid "Take me to my site!"
 msgstr "Guidami al mio sito!"
 

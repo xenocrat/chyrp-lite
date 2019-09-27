@@ -92,7 +92,7 @@ msgid "Strong"
 msgstr ""
 
 #: admin/help/markdown.twig:39
-msgid "&crarr;"
+msgid "Blank line"
 msgstr ""
 
 #: admin/help/markdown.twig:40
@@ -199,26 +199,26 @@ msgstr ""
 msgid "Toggle All"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:116
+#: admin/javascripts/admin.js.php:138
 msgid "Are you sure you want to proceed?"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:159
-#: admin/javascripts/admin.js.php:262
+#: admin/javascripts/admin.js.php:181
+#: admin/javascripts/admin.js.php:284
 msgid "Close"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:166
-#: admin/javascripts/admin.js.php:269
+#: admin/javascripts/admin.js.php:188
+#: admin/javascripts/admin.js.php:291
 msgid "close"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:186
+#: admin/javascripts/admin.js.php:208
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:202
+#: admin/javascripts/admin.js.php:224
 msgid "preview"
 msgstr ""
 

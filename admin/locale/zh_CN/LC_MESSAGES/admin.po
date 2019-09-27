@@ -123,8 +123,8 @@ msgid "Strong"
 msgstr ""
 
 #: admin/help/markdown.twig:39
-msgid "&crarr;"
-msgstr ""
+msgid "Blank line"
+msgstr "隐藏线"
 
 #: admin/help/markdown.twig:40
 msgid "New paragraph"
@@ -240,23 +240,23 @@ msgstr "您的博客的XML-RPC URL是 <code>%s/includes/rpc.php</code>。"
 msgid "Toggle All"
 msgstr "全部切换"
 
-#: admin/javascripts/admin.js.php:116
+#: admin/javascripts/admin.js.php:138
 msgid "Are you sure you want to proceed?"
 msgstr "确定继续？"
 
-#: admin/javascripts/admin.js.php:159 admin/javascripts/admin.js.php:262
+#: admin/javascripts/admin.js.php:181 admin/javascripts/admin.js.php:284
 msgid "Close"
 msgstr "关闭"
 
-#: admin/javascripts/admin.js.php:166 admin/javascripts/admin.js.php:269
+#: admin/javascripts/admin.js.php:188 admin/javascripts/admin.js.php:291
 msgid "close"
 msgstr "关闭"
 
-#: admin/javascripts/admin.js.php:186 admin/pages/themes.twig:25
+#: admin/javascripts/admin.js.php:208 admin/pages/themes.twig:25
 msgid "Preview"
 msgstr "预览"
 
-#: admin/javascripts/admin.js.php:202
+#: admin/javascripts/admin.js.php:224
 msgid "preview"
 msgstr "预览"
 
