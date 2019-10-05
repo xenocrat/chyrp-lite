@@ -325,6 +325,20 @@
             error(__("Error"), __("Could not write the configuration file."));
     }
 
+    /**
+     * Function: disable_simplemde
+     * Disables the simplemde module.
+     *
+     * Versions: 2019.03 => 2019.04
+     */
+    function disable_simplemde() {
+        $config = Config::current();
+        $set = $config->set("enabled_modules", array_diff($config->enabled_modules, array("simplemde")));
+
+        if ($set === false)
+            error(__("Error"), __("Could not write the configuration file."));
+    }
+
     #---------------------------------------------
     # Output Starts
     #---------------------------------------------
@@ -558,6 +572,7 @@
         remove_feed_url();
         remove_cookies_notification();
         remove_ajax();
+        disable_simplemde();
 
         # Perform module upgrades.
         foreach ($config->enabled_modules as $module)
