@@ -124,6 +124,7 @@ msgstr ""
 #: upgrade.php:299
 #: upgrade.php:312
 #: upgrade.php:325
+#: upgrade.php:339
 msgid "Error"
 msgstr ""
 
@@ -1534,6 +1535,7 @@ msgstr ""
 #: upgrade.php:299
 #: upgrade.php:312
 #: upgrade.php:325
+#: upgrade.php:339
 msgid "Could not write the configuration file."
 msgstr ""
 
@@ -1629,7 +1631,7 @@ msgid "Installation Complete"
 msgstr ""
 
 #: install.php:897
-#: upgrade.php:596
+#: upgrade.php:611
 msgid "What now?"
 msgstr ""
 
@@ -1642,47 +1644,47 @@ msgid "Log in to your site and configure things to your liking."
 msgstr ""
 
 #: install.php:902
-#: upgrade.php:602
+#: upgrade.php:617
 msgid "Take me to my site!"
 msgstr ""
 
-#: upgrade.php:336
+#: upgrade.php:350
 msgid "Chyrp Lite Upgrader"
 msgstr ""
 
-#: upgrade.php:585
+#: upgrade.php:600
 msgid "Halt!"
 msgstr ""
 
-#: upgrade.php:586
+#: upgrade.php:601
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr ""
 
-#: upgrade.php:588
+#: upgrade.php:603
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr ""
 
-#: upgrade.php:589
+#: upgrade.php:604
 msgid "Tell your users that your site is offline for maintenance."
 msgstr ""
 
-#: upgrade.php:592
+#: upgrade.php:607
 msgid "Upgrade me!"
 msgstr ""
 
-#: upgrade.php:595
+#: upgrade.php:610
 msgid "Upgrade Complete"
 msgstr ""
 
-#: upgrade.php:598
+#: upgrade.php:613
 msgid "Take action to resolve any errors reported on this page."
 msgstr ""
 
-#: upgrade.php:599
+#: upgrade.php:614
 msgid "Run this upgrader again if you need to."
 msgstr ""
 
-#: upgrade.php:600
+#: upgrade.php:615
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr ""
 
