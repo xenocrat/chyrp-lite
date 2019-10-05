@@ -34,31 +34,30 @@ sito web del tuo blog.
 
 #### Feathers:
 
-Testo: permette di scrivere post in testo.
-Foto: carica una immagine.
-Citazione: aggiunger euna citazione.
-Link: Link ad un altro sito web.
-Video: carica un file video.
-Audio: Carica un file audio.
-Caricamento dati: Carica file multipli.
+* Testo: permette di scrivere post in testo.
+* Foto: carica una immagine.
+* Citazione: aggiunger euna citazione.
+* Link: Link ad un altro sito web.
+* Video: carica un file video.
+* Audio: Carica un file audio.
+* Caricamento dati: Carica file multipli.
 
 #### Moduli:
-Cacher: Cache delle pagine web, riduce il carico del server.
-Categorizzazione: Categorizza i tuoi post.
-Tag: Aggiunge la funzionalità per taggare i post.
-Pingable: Registra gli avvisi dei blog che si collegano al tuo.
-Commenti: Aggiunge funzionalità di commento ai tuoi post.
-Like: Consenti agli utenti di aggiungere "like" a un post.
-Continua a leggere: Estrae lunghi post dall'indice del blog.
-Diritti di copyright: Aggiunge l'attribuzione dei diritti di proprietà intellettuale.
-Cascata: Aggiunge lo scorrimento infinito supportato da AJAX al tuo blog.
-Tavolo luminoso: Visione delle immagini con gestione dei diritti.
-Sitemap: Indicizza il tuo blog per motori di ricerca.
-MAPTCHA: Usa semplici operazioni di matematica per prevenire lo spam.
-Highlighter: Aggiunge la colorazione della sintassi concatenata.
-SimpleMDE: WYSIWYG-esque Editor per contenuti Markdown.
-Facile Embed: Il modo più semplice per incorporare video nel tuo blog.
-Visualizzazioni dei post: Contatore per la visualizzazione dei tuoi post.
+* Cacher: Cache delle pagine web, riduce il carico del server.
+* Categorizzazione: Categorizza i tuoi post.
+* Tag: Aggiunge la funzionalità per taggare i post.
+* Pingable: Registra gli avvisi dei blog che si collegano al tuo.
+* Commenti: Aggiunge funzionalità di commento ai tuoi post.
+* Like: Consenti agli utenti di aggiungere "like" a un post.
+* Continua a leggere: Estrae lunghi post dall'indice del blog.
+* Diritti di copyright: Aggiunge l'attribuzione dei diritti di proprietà intellettuale.
+* Cascata: Aggiunge lo scorrimento infinito supportato da AJAX al tuo blog.
+* Tavolo luminoso: Visione delle immagini con gestione dei diritti.
+* Sitemap: Indicizza il tuo blog per motori di ricerca.
+* MAPTCHA: Usa semplici operazioni di matematica per prevenire lo spam.
+* Highlighter: Aggiunge la colorazione della sintassi concatenata.
+* Facile Embed: Il modo più semplice per incorporare video nel tuo blog.
+* Visualizzazioni dei post: Contatore per la visualizzazione dei tuoi post.
 
 ## Requisiti
 

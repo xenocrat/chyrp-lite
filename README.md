@@ -53,7 +53,6 @@ do many blogging tasks remotely without having to visit your blog's website.
 * Sitemap: index your blog for search engines.
 * MAPTCHA: use simple mathematics problems to prevent spam.
 * Highlighter: syntax highlighting for your code snippets.
-* SimpleMDE: WYSIWYG-esque editor for Markdown content.
 * Easy Embed: the easiest way to embed videos in your blog.
 * Post Views: maintain a view count for your blog entries.
 
