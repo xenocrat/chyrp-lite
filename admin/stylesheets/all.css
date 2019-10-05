@@ -868,7 +868,7 @@ a.emblem.preview {
     height: 100%;
     top: 0px;
     left: 0px;
-    /* Prevent SimpleMDE overlapping */
+    /* Prevent other elements overlapping */
     z-index: 1;
     background-color: rgba(239, 239, 239, 0.75);
 }
