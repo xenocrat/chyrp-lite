@@ -38,7 +38,7 @@ var Post = {
     destroy: function(id) {
         var thisPost = $("#post_" + id).loader();
 
-        $.post(Site.chyrp_url + "/ajax/", {
+        $.post("<?php echo url('/', 'AjaxController'); ?>", {
             action: "destroy_post",
             id: id,
             hash: Visitor.token
@@ -79,7 +79,7 @@ var Page = {
     destroy: function(id) {
         var thisPage = $("#page_" + id).loader();
 
-        $.post(Site.chyrp_url + "/ajax/", {
+        $.post("<?php echo url('/', 'AjaxController'); ?>", {
             action: "destroy_page",
             id: id,
             hash: Visitor.token

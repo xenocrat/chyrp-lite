@@ -233,7 +233,7 @@ var Write = {
         // Build a form targeting a named iframe.
         $("<form>", {
             "id": uid,
-            "action": Site.chyrp_url + "/ajax/",
+            "action": "<?php echo url('/', 'AjaxController'); ?>",
             "method": "post",
             "accept-charset": "UTF-8",
             "target": uid,
