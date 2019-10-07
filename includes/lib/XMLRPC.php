@@ -86,7 +86,7 @@
             $url     = preg_quote($args[1], "/");
 
             # Convert the source encoding to UTF-8 if possible to ensure we render it correctly.
-            if (function_exists("mb_convert_encoding") and $charset != "UTF-8") {
+            if (function_exists("mb_convert_encoding") and strcasecmp($charset, "UTF-8") != 0) {
                 $title = mb_convert_encoding($title, "UTF-8", $charset);
                 $body = mb_convert_encoding($body, "UTF-8", $charset);
             }
