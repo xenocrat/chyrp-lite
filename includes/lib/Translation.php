@@ -23,7 +23,7 @@
         *     $reload - Reload the translation if already loaded?
         */
         public function load($domain, $path, $reload = false) {
-            $locale = Config::current()->locale;
+            $locale = (INSTALLING) ? get_locale() : Config::current()->locale ;
             $filepath = $path.DIR.$locale.DIR."LC_MESSAGES".DIR.$domain.".mo";
 
             if (isset($this->mo[$domain]) and !$reload)
