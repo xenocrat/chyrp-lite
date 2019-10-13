@@ -6,8 +6,8 @@
     class Translation {
         const MO_MAGIC_WORD_LE = "950412de";
         const MO_MAGIC_WORD_BE = "de120495";
-        const MO_SIZEOF_OFFSET = 28;
-        const ULONG            = 8;
+        const MO_SIZEOF_HEADER = 28;
+        const ULONG = 8;
 
         # Array: $mo
         # The loaded translations for each domain.
@@ -27,17 +27,17 @@
             $filepath = $path.DIR.$locale.DIR."LC_MESSAGES".DIR.$domain.".mo";
 
             if (isset($this->mo[$domain]) and !$reload)
-                return;
+                return false;
 
             if (!is_file($filepath) or !is_readable($filepath))
-                return;
+                return false;
 
             $mo_file = file_get_contents($filepath);
             $mo_data = array();
             $mo_length = strlen($mo_file);
 
-            if (self::MO_SIZEOF_OFFSET > $mo_length)
-                return;
+            if (self::MO_SIZEOF_HEADER > $mo_length)
+                return false;
 
             $id = unpack("H8magic", $mo_file);
 
@@ -49,7 +49,7 @@
 
             # Neither magic number matches; not a valid .mo file.
             if (!isset($big_endian))
-                return;
+                return false;
 
             $unpack = ($big_endian) ?
                 "H8magic/Nformat/Nnum/Nor/Ntr" :
@@ -66,10 +66,10 @@
                 $tr_str_offset = $mo_offset["tr"] + ($i * self::ULONG);
 
                 if (($or_str_offset + self::ULONG) > $mo_length)
-                    return;
+                    return false;
 
                 if (($tr_str_offset + self::ULONG) > $mo_length)
-                    return;
+                    return false;
 
                 $or_str_meta = unpack($unpack, $mo_file, $or_str_offset);
                 $tr_str_meta = unpack($unpack, $mo_file, $tr_str_offset);
@@ -78,10 +78,10 @@
                 $tr_str_end = $tr_str_meta["offset"] + $tr_str_meta["length"];
 
                 if ($or_str_end > $mo_length)
-                    return;
+                    return false;
 
                 if ($tr_str_end > $mo_length)
-                    return;
+                    return false;
 
                 $or_str_data = substr($mo_file,
                                         $or_str_meta["offset"],
@@ -110,6 +110,7 @@
             }
 
             $this->mo[$domain] = $mo_data;
+            return true;
         }
 
        /**
