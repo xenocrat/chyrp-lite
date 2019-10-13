@@ -311,10 +311,11 @@
      *     $locale - The path to the locale directory.
      */
     function load_translator($domain, $locale) {
+        if (USE_GETTEXT_SHIM)
+            return Translation::current()->load($domain, $locale);
+
         if (function_exists("bindtextdomain"))
             bindtextdomain($domain, $locale);
-        else
-            Translation::current()->load($domain, $locale);
 
         if (function_exists("bind_textdomain_codeset"))
             bind_textdomain_codeset($domain, "UTF-8");
@@ -346,9 +347,10 @@
      *     The translated string or the original.
      */
     function __($text, $domain = "chyrp") {
-        return function_exists("dgettext") ?
-            dgettext($domain, $text) :
-            Translation::current()->text($domain, $text) ;
+        if (USE_GETTEXT_SHIM)
+            return Translation::current()->text($domain, $text);
+
+        return function_exists("dgettext") ? dgettext($domain, $text) : $text ;
     }
 
     /**
@@ -365,9 +367,13 @@
      *     The translated string or the original.
      */
     function _p($single, $plural, $number, $domain = "chyrp") {
+        $int = (int) $number;
+
+        if (USE_GETTEXT_SHIM)
+            return Translation::current()->text($domain, $single, $plural, $int);
+
         return function_exists("dngettext") ?
-            dngettext($domain, $single, $plural, (int) $number) :
-            Translation::current()->text($domain, $single, $plural, (int) $number) ;
+            dngettext($domain, $single, $plural, $int) : (($int != 1) ? $plural : $single) ;
     }
 
     /**
