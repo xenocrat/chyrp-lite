@@ -140,6 +140,10 @@
     # Deny session storage when testing?
     define('SESSION_DENY_TESTER', true);
 
+    # Constant: USE_GETTEXT_SHIM
+    # Use a shim for translation support?
+    define('USE_GETTEXT_SHIM', false);
+
     # Constant: USE_OB
     # Use output buffering?
     if (!defined('USE_OB'))
