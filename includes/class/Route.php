@@ -45,8 +45,7 @@
 
             $config = Config::current();
 
-            fallback($controller->protected, array("__construct", "__destruct", "parse", "display"));
-            fallback($controller->permitted, array("login", "logout"));
+            fallback($controller->view_site_exempt, array());
             fallback($controller->feed, isset($_GET['feed']));
             fallback($controller->displayed, false);
 
@@ -101,7 +100,7 @@
 
                 # Show a 403 page if the visitor cannot view the site and this is not an exempt action.
                 if (!$visitor->group->can("view_site") and
-                    !in_array($this->action, $this->controller->permitted)) {
+                    !in_array($this->action, $this->controller->view_site_exempt)) {
 
                     $trigger->call("can_not_view_site");
                     show_403(__("Access Denied"), __("You are not allowed to view this site."));
@@ -120,14 +119,9 @@
                     break;
                 }
 
-                # Protect the controller's non-responder methods. PHP functions are not case-sensitive!
-                foreach ($this->controller->protected as $protected)
-                    if (strcasecmp($protected, $method) == 0)
-                        continue 2;
-
                 # This discovers responders native to the controller.
-                if (method_exists($this->controller, $method))
-                    $response = call_user_func_array(array($this->controller, $method), $args);
+                if (method_exists($this->controller, $name."_".$method))
+                    $response = call_user_func_array(array($this->controller, $name."_".$method), $args);
                 else
                     $response = false;
 
@@ -146,9 +140,11 @@
                 show_404();
 
             # Set redirect_to so that visitors will come back here after login.
-            if (!in_array($this->action, $this->controller->permitted) and
-                !$this->controller->feed and $this->controller->displayed)
+            if (!$this->controller->feed and $this->controller->displayed) {
+                # Ignore actions that are exempt from the "view_site" permission.
+                if (!in_array($this->action, $this->controller->view_site_exempt))
                     $_SESSION['redirect_to'] = self_url();
+            }
 
             $trigger->call("route_done", $this);
 

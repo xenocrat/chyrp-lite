@@ -37,21 +37,17 @@
         # Item limit for pagination.
         public $post_limit = 10;
 
-        # Array: $protected
-        # Methods that cannot respond to actions.
-        public $protected = array("__construct", "parse", "resort", "failed", "display", "current");
-
         # Array: $permitted
         # Methods that are exempt from the "view_site" permission.
-        public $permitted = array("login", "logout", "register", "activate", "lost_password", "reset");
+        public $view_site_exempt = array("login", "logout", "register", "activate", "lost_password", "reset");
 
         # Variable: $twig
         # Environment for the Twig template engine.
         private $twig;
 
-        # Array: $failpage
-        # Arguments for a failpage in the event that none of the actions are successful.
-        private $failpage;
+        # Array: $resort_to
+        # Arguments for a page of last resort.
+        private $resort_to;
 
         /**
          * Function: __construct
@@ -162,7 +158,7 @@
          * Function: index
          * Grabs the posts for the main index.
          */
-        public function index() {
+        public function main_index() {
             $this->display("pages".DIR."index",
                            array("posts" => new Paginator(Post::find(array("placeholders" => true)), $this->post_limit)));
         }
@@ -171,7 +167,7 @@
          * Function: archive
          * Grabs the posts for the archive page.
          */
-        public function archive() {
+        public function main_archive() {
             $sql = SQL::current();
             $statuses = Post::statuses();
             $feathers = Post::feathers();
@@ -262,7 +258,7 @@
          * Function: search
          * Grabs the posts for a search query.
          */
-        public function search() {
+        public function main_search() {
             # Redirect searches to a clean URL or dirty GET depending on configuration.
             if (isset($_POST['query']))
                 redirect("search/".str_ireplace("%2F", "", urlencode($_POST['query']))."/");
@@ -298,7 +294,7 @@
          * Function: drafts
          * Grabs the posts with draft status created by this user.
          */
-        public function drafts() {
+        public function main_drafts() {
             $visitor = Visitor::current();
 
             if (!$visitor->group->can("view_own_draft", "view_draft"))
@@ -316,7 +312,7 @@
          * Function: view
          * Handles post viewing via dirty URL or clean URL e.g. /year/month/day/url/.
          */
-        public function view($attrs = array(), $arg = array()) {
+        public function main_view($attrs = array(), $arg = array()) {
             $post = (!empty($attrs)) ?
                 Post::from_url($attrs, null, array("drafts" => true)) :
                 new Post(array("url" => fallback($_GET['url'])), array("drafts" => true)) ;
@@ -341,7 +337,7 @@
          * Function: page
          * Handles page viewing via dirty URL or clean URL e.g. /parent/child/child-of-child/.
          */
-        public function page($url = null, $hierarchy = array()) {
+        public function main_page($url = null, $hierarchy = array()) {
             $trigger = Trigger::current();
             $visitor = Visitor::current();
 
@@ -368,7 +364,7 @@
          * Function: id
          * Views a post or page by its static ID.
          */
-        public function id() {
+        public function main_id() {
             if (!empty($_GET['post']) and is_numeric($_GET['post'])) {
                 $post = new Post($_GET['post']);
 
@@ -394,7 +390,7 @@
          * Function: random
          * Grabs a random post and redirects to it.
          */
-        public function random() {
+        public function main_random() {
             $conds = array(Post::statuses());
 
             if (isset($_GET['feather']))
@@ -429,7 +425,7 @@
          * Function: register
          * Register a visitor as a new user.
          */
-        public function register() {
+        public function main_register() {
             $config = Config::current();
 
             if (!$config->can_register)
@@ -509,7 +505,7 @@
          * Function: activate
          * Activates (approves) a given login.
          */
-        public function activate() {
+        public function main_activate() {
             if (logged_in())
                 Flash::notice(__("You cannot activate an account because you are already logged in."), "/");
 
@@ -533,7 +529,7 @@
          * Function: reset
          * Resets the password for a given login.
          */
-        public function reset() {
+        public function main_reset() {
             if (logged_in())
                 Flash::notice(__("You cannot reset your password because you are already logged in."), "/");
 
@@ -559,7 +555,7 @@
          * Function: login
          * Logs in a user if they provide the username and password.
          */
-        public function login() {
+        public function main_login() {
             $trigger = Trigger::current();
 
             if (logged_in())
@@ -598,7 +594,7 @@
          * Function: logout
          * Logs out the current user.
          */
-        public function logout() {
+        public function main_logout() {
             $trigger = Trigger::current();
 
             if (!logged_in())
@@ -616,7 +612,7 @@
          * Function: controls
          * Updates the current user when the form is submitted.
          */
-        public function controls() {
+        public function main_controls() {
             $visitor = Visitor::current();
 
             if (!logged_in())
@@ -668,7 +664,7 @@
          * Function: lost_password
          * Emails a password reset link to the registered address of a user.
          */
-        public function lost_password() {
+        public function main_lost_password() {
             $config = Config::current();
 
             if (logged_in())
@@ -708,7 +704,7 @@
          * Function: feed
          * Grabs posts and serves a feed.
          */
-        public function feed($posts = null) {
+        public function main_feed($posts = null) {
             $config = Config::current();
             $trigger = Trigger::current();
             $theme = Theme::current();
@@ -801,7 +797,7 @@
                     return $trigger->call($route->action."_feed", $context);
 
                 if (isset($context["posts"]))
-                    return $this->feed($context["posts"]);
+                    return $this->main_feed($context["posts"]);
             }
 
             $this->context                       = array_merge($context, $this->context);
@@ -832,20 +828,20 @@
 
         /**
          * Function: resort
-         * Queue a failpage in the event that none of the actions are successful.
+         * Queue a page in the event that none of the actions are successful.
          */
         public function resort($template, $context = array(), $title = "") {
-            $this->failpage = array($template, $context, $title);
+            $this->resort_to = array($template, $context, $title);
             return false;
         }
 
         /**
          * Function: failed
-         * Serve a failpage in the event that none of the actions are successful.
+         * Serve a page in the event that none of the actions are successful.
          */
         public function failed($route) {
-            if (!empty($this->failpage))
-                call_user_func_array(array($this, "display"), $this->failpage);
+            if (!empty($this->resort_to))
+                call_user_func_array(array($this, "display"), $this->resort_to);
         }
 
         /**
