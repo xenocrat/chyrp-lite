@@ -13,6 +13,18 @@
         # The loaded translations for each domain.
         private $mo = array();
 
+        # String: $locale
+        # The current locale.
+        private $locale = "en_US";
+
+        /**
+         * Function: __construct
+         * Discovers the current locale.
+         */
+        private function __construct() {
+            $this->locale = get_locale();
+        }
+
        /**
         * Function: load
         * Loads translations from the .mo file into the supplied domain.
@@ -23,8 +35,7 @@
         *     $reload - Reload the translation if already loaded?
         */
         public function load($domain, $path, $reload = false) {
-            $locale = (INSTALLING) ? get_locale() : Config::current()->locale ;
-            $filepath = $path.DIR.$locale.DIR."LC_MESSAGES".DIR.$domain.".mo";
+            $filepath = $path.DIR.$this->locale.DIR."LC_MESSAGES".DIR.$domain.".mo";
 
             if (isset($this->mo[$domain]) and !$reload)
                 return false;
