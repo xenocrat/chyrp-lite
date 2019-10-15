@@ -36,7 +36,7 @@
          * Function: destroy_post
          * Destroys a post.
          */
-        public function admin_destroy_post() {
+        public function ajax_destroy_post() {
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
@@ -59,7 +59,7 @@
          * Function: destroy_page
          * Destroys a page.
          */
-        public function admin_destroy_page() {
+        public function ajax_destroy_page() {
             if (!Visitor::current()->group->can("delete_page"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete pages."));
 
@@ -82,7 +82,7 @@
          * Function: preview_post
          * Previews a post.
          */
-        public function admin_preview_post() {
+        public function ajax_preview_post() {
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
@@ -120,7 +120,7 @@
          * Function: preview_page
          * Previews a page.
          */
-        public function admin_preview_page() {
+        public function ajax_preview_page() {
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
