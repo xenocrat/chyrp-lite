@@ -206,7 +206,7 @@ Arguments:
 parse_route
 -----------
 Called from:
-	includes/class/Route.php on line 71
+	includes/class/Route.php on line 70
 
 Arguments:
 	$this
@@ -215,7 +215,7 @@ Arguments:
 route_init
 ----------
 Called from:
-	includes/class/Route.php on line 88
+	includes/class/Route.php on line 87
 
 Arguments:
 	$this
@@ -224,13 +224,13 @@ Arguments:
 can_not_view_site
 -----------------
 Called from:
-	includes/class/Route.php on line 106
+	includes/class/Route.php on line 105
 
 
 route_done
 ----------
 Called from:
-	includes/class/Route.php on line 153
+	includes/class/Route.php on line 149
 
 Arguments:
 	$this
@@ -245,13 +245,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 1132
+	includes/controller/Admin.php on line 1128
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1427
+	includes/controller/Admin.php on line 1423
 
 Arguments:
 	$group
@@ -260,7 +260,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1451
+	includes/controller/Admin.php on line 1447
 
 Arguments:
 	$user
@@ -269,7 +269,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1489
+	includes/controller/Admin.php on line 1485
 
 Arguments:
 	$entry, $post
@@ -278,7 +278,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1518
+	includes/controller/Admin.php on line 1514
 
 Arguments:
 	$entry, $page
@@ -287,7 +287,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1522
+	includes/controller/Admin.php on line 1518
 
 Arguments:
 	$imports
@@ -296,31 +296,31 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1798
+	includes/controller/Admin.php on line 1794
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1806
+	includes/controller/Admin.php on line 1802
 
 
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 360
+	includes/controller/Main.php on line 356
 
 
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 576
+	includes/controller/Main.php on line 572
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 588
+	includes/controller/Main.php on line 584
 
 Arguments:
 	$user
@@ -329,7 +329,7 @@ Arguments:
 user_logged_out
 ---------------
 Called from:
-	includes/controller/Main.php on line 610
+	includes/controller/Main.php on line 606
 
 Arguments:
 	$user
@@ -338,7 +338,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 765
+	includes/controller/Main.php on line 761
 
 Arguments:
 	$post, $feed
@@ -816,7 +816,7 @@ Arguments:
 parse_urls
 ----------
 Called from:
-	includes/class/Route.php on line 195
+	includes/class/Route.php on line 191
 
 Target:
 	$urls
@@ -873,7 +873,7 @@ Target:
 admin_determine_action
 ----------------------
 Called from:
-	includes/controller/Admin.php on line 156
+	includes/controller/Admin.php on line 152
 
 Target:
 	$route->action
@@ -882,7 +882,7 @@ Target:
 write_post_options
 ------------------
 Called from:
-	includes/controller/Admin.php on line 184
+	includes/controller/Admin.php on line 180
 
 Target:
 	$options
@@ -894,8 +894,8 @@ Arguments:
 post_options
 ------------
 Called from:
-	includes/controller/Admin.php on line 184
-	includes/controller/Admin.php on line 233
+	includes/controller/Admin.php on line 180
+	includes/controller/Admin.php on line 229
 
 Target:
 	$options
@@ -907,7 +907,7 @@ Arguments:
 edit_post_options
 -----------------
 Called from:
-	includes/controller/Admin.php on line 233
+	includes/controller/Admin.php on line 229
 
 Target:
 	$options
@@ -919,7 +919,7 @@ Arguments:
 posts_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 1196
+	includes/controller/Admin.php on line 1192
 
 Target:
 	$posts_atom
@@ -931,7 +931,7 @@ Arguments:
 pages_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 1243
+	includes/controller/Admin.php on line 1239
 
 Target:
 	$pages_atom
@@ -943,7 +943,7 @@ Arguments:
 export
 ------
 Called from:
-	includes/controller/Admin.php on line 1306
+	includes/controller/Admin.php on line 1302
 
 Target:
 	$exports
@@ -952,7 +952,7 @@ Target:
 before_import
 -------------
 Called from:
-	includes/controller/Admin.php on line 1397
+	includes/controller/Admin.php on line 1393
 
 Target:
 	$imports
@@ -961,7 +961,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 2072
+	includes/controller/Admin.php on line 2068
 
 Target:
 	$write
@@ -970,7 +970,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2101
+	includes/controller/Admin.php on line 2097
 
 Target:
 	$manage
@@ -979,7 +979,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 2126
+	includes/controller/Admin.php on line 2122
 
 Target:
 	$settings
@@ -988,7 +988,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2144
+	includes/controller/Admin.php on line 2140
 
 Target:
 	$extend
@@ -997,7 +997,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2198
+	includes/controller/Admin.php on line 2194
 
 Target:
 	$this->context
@@ -1047,7 +1047,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 829
+	includes/controller/Main.php on line 825
 
 Target:
 	$this->context
