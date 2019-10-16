@@ -366,8 +366,7 @@
         global $strings;
 
         foreach ($domains as $filename => $pathname) {
-            $contents = "#. Content-Type: text/plain; charset=UTF-8\n".
-                        "#. Copyright ".strftime("%Y")." Daniel Pimley and other contributors.\n".
+            $contents = "#. Copyright ".strftime("%Y")." Daniel Pimley and other contributors.\n".
                         "#. This file is distributed under the same license as the Chyrp Lite package.\n\n";
 
             foreach ($strings[$filename] as $string => $attributes) {
