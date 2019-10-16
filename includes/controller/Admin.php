@@ -31,6 +31,10 @@
         # Item limit for pagination.
         public $post_limit = 10;
 
+        # Array: $view_site_exempt
+        # Methods that are exempt from the "view_site" permission.
+        public $view_site_exempt = array("login", "logout");
+
         # String: $base
         # The base path for this controller.
         public $base = "admin";
