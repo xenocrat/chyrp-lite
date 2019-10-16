@@ -41,7 +41,7 @@
                 return false;
 
             if (!is_file($filepath) or !is_readable($filepath))
-                return false;
+                return true;
 
             $mo_file = file_get_contents($filepath);
             $mo_data = array();
