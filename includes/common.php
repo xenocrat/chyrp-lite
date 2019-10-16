@@ -290,6 +290,11 @@
     #     <Update>
     require_once INCLUDES_DIR.DIR."class".DIR."Update.php";
 
+    # File: Translation
+    # See Also:
+    #     <Translation>
+    require_once INCLUDES_DIR.DIR."class".DIR."Translation.php";
+
     # File: Main
     # See Also:
     #     <Controller>
