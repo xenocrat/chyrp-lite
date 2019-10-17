@@ -38,10 +38,10 @@
             $filepath = $path.DIR.$this->locale.DIR."LC_MESSAGES".DIR.$domain.".mo";
 
             if (isset($this->mo[$domain]) and !$reload)
-                return false;
+                return true;
 
             if (!is_file($filepath) or !is_readable($filepath))
-                return true;
+                return false;
 
             $mo_file = file_get_contents($filepath);
             $mo_data = array();
