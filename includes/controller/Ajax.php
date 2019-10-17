@@ -33,7 +33,7 @@
         }
 
         /**
-         * Function: destroy_post
+         * Function: ajax_destroy_post
          * Destroys a post.
          */
         public function ajax_destroy_post() {
@@ -56,7 +56,7 @@
         }
 
         /**
-         * Function: destroy_page
+         * Function: ajax_destroy_page
          * Destroys a page.
          */
         public function ajax_destroy_page() {
@@ -79,7 +79,7 @@
         }
 
         /**
-         * Function: preview_post
+         * Function: ajax_preview_post
          * Previews a post.
          */
         public function ajax_preview_post() {
@@ -117,7 +117,7 @@
         }
 
         /**
-         * Function: preview_page
+         * Function: ajax_preview_page
          * Previews a page.
          */
         public function ajax_preview_page() {

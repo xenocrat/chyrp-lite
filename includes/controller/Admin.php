@@ -161,7 +161,7 @@
         }
 
         /**
-         * Function: write_post
+         * Function: admin_write_post
          * Post writing.
          */
         public function admin_write_post() {
@@ -191,7 +191,7 @@
         }
 
         /**
-         * Function: add_post
+         * Function: admin_add_post
          * Adds a post when the form is submitted.
          */
         public function admin_add_post() {
@@ -215,7 +215,7 @@
         }
 
         /**
-         * Function: edit_post
+         * Function: admin_edit_post
          * Post editing.
          */
         public function admin_edit_post() {
@@ -240,7 +240,7 @@
         }
 
         /**
-         * Function: update_post
+         * Function: admin_update_post
          * Updates a post when the form is submitted.
          */
         public function admin_update_post() {
@@ -272,7 +272,7 @@
         }
 
         /**
-         * Function: delete_post
+         * Function: admin_delete_post
          * Post deletion (confirm page).
          */
         public function admin_delete_post() {
@@ -291,7 +291,7 @@
         }
 
         /**
-         * Function: destroy_post
+         * Function: admin_destroy_post
          * Destroys a post.
          */
         public function admin_destroy_post() {
@@ -318,7 +318,7 @@
         }
 
         /**
-         * Function: manage_posts
+         * Function: admin_manage_posts
          * Post management.
          */
         public function admin_manage_posts() {
@@ -381,7 +381,7 @@
         }
 
         /**
-         * Function: write_page
+         * Function: admin_write_page
          * Page creation.
          */
         public function admin_write_page() {
@@ -392,7 +392,7 @@
         }
 
         /**
-         * Function: add_page
+         * Function: admin_add_page
          * Adds a page when the form is submitted.
          */
         public function admin_add_page() {
@@ -429,7 +429,7 @@
         }
 
         /**
-         * Function: edit_page
+         * Function: admin_edit_page
          * Page editing.
          */
         public function admin_edit_page() {
@@ -450,7 +450,7 @@
         }
 
         /**
-         * Function: update_page
+         * Function: admin_update_page
          * Updates a page when the form is submitted.
          */
         public function admin_update_page() {
@@ -494,7 +494,7 @@
         }
 
         /**
-         * Function: delete_page
+         * Function: admin_delete_page
          * Page deletion (confirm page).
          */
         public function admin_delete_page() {
@@ -513,7 +513,7 @@
         }
 
         /**
-         * Function: destroy_page
+         * Function: admin_destroy_page
          * Destroys a page.
          */
         public function admin_destroy_page() {
@@ -554,7 +554,7 @@
         }
 
         /**
-         * Function: manage_pages
+         * Function: admin_manage_pages
          * Page management.
          */
         public function admin_manage_pages() {
@@ -578,7 +578,7 @@
         }
 
         /**
-         * Function: new_user
+         * Function: admin_new_user
          * User creation.
          */
         public function admin_new_user() {
@@ -595,7 +595,7 @@
         }
 
         /**
-         * Function: add_user
+         * Function: admin_add_user
          * Add a user when the form is submitted.
          */
         public function admin_add_user() {
@@ -665,7 +665,7 @@
         }
 
         /**
-         * Function: edit_user
+         * Function: admin_edit_user
          * User editing.
          */
         public function admin_edit_user() {
@@ -687,7 +687,7 @@
         }
 
         /**
-         * Function: update_user
+         * Function: admin_update_user
          * Updates a user when the form is submitted.
          */
         public function admin_update_user() {
@@ -767,7 +767,7 @@
         }
 
         /**
-         * Function: delete_user
+         * Function: admin_delete_user
          * User deletion (confirm page).
          */
         public function admin_delete_user() {
@@ -791,7 +791,7 @@
         }
 
         /**
-         * Function: destroy_user
+         * Function: admin_destroy_user
          * Destroys a user.
          */
         public function admin_destroy_user() {
@@ -852,7 +852,7 @@
         }
 
         /**
-         * Function: manage_users
+         * Function: admin_manage_users
          * User management.
          */
         public function admin_manage_users() {
@@ -877,7 +877,7 @@
         }
 
         /**
-         * Function: new_group
+         * Function: admin_new_group
          * Group creation.
          */
         public function admin_new_group() {
@@ -889,7 +889,7 @@
         }
 
         /**
-         * Function: add_group
+         * Function: admin_add_group
          * Adds a group when the form is submitted.
          */
         public function admin_add_group() {
@@ -915,7 +915,7 @@
         }
 
         /**
-         * Function: edit_group
+         * Function: admin_edit_group
          * Group editing.
          */
         public function admin_edit_group() {
@@ -936,7 +936,7 @@
         }
 
         /**
-         * Function: update_group
+         * Function: admin_update_group
          * Updates a group when the form is submitted.
          */
         public function admin_update_group() {
@@ -971,7 +971,7 @@
         }
 
         /**
-         * Function: delete_group
+         * Function: admin_delete_group
          * Group deletion (confirm page).
          */
         public function admin_delete_group() {
@@ -996,7 +996,7 @@
         }
 
         /**
-         * Function: destroy_group
+         * Function: admin_destroy_group
          * Destroys a group.
          */
         public function admin_destroy_group() {
@@ -1082,7 +1082,7 @@
         }
 
         /**
-         * Function: manage_groups
+         * Function: admin_manage_groups
          * Group management.
          */
         public function admin_manage_groups() {
@@ -1111,7 +1111,7 @@
         }
 
         /**
-         * Function: export
+         * Function: admin_export
          * Export content from this installation.
          */
         public function admin_export() {
@@ -1332,7 +1332,7 @@
         }
 
         /**
-         * Function: import
+         * Function: admin_import
          * Import content to this installation.
          */
         public function admin_import() {
@@ -1525,7 +1525,7 @@
         }
 
         /**
-         * Function: modules
+         * Function: admin_modules
          * Module enabling/disabling.
          */
         public function admin_modules() {
@@ -1608,7 +1608,7 @@
         }
 
         /**
-         * Function: feathers
+         * Function: admin_feathers
          * Feather enabling/disabling.
          */
         public function admin_feathers() {
@@ -1643,7 +1643,7 @@
         }
 
         /**
-         * Function: themes
+         * Function: admin_themes
          * Theme switching/previewing.
          */
         public function admin_themes() {
@@ -1672,7 +1672,7 @@
         }
 
         /**
-         * Function: enable
+         * Function: admin_enable
          * Enables a module or feather.
          */
         public function admin_enable() {
@@ -1716,7 +1716,7 @@
         }
 
         /**
-         * Function: disable
+         * Function: admin_disable
          * Disables a module or feather.
          */
         public function admin_disable() {
@@ -1756,7 +1756,7 @@
         }
 
         /**
-         * Function: change_theme
+         * Function: admin_change_theme
          * Changes the theme.
          */
         public function admin_change_theme() {
@@ -1784,7 +1784,7 @@
         }
 
         /**
-         * Function: preview_theme
+         * Function: admin_preview_theme
          * Previews the theme.
          */
         public function admin_preview_theme() {
@@ -1808,7 +1808,7 @@
         }
 
         /**
-         * Function: general_settings
+         * Function: admin_general_settings
          * General Settings page.
          */
         public function admin_general_settings() {
@@ -1862,7 +1862,7 @@
         }
 
         /**
-         * Function: content_settings
+         * Function: admin_content_settings
          * Content Settings page.
          */
         public function admin_content_settings() {
@@ -1912,7 +1912,7 @@
         }
 
         /**
-         * Function: user_settings
+         * Function: admin_user_settings
          * User Settings page.
          */
         public function admin_user_settings() {
@@ -1952,7 +1952,7 @@
         }
 
         /**
-         * Function: route_settings
+         * Function: admin_route_settings
          * Route Settings page.
          */
         public function admin_route_settings() {
@@ -2001,7 +2001,7 @@
         }
 
         /**
-         * Function: login
+         * Function: admin_login
          * Mask for MainController->login().
          */
         public function admin_login() {
@@ -2013,7 +2013,7 @@
         }
 
         /**
-         * Function: logout
+         * Function: admin_logout
          * Mask for MainController->logout().
          */
         public function admin_logout() {
@@ -2021,7 +2021,7 @@
         }
 
         /**
-         * Function: help
+         * Function: admin_help
          * Serves help pages for core and extensions.
          */
         public function admin_help() {

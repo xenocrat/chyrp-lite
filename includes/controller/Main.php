@@ -155,7 +155,7 @@
         }
 
         /**
-         * Function: index
+         * Function: main_index
          * Grabs the posts for the main index.
          */
         public function main_index() {
@@ -164,7 +164,7 @@
         }
 
         /**
-         * Function: archive
+         * Function: main_archive
          * Grabs the posts for the archive page.
          */
         public function main_archive() {
@@ -255,7 +255,7 @@
         }
 
         /**
-         * Function: search
+         * Function: main_search
          * Grabs the posts for a search query.
          */
         public function main_search() {
@@ -291,7 +291,7 @@
         }
 
         /**
-         * Function: drafts
+         * Function: main_drafts
          * Grabs the posts with draft status created by this user.
          */
         public function main_drafts() {
@@ -309,7 +309,7 @@
         }
 
         /**
-         * Function: view
+         * Function: main_view
          * Handles post viewing via dirty URL or clean URL e.g. /year/month/day/url/.
          */
         public function main_view($attrs = array(), $arg = array()) {
@@ -334,7 +334,7 @@
         }
 
         /**
-         * Function: page
+         * Function: main_page
          * Handles page viewing via dirty URL or clean URL e.g. /parent/child/child-of-child/.
          */
         public function main_page($url = null, $hierarchy = array()) {
@@ -361,7 +361,7 @@
         }
 
         /**
-         * Function: id
+         * Function: main_id
          * Views a post or page by its static ID.
          */
         public function main_id() {
@@ -387,7 +387,7 @@
         }
 
         /**
-         * Function: random
+         * Function: main_random
          * Grabs a random post and redirects to it.
          */
         public function main_random() {
@@ -422,7 +422,7 @@
         }
 
         /**
-         * Function: register
+         * Function: main_register
          * Register a visitor as a new user.
          */
         public function main_register() {
@@ -502,7 +502,7 @@
         }
 
         /**
-         * Function: activate
+         * Function: main_activate
          * Activates (approves) a given login.
          */
         public function main_activate() {
@@ -526,7 +526,7 @@
         }
 
         /**
-         * Function: reset
+         * Function: main_reset
          * Resets the password for a given login.
          */
         public function main_reset() {
@@ -552,7 +552,7 @@
         }
 
         /**
-         * Function: login
+         * Function: main_login
          * Logs in a user if they provide the username and password.
          */
         public function main_login() {
@@ -591,7 +591,7 @@
         }
 
         /**
-         * Function: logout
+         * Function: main_logout
          * Logs out the current user.
          */
         public function main_logout() {
@@ -609,7 +609,7 @@
         }
 
         /**
-         * Function: controls
+         * Function: main_controls
          * Updates the current user when the form is submitted.
          */
         public function main_controls() {
@@ -661,7 +661,7 @@
         }
 
         /**
-         * Function: lost_password
+         * Function: main_lost_password
          * Emails a password reset link to the registered address of a user.
          */
         public function main_lost_password() {
@@ -701,7 +701,7 @@
         }
 
         /**
-         * Function: feed
+         * Function: main_feed
          * Grabs posts and serves a feed.
          */
         public function main_feed($posts = null) {
