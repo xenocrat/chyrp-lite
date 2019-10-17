@@ -3,16 +3,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
+"Last-Translator: \n"
 "Language-Team: Marina Colucci\n"
+"Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
-"Last-Translator: \n"
+"X-Generator: Poedit 2.2.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: it_IT\n"
 
-#. Content-Type: text/plain; charset=UTF-8
 #. Copyright 2019 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/likes/admin/pages/like_settings.twig:3
@@ -50,7 +49,9 @@ msgstr "Consenti agli utenti di aggiungere &#8220;like&#8221; a un post."
 
 #: modules/likes/info.php:11
 msgid "Please remember to update the permission settings for each group."
-msgstr "Si prega di ricordare di aggiornare le impostazioni di autorizzazione per ogni gruppo."
+msgstr ""
+"Si prega di ricordare di aggiornare le impostazioni di autorizzazione per "
+"ogni gruppo."
 
 #: modules/likes/likes.php:33
 msgid "Like Posts"

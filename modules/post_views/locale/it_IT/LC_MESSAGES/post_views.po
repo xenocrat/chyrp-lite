@@ -3,16 +3,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
+"Last-Translator: \n"
 "Language-Team: Marina Colucci\n"
+"Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
-"Last-Translator: \n"
+"X-Generator: Poedit 2.2.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: it_IT\n"
 
-#. Content-Type: text/plain; charset=UTF-8
 #. Copyright 2019 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/post_views/info.php:3
@@ -42,4 +41,6 @@ msgstr "Per scaricare il conteggio delle visualizzazioni è necessario un ID."
 
 #: modules/post_views/post_views.php:50
 msgid "You do not have sufficient privileges to download this view count."
-msgstr "Non si dispone di privilegi sufficienti per scaricare il conteggio delle visualizzazioni."
+msgstr ""
+"Non si dispone di privilegi sufficienti per scaricare il conteggio delle "
+"visualizzazioni."
