@@ -433,9 +433,6 @@ input[type="password"]:focus {
     border-color: #1e57ba;
     outline: none;
 }
-input.digits {
-    max-width: 6em;
-}
 input[type="text"].error,
 input[type="email"].error,
 input[type="url"].error,
@@ -493,6 +490,7 @@ form.split input[type="email"],
 form.split input[type="url"],
 form.split input[type="number"],
 form.split input[type="password"],
+form.split select,
 form.split textarea {
     width: 33%;
 }
