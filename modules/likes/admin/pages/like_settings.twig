@@ -9,9 +9,9 @@
 <p>
 <label for="like_image">{{ "Like Image" | translate("likes") }}</label>
 <select name="like_image">
-{% for filename, filepath in like_images %}
-{% set option_selected = filepath | selected(site.module_likes.like_image) %}
-<option value="{{ filepath | fix(true) }}"{{ option_selected }}>{{ filename | split(".") | first | camelize(true) }}</option>
+{% for filename in like_images %}
+{% set option_selected = filename | selected(site.module_likes.like_image) %}
+<option value="{{ filename | fix(true) }}"{{ option_selected }}>{{ filename | split(".") | first | camelize(true) }}</option>
 {% endfor %}
 </select>
 </p>

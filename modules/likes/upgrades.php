@@ -15,7 +15,7 @@
             $set = $config->set("module_likes",
                                 array("show_on_index" => $config->module_like["showOnFront"],
                                       "like_with_text" => $config->module_like["likeWithText"],
-                                      "like_image" => $config->module_like["likeImage"]));
+                                      "like_image" => "pink.svg"));
 
             if ($set !== false)
                 $set = $config->remove("module_like");

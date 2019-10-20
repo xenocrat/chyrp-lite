@@ -17,7 +17,7 @@
             $config->set("module_likes",
                          array("show_on_index" => true,
                                "like_with_text" => false,
-                               "like_image" => $config->chyrp_url."/modules/likes/images/pink.svg"));
+                               "like_image" => "pink.svg"));
         }
 
         static function __uninstall($confirm) {
@@ -227,8 +227,11 @@
                                 url("/?action=like&post_id=".$post->id, $main).
                                 '" data-post_id="'.$post->id.'">';
 
-                    if (!empty($settings["like_image"]))
-                        $html.= '<img src="'.$settings["like_image"].'" alt="&#x2764;">';
+                    if (!empty($settings["like_image"])) {
+                        $file = urlencode($settings["like_image"]);
+                        $path = $config->chyrp_url."/modules/likes/images/".$file;
+                        $html.= '<img src="'.$path.'" alt="&#x2764;">';
+                    }
 
                     if ($settings["like_with_text"]) {
                         $html.= ' <span class="like">'.__("Like!", "likes").'</span>';
@@ -253,8 +256,11 @@
                                 url("/?action=unlike&post_id=".$post->id, $main).
                                 '" data-post_id="'.$post->id.'">';
 
-                    if (!empty($settings["like_image"]))
-                        $html.= '<img src="'.$settings["like_image"].'" alt="&#x2764;">';
+                    if (!empty($settings["like_image"])) {
+                        $file = urlencode($settings["like_image"]);
+                        $path = $config->chyrp_url."/modules/likes/images/".$file;
+                        $html.= '<img src="'.$path.'" alt="&#x2764;">';
+                    }
 
                     if ($settings["like_with_text"]) {
                         $html.= ' <span class="like">'.__("Like!", "likes").'</span>';
@@ -270,7 +276,8 @@
 
                 $html.= ($count <= 0) ?
                     __("You like this.", "likes") :
-                    sprintf(_p("You and %d person like this.", "You and %d people like this.", $count, "likes"), $count) ;
+                    sprintf(
+                    _p("You and %d person like this.", "You and %d people like this.", $count, "likes"), $count) ;
 
                 $html.= '</span>';
             }
@@ -283,10 +290,8 @@
             $images = array();
             $filepaths = glob(MODULES_DIR.DIR."likes".DIR."images".DIR."*.{jpg,jpeg,png,gif,svg}", GLOB_BRACE);
 
-            foreach ($filepaths as $filepath) {
-                $filename = basename($filepath);
-                $images[$filename] = Config::current()->chyrp_url."/modules/likes/images/".urlencode($filename);
-            }
+            foreach ($filepaths as $filepath)
+                $images[] = basename($filepath);
 
             return $images;
         }
