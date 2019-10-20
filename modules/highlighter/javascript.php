@@ -10,7 +10,7 @@ var ChyrpHighlighter = {
         ChyrpHighlighter.watch();
     },
     watch: function() {
-        // Watch for DOM additions on blog pages
+        // Watch for DOM additions on blog pages.
         if ( !!window.MutationObserver && $(".post").length ) {
             var target = $(".post").last().parent()[0];
             var observer = new MutationObserver(function(mutations) {

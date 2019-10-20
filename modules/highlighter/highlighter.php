@@ -48,7 +48,7 @@
 
         public function settings_nav($navs) {
             if (Visitor::current()->group->can("change_settings"))
-                $navs["highlighter_settings"] = array("title" => __("Highlighter", "highlighter"));
+                $navs["highlighter_settings"] = array("title" => __("Syntax Highlighting", "highlighter"));
 
             return $navs;
         }
