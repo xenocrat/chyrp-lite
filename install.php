@@ -6,25 +6,26 @@
 
     header("Content-Type: text/html; charset=UTF-8");
 
-    define('DEBUG',          true);
-    define('CHYRP_VERSION',  "2019.04");
-    define('CHYRP_CODENAME', "Arabian");
-    define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
-    define('MAIN',           false);
-    define('ADMIN',          false);
-    define('AJAX',           false);
-    define('XML_RPC',        false);
-    define('UPGRADING',      false);
-    define('INSTALLING',     true);
-    define('TESTER',         isset($_SERVER['HTTP_USER_AGENT']) and $_SERVER['HTTP_USER_AGENT'] == "TESTER");
-    define('DIR',            DIRECTORY_SEPARATOR);
-    define('MAIN_DIR',       dirname(__FILE__));
-    define('INCLUDES_DIR',   MAIN_DIR.DIR."includes");
-    define('CACHES_DIR',     INCLUDES_DIR.DIR."caches");
-    define('CACHE_TWIG',     false);
-    define('CACHE_THUMBS',   false);
-    define('USE_OB',         true);
-    define('USE_ZLIB',       false);
+    define('DEBUG',            true);
+    define('CHYRP_VERSION',    "2019.04");
+    define('CHYRP_CODENAME',   "Arabian");
+    define('CHYRP_IDENTITY',   "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
+    define('MAIN',             false);
+    define('ADMIN',            false);
+    define('AJAX',             false);
+    define('XML_RPC',          false);
+    define('UPGRADING',        false);
+    define('INSTALLING',       true);
+    define('TESTER',           isset($_SERVER['HTTP_USER_AGENT']) and $_SERVER['HTTP_USER_AGENT'] == "TESTER");
+    define('DIR',              DIRECTORY_SEPARATOR);
+    define('MAIN_DIR',         dirname(__FILE__));
+    define('INCLUDES_DIR',     MAIN_DIR.DIR."includes");
+    define('CACHES_DIR',       INCLUDES_DIR.DIR."caches");
+    define('CACHE_TWIG',       false);
+    define('CACHE_THUMBS',     false);
+    define('USE_GETTEXT_SHIM', (stripos(PHP_OS, "Win") === 0));
+    define('USE_OB',           true);
+    define('USE_ZLIB',         false);
 
     if (version_compare(PHP_VERSION, "5.4", "<"))
         exit("Chyrp Lite requires PHP 5.4 or greater. Installation cannot continue.");
@@ -59,6 +60,11 @@
     # See Also:
     #     <User>
     require_once INCLUDES_DIR.DIR."model".DIR."User.php";
+
+    # File: Translation
+    # See Also:
+    #     <Translation>
+    require_once INCLUDES_DIR.DIR."class".DIR."Translation.php";
 
     # Register our autoloader.
     spl_autoload_register("autoload");

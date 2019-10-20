@@ -6,28 +6,29 @@
 
     header("Content-Type: text/html; charset=UTF-8");
 
-    define('DEBUG',          true);
-    define('CHYRP_VERSION',  "2019.04");
-    define('CHYRP_CODENAME', "Arabian");
-    define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
-    define('MAIN',           false);
-    define('ADMIN',          false);
-    define('AJAX',           false);
-    define('XML_RPC',        false);
-    define('UPGRADING',      true);
-    define('INSTALLING',     false);
-    define('TESTER',         isset($_SERVER['HTTP_USER_AGENT']) and $_SERVER['HTTP_USER_AGENT'] == "TESTER");
-    define('DIR',            DIRECTORY_SEPARATOR);
-    define('MAIN_DIR',       dirname(__FILE__));
-    define('INCLUDES_DIR',   MAIN_DIR.DIR."includes");
-    define('CACHES_DIR',     INCLUDES_DIR.DIR."caches");
-    define('MODULES_DIR',    MAIN_DIR.DIR."modules");
-    define('FEATHERS_DIR',   MAIN_DIR.DIR."feathers");
-    define('THEMES_DIR',     MAIN_DIR.DIR."themes");
-    define('CACHE_TWIG',     false);
-    define('CACHE_THUMBS',   false);
-    define('USE_OB',         true);
-    define('USE_ZLIB',       false);
+    define('DEBUG',            true);
+    define('CHYRP_VERSION',    "2019.04");
+    define('CHYRP_CODENAME',   "Arabian");
+    define('CHYRP_IDENTITY',   "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
+    define('MAIN',             false);
+    define('ADMIN',            false);
+    define('AJAX',             false);
+    define('XML_RPC',          false);
+    define('UPGRADING',        true);
+    define('INSTALLING',       false);
+    define('TESTER',           isset($_SERVER['HTTP_USER_AGENT']) and $_SERVER['HTTP_USER_AGENT'] == "TESTER");
+    define('DIR',              DIRECTORY_SEPARATOR);
+    define('MAIN_DIR',         dirname(__FILE__));
+    define('INCLUDES_DIR',     MAIN_DIR.DIR."includes");
+    define('CACHES_DIR',       INCLUDES_DIR.DIR."caches");
+    define('MODULES_DIR',      MAIN_DIR.DIR."modules");
+    define('FEATHERS_DIR',     MAIN_DIR.DIR."feathers");
+    define('THEMES_DIR',       MAIN_DIR.DIR."themes");
+    define('CACHE_TWIG',       false);
+    define('CACHE_THUMBS',     false);
+    define('USE_GETTEXT_SHIM', (stripos(PHP_OS, "Win") === 0));
+    define('USE_OB',           true);
+    define('USE_ZLIB',         false);
 
     ob_start();
     define('OB_BASE_LEVEL', ob_get_level());
@@ -49,6 +50,11 @@
     # See Also:
     #     <SQL>
     require INCLUDES_DIR.DIR."class".DIR."SQL.php";
+
+    # File: Translation
+    # See Also:
+    #     <Translation>
+    require_once INCLUDES_DIR.DIR."class".DIR."Translation.php";
 
     # Register our autoloader.
     spl_autoload_register("autoload");
