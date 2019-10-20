@@ -14,9 +14,18 @@ msgstr ""
 
 #. Copyright 2019 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
-#: modules/highlighter/info.php:3
+#: modules/highlighter/admin/pages/highlighter_settings.twig:3
+#: modules/highlighter/admin/pages/highlighter_settings.twig:6
+msgid "Syntax Highlighting Settings"
+msgstr "语法高亮设置"
+
+#: modules/highlighter/admin/pages/highlighter_settings.twig:10
+msgid "Stylesheet"
+msgstr "样式表"
+
+#: modules/highlighter/highlighter.php:51 modules/highlighter/info.php:3
 msgid "Syntax Highlighting"
-msgstr ""
+msgstr "语法高亮"
 
 #: modules/highlighter/info.php:6
 msgid ""
