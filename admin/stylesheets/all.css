@@ -1007,13 +1007,11 @@ a.emblem.preview {
     input[type="number"],
     input[type="password"],
     input[type="file"],
+    select,
     textarea {
         margin-left: 0em !important;
         margin-right: 0em !important;
         width: 100% !important;
-    }
-    select {
-        width: 100%;
     }
     #content table thead tr th:not(.main):not(.controls):not(.toggler),
     #content table tbody tr td:not(.main):not(.controls):not(.checkbox):not(.placeholder) {
