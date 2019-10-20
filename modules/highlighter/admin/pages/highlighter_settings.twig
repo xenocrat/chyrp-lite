@@ -1,0 +1,24 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block title %}{{ "Highlighter Settings" | translate("highlighter") }}{% endblock %}
+
+{% block content %}
+<h2>{{ "Highlighter Settings" | translate("highlighter") }}</h2>
+<form id="highlighter_settings" class="split" action="{{ url('highlighter_settings') }}" method="post" accept-charset="UTF-8">
+<fieldset>
+<p>
+<label for="stylesheet">{{ "Stylesheet" | translate("highlighter") }}</label>
+<select name="stylesheet">
+{% for filename in highlighter_stylesheets %}
+{% set option_selected = filename | selected(site.module_highlighter.stylesheet) %}
+<option value="{{ filename | fix(true) }}"{{ option_selected }}>{{ filename | split(".") | first | camelize(true) }}</option>
+{% endfor %}
+</select>
+</p>
+<p class="buttons">
+<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Update" | translate }}</button>
+</p>
+<input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
+</fieldset>
+</form>
+{% endblock %}
