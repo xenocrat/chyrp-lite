@@ -7,6 +7,10 @@
                          array("stylesheet" => "monokai-sublime.css"));
         }
 
+        static function __uninstall() {
+            Config::current()->remove("module_highlighter");
+        }
+
         public function scripts($scripts) {
             $scripts[] = Config::current()->chyrp_url."/modules/highlighter/highlight.min.js";
             return $scripts;

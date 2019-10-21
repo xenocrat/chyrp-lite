@@ -23,7 +23,7 @@ msgstr "语法高亮设置"
 msgid "Stylesheet"
 msgstr "样式表"
 
-#: modules/highlighter/highlighter.php:51 modules/highlighter/info.php:3
+#: modules/highlighter/highlighter.php:55 modules/highlighter/info.php:3
 msgid "Syntax Highlighting"
 msgstr "语法高亮"
 

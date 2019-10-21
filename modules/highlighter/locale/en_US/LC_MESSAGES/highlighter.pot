@@ -10,7 +10,7 @@ msgstr ""
 msgid "Stylesheet"
 msgstr ""
 
-#: modules/highlighter/highlighter.php:51
+#: modules/highlighter/highlighter.php:55
 #: modules/highlighter/info.php:3
 msgid "Syntax Highlighting"
 msgstr ""

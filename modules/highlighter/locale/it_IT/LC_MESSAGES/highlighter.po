@@ -23,7 +23,7 @@ msgstr "Impostazioni di evidenziazione della sintassi"
 msgid "Stylesheet"
 msgstr "Foglio di stile"
 
-#: modules/highlighter/highlighter.php:51 modules/highlighter/info.php:3
+#: modules/highlighter/highlighter.php:55 modules/highlighter/info.php:3
 msgid "Syntax Highlighting"
 msgstr "Evidenziazione della sintassi"
 
