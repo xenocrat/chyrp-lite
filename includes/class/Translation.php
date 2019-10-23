@@ -4,8 +4,8 @@
     * A shim for translation support in the absence of GNU gettext.
     */
     class Translation {
-        const MO_MAGIC_WORD_LE = "950412de";
-        const MO_MAGIC_WORD_BE = "de120495";
+        const MO_MAGIC_WORD_BE = "950412de";
+        const MO_MAGIC_WORD_LE = "de120495";
         const MO_SIZEOF_HEADER = 28;
         const ULONG = 8;
 
@@ -52,13 +52,13 @@
 
             $id = unpack("H8magic", $mo_file);
 
-            if ($id["magic"] == self::MO_MAGIC_WORD_LE)
+            if ($id["magic"] == self::MO_MAGIC_WORD_BE)
                 $big_endian = true;
 
-            if ($id["magic"] == self::MO_MAGIC_WORD_BE)
+            if ($id["magic"] == self::MO_MAGIC_WORD_LE)
                 $big_endian = false;
 
-            # Neither magic number matches; not a valid .mo file.
+            # Neither magic word matches; not a valid .mo file.
             if (!isset($big_endian))
                 return false;
 
