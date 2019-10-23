@@ -26,7 +26,7 @@
     define('THEMES_DIR',       MAIN_DIR.DIR."themes");
     define('CACHE_TWIG',       false);
     define('CACHE_THUMBS',     false);
-    define('USE_GETTEXT_SHIM', (stripos(PHP_OS, "Win") === 0));
+    define('USE_GETTEXT_SHIM', stripos(PHP_OS, "Win") === 0);
     define('USE_OB',           true);
     define('USE_ZLIB',         false);
 
