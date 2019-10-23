@@ -927,12 +927,12 @@ a.emblem.preview {
 
 /* Group: Breakpoints */
 
-@media screen and (max-width: 1080px) {
+@media screen and (max-width: 1200px) {
     #content ul.themes > li {
         width: 49%;
     }
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 960px) {
     #header #navigation {
         left: 0em;
         right: 0em;
