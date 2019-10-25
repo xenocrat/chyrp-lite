@@ -1,6 +1,6 @@
 <?php
     /**
-     * File: javascript
+     * File: main.js.php
      * JavaScript for core functionality and extensions.
      */
     if (!defined('CHYRP_VERSION'))
