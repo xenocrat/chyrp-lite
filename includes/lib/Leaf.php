@@ -358,7 +358,7 @@
      */
     function twig_filter_thumbnail($filename, $alt_text = "", $url = null, $args = array(), $sizes = "100vw") {
         fallback($alt_text, $filename);
-        $filepath = Config::current()->chyrp_url."/includes/thumb.php?file=".urlencode($filename);
+        $filepath = Config::current()->chyrp_url."/includes/thumbnail.php?file=".urlencode($filename);
         $src_args = implode("&", $args);
         $set_args = preg_replace(array("/max_width=[^&]*(&)?/i",
                                        "/max_height=[^&]*(&)?/i"),
