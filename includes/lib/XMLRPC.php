@@ -131,10 +131,11 @@
 
             for ($i = 0; $i < $limit; $i++)
                 if (isset($results[0][$i]))
-                    $posts[] = new Post(null, array("read_from" => $results[0][$i], "filter" => false));
+                    $posts[] = new Post(null, array("read_from" => $results[0][$i],
+                                                    "filter" => false));
 
             foreach ($posts as $post) {
-                if (!$post->editable($user))
+                if (!$post->editable($user) and !$post->deletable($user))
                     continue;
 
                 $struct = array("postid"      => $post->id,
