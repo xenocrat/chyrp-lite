@@ -244,16 +244,17 @@
             fallback($args[3]["mt_allow_pings"], "open");
 
             $trigger = Trigger::current();
-            $pings = ($args[3]["mt_allow_pings"] == "open");
-            $slug = oneof(sanitize($args[3]["mt_basename"], true, true, 80), slug(8));
-            $created_at = oneof($this->convertFromDateCreated($args[3]), datetime());
+            $struct = $args[3];
+            $pings = ($struct["mt_allow_pings"] == "open");
+            $slug = oneof(sanitize($struct["mt_basename"], true, true, 80), slug(8));
+            $created_at = oneof($this->convertFromDateCreated($struct), datetime());
 
             # Support for extended content.
-            if (isset($args[3]["mt_text_more"]))
-                $args[3]["description"] .= "<!--more-->".$args[3]["mt_text_more"];
+            if (isset($struct["mt_text_more"]))
+                $struct["description"] .= "<!--more-->".$struct["mt_text_more"];
 
             # Convert statuses from WordPress to Chyrp equivalents.
-            switch ($args[3]["post_status"]) {
+            switch ($struct["post_status"]) {
                 case "draft":
                     $status = "draft";
                     break;
@@ -268,10 +269,10 @@
             }
 
             $status = ($user->group->can("add_post")) ? $status : "draft" ;
-            $values = array("title" => $args[3]["title"],
-                            "body" => oneof($args[3]["description"], "boo!"));
+            $values = array("title" => $struct["title"],
+                            "body" => oneof($struct["description"], "boo!"));
 
-            $trigger->call("metaWeblog_newPost_preQuery", $args[3]);
+            $trigger->call("metaWeblog_newPost_preQuery", $struct);
 
             $post = Post::add($values,
                               $slug,
@@ -284,7 +285,7 @@
                               null,
                               $pings);
 
-            $trigger->call("metaWeblog_newPost", $args[3], $post);
+            $trigger->call("metaWeblog_newPost", $struct, $post);
             return $post->id;
         }
 
@@ -304,13 +305,14 @@
             fallback($args[3]["post_status"]);
 
             $trigger = Trigger::current();
+            $struct = $args[3];
             $values = array();
-            $slug = oneof(sanitize($args[3]["mt_basename"], true, true, 80), $post->clean);
-            $updated_at = oneof($this->convertFromDateCreated($args[3]), $post->created_at);
+            $slug = oneof(sanitize($struct["mt_basename"], true, true, 80), $post->clean);
+            $updated_at = oneof($this->convertFromDateCreated($struct), $post->created_at);
 
             # Support for extended content.
-            if (isset($args[3]["mt_text_more"]))
-                $args[3]["description"] .= "<!--more-->".$args[3]["mt_text_more"];
+            if (isset($struct["mt_text_more"]))
+                $struct["description"] .= "<!--more-->".$struct["mt_text_more"];
 
             $post = new Post($args[0], array("filter" => false,
                                              "where" => array(Post::feathers())));
@@ -322,7 +324,7 @@
                 return new IXR_Error(403, __("You do not have sufficient privileges to edit this post."));
 
             # Convert statuses from WordPress to Chyrp equivalents.
-            switch ($args[3]["post_status"]) {
+            switch ($struct["post_status"]) {
                 case "publish":
                     $status = "public";
                     break;
@@ -341,8 +343,8 @@
 
             $status = ($user->group->can("edit_own_post", "edit_post")) ? $status : $post->status ;
 
-            $trigger->call("metaWeblog_editPost_preQuery", $args[3], $post);
-            $trigger->filter($values, "metaWeblog_editValues", $args[3], $post);
+            $trigger->call("metaWeblog_editPost_preQuery", $struct, $post);
+            $trigger->filter($values, "metaWeblog_editValues", $struct, $post);
 
             if (empty($values))
                 return new IXR_Error(404, __("Feather not found."));
@@ -355,7 +357,7 @@
                                   null,
                                   $updated_at);
 
-            $trigger->call("metaWeblog_editPost", $args[3], $post);
+            $trigger->call("metaWeblog_editPost", $struct, $post);
             return true;
         }
 
