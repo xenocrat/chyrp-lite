@@ -7,12 +7,14 @@
                                   "type" => "text",
                                   "label" => __("Title", "audio"),
                                   "optional" => true));
+
             $this->setField(array("attr" => "audio",
                                   "type" => "file",
                                   "label" => __("Audio File", "audio"),
                                   "multiple" => false,
                                   "accept" => ".".implode(",.", self::audio_extensions()),
                                   "note" => _f("(Max. file size: %d Megabytes)", $maximum, "audio")));
+
             $this->setField(array("attr" => "description",
                                   "type" => "text_block",
                                   "label" => __("Description", "audio"),
@@ -25,12 +27,15 @@
             $this->respondTo("delete_post", "delete_file");
             $this->respondTo("feed_item", "enclose_audio");
             $this->respondTo("filter_post", "filter_post");
+            $this->respondTo("metaWeblog_getPost", "metaWeblog_getValues");
+            $this->respondTo("metaWeblog_editValues", "metaWeblog_setValues");
         }
 
         public function submit() {
             if (isset($_FILES['audio']) and upload_tester($_FILES['audio']))
                 $filename = upload($_FILES['audio'], self::audio_extensions());
-            else
+
+            if (!isset($filename))
                 error(__("Error"), __("You did not select any audio to upload.", "audio"), null, 422);
 
             fallback($_POST['title'], "");
@@ -72,12 +77,13 @@
 
         public function enclose_audio($post, $feed) {
             $config = Config::current();
+            $filepath = uploaded($post->filename, false);
 
-            if ($post->feather != "audio" or !file_exists(uploaded($post->filename, false)))
+            if ($post->feather != "audio" or !file_exists($filepath))
                 return;
 
             $feed->enclosure(uploaded($post->filename),
-                             filesize(uploaded($post->filename, false)),
+                             filesize($filepath),
                              self::audio_type($post->filename));
         }
 
@@ -99,6 +105,26 @@
                 return;
 
             $post->audio_player = self::audio_player($post);
+        }
+
+        public function metaWeblog_getValues($struct, $post) {
+            if ($post->feather != "audio")
+                return;
+
+            $struct["title"] = $post->title;
+            $struct["description"] = $post->description;
+
+            return $struct;
+        }
+
+        public function metaWeblog_setValues($values, $args, $post) {
+            if ($post->feather != "audio")
+                return;
+
+            $values["title"] = $args["title"];
+            $values["description"] = $args["description"];
+
+            return $values;
         }
 
         private function audio_player($post) {

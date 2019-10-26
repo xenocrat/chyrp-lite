@@ -6,6 +6,7 @@
                                   "rows" => 5,
                                   "label" => __("Quote", "quote"),
                                   "preview" => true));
+
             $this->setField(array("attr" => "source",
                                   "type" => "text_block",
                                   "rows" => 5,
@@ -15,6 +16,9 @@
 
             $this->setFilter("quote", array("markup_post_text", "markup_text"));
             $this->setFilter("source", array("markup_post_text", "markup_text"));
+
+            $this->respondTo("metaWeblog_getPost", "metaWeblog_getValues");
+            $this->respondTo("metaWeblog_editValues", "metaWeblog_setValues");
         }
 
         public function submit() {
@@ -53,5 +57,27 @@
                 $content.= '<cite>'.$post->source.'</cite>';
 
             return $content;
+        }
+
+        public function metaWeblog_getValues($struct, $post) {
+            if ($post->feather != "quote")
+                return;
+
+            $struct["title"] = $post->source;
+            $struct["description"] = $post->quote;
+
+            return $struct;
+        }
+
+        public function metaWeblog_setValues($values, $args, $post) {
+            if ($post->feather != "quote")
+                return;
+
+            if ($args["description"] != "") {
+                $values["source"] = $args["title"];
+                $values["quote"] = $args["description"];
+            }
+
+            return $values;
         }
     }

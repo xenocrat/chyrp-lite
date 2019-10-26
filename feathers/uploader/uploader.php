@@ -7,11 +7,13 @@
                                   "type"=> "text",
                                   "label" => __("Title", "uploader"),
                                   "optional" => true));
+
             $this->setField(array("attr" => "uploads",
                                   "type" => "file",
                                   "label" => __("Files", "uploader"),
                                   "multiple" => true,
                                   "note" => _f("(Max. file size: %d Megabytes)", $maximum, "uploader")));
+
             $this->setField(array("attr" => "caption",
                                   "type" => "text_block",
                                   "label" => __("Caption", "uploader"),
@@ -26,6 +28,8 @@
             $this->respondTo("post","post");
             $this->respondTo("filter_post","filter_post");
             $this->respondTo("post_options", "add_option");
+            $this->respondTo("metaWeblog_getPost", "metaWeblog_getValues");
+            $this->respondTo("metaWeblog_editValues", "metaWeblog_setValues");
         }
 
         private function filenames_serialize($files) {
@@ -42,17 +46,20 @@
 
                 if (is_array($_FILES['uploads']['name'])) {
                     for ($i = 0; $i < count($_FILES['uploads']['name']); $i++)
-                        $filenames[] = upload(array('name' => $_FILES['uploads']['name'][$i],
-                                                    'type' => $_FILES['uploads']['type'][$i],
-                                                    'tmp_name' => $_FILES['uploads']['tmp_name'][$i],
-                                                    'error' => $_FILES['uploads']['error'][$i],
-                                                    'size' => $_FILES['uploads']['size'][$i]));
+                        $filenames[] = upload(
+                            array('name' => $_FILES['uploads']['name'][$i],
+                                  'type' => $_FILES['uploads']['type'][$i],
+                                  'tmp_name' => $_FILES['uploads']['tmp_name'][$i],
+                                  'error' => $_FILES['uploads']['error'][$i],
+                                  'size' => $_FILES['uploads']['size'][$i])
+                        );
                 } else {
                     $filenames[] = upload($_FILES['uploads']);
                 }
-            } else {
-                error(__("Error"), __("You did not select any files to upload.", "uploader"), null, 422);
             }
+
+            if (empty($filenames))
+                error(__("Error"), __("You did not select any files to upload.", "uploader"), null, 422);
 
             if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
                 $_POST['option']['source'] = add_scheme($_POST['option']['source']);
@@ -71,15 +78,18 @@
                 $this->delete_files($post);
                 $filenames = array();
 
-                if (is_array($_FILES['uploads']['name']))
+                if (is_array($_FILES['uploads']['name'])) {
                     for($i=0; $i < count($_FILES['uploads']['name']); $i++)
-                        $filenames[] = upload(array('name' => $_FILES['uploads']['name'][$i],
-                                                    'type' => $_FILES['uploads']['type'][$i],
-                                                    'tmp_name' => $_FILES['uploads']['tmp_name'][$i],
-                                                    'error' => $_FILES['uploads']['error'][$i],
-                                                    'size' => $_FILES['uploads']['size'][$i]));
-                else
+                        $filenames[] = upload(
+                            array('name' => $_FILES['uploads']['name'][$i],
+                                  'type' => $_FILES['uploads']['type'][$i],
+                                  'tmp_name' => $_FILES['uploads']['tmp_name'][$i],
+                                  'error' => $_FILES['uploads']['error'][$i],
+                                  'size' => $_FILES['uploads']['size'][$i])
+                        );
+                } else {
                     $filenames[] = upload($_FILES['uploads']);
+                }
             } else {
                 $filenames = $post->filenames;
             }
@@ -114,10 +124,12 @@
                 return;
 
             foreach ($post->filenames as $filename) {
-                if (!file_exists(uploaded($filename, false)))
+                $filepath = uploaded($filename, false);
+
+                if (!file_exists($filepath))
                     continue;
 
-                $feed->enclosure(uploaded($filename), filesize(uploaded($filename, false)));
+                $feed->enclosure(uploaded($filename), filesize($filepath));
             }
         }
 
@@ -157,6 +169,39 @@
                 }
         }
 
+        public function add_option($options, $post = null, $feather = null) {
+            if ($feather != "uploader")
+                return;
+
+            $options[] = array("attr" => "option[source]",
+                               "label" => __("Source", "uploader"),
+                               "help" => "uploader_source",
+                               "type" => "text",
+                               "value" => (isset($post) ? $post->source : ""));
+
+            return $options;
+        }
+
+        public function metaWeblog_getValues($struct, $post) {
+            if ($post->feather != "uploader")
+                return;
+
+            $struct["title"] = $post->title;
+            $struct["description"] = $post->caption;
+
+            return $struct;
+        }
+
+        public function metaWeblog_setValues($values, $args, $post) {
+            if ($post->feather != "uploader")
+                return;
+
+            $values["title"] = $args["title"];
+            $values["caption"] = $args["description"];
+
+            return $values;
+        }
+
         private function list_files($filenames) {
             $list = array();
 
@@ -170,18 +215,5 @@
             }
 
             return $list;
-        }
-
-        public function add_option($options, $post = null, $feather = null) {
-            if ($feather != "uploader")
-                return;
-
-            $options[] = array("attr" => "option[source]",
-                               "label" => __("Source", "uploader"),
-                               "help" => "uploader_source",
-                               "type" => "text",
-                               "value" => (isset($post) ? $post->source : ""));
-
-            return $options;
         }
     }

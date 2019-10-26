@@ -7,12 +7,14 @@
                                   "type" => "text",
                                   "label" => __("Title", "photo"),
                                   "optional" => true));
+
             $this->setField(array("attr" => "photo",
                                   "type" => "file",
                                   "label" => __("Photo", "photo"),
                                   "multiple" => false,
                                   "accept" => ".".implode(",.", self::photo_extensions()),
                                   "note" => _f("(Max. file size: %d Megabytes)", $maximum, "photo")));
+
             $this->setField(array("attr" => "caption",
                                   "type" => "text_block",
                                   "label" => __("Caption", "photo"),
@@ -24,14 +26,17 @@
 
             $this->respondTo("delete_post", "delete_file");
             $this->respondTo("post_options", "add_option");
+            $this->respondTo("metaWeblog_getPost", "metaWeblog_getValues");
+            $this->respondTo("metaWeblog_editValues", "metaWeblog_setValues");
         }
 
         public function submit() {
             if (isset($_FILES['photo']) and upload_tester($_FILES['photo']))
                 $filename = upload($_FILES['photo'], self::photo_extensions());
-            else
+
+            if (!isset($filename))
                 error(__("Error"), __("You did not select a photo to upload.", "photo"), null, 422);
-                
+
             if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
                 $_POST['option']['source'] = add_scheme($_POST['option']['source']);
 
@@ -112,6 +117,26 @@
                                "value" => (isset($post) ? $post->source : ""));
 
             return $options;
+        }
+
+        public function metaWeblog_getValues($struct, $post) {
+            if ($post->feather != "photo")
+                return;
+
+            $struct["title"] = $post->title;
+            $struct["description"] = $post->caption;
+
+            return $struct;
+        }
+
+        public function metaWeblog_setValues($values, $args, $post) {
+            if ($post->feather != "photo")
+                return;
+
+            $values["title"] = $args["title"];
+            $values["caption"] = $args["description"];
+
+            return $values;
         }
 
         private function photo_extensions() {

@@ -7,12 +7,14 @@
                                   "type" => "text",
                                   "label" => __("Title", "video"),
                                   "optional" => true));
+
             $this->setField(array("attr" => "video",
                                   "type" => "file",
                                   "label" => __("Video File", "video"),
                                   "multiple" => false,
                                   "accept" => ".".implode(",.", self::video_extensions()),
                                   "note" => _f("(Max. file size: %d Megabytes)", $maximum, "video")));
+
             $this->setField(array("attr" => "description",
                                   "type" => "text_block",
                                   "label" => __("Description", "video"),
@@ -25,12 +27,15 @@
             $this->respondTo("delete_post", "delete_file");
             $this->respondTo("feed_item", "enclose_video");
             $this->respondTo("filter_post", "filter_post");
+            $this->respondTo("metaWeblog_getPost", "metaWeblog_getValues");
+            $this->respondTo("metaWeblog_editValues", "metaWeblog_setValues");
         }
 
         public function submit() {
             if (isset($_FILES['video']) and upload_tester($_FILES['video']))
                 $filename = upload($_FILES['video'], self::video_extensions());
-            else
+
+            if (!isset($filename))
                 error(__("Error"), __("You did not select a video to upload.", "video"), null, 422);
 
             fallback($_POST['title'], "");
@@ -72,12 +77,13 @@
 
         public function enclose_video($post, $feed) {
             $config = Config::current();
+            $filepath = uploaded($post->filename, false);
 
-            if ($post->feather != "video" or !file_exists(uploaded($post->filename, false)))
+            if ($post->feather != "video" or !file_exists($filepath))
                 return;
 
             $feed->enclosure(uploaded($post->filename),
-                             filesize(uploaded($post->filename, false)),
+                             filesize($filepath),
                              self::video_type($post->filename));
         }
 
@@ -99,6 +105,26 @@
                 return;
 
             $post->video_player = self::video_player($post);
+        }
+
+        public function metaWeblog_getValues($struct, $post) {
+            if ($post->feather != "audio")
+                return;
+
+            $struct["title"] = $post->title;
+            $struct["description"] = $post->description;
+
+            return $struct;
+        }
+
+        public function metaWeblog_setValues($values, $args, $post) {
+            if ($post->feather != "audio")
+                return;
+
+            $values["title"] = $args["title"];
+            $values["description"] = $args["description"];
+
+            return $values;
         }
 
         private function video_player($post) {

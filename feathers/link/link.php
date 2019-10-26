@@ -5,9 +5,11 @@
                                   "type" => "text",
                                   "label" => __("Title", "link"),
                                   "optional" => true));
+
             $this->setField(array("attr" => "source",
                                   "type" => "text",
                                   "label" => __("URL", "link")));
+
             $this->setField(array("attr" => "description",
                                   "type" => "text_block",
                                   "label" => __("Description", "link"),
@@ -18,6 +20,8 @@
             $this->setFilter("description", array("markup_post_text", "markup_text"));
 
             $this->respondTo("feed_item", "link_related");
+            $this->respondTo("metaWeblog_getPost", "metaWeblog_getValues");
+            $this->respondTo("metaWeblog_editValues", "metaWeblog_setValues");
         }
 
         public function submit() {
@@ -30,6 +34,7 @@
             fallback($_POST['name'], "");
             fallback($_POST['description'], "");
             fallback($_POST['slug'], $_POST['name']);
+
             $_POST['source'] = add_scheme($_POST['source']);
 
             return Post::add(array("name" => $_POST['name'],
@@ -46,6 +51,7 @@
 
             fallback($_POST['name'], "");
             fallback($_POST['description'], "");
+
             $_POST['source'] = add_scheme($_POST['source']);
 
             return $post->update(array("name" => $_POST['name'],
@@ -70,5 +76,25 @@
                 return;
 
             $feed->related($post->source);
+        }
+
+        public function metaWeblog_getValues($struct, $post) {
+            if ($post->feather != "link")
+                return;
+
+            $struct["title"] = $post->name;
+            $struct["description"] = $post->description;
+
+            return $struct;
+        }
+
+        public function metaWeblog_setValues($values, $args, $post) {
+            if ($post->feather != "link")
+                return;
+
+            $values["name"] = $args["title"];
+            $values["description"] = $args["description"];
+
+            return $values;
         }
     }
