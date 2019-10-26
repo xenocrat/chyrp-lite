@@ -10,11 +10,11 @@ msgstr ""
 msgid "Post quotes and cite sources."
 msgstr ""
 
-#: feathers/quote/quote.php:12
+#: feathers/quote/quote.php:13
 msgid "Source"
 msgstr ""
 
-#: feathers/quote/quote.php:22
+#: feathers/quote/quote.php:26
 msgid "Quote can't be empty."
 msgstr ""
 

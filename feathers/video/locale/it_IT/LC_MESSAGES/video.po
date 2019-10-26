@@ -26,23 +26,23 @@ msgstr "Una Feather per il video."
 msgid "Title"
 msgstr "Titolo"
 
-#: feathers/video/video.php:12
+#: feathers/video/video.php:13
 msgid "Video File"
 msgstr "File Video"
 
-#: feathers/video/video.php:15
+#: feathers/video/video.php:16
 #, php-format
 msgid "(Max. file size: %d Megabytes)"
 msgstr "(Dimensione massima del file:%d megabyte)"
 
-#: feathers/video/video.php:18
+#: feathers/video/video.php:20
 msgid "Description"
 msgstr "Descrizione"
 
-#: feathers/video/video.php:34
+#: feathers/video/video.php:39
 msgid "You did not select a video to upload."
 msgstr "Non è stato selezionato alcun video da caricare."
 
-#: feathers/video/video.php:111
+#: feathers/video/video.php:137
 msgid "Your web browser does not support the <code>video</code> element."
 msgstr "Il browser web non supporta l'elemento </code>video<code>."

@@ -26,10 +26,10 @@ msgstr "Una Feather base di testo."
 msgid "Title"
 msgstr "Titolo"
 
-#: feathers/text/text.php:10
+#: feathers/text/text.php:11
 msgid "Body"
 msgstr "Contenuto di testo"
 
-#: feathers/text/text.php:30
+#: feathers/text/text.php:34
 msgid "Body can't be blank."
 msgstr "Il contenuto di testo non può essere vuoto."

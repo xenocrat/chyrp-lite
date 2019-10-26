@@ -89,12 +89,13 @@ msgstr "路由启动了一个无效的控制器。"
 #: includes/helpers.php:1878 includes/helpers.php:1881
 #: includes/helpers.php:1884 includes/helpers.php:1887
 #: includes/helpers.php:1890 includes/helpers.php:1893
-#: includes/helpers.php:1896 includes/helpers.php:1901 includes/thumb.php:15
-#: includes/thumb.php:18 includes/thumb.php:47 includes/thumb.php:202
-#: install.php:791 upgrade.php:173 upgrade.php:186 upgrade.php:199
-#: upgrade.php:212 upgrade.php:225 upgrade.php:239 upgrade.php:265
-#: upgrade.php:278 upgrade.php:292 upgrade.php:305 upgrade.php:318
-#: upgrade.php:331 upgrade.php:345
+#: includes/helpers.php:1896 includes/helpers.php:1901
+#: includes/thumbnail.php:15 includes/thumbnail.php:18
+#: includes/thumbnail.php:47 includes/thumbnail.php:202 install.php:791
+#: upgrade.php:173 upgrade.php:186 upgrade.php:199 upgrade.php:212
+#: upgrade.php:225 upgrade.php:239 upgrade.php:265 upgrade.php:278
+#: upgrade.php:292 upgrade.php:305 upgrade.php:318 upgrade.php:331
+#: upgrade.php:345
 msgid "Error"
 msgstr "错误"
 
@@ -142,11 +143,12 @@ msgstr "无效动作。"
 #: includes/controller/Ajax.php:90 includes/controller/Ajax.php:125
 #: includes/controller/Ajax.php:128 includes/controller/Main.php:301
 #: includes/controller/Main.php:357 includes/download.php:18
-#: includes/helpers.php:1739 includes/thumb.php:21
+#: includes/helpers.php:1739 includes/thumbnail.php:21
 msgid "Access Denied"
 msgstr "访问被拒绝"
 
-#: includes/class/Route.php:106 includes/download.php:18 includes/thumb.php:21
+#: includes/class/Route.php:106 includes/download.php:18
+#: includes/thumbnail.php:21
 msgid "You are not allowed to view this site."
 msgstr "您不允许访问这个站点。"
 
@@ -185,7 +187,7 @@ msgstr "您没有足够的权限查看此区域。"
 
 #: includes/controller/Admin.php:169 includes/controller/Admin.php:201
 #: includes/controller/Admin.php:1458 includes/controller/Ajax.php:90
-#: includes/lib/XMLRPC.php:185 includes/lib/XMLRPC.php:249
+#: includes/lib/XMLRPC.php:176 includes/lib/XMLRPC.php:237
 msgid "You do not have sufficient privileges to add posts."
 msgstr "您没有足够的权限增加帖子。"
 
@@ -202,11 +204,12 @@ msgstr "您必须启用至少一个羽毛才能撰写帖子。"
 #: includes/controller/Admin.php:1018 includes/controller/Admin.php:1701
 #: includes/controller/Admin.php:1745 includes/controller/Ajax.php:49
 #: includes/controller/Ajax.php:75 includes/download.php:24
-#: includes/helpers.php:97 includes/thumb.php:44
+#: includes/helpers.php:97 includes/thumbnail.php:44
 msgid "Not Found"
 msgstr "未找到"
 
 #: includes/controller/Admin.php:180 includes/controller/Admin.php:207
+#: includes/lib/XMLRPC.php:350
 msgid "Feather not found."
 msgstr "羽毛未找到。"
 
@@ -250,13 +253,13 @@ msgstr "编辑帖子需要ID。"
 
 #: includes/controller/Admin.php:228 includes/controller/Admin.php:264
 #: includes/controller/Admin.php:285 includes/controller/Admin.php:310
-#: includes/controller/Ajax.php:49 includes/lib/XMLRPC.php:219
-#: includes/lib/XMLRPC.php:332 includes/lib/XMLRPC.php:382
+#: includes/controller/Ajax.php:49 includes/lib/XMLRPC.php:210
+#: includes/lib/XMLRPC.php:321 includes/lib/XMLRPC.php:376
 msgid "Post not found."
 msgstr "帖子未找到。"
 
 #: includes/controller/Admin.php:231 includes/controller/Admin.php:267
-#: includes/lib/XMLRPC.php:222 includes/lib/XMLRPC.php:335
+#: includes/lib/XMLRPC.php:213 includes/lib/XMLRPC.php:324
 msgid "You do not have sufficient privileges to edit this post."
 msgstr "您没有足够的权限编辑这个帖子。"
 
@@ -278,7 +281,7 @@ msgid "An ID is required to delete a post."
 msgstr "删除帖子需要ID。"
 
 #: includes/controller/Admin.php:288 includes/controller/Admin.php:313
-#: includes/controller/Ajax.php:52 includes/lib/XMLRPC.php:385
+#: includes/controller/Ajax.php:52 includes/lib/XMLRPC.php:379
 msgid "You do not have sufficient privileges to delete this post."
 msgstr "您没有足够的权限删除这个帖子。"
 
@@ -679,7 +682,7 @@ msgid "You are already logged in."
 msgstr "您已登陆。"
 
 #: includes/controller/Admin.php:2029 includes/controller/Ajax.php:32
-#: includes/download.php:15 includes/thumb.php:18
+#: includes/download.php:15 includes/thumbnail.php:18
 msgid "Missing argument."
 msgstr "缺少参数。"
 
@@ -851,7 +854,7 @@ msgstr "您不能重设密码，因为您已登陆。"
 msgid "We have emailed you a new password."
 msgstr "我们已经通过电子邮件发送给您新密码。"
 
-#: includes/controller/Main.php:575 includes/lib/XMLRPC.php:423
+#: includes/controller/Main.php:575 includes/lib/XMLRPC.php:417
 msgid "Incorrect username and/or password."
 msgstr "不正确的用户名或者密码。"
 
@@ -901,11 +904,11 @@ msgstr ""
 msgid "Lost password"
 msgstr "忘记密码"
 
-#: includes/download.php:12 includes/thumb.php:15
+#: includes/download.php:12 includes/thumbnail.php:15
 msgid "This resource accepts GET requests only."
 msgstr "资源只能被GET请求。"
 
-#: includes/download.php:24 includes/thumb.php:44
+#: includes/download.php:24 includes/thumbnail.php:44
 msgid "File not found."
 msgstr "未找到。"
 
@@ -981,17 +984,17 @@ msgid "Only uploaded files are accepted."
 msgstr "只有上传的文件被接受。"
 
 #: includes/helpers.php:1742 includes/helpers.php:1774
-#: includes/lib/XMLRPC.php:196
+#: includes/lib/XMLRPC.php:187
 msgid "Upload path does not exist."
 msgstr "上传路径不存在。"
 
 #: includes/helpers.php:1745 includes/helpers.php:1777
-#: includes/lib/XMLRPC.php:199
+#: includes/lib/XMLRPC.php:190
 msgid "Upload path is not writable."
 msgstr "上传路径不可写。"
 
 #: includes/helpers.php:1748 includes/helpers.php:1780
-#: includes/helpers.php:1891 includes/lib/XMLRPC.php:202 upgrade.php:125
+#: includes/helpers.php:1891 includes/lib/XMLRPC.php:193 upgrade.php:125
 #: upgrade.php:142 upgrade.php:159
 msgid "Failed to write file to disk."
 msgstr "写入文件到磁盘失败。"
@@ -1135,7 +1138,7 @@ msgstr "您的页面不能被解析。"
 msgid "Your page does not link to our page."
 msgstr "您的页面没有链接到我们的页面。"
 
-#: includes/lib/XMLRPC.php:420
+#: includes/lib/XMLRPC.php:414
 msgid "XML-RPC support is disabled for this site."
 msgstr "这个站点禁用XML-RPC支持。"
 
@@ -1263,11 +1266,11 @@ msgstr "删除组"
 msgid "Export Content"
 msgstr "导出内容"
 
-#: includes/thumb.php:47
+#: includes/thumbnail.php:47
 msgid "Maximum size cannot be zero."
 msgstr "最大尺寸不能为0."
 
-#: includes/thumb.php:202
+#: includes/thumbnail.php:202
 msgid "Failed to create image thumbnail."
 msgstr "无法创建图片缩略图。"
 

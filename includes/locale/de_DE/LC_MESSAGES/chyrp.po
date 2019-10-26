@@ -89,12 +89,13 @@ msgstr "Route wurde mit einem ungültigen Controller initiiert."
 #: includes/helpers.php:1878 includes/helpers.php:1881
 #: includes/helpers.php:1884 includes/helpers.php:1887
 #: includes/helpers.php:1890 includes/helpers.php:1893
-#: includes/helpers.php:1896 includes/helpers.php:1901 includes/thumb.php:15
-#: includes/thumb.php:18 includes/thumb.php:47 includes/thumb.php:202
-#: install.php:791 upgrade.php:173 upgrade.php:186 upgrade.php:199
-#: upgrade.php:212 upgrade.php:225 upgrade.php:239 upgrade.php:265
-#: upgrade.php:278 upgrade.php:292 upgrade.php:305 upgrade.php:318
-#: upgrade.php:331 upgrade.php:345
+#: includes/helpers.php:1896 includes/helpers.php:1901
+#: includes/thumbnail.php:15 includes/thumbnail.php:18
+#: includes/thumbnail.php:47 includes/thumbnail.php:202 install.php:791
+#: upgrade.php:173 upgrade.php:186 upgrade.php:199 upgrade.php:212
+#: upgrade.php:225 upgrade.php:239 upgrade.php:265 upgrade.php:278
+#: upgrade.php:292 upgrade.php:305 upgrade.php:318 upgrade.php:331
+#: upgrade.php:345
 msgid "Error"
 msgstr "Fehler"
 
@@ -142,11 +143,12 @@ msgstr "Aktion nicht gültig."
 #: includes/controller/Ajax.php:90 includes/controller/Ajax.php:125
 #: includes/controller/Ajax.php:128 includes/controller/Main.php:301
 #: includes/controller/Main.php:357 includes/download.php:18
-#: includes/helpers.php:1739 includes/thumb.php:21
+#: includes/helpers.php:1739 includes/thumbnail.php:21
 msgid "Access Denied"
 msgstr "Zugriff verweigert"
 
-#: includes/class/Route.php:106 includes/download.php:18 includes/thumb.php:21
+#: includes/class/Route.php:106 includes/download.php:18
+#: includes/thumbnail.php:21
 msgid "You are not allowed to view this site."
 msgstr "Du hast keinen Zugriff auf diese Seite."
 
@@ -186,7 +188,7 @@ msgstr "Du verfügst nicht über die Berechtigung diesen Bereich einzusehen."
 
 #: includes/controller/Admin.php:169 includes/controller/Admin.php:201
 #: includes/controller/Admin.php:1458 includes/controller/Ajax.php:90
-#: includes/lib/XMLRPC.php:185 includes/lib/XMLRPC.php:249
+#: includes/lib/XMLRPC.php:176 includes/lib/XMLRPC.php:237
 msgid "You do not have sufficient privileges to add posts."
 msgstr "Du verfügst nicht über die Berechtigung Posts hinzuzufügen."
 
@@ -204,11 +206,12 @@ msgstr ""
 #: includes/controller/Admin.php:1018 includes/controller/Admin.php:1701
 #: includes/controller/Admin.php:1745 includes/controller/Ajax.php:49
 #: includes/controller/Ajax.php:75 includes/download.php:24
-#: includes/helpers.php:97 includes/thumb.php:44
+#: includes/helpers.php:97 includes/thumbnail.php:44
 msgid "Not Found"
 msgstr "Nicht gefunden"
 
 #: includes/controller/Admin.php:180 includes/controller/Admin.php:207
+#: includes/lib/XMLRPC.php:350
 msgid "Feather not found."
 msgstr "Feather nicht gefunden."
 
@@ -252,13 +255,13 @@ msgstr "Zum Bearbeiten eines Posts wird eine ID benötigt."
 
 #: includes/controller/Admin.php:228 includes/controller/Admin.php:264
 #: includes/controller/Admin.php:285 includes/controller/Admin.php:310
-#: includes/controller/Ajax.php:49 includes/lib/XMLRPC.php:219
-#: includes/lib/XMLRPC.php:332 includes/lib/XMLRPC.php:382
+#: includes/controller/Ajax.php:49 includes/lib/XMLRPC.php:210
+#: includes/lib/XMLRPC.php:321 includes/lib/XMLRPC.php:376
 msgid "Post not found."
 msgstr "Post nicht gefunden."
 
 #: includes/controller/Admin.php:231 includes/controller/Admin.php:267
-#: includes/lib/XMLRPC.php:222 includes/lib/XMLRPC.php:335
+#: includes/lib/XMLRPC.php:213 includes/lib/XMLRPC.php:324
 msgid "You do not have sufficient privileges to edit this post."
 msgstr "Du verfügst nicht über die Berechtigung diesen Post zu bearbeiten."
 
@@ -280,7 +283,7 @@ msgid "An ID is required to delete a post."
 msgstr "Zum Löschen eines Posts muss eine ID angegeben werden."
 
 #: includes/controller/Admin.php:288 includes/controller/Admin.php:313
-#: includes/controller/Ajax.php:52 includes/lib/XMLRPC.php:385
+#: includes/controller/Ajax.php:52 includes/lib/XMLRPC.php:379
 msgid "You do not have sufficient privileges to delete this post."
 msgstr "Du verfügst nicht über die Berechtigung diesen Post zu löschen."
 
@@ -682,7 +685,7 @@ msgid "You are already logged in."
 msgstr "Du bist bereits eingeloggt."
 
 #: includes/controller/Admin.php:2029 includes/controller/Ajax.php:32
-#: includes/download.php:15 includes/thumb.php:18
+#: includes/download.php:15 includes/thumbnail.php:18
 msgid "Missing argument."
 msgstr "Fehlendes Argument."
 
@@ -858,7 +861,7 @@ msgstr ""
 msgid "We have emailed you a new password."
 msgstr "Wir haben Dir ein neues Passwort geschickt."
 
-#: includes/controller/Main.php:575 includes/lib/XMLRPC.php:423
+#: includes/controller/Main.php:575 includes/lib/XMLRPC.php:417
 msgid "Incorrect username and/or password."
 msgstr "Benutzername und/oder Passwort nicht korrekt."
 
@@ -909,11 +912,11 @@ msgstr ""
 msgid "Lost password"
 msgstr "Passwort vergessen"
 
-#: includes/download.php:12 includes/thumb.php:15
+#: includes/download.php:12 includes/thumbnail.php:15
 msgid "This resource accepts GET requests only."
 msgstr "Diese Ressource akzeptiert nur GET Anfragen."
 
-#: includes/download.php:24 includes/thumb.php:44
+#: includes/download.php:24 includes/thumbnail.php:44
 msgid "File not found."
 msgstr "Datei nicht gefunden."
 
@@ -990,17 +993,17 @@ msgid "Only uploaded files are accepted."
 msgstr "Nur hochgeladene Dateien werden akzeptiert."
 
 #: includes/helpers.php:1742 includes/helpers.php:1774
-#: includes/lib/XMLRPC.php:196
+#: includes/lib/XMLRPC.php:187
 msgid "Upload path does not exist."
 msgstr "Uploadpfad existiert nicht."
 
 #: includes/helpers.php:1745 includes/helpers.php:1777
-#: includes/lib/XMLRPC.php:199
+#: includes/lib/XMLRPC.php:190
 msgid "Upload path is not writable."
 msgstr "Uploadpfad ist nicht beschreibbar."
 
 #: includes/helpers.php:1748 includes/helpers.php:1780
-#: includes/helpers.php:1891 includes/lib/XMLRPC.php:202 upgrade.php:125
+#: includes/helpers.php:1891 includes/lib/XMLRPC.php:193 upgrade.php:125
 #: upgrade.php:142 upgrade.php:159
 msgid "Failed to write file to disk."
 msgstr "Schreiben der Datei auf den Speicher ist fehlgeschlagen."
@@ -1151,7 +1154,7 @@ msgstr "Deine Seite konnte nicht geparst werden."
 msgid "Your page does not link to our page."
 msgstr "Deine Seite verlinkt nicht auf unsere."
 
-#: includes/lib/XMLRPC.php:420
+#: includes/lib/XMLRPC.php:414
 msgid "XML-RPC support is disabled for this site."
 msgstr "XML-RPC Unterstützung ist auf dieser Seite deaktiviert."
 
@@ -1280,11 +1283,11 @@ msgstr "Gruppen löschen"
 msgid "Export Content"
 msgstr "Inhalte exportieren"
 
-#: includes/thumb.php:47
+#: includes/thumbnail.php:47
 msgid "Maximum size cannot be zero."
 msgstr "Maximale Größe kann nicht null sein."
 
-#: includes/thumb.php:202
+#: includes/thumbnail.php:202
 msgid "Failed to create image thumbnail."
 msgstr "Vorschaubild konnte erstellt werden."
 

@@ -106,10 +106,10 @@ msgstr ""
 #: includes/helpers.php:1893
 #: includes/helpers.php:1896
 #: includes/helpers.php:1901
-#: includes/thumb.php:15
-#: includes/thumb.php:18
-#: includes/thumb.php:47
-#: includes/thumb.php:202
+#: includes/thumbnail.php:15
+#: includes/thumbnail.php:18
+#: includes/thumbnail.php:47
+#: includes/thumbnail.php:202
 #: install.php:791
 #: upgrade.php:173
 #: upgrade.php:186
@@ -212,13 +212,13 @@ msgstr ""
 #: includes/controller/Main.php:357
 #: includes/download.php:18
 #: includes/helpers.php:1739
-#: includes/thumb.php:21
+#: includes/thumbnail.php:21
 msgid "Access Denied"
 msgstr ""
 
 #: includes/class/Route.php:106
 #: includes/download.php:18
-#: includes/thumb.php:21
+#: includes/thumbnail.php:21
 msgid "You are not allowed to view this site."
 msgstr ""
 
@@ -261,8 +261,8 @@ msgstr ""
 #: includes/controller/Admin.php:201
 #: includes/controller/Admin.php:1458
 #: includes/controller/Ajax.php:90
-#: includes/lib/XMLRPC.php:185
-#: includes/lib/XMLRPC.php:249
+#: includes/lib/XMLRPC.php:176
+#: includes/lib/XMLRPC.php:237
 msgid "You do not have sufficient privileges to add posts."
 msgstr ""
 
@@ -289,12 +289,13 @@ msgstr ""
 #: includes/controller/Ajax.php:75
 #: includes/download.php:24
 #: includes/helpers.php:97
-#: includes/thumb.php:44
+#: includes/thumbnail.php:44
 msgid "Not Found"
 msgstr ""
 
 #: includes/controller/Admin.php:180
 #: includes/controller/Admin.php:207
+#: includes/lib/XMLRPC.php:350
 msgid "Feather not found."
 msgstr ""
 
@@ -365,16 +366,16 @@ msgstr ""
 #: includes/controller/Admin.php:285
 #: includes/controller/Admin.php:310
 #: includes/controller/Ajax.php:49
-#: includes/lib/XMLRPC.php:219
-#: includes/lib/XMLRPC.php:332
-#: includes/lib/XMLRPC.php:382
+#: includes/lib/XMLRPC.php:210
+#: includes/lib/XMLRPC.php:321
+#: includes/lib/XMLRPC.php:376
 msgid "Post not found."
 msgstr ""
 
 #: includes/controller/Admin.php:231
 #: includes/controller/Admin.php:267
-#: includes/lib/XMLRPC.php:222
-#: includes/lib/XMLRPC.php:335
+#: includes/lib/XMLRPC.php:213
+#: includes/lib/XMLRPC.php:324
 msgid "You do not have sufficient privileges to edit this post."
 msgstr ""
 
@@ -399,7 +400,7 @@ msgstr ""
 #: includes/controller/Admin.php:288
 #: includes/controller/Admin.php:313
 #: includes/controller/Ajax.php:52
-#: includes/lib/XMLRPC.php:385
+#: includes/lib/XMLRPC.php:379
 msgid "You do not have sufficient privileges to delete this post."
 msgstr ""
 
@@ -863,7 +864,7 @@ msgstr ""
 #: includes/controller/Admin.php:2029
 #: includes/controller/Ajax.php:32
 #: includes/download.php:15
-#: includes/thumb.php:18
+#: includes/thumbnail.php:18
 msgid "Missing argument."
 msgstr ""
 
@@ -1044,7 +1045,7 @@ msgid "We have emailed you a new password."
 msgstr ""
 
 #: includes/controller/Main.php:575
-#: includes/lib/XMLRPC.php:423
+#: includes/lib/XMLRPC.php:417
 msgid "Incorrect username and/or password."
 msgstr ""
 
@@ -1094,12 +1095,12 @@ msgid "Lost password"
 msgstr ""
 
 #: includes/download.php:12
-#: includes/thumb.php:15
+#: includes/thumbnail.php:15
 msgid "This resource accepts GET requests only."
 msgstr ""
 
 #: includes/download.php:24
-#: includes/thumb.php:44
+#: includes/thumbnail.php:44
 msgid "File not found."
 msgstr ""
 
@@ -1178,20 +1179,20 @@ msgstr ""
 
 #: includes/helpers.php:1742
 #: includes/helpers.php:1774
-#: includes/lib/XMLRPC.php:196
+#: includes/lib/XMLRPC.php:187
 msgid "Upload path does not exist."
 msgstr ""
 
 #: includes/helpers.php:1745
 #: includes/helpers.php:1777
-#: includes/lib/XMLRPC.php:199
+#: includes/lib/XMLRPC.php:190
 msgid "Upload path is not writable."
 msgstr ""
 
 #: includes/helpers.php:1748
 #: includes/helpers.php:1780
 #: includes/helpers.php:1891
-#: includes/lib/XMLRPC.php:202
+#: includes/lib/XMLRPC.php:193
 #: upgrade.php:125
 #: upgrade.php:142
 #: upgrade.php:159
@@ -1333,7 +1334,7 @@ msgstr ""
 msgid "Your page does not link to our page."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:420
+#: includes/lib/XMLRPC.php:414
 msgid "XML-RPC support is disabled for this site."
 msgstr ""
 
@@ -1462,11 +1463,11 @@ msgstr ""
 msgid "Export Content"
 msgstr ""
 
-#: includes/thumb.php:47
+#: includes/thumbnail.php:47
 msgid "Maximum size cannot be zero."
 msgstr ""
 
-#: includes/thumb.php:202
+#: includes/thumbnail.php:202
 msgid "Failed to create image thumbnail."
 msgstr ""
 

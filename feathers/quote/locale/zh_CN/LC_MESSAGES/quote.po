@@ -22,10 +22,10 @@ msgstr "Quote"
 msgid "Post quotes and cite sources."
 msgstr "发表引文和引用来源。"
 
-#: feathers/quote/quote.php:12
+#: feathers/quote/quote.php:13
 msgid "Source"
 msgstr "来源"
 
-#: feathers/quote/quote.php:22
+#: feathers/quote/quote.php:26
 msgid "Quote can't be empty."
 msgstr "Quote 不能为空。"

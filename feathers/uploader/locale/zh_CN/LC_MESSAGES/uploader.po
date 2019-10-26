@@ -37,23 +37,23 @@ msgstr "上传文件并使其可供访问者下载。"
 msgid "Title"
 msgstr "标题"
 
-#: feathers/uploader/uploader.php:12
+#: feathers/uploader/uploader.php:13
 msgid "Files"
 msgstr "文件"
 
-#: feathers/uploader/uploader.php:14
+#: feathers/uploader/uploader.php:15
 #, php-format
 msgid "(Max. file size: %d Megabytes)"
 msgstr "（最大文件大小：%d M）"
 
-#: feathers/uploader/uploader.php:17
+#: feathers/uploader/uploader.php:19
 msgid "Caption"
 msgstr "说明"
 
-#: feathers/uploader/uploader.php:54
+#: feathers/uploader/uploader.php:62
 msgid "You did not select any files to upload."
 msgstr "您没有选择任何文件上传。"
 
-#: feathers/uploader/uploader.php:180
+#: feathers/uploader/uploader.php:177
 msgid "Source"
 msgstr "来源"

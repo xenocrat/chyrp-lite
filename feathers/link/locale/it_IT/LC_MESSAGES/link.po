@@ -26,18 +26,18 @@ msgstr "Collega ad altri siti e aggiunge una descrizione facoltativa."
 msgid "Title"
 msgstr "Titolo"
 
-#: feathers/link/link.php:10
+#: feathers/link/link.php:11
 msgid "URL"
 msgstr "URL"
 
-#: feathers/link/link.php:13
+#: feathers/link/link.php:15
 msgid "Description"
 msgstr "Descrizione"
 
-#: feathers/link/link.php:25 feathers/link/link.php:42
+#: feathers/link/link.php:29 feathers/link/link.php:47
 msgid "URL can't be empty."
 msgstr "L'URL non può essere vuoto."
 
-#: feathers/link/link.php:28 feathers/link/link.php:45
+#: feathers/link/link.php:32 feathers/link/link.php:50
 msgid "Invalid URL."
 msgstr "URL non valido."

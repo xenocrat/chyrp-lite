@@ -13,11 +13,11 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
-#: feathers/text/text.php:10
+#: feathers/text/text.php:11
 msgid "Body"
 msgstr ""
 
-#: feathers/text/text.php:30
+#: feathers/text/text.php:34
 msgid "Body can't be blank."
 msgstr ""
 

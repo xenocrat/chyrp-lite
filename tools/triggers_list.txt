@@ -167,10 +167,10 @@ Arguments:
 delete_upload
 -------------
 Called from:
-	feathers/audio/audio.php on line 92
-	feathers/photo/photo.php on line 93
-	feathers/uploader/uploader.php on line 134
-	feathers/video/video.php on line 92
+	feathers/audio/audio.php on line 98
+	feathers/photo/photo.php on line 98
+	feathers/uploader/uploader.php on line 146
+	feathers/video/video.php on line 98
 
 Arguments:
 	$post->filename
@@ -179,7 +179,7 @@ Arguments:
 audio_player
 ------------
 Called from:
-	feathers/audio/audio.php on line 108
+	feathers/audio/audio.php on line 134
 
 Arguments:
 	$post
@@ -188,7 +188,7 @@ Arguments:
 video_player
 ------------
 Called from:
-	feathers/video/video.php on line 108
+	feathers/video/video.php on line 134
 
 Arguments:
 	$post
@@ -392,37 +392,37 @@ Arguments:
 metaWeblog_newPost_preQuery
 ---------------------------
 Called from:
-	includes/lib/XMLRPC.php on line 284
+	includes/lib/XMLRPC.php on line 275
 
 Arguments:
-	$args[3]
+	$struct
 
 
 metaWeblog_newPost
 ------------------
 Called from:
-	includes/lib/XMLRPC.php on line 298
+	includes/lib/XMLRPC.php on line 288
 
 Arguments:
-	$args[3], $post
+	$struct, $post
 
 
 metaWeblog_editPost_preQuery
 ----------------------------
 Called from:
-	includes/lib/XMLRPC.php on line 355
+	includes/lib/XMLRPC.php on line 346
 
 Arguments:
-	$args[3], $post
+	$struct, $post
 
 
 metaWeblog_editPost
 -------------------
 Called from:
-	includes/lib/XMLRPC.php on line 366
+	includes/lib/XMLRPC.php on line 360
 
 Arguments:
-	$args[3], $post
+	$struct, $post
 
 
 javascript
@@ -1104,8 +1104,8 @@ Target:
 metaWeblog_getPost
 ------------------
 Called from:
-	includes/lib/XMLRPC.php on line 159
-	includes/lib/XMLRPC.php on line 236
+	includes/lib/XMLRPC.php on line 150
+	includes/lib/XMLRPC.php on line 224
 
 Target:
 	$struct
@@ -1117,10 +1117,22 @@ Arguments:
 metaWeblog_getCategories
 ------------------------
 Called from:
-	includes/lib/XMLRPC.php on line 173
+	includes/lib/XMLRPC.php on line 164
 
 Target:
 	$categories
+
+
+metaWeblog_editValues
+---------------------
+Called from:
+	includes/lib/XMLRPC.php on line 347
+
+Target:
+	$values
+
+Arguments:
+	$struct, $post
 
 
 group

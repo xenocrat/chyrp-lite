@@ -26,10 +26,10 @@ msgstr "一个基本的文本羽毛。"
 msgid "Title"
 msgstr "标题"
 
-#: feathers/text/text.php:10
+#: feathers/text/text.php:11
 msgid "Body"
 msgstr "正文"
 
-#: feathers/text/text.php:30
+#: feathers/text/text.php:34
 msgid "Body can't be blank."
 msgstr "正文不能为空。"
