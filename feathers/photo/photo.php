@@ -129,12 +129,12 @@
             return $struct;
         }
 
-        public function metaWeblog_setValues($values, $args, $post) {
+        public function metaWeblog_setValues($values, $struct, $post) {
             if ($post->feather != "photo")
                 return;
 
-            $values["title"] = $args["title"];
-            $values["caption"] = $args["description"];
+            $values["title"] = $struct["title"];
+            $values["caption"] = $struct["description"];
 
             return $values;
         }

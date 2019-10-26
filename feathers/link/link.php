@@ -88,12 +88,12 @@
             return $struct;
         }
 
-        public function metaWeblog_setValues($values, $args, $post) {
+        public function metaWeblog_setValues($values, $struct, $post) {
             if ($post->feather != "link")
                 return;
 
-            $values["name"] = $args["title"];
-            $values["description"] = $args["description"];
+            $values["name"] = $struct["title"];
+            $values["description"] = $struct["description"];
 
             return $values;
         }

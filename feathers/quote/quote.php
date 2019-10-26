@@ -69,13 +69,13 @@
             return $struct;
         }
 
-        public function metaWeblog_setValues($values, $args, $post) {
+        public function metaWeblog_setValues($values, $struct, $post) {
             if ($post->feather != "quote")
                 return;
 
-            if ($args["description"] != "") {
-                $values["source"] = $args["title"];
-                $values["quote"] = $args["description"];
+            if ($struct["description"] != "") {
+                $values["source"] = $struct["title"];
+                $values["quote"] = $struct["description"];
             }
 
             return $values;
