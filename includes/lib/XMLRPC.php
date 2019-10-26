@@ -120,38 +120,29 @@
             global $user;
 
             $trigger = Trigger::current();
-            $where = array("feather" => XML_RPC_FEATHER);
+            $where = array(Post::feathers());
             $limit = (int) fallback($args[3], Config::current()->posts_per_page);
-
-            if ($user->group->can("view_own_draft", "edit_own_draft"))
-                $where["status"] = array("public", "draft");
-            else
-                $where["status"] = "public";
-
-            if (!$user->group->can("edit_draft", "edit_post", "delete_draft", "delete_post"))
-                $where["user_id"] = $user->id;
 
             $results = Post::find(array("placeholders" => true,
                                         "where" => $where,
                                         "order" => "created_at DESC, id DESC"));
 
             $posts = array();
+            $array = array();
 
             for ($i = 0; $i < $limit; $i++)
                 if (isset($results[0][$i]))
                     $posts[] = new Post(null, array("read_from" => $results[0][$i], "filter" => false));
 
-            $array = array();
-
-            $title = XML_RPC_TITLE;
-            $description = XML_RPC_DESCRIPTION;
-
             foreach ($posts as $post) {
+                if (!$post->editable($user))
+                    continue;
+
                 $struct = array("postid"      => $post->id,
                                 "userid"      => $post->user_id,
-                                "title"       => $post->$title,
+                                "title"       => "",
                                 "dateCreated" => new IXR_Date(when("Ymd\TH:i:se", $post->created_at)),
-                                "description" => $post->$description,
+                                "description" => "",
                                 "link"        => unfix($post->url()),
                                 "permaLink"   => unfix(url("id/post/".$post->id, MainController::current())),
                                 "mt_basename" => $post->clean);
@@ -213,7 +204,7 @@
             global $user;
 
             $post = new Post(fallback($args[0]), array("filter" => false,
-                                                       "where" => array("feather" => XML_RPC_FEATHER)));
+                                                       "where" => array(Post::feathers())));
 
             if ($post->no_results)
                 return new IXR_Error(404, __("Post not found."));
@@ -221,14 +212,11 @@
             if (!$post->editable($user))
                 return new IXR_Error(403, __("You do not have sufficient privileges to edit this post."));
 
-            $title = XML_RPC_TITLE;
-            $description = XML_RPC_DESCRIPTION;
-
             $struct = array("postid"      => $post->id,
                             "userid"      => $post->user_id,
-                            "title"       => $post->$title,
+                            "title"       => "",
                             "dateCreated" => new IXR_Date(when("Ymd\TH:i:se", $post->created_at)),
-                            "description" => $post->$description,
+                            "description" => "",
                             "link"        => unfix($post->url()),
                             "permaLink"   => unfix(url("id/post/".$post->id, MainController::current())),
                             "mt_basename" => $post->clean);
@@ -256,15 +244,13 @@
             fallback($args[3]["mt_allow_pings"], "open");
 
             $trigger = Trigger::current();
-            $content = $args[3]["description"];
+            $pings = ($args[3]["mt_allow_pings"] == "open");
+            $slug = oneof(sanitize($args[3]["mt_basename"], true, true, 80), slug(8));
+            $created_at = oneof($this->convertFromDateCreated($args[3]), datetime());
 
             # Support for extended content.
-            if (!empty($args[3]["mt_text_more"]))
-                $content .= "<!--more-->".$args[3]["mt_text_more"];
-
-            # Add excerpt to content so it isn't lost.
-            if (!empty($args[3]["mt_excerpt"]))
-                $content = $args[3]["mt_excerpt"]."\n\n".$content;
+            if (isset($args[3]["mt_text_more"]))
+                $args[3]["description"] .= "<!--more-->".$args[3]["mt_text_more"];
 
             # Convert statuses from WordPress to Chyrp equivalents.
             switch ($args[3]["post_status"]) {
@@ -281,19 +267,22 @@
                     $status = "public";
             }
 
+            $status = ($user->group->can("add_post")) ? $status : "draft" ;
+            $values = array("title" => $args[3]["title"],
+                            "body" => oneof($args[3]["description"], "boo!"));
+
             $trigger->call("metaWeblog_newPost_preQuery", $args[3]);
 
-            $post = Post::add(array(XML_RPC_TITLE => $args[3]["title"],
-                                    XML_RPC_DESCRIPTION => $content),
-                              sanitize(oneof($args[3]["mt_basename"], $args[3]["title"]), true, true, 80),
+            $post = Post::add($values,
+                              $slug,
                               "",
-                              XML_RPC_FEATHER,
+                              "text",
                               $user->id,
                               null,
-                              ($user->group->can("add_post")) ? $status : "draft",
-                              oneof($this->convertFromDateCreated($args[3]), datetime()),
+                              $status,
+                              $created_at,
                               null,
-                              ($args[3]["mt_allow_pings"] == "open"));
+                              $pings);
 
             $trigger->call("metaWeblog_newPost", $args[3], $post);
             return $post->id;
@@ -315,18 +304,16 @@
             fallback($args[3]["post_status"]);
 
             $trigger = Trigger::current();
-            $content = $args[3]["description"];
+            $values = array();
+            $slug = oneof(sanitize($args[3]["mt_basename"], true, true, 80), $post->clean);
+            $updated_at = oneof($this->convertFromDateCreated($args[3]), $post->created_at);
 
             # Support for extended content.
-            if (!empty($args[3]["mt_text_more"]))
-                $content .= "<!--more-->".$args[3]["mt_text_more"];
-
-            # Add excerpt to content so it isn't lost.
-            if (!empty($args[3]["mt_excerpt"]))
-                $content = $args[3]["mt_excerpt"]."\n\n".$content;
+            if (isset($args[3]["mt_text_more"]))
+                $args[3]["description"] .= "<!--more-->".$args[3]["mt_text_more"];
 
             $post = new Post($args[0], array("filter" => false,
-                                             "where" => array("feather" => XML_RPC_FEATHER)));
+                                             "where" => array(Post::feathers())));
 
             if ($post->no_results)
                 return new IXR_Error(404, __("Post not found."));
@@ -352,16 +339,21 @@
                     $status = $post->status;
             }
 
-            $trigger->call("metaWeblog_editPost_preQuery", $args[3], $post);
+            $status = ($user->group->can("edit_own_post", "edit_post")) ? $status : $post->status ;
 
-            $post = $post->update(array(XML_RPC_TITLE => $args[3]["title"],
-                                        XML_RPC_DESCRIPTION => $content),
+            $trigger->call("metaWeblog_editPost_preQuery", $args[3], $post);
+            $trigger->filter($values, "metaWeblog_editValues", $args[3], $post);
+
+            if (empty($values))
+                return new IXR_Error(404, __("Feather not found."));
+
+            $post = $post->update($values,
                                   null,
                                   $post->pinned,
-                                  ($user->group->can("edit_own_post", "edit_post")) ? $status : $post->status,
-                                  oneof(sanitize($args[3]["mt_basename"], true, true, 80), $post->clean),
+                                  $status,
+                                  $slug,
                                   null,
-                                  oneof($this->convertFromDateCreated($args[3]), $post->created_at));
+                                  $updated_at);
 
             $trigger->call("metaWeblog_editPost", $args[3], $post);
             return true;
@@ -376,7 +368,7 @@
             global $user;
 
             $post = new Post(fallback($args[1]), array("filter" => false,
-                                                       "where" => array("feather" => XML_RPC_FEATHER)));
+                                                       "where" => array(Post::feathers())));
 
             if ($post->no_results)
                 return new IXR_Error(404, __("Post not found."));
