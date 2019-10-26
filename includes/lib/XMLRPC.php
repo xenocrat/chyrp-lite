@@ -197,7 +197,7 @@
 
        /**
         * Function: metaWeblog_getPost
-        * Retrieves a specified post.
+        * Retrieves a specified post for editing.
         */
         public function metaWeblog_getPost($args) {
             $this->auth(fallback($args[1]), fallback($args[2]));
