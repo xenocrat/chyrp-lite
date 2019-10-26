@@ -120,11 +120,10 @@
             global $user;
 
             $trigger = Trigger::current();
-            $where = array(Post::feathers());
             $limit = (int) fallback($args[3], Config::current()->posts_per_page);
 
             $results = Post::find(array("placeholders" => true,
-                                        "where" => $where,
+                                        "where" => array(Post::feathers()),
                                         "order" => "created_at DESC, id DESC"));
 
             $posts = array();
