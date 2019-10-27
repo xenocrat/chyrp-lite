@@ -38,7 +38,7 @@
             return $struct;
         }
 
-        public function metaWeblog_editPost_preQuery($struct, $post = null) {
+        public function metaWeblog_editPost_preQuery($struct) {
             if (isset($struct["categories"][0]))
                 foreach (Category::find() as $category)
                     if ($category->name == $struct["categories"][0])
