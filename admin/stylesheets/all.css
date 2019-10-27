@@ -488,11 +488,13 @@ form.split label {
 form.split input[type="text"],
 form.split input[type="email"],
 form.split input[type="url"],
-form.split input[type="number"],
 form.split input[type="password"],
 form.split select,
 form.split textarea {
     width: 33%;
+}
+form.split input[type="number"] {
+    width: 16%;
 }
 form.split ul,
 form.split ol {
