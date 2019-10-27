@@ -251,7 +251,7 @@
 
             # Support for extended content.
             if (isset($struct["mt_text_more"]))
-                $struct["description"] .= "<!--more-->".$struct["mt_text_more"];
+                $struct["description"].= "<!--more-->".$struct["mt_text_more"];
 
             # Convert statuses from WordPress to Chyrp equivalents.
             switch ($struct["post_status"]) {
@@ -270,7 +270,7 @@
 
             $status = ($user->group->can("add_post")) ? $status : "draft" ;
             $values = array("title" => $struct["title"],
-                            "body" => oneof($struct["description"], "boo!"));
+                            "body" => oneof($struct["description"], "Lorem ipsum dolor sit amet."));
 
             $trigger->call("metaWeblog_newPost_preQuery", $struct);
 
@@ -312,7 +312,7 @@
 
             # Support for extended content.
             if (isset($struct["mt_text_more"]))
-                $struct["description"] .= "<!--more-->".$struct["mt_text_more"];
+                $struct["description"].= "<!--more-->".$struct["mt_text_more"];
 
             $post = new Post($args[0], array("filter" => false,
                                              "where" => array(Post::feathers())));
