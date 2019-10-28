@@ -262,7 +262,7 @@
                     $status = "scheduled";
                     break;
                 case "private":
-                    $status = "registered_only";
+                    $status = "private";
                     break;
                 default:
                     $status = "public";
@@ -335,7 +335,7 @@
                     $status = "scheduled";
                     break;
                 case "private":
-                    $status = "registered_only";
+                    $status = "private";
                     break;
                 default:
                     $status = $post->status;
