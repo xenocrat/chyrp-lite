@@ -92,7 +92,7 @@
             fallback($public,       true);
             fallback($show_in_list, true);
             fallback($list_order,   0);
-            fallback($clean,        sanitize(fallback($_POST['slug']), true, true, 80), slug(8));
+            fallback($clean,        slug(8));
             fallback($url,          self::check_url($clean));
             fallback($created_at,   datetime());
             fallback($updated_at,   "0000-00-00 00:00:00"); # Model->updated will check this.
@@ -170,12 +170,8 @@
             fallback($public,       $this->public);
             fallback($show_in_list, $this->show_in_list);
             fallback($list_order,   $this->list_order);
-            fallback($clean,        (!empty($_POST['slug']) and $_POST['slug'] != $this->clean) ?
-                                        oneof(sanitize($_POST['slug'], true, true, 80), slug(8)) :
-                                        $this->clean);
-            fallback($url,          ($clean != $this->clean) ?
-                                        self::check_url($clean) :
-                                        $this->url);
+            fallback($clean,        $this->clean);
+            fallback($url,          ($clean != $this->clean) ? self::check_url($clean) : $this->url);
             fallback($created_at,   $this->created_at);
             fallback($updated_at,   datetime());
 
