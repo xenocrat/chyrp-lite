@@ -649,11 +649,13 @@
             return $struct;
         }
 
-        public function metaWeblog_editPost_preQuery($struct, $post = null) {
+        public function metaWeblog_editPost_preQuery($values, $struct) {
             if (isset($struct["mt_allow_comments"]))
-                $_POST['option']['comment_status'] = ($struct["mt_allow_comments"] == "open") ? "open" : "closed" ;
+                $values['comment_status'] = ($struct["mt_allow_comments"] == "open") ? "open" : "closed" ;
             else
-                $_POST['option']['comment_status'] = "closed";
+                $values['comment_status'] = "closed";
+
+            return $values;
         }
 
         public function pingback($post, $to, $from, $title, $excerpt) {
