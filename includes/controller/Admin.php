@@ -206,8 +206,11 @@
             if (!feather_enabled($_POST['feather']))
                 show_404(__("Not Found"), __("Feather not found."));
 
-            if (!isset($_POST['draft']) and !$visitor->group->can("add_post"))
-                $_POST['draft'] = "true";
+            if (isset($_POST['draft']) and $visitor->group->can("add_draft"))
+                $_POST['status'] = "draft";
+
+            if (!$visitor->group->can("add_post"))
+                $_POST['status'] = "draft";
 
             $post = Feathers::$instances[$_POST['feather']]->submit();
 
@@ -252,11 +255,11 @@
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to update a post."), null, 400);
 
-            if (!isset($_POST['draft']) and !$visitor->group->can("add_post"))
-                $_POST['draft'] = "true";
-
             if (isset($_POST['publish']) and $visitor->group->can("add_post"))
                 $_POST['status'] = "public";
+
+            if (!$visitor->group->can("add_post"))
+                $_POST['status'] = "draft";
 
             $post = new Post($_POST['id'], array("drafts" => true));
 
@@ -372,7 +375,27 @@
                     $post->status_name = join(", ", $group_names);
                     $post->status_class = join(" ", $group_classes);
                 } else {
-                    $post->status_name = camelize($post->status, true);
+                    switch ($post->status) {
+                        case 'draft':
+                            $post->status_name = __("Draft", "admin");
+                            break;
+
+                        case 'public':
+                            $post->status_name = __("Public", "admin");
+                            break;
+
+                        case 'private':
+                            $post->status_name = __("Private", "admin");
+                            break;
+
+                        case 'registered_only':
+                            $post->status_name = __("All registered users", "admin");
+                            break;
+
+                        default:
+                            $post->status_name = camelize($post->status, true);
+                    }
+
                     $post->status_class = $post->status;
                 }
             }
@@ -423,7 +446,8 @@
                               $_POST['parent_id'],
                               $public,
                               $listed,
-                              $list_order);
+                              $list_order,
+                              sanitize($_POST['slug']));
 
             Flash::notice(__("Page created!"), $page->url());
         }
@@ -477,6 +501,7 @@
             fallback($_POST['parent_id'], 0);
             fallback($_POST['status'], "public");
             fallback($_POST['list_priority'], 0);
+            fallback($_POST['slug'], $page->clean);
 
             $public = in_array($_POST['status'], array("listed", "public"));
             $listed = in_array($_POST['status'], array("listed", "teased"));
@@ -488,7 +513,8 @@
                                   $_POST['parent_id'],
                                   $public,
                                   $listed,
-                                  $list_order);
+                                  $list_order,
+                                  sanitize($_POST['slug']));
 
             Flash::notice(__("Page updated.").' <a href="'.$page->url().'">'.__("View page &rarr;").'</a>', "manage_pages");
         }
@@ -1480,7 +1506,7 @@
                                       Post::check_url(unfix((string) $chyrp->url)),
                                       unfix((string) $chyrp->feather),
                                       (!$user->no_results) ? $user->id : $visitor->id,
-                                      (int) (bool) unfix((string) $chyrp->pinned),
+                                      (bool) unfix((string) $chyrp->pinned),
                                       unfix((string) $chyrp->status),
                                       datetime((string) $entry->published),
                                       ($updated) ? datetime((string) $entry->updated) : null,
@@ -1507,8 +1533,8 @@
                                       unfix((string) $entry->content),
                                       (!$user->no_results) ? $user->id : $visitor->id,
                                       (int) unfix((string) $attr->parent_id),
-                                      (int) (bool) unfix((string) $chyrp->public),
-                                      (int) (bool) unfix((string) $chyrp->show_in_list),
+                                      (bool) unfix((string) $chyrp->public),
+                                      (bool) unfix((string) $chyrp->show_in_list),
                                       (int) unfix((string) $chyrp->list_order),
                                       unfix((string) $chyrp->clean),
                                       Page::check_url(unfix((string) $chyrp->url)),
