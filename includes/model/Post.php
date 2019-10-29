@@ -199,19 +199,15 @@
                             $options    = array()) {
             $user_id = ($user instanceof User) ? $user->id : $user ;
 
-            fallback($clean,        sanitize(fallback($_POST['slug']), true, true, 80), slug(8));
+            fallback($clean,        slug(8));
             fallback($url,          self::check_url($clean));
-            fallback($feather,      fallback($_POST['feather'], "undefined"));
+            fallback($feather,      "undefined");
             fallback($user_id,      Visitor::current()->id);
-            fallback($pinned,       (int) !empty($_POST['pinned']));
-            fallback($status,       (!empty($_POST['draft'])) ?
-                                        "draft" :
-                                        fallback($_POST['status'], "public"));
-            fallback($created_at,   (!empty($_POST['created_at'])) ?
-                                        datetime($_POST['created_at']) :
-                                        datetime());
+            fallback($pinned,       false);
+            fallback($status,       "draft");
+            fallback($created_at,   datetime());
             fallback($updated_at,   "0000-00-00 00:00:00"); # Model->updated will check this.
-            fallback($options,      fallback($_POST['option'], array()));
+            fallback($options,      array());
 
             $sql = SQL::current();
             $config = Config::current();
@@ -300,21 +296,13 @@
 
             fallback($values,       array_combine($this->attribute_names, $this->attribute_values));
             fallback($user_id,      $this->user_id);
-            fallback($pinned,       (int) !empty($_POST['pinned']));
-            fallback($status,       (!empty($_POST['draft'])) ?
-                                        "draft" :
-                                        fallback($_POST['status'], $this->status));
-            fallback($clean,        (!empty($_POST['slug']) and $_POST['slug'] != $this->clean) ?
-                                        oneof(sanitize($_POST['slug'], true, true, 80), slug(8)) :
-                                        $this->clean);
-            fallback($url,          ($clean != $this->clean) ?
-                                        self::check_url($clean) :
-                                        $this->url);
-            fallback($created_at,   (!empty($_POST['created_at'])) ?
-                                        datetime($_POST['created_at']) :
-                                        $this->created_at);
+            fallback($pinned,       false);
+            fallback($status,       $this->status);
+            fallback($clean,        $this->clean);
+            fallback($url,          ($clean != $this->clean) ? self::check_url($clean) : $this->url);
+            fallback($created_at,   $this->created_at);
             fallback($updated_at,   datetime());
-            fallback($options,      fallback($_POST['option'], array()));
+            fallback($options,      array());
 
             $sql = SQL::current();
             $config = Config::current();
