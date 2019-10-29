@@ -38,11 +38,13 @@
             return $struct;
         }
 
-        public function metaWeblog_editPost_preQuery($struct) {
+        public function metaWeblog_editPost_preQuery($values, $struct) {
             if (isset($struct["categories"][0]))
                 foreach (Category::find() as $category)
                     if ($category->name == $struct["categories"][0])
-                        $_POST['option']['category_id'] = $category->id;
+                        $values['category_id'] = $category->id;
+
+            return $values;
         }
 
         public function metaWeblog_getCategories($struct) {
