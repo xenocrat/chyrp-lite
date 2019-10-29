@@ -34,12 +34,25 @@
             fallback($_POST['name'], "");
             fallback($_POST['description'], "");
             fallback($_POST['slug'], $_POST['name']);
+            fallback($_POST['status'], "public");
+            fallback($_POST['created_at'], datetime());
+            fallback($_POST['option'], array());
 
             $_POST['source'] = add_scheme($_POST['source']);
 
             return Post::add(array("name" => $_POST['name'],
                                    "source" => $_POST['source'],
-                                   "description" => $_POST['description']));
+                                   "description" => $_POST['description']),
+                             sanitize($_POST['slug']),
+                             "",
+                             "link",
+                             null,
+                             !empty($_POST['pinned']),
+                             $_POST['status'],
+                             datetime($_POST['created_at']),
+                             null,
+                             true,
+                             $_POST['option']);
         }
 
         public function update($post) {
@@ -51,12 +64,24 @@
 
             fallback($_POST['name'], "");
             fallback($_POST['description'], "");
+            fallback($_POST['slug'], $post->clean);
+            fallback($_POST['status'], $post->status);
+            fallback($_POST['created_at'], $post->created_at);
+            fallback($_POST['option'], array());
 
             $_POST['source'] = add_scheme($_POST['source']);
 
             return $post->update(array("name" => $_POST['name'],
                                        "source" => $_POST['source'],
-                                       "description" => $_POST['description']));
+                                       "description" => $_POST['description']),
+                                 null,
+                                 !empty($_POST['pinned']),
+                                 $_POST['status'],
+                                 sanitize($_POST['slug']),
+                                 "",
+                                 null,
+                                 null,
+                                 $_POST['option']);
         }
 
         public function title($post) {

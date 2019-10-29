@@ -27,9 +27,22 @@
 
             fallback($_POST['source'], "");
             fallback($_POST['slug'], $_POST['quote']);
+            fallback($_POST['status'], "public");
+            fallback($_POST['created_at'], datetime());
+            fallback($_POST['option'], array());
 
             return Post::add(array("quote" => $_POST['quote'],
-                                   "source" => $_POST['source']));
+                                   "source" => $_POST['source']),
+                             sanitize($_POST['slug']),
+                             "",
+                             "quote",
+                             null,
+                             !empty($_POST['pinned']),
+                             $_POST['status'],
+                             datetime($_POST['created_at']),
+                             null,
+                             true,
+                             $_POST['option']);
         }
 
         public function update($post) {
@@ -37,9 +50,21 @@
                 error(__("Error"), __("Quote can't be empty."), null, 422);
 
             fallback($_POST['source'], "");
+            fallback($_POST['slug'], $post->clean);
+            fallback($_POST['status'], $post->status);
+            fallback($_POST['created_at'], $post->created_at);
+            fallback($_POST['option'], array());
 
             return $post->update(array("quote" => $_POST['quote'],
-                                       "source" => $_POST['source']));
+                                       "source" => $_POST['source']),
+                                 null,
+                                 !empty($_POST['pinned']),
+                                 $_POST['status'],
+                                 sanitize($_POST['slug']),
+                                 "",
+                                 null,
+                                 null,
+                                 $_POST['option']);
         }
 
         public function title($post) {

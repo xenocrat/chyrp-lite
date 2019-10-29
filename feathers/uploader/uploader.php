@@ -67,10 +67,23 @@
             fallback($_POST['title'], "");
             fallback($_POST['caption'], "");
             fallback($_POST['slug'], $_POST['title']);
+            fallback($_POST['status'], "public");
+            fallback($_POST['created_at'], datetime());
+            fallback($_POST['option'], array());
 
             return Post::add(array("filenames" => self::filenames_serialize($filenames),
                                    "caption" => $_POST['caption'],
-                                   "title" => $_POST['title']));
+                                   "title" => $_POST['title']),
+                             sanitize($_POST['slug']),
+                             "",
+                             "uploader",
+                             null,
+                             !empty($_POST['pinned']),
+                             $_POST['status'],
+                             datetime($_POST['created_at']),
+                             null,
+                             true,
+                             $_POST['option']);
         }
 
         public function update($post) {
@@ -99,10 +112,22 @@
 
             fallback($_POST['title'], "");
             fallback($_POST['caption'], "");
+            fallback($_POST['slug'], $post->clean);
+            fallback($_POST['status'], $post->status);
+            fallback($_POST['created_at'], $post->created_at);
+            fallback($_POST['option'], array());
 
             return $post->update(array("filenames" => self::filenames_serialize($filenames),
                                        "caption" => $_POST['caption'],
-                                       "title" => $_POST['title']));
+                                       "title" => $_POST['title']),
+                                 null,
+                                 !empty($_POST['pinned']),
+                                 $_POST['status'],
+                                 sanitize($_POST['slug']),
+                                 "",
+                                 null,
+                                 null,
+                                 $_POST['option']);
         }
 
         public function title($post) {

@@ -24,9 +24,22 @@
 
             fallback($_POST['title'], "");
             fallback($_POST['slug'], $_POST['title']);
+            fallback($_POST['status'], "public");
+            fallback($_POST['created_at'], datetime());
+            fallback($_POST['option'], array());
 
             return Post::add(array("title" => $_POST['title'],
-                                   "body" => $_POST['body']));
+                                   "body" => $_POST['body']),
+                             sanitize($_POST['slug']),
+                             "",
+                             "text",
+                             null,
+                             !empty($_POST['pinned']),
+                             $_POST['status'],
+                             datetime($_POST['created_at']),
+                             null,
+                             true,
+                             $_POST['option']);
         }
 
         public function update($post) {
@@ -34,9 +47,21 @@
                 error(__("Error"), __("Body can't be blank.", "text"), null, 422);
 
             fallback($_POST['title'], "");
+            fallback($_POST['slug'], $post->clean);
+            fallback($_POST['status'], $post->status);
+            fallback($_POST['created_at'], $post->created_at);
+            fallback($_POST['option'], array());
 
             return $post->update(array("title" => $_POST['title'],
-                                       "body" => $_POST['body']));
+                                       "body" => $_POST['body']),
+                                 null,
+                                 !empty($_POST['pinned']),
+                                 $_POST['status'],
+                                 sanitize($_POST['slug']),
+                                 "",
+                                 null,
+                                 null,
+                                 $_POST['option']);
         }
 
         public function title($post) {
