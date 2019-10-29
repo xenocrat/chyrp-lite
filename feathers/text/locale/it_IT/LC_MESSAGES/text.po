@@ -30,6 +30,6 @@ msgstr "Titolo"
 msgid "Body"
 msgstr "Contenuto di testo"
 
-#: feathers/text/text.php:34
+#: feathers/text/text.php:47
 msgid "Body can't be blank."
 msgstr "Il contenuto di testo non può essere vuoto."

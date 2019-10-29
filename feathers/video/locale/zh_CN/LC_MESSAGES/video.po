@@ -43,6 +43,6 @@ msgstr "描述"
 msgid "You did not select a video to upload."
 msgstr "您没有选择上传的视频。"
 
-#: feathers/video/video.php:137
+#: feathers/video/video.php:163
 msgid "Your web browser does not support the <code>video</code> element."
 msgstr "您的浏览器不支持 <code>video</code> 元素。"

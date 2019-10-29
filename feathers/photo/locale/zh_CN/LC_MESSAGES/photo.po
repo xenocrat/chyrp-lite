@@ -15,7 +15,7 @@ msgstr ""
 #. Copyright 2019 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: feathers/photo/admin/help/photo_alt_text.twig:3
-#: feathers/photo/admin/help/photo_alt_text.twig:6 feathers/photo/photo.php:108
+#: feathers/photo/admin/help/photo_alt_text.twig:6 feathers/photo/photo.php:133
 msgid "Alternative Text"
 msgstr "替代文本"
 
@@ -65,6 +65,6 @@ msgstr "标题"
 msgid "You did not select a photo to upload."
 msgstr "您没有选择上传的照片。"
 
-#: feathers/photo/photo.php:114
+#: feathers/photo/photo.php:139
 msgid "Source"
 msgstr "来源"

@@ -341,35 +341,35 @@ msgstr ""
 msgid "Comment #%d"
 msgstr ""
 
-#: modules/comments/comments.php:666
+#: modules/comments/comments.php:668
 msgid "A ping from your URL is already registered."
 msgstr ""
 
-#: modules/comments/comments.php:669
+#: modules/comments/comments.php:671
 msgid "Your URL is too long to be stored in our database."
 msgstr ""
 
-#: modules/comments/comments.php:680
+#: modules/comments/comments.php:682
 msgid "Pingback registered!"
 msgstr ""
 
-#: modules/comments/comments.php:689
+#: modules/comments/comments.php:691
 msgid "Open"
 msgstr ""
 
-#: modules/comments/comments.php:692
+#: modules/comments/comments.php:694
 msgid "Closed"
 msgstr ""
 
-#: modules/comments/comments.php:695
+#: modules/comments/comments.php:697
 msgid "Private"
 msgstr ""
 
-#: modules/comments/comments.php:698
+#: modules/comments/comments.php:700
 msgid "Registered Only"
 msgstr ""
 
-#: modules/comments/comments.php:703
+#: modules/comments/comments.php:705
 msgid "Comment Status"
 msgstr ""
 

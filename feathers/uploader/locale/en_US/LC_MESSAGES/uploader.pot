@@ -39,7 +39,7 @@ msgstr ""
 msgid "You did not select any files to upload."
 msgstr ""
 
-#: feathers/uploader/uploader.php:177
+#: feathers/uploader/uploader.php:202
 msgid "Source"
 msgstr ""
 

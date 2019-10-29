@@ -64,23 +64,23 @@ msgstr "数据库错误： %s"
 msgid "Route was initiated with an invalid Controller."
 msgstr "路由启动了一个无效的控制器。"
 
-#: includes/class/Route.php:99 includes/controller/Admin.php:406
-#: includes/controller/Admin.php:409 includes/controller/Admin.php:467
-#: includes/controller/Admin.php:470 includes/controller/Admin.php:609
-#: includes/controller/Admin.php:614 includes/controller/Admin.php:617
-#: includes/controller/Admin.php:620 includes/controller/Admin.php:626
-#: includes/controller/Admin.php:629 includes/controller/Admin.php:632
-#: includes/controller/Admin.php:707 includes/controller/Admin.php:713
-#: includes/controller/Admin.php:722 includes/controller/Admin.php:730
-#: includes/controller/Admin.php:733 includes/controller/Admin.php:736
-#: includes/controller/Admin.php:903 includes/controller/Admin.php:910
-#: includes/controller/Admin.php:953 includes/controller/Admin.php:961
-#: includes/controller/Admin.php:1036 includes/controller/Admin.php:1051
-#: includes/controller/Admin.php:1064 includes/controller/Admin.php:1319
-#: includes/controller/Admin.php:1698 includes/controller/Admin.php:1742
-#: includes/controller/Admin.php:1827 includes/controller/Admin.php:1830
-#: includes/controller/Admin.php:1833 includes/controller/Admin.php:1836
-#: includes/controller/Admin.php:1839 includes/controller/Admin.php:2029
+#: includes/class/Route.php:99 includes/controller/Admin.php:429
+#: includes/controller/Admin.php:432 includes/controller/Admin.php:491
+#: includes/controller/Admin.php:494 includes/controller/Admin.php:635
+#: includes/controller/Admin.php:640 includes/controller/Admin.php:643
+#: includes/controller/Admin.php:646 includes/controller/Admin.php:652
+#: includes/controller/Admin.php:655 includes/controller/Admin.php:658
+#: includes/controller/Admin.php:733 includes/controller/Admin.php:739
+#: includes/controller/Admin.php:748 includes/controller/Admin.php:756
+#: includes/controller/Admin.php:759 includes/controller/Admin.php:762
+#: includes/controller/Admin.php:929 includes/controller/Admin.php:936
+#: includes/controller/Admin.php:979 includes/controller/Admin.php:987
+#: includes/controller/Admin.php:1062 includes/controller/Admin.php:1077
+#: includes/controller/Admin.php:1090 includes/controller/Admin.php:1345
+#: includes/controller/Admin.php:1724 includes/controller/Admin.php:1768
+#: includes/controller/Admin.php:1853 includes/controller/Admin.php:1856
+#: includes/controller/Admin.php:1859 includes/controller/Admin.php:1862
+#: includes/controller/Admin.php:1865 includes/controller/Admin.php:2055
 #: includes/controller/Ajax.php:32 includes/download.php:12
 #: includes/download.php:15 includes/error.php:144 includes/helpers.php:1736
 #: includes/helpers.php:1742 includes/helpers.php:1745
@@ -105,39 +105,39 @@ msgstr "无效动作。"
 
 #: includes/class/Route.php:106 includes/controller/Admin.php:160
 #: includes/controller/Admin.php:169 includes/controller/Admin.php:201
-#: includes/controller/Admin.php:204 includes/controller/Admin.php:231
-#: includes/controller/Admin.php:250 includes/controller/Admin.php:267
-#: includes/controller/Admin.php:288 includes/controller/Admin.php:299
-#: includes/controller/Admin.php:313 includes/controller/Admin.php:326
-#: includes/controller/Admin.php:389 includes/controller/Admin.php:400
-#: includes/controller/Admin.php:403 includes/controller/Admin.php:437
-#: includes/controller/Admin.php:458 includes/controller/Admin.php:461
-#: includes/controller/Admin.php:502 includes/controller/Admin.php:521
-#: includes/controller/Admin.php:524 includes/controller/Admin.php:564
-#: includes/controller/Admin.php:586 includes/controller/Admin.php:603
-#: includes/controller/Admin.php:606 includes/controller/Admin.php:673
-#: includes/controller/Admin.php:695 includes/controller/Admin.php:704
-#: includes/controller/Admin.php:775 includes/controller/Admin.php:799
-#: includes/controller/Admin.php:802 includes/controller/Admin.php:862
-#: includes/controller/Admin.php:885 includes/controller/Admin.php:897
-#: includes/controller/Admin.php:900 includes/controller/Admin.php:923
-#: includes/controller/Admin.php:944 includes/controller/Admin.php:947
-#: includes/controller/Admin.php:979 includes/controller/Admin.php:1004
-#: includes/controller/Admin.php:1007 includes/controller/Admin.php:1092
-#: includes/controller/Admin.php:1124 includes/controller/Admin.php:1130
-#: includes/controller/Admin.php:1346 includes/controller/Admin.php:1352
-#: includes/controller/Admin.php:1420 includes/controller/Admin.php:1434
-#: includes/controller/Admin.php:1458 includes/controller/Admin.php:1495
-#: includes/controller/Admin.php:1533 includes/controller/Admin.php:1616
-#: includes/controller/Admin.php:1651 includes/controller/Admin.php:1683
-#: includes/controller/Admin.php:1686 includes/controller/Admin.php:1727
-#: includes/controller/Admin.php:1730 includes/controller/Admin.php:1764
-#: includes/controller/Admin.php:1767 includes/controller/Admin.php:1792
-#: includes/controller/Admin.php:1803 includes/controller/Admin.php:1816
-#: includes/controller/Admin.php:1824 includes/controller/Admin.php:1870
-#: includes/controller/Admin.php:1883 includes/controller/Admin.php:1920
-#: includes/controller/Admin.php:1927 includes/controller/Admin.php:1960
-#: includes/controller/Admin.php:1966 includes/controller/Ajax.php:41
+#: includes/controller/Admin.php:204 includes/controller/Admin.php:234
+#: includes/controller/Admin.php:253 includes/controller/Admin.php:270
+#: includes/controller/Admin.php:291 includes/controller/Admin.php:302
+#: includes/controller/Admin.php:316 includes/controller/Admin.php:329
+#: includes/controller/Admin.php:412 includes/controller/Admin.php:423
+#: includes/controller/Admin.php:426 includes/controller/Admin.php:461
+#: includes/controller/Admin.php:482 includes/controller/Admin.php:485
+#: includes/controller/Admin.php:528 includes/controller/Admin.php:547
+#: includes/controller/Admin.php:550 includes/controller/Admin.php:590
+#: includes/controller/Admin.php:612 includes/controller/Admin.php:629
+#: includes/controller/Admin.php:632 includes/controller/Admin.php:699
+#: includes/controller/Admin.php:721 includes/controller/Admin.php:730
+#: includes/controller/Admin.php:801 includes/controller/Admin.php:825
+#: includes/controller/Admin.php:828 includes/controller/Admin.php:888
+#: includes/controller/Admin.php:911 includes/controller/Admin.php:923
+#: includes/controller/Admin.php:926 includes/controller/Admin.php:949
+#: includes/controller/Admin.php:970 includes/controller/Admin.php:973
+#: includes/controller/Admin.php:1005 includes/controller/Admin.php:1030
+#: includes/controller/Admin.php:1033 includes/controller/Admin.php:1118
+#: includes/controller/Admin.php:1150 includes/controller/Admin.php:1156
+#: includes/controller/Admin.php:1372 includes/controller/Admin.php:1378
+#: includes/controller/Admin.php:1446 includes/controller/Admin.php:1460
+#: includes/controller/Admin.php:1484 includes/controller/Admin.php:1521
+#: includes/controller/Admin.php:1559 includes/controller/Admin.php:1642
+#: includes/controller/Admin.php:1677 includes/controller/Admin.php:1709
+#: includes/controller/Admin.php:1712 includes/controller/Admin.php:1753
+#: includes/controller/Admin.php:1756 includes/controller/Admin.php:1790
+#: includes/controller/Admin.php:1793 includes/controller/Admin.php:1818
+#: includes/controller/Admin.php:1829 includes/controller/Admin.php:1842
+#: includes/controller/Admin.php:1850 includes/controller/Admin.php:1896
+#: includes/controller/Admin.php:1909 includes/controller/Admin.php:1946
+#: includes/controller/Admin.php:1953 includes/controller/Admin.php:1986
+#: includes/controller/Admin.php:1992 includes/controller/Ajax.php:41
 #: includes/controller/Ajax.php:52 includes/controller/Ajax.php:64
 #: includes/controller/Ajax.php:67 includes/controller/Ajax.php:87
 #: includes/controller/Ajax.php:90 includes/controller/Ajax.php:125
@@ -186,7 +186,7 @@ msgid "You do not have sufficient privileges to view this area."
 msgstr "您没有足够的权限查看此区域。"
 
 #: includes/controller/Admin.php:169 includes/controller/Admin.php:201
-#: includes/controller/Admin.php:1458 includes/controller/Ajax.php:90
+#: includes/controller/Admin.php:1484 includes/controller/Ajax.php:90
 #: includes/lib/XMLRPC.php:176 includes/lib/XMLRPC.php:237
 msgid "You do not have sufficient privileges to add posts."
 msgstr "您没有足够的权限增加帖子。"
@@ -196,34 +196,34 @@ msgid "You must enable at least one feather in order to write a post."
 msgstr "您必须启用至少一个羽毛才能撰写帖子。"
 
 #: includes/controller/Admin.php:180 includes/controller/Admin.php:207
-#: includes/controller/Admin.php:264 includes/controller/Admin.php:310
-#: includes/controller/Admin.php:475 includes/controller/Admin.php:535
-#: includes/controller/Admin.php:646 includes/controller/Admin.php:718
-#: includes/controller/Admin.php:748 includes/controller/Admin.php:813
-#: includes/controller/Admin.php:966 includes/controller/Admin.php:987
-#: includes/controller/Admin.php:1018 includes/controller/Admin.php:1701
-#: includes/controller/Admin.php:1745 includes/controller/Ajax.php:49
+#: includes/controller/Admin.php:267 includes/controller/Admin.php:313
+#: includes/controller/Admin.php:499 includes/controller/Admin.php:561
+#: includes/controller/Admin.php:672 includes/controller/Admin.php:744
+#: includes/controller/Admin.php:774 includes/controller/Admin.php:839
+#: includes/controller/Admin.php:992 includes/controller/Admin.php:1013
+#: includes/controller/Admin.php:1044 includes/controller/Admin.php:1727
+#: includes/controller/Admin.php:1771 includes/controller/Ajax.php:49
 #: includes/controller/Ajax.php:75 includes/download.php:24
 #: includes/helpers.php:97 includes/thumbnail.php:44
 msgid "Not Found"
 msgstr "未找到"
 
 #: includes/controller/Admin.php:180 includes/controller/Admin.php:207
-#: includes/lib/XMLRPC.php:350
+#: includes/lib/XMLRPC.php:349
 msgid "Feather not found."
 msgstr "羽毛未找到。"
 
-#: includes/controller/Admin.php:204 includes/controller/Admin.php:250
-#: includes/controller/Admin.php:299 includes/controller/Admin.php:403
-#: includes/controller/Admin.php:461 includes/controller/Admin.php:524
-#: includes/controller/Admin.php:606 includes/controller/Admin.php:695
-#: includes/controller/Admin.php:802 includes/controller/Admin.php:900
-#: includes/controller/Admin.php:947 includes/controller/Admin.php:1007
-#: includes/controller/Admin.php:1130 includes/controller/Admin.php:1352
-#: includes/controller/Admin.php:1686 includes/controller/Admin.php:1730
-#: includes/controller/Admin.php:1767 includes/controller/Admin.php:1803
-#: includes/controller/Admin.php:1824 includes/controller/Admin.php:1883
-#: includes/controller/Admin.php:1927 includes/controller/Admin.php:1966
+#: includes/controller/Admin.php:204 includes/controller/Admin.php:253
+#: includes/controller/Admin.php:302 includes/controller/Admin.php:426
+#: includes/controller/Admin.php:485 includes/controller/Admin.php:550
+#: includes/controller/Admin.php:632 includes/controller/Admin.php:721
+#: includes/controller/Admin.php:828 includes/controller/Admin.php:926
+#: includes/controller/Admin.php:973 includes/controller/Admin.php:1033
+#: includes/controller/Admin.php:1156 includes/controller/Admin.php:1378
+#: includes/controller/Admin.php:1712 includes/controller/Admin.php:1756
+#: includes/controller/Admin.php:1793 includes/controller/Admin.php:1829
+#: includes/controller/Admin.php:1850 includes/controller/Admin.php:1909
+#: includes/controller/Admin.php:1953 includes/controller/Admin.php:1992
 #: includes/controller/Ajax.php:41 includes/controller/Ajax.php:67
 #: includes/controller/Ajax.php:87 includes/controller/Ajax.php:125
 #: includes/controller/Main.php:439 includes/controller/Main.php:566
@@ -231,530 +231,530 @@ msgstr "羽毛未找到。"
 msgid "Invalid authentication token."
 msgstr "无效的认证令牌。"
 
-#: includes/controller/Admin.php:214
+#: includes/controller/Admin.php:217
 msgid "Post created!"
 msgstr "帖子已创建！"
 
-#: includes/controller/Admin.php:223 includes/controller/Admin.php:253
-#: includes/controller/Admin.php:280 includes/controller/Admin.php:302
-#: includes/controller/Admin.php:440 includes/controller/Admin.php:464
-#: includes/controller/Admin.php:505 includes/controller/Admin.php:527
-#: includes/controller/Admin.php:676 includes/controller/Admin.php:698
-#: includes/controller/Admin.php:778 includes/controller/Admin.php:805
-#: includes/controller/Admin.php:926 includes/controller/Admin.php:950
-#: includes/controller/Admin.php:982 includes/controller/Admin.php:1010
+#: includes/controller/Admin.php:226 includes/controller/Admin.php:256
+#: includes/controller/Admin.php:283 includes/controller/Admin.php:305
+#: includes/controller/Admin.php:464 includes/controller/Admin.php:488
+#: includes/controller/Admin.php:531 includes/controller/Admin.php:553
+#: includes/controller/Admin.php:702 includes/controller/Admin.php:724
+#: includes/controller/Admin.php:804 includes/controller/Admin.php:831
+#: includes/controller/Admin.php:952 includes/controller/Admin.php:976
+#: includes/controller/Admin.php:1008 includes/controller/Admin.php:1036
 #: includes/controller/Ajax.php:44 includes/controller/Ajax.php:70
 msgid "No ID Specified"
 msgstr "未指定ID"
 
-#: includes/controller/Admin.php:223
+#: includes/controller/Admin.php:226
 msgid "An ID is required to edit a post."
 msgstr "编辑帖子需要ID。"
 
-#: includes/controller/Admin.php:228 includes/controller/Admin.php:264
-#: includes/controller/Admin.php:285 includes/controller/Admin.php:310
+#: includes/controller/Admin.php:231 includes/controller/Admin.php:267
+#: includes/controller/Admin.php:288 includes/controller/Admin.php:313
 #: includes/controller/Ajax.php:49 includes/lib/XMLRPC.php:210
-#: includes/lib/XMLRPC.php:321 includes/lib/XMLRPC.php:376
+#: includes/lib/XMLRPC.php:319 includes/lib/XMLRPC.php:377
 msgid "Post not found."
 msgstr "帖子未找到。"
 
-#: includes/controller/Admin.php:231 includes/controller/Admin.php:267
-#: includes/lib/XMLRPC.php:213 includes/lib/XMLRPC.php:324
+#: includes/controller/Admin.php:234 includes/controller/Admin.php:270
+#: includes/lib/XMLRPC.php:213 includes/lib/XMLRPC.php:322
 msgid "You do not have sufficient privileges to edit this post."
 msgstr "您没有足够的权限编辑这个帖子。"
 
-#: includes/controller/Admin.php:253
+#: includes/controller/Admin.php:256
 msgid "An ID is required to update a post."
 msgstr "更新帖子需要ID。"
 
-#: includes/controller/Admin.php:271
+#: includes/controller/Admin.php:274
 msgid "Post updated."
 msgstr "帖子已更新。"
 
-#: includes/controller/Admin.php:271
+#: includes/controller/Admin.php:274
 msgid "View post &rarr;"
 msgstr "查看帖子 &rarr;"
 
-#: includes/controller/Admin.php:280 includes/controller/Admin.php:302
+#: includes/controller/Admin.php:283 includes/controller/Admin.php:305
 #: includes/controller/Ajax.php:44
 msgid "An ID is required to delete a post."
 msgstr "删除帖子需要ID。"
 
-#: includes/controller/Admin.php:288 includes/controller/Admin.php:313
-#: includes/controller/Ajax.php:52 includes/lib/XMLRPC.php:379
+#: includes/controller/Admin.php:291 includes/controller/Admin.php:316
+#: includes/controller/Ajax.php:52 includes/lib/XMLRPC.php:380
 msgid "You do not have sufficient privileges to delete this post."
 msgstr "您没有足够的权限删除这个帖子。"
 
-#: includes/controller/Admin.php:317 includes/controller/Ajax.php:55
+#: includes/controller/Admin.php:320 includes/controller/Ajax.php:55
 msgid "Post deleted."
 msgstr "帖子已删除。"
 
-#: includes/controller/Admin.php:326
+#: includes/controller/Admin.php:329
 msgid "You do not have sufficient privileges to manage any posts."
 msgstr "您没有足够的权限管理任何帖子。"
 
-#: includes/controller/Admin.php:389 includes/controller/Admin.php:400
-#: includes/controller/Admin.php:1495 includes/controller/Ajax.php:128
+#: includes/controller/Admin.php:412 includes/controller/Admin.php:423
+#: includes/controller/Admin.php:1521 includes/controller/Ajax.php:128
 msgid "You do not have sufficient privileges to add pages."
 msgstr "您没有足够的权限增加页面。"
 
-#: includes/controller/Admin.php:406 includes/controller/Admin.php:467
+#: includes/controller/Admin.php:429 includes/controller/Admin.php:491
 msgid "Title cannot be blank."
 msgstr "标题不能为空。"
 
-#: includes/controller/Admin.php:409 includes/controller/Admin.php:470
+#: includes/controller/Admin.php:432 includes/controller/Admin.php:494
 msgid "Body cannot be blank."
 msgstr "正文不能为空。"
 
-#: includes/controller/Admin.php:428
+#: includes/controller/Admin.php:452
 msgid "Page created!"
 msgstr "页面已创建！"
 
-#: includes/controller/Admin.php:437
+#: includes/controller/Admin.php:461
 msgid "You do not have sufficient privileges to edit this page."
 msgstr "您没有足够的权限编辑这个页面。"
 
-#: includes/controller/Admin.php:440 includes/controller/Admin.php:464
+#: includes/controller/Admin.php:464 includes/controller/Admin.php:488
 msgid "An ID is required to edit a page."
 msgstr "编辑页面需要ID。"
 
-#: includes/controller/Admin.php:445 includes/controller/Admin.php:475
-#: includes/controller/Admin.php:510 includes/controller/Admin.php:535
+#: includes/controller/Admin.php:469 includes/controller/Admin.php:499
+#: includes/controller/Admin.php:536 includes/controller/Admin.php:561
 #: includes/controller/Ajax.php:75
 msgid "Page not found."
 msgstr "页面未找到。"
 
-#: includes/controller/Admin.php:458
+#: includes/controller/Admin.php:482
 msgid "You do not have sufficient privileges to edit pages."
 msgstr "您没有足够的权限编辑页面。"
 
-#: includes/controller/Admin.php:493
+#: includes/controller/Admin.php:519
 msgid "Page updated."
 msgstr "页面已更新。"
 
-#: includes/controller/Admin.php:493 includes/controller/Admin.php:1987
+#: includes/controller/Admin.php:519 includes/controller/Admin.php:2013
 msgid "View page &rarr;"
 msgstr "查看页面 &rarr;"
 
-#: includes/controller/Admin.php:502 includes/controller/Admin.php:521
+#: includes/controller/Admin.php:528 includes/controller/Admin.php:547
 #: includes/controller/Ajax.php:64
 msgid "You do not have sufficient privileges to delete pages."
 msgstr "您没有足够的权限删除页面。"
 
-#: includes/controller/Admin.php:505 includes/controller/Admin.php:527
+#: includes/controller/Admin.php:531 includes/controller/Admin.php:553
 #: includes/controller/Ajax.php:70
 msgid "An ID is required to delete a page."
 msgstr "删除页面需要ID。"
 
-#: includes/controller/Admin.php:553 includes/controller/Ajax.php:78
+#: includes/controller/Admin.php:579 includes/controller/Ajax.php:78
 msgid "Page deleted."
 msgstr "页面已删除。"
 
-#: includes/controller/Admin.php:564
+#: includes/controller/Admin.php:590
 msgid "You do not have sufficient privileges to manage pages."
 msgstr "您没有足够的权限管理页面。"
 
-#: includes/controller/Admin.php:586 includes/controller/Admin.php:603
-#: includes/controller/Admin.php:1434
+#: includes/controller/Admin.php:612 includes/controller/Admin.php:629
+#: includes/controller/Admin.php:1460
 msgid "You do not have sufficient privileges to add users."
 msgstr "您没有足够的权限增加用户。"
 
-#: includes/controller/Admin.php:609 includes/controller/Admin.php:707
+#: includes/controller/Admin.php:635 includes/controller/Admin.php:733
 msgid "Please enter a username for the account."
 msgstr "请输入账户的用户名。"
 
-#: includes/controller/Admin.php:614 includes/controller/Admin.php:713
+#: includes/controller/Admin.php:640 includes/controller/Admin.php:739
 #: includes/controller/Main.php:447
 msgid "That username is already in use."
 msgstr "用户名已被使用。"
 
-#: includes/controller/Admin.php:617 includes/controller/Main.php:450
+#: includes/controller/Admin.php:643 includes/controller/Main.php:450
 #: install.php:550
 msgid "Passwords cannot be blank."
 msgstr "密码不能为空。"
 
-#: includes/controller/Admin.php:620 includes/controller/Admin.php:722
+#: includes/controller/Admin.php:646 includes/controller/Admin.php:748
 #: includes/controller/Main.php:452 includes/controller/Main.php:627
 #: install.php:484 install.php:552
 msgid "Passwords do not match."
 msgstr "密码不匹配。"
 
-#: includes/controller/Admin.php:623 includes/controller/Admin.php:724
+#: includes/controller/Admin.php:649 includes/controller/Admin.php:750
 msgid "Please consider setting a stronger password for this user."
 msgstr "请考虑为这个用户设置一个更强的密码。"
 
-#: includes/controller/Admin.php:626 includes/controller/Admin.php:730
-#: includes/controller/Admin.php:1827 includes/controller/Main.php:457
+#: includes/controller/Admin.php:652 includes/controller/Admin.php:756
+#: includes/controller/Admin.php:1853 includes/controller/Main.php:457
 #: includes/controller/Main.php:632 install.php:555
 msgid "Email address cannot be blank."
 msgstr "邮件地址不能为空。"
 
-#: includes/controller/Admin.php:629 includes/controller/Admin.php:733
-#: includes/controller/Admin.php:1830 includes/controller/Main.php:459
+#: includes/controller/Admin.php:655 includes/controller/Admin.php:759
+#: includes/controller/Admin.php:1856 includes/controller/Main.php:459
 #: includes/controller/Main.php:634 install.php:557
 msgid "Invalid email address."
 msgstr "无效的邮件地址。"
 
-#: includes/controller/Admin.php:632 includes/controller/Admin.php:736
+#: includes/controller/Admin.php:658 includes/controller/Admin.php:762
 #: includes/controller/Main.php:465 includes/controller/Main.php:637
 msgid "Invalid website URL."
 msgstr "无效的网站URL。"
 
-#: includes/controller/Admin.php:646 includes/controller/Admin.php:748
-#: includes/controller/Admin.php:931 includes/controller/Admin.php:966
-#: includes/controller/Admin.php:987 includes/controller/Admin.php:1018
+#: includes/controller/Admin.php:672 includes/controller/Admin.php:774
+#: includes/controller/Admin.php:957 includes/controller/Admin.php:992
+#: includes/controller/Admin.php:1013 includes/controller/Admin.php:1044
 msgid "Group not found."
 msgstr "组未找到。"
 
-#: includes/controller/Admin.php:664
+#: includes/controller/Admin.php:690
 msgid "User added."
 msgstr "用户已增加。"
 
-#: includes/controller/Admin.php:673 includes/controller/Admin.php:704
+#: includes/controller/Admin.php:699 includes/controller/Admin.php:730
 msgid "You do not have sufficient privileges to edit users."
 msgstr "您没有足够的权限编辑用户。"
 
-#: includes/controller/Admin.php:676 includes/controller/Admin.php:698
+#: includes/controller/Admin.php:702 includes/controller/Admin.php:724
 msgid "An ID is required to edit a user."
 msgstr "编辑用户需要ID。"
 
-#: includes/controller/Admin.php:681 includes/controller/Admin.php:718
-#: includes/controller/Admin.php:783 includes/controller/Admin.php:813
+#: includes/controller/Admin.php:707 includes/controller/Admin.php:744
+#: includes/controller/Admin.php:809 includes/controller/Admin.php:839
 msgid "User not found."
 msgstr "用户未找到。"
 
-#: includes/controller/Admin.php:766
+#: includes/controller/Admin.php:792
 msgid "User updated."
 msgstr "用户已更新。"
 
-#: includes/controller/Admin.php:775 includes/controller/Admin.php:799
+#: includes/controller/Admin.php:801 includes/controller/Admin.php:825
 msgid "You do not have sufficient privileges to delete users."
 msgstr "您没有足够的权限删除用户。"
 
-#: includes/controller/Admin.php:778 includes/controller/Admin.php:805
+#: includes/controller/Admin.php:804 includes/controller/Admin.php:831
 msgid "An ID is required to delete a user."
 msgstr "删除用户需要ID。"
 
-#: includes/controller/Admin.php:786
+#: includes/controller/Admin.php:812
 msgid "You cannot delete your own account."
 msgstr "您不能删除您自己的账户。"
 
-#: includes/controller/Admin.php:822 includes/controller/Admin.php:838
-#: includes/controller/Admin.php:1026 includes/controller/Admin.php:1047
-#: includes/controller/Admin.php:1060 includes/controller/Admin.php:1935
-#: includes/controller/Admin.php:1940
+#: includes/controller/Admin.php:848 includes/controller/Admin.php:864
+#: includes/controller/Admin.php:1052 includes/controller/Admin.php:1073
+#: includes/controller/Admin.php:1086 includes/controller/Admin.php:1961
+#: includes/controller/Admin.php:1966
 msgid "Gone"
 msgstr "前往"
 
-#: includes/controller/Admin.php:822
+#: includes/controller/Admin.php:848
 msgid "New owner for posts does not exist."
 msgstr "新帖子的所有者不存在。"
 
-#: includes/controller/Admin.php:838
+#: includes/controller/Admin.php:864
 msgid "New owner for pages does not exist."
 msgstr "新页面的所有者不存在。"
 
-#: includes/controller/Admin.php:851
+#: includes/controller/Admin.php:877
 msgid "User deleted."
 msgstr "用户已删除。"
 
-#: includes/controller/Admin.php:862
+#: includes/controller/Admin.php:888
 msgid "You do not have sufficient privileges to manage users."
 msgstr "您没有足够的权限管理用户。"
 
-#: includes/controller/Admin.php:885 includes/controller/Admin.php:897
-#: includes/controller/Admin.php:1420
+#: includes/controller/Admin.php:911 includes/controller/Admin.php:923
+#: includes/controller/Admin.php:1446
 msgid "You do not have sufficient privileges to add groups."
 msgstr "您没有足够的权限添加组。"
 
-#: includes/controller/Admin.php:903 includes/controller/Admin.php:953
+#: includes/controller/Admin.php:929 includes/controller/Admin.php:979
 msgid "Please enter a name for the group."
 msgstr "请输入组名。"
 
-#: includes/controller/Admin.php:910 includes/controller/Admin.php:961
+#: includes/controller/Admin.php:936 includes/controller/Admin.php:987
 msgid "That group name is already in use."
 msgstr "这个组名已经被使用。"
 
-#: includes/controller/Admin.php:914
+#: includes/controller/Admin.php:940
 msgid "Group added."
 msgstr "组已增加。"
 
-#: includes/controller/Admin.php:923 includes/controller/Admin.php:944
+#: includes/controller/Admin.php:949 includes/controller/Admin.php:970
 msgid "You do not have sufficient privileges to edit groups."
 msgstr "您没有足够的权限编辑组。"
 
-#: includes/controller/Admin.php:926 includes/controller/Admin.php:950
+#: includes/controller/Admin.php:952 includes/controller/Admin.php:976
 msgid "An ID is required to edit a group."
 msgstr "编辑组需要ID。"
 
-#: includes/controller/Admin.php:970
+#: includes/controller/Admin.php:996
 msgid "Group updated."
 msgstr "组已更新。"
 
-#: includes/controller/Admin.php:979 includes/controller/Admin.php:1004
+#: includes/controller/Admin.php:1005 includes/controller/Admin.php:1030
 msgid "You do not have sufficient privileges to delete groups."
 msgstr "您没有足够的权限删除组。"
 
-#: includes/controller/Admin.php:982 includes/controller/Admin.php:1010
+#: includes/controller/Admin.php:1008 includes/controller/Admin.php:1036
 msgid "An ID is required to delete a group."
 msgstr "删除组需要ID。"
 
-#: includes/controller/Admin.php:990
+#: includes/controller/Admin.php:1016
 msgid "You cannot delete your own group."
 msgstr "您不能删除您自己的组。"
 
-#: includes/controller/Admin.php:1026
+#: includes/controller/Admin.php:1052
 msgid "New member group does not exist."
 msgstr "新成员组不存在。"
 
-#: includes/controller/Admin.php:1036
+#: includes/controller/Admin.php:1062
 msgid "New member group must be specified."
 msgstr "新成员组必须被自定。"
 
-#: includes/controller/Admin.php:1047 includes/controller/Admin.php:1935
+#: includes/controller/Admin.php:1073 includes/controller/Admin.php:1961
 msgid "New default group does not exist."
 msgstr "新的默认组不存在。"
 
-#: includes/controller/Admin.php:1051
+#: includes/controller/Admin.php:1077
 msgid "New default group must be specified."
 msgstr "新的默认组必须被指定。"
 
-#: includes/controller/Admin.php:1060 includes/controller/Admin.php:1940
+#: includes/controller/Admin.php:1086 includes/controller/Admin.php:1966
 msgid "New guest group does not exist."
 msgstr "新的访问组不存在。"
 
-#: includes/controller/Admin.php:1064
+#: includes/controller/Admin.php:1090
 msgid "New guest group must be specified."
 msgstr "新的访问组必须被指定。"
 
-#: includes/controller/Admin.php:1081
+#: includes/controller/Admin.php:1107
 msgid "Group deleted."
 msgstr "组已删除。"
 
-#: includes/controller/Admin.php:1092
+#: includes/controller/Admin.php:1118
 msgid "You do not have sufficient privileges to manage groups."
 msgstr "您没有足够的权限管理组。"
 
-#: includes/controller/Admin.php:1124
+#: includes/controller/Admin.php:1150
 msgid "You do not have sufficient privileges to export content."
 msgstr "您没有足够的权限导出内容。"
 
-#: includes/controller/Admin.php:1309
+#: includes/controller/Admin.php:1335
 msgid "You did not select anything to export."
 msgstr "您没有选择任何导出的东西。"
 
-#: includes/controller/Admin.php:1319
+#: includes/controller/Admin.php:1345
 #, php-format
 msgid "Failed to export files because of ZipArchive error %d."
 msgstr "导出失败，原因：ZipArchive error %d."
 
-#: includes/controller/Admin.php:1346
+#: includes/controller/Admin.php:1372
 msgid "You do not have sufficient privileges to import content."
 msgstr "您没有足够的权限导入内容。"
 
-#: includes/controller/Admin.php:1358
+#: includes/controller/Admin.php:1384
 msgid "Posts export file is invalid."
 msgstr "帖子导出的文件无效。"
 
-#: includes/controller/Admin.php:1365
+#: includes/controller/Admin.php:1391
 msgid "Pages export file is invalid."
 msgstr "页面导出的文件无效。"
 
-#: includes/controller/Admin.php:1372
+#: includes/controller/Admin.php:1398
 msgid "Groups export file is invalid."
 msgstr "组导出的文件无效。"
 
-#: includes/controller/Admin.php:1379
+#: includes/controller/Admin.php:1405
 msgid "Users export file is invalid."
 msgstr "用户导出的文件无效。"
 
-#: includes/controller/Admin.php:1400
+#: includes/controller/Admin.php:1426
 msgid "You did not select anything to import."
 msgstr "您没有选择任何要导入的东西。"
 
-#: includes/controller/Admin.php:1524
+#: includes/controller/Admin.php:1550
 msgid "Chyrp Lite content successfully imported!"
 msgstr "Chyrp Lite 内容成功导入！"
 
-#: includes/controller/Admin.php:1533 includes/controller/Admin.php:1616
-#: includes/controller/Admin.php:1683 includes/controller/Admin.php:1727
+#: includes/controller/Admin.php:1559 includes/controller/Admin.php:1642
+#: includes/controller/Admin.php:1709 includes/controller/Admin.php:1753
 msgid "You do not have sufficient privileges to toggle extensions."
 msgstr "您没有足够的权限切换扩展。"
 
-#: includes/controller/Admin.php:1651 includes/controller/Admin.php:1764
-#: includes/controller/Admin.php:1792 includes/controller/Admin.php:1816
-#: includes/controller/Admin.php:1870 includes/controller/Admin.php:1920
-#: includes/controller/Admin.php:1960
+#: includes/controller/Admin.php:1677 includes/controller/Admin.php:1790
+#: includes/controller/Admin.php:1818 includes/controller/Admin.php:1842
+#: includes/controller/Admin.php:1896 includes/controller/Admin.php:1946
+#: includes/controller/Admin.php:1986
 msgid "You do not have sufficient privileges to change settings."
 msgstr "您没有足够的权限改变设置。"
 
-#: includes/controller/Admin.php:1654
+#: includes/controller/Admin.php:1680
 msgid "You are currently previewing a theme."
 msgstr "您目前正在预览主题。"
 
-#: includes/controller/Admin.php:1655
+#: includes/controller/Admin.php:1681
 msgid "Stop &rarr;"
 msgstr "停止 &rarr;"
 
-#: includes/controller/Admin.php:1689 includes/controller/Admin.php:1733
+#: includes/controller/Admin.php:1715 includes/controller/Admin.php:1759
 msgid "No Extension Specified"
 msgstr "没有指定扩展"
 
-#: includes/controller/Admin.php:1689
+#: includes/controller/Admin.php:1715
 msgid "You did not specify an extension to enable."
 msgstr "您没有指定要启用的扩展。"
 
-#: includes/controller/Admin.php:1698
+#: includes/controller/Admin.php:1724
 msgid "Extension already enabled."
 msgstr "扩展已启用。"
 
-#: includes/controller/Admin.php:1701 includes/controller/Admin.php:1745
+#: includes/controller/Admin.php:1727 includes/controller/Admin.php:1771
 msgid "Extension not found."
 msgstr "扩展未找到。"
 
-#: includes/controller/Admin.php:1715
+#: includes/controller/Admin.php:1741
 msgid "Extension enabled."
 msgstr "扩展已启用。"
 
-#: includes/controller/Admin.php:1733
+#: includes/controller/Admin.php:1759
 msgid "You did not specify an extension to disable."
 msgstr "您没有指定要停用的扩展。"
 
-#: includes/controller/Admin.php:1742
+#: includes/controller/Admin.php:1768
 msgid "Extension already disabled."
 msgstr "扩展已禁用。"
 
-#: includes/controller/Admin.php:1755
+#: includes/controller/Admin.php:1781
 msgid "Extension disabled."
 msgstr "扩展已禁用。"
 
-#: includes/controller/Admin.php:1770
+#: includes/controller/Admin.php:1796
 msgid "No Theme Specified"
 msgstr "没有指定主题"
 
-#: includes/controller/Admin.php:1770
+#: includes/controller/Admin.php:1796
 msgid "You did not specify which theme to select."
 msgstr "您没有指定要选择哪个主题。"
 
-#: includes/controller/Admin.php:1783
+#: includes/controller/Admin.php:1809
 msgid "Theme changed."
 msgstr "主题已更改。"
 
-#: includes/controller/Admin.php:1799
+#: includes/controller/Admin.php:1825
 msgid "Preview stopped."
 msgstr "预览已停止。"
 
-#: includes/controller/Admin.php:1807
+#: includes/controller/Admin.php:1833
 msgid "Preview started."
 msgstr "预览已开始。"
 
-#: includes/controller/Admin.php:1833 install.php:533
+#: includes/controller/Admin.php:1859 install.php:533
 msgid "Chyrp URL cannot be blank."
 msgstr "Chyrp URL 不能为空。"
 
-#: includes/controller/Admin.php:1836 install.php:535
+#: includes/controller/Admin.php:1862 install.php:535
 msgid "Invalid Chyrp URL."
 msgstr "无效的Chyrp URL。"
 
-#: includes/controller/Admin.php:1839
+#: includes/controller/Admin.php:1865
 msgid "Invalid canonical URL."
 msgstr "无效的规范URL。"
 
-#: includes/controller/Admin.php:1861 includes/controller/Admin.php:1911
-#: includes/controller/Admin.php:1951 includes/controller/Admin.php:2000
+#: includes/controller/Admin.php:1887 includes/controller/Admin.php:1937
+#: includes/controller/Admin.php:1977 includes/controller/Admin.php:2026
 msgid "Settings updated."
 msgstr "设置已更新。"
 
-#: includes/controller/Admin.php:1979
+#: includes/controller/Admin.php:2005
 msgid "My Awesome Homepage"
 msgstr "我最棒的主页"
 
-#: includes/controller/Admin.php:1980
+#: includes/controller/Admin.php:2006
 msgid "Nothing here yet!"
 msgstr "然而这里什么也没有！"
 
-#: includes/controller/Admin.php:1987
+#: includes/controller/Admin.php:2013
 msgid "Page created."
 msgstr "页面已创建。"
 
-#: includes/controller/Admin.php:2009 includes/controller/Main.php:562
+#: includes/controller/Admin.php:2035 includes/controller/Main.php:562
 msgid "You are already logged in."
 msgstr "您已登陆。"
 
-#: includes/controller/Admin.php:2029 includes/controller/Ajax.php:32
+#: includes/controller/Admin.php:2055 includes/controller/Ajax.php:32
 #: includes/download.php:15 includes/thumbnail.php:18
 msgid "Missing argument."
 msgstr "缺少参数。"
 
-#: includes/controller/Admin.php:2033
+#: includes/controller/Admin.php:2059
 msgid "Help"
 msgstr "帮助"
 
-#: includes/controller/Admin.php:2046
+#: includes/controller/Admin.php:2072
 msgid "Write"
 msgstr "写作"
 
-#: includes/controller/Admin.php:2047
+#: includes/controller/Admin.php:2073
 msgid "Manage"
 msgstr "管理所有"
 
-#: includes/controller/Admin.php:2048
+#: includes/controller/Admin.php:2074
 msgid "Settings"
 msgstr "设置"
 
-#: includes/controller/Admin.php:2049
+#: includes/controller/Admin.php:2075
 msgid "Extend"
 msgstr "扩展"
 
-#: includes/controller/Admin.php:2059
+#: includes/controller/Admin.php:2085
 msgid "Page"
 msgstr "页面"
 
-#: includes/controller/Admin.php:2086
+#: includes/controller/Admin.php:2112
 msgid "Posts"
 msgstr "所有帖子"
 
-#: includes/controller/Admin.php:2090
+#: includes/controller/Admin.php:2116
 msgid "Pages"
 msgstr "所有页面"
 
-#: includes/controller/Admin.php:2094 includes/controller/Admin.php:2122
+#: includes/controller/Admin.php:2120 includes/controller/Admin.php:2148
 msgid "Users"
 msgstr "用户"
 
-#: includes/controller/Admin.php:2098
+#: includes/controller/Admin.php:2124
 msgid "Groups"
 msgstr "所有组"
 
-#: includes/controller/Admin.php:2104
+#: includes/controller/Admin.php:2130
 msgid "Import"
 msgstr "导入"
 
-#: includes/controller/Admin.php:2107
+#: includes/controller/Admin.php:2133
 msgid "Export"
 msgstr "导出"
 
-#: includes/controller/Admin.php:2120
+#: includes/controller/Admin.php:2146
 msgid "General"
 msgstr "通用"
 
-#: includes/controller/Admin.php:2121
+#: includes/controller/Admin.php:2147
 msgid "Content"
 msgstr "内容"
 
-#: includes/controller/Admin.php:2123
+#: includes/controller/Admin.php:2149
 msgid "Routes"
 msgstr "路由"
 
-#: includes/controller/Admin.php:2139
+#: includes/controller/Admin.php:2165
 msgid "Modules"
 msgstr "模块"
 
-#: includes/controller/Admin.php:2140
+#: includes/controller/Admin.php:2166
 msgid "Feathers"
 msgstr "羽毛"
 
-#: includes/controller/Admin.php:2141
+#: includes/controller/Admin.php:2167
 msgid "Themes"
 msgstr "主题"
 
@@ -854,7 +854,7 @@ msgstr "您不能重设密码，因为您已登陆。"
 msgid "We have emailed you a new password."
 msgstr "我们已经通过电子邮件发送给您新密码。"
 
-#: includes/controller/Main.php:575 includes/lib/XMLRPC.php:417
+#: includes/controller/Main.php:575 includes/lib/XMLRPC.php:418
 msgid "Incorrect username and/or password."
 msgstr "不正确的用户名或者密码。"
 
@@ -1138,7 +1138,7 @@ msgstr "您的页面不能被解析。"
 msgid "Your page does not link to our page."
 msgstr "您的页面没有链接到我们的页面。"
 
-#: includes/lib/XMLRPC.php:414
+#: includes/lib/XMLRPC.php:415
 msgid "XML-RPC support is disabled for this site."
 msgstr "这个站点禁用XML-RPC支持。"
 

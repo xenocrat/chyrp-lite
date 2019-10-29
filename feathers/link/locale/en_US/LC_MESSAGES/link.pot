@@ -22,12 +22,12 @@ msgid "Description"
 msgstr ""
 
 #: feathers/link/link.php:29
-#: feathers/link/link.php:47
+#: feathers/link/link.php:60
 msgid "URL can't be empty."
 msgstr ""
 
 #: feathers/link/link.php:32
-#: feathers/link/link.php:50
+#: feathers/link/link.php:63
 msgid "Invalid URL."
 msgstr ""
 
