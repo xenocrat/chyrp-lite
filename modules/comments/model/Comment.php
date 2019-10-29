@@ -416,7 +416,7 @@
                                        post_id INTEGER DEFAULT 0,
                                        user_id INTEGER DEFAULT 0,
                                        parent_id INTEGER DEFAULT 0,
-                                       notify BOOLEAN DEFAULT '0',
+                                       notify BOOLEAN DEFAULT FALSE,
                                        created_at DATETIME DEFAULT NULL,
                                        updated_at DATETIME DEFAULT NULL
                                    ) DEFAULT CHARSET=utf8");
