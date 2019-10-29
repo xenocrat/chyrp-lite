@@ -245,9 +245,8 @@
 
             $trigger = Trigger::current();
             $struct = $args[3];
-            $pings = ($struct["mt_allow_pings"] == "open");
-            $slug = oneof(sanitize($struct["mt_basename"], true, true, 80), slug(8));
-            $created_at = oneof($this->convertFromDateCreated($struct), datetime());
+            $values = array("title" => $struct["title"],
+                            "body" => oneof($struct["description"], "Lorem ipsum dolor sit amet."));
 
             # Support for extended content.
             if (isset($struct["mt_text_more"]))
@@ -268,11 +267,12 @@
                     $status = "public";
             }
 
-            $status = ($user->group->can("add_post")) ? $status : "draft" ;
-            $values = array("title" => $struct["title"],
-                            "body" => oneof($struct["description"], "Lorem ipsum dolor sit amet."));
+            $slug = oneof(sanitize($struct["mt_basename"], true, true, 80), slug(8));
+            $status = $user->group->can("add_post") ? $status : "draft" ;
+            $pings = ($struct["mt_allow_pings"] == "open");
+            $created_at = oneof($this->convertFromDateCreated($struct), datetime());
 
-            $trigger->call("metaWeblog_newPost_preQuery", $struct);
+            $trigger->filter($values, "metaWeblog_newPost_preQuery", $struct);
 
             $post = Post::add($values,
                               $slug,
@@ -307,8 +307,6 @@
             $trigger = Trigger::current();
             $struct = $args[3];
             $values = array();
-            $slug = oneof(sanitize($struct["mt_basename"], true, true, 80), $post->clean);
-            $updated_at = oneof($this->convertFromDateCreated($struct), $post->created_at);
 
             # Support for extended content.
             if (isset($struct["mt_text_more"]))
@@ -341,13 +339,16 @@
                     $status = $post->status;
             }
 
-            $status = ($user->group->can("edit_own_post", "edit_post")) ? $status : $post->status ;
+            $slug = oneof(sanitize($struct["mt_basename"], true, true, 80), $post->clean);
+            $status = $user->group->can("add_post") ? $status : $post->status ;
+            $updated_at = oneof($this->convertFromDateCreated($struct), $post->created_at);
 
-            $trigger->call("metaWeblog_editPost_preQuery", $struct, $post);
             $trigger->filter($values, "metaWeblog_editValues", $struct, $post);
 
             if (empty($values))
                 return new IXR_Error(404, __("Feather not found."));
+
+            $trigger->filter($values, "metaWeblog_editPost_preQuery", $struct, $post);
 
             $post = $post->update($values,
                                   null,
