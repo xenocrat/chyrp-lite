@@ -97,33 +97,22 @@
             return $assoc;
         }
 
-        public function add_post($post) {
-            $tags = self::prepare_tags(fallback($_POST['tags'], ""));
-
-            if (empty($tags))
+        public function before_add_post_attributes($attributes) {
+            if (!isset($_POST['tags']))
                 return;
 
-            SQL::current()->insert("post_attributes",
-                                   array("name" => "tags",
-                                         "value" => self::tags_serialize($tags),
-                                         "post_id" => $post->id));
+            $tags = self::prepare_tags($_POST['tags']);
+            $attributes["tags"] = self::tags_serialize($tags);
+            return $attributes;
         }
 
-        public function update_post($post) {
-            $tags = self::prepare_tags(fallback($_POST['tags'], ""));
-
-            if (empty($tags)) {
-                SQL::current()->delete("post_attributes",
-                                       array("name" => "tags",
-                                             "post_id" => $post->id));
+        public function before_update_post_attributes($attributes) {
+            if (!isset($_POST['tags']))
                 return;
-            }
 
-            SQL::current()->replace("post_attributes",
-                                    array("post_id", "name"),
-                                    array("name" => "tags",
-                                          "value" => self::tags_serialize($tags),
-                                          "post_id" => $post->id));
+            $tags = self::prepare_tags($_POST['tags']);
+            $attributes["tags"] = self::tags_serialize($tags);
+            return $attributes;
         }
 
         public function post_options($fields, $post = null) {
@@ -435,16 +424,18 @@
 
         public function metaWeblog_getPost($struct, $post) {
             if (!empty($post->tags))
-                $struct['mt_keywords'] = array_keys($post->tags);
+                $struct['mt_keywords'] = implode(", ", array_keys($post->tags));
 
             return $struct;
         }
 
-        public function metaWeblog_editPost_preQuery($struct, $post = null) {
-            if (isset($struct["mt_keywords"]))
-                $_POST['tags'] = implode(", ", (array) $struct["mt_keywords"]);
-            else
-                $_POST['tags'] = isset($post->tags) ? implode(", ", array_keys($post->tags)) : "" ;
+        public function metaWeblog_editPost_preQuery($values, $struct) {
+            if (isset($struct["mt_keywords"])) {
+                $tags = self::prepare_tags($struct["mt_keywords"]);
+                $values["tags"] = self::tags_serialize($tags);
+            }
+
+            return $values;
         }
 
         public function related_posts($ids, $post, $limit) {
