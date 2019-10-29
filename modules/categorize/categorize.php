@@ -28,7 +28,8 @@
 
         public function feed_item($post, $feed) {
             if (!empty($post->category))
-                $feed->category($post->category->clean, url("category", MainController::current()), $post->category->name);
+                $feed->category($post->category->clean,
+                                url("category", MainController::current()), $post->category->name);
         }
 
         public function metaWeblog_getPost($struct, $post) {
@@ -39,11 +40,17 @@
         }
 
         public function metaWeblog_editPost_preQuery($values, $struct) {
-            if (isset($struct["categories"][0]))
-                foreach (Category::find() as $category)
-                    if ($category->name == $struct["categories"][0])
-                        $values['category_id'] = $category->id;
+            $category_id = 0;
 
+            if (isset($struct["categories"][0])) {
+                foreach (Category::find() as $category)
+                    if ($category->name == $struct["categories"][0]) {
+                        $category_id = $category->id;
+                        break;
+                    }
+            }
+
+            $values['category_id'] = $category_id;
             return $values;
         }
 
