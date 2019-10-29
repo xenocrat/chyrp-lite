@@ -1105,8 +1105,8 @@ Target:
 	$categories
 
 
-metaWeblog_newPost_preQuery
----------------------------
+metaWeblog_before_newPost
+-------------------------
 Called from:
 	includes/lib/XMLRPC.php on line 275
 
@@ -1129,8 +1129,8 @@ Arguments:
 	$struct, $post
 
 
-metaWeblog_editPost_preQuery
-----------------------------
+metaWeblog_before_editPost
+--------------------------
 Called from:
 	includes/lib/XMLRPC.php on line 351
 
