@@ -232,6 +232,8 @@
             $attribute_values = array_values($attributes);
             $attribute_names  = array_keys($attributes);
 
+            $trigger->filter($attributes, "before_add_post_attributes");
+
             # Insert the post attributes.
             foreach ($attributes as $name => $value)
                 $sql->insert("post_attributes",
@@ -325,6 +327,8 @@
             $attributes       = array_merge($values, $options);
             $attribute_values = array_values($attributes);
             $attribute_names  = array_keys($attributes);
+
+            $trigger->filter($attributes, "before_update_post_attributes");
 
             # Replace the post attributes.
             foreach ($attributes as $name => $value)
