@@ -228,11 +228,12 @@
 
             $id = $sql->latest("posts");
 
-            $attributes       = array_merge($values, $options);
-            $attribute_values = array_values($attributes);
-            $attribute_names  = array_keys($attributes);
+            $attributes = array_merge($values, $options);
 
             $trigger->filter($attributes, "before_add_post_attributes");
+
+            $attribute_values = array_values($attributes);
+            $attribute_names = array_keys($attributes);
 
             # Insert the post attributes.
             foreach ($attributes as $name => $value)
@@ -324,11 +325,12 @@
                          array("id" => $this->id),
                          $new_values);
 
-            $attributes       = array_merge($values, $options);
-            $attribute_values = array_values($attributes);
-            $attribute_names  = array_keys($attributes);
+            $attributes = array_merge($values, $options);
 
             $trigger->filter($attributes, "before_update_post_attributes");
+
+            $attribute_values = array_values($attributes);
+            $attribute_names = array_keys($attributes);
 
             # Replace the post attributes.
             foreach ($attributes as $name => $value)
