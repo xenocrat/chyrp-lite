@@ -5,7 +5,7 @@
         public function __init() {
             fallback($_SESSION['comments'], array());
 
-            $this->addAlias("metaWeblog_newPost_preQuery", "metaWeblog_editPost_preQuery");
+            $this->addAlias("metaWeblog_before_newPost", "metaWeblog_before_editPost");
         }
 
         static function __install() {
@@ -649,7 +649,7 @@
             return $struct;
         }
 
-        public function metaWeblog_editPost_preQuery($values, $struct) {
+        public function metaWeblog_before_editPost($values, $struct) {
             if (isset($struct["mt_allow_comments"]))
                 $values['comment_status'] = ($struct["mt_allow_comments"] == "open") ? "open" : "closed" ;
             else

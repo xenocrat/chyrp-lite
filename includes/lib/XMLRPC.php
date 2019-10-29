@@ -272,7 +272,7 @@
             $pings = ($struct["mt_allow_pings"] == "open");
             $created_at = oneof($this->convertFromDateCreated($struct), datetime());
 
-            $trigger->filter($values, "metaWeblog_newPost_preQuery", $struct);
+            $trigger->filter($values, "metaWeblog_before_newPost", $struct);
 
             $post = Post::add($values,
                               $slug,
@@ -348,7 +348,7 @@
             if (empty($values))
                 return new IXR_Error(404, __("Feather not found."));
 
-            $trigger->filter($values, "metaWeblog_editPost_preQuery", $struct, $post);
+            $trigger->filter($values, "metaWeblog_before_editPost", $struct, $post);
 
             $post = $post->update($values,
                                   null,

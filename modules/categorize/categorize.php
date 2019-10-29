@@ -3,7 +3,7 @@
 
     class Categorize extends Modules {
         public function __init() {
-            $this->addAlias("metaWeblog_newPost_preQuery", "metaWeblog_editPost_preQuery");
+            $this->addAlias("metaWeblog_before_newPost", "metaWeblog_before_editPost");
         }
 
         static function __install() {
@@ -39,7 +39,7 @@
             return $struct;
         }
 
-        public function metaWeblog_editPost_preQuery($values, $struct) {
+        public function metaWeblog_before_editPost($values, $struct) {
             $category_id = 0;
 
             if (isset($struct["categories"][0])) {
