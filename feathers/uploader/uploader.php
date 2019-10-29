@@ -221,6 +221,7 @@
             if ($post->feather != "uploader")
                 return;
 
+            $values["filenames"] = self::filenames_serialize($post->filenames);
             $values["title"] = $struct["title"];
             $values["caption"] = $struct["description"];
 

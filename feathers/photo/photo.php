@@ -159,6 +159,7 @@
                 return;
 
             $values["title"] = $struct["title"];
+            $values["filename"] = $post->filename;
             $values["caption"] = $struct["description"];
 
             return $values;
