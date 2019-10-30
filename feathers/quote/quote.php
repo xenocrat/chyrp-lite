@@ -18,7 +18,7 @@
             $this->setFilter("source", array("markup_post_text", "markup_text"));
 
             $this->respondTo("metaWeblog_getPost", "metaWeblog_getValues");
-            $this->respondTo("metaWeblog_editValues", "metaWeblog_setValues");
+            $this->respondTo("metaWeblog_before_editPost", "metaWeblog_setValues");
         }
 
         public function submit() {

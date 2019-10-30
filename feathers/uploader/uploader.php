@@ -29,7 +29,7 @@
             $this->respondTo("filter_post","filter_post");
             $this->respondTo("post_options", "add_option");
             $this->respondTo("metaWeblog_getPost", "metaWeblog_getValues");
-            $this->respondTo("metaWeblog_editValues", "metaWeblog_setValues");
+            $this->respondTo("metaWeblog_before_editPost", "metaWeblog_setValues");
         }
 
         private function filenames_serialize($files) {
