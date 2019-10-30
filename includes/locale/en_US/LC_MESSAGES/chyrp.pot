@@ -295,7 +295,6 @@ msgstr ""
 
 #: includes/controller/Admin.php:180
 #: includes/controller/Admin.php:207
-#: includes/lib/XMLRPC.php:349
 msgid "Feather not found."
 msgstr ""
 
@@ -368,7 +367,7 @@ msgstr ""
 #: includes/controller/Ajax.php:49
 #: includes/lib/XMLRPC.php:210
 #: includes/lib/XMLRPC.php:319
-#: includes/lib/XMLRPC.php:377
+#: includes/lib/XMLRPC.php:372
 msgid "Post not found."
 msgstr ""
 
@@ -400,7 +399,7 @@ msgstr ""
 #: includes/controller/Admin.php:291
 #: includes/controller/Admin.php:316
 #: includes/controller/Ajax.php:52
-#: includes/lib/XMLRPC.php:380
+#: includes/lib/XMLRPC.php:375
 msgid "You do not have sufficient privileges to delete this post."
 msgstr ""
 
@@ -1045,7 +1044,7 @@ msgid "We have emailed you a new password."
 msgstr ""
 
 #: includes/controller/Main.php:575
-#: includes/lib/XMLRPC.php:418
+#: includes/lib/XMLRPC.php:413
 msgid "Incorrect username and/or password."
 msgstr ""
 
@@ -1334,7 +1333,7 @@ msgstr ""
 msgid "Your page does not link to our page."
 msgstr ""
 
-#: includes/lib/XMLRPC.php:415
+#: includes/lib/XMLRPC.php:410
 msgid "XML-RPC support is disabled for this site."
 msgstr ""
 

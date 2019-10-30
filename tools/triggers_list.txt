@@ -401,7 +401,7 @@ Arguments:
 metaWeblog_editPost
 -------------------
 Called from:
-	includes/lib/XMLRPC.php on line 361
+	includes/lib/XMLRPC.php on line 356
 
 Arguments:
 	$struct, $post
@@ -1117,22 +1117,10 @@ Arguments:
 	$struct
 
 
-metaWeblog_editValues
----------------------
-Called from:
-	includes/lib/XMLRPC.php on line 346
-
-Target:
-	$values
-
-Arguments:
-	$struct, $post
-
-
 metaWeblog_before_editPost
 --------------------------
 Called from:
-	includes/lib/XMLRPC.php on line 351
+	includes/lib/XMLRPC.php on line 346
 
 Target:
 	$values

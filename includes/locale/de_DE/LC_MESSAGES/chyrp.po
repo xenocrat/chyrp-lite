@@ -211,7 +211,6 @@ msgid "Not Found"
 msgstr "Nicht gefunden"
 
 #: includes/controller/Admin.php:180 includes/controller/Admin.php:207
-#: includes/lib/XMLRPC.php:349
 msgid "Feather not found."
 msgstr "Feather nicht gefunden."
 
@@ -256,7 +255,7 @@ msgstr "Zum Bearbeiten eines Posts wird eine ID benötigt."
 #: includes/controller/Admin.php:231 includes/controller/Admin.php:267
 #: includes/controller/Admin.php:288 includes/controller/Admin.php:313
 #: includes/controller/Ajax.php:49 includes/lib/XMLRPC.php:210
-#: includes/lib/XMLRPC.php:319 includes/lib/XMLRPC.php:377
+#: includes/lib/XMLRPC.php:319 includes/lib/XMLRPC.php:372
 msgid "Post not found."
 msgstr "Post nicht gefunden."
 
@@ -283,7 +282,7 @@ msgid "An ID is required to delete a post."
 msgstr "Zum Löschen eines Posts muss eine ID angegeben werden."
 
 #: includes/controller/Admin.php:291 includes/controller/Admin.php:316
-#: includes/controller/Ajax.php:52 includes/lib/XMLRPC.php:380
+#: includes/controller/Ajax.php:52 includes/lib/XMLRPC.php:375
 msgid "You do not have sufficient privileges to delete this post."
 msgstr "Du verfügst nicht über die Berechtigung diesen Post zu löschen."
 
@@ -861,7 +860,7 @@ msgstr ""
 msgid "We have emailed you a new password."
 msgstr "Wir haben Dir ein neues Passwort geschickt."
 
-#: includes/controller/Main.php:575 includes/lib/XMLRPC.php:418
+#: includes/controller/Main.php:575 includes/lib/XMLRPC.php:413
 msgid "Incorrect username and/or password."
 msgstr "Benutzername und/oder Passwort nicht korrekt."
 
@@ -1154,7 +1153,7 @@ msgstr "Deine Seite konnte nicht geparst werden."
 msgid "Your page does not link to our page."
 msgstr "Deine Seite verlinkt nicht auf unsere."
 
-#: includes/lib/XMLRPC.php:415
+#: includes/lib/XMLRPC.php:410
 msgid "XML-RPC support is disabled for this site."
 msgstr "XML-RPC Unterstützung ist auf dieser Seite deaktiviert."
 
