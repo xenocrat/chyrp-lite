@@ -343,11 +343,6 @@
             $status = $user->group->can("add_post") ? $status : $post->status ;
             $updated_at = oneof($this->convertFromDateCreated($struct), $post->created_at);
 
-            $trigger->filter($values, "metaWeblog_editValues", $struct, $post);
-
-            if (empty($values))
-                return new IXR_Error(404, __("Feather not found."));
-
             $trigger->filter($values, "metaWeblog_before_editPost", $struct, $post);
 
             $post = $post->update($values,
