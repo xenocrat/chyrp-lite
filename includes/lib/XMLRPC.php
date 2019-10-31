@@ -246,7 +246,7 @@
             $trigger = Trigger::current();
             $struct = $args[3];
             $values = array("title" => $struct["title"],
-                            "body" => oneof($struct["description"], "Lorem ipsum dolor sit amet."));
+                            "body" => oneof($struct["description"], __("Nothing here yet!")));
 
             # Support for extended content.
             if (isset($struct["mt_text_more"]))
