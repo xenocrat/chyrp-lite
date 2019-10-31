@@ -13,10 +13,15 @@
 
             Config::current()->set("module_comments",
                                    array("default_comment_status" => "denied",
-                                         "allowed_comment_html" => array("strong", "em", "blockquote", "code", "pre", "a"),
                                          "comments_per_page" => 25,
                                          "auto_reload_comments" => 30,
-                                         "enable_reload_comments" => false));
+                                         "enable_reload_comments" => false,
+                                         "allowed_comment_html" => array("strong",
+                                                                         "em",
+                                                                         "blockquote",
+                                                                         "code",
+                                                                         "pre",
+                                                                         "a")));
 
             Group::add_permission("add_comment", "Add Comments");
             Group::add_permission("add_comment_private", "Add Comments to Private Posts");
@@ -79,7 +84,8 @@
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
-                error(__("No ID Specified"), __("An ID is required to add a comment.", "comments"), null, 400);
+                error(__("No ID Specified"),
+                      __("An ID is required to add a comment.", "comments"), null, 400);
 
             $post = new Post($_POST['post_id'], array("drafts" => true));
 
@@ -132,7 +138,8 @@
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to update a comment.", "comments"), null, 400);
+                error(__("No ID Specified"),
+                      __("An ID is required to update a comment.", "comments"), null, 400);
 
             $comment = new Comment($_POST['id']);
 
@@ -140,7 +147,8 @@
                 show_404(__("Not Found"), __("Comment not found.", "comments"));
 
             if (!$comment->editable())
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to edit this comment.", "comments"));
 
             fallback($_POST['created_at']);
             fallback($_POST['status'], $comment->status);
@@ -211,7 +219,8 @@
 
         public function admin_edit_comment($admin) {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to edit a comment.", "comments"), null, 400);
+                error(__("No ID Specified"),
+                      __("An ID is required to edit a comment.", "comments"), null, 400);
 
             $comment = new Comment($_GET['id'], array("filter" => false));
 
@@ -219,14 +228,16 @@
                 Flash::warning(__("Comment not found.", "comments"), "manage_comments");
 
             if (!$comment->editable())
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to edit this comment.", "comments"));
 
             $admin->display("pages".DIR."edit_comment", array("comment" => $comment));
         }
 
         public function admin_delete_comment($admin) {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a comment.", "comments"), null, 400);
+                error(__("No ID Specified"),
+                      __("An ID is required to delete a comment.", "comments"), null, 400);
 
             $comment = new Comment($_GET['id']);
 
@@ -234,7 +245,8 @@
                 Flash::warning(__("Comment not found.", "comments"), "manage_comments");
 
             if (!$comment->deletable())
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this comment.", "comments"));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to delete this comment.", "comments"));
 
             $admin->display("pages".DIR."delete_comment", array("comment" => $comment));
         }
@@ -244,7 +256,8 @@
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a comment.", "comments"), null, 400);
+                error(__("No ID Specified"),
+                      __("An ID is required to delete a comment.", "comments"), null, 400);
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
                 redirect("manage_comments");
@@ -255,7 +268,8 @@
                 show_404(__("Not Found"), __("Comment not found.", "comments"));
 
             if (!$comment->deletable())
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this comment.", "comments"));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to delete this comment.", "comments"));
 
             Comment::delete($comment->id);
 
@@ -265,7 +279,8 @@
 
         public function admin_manage_comments($admin) {
             if (!Comment::any_editable() and !Comment::any_deletable())
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to manage any comments.", "comments"));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to manage any comments.", "comments"));
 
             # Redirect searches to a clean URL or dirty GET depending on configuration.
             if (isset($_POST['query']))
@@ -281,17 +296,17 @@
             if (!$visitor->group->can("edit_comment", "delete_comment", true))
                 $where["user_id"] = $visitor->id;
 
-            $admin->display("pages".DIR."manage_comments",
-                            array("comments" => new Paginator(Comment::find(array("placeholders" => true,
-                                                                                  "where" => $where,
-                                                                                  "params" => $params,
-                                                                                  "order" => "post_id DESC, created_at ASC")),
-                                                              $admin->post_limit)));
+            $admin->display("pages".DIR."manage_comments", array("comments" => new Paginator(
+                Comment::find(array("placeholders" => true,
+                                    "where" => $where,
+                                    "params" => $params,
+                                    "order" => "post_id DESC, created_at ASC")), $admin->post_limit)));
         }
 
         public function admin_manage_spam($admin) {
             if (!Visitor::current()->group->can("edit_comment", "delete_comment", true))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to manage any comments.", "comments"));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to manage any comments.", "comments"));
 
             # Redirect searches to a clean URL or dirty GET depending on configuration.
             if (isset($_POST['query']))
@@ -302,12 +317,11 @@
 
             $where["status"] = "spam";
 
-            $admin->display("pages".DIR."manage_spam",
-                            array("comments" => new Paginator(Comment::find(array("placeholders" => true,
-                                                                                  "where" => $where,
-                                                                                  "params" => $params,
-                                                                                  "order" => "post_id DESC, created_at ASC")),
-                                                              $admin->post_limit)));
+            $admin->display("pages".DIR."manage_spam", array("comments" => new Paginator(
+                Comment::find(array("placeholders" => true,
+                                    "where" => $where,
+                                    "params" => $params,
+                                    "order" => "post_id DESC, created_at ASC")), $admin->post_limit)));
         }
 
         public function admin_bulk_comments() {
@@ -403,9 +417,10 @@
             if (empty($_POST))
                 return $admin->display("pages".DIR."comment_settings",
                                        array("comments_html" => $allowed_comment_html,
-                                             "comments_status" => array("approved" => __("Approved", "comments"),
-                                                                        "denied"   => __("Denied", "comments"),
-                                                                        "spam"     => __("Spam", "comments"))));
+                                             "comments_status" => array(
+                                             "approved" => __("Approved", "comments"),
+                                             "denied"   => __("Denied", "comments"),
+                                             "spam"     => __("Spam", "comments"))));
 
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
@@ -472,7 +487,8 @@
         }
 
         public function manage_posts_column($post) {
-            echo '<td class="post_comments value"><a href="'.$post->url().'#comments">'.$post->comment_count.'</a></td>';
+            echo '<td class="post_comments value"><a href="'.$post->url().
+                 '#comments">'.$post->comment_count.'</a></td>';
         }
 
         public function manage_users_column_header() {
@@ -485,7 +501,8 @@
 
         public function ajax_reload_comments() {
             if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
-                error(__("No ID Specified"), __("An ID is required to reload comments.", "comments"), null, 400);
+                error(__("No ID Specified"),
+                      __("An ID is required to reload comments.", "comments"), null, 400);
 
             $post = new Post($_POST['post_id'], array("drafts" => true));
 
@@ -498,13 +515,14 @@
             $ids = array();
 
             if ($post->latest_comment > $last) {
-                $times = SQL::current()->select("comments",
-                                                array("id", "created_at"),
-                                                array("post_id" => $post->id,
-                                                      "created_at >" => $last,
-                                                      "status not" => "spam",
-                                                      Comment::redactions()),
-                                                array("created_at ASC"));
+                $times = SQL::current()->select(
+                    "comments",
+                    array("id", "created_at"),
+                    array("post_id" => $post->id,
+                          "created_at >" => $last,
+                          "status not" => "spam",
+                          Comment::redactions()),
+                    array("created_at ASC"));
 
                 while ($row = $times->fetchObject()) {
                     $ids[] = $row->id;
@@ -517,7 +535,8 @@
 
         public function ajax_show_comment() {
             if (empty($_POST['comment_id']) or !is_numeric($_POST['comment_id']))
-                error(__("Error"), __("An ID is required to show a comment.", "comments"), null, 400);
+                error(__("Error"),
+                      __("An ID is required to show a comment.", "comments"), null, 400);
 
             $comment = new Comment($_POST['comment_id']);
 
@@ -533,7 +552,8 @@
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['comment_id']) or !is_numeric($_POST['comment_id']))
-                error(__("Error"), __("An ID is required to edit a comment.", "comments"), null, 400);
+                error(__("Error"),
+                      __("An ID is required to edit a comment.", "comments"), null, 400);
 
             $comment = new Comment($_POST['comment_id'], array("filter" => false));
 
@@ -541,7 +561,8 @@
                 show_404(__("Not Found"), __("Comment not found.", "comments"));
 
             if (!$comment->editable())
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this comment.", "comments"));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to edit this comment.", "comments"));
 
             $main = MainController::current();
             $main->display("forms".DIR."comment".DIR."edit", array("comment" => $comment));
@@ -552,7 +573,8 @@
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("Error"), __("An ID is required to delete a comment.", "comments"), null, 400);
+                error(__("Error"),
+                      __("An ID is required to delete a comment.", "comments"), null, 400);
 
             $comment = new Comment($_POST['id']);
 
@@ -560,7 +582,8 @@
                 show_404(__("Not Found"), __("Comment not found.", "comments"));
 
             if (!$comment->deletable())
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this comment.", "comments"));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to delete this comment.", "comments"));
 
             Comment::delete($comment->id);
             json_response(__("Comment deleted.", "comments"), true);
@@ -575,12 +598,15 @@
                 $post = $main->context["post"];
 
                 if (!$post->no_results) {
-                    $feed_url = ($config->clean_urls) ? rtrim($post->url(), "/")."/feed/" : $post->url()."&amp;feed" ;
-                    $title = _f("Comments on &#8220;%s&#8221;", oneof($post->title(), ucfirst($post->feather)), "comments");
+                    $feed_url = ($config->clean_urls) ?
+                        rtrim($post->url(), "/")."/feed/" : $post->url()."&amp;feed" ;
+
+                    $text = oneof($post->title(), ucfirst($post->feather));
+                    $title = _f("Comments on &#8220;%s&#8221;", $text, "comments");
 
                     $links[] = array("href" => $feed_url,
-                                 "type" => BlogFeed::type(),
-                                 "title" => $title);
+                                     "type" => BlogFeed::type(),
+                                     "title" => $title);
                 }
             }
 
@@ -613,7 +639,8 @@
             $post = $context["post"];
             $comments = $post->comments;
             $latest_timestamp = 0;
-            $title = _f("Comments on &#8220;%s&#8221;", oneof($post->title(), ucfirst($post->feather)), "comments");
+            $text = oneof($post->title(), ucfirst($post->feather));
+            $title = _f("Comments on &#8220;%s&#8221;", $text, "comments");
 
             foreach ($comments as $comment)
                 if (strtotime($comment->created_at) > $latest_timestamp)
@@ -688,18 +715,20 @@
         }
 
         public function post_options($fields, $post = null) {
-            $statuses = array(array("name" => __("Open", "comments"),
-                                    "value" => "open",
-                                    "selected" => ($post ? $post->comment_status == "open" : true)),
-                              array("name" => __("Closed", "comments"),
-                                    "value" => "closed",
-                                    "selected" => ($post ? $post->comment_status == "closed" : false)),
-                              array("name" => __("Private", "comments"),
-                                    "value" => "private",
-                                    "selected" => ($post ? $post->comment_status == "private" : false)),
-                              array("name" => __("Registered Only", "comments"),
-                                    "value" => "registered_only",
-                                    "selected" => ($post ? $post->comment_status == "registered_only" : false)));
+            $statuses = array(
+                array("name" => __("Open", "comments"),
+                      "value" => "open",
+                      "selected" => ($post ? $post->comment_status == "open" : true)),
+                array("name" => __("Closed", "comments"),
+                      "value" => "closed",
+                      "selected" => ($post ? $post->comment_status == "closed" : false)),
+                array("name" => __("Private", "comments"),
+                      "value" => "private",
+                      "selected" => ($post ? $post->comment_status == "private" : false)),
+                array("name" => __("Registered Only", "comments"),
+                      "value" => "registered_only",
+                      "selected" => ($post ? $post->comment_status == "registered_only" : false))
+            );
 
             $fields[] = array("attr" => "option[comment_status]",
                               "label" => __("Comment Status", "comments"),
@@ -795,7 +824,8 @@
         }
 
         public function visitor_comment_count_attr($attr, $visitor) {
-            return ($visitor->id == 0) ? count($_SESSION['comments']) : self::user_comment_count_attr($attr, $visitor) ;
+            return ($visitor->id == 0) ?
+                count($_SESSION['comments']) : self::user_comment_count_attr($attr, $visitor) ;
         }
 
         public function import_chyrp_post($entry, $post) {

@@ -41,7 +41,8 @@
 
         public function admin_edit_pingback($admin) {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to edit a pingback.", "pingable"), null, 400);
+                error(__("No ID Specified"),
+                      __("An ID is required to edit a pingback.", "pingable"), null, 400);
 
             $pingback = new Pingback($_GET['id']);
 
@@ -49,7 +50,8 @@
                 Flash::warning(__("Pingback not found.", "pingable"), "manage_pingbacks");
 
             if (!$pingback->editable())
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this pingback.", "pingable"));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to edit this pingback.", "pingable"));
 
             $admin->display("pages".DIR."edit_pingback", array("pingback" => $pingback));
         }
@@ -59,10 +61,12 @@
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to update a pingback.", "pingable"), null, 400);
+                error(__("No ID Specified"),
+                      __("An ID is required to update a pingback.", "pingable"), null, 400);
 
             if (empty($_POST['title']))
-                error(__("No Title Specified", "pingable"), __("A title is required to update a pingback.", "pingable"), null, 400);
+                error(__("No Title Specified", "pingable"),
+                      __("A title is required to update a pingback.", "pingable"), null, 400);
 
             $pingback = new Pingback($_POST['id']);
 
@@ -70,7 +74,8 @@
                 show_404(__("Not Found"), __("Pingback not found.", "pingable"));
 
             if (!$pingback->editable())
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this pingback.", "pingable"));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to edit this pingback.", "pingable"));
 
             $pingback = $pingback->update($_POST['title']);
 
@@ -79,7 +84,8 @@
 
         public function admin_delete_pingback($admin) {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a pingback.", "pingable"), null, 400);
+                error(__("No ID Specified"),
+                      __("An ID is required to delete a pingback.", "pingable"), null, 400);
 
             $pingback = new Pingback($_GET['id']);
 
@@ -87,7 +93,8 @@
                 Flash::warning(__("Pingback not found.", "pingable"), "manage_pingbacks");
 
             if (!$pingback->deletable())
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this pingback.", "pingable"));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to delete this pingback.", "pingable"));
 
             $admin->display("pages".DIR."delete_pingback", array("pingback" => $pingback));
         }
@@ -97,7 +104,8 @@
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a pingback.", "pingable"), null, 400);
+                error(__("No ID Specified"),
+                      __("An ID is required to delete a pingback.", "pingable"), null, 400);
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
                 redirect("manage_pingbacks");
@@ -108,7 +116,8 @@
                 show_404(__("Not Found"), __("Pingback not found.", "pingable"));
 
             if (!$pingback->deletable())
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this pingback.", "pingable"));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to delete this pingback.", "pingable"));
 
             Pingback::delete($pingback->id);
 
@@ -117,7 +126,8 @@
 
         public function admin_manage_pingbacks($admin) {
             if (!Visitor::current()->group->can("edit_pingback", "delete_pingback"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to manage pingbacks.", "pingable"));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to manage pingbacks.", "pingable"));
 
             # Redirect searches to a clean URL or dirty GET depending on configuration.
             if (isset($_POST['query']))
@@ -126,11 +136,10 @@
             fallback($_GET['query'], "");
             list($where, $params) = keywords($_GET['query'], "title LIKE :query", "pingbacks");
 
-            $admin->display("pages".DIR."manage_pingbacks",
-                            array("pingbacks" => new Paginator(Pingback::find(array("placeholders" => true,
-                                                                                    "where" => $where,
-                                                                                    "params" => $params)),
-                                                               $admin->post_limit)));
+            $admin->display("pages".DIR."manage_pingbacks", array("pingbacks" => new Paginator(
+                Pingback::find(array("placeholders" => true,
+                                     "where" => $where,
+                                     "params" => $params)), $admin->post_limit)));
         }
 
         public function manage_nav($navs) {
@@ -152,7 +161,8 @@
         }
 
         public function manage_posts_column($post) {
-            echo '<td class="post_pingbacks value"><a href="'.$post->url().'#pingbacks">'.$post->pingback_count.'</a></td>';
+            echo '<td class="post_pingbacks value"><a href="'.$post->url().
+                 '#pingbacks">'.$post->pingback_count.'</a></td>';
         }
 
         public function post($post) {

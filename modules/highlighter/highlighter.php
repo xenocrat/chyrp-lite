@@ -33,7 +33,8 @@
             $config = Config::current();
 
             if (!Visitor::current()->group->can("change_settings"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to change settings."));
 
             if (empty($_POST))
                 return $admin->display("pages".DIR."highlighter_settings",

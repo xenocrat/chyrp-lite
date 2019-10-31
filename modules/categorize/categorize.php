@@ -161,15 +161,15 @@
         public function main_category($main) {
             if (!isset($_GET['name']))
                 return $main->resort(array("pages".DIR."category", "pages".DIR."index"),
-                                     array("reason" => __("You did not specify a category.", "categorize")),
-                                     __("Invalid Category", "categorize"));
+                    array("reason" => __("You did not specify a category.", "categorize")),
+                    __("Invalid Category", "categorize"));
 
             $category = new Category(array("clean" => $_GET['name']));
 
             if ($category->no_results)
                 return $main->resort(array("pages".DIR."category", "pages".DIR."index"),
-                                     array("reason" => __("The category you specified was not found.", "categorize")),
-                                     __("Invalid Category", "categorize"));
+                    array("reason" => __("The category you specified was not found.", "categorize")),
+                    __("Invalid Category", "categorize"));
 
             $results = SQL::current()->select("post_attributes",
                                               array("post_id"),
@@ -183,25 +183,27 @@
 
             if (empty($ids))
                 return $main->resort(array("pages".DIR."category", "pages".DIR."index"),
-                                     array("reason" => __("There are no posts in the category you specified.", "categorize")),
-                                     __("Invalid Category", "categorize"));
+                    array("reason" => __("There are no posts in the category you specified.", "categorize")),
+                    __("Invalid Category", "categorize"));
 
-            $posts = new Paginator(Post::find(array("placeholders" => true,
-                                                    "where" => array("id" => $ids))),
-                                   $main->post_limit);
+            $posts = new Paginator(
+                Post::find(array("placeholders" => true,
+                                 "where" => array("id" => $ids))), $main->post_limit);
 
             if (empty($posts))
                 return false;
 
             $main->display(array("pages".DIR."category", "pages".DIR."index"),
-                           array("posts" => $posts, "category" => $category->name),
-                           _f("Posts in category &#8220;%s&#8221;", fix($category->name), "categorize"));
+                array("posts" => $posts, "category" => $category->name),
+                _f("Posts in category &#8220;%s&#8221;", fix($category->name), "categorize"));
         }
 
         public function manage_nav($navs) {
             if (Visitor::current()->group->can("manage_categorize"))
                 $navs["manage_category"] = array("title" => __("Categories", "categorize"),
-                                                 "selected" => array("new_category", "delete_category", "edit_category"));
+                                                 "selected" => array("new_category",
+                                                                     "delete_category",
+                                                                     "edit_category"));
 
             return $navs;
         }
@@ -213,7 +215,8 @@
 
         public function admin_manage_category($admin) {
             if (!Visitor::current()->group->can("manage_categorize"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to manage categories.", "categorize"));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to manage categories.", "categorize"));
 
             # Redirect searches to a clean URL or dirty GET depending on configuration.
             if (isset($_POST['query']))
@@ -229,20 +232,23 @@
 
         public function admin_new_category($admin) {
             if (!Visitor::current()->group->can("manage_categorize"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to add categories.", "categorize"));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to add categories.", "categorize"));
 
             $admin->display("pages".DIR."new_category");
         }
 
         public function admin_add_category($admin) {
             if (!Visitor::current()->group->can("manage_categorize"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to add categories.", "categorize"));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to add categories.", "categorize"));
 
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['name']))
-                error(__("No Name Specified", "categorize"), __("A name is required to add a category.", "categorize"), null, 400);
+                error(__("No Name Specified", "categorize"),
+                      __("A name is required to add a category.", "categorize"), null, 400);
 
             $clean = (!empty($_POST['clean'])) ? $_POST['clean'] : $_POST['name'] ;
             $clean = Category::check_clean(sanitize($clean, true, true));
@@ -256,7 +262,8 @@
 
         public function admin_edit_category($admin) {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to edit a category.", "categorize"), null, 400);
+                error(__("No ID Specified"),
+                      __("An ID is required to edit a category.", "categorize"), null, 400);
 
             $category = new Category($_GET['id']);
 
@@ -264,7 +271,8 @@
                 Flash::warning(__("Category not found.", "categorize"), "manage_category");
 
             if (!$category->editable())
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this category.", "categorize"));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to edit this category.", "categorize"));
 
             $admin->display("pages".DIR."edit_category", array("category" => $category));
         }
@@ -274,10 +282,12 @@
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to update a category.", "categorize"), null, 400);
+                error(__("No ID Specified"),
+                      __("An ID is required to update a category.", "categorize"), null, 400);
 
             if (empty($_POST['name']))
-                error(__("No Name Specified", "categorize"), __("A name is required to update a category.", "categorize"), null, 400);
+                error(__("No Name Specified", "categorize"),
+                      __("A name is required to update a category.", "categorize"), null, 400);
 
             $category = new Category($_POST['id']);
 
@@ -285,10 +295,13 @@
                 show_404(__("Not Found"), __("Category not found.", "categorize"));
 
             if (!$category->editable())
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this category.", "categorize"));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to edit this category.", "categorize"));
 
             $clean = (!empty($_POST['clean'])) ? $_POST['clean'] : $_POST['name'] ;
-            $clean = ($clean != $category->clean) ? Category::check_clean(sanitize($clean, true, true)) : $category->clean ;
+
+            $clean = ($clean != $category->clean) ?
+                Category::check_clean(sanitize($clean, true, true)) : $category->clean ;
 
             $category = $category->update($_POST['name'],
                                           $clean,
@@ -299,7 +312,8 @@
 
         public function admin_delete_category($admin) {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a category.", "categorize"), null, 400);
+                error(__("No ID Specified"),
+                      __("An ID is required to delete a category.", "categorize"), null, 400);
 
             $category = new Category($_GET['id']);
 
@@ -307,7 +321,8 @@
                 Flash::warning(__("Category not found.", "categorize"), "manage_category");
 
             if (!$category->deletable())
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this category.", "categorize"));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to delete this category.", "categorize"));
 
             $admin->display("pages".DIR."delete_category", array("category" => $category));
         }
@@ -317,7 +332,8 @@
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a category.", "categorize"), null, 400);
+                error(__("No ID Specified"),
+                      __("An ID is required to delete a category.", "categorize"), null, 400);
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
                 redirect("manage_category");
@@ -328,7 +344,8 @@
                 show_404(__("Not Found"), __("Category not found.", "categorize"));
 
             if (!$category->deletable())
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this category.", "categorize"));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to delete this category.", "categorize"));
 
             Category::delete($category->id);
             Flash::notice(__("Category deleted.", "categorize"), "manage_category");

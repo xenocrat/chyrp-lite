@@ -39,7 +39,8 @@
             $config = Config::current();
 
             if (!Visitor::current()->group->can("change_settings"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to change settings."));
 
             if (empty($_POST))
                 return $admin->display("pages".DIR."like_settings",
@@ -70,7 +71,8 @@
                 error(__("Error"), __("An ID is required to like a post.", "likes"), null, 400);
 
             if (!Visitor::current()->group->can("like_post"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to like posts.", "likes"));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to like posts.", "likes"));
 
             $post = new Post($_GET['post_id']);
 
@@ -83,10 +85,12 @@
 
         public function main_unlike() {
             if (empty($_GET['post_id']) or !is_numeric($_GET['post_id']))
-                error(__("Error"), __("An ID is required to unlike a post.", "likes"), null, 400);
+                error(__("Error"),
+                      __("An ID is required to unlike a post.", "likes"), null, 400);
 
             if (!Visitor::current()->group->can("unlike_post"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to unlike posts.", "likes"));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to unlike posts.", "likes"));
 
             $post = new Post($_GET['post_id']);
 

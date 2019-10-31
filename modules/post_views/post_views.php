@@ -39,7 +39,8 @@
 
         public function admin_download_views() {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to download a view count.", "post_views"), null, 400);
+                error(__("No ID Specified"),
+                      __("An ID is required to download a view count.", "post_views"), null, 400);
 
             $post = new Post($_GET['id'], array("drafts" => true));
 
@@ -47,7 +48,8 @@
                 show_404(__("Not Found"), __("Post not found."));
 
             if (!$post->editable() and !$post->deletable())
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to download this view count.", "post_views"));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to download this view count.", "post_views"));
 
             $data = View::find(array("where" => array("post_id" => $post->id)));
 
