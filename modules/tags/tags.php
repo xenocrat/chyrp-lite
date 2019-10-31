@@ -264,7 +264,7 @@
             if (!$post->editable())
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to edit this post."));
 
-            $this->update_post($post);
+            $post->update();
 
             Flash::notice(__("Tags updated.", "tags"), "manage_tags");
         }
@@ -296,7 +296,7 @@
                 unset($post->tags[$_POST['original']]);
 
                 $_POST['tags'] = implode(", ", array_keys($post->tags)).", ".$_POST['name'];
-                $this->update_post($post);
+                $post->update();
             }
 
             Flash::notice(__("Tag renamed.", "tags"), "manage_tags");
@@ -344,7 +344,7 @@
                 unset($post->tags[$_POST['name']]);
 
                 $_POST['tags'] = implode(", ", array_keys($post->tags));
-                $this->update_post($post);
+                $post->update();
             }
 
             Flash::notice(__("Tag deleted.", "tags"), "manage_tags");
@@ -370,7 +370,7 @@
                     continue;
 
                 $_POST['tags'] = implode(", ", array_keys($post->tags)).", ".$_POST['name'];
-                $this->update_post($post);
+                $post->update();
             }
 
             Flash::notice(__("Posts tagged.", "tags"), "manage_tags");
