@@ -271,7 +271,8 @@
 
             $post = Feathers::$instances[$post->feather]->update($post);
 
-            Flash::notice(__("Post updated.").' <a href="'.$post->url().'">'.__("View post &rarr;").'</a>', "manage_posts");
+            Flash::notice(__("Post updated.").' <a href="'.$post->url().'">'.
+                          __("View post &rarr;").'</a>', "manage_posts");
         }
 
         /**
@@ -333,7 +334,8 @@
                 redirect("manage_posts/query/".str_ireplace("%2F", "", urlencode($_POST['query']))."/");
 
             fallback($_GET['query'], "");
-            list($where, $params) = keywords($_GET['query'], "post_attributes.value LIKE :query OR url LIKE :query", "posts");
+            list($where, $params) = keywords($_GET['query'],
+                                    "post_attributes.value LIKE :query OR url LIKE :query", "posts");
 
             $visitor = Visitor::current();
 
@@ -351,10 +353,10 @@
                 $ids[] = $result["id"];
 
             if (!empty($ids))
-                $posts = new Paginator(Post::find(array("placeholders" => true,
-                                                        "drafts" => true,
-                                                        "where" => array("id" => $ids))),
-                                       $this->post_limit);
+                $posts = new Paginator(
+                    Post::find(array("placeholders" => true,
+                                     "drafts" => true,
+                                     "where" => array("id" => $ids))), $this->post_limit);
             else
                 $posts = new Paginator(array());
 
@@ -516,7 +518,8 @@
                                   $list_order,
                                   sanitize($_POST['slug']));
 
-            Flash::notice(__("Page updated.").' <a href="'.$page->url().'">'.__("View page &rarr;").'</a>', "manage_pages");
+            Flash::notice(__("Page updated.").' <a href="'.$page->url().'">'.
+                          __("View page &rarr;").'</a>', "manage_pages");
         }
 
         /**
@@ -596,11 +599,10 @@
             fallback($_GET['query'], "");
             list($where, $params) = keywords($_GET['query'], "title LIKE :query OR body LIKE :query", "pages");
 
-            $this->display("pages".DIR."manage_pages",
-                           array("pages" => new Paginator(Page::find(array("placeholders" => true,
-                                                                           "where" => $where,
-                                                                           "params" => $params)),
-                                                          $this->post_limit)));
+            $this->display("pages".DIR."manage_pages", array("pages" => new Paginator(
+                           Page::find(array("placeholders" => true,
+                                            "where" => $where,
+                                            "params" => $params)), $this->post_limit)));
         }
 
         /**
@@ -615,9 +617,9 @@
 
             $this->display("pages".DIR."new_user",
                            array("default_group" => new Group($config->default_group),
-                                 "groups" => Group::find(array("where" => array("id not" => array($config->guest_group,
-                                                                                                  $config->default_group)),
-                                                               "order" => "id DESC"))));
+                                 "groups" => Group::find(array(
+                                 "where" => array("id not" => array($config->guest_group, $config->default_group)),
+                                 "order" => "id DESC"))));
         }
 
         /**
@@ -680,12 +682,13 @@
                               ($config->email_activation) ? false : true);
 
             if (!$user->approved)
-                correspond("activate", array("to"      => $user->email,
-                                             "user_id" => $user->id,
-                                             "login"   => $user->login,
-                                             "link"    => fix($config->url, true).
-                                                          "/?action=activate&amp;login=".urlencode($user->login).
-                                                          "&amp;token=".token(array($user->login, $user->email))));
+                correspond("activate",
+                           array("to"      => $user->email,
+                                 "user_id" => $user->id,
+                                 "login"   => $user->login,
+                                 "link"    => fix($config->url, true).
+                                              "/?action=activate&amp;login=".urlencode($user->login).
+                                              "&amp;token=".token(array($user->login, $user->email))));
 
             Flash::notice(__("User added."), "manage_users");
         }
@@ -707,9 +710,9 @@
                 Flash::warning(__("User not found."), "manage_users");
 
             $this->display("pages".DIR."edit_user",
-                           array("user" => $user,
-                                 "groups" => Group::find(array("order" => "id ASC",
-                                                               "where" => array("id not" => Config::current()->guest_group)))));
+                           array("user" => $user, "groups" => Group::find(
+                           array("order" => "id ASC",
+                                 "where" => array("id not" => Config::current()->guest_group)))));
         }
 
         /**
@@ -782,12 +785,13 @@
                                   (!$user->approved and $config->email_activation) ? false : true);
 
             if (!$user->approved)
-                correspond("activate", array("to"      => $user->email,
-                                             "user_id" => $user->id,
-                                             "login"   => $user->login,
-                                             "link"    => fix($config->url, true).
-                                                          "/?action=activate&amp;login=".urlencode($user->login).
-                                                          "&amp;token=".token(array($user->login, $user->email))));
+                correspond("activate",
+                           array("to"      => $user->email,
+                                 "user_id" => $user->id,
+                                 "login"   => $user->login,
+                                 "link"    => fix($config->url, true).
+                                              "/?action=activate&amp;login=".urlencode($user->login).
+                                              "&amp;token=".token(array($user->login, $user->email))));
 
             Flash::notice(__("User updated."), "manage_users");
         }
@@ -895,11 +899,10 @@
             list($where, $params) = keywords($_GET['query'],
                 "login LIKE :query OR full_name LIKE :query OR email LIKE :query OR website LIKE :query", "users");
 
-            $this->display("pages".DIR."manage_users",
-                           array("users" => new Paginator(User::find(array("placeholders" => true,
-                                                                           "where" => $where,
-                                                                           "params" => $params)),
-                                                          $this->post_limit)));
+            $this->display("pages".DIR."manage_users", array("users" => new Paginator(
+                           User::find(array("placeholders" => true,
+                                            "where" => $where,
+                                            "params" => $params)), $this->post_limit)));
         }
 
         /**
@@ -1129,8 +1132,8 @@
                 else
                     $groups = new Paginator(array());
             } else {
-                $groups = new Paginator(Group::find(array("placeholders" => true, "order" => "id ASC")),
-                                        $this->post_limit);
+                $groups = new Paginator(Group::find(
+                    array("placeholders" => true, "order" => "id ASC")), $this->post_limit);
             }
 
             $this->display("pages".DIR."manage_groups", array("groups" => $groups));
@@ -1965,7 +1968,8 @@
             if ($guest_group->no_results)
                 error(__("Gone"), __("New guest group does not exist."), null, 410);
 
-            $correspond = (!empty($_POST['email_activation']) or !empty($_POST['email_correspondence'])) ? true : false ;
+            $correspond = (!empty($_POST['email_activation']) or
+                           !empty($_POST['email_correspondence'])) ? true : false ;
 
             $config = Config::current();
             $config->set("can_register", !empty($_POST['can_register']));
@@ -2010,7 +2014,8 @@
                                       true,
                                       0,
                                       "home");
-                    Flash::notice(__("Page created.").' <a href="'.$page->url().'">'.__("View page &rarr;").'</a>');
+                    Flash::notice(__("Page created.").' <a href="'.$page->url().'">'.
+                                  __("View page &rarr;").'</a>');
                 }
             }
 
@@ -2099,8 +2104,10 @@
 
             foreach ($write as $child => &$attributes) {
                 $attributes["selected"] = ($action == $child or
-                    (isset($attributes["selected"]) and in_array($action, (array) $attributes["selected"])) or
-                    (isset($_GET['feather']) and isset($attributes["feather"]) and $_GET['feather'] == $attributes["feather"]));
+                    (isset($attributes["selected"]) and
+                        in_array($action, (array) $attributes["selected"])) or
+                    (isset($_GET['feather']) and
+                        isset($attributes["feather"]) and $_GET['feather'] == $attributes["feather"]));
 
                 if ($attributes["selected"] == true)
                     $navigation["write"]["selected"] = true;

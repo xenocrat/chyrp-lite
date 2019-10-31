@@ -160,7 +160,8 @@
          */
         public function main_index() {
             $this->display("pages".DIR."index",
-                           array("posts" => new Paginator(Post::find(array("placeholders" => true)), $this->post_limit)));
+                           array("posts" => new Paginator(Post::find(
+                           array("placeholders" => true)), $this->post_limit)));
         }
 
         /**
@@ -199,18 +200,18 @@
                 $depth = "day";
                 $limit = strtotime("tomorrow", $timestamp);
                 $title = _f("Archive of %s", when("%d %B %Y", $timestamp, true));
-                $posts = new Paginator(Post::find(array("placeholders" => true,
-                                                        "where" => array("created_at LIKE" => when("Y-m-d%", $timestamp)),
-                                                        "order" => "created_at DESC, id DESC")),
-                                       $this->post_limit);
+                $posts = new Paginator(
+                    Post::find(array("placeholders" => true,
+                                     "where" => array("created_at LIKE" => when("Y-m-d%", $timestamp)),
+                                     "order" => "created_at DESC, id DESC")), $this->post_limit);
             } elseif (is_numeric($_GET['month'])) {
                 $depth = "month";
                 $limit = strtotime("midnight first day of next month", $timestamp);
                 $title = _f("Archive of %s", when("%B %Y", $timestamp, true));
-                $posts = new Paginator(Post::find(array("placeholders" => true,
-                                                        "where" => array("created_at LIKE" => when("Y-m-%", $timestamp)),
-                                                        "order" => "created_at DESC, id DESC")),
-                                       $this->post_limit);
+                $posts = new Paginator(
+                    Post::find(array("placeholders" => true,
+                                     "where" => array("created_at LIKE" => when("Y-m-%", $timestamp)),
+                                     "order" => "created_at DESC, id DESC")), $this->post_limit);
             } else {
                 $depth = "year";
                 $limit = strtotime("midnight first day of next year", $timestamp);
@@ -278,9 +279,9 @@
                 $ids[] = $result["id"];
 
             if (!empty($ids))
-                $posts = new Paginator(Post::find(array("placeholders" => true,
-                                                        "where" => array("id" => $ids))),
-                                       $this->post_limit);
+                $posts = new Paginator(
+                    Post::find(array("placeholders" => true,
+                                     "where" => array("id" => $ids))), $this->post_limit);
             else
                 $posts = new Paginator(array());
 
@@ -300,10 +301,10 @@
             if (!$visitor->group->can("view_own_draft", "view_draft"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to view drafts."));
 
-            $posts = new Paginator(Post::find(array("placeholders" => true,
-                                                    "where" => array("status" => "draft",
-                                                                     "user_id" => $visitor->id))),
-                                   $this->post_limit);
+            $posts = new Paginator(
+                Post::find(array("placeholders" => true,
+                                 "where" => array("status" => "draft",
+                                 "user_id" => $visitor->id))), $this->post_limit);
 
             $this->display(array("pages".DIR."drafts", "pages".DIR."index"), array("posts" => $posts), __("Drafts"));
         }
@@ -480,14 +481,15 @@
                                       ($config->email_activation) ? false : true);
 
                     if (!$user->approved) {
-                        correspond("activate", array("to"      => $user->email,
-                                                     "user_id" => $user->id,
-                                                     "login"   => $user->login,
-                                                     "link"    => fix($config->url, true).
-                                                                  "/?action=activate&amp;login=".
-                                                                  urlencode($user->login).
-                                                                  "&amp;token=".
-                                                                  token(array($user->login, $user->email))));
+                        correspond("activate",
+                                   array("to"      => $user->email,
+                                         "user_id" => $user->id,
+                                         "login"   => $user->login,
+                                         "link"    => fix($config->url, true).
+                                                      "/?action=activate&amp;login=".
+                                                      urlencode($user->login).
+                                                      "&amp;token=".
+                                                      token(array($user->login, $user->email))));
 
                         Flash::notice(__("We have emailed you an activation link."), "/");
                     }
@@ -541,10 +543,11 @@
 
             $new_password = random(8);
 
-            correspond("password", array("to"       => $user->email,
-                                         "user_id"  => $user->id,
-                                         "login"    => $user->login,
-                                         "password" => $new_password));
+            correspond("password",
+                       array("to"       => $user->email,
+                             "user_id"  => $user->id,
+                             "login"    => $user->login,
+                             "password" => $new_password));
 
             $user = $user->update(null, User::hashPassword($new_password));
 
@@ -684,14 +687,15 @@
                     $user = new User(array("login" => $_POST['login']));
 
                     if (!$user->no_results)
-                        correspond("reset", array("to"      => $user->email,
-                                                  "user_id" => $user->id,
-                                                  "login"   => $user->login,
-                                                  "link"    => fix($config->url, true).
-                                                               "/?action=reset&amp;login=".
-                                                               urlencode($user->login).
-                                                               "&amp;token=".
-                                                               token(array($user->login, $user->email))));
+                        correspond("reset",
+                                   array("to"      => $user->email,
+                                         "user_id" => $user->id,
+                                         "login"   => $user->login,
+                                         "link"    => fix($config->url, true).
+                                                      "/?action=reset&amp;login=".
+                                                      urlencode($user->login).
+                                                      "&amp;token=".
+                                                      token(array($user->login, $user->email))));
 
                     Flash::notice(__("If that username is in our database, we will email you a password reset link."), "/");
                 }
