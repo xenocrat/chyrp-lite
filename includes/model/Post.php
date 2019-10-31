@@ -299,7 +299,7 @@
 
             fallback($values,       array_combine($this->attribute_names, $this->attribute_values));
             fallback($user_id,      $this->user_id);
-            fallback($pinned,       false);
+            fallback($pinned,       $this->pinned);
             fallback($status,       $this->status);
             fallback($clean,        $this->clean);
             fallback($url,          ($clean != $this->clean) ? self::check_url($clean) : $this->url);
