@@ -440,7 +440,9 @@
 
             $public = in_array($_POST['status'], array("listed", "public"));
             $listed = in_array($_POST['status'], array("listed", "teased"));
-            $list_order = empty($_POST['list_order']) ? (int) $_POST['list_priority'] : (int) $_POST['list_order'] ;
+
+            $list_order = empty($_POST['list_order']) ?
+                (int) $_POST['list_priority'] : (int) $_POST['list_order'] ;
 
             $page = Page::add($_POST['title'],
                               $_POST['body'],
@@ -472,7 +474,8 @@
 
             $this->display("pages".DIR."edit_page",
                            array("page" => $page,
-                                 "pages" => Page::find(array("where" => array("id not" => $page->id)))));
+                                 "pages" => Page::find(array(
+                                 "where" => array("id not" => $page->id)))));
         }
 
         /**
@@ -507,7 +510,9 @@
 
             $public = in_array($_POST['status'], array("listed", "public"));
             $listed = in_array($_POST['status'], array("listed", "teased"));
-            $list_order = empty($_POST['list_order']) ? (int) $_POST['list_priority'] : (int) $_POST['list_order'] ;
+
+            $list_order = empty($_POST['list_order']) ?
+                (int) $_POST['list_priority'] : (int) $_POST['list_order'] ;
 
             $page = $page->update($_POST['title'],
                                   $_POST['body'],
