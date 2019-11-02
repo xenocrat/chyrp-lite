@@ -46,7 +46,7 @@ msgid "Manage Pingbacks"
 msgstr "管理Pingback"
 
 #: modules/pingable/admin/pages/manage_pingbacks.twig:18
-#: modules/pingable/pingable.php:138 modules/pingable/pingable.php:151
+#: modules/pingable/pingable.php:147 modules/pingable/pingable.php:160
 msgid "Pingbacks"
 msgstr "引用"
 
@@ -98,47 +98,47 @@ msgstr "您的网址太长，无法存储在我们的数据库中。"
 msgid "Pingback registered!"
 msgstr "Pingback已注册！"
 
-#: modules/pingable/pingable.php:44
+#: modules/pingable/pingable.php:45
 msgid "An ID is required to edit a pingback."
 msgstr "编辑pingback需要一个ID。"
 
-#: modules/pingable/pingable.php:49 modules/pingable/pingable.php:70
-#: modules/pingable/pingable.php:87 modules/pingable/pingable.php:108
+#: modules/pingable/pingable.php:50 modules/pingable/pingable.php:74
+#: modules/pingable/pingable.php:93 modules/pingable/pingable.php:116
 msgid "Pingback not found."
 msgstr "Pingback未找到。"
 
-#: modules/pingable/pingable.php:52 modules/pingable/pingable.php:73
+#: modules/pingable/pingable.php:54 modules/pingable/pingable.php:78
 msgid "You do not have sufficient privileges to edit this pingback."
 msgstr "您没有足够的权限编辑这个pingback。"
 
-#: modules/pingable/pingable.php:62
+#: modules/pingable/pingable.php:65
 msgid "An ID is required to update a pingback."
 msgstr "更新pingback需要一个ID。"
 
-#: modules/pingable/pingable.php:65
+#: modules/pingable/pingable.php:68
 msgid "No Title Specified"
 msgstr "未指定标题。"
 
-#: modules/pingable/pingable.php:65
+#: modules/pingable/pingable.php:69
 msgid "A title is required to update a pingback."
 msgstr "更新pingback需要一个标题。"
 
-#: modules/pingable/pingable.php:77
+#: modules/pingable/pingable.php:82
 msgid "Pingback updated."
 msgstr "Pingback已更新。"
 
-#: modules/pingable/pingable.php:82 modules/pingable/pingable.php:100
+#: modules/pingable/pingable.php:88 modules/pingable/pingable.php:108
 msgid "An ID is required to delete a pingback."
 msgstr "删除pingback需要一个ID。"
 
-#: modules/pingable/pingable.php:90 modules/pingable/pingable.php:111
+#: modules/pingable/pingable.php:97 modules/pingable/pingable.php:120
 msgid "You do not have sufficient privileges to delete this pingback."
 msgstr "您没有足够的权限删除这个pingback。"
 
-#: modules/pingable/pingable.php:115
+#: modules/pingable/pingable.php:124
 msgid "Pingback deleted."
 msgstr "Pingback已删除。"
 
-#: modules/pingable/pingable.php:120
+#: modules/pingable/pingable.php:130
 msgid "You do not have sufficient privileges to manage pingbacks."
 msgstr "您没有足够的权限来管理pingback。"

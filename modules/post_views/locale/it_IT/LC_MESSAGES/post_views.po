@@ -35,11 +35,11 @@ msgstr "Mostra contatore"
 msgid "Download view count for &#8220;%s&#8221;"
 msgstr "Download il conteggio delle visualizzazioni per il &#8220;%s&#8221;"
 
-#: modules/post_views/post_views.php:42
+#: modules/post_views/post_views.php:43
 msgid "An ID is required to download a view count."
 msgstr "Per scaricare il conteggio delle visualizzazioni è necessario un ID."
 
-#: modules/post_views/post_views.php:50
+#: modules/post_views/post_views.php:52
 msgid "You do not have sufficient privileges to download this view count."
 msgstr ""
 "Non si dispone di privilegi sufficienti per scaricare il conteggio delle "

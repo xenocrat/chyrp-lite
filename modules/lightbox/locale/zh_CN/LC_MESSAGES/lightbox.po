@@ -39,7 +39,7 @@ msgstr "保护图像"
 msgid "Prevent visitors from saving images?"
 msgstr "防止访问者保存图像？"
 
-#: modules/lightbox/info.php:3 modules/lightbox/lightbox.php:41
+#: modules/lightbox/info.php:3 modules/lightbox/lightbox.php:45
 msgid "Lightbox"
 msgstr ""
 
@@ -51,18 +51,18 @@ msgstr "为您的图片提供灯箱。"
 msgid "Close"
 msgstr "关闭"
 
-#: modules/lightbox/lightbox.php:20
+#: modules/lightbox/lightbox.php:22
 msgid "Black"
 msgstr "黑色"
 
-#: modules/lightbox/lightbox.php:21
+#: modules/lightbox/lightbox.php:23
 msgid "Gray"
 msgstr "灰色"
 
-#: modules/lightbox/lightbox.php:22
+#: modules/lightbox/lightbox.php:24
 msgid "White"
 msgstr "白色"
 
-#: modules/lightbox/lightbox.php:23
+#: modules/lightbox/lightbox.php:25
 msgid "Inherit"
 msgstr "继承"

@@ -39,7 +39,7 @@ msgstr "Proteggi immagini"
 msgid "Prevent visitors from saving images?"
 msgstr "Impedire ai visitatori di salvare le immagini?"
 
-#: modules/lightbox/info.php:3 modules/lightbox/lightbox.php:41
+#: modules/lightbox/info.php:3 modules/lightbox/lightbox.php:45
 msgid "Lightbox"
 msgstr "Tavolo luminoso"
 
@@ -51,18 +51,18 @@ msgstr "Un tavolo luminoso per le tue immagini."
 msgid "Close"
 msgstr "Chiudi"
 
-#: modules/lightbox/lightbox.php:20
+#: modules/lightbox/lightbox.php:22
 msgid "Black"
 msgstr "Nero"
 
-#: modules/lightbox/lightbox.php:21
+#: modules/lightbox/lightbox.php:23
 msgid "Gray"
 msgstr "Grigio"
 
-#: modules/lightbox/lightbox.php:22
+#: modules/lightbox/lightbox.php:24
 msgid "White"
 msgstr "Bianco"
 
-#: modules/lightbox/lightbox.php:23
+#: modules/lightbox/lightbox.php:25
 msgid "Inherit"
 msgstr "Sfondo riprodotto"

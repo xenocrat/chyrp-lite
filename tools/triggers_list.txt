@@ -245,13 +245,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 1158
+	includes/controller/Admin.php on line 1196
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1453
+	includes/controller/Admin.php on line 1495
 
 Arguments:
 	$group
@@ -260,7 +260,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1477
+	includes/controller/Admin.php on line 1520
 
 Arguments:
 	$user
@@ -269,7 +269,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1515
+	includes/controller/Admin.php on line 1559
 
 Arguments:
 	$entry, $post
@@ -278,7 +278,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1544
+	includes/controller/Admin.php on line 1589
 
 Arguments:
 	$entry, $page
@@ -287,7 +287,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1548
+	includes/controller/Admin.php on line 1593
 
 Arguments:
 	$imports
@@ -296,31 +296,31 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1824
+	includes/controller/Admin.php on line 1880
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1832
+	includes/controller/Admin.php on line 1888
 
 
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 356
+	includes/controller/Main.php on line 360
 
 
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 572
+	includes/controller/Main.php on line 579
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 584
+	includes/controller/Main.php on line 591
 
 Arguments:
 	$user
@@ -329,7 +329,7 @@ Arguments:
 user_logged_out
 ---------------
 Called from:
-	includes/controller/Main.php on line 606
+	includes/controller/Main.php on line 613
 
 Arguments:
 	$user
@@ -338,7 +338,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 761
+	includes/controller/Main.php on line 769
 
 Arguments:
 	$post, $feed
@@ -551,7 +551,7 @@ Arguments:
 comments_false_positives
 ------------------------
 Called from:
-	modules/comments/comments.php on line 388
+	modules/comments/comments.php on line 402
 
 Arguments:
 	$false_positives
@@ -560,7 +560,7 @@ Arguments:
 comments_false_negatives
 ------------------------
 Called from:
-	modules/comments/comments.php on line 391
+	modules/comments/comments.php on line 405
 
 Arguments:
 	$false_negatives
@@ -569,7 +569,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 641
+	modules/comments/comments.php on line 669
 
 Arguments:
 	$comment, $feed
@@ -623,7 +623,7 @@ Arguments:
 import_wordpress_post
 ---------------------
 Called from:
-	modules/migrator/migrator.php on line 137
+	modules/migrator/migrator.php on line 142
 
 Arguments:
 	$post, $new_post
@@ -632,7 +632,7 @@ Arguments:
 import_wordpress_page
 ---------------------
 Called from:
-	modules/migrator/migrator.php on line 150
+	modules/migrator/migrator.php on line 157
 
 Arguments:
 	$post, $new_page
@@ -641,7 +641,7 @@ Arguments:
 import_tumble
 -------------
 Called from:
-	modules/migrator/migrator.php on line 285
+	modules/migrator/migrator.php on line 297
 
 Arguments:
 	$post, $new_post
@@ -650,7 +650,7 @@ Arguments:
 import_textpattern_post
 -----------------------
 Called from:
-	modules/migrator/migrator.php on line 384
+	modules/migrator/migrator.php on line 399
 
 Arguments:
 	$post, $new_post
@@ -659,7 +659,7 @@ Arguments:
 import_movabletype_post
 -----------------------
 Called from:
-	modules/migrator/migrator.php on line 493
+	modules/migrator/migrator.php on line 511
 
 Arguments:
 	$post, $new_post
@@ -668,7 +668,7 @@ Arguments:
 import_movabletype_page
 -----------------------
 Called from:
-	modules/migrator/migrator.php on line 507
+	modules/migrator/migrator.php on line 527
 
 Arguments:
 	$post, $new_page
@@ -864,7 +864,7 @@ Target:
 write_post_options
 ------------------
 Called from:
-	includes/controller/Admin.php on line 184
+	includes/controller/Admin.php on line 186
 
 Target:
 	$options
@@ -876,8 +876,8 @@ Arguments:
 post_options
 ------------
 Called from:
-	includes/controller/Admin.php on line 184
-	includes/controller/Admin.php on line 236
+	includes/controller/Admin.php on line 186
+	includes/controller/Admin.php on line 240
 
 Target:
 	$options
@@ -889,7 +889,7 @@ Arguments:
 edit_post_options
 -----------------
 Called from:
-	includes/controller/Admin.php on line 236
+	includes/controller/Admin.php on line 240
 
 Target:
 	$options
@@ -901,7 +901,7 @@ Arguments:
 posts_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 1222
+	includes/controller/Admin.php on line 1260
 
 Target:
 	$posts_atom
@@ -913,7 +913,7 @@ Arguments:
 pages_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 1269
+	includes/controller/Admin.php on line 1309
 
 Target:
 	$pages_atom
@@ -925,7 +925,7 @@ Arguments:
 export
 ------
 Called from:
-	includes/controller/Admin.php on line 1332
+	includes/controller/Admin.php on line 1372
 
 Target:
 	$exports
@@ -934,7 +934,7 @@ Target:
 before_import
 -------------
 Called from:
-	includes/controller/Admin.php on line 1423
+	includes/controller/Admin.php on line 1464
 
 Target:
 	$imports
@@ -943,7 +943,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 2098
+	includes/controller/Admin.php on line 2160
 
 Target:
 	$write
@@ -952,7 +952,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2127
+	includes/controller/Admin.php on line 2197
 
 Target:
 	$manage
@@ -961,7 +961,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 2152
+	includes/controller/Admin.php on line 2222
 
 Target:
 	$settings
@@ -970,7 +970,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2170
+	includes/controller/Admin.php on line 2240
 
 Target:
 	$extend
@@ -979,7 +979,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2224
+	includes/controller/Admin.php on line 2294
 
 Target:
 	$this->context
@@ -1029,7 +1029,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 825
+	includes/controller/Main.php on line 833
 
 Target:
 	$this->context

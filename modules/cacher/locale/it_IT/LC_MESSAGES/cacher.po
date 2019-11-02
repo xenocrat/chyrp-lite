@@ -35,7 +35,7 @@ msgstr "Cancella Cache"
 msgid "Cache"
 msgstr "Cache"
 
-#: modules/cacher/cacher.php:132
+#: modules/cacher/cacher.php:134
 msgid "Cache cleared."
 msgstr "Cache cancellati."
 

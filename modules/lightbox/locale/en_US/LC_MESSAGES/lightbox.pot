@@ -27,7 +27,7 @@ msgid "Prevent visitors from saving images?"
 msgstr ""
 
 #: modules/lightbox/info.php:3
-#: modules/lightbox/lightbox.php:41
+#: modules/lightbox/lightbox.php:45
 msgid "Lightbox"
 msgstr ""
 
@@ -39,19 +39,19 @@ msgstr ""
 msgid "Close"
 msgstr ""
 
-#: modules/lightbox/lightbox.php:20
+#: modules/lightbox/lightbox.php:22
 msgid "Black"
 msgstr ""
 
-#: modules/lightbox/lightbox.php:21
+#: modules/lightbox/lightbox.php:23
 msgid "Gray"
 msgstr ""
 
-#: modules/lightbox/lightbox.php:22
+#: modules/lightbox/lightbox.php:24
 msgid "White"
 msgstr ""
 
-#: modules/lightbox/lightbox.php:23
+#: modules/lightbox/lightbox.php:25
 msgid "Inherit"
 msgstr ""
 

@@ -69,26 +69,26 @@ msgstr ""
 msgid "Sitemap"
 msgstr "Sitemap"
 
-#: modules/sitemap/sitemap.php:42
+#: modules/sitemap/sitemap.php:43
 msgid "Hourly"
 msgstr "Ogni ora"
 
-#: modules/sitemap/sitemap.php:43
+#: modules/sitemap/sitemap.php:44
 msgid "Daily"
 msgstr "Giornaliero"
 
-#: modules/sitemap/sitemap.php:44
+#: modules/sitemap/sitemap.php:45
 msgid "Weekly"
 msgstr "Settimanale"
 
-#: modules/sitemap/sitemap.php:45
+#: modules/sitemap/sitemap.php:46
 msgid "Monthly"
 msgstr "Mensile"
 
-#: modules/sitemap/sitemap.php:46
+#: modules/sitemap/sitemap.php:47
 msgid "Yearly"
 msgstr "Annuale"
 
-#: modules/sitemap/sitemap.php:47
+#: modules/sitemap/sitemap.php:48
 msgid "Never"
 msgstr "Mai"

@@ -22,11 +22,11 @@ msgstr ""
 msgid "Download view count for &#8220;%s&#8221;"
 msgstr ""
 
-#: modules/post_views/post_views.php:42
+#: modules/post_views/post_views.php:43
 msgid "An ID is required to download a view count."
 msgstr ""
 
-#: modules/post_views/post_views.php:50
+#: modules/post_views/post_views.php:52
 msgid "You do not have sufficient privileges to download this view count."
 msgstr ""
 

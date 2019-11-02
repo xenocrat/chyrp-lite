@@ -22,7 +22,7 @@ msgstr ""
 msgid "Cache"
 msgstr ""
 
-#: modules/cacher/cacher.php:132
+#: modules/cacher/cacher.php:134
 msgid "Cache cleared."
 msgstr ""
 

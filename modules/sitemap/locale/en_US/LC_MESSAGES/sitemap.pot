@@ -42,27 +42,27 @@ msgstr ""
 msgid "Sitemap"
 msgstr ""
 
-#: modules/sitemap/sitemap.php:42
+#: modules/sitemap/sitemap.php:43
 msgid "Hourly"
 msgstr ""
 
-#: modules/sitemap/sitemap.php:43
+#: modules/sitemap/sitemap.php:44
 msgid "Daily"
 msgstr ""
 
-#: modules/sitemap/sitemap.php:44
+#: modules/sitemap/sitemap.php:45
 msgid "Weekly"
 msgstr ""
 
-#: modules/sitemap/sitemap.php:45
+#: modules/sitemap/sitemap.php:46
 msgid "Monthly"
 msgstr ""
 
-#: modules/sitemap/sitemap.php:46
+#: modules/sitemap/sitemap.php:47
 msgid "Yearly"
 msgstr ""
 
-#: modules/sitemap/sitemap.php:47
+#: modules/sitemap/sitemap.php:48
 msgid "Never"
 msgstr ""
 

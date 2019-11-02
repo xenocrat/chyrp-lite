@@ -35,7 +35,7 @@ msgstr "清除缓存"
 msgid "Cache"
 msgstr "缓存"
 
-#: modules/cacher/cacher.php:132
+#: modules/cacher/cacher.php:134
 msgid "Cache cleared."
 msgstr "缓存已清除。"
 
