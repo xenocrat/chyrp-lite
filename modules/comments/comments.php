@@ -409,7 +409,8 @@
 
         public function admin_comment_settings($admin) {
             if (!Visitor::current()->group->can("change_settings"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to change settings."));
 
             $config = Config::current();
             $allowed_comment_html = implode(", ", $config->module_comments["allowed_comment_html"]);
