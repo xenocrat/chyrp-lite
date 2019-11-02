@@ -2,7 +2,8 @@
     class Migrator extends Modules {
         public function admin_manage_migration($admin) {
             if (!Visitor::current()->group->can("add_post"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to import content."));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to import content."));
 
             $admin->display("pages".DIR."manage_migration");
         }
@@ -24,7 +25,8 @@
             $visitor = Visitor::current();
 
             if (!$visitor->group->can("add_post"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to import content.", "migrator"));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to import content.", "migrator"));
 
             if (empty($_POST))
                 redirect("manage_migration");
@@ -91,8 +93,9 @@
                 $content   = $post->children("http://purl.org/rss/1.0/modules/content/");
                 $encoded   = $content->encoded;
 
-                if ($wordpress->post_type == "attachment" or $wordpress->status == "attachment" or $post->title == "zz_placeholder")
-                    continue;
+                if ($wordpress->post_type == "attachment" or
+                    $wordpress->status == "attachment" or $post->title == "zz_placeholder")
+                        continue;
 
                 if (!empty($_POST['media_url'])) {
                     $regexp_url = preg_quote($_POST['media_url'], "/");
@@ -121,31 +124,35 @@
                                               "future"  => "draft",
                                               "pending" => "draft");
 
-                    $new_post = Post::add(array("title" => trim($post->title),
-                                                "body" => trim($encoded),
-                                                "imported_from" => "wordpress"),
-                                          $clean,
-                                          Post::check_url($clean),
-                                          "text",
-                                          null,
-                                          (isset($wordpress->is_sticky)) ? (bool) (int) $wordpress->is_sticky : false,
-                                          $status_translate[(string) $wordpress->status],
-                                          (string) ($wordpress->post_date == "0000-00-00 00:00:00" ? datetime() : $wordpress->post_date),
-                                          null,
-                                          false);
+                    $new_post = Post::add(
+                        array("title" => trim($post->title),
+                              "body" => trim($encoded),
+                              "imported_from" => "wordpress"),
+                        $clean,
+                        Post::check_url($clean),
+                        "text",
+                        null,
+                        (isset($wordpress->is_sticky)) ? (bool) (int) $wordpress->is_sticky : false,
+                        $status_translate[(string) $wordpress->status],
+                        (string) ($wordpress->post_date == "0000-00-00 00:00:00" ? datetime() : $wordpress->post_date),
+                        null,
+                        false
+                    );
 
                     $trigger->call("import_wordpress_post", $post, $new_post);
 
                 } elseif ($wordpress->post_type == "page" and $visitor->group->can("add_page")) {
-                    $new_page = Page::add(trim($post->title),
-                                          trim($encoded),
-                                          null,
-                                          0,
-                                          true,
-                                          0,
-                                          $clean,
-                                          Page::check_url($clean),
-                                          (string) ($wordpress->post_date == "0000-00-00 00:00:00" ? datetime() : $wordpress->post_date));
+                    $new_page = Page::add(
+                        trim($post->title),
+                        trim($encoded),
+                        null,
+                        0,
+                        true,
+                        0,
+                        $clean,
+                        Page::check_url($clean),
+                        (string) ($wordpress->post_date == "0000-00-00 00:00:00" ? datetime() : $wordpress->post_date)
+                    );
 
                     $trigger->call("import_wordpress_page", $post, $new_page);
                 }
@@ -171,7 +178,10 @@
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
-            if (!feather_enabled("text") or !feather_enabled("photo") or !feather_enabled("quote") or !feather_enabled("link"))
+            if (!feather_enabled("text") or
+                !feather_enabled("photo") or
+                !feather_enabled("quote") or
+                !feather_enabled("link"))
                 error(__("Missing Feather", "migrator"),
                       __("Text, Photo, Quote, and Link feathers must be enabled to import from Tumblr.", "migrator"), null, 501);
 
@@ -271,16 +281,18 @@
 
                 $values["imported_from"] = "tumblr";
 
-                $new_post = Post::add($values,
-                                      $clean,
-                                      Post::check_url($clean),
-                                      $feather,
-                                      null,
-                                      null,
-                                      "public",
-                                      datetime((int) $post->attributes()->unix_timestamp),
-                                      null,
-                                      false);
+                $new_post = Post::add(
+                    $values,
+                    $clean,
+                    Post::check_url($clean),
+                    $feather,
+                    null,
+                    null,
+                    "public",
+                    datetime((int) $post->attributes()->unix_timestamp),
+                    null,
+                    false
+                );
 
                 $trigger->call("import_tumble", $post, $new_post);
             }
@@ -297,7 +309,8 @@
             $trigger = Trigger::current();
 
             if (!Visitor::current()->group->can("add_post"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to import content.", "migrator"));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to import content.", "migrator"));
 
             if (empty($_POST))
                 redirect("manage_migration");
@@ -368,18 +381,20 @@
 
                 $clean = sanitize(fallback($post["url_title"], $post["Title"]), true, true, 80);
 
-                $new_post = Post::add(array("title" => $post["Title"],
-                                            "body" => $post["Body"],
-                                            "imported_from" => "textpattern"),
-                                      $clean,
-                                      Post::check_url($clean),
-                                      "text",
-                                      null,
-                                      ($post["Status"] == "5"),
-                                      $status_translate[$post["Status"]],
-                                      $post["Posted"],
-                                      null,
-                                      false);
+                $new_post = Post::add(
+                    array("title" => $post["Title"],
+                          "body" => $post["Body"],
+                           "imported_from" => "textpattern"),
+                    $clean,
+                    Post::check_url($clean),
+                    "text",
+                    null,
+                    ($post["Status"] == "5"),
+                    $status_translate[$post["Status"]],
+                    $post["Posted"],
+                    null,
+                    false
+                );
 
                 $trigger->call("import_textpattern_post", $post, $new_post);
             }
@@ -397,7 +412,8 @@
             $visitor = Visitor::current();
 
             if (!$visitor->group->can("add_post"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to import content.", "migrator"));
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to import content.", "migrator"));
 
             if (empty($_POST))
                 redirect("manage_migration");
@@ -477,32 +493,36 @@
                 $clean = sanitize(fallback($post["entry_basename"], $post["entry_title"]), true, true, 80);
 
                 if (empty($post["entry_class"]) or $post["entry_class"] == "entry") {
-                    $new_post = Post::add(array("title" => $post["entry_title"],
-                                                "body" => $body,
-                                                "imported_from" => "movabletype"),
-                                          $clean,
-                                          Post::check_url($clean),
-                                          "text",
-                                          null,
-                                          false,
-                                          $status_translate[$post["entry_status"]],
-                                          oneof($post["entry_authored_on"], $post["entry_created_on"], datetime()),
-                                          $post["entry_modified_on"],
-                                          false);
+                    $new_post = Post::add(
+                        array("title" => $post["entry_title"],
+                              "body" => $body,
+                              "imported_from" => "movabletype"),
+                        $clean,
+                        Post::check_url($clean),
+                        "text",
+                        null,
+                        false,
+                        $status_translate[$post["entry_status"]],
+                        oneof($post["entry_authored_on"], $post["entry_created_on"], datetime()),
+                        $post["entry_modified_on"],
+                        false
+                    );
 
                     $trigger->call("import_movabletype_post", $post, $new_post);
 
                 } elseif ($post["entry_class"] == "page" and $visitor->group->can("add_page")) {
-                    $new_page = Page::add($post["entry_title"],
-                                          $body,
-                                          null,
-                                          0,
-                                          true,
-                                          0,
-                                          $clean,
-                                          Page::check_url($clean),
-                                          oneof($post["entry_authored_on"], $post["entry_created_on"], datetime()),
-                                          $post["entry_modified_on"]);
+                    $new_page = Page::add(
+                        $post["entry_title"],
+                        $body,
+                        null,
+                        0,
+                        true,
+                        0,
+                        $clean,
+                        Page::check_url($clean),
+                        oneof($post["entry_authored_on"], $post["entry_created_on"], datetime()),
+                        $post["entry_modified_on"]
+                    );
 
                     $trigger->call("import_movabletype_page", $post, $new_page);
                 }
