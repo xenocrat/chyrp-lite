@@ -267,7 +267,8 @@
             if (empty($_GET['query']))
                 Flash::warning(__("Please enter a search term."), "/");
 
-            list($where, $params) = keywords($_GET['query'], "post_attributes.value LIKE :query OR url LIKE :query", "posts");
+            list($where, $params) = keywords($_GET['query'],
+                                    "post_attributes.value LIKE :query OR url LIKE :query", "posts");
 
             $results = Post::find(array("placeholders" => true,
                                         "where" => $where,
@@ -306,7 +307,8 @@
                                  "where" => array("status" => "draft",
                                  "user_id" => $visitor->id))), $this->post_limit);
 
-            $this->display(array("pages".DIR."drafts", "pages".DIR."index"), array("posts" => $posts), __("Drafts"));
+            $this->display(array("pages".DIR."drafts", "pages".DIR."index"),
+                           array("posts" => $posts), __("Drafts"));
         }
 
         /**
@@ -331,7 +333,8 @@
             if ($post->status == "scheduled")
                 Flash::message(__("This post is scheduled to be published."));
 
-            $this->display(array("pages".DIR."view", "pages".DIR."index"), array("post" => $post), $post->title());
+            $this->display(array("pages".DIR."view", "pages".DIR."index"),
+                           array("post" => $post), $post->title());
         }
 
         /**
@@ -358,7 +361,8 @@
                 show_403(__("Access Denied"), __("You are not allowed to view this page."));
             }
 
-            $this->display(array("pages".DIR.$page->url, "pages".DIR."page"), array("page" => $page), $page->title);
+            $this->display(array("pages".DIR.$page->url, "pages".DIR."page"),
+                           array("page" => $page), $page->title);
         }
 
         /**
