@@ -259,12 +259,6 @@
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to update a post."), null, 400);
 
-            if (isset($_POST['publish']) and $visitor->group->can("add_post"))
-                $_POST['status'] = "public";
-
-            if (!$visitor->group->can("add_post"))
-                $_POST['status'] = "draft";
-
             $post = new Post($_POST['id'], array("drafts" => true));
 
             if ($post->no_results)
@@ -273,6 +267,12 @@
             if (!$post->editable())
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to edit this post."));
+
+            if (isset($_POST['publish']) and $visitor->group->can("add_post"))
+                $_POST['status'] = "public";
+
+            if (!$visitor->group->can("add_post"))
+                $_POST['status'] = $post->status;
 
             $post = Feathers::$instances[$post->feather]->update($post);
 
