@@ -102,6 +102,7 @@ h3.filter {
     text-align: center;
     margin: 0rem;
     padding: 2rem 0.5em;
+    background-color: #383839;
     border-bottom: 1px solid #666667;
 }
 h2.archive {
@@ -418,7 +419,7 @@ div.flash {
     color: #ffffff;
     background-color: #cc5252;
     padding: 0.5em;
-    border-bottom: 1px solid #666667;
+    border-bottom: 1px solid transparent;
 }
 div.metadata {
     font-weight: normal;
@@ -570,14 +571,16 @@ div.traversal a {
     height: 1em;
     top: 0px;
     color: #ffffff;
+    background-color: #383839;
     line-height: 1;
     border-radius: 50%;
-    border: 2px #666667 solid;
+    border: 1px #383839 solid;
 }
 div.traversal a:hover,
 div.traversal a:focus,
 div.traversal a:active {
     background-color: #666667;
+    border-color: #666667;
     transition: top 250ms cubic-bezier(0.5, -8, 0.2, 4);
 }
 div.next a:hover, div.next a:active {
@@ -603,7 +606,8 @@ div.tag_cloud a.tag {
     margin: 2px 0em;
     border-radius: 0.2em;
     color: #fffefd;
-    border: 2px solid #666667;
+    background-color: #383839;
+    border: 1px solid #383839;
 }
 div.tags a.tag:hover,
 div.tags a.tag:focus,
@@ -612,6 +616,7 @@ div.tag_cloud a.tag:hover,
 div.tag_cloud a.tag:focus,
 div.tag_cloud a.tag:active {
     background-color: #666667;
+    border-color: #666667;
 }
 div.category a.category {
     display: inline-block;
@@ -635,14 +640,14 @@ div.doaction a, button {
     padding: 0.4em 1.2em;
     border-radius: 0.2em;
     color: #fffefd;
-    background-color: transparent;
-    border: 2px solid #666667;
+    background-color: #383839;
+    border: 1px solid #383839;
 }
 div.doaction a:hover, button:hover,
 div.doaction a:focus, button:focus,
 div.doaction a:active, button:active {
     background-color: #666667;
-    border: 2px solid #666667;
+    border: 1px solid #666667;
 }
 div.doaction a.post_delete_link,
 div.doaction a.delete_link {
@@ -658,7 +663,7 @@ div.doaction a.delete_link:focus,
 div.doaction a.post_delete_link:active,
 div.doaction a.delete_link:active {
     background-color: #cc5252;
-    border: 2px solid #cc5252;
+    border: 1px solid #cc5252;
 }
 a.likes > img {
     display: inline-block;
