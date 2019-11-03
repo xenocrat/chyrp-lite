@@ -209,7 +209,7 @@
             if (!feather_enabled($_POST['feather']))
                 show_404(__("Not Found"), __("Feather not found."));
 
-            if (isset($_POST['draft']) and $visitor->group->can("add_draft"))
+            if (isset($_POST['draft']))
                 $_POST['status'] = "draft";
 
             if (!$visitor->group->can("add_post"))
@@ -217,7 +217,8 @@
 
             $post = Feathers::$instances[$_POST['feather']]->submit();
 
-            Flash::notice(__("Post created!"), (($post->status == "public") ? $post->url() : "write_post"));
+            Flash::notice(__("Post created!").'<a href="'.$post->url().'">'.
+                          __("View post &rarr;").'</a>', "manage_posts");
         }
 
         /**
@@ -268,7 +269,7 @@
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to edit this post."));
 
-            if (isset($_POST['publish']) and $visitor->group->can("add_post"))
+            if (isset($_POST['publish']))
                 $_POST['status'] = "public";
 
             if (!$visitor->group->can("add_post"))
