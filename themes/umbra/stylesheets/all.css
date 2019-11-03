@@ -490,7 +490,7 @@ ul.archive article.post.archive {
     font-size: 0.75em;
     margin: 1rem 0rem 1rem 1rem;
     padding: 8px;
-    border: 1px solid #c2bcb8;
+    border: 1px solid #666667;
 }
 article > header {
     display: block;
@@ -572,7 +572,7 @@ div.traversal a {
     color: #ffffff;
     line-height: 1;
     border-radius: 50%;
-    border: 1px #666667 solid;
+    border: 2px #666667 solid;
 }
 div.traversal a:hover,
 div.traversal a:focus,
@@ -603,7 +603,7 @@ div.tag_cloud a.tag {
     margin: 2px 0em;
     border-radius: 0.2em;
     color: #fffefd;
-    border: 1px solid #666667;
+    border: 2px solid #666667;
 }
 div.tags a.tag:hover,
 div.tags a.tag:focus,
@@ -636,13 +636,13 @@ div.doaction a, button {
     border-radius: 0.2em;
     color: #fffefd;
     background-color: transparent;
-    border: 1px solid #666667;
+    border: 2px solid #666667;
 }
 div.doaction a:hover, button:hover,
 div.doaction a:focus, button:focus,
 div.doaction a:active, button:active {
     background-color: #666667;
-    border: 1px solid #666667;
+    border: 2px solid #666667;
 }
 div.doaction a.post_delete_link,
 div.doaction a.delete_link {
@@ -658,7 +658,7 @@ div.doaction a.delete_link:focus,
 div.doaction a.post_delete_link:active,
 div.doaction a.delete_link:active {
     background-color: #cc5252;
-    border: 1px solid #cc5252;
+    border: 2px solid #cc5252;
 }
 a.likes > img {
     display: inline-block;
