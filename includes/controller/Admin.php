@@ -1852,7 +1852,7 @@
                       __("You did not specify which theme to select."), null, 400);
 
             if (!isset($_POST['change']) or $_POST['change'] != "indubitably")
-                self::preview_theme();
+                self::admin_preview_theme();
 
             $theme = str_replace(array(".", DIR), "", $_POST['theme']);
             Config::current()->set("theme", $theme);
