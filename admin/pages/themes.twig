@@ -7,25 +7,30 @@
 <ul id="blog_themes" class="extend themes">
 {% for safename, theme in themes %}
 <li class="theme{{ safename == site.theme ? ' current' : '' }}" id="{{ safename }}">
-<img src="{{ site.chyrp_url ~ '/themes/' ~ safename ~ '/screenshot.png' }}" alt="{{ theme.description | fix(true) }}" class="screenshot" title="{{ theme.description | fix(true) }}">
 <h3>
 <a class="emblem module_author" href="{{ theme.url }}" target="_blank">
 <img src="{{ site.chyrp_url }}/admin/images/icons/info.svg" alt="{{ 'info' | translate }}">
 {{ theme.name }}{# translation is done in the controller #}
 </a>
 </h3>
+<p class="theme_description">
+{{ theme.description }}{# translation is done in the controller #}
+</p>
+{% if safename != site.theme %}
 <div class="controls">
 <form action="{{ url('change_theme') }}" method="post" accept-charset="UTF-8">
 <input type="hidden" name="theme" value="{{ safename }}">
 <input type="hidden" name="hash" value="{{ authenticate() }}">
-<button name="change" value="indubitably" type="submit"{{ safename == site.theme ? " disabled" : "" }}>
+<button name="change" value="indubitably" type="submit">
 <img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Select" | translate }}
 </button>
-<button name="change" value="undecidedly"{{ safename == site.theme ? " disabled" : "" }}>
+<button name="change" value="undecidedly">
 <img src="{{ site.chyrp_url }}/admin/images/icons/magnifier.svg" alt="">{{ "Preview" | translate }}
 </button>
 </form>
+<div class="clear"></div>
 </div>
+{% endif %}
 </li>
 {% endfor %}
 </ul>
