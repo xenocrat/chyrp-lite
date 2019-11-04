@@ -251,7 +251,7 @@ msgstr "关闭"
 msgid "close"
 msgstr "关闭"
 
-#: admin/javascripts/admin.js.php:208 admin/pages/themes.twig:25
+#: admin/javascripts/admin.js.php:208 admin/pages/themes.twig:28
 msgid "Preview"
 msgstr "预览"
 
@@ -548,7 +548,7 @@ msgstr "已启用"
 
 #: admin/pages/feathers.twig:13 admin/pages/feathers.twig:49
 #: admin/pages/modules.twig:13 admin/pages/modules.twig:69
-#: admin/pages/themes.twig:13
+#: admin/pages/themes.twig:12
 msgid "info"
 msgstr "信息"
 
@@ -934,7 +934,7 @@ msgstr "主题"
 msgid "Blog Themes"
 msgstr "博客主题"
 
-#: admin/pages/themes.twig:22
+#: admin/pages/themes.twig:25
 msgid "Select"
 msgstr "选择"
 

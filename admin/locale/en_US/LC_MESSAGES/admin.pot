@@ -213,7 +213,7 @@ msgid "close"
 msgstr ""
 
 #: admin/javascripts/admin.js.php:208
-#: admin/pages/themes.twig:25
+#: admin/pages/themes.twig:28
 msgid "Preview"
 msgstr ""
 
@@ -554,7 +554,7 @@ msgstr ""
 #: admin/pages/feathers.twig:49
 #: admin/pages/modules.twig:13
 #: admin/pages/modules.twig:69
-#: admin/pages/themes.twig:13
+#: admin/pages/themes.twig:12
 msgid "info"
 msgstr ""
 
@@ -970,7 +970,7 @@ msgstr ""
 msgid "Blog Themes"
 msgstr ""
 
-#: admin/pages/themes.twig:22
+#: admin/pages/themes.twig:25
 msgid "Select"
 msgstr ""
 

@@ -267,7 +267,7 @@ msgstr "Chiudi"
 msgid "close"
 msgstr "chiudi"
 
-#: admin/javascripts/admin.js.php:208 admin/pages/themes.twig:25
+#: admin/javascripts/admin.js.php:208 admin/pages/themes.twig:28
 msgid "Preview"
 msgstr "Anteprima"
 
@@ -572,7 +572,7 @@ msgstr "Abilitato"
 
 #: admin/pages/feathers.twig:13 admin/pages/feathers.twig:49
 #: admin/pages/modules.twig:13 admin/pages/modules.twig:69
-#: admin/pages/themes.twig:13
+#: admin/pages/themes.twig:12
 msgid "info"
 msgstr "info"
 
@@ -960,7 +960,7 @@ msgstr "Temi"
 msgid "Blog Themes"
 msgstr "Temi del blog"
 
-#: admin/pages/themes.twig:22
+#: admin/pages/themes.twig:25
 msgid "Select"
 msgstr "Seleziona"
 
