@@ -189,7 +189,7 @@
 
             foreach ($post->files as $file)
                 if (in_array($file["type"], array("jpg", "jpeg", "png", "gif", "tif", "tiff", "bmp"))) {
-                    $post->thumb = $file["name"];
+                    $post->image = $file["name"];
                     break;
                 }
         }
