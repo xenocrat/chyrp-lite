@@ -284,18 +284,19 @@
                                  "title" => $config->name));
 
             # Generate a feed for this route action if it seems appropriate.
-            if ($route->action != "index" and !$main->feed and !empty($main->context["posts"])) {
-                # Rewind to page 1 (most recent) if the posts are paginated.
-                $page_url = ($main->context["posts"] instanceof Paginator) ?
-                    $main->context["posts"]->prev_page_url(1) : self_url() ;
+            if ($route->action != "index" and !$main->feed and !empty($main->context["posts"]) and
+                !($main->context["posts"] instanceof Paginator and $main->context["posts"]->total == 0)) {
+                    # Rewind to page 1 (most recent) if the posts are paginated.
+                    $page_url = ($main->context["posts"] instanceof Paginator) ?
+                        $main->context["posts"]->prev_page_url(1) : self_url() ;
 
-                $feed_url = ($config->clean_urls) ?
-                    rtrim($page_url, "/")."/feed/" :
-                    $page_url.(substr_count($page_url, "?") ? "&feed" : "?feed") ;
+                    $feed_url = ($config->clean_urls) ?
+                        rtrim($page_url, "/")."/feed/" :
+                        $page_url.(substr_count($page_url, "?") ? "&feed" : "?feed") ;
 
-                    $links[] = array("href" => $feed_url,
-                                     "type" => BlogFeed::type(),
-                                     "title" => oneof($this->title, $config->name));
+                        $links[] = array("href" => $feed_url,
+                                         "type" => BlogFeed::type(),
+                                         "title" => oneof($this->title, $config->name));
             }
 
             # Ask extensions to provide additional links.
