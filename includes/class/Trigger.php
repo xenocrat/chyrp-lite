@@ -90,13 +90,13 @@
 
             foreach (Modules::$instances as $module)
                 if (!in_array(array($module, $name), $this->called[$name]) and is_callable(array($module, $name))) {
-                        if (!empty($module->cancelled)) {
-                            $return = false;
-                            continue;
-                        }
-
-                        $return = call_user_func_array(array($module, $name), $arguments);
+                    if (!empty($module->cancelled)) {
+                        $return = false;
+                        continue;
                     }
+
+                    $return = call_user_func_array(array($module, $name), $arguments);
+                }
 
             return $return;
         }
@@ -158,14 +158,14 @@
 
             foreach (Modules::$instances as $module)
                 if (!in_array(array($module, $name), $this->called[$name]) and is_callable(array($module, $name))) {
-                        if (!empty($module->cancelled))
-                            continue;
+                    if (!empty($module->cancelled))
+                        continue;
 
-                        $call = call_user_func_array(array($module, $name),
-                                                     array_merge(array(&$target),
-                                                                        $arguments));
+                    $call = call_user_func_array(array($module, $name),
+                                                 array_merge(array(&$target),
+                                                                    $arguments));
 
-                        $target = fallback($call, $target);
+                    $target = fallback($call, $target);
                 }
 
             return $target;
