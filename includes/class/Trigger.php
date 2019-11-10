@@ -73,13 +73,30 @@
 
             if (isset($this->priorities[$name]) and usort($this->priorities[$name], array($this, "cmp")))
                 foreach ($this->priorities[$name] as $action) {
-                    $return = call_user_func_array($action["function"], $arguments);
-                    $this->called[$name][] = $action["function"];
+                    $function = $action["function"];
+
+                    if (is_array($function)) {
+                        $object = $function[0];
+
+                        if (is_object($object) and !empty($object->cancelled)) {
+                            $return = false;
+                            continue;
+                        }
+                    }
+
+                    $return = call_user_func_array($function, $arguments);
+                    $this->called[$name][] = $function;
                 }
 
             foreach (Modules::$instances as $module)
-                if (!in_array(array($module, $name), $this->called[$name]) and is_callable(array($module, $name)))
-                    $return = call_user_func_array(array($module, $name), $arguments);
+                if (!in_array(array($module, $name), $this->called[$name]) and is_callable(array($module, $name))) {
+                        if (!empty($module->cancelled)) {
+                            $return = false;
+                            continue;
+                        }
+
+                        $return = call_user_func_array(array($module, $name), $arguments);
+                    }
 
             return $return;
         }
@@ -122,17 +139,33 @@
 
             if (isset($this->priorities[$name]) and usort($this->priorities[$name], array($this, "cmp")))
                 foreach ($this->priorities[$name] as $action) {
-                    $call = call_user_func_array($action["function"],
-                                                 array_merge(array(&$target), $arguments));
-                    $this->called[$name][] = $action["function"];
+                    $function = $action["function"];
+
+                    if (is_array($function)) {
+                        $object = $function[0];
+
+                        if (is_object($object) and !empty($object->cancelled))
+                            continue;
+                    }
+
+                    $call = call_user_func_array($function,
+                                                 array_merge(array(&$target),
+                                                                    $arguments));
+
+                    $this->called[$name][] = $function;
                     $target = fallback($call, $target);
                 }
 
             foreach (Modules::$instances as $module)
                 if (!in_array(array($module, $name), $this->called[$name]) and is_callable(array($module, $name))) {
-                    $call = call_user_func_array(array($module, $name),
-                                                 array_merge(array(&$target), $arguments));
-                    $target = fallback($call, $target);
+                        if (!empty($module->cancelled))
+                            continue;
+
+                        $call = call_user_func_array(array($module, $name),
+                                                     array_merge(array(&$target),
+                                                                        $arguments));
+
+                        $target = fallback($call, $target);
                 }
 
             return $target;
