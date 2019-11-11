@@ -49,18 +49,17 @@
          *     $name - The name of the trigger, or an array of triggers to call.
          */
         public function call($name) {
-            if (is_array($name)) {
-                $return = null;
+            $return = null;
 
-                foreach ($name as $index => $call) {
+            if (is_array($name)) {
+                foreach ($name as $call) {
                     $args = func_get_args();
                     $args[0] = $call;
 
-                    if ($index + 1 == count($name))
-                        return $this->exists($call) ? call_user_func_array(array($this, "call"), $args) : $return ;
-                    else
-                        $return = $this->exists($call) ? call_user_func_array(array($this, "call"), $args) : $return ;
+                    $return = call_user_func_array(array($this, "call"), $args);
                 }
+
+                return $return;
             }
 
             if (!$this->exists($name))
@@ -68,7 +67,6 @@
 
             $arguments = func_get_args();
             array_shift($arguments);
-            $return = null;
             $this->called[$name] = array();
 
             if (isset($this->priorities[$name]) and usort($this->priorities[$name], array($this, "cmp")))
@@ -116,17 +114,17 @@
          *     $target, filtered through any/all actions for the trigger $name.
          */
         public function filter(&$target, $name) {
-            if (is_array($name))
-                foreach ($name as $index => $filter) {
+            if (is_array($name)) {
+                foreach ($name as $filter) {
                     $args = func_get_args();
                     $args[0] =& $target;
                     $args[1] = $filter;
 
-                    if ($index + 1 == count($name))
-                        return $target = call_user_func_array(array($this, "filter"), $args);
-                    else
-                        $target = call_user_func_array(array($this, "filter"), $args);
+                    $target = call_user_func_array(array($this, "filter"), $args);
                 }
+
+                return $target;
+            }
 
             if (!$this->exists($name))
                 return $target;
