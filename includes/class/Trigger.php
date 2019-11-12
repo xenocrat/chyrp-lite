@@ -49,21 +49,24 @@
          *     $name - The name of the trigger, or an array of triggers to call.
          */
         public function call($name) {
-            $return = null;
+            $return = false;
 
             if (is_array($name)) {
                 foreach ($name as $call) {
                     $args = func_get_args();
                     $args[0] = $call;
 
-                    $return = call_user_func_array(array($this, "call"), $args);
+                    $success = call_user_func_array(array($this, "call"), $args);
+
+                    if ($success !== false)
+                        $return = $success;
                 }
 
                 return $return;
             }
 
             if (!$this->exists($name))
-                return false;
+                return $return;
 
             $arguments = func_get_args();
             array_shift($arguments);
@@ -76,10 +79,8 @@
                     if (is_array($function)) {
                         $object = $function[0];
 
-                        if (is_object($object) and !empty($object->cancelled)) {
-                            $return = false;
+                        if (is_object($object) and !empty($object->cancelled))
                             continue;
-                        }
                     }
 
                     $return = call_user_func_array($function, $arguments);
@@ -88,10 +89,8 @@
 
             foreach (Modules::$instances as $module)
                 if (!in_array(array($module, $name), $this->called[$name]) and is_callable(array($module, $name))) {
-                    if (!empty($module->cancelled)) {
-                        $return = false;
+                    if (!empty($module->cancelled))
                         continue;
-                    }
 
                     $return = call_user_func_array(array($module, $name), $arguments);
                 }
