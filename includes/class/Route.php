@@ -131,20 +131,15 @@
                 }
             }
 
-            # No responders were found; display a failpage if one is set.
-            if (!$this->success and method_exists($this->controller, "failed"))
-                $this->controller->failed($this);
-
-            # Show a 404 page if routing failed and nothing was displayed.
+            # Return 404 if routing failed and nothing was displayed.
             if (!$this->success and !$this->controller->displayed)
                 show_404();
 
             # Set redirect_to so that visitors will come back here after login.
-            if (!$this->controller->feed and $this->controller->displayed) {
-                # Ignore actions that are exempt from the "view_site" permission.
-                if (!in_array($this->action, $this->controller->view_site_exempt))
+            # (ignores actions that are exempt from the "view_site" permission)
+            if (!$this->controller->feed and $this->controller->displayed and
+                !in_array($this->action, $this->controller->view_site_exempt))
                     $_SESSION['redirect_to'] = self_url();
-            }
 
             $trigger->call("route_done", $this);
 
