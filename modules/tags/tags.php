@@ -393,14 +393,14 @@
 
         public function main_tag($main) {
             if (!isset($_GET['name']))
-                return $main->resort(array("pages".DIR."tag", "pages".DIR."index"),
+                return $main->display(array("pages".DIR."tag", "pages".DIR."index"),
                     array("reason" => __("You did not specify a tag.", "tags")),
                     __("Invalid Tag", "tags"));
 
             $tag = self::tag_find($_GET['name']);
 
             if (empty($tag))
-                return $main->resort(array("pages".DIR."tag", "pages".DIR."index"),
+                return $main->display(array("pages".DIR."tag", "pages".DIR."index"),
                     array("reason" => __("The tag you specified was not found.", "tags")),
                     __("Invalid Tag", "tags"));
 
@@ -416,7 +416,7 @@
                 $ids[] = $result["post_id"];
 
             if (empty($ids))
-                return $main->resort(array("pages".DIR."tag", "pages".DIR."index"),
+                return $main->display(array("pages".DIR."tag", "pages".DIR."index"),
                     array("reason" => __("There are no posts with the tag you specified.", "tags")),
                     __("Invalid Tag", "tags"));
 
