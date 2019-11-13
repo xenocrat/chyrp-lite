@@ -2265,6 +2265,9 @@
             $route = Route::current();
             $trigger = Trigger::current();
 
+            if ($this->displayed == true)
+                return;
+
             $this->displayed = true;
 
             $this->context                       = array_merge($context, $this->context);
