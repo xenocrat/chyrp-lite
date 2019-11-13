@@ -45,10 +45,6 @@
         # Environment for the Twig template engine.
         private $twig;
 
-        # Array: $resort_to
-        # Arguments for a page of last resort.
-        private $resort_to;
-
         /**
          * Function: __construct
          * Loads the Twig parser and sets up the l10n domain.
@@ -789,6 +785,9 @@
             $trigger = Trigger::current();
             $theme = Theme::current();
 
+            if ($this->displayed == true)
+                return;
+
             if (is_array($template))
                 foreach (array_values($template) as $index => $try)
                     if ($theme->file_exists($try) or ($index + 1) == count($template))
@@ -832,24 +831,6 @@
 
             $trigger->filter($this->context, "twig_context_main");
             $this->twig->display($template.".twig", $this->context);
-        }
-
-        /**
-         * Function: resort
-         * Queue a page in the event that none of the actions are successful.
-         */
-        public function resort($template, $context = array(), $title = "") {
-            $this->resort_to = array($template, $context, $title);
-            return false;
-        }
-
-        /**
-         * Function: failed
-         * Serve a page in the event that none of the actions are successful.
-         */
-        public function failed($route) {
-            if (!empty($this->resort_to))
-                call_user_func_array(array($this, "display"), $this->resort_to);
         }
 
         /**
