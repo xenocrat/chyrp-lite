@@ -160,14 +160,14 @@
 
         public function main_category($main) {
             if (!isset($_GET['name']))
-                return $main->resort(array("pages".DIR."category", "pages".DIR."index"),
+                return $main->display(array("pages".DIR."category", "pages".DIR."index"),
                     array("reason" => __("You did not specify a category.", "categorize")),
                     __("Invalid Category", "categorize"));
 
             $category = new Category(array("clean" => $_GET['name']));
 
             if ($category->no_results)
-                return $main->resort(array("pages".DIR."category", "pages".DIR."index"),
+                return $main->display(array("pages".DIR."category", "pages".DIR."index"),
                     array("reason" => __("The category you specified was not found.", "categorize")),
                     __("Invalid Category", "categorize"));
 
@@ -182,7 +182,7 @@
                 $ids[] = $result["post_id"];
 
             if (empty($ids))
-                return $main->resort(array("pages".DIR."category", "pages".DIR."index"),
+                return $main->display(array("pages".DIR."category", "pages".DIR."index"),
                     array("reason" => __("There are no posts in the category you specified.", "categorize")),
                     __("Invalid Category", "categorize"));
 
