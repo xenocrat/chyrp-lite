@@ -155,7 +155,7 @@
 
             Trigger::current()->filter($route->action, "admin_determine_action");
 
-            # Show a 403 if we can't determine an allowed action for the visitor.
+            # Return 403 if we can't determine an allowed action for the visitor.
             if (!isset($route->action))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to view this area."));

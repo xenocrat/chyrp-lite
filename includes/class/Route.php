@@ -98,7 +98,7 @@
                 if (preg_match("/[^\w]/", $this->action))
                     error(__("Error"), __("Invalid action."), null, 400);
 
-                # Show a 403 page if the visitor cannot view the site and this is not an exempt action.
+                # Return 403 if the visitor cannot view the site and this is not an exempt action.
                 if (!$visitor->group->can("view_site") and
                     !in_array($this->action, $this->controller->view_site_exempt)) {
 
