@@ -259,12 +259,12 @@ msgstr "Zum Bearbeiten eines Posts wird eine ID benötigt."
 #: includes/controller/Admin.php:235 includes/controller/Admin.php:266
 #: includes/controller/Admin.php:295 includes/controller/Admin.php:321
 #: includes/controller/Ajax.php:49 includes/lib/XMLRPC.php:210
-#: includes/lib/XMLRPC.php:319 includes/lib/XMLRPC.php:372
+#: includes/lib/XMLRPC.php:318 includes/lib/XMLRPC.php:372
 msgid "Post not found."
 msgstr "Post nicht gefunden."
 
 #: includes/controller/Admin.php:239 includes/controller/Admin.php:270
-#: includes/lib/XMLRPC.php:213 includes/lib/XMLRPC.php:322
+#: includes/lib/XMLRPC.php:213 includes/lib/XMLRPC.php:321
 msgid "You do not have sufficient privileges to edit this post."
 msgstr "Du verfügst nicht über die Berechtigung diesen Post zu bearbeiten."
 
@@ -671,7 +671,7 @@ msgstr "Einstellungen aktualisiert."
 msgid "My Awesome Homepage"
 msgstr "Meine coole Homepage"
 
-#: includes/controller/Admin.php:2068 includes/lib/XMLRPC.php:249
+#: includes/controller/Admin.php:2068 includes/lib/XMLRPC.php:273
 msgid "Nothing here yet!"
 msgstr "Hier ist noch nichts!"
 

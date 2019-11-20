@@ -257,12 +257,12 @@ msgstr "编辑帖子需要ID。"
 #: includes/controller/Admin.php:235 includes/controller/Admin.php:266
 #: includes/controller/Admin.php:295 includes/controller/Admin.php:321
 #: includes/controller/Ajax.php:49 includes/lib/XMLRPC.php:210
-#: includes/lib/XMLRPC.php:319 includes/lib/XMLRPC.php:372
+#: includes/lib/XMLRPC.php:318 includes/lib/XMLRPC.php:372
 msgid "Post not found."
 msgstr "帖子未找到。"
 
 #: includes/controller/Admin.php:239 includes/controller/Admin.php:270
-#: includes/lib/XMLRPC.php:213 includes/lib/XMLRPC.php:322
+#: includes/lib/XMLRPC.php:213 includes/lib/XMLRPC.php:321
 msgid "You do not have sufficient privileges to edit this post."
 msgstr "您没有足够的权限编辑这个帖子。"
 
@@ -668,7 +668,7 @@ msgstr "设置已更新。"
 msgid "My Awesome Homepage"
 msgstr "我最棒的主页"
 
-#: includes/controller/Admin.php:2068 includes/lib/XMLRPC.php:249
+#: includes/controller/Admin.php:2068 includes/lib/XMLRPC.php:273
 msgid "Nothing here yet!"
 msgstr "然而这里什么也没有！"
 

@@ -371,7 +371,7 @@ msgstr ""
 #: includes/controller/Admin.php:321
 #: includes/controller/Ajax.php:49
 #: includes/lib/XMLRPC.php:210
-#: includes/lib/XMLRPC.php:319
+#: includes/lib/XMLRPC.php:318
 #: includes/lib/XMLRPC.php:372
 msgid "Post not found."
 msgstr ""
@@ -379,7 +379,7 @@ msgstr ""
 #: includes/controller/Admin.php:239
 #: includes/controller/Admin.php:270
 #: includes/lib/XMLRPC.php:213
-#: includes/lib/XMLRPC.php:322
+#: includes/lib/XMLRPC.php:321
 msgid "You do not have sufficient privileges to edit this post."
 msgstr ""
 
@@ -849,7 +849,7 @@ msgid "My Awesome Homepage"
 msgstr ""
 
 #: includes/controller/Admin.php:2068
-#: includes/lib/XMLRPC.php:249
+#: includes/lib/XMLRPC.php:273
 msgid "Nothing here yet!"
 msgstr ""
 
