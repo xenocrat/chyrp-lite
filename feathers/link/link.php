@@ -118,7 +118,6 @@
                 return;
 
             $values["name"] = $struct["title"];
-            $values["source"] = $post->source;
             $values["description"] = $struct["description"];
 
             return $values;
