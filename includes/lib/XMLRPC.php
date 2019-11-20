@@ -245,8 +245,6 @@
 
             $trigger = Trigger::current();
             $struct = $args[3];
-            $values = array("title" => $struct["title"],
-                            "body" => oneof($struct["description"], __("Nothing here yet!")));
 
             # Support for extended content.
             if (isset($struct["mt_text_more"]))
@@ -271,6 +269,8 @@
             $status = $user->group->can("add_post") ? $status : "draft" ;
             $pings = ($struct["mt_allow_pings"] == "open");
             $created_at = oneof($this->convertFromDateCreated($struct), datetime());
+            $values = array("title" => $struct["title"],
+                            "body" => oneof($struct["description"], __("Nothing here yet!")));
 
             $trigger->filter($values, "metaWeblog_before_newPost", $struct);
 
@@ -306,7 +306,6 @@
 
             $trigger = Trigger::current();
             $struct = $args[3];
-            $values = array();
 
             # Support for extended content.
             if (isset($struct["mt_text_more"]))
@@ -342,6 +341,7 @@
             $slug = oneof(sanitize($struct["mt_basename"], true, true, 80), $post->clean);
             $status = $user->group->can("add_post") ? $status : $post->status ;
             $updated_at = oneof($this->convertFromDateCreated($struct), $post->created_at);
+            $values = $post->attributes;
 
             $trigger->filter($values, "metaWeblog_before_editPost", $struct, $post);
 
