@@ -297,7 +297,7 @@
 
             $user_id = ($user instanceof User) ? $user->id : $user ;
 
-            fallback($values,       array_combine($this->attribute_names, $this->attribute_values));
+            fallback($values,       $this->attributes);
             fallback($user_id,      $this->user_id);
             fallback($pinned,       $this->pinned);
             fallback($status,       $this->status);
