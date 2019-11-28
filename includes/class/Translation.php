@@ -95,12 +95,12 @@
                     return false;
 
                 $or_str_data = substr($mo_file,
-                                        $or_str_meta["offset"],
-                                        $or_str_meta["length"]);
+                                      $or_str_meta["offset"],
+                                      $or_str_meta["length"]);
 
                 $tr_str_data = substr($mo_file,
-                                        $tr_str_meta["offset"],
-                                        $tr_str_meta["length"]);
+                                      $tr_str_meta["offset"],
+                                      $tr_str_meta["length"]);
 
                 # Discover null-separated plural forms.
                 if (strpos($or_str_data, "\0") !== false) {
