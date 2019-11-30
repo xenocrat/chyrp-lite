@@ -46,6 +46,7 @@
             $mo_file = file_get_contents($filepath);
             $mo_data = array();
             $mo_length = strlen($mo_file);
+            $big_endian = null;
 
             if (self::MO_SIZEOF_HEADER > $mo_length)
                 return false;
@@ -102,7 +103,7 @@
                                       $tr_str_meta["offset"],
                                       $tr_str_meta["length"]);
 
-                # Discover null-separated plural forms.
+                # Discover msgid null-separated plural forms.
                 if (strpos($or_str_data, "\0") !== false) {
                     $or_str_data = explode("\0", $or_str_data);
                     $tr_str_data = explode("\0", $tr_str_data);
@@ -111,7 +112,7 @@
                 $or_str_data = (array) $or_str_data;
                 $tr_str_data = (array) $tr_str_data;
 
-                # Add all discovered forms to the data array.
+                # Add discovered msgid+msgstr pairs to the data.
                 for ($z = 0; $z < count($or_str_data); $z++) {
                     fallback($tr_str_data[$z], "");
 
