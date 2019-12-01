@@ -7,7 +7,6 @@
         const MO_MAGIC_WORD_BE = "950412de";
         const MO_MAGIC_WORD_LE = "de120495";
         const MO_SIZEOF_HEADER = 28;
-        const LONG_LONG = 8;
 
         # Array: $mo
         # The loaded translations for each domain.
@@ -74,13 +73,13 @@
                 "Vlength/Voffset" ;
 
             for ($i = 0; $i < $mo_offset["num"]; $i++) {
-                $or_str_offset = $mo_offset["or"] + ($i * self::LONG_LONG);
-                $tr_str_offset = $mo_offset["tr"] + ($i * self::LONG_LONG);
+                $or_str_offset = $mo_offset["or"] + ($i * 8);
+                $tr_str_offset = $mo_offset["tr"] + ($i * 8);
 
-                if (($or_str_offset + self::LONG_LONG) > $mo_length)
+                if (($or_str_offset + 8) > $mo_length)
                     return false;
 
-                if (($tr_str_offset + self::LONG_LONG) > $mo_length)
+                if (($tr_str_offset + 8) > $mo_length)
                     return false;
 
                 $or_str_meta = unpack($unpack, $mo_file, $or_str_offset);
