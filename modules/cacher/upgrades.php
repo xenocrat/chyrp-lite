@@ -27,4 +27,23 @@
         }
     }
 
+    /**
+     * Function: cacher_update_config
+     * Updates config settings for for v1.5 and upwards.
+     *
+     * Versions: 2019.04 => 2020.01
+     */
+    function cacher_update_config() {
+        $config = Config::current();
+        $array = $config->module_cacher;
+
+        fallback($array["cache_seed"], random(8));
+
+        $set = $config->set("module_cacher", $array);
+
+        if ($set === false)
+            error(__("Error"), __("Could not write the configuration file."));
+    }
+
     cacher_migrate_config();
+    cacher_update_config();
