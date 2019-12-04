@@ -1,17 +1,23 @@
 <?php
     class Cacher extends Modules {
-        private $exclude;
-        private $url;
+        private $exclude = array();
+        private $seed = "";
+        private $url = "";
+        private $regenerated = false;
         protected $id;
         protected $cachers;
 
         public function __init() {
-            $this->exclude = Config::current()->module_cacher["cache_exclude"];
+            $config = Config::current();
+
+            $this->exclude = $config->module_cacher["cache_exclude"];
+            $this->seed    = $config->module_cacher["cache_seed"];
             $this->url     = rawurldecode(unfix(self_url()));
             $this->id      = token(array(USE_ZLIB,
                                          HTTP_ACCEPT_DEFLATE,
                                          HTTP_ACCEPT_GZIP,
                                          session_id(),
+                                         $this->seed,
                                          $this->url));
 
             $this->cachers = array(new HTMLCacher($this->id),
@@ -22,7 +28,8 @@
 
         static function __install() {
             Config::current()->set("module_cacher",
-                                   array("cache_expire" => 3600,
+                                   array("cache_seed" => random(8),
+                                         "cache_expire" => 3600,
                                          "cache_exclude" => array()));
         }
 
@@ -84,12 +91,25 @@
         }
 
         public function cache_regenerate() {
+            if ($this->regenerated)
+                return;
+
+            $this->regenerated = true;
+
             foreach ($this->cachers as $cacher)
                 $cacher->regenerate();
+
+            $config = Config::current();
+            $settings = $config->module_cacher;
+            $settings["cache_seed"] = random(8);
+            $config->set("module_cacher", $settings);
         }
 
         public function cache_exclude_url($url = null) {
-            $this->exclude[] = rawurldecode(unfix(is_url($url) ? $url : self_url()));
+            $raw = rawurldecode(unfix(is_url($url) ? $url : self_url()));
+
+            if (!in_array($raw, $this->exclude))
+                $this->exclude[] = $raw;
         }
 
         public function cache_id() {
@@ -119,8 +139,10 @@
 
             fallback($_POST['cache_expire'], 3600);
 
-            Config::current()->set("module_cacher",
-                                   array("cache_expire" => (int) $_POST['cache_expire']));
+            $config = Config::current();
+            $settings = $config->module_cacher;
+            $settings["cache_expire"] = (int) $_POST['cache_expire'];
+            $config->set("module_cacher", $settings);
 
             Flash::notice(__("Settings updated."), "cache_settings");
         }
@@ -133,7 +155,7 @@
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
-            $this->regenerate();
+            $this->cache_regenerate();
 
             Flash::notice(__("Cache cleared.", "cacher"), "cache_settings");
         }
