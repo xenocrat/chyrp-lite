@@ -92,6 +92,10 @@
             $this->exclude[] = rawurldecode(unfix(is_url($url) ? $url : self_url()));
         }
 
+        public function cache_id() {
+            return $this->id;
+        }
+
         public function settings_nav($navs) {
             if (Visitor::current()->group->can("change_settings"))
                 $navs["cache_settings"] = array("title" => __("Cache", "cacher"));
