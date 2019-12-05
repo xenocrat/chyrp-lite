@@ -5,9 +5,9 @@
         private $file;
         private $path;
 
-        public function __construct($id) {
+        public function __construct($id, $life) {
             $this->base = CACHES_DIR.DIR."html";
-            $this->life = Config::current()->module_cacher["cache_expire"];
+            $this->life = $life;
             $this->file = $id.".html";
             $this->path = $this->base.DIR.$this->file;
 

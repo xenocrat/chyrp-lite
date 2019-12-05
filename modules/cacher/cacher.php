@@ -1,7 +1,6 @@
 <?php
     class Cacher extends Modules {
         private $exclude = array();
-        private $seed = "";
         private $url = "";
         private $regenerated = false;
         protected $id;
@@ -10,18 +9,19 @@
         public function __init() {
             $config = Config::current();
 
+            $seed          = $config->module_cacher["cache_seed"];
+            $life          = $config->module_cacher["cache_expire"];
             $this->exclude = $config->module_cacher["cache_exclude"];
-            $this->seed    = $config->module_cacher["cache_seed"];
             $this->url     = rawurldecode(unfix(self_url()));
-            $this->id      = token(array(USE_ZLIB,
+            $this->id      = token(array($seed,
+                                         USE_ZLIB,
                                          HTTP_ACCEPT_DEFLATE,
                                          HTTP_ACCEPT_GZIP,
                                          session_id(),
-                                         $this->seed,
                                          $this->url));
 
-            $this->cachers = array(new HTMLCacher($this->id),
-                                   new FeedCacher($this->id));
+            $this->cachers = array(new HTMLCacher($this->id, $life),
+                                   new FeedCacher($this->id, $life));
 
             $this->prepare_cache_regenerators();
         }
