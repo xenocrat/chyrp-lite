@@ -8,6 +8,7 @@
 
         public function __init() {
             $config = Config::current();
+            $visitor = Visitor::current();
 
             $seed          = $config->module_cacher["cache_seed"];
             $life          = $config->module_cacher["cache_expire"];
@@ -18,6 +19,7 @@
                                          HTTP_ACCEPT_DEFLATE,
                                          HTTP_ACCEPT_GZIP,
                                          session_id(),
+                                         $visitor->id,
                                          $this->url));
 
             $this->cachers = array(new HTMLCacher($this->id, $life),
