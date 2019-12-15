@@ -414,7 +414,7 @@ input[type="password"] {
 }
 input:invalid,
 textarea:invalid {
-    border-color: #e5d7a1;
+    border-color: #ff7f00;
     box-shadow: none;
 }
 select:focus,
