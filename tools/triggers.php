@@ -312,7 +312,7 @@
         }
 
         @file_put_contents(MAIN_DIR.DIR."tools".DIR."triggers_list.txt", $contents);
-        echo $contents;
+        echo fix($contents);
     }
 
     #---------------------------------------------
@@ -376,7 +376,7 @@
             }
             *::selection {
                 color: #ffffff;
-                background-color: #4f4f4f;
+                background-color: #ff7f00;
             }
             html {
                 font-size: 14px;
