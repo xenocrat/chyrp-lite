@@ -31,11 +31,11 @@ msgstr "（秒）"
 msgid "Clear Cache"
 msgstr "清除缓存"
 
-#: modules/cacher/cacher.php:97
+#: modules/cacher/cacher.php:123
 msgid "Cache"
 msgstr "缓存"
 
-#: modules/cacher/cacher.php:134
+#: modules/cacher/cacher.php:162
 msgid "Cache cleared."
 msgstr "缓存已清除。"
 

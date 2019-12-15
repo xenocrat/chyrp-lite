@@ -239,7 +239,7 @@ Arguments:
 runtime
 -------
 Called from:
-	includes/common.php on line 384
+	includes/common.php on line 356
 
 
 before_export
@@ -846,7 +846,7 @@ Target:
 visitor
 -------
 Called from:
-	includes/common.php on line 381
+	includes/common.php on line 353
 
 Target:
 	$visitor
@@ -1348,7 +1348,7 @@ Target:
 cache_regenerate_triggers
 -------------------------
 Called from:
-	modules/cacher/cacher.php on line 71
+	modules/cacher/cacher.php on line 80
 
 Target:
 	$regenerate
@@ -1357,7 +1357,7 @@ Target:
 cache_exclude_url_triggers
 --------------------------
 Called from:
-	modules/cacher/cacher.php on line 80
+	modules/cacher/cacher.php on line 89
 
 Target:
 	$exclude_urls
