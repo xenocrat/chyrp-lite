@@ -1,0 +1,3635 @@
+==============================================
+includes/class/Config.php
+==============================================
+
+Class: Config
+-------------
+Holds all of the configuration settings for the entire site.
+
+
+Function: __construct
+---------------------
+Loads the configuration JSON file.
+
+
+Function: read
+--------------
+Reads the configuration file and decodes the settings.
+
+
+Function: write
+---------------
+Encodes the settings and writes the configuration file.
+
+
+Function: set
+-------------
+Adds or replaces a configuration setting with the given value.
+
+Parameters:
+    $setting - The setting name.
+    $value - The value to set.
+    $fallback - Add the setting only if it doesn't exist.
+
+
+Function: remove
+----------------
+Removes a configuration setting.
+
+Parameters:
+    $setting - The setting name.
+
+
+Function: current
+-----------------
+Returns a singleton reference to the current configuration.
+
+
+==============================================
+includes/class/Feathers.php
+==============================================
+
+Class: Feathers
+---------------
+Contains various functions, acts as the backbone for all feathers.
+
+
+Function: setFilter
+-------------------
+Applies a filter to a specified field of the Feather.
+
+Parameters:
+    $field - Attribute of the post to filter.
+    $name - Name of the filter to use.
+
+See Also:
+    <Trigger.filter>
+
+
+Function: customFilter
+----------------------
+Allows a Feather to apply its own filter to a specified field.
+
+Parameters:
+    $field - Attribute of the post to filter.
+    $name - Name of the class function to use as the filter.
+
+See Also:
+    <Trigger.filter>
+
+
+Function: respondTo
+-------------------
+Allows a Feather to respond to a Trigger as a Module would.
+
+Parameters:
+    $name - Name of the trigger to respond to.
+    $function - Name of the class function to respond with.
+    $priority - Priority of the response.
+
+See Also:
+    <Trigger>
+
+
+Function: setField
+------------------
+Sets the feather's fields for creating/editing posts with that feather.
+
+Parameters:
+    $options - An array of key => val options for the field.
+
+Options:
+    attr - The technical name for the field. Think $post->attr.
+    type - The field type. (text, file, text_block, or select)
+    label - The label for the field.
+    optional - Is this field optional?
+    extra - Stuff to output after the input field. Can be anything.
+    note - A minor note to display next to the label text.
+
+
+==============================================
+includes/class/Flash.php
+==============================================
+
+Class: Flash
+------------
+Stores messages (notice, warning, message) to display to the user after a redirect.
+
+
+Function: __construct
+---------------------
+Removes empty notification variables from the session.
+
+
+Function: prepare
+-----------------
+Prepare the structure of the "flash" session value.
+
+
+Function: message
+-----------------
+Add a message (neutral) to the session.
+
+Parameters:
+    $message - Message to display.
+    $redirect_to - URL to redirect to after the message is stored.
+
+
+Function: notice
+----------------
+Add a notice (positive) message to the session.
+
+Parameters:
+    $message - Message to display.
+    $redirect_to - URL to redirect to after the message is stored.
+
+
+Function: warning
+-----------------
+Add a warning (negative) message to the session.
+
+Parameters:
+    $message - Message to display.
+    $redirect_to - URL to redirect to after the message is stored.
+
+
+Function: messages
+------------------
+Calls <Flash.serve> "messages".
+
+
+Function: notices
+-----------------
+Calls <Flash.serve> "notices".
+
+
+Function: warnings
+------------------
+Calls <Flash.serve> "warnings".
+
+
+Function: all
+-------------
+Returns an associative array of all messages and destroys their session values.
+
+Returns:
+    An array of every message available, in the form of [type => [messages]].
+
+
+Function: serve
+---------------
+Serves a message of type $type and destroys it from the session.
+
+Parameters:
+    $type - Type of messages to serve.
+
+Returns:
+    An array of messages of the requested type.
+
+
+Function: exists
+----------------
+Checks for flash messages.
+
+Parameters:
+    $type - The type of message to check for.
+
+
+Function: current
+-----------------
+Returns a singleton reference to the current class.
+
+
+==============================================
+includes/class/Model.php
+==============================================
+
+Class: Model
+------------
+The basis for the Models system.
+
+
+Function: __get
+---------------
+Automatically handle model relationships when grabbing attributes of an object.
+
+Returns:
+    @mixed@
+
+
+Function: __isset
+-----------------
+Automatically handle model relationships when testing attributes of an object.
+
+
+Function: __getPlaceholders
+---------------------------
+Calls __get with the requested $name, but grabs everything as placeholders.
+
+Parameters:
+    $name - Name to call <Model.__get> with.
+
+Returns:
+    @mixed@
+
+See Also:
+    <Model.__get>
+
+
+Function: grab
+--------------
+Grabs a single model from the database.
+
+Parameters:
+    $model - The instantiated model class to pass the object to (e.g. Post).
+    $id - The ID of the model to grab. Can be null.
+    $options - An array of options, mostly SQL things.
+
+Options:
+    select - What to grab from the table.
+    from - Which table(s) to grab from?
+    left_join - A @LEFT JOIN@ associative array.
+    where - A string or array of conditions.
+    params - An array of parameters to pass to the SQL driver.
+    group - A string or array of "GROUP BY" conditions.
+    order - What to order the SQL result by.
+    offset - Offset for SQL query.
+    read_from - An array to read from instead of performing another query.
+    ignore_dupes - An array of columns in which duplicate values will be retained.
+
+
+Function: search
+----------------
+Returns an array of model objects that are found by the $options array.
+
+Parameters:
+    $options - An array of options, mostly SQL things.
+    $options_for_object - An array of options for the instantiation of the model.
+
+Options:
+    select - What to grab from the table.
+    from - Which table(s) to grab from?
+    left_join - A @LEFT JOIN@ associative array.
+    where - A string or array of conditions.
+    params - An array of parameters to pass to the SQL driver.
+    group - A string or array of "GROUP BY" conditions.
+    order - What to order the SQL result by.
+    offset - Offset for SQL query.
+    limit - Limit for SQL query.
+    placeholders - Return an array of arrays instead of an array of objects?
+    ignore_dupes - An array of columns in which duplicate values will be retained.
+
+See Also:
+    <Model.grab>
+
+
+Function: delete
+----------------
+Deletes a given object. Calls the @delete_[model]@ trigger with the object.
+
+Parameters:
+    $model - The model name.
+    $id - The ID of the object to delete.
+    $options_for_object - An array of options for the instantiation of the model.
+
+
+Function: deletable
+-------------------
+Checks if the <User> can delete the object.
+
+
+Function: editable
+------------------
+Checks if the <User> can edit the object.
+
+
+Function: edit_link
+-------------------
+Outputs an edit link for the model, if the visitor's <Group.can> edit_[model].
+
+Parameters:
+    $text - The text to show for the link.
+    $before - If the link can be shown, show this before it.
+    $after - If the link can be shown, show this after it.
+    $classes - Extra CSS classes for the link, space-delimited.
+
+
+Function: delete_link
+---------------------
+Outputs a delete link for the post, if the <User.can> delete_[model].
+
+Parameters:
+    $text - The text to show for the link.
+    $before - If the link can be shown, show this before it.
+    $after - If the link can be shown, show this after it.
+    $classes - Extra CSS classes for the link, space-delimited.
+
+
+==============================================
+includes/class/Modules.php
+==============================================
+
+Class: Modules
+--------------
+Contains various functions, acts as the backbone for all modules.
+
+
+Function: setPriority
+---------------------
+Sets the priority of an action for the module this function is called from.
+
+Parameters:
+    $name - Name of the trigger to respond to.
+    $priority - Priority of the response.
+
+
+Function: addAlias
+------------------
+Allows a module to respond to a trigger with multiple functions and custom priorities.
+
+Parameters:
+    $name - Name of the trigger to respond to.
+    $function - Name of the class function to respond with.
+    $priority - Priority of the response.
+
+
+==============================================
+includes/class/Paginator.php
+==============================================
+
+Class: Paginator
+----------------
+Paginates over an array.
+
+
+Function: __construct
+---------------------
+Prepares an array for pagination.
+
+Parameters:
+    $array - The array to paginate.
+    $per_page - Number of items per page.
+    $name - The name of the $_GET parameter to use for determining the current page.
+    $model - If this is true, each item in $array that gets shown on the page will be
+             initialized as a model of whatever is passed as the second argument to $array.
+             The first argument of $array is expected to be an array of IDs.
+    $page - Page number to start at.
+
+Returns:
+    A paginated array of length $per_page or smaller.
+
+
+Function: next
+--------------
+Returns the next pagination sequence.
+
+
+Function: prev
+--------------
+Returns the next pagination sequence.
+
+
+Function: next_page
+-------------------
+Checks whether or not it makes sense to show the Next Page link.
+
+
+Function: prev_page
+-------------------
+Checks whether or not it makes sense to show the Previous Page link.
+
+
+Function: next_link
+-------------------
+Outputs a link to the next page.
+
+Parameters:
+    $text - The text for the link.
+    $class - The CSS class for the link.
+    $page - Page number to link to.
+    $anchor - An anchor target.
+
+
+Function: prev_link
+-------------------
+Outputs a link to the previous page.
+
+Parameters:
+    $text - The text for the link.
+    $class - The CSS class for the link.
+    $page - Page number to link to.
+    $anchor - An anchor target.
+
+
+Function: final_link
+--------------------
+Outputs a link to the final page.
+
+Parameters:
+    $text - The text for the link.
+    $class - The CSS class for the link.
+    $anchor - An anchor target.
+
+
+Function: first_link
+--------------------
+Outputs a link to the first page.
+
+Parameters:
+    $text - The text for the link.
+    $class - The CSS class for the link.
+    $anchor - An anchor target.
+
+
+Function: next_page_url
+-----------------------
+Returns the URL to the next page.
+
+Parameters:
+    $page - Page number to link to.
+
+
+Function: prev_page_url
+-----------------------
+Returns the URL to the previous page.
+
+Parameters:
+    $page - Page number to link to.
+
+
+==============================================
+includes/class/Query.php
+==============================================
+
+Class: Query
+------------
+Handles a query based on the <SQL.method>.
+
+
+Function: __construct
+---------------------
+Creates a query based on the <SQL.interface>.
+
+Parameters:
+    $sql - <SQL> instance.
+    $query - Query to execute.
+    $params - An associative array of parameters used in the query.
+    $throw_exceptions - Throw exceptions instead of calling error()?
+
+
+Function: fetchColumn
+---------------------
+Fetches a column of the current row.
+
+Parameters:
+    $column - The offset of the column to grab. Default 0.
+
+
+Function: fetch
+---------------
+Returns the current row as an array.
+
+
+Function: fetchObject
+---------------------
+Returns the current row as an object.
+
+
+Function: fetchAll
+------------------
+Returns an array of every result.
+
+
+Function: grab
+--------------
+Grabs all of the given column out of the full result of a query.
+
+Parameters:
+    $column - Name of the column to grab.
+
+Returns:
+    An array of all of the values of that column in the result.
+
+
+Function: exception_handler
+---------------------------
+Handles exceptions thrown by failed queries.
+
+
+==============================================
+includes/class/QueryBuilder.php
+==============================================
+
+Class: QueryBuilder
+-------------------
+A generic SQL query builder.
+
+
+Function: build_select
+----------------------
+Creates a full SELECT query.
+
+Parameters:
+    $tables - Tables to select from.
+    $fields - Columns to select.
+    $order - What to order by.
+    $limit - Limit of the result.
+    $offset - Starting point for the result.
+    $group - What to group by.
+    $left_join - Any @LEFT JOIN@s to add.
+    &$params - An associative array of parameters used in the query.
+
+Returns:
+    A @SELECT@ query string.
+
+
+Function: build_insert
+----------------------
+Creates a full insert query.
+
+Parameters:
+    $table - Table to insert into.
+    $data - Data to insert.
+    &$params - An associative array of parameters used in the query.
+
+Returns:
+    An @INSERT@ query string.
+
+
+Function: build_update
+----------------------
+Creates a full update query.
+
+Parameters:
+    $table - Table to update.
+    $conds - Conditions to update rows by.
+    $data - Data to update.
+    &$params - An associative array of parameters used in the query.
+
+Returns:
+    An @UPDATE@ query string.
+
+
+Function: build_delete
+----------------------
+Creates a full delete query.
+
+Parameters:
+    $table - Table to delete from.
+    $conds - Conditions to delete by.
+    &$params - An associative array of parameters used in the query.
+
+Returns:
+    A @DELETE@ query string.
+
+
+Function: build_update_values
+-----------------------------
+Creates an update data part.
+
+Parameters:
+    $data - Data to update.
+    &$params - An associative array of parameters used in the query.
+
+
+Function: build_insert_header
+-----------------------------
+Creates an insert header.
+
+Parameters:
+    $data - Data to insert.
+
+
+Function: build_limits
+----------------------
+Creates the LIMIT part of a query.
+
+Parameters:
+    $offset - Offset of the result.
+    $limit - Limit of the result.
+
+
+Function: build_from
+--------------------
+Creates a FROM header for select queries.
+
+Parameters:
+    $tables - Tables to select from.
+
+
+Function: build_count
+---------------------
+Creates a SELECT COUNT(1) query.
+
+Parameters:
+    $tables - Tables to tablefy with.
+    $conds - Conditions to select by.
+    &$params - An associative array of parameters used in the query.
+
+
+Function: build_select_header
+-----------------------------
+Creates a SELECT fields header.
+
+Parameters:
+    $fields - Columns to select.
+    $tables - Tables to tablefy with.
+
+
+Function: build_where
+---------------------
+Creates a WHERE query.
+
+
+Function: build_group
+---------------------
+Creates a GROUP BY argument.
+
+Parameters:
+    $order - Columns to group by.
+    $tables - Tables to tablefy with.
+
+
+Function: build_order
+---------------------
+Creates an ORDER BY argument.
+
+Parameters:
+    $order - Columns to order by.
+    $tables - Tables to tablefy with.
+
+
+Function: build_list
+--------------------
+Returns ('one', 'two', '', 1, 0) from array("one", "two", null, true, false)
+
+
+Function: safecol
+-----------------
+Wraps a column in proper escaping if it is a SQL keyword.
+
+Doesn't check every keyword, just the common/sensible ones.
+
+Parameters:
+    $name - Name of the column.
+
+
+Function: build_conditions
+--------------------------
+Builds an associative array of SQL values into PDO-esque parameterized query strings.
+
+Parameters:
+    $conds - Conditions.
+    &$params - Parameters array to fill.
+    $tables - If specified, conditions will be tablefied with these tables.
+    $insert - Is this an insert/update query?
+
+
+Function: tablefy
+-----------------
+Automatically prepends tables and table prefixes to a field if it doesn't already have them.
+
+Parameters:
+    &$field - The field to "tablefy".
+    $tables - An array of tables. The first one will be used for prepending.
+
+
+==============================================
+includes/class/Route.php
+==============================================
+
+Class: Route
+------------
+Handles the routing process and other route-related tasks.
+
+
+Function: __construct
+---------------------
+Parse the URL and give the controller an opportunity to determine the action.
+
+Parameters:
+    $controller - The controller to use.
+
+
+Function: init
+--------------
+Attempt to call a responder for the action(s) until one of them doesn't return false.
+
+This will also call the @[controllername]_[action]@ and @route_[action]@ triggers.
+
+
+Function: url
+-------------
+Constructs an absolute URL from a relative one, translating clean to dirty URLs as necessary.
+
+The applicable URL translations are filtered through the @parse_urls@ trigger.
+
+Parameters:
+    $url - The relative URL. This is assumed to be a dirty URL if it begins with "/".
+    $controller - The controller to use. If omitted the current controller will be used.
+
+Returns:
+    An absolute clean or dirty URL, depending on @Config->clean_urls@ and controller support.
+
+
+Function: add
+-------------
+Adds a route to the blog. Required for actions that have more than one parameter.
+For example, for /tags/ you won't need to do this, but you will for /tag/(name)/.
+
+Parameters:
+    $path - The path to add. Wrap variables with parentheses e.g. "tag/(name)/".
+    $action - The action. Add parameters with semicolons e.g "tag;foo=bar;baz=boo".
+
+See Also:
+    <remove>
+
+
+Function: remove
+----------------
+Removes a route added by <add>.
+
+Parameters:
+    $path - The path to remove.
+
+See Also:
+    <add>
+
+
+Function: custom
+----------------
+Parses custom routes stored in the configuration.
+
+Notes:
+    The / path strictly requires no request args.
+
+
+Function: current
+-----------------
+Returns a singleton reference to the current class.
+
+
+==============================================
+includes/class/Session.php
+==============================================
+
+Class: Session
+--------------
+Handles visitor sessions.
+
+
+Function: open
+--------------
+Opens the session and decides if session storage will be denied.
+
+Parameters:
+    $path - Filesystem path.
+    $name - The session name.
+
+
+Function: close
+---------------
+Executed when the session is closed.
+
+
+Function: read
+--------------
+Reads a session from the database.
+
+Parameters:
+    $id - Session ID.
+
+
+Function: write
+---------------
+Writes a session to the database.
+
+Parameters:
+    $id - Session ID.
+    $data - Data to write.
+
+
+Function: destroy
+-----------------
+Deletes a session from the database.
+
+Parameters:
+    $id - Session ID.
+
+
+Function: gc
+------------
+Deletes sessions not updated for 30+ days, or with no stored data.
+
+Parameters:
+    $lifetime - The configured maximum session lifetime in seconds.
+
+
+==============================================
+includes/class/SQL.php
+==============================================
+
+Class: SQL
+----------
+Contains the database settings and functions for interacting with the SQL database.
+
+
+Function: __construct
+---------------------
+The class constructor is private so there is only one connection.
+
+Parameters:
+    $settings - An array of settings.
+
+
+Function: connect
+-----------------
+Connects to the SQL database.
+
+Parameters:
+    $checking - Return a boolean of whether or not it could connect, instead of triggering an error.
+
+
+Function: query
+---------------
+Executes a query and increases <SQL->$queries>.
+
+Parameters:
+    $query - Query to execute.
+    $params - An associative array of parameters used in the query.
+    $throw_exceptions - Should an exception be thrown if the query fails?
+
+
+Function: count
+---------------
+Performs a counting query and returns the number of matching rows.
+
+Parameters:
+    $tables - An array (or string) of tables to count results on.
+    $conds - An array (or string) of conditions to match.
+    $params - An associative array of parameters used in the query.
+    $throw_exceptions - Should exceptions be thrown on error?
+
+
+Function: select
+----------------
+Performs a SELECT with given criteria and returns the query result object.
+
+Parameters:
+    $tables - An array (or string) of tables to grab results from.
+    $fields - Fields to select.
+    $conds - An array (or string) of conditions to match.
+    $order - ORDER BY statement. Can be an array.
+    $params - An associative array of parameters used in the query.
+    $limit - Limit for results.
+    $offset - Offset for the select statement.
+    $group - GROUP BY statement. Can be an array.
+    $left_join - An array of additional LEFT JOINs.
+    $throw_exceptions - Should exceptions be thrown on error?
+
+
+Function: insert
+----------------
+Performs an INSERT with given data.
+
+Parameters:
+    $table - Table to insert to.
+    $data - An associative array of data to insert.
+    $params - An associative array of parameters used in the query.
+    $throw_exceptions - Should exceptions be thrown on error?
+
+
+Function: replace
+-----------------
+Performs either an INSERT or an UPDATE depending on
+whether a row exists with the specified keys matching
+their values in the data.
+
+Parameters:
+    $table - Table to update or insert into.
+    $keys - Columns to match on.
+    $data - Data for the insert and value matches for the keys.
+    $params - An associative array of parameters to be used in the query.
+    $throw_exceptions - Should exceptions be thrown on error?
+
+
+Function: update
+----------------
+Performs an UDATE with given criteria and data.
+
+Parameters:
+    $table - Table to update.
+    $conds - Rows to update.
+    $data - An associative array of data to update.
+    $params - An associative array of parameters used in the query.
+    $throw_exceptions - Should exceptions be thrown on error?
+
+
+Function: delete
+----------------
+Performs a DELETE with given criteria.
+
+Parameters:
+    $table - Table to delete from.
+    $conds - Rows to delete..
+    $params - An associative array of parameters used in the query.
+    $throw_exceptions - Should exceptions be thrown on error?
+
+
+Function: latest
+----------------
+Returns the last inserted sequential value.
+
+Parameters:
+    $table - Table to get the latest value from.
+    $seq - Name of the sequence.
+
+
+Function: escape
+----------------
+Escapes a string for Query construction using the SQL connection method's escaping functions.
+
+Parameters:
+    $string - String to escape.
+    $quotes - Auto-wrap the string in single quotes?
+
+
+Function: current
+-----------------
+Returns a singleton reference to the current connection.
+
+
+==============================================
+includes/class/Theme.php
+==============================================
+
+Class: Theme
+------------
+Various helper functions for blog themes.
+
+
+Function: __construct
+---------------------
+Populates useful attributes.
+
+
+Function: pages_list
+--------------------
+Returns a simple array of pages with @depth@ and @children@ attributes.
+
+Parameters:
+    $page_id - Page ID to use as the basis.
+    $exclude - Page ID to exclude from the list.
+
+
+Function: recurse_pages
+-----------------------
+Populates the page cache and gives each page @depth@ and @children@ attributes.
+
+Parameters:
+    $page - Page to start recursion at.
+
+
+Function: archive_list
+----------------------
+Generates an array listing each month with entries in the archives.
+
+Parameters:
+    $limit - Number of months to list.
+
+
+Function: recent_posts
+----------------------
+Generates an array of recent posts.
+
+Parameters:
+    $limit - Number of posts to list.
+
+
+Function: related_posts
+-----------------------
+Ask modules to contribute to a list of related posts.
+
+Parameters:
+    $post - The post to use as the basis.
+    $limit - Number of related posts to list.
+
+
+Function: file_exists
+---------------------
+Returns whether the specified Twig template file exists or not.
+
+Parameters:
+    $name - The filename.
+
+
+Function: stylesheets
+---------------------
+Outputs the stylesheet tags.
+
+
+Function: javascripts
+---------------------
+Outputs the JavaScript tags.
+
+
+Function: feeds
+---------------
+Outputs the feeds and other general purpose <link> tags.
+
+
+Function: load_time
+-------------------
+Returns the total elapsed time for this page load.
+
+
+Function: current
+-----------------
+Returns a singleton reference to the current class.
+
+
+==============================================
+includes/class/Translation.php
+==============================================
+
+Class: Translation
+------------------
+A shim for translation support in the absence of GNU gettext.
+
+
+Function: __construct
+---------------------
+Discovers the current locale.
+
+
+Function: load
+--------------
+Loads translations from the .mo file into the supplied domain.
+
+Parameters:
+    $domain - The name of this translation domain.
+    $path - The path to the locale directory.
+    $reload - Reload the translation if already loaded?
+
+
+Function: text
+--------------
+Returns the singular or plural translation of a string.
+
+Parameters:
+    $domain - The translation domain to search.
+    $single - Singular string.
+    $plural - Pluralized string (optional).
+    $number - The number to judge by (optional).
+
+
+Function: find
+--------------
+Returns a translation string from the supplied domain.
+
+
+Function: current
+-----------------
+Returns a singleton reference to the current class.
+
+
+==============================================
+includes/class/Trigger.php
+==============================================
+
+Class: Trigger
+--------------
+Controls and keeps track of all of the Triggers and events.
+
+
+Function: __construct
+---------------------
+Add predefined filters to implement Unicode emoji and Markdown support.
+
+
+Function: cmp
+-------------
+Sorts actions by priority when used with usort.
+
+
+Function: call
+--------------
+Calls a trigger, passing any additional arguments to it.
+
+Parameters:
+    $name - The name of the trigger, or an array of triggers to call.
+
+
+Function: filter
+----------------
+Filters a variable through a trigger's actions.
+Similar to <call>, except this is stackable and is intended to modify something instead of inject code.
+
+Any additional arguments passed to this function are passed to the function being called.
+
+Parameters:
+    &$target - The variable to filter.
+    $name - The name of the trigger.
+
+Returns:
+    $target, filtered through any/all actions for the trigger $name.
+
+
+Function: remove
+----------------
+Unregisters a given $action from a $trigger.
+
+Parameters:
+    $trigger - The trigger to unregister from.
+    $action - The action name.
+
+
+Function: exists
+----------------
+Checks if there are any actions for a given $trigger.
+
+Parameters:
+    $trigger - The trigger name.
+
+Returns:
+    @true@ or @false@
+
+
+Function: current
+-----------------
+Returns a singleton reference to the current class.
+
+
+==============================================
+includes/class/Update.php
+==============================================
+
+Class: Update
+-------------
+Informs the user if a newer version of Chyrp Lite is available.
+
+
+Function: check
+---------------
+Checks the update channel.
+
+
+Function: validate
+------------------
+Validates the XML dataset.
+
+
+Function: message
+-----------------
+Flash the user about the newer version.
+
+
+Function: warning
+-----------------
+Flash the user about the failed check.
+
+
+==============================================
+includes/common.php
+==============================================
+
+File: common
+------------
+
+BSD 3-Clause License
+
+Copyright 2008-2019 Alex Suraci, Arian Xhezairi, Daniel Pimley, and others.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its
+   contributors may be used to endorse or promote products derived from
+   this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+==============================================
+includes/controller/Admin.php
+==============================================
+
+Class: AdminController
+----------------------
+The logic controlling the administration console.
+
+
+Function: __construct
+---------------------
+Loads the Twig parser and sets up the l10n domain.
+
+
+Function: parse
+---------------
+Route constructor calls this to interpret clean URLs and determine the action.
+
+
+Function: admin_write_post
+--------------------------
+Post writing.
+
+
+Function: admin_add_post
+------------------------
+Adds a post when the form is submitted.
+
+
+Function: admin_edit_post
+-------------------------
+Post editing.
+
+
+Function: admin_update_post
+---------------------------
+Updates a post when the form is submitted.
+
+
+Function: admin_delete_post
+---------------------------
+Post deletion (confirm page).
+
+
+Function: admin_destroy_post
+----------------------------
+Destroys a post.
+
+
+Function: admin_manage_posts
+----------------------------
+Post management.
+
+
+Function: admin_write_page
+--------------------------
+Page creation.
+
+
+Function: admin_add_page
+------------------------
+Adds a page when the form is submitted.
+
+
+Function: admin_edit_page
+-------------------------
+Page editing.
+
+
+Function: admin_update_page
+---------------------------
+Updates a page when the form is submitted.
+
+
+Function: admin_delete_page
+---------------------------
+Page deletion (confirm page).
+
+
+Function: admin_destroy_page
+----------------------------
+Destroys a page.
+
+
+Function: admin_manage_pages
+----------------------------
+Page management.
+
+
+Function: admin_new_user
+------------------------
+User creation.
+
+
+Function: admin_add_user
+------------------------
+Add a user when the form is submitted.
+
+
+Function: admin_edit_user
+-------------------------
+User editing.
+
+
+Function: admin_update_user
+---------------------------
+Updates a user when the form is submitted.
+
+
+Function: admin_delete_user
+---------------------------
+User deletion (confirm page).
+
+
+Function: admin_destroy_user
+----------------------------
+Destroys a user.
+
+
+Function: admin_manage_users
+----------------------------
+User management.
+
+
+Function: admin_new_group
+-------------------------
+Group creation.
+
+
+Function: admin_add_group
+-------------------------
+Adds a group when the form is submitted.
+
+
+Function: admin_edit_group
+--------------------------
+Group editing.
+
+
+Function: admin_update_group
+----------------------------
+Updates a group when the form is submitted.
+
+
+Function: admin_delete_group
+----------------------------
+Group deletion (confirm page).
+
+
+Function: admin_destroy_group
+-----------------------------
+Destroys a group.
+
+
+Function: admin_manage_groups
+-----------------------------
+Group management.
+
+
+Function: admin_export
+----------------------
+Export content from this installation.
+
+
+Function: admin_import
+----------------------
+Import content to this installation.
+
+
+Function: admin_modules
+-----------------------
+Module enabling/disabling.
+
+
+Function: admin_feathers
+------------------------
+Feather enabling/disabling.
+
+
+Function: admin_themes
+----------------------
+Theme switching/previewing.
+
+
+Function: admin_enable
+----------------------
+Enables a module or feather.
+
+
+Function: admin_disable
+-----------------------
+Disables a module or feather.
+
+
+Function: admin_change_theme
+----------------------------
+Changes the theme.
+
+
+Function: admin_preview_theme
+-----------------------------
+Previews the theme.
+
+
+Function: admin_general_settings
+--------------------------------
+General Settings page.
+
+
+Function: admin_content_settings
+--------------------------------
+Content Settings page.
+
+
+Function: admin_user_settings
+-----------------------------
+User Settings page.
+
+
+Function: admin_route_settings
+------------------------------
+Route Settings page.
+
+
+Function: admin_login
+---------------------
+Mask for MainController->login().
+
+
+Function: admin_logout
+----------------------
+Mask for MainController->logout().
+
+
+Function: admin_help
+--------------------
+Serves help pages for core and extensions.
+
+
+Function: navigation_context
+----------------------------
+Returns the navigation context for Twig.
+
+
+Function: display
+-----------------
+Displays the page.
+
+Parameters:
+    $template - The template file to display (sans ".twig") relative to /admin/ for core and extensions.
+    $context - The context to be supplied to Twig.
+    $title - The title for the page. Defaults to a camelization of the action, e.g. foo_bar -> Foo Bar.
+
+
+Function: current
+-----------------
+Returns a singleton reference to the current class.
+
+
+==============================================
+includes/controller/Ajax.php
+==============================================
+
+Class: AjaxController
+---------------------
+The logic controlling AJAX requests.
+
+
+Function: parse
+---------------
+Route constructor calls this to determine the action in the case of a POST request.
+
+
+Function: ajax_destroy_post
+---------------------------
+Destroys a post.
+
+
+Function: ajax_destroy_page
+---------------------------
+Destroys a page.
+
+
+Function: ajax_preview_post
+---------------------------
+Previews a post.
+
+
+Function: ajax_preview_page
+---------------------------
+Previews a page.
+
+
+Function: current
+-----------------
+Returns a singleton reference to the current class.
+
+
+==============================================
+includes/controller/Main.php
+==============================================
+
+Class: MainController
+---------------------
+The logic controlling the blog.
+
+
+Function: __construct
+---------------------
+Loads the Twig parser and sets up the l10n domain.
+
+
+Function: parse
+---------------
+Route constructor calls this to interpret clean URLs and determine the action.
+
+
+Function: main_index
+--------------------
+Grabs the posts for the main index.
+
+
+Function: main_archive
+----------------------
+Grabs the posts for the archive page.
+
+
+Function: main_search
+---------------------
+Grabs the posts for a search query.
+
+
+Function: main_drafts
+---------------------
+Grabs the posts with draft status created by this user.
+
+
+Function: main_view
+-------------------
+Handles post viewing via dirty URL or clean URL e.g. /year/month/day/url/.
+
+
+Function: main_page
+-------------------
+Handles page viewing via dirty URL or clean URL e.g. /parent/child/child-of-child/.
+
+
+Function: main_id
+-----------------
+Views a post or page by its static ID.
+
+
+Function: main_random
+---------------------
+Grabs a random post and redirects to it.
+
+
+Function: main_register
+-----------------------
+Register a visitor as a new user.
+
+
+Function: main_activate
+-----------------------
+Activates (approves) a given login.
+
+
+Function: main_reset
+--------------------
+Resets the password for a given login.
+
+
+Function: main_login
+--------------------
+Logs in a user if they provide the username and password.
+
+
+Function: main_logout
+---------------------
+Logs out the current user.
+
+
+Function: main_controls
+-----------------------
+Updates the current user when the form is submitted.
+
+
+Function: main_lost_password
+----------------------------
+Emails a password reset link to the registered address of a user.
+
+
+Function: main_feed
+-------------------
+Grabs posts and serves a feed.
+
+
+Function: display
+-----------------
+Displays the page.
+
+If "posts" is in the context and the visitor requested a feed, they will be served.
+
+Parameters:
+    $template - The template file or array of fallbacks to display (sans ".twig") relative to THEME_DIR.
+    $context - The context to be supplied to Twig.
+    $title - The title for the page.
+
+
+Function: current
+-----------------
+Returns a singleton reference to the current class.
+
+
+==============================================
+includes/error.php
+==============================================
+
+File: error
+-----------
+Functions for handling and reporting errors.
+
+
+Function: error_composer
+------------------------
+Composes a message for the error() function to display.
+
+
+Function: exception_composer
+----------------------------
+Composes a message for the error() function to display.
+
+
+Function: error
+---------------
+Displays an error message via direct call or handler.
+
+Parameters:
+    $title - The title for the error dialog.
+    $body - The message for the error dialog.
+    $backtrace - The trace of the error.
+    $code - Numeric HTTP status code to set.
+
+
+==============================================
+includes/helpers.php
+==============================================
+
+File: helpers
+-------------
+Various functions used throughout the codebase.
+
+
+Function: session
+-----------------
+Begins Chyrp's custom session storage whatnots.
+
+Parameters:
+    $secure - Send the cookie only over HTTPS?
+
+
+Function: logged_in
+-------------------
+Returns whether or not the visitor is logged in.
+
+
+Function: redirect
+------------------
+Redirects to the supplied URL and exits immediately.
+
+Parameters:
+    $url - The absolute or relative URL to redirect to.
+
+
+Function: show_403
+------------------
+Shows an error message with a 403 HTTP header.
+
+Parameters:
+    $title - The title for the error dialog (optional).
+    $body - The message for the error dialog (optional).
+
+
+Function: show_404
+------------------
+Shows an error message with a 404 HTTP header.
+
+Parameters:
+    $title - The title for the error dialog (optional).
+    $body - The message for the error dialog (optional).
+
+
+Function: url
+-------------
+Mask for Route::url().
+
+
+Function: self_url
+------------------
+Returns an absolute URL for the current request.
+
+
+Function: htaccess_conf
+-----------------------
+Creates the .htaccess file for Chyrp Lite or overwrites an existing file.
+
+Parameters:
+    $url_path - The URL path to MAIN_DIR for the RewriteBase directive.
+
+Returns:
+    True if no action was needed, bytes written on success, false on failure.
+
+
+Function: caddyfile_conf
+------------------------
+Creates the caddyfile for Chyrp Lite or overwrites an existing file.
+
+Parameters:
+    $url_path - The URL path to MAIN_DIR for the rewrite directive.
+
+Returns:
+    True if no action was needed, bytes written on success, false on failure.
+
+
+Function: nginx_conf
+--------------------
+Creates the nginx configuration for Chyrp Lite or overwrites an existing file.
+
+Parameters:
+    $url_path - The URL path to MAIN_DIR for the location directive.
+
+Returns:
+    True if no action was needed, bytes written on success, false on failure.
+
+
+Function: locales
+-----------------
+Returns an array of locale choices for the "chyrp" domain.
+
+
+Function: set_locale
+--------------------
+Sets the locale with fallbacks for platform-specific quirks.
+
+Parameters:
+    $locale - The locale name, e.g. @en_US@, @uk_UA@, @fr_FR@
+
+
+Function: get_locale
+--------------------
+Gets the current locale setting minus charset.
+
+
+Function: load_translator
+-------------------------
+Sets the path for a gettext translation domain.
+
+Parameters:
+    $domain - The name of this translation domain.
+    $locale - The path to the locale directory.
+
+
+Function: lang_code
+-------------------
+Converts a language code to a localised display name.
+
+Parameters:
+    $code - The language code to convert.
+
+Returns:
+    A localised display name, e.g. "English (United States)".
+
+
+Function: __
+------------
+Translates a string using gettext.
+
+Parameters:
+    $text - The string to translate.
+    $domain - The translation domain to read from.
+
+Returns:
+    The translated string or the original.
+
+
+Function: _p
+------------
+Translates a plural (or not) form of a string.
+
+Parameters:
+    $single - Singular string.
+    $plural - Pluralized string.
+    $number - The number to judge by.
+    $domain - The translation domain to read from.
+
+Returns:
+    The translated string or the original.
+
+
+Function: _f
+------------
+Translates a string with sprintf() formatting.
+
+Parameters:
+    $string - String to translate and format.
+    $args - One arg or an array of arguments to format with.
+    $domain - The translation domain to read from.
+
+Returns:
+    The translated string or the original.
+
+
+Function: when
+--------------
+Formats a string that isn't a regular time() value.
+
+Parameters:
+    $formatting - The formatting for date() or strftime().
+    $when - A time value to be strtotime() converted.
+    $strftime - Format using @strftime@ instead of @date@?
+
+Returns:
+    A time/date string with the supplied formatting.
+
+
+Function: datetime
+------------------
+Formats datetime for SQL queries.
+
+Parameters:
+    $when - A timestamp (optional).
+
+Returns:
+    A standard datetime string.
+
+
+Function: now
+-------------
+Alias to strtotime, for prettiness like now("+1 day").
+
+
+Function: timezones
+-------------------
+Returns an array of timezone identifiers.
+
+
+Function: set_timezone
+----------------------
+Sets the timezone for all date/time functions.
+
+Parameters:
+    $timezone - The timezone to set.
+
+
+Function: get_timezone
+----------------------
+Gets the timezone for all date/time functions.
+
+
+Function: fallback
+------------------
+Sets the supplied variable if it is not already set, using the supplied arguments as candidates.
+
+Parameters:
+    &$variable - The variable to return or set.
+
+Returns:
+    The value that was assigned to the variable.
+
+Notes:
+    The first non-empty candidate will be used, or the last, or null if no candidates are supplied.
+
+
+Function: oneof
+---------------
+Crawls the supplied set of arguments in search of a candidate that has a substantial value.
+
+Returns:
+    The first candidate of substance, or the last, or null if no candidates are supplied.
+
+Notes:
+    It will guess where to stop based on types, e.g. "" has priority over array() but not 1.
+
+
+Function: derezz
+----------------
+Strips tags and junk from the supplied variable and tests it for emptiness.
+
+Parameters:
+    &$variable - The variable, supplied by reference.
+
+Returns:
+    Whether or not the stripped variable is empty.
+
+Notes:
+    Useful for data that will be stripped later on by its model
+    but which needs to be tested for uniqueness/emptiness first.
+
+
+Function: token
+---------------
+Salt and hash a unique token using the supplied data.
+
+Parameters:
+    $items - An array of items to hash.
+
+Returns:
+    A unique token salted with the site's secure hashkey.
+
+
+Function: slug
+--------------
+Generates a random slug value for posts and pages.
+
+Parameters:
+    $length - The number of characters to generate.
+
+Returns:
+    A string of the requested length.
+
+
+Function: authenticate
+----------------------
+Generates or validates an authentication token for the visitor.
+
+Parameters:
+    $hash - A previously generated token to be validated (optional).
+
+Returns:
+    An authentication token, or the validity of the supplied token.
+
+
+Function: random
+----------------
+Generates a string of alphanumeric random characters.
+
+Parameters:
+    $length - The number of characters to generate.
+
+Returns:
+    A string of the requested length.
+
+Notes:
+    Uses a cryptographically secure method if available.
+
+
+Function: shorthand_bytes
+-------------------------
+Decode shorthand bytes notation from php.ini.
+
+Parameters:
+    $value - The value returned by ini_get().
+
+Returns:
+    A byte value or the input if decoding failed.
+
+
+Function: timer_start
+---------------------
+Starts the internal timer and returns the microtime.
+
+
+Function: timer_stop
+--------------------
+Returns the elapsed time since the timer started.
+
+Parameters:
+    $precision - Round to n decimal places.
+
+Returns:
+    A formatted number with the requested $precision.
+
+
+Function: match
+---------------
+Try to match a string against an array of regular expressions.
+
+Parameters:
+    $try - An array of regular expressions, or a single regular expression.
+    $haystack - The string to test.
+
+Returns:
+    Whether or not the match succeeded.
+
+
+Function: autoload
+------------------
+Autoload PSR-0 classes on demand by scanning lib directories.
+
+Parameters:
+    $class - The name of the class to load.
+
+
+Function: keywords
+------------------
+Parse keyword searches for values in specific database columns.
+
+Parameters:
+    $query - The query to parse.
+    $plain - WHERE syntax to search for non-keyword queries.
+    $table - Check this table to ensure the keywords are valid.
+
+Returns:
+    An array containing the "WHERE" queries and the corresponding parameters.
+
+
+Function: pluralize
+-------------------
+Pluralizes a word.
+
+Parameters:
+    $string - The lowercase string to pluralize.
+    $number - If supplied, and this number is 1, it will not pluralize.
+
+Returns:
+    The supplied word with a trailing "s" added, or a non-normative pluralization.
+
+
+Function: depluralize
+---------------------
+Singularizes a word.
+
+Parameters:
+    $string - The lowercase string to depluralize.
+    $number - If supplied, and this number is not 1, it will not depluralize.
+
+Returns:
+    The supplied word with trailing "s" removed, or a non-normative singularization.
+
+
+Function: normalize
+-------------------
+Attempts to normalize all newlines and whitespace into single spaces.
+
+Returns:
+    The normalized string.
+
+
+Function: camelize
+------------------
+Converts a string to camel-case.
+
+Parameters:
+    $string - The string to camelize.
+    $keep_spaces - Whether or not to convert underscores to spaces or remove them.
+
+Returns:
+    A CamelCased string.
+
+See Also:
+    <decamelize>
+
+
+Function: decamelize
+--------------------
+Undoes camel-case conversion.
+
+Parameters:
+    $string - The string to decamelize.
+
+Returns:
+    A de_camel_cased string.
+
+See Also:
+    <camelize>
+
+
+Function: truncate
+------------------
+Truncates a string to the requested number of characters or less.
+
+Parameters:
+    $text - The string to be truncated.
+    $length - Truncate the string to this number of characters.
+    $ellipsis - A string to place at the truncation point.
+    $exact - Split words to return the exact length requested?
+    $encoding - The character encoding of the string and ellipsis.
+
+Returns:
+    A truncated string with ellipsis appended.
+
+
+Function: markdown
+------------------
+Implements the Markdown content parsing filter.
+
+Parameters:
+    $text - The body of the post/page to parse.
+
+Returns:
+    The text with Markdown formatting applied.
+
+Se Also:
+    https://github.com/commonmark/CommonMark
+    https://github.github.com/gfm/
+
+
+Function: emote
+---------------
+Converts emoticons to Unicode emoji HTML entities.
+
+Parameters:
+    $text - The body of the post/page to parse.
+
+Returns:
+    The text with emoticons replaced by emoji.
+
+See Also:
+    http://www.unicode.org/charts/PDF/U1F600.pdf
+
+
+Function: fix
+-------------
+Neutralizes HTML and quotes in strings for display.
+
+Parameters:
+    $string - String to fix.
+    $quotes - Encode quotes?
+    $double - Encode encoded?
+
+Returns:
+    A sanitized version of the string.
+
+
+Function: unfix
+---------------
+Undoes neutralization of HTML and quotes in strings.
+
+Parameters:
+    $string - String to unfix.
+    $all - Decode all entities?
+
+Returns:
+    An unsanitary version of the string.
+
+
+Function: sanitize
+------------------
+Sanitizes a string of troublesome characters, typically for use in URLs.
+
+Parameters:
+    $string - The string to sanitize - must be ASCII or UTF-8!
+    $lowercase - Force the string to lowercase?
+    $strict - Remove all characters except "-" and alphanumerics?
+    $truncate - Number of characters to truncate to (default 100, 0 to disable).
+
+Returns:
+    A sanitized version of the string.
+
+
+Function: sanitize_html
+-----------------------
+Sanitizes HTML to disable scripts and obnoxious attributes.
+
+Parameters:
+    $string - String containing HTML to sanitize.
+
+Returns:
+    A version of the string containing only valid tags and whitelisted attributes.
+
+
+Function: get_remote
+--------------------
+Retrieve the contents of a URL.
+
+Parameters:
+    $url - The URL of the resource to be retrieved.
+    $redirects - The maximum number of redirects to follow.
+    $timeout - The maximum number of seconds to wait.
+    $headers - Include response headers with the content?
+
+Returns:
+    The response content from the remote site.
+
+
+Function: grab_urls
+-------------------
+Crawls a string and grabs hyperlinks from it.
+
+Parameters:
+    $string - The string to crawl.
+
+Returns:
+    An array of all URLs found in the string.
+
+
+Function: send_pingbacks
+------------------------
+Sends pingback requests to the URLs in a string.
+
+Parameters:
+    $string - The string to crawl for pingback URLs.
+    $post - The post we're sending from.
+
+
+Function: pingback_url
+----------------------
+Checks if a URL is pingback-capable.
+
+Parameters:
+    $url - The URL to check.
+
+Returns:
+    The pingback target, or false if the URL is not pingback-capable.
+
+
+Function: load_info
+-------------------
+Loads an extension's info.php file and returns an array of attributes.
+
+
+Function: init_extensions
+-------------------------
+Initialize all Modules and Feathers.
+
+
+Function: module_enabled
+------------------------
+Determines if a module is currently enabled and not cancelled.
+
+Parameters:
+    $name - The non-camelized name of the module.
+
+Returns:
+    Whether or not the supplied module is enabled.
+
+
+Function: feather_enabled
+-------------------------
+Determines if a feather is currently enabled and not cancelled.
+
+Parameters:
+    $name - The non-camelized name of the feather.
+
+Returns:
+    Whether or not the supplied feather is enabled.
+
+
+Function: cancel_module
+-----------------------
+Temporarily declares a module cancelled (disabled).
+
+Parameters:
+    $target - The non-camelized name of the module.
+    $reason - Why was execution cancelled?
+
+Notes:
+    A module can cancel itself in its __init() method.
+
+
+Function: cancel_feather
+------------------------
+Temporarily declares a feather cancelled (disabled).
+
+Parameters:
+    $target - The non-camelized name of the feather.
+    $reason - Why was execution cancelled?
+
+Notes:
+    A feather can cancel itself in its __init() method.
+
+
+Function: upload
+----------------
+Validates and moves an uploaded file to the uploads directory.
+
+Parameters:
+    $file - The POST method upload array, e.g. $_FILES['userfile'].
+    $filter - An array of valid extensions (case-insensitive).
+
+Returns:
+    The filename of the upload relative to the uploads directory.
+
+
+Function: upload_from_url
+-------------------------
+Copy a file from a remote URL to the uploads directory.
+
+Parameters:
+    $url - The URL of the resource to be copied.
+    $redirects - The maximum number of redirects to follow.
+    $timeout - The maximum number of seconds to wait.
+
+Returns:
+    The filename of the upload relative to the uploads directory.
+
+
+Function: uploaded
+------------------
+Generates an absolute URL or filesystem path to an uploaded file.
+
+Parameters:
+    $file - Filename relative to the uploads directory.
+    $url - Whether to return a URL or a filesystem path.
+
+Returns:
+    The supplied filename prepended with URL or filesystem path.
+
+
+Function: uploaded_search
+-------------------------
+Returns an array of files discovered in the uploads directory.
+
+Parameters:
+    $search - A search term.
+    $filter - An array of valid extensions (case insensitive).
+
+
+Function: upload_tester
+-----------------------
+Tests uploaded file information to determine if the upload was successful.
+
+Parameters:
+    $file - The POST method upload array, e.g. $_FILES['userfile'].
+
+Returns:
+    True for a successful upload or false if no file was uploaded.
+
+Notes:
+    $_POST and $_FILES are empty if post_max_size directive is exceeded.
+
+
+Function: upload_filename
+-------------------------
+Generates a sanitized unique name for an uploaded file.
+
+Parameters:
+    $filename - The filename to make unique.
+    $filter - An array of valid extensions (case insensitive).
+
+Returns:
+    A sanitized unique version of the supplied filename.
+
+
+Function: password_strength
+---------------------------
+Award a numeric score for the strength of a password.
+
+Parameters:
+    $password - The password string to score.
+
+Returns:
+    A numeric score for the strength of the password.
+
+
+Function: is_url
+----------------
+Does the string look like a web URL?
+
+Parameters:
+    $string - The string to analyse.
+
+Returns:
+    Whether or not the string matches the criteria.
+
+Notes:
+    Recognises FQDN, IPv4 and IPv6 hosts.
+
+See Also:
+    <add_scheme>
+
+
+Function: add_scheme
+--------------------
+Prefixes a URL with a scheme if none was detected.
+
+Parameters:
+    $url - The URL to analyse.
+    $scheme - Force this scheme (optional).
+
+Returns:
+    URL prefixed with a default or supplied scheme.
+
+See Also:
+    <is_url>
+
+
+Function: is_email
+------------------
+Does the string look like an email address?
+
+Parameters:
+    $string - The string to analyse.
+
+Notes:
+    Recognises FQDN, IPv4 and IPv6 hosts.
+
+Returns:
+    Whether or not the string matches the criteria.
+
+
+Function: generate_captcha
+--------------------------
+Generates a captcha form element.
+
+Returns:
+    A string containing HTML elements to add to a form.
+
+
+Function: check_captcha
+-----------------------
+Checks the response to a captcha.
+
+Returns:
+    Whether or not the captcha was defeated.
+
+
+Function: get_gravatar
+----------------------
+Get either a Gravatar URL or complete image tag for a specified email address.
+
+Parameters:
+    $email - The email address.
+    $s - Return an image of this size in pixels (512 maximum).
+    $d - Default image set: 404/mm/identicon/monsterid/wavatar.
+    $r - Maximum acceptable guidance rating for images: g/pg/r/x.
+    $img - Return a complete <img> tag?
+
+Returns:
+    String containing either just a URL or a complete image tag.
+
+Source:
+    http://gravatar.com/site/implement/images/php/
+
+
+Function: json_set
+------------------
+JSON encodes a value and checks for errors.
+
+Parameters:
+    $value - The value to be encoded.
+    $options - A bitmask of encoding options.
+
+Returns:
+    A JSON encoded string or false on failure.
+
+
+Function: json_get
+------------------
+JSON decodes a value and checks for errors.
+
+Parameters:
+    $value - The UTF-8 string to be decoded.
+    $assoc - Convert objects into associative arrays?
+    $depth - Recursion depth for decoding.
+
+Returns:
+    A JSON decoded value of the appropriate PHP type.
+
+
+Function: json_response
+-----------------------
+Sends a structured JSON response and exits immediately.
+
+Parameters:
+    $text - A string containing a response message.
+    $data - Arbitrary data to be sent with the response.
+
+
+Function: file_attachment
+-------------------------
+Send a file attachment to the visitor.
+
+Parameters:
+    $contents - The bitstream to be delivered to the visitor.
+    $filename - The name to be applied to the content upon download.
+
+
+Function: email
+---------------
+Send an email using PHP's mail() function or an alternative.
+
+
+Function: correspond
+--------------------
+Send an email correspondence to a user about an action we took.
+
+Parameters:
+    $action - About which action are we corresponding with the user?
+    $params - An indexed array of parameters associated with this action.
+              $params["to"] is required: the address to be emailed.
+
+
+Function: javascripts
+---------------------
+Returns inline JavaScript for core functionality and extensions.
+
+
+==============================================
+includes/lib/AtomFeed.php
+==============================================
+
+Class: AtomFeed
+---------------
+Generates an Atom feed and outputs it piece by piece.
+
+See Also:
+    https://tools.ietf.org/html/rfc4287
+
+
+Function: __construct
+---------------------
+Sets the Atom feed header.
+
+
+Function: type
+--------------
+Returns the content type of the feed.
+
+
+Function: open
+--------------
+Outputs the opening feed element and top-level elements.
+
+Parameters:
+    $title - Title for this feed.
+    $subtitle - Subtitle (optional).
+    $id - Feed ID (optional).
+    $updated - Time of update (optional).
+
+
+Function: entry
+---------------
+Outputs an individual feed entry.
+
+Parameters:
+    $title - Title for this entry.
+    $id - The unique ID.
+    $content - Content for this entry.
+    $link - The URL to the resource.
+    $published - Time of creation.
+    $updated - Time of update (optional).
+    $name - Name of the author (optional).
+    $uri - URI of the author (optional).
+    $email - Email address of the author (optional).
+
+Notes:
+    The entry remains open to allow triggered insertions.
+
+
+Function: category
+------------------
+Outputs a category element for an entry or feed.
+
+Parameters:
+    $term - String that identifies the category.
+    $scheme - URI for the categorization scheme (optional).
+    $label - Human-readable label for the category (optional).
+
+
+Function: rights
+----------------
+Outputs a rights element for an entry or feed.
+
+Parameters:
+    $text - Human-readable licensing information.
+
+
+Function: enclosure
+-------------------
+Outputs a link element for a resource that is potentially large in size.
+
+Parameters:
+    $link - The URL to the resource.
+    $length - Size in bytes of the resource (optional).
+    $type - The media type of the resource (optional).
+    $title - Title for the resource (optional).
+
+
+Function: related
+-----------------
+Outputs a link element for a resource related to an entry or feed.
+
+Parameters:
+    $link - The URL to the resource.
+
+
+Function: split
+---------------
+Outputs a closing entry element.
+
+
+Function: close
+---------------
+Outputs the closing feed element.
+
+
+==============================================
+includes/lib/JSONFeed.php
+==============================================
+
+Class: JSONFeed
+---------------
+Generates a JSON feed and outputs it on closing.
+
+See Also:
+    https://jsonfeed.org/version/1
+
+
+Function: __construct
+---------------------
+Sets the JSON feed header.
+
+
+Function: type
+--------------
+Returns the content type of the feed.
+
+
+Function: open
+--------------
+Generates the top-level feed objects.
+
+Parameters:
+    $title - Title for this feed.
+    $subtitle - Subtitle (optional).
+    $id - Feed ID (optional).
+    $updated - Time of update (optional).
+
+
+Function: entry
+---------------
+Generates an individual feed item.
+
+Parameters:
+    $title - Title for this item.
+    $id - The unique ID.
+    $content - Content for this item.
+    $link - The URL to the resource.
+    $published - Time of creation.
+    $updated - Time of update (optional).
+    $name - Name of the author (optional).
+    $uri - URI of the author (optional).
+    $email - Email address of the author (optional).
+
+
+Function: category
+------------------
+Generates a tag object for an item.
+
+Parameters:
+    $term - String that identifies the category.
+    $scheme - URI for the categorization scheme (optional).
+    $label - Human-readable label for the category (optional).
+
+
+Function: rights
+----------------
+Not implemented in JSON Feed version 1.
+
+
+Function: enclosure
+-------------------
+Generates an attachment object for an item.
+
+Parameters:
+    $link - The URL to the resource.
+    $length - Size in bytes of the resource (optional).
+    $type - The media type of the resource (optional).
+    $title - Title for the resource (optional).
+
+
+Function: related
+-----------------
+Generates an external_url attribute for an item.
+
+Parameters:
+    $link - The external URL.
+
+
+Function: close
+---------------
+Encodes and outputs the feed.
+
+
+==============================================
+includes/lib/Leaf.php
+==============================================
+
+Class: Leaf
+-----------
+Extends the Twig template engine.
+
+
+Function: getFunctions
+----------------------
+Returns a list of operators to add to the existing list.
+
+
+Function: getFilters
+--------------------
+Returns a list of filters to add to the existing list.
+
+
+Function: twig_callback_missing_function
+----------------------------------------
+Scans enabled modules for a callable method matching the name of a missing Twig function.
+
+
+Function: twig_callback_missing_filter
+--------------------------------------
+Scans enabled modules for a callable method matching the name of a missing Twig filter.
+
+
+Function: twig_function_paginate
+--------------------------------
+Paginates an array of items using the Paginator class.
+
+
+Function: twig_function_posted
+------------------------------
+Returns a $_POST value if set, otherwise returns the fallback value.
+
+
+Function: twig_function_mailto
+------------------------------
+Returns an obfuscated mailto: URL.
+
+
+Function: twig_function_uploaded_search
+---------------------------------------
+Returns an array of matches, if the visitor has the "export_content" privilege.
+
+
+Function: twig_filter_translate
+-------------------------------
+Returns a translated string.
+
+
+Function: twig_filter_translate_plural
+--------------------------------------
+Returns a plural (or not) form of a translated string.
+
+
+Function: twig_filter_strftime_format
+-------------------------------------
+Returns date formatting for a string that isn't a regular time() value.
+
+
+Function: twig_filter_filesize_format
+-------------------------------------
+Returns a string containing a formatted filesize value.
+
+
+Function: twig_filter_match
+---------------------------
+Try to match a string against an array of regular expressions, or a single regular expression.
+
+
+Function: twig_filter_preg_replace
+----------------------------------
+Performs a <preg_replace> on the supplied string or array.
+
+
+Function: twig_filter_contains
+------------------------------
+Does the haystack variable contain the needle variable?
+
+
+Function: twig_filter_inspect
+-----------------------------
+Exports a variable for inspection.
+
+
+Function: twig_filter_checked
+-----------------------------
+Returns a HTML @checked@ attribute if the test evalutaes to true.
+
+
+Function: twig_filter_selected
+------------------------------
+Returns a HTML @selected@ attribute if the test matches any of the supplied arguments.
+
+
+Function: twig_filter_download
+------------------------------
+Returns a download link for a file located in the uploads directory.
+
+
+Function: twig_filter_thumbnail
+-------------------------------
+Returns a thumbnail <img> tag for an uploaded image, optionally with enclosing <a> tag.
+
+
+==============================================
+includes/lib/RSSFeed.php
+==============================================
+
+Class: RSSFeed
+--------------
+Generates an RSS feed and outputs it piece by piece.
+
+See Also:
+    http://www.rssboard.org/rss-2-0-11
+
+
+Function: __construct
+---------------------
+Sets the RSS feed header.
+
+
+Function: type
+--------------
+Returns the content type of the feed.
+
+
+Function: open
+--------------
+Outputs the opening channel element and top-level elements.
+
+Parameters:
+    $title - Title for this channel.
+    $subtitle - Subtitle (optional).
+    $id - Feed ID (optional).
+    $updated - Time of update (optional).
+
+
+Function: entry
+---------------
+Outputs an individual feed item.
+
+Parameters:
+    $title - Title for this item.
+    $id - The unique ID.
+    $content - Content for this item.
+    $link - The URL to the resource.
+    $published - Time of creation.
+    $updated - Time of update (optional).
+    $name - Name of the author (optional).
+    $uri - URI of the author (optional).
+    $email - Email address of the author (optional).
+
+Notes:
+    The item remains open to allow triggered insertions.
+
+
+Function: category
+------------------
+Outputs a category element for an item.
+
+Parameters:
+    $term - String that identifies the category.
+    $scheme - URI for the categorization scheme (optional).
+    $label - Human-readable label for the category (optional).
+
+
+Function: rights
+----------------
+Not implemented in RSS 2.0.11.
+
+
+Function: enclosure
+-------------------
+Outputs an enclosure element for a resource that is potentially large in size.
+
+Parameters:
+    $link - The URL to the resource.
+    $length - Size in bytes of the resource (optional).
+    $type - The media type of the resource (optional).
+    $title - Title for the resource (optional).
+
+
+Function: related
+-----------------
+Not implemented in RSS 2.0.11.
+
+
+Function: split
+---------------
+Outputs a closing item element.
+
+
+Function: close
+---------------
+Outputs the closing channel element.
+
+
+==============================================
+includes/lib/XMLRPC.php
+==============================================
+
+Class: XMLRPC
+-------------
+Extensible XML-RPC interface for remotely managing posts.
+
+
+Function: __construct
+---------------------
+Sets appropriate error and exception handlers and registers the methods.
+
+
+Function: pingback_ping
+-----------------------
+Receive and register pingbacks. Calls the @pingback@ trigger.
+
+
+Function: metaWeblog_getRecentPosts
+-----------------------------------
+Returns a list of recent posts that the user can edit/delete.
+
+
+Function: metaWeblog_getCategories
+----------------------------------
+Returns a list of available categories.
+
+
+Function: metaWeblog_newMediaObject
+-----------------------------------
+Uploads a file to the server.
+
+
+Function: metaWeblog_getPost
+----------------------------
+Retrieves a specified post for editing.
+
+
+Function: metaWeblog_newPost
+----------------------------
+Creates a new post.
+
+
+Function: metaWeblog_editPost
+-----------------------------
+Updates a specified post.
+
+
+Function: metaWeblog_deletePost
+-------------------------------
+Deletes a specified post.
+
+
+Function: metaWeblog_getUsersBlogs
+----------------------------------
+Returns information about the blog.
+
+
+Function: convertFromDateCreated
+--------------------------------
+Converts an IXR_Date (in $args["dateCreated"]) to SQL date format.
+
+
+Function: auth
+--------------
+Authenticates a user's login and password.
+
+
+Function: error_handler
+-----------------------
+
+
+Function: exception_handler
+---------------------------
+
+
+==============================================
+includes/main.js.php
+==============================================
+
+File: main.js.php
+-----------------
+JavaScript for core functionality and extensions.
+
+
+==============================================
+includes/model/Group.php
+==============================================
+
+Class: Group
+------------
+The Group model.
+
+See Also:
+    <Model>
+
+
+Function: __construct
+---------------------
+
+See Also:
+    <Model::grab>
+
+
+Function: find
+--------------
+
+See Also:
+    <Model::search>
+
+
+Function: can
+-------------
+Checks if the group can perform the specified actions.
+
+Parameters:
+    *$permissions - Permissions to check, as separate args.
+
+Returns:
+    @true@ or @false@
+
+Notes:
+    If the last arg is <true>, logic is "and", otherwise "or".
+
+
+Function: add
+-------------
+Adds a group to the database with the given name and permissions.
+
+Calls the @add_group@ trigger with the inserted group.
+
+Parameters:
+    $name - The group's name
+    $permissions - An array of the permissions (IDs).
+
+Returns:
+    The newly created <Group>.
+
+See Also:
+    <update>
+
+
+Function: update
+----------------
+Updates a group with the given name and permissions.
+
+Calls the @update_group@ trigger with the updated object and the old object.
+
+Parameters:
+    $name - The new Name to set.
+    $permissions - An array of the new permissions to set (IDs).
+
+Returns:
+    The updated <Group>.
+
+
+Function: delete
+----------------
+Deletes a given group and its permissions.
+
+See Also:
+    <Model::destroy>
+
+
+Function: add_permission
+------------------------
+Adds a permission to the Groups table.
+
+Parameters:
+    $id - The ID for the permission, e.g "can_do_something".
+    $name - The name for the permission, e.g. "Can Do Something".
+
+
+Function: remove_permission
+---------------------------
+Removes a permission from the Groups table.
+
+Parameters:
+    $id - The ID of the permission to remove.
+
+
+Function: list_permissions
+--------------------------
+Returns an array of all permissions in the Groups table.
+
+Parameters:
+    $group_id - List enabled permissions for this group ID.
+
+
+Function: size
+--------------
+Returns the amount of users in the group.
+
+
+==============================================
+includes/model/Page.php
+==============================================
+
+Class: Page
+-----------
+The Page model.
+
+See Also:
+    <Model>
+
+
+Function: __construct
+---------------------
+
+See Also:
+    <Model::grab>
+
+
+Function: find
+--------------
+
+See Also:
+    <Model::search>
+
+
+Function: add
+-------------
+Adds a page to the database.
+
+Calls the @add_page@ trigger with the new <Page>.
+
+Parameters:
+    $title - The Title for the new page.
+    $body - The Body for the new page.
+    $user - The <User> or <User.id> of the page's author.
+    $parent_id - The ID of the new page's parent page (0 for none).
+    $public - Whether the page can be viewed without permission.
+    $show_in_list - Whether or not to show it in the pages list.
+    $list_order - The order of the page in the list.
+    $clean - The slug for this page.
+    $url - The unique URL (created from $clean by default).
+    $created_at - The new page's "created" timestamp.
+    $updated_at - The new page's "last updated" timestamp.
+
+Returns:
+    The newly created <Page>.
+
+Notes:
+    The caller is responsible for validating all supplied values.
+
+See Also:
+    <update>
+
+
+Function: update
+----------------
+Updates the page.
+
+Calls the @update_page@ trigger with the updated <Page> and the original <Page>.
+
+Parameters:
+    $title - The new Title.
+    $body - The new Body.
+    $user - The <User> or <User.id> of the page's author.
+    $parent_id - The new parent ID.
+    $public - Whether the page can be viewed without permission.
+    $show_in_list - Whether or not to show it in the pages list.
+    $clean - A new slug for the page.
+    $url - A new unique URL for the page (created from $clean by default).
+    $created_at - The page's "created" timestamp.
+    $updated_at - The page's "last updated" timestamp.
+
+Returns:
+    The updated <Page>.
+
+Notes:
+    The caller is responsible for validating all supplied values.
+
+
+Function: delete
+----------------
+Deletes the given page.
+
+Calls the @delete_page@ trigger with the <Page> to delete.
+
+Parameters:
+    $page_id - The ID of the page to delete.
+    $recursive - Should the page's children be deleted? (default: false)
+
+See Also:
+    <Model::destroy>
+
+
+Function: exists
+----------------
+Checks if a page exists.
+
+Parameters:
+    $page_id - The page ID to check
+
+
+Function: check_url
+-------------------
+Checks if a given URL value is already being used as another page's URL.
+
+Parameters:
+    $url - The URL to check.
+
+Returns:
+    The unique version of the URL value.
+    If it's not used, it's the same as $url. If it is, a number is appended.
+
+
+Function: filter
+----------------
+Filters the page attributes through filter_page and markup filters.
+
+
+Function: from_url
+------------------
+Attempts to grab a page from its clean URL.
+
+Parameters:
+    $request - The request URI to parse.
+    $route - The route object to respond to, or null to return a Page object.
+
+
+Function: url
+-------------
+Returns a page's URL. We can cheat because we know the inner workings of MainController.
+
+
+Function: author
+----------------
+Returns a page's author. Example: $page->author->name
+
+
+==============================================
+includes/model/Post.php
+==============================================
+
+Class: Post
+-----------
+The Post model.
+
+See Also:
+    <Model>
+
+
+Function: __construct
+---------------------
+See Also:
+    <Model::grab>
+
+
+Function: find
+--------------
+See Also:
+    <Model::search>
+
+
+Function: add
+-------------
+Adds a post to the database.
+
+Calls the @add_post@ trigger with the new <Post> and extra options.
+
+Parameters:
+    $values - The data to insert.
+    $clean - The slug for this post.
+    $url - The unique sanitised URL (created from $clean by default).
+    $feather - The feather to post as.
+    $user - <User> to set as the post's author.
+    $pinned - Pin the post?
+    $status - Post status
+    $created_at - New @created_at@ timestamp for the post.
+    $updated_at - New @updated_at@ timestamp for the post.
+    $pingbacks - Send pingbacks?
+    $options - Options for the post.
+
+Returns:
+    The newly created <Post>.
+
+Notes:
+    The caller is responsible for validating all supplied values.
+
+See Also:
+    <update>
+
+
+Function: update
+----------------
+Updates a post with the given attributes.
+
+Calls the @update_post@ trigger with the updated <Post>, original <Post>, and extra options.
+
+Parameters:
+    $values - An array of data to set for the post.
+    $user - <User> to set as the post's author.
+    $pinned - Pin the post?
+    $status - Post status
+    $clean - A new slug for the post.
+    $url - A new unique URL for the post.
+    $created_at - New @created_at@ timestamp for the post.
+    $updated_at - New @updated_at@ timestamp for the post.
+    $options - Options for the post.
+    $pingbacks - Send pingbacks?
+
+Returns:
+    The updated <Post>.
+
+Notes:
+    The caller is responsible for validating all supplied values.
+
+See Also:
+    <add>
+
+
+Function: delete
+----------------
+Deletes a post from the database.
+
+See Also:
+    <Model::destroy>
+
+
+Function: deletable
+-------------------
+Checks if the <User> can delete the post.
+
+
+Function: editable
+------------------
+Checks if the <User> can edit the post.
+
+
+Function: any_editable
+----------------------
+Checks if the <Visitor> can edit any posts.
+
+
+Function: any_deletable
+-----------------------
+Checks if the <Visitor> can delete any posts.
+
+
+Function: exists
+----------------
+Checks if a post exists.
+
+Parameters:
+    $post_id - The post ID to check
+
+Returns:
+    true - if a post with that ID is in the database.
+
+
+Function: check_url
+-------------------
+Checks if a given URL value is already being used as another post's URL.
+
+Parameters:
+    $url - The URL to check.
+
+Returns:
+    The unique version of the URL value.
+    If it's not used, it's the same as $url. If it is, a number is appended.
+
+
+Function: url
+-------------
+Returns a post's URL. We can cheat because we know the inner workings of MainController.
+
+
+Function: title_from_excerpt
+----------------------------
+Generates an acceptable title from the post's excerpt.
+
+Returns:
+    The post's excerpt:
+    filtered -> first line -> ftags stripped -> truncated to 75 characters -> normalized.
+
+
+Function: title
+---------------
+Returns the given post's title, provided by its Feather.
+
+
+Function: excerpt
+-----------------
+Returns the given post's excerpt, provided by its Feather.
+
+
+Function: feed_content
+----------------------
+Returns the given post's feed content, provided by its Feather.
+
+
+Function: next
+--------------
+
+Returns:
+    The next post (the post made before this one).
+
+
+Function: prev
+--------------
+
+Returns:
+    The previous post (the post made after this one).
+
+
+Function: theme_exists
+----------------------
+Checks if the current post's feather theme file exists.
+
+
+Function: filter
+----------------
+Filters the post attributes through filter_post and any Feather filters.
+
+
+Function: from_url
+------------------
+Attempts to grab a post from its clean URL.
+
+Parameters:
+    $request - The request URI to parse, or an array of matches already found.
+    $route - The route object to respond to, or null to return a Post object.
+    $options - Additional options for the Post object (optional).
+
+
+Function: statuses
+------------------
+Returns a SQL query "chunk" for the "status" column permissions of the current user.
+
+Parameters:
+    $start - An array of additional statuses to allow;
+             "registered_only", "private" and "scheduled" are added deterministically.
+
+
+Function: feathers
+------------------
+Returns a SQL query "chunk" for the "feather" column so that it matches enabled feathers.
+
+
+Function: author
+----------------
+Returns a post's author. Example: $post->author->name
+
+
+Function: groups
+----------------
+Returns the IDs of any groups given viewing permission in the post's status.
+
+
+Function: publish_scheduled
+---------------------------
+Searches for and publishes scheduled posts.
+
+Calls the @publish_post@ trigger with the updated <Post>.
+
+
+==============================================
+includes/model/User.php
+==============================================
+
+Class: User
+-----------
+The User model.
+
+See Also:
+    <Model>
+
+
+Function: __construct
+---------------------
+
+See Also:
+    <Model::grab>
+
+
+Function: find
+--------------
+
+See Also:
+    <Model::search>
+
+
+Function: authenticate
+----------------------
+Checks to see if a given login and password match a user in the database.
+
+Parameters:
+    $login - The Login to check.
+    $password - The matching Password to check.
+
+Returns:
+    @true@ or @false@
+
+
+Function: add
+-------------
+Adds a user to the database with the passed username, password, and email.
+
+Calls the @add_user@ trigger with the inserted user.
+
+Parameters:
+    $login - The Login for the new user.
+    $password - The hashed password for the new user.
+    $email - The email for the new user.
+    $full_name - The full name of the user (optional).
+    $website - The user's website (optional).
+    $group_id - The user's <Group> ID (defaults to the default group).
+    $joined_at - Join date (defaults to now).
+
+Returns:
+    The newly created <User>.
+
+See Also:
+    <update>
+
+
+Function: update
+----------------
+Updates the user with the given login, password, full name, email, website, and <Group> ID.
+
+Passes all of the arguments to the update_user trigger. All parameters are omissible.
+
+Parameters:
+    $login - The new Login to set.
+    $password - The new hashed password to set.
+    $full_name - The new Full Name to set.
+    $email - The new email to set.
+    $website - The new Website to set.
+    $group_id - The new <Group> ID to set.
+
+Returns:
+    The updated <User>.
+
+See Also:
+    <add>
+
+
+Function: delete
+----------------
+Deletes a given user. Calls the @delete_user@ trigger and passes the <User> as an argument.
+
+See Also:
+    <Model::destroy>
+
+
+Function: hashPassword
+----------------------
+Creates a hash of a user's password for the database.
+
+Parameters:
+    $password - The unhashed password.
+
+Returns:
+    The hashed password.
+
+Notes:
+    <random> tries to be cryptographically secure.
+
+
+Function: checkPassword
+-----------------------
+Checks a given password against the user's stored hash.
+
+Parameters:
+    $password - The unhashed password given during a login attempt.
+    $stored - The the user's stored hash value from the database.
+
+Returns:
+    @true@ or @false@
+
+Notes:
+    Uses <hash_equals> if available to mitigate timing attacks.
+
+
+==============================================
+includes/model/Visitor.php
+==============================================
+
+Class: Visitor
+--------------
+The model for the currently browsing <User>.
+Group falls back to whatever group is set as the "Guest Group".
+
+See Also:
+    <User>
+
+
+Function: __construct
+---------------------
+Checks if a valid user is logged in.
+
+
+Function: __get
+---------------
+A detour around belongs_to "group" to account for the default Guest group.
+
+
+Function: find
+--------------
+
+See Also:
+    <Model::search>
+
+
+Function: current
+-----------------
+Returns a singleton reference to the current visitor.
+
+
+==============================================
+includes/rpc.php
+==============================================
+
+File: rpc
+---------
+Handles XML-RPC requests.
+
+
+==============================================
+includes/thumbnail.php
+==============================================
+
+File: thumbnail
+---------------
+Generates compressed image thumbnails for uploaded files.
+
+
