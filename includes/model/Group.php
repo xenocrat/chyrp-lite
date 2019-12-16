@@ -51,7 +51,7 @@
          * Checks if the group can perform the specified actions.
          *
          * Parameters:
-         *     *$permissions - Permissions to check, as separate args.
+         *     $permissions - Permissions to check, as separate args.
          *
          * Returns:
          *     @true@ or @false@
@@ -85,8 +85,6 @@
         /**
          * Function: add
          * Adds a group to the database with the given name and permissions.
-         *
-         * Calls the @add_group@ trigger with the inserted group.
          *
          * Parameters:
          *     $name - The group's name
@@ -139,8 +137,6 @@
         /**
          * Function: update
          * Updates a group with the given name and permissions.
-         *
-         * Calls the @update_group@ trigger with the updated object and the old object.
          *
          * Parameters:
          *     $name - The new Name to set.
@@ -291,7 +287,7 @@
 
         /**
          * Function: size
-         * Returns the amount of users in the group.
+         * Returns the number of users in the group.
          */
         public function size() {
             if ($this->no_results)

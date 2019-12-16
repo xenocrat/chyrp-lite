@@ -63,8 +63,6 @@
          * Function: add
          * Adds a user to the database with the passed username, password, and email.
          *
-         * Calls the @add_user@ trigger with the inserted user.
-         *
          * Parameters:
          *     $login - The Login for the new user.
          *     $password - The hashed password for the new user.
@@ -115,8 +113,6 @@
         /**
          * Function: update
          * Updates the user with the given login, password, full name, email, website, and <Group> ID.
-         *
-         * Passes all of the arguments to the update_user trigger. All parameters are omissible.
          *
          * Parameters:
          *     $login - The new Login to set.
@@ -172,7 +168,7 @@
 
         /**
          * Function: delete
-         * Deletes a given user. Calls the @delete_user@ trigger and passes the <User> as an argument.
+         * Deletes a given user.
          *
          * See Also:
          *     <Model::destroy>

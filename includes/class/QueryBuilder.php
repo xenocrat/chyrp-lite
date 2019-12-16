@@ -284,8 +284,6 @@
          * Function: safecol
          * Wraps a column in proper escaping if it is a SQL keyword.
          *
-         * Doesn't check every keyword, just the common/sensible ones.
-         *
          * Parameters:
          *     $name - Name of the column.
          */

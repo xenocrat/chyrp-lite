@@ -162,8 +162,6 @@
          * Function: add
          * Adds a post to the database.
          *
-         * Calls the @add_post@ trigger with the new <Post> and extra options.
-         *
          * Parameters:
          *     $values - The data to insert.
          *     $clean - The slug for this post.
@@ -258,8 +256,6 @@
         /**
          * Function: update
          * Updates a post with the given attributes.
-         *
-         * Calls the @update_post@ trigger with the updated <Post>, original <Post>, and extra options.
          *
          * Parameters:
          *     $values - An array of data to set for the post.

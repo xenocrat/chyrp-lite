@@ -43,7 +43,7 @@
 
         /**
          * Function: call
-         * Calls a trigger, passing any additional arguments to it.
+         * Calls a trigger action, passing any additional arguments to it.
          *
          * Parameters:
          *     $name - The name of the trigger, or an array of triggers to call.
@@ -100,9 +100,7 @@
 
         /**
          * Function: filter
-         * Filters a variable through a trigger's actions.
-         * Similar to <call>, except this is stackable and is intended to modify something instead of inject code.
-         *
+         * Modify a variable by filtering it through a stackable set of trigger actions.
          * Any additional arguments passed to this function are passed to the function being called.
          *
          * Parameters:

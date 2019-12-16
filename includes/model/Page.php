@@ -50,8 +50,6 @@
          * Function: add
          * Adds a page to the database.
          *
-         * Calls the @add_page@ trigger with the new <Page>.
-         *
          * Parameters:
          *     $title - The Title for the new page.
          *     $body - The Body for the new page.
@@ -126,8 +124,6 @@
         /**
          * Function: update
          * Updates the page.
-         * 
-         * Calls the @update_page@ trigger with the updated <Page> and the original <Page>.
          *
          * Parameters:
          *     $title - The new Title.
@@ -208,8 +204,6 @@
         /**
          * Function: delete
          * Deletes the given page.
-         * 
-         * Calls the @delete_page@ trigger with the <Page> to delete.
          *
          * Parameters:
          *     $page_id - The ID of the page to delete.

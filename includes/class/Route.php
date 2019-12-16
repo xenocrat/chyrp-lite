@@ -77,8 +77,6 @@
         /**
          * Function: init
          * Attempt to call a responder for the action(s) until one of them doesn't return false.
-         *
-         * This will also call the @[controllername]_[action]@ and @route_[action]@ triggers.
          */
         public function init() {
             $trigger = Trigger::current();
@@ -150,8 +148,6 @@
          * Function: url
          * Constructs an absolute URL from a relative one, translating clean to dirty URLs as necessary.
          *
-         * The applicable URL translations are filtered through the @parse_urls@ trigger.
-         *
          * Parameters:
          *     $url - The relative URL. This is assumed to be a dirty URL if it begins with "/".
          *     $controller - The controller to use. If omitted the current controller will be used.
@@ -199,12 +195,15 @@
 
         /**
          * Function: add
-         * Adds a route to the blog. Required for actions that have more than one parameter.
-         * For example, for /tags/ you won't need to do this, but you will for /tag/(name)/.
+         * Adds a route to the blog.
          *
          * Parameters:
          *     $path - The path to add. Wrap variables with parentheses e.g. "tag/(name)/".
          *     $action - The action. Add parameters with semicolons e.g "tag;foo=bar;baz=boo".
+         *
+         * Notes:
+         *     Required for actions that have more than one parameter.
+         *     For example, for /tags/ you won't need to do this, but you will for /tag/(name)/.
          *
          * See Also:
          *     <remove>

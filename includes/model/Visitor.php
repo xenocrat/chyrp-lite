@@ -2,7 +2,9 @@
     /**
      * Class: Visitor
      * The model for the currently browsing <User>.
-     * Group falls back to whatever group is set as the "Guest Group".
+     *
+     * Notes:
+     *     Group falls back to whatever group is set as the "Guest Group".
      *
      * See Also:
      *     <User>

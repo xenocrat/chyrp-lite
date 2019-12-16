@@ -418,6 +418,7 @@
 
        /**
         * Function: error_handler
+        * Handles errors encountered during XML-RPC requests.
         */
         public static function error_handler($errno, $message, $file, $line) {
             # Test for suppressed errors and excluded error levels.
@@ -434,6 +435,7 @@
 
        /**
         * Function: exception_handler
+        * Handles exceptions encountered during XML-RPC requests.
         */
         public static function exception_handler($e) {
             $err = new IXR_Error($e->getCode(), $e->getMessage());

@@ -770,9 +770,7 @@
 
         /**
          * Function: display
-         * Displays the page.
-         *
-         * If "posts" is in the context and the visitor requested a feed, they will be served.
+         * Displays the page, or serves a feed if requested.
          *
          * Parameters:
          *     $template - The template file or array of fallbacks to display (sans ".twig") relative to THEME_DIR.

@@ -396,7 +396,7 @@
 
         /**
          * Function: delete
-         * Deletes a given object. Calls the @delete_[model]@ trigger with the object.
+         * Deletes a given object.
          *
          * Parameters:
          *     $model - The model name.
