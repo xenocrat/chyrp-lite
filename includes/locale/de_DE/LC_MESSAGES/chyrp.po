@@ -64,7 +64,7 @@ msgstr "Datenbankfehler: %s"
 msgid "Route was initiated with an invalid Controller."
 msgstr "Route wurde mit einem ungültigen Controller initiiert."
 
-#: includes/class/Route.php:99 includes/controller/Admin.php:442
+#: includes/class/Route.php:97 includes/controller/Admin.php:442
 #: includes/controller/Admin.php:445 includes/controller/Admin.php:509
 #: includes/controller/Admin.php:512 includes/controller/Admin.php:660
 #: includes/controller/Admin.php:665 includes/controller/Admin.php:668
@@ -99,11 +99,11 @@ msgstr "Route wurde mit einem ungültigen Controller initiiert."
 msgid "Error"
 msgstr "Fehler"
 
-#: includes/class/Route.php:99
+#: includes/class/Route.php:97
 msgid "Invalid action."
 msgstr "Aktion nicht gültig."
 
-#: includes/class/Route.php:106 includes/controller/Admin.php:160
+#: includes/class/Route.php:104 includes/controller/Admin.php:160
 #: includes/controller/Admin.php:170 includes/controller/Admin.php:203
 #: includes/controller/Admin.php:207 includes/controller/Admin.php:238
 #: includes/controller/Admin.php:258 includes/controller/Admin.php:269
@@ -147,7 +147,7 @@ msgstr "Aktion nicht gültig."
 msgid "Access Denied"
 msgstr "Zugriff verweigert"
 
-#: includes/class/Route.php:106 includes/download.php:18
+#: includes/class/Route.php:104 includes/download.php:18
 #: includes/thumbnail.php:21
 msgid "You are not allowed to view this site."
 msgstr "Du hast keinen Zugriff auf diese Seite."
@@ -1170,115 +1170,115 @@ msgid "Are you sure you want to delete this page and its child pages?"
 msgstr ""
 "Bist Du Dir sicher, dass Du diese Seite und alle Unterseiten löschen willst?"
 
-#: includes/model/Group.php:254
+#: includes/model/Group.php:250
 msgid "Change Settings"
 msgstr "Einstellungen verändern"
 
-#: includes/model/Group.php:255
+#: includes/model/Group.php:251
 msgid "Toggle Extensions"
 msgstr "Extensions verwalten"
 
-#: includes/model/Group.php:256
+#: includes/model/Group.php:252
 msgid "View Site"
 msgstr "Blog anzeigen"
 
-#: includes/model/Group.php:257
+#: includes/model/Group.php:253
 msgid "View Private Posts"
 msgstr "Private Posts anzeigen"
 
-#: includes/model/Group.php:258
+#: includes/model/Group.php:254
 msgid "View Scheduled Posts"
 msgstr "Vorgemerkte Posts anzeigen"
 
-#: includes/model/Group.php:259
+#: includes/model/Group.php:255
 msgid "View Drafts"
 msgstr "Entwürfe anzeigen"
 
-#: includes/model/Group.php:260
+#: includes/model/Group.php:256
 msgid "View Own Drafts"
 msgstr "Eigene Entwürfe anzeigen"
 
-#: includes/model/Group.php:261
+#: includes/model/Group.php:257
 msgid "Add Posts"
 msgstr "Posts hinzufügen"
 
-#: includes/model/Group.php:262
+#: includes/model/Group.php:258
 msgid "Add Drafts"
 msgstr "Entwürfe hinzufügen"
 
-#: includes/model/Group.php:263
+#: includes/model/Group.php:259
 msgid "Edit Posts"
 msgstr "Posts bearbeiten"
 
-#: includes/model/Group.php:264
+#: includes/model/Group.php:260
 msgid "Edit Drafts"
 msgstr "Entwürfe bearbeiten"
 
-#: includes/model/Group.php:265
+#: includes/model/Group.php:261
 msgid "Edit Own Posts"
 msgstr "Eigene Posts bearbeiten"
 
-#: includes/model/Group.php:266
+#: includes/model/Group.php:262
 msgid "Edit Own Drafts"
 msgstr "Eigene Entwürfe bearbeiten"
 
-#: includes/model/Group.php:267
+#: includes/model/Group.php:263
 msgid "Delete Posts"
 msgstr "Posts löschen"
 
-#: includes/model/Group.php:268
+#: includes/model/Group.php:264
 msgid "Delete Drafts"
 msgstr "Entwürfe löschen"
 
-#: includes/model/Group.php:269
+#: includes/model/Group.php:265
 msgid "Delete Own Posts"
 msgstr "Eigene Posts löschen"
 
-#: includes/model/Group.php:270
+#: includes/model/Group.php:266
 msgid "Delete Own Drafts"
 msgstr "Eigene Entwürfe löschen"
 
-#: includes/model/Group.php:271
+#: includes/model/Group.php:267
 msgid "View Pages"
 msgstr "Seiten anzeigen"
 
-#: includes/model/Group.php:272
+#: includes/model/Group.php:268
 msgid "Add Pages"
 msgstr "Seiten hinzufügen"
 
-#: includes/model/Group.php:273
+#: includes/model/Group.php:269
 msgid "Edit Pages"
 msgstr "Seiten bearbeiten"
 
-#: includes/model/Group.php:274
+#: includes/model/Group.php:270
 msgid "Delete Pages"
 msgstr "Seiten löschen"
 
-#: includes/model/Group.php:275
+#: includes/model/Group.php:271
 msgid "Add Users"
 msgstr "Benutzer hinzufügen"
 
-#: includes/model/Group.php:276
+#: includes/model/Group.php:272
 msgid "Edit Users"
 msgstr "Benutzer bearbeiten"
 
-#: includes/model/Group.php:277
+#: includes/model/Group.php:273
 msgid "Delete Users"
 msgstr "Benutzer löschen"
 
-#: includes/model/Group.php:278
+#: includes/model/Group.php:274
 msgid "Add Groups"
 msgstr "Gruppen hinzufügen"
 
-#: includes/model/Group.php:279
+#: includes/model/Group.php:275
 msgid "Edit Groups"
 msgstr "Gruppen bearbeiten"
 
-#: includes/model/Group.php:280
+#: includes/model/Group.php:276
 msgid "Delete Groups"
 msgstr "Gruppen löschen"
 
-#: includes/model/Group.php:281
+#: includes/model/Group.php:277
 msgid "Export Content"
 msgstr "Inhalte exportieren"
 

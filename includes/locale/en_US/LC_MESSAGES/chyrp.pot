@@ -53,7 +53,7 @@ msgstr ""
 msgid "Route was initiated with an invalid Controller."
 msgstr ""
 
-#: includes/class/Route.php:99
+#: includes/class/Route.php:97
 #: includes/controller/Admin.php:442
 #: includes/controller/Admin.php:445
 #: includes/controller/Admin.php:509
@@ -127,11 +127,11 @@ msgstr ""
 msgid "Error"
 msgstr ""
 
-#: includes/class/Route.php:99
+#: includes/class/Route.php:97
 msgid "Invalid action."
 msgstr ""
 
-#: includes/class/Route.php:106
+#: includes/class/Route.php:104
 #: includes/controller/Admin.php:160
 #: includes/controller/Admin.php:170
 #: includes/controller/Admin.php:203
@@ -216,7 +216,7 @@ msgstr ""
 msgid "Access Denied"
 msgstr ""
 
-#: includes/class/Route.php:106
+#: includes/class/Route.php:104
 #: includes/download.php:18
 #: includes/thumbnail.php:21
 msgid "You are not allowed to view this site."
@@ -1352,115 +1352,115 @@ msgstr ""
 msgid "Are you sure you want to delete this page and its child pages?"
 msgstr ""
 
-#: includes/model/Group.php:254
+#: includes/model/Group.php:250
 msgid "Change Settings"
 msgstr ""
 
-#: includes/model/Group.php:255
+#: includes/model/Group.php:251
 msgid "Toggle Extensions"
 msgstr ""
 
-#: includes/model/Group.php:256
+#: includes/model/Group.php:252
 msgid "View Site"
 msgstr ""
 
-#: includes/model/Group.php:257
+#: includes/model/Group.php:253
 msgid "View Private Posts"
 msgstr ""
 
-#: includes/model/Group.php:258
+#: includes/model/Group.php:254
 msgid "View Scheduled Posts"
 msgstr ""
 
-#: includes/model/Group.php:259
+#: includes/model/Group.php:255
 msgid "View Drafts"
 msgstr ""
 
-#: includes/model/Group.php:260
+#: includes/model/Group.php:256
 msgid "View Own Drafts"
 msgstr ""
 
-#: includes/model/Group.php:261
+#: includes/model/Group.php:257
 msgid "Add Posts"
 msgstr ""
 
-#: includes/model/Group.php:262
+#: includes/model/Group.php:258
 msgid "Add Drafts"
 msgstr ""
 
-#: includes/model/Group.php:263
+#: includes/model/Group.php:259
 msgid "Edit Posts"
 msgstr ""
 
-#: includes/model/Group.php:264
+#: includes/model/Group.php:260
 msgid "Edit Drafts"
 msgstr ""
 
-#: includes/model/Group.php:265
+#: includes/model/Group.php:261
 msgid "Edit Own Posts"
 msgstr ""
 
-#: includes/model/Group.php:266
+#: includes/model/Group.php:262
 msgid "Edit Own Drafts"
 msgstr ""
 
-#: includes/model/Group.php:267
+#: includes/model/Group.php:263
 msgid "Delete Posts"
 msgstr ""
 
-#: includes/model/Group.php:268
+#: includes/model/Group.php:264
 msgid "Delete Drafts"
 msgstr ""
 
-#: includes/model/Group.php:269
+#: includes/model/Group.php:265
 msgid "Delete Own Posts"
 msgstr ""
 
-#: includes/model/Group.php:270
+#: includes/model/Group.php:266
 msgid "Delete Own Drafts"
 msgstr ""
 
-#: includes/model/Group.php:271
+#: includes/model/Group.php:267
 msgid "View Pages"
 msgstr ""
 
-#: includes/model/Group.php:272
+#: includes/model/Group.php:268
 msgid "Add Pages"
 msgstr ""
 
-#: includes/model/Group.php:273
+#: includes/model/Group.php:269
 msgid "Edit Pages"
 msgstr ""
 
-#: includes/model/Group.php:274
+#: includes/model/Group.php:270
 msgid "Delete Pages"
 msgstr ""
 
-#: includes/model/Group.php:275
+#: includes/model/Group.php:271
 msgid "Add Users"
 msgstr ""
 
-#: includes/model/Group.php:276
+#: includes/model/Group.php:272
 msgid "Edit Users"
 msgstr ""
 
-#: includes/model/Group.php:277
+#: includes/model/Group.php:273
 msgid "Delete Users"
 msgstr ""
 
-#: includes/model/Group.php:278
+#: includes/model/Group.php:274
 msgid "Add Groups"
 msgstr ""
 
-#: includes/model/Group.php:279
+#: includes/model/Group.php:275
 msgid "Edit Groups"
 msgstr ""
 
-#: includes/model/Group.php:280
+#: includes/model/Group.php:276
 msgid "Delete Groups"
 msgstr ""
 
-#: includes/model/Group.php:281
+#: includes/model/Group.php:277
 msgid "Export Content"
 msgstr ""
 

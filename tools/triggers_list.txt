@@ -215,7 +215,7 @@ Arguments:
 route_init
 ----------
 Called from:
-	includes/class/Route.php on line 87
+	includes/class/Route.php on line 85
 
 Arguments:
 	$this
@@ -224,13 +224,13 @@ Arguments:
 can_not_view_site
 -----------------
 Called from:
-	includes/class/Route.php on line 105
+	includes/class/Route.php on line 103
 
 
 route_done
 ----------
 Called from:
-	includes/class/Route.php on line 144
+	includes/class/Route.php on line 142
 
 Arguments:
 	$this
@@ -416,7 +416,7 @@ Called from:
 add_group
 ---------
 Called from:
-	includes/model/Group.php on line 134
+	includes/model/Group.php on line 132
 
 Arguments:
 	$group
@@ -425,7 +425,7 @@ Arguments:
 update_group
 ------------
 Called from:
-	includes/model/Group.php on line 194
+	includes/model/Group.php on line 190
 
 Arguments:
 	$group, $this
@@ -434,7 +434,7 @@ Arguments:
 add_page
 --------
 Called from:
-	includes/model/Page.php on line 121
+	includes/model/Page.php on line 119
 
 Arguments:
 	$page
@@ -443,7 +443,7 @@ Arguments:
 update_page
 -----------
 Called from:
-	includes/model/Page.php on line 203
+	includes/model/Page.php on line 199
 
 Arguments:
 	$page, $this
@@ -452,7 +452,7 @@ Arguments:
 add_post
 --------
 Called from:
-	includes/model/Post.php on line 253
+	includes/model/Post.php on line 251
 
 Arguments:
 	$post, $options
@@ -461,7 +461,7 @@ Arguments:
 update_post
 -----------
 Called from:
-	includes/model/Post.php on line 356
+	includes/model/Post.php on line 352
 
 Arguments:
 	$post, $this, $options
@@ -470,7 +470,7 @@ Arguments:
 publish_post
 ------------
 Called from:
-	includes/model/Post.php on line 895
+	includes/model/Post.php on line 891
 
 Arguments:
 	$post
@@ -479,7 +479,7 @@ Arguments:
 add_user
 --------
 Called from:
-	includes/model/User.php on line 110
+	includes/model/User.php on line 108
 
 Arguments:
 	$user
@@ -488,7 +488,7 @@ Arguments:
 update_user
 -----------
 Called from:
-	includes/model/User.php on line 168
+	includes/model/User.php on line 164
 
 Arguments:
 	$user, $this
@@ -798,7 +798,7 @@ Arguments:
 parse_urls
 ----------
 Called from:
-	includes/class/Route.php on line 186
+	includes/class/Route.php on line 182
 
 Target:
 	$urls
@@ -989,7 +989,7 @@ markup_page_title
 -----------------
 Called from:
 	includes/controller/Ajax.php on line 138
-	includes/model/Page.php on line 280
+	includes/model/Page.php on line 274
 
 Target:
 	$content
@@ -999,7 +999,7 @@ markup_title
 ------------
 Called from:
 	includes/controller/Ajax.php on line 138
-	includes/model/Page.php on line 280
+	includes/model/Page.php on line 274
 
 Target:
 	$content
@@ -1009,7 +1009,7 @@ markup_page_text
 ----------------
 Called from:
 	includes/controller/Ajax.php on line 142
-	includes/model/Page.php on line 281
+	includes/model/Page.php on line 275
 
 Target:
 	$content
@@ -1019,7 +1019,7 @@ markup_text
 -----------
 Called from:
 	includes/controller/Ajax.php on line 142
-	includes/model/Page.php on line 281
+	includes/model/Page.php on line 275
 	modules/comments/model/Comment.php on line 386
 
 Target:
@@ -1029,7 +1029,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 832
+	includes/controller/Main.php on line 830
 
 Target:
 	$this->context
@@ -1141,7 +1141,7 @@ Target:
 before_group_add_name
 ---------------------
 Called from:
-	includes/model/Group.php on line 106
+	includes/model/Group.php on line 104
 
 Target:
 	$name
@@ -1150,7 +1150,7 @@ Target:
 before_group_add_permissions
 ----------------------------
 Called from:
-	includes/model/Group.php on line 107
+	includes/model/Group.php on line 105
 
 Target:
 	$permissions
@@ -1159,7 +1159,7 @@ Target:
 before_group_update_name
 ------------------------
 Called from:
-	includes/model/Group.php on line 160
+	includes/model/Group.php on line 156
 
 Target:
 	$name
@@ -1168,7 +1168,7 @@ Target:
 before_group_update_permissions
 -------------------------------
 Called from:
-	includes/model/Group.php on line 161
+	includes/model/Group.php on line 157
 
 Target:
 	$permissions
@@ -1177,7 +1177,7 @@ Target:
 list_permissions
 ----------------
 Called from:
-	includes/model/Group.php on line 283
+	includes/model/Group.php on line 279
 
 Target:
 	$names
@@ -1195,7 +1195,7 @@ Target:
 before_add_page
 ---------------
 Called from:
-	includes/model/Page.php on line 115
+	includes/model/Page.php on line 113
 
 Target:
 	$new_values
@@ -1204,7 +1204,7 @@ Target:
 before_update_page
 ------------------
 Called from:
-	includes/model/Page.php on line 193
+	includes/model/Page.php on line 189
 
 Target:
 	$new_values
@@ -1213,7 +1213,7 @@ Target:
 filter_page
 -----------
 Called from:
-	includes/model/Page.php on line 275
+	includes/model/Page.php on line 269
 
 Target:
 	$this
@@ -1231,7 +1231,7 @@ Target:
 before_add_post
 ---------------
 Called from:
-	includes/model/Post.php on line 225
+	includes/model/Post.php on line 223
 
 Target:
 	$new_values
@@ -1240,7 +1240,7 @@ Target:
 before_add_post_attributes
 --------------------------
 Called from:
-	includes/model/Post.php on line 233
+	includes/model/Post.php on line 231
 
 Target:
 	$attributes
@@ -1249,7 +1249,7 @@ Target:
 before_update_post
 ------------------
 Called from:
-	includes/model/Post.php on line 322
+	includes/model/Post.php on line 318
 
 Target:
 	$new_values
@@ -1258,7 +1258,7 @@ Target:
 before_update_post_attributes
 -----------------------------
 Called from:
-	includes/model/Post.php on line 330
+	includes/model/Post.php on line 326
 
 Target:
 	$attributes
@@ -1267,7 +1267,7 @@ Target:
 title_from_excerpt
 ------------------
 Called from:
-	includes/model/Post.php on line 560
+	includes/model/Post.php on line 556
 
 Target:
 	$excerpt
@@ -1276,7 +1276,7 @@ Target:
 title
 -----
 Called from:
-	includes/model/Post.php on line 585
+	includes/model/Post.php on line 581
 
 Target:
 	$title
@@ -1288,7 +1288,7 @@ Arguments:
 excerpt
 -------
 Called from:
-	includes/model/Post.php on line 602
+	includes/model/Post.php on line 598
 
 Target:
 	$excerpt
@@ -1300,7 +1300,7 @@ Arguments:
 feed_content
 ------------
 Called from:
-	includes/model/Post.php on line 619
+	includes/model/Post.php on line 615
 
 Target:
 	$feed_content
@@ -1312,7 +1312,7 @@ Arguments:
 filter_post
 -----------
 Called from:
-	includes/model/Post.php on line 681
+	includes/model/Post.php on line 677
 
 Target:
 	$this
@@ -1330,7 +1330,7 @@ Target:
 before_add_user
 ---------------
 Called from:
-	includes/model/User.php on line 104
+	includes/model/User.php on line 102
 
 Target:
 	$new_values
@@ -1339,7 +1339,7 @@ Target:
 before_update_user
 ------------------
 Called from:
-	includes/model/User.php on line 158
+	includes/model/User.php on line 154
 
 Target:
 	$new_values

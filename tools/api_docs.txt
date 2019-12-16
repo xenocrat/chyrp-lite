@@ -285,7 +285,7 @@ See Also:
 
 Function: delete
 ----------------
-Deletes a given object. Calls the @delete_[model]@ trigger with the object.
+Deletes a given object.
 
 Parameters:
     $model - The model name.
@@ -668,8 +668,6 @@ Function: safecol
 -----------------
 Wraps a column in proper escaping if it is a SQL keyword.
 
-Doesn't check every keyword, just the common/sensible ones.
-
 Parameters:
     $name - Name of the column.
 
@@ -715,14 +713,10 @@ Function: init
 --------------
 Attempt to call a responder for the action(s) until one of them doesn't return false.
 
-This will also call the @[controllername]_[action]@ and @route_[action]@ triggers.
-
 
 Function: url
 -------------
 Constructs an absolute URL from a relative one, translating clean to dirty URLs as necessary.
-
-The applicable URL translations are filtered through the @parse_urls@ trigger.
 
 Parameters:
     $url - The relative URL. This is assumed to be a dirty URL if it begins with "/".
@@ -734,12 +728,15 @@ Returns:
 
 Function: add
 -------------
-Adds a route to the blog. Required for actions that have more than one parameter.
-For example, for /tags/ you won't need to do this, but you will for /tag/(name)/.
+Adds a route to the blog.
 
 Parameters:
     $path - The path to add. Wrap variables with parentheses e.g. "tag/(name)/".
     $action - The action. Add parameters with semicolons e.g "tag;foo=bar;baz=boo".
+
+Notes:
+    Required for actions that have more than one parameter.
+    For example, for /tags/ you won't need to do this, but you will for /tag/(name)/.
 
 See Also:
     <remove>
@@ -901,9 +898,7 @@ Parameters:
 
 Function: replace
 -----------------
-Performs either an INSERT or an UPDATE depending on
-whether a row exists with the specified keys matching
-their values in the data.
+Performs either an INSERT or an UPDATE depending on whether a row exists with the specified keys.
 
 Parameters:
     $table - Table to update or insert into.
@@ -1114,7 +1109,7 @@ Sorts actions by priority when used with usort.
 
 Function: call
 --------------
-Calls a trigger, passing any additional arguments to it.
+Calls a trigger action, passing any additional arguments to it.
 
 Parameters:
     $name - The name of the trigger, or an array of triggers to call.
@@ -1122,9 +1117,7 @@ Parameters:
 
 Function: filter
 ----------------
-Filters a variable through a trigger's actions.
-Similar to <call>, except this is stackable and is intended to modify something instead of inject code.
-
+Modify a variable by filtering it through a stackable set of trigger actions.
 Any additional arguments passed to this function are passed to the function being called.
 
 Parameters:
@@ -1597,9 +1590,7 @@ Grabs posts and serves a feed.
 
 Function: display
 -----------------
-Displays the page.
-
-If "posts" is in the context and the visitor requested a feed, they will be served.
+Displays the page, or serves a feed if requested.
 
 Parameters:
     $template - The template file or array of fallbacks to display (sans ".twig") relative to THEME_DIR.
@@ -2946,10 +2937,12 @@ Authenticates a user's login and password.
 
 Function: error_handler
 -----------------------
+Handles errors encountered during XML-RPC requests.
 
 
 Function: exception_handler
 ---------------------------
+Handles exceptions encountered during XML-RPC requests.
 
 
 ==============================================
@@ -2992,7 +2985,7 @@ Function: can
 Checks if the group can perform the specified actions.
 
 Parameters:
-    *$permissions - Permissions to check, as separate args.
+    $permissions - Permissions to check, as separate args.
 
 Returns:
     @true@ or @false@
@@ -3004,8 +2997,6 @@ Notes:
 Function: add
 -------------
 Adds a group to the database with the given name and permissions.
-
-Calls the @add_group@ trigger with the inserted group.
 
 Parameters:
     $name - The group's name
@@ -3021,8 +3012,6 @@ See Also:
 Function: update
 ----------------
 Updates a group with the given name and permissions.
-
-Calls the @update_group@ trigger with the updated object and the old object.
 
 Parameters:
     $name - The new Name to set.
@@ -3067,7 +3056,7 @@ Parameters:
 
 Function: size
 --------------
-Returns the amount of users in the group.
+Returns the number of users in the group.
 
 
 ==============================================
@@ -3100,8 +3089,6 @@ Function: add
 -------------
 Adds a page to the database.
 
-Calls the @add_page@ trigger with the new <Page>.
-
 Parameters:
     $title - The Title for the new page.
     $body - The Body for the new page.
@@ -3129,8 +3116,6 @@ Function: update
 ----------------
 Updates the page.
 
-Calls the @update_page@ trigger with the updated <Page> and the original <Page>.
-
 Parameters:
     $title - The new Title.
     $body - The new Body.
@@ -3153,8 +3138,6 @@ Notes:
 Function: delete
 ----------------
 Deletes the given page.
-
-Calls the @delete_page@ trigger with the <Page> to delete.
 
 Parameters:
     $page_id - The ID of the page to delete.
@@ -3236,8 +3219,6 @@ Function: add
 -------------
 Adds a post to the database.
 
-Calls the @add_post@ trigger with the new <Post> and extra options.
-
 Parameters:
     $values - The data to insert.
     $clean - The slug for this post.
@@ -3264,8 +3245,6 @@ See Also:
 Function: update
 ----------------
 Updates a post with the given attributes.
-
-Calls the @update_post@ trigger with the updated <Post>, original <Post>, and extra options.
 
 Parameters:
     $values - An array of data to set for the post.
@@ -3476,8 +3455,6 @@ Function: add
 -------------
 Adds a user to the database with the passed username, password, and email.
 
-Calls the @add_user@ trigger with the inserted user.
-
 Parameters:
     $login - The Login for the new user.
     $password - The hashed password for the new user.
@@ -3498,8 +3475,6 @@ Function: update
 ----------------
 Updates the user with the given login, password, full name, email, website, and <Group> ID.
 
-Passes all of the arguments to the update_user trigger. All parameters are omissible.
-
 Parameters:
     $login - The new Login to set.
     $password - The new hashed password to set.
@@ -3517,7 +3492,7 @@ See Also:
 
 Function: delete
 ----------------
-Deletes a given user. Calls the @delete_user@ trigger and passes the <User> as an argument.
+Deletes a given user.
 
 See Also:
     <Model::destroy>
@@ -3559,7 +3534,9 @@ includes/model/Visitor.php
 Class: Visitor
 --------------
 The model for the currently browsing <User>.
-Group falls back to whatever group is set as the "Guest Group".
+
+Notes:
+    Group falls back to whatever group is set as the "Guest Group".
 
 See Also:
     <User>
