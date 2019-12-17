@@ -43,10 +43,13 @@
 
         /**
          * Function: call
-         * Calls a trigger action, passing any additional arguments to it.
+         * Calls a trigger action.
          *
          * Parameters:
          *     $name - The name of the trigger, or an array of triggers to call.
+         *
+         * Notes:
+         *     Any additional arguments are passed on to the functions being called.
          */
         public function call($name) {
             $return = false;
@@ -101,7 +104,6 @@
         /**
          * Function: filter
          * Modify a variable by filtering it through a stackable set of trigger actions.
-         * Any additional arguments passed to this function are passed to the function being called.
          *
          * Parameters:
          *     &$target - The variable to filter.
@@ -109,6 +111,9 @@
          *
          * Returns:
          *     $target, filtered through any/all actions for the trigger $name.
+         *
+         * Notes:
+         *     Any additional arguments are passed on to the functions being called.
          */
         public function filter(&$target, $name) {
             if (is_array($name)) {
