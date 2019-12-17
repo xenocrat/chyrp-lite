@@ -1109,16 +1109,18 @@ Sorts actions by priority when used with usort.
 
 Function: call
 --------------
-Calls a trigger action, passing any additional arguments to it.
+Calls a trigger action.
 
 Parameters:
     $name - The name of the trigger, or an array of triggers to call.
+
+Notes:
+    Any additional arguments are passed on to the functions being called.
 
 
 Function: filter
 ----------------
 Modify a variable by filtering it through a stackable set of trigger actions.
-Any additional arguments passed to this function are passed to the function being called.
 
 Parameters:
     &$target - The variable to filter.
@@ -1126,6 +1128,9 @@ Parameters:
 
 Returns:
     $target, filtered through any/all actions for the trigger $name.
+
+Notes:
+    Any additional arguments are passed on to the functions being called.
 
 
 Function: remove
