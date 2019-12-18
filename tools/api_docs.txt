@@ -3168,8 +3168,8 @@ Parameters:
     $url - The URL to check.
 
 Returns:
-    The unique version of the URL value.
-    If it's not used, it's the same as $url. If it is, a number is appended.
+    The unique version of $url.
+    If unused, it's the same as $url. If used, a number is appended to it.
 
 
 Function: filter
@@ -3188,7 +3188,7 @@ Parameters:
 
 Function: url
 -------------
-Returns a page's URL. We can cheat because we know the inner workings of MainController.
+Returns a page's URL.
 
 
 Function: author
@@ -3321,12 +3321,12 @@ Parameters:
 
 Returns:
     The unique version of the URL value.
-    If it's not used, it's the same as $url. If it is, a number is appended.
+    If unused, it's the same as $url. If used, a number is appended to it.
 
 
 Function: url
 -------------
-Returns a post's URL. We can cheat because we know the inner workings of MainController.
+Returns a post's URL.
 
 
 Function: title_from_excerpt
