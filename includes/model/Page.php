@@ -242,8 +242,8 @@
          *     $url - The URL to check.
          *
          * Returns:
-         *     The unique version of the URL value.
-         *     If it's not used, it's the same as $url. If it is, a number is appended.
+         *     The unique version of $url.
+         *     If unused, it's the same as $url. If used, a number is appended to it.
          */
         static function check_url($url) {
             if (empty($url))
@@ -299,7 +299,7 @@
 
         /**
          * Function: url
-         * Returns a page's URL. We can cheat because we know the inner workings of MainController.
+         * Returns a page's URL.
          */
         public function url() {
             if ($this->no_results)
