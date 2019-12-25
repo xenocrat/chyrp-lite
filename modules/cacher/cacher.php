@@ -3,8 +3,8 @@
         private $exclude = array();
         private $url = "";
         private $regenerated = false;
-        protected $id;
-        protected $cachers;
+        private $id;
+        private $cachers;
 
         public function __init() {
             $config = Config::current();
