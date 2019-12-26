@@ -217,7 +217,7 @@
 
             $post = Feathers::$instances[$_POST['feather']]->submit();
 
-            Flash::notice(__("Post created!").'<a href="'.$post->url().'">'.
+            Flash::notice(__("Post created!").' <a href="'.$post->url().'">'.
                           __("View post &rarr;").'</a>', "manage_posts");
         }
 
