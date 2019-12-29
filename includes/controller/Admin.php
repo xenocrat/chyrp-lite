@@ -702,7 +702,7 @@
                               $_POST['full_name'],
                               $_POST['website'],
                               $group->id,
-                              ($config->email_activation) ? false : true);
+                              ($config->email_activation and empty($_POST['activated'])) ? false : true);
 
             if (!$user->approved)
                 correspond("activate",
@@ -807,7 +807,7 @@
                                   $_POST['full_name'],
                                   $_POST['website'],
                                   $group->id,
-                                  (!$user->approved and $config->email_activation) ? false : true);
+                                  ($config->email_activation and empty($_POST['activated'])) ? false : true);
 
             if (!$user->approved)
                 correspond("activate",

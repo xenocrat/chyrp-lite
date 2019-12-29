@@ -50,7 +50,7 @@
 {% if user.website is not empty %}<a href="{{ user.website | fix(true) }}">{{ user.website }}</a>{% endif %}
 </td>
 <td class="user_activated emblem">
-{% if user.approved == true %}
+{% if user.approved %}
 <img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
 {% endif %}
 </td>

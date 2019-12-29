@@ -45,6 +45,12 @@
 </label>
 <input class="text" type="url" name="website" value="" id="website" maxlength="128">
 </p>
+{% if site.email_activation %}
+<p>
+<label for="activated">{{ "Activated?" | translate }}</label>
+<input class="checkbox" type="checkbox" name="activated" id="activated">
+</p>
+{% endif %}
 {{ trigger.call("new_user_fields") }}
 <p class="buttons">
 <button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Add User" | translate }}</button>
