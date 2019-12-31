@@ -28,7 +28,9 @@
 <th class="user_group value">{{ "Group" | translate }}</th>
 <th class="user_joined date">{{ "Joined" | translate }}</th>
 <th class="user_website name">{{ "Website" | translate }}</th>
+{% if site.email_activation %}
 <th class="user_activated emblem">{{ "Activated?" | translate }}</th>
+{% endif %}
 {{ trigger.call("manage_users_column_header") }}
 <th class="controls" colspan="2">{{ "Controls" | translate }}</th>
 </tr>
@@ -49,11 +51,13 @@
 <td class="user_website name">
 {% if user.website is not empty %}<a href="{{ user.website | fix(true) }}">{{ user.website }}</a>{% endif %}
 </td>
+{% if site.email_activation %}
 <td class="user_activated emblem">
 {% if user.approved %}
 <img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
 {% endif %}
 </td>
+{% endif %}
 {{ trigger.call("manage_users_column", user) }}
 <td class="controls">
 {{ user.edit_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
