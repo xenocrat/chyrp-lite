@@ -2211,9 +2211,11 @@
             case "activate":
                 $params["subject"] = _f("Activate your account at %s", $config->name);
                 $params["message"] = _f("Hello, %s.", $params["login"]).
-                                     "\r\n"."\r\n".
+                                     "\r\n".
+                                     "\r\n".
                                      __("You are receiving this message because you registered a new account.").
-                                     "\r\n"."\r\n".
+                                     "\r\n".
+                                     "\r\n".
                                      __("Visit this link to activate your account:").
                                      "\r\n".
                                      unfix($params["link"]);
@@ -2223,9 +2225,11 @@
             case "reset":
                 $params["subject"] = _f("Reset your password at %s", $config->name);
                 $params["message"] = _f("Hello, %s.", $params["login"]).
-                                     "\r\n"."\r\n".
+                                     "\r\n".
+                                     "\r\n".
                                      __("You are receiving this message because you requested a new password.").
-                                     "\r\n"."\r\n".
+                                     "\r\n".
+                                     "\r\n".
                                      __("Visit this link to reset your password:").
                                      "\r\n".
                                      unfix($params["link"]);
@@ -2235,7 +2239,8 @@
             case "password":
                 $params["subject"] = _f("Your new password for %s", $config->name);
                 $params["message"] = _f("Hello, %s.", $params["login"]).
-                                     "\r\n"."\r\n".
+                                     "\r\n".
+                                     "\r\n".
                                      _f("Your new password is: %s", $params["password"]);
 
                 break;
