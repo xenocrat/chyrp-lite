@@ -515,7 +515,7 @@
 
             if ($user->no_results or empty($_GET['token']) or
                 $_GET['token'] != token(array($user->login, $user->email)))
-                Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
+                    Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
 
             if ($user->approved)
                 Flash::notice(__("Your account has already been activated."), "/");
@@ -539,7 +539,7 @@
 
             if ($user->no_results or empty($_GET['token']) or
                 $_GET['token'] != token(array($user->login, $user->email)))
-                Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
+                    Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
 
             $new_password = random(8);
 
@@ -559,6 +559,7 @@
          * Logs in a user if they provide the username and password.
          */
         public function main_login() {
+            $config = Config::current();
             $trigger = Trigger::current();
 
             if (logged_in())
@@ -580,7 +581,7 @@
                 if (!Flash::exists("warning")) {
                     $user = new User(array("login" => $_POST['login']));
 
-                    if (!$user->approved)
+                    if (!$user->approved and $config->email_activation)
                         Flash::notice(__("You must activate your account before you log in."), "/");
 
                     $_SESSION['user_id'] = $user->id;
