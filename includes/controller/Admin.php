@@ -709,7 +709,7 @@
                            array("to"      => $user->email,
                                  "user_id" => $user->id,
                                  "login"   => $user->login,
-                                 "link"    => fix($config->url, true).
+                                 "link"    => $config->url.
                                               "/?action=activate&amp;login=".urlencode($user->login).
                                               "&amp;token=".token(array($user->login, $user->email))));
 
@@ -814,7 +814,7 @@
                            array("to"      => $user->email,
                                  "user_id" => $user->id,
                                  "login"   => $user->login,
-                                 "link"    => fix($config->url, true).
+                                 "link"    => $config->url.
                                               "/?action=activate&amp;login=".urlencode($user->login).
                                               "&amp;token=".token(array($user->login, $user->email))));
 
