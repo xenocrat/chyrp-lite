@@ -211,7 +211,7 @@ msgid "Filename"
 msgstr "文件名"
 
 #: admin/help/uploads_manifest.twig:22 admin/pages/manage_pages.twig:67
-#: admin/pages/manage_posts.twig:55 admin/pages/manage_users.twig:67
+#: admin/pages/manage_posts.twig:55 admin/pages/manage_users.twig:71
 msgid "(none)"
 msgstr "(空)"
 
@@ -336,7 +336,7 @@ msgid "Compose blog content using Markdown text formatting."
 msgstr "使用Markdown语法撰写博客内容。"
 
 #: admin/pages/content_settings.twig:74 admin/pages/edit_group.twig:24
-#: admin/pages/edit_user.twig:49 admin/pages/general_settings.twig:57
+#: admin/pages/edit_user.twig:55 admin/pages/general_settings.twig:57
 #: admin/pages/route_settings.twig:85 admin/pages/user_settings.twig:47
 msgid "Update"
 msgstr "更新"
@@ -503,6 +503,11 @@ msgstr "(可选)"
 #: admin/pages/new_user.twig:43
 msgid "Website"
 msgstr "网站"
+
+#: admin/pages/edit_user.twig:49 admin/pages/manage_users.twig:32
+#: admin/pages/new_user.twig:50
+msgid "Activated?"
+msgstr "激活？"
 
 #: admin/pages/export.twig:3 admin/pages/export.twig:45
 msgid "Export"
@@ -673,28 +678,28 @@ msgid "Guests?"
 msgstr "访问者？"
 
 #: admin/pages/manage_groups.twig:29 admin/pages/manage_pages.twig:29
-#: admin/pages/manage_posts.twig:27 admin/pages/manage_users.twig:33
+#: admin/pages/manage_posts.twig:27 admin/pages/manage_users.twig:35
 msgid "Controls"
 msgstr "操作"
 
 #: admin/pages/manage_groups.twig:43 admin/pages/manage_groups.twig:48
 #: admin/pages/manage_pages.twig:46 admin/pages/manage_pages.twig:51
-#: admin/pages/manage_users.twig:54
+#: admin/pages/manage_users.twig:57
 msgid "yes"
 msgstr "是"
 
 #: admin/pages/manage_groups.twig:53 admin/pages/manage_pages.twig:59
-#: admin/pages/manage_posts.twig:47 admin/pages/manage_users.twig:59
+#: admin/pages/manage_posts.twig:47 admin/pages/manage_users.twig:63
 msgid "edit"
 msgstr "编辑"
 
 #: admin/pages/manage_groups.twig:56 admin/pages/manage_pages.twig:62
-#: admin/pages/manage_posts.twig:50 admin/pages/manage_users.twig:62
+#: admin/pages/manage_posts.twig:50 admin/pages/manage_users.twig:66
 msgid "delete"
 msgstr "删除"
 
 #: admin/pages/manage_groups.twig:64 admin/pages/manage_pages.twig:74
-#: admin/pages/manage_posts.twig:62 admin/pages/manage_users.twig:74
+#: admin/pages/manage_posts.twig:62 admin/pages/manage_users.twig:78
 #, php-format
 msgid "Page %d of %s"
 msgstr "%d of %s 的页面"
@@ -766,10 +771,6 @@ msgstr "登陆（名称）"
 msgid "Joined"
 msgstr "加入时间"
 
-#: admin/pages/manage_users.twig:31
-msgid "Activated?"
-msgstr "激活？"
-
 #: admin/pages/modules.twig:3 admin/pages/modules.twig:6
 msgid "Modules"
 msgstr "模块"
@@ -786,7 +787,7 @@ msgstr "这个模块需要以下模块启用："
 msgid "Add Group"
 msgstr "增加组"
 
-#: admin/pages/new_user.twig:3 admin/pages/new_user.twig:50
+#: admin/pages/new_user.twig:3 admin/pages/new_user.twig:56
 msgid "Add User"
 msgstr "增加用户"
 

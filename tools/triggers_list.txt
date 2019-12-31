@@ -35,7 +35,7 @@ Called from:
 edit_user_fields
 ----------------
 Called from:
-	admin/pages/edit_user.twig on line 47
+	admin/pages/edit_user.twig on line 53
 
 Arguments:
 	user
@@ -101,13 +101,13 @@ Arguments:
 manage_users_column_header
 --------------------------
 Called from:
-	admin/pages/manage_users.twig on line 32
+	admin/pages/manage_users.twig on line 34
 
 
 manage_users_column
 -------------------
 Called from:
-	admin/pages/manage_users.twig on line 57
+	admin/pages/manage_users.twig on line 61
 
 Arguments:
 	user
@@ -116,7 +116,7 @@ Arguments:
 new_user_fields
 ---------------
 Called from:
-	admin/pages/new_user.twig on line 48
+	admin/pages/new_user.twig on line 54
 
 
 before_page_fields
@@ -314,13 +314,13 @@ Called from:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 575
+	includes/controller/Main.php on line 576
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 587
+	includes/controller/Main.php on line 588
 
 Arguments:
 	$user
@@ -329,7 +329,7 @@ Arguments:
 user_logged_out
 ---------------
 Called from:
-	includes/controller/Main.php on line 609
+	includes/controller/Main.php on line 610
 
 Arguments:
 	$user
@@ -338,7 +338,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 765
+	includes/controller/Main.php on line 766
 
 Arguments:
 	$post, $feed
@@ -365,7 +365,7 @@ Called from:
 send_correspondence
 -------------------
 Called from:
-	includes/helpers.php on line 2248
+	includes/helpers.php on line 2253
 
 Arguments:
 	$action, $params
@@ -374,7 +374,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 2276
+	includes/helpers.php on line 2281
 
 Arguments:
 	$ob
@@ -1029,7 +1029,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 830
+	includes/controller/Main.php on line 831
 
 Target:
 	$this->context
@@ -1068,7 +1068,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 2277
+	includes/helpers.php on line 2282
 
 Target:
 	$nonce
