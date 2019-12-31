@@ -893,7 +893,8 @@
             $params["message"] = _f("%s commented on a blog post:", $params["author"]).
                                  "\r\n".
                                  unfix($post->url()).
-                                 "\r\n"."\r\n".
+                                 "\r\n".
+                                 "\r\n".
                                  truncate(strip_tags($params["body"]), 60);
             return $params;
         }
