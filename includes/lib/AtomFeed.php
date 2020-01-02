@@ -50,7 +50,9 @@
             echo '<id>'.fix(oneof($id, self_url())).'</id>'."\n";
             echo '<updated>'.when("c", oneof($updated, time())).'</updated>'."\n";
             echo '<link href="'.self_url().'" rel="self" type="application/atom+xml" />'."\n";
-            echo '<generator uri="http://chyrplite.net/" version="'.CHYRP_VERSION.'">'.CHYRP_IDENTITY.'</generator>'."\n";
+            echo '<generator uri="http://chyrplite.net/" version="'.CHYRP_VERSION.'">'.
+                 CHYRP_IDENTITY.
+                 '</generator>'."\n";
         }
 
         /**
@@ -71,7 +73,15 @@
          * Notes:
          *     The entry remains open to allow triggered insertions.
          */
-        public function entry($title, $id, $content, $link, $published, $updated = null, $name = "", $uri = "", $email = "") {
+        public function entry($title,
+                              $id,
+                              $content,
+                              $link,
+                              $published,
+                              $updated = null,
+                              $name = "",
+                              $uri = "",
+                              $email = "") {
             self::split();
 
             echo '<entry>'."\n";
