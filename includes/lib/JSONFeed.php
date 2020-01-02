@@ -28,7 +28,7 @@
          * Returns the content type of the feed.
          */
         static function type() {
-            return "application/json";
+            return "application/feed+json";
         }
 
         /**
@@ -42,8 +42,11 @@
          *     $updated - Time of update (optional).
          */
         public function open($title, $subtitle = "", $id = "", $updated = null) {
+            $language = preg_replace("/[\-_].*$/", "", Config::current()->locale);
+
             $this->json = array(
                 "version"       => "https://jsonfeed.org/version/1",
+                "language"      => $language,
                 "title"         => strip_tags($title),
                 "home_page_url" => url("/", MainController::current()),
                 "feed_url"      => unfix(self_url())
@@ -70,7 +73,15 @@
          *     $uri - URI of the author (optional).
          *     $email - Email address of the author (optional).
          */
-        public function entry($title, $id, $content, $link, $published, $updated = null, $name = "", $uri = "", $email = "") {
+        public function entry($title,
+                              $id,
+                              $content,
+                              $link,
+                              $published,
+                              $updated = null,
+                              $name = "",
+                              $uri = "",
+                              $email = "") {
             $this->count++;
 
             $item = array(
