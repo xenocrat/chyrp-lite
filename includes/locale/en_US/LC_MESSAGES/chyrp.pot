@@ -1,4 +1,4 @@
-#. Copyright 2019 Daniel Pimley and other contributors.
+#. Copyright 2020 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 
 #: includes/class/Config.php:21
@@ -1283,8 +1283,8 @@ msgstr ""
 msgid "Your new password is: %s"
 msgstr ""
 
-#: includes/lib/AtomFeed.php:84
-#: includes/lib/JSONFeed.php:83
+#: includes/lib/AtomFeed.php:94
+#: includes/lib/JSONFeed.php:94
 msgid "Guest"
 msgstr ""
 

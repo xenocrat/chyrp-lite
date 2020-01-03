@@ -12,7 +12,7 @@ msgstr ""
 "X-Generator: Poedit 2.2.4\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. Copyright 2019 Daniel Pimley and other contributors.
+#. Copyright 2020 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: includes/class/Config.php:21
 msgid "Could not read the configuration file."
@@ -1102,7 +1102,7 @@ msgstr "Dein neues Passwort für %s"
 msgid "Your new password is: %s"
 msgstr "Dein neues Passwort ist: %s"
 
-#: includes/lib/AtomFeed.php:84 includes/lib/JSONFeed.php:83
+#: includes/lib/AtomFeed.php:94 includes/lib/JSONFeed.php:94
 msgid "Guest"
 msgstr "Gast"
 

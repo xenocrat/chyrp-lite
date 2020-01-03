@@ -1,4 +1,4 @@
-#. Copyright 2019 Daniel Pimley and other contributors.
+#. Copyright 2020 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 
 #: feathers/photo/admin/help/photo_alt_text.twig:3
