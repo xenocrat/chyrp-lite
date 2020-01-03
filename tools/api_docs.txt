@@ -1775,6 +1775,17 @@ Returns:
     A localised display name, e.g. "English (United States)".
 
 
+Function: lang_base
+-------------------
+Extracts the primary language subtag for the supplied code.
+
+Parameters:
+    $code - The language code to extract from.
+
+Returns:
+    The primary subtag for this code, e.g. "en" from "en_US".
+
+
 Function: __
 ------------
 Translates a string using gettext.

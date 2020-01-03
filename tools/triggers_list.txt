@@ -347,25 +347,25 @@ Arguments:
 visitor_authenticate
 --------------------
 Called from:
-	includes/helpers.php on line 629
+	includes/helpers.php on line 645
 
 
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 2053
+	includes/helpers.php on line 2069
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 2070
+	includes/helpers.php on line 2086
 
 
 send_correspondence
 -------------------
 Called from:
-	includes/helpers.php on line 2253
+	includes/helpers.php on line 2269
 
 Arguments:
 	$action, $params
@@ -374,7 +374,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 2281
+	includes/helpers.php on line 2297
 
 Arguments:
 	$ob
@@ -1038,7 +1038,7 @@ Target:
 keyword_search
 --------------
 Called from:
-	includes/helpers.php on line 859
+	includes/helpers.php on line 875
 
 Target:
 	$search
@@ -1050,7 +1050,7 @@ Arguments:
 link_regexp
 -----------
 Called from:
-	includes/helpers.php on line 1428
+	includes/helpers.php on line 1444
 
 Target:
 	$expressions
@@ -1059,7 +1059,7 @@ Target:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 2183
+	includes/helpers.php on line 2199
 
 Target:
 	$function
@@ -1068,7 +1068,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 2282
+	includes/helpers.php on line 2298
 
 Target:
 	$nonce

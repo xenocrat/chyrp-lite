@@ -82,14 +82,14 @@ msgstr "Route wurde mit einem ungültigen Controller initiiert."
 #: includes/controller/Admin.php:1917 includes/controller/Admin.php:1920
 #: includes/controller/Admin.php:1923 includes/controller/Admin.php:2118
 #: includes/controller/Ajax.php:32 includes/download.php:12
-#: includes/download.php:15 includes/error.php:144 includes/helpers.php:1736
-#: includes/helpers.php:1742 includes/helpers.php:1745
-#: includes/helpers.php:1748 includes/helpers.php:1774
-#: includes/helpers.php:1777 includes/helpers.php:1780
-#: includes/helpers.php:1878 includes/helpers.php:1881
-#: includes/helpers.php:1884 includes/helpers.php:1887
-#: includes/helpers.php:1890 includes/helpers.php:1893
-#: includes/helpers.php:1896 includes/helpers.php:1901
+#: includes/download.php:15 includes/error.php:144 includes/helpers.php:1752
+#: includes/helpers.php:1758 includes/helpers.php:1761
+#: includes/helpers.php:1764 includes/helpers.php:1790
+#: includes/helpers.php:1793 includes/helpers.php:1796
+#: includes/helpers.php:1894 includes/helpers.php:1897
+#: includes/helpers.php:1900 includes/helpers.php:1903
+#: includes/helpers.php:1906 includes/helpers.php:1909
+#: includes/helpers.php:1912 includes/helpers.php:1917
 #: includes/thumbnail.php:15 includes/thumbnail.php:18
 #: includes/thumbnail.php:47 includes/thumbnail.php:202 install.php:791
 #: upgrade.php:173 upgrade.php:186 upgrade.php:199 upgrade.php:212
@@ -143,7 +143,7 @@ msgstr "Aktion nicht gültig."
 #: includes/controller/Ajax.php:90 includes/controller/Ajax.php:125
 #: includes/controller/Ajax.php:128 includes/controller/Main.php:299
 #: includes/controller/Main.php:357 includes/download.php:18
-#: includes/helpers.php:1739 includes/thumbnail.php:21
+#: includes/helpers.php:1755 includes/thumbnail.php:21
 msgid "Access Denied"
 msgstr "Zugriff verweigert"
 
@@ -945,69 +945,69 @@ msgstr ""
 msgid "The requested resource was not found."
 msgstr "Die angeforderte Ressource wurde nicht gefunden."
 
-#: includes/helpers.php:1374 includes/helpers.php:1497
+#: includes/helpers.php:1390 includes/helpers.php:1513
 #, php-format
 msgid "Socket error: %s"
 msgstr "Socketfehler: %s"
 
-#: includes/helpers.php:1575
+#: includes/helpers.php:1591
 msgid "Please create the uploads directory."
 msgstr "Bitte erstelle den uploads Ordner."
 
-#: includes/helpers.php:1577
+#: includes/helpers.php:1593
 msgid "Please make the uploads directory writable."
 msgstr "Bitte den uploads Ordner beschreibbar machen."
 
-#: includes/helpers.php:1595
+#: includes/helpers.php:1611
 #, php-format
 msgid "%s module is missing."
 msgstr "%s Modul nicht gefunden."
 
-#: includes/helpers.php:1604
+#: includes/helpers.php:1620
 #, php-format
 msgid "%s module is damaged."
 msgstr "%s Modul ist beschädigt."
 
-#: includes/helpers.php:1618
+#: includes/helpers.php:1634
 #, php-format
 msgid "%s feather is missing."
 msgstr "%s Feather nicht gefunden."
 
-#: includes/helpers.php:1627
+#: includes/helpers.php:1643
 #, php-format
 msgid "%s feather is damaged."
 msgstr "%s Feather ist beschädigt."
 
-#: includes/helpers.php:1687 includes/helpers.php:1708
+#: includes/helpers.php:1703 includes/helpers.php:1724
 #, php-format
 msgid "Execution of %s has been cancelled."
 msgstr "Ausführung von %s wurde abgebrochen."
 
-#: includes/helpers.php:1736
+#: includes/helpers.php:1752
 msgid "Uploaded file is of an unsupported type."
 msgstr "Der Typ der hochgeladenen Datei wird nicht unterstützt."
 
-#: includes/helpers.php:1739
+#: includes/helpers.php:1755
 msgid "Only uploaded files are accepted."
 msgstr "Nur hochgeladene Dateien werden akzeptiert."
 
-#: includes/helpers.php:1742 includes/helpers.php:1774
+#: includes/helpers.php:1758 includes/helpers.php:1790
 #: includes/lib/XMLRPC.php:187
 msgid "Upload path does not exist."
 msgstr "Uploadpfad existiert nicht."
 
-#: includes/helpers.php:1745 includes/helpers.php:1777
+#: includes/helpers.php:1761 includes/helpers.php:1793
 #: includes/lib/XMLRPC.php:190
 msgid "Upload path is not writable."
 msgstr "Uploadpfad ist nicht beschreibbar."
 
-#: includes/helpers.php:1748 includes/helpers.php:1780
-#: includes/helpers.php:1891 includes/lib/XMLRPC.php:193 upgrade.php:125
+#: includes/helpers.php:1764 includes/helpers.php:1796
+#: includes/helpers.php:1907 includes/lib/XMLRPC.php:193 upgrade.php:125
 #: upgrade.php:142 upgrade.php:159
 msgid "Failed to write file to disk."
 msgstr "Schreiben der Datei auf den Speicher ist fehlgeschlagen."
 
-#: includes/helpers.php:1879
+#: includes/helpers.php:1895
 msgid ""
 "The uploaded file exceeds the <code>upload_max_filesize</code> directive in "
 "php.ini."
@@ -1015,7 +1015,7 @@ msgstr ""
 "Die hochgeladene Datei überschreitet die <code>upload_max_filesize</code> "
 "Directive in der php.ini."
 
-#: includes/helpers.php:1882
+#: includes/helpers.php:1898
 msgid ""
 "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the "
 "HTML form."
@@ -1023,24 +1023,24 @@ msgstr ""
 "Die hochgeladene Datei überschreitet die <code>MAX_FILE_SIZE</code> "
 "Directive des HTML Formulars."
 
-#: includes/helpers.php:1885
+#: includes/helpers.php:1901
 msgid "The uploaded file was only partially uploaded."
 msgstr "Die hochgeladene Datei wurde nur teilweise hochgeladen."
 
-#: includes/helpers.php:1888
+#: includes/helpers.php:1904
 msgid "Missing a temporary folder."
 msgstr "Ein temporärer Ordner wurde nicht gefunden."
 
-#: includes/helpers.php:1894
+#: includes/helpers.php:1910
 msgid "File upload was stopped by a PHP extension."
 msgstr "Dateiupload wurde von einer PHP Extension angehalten."
 
-#: includes/helpers.php:1897
+#: includes/helpers.php:1913
 #, php-format
 msgid "File upload failed with error %d."
 msgstr "Dateiupload ist mit Fehler %d fehlgeschlagen."
 
-#: includes/helpers.php:1902
+#: includes/helpers.php:1918
 #, php-format
 msgid ""
 "The uploaded file exceeds the maximum size of %d Megabytes allowed by this "
@@ -1049,55 +1049,55 @@ msgstr ""
 "Die hochgeladene Datei erreicht die Maximalgröße von %d Megabytes, die diese "
 "Seite erlaubt."
 
-#: includes/helpers.php:2120
+#: includes/helpers.php:2136
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr "JSON encoding Fehler: %s"
 
-#: includes/helpers.php:2141
+#: includes/helpers.php:2157
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr "JSON decoding Fehler: %s"
 
-#: includes/helpers.php:2212
+#: includes/helpers.php:2228
 #, php-format
 msgid "Activate your account at %s"
 msgstr "Aktiviere Deinen Account bei %s"
 
-#: includes/helpers.php:2213 includes/helpers.php:2227
-#: includes/helpers.php:2241
+#: includes/helpers.php:2229 includes/helpers.php:2243
+#: includes/helpers.php:2257
 #, php-format
 msgid "Hello, %s."
 msgstr "Hallo, %s."
 
-#: includes/helpers.php:2216
+#: includes/helpers.php:2232
 msgid "You are receiving this message because you registered a new account."
 msgstr "Du erhälst diese Nachricht, weil Du einen neuen Account registierst."
 
-#: includes/helpers.php:2219
+#: includes/helpers.php:2235
 msgid "Visit this link to activate your account:"
 msgstr "Besuche den folgenden Link um Deinen Account zu aktivieren:"
 
-#: includes/helpers.php:2226
+#: includes/helpers.php:2242
 #, php-format
 msgid "Reset your password at %s"
 msgstr "Passwortzurücksetzung bei %s"
 
-#: includes/helpers.php:2230
+#: includes/helpers.php:2246
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 "Du erhälst diese Nachricht, weil Du ein neues Passwort angefordert hast."
 
-#: includes/helpers.php:2233
+#: includes/helpers.php:2249
 msgid "Visit this link to reset your password:"
 msgstr "Besuche den folgenden Link um Dein Passwort zurückzusetzen:"
 
-#: includes/helpers.php:2240
+#: includes/helpers.php:2256
 #, php-format
 msgid "Your new password for %s"
 msgstr "Dein neues Passwort für %s"
 
-#: includes/helpers.php:2244
+#: includes/helpers.php:2260
 #, php-format
 msgid "Your new password is: %s"
 msgstr "Dein neues Passwort ist: %s"
@@ -1106,17 +1106,17 @@ msgstr "Dein neues Passwort ist: %s"
 msgid "Guest"
 msgstr "Gast"
 
-#: includes/lib/Leaf.php:272
+#: includes/lib/Leaf.php:273
 #, php-format
 msgid "%s GB"
 msgstr "%s GB"
 
-#: includes/lib/Leaf.php:277
+#: includes/lib/Leaf.php:278
 #, php-format
 msgid "%s MB"
 msgstr "%s MB"
 
-#: includes/lib/Leaf.php:281
+#: includes/lib/Leaf.php:282
 #, php-format
 msgid "%s KB"
 msgstr "%s KB"
