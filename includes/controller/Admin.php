@@ -2256,9 +2256,13 @@
          * Displays the page.
          *
          * Parameters:
-         *     $template - The template file to display (sans ".twig") relative to /admin/ for core and extensions.
+         *     $template - The template file to display.
          *     $context - The context to be supplied to Twig.
-         *     $title - The title for the page. Defaults to a camelization of the action, e.g. foo_bar -> Foo Bar.
+         *     $title - The title for the page.
+         *
+         * Notes:
+         *     $template is supplied sans ".twig" and relative to /admin/ for core and extensions.
+         *     $title defaults to a camelization of the template filename, e.g. foo_bar -> Foo Bar.
          */
         public function display($template, $context = array(), $title = "") {
             $config = Config::current();
