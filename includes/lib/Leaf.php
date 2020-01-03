@@ -57,6 +57,8 @@
                 new \Twig\TwigFilter("uploaded",            "uploaded"),
                 new \Twig\TwigFilter("gravatar",            "get_gravatar"),
                 new \Twig\TwigFilter("add_scheme",          "add_scheme"),
+                new \Twig\TwigFilter("lang_base",           "lang_base"),
+
 
                 # Custom filters:
                 new \Twig\TwigFilter("translate",           "twig_filter_translate"),
