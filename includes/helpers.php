@@ -336,6 +336,22 @@
     }
 
     /**
+     * Function: lang_base
+     * Extracts the primary language subtag for the supplied code.
+     *
+     * Parameters:
+     *     $code - The language code to extract from.
+     *
+     * Returns:
+     *     The primary subtag for this code, e.g. "en" from "en_US".
+     */
+    function lang_base($code) {
+        $code = str_replace("_", "-", $code);
+        $tags = explode("-", $code);
+        return ($tags === false) ? "en" : $tags[0] ;
+    }
+
+    /**
      * Function: __
      * Translates a string using gettext.
      *
