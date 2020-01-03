@@ -754,14 +754,22 @@
             foreach ($posts as $post) {
                 $updated = ($post->updated) ? $post->updated_at : $post->created_at ;
 
+                if (!$post->user->no_results) {
+                    $author = oneof($post->user->full_name, $post->user->login);
+                    $website = $post->user->website;
+                } else {
+                    $author = null;
+                    $website = null;
+                }
+
                 $feed->entry(oneof($post->title(), ucfirst($post->feather)),
                              url("id/post/".$post->id),
                              $post->feed_content(),
                              $post->url(),
                              $post->created_at,
                              $updated,
-                             ((!$post->user->no_results) ? oneof($post->user->full_name, $post->user->login) : null),
-                             ((!$post->user->no_results) ? $post->user->website : null));
+                             $author,
+                             $website);
 
                 $trigger->call("feed_item", $post, $feed);
             }
@@ -774,9 +782,13 @@
          * Displays the page, or serves a feed if requested.
          *
          * Parameters:
-         *     $template - The template file or array of fallbacks to display (sans ".twig") relative to THEME_DIR.
+         *     $template - The template file to display.
          *     $context - The context to be supplied to Twig.
-         *     $title - The title for the page.
+         *     $title - The title for the page (optional).
+         *
+         * Notes:
+         *     $template is supplied sans ".twig" and relative to THEME_DIR.
+         *     $template can be an array of fallback template filenames to try.
          */
         public function display($template, $context = array(), $title = "") {
             $config = Config::current();
