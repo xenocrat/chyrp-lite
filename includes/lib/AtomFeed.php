@@ -38,7 +38,7 @@
          *     $updated - Time of update (optional).
          */
         public function open($title, $subtitle = "", $id = "", $updated = null) {
-            $language = preg_replace("/[\-_].*$/", "", Config::current()->locale);
+            $language = lang_base(Config::current()->locale);
 
             echo '<?xml version="1.0" encoding="UTF-8"?>'."\n";
             echo '<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="'.fix($language, true).'">'."\n";

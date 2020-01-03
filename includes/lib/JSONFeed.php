@@ -42,7 +42,7 @@
          *     $updated - Time of update (optional).
          */
         public function open($title, $subtitle = "", $id = "", $updated = null) {
-            $language = preg_replace("/[\-_].*$/", "", Config::current()->locale);
+            $language = lang_base(Config::current()->locale);
 
             $this->json = array(
                 "version"       => "https://jsonfeed.org/version/1",
