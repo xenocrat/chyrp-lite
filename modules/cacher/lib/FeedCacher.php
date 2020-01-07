@@ -70,8 +70,13 @@
                 if (DEBUG)
                     error_log("REGENERATING feed caches");
 
-                foreach ($files as $file)
+                foreach ($files as $file) {
+                    # Break the loop if this is taking too long.
+                    if (timer_stop() > 10)
+                        break;
+
                     @unlink($file);
+                }
             }
         }
     }
