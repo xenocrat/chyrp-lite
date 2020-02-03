@@ -212,6 +212,6 @@
          */
         static function checkPassword($password, $stored) {
             $try = crypt($password, $stored);
-            return (function_exists("hash_equals")) ? hash_equals($try, $stored) : ($try == $stored) ;
+            return (function_exists("hash_equals")) ? hash_equals($stored, $try) : ($stored === $try) ;
         }
     }
