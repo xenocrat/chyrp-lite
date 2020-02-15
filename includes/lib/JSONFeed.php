@@ -45,7 +45,7 @@
             $language = lang_base(Config::current()->locale);
 
             $this->json = array(
-                "version"       => "https://jsonfeed.org/version/1",
+                "version"       => "https://jsonfeed.org/version/1.1",
                 "language"      => $language,
                 "title"         => strip_tags($title),
                 "home_page_url" => url("/", MainController::current()),
@@ -91,7 +91,7 @@
                 "content_html"   => $content,
                 "date_published" => $published,
                 "date_modified"  => when("c", oneof($updated, $published)),
-                "author"         => array("name" => oneof($name, __("Guest")))
+                "authors"        => array(array("name" => oneof($name, __("Guest"))))
             );
 
             if (!empty($uri) and is_url($uri))
