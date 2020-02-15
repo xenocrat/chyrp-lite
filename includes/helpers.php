@@ -16,24 +16,27 @@
      *     $secure - Send the cookie only over HTTPS?
      */
     function session($secure = null) {
-        if(session_status() != PHP_SESSION_ACTIVE){
-            $handler = new Session();
-            session_set_save_handler($handler, true);
-
-            $parsed = parse_url(Config::current()->url);
-            fallback($parsed["scheme"], "http");
-            fallback($parsed["host"], $_SERVER['SERVER_NAME']);
-
-            if (!is_bool($secure))
-                $secure = ($parsed["scheme"] == "https");
-
-            session_set_cookie_params(2592000, "/", $parsed["host"], $secure, true);
-            session_name("ChyrpSession");
-            session_start();
-
-            if (isset($_COOKIE['ChyrpSession']))
-                setcookie(session_name(), session_id(), time() + 2592000, "/", $parsed["host"], $secure, true);
+        if (session_status() == PHP_SESSION_ACTIVE) {
+            trigger_error(__("Session cannot be started more than once"), E_USER_NOTICE);
+            return;
         }
+
+        $handler = new Session();
+        session_set_save_handler($handler, true);
+
+        $parsed = parse_url(Config::current()->url);
+        fallback($parsed["scheme"], "http");
+        fallback($parsed["host"], $_SERVER['SERVER_NAME']);
+
+        if (!is_bool($secure))
+            $secure = ($parsed["scheme"] == "https");
+
+        session_set_cookie_params(2592000, "/", $parsed["host"], $secure, true);
+        session_name("ChyrpSession");
+        session_start();
+
+        if (isset($_COOKIE['ChyrpSession']))
+            setcookie(session_name(), session_id(), time() + 2592000, "/", $parsed["host"], $secure, true);
     }
 
     /**
