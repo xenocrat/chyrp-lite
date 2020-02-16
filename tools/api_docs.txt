@@ -2206,6 +2206,7 @@ Sends pingback requests to the URLs in a string.
 Parameters:
     $string - The string to crawl for pingback URLs.
     $post - The post we're sending from.
+    $limit - Timer limit for this function (optional).
 
 
 Function: pingback_url

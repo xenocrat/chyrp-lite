@@ -353,19 +353,19 @@ Called from:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 2074
+	includes/helpers.php on line 2078
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 2091
+	includes/helpers.php on line 2095
 
 
 send_correspondence
 -------------------
 Called from:
-	includes/helpers.php on line 2274
+	includes/helpers.php on line 2278
 
 Arguments:
 	$action, $params
@@ -374,7 +374,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 2302
+	includes/helpers.php on line 2306
 
 Arguments:
 	$ob
@@ -1059,7 +1059,7 @@ Target:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 2204
+	includes/helpers.php on line 2208
 
 Target:
 	$function
@@ -1068,7 +1068,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 2303
+	includes/helpers.php on line 2307
 
 Target:
 	$nonce
