@@ -1468,9 +1468,13 @@
      * Parameters:
      *     $string - The string to crawl for pingback URLs.
      *     $post - The post we're sending from.
+     *     $limit - Timer limit for this function (optional).
      */
-    function send_pingbacks($string, $post) {
+    function send_pingbacks($string, $post, $limit = 30) {
         foreach (grab_urls($string) as $url) {
+            if (timer_stop() > $limit)
+                break;
+
             $ping_url = pingback_url(unfix($url, true));
 
             if ($ping_url !== false and is_url($ping_url)) {
