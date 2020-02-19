@@ -61,7 +61,7 @@
         private function highlighter_stylesheets() {
             $config = Config::current();
             $styles = array();
-            $filepaths = glob(MODULES_DIR.DIR."highlighter".DIR."styles".DIR."*.{css}", GLOB_BRACE);
+            $filepaths = glob(MODULES_DIR.DIR."highlighter".DIR."styles".DIR."*.css");
 
             foreach ($filepaths as $filepath)
                 $styles[] = basename($filepath);
