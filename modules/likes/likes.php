@@ -292,10 +292,16 @@
 
         private function like_images() {
             $images = array();
-            $filepaths = glob(MODULES_DIR.DIR."likes".DIR."images".DIR."*.{jpg,jpeg,png,gif,svg}", GLOB_BRACE);
+            $dir = new DirectoryIterator(MODULES_DIR.DIR."likes".DIR."images");
 
-            foreach ($filepaths as $filepath)
-                $images[] = basename($filepath);
+            foreach ($dir as $item) {
+                if ($item->isFile()) {
+                    $filename = $item->getFilename();
+
+                    if (preg_match("/.+\.(jpg|jpeg|png|gif|svg)$/i", $filename))
+                        $images[] = $filename;
+                }
+            }
 
             return $images;
         }
