@@ -231,7 +231,7 @@
         if (!is_file($template) or !is_readable($template))
             return false;
 
-        $caddyfile = preg_replace('~\\$chyrp_path/~',
+        $caddyfile = preg_replace('~\\$chyrp_path/?~',
                                  ltrim($url_path."/", "/"),
                                  file_get_contents($template));
 
