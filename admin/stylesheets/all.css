@@ -400,7 +400,11 @@ textarea,
 input[type="text"],
 input[type="email"],
 input[type="url"],
+input[type="tel"],
+input[type="date"],
+input[type="time"],
 input[type="number"],
+input[type="range"],
 input[type="password"] {
     box-sizing: border-box;
     width: 10em;
@@ -422,7 +426,11 @@ textarea:focus,
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="url"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
 input[type="number"]:focus,
+input[type="range"]:focus,
 input[type="password"]:focus {
     border-color: #1e57ba;
     outline: none;
@@ -430,7 +438,11 @@ input[type="password"]:focus {
 input[type="text"].error,
 input[type="email"].error,
 input[type="url"].error,
+input[type="tel"].error,
+input[type="date"].error,
+input[type="time"].error,
 input[type="number"].error,
+input[type="range"].error,
 input[type="password"].error,
 textarea.error {
     background-color: #faebe4;
@@ -438,7 +450,11 @@ textarea.error {
 input[type="text"].error:focus,
 input[type="email"].error:focus,
 input[type="url"].error:focus,
+input[type="tel"].error:focus,
+input[type="date"].error:focus,
+input[type="time"].error:focus,
 input[type="number"].error:focus,
+input[type="range"].error:focus,
 input[type="password"].error:focus,
 textarea.error:focus {
     border: 1px solid #d51800;
@@ -490,12 +506,16 @@ form.split label {
 form.split input[type="text"],
 form.split input[type="email"],
 form.split input[type="url"],
+form.split input[type="tel"],
 form.split input[type="password"],
 form.split select,
 form.split textarea {
     width: 33%;
 }
-form.split input[type="number"] {
+form.split input[type="date"],
+form.split input[type="time"],
+form.split input[type="number"],
+form.split input[type="range"] {
     width: 16%;
 }
 form.split ul,
@@ -768,8 +788,13 @@ div.confirmation button + button {
 .main_options input[type="text"],
 .main_options input[type="email"],
 .main_options input[type="url"],
+.main_options input[type="tel"],
+.main_options input[type="date"],
+.main_options input[type="time"],
 .main_options input[type="number"],
+.main_options input[type="range"],
 .main_options input[type="password"],
+.main_options input[type="file"],
 .main_options textarea {
     width: 100%;
     margin: 0em;
@@ -798,7 +823,11 @@ div.more_options p textarea {
 div.more_options p input[type="text"],
 div.more_options p input[type="email"],
 div.more_options p input[type="url"],
+div.more_options p input[type="tel"],
+div.more_options p input[type="date"],
+div.more_options p input[type="time"],
 div.more_options p input[type="number"],
+div.more_options p input[type="range"],
 div.more_options p input[type="password"],
 div.more_options p select,
 div.more_options p textarea {
@@ -1003,7 +1032,11 @@ a.emblem.preview {
     input[type="text"],
     input[type="email"],
     input[type="url"],
+    input[type="tel"],
+    input[type="date"],
+    input[type="time"],
     input[type="number"],
+    input[type="range"],
     input[type="password"],
     input[type="file"],
     select,
