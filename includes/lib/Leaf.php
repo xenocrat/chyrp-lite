@@ -258,9 +258,7 @@
             $time = is_numeric($timestamp) ? $timestamp : strtotime($timestamp) ;
             $when = time() - $time;
 
-            if ($when < 57600 and $when > -57600)
-                $format = "%T";
-            elseif ($when < 518400 and $when > -518400)
+            if ($when < 518400 and $when > -86400)
                 $format = "%A";
             else
                 $format = "%F";
