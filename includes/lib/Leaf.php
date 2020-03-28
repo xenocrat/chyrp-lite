@@ -253,7 +253,19 @@
      * Function: twig_filter_strftime_format
      * Returns date formatting for a string that isn't a regular time() value.
      */
-    function twig_filter_strftime_format($timestamp, $format="%c") {
+    function twig_filter_strftime_format($timestamp, $format = null) {
+        if (!isset($format)) {
+            $time = is_numeric($timestamp) ? $timestamp : strtotime($timestamp) ;
+            $when = time() - $time; error_log($when);
+
+            if ($when < 57600 and $when > -57600)
+                $format = "%T";
+            elseif ($when < 518400 and $when > -518400)
+                $format = "%A";
+            else
+                $format = "%F";
+        }
+
         return when($format, $timestamp, true);
     }
 
