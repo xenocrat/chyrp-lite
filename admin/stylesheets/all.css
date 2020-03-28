@@ -450,7 +450,15 @@ input[type="password"].strong:focus {
     border: 1px solid #189100;
 }
 input[type="file"] {
+    box-sizing: border-box;
     border: none;
+    transition-property: padding-left;
+    transition-duration: 250ms;
+    transition-delay: 250ms;
+}
+input[type="file"]:invalid {
+    padding-left: 1.5rem;
+    background: transparent url(../images/icons/invalid.svg) center left/16px no-repeat;
 }
 input[disabled],
 input.disabled {
