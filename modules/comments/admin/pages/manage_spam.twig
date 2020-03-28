@@ -22,7 +22,6 @@
 <tr class="head">
 <th class="toggler" id="spam_toggler"></th>
 <th class="comment_post title main">{{ "Post" | translate("comments") }}</th>
-<th class="comment_author value">{{ "Author" | translate("comments") }}</th>
 <th class="comment_date date">{{ "Added" | translate("comments") }}</th>
 {{ trigger.call("manage_comments_column_header") }}
 <th class="controls" colspan="2">{{ "Controls" | translate }}</th>
@@ -36,9 +35,6 @@
 </td>
 <td class="comment_post title main"><a href="{{ comment.post.url() }}#comment_{{ comment.id }}">
 {{ comment.post.title() | striptags | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
-</td>
-<td class="comment_author value">
-{{ not comment.user.no_results ? comment.user.login : comment.author }}
 </td>
 <td class="comment_date date">
 {{ comment.created_at | strftimeformat }}
