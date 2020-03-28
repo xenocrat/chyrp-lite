@@ -62,7 +62,7 @@
                                  $_POST['status'],
                                  sanitize($_POST['slug']),
                                  "",
-                                 null,
+                                 datetime($_POST['created_at']),
                                  null,
                                  $_POST['option']);
         }
