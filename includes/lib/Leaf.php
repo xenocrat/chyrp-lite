@@ -256,7 +256,7 @@
     function twig_filter_strftime_format($timestamp, $format = null) {
         if (!isset($format)) {
             $time = is_numeric($timestamp) ? $timestamp : strtotime($timestamp) ;
-            $when = time() - $time; error_log($when);
+            $when = time() - $time;
 
             if ($when < 57600 and $when > -57600)
                 $format = "%T";
