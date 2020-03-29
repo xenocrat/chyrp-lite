@@ -498,8 +498,8 @@ manage_comments_column_header
 -----------------------------
 Called from:
 	modules/categorize/admin/pages/manage_category.twig on line 28
-	modules/comments/admin/pages/manage_comments.twig on line 28
-	modules/comments/admin/pages/manage_spam.twig on line 27
+	modules/comments/admin/pages/manage_comments.twig on line 27
+	modules/comments/admin/pages/manage_spam.twig on line 26
 
 
 add_category
@@ -541,8 +541,8 @@ Arguments:
 manage_comments_column
 ----------------------
 Called from:
-	modules/comments/admin/pages/manage_comments.twig on line 53
-	modules/comments/admin/pages/manage_spam.twig on line 46
+	modules/comments/admin/pages/manage_comments.twig on line 48
+	modules/comments/admin/pages/manage_spam.twig on line 42
 
 Arguments:
 	comment

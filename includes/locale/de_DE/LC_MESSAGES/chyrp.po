@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Copyright 2020 Daniel Pimley and other contributors.
@@ -1110,17 +1110,21 @@ msgstr "Dein neues Passwort ist: %s"
 msgid "Guest"
 msgstr "Gast"
 
-#: includes/lib/Leaf.php:273
+#: includes/lib/Leaf.php:261
+msgid "Today"
+msgstr "Heute"
+
+#: includes/lib/Leaf.php:284
 #, php-format
 msgid "%s GB"
 msgstr "%s GB"
 
-#: includes/lib/Leaf.php:278
+#: includes/lib/Leaf.php:289
 #, php-format
 msgid "%s MB"
 msgstr "%s MB"
 
-#: includes/lib/Leaf.php:282
+#: includes/lib/Leaf.php:293
 #, php-format
 msgid "%s KB"
 msgstr "%s KB"

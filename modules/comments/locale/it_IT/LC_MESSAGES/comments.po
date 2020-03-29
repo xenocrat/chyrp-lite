@@ -9,10 +9,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. Copyright 2019 Daniel Pimley and other contributors.
+#. Copyright 2020 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/comments/admin/pages/comment_settings.twig:3
 #: modules/comments/admin/pages/comment_settings.twig:6
@@ -79,8 +79,6 @@ msgid "Body"
 msgstr "Testo"
 
 #: modules/comments/admin/pages/edit_comment.twig:21
-#: modules/comments/admin/pages/manage_comments.twig:25
-#: modules/comments/admin/pages/manage_spam.twig:25
 msgid "Author"
 msgstr "Autore"
 
@@ -97,7 +95,7 @@ msgid "Timestamp"
 msgstr "Date e ora"
 
 #: modules/comments/admin/pages/edit_comment.twig:42
-#: modules/comments/admin/pages/manage_comments.twig:27
+#: modules/comments/admin/pages/manage_comments.twig:26
 msgid "Status"
 msgstr "Stato"
 
@@ -126,8 +124,8 @@ msgid "Save"
 msgstr "Salva"
 
 #: modules/comments/admin/pages/edit_comment.twig:69
-#: modules/comments/admin/pages/manage_comments.twig:84
-#: modules/comments/admin/pages/manage_spam.twig:73
+#: modules/comments/admin/pages/manage_comments.twig:79
+#: modules/comments/admin/pages/manage_spam.twig:69
 msgid "Delete"
 msgstr "Elimina"
 
@@ -146,27 +144,27 @@ msgstr "Commenti"
 msgid "Post"
 msgstr "Post"
 
-#: modules/comments/admin/pages/manage_comments.twig:26
-#: modules/comments/admin/pages/manage_spam.twig:26
+#: modules/comments/admin/pages/manage_comments.twig:25
+#: modules/comments/admin/pages/manage_spam.twig:25
 msgid "Added"
 msgstr "Aggiunto"
 
-#: modules/comments/admin/pages/manage_comments.twig:73
-#: modules/comments/admin/pages/manage_spam.twig:65
+#: modules/comments/admin/pages/manage_comments.twig:68
+#: modules/comments/admin/pages/manage_spam.twig:61
 msgid "With selected:"
 msgstr "Selezionati:"
 
-#: modules/comments/admin/pages/manage_comments.twig:75
-#: modules/comments/admin/pages/manage_spam.twig:67
+#: modules/comments/admin/pages/manage_comments.twig:70
+#: modules/comments/admin/pages/manage_spam.twig:63
 msgid "Deny"
 msgstr "Rifiutare"
 
-#: modules/comments/admin/pages/manage_comments.twig:78
-#: modules/comments/admin/pages/manage_spam.twig:70
+#: modules/comments/admin/pages/manage_comments.twig:73
+#: modules/comments/admin/pages/manage_spam.twig:66
 msgid "Approve"
 msgstr "Approva"
 
-#: modules/comments/admin/pages/manage_comments.twig:81
+#: modules/comments/admin/pages/manage_comments.twig:76
 msgid "Mark as Spam"
 msgstr "Contrassegna come spam"
 
