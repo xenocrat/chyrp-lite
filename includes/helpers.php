@@ -727,7 +727,8 @@
      *     A formatted number with the requested $precision.
      */
     function timer_stop($precision = 3) {
-        return number_format((microtime(true) - timer_start()), $precision);
+        $elapsed = microtime(true) - timer_start();
+        return number_format($elapsed, $precision, ".", "");
     }
 
     /**
