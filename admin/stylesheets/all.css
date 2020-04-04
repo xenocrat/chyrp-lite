@@ -761,7 +761,6 @@ div.confirmation button + button {
 }
 *.tag {
     display: inline-block;
-    margin-top: 0.5rem;
     padding: 0px 2px;
     padding: 0em 0.25em;
     white-space: nowrap;
@@ -833,6 +832,10 @@ div.more_options p select,
 div.more_options p textarea {
     width: 100%;
     margin: 0em;
+}
+span.options_extra {
+    display: inline-block;
+    padding-top: 1rem;
 }
 
 /* Group: Helpers & General */
