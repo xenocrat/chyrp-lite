@@ -254,12 +254,29 @@
      * Returns date formatting for a string that isn't a regular time() value.
      */
     function twig_filter_strftime_format($timestamp, $format = null) {
+        static $tomorrow = null;
+        static $today    = null;
+        static $now      = null;
+        static $thisweek = null;
+
+        if (!isset($tomorrow))
+            $tomorrow = strtotime("tomorrow");
+
+        if (!isset($today))
+            $today = strtotime("today");
+
+        if (!isset($now))
+            $now = strtotime("now");
+
+        if (!isset($thisweek))
+            $thisweek = strtotime("this week");
+
         $time = is_numeric($timestamp) ? $timestamp : strtotime($timestamp) ;
 
         if (!isset($format)) {
-            if ($time < strtotime("tomorrow") and $time > strtotime("today"))
+            if ($time < $tomorrow and $time > $today)
                 $format = __("Today");
-            elseif ($time < strtotime("now") and $time > strtotime("this week"))
+            elseif ($time < $now and $time > $thisweek)
                 $format = "%A";
             else
                 $format = "%F";
