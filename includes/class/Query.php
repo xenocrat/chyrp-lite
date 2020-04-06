@@ -37,7 +37,7 @@
                 $trace = debug_backtrace();
                 $target = $trace[$index = 0];
 
-                # Getting a traceback from these files doesn't help much.
+                # Getting a trace from these files doesn't help much.
                 while (match(array("/SQL\.php/", "/Model\.php/", "/\/model\//"), $target["file"]))
                     if (isset($trace[$index + 1]["file"]))
                         $target = $trace[$index++];
@@ -48,7 +48,7 @@
 
                 foreach ($params as $name => $val)
                     $logQuery = preg_replace("/{$name}([^a-zA-Z0-9_]|$)/",
-                                             str_replace("\\", "\\\\", $this->sql->escape($val))."\\1", $logQuery);
+                                 str_replace("\\", "\\\\", $this->sql->escape($val))."\\1", $logQuery);
 
                 $this->sql->debug[] = array("number" => $this->sql->queries,
                                             "file" => str_replace(MAIN_DIR."/", "", $target["file"]),
@@ -67,9 +67,9 @@
 
                         foreach ($params as $name => $val)
                             $this->queryString = preg_replace("/{$name}([^a-zA-Z0-9_]|$)/",
-                                                              str_replace(array("\\", "\$"),
-                                                                          array("\\\\", "\\\$"),
-                                                                          $this->sql->escape($val))."\\1",
+                                                  str_replace(array("\\", "\$"),
+                                                              array("\\\\", "\\\$"),
+                                                              $this->sql->escape($val))."\\1",
                                                               $this->queryString);
 
                         if (!$result)
@@ -87,7 +87,7 @@
                                               str_replace(array("\\", "\$"),
                                                           array("\\\\", "\\\$"),
                                                           $this->sql->escape($val))."\\1",
-                                              $query);
+                                                          $query);
 
                     $this->queryString = $query;
 
