@@ -34,7 +34,7 @@
                      "FROM ".self::build_from($tables)."\n";
 
             foreach ($left_join as $join)
-                $query.= "LEFT JOIN __".$join["table"]." ON ".
+                $query.= "LEFT JOIN \"__".$join["table"]."\" ON ".
                          self::build_where($join["where"], $join["table"], $params)."\n";
 
             $query.= ($conds ? "WHERE ".self::build_where($conds, $tables, $params)."\n" : "").
@@ -62,7 +62,7 @@
                 foreach ($data as $key => $val)
                     $params[":".str_replace(array("(", ")", "."), "_", $key)] = $val;
 
-            return "INSERT INTO __$table\n".
+            return "INSERT INTO \"__$table\"\n".
                    self::build_insert_header($data)."\n".
                    "VALUES\n".
                    "(".implode(", ", array_keys($params)).")\n";
@@ -82,7 +82,7 @@
          *     An @UPDATE@ query string.
          */
         public static function build_update($table, $conds, $data, &$params = array()) {
-            return "UPDATE __$table\n".
+            return "UPDATE \"__$table\"\n".
                    "SET ".self::build_update_values($data, $params)."\n".
                    ($conds ? "WHERE ".self::build_where($conds, $table, $params) : "");
         }
@@ -100,7 +100,7 @@
          *     A @DELETE@ query string.
          */
         public static function build_delete($table, $conds, &$params = array()) {
-            return "DELETE FROM __$table\n".
+            return "DELETE FROM \"__$table\"\n".
                    ($conds ? "WHERE ".self::build_where($conds, $table, $params) : "");
         }
 
@@ -162,9 +162,12 @@
             if (!is_array($tables))
                 $tables = array($tables);
 
-            foreach ($tables as &$table)
+            foreach ($tables as &$table) {
                 if (substr($table, 0, 2) != "__")
                     $table = "__".$table;
+
+                $table = "\"".$table."\"";
+            }
 
             return implode(",\n     ", $tables);
         }
@@ -288,8 +291,8 @@
          *     $name - Name of the column.
          */
         public static function safecol($name) {
-            return preg_replace("/(([^a-zA-Z0-9_]|^)(order|group|having|limit)([^a-zA-Z0-9_]|$))/i",
-                                (SQL::current()->adapter == "mysql") ? "\\2`\\3`\\4" : '\\2"\\3"\\4',
+            return preg_replace("/(([^a-zA-Z0-9_]|^)(order|groups?|having|limit)([^a-zA-Z0-9_]|$))/i",
+                                '\\2"\\3"\\4',
                                 $name);
         }
 
@@ -421,7 +424,7 @@
          */
         public static function tablefy(&$field, $tables) {
             if (!preg_match_all("/(\(|[\s]+|^)(?!__)([a-z0-9_\.\*]+)(\)|[\s]+|$)/", $field, $matches))
-                return $field = str_replace("`", "", $field); # Method for bypassing the prefixer.
+                return $field;
 
             foreach ($matches[0] as $index => $full) {
                 $before = $matches[1][$index];
@@ -435,18 +438,9 @@
                 if (!substr_count($full, ".")) {
                     # Don't replace things that are already either prefixed or parameterized.
                     $field = preg_replace("/([^\.:'\"_]|^)".preg_quote($full, "/")."/",
-                                          "\\1".$before."__".$tables[0].".".$name.$after,
+                                          "\\1".$before."\"__".$tables[0]."\".".$name.$after,
                                           $field,
                                           1);
-                } else {
-                    # Okay, it does, but is the table prefixed?
-                    if (substr($full, 0, 2) != "__") {
-                        # Don't replace things that are already either prefixed or parameterized.
-                        $field = preg_replace("/([^\.:'\"_]|^)".preg_quote($full, "/")."/",
-                                              "\\1".$before."__".$name.$after,
-                                              $field,
-                                              1);
-                    }
                 }
             }
 

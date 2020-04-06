@@ -404,7 +404,7 @@
          * Creates the database table.
          */
         static function install() {
-            SQL::current()->query("CREATE TABLE IF NOT EXISTS __comments (
+            SQL::current()->query("CREATE TABLE IF NOT EXISTS \"__comments\" (
                                        id INTEGER PRIMARY KEY AUTO_INCREMENT,
                                        body LONGTEXT,
                                        author VARCHAR(250) DEFAULT '',
@@ -429,7 +429,7 @@
         static function uninstall() {
             $sql = SQL::current();
 
-            $sql->query("DROP TABLE __comments");
+            $sql->query("DROP TABLE \"__comments\"");
             $sql->delete("post_attributes", array("name" => "comment_status"));
         }
     }

@@ -71,7 +71,7 @@
          * Creates the database table.
          */
         static function install() {
-            SQL::current()->query("CREATE TABLE IF NOT EXISTS __views (
+            SQL::current()->query("CREATE TABLE IF NOT EXISTS \"__views\" (
                                        id INTEGER PRIMARY KEY AUTO_INCREMENT,
                                        post_id INTEGER NOT NULL,
                                        user_id INTEGER DEFAULT 0,
@@ -84,6 +84,6 @@
          * Drops the database table.
          */
         static function uninstall() {
-            SQL::current()->query("DROP TABLE __views");
+            SQL::current()->query("DROP TABLE \"__views\"");
         }
     }

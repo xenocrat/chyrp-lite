@@ -605,7 +605,7 @@
             $sql->connect();
 
             # Posts table.
-            $sql->query("CREATE TABLE IF NOT EXISTS __posts (
+            $sql->query("CREATE TABLE IF NOT EXISTS \"__posts\" (
                              id INTEGER PRIMARY KEY AUTO_INCREMENT,
                              feather VARCHAR(32) DEFAULT '',
                              clean VARCHAR(128) DEFAULT '',
@@ -618,7 +618,7 @@
                          ) DEFAULT CHARSET=utf8");
 
             # Post attributes table.
-            $sql->query("CREATE TABLE IF NOT EXISTS __post_attributes (
+            $sql->query("CREATE TABLE IF NOT EXISTS \"__post_attributes\" (
                              post_id INTEGER NOT NULL,
                              name VARCHAR(100) DEFAULT '',
                              value LONGTEXT,
@@ -626,7 +626,7 @@
                          ) DEFAULT CHARSET=utf8");
 
             # Pages table.
-            $sql->query("CREATE TABLE IF NOT EXISTS __pages (
+            $sql->query("CREATE TABLE IF NOT EXISTS \"__pages\" (
                              id INTEGER PRIMARY KEY AUTO_INCREMENT,
                              title VARCHAR(250) DEFAULT '',
                              body LONGTEXT,
@@ -642,7 +642,7 @@
                          ) DEFAULT CHARSET=utf8");
 
             # Users table.
-            $sql->query("CREATE TABLE IF NOT EXISTS __users (
+            $sql->query("CREATE TABLE IF NOT EXISTS \"__users\" (
                              id INTEGER PRIMARY KEY AUTO_INCREMENT,
                              login VARCHAR(64) DEFAULT '',
                              password VARCHAR(128) DEFAULT '',
@@ -656,14 +656,14 @@
                          ) DEFAULT CHARSET=utf8");
 
             # Groups table.
-            $sql->query("CREATE TABLE IF NOT EXISTS __groups (
+            $sql->query("CREATE TABLE IF NOT EXISTS \"__groups\" (
                              id INTEGER PRIMARY KEY AUTO_INCREMENT,
                              name VARCHAR(100) DEFAULT '',
                              UNIQUE (name)
                          ) DEFAULT CHARSET=utf8");
 
             # Permissions table.
-            $sql->query("CREATE TABLE IF NOT EXISTS __permissions (
+            $sql->query("CREATE TABLE IF NOT EXISTS \"__permissions\" (
                              id VARCHAR(100) DEFAULT '',
                              name VARCHAR(100) DEFAULT '',
                              group_id INTEGER DEFAULT 0,
@@ -671,7 +671,7 @@
                          ) DEFAULT CHARSET=utf8");
 
             # Sessions table.
-            $sql->query("CREATE TABLE IF NOT EXISTS __sessions (
+            $sql->query("CREATE TABLE IF NOT EXISTS \"__sessions\" (
                              id VARCHAR(40) DEFAULT '',
                              data LONGTEXT,
                              user_id INTEGER DEFAULT 0,

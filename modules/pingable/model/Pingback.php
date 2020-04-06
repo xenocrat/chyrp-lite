@@ -107,7 +107,7 @@
          * Creates the database table.
          */
         static function install() {
-            SQL::current()->query("CREATE TABLE IF NOT EXISTS __pingbacks (
+            SQL::current()->query("CREATE TABLE IF NOT EXISTS \"__pingbacks\" (
                                        id INTEGER PRIMARY KEY AUTO_INCREMENT,
                                        post_id INTEGER NOT NULL,
                                        source VARCHAR(2048) DEFAULT '',
@@ -121,6 +121,6 @@
          * Drops the database table.
          */
         static function uninstall() {
-            SQL::current()->query("DROP TABLE __pingbacks");
+            SQL::current()->query("DROP TABLE \"__pingbacks\"");
         }
     }

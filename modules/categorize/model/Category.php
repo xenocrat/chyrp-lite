@@ -171,7 +171,7 @@
          * Creates the database table.
          */
         static function install() {
-            SQL::current()->query("CREATE TABLE IF NOT EXISTS __categorize (
+            SQL::current()->query("CREATE TABLE IF NOT EXISTS \"__categorize\" (
                                       id INTEGER PRIMARY KEY AUTO_INCREMENT,
                                       name  VARCHAR(128) NOT NULL,
                                       clean VARCHAR(128) NOT NULL UNIQUE,
@@ -186,7 +186,7 @@
         static function uninstall() {
             $sql = SQL::current();
 
-            $sql->query("DROP TABLE __categorize");
+            $sql->query("DROP TABLE \"__categorize\"");
             $sql->delete("post_attributes", array("name" => "category_id"));
         }
     }

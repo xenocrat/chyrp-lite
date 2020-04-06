@@ -142,14 +142,10 @@
                 if (!strpos($query, $name))
                     unset($params[$name]);
 
+            # Add the table prefix to the query.
             $query = str_replace("__", $this->prefix, $query);
 
-            if ($this->adapter == "sqlite")
-                $query = str_ireplace(array(" DEFAULT CHARSET=utf8",
-                                            "AUTO_INCREMENT"),
-                                      array("",
-                                            "AUTOINCREMENT"), $query);
-
+            $query = $this->unwrinkle($query);
             $query = new Query($this, $query, $params, $throw_exceptions);
 
             return $query;
@@ -329,6 +325,23 @@
                 $string = "'".$string."'";
 
             return $string;
+        }
+
+        /**
+         * Function: unwrinkle
+         * Deals with various wrinkles in the SQL syntax.
+         *
+         * Parameters:
+         *     $query - Query to unwrinkle.
+         */
+        private function unwrinkle($query) {
+            if ($this->adapter == "sqlite")
+                $query = str_ireplace(array(" DEFAULT CHARSET=utf8",
+                                            "AUTO_INCREMENT"),
+                                      array("",
+                                            "AUTOINCREMENT"), $query);
+
+            return $query;
         }
 
         /**
