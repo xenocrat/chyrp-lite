@@ -441,6 +441,11 @@
                                           "\\1".$before."\"__".$tables[0]."\".".$name.$after,
                                           $field,
                                           1);
+                } else {
+                    $field = preg_replace("/([^\.:'\"_]|^)".preg_quote($full, "/")."/",
+                                          "\\1".$before."\"__".str_replace(".", "\".", $name).$after,
+                                          $field,
+                                          1);
                 }
             }
 
