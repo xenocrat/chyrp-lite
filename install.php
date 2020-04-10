@@ -605,80 +605,73 @@
             $sql->connect();
 
             # Posts table.
-            $sql->query("CREATE TABLE IF NOT EXISTS \"__posts\" (
-                             id INTEGER PRIMARY KEY AUTO_INCREMENT,
-                             feather VARCHAR(32) DEFAULT '',
-                             clean VARCHAR(128) DEFAULT '',
-                             url VARCHAR(128) DEFAULT '',
-                             pinned BOOLEAN DEFAULT FALSE,
-                             status VARCHAR(32) DEFAULT 'public',
-                             user_id INTEGER DEFAULT 0,
-                             created_at DATETIME DEFAULT NULL,
-                             updated_at DATETIME DEFAULT NULL
-                         ) DEFAULT CHARSET=utf8");
+            $sql->create("posts",
+                         array("id INTEGER PRIMARY KEY AUTO_INCREMENT",
+                               "feather VARCHAR(32) DEFAULT ''",
+                               "clean VARCHAR(128) DEFAULT ''",
+                               "url VARCHAR(128) DEFAULT ''",
+                               "pinned BOOLEAN DEFAULT FALSE",
+                               "status VARCHAR(32) DEFAULT 'public'",
+                               "user_id INTEGER DEFAULT 0",
+                               "created_at DATETIME DEFAULT NULL",
+                               "updated_at DATETIME DEFAULT NULL"));
 
             # Post attributes table.
-            $sql->query("CREATE TABLE IF NOT EXISTS \"__post_attributes\" (
-                             post_id INTEGER NOT NULL,
-                             name VARCHAR(100) DEFAULT '',
-                             value LONGTEXT,
-                             PRIMARY KEY (post_id, name)
-                         ) DEFAULT CHARSET=utf8");
+            $sql->create("post_attributes",
+                         array("post_id INTEGER NOT NULL",
+                               "name VARCHAR(100) DEFAULT ''",
+                               "value LONGTEXT",
+                               "PRIMARY KEY (post_id, name)"));
 
             # Pages table.
-            $sql->query("CREATE TABLE IF NOT EXISTS \"__pages\" (
-                             id INTEGER PRIMARY KEY AUTO_INCREMENT,
-                             title VARCHAR(250) DEFAULT '',
-                             body LONGTEXT,
-                             public BOOLEAN DEFAULT '1',
-                             show_in_list BOOLEAN DEFAULT '1',
-                             list_order INTEGER DEFAULT 0,
-                             clean VARCHAR(128) DEFAULT '',
-                             url VARCHAR(128) DEFAULT '',
-                             user_id INTEGER DEFAULT 0,
-                             parent_id INTEGER DEFAULT 0,
-                             created_at DATETIME DEFAULT NULL,
-                             updated_at DATETIME DEFAULT NULL
-                         ) DEFAULT CHARSET=utf8");
+            $sql->create("pages",
+                         array("id INTEGER PRIMARY KEY AUTO_INCREMENT",
+                               "title VARCHAR(250) DEFAULT ''",
+                               "body LONGTEXT",
+                               "public BOOLEAN DEFAULT '1'",
+                               "show_in_list BOOLEAN DEFAULT '1'",
+                               "list_order INTEGER DEFAULT 0",
+                               "clean VARCHAR(128) DEFAULT ''",
+                               "url VARCHAR(128) DEFAULT ''",
+                               "user_id INTEGER DEFAULT 0",
+                               "parent_id INTEGER DEFAULT 0",
+                               "created_at DATETIME DEFAULT NULL",
+                               "updated_at DATETIME DEFAULT NULL"));
 
             # Users table.
-            $sql->query("CREATE TABLE IF NOT EXISTS \"__users\" (
-                             id INTEGER PRIMARY KEY AUTO_INCREMENT,
-                             login VARCHAR(64) DEFAULT '',
-                             password VARCHAR(128) DEFAULT '',
-                             full_name VARCHAR(250) DEFAULT '',
-                             email VARCHAR(128) DEFAULT '',
-                             website VARCHAR(128) DEFAULT '',
-                             group_id INTEGER DEFAULT 0,
-                             approved BOOLEAN DEFAULT '1',
-                             joined_at DATETIME DEFAULT NULL,
-                             UNIQUE (login)
-                         ) DEFAULT CHARSET=utf8");
+            $sql->create("users",
+                         array("id INTEGER PRIMARY KEY AUTO_INCREMENT",
+                               "login VARCHAR(64) DEFAULT ''",
+                               "password VARCHAR(128) DEFAULT ''",
+                               "full_name VARCHAR(250) DEFAULT ''",
+                               "email VARCHAR(128) DEFAULT ''",
+                               "website VARCHAR(128) DEFAULT ''",
+                               "group_id INTEGER DEFAULT 0",
+                               "approved BOOLEAN DEFAULT '1'",
+                               "joined_at DATETIME DEFAULT NULL",
+                               "UNIQUE (login)"));
 
             # Groups table.
-            $sql->query("CREATE TABLE IF NOT EXISTS \"__groups\" (
-                             id INTEGER PRIMARY KEY AUTO_INCREMENT,
-                             name VARCHAR(100) DEFAULT '',
-                             UNIQUE (name)
-                         ) DEFAULT CHARSET=utf8");
+            $sql->create("groups",
+                         array("id INTEGER PRIMARY KEY AUTO_INCREMENT",
+                               "name VARCHAR(100) DEFAULT ''",
+                               "UNIQUE (name)"));
 
             # Permissions table.
-            $sql->query("CREATE TABLE IF NOT EXISTS \"__permissions\" (
-                             id VARCHAR(100) DEFAULT '',
-                             name VARCHAR(100) DEFAULT '',
-                             group_id INTEGER DEFAULT 0,
-                             PRIMARY KEY (id, group_id)
-                         ) DEFAULT CHARSET=utf8");
+            $sql->create("permissions",
+                         array("id VARCHAR(100) DEFAULT ''",
+                               "name VARCHAR(100) DEFAULT ''",
+                               "group_id INTEGER DEFAULT 0",
+                               "PRIMARY KEY (id, group_id)"));
 
             # Sessions table.
-            $sql->query("CREATE TABLE IF NOT EXISTS \"__sessions\" (
-                             id VARCHAR(40) DEFAULT '',
-                             data LONGTEXT,
-                             user_id INTEGER DEFAULT 0,
-                             created_at DATETIME DEFAULT NULL,
-                             updated_at DATETIME DEFAULT NULL,
-                             PRIMARY KEY (id)
-                         ) DEFAULT CHARSET=utf8");
+            $sql->create("sessions",
+                         array("id VARCHAR(40) DEFAULT ''",
+                               "data LONGTEXT",
+                               "user_id INTEGER DEFAULT 0",
+                               "created_at DATETIME DEFAULT NULL",
+                               "updated_at DATETIME DEFAULT NULL",
+                               "PRIMARY KEY (id)"));
 
             # Add the default permissions.
             $names = array("change_settings" => "Change Settings",

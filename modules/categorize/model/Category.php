@@ -171,12 +171,11 @@
          * Creates the database table.
          */
         static function install() {
-            SQL::current()->query("CREATE TABLE IF NOT EXISTS \"__categorize\" (
-                                      id INTEGER PRIMARY KEY AUTO_INCREMENT,
-                                      name  VARCHAR(128) NOT NULL,
-                                      clean VARCHAR(128) NOT NULL UNIQUE,
-                                      show_on_home BOOLEAN DEFAULT '1'
-                                  ) DEFAULT CHARSET=UTF8");
+            SQL::current()->create("categorize",
+                                   array("id INTEGER PRIMARY KEY AUTO_INCREMENT",
+                                         "name  VARCHAR(128) NOT NULL",
+                                         "clean VARCHAR(128) NOT NULL UNIQUE",
+                                         "show_on_home BOOLEAN DEFAULT '1'"));
         }
 
         /**
@@ -186,7 +185,7 @@
         static function uninstall() {
             $sql = SQL::current();
 
-            $sql->query("DROP TABLE \"__categorize\"");
+            $sql->drop("categorize");
             $sql->delete("post_attributes", array("name" => "category_id"));
         }
     }

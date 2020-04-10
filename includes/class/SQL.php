@@ -144,8 +144,6 @@
 
             # Add the table prefix to the query.
             $query = str_replace("__", $this->prefix, $query);
-
-            $query = $this->unwrinkle($query);
             $query = new Query($this, $query, $params, $throw_exceptions);
 
             return $query;
@@ -277,6 +275,33 @@
         }
 
         /**
+         * Function: drop
+         * Performs a DROP TABLE with given criteria.
+         *
+         * Parameters:
+         *     $table - Table to drop.
+         *     $throw_exceptions - Should exceptions be thrown on error?
+         */
+        public function drop($table, $throw_exceptions = false) {
+            $build = QueryBuilder::build_drop($table);
+            return $this->query($build, array(), $throw_exceptions);
+        }
+
+        /**
+         * Function: create
+         * Performs a CREATE TABLE with given criteria.
+         *
+         * Parameters:
+         *     $table - Table to create.
+         *     $cols - An array of column declarations.
+         *     $throw_exceptions - Should exceptions be thrown on error?
+         */
+        public function create($table, $cols, $throw_exceptions = false) {
+            $build = QueryBuilder::build_create($table, $cols);
+            return $this->query($build, array(), $throw_exceptions);
+        }
+
+        /**
          * Function: latest
          * Returns the last inserted sequential value.
          *
@@ -325,23 +350,6 @@
                 $string = "'".$string."'";
 
             return $string;
-        }
-
-        /**
-         * Function: unwrinkle
-         * Deals with various wrinkles in the SQL syntax.
-         *
-         * Parameters:
-         *     $query - Query to unwrinkle.
-         */
-        private function unwrinkle($query) {
-            if ($this->adapter == "sqlite")
-                $query = str_ireplace(array(" DEFAULT CHARSET=utf8",
-                                            "AUTO_INCREMENT"),
-                                      array("",
-                                            "AUTOINCREMENT"), $query);
-
-            return $query;
         }
 
         /**

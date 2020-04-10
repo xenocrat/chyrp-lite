@@ -177,24 +177,22 @@
 
             if ($sql->adapter == "mysql") {
                 # SQLite does not support the KEY column definition.
-                $sql->query("CREATE TABLE IF NOT EXISTS \"__likes\" (
-                                 id INTEGER PRIMARY KEY AUTO_INCREMENT,
-                                 post_id INTEGER NOT NULL,
-                                 user_id INTEGER NOT NULL,
-                                 timestamp DATETIME DEFAULT NULL,
-                                 session_hash VARCHAR(32) NOT NULL,
-                                 KEY key_user_id (post_id, user_id)
-                             ) DEFAULT CHARSET=utf8");
+                $sql->create("likes",
+                             array("id INTEGER PRIMARY KEY AUTO_INCREMENT",
+                                   "post_id INTEGER NOT NULL",
+                                   "user_id INTEGER NOT NULL",
+                                   "timestamp DATETIME DEFAULT NULL",
+                                   "session_hash VARCHAR(32) NOT NULL",
+                                   "KEY key_post_user (post_id, user_id)"));
             } else {
                 # MySQL does not support CREATE INDEX IF NOT EXISTS.
-                $sql->query("CREATE TABLE IF NOT EXISTS \"__likes\" (
-                                 id INTEGER PRIMARY KEY AUTO_INCREMENT,
-                                 post_id INTEGER NOT NULL,
-                                 user_id INTEGER NOT NULL,
-                                 timestamp DATETIME DEFAULT NULL,
-                                 session_hash VARCHAR(32) NOT NULL
-                             )");
-                $sql->query("CREATE INDEX IF NOT EXISTS key_user_id ON \"__likes\" (post_id, user_id)");
+                $sql->create("likes",
+                             array("id INTEGER PRIMARY KEY AUTO_INCREMENT",
+                                   "post_id INTEGER NOT NULL",
+                                   "user_id INTEGER NOT NULL",
+                                   "timestamp DATETIME DEFAULT NULL",
+                                   "session_hash VARCHAR(32) NOT NULL"));
+                $sql->query("CREATE INDEX IF NOT EXISTS key_post_user ON \"__likes\" (post_id, user_id)");
             }
         }
 
@@ -203,6 +201,6 @@
          * Drops the database table.
          */
         static function uninstall() {
-            SQL::current()->query("DROP TABLE \"__likes\"");
+            SQL::current()->drop("likes");
         }
     }

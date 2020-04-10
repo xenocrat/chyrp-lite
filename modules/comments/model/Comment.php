@@ -404,22 +404,21 @@
          * Creates the database table.
          */
         static function install() {
-            SQL::current()->query("CREATE TABLE IF NOT EXISTS \"__comments\" (
-                                       id INTEGER PRIMARY KEY AUTO_INCREMENT,
-                                       body LONGTEXT,
-                                       author VARCHAR(250) DEFAULT '',
-                                       author_url VARCHAR(2048) DEFAULT '',
-                                       author_email VARCHAR(128) DEFAULT '',
-                                       author_ip INTEGER DEFAULT 0,
-                                       author_agent VARCHAR(255) DEFAULT '',
-                                       status VARCHAR(32) default 'denied',
-                                       post_id INTEGER DEFAULT 0,
-                                       user_id INTEGER DEFAULT 0,
-                                       parent_id INTEGER DEFAULT 0,
-                                       notify BOOLEAN DEFAULT FALSE,
-                                       created_at DATETIME DEFAULT NULL,
-                                       updated_at DATETIME DEFAULT NULL
-                                   ) DEFAULT CHARSET=utf8");
+            SQL::current()->create("comments",
+                                   array("id INTEGER PRIMARY KEY AUTO_INCREMENT",
+                                         "body LONGTEXT",
+                                         "author VARCHAR(250) DEFAULT ''",
+                                         "author_url VARCHAR(2048) DEFAULT ''",
+                                         "author_email VARCHAR(128) DEFAULT ''",
+                                         "author_ip INTEGER DEFAULT 0",
+                                         "author_agent VARCHAR(255) DEFAULT ''",
+                                         "status VARCHAR(32) default 'denied'",
+                                         "post_id INTEGER DEFAULT 0",
+                                         "user_id INTEGER DEFAULT 0",
+                                         "parent_id INTEGER DEFAULT 0",
+                                         "notify BOOLEAN DEFAULT FALSE",
+                                         "created_at DATETIME DEFAULT NULL",
+                                         "updated_at DATETIME DEFAULT NULL"));
         }
 
         /**
@@ -429,7 +428,7 @@
         static function uninstall() {
             $sql = SQL::current();
 
-            $sql->query("DROP TABLE \"__comments\"");
+            $sql->drop("comments");
             $sql->delete("post_attributes", array("name" => "comment_status"));
         }
     }

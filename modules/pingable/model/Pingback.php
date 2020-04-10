@@ -107,13 +107,12 @@
          * Creates the database table.
          */
         static function install() {
-            SQL::current()->query("CREATE TABLE IF NOT EXISTS \"__pingbacks\" (
-                                       id INTEGER PRIMARY KEY AUTO_INCREMENT,
-                                       post_id INTEGER NOT NULL,
-                                       source VARCHAR(2048) DEFAULT '',
-                                       title LONGTEXT,
-                                       created_at DATETIME DEFAULT NULL
-                                   ) DEFAULT CHARSET=utf8");
+            SQL::current()->create("pingbacks",
+                                   array("id INTEGER PRIMARY KEY AUTO_INCREMENT",
+                                         "post_id INTEGER NOT NULL",
+                                         "source VARCHAR(2048) DEFAULT ''",
+                                         "title LONGTEXT",
+                                         "created_at DATETIME DEFAULT NULL"));
         }
 
         /**
@@ -121,6 +120,6 @@
          * Drops the database table.
          */
         static function uninstall() {
-            SQL::current()->query("DROP TABLE \"__pingbacks\"");
+            SQL::current()->drop("pingbacks");
         }
     }

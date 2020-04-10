@@ -105,6 +105,45 @@
         }
 
         /**
+         * Function: build_drop
+         * Creates a full drop table query.
+         *
+         * Parameters:
+         *     $table - Table to drop.
+         *
+         * Returns:
+         *     A @DROP TABLE@ query string.
+         */
+        public static function build_drop($table) {
+            return "DROP TABLE IF EXISTS \"__$table\"";
+        }
+
+        /**
+         * Function: build_create
+         * Creates a full create table query.
+         *
+         * Parameters:
+         *     $table - Table to create.
+         *     $cols - An array of column declarations.
+         *
+         * Returns:
+         *     A @CREATE TABLE@ query string.
+         */
+        public static function build_create($table, $cols) {
+            $query = "CREATE TABLE IF NOT EXISTS \"__$table\" (\n  ".
+                     implode(",\n  ", self::safecol((array) $cols))."\n)";
+
+            if (SQL::current()->adapter == "sqlite") {
+                $query = str_ireplace("AUTO_INCREMENT", "AUTOINCREMENT", $query);
+            } else {
+                $query.= " DEFAULT CHARSET=utf8";
+                $query = str_ireplace("AUTOINCREMENT", "AUTO_INCREMENT", $query);
+            }
+
+            return $query;
+        }
+
+        /**
          * Function: build_update_values
          * Creates an update data part.
          *
