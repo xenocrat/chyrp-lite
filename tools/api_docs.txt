@@ -583,6 +583,29 @@ Returns:
     A @DELETE@ query string.
 
 
+Function: build_drop
+--------------------
+Creates a full drop table query.
+
+Parameters:
+    $table - Table to drop.
+
+Returns:
+    A @DROP TABLE@ query string.
+
+
+Function: build_create
+----------------------
+Creates a full create table query.
+
+Parameters:
+    $table - Table to create.
+    $cols - An array of column declarations.
+
+Returns:
+    A @CREATE TABLE@ query string.
+
+
 Function: build_update_values
 -----------------------------
 Creates an update data part.
@@ -928,6 +951,25 @@ Parameters:
     $table - Table to delete from.
     $conds - Rows to delete..
     $params - An associative array of parameters used in the query.
+    $throw_exceptions - Should exceptions be thrown on error?
+
+
+Function: drop
+--------------
+Performs a DROP TABLE with given criteria.
+
+Parameters:
+    $table - Table to drop.
+    $throw_exceptions - Should exceptions be thrown on error?
+
+
+Function: create
+----------------
+Performs a CREATE TABLE with given criteria.
+
+Parameters:
+    $table - Table to create.
+    $cols - An array of column declarations.
     $throw_exceptions - Should exceptions be thrown on error?
 
 

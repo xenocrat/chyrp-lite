@@ -91,7 +91,7 @@ msgstr "Route wurde mit einem ungültigen Controller initiiert."
 #: includes/helpers.php:1916 includes/helpers.php:1919
 #: includes/helpers.php:1922 includes/helpers.php:1927
 #: includes/thumbnail.php:15 includes/thumbnail.php:18
-#: includes/thumbnail.php:47 includes/thumbnail.php:202 install.php:791
+#: includes/thumbnail.php:47 includes/thumbnail.php:202 install.php:784
 #: upgrade.php:173 upgrade.php:186 upgrade.php:199 upgrade.php:212
 #: upgrade.php:225 upgrade.php:239 upgrade.php:265 upgrade.php:278
 #: upgrade.php:292 upgrade.php:305 upgrade.php:318 upgrade.php:331
@@ -1356,42 +1356,42 @@ msgid "Please enter a username and password for the MySQL database."
 msgstr ""
 "Bitte gib einen Benutzernamen und ein Passwort für die MySQL Datenbank ein."
 
-#: install.php:791 upgrade.php:173 upgrade.php:186 upgrade.php:199
+#: install.php:784 upgrade.php:173 upgrade.php:186 upgrade.php:199
 #: upgrade.php:212 upgrade.php:225 upgrade.php:239 upgrade.php:265
 #: upgrade.php:278 upgrade.php:292 upgrade.php:305 upgrade.php:318
 #: upgrade.php:331 upgrade.php:345
 msgid "Could not write the configuration file."
 msgstr "Konfigurationsdatei konnte nicht geschrieben werden."
 
-#: install.php:808
+#: install.php:801
 msgid "Database Setup"
 msgstr "Datenbank Setup"
 
-#: install.php:810
+#: install.php:803
 msgid "Adapter"
 msgstr "Adapter"
 
-#: install.php:821
+#: install.php:814
 msgid "Host"
 msgstr "Host"
 
-#: install.php:825 install.php:884
+#: install.php:818 install.php:877
 msgid "Username"
 msgstr "Benutzername"
 
-#: install.php:829 install.php:888 install.php:892
+#: install.php:822 install.php:881 install.php:885
 msgid "Password"
 msgstr "Passwort"
 
-#: install.php:833
+#: install.php:826
 msgid "Database"
 msgstr "Datenbank"
 
-#: install.php:835
+#: install.php:828
 msgid "(absolute or relative path)"
 msgstr "(absoluter oder relativer Pfad)"
 
-#: install.php:841
+#: install.php:834
 msgid ""
 "Be sure to put your SQLite database outside the document root directory, "
 "otherwise visitors will be able to download it."
@@ -1399,76 +1399,76 @@ msgstr ""
 "Bitte stelle sicher, dass die SQLite Datenbank außerhalb des "
 "Webserververzeichnisses ist, so dass Benutzer sie nicht herunterladen können."
 
-#: install.php:844
+#: install.php:837
 msgid "Table Prefix"
 msgstr "Tabellenpräfix"
 
-#: install.php:844
+#: install.php:837
 msgid "(optional)"
 msgstr "(optional)"
 
-#: install.php:848
+#: install.php:841
 msgid "Website Setup"
 msgstr "Website Setup"
 
-#: install.php:850
+#: install.php:843
 msgid "Chyrp URL"
 msgstr "Chyrp URL"
 
-#: install.php:854
+#: install.php:847
 msgid "Site Name"
 msgstr "Blogname"
 
-#: install.php:855
+#: install.php:848
 msgid "My Awesome Site"
 msgstr "Meine coole Seite"
 
-#: install.php:858
+#: install.php:851
 msgid "Description"
 msgstr "Beschreibung"
 
-#: install.php:862
+#: install.php:855
 msgid "Time Zone"
 msgstr "Zeitzone"
 
-#: install.php:872
+#: install.php:865
 msgid "Language"
 msgstr "Sprache"
 
-#: install.php:882
+#: install.php:875
 msgid "Admin Account"
 msgstr "Admin Account"
 
-#: install.php:892
+#: install.php:885
 msgid "(again)"
 msgstr "(nochmal)"
 
-#: install.php:896
+#: install.php:889
 msgid "Email Address"
 msgstr "E-Mail Addresse"
 
-#: install.php:899
+#: install.php:892
 msgid "Install me!"
 msgstr "Installieren!"
 
-#: install.php:902
+#: install.php:895
 msgid "Installation Complete"
 msgstr "Installation vollständig"
 
-#: install.php:903 upgrade.php:617
+#: install.php:896 upgrade.php:617
 msgid "What now?"
 msgstr "Und weiter?"
 
-#: install.php:905
+#: install.php:898
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr "Lösche die <em>install.php</em>. Die brauchst Du nicht mehr."
 
-#: install.php:906
+#: install.php:899
 msgid "Log in to your site and configure things to your liking."
 msgstr ""
 "Logge Dich auf deiner Seite ein und passe die Dinge deiner Vorstellung an."
 
-#: install.php:908 upgrade.php:623
+#: install.php:901 upgrade.php:623
 msgid "Take me to my site!"
 msgstr "Bring mich zur Seite!"
 
