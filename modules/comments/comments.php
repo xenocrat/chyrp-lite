@@ -128,9 +128,9 @@
                                        $parent,
                                        $notify);
 
-            return array($post, true, (($comment->status == "approved") ?
-                                            __("Comment added.", "comments") :
-                                            __("Your comment is awaiting moderation.", "comments")));
+            return array($comment, true, (($comment->status == "approved") ?
+                                        __("Comment added.", "comments") :
+                                        __("Your comment is awaiting moderation.", "comments")));
         }
 
         private function update_comment() {
@@ -208,7 +208,7 @@
         }
 
         public function ajax_add_comment() {
-            list($post, $success, $message) = self::add_comment();
+            list($comment, $success, $message) = self::add_comment();
             json_response($message, $success);
         }
 
@@ -616,7 +616,7 @@
 
         public function main_view() {
             if (isset($_POST['action']) and $_POST['action'] == "add_comment") {
-                list($post, $success, $message) = self::add_comment();
+                list($comment, $success, $message) = self::add_comment();
                 $type = ($success) ? "notice" : "warning" ;
                 Flash::$type($message);
 
