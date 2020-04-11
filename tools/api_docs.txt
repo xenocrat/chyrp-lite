@@ -689,7 +689,7 @@ Returns ('one', 'two', '', 1, 0) from array("one", "two", null, true, false)
 
 Function: safecol
 -----------------
-Wraps a column in proper escaping if it is a SQL keyword.
+Wraps a column in proper escaping if the name is a subset of SQL keywords.
 
 Parameters:
     $name - Name of the column.
