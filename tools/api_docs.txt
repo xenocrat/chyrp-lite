@@ -601,6 +601,7 @@ Creates a full create table query.
 Parameters:
     $table - Table to create.
     $cols - An array of column declarations.
+    $adapter - Database adapter in use with current settings.
 
 Returns:
     A @CREATE TABLE@ query string.
