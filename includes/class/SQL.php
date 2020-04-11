@@ -297,7 +297,7 @@
          *     $throw_exceptions - Should exceptions be thrown on error?
          */
         public function create($table, $cols, $throw_exceptions = false) {
-            $build = QueryBuilder::build_create($table, $cols);
+            $build = QueryBuilder::build_create($table, $cols, $this->adapter);
             return $this->query($build, array(), $throw_exceptions);
         }
 

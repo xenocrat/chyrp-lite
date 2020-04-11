@@ -125,15 +125,16 @@
          * Parameters:
          *     $table - Table to create.
          *     $cols - An array of column declarations.
+         *     $adapter - Database adapter in use with current settings.
          *
          * Returns:
          *     A @CREATE TABLE@ query string.
          */
-        public static function build_create($table, $cols) {
+        public static function build_create($table, $cols, $adapter) {
             $query = "CREATE TABLE IF NOT EXISTS \"__$table\" (\n  ".
                      implode(",\n  ", self::safecol((array) $cols))."\n)";
 
-            if (SQL::current()->adapter == "sqlite") {
+            if ($adapter == "sqlite") {
                 $query = str_ireplace("AUTO_INCREMENT", "AUTOINCREMENT", $query);
             } else {
                 $query.= " DEFAULT CHARSET=utf8";
