@@ -324,13 +324,14 @@
 
         /**
          * Function: safecol
-         * Wraps a column in proper escaping if it is a SQL keyword.
+         * Wraps a column in proper escaping if the name is a subset of SQL keywords.
          *
          * Parameters:
          *     $name - Name of the column.
          */
         public static function safecol($name) {
-            return preg_replace("/(([^a-zA-Z0-9_]|^)(order|groups?|having|limit)([^a-zA-Z0-9_]|$))/i",
+            $keywords = "join|into|set|from|where|groups?|having|order|limit|offset";
+            return preg_replace("/(([^a-zA-Z0-9_]|^)($keywords)([^a-zA-Z0-9_]|$))/i",
                                 '\\2"\\3"\\4',
                                 $name);
         }
