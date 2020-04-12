@@ -43,5 +43,22 @@
             error(__("Error"), __("Could not write the configuration file."));
     }
 
+    /**
+     * Function: likes_clean_indexes
+     * Cleans the database table of deprecated indexes.
+     *
+     * Versions: 2020.01 => 2020.02
+     */
+    function likes_clean_indexes() {
+        $sql = SQL::current();
+
+        if ($sql->adapter == "sqlite") {
+            $sql->query("DROP INDEX IF EXISTS key_post_id");
+            $sql->query("DROP INDEX IF EXISTS key_user_id");
+            $sql->query("CREATE INDEX IF NOT EXISTS key_post_user ON \"__likes\" (post_id, user_id)");
+        }
+    }
+
     likes_migrate_config();
     likes_update_config();
+    likes_clean_indexes();
