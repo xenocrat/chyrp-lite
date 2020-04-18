@@ -836,6 +836,7 @@ div.more_options p textarea {
 }
 span.options_extra {
     display: inline-block;
+    width: 100%;
     padding-top: 1rem;
 }
 
