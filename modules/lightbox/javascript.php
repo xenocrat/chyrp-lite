@@ -112,12 +112,8 @@ var ChyrpLightbox = {
                 "alt": alt,
                 "title": alt
             }).css(ChyrpLightbox.styles.fg).on("click", function(e) {
-                if (e.target === e.currentTarget) {
-                    if (ref && ChyrpLightbox.protect == false)
-                        window.location.assign(ref);
-                    else
-                        ChyrpLightbox.hide();
-                }
+                if (e.target === e.currentTarget)
+                    ChyrpLightbox.hide();
             }).on("load", ChyrpLightbox.show)).appendTo("body");
 
             ChyrpLightbox.active = true;
