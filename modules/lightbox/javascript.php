@@ -96,7 +96,6 @@ var ChyrpLightbox = {
 
             var src = $(this).attr("src");
             var alt = $(this).attr("alt");
-            var ref = $(this).parent("a.image_link").attr("href");
 
             $("<div>", {
                 "id": "ChyrpLightbox-bg",
@@ -109,8 +108,7 @@ var ChyrpLightbox = {
             }).append($("<img>", {
                 "id": "ChyrpLightbox-fg",
                 "src": src,
-                "alt": alt,
-                "title": alt
+                "alt": alt
             }).css(ChyrpLightbox.styles.fg).on("click", function(e) {
                 if (e.target === e.currentTarget)
                     ChyrpLightbox.hide();
