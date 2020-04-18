@@ -9,10 +9,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#. Copyright 2019 Daniel Pimley and other contributors.
+#. Copyright 2020 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: admin/help/canonical_url.twig:3 admin/help/canonical_url.twig:6
 #: admin/pages/general_settings.twig:23
@@ -318,8 +318,8 @@ msgstr "尝试您帖子链接到的站点。"
 #: admin/pages/general_settings.twig:27 admin/pages/manage_pages.twig:11
 #: admin/pages/manage_posts.twig:11 admin/pages/manage_users.twig:11
 #: admin/pages/modules.twig:18 admin/pages/modules.twig:74
-#: admin/partials/page_fields.twig:21 admin/partials/post_fields.twig:34
-#: admin/partials/post_fields.twig:99 admin/partials/post_fields.twig:119
+#: admin/partials/page_fields.twig:20 admin/partials/post_fields.twig:30
+#: admin/partials/post_fields.twig:98 admin/partials/post_fields.twig:118
 msgid "help"
 msgstr "帮助"
 
@@ -495,7 +495,7 @@ msgstr "全名"
 #: admin/pages/edit_user.twig:36 admin/pages/edit_user.twig:43
 #: admin/pages/general_settings.twig:24 admin/pages/import.twig:41
 #: admin/pages/new_user.twig:37 admin/pages/new_user.twig:44
-#: admin/partials/post_fields.twig:30
+#: admin/partials/post_fields.twig:35
 msgid "(optional)"
 msgstr "(可选)"
 
@@ -987,7 +987,7 @@ msgstr "写作"
 msgid "Body"
 msgstr "正文"
 
-#: admin/partials/page_fields.twig:20 admin/partials/post_fields.twig:98
+#: admin/partials/page_fields.twig:21 admin/partials/post_fields.twig:99
 msgid "Slug"
 msgstr ""
 

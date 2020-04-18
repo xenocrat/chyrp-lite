@@ -287,10 +287,10 @@ msgstr ""
 #: admin/pages/manage_users.twig:11
 #: admin/pages/modules.twig:18
 #: admin/pages/modules.twig:74
-#: admin/partials/page_fields.twig:21
-#: admin/partials/post_fields.twig:34
-#: admin/partials/post_fields.twig:99
-#: admin/partials/post_fields.twig:119
+#: admin/partials/page_fields.twig:20
+#: admin/partials/post_fields.twig:30
+#: admin/partials/post_fields.twig:98
+#: admin/partials/post_fields.twig:118
 msgid "help"
 msgstr ""
 
@@ -493,7 +493,7 @@ msgstr ""
 #: admin/pages/import.twig:41
 #: admin/pages/new_user.twig:37
 #: admin/pages/new_user.twig:44
-#: admin/partials/post_fields.twig:30
+#: admin/partials/post_fields.twig:35
 msgid "(optional)"
 msgstr ""
 
@@ -1025,8 +1025,8 @@ msgstr ""
 msgid "Body"
 msgstr ""
 
-#: admin/partials/page_fields.twig:20
-#: admin/partials/post_fields.twig:98
+#: admin/partials/page_fields.twig:21
+#: admin/partials/post_fields.twig:99
 msgid "Slug"
 msgstr ""
 
