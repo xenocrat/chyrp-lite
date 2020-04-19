@@ -96,6 +96,7 @@ var ChyrpLightbox = {
 
             var src = $(this).attr("src");
             var alt = $(this).attr("alt");
+            var ref = $(this).parent("a.image_link").attr("href");
 
             $("<div>", {
                 "id": "ChyrpLightbox-bg",
@@ -110,8 +111,14 @@ var ChyrpLightbox = {
                 "src": src,
                 "alt": alt
             }).css(ChyrpLightbox.styles.fg).on("click", function(e) {
-                if (e.target === e.currentTarget)
+                if (e.target === e.currentTarget) {
+                    if (e.altKey && ref) {
+                        if (!ChyrpLightbox.protect || ref.indexOf(Site.chyrp_url) != 0)
+                            window.location.assign(ref);
+                    }
+
                     ChyrpLightbox.hide();
+                }
             }).on("load", ChyrpLightbox.show)).appendTo("body");
 
             ChyrpLightbox.active = true;
