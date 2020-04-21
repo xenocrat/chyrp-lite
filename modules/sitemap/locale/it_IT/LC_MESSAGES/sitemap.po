@@ -9,10 +9,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. Copyright 2019 Daniel Pimley and other contributors.
+#. Copyright 2020 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/sitemap/admin/pages/sitemap_settings.twig:3
 #: modules/sitemap/admin/pages/sitemap_settings.twig:6
@@ -20,18 +20,26 @@ msgid "Sitemap Settings"
 msgstr "Impostazioni Sitemap"
 
 #: modules/sitemap/admin/pages/sitemap_settings.twig:10
+msgid "Sitemap Path"
+msgstr "Percorso del Sitemap"
+
+#: modules/sitemap/admin/pages/sitemap_settings.twig:13
+msgid "The directory to which the sitemap is written."
+msgstr "Directory in cui viene scritta la Sitemap."
+
+#: modules/sitemap/admin/pages/sitemap_settings.twig:17
 msgid "Blog is Updated"
 msgstr "Blog é aggiornato"
 
-#: modules/sitemap/admin/pages/sitemap_settings.twig:18
+#: modules/sitemap/admin/pages/sitemap_settings.twig:25
 msgid "Pages are Edited"
 msgstr "Le pagine sono modificate"
 
-#: modules/sitemap/admin/pages/sitemap_settings.twig:26
+#: modules/sitemap/admin/pages/sitemap_settings.twig:33
 msgid "Posts are Edited"
 msgstr "I post sono modificati"
 
-#: modules/sitemap/admin/pages/sitemap_settings.twig:35
+#: modules/sitemap/admin/pages/sitemap_settings.twig:42
 msgid ""
 "These values hint to search engines how frequently they should crawl your "
 "site."
@@ -59,36 +67,34 @@ msgstr ""
 "Ricordarsi di concedere le autorizzazioni di scrittura per sitemap.xml nella "
 "directory radice del sito."
 
-#: modules/sitemap/sitemap.php:5
-msgid "Sitemap module cannot determine the server's document root."
-msgstr ""
-"Il modulo Sitemap non può determinare la directory principale del documento "
-"del server."
-
-#: modules/sitemap/sitemap.php:31
+#: modules/sitemap/sitemap.php:29
 msgid "Sitemap"
 msgstr "Sitemap"
 
-#: modules/sitemap/sitemap.php:43
+#: modules/sitemap/sitemap.php:41
 msgid "Hourly"
 msgstr "Ogni ora"
 
-#: modules/sitemap/sitemap.php:44
+#: modules/sitemap/sitemap.php:42
 msgid "Daily"
 msgstr "Giornaliero"
 
-#: modules/sitemap/sitemap.php:45
+#: modules/sitemap/sitemap.php:43
 msgid "Weekly"
 msgstr "Settimanale"
 
-#: modules/sitemap/sitemap.php:46
+#: modules/sitemap/sitemap.php:44
 msgid "Monthly"
 msgstr "Mensile"
 
-#: modules/sitemap/sitemap.php:47
+#: modules/sitemap/sitemap.php:45
 msgid "Yearly"
 msgstr "Annuale"
 
-#: modules/sitemap/sitemap.php:48
+#: modules/sitemap/sitemap.php:46
 msgid "Never"
 msgstr "Mai"
+
+#: modules/sitemap/sitemap.php:59
+msgid "Sitemap path does not exist."
+msgstr "Il percorso del Sitemap non esiste."

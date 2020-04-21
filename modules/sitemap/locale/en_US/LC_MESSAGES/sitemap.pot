@@ -7,18 +7,26 @@ msgid "Sitemap Settings"
 msgstr ""
 
 #: modules/sitemap/admin/pages/sitemap_settings.twig:10
+msgid "Sitemap Path"
+msgstr ""
+
+#: modules/sitemap/admin/pages/sitemap_settings.twig:13
+msgid "The directory to which the sitemap is written."
+msgstr ""
+
+#: modules/sitemap/admin/pages/sitemap_settings.twig:17
 msgid "Blog is Updated"
 msgstr ""
 
-#: modules/sitemap/admin/pages/sitemap_settings.twig:18
+#: modules/sitemap/admin/pages/sitemap_settings.twig:25
 msgid "Pages are Edited"
 msgstr ""
 
-#: modules/sitemap/admin/pages/sitemap_settings.twig:26
+#: modules/sitemap/admin/pages/sitemap_settings.twig:33
 msgid "Posts are Edited"
 msgstr ""
 
-#: modules/sitemap/admin/pages/sitemap_settings.twig:35
+#: modules/sitemap/admin/pages/sitemap_settings.twig:42
 msgid "These values hint to search engines how frequently they should crawl your site."
 msgstr ""
 
@@ -34,35 +42,35 @@ msgstr ""
 msgid "Please remember to give write permissions to sitemap.xml on the root directory of the site."
 msgstr ""
 
-#: modules/sitemap/sitemap.php:5
-msgid "Sitemap module cannot determine the server's document root."
-msgstr ""
-
-#: modules/sitemap/sitemap.php:31
+#: modules/sitemap/sitemap.php:29
 msgid "Sitemap"
 msgstr ""
 
-#: modules/sitemap/sitemap.php:43
+#: modules/sitemap/sitemap.php:41
 msgid "Hourly"
 msgstr ""
 
-#: modules/sitemap/sitemap.php:44
+#: modules/sitemap/sitemap.php:42
 msgid "Daily"
 msgstr ""
 
-#: modules/sitemap/sitemap.php:45
+#: modules/sitemap/sitemap.php:43
 msgid "Weekly"
 msgstr ""
 
-#: modules/sitemap/sitemap.php:46
+#: modules/sitemap/sitemap.php:44
 msgid "Monthly"
 msgstr ""
 
-#: modules/sitemap/sitemap.php:47
+#: modules/sitemap/sitemap.php:45
 msgid "Yearly"
 msgstr ""
 
-#: modules/sitemap/sitemap.php:48
+#: modules/sitemap/sitemap.php:46
 msgid "Never"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:59
+msgid "Sitemap path does not exist."
 msgstr ""
 
