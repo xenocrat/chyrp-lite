@@ -1,9 +1,6 @@
 <?php 
     class Sitemap extends Modules {
         public function __init() {
-            if (!isset($_SERVER['DOCUMENT_ROOT']))
-                cancel_module("sitemap", __("Sitemap module cannot determine the server's document root.", "sitemap"));
-
             $actions = array("add_post",
                              "add_page",
                              "update_post",
@@ -17,9 +14,10 @@
 
         static function __install() {
             Config::current()->set("module_sitemap",
-                                   array("blog_changefreq" => "daily",
+                                   array("blog_changefreq"  => "daily",
                                          "pages_changefreq" => "yearly",
-                                         "posts_changefreq" => "monthly"));
+                                         "posts_changefreq" => "monthly",
+                                         "sitemap_path"     => MAIN_DIR));
         }
 
         static function __uninstall() {
@@ -53,11 +51,23 @@
             fallback($_POST['blog_changefreq'], "daily");
             fallback($_POST['pages_changefreq'], "yearly");
             fallback($_POST['posts_changefreq'], "monthly");
+            fallback($_POST['sitemap_path'], MAIN_DIR);
+
+            $realpath = realpath($_POST['sitemap_path']);
+
+            if ($realpath === false) {
+                Flash::warning(__("Sitemap path does not exist.", "sitemap"));
+                $realpath = MAIN_DIR;
+            }
+
+            $separator = preg_quote(DIR, "~");
+            $filepath = preg_replace("~".$separator."(sitemap\.xml)?$~i", "", $realpath);
 
             Config::current()->set("module_sitemap",
-                                   array("blog_changefreq" => $_POST['blog_changefreq'],
+                                   array("blog_changefreq"  => $_POST['blog_changefreq'],
                                          "pages_changefreq" => $_POST['pages_changefreq'],
-                                         "posts_changefreq" => $_POST['posts_changefreq']));
+                                         "posts_changefreq" => $_POST['posts_changefreq'],
+                                         "sitemap_path"     => $filepath));
 
             Flash::notice(__("Settings updated."), "sitemap_settings");
         }
@@ -67,9 +77,6 @@
          * Generates a sitemap of the blog and writes it to the document root.
          */
         public function make_sitemap() {
-            if ($this->cancelled)
-                return;
-
             $results = SQL::current()->select("posts",
                                               "id",
                                               array("status" => "public"),
@@ -123,6 +130,6 @@
 
             $xml.= '</urlset>'."\n";
 
-            @file_put_contents($_SERVER['DOCUMENT_ROOT'].DIR."sitemap.xml", $xml);
+            @file_put_contents($settings["sitemap_path"].DIR."sitemap.xml", $xml);
         }
     }
