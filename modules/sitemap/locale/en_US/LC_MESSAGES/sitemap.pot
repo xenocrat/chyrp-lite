@@ -70,7 +70,7 @@ msgstr ""
 msgid "Never"
 msgstr ""
 
-#: modules/sitemap/sitemap.php:59
-msgid "Sitemap path does not exist."
+#: modules/sitemap/sitemap.php:60
+msgid "Could not determine the absolute path."
 msgstr ""
 

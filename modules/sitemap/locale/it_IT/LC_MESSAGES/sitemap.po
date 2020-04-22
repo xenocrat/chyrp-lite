@@ -95,6 +95,6 @@ msgstr "Annuale"
 msgid "Never"
 msgstr "Mai"
 
-#: modules/sitemap/sitemap.php:59
-msgid "Sitemap path does not exist."
-msgstr "Il percorso del Sitemap non esiste."
+#: modules/sitemap/sitemap.php:60
+msgid "Could not determine the absolute path."
+msgstr "Impossibile determinare il percorso assoluto."
