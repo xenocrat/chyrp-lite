@@ -53,21 +53,22 @@
             fallback($_POST['posts_changefreq'], "monthly");
             fallback($_POST['sitemap_path'], MAIN_DIR);
 
+            $config = Config::current();
             $realpath = realpath($_POST['sitemap_path']);
 
             if ($realpath === false) {
-                Flash::warning(__("Sitemap path does not exist.", "sitemap"));
-                $realpath = MAIN_DIR;
+                Flash::warning(__("Could not determine the absolute path.", "sitemap"));
+                $filepath = $config->module_sitemap["sitemap_path"];
+            } else {
+                $separator = preg_quote(DIR, "~");
+                $filepath = preg_replace("~".$separator."(sitemap\.xml)?$~i", "", $realpath);
             }
 
-            $separator = preg_quote(DIR, "~");
-            $filepath = preg_replace("~".$separator."(sitemap\.xml)?$~i", "", $realpath);
-
-            Config::current()->set("module_sitemap",
-                                   array("blog_changefreq"  => $_POST['blog_changefreq'],
-                                         "pages_changefreq" => $_POST['pages_changefreq'],
-                                         "posts_changefreq" => $_POST['posts_changefreq'],
-                                         "sitemap_path"     => $filepath));
+            $config->set("module_sitemap",
+                         array("blog_changefreq"  => $_POST['blog_changefreq'],
+                               "pages_changefreq" => $_POST['pages_changefreq'],
+                               "posts_changefreq" => $_POST['posts_changefreq'],
+                               "sitemap_path"     => $filepath));
 
             Flash::notice(__("Settings updated."), "sitemap_settings");
         }
