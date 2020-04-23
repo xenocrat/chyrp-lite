@@ -57,7 +57,7 @@
             $realpath = realpath($_POST['sitemap_path']);
 
             if ($realpath === false) {
-                Flash::warning(__("Could not determine the absolute path.", "sitemap"));
+                Flash::warning(__("Could not determine the absolute path to the Sitemap.", "sitemap"));
                 $filepath = $config->module_sitemap["sitemap_path"];
             } else {
                 $separator = preg_quote(DIR, "~");
