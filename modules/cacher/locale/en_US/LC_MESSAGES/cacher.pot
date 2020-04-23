@@ -18,11 +18,11 @@ msgstr ""
 msgid "Clear Cache"
 msgstr ""
 
-#: modules/cacher/cacher.php:123
+#: modules/cacher/cacher.php:142
 msgid "Cache"
 msgstr ""
 
-#: modules/cacher/cacher.php:162
+#: modules/cacher/cacher.php:181
 msgid "Cache cleared."
 msgstr ""
 

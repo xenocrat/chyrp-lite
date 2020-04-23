@@ -96,5 +96,5 @@ msgid "Never"
 msgstr "Mai"
 
 #: modules/sitemap/sitemap.php:60
-msgid "Could not determine the absolute path."
-msgstr "Impossibile determinare il percorso assoluto."
+msgid "Could not determine the absolute path to the Sitemap."
+msgstr "Impossibile determinare il percorso assoluto del Sitemap."

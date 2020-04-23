@@ -92,5 +92,5 @@ msgid "Never"
 msgstr "从不"
 
 #: modules/sitemap/sitemap.php:60
-msgid "Could not determine the absolute path."
-msgstr "无法确定绝对路径。"
+msgid "Could not determine the absolute path to the Sitemap."
+msgstr "无法确定Sitemap的绝对路径。"
