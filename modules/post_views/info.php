@@ -7,5 +7,7 @@ return array(
     "author"        => array(
         "name"      => "Daniel Pimley",
         "url"       => "http://chyrplite.net/"),
-    "confirm"       => __("Do you want to remove view counts from the database?", "post_views")
+    "confirm"       => __("Do you want to remove view counts from the database?", "post_views"),
+    "conflicts"     => array(
+                       "cacher")
 );
