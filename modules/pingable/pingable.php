@@ -228,9 +228,4 @@
 
             return $atom;
         }
-
-        public function cache_regenerate_triggers($regenerate) {
-            $triggers = array("add_pingback", "update_pingback", "delete_pingback");
-            return array_merge($regenerate, $triggers);
-        }
     }

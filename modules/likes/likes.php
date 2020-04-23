@@ -351,11 +351,6 @@
             return $atom;
         }
 
-        public function cache_regenerate_triggers($regenerate) {
-            $triggers = array("add_like", "delete_like");
-            return array_merge($regenerate, $triggers);
-        }
-
         public function user_logged_in($user) {
             # Erase the visitor's session values to avoid misattribution.
             $_SESSION["likes"] = array();

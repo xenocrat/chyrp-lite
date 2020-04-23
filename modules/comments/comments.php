@@ -898,9 +898,4 @@
                                  truncate(strip_tags($params["body"]), 60);
             return $params;
         }
-
-        public function cache_regenerate_triggers($regenerate) {
-            $triggers = array("add_comment", "update_comment", "delete_comment");
-            return array_merge($regenerate, $triggers);
-        }
     }

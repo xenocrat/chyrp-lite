@@ -74,7 +74,26 @@
                 "import_chyrp_page",
                 "user_logged_in",
                 "user_logged_out",
-                "change_setting"
+                "change_setting",
+
+                # Categorize module:
+                "add_category",
+                "update_category",
+                "delete_category",
+
+                # Comments module:
+                "add_comment",
+                "update_comment",
+                "delete_comment",
+
+                # Likes module:
+                "add_like",
+                "delete_like",
+
+                # Pingable module:
+                "add_pingback",
+                "update_pingback",
+                "delete_pingback"
             );
 
             $trigger->filter($regenerate, "cache_regenerate_triggers");

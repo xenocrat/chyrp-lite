@@ -350,9 +350,4 @@
             Category::delete($category->id);
             Flash::notice(__("Category deleted.", "categorize"), "manage_category");
         }
-
-        public function cache_regenerate_triggers($regenerate) {
-            $triggers = array("add_category", "update_category", "delete_category");
-            return array_merge($regenerate, $triggers);
-        }
     }
