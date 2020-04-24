@@ -422,12 +422,16 @@ div.flash {
     border-bottom: 1px solid transparent;
 }
 div.metadata {
-    font-weight: normal;
-    font-size: 0.75em;
+    box-sizing: border-box;
     display: block;
     width: 100%;
-    padding: 0rem;
+    font-weight: normal;
+    font-size: 0.75em;
+    text-align: center;
     margin-top: 2rem;
+    padding: 0.2rem;
+    border: 1px solid #383839;
+    border-radius: 0.2rem;
 }
 div.comments_pagination {
     width: 100%;
@@ -770,10 +774,6 @@ img.gravatar {
     }
     input, select {
         width: 100%;
-    }
-    table {
-        box-sizing: border-box;
-        display: block;
     }
     h1.banner {
         margin-bottom: 2rem;

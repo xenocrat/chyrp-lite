@@ -436,13 +436,17 @@ div.flash + div.flash {
     border-top: 1px solid #ffffff;
 }
 div.metadata {
-    font-weight: normal;
-    font-size: 0.75em;
-    font-style: italic;
+    box-sizing: border-box;
     display: block;
     width: 100%;
-    padding: 0rem;
+    font-weight: normal;
+    font-size: 0.75em;
+    text-align: center;
     margin-top: 2rem;
+    padding: 0.2rem;
+    background-color: #f5f4f0;
+    border: 1px solid #ebeae6;
+    border-radius: 1.5rem;
 }
 div.comments_pagination {
     width: 100%;
@@ -765,10 +769,6 @@ img.gravatar {
     }
     input, select {
         width: 100%;
-    }
-    table {
-        box-sizing: border-box;
-        display: block;
     }
     h1.banner {
         margin-bottom: 2rem;
