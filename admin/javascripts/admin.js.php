@@ -148,12 +148,18 @@ function auto_submit() {
         $(this).parents("form").submit();
     });
 }
-// Disable the other buttons in a form when one is clicked.
+// Prevent forms being submitted multiple times in a short interval.
 function solo_submit() {
-    $("form button:not([type='button'])").on("click", function(e) {
-        $(this).parents("form").find("button:not([type='button'])").not($(this)).each(function() {
-            $(this).prop("disabled", true);
-        });
+    $("form").on("submit", function(e) {
+        var last = $(this).attr("data-submitted") || 0 ;
+        var when = Date.now();
+
+        if (when < last + 5000) {
+            e.preventDefault();
+            console.log("Form submission blocked for 5 secs.");
+        } else {
+            $(this).attr("data-submitted", when);
+        }
     });
 }
 var Route = {
