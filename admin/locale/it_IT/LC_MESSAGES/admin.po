@@ -259,19 +259,19 @@ msgstr "Spunta tutto"
 msgid "Are you sure you want to proceed?"
 msgstr "Sei sicuro di volere procedere?"
 
-#: admin/javascripts/admin.js.php:190 admin/javascripts/admin.js.php:293
+#: admin/javascripts/admin.js.php:196 admin/javascripts/admin.js.php:299
 msgid "Close"
 msgstr "Chiudi"
 
-#: admin/javascripts/admin.js.php:197 admin/javascripts/admin.js.php:300
+#: admin/javascripts/admin.js.php:203 admin/javascripts/admin.js.php:306
 msgid "close"
 msgstr "chiudi"
 
-#: admin/javascripts/admin.js.php:217 admin/pages/themes.twig:28
+#: admin/javascripts/admin.js.php:223 admin/pages/themes.twig:28
 msgid "Preview"
 msgstr "Anteprima"
 
-#: admin/javascripts/admin.js.php:233
+#: admin/javascripts/admin.js.php:239
 msgid "preview"
 msgstr "anteprima"
 

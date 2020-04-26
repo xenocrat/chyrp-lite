@@ -243,19 +243,19 @@ msgstr "全部切换"
 msgid "Are you sure you want to proceed?"
 msgstr "确定继续？"
 
-#: admin/javascripts/admin.js.php:190 admin/javascripts/admin.js.php:293
+#: admin/javascripts/admin.js.php:196 admin/javascripts/admin.js.php:299
 msgid "Close"
 msgstr "关闭"
 
-#: admin/javascripts/admin.js.php:197 admin/javascripts/admin.js.php:300
+#: admin/javascripts/admin.js.php:203 admin/javascripts/admin.js.php:306
 msgid "close"
 msgstr "关闭"
 
-#: admin/javascripts/admin.js.php:217 admin/pages/themes.twig:28
+#: admin/javascripts/admin.js.php:223 admin/pages/themes.twig:28
 msgid "Preview"
 msgstr "预览"
 
-#: admin/javascripts/admin.js.php:233
+#: admin/javascripts/admin.js.php:239
 msgid "preview"
 msgstr "预览"
 
