@@ -14,6 +14,7 @@ $(function() {
     validate_passwords();
     confirm_submit();
     auto_submit();
+    solo_submit();
     Help.init();
     Write.init();
     Settings.init();
@@ -145,6 +146,14 @@ function confirm_submit() {
 function auto_submit() {
     $("select[data-submit], input[data-submit][type='checkbox']").on("change", function(e) {
         $(this).parents("form").submit();
+    });
+}
+// Disable the other buttons in a form when one is clicked.
+function solo_submit() {
+    $("form button:not([type='button'])").on("click", function(e) {
+        $(this).parents("form").find("button:not([type='button'])").not($(this)).each(function() {
+            $(this).prop("disabled", true);
+        });
     });
 }
 var Route = {
