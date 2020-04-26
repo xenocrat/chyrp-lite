@@ -154,7 +154,7 @@ function solo_submit() {
         var last = $(this).attr("data-submitted") || 0 ;
         var when = Date.now();
 
-        if (when < last + 5000) {
+        if ((when - last) < 5000) {
             e.preventDefault();
             console.log("Form submission blocked for 5 secs.");
         } else {
