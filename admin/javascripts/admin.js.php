@@ -134,7 +134,7 @@ function validate_passwords() {
 }
 // Asks the user to confirm form submission.
 function confirm_submit() {
-    $("form[data-confirm]").submit(function(e) {
+    $("form[data-confirm]").on("submit", function(e) {
         var text = $(this).attr("data-confirm") ||
                    '<?php echo __("Are you sure you want to proceed?", "admin"); ?>' ;
 
