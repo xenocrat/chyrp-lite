@@ -1119,4 +1119,8 @@ a.emblem.preview {
     div.controls .feather_disabler_confirm {
         margin-top: 1rem;
     }
+    div.controls .module_disabler_confirm label,
+    div.controls .feather_disabler_confirm label {
+        display: inline;
+    }
 }
