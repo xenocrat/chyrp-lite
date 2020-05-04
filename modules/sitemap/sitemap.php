@@ -93,7 +93,7 @@
             else
                 $posts = array();
 
-            $pages = Page::find(array("where" => array("show_in_list" => true),
+            $pages = Page::find(array("where" => array("public" => true),
                                       "order" => "list_order ASC"));
 
             $config = Config::current();
@@ -126,6 +126,7 @@
                        '<loc>'.$page->url().'</loc>'."\n".
                        '<lastmod>'.when("c", $lastmod).'</lastmod>'."\n".
                        '<changefreq>'.$settings["pages_changefreq"].'</changefreq>'."\n".
+                       '<priority>'.(($page->show_in_list) ? "1.0" : "0.5").'</priority>'."\n".
                        '</url>'."\n";
             }
 
