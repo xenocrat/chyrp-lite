@@ -98,6 +98,14 @@
     if (file_exists(INCLUDES_DIR.DIR."config.json.php"))
         redirect($config->url);
 
+    # Get a PDO driver list and test if we have the required drivers.
+    if (class_exists("PDO")) {
+        $drivers = PDO::getAvailableDrivers();
+
+        if (!in_array("mysql", $drivers) and !in_array("sqlite", $drivers))
+            alert(__("PDO requires a MySQL or SQLite database driver."));
+    }
+
     # Test if we can write to MAIN_DIR (needed for the .htaccess file).
     if (!is_writable(MAIN_DIR))
         alert(__("Please CHMOD or CHOWN the installation directory to make it writable."));
@@ -802,10 +810,10 @@
                 <p id="adapter_field">
                     <label for="adapter"><?php echo __("Adapter"); ?></label>
                     <select name="adapter" id="adapter">
-                        <?php if ((class_exists("PDO") and in_array("mysql", PDO::getAvailableDrivers())) or class_exists("MySQLi")): ?>
+                        <?php if ((class_exists("PDO") and in_array("mysql", $drivers)) or class_exists("MySQLi")): ?>
                         <option value="mysql"<?php selected("mysql", fallback($_POST['adapter'], "mysql")); ?>>MySQL</option>
                         <?php endif; ?>
-                        <?php if (class_exists("PDO") and in_array("sqlite", PDO::getAvailableDrivers())): ?>
+                        <?php if (class_exists("PDO") and in_array("sqlite", $drivers)): ?>
                         <option value="sqlite"<?php selected("sqlite", fallback($_POST['adapter'], "mysql")); ?>>SQLite</option>
                         <?php endif; ?>
                     </select>
