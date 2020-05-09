@@ -2525,6 +2525,20 @@ Parameters:
     $filename - The name to be applied to the content upon download.
 
 
+Function: zip_archive
+---------------------
+Creates a basic flat Zip archive from an array of items.
+
+Parameters:
+    $array - An associate array of file names and contents.
+
+Returns:
+    A Zip archive.
+
+See Also:
+    https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT
+
+
 Function: email
 ---------------
 Send an email using PHP's mail() function or an alternative.
