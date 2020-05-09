@@ -1376,26 +1376,12 @@
                 Flash::warning(__("You did not select anything to export."), "export");
 
             $filename = sanitize(camelize($config->name), false, true)."_Export_".date("Y-m-d");
-            $filepath = tempnam(sys_get_temp_dir(), "zip");
+            $archived = zip_archive($exports);
 
-            if (class_exists("ZipArchive")) {
-                $zip = new ZipArchive;
-                $err = $zip->open($filepath, ZipArchive::CREATE | ZipArchive::OVERWRITE);
-
-                if ($err !== true)
-                    error(__("Error"), _f("Failed to export files because of ZipArchive error %d.", $err));
-
-                foreach ($exports as $name => $contents)
-                    $zip->addFromString($name, $contents);
-
-                $zip->close();
-                $bitstream = file_get_contents($filepath);
-                unlink($filepath);
-                file_attachment($bitstream, $filename.".zip");
-            } else {
-                # ZipArchive not installed: send the first export item.
+            if ($archived === false)
                 file_attachment(reset($exports), key($exports));
-            }
+            else
+                file_attachment($archived, $filename.".zip");
         }
 
         /**
