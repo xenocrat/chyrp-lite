@@ -2201,6 +2201,93 @@
     }
 
     /**
+     * Function: zip_archive
+     * Creates a basic flat Zip archive from an array of items.
+     *
+     * Parameters:
+     *     $array - An associate array of file names and contents.
+     *
+     * Returns:
+     *     A Zip archive.
+     *
+     * See Also:
+     *     https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT
+     */
+    function zip_archive($array) {
+        if (!function_exists("gzcompress"))
+            return false;
+
+        $file = "";
+        $cdir = "";
+        $eocd = "";
+
+        # Generate MS-DOS date/time format.
+        $now  = getdate();
+        $time = 0 | $now["seconds"] >> 1 | $now["minutes"] << 5 | $now["hours"] << 11;
+        $date = 0 | $now["mday"] | $now["mon"] << 5 | ($now["year"] - 1980) << 9;
+
+        foreach ($array as $name => $orig) {
+            # Remove directory separators.
+            $name = str_replace(array("\\", "/"), "", $name);
+
+            $head = "\x50\x4b\x03\x04";         # Local file header signature.
+            $head.= "\x14\x00";                 # Version needed to extract.
+            $head.= "\x00\x00";                 # General purpose bit flag.
+            $head.= "\x08\x00";                 # Compression method.
+            $head.= pack("v", $time);           # Last mod file time.
+            $head.= pack("v", $date);           # Last mod file date.
+
+            $nlen = strlen($name);
+            $olen = strlen($orig);
+            $crc  = crc32($orig);
+            $comp = gzcompress($orig, 6, ZLIB_ENCODING_DEFLATE);
+
+            # Trim ZLIB header and checksum from the deflated data.
+            $comp = substr(substr($comp, 0, strlen($comp) - 4), 2);
+
+            $clen = strlen($comp);
+
+            $head.= pack("V", $crc);            # CRC-32.
+            $head.= pack("V", $clen);           # Compressed size.
+            $head.= pack("V", $olen);           # Uncompressed size.
+            $head.= pack("v", $nlen);           # File name length.
+            $head.= pack("v", 0);               # Extra field length.
+
+            $cdir.= "\x50\x4b\x01\x02";         # Central file header signature.
+            $cdir.= "\x00\x00";                 # Version made by.
+            $cdir.= "\x14\x00";                 # Version needed to extract.
+            $cdir.= "\x00\x00";                 # General purpose bit flag.
+            $cdir.= "\x08\x00";                 # Compression method.
+            $cdir.= pack("v", $time);           # Last mod file time.
+            $cdir.= pack("v", $date);           # Last mod file date.
+            $cdir.= pack("V", $crc);            # CRC-32.
+            $cdir.= pack("V", $clen);           # Compressed size.
+            $cdir.= pack("V", $olen);           # Uncompressed size.
+            $cdir.= pack("v", $nlen);           # File name length.
+            $cdir.= pack("v", 0);               # Extra field length.
+            $cdir.= pack("v", 0);               # File comment length.
+            $cdir.= pack("v", 0);               # Disk number start.
+            $cdir.= pack("v", 0);               # Internal file attributes.
+            $cdir.= pack("V", 32);              # External file attributes.
+            $cdir.= pack("V", strlen($file));   # Relative offset of local header.
+            $cdir.= $name;
+
+            $file.= $head.$name.$comp;
+        }
+
+        $eocd.= "\x50\x4b\x05\x06";
+        $eocd.= "\x00\x00";                     # Number of this disk.
+        $eocd.= "\x00\x00";                     # Disk with start of central directory.
+        $eocd.= pack("v", count($array));       # Entries on this disk.
+        $eocd.= pack("v", count($array));       # Total number of entries.
+        $eocd.= pack("V", strlen($cdir));       # Size of the central directory.
+        $eocd.= pack("V", strlen($file));       # Offset of start of central directory.
+        $eocd.= "\x00\x00";                     # ZIP file comment length.
+
+        return $file.$cdir.$eocd;
+    }
+
+    /**
      * Function: email
      * Send an email using PHP's mail() function or an alternative.
      */
