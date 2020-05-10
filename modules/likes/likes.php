@@ -107,7 +107,7 @@
 
             # JavaScript can't know if this is allowed, so don't throw an error here.
             if (!Visitor::current()->group->can("like_post"))
-                json_response(__("You do not have sufficient privileges to like posts.", "likes"), false);
+                return json_response(__("You do not have sufficient privileges to like posts.", "likes"), false);
 
             $post = new Post($_POST['post_id']);
 
@@ -131,7 +131,7 @@
 
             # JavaScript can't know if this is allowed, so don't throw an error here.
             if (!Visitor::current()->group->can("unlike_post"))
-                json_response(__("You do not have sufficient privileges to unlike posts.", "likes"), false);
+                return json_response(__("You do not have sufficient privileges to unlike posts.", "likes"), false);
 
             $post = new Post($_POST['post_id']);
 
