@@ -2171,7 +2171,7 @@
 
     /**
      * Function: json_response
-     * Sends a structured JSON response and exits immediately.
+     * Send a structured JSON response.
      *
      * Parameters:
      *     $text - A string containing a response message.
