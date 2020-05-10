@@ -2275,7 +2275,7 @@
             $file.= $head.$name.$comp;
         }
 
-        $eocd.= "\x50\x4b\x05\x06";
+        $eocd.= "\x50\x4b\x05\x06";             # End of central directory signature.
         $eocd.= "\x00\x00";                     # Number of this disk.
         $eocd.= "\x00\x00";                     # Disk with start of central directory.
         $eocd.= pack("v", count($array));       # Entries on this disk.
