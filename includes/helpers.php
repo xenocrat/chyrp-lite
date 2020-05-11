@@ -2120,7 +2120,7 @@
      *     http://gravatar.com/site/implement/images/php/
      */
     function get_gravatar($email, $s = 80, $img = false, $d = "mm", $r = "g") {
-        $url = "http://www.gravatar.com/avatar/".md5(strtolower(trim($email)))."?s=$s&d=$d&r=$r";
+        $url = "https://www.gravatar.com/avatar/".md5(strtolower(trim($email)))."?s=$s&d=$d&r=$r";
         return ($img) ? '<img class="gravatar" src="'.fix($url, true, true).'">' : $url ;
     }
 
