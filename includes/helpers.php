@@ -2214,9 +2214,6 @@
      *     https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT
      */
     function zip_archive($array) {
-        if (!function_exists("gzcompress"))
-            return false;
-
         $file = "";
         $cdir = "";
         $eocd = "";
@@ -2240,10 +2237,18 @@
             $nlen = strlen($name);
             $olen = strlen($orig);
             $crc  = crc32($orig);
-            $comp = gzcompress($orig, 6, ZLIB_ENCODING_DEFLATE);
 
-            # Trim ZLIB header and checksum from the deflated data.
-            $comp = substr(substr($comp, 0, strlen($comp) - 4), 2);
+
+            if (function_exists("gzcompress")) {
+                $comp = gzcompress($orig, 6, ZLIB_ENCODING_DEFLATE);
+
+                # Trim ZLIB header and checksum from the deflated data.
+                $comp = substr(substr($comp, 0, strlen($comp) - 4), 2);
+                $method = "\x08\x00";
+            } else {
+                $comp = $orig;
+                $method = "\x00\x00";
+            }
 
             $clen = strlen($comp);
 
@@ -2257,7 +2262,7 @@
             $cdir.= "\x00\x00";                 # Version made by.
             $cdir.= "\x14\x00";                 # Version needed to extract.
             $cdir.= "\x00\x00";                 # General purpose bit flag.
-            $cdir.= "\x08\x00";                 # Compression method.
+            $cdir.= $method;                    # Compression method.
             $cdir.= pack("v", $time);           # Last mod file time.
             $cdir.= pack("v", $date);           # Last mod file date.
             $cdir.= pack("V", $crc);            # CRC-32.
