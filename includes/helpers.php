@@ -2227,18 +2227,6 @@
             # Remove directory separators.
             $name = str_replace(array("\\", "/"), "", $name);
 
-            $head = "\x50\x4b\x03\x04";         # Local file header signature.
-            $head.= "\x14\x00";                 # Version needed to extract.
-            $head.= "\x00\x00";                 # General purpose bit flag.
-            $head.= "\x08\x00";                 # Compression method.
-            $head.= pack("v", $time);           # Last mod file time.
-            $head.= pack("v", $date);           # Last mod file date.
-
-            $nlen = strlen($name);
-            $olen = strlen($orig);
-            $crc  = crc32($orig);
-
-
             if (function_exists("gzcompress")) {
                 $comp = gzcompress($orig, 6, ZLIB_ENCODING_DEFLATE);
 
@@ -2250,7 +2238,17 @@
                 $method = "\x00\x00";
             }
 
+            $head = "\x50\x4b\x03\x04";         # Local file header signature.
+            $head.= "\x14\x00";                 # Version needed to extract.
+            $head.= "\x00\x00";                 # General purpose bit flag.
+            $head.= $method;                    # Compression method.
+            $head.= pack("v", $time);           # Last mod file time.
+            $head.= pack("v", $date);           # Last mod file date.
+
+            $nlen = strlen($name);
+            $olen = strlen($orig);
             $clen = strlen($comp);
+            $crc  = crc32($orig);
 
             $head.= pack("V", $crc);            # CRC-32.
             $head.= pack("V", $clen);           # Compressed size.
