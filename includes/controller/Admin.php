@@ -1377,11 +1377,7 @@
 
             $filename = sanitize(camelize($config->name), false, true)."_Export_".date("Y-m-d");
             $archived = zip_archive($exports);
-
-            if ($archived === false)
-                file_attachment(reset($exports), key($exports));
-            else
-                file_attachment($archived, $filename.".zip");
+            file_attachment($archived, $filename.".zip");
         }
 
         /**
