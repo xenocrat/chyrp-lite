@@ -365,7 +365,7 @@ Called from:
 send_correspondence
 -------------------
 Called from:
-	includes/helpers.php on line 2371
+	includes/helpers.php on line 2369
 
 Arguments:
 	$action, $params
@@ -374,7 +374,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 2399
+	includes/helpers.php on line 2397
 
 Arguments:
 	$ob
@@ -1059,7 +1059,7 @@ Target:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 2301
+	includes/helpers.php on line 2299
 
 Target:
 	$function
@@ -1068,7 +1068,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 2400
+	includes/helpers.php on line 2398
 
 Target:
 	$nonce

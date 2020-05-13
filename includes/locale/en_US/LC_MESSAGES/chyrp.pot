@@ -1238,45 +1238,45 @@ msgstr ""
 msgid "JSON decoding error: %s"
 msgstr ""
 
-#: includes/helpers.php:2330
+#: includes/helpers.php:2328
 #, php-format
 msgid "Activate your account at %s"
 msgstr ""
 
-#: includes/helpers.php:2331
-#: includes/helpers.php:2345
-#: includes/helpers.php:2359
+#: includes/helpers.php:2329
+#: includes/helpers.php:2343
+#: includes/helpers.php:2357
 #, php-format
 msgid "Hello, %s."
 msgstr ""
 
-#: includes/helpers.php:2334
+#: includes/helpers.php:2332
 msgid "You are receiving this message because you registered a new account."
 msgstr ""
 
-#: includes/helpers.php:2337
+#: includes/helpers.php:2335
 msgid "Visit this link to activate your account:"
 msgstr ""
 
-#: includes/helpers.php:2344
+#: includes/helpers.php:2342
 #, php-format
 msgid "Reset your password at %s"
 msgstr ""
 
-#: includes/helpers.php:2348
+#: includes/helpers.php:2346
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 
-#: includes/helpers.php:2351
+#: includes/helpers.php:2349
 msgid "Visit this link to reset your password:"
 msgstr ""
 
-#: includes/helpers.php:2358
+#: includes/helpers.php:2356
 #, php-format
 msgid "Your new password for %s"
 msgstr ""
 
-#: includes/helpers.php:2362
+#: includes/helpers.php:2360
 #, php-format
 msgid "Your new password is: %s"
 msgstr ""
