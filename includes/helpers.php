@@ -2205,7 +2205,7 @@
      * Creates a basic flat Zip archive from an array of items.
      *
      * Parameters:
-     *     $array - An associate array of file names and contents.
+     *     $array - An associative array of names and contents.
      *
      * Returns:
      *     A Zip archive.
