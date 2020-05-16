@@ -31,12 +31,40 @@
         if (!is_bool($secure))
             $secure = ($parsed["scheme"] == "https");
 
-        session_set_cookie_params(2592000, "/; SameSite=Lax", $parsed["host"], $secure, true);
-        session_name("ChyrpSession");
-        session_start();
+        $options = array("lifetime" => 2592000,
+                         "expires"  => time() + 2592000,
+                         "path"     => "/",
+                         "domain"   => $parsed["host"],
+                         "secure"   => $secure,
+                         "httponly" => true,
+                         "samesite" => "Lax");
 
-        if (isset($_COOKIE['ChyrpSession']))
-            setcookie(session_name(), session_id(), time() + 2592000, "/; SameSite=Lax", $parsed["host"], $secure, true);
+        if (version_compare(PHP_VERSION, "7.3", "<")) {
+            session_set_cookie_params($options["lifetime"],
+                                      $options["path"]."; SameSite=Lax",
+                                      $options["domain"],
+                                      $options["secure"],
+                                      $options["httponly"]);
+
+            session_name("ChyrpSession");
+            session_start();
+
+            if (isset($_COOKIE['ChyrpSession']))
+                setcookie(session_name(),
+                          session_id(),
+                          $options["expires"],
+                          $options["path"]."; SameSite=Lax",
+                          $options["domain"],
+                          $options["secure"],
+                          $options["httponly"]);
+        } else {
+            session_set_cookie_params($options);
+            session_name("ChyrpSession");
+            session_start();
+
+            if (isset($_COOKIE['ChyrpSession']))
+                setcookie(session_name(), session_id(), $options);
+        }
     }
 
     /**
