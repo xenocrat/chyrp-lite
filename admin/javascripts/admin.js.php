@@ -150,7 +150,7 @@ function auto_submit() {
 }
 // Prevent forms being submitted multiple times in a short interval.
 function solo_submit() {
-    $("form").on("submit", function(e) {
+    $("form").on("submit.solo", function(e) {
         var last = $(this).attr("data-submitted") || 0 ;
         var when = Date.now();
 
@@ -358,7 +358,7 @@ var Extend = {
             $('#confirm_' + name).prop("checked", confirm(text.replace(/<[^>]+>/g, "")));
 
         // Disable this handler and resubmit the form with the checkbox set accordingly.
-        $(e.target).off("submit.confirm").submit();
+        $(e.target).off("submit.confirm submit.solo").submit();
     }
 }
 <?php $trigger->call("admin_javascript"); ?>
