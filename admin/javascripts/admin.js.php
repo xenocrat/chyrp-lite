@@ -347,18 +347,19 @@ var Extend = {
         $(".module_disabler, .feather_disabler").on("submit.confirm", Extend.confirm);
     },
     confirm: function(e) {
-        e.preventDefault();
-
         var id = $(e.target).parents("li.module, li.feather").attr("id");
         var name = (!!id) ? id.replace(/^(module|feather)_/, "") : "" ;
         var text = $('label[for="confirm_' + name + '"]').html();
 
-        // Display the modal if the text was found, and set the checkbox to the response.
-        if (!!text)
+        if (!!text) {
+            e.preventDefault();
+
+            // Display the modal if text was found, and set the checkbox to the response.
             $('#confirm_' + name).prop("checked", confirm(text.replace(/<[^>]+>/g, "")));
 
-        // Disable this handler and resubmit the form with the checkbox set accordingly.
-        $(e.target).off("submit.confirm submit.solo").submit();
+            // Disable handlers and resubmit the form with the checkbox set accordingly.
+            $(e.target).off("submit.confirm submit.solo").submit();
+        }
     }
 }
 <?php $trigger->call("admin_javascript"); ?>
