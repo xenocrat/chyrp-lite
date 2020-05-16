@@ -31,12 +31,12 @@
         if (!is_bool($secure))
             $secure = ($parsed["scheme"] == "https");
 
-        session_set_cookie_params(2592000, "/", $parsed["host"], $secure, true);
+        session_set_cookie_params(2592000, "/; SameSite=Lax", $parsed["host"], $secure, true);
         session_name("ChyrpSession");
         session_start();
 
         if (isset($_COOKIE['ChyrpSession']))
-            setcookie(session_name(), session_id(), time() + 2592000, "/", $parsed["host"], $secure, true);
+            setcookie(session_name(), session_id(), time() + 2592000, "/; SameSite=Lax", $parsed["host"], $secure, true);
     }
 
     /**
