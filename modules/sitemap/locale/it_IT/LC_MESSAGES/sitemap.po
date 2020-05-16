@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.3.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Copyright 2020 Daniel Pimley and other contributors.
@@ -58,14 +58,6 @@ msgid ""
 msgstr ""
 "Crea un file <em>sitemap.xml</em> sul tuo server per aiutare i motori di "
 "ricerca a indicizzare il tuo blog."
-
-#: modules/sitemap/info.php:11
-msgid ""
-"Please remember to give write permissions to sitemap.xml on the root "
-"directory of the site."
-msgstr ""
-"Ricordarsi di concedere le autorizzazioni di scrittura per sitemap.xml nella "
-"directory radice del sito."
 
 #: modules/sitemap/sitemap.php:29
 msgid "Sitemap"
