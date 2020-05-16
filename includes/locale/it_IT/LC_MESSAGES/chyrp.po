@@ -82,14 +82,14 @@ msgstr "Il percorso è stato avviato con un Controller non valido."
 #: includes/controller/Admin.php:1902 includes/controller/Admin.php:1905
 #: includes/controller/Admin.php:2100 includes/controller/Ajax.php:32
 #: includes/download.php:12 includes/download.php:15 includes/error.php:144
-#: includes/helpers.php:1762 includes/helpers.php:1768
-#: includes/helpers.php:1771 includes/helpers.php:1774
-#: includes/helpers.php:1800 includes/helpers.php:1803
-#: includes/helpers.php:1806 includes/helpers.php:1904
-#: includes/helpers.php:1907 includes/helpers.php:1910
-#: includes/helpers.php:1913 includes/helpers.php:1916
-#: includes/helpers.php:1919 includes/helpers.php:1922
-#: includes/helpers.php:1927 includes/thumbnail.php:15
+#: includes/helpers.php:1790 includes/helpers.php:1796
+#: includes/helpers.php:1799 includes/helpers.php:1802
+#: includes/helpers.php:1828 includes/helpers.php:1831
+#: includes/helpers.php:1834 includes/helpers.php:1932
+#: includes/helpers.php:1935 includes/helpers.php:1938
+#: includes/helpers.php:1941 includes/helpers.php:1944
+#: includes/helpers.php:1947 includes/helpers.php:1950
+#: includes/helpers.php:1955 includes/thumbnail.php:15
 #: includes/thumbnail.php:18 includes/thumbnail.php:47
 #: includes/thumbnail.php:202 install.php:792 upgrade.php:173 upgrade.php:186
 #: upgrade.php:199 upgrade.php:212 upgrade.php:225 upgrade.php:239
@@ -142,7 +142,7 @@ msgstr "Azione non valida."
 #: includes/controller/Ajax.php:90 includes/controller/Ajax.php:125
 #: includes/controller/Ajax.php:128 includes/controller/Main.php:299
 #: includes/controller/Main.php:357 includes/download.php:18
-#: includes/helpers.php:1765 includes/thumbnail.php:21
+#: includes/helpers.php:1793 includes/thumbnail.php:21
 msgid "Access Denied"
 msgstr "Accesso negato"
 
@@ -204,7 +204,7 @@ msgstr "Per poter scrivere un post, devi abilitare almeno una Feather."
 #: includes/controller/Admin.php:1081 includes/controller/Admin.php:1760
 #: includes/controller/Admin.php:1806 includes/controller/Ajax.php:49
 #: includes/controller/Ajax.php:75 includes/download.php:24
-#: includes/helpers.php:102 includes/thumbnail.php:44
+#: includes/helpers.php:130 includes/thumbnail.php:44
 msgid "Not Found"
 msgstr "Non trovato"
 
@@ -934,81 +934,81 @@ msgstr "%s riga %d"
 msgid "Session cannot be started more than once"
 msgstr "Impossibile iniziare la sessione più di una volta"
 
-#: includes/helpers.php:78
+#: includes/helpers.php:106
 msgid "Forbidden"
 msgstr "Negato"
 
-#: includes/helpers.php:79
+#: includes/helpers.php:107
 msgid "You do not have permission to access this resource."
 msgstr "Non si dispone dell'autorizzazione per accedere a questa risorsa."
 
-#: includes/helpers.php:103
+#: includes/helpers.php:131
 msgid "The requested resource was not found."
 msgstr "La risorsa richiesta non è stata trovata."
 
-#: includes/helpers.php:1396 includes/helpers.php:1523
+#: includes/helpers.php:1424 includes/helpers.php:1551
 #, php-format
 msgid "Socket error: %s"
 msgstr "Errore socket: %s"
 
-#: includes/helpers.php:1601
+#: includes/helpers.php:1629
 msgid "Please create the uploads directory."
 msgstr "Si prega di creare la directory per il caricamento dati."
 
-#: includes/helpers.php:1603
+#: includes/helpers.php:1631
 msgid "Please make the uploads directory writable."
 msgstr "Si prega di rendere la directory per il caricamento dati scrivibile."
 
-#: includes/helpers.php:1621
+#: includes/helpers.php:1649
 #, php-format
 msgid "%s module is missing."
 msgstr "Modulo %s mancante."
 
-#: includes/helpers.php:1630
+#: includes/helpers.php:1658
 #, php-format
 msgid "%s module is damaged."
 msgstr "Il modulo %s è danneggiato."
 
-#: includes/helpers.php:1644
+#: includes/helpers.php:1672
 #, php-format
 msgid "%s feather is missing."
 msgstr "%s Feather mancante."
 
-#: includes/helpers.php:1653
+#: includes/helpers.php:1681
 #, php-format
 msgid "%s feather is damaged."
 msgstr "Feather %s è danneggiata."
 
-#: includes/helpers.php:1713 includes/helpers.php:1734
+#: includes/helpers.php:1741 includes/helpers.php:1762
 #, php-format
 msgid "Execution of %s has been cancelled."
 msgstr "L'esecuzione di %s è stata annullata."
 
-#: includes/helpers.php:1762
+#: includes/helpers.php:1790
 msgid "Uploaded file is of an unsupported type."
 msgstr "Il file caricato è di tipo non supportato."
 
-#: includes/helpers.php:1765
+#: includes/helpers.php:1793
 msgid "Only uploaded files are accepted."
 msgstr "Vengono accettati solo file giá caricati."
 
-#: includes/helpers.php:1768 includes/helpers.php:1800
+#: includes/helpers.php:1796 includes/helpers.php:1828
 #: includes/lib/XMLRPC.php:187
 msgid "Upload path does not exist."
 msgstr "Il percorso di caricamento non esiste."
 
-#: includes/helpers.php:1771 includes/helpers.php:1803
+#: includes/helpers.php:1799 includes/helpers.php:1831
 #: includes/lib/XMLRPC.php:190
 msgid "Upload path is not writable."
 msgstr "Il percorso di caricamento non è scrivibile."
 
-#: includes/helpers.php:1774 includes/helpers.php:1806
-#: includes/helpers.php:1917 includes/lib/XMLRPC.php:193 upgrade.php:125
+#: includes/helpers.php:1802 includes/helpers.php:1834
+#: includes/helpers.php:1945 includes/lib/XMLRPC.php:193 upgrade.php:125
 #: upgrade.php:142 upgrade.php:159
 msgid "Failed to write file to disk."
 msgstr "Impossibile scrivere il file su disco."
 
-#: includes/helpers.php:1905
+#: includes/helpers.php:1933
 msgid ""
 "The uploaded file exceeds the <code>upload_max_filesize</code> directive in "
 "php.ini."
@@ -1016,7 +1016,7 @@ msgstr ""
 "Il file caricato supera la <code>upload_max_filesize</code> direttiva in php."
 "ini."
 
-#: includes/helpers.php:1908
+#: includes/helpers.php:1936
 msgid ""
 "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the "
 "HTML form."
@@ -1024,24 +1024,24 @@ msgstr ""
 "Il file caricato supera la direttiva <code>MAX_FILE_SIZE</code> nel modulo "
 "HTML."
 
-#: includes/helpers.php:1911
+#: includes/helpers.php:1939
 msgid "The uploaded file was only partially uploaded."
 msgstr "File caricato parzialmente."
 
-#: includes/helpers.php:1914
+#: includes/helpers.php:1942
 msgid "Missing a temporary folder."
 msgstr "Manca una cartella temporanea."
 
-#: includes/helpers.php:1920
+#: includes/helpers.php:1948
 msgid "File upload was stopped by a PHP extension."
 msgstr "Il caricamento dei file è stato interrotto da un'estensione PHP."
 
-#: includes/helpers.php:1923
+#: includes/helpers.php:1951
 #, php-format
 msgid "File upload failed with error %d."
 msgstr "Caricamento file non riuscito con errore %d."
 
-#: includes/helpers.php:1928
+#: includes/helpers.php:1956
 #, php-format
 msgid ""
 "The uploaded file exceeds the maximum size of %d Megabytes allowed by this "
@@ -1050,55 +1050,55 @@ msgstr ""
 "Il file caricato supera la dimensione massima di %d megabyte consentiti da "
 "questo sito."
 
-#: includes/helpers.php:2146
+#: includes/helpers.php:2174
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr "Errore di codifica JSON: %s"
 
-#: includes/helpers.php:2167
+#: includes/helpers.php:2195
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr "Errore di decodifica JSON: %s"
 
-#: includes/helpers.php:2328
+#: includes/helpers.php:2356
 #, php-format
 msgid "Activate your account at %s"
 msgstr "Attiva il tuo account %s"
 
-#: includes/helpers.php:2329 includes/helpers.php:2343
-#: includes/helpers.php:2357
+#: includes/helpers.php:2357 includes/helpers.php:2371
+#: includes/helpers.php:2385
 #, php-format
 msgid "Hello, %s."
 msgstr "Ciao, %s."
 
-#: includes/helpers.php:2332
+#: includes/helpers.php:2360
 msgid "You are receiving this message because you registered a new account."
 msgstr "Si riceve questo messaggio perché è stato registrato un nuovo account."
 
-#: includes/helpers.php:2335
+#: includes/helpers.php:2363
 msgid "Visit this link to activate your account:"
 msgstr "Visita questo link per attivare il tuo account:"
 
-#: includes/helpers.php:2342
+#: includes/helpers.php:2370
 #, php-format
 msgid "Reset your password at %s"
 msgstr "Reimpostare la password per %s"
 
-#: includes/helpers.php:2346
+#: includes/helpers.php:2374
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 "Si riceve questo messaggio perché è stata richiesta una nuova password."
 
-#: includes/helpers.php:2349
+#: includes/helpers.php:2377
 msgid "Visit this link to reset your password:"
 msgstr "Visita questo link per reimpostare la password:"
 
-#: includes/helpers.php:2356
+#: includes/helpers.php:2384
 #, php-format
 msgid "Your new password for %s"
 msgstr "La tua nuova password per %s"
 
-#: includes/helpers.php:2360
+#: includes/helpers.php:2388
 #, php-format
 msgid "Your new password is: %s"
 msgstr "La tua nuova password è: %s"
