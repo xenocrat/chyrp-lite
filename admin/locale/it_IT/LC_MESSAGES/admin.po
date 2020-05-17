@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.3.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Copyright 2020 Daniel Pimley and other contributors.
@@ -251,27 +251,27 @@ msgstr ""
 msgid "Your blog's XML-RPC URL is <code>%s/includes/rpc.php</code>."
 msgstr "L'URL XML-RPC del tuo blog è <code>%s/includes/RPC.php</code>."
 
-#: admin/javascripts/admin.js.php:47
+#: admin/javascripts/admin.js.php:46
 msgid "Toggle All"
 msgstr "Spunta tutto"
 
-#: admin/javascripts/admin.js.php:139
+#: admin/javascripts/admin.js.php:138
 msgid "Are you sure you want to proceed?"
 msgstr "Sei sicuro di volere procedere?"
 
-#: admin/javascripts/admin.js.php:196 admin/javascripts/admin.js.php:299
+#: admin/javascripts/admin.js.php:189 admin/javascripts/admin.js.php:292
 msgid "Close"
 msgstr "Chiudi"
 
-#: admin/javascripts/admin.js.php:203 admin/javascripts/admin.js.php:306
+#: admin/javascripts/admin.js.php:196 admin/javascripts/admin.js.php:299
 msgid "close"
 msgstr "chiudi"
 
-#: admin/javascripts/admin.js.php:223 admin/pages/themes.twig:28
+#: admin/javascripts/admin.js.php:216 admin/pages/themes.twig:28
 msgid "Preview"
 msgstr "Anteprima"
 
-#: admin/javascripts/admin.js.php:239
+#: admin/javascripts/admin.js.php:232
 msgid "preview"
 msgstr "anteprima"
 
