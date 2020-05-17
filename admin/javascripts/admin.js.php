@@ -13,7 +13,6 @@ $(function() {
     validate_url();
     validate_passwords();
     confirm_submit();
-    auto_submit();
     solo_submit();
     Help.init();
     Write.init();
@@ -122,7 +121,7 @@ function validate_passwords() {
             passwords.last().removeClass("error");
     });
 
-    passwords.parents("form").on("submit", function(e) {
+    passwords.parents("form").on("submit.passwords", function(e) {
         var password1 = passwords.first().val();
         var password2 = passwords.last().val();
 
@@ -134,18 +133,12 @@ function validate_passwords() {
 }
 // Asks the user to confirm form submission.
 function confirm_submit() {
-    $("form[data-confirm]").on("submit", function(e) {
+    $("form[data-confirm]").on("submit.confirm", function(e) {
         var text = $(this).attr("data-confirm") ||
                    '<?php echo __("Are you sure you want to proceed?", "admin"); ?>' ;
 
         if (!confirm(text.replace(/<[^>]+>/g, "")))
             e.preventDefault();
-    });
-}
-// Submit a form when an element changes.
-function auto_submit() {
-    $("select[data-submit], input[data-submit][type='checkbox']").on("change", function(e) {
-        $(this).parents("form").submit();
     });
 }
 // Prevent forms being submitted multiple times in a short interval.
@@ -344,7 +337,7 @@ var Extend = {
     init: function() {
         // Hide the confirmation checkbox and use a modal instead.
         $(".module_disabler_confirm, .feather_disabler_confirm").hide();
-        $(".module_disabler, .feather_disabler").on("submit.confirm", Extend.confirm);
+        $(".module_disabler, .feather_disabler").on("submit.disabler", Extend.confirm);
     },
     confirm: function(e) {
         var id = $(e.target).parents("li.module, li.feather").attr("id");
@@ -358,7 +351,7 @@ var Extend = {
             $('#confirm_' + name).prop("checked", confirm(text.replace(/<[^>]+>/g, "")));
 
             // Disable handlers and resubmit the form with the checkbox set accordingly.
-            $(e.target).off("submit.confirm submit.solo").submit();
+            $(e.target).off("submit.disabler submit.solo").submit();
         }
     }
 }
