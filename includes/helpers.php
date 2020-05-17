@@ -58,12 +58,18 @@
                           $options["secure"],
                           $options["httponly"]);
         } else {
-            session_set_cookie_params($options);
+            $options_params = $options;
+            $options_cookie = $options;
+
+            unset($options_params["expires"]);
+            unset($options_cookie["lifetime"]);
+
+            session_set_cookie_params($options_params);
             session_name("ChyrpSession");
             session_start();
 
             if (isset($_COOKIE['ChyrpSession']))
-                setcookie(session_name(), session_id(), $options);
+                setcookie(session_name(), session_id(), $options_cookie);
         }
     }
 
