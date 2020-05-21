@@ -112,7 +112,7 @@
 
                 case "mysqli":
                     $result = $this->query->fetch_array();
-                    return $result[$column];
+                    return is_array($result) ? $result[$column] : $result ;
             }
         }
 
