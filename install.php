@@ -98,12 +98,19 @@
     if (file_exists(INCLUDES_DIR.DIR."config.json.php"))
         redirect($config->url);
 
-    # Get a PDO driver list and test if we have the required drivers.
+    # Test for basic database access requirements.
+    if (!class_exists("MySQLi") and !class_exists("PDO"))
+        alert(__("MySQLi or PDO is required for database access."));
+
+    # Get a PDO driver list.
     if (class_exists("PDO")) {
         $drivers = PDO::getAvailableDrivers();
 
-        if (!in_array("mysql", $drivers) and !in_array("sqlite", $drivers))
-            alert(__("PDO requires a MySQL or SQLite database driver."));
+        # Test if we have a PDO driver available in the asbence of MySQLi.
+        if (!in_array("mysql", $drivers) and !in_array("sqlite", $drivers)) {
+            if (!class_exists("MySQLi"))
+                alert(__("PDO requires a MySQL or SQLite database driver."));
+        }
     }
 
     # Test if we can write to MAIN_DIR (needed for the .htaccess file).
@@ -563,9 +570,6 @@
             alert(__("Email address cannot be blank."));
         elseif (!is_email($_POST['email']))
             alert(__("Invalid email address."));
-
-        if (!class_exists("MySQLi") and !class_exists("PDO"))
-            alert(__("MySQLi or PDO is required for database access."));
 
         if (!alert() and $_POST['adapter'] == "sqlite") {
             $realpath = realpath(dirname($_POST['database']));
