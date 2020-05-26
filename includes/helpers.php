@@ -1445,7 +1445,11 @@
         while (!feof($connect) and strpos($remote_headers, "\r\n\r\n") === false)
             $remote_headers.= fgets($connect);
 
-        # Search for 301 or 302 header and recurse with new location unless redirects are exhausted.
+        # Search for 4XX or 5XX error codes.
+        if (preg_match("~^HTTP/[0-9]\.[0-9] [4-5][0-9][0-9]~m", $remote_headers))
+            return false;
+
+        # Search for 301/302 and recurse with new location unless redirects are exhausted.
         if ($redirects > 0 and preg_match("~^HTTP/[0-9]\.[0-9] 30[1-2]~m", $remote_headers)
                            and preg_match("~^Location: (.+)$~mi", $remote_headers, $matches)) {
 
@@ -2258,6 +2262,9 @@
         $date = 0 | $now["mday"] | $now["mon"] << 5 | ($now["year"] - 1980) << 9;
 
         foreach ($array as $name => $orig) {
+            if (strlen($orig) > 0xffffffff)
+                trigger_error(__("Zip archive entries cannot exceed 4294967295 bytes."), E_USER_WARNING);
+
             # Remove directory separators.
             $name = str_replace(array("\\", "/"), "", $name);
 
