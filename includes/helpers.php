@@ -1406,7 +1406,7 @@
      *     $headers - Include response headers with the content?
      *
      * Returns:
-     *     The response content from the remote site.
+     *     The response content, or false on failure.
      */
     function get_remote($url, $redirects = 0, $timeout = 10, $headers = false) {
         extract(parse_url(add_scheme($url)), EXTR_SKIP);
@@ -1544,7 +1544,7 @@
      *     $url - The URL to check.
      *
      * Returns:
-     *     The pingback target, or false if the URL is not pingback-capable.
+     *     The pingback target, or false on failure.
      */
     function pingback_url($url) {
         extract(parse_url(add_scheme($url)), EXTR_SKIP);
@@ -1984,7 +1984,7 @@
      *     $filter - An array of valid extensions (case insensitive).
      *
      * Returns:
-     *     A sanitized unique version of the supplied filename.
+     *     A sanitized unique filename, or false on failure.
      */
     function upload_filename($filename, $filter = array()) {
         if (!empty($filter))
