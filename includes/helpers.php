@@ -1446,19 +1446,26 @@
             $remote_headers.= fgets($connect);
 
         # Search for 4XX or 5XX error codes.
-        if (preg_match("~^HTTP/[0-9]\.[0-9] [4-5][0-9][0-9]~m", $remote_headers))
+        if (preg_match("~^HTTP/[0-9]\.[0-9] [4-5][0-9][0-9]~m", $remote_headers)) {
+            fclose($connect);
             return false;
+        }
 
         # Search for 301/302 and recurse with new location unless redirects are exhausted.
-        if ($redirects > 0 and preg_match("~^HTTP/[0-9]\.[0-9] 30[1-2]~m", $remote_headers)
-                           and preg_match("~^Location: (.+)$~mi", $remote_headers, $matches)) {
+        if (preg_match("~^HTTP/[0-9]\.[0-9] 30[1-2]~m", $remote_headers)) {
+            if ($redirects > 0) {
+                if (preg_match("~^Location: (.+)$~mi", $remote_headers, $matches)) {
+                    $location = trim($matches[1]);
 
-            $location = trim($matches[1]);
-
-            if (is_url($location)) {
-                fclose($connect);
-                return get_remote($location, $redirects - 1, $timeout, $headers);
+                    if (is_url($location)) {
+                        fclose($connect);
+                        return get_remote($location, $redirects - 1, $timeout, $headers);
+                    }
+                }
             }
+
+            fclose($connect);
+            return false;
         }
 
         # Receive the response content.
