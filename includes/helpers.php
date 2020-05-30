@@ -2274,16 +2274,21 @@
 
             # Remove directory separators.
             $name = str_replace(array("\\", "/"), "", $name);
+            $comp = $orig;
+            $method = "\x00\x00";
 
             if (function_exists("gzcompress")) {
-                $comp = gzcompress($orig, 6, ZLIB_ENCODING_DEFLATE);
+                $zlib = gzcompress($orig, 6, ZLIB_ENCODING_DEFLATE);
 
-                # Trim ZLIB header and checksum from the deflated data.
-                $comp = substr(substr($comp, 0, strlen($comp) - 4), 2);
-                $method = "\x08\x00";
-            } else {
-                $comp = $orig;
-                $method = "\x00\x00";
+                if ($zlib !== false) {
+                    # Trim ZLIB header and checksum from the deflated data.
+                    $zlib = substr(substr($zlib, 0, strlen($zlib) - 4), 2);
+
+                    if (strlen($zlib) < strlen($orig)) {
+                        $comp = $zlib;
+                        $method = "\x08\x00";
+                    }
+                }
             }
 
             $head = "\x50\x4b\x03\x04";         # Local file header signature.
