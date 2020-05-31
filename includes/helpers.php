@@ -2269,13 +2269,13 @@
         $date = 0 | $now["mday"] | $now["mon"] << 5 | ($now["year"] - 1980) << 9;
 
         foreach ($array as $name => $orig) {
-            if (strlen($orig) > 0xffffffff)
-                trigger_error(__("Zip archive entries cannot exceed 4294967295 bytes."), E_USER_WARNING);
-
             # Remove directory separators.
             $name = str_replace(array("\\", "/"), "", $name);
             $comp = $orig;
             $method = "\x00\x00";
+
+            if (strlen($name) > 0xffff or strlen($orig) > 0xffffffff)
+                trigger_error(__("Failed to create Zip archive."), E_USER_WARNING);
 
             if (function_exists("gzcompress")) {
                 $zlib = gzcompress($orig, 6, ZLIB_ENCODING_DEFLATE);
