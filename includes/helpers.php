@@ -591,12 +591,14 @@
         $args = func_get_args();
 
         foreach ($args as $index => $arg) {
-            if (!isset($arg) or
-                (is_string($arg) and trim($arg) === "") or $arg === array() or
-                (is_object($arg) and empty($arg)) or ($arg === "0000-00-00 00:00:00"))
-                $last = $arg;
-            else
+            $unset = (!isset($arg) or
+                     (is_string($arg) and trim($arg) === "") or $arg === array() or
+                     (is_object($arg) and empty($arg)) or ($arg === "0000-00-00 00:00:00"));
+
+            if (!$unset)
                 return $arg;
+
+            $last = $arg;
 
             if ($index + 1 == count($args))
                 break;
