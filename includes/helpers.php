@@ -557,26 +557,23 @@
         if (is_bool($variable))
             return $variable;
 
-        $set = (!isset($variable) or (is_string($variable) and trim($variable) === "") or $variable === array());
+        $unset = (!isset($variable) or (is_string($variable) and trim($variable) === "") or $variable === array());
 
+        if (!$unset)
+            return $variable;
+
+        $fallback = null;
         $args = func_get_args();
         array_shift($args);
 
-        if (count($args) > 1) {
-            foreach ($args as $arg) {
-                $fallback = $arg;
+        foreach ($args as $arg) {
+            $fallback = $arg;
 
-                if (isset($arg) and (!is_string($arg) or (is_string($arg) and trim($arg) !== "")) and $arg !== array())
-                    break;
-            }
-        } else {
-            $fallback = isset($args[0]) ? $args[0] : null ;
+            if (isset($arg) and (!is_string($arg) or (is_string($arg) and trim($arg) !== "")) and $arg !== array())
+                break;
         }
 
-        if ($set)
-            $variable = $fallback;
-
-        return $set ? $fallback : $variable ;
+        return $variable = $fallback;
     }
 
     /**
