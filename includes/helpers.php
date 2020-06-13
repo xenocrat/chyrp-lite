@@ -967,9 +967,13 @@
             "/(quiz)$/i"                   => "\\1zes"
         );
 
-        $replaced = preg_replace(array_keys($replacements), array_values($replacements), $string, 1);
+        $replaced = preg_replace(array_keys($replacements),
+                                 array_values($replacements), $string, 1);
 
-        return ($replaced == $string) ? $string."s" : $replaced ;
+        if ($replaced == $string)
+            $replaced = $string."s";
+
+        return $replaced;
     }
 
     /**
@@ -1014,9 +1018,13 @@
             "/(quiz)zes$/i"           => "\\1"
         );
 
-        $replaced = preg_replace(array_keys($replacements), array_values($replacements), $string, 1);
+        $replaced = preg_replace(array_keys($replacements),
+                                 array_values($replacements), $string, 1);
 
-        return ($replaced == $string and substr($string, -1) == "s") ? substr($string, 0, -1) : $replaced ;
+        if ($replaced == $string and substr($string, -1) == "s")
+            $replaced = substr($string, 0, -1);
+
+        return $replaced;
     }
 
     /**
@@ -1728,7 +1736,8 @@
      *     Whether or not the supplied module is enabled.
      */
     function module_enabled($name) {
-        return (!empty(Modules::$instances[$name]) and empty(Modules::$instances[$name]->cancelled));
+        return (!empty(Modules::$instances[$name]) and
+                 empty(Modules::$instances[$name]->cancelled));
     }
 
     /**
@@ -1742,7 +1751,8 @@
      *     Whether or not the supplied feather is enabled.
      */
     function feather_enabled($name) {
-        return (!empty(Feathers::$instances[$name]) and empty(Feathers::$instances[$name]->cancelled));
+        return (!empty(Feathers::$instances[$name]) and
+                 empty(Feathers::$instances[$name]->cancelled));
     }
 
     /**
@@ -2072,9 +2082,11 @@
      *     <add_scheme>
      */
     function is_url($string) {
-        return (preg_match('~^(https?://)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)(:[0-9]{1,5})?($|/)~i', $string) or
-                preg_match('~^(https?://)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(:[0-9]{1,5})?($|/)~', $string) or
-                preg_match('~^(https?://)?(\[[a-f0-9\:]{3,39}\])(:[0-9]{1,5})?($|/)~i', $string));
+        return (
+            preg_match('~^(https?://)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)(:[0-9]{1,5})?($|/)~i', $string) or
+            preg_match('~^(https?://)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(:[0-9]{1,5})?($|/)~', $string) or
+            preg_match('~^(https?://)?(\[[a-f0-9\:]{3,39}\])(:[0-9]{1,5})?($|/)~i', $string)
+        );
     }
 
     /**
@@ -2111,9 +2123,11 @@
      *     Whether or not the string matches the criteria.
      */
     function is_email($string) {
-        return (preg_match('~^[^ <>@]+@([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)$~i', $string) or
-                preg_match('~^[^ <>@]+@([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$~', $string) or
-                preg_match('~^[^ <>@]+@(\[[a-f0-9\:]{3,39}\])$~i', $string));
+        return (
+            preg_match('~^[^ <>@]+@([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)$~i', $string) or
+            preg_match('~^[^ <>@]+@([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$~', $string) or
+            preg_match('~^[^ <>@]+@(\[[a-f0-9\:]{3,39}\])$~i', $string)
+        );
     }
 
     /**
