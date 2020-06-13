@@ -570,9 +570,11 @@
         foreach ($args as $arg) {
             $fallback = $arg;
 
-            if (isset($arg) and $arg !== array() and
-                (!is_string($arg) or (is_string($arg) and trim($arg) !== "")))
-                    break;
+            $nonempty = (isset($arg) and $arg !== array() and
+                        (!is_string($arg) or (is_string($arg) and trim($arg) !== "")));
+
+            if ($nonempty)
+                break;
         }
 
         return $variable = $fallback;
