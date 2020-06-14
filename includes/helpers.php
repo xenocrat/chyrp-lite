@@ -78,7 +78,8 @@
      * Returns whether or not the visitor is logged in.
      */
     function logged_in() {
-        return (class_exists("Visitor") and isset(Visitor::current()->id) and Visitor::current()->id != 0);
+        return (class_exists("Visitor") and 
+                isset(Visitor::current()->id) and Visitor::current()->id != 0);
     }
 
     #---------------------------------------------
@@ -162,7 +163,8 @@
      */
     function self_url() {
         $parsed = parse_url(Config::current()->url);
-        $origin = fallback($parsed["scheme"], "http")."://".fallback($parsed["host"], $_SERVER['SERVER_NAME']);
+        $origin = fallback($parsed["scheme"], "http")."://".
+                  fallback($parsed["host"], $_SERVER['SERVER_NAME']);
 
         if (isset($parsed["port"]))
             $origin.= ":".$parsed["port"];
@@ -510,8 +512,8 @@
 
         foreach ($zone_list as $zone) {
             $timezones[] = array("code" => $zone,
-                                 "name" => str_replace(array("_", "St "), array(" ", "St. "), $zone));
-
+                                 "name" => str_replace(array("_", "St "),
+                                                       array(" ", "St. "), $zone));
         }
 
         return $timezones;
@@ -837,11 +839,12 @@
         $params   = array(); # Parameters for the non-keyword filter.
         $columns  = !empty($table) ? SQL::current()->select($table)->fetch() : array() ;
 
-        foreach (preg_split("/\s(?=\w+:)|;/", $query, -1, PREG_SPLIT_NO_EMPTY) as $fragment)
+        foreach (preg_split("/\s(?=\w+:)|;/", $query, -1, PREG_SPLIT_NO_EMPTY) as $fragment) {
             if (!substr_count($fragment, ":"))
                 $strings[] = trim($fragment);
             else
                 $keywords[] = trim($fragment);
+        }
 
         $dates = array("year", "month", "day", "hour", "minute", "second");
 
