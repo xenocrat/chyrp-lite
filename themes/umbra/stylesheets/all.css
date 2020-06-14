@@ -467,8 +467,8 @@ div#main > article, div.standalone {
     width: 100%;
     max-width: 1024px;
     clear: both;
-    margin: 0em auto 4rem auto;
-    padding: 4rem 4rem 0rem 4rem;
+    margin: 0em auto 0em auto;
+    padding: 4rem;
 }
 div#main > article.discourse,
 div#main > article.commentary {
@@ -484,6 +484,9 @@ div#main > article.discourse > div {
     margin: 0em;
     padding: 2rem 2rem 1rem 2rem;
     border: 1px solid #666667;
+}
+div#main > article + article {
+    margin-top: 2rem;
 }
 ul.archive article.post.archive {
     display: block;
