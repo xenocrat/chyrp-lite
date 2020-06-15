@@ -544,7 +544,7 @@
 
     /**
      * Function: fallback
-     * Sets the supplied variable if it is not already set, using the supplied arguments as candidates.
+     * Sets the supplied variable if it is not already set.
      *
      * Parameters:
      *     &$variable - The variable to return or set.
@@ -553,7 +553,8 @@
      *     The value that was assigned to the variable.
      *
      * Notes:
-     *     The first non-empty candidate will be used, or the last, or null if no candidates are supplied.
+     *     The value will be the first non-empty argument,
+     *     or the last, or null if no arguments are supplied.
      */
     function fallback(&$variable) {
         if (is_bool($variable))
@@ -584,13 +585,14 @@
 
     /**
      * Function: oneof
-     * Crawls the supplied set of arguments in search of a candidate that has a substantial value.
+     * Returns a value from the supplied set of arguments.
      *
      * Returns:
-     *     The first candidate of substance, or the last, or null if no candidates are supplied.
+     *     The first non-empty argument, or the last, or null.
      *
      * Notes:
-     *     It will guess where to stop based on types, e.g. "" has priority over array() but not 1.
+     *     It will guess where to stop based on types,
+     *     e.g. "" has priority over array() but not 1.
      */
     function oneof() {
         $last = null;
