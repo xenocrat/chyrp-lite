@@ -495,6 +495,7 @@
                     }
 
                     $_SESSION['user_id'] = $user->id;
+                    Trigger::current()->call("user_logged_in", $user);
 
                     Flash::notice(__("Your account is now active."), "/");
                 }
@@ -523,6 +524,7 @@
             $user = $user->update(null, null, null, null, null, null, true);
 
             $_SESSION['user_id'] = $user->id;
+            Trigger::current()->call("user_logged_in", $user);
 
             Flash::notice(__("Your account is now active."), "/");
         }
