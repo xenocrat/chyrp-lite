@@ -322,25 +322,38 @@
      *     $locale - The locale name, e.g. @en_US@, @uk_UA@, @fr_FR@
      */
     function set_locale($locale = "en_US") {
-        # Set the ICU locale.
-        if (class_exists("Locale"))
+        $list = array($locale.".UTF-8",
+                      $locale.".utf-8",
+                      $locale.".UTF8",
+                      $locale.".utf8",
+                      $locale);
+
+        if (class_exists("Locale")) {
+            # Generate a locale string for Windows.
+            $list[] = Locale::getDisplayLanguage($locale, "en_US").
+                    "_".Locale::getDisplayRegion($locale, "en_US");
+
+            # Set the ICU locale.
             Locale::setDefault($locale);
+        }
 
         # Set the PHP locale.
         @putenv("LC_ALL=".$locale);
-        setlocale(LC_ALL, array($locale.".UTF-8",
-                                $locale.".utf-8",
-                                $locale.".UTF8",
-                                $locale.".utf8",
-                                $locale));
+        setlocale(LC_ALL, $list);
     }
 
     /**
      * Function: get_locale
-     * Gets the current locale setting minus charset.
+     * Gets the current locale setting.
+     *
+     * Notes:
+     *     Does not use setlocale() because the return value is non-normative.
      */
     function get_locale() {
-        return preg_replace("/\.utf-?8$/i", "", setlocale(LC_ALL, 0));
+        if (INSTALLING)
+            return isset($_REQUEST['locale']) ? $_REQUEST['locale'] : "en_US" ;
+
+        return Config::current()->locale;
     }
 
     /**
