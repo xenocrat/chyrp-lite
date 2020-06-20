@@ -325,13 +325,12 @@
         $list = array($locale.".UTF-8",
                       $locale.".utf-8",
                       $locale.".UTF8",
-                      $locale.".utf8",
-                      $locale);
+                      $locale.".utf8");
 
         if (class_exists("Locale")) {
             # Generate a locale string for Windows.
             $list[] = Locale::getDisplayLanguage($locale, "en_US").
-                    "_".Locale::getDisplayRegion($locale, "en_US");
+                    "_".Locale::getDisplayRegion($locale, "en_US").".utf8";
 
             # Set the ICU locale.
             Locale::setDefault($locale);
