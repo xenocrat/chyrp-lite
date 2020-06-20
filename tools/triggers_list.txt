@@ -311,25 +311,27 @@ Called from:
 	includes/controller/Main.php on line 356
 
 
-user_authenticate
------------------
-Called from:
-	includes/controller/Main.php on line 576
-
-
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 588
+	includes/controller/Main.php on line 498
+	includes/controller/Main.php on line 527
+	includes/controller/Main.php on line 590
 
 Arguments:
 	$user
 
 
+user_authenticate
+-----------------
+Called from:
+	includes/controller/Main.php on line 578
+
+
 user_logged_out
 ---------------
 Called from:
-	includes/controller/Main.php on line 610
+	includes/controller/Main.php on line 612
 
 Arguments:
 	$user
@@ -338,7 +340,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 774
+	includes/controller/Main.php on line 776
 
 Arguments:
 	$post, $feed
@@ -347,25 +349,25 @@ Arguments:
 visitor_authenticate
 --------------------
 Called from:
-	includes/helpers.php on line 684
+	includes/helpers.php on line 704
 
 
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 2113
+	includes/helpers.php on line 2159
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 2130
+	includes/helpers.php on line 2176
 
 
 send_correspondence
 -------------------
 Called from:
-	includes/helpers.php on line 2403
+	includes/helpers.php on line 2457
 
 Arguments:
 	$action, $params
@@ -374,7 +376,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 2431
+	includes/helpers.php on line 2485
 
 Arguments:
 	$ob
@@ -1029,7 +1031,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 843
+	includes/controller/Main.php on line 845
 
 Target:
 	$this->context
@@ -1038,7 +1040,7 @@ Target:
 keyword_search
 --------------
 Called from:
-	includes/helpers.php on line 915
+	includes/helpers.php on line 936
 
 Target:
 	$search
@@ -1050,7 +1052,7 @@ Arguments:
 link_regexp
 -----------
 Called from:
-	includes/helpers.php on line 1484
+	includes/helpers.php on line 1524
 
 Target:
 	$expressions
@@ -1059,7 +1061,7 @@ Target:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 2333
+	includes/helpers.php on line 2387
 
 Target:
 	$function
@@ -1068,7 +1070,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 2432
+	includes/helpers.php on line 2486
 
 Target:
 	$nonce
