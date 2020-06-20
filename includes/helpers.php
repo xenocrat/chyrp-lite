@@ -524,9 +524,11 @@
         $zone_list = timezone_identifiers_list(DateTimeZone::ALL);
 
         foreach ($zone_list as $zone) {
+            $name = str_replace(array("_", "St "),
+                                array(" ", "St. "), $zone);
+
             $timezones[] = array("code" => $zone,
-                                 "name" => str_replace(array("_", "St "),
-                                                       array(" ", "St. "), $zone));
+                                 "name" => $name);
         }
 
         return $timezones;
