@@ -559,7 +559,7 @@
     # Upgrading Starts
     #---------------------------------------------
 
-    if ((isset($_POST['upgrade']) and $_POST['upgrade'] == "yes")) {
+    if (isset($_POST['upgrade']) and $_POST['upgrade'] == "yes") {
         # Perform core upgrade tasks.
         test_directories();
         update_htaccess();
