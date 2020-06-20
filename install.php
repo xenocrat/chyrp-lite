@@ -77,10 +77,10 @@
     $config = Config::current();
 
     # Get the timezone.
-    $timezone = isset($_POST['timezone']) ? $_POST['timezone'] : get_timezone() ;
+    $timezone = get_timezone();
 
     # Get the locale.
-    $locale = isset($_REQUEST['locale']) ? $_REQUEST['locale'] : get_locale() ;
+    $locale = get_locale();
 
     # Where are we?
     $url = preg_replace("/\/install\.php.*$/i", "", guess_url());
@@ -526,8 +526,7 @@
                 });
 
                 $("#locale").change(function(e) {
-                    var url = window.location.href.split('?');
-                    window.location.href = url[0] + "?locale=" + $(this).val();
+                    $("#installer").submit();
                 });
             });
         </script>
@@ -540,7 +539,7 @@
     # Installation Starts
     #---------------------------------------------
 
-    if (!empty($_POST)) {
+    if (isset($_POST['install']) and $_POST['install'] == "yes") {
         if (empty($_POST['database']))
             alert(__("Database cannot be blank."));
 
@@ -901,7 +900,7 @@
                     <label for="email"><?php echo __("Email Address"); ?></label>
                     <input type="email" name="email" value="<?php posted("email"); ?>" id="email" maxlength="128">
                 </p>
-                <button type="submit"><?php echo __("Install me!"); ?></button>
+                <button type="submit" name="install" value="yes"><?php echo __("Install me!"); ?></button>
             </form>
 <?php else: ?>
             <h1><?php echo __("Installation Complete"); ?></h1>
