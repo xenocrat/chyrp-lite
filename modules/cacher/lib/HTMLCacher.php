@@ -54,7 +54,7 @@
         public function set($route) {
             if (self::cacheable($route)) {
                 if (DEBUG)
-                    error_log("GENERATE HTML cache file ".$this->file);
+                    error_log("CREATE HTML cache file ".$this->file);
 
                 $contents = ob_get_contents();
 
@@ -68,7 +68,7 @@
 
             if (!empty($files)) {
                 if (DEBUG)
-                    error_log("REGENERATE HTML caches");
+                    error_log("DELETE HTML caches");
 
                 foreach ($files as $file) {
                     # Break the loop if this is taking too long.
