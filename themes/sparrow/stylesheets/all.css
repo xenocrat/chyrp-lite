@@ -611,7 +611,6 @@ div.category a.category {
     border: 1px solid #c2bcb8;
     border-top: none;
 }
-div.traversal + div#main > article:first-child div.category a.category,
 div#main > div.traversal + article div.category a.category {
     border-top: 1px solid #c2bcb8;
 }
