@@ -339,6 +339,9 @@
         # Set the PHP locale.
         @putenv("LC_ALL=".$locale);
         setlocale(LC_ALL, $list);
+
+        if (DEBUG)
+            error_log("LOCALE ".setlocale(LC_CTYPE, 0));
     }
 
     /**
@@ -541,7 +544,12 @@
      *     $timezone - The timezone to set.
      */
     function set_timezone($timezone = "Atlantic/Reykjavik") {
-        return date_default_timezone_set($timezone);
+        $result = date_default_timezone_set($timezone);
+
+        if (DEBUG)
+            error_log("TIMEZONE ".get_timezone());
+
+        return $result;
     }
 
     /**
