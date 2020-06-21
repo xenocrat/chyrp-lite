@@ -171,7 +171,7 @@
         }
 
         if (DEBUG)
-            error_log("GENERATE image thumbnail for ".$filename);
+            error_log("CREATE image thumbnail for ".$filename);
 
         # Create the thumbnail.
         $thumb = imagecreatetruecolor($thumb_w, $thumb_h);
