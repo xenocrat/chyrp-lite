@@ -286,7 +286,6 @@ table {
     width: 100%;
     margin: 0em 0em 1em 0em;
     overflow-x: scroll;
-    -webkit-overflow-scrolling: touch;
 }
 table:last-child {
     margin-bottom: 0em;
@@ -336,8 +335,6 @@ select, input {
     background-color: #ffffff;
     border: 1px solid #c6ccc8;
     border-radius: 0em;
-    /* Removes shadow from Mobile Safari */
-    background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%);
 }
 select:focus, input:focus {
     outline: none;
@@ -376,8 +373,6 @@ textarea {
     background-color: #ffffff;
     border: 1px solid #c6ccc8;
     border-radius: 0em;
-    /* Removes shadow from Mobile Safari */
-    background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%);
 }
 textarea:focus {
     outline: none;
@@ -395,9 +390,6 @@ button {
 }
 button:focus {
     outline: none;
-}
-button::-moz-focus-inner {
-    border: none;
 }
 button#search_submit,
 button#sidebar_search_submit {
