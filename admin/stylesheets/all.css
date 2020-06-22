@@ -413,8 +413,6 @@ input[type="password"] {
     border-radius: 0em;
     border: 1px solid #dfdfdf;
     background-color: #ffffff;
-    /* Removes shadow from Mobile Safari */
-    background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%);
 }
 input:invalid,
 textarea:invalid {
@@ -541,7 +539,6 @@ table {
     width: 100%;
     margin: 0rem 0rem 1rem 0rem;
     overflow-x: scroll;
-    -webkit-overflow-scrolling: touch;
 }
 table:last-child,
 table.interactive {
@@ -693,9 +690,6 @@ a.next_page:active,
 a.prev_page:active {
     border-color: #1e57ba;
     outline: none;
-}
-button::-moz-focus-inner {
-    border: none;
 }
 div.pagination a.prev_page + a.next_page {
     margin-left: 1rem;
