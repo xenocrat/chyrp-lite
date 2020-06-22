@@ -322,7 +322,6 @@
                 border-radius: 0em;
                 border: 1px solid #dfdfdf;
                 background-color: #ffffff;
-                background-image: -webkit-linear-gradient(top, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 100%);
             }
             input[type="text"]:focus,
             input[type="email"]:focus,
