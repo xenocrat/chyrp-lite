@@ -365,8 +365,6 @@ button {
     font: inherit;
     font-size: inherit;
     cursor: pointer;
-    transition-property: background-color, border;
-    transition-duration: 250ms;
 }
 button:focus {
     outline: none;
@@ -555,10 +553,6 @@ article.audio audio {
     width: 100%;
     max-width: 800px;
 }
-a {
-    transition-property: background-color;
-    transition-duration: 250ms;
-}
 a:link, a:visited {
     color: #4e5a66;
     text-decoration: none;
@@ -678,7 +672,6 @@ a.archive_post_link {
     color: transparent;
     background-color: transparent;
     mix-blend-mode: multiply;
-    transition: all 0s;
 }
 a.archive_post_link:hover,
 a.archive_post_link:focus,
