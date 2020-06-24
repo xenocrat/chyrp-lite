@@ -171,7 +171,7 @@
         }
 
         if (DEBUG)
-            error_log("CREATE image thumbnail for ".$filename);
+            error_log("CREATE image thumbnail ".$cache_filename);
 
         # Create the thumbnail.
         $thumb = imagecreatetruecolor($thumb_w, $thumb_h);
@@ -208,7 +208,7 @@
 
     if (isset($cache_filepath)) {
         if (DEBUG)
-            error_log("SERVE image thumbnail for ".$filename);
+            error_log("SERVE image thumbnail ".$cache_filename);
 
         readfile($cache_filepath);
     }
