@@ -39,7 +39,7 @@
         public function get($route) {
             if (self::available($route)) {
                 if (DEBUG)
-                    error_log("SERVE feed cache file ".$this->file);
+                    error_log("SERVE feed cache ".$this->file);
 
                 $contents = @file_get_contents($this->path);
 
@@ -54,7 +54,7 @@
         public function set($route) {
             if (self::cacheable($route)) {
                 if (DEBUG)
-                    error_log("CREATE feed cache file ".$this->file);
+                    error_log("CREATE feed cache ".$this->file);
 
                 $contents = ob_get_contents();
 
