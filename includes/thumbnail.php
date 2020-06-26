@@ -29,7 +29,6 @@
     $thumb_w = abs((int) fallback($_GET["max_width"], 640));
     $thumb_h = abs((int) fallback($_GET["max_height"], 0));
 
-    # GD library is not available.
     if (!function_exists("gd_info"))
         redirect($url);
 
@@ -144,8 +143,8 @@
     header("Expires: ".date("r", now("+30 days")));
     header("Content-Disposition: inline; filename=\"".addslashes($cache_fn)."\"");
 
+    # Create a thumbnail if caching is disabled or no file exists.
     if (!isset($cache_fp) or !file_exists($cache_fp)) {
-        # Verify the media type is supported.
         switch ($type) {
             case IMAGETYPE_GIF:
                 if (imagetypes() & IMG_GIF) {
@@ -203,7 +202,7 @@
                            $orig_w,
                            $orig_h);
 
-        # Create the thumbnail.
+        # Create the thumbnail file - outputs directly if caching is disabled.
         $result = ($function == "imagejpeg" or $function == "imagepng") ?
             $function($thumb, $cache_fp, $quality) : $function($thumb, $cache_fp) ;
 
@@ -215,6 +214,7 @@
         imagedestroy($thumb);
     }
 
+    # Serve a file previously or newly created.
     if (isset($cache_fp)) {
         if (DEBUG)
             error_log("SERVE image ".$cache_fn);
