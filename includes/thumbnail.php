@@ -46,6 +46,19 @@
     if ($thumb_w == 0 and $thumb_h == 0)
         error(__("Error"), __("Maximum size cannot be zero."), null, 422);
 
+    # Respond to Last-Modified-Since so the agent will use cache.
+    if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
+        $lastmod = strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']);
+
+        if ($lastmod >= filemtime($filepath)) {
+            header($_SERVER['SERVER_PROTOCOL']." 304 Not Modified");
+            header("Cache-Control: public");
+            header("Pragma: public");
+            header("Expires: ".date("r", now("+30 days")));
+            exit;
+        }
+    }
+
     function resize_thumb(&$crop_x, &$crop_y, &$thumb_w, &$thumb_h, &$orig_w, &$orig_h) {
         $scale_x = ($thumb_w > 0) ? $thumb_w / $orig_w : 0 ;
         $scale_y = ($thumb_h > 0) ? $thumb_h / $orig_h : 0 ;
@@ -129,18 +142,17 @@
     }
 
     $cache_fn = md5($filename.$thumb_w.$thumb_h.$quality).".".$ext;
-    $cache_fp = (CACHE_THUMBS) ? CACHES_DIR.DIR."thumbs".DIR."thumb_".$cache_fn : null ;
+    $cache_fp = (CACHE_THUMBS) ? CACHES_DIR.DIR."thumbs".DIR.$cache_fn : null ;
 
     header("Last-Modified: ".date("r", filemtime($filepath)));
     header("Content-Type: ".$media_type);
     header("Cache-Control: public");
-    header("Expires: ".date("r", strtotime("+30 days")));
+    header("Pragma: public");
+    header("Expires: ".date("r", now("+30 days")));
     header("Content-Disposition: inline; filename=\"".addslashes($cache_fn)."\"");
 
-    if (!isset($cache_fp) or
-        !file_exists($cache_fp) or
-        !(filemtime($cache_fp) > filemtime($filepath))) {
-        # Verify the media type is supported and prepare the original.
+    if (!isset($cache_fp) or !file_exists($cache_fp)) {
+        # Verify the media type is supported.
         switch ($type) {
             case IMAGETYPE_GIF:
                 if (imagetypes() & IMG_GIF) {
@@ -171,7 +183,7 @@
         }
 
         if (DEBUG)
-            error_log("CREATE image thumbnail ".$cache_fn);
+            error_log("CREATE image ".$cache_fn);
 
         # Create the thumbnail.
         $thumb = imagecreatetruecolor($thumb_w, $thumb_h);
@@ -212,7 +224,7 @@
 
     if (isset($cache_fp)) {
         if (DEBUG)
-            error_log("SERVE image thumbnail ".$cache_fn);
+            error_log("SERVE image ".$cache_fn);
 
         readfile($cache_fp);
     }
