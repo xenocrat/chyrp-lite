@@ -33,20 +33,13 @@
     if (!function_exists("gd_info"))
         redirect($url);
 
-    $gd_info = gd_info();
-    preg_match("/\d[\d\.]*/", $gd_info["GD Version"], $gd_version);
-
-    # GD version too low for our script.
-    if (version_compare($gd_version[0], "2.0.28", "<"))
-        redirect($url);
-
     if (!is_readable($filepath) or !is_file($filepath))
         show_404(__("Not Found"), __("File not found."));
 
     if ($thumb_w == 0 and $thumb_h == 0)
         error(__("Error"), __("Maximum size cannot be zero."), null, 422);
 
-    # Respond to Last-Modified-Since so the agent will use cache.
+    # Respond to Last-Modified-Since so the user agent will use cache.
     if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
         $lastmod = strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']);
 
