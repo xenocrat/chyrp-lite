@@ -28,9 +28,6 @@
     $thumb_w = abs((int) fallback($_GET["max_width"], 640));
     $thumb_h = abs((int) fallback($_GET["max_height"], 0));
 
-    if (!function_exists("gd_info"))
-        redirect($url);
-
     if (!is_readable($filepath) or !is_file($filepath))
         show_404(__("Not Found"), __("File not found."));
 
@@ -51,6 +48,12 @@
     }
 
     function resize_thumb(&$crop_x, &$crop_y, &$thumb_w, &$thumb_h, &$orig_w, &$orig_h) {
+        # getimagesize() could not determine the image dimensions.
+        if ($orig_w == 0 or $orig_h == 0) {
+            $orig_w = 1;
+            $orig_h = 1;
+        }
+
         $scale_x = ($thumb_w > 0) ? $thumb_w / $orig_w : 0 ;
         $scale_y = ($thumb_h > 0) ? $thumb_h / $orig_h : 0 ;
 
@@ -100,7 +103,7 @@
         }
     }
 
-    # Fetch original image metadata.
+    # Fetch original image metadata (does not require GD library).
     list($orig_w, $orig_h, $type, $attr) = getimagesize($filepath);
 
     $crop_x = 0;
@@ -110,33 +113,24 @@
     # Call our function to determine the final scale of the thumbnail.
     resize_thumb($crop_x, $crop_y, $thumb_w, $thumb_h, $orig_w, $orig_h);
 
-    # Redirect to the original if the size is already less than requested.
-    if ($orig_w <= $thumb_w and $orig_h <= $thumb_h and empty($_GET['square']))
-        redirect($url);
-
-    # Determine the media type.
-    switch ($type) {
-        case IMAGETYPE_GIF:
-            $media_type = "image/gif";
-            break;
-        case IMAGETYPE_JPEG:
-            $media_type = "image/jpeg";
-            break;
-        case IMAGETYPE_PNG:
-            $media_type = "image/png";
-            break;
-        case IMAGETYPE_BMP:
-            $media_type = "image/bmp";
-            break;
-        default:
-            $media_type = "application/octet-stream";
-    }
-
     $cache_fn = md5($filename.$thumb_w.$thumb_h.$quality).".".$ext;
     $cache_fp = (CACHE_THUMBS) ? CACHES_DIR.DIR."thumbs".DIR.$cache_fn : null ;
 
+    # Use the original file if the size is already smaller than requested.
+    if ($orig_w <= $thumb_w and $orig_h <= $thumb_h and empty($_GET['square'])) {
+        $cache_fn = $filename;
+        $cache_fp = $filepath;
+    }
+
+    # Use the original file if GD is unavailable or type is unsupported by our script.
+    if (!function_exists("gd_info") or
+        !((IMAGETYPE_GIF | IMAGETYPE_JPEG | IMAGETYPE_PNG | IMAGETYPE_BMP) & $type)) {
+        $cache_fn = $filename;
+        $cache_fp = $filepath;
+    }
+
     header("Last-Modified: ".date("r", filemtime($filepath)));
-    header("Content-Type: ".$media_type);
+    header("Content-Type: ".image_type_to_mime_type($type));
     header("Cache-Control: public");
     header("Pragma: public");
     header("Expires: ".date("r", now("+30 days")));
@@ -170,7 +164,8 @@
                     break;
                 }
             default:
-                redirect($url); # Redirect if type is unsupported.
+                # Redirect if type is unsupported by GD library.
+                redirect($url);
         }
 
         if (DEBUG)
