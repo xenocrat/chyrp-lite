@@ -1660,6 +1660,15 @@ Returns a singleton reference to the current class.
 
 
 ==============================================
+includes/download.php
+==============================================
+
+File: download
+--------------
+Send an uploaded file to the visitor as a file attachment.
+
+
+==============================================
 includes/error.php
 ==============================================
 
