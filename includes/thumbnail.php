@@ -47,7 +47,7 @@
         }
     }
 
-    function resize_thumb(&$crop_x, &$crop_y, &$thumb_w, &$thumb_h, &$orig_w, &$orig_h) {
+    function thumb_resize(&$crop_x, &$crop_y, &$thumb_w, &$thumb_h, &$orig_w, &$orig_h) {
         # getimagesize() could not determine the image dimensions.
         if ($orig_w == 0 or $orig_h == 0) {
             $orig_w = 1;
@@ -111,7 +111,7 @@
     $quality = ($quality > 100) ? 100 : $quality ;
 
     # Call our function to determine the final scale of the thumbnail.
-    resize_thumb($crop_x, $crop_y, $thumb_w, $thumb_h, $orig_w, $orig_h);
+    thumb_resize($crop_x, $crop_y, $thumb_w, $thumb_h, $orig_w, $orig_h);
 
     $cache_fn = md5($filename.$thumb_w.$thumb_h.$quality).".".$ext;
     $cache_fp = (CACHE_THUMBS) ? CACHES_DIR.DIR."thumbs".DIR.$cache_fn : null ;
