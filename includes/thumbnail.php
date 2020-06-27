@@ -24,7 +24,6 @@
     $filename = str_replace(DIR, "", $_GET['file']);
     $filepath = uploaded($filename, false);
     $ext = pathinfo($filename, PATHINFO_EXTENSION);
-    $url = uploaded($filename);
     $thumb_w = abs((int) fallback($_GET["max_width"], 640));
     $thumb_h = abs((int) fallback($_GET["max_height"], 0));
 
@@ -122,11 +121,14 @@
         $cache_fp = $filepath;
     }
 
-    # Use the original file if GD is unavailable or type is not handled.
+    # Use the original file if GD support is unavailable or type is not handled.
     if (!function_exists("gd_info") or
+        !(imagetypes() & IMG_GIF) or
+        !(imagetypes() & IMG_JPEG) or
+        !(imagetypes() & IMG_PNG) or
         !((IMAGETYPE_GIF | IMAGETYPE_JPEG | IMAGETYPE_PNG) & $type)) {
-        $cache_fn = $filename;
-        $cache_fp = $filepath;
+            $cache_fn = $filename;
+            $cache_fp = $filepath;
     }
 
     header("Last-Modified: ".date("r", filemtime($filepath)));
@@ -140,26 +142,17 @@
     if (!isset($cache_fp) or !file_exists($cache_fp)) {
         switch ($type) {
             case IMAGETYPE_GIF:
-                if (imagetypes() & IMG_GIF) {
-                    $original = imagecreatefromgif($filepath);
-                    $function = "imagegif";
-                    break;
-                }
+                $original = imagecreatefromgif($filepath);
+                $function = "imagegif";
+                break;
             case IMAGETYPE_JPEG:
-                if (imagetypes() & IMG_JPG) {
-                    $original = imagecreatefromjpeg($filepath);
-                    $function = "imagejpeg";
-                    break;
-                }
+                $original = imagecreatefromjpeg($filepath);
+                $function = "imagejpeg";
+                break;
             case IMAGETYPE_PNG:
-                if (imagetypes() & IMG_PNG) {
-                    $original = imagecreatefrompng($filepath);
-                    $function = "imagepng";
-                    break;
-                }
-            default:
-                # Redirect if GD library support is unavailable.
-                redirect($url);
+                $original = imagecreatefrompng($filepath);
+                $function = "imagepng";
+                break;
         }
 
         if (DEBUG)
