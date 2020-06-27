@@ -24,9 +24,9 @@
         show_404(__("Not Found"), __("File not found."));
 
     if (DEBUG)
-        error_log("SERVING file download for ".$filename);
+        error_log("SERVE download ".$filename);
 
-    if (!ini_get("zlib.output_compression"))
+    if (!in_array("ob_gzhandler", ob_list_handlers()) and !ini_get("zlib.output_compression"))
         header("Content-Length: ".filesize($filepath));
 
     header("Last-Modified: ".date("r", filemtime($filepath)));
