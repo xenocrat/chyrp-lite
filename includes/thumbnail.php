@@ -122,9 +122,9 @@
         $cache_fp = $filepath;
     }
 
-    # Use the original file if GD is unavailable or type is unsupported by our script.
+    # Use the original file if GD is unavailable or type is not handled.
     if (!function_exists("gd_info") or
-        !((IMAGETYPE_GIF | IMAGETYPE_JPEG | IMAGETYPE_PNG | IMAGETYPE_BMP) & $type)) {
+        !((IMAGETYPE_GIF | IMAGETYPE_JPEG | IMAGETYPE_PNG) & $type)) {
         $cache_fn = $filename;
         $cache_fp = $filepath;
     }
@@ -157,14 +157,8 @@
                     $function = "imagepng";
                     break;
                 }
-            case IMAGETYPE_BMP:
-                if (imagetypes() & IMG_WBMP) {
-                    $original = imagecreatefromwbmp($filepath);
-                    $function = "imagewbmp";
-                    break;
-                }
             default:
-                # Redirect if type is unsupported by GD library.
+                # Redirect if GD library support is unavailable.
                 redirect($url);
         }
 
