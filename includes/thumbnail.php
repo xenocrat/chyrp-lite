@@ -20,7 +20,6 @@
     if (!$visitor->group->can("view_site"))
         show_403(__("Access Denied"), __("You are not allowed to view this site."));
 
-    $config = Config::current();
     $quality = abs((int) fallback($_GET["quality"], 80));
     $filename = str_replace(DIR, "", $_GET['file']);
     $filepath = uploaded($filename, false);
