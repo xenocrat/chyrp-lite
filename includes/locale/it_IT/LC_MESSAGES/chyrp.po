@@ -90,11 +90,12 @@ msgstr "Il percorso è stato avviato con un Controller non valido."
 #: includes/helpers.php:1998 includes/helpers.php:2001
 #: includes/helpers.php:2004 includes/helpers.php:2007
 #: includes/helpers.php:2012 includes/thumbnail.php:15
-#: includes/thumbnail.php:18 includes/thumbnail.php:34
-#: includes/thumbnail.php:191 install.php:794 upgrade.php:173 upgrade.php:186
-#: upgrade.php:199 upgrade.php:212 upgrade.php:225 upgrade.php:239
-#: upgrade.php:265 upgrade.php:278 upgrade.php:292 upgrade.php:305
-#: upgrade.php:318 upgrade.php:331 upgrade.php:345
+#: includes/thumbnail.php:18 includes/thumbnail.php:33
+#: includes/thumbnail.php:158 includes/thumbnail.php:193 install.php:794
+#: upgrade.php:173 upgrade.php:186 upgrade.php:199 upgrade.php:212
+#: upgrade.php:225 upgrade.php:239 upgrade.php:265 upgrade.php:278
+#: upgrade.php:292 upgrade.php:305 upgrade.php:318 upgrade.php:331
+#: upgrade.php:345
 msgid "Error"
 msgstr "Errore"
 
@@ -204,7 +205,7 @@ msgstr "Per poter scrivere un post, devi abilitare almeno una Feather."
 #: includes/controller/Admin.php:1081 includes/controller/Admin.php:1760
 #: includes/controller/Admin.php:1806 includes/controller/Ajax.php:49
 #: includes/controller/Ajax.php:75 includes/download.php:24
-#: includes/helpers.php:137 includes/thumbnail.php:31
+#: includes/helpers.php:137 includes/thumbnail.php:30
 msgid "Not Found"
 msgstr "Non trovato"
 
@@ -913,7 +914,7 @@ msgstr "Password dimenticata"
 msgid "This resource accepts GET requests only."
 msgstr "Questa risorsa accetta solo richieste GET."
 
-#: includes/download.php:24 includes/thumbnail.php:31
+#: includes/download.php:24 includes/thumbnail.php:30
 msgid "File not found."
 msgstr "File non trovato."
 
@@ -1293,11 +1294,11 @@ msgstr "Cancella gruppi"
 msgid "Export Content"
 msgstr "Esporta contenuto"
 
-#: includes/thumbnail.php:34
+#: includes/thumbnail.php:33
 msgid "Maximum size cannot be zero."
 msgstr "La dimensione massima non può essere zero."
 
-#: includes/thumbnail.php:191
+#: includes/thumbnail.php:158 includes/thumbnail.php:193
 msgid "Failed to create image thumbnail."
 msgstr "Impossibile creare l'immagine in forato ridotto."
 

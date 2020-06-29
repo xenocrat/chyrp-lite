@@ -90,11 +90,12 @@ msgstr "路由启动了一个无效的控制器。"
 #: includes/helpers.php:1998 includes/helpers.php:2001
 #: includes/helpers.php:2004 includes/helpers.php:2007
 #: includes/helpers.php:2012 includes/thumbnail.php:15
-#: includes/thumbnail.php:18 includes/thumbnail.php:34
-#: includes/thumbnail.php:191 install.php:794 upgrade.php:173 upgrade.php:186
-#: upgrade.php:199 upgrade.php:212 upgrade.php:225 upgrade.php:239
-#: upgrade.php:265 upgrade.php:278 upgrade.php:292 upgrade.php:305
-#: upgrade.php:318 upgrade.php:331 upgrade.php:345
+#: includes/thumbnail.php:18 includes/thumbnail.php:33
+#: includes/thumbnail.php:158 includes/thumbnail.php:193 install.php:794
+#: upgrade.php:173 upgrade.php:186 upgrade.php:199 upgrade.php:212
+#: upgrade.php:225 upgrade.php:239 upgrade.php:265 upgrade.php:278
+#: upgrade.php:292 upgrade.php:305 upgrade.php:318 upgrade.php:331
+#: upgrade.php:345
 msgid "Error"
 msgstr "错误"
 
@@ -203,7 +204,7 @@ msgstr "您必须启用至少一个羽毛才能撰写帖子。"
 #: includes/controller/Admin.php:1081 includes/controller/Admin.php:1760
 #: includes/controller/Admin.php:1806 includes/controller/Ajax.php:49
 #: includes/controller/Ajax.php:75 includes/download.php:24
-#: includes/helpers.php:137 includes/thumbnail.php:31
+#: includes/helpers.php:137 includes/thumbnail.php:30
 msgid "Not Found"
 msgstr "未找到"
 
@@ -901,7 +902,7 @@ msgstr "忘记密码"
 msgid "This resource accepts GET requests only."
 msgstr "资源只能被GET请求。"
 
-#: includes/download.php:24 includes/thumbnail.php:31
+#: includes/download.php:24 includes/thumbnail.php:30
 msgid "File not found."
 msgstr "未找到。"
 
@@ -1273,11 +1274,11 @@ msgstr "删除组"
 msgid "Export Content"
 msgstr "导出内容"
 
-#: includes/thumbnail.php:34
+#: includes/thumbnail.php:33
 msgid "Maximum size cannot be zero."
 msgstr "最大尺寸不能为0."
 
-#: includes/thumbnail.php:191
+#: includes/thumbnail.php:158 includes/thumbnail.php:193
 msgid "Failed to create image thumbnail."
 msgstr "无法创建图片缩略图。"
 
