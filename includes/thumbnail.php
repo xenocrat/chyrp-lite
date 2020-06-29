@@ -137,8 +137,10 @@
     header("Expires: ".date("r", now("+30 days")));
     header("Content-Disposition: inline; filename=\"".addslashes($cache_fn)."\"");
 
-    # Create a thumbnail if caching is disabled or no file exists.
-    if (!isset($cache_fp) or !file_exists($cache_fp)) {
+    # Create a thumbnail if caching is disabled, file is missing or stale.
+    if (!isset($cache_fp) or !file_exists($cache_fp) or
+        filemtime($cache_fp) < filemtime($filepath)) {
+
         switch ($type) {
             case IMAGETYPE_GIF:
                 $original = imagecreatefromgif($filepath);
@@ -160,7 +162,7 @@
         if (DEBUG)
             error_log("CREATE image ".$cache_fn);
 
-        # Create the thumbnail.
+        # Create the thumbnail image resource.
         $thumb = imagecreatetruecolor($thumb_w, $thumb_h);
 
         if ($function == "imagepng") {
