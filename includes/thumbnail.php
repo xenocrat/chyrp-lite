@@ -23,7 +23,6 @@
     $quality = abs((int) fallback($_GET["quality"], 80));
     $filename = str_replace(DIR, "", $_GET['file']);
     $filepath = uploaded($filename, false);
-    $ext = pathinfo($filename, PATHINFO_EXTENSION);
     $thumb_w = abs((int) fallback($_GET["max_width"], 640));
     $thumb_h = abs((int) fallback($_GET["max_height"], 0));
 
@@ -33,7 +32,7 @@
     if ($thumb_w == 0 and $thumb_h == 0)
         error(__("Error"), __("Maximum size cannot be zero."), null, 422);
 
-    # Respond to Last-Modified-Since so the user agent will use cache.
+    # Respond to If-Modified-Since so the user agent will use cache.
     if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
         $lastmod = strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']);
 
@@ -112,7 +111,7 @@
     # Call our function to determine the final scale of the thumbnail.
     thumb_resize($crop_x, $crop_y, $thumb_w, $thumb_h, $orig_w, $orig_h);
 
-    $cache_fn = md5($filename.$thumb_w.$thumb_h.$quality).".".$ext;
+    $cache_fn = md5($filename.$thumb_w.$thumb_h.$quality).image_type_to_extension($type);
     $cache_fp = (CACHE_THUMBS) ? CACHES_DIR.DIR."thumbs".DIR.$cache_fn : null ;
 
     # Use the original file if the size is already smaller than requested.
@@ -154,6 +153,9 @@
                 $function = "imagepng";
                 break;
         }
+
+        if ($original === false)
+            error(__("Error"), __("Failed to create image thumbnail."));
 
         if (DEBUG)
             error_log("CREATE image ".$cache_fn);
