@@ -139,7 +139,7 @@
 
     # Create a thumbnail if caching is disabled, file is missing or stale.
     if (!isset($cache_fp) or !file_exists($cache_fp) or
-        filemtime($cache_fp) < filemtime($filepath)) {
+        ($cache_fp != $filepath and filemtime($cache_fp) < filemtime($filepath))) {
 
         switch ($type) {
             case IMAGETYPE_GIF:
