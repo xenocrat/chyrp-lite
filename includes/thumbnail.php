@@ -32,6 +32,9 @@
     if ($thumb_w == 0 and $thumb_h == 0)
         error(__("Error"), __("Maximum size cannot be zero."), null, 422);
 
+    if (!function_exists("gd_info"))
+        redirect(uploaded($filename));
+
     # Respond to If-Modified-Since so the user agent will use cache.
     if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
         $lastmod = strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']);
@@ -121,10 +124,9 @@
     }
 
     # Use the original file if GD support is unavailable or type is not handled.
-    if (!function_exists("gd_info") or
-        !(imagetypes() & IMG_GIF) or
-        !(imagetypes() & IMG_JPEG) or
-        !(imagetypes() & IMG_PNG) or
+    if (($type == IMAGETYPE_GIF and !(imagetypes() & IMG_GIF)) or
+        ($type == IMAGETYPE_JPEG and !(imagetypes() & IMG_JPEG)) or
+        ($type == IMAGETYPE_PNG and !(imagetypes() & IMG_PNG)) or
         !((IMAGETYPE_GIF | IMAGETYPE_JPEG | IMAGETYPE_PNG) & $type)) {
             $cache_fn = $filename;
             $cache_fp = $filepath;
