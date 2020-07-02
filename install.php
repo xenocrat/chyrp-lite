@@ -458,6 +458,8 @@
         </style>
         <script src="includes/common.js" type="text/javascript" charset="UTF-8"></script>
         <script type="text/javascript">
+            'use strict';
+
             function toggle_adapter() {
                 if ($("#adapter").val() == "sqlite") {
                     $("#database_sub, #database_aside").fadeIn("fast");

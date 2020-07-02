@@ -6,6 +6,8 @@
     if (!defined('CHYRP_VERSION'))
         exit;
 ?>
+'use strict';
+
 $(function() {
     Post.init();
     Page.init();

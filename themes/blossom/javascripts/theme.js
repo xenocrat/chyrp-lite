@@ -1,3 +1,5 @@
+'use strict';
+
 // Mobile navigation menu.
 $(document).ready(function() {
     $("#mobile_toggle_link").on("click", function(e) {
