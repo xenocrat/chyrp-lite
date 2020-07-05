@@ -737,10 +737,11 @@ img.gravatar {
         background-color: #ffffff;
         margin: 2rem;
     }
+    div#mast,
     div.prev, div.next {
         display: none;
     }
-    div.main > article,
+    div#main > article,
     div.standalone {
         page-break-inside: avoid;
     }

@@ -809,12 +809,12 @@ article img {
     div.prev, div.next {
         display: none;
     }
-    div.main > article,
+    div#main > article,
     div.standalone {
         background-color: #ffffff;
+        background-image: none;
         page-break-inside: avoid;
         box-shadow: none;
-        border: 0.1em solid #d2d9d4;
     }
 }
 @media screen and (max-width: 959px) {

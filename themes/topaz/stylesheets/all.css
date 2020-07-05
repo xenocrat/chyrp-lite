@@ -821,11 +821,10 @@ article img {
     div.prev, div.next {
         display: none;
     }
-    div.main > article,
+    div#main > article,
     div.standalone {
         background-color: #ffffff;
         page-break-inside: avoid;
-        border: 0.1em solid #c6ccc8;
     }
 }
 @media screen and (max-width: 959px) {

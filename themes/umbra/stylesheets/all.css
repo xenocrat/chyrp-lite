@@ -749,6 +749,7 @@ img.gravatar {
     body {
         margin: 2rem;
     }
+    div#mast,
     div.next {
         display: none;
     }
