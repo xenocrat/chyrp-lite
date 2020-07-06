@@ -753,7 +753,7 @@ img.gravatar {
     div.next {
         display: none;
     }
-    div.main > article,
+    div#main > article,
     div.standalone {
         page-break-inside: avoid;
     }

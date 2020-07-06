@@ -818,13 +818,16 @@ article img {
         margin: 2rem;
     }
     div#sidebar, div#tail,
-    div.prev, div.next {
+    div.prev, div.next, div.prev_next {
         display: none;
     }
     div#main > article,
     div.standalone {
         background-color: #ffffff;
         page-break-inside: avoid;
+    }
+    ol.comments li.comment_form {
+       background-color: #ffffff; 
     }
 }
 @media screen and (max-width: 959px) {

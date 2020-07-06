@@ -745,6 +745,14 @@ img.gravatar {
     div.standalone {
         page-break-inside: avoid;
     }
+    div#main > article.discourse > div,
+    ol.comments li,
+    div.metadata {
+        background-color: #ffffff;
+    }
+    div#main > article:first-child div.category a.category {
+        border: 1px solid #c2bcb8;
+    }
 }
 @media screen and (max-width: 639px) {
     html {
