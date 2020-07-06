@@ -757,6 +757,9 @@ img.gravatar {
     div.standalone {
         page-break-inside: avoid;
     }
+    div#main > article:first-child div.category a.category {
+        border: 1px solid #666667;
+    }
 }
 @media screen and (max-width: 639px) {
     html {
