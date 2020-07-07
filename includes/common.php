@@ -10,11 +10,11 @@
 
     # Constant: CHYRP_VERSION
     # Version number for this release.
-    define('CHYRP_VERSION', "2020.02");
+    define('CHYRP_VERSION', "2020.03");
 
     # Constant: CHYRP_CODENAME
     # The codename for this version.
-    define('CHYRP_CODENAME', "Somali");
+    define('CHYRP_CODENAME', "Dead Sea");
 
     # Constant: CHYRP_IDENTITY
     # The string identifying this version.
