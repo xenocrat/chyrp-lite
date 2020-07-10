@@ -133,21 +133,29 @@
         isset($_SERVER['HTTP_ACCEPT_ENCODING']) and
         substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "gzip"));
 
+    # Constant: CAN_USE_ZLIB
+    # Can we use zlib to compress output?
+    define('CAN_USE_ZLIB',
+        (HTTP_ACCEPT_DEFLATE or HTTP_ACCEPT_GZIP) and extension_loaded("zlib"));
+
     # Constant: USE_ZLIB
     # Use zlib to provide content compression?
     if (!defined('USE_ZLIB'))
-        define('USE_ZLIB',
-            (HTTP_ACCEPT_DEFLATE or HTTP_ACCEPT_GZIP) and
-            extension_loaded("zlib") and !ini_get("zlib.output_compression"));
+        define('USE_ZLIB', CAN_USE_ZLIB and !ini_get("zlib.output_compression"));
 
-    # Start output buffering and set header.
-    if (USE_OB)
+    # Start output buffering.
+    if (USE_OB) {
         if (USE_ZLIB) {
             ob_start("ob_gzhandler");
-            header("Content-Encoding: ".(HTTP_ACCEPT_GZIP ? "gzip" : "deflate"));
         } else {
             ob_start();
         }
+    }
+
+    # Set the content encoding header so that it can survive error states.
+    if ((USE_OB and USE_ZLIB) or
+        (CAN_USE_ZLIB and ini_get("zlib.output_compression")))
+            header("Content-Encoding: ".(HTTP_ACCEPT_GZIP ? "gzip" : "deflate"));
 
     # Constant: OB_BASE_LEVEL
     # The base level of output buffering.
