@@ -21,7 +21,7 @@
         show_403(__("Access Denied"), __("You are not allowed to view this site."));
 
     $quality = abs((int) fallback($_GET["quality"], 80));
-    $filename = str_replace(DIR, "", $_GET['file']);
+    $filename = str_replace(array(DIR, "/"), "", $_GET['file']);
     $filepath = uploaded($filename, false);
     $thumb_w = abs((int) fallback($_GET["max_width"], 640));
     $thumb_h = abs((int) fallback($_GET["max_height"], 0));

@@ -17,7 +17,7 @@
     if (!$visitor->group->can("view_site"))
         show_403(__("Access Denied"), __("You are not allowed to view this site."));
 
-    $filename = str_replace(DIR, "", $_GET['file']);
+    $filename = str_replace(array(DIR, "/"), "", $_GET['file']);
     $filepath = uploaded($filename, false);
 
     if (!is_readable($filepath) or !is_file($filepath))
