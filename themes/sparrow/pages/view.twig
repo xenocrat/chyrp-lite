@@ -3,13 +3,13 @@
 {% block content %}
 {% if not post.prev.no_results %}
 <div role="navigation" class="prev traversal">
-<a href="{{ post.prev.url() }}">{{ "&larr; Next post" | translate }}</a>
+<a rel="prev" href="{{ post.prev.url() }}">{{ "&larr; Next post" | translate }}</a>
 </div>
 {% endif %}
 {% include(["feathers" ~ DIR ~ post.feather ~ ".twig", "feathers" ~ DIR ~ "missing.twig"]) %}
 {% if not post.next.no_results %}
 <div role="navigation" class="next traversal">
-<a href="{{ post.next.url() }}">{{ "Previous post &rarr;" | translate }}</a>
+<a rel="next" href="{{ post.next.url() }}">{{ "Previous post &rarr;" | translate }}</a>
 </div>
 {% endif %}
 {% if module_enabled("pingable") and post.pingback_count > 0 %}

@@ -3,8 +3,8 @@
 {% block content %}
 {% include(["feathers" ~ DIR ~ post.feather ~ ".twig", "feathers" ~ DIR ~ "missing.twig"]) %}
 <div role="navigation" class="prev_next traversal">
-{% if not post.prev.no_results %}<a href="{{ post.prev.url() }}">{{ "Next post" | translate }}</a>{% endif %}
-{% if not post.next.no_results %}<a href="{{ post.next.url() }}">{{ "Previous post" | translate }}</a>{% endif %}
+{% if not post.prev.no_results %}<a rel="prev" href="{{ post.prev.url() }}">{{ "Next post" | translate }}</a>{% endif %}
+{% if not post.next.no_results %}<a rel="next" href="{{ post.next.url() }}">{{ "Previous post" | translate }}</a>{% endif %}
 </div>
 {% if module_enabled("pingable") and post.pingback_count > 0 %}
 <article role="complementary" class="discourse">
