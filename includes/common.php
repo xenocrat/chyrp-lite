@@ -135,8 +135,7 @@
 
     # Constant: CAN_USE_ZLIB
     # Can we use zlib to compress output?
-    define('CAN_USE_ZLIB',
-        (HTTP_ACCEPT_DEFLATE or HTTP_ACCEPT_GZIP) and extension_loaded("zlib"));
+    define('CAN_USE_ZLIB', (HTTP_ACCEPT_DEFLATE or HTTP_ACCEPT_GZIP) and extension_loaded("zlib"));
 
     # Constant: USE_ZLIB
     # Use zlib to provide content compression?
@@ -152,10 +151,9 @@
         }
     }
 
-    # Set the content encoding header so that it can survive error states.
-    if ((USE_OB and USE_ZLIB) or
-        (CAN_USE_ZLIB and ini_get("zlib.output_compression")))
-            header("Content-Encoding: ".(HTTP_ACCEPT_GZIP ? "gzip" : "deflate"));
+    # Set the content encoding header so that it can survive error state buffer cleans.
+    if ((USE_OB and USE_ZLIB) or (CAN_USE_ZLIB and ini_get("zlib.output_compression")))
+        header("Content-Encoding: ".(HTTP_ACCEPT_GZIP ? "gzip" : "deflate"));
 
     # Constant: OB_BASE_LEVEL
     # The base level of output buffering.
