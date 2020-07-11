@@ -76,6 +76,10 @@
             header("Cache-Control: no-cache, must-revalidate");
             header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
 
+            # Resend the content encoding header if transparent compression is on.
+            if (CAN_USE_ZLIB and ini_get("zlib.output_compression"))
+                header("Content-Encoding: ".(HTTP_ACCEPT_GZIP ? "gzip" : "deflate"));
+
             switch ($code) {
                 case 400:
                     header($_SERVER['SERVER_PROTOCOL']." 400 Bad Request");
