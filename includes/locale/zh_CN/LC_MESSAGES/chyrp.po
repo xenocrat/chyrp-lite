@@ -81,7 +81,7 @@ msgstr "路由启动了一个无效的控制器。"
 #: includes/controller/Admin.php:1896 includes/controller/Admin.php:1899
 #: includes/controller/Admin.php:1902 includes/controller/Admin.php:1905
 #: includes/controller/Admin.php:2100 includes/controller/Ajax.php:32
-#: includes/download.php:12 includes/download.php:15 includes/error.php:144
+#: includes/download.php:12 includes/download.php:15 includes/error.php:148
 #: includes/helpers.php:1847 includes/helpers.php:1853
 #: includes/helpers.php:1856 includes/helpers.php:1859
 #: includes/helpers.php:1885 includes/helpers.php:1888
@@ -169,15 +169,15 @@ msgstr "前往 GitHub &rarr;"
 msgid "Unable to check for new Chyrp Lite versions."
 msgstr "无法检查新的Chyrp Lite版本。"
 
-#: includes/common.php:287 includes/common.php:292
+#: includes/common.php:290 includes/common.php:295
 msgid "Service Unavailable"
 msgstr "暂停服务"
 
-#: includes/common.php:288
+#: includes/common.php:291
 msgid "This resource is temporarily unable to serve your request."
 msgstr ""
 
-#: includes/common.php:293
+#: includes/common.php:296
 msgid "This resource cannot respond because it is not configured."
 msgstr ""
 
@@ -860,7 +860,7 @@ msgstr "在登陆前必须激活您的账户。"
 msgid "Logged in."
 msgstr "已登陆。"
 
-#: includes/controller/Main.php:596 includes/error.php:358
+#: includes/controller/Main.php:596 includes/error.php:362
 msgid "Log in"
 msgstr "登陆"
 
@@ -906,15 +906,15 @@ msgstr "资源只能被GET请求。"
 msgid "File not found."
 msgstr "未找到。"
 
-#: includes/error.php:145
+#: includes/error.php:149
 msgid "An unspecified error has occurred."
 msgstr "发生未指定错误。"
 
-#: includes/error.php:350
+#: includes/error.php:354
 msgid "Backtrace"
 msgstr "回溯"
 
-#: includes/error.php:353
+#: includes/error.php:357
 #, php-format
 msgid "%s on line %d"
 msgstr "%s 在行 %d"

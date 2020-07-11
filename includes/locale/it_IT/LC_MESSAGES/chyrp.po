@@ -81,7 +81,7 @@ msgstr "Il percorso è stato avviato con un Controller non valido."
 #: includes/controller/Admin.php:1896 includes/controller/Admin.php:1899
 #: includes/controller/Admin.php:1902 includes/controller/Admin.php:1905
 #: includes/controller/Admin.php:2100 includes/controller/Ajax.php:32
-#: includes/download.php:12 includes/download.php:15 includes/error.php:144
+#: includes/download.php:12 includes/download.php:15 includes/error.php:148
 #: includes/helpers.php:1847 includes/helpers.php:1853
 #: includes/helpers.php:1856 includes/helpers.php:1859
 #: includes/helpers.php:1885 includes/helpers.php:1888
@@ -169,16 +169,16 @@ msgstr "Vai a GitHub &rarr;"
 msgid "Unable to check for new Chyrp Lite versions."
 msgstr "Impossibile controllare le nuove versioni di Chyrp Lite."
 
-#: includes/common.php:287 includes/common.php:292
+#: includes/common.php:290 includes/common.php:295
 msgid "Service Unavailable"
 msgstr "Servizio non disponibile"
 
-#: includes/common.php:288
+#: includes/common.php:291
 msgid "This resource is temporarily unable to serve your request."
 msgstr ""
 "Questa risorsa non è temporaneamente in grado di soddisfare la richiesta."
 
-#: includes/common.php:293
+#: includes/common.php:296
 msgid "This resource cannot respond because it is not configured."
 msgstr "Questa risorsa non può rispondere perché non configurata."
 
@@ -871,7 +871,7 @@ msgstr "Si deve attivare un tuo account prima di poter accedere."
 msgid "Logged in."
 msgstr "L'accesso é stato effettuato."
 
-#: includes/controller/Main.php:596 includes/error.php:358
+#: includes/controller/Main.php:596 includes/error.php:362
 msgid "Log in"
 msgstr "Accedi"
 
@@ -918,15 +918,15 @@ msgstr "Questa risorsa accetta solo richieste GET."
 msgid "File not found."
 msgstr "File non trovato."
 
-#: includes/error.php:145
+#: includes/error.php:149
 msgid "An unspecified error has occurred."
 msgstr "Si è verificato un errore non specificato."
 
-#: includes/error.php:350
+#: includes/error.php:354
 msgid "Backtrace"
 msgstr "Backtrace"
 
-#: includes/error.php:353
+#: includes/error.php:357
 #, php-format
 msgid "%s on line %d"
 msgstr "%s riga %d"

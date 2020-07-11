@@ -89,7 +89,7 @@ msgstr ""
 #: includes/controller/Ajax.php:32
 #: includes/download.php:12
 #: includes/download.php:15
-#: includes/error.php:144
+#: includes/error.php:148
 #: includes/helpers.php:1847
 #: includes/helpers.php:1853
 #: includes/helpers.php:1856
@@ -240,16 +240,16 @@ msgstr ""
 msgid "Unable to check for new Chyrp Lite versions."
 msgstr ""
 
-#: includes/common.php:287
-#: includes/common.php:292
+#: includes/common.php:290
+#: includes/common.php:295
 msgid "Service Unavailable"
 msgstr ""
 
-#: includes/common.php:288
+#: includes/common.php:291
 msgid "This resource is temporarily unable to serve your request."
 msgstr ""
 
-#: includes/common.php:293
+#: includes/common.php:296
 msgid "This resource cannot respond because it is not configured."
 msgstr ""
 
@@ -1054,7 +1054,7 @@ msgid "Logged in."
 msgstr ""
 
 #: includes/controller/Main.php:596
-#: includes/error.php:358
+#: includes/error.php:362
 msgid "Log in"
 msgstr ""
 
@@ -1100,15 +1100,15 @@ msgstr ""
 msgid "File not found."
 msgstr ""
 
-#: includes/error.php:145
+#: includes/error.php:149
 msgid "An unspecified error has occurred."
 msgstr ""
 
-#: includes/error.php:350
+#: includes/error.php:354
 msgid "Backtrace"
 msgstr ""
 
-#: includes/error.php:353
+#: includes/error.php:357
 #, php-format
 msgid "%s on line %d"
 msgstr ""
