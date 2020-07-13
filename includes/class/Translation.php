@@ -21,8 +21,7 @@
          * Discovers the current locale.
          */
         private function __construct() {
-            if (file_exists(INCLUDES_DIR.DIR."config.json.php"))
-                $this->locale = get_locale();
+            $this->locale = get_locale();
         }
 
        /**

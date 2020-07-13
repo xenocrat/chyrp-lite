@@ -352,7 +352,7 @@
      *     Does not use setlocale() because the return value is non-normative.
      */
     function get_locale() {
-        if (INSTALLING)
+        if (INSTALLING or !file_exists(INCLUDES_DIR.DIR."config.json.php"))
             return isset($_REQUEST['locale']) ? $_REQUEST['locale'] : "en_US" ;
 
         return Config::current()->locale;
