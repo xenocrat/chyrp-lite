@@ -209,13 +209,14 @@
             foreach ($results[0] as $result)
                 $ids[] = $result["id"];
 
-            if (!empty($ids))
+            if (!empty($ids)) {
                 $posts = new Paginator(
                     Post::find(array("placeholders" => true,
                                      "drafts" => true,
                                      "where" => array("id" => $ids))), $admin->post_limit);
-            else
+            } else {
                 $posts = new Paginator(array());
+            }
 
             $admin->display("pages".DIR."manage_tags",
                             array("tag_cloud" => self::tag_cloud(), "posts" => $posts));
