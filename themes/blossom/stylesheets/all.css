@@ -520,7 +520,7 @@ div#main > article, div.standalone {
     clear: both;
     background-color: #fbfbf7;
     margin: 0rem auto 2rem auto;
-    padding: 2rem 2rem 0rem 2rem;
+    padding: 1.5rem 2rem 0rem 2rem;
     border: 1px solid #c6ccc8;
     border-radius: 6px;
     background-image: linear-gradient(to bottom, #ffffff 0em, #fbfbf7 10em);
