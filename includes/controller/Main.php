@@ -248,14 +248,17 @@
                                                     "depth" => $depth,
                                                     "next"  => strtotime(fallback($next["created_at"])),
                                                     "prev"  => strtotime(fallback($prev["created_at"])))),
-                           $title);
+                                                    $title);
         }
 
         /**
          * Function: main_search
-         * Grabs the posts for a search query.
+         * Grabs the posts and pages for a search query.
          */
         public function main_search() {
+            $config = Config::current();
+            $visitor = Visitor::current();
+
             # Redirect searches to a clean URL or dirty GET depending on configuration.
             if (isset($_POST['query']))
                 redirect("search/".str_ireplace("%2F", "", urlencode($_POST['query']))."/");
@@ -275,15 +278,30 @@
             foreach ($results[0] as $result)
                 $ids[] = $result["id"];
 
-            if (!empty($ids))
+            if (!empty($ids)) {
                 $posts = new Paginator(
                     Post::find(array("placeholders" => true,
                                      "where" => array("id" => $ids))), $this->post_limit);
-            else
+            } else {
                 $posts = new Paginator(array());
+            }
+
+            if ($config->search_pages) {
+                list($where, $params) = keywords($_GET['query'],
+                                        "title LIKE :query OR body LIKE :query", "pages");
+
+                if (!$visitor->group->can("view_page"))
+                    $where["public"] = true;
+
+                $pages = Page::find(array("where" => $where,
+                                          "params" => $params));   
+            } else {
+                $pages = array();
+            }
 
             $this->display(array("pages".DIR."search", "pages".DIR."index"),
                            array("posts" => $posts,
+                                 "pages" => $pages,
                                  "search" => $_GET['query']),
                            _f("Search results for &#8220;%s&#8221;", fix($_GET['query'])));
         }

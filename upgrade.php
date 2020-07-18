@@ -345,6 +345,19 @@
             error(__("Error"), __("Could not write the configuration file."));
     }
 
+    /**
+     * Function: add_search_pages
+     * Adds the search_pages config setting.
+     *
+     * Versions: 2020.03 => 2020.04
+     */
+    function add_search_pages() {
+        $set = Config::current()->set("search_pages", false, true);
+
+        if ($set === false)
+            error(__("Error"), __("Could not write the configuration file."));
+    }
+
     #---------------------------------------------
     # Output Starts
     #---------------------------------------------
@@ -579,6 +592,7 @@
         remove_cookies_notification();
         remove_ajax();
         disable_simplemde();
+        add_search_pages();
 
         # Perform module upgrades.
         foreach ($config->enabled_modules as $module)

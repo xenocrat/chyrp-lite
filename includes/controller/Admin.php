@@ -361,13 +361,14 @@
             foreach ($results[0] as $result)
                 $ids[] = $result["id"];
 
-            if (!empty($ids))
+            if (!empty($ids)) {
                 $posts = new Paginator(
                     Post::find(array("placeholders" => true,
                                      "drafts" => true,
                                      "where" => array("id" => $ids))), $this->post_limit);
-            else
+            } else {
                 $posts = new Paginator(array());
+            }
 
             foreach ($posts->paginated as &$post) {
                 if ($ids = $post->groups()) {
@@ -1162,10 +1163,11 @@
             if (!empty($_GET['search'])) {
                 $user = new User(array("login" => $_GET['search']));
 
-                if (!$user->no_results)
+                if (!$user->no_results) {
                     $groups = new Paginator(array($user->group));
-                else
+                } else {
                     $groups = new Paginator(array());
+                }
             } else {
                 $groups = new Paginator(Group::find(
                     array("placeholders" => true, "order" => "id ASC")), $this->post_limit);
@@ -1970,6 +1972,7 @@
             $config->set("feed_format", $_POST['feed_format']);
             $config->set("uploads_path", $matches[1].$matches[2].$matches[3]);
             $config->set("uploads_limit", (int) $_POST['uploads_limit']);
+            $config->set("search_pages", !empty($_POST['search_pages']));
             $config->set("send_pingbacks", !empty($_POST['send_pingbacks']));
             $config->set("enable_xmlrpc", !empty($_POST['enable_xmlrpc']));
             $config->set("enable_emoji", !empty($_POST['enable_emoji']));

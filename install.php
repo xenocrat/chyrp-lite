@@ -775,6 +775,7 @@
                          $config->set("feed_items", 20),
                          $config->set("uploads_path", DIR."uploads".DIR),
                          $config->set("uploads_limit", 10),
+                         $config->set("search_pages", false),
                          $config->set("send_pingbacks", false),
                          $config->set("enable_xmlrpc", true),
                          $config->set("enable_emoji", true),

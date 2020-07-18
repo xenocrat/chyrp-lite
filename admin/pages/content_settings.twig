@@ -39,6 +39,13 @@
 </select>
 </p>
 <p>
+<label for="search_pages">{{ "Search Pages" | translate }}</label>
+<input class="checkbox" type="checkbox" name="search_pages" id="search_pages"{{ site.search_pages | checked }}>
+<small>
+{{ "Include pages in search results." | translate }}
+</small>
+</p>
+<p>
 <label for="send_pingbacks">{{ "Send Pingbacks" | translate }}</label>
 <input class="checkbox" type="checkbox" name="send_pingbacks" id="send_pingbacks"{{ site.send_pingbacks | checked }}>
 <small>
