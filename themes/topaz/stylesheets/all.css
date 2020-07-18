@@ -90,8 +90,13 @@ h2 {
     margin: 0.67em 0em;
     padding: 0em;
 }
-h2.post_title {
+h2.post_title,
+h2.page_title {
     text-align: center;
+}
+h2.page_title {
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #ebedec;
 }
 h3 {
     font-size: 1em;
@@ -530,7 +535,7 @@ div#main > article, div.standalone {
     clear: both;
     background-color: #ffffff;
     margin: 0rem auto 2rem auto;
-    padding: 2rem 2rem 0rem 2rem;
+    padding: 1.5rem 2rem 0rem 2rem;
     border: 1px solid #c6ccc8;
     border-radius: 0.4em;
 }
