@@ -31,6 +31,8 @@ msgstr ""
 #: themes/blossom/feathers/uploader.twig:6
 #: themes/blossom/feathers/video.twig:6
 #: themes/blossom/pages/archive.twig:36
+#: themes/blossom/pages/page.twig:6
+#: themes/blossom/pages/search.twig:19
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr ""
@@ -407,7 +409,7 @@ msgstr ""
 msgid "Search results for &#8220;%s&#8221;"
 msgstr ""
 
-#: themes/blossom/pages/search.twig:13
+#: themes/blossom/pages/search.twig:10
 msgid "Your search did not return any results."
 msgstr ""
 

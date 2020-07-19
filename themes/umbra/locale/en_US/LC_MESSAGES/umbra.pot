@@ -36,6 +36,7 @@ msgstr ""
 #: themes/umbra/feathers/uploader.twig:6
 #: themes/umbra/feathers/video.twig:6
 #: themes/umbra/pages/archive.twig:29
+#: themes/umbra/pages/page.twig:6
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr ""
@@ -332,7 +333,7 @@ msgstr ""
 msgid "Search results for &#8220;%s&#8221;"
 msgstr ""
 
-#: themes/umbra/pages/search.twig:10
+#: themes/umbra/pages/search.twig:7
 msgid "Your search did not return any results."
 msgstr ""
 

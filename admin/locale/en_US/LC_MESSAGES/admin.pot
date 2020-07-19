@@ -39,7 +39,7 @@ msgstr ""
 #: admin/help/markdown.twig:3
 #: admin/help/markdown.twig:6
 #: admin/help/markdown.twig:13
-#: admin/pages/content_settings.twig:65
+#: admin/pages/content_settings.twig:72
 #: admin/partials/page_fields.twig:10
 #: admin/partials/post_fields.twig:26
 msgid "Markdown"
@@ -146,7 +146,7 @@ msgstr ""
 
 #: admin/help/unicode_emoticons.twig:3
 #: admin/help/unicode_emoticons.twig:6
-#: admin/pages/content_settings.twig:57
+#: admin/pages/content_settings.twig:64
 msgid "Unicode Emoticons"
 msgstr ""
 
@@ -181,7 +181,7 @@ msgstr ""
 
 #: admin/help/xmlrpc.twig:3
 #: admin/help/xmlrpc.twig:6
-#: admin/pages/content_settings.twig:49
+#: admin/pages/content_settings.twig:56
 msgid "XML-RPC Support"
 msgstr ""
 
@@ -264,16 +264,24 @@ msgid "Feed Format"
 msgstr ""
 
 #: admin/pages/content_settings.twig:42
-msgid "Send Pingbacks"
+msgid "Search Pages"
 msgstr ""
 
 #: admin/pages/content_settings.twig:45
+msgid "Include pages in search results."
+msgstr ""
+
+#: admin/pages/content_settings.twig:49
+msgid "Send Pingbacks"
+msgstr ""
+
+#: admin/pages/content_settings.twig:52
 msgid "Attempts to notify sites to which your posts link."
 msgstr ""
 
-#: admin/pages/content_settings.twig:51
-#: admin/pages/content_settings.twig:59
-#: admin/pages/content_settings.twig:67
+#: admin/pages/content_settings.twig:58
+#: admin/pages/content_settings.twig:66
+#: admin/pages/content_settings.twig:74
 #: admin/pages/export.twig:14
 #: admin/pages/export.twig:20
 #: admin/pages/export.twig:26
@@ -294,19 +302,19 @@ msgstr ""
 msgid "help"
 msgstr ""
 
-#: admin/pages/content_settings.twig:53
+#: admin/pages/content_settings.twig:60
 msgid "XML-RPC support allows you to manipulate your blog content remotely."
 msgstr ""
 
-#: admin/pages/content_settings.twig:61
+#: admin/pages/content_settings.twig:68
 msgid "Display emoticons as Unicode emoji."
 msgstr ""
 
-#: admin/pages/content_settings.twig:69
+#: admin/pages/content_settings.twig:76
 msgid "Compose blog content using Markdown text formatting."
 msgstr ""
 
-#: admin/pages/content_settings.twig:74
+#: admin/pages/content_settings.twig:81
 #: admin/pages/edit_group.twig:24
 #: admin/pages/edit_user.twig:55
 #: admin/pages/general_settings.twig:57

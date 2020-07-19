@@ -9,10 +9,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3.1\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#. Copyright 2019 Daniel Pimley and other contributors.
+#. Copyright 2020 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/sparrow/content/comment.twig:3
 #, php-format
@@ -44,6 +44,7 @@ msgstr "标签"
 #: themes/sparrow/feathers/photo.twig:6 themes/sparrow/feathers/quote.twig:6
 #: themes/sparrow/feathers/text.twig:6 themes/sparrow/feathers/uploader.twig:6
 #: themes/sparrow/feathers/video.twig:6 themes/sparrow/pages/archive.twig:36
+#: themes/sparrow/pages/page.twig:6
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "永久链接至 &#8220;%s&#8221;"
@@ -378,7 +379,7 @@ msgstr "没有帖子"
 msgid "Search results for &#8220;%s&#8221;"
 msgstr "&#8220;%s&#8221; 的搜索结果"
 
-#: themes/sparrow/pages/search.twig:10
+#: themes/sparrow/pages/search.twig:7
 msgid "Your search did not return any results."
 msgstr "空空如也"
 

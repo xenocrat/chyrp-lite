@@ -9,10 +9,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. Copyright 2019 Daniel Pimley and other contributors.
+#. Copyright 2020 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/blossom/content/comment.twig:3
 #, php-format
@@ -40,6 +40,7 @@ msgstr "Tags"
 #: themes/blossom/feathers/photo.twig:6 themes/blossom/feathers/quote.twig:6
 #: themes/blossom/feathers/text.twig:6 themes/blossom/feathers/uploader.twig:6
 #: themes/blossom/feathers/video.twig:6 themes/blossom/pages/archive.twig:36
+#: themes/blossom/pages/page.twig:6 themes/blossom/pages/search.twig:19
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "Permanentlink zu &#8220;%s&#8221;"
@@ -415,7 +416,7 @@ msgstr "Keine Posts"
 msgid "Search results for &#8220;%s&#8221;"
 msgstr "Suchergebnisse für &#8220;%s&#8221;"
 
-#: themes/blossom/pages/search.twig:13
+#: themes/blossom/pages/search.twig:10
 msgid "Your search did not return any results."
 msgstr "Deine Suche erzielte keine Ergebnisse."
 

@@ -245,13 +245,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 1197
+	includes/controller/Admin.php on line 1199
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1478
+	includes/controller/Admin.php on line 1480
 
 Arguments:
 	$group
@@ -260,7 +260,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1503
+	includes/controller/Admin.php on line 1505
 
 Arguments:
 	$user
@@ -269,7 +269,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1542
+	includes/controller/Admin.php on line 1544
 
 Arguments:
 	$entry, $post
@@ -278,7 +278,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1572
+	includes/controller/Admin.php on line 1574
 
 Arguments:
 	$entry, $page
@@ -287,7 +287,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1576
+	includes/controller/Admin.php on line 1578
 
 Arguments:
 	$imports
@@ -296,27 +296,27 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1863
+	includes/controller/Admin.php on line 1865
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1871
+	includes/controller/Admin.php on line 1873
 
 
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 356
+	includes/controller/Main.php on line 374
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 498
-	includes/controller/Main.php on line 527
-	includes/controller/Main.php on line 590
+	includes/controller/Main.php on line 516
+	includes/controller/Main.php on line 545
+	includes/controller/Main.php on line 608
 
 Arguments:
 	$user
@@ -325,13 +325,13 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 578
+	includes/controller/Main.php on line 596
 
 
 user_logged_out
 ---------------
 Called from:
-	includes/controller/Main.php on line 612
+	includes/controller/Main.php on line 630
 
 Arguments:
 	$user
@@ -340,7 +340,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 776
+	includes/controller/Main.php on line 794
 
 Arguments:
 	$post, $feed
@@ -903,7 +903,7 @@ Arguments:
 posts_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 1261
+	includes/controller/Admin.php on line 1263
 
 Target:
 	$posts_atom
@@ -915,7 +915,7 @@ Arguments:
 pages_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 1310
+	includes/controller/Admin.php on line 1312
 
 Target:
 	$pages_atom
@@ -927,7 +927,7 @@ Arguments:
 export
 ------
 Called from:
-	includes/controller/Admin.php on line 1373
+	includes/controller/Admin.php on line 1375
 
 Target:
 	$exports
@@ -936,7 +936,7 @@ Target:
 before_import
 -------------
 Called from:
-	includes/controller/Admin.php on line 1447
+	includes/controller/Admin.php on line 1449
 
 Target:
 	$imports
@@ -945,7 +945,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 2143
+	includes/controller/Admin.php on line 2146
 
 Target:
 	$write
@@ -954,7 +954,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2180
+	includes/controller/Admin.php on line 2183
 
 Target:
 	$manage
@@ -963,7 +963,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 2205
+	includes/controller/Admin.php on line 2208
 
 Target:
 	$settings
@@ -972,7 +972,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2223
+	includes/controller/Admin.php on line 2226
 
 Target:
 	$extend
@@ -981,7 +981,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2284
+	includes/controller/Admin.php on line 2287
 
 Target:
 	$this->context
@@ -1031,7 +1031,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 845
+	includes/controller/Main.php on line 863
 
 Target:
 	$this->context

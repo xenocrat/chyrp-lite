@@ -9,10 +9,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. Copyright 2019 Daniel Pimley and other contributors.
+#. Copyright 2020 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/umbra/content/comment.twig:3
 #, php-format
@@ -44,6 +44,7 @@ msgstr "Tags"
 #: themes/umbra/feathers/photo.twig:6 themes/umbra/feathers/quote.twig:6
 #: themes/umbra/feathers/text.twig:6 themes/umbra/feathers/uploader.twig:6
 #: themes/umbra/feathers/video.twig:6 themes/umbra/pages/archive.twig:29
+#: themes/umbra/pages/page.twig:6
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "Permanentlink zu &#8220;%s&#8221;"
@@ -342,7 +343,7 @@ msgstr "Keine Posts"
 msgid "Search results for &#8220;%s&#8221;"
 msgstr "Suchergebnisse für &#8220;%s&#8221;"
 
-#: themes/umbra/pages/search.twig:10
+#: themes/umbra/pages/search.twig:7
 msgid "Your search did not return any results."
 msgstr "Deine Suche erzielte keine Ergebnisse."
 

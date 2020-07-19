@@ -36,6 +36,7 @@ msgstr ""
 #: themes/sparrow/feathers/uploader.twig:6
 #: themes/sparrow/feathers/video.twig:6
 #: themes/sparrow/pages/archive.twig:36
+#: themes/sparrow/pages/page.twig:6
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr ""
@@ -371,7 +372,7 @@ msgstr ""
 msgid "Search results for &#8220;%s&#8221;"
 msgstr ""
 
-#: themes/sparrow/pages/search.twig:10
+#: themes/sparrow/pages/search.twig:7
 msgid "Your search did not return any results."
 msgstr ""
 

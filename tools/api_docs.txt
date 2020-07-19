@@ -1572,7 +1572,7 @@ Grabs the posts for the archive page.
 
 Function: main_search
 ---------------------
-Grabs the posts for a search query.
+Grabs the posts and pages for a search query.
 
 
 Function: main_drafts
