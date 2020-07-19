@@ -2,7 +2,9 @@
 
 {% block content %}
 <article id="page_{{ page.id }}" class="page"> 
-<h2 class="page_title">{{ page.title }}</h2>
+<h2 class="page_title">
+<a href="{{ page.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(page.title | striptags | normalize | fix(true)) }}">{{ page.title }}</a>
+</h2>
 <section>
 {{ page.body }}
 </section>
