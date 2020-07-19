@@ -96,6 +96,7 @@ h2.page_title {
 }
 h2.page_title {
     padding-bottom: 2rem;
+    margin-bottom: 2rem;
     border-bottom: 1px solid #ebedec;
 }
 h3 {
