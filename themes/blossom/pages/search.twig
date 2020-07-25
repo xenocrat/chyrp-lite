@@ -13,6 +13,11 @@
 {% for post in posts.paginated %}
 {% include(["feathers" ~ DIR ~ post.feather ~ ".twig", "feathers" ~ DIR ~ "missing.twig"]) %}
 {% endfor %}
+{% if posts.paginated is not empty and pages is not empty %}
+<div class="ribbon">
+<h3 class="ribbon">{{ "Pages" | translate }}</h3>
+</div>
+{% endif %}
 {% for page in pages %}
 <article id="page_{{ page.id }}" class="page"> 
 <h2>
