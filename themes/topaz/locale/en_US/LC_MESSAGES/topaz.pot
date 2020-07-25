@@ -32,7 +32,7 @@ msgstr ""
 #: themes/topaz/feathers/video.twig:6
 #: themes/topaz/pages/archive.twig:29
 #: themes/topaz/pages/page.twig:6
-#: themes/topaz/pages/search.twig:19
+#: themes/topaz/pages/search.twig:24
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr ""
@@ -173,6 +173,7 @@ msgid "Categories"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:61
+#: themes/topaz/pages/search.twig:18
 msgid "Pages"
 msgstr ""
 

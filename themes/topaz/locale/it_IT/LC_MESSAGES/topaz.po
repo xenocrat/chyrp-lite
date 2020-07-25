@@ -40,7 +40,7 @@ msgstr "Tag"
 #: themes/topaz/feathers/photo.twig:6 themes/topaz/feathers/quote.twig:6
 #: themes/topaz/feathers/text.twig:6 themes/topaz/feathers/uploader.twig:6
 #: themes/topaz/feathers/video.twig:6 themes/topaz/pages/archive.twig:29
-#: themes/topaz/pages/page.twig:6 themes/topaz/pages/search.twig:19
+#: themes/topaz/pages/page.twig:6 themes/topaz/pages/search.twig:24
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "Link permanente &#8220;%s&#8221;"
@@ -165,7 +165,7 @@ msgstr "Accedi"
 msgid "Categories"
 msgstr "Categorie"
 
-#: themes/topaz/content/sidebar.twig:61
+#: themes/topaz/content/sidebar.twig:61 themes/topaz/pages/search.twig:18
 msgid "Pages"
 msgstr "Pagine"
 

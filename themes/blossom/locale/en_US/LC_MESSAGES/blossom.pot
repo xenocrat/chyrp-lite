@@ -32,7 +32,7 @@ msgstr ""
 #: themes/blossom/feathers/video.twig:6
 #: themes/blossom/pages/archive.twig:36
 #: themes/blossom/pages/page.twig:6
-#: themes/blossom/pages/search.twig:19
+#: themes/blossom/pages/search.twig:24
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr ""
@@ -173,6 +173,7 @@ msgid "Categories"
 msgstr ""
 
 #: themes/blossom/content/sidebar.twig:61
+#: themes/blossom/pages/search.twig:18
 msgid "Pages"
 msgstr ""
 
