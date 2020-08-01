@@ -786,7 +786,8 @@ img {
     margin: 0em;
     padding: 0em;
 }
-article > section.photo img {
+article > section.photo img,
+article.archive img {
     width: 100%;
 }
 article img {

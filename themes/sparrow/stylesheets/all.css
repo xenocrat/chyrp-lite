@@ -684,7 +684,8 @@ img {
     margin: 0em;
     padding: 0em;
 }
-article > section.photo img {
+article > section.photo img,
+article.archive img {
     width: 100%;
 }
 article img {
@@ -705,6 +706,7 @@ img.gravatar {
     left: 24px;
     width: 48px;
     height: 48px;
+    border-radius: 50%;
 }
 .ajax_loading {
     background-size: 30px 30px;
