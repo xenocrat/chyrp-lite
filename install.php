@@ -7,8 +7,8 @@
     header("Content-Type: text/html; charset=UTF-8");
 
     define('DEBUG',            true);
-    define('CHYRP_VERSION',    "2020.03");
-    define('CHYRP_CODENAME',   "Dead Sea");
+    define('CHYRP_VERSION',    "2020.04");
+    define('CHYRP_CODENAME',   "Spanish");
     define('CHYRP_IDENTITY',   "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
     define('MAIN',             false);
     define('ADMIN',            false);
