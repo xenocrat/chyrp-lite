@@ -539,11 +539,11 @@ function twig_replace_filter($str, $from, $to = null)
  */
 function twig_round($value, $precision = 0, $method = 'common')
 {
-    if ('common' == $method) {
+    if ('common' === $method) {
         return round($value, $precision);
     }
 
-    if ('ceil' != $method && 'floor' != $method) {
+    if ('ceil' !== $method && 'floor' !== $method) {
         throw new RuntimeError('The round filter only supports the "common", "ceil", and "floor" methods.');
     }
 
@@ -1214,7 +1214,7 @@ function _twig_escape_js_callback($matches)
 
     /*
      * A few characters have short escape sequences in JSON and JavaScript.
-     * Escape sequences supported only by JavaScript, not JSON, are ommitted.
+     * Escape sequences supported only by JavaScript, not JSON, are omitted.
      * \" is also supported but omitted, because the resulting string is not HTML safe.
      */
     static $shortMap = [
@@ -1504,7 +1504,7 @@ function twig_to_array($seq, $preserveKeys = true)
 function twig_test_empty($value)
 {
     if ($value instanceof \Countable) {
-        return 0 == \count($value);
+        return 0 === \count($value);
     }
 
     if ($value instanceof \Traversable) {
@@ -1695,6 +1695,10 @@ function twig_array_batch($items, $size, $fill = null, $preserveKeys = true)
 
 function twig_array_filter($array, $arrow)
 {
+    if (!twig_test_iterable($array)) {
+        throw new RuntimeError(sprintf('The "filter" filter expects an array or "Traversable", got "%s".', \is_object($array) ? \get_class($array) : \gettype($array)));
+    }
+
     if (\is_array($array)) {
         if (\PHP_VERSION_ID >= 50600) {
             return array_filter($array, $arrow, \ARRAY_FILTER_USE_BOTH);
