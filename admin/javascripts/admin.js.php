@@ -142,6 +142,14 @@ function confirm_submit() {
         if (!confirm(text.replace(/<[^>]+>/g, "")))
             e.preventDefault();
     });
+
+    $("button[data-confirm]").on("click.confirm", function(e) {
+        var text = $(this).attr("data-confirm") ||
+                   '<?php echo __("Are you sure you want to proceed?", "admin"); ?>' ;
+
+        if (!confirm(text.replace(/<[^>]+>/g, "")))
+            e.preventDefault();
+    });
 }
 // Prevent forms being submitted multiple times in a short interval.
 function solo_submit() {
@@ -333,28 +341,6 @@ var Settings = {
                     $(this).removeClass("tag_added");
             });
         }).trigger("keyup");
-    }
-}
-var Extend = {
-    init: function() {
-        // Hide the confirmation checkbox and use a modal instead.
-        $(".module_disabler_confirm, .feather_disabler_confirm").hide();
-        $(".module_disabler, .feather_disabler").on("submit.disabler", Extend.confirm);
-    },
-    confirm: function(e) {
-        var id = $(e.target).parents("li.module, li.feather").attr("id");
-        var name = (!!id) ? id.replace(/^(module|feather)_/, "") : "" ;
-        var text = $('label[for="confirm_' + name + '"]').html();
-
-        if (!!text) {
-            e.preventDefault();
-
-            // Display the modal if text was found, and set the checkbox to the response.
-            $('#confirm_' + name).prop("checked", confirm(text.replace(/<[^>]+>/g, "")));
-
-            // Disable handlers and resubmit the form with the checkbox set accordingly.
-            $(e.target).off("submit.disabler submit.solo").submit();
-        }
     }
 }
 <?php $trigger->call("admin_javascript"); ?>

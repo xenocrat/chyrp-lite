@@ -29,10 +29,9 @@
 <img src="{{ site.chyrp_url }}/admin/images/icons/deny.svg" alt="">{{ "Disable" | translate }}
 </button>
 {% if feather.confirm is not empty %}
-<p class="feather_disabler_confirm">
-<input class="checkbox" type="checkbox" name="confirm" id="confirm_{{ safename }}">
-<label for="confirm_{{ safename }}">{{ feather.confirm }}{# translation is done in the controller #}</label>
-</p>
+<button name="confirm" value="yes" type="submit" data-confirm="{{ feather.confirm | fix(true) }}">
+<img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg" alt="">{{ "Delete!" | translate }}
+</button>
 {% endif %}
 </form>
 <div class="clear"></div>
