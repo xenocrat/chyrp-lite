@@ -34,7 +34,10 @@
 </tr>
 {% else %}
 <tr>
-<td class="placeholder"><span class="sub">{{ "(none)" | translate }}</span></td>
+<td class="placeholder">
+<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/failure.svg" alt="">
+<span class="sub">{{ "(none)" | translate }}</span>
+</td>
 </tr>
 {% endfor %}
 </tbody>
