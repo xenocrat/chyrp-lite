@@ -172,11 +172,12 @@ msgstr ""
 msgid "Filename"
 msgstr ""
 
-#: admin/help/uploads_manifest.twig:22
-#: admin/pages/manage_pages.twig:67
-#: admin/pages/manage_posts.twig:55
-#: admin/pages/manage_users.twig:71
-msgid "(none)"
+#: admin/help/uploads_manifest.twig:24
+#: admin/pages/manage_pages.twig:69
+#: admin/pages/manage_posts.twig:57
+#: admin/pages/manage_users.twig:73
+#: admin/partials/page_fields.twig:52
+msgid "[None]"
 msgstr ""
 
 #: admin/help/xmlrpc.twig:3
@@ -199,25 +200,26 @@ msgid "Toggle All"
 msgstr ""
 
 #: admin/javascripts/admin.js.php:140
+#: admin/javascripts/admin.js.php:148
 msgid "Are you sure you want to proceed?"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:191
-#: admin/javascripts/admin.js.php:294
+#: admin/javascripts/admin.js.php:199
+#: admin/javascripts/admin.js.php:302
 msgid "Close"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:198
-#: admin/javascripts/admin.js.php:301
+#: admin/javascripts/admin.js.php:206
+#: admin/javascripts/admin.js.php:309
 msgid "close"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:218
+#: admin/javascripts/admin.js.php:226
 #: admin/pages/themes.twig:28
 msgid "Preview"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:234
+#: admin/javascripts/admin.js.php:242
 msgid "preview"
 msgstr ""
 
@@ -288,13 +290,13 @@ msgstr ""
 #: admin/pages/export.twig:32
 #: admin/pages/export.twig:41
 #: admin/pages/feathers.twig:18
-#: admin/pages/feathers.twig:54
+#: admin/pages/feathers.twig:53
 #: admin/pages/general_settings.twig:27
 #: admin/pages/manage_pages.twig:11
 #: admin/pages/manage_posts.twig:11
 #: admin/pages/manage_users.twig:11
 #: admin/pages/modules.twig:18
-#: admin/pages/modules.twig:74
+#: admin/pages/modules.twig:73
 #: admin/partials/page_fields.twig:20
 #: admin/partials/post_fields.twig:30
 #: admin/partials/post_fields.twig:98
@@ -565,9 +567,9 @@ msgid "Enabled"
 msgstr ""
 
 #: admin/pages/feathers.twig:13
-#: admin/pages/feathers.twig:49
+#: admin/pages/feathers.twig:48
 #: admin/pages/modules.twig:13
-#: admin/pages/modules.twig:69
+#: admin/pages/modules.twig:68
 #: admin/pages/themes.twig:12
 msgid "info"
 msgstr ""
@@ -577,13 +579,18 @@ msgstr ""
 msgid "Disable"
 msgstr ""
 
-#: admin/pages/feathers.twig:44
-#: admin/pages/modules.twig:64
+#: admin/pages/feathers.twig:33
+#: admin/pages/modules.twig:53
+msgid "Uninstall"
+msgstr ""
+
+#: admin/pages/feathers.twig:43
+#: admin/pages/modules.twig:63
 msgid "Disabled"
 msgstr ""
 
-#: admin/pages/feathers.twig:65
-#: admin/pages/modules.twig:106
+#: admin/pages/feathers.twig:64
+#: admin/pages/modules.twig:105
 msgid "Enable"
 msgstr ""
 
@@ -732,9 +739,9 @@ msgid "delete"
 msgstr ""
 
 #: admin/pages/manage_groups.twig:64
-#: admin/pages/manage_pages.twig:74
-#: admin/pages/manage_posts.twig:62
-#: admin/pages/manage_users.twig:78
+#: admin/pages/manage_pages.twig:77
+#: admin/pages/manage_posts.twig:65
+#: admin/pages/manage_users.twig:81
 #, php-format
 msgid "Page %d of %s"
 msgstr ""
@@ -817,12 +824,12 @@ msgid "Modules"
 msgstr ""
 
 #: admin/pages/modules.twig:25
-#: admin/pages/modules.twig:81
+#: admin/pages/modules.twig:80
 msgid "This module conflicts with the following modules:"
 msgstr ""
 
 #: admin/pages/modules.twig:35
-#: admin/pages/modules.twig:91
+#: admin/pages/modules.twig:90
 msgid "This module requires the following modules to be enabled:"
 msgstr ""
 
@@ -1074,10 +1081,6 @@ msgstr ""
 
 #: admin/partials/page_fields.twig:50
 msgid "Parent"
-msgstr ""
-
-#: admin/partials/page_fields.twig:52
-msgid "[None]"
 msgstr ""
 
 #: admin/partials/page_fields.twig:70

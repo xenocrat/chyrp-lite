@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Copyright 2020 Daniel Pimley and other contributors.
@@ -226,10 +226,11 @@ msgstr "Manifesto per i caricamenti dati"
 msgid "Filename"
 msgstr "Nome del file"
 
-#: admin/help/uploads_manifest.twig:22 admin/pages/manage_pages.twig:67
-#: admin/pages/manage_posts.twig:55 admin/pages/manage_users.twig:71
-msgid "(none)"
-msgstr "(nessuno)"
+#: admin/help/uploads_manifest.twig:24 admin/pages/manage_pages.twig:69
+#: admin/pages/manage_posts.twig:57 admin/pages/manage_users.twig:73
+#: admin/partials/page_fields.twig:52
+msgid "[None]"
+msgstr "[Nessuno]"
 
 #: admin/help/xmlrpc.twig:3 admin/help/xmlrpc.twig:6
 #: admin/pages/content_settings.twig:56
@@ -255,23 +256,23 @@ msgstr "L'URL XML-RPC del tuo blog è <code>%s/includes/RPC.php</code>."
 msgid "Toggle All"
 msgstr "Spunta tutto"
 
-#: admin/javascripts/admin.js.php:140
+#: admin/javascripts/admin.js.php:140 admin/javascripts/admin.js.php:148
 msgid "Are you sure you want to proceed?"
 msgstr "Sei sicuro di volere procedere?"
 
-#: admin/javascripts/admin.js.php:191 admin/javascripts/admin.js.php:294
+#: admin/javascripts/admin.js.php:199 admin/javascripts/admin.js.php:302
 msgid "Close"
 msgstr "Chiudi"
 
-#: admin/javascripts/admin.js.php:198 admin/javascripts/admin.js.php:301
+#: admin/javascripts/admin.js.php:206 admin/javascripts/admin.js.php:309
 msgid "close"
 msgstr "chiudi"
 
-#: admin/javascripts/admin.js.php:218 admin/pages/themes.twig:28
+#: admin/javascripts/admin.js.php:226 admin/pages/themes.twig:28
 msgid "Preview"
 msgstr "Anteprima"
 
-#: admin/javascripts/admin.js.php:234
+#: admin/javascripts/admin.js.php:242
 msgid "preview"
 msgstr "anteprima"
 
@@ -340,10 +341,10 @@ msgstr "Tenta di notificare i siti a cui si collegano i tuoi post."
 #: admin/pages/content_settings.twig:74 admin/pages/export.twig:14
 #: admin/pages/export.twig:20 admin/pages/export.twig:26
 #: admin/pages/export.twig:32 admin/pages/export.twig:41
-#: admin/pages/feathers.twig:18 admin/pages/feathers.twig:54
+#: admin/pages/feathers.twig:18 admin/pages/feathers.twig:53
 #: admin/pages/general_settings.twig:27 admin/pages/manage_pages.twig:11
 #: admin/pages/manage_posts.twig:11 admin/pages/manage_users.twig:11
-#: admin/pages/modules.twig:18 admin/pages/modules.twig:74
+#: admin/pages/modules.twig:18 admin/pages/modules.twig:73
 #: admin/partials/page_fields.twig:20 admin/partials/post_fields.twig:30
 #: admin/partials/post_fields.twig:98 admin/partials/post_fields.twig:118
 msgid "help"
@@ -583,8 +584,8 @@ msgstr "Feather"
 msgid "Enabled"
 msgstr "Abilitato"
 
-#: admin/pages/feathers.twig:13 admin/pages/feathers.twig:49
-#: admin/pages/modules.twig:13 admin/pages/modules.twig:69
+#: admin/pages/feathers.twig:13 admin/pages/feathers.twig:48
+#: admin/pages/modules.twig:13 admin/pages/modules.twig:68
 #: admin/pages/themes.twig:12
 msgid "info"
 msgstr "info"
@@ -593,11 +594,15 @@ msgstr "info"
 msgid "Disable"
 msgstr "Disabilita"
 
-#: admin/pages/feathers.twig:44 admin/pages/modules.twig:64
+#: admin/pages/feathers.twig:33 admin/pages/modules.twig:53
+msgid "Uninstall"
+msgstr "Disinstalla"
+
+#: admin/pages/feathers.twig:43 admin/pages/modules.twig:63
 msgid "Disabled"
 msgstr "Disabilitato"
 
-#: admin/pages/feathers.twig:65 admin/pages/modules.twig:106
+#: admin/pages/feathers.twig:64 admin/pages/modules.twig:105
 msgid "Enable"
 msgstr "Abilita"
 
@@ -732,8 +737,8 @@ msgstr "modifica"
 msgid "delete"
 msgstr "elimina"
 
-#: admin/pages/manage_groups.twig:64 admin/pages/manage_pages.twig:74
-#: admin/pages/manage_posts.twig:62 admin/pages/manage_users.twig:78
+#: admin/pages/manage_groups.twig:64 admin/pages/manage_pages.twig:77
+#: admin/pages/manage_posts.twig:65 admin/pages/manage_users.twig:81
 #, php-format
 msgid "Page %d of %s"
 msgstr "Pagina %d di %s"
@@ -809,11 +814,11 @@ msgstr "Iscritto"
 msgid "Modules"
 msgstr "Moduli"
 
-#: admin/pages/modules.twig:25 admin/pages/modules.twig:81
+#: admin/pages/modules.twig:25 admin/pages/modules.twig:80
 msgid "This module conflicts with the following modules:"
 msgstr "Questo modulo è in conflitto con i seguenti moduli:"
 
-#: admin/pages/modules.twig:35 admin/pages/modules.twig:91
+#: admin/pages/modules.twig:35 admin/pages/modules.twig:90
 msgid "This module requires the following modules to be enabled:"
 msgstr "Questo modulo richiede che i seguenti moduli siano abilitati:"
 
@@ -1060,10 +1065,6 @@ msgstr "Bassa"
 #: admin/partials/page_fields.twig:50
 msgid "Parent"
 msgstr "Principale"
-
-#: admin/partials/page_fields.twig:52
-msgid "[None]"
-msgstr "[Nessuno]"
 
 #: admin/partials/page_fields.twig:70 admin/partials/post_fields.twig:153
 #: admin/partials/post_fields.twig:162

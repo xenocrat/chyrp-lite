@@ -111,8 +111,8 @@ msgid "Save"
 msgstr ""
 
 #: modules/comments/admin/pages/edit_comment.twig:69
-#: modules/comments/admin/pages/manage_comments.twig:79
-#: modules/comments/admin/pages/manage_spam.twig:69
+#: modules/comments/admin/pages/manage_comments.twig:82
+#: modules/comments/admin/pages/manage_spam.twig:72
 msgid "Delete"
 msgstr ""
 
@@ -138,22 +138,22 @@ msgstr ""
 msgid "Added"
 msgstr ""
 
-#: modules/comments/admin/pages/manage_comments.twig:68
-#: modules/comments/admin/pages/manage_spam.twig:61
+#: modules/comments/admin/pages/manage_comments.twig:71
+#: modules/comments/admin/pages/manage_spam.twig:64
 msgid "With selected:"
-msgstr ""
-
-#: modules/comments/admin/pages/manage_comments.twig:70
-#: modules/comments/admin/pages/manage_spam.twig:63
-msgid "Deny"
 msgstr ""
 
 #: modules/comments/admin/pages/manage_comments.twig:73
 #: modules/comments/admin/pages/manage_spam.twig:66
-msgid "Approve"
+msgid "Deny"
 msgstr ""
 
 #: modules/comments/admin/pages/manage_comments.twig:76
+#: modules/comments/admin/pages/manage_spam.twig:69
+msgid "Approve"
+msgstr ""
+
+#: modules/comments/admin/pages/manage_comments.twig:79
 msgid "Mark as Spam"
 msgstr ""
 

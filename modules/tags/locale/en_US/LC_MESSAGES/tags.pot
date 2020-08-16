@@ -30,7 +30,7 @@ msgid "Editing Tags for &#8220;%s&#8221;"
 msgstr ""
 
 #: modules/tags/admin/pages/edit_tags.twig:10
-#: modules/tags/admin/pages/manage_tags.twig:49
+#: modules/tags/admin/pages/manage_tags.twig:52
 #: modules/tags/tags.php:132
 #: modules/tags/tags.php:174
 #: modules/tags/tags.php:181
@@ -52,11 +52,11 @@ msgstr ""
 msgid "Posts Tagged"
 msgstr ""
 
-#: modules/tags/admin/pages/manage_tags.twig:81
+#: modules/tags/admin/pages/manage_tags.twig:87
 msgid "Tag Selected Post(s) with:"
 msgstr ""
 
-#: modules/tags/admin/pages/manage_tags.twig:83
+#: modules/tags/admin/pages/manage_tags.twig:89
 msgid "Tag"
 msgstr ""
 

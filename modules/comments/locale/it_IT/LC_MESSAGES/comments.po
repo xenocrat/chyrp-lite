@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Copyright 2020 Daniel Pimley and other contributors.
@@ -124,8 +124,8 @@ msgid "Save"
 msgstr "Salva"
 
 #: modules/comments/admin/pages/edit_comment.twig:69
-#: modules/comments/admin/pages/manage_comments.twig:79
-#: modules/comments/admin/pages/manage_spam.twig:69
+#: modules/comments/admin/pages/manage_comments.twig:82
+#: modules/comments/admin/pages/manage_spam.twig:72
 msgid "Delete"
 msgstr "Elimina"
 
@@ -149,22 +149,22 @@ msgstr "Post"
 msgid "Added"
 msgstr "Aggiunto"
 
-#: modules/comments/admin/pages/manage_comments.twig:68
-#: modules/comments/admin/pages/manage_spam.twig:61
+#: modules/comments/admin/pages/manage_comments.twig:71
+#: modules/comments/admin/pages/manage_spam.twig:64
 msgid "With selected:"
 msgstr "Selezionati:"
 
-#: modules/comments/admin/pages/manage_comments.twig:70
-#: modules/comments/admin/pages/manage_spam.twig:63
+#: modules/comments/admin/pages/manage_comments.twig:73
+#: modules/comments/admin/pages/manage_spam.twig:66
 msgid "Deny"
 msgstr "Rifiutare"
 
-#: modules/comments/admin/pages/manage_comments.twig:73
-#: modules/comments/admin/pages/manage_spam.twig:66
+#: modules/comments/admin/pages/manage_comments.twig:76
+#: modules/comments/admin/pages/manage_spam.twig:69
 msgid "Approve"
 msgstr "Approva"
 
-#: modules/comments/admin/pages/manage_comments.twig:76
+#: modules/comments/admin/pages/manage_comments.twig:79
 msgid "Mark as Spam"
 msgstr "Contrassegna come spam"
 

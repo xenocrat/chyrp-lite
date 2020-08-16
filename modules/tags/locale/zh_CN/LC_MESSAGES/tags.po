@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Copyright 2020 Daniel Pimley and other contributors.
@@ -52,7 +52,7 @@ msgid "Editing Tags for &#8220;%s&#8221;"
 msgstr "编辑标签 &#8220;%s&#8221;"
 
 #: modules/tags/admin/pages/edit_tags.twig:10
-#: modules/tags/admin/pages/manage_tags.twig:49 modules/tags/tags.php:132
+#: modules/tags/admin/pages/manage_tags.twig:52 modules/tags/tags.php:132
 #: modules/tags/tags.php:174 modules/tags/tags.php:181
 #: modules/tags/tags.php:439
 msgid "Tags"
@@ -72,11 +72,11 @@ msgstr "姓名"
 msgid "Posts Tagged"
 msgstr "帖子已标记"
 
-#: modules/tags/admin/pages/manage_tags.twig:81
+#: modules/tags/admin/pages/manage_tags.twig:87
 msgid "Tag Selected Post(s) with:"
 msgstr "将选中的帖子标记为："
 
-#: modules/tags/admin/pages/manage_tags.twig:83
+#: modules/tags/admin/pages/manage_tags.twig:89
 msgid "Tag"
 msgstr "标记"
 
