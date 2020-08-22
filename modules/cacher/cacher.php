@@ -15,6 +15,7 @@
             $this->exclude = $config->module_cacher["cache_exclude"];
             $this->url     = rawurldecode(unfix(self_url()));
             $this->id      = token(array($seed,
+                                         CAN_USE_ZLIB,
                                          USE_ZLIB,
                                          HTTP_ACCEPT_DEFLATE,
                                          HTTP_ACCEPT_GZIP,
