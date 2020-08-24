@@ -73,7 +73,7 @@
             if ($model)
                 list($this->array, $model_name) = $this->array;
 
-            $request = (isset($_GET[$name]) and is_numeric($_GET[$name])) ? $_GET[$name] : null ;
+            $request = (isset($_GET[$name]) and is_numeric($_GET[$name])) ? abs((int) $_GET[$name]) : null ;
 
             $this->total = count($this->array);
             $this->page = oneof($page, $request, 1);
