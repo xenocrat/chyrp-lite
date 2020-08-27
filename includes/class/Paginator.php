@@ -73,15 +73,17 @@
             if ($model)
                 list($this->array, $model_name) = $this->array;
 
-            $request = (isset($_GET[$name]) and is_numeric($_GET[$name])) ? abs((int) $_GET[$name]) : null ;
+            $request = (isset($_GET[$name]) and is_numeric($_GET[$name])) ? $_GET[$name] : null ;
 
             $this->total = count($this->array);
-            $this->page = oneof($page, $request, 1);
+            $this->page = intval(oneof($page, $request, 1));
             $this->pages = ceil($this->total / $this->per_page);
+            $this->result = array();
+
+            if ($this->page < 1)
+                $this->page = 1;
 
             $offset = ($this->page - 1) * $this->per_page;
-
-            $this->result = array();
 
             if ($model) {
                 for ($i = $offset; $i < ($offset + $this->per_page); $i++)
@@ -104,7 +106,7 @@
 
         /**
          * Function: prev
-         * Returns the next pagination sequence.
+         * Returns the previous pagination sequence.
          */
         public function prev() {
             return new self($this->array, $this->per_page, $this->name, $this->model, $this->page - 1);
