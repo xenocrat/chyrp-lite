@@ -532,9 +532,11 @@
 
             $user = new User(array("login" => urldecode(fallback($_GET['login']))));
 
-            if ($user->no_results or empty($_GET['token']) or
-                $_GET['token'] != token(array($user->login, $user->email)))
-                    Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
+            if ($user->no_results)
+                Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
+
+            if (fallback($_GET['token']) != token(array($user->login, $user->email)))
+                Flash::warning(__("Invalid authentication token."), "/");
 
             if ($user->approved)
                 Flash::notice(__("Your account has already been activated."), "/");
@@ -557,9 +559,11 @@
 
             $user = new User(array("login" => urldecode(fallback($_GET['login']))));
 
-            if ($user->no_results or empty($_GET['token']) or
-                $_GET['token'] != token(array($user->login, $user->email)))
-                    Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
+            if ($user->no_results)
+                Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
+
+            if (fallback($_GET['token']) != token(array($user->login, $user->email)))
+                Flash::warning(__("Invalid authentication token."), "/");
 
             $new_password = random(8);
 
