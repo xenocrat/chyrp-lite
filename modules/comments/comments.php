@@ -631,6 +631,30 @@
             return false;
         }
 
+        public function main_unsubscribe($main) {
+            fallback($_GET['email']);
+            fallback($_GET['id']);
+            fallback($_GET['token']);
+
+            $post = new Post($_GET['id']);
+
+            if ($post->no_results)
+                Flash::warning(__("Post not found."), "/");
+
+            if (!is_email($_GET['email']))
+                Flash::warning(__("Invalid email address."), "/");
+
+            if ($_GET['token'] != token($_GET['email']))
+                Flash::notice(__("Invalid authentication token."), "/");
+
+            SQL::current()->update("comments",
+                                   array("post_id" => $post->id,
+                                         "author_email" => $_GET['email']),
+                                   array("notify" => false));
+
+            Flash::notice(__("You have unsubscribed from the conversation.", "comments"), $post->url());
+        }
+
         public function view_feed($context) {
             $trigger = Trigger::current();
 
@@ -889,13 +913,19 @@
         public function correspond_comment($params) {
             $post = new Post($params["post_id"], array("drafts" => true));
 
-            $params["subject"] = _f("New Comment at %s", Config::current()->name);
-            $params["message"] = _f("%s commented on a blog post:", $params["author"]).
+            $params["subject"] = _f("New Comment at %s", Config::current()->name, "comments");
+            $params["message"] = _f("%s commented on a blog post:", $params["author"], "comments").
                                  "\r\n".
                                  unfix($post->url()).
                                  "\r\n".
                                  "\r\n".
-                                 truncate(strip_tags($params["body"]), 60);
+                                 truncate(strip_tags($params["body"]), 60).
+                                 "\r\n".
+                                 "\r\n".
+                                 __("Unsubscribe from this conversation:", "comments").
+                                 "\r\n".
+                                 unfix($params["link"]);
+
             return $params;
         }
     }

@@ -156,6 +156,7 @@
                             $created_at = null,
                             $updated_at = null) {
             $sql = SQL::current();
+            $config = Config::current();
 
             $sql->insert("comments",
                          array("body"         => $body,
@@ -192,7 +193,12 @@
                                                 "user_id" => $id,
                                                 "post_id" => $new->post_id,
                                                 "author"  => $new->author,
-                                                "body"    => $new->body));
+                                                "body"    => $new->body,
+                                                "link"    => $config->url.
+                                                             "/?action=unsubscribe&amp;email=".
+                                                             urlencode($to).
+                                                             "&amp;id=".$new->post_id.
+                                                             "&amp;token=".token($to)));
             }
 
             Trigger::current()->call("add_comment", $new);
