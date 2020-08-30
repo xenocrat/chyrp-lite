@@ -530,12 +530,15 @@
             if (logged_in())
                 Flash::notice(__("You cannot activate an account because you are already logged in."), "/");
 
-            $user = new User(array("login" => urldecode(fallback($_GET['login']))));
+            fallback($_GET['login']);
+            fallback($_GET['token']);
+
+            $user = new User(array("login" => $_GET['login']));
 
             if ($user->no_results)
                 Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
 
-            if (fallback($_GET['token']) != token(array($user->login, $user->email)))
+            if ($_GET['token'] != token(array($user->login, $user->email)))
                 Flash::warning(__("Invalid authentication token."), "/");
 
             if ($user->approved)
@@ -557,12 +560,15 @@
             if (logged_in())
                 Flash::notice(__("You cannot reset your password because you are already logged in."), "/");
 
-            $user = new User(array("login" => urldecode(fallback($_GET['login']))));
+            fallback($_GET['login']);
+            fallback($_GET['token']);
+
+            $user = new User(array("login" => $_GET['login']));
 
             if ($user->no_results)
                 Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
 
-            if (fallback($_GET['token']) != token(array($user->login, $user->email)))
+            if ($_GET['token'] != token(array($user->login, $user->email)))
                 Flash::warning(__("Invalid authentication token."), "/");
 
             $new_password = random(8);
