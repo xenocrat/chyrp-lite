@@ -633,8 +633,10 @@
 
         public function main_unsubscribe($main) {
             fallback($_GET['email']);
-            fallback($_GET['id']);
             fallback($_GET['token']);
+
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
+                Flash::warning(__("Post not found."), "/");
 
             $post = new Post($_GET['id']);
 
