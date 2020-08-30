@@ -571,7 +571,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 669
+	modules/comments/comments.php on line 695
 
 Arguments:
 	$comment, $feed
@@ -580,7 +580,7 @@ Arguments:
 add_comment
 -----------
 Called from:
-	modules/comments/model/Comment.php on line 198
+	modules/comments/model/Comment.php on line 204
 
 Arguments:
 	$new
@@ -589,7 +589,7 @@ Arguments:
 update_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 253
+	modules/comments/model/Comment.php on line 259
 
 Arguments:
 	$comment, $this
@@ -1022,7 +1022,7 @@ markup_text
 Called from:
 	includes/controller/Ajax.php on line 142
 	includes/model/Page.php on line 275
-	modules/comments/model/Comment.php on line 386
+	modules/comments/model/Comment.php on line 392
 
 Target:
 	$content
@@ -1350,7 +1350,7 @@ Target:
 cache_regenerate_triggers
 -------------------------
 Called from:
-	modules/cacher/cacher.php on line 99
+	modules/cacher/cacher.php on line 100
 
 Target:
 	$regenerate
@@ -1359,7 +1359,7 @@ Target:
 cache_exclude_url_triggers
 --------------------------
 Called from:
-	modules/cacher/cacher.php on line 108
+	modules/cacher/cacher.php on line 109
 
 Target:
 	$exclude_urls
@@ -1389,7 +1389,7 @@ Arguments:
 filter_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 383
+	modules/comments/model/Comment.php on line 389
 
 Target:
 	$this
@@ -1398,7 +1398,7 @@ Target:
 markup_comment_text
 -------------------
 Called from:
-	modules/comments/model/Comment.php on line 386
+	modules/comments/model/Comment.php on line 392
 
 Target:
 	$this->body

@@ -325,47 +325,65 @@ msgstr "自 %s 添加了评论"
 msgid "An ID is required to show a comment."
 msgstr "显示评论必须要一个ID。"
 
-#: modules/comments/comments.php:606 modules/comments/comments.php:644
+#: modules/comments/comments.php:606 modules/comments/comments.php:670
 #, php-format
 msgid "Comments on &#8220;%s&#8221;"
 msgstr "对 &#8220;%s&#8221; 的评论"
 
-#: modules/comments/comments.php:660
+#: modules/comments/comments.php:657
+msgid "You have unsubscribed from the conversation."
+msgstr "您已取消订阅对话。"
+
+#: modules/comments/comments.php:686
 #, php-format
 msgid "Comment #%d"
 msgstr "评论 #%d"
 
-#: modules/comments/comments.php:696
+#: modules/comments/comments.php:722
 msgid "A ping from your URL is already registered."
 msgstr "您的URL中的ping已被注册。"
 
-#: modules/comments/comments.php:699
+#: modules/comments/comments.php:725
 msgid "Your URL is too long to be stored in our database."
 msgstr "您的网址太长，无法存储在我们的数据库中。"
 
-#: modules/comments/comments.php:710
+#: modules/comments/comments.php:736
 msgid "Pingback registered!"
 msgstr "Pingback已注册！"
 
-#: modules/comments/comments.php:720
+#: modules/comments/comments.php:746
 msgid "Open"
 msgstr "打开"
 
-#: modules/comments/comments.php:723
+#: modules/comments/comments.php:749
 msgid "Closed"
 msgstr "已关闭"
 
-#: modules/comments/comments.php:726
+#: modules/comments/comments.php:752
 msgid "Private"
 msgstr "私人"
 
-#: modules/comments/comments.php:729
+#: modules/comments/comments.php:755
 msgid "Registered Only"
 msgstr "仅注册"
 
-#: modules/comments/comments.php:735
+#: modules/comments/comments.php:761
 msgid "Comment Status"
 msgstr "评论状态"
+
+#: modules/comments/comments.php:918
+#, php-format
+msgid "New Comment at %s"
+msgstr "%s 上的新注释"
+
+#: modules/comments/comments.php:919
+#, php-format
+msgid "%s commented on a blog post:"
+msgstr "%s 在博客文章上评论："
+
+#: modules/comments/comments.php:927
+msgid "Unsubscribe from this conversation:"
+msgstr "取消订阅此对话："
 
 #: modules/comments/info.php:6
 msgid "Adds commenting functionality to your posts, with pingback support."
@@ -383,6 +401,6 @@ msgstr "您想从数据库中删除评论吗？"
 msgid "Are you sure you want to permanently delete this comment?"
 msgstr "您确定要永久删除这个评论？"
 
-#: modules/comments/model/Comment.php:369
+#: modules/comments/model/Comment.php:375
 msgid "Anon"
 msgstr "不久"

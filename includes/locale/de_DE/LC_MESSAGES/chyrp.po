@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Copyright 2020 Daniel Pimley and other contributors.
@@ -26,19 +26,19 @@ msgstr "Bearbeiten"
 msgid "Delete"
 msgstr "Löschen"
 
-#: includes/class/Paginator.php:146
+#: includes/class/Paginator.php:148
 msgid "Next &rarr;"
 msgstr "Nächste &rarr;"
 
-#: includes/class/Paginator.php:169
+#: includes/class/Paginator.php:171
 msgid "&larr; Previous"
 msgstr "&larr; Vorherige"
 
-#: includes/class/Paginator.php:191
+#: includes/class/Paginator.php:193
 msgid "Final &rarr;"
 msgstr "Letzte &rarr;"
 
-#: includes/class/Paginator.php:213
+#: includes/class/Paginator.php:215
 msgid "&larr; First"
 msgstr "&larr; Erste"
 

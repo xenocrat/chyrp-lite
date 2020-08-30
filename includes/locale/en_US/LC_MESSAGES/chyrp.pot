@@ -13,19 +13,19 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: includes/class/Paginator.php:146
+#: includes/class/Paginator.php:148
 msgid "Next &rarr;"
 msgstr ""
 
-#: includes/class/Paginator.php:169
+#: includes/class/Paginator.php:171
 msgid "&larr; Previous"
 msgstr ""
 
-#: includes/class/Paginator.php:191
+#: includes/class/Paginator.php:193
 msgid "Final &rarr;"
 msgstr ""
 
-#: includes/class/Paginator.php:213
+#: includes/class/Paginator.php:215
 msgid "&larr; First"
 msgstr ""
 

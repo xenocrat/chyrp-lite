@@ -329,46 +329,64 @@ msgid "An ID is required to show a comment."
 msgstr ""
 
 #: modules/comments/comments.php:606
-#: modules/comments/comments.php:644
+#: modules/comments/comments.php:670
 #, php-format
 msgid "Comments on &#8220;%s&#8221;"
 msgstr ""
 
-#: modules/comments/comments.php:660
+#: modules/comments/comments.php:657
+msgid "You have unsubscribed from the conversation."
+msgstr ""
+
+#: modules/comments/comments.php:686
 #, php-format
 msgid "Comment #%d"
 msgstr ""
 
-#: modules/comments/comments.php:696
+#: modules/comments/comments.php:722
 msgid "A ping from your URL is already registered."
 msgstr ""
 
-#: modules/comments/comments.php:699
+#: modules/comments/comments.php:725
 msgid "Your URL is too long to be stored in our database."
 msgstr ""
 
-#: modules/comments/comments.php:710
+#: modules/comments/comments.php:736
 msgid "Pingback registered!"
 msgstr ""
 
-#: modules/comments/comments.php:720
+#: modules/comments/comments.php:746
 msgid "Open"
 msgstr ""
 
-#: modules/comments/comments.php:723
+#: modules/comments/comments.php:749
 msgid "Closed"
 msgstr ""
 
-#: modules/comments/comments.php:726
+#: modules/comments/comments.php:752
 msgid "Private"
 msgstr ""
 
-#: modules/comments/comments.php:729
+#: modules/comments/comments.php:755
 msgid "Registered Only"
 msgstr ""
 
-#: modules/comments/comments.php:735
+#: modules/comments/comments.php:761
 msgid "Comment Status"
+msgstr ""
+
+#: modules/comments/comments.php:918
+#, php-format
+msgid "New Comment at %s"
+msgstr ""
+
+#: modules/comments/comments.php:919
+#, php-format
+msgid "%s commented on a blog post:"
+msgstr ""
+
+#: modules/comments/comments.php:927
+msgid "Unsubscribe from this conversation:"
 msgstr ""
 
 #: modules/comments/info.php:6
@@ -387,7 +405,7 @@ msgstr ""
 msgid "Are you sure you want to permanently delete this comment?"
 msgstr ""
 
-#: modules/comments/model/Comment.php:369
+#: modules/comments/model/Comment.php:375
 msgid "Anon"
 msgstr ""
 

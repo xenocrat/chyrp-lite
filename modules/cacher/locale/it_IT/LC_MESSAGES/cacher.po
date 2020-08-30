@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.4.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Copyright 2020 Daniel Pimley and other contributors.
@@ -31,11 +31,11 @@ msgstr "(secondi)"
 msgid "Clear Cache"
 msgstr "Cancella Cache"
 
-#: modules/cacher/cacher.php:142
+#: modules/cacher/cacher.php:143
 msgid "Cache"
 msgstr "Cache"
 
-#: modules/cacher/cacher.php:181
+#: modules/cacher/cacher.php:182
 msgid "Cache cleared."
 msgstr "Cache cancellati."
 

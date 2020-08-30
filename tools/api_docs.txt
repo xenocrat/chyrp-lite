@@ -386,7 +386,7 @@ Returns the next pagination sequence.
 
 Function: prev
 --------------
-Returns the next pagination sequence.
+Returns the previous pagination sequence.
 
 
 Function: next_page
