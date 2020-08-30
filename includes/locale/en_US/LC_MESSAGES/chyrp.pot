@@ -326,9 +326,11 @@ msgstr ""
 #: includes/controller/Ajax.php:87
 #: includes/controller/Ajax.php:125
 #: includes/controller/Main.php:458
-#: includes/controller/Main.php:590
-#: includes/controller/Main.php:647
-#: includes/controller/Main.php:702
+#: includes/controller/Main.php:539
+#: includes/controller/Main.php:566
+#: includes/controller/Main.php:594
+#: includes/controller/Main.php:651
+#: includes/controller/Main.php:706
 msgid "Invalid authentication token."
 msgstr ""
 
@@ -512,7 +514,7 @@ msgstr ""
 #: includes/controller/Admin.php:672
 #: includes/controller/Admin.php:777
 #: includes/controller/Main.php:471
-#: includes/controller/Main.php:651
+#: includes/controller/Main.php:655
 #: install.php:500
 #: install.php:567
 msgid "Passwords do not match."
@@ -527,7 +529,7 @@ msgstr ""
 #: includes/controller/Admin.php:785
 #: includes/controller/Admin.php:1895
 #: includes/controller/Main.php:476
-#: includes/controller/Main.php:656
+#: includes/controller/Main.php:660
 #: install.php:570
 msgid "Email address cannot be blank."
 msgstr ""
@@ -536,7 +538,7 @@ msgstr ""
 #: includes/controller/Admin.php:788
 #: includes/controller/Admin.php:1898
 #: includes/controller/Main.php:478
-#: includes/controller/Main.php:658
+#: includes/controller/Main.php:662
 #: install.php:572
 msgid "Invalid email address."
 msgstr ""
@@ -544,7 +546,7 @@ msgstr ""
 #: includes/controller/Admin.php:684
 #: includes/controller/Admin.php:791
 #: includes/controller/Main.php:484
-#: includes/controller/Main.php:661
+#: includes/controller/Main.php:665
 msgid "Invalid website URL."
 msgstr ""
 
@@ -854,7 +856,7 @@ msgid "Page created."
 msgstr ""
 
 #: includes/controller/Admin.php:2083
-#: includes/controller/Main.php:586
+#: includes/controller/Main.php:590
 msgid "You are already logged in."
 msgstr ""
 
@@ -997,7 +999,7 @@ msgid "Please enter a username for your account."
 msgstr ""
 
 #: includes/controller/Main.php:473
-#: includes/controller/Main.php:653
+#: includes/controller/Main.php:657
 msgid "Please consider setting a stronger password for your account."
 msgstr ""
 
@@ -1010,7 +1012,7 @@ msgid "We have emailed you an activation link."
 msgstr ""
 
 #: includes/controller/Main.php:518
-#: includes/controller/Main.php:547
+#: includes/controller/Main.php:549
 msgid "Your account is now active."
 msgstr ""
 
@@ -1022,72 +1024,72 @@ msgstr ""
 msgid "You cannot activate an account because you are already logged in."
 msgstr ""
 
-#: includes/controller/Main.php:537
-#: includes/controller/Main.php:562
-#: includes/controller/Main.php:698
+#: includes/controller/Main.php:536
+#: includes/controller/Main.php:563
+#: includes/controller/Main.php:702
 msgid "Please contact the blog administrator for help with your account."
 msgstr ""
 
-#: includes/controller/Main.php:540
+#: includes/controller/Main.php:542
 msgid "Your account has already been activated."
 msgstr ""
 
-#: includes/controller/Main.php:556
-#: includes/controller/Main.php:695
+#: includes/controller/Main.php:558
+#: includes/controller/Main.php:699
 msgid "You cannot reset your password because you are already logged in."
 msgstr ""
 
-#: includes/controller/Main.php:574
+#: includes/controller/Main.php:578
 msgid "We have emailed you a new password."
 msgstr ""
 
-#: includes/controller/Main.php:599
+#: includes/controller/Main.php:603
 #: includes/lib/XMLRPC.php:413
 msgid "Incorrect username and/or password."
 msgstr ""
 
-#: includes/controller/Main.php:605
+#: includes/controller/Main.php:609
 msgid "You must activate your account before you log in."
 msgstr ""
 
-#: includes/controller/Main.php:610
+#: includes/controller/Main.php:614
 msgid "Logged in."
 msgstr ""
 
-#: includes/controller/Main.php:614
+#: includes/controller/Main.php:618
 #: includes/error.php:362
 msgid "Log in"
 msgstr ""
 
-#: includes/controller/Main.php:625
+#: includes/controller/Main.php:629
 msgid "You aren't logged in."
 msgstr ""
 
-#: includes/controller/Main.php:632
+#: includes/controller/Main.php:636
 msgid "Logged out."
 msgstr ""
 
-#: includes/controller/Main.php:643
+#: includes/controller/Main.php:647
 msgid "You must be logged in to access user controls."
 msgstr ""
 
-#: includes/controller/Main.php:680
+#: includes/controller/Main.php:684
 msgid "Your profile has been updated."
 msgstr ""
 
-#: includes/controller/Main.php:684
+#: includes/controller/Main.php:688
 msgid "Controls"
 msgstr ""
 
-#: includes/controller/Main.php:705
+#: includes/controller/Main.php:709
 msgid "Please enter your username."
 msgstr ""
 
-#: includes/controller/Main.php:721
+#: includes/controller/Main.php:725
 msgid "If that username is in our database, we will email you a password reset link."
 msgstr ""
 
-#: includes/controller/Main.php:725
+#: includes/controller/Main.php:729
 msgid "Lost password"
 msgstr ""
 
