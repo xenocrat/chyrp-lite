@@ -913,12 +913,10 @@
         }
 
         public function correspond_comment($params) {
-            $post = new Post($params["post_id"], array("drafts" => true));
-
             $params["subject"] = _f("New Comment at %s", Config::current()->name, "comments");
             $params["message"] = _f("%s commented on a blog post:", $params["author"], "comments").
                                  "\r\n".
-                                 unfix($post->url()).
+                                 unfix($params["link1"]).
                                  "\r\n".
                                  "\r\n".
                                  truncate(strip_tags($params["body"]), 60).
@@ -926,7 +924,7 @@
                                  "\r\n".
                                  __("Unsubscribe from this conversation:", "comments").
                                  "\r\n".
-                                 unfix($params["link"]);
+                                 unfix($params["link2"]);
 
             return $params;
         }
