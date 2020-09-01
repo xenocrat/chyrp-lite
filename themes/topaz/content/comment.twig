@@ -18,7 +18,7 @@
 {% endif %}
 <div class="metadata">
 <cite>
-<a href="{{ url('comment/%d/' | format(comment.id)) }}" class="permalink">
+<a href="{{ comment.url() }}" class="permalink">
 {{ comment.created_at | strftimeformat("%d %B, %Y, at %I:%M %p" | translate) }}
 </a>
 </cite>
