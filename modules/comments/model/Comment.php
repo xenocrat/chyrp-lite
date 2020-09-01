@@ -194,7 +194,8 @@
                                                 "post_id" => $new->post_id,
                                                 "author"  => $new->author,
                                                 "body"    => $new->body,
-                                                "link"    => $config->url.
+                                                "link1"   => $new->url(),
+                                                "link2"   => $config->url.
                                                              "/?action=unsubscribe&amp;email=".
                                                              urlencode($to).
                                                              "&amp;id=".$new->post_id.
@@ -361,6 +362,17 @@
             $list = empty($_SESSION['comments']) ? "(0)" : QueryBuilder::build_list($_SESSION['comments']) ;
             $user_id = (int) Visitor::current()->id;
             return "status != 'denied' OR ((user_id != 0 AND user_id = ".$user_id.") OR (id IN ".$list."))";
+        }
+
+        /**
+         * Function: url
+         * Returns a comment's URL.
+         */
+        public function url() {
+            if ($this->no_results)
+                return false;
+
+            return url("comment/".$this->id, MainController::current());
         }
 
         /**
