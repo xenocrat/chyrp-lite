@@ -580,7 +580,7 @@ Arguments:
 add_comment
 -----------
 Called from:
-	modules/comments/model/Comment.php on line 204
+	modules/comments/model/Comment.php on line 205
 
 Arguments:
 	$new
@@ -589,7 +589,7 @@ Arguments:
 update_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 259
+	modules/comments/model/Comment.php on line 260
 
 Arguments:
 	$comment, $this
@@ -1022,7 +1022,7 @@ markup_text
 Called from:
 	includes/controller/Ajax.php on line 142
 	includes/model/Page.php on line 275
-	modules/comments/model/Comment.php on line 392
+	modules/comments/model/Comment.php on line 404
 
 Target:
 	$content
@@ -1389,7 +1389,7 @@ Arguments:
 filter_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 389
+	modules/comments/model/Comment.php on line 401
 
 Target:
 	$this
@@ -1398,7 +1398,7 @@ Target:
 markup_comment_text
 -------------------
 Called from:
-	modules/comments/model/Comment.php on line 392
+	modules/comments/model/Comment.php on line 404
 
 Target:
 	$this->body

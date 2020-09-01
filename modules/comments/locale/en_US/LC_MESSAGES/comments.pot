@@ -375,17 +375,17 @@ msgstr ""
 msgid "Comment Status"
 msgstr ""
 
-#: modules/comments/comments.php:918
+#: modules/comments/comments.php:916
 #, php-format
 msgid "New Comment at %s"
 msgstr ""
 
-#: modules/comments/comments.php:919
+#: modules/comments/comments.php:917
 #, php-format
 msgid "%s commented on a blog post:"
 msgstr ""
 
-#: modules/comments/comments.php:927
+#: modules/comments/comments.php:925
 msgid "Unsubscribe from this conversation:"
 msgstr ""
 
@@ -405,7 +405,7 @@ msgstr ""
 msgid "Are you sure you want to permanently delete this comment?"
 msgstr ""
 
-#: modules/comments/model/Comment.php:375
+#: modules/comments/model/Comment.php:387
 msgid "Anon"
 msgstr ""
 
