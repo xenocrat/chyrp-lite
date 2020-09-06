@@ -341,10 +341,8 @@ msgstr "Tenta di notificare i siti a cui si collegano i tuoi post."
 #: admin/pages/content_settings.twig:74 admin/pages/export.twig:14
 #: admin/pages/export.twig:20 admin/pages/export.twig:26
 #: admin/pages/export.twig:32 admin/pages/export.twig:41
-#: admin/pages/feathers.twig:18 admin/pages/feathers.twig:53
 #: admin/pages/general_settings.twig:27 admin/pages/manage_pages.twig:11
 #: admin/pages/manage_posts.twig:11 admin/pages/manage_users.twig:11
-#: admin/pages/modules.twig:18 admin/pages/modules.twig:73
 #: admin/partials/page_fields.twig:20 admin/partials/post_fields.twig:30
 #: admin/partials/post_fields.twig:98 admin/partials/post_fields.twig:118
 msgid "help"
@@ -584,25 +582,25 @@ msgstr "Feather"
 msgid "Enabled"
 msgstr "Abilitato"
 
-#: admin/pages/feathers.twig:13 admin/pages/feathers.twig:48
-#: admin/pages/modules.twig:13 admin/pages/modules.twig:68
+#: admin/pages/feathers.twig:13 admin/pages/feathers.twig:45
+#: admin/pages/modules.twig:13 admin/pages/modules.twig:65
 #: admin/pages/themes.twig:12
 msgid "info"
 msgstr "info"
 
-#: admin/pages/feathers.twig:29 admin/pages/modules.twig:49
+#: admin/pages/feathers.twig:26 admin/pages/modules.twig:46
 msgid "Disable"
 msgstr "Disabilita"
 
-#: admin/pages/feathers.twig:33 admin/pages/modules.twig:53
+#: admin/pages/feathers.twig:30 admin/pages/modules.twig:50
 msgid "Uninstall"
 msgstr "Disinstalla"
 
-#: admin/pages/feathers.twig:43 admin/pages/modules.twig:63
+#: admin/pages/feathers.twig:40 admin/pages/modules.twig:60
 msgid "Disabled"
 msgstr "Disabilitato"
 
-#: admin/pages/feathers.twig:64 admin/pages/modules.twig:105
+#: admin/pages/feathers.twig:58 admin/pages/modules.twig:99
 msgid "Enable"
 msgstr "Abilita"
 
@@ -814,11 +812,11 @@ msgstr "Iscritto"
 msgid "Modules"
 msgstr "Moduli"
 
-#: admin/pages/modules.twig:25 admin/pages/modules.twig:80
+#: admin/pages/modules.twig:22 admin/pages/modules.twig:74
 msgid "This module conflicts with the following modules:"
 msgstr "Questo modulo è in conflitto con i seguenti moduli:"
 
-#: admin/pages/modules.twig:35 admin/pages/modules.twig:90
+#: admin/pages/modules.twig:32 admin/pages/modules.twig:84
 msgid "This module requires the following modules to be enabled:"
 msgstr "Questo modulo richiede che i seguenti moduli siano abilitati:"
 
