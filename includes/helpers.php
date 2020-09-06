@@ -1666,7 +1666,6 @@
         fallback($info["url"],           "");
         fallback($info["description"],   "");
         fallback($info["author"],        array("name" => "", "url" => ""));
-        fallback($info["help"]);
         fallback($info["confirm"]);
         fallback($info["uploader"],      false);
         fallback($info["conflicts"],     array());
