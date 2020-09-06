@@ -4,7 +4,7 @@
 
 {% block content %}
 <h1>{{ "Editing Group &#8220;%s&#8221;" | translate | format(group.name) }}</h1>
-<form id="group_edit" class="split" action="{{ url('update_group') }}" method="post" accept-charset="UTF-8" data-toggler="group_toggler"{{ group.id == visitor.group.id ? ' data-confirm="' ~ ("Are you sure you want to make these changes to your group?" | translate | fix(true)) ~ '"' : '' }}>
+<form id="group_edit" class="split" action="{{ url('update_group') }}" method="post" accept-charset="UTF-8" data-toggler="group_toggler"{% if group.id == visitor.group.id %} data-confirm="{{'Are you sure you want to make these changes to your group?' | translate | fix(true) }}"{% endif %}>
 <fieldset>
 <p>
 <label for="name">{{ "Name" | translate }}</label>

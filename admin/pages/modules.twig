@@ -7,16 +7,13 @@
 <ul id="modules_enabled" class="extend modules">
 <h5>{{ "Enabled" | translate }}</h5>
 {% for safename, module in enabled_modules %}
-<li class="module{{ module.classes is defined ? ' ' ~ module.classes | join(" ") : '' }}" id="module_{{ safename }}">
+<li class="module{{ module.classes is defined ? ' ' ~ module.classes | join(' ') : '' }}" id="module_{{ safename }}">
 <h3>
 <a class="emblem module_url" href="{{ module.url }}" target="_blank">
 <img src="{{ site.chyrp_url }}/admin/images/icons/info.svg" alt="{{ 'info' | translate }}">
 {{ module.name }}{# translation is done in the controller #}
 </a>
 </h3>
-{% if module.help %}
-<a href="{{ url('help/id/' ~ (module.help | url_encode)) }}" rel="help" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
-{% endif %}
 <p class="module_description">
 {{ module.description }}{# translation is done in the controller #}
 </p>
@@ -62,16 +59,13 @@
 <ul id="modules_disabled" class="extend modules">
 <h5>{{ "Disabled" | translate }}</h5>
 {% for safename, module in disabled_modules %}
-<li class="module{{ module.classes is defined ? ' ' ~ module.classes | join(" ") : '' }}" id="module_{{ safename }}">
+<li class="module{{ module.classes is defined ? ' ' ~ module.classes | join(' ') : '' }}" id="module_{{ safename }}">
 <h3>
 <a class="emblem module_url" href="{{ module.url }}" target="_blank">
 <img src="{{ site.chyrp_url }}/admin/images/icons/info.svg" alt="{{ 'info' | translate }}">
 {{ module.name }}{# translation is done in the controller #}
 </a>
 </h3>
-{% if module.help %}
-<a href="{{ url('help/id/' ~ (module.help | url_encode)) }}" rel="help" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
-{% endif %}
 <p class="module_description">
 {{ module.description }}{# translation is done in the controller #}
 </p>
