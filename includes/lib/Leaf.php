@@ -386,7 +386,6 @@
      * Returns a thumbnail <img> tag for an uploaded image, optionally with enclosing <a> tag.
      */
     function twig_filter_thumbnail($filename, $alt_text = "", $url = null, $args = array(), $sizes = "100vw") {
-        fallback($alt_text, $filename);
         $filepath = Config::current()->chyrp_url."/includes/thumbnail.php?file=".urlencode($filename);
         $src_args = implode("&", $args);
         $set_args = preg_replace(array("/max_width=[^&]*(&)?/i",
