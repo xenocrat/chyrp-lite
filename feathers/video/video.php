@@ -62,8 +62,8 @@
 
         public function update($post) {
             if (isset($_FILES['video']) and upload_tester($_FILES['video'])) {
-                $this->delete_file($post);
                 $filename = upload($_FILES['video'], self::video_extensions());
+                $this->delete_file($post);
             } else {
                 $filename = $post->filename;
             }

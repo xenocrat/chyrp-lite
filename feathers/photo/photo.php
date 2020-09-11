@@ -64,8 +64,8 @@
 
         public function update($post) {
             if (isset($_FILES['photo']) and upload_tester($_FILES['photo'])) {
-                $this->delete_file($post);
                 $filename = upload($_FILES['photo'], self::photo_extensions());
+                $this->delete_file($post);
             } else {
                 $filename = $post->filename;
             }

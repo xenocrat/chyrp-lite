@@ -62,8 +62,8 @@
 
         public function update($post) {
             if (isset($_FILES['audio']) and upload_tester($_FILES['audio'])) {
-                $this->delete_file($post);
                 $filename = upload($_FILES['audio'], self::audio_extensions());
+                $this->delete_file($post);
             } else {
                 $filename = $post->filename;
             }
