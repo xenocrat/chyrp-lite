@@ -169,7 +169,7 @@ delete_upload
 Called from:
 	feathers/audio/audio.php on line 123
 	feathers/photo/photo.php on line 123
-	feathers/uploader/uploader.php on line 171
+	feathers/uploader/uploader.php on line 172
 	feathers/video/video.php on line 123
 
 Arguments:
