@@ -908,9 +908,9 @@ a.emblem.preview {
     position: absolute;
     margin: 0em;
     top: calc(0% + 48px);
-    left: calc(0% + 48px);
-    width: calc(100% - 96px);
-    height: calc(100% - 96px);
+    left: calc(25% - 48px);
+    width: calc(50% + 96px);
+    height: calc(50% + 96px);
     overflow-x: hidden;
     overflow-y: auto;
     border: none;
@@ -923,7 +923,7 @@ a.emblem.preview {
     width: 24px;
     height: 24px;
     top: 24px;
-    right: 24px;
+    right: calc(25% - 72px);
     cursor: pointer;
 }
 .iframe_close_gadget img {
