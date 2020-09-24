@@ -19,7 +19,6 @@ $(function() {
     Help.init();
     Write.init();
     Settings.init();
-    Extend.init();
 });
 // Adds a master toggle to forms that have multiple checkboxes.
 function toggle_all() {
