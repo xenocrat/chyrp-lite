@@ -52,6 +52,9 @@
 <p>
 <label for="check_updates">{{ "Check for Updates?" | translate }}</label>
 <input class="checkbox" type="checkbox" name="check_updates" id="check_updates"{{ site.check_updates | checked }}>
+<small>
+{{ "Current version: %s" | translate | format(version, codename) }}
+</small>
 </p>
 <p class="buttons">
 <button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Update" | translate }}</button>
