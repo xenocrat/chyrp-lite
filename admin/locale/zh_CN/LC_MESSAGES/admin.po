@@ -343,7 +343,7 @@ msgid "Compose blog content using Markdown text formatting."
 msgstr "使用Markdown语法撰写博客内容。"
 
 #: admin/pages/content_settings.twig:81 admin/pages/edit_group.twig:24
-#: admin/pages/edit_user.twig:55 admin/pages/general_settings.twig:57
+#: admin/pages/edit_user.twig:55 admin/pages/general_settings.twig:60
 #: admin/pages/route_settings.twig:85 admin/pages/user_settings.twig:47
 msgid "Update"
 msgstr "更新"
@@ -615,6 +615,11 @@ msgstr "语言"
 #: admin/pages/general_settings.twig:53
 msgid "Check for Updates?"
 msgstr "检查更新？"
+
+#: admin/pages/general_settings.twig:56
+#, php-format
+msgid "Current version: %s"
+msgstr "当前版本： %s"
 
 #: admin/pages/import.twig:3 admin/pages/import.twig:50
 msgid "Import"
