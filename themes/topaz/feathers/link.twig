@@ -5,7 +5,7 @@
 <a href="{{ post.source | striptags | fix(true) }}" class="link">{{ post.name }}</a>
 </h2>
 <h6 class="post_byline">{{ "Written by %s" | translate | format(post.author.name) }}</h6>
-<section class="description{{ post.description | length > 1000 ? ' longform' : '' }}">
+<section class="description">
 {{ post.description }}
 </section>
 {% endblock %}

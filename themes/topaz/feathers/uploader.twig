@@ -8,7 +8,7 @@
 <h6 class="post_byline">{{ "Written by %s" | translate | format(post.author.name) }}</h6>
 {% endif %}
 {% if post.caption is not empty %}
-<section class="caption{{ post.caption | length > 1000 ? ' longform' : '' }}">
+<section class="caption">
 {{ post.caption }}
 </section>
 {% endif %}

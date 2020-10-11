@@ -7,7 +7,7 @@
 </h2>
 <h6 class="post_byline">{{ "Written by %s" | translate | format(post.author.name) }}</h6>
 {% endif %}
-<section class="quote{% if post.quote | length > 1000 %} longform{% endif %}">
+<section class="quote">
 <blockquote>
 {{ post.quote }}
 </blockquote>
