@@ -13,7 +13,7 @@
 {{ theme.javascripts() }}
 {{ trigger.call("end_head") }}
 </head>
-<body>
+<body class="route_{{ route.action }}">
 <!-- Mast -->
 {% for notice in flash.notices %}
 <div class="flash notice">
