@@ -825,6 +825,10 @@
                                 array(DIR, DIR, ""),
                                 ltrim($class, "\\")).".php";
 
+        # Use Twig 1.42.5 (last version to support PHP 5.5, 5.6, and 7.0).
+        if (version_compare(PHP_VERSION, "7.1", "<"))
+            $filepath = str_replace("Twig".DIR, "TwigLegacy".DIR, $filepath);
+
         if (is_file(INCLUDES_DIR.DIR."lib".DIR.$filepath)) {
             require INCLUDES_DIR.DIR."lib".DIR.$filepath;
             return;
