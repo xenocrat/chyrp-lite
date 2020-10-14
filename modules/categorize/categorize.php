@@ -67,6 +67,9 @@
             if (empty($post->category_id))
                 return $ids;
 
+            if (count($ids) >= $limit)
+                return $ids;
+
             $results = SQL::current()->select("post_attributes",
                                               array("post_id"),
                                               array("name" => "category_id",
