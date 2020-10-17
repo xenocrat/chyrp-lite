@@ -90,21 +90,21 @@ msgstr ""
 #: includes/download.php:12
 #: includes/download.php:15
 #: includes/error.php:148
-#: includes/helpers.php:1846
-#: includes/helpers.php:1852
-#: includes/helpers.php:1855
-#: includes/helpers.php:1858
-#: includes/helpers.php:1884
-#: includes/helpers.php:1887
-#: includes/helpers.php:1890
-#: includes/helpers.php:1988
-#: includes/helpers.php:1991
-#: includes/helpers.php:1994
-#: includes/helpers.php:1997
-#: includes/helpers.php:2000
-#: includes/helpers.php:2003
-#: includes/helpers.php:2006
-#: includes/helpers.php:2011
+#: includes/helpers.php:1850
+#: includes/helpers.php:1856
+#: includes/helpers.php:1859
+#: includes/helpers.php:1862
+#: includes/helpers.php:1888
+#: includes/helpers.php:1891
+#: includes/helpers.php:1894
+#: includes/helpers.php:1992
+#: includes/helpers.php:1995
+#: includes/helpers.php:1998
+#: includes/helpers.php:2001
+#: includes/helpers.php:2004
+#: includes/helpers.php:2007
+#: includes/helpers.php:2010
+#: includes/helpers.php:2015
 #: includes/thumbnail.php:15
 #: includes/thumbnail.php:18
 #: includes/thumbnail.php:33
@@ -212,7 +212,7 @@ msgstr ""
 #: includes/controller/Main.php:317
 #: includes/controller/Main.php:375
 #: includes/download.php:18
-#: includes/helpers.php:1849
+#: includes/helpers.php:1853
 #: includes/thumbnail.php:21
 msgid "Access Denied"
 msgstr ""
@@ -1132,69 +1132,69 @@ msgstr ""
 msgid "The requested resource was not found."
 msgstr ""
 
-#: includes/helpers.php:1468
-#: includes/helpers.php:1606
+#: includes/helpers.php:1472
+#: includes/helpers.php:1610
 #, php-format
 msgid "Socket error: %s"
 msgstr ""
 
-#: includes/helpers.php:1683
+#: includes/helpers.php:1687
 msgid "Please create the uploads directory."
 msgstr ""
 
-#: includes/helpers.php:1685
+#: includes/helpers.php:1689
 msgid "Please make the uploads directory writable."
 msgstr ""
 
-#: includes/helpers.php:1703
+#: includes/helpers.php:1707
 #, php-format
 msgid "%s module is missing."
 msgstr ""
 
-#: includes/helpers.php:1712
+#: includes/helpers.php:1716
 #, php-format
 msgid "%s module is damaged."
 msgstr ""
 
-#: includes/helpers.php:1726
+#: includes/helpers.php:1730
 #, php-format
 msgid "%s feather is missing."
 msgstr ""
 
-#: includes/helpers.php:1735
+#: includes/helpers.php:1739
 #, php-format
 msgid "%s feather is damaged."
 msgstr ""
 
-#: includes/helpers.php:1797
-#: includes/helpers.php:1818
+#: includes/helpers.php:1801
+#: includes/helpers.php:1822
 #, php-format
 msgid "Execution of %s has been cancelled."
 msgstr ""
 
-#: includes/helpers.php:1846
+#: includes/helpers.php:1850
 msgid "Uploaded file is of an unsupported type."
 msgstr ""
 
-#: includes/helpers.php:1849
+#: includes/helpers.php:1853
 msgid "Only uploaded files are accepted."
 msgstr ""
 
-#: includes/helpers.php:1852
-#: includes/helpers.php:1884
+#: includes/helpers.php:1856
+#: includes/helpers.php:1888
 #: includes/lib/XMLRPC.php:187
 msgid "Upload path does not exist."
 msgstr ""
 
-#: includes/helpers.php:1855
-#: includes/helpers.php:1887
+#: includes/helpers.php:1859
+#: includes/helpers.php:1891
 #: includes/lib/XMLRPC.php:190
 msgid "Upload path is not writable."
 msgstr ""
 
-#: includes/helpers.php:1858
-#: includes/helpers.php:1890
-#: includes/helpers.php:2001
+#: includes/helpers.php:1862
+#: includes/helpers.php:1894
+#: includes/helpers.php:2005
 #: includes/lib/XMLRPC.php:193
 #: upgrade.php:125
 #: upgrade.php:142
@@ -1202,89 +1202,89 @@ msgstr ""
 msgid "Failed to write file to disk."
 msgstr ""
 
-#: includes/helpers.php:1989
+#: includes/helpers.php:1993
 msgid "The uploaded file exceeds the <code>upload_max_filesize</code> directive in php.ini."
 msgstr ""
 
-#: includes/helpers.php:1992
+#: includes/helpers.php:1996
 msgid "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the HTML form."
 msgstr ""
 
-#: includes/helpers.php:1995
+#: includes/helpers.php:1999
 msgid "The uploaded file was only partially uploaded."
 msgstr ""
 
-#: includes/helpers.php:1998
+#: includes/helpers.php:2002
 msgid "Missing a temporary folder."
 msgstr ""
 
-#: includes/helpers.php:2004
+#: includes/helpers.php:2008
 msgid "File upload was stopped by a PHP extension."
 msgstr ""
 
-#: includes/helpers.php:2007
+#: includes/helpers.php:2011
 #, php-format
 msgid "File upload failed with error %d."
 msgstr ""
 
-#: includes/helpers.php:2012
+#: includes/helpers.php:2016
 #, php-format
 msgid "The uploaded file exceeds the maximum size of %d Megabytes allowed by this site."
 msgstr ""
 
-#: includes/helpers.php:2234
+#: includes/helpers.php:2238
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr ""
 
-#: includes/helpers.php:2255
+#: includes/helpers.php:2259
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr ""
 
-#: includes/helpers.php:2321
+#: includes/helpers.php:2325
 msgid "Failed to create Zip archive."
 msgstr ""
 
-#: includes/helpers.php:2424
+#: includes/helpers.php:2428
 #, php-format
 msgid "Activate your account at %s"
 msgstr ""
 
-#: includes/helpers.php:2425
-#: includes/helpers.php:2439
-#: includes/helpers.php:2453
+#: includes/helpers.php:2429
+#: includes/helpers.php:2443
+#: includes/helpers.php:2457
 #, php-format
 msgid "Hello, %s."
 msgstr ""
 
-#: includes/helpers.php:2428
+#: includes/helpers.php:2432
 msgid "You are receiving this message because you registered a new account."
 msgstr ""
 
-#: includes/helpers.php:2431
+#: includes/helpers.php:2435
 msgid "Visit this link to activate your account:"
 msgstr ""
 
-#: includes/helpers.php:2438
+#: includes/helpers.php:2442
 #, php-format
 msgid "Reset your password at %s"
 msgstr ""
 
-#: includes/helpers.php:2442
+#: includes/helpers.php:2446
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 
-#: includes/helpers.php:2445
+#: includes/helpers.php:2449
 msgid "Visit this link to reset your password:"
 msgstr ""
 
-#: includes/helpers.php:2452
+#: includes/helpers.php:2456
 #, php-format
 msgid "Your new password for %s"
 msgstr ""
 
-#: includes/helpers.php:2456
+#: includes/helpers.php:2460
 #, php-format
 msgid "Your new password is: %s"
 msgstr ""
