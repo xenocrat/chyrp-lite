@@ -22,7 +22,7 @@ msgstr ""
 
 #: modules/migrator/admin/pages/manage_migration.twig:36
 #, php-format
-msgid "Something like <code>http://%s.tumblr.com/</code>."
+msgid "Something like <code>https://%s.tumblr.com/</code>."
 msgstr ""
 
 #: modules/migrator/admin/pages/manage_migration.twig:37
