@@ -133,10 +133,9 @@
             if (!$this->success and !$this->controller->displayed)
                 show_404();
 
-            # Set redirect_to so that visitors will come back here after login.
-            # (ignores actions that are exempt from the "view_site" permission)
+            # Set redirect_to for actions that visitors might want to come back to after login.
             if (!$this->controller->feed and $this->controller->displayed and
-                !in_array($this->action, $this->controller->view_site_exempt))
+                !in_array($this->action, $this->controller->view_site_exempt) and empty($_POST))
                     $_SESSION['redirect_to'] = self_url();
 
             $trigger->call("route_done", $this);
