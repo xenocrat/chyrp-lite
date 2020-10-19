@@ -183,9 +183,6 @@
 
             $_SESSION['latest_feather'] = $_GET['feather'];
 
-            if (!empty($_SESSION['redirect_to']))
-                $_SESSION['post_redirect'] = $_SESSION['redirect_to'];
-
             Trigger::current()->filter($options, array("write_post_options", "post_options"), null, $_GET['feather']);
 
             $this->display("pages".DIR."write_post",
@@ -221,8 +218,7 @@
             $post = Feathers::$instances[$_POST['feather']]->submit();
 
             Flash::notice(__("Post created!").' <a href="'.$post->url().'">'.
-                          __("View post &rarr;").'</a>',
-                          fallback($_SESSION['post_redirect'], "manage_posts"));
+                          __("View post &rarr;").'</a>', "manage_posts");
         }
 
         /**
@@ -432,9 +428,6 @@
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to add pages."));
 
-            if (!empty($_SESSION['redirect_to']))
-                $_SESSION['page_redirect'] = $_SESSION['redirect_to'];
-
             $this->display("pages".DIR."write_page", array("pages" => Page::find()));
         }
 
@@ -477,8 +470,7 @@
                               sanitize($_POST['slug']));
 
             Flash::notice(__("Page created!").' <a href="'.$page->url().'">'.
-                          __("View page &rarr;").'</a>',
-                          fallback($_SESSION['page_redirect'], "manage_pages"));
+                          __("View page &rarr;").'</a>', "manage_pages");
         }
 
         /**
