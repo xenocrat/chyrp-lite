@@ -37,10 +37,6 @@
         # Item limit for pagination.
         public $post_limit = 10;
 
-        # Array: $view_site_exempt
-        # Methods that are exempt from the "view_site" permission.
-        public $view_site_exempt = array("login", "logout", "register", "activate", "lost_password", "reset");
-
         # Variable: $twig
         # Environment for the Twig template engine.
         private $twig;
@@ -148,6 +144,15 @@
 
             # Are we viewing a page?
             Page::from_url($route->request, $route);
+        }
+
+        /**
+         * Function: exempt
+         * Route constructor calls this to determine "view_site" exemptions.
+         */
+        public function exempt($action) {
+            $exemptions = array("login", "logout", "register", "activate", "lost_password", "reset");
+            return in_array($action, $exemptions);
         }
 
         /**

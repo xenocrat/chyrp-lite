@@ -16,10 +16,6 @@
         # The base path for this controller.
         public $base = "ajax";
 
-        # Array: $protected
-        # Methods that cannot respond to actions.
-        public $protected = array("parse", "current");
-
         /**
          * Function: parse
          * Route constructor calls this to determine the action in the case of a POST request.
@@ -30,6 +26,14 @@
 
             if (!isset($route->action))
                 error(__("Error"), __("Missing argument."), null, 400);
+        }
+
+        /**
+         * Function: exempt
+         * Route constructor calls this to determine "view_site" exemptions.
+         */
+        public function exempt($action) {
+            return false;
         }
 
         /**

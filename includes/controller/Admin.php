@@ -31,10 +31,6 @@
         # Item limit for pagination.
         public $post_limit = 10;
 
-        # Array: $view_site_exempt
-        # Methods that are exempt from the "view_site" permission.
-        public $view_site_exempt = array("login", "logout");
-
         # String: $base
         # The base path for this controller.
         public $base = "admin";
@@ -159,6 +155,15 @@
             if (!isset($route->action))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to view this area."));
+        }
+
+        /**
+         * Function: exempt
+         * Route constructor calls this to determine "view_site" exemptions.
+         */
+        public function exempt($action) {
+            $exemptions = array("login", "logout");
+            return in_array($action, $exemptions);
         }
 
         /**
