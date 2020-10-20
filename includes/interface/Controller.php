@@ -9,4 +9,10 @@
          * Route constructor calls this to determine the action.
          */
         public function parse($route);
+
+        /**
+         * Function: exempt
+         * Route constructor calls this to determine "view_site" exemptions.
+         */
+        public function exempt($action);
     }
