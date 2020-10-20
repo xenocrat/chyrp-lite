@@ -45,7 +45,6 @@
 
             $config = Config::current();
 
-            fallback($controller->view_site_exempt, array());
             fallback($controller->feed, isset($_GET['feed']));
             fallback($controller->displayed, false);
 
@@ -97,8 +96,7 @@
                     error(__("Error"), __("Invalid action."), null, 400);
 
                 # Return 403 if the visitor cannot view the site and this is not an exempt action.
-                if (!$visitor->group->can("view_site") and
-                    !in_array($this->action, $this->controller->view_site_exempt)) {
+                if (!$visitor->group->can("view_site") and !$this->controller->exempt($this->action)) {
 
                     $trigger->call("can_not_view_site");
                     show_403(__("Access Denied"), __("You are not allowed to view this site."));
@@ -135,8 +133,9 @@
 
             # Set redirect_to for actions that visitors might want to come back to after login.
             if (!$this->controller->feed and $this->controller->displayed and
-                !in_array($this->action, $this->controller->view_site_exempt) and empty($_POST))
+                !$this->controller->exempt($this->action) and empty($_POST)) {
                     $_SESSION['redirect_to'] = self_url();
+            }
 
             $trigger->call("route_done", $this);
 
