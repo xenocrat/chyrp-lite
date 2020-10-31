@@ -180,7 +180,12 @@
             if (empty($config->enabled_feathers))
                 Flash::notice(__("You must enable at least one feather in order to write a post."), "feathers");
 
-            fallback($_SESSION['latest_feather'], reset($config->enabled_feathers));
+            if (!isset($_SESSION['latest_feather']))
+                $_SESSION['latest_feather'] = reset($config->enabled_feathers);
+
+            if (!feather_enabled($_SESSION['latest_feather']))
+                $_SESSION['latest_feather'] = reset($config->enabled_feathers);
+
             fallback($_GET['feather'], $_SESSION['latest_feather']);
 
             if (!feather_enabled($_GET['feather']))
@@ -1825,10 +1830,6 @@
                 call_user_func(array($class_name, "__uninstall"), !empty($_POST['confirm']));
 
             $config->set($enabled_array, array_diff($config->$enabled_array, array($name)));
-
-            if ($type == "feather" and
-                isset($_SESSION['latest_feather']) and $_SESSION['latest_feather'] == $name)
-                    unset($_SESSION['latest_feather']);
 
             Flash::notice(__("Extension disabled."), pluralize($type));
         }
