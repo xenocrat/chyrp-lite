@@ -54,6 +54,10 @@
 html {
     font-size: 14px;
 }
+html[lang="ar"],
+html[lang="he"] {
+    direction: rtl;
+}
 body, div, dl, dt, dd, ul, ol, li,
 h1, h2, h3, h4, h5, h6,
 pre, code, form, fieldset, legend,
@@ -499,7 +503,8 @@ form.split label {
     width: 45%;
     clear: both;
     text-align: right;
-    padding: 0rem 1rem 0rem 0rem;
+    text-align: end;
+    padding: 0rem 1rem;
 }
 form.split input[type="text"],
 form.split input[type="email"],
@@ -525,9 +530,19 @@ form.split .small {
     display: block;
     margin: 0.25rem 0rem 0rem 45%;
 }
+html[lang="ar"] form.split small,
+html[lang="he"] form.split small,
+html[lang="ar"] form.split .small,
+html[lang="he"] form.split .small {
+    margin: 0.25rem 45% 0rem 0rem;
+}
 form.split p.buttons {
     display: block;
     margin: 1rem 0rem 0rem 45%;
+}
+html[lang="ar"] form.split p.buttons,
+html[lang="he"] form.split p.buttons {
+    margin: 1rem 45% 0rem 0rem;
 }
 form.split div.confirmation {
     margin-top: 1rem;
@@ -581,6 +596,7 @@ table tbody tr td.name,
 table thead tr th.list,
 table tbody tr td.list {
     text-align: left;
+    text-align: start;
 }
 table thead tr th.date,
 table tbody tr td.date,
@@ -725,9 +741,10 @@ a.button.yay:active {
 button > img,
 a.button > img {
     position: relative;
-    top: 2px;
+    top: 0.3em;
     width: 16px;
     height: 16px;
+    float: left;
     margin-right: 4px;
 }
 button[disabled],
@@ -746,12 +763,8 @@ button.disabled:focus {
 div.confirmation button,
 div.confirmation a.button {
     min-width: 10em;
-}
-div.confirmation a.button + a.button,
-div.confirmation button + a.button,
-div.confirmation a.button + button,
-div.confirmation button + button {
-    margin-left: 1rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
 }
 *.tag {
     display: inline-block;
@@ -874,6 +887,7 @@ a.emblem.markdown > img {
 }
 a.emblem.preview {
     float: right;
+    margin-left: 4px;
 }
 .filters .filter_item {
     box-sizing: border-box;
@@ -1020,12 +1034,20 @@ a.emblem.preview {
         width: 100%;
         float: none;
         text-align: left;
+        text-align: start;
         padding: 0em;
     }
     form.split small,
     form.split .small,
-    form.split p.buttons {
+    form.split p.buttons,
+    html[lang="ar"] form.split small,
+    html[lang="he"] form.split small,
+    html[lang="ar"] form.split .small,
+    html[lang="he"] form.split .small,
+    html[lang="ar"] form.split p.buttons,
+    html[lang="he"] form.split p.buttons {
         margin-left: 0em;
+        margin-right: 0em;
     }
     input.text,
     input[type="text"],
