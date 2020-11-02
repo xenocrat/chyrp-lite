@@ -49,6 +49,10 @@
 html {
     font-size: 16px;
 }
+html[lang="ar"],
+html[lang="he"] {
+    direction: rtl;
+}
 *::selection {
     color: #ffffff;
     background-color: #0084c8;
@@ -246,6 +250,7 @@ ul.navigation li:last-child {
 }
 ul.sidebar_nav li {
     text-align: left;
+    text-align: start;
     font-size: 0.75em;
 }
 ul.tail_nav li {
@@ -335,6 +340,7 @@ select, input {
     padding: 0.4em;
     background: none;
     text-align: left;
+    text-align: start;
     font: inherit;
     font-size: inherit;
     color: #4e5a66;
@@ -500,6 +506,7 @@ div.tags {
 div.doaction {
     font-family: inherit;
     text-align: right;
+    text-align: end;
     margin-bottom: 1em;
 }
 div.doaction:last-child {
@@ -616,6 +623,7 @@ article > footer {
     display: block;
     width: 100%;
     text-align: left;
+    text-align: start;
     clear: both;
     margin: 0em 0em 1em 0em;
     padding: 0em;
