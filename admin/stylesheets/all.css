@@ -745,7 +745,7 @@ a.button > img {
     width: 16px;
     height: 16px;
     float: left;
-    margin-right: 4px;
+    margin-right: 0.6em;
 }
 button[disabled],
 button.disabled {
