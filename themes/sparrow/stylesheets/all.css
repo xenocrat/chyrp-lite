@@ -49,6 +49,10 @@
 html {
     font-size: 16px;
 }
+html[lang="ar"],
+html[lang="he"] {
+    direction: rtl;
+}
 *::selection {
     color: #ffffff;
     background-color: #99726d;
@@ -310,6 +314,7 @@ select, input {
     padding: 0.4em;
     background: none;
     text-align: left;
+    text-align: start;
     font: inherit;
     font-size: inherit;
     color: #4e5a66;
@@ -403,6 +408,7 @@ div.traversal {
     max-width: 1024px;
 }
 div.prev {
+    text-align: left;
     padding-left: 2rem;
     margin: 2rem auto 0rem auto;
 }
@@ -537,6 +543,7 @@ article > footer {
     display: block;
     width: 100%;
     text-align: left;
+    text-align: start;
     clear: both;
     margin: 0em 0em 1em 0em;
     padding: 0em;
@@ -564,7 +571,7 @@ a:hover, a:focus, a:active {
 }
 ul.navigation li > a {
     display: inline-block;
-    margin: 0em 1em 1em 0em;
+    margin: 0rem 0.5rem 1rem 0.5rem;
 }
 h3.flash a {
     color: #ffffff;
@@ -827,7 +834,15 @@ img.gravatar {
 @media screen and (min-width: 1024px) {
     div#mast_box {
         text-align: left;
+        text-align: start;
         padding: 4em 8rem 4rem 8rem;
+    }
+    ul.navigation li > a {
+        margin: 0rem 1rem 1rem 0rem;
+    }
+    html[lang="ar"] ul.navigation li > a,
+    html[lang="he"] ul.navigation li > a {
+        margin: 0rem 0rem 1rem 1rem;
     }
     div.search_box {
         display: inline-block;
