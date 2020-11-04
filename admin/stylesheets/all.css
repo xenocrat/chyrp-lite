@@ -741,7 +741,7 @@ a.button.yay:active {
 button > img,
 a.button > img {
     position: relative;
-    top: 0.3em;
+    top: 4px;
     width: 16px;
     height: 16px;
     float: left;
