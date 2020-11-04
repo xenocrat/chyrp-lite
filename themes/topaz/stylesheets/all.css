@@ -180,6 +180,7 @@ blockquote:last-child {
 pre {
     font-family: "Hack webfont", monospace;
     margin: 1em 0em;
+    overflow-x: auto;
 }
 code {
     font-family: "Hack webfont", monospace;
