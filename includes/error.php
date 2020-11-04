@@ -293,17 +293,6 @@
                 color: #2f61c4;
                 text-decoration: underline;
             }
-            pre.pane a {
-                color: #ffffff;
-                font-weight: bold;
-                font-style: italic;
-                text-decoration: none;
-            }
-            pre.pane a:hover,
-            pre.pane a:focus,
-            pre.pane a:active {
-                text-decoration: underline;
-            }
             a.big,
             button {
                 box-sizing: border-box;
