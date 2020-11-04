@@ -1058,7 +1058,7 @@ msgid "Logged in."
 msgstr ""
 
 #: includes/controller/Main.php:629
-#: includes/error.php:363
+#: includes/error.php:352
 msgid "Log in"
 msgstr ""
 
@@ -1108,11 +1108,11 @@ msgstr ""
 msgid "An unspecified error has occurred."
 msgstr ""
 
-#: includes/error.php:355
+#: includes/error.php:344
 msgid "Backtrace"
 msgstr ""
 
-#: includes/error.php:358
+#: includes/error.php:347
 #, php-format
 msgid "%s on line %d"
 msgstr ""

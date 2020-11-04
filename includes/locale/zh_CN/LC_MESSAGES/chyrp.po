@@ -862,7 +862,7 @@ msgstr "在登陆前必须激活您的账户。"
 msgid "Logged in."
 msgstr "已登陆。"
 
-#: includes/controller/Main.php:629 includes/error.php:363
+#: includes/controller/Main.php:629 includes/error.php:352
 msgid "Log in"
 msgstr "登陆"
 
@@ -912,11 +912,11 @@ msgstr "未找到。"
 msgid "An unspecified error has occurred."
 msgstr "发生未指定错误。"
 
-#: includes/error.php:355
+#: includes/error.php:344
 msgid "Backtrace"
 msgstr "回溯"
 
-#: includes/error.php:358
+#: includes/error.php:347
 #, php-format
 msgid "%s on line %d"
 msgstr "%s 在行 %d"
