@@ -199,7 +199,7 @@ hr:last-child, hr.post:last-of-type, hr + hr {
 }
 ul {
     list-style: disc outside;
-    margin: 1em 0em 1em 2em;
+    margin: 1em 2em;
     padding: 0em;
 }
 ul li > ul {
@@ -207,11 +207,17 @@ ul li > ul {
 }
 ol {
     list-style: decimal outside;
-    margin: 1em 0em 1em 2em;
+    margin: 1em 2em;
     padding: 0em;
 }
 ol li > ol {
     list-style-type: lower-latin;
+}
+html[lang="ar"] ol li > ol {
+    list-style-type: arabic-indic;
+}
+html[lang="he"] ol li > ol {
+    list-style-type: hebrew;
 }
 dl {
     list-style: none;
