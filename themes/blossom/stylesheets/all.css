@@ -245,6 +245,7 @@ ul.tail_nav li {
 }
 ul.archive {
     list-style: none;
+    margin: 1rem 0rem;
 }
 ul.archive:last-child {
     margin-bottom: 0em;
@@ -867,9 +868,6 @@ article img {
     ol.comments li.comment_form {
         padding: 0em 1rem 1rem 1rem;
     }
-    ul.archive li {
-        margin: 0rem 0rem 0rem 1rem;
-    }
     ul.tail_nav.mobile_nav {
         display: block;
         position: fixed;
@@ -927,9 +925,6 @@ article img {
     }
 }
 @media screen and (max-width: 599px) {
-    ul.archive li {
-        margin-left: 0em;
-    }
     ul.archive article.post.archive {
         box-sizing: border-box;
         width: 100%;
