@@ -582,9 +582,9 @@ ul.navigation li > a {
     margin: 0rem 0.5rem 1rem 0.5rem;
 }
 h3.flash a {
-    color: #ffffff;
     font-weight: bold;
-    font-style: italic;
+    color: #ffffff;
+    border-bottom: 1px transparent solid;
 }
 h3.flash a:hover,
 h3.flash a:focus,
@@ -609,6 +609,7 @@ div.category a.category {
     right: 4rem;
     padding: 0.2em 0.6em;
     margin: 0em;
+    background-color: #f5f4f0;
     border: 1px solid #c2bcb8;
     border-top: none;
 }

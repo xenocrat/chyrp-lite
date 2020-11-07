@@ -54,13 +54,13 @@ html[lang="he"] {
     direction: rtl;
 }
 *::selection {
-    color: #000000;
+    color: #ffffff;
     background-color: #cc5252;
 }
 body {
     font-family: "Open Sans webfont", sans-serif;
     font-size: 1rem;
-    color: #adafae;
+    color: #ffffff;
     line-height: 1.5;
     background-color: #202021;
     margin: 0em 0em 4rem 0em;
@@ -503,7 +503,7 @@ ul.archive article.post.archive {
     font-size: 0.75em;
     margin: 1rem 0rem 1rem 2rem;
     padding: 8px;
-    border: 1px solid #666667;
+    border: 1px solid lightgreen;
 }
 article > header {
     display: block;
@@ -554,12 +554,12 @@ article.audio audio {
     max-width: 800px;
 }
 a:link, a:visited {
-    color: #adafae;
+    color: #ffffff;
     text-decoration: none;
 }
 a:hover, a:focus, a:active {
     outline: none;
-    color: #ffffff;
+    color: lightgreen;
     text-decoration: none;
 }
 ul.navigation li > a {
@@ -567,14 +567,13 @@ ul.navigation li > a {
     margin: 0rem 0.5rem 1rem 0.5rem;
 }
 h3.flash a {
-    color: #ffffff;
-    font-weight: bold;
-    font-style: italic;
+    border-bottom: 1px #ffffff solid;
 }
 h3.flash a:hover,
 h3.flash a:focus,
 h3.flash a:active {
-    border-bottom: 1px #ffffff solid;
+    color: lightgreen;
+    border-bottom: 1px lightgreen solid;
 }
 div.traversal a {
     display: inline-block;
@@ -601,14 +600,14 @@ div.next a:hover, div.next a:active {
 }
 section a:link, p a:link,
 section a:visited, p a:visited {
-    color: #adafae;
-    border-bottom: 1px #adafae solid;
+    color: #ffffff;
+    border-bottom: 1px #ffffff solid;
 }
 section a:hover, p a:hover,
 section a:focus, p a:focus,
 section a:active, p a:active {
-    color: #ffffff;
-    border-bottom: 1px #ffffff solid;
+    color: lightgreen;
+    border-bottom: 1px lightgreen solid;
 }
 div.tags a.tag,
 div.tag_cloud a.tag {
@@ -617,10 +616,9 @@ div.tag_cloud a.tag {
     top: 0px;
     padding: 0.2em 0.4em;
     margin: 2px 0em;
-    border-radius: 0.2em;
     color: #fffefd;
     background-color: #383839;
-    border: 1px solid #383839;
+    border: 1px solid #666667;
 }
 div.tags a.tag:hover,
 div.tags a.tag:focus,
@@ -639,6 +637,7 @@ div.category a.category {
     padding: 0.2em 0.6em;
     margin: 0em;
     color: #fffefd;
+    background-color: #383839;
     border: 1px solid #666667;
     border-top: none;
 }
