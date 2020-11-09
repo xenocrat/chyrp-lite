@@ -112,12 +112,8 @@
                 $tr_str_data = (array) $tr_str_data;
 
                 # Add discovered msgid+msgstr pairs to the data.
-                for ($z = 0; $z < count($or_str_data); $z++) {
-                    fallback($tr_str_data[$z], "");
-
-                    $mo_data[] = array("or" => $or_str_data[$z],
-                                       "tr" => $tr_str_data[$z]);
-                }
+                $mo_data[] = array("or" => $or_str_data,
+                                   "tr" => $tr_str_data);
             }
 
             $this->mo[$domain] = $mo_data;
@@ -135,26 +131,32 @@
         *     $number - The number to judge by (optional).
         */
         public function text($domain, $single, $plural = null, $number = 1) {
-            $single = isset($single) ? $this->find($domain, $single) : "" ;
-            $plural = isset($plural) ? $this->find($domain, $plural) : "" ;
+            if (isset($plural)) {
+                $array = $this->find($domain, $plural);
+                $n = (int) $number;
+                $index = ($n != 1) ? 1 : 0 ;
+                Trigger::current()->filter($index, "translate_plural", $n, $this->locale);
+                return fallback($array[$index], ($n != 1) ? $plural : $single);
+            }
 
-            return ((int) $number != 1) ? $plural : $single ;
+            $array = $this->find($domain, $single);
+            return fallback($array[0], $single);
         }
 
        /**
         * Function: find
-        * Returns a translation string from the supplied domain.
+        * Returns a translation array from the supplied domain.
         */
         public function find($domain, $string) {
             if (!isset($this->mo[$domain]))
-                return $string;
+                return array();
 
             foreach ($this->mo[$domain] as $entry) {
-                if ($entry["or"] == $string)
-                    return oneof($entry["tr"], $string);
+                if (in_array($string, $entry["or"], true))
+                    return $entry["tr"];
             }
 
-            return $string;
+            return array();
         }
 
         /**
