@@ -134,9 +134,12 @@
             if (isset($plural)) {
                 $array = $this->find($domain, $plural);
                 $n = (int) $number;
-                $index = ($n != 1) ? 1 : 0 ;
-                Trigger::current()->filter($index, "translate_plural", $n, $this->locale);
-                return fallback($array[$index], ($n != 1) ? $plural : $single);
+                $nplural = ($n != 1) ? 1 : 0 ;
+                $trigger = Trigger::current();
+
+                # Respond to this filter for translations with n > 1 plural forms.
+                $trigger->filter($nplural, "translate_plural", $n, $this->locale);
+                return fallback($array[$nplural], ($n != 1) ? $plural : $single);
             }
 
             $array = $this->find($domain, $single);
