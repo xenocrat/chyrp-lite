@@ -293,7 +293,7 @@ div.pagination {
 }
 a.prev_page,
 a.next_page {
-    min-width: 10em;
+    min-width: 15em;
 }
 span.pages {
     display: block;
@@ -762,9 +762,10 @@ button.disabled:focus {
 }
 div.confirmation button,
 div.confirmation a.button {
-    min-width: 10em;
+    min-width: 15em;
     margin-left: 0.5rem;
     margin-right: 0.5rem;
+    padding-right: calc(16px + 0.6em);
 }
 *.tag {
     display: inline-block;
@@ -1090,6 +1091,7 @@ a.emblem.preview {
         clear: both !important;
         display: block !important;
         width: 100% !important;
+        padding: 0.4em 0.6em !important;
         margin: 1em 0em 0em 0em !important;
         text-align: center !important;
         box-sizing: border-box !important;
