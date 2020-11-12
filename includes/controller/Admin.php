@@ -270,6 +270,9 @@
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
+            if (isset($_POST['cancel']))
+                redirect(fallback($_SESSION['post_redirect'], "manage_posts"));
+
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to update a post."), null, 400);
 
@@ -520,6 +523,9 @@
 
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
+
+            if (isset($_POST['cancel']))
+                redirect(fallback($_SESSION['page_redirect'], "manage_pages"));
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a page."), null, 400);
