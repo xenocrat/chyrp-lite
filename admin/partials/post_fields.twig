@@ -152,6 +152,10 @@
 <button type="submit" class="yay" name="publish" value="true">
 <img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Publish" | translate }}
 </button>
+{% else %}
+<button type="submit" class="boo" name="cancel" value="true" data-confirm="">
+<img src="{{ site.chyrp_url }}/admin/images/icons/cancel.svg" alt="">{{ "Cancel" | translate }}
+</button>
 {% endif %}
 <button type="submit">
 <img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="">{{ "Save" | translate }}
