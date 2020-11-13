@@ -152,14 +152,17 @@
 <button type="submit" class="yay" name="publish" value="true">
 <img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Publish" | translate }}
 </button>
+<button type="submit">
+<img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="">{{ "Save" | translate }}
+</button>
 {% else %}
+<button type="submit">
+<img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="">{{ "Save" | translate }}
+</button>
 <button type="submit" class="boo" name="cancel" value="true" data-confirm="">
 <img src="{{ site.chyrp_url }}/admin/images/icons/cancel.svg" alt="">{{ "Cancel" | translate }}
 </button>
 {% endif %}
-<button type="submit">
-<img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="">{{ "Save" | translate }}
-</button>
 {% else %}
 {% if visitor.group.can("add_post") %}
 <button type="submit" class="yay">
