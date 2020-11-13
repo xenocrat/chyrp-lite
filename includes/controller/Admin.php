@@ -470,6 +470,11 @@
             $public = in_array($_POST['status'], array("listed", "public"));
             $listed = in_array($_POST['status'], array("listed", "teased"));
 
+            if (isset($_POST['private'])) {
+                $public = false;
+                $listed = false;
+            }
+
             $list_order = empty($_POST['list_order']) ?
                 (int) $_POST['list_priority'] : (int) $_POST['list_order'] ;
 
