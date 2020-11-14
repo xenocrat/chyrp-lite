@@ -780,7 +780,6 @@ a.archive_post_link:hover,
 a.archive_post_link:focus,
 a.archive_post_link:active {
     background-color: #2ea8e5;
-    opacity: 0.8;
 }
 iframe {
     width: 100%;

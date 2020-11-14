@@ -176,7 +176,6 @@ code {
     font-family: "Hack webfont", monospace;
     font-size: 0.75em;
     font-style: normal;
-    color: #fffefd;
     background-color: #666667;
     padding: 0.2em 0.4em;
     margin: 0.2em 0em;
@@ -282,7 +281,6 @@ table:last-child {
 }
 table thead tr {
     background-color: #666667;
-    color: #fffefd;
     border: 1px solid #666667;
 }
 table thead tr th {
@@ -421,7 +419,6 @@ div.flash {
     box-sizing: border-box;
     width: 100%;
     text-align: center;
-    color: #ffffff;
     background-color: #cc5252;
     padding: 0.5em;
     border-bottom: 1px solid transparent;
@@ -616,9 +613,8 @@ div.tag_cloud a.tag {
     top: 0px;
     padding: 0.2em 0.4em;
     margin: 2px 0em;
-    color: #fffefd;
-    background-color: #383839;
-    border: 1px solid #666667;
+    color: #ffffff;
+    border: 1px solid lightgreen;
 }
 div.tags a.tag:hover,
 div.tags a.tag:focus,
@@ -626,8 +622,7 @@ div.tags a.tag:active,
 div.tag_cloud a.tag:hover,
 div.tag_cloud a.tag:focus,
 div.tag_cloud a.tag:active {
-    background-color: #666667;
-    border-color: #666667;
+    background-color: #cc5252;
 }
 div.category a.category {
     display: inline-block;
@@ -636,22 +631,16 @@ div.category a.category {
     right: 4rem;
     padding: 0.2em 0.6em;
     margin: 0em;
-    color: #fffefd;
     background-color: #383839;
     border: 1px solid #666667;
     border-top: none;
-}
-div.category a.category:hover,
-div.category a.category:focus,
-div.category a.category:active {
-    background-color: #666667;
 }
 div.doaction a, button {
     display: inline-block;
     white-space: nowrap;
     padding: 0.4em 1.2em;
     border-radius: 0.2em;
-    color: #fffefd;
+    color: #ffffff;
     background-color: #383839;
     border: 1px solid #383839;
 }
@@ -702,7 +691,6 @@ a.archive_post_link:hover,
 a.archive_post_link:focus,
 a.archive_post_link:active {
     background-color: #cc5252;
-    opacity: 0.8;
 }
 iframe {
     width: 100%;

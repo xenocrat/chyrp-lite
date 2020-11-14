@@ -693,7 +693,6 @@ a.archive_post_link:hover,
 a.archive_post_link:focus,
 a.archive_post_link:active {
     background-color: #cc5252;
-    opacity: 0.8;
 }
 img {
     border-style: none;
