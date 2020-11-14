@@ -10,11 +10,11 @@
 
     # Constant: CHYRP_VERSION
     # Version number for this release.
-    define('CHYRP_VERSION', "2020.04");
+    define('CHYRP_VERSION', "2021.01");
 
     # Constant: CHYRP_CODENAME
     # The codename for this version.
-    define('CHYRP_CODENAME', "Spanish");
+    define('CHYRP_CODENAME', "House");
 
     # Constant: CHYRP_IDENTITY
     # The string identifying this version.
