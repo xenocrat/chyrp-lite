@@ -4,7 +4,7 @@
      * Generates a JSON feed and outputs it on closing.
      *
      * See Also:
-     *     https://jsonfeed.org/version/1
+     *     https://jsonfeed.org/version/1.1
      */
     class JSONFeed implements FeedGenerator {
         # Variable: $count
