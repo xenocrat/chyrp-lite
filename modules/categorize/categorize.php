@@ -106,9 +106,10 @@
             $options[0]["selected"] = empty($post->category_id);
 
             foreach (Category::find() as $category) {
+                $selected = ($post) ? $post->category_id == $category->id : false ;
                 $options[$category->id]["value"] = $category->id;
                 $options[$category->id]["name"] = oneof($category->name, __("[Untitled]"));
-                $options[$category->id]["selected"] = ($post ? $post->category_id == $category->id : false);
+                $options[$category->id]["selected"] = $selected;
             }
 
             $fields[] = array("attr" => "option[category_id]",

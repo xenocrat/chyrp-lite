@@ -58,12 +58,14 @@
 
             $loader = new \Twig\Loader\ChainLoader($chain);
 
-            $this->twig = new \Twig\Environment($loader,
-                                                array("debug" => DEBUG,
-                                                      "strict_variables" => DEBUG,
-                                                      "charset" => "UTF-8",
-                                                      "cache" => (CACHE_TWIG ? CACHES_DIR.DIR."twig" : false),
-                                                      "autoescape" => false));
+            $this->twig = new \Twig\Environment(
+                $loader,
+                array("debug" => DEBUG,
+                      "strict_variables" => DEBUG,
+                      "charset" => "UTF-8",
+                      "cache" => (CACHE_TWIG ? CACHES_DIR.DIR."twig" : false),
+                      "autoescape" => false)
+            );
 
             $this->twig->addExtension(new Leaf());
             $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
@@ -667,12 +669,12 @@
                          __("You do not have sufficient privileges to add users."));
 
             $config = Config::current();
+            $options = array("where" => array("id not" => array($config->guest_group, $config->default_group)),
+                             "order" => "id DESC");
 
             $this->display("pages".DIR."new_user",
                            array("default_group" => new Group($config->default_group),
-                                 "groups" => Group::find(array(
-                                 "where" => array("id not" => array($config->guest_group, $config->default_group)),
-                                 "order" => "id DESC"))));
+                                 "groups" => Group::find($options)));
         }
 
         /**
@@ -764,10 +766,11 @@
             if ($user->no_results)
                 Flash::warning(__("User not found."), "manage_users");
 
+            $options = array("order" => "id ASC",
+                             "where" => array("id not" => Config::current()->guest_group));
+
             $this->display("pages".DIR."edit_user",
-                           array("user" => $user, "groups" => Group::find(
-                           array("order" => "id ASC",
-                                 "where" => array("id not" => Config::current()->guest_group)))));
+                           array("user" => $user, "groups" => Group::find($options)));
         }
 
         /**
@@ -872,9 +875,11 @@
             if ($user->id == Visitor::current()->id)
                 Flash::warning(__("You cannot delete your own account."), "manage_users");
 
+            $options = array("where" => array("id not" => $user->id));
+
             $this->display("pages".DIR."delete_user",
                            array("user" => $user,
-                                 "users" => User::find(array("where" => array("id not" => $user->id)))));
+                                 "users" => User::find($options)));
         }
 
         /**
@@ -1082,10 +1087,12 @@
             if ($group->id == Visitor::current()->group->id)
                 Flash::warning(__("You cannot delete your own group."), "manage_groups");
 
+            $options = array("where" => array("id not" => $group->id),
+                             "order" => "id ASC");
+
             $this->display("pages".DIR."delete_group",
                            array("group" => $group,
-                                 "groups" => Group::find(array("where" => array("id not" => $group->id),
-                                                               "order" => "id ASC"))));
+                                 "groups" => Group::find($options)));
         }
 
         /**
@@ -1972,7 +1979,8 @@
                                         "class" => "JSONFeed"));
 
             if (empty($_POST))
-                return $this->display("pages".DIR."content_settings", array("feed_formats" => $feed_formats));
+                return $this->display("pages".DIR."content_settings",
+                                      array("feed_formats" => $feed_formats));
 
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));

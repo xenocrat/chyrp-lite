@@ -48,12 +48,14 @@
         private function __construct() {
             $loader = new \Twig\Loader\FilesystemLoader(THEME_DIR);
 
-            $this->twig = new \Twig\Environment($loader,
-                                                array("debug" => DEBUG,
-                                                      "strict_variables" => DEBUG,
-                                                      "charset" => "UTF-8",
-                                                      "cache" => (CACHE_TWIG ? CACHES_DIR.DIR."twig" : false),
-                                                      "autoescape" => false));
+            $this->twig = new \Twig\Environment(
+                $loader,
+                array("debug" => DEBUG,
+                      "strict_variables" => DEBUG,
+                      "charset" => "UTF-8",
+                      "cache" => (CACHE_TWIG ? CACHES_DIR.DIR."twig" : false),
+                      "autoescape" => false)
+            );
 
             $this->twig->addExtension(new Leaf());
             $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
@@ -246,13 +248,16 @@
                                        $feathers),
                                  array("created_at ASC"))->fetch();
 
+            fallback($next["created_at"]);
+            fallback($prev["created_at"]);
+
             $this->display("pages".DIR."archive",
                            array("posts" => $posts,
                                  "months" => array_reverse($months, true),
                                  "archive" => array("when"  => $timestamp,
                                                     "depth" => $depth,
-                                                    "next"  => strtotime(fallback($next["created_at"])),
-                                                    "prev"  => strtotime(fallback($prev["created_at"])))),
+                                                    "next"  => strtotime($next["created_at"]),
+                                                    "prev"  => strtotime($prev["created_at"]))),
                                                     $title);
         }
 
