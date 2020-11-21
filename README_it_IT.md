@@ -58,6 +58,7 @@ sito web del tuo blog.
 * Highlighter: Aggiunge la colorazione della sintassi concatenata.
 * Facile Embed: Il modo più semplice per incorporare video nel tuo blog.
 * Visualizzazioni dei post: Contatore per la visualizzazione dei tuoi post.
+* MathJax: Un motore di visualizzazione JavaScript per la matematica.
 
 ## Requisiti
 

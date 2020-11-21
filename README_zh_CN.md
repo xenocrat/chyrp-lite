@@ -51,6 +51,7 @@ Chyrp Lite还实现了一个完整的与WordPress兼容的MetaWeblog XML-RPC API
 * Highlighter: 语法突出显示您的代码片段。
 * Easy Embed: 在您的博客中嵌入视频最简单的方法。
 * Post Views: 维护您的博客条目的查看次数。
+* MathJax: JavaScript的数学显示引擎。
 
 ## 安装要求
 

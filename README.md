@@ -55,6 +55,7 @@ do many blogging tasks remotely without having to visit your blog's website.
 * Highlighter: syntax highlighting for your code snippets.
 * Easy Embed: the easiest way to embed videos in your blog.
 * Post Views: maintain a view count for your blog entries.
+* MathJax: A JavaScript display engine for mathematics.
 
 ## Requirements
 
