@@ -193,13 +193,13 @@
         }
 
         public function main_update_comment() {
-            list($comment, $success, $message) = self::update_comment();
+            list($comment, $success, $message) = $this->update_comment();
             $type = ($success) ? "notice" : "warning" ;
             Flash::$type($message, $comment->post->url());
         }
 
         public function admin_update_comment() {
-            list($comment, $success, $message) = self::update_comment();
+            list($comment, $success, $message) = $this->update_comment();
 
             if (!$success)
                 error(__("Error"), $message, null, 422);
@@ -208,12 +208,12 @@
         }
 
         public function ajax_add_comment() {
-            list($comment, $success, $message) = self::add_comment();
+            list($comment, $success, $message) = $this->add_comment();
             json_response($message, $success);
         }
 
         public function ajax_update_comment() {
-            list($comment, $success, $message) = self::update_comment();
+            list($comment, $success, $message) = $this->update_comment();
             json_response($message, $success);
         }
 
@@ -616,7 +616,7 @@
 
         public function main_view() {
             if (isset($_POST['action']) and $_POST['action'] == "add_comment") {
-                list($comment, $success, $message) = self::add_comment();
+                list($comment, $success, $message) = $this->add_comment();
                 $type = ($success) ? "notice" : "warning" ;
                 Flash::$type($message);
 
@@ -852,7 +852,7 @@
 
         public function visitor_comment_count_attr($attr, $visitor) {
             return ($visitor->id == 0) ?
-                count($_SESSION['comments']) : self::user_comment_count_attr($attr, $visitor) ;
+                count($_SESSION['comments']) : $this->user_comment_count_attr($attr, $visitor) ;
         }
 
         public function import_chyrp_post($entry, $post) {

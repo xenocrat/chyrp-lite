@@ -71,7 +71,7 @@
             fallback($_POST['created_at'], datetime());
             fallback($_POST['option'], array());
 
-            return Post::add(array("filenames" => self::filenames_serialize($filenames),
+            return Post::add(array("filenames" => $this->filenames_serialize($filenames),
                                    "caption" => $_POST['caption'],
                                    "title" => $_POST['title']),
                              sanitize($_POST['slug']),
@@ -118,7 +118,7 @@
             fallback($_POST['created_at'], $post->created_at);
             fallback($_POST['option'], array());
 
-            return $post->update(array("filenames" => self::filenames_serialize($filenames),
+            return $post->update(array("filenames" => $this->filenames_serialize($filenames),
                                        "caption" => $_POST['caption'],
                                        "title" => $_POST['title']),
                                  null,
@@ -179,14 +179,14 @@
             if ($post->feather != "uploader")
                 return;
 
-            $post->filenames = self::filenames_unserialize($post->filenames);
+            $post->filenames = $this->filenames_unserialize($post->filenames);
         }
 
         public function filter_post($post) {
             if ($post->feather != "uploader")
                 return;
 
-            $post->files = self::list_files($post->filenames);
+            $post->files = $this->list_files($post->filenames);
 
             foreach ($post->files as $file)
                 if (in_array($file["type"], array("jpg", "jpeg", "png", "gif", "tif", "tiff", "bmp"))) {

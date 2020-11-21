@@ -51,12 +51,12 @@
 
         private function tags_name_match($name) {
             # Serialized notation of key for SQL queries.
-            return "%\"".self::tags_encoded($name)."\":%";
+            return "%\"".$this->tags_encoded($name)."\":%";
         }
 
         private function tags_clean_match($clean) {
             # Serialized notation of value for SQL queries.
-            return "%:\"".self::tags_encoded($clean)."\"%";
+            return "%:\"".$this->tags_encoded($clean)."\"%";
         }
 
         private function tags_encoded($text) {
@@ -101,8 +101,8 @@
             if (!isset($_POST['tags']))
                 return;
 
-            $tags = self::prepare_tags($_POST['tags']);
-            $attributes["tags"] = self::tags_serialize($tags);
+            $tags = $this->prepare_tags($_POST['tags']);
+            $attributes["tags"] = $this->tags_serialize($tags);
             return $attributes;
         }
 
@@ -110,13 +110,13 @@
             if (!isset($_POST['tags']))
                 return;
 
-            $tags = self::prepare_tags($_POST['tags']);
-            $attributes["tags"] = self::tags_serialize($tags);
+            $tags = $this->prepare_tags($_POST['tags']);
+            $attributes["tags"] = $this->tags_serialize($tags);
             return $attributes;
         }
 
         public function post_options($fields, $post = null) {
-            $cloud = self::tag_cloud(false, "name_asc");
+            $cloud = $this->tag_cloud(false, "name_asc");
             $names = isset($post->tags) ? array_keys($post->tags) : array();
 
             $selector = "\n".'<span class="options_extra tags_select">'."\n";
@@ -140,7 +140,7 @@
         }
 
         public function post($post) {
-            $post->tags = !empty($post->tags) ? self::tags_unserialize($post->tags) : array() ;
+            $post->tags = !empty($post->tags) ? $this->tags_unserialize($post->tags) : array() ;
             uksort($post->tags, function($a, $b) { return $this->mb_strcasecmp($a, $b); });
         }
 
@@ -159,7 +159,7 @@
 
         public function twig_context_main($context) {
             if (!isset($context["tag_cloud"]))
-                $context["tag_cloud"] = self::tag_cloud(10);
+                $context["tag_cloud"] = $this->tag_cloud(10);
 
             return $context;
         }
@@ -192,7 +192,7 @@
                          __("You do not have sufficient privileges to manage tags.", "tags"));
 
             fallback($_GET['query'], "");
-            list($where, $params) = keywords(self::tags_encoded($_GET['query']),
+            list($where, $params) = keywords($this->tags_encoded($_GET['query']),
                                     "post_attributes.name = 'tags' AND post_attributes.value LIKE :query");
 
             $visitor = Visitor::current();
@@ -219,7 +219,7 @@
             }
 
             $admin->display("pages".DIR."manage_tags",
-                            array("tag_cloud" => self::tag_cloud(), "posts" => $posts));
+                            array("tag_cloud" => $this->tag_cloud(), "posts" => $posts));
         }
 
         public function admin_rename_tag($admin) {
@@ -231,7 +231,7 @@
                 error(__("No Tag Specified", "tags"),
                       __("Please specify the tag you want to rename.", "tags"), null, 400);
 
-            $tag = self::tag_find($_GET['clean']);
+            $tag = $this->tag_find($_GET['clean']);
 
             if (empty($tag))
                 Flash::warning(__("Tag not found.", "tags"), "manage_tags");
@@ -295,7 +295,7 @@
                 "post_attributes",
                 "post_id",
                 array("name" => "tags",
-                      "value LIKE" => self::tags_name_match($_POST['original'])))->fetchAll();
+                      "value LIKE" => $this->tags_name_match($_POST['original'])))->fetchAll();
 
             foreach ($results as $result) {
                 $post = new Post($result["post_id"]);
@@ -321,7 +321,7 @@
                 error(__("No Tag Specified", "tags"),
                       __("Please specify the tag you want to delete.", "tags"), null, 400);
 
-            $tag = self::tag_find($_GET['clean']);
+            $tag = $this->tag_find($_GET['clean']);
 
             if (empty($tag))
                 Flash::warning(__("Tag not found.", "tags"), "manage_tags");
@@ -348,7 +348,7 @@
                 "post_attributes",
                 "post_id",
                 array("name" => "tags",
-                      "value LIKE" => self::tags_name_match($_POST['name'])))->fetchAll();
+                      "value LIKE" => $this->tags_name_match($_POST['name'])))->fetchAll();
 
             foreach ($results as $result)  {
                 $post = new Post($result["post_id"]);
@@ -398,7 +398,7 @@
                     array("reason" => __("You did not specify a tag.", "tags")),
                     __("Invalid Tag", "tags"));
 
-            $tag = self::tag_find($_GET['name']);
+            $tag = $this->tag_find($_GET['name']);
 
             if (empty($tag))
                 return $main->display(array("pages".DIR."tag", "pages".DIR."index"),
@@ -409,7 +409,7 @@
                 "post_attributes",
                 array("value", "post_id"),
                 array("name" => "tags",
-                      "value LIKE" => self::tags_clean_match($_GET['name'])))->fetchAll();
+                      "value LIKE" => $this->tags_clean_match($_GET['name'])))->fetchAll();
 
             $ids = array();
 
@@ -435,7 +435,7 @@
 
         public function main_tags($main) {
             $main->display("pages".DIR."tags",
-                           array("tag_cloud" => self::tag_cloud(false, "name_asc")),
+                           array("tag_cloud" => $this->tag_cloud(false, "name_asc")),
                            __("Tags", "tags"));
         }
 
@@ -448,8 +448,8 @@
 
         public function metaWeblog_before_editPost($values, $struct) {
             if (isset($struct["mt_keywords"])) {
-                $tags = self::prepare_tags($struct["mt_keywords"]);
-                $values["tags"] = self::tags_serialize($tags);
+                $tags = $this->prepare_tags($struct["mt_keywords"]);
+                $values["tags"] = $this->tags_serialize($tags);
             }
 
             return $values;
@@ -467,7 +467,7 @@
                     "post_attributes",
                     array("post_id"),
                     array("name" => "tags",
-                          "value LIKE" => self::tags_name_match($name),
+                          "value LIKE" => $this->tags_name_match($name),
                           "post_id !=" => $post->id),
                     array("post_id DESC"),
                     array(),
@@ -504,7 +504,7 @@
                 $cloud = array();
 
                 foreach ($results as $result) {
-                    $these = self::tags_unserialize($result["value"]);
+                    $these = $this->tags_unserialize($result["value"]);
                     $found = array_merge($found, $these);
 
                     foreach ($these as $name => $clean)
@@ -540,7 +540,7 @@
         }
 
         public function tag_find($clean) {
-            $cloud = self::tag_cloud();
+            $cloud = $this->tag_cloud();
 
             foreach ($cloud as $tag)
                 if ($tag["clean"] === $clean)

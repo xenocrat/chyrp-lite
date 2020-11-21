@@ -12,7 +12,7 @@
                                   "type" => "file",
                                   "label" => __("Photo", "photo"),
                                   "multiple" => false,
-                                  "accept" => ".".implode(",.", self::photo_extensions()),
+                                  "accept" => ".".implode(",.", $this->photo_extensions()),
                                   "note" => _f("(Max. file size: %d Megabytes)", $maximum, "photo")));
 
             $this->setField(array("attr" => "caption",
@@ -32,7 +32,7 @@
 
         public function submit() {
             if (isset($_FILES['photo']) and upload_tester($_FILES['photo']))
-                $filename = upload($_FILES['photo'], self::photo_extensions());
+                $filename = upload($_FILES['photo'], $this->photo_extensions());
 
             if (!isset($filename))
                 error(__("Error"), __("You did not select a photo to upload.", "photo"), null, 422);
@@ -64,7 +64,7 @@
 
         public function update($post) {
             if (isset($_FILES['photo']) and upload_tester($_FILES['photo'])) {
-                $filename = upload($_FILES['photo'], self::photo_extensions());
+                $filename = upload($_FILES['photo'], $this->photo_extensions());
                 $this->delete_file($post);
             } else {
                 $filename = $post->filename;

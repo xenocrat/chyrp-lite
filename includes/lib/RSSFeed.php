@@ -81,7 +81,7 @@
                               $name = "",
                               $uri = "",
                               $email = "") {
-            self::split();
+            $this->split();
 
             echo '<item>'."\n";
             echo '<title>'.strip_tags($title).'</title>'."\n";
@@ -163,7 +163,7 @@
          * Outputs the closing channel element.
          */
         public function close() {
-            self::split();
+            $this->split();
             echo '</channel>'."\n";
             echo '</rss>'."\n";
         }

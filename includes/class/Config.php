@@ -20,7 +20,7 @@
                     false :
                     trigger_error(__("Could not read the configuration file."), E_USER_ERROR) ;
 
-            self::read();
+            $this->read();
 
             foreach ($this->json as $setting => $value)
                 if (!is_numeric($setting) and $setting != "json")
@@ -75,7 +75,7 @@
             if (class_exists("Trigger"))
                 Trigger::current()->call("change_setting", $setting, $value);
 
-            return self::write();
+            return $this->write();
         }
 
         /**
@@ -87,7 +87,7 @@
          */
         public function remove($setting) {
             unset($this->json[$setting]);
-            return self::write();
+            return $this->write();
         }
 
         /**

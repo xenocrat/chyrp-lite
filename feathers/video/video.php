@@ -12,7 +12,7 @@
                                   "type" => "file",
                                   "label" => __("Video File", "video"),
                                   "multiple" => false,
-                                  "accept" => ".".implode(",.", self::video_extensions()),
+                                  "accept" => ".".implode(",.", $this->video_extensions()),
                                   "note" => _f("(Max. file size: %d Megabytes)", $maximum, "video")));
 
             $this->setField(array("attr" => "description",
@@ -33,7 +33,7 @@
 
         public function submit() {
             if (isset($_FILES['video']) and upload_tester($_FILES['video']))
-                $filename = upload($_FILES['video'], self::video_extensions());
+                $filename = upload($_FILES['video'], $this->video_extensions());
 
             if (!isset($filename))
                 error(__("Error"), __("You did not select a video to upload.", "video"), null, 422);
@@ -62,7 +62,7 @@
 
         public function update($post) {
             if (isset($_FILES['video']) and upload_tester($_FILES['video'])) {
-                $filename = upload($_FILES['video'], self::video_extensions());
+                $filename = upload($_FILES['video'], $this->video_extensions());
                 $this->delete_file($post);
             } else {
                 $filename = $post->filename;
@@ -109,7 +109,7 @@
 
             $feed->enclosure(uploaded($post->filename),
                              filesize($filepath),
-                             self::video_type($post->filename));
+                             $this->video_type($post->filename));
         }
 
         public function delete_file($post) {
@@ -129,7 +129,7 @@
             if ($post->feather != "video")
                 return;
 
-            $post->video_player = self::video_player($post);
+            $post->video_player = $this->video_player($post);
         }
 
         public function metaWeblog_getValues($struct, $post) {
@@ -160,7 +160,7 @@
 
             return '<video controls>'."\n".
                    __("Your web browser does not support the <code>video</code> element.", "video")."\n".
-                   '<source src="'.uploaded($post->filename).'" type="'.self::video_type($post->filename).
+                   '<source src="'.uploaded($post->filename).'" type="'.$this->video_type($post->filename).
                    '">'."\n".'</video>'."\n";
         }
 

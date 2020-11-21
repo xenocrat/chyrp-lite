@@ -12,7 +12,7 @@
                                   "type" => "file",
                                   "label" => __("Audio File", "audio"),
                                   "multiple" => false,
-                                  "accept" => ".".implode(",.", self::audio_extensions()),
+                                  "accept" => ".".implode(",.", $this->audio_extensions()),
                                   "note" => _f("(Max. file size: %d Megabytes)", $maximum, "audio")));
 
             $this->setField(array("attr" => "description",
@@ -33,7 +33,7 @@
 
         public function submit() {
             if (isset($_FILES['audio']) and upload_tester($_FILES['audio']))
-                $filename = upload($_FILES['audio'], self::audio_extensions());
+                $filename = upload($_FILES['audio'], $this->audio_extensions());
 
             if (!isset($filename))
                 error(__("Error"), __("You did not select any audio to upload.", "audio"), null, 422);
@@ -62,7 +62,7 @@
 
         public function update($post) {
             if (isset($_FILES['audio']) and upload_tester($_FILES['audio'])) {
-                $filename = upload($_FILES['audio'], self::audio_extensions());
+                $filename = upload($_FILES['audio'], $this->audio_extensions());
                 $this->delete_file($post);
             } else {
                 $filename = $post->filename;
@@ -109,7 +109,7 @@
 
             $feed->enclosure(uploaded($post->filename),
                              filesize($filepath),
-                             self::audio_type($post->filename));
+                             $this->audio_type($post->filename));
         }
 
         public function delete_file($post) {
@@ -129,7 +129,7 @@
             if ($post->feather != "audio")
                 return;
 
-            $post->audio_player = self::audio_player($post);
+            $post->audio_player = $this->audio_player($post);
         }
 
         public function metaWeblog_getValues($struct, $post) {
@@ -160,7 +160,7 @@
 
             return '<audio controls>'."\n".
                    __("Your web browser does not support the <code>audio</code> element.", "audio")."\n".
-                   '<source src="'.uploaded($post->filename).'" type="'.self::audio_type($post->filename).
+                   '<source src="'.uploaded($post->filename).'" type="'.$this->audio_type($post->filename).
                    '">'."\n".'</audio>'."\n";
         }
 

@@ -37,7 +37,7 @@
         }
 
         public function get($route) {
-            if (self::available($route)) {
+            if ($this->available($route)) {
                 if (DEBUG)
                     error_log("SERVE feed cache ".$this->file);
 
@@ -52,7 +52,7 @@
         }
 
         public function set($route) {
-            if (self::cacheable($route)) {
+            if ($this->cacheable($route)) {
                 if (DEBUG)
                     error_log("CREATE feed cache ".$this->file);
 

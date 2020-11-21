@@ -82,7 +82,7 @@
                               $name = "",
                               $uri = "",
                               $email = "") {
-            self::split();
+            $this->split();
 
             echo '<entry>'."\n";
             echo '<title type="html">'.fix($title, false, true).'</title>'."\n";
@@ -188,7 +188,7 @@
          * Outputs the closing feed element.
          */
         public function close() {
-            self::split();
+            $this->split();
             echo '</feed>'."\n";
         }
     }

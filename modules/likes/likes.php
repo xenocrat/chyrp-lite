@@ -207,7 +207,7 @@
 
         public function visitor_like_count_attr($attr, $visitor) {
             return ($visitor->id == 0) ?
-                count(array_diff($_SESSION["likes"], array(null))) : self::user_like_count_attr($attr, $visitor) ;
+                count(array_diff($_SESSION["likes"], array(null))) : $this->user_like_count_attr($attr, $visitor) ;
         }
 
         public function post_like_link_attr($attr, $post) {
