@@ -1,0 +1,23 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block title %}{{ "MathJax Settings" | translate("mathjax") }}{% endblock %}
+
+{% block content %}
+<h2>{{ "MathJax Settings" | translate("mathjax") }}</h2>
+<form id="mathjax_settings" class="split" action="{{ url('mathjax_settings') }}" method="post" accept-charset="UTF-8">
+<fieldset>
+<p>
+<label for="enable_latex">{{ "TeX and LaTeX Support" | translate("mathjax") }}</label>
+<input type="checkbox" class="checkbox" name="enable_latex"{{ site.module_mathjax.enable_latex | checked }}>
+</p>
+<p>
+<label for="enable_mathml">{{ "MathML Support" | translate("mathjax") }}</label>
+<input type="checkbox" class="checkbox" name="enable_mathml"{{ site.module_mathjax.enable_mathml | checked }}>
+</p>
+<p class="buttons">
+<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Update" | translate }}</button>
+</p>
+<input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
+</fieldset>
+</form>
+{% endblock %}
