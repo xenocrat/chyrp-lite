@@ -376,6 +376,7 @@ msgstr "删除！"
 
 #: admin/pages/delete_group.twig:47 admin/pages/delete_page.twig:23
 #: admin/pages/delete_post.twig:17 admin/pages/delete_user.twig:44
+#: admin/partials/page_fields.twig:80 admin/partials/post_fields.twig:163
 msgid "Cancel"
 msgstr "取消"
 
@@ -1044,12 +1045,13 @@ msgid "Parent"
 msgstr "父级"
 
 #: admin/partials/page_fields.twig:70 admin/partials/post_fields.twig:153
-#: admin/partials/post_fields.twig:162
+#: admin/partials/post_fields.twig:169
 msgid "Publish"
 msgstr "公开"
 
-#: admin/partials/page_fields.twig:74 admin/partials/post_fields.twig:157
-#: admin/partials/post_fields.twig:166
+#: admin/partials/page_fields.twig:73 admin/partials/page_fields.twig:77
+#: admin/partials/post_fields.twig:156 admin/partials/post_fields.twig:160
+#: admin/partials/post_fields.twig:173
 msgid "Save"
 msgstr "保存"
 

@@ -1,0 +1,36 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#. Copyright 2020 Daniel Pimley and other contributors.
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/mathjax/admin/pages/mathjax_settings.twig:3
+#: modules/mathjax/admin/pages/mathjax_settings.twig:6
+msgid "MathJax Settings"
+msgstr "MathJax 设置"
+
+#: modules/mathjax/admin/pages/mathjax_settings.twig:10
+msgid "TeX and LaTeX Support"
+msgstr "TeX 和 LaTeX 支持"
+
+#: modules/mathjax/admin/pages/mathjax_settings.twig:15
+msgid "MathML Support"
+msgstr "MathML 支持"
+
+#: modules/mathjax/info.php:3 modules/mathjax/mathjax.php:53
+msgid "MathJax"
+msgstr "MathJax"
+
+#: modules/mathjax/info.php:6
+msgid "A JavaScript display engine for mathematics."
+msgstr "JavaScript的数学显示引擎。"

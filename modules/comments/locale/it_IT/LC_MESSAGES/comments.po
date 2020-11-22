@@ -100,18 +100,18 @@ msgid "Status"
 msgstr "Stato"
 
 #: modules/comments/admin/pages/edit_comment.twig:45
-#: modules/comments/comments.php:422
+#: modules/comments/comments.php:417
 msgid "Approved"
 msgstr "Approvato"
 
 #: modules/comments/admin/pages/edit_comment.twig:47
-#: modules/comments/comments.php:423
+#: modules/comments/comments.php:418
 msgid "Denied"
 msgstr "Negato"
 
 #: modules/comments/admin/pages/edit_comment.twig:49
 #: modules/comments/admin/pages/manage_spam.twig:18
-#: modules/comments/comments.php:424
+#: modules/comments/comments.php:419
 msgid "Spam"
 msgstr "Spam"
 

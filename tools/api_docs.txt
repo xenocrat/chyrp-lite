@@ -1123,7 +1123,7 @@ Parameters:
 
 Function: find
 --------------
-Returns a translation string from the supplied domain.
+Returns a translation array from the supplied domain.
 
 
 Function: current
@@ -2821,7 +2821,7 @@ Class: JSONFeed
 Generates a JSON feed and outputs it on closing.
 
 See Also:
-    https://jsonfeed.org/version/1
+    https://jsonfeed.org/version/1.1
 
 
 Function: __construct
