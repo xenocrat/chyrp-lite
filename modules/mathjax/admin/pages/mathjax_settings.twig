@@ -9,10 +9,12 @@
 <p>
 <label for="enable_latex">{{ "TeX and LaTeX Support" | translate("mathjax") }}</label>
 <input type="checkbox" class="checkbox" name="enable_latex"{{ site.module_mathjax.enable_latex | checked }}>
+<a href="https://docs.mathjax.org/en/v3.0-latest/input/tex/delimiters.html" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
 </p>
 <p>
 <label for="enable_mathml">{{ "MathML Support" | translate("mathjax") }}</label>
 <input type="checkbox" class="checkbox" name="enable_mathml"{{ site.module_mathjax.enable_mathml | checked }}>
+<a href="https://docs.mathjax.org/en/v3.0-latest/input/mathml.html" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
 </p>
 <p class="buttons">
 <button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Update" | translate }}</button>
