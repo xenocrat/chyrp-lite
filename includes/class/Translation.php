@@ -137,7 +137,7 @@
                 $nplural = ($n != 1) ? 1 : 0 ;
                 $trigger = Trigger::current();
 
-                # Respond to this filter for translations with n > 1 plural forms.
+                # Respond to this filter for languages with n != 2 plural forms.
                 $trigger->filter($nplural, "translate_plural", $n, $this->locale);
                 return fallback($array[$nplural], ($n != 1) ? $plural : $single);
             }
