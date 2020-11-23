@@ -3,7 +3,7 @@
      * Class: Leaf
      * Extends the Twig template engine.
      */
-    class Leaf extends Twig_Extension {
+    class Leaf extends \Twig\Extension\AbstractExtension {
         /**
          * Function: getFunctions
          * Returns a list of operators to add to the existing list.
