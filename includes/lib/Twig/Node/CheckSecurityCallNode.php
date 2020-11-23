@@ -14,22 +14,15 @@ namespace Twig\Node;
 use Twig\Compiler;
 
 /**
- * Represents a flush node.
- *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class FlushNode extends Node
+class CheckSecurityCallNode extends Node
 {
-    public function __construct(int $lineno, string $tag)
-    {
-        parent::__construct([], [], $lineno, $tag);
-    }
-
-    public function compile(Compiler $compiler): void
+    public function compile(Compiler $compiler)
     {
         $compiler
-            ->addDebugInfo($this)
-            ->write("flush();\n")
+            ->write("\$this->sandbox = \$this->env->getExtension('\Twig\Extension\SandboxExtension');\n")
+            ->write("\$this->checkSecurity();\n")
         ;
     }
 }
