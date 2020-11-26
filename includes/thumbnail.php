@@ -42,7 +42,7 @@
         if ($lastmod >= filemtime($filepath)) {
             header($_SERVER['SERVER_PROTOCOL']." 304 Not Modified");
             header("Cache-Control: public");
-            header("Pragma: public");
+            header("Pragma: no-cache");
             header("Expires: ".date("r", now("+30 days")));
             exit;
         }
@@ -135,7 +135,7 @@
     header("Last-Modified: ".date("r", filemtime($filepath)));
     header("Content-Type: ".image_type_to_mime_type($type));
     header("Cache-Control: public");
-    header("Pragma: public");
+    header("Pragma: no-cache");
     header("Expires: ".date("r", now("+30 days")));
     header("Content-Disposition: inline; filename=\"".addslashes($cache_fn)."\"");
 
