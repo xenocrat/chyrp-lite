@@ -29,15 +29,15 @@
 
     /**
      * Function: cacher_update_config
-     * Updates config settings for for v1.5 and upwards.
+     * Updates config settings for for v2.0 and upwards.
      *
-     * Versions: 2019.04 => 2020.01
+     * Versions: 2020.04 => 2021.01
      */
     function cacher_update_config() {
         $config = Config::current();
         $array = $config->module_cacher;
 
-        fallback($array["cache_seed"], random(8));
+        fallback($array["cache_lastmod"], time());
 
         $set = $config->set("module_cacher", $array);
 

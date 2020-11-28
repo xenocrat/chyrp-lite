@@ -1,38 +1,23 @@
 <?php
     class Cacher extends Modules {
+        private $lastmod = 0;
         private $exclude = array();
         private $url = "";
-        private $regenerated = false;
-        private $id;
-        private $cachers;
+        private $modified = false;
 
         public function __init() {
             $config = Config::current();
-            $visitor = Visitor::current();
 
-            $seed          = $config->module_cacher["cache_seed"];
-            $life          = $config->module_cacher["cache_expire"];
+            $this->lastmod = $config->module_cacher["cache_lastmod"];
             $this->exclude = $config->module_cacher["cache_exclude"];
-            $this->url     = rawurldecode(unfix(self_url()));
-            $this->id      = token(array($seed,
-                                         CAN_USE_ZLIB,
-                                         USE_ZLIB,
-                                         HTTP_ACCEPT_DEFLATE,
-                                         HTTP_ACCEPT_GZIP,
-                                         session_id(),
-                                         $visitor->id,
-                                         $this->url));
+            $this->url = rawurldecode(unfix(self_url()));
 
-            $this->cachers = array(new HTMLCacher($this->id, $life),
-                                   new FeedCacher($this->id, $life));
-
-            $this->prepare_cache_regenerators();
+            $this->prepare_cache_triggers();
         }
 
         static function __install() {
             Config::current()->set("module_cacher",
-                                   array("cache_seed" => random(8),
-                                         "cache_expire" => 3600,
+                                   array("cache_lastmod" => time(),
                                          "cache_exclude" => array()));
         }
 
@@ -41,24 +26,60 @@
         }
 
         public function route_init($route) {
-            if (!(USE_OB and OB_BASE_LEVEL == ob_get_level()))
+            if (!$this->eligible())
                 return;
 
-            if (!$this->cancelled and !in_array($this->url, $this->exclude))
-                foreach ($this->cachers as $cacher)
-                    $cacher->get($route);
+            if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
+                $lastmod = strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']);
+
+                if ($lastmod >= $this->lastmod) {
+                    # Prevent redirects to the last visited uncached page.
+                    unset($_SESSION['redirect_to']);
+
+                    header($_SERVER['SERVER_PROTOCOL']." 304 Not Modified");
+                    header("Cache-Control: no-cache");
+                    header("Pragma: no-cache");
+                    header("Expires: ".date("r", now("+30 days")));
+                    exit;
+                }
+            }
         }
 
-        public function end($route) {
-            if (!(USE_OB and OB_BASE_LEVEL == ob_get_level()))
+        public function route_done($route) {
+            if (!$this->eligible())
                 return;
 
-            if (!$this->cancelled and !in_array($this->url, $this->exclude))
-                foreach ($this->cachers as $cacher)
-                    $cacher->set($route);
+            if (!$route->success or !$route->controller->displayed)
+                return;
+
+            if (!headers_sent()) {
+                header("Last-Modified: ".date("r", $this->lastmod));
+                header("Cache-Control: no-cache");
+                header("Pragma: no-cache");
+                header("Expires: ".date("r", now("+30 days")));
+            }
         }
 
-        private function prepare_cache_regenerators() {
+        private function eligible() {
+            if (PREVIEWING)
+                return false;
+
+            if (!empty($_POST))
+                return false;
+
+            if (!isset($_COOKIE['ChyrpSession']))
+                return false;
+
+            if (Flash::exists())
+                return false;
+
+            if (in_array($this->url, $this->exclude))
+                return false;
+
+            return true;
+        }
+
+        private function prepare_cache_triggers() {
             $trigger = Trigger::current();
 
             $regenerate = array(
@@ -69,6 +90,7 @@
                 "update_user",
                 "delete_post",
                 "delete_page",
+                "update_group",
                 "delete_user",
                 "publish_post",
                 "import_chyrp_post",
@@ -102,83 +124,30 @@
             foreach ($regenerate as $action)
                 $this->addAlias($action, "cache_regenerate");
 
-            $exclude_urls = array(
+            $exclude = array(
                 "before_generate_captcha"
             );
 
-            $trigger->filter($exclude_urls, "cache_exclude_url_triggers");
+            $trigger->filter($exclude, "cache_exclude_triggers");
 
-            foreach ($exclude_urls as $action)
-                $this->addAlias($action, "cache_exclude_url");
+            foreach ($exclude as $action)
+                $this->addAlias($action, "cache_exclude");
         }
 
         public function cache_regenerate() {
-            if ($this->regenerated)
+            if ($this->modified)
                 return;
 
-            $this->regenerated = true;
-
-            foreach ($this->cachers as $cacher)
-                $cacher->regenerate();
+            $this->modified = true;
 
             $config = Config::current();
             $settings = $config->module_cacher;
-            $settings["cache_seed"] = random(8);
+            $settings["cache_lastmod"] = time();
             $config->set("module_cacher", $settings);
         }
 
-        public function cache_exclude_url($url = null) {
-            $raw = rawurldecode(unfix(is_url($url) ? $url : self_url()));
-
-            if (!in_array($raw, $this->exclude))
-                $this->exclude[] = $raw;
-        }
-
-        public function cache_id() {
-            return $this->id;
-        }
-
-        public function settings_nav($navs) {
-            if (Visitor::current()->group->can("change_settings"))
-                $navs["cache_settings"] = array("title" => __("Cache", "cacher"));
-
-            return $navs;
-        }
-
-        public function admin_cache_settings($admin) {
-            if (!Visitor::current()->group->can("change_settings"))
-                show_403(__("Access Denied"),
-                         __("You do not have sufficient privileges to change settings."));
-
-            if (empty($_POST))
-                return $admin->display("pages".DIR."cache_settings");
-
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
-                show_403(__("Access Denied"), __("Invalid authentication token."));
-
-            if (isset($_POST['clear_cache']) and $_POST['clear_cache'] == "indubitably")
-                $this->admin_clear_cache();
-
-            fallback($_POST['cache_expire'], 3600);
-
-            $config = Config::current();
-            $settings = $config->module_cacher;
-            $settings["cache_expire"] = (int) $_POST['cache_expire'];
-            $config->set("module_cacher", $settings);
-
-            Flash::notice(__("Settings updated."), "cache_settings");
-        }
-
-        public function admin_clear_cache() {
-            if (!Visitor::current()->group->can("change_settings"))
-                show_403(__("Access Denied"),
-                         __("You do not have sufficient privileges to change settings."));
-
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
-                show_403(__("Access Denied"), __("Invalid authentication token."));
-
-            $this->cache_regenerate();
-
-            Flash::notice(__("Cache cleared.", "cacher"), "cache_settings");
+        public function cache_exclude() {
+            if (!in_array($this->url, $this->exclude))
+                $this->exclude[] = $this->url;
         }
     }
