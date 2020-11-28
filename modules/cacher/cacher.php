@@ -33,8 +33,10 @@
                 $lastmod = strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']);
 
                 if ($lastmod >= $this->lastmod) {
-                    # Prevent redirects to the last visited uncached page.
+                    # Prevent erroneous redirections.
                     unset($_SESSION['redirect_to']);
+                    unset($_SESSION['post_redirect']);
+                    unset($_SESSION['page_redirect']);
 
                     header($_SERVER['SERVER_PROTOCOL']." 304 Not Modified");
                     header("Cache-Control: no-cache");
