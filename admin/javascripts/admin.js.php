@@ -212,7 +212,6 @@ var Help = {
     }
 }
 var Write = {
-    failed: false,
     init: function() {
         // Insert buttons for ajax previews.
         if (<?php echo($theme->file_exists("content".DIR."preview") ? "true" : "false"); ?>)
@@ -287,6 +286,9 @@ var Write = {
                         '<img alt="" src="' + response.data.url + '">' ;
 
                     e.target.setRangeText(text);
+                }).fail(function(response) {
+                    $(e.target).loader(true);
+                    alert('<?php echo __("Oops! Something went wrong on this web page."); ?>');
                 });
             }
         }
@@ -362,15 +364,6 @@ var Write = {
 
         // Submit the form and destroy it immediately.
         $("#" + uid).submit().remove();
-    },
-    panic: function(message) {
-        message = (typeof message === "string") ?
-            message :
-            '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;
-
-        Write.failed = true;
-        alert(message);
-        $(".ajax_loading").loader(true);
     }
 }
 var Settings = {
