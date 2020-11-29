@@ -152,6 +152,28 @@
         }
 
         /**
+         * Function: ajax_file_upload
+         * Moves a file to the uploads directory.
+         */
+        public function ajax_file_upload() {
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+                show_403(__("Access Denied"), __("Invalid authentication token."));
+
+            if (!Visitor::current()->group->can("add_post", "add_page"))
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to import files."));
+
+            if (!isset($_FILES['file']))
+                error(__("Error"), __("Missing argument."), null, 400);
+
+            if (upload_tester($_FILES['file'])) {
+                $filename = upload($_FILES['file']);
+                $data = array("file" => $filename, "url" => uploaded($filename));
+                json_response(__("File uploaded."), $data);
+            }
+        }
+
+        /**
          * Function: current
          * Returns a singleton reference to the current class.
          */
