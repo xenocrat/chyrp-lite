@@ -212,6 +212,7 @@ var Help = {
     }
 }
 var Write = {
+    failed: false,
     init: function() {
         // Insert buttons for ajax previews.
         if (<?php echo($theme->file_exists("content".DIR."preview") ? "true" : "false"); ?>)
@@ -243,6 +244,52 @@ var Write = {
                     )
                 );
             });
+
+        // Support drag-and-drop image file uploads.
+        $("#write_form textarea, #edit_form textarea").each(function() {
+            $(this).on("dragover", Write.drag).on("drop", Write.drop);
+        });   
+    },
+    drag: function(e) {
+        e.preventDefault();
+    },
+    drop: function(e) {
+        // Process drag-and-drop image file uploads.
+        e.stopPropagation();
+        e.preventDefault();
+        var dt = e.originalEvent.dataTransfer;
+
+        if (dt.files && dt.files.length > 0) {
+            var file = dt.files[0];
+            var form = new FormData();
+
+            if (file.type.indexOf("image/") == 0) {
+                form.set("action", "file_upload");
+                form.set("hash", Visitor.token);
+                form.set("file", file, file.name);
+
+                $(e.target).loader();
+
+                // Upload the file and insert the tag if successful.
+                $.ajax({
+                    error: Write.panic,
+                    type: "POST",
+                    url: "<?php echo url('/', 'AjaxController'); ?>",
+                    data: form,
+                    processData: false,
+                    contentType: false,
+                    dataType: "json",
+                }).done(function(response) {
+                    $(e.target).loader(true);
+
+                    var text = (e.target.selectionStart != e.target.selectionEnd) ?
+                        response.data.url :
+                        '<img alt="" src="' + response.data.url + '">' ;
+
+                    e.target.setRangeText(text);
+                });
+            }
+        }
     },
     show: function(action, safename, field, content) {
         var uid = Date.now().toString(16);
@@ -315,6 +362,15 @@ var Write = {
 
         // Submit the form and destroy it immediately.
         $("#" + uid).submit().remove();
+    },
+    panic: function(message) {
+        message = (typeof message === "string") ?
+            message :
+            '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;
+
+        Write.failed = true;
+        alert(message);
+        $(".ajax_loading").loader(true);
     }
 }
 var Settings = {
