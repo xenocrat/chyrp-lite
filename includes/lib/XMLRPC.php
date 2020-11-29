@@ -173,7 +173,7 @@
             global $user;
 
             if (!$user->group->can("add_post", "add_draft"))
-                return new IXR_Error(403, __("You do not have sufficient privileges to add posts."));
+                return new IXR_Error(403, __("You do not have sufficient privileges to import files."));
 
             fallback($args[3], array());
             fallback($args[3]["name"]);
