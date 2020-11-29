@@ -804,7 +804,7 @@ article > section.photo img,
 article.archive img {
     width: 100%;
 }
-article img {
+section img {
     max-width: 100%;
 }
 .ajax_loading {
