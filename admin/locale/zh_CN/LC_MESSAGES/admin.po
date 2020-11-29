@@ -244,11 +244,11 @@ msgstr "全部切换"
 msgid "Are you sure you want to proceed?"
 msgstr "确定继续？"
 
-#: admin/javascripts/admin.js.php:198 admin/javascripts/admin.js.php:301
+#: admin/javascripts/admin.js.php:198 admin/javascripts/admin.js.php:350
 msgid "Close"
 msgstr "关闭"
 
-#: admin/javascripts/admin.js.php:205 admin/javascripts/admin.js.php:308
+#: admin/javascripts/admin.js.php:205 admin/javascripts/admin.js.php:357
 msgid "close"
 msgstr "关闭"
 

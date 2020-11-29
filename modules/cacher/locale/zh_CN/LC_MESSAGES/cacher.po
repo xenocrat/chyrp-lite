@@ -14,31 +14,6 @@ msgstr ""
 
 #. Copyright 2020 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
-#: modules/cacher/admin/pages/cache_settings.twig:3
-#: modules/cacher/admin/pages/cache_settings.twig:6
-msgid "Cache Settings"
-msgstr "缓存设置"
-
-#: modules/cacher/admin/pages/cache_settings.twig:10
-msgid "Expire Cache After&hellip;"
-msgstr "缓存多久到期 &hellip;"
-
-#: modules/cacher/admin/pages/cache_settings.twig:12
-msgid "(seconds)"
-msgstr "（秒）"
-
-#: modules/cacher/admin/pages/cache_settings.twig:17
-msgid "Clear Cache"
-msgstr "清除缓存"
-
-#: modules/cacher/cacher.php:143
-msgid "Cache"
-msgstr "缓存"
-
-#: modules/cacher/cacher.php:182
-msgid "Cache cleared."
-msgstr "缓存已清除。"
-
 #: modules/cacher/info.php:3
 msgid "Cacher"
 msgstr ""
@@ -46,7 +21,3 @@ msgstr ""
 #: modules/cacher/info.php:6
 msgid "Caches pages, drastically reducing server load."
 msgstr "缓存页面，大大减少服务器负载。"
-
-#: modules/cacher/lib/FeedCacher.php:16 modules/cacher/lib/HTMLCacher.php:16
-msgid "Cacher module cannot write caches to disk."
-msgstr "Cacher模块不能将缓存写入磁盘。"

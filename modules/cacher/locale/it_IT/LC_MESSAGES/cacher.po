@@ -14,31 +14,6 @@ msgstr ""
 
 #. Copyright 2020 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
-#: modules/cacher/admin/pages/cache_settings.twig:3
-#: modules/cacher/admin/pages/cache_settings.twig:6
-msgid "Cache Settings"
-msgstr "Impostazioni Cache"
-
-#: modules/cacher/admin/pages/cache_settings.twig:10
-msgid "Expire Cache After&hellip;"
-msgstr "Cache verranno cancellati dopo&hellip;"
-
-#: modules/cacher/admin/pages/cache_settings.twig:12
-msgid "(seconds)"
-msgstr "(secondi)"
-
-#: modules/cacher/admin/pages/cache_settings.twig:17
-msgid "Clear Cache"
-msgstr "Cancella Cache"
-
-#: modules/cacher/cacher.php:143
-msgid "Cache"
-msgstr "Cache"
-
-#: modules/cacher/cacher.php:182
-msgid "Cache cleared."
-msgstr "Cache cancellati."
-
 #: modules/cacher/info.php:3
 msgid "Cacher"
 msgstr "Cacher"
@@ -46,7 +21,3 @@ msgstr "Cacher"
 #: modules/cacher/info.php:6
 msgid "Caches pages, drastically reducing server load."
 msgstr "Cache delle pagine web, riduce drasticamente il carico del server."
-
-#: modules/cacher/lib/FeedCacher.php:16 modules/cacher/lib/HTMLCacher.php:16
-msgid "Cacher module cannot write caches to disk."
-msgstr "Il modulo cacher non può trascrivere i cache su disco."

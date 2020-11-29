@@ -1546,6 +1546,11 @@ Function: ajax_preview_page
 Previews a page.
 
 
+Function: ajax_file_upload
+--------------------------
+Moves a file to the uploads directory.
+
+
 Function: current
 -----------------
 Returns a singleton reference to the current class.

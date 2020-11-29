@@ -17,7 +17,7 @@ Arguments:
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 345
+	admin/javascripts/admin.js.php on line 394
 
 
 admin_head
@@ -251,7 +251,7 @@ Called from:
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1517
+	includes/controller/Admin.php on line 1521
 
 Arguments:
 	$group
@@ -260,7 +260,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1542
+	includes/controller/Admin.php on line 1546
 
 Arguments:
 	$user
@@ -269,7 +269,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1581
+	includes/controller/Admin.php on line 1585
 
 Arguments:
 	$entry, $post
@@ -278,7 +278,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1611
+	includes/controller/Admin.php on line 1615
 
 Arguments:
 	$entry, $page
@@ -287,7 +287,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1615
+	includes/controller/Admin.php on line 1619
 
 Arguments:
 	$imports
@@ -296,13 +296,13 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1898
+	includes/controller/Admin.php on line 1902
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1906
+	includes/controller/Admin.php on line 1910
 
 
 can_not_view_page
@@ -948,7 +948,7 @@ Target:
 before_import
 -------------
 Called from:
-	includes/controller/Admin.php on line 1486
+	includes/controller/Admin.php on line 1490
 
 Target:
 	$imports
@@ -957,7 +957,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 2180
+	includes/controller/Admin.php on line 2184
 
 Target:
 	$write
@@ -966,7 +966,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2217
+	includes/controller/Admin.php on line 2221
 
 Target:
 	$manage
@@ -975,7 +975,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 2242
+	includes/controller/Admin.php on line 2246
 
 Target:
 	$settings
@@ -984,7 +984,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2260
+	includes/controller/Admin.php on line 2264
 
 Target:
 	$extend
@@ -993,7 +993,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2321
+	includes/controller/Admin.php on line 2325
 
 Target:
 	$this->context
@@ -1362,19 +1362,19 @@ Target:
 cache_regenerate_triggers
 -------------------------
 Called from:
-	modules/cacher/cacher.php on line 100
+	modules/cacher/cacher.php on line 123
 
 Target:
 	$regenerate
 
 
-cache_exclude_url_triggers
---------------------------
+cache_exclude_triggers
+----------------------
 Called from:
-	modules/cacher/cacher.php on line 109
+	modules/cacher/cacher.php on line 132
 
 Target:
-	$exclude_urls
+	$exclude
 
 
 comment
