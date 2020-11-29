@@ -1469,6 +1469,10 @@
             }
 
             if (isset($_FILES['uploads']) and upload_tester($_FILES['uploads'])) {
+                if (!$visitor->group->can("add_post", "add_page"))
+                    show_403(__("Access Denied"),
+                             __("You do not have sufficient privileges to import files."));
+
                 $imports["uploads"] = array();
 
                 if (is_array($_FILES['uploads']['name'])) {
