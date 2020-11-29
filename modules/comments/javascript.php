@@ -21,13 +21,13 @@ var ChyrpComment = {
 
                 // Submit the form.
                 $.ajax({
+                    error: ChyrpComment.panic,
                     type: "POST",
                     url: "<?php echo url('/', 'AjaxController'); ?>",
                     data: new FormData(this),
                     processData: false,
                     contentType: false,
                     dataType: "json",
-                    error: ChyrpComment.panic,
                 }).done(function(response) {
                     $("#comments .comment_form").loader(true);
                     alert(response.text);
@@ -72,6 +72,7 @@ var ChyrpComment = {
         if (ChyrpComment.editing == 0 && ChyrpComment.notice == 0 && !ChyrpComment.failed &&
             $("#comments .comment").length < ChyrpComment.per_page) {
                 $.ajax({
+                    error: ChyrpComment.panic,
                     type: "POST",
                     dataType: "json",
                     url: "<?php echo url('/', 'AjaxController'); ?>",
@@ -79,21 +80,19 @@ var ChyrpComment = {
                         action: "reload_comments",
                         post_id: id,
                         last_comment: ts
-                    },
-                    success: function(response) {
-                        if (response.data.comment_ids.length > 0) {
-                            $("#comments").attr("data-timestamp", response.data.last_comment);
-                            $.each(response.data.comment_ids, function(i, id) {
-                                $.post("<?php echo url('/', 'AjaxController'); ?>", {
-                                    action: "show_comment",
-                                    comment_id: id
-                                }, function(data){
-                                    $(data).insertBefore("#comment_shim").hide().fadeIn("slow");
-                                }, "html").fail(ChyrpComment.panic);
-                            });
-                        }
-                    },
-                    error: ChyrpComment.panic
+                    }
+                }).done(function(response) {
+                    if (response.data.comment_ids.length > 0) {
+                        $("#comments").attr("data-timestamp", response.data.last_comment);
+                        $.each(response.data.comment_ids, function(i, id) {
+                            $.post("<?php echo url('/', 'AjaxController'); ?>", {
+                                action: "show_comment",
+                                comment_id: id
+                            }, function(data){
+                                $(data).insertBefore("#comment_shim").hide().fadeIn("slow");
+                            }, "html").fail(ChyrpComment.panic);
+                        });
+                    }
                 });
         }
     },
@@ -119,13 +118,13 @@ var ChyrpComment = {
 
                             // Submit the form.
                             $.ajax({
+                                error: ChyrpComment.panic,
                                 type: "POST",
                                 url: "<?php echo url('/', 'AjaxController'); ?>",
                                 data: new FormData(thisForm[0]),
                                 processData: false,
                                 contentType: false,
                                 dataType: "json",
-                                error: ChyrpComment.panic,
                             }).done(function(response) {
                                 // Validation failed if data value is false.
                                 if (response.data === false) {
