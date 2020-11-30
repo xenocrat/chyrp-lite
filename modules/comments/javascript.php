@@ -27,7 +27,7 @@ var ChyrpComment = {
                     data: new FormData(this),
                     processData: false,
                     contentType: false,
-                    dataType: "json",
+                    dataType: "json"
                 }).done(function(response) {
                     $("#comments .comment_form").loader(true);
                     alert(response.text);
@@ -124,7 +124,7 @@ var ChyrpComment = {
                                 data: new FormData(thisForm[0]),
                                 processData: false,
                                 contentType: false,
-                                dataType: "json",
+                                dataType: "json"
                             }).done(function(response) {
                                 // Validation failed if data value is false.
                                 if (response.data === false) {
