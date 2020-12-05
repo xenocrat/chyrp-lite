@@ -3237,7 +3237,7 @@ Notes:
 
 Function: add
 -------------
-Adds a group to the database with the given name and permissions.
+Adds a group to the database.
 
 Parameters:
     $name - The group's name
@@ -3694,7 +3694,7 @@ Returns:
 
 Function: add
 -------------
-Adds a user to the database with the passed username, password, and email.
+Adds a user to the database.
 
 Parameters:
     $login - The Login for the new user.
@@ -3714,7 +3714,7 @@ See Also:
 
 Function: update
 ----------------
-Updates the user with the given login, password, full name, email, website, and <Group> ID.
+Updates a user with the given parameters.
 
 Parameters:
     $login - The new Login to set.
@@ -3747,7 +3747,7 @@ Parameters:
     $password - The unhashed password.
 
 Returns:
-    The hashed password.
+    The password hashed using the SHA-512 algorithm.
 
 Notes:
     <random> tries to be cryptographically secure.
