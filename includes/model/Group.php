@@ -84,7 +84,7 @@
 
         /**
          * Function: add
-         * Adds a group to the database with the given name and permissions.
+         * Adds a group to the database.
          *
          * Parameters:
          *     $name - The group's name
