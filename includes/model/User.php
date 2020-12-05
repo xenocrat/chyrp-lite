@@ -61,7 +61,7 @@
 
         /**
          * Function: add
-         * Adds a user to the database with the passed username, password, and email.
+         * Adds a user to the database.
          *
          * Parameters:
          *     $login - The Login for the new user.
@@ -112,7 +112,7 @@
 
         /**
          * Function: update
-         * Updates the user with the given login, password, full name, email, website, and <Group> ID.
+         * Updates a user with the given parameters.
          *
          * Parameters:
          *     $login - The new Login to set.
@@ -142,14 +142,16 @@
             $sql = SQL::current();
             $trigger = Trigger::current();
 
-            $new_values = array("login"     => isset($login) ? strip_tags($login) : $this->login,
-                                "password"  => isset($password) ? $password : $this->password,
-                                "email"     => isset($email) ? strip_tags($email) : $this->email,
-                                "full_name" => isset($full_name) ? strip_tags($full_name) : $this->full_name,
-                                "website"   => isset($website) ? strip_tags($website) : $this->website,
-                                "group_id"  => oneof($group_id, $this->group_id),
-                                "approved"  => oneof($approved, $this->approved),
-                                "joined_at" => oneof($joined_at, $this->joined_at));
+            $new_values = array(
+                "login"     => isset($login) ? strip_tags($login) : $this->login,
+                "password"  => isset($password) ? $password : $this->password,
+                "email"     => isset($email) ? strip_tags($email) : $this->email,
+                "full_name" => isset($full_name) ? strip_tags($full_name) : $this->full_name,
+                "website"   => isset($website) ? strip_tags($website) : $this->website,
+                "group_id"  => oneof($group_id, $this->group_id),
+                "approved"  => oneof($approved, $this->approved),
+                "joined_at" => oneof($joined_at, $this->joined_at)
+            );
 
             $trigger->filter($new_values, "before_update_user");
 
@@ -185,14 +187,14 @@
          *     $password - The unhashed password.
          * 
          * Returns:
-         *     The hashed password.
+         *     The password hashed using the SHA-512 algorithm.
          *
          * Notes:
          *     <random> tries to be cryptographically secure.
          */
         static function hashPassword($password) {
             $salt = random(16);
-            $prefix = '$6$'; # Prefix for SHA-512.
+            $prefix = '$6$rounds=100000$';
             return crypt($password, $prefix.$salt);
         }
 
@@ -212,6 +214,8 @@
          */
         static function checkPassword($password, $stored) {
             $try = crypt($password, $stored);
-            return (function_exists("hash_equals")) ? hash_equals($stored, $try) : ($stored === $try) ;
+
+            return (function_exists("hash_equals")) ?
+                hash_equals($stored, $try) : ($stored === $try) ;
         }
     }
