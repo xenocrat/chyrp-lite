@@ -194,7 +194,7 @@
          */
         static function hashPassword($password) {
             $salt = random(16);
-            $prefix = '$6$rounds=100000$';
+            $prefix = '$6$rounds=50000$';
             return crypt($password, $prefix.$salt);
         }
 
