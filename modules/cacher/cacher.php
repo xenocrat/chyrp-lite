@@ -1,24 +1,19 @@
 <?php
     class Cacher extends Modules {
         private $lastmod = 0;
-        private $exclude = array();
-        private $url = "";
+        private $excluded = false;
         private $modified = false;
 
         public function __init() {
             $config = Config::current();
 
             $this->lastmod = $config->module_cacher["cache_lastmod"];
-            $this->exclude = $config->module_cacher["cache_exclude"];
-            $this->url = rawurldecode(unfix(self_url()));
-
             $this->prepare_cache_triggers();
         }
 
         static function __install() {
             Config::current()->set("module_cacher",
-                                   array("cache_lastmod" => time(),
-                                         "cache_exclude" => array()));
+                                   array("cache_lastmod" => time()));
         }
 
         static function __uninstall() {
@@ -69,13 +64,10 @@
             if (!empty($_POST))
                 return false;
 
-            if (!isset($_COOKIE['ChyrpSession']))
-                return false;
-
             if (Flash::exists())
                 return false;
 
-            if (in_array($this->url, $this->exclude))
+            if ($this->excluded)
                 return false;
 
             return true;
@@ -148,7 +140,6 @@
         }
 
         public function cache_exclude() {
-            if (!in_array($this->url, $this->exclude))
-                $this->exclude[] = $this->url;
+            $this->excluded = true;
         }
     }
