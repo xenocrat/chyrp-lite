@@ -32,11 +32,18 @@
         }
 
         private function sort_tags_popularity_asc($a, $b) {
-            return $a["popularity"] > $b["popularity"];
+            if ($a["popularity"] == $b["popularity"])
+                return 0;
+
+            return ($a["popularity"] > $b["popularity"]) ? -1 : 1 ;
+
         }
 
         private function sort_tags_popularity_desc($a, $b) {
-            return $a["popularity"] < $b["popularity"];
+            if ($a["popularity"] == $b["popularity"])
+                return 0;
+
+            return ($a["popularity"] < $b["popularity"]) ? -1 : 1 ;
         }
 
         private function mb_strcasecmp($str1, $str2, $encoding = "UTF-8") {
@@ -46,7 +53,8 @@
             if (!function_exists("mb_strtoupper"))
                 return substr_compare(strtoupper($str1), strtoupper($str2), 0);
 
-            return substr_compare(mb_strtoupper($str1, $encoding), mb_strtoupper($str2, $encoding), 0);
+            return substr_compare(mb_strtoupper($str1, $encoding),
+                                  mb_strtoupper($str2, $encoding), 0);
         }
 
         private function tags_name_match($name) {
@@ -85,7 +93,9 @@
             $names = array_diff($names, array(""));
 
             # Build an array containing a sanitized slug for each tag.
-            $clean = array_map(function($value) { return sanitize($value, true, true); }, $names);
+            $clean = array_map(function($value) {
+                return sanitize($value, true, true);
+            }, $names);
 
             # Build an associative array with tags as the keys and slugs as the values.
             $assoc = array_combine($names, $clean);
@@ -123,7 +133,8 @@
 
             foreach ($cloud as $tag) {
                 $selected = (in_array($tag["name"], $names)) ? " tag_added" : "" ;
-                $selector.= '<a class="tag'.$selected.'" href="#" role="button">'.$tag["name"].'</a>'."\n";
+                $selector.= '<a class="tag'.$selected.
+                            '" href="#" role="button">'.$tag["name"].'</a>'."\n";
             }
 
             $selector.= "</span>"."\n";
@@ -141,7 +152,9 @@
 
         public function post($post) {
             $post->tags = !empty($post->tags) ? $this->tags_unserialize($post->tags) : array() ;
-            uksort($post->tags, function($a, $b) { return $this->mb_strcasecmp($a, $b); });
+            uksort($post->tags, function($a, $b) {
+                return $this->mb_strcasecmp($a, $b);
+            });
         }
 
         public function post_tags_link_attr($attr, $post) {
@@ -152,7 +165,8 @@
                 return $tags;
 
             foreach ($post->tags as $tag => $clean)
-                $tags[] = '<a class="tag" href="'.url("tag/".urlencode($clean), $main).'" rel="tag">'.$tag.'</a>';
+                $tags[] = '<a class="tag" href="'.
+                          url("tag/".urlencode($clean), $main).'" rel="tag">'.$tag.'</a>';
 
             return $tags;
         }
@@ -522,12 +536,12 @@
                 $main = MainController::current();
 
                 foreach ($popularity as $tag => $count) {
-                    $title = _p("%d post tagged with &#8220;%s&#8221;", "%d posts tagged with &#8220;%s&#8221;", $count, "tags");
+                    $title = $this->tag_title_post_count($tag, $count);
 
                     $cloud[] = array("size" => floor($dif * ($count - $min)),
                                      "popularity" => $count,
                                      "name" => $tag,
-                                     "title" => sprintf($title, $count, fix($tag, true)),
+                                     "title" => $title,
                                      "clean" => $found[$tag],
                                      "url" => url("tag/".$found[$tag], $main));
                 }
@@ -537,6 +551,11 @@
 
             usort($cloud, array($this, "sort_tags_".$sort));
             return ($limit) ? array_slice($cloud, 0, $limit) : $cloud ;
+        }
+
+        private function tag_title_post_count($tag, $count) {
+            $str = _p("%d post tagged with &#8220;%s&#8221;", "%d posts tagged with &#8220;%s&#8221;", $count, "tags");
+            return sprintf($str, $count, fix($tag, true));
         }
 
         public function tag_find($clean) {
