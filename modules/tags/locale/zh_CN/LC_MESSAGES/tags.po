@@ -52,9 +52,9 @@ msgid "Editing Tags for &#8220;%s&#8221;"
 msgstr "编辑标签 &#8220;%s&#8221;"
 
 #: modules/tags/admin/pages/edit_tags.twig:10
-#: modules/tags/admin/pages/manage_tags.twig:52 modules/tags/tags.php:132
-#: modules/tags/tags.php:174 modules/tags/tags.php:181
-#: modules/tags/tags.php:439
+#: modules/tags/admin/pages/manage_tags.twig:52 modules/tags/tags.php:143
+#: modules/tags/tags.php:188 modules/tags/tags.php:195
+#: modules/tags/tags.php:453
 msgid "Tags"
 msgstr "标签"
 
@@ -105,102 +105,102 @@ msgstr "为帖子添加标签功能。"
 msgid "Do you want to remove your tags from the database?"
 msgstr "您想从数据库中删除您的标签吗？"
 
-#: modules/tags/tags.php:134
+#: modules/tags/tags.php:145
 msgid "(comma separated)"
 msgstr "（逗号分割）"
 
-#: modules/tags/tags.php:192
+#: modules/tags/tags.php:206
 msgid "You do not have sufficient privileges to manage tags."
 msgstr "您没有足够的权限来管理标签。"
 
-#: modules/tags/tags.php:228 modules/tags/tags.php:282
+#: modules/tags/tags.php:242 modules/tags/tags.php:296
 msgid "You do not have sufficient privileges to rename tags."
 msgstr "您没有足够的权限来重命名标签。"
 
-#: modules/tags/tags.php:231 modules/tags/tags.php:288
-#: modules/tags/tags.php:321 modules/tags/tags.php:341
+#: modules/tags/tags.php:245 modules/tags/tags.php:302
+#: modules/tags/tags.php:335 modules/tags/tags.php:355
 msgid "No Tag Specified"
 msgstr "未指定标签"
 
-#: modules/tags/tags.php:232 modules/tags/tags.php:289
+#: modules/tags/tags.php:246 modules/tags/tags.php:303
 msgid "Please specify the tag you want to rename."
 msgstr "请指定您要重命名的标签。"
 
-#: modules/tags/tags.php:237 modules/tags/tags.php:327
+#: modules/tags/tags.php:251 modules/tags/tags.php:341
 msgid "Tag not found."
 msgstr "标签未找到。"
 
-#: modules/tags/tags.php:244
+#: modules/tags/tags.php:258
 msgid "An ID is required to edit tags."
 msgstr "编辑标签需要ID。"
 
-#: modules/tags/tags.php:263
+#: modules/tags/tags.php:277
 msgid "An ID is required to update tags."
 msgstr "更新标签需要ID。"
 
-#: modules/tags/tags.php:276
+#: modules/tags/tags.php:290
 msgid "Tags updated."
 msgstr "标签已更新。"
 
-#: modules/tags/tags.php:292
+#: modules/tags/tags.php:306
 msgid "Name cannot be blank."
 msgstr "名字不能为空。"
 
-#: modules/tags/tags.php:312
+#: modules/tags/tags.php:326
 msgid "Tag renamed."
 msgstr "标签已重命名。"
 
-#: modules/tags/tags.php:318 modules/tags/tags.php:335
+#: modules/tags/tags.php:332 modules/tags/tags.php:349
 msgid "You do not have sufficient privileges to delete tags."
 msgstr "您没有足够的权限来删除标签。"
 
-#: modules/tags/tags.php:322 modules/tags/tags.php:342
+#: modules/tags/tags.php:336 modules/tags/tags.php:356
 msgid "Please specify the tag you want to delete."
 msgstr "请指定您要删除的标签。"
 
-#: modules/tags/tags.php:365
+#: modules/tags/tags.php:379
 msgid "Tag deleted."
 msgstr "标签已删除。"
 
-#: modules/tags/tags.php:371
+#: modules/tags/tags.php:385
 msgid "You do not have sufficient privileges to add tags."
 msgstr "您没有足够的权限来增加标签。"
 
-#: modules/tags/tags.php:377
+#: modules/tags/tags.php:391
 msgid "No posts selected."
 msgstr "没有选择帖子。"
 
-#: modules/tags/tags.php:380
+#: modules/tags/tags.php:394
 msgid "No tags specified."
 msgstr "没有指定标签。"
 
-#: modules/tags/tags.php:392
+#: modules/tags/tags.php:406
 msgid "Posts tagged."
 msgstr "帖子已标记。"
 
-#: modules/tags/tags.php:398
+#: modules/tags/tags.php:412
 msgid "You did not specify a tag."
 msgstr "你没有指定一个标签。"
 
-#: modules/tags/tags.php:399 modules/tags/tags.php:406
-#: modules/tags/tags.php:422
+#: modules/tags/tags.php:413 modules/tags/tags.php:420
+#: modules/tags/tags.php:436
 msgid "Invalid Tag"
 msgstr "无效的标签。"
 
-#: modules/tags/tags.php:405
+#: modules/tags/tags.php:419
 msgid "The tag you specified was not found."
 msgstr "没有找到您指定的标签。"
 
-#: modules/tags/tags.php:421
+#: modules/tags/tags.php:435
 msgid "There are no posts with the tag you specified."
 msgstr "没有您指定标签的帖子。"
 
-#: modules/tags/tags.php:433
+#: modules/tags/tags.php:447
 #, php-format
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr "&#8220;%s&#8221; 的帖子标签"
 
-#: modules/tags/tags.php:525
+#: modules/tags/tags.php:557
 #, php-format
 msgid "%d post tagged with &#8220;%s&#8221;"
 msgid_plural "%d posts tagged with &#8220;%s&#8221;"
