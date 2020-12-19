@@ -102,16 +102,11 @@
                                       $tr_str_meta["offset"],
                                       $tr_str_meta["length"]);
 
-                # Discover msgid null-separated plural forms.
-                if (strpos($or_str_data, "\0") !== false) {
-                    $or_str_data = explode("\0", $or_str_data);
-                    $tr_str_data = explode("\0", $tr_str_data);
-                }
+                # Discover null-separated plural forms.
+                $or_str_data = explode("\0", $or_str_data);
+                $tr_str_data = explode("\0", $tr_str_data);
 
-                $or_str_data = (array) $or_str_data;
-                $tr_str_data = (array) $tr_str_data;
-
-                # Add discovered msgid+msgstr pairs to the data.
+                # Add discovered messages to the data.
                 $mo_data[] = array("or" => $or_str_data,
                                    "tr" => $tr_str_data);
             }
