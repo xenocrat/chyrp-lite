@@ -48,6 +48,15 @@
         }
     }
 
+    # Half the quality if reduced data usage is preferred.
+    if (isset($_SERVER['HTTP_SAVE_DATA'])) {
+        $save = $_SERVER['HTTP_SAVE_DATA'];
+        $half = ($quality > 0) ? floor($quality / 2) : 0 ;
+
+        if (strtolower($save) != "off" or $save != "0")
+           $quality = $half;
+    }
+
     function thumb_resize(&$crop_x, &$crop_y, &$thumb_w, &$thumb_h, &$orig_w, &$orig_h) {
         # getimagesize() could not determine the image dimensions.
         if ($orig_w == 0 or $orig_h == 0) {
