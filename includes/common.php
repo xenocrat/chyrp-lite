@@ -365,5 +365,5 @@
     # Set headers.
     header("Content-Type: text/html; charset=UTF-8");
     header("Referrer-Policy: strict-origin-when-cross-origin");
-    header("Vary: Accept-Encoding, Cookie");
+    header("Vary: Accept-Encoding, Cookie, Save-Data");
     header("X-Pingback: ".$config->chyrp_url."/includes/rpc.php");
