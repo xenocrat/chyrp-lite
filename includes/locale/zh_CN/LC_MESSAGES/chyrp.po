@@ -91,8 +91,8 @@ msgstr "路由启动了一个无效的控制器。"
 #: includes/helpers.php:2004 includes/helpers.php:2007
 #: includes/helpers.php:2010 includes/helpers.php:2015
 #: includes/thumbnail.php:15 includes/thumbnail.php:18
-#: includes/thumbnail.php:33 includes/thumbnail.php:162
-#: includes/thumbnail.php:197 install.php:797 upgrade.php:173 upgrade.php:186
+#: includes/thumbnail.php:33 includes/thumbnail.php:171
+#: includes/thumbnail.php:206 install.php:797 upgrade.php:173 upgrade.php:186
 #: upgrade.php:199 upgrade.php:212 upgrade.php:225 upgrade.php:239
 #: upgrade.php:265 upgrade.php:278 upgrade.php:292 upgrade.php:305
 #: upgrade.php:318 upgrade.php:331 upgrade.php:345 upgrade.php:358
@@ -1290,7 +1290,7 @@ msgstr "导出内容"
 msgid "Maximum size cannot be zero."
 msgstr "最大尺寸不能为0."
 
-#: includes/thumbnail.php:162 includes/thumbnail.php:197
+#: includes/thumbnail.php:171 includes/thumbnail.php:206
 msgid "Failed to create image thumbnail."
 msgstr "无法创建图片缩略图。"
 
