@@ -53,7 +53,7 @@
         $save = $_SERVER['HTTP_SAVE_DATA'];
         $half = ($quality > 0) ? floor($quality / 2) : 0 ;
 
-        if (strtolower($save) != "off" or $save != "0")
+        if (strtolower($save) != "off" and $save != "0")
            $quality = $half;
     }
 
