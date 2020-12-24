@@ -432,8 +432,8 @@ div.metadata {
     text-align: center;
     margin-top: 2rem;
     padding: 0.2rem;
-    border: 1px solid #383839;
     border-radius: 0.2rem;
+    background-color: #383839;
 }
 div.comments_pagination {
     width: 100%;
@@ -606,7 +606,6 @@ section a:active, p a:active {
     color: lightgreen;
     border-bottom: 1px lightgreen solid;
 }
-div.tags a.tag,
 div.tag_cloud a.tag {
     display: inline-block;
     position: relative;
@@ -616,9 +615,6 @@ div.tag_cloud a.tag {
     color: #ffffff;
     border: 1px solid lightgreen;
 }
-div.tags a.tag:hover,
-div.tags a.tag:focus,
-div.tags a.tag:active,
 div.tag_cloud a.tag:hover,
 div.tag_cloud a.tag:focus,
 div.tag_cloud a.tag:active {
@@ -631,7 +627,6 @@ div.category a.category {
     right: 4rem;
     padding: 0.2em 0.6em;
     margin: 0em;
-    background-color: #383839;
     border: 1px solid #666667;
     border-top: none;
 }
