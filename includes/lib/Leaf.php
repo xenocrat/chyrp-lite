@@ -405,7 +405,8 @@
         $img = '<img src="'.fix($filepath.$src_args, true).
                '" srcset="'.fix(implode(", ", $srcset), true).
                '" sizes="'.fix($sizes, true).
-               '" alt="'.fix($alt_text, true).'" class="image">';
+               '" alt="'.fix($alt_text, true).
+               '" class="image" loading="lazy">';
 
         # Enclose in <a> tag? Provide @true@ or a candidate URL.
         if (isset($url) and $url !== false)
