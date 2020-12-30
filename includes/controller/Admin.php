@@ -268,12 +268,13 @@
          */
         public function admin_update_post() {
             $visitor = Visitor::current();
+            fallback($_SESSION['post_redirect'], "manage_posts");
 
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (isset($_POST['cancel']))
-                redirect(fallback($_SESSION['post_redirect'], "manage_posts"));
+                redirect($_SESSION['post_redirect']);
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to update a post."), null, 400);
@@ -296,8 +297,7 @@
             $post = Feathers::$instances[$post->feather]->update($post);
 
             Flash::notice(__("Post updated.").' <a href="'.$post->url().'">'.
-                          __("View post &rarr;").'</a>',
-                          fallback($_SESSION['post_redirect'], "manage_posts"));
+                          __("View post &rarr;").'</a>', $_SESSION['post_redirect']);
         }
 
         /**
@@ -524,7 +524,10 @@
          * Updates a page when the form is submitted.
          */
         public function admin_update_page() {
-            if (!Visitor::current()->group->can("edit_page"))
+            $visitor = Visitor::current();
+            fallback($_SESSION['page_redirect'], "manage_pages");
+
+            if (!$visitor->group->can("edit_page"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to edit pages."));
 
@@ -532,7 +535,7 @@
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
             if (isset($_POST['cancel']))
-                redirect(fallback($_SESSION['page_redirect'], "manage_pages"));
+                redirect($_SESSION['page_redirect']);
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a page."), null, 400);
@@ -569,8 +572,7 @@
                                   sanitize($_POST['slug']));
 
             Flash::notice(__("Page updated.").' <a href="'.$page->url().'">'.
-                          __("View page &rarr;").'</a>',
-                          fallback($_SESSION['page_redirect'], "manage_pages"));
+                          __("View page &rarr;").'</a>', $_SESSION['page_redirect']);
         }
 
         /**
