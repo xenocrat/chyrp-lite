@@ -258,7 +258,7 @@ var Write = {
         e.preventDefault();
         var dt = e.originalEvent.dataTransfer;
 
-        if (dt.files && dt.files.length > 0) {
+        if (!!dt && dt.files && dt.files.length > 0) {
             var file = dt.files[0];
             var form = new FormData();
 
@@ -271,7 +271,6 @@ var Write = {
 
                 // Upload the file and insert the tag if successful.
                 $.ajax({
-                    error: Write.panic,
                     type: "POST",
                     url: "<?php echo url('/', 'AjaxController'); ?>",
                     data: form,
