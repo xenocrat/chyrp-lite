@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 2.4.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Copyright 2020 Daniel Pimley and other contributors.
@@ -260,11 +260,11 @@ msgstr "Spunta tutto"
 msgid "Are you sure you want to proceed?"
 msgstr "Sei sicuro di volere procedere?"
 
-#: admin/javascripts/admin.js.php:198 admin/javascripts/admin.js.php:350
+#: admin/javascripts/admin.js.php:198 admin/javascripts/admin.js.php:349
 msgid "Close"
 msgstr "Chiudi"
 
-#: admin/javascripts/admin.js.php:205 admin/javascripts/admin.js.php:357
+#: admin/javascripts/admin.js.php:205 admin/javascripts/admin.js.php:356
 msgid "close"
 msgstr "chiudi"
 
