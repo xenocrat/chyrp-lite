@@ -246,10 +246,19 @@ var Write = {
 
         // Support drag-and-drop image file uploads.
         $("#write_form textarea, #edit_form textarea").each(function() {
-            $(this).on("dragover", Write.drag).on("drop", Write.drop);
+            $(this).on("dragover", Write.dragover).
+                    on("dragenter", Write.dragenter).
+                    on("dragexit", Write.dragexit).
+                    on("drop", Write.drop);
         });   
     },
-    drag: function(e) {
+    dragenter: function(e) {
+        $(e.target).addClass("drag_highlight");
+    },
+    dragexit: function(e) {
+        $(e.target).removeClass("drag_highlight");
+    },
+    dragover: function(e) {
         e.preventDefault();
     },
     drop: function(e) {
@@ -258,7 +267,7 @@ var Write = {
         e.preventDefault();
         var dt = e.originalEvent.dataTransfer;
 
-        if (!!dt && dt.files && dt.files.length > 0) {
+        if (!!dt && !!dt.files && dt.files.length > 0) {
             var file = dt.files[0];
             var form = new FormData();
 
