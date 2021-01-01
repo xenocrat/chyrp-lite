@@ -28,11 +28,6 @@
                 $lastmod = strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']);
 
                 if ($lastmod >= $this->lastmod) {
-                    # Prevent erroneous redirections.
-                    unset($_SESSION['redirect_to']);
-                    unset($_SESSION['post_redirect']);
-                    unset($_SESSION['page_redirect']);
-
                     header($_SERVER['SERVER_PROTOCOL']." 304 Not Modified");
                     header("Cache-Control: no-cache");
                     header("Pragma: no-cache");
@@ -43,6 +38,11 @@
         }
 
         public function route_done($route) {
+            # Prevent erroneous redirections.
+            unset($_SESSION['redirect_to']);
+            unset($_SESSION['post_redirect']);
+            unset($_SESSION['page_redirect']);
+
             if (!$this->eligible())
                 return;
 
