@@ -248,14 +248,14 @@ var Write = {
         $("#write_form textarea, #edit_form textarea").each(function() {
             $(this).on("dragover", Write.dragover).
                     on("dragenter", Write.dragenter).
-                    on("dragexit", Write.dragexit).
+                    on("dragleave", Write.dragleave).
                     on("drop", Write.drop);
         });   
     },
     dragenter: function(e) {
         $(e.target).addClass("drag_highlight");
     },
-    dragexit: function(e) {
+    dragleave: function(e) {
         $(e.target).removeClass("drag_highlight");
     },
     dragover: function(e) {
