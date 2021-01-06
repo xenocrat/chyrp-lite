@@ -46,7 +46,7 @@
             if (!$this->eligible())
                 return;
 
-            if (!$route->success or !$route->controller->displayed)
+            if (!$route->success)
                 return;
 
             if (!headers_sent()) {
