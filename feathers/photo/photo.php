@@ -103,8 +103,8 @@
 
         public function feed_content($post) {
             $content = '<img src="'.Config::current()->chyrp_url.
-                       "/includes/thumb.php?file=".urlencode($post->filename).
-                       '" alt="'.fix(oneof($post->alt_text, $post->filename), true).'">';
+                       "/includes/thumbnail.php?file=".urlencode($post->filename).
+                       '" alt="'.fix($post->alt_text, true).'">';
 
             if (!empty($post->caption))
                 $content.= '<figcaption>'.$post->caption.'</figcaption>';
