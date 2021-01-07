@@ -19,9 +19,9 @@
 <h4 class="archive">{{ post.title | striptags | normalize | truncate(20) }}</h4>
 {% endif %}
 {% if post.feather == "photo" %}
-{{ post.filename | thumbnail(post.alt_text, false, ["max_width=196", "quality=60", "square=1"], "20vw") }}
+{{ post.filename | thumbnail(post.alt_text, false, ["max_width=196", "quality=60", "square=1"], "(max-width: 639px) 95vw, 15vw") }}
 {% elseif post.feather == "uploader" and post.image is defined %}
-{{ post.image | thumbnail("", false, ["max_width=196", "quality=60", "square=1"], "20vw") }}
+{{ post.image | thumbnail("", false, ["max_width=196", "quality=60", "square=1"], "(max-width: 639px) 95vw, 15vw") }}
 {% else %}
 <p>{{ post.excerpt() | striptags | normalize | oneof(post.slug) }}</p>
 {% endif %}

@@ -14,7 +14,7 @@
 {% for file in post.files %}
 {% if ["jpg", "jpeg", "png", "gif", "tif", "tiff", "bmp"] | contains(file.type) %}
 <section class="photo">
-{{ file.name | thumbnail(file.name, post.source, ["max_width=1024", "max_height=2048", "quality=80"], "80vw") }}
+{{ file.name | thumbnail(file.name, post.source, ["max_width=1024", "max_height=2048", "quality=80"], "(max-width: 959px) 95vw, 75vw") }}
 </section>
 {% else %}
 <section class="attachment">

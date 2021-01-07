@@ -7,7 +7,7 @@
 </h2>
 {% endif %}
 <section class="photo">
-{{ post.filename | thumbnail(post.alt_text, post.source, ["max_width=1024", "max_height=2048", "quality=80"], "80vw") }}
+{{ post.filename | thumbnail(post.alt_text, post.source, ["max_width=1024", "max_height=2048", "quality=80"], "(max-width: 959px) 95vw, 75vw") }}
 </section>
 {% if post.caption is not empty %}
 <section class="caption">
