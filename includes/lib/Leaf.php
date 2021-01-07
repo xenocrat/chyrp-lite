@@ -397,8 +397,7 @@
         $set_args = !empty($set_args) ? "&".$set_args : $set_args ;
 
         # Source set for responsive images.
-        $srcset = array($filepath.$src_args." 1x",
-                        $filepath."&max_width=960".$set_args." 960w",
+        $srcset = array($filepath."&max_width=960".$set_args." 960w",
                         $filepath."&max_width=640".$set_args." 640w",
                         $filepath."&max_width=320".$set_args." 320w");
 
