@@ -1,4 +1,4 @@
-#. Copyright 2020 Daniel Pimley and other contributors.
+#. Copyright 2021 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 
 #: modules/migrator/admin/pages/manage_migration.twig:10

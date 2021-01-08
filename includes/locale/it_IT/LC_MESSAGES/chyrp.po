@@ -12,7 +12,7 @@ msgstr ""
 "X-Generator: Poedit 2.4.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. Copyright 2020 Daniel Pimley and other contributors.
+#. Copyright 2021 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: includes/class/Config.php:21
 msgid "Could not read the configuration file."
@@ -772,7 +772,7 @@ msgstr "Temi"
 msgid "Preview"
 msgstr "Anteprima"
 
-#: includes/controller/Ajax.php:172
+#: includes/controller/Ajax.php:175
 msgid "File uploaded."
 msgstr "File caricato."
 
