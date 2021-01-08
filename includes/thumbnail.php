@@ -23,7 +23,7 @@
     $quality = abs((int) fallback($_GET["quality"], 80));
     $filename = str_replace(array(DIR, "/"), "", $_GET['file']);
     $filepath = uploaded($filename, false);
-    $thumb_w = abs((int) fallback($_GET["max_width"], 640));
+    $thumb_w = abs((int) fallback($_GET["max_width"], 960));
     $thumb_h = abs((int) fallback($_GET["max_height"], 0));
 
     if (!is_readable($filepath) or !is_file($filepath))
