@@ -168,7 +168,10 @@
 
             if (upload_tester($_FILES['file'])) {
                 $filename = upload($_FILES['file']);
-                $data = array("file" => $filename, "url" => uploaded($filename));
+                $url = Config::current()->chyrp_url.
+                       "/includes/thumbnail.php?file=".urlencode($filename);
+
+                $data = array("file" => $filename, "url" => $url);
                 json_response(__("File uploaded."), $data);
             }
         }
