@@ -91,8 +91,8 @@ msgstr "Route wurde mit einem ungültigen Controller initiiert."
 #: includes/helpers.php:2004 includes/helpers.php:2007
 #: includes/helpers.php:2010 includes/helpers.php:2015
 #: includes/thumbnail.php:15 includes/thumbnail.php:18
-#: includes/thumbnail.php:33 includes/thumbnail.php:171
-#: includes/thumbnail.php:206 install.php:797 upgrade.php:173 upgrade.php:186
+#: includes/thumbnail.php:33 includes/thumbnail.php:173
+#: includes/thumbnail.php:208 install.php:797 upgrade.php:173 upgrade.php:186
 #: upgrade.php:199 upgrade.php:212 upgrade.php:225 upgrade.php:239
 #: upgrade.php:265 upgrade.php:278 upgrade.php:292 upgrade.php:305
 #: upgrade.php:318 upgrade.php:331 upgrade.php:345 upgrade.php:358
@@ -1309,7 +1309,7 @@ msgstr "Inhalte exportieren"
 msgid "Maximum size cannot be zero."
 msgstr "Maximale Größe kann nicht null sein."
 
-#: includes/thumbnail.php:171 includes/thumbnail.php:206
+#: includes/thumbnail.php:173 includes/thumbnail.php:208
 msgid "Failed to create image thumbnail."
 msgstr "Vorschaubild konnte erstellt werden."
 
