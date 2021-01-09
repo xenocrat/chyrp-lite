@@ -32,8 +32,10 @@
     if ($thumb_w == 0 and $thumb_h == 0)
         error(__("Error"), __("Maximum size cannot be zero."), null, 422);
 
-    if (!function_exists("gd_info"))
+    if (!function_exists("gd_info")) {
+        header($_SERVER['SERVER_PROTOCOL']." 301 Moved Permanently");
         redirect(uploaded($filename));
+    }
 
     # Respond to If-Modified-Since so the user agent will use cache.
     if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
