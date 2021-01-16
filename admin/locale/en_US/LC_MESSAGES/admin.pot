@@ -205,12 +205,12 @@ msgid "Are you sure you want to proceed?"
 msgstr ""
 
 #: admin/javascripts/admin.js.php:198
-#: admin/javascripts/admin.js.php:358
+#: admin/javascripts/admin.js.php:357
 msgid "Close"
 msgstr ""
 
 #: admin/javascripts/admin.js.php:205
-#: admin/javascripts/admin.js.php:365
+#: admin/javascripts/admin.js.php:364
 msgid "close"
 msgstr ""
 

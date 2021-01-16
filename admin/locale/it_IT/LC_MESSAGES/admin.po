@@ -12,7 +12,7 @@ msgstr ""
 "X-Generator: Poedit 2.4.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. Copyright 2020 Daniel Pimley and other contributors.
+#. Copyright 2021 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: admin/help/canonical_url.twig:3 admin/help/canonical_url.twig:6
 #: admin/pages/general_settings.twig:23
@@ -260,11 +260,11 @@ msgstr "Spunta tutto"
 msgid "Are you sure you want to proceed?"
 msgstr "Sei sicuro di volere procedere?"
 
-#: admin/javascripts/admin.js.php:198 admin/javascripts/admin.js.php:358
+#: admin/javascripts/admin.js.php:198 admin/javascripts/admin.js.php:357
 msgid "Close"
 msgstr "Chiudi"
 
-#: admin/javascripts/admin.js.php:205 admin/javascripts/admin.js.php:365
+#: admin/javascripts/admin.js.php:205 admin/javascripts/admin.js.php:364
 msgid "close"
 msgstr "chiudi"
 
