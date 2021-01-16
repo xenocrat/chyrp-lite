@@ -287,16 +287,15 @@ var Write = {
                     contentType: false,
                     dataType: "json",
                 }).done(function(response) {
-                    $(e.target).loader(true);
-
                     var text = (e.target.selectionStart != e.target.selectionEnd) ?
                         response.data.url :
                         '<img alt="" src="' + response.data.url + '">' ;
 
                     e.target.setRangeText(text);
                 }).fail(function(response) {
-                    $(e.target).loader(true);
                     alert('<?php echo __("Oops! Something went wrong on this web page."); ?>');
+                }).always(function(response) {
+                    $(e.target).loader(true).removeClass("drag_highlight");
                 });
             }
         }
