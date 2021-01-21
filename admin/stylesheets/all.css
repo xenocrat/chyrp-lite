@@ -846,6 +846,8 @@ span.options_extra {
     display: inline-block;
     width: 100%;
     padding-top: 1rem;
+    max-height: 10rem;
+    overflow-y: auto;
 }
 
 /* Group: Helpers & General */
