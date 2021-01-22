@@ -441,6 +441,7 @@
             }
             h1 {
                 font-size: 2em;
+                font-weight: bold;
                 margin: 1rem 0rem;
                 text-align: center;
                 line-height: 1;
@@ -449,10 +450,16 @@
                 margin-top: 0rem;
             }
             h2 {
-                font-size: 1.25em;
+                font-size: 1.5em;
+                font-weight: bold;
                 text-align: center;
+                margin: 1rem 0rem;
+            }
+            h3 {
+                font-size: 1em;
                 font-weight: bold;
                 margin: 1rem 0rem;
+                border-bottom: 1px solid #efefef;
             }
             p {
                 margin-bottom: 1rem;

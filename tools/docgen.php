@@ -227,18 +227,25 @@
             }
             h1 {
                 font-size: 2em;
-                margin: 1rem 0rem;
-                text-align: center;
-                line-height: 1;
-            }
-            h1:first-child {
-                margin-top: 0rem;
-            }
-            h2 {
-                font-size: 1.25em;
                 text-align: center;
                 font-weight: bold;
                 margin: 1rem 0rem;
+                line-height: 1;
+            }
+            h1:first-child {
+                margin-top: 0em;
+            }
+            h2 {
+                font-size: 1.5em;
+                text-align: center;
+                font-weight: bold;
+                margin: 1rem 0rem;
+            }
+            h3 {
+                font-size: 1em;
+                font-weight: bold;
+                margin: 1rem 0rem;
+                border-bottom: 1px solid #efefef;
             }
             p {
                 margin-bottom: 1rem;
