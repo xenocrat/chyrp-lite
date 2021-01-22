@@ -167,7 +167,7 @@
     <head>
         <meta charset="UTF-8">
         <title><?php echo strip_tags($title); ?></title>
-        <meta name="viewport" content="width = 520, user-scalable = no">
+        <meta name="viewport" content="width = 640">
         <style type="text/css">
             @font-face {
                 font-family: 'Open Sans webfont';
@@ -237,28 +237,29 @@
                 line-height: 1.5;
                 color: #4a4747;
                 background: #efefef;
-                padding: 0rem 0rem 5rem;
+                padding: 2rem;
             }
             h1 {
                 font-size: 2em;
-                margin: 1rem 0em;
-                text-align: left;
+                margin: 1rem 0rem;
+                text-align: center;
                 line-height: 1;
             }
             h1:first-child {
-                margin-top: 0em;
+                margin-top: 0rem;
             }
             h2 {
                 font-size: 1.25em;
+                text-align: center;
                 font-weight: bold;
-                margin: 1rem 0em;
+                margin: 1rem 0rem;
             }
             p {
                 margin-bottom: 1rem;
             }
             p:last-child,
             p:empty {
-                margin-bottom: 0em;
+                margin-bottom: 0rem;
             }
             code {
                 font-family: "Hack webfont", monospace;
@@ -278,10 +279,10 @@
             }
             ul:last-child,
             ol:last-child {
-                margin-bottom: 0em;
+                margin-bottom: 0rem;
             }
             ol.backtrace {
-                margin-top: 0.5em;
+                margin-top: 0.5rem;
             }
             a:link,
             a:visited {
@@ -316,7 +317,7 @@
             }
             a.big:last-child,
             button:last-child {
-                margin-bottom: 0em;
+                margin-bottom: 0rem;
             }
             a.big:hover,
             button:hover,
@@ -331,7 +332,7 @@
                 width: 30rem;
                 background: #ffffff;
                 padding: 2rem;
-                margin: 5rem auto 0rem auto;
+                margin: 0rem auto 0rem auto;
                 border-radius: 2rem;
             }
         </style>

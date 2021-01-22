@@ -411,7 +411,7 @@
     <head>
         <meta charset="UTF-8">
         <title><?php echo "Gettext"; ?></title>
-        <meta name="viewport" content="width = 520, user-scalable = no">
+        <meta name="viewport" content="width = 640">
         <style type="text/css">
             @font-face {
                 font-family: 'Open Sans webfont';
@@ -481,7 +481,7 @@
                 line-height: 1.5;
                 color: #4a4747;
                 background: #efefef;
-                padding: 0rem 0rem 5rem;
+                padding: 2rem;
             }
             h1 {
                 font-size: 2em;
@@ -490,7 +490,7 @@
                 line-height: 1;
             }
             h1:first-child {
-                margin-top: 0em;
+                margin-top: 0rem;
             }
             h2 {
                 font-size: 1.25em;
@@ -503,7 +503,7 @@
             }
             p:last-child,
             p:empty {
-                margin-bottom: 0em;
+                margin-bottom: 0rem;
             }
             code {
                 font-family: "Hack webfont", monospace;
@@ -535,7 +535,7 @@
                 display: none;
             }
             pre.pane:empty + h1 {
-                margin-top: 0em;
+                margin-top: 0rem;
             }
             a:link,
             a:visited {
@@ -571,7 +571,7 @@
                 margin: 1rem 0rem;
                 padding: 0.4em 0.6em;
                 background-color: #f2fbff;
-                border: 1px solid #b8cdd9;
+                border: 2px solid #b8cdd9;
                 border-radius: 0.3em;
                 cursor: pointer;
             }
@@ -602,7 +602,7 @@
                 width: 30rem;
                 background: #ffffff;
                 padding: 2rem;
-                margin: 5rem auto 0rem auto;
+                margin: 0rem auto 0rem auto;
                 border-radius: 2rem;
             }
         </style>

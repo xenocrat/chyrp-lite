@@ -183,7 +183,7 @@
     <head>
         <meta charset="UTF-8">
         <title><?php echo __("Chyrp Lite Installer"); ?></title>
-        <meta name="viewport" content="width = 520, user-scalable = no">
+        <meta name="viewport" content="width = 640">
         <style type="text/css">
             @font-face {
                 font-family: 'Open Sans webfont';
@@ -253,13 +253,13 @@
                 line-height: 1.5;
                 color: #4a4747;
                 background: #efefef;
-                padding: 0rem 0rem 5rem;
+                padding: 2rem;
             }
             h1 {
                 font-size: 2em;
                 text-align: center;
                 font-weight: bold;
-                margin: 1rem 0em;
+                margin: 1rem 0rem;
                 line-height: 1;
             }
             h1:first-child {
@@ -269,14 +269,14 @@
                 font-size: 1.25em;
                 text-align: center;
                 font-weight: bold;
-                margin: 1rem 0em;
+                margin: 1rem 0rem;
             }
             p {
                 margin-bottom: 1rem;
             }
             p:last-child,
             p:empty {
-                margin-bottom: 0em;
+                margin-bottom: 0rem;
             }
             code {
                 font-family: "Hack webfont", monospace;
@@ -316,7 +316,7 @@
             select {
                 box-sizing: border-box;
                 width: 100%;
-                margin: 0em;
+                margin: 0rem;
                 font-size: 1.25em;
                 padding: 0.2em;
                 border-radius: 0em;
@@ -379,7 +379,7 @@
                 display: none;
             }
             pre.pane:empty + h1 {
-                margin-top: 0em;
+                margin-top: 0rem;
             }
             a:link,
             a:visited {
@@ -425,7 +425,7 @@
             }
             a.big:last-child,
             button:last-child {
-                margin-bottom: 0em;
+                margin-bottom: 0rem;
             }
             a.big:hover,
             button:hover,
@@ -447,7 +447,7 @@
                 width: 30rem;
                 background: #ffffff;
                 padding: 2rem;
-                margin: 5rem auto 0rem auto;
+                margin: 0rem auto 0rem auto;
                 border-radius: 2rem;
             }
             .sub {
