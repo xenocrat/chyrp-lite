@@ -245,7 +245,7 @@
                 font-size: 1em;
                 font-weight: bold;
                 margin: 1rem 0rem;
-                border-bottom: 1px solid #efefef;
+                border-bottom: 1px solid #dfdfdf;
             }
             p {
                 margin-bottom: 1rem;
