@@ -129,11 +129,7 @@
             if (isset($plural)) {
                 $array = $this->find($domain, $plural);
                 $n = (int) $number;
-                $nplural = ($n != 1) ? 1 : 0 ;
-                $trigger = Trigger::current();
-
-                # Respond to this filter for languages with n != 2 plural forms.
-                $trigger->filter($nplural, "translate_plural", $n, $this->locale);
+                $nplural = $this->nplural($n);
                 return fallback($array[$nplural], ($n != 1) ? $plural : $single);
             }
 
@@ -155,6 +151,39 @@
             }
 
             return array();
+        }
+
+       /**
+        * Function: nplural
+        * Support for for languages with n != 2 plural forms.
+        */
+        private function nplural($n) {
+            static $base;
+
+            if (!isset($base))
+                $base = strtolower(lang_base($this->locale));
+
+            switch ($base) {
+                case "zh":
+                    return 0;
+
+                case "ar":
+                    if ($n == 0)
+                        return 0;
+                    elseif ($n == 1)
+                        return 1;
+                    elseif ($n == 2)
+                        return 2;
+                    elseif ($n % 100 >= 3 and $n % 100 <= 10)
+                        return 3;
+                    elseif ($n % 100 >= 11 and $n % 100 <= 99)
+                        return 4;
+                    else
+                        return 5;
+
+                default:
+                    return ($n != 1) ? 1 : 0 ;
+            }
         }
 
         /**
