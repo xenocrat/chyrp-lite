@@ -183,7 +183,7 @@
     <head>
         <meta charset="UTF-8">
         <title><?php echo __("Chyrp Lite Installer"); ?></title>
-        <meta name="viewport" content="width = 640">
+        <meta name="viewport" content="width = 800">
         <style type="text/css">
             @font-face {
                 font-family: 'Open Sans webfont';
