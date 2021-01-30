@@ -134,11 +134,22 @@
             $query = "CREATE TABLE IF NOT EXISTS \"__$table\" (\n  ".
                      implode(",\n  ", self::safecol((array) $cols))."\n)";
 
-            if ($sql->adapter == "sqlite") {
-                $query = str_ireplace("AUTO_INCREMENT", "AUTOINCREMENT", $query);
-            } else {
-                $query.= " DEFAULT CHARSET=utf8";
-                $query = str_ireplace("AUTOINCREMENT", "AUTO_INCREMENT", $query);
+            switch ($sql->adapter) {
+                case "sqlite":
+                    $query = str_ireplace("AUTO_INCREMENT", "AUTOINCREMENT", $query);
+                    break;
+
+                case "mysql":
+                    $query = str_ireplace("AUTOINCREMENT", "AUTO_INCREMENT", $query);
+                    $query.= " DEFAULT CHARSET=utf8";
+                    break;
+
+                case "pgsql":
+                    $query = str_ireplace(
+                        array("AUTO_INCREMENT", "AUTOINCREMENT", "LONGTEXT", "DATETIME"),
+                        array("SERIAL",         "SERIAL",        "TEXT",     "TIMESTAMP"),
+                        $query);
+                    break;
             }
 
             return $query;
