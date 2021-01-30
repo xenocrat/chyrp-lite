@@ -82,6 +82,12 @@
     # Get the locale.
     $locale = get_locale();
 
+    # List of discovered drivers.
+    $drivers = array();
+
+    # Currently selected adapter.
+    $adapter = isset($_POST['adapter']) ? $_POST['adapter'] : "mysql" ;
+
     # Where are we?
     $url = preg_replace("/\/install\.php.*$/i", "", guess_url());
 
@@ -98,20 +104,25 @@
     if (file_exists(INCLUDES_DIR.DIR."config.json.php"))
         redirect($config->url);
 
-    # Test for basic database access requirements.
-    if (!class_exists("MySQLi") and !class_exists("PDO"))
-        alert(__("MySQLi or PDO is required for database access."));
+    if (class_exists("MySQLi"))
+        $drivers[] = "mysql";
 
-    # Get a PDO driver list.
     if (class_exists("PDO")) {
-        $drivers = PDO::getAvailableDrivers();
+        $pdo_available_drivers = PDO::getAvailableDrivers();
 
-        # Test if we have a PDO driver available in the asbence of MySQLi.
-        if (!in_array("mysql", $drivers) and !in_array("sqlite", $drivers)) {
-            if (!class_exists("MySQLi"))
-                alert(__("PDO requires a MySQL or SQLite database driver."));
-        }
+        if (in_array("sqlite", $pdo_available_drivers))
+            $drivers[] = "sqlite";
+
+        if (in_array("mysql", $pdo_available_drivers))
+            $drivers[] = "mysql";
+
+        if (in_array("pgsql", $pdo_available_drivers))
+            $drivers[] = "pgsql";
     }
+
+    # Test for basic database access requirements.
+    if (empty($drivers))
+        alert(__("MySQLi or PDO is required for database access."));
 
     # Test if we can write to MAIN_DIR (needed for the .htaccess file).
     if (!is_writable(MAIN_DIR))
@@ -581,18 +592,18 @@
             $realpath = realpath(dirname($_POST['database']));
 
             if ($realpath === false)
-                alert(__("Could not determine the absolute path to the SQLite database."));
+                alert(__("Could not determine the absolute path to the database."));
             else
                 $_POST['database'] = $realpath.DIR.basename($_POST['database']);
         }
 
         if (!alert() and $_POST['adapter'] == "sqlite")
             if (!is_writable(dirname($_POST['database'])))
-                alert(__("Please make the SQLite database writable by the server."));
+                alert(__("Please make the database writable by the server."));
 
-        if (!alert() and $_POST['adapter'] == "mysql")
+        if (!alert() and $_POST['adapter'] != "sqlite")
             if (empty($_POST['username']) or empty($_POST['password']))
-                alert(__("Please enter a username and password for the MySQL database."));
+                alert(__("Please enter a username and password for the database."));
 
         if (!alert()) {
             # Build the SQL settings based on user input.
@@ -821,11 +832,14 @@
                 <p id="adapter_field">
                     <label for="adapter"><?php echo __("Adapter"); ?></label>
                     <select name="adapter" id="adapter">
-                        <?php if ((class_exists("PDO") and in_array("mysql", $drivers)) or class_exists("MySQLi")): ?>
-                        <option value="mysql"<?php selected("mysql", fallback($_POST['adapter'], "mysql")); ?>>MySQL</option>
+                        <?php if (in_array("sqlite", $drivers)): ?>
+                        <option value="sqlite"<?php selected("sqlite", $adapter); ?>>SQLite</option>
                         <?php endif; ?>
-                        <?php if (class_exists("PDO") and in_array("sqlite", $drivers)): ?>
-                        <option value="sqlite"<?php selected("sqlite", fallback($_POST['adapter'], "mysql")); ?>>SQLite</option>
+                        <?php if (in_array("mysql", $drivers)): ?>
+                        <option value="mysql"<?php selected("mysql", $adapter); ?>>MySQL</option>
+                        <?php endif; ?>
+                        <?php if (in_array("pgsql", $drivers)): ?>
+                        <option value="pgsql"<?php selected("pgsql", $adapter); ?>>PostgreSQL</option>
                         <?php endif; ?>
                     </select>
                 </p>
