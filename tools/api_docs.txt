@@ -1126,6 +1126,11 @@ Function: find
 Returns a translation array from the supplied domain.
 
 
+Function: nplural
+-----------------
+Support for for languages with n != 2 plural forms.
+
+
 Function: current
 -----------------
 Returns a singleton reference to the current class.

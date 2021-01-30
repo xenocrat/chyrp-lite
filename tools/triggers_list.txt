@@ -845,18 +845,6 @@ Target:
 	$links
 
 
-translate_plural
-----------------
-Called from:
-	includes/class/Translation.php on line 136
-
-Target:
-	$nplural
-
-Arguments:
-	$n, $this->locale
-
-
 visitor
 -------
 Called from:
