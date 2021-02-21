@@ -165,6 +165,6 @@
         }
 
         private function photo_extensions() {
-            return array("jpg", "jpeg", "png", "gif", "tif", "tiff", "bmp");
+            return array("jpg", "jpeg", "png", "gif", "webp", "avif");
         }
     }
