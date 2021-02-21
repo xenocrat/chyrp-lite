@@ -271,6 +271,7 @@
             code {
                 font-family: "Hack webfont", monospace;
                 font-style: normal;
+                font-size: 0.8rem;
                 word-wrap: break-word;
                 background-color: #efefef;
                 padding: 2px;
@@ -295,6 +296,9 @@
             a:visited {
                 color: #4a4747;
                 text-decoration: underline;
+            }
+            a:focus {
+                outline: #ff7f00 dashed 2px;
             }
             a:hover,
             a:focus,

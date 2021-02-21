@@ -7,8 +7,8 @@
     header("Content-Type: text/html; charset=UTF-8");
 
     define('DEBUG',          true);
-    define('CHYRP_VERSION',  "2021.01");
-    define('CHYRP_CODENAME', "House");
+    define('CHYRP_VERSION',  "2021.02");
+    define('CHYRP_CODENAME', "Abd al Kuri");
     define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
     define('MAIN',           false);
     define('ADMIN',          false);
@@ -430,6 +430,7 @@
             code {
                 font-family: "Hack webfont", monospace;
                 font-style: normal;
+                font-size: 0.8rem;
                 word-wrap: break-word;
                 background-color: #efefef;
                 padding: 2px;
@@ -463,6 +464,9 @@
             a:visited {
                 color: #4a4747;
                 text-decoration: underline;
+            }
+            a:focus {
+                outline: #ff7f00 dashed 2px;
             }
             a:hover,
             a:focus,
