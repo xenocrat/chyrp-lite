@@ -189,7 +189,7 @@
             $post->files = $this->list_files($post->filenames);
 
             foreach ($post->files as $file)
-                if (in_array($file["type"], array("jpg", "jpeg", "png", "gif", "tif", "tiff", "bmp"))) {
+                if (in_array($file["type"], array("jpg", "jpeg", "png", "gif", "webp", "avif"))) {
                     $post->image = $file["name"];
                     break;
                 }
