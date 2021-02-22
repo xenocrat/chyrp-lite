@@ -59,6 +59,25 @@
            $quality = $half;
     }
 
+    function thumb_creatable($type) {
+        if ($type == IMAGETYPE_GIF and (imagetypes() & IMG_GIF))
+            return true;
+
+        if ($type == IMAGETYPE_JPEG and (imagetypes() & IMG_JPEG))
+            return true;
+
+        if ($type == IMAGETYPE_PNG and (imagetypes() & IMG_PNG))
+            return true;
+
+        if (version_compare(PHP_VERSION, "7.1", "<"))
+            return false;
+
+        if ($type == IMAGETYPE_WEBP and (imagetypes() & IMG_WEBP))
+            return true;
+
+        return false;
+    }
+
     function thumb_resize(&$crop_x, &$crop_y, &$thumb_w, &$thumb_h, &$orig_w, &$orig_h) {
         # getimagesize() could not determine the image dimensions.
         if ($orig_w == 0 or $orig_h == 0) {
@@ -135,12 +154,9 @@
     }
 
     # Use the original file if GD support is unavailable or type is not handled.
-    if (($type == IMAGETYPE_GIF and !(imagetypes() & IMG_GIF)) or
-        ($type == IMAGETYPE_JPEG and !(imagetypes() & IMG_JPEG)) or
-        ($type == IMAGETYPE_PNG and !(imagetypes() & IMG_PNG)) or
-        !((IMAGETYPE_GIF | IMAGETYPE_JPEG | IMAGETYPE_PNG) & $type)) {
-            $cache_fn = $filename;
-            $cache_fp = $filepath;
+    if (!thumb_creatable($type)) {
+        $cache_fn = $filename;
+        $cache_fp = $filepath;
     }
 
     header("Last-Modified: ".date("r", filemtime($filepath)));
@@ -167,6 +183,10 @@
                 $original = imagecreatefrompng($filepath);
                 $function = "imagepng";
                 break;
+            case IMAGETYPE_WEBP:
+                $original = imagecreatefromwebp($filepath);
+                $function = "imagewebp";
+                break;
         }
 
         if ($original === false)
@@ -177,6 +197,11 @@
 
         # Create the thumbnail image resource.
         $thumb = imagecreatetruecolor($thumb_w, $thumb_h);
+
+        if ($function == "imagewebp") {
+            imagealphablending($thumb, false);
+            imagesavealpha($thumb, true);
+        }
 
         if ($function == "imagepng") {
             imagealphablending($thumb, false);
@@ -201,8 +226,8 @@
                            $orig_h);
 
         # Create the thumbnail file - outputs directly if caching is disabled.
-        $result = ($function == "imagejpeg" or $function == "imagepng") ?
-            $function($thumb, $cache_fp, $quality) : $function($thumb, $cache_fp) ;
+        $result = ($function == "imagegif") ?
+            $function($thumb, $cache_fp) : $function($thumb, $cache_fp, $quality) ;
 
         if ($result === false)
             error(__("Error"), __("Failed to create image thumbnail."));
