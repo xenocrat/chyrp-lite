@@ -146,17 +146,21 @@
 
     $cache_fn = md5($filename.$thumb_w.$thumb_h.$quality).image_type_to_extension($type);
     $cache_fp = (CACHE_THUMBS) ? CACHES_DIR.DIR."thumbs".DIR.$cache_fn : null ;
+    $cache_ok = (isset($cache_fp) and file_exists($cache_fp) and
+                filemtime($cache_fp) >= filemtime($filepath));
 
     # Use the original file if the size is already smaller than requested.
     if ($orig_w <= $thumb_w and $orig_h <= $thumb_h and empty($_GET['square'])) {
         $cache_fn = $filename;
         $cache_fp = $filepath;
+        $cache_ok = true;
     }
 
     # Use the original file if GD support is unavailable or type is not handled.
     if (!thumb_creatable($type)) {
         $cache_fn = $filename;
         $cache_fp = $filepath;
+        $cache_ok = true;
     }
 
     header("Last-Modified: ".date("r", filemtime($filepath)));
@@ -167,9 +171,7 @@
     header("Content-Disposition: inline; filename=\"".addslashes($cache_fn)."\"");
 
     # Create a thumbnail if caching is disabled, file is missing or stale.
-    if (!isset($cache_fp) or !file_exists($cache_fp) or
-        ($cache_fp != $filepath and filemtime($cache_fp) < filemtime($filepath))) {
-
+    if (!$cache_ok) {
         switch ($type) {
             case IMAGETYPE_GIF:
                 $original = imagecreatefromgif($filepath);
