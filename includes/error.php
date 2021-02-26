@@ -292,6 +292,9 @@
             ol.backtrace {
                 margin-top: 0.5rem;
             }
+            pre {
+                overflow-x: auto;
+            }
             a:link,
             a:visited {
                 color: #4a4747;
