@@ -623,7 +623,9 @@
         foreach ($args as $index => $arg) {
             $unset = (!isset($arg) or $arg === array() or
                      (is_string($arg) and trim($arg) === "") or
-                     (is_object($arg) and empty($arg)) or ($arg === "0000-00-00 00:00:00"));
+                     (is_object($arg) and empty($arg)) or
+                     ($arg === "0000-00-00 00:00:00") or
+                     ($arg === "0001-01-01 00:00:00"));
 
             if (!$unset)
                 return $arg;
