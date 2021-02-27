@@ -66,12 +66,14 @@
                     if (is_bool($val))
                         $val = (int) $val;
 
+                    # PostgreSQL requires a valid date.
                     if ($sql->adapter == "pgsql") {
-                        if ($val === null)
-                            $val = "DEFAULT";
-
-                        if ($val === "0000-00-00 00:00:00")
-                            $val = "0001-01-01 00:00:00";
+                        if ($key == "created_at" or
+                            $key == "updated_at" or
+                            $key == "joined_at") {
+                                if ($val === "0000-00-00 00:00:00")
+                                    $val = "0001-01-01 00:00:00";
+                        }
                     }
 
                     $params[":".str_replace(array("(", ")", "."), "_", $key)] = $val;
@@ -169,7 +171,8 @@
                         $query);
                     $query = preg_replace(
                         "/INTEGER( (PRIMARY )?KEY)? AUTO_?INCREMENT/i",
-                        "SERIAL$1", $query);
+                        "SERIAL$1",
+                        $query);
                     break;
             }
 
@@ -398,7 +401,7 @@
         public static function build_conditions($sql, $conds, &$params, $tables = null, $insert = false) {
             $conditions = array();
 
-            # Transform to text to enable LIKE operator on all datatypes in PostgreSQL.
+            # PostgreSQL: cast to text to enable LIKE operator.
             $text = ($sql->adapter == "pgsql") ? "::text" : "" ;
 
             foreach ($conds as $key => $val) {
@@ -486,17 +489,21 @@
                                 $cond = self::safecol($sql, $key)." IN ".
                                         self::build_list($sql, $val, $params);
                             } elseif ($val === null and $insert) {
-                                $cond = self::safecol($sql, $key)." = ".
-                                        (($sql->adapter == "pgsql") ? "DEFAULT" : "''");
+                                $cond = self::safecol($sql, $key)." = ''";
                             } elseif ($val === null) {
                                 $cond = self::safecol($sql, $key)." IS NULL";
                             } else {
                                 $param = str_replace(array("(", ")", "."), "_", $key);
                                 $cond = self::safecol($sql, $key)." = :".$param;
 
+                                # PostgreSQL requires a valid date.
                                 if ($sql->adapter == "pgsql") {
-                                    if ($val === "0000-00-00 00:00:00")
-                                        $val = "0001-01-01 00:00:00";
+                                    if ($key == "created_at" or
+                                        $key == "updated_at" or
+                                        $key == "joined_at") {
+                                            if ($val === "0000-00-00 00:00:00")
+                                                $val = "0001-01-01 00:00:00";
+                                    }
                                 }
 
                                 $params[":".$param] = $val;
