@@ -160,7 +160,7 @@
          *     $throw_exceptions - Should exceptions be thrown on error?
          */
         public function count($tables, $conds = null, $params = array(), $throw_exceptions = false) {
-            $build = QueryBuilder::build_count($tables, $conds, $params);
+            $build = QueryBuilder::build_count($this, $tables, $conds, $params);
             $query = $this->query($build, $params, $throw_exceptions);
 
             return isset($query->query) ? $query->fetchColumn() : false ;
@@ -192,7 +192,8 @@
                                $group = null,
                                $left_join = array(),
                                $throw_exceptions = false) {
-            $build = QueryBuilder::build_select($tables,
+            $build = QueryBuilder::build_select($this,
+                                                $tables,
                                                 $fields,
                                                 $conds,
                                                 $order,
@@ -216,7 +217,7 @@
          *     $throw_exceptions - Should exceptions be thrown on error?
          */
         public function insert($table, $data, $params = array(), $throw_exceptions = false) {
-            $build = QueryBuilder::build_insert($table, $data, $params);
+            $build = QueryBuilder::build_insert($this, $table, $data, $params);
             return $this->query($build, $params, $throw_exceptions);
         }
 
@@ -255,7 +256,7 @@
          *     $throw_exceptions - Should exceptions be thrown on error?
          */
         public function update($table, $conds, $data, $params = array(), $throw_exceptions = false) {
-            $build = QueryBuilder::build_update($table, $conds, $data, $params);
+            $build = QueryBuilder::build_update($this, $table, $conds, $data, $params);
             return $this->query($build, $params, $throw_exceptions);
         }
 
@@ -270,7 +271,7 @@
          *     $throw_exceptions - Should exceptions be thrown on error?
          */
         public function delete($table, $conds, $params = array(), $throw_exceptions = false) {
-            $build = QueryBuilder::build_delete($table, $conds, $params);
+            $build = QueryBuilder::build_delete($this, $table, $conds, $params);
             return $this->query($build, $params, $throw_exceptions);
         }
 
@@ -283,7 +284,7 @@
          *     $throw_exceptions - Should exceptions be thrown on error?
          */
         public function drop($table, $throw_exceptions = false) {
-            $build = QueryBuilder::build_drop($table);
+            $build = QueryBuilder::build_drop($this, $table);
             return $this->query($build, array(), $throw_exceptions);
         }
 
@@ -297,7 +298,7 @@
          *     $throw_exceptions - Should exceptions be thrown on error?
          */
         public function create($table, $cols, $throw_exceptions = false) {
-            $build = QueryBuilder::build_create($table, $cols, $this);
+            $build = QueryBuilder::build_create($this, $table, $cols);
             return $this->query($build, array(), $throw_exceptions);
         }
 
