@@ -298,7 +298,9 @@
                 $model->queryString = $query->queryString;
 
             if (isset($model->updated_at))
-                $model->updated = (!empty($model->updated_at) and $model->updated_at != "0000-00-00 00:00:00");
+                $model->updated = (!empty($model->updated_at) and
+                                    $model->updated_at != "0000-00-00 00:00:00" and
+                                    $model->updated_at != "0001-01-01 00:00:00");
 
             $clone = clone $model;
 
