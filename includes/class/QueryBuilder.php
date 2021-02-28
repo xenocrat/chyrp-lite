@@ -66,15 +66,8 @@
                     if (is_bool($val))
                         $val = (int) $val;
 
-                    # PostgreSQL requires a valid date.
-                    if ($sql->adapter == "pgsql") {
-                        if ($key == "created_at" or
-                            $key == "updated_at" or
-                            $key == "joined_at") {
-                                if ($val === "0000-00-00 00:00:00")
-                                    $val = "0001-01-01 00:00:00";
-                        }
-                    }
+                    if ($key == "updated_at" and $val === "0000-00-00 00:00:00")
+                        $val = "0001-01-01 00:00:00";
 
                     $params[":".str_replace(array("(", ")", "."), "_", $key)] = $val;
                 }
@@ -357,7 +350,15 @@
 
         /**
          * Function: build_list
-         * Returns ('one', 'two', '', 1, 0) from array("one", "two", null, true, false)
+         * Creates a list of values.
+         *
+         * Parameters:
+         *     $sql - The SQL instance calling this method.
+         *     $data - An array of values.
+         *     &$params - An associative array of parameters used in the query.
+         *
+         * Returns:
+         *     ('one', 'two', '', 1, 0) from array("one", "two", null, true, false).
          */
         public static function build_list($sql, $vals, $params = array()) {
             $return = array();
@@ -365,6 +366,9 @@
             foreach ($vals as $val) {
                 if (is_object($val)) # Useful catch, e.g. empty SimpleXML objects.
                     $val = "";
+
+                if (is_bool($val))
+                    $val = (int) $val;
 
                 $return[] = (isset($params[$val])) ? $val : SQL::current()->escape($val) ;
             }
@@ -496,15 +500,8 @@
                                 $param = str_replace(array("(", ")", "."), "_", $key);
                                 $cond = self::safecol($sql, $key)." = :".$param;
 
-                                # PostgreSQL requires a valid date.
-                                if ($sql->adapter == "pgsql") {
-                                    if ($key == "created_at" or
-                                        $key == "updated_at" or
-                                        $key == "joined_at") {
-                                            if ($val === "0000-00-00 00:00:00")
-                                                $val = "0001-01-01 00:00:00";
-                                    }
-                                }
+                                if ($key == "updated_at" and $val === "0000-00-00 00:00:00")
+                                    $val = "0001-01-01 00:00:00";
 
                                 $params[":".$param] = $val;
                             }
