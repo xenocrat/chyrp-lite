@@ -93,7 +93,7 @@
             fallback($clean,        slug(8));
             fallback($url,          self::check_url($clean));
             fallback($created_at,   datetime());
-            fallback($updated_at,   "0000-00-00 00:00:00"); # Model->updated will check this.
+            fallback($updated_at,   "0001-01-01 00:00:00"); # Model->updated will check this.
 
             $sql = SQL::current();
             $trigger = Trigger::current();
