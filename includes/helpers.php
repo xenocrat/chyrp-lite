@@ -367,7 +367,7 @@
      *     $locale - The path to the locale directory.
      */
     function load_translator($domain, $locale) {
-        if (USE_GETTEXT_SHIM)
+        if (USE_GETTEXT_SHIM and class_exists("Translation"))
             return Translation::current()->load($domain, $locale);
 
         if (function_exists("bindtextdomain"))
@@ -862,12 +862,18 @@
         if (empty($trimmed))
             return array(array(), array());
 
+        $sql = SQL::current();
+
+        # PostgreSQL: use ILIKE operator for case-insensitivity.
+        if ($sql->adapter == "pgsql")
+            $plain = str_replace(" LIKE ", " ILIKE ", $plain);
+
         $strings  = array(); # Non-keyword values found in the query.
         $keywords = array(); # Keywords (attr:val;) found in the query.
         $where    = array(); # Parameters validated and added to WHERE.
         $filters  = array(); # Table column filters to be validated.
         $params   = array(); # Parameters for the non-keyword filter.
-        $columns  = !empty($table) ? SQL::current()->select($table)->fetch() : array() ;
+        $columns  = !empty($table) ? $sql->select($table)->fetch() : array() ;
 
         foreach (preg_split("/\s(?=\w+:)|;/", $query, -1, PREG_SPLIT_NO_EMPTY) as $fragment) {
             if (!substr_count($fragment, ":"))
