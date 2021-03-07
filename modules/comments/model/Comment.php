@@ -171,7 +171,7 @@
                                "parent_id"    => $parent,
                                "notify"       => $notify,
                                "created_at"   => fallback($created_at, datetime()),
-                               "updated_at"   => fallback($updated_at, "0000-00-00 00:00:00")));
+                               "updated_at"   => fallback($updated_at, "0001-01-01 00:00:00")));
 
             $new = new self($sql->latest("comments"), array("skip_where" => true));
 
