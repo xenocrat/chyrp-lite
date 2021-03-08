@@ -482,12 +482,27 @@
             'use strict';
 
             function toggle_adapter() {
-                if ($("#adapter").val() == "sqlite") {
-                    $("#database_sub, #database_aside").fadeIn("fast");
+                var adapter = $("#adapter").val();
+
+                if (adapter == "sqlite") {
+                    $("#database_sub").fadeIn("fast");
                     $("#host_field, #username_field, #password_field, #prefix_field").fadeOut("fast");
                 } else {
-                    $("#database_sub, #database_aside").fadeOut("fast");
-                    $("#host_field, #username_field, #password_field, #prefix_field").fadeIn("fast");
+                    $("#database_sub").fadeOut("fast");
+                    $("#host_field, #username_field, #password_field, #prefix_field").fadeIn("fast"); 
+                }
+
+                if (adapter == "sqlite") {
+                    $("#db_aside_sqlite").fadeIn("fast");
+                    $("#db_aside_mysql, #db_aside_pgsql").fadeOut("fast");
+                } else if (adapter == "mysql") {
+                    $("#db_aside_mysql").fadeIn("fast");
+                    $("#db_aside_sqlite, #db_aside_pgsql").fadeOut("fast");
+                } else if (adapter == "pgsql") {
+                    $("#db_aside_pgsql").fadeIn("fast");
+                    $("#db_aside_mysql, #db_aside_sqlite").fadeOut("fast");
+                } else {
+                    $("#db_aside_mysql, #db_aside_pgsql, #db_aside_sqlite").fadeOut("fast");
                 }
             }
             $(function() {
@@ -867,7 +882,13 @@
                     </label>
                     <input type="text" name="database" value="<?php posted("database"); ?>" id="database">
                 </p>
-                <aside id="database_aside">
+                <aside id="db_aside_pgsql">
+                    <?php echo __("Make sure your PostgreSQL database uses UTF-8 encoding."); ?>
+                </aside>
+                <aside id="db_aside_mysql">
+                    <?php echo __("Case-insensitive collation is recommended for your MySQL database."); ?>
+                </aside>
+                <aside id="db_aside_sqlite">
                     <?php echo __("Be sure to put your SQLite database outside the document root directory, otherwise visitors will be able to download it."); ?>
                 </aside>
                 <p id="prefix_field">
