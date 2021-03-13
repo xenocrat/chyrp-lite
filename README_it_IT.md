@@ -1,6 +1,4 @@
-#### README:
-* [English](README.md)
-* [简体中文](README_zh_CN.md)
+[English](README.md), [简体中文](README_zh_CN.md).
 
 ## Cosa Chyrp Lite può fare per me?
 
@@ -68,6 +66,9 @@ sito web del tuo blog.
   - MySQLi or PDO
 * SQLite:
   - SQLite 3+
+  - PDO
+* PostgreSQL:
+  - PostgreSQL 10+
   - PDO
 
 ## Installazione

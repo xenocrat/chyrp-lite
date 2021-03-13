@@ -1,6 +1,4 @@
-#### README:
-* [English](README.md)
-* [Italiano](README_it_IT.md)
+[English](README.md), [Italiano](README_it_IT.md).
 
 ## Chyrp Lite能为我做什么？
 
@@ -61,6 +59,9 @@ Chyrp Lite还实现了一个完整的与WordPress兼容的MetaWeblog XML-RPC API
   - MySQLi or PDO
 * SQLite:
   - SQLite 3+
+  - PDO
+* PostgreSQL:
+  - PostgreSQL 10+
   - PDO
 
 ## 安装
