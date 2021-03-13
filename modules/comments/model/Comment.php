@@ -359,8 +359,10 @@
          * Returns a SQL query "chunk" that hides some comments from the <Visitor>.
          */
         static function redactions() {
-            $list = empty($_SESSION['comments']) ? "(0)" : QueryBuilder::build_list($_SESSION['comments']) ;
             $user_id = (int) Visitor::current()->id;
+            $list = empty($_SESSION['comments']) ?
+                "(0)" : QueryBuilder::build_list(SQL::current(), $_SESSION['comments']) ;
+
             return "status != 'denied' OR ((user_id != 0 AND user_id = ".$user_id.") OR (id IN ".$list."))";
         }
 
