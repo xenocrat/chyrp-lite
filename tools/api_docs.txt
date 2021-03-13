@@ -530,6 +530,7 @@ Function: build_select
 Creates a full SELECT query.
 
 Parameters:
+    $sql - The SQL instance calling this method.
     $tables - Tables to select from.
     $fields - Columns to select.
     $order - What to order by.
@@ -548,6 +549,7 @@ Function: build_insert
 Creates a full insert query.
 
 Parameters:
+    $sql - The SQL instance calling this method.
     $table - Table to insert into.
     $data - Data to insert.
     &$params - An associative array of parameters used in the query.
@@ -561,6 +563,7 @@ Function: build_update
 Creates a full update query.
 
 Parameters:
+    $sql - The SQL instance calling this method.
     $table - Table to update.
     $conds - Conditions to update rows by.
     $data - Data to update.
@@ -575,6 +578,7 @@ Function: build_delete
 Creates a full delete query.
 
 Parameters:
+    $sql - The SQL instance calling this method.
     $table - Table to delete from.
     $conds - Conditions to delete by.
     &$params - An associative array of parameters used in the query.
@@ -588,6 +592,7 @@ Function: build_drop
 Creates a full drop table query.
 
 Parameters:
+    $sql - The SQL instance calling this method.
     $table - Table to drop.
 
 Returns:
@@ -599,9 +604,9 @@ Function: build_create
 Creates a full create table query.
 
 Parameters:
+    $sql - The SQL instance calling this method.
     $table - Table to create.
     $cols - An array of column declarations.
-    $sql - The SQL instance calling this method.
 
 Returns:
     A @CREATE TABLE@ query string.
@@ -612,6 +617,7 @@ Function: build_update_values
 Creates an update data part.
 
 Parameters:
+    $sql - The SQL instance calling this method.
     $data - Data to update.
     &$params - An associative array of parameters used in the query.
 
@@ -621,6 +627,7 @@ Function: build_insert_header
 Creates an insert header.
 
 Parameters:
+    $sql - The SQL instance calling this method.
     $data - Data to insert.
 
 
@@ -629,6 +636,7 @@ Function: build_limits
 Creates the LIMIT part of a query.
 
 Parameters:
+    $sql - The SQL instance calling this method.
     $offset - Offset of the result.
     $limit - Limit of the result.
 
@@ -638,6 +646,7 @@ Function: build_from
 Creates a FROM header for select queries.
 
 Parameters:
+    $sql - The SQL instance calling this method.
     $tables - Tables to select from.
 
 
@@ -646,6 +655,7 @@ Function: build_count
 Creates a SELECT COUNT(1) query.
 
 Parameters:
+    $sql - The SQL instance calling this method.
     $tables - Tables to tablefy with.
     $conds - Conditions to select by.
     &$params - An associative array of parameters used in the query.
@@ -656,6 +666,7 @@ Function: build_select_header
 Creates a SELECT fields header.
 
 Parameters:
+    $sql - The SQL instance calling this method.
     $fields - Columns to select.
     $tables - Tables to tablefy with.
 
@@ -664,12 +675,19 @@ Function: build_where
 ---------------------
 Creates a WHERE query.
 
+Parameters:
+    $sql - The SQL instance calling this method.
+    $conds - Conditions to select by.
+    $tables - Tables to tablefy with.
+    &$params - An associative array of parameters used in the query.
+
 
 Function: build_group
 ---------------------
 Creates a GROUP BY argument.
 
 Parameters:
+    $sql - The SQL instance calling this method.
     $order - Columns to group by.
     $tables - Tables to tablefy with.
 
@@ -679,13 +697,22 @@ Function: build_order
 Creates an ORDER BY argument.
 
 Parameters:
+    $sql - The SQL instance calling this method.
     $order - Columns to order by.
     $tables - Tables to tablefy with.
 
 
 Function: build_list
 --------------------
-Returns ('one', 'two', '', 1, 0) from array("one", "two", null, true, false)
+Creates a list of values.
+
+Parameters:
+    $sql - The SQL instance calling this method.
+    $data - An array of values.
+    &$params - An associative array of parameters used in the query.
+
+Returns:
+    ('one', 'two', '', 1, 0) from array("one", "two", null, true, false).
 
 
 Function: safecol
@@ -693,6 +720,7 @@ Function: safecol
 Wraps a column in proper escaping if the name is a subset of SQL keywords.
 
 Parameters:
+    $sql - The SQL instance calling this method.
     $name - Name of the column.
 
 
@@ -701,6 +729,7 @@ Function: build_conditions
 Builds an associative array of SQL values into PDO-esque parameterized query strings.
 
 Parameters:
+    $sql - The SQL instance calling this method.
     $conds - Conditions.
     &$params - Parameters array to fill.
     $tables - If specified, conditions will be tablefied with these tables.
@@ -712,6 +741,7 @@ Function: tablefy
 Automatically prepends tables and table prefixes to a field if it doesn't already have them.
 
 Parameters:
+    $sql - The SQL instance calling this method.
     &$field - The field to "tablefy".
     $tables - An array of tables. The first one will be used for prepending.
 
