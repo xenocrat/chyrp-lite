@@ -114,7 +114,7 @@
 
             if ($this->adapter == "mysql") {
                 # These are not added to the query debug/count.
-                new Query($this, "SET SESSION sql_mode = 'ANSI'");
+                new Query($this, "SET SESSION sql_mode = 'ANSI,STRICT_TRANS_TABLES'");
                 new Query($this, "SET NAMES 'utf8'");
             }
 
