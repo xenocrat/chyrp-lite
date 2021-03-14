@@ -500,8 +500,10 @@
                                 $param = str_replace(array("(", ")", "."), "_", $key);
                                 $cond = self::safecol($sql, $key)." = :".$param;
 
-                                if ($key == "updated_at" and $val === "0000-00-00 00:00:00")
-                                    $val = "0001-01-01 00:00:00";
+                                if ($insert) {
+                                    if ($key == "updated_at" and $val === "0000-00-00 00:00:00")
+                                        $val = "0001-01-01 00:00:00";
+                                }
 
                                 $params[":".$param] = $val;
                             }
