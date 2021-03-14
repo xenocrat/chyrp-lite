@@ -426,7 +426,7 @@
                             $param = str_replace(array("(", ")", "."), "_", $key);
 
                             if (is_array($val))
-                                $cond = $key." NOT IN ".self::build_list($val, $params);
+                                $cond = $key." NOT IN ".self::build_list($sql, $val, $params);
                             elseif ($val === null)
                                 $cond = $key." IS NOT NULL";
                             else {
