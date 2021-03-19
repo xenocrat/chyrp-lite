@@ -708,7 +708,7 @@ section img {
 }
 iframe {
     width: 100%;
-    max-height: 40em;
+    height: auto;
     border: none;
     margin: 1rem 0rem;
 }

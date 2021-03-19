@@ -689,7 +689,7 @@ a.archive_post_link:active {
 }
 iframe {
     width: 100%;
-    max-height: 40em;
+    height: auto;
     border: none;
     margin: 1rem 0rem;
 }
