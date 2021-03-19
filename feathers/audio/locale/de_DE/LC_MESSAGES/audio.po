@@ -1,0 +1,48 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de_DE\n"
+
+#. Copyright 2021 Daniel Pimley and other contributors.
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: feathers/audio/audio.php:8
+msgid "Title"
+msgstr ""
+
+#: feathers/audio/audio.php:13
+msgid "Audio File"
+msgstr ""
+
+#: feathers/audio/audio.php:16
+#, php-format
+msgid "(Max. file size: %d Megabytes)"
+msgstr ""
+
+#: feathers/audio/audio.php:20
+msgid "Description"
+msgstr ""
+
+#: feathers/audio/audio.php:39
+msgid "You did not select any audio to upload."
+msgstr ""
+
+#: feathers/audio/audio.php:162
+msgid "Your web browser does not support the <code>audio</code> element."
+msgstr ""
+
+#: feathers/audio/info.php:3
+msgid "Audio"
+msgstr ""
+
+#: feathers/audio/info.php:6
+msgid "A feather for audio."
+msgstr ""

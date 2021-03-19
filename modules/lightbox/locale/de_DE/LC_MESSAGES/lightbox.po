@@ -1,0 +1,68 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de_DE\n"
+
+#. Copyright 2021 Daniel Pimley and other contributors.
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/lightbox/admin/pages/lightbox_settings.twig:3
+#: modules/lightbox/admin/pages/lightbox_settings.twig:6
+msgid "Lightbox Settings"
+msgstr ""
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:10
+msgid "Background"
+msgstr ""
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:18
+msgid "Edge Spacing"
+msgstr ""
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:20
+msgid "(pixels)"
+msgstr ""
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:23
+msgid "Protect Images"
+msgstr ""
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:25
+msgid "Prevent visitors from saving images?"
+msgstr ""
+
+#: modules/lightbox/info.php:3 modules/lightbox/lightbox.php:45
+msgid "Lightbox"
+msgstr ""
+
+#: modules/lightbox/info.php:6
+msgid "A lightbox for your images."
+msgstr ""
+
+#: modules/lightbox/javascript.php:105
+msgid "Close"
+msgstr ""
+
+#: modules/lightbox/lightbox.php:22
+msgid "Black"
+msgstr ""
+
+#: modules/lightbox/lightbox.php:23
+msgid "Gray"
+msgstr ""
+
+#: modules/lightbox/lightbox.php:24
+msgid "White"
+msgstr ""
+
+#: modules/lightbox/lightbox.php:25
+msgid "Inherit"
+msgstr ""

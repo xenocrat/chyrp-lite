@@ -1,0 +1,171 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.2\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: de_DE\n"
+
+#. Copyright 2021 Daniel Pimley and other contributors.
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/migrator/admin/pages/manage_migration.twig:10
+msgid "eXtended .XML File"
+msgstr ""
+
+#: modules/migrator/admin/pages/manage_migration.twig:14
+#: modules/migrator/admin/pages/manage_migration.twig:73
+#: modules/migrator/admin/pages/manage_migration.twig:108
+msgid "URL for Embedded Media"
+msgstr ""
+
+#: modules/migrator/admin/pages/manage_migration.twig:19
+#, php-format
+msgid "Usually something like <code>%s/wp-content/uploads/</code>."
+msgstr ""
+
+#: modules/migrator/admin/pages/manage_migration.twig:33
+msgid "Your Tumblr URL"
+msgstr ""
+
+#: modules/migrator/admin/pages/manage_migration.twig:36
+#, php-format
+msgid "Something like <code>https://%s.tumblr.com/</code>."
+msgstr ""
+
+#: modules/migrator/admin/pages/manage_migration.twig:37
+msgid "Audio and Video cannot be imported."
+msgstr ""
+
+#: modules/migrator/admin/pages/manage_migration.twig:51
+#: modules/migrator/admin/pages/manage_migration.twig:92
+msgid "Host"
+msgstr ""
+
+#: modules/migrator/admin/pages/manage_migration.twig:55
+#: modules/migrator/admin/pages/manage_migration.twig:96
+msgid "Username"
+msgstr ""
+
+#: modules/migrator/admin/pages/manage_migration.twig:59
+#: modules/migrator/admin/pages/manage_migration.twig:100
+msgid "Password"
+msgstr ""
+
+#: modules/migrator/admin/pages/manage_migration.twig:63
+#: modules/migrator/admin/pages/manage_migration.twig:104
+msgid "Database"
+msgstr ""
+
+#: modules/migrator/admin/pages/manage_migration.twig:67
+msgid "Table Prefix"
+msgstr ""
+
+#: modules/migrator/admin/pages/manage_migration.twig:78
+#: modules/migrator/admin/pages/manage_migration.twig:113
+#, php-format
+msgid "Usually something like <code>%s/images/</code>."
+msgstr ""
+
+#: modules/migrator/info.php:3
+msgid "Migration Assistant"
+msgstr ""
+
+#: modules/migrator/info.php:6
+msgid "Enables import from Wordpress, MovableType, TextPattern, and Tumblr."
+msgstr ""
+
+#: modules/migrator/migrator.php:13
+msgid "Migration"
+msgstr ""
+
+#: modules/migrator/migrator.php:29 modules/migrator/migrator.php:173
+#: modules/migrator/migrator.php:313 modules/migrator/migrator.php:416
+msgid "You do not have sufficient privileges to import content."
+msgstr ""
+
+#: modules/migrator/migrator.php:38 modules/migrator/migrator.php:185
+#: modules/migrator/migrator.php:322 modules/migrator/migrator.php:425
+msgid "Missing Feather"
+msgstr ""
+
+#: modules/migrator/migrator.php:39
+msgid "Text feather must be enabled to import from WordPress."
+msgstr ""
+
+#: modules/migrator/migrator.php:42
+msgid "You must select a WordPress export file."
+msgstr ""
+
+#: modules/migrator/migrator.php:89
+msgid "The file does not seem to be a valid WordPress export file."
+msgstr ""
+
+#: modules/migrator/migrator.php:161
+msgid "WordPress content successfully imported!"
+msgstr ""
+
+#: modules/migrator/migrator.php:186
+msgid "Text, Photo, Quote, and Link feathers must be enabled to import from Tumblr."
+msgstr ""
+
+#: modules/migrator/migrator.php:189
+msgid "Invalid URL."
+msgstr ""
+
+#: modules/migrator/migrator.php:205
+msgid "Could not retrieve content from the Tumblr URL."
+msgstr ""
+
+#: modules/migrator/migrator.php:300
+msgid "Tumblr content successfully imported!"
+msgstr ""
+
+#: modules/migrator/migrator.php:323
+msgid "Text feather must be enabled to import from TextPattern."
+msgstr ""
+
+#: modules/migrator/migrator.php:326 modules/migrator/migrator.php:429
+msgid "Host cannot be empty."
+msgstr ""
+
+#: modules/migrator/migrator.php:329 modules/migrator/migrator.php:432
+msgid "Username cannot be empty."
+msgstr ""
+
+#: modules/migrator/migrator.php:332 modules/migrator/migrator.php:435
+msgid "Password cannot be empty."
+msgstr ""
+
+#: modules/migrator/migrator.php:335 modules/migrator/migrator.php:438
+msgid "Database cannot be empty."
+msgstr ""
+
+#: modules/migrator/migrator.php:346
+msgid "Could not connect to the TextPattern database."
+msgstr ""
+
+#: modules/migrator/migrator.php:354 modules/migrator/migrator.php:456
+msgid "Database Error"
+msgstr ""
+
+#: modules/migrator/migrator.php:402
+msgid "TextPattern content successfully imported!"
+msgstr ""
+
+#: modules/migrator/migrator.php:426
+msgid "Text feather must be enabled to import from MovableType."
+msgstr ""
+
+#: modules/migrator/migrator.php:449
+msgid "Could not connect to the MovableType database."
+msgstr ""
+
+#: modules/migrator/migrator.php:531
+msgid "MovableType content successfully imported!"
+msgstr ""
