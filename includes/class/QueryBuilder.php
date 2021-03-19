@@ -41,8 +41,10 @@
 
             $query.= ($conds ? "WHERE ".self::build_where($sql, $conds, $tables, $params)."\n" : "").
                      ($group ? "GROUP BY ".self::build_group($sql, $group, $tables)."\n" : "").
-                     ($order ? "ORDER BY ".self::build_order($sql, $order, $tables)."\n" : "").
-                     self::build_limits($sql, $offset, $limit);
+                     ($order ? "ORDER BY ".self::build_order($sql, $order, $tables)."\n" : "");
+
+            if (empty($left_join))
+                $query.= self::build_limits($sql, $offset, $limit);
 
             return $query;
         }
