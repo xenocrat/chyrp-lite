@@ -107,9 +107,6 @@
          *     <Model::search>
          */
         static function find($options = array(), $options_for_object = array()) {
-            # LIMIT cannot be used because of LEFT JOIN attributes.
-            unset($options["limit"]);
-
             if (isset($options["where"]) and !is_array($options["where"]))
                 $options["where"] = array($options["where"]);
             elseif (!isset($options["where"]))
