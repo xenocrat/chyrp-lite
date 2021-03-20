@@ -261,7 +261,6 @@
                 word-wrap: break-word;
                 background-color: #efefef;
                 padding: 2px;
-                color: #4f4f4f;
             }
             strong {
                 font-weight: normal;
