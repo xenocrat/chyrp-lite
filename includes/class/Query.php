@@ -38,7 +38,7 @@
                 $target = $trace[$index = 0];
 
                 # Getting a trace from these files doesn't help much.
-                while (match(array("/SQL\.php/", "/Model\.php/", "/\/model\//"), $target["file"])) {
+                while (match_any(array("/SQL\.php/", "/Model\.php/", "/\/model\//"), $target["file"])) {
                     if (isset($trace[$index + 1]["file"]))
                         $target = $trace[$index++];
                     else

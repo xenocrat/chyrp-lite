@@ -797,7 +797,7 @@
     }
 
     /**
-     * Function: match
+     * Function: match_any
      * Try to match a string against an array of regular expressions.
      *
      * Parameters:
@@ -807,7 +807,7 @@
      * Returns:
      *     Whether or not the match succeeded.
      */
-    function match($try, $haystack) {
+    function match_any($try, $haystack) {
         foreach ((array) $try as $needle)
             if (preg_match($needle, $haystack))
                 return true;
