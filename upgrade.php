@@ -358,6 +358,28 @@
             error(__("Error"), __("Could not write the configuration file."));
     }
 
+    /**
+     * Function: fix_sqlite_post_pinned
+     * Fixes the pinned status of posts created without bool-to-int conversion.
+     *
+     * Versions: 2021.01 => 2021.02
+     */
+    function fix_sqlite_post_pinned() {
+        $sql = SQL::current();
+
+        if ($sql->adapter != "sqlite")
+            return;
+
+        $results = $sql->select("posts",
+                                "id",
+                                array("pinned" => ""))->fetchAll();
+
+        foreach ($results as $result)
+            $sql->update("posts",
+                         array("id" => $result["id"]),
+                         array("pinned" => false));
+    }
+
     #---------------------------------------------
     # Output Starts
     #---------------------------------------------
@@ -603,6 +625,7 @@
         remove_ajax();
         disable_simplemde();
         add_search_pages();
+        fix_sqlite_post_pinned();
 
         # Perform module upgrades.
         foreach ($config->enabled_modules as $module)
