@@ -2098,8 +2098,8 @@ Returns:
     A formatted number with the requested $precision.
 
 
-Function: match
----------------
+Function: match_any
+-------------------
 Try to match a string against an array of regular expressions.
 
 Parameters:

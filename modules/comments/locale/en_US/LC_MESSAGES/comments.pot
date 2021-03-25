@@ -405,7 +405,7 @@ msgstr ""
 msgid "Are you sure you want to permanently delete this comment?"
 msgstr ""
 
-#: modules/comments/model/Comment.php:387
+#: modules/comments/model/Comment.php:389
 msgid "Anon"
 msgstr ""
 

@@ -454,7 +454,7 @@ Arguments:
 add_post
 --------
 Called from:
-	includes/model/Post.php on line 251
+	includes/model/Post.php on line 248
 
 Arguments:
 	$post, $options
@@ -463,7 +463,7 @@ Arguments:
 update_post
 -----------
 Called from:
-	includes/model/Post.php on line 352
+	includes/model/Post.php on line 349
 
 Arguments:
 	$post, $this, $options
@@ -472,7 +472,7 @@ Arguments:
 publish_post
 ------------
 Called from:
-	includes/model/Post.php on line 891
+	includes/model/Post.php on line 888
 
 Arguments:
 	$post
@@ -1022,7 +1022,7 @@ markup_text
 Called from:
 	includes/controller/Ajax.php on line 146
 	includes/model/Page.php on line 275
-	modules/comments/model/Comment.php on line 404
+	modules/comments/model/Comment.php on line 406
 
 Target:
 	$content
@@ -1233,7 +1233,7 @@ Target:
 before_add_post
 ---------------
 Called from:
-	includes/model/Post.php on line 223
+	includes/model/Post.php on line 220
 
 Target:
 	$new_values
@@ -1242,7 +1242,7 @@ Target:
 before_add_post_attributes
 --------------------------
 Called from:
-	includes/model/Post.php on line 231
+	includes/model/Post.php on line 228
 
 Target:
 	$attributes
@@ -1251,7 +1251,7 @@ Target:
 before_update_post
 ------------------
 Called from:
-	includes/model/Post.php on line 318
+	includes/model/Post.php on line 315
 
 Target:
 	$new_values
@@ -1260,7 +1260,7 @@ Target:
 before_update_post_attributes
 -----------------------------
 Called from:
-	includes/model/Post.php on line 326
+	includes/model/Post.php on line 323
 
 Target:
 	$attributes
@@ -1269,7 +1269,7 @@ Target:
 title_from_excerpt
 ------------------
 Called from:
-	includes/model/Post.php on line 556
+	includes/model/Post.php on line 553
 
 Target:
 	$excerpt
@@ -1278,7 +1278,7 @@ Target:
 title
 -----
 Called from:
-	includes/model/Post.php on line 581
+	includes/model/Post.php on line 578
 
 Target:
 	$title
@@ -1290,7 +1290,7 @@ Arguments:
 excerpt
 -------
 Called from:
-	includes/model/Post.php on line 598
+	includes/model/Post.php on line 595
 
 Target:
 	$excerpt
@@ -1302,7 +1302,7 @@ Arguments:
 feed_content
 ------------
 Called from:
-	includes/model/Post.php on line 615
+	includes/model/Post.php on line 612
 
 Target:
 	$feed_content
@@ -1314,7 +1314,7 @@ Arguments:
 filter_post
 -----------
 Called from:
-	includes/model/Post.php on line 677
+	includes/model/Post.php on line 674
 
 Target:
 	$this
@@ -1389,7 +1389,7 @@ Arguments:
 filter_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 401
+	modules/comments/model/Comment.php on line 403
 
 Target:
 	$this
@@ -1398,7 +1398,7 @@ Target:
 markup_comment_text
 -------------------
 Called from:
-	modules/comments/model/Comment.php on line 404
+	modules/comments/model/Comment.php on line 406
 
 Target:
 	$this->body
