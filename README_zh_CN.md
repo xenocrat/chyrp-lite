@@ -85,7 +85,7 @@ Chyrp Lite还实现了一个完整的与WordPress兼容的MetaWeblog XML-RPC API
 
 ## 文档
 
-Chyrp Lite [wiki](https://github.com/xenocrat/chyrp-lite/wiki) 为用户和开发者提供了非常全面的文档。
+Chyrp Lite [wiki](https://chyrplite.net/wiki/) 为用户和开发者提供了非常全面的文档。
 
 ## 作者
 

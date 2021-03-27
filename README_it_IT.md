@@ -92,7 +92,7 @@ Puoi aggiornare Chyrp Lyte in sei passaggi:
 
 ## Documentazione
 
-Chyrp Lite [wiki](https://github.com/xenocrat/chyrp-lite/wiki) ha una comprensiva documentazione per utenti e Developers.
+Chyrp Lite [wiki](https://chyrplite.net/wiki/) ha una comprensiva documentazione per utenti e Developers.
 
 ## Autori
 

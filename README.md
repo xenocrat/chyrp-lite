@@ -89,7 +89,7 @@ You can upgrade Chyrp Lite in six steps:
 
 ## Documentation
 
-The Chyrp Lite [wiki](https://github.com/xenocrat/chyrp-lite/wiki) has comprehensive documentation
+The Chyrp Lite [wiki](https://chyrplite.net/wiki/) has comprehensive documentation
 for users and developers.
 
 ## Authors
