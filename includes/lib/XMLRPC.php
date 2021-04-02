@@ -129,15 +129,20 @@
             $posts = array();
             $array = array();
 
-            for ($i = 0; $i < $limit; $i++)
-                if (isset($results[0][$i]))
-                    $posts[] = new Post(null, array("read_from" => $results[0][$i],
-                                                    "filter" => false));
+            foreach ($results[0] as $result) {
+                $new = new Post(null, array("read_from" => $result,
+                                            "filter" => false));
 
-            foreach ($posts as $post) {
-                if (!$post->editable($user) and !$post->deletable($user))
+                if (!$new->editable($user) and !$new->deletable($user))
                     continue;
 
+                $posts[] = $new;
+
+                if (count($posts) >= $limit)
+                    break;
+            }
+
+            foreach ($posts as $post) {
                 $struct = array("postid"      => $post->id,
                                 "userid"      => $post->user_id,
                                 "title"       => "",
