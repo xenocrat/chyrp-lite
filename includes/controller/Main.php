@@ -168,6 +168,19 @@
         }
 
         /**
+         * Function: main_updated
+         * Grabs the posts that have been updated.
+         */
+        public function main_updated() {
+            $this->display(array("pages".DIR."updated", "pages".DIR."index"),
+                           array("posts" => new Paginator(Post::find(
+                           array("placeholders" => true,
+                                 "where" => array("updated_at >" => "0001-01-01 00:00:00"),
+                                 "order" => "updated_at DESC, created_at DESC, id DESC")),
+                                 $this->post_limit)));
+        }
+
+        /**
          * Function: main_archive
          * Grabs the posts for the archive page.
          */
