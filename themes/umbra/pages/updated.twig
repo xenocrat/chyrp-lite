@@ -1,0 +1,12 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block content %}
+{% if posts.paginated is not empty %}
+<h3 role="status" class="filter">{{ "Updated posts" | translate }}</h3>
+{% endif %}
+{% for post in posts.paginated %}
+{% include(["feathers" ~ DIR ~ post.feather ~ ".twig", "feathers" ~ DIR ~ "missing.twig"]) %}
+{% else %}
+<h3 role="status" class="filter">{{ "There aren't any updated posts" | translate }}</h3>
+{% endfor %}
+{% endblock %}
