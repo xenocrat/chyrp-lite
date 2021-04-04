@@ -6,7 +6,7 @@
 
     # Constant: DEBUG
     # Should Chyrp use debugging processes?
-    define('DEBUG', false);
+    define('DEBUG', file_exists(dirname(__FILE__).DIRECTORY_SEPARATOR."DEBUG"));
 
     # Constant: CHYRP_VERSION
     # Version number for this release.
