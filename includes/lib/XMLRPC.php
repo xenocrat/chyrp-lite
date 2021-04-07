@@ -130,6 +130,9 @@
             $array = array();
 
             foreach ($results[0] as $result) {
+                if (count($posts) >= $limit)
+                    break;
+
                 $new = new Post(null, array("read_from" => $result,
                                             "filter" => false));
 
@@ -137,9 +140,6 @@
                     continue;
 
                 $posts[] = $new;
-
-                if (count($posts) >= $limit)
-                    break;
             }
 
             foreach ($posts as $post) {
