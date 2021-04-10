@@ -28,6 +28,10 @@
             return $scripts;
         }
 
+        public function javascript() {
+            include MODULES_DIR.DIR."mathjax".DIR."javascript.php";
+        }
+
         public function admin_mathjax_settings($admin) {
             $config = Config::current();
 
