@@ -15,14 +15,14 @@
 {% for post in month %}
 <li>
 <article class="post archive {{ post.feather }}" id="post_{{ post.id }}">
-{% if post.title is not empty and post.feather != "photo" and not (post.feather == "uploader" and post.image is defined) %}
-<h4 class="archive">{{ post.title | striptags | normalize | truncate(20) }}</h4>
-{% endif %}
 {% if post.feather == "photo" %}
 {{ post.filename | thumbnail(post.alt_text, false, ["max_width=196", "quality=60", "square=1"], "(max-width: 639px) 95vw, 196px") }}
 {% elseif post.feather == "uploader" and post.image is defined %}
 {{ post.image | thumbnail("", false, ["max_width=196", "quality=60", "square=1"], "(max-width: 639px) 95vw, 196px") }}
 {% else %}
+{% if post.title is not empty %}
+<h4 class="archive">{{ post.title | striptags | normalize | truncate(20) }}</h4>
+{% endif %}
 <p>{{ post.excerpt() | striptags | normalize | oneof(post.slug) }}</p>
 {% endif %}
 <a href="{{ post.url() }}" class="archive_post_link">
