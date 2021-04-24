@@ -918,7 +918,7 @@ a.emblem.preview {
     max-width: 100%;
 }
 .drag_highlight {
-    box-shadow: 0px 4px 16px 2px rgba(79, 79, 79, 0.5) !important;
+    background-color: #fffceb;
 }
 
 /* Group: iFrames */
