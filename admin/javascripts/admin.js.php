@@ -246,11 +246,39 @@ var Write = {
 
         // Support drag-and-drop image file uploads.
         $("#write_form textarea, #edit_form textarea").each(function() {
-            $(this).on("dragover", Write.dragover).
-                    on("dragenter", Write.dragenter).
-                    on("dragleave", Write.dragleave).
-                    on("drop", Write.drop);
-        });   
+            var target = $(this);
+
+            target.on("dragover", Write.dragover).
+                   on("dragenter", Write.dragenter).
+                   on("dragleave", Write.dragleave).
+                   on("drop", Write.drop);
+        });
+
+        // Add a word counter to textarea elements.
+        $("#write_form textarea, #edit_form textarea").each(function() {
+            var target = $(this);
+
+            target.after(
+                $("<span>", {"id": target.attr("id") + "_tray"}
+            ).addClass("options_tray"));
+
+            var tray = $("#" + target.attr("id") + "_tray");
+            var regex = /\p{White_Space}+/gu;
+            var label = '<?php echo __("Words:", "admin"); ?>';
+
+            target.on("input", function(e) {
+                var words = target.val();
+                var count = words.trim().match(regex);
+                var total = !!count ? count.length + 1 : 1 ;
+
+                if (total == 1 && words.match(/^\p{White_Space}*$/gu))
+                    total = 0;
+
+                tray.html(label + " " + total);
+            });
+
+            target.trigger("input");
+        });
     },
     dragenter: function(e) {
         $(e.target).addClass("drag_highlight");

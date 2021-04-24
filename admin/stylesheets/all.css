@@ -489,6 +489,7 @@ code {
     font-style: normal;
 }
 code {
+    font-size: 0.8rem;
     background-color: #efefef;
     padding: 0px 2px;
     color: #4f4f4f;
@@ -848,6 +849,17 @@ span.options_extra {
     padding-top: 1rem;
     max-height: 10rem;
     overflow-y: auto;
+}
+span.options_tray {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    font-size: 0.67rem;
+    border: 1px solid #dfdfdf;
+    border-top: none;padding: 0.25rem 0.5rem;
+    background-color: #fbfbfb;
+    border-bottom-left-radius: 0.8em;
+    border-bottom-right-radius: 0.8em;
 }
 
 /* Group: Helpers & General */
