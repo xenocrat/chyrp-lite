@@ -298,13 +298,14 @@ var Write = {
         if (!!dt && !!dt.files && dt.files.length > 0) {
             var file = dt.files[0];
             var form = new FormData();
+            var tray = $("#" + $(e.target).attr("id") + "_tray");
 
             if (file.type.indexOf("image/") == 0) {
                 form.set("action", "file_upload");
                 form.set("hash", Visitor.token);
                 form.set("file", file, file.name);
 
-                $(e.target).loader();
+                tray.loader().html('<?php echo __("Uploading...", "admin"); ?>');
 
                 // Upload the file and insert the tag if successful.
                 $.ajax({
@@ -320,10 +321,12 @@ var Write = {
                         '<img alt="" src="' + response.data.url + '">' ;
 
                     e.target.setRangeText(text);
+                    $(e.target).trigger("input");
                 }).fail(function(response) {
-                    alert('<?php echo __("Oops! Something went wrong on this web page."); ?>');
+                    tray.html('<?php echo __("Oops! Something went wrong on this web page."); ?>');
                 }).always(function(response) {
-                    $(e.target).loader(true).removeClass("drag_highlight");
+                    tray.loader(true);
+                    $(e.target).removeClass("drag_highlight");
                 });
             }
         }
