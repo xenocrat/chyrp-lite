@@ -367,7 +367,7 @@
 
             $visitor = Visitor::current();
 
-            if (!$visitor->group->can("view_draft", "edit_draft", "edit_post", "delete_draft", "delete_post"))
+            if (!$visitor->group->can("edit_draft", "edit_post", "delete_draft", "delete_post"))
                 $where["user_id"] = $visitor->id;
 
             $results = Post::find(array("placeholders" => true,
@@ -1242,11 +1242,6 @@
                 list($where, $params) = keywords($_POST['filter_posts'],
                     "post_attributes.value LIKE :query OR url LIKE :query", "posts");
 
-                $visitor = Visitor::current();
-
-                if (!$visitor->group->can("view_draft", "edit_draft", "edit_post", "delete_draft", "delete_post"))
-                    $where["user_id"] = $visitor->id;
-
                 $results = Post::find(array("placeholders" => true,
                                             "drafts" => true,
                                             "where" => $where,
@@ -1310,7 +1305,6 @@
 
             if (isset($_POST['pages'])) {
                 fallback($_POST['filter_pages'], "");
-
                 list($where, $params) = keywords($_POST['filter_pages'],
                                         "title LIKE :query OR body LIKE :query", "pages");
 
