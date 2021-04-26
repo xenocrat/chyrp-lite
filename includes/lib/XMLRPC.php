@@ -120,10 +120,14 @@
             global $user;
 
             $trigger = Trigger::current();
+            $where = array(Post::feathers());
             $limit = (int) fallback($args[3], Config::current()->posts_per_page);
 
+            if (!$user->group->can("edit_draft", "edit_post", "delete_draft", "delete_post"))
+                $where["user_id"] = $user->id;
+
             $results = Post::find(array("placeholders" => true,
-                                        "where" => array(Post::feathers()),
+                                        "where" => $where,
                                         "order" => "created_at DESC, id DESC"));
 
             $posts = array();
