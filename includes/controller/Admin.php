@@ -1209,7 +1209,8 @@
                 }
             } else {
                 $groups = new Paginator(Group::find(
-                    array("placeholders" => true, "order" => "id ASC")), $this->post_limit);
+                    array("placeholders" => true,
+                          "order" => "id ASC")), $this->post_limit);
             }
 
             $this->display("pages".DIR."manage_groups", array("groups" => $groups));
@@ -1252,11 +1253,14 @@
                 foreach ($results[0] as $result)
                     $ids[] = $result["id"];
 
-                if (!empty($ids))
-                    $posts = Post::find(array("drafts" => true, "where" => array("id" => $ids), "order" => "id ASC"),
+                if (!empty($ids)) {
+                    $posts = Post::find(array("drafts" => true,
+                                              "where" => array("id" => $ids),
+                                              "order" => "id ASC"),
                                         array("filter" => false));
-                else
+                } else {
                     $posts = array();
+                }
 
                 $posts_atom = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
                 $posts_atom.= '<feed xmlns="http://www.w3.org/2005/Atom" xmlns:chyrp="http://chyrp.net/export/1.0/">'."\n";
@@ -1308,7 +1312,9 @@
                 list($where, $params) = keywords($_POST['filter_pages'],
                                         "title LIKE :query OR body LIKE :query", "pages");
 
-                $pages = Page::find(array("where" => $where, "params" => $params, "order" => "id ASC"),
+                $pages = Page::find(array("where" => $where,
+                                          "params" => $params,
+                                          "order" => "id ASC"),
                                     array("filter" => false));
 
                 $pages_atom = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
@@ -1355,7 +1361,9 @@
                 fallback($_POST['filter_groups'], "");
                 list($where, $params) = keywords($_POST['filter_groups'], "name LIKE :query", "groups");
 
-                $groups = Group::find(array("where" => $where, "params" => $params, "order" => "id ASC"));
+                $groups = Group::find(array("where" => $where,
+                                            "params" => $params,
+                                            "order" => "id ASC"));
 
                 $groups_json = array();
 
@@ -1370,7 +1378,9 @@
                 list($where, $params) = keywords($_POST['filter_users'],
                     "login LIKE :query OR full_name LIKE :query OR email LIKE :query OR website LIKE :query", "users");
 
-                $users = User::find(array("where" => $where, "params" => $params, "order" => "id ASC"));
+                $users = User::find(array("where" => $where,
+                                          "params" => $params,
+                                          "order" => "id ASC"));
 
                 $users_json = array();
 
