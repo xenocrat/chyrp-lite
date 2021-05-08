@@ -1386,6 +1386,9 @@
         # Strip invalid tags.
         $text = preg_replace("/<([^a-z\/!]|\/(?![a-z])|!(?!--))[^>]*>/i", " ", $text);
 
+        # Strip style tags.
+        $text = preg_replace("/<\/?style[^>]*>/i", " ", $text);
+
         # Strip script tags.
         $text = preg_replace("/<\/?script[^>]*>/i", " ", $text);
 
