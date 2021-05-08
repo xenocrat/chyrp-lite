@@ -4,8 +4,15 @@
 {% if tag_cloud is not empty %}
 <div class="tag_cloud standalone">
 <h2>{{ "Tag cloud" | translate }}</h2>
+<style nonce="{{ tag_nonce }}">
 {% for tag in tag_cloud %}
-<a class="tag" href="{{ tag.url }}" style="font-size: {{ tag.size + 100 }}%" title="{{ tag.title }}">{{ tag.name }}</a>
+a.tag.s{{ tag.size + 100 }} {
+font-size: {{ tag.size + 100 }}%;
+}
+{% endfor %}
+</style>
+{% for tag in tag_cloud %}
+<a class="tag s{{ tag.size + 100 }}" href="{{ tag.url }}" title="{{ tag.title }}">{{ tag.name }}</a>
 {% endfor %}
 </div>
 {% else %}
