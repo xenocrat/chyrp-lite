@@ -2488,7 +2488,7 @@
         $route = Route::current();
         $theme = Theme::current();
         $trigger = Trigger::current();
-        $nonce = base64_encode(token("nonce"));
+        $nonce = "";
 
         $script = (ADMIN) ?
             MAIN_DIR.DIR."admin".DIR."javascripts".DIR."admin.js.php" :
