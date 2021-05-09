@@ -861,6 +861,12 @@ span.options_tray {
     border-bottom-left-radius: 0.8em;
     border-bottom-right-radius: 0.8em;
 }
+textarea:invalid + span.options_tray {
+    border-color: #ff7f00;
+}
+textarea:focus + span.options_tray {
+    border-color: #1e57ba;
+}
 
 /* Group: Helpers & General */
 
