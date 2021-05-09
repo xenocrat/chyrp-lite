@@ -398,9 +398,17 @@ msgstr "Posts mit den Tags &#8220;%s&#8221;"
 msgid "Tag cloud"
 msgstr "Tagcloud"
 
-#: themes/sparrow/pages/tags.twig:12
+#: themes/sparrow/pages/tags.twig:19
 msgid "Nothing here yet!"
 msgstr "Hier ist noch nichts!"
+
+#: themes/sparrow/pages/updated.twig:5
+msgid "Updated posts"
+msgstr "Aktualisierte Posts"
+
+#: themes/sparrow/pages/updated.twig:10
+msgid "There aren't any updated posts"
+msgstr "Es gibt keine aktualisierten Posts"
 
 #: themes/sparrow/pages/view.twig:6
 msgid "&larr; Next post"

@@ -346,8 +346,16 @@ msgstr ""
 msgid "Tag cloud"
 msgstr ""
 
-#: themes/umbra/pages/tags.twig:12
+#: themes/umbra/pages/tags.twig:19
 msgid "Nothing here yet!"
+msgstr ""
+
+#: themes/umbra/pages/updated.twig:5
+msgid "Updated posts"
+msgstr ""
+
+#: themes/umbra/pages/updated.twig:10
+msgid "There aren't any updated posts"
 msgstr ""
 
 #: themes/umbra/pages/view.twig:8

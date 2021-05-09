@@ -354,9 +354,17 @@ msgstr "Post contrassegnati con &#8220;%s&#8221;"
 msgid "Tag cloud"
 msgstr "Tag cloud"
 
-#: themes/umbra/pages/tags.twig:12
+#: themes/umbra/pages/tags.twig:19
 msgid "Nothing here yet!"
 msgstr "Non c'è ancora niente!"
+
+#: themes/umbra/pages/updated.twig:5
+msgid "Updated posts"
+msgstr "Post aggiornati"
+
+#: themes/umbra/pages/updated.twig:10
+msgid "There aren't any updated posts"
+msgstr "Non ci sono post aggiornati"
 
 #: themes/umbra/pages/view.twig:8
 msgid "Pingbacks"

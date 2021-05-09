@@ -205,12 +205,12 @@ msgid "Are you sure you want to proceed?"
 msgstr ""
 
 #: admin/javascripts/admin.js.php:198
-#: admin/javascripts/admin.js.php:357
+#: admin/javascripts/admin.js.php:388
 msgid "Close"
 msgstr ""
 
 #: admin/javascripts/admin.js.php:205
-#: admin/javascripts/admin.js.php:364
+#: admin/javascripts/admin.js.php:395
 msgid "close"
 msgstr ""
 
@@ -221,6 +221,14 @@ msgstr ""
 
 #: admin/javascripts/admin.js.php:241
 msgid "preview"
+msgstr ""
+
+#: admin/javascripts/admin.js.php:267
+msgid "Words:"
+msgstr ""
+
+#: admin/javascripts/admin.js.php:308
+msgid "Uploading..."
 msgstr ""
 
 #: admin/layouts/default.twig:60

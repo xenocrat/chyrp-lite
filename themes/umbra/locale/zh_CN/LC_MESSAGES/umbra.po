@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: blossom\n"
+"Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: 筱枫 <q849958241@163.com>\n"
@@ -352,9 +352,17 @@ msgstr "&#8220;%s&#8221; 的帖子标签"
 msgid "Tag cloud"
 msgstr "标签云"
 
-#: themes/umbra/pages/tags.twig:12
+#: themes/umbra/pages/tags.twig:19
 msgid "Nothing here yet!"
 msgstr "然而这里什么也没有！"
+
+#: themes/umbra/pages/updated.twig:5
+msgid "Updated posts"
+msgstr "更新后的帖子"
+
+#: themes/umbra/pages/updated.twig:10
+msgid "There aren't any updated posts"
+msgstr "没有任何更新的帖子"
 
 #: themes/umbra/pages/view.twig:8
 msgid "Pingbacks"

@@ -425,9 +425,17 @@ msgstr "Posts mit den Tags &#8220;%s&#8221;"
 msgid "Tag cloud"
 msgstr "Tagcloud"
 
-#: themes/topaz/pages/tags.twig:13
+#: themes/topaz/pages/tags.twig:20
 msgid "Nothing here yet!"
 msgstr "Hier ist noch nichts!"
+
+#: themes/topaz/pages/updated.twig:6
+msgid "Updated posts"
+msgstr "Aktualisierte Posts"
+
+#: themes/topaz/pages/updated.twig:13
+msgid "There aren't any updated posts"
+msgstr "Es gibt keine aktualisierten Posts"
 
 #: themes/topaz/pages/view.twig:6
 msgid "Next post"

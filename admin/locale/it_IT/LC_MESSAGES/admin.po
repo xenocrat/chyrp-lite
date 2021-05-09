@@ -260,11 +260,11 @@ msgstr "Spunta tutto"
 msgid "Are you sure you want to proceed?"
 msgstr "Sei sicuro di volere procedere?"
 
-#: admin/javascripts/admin.js.php:198 admin/javascripts/admin.js.php:357
+#: admin/javascripts/admin.js.php:198 admin/javascripts/admin.js.php:388
 msgid "Close"
 msgstr "Chiudi"
 
-#: admin/javascripts/admin.js.php:205 admin/javascripts/admin.js.php:364
+#: admin/javascripts/admin.js.php:205 admin/javascripts/admin.js.php:395
 msgid "close"
 msgstr "chiudi"
 
@@ -275,6 +275,14 @@ msgstr "Anteprima"
 #: admin/javascripts/admin.js.php:241
 msgid "preview"
 msgstr "anteprima"
+
+#: admin/javascripts/admin.js.php:267
+msgid "Words:"
+msgstr "Parole:"
+
+#: admin/javascripts/admin.js.php:308
+msgid "Uploading..."
+msgstr "Caricamento in corso…."
 
 #: admin/layouts/default.twig:60
 #, php-format

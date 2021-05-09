@@ -1620,6 +1620,11 @@ Function: main_index
 Grabs the posts for the main index.
 
 
+Function: main_updated
+----------------------
+Grabs the posts that have been updated.
+
+
 Function: main_archive
 ----------------------
 Grabs the posts for the archive page.

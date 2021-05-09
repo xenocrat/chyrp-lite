@@ -17,7 +17,7 @@ Arguments:
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 401
+	admin/javascripts/admin.js.php on line 432
 
 
 admin_head
@@ -245,13 +245,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 1238
+	includes/controller/Admin.php on line 1239
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1523
+	includes/controller/Admin.php on line 1527
 
 Arguments:
 	$group
@@ -260,7 +260,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1548
+	includes/controller/Admin.php on line 1552
 
 Arguments:
 	$user
@@ -269,7 +269,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1587
+	includes/controller/Admin.php on line 1591
 
 Arguments:
 	$entry, $post
@@ -278,7 +278,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1617
+	includes/controller/Admin.php on line 1621
 
 Arguments:
 	$entry, $page
@@ -287,7 +287,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1621
+	includes/controller/Admin.php on line 1625
 
 Arguments:
 	$imports
@@ -296,27 +296,27 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1904
+	includes/controller/Admin.php on line 1908
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1912
+	includes/controller/Admin.php on line 1916
 
 
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 384
+	includes/controller/Main.php on line 397
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 526
-	includes/controller/Main.php on line 560
-	includes/controller/Main.php on line 628
+	includes/controller/Main.php on line 539
+	includes/controller/Main.php on line 573
+	includes/controller/Main.php on line 641
 
 Arguments:
 	$user
@@ -325,13 +325,13 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 616
+	includes/controller/Main.php on line 629
 
 
 user_logged_out
 ---------------
 Called from:
-	includes/controller/Main.php on line 650
+	includes/controller/Main.php on line 663
 
 Arguments:
 	$user
@@ -340,7 +340,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 814
+	includes/controller/Main.php on line 827
 
 Arguments:
 	$post, $feed
@@ -355,19 +355,19 @@ Called from:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 2179
+	includes/helpers.php on line 2182
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 2196
+	includes/helpers.php on line 2199
 
 
 send_correspondence
 -------------------
 Called from:
-	includes/helpers.php on line 2477
+	includes/helpers.php on line 2480
 
 Arguments:
 	$action, $params
@@ -376,7 +376,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 2505
+	includes/helpers.php on line 2508
 
 Arguments:
 	$ob
@@ -394,7 +394,7 @@ Arguments:
 metaWeblog_newPost
 ------------------
 Called from:
-	includes/lib/XMLRPC.php on line 288
+	includes/lib/XMLRPC.php on line 297
 
 Arguments:
 	$struct, $post
@@ -403,7 +403,7 @@ Arguments:
 metaWeblog_editPost
 -------------------
 Called from:
-	includes/lib/XMLRPC.php on line 356
+	includes/lib/XMLRPC.php on line 365
 
 Arguments:
 	$struct, $post
@@ -903,7 +903,7 @@ Arguments:
 posts_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 1302
+	includes/controller/Admin.php on line 1301
 
 Target:
 	$posts_atom
@@ -927,7 +927,7 @@ Arguments:
 export
 ------
 Called from:
-	includes/controller/Admin.php on line 1414
+	includes/controller/Admin.php on line 1418
 
 Target:
 	$exports
@@ -936,7 +936,7 @@ Target:
 before_import
 -------------
 Called from:
-	includes/controller/Admin.php on line 1492
+	includes/controller/Admin.php on line 1496
 
 Target:
 	$imports
@@ -945,7 +945,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 2186
+	includes/controller/Admin.php on line 2190
 
 Target:
 	$write
@@ -954,7 +954,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2223
+	includes/controller/Admin.php on line 2227
 
 Target:
 	$manage
@@ -963,7 +963,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 2248
+	includes/controller/Admin.php on line 2252
 
 Target:
 	$settings
@@ -972,7 +972,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2266
+	includes/controller/Admin.php on line 2270
 
 Target:
 	$extend
@@ -981,7 +981,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2327
+	includes/controller/Admin.php on line 2331
 
 Target:
 	$this->context
@@ -1031,7 +1031,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 883
+	includes/controller/Main.php on line 896
 
 Target:
 	$this->context
@@ -1052,7 +1052,7 @@ Arguments:
 link_regexp
 -----------
 Called from:
-	includes/helpers.php on line 1545
+	includes/helpers.php on line 1548
 
 Target:
 	$expressions
@@ -1061,7 +1061,7 @@ Target:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 2407
+	includes/helpers.php on line 2410
 
 Target:
 	$function
@@ -1070,7 +1070,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 2506
+	includes/helpers.php on line 2509
 
 Target:
 	$nonce
@@ -1088,8 +1088,8 @@ Target:
 metaWeblog_getPost
 ------------------
 Called from:
-	includes/lib/XMLRPC.php on line 150
-	includes/lib/XMLRPC.php on line 224
+	includes/lib/XMLRPC.php on line 159
+	includes/lib/XMLRPC.php on line 233
 
 Target:
 	$struct
@@ -1101,7 +1101,7 @@ Arguments:
 metaWeblog_getCategories
 ------------------------
 Called from:
-	includes/lib/XMLRPC.php on line 164
+	includes/lib/XMLRPC.php on line 173
 
 Target:
 	$categories
@@ -1110,7 +1110,7 @@ Target:
 metaWeblog_before_newPost
 -------------------------
 Called from:
-	includes/lib/XMLRPC.php on line 275
+	includes/lib/XMLRPC.php on line 284
 
 Target:
 	$values
@@ -1122,7 +1122,7 @@ Arguments:
 metaWeblog_before_editPost
 --------------------------
 Called from:
-	includes/lib/XMLRPC.php on line 346
+	includes/lib/XMLRPC.php on line 355
 
 Target:
 	$values
@@ -1402,3 +1402,12 @@ Called from:
 
 Target:
 	$this->body
+
+
+stylesheets_nonce
+-----------------
+Called from:
+	modules/tags/tags.php on line 455
+
+Target:
+	$nonce

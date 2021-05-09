@@ -50,7 +50,7 @@ msgstr ""
 #: modules/tags/admin/pages/edit_tags.twig:10
 #: modules/tags/admin/pages/manage_tags.twig:52 modules/tags/tags.php:143
 #: modules/tags/tags.php:188 modules/tags/tags.php:195
-#: modules/tags/tags.php:453
+#: modules/tags/tags.php:456
 msgid "Tags"
 msgstr ""
 
@@ -196,7 +196,7 @@ msgstr ""
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr ""
 
-#: modules/tags/tags.php:557
+#: modules/tags/tags.php:560
 #, php-format
 msgid "%d post tagged with &#8220;%s&#8221;"
 msgid_plural "%d posts tagged with &#8220;%s&#8221;"

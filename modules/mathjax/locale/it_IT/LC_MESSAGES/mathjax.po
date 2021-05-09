@@ -27,7 +27,7 @@ msgstr "Supporto TeX e LaTeX"
 msgid "MathML Support"
 msgstr "Supporto MathML"
 
-#: modules/mathjax/info.php:3 modules/mathjax/mathjax.php:53
+#: modules/mathjax/info.php:3 modules/mathjax/mathjax.php:57
 msgid "MathJax"
 msgstr "MathJax"
 

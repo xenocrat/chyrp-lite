@@ -434,8 +434,16 @@ msgstr ""
 msgid "Tag cloud"
 msgstr ""
 
-#: themes/topaz/pages/tags.twig:13
+#: themes/topaz/pages/tags.twig:20
 msgid "Nothing here yet!"
+msgstr ""
+
+#: themes/topaz/pages/updated.twig:6
+msgid "Updated posts"
+msgstr ""
+
+#: themes/topaz/pages/updated.twig:13
+msgid "There aren't any updated posts"
 msgstr ""
 
 #: themes/topaz/pages/view.twig:6

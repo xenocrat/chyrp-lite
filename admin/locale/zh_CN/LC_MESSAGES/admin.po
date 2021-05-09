@@ -244,11 +244,11 @@ msgstr "全部切换"
 msgid "Are you sure you want to proceed?"
 msgstr "确定继续？"
 
-#: admin/javascripts/admin.js.php:198 admin/javascripts/admin.js.php:357
+#: admin/javascripts/admin.js.php:198 admin/javascripts/admin.js.php:388
 msgid "Close"
 msgstr "关闭"
 
-#: admin/javascripts/admin.js.php:205 admin/javascripts/admin.js.php:364
+#: admin/javascripts/admin.js.php:205 admin/javascripts/admin.js.php:395
 msgid "close"
 msgstr "关闭"
 
@@ -259,6 +259,14 @@ msgstr "预览"
 #: admin/javascripts/admin.js.php:241
 msgid "preview"
 msgstr "预览"
+
+#: admin/javascripts/admin.js.php:267
+msgid "Words:"
+msgstr ""
+
+#: admin/javascripts/admin.js.php:308
+msgid "Uploading..."
+msgstr "上传中..."
 
 #: admin/layouts/default.twig:60
 #, php-format
