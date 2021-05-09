@@ -7,8 +7,8 @@
     header("Content-Type: text/html; charset=UTF-8");
 
     define('DEBUG',          true);
-    define('CHYRP_VERSION',  "2021.02");
-    define('CHYRP_CODENAME', "Abd al Kuri");
+    define('CHYRP_VERSION',  "2021.03");
+    define('CHYRP_CODENAME', "Northern");
     define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
     define('MAIN',           false);
     define('ADMIN',          false);
