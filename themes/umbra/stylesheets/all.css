@@ -501,7 +501,7 @@ ul.archive article.post.archive {
     height: 196px;
     overflow: hidden;
     font-size: 0.75em;
-    margin: 1rem 0rem 1rem 2rem;
+    margin: 2rem 0rem 0rem 2rem;
     padding: 8px;
     border: 1px solid lightgreen;
 }
@@ -774,16 +774,6 @@ div.metadata img.gravatar {
     }
     input, select {
         width: 100%;
-    }
-    h1.banner {
-        margin-bottom: 2rem;
-    }
-    div#mast_box {
-        padding: 2rem 1rem;
-    }
-    ul.navigation li > a {
-        display: inline-block;
-        margin: 0em 0.5em 2em 0.5em;
     }
     button#search_submit {
         display: none;
