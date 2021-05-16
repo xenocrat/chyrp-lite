@@ -695,75 +695,75 @@ msgstr "Du bist bereits eingeloggt."
 msgid "Missing argument."
 msgstr "Fehlendes Argument."
 
-#: includes/controller/Admin.php:2151
+#: includes/controller/Admin.php:2153
 msgid "Help"
 msgstr "Hilfe"
 
-#: includes/controller/Admin.php:2164
+#: includes/controller/Admin.php:2166
 msgid "Write"
 msgstr "Schreiben"
 
-#: includes/controller/Admin.php:2165
+#: includes/controller/Admin.php:2167
 msgid "Manage"
 msgstr "Verwalten"
 
-#: includes/controller/Admin.php:2166
+#: includes/controller/Admin.php:2168
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: includes/controller/Admin.php:2167
+#: includes/controller/Admin.php:2169
 msgid "Extend"
 msgstr "Erweitern"
 
-#: includes/controller/Admin.php:2177
+#: includes/controller/Admin.php:2179
 msgid "Page"
 msgstr "Seite"
 
-#: includes/controller/Admin.php:2206
+#: includes/controller/Admin.php:2208
 msgid "Posts"
 msgstr "Posts"
 
-#: includes/controller/Admin.php:2211
+#: includes/controller/Admin.php:2213
 msgid "Pages"
 msgstr "Seiten"
 
-#: includes/controller/Admin.php:2216 includes/controller/Admin.php:2248
+#: includes/controller/Admin.php:2218 includes/controller/Admin.php:2250
 msgid "Users"
 msgstr "Benutzer"
 
-#: includes/controller/Admin.php:2222
+#: includes/controller/Admin.php:2224
 msgid "Groups"
 msgstr "Gruppen"
 
-#: includes/controller/Admin.php:2230
+#: includes/controller/Admin.php:2232
 msgid "Import"
 msgstr "Import"
 
-#: includes/controller/Admin.php:2233
+#: includes/controller/Admin.php:2235
 msgid "Export"
 msgstr "Export"
 
-#: includes/controller/Admin.php:2246
+#: includes/controller/Admin.php:2248
 msgid "General"
 msgstr "Allgemein"
 
-#: includes/controller/Admin.php:2247
+#: includes/controller/Admin.php:2249
 msgid "Content"
 msgstr "Inhalt"
 
-#: includes/controller/Admin.php:2249
+#: includes/controller/Admin.php:2251
 msgid "Routes"
 msgstr "Routes"
 
-#: includes/controller/Admin.php:2265
+#: includes/controller/Admin.php:2267
 msgid "Modules"
 msgstr "Module"
 
-#: includes/controller/Admin.php:2266
+#: includes/controller/Admin.php:2268
 msgid "Feathers"
 msgstr "Feathers"
 
-#: includes/controller/Admin.php:2267
+#: includes/controller/Admin.php:2269
 msgid "Themes"
 msgstr "Themes"
 

@@ -879,76 +879,76 @@ msgstr ""
 msgid "Missing argument."
 msgstr ""
 
-#: includes/controller/Admin.php:2151
+#: includes/controller/Admin.php:2153
 msgid "Help"
 msgstr ""
 
-#: includes/controller/Admin.php:2164
+#: includes/controller/Admin.php:2166
 msgid "Write"
 msgstr ""
 
-#: includes/controller/Admin.php:2165
+#: includes/controller/Admin.php:2167
 msgid "Manage"
 msgstr ""
 
-#: includes/controller/Admin.php:2166
+#: includes/controller/Admin.php:2168
 msgid "Settings"
 msgstr ""
 
-#: includes/controller/Admin.php:2167
+#: includes/controller/Admin.php:2169
 msgid "Extend"
 msgstr ""
 
-#: includes/controller/Admin.php:2177
+#: includes/controller/Admin.php:2179
 msgid "Page"
 msgstr ""
 
-#: includes/controller/Admin.php:2206
+#: includes/controller/Admin.php:2208
 msgid "Posts"
 msgstr ""
 
-#: includes/controller/Admin.php:2211
+#: includes/controller/Admin.php:2213
 msgid "Pages"
 msgstr ""
 
-#: includes/controller/Admin.php:2216
-#: includes/controller/Admin.php:2248
+#: includes/controller/Admin.php:2218
+#: includes/controller/Admin.php:2250
 msgid "Users"
 msgstr ""
 
-#: includes/controller/Admin.php:2222
+#: includes/controller/Admin.php:2224
 msgid "Groups"
 msgstr ""
 
-#: includes/controller/Admin.php:2230
+#: includes/controller/Admin.php:2232
 msgid "Import"
 msgstr ""
 
-#: includes/controller/Admin.php:2233
+#: includes/controller/Admin.php:2235
 msgid "Export"
 msgstr ""
 
-#: includes/controller/Admin.php:2246
+#: includes/controller/Admin.php:2248
 msgid "General"
 msgstr ""
 
-#: includes/controller/Admin.php:2247
+#: includes/controller/Admin.php:2249
 msgid "Content"
 msgstr ""
 
-#: includes/controller/Admin.php:2249
+#: includes/controller/Admin.php:2251
 msgid "Routes"
 msgstr ""
 
-#: includes/controller/Admin.php:2265
+#: includes/controller/Admin.php:2267
 msgid "Modules"
 msgstr ""
 
-#: includes/controller/Admin.php:2266
+#: includes/controller/Admin.php:2268
 msgid "Feathers"
 msgstr ""
 
-#: includes/controller/Admin.php:2267
+#: includes/controller/Admin.php:2269
 msgid "Themes"
 msgstr ""
 

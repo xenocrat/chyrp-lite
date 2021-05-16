@@ -690,75 +690,75 @@ msgstr "您已登陆。"
 msgid "Missing argument."
 msgstr "缺少参数。"
 
-#: includes/controller/Admin.php:2151
+#: includes/controller/Admin.php:2153
 msgid "Help"
 msgstr "帮助"
 
-#: includes/controller/Admin.php:2164
+#: includes/controller/Admin.php:2166
 msgid "Write"
 msgstr "写作"
 
-#: includes/controller/Admin.php:2165
+#: includes/controller/Admin.php:2167
 msgid "Manage"
 msgstr "管理所有"
 
-#: includes/controller/Admin.php:2166
+#: includes/controller/Admin.php:2168
 msgid "Settings"
 msgstr "设置"
 
-#: includes/controller/Admin.php:2167
+#: includes/controller/Admin.php:2169
 msgid "Extend"
 msgstr "扩展"
 
-#: includes/controller/Admin.php:2177
+#: includes/controller/Admin.php:2179
 msgid "Page"
 msgstr "页面"
 
-#: includes/controller/Admin.php:2206
+#: includes/controller/Admin.php:2208
 msgid "Posts"
 msgstr "所有帖子"
 
-#: includes/controller/Admin.php:2211
+#: includes/controller/Admin.php:2213
 msgid "Pages"
 msgstr "所有页面"
 
-#: includes/controller/Admin.php:2216 includes/controller/Admin.php:2248
+#: includes/controller/Admin.php:2218 includes/controller/Admin.php:2250
 msgid "Users"
 msgstr "用户"
 
-#: includes/controller/Admin.php:2222
+#: includes/controller/Admin.php:2224
 msgid "Groups"
 msgstr "所有组"
 
-#: includes/controller/Admin.php:2230
+#: includes/controller/Admin.php:2232
 msgid "Import"
 msgstr "导入"
 
-#: includes/controller/Admin.php:2233
+#: includes/controller/Admin.php:2235
 msgid "Export"
 msgstr "导出"
 
-#: includes/controller/Admin.php:2246
+#: includes/controller/Admin.php:2248
 msgid "General"
 msgstr "通用"
 
-#: includes/controller/Admin.php:2247
+#: includes/controller/Admin.php:2249
 msgid "Content"
 msgstr "内容"
 
-#: includes/controller/Admin.php:2249
+#: includes/controller/Admin.php:2251
 msgid "Routes"
 msgstr "路由"
 
-#: includes/controller/Admin.php:2265
+#: includes/controller/Admin.php:2267
 msgid "Modules"
 msgstr "模块"
 
-#: includes/controller/Admin.php:2266
+#: includes/controller/Admin.php:2268
 msgid "Feathers"
 msgstr "羽毛"
 
-#: includes/controller/Admin.php:2267
+#: includes/controller/Admin.php:2269
 msgid "Themes"
 msgstr "主题"
 

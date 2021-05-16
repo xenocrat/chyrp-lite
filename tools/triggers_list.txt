@@ -942,10 +942,20 @@ Target:
 	$imports
 
 
+stylesheets_nonce
+-----------------
+Called from:
+	includes/controller/Admin.php on line 2151
+	modules/tags/tags.php on line 452
+
+Target:
+	$nonce
+
+
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 2190
+	includes/controller/Admin.php on line 2192
 
 Target:
 	$write
@@ -954,7 +964,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2227
+	includes/controller/Admin.php on line 2229
 
 Target:
 	$manage
@@ -963,7 +973,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 2252
+	includes/controller/Admin.php on line 2254
 
 Target:
 	$settings
@@ -972,7 +982,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2270
+	includes/controller/Admin.php on line 2272
 
 Target:
 	$extend
@@ -981,7 +991,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2331
+	includes/controller/Admin.php on line 2333
 
 Target:
 	$this->context
@@ -1402,12 +1412,3 @@ Called from:
 
 Target:
 	$this->body
-
-
-stylesheets_nonce
------------------
-Called from:
-	modules/tags/tags.php on line 455
-
-Target:
-	$nonce
