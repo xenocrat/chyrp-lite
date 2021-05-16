@@ -449,10 +449,11 @@
 
         public function main_tags($main) {
             $nonce = "";
+            Trigger::current()->filter($nonce, "stylesheets_nonce");
 
             $main->display("pages".DIR."tags",
                            array("tag_cloud" => $this->tag_cloud(false, "name_asc"),
-                                 "tag_nonce" => Trigger::current()->filter($nonce, "stylesheets_nonce")),
+                                 "tag_nonce" => $nonce),
                            __("Tags", "tags"));
         }
 
