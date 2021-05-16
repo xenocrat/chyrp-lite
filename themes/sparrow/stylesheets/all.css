@@ -484,14 +484,14 @@ div#main > article, div.standalone {
     display: block;
     position: relative;
     width: 100%;
-    max-width: 1024px;
+    max-width: 832px;
     clear: both;
     margin: 0em auto 0em auto;
     padding: 2rem;
 }
 div#main > article.discourse,
 div#main > article.commentary {
-    padding: 0rem 4rem;
+    padding: 0rem 2rem;
     overflow: hidden;
     border-bottom: none;
 }
@@ -543,7 +543,7 @@ article section.comment {
 }
 article > section.photo {
     width: 100%;
-    max-height: 1024px;
+    max-height: 150vw;
     overflow: hidden;
     clear: both;
 }
@@ -792,33 +792,10 @@ div.metadata img.gravatar {
     }
 }
 @media screen and (min-width: 1024px) {
-    div#mast_box {
-        text-align: left;
-        text-align: start;
-        padding: 2em 8rem 2rem 8rem;
-    }
-    ul.navigation li > a {
-        margin: 0rem 1rem 1rem 0rem;
-    }
-    html[lang="ar"] ul.navigation li > a,
-    html[lang="he"] ul.navigation li > a {
-        margin: 0rem 0rem 1rem 1rem;
-    }
-    div.search_box {
-        text-align: end;
-    }
     h3.filter {
         max-width: 960px;
         margin-left: auto;
         margin-right: auto;
-    }
-    div#main > article, div.standalone {
-        padding-left: 8rem;
-        padding-right: 8rem;
-    }
-    div#main > article.discourse,
-    div#main > article.commentary {
-        padding: 0rem 8rem;
     }
     iframe.video_embed {
         max-height: 432px;

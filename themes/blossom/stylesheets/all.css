@@ -65,10 +65,10 @@ body {
     background-color: #f7f5ed;
     margin: 0rem 2rem 2rem 16rem;
     min-width: 288px;
-    max-width: 1200px;
+    max-width: 1600px;
 }
 body.preview {
-    margin: 2rem;
+    margin: 1rem;
 }
 p {
     margin: 0em 0em 1em 0em;
@@ -103,7 +103,7 @@ h3.ribbon {
     margin: 0em;
 }
 h2.archive {
-    margin-top: 1em;
+    margin: 2rem 0rem 0rem 0rem;
     clear: both;
 }
 h4, h5, h6 {
@@ -245,10 +245,7 @@ ul.tail_nav li {
 }
 ul.archive {
     list-style: none;
-    margin: 1rem 0rem;
-}
-ul.archive:last-child {
-    margin-bottom: 0em;
+    margin: 0rem;
 }
 ul.archive li {
     margin: 0em;
@@ -569,9 +566,6 @@ div.user_register.standalone {
     max-width: 384px;
     margin-left: 0em;
 }
-div.archive.standalone {
-    padding-bottom: 1rem;
-}
 ul.archive article.post.archive {
     display: block;
     position: relative;
@@ -581,7 +575,7 @@ ul.archive article.post.archive {
     overflow: hidden;
     font-size: 0.75em;
     background-color: #fbfbf7;
-    margin: 0rem 0rem 1rem 1rem;
+    margin: 1rem 0rem 0rem 1rem;
     padding: 8px;
     border: 1px solid #c6ccc8;
     border-radius: 6px;
@@ -610,7 +604,7 @@ article section.comment {
 }
 article > section.photo {
     width: 100%;
-    max-height: 1024px;
+    max-height: 150vw;
     overflow: hidden;
     clear: both;
 }
@@ -777,8 +771,7 @@ iframe.video_embed {
     height: calc((100vw - 22rem) * 0.5625);
 }
 body.preview iframe.video_embed {
-    max-height: 675px;
-    height: calc((100vw - 8rem) * 0.5625);
+    height: auto;
 }
 img {
     border-style: none;
