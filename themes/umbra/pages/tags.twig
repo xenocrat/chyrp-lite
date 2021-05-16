@@ -4,7 +4,7 @@
 {% if tag_cloud is not empty %}
 <div class="tag_cloud standalone">
 <h2>{{ "Tag cloud" | translate }}</h2>
-<style nonce="{{ tag_nonce }}">
+<style type="text/css" nonce="{{ tag_nonce }}">
 {% for tag in tag_cloud %}
 a.tag.s{{ tag.size + 100 }} {
 font-size: {{ tag.size + 100 }}%;
