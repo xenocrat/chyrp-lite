@@ -110,7 +110,7 @@ h3.filter {
     border-bottom: 1px solid #666667;
 }
 h2.archive {
-    margin-top: 1em;
+    margin: 2rem 0rem 0rem 0rem;
     clear: both;
 }
 h4 {
@@ -239,10 +239,7 @@ ul.navigation li {
 }
 ul.archive {
     list-style: none;
-    margin: 1rem 0rem;
-}
-ul.archive:last-child {
-    margin-bottom: 0em;
+    margin: 0rem;
 }
 ul.archive li {
     margin: 0em;

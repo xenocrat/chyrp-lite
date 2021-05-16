@@ -113,7 +113,7 @@ div#main > h3.filter:first-child {
     margin-top: 2rem;
 }
 h2.archive {
-    margin-top: 1em;
+    margin: 2rem 0rem 0rem 0rem;
     clear: both;
 }
 h4 {
@@ -241,10 +241,7 @@ ul.navigation li {
 }
 ul.archive {
     list-style: none;
-    margin: 1rem 0rem;
-}
-ul.archive:last-child {
-    margin-bottom: 0em;
+    margin: 0rem;
 }
 ul.archive li {
     margin: 0em;
@@ -702,7 +699,7 @@ iframe {
 }
 iframe.video_embed {
     max-height: none;
-    height: calc((100vw - 8rem) * 0.5625);
+    height: calc((100vw - 4rem) * 0.5625);
 }
 div.metadata img.gravatar {
     position: absolute;
@@ -783,9 +780,6 @@ div.metadata img.gravatar {
     div#main > article.discourse,
     div#main > article.commentary {
         padding: 0rem 2rem;
-    }
-    iframe.video_embed {
-        height: calc((100vw - 4rem) * 0.5625);
     }
     ul.archive article.post.archive {
         box-sizing: border-box;
