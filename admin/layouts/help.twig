@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>{{ site.name }}: {% block title %}{{ title }}{% endblock %}</title>
-<style type="text/css">
+<style type="text/css" nonce="{{ style_nonce }}">
 @font-face {
     font-family: 'Open Sans webfont';
     src: url('{{ site.chyrp_url }}/fonts/OpenSans-Regular.woff') format('woff');
