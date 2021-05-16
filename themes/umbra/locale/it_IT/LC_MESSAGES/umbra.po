@@ -32,15 +32,11 @@ msgstr "Questo commento è in attesa di verifica da un moderatore."
 msgid "%d %B, %Y, at %I:%M %p"
 msgstr "%d %B, %Y, %I:%M %p"
 
-#: themes/umbra/content/post.twig:7 themes/umbra/pages/view.twig:11
-msgid "[Untitled]"
-msgstr "[Senza titolo]"
-
-#: themes/umbra/content/post.twig:10
+#: themes/umbra/content/post.twig:6
 msgid "Tags"
 msgstr "Tag"
 
-#: themes/umbra/content/post.twig:20 themes/umbra/feathers/audio.twig:6
+#: themes/umbra/content/post.twig:15 themes/umbra/feathers/audio.twig:6
 #: themes/umbra/feathers/photo.twig:6 themes/umbra/feathers/quote.twig:6
 #: themes/umbra/feathers/text.twig:6 themes/umbra/feathers/uploader.twig:6
 #: themes/umbra/feathers/video.twig:6 themes/umbra/pages/archive.twig:29
@@ -49,28 +45,32 @@ msgstr "Tag"
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "Link permanente &#8220;%s&#8221;"
 
-#: themes/umbra/content/post.twig:22 themes/umbra/layouts/default.twig:56
+#: themes/umbra/content/post.twig:17 themes/umbra/layouts/default.twig:56
 msgid "Draft"
 msgstr "Bozza"
 
-#: themes/umbra/content/post.twig:24
+#: themes/umbra/content/post.twig:19
 msgid "Scheduled"
 msgstr "Programmato"
 
-#: themes/umbra/content/post.twig:26
+#: themes/umbra/content/post.twig:21
 msgid "Pinned"
 msgstr "Pinned"
 
-#: themes/umbra/content/post.twig:28
+#: themes/umbra/content/post.twig:23
 msgid "%d %b, %Y"
 msgstr "%d %b, %Y"
 
-#: themes/umbra/content/post.twig:37
+#: themes/umbra/content/post.twig:27 themes/umbra/pages/view.twig:11
+msgid "[Untitled]"
+msgstr "[Senza titolo]"
+
+#: themes/umbra/content/post.twig:35
 #, php-format
 msgid "&copy; %s, %s."
 msgstr "&copy; %s, %s."
 
-#: themes/umbra/content/post.twig:39
+#: themes/umbra/content/post.twig:37
 #, php-format
 msgid "&copy; %s."
 msgstr "&copy; %s."

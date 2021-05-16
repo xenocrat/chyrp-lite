@@ -32,15 +32,11 @@ msgstr "这个评论正在等待审核。"
 msgid "%d %B, %Y, at %I:%M %p"
 msgstr "%d %B, %Y, at %I:%M %p"
 
-#: themes/sparrow/content/post.twig:7 themes/sparrow/pages/view.twig:21
-msgid "[Untitled]"
-msgstr "[无标题]"
-
-#: themes/sparrow/content/post.twig:10
+#: themes/sparrow/content/post.twig:6
 msgid "Tags"
 msgstr "标签"
 
-#: themes/sparrow/content/post.twig:20 themes/sparrow/feathers/audio.twig:6
+#: themes/sparrow/content/post.twig:15 themes/sparrow/feathers/audio.twig:6
 #: themes/sparrow/feathers/photo.twig:6 themes/sparrow/feathers/quote.twig:6
 #: themes/sparrow/feathers/text.twig:6 themes/sparrow/feathers/uploader.twig:6
 #: themes/sparrow/feathers/video.twig:6 themes/sparrow/pages/archive.twig:36
@@ -49,52 +45,56 @@ msgstr "标签"
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "永久链接至 &#8220;%s&#8221;"
 
-#: themes/sparrow/content/post.twig:22 themes/sparrow/layouts/default.twig:56
+#: themes/sparrow/content/post.twig:17 themes/sparrow/layouts/default.twig:56
 msgid "Draft"
 msgstr "草稿"
 
-#: themes/sparrow/content/post.twig:24
+#: themes/sparrow/content/post.twig:19
 msgid "Scheduled"
 msgstr "计划"
 
-#: themes/sparrow/content/post.twig:26
+#: themes/sparrow/content/post.twig:21
 msgid "Pinned"
 msgstr "固定"
 
-#: themes/sparrow/content/post.twig:28
+#: themes/sparrow/content/post.twig:23
 msgid "%d %b, %Y"
 msgstr "%d %b, %Y"
 
-#: themes/sparrow/content/post.twig:36
+#: themes/sparrow/content/post.twig:29 themes/sparrow/pages/view.twig:21
+msgid "[Untitled]"
+msgstr "[无标题]"
+
+#: themes/sparrow/content/post.twig:37
 msgid "View pingbacks"
 msgstr "查看引用"
 
-#: themes/sparrow/content/post.twig:37
+#: themes/sparrow/content/post.twig:38
 #, php-format
 msgid "%s pingback"
 msgid_plural "%s pingbacks"
 msgstr[0] "%s 包括引用"
 
-#: themes/sparrow/content/post.twig:42
+#: themes/sparrow/content/post.twig:43
 msgid "Comments closed"
 msgstr "评论已关闭"
 
-#: themes/sparrow/content/post.twig:45
+#: themes/sparrow/content/post.twig:46
 msgid "View comments"
 msgstr "查看评论"
 
-#: themes/sparrow/content/post.twig:46
+#: themes/sparrow/content/post.twig:47
 #, php-format
 msgid "%s comment"
 msgid_plural "%s comments"
 msgstr[0] "%s 评论"
 
-#: themes/sparrow/content/post.twig:53
+#: themes/sparrow/content/post.twig:54
 #, php-format
 msgid "&copy; %s, %s."
 msgstr "&copy; %s, %s."
 
-#: themes/sparrow/content/post.twig:55
+#: themes/sparrow/content/post.twig:56
 #, php-format
 msgid "&copy; %s."
 msgstr "&copy; %s."
