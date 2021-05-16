@@ -2147,8 +2147,10 @@
                 error(__("Error"), __("Missing argument."), null, 400);
 
             $template = str_replace(DIR, "", $_GET['id']);
+            $nonce = "";
+            Trigger::current()->filter($nonce, "stylesheets_nonce");
 
-            return $this->display("help".DIR.$template, array(), __("Help"));
+            return $this->display("help".DIR.$template, array("style_nonce" => $nonce), __("Help"));
         }
 
         /**
