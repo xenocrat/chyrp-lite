@@ -177,7 +177,7 @@
                            array("placeholders" => true,
                                  "where" => array("updated_at >" => "0001-01-01 00:00:00"),
                                  "order" => "updated_at DESC, created_at DESC, id DESC")),
-                                 $this->post_limit)));
+                                 $this->post_limit)), __("Updated posts"));
         }
 
         /**
