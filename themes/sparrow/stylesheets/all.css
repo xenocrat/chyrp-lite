@@ -738,11 +738,6 @@ div.metadata img.gravatar {
     }
     body {
         background-color: #ffffff;
-        margin: 2rem;
-    }
-    div#mast,
-    div.prev, div.next {
-        display: none;
     }
     div#main > article,
     div.standalone {

@@ -744,19 +744,9 @@ div.metadata img.gravatar {
     html {
         font-size: 4.2mm;
     }
-    body {
-        margin: 2rem;
-    }
-    div#mast,
-    div.next {
-        display: none;
-    }
     div#main > article,
     div.standalone {
         page-break-inside: avoid;
-    }
-    div#main > article:first-child div.metadata a.category {
-        border: 1px solid #666667;
     }
 }
 @media screen and (max-width: 639px) {

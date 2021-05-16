@@ -829,11 +829,6 @@ section img {
     }
     body {
         background-color: #ffffff;
-        margin: 2rem;
-    }
-    div#sidebar, div#tail,
-    div.prev, div.next, div.prev_next {
-        display: none;
     }
     div#main > article,
     div.standalone {
