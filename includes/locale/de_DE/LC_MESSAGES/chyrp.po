@@ -775,6 +775,10 @@ msgstr "Vorschau"
 msgid "File uploaded."
 msgstr "Datei geladen."
 
+#: includes/controller/Main.php:180
+msgid "Updated posts"
+msgstr "Aktualisierte Posts"
+
 #: includes/controller/Main.php:218 includes/controller/Main.php:226
 #: includes/controller/Main.php:234
 #, php-format

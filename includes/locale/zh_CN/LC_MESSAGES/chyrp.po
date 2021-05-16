@@ -770,6 +770,10 @@ msgstr "预览"
 msgid "File uploaded."
 msgstr "文件已上载。"
 
+#: includes/controller/Main.php:180
+msgid "Updated posts"
+msgstr "更新后的帖子"
+
 #: includes/controller/Main.php:218 includes/controller/Main.php:226
 #: includes/controller/Main.php:234
 #, php-format

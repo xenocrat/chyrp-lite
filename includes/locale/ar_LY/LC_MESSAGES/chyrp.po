@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: chyrplite\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-05-16 14:39+0100\n"
+"PO-Revision-Date: 2021-05-16 14:53+0100\n"
 "Last-Translator: Anas Mohammed Almzoghy <a.almzoghy@gmail.com>\n"
 "Language-Team: Arabic\n"
 "Language: ar_LY\n"
@@ -775,6 +775,10 @@ msgstr "معاينة"
 #: includes/controller/Ajax.php:175
 msgid "File uploaded."
 msgstr ""
+
+#: includes/controller/Main.php:180
+msgid "Updated posts"
+msgstr "المشاركات المحدثة"
 
 #: includes/controller/Main.php:218 includes/controller/Main.php:226
 #: includes/controller/Main.php:234

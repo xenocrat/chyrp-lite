@@ -776,6 +776,10 @@ msgstr "Anteprima"
 msgid "File uploaded."
 msgstr "File caricato."
 
+#: includes/controller/Main.php:180
+msgid "Updated posts"
+msgstr "Post aggiornati"
+
 #: includes/controller/Main.php:218 includes/controller/Main.php:226
 #: includes/controller/Main.php:234
 #, php-format

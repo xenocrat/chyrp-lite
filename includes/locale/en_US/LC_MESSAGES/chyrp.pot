@@ -961,6 +961,10 @@ msgstr ""
 msgid "File uploaded."
 msgstr ""
 
+#: includes/controller/Main.php:180
+msgid "Updated posts"
+msgstr ""
+
 #: includes/controller/Main.php:218
 #: includes/controller/Main.php:226
 #: includes/controller/Main.php:234
