@@ -259,7 +259,7 @@ ol.comments li {
     position: relative;
     width: 100%;
     margin: 0em;
-    padding: 2rem 2rem 2rem 96px;
+    padding: 2rem;
     border: 1px solid #666667;
     border-bottom: none;
 }
@@ -268,6 +268,9 @@ ol.comments li#comment_shim {
 }
 ol.comments li.comment_form {
     padding: 1rem 2rem 2rem 2rem;
+}
+ol.comments li > h3 {
+    margin-right: 4rem;
 }
 table {
     border-collapse: collapse;
@@ -398,7 +401,7 @@ div#mast_box {
     max-width: 1024px;
     text-align: center;
     margin: 0em auto;
-    padding: 4em;
+    padding: 2em;
 }
 div#main {
     box-sizing: border-box;
@@ -620,7 +623,7 @@ div.tag_cloud a.tag:focus,
 div.tag_cloud a.tag:active {
     background-color: #cc5252;
 }
-div.category a.category {
+div.metadata a.category {
     display: inline-block;
     position: absolute;
     top: 0px;
@@ -709,12 +712,12 @@ article.archive img {
 section img {
     max-width: 100%;
 }
-img.gravatar {
+div.metadata img.gravatar {
     position: absolute;
-    top: 2rem;
-    left: 24px;
-    width: 48px;
-    height: 48px;
+    top: 1rem;
+    right: 2rem;
+    width: 2.5rem;
+    height: 2.5rem;
     border-radius: 50%;
 }
 .ajax_loading {
@@ -755,7 +758,7 @@ img.gravatar {
     div.standalone {
         page-break-inside: avoid;
     }
-    div#main > article:first-child div.category a.category {
+    div#main > article:first-child div.metadata a.category {
         border: 1px solid #666667;
     }
 }
@@ -793,21 +796,11 @@ img.gravatar {
     div#main > article.commentary {
         padding: 0rem 2rem;
     }
-    div.category a.category {
+    div.metadata a.category {
         right: 2rem;
-    }
-    ol.comments li {
-        padding: 2rem;
     }
     iframe.video_embed {
         height: calc((100vw - 4rem) * 0.5625);
-    }
-    img.gravatar {
-        position: static;
-        width: 24px;
-        height: 24px;
-        vertical-align: middle;
-        margin-right: 4px;
     }
     ul.archive article.post.archive {
         box-sizing: border-box;
@@ -823,7 +816,7 @@ img.gravatar {
     div#mast_box {
         text-align: left;
         text-align: start;
-        padding: 4em 8rem 4rem 8rem;
+        padding: 2em 8rem 2rem 8rem;
     }
     ul.navigation li > a {
         margin: 0rem 1rem 1rem 0rem;
@@ -833,7 +826,7 @@ img.gravatar {
         margin: 0rem 0rem 1rem 1rem;
     }
     div.search_box {
-        display: inline-block;
+        text-align: end;
     }
     div#main > article, div.standalone {
         padding-left: 8rem;
@@ -843,7 +836,7 @@ img.gravatar {
     div#main > article.commentary {
         padding: 0rem 8rem;
     }
-    div.category a.category {
+    div.metadata a.category {
         right: 8rem;
     }
     iframe.video_embed {

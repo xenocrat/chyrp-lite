@@ -63,7 +63,7 @@ body {
     color: #4e5a66;
     line-height: 1.5;
     background-color: #fcfbf7;
-    margin: 0em 0em 4rem 0em;
+    margin: 0em 0em 2rem 0em;
     min-width: 288px;
 }
 body.preview {
@@ -261,7 +261,7 @@ ol.comments li {
     position: relative;
     width: 100%;
     margin: 0em;
-    padding: 2rem 2rem 2rem 96px;
+    padding: 2rem;
     background-color: #f5f4f0;
     border: 1px solid #c2bcb8;
     border-bottom: none;
@@ -271,6 +271,9 @@ ol.comments li#comment_shim {
 }
 ol.comments li.comment_form {
     padding: 1rem 2rem 2rem 2rem;
+}
+ol.comments li > h3 {
+    margin-right: 4rem;
 }
 table {
     border-collapse: collapse;
@@ -401,7 +404,7 @@ div#mast_box {
     max-width: 1024px;
     text-align: center;
     margin: 0em auto;
-    padding: 4em;
+    padding: 2rem;
 }
 div#main {
     box-sizing: border-box;
@@ -449,7 +452,7 @@ div.metadata {
     margin-top: 2rem;
     padding: 0.2rem;
     background-color: #f5f4f0;
-    border: 1px solid #dbdad6;
+    border: 1px solid #c2bcb8;
     border-radius: 1.5rem;
 }
 div.comments_pagination {
@@ -487,7 +490,7 @@ div#main > article, div.standalone {
     max-width: 1024px;
     clear: both;
     margin: 0em auto 0em auto;
-    padding: 4rem;
+    padding: 2rem;
 }
 div#main > article.discourse,
 div#main > article.commentary {
@@ -602,21 +605,6 @@ section a:active, p a:active {
     color: #cc5252;
     border-bottom: 1px #cc5252 solid;
 }
-div.category a.category {
-    display: inline-block;
-    position: absolute;
-    top: 0px;
-    right: 4rem;
-    padding: 0.2em 0.6em;
-    margin: 0em;
-    background-color: #f5f4f0;
-    border: 1px solid #c2bcb8;
-    border-top: none;
-}
-div.traversal + div#main > article:first-child div.category a.category,
-div#main > div.traversal + article div.category a.category {
-    border-top: 1px solid #c2bcb8;
-}
 div.tags a.tag,
 div.tag_cloud a.tag {
     display: inline-block;
@@ -716,12 +704,12 @@ iframe.video_embed {
     max-height: none;
     height: calc((100vw - 8rem) * 0.5625);
 }
-img.gravatar {
+div.metadata img.gravatar {
     position: absolute;
-    top: 2rem;
-    left: 24px;
-    width: 48px;
-    height: 48px;
+    top: 1rem;
+    right: 2rem;
+    width: 2.5rem;
+    height: 2.5rem;
     border-radius: 50%;
 }
 .ajax_loading {
@@ -768,9 +756,6 @@ img.gravatar {
     div.metadata {
         background-color: #ffffff;
     }
-    div#main > article:first-child div.category a.category {
-        border: 1px solid #c2bcb8;
-    }
 }
 @media screen and (max-width: 639px) {
     html {
@@ -801,9 +786,6 @@ img.gravatar {
     h3.filter {
         margin: 0rem 0.5rem;
     }
-    div.prev {
-        margin-top: 2rem;
-    }
     div#main > article, div.standalone {
         margin: 0em auto 2rem auto;
         padding: 2rem 2rem 0rem 2rem;
@@ -812,21 +794,8 @@ img.gravatar {
     div#main > article.commentary {
         padding: 0rem 2rem;
     }
-    div.category a.category {
-        right: 2rem;
-    }
-    ol.comments li {
-        padding: 2rem;
-    }
     iframe.video_embed {
         height: calc((100vw - 4rem) * 0.5625);
-    }
-    img.gravatar {
-        position: static;
-        width: 24px;
-        height: 24px;
-        vertical-align: middle;
-        margin-right: 4px;
     }
     ul.archive article.post.archive {
         box-sizing: border-box;
@@ -842,7 +811,7 @@ img.gravatar {
     div#mast_box {
         text-align: left;
         text-align: start;
-        padding: 4em 8rem 4rem 8rem;
+        padding: 2em 8rem 2rem 8rem;
     }
     ul.navigation li > a {
         margin: 0rem 1rem 1rem 0rem;
@@ -852,7 +821,7 @@ img.gravatar {
         margin: 0rem 0rem 1rem 1rem;
     }
     div.search_box {
-        display: inline-block;
+        text-align: end;
     }
     h3.filter {
         max-width: 960px;
@@ -866,9 +835,6 @@ img.gravatar {
     div#main > article.discourse,
     div#main > article.commentary {
         padding: 0rem 8rem;
-    }
-    div.category a.category {
-        right: 8rem;
     }
     iframe.video_embed {
         max-height: 432px;

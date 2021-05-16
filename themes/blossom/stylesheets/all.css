@@ -916,7 +916,7 @@ section img {
     div.metadata {
         left: -1rem;
         margin-top: 1rem;
-        padding: 0rem 1rem;
+        padding: 0.25rem 1rem;
     }
     iframe.video_embed {
         height: calc((100vw - 4rem) * 0.5625);
