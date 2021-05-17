@@ -356,7 +356,7 @@ textarea {
     box-sizing: border-box;
     display: block;
     width: 100%;
-    height: 160px;
+    height: 320px;
     max-width: 800px;
     font: inherit;
     font-size: inherit;
@@ -464,20 +464,13 @@ div.tags {
 }
 div.doaction {
     font-family: inherit;
-    margin-bottom: 1em;
+    margin: 1em 0em;
 }
 div.doaction:last-child {
     margin-bottom: 0em;
 }
-div.speak {
-    margin-top: 1em;
-    margin-bottom: 0em;
-}
 div.admin, div.downloads {
     margin: 1em 0em 0em 0em;
-}
-input + div.doaction, textarea + div.doaction {
-    margin-top: 1em;
 }
 div#main > article, div.standalone {
     box-sizing: border-box;

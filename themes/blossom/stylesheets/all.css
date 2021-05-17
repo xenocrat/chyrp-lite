@@ -65,7 +65,7 @@ body {
     background-color: #f7f5ed;
     margin: 0rem 2rem 2rem 16rem;
     min-width: 288px;
-    max-width: 1600px;
+    max-width: 1024px;
 }
 body.preview {
     margin: 1rem;
@@ -357,7 +357,7 @@ textarea {
     box-sizing: border-box;
     display: block;
     width: 100%;
-    height: 160px;
+    height: 320px;
     max-width: 960px;
     font: inherit;
     font-size: inherit;
@@ -499,20 +499,13 @@ div.tags {
 }
 div.doaction {
     font-family: inherit;
-    margin-bottom: 1em;
+    margin: 1em 0em;
 }
 div.doaction:last-child {
     margin-bottom: 0em;
 }
-div.speak {
-    margin-top: 1em;
-    margin-bottom: 0em;
-}
 div.admin, div.downloads {
     margin: 1em 0em 0em 0em;
-}
-input + div.doaction, textarea + div.doaction {
-    margin-top: 1em;
 }
 div.search_box {
     text-align: center;
@@ -534,7 +527,7 @@ div#main > article, div.standalone {
     max-width: 1024px;
     clear: both;
     background-color: #fbfbf7;
-    margin: 0rem auto 2rem auto;
+    margin: 0rem auto 2rem 0rem;
     padding: 1.5rem 2rem 0rem 2rem;
     border: 1px solid #c6ccc8;
     border-radius: 6px;
@@ -564,7 +557,6 @@ div.user_login.standalone,
 div.lost_password.standalone,
 div.user_register.standalone {
     max-width: 384px;
-    margin-left: 0em;
 }
 ul.archive article.post.archive {
     display: block;
