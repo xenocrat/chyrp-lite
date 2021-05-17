@@ -552,7 +552,7 @@ div#main > article.post.pinned {
     border-color: #2ea8e5;
 }
 div#main > article.discourse {
-    padding: 2rem 2rem 1rem 2rem;
+    padding: 2rem;
     margin-top: 2rem;
 }
 div#main > article.commentary {

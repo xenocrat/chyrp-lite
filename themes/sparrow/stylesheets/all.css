@@ -494,7 +494,7 @@ div#main > article.discourse > div {
     position: relative;
     width: 100%;
     margin: 0em;
-    padding: 2rem 2rem 1rem 2rem;
+    padding: 2rem;
     background-color: #f5f4f0;
     border: 1px solid #c2bcb8;
 }
