@@ -926,7 +926,7 @@ section img {
         height: calc((100vw - 4rem) * 0.5625);
     }
 }
-@media screen and (max-width: 599px) {
+@media screen and (max-width: 559px) {
     ul.archive article.post.archive {
         box-sizing: border-box;
         width: 100%;
