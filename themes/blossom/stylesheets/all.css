@@ -235,7 +235,7 @@ ul.navigation li {
 ul.navigation li:last-child {
     border-bottom: none;
 }
-ul.sidebar_nav li {
+ul.sidebar li {
     text-align: left;
     text-align: start;
     font-size: 0.75em;
