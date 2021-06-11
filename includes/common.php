@@ -97,8 +97,8 @@
     define('UPDATE_INTERVAL', 86400);
 
     # Constant: UPDATE_PAGE
-    # URL to the list of releases.
-    define('UPDATE_PAGE', "https://github.com/xenocrat/chyrp-lite/releases");
+    # URL to the latest release.
+    define('UPDATE_PAGE', "https://github.com/xenocrat/chyrp-lite/releases/latest");
 
     # Constant: SESSION_DENY_BOT
     # Deny session storage to robots?
