@@ -233,6 +233,9 @@ dl dt {
 dl dd {
     margin-left: 1em;
 }
+ul#nav {
+    display: none;
+}
 ul.navigation {
     list-style: none;
     font-size: 1em;
@@ -260,7 +263,7 @@ ul.sidebar_nav li {
     text-align: start;
     font-size: 0.75em;
 }
-ul.tail_nav li {
+ul#nav li {
     text-align: center;
     padding-top: 0em;
     padding-bottom: 0em;
@@ -325,9 +328,11 @@ form, fieldset {
     padding: 0em;
     border: none;
 }
-div.search_box > form {
+form.search_box {
     display: inline-block;
     position: relative;
+    text-align: center;
+    margin-bottom: 2em;
 }
 form.comment_edit {
     width: 100%;
@@ -441,7 +446,6 @@ div#mast {
     display: none;
     width: 100%;
     text-align: center;
-    margin-bottom: 2em;
 }
 div#main {
     width: 100%;
@@ -514,18 +518,6 @@ div.doaction:last-child {
 }
 div.admin, div.downloads {
     margin: 1em 0em 0em 0em;
-}
-div.search_box {
-    text-align: center;
-    margin-bottom: 2em;
-}
-div#tail {
-    display: none;
-    width: 100%;
-    clear: both;
-    padding-top: 2em;
-    text-align: center;
-    margin: 0em;
 }
 div#main > article, div.standalone {
     display: block;
@@ -827,7 +819,7 @@ section img {
         margin: 0rem 1rem 1rem 1rem;
     }
     body.mobile_nav {
-        margin-bottom: 3rem;
+        margin-bottom: 5rem;
     }
     h2 {
         font-size: 1.25em;
@@ -856,14 +848,16 @@ section img {
     ol.comments li.comment_form {
         padding: 1em;
     }
-    ul.tail_nav.mobile_nav {
+    ul#nav {
         display: block;
+        margin: 2em 0em 0em 0em;
+    }
+    ul#nav.mobile_nav {
         position: fixed;
         bottom: 0px;
         left: 0px;
         width: 100%;
         height: auto;
-        margin: 0em;
         padding: 0em;
         background-color: #fcfbfa;
         border-right: none;
@@ -871,15 +865,15 @@ section img {
         border-left: none;
         border-radius: 0em;
     }
-    ul.tail_nav.mobile_nav li {
+    ul#nav.mobile_nav li {
         height: 0em;
         overflow: hidden;
         border-bottom: none;
         box-sizing: border-box;
         transition: height 250ms ease 0s;
     }
-    ul.tail_nav.mobile_nav.on li,
-    ul.tail_nav.mobile_nav li#mobile_toggle {
+    ul#nav.mobile_nav.on li,
+    ul#nav.mobile_nav li#mobile_toggle {
         height: 3em;
         border-bottom: 1px solid #d2d9d4;
     }

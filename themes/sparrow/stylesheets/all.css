@@ -301,10 +301,9 @@ form, fieldset {
     padding: 0em;
     border: none;
 }
-div.search_box > form {
+form.search_box {
     width: auto;
-    display: inline-block;
-    position: relative;
+    display: block;
 }
 form.comment_edit {
     width: 100%;
@@ -386,17 +385,13 @@ div.clear {
     clear: both;
 }
 div#mast {
-    width: 100%;
-    background-color: #f5f4f0;
-    border-bottom: 1px solid #c2bcb8;
-}
-div#mast_box {
     box-sizing: border-box;
     width: 100%;
-    max-width: 1024px;
     text-align: center;
-    margin: 0em auto;
+    margin: 0em;
     padding: 2rem;
+    background-color: #f5f4f0;
+    border-bottom: 1px solid #c2bcb8;
 }
 div#main {
     box-sizing: border-box;
