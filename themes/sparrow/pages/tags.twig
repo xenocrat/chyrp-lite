@@ -6,13 +6,13 @@
 <h2>{{ "Tag cloud" | translate }}</h2>
 <style type="text/css" nonce="{{ tag_nonce }}">
 {% for tag in tag_cloud %}
-a.tag.s{{ tag.size + 100 }} {
+a.tag.tag-{{ tag.clean }} {
 font-size: {{ tag.size + 100 }}%;
 }
 {% endfor %}
 </style>
 {% for tag in tag_cloud %}
-<a class="tag s{{ tag.size + 100 }}" href="{{ tag.url }}" title="{{ tag.title }}">{{ tag.name }}</a>
+<a class="tag tag-{{ tag.clean }}" href="{{ tag.url }}" title="{{ tag.title }}">{{ tag.name }}</a>
 {% endfor %}
 </div>
 {% else %}
