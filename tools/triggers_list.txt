@@ -748,10 +748,10 @@ Called from:
 end_content
 -----------
 Called from:
-	themes/blossom/layouts/default.twig on line 119
-	themes/sparrow/layouts/default.twig on line 102
-	themes/topaz/layouts/default.twig on line 118
-	themes/umbra/layouts/default.twig on line 96
+	themes/blossom/layouts/default.twig on line 115
+	themes/sparrow/layouts/default.twig on line 98
+	themes/topaz/layouts/default.twig on line 116
+	themes/umbra/layouts/default.twig on line 92
 
 
 

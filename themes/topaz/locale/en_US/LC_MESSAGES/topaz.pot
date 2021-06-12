@@ -39,7 +39,7 @@ msgstr ""
 
 #: themes/topaz/content/post.twig:17
 #: themes/topaz/content/sidebar.twig:29
-#: themes/topaz/layouts/default.twig:93
+#: themes/topaz/layouts/default.twig:92
 msgid "Draft"
 msgstr ""
 
@@ -117,54 +117,54 @@ msgid "Links"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:11
-#: themes/topaz/layouts/default.twig:63
+#: themes/topaz/layouts/default.twig:62
 msgid "Blog"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:14
 #: themes/topaz/forms/user/controls.twig:9
 #: themes/topaz/forms/user/register.twig:13
-#: themes/topaz/layouts/default.twig:75
+#: themes/topaz/layouts/default.twig:74
 msgid "Email"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:17
-#: themes/topaz/layouts/default.twig:78
+#: themes/topaz/layouts/default.twig:77
 msgid "Feed"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:21
-#: themes/topaz/layouts/default.twig:85
+#: themes/topaz/layouts/default.twig:84
 msgid "Admin"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:25
-#: themes/topaz/layouts/default.twig:89
+#: themes/topaz/layouts/default.twig:88
 msgid "Write"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:34
 #: themes/topaz/forms/user/controls.twig:5
-#: themes/topaz/layouts/default.twig:98
+#: themes/topaz/layouts/default.twig:97
 msgid "Controls"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:37
-#: themes/topaz/layouts/default.twig:101
+#: themes/topaz/layouts/default.twig:100
 msgid "Log out"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:42
 #: themes/topaz/forms/user/register.twig:5
 #: themes/topaz/forms/user/register.twig:19
-#: themes/topaz/layouts/default.twig:106
+#: themes/topaz/layouts/default.twig:105
 msgid "Register"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:46
 #: themes/topaz/forms/user/login.twig:5
 #: themes/topaz/forms/user/login.twig:14
-#: themes/topaz/layouts/default.twig:110
+#: themes/topaz/layouts/default.twig:109
 msgid "Log in"
 msgstr ""
 
@@ -186,7 +186,7 @@ msgid "Recent Posts"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:91
-#: themes/topaz/layouts/default.twig:81
+#: themes/topaz/layouts/default.twig:80
 msgid "Archive"
 msgstr ""
 
@@ -371,11 +371,11 @@ msgstr ""
 msgid "Older posts"
 msgstr ""
 
-#: themes/topaz/layouts/default.twig:114
+#: themes/topaz/layouts/default.twig:113
 msgid "Menu"
 msgstr ""
 
-#: themes/topaz/layouts/default.twig:125
+#: themes/topaz/layouts/default.twig:123
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr ""

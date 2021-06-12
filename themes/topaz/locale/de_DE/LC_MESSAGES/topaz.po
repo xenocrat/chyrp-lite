@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Copyright 2021 Daniel Pimley and other contributors.
@@ -46,7 +46,7 @@ msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "Permanentlink zu &#8220;%s&#8221;"
 
 #: themes/topaz/content/post.twig:17 themes/topaz/content/sidebar.twig:29
-#: themes/topaz/layouts/default.twig:93
+#: themes/topaz/layouts/default.twig:92
 msgid "Draft"
 msgstr "Entwurf"
 
@@ -119,45 +119,45 @@ msgstr "Suchen"
 msgid "Links"
 msgstr "Links"
 
-#: themes/topaz/content/sidebar.twig:11 themes/topaz/layouts/default.twig:63
+#: themes/topaz/content/sidebar.twig:11 themes/topaz/layouts/default.twig:62
 msgid "Blog"
 msgstr "Blog"
 
 #: themes/topaz/content/sidebar.twig:14 themes/topaz/forms/user/controls.twig:9
 #: themes/topaz/forms/user/register.twig:13
-#: themes/topaz/layouts/default.twig:75
+#: themes/topaz/layouts/default.twig:74
 msgid "Email"
 msgstr "E-Mail"
 
-#: themes/topaz/content/sidebar.twig:17 themes/topaz/layouts/default.twig:78
+#: themes/topaz/content/sidebar.twig:17 themes/topaz/layouts/default.twig:77
 msgid "Feed"
 msgstr "Feed"
 
-#: themes/topaz/content/sidebar.twig:21 themes/topaz/layouts/default.twig:85
+#: themes/topaz/content/sidebar.twig:21 themes/topaz/layouts/default.twig:84
 msgid "Admin"
 msgstr "Administration"
 
-#: themes/topaz/content/sidebar.twig:25 themes/topaz/layouts/default.twig:89
+#: themes/topaz/content/sidebar.twig:25 themes/topaz/layouts/default.twig:88
 msgid "Write"
 msgstr "Schreiben"
 
 #: themes/topaz/content/sidebar.twig:34 themes/topaz/forms/user/controls.twig:5
-#: themes/topaz/layouts/default.twig:98
+#: themes/topaz/layouts/default.twig:97
 msgid "Controls"
 msgstr "Details"
 
-#: themes/topaz/content/sidebar.twig:37 themes/topaz/layouts/default.twig:101
+#: themes/topaz/content/sidebar.twig:37 themes/topaz/layouts/default.twig:100
 msgid "Log out"
 msgstr "Ausloggen"
 
 #: themes/topaz/content/sidebar.twig:42 themes/topaz/forms/user/register.twig:5
 #: themes/topaz/forms/user/register.twig:19
-#: themes/topaz/layouts/default.twig:106
+#: themes/topaz/layouts/default.twig:105
 msgid "Register"
 msgstr "Registrieren"
 
 #: themes/topaz/content/sidebar.twig:46 themes/topaz/forms/user/login.twig:5
-#: themes/topaz/forms/user/login.twig:14 themes/topaz/layouts/default.twig:110
+#: themes/topaz/forms/user/login.twig:14 themes/topaz/layouts/default.twig:109
 msgid "Log in"
 msgstr "Einloggen"
 
@@ -177,7 +177,7 @@ msgstr "Verwandte Posts"
 msgid "Recent Posts"
 msgstr "Kürzliche Posts"
 
-#: themes/topaz/content/sidebar.twig:91 themes/topaz/layouts/default.twig:81
+#: themes/topaz/content/sidebar.twig:91 themes/topaz/layouts/default.twig:80
 msgid "Archive"
 msgstr "Archiv"
 
@@ -363,11 +363,11 @@ msgstr "Neuere Posts"
 msgid "Older posts"
 msgstr "Ältere Posts"
 
-#: themes/topaz/layouts/default.twig:114
+#: themes/topaz/layouts/default.twig:113
 msgid "Menu"
 msgstr "Menü"
 
-#: themes/topaz/layouts/default.twig:125
+#: themes/topaz/layouts/default.twig:123
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "Aufgerufen von %s in Zeile %d in %s Sekunden."
