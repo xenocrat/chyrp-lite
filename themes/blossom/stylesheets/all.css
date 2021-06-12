@@ -850,7 +850,7 @@ section img {
         overflow: hidden;
         border-bottom: none;
         box-sizing: border-box;
-        transition: height 250ms ease 0s;
+        transition: height 250ms ease 125ms, border-bottom 0ms 125ms;
     }
     ul#nav.mobile_nav.on li,
     ul#nav.mobile_nav li#mobile_toggle {
@@ -860,6 +860,7 @@ section img {
     ul#nav.mobile_nav.on li#mobile_toggle {
         height: 0em;
         border-bottom: none;
+        transition: height 125ms ease 0s;
     }
     div#mast {
         display: block;
