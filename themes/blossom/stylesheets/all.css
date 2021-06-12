@@ -857,6 +857,10 @@ section img {
         height: 3em;
         border-bottom: 1px solid #d2d9d4;
     }
+    ul#nav.mobile_nav.on li#mobile_toggle {
+        height: 0em;
+        border-bottom: none;
+    }
     div#mast {
         display: block;
     }
