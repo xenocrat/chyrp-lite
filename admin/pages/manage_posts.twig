@@ -5,14 +5,12 @@
 {% block content %}
 <form class="filters" action="{{ url('manage_posts') }}" method="post" accept-charset="UTF-8" role="search">
 <fieldset>
-<div class="filter_item">
 <h3>
 {{ "Search&hellip;" | translate }}
 <a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
 </h3>
 <input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true) }}" id="query">
 <button type="submit">{{ "Search" | translate }}</button>
-</div>
 </fieldset>
 </form>
 <h2>{{ GET.query is not empty ? "Search Results" | translate : "Posts" | translate }}</h2>

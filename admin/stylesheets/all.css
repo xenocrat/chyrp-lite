@@ -910,19 +910,6 @@ a.emblem.preview {
     float: right;
     margin-left: 4px;
 }
-.filters .filter_item {
-    box-sizing: border-box;
-    float: left;
-    max-width: 50%;
-    padding-right: 2rem;
-}
-.filters .filter_item:last-of-type {
-    padding-right: 0rem;
-}
-.filters .filter_item:only-of-type {
-    float: none;
-    max-width: 100%;
-}
 .drag_highlight {
     background-color: #fffceb;
 }
@@ -1130,14 +1117,6 @@ a.emblem.preview {
     }
     div.controls h4 {
         display: block;
-    }
-    .filters .filter_item {
-        width: 100%;
-        max-width: 100%;
-        float: none;
-        clear: both;
-        margin-bottom: 1rem;
-        padding-right: 0em;
     }
     div.more_options p.more_options_option {
         width: 100%;

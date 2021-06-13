@@ -5,7 +5,6 @@
 {% block content %}
 <form class="filters" action="{{ url('manage_groups') }}" method="post" accept-charset="UTF-8" role="search">
 <fieldset>
-<div class="filter_item">
 <h3>{{ "Search all groups for user&hellip;" | translate }}</h3>
 <input class="text filter_text" type="text" name="search" value="{{ GET.search is defined ? GET.search | fix(true) : '' }}" id="search">
 <button type="submit">{{ "Search" | translate }}</button>
@@ -14,7 +13,6 @@
 <img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="">{{ "New Group" | translate }}
 </a>
 {% endif %}
-</div>
 </fieldset>
 </form>
 <h2>{{ GET.search is defined ? "Search Results" | translate : "Groups" | translate }}</h2>

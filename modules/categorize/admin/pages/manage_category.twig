@@ -5,7 +5,6 @@
 {% block content %}
 <form class="filters" action="{{ url('manage_category') }}" method="post" accept-charset="UTF-8" role="search">
 <fieldset>
-<div class="filter_item">
 <h3>
 {{ "Search&hellip;" | translate }}
 <a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
@@ -15,7 +14,6 @@
 <a href="{{ url('new_category') }}" class="button yay"> 
 <img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="">{{ "Add Category" | translate("categorize") }}
 </a>
-</div>
 </fieldset>
 </form>
 <h2>{{ GET.query is not empty ? "Search Results" | translate : "Manage Categories" | translate("categorize") }}</h2>
