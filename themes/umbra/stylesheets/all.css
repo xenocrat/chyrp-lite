@@ -260,11 +260,14 @@ ol.comments li {
     border: 1px solid #666667;
     border-bottom: none;
 }
+ol.comments label:first-child {
+    margin-top:  0em;
+}
 ol.comments li#comment_shim {
     display: none;
 }
 ol.comments li.comment_form {
-    padding: 1rem 2rem 2rem 2rem;
+    padding: 2rem;
 }
 ol.comments li > h3 {
     margin-right: 4rem;
