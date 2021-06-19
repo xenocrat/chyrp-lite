@@ -4,7 +4,7 @@
             $config = Config::current();
 
             $config->set("module_highlighter",
-                         array("stylesheet" => "monokai-sublime.css"));
+                         array("stylesheet" => "monokai-sublime.min.css"));
         }
 
         static function __uninstall() {

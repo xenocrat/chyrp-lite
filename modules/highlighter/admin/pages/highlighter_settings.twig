@@ -11,7 +11,7 @@
 <select name="stylesheet">
 {% for filename in highlighter_stylesheets %}
 {% set option_selected = filename | selected(site.module_highlighter.stylesheet) %}
-<option value="{{ filename | fix(true) }}"{{ option_selected }}>{{ filename | preg_replace("/(.+)\\.css$/i", "$1") | camelize(true) }}</option>
+<option value="{{ filename | fix(true) }}"{{ option_selected }}>{{ filename | preg_replace("/(.+?)(\\.min)?\\.css$/i", "$1") | camelize(true) }}</option>
 {% endfor %}
 </select>
 </p>
