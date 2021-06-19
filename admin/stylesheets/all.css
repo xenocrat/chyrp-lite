@@ -134,9 +134,6 @@ strong {
     font: inherit;
     font-weight: bold;
 }
-small, .small, .sub {
-    color: #b3b5b5;
-}
 small, .small {
     font-size: 0.8em;
 }
@@ -219,7 +216,6 @@ div.clear {
 #header #navigation li a:link,
 #header #navigation li a:visited {
     background-color: #cfcfcf;
-    color: #5f5f5f;
 }
 #header #navigation li.selected a:link,
 #header #navigation li.selected a:visited,
@@ -227,7 +223,6 @@ div.clear {
 #header #navigation li a:focus {
     outline: none;
     background-color: #efefef;
-    color: #4a4747;
 }
 
 /* Group: Sub-Navigation */
@@ -262,16 +257,14 @@ div.clear {
 #sub_nav li a:link,
 #sub_nav li a:visited {
     background-color: #dfdfdf;
-    color: #5f5f5f;
 }
 #sub_nav li.selected a:link,
 #sub_nav li.selected a:visited,
 #sub_nav li a:hover,
 #sub_nav li a:focus {
     outline: none;
-    background-color: #ffffff;
     color: #4a4747;
-    border-color: #dfdfdf;
+    background-color: #ffffff;
 }
 
 /* Group: Content */
@@ -281,7 +274,7 @@ div.clear {
     background-color: #ffffff;
     padding: 1em;
     margin: 0rem 4rem 4rem 4rem;
-    border: 1px solid #dfdfdf;
+    border: 1px solid #cfcfcf;
     border-top: none;
     position: relative;
     overflow: hidden;
@@ -330,7 +323,7 @@ span.pages {
 }
 #content ul.extend > li {
     background-color: #efefef;
-    border: 1px solid #dfdfdf;
+    border: 1px solid #cfcfcf;
 }
 #content ul#modules_enabled > li,
 #content ul#feathers_enabled > li,
@@ -364,7 +357,7 @@ li.feather div.controls,
 li.theme div.controls {
     margin-top: 1em;
     padding-top: 1em;
-    border-top: 1px solid #dfdfdf;
+    border-top: 1px solid #cfcfcf;
 }
 ul#modules_enabled div.controls,
 ul#feathers_enabled div.controls,
@@ -415,7 +408,7 @@ input[type="password"] {
     font-size: 1.25rem;
     padding: 0.4em;
     border-radius: 0em;
-    border: 1px solid #dfdfdf;
+    border: 1px solid #cfcfcf;
     background-color: #ffffff;
 }
 input:invalid,
@@ -493,7 +486,7 @@ code {
     background-color: #efefef;
     padding: 0px 2px;
     color: #4f4f4f;
-    border: 1px solid #dfdfdf;
+    border: 1px solid #cfcfcf;
 }
 form.split > fieldset > * {
     clear: both;
@@ -571,7 +564,7 @@ table thead tr th {
 }
 table tbody tr td {
     padding: 0.5rem;
-    border: 1px solid #dfdfdf;
+    border: 1px solid #cfcfcf;
     vertical-align: middle;
 }
 table tbody tr:nth-child(even) td {
@@ -751,7 +744,7 @@ a.button > img {
 button[disabled],
 button.disabled {
     background-color: #efefef;
-    border-color: #dfdfdf;
+    border-color: #cfcfcf;
     color: #7f7f7f;
     cursor: not-allowed;
 }
@@ -775,7 +768,7 @@ div.confirmation a.button {
     padding: 0em 0.25em;
     white-space: nowrap;
     border-radius: 0.25em;
-    border: 1px solid #dfdfdf;
+    border: 1px solid #cfcfcf;
     background-color: #efefef;
 }
 *.tag:link,
@@ -855,7 +848,7 @@ span.options_tray {
     display: block;
     width: 100%;
     font-size: 0.67rem;
-    border: 1px solid #dfdfdf;
+    border: 1px solid #cfcfcf;
     border-top: none;
     padding: 0.25rem 0.5rem;
     border-bottom-left-radius: 0.8em;
@@ -873,7 +866,7 @@ textarea:focus + span.options_tray {
 table.interactive + div.controls {
     background-color: #fffceb;
     padding: 1rem;
-    border: 1px solid #dfdfdf;
+    border: 1px solid #cfcfcf;
     border-top: none;
 }
 div.controls h4 {
