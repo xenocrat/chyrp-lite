@@ -167,6 +167,10 @@ code {
     margin: 0.2em 0em;
     display: inline-block;
 }
+pre > code {
+    box-sizing: border-box;
+    width: 100%;
+}
 hr {
     width: 100%;
     border: none;

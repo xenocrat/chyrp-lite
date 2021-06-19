@@ -182,7 +182,8 @@ code {
     display: inline-block;
 }
 pre > code {
-    border: 1px solid #666667;
+    box-sizing: border-box;
+    width: 100%;
 }
 hr {
     width: 100%;
