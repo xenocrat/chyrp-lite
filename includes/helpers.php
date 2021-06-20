@@ -2224,7 +2224,7 @@
      */
     function get_gravatar($email, $s = 80, $img = false, $d = "mm", $r = "g") {
         $url = "https://www.gravatar.com/avatar/".md5(strtolower(trim($email)))."?s=$s&d=$d&r=$r";
-        return ($img) ? '<img class="gravatar" src="'.fix($url, true, true).'">' : $url ;
+        return ($img) ? '<img class="gravatar" src="'.fix($url, true, true).'" alt="">' : $url ;
     }
 
     #---------------------------------------------
