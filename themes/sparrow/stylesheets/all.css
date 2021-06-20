@@ -290,9 +290,9 @@ table:last-child {
     margin-bottom: 0em;
 }
 table thead tr {
-    background-color: #c2bcb8;
-    color: #fbfbf7;
-    border: 1px solid #c2bcb8;
+    background-color: #a49187;
+    color: #ffffff;
+    border: 1px solid #a49187;
 }
 table thead tr th {
     padding: 0.5em;
@@ -300,7 +300,7 @@ table thead tr th {
 }
 table tbody tr td {
     padding: 0.5em;
-    border: 1px solid #c2bcb8;
+    border: 1px solid #a49187;
     vertical-align: middle;
 }
 form, fieldset {
@@ -331,7 +331,7 @@ select, input {
     font: inherit;
     font-size: inherit;
     color: #4e5a66;
-    background-color: #fffefd;
+    background-color: #ffffff;
     border: 1px solid #c2bcb8;
     border-radius: 0em;
 }
@@ -614,8 +614,8 @@ div.doaction a, button {
     white-space: nowrap;
     padding: 0.4em 1.2em;
     border-radius: 0.2em;
-    color: #fffefd;
-    background-color: #c2b9b4;
+    color: #ffffff;
+    background-color: #a49187;
     border: none;
 }
 div.doaction a:hover, button:hover,

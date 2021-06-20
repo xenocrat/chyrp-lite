@@ -1,6 +1,6 @@
 <form id="add_comment" action="{{ self_url() }}" method="post" accept-charset="UTF-8">
 {% if visitor.logged_in %}
-<label for="body">{{ "%s's comment" | translate | format(visitor.full_name | oneof(visitor.login)) }}</label>
+<label for="comment_body_field">{{ "%s's comment" | translate | format(visitor.full_name | oneof(visitor.login)) }}</label>
 {% else %}
 <label for="comment_author_field">{{ "Your name" | translate }}</label>
 <input type="text" name="author" value="{{ posted('author') | fix(true) }}" id="comment_author_field" class="text" maxlength="250">

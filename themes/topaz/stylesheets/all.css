@@ -135,7 +135,6 @@ h6.post_byline {
     font-style: italic;
     font-size: 0.75em;
     text-align: center;
-    color: #9ea8a8;
     margin-bottom: 2rem;
     padding-bottom: 2rem;
     border-bottom: 1px solid #ebedec;
@@ -318,7 +317,7 @@ table:last-child {
 }
 table thead tr {
     background-color: #39434d;
-    color: #fbfbf7;
+    color: #ffffff;
     border: 1px solid #39434d;
 }
 table thead tr th {
@@ -498,7 +497,6 @@ div.metadata {
     font-size: 0.75em;
     font-style: italic;
     text-align: center;
-    color: #9ea8a8;
     display: block;
     width: 100%;
     padding: 2rem 0rem;
@@ -651,7 +649,7 @@ div.traversal a {
     padding: 0.4em 1.2em;
     margin: 0em 0.5rem;
     min-width: 8em;
-    color: #fffefd;
+    color: #ffffff;
     background-color: #2ea8e5;
     border: none;
     border-radius: 0.4em;
@@ -659,7 +657,7 @@ div.traversal a {
 div.traversal a:hover,
 div.traversal a:focus,
 div.traversal a:active {
-    color: #fffefd;
+    color: #ffffff;
     background-color: #0084c8;
 }
 div.traversal a:first-child {
@@ -700,21 +698,13 @@ div.tag_cloud a:active {
     background-color: #7ac2e5;
     border: 1px #7ac2e5 solid;
 }
-div.metadata a {
-    color: #9ea8a8;
-}
-div.metadata a:hover,
-div.metadata a:focus,
-div.metadata a:active {
-    color: #0084c8;
-}
 div.doaction a, button {
     display: inline-block;
     white-space: nowrap;
     padding: 0.4em 1.2em;
     border-radius: 2em;
     color: #39434d;
-    background-color: #fffefd;
+    background-color: #ffffff;
     border: 1px #c6ccc8 solid;
 }
 div.doaction a:hover, button:hover,
