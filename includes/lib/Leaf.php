@@ -412,5 +412,7 @@
             $href = (is_string($url) and is_url($url)) ? $url : uploaded($filename) ;
 
         return isset($href) ?
-            '<a href="'.fix($href, true).'" class="image_link">'.$img.'</a>' : $img ;
+            '<a href="'.fix($href, true).
+            '" class="image_link" aria-label="'.__("Image source").'">'.$img.'</a>' :
+            $img ;
     }
