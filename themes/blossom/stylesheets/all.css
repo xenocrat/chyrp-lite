@@ -557,7 +557,6 @@ ul.archive article.post.archive {
     float: left;
     width: 196px;
     height: 196px;
-    overflow: hidden;
     font-size: 0.75em;
     background-color: #fbfbf7;
     margin: 1rem 0rem 0rem 1rem;
@@ -565,6 +564,10 @@ ul.archive article.post.archive {
     border: 1px solid #c6ccc8;
     border-radius: 6px;
     background-image: linear-gradient(to bottom, #ffffff 0em, #fbfbf7 10em);
+}
+div.post_archive_container {
+    height: 100%;
+    overflow: hidden;
 }
 article > header {
     display: block;
@@ -719,20 +722,21 @@ a.likes:active > img {
     top: 1px;
 }
 a.archive_post_link {
+    box-sizing: border-box;
     display: block;
     position: absolute;
-    top: -1px;
-    left: -1px;
-    bottom: -1px;
-    right: -1px;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    border-radius: 6px;
     color: transparent;
     background-color: transparent;
-    mix-blend-mode: multiply;
 }
 a.archive_post_link:hover,
 a.archive_post_link:focus,
 a.archive_post_link:active {
-    background-color: #d94c7b;
+    outline: #d94c7b solid 4px;
 }
 iframe {
     width: 100%;

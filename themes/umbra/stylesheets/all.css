@@ -483,11 +483,14 @@ ul.archive article.post.archive {
     float: left;
     width: 196px;
     height: 196px;
-    overflow: hidden;
     font-size: 0.75em;
     margin: 2rem 0rem 0rem 2rem;
     padding: 8px;
     border: 1px solid lightgreen;
+}
+div.post_archive_container {
+    height: 100%;
+    overflow: hidden;
 }
 article > header {
     display: block;
@@ -656,20 +659,20 @@ a.likes:active > img {
     top: 1px;
 }
 a.archive_post_link {
+    box-sizing: border-box;
     display: block;
     position: absolute;
-    top: -1px;
-    left: -1px;
-    bottom: -1px;
-    right: -1px;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
     color: transparent;
     background-color: transparent;
-    mix-blend-mode: lighten;
 }
 a.archive_post_link:hover,
 a.archive_post_link:focus,
 a.archive_post_link:active {
-    background-color: #cc5252;
+    outline: lightgreen solid 4px;
 }
 img {
     border-style: none;
