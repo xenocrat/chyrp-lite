@@ -263,7 +263,6 @@ div.clear {
 #sub_nav li a:hover,
 #sub_nav li a:focus {
     outline: none;
-    color: #4a4747;
     background-color: #ffffff;
 }
 
@@ -839,7 +838,7 @@ div.more_options p textarea {
 span.options_extra {
     display: inline-block;
     width: 100%;
-    padding-top: 1rem;
+    padding: 1rem 2px 2px 2px;
     max-height: 10rem;
     overflow-y: auto;
 }
@@ -902,6 +901,17 @@ a.emblem.markdown > img {
 a.emblem.preview {
     float: right;
     margin-left: 4px;
+}
+a.emblem:focus {
+    outline: none;
+}
+a.emblem:hover > img,
+a.emblem:focus > img {
+    filter: brightness(100%) sepia(100%) saturate(350%) hue-rotate(180deg);
+}
+a.emblem.markdown:hover > img,
+a.emblem.markdown:focus > img {
+    filter: invert(25%) sepia(100%) saturate(330%) hue-rotate(180deg) brightness(125%);
 }
 .drag_highlight {
     background-color: #fffceb;
