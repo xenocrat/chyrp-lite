@@ -1,5 +1,9 @@
 [简体中文](README_zh_CN.md), [Italiano](README_it_IT.md).
 
+# &#x1f4e3; Translations wanted!
+
+Go to the [wiki](https://github.com/xenocrat/chyrp-lite/wiki/Introduction-to-Translations) to find out more about translating Chyrp Lite into your language.
+
 ## What can Chyrp Lite do for me?
 
 Chyrp Lite makes it possible to host a blog on your own web server with minimal fuss. You can have
