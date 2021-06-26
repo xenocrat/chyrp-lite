@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. Copyright 2021 Daniel Pimley and other contributors.
@@ -45,20 +45,20 @@ msgstr "更新"
 msgid "Manage Pingbacks"
 msgstr "管理Pingback"
 
-#: modules/pingable/admin/pages/manage_pingbacks.twig:18
+#: modules/pingable/admin/pages/manage_pingbacks.twig:16
 #: modules/pingable/pingable.php:147 modules/pingable/pingable.php:160
 msgid "Pingbacks"
 msgstr "引用"
 
-#: modules/pingable/admin/pages/manage_pingbacks.twig:22
+#: modules/pingable/admin/pages/manage_pingbacks.twig:20
 msgid "Source"
 msgstr "来源"
 
-#: modules/pingable/admin/pages/manage_pingbacks.twig:23
+#: modules/pingable/admin/pages/manage_pingbacks.twig:21
 msgid "Post"
 msgstr "帖子"
 
-#: modules/pingable/admin/pages/manage_pingbacks.twig:24
+#: modules/pingable/admin/pages/manage_pingbacks.twig:22
 msgid "Added"
 msgstr "增加"
 

@@ -30,7 +30,7 @@ msgstr ""
 #: themes/blossom/feathers/text.twig:6
 #: themes/blossom/feathers/uploader.twig:6
 #: themes/blossom/feathers/video.twig:6
-#: themes/blossom/pages/archive.twig:36
+#: themes/blossom/pages/archive.twig:38
 #: themes/blossom/pages/page.twig:6
 #: themes/blossom/pages/search.twig:24
 #, php-format
@@ -378,13 +378,13 @@ msgid "Not found."
 msgstr ""
 
 #: themes/blossom/pages/archive.twig:10
-#: themes/blossom/pages/archive.twig:48
-#: themes/blossom/pages/archive.twig:58
+#: themes/blossom/pages/archive.twig:50
+#: themes/blossom/pages/archive.twig:60
 #, php-format
 msgid "Archive of %s"
 msgstr ""
 
-#: themes/blossom/pages/archive.twig:69
+#: themes/blossom/pages/archive.twig:71
 msgid "There aren't any posts in the timeframe you specified."
 msgstr ""
 

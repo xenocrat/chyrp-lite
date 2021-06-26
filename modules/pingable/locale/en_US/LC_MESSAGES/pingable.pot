@@ -32,21 +32,21 @@ msgstr ""
 msgid "Manage Pingbacks"
 msgstr ""
 
-#: modules/pingable/admin/pages/manage_pingbacks.twig:18
+#: modules/pingable/admin/pages/manage_pingbacks.twig:16
 #: modules/pingable/pingable.php:147
 #: modules/pingable/pingable.php:160
 msgid "Pingbacks"
 msgstr ""
 
-#: modules/pingable/admin/pages/manage_pingbacks.twig:22
+#: modules/pingable/admin/pages/manage_pingbacks.twig:20
 msgid "Source"
 msgstr ""
 
-#: modules/pingable/admin/pages/manage_pingbacks.twig:23
+#: modules/pingable/admin/pages/manage_pingbacks.twig:21
 msgid "Post"
 msgstr ""
 
-#: modules/pingable/admin/pages/manage_pingbacks.twig:24
+#: modules/pingable/admin/pages/manage_pingbacks.twig:22
 msgid "Added"
 msgstr ""
 

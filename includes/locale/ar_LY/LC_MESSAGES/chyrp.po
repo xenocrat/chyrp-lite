@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: chyrplite\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-05-16 14:53+0100\n"
+"PO-Revision-Date: 2021-06-26 11:04+0100\n"
 "Last-Translator: Anas Mohammed Almzoghy <a.almzoghy@gmail.com>\n"
 "Language-Team: Arabic\n"
 "Language: ar_LY\n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Crowdin-Language: ar\n"
 "X-Crowdin-File: chyrp.pot\n"
 "X-Crowdin-File-ID: 2\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.0\n"
 
 #. Copyright 2021 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
@@ -1137,6 +1137,10 @@ msgstr "%s ميجابايت"
 #, php-format
 msgid "%s KB"
 msgstr "%s كيلوبايت"
+
+#: includes/lib/Leaf.php:416
+msgid "Image source"
+msgstr "مصدر الصورة"
 
 #: includes/lib/XMLRPC.php:46
 msgid "Pingback support is disabled for this site."

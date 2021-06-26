@@ -39,7 +39,7 @@ msgstr "Tags"
 #: themes/sparrow/content/post.twig:15 themes/sparrow/feathers/audio.twig:6
 #: themes/sparrow/feathers/photo.twig:6 themes/sparrow/feathers/quote.twig:6
 #: themes/sparrow/feathers/text.twig:6 themes/sparrow/feathers/uploader.twig:6
-#: themes/sparrow/feathers/video.twig:6 themes/sparrow/pages/archive.twig:36
+#: themes/sparrow/feathers/video.twig:6 themes/sparrow/pages/archive.twig:38
 #: themes/sparrow/pages/page.twig:6
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
@@ -353,17 +353,17 @@ msgstr "&larr; Archiv vom %s"
 msgid "%B %Y"
 msgstr "%B %Y"
 
-#: themes/sparrow/pages/archive.twig:48
+#: themes/sparrow/pages/archive.twig:50
 #, php-format
 msgid "Archive of %s &rarr;"
 msgstr "Archiv vom %s &rarr;"
 
-#: themes/sparrow/pages/archive.twig:57
+#: themes/sparrow/pages/archive.twig:59
 #, php-format
 msgid "Archive of %s"
 msgstr "Archiv vom %s"
 
-#: themes/sparrow/pages/archive.twig:66
+#: themes/sparrow/pages/archive.twig:68
 msgid "There aren't any posts in the timeframe you specified."
 msgstr "In dem angegebenen Zeitfenster gibt es keine Posts."
 

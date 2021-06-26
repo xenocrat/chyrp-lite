@@ -1333,6 +1333,10 @@ msgstr ""
 msgid "%s KB"
 msgstr ""
 
+#: includes/lib/Leaf.php:416
+msgid "Image source"
+msgstr ""
+
 #: includes/lib/XMLRPC.php:46
 msgid "Pingback support is disabled for this site."
 msgstr ""

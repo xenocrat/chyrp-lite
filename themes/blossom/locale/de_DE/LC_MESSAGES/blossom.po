@@ -39,7 +39,7 @@ msgstr "Tags"
 #: themes/blossom/content/post.twig:15 themes/blossom/feathers/audio.twig:6
 #: themes/blossom/feathers/photo.twig:6 themes/blossom/feathers/quote.twig:6
 #: themes/blossom/feathers/text.twig:6 themes/blossom/feathers/uploader.twig:6
-#: themes/blossom/feathers/video.twig:6 themes/blossom/pages/archive.twig:36
+#: themes/blossom/feathers/video.twig:6 themes/blossom/pages/archive.twig:38
 #: themes/blossom/pages/page.twig:6 themes/blossom/pages/search.twig:24
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
@@ -383,13 +383,13 @@ msgstr "Nicht erlaubt."
 msgid "Not found."
 msgstr "Nicht gefunden."
 
-#: themes/blossom/pages/archive.twig:10 themes/blossom/pages/archive.twig:48
-#: themes/blossom/pages/archive.twig:58
+#: themes/blossom/pages/archive.twig:10 themes/blossom/pages/archive.twig:50
+#: themes/blossom/pages/archive.twig:60
 #, php-format
 msgid "Archive of %s"
 msgstr "Archiv vom %s"
 
-#: themes/blossom/pages/archive.twig:69
+#: themes/blossom/pages/archive.twig:71
 msgid "There aren't any posts in the timeframe you specified."
 msgstr "In dem angegebenen Zeitfenster gibt es keine Posts."
 
