@@ -55,7 +55,7 @@ html[lang="he"] {
 }
 *::selection {
     color: #ffffff;
-    background-color: #99726d;
+    background-color: #4e5a66;
 }
 body {
     font-family: "Open Sans webfont", sans-serif;
@@ -156,7 +156,6 @@ strong {
 }
 cite {
     font: inherit;
-    color: #999491;
 }
 small {
     font-weight: normal;
@@ -290,9 +289,9 @@ table:last-child {
     margin-bottom: 0em;
 }
 table thead tr {
-    background-color: #a49187;
+    background-color: #98716c;
     color: #ffffff;
-    border: 1px solid #a49187;
+    border: 1px solid #98716c;
 }
 table thead tr th {
     padding: 0.5em;
@@ -300,7 +299,7 @@ table thead tr th {
 }
 table tbody tr td {
     padding: 0.5em;
-    border: 1px solid #a49187;
+    border: 1px solid #98716c;
     vertical-align: middle;
 }
 form, fieldset {
@@ -338,7 +337,7 @@ select, input {
 select:focus, input:focus {
     outline: none;
     background-color: #ffffff;
-    border: 1px solid #99726d;
+    border: 1px solid #98716c;
 }
 input:placeholder {
     color: #c6ccc8;
@@ -373,7 +372,7 @@ textarea {
 }
 textarea:focus {
     outline: none;
-    border: 1px solid #99726d;
+    border: 1px solid #98716c;
 }
 button {
     font: inherit;
@@ -616,13 +615,13 @@ div.doaction a, button {
     padding: 0.4em 1.2em;
     border-radius: 0.2em;
     color: #ffffff;
-    background-color: #a49187;
+    background-color: #98716c;
     border: none;
 }
 div.doaction a:hover, button:hover,
 div.doaction a:focus, button:focus,
 div.doaction a:active, button:active {
-    background-color: #99726d;
+    background-color: #4e5a66;
     border: none;
 }
 div.doaction a.post_delete_link,

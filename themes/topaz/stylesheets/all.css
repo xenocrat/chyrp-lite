@@ -55,7 +55,7 @@ html[lang="he"] {
 }
 *::selection {
     color: #ffffff;
-    background-color: #0084c8;
+    background-color: #0070c4;
 }
 body {
     font-family: "Open Sans webfont", sans-serif;
@@ -484,13 +484,13 @@ div.ribbon {
     width: 100%;
     text-align: center;
     color: #ffffff;
-    background-color: #2ea8e5;
+    background-color: #0070c4;
     padding: 0.5em;
     margin-bottom: 1em;
     border-radius: 0.2em;
 }
 div.flash {
-    background-color: #0084c8;
+    background-color: #0070c4;
 }
 div.metadata {
     font-weight: normal;
@@ -541,7 +541,7 @@ div#main > article:last-child {
     margin-bottom: 0rem;
 }
 div#main > article.post.pinned {
-    border-color: #2ea8e5;
+    border-color: #0070c4;
 }
 div#main > article.discourse {
     padding: 2rem;
@@ -632,9 +632,9 @@ a:link, a:visited {
 }
 a:hover, a:focus, a:active {
     outline: none;
-    color: #0084c8;
+    color: #0070c4;
     text-decoration: none;
-    border-bottom: 1px #0084c8 solid;
+    border-bottom: 1px #0070c4 solid;
 }
 h3.ribbon a {
     color: #ffffff;
@@ -651,7 +651,7 @@ div.traversal a {
     margin: 0em 0.5rem;
     min-width: 8em;
     color: #ffffff;
-    background-color: #2ea8e5;
+    background-color: #5c6773;
     border: none;
     border-radius: 0.4em;
 }
@@ -659,7 +659,7 @@ div.traversal a:hover,
 div.traversal a:focus,
 div.traversal a:active {
     color: #ffffff;
-    background-color: #0084c8;
+    background-color: #0070c4;
 }
 div.traversal a:first-child {
     border-top-left-radius: 2em;
@@ -677,7 +677,7 @@ section a:visited, p a:visited {
 section a:hover, p a:hover,
 section a:focus, p a:focus,
 section a:active, p a:active {
-    color: #0084c8;
+    color: #0070c4;
 }
 div.tags a,
 div.tag_cloud a {
@@ -723,7 +723,7 @@ article > section.photo > a {
     border-bottom: none;
 }
 article > section.photo > a:focus {
-    outline: #0084c8 solid 4px;
+    outline: #0070c4 solid 4px;
 }
 a.likes > img {
     display: inline-block;
@@ -750,7 +750,7 @@ a.archive_post_link {
 a.archive_post_link:hover,
 a.archive_post_link:focus,
 a.archive_post_link:active {
-    outline: #2ea8e5 solid 4px;
+    outline: #0070c4 solid 4px;
 }
 iframe {
     width: 100%;

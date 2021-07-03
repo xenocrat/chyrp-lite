@@ -55,7 +55,7 @@ html[lang="he"] {
 }
 *::selection {
     color: #ffffff;
-    background-color: #42a66a;
+    background-color: #208448;
 }
 body {
     font-family: "Open Sans webfont", sans-serif;
@@ -137,7 +137,6 @@ strong {
 }
 cite {
     font: inherit;
-    color: #9ea8a8;
 }
 small {
     font-weight: normal;
@@ -641,13 +640,13 @@ div.traversal a {
     border: none;
     border-radius: 0.2em;
     color: #ffffff;
-    background-color: #42a66a;
+    background-color: #208448;
 }
 div.traversal a:hover,
 div.traversal a:focus,
 div.traversal a:active {
     color: #ffffff;
-    background-color: #1d8546;
+    background-color: #006428;
 }
 section a:link, p a:link,
 section a:visited, p a:visited {
@@ -668,7 +667,7 @@ div.tag_cloud a {
     border: none;
     border-radius: 0.2em;
     color: #ffffff;
-    background-color: #42a66a;
+    background-color: #208448;
 }
 div.tags a:hover,
 div.tags a:focus,
@@ -677,7 +676,7 @@ div.tag_cloud a:hover,
 div.tag_cloud a:focus,
 div.tag_cloud a:active {
     color: #ffffff;
-    background-color: #1d8546;
+    background-color: #006428;
 }
 div.doaction a, button {
     display: inline-block;
