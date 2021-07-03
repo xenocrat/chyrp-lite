@@ -17,7 +17,7 @@
      */
     function session($secure = null) {
         if (session_status() == PHP_SESSION_ACTIVE) {
-            trigger_error(__("Session cannot be started more than once"), E_USER_NOTICE);
+            trigger_error(__("Session cannot be started more than once."), E_USER_NOTICE);
             return;
         }
 
