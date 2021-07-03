@@ -44,6 +44,7 @@ msgid "Manage Tags"
 msgstr ""
 
 #: modules/tags/admin/pages/manage_tags.twig:10
+#: modules/tags/admin/pages/manage_tags.twig:88
 #: modules/tags/admin/pages/rename_tag.twig:10
 msgid "Name"
 msgstr ""

@@ -950,8 +950,8 @@ msgid "%s on line %d"
 msgstr "%s riga %d"
 
 #: includes/helpers.php:20
-msgid "Session cannot be started more than once"
-msgstr "Impossibile iniziare la sessione più di una volta"
+msgid "Session cannot be started more than once."
+msgstr "Impossibile iniziare la sessione più di una volta."
 
 #: includes/helpers.php:113
 msgid "Forbidden"

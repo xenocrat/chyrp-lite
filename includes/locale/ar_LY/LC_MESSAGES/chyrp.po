@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: chyrplite\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-06-26 11:04+0100\n"
+"PO-Revision-Date: 2021-07-03 22:38+0100\n"
 "Last-Translator: Anas Mohammed Almzoghy <a.almzoghy@gmail.com>\n"
 "Language-Team: Arabic\n"
 "Language: ar_LY\n"
@@ -945,8 +945,8 @@ msgid "%s on line %d"
 msgstr "%s في السطر %d"
 
 #: includes/helpers.php:20
-msgid "Session cannot be started more than once"
-msgstr "لا يمكن بدء الجلسة أكثر من مرة"
+msgid "Session cannot be started more than once."
+msgstr "لا يمكن بدء الجلسة أكثر من مرة."
 
 #: includes/helpers.php:113
 msgid "Forbidden"

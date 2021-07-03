@@ -222,35 +222,35 @@ msgstr ""
 msgid "Your blog's XML-RPC URL is <code>%s/includes/rpc.php</code>."
 msgstr ""
 
-#: admin/javascripts/admin.js.php:47
+#: admin/javascripts/admin.js.php:47 admin/javascripts/admin.js.php:53
 msgid "Toggle All"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:139 admin/javascripts/admin.js.php:147
+#: admin/javascripts/admin.js.php:140 admin/javascripts/admin.js.php:148
 msgid "Are you sure you want to proceed?"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:198 admin/javascripts/admin.js.php:388
+#: admin/javascripts/admin.js.php:199 admin/javascripts/admin.js.php:389
 msgid "Close"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:205 admin/javascripts/admin.js.php:395
+#: admin/javascripts/admin.js.php:206 admin/javascripts/admin.js.php:396
 msgid "close"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:225 admin/pages/themes.twig:28
+#: admin/javascripts/admin.js.php:226 admin/pages/themes.twig:28
 msgid "Preview"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:241
+#: admin/javascripts/admin.js.php:242
 msgid "preview"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:267
+#: admin/javascripts/admin.js.php:268
 msgid "Words:"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:308
+#: admin/javascripts/admin.js.php:309
 msgid "Uploading..."
 msgstr ""
 
@@ -659,6 +659,11 @@ msgstr ""
 
 #: admin/pages/manage_groups.twig:8
 msgid "Search all groups for user&hellip;"
+msgstr ""
+
+#: admin/pages/manage_groups.twig:9 admin/pages/manage_pages.twig:12
+#: admin/pages/manage_posts.twig:12 admin/pages/manage_users.twig:12
+msgid "Query"
 msgstr ""
 
 #: admin/pages/manage_groups.twig:10 admin/pages/manage_pages.twig:13

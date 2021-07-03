@@ -938,8 +938,8 @@ msgid "%s on line %d"
 msgstr "%s 在行 %d"
 
 #: includes/helpers.php:20
-msgid "Session cannot be started more than once"
-msgstr "会话不能多次启动"
+msgid "Session cannot be started more than once."
+msgstr "会话不能多次启动。"
 
 #: includes/helpers.php:113
 msgid "Forbidden"

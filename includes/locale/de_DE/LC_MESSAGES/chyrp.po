@@ -948,8 +948,8 @@ msgid "%s on line %d"
 msgstr "%s in Zeile %d"
 
 #: includes/helpers.php:20
-msgid "Session cannot be started more than once"
-msgstr "Sitzung kann nicht mehr als einmal gestartet werden"
+msgid "Session cannot be started more than once."
+msgstr "Sitzung kann nicht mehr als einmal gestartet werden."
 
 #: includes/helpers.php:113
 msgid "Forbidden"

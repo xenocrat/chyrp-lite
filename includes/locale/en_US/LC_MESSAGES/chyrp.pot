@@ -1137,7 +1137,7 @@ msgid "%s on line %d"
 msgstr ""
 
 #: includes/helpers.php:20
-msgid "Session cannot be started more than once"
+msgid "Session cannot be started more than once."
 msgstr ""
 
 #: includes/helpers.php:113
