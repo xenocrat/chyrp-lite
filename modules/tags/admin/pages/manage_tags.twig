@@ -57,8 +57,7 @@
 {% for post in posts.paginated %}
 <tr class="post">
 <td class="checkbox">
-<input type="checkbox" name="post[{{ loop.index0 }}]" value="{{ post.id }}" id="post_checkbox_{{ post.id }}" aria-label="{{ 'Select
-' | translate | fix(true) }}">
+<input type="checkbox" name="post[{{ loop.index0 }}]" value="{{ post.id }}" id="post_checkbox_{{ post.id }}" aria-label="{{ 'Select' | translate | fix(true) }}">
 </td>
 <td class="post_title title main">
 <a class="edit_tag" href="{{ post.url() }}">{{ post.title() | striptags | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
