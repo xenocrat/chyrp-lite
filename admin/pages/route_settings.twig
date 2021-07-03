@@ -5,7 +5,7 @@
 {% block content %}
 <h2>{{ "Route Settings" | translate }}</h2>
 <form id="route_settings" class="split" action="{{ url('route_settings') }}" method="post" accept-charset="UTF-8">
-<fieldset>
+<fieldset role="presentation">
 <p>
 <label for="clean_urls">{{ "Clean URLs" | translate }}</label>
 <input type="checkbox" name="clean_urls" id="clean_urls"{{ site.clean_urls | checked }}>

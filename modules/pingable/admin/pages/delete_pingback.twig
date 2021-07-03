@@ -8,7 +8,7 @@
 {{ "Are you sure you want to delete the pingback from &#8220;%s&#8221;?" | translate("pingable") | format(pingback.title | oneof("[Untitled]" | translate)) }}
 </p>
 <form class="delete" action="{{ url('destroy_pingback') }}" method="post" accept-charset="UTF-8">
-<fieldset>
+<fieldset role="presentation">
 <div class="confirmation">
 <button name="destroy" value="indubitably" class="boo">
 <img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg" alt="">{{ "Delete!" | translate }}

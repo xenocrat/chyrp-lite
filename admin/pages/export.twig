@@ -5,7 +5,7 @@
 {% block content %}
 <h2>{{ "What would you like to export?" | translate }}</h2>
 <form id="export_form" class="split" action="{{ url('export') }}" method="post" accept-charset="UTF-8">
-<fieldset>
+<fieldset role="presentation">
 {% set field_aria = "filter (optional)" | translate %}
 <p>
 <label for="posts">{{ "Posts" | translate }}</label>
@@ -38,7 +38,7 @@
 <label for="uploads">{{ "Uploads Manifest" | translate }}</label>
 <input class="checkbox" type="checkbox" name="uploads" value="" id="uploads" checked="checked">
 <input class="text filter_text" type="text" name="filter_uploads" value="" id="filter_uploads" aria-label="{{ field_aria }}" placeholder="{{ field_aria }}">
-<a href="{{ url('help/id/uploads_manifest') }}" target="_blank" class="help emblem info"><img src="{{ site.chyrp_url }}/admin/images/icons/info.svg" alt="{{ 'help' | translate }}"></a>
+<a href="{{ url('help/id/uploads_manifest') }}" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
 </p>
 {{ trigger.call("export_choose") }}
 <p class="buttons">

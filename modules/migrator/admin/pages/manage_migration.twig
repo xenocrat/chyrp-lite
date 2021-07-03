@@ -5,7 +5,7 @@
 {% block content %}
 <h2>WordPress</h2>
 <form id="import_wordpress_form" class="split" action="{{ url('import_wordpress') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
-<fieldset>
+<fieldset role="presentation">
 <p>
 <label for="xml_file">{{ "eXtended .XML File" | translate("migrator") }}</label>
 <input type="file" name="xml_file" value="" id="xml_file" accept=".xml" required>
@@ -28,7 +28,7 @@
 <hr>
 <h2>Tumblr</h2>
 <form id="import_tumblr_form" class="split" action="{{ url('import_tumblr') }}" method="post" accept-charset="UTF-8">
-<fieldset>
+<fieldset role="presentation">
 <p>
 <label for="tumblr_url">{{ "Your Tumblr URL" | translate("migrator") }}</label>
 <input class="text" type="url" name="tumblr_url" value="" id="tumblr_url" required>
@@ -46,7 +46,7 @@
 <hr>
 <h2>TextPattern</h2>
 <form id="import_textpattern_form" class="split" action="{{ url('import_textpattern') }}" method="post" accept-charset="UTF-8">
-<fieldset>
+<fieldset role="presentation">
 <p>
 <label for="host">{{ "Host" | translate("migrator") }}</label>
 <input class="text" type="text" name="host" value="localhost" id="host" required>
@@ -87,7 +87,7 @@
 <hr>
 <h2>MovableType</h2>
 <form id="import_movabletype_form" class="split" action="{{ url('import_movabletype') }}" method="post" accept-charset="UTF-8">
-<fieldset>
+<fieldset role="presentation">
 <p>
 <label for="host">{{ "Host" | translate("migrator") }}</label>
 <input class="text" type="text" name="host" value="localhost" id="host" required>

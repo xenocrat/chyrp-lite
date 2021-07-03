@@ -5,7 +5,7 @@
 {% block content %}
 <h2>{{ "Editing Category &#8220;%s&#8221;" | translate("categorize") | format(category.name | oneof("[Untitled]" | translate)) }}</h2>
 <form id="edit_category" class="split" action="{{ url('update_category') }}" method="post" accept-charset="UTF-8">
-<fieldset>
+<fieldset role="presentation">
 <p>
 <label for="name">{{ "Name" | translate("categorize") }}</label>
 <input class="text" type="text" name="name" value="{{ category.name | fix(true, true) }}" id="name" maxlength="128" required>

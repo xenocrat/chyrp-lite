@@ -5,7 +5,7 @@
 {% block content %}
 <h2>{{ "Sitemap Settings" | translate("sitemap") }}</h2>
 <form id="sitemap_settings" class="split" action="{{ url('sitemap_settings') }}" method="post" accept-charset="UTF-8">
-<fieldset>
+<fieldset role="presentation">
 <p>
 <label for="sitemap_path">{{ "Sitemap Path" | translate("sitemap") }}</label>
 <input class="text" type="text" name="sitemap_path" value="{{ site.module_sitemap['sitemap_path'] | fix(true) }}" id="sitemap_path">

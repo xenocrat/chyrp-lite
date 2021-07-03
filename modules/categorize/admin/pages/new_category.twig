@@ -5,7 +5,7 @@
 {% block content %}
 <h2>{{ "New Category" | translate("categorize") }}</h2>
 <form id="add_category" class="split" action="{{ url('add_category') }}" method="post" accept-charset="UTF-8">
-<fieldset>
+<fieldset role="presentation">
 <p>
 <label for="name">{{ "Name" | translate("categorize") }}</label>
 <input class="text" type="text" name="name" value="" id="name" maxlength="128" required>

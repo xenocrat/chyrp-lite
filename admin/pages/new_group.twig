@@ -5,7 +5,7 @@
 {% block content %}
 <h1>{{ "New Group" | translate }}</h1>
 <form id="new_group" class="split" action="{{ url('add_group') }}" method="post" accept-charset="UTF-8">
-<fieldset>
+<fieldset role="presentation">
 <p>
 <label for="name">{{ "Name" | translate }}</label>
 <input class="text" type="text" name="name" value="" id="name" maxlength="100" required>

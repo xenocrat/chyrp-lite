@@ -5,7 +5,7 @@
 {% block content %}
 <h2>{{ "Editing Tags for &#8220;%s&#8221;" | translate("tags") | format(post.title() | striptags | oneof("[Untitled]" | translate)) }}</h2>
 <form class="split" action="{{ url('update_tags') }}" method="post" accept-charset="UTF-8">
-<fieldset>
+<fieldset role="presentation">
 <p>
 <label for="name">{{ "Tags" | translate("tags") }}</label>
 <input type="text" name="tags" value="{{ post.tags | keys | join(', ') | fix(true, true) }}" id="tags">

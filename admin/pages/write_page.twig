@@ -4,7 +4,7 @@
 
 {% block content %}
 <form id="write_form" action="{{ url('add_page') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
-<fieldset>
+<fieldset role="presentation">
 {% include "partials" ~ DIR ~ "page_fields.twig" %}
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
 </fieldset>

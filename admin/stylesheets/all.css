@@ -836,10 +836,12 @@ div.more_options p textarea {
     margin: 0em;
 }
 span.options_extra {
+    box-sizing: border-box;
     display: inline-block;
     width: 100%;
-    padding: 1rem 2px 2px 2px;
     max-height: 10rem;
+    padding: 1rem 0.5rem 0.5rem 0.5rem;
+    background-color: #fbfbfb;
     overflow-y: auto;
 }
 span.options_tray {

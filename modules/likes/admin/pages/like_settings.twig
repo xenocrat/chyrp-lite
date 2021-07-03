@@ -5,7 +5,7 @@
 {% block content %}
 <h2>{{ "Like Settings" | translate("likes") }}</h2>
 <form id="like_settings" class="split" action="{{ url('like_settings') }}" method="post" accept-charset="UTF-8">
-<fieldset>
+<fieldset role="presentation">
 <p>
 <label for="like_image">{{ "Like Image" | translate("likes") }}</label>
 <select name="like_image">

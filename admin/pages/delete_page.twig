@@ -8,7 +8,7 @@
 {{ "Are you sure you want to delete &#8220;%s&#8221;?" | translate | format(page.title | striptags | oneof("[Untitled]" | translate)) }}
 </p>
 <form class="delete split" action="{{ url('destroy_page') }}" method="post" accept-charset="UTF-8">
-<fieldset>
+<fieldset role="presentation">
 {% if page.children is not empty %}
 <p>
 <label for="destroy_children">{{ "Delete children?" | translate }}</label>

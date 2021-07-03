@@ -5,7 +5,7 @@
 {% block content %}
 <h2>{{ "Cascade Settings" | translate("cascade") }}</h2>
 <form id="cascade_settings" class="split" action="{{ url('cascade_settings') }}" method="post" accept-charset="UTF-8">
-<fieldset>
+<fieldset role="presentation">
 <p>
 <label for="auto">{{ "Automatic" | translate("cascade") }}</label>
 <input type="checkbox" class="checkbox" name="auto"{{ site.module_cascade.ajax_scroll_auto | checked }}>
