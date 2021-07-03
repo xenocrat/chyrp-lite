@@ -457,7 +457,7 @@ input[type="password"].strong {
     background-color: #ebfae4;
 }
 input[type="password"].strong:focus {
-    border: 1px solid #189100;
+    border: 1px solid #108600;
 }
 input[type="file"] {
     box-sizing: border-box;
@@ -639,16 +639,16 @@ td.controls img {
 p.flash {
     padding: 0.6rem;
     margin-bottom: 1rem;
-    background-color: #7a9acc;
+    background-color: #1e57ba;
     color: #ffffff;
     border: none;
     border-radius: 0.3em;
 }
 p.flash.notice {
-    background-color: #76b362;
+    background-color: #108600;
 }
 p.flash.warning {
-    background-color: #d94c4c;
+    background-color: #c11600;
 }
 p.flash a {
     color: #ffffff;
@@ -715,7 +715,7 @@ button.boo:focus,
 a.button.boo:focus,
 button.boo:active,
 a.button.boo:active {
-    border-color: #d51800;
+    border-color: #c11600;
 }
 button.yay,
 a.button.yay {
@@ -729,7 +729,7 @@ button.yay:focus,
 a.button.yay:focus,
 button.yay:active,
 a.button.yay:active {
-    border-color: #189100;
+    border-color: #108600;
 }
 button > img,
 a.button > img {
@@ -840,7 +840,7 @@ span.options_extra {
     display: inline-block;
     width: 100%;
     max-height: 10rem;
-    padding: 1rem 0.5rem 0.5rem 0.5rem;
+    padding: 0.5rem;
     background-color: #fbfbfb;
     overflow-y: auto;
 }

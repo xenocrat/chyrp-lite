@@ -13,7 +13,7 @@
 </p>
 <p>
 <label for="default_comment_status">{{ "Default Comment Status" | translate("comments") }}</label>
-<select name="default_comment_status">
+<select name="default_comment_status" id="default_comment_status">
 {% set default_comment_status = site.module_comments.default_comment_status %}
 {% for key, val in comments_status %}
 <option value="{{ key }}"{{ key | selected(default_comment_status) }}>{{ val }}</option>
@@ -27,7 +27,7 @@
 </p>
 <p>
 <label for="enable_reload_comments">{{ "Reload Comments" | translate("comments") }}</label>
-<input type="checkbox" class="checkbox" name="enable_reload_comments"{{ site.module_comments.enable_reload_comments | checked }}>
+<input type="checkbox" class="checkbox" name="enable_reload_comments"  id="enable_reload_comments"{{ site.module_comments.enable_reload_comments | checked }}>
 <small>{{ "Show newly added comments (up to the maximum number per page)." | translate("comments") }}</small>
 </p>
 <p>
