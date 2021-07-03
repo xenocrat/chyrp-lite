@@ -49,7 +49,8 @@ function toggle_all() {
                 "type": "checkbox",
                 "name": "toggle",
                 "id": master,
-                "class": "checkbox"
+                "class": "checkbox",
+                "aria-label": '<?php echo __("Toggle All", "admin"); ?>'
             }).prop("checked", all_on).click(function(e) {
                 slaves.prop("checked", $(this).prop("checked"));
             })]

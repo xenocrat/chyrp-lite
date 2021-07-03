@@ -29,7 +29,8 @@
 {% for comment in comments.paginated %}
 <tr id="comment_{{ comment.id }}" class="comment {{ comment.status }}">
 <td rowspan="2" class="checkbox">
-<input type="checkbox" name="comment[{{ comment.id }}]" value="" id="comment_checkbox_{{ comment.id }}">
+<input type="checkbox" name="comment[{{ comment.id }}]" value="" id="comment_checkbox_{{ comment.id }}" aria-label="{{ 'Select
+' | translate | fix(true) }}">
 </td>
 <td class="comment_post title main"><a href="{{ comment.post.url() }}#comment_{{ comment.id }}">
 {{ comment.post.title() | striptags | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
