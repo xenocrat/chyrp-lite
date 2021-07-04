@@ -157,9 +157,6 @@ a:active {
     color: #2f61c4;
     text-decoration: underline;
 }
-small a, .small a, .sub a {
-    color: #b3b5b5;
-}
 div.clear {
     visibility: hidden;
     clear: both;
