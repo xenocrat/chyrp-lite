@@ -259,7 +259,7 @@
                 font-size: 1em;
                 font-weight: bold;
                 margin: 1rem 0rem;
-                border-bottom: 1px solid #dfdfdf;
+                border-bottom: 1px solid #cfcfcf;
             }
             p {
                 margin-bottom: 1rem;
@@ -274,7 +274,9 @@
                 font-size: 0.8rem;
                 word-wrap: break-word;
                 background-color: #efefef;
-                padding: 2px;
+                padding: 0px 2px;
+                color: #4f4f4f;
+                border: 1px solid #cfcfcf;
             }
             strong {
                 font-weight: normal;

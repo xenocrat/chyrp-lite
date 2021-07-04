@@ -286,7 +286,7 @@
                 font-size: 1em;
                 font-weight: bold;
                 margin: 1rem 0rem;
-                border-bottom: 1px solid #dfdfdf;
+                border-bottom: 1px solid #cfcfcf;
             }
             p {
                 margin-bottom: 1rem;
@@ -301,7 +301,9 @@
                 font-size: 0.8rem;
                 word-wrap: break-word;
                 background-color: #efefef;
-                padding: 2px;
+                padding: 0px 2px;
+                color: #4f4f4f;
+                border: 1px solid #cfcfcf;
             }
             strong {
                 font-weight: normal;
@@ -337,7 +339,7 @@
                 font-size: 1.25em;
                 padding: 0.2em;
                 border-radius: 0em;
-                border: 1px solid #dfdfdf;
+                border: 1px solid #cfcfcf;
                 background-color: #ffffff;
             }
             input[type="text"]:focus,
@@ -373,12 +375,12 @@
                 background-color: #ebfae4;
             }
             input[type="password"].strong:focus {
-                border: 1px solid #189100;
+                border: 1px solid #108600;
             }
             form hr {
                 border: none;
                 clear: both;
-                border-top: 1px solid #dddddd;
+                border-top: 1px solid #cfcfcf;
                 margin: 2rem 0rem;
             }
             form p {
