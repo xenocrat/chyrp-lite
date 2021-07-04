@@ -474,7 +474,6 @@
             }
             .sub {
                 font-size: 0.8em;
-                color: #b3b5b5;
                 font-weight: normal;
             }
         </style>
