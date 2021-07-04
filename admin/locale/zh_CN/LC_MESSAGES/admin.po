@@ -813,7 +813,7 @@ msgstr "该模块与以下模块冲突："
 msgid "This module requires the following modules to be enabled:"
 msgstr "这个模块需要以下模块启用："
 
-#: admin/pages/new_group.twig:23
+#: admin/pages/new_group.twig:24
 msgid "Add Group"
 msgstr "增加组"
 
