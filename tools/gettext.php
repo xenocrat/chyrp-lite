@@ -397,8 +397,8 @@
             $result = @file_put_contents($pot_file, $contents);
 
             echo $filename.".pot ".(($result === false) ?
-                                    '<span style="color:#d94c4c;">Boo!</span>' :
-                                    '<span style="color:#76b362;">Yay!</span>')."\n";
+                                    '<span style="background-color:#c11600;">Boo!</span>' :
+                                    '<span style="background-color:#108600;">Yay!</span>')."\n";
         }
     }
 
