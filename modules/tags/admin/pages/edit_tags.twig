@@ -7,7 +7,7 @@
 <form class="split" action="{{ url('update_tags') }}" method="post" accept-charset="UTF-8">
 <fieldset role="presentation">
 <p>
-<label for="name">{{ "Tags" | translate("tags") }}</label>
+<label for="tags">{{ "Tags" | translate("tags") }}</label>
 <input type="text" name="tags" value="{{ post.tags | keys | join(', ') | fix(true, true) }}" id="tags">
 </p>
 <p class="buttons">
