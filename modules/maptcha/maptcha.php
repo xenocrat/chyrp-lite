@@ -56,7 +56,7 @@
             }
 
             return '<label for="maptcha_response">'.$label.'</label>'."\n".
-                   '<input type="number" name="maptcha_response" value="" placeholder="'.
+                   '<input type="number" name="maptcha_response" id="maptcha_response" value="" placeholder="'.
                    __("Yay mathemetics!", "maptcha").'">'."\n".
                    '<input type="hidden" name="maptcha_requested" value="'.$t.'">'."\n".
                    '<input type="hidden" name="maptcha_challenge" value="'.$value.'">'."\n";
