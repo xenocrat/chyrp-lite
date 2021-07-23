@@ -39,38 +39,18 @@
                          "httponly" => true,
                          "samesite" => "Lax");
 
-        if (version_compare(PHP_VERSION, "7.3", "<")) {
-            session_set_cookie_params($options["lifetime"],
-                                      $options["path"]."; SameSite=Lax",
-                                      $options["domain"],
-                                      $options["secure"],
-                                      $options["httponly"]);
+        $options_params = $options;
+        $options_cookie = $options;
 
-            session_name("ChyrpSession");
-            session_start();
+        unset($options_params["expires"]);
+        unset($options_cookie["lifetime"]);
 
-            if (isset($_COOKIE['ChyrpSession']))
-                setcookie(session_name(),
-                          session_id(),
-                          $options["expires"],
-                          $options["path"]."; SameSite=Lax",
-                          $options["domain"],
-                          $options["secure"],
-                          $options["httponly"]);
-        } else {
-            $options_params = $options;
-            $options_cookie = $options;
+        session_set_cookie_params($options_params);
+        session_name("ChyrpSession");
+        session_start();
 
-            unset($options_params["expires"]);
-            unset($options_cookie["lifetime"]);
-
-            session_set_cookie_params($options_params);
-            session_name("ChyrpSession");
-            session_start();
-
-            if (isset($_COOKIE['ChyrpSession']))
-                setcookie(session_name(), session_id(), $options_cookie);
-        }
+        if (isset($_COOKIE['ChyrpSession']))
+            setcookie(session_name(), session_id(), $options_cookie);
     }
 
     /**
@@ -729,18 +709,15 @@
      *     A string of the requested length.
      *
      * Notes:
-     *     Uses a cryptographically secure method if available.
+     *     Uses a cryptographically secure pseudo-random method.
      */
     function random($length) {
         $input = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         $range = strlen($input) - 1;
         $chars = "";
 
-        $func  = function_exists("random_int") ? "random_int" :
-                (function_exists("mt_rand") ? "mt_rand" : "rand") ;
-
         for ($i = 0; $i < $length; $i++)
-            $chars.= $input[$func(0, $range)];
+            $chars.= $input[random_int(0, $range)];
 
         return $chars;
     }
@@ -826,10 +803,6 @@
         $filepath = str_replace(array("_", "\\", "\0"),
                                 array(DIR, DIR, ""),
                                 ltrim($class, "\\")).".php";
-
-        # Use Twig 1.42.5, last version to support PHP 5.5, 5.6, 7.0, and 7.1.
-        if (version_compare(PHP_VERSION, "7.2.5", "<"))
-            $filepath = str_replace("Twig".DIR, "TwigLegacy".DIR, $filepath);
 
         if (is_file(INCLUDES_DIR.DIR."lib".DIR.$filepath)) {
             require INCLUDES_DIR.DIR."lib".DIR.$filepath;
