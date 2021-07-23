@@ -21,6 +21,9 @@
          * Route constructor calls this to determine the action in the case of a POST request.
          */
         public function parse($route) {
+            if (isset($_SERVER['HTTP_SEC_FETCH_SITE']) and $_SERVER['HTTP_SEC_FETCH_SITE'] != "same-origin")
+                show_403();
+
             if (empty($route->action) and isset($_POST['action']))
                 return $route->action = $_POST['action'];
 
