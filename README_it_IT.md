@@ -60,7 +60,7 @@ sito web del tuo blog.
 
 ## Requisiti
 
-* PHP 5.4+ con estensioni predefinite (Session, JSON, Ctype, libxml, SimpleXML)
+* [PHP](https://www.php.net/supported-versions.php) con estensioni predefinite (Session, JSON, Ctype, libxml, SimpleXML)
 * MySQL:
   - MySQL 4.1+
   - MySQLi or PDO

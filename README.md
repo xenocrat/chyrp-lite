@@ -61,7 +61,7 @@ do many blogging tasks remotely without having to visit your blog's website.
 
 ## Requirements
 
-* PHP 5.4+ with default extensions (Session, JSON, Ctype, libxml, SimpleXML)
+* [PHP](https://www.php.net/supported-versions.php) with default extensions (Session, JSON, Ctype, libxml, SimpleXML)
 * MySQL:
   - MySQL 4.1+
   - MySQLi or PDO

@@ -53,7 +53,7 @@ Chyrp Lite还实现了一个完整的与WordPress兼容的MetaWeblog XML-RPC API
 
 ## 安装要求
 
-* PHP 5.4+具有默认扩展名 (Session, JSON, Ctype, libxml, SimpleXML)
+* [PHP](https://www.php.net/supported-versions.php) 具有默认扩展名 (Session, JSON, Ctype, libxml, SimpleXML)
 * MySQL:
   - MySQL 4.1+
   - MySQLi or PDO
