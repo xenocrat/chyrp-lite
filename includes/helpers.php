@@ -2211,7 +2211,7 @@
      * Parameters:
      *     $value - The value to be encoded.
      *     $options - A bitmask of encoding options.
-     *     $depth - Recursion depth for decoding.
+     *     $depth - Recursion depth for encoding.
      *
      * Returns:
      *     A JSON encoded string or false on failure.
