@@ -2211,12 +2211,13 @@
      * Parameters:
      *     $value - The value to be encoded.
      *     $options - A bitmask of encoding options.
+     *     $depth - Recursion depth for decoding.
      *
      * Returns:
      *     A JSON encoded string or false on failure.
      */
-    function json_set($value, $options = 0) {
-        $encoded = json_encode($value, $options);
+    function json_set($value, $options = 0, $depth = 512) {
+        $encoded = json_encode($value, $options, $depth);
 
         if (json_last_error())
             trigger_error(_f("JSON encoding error: %s", fix(json_last_error_msg(), false, true)), E_USER_WARNING);
@@ -2232,12 +2233,13 @@
      *     $value - The UTF-8 string to be decoded.
      *     $assoc - Convert objects into associative arrays?
      *     $depth - Recursion depth for decoding.
+     *     $options - A bitmask of decoding options.
      *
      * Returns:
      *     A JSON decoded value of the appropriate PHP type.
      */
-    function json_get($value, $assoc = false, $depth = 512) {
-        $decoded = json_decode($value, $assoc, $depth);
+    function json_get($value, $assoc = false, $depth = 512, $options = 0) {
+        $decoded = json_decode($value, $assoc, $depth, $options);
 
         if (json_last_error())
             trigger_error(_f("JSON decoding error: %s", fix(json_last_error_msg(), false, true)), E_USER_WARNING);
