@@ -28,6 +28,7 @@
                 $lastmod = strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']);
 
                 if ($lastmod >= $this->lastmod) {
+                    header_remove();
                     header($_SERVER['SERVER_PROTOCOL']." 304 Not Modified");
                     header("Cache-Control: no-cache");
                     header("Pragma: no-cache");
