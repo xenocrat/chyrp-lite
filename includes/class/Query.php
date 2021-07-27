@@ -1,7 +1,7 @@
 <?php
     /**
      * Class: Query
-     * Handles a query based on the <SQL.method>.
+     * Handles a SQL query.
      */
     class Query {
         # Variable: $query
@@ -58,44 +58,24 @@
                                             "time" => timer_stop());
             }
 
-            switch($this->sql->method) {
-                case "pdo":
-                    try {
-                        $this->query = $this->db->prepare($query);
-                        $result = $this->query->execute($params);
-                        $this->query->setFetchMode(PDO::FETCH_ASSOC);
-                        $this->queryString = $query;
+            try {
+                $this->query = $this->db->prepare($query);
+                $result = $this->query->execute($params);
+                $this->query->setFetchMode(PDO::FETCH_ASSOC);
+                $this->queryString = $query;
 
-                        foreach ($params as $name => $val)
-                            $this->queryString = preg_replace("/{$name}([^a-zA-Z0-9_]|$)/",
-                                                  str_replace(array("\\", "\$"),
-                                                              array("\\\\", "\\\$"),
-                                                              $this->sql->escape($val))."\\1",
-                                                              $this->queryString);
+                foreach ($params as $name => $val)
+                    $this->queryString = preg_replace("/{$name}([^a-zA-Z0-9_]|$)/",
+                                          str_replace(array("\\", "\$"),
+                                                      array("\\\\", "\\\$"),
+                                                      $this->sql->escape($val))."\\1",
+                                                      $this->queryString);
 
-                        if (!$result)
-                            throw new PDOException(__("PDO failed to execute the prepared statement."));
+                if (!$result)
+                    throw new PDOException(__("PDO failed to execute the prepared statement."));
 
-                    } catch (PDOException $e) {
-                        return $this->exception_handler($e);
-                    }
-
-                    break;
-
-                case "mysqli":
-                    foreach ($params as $name => $val)
-                        $query = preg_replace("/{$name}([^a-zA-Z0-9_]|$)/",
-                                              str_replace(array("\\", "\$"),
-                                                          array("\\\\", "\\\$"),
-                                                          $this->sql->escape($val))."\\1",
-                                                          $query);
-
-                    $this->queryString = $query;
-
-                    if (!$this->query = $this->db->query($query))
-                        return $this->exception_handler(new Exception($this->db->error, $this->db->errno));
-
-                    break;
+            } catch (PDOException $e) {
+                return $this->exception_handler($e);
             }
         }
 
@@ -107,14 +87,7 @@
          *     $column - The offset of the column to grab. Default 0.
          */
         public function fetchColumn($column = 0) {
-            switch($this->sql->method) {
-                case "pdo":
-                    return $this->query->fetchColumn($column);
-
-                case "mysqli":
-                    $result = $this->query->fetch_array();
-                    return is_array($result) ? $result[$column] : $result ;
-            }
+            return $this->query->fetchColumn($column);
         }
 
         /**
@@ -122,13 +95,7 @@
          * Returns the current row as an array.
          */
         public function fetch() {
-            switch($this->sql->method) {
-                case "pdo":
-                    return $this->query->fetch();
-
-                case "mysqli":
-                    return $this->query->fetch_array();
-            }
+            return $this->query->fetch();
         }
 
         /**
@@ -136,13 +103,7 @@
          * Returns the current row as an object.
          */
         public function fetchObject() {
-            switch($this->sql->method) {
-                case "pdo":
-                    return $this->query->fetchObject();
-
-                case "mysqli":
-                    return $this->query->fetch_object();
-            }
+            return $this->query->fetchObject();
         }
 
         /**
@@ -150,18 +111,7 @@
          * Returns an array of every result.
          */
         public function fetchAll($style = null) {
-            switch($this->sql->method) {
-                case "pdo":
-                    return $this->query->fetchAll($style);
-
-                case "mysqli":
-                    $results = array();
-
-                    while ($row = $this->query->fetch_assoc())
-                        $results[] = $row;
-
-                    return $results;
-            }
+            return $this->query->fetchAll($style);
         }
 
         /**

@@ -104,9 +104,6 @@
     if (file_exists(INCLUDES_DIR.DIR."config.json.php"))
         redirect($config->url);
 
-    if (class_exists("MySQLi"))
-        $drivers[] = "mysql";
-
     if (class_exists("PDO")) {
         $pdo_available_drivers = PDO::getAvailableDrivers();
 
@@ -122,7 +119,7 @@
 
     # Test for basic database access requirements.
     if (empty($drivers))
-        alert(__("MySQLi or PDO is required for database access."));
+        alert(__("PDO is required for database access."));
 
     # Test if we can write to MAIN_DIR (needed for the .htaccess file).
     if (!is_writable(MAIN_DIR))

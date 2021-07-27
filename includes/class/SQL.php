@@ -68,48 +68,29 @@
             if ($this->connected)
                 return true;
 
-            # For MySQL databases we prefer the MySQLi driver.
-            $this->method = ($this->adapter == "mysql" and class_exists("MySQLi")) ? "mysqli" : "pdo" ;
+            try {
+                if (!in_array($this->adapter, PDO::getAvailableDrivers()))
+                    throw new PDOException(__("PDO driver is unavailable for this database."));
 
-            switch($this->method) {
-                case "pdo":
-                    try {
-                        if (!in_array($this->adapter, PDO::getAvailableDrivers()))
-                            throw new PDOException(__("PDO driver is unavailable for this database."));
+                if ($this->adapter == "sqlite")
+                    $this->db = new PDO("sqlite:".$this->database,
+                                        null,
+                                        null,
+                                        array(PDO::ATTR_PERSISTENT => false));
+                else
+                    $this->db = new PDO($this->adapter.":host=".$this->host.";".
+                                        ((isset($this->port)) ? "port=".$this->port.";" : "").
+                                        "dbname=".$this->database,
+                                        $this->username,
+                                        $this->password,
+                                        array(PDO::ATTR_PERSISTENT => false));
 
-                        if ($this->adapter == "sqlite")
-                            $this->db = new PDO("sqlite:".$this->database,
-                                                null,
-                                                null,
-                                                array(PDO::ATTR_PERSISTENT => false));
-                        else
-                            $this->db = new PDO($this->adapter.":host=".$this->host.";".
-                                                ((isset($this->port)) ? "port=".$this->port.";" : "").
-                                                "dbname=".$this->database,
-                                                $this->username,
-                                                $this->password,
-                                                array(PDO::ATTR_PERSISTENT => false));
-
-                        $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                    } catch (PDOException $error) {
-                        $this->error = $error->getMessage();
-                        return ($checking) ?
-                            false :
-                            trigger_error(_f("Database error: %s", fix($this->error, false, true)), E_USER_ERROR) ;
-                    }
-
-                    break;
-
-                case "mysqli":
-                    $this->db = @new MySQLi($this->host, $this->username, $this->password, $this->database);
-                    $this->error = $this->db->connect_error;
-
-                    if (!empty($this->error))
-                        return ($checking) ?
-                            false :
-                            trigger_error(_f("Database error: %s", fix($this->error, false, true)), E_USER_ERROR) ;
-
-                    break;
+                $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (PDOException $error) {
+                $this->error = $error->getMessage();
+                return ($checking) ?
+                    false :
+                    trigger_error(_f("Database error: %s", fix($this->error, false, true)), E_USER_ERROR) ;
             }
 
             if ($this->adapter == "mysql") {
@@ -314,18 +295,12 @@
             if (!isset($this->db))
                 $this->connect();
 
-            switch($this->method) {
-                case "pdo":
-                    return $this->db->lastInsertId($this->prefix.$table."_".$seq);
-
-                case "mysqli":
-                    return $this->db->insert_id;
-            }
+            return $this->db->lastInsertId($this->prefix.$table."_".$seq);
         }
 
         /**
          * Function: escape
-         * Escapes a string for Query construction using the SQL connection method's escaping functions.
+         * Escapes a string for Query construction.
          *
          * Parameters:
          *     $string - String to escape.
@@ -335,16 +310,7 @@
             if (!isset($this->db))
                 $this->connect();
 
-            switch($this->method) {
-                case "pdo":
-                    $string = trim($this->db->quote($string), "'");
-                    break;
-
-                case "mysqli":
-                    $string = $this->db->escape_string($string);
-                    break;
-            }
-
+            $string = trim($this->db->quote($string), "'");
             $string = str_replace('$', '\$', $string);
 
             if ($quotes and !is_numeric($string))
