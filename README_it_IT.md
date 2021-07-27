@@ -61,15 +61,13 @@ sito web del tuo blog.
 ## Requisiti
 
 * [PHP](https://www.php.net/supported-versions.php) con estensioni predefinite (Session, JSON, Ctype, libxml, SimpleXML)
+* [PDO](https://www.php.net/manual/en/book.pdo.php)
 * MySQL:
   - MySQL 4.1+
-  - MySQLi or PDO
 * SQLite:
   - SQLite 3+
-  - PDO
 * PostgreSQL:
   - PostgreSQL 10+
-  - PDO
 
 ## Installazione
 

@@ -62,15 +62,13 @@ do many blogging tasks remotely without having to visit your blog's website.
 ## Requirements
 
 * [PHP](https://www.php.net/supported-versions.php) with default extensions (Session, JSON, Ctype, libxml, SimpleXML)
+* [PDO](https://www.php.net/manual/en/book.pdo.php)
 * MySQL:
   - MySQL 4.1+
-  - MySQLi or PDO
 * SQLite:
   - SQLite 3+
-  - PDO
 * PostgreSQL:
   - PostgreSQL 10+
-  - PDO
 
 ## Installation
 
