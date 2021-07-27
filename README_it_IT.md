@@ -62,12 +62,9 @@ sito web del tuo blog.
 
 * [PHP](https://www.php.net/supported-versions.php) con estensioni predefinite (Session, JSON, Ctype, libxml, SimpleXML)
 * [PDO](https://www.php.net/manual/en/book.pdo.php)
-* MySQL:
-  - MySQL 4.1+
-* SQLite:
-  - SQLite 3+
-* PostgreSQL:
-  - PostgreSQL 10+
+* MySQL 4.1+
+* SQLite 3+
+* PostgreSQL 10+
 
 ## Installazione
 
