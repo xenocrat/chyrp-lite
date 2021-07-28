@@ -80,9 +80,9 @@ Puoi aggiornare Chyrp Lyte in sei passaggi:
 
 1. __Fai un backup completo prima di procedere con l'aggiornamento!__
 2. Scarica l'ultima versione di Chyrp Lite.
-3. Copia il tuo file di configurazione da _includes/config.json.php_ in un luogo sicuro.
-4. Sovrascrivi la tua versione corrente con la nuova, assicurandoti di mantenere la tua cartella _uploads_.
-5. Ripristina il tuo file di configurazione presso _includes_.
+3. Sposta le tue cartelle _uploads_ e il file _includes/config.json.php_ in un luogo sicuro.
+4. Sovrascrivi la tua versione corrente con la nuova.
+5. Ripristina la tua cartella _uploads_ e il file _includes/config.json.php_.
 6. Esegui il processo di aggiornamento visitando [upgrade.php](upgrade.php) sul tuo web browser.
 
 ## Documentazione

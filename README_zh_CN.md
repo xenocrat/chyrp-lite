@@ -73,9 +73,9 @@ Chyrp Lite还实现了一个完整的与WordPress兼容的MetaWeblog XML-RPC API
 
 1. __继续之前备份您的数据库！__
 2. 下载最新版本的Chyrp Lite。
-3. 从 _includes/config.json.php_ 复制配置文件到一个安全的地方。
-4. 使用新版本覆盖当前版本， 确保保留 _uploads_ 文件夹。
-5. 恢复配置文件到 _includes_.
+3. 将您的 _uploads_ 文件夹和 _includes/config.json.php_ 移动到安全的地方。
+4. 使用新版本覆盖当前版本。
+5. 恢复您的 _uploads_ 文件夹和 _includes/config.json.php_。
 6. 在您的浏览其中访问 [upgrade.php](upgrade.php) 来运行升级程序。
 
 ## 文档

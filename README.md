@@ -1,9 +1,5 @@
 [简体中文](README_zh_CN.md), [Italiano](README_it_IT.md).
 
-# &#x1f4e3; Translations wanted!
-
-Go to the [wiki](https://github.com/xenocrat/chyrp-lite/wiki/Introduction-to-Translations) to find out more about translating Chyrp Lite into your language.
-
 ## What can Chyrp Lite do for me?
 
 Chyrp Lite makes it possible to host a blog on your own web server with minimal fuss. You can have
@@ -81,9 +77,9 @@ You can upgrade Chyrp Lite in six steps:
 
 1. __Backup your database before proceeding!__
 2. Download the latest version of Chyrp Lite.
-3. Copy your config file from _includes/config.json.php_ to somewhere safe.
-4. Overwrite your current version with the new one, making sure to retain your _uploads_ folder.
-5. Restore your config file to _includes_.
+3. Move your _uploads_ folder and _includes/config.json.php_ somewhere safe.
+4. Overwrite your current version with the new one.
+5. Restore your _uploads_ folder and _includes/config.json.php_.
 6. Run the upgrade process by visiting [upgrade.php](upgrade.php) in your web browser.
 
 ## Documentation
