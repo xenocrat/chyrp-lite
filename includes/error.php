@@ -177,7 +177,7 @@
             }
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('<?php echo $chyrp_url; ?>/fonts/OpenSans-Semibold.woff') format('woff');
+                src: url('<?php echo $chyrp_url; ?>/fonts/OpenSans-SemiBold.woff') format('woff');
                 font-weight: bold;
                 font-style: normal;
             }
@@ -189,7 +189,7 @@
             }
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('<?php echo $chyrp_url; ?>/fonts/OpenSans-SemiboldItalic.woff') format('woff');
+                src: url('<?php echo $chyrp_url; ?>/fonts/OpenSans-SemiBoldItalic.woff') format('woff');
                 font-weight: bold;
                 font-style: italic;
             }
