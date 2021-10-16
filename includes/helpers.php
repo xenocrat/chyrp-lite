@@ -2014,22 +2014,26 @@
      *     A sanitized unique filename, or false on failure.
      */
     function upload_filename($filename, $filter = array()) {
-        if (!empty($filter))
-            foreach ($filter as &$entry)
-                $entry = preg_quote($entry, "/");
-
-        $patterns = !empty($filter) ? implode("|", $filter) : "tar\.[a-z0-9]+|[a-z0-9]+" ;
-        $disallow = "htaccess|php|php3|php4|php5|php7|phps|phtml|shtml|shtm|stm|cgi|asp|aspx";
-
-        # Extract the file's basename and extension, disallow harmful extensions.
-        preg_match("/(.+?)(\.($patterns)(?<!$disallow))?$/i", $filename, $matches);
-
-        # Return false if a valid extension was not extracted.
-        if (!empty($filter) and empty($matches[3]))
+        if (strlen($filename) < 1)
             return false;
 
-        $extension = fallback($matches[3], "bin");
-        $sanitized = oneof(sanitize(fallback($matches[1], ""), true, true, 80), md5($filename));
+        if (empty($filter))
+            $filter = upload_filter_whitelist();
+
+        foreach ($filter as &$entry)
+            $entry = preg_quote($entry, "/");
+
+        $patterns = implode("|", $filter);
+
+        # Extract the file's basename and extension.
+        preg_match("/(.+?)(\.($patterns))?$/i", $filename, $matches);
+
+        # Return false if a valid extension was not extracted.
+        if (empty($matches[3]))
+            return false;
+
+        $extension = $matches[3];
+        $sanitized = oneof(sanitize($matches[1], true, true, 80), md5($filename));
         $count = 1;
         $unique = $sanitized.".".$extension;
 
@@ -2039,6 +2043,20 @@
         }
 
         return $unique;
+    }
+
+    /**
+     * Function: upload_filter_whitelist
+     * Returns an array containing a default list of allowed extensions.
+     */
+    function upload_filter_whitelist() {
+        return array(
+            "bin", "txt", "md",
+            "zip", "tar", "rar", "dmg", "bz2", "gz",
+            "jpg", "jpeg", "png", "gif", "webp", "avif",
+            "mp4", "ogv", "webm", "3gp", "mkv", "mov",
+            "mp3", "m4a", "mp4", "oga", "ogg", "webm", "mka"
+        );
     }
 
     #---------------------------------------------
