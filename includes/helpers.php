@@ -2014,9 +2014,6 @@
      *     A sanitized unique filename, or false on failure.
      */
     function upload_filename($filename, $filter = array()) {
-        if (strlen($filename) < 1)
-            return false;
-
         if (empty($filter))
             $filter = upload_filter_whitelist();
 
@@ -2025,11 +2022,8 @@
 
         $patterns = implode("|", $filter);
 
-        # Extract the file's basename and extension.
-        preg_match("/(.+?)(\.($patterns))?$/i", $filename, $matches);
-
-        # Return false if a valid extension was not extracted.
-        if (empty($matches[3]))
+        # Return false if a valid basename and extension is not extracted.
+        if (!preg_match("/(.+)(\.($patterns))$/i", $filename, $matches))
             return false;
 
         $extension = $matches[3];
@@ -2051,16 +2045,16 @@
      */
     function upload_filter_whitelist() {
         return array(
-            # Binary / Text formats:
+            # Binary and text formats:
             "bin", "exe", "txt", "md", "pdf",
 
-            # Archive / Compression formats:
+            # Archive and compression formats:
             "zip", "tar", "rar", "dmg", "bz2", "gz",
 
             # Image formats:
-            "jpg", "jpeg", "png", "gif", "webp", "avif",
+            "jpg", "jpeg", "png", "gif", "webp", "avif", "tif", "tiff",
 
-            # Video / Audio formats:
+            # Video and audio formats:
             "mp4", "ogv", "webm", "3gp", "mkv", "mov", "mp3", "m4a", "oga", "ogg", "mka", "flac"
         );
     }
