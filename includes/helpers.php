@@ -2046,16 +2046,16 @@
     function upload_filter_whitelist() {
         return array(
             # Binary and text formats:
-            "bin", "exe", "txt", "md", "pdf",
+            "bin", "exe", "txt", "rtf", "md", "pdf",
 
             # Archive and compression formats:
-            "zip", "tar", "rar", "dmg", "bz2", "gz",
+            "zip", "tar", "rar", "dmg", "cab", "bz2", "gz",
 
             # Image formats:
-            "jpg", "jpeg", "png", "gif", "webp", "avif", "tif", "tiff",
+            "jpg", "jpeg", "png", "gif", "webp", "avif", "tif", "tiff", "bmp",
 
             # Video and audio formats:
-            "mp4", "ogv", "webm", "3gp", "mkv", "mov", "mp3", "m4a", "oga", "ogg", "mka", "flac"
+            "mp4", "ogv", "webm", "3gp", "mkv", "mov", "mp3", "m4a", "oga", "ogg", "mka", "flac", "wav"
         );
     }
 
