@@ -54,7 +54,7 @@
         preg_match("/(bots?|crawler|slurp|spider)\b/i", $_SERVER['HTTP_USER_AGENT']));
 
     # Constant: TESTER
-    # Are we being visited by the automated tester?
+    # Are we being visited by an automated tester?
     define('TESTER', isset($_SERVER['HTTP_USER_AGENT']) and $_SERVER['HTTP_USER_AGENT'] == "TESTER");
 
     # Constant: DIR
