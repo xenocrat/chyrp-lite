@@ -27,8 +27,7 @@
         public function open($path, $name) {
             $this->created_at = datetime();
 
-            if (SESSION_DENY_BOT and isset($_SERVER['HTTP_USER_AGENT']) and
-                preg_match("/(bot|crawler|slurp|spider)\b/i", $_SERVER['HTTP_USER_AGENT']))
+            if (SESSION_DENY_BOT and BOT_UA)
                     $this->deny = true;
 
             if (SESSION_DENY_RPC and XML_RPC)

@@ -48,8 +48,13 @@
     # Is the user running the installer? (false)
     define('INSTALLING', false);
 
+    # Constant: BOT_UA
+    # Are we being visited by a probable robot?
+    define('BOT_UA', isset($_SERVER['HTTP_USER_AGENT']) and
+        preg_match("/(bots?|crawler|slurp|spider)\b/i", $_SERVER['HTTP_USER_AGENT']));
+
     # Constant: TESTER
-    # Is the site being run by the automated tester?
+    # Are we being visited by the automated tester?
     define('TESTER', isset($_SERVER['HTTP_USER_AGENT']) and $_SERVER['HTTP_USER_AGENT'] == "TESTER");
 
     # Constant: DIR
