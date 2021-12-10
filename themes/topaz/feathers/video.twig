@@ -3,13 +3,13 @@
 {% block content %}
 {% if post.title is not empty %}
 <h2 class="post_title">
-<a href="{{ post.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(post.title | striptags | normalize | fix(true)) }}">{{ post.title }}</a>
+<a href="{{ post.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(post.title | striptags | normalize | fix(true)) }}">{{ post.title | striptags }}</a>
 </h2>
 <h6 class="post_byline">{{ "Written by %s" | translate | format(post.author.name) }}</h6>
 {% endif %}
 {% if post.description is not empty %}
 <section class="description">
-{{ post.description }}
+{{ post.description | striptags }}
 </section>
 {% endif %}
 <section class="video">

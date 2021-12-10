@@ -3,17 +3,17 @@
 {% block content %}
 {% if post.title is not empty %}
 <h2 class="post_title">
-<a href="{{ post.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(post.title | striptags | normalize | fix(true)) }}">{{ post.title }}</a>
+<a href="{{ post.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(post.title | striptags | normalize | fix(true)) }}">{{ post.title | striptags }}</a>
 </h2>
 <h6 class="post_byline">{{ "Written by %s" | translate | format(post.author.name) }}</h6>
 {% endif %}
 <section class="quote">
 <blockquote>
-{{ post.quote }}
+{{ post.quote | striptags }}
 </blockquote>
 {% if post.source is not empty %}
 <cite>
-{{ post.source }}
+{{ post.source | striptags }}
 </cite>
 {% endif %}
 </section>

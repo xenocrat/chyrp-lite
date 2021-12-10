@@ -3,15 +3,15 @@
 {% block content %}
 {% if post.title is not empty %}
 <h2 class="post_title">
-<a href="{{ post.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(post.title | striptags | normalize | fix(true)) }}">{{ post.title }}</a>
+<a href="{{ post.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(post.title | striptags | normalize | fix(true)) }}">{{ post.title | striptags }}</a>
 </h2>
 {% endif %}
 <section class="photo">
-{{ post.filename | thumbnail(post.alt_text, post.source, ["max_width=1280", "max_height=1920", "quality=80"], "(max-width: 959px) 95vw, 75vw") }}
+{{ post.filename | thumbnail(post.alt_text, post.source, ["max_width=1280", "max_height=1920", "quality=80"], "(max-width: 959px) 95vw, 75vw") | striptags }}
 </section>
 {% if post.caption is not empty %}
 <section class="caption">
-{{ post.caption }}
+{{ post.caption | striptags }}
 </section>
 {% endif %}
 {% endblock %}

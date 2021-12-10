@@ -2,9 +2,9 @@
 
 {% block content %}
 <h2 class="post_title">
-<a href="{{ post.source | striptags | fix(true) }}" class="link">{{ post.name }}</a>
+<a href="{{ post.source | striptags | fix(true) }}" class="link">{{ post.name | striptags }}</a>
 </h2>
 <section class="description">
-{{ post.description }}
+{{ post.description | striptags }}
 </section>
 {% endblock %}
