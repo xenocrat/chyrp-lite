@@ -33,9 +33,6 @@
             if (SESSION_DENY_RPC and XML_RPC)
                 $this->deny = true;
 
-            if (SESSION_DENY_TESTER and TESTER)
-                $this->deny = true;
-
             return true;
         }
 

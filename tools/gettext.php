@@ -16,7 +16,6 @@
     define('XML_RPC',        false);
     define('UPGRADING',      false);
     define('INSTALLING',     false);
-    define('TESTER',         false);
     define('DIR',            DIRECTORY_SEPARATOR);
     define('MAIN_DIR',       dirname(dirname(__FILE__)));
     define('INCLUDES_DIR',   MAIN_DIR.DIR."includes");

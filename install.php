@@ -16,7 +16,6 @@
     define('XML_RPC',          false);
     define('UPGRADING',        false);
     define('INSTALLING',       true);
-    define('TESTER',           isset($_SERVER['HTTP_USER_AGENT']) and $_SERVER['HTTP_USER_AGENT'] == "TESTER");
     define('DIR',              DIRECTORY_SEPARATOR);
     define('MAIN_DIR',         dirname(__FILE__));
     define('INCLUDES_DIR',     MAIN_DIR.DIR."includes");
