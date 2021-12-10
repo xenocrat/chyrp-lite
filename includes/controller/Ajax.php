@@ -101,7 +101,7 @@
 
             $class = camelize(fallback($_POST['safename'], "text"));
             $field = fallback($_POST['field'], "body");
-            $content = sanitize_html(fallback($_POST['content'], ""));
+            $content = fallback($_POST['content'], "");
 
             # Custom filters.
             if (isset(Feathers::$custom_filters[$class]))
@@ -138,7 +138,7 @@
             $main = MainController::current();
 
             $field = fallback($_POST['field'], "body");
-            $content = sanitize_html(fallback($_POST['content'], ""));
+            $content = fallback($_POST['content'], "");
 
             # Page title filters.
             if ($field == "title")
