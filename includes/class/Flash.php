@@ -62,6 +62,9 @@
 
             $_SESSION['messages'][] = Trigger::current()->filter($message, "flash_message", $redirect_to);
 
+            if (DEBUG and !headers_sent())
+                header("X-Chyrp-Flash-Messages: ".count($_SESSION['messages']));
+
             if (isset($redirect_to))
                 redirect($redirect_to);
         }
@@ -79,8 +82,8 @@
 
             $_SESSION['notices'][] = Trigger::current()->filter($message, "flash_notice_message", $redirect_to);
 
-            if (TESTER)
-                exit("SUCCESS: ".$message);
+            if (DEBUG and !headers_sent())
+                header("X-Chyrp-Flash-Notices: ".count($_SESSION['notices']));
 
             if (isset($redirect_to))
                 redirect($redirect_to);
@@ -99,8 +102,8 @@
 
             $_SESSION['warnings'][] = Trigger::current()->filter($message, "flash_warning_message", $redirect_to);
 
-            if (TESTER)
-                exit("ERROR: ".$message);
+            if (DEBUG and !headers_sent())
+                header("X-Chyrp-Flash-Warnings: ".count($_SESSION['warnings']));
 
             if (isset($redirect_to))
                 redirect($redirect_to);
