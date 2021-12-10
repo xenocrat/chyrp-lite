@@ -42,20 +42,19 @@ msgstr "Finale &rarr;"
 msgid "&larr; First"
 msgstr "&larr; Prima"
 
-#: includes/class/Query.php:77
+#: includes/class/Query.php:75
 msgid "PDO failed to execute the prepared statement."
 msgstr "PDO non ha eseguito l'istruzione predisposta."
 
-#: includes/class/Query.php:198
+#: includes/class/Query.php:148
 msgid "Query String"
 msgstr "Stringa di ricerca"
 
-#: includes/class/Query.php:200
+#: includes/class/Query.php:150
 msgid "Parameters"
 msgstr "Parametri"
 
-#: includes/class/Query.php:204 includes/class/SQL.php:98
-#: includes/class/SQL.php:110 install.php:648
+#: includes/class/Query.php:154 includes/class/SQL.php:93 install.php:645
 #, php-format
 msgid "Database error: %s"
 msgstr "Errore di database: %s"
@@ -80,19 +79,19 @@ msgstr "Il percorso è stato avviato con un Controller non valido."
 #: includes/controller/Admin.php:1852 includes/controller/Admin.php:1938
 #: includes/controller/Admin.php:1941 includes/controller/Admin.php:1944
 #: includes/controller/Admin.php:1947 includes/controller/Admin.php:1950
-#: includes/controller/Admin.php:2147 includes/controller/Ajax.php:28
-#: includes/controller/Ajax.php:167 includes/download.php:12
-#: includes/download.php:15 includes/error.php:149 includes/helpers.php:1861
-#: includes/helpers.php:1867 includes/helpers.php:1870
-#: includes/helpers.php:1873 includes/helpers.php:1899
-#: includes/helpers.php:1902 includes/helpers.php:1905
-#: includes/helpers.php:2003 includes/helpers.php:2006
-#: includes/helpers.php:2009 includes/helpers.php:2012
-#: includes/helpers.php:2015 includes/helpers.php:2018
-#: includes/helpers.php:2021 includes/helpers.php:2026
+#: includes/controller/Admin.php:2147 includes/controller/Ajax.php:31
+#: includes/controller/Ajax.php:170 includes/download.php:12
+#: includes/download.php:15 includes/error.php:149 includes/helpers.php:1834
+#: includes/helpers.php:1840 includes/helpers.php:1843
+#: includes/helpers.php:1846 includes/helpers.php:1872
+#: includes/helpers.php:1875 includes/helpers.php:1878
+#: includes/helpers.php:1976 includes/helpers.php:1979
+#: includes/helpers.php:1982 includes/helpers.php:1985
+#: includes/helpers.php:1988 includes/helpers.php:1991
+#: includes/helpers.php:1994 includes/helpers.php:1999
 #: includes/thumbnail.php:15 includes/thumbnail.php:18
 #: includes/thumbnail.php:33 includes/thumbnail.php:195
-#: includes/thumbnail.php:235 install.php:833 upgrade.php:173 upgrade.php:186
+#: includes/thumbnail.php:235 install.php:830 upgrade.php:173 upgrade.php:186
 #: upgrade.php:199 upgrade.php:212 upgrade.php:225 upgrade.php:239
 #: upgrade.php:265 upgrade.php:278 upgrade.php:292 upgrade.php:305
 #: upgrade.php:318 upgrade.php:331 upgrade.php:345 upgrade.php:358
@@ -138,13 +137,13 @@ msgstr "Azione non valida."
 #: includes/controller/Admin.php:1981 includes/controller/Admin.php:1996
 #: includes/controller/Admin.php:2034 includes/controller/Admin.php:2042
 #: includes/controller/Admin.php:2076 includes/controller/Admin.php:2083
-#: includes/controller/Ajax.php:45 includes/controller/Ajax.php:56
-#: includes/controller/Ajax.php:68 includes/controller/Ajax.php:71
-#: includes/controller/Ajax.php:91 includes/controller/Ajax.php:94
-#: includes/controller/Ajax.php:129 includes/controller/Ajax.php:132
-#: includes/controller/Ajax.php:160 includes/controller/Ajax.php:163
+#: includes/controller/Ajax.php:48 includes/controller/Ajax.php:59
+#: includes/controller/Ajax.php:71 includes/controller/Ajax.php:74
+#: includes/controller/Ajax.php:94 includes/controller/Ajax.php:97
+#: includes/controller/Ajax.php:132 includes/controller/Ajax.php:135
+#: includes/controller/Ajax.php:163 includes/controller/Ajax.php:166
 #: includes/controller/Main.php:340 includes/controller/Main.php:398
-#: includes/download.php:18 includes/helpers.php:1864 includes/thumbnail.php:21
+#: includes/download.php:18 includes/helpers.php:1837 includes/thumbnail.php:21
 msgid "Access Denied"
 msgstr "Accesso negato"
 
@@ -153,7 +152,7 @@ msgstr "Accesso negato"
 msgid "You are not allowed to view this site."
 msgstr "Non è consentito visualizzare questo sito."
 
-#: includes/class/SQL.php:78
+#: includes/class/SQL.php:73
 msgid "PDO driver is unavailable for this database."
 msgstr "Il driver PDO non è disponibile per questo database."
 
@@ -170,16 +169,16 @@ msgstr "Vai a GitHub &rarr;"
 msgid "Unable to check for new Chyrp Lite versions."
 msgstr "Impossibile controllare le nuove versioni di Chyrp Lite."
 
-#: includes/common.php:290 includes/common.php:295
+#: includes/common.php:295 includes/common.php:300
 msgid "Service Unavailable"
 msgstr "Servizio non disponibile"
 
-#: includes/common.php:291
+#: includes/common.php:296
 msgid "This resource is temporarily unable to serve your request."
 msgstr ""
 "Questa risorsa non è temporaneamente in grado di soddisfare la richiesta."
 
-#: includes/common.php:296
+#: includes/common.php:301
 msgid "This resource cannot respond because it is not configured."
 msgstr "Questa risorsa non può rispondere perché non configurata."
 
@@ -188,7 +187,7 @@ msgid "You do not have sufficient privileges to view this area."
 msgstr "Non si dispone di privilegi sufficienti per visualizzare questa area."
 
 #: includes/controller/Admin.php:178 includes/controller/Admin.php:216
-#: includes/controller/Admin.php:1560 includes/controller/Ajax.php:94
+#: includes/controller/Admin.php:1560 includes/controller/Ajax.php:97
 #: includes/lib/XMLRPC.php:246
 msgid "You do not have sufficient privileges to add posts."
 msgstr "Non si dispone di privilegi sufficienti per aggiungere post."
@@ -204,9 +203,9 @@ msgstr "Per poter scrivere un post, devi abilitare almeno una Feather."
 #: includes/controller/Admin.php:838 includes/controller/Admin.php:908
 #: includes/controller/Admin.php:1065 includes/controller/Admin.php:1087
 #: includes/controller/Admin.php:1121 includes/controller/Admin.php:1809
-#: includes/controller/Admin.php:1855 includes/controller/Ajax.php:53
-#: includes/controller/Ajax.php:79 includes/download.php:24
-#: includes/helpers.php:137 includes/thumbnail.php:30
+#: includes/controller/Admin.php:1855 includes/controller/Ajax.php:56
+#: includes/controller/Ajax.php:82 includes/download.php:24
+#: includes/helpers.php:117 includes/thumbnail.php:30
 msgid "Not Found"
 msgstr "Non trovato"
 
@@ -225,9 +224,9 @@ msgstr "Feather non trovata."
 #: includes/controller/Admin.php:1875 includes/controller/Admin.php:1913
 #: includes/controller/Admin.php:1935 includes/controller/Admin.php:1996
 #: includes/controller/Admin.php:2042 includes/controller/Admin.php:2083
-#: includes/controller/Ajax.php:45 includes/controller/Ajax.php:71
-#: includes/controller/Ajax.php:91 includes/controller/Ajax.php:129
-#: includes/controller/Ajax.php:160 includes/controller/Main.php:481
+#: includes/controller/Ajax.php:48 includes/controller/Ajax.php:74
+#: includes/controller/Ajax.php:94 includes/controller/Ajax.php:132
+#: includes/controller/Ajax.php:163 includes/controller/Main.php:481
 #: includes/controller/Main.php:565 includes/controller/Main.php:595
 #: includes/controller/Main.php:623 includes/controller/Main.php:680
 #: includes/controller/Main.php:735
@@ -250,7 +249,7 @@ msgstr "Visualizza il post &rarr;"
 #: includes/controller/Admin.php:870 includes/controller/Admin.php:900
 #: includes/controller/Admin.php:1024 includes/controller/Admin.php:1049
 #: includes/controller/Admin.php:1082 includes/controller/Admin.php:1113
-#: includes/controller/Ajax.php:48 includes/controller/Ajax.php:74
+#: includes/controller/Ajax.php:51 includes/controller/Ajax.php:77
 msgid "No ID Specified"
 msgstr "Nessun ID specificato"
 
@@ -260,7 +259,7 @@ msgstr "Per modificare un post è necessario un ID."
 
 #: includes/controller/Admin.php:247 includes/controller/Admin.php:285
 #: includes/controller/Admin.php:314 includes/controller/Admin.php:340
-#: includes/controller/Ajax.php:53 includes/lib/XMLRPC.php:219
+#: includes/controller/Ajax.php:56 includes/lib/XMLRPC.php:219
 #: includes/lib/XMLRPC.php:327 includes/lib/XMLRPC.php:381
 msgid "Post not found."
 msgstr "Post non trovato."
@@ -279,16 +278,16 @@ msgid "Post updated."
 msgstr "Post aggiornato."
 
 #: includes/controller/Admin.php:309 includes/controller/Admin.php:332
-#: includes/controller/Ajax.php:48
+#: includes/controller/Ajax.php:51
 msgid "An ID is required to delete a post."
 msgstr "È necessario un ID per eliminare un post."
 
 #: includes/controller/Admin.php:318 includes/controller/Admin.php:344
-#: includes/controller/Ajax.php:56 includes/lib/XMLRPC.php:384
+#: includes/controller/Ajax.php:59 includes/lib/XMLRPC.php:384
 msgid "You do not have sufficient privileges to delete this post."
 msgstr "Non si dispone di privilegi sufficienti per eliminare questo post."
 
-#: includes/controller/Admin.php:348 includes/controller/Ajax.php:59
+#: includes/controller/Admin.php:348 includes/controller/Ajax.php:62
 msgid "Post deleted."
 msgstr "Post cancellato."
 
@@ -297,7 +296,7 @@ msgid "You do not have sufficient privileges to manage any posts."
 msgstr "Non si dispone di privilegi sufficienti per gestire i post."
 
 #: includes/controller/Admin.php:444 includes/controller/Admin.php:456
-#: includes/controller/Admin.php:1598 includes/controller/Ajax.php:132
+#: includes/controller/Admin.php:1598 includes/controller/Ajax.php:135
 msgid "You do not have sufficient privileges to add pages."
 msgstr "Non si dispone di privilegi sufficienti per aggiungere pagine."
 
@@ -328,7 +327,7 @@ msgstr "Per modificare una pagina è necessario un ID."
 
 #: includes/controller/Admin.php:511 includes/controller/Admin.php:552
 #: includes/controller/Admin.php:593 includes/controller/Admin.php:619
-#: includes/controller/Ajax.php:79
+#: includes/controller/Ajax.php:82
 msgid "Page not found."
 msgstr "Pagina non trovata."
 
@@ -341,16 +340,16 @@ msgid "Page updated."
 msgstr "Pagina aggiornata."
 
 #: includes/controller/Admin.php:585 includes/controller/Admin.php:605
-#: includes/controller/Ajax.php:68
+#: includes/controller/Ajax.php:71
 msgid "You do not have sufficient privileges to delete pages."
 msgstr "Non si dispone di privilegi sufficienti per eliminare le pagine."
 
 #: includes/controller/Admin.php:588 includes/controller/Admin.php:611
-#: includes/controller/Ajax.php:74
+#: includes/controller/Ajax.php:77
 msgid "An ID is required to delete a page."
 msgstr "Per eliminare una pagina è necessario un ID."
 
-#: includes/controller/Admin.php:637 includes/controller/Ajax.php:82
+#: includes/controller/Admin.php:637 includes/controller/Ajax.php:85
 msgid "Page deleted."
 msgstr "Pagina eliminata."
 
@@ -373,13 +372,13 @@ msgid "That username is already in use."
 msgstr "Il nome utente è già in uso."
 
 #: includes/controller/Admin.php:703 includes/controller/Main.php:492
-#: install.php:601
+#: install.php:598
 msgid "Passwords cannot be blank."
 msgstr "La casella della Password non puó essere vuota."
 
 #: includes/controller/Admin.php:706 includes/controller/Admin.php:812
 #: includes/controller/Main.php:494 includes/controller/Main.php:684
-#: install.php:536 install.php:603
+#: install.php:533 install.php:600
 msgid "Passwords do not match."
 msgstr "Le Password non corrispondono."
 
@@ -391,13 +390,13 @@ msgstr ""
 
 #: includes/controller/Admin.php:712 includes/controller/Admin.php:820
 #: includes/controller/Admin.php:1938 includes/controller/Main.php:499
-#: includes/controller/Main.php:689 install.php:606
+#: includes/controller/Main.php:689 install.php:603
 msgid "Email address cannot be blank."
 msgstr "La casella dell'indirizzo email non può essere vuota."
 
 #: includes/controller/Admin.php:715 includes/controller/Admin.php:823
 #: includes/controller/Admin.php:1941 includes/controller/Main.php:501
-#: includes/controller/Main.php:691 install.php:608
+#: includes/controller/Main.php:691 install.php:605
 msgid "Invalid email address."
 msgstr "Indirizzo email non valido."
 
@@ -569,7 +568,7 @@ msgstr "File di esportazione dei gruppi non è valido."
 msgid "Users export file is invalid."
 msgstr "Il file di esportazione degli utenti non è valido."
 
-#: includes/controller/Admin.php:1480 includes/controller/Ajax.php:164
+#: includes/controller/Admin.php:1480 includes/controller/Ajax.php:167
 #: includes/lib/XMLRPC.php:185
 msgid "You do not have sufficient privileges to import files."
 msgstr "Non si dispone di privilegi sufficienti per importare file."
@@ -657,11 +656,11 @@ msgstr "Anteprima interrotta."
 msgid "Preview started."
 msgstr "Anteprima avviata."
 
-#: includes/controller/Admin.php:1944 install.php:584
+#: includes/controller/Admin.php:1944 install.php:581
 msgid "Chyrp URL cannot be blank."
 msgstr "L'URL di Chyrp non può essere vuoto."
 
-#: includes/controller/Admin.php:1947 install.php:586
+#: includes/controller/Admin.php:1947 install.php:583
 msgid "Invalid Chyrp URL."
 msgstr "URL di Chyrp non valido."
 
@@ -690,8 +689,8 @@ msgstr "Pagina creata."
 msgid "You are already logged in."
 msgstr "Hai già effettuato l’accesso."
 
-#: includes/controller/Admin.php:2147 includes/controller/Ajax.php:28
-#: includes/controller/Ajax.php:167 includes/download.php:15
+#: includes/controller/Admin.php:2147 includes/controller/Ajax.php:31
+#: includes/controller/Ajax.php:170 includes/download.php:15
 #: includes/thumbnail.php:18
 msgid "Missing argument."
 msgstr "Argomento mancante."
@@ -768,11 +767,11 @@ msgstr "Feather"
 msgid "Themes"
 msgstr "Temi"
 
-#: includes/controller/Ajax.php:120 includes/controller/Ajax.php:151
+#: includes/controller/Ajax.php:123 includes/controller/Ajax.php:154
 msgid "Preview"
 msgstr "Anteprima"
 
-#: includes/controller/Ajax.php:175
+#: includes/controller/Ajax.php:178
 msgid "File uploaded."
 msgstr "File caricato."
 
@@ -827,7 +826,7 @@ msgstr "Questo sito non consente la registrazione."
 msgid "You cannot register an account because you are already logged in."
 msgstr "Non è possibile registrare un account perché si è già registrati."
 
-#: includes/controller/Main.php:484 install.php:598
+#: includes/controller/Main.php:484 install.php:595
 msgid "Please enter a username for your account."
 msgstr "Inserisci un nome utente per il tuo account."
 
@@ -953,81 +952,81 @@ msgstr "%s riga %d"
 msgid "Session cannot be started more than once."
 msgstr "Impossibile iniziare la sessione più di una volta."
 
-#: includes/helpers.php:113
+#: includes/helpers.php:93
 msgid "Forbidden"
 msgstr "Negato"
 
-#: includes/helpers.php:114
+#: includes/helpers.php:94
 msgid "You do not have permission to access this resource."
 msgstr "Non si dispone dell'autorizzazione per accedere a questa risorsa."
 
-#: includes/helpers.php:138
+#: includes/helpers.php:118
 msgid "The requested resource was not found."
 msgstr "La risorsa richiesta non è stata trovata."
 
-#: includes/helpers.php:1483 includes/helpers.php:1621
+#: includes/helpers.php:1456 includes/helpers.php:1594
 #, php-format
 msgid "Socket error: %s"
 msgstr "Errore socket: %s"
 
-#: includes/helpers.php:1698
+#: includes/helpers.php:1671
 msgid "Please create the uploads directory."
 msgstr "Si prega di creare la directory per il caricamento dati."
 
-#: includes/helpers.php:1700
+#: includes/helpers.php:1673
 msgid "Please make the uploads directory writable."
 msgstr "Si prega di rendere la directory per il caricamento dati scrivibile."
 
-#: includes/helpers.php:1718
+#: includes/helpers.php:1691
 #, php-format
 msgid "%s module is missing."
 msgstr "Modulo %s mancante."
 
-#: includes/helpers.php:1727
+#: includes/helpers.php:1700
 #, php-format
 msgid "%s module is damaged."
 msgstr "Il modulo %s è danneggiato."
 
-#: includes/helpers.php:1741
+#: includes/helpers.php:1714
 #, php-format
 msgid "%s feather is missing."
 msgstr "%s Feather mancante."
 
-#: includes/helpers.php:1750
+#: includes/helpers.php:1723
 #, php-format
 msgid "%s feather is damaged."
 msgstr "Feather %s è danneggiata."
 
-#: includes/helpers.php:1812 includes/helpers.php:1833
+#: includes/helpers.php:1785 includes/helpers.php:1806
 #, php-format
 msgid "Execution of %s has been cancelled."
 msgstr "L'esecuzione di %s è stata annullata."
 
-#: includes/helpers.php:1861
+#: includes/helpers.php:1834
 msgid "Uploaded file is of an unsupported type."
 msgstr "Il file caricato è di tipo non supportato."
 
-#: includes/helpers.php:1864
+#: includes/helpers.php:1837
 msgid "Only uploaded files are accepted."
 msgstr "Vengono accettati solo file giá caricati."
 
-#: includes/helpers.php:1867 includes/helpers.php:1899
+#: includes/helpers.php:1840 includes/helpers.php:1872
 #: includes/lib/XMLRPC.php:196
 msgid "Upload path does not exist."
 msgstr "Il percorso di caricamento non esiste."
 
-#: includes/helpers.php:1870 includes/helpers.php:1902
+#: includes/helpers.php:1843 includes/helpers.php:1875
 #: includes/lib/XMLRPC.php:199
 msgid "Upload path is not writable."
 msgstr "Il percorso di caricamento non è scrivibile."
 
-#: includes/helpers.php:1873 includes/helpers.php:1905
-#: includes/helpers.php:2016 includes/lib/XMLRPC.php:202 upgrade.php:125
+#: includes/helpers.php:1846 includes/helpers.php:1878
+#: includes/helpers.php:1989 includes/lib/XMLRPC.php:202 upgrade.php:125
 #: upgrade.php:142 upgrade.php:159
 msgid "Failed to write file to disk."
 msgstr "Impossibile scrivere il file su disco."
 
-#: includes/helpers.php:2004
+#: includes/helpers.php:1977
 msgid ""
 "The uploaded file exceeds the <code>upload_max_filesize</code> directive in "
 "php.ini."
@@ -1035,7 +1034,7 @@ msgstr ""
 "Il file caricato supera la <code>upload_max_filesize</code> direttiva in php."
 "ini."
 
-#: includes/helpers.php:2007
+#: includes/helpers.php:1980
 msgid ""
 "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the "
 "HTML form."
@@ -1043,24 +1042,24 @@ msgstr ""
 "Il file caricato supera la direttiva <code>MAX_FILE_SIZE</code> nel modulo "
 "HTML."
 
-#: includes/helpers.php:2010
+#: includes/helpers.php:1983
 msgid "The uploaded file was only partially uploaded."
 msgstr "File caricato parzialmente."
 
-#: includes/helpers.php:2013
+#: includes/helpers.php:1986
 msgid "Missing a temporary folder."
 msgstr "Manca una cartella temporanea."
 
-#: includes/helpers.php:2019
+#: includes/helpers.php:1992
 msgid "File upload was stopped by a PHP extension."
 msgstr "Il caricamento dei file è stato interrotto da un'estensione PHP."
 
-#: includes/helpers.php:2022
+#: includes/helpers.php:1995
 #, php-format
 msgid "File upload failed with error %d."
 msgstr "Caricamento file non riuscito con errore %d."
 
-#: includes/helpers.php:2027
+#: includes/helpers.php:2000
 #, php-format
 msgid ""
 "The uploaded file exceeds the maximum size of %d Megabytes allowed by this "
@@ -1069,59 +1068,59 @@ msgstr ""
 "Il file caricato supera la dimensione massima di %d megabyte consentiti da "
 "questo sito."
 
-#: includes/helpers.php:2249
+#: includes/helpers.php:2241
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr "Errore di codifica JSON: %s"
 
-#: includes/helpers.php:2270
+#: includes/helpers.php:2263
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr "Errore di decodifica JSON: %s"
 
-#: includes/helpers.php:2336
+#: includes/helpers.php:2329
 msgid "Failed to create Zip archive."
 msgstr "Impossibile creare l'archivio Zip."
 
-#: includes/helpers.php:2439
+#: includes/helpers.php:2432
 #, php-format
 msgid "Activate your account at %s"
 msgstr "Attiva il tuo account %s"
 
-#: includes/helpers.php:2440 includes/helpers.php:2454
-#: includes/helpers.php:2468
+#: includes/helpers.php:2433 includes/helpers.php:2447
+#: includes/helpers.php:2461
 #, php-format
 msgid "Hello, %s."
 msgstr "Ciao, %s."
 
-#: includes/helpers.php:2443
+#: includes/helpers.php:2436
 msgid "You are receiving this message because you registered a new account."
 msgstr "Si riceve questo messaggio perché è stato registrato un nuovo account."
 
-#: includes/helpers.php:2446
+#: includes/helpers.php:2439
 msgid "Visit this link to activate your account:"
 msgstr "Visita questo link per attivare il tuo account:"
 
-#: includes/helpers.php:2453
+#: includes/helpers.php:2446
 #, php-format
 msgid "Reset your password at %s"
 msgstr "Reimpostare la password per %s"
 
-#: includes/helpers.php:2457
+#: includes/helpers.php:2450
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 "Si riceve questo messaggio perché è stata richiesta una nuova password."
 
-#: includes/helpers.php:2460
+#: includes/helpers.php:2453
 msgid "Visit this link to reset your password:"
 msgstr "Visita questo link per reimpostare la password:"
 
-#: includes/helpers.php:2467
+#: includes/helpers.php:2460
 #, php-format
 msgid "Your new password for %s"
 msgstr "La tua nuova password per %s"
 
-#: includes/helpers.php:2471
+#: includes/helpers.php:2464
 #, php-format
 msgid "Your new password is: %s"
 msgstr "La tua nuova password è: %s"
@@ -1322,108 +1321,108 @@ msgstr "La dimensione massima non può essere zero."
 msgid "Failed to create image thumbnail."
 msgstr "Impossibile creare l'immagine in forato ridotto."
 
-#: install.php:125
-msgid "MySQLi or PDO is required for database access."
-msgstr "MySQLi o PDO è necessario per l'accesso al database."
+#: install.php:122
+msgid "PDO is required for database access."
+msgstr "PDO è necessario per l'accesso al database."
 
-#: install.php:129 upgrade.php:101
+#: install.php:126 upgrade.php:101
 msgid "Please CHMOD or CHOWN the installation directory to make it writable."
 msgstr ""
 "Si prega di CHMOD o CHOWN la directory di installazione per renderlo "
 "scrivibile."
 
-#: install.php:133 upgrade.php:105
+#: install.php:130 upgrade.php:105
 msgid ""
 "Please CHMOD or CHOWN the <em>includes</em> directory to make it writable."
 msgstr ""
 "Si prega di CHMOD o CHOWN il <em>includes</em> directory per renderlo "
 "scrivibile."
 
-#: install.php:137 upgrade.php:109
+#: install.php:134 upgrade.php:109
 msgid ""
 "Please CHMOD or CHOWN the <em>caches</em> directory to make it writable."
 msgstr ""
 "Si prega di CHMOD o CHOWN il <em>caches</em> directory per renderlo "
 "scrivibile."
 
-#: install.php:196
+#: install.php:193
 msgid "Chyrp Lite Installer"
 msgstr "Chyrp Lite Installer"
 
-#: install.php:581
+#: install.php:578
 msgid "Database cannot be blank."
 msgstr "Il database non può essere vuoto."
 
-#: install.php:589
+#: install.php:586
 msgid "Please enter a name for your website."
 msgstr "Inserisci un nome per il tuo sito web."
 
-#: install.php:592
+#: install.php:589
 msgid "Time zone cannot be blank."
 msgstr "La selezione del fuso orario non può essere vuoto."
 
-#: install.php:595
+#: install.php:592
 msgid "Language cannot be blank."
 msgstr "La selezione della lingua non può essere vuota."
 
-#: install.php:614
+#: install.php:611
 msgid "Could not determine the absolute path to the database."
 msgstr "Impossibile determinare il percorso assoluto del database."
 
-#: install.php:621
+#: install.php:618
 msgid "Please make the database writable by the server."
 msgstr "Si prega di rendere il database scrivibile dal server."
 
-#: install.php:625
+#: install.php:622
 msgid "Please enter a username and password for the database."
 msgstr "Inserisci un nome utente e una password per il database."
 
-#: install.php:833 upgrade.php:173 upgrade.php:186 upgrade.php:199
+#: install.php:830 upgrade.php:173 upgrade.php:186 upgrade.php:199
 #: upgrade.php:212 upgrade.php:225 upgrade.php:239 upgrade.php:265
 #: upgrade.php:278 upgrade.php:292 upgrade.php:305 upgrade.php:318
 #: upgrade.php:331 upgrade.php:345 upgrade.php:358
 msgid "Could not write the configuration file."
 msgstr "Impossibile scrivere il file di configurazione."
 
-#: install.php:850
+#: install.php:847
 msgid "Database Setup"
 msgstr "Impostazione database"
 
-#: install.php:852
+#: install.php:849
 msgid "Adapter"
 msgstr "Adattatore"
 
-#: install.php:866
+#: install.php:863
 msgid "Host"
 msgstr "Host"
 
-#: install.php:870 install.php:935
+#: install.php:867 install.php:932
 msgid "Username"
 msgstr "Nome utente"
 
-#: install.php:874 install.php:939 install.php:943
+#: install.php:871 install.php:936 install.php:940
 msgid "Password"
 msgstr "Password"
 
-#: install.php:878
+#: install.php:875
 msgid "Database"
 msgstr "Database"
 
-#: install.php:880
+#: install.php:877
 msgid "(absolute or relative path)"
 msgstr "(percorso assoluto o relativo)"
 
-#: install.php:886
+#: install.php:883
 msgid "Make sure your PostgreSQL database uses UTF-8 encoding."
 msgstr "Assicurarsi che il database PostgreSQL utilizzi la codifica UTF-8."
 
-#: install.php:889
+#: install.php:886
 msgid "Case-insensitive collation is recommended for your MySQL database."
 msgstr ""
 "Le regole di Collation senza distinzione tra maiuscole e minuscole sono "
 "consigliate per il database MySQL."
 
-#: install.php:892
+#: install.php:889
 msgid ""
 "Be sure to put your SQLite database outside the document root directory, "
 "otherwise visitors will be able to download it."
@@ -1432,75 +1431,75 @@ msgstr ""
 "directory principale del documento, altrimenti altri utenti saranno in grado "
 "di scaricarlo."
 
-#: install.php:895
+#: install.php:892
 msgid "Table Prefix"
 msgstr "Prefisso tabella"
 
-#: install.php:895
+#: install.php:892
 msgid "(optional)"
 msgstr "(opzionale)"
 
-#: install.php:899
+#: install.php:896
 msgid "Website Setup"
 msgstr "Configurazione del sito web"
 
-#: install.php:901
+#: install.php:898
 msgid "Chyrp URL"
 msgstr "URL Chyrp"
 
-#: install.php:905
+#: install.php:902
 msgid "Site Name"
 msgstr "Nome del sito"
 
-#: install.php:906
+#: install.php:903
 msgid "My Awesome Site"
 msgstr "Il mio favoloso sito"
 
-#: install.php:909
+#: install.php:906
 msgid "Description"
 msgstr "Descrizione"
 
-#: install.php:913
+#: install.php:910
 msgid "Time Zone"
 msgstr "Fuso orario"
 
-#: install.php:923
+#: install.php:920
 msgid "Language"
 msgstr "Lingua"
 
-#: install.php:933
+#: install.php:930
 msgid "Admin Account"
 msgstr "Amministratore"
 
-#: install.php:943
+#: install.php:940
 msgid "(again)"
 msgstr "(ripeti)"
 
-#: install.php:947
+#: install.php:944
 msgid "Email Address"
 msgstr "Indirizzo email"
 
-#: install.php:950
+#: install.php:947
 msgid "Install me!"
 msgstr "Installami!"
 
-#: install.php:953
+#: install.php:950
 msgid "Installation Complete"
 msgstr "Installazione completata"
 
-#: install.php:954 upgrade.php:666
+#: install.php:951 upgrade.php:666
 msgid "What now?"
 msgstr "E adesso?"
 
-#: install.php:956
+#: install.php:953
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr "Elimina <em>install.php</em>, non ne avrai più bisogno."
 
-#: install.php:957
+#: install.php:954
 msgid "Log in to your site and configure things to your liking."
 msgstr "Accedi al tuo sito e configura a tuo piacimento."
 
-#: install.php:959 upgrade.php:672
+#: install.php:956 upgrade.php:672
 msgid "Take me to my site!"
 msgstr "Guidami al mio sito!"
 

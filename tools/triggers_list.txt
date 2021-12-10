@@ -169,7 +169,7 @@ delete_upload
 Called from:
 	feathers/audio/audio.php on line 123
 	feathers/photo/photo.php on line 123
-	feathers/uploader/uploader.php on line 172
+	feathers/uploader/uploader.php on line 173
 	feathers/video/video.php on line 123
 
 Arguments:
@@ -239,7 +239,7 @@ Arguments:
 runtime
 -------
 Called from:
-	includes/common.php on line 359
+	includes/common.php on line 364
 
 
 before_export
@@ -349,25 +349,25 @@ Arguments:
 visitor_authenticate
 --------------------
 Called from:
-	includes/helpers.php on line 715
+	includes/helpers.php on line 695
 
 
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 2182
+	includes/helpers.php on line 2173
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 2199
+	includes/helpers.php on line 2190
 
 
 send_correspondence
 -------------------
 Called from:
-	includes/helpers.php on line 2480
+	includes/helpers.php on line 2473
 
 Arguments:
 	$action, $params
@@ -376,7 +376,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 2508
+	includes/helpers.php on line 2501
 
 Arguments:
 	$ob
@@ -848,7 +848,7 @@ Target:
 visitor
 -------
 Called from:
-	includes/common.php on line 356
+	includes/common.php on line 361
 
 Target:
 	$visitor
@@ -1000,7 +1000,7 @@ Target:
 markup_page_title
 -----------------
 Called from:
-	includes/controller/Ajax.php on line 142
+	includes/controller/Ajax.php on line 145
 	includes/model/Page.php on line 274
 
 Target:
@@ -1010,7 +1010,7 @@ Target:
 markup_title
 ------------
 Called from:
-	includes/controller/Ajax.php on line 142
+	includes/controller/Ajax.php on line 145
 	includes/model/Page.php on line 274
 
 Target:
@@ -1020,7 +1020,7 @@ Target:
 markup_page_text
 ----------------
 Called from:
-	includes/controller/Ajax.php on line 146
+	includes/controller/Ajax.php on line 149
 	includes/model/Page.php on line 275
 
 Target:
@@ -1030,7 +1030,7 @@ Target:
 markup_text
 -----------
 Called from:
-	includes/controller/Ajax.php on line 146
+	includes/controller/Ajax.php on line 149
 	includes/model/Page.php on line 275
 	modules/comments/model/Comment.php on line 406
 
@@ -1050,7 +1050,7 @@ Target:
 keyword_search
 --------------
 Called from:
-	includes/helpers.php on line 957
+	includes/helpers.php on line 930
 
 Target:
 	$search
@@ -1062,7 +1062,7 @@ Arguments:
 link_regexp
 -----------
 Called from:
-	includes/helpers.php on line 1548
+	includes/helpers.php on line 1521
 
 Target:
 	$expressions
@@ -1071,7 +1071,7 @@ Target:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 2410
+	includes/helpers.php on line 2403
 
 Target:
 	$function
@@ -1080,7 +1080,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 2509
+	includes/helpers.php on line 2502
 
 Target:
 	$nonce
@@ -1360,7 +1360,7 @@ Target:
 cache_regenerate_triggers
 -------------------------
 Called from:
-	modules/cacher/cacher.php on line 115
+	modules/cacher/cacher.php on line 116
 
 Target:
 	$regenerate
@@ -1369,7 +1369,7 @@ Target:
 cache_exclude_triggers
 ----------------------
 Called from:
-	modules/cacher/cacher.php on line 124
+	modules/cacher/cacher.php on line 125
 
 Target:
 	$exclude

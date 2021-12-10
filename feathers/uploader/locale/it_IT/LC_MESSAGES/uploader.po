@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Copyright 2021 Daniel Pimley and other contributors.
@@ -43,19 +43,19 @@ msgstr "Titolo"
 msgid "Files"
 msgstr "File"
 
-#: feathers/uploader/uploader.php:15
+#: feathers/uploader/uploader.php:16
 #, php-format
 msgid "(Max. file size: %d Megabytes)"
 msgstr "(Dimensione massima del file:%d megabyte)"
 
-#: feathers/uploader/uploader.php:19
+#: feathers/uploader/uploader.php:20
 msgid "Caption"
 msgstr "Didascalia"
 
-#: feathers/uploader/uploader.php:62
+#: feathers/uploader/uploader.php:63
 msgid "You did not select any files to upload."
 msgstr "Non è stato selezionato alcun file da caricare."
 
-#: feathers/uploader/uploader.php:203
+#: feathers/uploader/uploader.php:204
 msgid "Source"
 msgstr "Sorgente"

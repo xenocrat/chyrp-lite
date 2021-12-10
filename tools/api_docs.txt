@@ -463,7 +463,7 @@ includes/class/Query.php
 
 Class: Query
 ------------
-Handles a query based on the <SQL.method>.
+Handles a SQL query.
 
 
 Function: __construct
@@ -1015,7 +1015,7 @@ Parameters:
 
 Function: escape
 ----------------
-Escapes a string for Query construction using the SQL connection method's escaping functions.
+Escapes a string for Query construction.
 
 Parameters:
     $string - String to escape.
@@ -2073,7 +2073,7 @@ Returns:
     A string of the requested length.
 
 Notes:
-    Uses a cryptographically secure method if available.
+    Uses a cryptographically secure pseudo-random method.
 
 
 Function: shorthand_bytes
@@ -2465,6 +2465,11 @@ Returns:
     A sanitized unique filename, or false on failure.
 
 
+Function: upload_filter_whitelist
+---------------------------------
+Returns an array containing a default list of allowed extensions.
+
+
 Function: password_strength
 ---------------------------
 Award a numeric score for the strength of a password.
@@ -2563,6 +2568,7 @@ JSON encodes a value and checks for errors.
 Parameters:
     $value - The value to be encoded.
     $options - A bitmask of encoding options.
+    $depth - Recursion depth for encoding.
 
 Returns:
     A JSON encoded string or false on failure.
@@ -2576,6 +2582,7 @@ Parameters:
     $value - The UTF-8 string to be decoded.
     $assoc - Convert objects into associative arrays?
     $depth - Recursion depth for decoding.
+    $options - A bitmask of decoding options.
 
 Returns:
     A JSON decoded value of the appropriate PHP type.
