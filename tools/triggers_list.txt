@@ -776,7 +776,7 @@ Arguments:
 flash_notice_message
 --------------------
 Called from:
-	includes/class/Flash.php on line 80
+	includes/class/Flash.php on line 83
 
 Target:
 	$message
@@ -788,7 +788,7 @@ Arguments:
 flash_warning_message
 ---------------------
 Called from:
-	includes/class/Flash.php on line 100
+	includes/class/Flash.php on line 103
 
 Target:
 	$message
