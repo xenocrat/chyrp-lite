@@ -53,10 +53,6 @@
     define('BOT_UA', isset($_SERVER['HTTP_USER_AGENT']) and
         preg_match("/(bots?|crawler|slurp|spider)\b/i", $_SERVER['HTTP_USER_AGENT']));
 
-    # Constant: TESTER
-    # Are we being visited by an automated tester?
-    define('TESTER', isset($_SERVER['HTTP_USER_AGENT']) and $_SERVER['HTTP_USER_AGENT'] == "TESTER");
-
     # Constant: DIR
     # Native directory separator.
     define('DIR', DIRECTORY_SEPARATOR);
@@ -112,10 +108,6 @@
     # Constant: SESSION_DENY_RPC
     # Deny session storage to XML-RPC?
     define('SESSION_DENY_RPC', true);
-
-    # Constant: SESSION_DENY_TESTER
-    # Deny session storage when testing?
-    define('SESSION_DENY_TESTER', true);
 
     # Constant: USE_GETTEXT_SHIM
     # Use a shim for translation support?
