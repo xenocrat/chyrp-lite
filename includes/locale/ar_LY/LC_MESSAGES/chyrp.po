@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: chyrplite\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-12-12 16:06+0000\n"
+"PO-Revision-Date: 2021-12-12 16:17+0000\n"
 "Last-Translator: Anas Mohammed Almzoghy <a.almzoghy@gmail.com>\n"
 "Language-Team: Arabic\n"
 "Language: ar_LY\n"
@@ -175,15 +175,15 @@ msgstr "اذهب إلى GitHub &rarr;"
 msgid "Unable to check for new Chyrp Lite versions."
 msgstr "غير قادر على التحقق من إصدارات Chyrp Lite الجديدة."
 
-#: includes/common.php:295 includes/common.php:300
+#: includes/common.php:287 includes/common.php:292
 msgid "Service Unavailable"
 msgstr "الخدمة غير متاحة"
 
-#: includes/common.php:296
+#: includes/common.php:288
 msgid "This resource is temporarily unable to serve your request."
 msgstr "الموقع غير قادر مؤقتاً على تلبية طلبك."
 
-#: includes/common.php:301
+#: includes/common.php:293
 msgid "This resource cannot respond because it is not configured."
 msgstr "لا يمكن للموقع إجابة طلبك لأنه غير مُهيء."
 
