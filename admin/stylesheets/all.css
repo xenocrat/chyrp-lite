@@ -157,10 +157,6 @@ a:active {
     color: #2f61c4;
     text-decoration: underline;
 }
-div.clear {
-    visibility: hidden;
-    clear: both;
-}
 
 /* Group: Header */
 
@@ -181,20 +177,21 @@ div.clear {
 }
 #header #navigation {
     position: absolute;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
     bottom: 0em;
     left: 4rem;
     right: 4rem;
 }
 #header #navigation li {
     display: block;
+    width: 24%;
 }
 #header #navigation li a {
     box-sizing: border-box;
     display: block;
-    float: left;
-    width: 24%;
-    margin-left: 0em;
-    margin-right: 1%;
+    margin: 0rem;
     padding: 0rem 1rem;
     height: 3rem;
     line-height: 3rem;
@@ -205,10 +202,6 @@ div.clear {
     text-decoration: none;
     border-top-left-radius: 0.8em;
     border-top-right-radius: 0.8em;
-}
-#header #navigation li:last-child a {
-    width: 25%;
-    margin-right: 0%;
 }
 #header #navigation li a:link,
 #header #navigation li a:visited {
@@ -294,12 +287,6 @@ span.pages {
 #content ul.extend {
     box-sizing: border-box;
     width: 100%;
-    clear: both;
-}
-#content ul#modules_enabled,
-#content ul#feathers_enabled {
-    clear: both;
-    float: left;
 }
 #content ul.extend > h5:only-child {
     display: none;
@@ -351,6 +338,8 @@ li.module:not(.error) .module_conflicts_list {
 li.module div.controls,
 li.feather div.controls,
 li.theme div.controls {
+    display: flex;
+    flex-direction: row-reverse;
     margin-top: 1em;
     padding-top: 1em;
     border-top: 1px solid #cfcfcf;
@@ -367,6 +356,7 @@ ul#modules_disabled > li.error div.controls {
 li.module div.controls button,
 li.feather div.controls button,
 li.theme div.controls button {
+    display: block;
     float: right;
 }
 li.module div.controls button + button,
@@ -796,21 +786,17 @@ div.confirmation a.button {
     width: 100%;
     margin: 0em;
 }
+.more_options {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
 .more_options_option {
     box-sizing: border-box;
     display: block;
-    width: 50%;
+    width: calc(50% - 1rem);
     margin: 0em;
     padding-bottom: 1rem;
-    min-height: 5rem;
-    float: left;
-}
-.more_options_option:nth-of-type(odd) {
-    clear: both;
-    padding-right: 1rem;
-}
-.more_options_option:nth-of-type(even) {
-    padding-left: 1rem;
 }
 div.more_options p input,
 div.more_options p select,
@@ -989,18 +975,8 @@ a.emblem.markdown:focus > img {
 
 @media screen and (max-width: 960px) {
     #header #navigation {
-        left: 0em;
-        right: 0em;
-    }
-    #header #navigation li a {
-        display: block;
-        width: 24%;
-        margin-left: 0em;
-        margin-right: 1%;
-    }
-    #header #navigation li:last-child a {
-        width: 25%;
-        margin-right: 0%;
+        left: 1rem;
+        right: 1rem;
     }
     #sub_nav {
         margin-top: 1rem;
@@ -1123,13 +1099,6 @@ a.emblem.markdown:focus > img {
     }
     div.more_options p.more_options_option {
         width: 100%;
-        min-height: 0em;
-        margin: 0rem 0rem 1rem 0rem;
-        padding: 0em;
-    }
-    div.more_options > .more_options_option {
-        padding-left: 0em !important;
-        padding-right: 0em !important;
     }
     #content ul.extend > li > h3 {
         line-height: 2;
