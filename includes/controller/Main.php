@@ -341,7 +341,7 @@
 
             $posts = new Paginator(
                 Post::find(array("placeholders" => true,
-                                 "where" => array("status" => "draft",
+                                 "where" => array("status" => Post::STATUS_DRAFT,
                                  "user_id" => $visitor->id))), $this->post_limit);
 
             $this->display(array("pages".DIR."drafts", "pages".DIR."index"),
@@ -364,10 +364,10 @@
             if (!isset($_GET['feed']) and !(count($arg) > count($attrs) and end($arg) == "feed"))
                 $this->feed = false;
 
-            if ($post->status == "draft")
+            if ($post->status == Post::STATUS_DRAFT)
                 Flash::message(__("This post is not published."));
 
-            if ($post->status == "scheduled")
+            if ($post->status == Post::STATUS_SCHEDULED)
                 Flash::message(__("This post is scheduled to be published."));
 
             $this->display(array("pages".DIR."view", "pages".DIR."index"),
@@ -771,7 +771,7 @@
             if (!isset($posts)) {
                 $results = SQL::current()->select("posts",
                                                   "id",
-                                                  array("status" => "public"),
+                                                  array("status" => Post::STATUS_PUBLIC),
                                                   array("id DESC"),
                                                   array(),
                                                   $config->feed_items)->fetchAll();
