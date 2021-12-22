@@ -553,7 +553,7 @@ Arguments:
 comments_false_positives
 ------------------------
 Called from:
-	modules/comments/comments.php on line 402
+	modules/comments/comments.php on line 440
 
 Arguments:
 	$false_positives
@@ -562,7 +562,7 @@ Arguments:
 comments_false_negatives
 ------------------------
 Called from:
-	modules/comments/comments.php on line 405
+	modules/comments/comments.php on line 443
 
 Arguments:
 	$false_negatives
@@ -571,7 +571,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 695
+	modules/comments/comments.php on line 733
 
 Arguments:
 	$comment, $feed
@@ -580,7 +580,7 @@ Arguments:
 add_comment
 -----------
 Called from:
-	modules/comments/model/Comment.php on line 205
+	modules/comments/model/Comment.php on line 214
 
 Arguments:
 	$new
@@ -589,7 +589,7 @@ Arguments:
 update_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 260
+	modules/comments/model/Comment.php on line 272
 
 Arguments:
 	$comment, $this
@@ -1032,7 +1032,7 @@ markup_text
 Called from:
 	includes/controller/Ajax.php on line 149
 	includes/model/Page.php on line 275
-	modules/comments/model/Comment.php on line 406
+	modules/comments/model/Comment.php on line 419
 
 Target:
 	$content
@@ -1378,7 +1378,7 @@ Target:
 comment
 -------
 Called from:
-	modules/comments/model/Comment.php on line 37
+	modules/comments/model/Comment.php on line 46
 
 Target:
 	$this
@@ -1387,7 +1387,7 @@ Target:
 comment_is_spam
 ---------------
 Called from:
-	modules/comments/model/Comment.php on line 96
+	modules/comments/model/Comment.php on line 105
 
 Target:
 	$spam
@@ -1399,7 +1399,7 @@ Arguments:
 filter_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 403
+	modules/comments/model/Comment.php on line 416
 
 Target:
 	$this
@@ -1408,7 +1408,7 @@ Target:
 markup_comment_text
 -------------------
 Called from:
-	modules/comments/model/Comment.php on line 406
+	modules/comments/model/Comment.php on line 419
 
 Target:
 	$this->body
