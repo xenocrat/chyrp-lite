@@ -7,6 +7,12 @@
      *     <Model>
      */
     class Post extends Model {
+        const STATUS_PUBLIC    = "public";
+        const STATUS_DRAFT     = "draft";
+        const STATUS_REG_ONLY  = "registered_only";
+        const STATUS_PRIVATE   = "private";
+        const STATUS_SCHEDULED = "scheduled";
+
         public $belongs_to = "user";
 
         # Array: $url_attrs
@@ -54,13 +60,13 @@
                     $private = (isset($options["drafts"]) and
                                 $options["drafts"] and
                                 $visitor->group->can("view_draft")) ?
-                                   self::statuses(array("draft")) :
+                                   self::statuses(array(self::STATUS_DRAFT)) :
                                    self::statuses() ;
 
                     if (isset($options["drafts"]) and
                         $options["drafts"] and
                         $visitor->group->can("view_own_draft")) {
-                            $private.= " OR (status = 'draft' AND user_id = :visitor_id)";
+                            $private.= " OR (status = '".self::STATUS_DRAFT."' AND user_id = :visitor_id)";
                             $options["params"][":visitor_id"] = $visitor->id;
                     }
 
@@ -128,13 +134,13 @@
                     $private = (isset($options["drafts"]) and
                                 $options["drafts"] and
                                 $visitor->group->can("view_draft")) ?
-                                   self::statuses(array("draft")) :
+                                   self::statuses(array(self::STATUS_DRAFT)) :
                                    self::statuses() ;
 
                     if (isset($options["drafts"]) and
                         $options["drafts"] and
                         $visitor->group->can("view_own_draft")) {
-                            $private.= " OR (status = 'draft' AND user_id = :visitor_id)";
+                            $private.= " OR (status = '".self::STATUS_DRAFT."' AND user_id = :visitor_id)";
                             $options["params"][":visitor_id"] = $visitor->id;
                     }
 
@@ -199,7 +205,7 @@
             fallback($feather,      "undefined");
             fallback($user_id,      Visitor::current()->id);
             fallback($pinned,       false);
-            fallback($status,       "draft");
+            fallback($status,       self::STATUS_DRAFT);
             fallback($created_at,   datetime());
             fallback($updated_at,   "0001-01-01 00:00:00"); # Model->updated will check this.
             fallback($options,      array());
@@ -240,7 +246,7 @@
             $post = new self($id, array("skip_where" => true));
 
             # Attempt to send pingbacks to URLs discovered in post attribute values.
-            if ($config->send_pingbacks and $pingbacks and $post->status == "public")
+            if ($config->send_pingbacks and $pingbacks and $post->status == self::STATUS_PUBLIC)
                 foreach ($post->attribute_values as $value)
                     if (is_string($value))
                         send_pingbacks($value, $post);
@@ -341,7 +347,7 @@
                                                         "attribute_values" => $attribute_values))));
 
             # Attempt to send pingbacks to URLs discovered in post attribute values.
-            if ($config->send_pingbacks and $pingbacks and $this->status == "public")
+            if ($config->send_pingbacks and $pingbacks and $this->status == self::STATUS_PUBLIC)
                 foreach ($post->attribute_values as $value)
                     if (is_string($value))
                         send_pingbacks($value, $post);
@@ -376,9 +382,9 @@
             if ($user->group->can("delete_post"))
                 return true;
 
-            return ($this->status == "draft" and $user->group->can("delete_draft")) or
+            return ($this->status == self::STATUS_DRAFT and $user->group->can("delete_draft")) or
                    ($user->group->can("delete_own_post") and $this->user_id == $user->id) or
-                   (($user->group->can("delete_own_draft") and $this->status == "draft") and
+                   (($user->group->can("delete_own_draft") and $this->status == self::STATUS_DRAFT) and
                     $this->user_id == $user->id);
         }
 
@@ -395,9 +401,9 @@
             if ($user->group->can("edit_post"))
                 return true;
 
-            return ($this->status == "draft" and $user->group->can("edit_draft")) or
+            return ($this->status == self::STATUS_DRAFT and $user->group->can("edit_draft")) or
                    ($user->group->can("edit_own_post") and $this->user_id == $user->id) or
-                   (($user->group->can("edit_own_draft") and $this->status == "draft") and
+                   (($user->group->can("edit_own_draft") and $this->status == self::STATUS_DRAFT) and
                     $this->user_id == $user->id);
         }
 
@@ -415,7 +421,7 @@
 
             # Can they edit drafts?
             if ($visitor->group->can("edit_draft") and
-                $sql->count("posts", array("status" => "draft")))
+                $sql->count("posts", array("status" => self::STATUS_DRAFT)))
                 return true;
 
             # Can they edit their own posts, and do they have any?
@@ -425,7 +431,7 @@
 
             # Can they edit their own drafts, and do they have any?
             if ($visitor->group->can("edit_own_draft") and
-                $sql->count("posts", array("status" => "draft", "user_id" => $visitor->id)))
+                $sql->count("posts", array("status" => self::STATUS_DRAFT, "user_id" => $visitor->id)))
                 return true;
 
             return false;
@@ -445,7 +451,7 @@
 
             # Can they delete drafts?
             if ($visitor->group->can("delete_draft") and
-                $sql->count("posts", array("status" => "draft")))
+                $sql->count("posts", array("status" => self::STATUS_DRAFT)))
                     return true;
 
             # Can they delete their own posts, and do they have any?
@@ -455,7 +461,7 @@
 
             # Can they delete their own drafts, and do they have any?
             if ($visitor->group->can("delete_own_draft") and
-                $sql->count("posts", array("status" => "draft", "user_id" => $visitor->id)))
+                $sql->count("posts", array("status" => self::STATUS_DRAFT, "user_id" => $visitor->id)))
                     return true;
 
             return false;
@@ -627,8 +633,8 @@
 
             return $this->next = new self(null,
                                           array("where" => array("created_at <" => $this->created_at,
-                                                                 ($this->status == "draft" ?
-                                                                    self::statuses(array("draft")) :
+                                                                 ($this->status == self::STATUS_DRAFT ?
+                                                                    self::statuses(array(self::STATUS_DRAFT)) :
                                                                     self::statuses())),
                                                 "order" => "created_at DESC, id DESC"));
         }
@@ -648,8 +654,8 @@
 
             return $this->prev = new self(null,
                                           array("where" => array("created_at >" => $this->created_at,
-                                                                ($this->status == "draft" ?
-                                                                    self::statuses(array("draft")) :
+                                                                ($this->status == self::STATUS_DRAFT ?
+                                                                    self::statuses(array(self::STATUS_DRAFT)) :
                                                                     self::statuses())),
                                                 "order" => "created_at ASC, id ASC"));
         }
@@ -796,16 +802,16 @@
         static function statuses($start = array()) {
             $visitor = Visitor::current();
 
-            $statuses = array_merge(array("public"), $start);
+            $statuses = array_merge(array(self::STATUS_PUBLIC), $start);
 
             if (logged_in())
-                $statuses[] = "registered_only";
+                $statuses[] = self::STATUS_REG_ONLY;
 
             if ($visitor->group->can("view_private"))
-                $statuses[] = "private";
+                $statuses[] = self::STATUS_PRIVATE;
 
             if ($visitor->group->can("view_scheduled"))
-                $statuses[] = "scheduled";
+                $statuses[] = self::STATUS_SCHEDULED;
 
             return "(posts.status IN ('".implode("', '", $statuses)."')".
                    " OR posts.status LIKE '%{".$visitor->group->id."}%')".
@@ -871,12 +877,12 @@
             $ids = $sql->select("posts",
                                 "id",
                                 array("created_at <=" => datetime(),
-                                      "status" => "scheduled"))->fetchAll();
+                                      "status" => self::STATUS_SCHEDULED))->fetchAll();
 
             foreach ($ids as $id) {
                 $sql->update("posts",
                              array("id" => $id),
-                             array("status" => "public"));
+                             array("status" => self::STATUS_PUBLIC));
 
                 $post = new self($id, array("skip_where" => true));
 
