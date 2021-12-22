@@ -262,20 +262,20 @@
             # Convert statuses from WordPress to Chyrp equivalents.
             switch ($struct["post_status"]) {
                 case "draft":
-                    $status = "draft";
+                    $status = Post::STATUS_DRAFT;
                     break;
                 case "future":
-                    $status = "scheduled";
+                    $status = Post::STATUS_SCHEDULED;
                     break;
                 case "private":
-                    $status = "private";
+                    $status = Post::STATUS_PRIVATE;
                     break;
                 default:
-                    $status = "public";
+                    $status = Post::STATUS_PUBLIC;
             }
 
             $slug = oneof(sanitize($struct["mt_basename"], true, true, 80), slug(8));
-            $status = $user->group->can("add_post") ? $status : "draft" ;
+            $status = $user->group->can("add_post") ? $status : Post::STATUS_DRAFT ;
             $pings = ($struct["mt_allow_pings"] == "open");
             $created_at = oneof($this->convertFromDateCreated($struct), datetime());
             $values = array("title" => $struct["title"],
@@ -332,16 +332,16 @@
             # Convert statuses from WordPress to Chyrp equivalents.
             switch ($struct["post_status"]) {
                 case "publish":
-                    $status = "public";
+                    $status = Post::STATUS_PUBLIC;
                     break;
                 case "draft":
-                    $status = "draft";
+                    $status = Post::STATUS_DRAFT;
                     break;
                 case "future":
-                    $status = "scheduled";
+                    $status = Post::STATUS_SCHEDULED;
                     break;
                 case "private":
-                    $status = "private";
+                    $status = Post::STATUS_PRIVATE;
                     break;
                 default:
                     $status = $post->status;
