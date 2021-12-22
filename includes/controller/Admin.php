@@ -222,10 +222,10 @@
                 show_404(__("Not Found"), __("Feather not found."));
 
             if (isset($_POST['draft']))
-                $_POST['status'] = "draft";
+                $_POST['status'] = Post::STATUS_DRAFT;
 
             if (!$visitor->group->can("add_post"))
-                $_POST['status'] = "draft";
+                $_POST['status'] = Post::STATUS_DRAFT;
 
             $post = Feathers::$instances[$_POST['feather']]->submit();
 
@@ -289,7 +289,7 @@
                          __("You do not have sufficient privileges to edit this post."));
 
             if (isset($_POST['publish']))
-                $_POST['status'] = "public";
+                $_POST['status'] = Post::STATUS_PUBLIC;
 
             if (!$visitor->group->can("add_post"))
                 $_POST['status'] = $post->status;
@@ -407,19 +407,19 @@
                     $post->status_class = join(" ", $group_classes);
                 } else {
                     switch ($post->status) {
-                        case 'draft':
+                        case Post::STATUS_DRAFT:
                             $post->status_name = __("Draft", "admin");
                             break;
 
-                        case 'public':
+                        case Post::STATUS_PUBLIC:
                             $post->status_name = __("Public", "admin");
                             break;
 
-                        case 'private':
+                        case Post::STATUS_PRIVATE:
                             $post->status_name = __("Private", "admin");
                             break;
 
-                        case 'registered_only':
+                        case Post::STATUS_REG_ONLY:
                             $post->status_name = __("All registered users", "admin");
                             break;
 
@@ -1176,7 +1176,7 @@
 
                 $sql->update("posts",
                              array("id" => $post["id"]),
-                             array("status" => "private"));
+                             array("status" => Post::STATUS_PRIVATE));
             }
 
             Group::delete($group->id);
