@@ -7,6 +7,15 @@
      *     <Model>
      */
     class Comment extends Model {
+        const STATUS_APPROVED = "approved";
+        const STATUS_DENIED   = "denied";
+        const STATUS_SPAM     = "spam";
+        const STATUS_PINGBACK = "pingback";
+        const OPTION_OPEN     = "open";
+        const OPTION_CLOSED   = "closed";
+        const OPTION_PRIVATE  = "private";
+        const OPTION_REG_ONLY = "registered_only";
+
         public $no_results = false;
 
         public $belongs_to = array("post", "user", "parent" => array("model" => "comment"));
@@ -23,7 +32,7 @@
             $skip_where = (ADMIN or (isset($options["skip_where"]) and $options["skip_where"]));
 
             if (!$skip_where) {
-                $options["where"]["status not"] = "spam";
+                $options["where"]["status not"] = self::STATUS_SPAM;
                 $options["where"][] = self::redactions();
             }
 
@@ -50,7 +59,7 @@
             $skip_where = (ADMIN or (isset($options["skip_where"]) and $options["skip_where"]));
 
             if (!$skip_where) {
-                $options["where"]["status not"] = "spam";
+                $options["where"]["status not"] = self::STATUS_SPAM;
                 $options["where"][] = self::redactions();
             }
 
@@ -89,14 +98,14 @@
                             "author_email" => $author_email);
 
             fallback($status, ($post->user_id == $visitor->id) ?
-                                    "approved" :
+                                    self::STATUS_APPROVED :
                                     $config->module_comments["default_comment_status"]);
 
-            $spam = ($status == "spam") ? true : false ;
+            $spam = ($status == self::STATUS_SPAM);
             $trigger->filter($spam, "comment_is_spam", $values);
 
             if ($spam)
-                $status = "spam";
+                $status = self::STATUS_SPAM;
 
             if (!logged_in() or !$config->email_correspondence)
                 $notify = false;
@@ -151,8 +160,8 @@
                             $status,
                             $post_id,
                             $user_id,
-                            $parent,
-                            $notify,
+                            $parent = null,
+                            $notify = null,
                             $created_at = null,
                             $updated_at = null) {
             $sql = SQL::current();
@@ -168,18 +177,18 @@
                                "status"       => $status,
                                "post_id"      => $post_id,
                                "user_id"      => $user_id,
-                               "parent_id"    => $parent,
-                               "notify"       => $notify,
+                               "parent_id"    => fallback($parent, 0),
+                               "notify"       => fallback($notify, false),
                                "created_at"   => fallback($created_at, datetime()),
                                "updated_at"   => fallback($updated_at, "0001-01-01 00:00:00")));
 
             $new = new self($sql->latest("comments"), array("skip_where" => true));
 
-            if ($new->status == "approved") {
+            if ($new->status == self::STATUS_APPROVED) {
                 $comments = self::find(array("skip_where" => true,
                                              "where"      => array("post_id"    => $new->post_id,
                                                                    "user_id !=" => $new->user_id,
-                                                                   "status"     => "approved",
+                                                                   "status"     => self::STATUS_APPROVED,
                                                                    "notify"     => true)),
                                        array("filter" => false));
 
@@ -228,19 +237,22 @@
                                $author,
                                $author_url,
                                $author_email,
-                               $status,
-                               $notify,
+                               $status = null,
+                               $notify = null,
                                $created_at = null,
                                $updated_at = null) {
             if ($this->no_results)
                 return false;
 
+            if ($this->status == self::STATUS_PINGBACK)
+                $status = $this->status;
+
             $new_values = array("body"         => $body,
                                 "author"       => strip_tags($author),
                                 "author_url"   => strip_tags($author_url),
                                 "author_email" => strip_tags($author_email),
-                                "status"       => $status,
-                                "notify"       => $notify,
+                                "status"       => fallback($status, $this->status),
+                                "notify"       => fallback($notify, $this->notify),
                                 "created_at"   => fallback($created_at, $this->created_at),
                                 "updated_at"   => fallback($updated_at, datetime()));
 
@@ -349,9 +361,9 @@
 
             # Assume allowed comments by default.
             return empty($post->comment_status) or
-                       !($post->comment_status == "closed" or
-                        ($post->comment_status == "registered_only" and !logged_in()) or
-                        ($post->comment_status == "private" and !$visitor->group->can("add_comment_private")));
+                       !($post->comment_status == self::OPTION_CLOSED or
+                        ($post->comment_status == self::OPTION_REG_ONLY and !logged_in()) or
+                        ($post->comment_status == self::OPTION_PRIVATE and !$visitor->group->can("add_comment_private")));
         }
 
         /**
@@ -363,7 +375,8 @@
             $list = empty($_SESSION['comments']) ?
                 "(0)" : QueryBuilder::build_list(SQL::current(), $_SESSION['comments']) ;
 
-            return "status != 'denied' OR ((user_id != 0 AND user_id = ".$user_id.") OR (id IN ".$list."))";
+            return "status != '".self::STATUS_DENIED.
+                   "' OR ((user_id != 0 AND user_id = ".$user_id.") OR (id IN ".$list."))";
         }
 
         /**
@@ -432,7 +445,7 @@
                                          "author_email VARCHAR(128) DEFAULT ''",
                                          "author_ip INTEGER DEFAULT 0",
                                          "author_agent VARCHAR(255) DEFAULT ''",
-                                         "status VARCHAR(32) default 'denied'",
+                                         "status VARCHAR(32) default '".self::STATUS_DENIED."'",
                                          "post_id INTEGER DEFAULT 0",
                                          "user_id INTEGER DEFAULT 0",
                                          "parent_id INTEGER DEFAULT 0",
