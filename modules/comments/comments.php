@@ -12,7 +12,7 @@
             Comment::install();
 
             Config::current()->set("module_comments",
-                                   array("default_comment_status" => "denied",
+                                   array("default_comment_status" => Comment::STATUS_DENIED,
                                          "comments_per_page" => 25,
                                          "auto_reload_comments" => 30,
                                          "enable_reload_comments" => false,
@@ -118,7 +118,7 @@
 
             fallback($_POST['author_url'], "");
             fallback($parent, (int) $_POST['parent_id'], 0);
-            fallback($notify, (!empty($_POST['notify']) and logged_in()));
+            $notify = (!empty($_POST['notify']) and logged_in());
 
             $comment = Comment::create($_POST['body'],
                                        $_POST['author'],
@@ -128,7 +128,7 @@
                                        $parent,
                                        $notify);
 
-            return array($comment, true, (($comment->status == "approved") ?
+            return array($comment, true, (($comment->status == Comment::STATUS_APPROVED) ?
                                         __("Comment added.", "comments") :
                                         __("Your comment is awaiting moderation.", "comments")));
         }
@@ -154,7 +154,6 @@
             fallback($_POST['status'], $comment->status);
             fallback($_POST['author_email'], $comment->author_email);
             fallback($_POST['author_url'], $comment->author_url);
-            fallback($notify, (!empty($_POST['notify']) and logged_in()));
 
             if (empty($_POST['body']))
                 return array($comment, false, __("Message can't be blank.", "comments"));
@@ -162,7 +161,7 @@
             if (empty($_POST['author']) or derezz($_POST['author']))
                 return array($comment, false, __("Author can't be blank.", "comments"));
 
-            if (empty($_POST['author_email']) and $_POST['status'] != "pingback")
+            if (empty($_POST['author_email']) and $_POST['status'] != Comment::STATUS_PINGBACK)
                 return array($comment, false, __("Email address can't be blank.", "comments"));
 
             if (!empty($_POST['author_email']) and !is_email($_POST['author_email']))
@@ -174,11 +173,9 @@
             if (!empty($_POST['author_url']))
                 $_POST['author_url'] = add_scheme($_POST['author_url']);
 
-            if (!in_array($_POST['status'], array("approved", "denied", "spam", "pingback")))
-                $_POST['status'] = $comment->status;
-
             $editor = Visitor::current()->group->can("edit_comment");
             $status = ($editor) ? $_POST['status'] : $comment->status ;
+            $notify = (!empty($_POST['notify']) and logged_in());
             $created_at = ($editor) ? datetime($_POST['created_at']) : $comment->created_at ;
 
             $comment = $comment->update($_POST['body'],
@@ -274,7 +271,7 @@
             Comment::delete($comment->id);
 
             Flash::notice(__("Comment deleted.", "comments"));
-            redirect("manage_".(($comment->status == "spam") ? "spam" : "comments"));
+            redirect("manage_".(($comment->status == Comment::STATUS_SPAM) ? "spam" : "comments"));
         }
 
         public function admin_manage_comments($admin) {
@@ -289,7 +286,7 @@
             fallback($_GET['query'], "");
             list($where, $params) = keywords($_GET['query'], "body LIKE :query", "comments");
 
-            $where["status not"] = "spam";
+            $where["status not"] = Comment::STATUS_SPAM;
 
             $visitor = Visitor::current();
 
@@ -315,7 +312,7 @@
             fallback($_GET['query'], "");
             list($where, $params) = keywords($_GET['query'], "body LIKE :query", "comments");
 
-            $where["status"] = "spam";
+            $where["status"] = Comment::STATUS_SPAM;
 
             $admin->display("pages".DIR."manage_spam", array("comments" => new Paginator(
                 Comment::find(array("placeholders" => true,
@@ -334,14 +331,20 @@
             $comments = array_keys($_POST['comment']);
 
             if (isset($_POST['delete'])) {
+                $count_delete = 0;
+
                 foreach ($comments as $comment) {
                     $comment = new Comment($comment);
 
-                    if ($comment->deletable())
-                        Comment::delete($comment->id);
+                    if (!$comment->deletable())
+                        continue;
+
+                    Comment::delete($comment->id);
+                    $count_delete++;
                 }
 
-                Flash::notice(__("Selected comments deleted.", "comments"));
+                if (!empty($count_delete))
+                    Flash::notice(__("Selected comments deleted.", "comments"));
             }
 
             $false_positives = array();
@@ -350,50 +353,85 @@
             $sql = SQL::current();
 
             if (isset($_POST['deny'])) {
+                $count_deny = 0;
+
                 foreach ($comments as $comment) {
                     $comment = new Comment($comment);
 
                     if (!$comment->editable())
                         continue;
 
-                    if ($comment->status == "spam")
+                    if ($comment->status == Comment::STATUS_PINGBACK)
+                        continue;
+
+                    if ($comment->status == Comment::STATUS_SPAM)
                         $false_positives[] = $comment;
 
-                    $sql->update("comments", array("id" => $comment->id), array("status" => "denied"));
+                    $comment->update($comment->body,
+                                     $comment->author,
+                                     $comment->author_url,
+                                     $comment->author_email,
+                                     Comment::STATUS_DENIED);
+
+                    $count_deny++;
                 }
 
-                Flash::notice(__("Selected comments denied.", "comments"));
+                if (!empty($count_deny))
+                    Flash::notice(__("Selected comments denied.", "comments"));
             }
 
             if (isset($_POST['approve'])) {
+                $count_approve = 0;
+
                 foreach ($comments as $comment) {
                     $comment = new Comment($comment);
 
                     if (!$comment->editable())
                         continue;
 
-                    if ($comment->status == "spam")
+                    if ($comment->status == Comment::STATUS_PINGBACK)
+                        continue;
+
+                    if ($comment->status == Comment::STATUS_SPAM)
                         $false_positives[] = $comment;
 
-                    $sql->update("comments", array("id" => $comment->id), array("status" => "approved"));
+                    $comment->update($comment->body,
+                                     $comment->author,
+                                     $comment->author_url,
+                                     $comment->author_email,
+                                     Comment::STATUS_APPROVED);
+
+                    $count_approve++;
                 }
 
-                Flash::notice(__("Selected comments approved.", "comments"));
+                if (!empty($count_approve))
+                    Flash::notice(__("Selected comments approved.", "comments"));
             }
 
             if (isset($_POST['spam'])) {
+                $count_spam = 0;
+
                 foreach ($comments as $comment) {
                     $comment = new Comment($comment);
 
                     if (!$comment->editable())
                         continue;
 
-                    $sql->update("comments", array("id" => $comment->id), array("status" => "spam"));
+                    if ($comment->status == Comment::STATUS_PINGBACK)
+                        continue;
 
+                    $comment->update($comment->body,
+                                     $comment->author,
+                                     $comment->author_url,
+                                     $comment->author_email,
+                                     Comment::STATUS_SPAM);
+
+                    $count_spam++;
                     $false_negatives[] = $comment;
                 }
 
-                Flash::notice(__("Selected comments marked as spam.", "comments"));
+                if (!empty($count_spam))
+                    Flash::notice(__("Selected comments marked as spam.", "comments"));
             }
 
             $trigger = Trigger::current();
@@ -414,9 +452,9 @@
 
             $config = Config::current();
             $comments_html = implode(", ", $config->module_comments["allowed_comment_html"]);
-            $comments_status = array("approved" => __("Approved", "comments"),
-                                     "denied"   => __("Denied", "comments"),
-                                     "spam"     => __("Spam", "comments"));
+            $comments_status = array(Comment::STATUS_APPROVED => __("Approved", "comments"),
+                                     Comment::STATUS_DENIED   => __("Denied", "comments"),
+                                     Comment::STATUS_SPAM     => __("Spam", "comments"));
 
             if (empty($_POST))
                 return $admin->display("pages".DIR."comment_settings",
@@ -426,7 +464,7 @@
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
-            fallback($_POST['default_comment_status'], "denied");
+            fallback($_POST['default_comment_status'], Comment::STATUS_DENIED);
             fallback($_POST['allowed_comment_html'], "");
             fallback($_POST['comments_per_page'], 25);
             fallback($_POST['auto_reload_comments'], 30);
@@ -471,8 +509,8 @@
                 return $navs;
 
             $sql = SQL::current();
-            $comment_count = $sql->count("comments", array("status not" => "spam"));
-            $spam_count = $sql->count("comments", array("status" => "spam"));
+            $comment_count = $sql->count("comments", array("status not" => Comment::STATUS_SPAM));
+            $spam_count = $sql->count("comments", array("status" => Comment::STATUS_SPAM));
 
             $navs["manage_comments"] = array("title" => _f("Comments (%d)", $comment_count, "comments"),
                                              "selected" => array("edit_comment", "delete_comment"));
@@ -521,7 +559,7 @@
                     array("id", "created_at"),
                     array("post_id" => $post->id,
                           "created_at >" => $last,
-                          "status not" => "spam",
+                          "status not" => Comment::STATUS_SPAM,
                           Comment::redactions()),
                     array("created_at ASC"));
 
@@ -715,7 +753,7 @@
         public function pingback($post, $to, $from, $title, $excerpt) {
             $count = SQL::current()->count("comments",
                                            array("post_id" => $post->id,
-                                                 "status" => "pingback",
+                                                 "status" => Comment::STATUS_PINGBACK,
                                                  "author_url" => $from));
 
             if (!empty($count))
@@ -731,7 +769,7 @@
                             $post,
                             0,
                             0,
-                            "pingback");
+                            Comment::STATUS_PINGBACK);
 
             return __("Pingback registered!", "comments");
         }
@@ -744,16 +782,16 @@
         public function post_options($fields, $post = null) {
             $statuses = array(
                 array("name" => __("Open", "comments"),
-                      "value" => "open",
+                      "value" => Comment::OPTION_OPEN,
                       "selected" => ($post ? $post->comment_status == "open" : true)),
                 array("name" => __("Closed", "comments"),
-                      "value" => "closed",
+                      "value" => Comment::OPTION_CLOSED,
                       "selected" => ($post ? $post->comment_status == "closed" : false)),
                 array("name" => __("Private", "comments"),
-                      "value" => "private",
+                      "value" => Comment::OPTION_PRIVATE,
                       "selected" => ($post ? $post->comment_status == "private" : false)),
                 array("name" => __("Registered Only", "comments"),
-                      "value" => "registered_only",
+                      "value" => Comment::OPTION_REG_ONLY,
                       "selected" => ($post ? $post->comment_status == "registered_only" : false))
             );
 
@@ -786,7 +824,7 @@
 
             $counts = SQL::current()->select("comments",
                                              array("COUNT(post_id) AS total", "post_id as post_id"),
-                                             array("status not" => "spam",
+                                             array("status not" => Comment::STATUS_SPAM,
                                                    Comment::redactions()),
                                              null,
                                              array(),
@@ -816,7 +854,7 @@
 
             $times = SQL::current()->select("comments",
                                             array("MAX(created_at) AS latest", "post_id"),
-                                            array("status not" => "spam",
+                                            array("status not" => Comment::STATUS_SPAM,
                                                   Comment::redactions()),
                                             null,
                                             array(),
@@ -836,7 +874,7 @@
 
             $counts = SQL::current()->select("comments",
                                              array("COUNT(user_id) AS total", "user_id as user_id"),
-                                             array("status not" => "spam",
+                                             array("status not" => Comment::STATUS_SPAM,
                                                    Comment::redactions()),
                                              null,
                                              array(),
