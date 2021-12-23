@@ -21,11 +21,11 @@
 <form action="{{ url('change_theme') }}" method="post" accept-charset="UTF-8">
 <input type="hidden" name="theme" value="{{ safename }}">
 <input type="hidden" name="hash" value="{{ authenticate() }}">
-<button name="change" value="indubitably" type="submit">
-<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Select" | translate }}
-</button>
 <button name="change" value="undecidedly">
 <img src="{{ site.chyrp_url }}/admin/images/icons/magnifier.svg" alt="">{{ "Preview" | translate }}
+</button>
+<button name="change" value="indubitably" type="submit">
+<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Select" | translate }}
 </button>
 </form>
 </div>
