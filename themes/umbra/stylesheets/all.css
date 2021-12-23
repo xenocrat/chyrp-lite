@@ -111,7 +111,6 @@ h3.filter {
 }
 h2.archive {
     margin: 2rem 0rem 0rem 0rem;
-    clear: both;
 }
 h4 {
     font-size: 1em;
@@ -240,10 +239,14 @@ ul.navigation li {
 }
 ul.archive {
     list-style: none;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
     margin: 0rem;
 }
 ul.archive li {
     margin: 0em;
+    flex: none;
 }
 ol.comments {
     list-style: none;
@@ -382,10 +385,6 @@ label {
     display: block;
     margin-top: 1em;
 }
-div.clear {
-    visibility: hidden;
-    clear: both;
-}
 div#mast {
     box-sizing: border-box;
     width: 100%;
@@ -399,7 +398,6 @@ div#main {
     width: 100%;
     margin: 0em;
     padding: 0em;
-    clear: both;
     overflow: visible;
 }
 div.traversal {
@@ -431,7 +429,6 @@ div.metadata {
 }
 div.comments_pagination {
     width: 100%;
-    clear: both;
     padding-top: 2rem;
     text-align: center;
 }
@@ -455,7 +452,6 @@ div#main > article, div.standalone {
     position: relative;
     width: 100%;
     max-width: 896px;
-    clear: both;
     margin: 0em auto 0em auto;
     padding: 4rem;
 }
@@ -480,11 +476,10 @@ div#main > article + article {
 ul.archive article.post.archive {
     display: block;
     position: relative;
-    float: left;
     width: 196px;
     height: 196px;
     font-size: 0.75em;
-    margin: 2rem 0rem 0rem 2rem;
+    margin-top: 2rem;
     padding: 8px;
     border: 1px solid lightgreen;
 }
@@ -495,7 +490,6 @@ div.post_archive_container {
 article > header {
     display: block;
     width: 100%;
-    clear: both;
     margin: 0em;
     padding: 0em;
     border: none;
@@ -503,7 +497,6 @@ article > header {
 article > section {
     display: block;
     width: 100%;
-    clear: both;
     margin: 1em 0em 0em 0em;
     padding: 0em;
 }
@@ -515,14 +508,12 @@ article section.comment {
 }
 article > section.photo {
     width: 100%;
-    clear: both;
 }
 article > footer {
     display: block;
     width: 100%;
     text-align: left;
     text-align: start;
-    clear: both;
     margin: 0em 0em 1em 0em;
     padding: 0em;
     border: none;
@@ -766,6 +757,9 @@ div.metadata img.gravatar {
     }
     iframe.video_embed {
         height: calc((100vw - 4rem) * 0.5625);
+    }
+    ul.archive li {
+        flex: auto;
     }
     ul.archive article.post.archive {
         box-sizing: border-box;
