@@ -238,7 +238,7 @@ msgstr ""
 msgid "close"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:226 admin/pages/themes.twig:28
+#: admin/javascripts/admin.js.php:226 admin/pages/themes.twig:25
 msgid "Preview"
 msgstr ""
 
@@ -370,7 +370,7 @@ msgstr ""
 
 #: admin/pages/delete_group.twig:47 admin/pages/delete_page.twig:23
 #: admin/pages/delete_post.twig:17 admin/pages/delete_user.twig:44
-#: admin/partials/page_fields.twig:80 admin/partials/post_fields.twig:163
+#: admin/partials/page_fields.twig:79 admin/partials/post_fields.twig:162
 msgid "Cancel"
 msgstr ""
 
@@ -553,25 +553,25 @@ msgstr ""
 msgid "Enabled"
 msgstr ""
 
-#: admin/pages/feathers.twig:13 admin/pages/feathers.twig:45
-#: admin/pages/modules.twig:13 admin/pages/modules.twig:65
+#: admin/pages/feathers.twig:13 admin/pages/feathers.twig:44
+#: admin/pages/modules.twig:13 admin/pages/modules.twig:64
 #: admin/pages/themes.twig:12
 msgid "info"
 msgstr ""
 
-#: admin/pages/feathers.twig:26 admin/pages/modules.twig:46
-msgid "Disable"
-msgstr ""
-
-#: admin/pages/feathers.twig:30 admin/pages/modules.twig:50
+#: admin/pages/feathers.twig:27 admin/pages/modules.twig:47
 msgid "Uninstall"
 msgstr ""
 
-#: admin/pages/feathers.twig:40 admin/pages/modules.twig:60
+#: admin/pages/feathers.twig:31 admin/pages/modules.twig:51
+msgid "Disable"
+msgstr ""
+
+#: admin/pages/feathers.twig:39 admin/pages/modules.twig:59
 msgid "Disabled"
 msgstr ""
 
-#: admin/pages/feathers.twig:58 admin/pages/modules.twig:99
+#: admin/pages/feathers.twig:57 admin/pages/modules.twig:98
 msgid "Enable"
 msgstr ""
 
@@ -791,11 +791,11 @@ msgstr ""
 msgid "Modules"
 msgstr ""
 
-#: admin/pages/modules.twig:22 admin/pages/modules.twig:74
+#: admin/pages/modules.twig:22 admin/pages/modules.twig:73
 msgid "This module conflicts with the following modules:"
 msgstr ""
 
-#: admin/pages/modules.twig:32 admin/pages/modules.twig:84
+#: admin/pages/modules.twig:32 admin/pages/modules.twig:83
 msgid "This module requires the following modules to be enabled:"
 msgstr ""
 
@@ -951,7 +951,7 @@ msgstr ""
 msgid "Blog Themes"
 msgstr ""
 
-#: admin/pages/themes.twig:25
+#: admin/pages/themes.twig:28
 msgid "Select"
 msgstr ""
 
@@ -1043,14 +1043,14 @@ msgstr ""
 msgid "Parent"
 msgstr ""
 
-#: admin/partials/page_fields.twig:70 admin/partials/post_fields.twig:153
-#: admin/partials/post_fields.twig:169
+#: admin/partials/page_fields.twig:69 admin/partials/post_fields.twig:152
+#: admin/partials/post_fields.twig:168
 msgid "Publish"
 msgstr ""
 
-#: admin/partials/page_fields.twig:73 admin/partials/page_fields.twig:77
-#: admin/partials/post_fields.twig:156 admin/partials/post_fields.twig:160
-#: admin/partials/post_fields.twig:173
+#: admin/partials/page_fields.twig:72 admin/partials/page_fields.twig:76
+#: admin/partials/post_fields.twig:155 admin/partials/post_fields.twig:159
+#: admin/partials/post_fields.twig:172
 msgid "Save"
 msgstr ""
 
