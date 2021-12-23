@@ -104,7 +104,6 @@ h3.ribbon {
 }
 h2.archive {
     margin: 2rem 0rem 0rem 0rem;
-    clear: both;
 }
 h4, h5, h6 {
     font-size: 1em;
@@ -251,10 +250,14 @@ ul#nav li {
 }
 ul.archive {
     list-style: none;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
     margin: 0rem;
 }
 ul.archive li {
     margin: 0em;
+    flex: none;
 }
 ol.comments {
     list-style: none;
@@ -421,10 +424,6 @@ label {
 div.shim {
     margin-top: 2em;
 }
-div.clear {
-    visibility: hidden;
-    clear: both;
-}
 div#mast {
     display: none;
     width: 100%;
@@ -434,7 +433,6 @@ div#main {
     width: 100%;
     margin: 0em;
     padding: 0em;
-    clear: both;
     overflow: visible;
 }
 div#sidebar {
@@ -446,13 +444,11 @@ div#sidebar {
 }
 div.prev {
     width: 100%;
-    clear: both;
     text-align: center;
     margin-bottom: 2em;
 }
 div.next {
     width: 100%;
-    clear: both;
     text-align: center;
     margin-top: 2em;
 }
@@ -494,7 +490,6 @@ article.post.pinned div.metadata {
 }
 div.comments_pagination {
     width: 100%;
-    clear: both;
     text-align: center;
 }
 div.tags {
@@ -517,7 +512,6 @@ div#main > article, div.standalone {
     box-sizing: border-box;
     width: 100%;
     max-width: 1024px;
-    clear: both;
     background-color: #fbfbf7;
     margin: 0rem auto 2rem 0rem;
     padding: 2rem 2rem 0rem 2rem;
@@ -553,12 +547,11 @@ div.user_register.standalone {
 ul.archive article.post.archive {
     display: block;
     position: relative;
-    float: left;
     width: 196px;
     height: 196px;
     font-size: 0.75em;
     background-color: #fbfbf7;
-    margin: 1rem 0rem 0rem 1rem;
+    margin-top: 1rem;
     padding: 8px;
     border: 1px solid #c6ccc8;
     border-radius: 6px;
@@ -571,7 +564,6 @@ div.post_archive_container {
 article > header {
     display: block;
     width: 100%;
-    clear: both;
     margin: 0em;
     padding: 0em;
     border: none;
@@ -579,7 +571,6 @@ article > header {
 article > section {
     display: block;
     width: 100%;
-    clear: both;
     margin: 1em 0em 0em 0em;
     padding: 0em;
 }
@@ -591,14 +582,12 @@ article section.comment {
 }
 article > section.photo {
     width: 100%;
-    clear: both;
 }
 article > footer {
     display: block;
     width: 100%;
     text-align: left;
     text-align: start;
-    clear: both;
     margin: 0em 0em 1em 0em;
     padding: 0em;
     border: none;
@@ -901,7 +890,9 @@ article.archive img {
         box-sizing: border-box;
         width: 100%;
         height: auto;
-        margin-left: 0em;
+    }
+    ul.archive li {
+        flex: auto;
     }
     ul.archive article.post.archive img {
         width: 100%;
