@@ -347,17 +347,17 @@ msgstr "&larr; %s的档案"
 msgid "%B %Y"
 msgstr "%B %Y"
 
-#: themes/sparrow/pages/archive.twig:50
+#: themes/sparrow/pages/archive.twig:49
 #, php-format
 msgid "Archive of %s &rarr;"
 msgstr "%s的档案 &rarr;"
 
-#: themes/sparrow/pages/archive.twig:59
+#: themes/sparrow/pages/archive.twig:58
 #, php-format
 msgid "Archive of %s"
 msgstr "%s的档案"
 
-#: themes/sparrow/pages/archive.twig:68
+#: themes/sparrow/pages/archive.twig:67
 msgid "There aren't any posts in the timeframe you specified."
 msgstr "在指定的时间范围内没有任何帖子。"
 

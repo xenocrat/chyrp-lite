@@ -381,13 +381,13 @@ msgstr "Negato."
 msgid "Not found."
 msgstr "Non trovato."
 
-#: themes/blossom/pages/archive.twig:10 themes/blossom/pages/archive.twig:50
-#: themes/blossom/pages/archive.twig:60
+#: themes/blossom/pages/archive.twig:10 themes/blossom/pages/archive.twig:49
+#: themes/blossom/pages/archive.twig:59
 #, php-format
 msgid "Archive of %s"
 msgstr "Archivio %s"
 
-#: themes/blossom/pages/archive.twig:71
+#: themes/blossom/pages/archive.twig:70
 msgid "There aren't any posts in the timeframe you specified."
 msgstr "Non ci sono post nell'intervallo di tempo specificato."
 

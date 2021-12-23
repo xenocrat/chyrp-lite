@@ -312,12 +312,12 @@ msgstr "未找到."
 msgid "%B %Y"
 msgstr "%B %Y"
 
-#: themes/umbra/pages/archive.twig:52
+#: themes/umbra/pages/archive.twig:51
 #, php-format
 msgid "Archive of %s"
 msgstr "%s的档案"
 
-#: themes/umbra/pages/archive.twig:61
+#: themes/umbra/pages/archive.twig:60
 msgid "There aren't any posts in the timeframe you specified."
 msgstr "在指定的时间范围内没有任何帖子。"
 

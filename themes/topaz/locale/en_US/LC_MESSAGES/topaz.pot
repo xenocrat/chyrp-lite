@@ -388,14 +388,14 @@ msgstr ""
 msgid "Not found."
 msgstr ""
 
-#: themes/topaz/pages/archive.twig:43
-#: themes/topaz/pages/archive.twig:48
-#: themes/topaz/pages/archive.twig:58
+#: themes/topaz/pages/archive.twig:42
+#: themes/topaz/pages/archive.twig:47
+#: themes/topaz/pages/archive.twig:57
 #, php-format
 msgid "Archive of %s"
 msgstr ""
 
-#: themes/topaz/pages/archive.twig:69
+#: themes/topaz/pages/archive.twig:68
 msgid "There aren't any posts in the timeframe you specified."
 msgstr ""
 

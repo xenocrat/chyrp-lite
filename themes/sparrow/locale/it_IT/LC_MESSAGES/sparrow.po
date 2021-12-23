@@ -351,17 +351,17 @@ msgstr "&larr; Archivio %s"
 msgid "%B %Y"
 msgstr "%B %Y"
 
-#: themes/sparrow/pages/archive.twig:50
+#: themes/sparrow/pages/archive.twig:49
 #, php-format
 msgid "Archive of %s &rarr;"
 msgstr "Archivio %s &rarr;"
 
-#: themes/sparrow/pages/archive.twig:59
+#: themes/sparrow/pages/archive.twig:58
 #, php-format
 msgid "Archive of %s"
 msgstr "Archivio %s"
 
-#: themes/sparrow/pages/archive.twig:68
+#: themes/sparrow/pages/archive.twig:67
 msgid "There aren't any posts in the timeframe you specified."
 msgstr "Non ci sono post nell'intervallo di tempo specificato."
 
