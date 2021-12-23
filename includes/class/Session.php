@@ -53,7 +53,7 @@
          */
         public function read($id) {
             $result = SQL::current()->select("sessions",
-                                             "data, created_at",
+                                             array("data", "created_at"),
                                              array("id" => $id))->fetch();
 
             if (!empty($result)) {
