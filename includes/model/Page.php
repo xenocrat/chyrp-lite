@@ -159,8 +159,8 @@
 
             $user_id = ($user instanceof User) ? $user->id : $user ;
 
-            fallback($title,        $this->title);
-            fallback($body,         $this->body);
+            fallback($title,        ($this->filtered) ? $this->title_unfiltered : $this->title);
+            fallback($body,         ($this->filtered) ? $this->body_unfiltered : $this->body);
             fallback($user_id,      $this->user_id);
             fallback($parent_id,    $this->parent_id);
             fallback($public,       $this->public);
