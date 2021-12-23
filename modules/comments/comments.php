@@ -334,7 +334,7 @@
                 $count_delete = 0;
 
                 foreach ($comments as $comment) {
-                    $comment = new Comment($comment);
+                    $comment = new Comment($comment, array("filter" => false));
 
                     if (!$comment->deletable())
                         continue;
@@ -356,7 +356,7 @@
                 $count_deny = 0;
 
                 foreach ($comments as $comment) {
-                    $comment = new Comment($comment);
+                    $comment = new Comment($comment, array("filter" => false));
 
                     if (!$comment->editable())
                         continue;
@@ -384,7 +384,7 @@
                 $count_approve = 0;
 
                 foreach ($comments as $comment) {
-                    $comment = new Comment($comment);
+                    $comment = new Comment($comment, array("filter" => false));
 
                     if (!$comment->editable())
                         continue;
@@ -412,7 +412,7 @@
                 $count_spam = 0;
 
                 foreach ($comments as $comment) {
-                    $comment = new Comment($comment);
+                    $comment = new Comment($comment, array("filter" => false));
 
                     if (!$comment->editable())
                         continue;
