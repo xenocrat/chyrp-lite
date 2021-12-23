@@ -269,7 +269,6 @@ a:active {
     overflow: hidden;
 }
 div.pagination {
-    clear: both;
     text-align: center;
     margin-top: 1em;
 }
@@ -338,8 +337,8 @@ li.module:not(.error) .module_conflicts_list {
 li.module div.controls,
 li.feather div.controls,
 li.theme div.controls {
-    display: flex;
-    flex-direction: row-reverse;
+    text-align: right;
+    text-align: end;
     margin-top: 1em;
     padding-top: 1em;
     border-top: 1px solid #cfcfcf;
@@ -352,17 +351,6 @@ li.theme.current div.controls {
 ul#modules_enabled > li.error div.controls,
 ul#modules_disabled > li.error div.controls {
     border-top: 1px solid #d9a086;
-}
-li.module div.controls button,
-li.feather div.controls button,
-li.theme div.controls button {
-    display: block;
-    float: right;
-}
-li.module div.controls button + button,
-li.feather div.controls button + button,
-li.theme div.controls button + button {
-    margin-right: 1rem;
 }
 #content ul.extend li a.emblem img,
 #content ul.extend > li > h3 a {
@@ -474,14 +462,10 @@ code {
     color: #4f4f4f;
     border: 1px solid #cfcfcf;
 }
-form.split > fieldset > * {
-    clear: both;
-}
 form.split label {
     box-sizing: border-box;
     display: inline-block;
     width: 45%;
-    clear: both;
     text-align: right;
     text-align: end;
     padding: 0rem 1rem;
@@ -651,9 +635,6 @@ p.flash a:active {
 
 /* Group: Buttons */
 
-.buttons {
-    clear: both;
-}
 button,
 a.button,
 a.next_page,
@@ -853,12 +834,6 @@ table.interactive + div.controls {
     border: 1px solid #cfcfcf;
     border-top: none;
 }
-div.controls h4 {
-    display: inline;
-}
-div.controls input {
-    padding: 0.4em;
-}
 div.confirmation {
     text-align: center;
     margin-top: 1rem;
@@ -1005,24 +980,22 @@ a.emblem.markdown:focus > img {
     #sub_nav li a {
         box-sizing: border-box;
         display: block;
-        float: left;
         width: 100%;
         margin: 0em;
         padding: 0rem 1rem 2rem 1rem;
         font-size: 1rem;
     }
     #sub_nav li:nth-child(odd) a {
-        border-right: none !important;
+        border-right: none;
     }
     #sub_nav li:nth-child(odd):last-child a {
-        border-right: 1px solid #cfcfcf !important;
+        border-right: 1px solid #cfcfcf;
     }
     label {
         display: block;
     }
     form.split label {
         width: 100%;
-        float: none;
         text-align: left;
         text-align: start;
         padding: 0em;
@@ -1052,8 +1025,6 @@ a.emblem.markdown:focus > img {
     input[type="file"],
     select,
     textarea {
-        margin-left: 0em !important;
-        margin-right: 0em !important;
         width: 100% !important;
     }
     #content table thead tr th:not(.main):not(.controls):not(.toggler),
@@ -1069,50 +1040,23 @@ a.emblem.markdown:focus > img {
     #content table tbody tr td.controls,
     #content table tbody tr td.checkbox,
     #content table tbody tr td.emblem {
-        min-width: 32px;
-    }
-    table.interactive + div.controls {
-        padding: 2rem;
+        min-width: 3rem;
     }
     button, a.button,
     a.prev_page, a.next_page {
-        float: none !important;
-        clear: both !important;
         display: block !important;
         width: 100% !important;
-        padding: 0.4em 0.6em !important;
         margin: 1em 0em 0em 0em !important;
         text-align: center !important;
-        box-sizing: border-box !important;
-    }
-    form.split label + button {
-        margin-top: 0em !important;
-    }
-    p.flash {
-        margin: 0rem 0rem 1rem 0rem !important;
     }
     span.pages {
         margin-top: 1rem;
     }
-    div.controls h4 {
-        display: block;
-    }
     div.more_options p.more_options_option {
         width: 100%;
-    }
-    #content ul.extend > li > h3 {
-        line-height: 2;
     }
     li.module div.controls,
     li.feather div.controls {
         padding-top: 0em;
-    }
-    div.controls .module_disabler_confirm,
-    div.controls .feather_disabler_confirm {
-        margin-top: 1rem;
-    }
-    div.controls .module_disabler_confirm label,
-    div.controls .feather_disabler_confirm label {
-        display: inline;
     }
 }
