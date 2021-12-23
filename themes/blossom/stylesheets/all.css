@@ -886,13 +886,13 @@ article.archive img {
     }
 }
 @media screen and (max-width: 559px) {
+    ul.archive li {
+        flex: auto;
+    }
     ul.archive article.post.archive {
         box-sizing: border-box;
         width: 100%;
         height: auto;
-    }
-    ul.archive li {
-        flex: auto;
     }
     ul.archive article.post.archive img {
         width: 100%;
