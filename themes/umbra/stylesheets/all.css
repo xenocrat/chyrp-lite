@@ -241,8 +241,9 @@ ul.archive {
     list-style: none;
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-evenly;
-    margin: 0rem;
+    justify-content: start;
+    gap: 2rem;
+    margin: 2rem 0rem 0rem 0rem;
 }
 ul.archive li {
     margin: 0em;
@@ -479,7 +480,6 @@ ul.archive article.post.archive {
     width: 196px;
     height: 196px;
     font-size: 0.75em;
-    margin-top: 2rem;
     padding: 8px;
     border: 1px solid lightgreen;
 }
@@ -759,7 +759,7 @@ div.metadata img.gravatar {
         height: calc((100vw - 4rem) * 0.5625);
     }
     ul.archive li {
-        flex: auto;
+        flex: 100%;
     }
     ul.archive article.post.archive {
         box-sizing: border-box;

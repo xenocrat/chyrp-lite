@@ -275,8 +275,9 @@ ul.archive {
     list-style: none;
     display: flex;
     flex-flow: row wrap;
-    justify-content: space-evenly;
-    margin: 0rem;
+    justify-content: start;
+    gap: 1rem;
+    margin: 1rem 0rem 0rem 0rem;
 }
 ul.archive li {
     margin: 0em;
@@ -565,7 +566,6 @@ ul.archive article.post.archive {
     width: 196px;
     height: 196px;
     font-size: 0.75em;
-    margin-top: 1rem;
     padding: 8px;
     border: 1px solid #c6ccc8;
     border-radius: 6px;
@@ -914,7 +914,7 @@ article.archive img {
 }
 @media screen and (max-width: 559px) {
     ul.archive li {
-        flex: auto;
+        flex: 100%;
     }
     ul.archive article.post.archive {
         box-sizing: border-box;
