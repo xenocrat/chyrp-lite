@@ -1055,8 +1055,7 @@ a.emblem.markdown:focus > img {
         margin-top: 1rem;
     }
     div.more_options p.more_options_option {
-        width: 100%;
-        flex: auto;
+        flex: 100%;
     }
     li.module div.controls,
     li.feather div.controls {
