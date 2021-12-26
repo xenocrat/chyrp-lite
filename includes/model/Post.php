@@ -874,9 +874,6 @@
          */
         static function publish_scheduled($pingbacks = true) {
             $sql = SQL::current();
-            $config = Config::current();
-            $trigger = Trigger::current();
-
             $ids = $sql->select("posts",
                                 "id",
                                 array("created_at <=" => datetime(),
