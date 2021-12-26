@@ -460,22 +460,22 @@ Arguments:
 	$post, $options
 
 
-update_post
------------
+publish_post
+------------
 Called from:
-	includes/model/Post.php on line 355
+	includes/model/Post.php on line 356
 
 Arguments:
 	$post, $this, $options
 
 
-publish_post
-------------
+update_post
+-----------
 Called from:
-	includes/model/Post.php on line 894
+	includes/model/Post.php on line 358
 
 Arguments:
-	$post
+	$post, $this, $options
 
 
 add_user
@@ -1279,7 +1279,7 @@ Target:
 title_from_excerpt
 ------------------
 Called from:
-	includes/model/Post.php on line 559
+	includes/model/Post.php on line 562
 
 Target:
 	$excerpt
@@ -1288,7 +1288,7 @@ Target:
 title
 -----
 Called from:
-	includes/model/Post.php on line 584
+	includes/model/Post.php on line 587
 
 Target:
 	$title
@@ -1300,7 +1300,7 @@ Arguments:
 excerpt
 -------
 Called from:
-	includes/model/Post.php on line 601
+	includes/model/Post.php on line 604
 
 Target:
 	$excerpt
@@ -1312,7 +1312,7 @@ Arguments:
 feed_content
 ------------
 Called from:
-	includes/model/Post.php on line 618
+	includes/model/Post.php on line 621
 
 Target:
 	$feed_content
@@ -1324,7 +1324,7 @@ Arguments:
 filter_post
 -----------
 Called from:
-	includes/model/Post.php on line 680
+	includes/model/Post.php on line 683
 
 Target:
 	$this
