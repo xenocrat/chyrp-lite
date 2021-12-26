@@ -347,12 +347,15 @@
                                                         "attribute_values" => $attribute_values))));
 
             # Attempt to send pingbacks to URLs discovered in post attribute values.
-            if ($config->send_pingbacks and $pingbacks and $this->status == self::STATUS_PUBLIC)
+            if ($config->send_pingbacks and $pingbacks and $post->status == self::STATUS_PUBLIC)
                 foreach ($post->attribute_values as $value)
                     if (is_string($value))
                         send_pingbacks($value, $post);
 
-            $trigger->call("update_post", $post, $this, $options);
+            if ($this->status == self::STATUS_SCHEDULED and $post->status == self::STATUS_PUBLIC)
+                $trigger->call("publish_post", $post, $this, $options);
+            else
+                $trigger->call("update_post", $post, $this, $options);
 
             return $post;
         }
@@ -880,18 +883,8 @@
                                       "status" => self::STATUS_SCHEDULED))->fetchAll();
 
             foreach ($ids as $id) {
-                $sql->update("posts",
-                             array("id" => $id),
-                             array("status" => self::STATUS_PUBLIC));
-
                 $post = new self($id, array("skip_where" => true));
-
-                if ($config->send_pingbacks and $pingbacks)
-                    foreach ($post->attribute_values as $value)
-                        if (is_string($value))
-                            send_pingbacks($value, $post);
-
-                $trigger->call("publish_post", $post);
+                $post->update(null, null, null, self::STATUS_PUBLIC);
             }
         }
     }
