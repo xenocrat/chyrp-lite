@@ -423,6 +423,10 @@
                             $post->status_name = __("All registered users", "admin");
                             break;
 
+                        case Post::STATUS_SCHEDULED:
+                            $post->status_name = __("Scheduled", "admin");
+                            break;
+
                         default:
                             $post->status_name = camelize($post->status, true);
                     }
