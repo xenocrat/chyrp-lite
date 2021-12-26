@@ -323,7 +323,7 @@
          * Function: current
          * Returns a singleton reference to the current connection.
          */
-        public static function & current($settings = false) {
+        public static function & current($settings = false): self {
             if ($settings) {
                 static $loaded = null;
                 $loaded = new self($settings);

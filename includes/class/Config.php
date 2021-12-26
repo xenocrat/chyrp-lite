@@ -94,7 +94,7 @@
          * Function: current
          * Returns a singleton reference to the current configuration.
          */
-        public static function & current() {
+        public static function & current(): self {
             static $instance = null;
             $instance = (empty($instance)) ? new self() : $instance ;
             return $instance;

@@ -285,7 +285,7 @@
          * Function: current
          * Returns a singleton reference to the current class.
          */
-        public static function & current($controller = null) {
+        public static function & current($controller = null): ?self {
             static $instance = null;
 
             if (!isset($controller) and empty($instance))
