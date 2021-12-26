@@ -245,13 +245,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 1239
+	includes/controller/Admin.php on line 1243
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1527
+	includes/controller/Admin.php on line 1531
 
 Arguments:
 	$group
@@ -260,7 +260,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1552
+	includes/controller/Admin.php on line 1556
 
 Arguments:
 	$user
@@ -269,7 +269,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1591
+	includes/controller/Admin.php on line 1595
 
 Arguments:
 	$entry, $post
@@ -278,7 +278,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1621
+	includes/controller/Admin.php on line 1625
 
 Arguments:
 	$entry, $page
@@ -287,7 +287,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1625
+	includes/controller/Admin.php on line 1629
 
 Arguments:
 	$imports
@@ -296,13 +296,13 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1908
+	includes/controller/Admin.php on line 1912
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1916
+	includes/controller/Admin.php on line 1920
 
 
 can_not_view_page
@@ -903,7 +903,7 @@ Arguments:
 posts_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 1301
+	includes/controller/Admin.php on line 1305
 
 Target:
 	$posts_atom
@@ -915,7 +915,7 @@ Arguments:
 pages_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 1351
+	includes/controller/Admin.php on line 1355
 
 Target:
 	$pages_atom
@@ -927,7 +927,7 @@ Arguments:
 export
 ------
 Called from:
-	includes/controller/Admin.php on line 1418
+	includes/controller/Admin.php on line 1422
 
 Target:
 	$exports
@@ -936,7 +936,7 @@ Target:
 before_import
 -------------
 Called from:
-	includes/controller/Admin.php on line 1496
+	includes/controller/Admin.php on line 1500
 
 Target:
 	$imports
@@ -945,7 +945,7 @@ Target:
 stylesheets_nonce
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2151
+	includes/controller/Admin.php on line 2155
 	modules/tags/tags.php on line 452
 
 Target:
@@ -955,7 +955,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 2192
+	includes/controller/Admin.php on line 2196
 
 Target:
 	$write
@@ -964,7 +964,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2229
+	includes/controller/Admin.php on line 2233
 
 Target:
 	$manage
@@ -973,7 +973,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 2254
+	includes/controller/Admin.php on line 2258
 
 Target:
 	$settings
@@ -982,7 +982,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2272
+	includes/controller/Admin.php on line 2276
 
 Target:
 	$extend
@@ -991,7 +991,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2333
+	includes/controller/Admin.php on line 2337
 
 Target:
 	$this->context
