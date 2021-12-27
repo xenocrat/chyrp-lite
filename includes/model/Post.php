@@ -880,7 +880,9 @@
                                       "status" => self::STATUS_SCHEDULED))->fetchAll();
 
             foreach ($ids as $id) {
-                $post = new self($id, array("skip_where" => true));
+                $post = new self($id, array("skip_where" => true,
+                                            "filter" => false));
+
                 $post->update(null, null, null, self::STATUS_PUBLIC);
             }
         }
