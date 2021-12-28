@@ -733,7 +733,7 @@
                 $attrs = array(); # Post attributes present in post_url.
                 $parts = preg_split("|(\([^)]+\))|",
                                     $config->post_url,
-                                    null,
+                                    0,
                                     PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
 
                 # Differentiate between post attributes and junk in post_url.

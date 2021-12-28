@@ -15,7 +15,7 @@
      * Parameters:
      *     $secure - Send the cookie only over HTTPS?
      */
-    function session($secure = null) {
+    function session($secure = null): void {
         if (session_status() == PHP_SESSION_ACTIVE) {
             trigger_error(__("Session cannot be started more than once."), E_USER_NOTICE);
             return;
@@ -57,7 +57,7 @@
      * Function: logged_in
      * Returns whether or not the visitor is logged in.
      */
-    function logged_in() {
+    function logged_in(): bool {
         return (class_exists("Visitor") and 
                 isset(Visitor::current()->id) and Visitor::current()->id != 0);
     }
@@ -133,7 +133,7 @@
      * Function: url
      * Mask for Route::url().
      */
-    function url($url, $controller = null) {
+    function url($url, $controller = null): string {
         return Route::url($url, $controller);
     }
 
@@ -141,7 +141,7 @@
      * Function: self_url
      * Returns an absolute URL for the current request.
      */
-    function self_url() {
+    function self_url(): string {
         $parsed = parse_url(Config::current()->url);
         $origin = fallback($parsed["scheme"], "http")."://".
                   fallback($parsed["host"], $_SERVER['SERVER_NAME']);
@@ -271,7 +271,7 @@
      * Function: locales
      * Returns an array of locale choices for the "chyrp" domain.
      */
-    function locales() {
+    function locales(): array {
         # Ensure the default locale is always present in the list.
         $locales = array(array("code" => "en_US",
                                "name" => lang_code("en_US")));
@@ -301,7 +301,7 @@
      * Parameters:
      *     $locale - The locale name, e.g. @en_US@, @uk_UA@, @fr_FR@
      */
-    function set_locale($locale = "en_US") {
+    function set_locale($locale = "en_US"): void {
         $list = array($locale.".UTF-8",
                       $locale.".utf-8",
                       $locale.".UTF8",
@@ -331,7 +331,7 @@
      * Notes:
      *     Does not use setlocale() because the return value is non-normative.
      */
-    function get_locale() {
+    function get_locale(): string {
         if (INSTALLING or !file_exists(INCLUDES_DIR.DIR."config.json.php"))
             return isset($_REQUEST['locale']) ? $_REQUEST['locale'] : "en_US" ;
 
@@ -346,7 +346,7 @@
      *     $domain - The name of this translation domain.
      *     $locale - The path to the locale directory.
      */
-    function load_translator($domain, $locale) {
+    function load_translator($domain, $locale): ?bool {
         if (USE_GETTEXT_SHIM and class_exists("Translation"))
             return Translation::current()->load($domain, $locale);
 
@@ -367,7 +367,7 @@
      * Returns:
      *     A localised display name, e.g. "English (United States)".
      */
-    function lang_code($code) {
+    function lang_code($code): string {
         return class_exists("Locale") ? Locale::getDisplayName($code, $code) : $code ;
     }
 
@@ -381,7 +381,7 @@
      * Returns:
      *     The primary subtag for this code, e.g. "en" from "en_US".
      */
-    function lang_base($code) {
+    function lang_base($code): string {
         $code = str_replace("_", "-", $code);
         $tags = explode("-", $code);
         return ($tags === false) ? "en" : $tags[0] ;
@@ -398,7 +398,7 @@
      * Returns:
      *     The translated string or the original.
      */
-    function __($text, $domain = "chyrp") {
+    function __($text, $domain = "chyrp"): string {
         if (USE_GETTEXT_SHIM)
             return Translation::current()->text($domain, $text);
 
@@ -418,7 +418,7 @@
      * Returns:
      *     The translated string or the original.
      */
-    function _p($single, $plural, $number, $domain = "chyrp") {
+    function _p($single, $plural, $number, $domain = "chyrp"): string {
         $int = (int) $number;
 
         if (USE_GETTEXT_SHIM)
@@ -440,7 +440,7 @@
      * Returns:
      *     The translated string or the original.
      */
-    function _f($string, $args = array(), $domain = "chyrp") {
+    function _f($string, $args = array(), $domain = "chyrp"): string {
         $args = (array) $args;
         array_unshift($args, __($string, $domain));
         return call_user_func_array("sprintf", $args);
@@ -457,18 +457,13 @@
      * Parameters:
      *     $formatting - The formatting for date() or strftime().
      *     $when - A time value to be strtotime() converted.
-     *     $strftime - Format using @strftime@ instead of @date@?
      *
      * Returns:
      *     A time/date string with the supplied formatting.
      */
-    function when($formatting, $when, $strftime = false) {
+    function when($formatting, $when) {
         $time = is_numeric($when) ? $when : strtotime($when) ;
-
-        if ($strftime)
-            return strftime($formatting, $time);
-        else
-            return date($formatting, $time);
+        return date($formatting, $time);
     }
 
     /**
@@ -501,7 +496,7 @@
      * Function: timezones
      * Returns an array of timezone identifiers.
      */
-    function timezones() {
+    function timezones(): array {
         $timezones = array();
         $zone_list = timezone_identifiers_list(DateTimeZone::ALL);
 
@@ -523,7 +518,7 @@
      * Parameters:
      *     $timezone - The timezone to set.
      */
-    function set_timezone($timezone = "Atlantic/Reykjavik") {
+    function set_timezone($timezone = "Atlantic/Reykjavik"): bool {
         $result = date_default_timezone_set($timezone);
 
         if (DEBUG)
@@ -536,7 +531,7 @@
      * Function: get_timezone
      * Gets the timezone for all date/time functions.
      */
-    function get_timezone() {
+    function get_timezone(): string {
         return date_default_timezone_get();
     }
 
@@ -648,7 +643,7 @@
      *     Useful for data that will be stripped later on by its model
      *     but which needs to be tested for uniqueness/emptiness first.
      */
-    function derezz(&$variable) {
+    function derezz(&$variable): bool {
         $variable = str_replace(array("\n", "\r", "\0"), "", strip_tags($variable));
         return empty($variable);
     }
@@ -663,7 +658,7 @@
      * Returns:
      *     A unique token salted with the site's secure hashkey.
      */
-    function token($items) {
+    function token($items): string {
         return sha1(implode((array) $items).Config::current()->secure_hashkey);
     }
 
@@ -677,7 +672,7 @@
      * Returns:
      *     A string of the requested length.
      */
-    function slug($length) {
+    function slug($length): string {
         return strtolower(random($length));
     }
 
@@ -711,7 +706,7 @@
      * Notes:
      *     Uses a cryptographically secure pseudo-random method.
      */
-    function random($length) {
+    function random($length): string {
         $input = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         $range = strlen($input) - 1;
         $chars = "";
@@ -749,7 +744,7 @@
      * Function: timer_start
      * Starts the internal timer and returns the microtime.
      */
-    function timer_start() {
+    function timer_start(): float {
         static $timer;
 
         if (!isset($timer))
@@ -768,7 +763,7 @@
      * Returns:
      *     A formatted number with the requested $precision.
      */
-    function timer_stop($precision = 3) {
+    function timer_stop($precision = 3): string {
         $elapsed = microtime(true) - timer_start();
         return number_format($elapsed, $precision, ".", "");
     }
@@ -784,7 +779,7 @@
      * Returns:
      *     Whether or not the match succeeded.
      */
-    function match_any($try, $haystack) {
+    function match_any($try, $haystack): bool {
         foreach ((array) $try as $needle)
             if (preg_match($needle, $haystack))
                 return true;
@@ -799,7 +794,7 @@
      * Parameters:
      *     $class - The name of the class to load.
      */
-    function autoload($class) {
+    function autoload($class): void {
         $filepath = str_replace(array("_", "\\", "\0"),
                                 array(DIR, DIR, ""),
                                 ltrim($class, "\\")).".php";
@@ -829,7 +824,7 @@
      * Returns:
      *     An array containing the "WHERE" queries and the corresponding parameters.
      */
-    function keywords($query, $plain, $table = null) {
+    function keywords($query, $plain, $table = null): array {
         $trimmed = trim($query);
 
         if (empty($trimmed))
@@ -947,7 +942,7 @@
      * Returns:
      *     The supplied word with a trailing "s" added, or a non-normative pluralization.
      */
-    function pluralize($string, $number = null) {
+    function pluralize($string, $number = null): string {
         $uncountable = array("audio", "equipment", "fish", "information", "money",
                              "moose", "news", "rice", "series", "sheep", "species");
 
@@ -999,7 +994,7 @@
      * Returns:
      *     The supplied word with trailing "s" removed, or a non-normative singularization.
      */
-    function depluralize($string, $number = null) {
+    function depluralize($string, $number = null): string {
         $uncountable = array("news", "series", "species");
 
         if (in_array($string, $uncountable) or (isset($number) and $number != 1))
@@ -1046,7 +1041,7 @@
      * Returns:
      *     The normalized string.
      */
-    function normalize($string) {
+    function normalize($string): string {
         return trim(preg_replace("/[\s\n\r\t]+/", " ", $string));
     }
 
@@ -1064,7 +1059,7 @@
      * See Also:
      *     <decamelize>
      */
-    function camelize($string, $keep_spaces = false) {
+    function camelize($string, $keep_spaces = false): string {
         $lowercase = strtolower($string);
         $deunderscore = str_replace("_", " ", $lowercase);
         $dehyphen = str_replace("-", " ", $deunderscore);
@@ -1089,7 +1084,7 @@
      * See Also:
      *     <camelize>
      */
-    function decamelize($string) {
+    function decamelize($string): string {
         return strtolower(preg_replace("/([a-z])([A-Z])/", "\\1_\\2", $string));
     }
 
@@ -1107,7 +1102,7 @@
      * Returns:
      *     A truncated string with ellipsis appended.
      */
-    function truncate($text, $length = 100, $ellipsis = "...", $exact = false, $encoding = "UTF-8") {
+    function truncate($text, $length = 100, $ellipsis = "...", $exact = false, $encoding = "UTF-8"): string {
         if (function_exists("mb_strlen") and function_exists("mb_substr")) {
             if (mb_strlen($text, $encoding) <= $length)
                 return $text;
@@ -1144,7 +1139,7 @@
      *     https://github.com/commonmark/CommonMark
      *     https://github.github.com/gfm/
      */
-    function markdown($text) {
+    function markdown($text): string {
         $parser = new \cebe\markdown\GithubMarkdown();
         $parser->html5 = true;
         $parser->keepListStartNumber = true;
@@ -1164,7 +1159,7 @@
      * See Also:
      *     http://www.unicode.org/charts/PDF/U1F600.pdf
      */
-    function emote($text) {
+    function emote($text): string {
         $emoji = array(
             "o:-)"    => "&#x1f607;",
             "&gt;:-)" => "&#x1f608;",
@@ -1213,7 +1208,7 @@
      * Returns:
      *     A sanitized version of the string.
      */
-    function fix($string, $quotes = false, $double = false) {
+    function fix($string, $quotes = false, $double = false): string {
         $quotes = ($quotes) ? ENT_QUOTES : ENT_NOQUOTES ;
         return htmlspecialchars($string, $quotes | ENT_HTML5, "UTF-8", $double);
     }
@@ -1229,7 +1224,7 @@
      * Returns:
      *     An unsanitary version of the string.
      */
-    function unfix($string, $all = false) {
+    function unfix($string, $all = false): string {
         return ($all) ?
             html_entity_decode($string, ENT_QUOTES | ENT_HTML5, "UTF-8") :
             htmlspecialchars_decode($string, ENT_QUOTES | ENT_HTML5) ;
@@ -1248,7 +1243,7 @@
      * Returns:
      *     A sanitized version of the string.
      */
-    function sanitize($string, $lowercase = true, $strict = false, $truncate = 100) {
+    function sanitize($string, $lowercase = true, $strict = false, $truncate = 100): string {
         $strip = array("&amp;", "&#8216;", "&#8217;", "&#8220;", "&#8221;", "&#8211;", "&#8212;", "&",
                        "~", "`", "!", "@", "#", "$", "%", "^", "*", "(", ")", "_", "=", "+", "[", "{",
                        "]", "}", "\\", "|", ";", ":", "\"", "'", "—", "–", ",", "<", ".", ">", "/", "?");
@@ -1355,7 +1350,7 @@
      * Returns:
      *     A version of the string containing only valid tags and whitelisted attributes.
      */
-    function sanitize_html($text) {
+    function sanitize_html($text): string {
         # Strip invalid tags.
         $text = preg_replace("/<([^a-z\/!]|\/(?![a-z])|!(?!--))[^>]*>/i", " ", $text);
 
@@ -1512,7 +1507,7 @@
      * Returns:
      *     An array of all URLs found in the string.
      */
-    function grab_urls($string) {
+    function grab_urls($string): array {
         # These expressions capture hyperlinks in HTML and unfiltered Markdown.
         $expressions = array("/<a[^>]* href=(\"[^\"]+\"|\'[^\']+\')[^>]*>[^<]+<\/a>/i",
                              "/\[[^\]]+\]\(([^\)]+)\)/");
@@ -1542,7 +1537,7 @@
      *     $post - The post we're sending from.
      *     $limit - Timer limit for this function (optional).
      */
-    function send_pingbacks($string, $post, $limit = 30) {
+    function send_pingbacks($string, $post, $limit = 30): void {
         foreach (grab_urls($string) as $url) {
             if (timer_stop() > $limit)
                 break;
@@ -1642,7 +1637,7 @@
      * Function: load_info
      * Loads an extension's info.php file and returns an array of attributes.
      */
-    function load_info($filepath) {
+    function load_info($filepath): array {
         if (is_file($filepath) and is_readable($filepath))
             $info = include $filepath;
 
@@ -1679,7 +1674,7 @@
      * Function: init_extensions
      * Initialize all Modules and Feathers.
      */
-    function init_extensions() {
+    function init_extensions(): void {
         $config = Config::current();
 
         # Instantiate all Modules.
@@ -1749,7 +1744,7 @@
      * Returns:
      *     Whether or not the supplied module is enabled.
      */
-    function module_enabled($name) {
+    function module_enabled($name): bool {
         return (!empty(Modules::$instances[$name]) and
                  empty(Modules::$instances[$name]->cancelled));
     }
@@ -1764,7 +1759,7 @@
      * Returns:
      *     Whether or not the supplied feather is enabled.
      */
-    function feather_enabled($name) {
+    function feather_enabled($name): bool {
         return (!empty(Feathers::$instances[$name]) and
                  empty(Feathers::$instances[$name]->cancelled));
     }
@@ -1780,7 +1775,7 @@
      * Notes:
      *     A module can cancel itself in its __init() method.
      */
-     function cancel_module($target, $reason = "") {
+     function cancel_module($target, $reason = ""): void {
         $message = empty($reason) ?
             _f("Execution of %s has been cancelled.", camelize($target)) : $reason ;
 
@@ -1801,7 +1796,7 @@
      * Notes:
      *     A feather can cancel itself in its __init() method.
      */
-     function cancel_feather($target, $reason = "") {
+     function cancel_feather($target, $reason = ""): void {
         $message = empty($reason) ?
             _f("Execution of %s has been cancelled.", camelize($target)) : $reason ;
 
@@ -1826,7 +1821,7 @@
      * Returns:
      *     The filename of the upload relative to the uploads directory.
      */
-    function upload($file, $filter = null) {
+    function upload($file, $filter = null): string {
         $uploads_path = MAIN_DIR.Config::current()->uploads_path;
         $filename = upload_filename($file['name'], $filter);
 
@@ -1860,7 +1855,7 @@
      * Returns:
      *     The filename of the upload relative to the uploads directory.
      */
-    function upload_from_url($url, $redirects = 3, $timeout = 10) {
+    function upload_from_url($url, $redirects = 3, $timeout = 10): string {
         preg_match("~[^/\?]+(?=($|\?))~i", $url, $matches);
         fallback($matches[0], md5($url).".bin");
 
@@ -1891,7 +1886,7 @@
      * Returns:
      *     The supplied filename prepended with URL or filesystem path.
      */
-    function uploaded($file, $url = true) {
+    function uploaded($file, $url = true): string {
         $config = Config::current();
 
         return ($url) ?
@@ -1907,7 +1902,7 @@
      *     $search - A search term.
      *     $filter - An array of valid extensions (case insensitive).
      */
-    function uploaded_search($search = "", $filter = array()) {
+    function uploaded_search($search = "", $filter = array()): array {
         $config = Config::current();
         $results = array();
 
@@ -1948,7 +1943,7 @@
      * Notes:
      *     $_POST and $_FILES are empty if post_max_size directive is exceeded.
      */
-    function upload_tester($file) {
+    function upload_tester($file): bool {
         $success = false;
         $results = array();
         $maximum = Config::current()->uploads_limit;
@@ -2043,7 +2038,7 @@
      * Function: upload_filter_whitelist
      * Returns an array containing a default list of allowed extensions.
      */
-    function upload_filter_whitelist() {
+    function upload_filter_whitelist(): array {
         return array(
             # Binary and text formats:
             "bin", "exe", "txt", "rtf", "md", "pdf",
@@ -2073,7 +2068,7 @@
      * Returns:
      *     A numeric score for the strength of the password.
      */
-    function password_strength($password = "") {
+    function password_strength($password = ""): int {
         $score = 0;
 
         if (empty($password))
@@ -2113,7 +2108,7 @@
      * See Also:
      *     <add_scheme>
      */
-    function is_url($string) {
+    function is_url($string): bool {
         return (
             preg_match('~^(https?://)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)(:[0-9]{1,5})?($|/)~i', $string) or
             preg_match('~^(https?://)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(:[0-9]{1,5})?($|/)~', $string) or
@@ -2135,7 +2130,7 @@
      * See Also:
      *     <is_url>
      */
-    function add_scheme($url, $scheme = null) {
+    function add_scheme($url, $scheme = null): string {
         preg_match('~^([a-z]+://)?(.+)~i', $url, $matches);
         $matches[1] = isset($scheme) ? $scheme : oneof($matches[1], "http://") ;
         return $url = $matches[1].$matches[2];
@@ -2154,7 +2149,7 @@
      * Returns:
      *     Whether or not the string matches the criteria.
      */
-    function is_email($string) {
+    function is_email($string): bool {
         return (
             preg_match('~^[^ <>@]+@([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)$~i', $string) or
             preg_match('~^[^ <>@]+@([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$~', $string) or
@@ -2213,7 +2208,7 @@
      * Source:
      *     http://gravatar.com/site/implement/images/php/
      */
-    function get_gravatar($email, $s = 80, $img = false, $d = "mm", $r = "g") {
+    function get_gravatar($email, $s = 80, $img = false, $d = "mm", $r = "g"): string {
         $url = "https://www.gravatar.com/avatar/".md5(strtolower(trim($email)))."?s=$s&d=$d&r=$r";
         return ($img) ? '<img class="gravatar" src="'.fix($url, true, true).'" alt="">' : $url ;
     }
@@ -2273,7 +2268,7 @@
      *     $text - A string containing a response message.
      *     $data - Arbitrary data to be sent with the response.
      */
-    function json_response($text = null, $data = null) {
+    function json_response($text = null, $data = null): void {
         header("Content-Type: application/json; charset=UTF-8");
         echo json_set(array("text" => $text, "data" => $data));
     }
@@ -2286,7 +2281,7 @@
      *     $contents - The bitstream to be delivered to the visitor.
      *     $filename - The name to be applied to the content upon download.
      */
-    function file_attachment($contents = "", $filename = "caconym") {
+    function file_attachment($contents = "", $filename = "caconym"): void {
         header("Content-Type: application/octet-stream");
         header("Content-Disposition: attachment; filename=\"".addslashes($filename)."\"");
 
@@ -2309,7 +2304,7 @@
      * See Also:
      *     https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT
      */
-    function zip_archive($array) {
+    function zip_archive($array): string {
         $file = "";
         $cdir = "";
         $eocd = "";
@@ -2479,7 +2474,7 @@
      * Function: javascripts
      * Returns inline JavaScript for core functionality and extensions.
      */
-    function javascripts() {
+    function javascripts(): string {
         $config = Config::current();
         $route = Route::current();
         $theme = Theme::current();

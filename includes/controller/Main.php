@@ -261,8 +261,14 @@
                                        $feathers),
                                  array("created_at ASC"))->fetch();
 
-            fallback($next["created_at"]);
-            fallback($prev["created_at"]);
+            if ($prev === false)
+                $prev = array();
+
+            if ($next === false)
+                $next = array();
+
+            fallback($next["created_at"], "");
+            fallback($prev["created_at"], "");
 
             $this->display("pages".DIR."archive",
                            array("posts" => $posts,

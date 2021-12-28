@@ -24,7 +24,7 @@
          *     $path - Filesystem path.
          *     $name - The session name.
          */
-        public function open($path, $name) {
+        public function open($path, $name): bool {
             $this->created_at = datetime();
 
             if (SESSION_DENY_BOT and BOT_UA)
@@ -40,7 +40,7 @@
          * Function: close
          * Executed when the session is closed.
          */
-        public function close() {
+        public function close(): bool {
             return true;
         }
 
@@ -51,6 +51,7 @@
          * Parameters:
          *     $id - Session ID.
          */
+        #[\ReturnTypeWillChange]
         public function read($id) {
             $result = SQL::current()->select("sessions",
                                              array("data", "created_at"),
@@ -72,7 +73,7 @@
          *     $id - Session ID.
          *     $data - Data to write.
          */
-        public function write($id, $data) {
+        public function write($id, $data): bool {
             $sql = SQL::current();
             $visitor = Visitor::current();
 
@@ -95,7 +96,7 @@
          * Parameters:
          *     $id - Session ID.
          */
-        public function destroy($id) {
+        public function destroy($id): bool {
             SQL::current()->delete("sessions", array("id" => $id));
             return true;
         }
@@ -107,6 +108,7 @@
          * Parameters:
          *     $lifetime - The configured maximum session lifetime in seconds.
          */
+        #[\ReturnTypeWillChange]
         public function gc($lifetime) {
             SQL::current()->delete("sessions",
                                    "updated_at <= :thirty_days OR data = '' OR data IS NULL",

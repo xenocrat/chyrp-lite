@@ -54,6 +54,9 @@
             fallback($this->prefix);
             fallback($this->adapter);
 
+            if (!isset($this->prefix))
+                $this->prefix = "";
+
             $this->connected = false;
         }
 
