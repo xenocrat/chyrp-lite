@@ -20,7 +20,7 @@
 {% elseif post.pinned %}
 {{ "Pinned" | translate }}
 {% else %}
-{{ post.created_at | strftimeformat("%d %b, %Y" | translate) }}
+{{ post.created_at | strftimeformat }}
 {% endif %}
 </a>
 {% if module_enabled("categorize") and post.category is defined %}

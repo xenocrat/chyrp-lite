@@ -91,7 +91,7 @@
 <ul class="navigation sidebar archive_list" aria-labelledby="label_archive_list">
 {% for archive in theme.archives_list() %}
 <li>
-<a href="{{ archive.url }}">{{ archive.when | strftimeformat("%B %Y" | translate) }}</a>
+<a href="{{ archive.url }}">{{ archive.when | strftimeformat("F Y" | translate) }}</a>
 </li>
 {% endfor %}
 </ul>
