@@ -1509,13 +1509,13 @@
                 set_time_limit(300);
 
             function media_url_scan(&$value) {
-                $regexp_url = preg_quote($_POST['media_url'], "/");
+                $config = Config::current();
 
-                if (preg_match_all("/{$regexp_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/", $value, $media))
-                    foreach ($media[0] as $matched_url) {
-                        $filename = upload_from_url($matched_url);
-                        $value = str_replace($matched_url, uploaded($filename), $value);
-                    }
+                $regexp_url = preg_quote($_POST['media_url'], "/");
+                $uploads_url = fix($config->chyrp_url.str_replace(DIR, "/", $config->uploads_path));
+
+                $value = preg_replace("/{$regexp_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/",
+                                      $uploads_url."$1.$2", $value);
             }
 
             if (isset($imports["groups"])) {
