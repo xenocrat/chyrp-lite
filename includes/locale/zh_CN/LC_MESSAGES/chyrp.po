@@ -9,10 +9,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#. Copyright 2021 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: includes/class/Config.php:21
 msgid "Could not read the configuration file."
@@ -54,7 +53,7 @@ msgstr "查询语句"
 msgid "Parameters"
 msgstr "参数"
 
-#: includes/class/Query.php:154 includes/class/SQL.php:93 install.php:644
+#: includes/class/Query.php:154 includes/class/SQL.php:96 install.php:644
 #, php-format
 msgid "Database error: %s"
 msgstr "数据库错误： %s"
@@ -81,14 +80,14 @@ msgstr "路由启动了一个无效的控制器。"
 #: includes/controller/Admin.php:1951 includes/controller/Admin.php:1954
 #: includes/controller/Admin.php:2151 includes/controller/Ajax.php:31
 #: includes/controller/Ajax.php:170 includes/download.php:12
-#: includes/download.php:15 includes/error.php:149 includes/helpers.php:1834
-#: includes/helpers.php:1840 includes/helpers.php:1843
-#: includes/helpers.php:1846 includes/helpers.php:1872
-#: includes/helpers.php:1875 includes/helpers.php:1878
-#: includes/helpers.php:1976 includes/helpers.php:1979
-#: includes/helpers.php:1982 includes/helpers.php:1985
-#: includes/helpers.php:1988 includes/helpers.php:1991
-#: includes/helpers.php:1994 includes/helpers.php:1999
+#: includes/download.php:15 includes/error.php:149 includes/helpers.php:1829
+#: includes/helpers.php:1835 includes/helpers.php:1838
+#: includes/helpers.php:1841 includes/helpers.php:1867
+#: includes/helpers.php:1870 includes/helpers.php:1873
+#: includes/helpers.php:1971 includes/helpers.php:1974
+#: includes/helpers.php:1977 includes/helpers.php:1980
+#: includes/helpers.php:1983 includes/helpers.php:1986
+#: includes/helpers.php:1989 includes/helpers.php:1994
 #: includes/thumbnail.php:15 includes/thumbnail.php:18
 #: includes/thumbnail.php:33 includes/thumbnail.php:195
 #: includes/thumbnail.php:235 install.php:829 upgrade.php:172 upgrade.php:185
@@ -142,8 +141,8 @@ msgstr "无效动作。"
 #: includes/controller/Ajax.php:94 includes/controller/Ajax.php:97
 #: includes/controller/Ajax.php:132 includes/controller/Ajax.php:135
 #: includes/controller/Ajax.php:163 includes/controller/Ajax.php:166
-#: includes/controller/Main.php:340 includes/controller/Main.php:398
-#: includes/download.php:18 includes/helpers.php:1837 includes/thumbnail.php:21
+#: includes/controller/Main.php:346 includes/controller/Main.php:404
+#: includes/download.php:18 includes/helpers.php:1832 includes/thumbnail.php:21
 msgid "Access Denied"
 msgstr "访问被拒绝"
 
@@ -152,7 +151,7 @@ msgstr "访问被拒绝"
 msgid "You are not allowed to view this site."
 msgstr "您不允许访问这个站点。"
 
-#: includes/class/SQL.php:73
+#: includes/class/SQL.php:76
 msgid "PDO driver is unavailable for this database."
 msgstr ""
 
@@ -225,10 +224,10 @@ msgstr "羽毛未找到。"
 #: includes/controller/Admin.php:2046 includes/controller/Admin.php:2087
 #: includes/controller/Ajax.php:48 includes/controller/Ajax.php:74
 #: includes/controller/Ajax.php:94 includes/controller/Ajax.php:132
-#: includes/controller/Ajax.php:163 includes/controller/Main.php:481
-#: includes/controller/Main.php:565 includes/controller/Main.php:595
-#: includes/controller/Main.php:623 includes/controller/Main.php:680
-#: includes/controller/Main.php:735
+#: includes/controller/Ajax.php:163 includes/controller/Main.php:487
+#: includes/controller/Main.php:571 includes/controller/Main.php:601
+#: includes/controller/Main.php:629 includes/controller/Main.php:686
+#: includes/controller/Main.php:741
 msgid "Invalid authentication token."
 msgstr "无效的认证令牌。"
 
@@ -366,17 +365,17 @@ msgid "Please enter a username for the account."
 msgstr "请输入账户的用户名。"
 
 #: includes/controller/Admin.php:704 includes/controller/Admin.php:807
-#: includes/controller/Main.php:489
+#: includes/controller/Main.php:495
 msgid "That username is already in use."
 msgstr "用户名已被使用。"
 
-#: includes/controller/Admin.php:707 includes/controller/Main.php:492
+#: includes/controller/Admin.php:707 includes/controller/Main.php:498
 #: install.php:597
 msgid "Passwords cannot be blank."
 msgstr "密码不能为空。"
 
 #: includes/controller/Admin.php:710 includes/controller/Admin.php:816
-#: includes/controller/Main.php:494 includes/controller/Main.php:684
+#: includes/controller/Main.php:500 includes/controller/Main.php:690
 #: install.php:532 install.php:599
 msgid "Passwords do not match."
 msgstr "密码不匹配。"
@@ -386,19 +385,19 @@ msgid "Please consider setting a stronger password for this user."
 msgstr "请考虑为这个用户设置一个更强的密码。"
 
 #: includes/controller/Admin.php:716 includes/controller/Admin.php:824
-#: includes/controller/Admin.php:1942 includes/controller/Main.php:499
-#: includes/controller/Main.php:689 install.php:602
+#: includes/controller/Admin.php:1942 includes/controller/Main.php:505
+#: includes/controller/Main.php:695 install.php:602
 msgid "Email address cannot be blank."
 msgstr "邮件地址不能为空。"
 
 #: includes/controller/Admin.php:719 includes/controller/Admin.php:827
-#: includes/controller/Admin.php:1945 includes/controller/Main.php:501
-#: includes/controller/Main.php:691 install.php:604
+#: includes/controller/Admin.php:1945 includes/controller/Main.php:507
+#: includes/controller/Main.php:697 install.php:604
 msgid "Invalid email address."
 msgstr "无效的邮件地址。"
 
 #: includes/controller/Admin.php:722 includes/controller/Admin.php:830
-#: includes/controller/Main.php:507 includes/controller/Main.php:694
+#: includes/controller/Main.php:513 includes/controller/Main.php:700
 msgid "Invalid website URL."
 msgstr "无效的网站URL。"
 
@@ -679,7 +678,7 @@ msgstr "然而这里什么也没有！"
 msgid "Page created."
 msgstr "页面已创建。"
 
-#: includes/controller/Admin.php:2131 includes/controller/Main.php:619
+#: includes/controller/Admin.php:2131 includes/controller/Main.php:625
 msgid "You are already logged in."
 msgstr "您已登陆。"
 
@@ -779,139 +778,139 @@ msgstr "更新后的帖子"
 msgid "Archive of %s"
 msgstr "%s的档案"
 
-#: includes/controller/Main.php:290
+#: includes/controller/Main.php:296
 msgid "Please enter a search term."
 msgstr "请输入搜索项。"
 
-#: includes/controller/Main.php:329
+#: includes/controller/Main.php:335
 #, php-format
 msgid "Search results for &#8220;%s&#8221;"
 msgstr "&#8220;%s&#8221; 的搜索结果"
 
-#: includes/controller/Main.php:340
+#: includes/controller/Main.php:346
 msgid "You do not have sufficient privileges to view drafts."
 msgstr "您没有足够的权限查看草稿。"
 
-#: includes/controller/Main.php:348
+#: includes/controller/Main.php:354
 msgid "Drafts"
 msgstr "草稿"
 
-#: includes/controller/Main.php:368
+#: includes/controller/Main.php:374
 msgid "This post is not published."
 msgstr "帖子没有被发布。"
 
-#: includes/controller/Main.php:371
+#: includes/controller/Main.php:377
 msgid "This post is scheduled to be published."
 msgstr "这篇帖子计划被公开于。"
 
-#: includes/controller/Main.php:398
+#: includes/controller/Main.php:404
 msgid "You are not allowed to view this page."
 msgstr "您不允许查看这个页面。"
 
-#: includes/controller/Main.php:463
+#: includes/controller/Main.php:469
 msgid "There aren't enough posts for random selection."
 msgstr "没有足够的帖子来随机选择。"
 
-#: includes/controller/Main.php:474
+#: includes/controller/Main.php:480
 msgid "This site does not allow registration."
 msgstr "站点不允许注册。"
 
-#: includes/controller/Main.php:477
+#: includes/controller/Main.php:483
 msgid "You cannot register an account because you are already logged in."
 msgstr "您不能注册账户，因为您已登陆。"
 
-#: includes/controller/Main.php:484 install.php:594
+#: includes/controller/Main.php:490 install.php:594
 msgid "Please enter a username for your account."
 msgstr "请输入账户的用户名。"
 
-#: includes/controller/Main.php:496 includes/controller/Main.php:686
+#: includes/controller/Main.php:502 includes/controller/Main.php:692
 msgid "Please consider setting a stronger password for your account."
 msgstr "请考虑为您的账户设置个更强大的密码。"
 
-#: includes/controller/Main.php:504
+#: includes/controller/Main.php:510
 msgid "Incorrect captcha response."
 msgstr "错误的验证码。"
 
-#: includes/controller/Main.php:535
+#: includes/controller/Main.php:541
 msgid "We have emailed you an activation link."
 msgstr "我们已经通过电子邮件发送您的激活链接。"
 
-#: includes/controller/Main.php:541 includes/controller/Main.php:575
+#: includes/controller/Main.php:547 includes/controller/Main.php:581
 msgid "Your account is now active."
 msgstr "您的账户现已激活。"
 
-#: includes/controller/Main.php:545
+#: includes/controller/Main.php:551
 msgid "Register"
 msgstr "注册"
 
-#: includes/controller/Main.php:554
+#: includes/controller/Main.php:560
 msgid "You cannot activate an account because you are already logged in."
 msgstr "您不能激活账户，因为您已登陆。"
 
-#: includes/controller/Main.php:562 includes/controller/Main.php:592
-#: includes/controller/Main.php:731
+#: includes/controller/Main.php:568 includes/controller/Main.php:598
+#: includes/controller/Main.php:737
 msgid "Please contact the blog administrator for help with your account."
 msgstr "请联系博客管理员以获取有关您帐户的帮助。"
 
-#: includes/controller/Main.php:568
+#: includes/controller/Main.php:574
 msgid "Your account has already been activated."
 msgstr "您的账户已经被激活过。"
 
-#: includes/controller/Main.php:584 includes/controller/Main.php:728
+#: includes/controller/Main.php:590 includes/controller/Main.php:734
 msgid "You cannot reset your password because you are already logged in."
 msgstr "您不能重设密码，因为您已登陆。"
 
-#: includes/controller/Main.php:607
+#: includes/controller/Main.php:613
 msgid "We have emailed you a new password."
 msgstr "我们已经通过电子邮件发送给您新密码。"
 
-#: includes/controller/Main.php:632 includes/lib/XMLRPC.php:422
+#: includes/controller/Main.php:638 includes/lib/XMLRPC.php:422
 msgid "Incorrect username and/or password."
 msgstr "不正确的用户名或者密码。"
 
-#: includes/controller/Main.php:638
+#: includes/controller/Main.php:644
 msgid "You must activate your account before you log in."
 msgstr "在登陆前必须激活您的账户。"
 
-#: includes/controller/Main.php:643
+#: includes/controller/Main.php:649
 msgid "Logged in."
 msgstr "已登陆。"
 
-#: includes/controller/Main.php:647 includes/error.php:369
+#: includes/controller/Main.php:653 includes/error.php:369
 msgid "Log in"
 msgstr "登陆"
 
-#: includes/controller/Main.php:658
+#: includes/controller/Main.php:664
 msgid "You aren't logged in."
 msgstr "您没有登陆。"
 
-#: includes/controller/Main.php:665
+#: includes/controller/Main.php:671
 msgid "Logged out."
 msgstr "退出登陆。"
 
-#: includes/controller/Main.php:676
+#: includes/controller/Main.php:682
 msgid "You must be logged in to access user controls."
 msgstr "您必须登陆才能访问用户操作。"
 
-#: includes/controller/Main.php:713
+#: includes/controller/Main.php:719
 msgid "Your profile has been updated."
 msgstr "您的配置文件已经更新。"
 
-#: includes/controller/Main.php:717
+#: includes/controller/Main.php:723
 msgid "Controls"
 msgstr "操作"
 
-#: includes/controller/Main.php:738
+#: includes/controller/Main.php:744
 msgid "Please enter your username."
 msgstr "请在下面输入您的用户名，我们会通过电子邮件向您发送新帐户的密码。"
 
-#: includes/controller/Main.php:754
+#: includes/controller/Main.php:760
 msgid ""
 "If that username is in our database, we will email you a password reset link."
 msgstr ""
 "如果您的用户名在我们的数据中，我们将会用电子邮件发送重置密码的链接给您。"
 
-#: includes/controller/Main.php:758
+#: includes/controller/Main.php:764
 msgid "Lost password"
 msgstr "忘记密码"
 
@@ -952,156 +951,156 @@ msgstr "您没有权限访问这个资源。"
 msgid "The requested resource was not found."
 msgstr "请求的资源未找到。"
 
-#: includes/helpers.php:1456 includes/helpers.php:1594
+#: includes/helpers.php:1451 includes/helpers.php:1589
 #, php-format
 msgid "Socket error: %s"
 msgstr "套接字错误： %s"
 
-#: includes/helpers.php:1671
+#: includes/helpers.php:1666
 msgid "Please create the uploads directory."
 msgstr "请创建上传目录。"
 
-#: includes/helpers.php:1673
+#: includes/helpers.php:1668
 msgid "Please make the uploads directory writable."
 msgstr "请确保上传目录科协。"
 
-#: includes/helpers.php:1691
+#: includes/helpers.php:1686
 #, php-format
 msgid "%s module is missing."
 msgstr "找不到模块 %s 。"
 
-#: includes/helpers.php:1700
+#: includes/helpers.php:1695
 #, php-format
 msgid "%s module is damaged."
 msgstr "模块 %s 破损。"
 
-#: includes/helpers.php:1714
+#: includes/helpers.php:1709
 #, php-format
 msgid "%s feather is missing."
 msgstr "找不到羽毛 %s 。"
 
-#: includes/helpers.php:1723
+#: includes/helpers.php:1718
 #, php-format
 msgid "%s feather is damaged."
 msgstr "羽毛 %s 破损。"
 
-#: includes/helpers.php:1785 includes/helpers.php:1806
+#: includes/helpers.php:1780 includes/helpers.php:1801
 #, php-format
 msgid "Execution of %s has been cancelled."
 msgstr "执行 %s 已被取消。"
 
-#: includes/helpers.php:1834
+#: includes/helpers.php:1829
 msgid "Uploaded file is of an unsupported type."
 msgstr "上传的文件是不支持的类型。"
 
-#: includes/helpers.php:1837
+#: includes/helpers.php:1832
 msgid "Only uploaded files are accepted."
 msgstr "只有上传的文件被接受。"
 
-#: includes/helpers.php:1840 includes/helpers.php:1872
+#: includes/helpers.php:1835 includes/helpers.php:1867
 #: includes/lib/XMLRPC.php:196
 msgid "Upload path does not exist."
 msgstr "上传路径不存在。"
 
-#: includes/helpers.php:1843 includes/helpers.php:1875
+#: includes/helpers.php:1838 includes/helpers.php:1870
 #: includes/lib/XMLRPC.php:199
 msgid "Upload path is not writable."
 msgstr "上传路径不可写。"
 
-#: includes/helpers.php:1846 includes/helpers.php:1878
-#: includes/helpers.php:1989 includes/lib/XMLRPC.php:202 upgrade.php:124
+#: includes/helpers.php:1841 includes/helpers.php:1873
+#: includes/helpers.php:1984 includes/lib/XMLRPC.php:202 upgrade.php:124
 #: upgrade.php:141 upgrade.php:158
 msgid "Failed to write file to disk."
 msgstr "写入文件到磁盘失败。"
 
-#: includes/helpers.php:1977
+#: includes/helpers.php:1972
 msgid ""
 "The uploaded file exceeds the <code>upload_max_filesize</code> directive in "
 "php.ini."
 msgstr "上传的文件超过 php.ini 中<code>upload_max_filesize</code>的大小。"
 
-#: includes/helpers.php:1980
+#: includes/helpers.php:1975
 msgid ""
 "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the "
 "HTML form."
 msgstr "上传的文件超过 php.ini 中<code>MAX_FILE_SIZE</code>的大小。"
 
-#: includes/helpers.php:1983
+#: includes/helpers.php:1978
 msgid "The uploaded file was only partially uploaded."
 msgstr "上传文件仅部分上传。"
 
-#: includes/helpers.php:1986
+#: includes/helpers.php:1981
 msgid "Missing a temporary folder."
 msgstr "缺少临时文件夹。"
 
-#: includes/helpers.php:1992
+#: includes/helpers.php:1987
 msgid "File upload was stopped by a PHP extension."
 msgstr "文件上传已被PHP扩展停止。"
 
-#: includes/helpers.php:1995
+#: includes/helpers.php:1990
 #, php-format
 msgid "File upload failed with error %d."
 msgstr "上传文件失败，错误：%d."
 
-#: includes/helpers.php:2000
+#: includes/helpers.php:1995
 #, php-format
 msgid ""
 "The uploaded file exceeds the maximum size of %d Megabytes allowed by this "
 "site."
 msgstr "上传的文件超过本站点允许的 %d M。"
 
-#: includes/helpers.php:2241
+#: includes/helpers.php:2236
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr "JSON编码错误：%s"
 
-#: includes/helpers.php:2263
+#: includes/helpers.php:2258
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr "JSON解码错误：%s"
 
-#: includes/helpers.php:2329
+#: includes/helpers.php:2324
 msgid "Failed to create Zip archive."
 msgstr "无法创建 Zip 存档。"
 
-#: includes/helpers.php:2432
+#: includes/helpers.php:2427
 #, php-format
 msgid "Activate your account at %s"
 msgstr "在 %s 上激活您的账户"
 
-#: includes/helpers.php:2433 includes/helpers.php:2447
-#: includes/helpers.php:2461
+#: includes/helpers.php:2428 includes/helpers.php:2442
+#: includes/helpers.php:2456
 #, php-format
 msgid "Hello, %s."
 msgstr "您好，%s."
 
-#: includes/helpers.php:2436
+#: includes/helpers.php:2431
 msgid "You are receiving this message because you registered a new account."
 msgstr "您收到此邮件因为您已经注册了新账户。"
 
-#: includes/helpers.php:2439
+#: includes/helpers.php:2434
 msgid "Visit this link to activate your account:"
 msgstr "访问这个链接激活您的账户："
 
-#: includes/helpers.php:2446
+#: includes/helpers.php:2441
 #, php-format
 msgid "Reset your password at %s"
 msgstr "在 %s上重置您的密码"
 
-#: includes/helpers.php:2450
+#: includes/helpers.php:2445
 msgid "You are receiving this message because you requested a new password."
 msgstr "您收到此消息是因为您请求了新密码。"
 
-#: includes/helpers.php:2453
+#: includes/helpers.php:2448
 msgid "Visit this link to reset your password:"
 msgstr "访问这个链接重置您的密码："
 
-#: includes/helpers.php:2460
+#: includes/helpers.php:2455
 #, php-format
 msgid "Your new password for %s"
 msgstr "您的新密码为 %s"
 
-#: includes/helpers.php:2464
+#: includes/helpers.php:2459
 #, php-format
 msgid "Your new password is: %s"
 msgstr "您的新密码: %s"
@@ -1110,26 +1109,26 @@ msgstr "您的新密码: %s"
 msgid "Guest"
 msgstr "访问者"
 
-#: includes/lib/Leaf.php:278
+#: includes/lib/Leaf.php:282
 msgid "Today"
 msgstr "今天"
 
-#: includes/lib/Leaf.php:301
+#: includes/lib/Leaf.php:307
 #, php-format
 msgid "%s GB"
 msgstr "%s GB"
 
-#: includes/lib/Leaf.php:306
+#: includes/lib/Leaf.php:312
 #, php-format
 msgid "%s MB"
 msgstr "%s MB"
 
-#: includes/lib/Leaf.php:310
+#: includes/lib/Leaf.php:316
 #, php-format
 msgid "%s KB"
 msgstr "%s KB"
 
-#: includes/lib/Leaf.php:416
+#: includes/lib/Leaf.php:422
 msgid "Image source"
 msgstr "图片来源"
 

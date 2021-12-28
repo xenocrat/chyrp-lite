@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: chyrplite\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-12-26 13:04+0000\n"
+"PO-Revision-Date: 2021-12-28 17:29+0000\n"
 "Last-Translator: Anas Mohammed Almzoghy <a.almzoghy@gmail.com>\n"
 "Language-Team: Arabic\n"
 "Language: ar_LY\n"
@@ -16,9 +16,8 @@ msgstr ""
 "X-Crowdin-Language: ar\n"
 "X-Crowdin-File: chyrp.pot\n"
 "X-Crowdin-File-ID: 2\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#. Copyright 2021 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: includes/class/Config.php:21
 msgid "Could not read the configuration file."
@@ -60,7 +59,7 @@ msgstr "سلسلة الاستعلام"
 msgid "Parameters"
 msgstr "البارامترات"
 
-#: includes/class/Query.php:154 includes/class/SQL.php:93 install.php:644
+#: includes/class/Query.php:154 includes/class/SQL.php:96 install.php:644
 #, php-format
 msgid "Database error: %s"
 msgstr "خطأ في قاعدة البيانات: %s"
@@ -87,14 +86,14 @@ msgstr "المُتحكم بالمسار المُدخل غير صالح."
 #: includes/controller/Admin.php:1951 includes/controller/Admin.php:1954
 #: includes/controller/Admin.php:2151 includes/controller/Ajax.php:31
 #: includes/controller/Ajax.php:170 includes/download.php:12
-#: includes/download.php:15 includes/error.php:149 includes/helpers.php:1834
-#: includes/helpers.php:1840 includes/helpers.php:1843
-#: includes/helpers.php:1846 includes/helpers.php:1872
-#: includes/helpers.php:1875 includes/helpers.php:1878
-#: includes/helpers.php:1976 includes/helpers.php:1979
-#: includes/helpers.php:1982 includes/helpers.php:1985
-#: includes/helpers.php:1988 includes/helpers.php:1991
-#: includes/helpers.php:1994 includes/helpers.php:1999
+#: includes/download.php:15 includes/error.php:149 includes/helpers.php:1829
+#: includes/helpers.php:1835 includes/helpers.php:1838
+#: includes/helpers.php:1841 includes/helpers.php:1867
+#: includes/helpers.php:1870 includes/helpers.php:1873
+#: includes/helpers.php:1971 includes/helpers.php:1974
+#: includes/helpers.php:1977 includes/helpers.php:1980
+#: includes/helpers.php:1983 includes/helpers.php:1986
+#: includes/helpers.php:1989 includes/helpers.php:1994
 #: includes/thumbnail.php:15 includes/thumbnail.php:18
 #: includes/thumbnail.php:33 includes/thumbnail.php:195
 #: includes/thumbnail.php:235 install.php:829 upgrade.php:172 upgrade.php:185
@@ -148,8 +147,8 @@ msgstr "إجراء غير صحيح."
 #: includes/controller/Ajax.php:94 includes/controller/Ajax.php:97
 #: includes/controller/Ajax.php:132 includes/controller/Ajax.php:135
 #: includes/controller/Ajax.php:163 includes/controller/Ajax.php:166
-#: includes/controller/Main.php:340 includes/controller/Main.php:398
-#: includes/download.php:18 includes/helpers.php:1837 includes/thumbnail.php:21
+#: includes/controller/Main.php:346 includes/controller/Main.php:404
+#: includes/download.php:18 includes/helpers.php:1832 includes/thumbnail.php:21
 msgid "Access Denied"
 msgstr "تم رفض الوصول"
 
@@ -158,7 +157,7 @@ msgstr "تم رفض الوصول"
 msgid "You are not allowed to view this site."
 msgstr "غير مسموح لك بتصفح هذا الموقع."
 
-#: includes/class/SQL.php:73
+#: includes/class/SQL.php:76
 msgid "PDO driver is unavailable for this database."
 msgstr "مشغل PDO غير متوفر لقاعدة البيانات هذه."
 
@@ -231,10 +230,10 @@ msgstr "الريشة غير موجودة."
 #: includes/controller/Admin.php:2046 includes/controller/Admin.php:2087
 #: includes/controller/Ajax.php:48 includes/controller/Ajax.php:74
 #: includes/controller/Ajax.php:94 includes/controller/Ajax.php:132
-#: includes/controller/Ajax.php:163 includes/controller/Main.php:481
-#: includes/controller/Main.php:565 includes/controller/Main.php:595
-#: includes/controller/Main.php:623 includes/controller/Main.php:680
-#: includes/controller/Main.php:735
+#: includes/controller/Ajax.php:163 includes/controller/Main.php:487
+#: includes/controller/Main.php:571 includes/controller/Main.php:601
+#: includes/controller/Main.php:629 includes/controller/Main.php:686
+#: includes/controller/Main.php:741
 msgid "Invalid authentication token."
 msgstr "رمز المصادقة غير صالح."
 
@@ -372,17 +371,17 @@ msgid "Please enter a username for the account."
 msgstr "الرجاء إدخال اسم المستخدم لهذا الحساب."
 
 #: includes/controller/Admin.php:704 includes/controller/Admin.php:807
-#: includes/controller/Main.php:489
+#: includes/controller/Main.php:495
 msgid "That username is already in use."
 msgstr "اسم المستخدم هذا مُسجل مسبقاً."
 
-#: includes/controller/Admin.php:707 includes/controller/Main.php:492
+#: includes/controller/Admin.php:707 includes/controller/Main.php:498
 #: install.php:597
 msgid "Passwords cannot be blank."
 msgstr "لا يمكن أن تكون كلمات المرور فارغة."
 
 #: includes/controller/Admin.php:710 includes/controller/Admin.php:816
-#: includes/controller/Main.php:494 includes/controller/Main.php:684
+#: includes/controller/Main.php:500 includes/controller/Main.php:690
 #: install.php:532 install.php:599
 msgid "Passwords do not match."
 msgstr "كلمة المرور غير متطابقة."
@@ -392,19 +391,19 @@ msgid "Please consider setting a stronger password for this user."
 msgstr "الرجاء وضع كلمة مرور أقوى لهذا المستخدم."
 
 #: includes/controller/Admin.php:716 includes/controller/Admin.php:824
-#: includes/controller/Admin.php:1942 includes/controller/Main.php:499
-#: includes/controller/Main.php:689 install.php:602
+#: includes/controller/Admin.php:1942 includes/controller/Main.php:505
+#: includes/controller/Main.php:695 install.php:602
 msgid "Email address cannot be blank."
 msgstr "لا يمكن أن يكون عنوان البريد الإلكتروني فارغاً."
 
 #: includes/controller/Admin.php:719 includes/controller/Admin.php:827
-#: includes/controller/Admin.php:1945 includes/controller/Main.php:501
-#: includes/controller/Main.php:691 install.php:604
+#: includes/controller/Admin.php:1945 includes/controller/Main.php:507
+#: includes/controller/Main.php:697 install.php:604
 msgid "Invalid email address."
 msgstr "عنوان البريد الإلكتروني غير صالح."
 
 #: includes/controller/Admin.php:722 includes/controller/Admin.php:830
-#: includes/controller/Main.php:507 includes/controller/Main.php:694
+#: includes/controller/Main.php:513 includes/controller/Main.php:700
 msgid "Invalid website URL."
 msgstr "رابط الموقع غير صالح."
 
@@ -685,7 +684,7 @@ msgstr "لا شيء هنا بعد!"
 msgid "Page created."
 msgstr "تم إنشاء الصفحة."
 
-#: includes/controller/Admin.php:2131 includes/controller/Main.php:619
+#: includes/controller/Admin.php:2131 includes/controller/Main.php:625
 msgid "You are already logged in."
 msgstr "أنت مُسجل الدخول بالفعل."
 
@@ -785,140 +784,140 @@ msgstr "المشاركات المحدثة"
 msgid "Archive of %s"
 msgstr "أرشيف %s"
 
-#: includes/controller/Main.php:290
+#: includes/controller/Main.php:296
 msgid "Please enter a search term."
 msgstr "رجاءاً أدخل كلمة للبحث."
 
-#: includes/controller/Main.php:329
+#: includes/controller/Main.php:335
 #, php-format
 msgid "Search results for &#8220;%s&#8221;"
 msgstr "نتائج البحث عن &#8220;%s&#8221;"
 
-#: includes/controller/Main.php:340
+#: includes/controller/Main.php:346
 msgid "You do not have sufficient privileges to view drafts."
 msgstr "ليس لديك الصلاحيات كافية لعرض المسودات."
 
-#: includes/controller/Main.php:348
+#: includes/controller/Main.php:354
 msgid "Drafts"
 msgstr "المسودات"
 
-#: includes/controller/Main.php:368
+#: includes/controller/Main.php:374
 msgid "This post is not published."
 msgstr "لم يتم نشر هذا المنشور."
 
-#: includes/controller/Main.php:371
+#: includes/controller/Main.php:377
 msgid "This post is scheduled to be published."
 msgstr "هذا المنشور مجدول للنشر."
 
-#: includes/controller/Main.php:398
+#: includes/controller/Main.php:404
 msgid "You are not allowed to view this page."
 msgstr "غير مسموح لك برؤية هذه الصفحة."
 
-#: includes/controller/Main.php:463
+#: includes/controller/Main.php:469
 msgid "There aren't enough posts for random selection."
 msgstr "لا يوجد عدد كاف من المنشورات للاختيار العشوائي."
 
-#: includes/controller/Main.php:474
+#: includes/controller/Main.php:480
 msgid "This site does not allow registration."
 msgstr "التسجيل متوقف."
 
-#: includes/controller/Main.php:477
+#: includes/controller/Main.php:483
 msgid "You cannot register an account because you are already logged in."
 msgstr "لا يمكنك التسجيل لأنك بالفعل مُسجل الدخول."
 
-#: includes/controller/Main.php:484 install.php:594
+#: includes/controller/Main.php:490 install.php:594
 msgid "Please enter a username for your account."
 msgstr "الرجاء إدخال اسم المستخدم للحساب الخاص بك."
 
-#: includes/controller/Main.php:496 includes/controller/Main.php:686
+#: includes/controller/Main.php:502 includes/controller/Main.php:692
 msgid "Please consider setting a stronger password for your account."
 msgstr "الرجاء وضع كلمة مرور أقوى لحسابك."
 
-#: includes/controller/Main.php:504
+#: includes/controller/Main.php:510
 msgid "Incorrect captcha response."
 msgstr "كلمة التحقق غير صحيحة."
 
-#: includes/controller/Main.php:535
+#: includes/controller/Main.php:541
 msgid "We have emailed you an activation link."
 msgstr "تم إرسال رابط التفعيل بريدك الإلكتروني."
 
-#: includes/controller/Main.php:541 includes/controller/Main.php:575
+#: includes/controller/Main.php:547 includes/controller/Main.php:581
 msgid "Your account is now active."
 msgstr "حسابك مُفعل الآن."
 
-#: includes/controller/Main.php:545
+#: includes/controller/Main.php:551
 msgid "Register"
 msgstr "تسجيل"
 
-#: includes/controller/Main.php:554
+#: includes/controller/Main.php:560
 msgid "You cannot activate an account because you are already logged in."
 msgstr "لا يمكنك تفعيل الحساب لأنك مسجل الدخول مسبقاً."
 
-#: includes/controller/Main.php:562 includes/controller/Main.php:592
-#: includes/controller/Main.php:731
+#: includes/controller/Main.php:568 includes/controller/Main.php:598
+#: includes/controller/Main.php:737
 msgid "Please contact the blog administrator for help with your account."
 msgstr "الرجاء الاتصال بمسؤول المدونة للحصول على المساعدة بخصوص حسابك."
 
-#: includes/controller/Main.php:568
+#: includes/controller/Main.php:574
 msgid "Your account has already been activated."
 msgstr "تم تفعيل حسابك مسبقاً."
 
-#: includes/controller/Main.php:584 includes/controller/Main.php:728
+#: includes/controller/Main.php:590 includes/controller/Main.php:734
 msgid "You cannot reset your password because you are already logged in."
 msgstr "لا يمكنك إعادة تعيين كلمة المرور الخاصة بك لأنك مسجل الدخول مسبقاً."
 
-#: includes/controller/Main.php:607
+#: includes/controller/Main.php:613
 msgid "We have emailed you a new password."
 msgstr "لقد أرسلنا كلمة المرور الجديدة على بريدك الإلكتروني."
 
-#: includes/controller/Main.php:632 includes/lib/XMLRPC.php:422
+#: includes/controller/Main.php:638 includes/lib/XMLRPC.php:422
 msgid "Incorrect username and/or password."
 msgstr "خطأ في اسم المستخدم أو كلمة المرور."
 
-#: includes/controller/Main.php:638
+#: includes/controller/Main.php:644
 msgid "You must activate your account before you log in."
 msgstr "يجب عليك تفعيل حسابك قبل تسجيل الدخول."
 
-#: includes/controller/Main.php:643
+#: includes/controller/Main.php:649
 msgid "Logged in."
 msgstr "تم تسجيل الدخول."
 
-#: includes/controller/Main.php:647 includes/error.php:369
+#: includes/controller/Main.php:653 includes/error.php:369
 msgid "Log in"
 msgstr "تسجيل الدخول"
 
-#: includes/controller/Main.php:658
+#: includes/controller/Main.php:664
 msgid "You aren't logged in."
 msgstr "لم تقم بتسجيل الدخول."
 
-#: includes/controller/Main.php:665
+#: includes/controller/Main.php:671
 msgid "Logged out."
 msgstr "تم تسجيل الخروج."
 
-#: includes/controller/Main.php:676
+#: includes/controller/Main.php:682
 msgid "You must be logged in to access user controls."
 msgstr "يجب عليك تسجيل الدخول للوصول إلى الملف الشخصي."
 
-#: includes/controller/Main.php:713
+#: includes/controller/Main.php:719
 msgid "Your profile has been updated."
 msgstr "تم تحديث ملفك الشخصي."
 
-#: includes/controller/Main.php:717
+#: includes/controller/Main.php:723
 msgid "Controls"
 msgstr "الملف الشخصي"
 
-#: includes/controller/Main.php:738
+#: includes/controller/Main.php:744
 msgid "Please enter your username."
 msgstr "رجاءاً أدخل اسم المستخدم الخاص بك."
 
-#: includes/controller/Main.php:754
+#: includes/controller/Main.php:760
 msgid ""
 "If that username is in our database, we will email you a password reset link."
 msgstr ""
 "إذا كان اسم المستخدم في قاعدة بياناتنا، سوف نرسل لك رابط إعادة تعيين كلمة "
 "المرور."
 
-#: includes/controller/Main.php:758
+#: includes/controller/Main.php:764
 msgid "Lost password"
 msgstr "نسيت كلمة المرور"
 
@@ -959,98 +958,98 @@ msgstr "ليس لديك الصلاحيّات الكافية للوصول إلى 
 msgid "The requested resource was not found."
 msgstr "لم يتم العثور على المورد المطلوب."
 
-#: includes/helpers.php:1456 includes/helpers.php:1594
+#: includes/helpers.php:1451 includes/helpers.php:1589
 #, php-format
 msgid "Socket error: %s"
 msgstr ""
 
-#: includes/helpers.php:1671
+#: includes/helpers.php:1666
 msgid "Please create the uploads directory."
 msgstr "الرجاء إنشاء مجلد الرفع."
 
-#: includes/helpers.php:1673
+#: includes/helpers.php:1668
 msgid "Please make the uploads directory writable."
 msgstr "يرجى جعل مجلد الرفع قابل للكتابة."
 
-#: includes/helpers.php:1691
+#: includes/helpers.php:1686
 #, php-format
 msgid "%s module is missing."
 msgstr "الملحق %s غير موجود."
 
-#: includes/helpers.php:1700
+#: includes/helpers.php:1695
 #, php-format
 msgid "%s module is damaged."
 msgstr "الملحق %s معطوب."
 
-#: includes/helpers.php:1714
+#: includes/helpers.php:1709
 #, php-format
 msgid "%s feather is missing."
 msgstr "الريشة %s غير موجودة."
 
-#: includes/helpers.php:1723
+#: includes/helpers.php:1718
 #, php-format
 msgid "%s feather is damaged."
 msgstr "الريشة %s معطوبة."
 
-#: includes/helpers.php:1785 includes/helpers.php:1806
+#: includes/helpers.php:1780 includes/helpers.php:1801
 #, php-format
 msgid "Execution of %s has been cancelled."
 msgstr "تم إلغاء تنفيذ %s."
 
-#: includes/helpers.php:1834
+#: includes/helpers.php:1829
 msgid "Uploaded file is of an unsupported type."
 msgstr "إمتداد الملف المرفوع غير مدعوم."
 
-#: includes/helpers.php:1837
+#: includes/helpers.php:1832
 msgid "Only uploaded files are accepted."
 msgstr "يتم قبول الملفات المرفوعة فقط."
 
-#: includes/helpers.php:1840 includes/helpers.php:1872
+#: includes/helpers.php:1835 includes/helpers.php:1867
 #: includes/lib/XMLRPC.php:196
 msgid "Upload path does not exist."
 msgstr "مسار مجلد الرفع غير موجود."
 
-#: includes/helpers.php:1843 includes/helpers.php:1875
+#: includes/helpers.php:1838 includes/helpers.php:1870
 #: includes/lib/XMLRPC.php:199
 msgid "Upload path is not writable."
 msgstr "مسار مجلد الرفع غير قابل للكتابة."
 
-#: includes/helpers.php:1846 includes/helpers.php:1878
-#: includes/helpers.php:1989 includes/lib/XMLRPC.php:202 upgrade.php:124
+#: includes/helpers.php:1841 includes/helpers.php:1873
+#: includes/helpers.php:1984 includes/lib/XMLRPC.php:202 upgrade.php:124
 #: upgrade.php:141 upgrade.php:158
 msgid "Failed to write file to disk."
 msgstr "فشل في كتابة الملف على القرص."
 
-#: includes/helpers.php:1977
+#: includes/helpers.php:1972
 msgid ""
 "The uploaded file exceeds the <code>upload_max_filesize</code> directive in "
 "php.ini."
 msgstr "الملف الذي تم رفعه يتجاوز <code>upload_max_filesize</code> في php.ini."
 
-#: includes/helpers.php:1980
+#: includes/helpers.php:1975
 msgid ""
 "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the "
 "HTML form."
 msgstr "الملف الذي تم رفعه يتجاوز <code>MAX_FILE_SIZE</code> في نموذج HTML."
 
-#: includes/helpers.php:1983
+#: includes/helpers.php:1978
 msgid "The uploaded file was only partially uploaded."
 msgstr "تم رفع الملف بشكل جزئي."
 
-#: includes/helpers.php:1986
+#: includes/helpers.php:1981
 msgid "Missing a temporary folder."
 msgstr "المجلد المؤقت غير موجود."
 
-#: includes/helpers.php:1992
+#: includes/helpers.php:1987
 msgid "File upload was stopped by a PHP extension."
 msgstr "تم إيقاف رفع الملف من قبل ملحق PHP."
 
-#: includes/helpers.php:1995
+#: includes/helpers.php:1990
 #, php-format
 msgid "File upload failed with error %d."
 msgstr "فشل رفع الملف مع خطأ %d."
 
-#: includes/helpers.php:2000
+#: includes/helpers.php:1995
 #, php-format
 msgid ""
 "The uploaded file exceeds the maximum size of %d Megabytes allowed by this "
@@ -1058,58 +1057,58 @@ msgid ""
 msgstr ""
 "الملف الذي رفعته يتجاوز الحد الأقصى (%d ميجابايت) المسموح به لهذا الموقع."
 
-#: includes/helpers.php:2241
+#: includes/helpers.php:2236
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr "خطأ ترميز JSON: %s"
 
-#: includes/helpers.php:2263
+#: includes/helpers.php:2258
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr "خطأ في فك الترميز JSON: %s"
 
-#: includes/helpers.php:2329
+#: includes/helpers.php:2324
 msgid "Failed to create Zip archive."
 msgstr "فشل إنشاء أرشيف مضغوط."
 
-#: includes/helpers.php:2432
+#: includes/helpers.php:2427
 #, php-format
 msgid "Activate your account at %s"
 msgstr "تفعيل حسابك في %s"
 
-#: includes/helpers.php:2433 includes/helpers.php:2447
-#: includes/helpers.php:2461
+#: includes/helpers.php:2428 includes/helpers.php:2442
+#: includes/helpers.php:2456
 #, php-format
 msgid "Hello, %s."
 msgstr "مرحباً، %s."
 
-#: includes/helpers.php:2436
+#: includes/helpers.php:2431
 msgid "You are receiving this message because you registered a new account."
 msgstr "لقد تلقيت هذه الرسالة لأنك سجلت حِساب جديد."
 
-#: includes/helpers.php:2439
+#: includes/helpers.php:2434
 msgid "Visit this link to activate your account:"
 msgstr "قم بزيارة هذا الرابط لتفعيل حسابك:"
 
-#: includes/helpers.php:2446
+#: includes/helpers.php:2441
 #, php-format
 msgid "Reset your password at %s"
 msgstr "إعادة تعيين كلمة مرورك في %s"
 
-#: includes/helpers.php:2450
+#: includes/helpers.php:2445
 msgid "You are receiving this message because you requested a new password."
 msgstr "لقد تلقيت هذه الرسالة لأنك طلبت كلمة مرور جديدة."
 
-#: includes/helpers.php:2453
+#: includes/helpers.php:2448
 msgid "Visit this link to reset your password:"
 msgstr "قم بزيارة هذا الرابط لإعادة تعيين كلمة مرورك:"
 
-#: includes/helpers.php:2460
+#: includes/helpers.php:2455
 #, php-format
 msgid "Your new password for %s"
 msgstr "كلمة المرور الجديدة الخاصة بك لـ %s"
 
-#: includes/helpers.php:2464
+#: includes/helpers.php:2459
 #, php-format
 msgid "Your new password is: %s"
 msgstr "كلمة المرور الجديدة: %s"
@@ -1118,26 +1117,26 @@ msgstr "كلمة المرور الجديدة: %s"
 msgid "Guest"
 msgstr "ضيف"
 
-#: includes/lib/Leaf.php:278
+#: includes/lib/Leaf.php:282
 msgid "Today"
 msgstr "اليوم"
 
-#: includes/lib/Leaf.php:301
+#: includes/lib/Leaf.php:307
 #, php-format
 msgid "%s GB"
 msgstr "%s جيجابايت"
 
-#: includes/lib/Leaf.php:306
+#: includes/lib/Leaf.php:312
 #, php-format
 msgid "%s MB"
 msgstr "%s ميجابايت"
 
-#: includes/lib/Leaf.php:310
+#: includes/lib/Leaf.php:316
 #, php-format
 msgid "%s KB"
 msgstr "%s كيلوبايت"
 
-#: includes/lib/Leaf.php:416
+#: includes/lib/Leaf.php:422
 msgid "Image source"
 msgstr "مصدر الصورة"
 

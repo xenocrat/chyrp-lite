@@ -9,10 +9,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
-#. Copyright 2021 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/sparrow/content/comment.twig:3
 #, php-format
@@ -27,10 +26,6 @@ msgstr "%s:"
 #: themes/sparrow/content/comment.twig:9
 msgid "This comment is awaiting moderation."
 msgstr "Questo commento è in attesa di verifica da un moderatore."
-
-#: themes/sparrow/content/comment.twig:23
-msgid "%d %B, %Y, at %I:%M %p"
-msgstr "%d %B, %Y, %I:%M %p"
 
 #: themes/sparrow/content/post.twig:6
 msgid "Tags"
@@ -56,10 +51,6 @@ msgstr "Programmato"
 #: themes/sparrow/content/post.twig:21
 msgid "Pinned"
 msgstr "Pinned"
-
-#: themes/sparrow/content/post.twig:23
-msgid "%d %b, %Y"
-msgstr "%d %b, %Y"
 
 #: themes/sparrow/content/post.twig:29 themes/sparrow/pages/view.twig:21
 msgid "[Untitled]"
@@ -348,8 +339,8 @@ msgid "&larr; Archive of %s"
 msgstr "&larr; Archivio %s"
 
 #: themes/sparrow/pages/archive.twig:18
-msgid "%B %Y"
-msgstr "%B %Y"
+msgid "F Y"
+msgstr ""
 
 #: themes/sparrow/pages/archive.twig:49
 #, php-format

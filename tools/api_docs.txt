@@ -1947,7 +1947,6 @@ Formats a string that isn't a regular time() value.
 Parameters:
     $formatting - The formatting for date() or strftime().
     $when - A time value to be strtotime() converted.
-    $strftime - Format using @strftime@ instead of @date@?
 
 Returns:
     A time/date string with the supplied formatting.

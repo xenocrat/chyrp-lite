@@ -1,4 +1,3 @@
-#. Copyright 2021 Daniel Pimley and other contributors.
 #. This file is distributed under the same license as the Chyrp Lite package.
 
 #: themes/sparrow/content/comment.twig:3
@@ -13,10 +12,6 @@ msgstr ""
 
 #: themes/sparrow/content/comment.twig:9
 msgid "This comment is awaiting moderation."
-msgstr ""
-
-#: themes/sparrow/content/comment.twig:23
-msgid "%d %B, %Y, at %I:%M %p"
 msgstr ""
 
 #: themes/sparrow/content/post.twig:6
@@ -47,10 +42,6 @@ msgstr ""
 
 #: themes/sparrow/content/post.twig:21
 msgid "Pinned"
-msgstr ""
-
-#: themes/sparrow/content/post.twig:23
-msgid "%d %b, %Y"
 msgstr ""
 
 #: themes/sparrow/content/post.twig:29
@@ -337,7 +328,7 @@ msgid "&larr; Archive of %s"
 msgstr ""
 
 #: themes/sparrow/pages/archive.twig:18
-msgid "%B %Y"
+msgid "F Y"
 msgstr ""
 
 #: themes/sparrow/pages/archive.twig:49
