@@ -26,6 +26,7 @@
     define('CACHE_TWIG',     false);
     define('CACHE_THUMBS',   false);
     define('USE_OB',         true);
+    define('CAN_USE_ZLIB',   false);
     define('USE_ZLIB',       false);
 
     ob_start();

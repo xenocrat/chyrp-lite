@@ -26,6 +26,7 @@
     define('CACHE_TWIG',     false);
     define('CACHE_THUMBS',   false);
     define('USE_OB',         true);
+    define('CAN_USE_ZLIB',   false);
     define('USE_ZLIB',       false);
 
     ob_start();
@@ -367,8 +368,7 @@
         global $strings;
 
         foreach ($domains as $filename => $pathname) {
-            $contents = "#. Copyright ".strftime("%Y")." Daniel Pimley and other contributors.\n".
-                        "#. This file is distributed under the same license as the Chyrp Lite package.\n\n";
+            $contents = "#. This file is distributed under the same license as the Chyrp Lite package.\n\n";
 
             foreach ($strings[$filename] as $string => $attributes) {
                 foreach ($attributes["places"] as $place)
