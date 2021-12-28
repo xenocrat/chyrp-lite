@@ -258,7 +258,7 @@
         static $today    = null;
         static $now      = null;
         static $thisweek = null;
-        static $thisyeat = null;
+        static $thisyear = null;
 
         if (!isset($tomorrow))
             $tomorrow = strtotime("tomorrow");
