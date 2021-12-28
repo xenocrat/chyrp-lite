@@ -1856,12 +1856,15 @@
      *     The filename of the upload relative to the uploads directory.
      */
     function upload_from_url($url, $redirects = 3, $timeout = 10): string {
-        preg_match("~[^/\?]+(?=($|\?))~i", $url, $matches);
-        fallback($matches[0], md5($url).".bin");
+        if (!preg_match("~[^ /\?]+(?=($|\?))~", $url, $match))
+            return false;
 
         $uploads_path = MAIN_DIR.Config::current()->uploads_path;
-        $filename = upload_filename($matches[0]);
+        $filename = upload_filename($match[0]);
         $contents = get_remote($url, $redirects, $timeout);
+
+        if ($filename === false)
+            return false;
 
         if (!is_dir($uploads_path))
             error(__("Error"), __("Upload path does not exist."));
