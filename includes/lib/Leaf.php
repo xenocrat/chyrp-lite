@@ -258,6 +258,7 @@
         static $today    = null;
         static $now      = null;
         static $thisweek = null;
+        static $thisyeat = null;
 
         if (!isset($tomorrow))
             $tomorrow = strtotime("tomorrow");
@@ -271,18 +272,23 @@
         if (!isset($thisweek))
             $thisweek = strtotime("this week");
 
+        if (!isset($thisyear))
+            $thisyear = strtotime("midnight 1 january this year");
+
         $time = is_numeric($timestamp) ? $timestamp : strtotime($timestamp) ;
 
         if (!isset($format)) {
             if ($time < $tomorrow and $time > $today)
-                $format = __("Today");
+                return __("Today");
             elseif ($time < $now and $time > $thisweek)
-                $format = "%A";
+                $format = "l";
+            elseif ($time < $now and $time > $thisyear)
+                $format = "F";
             else
-                $format = "%F";
+                $format = "Y";
         }
 
-        return when($format, $time, true);
+        return when($format, $time);
     }
 
     /**
