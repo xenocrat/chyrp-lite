@@ -1210,7 +1210,7 @@
      */
     function fix($string, $quotes = false, $double = false): string {
         $quotes = ($quotes) ? ENT_QUOTES : ENT_NOQUOTES ;
-        return htmlspecialchars($string, $quotes | ENT_HTML5, "UTF-8", $double);
+        return htmlspecialchars((string) $string, $quotes | ENT_HTML5, "UTF-8", $double);
     }
 
     /**
@@ -1226,8 +1226,8 @@
      */
     function unfix($string, $all = false): string {
         return ($all) ?
-            html_entity_decode($string, ENT_QUOTES | ENT_HTML5, "UTF-8") :
-            htmlspecialchars_decode($string, ENT_QUOTES | ENT_HTML5) ;
+            html_entity_decode((string) $string, ENT_QUOTES | ENT_HTML5, "UTF-8") :
+            htmlspecialchars_decode((string) $string, ENT_QUOTES | ENT_HTML5) ;
     }
 
     /**
