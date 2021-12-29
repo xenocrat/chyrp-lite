@@ -251,7 +251,7 @@ Called from:
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1531
+	includes/controller/Admin.php on line 1521
 
 Arguments:
 	$group
@@ -260,7 +260,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1556
+	includes/controller/Admin.php on line 1546
 
 Arguments:
 	$user
@@ -269,7 +269,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1595
+	includes/controller/Admin.php on line 1591
 
 Arguments:
 	$entry, $post
@@ -278,7 +278,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1625
+	includes/controller/Admin.php on line 1621
 
 Arguments:
 	$entry, $page
@@ -287,7 +287,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1629
+	includes/controller/Admin.php on line 1625
 
 Arguments:
 	$imports
@@ -296,13 +296,13 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1912
+	includes/controller/Admin.php on line 1908
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1920
+	includes/controller/Admin.php on line 1916
 
 
 can_not_view_page
@@ -355,19 +355,19 @@ Called from:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 2168
+	includes/helpers.php on line 2171
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 2185
+	includes/helpers.php on line 2188
 
 
 send_correspondence
 -------------------
 Called from:
-	includes/helpers.php on line 2468
+	includes/helpers.php on line 2471
 
 Arguments:
 	$action, $params
@@ -376,7 +376,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 2496
+	includes/helpers.php on line 2499
 
 Arguments:
 	$ob
@@ -945,7 +945,7 @@ Target:
 stylesheets_nonce
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2155
+	includes/controller/Admin.php on line 2151
 	modules/tags/tags.php on line 452
 
 Target:
@@ -955,7 +955,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 2196
+	includes/controller/Admin.php on line 2192
 
 Target:
 	$write
@@ -964,7 +964,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2233
+	includes/controller/Admin.php on line 2229
 
 Target:
 	$manage
@@ -973,7 +973,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 2258
+	includes/controller/Admin.php on line 2254
 
 Target:
 	$settings
@@ -982,7 +982,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2276
+	includes/controller/Admin.php on line 2272
 
 Target:
 	$extend
@@ -991,7 +991,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2337
+	includes/controller/Admin.php on line 2333
 
 Target:
 	$this->context
@@ -1071,7 +1071,7 @@ Target:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 2398
+	includes/helpers.php on line 2401
 
 Target:
 	$function
@@ -1080,7 +1080,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 2497
+	includes/helpers.php on line 2500
 
 Target:
 	$nonce
