@@ -1508,16 +1508,6 @@
             if (ini_get("max_execution_time") !== 0)
                 set_time_limit(300);
 
-            function media_url_scan(&$value) {
-                $config = Config::current();
-
-                $regexp_url = preg_quote($_POST['media_url'], "/");
-                $uploads_url = fix($config->chyrp_url.str_replace(DIR, "/", $config->uploads_path));
-
-                $value = preg_replace("/{$regexp_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/",
-                                      $uploads_url."$1.$2", $value);
-            }
-
             if (isset($imports["groups"])) {
                 if (!$visitor->group->can("add_group"))
                     show_403(__("Access Denied"),
@@ -1575,7 +1565,13 @@
                         $values[$value->getName()] = unfix((string) $value);
 
                     if (!empty($_POST['media_url']))
-                        array_walk_recursive($values, "media_url_scan");
+                        array_walk_recursive($values, function (&$value) {
+                            $config = Config::current();
+                            $old_url = preg_quote($_POST['media_url'], "/");
+                            $new_url = fix($config->chyrp_url.str_replace(DIR, "/", $config->uploads_path));
+                            $regex = "/{$old_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/";
+                            $value = preg_replace($regex, $new_url."$1.$2", $value);
+                        });
 
                     $values["imported_from"] = "chyrp";
 
