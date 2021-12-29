@@ -259,9 +259,6 @@
     function twig_filter_strftime_format($timestamp, $format = null) {
         static $tomorrow = null;
         static $today    = null;
-        static $now      = null;
-        static $thisweek = null;
-        static $thisyear = null;
 
         if (!isset($tomorrow))
             $tomorrow = strtotime("tomorrow");
@@ -269,23 +266,13 @@
         if (!isset($today))
             $today = strtotime("today");
 
-        if (!isset($now))
-            $now = strtotime("now");
-
-        if (!isset($thisyear))
-            $thisyear = strtotime("midnight 1 january this year");
-
         $time = is_numeric($timestamp) ? $timestamp : strtotime($timestamp) ;
 
         if (!isset($format)) {
             if ($time < $tomorrow and $time >= $today)
                 return __("Today");
-            elseif ($time > $tomorrow)
-                $format = "Y-m-d H:i:s";
-            elseif ($time < $now and $time > $thisyear)
-                $format = "d F";
-            else
-                $format = "F Y";
+
+            $format = (ADMIN) ? "Y-m-d" : "d F Y" ;
         }
 
         return when($format, $time);
