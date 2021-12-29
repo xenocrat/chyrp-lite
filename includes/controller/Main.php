@@ -262,13 +262,10 @@
                                  array("created_at ASC"))->fetch();
 
             if ($prev === false)
-                $prev = array();
+                $prev = array("created_at" => "");
 
             if ($next === false)
-                $next = array();
-
-            fallback($next["created_at"], "");
-            fallback($prev["created_at"], "");
+                $next = array("created_at" => "");
 
             $this->display("pages".DIR."archive",
                            array("posts" => $posts,
