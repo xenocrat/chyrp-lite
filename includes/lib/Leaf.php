@@ -252,6 +252,9 @@
     /**
      * Function: twig_filter_strftime_format
      * Returns date formatting for a string that isn't a regular time() value.
+     * 
+     * Notes:
+     *     Uses date() instead of strftime(). Name retained for compatibility.
      */
     function twig_filter_strftime_format($timestamp, $format = null) {
         static $tomorrow = null;
@@ -269,23 +272,20 @@
         if (!isset($now))
             $now = strtotime("now");
 
-        if (!isset($thisweek))
-            $thisweek = strtotime("this week");
-
         if (!isset($thisyear))
             $thisyear = strtotime("midnight 1 january this year");
 
         $time = is_numeric($timestamp) ? $timestamp : strtotime($timestamp) ;
 
         if (!isset($format)) {
-            if ($time < $tomorrow and $time > $today)
+            if ($time < $tomorrow and $time >= $today)
                 return __("Today");
-            elseif ($time < $now and $time > $thisweek)
-                $format = "l";
+            elseif ($time > $tomorrow)
+                $format = "Y-m-d H:i:s";
             elseif ($time < $now and $time > $thisyear)
-                $format = "F";
+                $format = "d F";
             else
-                $format = "Y";
+                $format = "F Y";
         }
 
         return when($format, $time);
