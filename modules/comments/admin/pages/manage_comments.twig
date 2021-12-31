@@ -38,7 +38,7 @@
 {{ comment.post.title() | striptags | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
 {% endif %}
 <td class="comment_date date">
-{{ comment.created_at | strftimeformat }}
+{{ comment.created_at | dateformat }}
 </td>
 <td class="comment_status status">
 {{ comment.status | capitalize | translate("comments") }}

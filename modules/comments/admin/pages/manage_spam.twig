@@ -35,7 +35,7 @@
 {{ comment.post.title() | striptags | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
 </td>
 <td class="comment_date date">
-{{ comment.created_at | strftimeformat }}
+{{ comment.created_at | dateformat }}
 </td>
 {{ trigger.call("manage_comments_column", comment) }}
 <td class="controls">
