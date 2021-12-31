@@ -7,8 +7,8 @@
 <div class="archive standalone">
 {% for when, month in months %}
 <h2 id="label_{{ when }}_archive" class="archive">
-<a href="{{ url('archive/%s/' | format(when | strftimeformat('Y/m'))) }}">
-{{ when | strftimeformat("F Y" | translate) }}
+<a href="{{ url('archive/%s/' | format(when | dateformat('Y/m'))) }}">
+{{ when | dateformat("F Y" | translate) }}
 </a>
 </h2>
 <ul aria-labelledby="label_{{ when }}_archive" class="archive">
@@ -38,8 +38,8 @@
 </div>
 {% if archive.next is not empty %}
 <div role="navigation" class="next traversal">
-<a href="{{ url('archive/%s/' | format(archive.next | strftimeformat('Y'))) }}">
-{{ archive.next | strftimeformat("Y") }}
+<a href="{{ url('archive/%s/' | format(archive.next | dateformat('Y'))) }}">
+{{ archive.next | dateformat("Y") }}
 </a>
 </div>
 {% endif %}
@@ -48,7 +48,7 @@
 {# Posts? (For daily/monthly archives) #}
 {% if posts.paginated is not empty %}
 <h3 role="status" class="filter">
-{{ "Archive of %s" | translate | format(archive.when | strftimeformat(archive.depth == "day" ? "d F Y" : "F Y")) }}
+{{ "Archive of %s" | translate | format(archive.when | dateformat(archive.depth == "day" ? "d F Y" : "F Y")) }}
 </h3>
 {% for post in posts.paginated %}
 {% include(["feathers" ~ DIR ~ post.feather ~ ".twig", "feathers" ~ DIR ~ "missing.twig"]) %}
