@@ -62,6 +62,7 @@
                 # Custom filters:
                 new \Twig\TwigFilter("translate",           "twig_filter_translate"),
                 new \Twig\TwigFilter("translate_plural",    "twig_filter_translate_plural"),
+                new \Twig\TwigFilter("dateformat",          "twig_filter_date_format"),
                 new \Twig\TwigFilter("strftimeformat",      "twig_filter_strftime_format"),
                 new \Twig\TwigFilter("filesizeformat",      "twig_filter_filesize_format"),
                 new \Twig\TwigFilter("preg_match",          "twig_filter_preg_match"),
@@ -250,13 +251,10 @@
     }
 
     /**
-     * Function: twig_filter_strftime_format
+     * Function: twig_filter_date_format
      * Returns date formatting for a string that isn't a regular time() value.
-     * 
-     * Notes:
-     *     Uses date() instead of strftime(). Name retained for compatibility.
      */
-    function twig_filter_strftime_format($timestamp, $format = null) {
+    function twig_filter_date_format($timestamp, $format = null) {
         static $tomorrow = null;
         static $today    = null;
 
@@ -276,6 +274,17 @@
         }
 
         return when($format, $time);
+    }
+
+    /**
+     * Function: twig_filter_strftime_format
+     * Returns date formatting for a string that isn't a regular time() value.
+     * 
+     * Notes:
+     *     Uses date() instead of strftime(). Retained for backwards compatibility.
+     */
+    function twig_filter_strftime_format($timestamp, $format = null) {
+        return when("Y-m-d H:i:s", $timestamp);
     }
 
     /**
