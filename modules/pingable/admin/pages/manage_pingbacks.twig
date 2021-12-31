@@ -38,7 +38,7 @@
 {% endif %}
 </td>
 <td class="pingback_date date">
-{{ pingback.created_at | strftimeformat }}
+{{ pingback.created_at | dateformat }}
 </td>
 {{ trigger.call("manage_pingbacks_column", pingback) }}
 <td class="controls">
