@@ -1312,26 +1312,26 @@ msgstr ""
 msgid "Guest"
 msgstr ""
 
-#: includes/lib/Leaf.php:273
+#: includes/lib/Leaf.php:271
 msgid "Today"
-msgstr ""
-
-#: includes/lib/Leaf.php:294
-#, php-format
-msgid "%s GB"
-msgstr ""
-
-#: includes/lib/Leaf.php:299
-#, php-format
-msgid "%s MB"
 msgstr ""
 
 #: includes/lib/Leaf.php:303
 #, php-format
+msgid "%s GB"
+msgstr ""
+
+#: includes/lib/Leaf.php:308
+#, php-format
+msgid "%s MB"
+msgstr ""
+
+#: includes/lib/Leaf.php:312
+#, php-format
 msgid "%s KB"
 msgstr ""
 
-#: includes/lib/Leaf.php:409
+#: includes/lib/Leaf.php:418
 msgid "Image source"
 msgstr ""
 

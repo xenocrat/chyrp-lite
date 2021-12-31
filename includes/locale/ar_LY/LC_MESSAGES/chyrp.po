@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: chyrplite\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-12-29 19:02+0000\n"
+"PO-Revision-Date: 2021-12-31 11:31+0000\n"
 "Last-Translator: Anas Mohammed Almzoghy <a.almzoghy@gmail.com>\n"
 "Language-Team: Arabic\n"
 "Language: ar_LY\n"
@@ -1117,26 +1117,26 @@ msgstr "كلمة المرور الجديدة: %s"
 msgid "Guest"
 msgstr "ضيف"
 
-#: includes/lib/Leaf.php:273
+#: includes/lib/Leaf.php:271
 msgid "Today"
 msgstr "اليوم"
 
-#: includes/lib/Leaf.php:294
+#: includes/lib/Leaf.php:303
 #, php-format
 msgid "%s GB"
 msgstr "%s جيجابايت"
 
-#: includes/lib/Leaf.php:299
+#: includes/lib/Leaf.php:308
 #, php-format
 msgid "%s MB"
 msgstr "%s ميجابايت"
 
-#: includes/lib/Leaf.php:303
+#: includes/lib/Leaf.php:312
 #, php-format
 msgid "%s KB"
 msgstr "%s كيلوبايت"
 
-#: includes/lib/Leaf.php:409
+#: includes/lib/Leaf.php:418
 msgid "Image source"
 msgstr "مصدر الصورة"
 

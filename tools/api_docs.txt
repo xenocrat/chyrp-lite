@@ -3010,12 +3010,17 @@ Function: twig_filter_translate_plural
 Returns a plural (or not) form of a translated string.
 
 
+Function: twig_filter_date_format
+---------------------------------
+Returns date formatting for a string that isn't a regular time() value.
+
+
 Function: twig_filter_strftime_format
 -------------------------------------
 Returns date formatting for a string that isn't a regular time() value.
 
 Notes:
-    Uses date() instead of strftime(). Name retained for compatibility.
+    Uses date() instead of strftime(). Retained for backwards compatibility.
 
 
 Function: twig_filter_filesize_format

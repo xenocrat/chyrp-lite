@@ -1127,26 +1127,26 @@ msgstr "Dein neues Passwort ist: %s"
 msgid "Guest"
 msgstr "Gast"
 
-#: includes/lib/Leaf.php:273
+#: includes/lib/Leaf.php:271
 msgid "Today"
 msgstr "Heute"
 
-#: includes/lib/Leaf.php:294
+#: includes/lib/Leaf.php:303
 #, php-format
 msgid "%s GB"
 msgstr "%s GB"
 
-#: includes/lib/Leaf.php:299
+#: includes/lib/Leaf.php:308
 #, php-format
 msgid "%s MB"
 msgstr "%s MB"
 
-#: includes/lib/Leaf.php:303
+#: includes/lib/Leaf.php:312
 #, php-format
 msgid "%s KB"
 msgstr "%s KB"
 
-#: includes/lib/Leaf.php:409
+#: includes/lib/Leaf.php:418
 msgid "Image source"
 msgstr "Bildquelle"
 
