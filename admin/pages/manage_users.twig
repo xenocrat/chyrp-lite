@@ -44,7 +44,7 @@
 {{ user.group.name }}
 </td>
 <td class="user_joined date">
-{{ user.joined_at | strftimeformat }}
+{{ user.joined_at | dateformat }}
 </td>
 <td class="user_website name">
 {% if user.website is not empty %}<a href="{{ user.website | fix(true) }}">{{ user.website }}</a>{% endif %}

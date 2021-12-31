@@ -32,7 +32,7 @@
 <a href="{{ post.url() }}">{{ post.title() | striptags | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
 </td>
 <td class="post_date date">
-{{ post.created_at | strftimeformat }}
+{{ post.created_at | dateformat }}
 </td>
 <td class="post_status status">
 {{ post.status_name }}

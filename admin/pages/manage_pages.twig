@@ -34,10 +34,10 @@
 <a href="{{ page.url() }}">{{ page.title | striptags | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
 </td>
 <td class="page_created date">
-{{ page.created_at | strftimeformat }}
+{{ page.created_at | dateformat }}
 </td>
 <td class="page_updated date">
-{% if page.updated %}{{ page.updated_at | strftimeformat }}{% else %}<span class="sub">{{ "never" | translate }}</span>{% endif %}
+{% if page.updated %}{{ page.updated_at | dateformat }}{% else %}<span class="sub">{{ "never" | translate }}</span>{% endif %}
 </td>
 <td class="page_public emblem">
 {% if page.public %}
