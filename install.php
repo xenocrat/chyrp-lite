@@ -24,6 +24,7 @@
     define('CACHE_THUMBS',     false);
     define('USE_GETTEXT_SHIM', stripos(PHP_OS, "Win") === 0);
     define('USE_OB',           true);
+    define('CAN_USE_ZLIB',     false);
     define('USE_ZLIB',         false);
 
     if (version_compare(PHP_VERSION, "7.4", "<"))
