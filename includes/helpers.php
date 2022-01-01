@@ -346,7 +346,7 @@
      *     $domain - The name of this translation domain.
      *     $locale - The path to the locale directory.
      */
-    function load_translator($domain, $locale): ?bool {
+    function load_translator($domain, $locale) {
         if (USE_GETTEXT_SHIM and class_exists("Translation"))
             return Translation::current()->load($domain, $locale);
 
