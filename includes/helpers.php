@@ -346,9 +346,11 @@
      *     $domain - The name of this translation domain.
      *     $locale - The path to the locale directory.
      */
-    function load_translator($domain, $locale) {
-        if (USE_GETTEXT_SHIM and class_exists("Translation"))
-            return Translation::current()->load($domain, $locale);
+    function load_translator($domain, $locale): void {
+        if (USE_GETTEXT_SHIM and class_exists("Translation")) {
+            Translation::current()->load($domain, $locale);
+            return;
+        }
 
         if (function_exists("bindtextdomain"))
             bindtextdomain($domain, $locale);
@@ -480,7 +482,6 @@
         fallback($when, time());
 
         $time = is_numeric($when) ? $when : strtotime($when) ;
-
         return date("Y-m-d H:i:s", $time);
     }
 
