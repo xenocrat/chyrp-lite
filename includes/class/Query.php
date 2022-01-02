@@ -110,7 +110,7 @@
          * Function: fetchAll
          * Returns an array of every result.
          */
-        public function fetchAll($style = PDO::FETCH_ASSOC) {
+        public function fetchAll($style = PDO::FETCH_ASSOC) { # Can be PDO::FETCH_DEFAULT in PHP 8.0.7+
             return $this->query->fetchAll($style);
         }
 
