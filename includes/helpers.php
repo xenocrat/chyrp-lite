@@ -1860,12 +1860,17 @@
         if (!preg_match("~[^ /\?]+(?=($|\?))~", $url, $match))
             return false;
 
-        $uploads_path = MAIN_DIR.Config::current()->uploads_path;
         $filename = upload_filename($match[0]);
-        $contents = get_remote($url, $redirects, $timeout);
 
         if ($filename === false)
             return false;
+
+        $contents = get_remote($url, $redirects, $timeout);
+
+        if ($contents === false)
+            return false;
+
+        $uploads_path = MAIN_DIR.Config::current()->uploads_path;
 
         if (!is_dir($uploads_path))
             error(__("Error"), __("Upload path does not exist."));
@@ -1914,7 +1919,7 @@
             foreach ($filter as &$entry)
                 $entry = preg_quote($entry, "/");
 
-        $patterns = !empty($filter) ? implode("|", $filter) : ".*" ;
+        $patterns = !empty($filter) ? implode("|", $filter) : ".+" ;
         $dir = new DirectoryIterator(MAIN_DIR.$config->uploads_path);
 
         foreach ($dir as $item) {
