@@ -810,6 +810,9 @@ span.options_extra {
     overflow-y: auto;
     box-shadow: inset 0px 2px 4px 0px rgba(79, 79, 79, 0.25);
 }
+span.options_extra:empty {
+    display: none;
+}
 span.options_tray {
     box-sizing: border-box;
     display: block;
