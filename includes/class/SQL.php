@@ -76,18 +76,16 @@
                     throw new PDOException(__("PDO driver is unavailable for this database."));
 
                 if ($this->adapter == "sqlite")
-                    $this->db = new PDO("sqlite:".$this->database,
-                                        null,
-                                        null,
-                                        array(PDO::ATTR_PERSISTENT => false));
+                    $this->db = new PDO("sqlite:".$this->database);
                 else
                     $this->db = new PDO($this->adapter.":host=".$this->host.";".
                                         ((isset($this->port)) ? "port=".$this->port.";" : "").
-                                        "dbname=".$this->database,
+                                        "dbname=".$this->database.
+                                        (($this->adapter == "mysql") ? ";charset=utf8mb4;" : ""),
                                         $this->username,
-                                        $this->password,
-                                        array(PDO::ATTR_PERSISTENT => false));
+                                        $this->password);
 
+                $this->db->setAttribute(PDO::ATTR_PERSISTENT, false);
                 $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (PDOException $error) {
                 $this->error = $error->getMessage();
@@ -97,9 +95,8 @@
             }
 
             if ($this->adapter == "mysql") {
-                # These are not added to the query debug/count.
+                # This is not added to the query debug/count.
                 new Query($this, "SET SESSION sql_mode = 'ANSI,STRICT_TRANS_TABLES'");
-                new Query($this, "SET NAMES 'utf8'");
             }
 
             return $this->connected = true;
