@@ -128,13 +128,13 @@
             $cloud = $this->tag_cloud(false, "name_asc");
             $names = isset($post->tags) ? array_keys($post->tags) : array();
 
-            $selector = "\n".'<span class="options_extra tags_select">'."\n";
+            $selector = "\n".'<span class="options_extra tags_select">';
 
             foreach ($cloud as $tag) {
                 $selected = (in_array($tag["name"], $names)) ? " tag_added" : "" ;
 
                 $selector.= '<a class="tag'.$selected.
-                            '" href="#" role="button">'.$tag["name"].'</a>'."\n";
+                            '" href="#" role="button">'.$tag["name"].'</a> ';
             }
 
             $selector.= "</span>"."\n";
