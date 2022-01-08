@@ -81,7 +81,7 @@
                     $this->db = new PDO($this->adapter.":host=".$this->host.";".
                                         ((isset($this->port)) ? "port=".$this->port.";" : "").
                                         "dbname=".$this->database.
-                                        (($this->adapter == "mysql") ? ";charset=utf8mb4;" : ""),
+                                        (($this->adapter == "mysql") ? ";charset=utf8mb4" : ""),
                                         $this->username,
                                         $this->password);
 
