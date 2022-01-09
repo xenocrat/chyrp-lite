@@ -47,15 +47,12 @@
             foreach ($settings as $setting => $value)
                 $this->$setting = $value;
 
-            fallback($this->host);
+            fallback($this->host, "");
             fallback($this->username);
             fallback($this->password);
-            fallback($this->database);
-            fallback($this->prefix);
-            fallback($this->adapter);
-
-            if (!isset($this->prefix))
-                $this->prefix = "";
+            fallback($this->database, "");
+            fallback($this->prefix, "");
+            fallback($this->adapter, "");
 
             $this->connected = false;
         }
