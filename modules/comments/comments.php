@@ -78,6 +78,25 @@
             redirect($comment->post->url()."#comment_".$comment->id);
         }
 
+        public function main_most_comments($main) {
+            $this->get_post_comment_counts();
+            $posts = Post::find(array("placeholders" => true));
+
+            usort($posts[0], function ($a, $b) {
+                $count_a = fallback($this->caches["post_comment_counts"][$a["id"]], 0);
+                $count_b = fallback($this->caches["post_comment_counts"][$b["id"]], 0);
+
+                if ($count_a == $count_b)
+                    return 0;
+
+                return ($count_a > $count_b) ? -1 : 1 ;
+            });
+
+            $main->display(array("pages".DIR."most_comments", "pages".DIR."index"),
+                           array("posts" => new Paginator($posts, $main->post_limit)),
+                           __("Most commented on posts", "comments"));
+        }
+
         public function parse_urls($urls) {
             $urls['|/comment/([0-9]+)/|'] = '/?action=comment&amp;id=$1';
             return $urls;
