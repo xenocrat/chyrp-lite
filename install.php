@@ -883,7 +883,7 @@
                     <?php echo __("Make sure your PostgreSQL database uses UTF-8 encoding."); ?>
                 </aside>
                 <aside id="db_aside_mysql">
-                    <?php echo __("Case-insensitive utf8mb4 collation is recommended for your MySQL database."); ?>
+                    <?php echo __("The collation <code>utf8mb4_general_ci</code> is recommended for your MySQL database."); ?>
                 </aside>
                 <aside id="db_aside_sqlite">
                     <?php echo __("Be sure to put your SQLite database outside the document root directory, otherwise visitors will be able to download it."); ?>
