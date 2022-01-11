@@ -70,6 +70,25 @@
             return $navs;
         }
 
+        public function main_most_likes($main) {
+            $this->get_post_like_counts();
+            $posts = Post::find(array("placeholders" => true));
+
+            usort($posts[0], function ($a, $b) {
+                $count_a = fallback($this->caches["post_like_counts"][$a["id"]], 0);
+                $count_b = fallback($this->caches["post_like_counts"][$b["id"]], 0);
+
+                if ($count_a == $count_b)
+                    return 0;
+
+                return ($count_a > $count_b) ? -1 : 1 ;
+            });
+
+            $main->display(array("pages".DIR."most_likes", "pages".DIR."index"),
+                           array("posts" => new Paginator($posts, $main->post_limit)),
+                           __("Most liked posts", "likes"));
+        }
+
         public function main_like() {
             if (empty($_GET['post_id']) or !is_numeric($_GET['post_id']))
                 error(__("Error"), __("An ID is required to like a post.", "likes"), null, 400);
