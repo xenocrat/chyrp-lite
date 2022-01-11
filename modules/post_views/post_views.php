@@ -2,6 +2,10 @@
     require_once "model".DIR."View.php";
 
     class PostViews extends Modules {
+        # Array: $caches
+        # Query caches for methods.
+        private $caches = array();
+
         static function __install() {
             View::install();
         }
@@ -62,12 +66,11 @@
             file_attachment($filedata, $filename.".csv");
         }
 
-        public function post_view_count_attr($attr, $post) {
-            if ($post->no_results)
-                return 0;
+        private function get_post_view_counts() {
+            if (isset($this->caches["post_view_counts"]))
+                return;
 
-            if (isset($this->post_view_counts))
-                return fallback($this->post_view_counts[$post->id], 0);
+            $this->caches["post_view_counts"] = array();
 
             $counts = SQL::current()->select("views",
                                              "COUNT(post_id) AS total, post_id as post_id",
@@ -79,8 +82,14 @@
                                              "post_id")->fetchAll();
 
             foreach ($counts as $count)
-                $this->post_view_counts[$count["post_id"]] = (int) $count["total"];
+                $this->caches["post_view_counts"][$count["post_id"]] = (int) $count["total"];
+        }
 
-            return fallback($this->post_view_counts[$post->id], 0);
+        public function post_view_count_attr($attr, $post) {
+            if ($post->no_results)
+                return 0;
+
+            $this->get_post_view_counts();
+            return fallback($this->caches["post_view_counts"][$post->id], 0);
         }
     }

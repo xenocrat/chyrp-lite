@@ -2,6 +2,10 @@
     require_once "model".DIR."Category.php";
 
     class Categorize extends Modules {
+        # Array: $caches
+        # Query caches for methods.
+        private $caches = array();
+
         public function __init() {
             $this->addAlias("metaWeblog_before_newPost", "metaWeblog_before_editPost");
         }
@@ -130,12 +134,11 @@
             }
         }
 
-        public function category_post_count_attr($attr, $category) {
-            if ($category->no_results)
-                return 0;
+        private function get_category_post_counts() {
+            if (isset($this->caches["category_post_counts"]))
+                return;
 
-            if (isset($this->category_post_counts))
-                return fallback($this->category_post_counts[$category->id], 0);
+            $this->caches["category_post_counts"] = array();
 
             $counts = SQL::current()->select("post_attributes",
                                              "COUNT(value) AS total, value AS category_id",
@@ -147,9 +150,15 @@
                                              "value")->fetchAll();
 
             foreach ($counts as $count)
-                $this->category_post_counts[$count["category_id"]] = (int) $count["total"];
+                $this->caches["category_post_counts"][$count["category_id"]] = (int) $count["total"];
+        }
 
-            return fallback($this->category_post_counts[$category->id], 0);
+        public function category_post_count_attr($attr, $category) {
+            if ($category->no_results)
+                return 0;
+
+            $this->get_category_post_counts();
+            return fallback($this->caches["category_post_counts"][$category->id], 0);
         }
 
         public function twig_context_main($context) {

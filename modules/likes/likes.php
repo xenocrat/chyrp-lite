@@ -2,6 +2,10 @@
     require_once "model".DIR."Like.php";
 
     class Likes extends Modules {
+        # Array: $caches
+        # Query caches for methods.
+        private $caches = array();
+
         public function __init() {
             fallback($_SESSION["likes"], array());
         }
@@ -161,12 +165,11 @@
             SQL::current()->update("likes", array("user_id" => $user->id), array("user_id" => 0));
         }
 
-        public function post_like_count_attr($attr, $post) {
-            if ($post->no_results)
-                return 0;
+        private function get_post_like_counts() {
+            if (isset($this->caches["post_like_counts"]))
+                return;
 
-            if (isset($this->post_like_counts))
-                return fallback($this->post_like_counts[$post->id], 0);
+            $this->caches["post_like_counts"] = array();
 
             $counts = SQL::current()->select("likes",
                                              "COUNT(post_id) AS total, post_id as post_id",
@@ -178,17 +181,22 @@
                                              "post_id")->fetchAll();
 
             foreach ($counts as $count)
-                $this->post_like_counts[$count["post_id"]] = (int) $count["total"];
-
-            return fallback($this->post_like_counts[$post->id], 0);
+                $this->caches["post_like_counts"][$count["post_id"]] = (int) $count["total"];
         }
 
-        public function user_like_count_attr($attr, $user) {
-            if ($user->no_results)
+        public function post_like_count_attr($attr, $post) {
+            if ($post->no_results)
                 return 0;
 
-            if (isset($this->user_like_counts))
-                return fallback($this->user_like_counts[$user->id], 0);
+            $this->get_post_like_counts();
+            return fallback($this->caches["post_like_counts"][$post->id], 0);
+        }
+
+        public function get_user_like_counts() {
+            if (isset($this->caches["user_like_counts"]))
+                return;
+
+            $this->caches["user_like_counts"] = array();
 
             $counts = SQL::current()->select("likes",
                                              "COUNT(user_id) AS total, user_id as user_id",
@@ -200,9 +208,15 @@
                                              "user_id")->fetchAll();
 
             foreach ($counts as $count)
-                $this->user_like_counts[$count["user_id"]] = (int) $count["total"];
+                $this->caches["user_like_counts"][$count["user_id"]] = (int) $count["total"];
+        }
 
-            return fallback($this->user_like_counts[$user->id], 0);
+        public function user_like_count_attr($attr, $user) {
+            if ($user->no_results)
+                return 0;
+
+            $this->get_user_like_counts();
+            return fallback($this->caches["user_like_counts"][$user->id], 0);
         }
 
         public function visitor_like_count_attr($attr, $visitor) {

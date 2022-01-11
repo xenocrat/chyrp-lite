@@ -2,6 +2,10 @@
     require_once "model".DIR."Comment.php";
 
     class Comments extends Modules {
+        # Array: $caches
+        # Query caches for methods.
+        private $caches = array();
+
         public function __init() {
             fallback($_SESSION['comments'], array());
 
@@ -815,12 +819,11 @@
             $post->has_many[] = "comments";
         }
 
-        public function post_comment_count_attr($attr, $post) {
-            if ($post->no_results)
-                return 0;
+        private function get_post_comment_counts() {
+            if (isset($this->caches["post_comment_counts"]))
+                return;
 
-            if (isset($this->post_comment_counts))
-                return fallback($this->post_comment_counts[$post->id], 0);
+            $this->caches["post_comment_counts"] = array();
 
             $counts = SQL::current()->select("comments",
                                              array("COUNT(post_id) AS total", "post_id as post_id"),
@@ -833,24 +836,22 @@
                                              "post_id");
 
             foreach ($counts->fetchAll() as $count)
-                $this->post_comment_counts[$count["post_id"]] = (int) $count["total"];
-
-            return fallback($this->post_comment_counts[$post->id], 0);
+                $this->caches["post_comment_counts"][$count["post_id"]] = (int) $count["total"];
         }
 
-        public function post_commentable_attr($attr, $post) {
+        public function post_comment_count_attr($attr, $post) {
             if ($post->no_results)
-                return false;
+                return 0;
 
-            return Comment::creatable($post);
+            $this->get_post_comment_counts();
+            return fallback($this->caches["post_comment_counts"][$post->id], 0);
         }
 
-        public function post_latest_comment_attr($attr, $post) {
-            if ($post->no_results)
-                return null;
+        private function get_latest_comments() {
+            if (isset($this->caches["latest_comments"]))
+                return;
 
-            if (isset($this->latest_comments))
-                return fallback($this->latest_comments[$post->id], null);
+            $this->caches["latest_comments"] = array();
 
             $times = SQL::current()->select("comments",
                                             array("MAX(created_at) AS latest", "post_id"),
@@ -863,14 +864,22 @@
                                             "post_id");
 
             foreach ($times->fetchAll() as $row)
-                $this->latest_comments[$row["post_id"]] = $row["latest"];
-
-            return fallback($this->latest_comments[$post->id], null);
+                $this->caches["latest_comments"][$row["post_id"]] = $row["latest"];
         }
 
-        public function user_comment_count_attr($attr, $user) {
-            if (isset($this->user_comment_counts))
-                return fallback($this->user_comment_counts[$user->id], 0);
+        public function post_latest_comment_attr($attr, $post) {
+            if ($post->no_results)
+                return null;
+
+            $this->get_latest_comments();
+            return fallback($this->caches["latest_comments"][$post->id], null);
+        }
+
+        private function get_user_comment_counts() {
+            if (isset($this->caches["user_comment_counts"]))
+                return;
+
+            $this->caches["user_comment_counts"] = array();
 
             $counts = SQL::current()->select("comments",
                                              array("COUNT(user_id) AS total", "user_id as user_id"),
@@ -883,14 +892,27 @@
                                              "user_id");
 
             foreach ($counts->fetchAll() as $count)
-                $this->user_comment_counts[$count["user_id"]] = (int) $count["total"];
+                $this->caches["user_comment_counts"][$count["user_id"]] = (int) $count["total"];
+        }
 
-            return fallback($this->user_comment_counts[$user->id], 0);
+        public function user_comment_count_attr($attr, $user) {
+            if ($user->no_results)
+                return 0;
+
+            $this->get_user_comment_counts();
+            return fallback($this->caches["user_comment_counts"][$user->id], 0);
         }
 
         public function visitor_comment_count_attr($attr, $visitor) {
             return ($visitor->id == 0) ?
                 count($_SESSION['comments']) : $this->user_comment_count_attr($attr, $visitor) ;
+        }
+
+        public function post_commentable_attr($attr, $post) {
+            if ($post->no_results)
+                return false;
+
+            return Comment::creatable($post);
         }
 
         public function import_chyrp_post($entry, $post) {
