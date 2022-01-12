@@ -40,4 +40,27 @@
         }
     }
 
+    /**
+     * Function: fix_comment_updated
+     * Normalizes "0000-00-00 00:00:00" updated_at values to "0001-01-01 00:00:00".
+     *
+     * Versions: 2022.01 => 2022.02
+     */
+    function fix_comment_updated() {
+        $sql = SQL::current();
+
+        if ($sql->adapter == "pgsql")
+            return;
+
+        $results = $sql->select("comments",
+                                "id",
+                                array("updated_at" => "0000-00-00 00:00:00"))->fetchAll();
+
+        foreach ($results as $result)
+            $sql->update("comments",
+                         array("id" => $result["id"]),
+                         array("updated_at" => "0001-01-01 00:00:00"));
+    }
+
     comments_migrate_config();
+    fix_comment_updated();
