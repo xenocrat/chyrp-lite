@@ -156,7 +156,7 @@
 
                 case "mysql":
                     $query = str_ireplace("AUTOINCREMENT", "AUTO_INCREMENT", $query);
-                    $query.= " DEFAULT CHARSET=utf8";
+                    $query.= " DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_general_ci";
                     break;
 
                 case "pgsql":
