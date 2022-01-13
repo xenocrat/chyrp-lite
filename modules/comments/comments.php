@@ -79,12 +79,11 @@
         }
 
         public function main_most_comments($main) {
-            $this->get_post_comment_counts();
             $posts = Post::find(array("placeholders" => true));
 
             usort($posts[0], function ($a, $b) {
-                $count_a = fallback($this->caches["post_comment_counts"][$a["id"]], 0);
-                $count_b = fallback($this->caches["post_comment_counts"][$b["id"]], 0);
+                $count_a = $this->get_post_comment_counts($a["id"]);
+                $count_b = $this->get_post_comment_counts($b["id"]);
 
                 if ($count_a == $count_b)
                     return 0;
@@ -838,88 +837,88 @@
             $post->has_many[] = "comments";
         }
 
-        private function get_post_comment_counts() {
-            if (isset($this->caches["post_comment_counts"]))
-                return;
+        private function get_post_comment_counts($post_id) {
+            if (!isset($this->caches["post_comment_counts"])) {
+                $counts = SQL::current()->select("comments",
+                                                 array("COUNT(post_id) AS total", "post_id as post_id"),
+                                                 array("status not" => Comment::STATUS_SPAM,
+                                                       Comment::redactions()),
+                                                 null,
+                                                 array(),
+                                                 null,
+                                                 null,
+                                                 "post_id");
 
-            $this->caches["post_comment_counts"] = array();
+                $this->caches["post_comment_counts"] = array();
 
-            $counts = SQL::current()->select("comments",
-                                             array("COUNT(post_id) AS total", "post_id as post_id"),
-                                             array("status not" => Comment::STATUS_SPAM,
-                                                   Comment::redactions()),
-                                             null,
-                                             array(),
-                                             null,
-                                             null,
-                                             "post_id");
+                foreach ($counts->fetchAll() as $count)
+                    $this->caches["post_comment_counts"][$count["post_id"]] = (int) $count["total"];
+            }
 
-            foreach ($counts->fetchAll() as $count)
-                $this->caches["post_comment_counts"][$count["post_id"]] = (int) $count["total"];
+            return fallback($this->caches["post_comment_counts"][$post_id], 0);
         }
 
         public function post_comment_count_attr($attr, $post) {
             if ($post->no_results)
                 return 0;
 
-            $this->get_post_comment_counts();
-            return fallback($this->caches["post_comment_counts"][$post->id], 0);
+            return $this->get_post_comment_counts($post->id);
         }
 
-        private function get_latest_comments() {
-            if (isset($this->caches["latest_comments"]))
-                return;
+        private function get_latest_comments($post_id) {
+            if (!isset($this->caches["latest_comments"])) {
+                $times = SQL::current()->select("comments",
+                                                array("MAX(created_at) AS latest", "post_id"),
+                                                array("status not" => Comment::STATUS_SPAM,
+                                                      Comment::redactions()),
+                                                null,
+                                                array(),
+                                                null,
+                                                null,
+                                                "post_id");
 
-            $this->caches["latest_comments"] = array();
+                $this->caches["latest_comments"] = array();
 
-            $times = SQL::current()->select("comments",
-                                            array("MAX(created_at) AS latest", "post_id"),
-                                            array("status not" => Comment::STATUS_SPAM,
-                                                  Comment::redactions()),
-                                            null,
-                                            array(),
-                                            null,
-                                            null,
-                                            "post_id");
+                foreach ($times->fetchAll() as $row)
+                    $this->caches["latest_comments"][$row["post_id"]] = $row["latest"];
+            }
 
-            foreach ($times->fetchAll() as $row)
-                $this->caches["latest_comments"][$row["post_id"]] = $row["latest"];
+            return fallback($this->caches["latest_comments"][$post_id], null);
         }
 
         public function post_latest_comment_attr($attr, $post) {
             if ($post->no_results)
                 return null;
 
-            $this->get_latest_comments();
-            return fallback($this->caches["latest_comments"][$post->id], null);
+            return $this->get_latest_comments($post->id);
         }
 
-        private function get_user_comment_counts() {
-            if (isset($this->caches["user_comment_counts"]))
-                return;
+        private function get_user_comment_counts($user_id) {
+            if (!isset($this->caches["user_comment_counts"])) {
+                $this->caches["user_comment_counts"] = array();
 
-            $this->caches["user_comment_counts"] = array();
+                $counts = SQL::current()->select("comments",
+                                                 array("COUNT(user_id) AS total", "user_id as user_id"),
+                                                 array("status not" => Comment::STATUS_SPAM,
+                                                       Comment::redactions()),
+                                                 null,
+                                                 array(),
+                                                 null,
+                                                 null,
+                                                 "user_id");
 
-            $counts = SQL::current()->select("comments",
-                                             array("COUNT(user_id) AS total", "user_id as user_id"),
-                                             array("status not" => Comment::STATUS_SPAM,
-                                                   Comment::redactions()),
-                                             null,
-                                             array(),
-                                             null,
-                                             null,
-                                             "user_id");
+                foreach ($counts->fetchAll() as $count)
+                    $this->caches["user_comment_counts"][$count["user_id"]] = (int) $count["total"];
+            }
 
-            foreach ($counts->fetchAll() as $count)
-                $this->caches["user_comment_counts"][$count["user_id"]] = (int) $count["total"];
+            return fallback($this->caches["user_comment_counts"][$user_id], 0);
         }
 
         public function user_comment_count_attr($attr, $user) {
             if ($user->no_results)
                 return 0;
 
-            $this->get_user_comment_counts();
-            return fallback($this->caches["user_comment_counts"][$user->id], 0);
+            return $this->get_user_comment_counts($user->id);
         }
 
         public function visitor_comment_count_attr($attr, $visitor) {

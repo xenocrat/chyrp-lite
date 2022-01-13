@@ -177,31 +177,31 @@
             SQL::current()->delete("pingbacks", array("post_id" => $post->id));
         }
 
-        private function get_post_pingback_counts() {
-            if (isset($this->caches["post_pingback_counts"]))
-                return;
+        private function get_post_pingback_counts($post_id) {
+            if (!isset($this->caches["post_pingback_counts"])) {
+                $counts = SQL::current()->select("pingbacks",
+                                                 "COUNT(post_id) AS total, post_id as post_id",
+                                                 null,
+                                                 null,
+                                                 array(),
+                                                 null,
+                                                 null,
+                                                 "post_id")->fetchAll();
 
-            $this->caches["post_pingback_counts"] = array();
+                $this->caches["post_pingback_counts"] = array();
 
-            $counts = SQL::current()->select("pingbacks",
-                                             "COUNT(post_id) AS total, post_id as post_id",
-                                             null,
-                                             null,
-                                             array(),
-                                             null,
-                                             null,
-                                             "post_id")->fetchAll();
+                foreach ($counts as $count)
+                    $this->caches["post_pingback_counts"][$count["post_id"]] = (int) $count["total"];
+            }
 
-            foreach ($counts as $count)
-                $this->caches["post_pingback_counts"][$count["post_id"]] = (int) $count["total"];
+            return fallback($this->caches["post_pingback_counts"][$post_id], 0);
         }
 
         public function post_pingback_count_attr($attr, $post) {
             if ($post->no_results)
                 return 0;
 
-            $this->get_post_pingback_counts();
-            return fallback($this->caches["post_pingback_counts"][$post->id], 0);
+            return $this->get_post_pingback_counts($post->id);
         }
 
         public function import_chyrp_post($entry, $post) {

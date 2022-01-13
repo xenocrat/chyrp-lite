@@ -134,31 +134,31 @@
             }
         }
 
-        private function get_category_post_counts() {
-            if (isset($this->caches["category_post_counts"]))
-                return;
+        private function get_category_post_counts($category_id) {
+            if (!isset($this->caches["category_post_counts"])) {
+                $counts = SQL::current()->select("post_attributes",
+                                                 "COUNT(value) AS total, value AS category_id",
+                                                 array("name" => "category_id"),
+                                                 null,
+                                                 array(),
+                                                 null,
+                                                 null,
+                                                 "value")->fetchAll();
 
-            $this->caches["category_post_counts"] = array();
+                $this->caches["category_post_counts"] = array();
 
-            $counts = SQL::current()->select("post_attributes",
-                                             "COUNT(value) AS total, value AS category_id",
-                                             array("name" => "category_id"),
-                                             null,
-                                             array(),
-                                             null,
-                                             null,
-                                             "value")->fetchAll();
+                foreach ($counts as $count)
+                    $this->caches["category_post_counts"][$count["category_id"]] = (int) $count["total"];
+            }
 
-            foreach ($counts as $count)
-                $this->caches["category_post_counts"][$count["category_id"]] = (int) $count["total"];
+            return fallback($this->caches["category_post_counts"][$category_id], 0);
         }
 
         public function category_post_count_attr($attr, $category) {
             if ($category->no_results)
                 return 0;
 
-            $this->get_category_post_counts();
-            return fallback($this->caches["category_post_counts"][$category->id], 0);
+            return $this->get_category_post_counts($category->id);
         }
 
         public function twig_context_main($context) {
