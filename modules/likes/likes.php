@@ -71,12 +71,11 @@
         }
 
         public function main_most_likes($main) {
-            $this->get_post_like_counts();
             $posts = Post::find(array("placeholders" => true));
 
             usort($posts[0], function ($a, $b) {
-                $count_a = fallback($this->caches["post_like_counts"][$a["id"]], 0);
-                $count_b = fallback($this->caches["post_like_counts"][$b["id"]], 0);
+                $count_a = $this->get_post_like_count($a["id"]);
+                $count_b = $this->get_post_like_count($b["id"]);
 
                 if ($count_a == $count_b)
                     return 0;
@@ -184,7 +183,7 @@
             SQL::current()->update("likes", array("user_id" => $user->id), array("user_id" => 0));
         }
 
-        private function get_post_like_counts($post_id) {
+        private function get_post_like_count($post_id) {
             if (!isset($this->caches["post_like_counts"])) {
                 $counts = SQL::current()->select("likes",
                                                  "COUNT(post_id) AS total, post_id as post_id",
@@ -208,10 +207,10 @@
             if ($post->no_results)
                 return 0;
 
-            return $this->get_post_like_counts($post->id);
+            return $this->get_post_like_count($post->id);
         }
 
-        public function get_user_like_counts($user_id) {
+        public function get_user_like_count($user_id) {
             if (!isset($this->caches["user_like_counts"])) {
                 $counts = SQL::current()->select("likes",
                                                  "COUNT(user_id) AS total, user_id as user_id",
@@ -235,7 +234,7 @@
             if ($user->no_results)
                 return 0;
 
-            return $this->get_user_like_counts($user->id);
+            return $this->get_user_like_count($user->id);
         }
 
         public function visitor_like_count_attr($attr, $visitor) {

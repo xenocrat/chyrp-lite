@@ -82,8 +82,8 @@
             $posts = Post::find(array("placeholders" => true));
 
             usort($posts[0], function ($a, $b) {
-                $count_a = $this->get_post_comment_counts($a["id"]);
-                $count_b = $this->get_post_comment_counts($b["id"]);
+                $count_a = $this->get_post_comment_count($a["id"]);
+                $count_b = $this->get_post_comment_count($b["id"]);
 
                 if ($count_a == $count_b)
                     return 0;
@@ -837,7 +837,7 @@
             $post->has_many[] = "comments";
         }
 
-        private function get_post_comment_counts($post_id) {
+        private function get_post_comment_count($post_id) {
             if (!isset($this->caches["post_comment_counts"])) {
                 $counts = SQL::current()->select("comments",
                                                  array("COUNT(post_id) AS total", "post_id as post_id"),
@@ -862,7 +862,7 @@
             if ($post->no_results)
                 return 0;
 
-            return $this->get_post_comment_counts($post->id);
+            return $this->get_post_comment_count($post->id);
         }
 
         private function get_latest_comments($post_id) {
@@ -893,7 +893,7 @@
             return $this->get_latest_comments($post->id);
         }
 
-        private function get_user_comment_counts($user_id) {
+        private function get_user_comment_count($user_id) {
             if (!isset($this->caches["user_comment_counts"])) {
                 $this->caches["user_comment_counts"] = array();
 
@@ -918,7 +918,7 @@
             if ($user->no_results)
                 return 0;
 
-            return $this->get_user_comment_counts($user->id);
+            return $this->get_user_comment_count($user->id);
         }
 
         public function visitor_comment_count_attr($attr, $visitor) {

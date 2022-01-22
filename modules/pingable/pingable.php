@@ -177,7 +177,7 @@
             SQL::current()->delete("pingbacks", array("post_id" => $post->id));
         }
 
-        private function get_post_pingback_counts($post_id) {
+        private function get_post_pingback_count($post_id) {
             if (!isset($this->caches["post_pingback_counts"])) {
                 $counts = SQL::current()->select("pingbacks",
                                                  "COUNT(post_id) AS total, post_id as post_id",
@@ -201,7 +201,7 @@
             if ($post->no_results)
                 return 0;
 
-            return $this->get_post_pingback_counts($post->id);
+            return $this->get_post_pingback_count($post->id);
         }
 
         public function import_chyrp_post($entry, $post) {

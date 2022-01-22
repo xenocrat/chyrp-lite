@@ -66,7 +66,7 @@
             file_attachment($filedata, $filename.".csv");
         }
 
-        private function get_post_view_counts($post_id) {
+        private function get_post_view_count($post_id) {
             if (!isset($this->caches["post_view_counts"])) {
                 $counts = SQL::current()->select("views",
                                                  "COUNT(post_id) AS total, post_id as post_id",
@@ -90,6 +90,6 @@
             if ($post->no_results)
                 return 0;
 
-            return $this->get_post_view_counts($post->id);
+            return $this->get_post_view_count($post->id);
         }
     }

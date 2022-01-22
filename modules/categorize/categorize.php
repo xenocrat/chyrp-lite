@@ -134,7 +134,7 @@
             }
         }
 
-        private function get_category_post_counts($category_id) {
+        private function get_category_post_count($category_id) {
             if (!isset($this->caches["category_post_counts"])) {
                 $counts = SQL::current()->select("post_attributes",
                                                  "COUNT(value) AS total, value AS category_id",
@@ -158,7 +158,7 @@
             if ($category->no_results)
                 return 0;
 
-            return $this->get_category_post_counts($category->id);
+            return $this->get_category_post_count($category->id);
         }
 
         public function twig_context_main($context) {
