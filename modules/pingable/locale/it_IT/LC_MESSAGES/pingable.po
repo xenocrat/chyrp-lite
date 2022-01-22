@@ -45,7 +45,7 @@ msgid "Manage Pingbacks"
 msgstr "Gestisci Pingbacks"
 
 #: modules/pingable/admin/pages/manage_pingbacks.twig:16
-#: modules/pingable/pingable.php:147 modules/pingable/pingable.php:160
+#: modules/pingable/pingable.php:151 modules/pingable/pingable.php:164
 msgid "Pingbacks"
 msgstr "Pingback"
 
@@ -79,68 +79,68 @@ msgstr ""
 msgid "Do you want to remove pingbacks from the database?"
 msgstr "Si desidera rimuovere gli avvisi dal database?"
 
-#: modules/pingable/pingable.php:21
+#: modules/pingable/pingable.php:25
 msgid "Edit Pingbacks"
 msgstr "Modifica dei Pingbacks"
 
-#: modules/pingable/pingable.php:22
+#: modules/pingable/pingable.php:26
 msgid "Delete Pingbacks"
 msgstr "Elimina Pingbacks"
 
-#: modules/pingable/pingable.php:32
+#: modules/pingable/pingable.php:36
 msgid "A ping from your URL is already registered."
 msgstr "Un ping dall'URL è già registrato."
 
-#: modules/pingable/pingable.php:35
+#: modules/pingable/pingable.php:39
 msgid "Your URL is too long to be stored in our database."
 msgstr "Il tuo URL è troppo lungo per essere memorizzato nel nostro database."
 
-#: modules/pingable/pingable.php:39
+#: modules/pingable/pingable.php:43
 msgid "Pingback registered!"
 msgstr "Pingback registrato!"
 
-#: modules/pingable/pingable.php:45
+#: modules/pingable/pingable.php:49
 msgid "An ID is required to edit a pingback."
 msgstr "È necessario un ID per modificare un Pingback."
 
-#: modules/pingable/pingable.php:50 modules/pingable/pingable.php:74
-#: modules/pingable/pingable.php:93 modules/pingable/pingable.php:116
+#: modules/pingable/pingable.php:54 modules/pingable/pingable.php:78
+#: modules/pingable/pingable.php:97 modules/pingable/pingable.php:120
 msgid "Pingback not found."
 msgstr "Pingback non trovato."
 
-#: modules/pingable/pingable.php:54 modules/pingable/pingable.php:78
+#: modules/pingable/pingable.php:58 modules/pingable/pingable.php:82
 msgid "You do not have sufficient privileges to edit this pingback."
 msgstr ""
 "Non si dispone di privilegi sufficienti per modificare questo Pingback."
 
-#: modules/pingable/pingable.php:65
+#: modules/pingable/pingable.php:69
 msgid "An ID is required to update a pingback."
 msgstr "È necessario un ID per aggiornare un Pingback."
 
-#: modules/pingable/pingable.php:68
+#: modules/pingable/pingable.php:72
 msgid "No Title Specified"
 msgstr "Nessun titolo specificato"
 
-#: modules/pingable/pingable.php:69
+#: modules/pingable/pingable.php:73
 msgid "A title is required to update a pingback."
 msgstr "È necessario un titolo per aggiornare un Pingback."
 
-#: modules/pingable/pingable.php:82
+#: modules/pingable/pingable.php:86
 msgid "Pingback updated."
 msgstr "Pingback aggiornato."
 
-#: modules/pingable/pingable.php:88 modules/pingable/pingable.php:108
+#: modules/pingable/pingable.php:92 modules/pingable/pingable.php:112
 msgid "An ID is required to delete a pingback."
 msgstr "È necessario un ID per eliminare un Pingback."
 
-#: modules/pingable/pingable.php:97 modules/pingable/pingable.php:120
+#: modules/pingable/pingable.php:101 modules/pingable/pingable.php:124
 msgid "You do not have sufficient privileges to delete this pingback."
 msgstr "Non si dispone di privilegi sufficienti per eliminare questo Pingback."
 
-#: modules/pingable/pingable.php:124
+#: modules/pingable/pingable.php:128
 msgid "Pingback deleted."
 msgstr "Pingback eliminato."
 
-#: modules/pingable/pingable.php:130
+#: modules/pingable/pingable.php:134
 msgid "You do not have sufficient privileges to manage pingbacks."
 msgstr "Non si dispone di privilegi sufficienti per gestire i Pingbacks."

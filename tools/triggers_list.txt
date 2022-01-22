@@ -349,25 +349,25 @@ Arguments:
 visitor_authenticate
 --------------------
 Called from:
-	includes/helpers.php on line 690
+	includes/helpers.php on line 691
 
 
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 2171
+	includes/helpers.php on line 2177
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 2188
+	includes/helpers.php on line 2194
 
 
 send_correspondence
 -------------------
 Called from:
-	includes/helpers.php on line 2471
+	includes/helpers.php on line 2477
 
 Arguments:
 	$action, $params
@@ -376,7 +376,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 2499
+	includes/helpers.php on line 2505
 
 Arguments:
 	$ob
@@ -553,7 +553,7 @@ Arguments:
 comments_false_positives
 ------------------------
 Called from:
-	modules/comments/comments.php on line 440
+	modules/comments/comments.php on line 462
 
 Arguments:
 	$false_positives
@@ -562,7 +562,7 @@ Arguments:
 comments_false_negatives
 ------------------------
 Called from:
-	modules/comments/comments.php on line 443
+	modules/comments/comments.php on line 465
 
 Arguments:
 	$false_negatives
@@ -571,7 +571,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 733
+	modules/comments/comments.php on line 755
 
 Arguments:
 	$comment, $feed
@@ -1050,7 +1050,7 @@ Target:
 keyword_search
 --------------
 Called from:
-	includes/helpers.php on line 925
+	includes/helpers.php on line 926
 
 Target:
 	$search
@@ -1062,7 +1062,7 @@ Arguments:
 link_regexp
 -----------
 Called from:
-	includes/helpers.php on line 1516
+	includes/helpers.php on line 1517
 
 Target:
 	$expressions
@@ -1071,7 +1071,7 @@ Target:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 2401
+	includes/helpers.php on line 2407
 
 Target:
 	$function
@@ -1080,7 +1080,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 2500
+	includes/helpers.php on line 2506
 
 Target:
 	$nonce

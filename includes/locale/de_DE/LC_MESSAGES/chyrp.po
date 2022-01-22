@@ -53,7 +53,7 @@ msgstr "Abfragezeichenfolge"
 msgid "Parameters"
 msgstr "Parameter"
 
-#: includes/class/Query.php:154 includes/class/SQL.php:96 install.php:645
+#: includes/class/Query.php:154 includes/class/SQL.php:91 install.php:645
 #, php-format
 msgid "Database error: %s"
 msgstr "Datenbankfehler: %s"
@@ -80,14 +80,14 @@ msgstr "Route wurde mit einem ungültigen Controller initiiert."
 #: includes/controller/Admin.php:1947 includes/controller/Admin.php:1950
 #: includes/controller/Admin.php:2147 includes/controller/Ajax.php:31
 #: includes/controller/Ajax.php:170 includes/download.php:12
-#: includes/download.php:15 includes/error.php:149 includes/helpers.php:1829
-#: includes/helpers.php:1835 includes/helpers.php:1838
-#: includes/helpers.php:1841 includes/helpers.php:1870
-#: includes/helpers.php:1873 includes/helpers.php:1876
-#: includes/helpers.php:1974 includes/helpers.php:1977
+#: includes/download.php:15 includes/error.php:149 includes/helpers.php:1830
+#: includes/helpers.php:1836 includes/helpers.php:1839
+#: includes/helpers.php:1842 includes/helpers.php:1876
+#: includes/helpers.php:1879 includes/helpers.php:1882
 #: includes/helpers.php:1980 includes/helpers.php:1983
 #: includes/helpers.php:1986 includes/helpers.php:1989
-#: includes/helpers.php:1992 includes/helpers.php:1997
+#: includes/helpers.php:1992 includes/helpers.php:1995
+#: includes/helpers.php:1998 includes/helpers.php:2003
 #: includes/thumbnail.php:15 includes/thumbnail.php:18
 #: includes/thumbnail.php:33 includes/thumbnail.php:195
 #: includes/thumbnail.php:235 install.php:830 upgrade.php:173 upgrade.php:186
@@ -142,7 +142,7 @@ msgstr "Aktion nicht gültig."
 #: includes/controller/Ajax.php:132 includes/controller/Ajax.php:135
 #: includes/controller/Ajax.php:163 includes/controller/Ajax.php:166
 #: includes/controller/Main.php:343 includes/controller/Main.php:401
-#: includes/download.php:18 includes/helpers.php:1832 includes/thumbnail.php:21
+#: includes/download.php:18 includes/helpers.php:1833 includes/thumbnail.php:21
 msgid "Access Denied"
 msgstr "Zugriff verweigert"
 
@@ -151,7 +151,7 @@ msgstr "Zugriff verweigert"
 msgid "You are not allowed to view this site."
 msgstr "Du hast keinen Zugriff auf diese Seite."
 
-#: includes/class/SQL.php:76
+#: includes/class/SQL.php:73
 msgid "PDO driver is unavailable for this database."
 msgstr "PDO Treiber ist für diese Datenbank nicht verfügbar."
 
@@ -962,69 +962,69 @@ msgstr ""
 msgid "The requested resource was not found."
 msgstr "Die angeforderte Ressource wurde nicht gefunden."
 
-#: includes/helpers.php:1451 includes/helpers.php:1589
+#: includes/helpers.php:1452 includes/helpers.php:1590
 #, php-format
 msgid "Socket error: %s"
 msgstr "Socketfehler: %s"
 
-#: includes/helpers.php:1666
+#: includes/helpers.php:1667
 msgid "Please create the uploads directory."
 msgstr "Bitte erstelle den uploads Ordner."
 
-#: includes/helpers.php:1668
+#: includes/helpers.php:1669
 msgid "Please make the uploads directory writable."
 msgstr "Bitte den uploads Ordner beschreibbar machen."
 
-#: includes/helpers.php:1686
+#: includes/helpers.php:1687
 #, php-format
 msgid "%s module is missing."
 msgstr "%s Modul nicht gefunden."
 
-#: includes/helpers.php:1695
+#: includes/helpers.php:1696
 #, php-format
 msgid "%s module is damaged."
 msgstr "%s Modul ist beschädigt."
 
-#: includes/helpers.php:1709
+#: includes/helpers.php:1710
 #, php-format
 msgid "%s feather is missing."
 msgstr "%s Feather nicht gefunden."
 
-#: includes/helpers.php:1718
+#: includes/helpers.php:1719
 #, php-format
 msgid "%s feather is damaged."
 msgstr "%s Feather ist beschädigt."
 
-#: includes/helpers.php:1780 includes/helpers.php:1801
+#: includes/helpers.php:1781 includes/helpers.php:1802
 #, php-format
 msgid "Execution of %s has been cancelled."
 msgstr "Ausführung von %s wurde abgebrochen."
 
-#: includes/helpers.php:1829
+#: includes/helpers.php:1830
 msgid "Uploaded file is of an unsupported type."
 msgstr "Der Typ der hochgeladenen Datei wird nicht unterstützt."
 
-#: includes/helpers.php:1832
+#: includes/helpers.php:1833
 msgid "Only uploaded files are accepted."
 msgstr "Nur hochgeladene Dateien werden akzeptiert."
 
-#: includes/helpers.php:1835 includes/helpers.php:1870
+#: includes/helpers.php:1836 includes/helpers.php:1876
 #: includes/lib/XMLRPC.php:196
 msgid "Upload path does not exist."
 msgstr "Uploadpfad existiert nicht."
 
-#: includes/helpers.php:1838 includes/helpers.php:1873
+#: includes/helpers.php:1839 includes/helpers.php:1879
 #: includes/lib/XMLRPC.php:199
 msgid "Upload path is not writable."
 msgstr "Uploadpfad ist nicht beschreibbar."
 
-#: includes/helpers.php:1841 includes/helpers.php:1876
-#: includes/helpers.php:1987 includes/lib/XMLRPC.php:202 upgrade.php:125
+#: includes/helpers.php:1842 includes/helpers.php:1882
+#: includes/helpers.php:1993 includes/lib/XMLRPC.php:202 upgrade.php:125
 #: upgrade.php:142 upgrade.php:159
 msgid "Failed to write file to disk."
 msgstr "Schreiben der Datei auf den Speicher ist fehlgeschlagen."
 
-#: includes/helpers.php:1975
+#: includes/helpers.php:1981
 msgid ""
 "The uploaded file exceeds the <code>upload_max_filesize</code> directive in "
 "php.ini."
@@ -1032,7 +1032,7 @@ msgstr ""
 "Die hochgeladene Datei überschreitet die <code>upload_max_filesize</code> "
 "Directive in der php.ini."
 
-#: includes/helpers.php:1978
+#: includes/helpers.php:1984
 msgid ""
 "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the "
 "HTML form."
@@ -1040,24 +1040,24 @@ msgstr ""
 "Die hochgeladene Datei überschreitet die <code>MAX_FILE_SIZE</code> "
 "Directive des HTML Formulars."
 
-#: includes/helpers.php:1981
+#: includes/helpers.php:1987
 msgid "The uploaded file was only partially uploaded."
 msgstr "Die hochgeladene Datei wurde nur teilweise hochgeladen."
 
-#: includes/helpers.php:1984
+#: includes/helpers.php:1990
 msgid "Missing a temporary folder."
 msgstr "Ein temporärer Ordner wurde nicht gefunden."
 
-#: includes/helpers.php:1990
+#: includes/helpers.php:1996
 msgid "File upload was stopped by a PHP extension."
 msgstr "Dateiupload wurde von einer PHP Extension angehalten."
 
-#: includes/helpers.php:1993
+#: includes/helpers.php:1999
 #, php-format
 msgid "File upload failed with error %d."
 msgstr "Dateiupload ist mit Fehler %d fehlgeschlagen."
 
-#: includes/helpers.php:1998
+#: includes/helpers.php:2004
 #, php-format
 msgid ""
 "The uploaded file exceeds the maximum size of %d Megabytes allowed by this "
@@ -1066,59 +1066,59 @@ msgstr ""
 "Die hochgeladene Datei erreicht die Maximalgröße von %d Megabytes, die diese "
 "Seite erlaubt."
 
-#: includes/helpers.php:2239
+#: includes/helpers.php:2245
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr "JSON encoding Fehler: %s"
 
-#: includes/helpers.php:2261
+#: includes/helpers.php:2267
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr "JSON decoding Fehler: %s"
 
-#: includes/helpers.php:2327
+#: includes/helpers.php:2333
 msgid "Failed to create Zip archive."
 msgstr "Fehler beim Erstellen des Zip-Archivs."
 
-#: includes/helpers.php:2430
+#: includes/helpers.php:2436
 #, php-format
 msgid "Activate your account at %s"
 msgstr "Aktiviere Deinen Account bei %s"
 
-#: includes/helpers.php:2431 includes/helpers.php:2445
-#: includes/helpers.php:2459
+#: includes/helpers.php:2437 includes/helpers.php:2451
+#: includes/helpers.php:2465
 #, php-format
 msgid "Hello, %s."
 msgstr "Hallo, %s."
 
-#: includes/helpers.php:2434
+#: includes/helpers.php:2440
 msgid "You are receiving this message because you registered a new account."
 msgstr "Du erhälst diese Nachricht, weil Du einen neuen Account registierst."
 
-#: includes/helpers.php:2437
+#: includes/helpers.php:2443
 msgid "Visit this link to activate your account:"
 msgstr "Besuche den folgenden Link um Deinen Account zu aktivieren:"
 
-#: includes/helpers.php:2444
+#: includes/helpers.php:2450
 #, php-format
 msgid "Reset your password at %s"
 msgstr "Passwortzurücksetzung bei %s"
 
-#: includes/helpers.php:2448
+#: includes/helpers.php:2454
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 "Du erhälst diese Nachricht, weil Du ein neues Passwort angefordert hast."
 
-#: includes/helpers.php:2451
+#: includes/helpers.php:2457
 msgid "Visit this link to reset your password:"
 msgstr "Besuche den folgenden Link um Dein Passwort zurückzusetzen:"
 
-#: includes/helpers.php:2458
+#: includes/helpers.php:2464
 #, php-format
 msgid "Your new password for %s"
 msgstr "Dein neues Passwort für %s"
 
-#: includes/helpers.php:2462
+#: includes/helpers.php:2468
 #, php-format
 msgid "Your new password is: %s"
 msgstr "Dein neues Passwort ist: %s"
@@ -1416,10 +1416,12 @@ msgstr ""
 "Stellen Sie sicher, dass Ihre PostgreSQL-Datenbank UTF-8-Codierung verwendet."
 
 #: install.php:886
-msgid "Case-insensitive collation is recommended for your MySQL database."
+msgid ""
+"The collation <code>utf8mb4_general_ci</code> is recommended for your MySQL "
+"database."
 msgstr ""
-"Für Ihre MySQL-Datenbank wird eine Kollatierung ohne Berücksichtigung der "
-"Groß- und Kleinschreibung empfohlen."
+"Für die MySQL-Datenbank wird die Sortierung <code>utf8mb4_general_ci</code> "
+"empfohlen."
 
 #: install.php:889
 msgid ""
@@ -1485,7 +1487,7 @@ msgstr "Installieren!"
 msgid "Installation Complete"
 msgstr "Installation vollständig"
 
-#: install.php:951 upgrade.php:666
+#: install.php:951 upgrade.php:689
 msgid "What now?"
 msgstr "Und weiter?"
 
@@ -1498,47 +1500,47 @@ msgid "Log in to your site and configure things to your liking."
 msgstr ""
 "Logge Dich auf deiner Seite ein und passe die Dinge deiner Vorstellung an."
 
-#: install.php:956 upgrade.php:672
+#: install.php:956 upgrade.php:695
 msgid "Take me to my site!"
 msgstr "Bring mich zur Seite!"
 
-#: upgrade.php:391
+#: upgrade.php:413
 msgid "Chyrp Lite Upgrader"
 msgstr "Chyrp Lite Upgrader"
 
-#: upgrade.php:655
+#: upgrade.php:678
 msgid "Halt!"
 msgstr "Halt!"
 
-#: upgrade.php:656
+#: upgrade.php:679
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr "Bitte beachte diese Vorsichtsmaßnahmen bevor Du das Upgrade ausführst:"
 
-#: upgrade.php:658
+#: upgrade.php:681
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr ""
 "<strong>Erstelle ein Backup Deiner Datenbank bevor Du fortfährst!</strong>"
 
-#: upgrade.php:659
+#: upgrade.php:682
 msgid "Tell your users that your site is offline for maintenance."
 msgstr "Sag Deinen Besuchern Bescheid, dass diese Seite offline sein wird."
 
-#: upgrade.php:662
+#: upgrade.php:685
 msgid "Upgrade me!"
 msgstr "Upgrade!"
 
-#: upgrade.php:665
+#: upgrade.php:688
 msgid "Upgrade Complete"
 msgstr "Upgrade vollständig"
 
-#: upgrade.php:668
+#: upgrade.php:691
 msgid "Take action to resolve any errors reported on this page."
 msgstr "Bitte löse alle auf dieser Seite stehenden Fehler."
 
-#: upgrade.php:669
+#: upgrade.php:692
 msgid "Run this upgrader again if you need to."
 msgstr "Führe diesen Upgrader erneut aus, wenn es benötigt wird."
 
-#: upgrade.php:670
+#: upgrade.php:693
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr "Lösche <em>upgrade.php</em>, wenn du fertig mit dem Upgraden bist."

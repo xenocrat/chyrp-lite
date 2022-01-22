@@ -25,19 +25,19 @@ msgstr "统计您的帖子被查看的次数。"
 msgid "Do you want to remove view counts from the database?"
 msgstr "您想从数据库中删除查看计数？"
 
-#: modules/post_views/post_views.php:20
+#: modules/post_views/post_views.php:24
 msgid "View Count"
 msgstr "查看计数"
 
-#: modules/post_views/post_views.php:26
+#: modules/post_views/post_views.php:30
 #, php-format
 msgid "Download view count for &#8220;%s&#8221;"
 msgstr "从&#8220;%s&#8221;下载查看计数"
 
-#: modules/post_views/post_views.php:43
+#: modules/post_views/post_views.php:47
 msgid "An ID is required to download a view count."
 msgstr "下载查看计数需要一个ID。"
 
-#: modules/post_views/post_views.php:52
+#: modules/post_views/post_views.php:56
 msgid "You do not have sufficient privileges to download this view count."
 msgstr "您没有足够的权限下载查看计数。"

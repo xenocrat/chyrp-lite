@@ -38,7 +38,7 @@ msgstr "Mostra sulle pagine di indice"
 msgid "Enables like functionality on blog index pages."
 msgstr "Abilita la funzionalità like nelle pagine di indice del blog."
 
-#: modules/likes/info.php:3 modules/likes/likes.php:64
+#: modules/likes/info.php:3 modules/likes/likes.php:68
 msgid "Likes"
 msgstr "Like"
 
@@ -52,64 +52,68 @@ msgstr ""
 "Si prega di ricordare di aggiornare le impostazioni di autorizzazione per "
 "ogni gruppo."
 
-#: modules/likes/likes.php:33
+#: modules/likes/likes.php:37
 msgid "Like Posts"
 msgstr "Like post"
 
-#: modules/likes/likes.php:34
+#: modules/likes/likes.php:38
 msgid "Unlike Posts"
 msgstr "Unlike post"
 
-#: modules/likes/likes.php:71 modules/likes/likes.php:106
+#: modules/likes/likes.php:89
+msgid "Most liked posts"
+msgstr "Post più like"
+
+#: modules/likes/likes.php:94 modules/likes/likes.php:129
 msgid "An ID is required to like a post."
 msgstr "Un ID è necessario per aggiungere like a un post."
 
-#: modules/likes/likes.php:75 modules/likes/likes.php:110
+#: modules/likes/likes.php:98 modules/likes/likes.php:133
 msgid "You do not have sufficient privileges to like posts."
 msgstr "Non si dispone di privilegi sufficienti per aggiungere like ai post."
 
-#: modules/likes/likes.php:83
+#: modules/likes/likes.php:106
 msgid "Post liked."
 msgstr "Like aggiunto al post."
 
-#: modules/likes/likes.php:89 modules/likes/likes.php:130
+#: modules/likes/likes.php:112 modules/likes/likes.php:153
 msgid "An ID is required to unlike a post."
 msgstr "Un ID è richiesto per aggiungere unlike a un post."
 
-#: modules/likes/likes.php:93 modules/likes/likes.php:134
+#: modules/likes/likes.php:116 modules/likes/likes.php:157
 msgid "You do not have sufficient privileges to unlike posts."
 msgstr "Non si dispone di privilegi sufficienti per aggiungere unlike ai post."
 
-#: modules/likes/likes.php:101
+#: modules/likes/likes.php:124
 msgid "Post unliked."
 msgstr "Unlike aggiunto al post."
 
-#: modules/likes/likes.php:122 modules/likes/likes.php:282
+#: modules/likes/likes.php:145 modules/likes/likes.php:316
 msgid "You like this."
 msgstr "Hai aggiunto like."
 
-#: modules/likes/likes.php:123 modules/likes/likes.php:284
+#: modules/likes/likes.php:146 modules/likes/likes.php:318
 #, php-format
 msgid "You and %d person like this."
 msgid_plural "You and %d people like this."
 msgstr[0] "Tu e %d avete aggiunto like."
 msgstr[1] "Tu e alter %d persone avete aggiunto like."
 
-#: modules/likes/likes.php:146 modules/likes/likes.php:253
+#: modules/likes/likes.php:169 modules/likes/likes.php:287
 msgid "No likes yet."
 msgstr "Nessun like."
 
-#: modules/likes/likes.php:147 modules/likes/likes.php:254
+#: modules/likes/likes.php:170 modules/likes/likes.php:288
 #, php-format
 msgid "%d person likes this."
 msgid_plural "%d people like this."
 msgstr[0] "%d persona ha aggiunto like."
 msgstr[1] "%d persone hanno aggiunto like."
 
-#: modules/likes/likes.php:241 modules/likes/likes.php:270
+#: modules/likes/likes.php:275 modules/likes/likes.php:304
 msgid "Like!"
 msgstr "Like!"
 
-#: modules/likes/likes.php:242 modules/likes/likes.php:271
+#: modules/likes/likes.php:276 modules/likes/likes.php:305
 msgid "Unlike!"
 msgstr "Unlike!"
