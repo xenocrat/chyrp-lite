@@ -2406,7 +2406,7 @@ Returns:
 
 Function: upload_from_url
 -------------------------
-Copy a file from a remote URL to the uploads directory.
+Copies a file from a remote URL to the uploads directory.
 
 Parameters:
     $url - The URL of the resource to be copied.
@@ -2414,7 +2414,7 @@ Parameters:
     $timeout - The maximum number of seconds to wait.
 
 Returns:
-    The filename of the upload relative to the uploads directory.
+    The filename of the copied file, or false on failure.
 
 
 Function: uploaded
