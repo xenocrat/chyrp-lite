@@ -1846,7 +1846,7 @@
 
     /**
      * Function: upload_from_url
-     * Copy a file from a remote URL to the uploads directory.
+     * Copies a file from a remote URL to the uploads directory.
      *
      * Parameters:
      *     $url - The URL of the resource to be copied.
@@ -1854,9 +1854,9 @@
      *     $timeout - The maximum number of seconds to wait.
      *
      * Returns:
-     *     The filename of the upload relative to the uploads directory.
+     *     The filename of the copied file, or false on failure.
      */
-    function upload_from_url($url, $redirects = 3, $timeout = 10): string {
+    function upload_from_url($url, $redirects = 3, $timeout = 10) {
         if (!preg_match("~[^ /\?]+(?=($|\?))~", $url, $match))
             return false;
 
