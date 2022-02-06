@@ -7,8 +7,8 @@
     header("Content-Type: text/html; charset=UTF-8");
 
     define('DEBUG',            true);
-    define('CHYRP_VERSION',    "2022.01");
-    define('CHYRP_CODENAME',   "Sultan");
+    define('CHYRP_VERSION',    "2022.02");
+    define('CHYRP_CODENAME',   "Coal");
     define('CHYRP_IDENTITY',   "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
     define('MAIN',             false);
     define('ADMIN',            false);

@@ -10,11 +10,11 @@
 
     # Constant: CHYRP_VERSION
     # Version number for this release.
-    define('CHYRP_VERSION', "2022.01");
+    define('CHYRP_VERSION', "2022.02");
 
     # Constant: CHYRP_CODENAME
     # The codename for this version.
-    define('CHYRP_CODENAME', "Sultan");
+    define('CHYRP_CODENAME', "Coal");
 
     # Constant: CHYRP_IDENTITY
     # The string identifying this version.
