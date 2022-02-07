@@ -8,6 +8,22 @@
         # Holds the current query.
         public $query;
 
+        # Variable: $result
+        # Holds the current result.
+        public $result;
+
+        # Variable: $queryString
+        # Holds the current query string.
+        public $queryString = "";
+
+        # Array: $params
+        # Holds the query parameters.
+        private $params = array();
+
+        # Boolean: $throw_exceptions
+        # Throw exceptions instead of calling error()?
+        private $throw_exceptions = false;
+
         /**
          * Function: __construct
          * Creates a query based on the <SQL.interface>.
@@ -60,7 +76,7 @@
 
             try {
                 $this->query = $this->db->prepare($query);
-                $result = $this->query->execute($params);
+                $this->result = $this->query->execute($params);
                 $this->query->setFetchMode(PDO::FETCH_ASSOC);
                 $this->queryString = $query;
 
@@ -71,7 +87,7 @@
                                                       $this->sql->escape($val))."\\1",
                                                       $this->queryString);
 
-                if (!$result)
+                if (!$this->result)
                     throw new PDOException(__("PDO failed to execute the prepared statement."));
 
             } catch (PDOException $e) {
