@@ -402,6 +402,29 @@
                          array("updated_at" => "0001-01-01 00:00:00"));
     }
 
+    /**
+     * Function: mysql_utf8mb4
+     * Upgrades MySQL database tables and columns to utf8mb4.
+     *
+     * Versions: 2022.01 => 2022.02
+     */
+    function mysql_utf8mb4() {
+        $sql = SQL::current();
+
+        if ($sql->adapter != "mysql")
+            return;
+
+        $tables = $sql->query("SHOW TABLE STATUS")->fetchAll();
+
+        foreach ($tables as $table) {
+            if (strpos($table["Collation"], "utf8mb4_") === 0)
+                continue;
+
+            $sql->query("ALTER TABLE \"".$table["Name"].
+                        "\" CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci");
+        }
+    }
+
     #---------------------------------------------
     # Output Starts
     #---------------------------------------------
@@ -651,6 +674,7 @@
         add_search_pages();
         fix_sqlite_post_pinned();
         fix_post_updated();
+        mysql_utf8mb4();
 
         # Perform module upgrades.
         foreach ($config->enabled_modules as $module)
