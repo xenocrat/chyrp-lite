@@ -5,15 +5,15 @@
      */
     class Query {
         # Variable: $query
-        # Holds the current query.
+        # Holds the prepared query.
         public $query;
 
-        # Variable: $result
-        # Holds the current result.
+        # Boolean: $result
+        # The result of execution.
         public $result;
 
         # Variable: $queryString
-        # Holds the current query string.
+        # Holds the query statement.
         public $queryString = "";
 
         # Array: $params
