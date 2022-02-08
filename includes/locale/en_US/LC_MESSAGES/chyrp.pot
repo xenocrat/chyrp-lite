@@ -28,19 +28,19 @@ msgstr ""
 msgid "&larr; First"
 msgstr ""
 
-#: includes/class/Query.php:75
+#: includes/class/Query.php:91
 msgid "PDO failed to execute the prepared statement."
 msgstr ""
 
-#: includes/class/Query.php:148
+#: includes/class/Query.php:164
 msgid "Query String"
 msgstr ""
 
-#: includes/class/Query.php:150
+#: includes/class/Query.php:166
 msgid "Parameters"
 msgstr ""
 
-#: includes/class/Query.php:154
+#: includes/class/Query.php:170
 #: includes/class/SQL.php:91
 #: install.php:645
 #, php-format
@@ -1674,7 +1674,7 @@ msgid "Installation Complete"
 msgstr ""
 
 #: install.php:951
-#: upgrade.php:689
+#: upgrade.php:713
 msgid "What now?"
 msgstr ""
 
@@ -1687,47 +1687,47 @@ msgid "Log in to your site and configure things to your liking."
 msgstr ""
 
 #: install.php:956
-#: upgrade.php:695
+#: upgrade.php:719
 msgid "Take me to my site!"
 msgstr ""
 
-#: upgrade.php:413
+#: upgrade.php:436
 msgid "Chyrp Lite Upgrader"
 msgstr ""
 
-#: upgrade.php:678
+#: upgrade.php:702
 msgid "Halt!"
 msgstr ""
 
-#: upgrade.php:679
+#: upgrade.php:703
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr ""
 
-#: upgrade.php:681
+#: upgrade.php:705
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr ""
 
-#: upgrade.php:682
+#: upgrade.php:706
 msgid "Tell your users that your site is offline for maintenance."
 msgstr ""
 
-#: upgrade.php:685
+#: upgrade.php:709
 msgid "Upgrade me!"
 msgstr ""
 
-#: upgrade.php:688
+#: upgrade.php:712
 msgid "Upgrade Complete"
 msgstr ""
 
-#: upgrade.php:691
+#: upgrade.php:715
 msgid "Take action to resolve any errors reported on this page."
 msgstr ""
 
-#: upgrade.php:692
+#: upgrade.php:716
 msgid "Run this upgrader again if you need to."
 msgstr ""
 
-#: upgrade.php:693
+#: upgrade.php:717
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr ""
 

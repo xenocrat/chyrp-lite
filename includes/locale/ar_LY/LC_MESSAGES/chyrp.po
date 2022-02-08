@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: chyrplite\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-01-21 19:20+0000\n"
+"PO-Revision-Date: 2022-02-08 18:36+0000\n"
 "Last-Translator: Anas Mohammed Almzoghy <a.almzoghy@gmail.com>\n"
 "Language-Team: Arabic\n"
 "Language: ar_LY\n"
@@ -47,19 +47,19 @@ msgstr "الأخيرة &rarr;"
 msgid "&larr; First"
 msgstr "&larr; الأولى"
 
-#: includes/class/Query.php:75
+#: includes/class/Query.php:91
 msgid "PDO failed to execute the prepared statement."
 msgstr "فشل تنفيذ جملة إتصال PDO."
 
-#: includes/class/Query.php:148
+#: includes/class/Query.php:164
 msgid "Query String"
 msgstr "سلسلة الاستعلام"
 
-#: includes/class/Query.php:150
+#: includes/class/Query.php:166
 msgid "Parameters"
 msgstr "البارامترات"
 
-#: includes/class/Query.php:154 includes/class/SQL.php:91 install.php:645
+#: includes/class/Query.php:170 includes/class/SQL.php:91 install.php:645
 #, php-format
 msgid "Database error: %s"
 msgstr "خطأ في قاعدة البيانات: %s"
@@ -1467,7 +1467,7 @@ msgstr "قم بتثبيتي!"
 msgid "Installation Complete"
 msgstr "اكتمل التثبيت"
 
-#: install.php:951 upgrade.php:689
+#: install.php:951 upgrade.php:713
 msgid "What now?"
 msgstr "ماذا الآن؟"
 
@@ -1479,46 +1479,46 @@ msgstr "احذف <em>install.php</em>، لن تحتاج إليه بعد الآن
 msgid "Log in to your site and configure things to your liking."
 msgstr "سجّل الدخول إلى موقعك وقم بتهيئة الأشياء كيفما أحببت."
 
-#: install.php:956 upgrade.php:695
+#: install.php:956 upgrade.php:719
 msgid "Take me to my site!"
 msgstr "خذني إلى موقعي!"
 
-#: upgrade.php:413
+#: upgrade.php:436
 msgid "Chyrp Lite Upgrader"
 msgstr "ترقية Chyrp Lite"
 
-#: upgrade.php:678
+#: upgrade.php:702
 msgid "Halt!"
 msgstr "إيقاف!"
 
-#: upgrade.php:679
+#: upgrade.php:703
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr "يرجى اتخاذ هذه التدابير الاحترازية قبل الترقية:"
 
-#: upgrade.php:681
+#: upgrade.php:705
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr "<strong>قم بنسخ قاعدة البيانات الخاصة بك قبل المتابعة!</strong>"
 
-#: upgrade.php:682
+#: upgrade.php:706
 msgid "Tell your users that your site is offline for maintenance."
 msgstr "أخبر المستخدمين أن موقعك متوقف للصيانة."
 
-#: upgrade.php:685
+#: upgrade.php:709
 msgid "Upgrade me!"
 msgstr "قم بالترقية!"
 
-#: upgrade.php:688
+#: upgrade.php:712
 msgid "Upgrade Complete"
 msgstr "تمت الترقية"
 
-#: upgrade.php:691
+#: upgrade.php:715
 msgid "Take action to resolve any errors reported on this page."
 msgstr "إتخذ إجراءات لحل أي أخطاء تظهر في هذه الصفحة."
 
-#: upgrade.php:692
+#: upgrade.php:716
 msgid "Run this upgrader again if you need to."
 msgstr "قم بتشغيل الترقية مرة أخرى إذا كنت بحاجة إلى ذلك."
 
-#: upgrade.php:693
+#: upgrade.php:717
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr "احذف <em>upgrade.php</em> بمجرد الانتهاء من الترقية."

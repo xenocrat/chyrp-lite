@@ -41,19 +41,19 @@ msgstr "最后 &rarr;"
 msgid "&larr; First"
 msgstr "&larr; 开始"
 
-#: includes/class/Query.php:75
+#: includes/class/Query.php:91
 msgid "PDO failed to execute the prepared statement."
 msgstr "PDO未能执行准备好的语句。"
 
-#: includes/class/Query.php:148
+#: includes/class/Query.php:164
 msgid "Query String"
 msgstr "查询语句"
 
-#: includes/class/Query.php:150
+#: includes/class/Query.php:166
 msgid "Parameters"
 msgstr "参数"
 
-#: includes/class/Query.php:154 includes/class/SQL.php:91 install.php:645
+#: includes/class/Query.php:170 includes/class/SQL.php:91 install.php:645
 #, php-format
 msgid "Database error: %s"
 msgstr "数据库错误： %s"
@@ -1457,7 +1457,7 @@ msgstr "安装！"
 msgid "Installation Complete"
 msgstr "安装完成"
 
-#: install.php:951 upgrade.php:689
+#: install.php:951 upgrade.php:713
 msgid "What now?"
 msgstr "现在做什么？"
 
@@ -1469,46 +1469,46 @@ msgstr "删除 <em>install.php</em>，您不再需要它。"
 msgid "Log in to your site and configure things to your liking."
 msgstr "登陆您的站点并且配置您喜欢的东西。"
 
-#: install.php:956 upgrade.php:695
+#: install.php:956 upgrade.php:719
 msgid "Take me to my site!"
 msgstr "前往我的站点！"
 
-#: upgrade.php:413
+#: upgrade.php:436
 msgid "Chyrp Lite Upgrader"
 msgstr "Chyrp Lite升级程序"
 
-#: upgrade.php:678
+#: upgrade.php:702
 msgid "Halt!"
 msgstr "等一下！"
 
-#: upgrade.php:679
+#: upgrade.php:703
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr "升级前请采取以下预防措施："
 
-#: upgrade.php:681
+#: upgrade.php:705
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr "<strong>开始前备份您的数据库！</strong>"
 
-#: upgrade.php:682
+#: upgrade.php:706
 msgid "Tell your users that your site is offline for maintenance."
 msgstr "告知您的用户站点处于离线状态以进行维护。"
 
-#: upgrade.php:685
+#: upgrade.php:709
 msgid "Upgrade me!"
 msgstr "升级！"
 
-#: upgrade.php:688
+#: upgrade.php:712
 msgid "Upgrade Complete"
 msgstr "升级完成"
 
-#: upgrade.php:691
+#: upgrade.php:715
 msgid "Take action to resolve any errors reported on this page."
 msgstr "采取措施解决此页面上报告的任何错误。"
 
-#: upgrade.php:692
+#: upgrade.php:716
 msgid "Run this upgrader again if you need to."
 msgstr "如果需要，再次运行此升级程序。"
 
-#: upgrade.php:693
+#: upgrade.php:717
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr "删除 <em>upgrade.php</em> 一旦您升级完成后。"

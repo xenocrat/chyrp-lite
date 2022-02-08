@@ -41,19 +41,19 @@ msgstr "Letzte &rarr;"
 msgid "&larr; First"
 msgstr "&larr; Erste"
 
-#: includes/class/Query.php:75
+#: includes/class/Query.php:91
 msgid "PDO failed to execute the prepared statement."
 msgstr "PDO konnte das vorbereitete Statement nicht ausführen."
 
-#: includes/class/Query.php:148
+#: includes/class/Query.php:164
 msgid "Query String"
 msgstr "Abfragezeichenfolge"
 
-#: includes/class/Query.php:150
+#: includes/class/Query.php:166
 msgid "Parameters"
 msgstr "Parameter"
 
-#: includes/class/Query.php:154 includes/class/SQL.php:91 install.php:645
+#: includes/class/Query.php:170 includes/class/SQL.php:91 install.php:645
 #, php-format
 msgid "Database error: %s"
 msgstr "Datenbankfehler: %s"
@@ -1487,7 +1487,7 @@ msgstr "Installieren!"
 msgid "Installation Complete"
 msgstr "Installation vollständig"
 
-#: install.php:951 upgrade.php:689
+#: install.php:951 upgrade.php:713
 msgid "What now?"
 msgstr "Und weiter?"
 
@@ -1500,47 +1500,47 @@ msgid "Log in to your site and configure things to your liking."
 msgstr ""
 "Logge Dich auf deiner Seite ein und passe die Dinge deiner Vorstellung an."
 
-#: install.php:956 upgrade.php:695
+#: install.php:956 upgrade.php:719
 msgid "Take me to my site!"
 msgstr "Bring mich zur Seite!"
 
-#: upgrade.php:413
+#: upgrade.php:436
 msgid "Chyrp Lite Upgrader"
 msgstr "Chyrp Lite Upgrader"
 
-#: upgrade.php:678
+#: upgrade.php:702
 msgid "Halt!"
 msgstr "Halt!"
 
-#: upgrade.php:679
+#: upgrade.php:703
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr "Bitte beachte diese Vorsichtsmaßnahmen bevor Du das Upgrade ausführst:"
 
-#: upgrade.php:681
+#: upgrade.php:705
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr ""
 "<strong>Erstelle ein Backup Deiner Datenbank bevor Du fortfährst!</strong>"
 
-#: upgrade.php:682
+#: upgrade.php:706
 msgid "Tell your users that your site is offline for maintenance."
 msgstr "Sag Deinen Besuchern Bescheid, dass diese Seite offline sein wird."
 
-#: upgrade.php:685
+#: upgrade.php:709
 msgid "Upgrade me!"
 msgstr "Upgrade!"
 
-#: upgrade.php:688
+#: upgrade.php:712
 msgid "Upgrade Complete"
 msgstr "Upgrade vollständig"
 
-#: upgrade.php:691
+#: upgrade.php:715
 msgid "Take action to resolve any errors reported on this page."
 msgstr "Bitte löse alle auf dieser Seite stehenden Fehler."
 
-#: upgrade.php:692
+#: upgrade.php:716
 msgid "Run this upgrader again if you need to."
 msgstr "Führe diesen Upgrader erneut aus, wenn es benötigt wird."
 
-#: upgrade.php:693
+#: upgrade.php:717
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr "Lösche <em>upgrade.php</em>, wenn du fertig mit dem Upgraden bist."
