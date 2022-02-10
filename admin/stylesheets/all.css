@@ -546,7 +546,6 @@ table tbody tr td.main {
 }
 table thead tr th.checkbox,
 table tbody tr td.checkbox,
-table thead tr th.controls,
 table tbody tr td.controls {
     text-align: center;
     vertical-align: middle;
