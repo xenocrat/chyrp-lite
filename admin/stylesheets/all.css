@@ -582,9 +582,11 @@ table tbody tr td.placeholder {
 table tbody tr td.status {
     background-color: #f2fbff;
 }
-table tbody tr.private td.status,
-table tbody tr.registered_only td.status {
+table tbody tr.private td.status {
     background-color: #faebe4;
+}
+table tbody tr.registered_only td.status {
+    background-color: #fffceb;
 }
 table tbody tr.public td.status {
     background-color: #ebfae4;
@@ -745,8 +747,8 @@ div.confirmation a.button {
     text-decoration: none;
 }
 *.tag_added {
-    background-color: #fffecd;
-    border-color: #e5d7a1;
+    background-color: #f2fbff;
+    border-color: #b8cdd9;
 }
 
 /* Group: Options */
@@ -807,10 +809,11 @@ span.options_extra {
     display: block;
     width: 100%;
     max-height: 10rem;
-    padding: 0.5rem;
-    background-color: #fbfbfb;
+    padding: 1rem;
+    background-color: #fffceb;
+    border: 1px solid #cfcfcf;
+    border-top: none;
     overflow-y: auto;
-    box-shadow: inset 0px 2px 4px 0px rgba(79, 79, 79, 0.25);
 }
 span.options_extra:empty {
     display: none;
