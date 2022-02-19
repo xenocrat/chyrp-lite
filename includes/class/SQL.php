@@ -33,28 +33,57 @@
         # Holds an error message from the last attempted query.
         public $error = null;
 
+        # String: $host
+        # Holds the host setting.
+        public $host = "";
+
+        # String: $username
+        # Holds the username setting.
+        public $username = "";
+
+        # String: $password
+        # Holds the password setting.
+        public $password = "";
+
+        # String: $database
+        # Holds the database setting.
+        public $database = "";
+
+        # String: $prefix
+        # Holds the prefix setting.
+        public $prefix = "";
+
+        # String: $adapter
+        # Holds the adapter setting.
+        public $adapter = "";
+
+        # Boolean: $connected
+        # Has a connection to the database been established?
+        private $connected = false;
+
         /**
          * Function: __construct
          * The class constructor is private so there is only one connection.
          *
          * Parameters:
-         *     $settings - An array of settings.
+         *     $settings - An array of settings (optional).
          */
         private function __construct($settings = array()) {
-            if (class_exists("Config") and !INSTALLING)
+            if (class_exists("Config"))
                 fallback($settings, Config::current()->sql);
 
-            foreach ($settings as $setting => $value)
-                $this->$setting = $value;
-
-            fallback($this->host, "");
-            fallback($this->username);
-            fallback($this->password);
-            fallback($this->database, "");
-            fallback($this->prefix, "");
-            fallback($this->adapter, "");
-
-            $this->connected = false;
+            foreach ($settings as $setting => $value) {
+                switch ($setting) {
+                    case "host":
+                    case "username":
+                    case "password":
+                    case "database":
+                    case "prefix":
+                    case "adapter":
+                        $this->$setting = fallback($value, "");
+                        break;
+                }
+            }
         }
 
         /**
@@ -62,7 +91,7 @@
          * Connects to the SQL database.
          *
          * Parameters:
-         *     $checking - Return a boolean of whether or not it could connect, instead of triggering an error.
+         *     $checking - Return a boolean for failure, instead of triggering an error?
          */
         public function connect($checking = false) {
             if ($this->connected)
@@ -82,13 +111,14 @@
                                         $this->username,
                                         $this->password);
 
-                $this->db->setAttribute(PDO::ATTR_PERSISTENT, false);
                 $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (PDOException $error) {
                 $this->error = $error->getMessage();
-                return ($checking) ?
-                    false :
-                    trigger_error(_f("Database error: %s", fix($this->error, false, true)), E_USER_ERROR) ;
+
+                if ($checking)
+                    return false;
+
+                trigger_error(_f("Database error: %s", fix($this->error, false, true)), E_USER_ERROR);
             }
 
             if ($this->adapter == "mysql") {
