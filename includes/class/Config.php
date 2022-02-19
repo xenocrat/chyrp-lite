@@ -13,18 +13,18 @@
          * Loads the configuration JSON file.
          */
         private function __construct() {
-            $filepath = INCLUDES_DIR.DIR."config.json.php";
+            if (!$this->read() and !INSTALLING)
+                trigger_error(__("Could not read the configuration file."), E_USER_ERROR);
 
-            if (!is_file($filepath) or !is_readable($filepath))
-                return (INSTALLING) ?
-                    false :
-                    trigger_error(__("Could not read the configuration file."), E_USER_ERROR) ;
+            foreach ($this->json as $setting => $value) {
+                if (is_numeric($setting))
+                    continue;
 
-            $this->read();
+                if ($setting == "json")
+                    continue;
 
-            foreach ($this->json as $setting => $value)
-                if (!is_numeric($setting) and $setting != "json")
-                    $this->$setting = $value;
+                $this->$setting = $value;
+            }
 
             fallback($this->sql,              array());
             fallback($this->enabled_modules,  array());
@@ -38,9 +38,17 @@
          */
         private function read() {
             $security = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
-            $contents = file_get_contents(INCLUDES_DIR.DIR."config.json.php");
+            $contents = @file_get_contents(INCLUDES_DIR.DIR."config.json.php");
 
-            return $this->json = json_get(str_replace($security, "", $contents), true);
+            if ($contents === false)
+                return false;
+
+            $json = json_get(str_replace($security, "", $contents), true);
+
+            if (!is_array($json))
+                return false;
+
+            return $this->json = $json;
         }
 
         /**
@@ -64,7 +72,10 @@
          *     $fallback - Add the setting only if it doesn't exist.
          */
         public function set($setting, $value, $fallback = false) {
-            if (is_numeric($setting) or $setting == "json")
+            if (is_numeric($setting))
+                return false;
+
+            if ($setting == "json")
                 return false;
 
             if (isset($this->$setting) and $fallback)
