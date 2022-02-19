@@ -23,7 +23,7 @@
          * Function: type
          * Returns the content type of the feed.
          */
-        static function type() {
+        static function type(): string {
             return "application/rss+xml";
         }
 
@@ -37,7 +37,7 @@
          *     $id - Feed ID (optional).
          *     $updated - Time of update (optional).
          */
-        public function open($title, $subtitle = "", $id = "", $updated = null) {
+        public function open($title, $subtitle = "", $id = "", $updated = null): void {
             $language = lang_base(Config::current()->locale);
 
             echo '<?xml version="1.0" encoding="UTF-8"?>'."\n";
@@ -80,7 +80,7 @@
                               $updated = null,
                               $name = "",
                               $uri = "",
-                              $email = "") {
+                              $email = ""): void {
             $this->split();
 
             echo '<item>'."\n";
@@ -105,7 +105,7 @@
          *     $scheme - URI for the categorization scheme (optional).
          *     $label - Human-readable label for the category (optional).
          */
-        public function category($term, $scheme = "", $label = "") {
+        public function category($term, $scheme = "", $label = ""): void {
             if ($this->count == 0)
                 return;
 
@@ -135,7 +135,7 @@
          *     $type - The media type of the resource (optional).
          *     $title - Title for the resource (optional).
          */
-        public function enclosure($link, $length = 0, $type = "", $title = "") {
+        public function enclosure($link, $length = 0, $type = "", $title = ""): void {
             echo '<enclosure url="'.fix($link, true).'"'.
                  ' length="'.fix($length, true).'"'.
                  ' type="'.fix(oneof($type, "application/octet-stream"), true).'" />'."\n";
@@ -145,7 +145,7 @@
          * Function: related
          * Not implemented in RSS 2.0.11.
          */
-        public function related($link) {
+        public function related($link): void {
             return;
         }
 
@@ -153,7 +153,7 @@
          * Function: split
          * Outputs a closing item element.
          */
-        private function split() {
+        private function split(): void {
             if ($this->count > 0)
                 echo '</item>'."\n";
         }
@@ -162,7 +162,7 @@
          * Function: close
          * Outputs the closing channel element.
          */
-        public function close() {
+        public function close(): void {
             $this->split();
             echo '</channel>'."\n";
             echo '</rss>'."\n";

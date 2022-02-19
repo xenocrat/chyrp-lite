@@ -41,7 +41,7 @@
             return json_get($filenames, true);
         }
 
-        public function submit() {
+        public function submit(): Post {
             if (isset($_FILES['uploads']) and upload_tester($_FILES['uploads'])) {
                 $filenames = array();
 
@@ -87,7 +87,7 @@
                              $_POST['option']);
         }
 
-        public function update($post) {
+        public function update($post): Post {
             if (isset($_FILES['uploads']) and upload_tester($_FILES['uploads'])) {
                 $filenames = array();
 
@@ -132,19 +132,19 @@
                                  $_POST['option']);
         }
 
-        public function title($post) {
+        public function title($post): string {
             return oneof($post->title, $post->title_from_excerpt());
         }
 
-        public function excerpt($post) {
+        public function excerpt($post): string {
             return $post->caption;
         }
 
-        public function feed_content($post) {
+        public function feed_content($post): string {
             return $post->caption;
         }
 
-        public function enclose_uploaded($post, $feed) {
+        public function enclose_uploaded($post, $feed): void {
             $config = Config::current();
 
             if ($post->feather != "uploader")
@@ -160,7 +160,7 @@
             }
         }
 
-        public function delete_files($post) {
+        public function delete_files($post): void {
             if ($post->feather != "uploader")
                 return;
 
@@ -176,14 +176,14 @@
             }
         }
 
-        public function post($post) {
+        public function post($post): void {
             if ($post->feather != "uploader")
                 return;
 
             $post->filenames = $this->filenames_unserialize($post->filenames);
         }
 
-        public function filter_post($post) {
+        public function filter_post($post): void {
             if ($post->feather != "uploader")
                 return;
 
@@ -196,9 +196,9 @@
                 }
         }
 
-        public function add_option($options, $post = null, $feather = null) {
+        public function add_option($options, $post = null, $feather = null): array {
             if ($feather != "uploader")
-                return;
+                return $options;
 
             $options[] = array("attr" => "option[source]",
                                "label" => __("Source", "uploader"),
@@ -209,9 +209,9 @@
             return $options;
         }
 
-        public function metaWeblog_getValues($struct, $post) {
+        public function metaWeblog_getValues($struct, $post): array {
             if ($post->feather != "uploader")
-                return;
+                return $struct;
 
             $struct["title"] = $post->title;
             $struct["description"] = $post->caption;
@@ -219,9 +219,9 @@
             return $struct;
         }
 
-        public function metaWeblog_setValues($values, $struct, $post) {
+        public function metaWeblog_setValues($values, $struct, $post): array {
             if ($post->feather != "uploader")
-                return;
+                return $values;
 
             $values["title"] = $struct["title"];
             $values["caption"] = $struct["description"];
@@ -229,7 +229,7 @@
             return $values;
         }
 
-        private function list_files($filenames) {
+        private function list_files($filenames): array {
             $list = array();
 
             foreach ($filenames as $filename) {

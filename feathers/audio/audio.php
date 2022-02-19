@@ -31,7 +31,7 @@
             $this->respondTo("metaWeblog_before_editPost", "metaWeblog_setValues");
         }
 
-        public function submit() {
+        public function submit(): Post {
             if (isset($_FILES['audio']) and upload_tester($_FILES['audio']))
                 $filename = upload($_FILES['audio'], $this->audio_extensions());
 
@@ -60,7 +60,7 @@
                              $_POST['option']);
         }
 
-        public function update($post) {
+        public function update($post): Post {
             if (isset($_FILES['audio']) and upload_tester($_FILES['audio'])) {
                 $filename = upload($_FILES['audio'], $this->audio_extensions());
                 $this->delete_file($post);
@@ -88,15 +88,15 @@
                                  $_POST['option']);
         }
 
-        public function title($post) {
+        public function title($post): string {
             return oneof($post->title, $post->title_from_excerpt());
         }
 
-        public function excerpt($post) {
+        public function excerpt($post): string {
             return $post->description;
         }
 
-        public function feed_content($post) {
+        public function feed_content($post): string {
             return $post->description;
         }
 
@@ -112,7 +112,7 @@
                              $this->audio_type($post->filename));
         }
 
-        public function delete_file($post) {
+        public function delete_file($post): void {
             if ($post->feather != "audio")
                 return;
 
@@ -125,16 +125,16 @@
             }
         }
 
-        public function filter_post($post) {
+        public function filter_post($post): void {
             if ($post->feather != "audio")
                 return;
 
             $post->audio_player = $this->audio_player($post);
         }
 
-        public function metaWeblog_getValues($struct, $post) {
+        public function metaWeblog_getValues($struct, $post): array {
             if ($post->feather != "audio")
-                return;
+                return $struct;
 
             $struct["title"] = $post->title;
             $struct["description"] = $post->description;
@@ -142,9 +142,9 @@
             return $struct;
         }
 
-        public function metaWeblog_setValues($values, $struct, $post) {
+        public function metaWeblog_setValues($values, $struct, $post): array {
             if ($post->feather != "audio")
-                return;
+                return $values;
 
             $values["title"] = $struct["title"];
             $values["description"] = $struct["description"];
@@ -152,7 +152,7 @@
             return $values;
         }
 
-        private function audio_player($post) {
+        private function audio_player($post): string {
             $trigger = Trigger::current();
 
             if ($trigger->exists("audio_player"))
@@ -164,7 +164,7 @@
                    '">'."\n".'</audio>'."\n";
         }
 
-        private function audio_type($filename) {
+        private function audio_type($filename): string {
             $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 
             switch($extension) {
@@ -187,7 +187,7 @@
             }
         }
 
-        private function audio_extensions() {
+        private function audio_extensions(): array {
             return array("mp3", "m4a", "mp4", "oga", "ogg", "webm", "mka");
         }
     }

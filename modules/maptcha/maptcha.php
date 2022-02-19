@@ -8,7 +8,7 @@
             Config::current()->remove("module_maptcha");
         }
 
-        static function generateCaptcha() {
+        static function generateCaptcha(): string {
             $hashkey = Config::current()->module_maptcha["maptcha_hashkey"];
 
             $t = time();
@@ -62,7 +62,7 @@
                    '<input type="hidden" name="maptcha_challenge" value="'.$value.'">'."\n";
         }
 
-        static function checkCaptcha() {
+        static function checkCaptcha(): bool {
             # Constant: MAPTCHA_MIN_ELAPSED
             # Minimum elapsed timed in seconds allowed between challenge and response.
             if (!defined('MAPTCHA_MIN_ELAPSED'))

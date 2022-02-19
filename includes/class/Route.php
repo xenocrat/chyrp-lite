@@ -77,7 +77,7 @@
          * Function: init
          * Attempt to call a responder for the action(s) until one of them doesn't return false.
          */
-        public function init() {
+        public function init(): bool {
             $trigger = Trigger::current();
             $visitor = Visitor::current();
 
@@ -153,7 +153,7 @@
          * Returns:
          *     An absolute clean or dirty URL, depending on @Config->clean_urls@ and controller support.
          */
-        static function url($url, $controller = null) {
+        static function url($url, $controller = null): string {
             $config = Config::current();
 
             if (!isset($controller))
@@ -206,12 +206,10 @@
          * See Also:
          *     <remove>
          */
-        public function add($path, $action) {
+        public function add($path, $action): void {
             $config = Config::current();
-
             $new_routes = $config->routes;
             $new_routes[$path] = $action;
-
             $config->set("routes", $new_routes);
         }
 
@@ -225,11 +223,9 @@
          * See Also:
          *     <add>
          */
-        public function remove($path) {
+        public function remove($path): void {
             $config = Config::current();
-
             unset($config->routes[$path]);
-
             $config->set("routes", $config->routes);
         }
 
@@ -240,7 +236,7 @@
          * Notes:
          *     The / path strictly requires no request args.
          */
-        public function custom() {
+        public function custom(): void {
             if (!$this->controller instanceof MainController)
                 return;
 

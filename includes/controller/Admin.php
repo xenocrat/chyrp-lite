@@ -82,7 +82,7 @@
          * Function: parse
          * Route constructor calls this to interpret clean URLs and determine the action.
          */
-        public function parse($route) {
+        public function parse($route): ?string {
             $visitor = Visitor::current();
             $config = Config::current();
 
@@ -157,13 +157,15 @@
             if (!isset($route->action))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to view this area."));
+
+            return null;
         }
 
         /**
          * Function: exempt
          * Route constructor calls this to determine "view_site" exemptions.
          */
-        public function exempt($action) {
+        public function exempt($action): bool {
             $exemptions = array("login", "logout");
             return in_array($action, $exemptions);
         }
@@ -195,6 +197,7 @@
 
             $_SESSION['latest_feather'] = $_GET['feather'];
 
+            $options = array();
             Trigger::current()->filter($options, array("write_post_options", "post_options"), null, $_GET['feather']);
 
             $this->display("pages".DIR."write_post",
@@ -253,6 +256,7 @@
             if (!empty($_SESSION['redirect_to']))
                 $_SESSION['post_redirect'] = $_SESSION['redirect_to'];
 
+            $options = array();
             Trigger::current()->filter($options, array("edit_post_options", "post_options"), $post, $post->feather);
 
             $this->display("pages".DIR."edit_post",

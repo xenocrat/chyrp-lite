@@ -105,7 +105,7 @@
      * Function: twig_function_paginate
      * Paginates an array of items using the Paginator class.
      */
-    function twig_function_paginate($array, $per_page = 10, $name = "twig") {
+    function twig_function_paginate($array, $per_page = 10, $name = "twig"): Paginator {
         # This is important for clean URL parsing in MainController.
         $name = str_replace("_", "-", $name)."_page";
 
@@ -124,7 +124,7 @@
      * Function: twig_function_posted
      * Returns a $_POST value if set, otherwise returns the fallback value.
      */
-    function twig_function_posted($index, $fallback = "") {
+    function twig_function_posted($index, $fallback = ""): bool {
         return isset($_POST[$index]) ? $_POST[$index] : $fallback ;
     }
 
@@ -221,7 +221,7 @@
      * Function: twig_function_uploaded_search
      * Returns an array of matches, if the visitor has the "export_content" privilege.
      */
-    function twig_function_uploaded_search($search = "", $filter = array()) {
+    function twig_function_uploaded_search($search = "", $filter = array()): array {
         if (!Visitor::current()->group->can("export_content"))
             return array();
 
@@ -232,7 +232,7 @@
      * Function: twig_filter_translate
      * Returns a translated string.
      */
-    function twig_filter_translate($string, $domain = null) {
+    function twig_filter_translate($string, $domain = null): string {
         if (!isset($domain))
             $domain = (ADMIN) ? "admin" : Theme::current()->safename ;
 
@@ -243,7 +243,7 @@
      * Function: twig_filter_translate_plural
      * Returns a plural (or not) form of a translated string.
      */
-    function twig_filter_translate_plural($single, $plural, $number, $domain = null) {
+    function twig_filter_translate_plural($single, $plural, $number, $domain = null): string {
         if (!isset($domain))
             $domain = (ADMIN) ? "admin" : Theme::current()->safename ;
 
@@ -254,7 +254,7 @@
      * Function: twig_filter_date_format
      * Returns date formatting for a string that isn't a regular time() value.
      */
-    function twig_filter_date_format($timestamp, $format = null) {
+    function twig_filter_date_format($timestamp, $format = null): string {
         static $tomorrow = null;
         static $today    = null;
 
@@ -283,7 +283,7 @@
      * Notes:
      *     Uses date() instead of strftime(). Retained for backwards compatibility.
      */
-    function twig_filter_strftime_format($timestamp, $format = null) {
+    function twig_filter_strftime_format($timestamp, $format = null): string {
         return when("Y-m-d H:i:s", $timestamp);
     }
 
@@ -291,7 +291,7 @@
      * Function: twig_filter_filesize_format
      * Returns a string containing a formatted filesize value.
      */
-    function twig_filter_filesize_format($bytes) {
+    function twig_filter_filesize_format($bytes): string {
         if (is_array($bytes))
             $bytes = max($bytes);
 
@@ -316,7 +316,7 @@
      * Function: twig_filter_match
      * Try to match a string against an array of regular expressions, or a single regular expression.
      */
-    function twig_filter_preg_match($haystack, $try) {
+    function twig_filter_preg_match($haystack, $try): bool {
         return match_any($try, $haystack);
     }
 
@@ -349,7 +349,7 @@
      * Function: twig_filter_inspect
      * Exports a variable for inspection.
      */
-    function twig_filter_inspect($variable) {
+    function twig_filter_inspect($variable): string {
         return '<pre class="chyrp_inspect"><code>'.fix(var_export($variable, true)).'</code></pre>';
     }
 
@@ -357,29 +357,30 @@
      * Function: twig_filter_checked
      * Returns a HTML @checked@ attribute if the test evalutaes to true.
      */
-    function twig_filter_checked($test) {
-        if ($test)
-            return " checked";
+    function twig_filter_checked($test): string {
+        return ($test) ? " checked" : "" ;
     }
 
     /**
      * Function: twig_filter_selected
      * Returns a HTML @selected@ attribute if the test matches any of the supplied arguments.
      */
-    function twig_filter_selected($test) {
+    function twig_filter_selected($test): string {
         $try = func_get_args();
         array_shift($try);
 
         foreach ($try as $value)
             if ((is_array($value) and in_array($test, $value)) or ($test == $value))
                 return " selected";
+
+        return "";
     }
 
     /**
      * Function: twig_filter_download
      * Returns a download link for a file located in the uploads directory.
      */
-    function twig_filter_download($filename) {
+    function twig_filter_download($filename): string {
         return fix(Config::current()->chyrp_url."/includes/download.php?file=".urlencode($filename), true);
     }
 
@@ -387,7 +388,7 @@
      * Function: twig_filter_thumbnail
      * Returns a thumbnail <img> tag for an uploaded image, optionally with enclosing <a> tag.
      */
-    function twig_filter_thumbnail($filename, $alt_text = "", $url = null, $args = array(), $sizes = "100vw") {
+    function twig_filter_thumbnail($filename, $alt_text = "", $url = null, $args = array(), $sizes = "100vw"): string {
         $filepath = Config::current()->chyrp_url."/includes/thumbnail.php?file=".urlencode($filename);
         $src_args = implode("&", $args);
         $set_args = preg_replace(array("/max_width=[^&]*(&)?/i",

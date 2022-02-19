@@ -18,7 +18,7 @@
             $this->respondTo("metaWeblog_before_editPost", "metaWeblog_setValues");
         }
 
-        public function submit() {
+        public function submit(): Post {
             if (empty($_POST['body']))
                 error(__("Error"), __("Body can't be blank."), null, 422);
 
@@ -42,7 +42,7 @@
                              $_POST['option']);
         }
 
-        public function update($post) {
+        public function update($post): Post {
             if (empty($_POST['body']))
                 error(__("Error"), __("Body can't be blank.", "text"), null, 422);
 
@@ -64,15 +64,15 @@
                                  $_POST['option']);
         }
 
-        public function title($post) {
+        public function title($post): string {
             return oneof($post->title, $post->title_from_excerpt());
         }
 
-        public function excerpt($post) {
+        public function excerpt($post): string {
             return $post->body;
         }
 
-        public function feed_content($post) {
+        public function feed_content($post): string {
             return $post->body;
         }
 

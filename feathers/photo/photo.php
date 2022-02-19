@@ -30,7 +30,7 @@
             $this->respondTo("metaWeblog_before_editPost", "metaWeblog_setValues");
         }
 
-        public function submit() {
+        public function submit(): Post {
             if (isset($_FILES['photo']) and upload_tester($_FILES['photo']))
                 $filename = upload($_FILES['photo'], $this->photo_extensions());
 
@@ -62,7 +62,7 @@
                              $_POST['option']);
         }
 
-        public function update($post) {
+        public function update($post): Post {
             if (isset($_FILES['photo']) and upload_tester($_FILES['photo'])) {
                 $filename = upload($_FILES['photo'], $this->photo_extensions());
                 $this->delete_file($post);
@@ -93,15 +93,15 @@
                                  $_POST['option']);
         }
 
-        public function title($post) {
+        public function title($post): string {
             return oneof($post->title, $post->title_from_excerpt());
         }
 
-        public function excerpt($post) {
+        public function excerpt($post): string {
             return $post->caption;
         }
 
-        public function feed_content($post) {
+        public function feed_content($post): string {
             $content = '<img src="'.Config::current()->chyrp_url.
                        "/includes/thumbnail.php?file=".urlencode($post->filename).
                        '" alt="'.fix($post->alt_text, true).'">';
@@ -112,7 +112,7 @@
             return '<figure>'.$content.'</figure>';
         }
 
-        public function delete_file($post) {
+        public function delete_file($post): void {
             if ($post->feather != "photo")
                 return;
 
@@ -125,9 +125,9 @@
             }
         }
 
-        public function add_option($options, $post = null, $feather = null) {
+        public function add_option($options, $post = null, $feather = null): array {
             if ($feather != "photo")
-                return;
+                return $options;
 
             $options[] = array("attr" => "option[alt_text]",
                                "label" => __("Alternative Text", "photo"),
@@ -144,9 +144,9 @@
             return $options;
         }
 
-        public function metaWeblog_getValues($struct, $post) {
+        public function metaWeblog_getValues($struct, $post): array {
             if ($post->feather != "photo")
-                return;
+                return $struct;
 
             $struct["title"] = $post->title;
             $struct["description"] = $post->caption;
@@ -154,9 +154,9 @@
             return $struct;
         }
 
-        public function metaWeblog_setValues($values, $struct, $post) {
+        public function metaWeblog_setValues($values, $struct, $post): array {
             if ($post->feather != "photo")
-                return;
+                return $values;
 
             $values["title"] = $struct["title"];
             $values["caption"] = $struct["description"];
@@ -164,7 +164,7 @@
             return $values;
         }
 
-        private function photo_extensions() {
+        private function photo_extensions(): array {
             return array("jpg", "jpeg", "png", "gif", "webp", "avif");
         }
     }

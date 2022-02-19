@@ -33,7 +33,7 @@
         *     $path - The path to the locale directory.
         *     $reload - Reload the translation if already loaded?
         */
-        public function load($domain, $path, $reload = false) {
+        public function load($domain, $path, $reload = false): bool {
             $filepath = $path.DIR.$this->locale.DIR."LC_MESSAGES".DIR.$domain.".mo";
 
             if (isset($this->mo[$domain]) and !$reload)
@@ -125,7 +125,7 @@
         *     $plural - Pluralized string (optional).
         *     $number - The number to judge by (optional).
         */
-        public function text($domain, $single, $plural = null, $number = 1) {
+        public function text($domain, $single, $plural = null, $number = 1): string {
             if (isset($plural)) {
                 $array = $this->find($domain, $plural);
                 $n = (int) $number;
@@ -141,7 +141,7 @@
         * Function: find
         * Returns a translation array from the supplied domain.
         */
-        public function find($domain, $string) {
+        public function find($domain, $string): array {
             if (!isset($this->mo[$domain]))
                 return array();
 
@@ -157,7 +157,7 @@
         * Function: nplural
         * Support for for languages with n != 2 plural forms.
         */
-        private function nplural($n) {
+        private function nplural($n): int {
             static $base;
 
             if (!isset($base))

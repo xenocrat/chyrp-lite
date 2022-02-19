@@ -100,7 +100,7 @@
          * Function: next
          * Returns the next pagination sequence.
          */
-        public function next() {
+        public function next(): self {
             return new self($this->array, $this->per_page, $this->name, $this->model, $this->page + 1);
         }
 
@@ -108,7 +108,7 @@
          * Function: prev
          * Returns the previous pagination sequence.
          */
-        public function prev() {
+        public function prev(): self {
             return new self($this->array, $this->per_page, $this->name, $this->model, $this->page - 1);
         }
 
@@ -116,7 +116,7 @@
          * Function: next_page
          * Checks whether or not it makes sense to show the Next Page link.
          */
-        public function next_page() {
+        public function next_page(): bool {
             return ($this->page < $this->pages and $this->pages != 1 and $this->pages != 0);
         }
 
@@ -124,7 +124,7 @@
          * Function: prev_page
          * Checks whether or not it makes sense to show the Previous Page link.
          */
-        public function prev_page() {
+        public function prev_page(): bool {
             return ($this->page != 1 and $this->page <= $this->pages);
         }
 
@@ -138,9 +138,9 @@
          *     $page - Page number to link to.
          *     $anchor - An anchor target.
          */
-        public function next_link($text = null, $class = "next_page", $page = null, $anchor = "") {
+        public function next_link($text = null, $class = "next_page", $page = null, $anchor = ""): ?string {
             if (!$this->next_page())
-                return;
+                return null;
 
             if (!empty($anchor))
                 $anchor = '#'.$anchor;
@@ -161,9 +161,9 @@
          *     $page - Page number to link to.
          *     $anchor - An anchor target.
          */
-        public function prev_link($text = null, $class = "prev_page", $page = null, $anchor = "") {
+        public function prev_link($text = null, $class = "prev_page", $page = null, $anchor = ""): ?string {
             if (!$this->prev_page())
-                return;
+                return null;
 
             if (!empty($anchor))
                 $anchor = '#'.$anchor;
@@ -183,9 +183,9 @@
          *     $class - The CSS class for the link.
          *     $anchor - An anchor target.
          */
-        public function final_link($text = null, $class = "final_page", $anchor = "") {
+        public function final_link($text = null, $class = "final_page", $anchor = ""): ?string {
             if (!$this->pages)
-                return;
+                return null;
 
             if (!empty($anchor))
                 $anchor = '#'.$anchor;
@@ -205,9 +205,9 @@
          *     $class - The CSS class for the link.
          *     $anchor - An anchor target.
          */
-        public function first_link($text = null, $class = "first_page", $anchor = "") {
+        public function first_link($text = null, $class = "first_page", $anchor = ""): ?string {
             if (!$this->pages)
-                return;
+                return null;
 
             if (!empty($anchor))
                 $anchor = '#'.$anchor;
@@ -225,7 +225,7 @@
          * Parameters:
          *     $page - Page number to link to.
          */
-        public function next_page_url($page = null) {
+        public function next_page_url($page = null): string {
             $config = Config::current();
             $request = unfix(self_url());
 
@@ -253,7 +253,7 @@
          * Parameters:
          *     $page - Page number to link to.
          */
-        public function prev_page_url($page = null) {
+        public function prev_page_url($page = null): string {
             $config = Config::current();
             $request = unfix(self_url());
 

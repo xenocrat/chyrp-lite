@@ -72,7 +72,7 @@
          * Function: parse
          * Route constructor calls this to interpret clean URLs and determine the action.
          */
-        public function parse($route) {
+        public function parse($route): ?string {
             $config = Config::current();
 
             # Serve the index if the first arg is empty and / is not a route.
@@ -146,13 +146,15 @@
 
             # Are we viewing a page?
             Page::from_url($route->request, $route);
+
+            return null;
         }
 
         /**
          * Function: exempt
          * Route constructor calls this to determine "view_site" exemptions.
          */
-        public function exempt($action) {
+        public function exempt($action): bool {
             $exemptions = array("login", "logout", "register", "activate", "lost_password", "reset");
             return in_array($action, $exemptions);
         }

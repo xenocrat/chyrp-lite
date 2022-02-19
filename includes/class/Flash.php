@@ -41,7 +41,7 @@
          * Function: prepare
          * Prepare the structure of the "flash" session value.
          */
-        static function prepare($type) {
+        static function prepare($type): void {
             if (!isset($_SESSION))
                 $_SESSION = array();
 
@@ -57,7 +57,7 @@
          *     $message - Message to display.
          *     $redirect_to - URL to redirect to after the message is stored.
          */
-        static function message($message, $redirect_to = null) {
+        static function message($message, $redirect_to = null): void {
             self::prepare("messages");
 
             $_SESSION['messages'][] = Trigger::current()->filter($message, "flash_message", $redirect_to);
@@ -77,7 +77,7 @@
          *     $message - Message to display.
          *     $redirect_to - URL to redirect to after the message is stored.
          */
-        static function notice($message, $redirect_to = null) {
+        static function notice($message, $redirect_to = null): void {
             self::prepare("notices");
 
             $_SESSION['notices'][] = Trigger::current()->filter($message, "flash_notice_message", $redirect_to);
@@ -97,7 +97,7 @@
          *     $message - Message to display.
          *     $redirect_to - URL to redirect to after the message is stored.
          */
-        static function warning($message, $redirect_to = null) {
+        static function warning($message, $redirect_to = null): void {
             self::prepare("warnings");
 
             $_SESSION['warnings'][] = Trigger::current()->filter($message, "flash_warning_message", $redirect_to);
@@ -113,7 +113,7 @@
          * Function: messages
          * Calls <Flash.serve> "messages".
          */
-        public function messages() {
+        public function messages(): array {
             return $this->serve("messages");
         }
 
@@ -121,7 +121,7 @@
          * Function: notices
          * Calls <Flash.serve> "notices".
          */
-        public function notices() {
+        public function notices(): array {
             return $this->serve("notices");
         }
 
@@ -129,7 +129,7 @@
          * Function: warnings
          * Calls <Flash.serve> "warnings".
          */
-        public function warnings() {
+        public function warnings(): array {
             return $this->serve("warnings");
         }
 
@@ -140,7 +140,7 @@
          * Returns:
          *     An array of every message available, in the form of [type => [messages]].
          */
-        public function all() {
+        public function all(): array {
             return array("messages" => $this->messages(),
                          "notices" => $this->notices(),
                          "warnings" => $this->warnings());
@@ -156,7 +156,7 @@
          * Returns:
          *     An array of messages of the requested type.
          */
-        public function serve($type) {
+        public function serve($type): array {
             if (!empty($_SESSION[$type]))
                 self::$exists[depluralize($type)] = self::$exists[null] = true;
 
@@ -175,7 +175,7 @@
          * Parameters:
          *     $type - The type of message to check for.
          */
-        static function exists($type = null) {
+        static function exists($type = null): bool {
             if (self::$exists[$type])
                 return self::$exists[$type];
 

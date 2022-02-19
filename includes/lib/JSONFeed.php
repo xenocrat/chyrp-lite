@@ -27,7 +27,7 @@
          * Function: type
          * Returns the content type of the feed.
          */
-        static function type() {
+        static function type(): string {
             return "application/feed+json";
         }
 
@@ -41,7 +41,7 @@
          *     $id - Feed ID (optional).
          *     $updated - Time of update (optional).
          */
-        public function open($title, $subtitle = "", $id = "", $updated = null) {
+        public function open($title, $subtitle = "", $id = "", $updated = null): void {
             $language = lang_base(Config::current()->locale);
 
             $this->json = array(
@@ -81,7 +81,7 @@
                               $updated = null,
                               $name = "",
                               $uri = "",
-                              $email = "") {
+                              $email = ""): void {
             $this->count++;
 
             $item = array(
@@ -109,7 +109,7 @@
          *     $scheme - URI for the categorization scheme (optional).
          *     $label - Human-readable label for the category (optional).
          */
-        public function category($term, $scheme = "", $label = "") {
+        public function category($term, $scheme = "", $label = ""): void {
             if ($this->count == 0)
                 return;
 
@@ -122,7 +122,7 @@
          * Function: rights
          * Not implemented in JSON Feed version 1.
          */
-        public function rights($text) {
+        public function rights($text): void {
             return;
         }
 
@@ -136,7 +136,7 @@
          *     $type - The media type of the resource (optional).
          *     $title - Title for the resource (optional).
          */
-        public function enclosure($link, $length = null, $type = "", $title = "") {
+        public function enclosure($link, $length = null, $type = "", $title = ""): void {
             if ($this->count == 0)
                 return;
 
@@ -163,7 +163,7 @@
          * Parameters:
          *     $link - The external URL.
          */
-        public function related($link) {
+        public function related($link): void {
             if ($this->count == 0)
                 return;
 
@@ -175,7 +175,7 @@
          * Function: close
          * Encodes and outputs the feed.
          */
-        public function close() {
+        public function close(): void {
             echo json_set($this->json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
         }
     }

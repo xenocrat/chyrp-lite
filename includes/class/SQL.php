@@ -93,7 +93,7 @@
          * Parameters:
          *     $checking - Return a boolean for failure, instead of triggering an error?
          */
-        public function connect($checking = false) {
+        public function connect($checking = false): bool {
             if ($this->connected)
                 return true;
 

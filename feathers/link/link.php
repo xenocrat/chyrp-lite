@@ -24,7 +24,7 @@
             $this->respondTo("metaWeblog_before_editPost", "metaWeblog_setValues");
         }
 
-        public function submit() {
+        public function submit(): Post {
             if (empty($_POST['source']))
                 error(__("Error"), __("URL can't be empty.", "link"), null, 422);
 
@@ -55,7 +55,7 @@
                              $_POST['option']);
         }
 
-        public function update($post) {
+        public function update($post): Post {
             if (empty($_POST['source']))
                 error(__("Error"), __("URL can't be empty.", "link"), null, 422);
 
@@ -84,28 +84,28 @@
                                  $_POST['option']);
         }
 
-        public function title($post) {
+        public function title($post): string {
             return oneof($post->name, $post->title_from_excerpt(), $post->source);
         }
 
-        public function excerpt($post) {
+        public function excerpt($post): string {
             return $post->description;
         }
 
-        public function feed_content($post) {
+        public function feed_content($post): string {
             return $post->description;
         }
 
-        public function link_related($post, $feed) {
+        public function link_related($post, $feed): void {
             if ($post->feather != "link")
                 return;
 
             $feed->related($post->source);
         }
 
-        public function metaWeblog_getValues($struct, $post) {
+        public function metaWeblog_getValues($struct, $post): array {
             if ($post->feather != "link")
-                return;
+                return $struct;
 
             $struct["title"] = $post->name;
             $struct["description"] = $post->description;
@@ -113,9 +113,9 @@
             return $struct;
         }
 
-        public function metaWeblog_setValues($values, $struct, $post) {
+        public function metaWeblog_setValues($values, $struct, $post): array {
             if ($post->feather != "link")
-                return;
+                return $values;
 
             $values["name"] = $struct["title"];
             $values["description"] = $struct["description"];

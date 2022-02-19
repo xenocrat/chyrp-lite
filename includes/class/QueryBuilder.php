@@ -31,7 +31,7 @@
                                             $offset = null,
                                             $group = null,
                                             $left_join = array(),
-                                            &$params = array()) {
+                                            &$params = array()): string {
             $query = "SELECT ".self::build_select_header($sql, $fields, $tables)."\n".
                      "FROM ".self::build_from($sql, $tables)."\n";
 
@@ -62,7 +62,7 @@
          * Returns:
          *     An @INSERT@ query string.
          */
-        public static function build_insert($sql, $table, $data, &$params = array()) {
+        public static function build_insert($sql, $table, $data, &$params = array()): string {
             if (empty($params))
                 foreach ($data as $key => $val) {
                     if (is_bool($val))
@@ -94,7 +94,7 @@
          * Returns:
          *     An @UPDATE@ query string.
          */
-        public static function build_update($sql, $table, $conds, $data, &$params = array()) {
+        public static function build_update($sql, $table, $conds, $data, &$params = array()): string {
             return "UPDATE \"__$table\"\n".
                    "SET ".self::build_update_values($sql, $data, $params)."\n".
                    ($conds ? "WHERE ".self::build_where($sql, $conds, $table, $params) : "");
@@ -113,7 +113,7 @@
          * Returns:
          *     A @DELETE@ query string.
          */
-        public static function build_delete($sql, $table, $conds, &$params = array()) {
+        public static function build_delete($sql, $table, $conds, &$params = array()): string {
             return "DELETE FROM \"__$table\"\n".
                    ($conds ? "WHERE ".self::build_where($sql, $conds, $table, $params) : "");
         }
@@ -129,7 +129,7 @@
          * Returns:
          *     A @DROP TABLE@ query string.
          */
-        public static function build_drop($sql, $table) {
+        public static function build_drop($sql, $table): string {
             return "DROP TABLE IF EXISTS \"__$table\"";
         }
 
@@ -145,7 +145,7 @@
          * Returns:
          *     A @CREATE TABLE@ query string.
          */
-        public static function build_create($sql, $table, $cols) {
+        public static function build_create($sql, $table, $cols): string {
             $query = "CREATE TABLE IF NOT EXISTS \"__$table\" (\n  ".
                      implode(",\n  ", self::safecol($sql, (array) $cols))."\n)";
 
@@ -183,7 +183,7 @@
          *     $data - Data to update.
          *     &$params - An associative array of parameters used in the query.
          */
-        public static function build_update_values($sql, $data, &$params = array()) {
+        public static function build_update_values($sql, $data, &$params = array()): string {
             $set = self::build_conditions($sql, $data, $params, null, true);
             return implode(",\n    ", $set);
         }
@@ -196,7 +196,7 @@
          *     $sql - The SQL instance calling this method.
          *     $data - Data to insert.
          */
-        public static function build_insert_header($sql, $data) {
+        public static function build_insert_header($sql, $data): string {
             $set = array();
 
             foreach (array_keys($data) as $field)
@@ -214,7 +214,7 @@
          *     $offset - Offset of the result.
          *     $limit - Limit of the result.
          */
-        public static function build_limits($sql, $offset, $limit) {
+        public static function build_limits($sql, $offset, $limit): string {
             if ($limit === null)
                 return "";
 
@@ -232,7 +232,7 @@
          *     $sql - The SQL instance calling this method.
          *     $tables - Tables to select from.
          */
-        public static function build_from($sql, $tables) {
+        public static function build_from($sql, $tables): string {
             if (!is_array($tables))
                 $tables = array($tables);
 
@@ -256,7 +256,7 @@
          *     $conds - Conditions to select by.
          *     &$params - An associative array of parameters used in the query.
          */
-        public static function build_count($sql, $tables, $conds, &$params = array()) {
+        public static function build_count($sql, $tables, $conds, &$params = array()): string {
             return "SELECT COUNT(1) AS count\n".
                    "FROM ".self::build_from($sql, $tables)."\n".
                    ($conds ? "WHERE ".self::build_where($sql, $conds, $tables, $params) : "");
@@ -271,7 +271,7 @@
          *     $fields - Columns to select.
          *     $tables - Tables to tablefy with.
          */
-        public static function build_select_header($sql, $fields, $tables = null) {
+        public static function build_select_header($sql, $fields, $tables = null): string {
             if (!is_array($fields))
                 $fields = array($fields);
 
@@ -295,7 +295,7 @@
          *     $tables - Tables to tablefy with.
          *     &$params - An associative array of parameters used in the query.
          */
-        public static function build_where($sql, $conds, $tables = null, &$params = array()) {
+        public static function build_where($sql, $conds, $tables = null, &$params = array()): string {
             $conds = (array) $conds;
             $tables = (array) $tables;
 
@@ -313,7 +313,7 @@
          *     $order - Columns to group by.
          *     $tables - Tables to tablefy with.
          */
-        public static function build_group($sql, $by, $tables = null) {
+        public static function build_group($sql, $by, $tables = null): string {
             $by = (array) $by;
             $tables = (array) $tables;
 
@@ -334,7 +334,7 @@
          *     $order - Columns to order by.
          *     $tables - Tables to tablefy with.
          */
-        public static function build_order($sql, $order, $tables = null) {
+        public static function build_order($sql, $order, $tables = null): string {
             $tables = (array) $tables;
 
             if (!is_array($order)) {
@@ -362,7 +362,7 @@
          * Returns:
          *     ('one', 'two', '', 1, 0) from array("one", "two", null, true, false).
          */
-        public static function build_list($sql, $vals, $params = array()) {
+        public static function build_list($sql, $vals, $params = array()): string {
             $return = array();
 
             foreach ($vals as $val) {
@@ -386,7 +386,7 @@
          *     $sql - The SQL instance calling this method.
          *     $name - Name of the column.
          */
-        public static function safecol($sql, $name) {
+        public static function safecol($sql, $name): string {
             $keywords = "join|into|set|from|where|groups?|having|order|limit|offset";
             return preg_replace("/(([^a-zA-Z0-9_]|^)($keywords)([^a-zA-Z0-9_]|$))/i",
                                 '\\2"\\3"\\4',
@@ -404,7 +404,7 @@
          *     $tables - If specified, conditions will be tablefied with these tables.
          *     $insert - Is this an insert/update query?
          */
-        public static function build_conditions($sql, $conds, &$params, $tables = null, $insert = false) {
+        public static function build_conditions($sql, $conds, &$params, $tables = null, $insert = false): array {
             $conditions = array();
 
             # PostgreSQL: cast to text to enable LIKE operator.
@@ -533,9 +533,9 @@
          *     &$field - The field to "tablefy".
          *     $tables - An array of tables. The first one will be used for prepending.
          */
-        public static function tablefy($sql, &$field, $tables) {
+        public static function tablefy($sql, &$field, $tables): void {
             if (!preg_match_all("/(\(|[\s]+|^)(?!__)([a-z0-9_\.\*]+)(\)|[\s]+|$)/", $field, $matches))
-                return $field;
+                return;
 
             foreach ($matches[0] as $index => $full) {
                 $before = $matches[1][$index];

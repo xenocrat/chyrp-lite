@@ -31,7 +31,7 @@
             $this->respondTo("metaWeblog_before_editPost", "metaWeblog_setValues");
         }
 
-        public function submit() {
+        public function submit(): Post {
             if (isset($_FILES['video']) and upload_tester($_FILES['video']))
                 $filename = upload($_FILES['video'], $this->video_extensions());
 
@@ -60,7 +60,7 @@
                              $_POST['option']);
         }
 
-        public function update($post) {
+        public function update($post): Post {
             if (isset($_FILES['video']) and upload_tester($_FILES['video'])) {
                 $filename = upload($_FILES['video'], $this->video_extensions());
                 $this->delete_file($post);
@@ -88,19 +88,19 @@
                                  $_POST['option']);
         }
 
-        public function title($post) {
+        public function title($post): string {
             return oneof($post->title, $post->title_from_excerpt());
         }
 
-        public function excerpt($post) {
+        public function excerpt($post): string {
             return $post->description;
         }
 
-        public function feed_content($post) {
+        public function feed_content($post): string {
             return $post->description;
         }
 
-        public function enclose_video($post, $feed) {
+        public function enclose_video($post, $feed): void {
             $config = Config::current();
             $filepath = uploaded($post->filename, false);
 
@@ -112,7 +112,7 @@
                              $this->video_type($post->filename));
         }
 
-        public function delete_file($post) {
+        public function delete_file($post): void {
             if ($post->feather != "video")
                 return;
 
@@ -125,7 +125,7 @@
             }
         }
 
-        public function filter_post($post) {
+        public function filter_post($post): void {
             if ($post->feather != "video")
                 return;
 
@@ -152,7 +152,7 @@
             return $values;
         }
 
-        private function video_player($post) {
+        private function video_player($post): string {
             $trigger = Trigger::current();
 
             if ($trigger->exists("video_player"))
@@ -164,7 +164,7 @@
                    '">'."\n".'</video>'."\n";
         }
 
-        private function video_type($filename) {
+        private function video_type($filename): string {
             $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 
             switch($extension) {
@@ -185,7 +185,7 @@
             }
         }
 
-        private function video_extensions() {
+        private function video_extensions(): array {
             return array("mp4", "ogv", "webm", "3gp", "mkv", "mov");
         }
     }

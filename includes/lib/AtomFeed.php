@@ -23,7 +23,7 @@
          * Function: type
          * Returns the content type of the feed.
          */
-        static function type() {
+        static function type(): string {
             return "application/atom+xml";
         }
 
@@ -37,7 +37,7 @@
          *     $id - Feed ID (optional).
          *     $updated - Time of update (optional).
          */
-        public function open($title, $subtitle = "", $id = "", $updated = null) {
+        public function open($title, $subtitle = "", $id = "", $updated = null): void {
             $language = lang_base(Config::current()->locale);
 
             echo '<?xml version="1.0" encoding="UTF-8"?>'."\n";
@@ -81,7 +81,7 @@
                               $updated = null,
                               $name = "",
                               $uri = "",
-                              $email = "") {
+                              $email = ""): void {
             $this->split();
 
             echo '<entry>'."\n";
@@ -114,7 +114,7 @@
          *     $scheme - URI for the categorization scheme (optional).
          *     $label - Human-readable label for the category (optional).
          */
-        public function category($term, $scheme = "", $label = "") {
+        public function category($term, $scheme = "", $label = ""): void {
             $category = '<category term="'.fix($term, true).'"';
 
             if (!empty($scheme))
@@ -133,7 +133,7 @@
          * Parameters:
          *     $text - Human-readable licensing information.
          */
-        public function rights($text) {
+        public function rights($text): void {
             echo '<rights>'.fix($text, false, true).'</rights>'."\n";
         }
 
@@ -147,7 +147,7 @@
          *     $type - The media type of the resource (optional).
          *     $title - Title for the resource (optional).
          */
-        public function enclosure($link, $length = null, $type = "", $title = "") {
+        public function enclosure($link, $length = null, $type = "", $title = ""): void {
             $enclosure = '<link rel="enclosure" href="'.fix($link, true).'"';
 
             if (!empty($length))
@@ -169,7 +169,7 @@
          * Parameters:
          *     $link - The URL to the resource.
          */
-        public function related($link) {
+        public function related($link): void {
             if (!empty($link) and is_url($link))
                 echo '<link rel="related" href="'.fix($link, true).'" />'."\n";
         }
@@ -178,7 +178,7 @@
          * Function: split
          * Outputs a closing entry element.
          */
-        private function split() {
+        private function split(): void {
             if ($this->count > 0)
                 echo '</entry>'."\n";
         }
@@ -187,7 +187,7 @@
          * Function: close
          * Outputs the closing feed element.
          */
-        public function close() {
+        public function close(): void {
             $this->split();
             echo '</feed>'."\n";
         }

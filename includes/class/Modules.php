@@ -24,7 +24,7 @@
          *     $name - Name of the trigger to respond to.
          *     $priority - Priority of the response.
          */
-        protected function setPriority($name, $priority) {
+        protected function setPriority($name, $priority): void {
             Trigger::current()->priorities[$name][] = array("priority" => $priority,
                                                             "function" => array($this, $name));
         }
@@ -38,7 +38,7 @@
          *     $function - Name of the class function to respond with.
          *     $priority - Priority of the response.
          */
-        protected function addAlias($name, $function, $priority = 10) {
+        protected function addAlias($name, $function, $priority = 10): void {
             Trigger::current()->priorities[$name][] = array("priority" => $priority,
                                                             "function" => array($this, $function));
         }

@@ -8,11 +8,11 @@
          * Function: parse
          * Route constructor calls this to determine the action.
          */
-        public function parse($route);
+        public function parse($route): ?string;
 
         /**
          * Function: exempt
          * Route constructor calls this to determine "view_site" exemptions.
          */
-        public function exempt($action);
+        public function exempt($action): bool;
     }

@@ -21,7 +21,7 @@
             $this->respondTo("metaWeblog_before_editPost", "metaWeblog_setValues");
         }
 
-        public function submit() {
+        public function submit(): Post {
             if (empty($_POST['quote']))
                 error(__("Error"), __("Quote can't be empty.", "quote"), null, 422);
 
@@ -45,7 +45,7 @@
                              $_POST['option']);
         }
 
-        public function update($post) {
+        public function update($post): Post {
             if (empty($_POST['quote']))
                 error(__("Error"), __("Quote can't be empty."), null, 422);
 
@@ -67,15 +67,15 @@
                                  $_POST['option']);
         }
 
-        public function title($post) {
+        public function title($post): string {
             return $post->title_from_excerpt();
         }
 
-        public function excerpt($post) {
+        public function excerpt($post): string {
             return $post->quote;
         }
 
-        public function feed_content($post) {
+        public function feed_content($post): string {
             $content = '<blockquote>'.$post->quote.'</blockquote>';
 
             if (!empty($post->source))
@@ -84,9 +84,9 @@
             return $content;
         }
 
-        public function metaWeblog_getValues($struct, $post) {
+        public function metaWeblog_getValues($struct, $post): array {
             if ($post->feather != "quote")
-                return;
+                return $struct;
 
             $struct["title"] = $post->source;
             $struct["description"] = $post->quote;
@@ -94,9 +94,9 @@
             return $struct;
         }
 
-        public function metaWeblog_setValues($values, $struct, $post) {
+        public function metaWeblog_setValues($values, $struct, $post): array {
             if ($post->feather != "quote")
-                return;
+                return $values;
 
             if ($struct["description"] != "") {
                 $values["source"] = $struct["title"];

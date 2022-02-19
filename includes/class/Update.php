@@ -8,7 +8,7 @@
          * Function: check
          * Checks the update channel.
          */
-        public static function check() {
+        public static function check(): void {
             $config = Config::current();
             $visitor = Visitor::current();
 
@@ -27,19 +27,23 @@
             $rss = get_remote(UPDATE_XML, 3);
             $xml = @simplexml_load_string($rss);
 
-            if (!self::validate($xml))
-                return self::warning();
+            if (!self::validate($xml)) {
+                self::warning();
+                return;
+            }
 
             foreach ($xml->channel->item as $item)
-                if (version_compare(CHYRP_VERSION, $item->guid, "<"))
-                    return self::message($item);
+                if (version_compare(CHYRP_VERSION, $item->guid, "<")) {
+                    self::message($item);
+                    return;
+                }
         }
 
         /**
          * Function: validate
          * Validates the XML dataset.
          */
-        private static function validate($xml) {
+        private static function validate($xml): bool {
             if (!$xml instanceof SimpleXMLElement)
                 return false;
 
@@ -59,7 +63,7 @@
          * Function: message
          * Flash the user about the newer version.
          */
-        private static function message($item) {
+        private static function message($item): void {
             Flash::message(_f("Chyrp Lite &#8220;%s&#8221; is available.", fix($item->title)).
                            ' <a href="'.fix($item->link, true).'" target="_blank">'.
                            __("Go to GitHub &rarr;").'</a>');
@@ -69,7 +73,7 @@
          * Function: warning
          * Flash the user about the failed check.
          */
-        private static function warning() {
+        private static function warning(): void {
             Flash::warning(__("Unable to check for new Chyrp Lite versions.").
                            ' <a href="'.fix(UPDATE_PAGE, true).'" target="_blank">'.
                            __("Go to GitHub &rarr;").'</a>');

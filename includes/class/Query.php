@@ -140,7 +140,7 @@
          * Returns:
          *     An array of all of the values of that column in the result.
          */
-         public function grab($column) {
+         public function grab($column): array {
             $all = $this->fetchAll();
             $result = array();
 
@@ -154,7 +154,7 @@
          * Function: exception_handler
          * Handles exceptions thrown by failed queries.
          */
-        public function exception_handler($e) {
+        public function exception_handler($e): void {
             $this->sql->error = $e->getMessage();
 
             # Trigger an error if throws were not requested.
@@ -167,7 +167,7 @@
                     "<pre>".fix(print_r($this->params, true), false, true)."</pre>" :
                     fix($this->sql->error, false, true) ;
 
-                return trigger_error(_f("Database error: %s", $message), E_USER_WARNING);
+                trigger_error(_f("Database error: %s", $message), E_USER_WARNING);
             }
 
             # Otherwise we chain the exception.

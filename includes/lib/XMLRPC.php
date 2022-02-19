@@ -115,7 +115,7 @@
         * Function: metaWeblog_getRecentPosts
         * Returns a list of recent posts that the user can edit/delete.
         */
-        public function metaWeblog_getRecentPosts($args) {
+        public function metaWeblog_getRecentPosts($args): array {
             $this->auth(fallback($args[1]), fallback($args[2]));
             global $user;
 
@@ -166,7 +166,7 @@
         * Function: metaWeblog_getCategories
         * Returns a list of available categories.
         */
-        public function metaWeblog_getCategories($args) {
+        public function metaWeblog_getCategories($args): array {
             $this->auth(fallback($args[1]), fallback($args[2]));
 
             $categories = array();
@@ -391,7 +391,7 @@
         * Function: metaWeblog_getUsersBlogs
         * Returns information about the blog.
         */
-        public function metaWeblog_getUsersBlogs($args) {
+        public function metaWeblog_getUsersBlogs($args): array {
             $this->auth(fallback($args[1]), fallback($args[2]));
 
             return array(array("url"      => unfix(url("/", MainController::current())),
@@ -403,7 +403,7 @@
         * Function: convertFromDateCreated
         * Converts an IXR_Date (in $args["dateCreated"]) to SQL date format.
         */
-        private function convertFromDateCreated($args) {
+        private function convertFromDateCreated($args): ?string {
             if (array_key_exists("dateCreated", $args))
                 return when("Y-m-d H:i:s", $args["dateCreated"]->getIso());
             else
@@ -414,7 +414,7 @@
         * Function: auth
         * Authenticates a user's login and password.
         */
-        private function auth($login, $password) {
+        private function auth($login, $password): void {
             if (!Config::current()->enable_xmlrpc)
                 throw new Exception(__("XML-RPC support is disabled for this site."), 501);
 

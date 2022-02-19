@@ -37,7 +37,7 @@
          *     $page_id - Page ID to use as the basis.
          *     $exclude - Page ID to exclude from the list.
          */
-        public function pages_list($page_id = 0, $exclude = null) {
+        public function pages_list($page_id = 0, $exclude = null): array {
             $cache_id = serialize(array($page_id, $exclude));
 
             if (isset($this->caches["pages_list"][$cache_id]))
@@ -75,7 +75,7 @@
          * Parameters:
          *     $page - Page to start recursion at.
          */
-        private function recurse_pages($page) {
+        private function recurse_pages($page): void {
             $page->depth    = isset($page->depth) ? $page->depth : 1 ;
             $page->children = isset($this->caches["pages"]["children"][$page->id]);
 
@@ -95,7 +95,7 @@
          * Parameters:
          *     $limit - Number of months to list.
          */
-        public function archives_list($limit = 12) {
+        public function archives_list($limit = 12): array {
             if (isset($this->caches["archives_list"][$limit]))
                 return $this->caches["archives_list"][$limit];
 
@@ -131,7 +131,7 @@
          * Parameters:
          *     $limit - Number of posts to list.
          */
-        public function recent_posts($limit = 5) {
+        public function recent_posts($limit = 5): array {
             if (isset($this->caches["recent_posts"][$limit]))
                 return $this->caches["recent_posts"][$limit];
 
@@ -156,9 +156,9 @@
          *     $post - The post to use as the basis.
          *     $limit - Number of related posts to list.
          */
-        public function related_posts($post, $limit = 5) {
+        public function related_posts($post, $limit = 5): array {
             if ($post->no_results)
-                return;
+                return array();
 
             if (isset($this->caches["related_posts"][$post->id][$limit]))
                 return $this->caches["related_posts"][$post->id][$limit];
@@ -168,7 +168,7 @@
             Trigger::current()->filter($ids, "related_posts", $post, $limit);
 
             if (empty($ids))
-                return;
+                return array();
 
             $results = Post::find(array("placeholders" => true,
                                         "where" => array("id" => $ids),
@@ -190,7 +190,7 @@
          * Parameters:
          *     $name - The filename.
          */
-        public function file_exists($name) {
+        public function file_exists($name): bool {
             return file_exists(THEME_DIR.DIR.$name.".twig");
         }
 
@@ -198,7 +198,7 @@
          * Function: stylesheets
          * Outputs the stylesheet tags.
          */
-        public function stylesheets() {
+        public function stylesheets(): string {
             $config = Config::current();
 
             $stylesheets = array();
@@ -235,7 +235,7 @@
          * Function: javascripts
          * Outputs the JavaScript tags.
          */
-        public function javascripts() {
+        public function javascripts(): string {
             $config = Config::current();
             $route = Route::current();
 
@@ -273,7 +273,7 @@
          * Function: feeds
          * Outputs the feeds and other general purpose <link> tags.
          */
-        public function feeds() {
+        public function feeds(): string {
             $config = Config::current();
             $route = Route::current();
             $main = MainController::current();
@@ -325,7 +325,7 @@
          * Function: load_time
          * Returns the total elapsed time for this page load.
          */
-        public function load_time() {
+        public function load_time(): string {
             return timer_stop();
         }
 

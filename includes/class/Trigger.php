@@ -34,7 +34,7 @@
          * Function: cmp
          * Sorts actions by priority when used with usort.
          */
-        private function cmp($a, $b) {
+        private function cmp($a, $b): int {
             if (empty($a) or empty($b))
                 return 0;
 
@@ -179,7 +179,7 @@
          *     $trigger - The trigger to unregister from.
          *     $action - The action name.
          */
-        public function remove($trigger, $action) {
+        public function remove($trigger, $action): void {
             foreach ($this->actions[$trigger] as $index => $func) {
                 if ($func == $action) {
                     unset($this->actions[$trigger][$key]);
@@ -200,7 +200,7 @@
          * Returns:
          *     @true@ or @false@
          */
-        public function exists($name) {
+        public function exists($name): bool {
             if (isset($this->exists[$name]))
                 return $this->exists[$name];
 
