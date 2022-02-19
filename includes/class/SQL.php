@@ -26,7 +26,7 @@
         public $queries = 0;
 
         # Variable: $db
-        # Holds the currently running database.
+        # Holds the currently running database instance.
         public $db;
 
         # Variable: $error
