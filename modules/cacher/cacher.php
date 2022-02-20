@@ -4,23 +4,23 @@
         private $excluded = false;
         private $modified = false;
 
-        public function __init() {
+        public function __init(): void {
             $config = Config::current();
 
             $this->lastmod = $config->module_cacher["cache_lastmod"];
             $this->prepare_cache_triggers();
         }
 
-        static function __install() {
+        static function __install(): void {
             Config::current()->set("module_cacher",
                                    array("cache_lastmod" => time()));
         }
 
-        static function __uninstall() {
+        static function __uninstall(): void {
             Config::current()->remove("module_cacher");
         }
 
-        public function route_init($route) {
+        public function route_init($route): void {
             if (!$this->eligible())
                 return;
 
@@ -38,7 +38,7 @@
             }
         }
 
-        public function route_done($route) {
+        public function route_done($route): void {
             # Prevent erroneous redirections.
             unset($_SESSION['redirect_to']);
             unset($_SESSION['post_redirect']);
@@ -58,7 +58,7 @@
             }
         }
 
-        private function eligible() {
+        private function eligible(): bool {
             if (PREVIEWING)
                 return false;
 
@@ -74,7 +74,7 @@
             return true;
         }
 
-        private function prepare_cache_triggers() {
+        private function prepare_cache_triggers(): void {
             $trigger = Trigger::current();
 
             $regenerate = array(
@@ -128,7 +128,7 @@
                 $this->addAlias($action, "cache_exclude");
         }
 
-        public function cache_regenerate() {
+        public function cache_regenerate(): void {
             if ($this->modified)
                 return;
 
@@ -140,7 +140,7 @@
             $config->set("module_cacher", $settings);
         }
 
-        public function cache_exclude() {
+        public function cache_exclude(): void {
             $this->excluded = true;
         }
     }

@@ -1,6 +1,6 @@
 <?php
     class Mathjax extends Modules {
-        static function __install() {
+        static function __install(): void {
             $config = Config::current();
 
             $config->set("module_mathjax",
@@ -8,11 +8,11 @@
                                "enable_mathml" => true));
         }
 
-        static function __uninstall() {
+        static function __uninstall(): void {
             Config::current()->remove("module_mathjax");
         }
 
-        public function scripts($scripts) {
+        public function scripts($scripts): array {
             $config = Config::current();
             $script = "";
 
@@ -28,19 +28,21 @@
             return $scripts;
         }
 
-        public function javascript() {
+        public function javascript(): void {
             include MODULES_DIR.DIR."mathjax".DIR."javascript.php";
         }
 
-        public function admin_mathjax_settings($admin) {
+        public function admin_mathjax_settings($admin): void {
             $config = Config::current();
 
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to change settings."));
 
-            if (empty($_POST))
-                return $admin->display("pages".DIR."mathjax_settings");
+            if (empty($_POST)) {
+                $admin->display("pages".DIR."mathjax_settings");
+                return;
+            }
 
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
@@ -52,7 +54,7 @@
             Flash::notice(__("Settings updated."), "mathjax_settings");
         }
 
-        public function settings_nav($navs) {
+        public function settings_nav($navs): array {
             if (Visitor::current()->group->can("change_settings"))
                 $navs["mathjax_settings"] = array("title" => __("MathJax", "mathjax"));
 

@@ -6,11 +6,11 @@
         # Query caches for methods.
         private $caches = array();
 
-        public function __init() {
+        public function __init(): void {
             fallback($_SESSION["likes"], array());
         }
 
-        static function __install() {
+        static function __install(): void {
             $config = Config::current();
 
             Like::install();
@@ -24,7 +24,7 @@
                                "like_image" => "pink.svg"));
         }
 
-        static function __uninstall($confirm) {
+        static function __uninstall($confirm): void {
             if ($confirm)
                 Like::uninstall();
 
@@ -33,22 +33,25 @@
             Config::current()->remove("module_likes");
         }
 
-        public function list_permissions($names = array()) {
+        public function list_permissions($names = array()): array {
             $names["like_post"]   = __("Like Posts", "likes");
             $names["unlike_post"] = __("Unlike Posts", "likes");
             return $names;
         }
 
-        public function admin_like_settings($admin) {
+        public function admin_like_settings($admin): void {
             $config = Config::current();
 
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to change settings."));
 
-            if (empty($_POST))
-                return $admin->display("pages".DIR."like_settings",
-                                       array("like_images" => $this->like_images()));
+            if (empty($_POST)) {
+                $admin->display("pages".DIR."like_settings",
+                                array("like_images" => $this->like_images()));
+
+                return;
+            }
 
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
@@ -63,14 +66,14 @@
             Flash::notice(__("Settings updated."), "like_settings");
         }
 
-        public function settings_nav($navs) {
+        public function settings_nav($navs): array {
             if (Visitor::current()->group->can("change_settings"))
                 $navs["like_settings"] = array("title" => __("Likes", "likes"));
 
             return $navs;
         }
 
-        public function main_most_likes($main) {
+        public function main_most_likes($main): void {
             $posts = Post::find(array("placeholders" => true));
 
             usort($posts[0], function ($a, $b) {
@@ -123,13 +126,15 @@
             Flash::notice(__("Post unliked.", "likes"), $post->url()."#likes_".$post->id);
         }
 
-        public function ajax_like() {
+        public function ajax_like(): void {
             if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
                 error(__("Error"), __("An ID is required to like a post.", "likes"), null, 400);
 
             # JavaScript can't know if this is allowed, so don't throw an error here.
-            if (!Visitor::current()->group->can("like_post"))
-                return json_response(__("You do not have sufficient privileges to like posts.", "likes"), false);
+            if (!Visitor::current()->group->can("like_post")) {
+                json_response(__("You do not have sufficient privileges to like posts.", "likes"), false);
+                return;
+            }
 
             $post = new Post($_POST['post_id']);
 
@@ -147,13 +152,15 @@
             json_response($text, true);
         }
 
-        public function ajax_unlike() {
+        public function ajax_unlike(): void {
             if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
                 error(__("Error"), __("An ID is required to unlike a post.", "likes"), null, 400);
 
             # JavaScript can't know if this is allowed, so don't throw an error here.
-            if (!Visitor::current()->group->can("unlike_post"))
-                return json_response(__("You do not have sufficient privileges to unlike posts.", "likes"), false);
+            if (!Visitor::current()->group->can("unlike_post")) {
+                json_response(__("You do not have sufficient privileges to unlike posts.", "likes"), false);
+                return;
+            }
 
             $post = new Post($_POST['post_id']);
 
@@ -171,19 +178,19 @@
             json_response($text, true);
         }
 
-        public function post($post) {
+        public function post($post): void {
             $post->has_many[] = "likes";
         }
 
-        public function delete_post($post) {
+        public function delete_post($post): void {
             SQL::current()->delete("likes", array("post_id" => $post->id));
         }
 
-        public function delete_user($user) {
+        public function delete_user($user): void {
             SQL::current()->update("likes", array("user_id" => $user->id), array("user_id" => 0));
         }
 
-        private function get_post_like_count($post_id) {
+        private function get_post_like_count($post_id): int {
             if (!isset($this->caches["post_like_counts"])) {
                 $counts = SQL::current()->select("likes",
                                                  "COUNT(post_id) AS total, post_id as post_id",
@@ -203,14 +210,14 @@
             return fallback($this->caches["post_like_counts"][$post_id], 0);
         }
 
-        public function post_like_count_attr($attr, $post) {
+        public function post_like_count_attr($attr, $post): int {
             if ($post->no_results)
                 return 0;
 
             return $this->get_post_like_count($post->id);
         }
 
-        public function get_user_like_count($user_id) {
+        public function get_user_like_count($user_id): int {
             if (!isset($this->caches["user_like_counts"])) {
                 $counts = SQL::current()->select("likes",
                                                  "COUNT(user_id) AS total, user_id as user_id",
@@ -230,20 +237,20 @@
             return fallback($this->caches["user_like_counts"][$user_id], 0);
         }
 
-        public function user_like_count_attr($attr, $user) {
+        public function user_like_count_attr($attr, $user): int {
             if ($user->no_results)
                 return 0;
 
             return $this->get_user_like_count($user->id);
         }
 
-        public function visitor_like_count_attr($attr, $visitor) {
+        public function visitor_like_count_attr($attr, $visitor): int {
             return ($visitor->id == 0) ?
                 count(array_diff($_SESSION["likes"], array(null))) :
                 $this->user_like_count_attr($attr, $visitor) ;
         }
 
-        public function post_like_link_attr($attr, $post) {
+        public function post_like_link_attr($attr, $post): ?string {
             $config = Config::current();
             $route = Route::current();
             $main = MainController::current();
@@ -251,10 +258,10 @@
             $settings = $config->module_likes;
 
             if ($post->no_results or !isset($route))
-                return;
+                return null;
 
             if ($settings["show_on_index"] == false and $route->action == "index")
-                return;
+                return null;
 
             $html = '<div class="likes" id="likes_'.$post->id.'">';
 
@@ -323,7 +330,7 @@
             return $html;
         }
 
-        private function like_images() {
+        private function like_images(): array {
             $images = array();
             $dir = new DirectoryIterator(MODULES_DIR.DIR."likes".DIR."images");
 
@@ -339,15 +346,15 @@
             return $images;
         }
 
-        public function manage_posts_column_header() {
+        public function manage_posts_column_header(): void {
             echo '<th class="post_likes value">'.__("Likes", "tags").'</th>';
         }
 
-        public function manage_posts_column($post) {
+        public function manage_posts_column($post): void {
             echo '<td class="post_likes value">'.$post->like_count.'</td>';
         }
 
-        public function import_chyrp_post($entry, $post) {
+        public function import_chyrp_post($entry, $post): void {
             $chyrp = $entry->children("http://chyrp.net/export/1.0/");
 
             if (!isset($chyrp->like))
@@ -366,7 +373,7 @@
             }
         }
 
-        public function posts_export($atom, $post) {
+        public function posts_export($atom, $post): string {
             $likes = SQL::current()->select("likes",
                                              "*",
                                              array("post_id" => $post->id))->fetchAll();
@@ -384,17 +391,17 @@
             return $atom;
         }
 
-        public function user_logged_in($user) {
+        public function user_logged_in($user): void {
             # Erase the visitor's session values to avoid misattribution.
             $_SESSION["likes"] = array();
         }
 
-        public function stylesheets($styles) {
+        public function stylesheets($styles): array {
             $styles[] = Config::current()->chyrp_url."/modules/likes/likes.css";
             return $styles;
         }
 
-        public function javascript() {
+        public function javascript(): void {
             include MODULES_DIR.DIR."likes".DIR."javascript.php";
         }
     }

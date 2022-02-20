@@ -1,14 +1,14 @@
 <?php
     class Tags extends Modules {
-        public function __init() {
+        public function __init(): void {
             $this->addAlias("metaWeblog_before_newPost", "metaWeblog_before_editPost");
         }
 
-        static function __install() {
+        static function __install(): void {
             Route::current()->add("tag/(name)/", "tag");
         }
 
-        static function __uninstall($confirm) {
+        static function __uninstall($confirm): void {
             Route::current()->remove("tag/(name)/");
 
             if ($confirm)
@@ -23,29 +23,29 @@
             return json_get($tags, true);
         }
 
-        private function sort_tags_name_asc($a, $b) {
+        private function sort_tags_name_asc($a, $b): int {
             return $this->mb_strcasecmp($a["name"], $b["name"]);
         }
 
-        private function sort_tags_name_desc($a, $b) {
+        private function sort_tags_name_desc($a, $b): int {
             return $this->mb_strcasecmp($b["name"], $a["name"]);
         }
 
-        private function sort_tags_popularity_asc($a, $b) {
+        private function sort_tags_popularity_asc($a, $b): int {
             if ($a["popularity"] == $b["popularity"])
                 return 0;
 
             return ($a["popularity"] < $b["popularity"]) ? -1 : 1 ;
         }
 
-        private function sort_tags_popularity_desc($a, $b) {
+        private function sort_tags_popularity_desc($a, $b): int {
             if ($a["popularity"] == $b["popularity"])
                 return 0;
 
             return ($a["popularity"] > $b["popularity"]) ? -1 : 1 ;
         }
 
-        private function mb_strcasecmp($str1, $str2, $encoding = "UTF-8") {
+        private function mb_strcasecmp($str1, $str2, $encoding = "UTF-8"): int {
             $str1 = preg_replace("/[[:punct:]]+/", "", $str1);
             $str2 = preg_replace("/[[:punct:]]+/", "", $str2);
 
@@ -56,22 +56,22 @@
                                   mb_strtoupper($str2, $encoding), 0);
         }
 
-        private function tags_name_match($name) {
+        private function tags_name_match($name): string {
             # Serialized notation of key for SQL queries.
             return "%\"".$this->tags_encoded($name)."\":%";
         }
 
-        private function tags_clean_match($clean) {
+        private function tags_clean_match($clean): string {
             # Serialized notation of value for SQL queries.
             return "%:\"".$this->tags_encoded($clean)."\"%";
         }
 
-        private function tags_encoded($text) {
+        private function tags_encoded($text): string {
             # Recreate JSON encoding and do SQL double-escaping for the search term.
             return SQL::current()->escape(trim(json_set((string) $text), "\""), false);
         }
 
-        private function prepare_tags($tags) {
+        private function prepare_tags($tags): array {
             # Split at the comma.
             $names = explode(",", $tags);
 
@@ -106,25 +106,25 @@
             return $assoc;
         }
 
-        public function before_add_post_attributes($attributes) {
+        public function before_add_post_attributes($attributes): array {
             if (!isset($_POST['tags']))
-                return;
+                return $attributes;
 
             $tags = $this->prepare_tags($_POST['tags']);
             $attributes["tags"] = $this->tags_serialize($tags);
             return $attributes;
         }
 
-        public function before_update_post_attributes($attributes) {
+        public function before_update_post_attributes($attributes): array {
             if (!isset($_POST['tags']))
-                return;
+                return $attributes;
 
             $tags = $this->prepare_tags($_POST['tags']);
             $attributes["tags"] = $this->tags_serialize($tags);
             return $attributes;
         }
 
-        public function post_options($fields, $post = null) {
+        public function post_options($fields, $post = null): array {
             $cloud = $this->tag_cloud(false, "name_asc");
             $names = isset($post->tags) ? array_keys($post->tags) : array();
 
@@ -150,14 +150,14 @@
             return $fields;
         }
 
-        public function post($post) {
+        public function post($post): void {
             $post->tags = !empty($post->tags) ? $this->tags_unserialize($post->tags) : array() ;
             uksort($post->tags, function($a, $b) {
                 return $this->mb_strcasecmp($a, $b);
             });
         }
 
-        public function post_tags_link_attr($attr, $post) {
+        public function post_tags_link_attr($attr, $post): array {
             $main = MainController::current();
             $tags = array();
 
@@ -171,19 +171,19 @@
             return $tags;
         }
 
-        public function twig_context_main($context) {
+        public function twig_context_main($context): array {
             if (!isset($context["tag_cloud"]))
                 $context["tag_cloud"] = $this->tag_cloud(10);
 
             return $context;
         }
 
-        public function parse_urls($urls) {
+        public function parse_urls($urls): array {
             $urls['|/tag/([^/]+)/|'] = '/?action=tag&amp;name=$1';
             return $urls;
         }
 
-        public function manage_nav($navs) {
+        public function manage_nav($navs): array {
             if (Post::any_editable())
                 $navs["manage_tags"] = array("title" => __("Tags", "tags"),
                                              "selected" => array("rename_tag", "delete_tag", "edit_tags"));
@@ -191,16 +191,16 @@
             return $navs;
         }
 
-        public function manage_posts_column_header() {
+        public function manage_posts_column_header(): void {
             echo '<th class="post_tags list">'.__("Tags", "tags").'</th>';
         }
 
-        public function manage_posts_column($post) {
+        public function manage_posts_column($post): void {
             $tags = !empty($post->tags_link) ? implode(" ", $post->tags_link) : "" ;
             echo '<td class="post_tags list">'.$tags.'</td>';
         }
 
-        public function admin_manage_tags($admin) {
+        public function admin_manage_tags($admin): void {
             if (!Post::any_editable())
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to manage tags.", "tags"));
@@ -236,7 +236,7 @@
                             array("tag_cloud" => $this->tag_cloud(), "posts" => $posts));
         }
 
-        public function admin_rename_tag($admin) {
+        public function admin_rename_tag($admin): void {
             if (!Post::any_editable())
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to rename tags.", "tags"));
@@ -253,7 +253,7 @@
             $admin->display("pages".DIR."rename_tag", array("tag" => $tag));
         }
 
-        public function admin_edit_tags($admin) {
+        public function admin_edit_tags($admin): void {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to edit tags.", "tags"), null, 400);
 
@@ -326,7 +326,7 @@
             Flash::notice(__("Tag renamed.", "tags"), "manage_tags");
         }
 
-        public function admin_delete_tag($admin) {
+        public function admin_delete_tag($admin): void {
             if (!Post::any_editable())
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to delete tags.", "tags"));
@@ -406,18 +406,24 @@
             Flash::notice(__("Posts tagged.", "tags"), "manage_tags");
         }
 
-        public function main_tag($main) {
-            if (!isset($_GET['name']))
-                return $main->display(array("pages".DIR."tag", "pages".DIR."index"),
-                    array("reason" => __("You did not specify a tag.", "tags")),
-                    __("Invalid Tag", "tags"));
+        public function main_tag($main): bool {
+            if (!isset($_GET['name'])) {
+                $main->display(array("pages".DIR."tag", "pages".DIR."index"),
+                               array("reason" => __("You did not specify a tag.", "tags")),
+                               __("Invalid Tag", "tags"));
+
+                return true;
+            }
 
             $tag = $this->tag_find($_GET['name']);
 
-            if (empty($tag))
-                return $main->display(array("pages".DIR."tag", "pages".DIR."index"),
+            if (empty($tag)) {
+                $main->display(array("pages".DIR."tag", "pages".DIR."index"),
                     array("reason" => __("The tag you specified was not found.", "tags")),
                     __("Invalid Tag", "tags"));
+
+                return true;
+            }
 
             $results = SQL::current()->select(
                 "post_attributes",
@@ -430,10 +436,13 @@
             foreach ($results as $result)
                 $ids[] = $result["post_id"];
 
-            if (empty($ids))
-                return $main->display(array("pages".DIR."tag", "pages".DIR."index"),
+            if (empty($ids)) {
+                $main->display(array("pages".DIR."tag", "pages".DIR."index"),
                     array("reason" => __("There are no posts with the tag you specified.", "tags")),
                     __("Invalid Tag", "tags"));
+
+                return true;
+            }
 
             $posts = new Paginator(
                 Post::find(array("placeholders" => true,
@@ -445,9 +454,11 @@
             $main->display(array("pages".DIR."tag", "pages".DIR."index"),
                            array("posts" => $posts, "tag" => $tag),
                            _f("Posts tagged with &#8220;%s&#8221;", array($tag["name"]), "tags"));
+
+            return true;
         }
 
-        public function main_tags($main) {
+        public function main_tags($main): void {
             $nonce = "";
             Trigger::current()->filter($nonce, "stylesheets_nonce");
 
@@ -457,14 +468,14 @@
                            __("Tags", "tags"));
         }
 
-        public function metaWeblog_getPost($struct, $post) {
+        public function metaWeblog_getPost($struct, $post): array {
             if (!empty($post->tags))
                 $struct['mt_keywords'] = implode(", ", array_keys($post->tags));
 
             return $struct;
         }
 
-        public function metaWeblog_before_editPost($values, $struct) {
+        public function metaWeblog_before_editPost($values, $struct): array {
             if (isset($struct["mt_keywords"])) {
                 $tags = $this->prepare_tags($struct["mt_keywords"]);
                 $values["tags"] = $this->tags_serialize($tags);
@@ -473,7 +484,7 @@
             return $values;
         }
 
-        public function related_posts($ids, $post, $limit) {
+        public function related_posts($ids, $post, $limit): array {
             if (empty($post->tags))
                 return $ids;
 
@@ -498,7 +509,7 @@
             return $ids;
         }
 
-        public function tag_cloud($limit = false, $sort = "popularity_desc", $scale = 400) {
+        public function tag_cloud($limit = false, $sort = "popularity_desc", $scale = 400): array {
             if (isset($this->tag_cache))
                 $cloud = $this->tag_cache;
 
@@ -557,7 +568,7 @@
             return ($limit) ? array_slice($cloud, 0, $limit) : $cloud ;
         }
 
-        private function tag_title_post_count($tag, $count) {
+        private function tag_title_post_count($tag, $count): string {
             $str = _p("%d post tagged with &#8220;%s&#8221;", "%d posts tagged with &#8220;%s&#8221;", $count, "tags");
             return sprintf($str, $count, fix($tag, true));
         }
@@ -572,14 +583,14 @@
             return false;
         }
 
-        public function feed_item($post, $feed) {
+        public function feed_item($post, $feed): void {
             $scheme = url("tags", MainController::current());
 
             foreach ($post->tags as $tag => $clean)
                 $feed->category($clean, $scheme, $tag);
         }
 
-        public function admin_javascript() {
+        public function admin_javascript(): void {
             include MODULES_DIR.DIR."tags".DIR."javascript.php";
         }
     }

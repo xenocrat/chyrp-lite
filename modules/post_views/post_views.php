@@ -6,25 +6,25 @@
         # Query caches for methods.
         private $caches = array();
 
-        static function __install() {
+        static function __install(): void {
             View::install();
         }
 
-        static function __uninstall($confirm) {
+        static function __uninstall($confirm): void {
             if ($confirm)
                 View::uninstall();
         }
 
-        public function twig_context_main($context) {
+        public function twig_context_main($context): void {
             if (isset($context["post"]) and ($context["post"] instanceof Post) and !$context["post"]->no_results)
                 View::add($context["post"]->id, Visitor::current()->id);
         }
 
-        public function manage_posts_column_header() {
+        public function manage_posts_column_header(): void {
             echo '<th class="post_views value">'.__("View Count", "post_views").'</th>';
         }
 
-        public function manage_posts_column($post) {
+        public function manage_posts_column($post): void {
             if ($post->view_count > 0)
                 echo '<td class="post_views value">'.'<a href="'.url("download_views/id/".$post->id).'" title="'.
                         fix(_f("Download view count for &#8220;%s&#8221;", $post->title(), "post_views"), true).'">'.
@@ -33,15 +33,15 @@
                 echo '<td class="post_views value">'.$post->view_count.'</td>';
         }
 
-        public function post($post) {
+        public function post($post): void {
             $post->has_many[] = "views";
         }
 
-        static function delete_post($post) {
+        static function delete_post($post): void {
             SQL::current()->delete("views", array("post_id" => $post->id));
         }
 
-        public function admin_download_views() {
+        public function admin_download_views(): void {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"),
                       __("An ID is required to download a view count.", "post_views"), null, 400);
@@ -66,7 +66,7 @@
             file_attachment($filedata, $filename.".csv");
         }
 
-        private function get_post_view_count($post_id) {
+        private function get_post_view_count($post_id): int {
             if (!isset($this->caches["post_view_counts"])) {
                 $counts = SQL::current()->select("views",
                                                  "COUNT(post_id) AS total, post_id as post_id",
@@ -86,7 +86,7 @@
             return fallback($this->caches["post_view_counts"][$post_id], 0);
         }
 
-        public function post_view_count_attr($attr, $post) {
+        public function post_view_count_attr($attr, $post): int {
             if ($post->no_results)
                 return 0;
 

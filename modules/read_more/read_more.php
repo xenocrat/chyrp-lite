@@ -1,11 +1,11 @@
 <?php
     class ReadMore extends Modules {
-        public function __init() {
+        public function __init(): void {
             # Truncate in "markup_post_text" before Markdown filtering in "markup_text".
             $this->setPriority("markup_post_text", 1);
         }
 
-        public function markup_post_text($text, $post = null) {
+        public function markup_post_text($text, $post = null): string {
             if (!is_string($text) or !preg_match("/<!-- *more([^>]*)?-->/i", $text, $matches))
                 return $text;
 
@@ -25,7 +25,7 @@
             return $split[0].'<a class="read_more" href="'.$url.'">'.fix($more).'</a>';
         }
 
-        public function title_from_excerpt($text) {
+        public function title_from_excerpt($text): string {
             $split = preg_split('/<a class="read_more"/', $text);
             return $split[0];
         }

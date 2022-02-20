@@ -1,11 +1,11 @@
 <?php
     class EasyEmbed extends Modules {
-        public function __init() {
+        public function __init(): void {
             # Replace comment codes before Markdown filtering (priority 5).
             $this->setPriority("markup_text", 4);
         }
 
-        public function markup_text($text) {
+        public function markup_text($text): string {
             if (!is_string($text))
                 return $text;
 

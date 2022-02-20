@@ -1,28 +1,31 @@
 <?php
     class Lightbox extends Modules {
-        static function __install() {
+        static function __install(): void {
             Config::current()->set("module_lightbox",
                                    array("background" => "grey",
                                          "spacing" => 24,
                                          "protect" => true));
         }
 
-        static function __uninstall() {
+        static function __uninstall(): void {
             Config::current()->remove("module_lightbox");
         }
 
-        public function admin_lightbox_settings($admin) {
+        public function admin_lightbox_settings($admin): void {
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to change settings."));
     
-            if (empty($_POST))
-                return $admin->display("pages".DIR."lightbox_settings",
-                                       array("lightbox_background" => array(
-                                             "black"   => __("Black", "lightbox"),
-                                             "grey"    => __("Gray", "lightbox"),
-                                             "white"   => __("White", "lightbox"),
-                                             "inherit" => __("Inherit", "lightbox"))));
+            if (empty($_POST)) {
+                $admin->display("pages".DIR."lightbox_settings",
+                                array("lightbox_background" => array(
+                                      "black"   => __("Black", "lightbox"),
+                                      "grey"    => __("Gray", "lightbox"),
+                                      "white"   => __("White", "lightbox"),
+                                      "inherit" => __("Inherit", "lightbox"))));
+
+                return;
+            }
 
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
@@ -40,14 +43,14 @@
             Flash::notice(__("Settings updated."), "lightbox_settings");
         }
 
-        public function settings_nav($navs) {
+        public function settings_nav($navs): array {
             if (Visitor::current()->group->can("change_settings"))
                 $navs["lightbox_settings"] = array("title" => __("Lightbox", "lightbox"));
 
             return $navs;
         }
 
-        public function javascript() {
+        public function javascript(): void {
             $config = Config::current();
             include MODULES_DIR.DIR."lightbox".DIR."javascript.php";
         }

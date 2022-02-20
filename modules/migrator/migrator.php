@@ -1,6 +1,6 @@
 <?php
     class Migrator extends Modules {
-        public function admin_manage_migration($admin) {
+        public function admin_manage_migration($admin): void {
             if (!Visitor::current()->group->can("add_post"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to import content."));
@@ -8,7 +8,7 @@
             $admin->display("pages".DIR."manage_migration");
         }
 
-        public function manage_nav($navs) {
+        public function manage_nav($navs): array {
             if (Visitor::current()->group->can("add_post"))
                 $navs["manage_migration"] = array("title" => __("Migration", "migrator"));
 

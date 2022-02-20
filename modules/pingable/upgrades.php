@@ -8,7 +8,7 @@
      *
      * Versions: 2016.04 => 2017.01
      */
-    function add_edit_pingback() {
+    function add_edit_pingback(): void {
         $sql = SQL::current();
 
         if (!$sql->count("permissions", array("id" => "edit_pingback", "group_id" => 0)))

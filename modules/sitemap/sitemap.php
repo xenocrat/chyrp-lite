@@ -1,6 +1,6 @@
 <?php 
     class Sitemap extends Modules {
-        public function __init() {
+        public function __init(): void {
             $actions = array("add_post",
                              "add_page",
                              "update_post",
@@ -12,7 +12,7 @@
                 $this->addAlias($action, "make_sitemap", 8);
         }
 
-        static function __install() {
+        static function __install(): void {
             Config::current()->set("module_sitemap",
                                    array("blog_changefreq"  => "daily",
                                          "pages_changefreq" => "yearly",
@@ -20,30 +20,33 @@
                                          "sitemap_path"     => MAIN_DIR));
         }
 
-        static function __uninstall() {
+        static function __uninstall(): void {
             Config::current()->remove("module_sitemap");
         }
 
-        public function settings_nav($navs) {
+        public function settings_nav($navs): array {
             if (Visitor::current()->group->can("change_settings"))
                 $navs["sitemap_settings"] = array("title" => __("Sitemap", "sitemap"));
 
             return $navs;
         }
 
-        public function admin_sitemap_settings($admin) {
+        public function admin_sitemap_settings($admin): void {
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to change settings."));
 
-            if (empty($_POST))
-                return $admin->display("pages".DIR."sitemap_settings",
-                                       array("sitemap_changefreq" => array(
-                                             "hourly"  => __("Hourly", "sitemap"),
-                                             "daily"   => __("Daily", "sitemap"),
-                                             "weekly"  => __("Weekly", "sitemap"),
-                                             "monthly" => __("Monthly", "sitemap"),
-                                             "yearly"  => __("Yearly", "sitemap"),
-                                             "never"   => __("Never", "sitemap"))));
+            if (empty($_POST)) {
+                $admin->display("pages".DIR."sitemap_settings",
+                                array("sitemap_changefreq" => array(
+                                      "hourly"  => __("Hourly", "sitemap"),
+                                      "daily"   => __("Daily", "sitemap"),
+                                      "weekly"  => __("Weekly", "sitemap"),
+                                      "monthly" => __("Monthly", "sitemap"),
+                                      "yearly"  => __("Yearly", "sitemap"),
+                                      "never"   => __("Never", "sitemap"))));
+
+                return;
+            }
 
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
@@ -77,7 +80,7 @@
          * Function: make_sitemap
          * Generates a sitemap of the blog and writes it to the document root.
          */
-        public function make_sitemap() {
+        public function make_sitemap(): void {
             $results = SQL::current()->select("posts",
                                               "id",
                                               array("status" => "public"),

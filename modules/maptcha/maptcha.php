@@ -1,10 +1,10 @@
 <?php
     class Maptcha extends Modules implements CaptchaProvider {
-        static function __install() {
+        static function __install(): void {
             Config::current()->set("module_maptcha", array("maptcha_hashkey" => random(32)));
         }
 
-        static function __uninstall() {
+        static function __uninstall(): void {
             Config::current()->remove("module_maptcha");
         }
 

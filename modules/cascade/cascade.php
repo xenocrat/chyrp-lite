@@ -1,20 +1,22 @@
 <?php
     class Cascade extends Modules {
-        static function __install() {
+        static function __install(): void {
             Config::current()->set("module_cascade", array("ajax_scroll_auto" => true));
         }
 
-        static function __uninstall() {
+        static function __uninstall(): void {
             Config::current()->remove("module_cascade");
         }
 
-        public function admin_cascade_settings($admin) {
+        public function admin_cascade_settings($admin): void {
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to change settings."));
     
-            if (empty($_POST))
-                return $admin->display("pages".DIR."cascade_settings");
+            if (empty($_POST)) {
+                $admin->display("pages".DIR."cascade_settings");
+                return;
+            }
     
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
@@ -25,14 +27,14 @@
             Flash::notice(__("Settings updated."), "cascade_settings");
         }
 
-        public function settings_nav($navs) {
+        public function settings_nav($navs): array {
             if (Visitor::current()->group->can("change_settings"))
                 $navs["cascade_settings"] = array("title" => __("Cascade", "cascade"));
 
             return $navs;
         }
 
-        public function javascript() {
+        public function javascript(): void {
             include MODULES_DIR.DIR."cascade".DIR."javascript.php";
         }
     }

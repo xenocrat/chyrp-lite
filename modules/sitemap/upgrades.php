@@ -8,7 +8,7 @@
      *
      * Versions: 2020.01 => 2020.02
      */
-    function sitemap_update_config() {
+    function sitemap_update_config(): void {
         $config = Config::current();
         $array = $config->module_sitemap;
 
