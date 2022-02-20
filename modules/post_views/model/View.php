@@ -19,7 +19,7 @@
             parent::grab($this, $view_id, $options);
 
             if ($this->no_results)
-                return false;
+                return;
         }
 
         /**
@@ -28,7 +28,7 @@
          * See Also:
          *     <Model::search>
          */
-        static function find($options = array(), $options_for_object = array()) {
+        static function find($options = array(), $options_for_object = array()): array {
             return parent::search(get_class(), $options, $options_for_object);
         }
 
@@ -44,7 +44,7 @@
          * Returns:
          *     The newly created <View>.
          */
-        static function add($post_id, $user_id, $created_at = null) {
+        static function add($post_id, $user_id, $created_at = null): self {
             $sql = SQL::current();
 
             $sql->insert("views",
@@ -62,7 +62,7 @@
          * See Also:
          *     <Model::destroy>
          */
-        static function delete($view_id) {
+        static function delete($view_id): void {
             parent::destroy(get_class(), $view_id);
         }
 
@@ -70,7 +70,7 @@
          * Function: install
          * Creates the database table.
          */
-        static function install() {
+        static function install(): void {
             SQL::current()->create("views",
                                    array("id INTEGER PRIMARY KEY AUTO_INCREMENT",
                                          "post_id INTEGER NOT NULL",
@@ -82,7 +82,7 @@
          * Function: uninstall
          * Drops the database table.
          */
-        static function uninstall() {
+        static function uninstall(): void {
             SQL::current()->drop("views");
         }
     }

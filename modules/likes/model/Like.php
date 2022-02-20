@@ -19,7 +19,7 @@
             parent::grab($this, $like_id, $options);
 
             if ($this->no_results)
-                return false;
+                return;
         }
 
         /**
@@ -28,7 +28,7 @@
          * See Also:
          *     <Model::search>
          */
-        static function find($options = array(), $options_for_object = array()) {
+        static function find($options = array(), $options_for_object = array()): array {
             return parent::search(get_class(), $options, $options_for_object);
         }
 
@@ -48,7 +48,7 @@
          * Notes:
          *     Allows only one like per hash to avoid abuse by guests.
          */
-        static function add($post_id, $user_id, $timestamp, $session_hash) {
+        static function add($post_id, $user_id, $timestamp, $session_hash): self {
             $sql = SQL::current();
 
             $old = new self(array("post_id"      => $post_id,
@@ -75,7 +75,7 @@
          * See Also:
          *     <Model::destroy>
          */
-        static function delete($like_id) {
+        static function delete($like_id): void {
             parent::destroy(get_class(), $like_id);
         }
 
@@ -83,7 +83,7 @@
          * Function: deletable
          * Checks if the <User> can delete the like.
          */
-        public function deletable($user = null) {
+        public function deletable($user = null): bool {
             if ($this->no_results)
                 return false;
 
@@ -95,7 +95,7 @@
          * Function: editable
          * Checks if the <User> can edit the like.
          */
-        public function editable($user = null) {
+        public function editable($user = null): bool {
             if ($this->no_results)
                 return false;
 
@@ -113,7 +113,7 @@
          * Notes:
          *     Duplicate likes will be attributed ID 0 (non-removable).
          */
-        static function create($post_id) {
+        static function create($post_id): void {
             if (!isset($_SESSION["likes"][$post_id]))
                 $new = self::add($post_id,
                                  Visitor::current()->id,
@@ -135,7 +135,7 @@
          * Notes:
          *     Guests' likes are removable until the session is destroyed.
          */
-        static function remove($post_id) {
+        static function remove($post_id): void {
             if (!empty($_SESSION["likes"][$post_id]))
                 self::delete($_SESSION["likes"][$post_id]);
 
@@ -148,7 +148,7 @@
          * Function: discover
          * Determines if a visitor has liked a post and sets the session value.
          */
-        static function discover($post_id) {
+        static function discover($post_id): bool {
             if (logged_in()) {
                 $check = new self(array("post_id" => $post_id,
                                         "user_id" => Visitor::current()->id));
@@ -164,7 +164,7 @@
          * Function: session_hash
          * Returns a hash generated from the visitor's ID and IP address.
          */
-        private static function session_hash() {
+        private static function session_hash(): string {
             return md5(Visitor::current()->id.$_SERVER['REMOTE_ADDR']);
         }
 
@@ -172,7 +172,7 @@
          * Function: install
          * Creates the database table.
          */
-        static function install() {
+        static function install(): void {
             $sql = SQL::current();
 
             if ($sql->adapter == "mysql") {
@@ -200,7 +200,7 @@
          * Function: uninstall
          * Drops the database table.
          */
-        static function uninstall() {
+        static function uninstall(): void {
             SQL::current()->drop("likes");
         }
     }

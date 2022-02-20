@@ -43,7 +43,7 @@
          * See Also:
          *     <Model::search>
          */
-        static function find($options = array(), $options_for_object = array()) {
+        static function find($options = array(), $options_for_object = array()): array {
             fallback($options["order"], "id ASC");
             return parent::search("user", $options, $options_for_object);
         }
@@ -52,7 +52,7 @@
          * Function: current
          * Returns a singleton reference to the current visitor.
          */
-        public static function & current() {
+        public static function & current(): self {
             static $instance = null;
             $instance = (empty($instance)) ? new self() : $instance ;
             return $instance;

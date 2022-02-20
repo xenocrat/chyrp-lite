@@ -43,7 +43,7 @@
          * Function: ajax_destroy_post
          * Destroys a post.
          */
-        public function ajax_destroy_post() {
+        public function ajax_destroy_post(): void {
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
@@ -66,7 +66,7 @@
          * Function: ajax_destroy_page
          * Destroys a page.
          */
-        public function ajax_destroy_page() {
+        public function ajax_destroy_page(): void {
             if (!Visitor::current()->group->can("delete_page"))
                 show_403(__("Access Denied"), __("You do not have sufficient privileges to delete pages."));
 
@@ -89,7 +89,7 @@
          * Function: ajax_preview_post
          * Previews a post.
          */
-        public function ajax_preview_post() {
+        public function ajax_preview_post(): void {
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
@@ -127,7 +127,7 @@
          * Function: ajax_preview_page
          * Previews a page.
          */
-        public function ajax_preview_page() {
+        public function ajax_preview_page(): void {
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
@@ -158,7 +158,7 @@
          * Function: ajax_file_upload
          * Moves a file to the uploads directory.
          */
-        public function ajax_file_upload() {
+        public function ajax_file_upload(): void {
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 

@@ -20,7 +20,7 @@
             parent::grab($this, $user_id, $options);
 
             if ($this->no_results)
-                return false;
+                return;
 
             Trigger::current()->filter($this, "user");
         }
@@ -31,7 +31,7 @@
          * See Also:
          *     <Model::search>
          */
-        static function find($options = array(), $options_for_object = array()) {
+        static function find($options = array(), $options_for_object = array()): array {
             fallback($options["order"], "id ASC");
             return parent::search(get_class(), $options, $options_for_object);
         }
@@ -47,7 +47,7 @@
          * Returns:
          *     @true@ or @false@
          */
-        static function authenticate($login, $password) {
+        static function authenticate($login, $password): bool {
             $check = new self(array("login" => $login));
 
             if ($check->no_results)
@@ -85,7 +85,7 @@
                             $website = "",
                             $group_id = null,
                             $approved = true,
-                            $joined_at = null) {
+                            $joined_at = null): self {
             $config = Config::current();
             $sql = SQL::current();
             $trigger = Trigger::current();
@@ -175,7 +175,7 @@
          * See Also:
          *     <Model::destroy>
          */
-        static function delete($user_id) {
+        static function delete($user_id): void {
             parent::destroy(get_class(), $user_id);
         }
 
@@ -192,7 +192,7 @@
          * Notes:
          *     <random> tries to be cryptographically secure.
          */
-        static function hashPassword($password) {
+        static function hashPassword($password): string {
             $salt = random(16);
             $prefix = '$6$rounds=50000$';
             return crypt($password, $prefix.$salt);
@@ -212,7 +212,7 @@
          * Notes:
          *     Uses <hash_equals> if available to mitigate timing attacks.
          */
-        static function checkPassword($password, $stored) {
+        static function checkPassword($password, $stored): bool {
             $try = crypt($password, $stored);
             return hash_equals($stored, $try);
         }

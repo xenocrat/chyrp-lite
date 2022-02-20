@@ -18,7 +18,7 @@
             parent::grab($this, $category_id, $options);
 
             if ($this->no_results)
-                return false;
+                return;
 
             $this->url = url("category/".$this->clean, MainController::current());
         }
@@ -29,7 +29,7 @@
          * See Also:
          *     <Model::search>
          */
-        static function find($options = array(), $options_for_object = array()) {
+        static function find($options = array(), $options_for_object = array()): array {
             $options["from"] = "categorize";
             return parent::search(get_class(), $options, $options_for_object);
         }
@@ -49,7 +49,7 @@
          * See Also:
          *     <update>
          */
-        static function add($name, $clean, $show_on_home) {
+        static function add($name, $clean, $show_on_home): self {
             $sql = SQL::current();
 
             $sql->insert("categorize",
@@ -99,7 +99,7 @@
          * Function: delete
          * Deletes a category from the database.
          */
-        static function delete($category_id) {
+        static function delete($category_id): void {
             $trigger = Trigger::current();
             $sql = SQL::current();
 
@@ -120,7 +120,7 @@
          * Function: deletable
          * Checks if the <User> can delete the category.
          */
-        public function deletable($user = null) {
+        public function deletable($user = null): bool {
             if ($this->no_results)
                 return false;
 
@@ -132,7 +132,7 @@
          * Function: editable
          * Checks if the <User> can edit the category.
          */
-        public function editable($user = null) {
+        public function editable($user = null): bool {
             if ($this->no_results)
                 return false;
 
@@ -151,7 +151,7 @@
          *     The unique version of the slug.
          *     If it's not used, it's the same as $clean. If it is, a number is appended.
          */
-        static function check_clean($clean) {
+        static function check_clean($clean): string {
             if (empty($clean))
                 return $clean;
 
@@ -170,7 +170,7 @@
          * Function: install
          * Creates the database table.
          */
-        static function install() {
+        static function install(): void {
             SQL::current()->create("categorize",
                                    array("id INTEGER PRIMARY KEY AUTO_INCREMENT",
                                          "name  VARCHAR(128) NOT NULL",
@@ -182,7 +182,7 @@
          * Function: uninstall
          * Drops the database table.
          */
-        static function uninstall() {
+        static function uninstall(): void {
             $sql = SQL::current();
 
             $sql->drop("categorize");

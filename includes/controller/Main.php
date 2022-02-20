@@ -163,7 +163,7 @@
          * Function: main_index
          * Grabs the posts for the main index.
          */
-        public function main_index() {
+        public function main_index(): void {
             $this->display("pages".DIR."index",
                            array("posts" => new Paginator(Post::find(
                            array("placeholders" => true)), $this->post_limit)));
@@ -173,7 +173,7 @@
          * Function: main_updated
          * Grabs the posts that have been updated.
          */
-        public function main_updated() {
+        public function main_updated(): void {
             $this->display(array("pages".DIR."updated", "pages".DIR."index"),
                            array("posts" => new Paginator(Post::find(
                            array("placeholders" => true,
@@ -186,7 +186,7 @@
          * Function: main_archive
          * Grabs the posts for the archive page.
          */
-        public function main_archive() {
+        public function main_archive(): void {
             $sql = SQL::current();
             $statuses = Post::statuses();
             $feathers = Post::feathers();
@@ -283,7 +283,7 @@
          * Function: main_search
          * Grabs the posts and pages for a search query.
          */
-        public function main_search() {
+        public function main_search(): void {
             $config = Config::current();
             $visitor = Visitor::current();
 
@@ -338,7 +338,7 @@
          * Function: main_drafts
          * Grabs the posts with draft status created by this user.
          */
-        public function main_drafts() {
+        public function main_drafts(): void {
             $visitor = Visitor::current();
 
             if (!$visitor->group->can("view_own_draft", "view_draft"))
@@ -357,7 +357,7 @@
          * Function: main_view
          * Handles post viewing via dirty URL or clean URL e.g. /year/month/day/url/.
          */
-        public function main_view($attrs = array(), $arg = array()) {
+        public function main_view($attrs = array(), $arg = array()): bool {
             $post = (!empty($attrs)) ?
                 Post::from_url($attrs, null, array("drafts" => true)) :
                 new Post(array("url" => fallback($_GET['url'])), array("drafts" => true)) ;
@@ -377,13 +377,15 @@
 
             $this->display(array("pages".DIR."view", "pages".DIR."index"),
                            array("post" => $post), $post->title());
+
+            return true;
         }
 
         /**
          * Function: main_page
          * Handles page viewing via dirty URL or clean URL e.g. /parent/child/child-of-child/.
          */
-        public function main_page($url = null, $hierarchy = array()) {
+        public function main_page($url = null, $hierarchy = array()): bool {
             $trigger = Trigger::current();
             $visitor = Visitor::current();
 
@@ -405,13 +407,15 @@
 
             $this->display(array("pages".DIR.$page->url, "pages".DIR."page"),
                            array("page" => $page), $page->title);
+
+            return true;
         }
 
         /**
          * Function: main_id
          * Views a post or page by its static ID.
          */
-        public function main_id() {
+        public function main_id(): bool {
             if (!empty($_GET['post']) and is_numeric($_GET['post'])) {
                 $post = new Post($_GET['post']);
 
@@ -437,7 +441,7 @@
          * Function: main_random
          * Grabs a random post and redirects to it.
          */
-        public function main_random() {
+        public function main_random(): bool {
             $conds = array(Post::statuses());
 
             if (isset($_GET['feather']))
@@ -472,7 +476,7 @@
          * Function: main_register
          * Register a visitor as a new user.
          */
-        public function main_register() {
+        public function main_register(): void {
             $config = Config::current();
 
             if (!$config->can_register)
@@ -616,7 +620,7 @@
          * Function: main_login
          * Logs in a user if they provide the username and password.
          */
-        public function main_login() {
+        public function main_login(): void {
             $config = Config::current();
             $trigger = Trigger::current();
 
@@ -674,7 +678,7 @@
          * Function: main_controls
          * Updates the current user when the form is submitted.
          */
-        public function main_controls() {
+        public function main_controls(): void {
             $visitor = Visitor::current();
 
             if (!logged_in())
@@ -726,7 +730,7 @@
          * Function: main_lost_password
          * Emails a password reset link to the registered address of a user.
          */
-        public function main_lost_password() {
+        public function main_lost_password(): void {
             $config = Config::current();
 
             if (logged_in())
@@ -767,7 +771,7 @@
          * Function: main_feed
          * Grabs posts and serves a feed.
          */
-        public function main_feed($posts = null) {
+        public function main_feed($posts = null): void {
             $config = Config::current();
             $trigger = Trigger::current();
             $theme = Theme::current();
@@ -848,7 +852,7 @@
          *     $template is supplied sans ".twig" and relative to THEME_DIR.
          *     $template can be an array of fallback template filenames to try.
          */
-        public function display($template, $context = array(), $title = "") {
+        public function display($template, $context = array(), $title = ""): void {
             $config = Config::current();
             $route = Route::current();
             $trigger = Trigger::current();
@@ -859,8 +863,10 @@
 
             if (is_array($template))
                 foreach (array_values($template) as $index => $try)
-                    if ($theme->file_exists($try) or ($index + 1) == count($template))
-                        return $this->display($try, $context, $title);
+                    if ($theme->file_exists($try) or ($index + 1) == count($template)) {
+                        $this->display($try, $context, $title);
+                        return;
+                    }
 
             $this->displayed = true;
 
@@ -869,11 +875,15 @@
 
             # Serve feeds if a feed request was detected for this action.
             if ($this->feed) {
-                if ($trigger->exists($route->action."_feed"))
-                    return $trigger->call($route->action."_feed", $context);
+                if ($trigger->exists($route->action."_feed")) {
+                    $trigger->call($route->action."_feed", $context);
+                    return;
+                }
 
-                if (isset($context["posts"]))
-                    return $this->main_feed($context["posts"]);
+                if (isset($context["posts"])) {
+                    $this->main_feed($context["posts"]);
+                    return;
+                }
             }
 
             $this->context                       = array_merge($context, $this->context);

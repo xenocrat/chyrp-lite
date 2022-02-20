@@ -174,7 +174,7 @@
          * Function: admin_write_post
          * Post writing.
          */
-        public function admin_write_post() {
+        public function admin_write_post(): void {
             if (!Visitor::current()->group->can("add_post", "add_draft"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to add posts."));
@@ -240,7 +240,7 @@
          * Function: admin_edit_post
          * Post editing.
          */
-        public function admin_edit_post() {
+        public function admin_edit_post(): void {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to edit a post."), null, 400);
 
@@ -308,7 +308,7 @@
          * Function: admin_delete_post
          * Post deletion (confirm page).
          */
-        public function admin_delete_post() {
+        public function admin_delete_post(): void {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to delete a post."), null, 400);
 
@@ -356,7 +356,7 @@
          * Function: admin_manage_posts
          * Post management.
          */
-        public function admin_manage_posts() {
+        public function admin_manage_posts(): void {
             if (!Post::any_editable() and !Post::any_deletable())
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to manage any posts."));
@@ -446,7 +446,7 @@
          * Function: admin_write_page
          * Page creation.
          */
-        public function admin_write_page() {
+        public function admin_write_page(): void {
             if (!Visitor::current()->group->can("add_page"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to add pages."));
@@ -505,7 +505,7 @@
          * Function: admin_edit_page
          * Page editing.
          */
-        public function admin_edit_page() {
+        public function admin_edit_page(): void {
             if (!Visitor::current()->group->can("edit_page"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to edit this page."));
@@ -587,7 +587,7 @@
          * Function: admin_delete_page
          * Page deletion (confirm page).
          */
-        public function admin_delete_page() {
+        public function admin_delete_page(): void {
             if (!Visitor::current()->group->can("delete_page"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to delete pages."));
@@ -649,7 +649,7 @@
          * Function: admin_manage_pages
          * Page management.
          */
-        public function admin_manage_pages() {
+        public function admin_manage_pages(): void {
             $visitor = Visitor::current();
 
             if (!$visitor->group->can("edit_page", "delete_page"))
@@ -673,7 +673,7 @@
          * Function: admin_new_user
          * User creation.
          */
-        public function admin_new_user() {
+        public function admin_new_user(): void {
             if (!Visitor::current()->group->can("add_user"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to add users."));
@@ -763,7 +763,7 @@
          * Function: admin_edit_user
          * User editing.
          */
-        public function admin_edit_user() {
+        public function admin_edit_user(): void {
             if (!Visitor::current()->group->can("edit_user"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to edit users."));
@@ -869,7 +869,7 @@
          * Function: admin_delete_user
          * User deletion (confirm page).
          */
-        public function admin_delete_user() {
+        public function admin_delete_user(): void {
             if (!Visitor::current()->group->can("delete_user"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to delete users."));
@@ -958,7 +958,7 @@
          * Function: admin_manage_users
          * User management.
          */
-        public function admin_manage_users() {
+        public function admin_manage_users(): void {
             $visitor = Visitor::current();
 
             if (!$visitor->group->can("add_user", "edit_user", "delete_user"))
@@ -983,7 +983,7 @@
          * Function: admin_new_group
          * Group creation.
          */
-        public function admin_new_group() {
+        public function admin_new_group(): void {
             if (!Visitor::current()->group->can("add_group"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to add groups."));
@@ -1023,7 +1023,7 @@
          * Function: admin_edit_group
          * Group editing.
          */
-        public function admin_edit_group() {
+        public function admin_edit_group(): void {
             if (!Visitor::current()->group->can("edit_group"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to edit groups."));
@@ -1081,7 +1081,7 @@
          * Function: admin_delete_group
          * Group deletion (confirm page).
          */
-        public function admin_delete_group() {
+        public function admin_delete_group(): void {
             if (!Visitor::current()->group->can("delete_group"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to delete groups."));
@@ -1196,7 +1196,7 @@
          * Function: admin_manage_groups
          * Group management.
          */
-        public function admin_manage_groups() {
+        public function admin_manage_groups(): void {
             $visitor = Visitor::current();
 
             if (!$visitor->group->can("add_group", "edit_group", "delete_group"))
@@ -1228,7 +1228,7 @@
          * Function: admin_export
          * Export content from this installation.
          */
-        public function admin_export() {
+        public function admin_export(): void {
             $config  = Config::current();
             $trigger = Trigger::current();
             $visitor = Visitor::current();
@@ -1238,8 +1238,10 @@
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to export content."));
 
-            if (empty($_POST))
-                return $this->display("pages".DIR."export");
+            if (empty($_POST)) {
+                $this->display("pages".DIR."export");
+                return;
+            }
 
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
@@ -1437,7 +1439,7 @@
          * Function: admin_import
          * Import content to this installation.
          */
-        public function admin_import() {
+        public function admin_import(): void {
             $config  = Config::current();
             $trigger = Trigger::current();
             $visitor = Visitor::current();
@@ -1448,8 +1450,10 @@
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to import content."));
 
-            if (empty($_POST))
-                return $this->display("pages".DIR."import");
+            if (empty($_POST)) {
+                $this->display("pages".DIR."import");
+                return;
+            }
 
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
@@ -1635,7 +1639,7 @@
          * Function: admin_modules
          * Module enabling/disabling.
          */
-        public function admin_modules() {
+        public function admin_modules(): void {
             if (!Visitor::current()->group->can("toggle_extensions"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to toggle extensions."));
@@ -1719,7 +1723,7 @@
          * Function: admin_feathers
          * Feather enabling/disabling.
          */
-        public function admin_feathers() {
+        public function admin_feathers(): void {
             if (!Visitor::current()->group->can("toggle_extensions"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to toggle extensions."));
@@ -1755,7 +1759,7 @@
          * Function: admin_themes
          * Theme switching/previewing.
          */
-        public function admin_themes() {
+        public function admin_themes(): void {
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to change settings."));
@@ -1925,15 +1929,18 @@
          * Function: admin_general_settings
          * General Settings page.
          */
-        public function admin_general_settings() {
+        public function admin_general_settings(): void {
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to change settings."));
 
-            if (empty($_POST))
-                return $this->display("pages".DIR."general_settings",
-                                      array("locales" => locales(),
-                                            "timezones" => timezones()));
+            if (empty($_POST)) {
+                $this->display("pages".DIR."general_settings",
+                               array("locales" => locales(),
+                                     "timezones" => timezones()));
+
+                return;
+            }
 
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
@@ -1980,7 +1987,7 @@
          * Function: admin_content_settings
          * Content Settings page.
          */
-        public function admin_content_settings() {
+        public function admin_content_settings(): void {
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to change settings."));
@@ -1992,9 +1999,12 @@
                                   array("name" => "JSON",
                                         "class" => "JSONFeed"));
 
-            if (empty($_POST))
-                return $this->display("pages".DIR."content_settings",
-                                      array("feed_formats" => $feed_formats));
+            if (empty($_POST)) {
+                $this->display("pages".DIR."content_settings",
+                               array("feed_formats" => $feed_formats));
+
+                return;
+            }
 
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
@@ -2033,14 +2043,17 @@
          * Function: admin_user_settings
          * User Settings page.
          */
-        public function admin_user_settings() {
+        public function admin_user_settings(): void {
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to change settings."));
 
-            if (empty($_POST))
-                return $this->display("pages".DIR."user_settings",
-                                      array("groups" => Group::find(array("order" => "id DESC"))));
+            if (empty($_POST)) {
+                $this->display("pages".DIR."user_settings",
+                               array("groups" => Group::find(array("order" => "id DESC"))));
+
+                return;
+            }
 
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
@@ -2075,13 +2088,15 @@
          * Function: admin_route_settings
          * Route Settings page.
          */
-        public function admin_route_settings() {
+        public function admin_route_settings(): void {
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to change settings."));
 
-            if (empty($_POST))
-                return $this->display("pages".DIR."route_settings");
+            if (empty($_POST)) {
+                $this->display("pages".DIR."route_settings");
+                return;
+            }
 
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
@@ -2146,7 +2161,7 @@
          * Function: admin_help
          * Serves help pages for core and extensions.
          */
-        public function admin_help() {
+        public function admin_help(): void {
             if (empty($_GET['id']))
                 error(__("Error"), __("Missing argument."), null, 400);
 
@@ -2154,14 +2169,14 @@
             $nonce = "";
             Trigger::current()->filter($nonce, "stylesheets_nonce");
 
-            return $this->display("help".DIR.$template, array("style_nonce" => $nonce), __("Help"));
+            $this->display("help".DIR.$template, array("style_nonce" => $nonce), __("Help"));
         }
 
         /**
          * Function: navigation_context
          * Returns the navigation context for Twig.
          */
-        private function navigation_context($action) {
+        private function navigation_context($action): array {
             $trigger = Trigger::current();
             $visitor = Visitor::current();
 
@@ -2299,7 +2314,7 @@
          *     $template is supplied sans ".twig" and relative to /admin/ for core and extensions.
          *     $title defaults to a camelization of the template filename, e.g. foo_bar -> Foo Bar.
          */
-        public function display($template, $context = array(), $title = "") {
+        public function display($template, $context = array(), $title = ""): void {
             $config = Config::current();
             $route = Route::current();
             $trigger = Trigger::current();

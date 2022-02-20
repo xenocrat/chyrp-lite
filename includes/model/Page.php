@@ -19,12 +19,12 @@
          */
         public function __construct($page_id, $options = array()) {
             if (!isset($page_id) and empty($options))
-                return false;
+                return;
 
             parent::grab($this, $page_id, $options);
 
             if ($this->no_results)
-                return false;
+                return;
 
             $this->slug = $this->url;
 
@@ -42,7 +42,7 @@
          * See Also:
          *     <Model::search>
          */
-        static function find($options = array(), $options_for_object = array()) {
+        static function find($options = array(), $options_for_object = array()): array {
             return parent::search(get_class(), $options, $options_for_object);
         }
 
@@ -82,7 +82,7 @@
                             $clean        = "",
                             $url          = "",
                             $created_at   = null,
-                            $updated_at   = null) {
+                            $updated_at   = null): self {
             $user_id = ($user instanceof User) ? $user->id : $user ;
 
             fallback($user_id,      Visitor::current()->id);
@@ -212,7 +212,7 @@
          * See Also:
          *     <Model::destroy>
          */
-        static function delete($page_id, $recursive = false) {
+        static function delete($page_id, $recursive = false): void {
             if ($recursive) {
                 $page = new self($page_id);
 
@@ -230,7 +230,7 @@
          * Parameters:
          *     $page_id - The page ID to check
          */
-        static function exists($page_id) {
+        static function exists($page_id): bool {
             return SQL::current()->count("pages", array("id" => $page_id)) == 1;
         }
 
@@ -245,7 +245,7 @@
          *     The unique version of $url.
          *     If unused, it's the same as $url. If used, a number is appended to it.
          */
-        static function check_url($url) {
+        static function check_url($url): string {
             if (empty($url))
                 return $url;
 
@@ -264,7 +264,7 @@
          * Function: filter
          * Filters the page attributes through filter_page and markup filters.
          */
-        private function filter() {
+        private function filter(): void {
             $trigger = Trigger::current();
             $trigger->filter($this, "filter_page");
 

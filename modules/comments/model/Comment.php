@@ -39,7 +39,7 @@
             parent::grab($this, $comment_id, $options);
 
             if ($this->no_results)
-                return false;
+                return;
 
             $this->filtered = !isset($options["filter"]) or $options["filter"];
 
@@ -55,7 +55,7 @@
          * See Also:
          *     <Model::search>
          */
-        static function find($options = array(), $options_for_object = array()) {
+        static function find($options = array(), $options_for_object = array()): array {
             $skip_where = (ADMIN or (isset($options["skip_where"]) and $options["skip_where"]));
 
             if (!$skip_where) {
@@ -88,7 +88,7 @@
                                $post,
                                $parent,
                                $notify,
-                               $status = null) {
+                               $status = null): self {
             $config = Config::current();
             $visitor = Visitor::current();
             $trigger = Trigger::current();
@@ -163,7 +163,7 @@
                             $parent = null,
                             $notify = null,
                             $created_at = null,
-                            $updated_at = null) {
+                            $updated_at = null): self {
             $sql = SQL::current();
             $config = Config::current();
 
@@ -281,7 +281,7 @@
          * See Also:
          *     <Model::destroy>
          */
-        static function delete($comment_id) {
+        static function delete($comment_id): void {
             parent::destroy(get_class(), $comment_id, array("skip_where" => true));
         }
 
@@ -289,7 +289,7 @@
          * Function: editable
          * Checks if the <User> can edit the comment.
          */
-        public function editable($user = null) {
+        public function editable($user = null): bool {
             if ($this->no_results)
                 return false;
 
@@ -302,7 +302,7 @@
          * Function: deletable
          * Checks if the <User> can delete the comment.
          */
-        public function deletable($user = null) {
+        public function deletable($user = null): bool {
             if ($this->no_results)
                 return false;
 
@@ -315,7 +315,7 @@
          * Function: any_editable
          * Checks if the <Visitor> can edit any comments.
          */
-        static function any_editable() {
+        static function any_editable(): bool {
             $visitor = Visitor::current();
 
             # Can they edit comments?
@@ -334,7 +334,7 @@
          * Function: any_deletable
          * Checks if the <Visitor> can delete any comments.
          */
-        static function any_deletable() {
+        static function any_deletable(): bool {
             $visitor = Visitor::current();
 
             # Can they delete comments?
@@ -353,7 +353,7 @@
          * Function: creatable
          * Checks if the <Visitor> can comment on a post.
          */
-        static function creatable($post) {
+        static function creatable($post): bool {
             $visitor = Visitor::current();
             
             if (!$visitor->group->can("add_comment"))
@@ -370,7 +370,7 @@
          * Function: redactions
          * Returns a SQL query "chunk" that hides some comments from the <Visitor>.
          */
-        static function redactions() {
+        static function redactions(): string {
             $user_id = (int) Visitor::current()->id;
             $list = empty($_SESSION['comments']) ?
                 "(0)" : QueryBuilder::build_list(SQL::current(), $_SESSION['comments']) ;
@@ -411,7 +411,7 @@
          * Function: filter
          * Filters the comment through filter_comment and markup filters.
          */
-        private function filter() {
+        private function filter(): void {
             $trigger = Trigger::current();
             $trigger->filter($this, "filter_comment");
 
@@ -436,7 +436,7 @@
          * Function: install
          * Creates the database table.
          */
-        static function install() {
+        static function install(): void {
             SQL::current()->create("comments",
                                    array("id INTEGER PRIMARY KEY AUTO_INCREMENT",
                                          "body LONGTEXT",
@@ -458,7 +458,7 @@
          * Function: uninstall
          * Drops the database table.
          */
-        static function uninstall() {
+        static function uninstall(): void {
             $sql = SQL::current();
 
             $sql->drop("comments");

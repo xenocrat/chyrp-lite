@@ -15,6 +15,14 @@
 
         public $belongs_to = "user";
 
+        # Variable: $prev
+        # The previous post (the post made after this one).
+        private $prev;
+
+        # Variable: $next
+        # The next post (the post made before this one).
+        private $next;
+
         # Array: $url_attrs
         # The translation array of the post URL setting to regular expressions.
         static $url_attrs = array('(year)'     => '([0-9]{4})',
@@ -37,7 +45,7 @@
          */
         public function __construct($post_id = null, $options = array()) {
             if (!isset($post_id) and empty($options))
-                return false;
+                return;
 
             if (isset($options["where"]) and !is_array($options["where"]))
                 $options["where"] = array($options["where"]);
@@ -85,7 +93,7 @@
             parent::grab($this, $post_id, $options);
 
             if ($this->no_results)
-                return false;
+                return;
 
             $this->slug = $this->url;
 
@@ -112,7 +120,7 @@
          * See Also:
          *     <Model::search>
          */
-        static function find($options = array(), $options_for_object = array()) {
+        static function find($options = array(), $options_for_object = array()): array {
             if (isset($options["where"]) and !is_array($options["where"]))
                 $options["where"] = array($options["where"]);
             elseif (!isset($options["where"]))
@@ -197,7 +205,7 @@
                             $created_at = null,
                             $updated_at = null,
                             $pingbacks  = true,
-                            $options    = array()) {
+                            $options    = array()): self {
             $user_id = ($user instanceof User) ? $user->id : $user ;
 
             fallback($clean,        slug(8));
@@ -367,7 +375,7 @@
          * See Also:
          *     <Model::destroy>
          */
-        static function delete($id) {
+        static function delete($id): void {
             parent::destroy(get_class(), $id, array("skip_where" => true));
             SQL::current()->delete("post_attributes", array("post_id" => $id));
         }
@@ -376,7 +384,7 @@
          * Function: deletable
          * Checks if the <User> can delete the post.
          */
-        public function deletable($user = null) {
+        public function deletable($user = null): bool {
             if ($this->no_results)
                 return false;
 
@@ -395,7 +403,7 @@
          * Function: editable
          * Checks if the <User> can edit the post.
          */
-        public function editable($user = null) {
+        public function editable($user = null): bool {
             if ($this->no_results)
                 return false;
 
@@ -414,7 +422,7 @@
          * Function: any_editable
          * Checks if the <Visitor> can edit any posts.
          */
-        static function any_editable() {
+        static function any_editable(): bool {
             $visitor = Visitor::current();
             $sql = SQL::current();
 
@@ -444,7 +452,7 @@
          * Function: any_deletable
          * Checks if the <Visitor> can delete any posts.
          */
-        static function any_deletable() {
+        static function any_deletable(): bool {
             $visitor = Visitor::current();
             $sql = SQL::current();
 
@@ -480,7 +488,7 @@
          * Returns:
          *     true - if a post with that ID is in the database.
          */
-        static function exists($post_id) {
+        static function exists($post_id): bool {
             return SQL::current()->count("posts", array("id" => $post_id)) == 1;
         }
 
@@ -495,7 +503,7 @@
          *     The unique version of the URL value.
          *     If unused, it's the same as $url. If used, a number is appended to it.
          */
-        static function check_url($url) {
+        static function check_url($url): string {
             if (empty($url))
                 return $url;
 
@@ -631,15 +639,16 @@
             if ($this->no_results)
                 return false;
 
-            if (isset($this->next))
-                return $this->next;
+            if (!isset($this->next)) {
+                $this->next = new self(null,
+                                       array("where" => array("created_at <" => $this->created_at,
+                                                              ($this->status == self::STATUS_DRAFT ?
+                                                                 self::statuses(array(self::STATUS_DRAFT)) :
+                                                                 self::statuses())),
+                                             "order" => "created_at DESC, id DESC"));
+            }
 
-            return $this->next = new self(null,
-                                          array("where" => array("created_at <" => $this->created_at,
-                                                                 ($this->status == self::STATUS_DRAFT ?
-                                                                    self::statuses(array(self::STATUS_DRAFT)) :
-                                                                    self::statuses())),
-                                                "order" => "created_at DESC, id DESC"));
+            return $this->next;
         }
 
         /**
@@ -652,22 +661,23 @@
             if ($this->no_results)
                 return false;
 
-            if (isset($this->prev))
-                return $this->prev;
+            if (!isset($this->prev)) {
+                $this->prev = new self(null,
+                                       array("where" => array("created_at >" => $this->created_at,
+                                                             ($this->status == self::STATUS_DRAFT ?
+                                                                 self::statuses(array(self::STATUS_DRAFT)) :
+                                                                 self::statuses())),
+                                             "order" => "created_at ASC, id ASC"));
+            }
 
-            return $this->prev = new self(null,
-                                          array("where" => array("created_at >" => $this->created_at,
-                                                                ($this->status == self::STATUS_DRAFT ?
-                                                                    self::statuses(array(self::STATUS_DRAFT)) :
-                                                                    self::statuses())),
-                                                "order" => "created_at ASC, id ASC"));
+            return $this->prev;
         }
 
         /**
          * Function: theme_exists
          * Checks if the current post's feather theme file exists.
          */
-        public function theme_exists() {
+        public function theme_exists(): bool {
             return !$this->no_results and Theme::current()->file_exists("feathers".DIR.$this->feather);
         }
 
@@ -675,7 +685,7 @@
          * Function: filter
          * Filters the post attributes through filter_post and any Feather filters.
          */
-        private function filter() {
+        private function filter(): void {
             $class = camelize($this->feather);
             $touched = array();
 
@@ -802,7 +812,7 @@
          *     $start - An array of additional statuses to allow;
          *              "registered_only", "private" and "scheduled" are added deterministically.
          */
-        static function statuses($start = array()) {
+        static function statuses($start = array()): string {
             $visitor = Visitor::current();
 
             $statuses = array_merge(array(self::STATUS_PUBLIC), $start);
@@ -825,7 +835,7 @@
          * Function: feathers
          * Returns a SQL query "chunk" for the "feather" column so that it matches enabled feathers.
          */
-        static function feathers() {
+        static function feathers(): string {
             $feathers = array();
 
             foreach (Config::current()->enabled_feathers as $feather)
@@ -872,7 +882,7 @@
          *
          * Calls the @publish_post@ trigger with the updated <Post>.
          */
-        static function publish_scheduled($pingbacks = true) {
+        static function publish_scheduled($pingbacks = true): void {
             $sql = SQL::current();
             $ids = $sql->select("posts",
                                 "id",

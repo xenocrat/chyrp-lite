@@ -193,7 +193,7 @@
          *     read_from - An array to read from instead of performing another query.
          *     ignore_dupes - An array of columns in which duplicate values will be retained.
          */
-        protected static function grab($model, $id, $options = array()) {
+        protected static function grab($model, $id, $options = array()): void {
             $model_name = strtolower(get_class($model));
 
             if ($model_name == "visitor")
@@ -285,10 +285,12 @@
                 }
             }
 
-            if (!$read or !count($read))
-                return $model->no_results = true;
-            else
+            if (!$read or !count($read)) {
+                $model->no_results = true;
+                return;
+            } else {
                 $model->no_results = false;
+            }
 
             foreach ($read as $key => $val)
                 if (!is_int($key))
@@ -334,7 +336,7 @@
          * See Also:
          *     <Model.grab>
          */
-        protected static function search($model, $options = array(), $options_for_object = array()) {
+        protected static function search($model, $options = array(), $options_for_object = array()): array {
             $model_name = strtolower($model);
 
             fallback($options["select"], "*");
@@ -405,7 +407,7 @@
          *     $id - The ID of the object to delete.
          *     $options_for_object - An array of options for the instantiation of the model.
          */
-        protected static function destroy($model, $id, $options_for_object = array()) {
+        protected static function destroy($model, $id, $options_for_object = array()): void {
             $model = strtolower($model);
             $trigger = Trigger::current();
 
@@ -419,7 +421,7 @@
          * Function: deletable
          * Checks if the <User> can delete the object.
          */
-        public function deletable($user = null) {
+        public function deletable($user = null): bool {
             if ($this->no_results)
                 return false;
 
@@ -433,7 +435,7 @@
          * Function: editable
          * Checks if the <User> can edit the object.
          */
-        public function editable($user = null) {
+        public function editable($user = null): bool {
             if ($this->no_results)
                 return false;
 
@@ -453,9 +455,9 @@
          *     $after - If the link can be shown, show this after it.
          *     $classes - Extra CSS classes for the link, space-delimited.
          */
-        public function edit_link($text = null, $before = null, $after = null, $classes = "") {
+        public function edit_link($text = null, $before = null, $after = null, $classes = ""): void {
             if (!$this->editable())
-                return false;
+                return;
 
             fallback($text, __("Edit"));
 
@@ -478,9 +480,9 @@
          *     $after - If the link can be shown, show this after it.
          *     $classes - Extra CSS classes for the link, space-delimited.
          */
-        public function delete_link($text = null, $before = null, $after = null, $classes = "") {
+        public function delete_link($text = null, $before = null, $after = null, $classes = ""): void {
             if (!$this->deletable())
-                return false;
+                return;
 
             fallback($text, __("Delete"));
 

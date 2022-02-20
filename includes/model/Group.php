@@ -9,6 +9,10 @@
     class Group extends Model {
         public $has_many = "users";
 
+        # Integer: $size
+        # The number of users in the group.
+        private $size;
+
         /**
          * Function: __construct
          *
@@ -26,7 +30,7 @@
             $this->permissions = (array) oneof($this->permissions, array());
 
             if ($this->no_results)
-                return false;
+                return;
 
             Trigger::current()->filter($this, "group");
         }
@@ -37,7 +41,7 @@
          * See Also:
          *     <Model::search>
          */
-        static function find($options = array(), $options_for_object = array()) {
+        static function find($options = array(), $options_for_object = array()): array {
             $options["left_join"][] = array("table" => "permissions",
                                             "where" => "group_id = groups.id");
             $options["select"][] = "groups.*";
@@ -59,7 +63,7 @@
          * Notes:
          *     If the last arg is <true>, logic is "and", otherwise "or".
          */
-        public function can() {
+        public function can(): bool {
             if ($this->no_results)
                 return false;
 
@@ -96,7 +100,7 @@
          * See Also:
          *     <update>
          */
-        static function add($name, $permissions) {
+        static function add($name, $permissions): self {
             $sql = SQL::current();
             $trigger = Trigger::current();
             $name = strip_tags($name);
@@ -199,7 +203,7 @@
          * See Also:
          *     <Model::destroy>
          */
-        static function delete($group_id) {
+        static function delete($group_id): void {
             if (!empty($group_id))
                 SQL::current()->delete("permissions", array("group_id" => $group_id));
 
@@ -214,7 +218,7 @@
          *     $id - The ID for the permission, e.g "can_do_something".
          *     $name - The name for the permission, e.g. "Can Do Something".
          */
-        static function add_permission($id, $name = null) {
+        static function add_permission($id, $name = null): void {
             $sql = SQL::current();
 
             if ($sql->count("permissions", array("id" => $id, "group_id" => 0)))
@@ -231,7 +235,7 @@
          * Parameters:
          *     $id - The ID of the permission to remove.
          */
-        static function remove_permission($id) {
+        static function remove_permission($id): void {
             SQL::current()->delete("permissions", array("id" => $id));
         }
 
@@ -242,7 +246,7 @@
          * Parameters:
          *     $group_id - List enabled permissions for this group ID.
          */
-        static function list_permissions($group_id = 0) {
+        static function list_permissions($group_id = 0): array {
             $permissions = SQL::current()->select("permissions",
                                                   "*",
                                                   array("group_id" => $group_id))->fetchAll();
@@ -293,9 +297,10 @@
             if ($this->no_results)
                 return false;
 
-            return (isset($this->size)) ?
-                $this->size :
+            if (!isset($this->size))
                 $this->size = SQL::current()->count("users",
-                                                    array("group_id" => $this->id)) ;
+                                                    array("group_id" => $this->id));
+
+            return $this->size;
         }
     }
