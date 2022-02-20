@@ -150,7 +150,7 @@
      * Function: guess_url
      * Returns a best guess of the current URL.
      */
-    function guess_url() {
+    function guess_url(): string {
         $scheme = (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off") ? "https" : "http" ;
         $host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'] ;
 
@@ -165,7 +165,7 @@
      *     $index - The named index to test in the $_POST array.
      *     $fallback - The value to echo if the $_POST value is not set.
      */
-    function posted($index, $fallback = "") {
+    function posted($index, $fallback = ""): void {
         echo fix(isset($_POST[$index]) ? $_POST[$index] : $fallback, true);
     }
 
@@ -177,7 +177,7 @@
      *     $val1 - Compare this value...
      *     $val2 - ... with this value.
      */
-    function selected($val1, $val2) {
+    function selected($val1, $val2): void {
         if ($val1 == $val2)
                 echo " selected";
     }

@@ -95,7 +95,7 @@
      * Function: test_directories
      * Tests whether or not the directories that need write access have it.
      */
-    function test_directories() {
+    function test_directories(): void {
         # Test if we can write to MAIN_DIR (needed for the .htaccess file).
         if (!is_writable(MAIN_DIR))
             alert(__("Please CHMOD or CHOWN the installation directory to make it writable."));
@@ -115,7 +115,7 @@
      *
      * Versions: 2018.02 => 2018.03
      */
-    function update_htaccess() {
+    function update_htaccess(): void {
         $config = Config::current();
 
         if (file_exists(MAIN_DIR.DIR.".htaccess")) {
@@ -132,7 +132,7 @@
      *
      * Versions: 2019.03 => 2019.04
      */
-    function update_caddyfile() {
+    function update_caddyfile(): void {
         $config = Config::current();
 
         if (file_exists(MAIN_DIR.DIR."caddyfile")) {
@@ -149,7 +149,7 @@
      *
      * Versions: 2019.03 => 2019.04
      */
-    function update_nginx() {
+    function update_nginx(): void {
         $config = Config::current();
 
         if (file_exists(MAIN_DIR.DIR."include.conf")) {
@@ -166,7 +166,7 @@
      *
      * Versions: 2015.06 => 2015.07
      */
-    function add_markdown() {
+    function add_markdown(): void {
         $set = Config::current()->set("enable_markdown", true, true);
 
         if ($set === false)
@@ -179,7 +179,7 @@
      *
      * Versions: 2015.06 => 2015.07
      */
-    function add_homepage() {
+    function add_homepage(): void {
         $set = Config::current()->set("enable_homepage", false, true);
 
         if ($set === false)
@@ -192,7 +192,7 @@
      *
      * Versions: 2015.06 => 2015.07
      */
-    function add_uploads_limit() {
+    function add_uploads_limit(): void {
         $set = Config::current()->set("uploads_limit", 10, true);
 
         if ($set === false)
@@ -205,7 +205,7 @@
      *
      * Versions: 2015.06 => 2015.07
      */
-    function remove_trackbacking() {
+    function remove_trackbacking(): void {
         $set = Config::current()->remove("enable_trackbacking");
 
         if ($set === false)
@@ -218,7 +218,7 @@
      *
      * Versions: 2015.07 => 2016.01
      */
-    function add_admin_per_page() {
+    function add_admin_per_page(): void {
         $set = Config::current()->set("admin_per_page", 25, true);
 
         if ($set === false)
@@ -231,7 +231,7 @@
      *
      * Versions: 2016.03 => 2016.04
      */
-    function disable_importers() {
+    function disable_importers(): void {
         $config = Config::current();
         $set = $config->set("enabled_modules", array_diff($config->enabled_modules, array("importers")));
 
@@ -245,7 +245,7 @@
      *
      * Versions: 2016.03 => 2016.04
      */
-    function add_export_content() {
+    function add_export_content(): void {
         $sql = SQL::current();
 
         if (!$sql->count("permissions", array("id" => "export_content", "group_id" => 0)))
@@ -258,7 +258,7 @@
      *
      * Versions: 2017.02 => 2017.03
      */
-    function add_feed_format() {
+    function add_feed_format(): void {
         $set = Config::current()->set("feed_format", "AtomFeed", true);
 
         if ($set === false)
@@ -271,7 +271,7 @@
      *
      * Versions: 2017.03 => 2018.01
      */
-    function remove_captcha() {
+    function remove_captcha(): void {
         $set = Config::current()->remove("enable_captcha");
 
         if ($set === false)
@@ -284,7 +284,7 @@
      *
      * Versions: 2017.03 => 2018.01
      */
-    function disable_recaptcha() {
+    function disable_recaptcha(): void {
         $config = Config::current();
         $set = $config->set("enabled_modules", array_diff($config->enabled_modules, array("recaptcha")));
 
@@ -298,7 +298,7 @@
      *
      * Versions: 2018.03 => 2018.04
      */
-    function remove_feed_url() {
+    function remove_feed_url(): void {
         $set = Config::current()->remove("feed_url");
 
         if ($set === false)
@@ -311,7 +311,7 @@
      *
      * Versions: 2019.01 => 2019.02
      */
-    function remove_cookies_notification() {
+    function remove_cookies_notification(): void {
         $set = Config::current()->remove("cookies_notification");
 
         if ($set === false)
@@ -324,7 +324,7 @@
      *
      * Versions: 2019.02 => 2019.03
      */
-    function remove_ajax() {
+    function remove_ajax(): void {
         $set = Config::current()->remove("enable_ajax");
 
         if ($set === false)
@@ -337,7 +337,7 @@
      *
      * Versions: 2019.03 => 2019.04
      */
-    function disable_simplemde() {
+    function disable_simplemde(): void {
         $config = Config::current();
         $set = $config->set("enabled_modules", array_diff($config->enabled_modules, array("simplemde")));
 
@@ -351,7 +351,7 @@
      *
      * Versions: 2020.03 => 2020.04
      */
-    function add_search_pages() {
+    function add_search_pages(): void {
         $set = Config::current()->set("search_pages", false, true);
 
         if ($set === false)
@@ -364,7 +364,7 @@
      *
      * Versions: 2021.01 => 2021.02
      */
-    function fix_sqlite_post_pinned() {
+    function fix_sqlite_post_pinned(): void {
         $sql = SQL::current();
 
         if ($sql->adapter != "sqlite")
@@ -386,7 +386,7 @@
      *
      * Versions: 2022.01 => 2022.02
      */
-    function fix_post_updated() {
+    function fix_post_updated(): void {
         $sql = SQL::current();
 
         if ($sql->adapter == "pgsql")
@@ -408,7 +408,7 @@
      *
      * Versions: 2022.01 => 2022.02
      */
-    function mysql_utf8mb4() {
+    function mysql_utf8mb4(): void {
         $sql = SQL::current();
 
         if ($sql->adapter != "mysql")
