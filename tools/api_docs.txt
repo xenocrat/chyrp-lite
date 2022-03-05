@@ -890,7 +890,7 @@ Function: __construct
 The class constructor is private so there is only one connection.
 
 Parameters:
-    $settings - An array of settings.
+    $settings - An array of settings (optional).
 
 
 Function: connect
@@ -898,7 +898,7 @@ Function: connect
 Connects to the SQL database.
 
 Parameters:
-    $checking - Return a boolean of whether or not it could connect, instead of triggering an error.
+    $checking - Return a boolean for failure, instead of triggering an error?
 
 
 Function: query

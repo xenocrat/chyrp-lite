@@ -53,7 +53,7 @@ msgstr "编辑标签 &#8220;%s&#8221;"
 #: modules/tags/admin/pages/edit_tags.twig:10
 #: modules/tags/admin/pages/manage_tags.twig:52 modules/tags/tags.php:143
 #: modules/tags/tags.php:188 modules/tags/tags.php:195
-#: modules/tags/tags.php:457
+#: modules/tags/tags.php:468
 msgid "Tags"
 msgstr "标签"
 
@@ -182,25 +182,25 @@ msgstr "帖子已标记。"
 msgid "You did not specify a tag."
 msgstr "你没有指定一个标签。"
 
-#: modules/tags/tags.php:413 modules/tags/tags.php:420
-#: modules/tags/tags.php:436
+#: modules/tags/tags.php:413 modules/tags/tags.php:423
+#: modules/tags/tags.php:442
 msgid "Invalid Tag"
 msgstr "无效的标签。"
 
-#: modules/tags/tags.php:419
+#: modules/tags/tags.php:422
 msgid "The tag you specified was not found."
 msgstr "没有找到您指定的标签。"
 
-#: modules/tags/tags.php:435
+#: modules/tags/tags.php:441
 msgid "There are no posts with the tag you specified."
 msgstr "没有您指定标签的帖子。"
 
-#: modules/tags/tags.php:447
+#: modules/tags/tags.php:456
 #, php-format
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr "&#8220;%s&#8221; 的帖子标签"
 
-#: modules/tags/tags.php:561
+#: modules/tags/tags.php:572
 #, php-format
 msgid "%d post tagged with &#8220;%s&#8221;"
 msgid_plural "%d posts tagged with &#8220;%s&#8221;"

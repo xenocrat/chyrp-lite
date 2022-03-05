@@ -197,7 +197,7 @@ Arguments:
 change_setting
 --------------
 Called from:
-	includes/class/Config.php on line 76
+	includes/class/Config.php on line 87
 
 Arguments:
 	$setting, $value
@@ -245,13 +245,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 1243
+	includes/controller/Admin.php on line 1249
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1521
+	includes/controller/Admin.php on line 1529
 
 Arguments:
 	$group
@@ -260,7 +260,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1546
+	includes/controller/Admin.php on line 1554
 
 Arguments:
 	$user
@@ -269,7 +269,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1591
+	includes/controller/Admin.php on line 1599
 
 Arguments:
 	$entry, $post
@@ -278,7 +278,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1621
+	includes/controller/Admin.php on line 1629
 
 Arguments:
 	$entry, $page
@@ -287,7 +287,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1625
+	includes/controller/Admin.php on line 1633
 
 Arguments:
 	$imports
@@ -296,27 +296,27 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1908
+	includes/controller/Admin.php on line 1916
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1916
+	includes/controller/Admin.php on line 1924
 
 
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 400
+	includes/controller/Main.php on line 404
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 542
-	includes/controller/Main.php on line 576
-	includes/controller/Main.php on line 644
+	includes/controller/Main.php on line 548
+	includes/controller/Main.php on line 582
+	includes/controller/Main.php on line 650
 
 Arguments:
 	$user
@@ -325,13 +325,13 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 632
+	includes/controller/Main.php on line 638
 
 
 user_logged_out
 ---------------
 Called from:
-	includes/controller/Main.php on line 666
+	includes/controller/Main.php on line 672
 
 Arguments:
 	$user
@@ -340,7 +340,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 830
+	includes/controller/Main.php on line 836
 
 Arguments:
 	$post, $feed
@@ -418,7 +418,7 @@ Called from:
 add_group
 ---------
 Called from:
-	includes/model/Group.php on line 132
+	includes/model/Group.php on line 136
 
 Arguments:
 	$group
@@ -427,7 +427,7 @@ Arguments:
 update_group
 ------------
 Called from:
-	includes/model/Group.php on line 190
+	includes/model/Group.php on line 194
 
 Arguments:
 	$group, $this
@@ -454,7 +454,7 @@ Arguments:
 add_post
 --------
 Called from:
-	includes/model/Post.php on line 254
+	includes/model/Post.php on line 262
 
 Arguments:
 	$post, $options
@@ -463,7 +463,7 @@ Arguments:
 publish_post
 ------------
 Called from:
-	includes/model/Post.php on line 356
+	includes/model/Post.php on line 364
 
 Arguments:
 	$post, $this, $options
@@ -472,7 +472,7 @@ Arguments:
 update_post
 -----------
 Called from:
-	includes/model/Post.php on line 358
+	includes/model/Post.php on line 366
 
 Arguments:
 	$post, $this, $options
@@ -571,7 +571,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 755
+	modules/comments/comments.php on line 760
 
 Arguments:
 	$comment, $feed
@@ -866,7 +866,7 @@ Target:
 write_post_options
 ------------------
 Called from:
-	includes/controller/Admin.php on line 198
+	includes/controller/Admin.php on line 201
 
 Target:
 	$options
@@ -878,8 +878,8 @@ Arguments:
 post_options
 ------------
 Called from:
-	includes/controller/Admin.php on line 198
-	includes/controller/Admin.php on line 256
+	includes/controller/Admin.php on line 201
+	includes/controller/Admin.php on line 260
 
 Target:
 	$options
@@ -891,7 +891,7 @@ Arguments:
 edit_post_options
 -----------------
 Called from:
-	includes/controller/Admin.php on line 256
+	includes/controller/Admin.php on line 260
 
 Target:
 	$options
@@ -903,7 +903,7 @@ Arguments:
 posts_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 1305
+	includes/controller/Admin.php on line 1311
 
 Target:
 	$posts_atom
@@ -915,7 +915,7 @@ Arguments:
 pages_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 1355
+	includes/controller/Admin.php on line 1361
 
 Target:
 	$pages_atom
@@ -927,7 +927,7 @@ Arguments:
 export
 ------
 Called from:
-	includes/controller/Admin.php on line 1422
+	includes/controller/Admin.php on line 1428
 
 Target:
 	$exports
@@ -936,7 +936,7 @@ Target:
 before_import
 -------------
 Called from:
-	includes/controller/Admin.php on line 1500
+	includes/controller/Admin.php on line 1508
 
 Target:
 	$imports
@@ -945,8 +945,8 @@ Target:
 stylesheets_nonce
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2151
-	modules/tags/tags.php on line 452
+	includes/controller/Admin.php on line 2170
+	modules/tags/tags.php on line 463
 
 Target:
 	$nonce
@@ -955,7 +955,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 2192
+	includes/controller/Admin.php on line 2211
 
 Target:
 	$write
@@ -964,7 +964,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2229
+	includes/controller/Admin.php on line 2248
 
 Target:
 	$manage
@@ -973,7 +973,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 2254
+	includes/controller/Admin.php on line 2273
 
 Target:
 	$settings
@@ -982,7 +982,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2272
+	includes/controller/Admin.php on line 2291
 
 Target:
 	$extend
@@ -991,7 +991,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2333
+	includes/controller/Admin.php on line 2352
 
 Target:
 	$this->context
@@ -1041,7 +1041,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 899
+	includes/controller/Main.php on line 911
 
 Target:
 	$this->context
@@ -1144,7 +1144,7 @@ Arguments:
 group
 -----
 Called from:
-	includes/model/Group.php on line 31
+	includes/model/Group.php on line 35
 
 Target:
 	$this
@@ -1153,7 +1153,7 @@ Target:
 before_group_add_name
 ---------------------
 Called from:
-	includes/model/Group.php on line 104
+	includes/model/Group.php on line 108
 
 Target:
 	$name
@@ -1162,7 +1162,7 @@ Target:
 before_group_add_permissions
 ----------------------------
 Called from:
-	includes/model/Group.php on line 105
+	includes/model/Group.php on line 109
 
 Target:
 	$permissions
@@ -1171,7 +1171,7 @@ Target:
 before_group_update_name
 ------------------------
 Called from:
-	includes/model/Group.php on line 156
+	includes/model/Group.php on line 160
 
 Target:
 	$name
@@ -1180,7 +1180,7 @@ Target:
 before_group_update_permissions
 -------------------------------
 Called from:
-	includes/model/Group.php on line 157
+	includes/model/Group.php on line 161
 
 Target:
 	$permissions
@@ -1189,7 +1189,7 @@ Target:
 list_permissions
 ----------------
 Called from:
-	includes/model/Group.php on line 279
+	includes/model/Group.php on line 283
 
 Target:
 	$names
@@ -1234,7 +1234,7 @@ Target:
 post
 ----
 Called from:
-	includes/model/Post.php on line 104
+	includes/model/Post.php on line 112
 
 Target:
 	$this
@@ -1243,7 +1243,7 @@ Target:
 before_add_post
 ---------------
 Called from:
-	includes/model/Post.php on line 226
+	includes/model/Post.php on line 234
 
 Target:
 	$new_values
@@ -1252,7 +1252,7 @@ Target:
 before_add_post_attributes
 --------------------------
 Called from:
-	includes/model/Post.php on line 234
+	includes/model/Post.php on line 242
 
 Target:
 	$attributes
@@ -1261,7 +1261,7 @@ Target:
 before_update_post
 ------------------
 Called from:
-	includes/model/Post.php on line 321
+	includes/model/Post.php on line 329
 
 Target:
 	$new_values
@@ -1270,7 +1270,7 @@ Target:
 before_update_post_attributes
 -----------------------------
 Called from:
-	includes/model/Post.php on line 329
+	includes/model/Post.php on line 337
 
 Target:
 	$attributes
@@ -1279,7 +1279,7 @@ Target:
 title_from_excerpt
 ------------------
 Called from:
-	includes/model/Post.php on line 562
+	includes/model/Post.php on line 570
 
 Target:
 	$excerpt
@@ -1288,7 +1288,7 @@ Target:
 title
 -----
 Called from:
-	includes/model/Post.php on line 587
+	includes/model/Post.php on line 595
 
 Target:
 	$title
@@ -1300,7 +1300,7 @@ Arguments:
 excerpt
 -------
 Called from:
-	includes/model/Post.php on line 604
+	includes/model/Post.php on line 612
 
 Target:
 	$excerpt
@@ -1312,7 +1312,7 @@ Arguments:
 feed_content
 ------------
 Called from:
-	includes/model/Post.php on line 621
+	includes/model/Post.php on line 629
 
 Target:
 	$feed_content
@@ -1324,7 +1324,7 @@ Arguments:
 filter_post
 -----------
 Called from:
-	includes/model/Post.php on line 683
+	includes/model/Post.php on line 693
 
 Target:
 	$this

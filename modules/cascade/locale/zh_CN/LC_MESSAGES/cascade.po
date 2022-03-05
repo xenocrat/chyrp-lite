@@ -26,7 +26,7 @@ msgstr "自动"
 msgid "Load more posts when the visitor scrolls to the bottom of the page?"
 msgstr "当访问者滚动到页面底部时加载更多帖子？"
 
-#: modules/cascade/cascade.php:30 modules/cascade/info.php:3
+#: modules/cascade/cascade.php:32 modules/cascade/info.php:3
 msgid "Cascade"
 msgstr ""
 

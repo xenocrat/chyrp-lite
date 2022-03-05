@@ -120,9 +120,9 @@ msgid "Manage Comments"
 msgstr ""
 
 #: modules/comments/admin/pages/manage_comments.twig:16
-#: modules/comments/comments.php:524
-#: modules/comments/comments.php:547
-#: modules/comments/comments.php:556
+#: modules/comments/comments.php:529
+#: modules/comments/comments.php:552
+#: modules/comments/comments.php:561
 #: modules/comments/info.php:3
 msgid "Comments"
 msgstr ""
@@ -249,15 +249,15 @@ msgstr ""
 #: modules/comments/comments.php:247
 #: modules/comments/comments.php:264
 #: modules/comments/comments.php:287
-#: modules/comments/comments.php:605
-#: modules/comments/comments.php:622
-#: modules/comments/comments.php:643
+#: modules/comments/comments.php:610
+#: modules/comments/comments.php:627
+#: modules/comments/comments.php:648
 msgid "Comment not found."
 msgstr ""
 
 #: modules/comments/comments.php:173
 #: modules/comments/comments.php:251
-#: modules/comments/comments.php:626
+#: modules/comments/comments.php:631
 msgid "You do not have sufficient privileges to edit this comment."
 msgstr ""
 
@@ -266,24 +266,24 @@ msgid "Comment updated."
 msgstr ""
 
 #: modules/comments/comments.php:242
-#: modules/comments/comments.php:617
+#: modules/comments/comments.php:622
 msgid "An ID is required to edit a comment."
 msgstr ""
 
 #: modules/comments/comments.php:259
 #: modules/comments/comments.php:279
-#: modules/comments/comments.php:638
+#: modules/comments/comments.php:643
 msgid "An ID is required to delete a comment."
 msgstr ""
 
 #: modules/comments/comments.php:268
 #: modules/comments/comments.php:291
-#: modules/comments/comments.php:647
+#: modules/comments/comments.php:652
 msgid "You do not have sufficient privileges to delete this comment."
 msgstr ""
 
 #: modules/comments/comments.php:295
-#: modules/comments/comments.php:650
+#: modules/comments/comments.php:655
 msgid "Comment deleted."
 msgstr ""
 
@@ -308,87 +308,87 @@ msgstr ""
 msgid "Selected comments marked as spam."
 msgstr ""
 
-#: modules/comments/comments.php:537
+#: modules/comments/comments.php:542
 #, php-format
 msgid "Comments (%d)"
 msgstr ""
 
-#: modules/comments/comments.php:541
+#: modules/comments/comments.php:546
 #, php-format
 msgid "Spam (%d)"
 msgstr ""
 
-#: modules/comments/comments.php:566
+#: modules/comments/comments.php:571
 msgid "An ID is required to reload comments."
 msgstr ""
 
-#: modules/comments/comments.php:574
+#: modules/comments/comments.php:579
 #, php-format
 msgid "Comments added since %s"
 msgstr ""
 
-#: modules/comments/comments.php:600
+#: modules/comments/comments.php:605
 msgid "An ID is required to show a comment."
 msgstr ""
 
-#: modules/comments/comments.php:666
-#: modules/comments/comments.php:730
+#: modules/comments/comments.php:671
+#: modules/comments/comments.php:735
 #, php-format
 msgid "Comments on &#8220;%s&#8221;"
 msgstr ""
 
-#: modules/comments/comments.php:717
+#: modules/comments/comments.php:722
 msgid "You have unsubscribed from the conversation."
 msgstr ""
 
-#: modules/comments/comments.php:746
+#: modules/comments/comments.php:751
 #, php-format
 msgid "Comment #%d"
 msgstr ""
 
-#: modules/comments/comments.php:782
+#: modules/comments/comments.php:787
 msgid "A ping from your URL is already registered."
 msgstr ""
 
-#: modules/comments/comments.php:785
+#: modules/comments/comments.php:790
 msgid "Your URL is too long to be stored in our database."
 msgstr ""
 
-#: modules/comments/comments.php:796
+#: modules/comments/comments.php:801
 msgid "Pingback registered!"
 msgstr ""
 
-#: modules/comments/comments.php:806
+#: modules/comments/comments.php:811
 msgid "Open"
 msgstr ""
 
-#: modules/comments/comments.php:809
+#: modules/comments/comments.php:814
 msgid "Closed"
 msgstr ""
 
-#: modules/comments/comments.php:812
+#: modules/comments/comments.php:817
 msgid "Private"
 msgstr ""
 
-#: modules/comments/comments.php:815
+#: modules/comments/comments.php:820
 msgid "Registered Only"
 msgstr ""
 
-#: modules/comments/comments.php:821
+#: modules/comments/comments.php:826
 msgid "Comment Status"
 msgstr ""
 
-#: modules/comments/comments.php:994
+#: modules/comments/comments.php:999
 #, php-format
 msgid "New Comment at %s"
 msgstr ""
 
-#: modules/comments/comments.php:995
+#: modules/comments/comments.php:1000
 #, php-format
 msgid "%s commented on a blog post:"
 msgstr ""
 
-#: modules/comments/comments.php:1003
+#: modules/comments/comments.php:1008
 msgid "Unsubscribe from this conversation:"
 msgstr ""
 

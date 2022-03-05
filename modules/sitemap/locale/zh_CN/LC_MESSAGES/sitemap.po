@@ -84,6 +84,6 @@ msgstr "每年"
 msgid "Never"
 msgstr "从不"
 
-#: modules/sitemap/sitemap.php:60
+#: modules/sitemap/sitemap.php:63
 msgid "Could not determine the absolute path to the Sitemap."
 msgstr "无法确定Sitemap的绝对路径。"

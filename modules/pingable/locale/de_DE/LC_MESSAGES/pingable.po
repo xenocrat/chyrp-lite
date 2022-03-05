@@ -45,7 +45,7 @@ msgid "Manage Pingbacks"
 msgstr ""
 
 #: modules/pingable/admin/pages/manage_pingbacks.twig:16
-#: modules/pingable/pingable.php:151 modules/pingable/pingable.php:164
+#: modules/pingable/pingable.php:151 modules/pingable/pingable.php:166
 msgid "Pingbacks"
 msgstr ""
 

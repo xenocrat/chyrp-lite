@@ -38,7 +38,7 @@ msgstr "Proteggi immagini"
 msgid "Prevent visitors from saving images?"
 msgstr "Impedire ai visitatori di salvare le immagini?"
 
-#: modules/lightbox/info.php:3 modules/lightbox/lightbox.php:45
+#: modules/lightbox/info.php:3 modules/lightbox/lightbox.php:48
 msgid "Lightbox"
 msgstr "Tavolo luminoso"
 

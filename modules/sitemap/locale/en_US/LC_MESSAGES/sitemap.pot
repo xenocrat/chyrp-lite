@@ -65,7 +65,7 @@ msgstr ""
 msgid "Never"
 msgstr ""
 
-#: modules/sitemap/sitemap.php:60
+#: modules/sitemap/sitemap.php:63
 msgid "Could not determine the absolute path to the Sitemap."
 msgstr ""
 
