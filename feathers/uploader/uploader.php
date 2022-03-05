@@ -87,7 +87,7 @@
                              $_POST['option']);
         }
 
-        public function update($post): Post {
+        public function update($post)/*: Post|false */{
             if (isset($_FILES['uploads']) and upload_tester($_FILES['uploads'])) {
                 $filenames = array();
 

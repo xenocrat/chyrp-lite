@@ -73,7 +73,7 @@
      * Parameters:
      *     $url - The absolute or relative URL to redirect to.
      */
-    function redirect($url) {
+    function redirect($url)/*: never*/{
         if (class_exists("Route") and !substr_count($url, "://"))
             $url = url($url);
 
@@ -89,7 +89,7 @@
      *     $title - The title for the error dialog (optional).
      *     $body - The message for the error dialog (optional).
      */
-    function show_403($title = "", $body = "") {
+    function show_403($title = "", $body = "")/*: never*/{
         $title = oneof($title, __("Forbidden"));
         $body = oneof($body, __("You do not have permission to access this resource."));
 
@@ -113,7 +113,7 @@
      *     $title - The title for the error dialog (optional).
      *     $body - The message for the error dialog (optional).
      */
-     function show_404($title = "", $body = "") {
+     function show_404($title = "", $body = "")/*: never*/{
         $title = oneof($title, __("Not Found"));
         $body = oneof($body, __("The requested resource was not found."));
 
@@ -162,7 +162,7 @@
      * Returns:
      *     True if no action was needed, bytes written on success, false on failure.
      */
-    function htaccess_conf($url_path = null) {
+    function htaccess_conf($url_path = null)/*: int|bool*/{
         $url_path = oneof($url_path,
                           parse_url(Config::current()->chyrp_url, PHP_URL_PATH),
                           "/");
@@ -199,7 +199,7 @@
      * Returns:
      *     True if no action was needed, bytes written on success, false on failure.
      */
-    function caddyfile_conf($url_path = null) {
+    function caddyfile_conf($url_path = null)/*: int|bool*/{
         $url_path = oneof($url_path,
                           parse_url(Config::current()->chyrp_url, PHP_URL_PATH),
                           "/");
@@ -236,7 +236,7 @@
      * Returns:
      *     True if no action was needed, bytes written on success, false on failure.
      */
-    function nginx_conf($url_path = null) {
+    function nginx_conf($url_path = null)/*: int|bool*/{
         $url_path = oneof($url_path,
                           parse_url(Config::current()->chyrp_url, PHP_URL_PATH),
                           "/");
@@ -463,7 +463,7 @@
      * Returns:
      *     A time/date string with the supplied formatting.
      */
-    function when($formatting, $when) {
+    function when($formatting, $when)/*: string|false*/{
         $time = is_numeric($when) ? $when : strtotime($when) ;
         return date($formatting, $time);
     }
@@ -478,7 +478,7 @@
      * Returns:
      *     A standard datetime string.
      */
-    function datetime($when = null) {
+    function datetime($when = null)/*: string|false*/{
         fallback($when, time());
 
         $time = is_numeric($when) ? $when : strtotime($when) ;
@@ -489,7 +489,7 @@
      * Function: now
      * Alias to strtotime, for prettiness like now("+1 day").
      */
-    function now($when) {
+    function now($when)/*: string|false*/{
         return strtotime($when);
     }
 
@@ -554,7 +554,7 @@
      *     The value will be the first non-empty argument,
      *     or the last, or null if no arguments are supplied.
      */
-    function fallback(&$variable) {
+    function fallback(&$variable)/*: mixed*/{
         if (is_bool($variable))
             return $variable;
 
@@ -592,7 +592,7 @@
      *     It will guess where to stop based on types,
      *     e.g. "" has priority over array() but not 1.
      */
-    function oneof() {
+    function oneof()/*: mixed*/{
         $last = null;
         $args = func_get_args();
 
@@ -687,7 +687,7 @@
      * Returns:
      *     An authentication token, or the validity of the supplied token.
      */
-    function authenticate($hash = null) {
+    function authenticate($hash = null)/*: bool|string*/{
         Trigger::current()->call("visitor_authenticate");
 
         $id = session_id();
@@ -728,7 +728,7 @@
      * Returns:
      *     A byte value or the input if decoding failed.
      */
-    function shorthand_bytes($value) {
+    function shorthand_bytes($value)/*: mixed*/ {
         switch (substr($value, -1)) {
             case "K": case "k":
                 return (int) $value * 1024;
@@ -1430,7 +1430,7 @@
      * Returns:
      *     The response content, or false on failure.
      */
-    function get_remote($url, $redirects = 0, $timeout = 10, $headers = false) {
+    function get_remote($url, $redirects = 0, $timeout = 10, $headers = false)/*: string|false*/{
         extract(parse_url(add_scheme($url)), EXTR_SKIP);
         fallback($path, "/");
         fallback($scheme, "http");
@@ -1568,7 +1568,7 @@
      * Returns:
      *     The pingback target, or false on failure.
      */
-    function pingback_url($url) {
+    function pingback_url($url)/*: string|false*/{
         extract(parse_url(add_scheme($url)), EXTR_SKIP);
         fallback($path, "/");
         fallback($scheme, "http");
@@ -1856,7 +1856,7 @@
      * Returns:
      *     The filename of the copied file, or false on failure.
      */
-    function upload_from_url($url, $redirects = 3, $timeout = 10) {
+    function upload_from_url($url, $redirects = 3, $timeout = 10)/*: string|false*/{
         if (!preg_match("~[^ /\?]+(?=($|\?))~", $url, $match))
             return false;
 
@@ -2017,7 +2017,7 @@
      * Returns:
      *     A sanitized unique filename, or false on failure.
      */
-    function upload_filename($filename, $filter = array()) {
+    function upload_filename($filename, $filter = array())/*: string|false*/{
         if (empty($filter))
             $filter = upload_filter_whitelist();
 
@@ -2238,7 +2238,7 @@
      * Returns:
      *     A JSON encoded string or false on failure.
      */
-    function json_set($value, $options = 0, $depth = 512) {
+    function json_set($value, $options = 0, $depth = 512)/*: string|false*/{
         $encoded = json_encode($value, $options, $depth);
 
         if (json_last_error())
@@ -2260,7 +2260,7 @@
      * Returns:
      *     A JSON decoded value of the appropriate PHP type.
      */
-    function json_get($value, $assoc = false, $depth = 512, $options = 0) {
+    function json_get($value, $assoc = false, $depth = 512, $options = 0)/*: mixed*/{
         $decoded = json_decode($value, $assoc, $depth, $options);
 
         if (json_last_error())
@@ -2402,7 +2402,7 @@
      * Function: email
      * Send an email using PHP's mail() function or an alternative.
      */
-    function email() {
+    function email(): bool {
         $function = "mail";
         Trigger::current()->filter($function, "send_mail");
         return call_user_func_array($function, func_get_args());
@@ -2417,7 +2417,7 @@
      *     $params - An indexed array of parameters associated with this action.
      *               $params["to"] is required: the address to be emailed.
      */
-    function correspond($action, $params) {
+    function correspond($action, $params): bool {
         $config  = Config::current();
         $trigger = Trigger::current();
 

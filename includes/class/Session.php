@@ -52,7 +52,7 @@
          *     $id - Session ID.
          */
         #[\ReturnTypeWillChange]
-        public function read($id) {
+        public function read($id)/*: string|false */{
             $result = SQL::current()->select("sessions",
                                              array("data", "created_at"),
                                              array("id" => $id))->fetch();
@@ -109,7 +109,7 @@
          *     $lifetime - The configured maximum session lifetime in seconds.
          */
         #[\ReturnTypeWillChange]
-        public function gc($lifetime) {
+        public function gc($lifetime)/*: int|false */{
             SQL::current()->delete("sessions",
                                    "updated_at <= :thirty_days OR data = '' OR data IS NULL",
                                    array(":thirty_days" => datetime(strtotime("-30 days"))));

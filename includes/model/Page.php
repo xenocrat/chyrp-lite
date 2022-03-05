@@ -153,7 +153,7 @@
                                $clean        = null,
                                $url          = null,
                                $created_at   = null,
-                               $updated_at   = null) {
+                               $updated_at   = null)/*: self|false */{
             if ($this->no_results)
                 return false;
 
@@ -283,7 +283,7 @@
          *     $request - The request URI to parse.
          *     $route - The route object to respond to, or null to return a Page object.
          */
-        static function from_url($request, $route = null) {
+        static function from_url($request, $route = null)/*: self|array|false */{
             $hierarchy = explode("/", trim(str_replace(Config::current()->url, "/", $request), "/"));
             $pages = self::find(array("where" => array("url" => $hierarchy)));
 
@@ -301,7 +301,7 @@
          * Function: url
          * Returns a page's URL.
          */
-        public function url() {
+        public function url()/*: string|false */{
             if ($this->no_results)
                 return false;
 
@@ -326,7 +326,7 @@
          * Function: author
          * Returns a page's author. Example: $page->author->name
          */
-        public function author() {
+        public function author()/*: object|false */{
             if ($this->no_results)
                 return false;
 

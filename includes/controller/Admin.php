@@ -211,7 +211,7 @@
          * Function: admin_add_post
          * Adds a post when the form is submitted.
          */
-        public function admin_add_post() {
+        public function admin_add_post()/*: never */{
             $visitor = Visitor::current();
 
             if (!$visitor->group->can("add_post", "add_draft"))
@@ -270,7 +270,7 @@
          * Function: admin_update_post
          * Updates a post when the form is submitted.
          */
-        public function admin_update_post() {
+        public function admin_update_post()/*: never */{
             $visitor = Visitor::current();
             fallback($_SESSION['post_redirect'], "manage_posts");
 
@@ -328,7 +328,7 @@
          * Function: admin_destroy_post
          * Destroys a post.
          */
-        public function admin_destroy_post() {
+        public function admin_destroy_post()/*: never */{
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
@@ -458,7 +458,7 @@
          * Function: admin_add_page
          * Adds a page when the form is submitted.
          */
-        public function admin_add_page() {
+        public function admin_add_page()/*: never */{
             if (!Visitor::current()->group->can("add_page"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to add pages."));
@@ -531,7 +531,7 @@
          * Function: admin_update_page
          * Updates a page when the form is submitted.
          */
-        public function admin_update_page() {
+        public function admin_update_page()/*: never */{
             $visitor = Visitor::current();
             fallback($_SESSION['page_redirect'], "manage_pages");
 
@@ -607,7 +607,7 @@
          * Function: admin_destroy_page
          * Destroys a page.
          */
-        public function admin_destroy_page() {
+        public function admin_destroy_page()/*: never */{
             if (!Visitor::current()->group->can("delete_page"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to delete pages."));
@@ -691,7 +691,7 @@
          * Function: admin_add_user
          * Add a user when the form is submitted.
          */
-        public function admin_add_user() {
+        public function admin_add_user()/*: never */{
             if (!Visitor::current()->group->can("add_user"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to add users."));
@@ -787,7 +787,7 @@
          * Function: admin_update_user
          * Updates a user when the form is submitted.
          */
-        public function admin_update_user() {
+        public function admin_update_user()/*: never */{
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
@@ -896,7 +896,7 @@
          * Function: admin_destroy_user
          * Destroys a user.
          */
-        public function admin_destroy_user() {
+        public function admin_destroy_user()/*: never */{
             if (!Visitor::current()->group->can("delete_user"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to delete users."));
@@ -996,7 +996,7 @@
          * Function: admin_add_group
          * Adds a group when the form is submitted.
          */
-        public function admin_add_group() {
+        public function admin_add_group()/*: never */{
             if (!Visitor::current()->group->can("add_group"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to add groups."));
@@ -1045,7 +1045,7 @@
          * Function: admin_update_group
          * Updates a group when the form is submitted.
          */
-        public function admin_update_group() {
+        public function admin_update_group()/*: never */{
             if (!Visitor::current()->group->can("edit_group"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to edit groups."));
@@ -1109,7 +1109,7 @@
          * Function: admin_destroy_group
          * Destroys a group.
          */
-        public function admin_destroy_group() {
+        public function admin_destroy_group()/*: never */{
             if (!Visitor::current()->group->can("delete_group"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to delete groups."));
@@ -1789,7 +1789,7 @@
          * Function: admin_enable
          * Enables a module or feather.
          */
-        public function admin_enable() {
+        public function admin_enable()/*: never */{
             $config  = Config::current();
             $visitor = Visitor::current();
 
@@ -1835,7 +1835,7 @@
          * Function: admin_disable
          * Disables a module or feather.
          */
-        public function admin_disable() {
+        public function admin_disable()/*: never */{
             $config  = Config::current();
             $visitor = Visitor::current();
 
@@ -1874,7 +1874,7 @@
          * Function: admin_change_theme
          * Changes the theme.
          */
-        public function admin_change_theme() {
+        public function admin_change_theme()/*: never */{
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to change settings."));
@@ -1904,7 +1904,7 @@
          * Function: admin_preview_theme
          * Previews the theme.
          */
-        public function admin_preview_theme() {
+        public function admin_preview_theme()/*: never */{
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to change settings."));
@@ -2141,7 +2141,7 @@
          * Function: admin_login
          * Mask for MainController->login().
          */
-        public function admin_login() {
+        public function admin_login()/*: never */{
             if (logged_in())
                 Flash::notice(__("You are already logged in."), "/");
 
@@ -2153,7 +2153,7 @@
          * Function: admin_logout
          * Mask for MainController->logout().
          */
-        public function admin_logout() {
+        public function admin_logout()/*: never */{
             redirect(url("logout", MainController::current()));
         }
 

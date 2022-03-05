@@ -59,7 +59,7 @@
            $quality = $half;
     }
 
-    function thumb_creatable($type) {
+    function thumb_creatable($type): bool {
         if ($type == IMAGETYPE_GIF and (imagetypes() & IMG_GIF))
             return true;
 
@@ -78,7 +78,7 @@
         return false;
     }
 
-    function thumb_resize(&$crop_x, &$crop_y, &$thumb_w, &$thumb_h, &$orig_w, &$orig_h) {
+    function thumb_resize(&$crop_x, &$crop_y, &$thumb_w, &$thumb_h, &$orig_w, &$orig_h): void {
         # getimagesize() could not determine the image dimensions.
         if ($orig_w == 0 or $orig_h == 0) {
             $orig_w = 1;

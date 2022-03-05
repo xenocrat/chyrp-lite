@@ -60,7 +60,7 @@
                              $_POST['option']);
         }
 
-        public function update($post): Post {
+        public function update($post)/*: Post|false */{
             if (isset($_FILES['video']) and upload_tester($_FILES['video'])) {
                 $filename = upload($_FILES['video'], $this->video_extensions());
                 $this->delete_file($post);

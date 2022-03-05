@@ -91,7 +91,7 @@
                            __("Most liked posts", "likes"));
         }
 
-        public function main_like() {
+        public function main_like()/*: never */{
             if (empty($_GET['post_id']) or !is_numeric($_GET['post_id']))
                 error(__("Error"), __("An ID is required to like a post.", "likes"), null, 400);
 
@@ -108,7 +108,7 @@
             Flash::notice(__("Post liked.", "likes"), $post->url()."#likes_".$post->id);
         }
 
-        public function main_unlike() {
+        public function main_unlike()/*: never */{
             if (empty($_GET['post_id']) or !is_numeric($_GET['post_id']))
                 error(__("Error"),
                       __("An ID is required to unlike a post.", "likes"), null, 400);

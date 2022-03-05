@@ -51,7 +51,7 @@
          * Notes:
          *     Any additional arguments are passed on to the functions being called.
          */
-        public function call($name) {
+        public function call($name)/*: mixed */{
             $return = false;
 
             if (is_array($name)) {
@@ -115,7 +115,7 @@
          * Notes:
          *     Any additional arguments are passed on to the functions being called.
          */
-        public function filter(&$target, $name) {
+        public function filter(&$target, $name)/*: mixed */{
             if (is_array($name)) {
                 foreach ($name as $filter) {
                     $args = func_get_args();

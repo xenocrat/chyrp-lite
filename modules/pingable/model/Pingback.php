@@ -69,7 +69,7 @@
          * Returns:
          *     The updated <Pingback>.
          */
-        public function update($title) {
+        public function update($title)/*: self|false */{
             if ($this->no_results)
                 return false;
 

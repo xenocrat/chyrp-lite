@@ -149,7 +149,7 @@
          * Returns:
          *     The updated <Group>.
          */
-        public function update($name, $permissions) {
+        public function update($name, $permissions)/*: self|false */{
             if ($this->no_results)
                 return false;
 
@@ -293,7 +293,7 @@
          * Function: size
          * Returns the number of users in the group.
          */
-        public function size() {
+        public function size()/*: mixed */{
             if ($this->no_results)
                 return false;
 

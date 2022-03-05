@@ -60,7 +60,7 @@
                              $_POST['option']);
         }
 
-        public function update($post): Post {
+        public function update($post)/*: Post|false */{
             if (isset($_FILES['audio']) and upload_tester($_FILES['audio'])) {
                 $filename = upload($_FILES['audio'], $this->audio_extensions());
                 $this->delete_file($post);

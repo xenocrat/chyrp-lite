@@ -27,7 +27,7 @@
             return $names;
         }
 
-        public function pingback($post, $to, $from, $title, $excerpt) {
+        public function pingback($post, $to, $from, $title, $excerpt)/*: string|IXR_Error */{
             $count = SQL::current()->count("pingbacks",
                                            array("post_id" => $post->id,
                                                  "source" => $from));
@@ -60,7 +60,7 @@
             $admin->display("pages".DIR."edit_pingback", array("pingback" => $pingback));
         }
 
-        public function admin_update_pingback($admin) {
+        public function admin_update_pingback($admin)/*: never */{
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
@@ -103,7 +103,7 @@
             $admin->display("pages".DIR."delete_pingback", array("pingback" => $pingback));
         }
 
-        public function admin_destroy_pingback() {
+        public function admin_destroy_pingback()/*: never */{
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 

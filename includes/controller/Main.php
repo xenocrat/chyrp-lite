@@ -558,7 +558,7 @@
          * Function: main_activate
          * Activates (approves) a given login.
          */
-        public function main_activate() {
+        public function main_activate()/*: never */{
             if (logged_in())
                 Flash::notice(__("You cannot activate an account because you are already logged in."), "/");
 
@@ -588,7 +588,7 @@
          * Function: main_reset
          * Resets the password for a given login.
          */
-        public function main_reset() {
+        public function main_reset()/*: never */{
             if (logged_in())
                 Flash::notice(__("You cannot reset your password because you are already logged in."), "/");
 
@@ -660,7 +660,7 @@
          * Function: main_logout
          * Logs out the current user.
          */
-        public function main_logout() {
+        public function main_logout()/*: never */{
             $trigger = Trigger::current();
 
             if (!logged_in())

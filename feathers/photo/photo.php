@@ -62,7 +62,7 @@
                              $_POST['option']);
         }
 
-        public function update($post): Post {
+        public function update($post)/*: Post|false */{
             if (isset($_FILES['photo']) and upload_tester($_FILES['photo'])) {
                 $filename = upload($_FILES['photo'], $this->photo_extensions());
                 $this->delete_file($post);

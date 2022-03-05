@@ -55,7 +55,7 @@
                              $_POST['option']);
         }
 
-        public function update($post): Post {
+        public function update($post)/*: Post|false */{
             if (empty($_POST['source']))
                 error(__("Error"), __("URL can't be empty.", "link"), null, 422);
 

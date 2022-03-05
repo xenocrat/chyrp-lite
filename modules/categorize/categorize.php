@@ -222,7 +222,7 @@
             return true;
         }
 
-        public function manage_nav($navs) {
+        public function manage_nav($navs): array {
             if (Visitor::current()->group->can("manage_categorize"))
                 $navs["manage_category"] = array("title" => __("Categories", "categorize"),
                                                  "selected" => array("new_category",
@@ -264,7 +264,7 @@
             $admin->display("pages".DIR."new_category");
         }
 
-        public function admin_add_category($admin) {
+        public function admin_add_category($admin)/*: never */ {
             if (!Visitor::current()->group->can("manage_categorize"))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to add categories.", "categorize"));
@@ -303,7 +303,7 @@
             $admin->display("pages".DIR."edit_category", array("category" => $category));
         }
 
-        public function admin_update_category($admin) {
+        public function admin_update_category($admin)/*: never */ {
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
@@ -353,7 +353,7 @@
             $admin->display("pages".DIR."delete_category", array("category" => $category));
         }
 
-        public function admin_destroy_category() {
+        public function admin_destroy_category()/*: never */ {
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 

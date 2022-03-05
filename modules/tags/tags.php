@@ -269,7 +269,7 @@
             $admin->display("pages".DIR."edit_tags", array("post" => $post));
         }
 
-        public function admin_update_tags($admin) {
+        public function admin_update_tags($admin)/*: never */{
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
@@ -290,7 +290,7 @@
             Flash::notice(__("Tags updated.", "tags"), "manage_tags");
         }
 
-        public function admin_update_tag($admin) {
+        public function admin_update_tag($admin)/*: never */{
             if (!Post::any_editable())
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to rename tags.", "tags"));
@@ -343,7 +343,7 @@
             $admin->display("pages".DIR."delete_tag", array("tag" => $tag));
         }
 
-        public function admin_destroy_tag() {
+        public function admin_destroy_tag()/*: never */{
             if (!Post::any_editable())
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to delete tags.", "tags"));
@@ -379,7 +379,7 @@
             Flash::notice(__("Tag deleted.", "tags"), "manage_tags");
         }
 
-        public function admin_bulk_tag($admin) {
+        public function admin_bulk_tag($admin)/*: never */{
             if (!Post::any_editable())
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to add tags.", "tags"));
@@ -573,7 +573,7 @@
             return sprintf($str, $count, fix($tag, true));
         }
 
-        public function tag_find($clean) {
+        public function tag_find($clean)/*: array|false */{
             $cloud = $this->tag_cloud();
 
             foreach ($cloud as $tag)

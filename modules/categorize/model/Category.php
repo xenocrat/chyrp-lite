@@ -74,7 +74,7 @@
          * Returns:
          *     The updated <Category>.
          */
-        public function update($name, $clean, $show_on_home) {
+        public function update($name, $clean, $show_on_home)/*: self|false */{
             if ($this->no_results)
                 return false;
 

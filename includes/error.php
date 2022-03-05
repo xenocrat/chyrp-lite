@@ -61,7 +61,7 @@
      *     $backtrace - The trace of the error.
      *     $code - Numeric HTTP status code to set.
      */
-    function error($title = "", $body = "", $backtrace = array(), $code = 500) {
+    function error($title = "", $body = "", $backtrace = array(), $code = 500)/*: never*/{
         # Discard any additional output buffers.
         while (OB_BASE_LEVEL < ob_get_level())
             ob_end_clean();

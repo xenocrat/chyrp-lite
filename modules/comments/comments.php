@@ -211,13 +211,13 @@
             return array($comment, true, __("Comment updated.", "comments"));
         }
 
-        public function main_update_comment() {
+        public function main_update_comment()/*: never */{
             list($comment, $success, $message) = $this->update_comment();
             $type = ($success) ? "notice" : "warning" ;
             Flash::$type($message, $comment->post->url());
         }
 
-        public function admin_update_comment() {
+        public function admin_update_comment()/*: never */{
             list($comment, $success, $message) = $this->update_comment();
 
             if (!$success)
@@ -270,7 +270,7 @@
             $admin->display("pages".DIR."delete_comment", array("comment" => $comment));
         }
 
-        public function admin_destroy_comment() {
+        public function admin_destroy_comment()/*: never */{
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
@@ -343,7 +343,7 @@
                                     "order" => "post_id DESC, created_at ASC")), $admin->post_limit)));
         }
 
-        public function admin_bulk_comments() {
+        public function admin_bulk_comments()/*: never */{
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
@@ -696,7 +696,7 @@
             return false;
         }
 
-        public function main_unsubscribe($main) {
+        public function main_unsubscribe($main)/*: never */{
             fallback($_GET['email']);
             fallback($_GET['token']);
 
@@ -777,7 +777,7 @@
             return $values;
         }
 
-        public function pingback($post, $to, $from, $title, $excerpt) {
+        public function pingback($post, $to, $from, $title, $excerpt)/*: string|IXR_Error */{
             $count = SQL::current()->count("comments",
                                            array("post_id" => $post->id,
                                                  "status" => Comment::STATUS_PINGBACK,

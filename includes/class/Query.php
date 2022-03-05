@@ -102,7 +102,7 @@
          * Parameters:
          *     $column - The offset of the column to grab. Default 0.
          */
-        public function fetchColumn($column = 0) {
+        public function fetchColumn($column = 0)/*: mixed */{
             return $this->query->fetchColumn($column);
         }
 
@@ -110,7 +110,7 @@
          * Function: fetch
          * Returns the current row as an array.
          */
-        public function fetch() {
+        public function fetch()/*: mixed */{
             return $this->query->fetch();
         }
 
@@ -118,7 +118,7 @@
          * Function: fetchObject
          * Returns the current row as an object.
          */
-        public function fetchObject() {
+        public function fetchObject()/*: object|false */{
             return $this->query->fetchObject();
         }
 
@@ -126,7 +126,7 @@
          * Function: fetchAll
          * Returns an array of every result.
          */
-        public function fetchAll($style = PDO::FETCH_ASSOC) { # Can be PDO::FETCH_DEFAULT in PHP 8.0.7+
+        public function fetchAll($style = PDO::FETCH_ASSOC): array { # Can be PDO::FETCH_DEFAULT in PHP 8.0.7+
             return $this->query->fetchAll($style);
         }
 

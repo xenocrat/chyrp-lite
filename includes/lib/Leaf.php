@@ -81,7 +81,7 @@
      * Function: twig_callback_missing_function
      * Scans enabled modules for a callable method matching the name of a missing Twig function.
      */
-    function twig_callback_missing_function($name) {
+    function twig_callback_missing_function($name)/*: \Twig\TwigFunction|false */{
         foreach (Modules::$instances as $module)
             if (is_callable(array($module, "twig_function_".$name)))
                 return new \Twig\TwigFunction($name, array($module, "twig_function_".$name));
@@ -93,7 +93,7 @@
      * Function: twig_callback_missing_filter
      * Scans enabled modules for a callable method matching the name of a missing Twig filter.
      */
-    function twig_callback_missing_filter($name) {
+    function twig_callback_missing_filter($name)/*: \Twig\TwigFilter|false */{
         foreach (Modules::$instances as $module)
             if (is_callable(array($module, "twig_filter_".$name)))
                 return new \Twig\TwigFilter($name, array($module, "twig_filter_".$name));
@@ -132,9 +132,9 @@
      * Function: twig_function_mailto
      * Returns an obfuscated mailto: URL.
      */
-    function twig_function_mailto($email) {
+    function twig_function_mailto($email): ?string {
         if (!is_email($email))
-            return false;
+            return null;
 
         # "mailto:" composed in HTML entities.
         $mailto = "&#x0006D;&#x00061;&#x00069;&#x0006C;&#x00074;&#x0006F;&#x0003A;";
@@ -324,7 +324,7 @@
      * Function: twig_filter_preg_replace
      * Performs a <preg_replace> on the supplied string or array.
      */
-    function twig_filter_preg_replace($subject, $pattern, $replacement, $limit = -1) {
+    function twig_filter_preg_replace($subject, $pattern, $replacement, $limit = -1): ?string {
         return preg_replace($pattern, $replacement, $subject, $limit);
     }
 
@@ -332,7 +332,7 @@
      * Function: twig_filter_contains
      * Does the haystack variable contain the needle variable?
      */
-    function twig_filter_contains($haystack, $needle) {
+    function twig_filter_contains($haystack, $needle)/*: int|bool */{
         if (is_array($haystack))
             return in_array($needle, $haystack);
 

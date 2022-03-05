@@ -36,7 +36,7 @@
          * Function: read
          * Reads the configuration file and decodes the settings.
          */
-        private function read() {
+        private function read()/*: array|false */{
             $security = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
             $contents = @file_get_contents(INCLUDES_DIR.DIR."config.json.php");
 
@@ -55,7 +55,7 @@
          * Function: write
          * Encodes the settings and writes the configuration file.
          */
-        private function write() {
+        private function write()/*: int|false */{
             $contents = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
             $contents.= json_set($this->json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
@@ -71,7 +71,7 @@
          *     $value - The value to set.
          *     $fallback - Add the setting only if it doesn't exist.
          */
-        public function set($setting, $value, $fallback = false) {
+        public function set($setting, $value, $fallback = false)/*: int|false */{
             if (is_numeric($setting))
                 return false;
 
@@ -96,7 +96,7 @@
          * Parameters:
          *     $setting - The setting name.
          */
-        public function remove($setting) {
+        public function remove($setting)/*: int|false */{
             unset($this->json[$setting]);
             return $this->write();
         }
