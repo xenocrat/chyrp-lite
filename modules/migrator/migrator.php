@@ -223,7 +223,7 @@
                     }
             }
 
-            function reverse($a, $b) {
+            function reverse($a, $b): int {
                 if (empty($a) or empty($b))
                     return 0;
 

@@ -293,7 +293,7 @@
          * Function: size
          * Returns the number of users in the group.
          */
-        public function size()/*: mixed */{
+        public function size()/*: int|false */{
             if ($this->no_results)
                 return false;
 
@@ -301,6 +301,6 @@
                 $this->size = SQL::current()->count("users",
                                                     array("group_id" => $this->id));
 
-            return $this->size;
+            return (int) $this->size;
         }
     }

@@ -318,7 +318,7 @@
          *     $table - Table to get the latest value from.
          *     $seq - Name of the sequence.
          */
-        public function latest($table, $seq = "id_seq")/*: mixed */ {
+        public function latest($table, $seq = "id_seq")/*: string|false */ {
             if (!isset($this->db))
                 $this->connect();
 

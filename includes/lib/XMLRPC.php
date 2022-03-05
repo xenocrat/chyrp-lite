@@ -295,7 +295,7 @@
                               $pings);
 
             $trigger->call("metaWeblog_newPost", $struct, $post);
-            return $post->id;
+            return (int) $post->id;
         }
 
        /**
