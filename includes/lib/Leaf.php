@@ -124,7 +124,7 @@
      * Function: twig_function_posted
      * Returns a $_POST value if set, otherwise returns the fallback value.
      */
-    function twig_function_posted($index, $fallback = ""): bool {
+    function twig_function_posted($index, $fallback = ""): string {
         return isset($_POST[$index]) ? $_POST[$index] : $fallback ;
     }
 
