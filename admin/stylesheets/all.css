@@ -629,7 +629,6 @@ p.flash.warning {
 p.flash a {
     color: #ffffff;
     font-weight: bold;
-    font-style: italic;
     text-decoration: none;
 }
 p.flash a:hover,
