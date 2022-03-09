@@ -414,7 +414,6 @@
             pre.pane a {
                 color: #ffffff;
                 font-weight: bold;
-                font-style: italic;
                 text-decoration: none;
             }
             pre.pane a:hover,
