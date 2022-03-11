@@ -42,6 +42,7 @@
         $lastmod = strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']);
 
         if ($lastmod >= filemtime($filepath)) {
+            header_remove();
             header($_SERVER['SERVER_PROTOCOL']." 304 Not Modified");
             header("Cache-Control: public");
             header("Pragma: no-cache");
@@ -52,11 +53,8 @@
 
     # Half the quality if reduced data usage is preferred.
     if (isset($_SERVER['HTTP_SAVE_DATA'])) {
-        $save = $_SERVER['HTTP_SAVE_DATA'];
-        $half = ($quality > 0) ? floor($quality / 2) : 0 ;
-
-        if (strtolower($save) != "off" and $save != "0")
-           $quality = $half;
+        if (!preg_match("/^(off|0)$/i", $_SERVER['HTTP_SAVE_DATA']))
+           $quality = ($quality > 0) ? floor($quality / 2) : 0 ;
     }
 
     function thumb_creatable($type): bool {
@@ -68,9 +66,6 @@
 
         if ($type == IMAGETYPE_PNG and (imagetypes() & IMG_PNG))
             return true;
-
-        if (version_compare(PHP_VERSION, "7.1", "<"))
-            return false;
 
         if ($type == IMAGETYPE_WEBP and (imagetypes() & IMG_WEBP))
             return true;
