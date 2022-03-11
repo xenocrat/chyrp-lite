@@ -63,6 +63,7 @@
                 new \Twig\TwigFilter("translate",           "twig_filter_translate"),
                 new \Twig\TwigFilter("translate_plural",    "twig_filter_translate_plural"),
                 new \Twig\TwigFilter("dateformat",          "twig_filter_date_format"),
+                new \Twig\TwigFilter("time",                "twig_filter_time"),
                 new \Twig\TwigFilter("strftimeformat",      "twig_filter_strftime_format"),
                 new \Twig\TwigFilter("filesizeformat",      "twig_filter_filesize_format"),
                 new \Twig\TwigFilter("preg_match",          "twig_filter_preg_match"),
@@ -274,6 +275,17 @@
         }
 
         return when($format, $time);
+    }
+
+    /**
+     * Function: twig_filter_time
+     * Returns a <time> HTML element, created using twig_filter_date_format().
+     */
+    function twig_filter_time($timestamp, $format = null): string {
+        $string = twig_filter_date_format($timestamp, $format);
+        $datetime = twig_filter_date_format($timestamp, "c");
+
+        return "<time datetime=\"".$datetime."\">".$string."</time>";
     }
 
     /**
