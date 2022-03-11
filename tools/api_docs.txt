@@ -3015,6 +3015,11 @@ Function: twig_filter_date_format
 Returns date formatting for a string that isn't a regular time() value.
 
 
+Function: twig_filter_time
+--------------------------
+Returns a <time> HTML element, created using twig_filter_date_format().
+
+
 Function: twig_filter_strftime_format
 -------------------------------------
 Returns date formatting for a string that isn't a regular time() value.
