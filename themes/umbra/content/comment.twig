@@ -20,7 +20,7 @@
 {{ comment.author_email | gravatar(80, true) }}
 <cite>
 <a href="{{ comment.url() }}" class="permalink">
-{{ comment.created_at | dateformat }}
+{{ comment.created_at | time }}
 </a>
 </cite>
 </div>
