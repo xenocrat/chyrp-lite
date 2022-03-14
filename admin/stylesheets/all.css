@@ -631,11 +631,6 @@ p.flash a {
     font-weight: bold;
     text-decoration: none;
 }
-p.flash a:hover,
-p.flash a:focus,
-p.flash a:active {
-    text-decoration: underline;
-}
 
 /* Group: Buttons */
 
