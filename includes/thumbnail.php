@@ -129,6 +129,15 @@
         }
     }
 
+    function thumb_serve($filepath, $filename)/*: never */{
+        if (DEBUG)
+            error_log("SERVE image ".$filename);
+
+        readfile($filepath);
+        ob_end_flush();
+        exit;
+    }
+
     # Fetch original image metadata (does not require GD library).
     list($orig_w, $orig_h, $type, $attr) = getimagesize($filepath);
 
@@ -140,23 +149,8 @@
     thumb_resize($crop_x, $crop_y, $thumb_w, $thumb_h, $orig_w, $orig_h);
 
     $cache_fn = md5($filename.$thumb_w.$thumb_h.$quality).image_type_to_extension($type);
-    $cache_fp = (CACHE_THUMBS) ? CACHES_DIR.DIR."thumbs".DIR.$cache_fn : null ;
-    $cache_ok = (isset($cache_fp) and file_exists($cache_fp) and
-                filemtime($cache_fp) >= filemtime($filepath));
-
-    # Use the original file if the size is already smaller than requested.
-    if ($orig_w <= $thumb_w and $orig_h <= $thumb_h and empty($_GET['square'])) {
-        $cache_fn = $filename;
-        $cache_fp = $filepath;
-        $cache_ok = true;
-    }
-
-    # Use the original file if GD support is unavailable or type is not handled.
-    if (!thumb_creatable($type)) {
-        $cache_fn = $filename;
-        $cache_fp = $filepath;
-        $cache_ok = true;
-    }
+    $cache_fp = CACHES_DIR.DIR."thumbs".DIR.$cache_fn;
+    $cache_ok = (file_exists($cache_fp) and filemtime($cache_fp) >= filemtime($filepath));
 
     header("Last-Modified: ".date("r", filemtime($filepath)));
     header("Content-Type: ".image_type_to_mime_type($type));
@@ -165,7 +159,15 @@
     header("Expires: ".date("r", now("+30 days")));
     header("Content-Disposition: inline; filename=\"".addslashes($cache_fn)."\"");
 
-    # Create a thumbnail if caching is disabled, file is missing or stale.
+    # Serve the original file if the size is already smaller than requested.
+    if ($orig_w <= $thumb_w and $orig_h <= $thumb_h and empty($_GET['square']))
+        thumb_serve($filepath, $filename);
+
+    # Serve the original file if GD support is unavailable or type is not handled.
+    if (!thumb_creatable($type))
+        thumb_serve($filepath, $filename);
+
+    # (Re)create a thumbnail if the file is missing or stale.
     if (!$cache_ok) {
         switch ($type) {
             case IMAGETYPE_GIF:
@@ -195,19 +197,19 @@
         # Create the thumbnail image resource.
         $thumb = imagecreatetruecolor($thumb_w, $thumb_h);
 
-        if ($function == "imagewebp") {
-            imagealphablending($thumb, false);
-            imagesavealpha($thumb, true);
-        }
-
-        if ($function == "imagepng") {
-            imagealphablending($thumb, false);
-            imagesavealpha($thumb, true);
-            $quality = 10 - (($quality > 0) ? ceil($quality / 10) : 1);
-        }
-
-        if ($function == "imagejpeg") {
-            imageinterlace($thumb, true);
+        switch ($function) {
+            case "imagejpeg":
+                imageinterlace($thumb, true);
+                break;
+            case "imagepng":
+                imagealphablending($thumb, false);
+                imagesavealpha($thumb, true);
+                $quality = 10 - (($quality > 0) ? ceil($quality / 10) : 1);
+                break;
+            case "imagewebp":
+                imagealphablending($thumb, false);
+                imagesavealpha($thumb, true);
+                break;
         }
 
         # Do the crop and resize.
@@ -222,9 +224,14 @@
                            $orig_w,
                            $orig_h);
 
-        # Create the thumbnail file - outputs directly if caching is disabled.
-        $result = ($function == "imagegif") ?
-            $function($thumb, $cache_fp) : $function($thumb, $cache_fp, $quality) ;
+        # Create the thumbnail file.
+        switch ($function) {
+            case "imagegif":
+                $result = $function($thumb, $cache_fp);
+                break;
+            default:
+                $result = $function($thumb, $cache_fp, $quality);
+        }
 
         if ($result === false)
             error(__("Error"), __("Failed to create image thumbnail."));
@@ -234,12 +241,6 @@
         imagedestroy($thumb);
     }
 
-    # Serve a file previously or newly created.
-    if (isset($cache_fp)) {
-        if (DEBUG)
-            error_log("SERVE image ".$cache_fn);
-
-        readfile($cache_fp);
-    }
-
-    ob_end_flush();
+    # Serve a fresh thumbnail file.
+    if (isset($cache_fp))
+        thumb_serve($cache_fp, $cache_fn);
