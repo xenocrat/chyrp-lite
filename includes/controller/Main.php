@@ -53,7 +53,7 @@
                 array("debug" => DEBUG,
                       "strict_variables" => DEBUG,
                       "charset" => "UTF-8",
-                      "cache" => (CACHE_TWIG ? CACHES_DIR.DIR."twig" : false),
+                      "cache" => CACHES_DIR.DIR."twig",
                       "autoescape" => false)
             );
 
