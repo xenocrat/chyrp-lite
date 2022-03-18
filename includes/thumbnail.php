@@ -129,9 +129,9 @@
         }
     }
 
-    function thumb_serve($filepath, $filename)/*: never */{
+    function thumb_serve($filepath)/*: never */{
         if (DEBUG)
-            error_log("SERVE image ".$filename);
+            error_log("SERVE image ".$filepath);
 
         readfile($filepath);
         ob_end_flush();
@@ -161,11 +161,11 @@
 
     # Serve the original file if the size is already smaller than requested.
     if ($orig_w <= $thumb_w and $orig_h <= $thumb_h and empty($_GET['square']))
-        thumb_serve($filepath, $filename);
+        thumb_serve($filepath);
 
     # Serve the original file if GD support is unavailable or type is not handled.
     if (!thumb_creatable($type))
-        thumb_serve($filepath, $filename);
+        thumb_serve($filepath);
 
     # (Re)create a thumbnail if the file is missing or stale.
     if (!$cache_ok) {
@@ -242,5 +242,4 @@
     }
 
     # Serve a fresh thumbnail file.
-    if (isset($cache_fp))
-        thumb_serve($cache_fp, $cache_fn);
+    thumb_serve($cache_fp);
