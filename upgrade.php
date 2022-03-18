@@ -105,6 +105,14 @@
         # Test if we can write to CACHES_DIR (needed by some extensions).
         if (!is_writable(CACHES_DIR))
             alert(__("Please CHMOD or CHOWN the <em>caches</em> directory to make it writable."));
+
+        # Test if we can write to twig cache.
+        if (!is_writable(CACHES_DIR.DIR."twig"))
+            alert(__("Please CHMOD or CHOWN the <em>twig</em> directory to make it writable."));
+
+        # Test if we can write to thumbs cache.
+        if (!is_writable(CACHES_DIR.DIR."thumbs"))
+            alert(__("Please CHMOD or CHOWN the <em>thumbs</em> directory to make it writable."));
     }
 
     /**
