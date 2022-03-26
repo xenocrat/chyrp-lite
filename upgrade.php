@@ -7,8 +7,8 @@
     header("Content-Type: text/html; charset=UTF-8");
 
     define('DEBUG',            true);
-    define('CHYRP_VERSION',    "2022.02");
-    define('CHYRP_CODENAME',   "Coal");
+    define('CHYRP_VERSION',    "2022.03");
+    define('CHYRP_CODENAME',   "Elegant");
     define('CHYRP_IDENTITY',   "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
     define('MAIN',             false);
     define('ADMIN',            false);
@@ -583,6 +583,7 @@
             }
             a:focus {
                 outline: #ff7f00 dashed 2px;
+                outline-offset: 1px;
             }
             a:hover,
             a:focus,
