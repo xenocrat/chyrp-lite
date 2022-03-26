@@ -303,6 +303,7 @@
             }
             a:focus {
                 outline: #ff7f00 dashed 2px;
+                outline-offset: 1px;
             }
             a:hover,
             a:focus,
