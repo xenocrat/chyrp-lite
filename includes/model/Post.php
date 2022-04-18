@@ -726,47 +726,46 @@
 
         /**
          * Function: from_url
-         * Attempts to grab a post from its clean URL.
+         * Attempts to grab a post from its clean or dirty URL.
          *
          * Parameters:
-         *     $request - The request URI to parse, or an array of matches already found.
+         *     $request - The request URI to parse.
          *     $route - The route object to respond to, or null to return a Post object.
          *     $options - Additional options for the Post object (optional).
          */
         static function from_url($request, $route = null, $options = array())/*: self|array|false */{
             $config = Config::current();
 
-            $found = is_array($request) ? $request : array() ;
-
-            if (empty($found)) {
-                $regex = "";      # Request validity is tested with this.
-                $attrs = array(); # Post attributes present in post_url.
-                $parts = preg_split("|(\([^)]+\))|",
-                                    $config->post_url,
-                                    0,
-                                    PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
-
-                # Differentiate between post attributes and junk in post_url.
-                foreach ($parts as $part)
-                    if (isset(self::$url_attrs[$part])) {
-                        $regex .= self::$url_attrs[$part];
-                        $attrs[] = trim($part, "()");
-                    } else {
-                        $regex .= preg_quote($part, "|");
-                    }
-
-                # Test the request and return false if it isn't valid.
-                if (!preg_match("|^$regex|", ltrim(str_replace($config->url, "/", $request), "/"), $matches))
-                    return false;
-
-                # Populate $found using the array of sub-pattern matches.
-                for ($i = 0; $i < count($attrs); $i++)
-                    $found[$attrs[$i]] = urldecode($matches[$i + 1]);
-
-                # If a route was provided, respond to it and return.
-                if (isset($route))
-                    return $route->try["view"] = array($found, $route->arg);
+            # Dirty URL?
+            if (preg_match("/(\?|&)url=([^&#]+)/", $request, $slug)) {
+                $post = new self(array("url" => $slug[2]), $options);
+                return isset($route) ? $route->try["view"] = array($post) : $post ;
             }
+
+            $regex = "";      # Request validity is tested with this.
+            $attrs = array(); # Post attributes present in post_url.
+            $found = array(); # Post attributes found in the request.
+            $parts = preg_split("|(\([^)]+\))|",
+                                $config->post_url,
+                                0,
+                                PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+
+            # Differentiate between post attributes and junk in post_url.
+            foreach ($parts as $part)
+                if (isset(self::$url_attrs[$part])) {
+                    $regex .= self::$url_attrs[$part];
+                    $attrs[] = trim($part, "()");
+                } else {
+                    $regex .= preg_quote($part, "|");
+                }
+
+            # Test the request and return false if it isn't valid.
+            if (!preg_match("|^$regex|", ltrim(str_replace($config->url, "/", $request), "/"), $matches))
+                return false;
+
+            # Populate $found using the array of sub-pattern matches.
+            for ($i = 0; $i < count($attrs); $i++)
+                $found[$attrs[$i]] = urldecode($matches[$i + 1]);
 
             $where = array();
             $dates = array("year", "month", "day", "hour", "minute", "second");
@@ -801,7 +800,8 @@
                     $where[$part] = $value;
                 }
 
-            return new self(null, array_merge($options, array("where" => $where)));
+            $post = new self(null, array_merge($options, array("where" => $where)));
+            return isset($route) ? $route->try["view"] = array($post) : $post ;
         }
 
         /**

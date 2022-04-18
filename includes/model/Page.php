@@ -277,13 +277,19 @@
 
         /**
          * Function: from_url
-         * Attempts to grab a page from its clean URL.
+         * Attempts to grab a page from its clean or dirty  URL.
          *
          * Parameters:
          *     $request - The request URI to parse.
          *     $route - The route object to respond to, or null to return a Page object.
          */
         static function from_url($request, $route = null)/*: self|array|false */{
+            # Dirty URL?
+            if (preg_match("/(\?|&)url=([^&#]+)/", $request, $slug)) {
+                $page = new self(array("url" => $slug[2]));
+                return isset($route) ? $route->try["view"] = array($page) : $page ;
+            }
+
             $hierarchy = explode("/", trim(str_replace(Config::current()->url, "/", $request), "/"));
             $pages = self::find(array("where" => array("url" => $hierarchy)));
 
@@ -292,9 +298,10 @@
                 return false;
 
             # Loop over the pages until we find the one we want.
-            foreach ($pages as $page)
+            foreach ($pages as $page) {
                 if ($page->url == end($hierarchy))
-                    return isset($route) ? $route->try["page"] = array($page->url, $hierarchy) : $page ;
+                    return isset($route) ? $route->try["page"] = array($page) : $page ;
+            }
         }
 
         /**
