@@ -1531,11 +1531,11 @@
 
     /**
      * Function: webmention_send
-     * Sends Webmention requests to the URLs in a string.
+     * Sends Webmentions to the URLs discovered in a string.
      *
      * Parameters:
      *     $string - The string to crawl for Webmention URLs.
-     *     $post - The post we're sending from.
+     *     $post - The post this string belongs to.
      *     $limit - Execution time limit in seconds (optional).
      */
     function webmention_send($string, $post, $limit = 30): void {
@@ -1592,15 +1592,18 @@
 
     /**
      * Function: webmention_receive
-     * Receives Webmention requests and ????????.
+     * Receives and validates Webmentions.
      *
      * Parameters:
-     *     $string - The string to crawl for Webmention URLs.
-     *     $post - The post we're sending from.
-     *     $limit - Execution time limit in seconds (optional).
+     *     $source - The sender's URL.
+     *     $target - The URL of our post.
      */
     function webmention_receive($source, $target): void {
         $trigger = Trigger::current();
+
+        # No need to continue without a responder for the Webmention trigger.
+        if (!$trigger->exists("webmention"))
+            error(__("Error"), __("Webmention support is disabled for this site."), null, 503);
 
         if (!is_url($source))
             error(__("Error"), __("The URL for your page is not valid."), null, 400);
@@ -1610,10 +1613,6 @@
 
         $source_url = add_scheme(unfix($source), true);
         $target_url = add_scheme(unfix($target), true);
-
-        # No need to continue without a responder for the Webmention trigger.
-        if (!$trigger->exists("webmention"))
-            error(__("Webmention support is disabled for this site."), null, 503);
 
         if ($target == $source)
             error(__("Error"), __("The from and to URLs cannot be the same."), null, 400);
@@ -1637,7 +1636,7 @@
 
     /**
      * Function: webmention_discover
-     * Checks if a URL is capable of receiving Webmentions.
+     * Determines if a URL is capable of receiving Webmentions.
      *
      * Parameters:
      *     $url - The URL to check.
