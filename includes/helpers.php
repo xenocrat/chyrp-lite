@@ -1571,8 +1571,6 @@
                 continue;
             }
 
-            $remote_headers = "";
-            $remote_content = "";
             $wm_array = array("source" => unfix($post->url()), "target" => $url);
             $wm_query = http_build_query($wm_array);
 
@@ -1615,7 +1613,7 @@
         $target_url = add_scheme(unfix($target), true);
 
         if ($target == $source)
-            error(__("Error"), __("The from and to URLs cannot be the same."), null, 400);
+            error(__("Error"), __("The source and target URLs cannot be the same."), null, 400);
 
         $post = Post::from_url($target_url);
 
@@ -1623,7 +1621,7 @@
             error(__("Error"), __("We have not published at that URL."), null, 404);
 
         # Retrieve the page that linked here.
-        $content = get_remote($source_url, 0, 10, true);
+        $content = get_remote($source_url, 0, 10);
 
         if (empty($content))
             error(__("Error"), __("You have not published at that URL."), null, 404);
