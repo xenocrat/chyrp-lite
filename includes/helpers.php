@@ -1626,10 +1626,10 @@
         if (empty($content))
             error(__("Error"), __("You have not published at that URL."), null, 404);
 
-        if (strpos($content, $source) === false)
+        if (strpos($content, $target) === false)
             error(__("Error"), __("Your page does not link to our page."), null, 400);
 
-        $trigger->call("webmention", $post, $target, $source);
+        $trigger->call("webmention", $post, $source, $target);
     }
 
     /**
