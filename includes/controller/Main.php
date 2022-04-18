@@ -359,7 +359,7 @@
          */
         public function main_view($post = null): bool {
             if (!isset($post))
-                $post = new Post(array("url" => fallback($_GET['url'])), array("drafts" => true)) ;
+                $post = new Post(array("url" => fallback($_GET['url'])), array("drafts" => true));
 
             if ($post->no_results)
                 return false;
