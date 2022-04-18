@@ -254,10 +254,12 @@
             $post = new self($id, array("skip_where" => true));
 
             # Attempt to send pingbacks to URLs discovered in post attribute values.
-            if ($config->send_pingbacks and $pingbacks and $post->status == self::STATUS_PUBLIC)
+            if ($config->send_pingbacks and $pingbacks and $post->status == self::STATUS_PUBLIC) {
                 foreach ($post->attribute_values as $value)
-                    if (is_string($value))
+                    if (is_string($value)) {
                         send_pingbacks($value, $post);
+                    }
+            }
 
             $trigger->call("add_post", $post, $options);
 
@@ -355,10 +357,12 @@
                                                         "attribute_values" => $attribute_values))));
 
             # Attempt to send pingbacks to URLs discovered in post attribute values.
-            if ($config->send_pingbacks and $pingbacks and $post->status == self::STATUS_PUBLIC)
+            if ($config->send_pingbacks and $pingbacks and $post->status == self::STATUS_PUBLIC) {
                 foreach ($post->attribute_values as $value)
-                    if (is_string($value))
+                    if (is_string($value)) {
                         send_pingbacks($value, $post);
+                    }
+            }
 
             if ($this->status == self::STATUS_SCHEDULED and $post->status == self::STATUS_PUBLIC)
                 $trigger->call("publish_post", $post, $this, $options);
@@ -893,7 +897,8 @@
                 $post = new self($id, array("skip_where" => true,
                                             "filter" => false));
 
-                $post->update(null, null, null, self::STATUS_PUBLIC);
+                $post->update(null, null, null, self::STATUS_PUBLIC,
+                              null, null, null, null, null, $pingbacks);
             }
         }
     }
