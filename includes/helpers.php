@@ -1510,7 +1510,7 @@
      */
     function grab_urls($string): array {
         # These expressions capture hyperlinks in HTML and unfiltered Markdown.
-        $expressions = array("/<a[^>]* href=(\"[^\"]+\"|\'[^\']+\')[^>]*>[^<]+<\/a>/i",
+        $expressions = array("/<a(?= )[^>]* href=(\"[^\"]+\"|\'[^\']+\')[^>]*>[^<]+<\/a>/i",
                              "/\[[^\]]+\]\(([^\)]+)\)/");
 
         # Modules can support other syntaxes.
@@ -1527,6 +1527,228 @@
             $url = trim($url, " \"'");
 
         return array_filter(array_unique($urls), "is_url");
+    }
+
+    /**
+     * Function: webmention_send
+     * Sends Webmention requests to the URLs in a string.
+     *
+     * Parameters:
+     *     $string - The string to crawl for Webmention URLs.
+     *     $post - The post we're sending from.
+     *     $limit - Execution time limit in seconds (optional).
+     */
+    function webmention_send($string, $post, $limit = 30): void {
+        foreach (grab_urls($string) as $url) {
+            # Have we exceeded the time limit?
+            if (timer_stop() > $limit)
+                break;
+
+            $endpoint = webmention_discover(unfix($url, true));
+
+            if ($endpoint === false)
+                continue;
+
+            extract(parse_url(add_scheme($endpoint)), EXTR_SKIP);
+            fallback($path, "/");
+            fallback($scheme, "http");
+            fallback($port, ($scheme == "https") ? 443 : 80);
+
+            if (isset($query))
+                $path.= "?".$query;
+
+            if (!isset($host))
+                continue;
+
+            if ($scheme == "https" and !extension_loaded("openssl"))
+                continue;
+
+            $prefix  = ($scheme == "https") ? "tls://" : "tcp://" ;
+            $connect = @fsockopen($prefix.$host, $port, $errno, $errstr, 3);
+
+            if (!$connect) {
+                trigger_error(_f("Socket error: %s", fix($errstr, false, true)), E_USER_NOTICE);
+                continue;
+            }
+
+            $remote_headers = "";
+            $remote_content = "";
+            $wm_array = array("source" => unfix($post->url()), "target" => $url);
+            $wm_query = http_build_query($wm_array);
+
+            # Send the Webmention.
+            fwrite($connect,
+                "POST ".$path." HTTP/1.0\r\n".
+                "Host: ".$host."\r\n".
+                "Content-Type: Content-Type: application/x-www-form-urlencoded\r\n".
+                "Content-Length: ".strlen($wm_query)."\r\n".
+                "Connection: close"."\r\n".
+                "User-Agent: ".CHYRP_IDENTITY."\r\n\r\n");
+
+            fwrite($connect, $wm_query);
+            fclose($connect);
+        }
+    }
+
+    /**
+     * Function: webmention_receive
+     * Receives Webmention requests and ????????.
+     *
+     * Parameters:
+     *     $string - The string to crawl for Webmention URLs.
+     *     $post - The post we're sending from.
+     *     $limit - Execution time limit in seconds (optional).
+     */
+    function webmention_receive($source, $target): void {
+        $trigger = Trigger::current();
+
+        if (!is_url($source))
+            error(__("Error"), __("The URL for your page is not valid."), null, 400);
+
+        if (!is_url($target))
+            error(__("Error"), __("The URL for our page is not valid."), null, 400);
+
+        $source_url = add_scheme(unfix($source), true);
+        $target_url = add_scheme(unfix($target), true);
+
+        # No need to continue without a responder for the Webmention trigger.
+        if (!$trigger->exists("webmention"))
+            error(__("Webmention support is disabled for this site."), null, 503);
+
+        if ($target == $source)
+            error(__("Error"), __("The from and to URLs cannot be the same."), null, 400);
+
+        $post = Post::from_url($target_url);
+
+        if ($post->no_results)
+            error(__("Error"), __("We have not published at that URL."), null, 404);
+
+        # Retrieve the page that linked here.
+        $content = get_remote($source_url, 0, 10, true);
+
+        if (empty($content))
+            error(__("Error"), __("You have not published at that URL."), null, 404);
+
+        if (strpos($content, $source) === false)
+            error(__("Error"), __("Your page does not link to our page."), null, 400);
+
+        $trigger->call("webmention", $post, $target, $source);
+    }
+
+    /**
+     * Function: webmention_discover
+     * Checks if a URL is capable of receiving Webmentions.
+     *
+     * Parameters:
+     *     $url - The URL to check.
+     *     $redirects - The maximum number of redirects to follow.
+     *
+     * Returns:
+     *     The Webmention endpoint URL, or false on failure.
+     */
+    function webmention_discover($url, $redirects = 3)/*: string|false*/{
+        extract(parse_url(add_scheme($url)), EXTR_SKIP);
+        fallback($path, "/");
+        fallback($scheme, "http");
+        fallback($port, ($scheme == "https") ? 443 : 80);
+
+        if (isset($query))
+            $path.= "?".$query;
+
+        if (!isset($host))
+            return false;
+
+        if ($scheme == "https" and !extension_loaded("openssl"))
+            return false;
+
+        $prefix  = ($scheme == "https") ? "tls://" : "tcp://" ;
+        $connect = @fsockopen($prefix.$host, $port, $errno, $errstr, 3);
+
+        if (!$connect) {
+            trigger_error(_f("Socket error: %s", fix($errstr, false, true)), E_USER_NOTICE);
+            return false;
+        }
+
+        $remote_headers = "";
+        $remote_content = "";
+
+        # Send the GET headers.
+        fwrite($connect,
+            "GET ".$path." HTTP/1.0\r\n".
+            "Host: ".$host."\r\n".
+            "Connection: close"."\r\n".
+            "User-Agent: ".CHYRP_IDENTITY."\r\n\r\n");
+
+        # Check for Link header containing the endpoint.
+        while (!feof($connect) and strpos($remote_headers, "\r\n\r\n") === false) {
+            $line = fgets($connect);
+            $remote_headers.= $line;
+
+            if (preg_match("/^Link: <(.+)>; rel=\"webmention\"/i", $line, $header)) {
+                fclose($connect);
+
+                $endpoint = trim($header[1]);
+                return is_url($endpoint) ? $endpoint : $url.$endpoint ;
+            }
+        }
+
+        # Search for 301/302 and recurse with new location unless redirects are exhausted.
+        if (preg_match("~^HTTP/[0-9]\.[0-9] 30[1-2]~m", $remote_headers)) {
+            if ($redirects > 0) {
+                if (preg_match("~^Location: (.+)$~mi", $remote_headers, $matches)) {
+                    $location = trim($matches[1]);
+
+                    if (is_url($location)) {
+                        fclose($connect);
+                        return webmention_discover($location, $redirects - 1);
+                    }
+                }
+            }
+
+            fclose($connect);
+            return false;
+        }
+
+        # Check if the content is UTF-8 encoded text/html before continuing.
+        if (!preg_match("~^Content-Type: text/html; charset=UTF-8~im", $remote_headers)) {
+            fclose($connect);
+            return false;
+        }
+
+        # Receive the response content.
+        while (!feof($connect))
+            $remote_content.= fgets($connect);
+
+        # Check for <link> element containing the endpoint.
+        if (preg_match_all("/<link [^>]+>/i", $remote_content, $links)) {
+            foreach ($links as $link) {
+                if (!preg_match("/ rel=(\"webmention\"|\'webmention\')/i", $link))
+                    continue;
+
+                if (preg_match("/ href=(\"[^\"]+\"|\'[^\']+\')/i", $link, $href)) {
+                    fclose($connect);
+                    $endpoint = unfix(trim($href[1], "\"'"));
+                    return is_url($endpoint) ? $endpoint : $url.$endpoint ;
+                }  
+            }
+        }
+
+        # Check for <a> element containing the endpoint.
+        if (preg_match_all("/<a [^>]+>/i", $remote_content, $anchors)) {
+            foreach ($anchors as $anchor) {
+                if (!preg_match("/ rel=(\"webmention\"|\'webmention\')/i", $anchor))
+                    continue;
+
+                if (preg_match("/ href=(\"[^\"]+\"|\'[^\']+\')/i", $anchor, $href)) {
+                    fclose($connect);
+                    $endpoint = unfix(trim($href[1], "\"'"));
+                    return is_url($endpoint) ? $endpoint : $url.$endpoint ;
+                }  
+            }
+        }
+
+        fclose($connect);
+        return false;
     }
 
     /**
@@ -2140,9 +2362,9 @@
      *     <is_url>
      */
     function add_scheme($url, $scheme = null): string {
-        preg_match('~^([a-z]+://)?(.+)~i', $url, $matches);
-        $matches[1] = isset($scheme) ? $scheme : oneof($matches[1], "http://") ;
-        return $url = $matches[1].$matches[2];
+        preg_match('~^([a-z]+://)?(.+)~i', $url, $match);
+        $match[1] = isset($scheme) ? $scheme : oneof($match[1], "http://") ;
+        return $url = $match[1].$match[2];
     }
 
     /**

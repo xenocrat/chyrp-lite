@@ -356,3 +356,4 @@
     header("Referrer-Policy: strict-origin-when-cross-origin");
     header("Vary: Accept-Encoding, Cookie, Save-Data");
     header("X-Pingback: ".$config->chyrp_url."/includes/rpc.php");
+    header("Link: <".$config->chyrp_url."/?action=webmention>; rel=\"webmention\"");

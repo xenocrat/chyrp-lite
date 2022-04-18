@@ -357,17 +357,12 @@
          * Function: main_view
          * Handles post viewing via dirty URL or clean URL e.g. /year/month/day/url/.
          */
-        public function main_view($attrs = array(), $arg = array()): bool {
-            $post = (!empty($attrs)) ?
-                Post::from_url($attrs, null, array("drafts" => true)) :
-                new Post(array("url" => fallback($_GET['url'])), array("drafts" => true)) ;
+        public function main_view($post = null): bool {
+            if (!isset($post))
+                $post = new Post(array("url" => fallback($_GET['url'])), array("drafts" => true)) ;
 
             if ($post->no_results)
                 return false;
-
-            # Don't fool ourselves into thinking a feed was requested because of a "feed" attribute.
-            if (!isset($_GET['feed']) and !(count($arg) > count($attrs) and end($arg) == "feed"))
-                $this->feed = false;
 
             if ($post->status == Post::STATUS_DRAFT)
                 Flash::message(__("This post is not published."));
@@ -385,20 +380,15 @@
          * Function: main_page
          * Handles page viewing via dirty URL or clean URL e.g. /parent/child/child-of-child/.
          */
-        public function main_page($url = null, $hierarchy = array()): bool {
+        public function main_page($page = null): bool {
             $trigger = Trigger::current();
             $visitor = Visitor::current();
 
-            $page = (isset($url)) ?
-                new Page(array("url" => $url)) :
-                new Page(array("url" => fallback($_GET['url']))) ;
+            if (!isset($page))
+                $page = new Page(array("url" => fallback($_GET['url'])));
 
             if ($page->no_results)
                 return false;
-
-            # Don't fool ourselves into thinking a feed was requested because of a "feed" page URL.
-            if (!isset($_GET['feed']) and end($hierarchy) == "feed")
-                $this->feed = false;
 
             if (!$page->public and !$visitor->group->can("view_page") and $page->user_id != $visitor->id) {
                 $trigger->call("can_not_view_page");
@@ -765,6 +755,14 @@
             }
 
             $this->display("forms".DIR."user".DIR."lost_password", array(), __("Lost password"));
+        }
+
+        /**
+         * Function: main_webmention
+         * Webmention receiver endpoint.
+         */
+        public function main_webmention(): void {
+            webmention_receive(fallback($_POST['source']), fallback($_POST['target']));
         }
 
         /**
