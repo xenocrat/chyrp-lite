@@ -54,10 +54,7 @@
             if (!is_url($source))
                 return new IXR_Error(16, __("The URL for your page is not valid."));
 
-            if (preg_match("/url=([^&#]+)/", $target, $url))
-                $post = new Post(array("url" => $url[1]));
-            else
-                $post = Post::from_url($target);
+            $post = Post::from_url($target);
 
             if ($post->no_results)
                 return new IXR_Error(33, __("We have not published at that URL."));
