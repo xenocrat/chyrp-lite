@@ -258,6 +258,7 @@
                 foreach ($post->attribute_values as $value)
                     if (is_string($value)) {
                         send_pingbacks($value, $post);
+                        webmention_send($value, $post);
                     }
             }
 
@@ -361,6 +362,7 @@
                 foreach ($post->attribute_values as $value)
                     if (is_string($value)) {
                         send_pingbacks($value, $post);
+                        webmention_send($value, $post);
                     }
             }
 
