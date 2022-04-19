@@ -1685,7 +1685,16 @@
                 fclose($connect);
 
                 $endpoint = trim($header[1]);
-                return is_url($endpoint) ? $endpoint : $url.$endpoint ;
+
+                # Absolute URL?
+                if (is_url($endpoint))
+                    return $endpoint;
+
+                # Relative URL?
+                if (is_url($url.$endpoint))
+                    return $url.$endpoint;
+
+                return false;
             }
         }
 
@@ -1725,7 +1734,16 @@
                 if (preg_match("/ href=(\"[^\"]+\"|\'[^\']+\')/i", $link, $href)) {
                     fclose($connect);
                     $endpoint = unfix(trim($href[1], "\"'"));
-                    return is_url($endpoint) ? $endpoint : $url.$endpoint ;
+
+                    # Absolute URL?
+                    if (is_url($endpoint))
+                        return $endpoint;
+
+                    # Relative URL?
+                    if (is_url($url.$endpoint))
+                        return $url.$endpoint;
+
+                    return false;
                 }  
             }
         }
@@ -1739,7 +1757,16 @@
                 if (preg_match("/ href=(\"[^\"]+\"|\'[^\']+\')/i", $anchor, $href)) {
                     fclose($connect);
                     $endpoint = unfix(trim($href[1], "\"'"));
-                    return is_url($endpoint) ? $endpoint : $url.$endpoint ;
+
+                    # Absolute URL?
+                    if (is_url($endpoint))
+                        return $endpoint;
+
+                    # Relative URL?
+                    if (is_url($url.$endpoint))
+                        return $url.$endpoint;
+
+                    return false;
                 }  
             }
         }
