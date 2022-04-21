@@ -1691,10 +1691,7 @@
                     return $endpoint;
 
                 # Relative URL?
-                if (is_url($url.$endpoint))
-                    return $url.$endpoint;
-
-                return false;
+                return absolute_url($url, $endpoint);
             }
         }
 
@@ -1740,10 +1737,7 @@
                         return $endpoint;
 
                     # Relative URL?
-                    if (is_url($url.$endpoint))
-                        return $url.$endpoint;
-
-                    return false;
+                    return absolute_url($url, $endpoint);
                 }  
             }
         }
@@ -1763,16 +1757,46 @@
                         return $endpoint;
 
                     # Relative URL?
-                    if (is_url($url.$endpoint))
-                        return $url.$endpoint;
-
-                    return false;
+                    return absolute_url($url, $endpoint);
                 }  
             }
         }
 
         fclose($connect);
         return false;
+    }
+
+    /**
+     * Function: absolute_url
+     * Combines a base URL and relative path into an absolute URL.
+     *
+     * Parameters:
+     *     $base - The base URL.
+     *     $rel - The relative path.
+     *
+     * Returns:
+     *     An absolute URL, or false on failure.
+     * 
+     * Notes:
+     *     Does not attempt to resolve dot segments in the paths.
+     */
+    function absolute_url($base, $rel) {
+        extract(parse_url(add_scheme($base)), EXTR_SKIP);
+        fallback($path, "/");
+        fallback($scheme, "http");
+
+        if (!isset($host))
+            return false;
+
+        if (strrpos($path, "/") !== strlen($path))
+            $path.= "/";
+
+        if (strpos($rel, "/") === 0)
+            $path = $rel;
+        else
+            $path.= $rel;
+
+        return $scheme."://".$host.(isset($port) ? ":".$port : "").$path;
     }
 
     /**
