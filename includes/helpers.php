@@ -1691,7 +1691,7 @@
                     return $endpoint;
 
                 # Relative URL?
-                return absolute_url($url, $endpoint);
+                return merge_urls($url, $endpoint);
             }
         }
 
@@ -1737,7 +1737,7 @@
                         return $endpoint;
 
                     # Relative URL?
-                    return absolute_url($url, $endpoint);
+                    return merge_urls($url, $endpoint);
                 }  
             }
         }
@@ -1757,7 +1757,7 @@
                         return $endpoint;
 
                     # Relative URL?
-                    return absolute_url($url, $endpoint);
+                    return merge_urls($url, $endpoint);
                 }  
             }
         }
@@ -1767,20 +1767,20 @@
     }
 
     /**
-     * Function: absolute_url
-     * Combines a base URL and relative path into an absolute URL.
+     * Function: merge_urls
+     * Combines a base URL and relative path into a target URL.
      *
      * Parameters:
      *     $base - The base URL.
      *     $rel - The relative path.
      *
      * Returns:
-     *     An absolute URL, or false on failure.
+     *     A merged target URL, or false on failure.
      * 
      * Notes:
-     *     Does not attempt to resolve dot segments in the paths.
+     *     Does not attempt to resolve dot segments in the path.
      */
-    function absolute_url($base, $rel) {
+    function merge_urls($base, $rel) {
         extract(parse_url(add_scheme($base)), EXTR_SKIP);
         fallback($path, "/");
         fallback($scheme, "http");
@@ -1788,9 +1788,17 @@
         if (!isset($host))
             return false;
 
-        if (strrpos($path, "/") !== strlen($path))
-            $path.= "/";
+        if ($rel == "")
+            return add_scheme($base);
 
+        $end = strrpos($path, "/");
+        $len = strlen($path);
+
+        # Reduce the base path by one segment if the path doesn't end with "/".
+        if ($end !== ($len - 1))
+            $path = substr($path, 0, $end + 1);
+
+        # Append the relative path, or replace the path if rel begins with "/".
         if (strpos($rel, "/") === 0)
             $path = $rel;
         else
