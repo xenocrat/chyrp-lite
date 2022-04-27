@@ -46,7 +46,7 @@
 
             if ($trigger->exists($model_name."_".$name."_attr")) {
                 $trigger->filter($filtered, $model_name."_".$name."_attr", $this);
-                $this->$name = $filtered;
+                $this->data[$name] = $filtered;
             }
 
             if (isset($this->data[$name]))
