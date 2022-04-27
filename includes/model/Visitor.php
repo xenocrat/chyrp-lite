@@ -27,14 +27,16 @@
          * Function: __get
          * A detour around belongs_to "group" to account for the default Guest group.
          */
-        public function __get($name) {
+        public function &__get($name) {
             if ($name == "group") {
-                return isset($this->group_id) ?
+                $this->data["group"] = isset($this->group_id) ?
                     new Group($this->group_id) :
                     new Group(Config::current()->guest_group) ;
-            } else {
-                return parent::__get($name);
+
+                return $this->data["group"];
             }
+
+            return parent::__get($name);
         }
 
         /**

@@ -5,8 +5,16 @@
      */
     class Model {
         # Array: $caches
-        # Caches every loaded module into a clone of the object.
+        # Caches every loaded model into a clone of the object.
         static $caches = array();
+
+        # Array: $data
+        # Stores dynamic attributes for the loaded model.
+        private $data = array();
+
+        # Boolean: $no_results
+        # Did the query for this model return no results?
+        public $no_results = false;
 
         # Array: $belongs_to
         # An array of models that this Model belongs to.
@@ -25,12 +33,12 @@
 
         /**
          * Function: __get
-         * Automatically handle model relationships when grabbing attributes of an object.
+         * Handles model relationships, deferred and dynamic attributes.
          *
          * Returns:
          *     @mixed@
          */
-        public function __get($name) {
+        public function &__get($name) {
             $model_name = get_class($this);
             $placeholders = (isset($this->__placeholders) and $this->__placeholders);
 
@@ -40,6 +48,9 @@
                 $trigger->filter($filtered, $model_name."_".$name."_attr", $this);
                 $this->$name = $filtered;
             }
+
+            if (isset($this->data[$name]))
+                return $this->data[$name];
 
             $this->belongs_to = (array) $this->belongs_to;
             $this->has_many   = (array) $this->has_many;
@@ -69,7 +80,8 @@
                     $opts = array("where" => array("id" => $this->{$name."_id"}));
                 }
 
-                return $this->$name = new $model(null, $opts);
+                $this->data[$name] = new $model(null, $opts);
+                return $this->data[$name];
             } elseif (in_array($name, $this->has_many) or isset($this->has_many[$name])) {
                 if (isset($this->has_many[$name])) {
                     $opts =& $this->has_many[$name];
@@ -94,7 +106,8 @@
                                   "placeholders" => $placeholders);
                 }
 
-                return $this->$name = call_user_func(array($model, "find"), $opts);
+                $this->data[$name] = call_user_func(array($model, "find"), $opts);
+                return $this->data[$name];
             } elseif (in_array($name, $this->has_one) or isset($this->has_one[$name])) {
                 if (isset($this->has_one[$name])) {
                     $opts =& $this->has_one[$name];
@@ -116,24 +129,33 @@
                     $opts = array("where" => array(strtolower($match)."_id" => $this->id));
                 }
 
-                return $this->$name = new $model(null, $opts);
+                $this->data[$name] = new $model(null, $opts);
+                return $this->data[$name];
             }
 
-            if (isset($this->$name))
-                return $this->$name;
+            $this->data[$name] = null;
+            return $this->data[$name];
+        }
+
+        /**
+         * Function __set
+         * Handles dynamic attributes.
+         */
+        public function __set($name, $value) {
+            $this->data[$name] = $value;
         }
 
         /**
          * Function: __isset
-         * Automatically handle model relationships when testing attributes of an object.
+         * Handles model relationships, deferred and dynamic attributes.
          */
         public function __isset($name) {
-            if (isset($this->$name))
-                return true;
-
             $model_name = get_class($this);
 
             if (Trigger::current()->exists($model_name."_".$name."_attr"))
+                return true;
+
+            if (isset($this->data[$name]))
                 return true;
 
             $this->belongs_to = (array) $this->belongs_to;
