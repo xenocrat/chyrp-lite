@@ -4,9 +4,9 @@
      * Holds all of the configuration settings for the entire site.
      */
     class Config {
-        # Array: $json
+        # Array: $data
         # Holds all of the JSON settings as a $key => $val array.
-        private $json = array();
+        private $data = array();
 
         /**
          * Function: __construct
@@ -16,20 +16,19 @@
             if (!$this->read() and !INSTALLING)
                 trigger_error(__("Could not read the configuration file."), E_USER_ERROR);
 
-            foreach ($this->json as $setting => $value) {
-                if (is_numeric($setting))
-                    continue;
+            fallback($this->data["sql"],              array());
+            fallback($this->data["enabled_modules"],  array());
+            fallback($this->data["enabled_feathers"], array());
+            fallback($this->data["routes"],           array());
+        }
 
-                if ($setting == "json")
-                    continue;
+        public function __get($name) {
+            if (isset($this->data[$name]))
+                return $this->data[$name];
+        }
 
-                $this->$setting = $value;
-            }
-
-            fallback($this->sql,              array());
-            fallback($this->enabled_modules,  array());
-            fallback($this->enabled_feathers, array());
-            fallback($this->routes,           array());
+        public function __isset($name) {
+            return isset($this->data[$name]);
         }
 
         /**
@@ -48,7 +47,7 @@
             if (!is_array($json))
                 return false;
 
-            return $this->json = $json;
+            return $this->data = $json;
         }
 
         /**
@@ -57,7 +56,7 @@
          */
         private function write()/*: int|false */{
             $contents = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
-            $contents.= json_set($this->json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+            $contents.= json_set($this->data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
             return @file_put_contents(INCLUDES_DIR.DIR."config.json.php", $contents);
         }
@@ -72,16 +71,10 @@
          *     $fallback - Add the setting only if it doesn't exist.
          */
         public function set($setting, $value, $fallback = false)/*: int|false */{
-            if (is_numeric($setting))
-                return false;
-
-            if ($setting == "json")
-                return false;
-
-            if (isset($this->$setting) and $fallback)
+            if (isset($this->data[$setting]) and $fallback)
                 return true;
 
-            $this->json[$setting] = $this->$setting = $value;
+            $this->data[$setting] = $value;
 
             if (class_exists("Trigger"))
                 Trigger::current()->call("change_setting", $setting, $value);
@@ -97,7 +90,7 @@
          *     $setting - The setting name.
          */
         public function remove($setting)/*: int|false */{
-            unset($this->json[$setting]);
+            unset($this->data[$setting]);
             return $this->write();
         }
 
