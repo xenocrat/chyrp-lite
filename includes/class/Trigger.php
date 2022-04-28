@@ -172,25 +172,6 @@
         }
 
         /**
-         * Function: remove
-         * Unregisters a given $action from a $trigger.
-         *
-         * Parameters:
-         *     $trigger - The trigger to unregister from.
-         *     $action - The action name.
-         */
-        public function remove($trigger, $action): void {
-            foreach ($this->actions[$trigger] as $index => $func) {
-                if ($func == $action) {
-                    unset($this->actions[$trigger][$key]);
-                    return;
-                }
-            }
-
-            $this->actions[$trigger]["disabled"][] = $action;
-        }
-
-        /**
          * Function: exists
          * Checks if there are any actions for a given $trigger.
          *
