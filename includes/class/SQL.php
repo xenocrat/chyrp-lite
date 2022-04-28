@@ -37,6 +37,10 @@
         # Holds the host setting.
         public $host = "";
 
+        # String: $port
+        # Holds the port setting.
+        public $port = "";
+
         # String: $username
         # Holds the username setting.
         public $username = "";
@@ -75,6 +79,7 @@
             foreach ($settings as $setting => $value) {
                 switch ($setting) {
                     case "host":
+                    case "port":
                     case "username":
                     case "password":
                     case "database":
@@ -105,7 +110,7 @@
                     $this->db = new PDO("sqlite:".$this->database);
                 else
                     $this->db = new PDO($this->adapter.":host=".$this->host.";".
-                                        ((isset($this->port)) ? "port=".$this->port.";" : "").
+                                        ((!empty($this->port)) ? "port=".$this->port.";" : "").
                                         "dbname=".$this->database.
                                         (($this->adapter == "mysql") ? ";charset=utf8mb4" : ""),
                                         $this->username,
