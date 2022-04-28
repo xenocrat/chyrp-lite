@@ -16,6 +16,10 @@
         # Holds the query statement.
         public $queryString = "";
 
+        # Variable: $sql
+        # Holds the current <SQL> instance.
+        private $sql;
+
         # Array: $params
         # Holds the query parameters.
         private $params = array();
@@ -42,8 +46,6 @@
 
             if ($count)
                 ++$this->sql->queries;
-
-            $this->db =& $this->sql->db;
 
             $this->params = $params;
             $this->throw_exceptions = (XML_RPC) ? true : $throw_exceptions ;
@@ -75,7 +77,7 @@
             }
 
             try {
-                $this->query = $this->db->prepare($query);
+                $this->query = $this->sql->db->prepare($query);
                 $this->result = $this->query->execute($params);
                 $this->query->setFetchMode(PDO::FETCH_ASSOC);
                 $this->queryString = $query;
