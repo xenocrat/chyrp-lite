@@ -33,6 +33,7 @@
             if (isset($this->data[$name]))
                 return $this->data[$name];
 
+            trigger_error(__("Requested configuration setting not found."), E_USER_NOTICE);
             return null;
         }
 
