@@ -5,7 +5,7 @@
      */
     class Feathers {
         # Array: $instances
-        # Holds all Feather instantiations.
+        # Holds all feather instantiations.
         static $instances = array();
 
         # Boolean: $cancelled
@@ -16,12 +16,16 @@
         # The feather's non-camelized name.
         public $safename = "";
 
+        # Array: $fields
+        # The attribute fields for the feather.
+        public $fields = array();
+
         # Array: $filters
-        # Manages named Trigger filters for Feather fields.
+        # Manages named Trigger filters for feather fields.
         static $filters = array();
 
         # Array: $custom_filters
-        # Manages custom Feather-provided Trigger filters.
+        # Manages custom feather-provided trigger filters.
         static $custom_filters = array();
 
         /**
