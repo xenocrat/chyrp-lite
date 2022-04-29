@@ -801,6 +801,28 @@
             return __("Pingback registered!", "comments");
         }
 
+        public function webmention($post, $from, $to): void {
+            $count = SQL::current()->count("comments",
+                                           array("post_id" => $post->id,
+                                                 "status" => Comment::STATUS_PINGBACK,
+                                                 "author_url" => $from));
+
+            if (!empty($count))
+                error(__("Error"), __("A ping from your URL is already registered.", "comments"), null, 422);
+
+            if (strlen($from) > 2048)
+                error(__("Error"), __("Your URL is too long to be stored in our database.", "comments"), null, 413);
+
+            Comment::create("Webmention",
+                            preg_replace("~(https?://|^)([^/:]+).*~", "$2", $from),
+                            $from,
+                            "",
+                            $post,
+                            0,
+                            0,
+                            Comment::STATUS_PINGBACK);
+        }
+
         public function javascript(): void {
             $config  = Config::current();
             include MODULES_DIR.DIR."comments".DIR."javascript.php";
