@@ -5,12 +5,12 @@
      */
     class Config {
         # Array: $data
-        # Holds all of the JSON settings as a $key => $val array.
+        # Holds the configuration data as a $key => $val array.
         private $data = array();
 
         /**
          * Function: __construct
-         * Loads the configuration JSON file.
+         * Loads the configuration file from disk.
          */
         private function __construct() {
             if (!$this->read() and !INSTALLING)
@@ -22,11 +22,24 @@
             fallback($this->data["routes"],           array());
         }
 
+        /**
+         * Function: __get
+         * Handles access to the configuration data.
+         *
+         * Returns:
+         *     @mixed@
+         */
         public function __get($name) {
             if (isset($this->data[$name]))
                 return $this->data[$name];
+
+            return null;
         }
 
+        /**
+         * Function: __isset
+         * Handles access to the configuration data.
+         */
         public function __isset($name) {
             return isset($this->data[$name]);
         }
