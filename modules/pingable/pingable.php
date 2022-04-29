@@ -43,6 +43,20 @@
             return __("Pingback registered!", "pingable");
         }
 
+        public function webmention($post, $from, $to): void {
+            $count = SQL::current()->count("pingbacks",
+                                           array("post_id" => $post->id,
+                                                 "source" => $from));
+
+            if (!empty($count))
+                error(__("Error"), __("A ping from your URL is already registered.", "pingable"), null, 422);
+
+            if (strlen($from) > 2048)
+                error(__("Error"), __("Your URL is too long to be stored in our database.", "pingable"), null, 413);
+
+            Pingback::add($post->id, $from, preg_replace("~(https?://|^)([^/:]+).*~", "$2", $from));
+        }
+
         public function admin_edit_pingback($admin): void {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"),
