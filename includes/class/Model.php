@@ -44,13 +44,15 @@
 
             $trigger = Trigger::current();
 
-            if ($trigger->exists($model_name."_".$name."_attr")) {
-                $trigger->filter($filtered, $model_name."_".$name."_attr", $this);
-                $this->data[$name] = $filtered;
-            }
-
             if (isset($this->data[$name]))
                 return $this->data[$name];
+
+            if ($trigger->exists($model_name."_".$name."_attr")) {
+                $filtered = null;
+                $trigger->filter($filtered, $model_name."_".$name."_attr", $this);
+                $this->data[$name] = $filtered;
+                return $this->data[$name];
+            }
 
             $this->belongs_to = (array) $this->belongs_to;
             $this->has_many   = (array) $this->has_many;
