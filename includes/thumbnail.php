@@ -131,7 +131,7 @@
 
     function thumb_serve($filepath)/*: never */{
         if (DEBUG)
-            error_log("SERVE image ".$filepath);
+            error_log("IMAGE served ".$filepath);
 
         readfile($filepath);
         ob_end_flush();
@@ -192,7 +192,7 @@
             error(__("Error"), __("Failed to create image thumbnail."));
 
         if (DEBUG)
-            error_log("CREATE image ".$cache_fn);
+            error_log("IMAGE created ".$cache_fn);
 
         # Create the thumbnail image resource.
         $thumb = imagecreatetruecolor($thumb_w, $thumb_h);
