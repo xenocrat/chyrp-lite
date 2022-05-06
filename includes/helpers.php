@@ -1549,6 +1549,9 @@
             if ($endpoint === false)
                 continue;
 
+            if (DEBUG)
+                error_log("WEBMENTION @ ".$endpoint);
+
             extract(parse_url(add_scheme($endpoint)), EXTR_SKIP);
             fallback($path, "/");
             fallback($scheme, "http");
@@ -1598,6 +1601,9 @@
      */
     function webmention_receive($source, $target): void {
         $trigger = Trigger::current();
+
+        if (DEBUG)
+            error_log("WEBMENTION from ".$source);
 
         # No need to continue without a responder for the Webmention trigger.
         if (!$trigger->exists("webmention"))
