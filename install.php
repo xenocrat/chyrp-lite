@@ -484,10 +484,10 @@
 
                 if (adapter == "sqlite") {
                     $("#database_sub").fadeIn("fast");
-                    $("#host_field, #username_field, #password_field, #prefix_field").fadeOut("fast");
+                    $("#host_field, #port_field, #username_field, #password_field, #prefix_field").fadeOut("fast");
                 } else {
                     $("#database_sub").fadeOut("fast");
-                    $("#host_field, #username_field, #password_field, #prefix_field").fadeIn("fast"); 
+                    $("#host_field, #port_field, #username_field, #password_field, #prefix_field").fadeIn("fast"); 
                 }
 
                 if (adapter == "sqlite") {
@@ -626,12 +626,14 @@
             # Build the SQL settings based on user input.
             $settings = ($_POST['adapter'] == "sqlite") ?
                 array("host"     => "",
+                      "port"     => "",
                       "username" => "",
                       "password" => "",
                       "database" => $_POST['database'],
                       "prefix"   => "",
                       "adapter"  => $_POST['adapter']) :
                 array("host"     => $_POST['host'],
+                      "port"     => $_POST['port'],
                       "username" => $_POST['username'],
                       "password" => $_POST['password'],
                       "database" => $_POST['database'],
@@ -863,6 +865,10 @@
                 <p id="host_field">
                     <label for="host"><?php echo __("Host"); ?></label>
                     <input type="text" name="host" value="<?php posted("host", (isset($_ENV['DATABASE_SERVER']) ? $_ENV['DATABASE_SERVER'] : "localhost")); ?>" id="host">
+                </p>
+                <p id="port_field">
+                    <label for="port"><?php echo __("Port"); ?> <span class="sub"><?php echo __("(optional)"); ?></span></label>
+                    <input type="text" name="port" value="<?php posted("port"); ?>" id="port">
                 </p>
                 <p id="username_field">
                     <label for="username"><?php echo __("Username"); ?></label>
