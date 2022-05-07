@@ -740,7 +740,7 @@
                 show_404(__("Not Found"), __("Group not found."));
 
             $user = User::add($_POST['login'],
-                              User::hashPassword($_POST['password1']),
+                              User::hash_password($_POST['password1']),
                               $_POST['email'],
                               $_POST['full_name'],
                               $_POST['website'],
@@ -822,7 +822,7 @@
                     Flash::message(__("Please consider setting a stronger password for this user."));
 
             $password = (!empty($_POST['new_password1'])) ?
-                User::hashPassword($_POST['new_password1']) : $user->password ;
+                User::hash_password($_POST['new_password1']) : $user->password ;
 
             if (empty($_POST['email']))
                 error(__("Error"), __("Email address cannot be blank."), null, 422);
@@ -1543,7 +1543,7 @@
                         $group = new Group(array("name" => (string) fallback($attributes["group"])));
 
                         $user = User::add($login,
-                                          fallback($attributes["password"], User::hashPassword(random(8))),
+                                          fallback($attributes["password"], User::hash_password(random(8))),
                                           fallback($attributes["email"], ""),
                                           fallback($attributes["full_name"], ""),
                                           fallback($attributes["website"], ""),

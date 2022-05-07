@@ -787,7 +787,7 @@
             if (!$sql->select("users", "id", array("login" => $_POST['login']))->fetchColumn())
                 $sql->insert("users",
                              array("login" => $_POST['login'],
-                                   "password" => User::hashPassword($_POST['password1']),
+                                   "password" => User::hash_password($_POST['password1']),
                                    "email" => $_POST['email'],
                                    "group_id" => $group_id["admin"],
                                    "approved" => true,

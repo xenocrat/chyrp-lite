@@ -513,7 +513,7 @@
 
                 if (!Flash::exists("warning")) {
                     $user = User::add($_POST['login'],
-                                      User::hashPassword($_POST['password1']),
+                                      User::hash_password($_POST['password1']),
                                       $_POST['email'],
                                       $_POST['full_name'],
                                       $_POST['website'],
@@ -601,7 +601,7 @@
                              "login"    => $user->login,
                              "password" => $new_password));
 
-            $user = $user->update(null, User::hashPassword($new_password));
+            $user = $user->update(null, User::hash_password($new_password));
 
             Flash::notice(__("We have emailed you a new password."), "login");
         }
@@ -700,7 +700,7 @@
 
                 if (!Flash::exists("warning")) {
                     $password = (!empty($_POST['new_password1'])) ?
-                        User::hashPassword($_POST['new_password1']) : $visitor->password ;
+                        User::hash_password($_POST['new_password1']) : $visitor->password ;
 
                     $visitor = $visitor->update($visitor->login,
                                                 $password,

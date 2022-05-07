@@ -53,7 +53,7 @@
             if ($check->no_results)
                 return false;
 
-            if (self::checkPassword($password, $check->password))
+            if (self::check_password($password, $check->password))
                 return true;
 
             return false;
@@ -100,11 +100,9 @@
                                 "joined_at" => oneof($joined_at, datetime()));
 
             $trigger->filter($new_values, "before_add_user");
-
             $sql->insert("users", $new_values);
 
             $user = new self($sql->latest("users"));
-
             $trigger->call("add_user", $user);
 
             return $user;
@@ -180,7 +178,7 @@
         }
 
         /**
-         * Function: hashPassword
+         * Function: hash_password
          * Creates a hash of a user's password for the database.
          *
          * Parameters:
@@ -192,14 +190,14 @@
          * Notes:
          *     <random> tries to be cryptographically secure.
          */
-        static function hashPassword($password): string {
+        static function hash_password($password): string {
             $salt = random(16);
             $prefix = '$6$rounds=50000$';
             return crypt($password, $prefix.$salt);
         }
 
         /**
-         * Function: checkPassword
+         * Function: check_password
          * Checks a given password against the user's stored hash.
          *
          * Parameters:
@@ -210,9 +208,9 @@
          *     @true@ or @false@
          *
          * Notes:
-         *     Uses <hash_equals> if available to mitigate timing attacks.
+         *     Uses <hash_equals> to mitigate timing attacks.
          */
-        static function checkPassword($password, $stored): bool {
+        static function check_password($password, $stored): bool {
             $try = crypt($password, $stored);
             return hash_equals($stored, $try);
         }
