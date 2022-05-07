@@ -646,7 +646,7 @@
      */
     function derezz(&$variable): bool {
         $variable = str_replace(array("\n", "\r", "\0"), "", strip_tags($variable));
-        return empty($variable);
+        return ($variable == "");
     }
 
     /**
