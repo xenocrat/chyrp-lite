@@ -632,21 +632,24 @@
 
     /**
      * Function: derezz
-     * Strips tags and junk from the supplied variable and tests it for emptiness.
+     * Strips tags and junk from the supplied string and tests it for emptiness.
      *
      * Parameters:
-     *     &$variable - The variable, supplied by reference.
+     *     &$string - The string, supplied by reference.
      *
      * Returns:
-     *     Whether or not the stripped variable is empty.
+     *     Whether or not the stripped string is empty.
      *
      * Notes:
      *     Useful for data that will be stripped later on by its model
      *     but which needs to be tested for uniqueness/emptiness first.
+     * 
+     * See Also:
+     *     <Group::add> <User::add>
      */
-    function derezz(&$variable): bool {
-        $variable = str_replace(array("\n", "\r", "\0"), "", strip_tags($variable));
-        return ($variable == "");
+    function derezz(&$string): bool {
+        $string = str_replace(array("\n", "\r", "\0"), "", strip_tags($string));
+        return ($string == "");
     }
 
     /**
