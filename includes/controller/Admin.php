@@ -180,15 +180,16 @@
                          __("You do not have sufficient privileges to add posts."));
 
             $config = Config::current();
+            $feathers = $config->enabled_feathers;
 
             if (empty($config->enabled_feathers))
                 Flash::notice(__("You must enable at least one feather in order to write a post."), "feathers");
 
             if (!isset($_SESSION['latest_feather']))
-                $_SESSION['latest_feather'] = reset($config->enabled_feathers);
+                $_SESSION['latest_feather'] = reset($feathers);
 
             if (!feather_enabled($_SESSION['latest_feather']))
-                $_SESSION['latest_feather'] = reset($config->enabled_feathers);
+                $_SESSION['latest_feather'] = reset($feathers);
 
             fallback($_GET['feather'], $_SESSION['latest_feather']);
 
