@@ -55,11 +55,13 @@
 
     /**
      * Function: logged_in
-     * Returns whether or not the visitor is logged in.
+     * Mask for Visitor::logged_in().
      */
     function logged_in(): bool {
-        return (class_exists("Visitor") and 
-                isset(Visitor::current()->id) and Visitor::current()->id != 0);
+        if (!class_exists("Visitor"))
+            return false;
+
+        return Visitor::logged_in();
     }
 
     #---------------------------------------------
@@ -74,7 +76,7 @@
      *     $url - The absolute or relative URL to redirect to.
      */
     function redirect($url)/*: never*/{
-        if (class_exists("Route") and !substr_count($url, "://"))
+        if (!substr_count($url, "://"))
             $url = url($url);
 
         header("Location: ".unfix($url, true));
@@ -134,6 +136,9 @@
      * Mask for Route::url().
      */
     function url($url, $controller = null): string {
+        if (!class_exists("Route"))
+            return $url;
+
         return Route::url($url, $controller);
     }
 
@@ -682,19 +687,13 @@
 
     /**
      * Function: authenticate
-     * Generates or validates an authentication token for the visitor.
-     *
-     * Parameters:
-     *     $hash - A previously generated token to be validated (optional).
-     *
-     * Returns:
-     *     An authentication token, or the validity of the supplied token.
+     * Mask for Session::authenticate().
      */
     function authenticate($hash = null)/*: bool|string*/{
-        Trigger::current()->call("visitor_authenticate");
+        if (!class_exists("Session"))
+            return false;
 
-        $id = session_id();
-        return isset($hash) ? (token($id) == $hash) : (($id == "") ? "" : token($id)) ;
+        return Session::authenticate();
     }
 
     /**
