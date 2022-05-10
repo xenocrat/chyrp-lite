@@ -116,4 +116,23 @@
 
             return true;
         }
+
+        /**
+         * Function: authenticate
+         * Generates or validates an authentication token for this session.
+         *
+         * Parameters:
+         *     $hash - A previously generated token to be validated (optional).
+         *
+         * Returns:
+         *     An authentication token, or the validity of the supplied token.
+         */
+        public static function authenticate($hash = null)/*: bool|string*/{
+            $id = session_id();
+
+            if (isset($hash))
+                return (token($id) == $hash);
+
+            return ($id == "") ? false : token($id) ;
+        }
     }
