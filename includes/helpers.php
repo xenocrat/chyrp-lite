@@ -1552,7 +1552,7 @@
                 continue;
 
             if (DEBUG)
-                error_log("WEBMENTION @ ".$endpoint);
+                error_log("WEBMENTION @ ".$endpoint." (".$url.")");
 
             extract(parse_url(add_scheme($endpoint)), EXTR_SKIP);
             fallback($path, "/");
@@ -1604,9 +1604,6 @@
     function webmention_receive($source, $target): void {
         $trigger = Trigger::current();
 
-        if (DEBUG)
-            error_log("WEBMENTION from ".$source);
-
         # No need to continue without a responder for the Webmention trigger.
         if (!$trigger->exists("webmention"))
             error(__("Error"), __("Webmention support is disabled for this site."), null, 503);
@@ -1616,6 +1613,9 @@
 
         if (!is_url($target))
             error(__("Error"), __("The URL for our page is not valid."), null, 400);
+
+        if (DEBUG)
+            error_log("WEBMENTION received; source:".$source." target:".$target);
 
         $source_url = add_scheme(unfix($source), true);
         $target_url = add_scheme(unfix($target), true);
