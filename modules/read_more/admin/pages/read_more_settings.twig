@@ -1,0 +1,19 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block title %}{{ "Read More Settings" | translate("read_more") }}{% endblock %}
+
+{% block content %}
+<h2>{{ "Read More Settings" | translate("read_more") }}</h2>
+<form id="cascade_settings" class="split" action="{{ url('read_more_settings') }}" method="post" accept-charset="UTF-8">
+<fieldset role="presentation">
+<p>
+<label for="apply_to_feeds">{{ "Apply to feeds" | translate("read_more") }}</label>
+<input type="checkbox" class="checkbox" name="apply_to_feeds" id="apply_to_feeds"{{ site.module_read_more.apply_to_feeds | checked }}>
+</p>
+<p class="buttons">
+<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Update" | translate }}</button>
+</p>
+<input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
+</fieldset>
+</form>
+{% endblock %}
