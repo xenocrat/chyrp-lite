@@ -325,7 +325,7 @@
     }
 
     /**
-     * Function: twig_filter_match
+     * Function: twig_filter_preg_match
      * Try to match a string against an array of regular expressions, or a single regular expression.
      */
     function twig_filter_preg_match($haystack, $try): bool {
