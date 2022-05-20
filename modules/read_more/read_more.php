@@ -1,7 +1,8 @@
 <?php
     class ReadMore extends Modules {
         static function __install(): void {
-            Config::current()->set("module_read_more", array("apply_to_feeds" => false));
+            Config::current()->set("module_read_more",
+                                   array("apply_to_feeds" => false, "default_text" => ""));
         }
 
         static function __uninstall(): void {
@@ -26,8 +27,11 @@
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
     
+            fallback($_POST['default_text'], "");
+
             Config::current()->set("module_read_more",
-                                   array("apply_to_feeds" => isset($_POST['apply_to_feeds'])));
+                                   array("apply_to_feeds" => isset($_POST['apply_to_feeds']),
+                                         "default_text" => $_POST['default_text']));
 
             Flash::notice(__("Settings updated."), "read_more_settings");
         }
@@ -43,13 +47,15 @@
             if (!is_string($text) or !preg_match("/<!-- *more([^>]*)?-->/i", $text, $matches))
                 return $text;
 
-            $route = Route::current();
-            $array = Config::current()->module_read_more;
-
             if (!isset($post) or !$this->eligible())
                 return preg_replace("/<!-- *more([^>]*)?-->/i", "", $text);
 
-            $more = oneof(trim(fallback($matches[1])), __("&hellip;more", "read_more"));
+            $settings = Config::current()->module_read_more;
+
+            $more = oneof(trim(fallback($matches[1])),
+                          $settings["default_text"],
+                          __("&hellip;more", "read_more"));
+
             $url = (!$post->no_results) ? $post->url() : "#" ;
             $split = preg_split("/<!-- *more([^>]*)?-->/i", $text, -1, PREG_SPLIT_NO_EMPTY);
 
@@ -63,7 +69,7 @@
 
         private function eligible(): bool {
             $route = Route::current();
-            $array = Config::current()->module_read_more;
+            $settings = Config::current()->module_read_more;
 
             if (!isset($route))
                 return false;
@@ -74,7 +80,7 @@
             if ($route->action == "view")
                 return false;
 
-            if ($route->controller->feed and !$array["apply_to_feeds"])
+            if ($route->controller->feed and !$settings["apply_to_feeds"])
                 return false;
 
             return true;

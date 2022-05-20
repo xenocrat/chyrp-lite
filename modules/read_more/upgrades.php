@@ -9,7 +9,9 @@
      * Versions: 2022.01 => 2022.02
      */
     function read_more_add_config(): void {
-        $set = Config::current()->set("module_read_more", array("apply_to_feeds" => false), true);
+        $set = Config::current()->set("module_read_more",
+                                      array("apply_to_feeds" => false, "default_text" => ""),
+                                      true);
 
         if ($set === false)
             error(__("Error"), __("Could not write the configuration file."));
