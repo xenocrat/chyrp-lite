@@ -6,7 +6,7 @@
      * Function: read_more_add_config
      * Adds config settings into an array.
      *
-     * Versions: 2022.01 => 2022.02
+     * Versions: 2022.02 => 2022.03
      */
     function read_more_add_config(): void {
         $set = Config::current()->set("module_read_more",
