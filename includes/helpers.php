@@ -1146,6 +1146,7 @@
         $parser = new \cebe\markdown\GithubMarkdown();
         $parser->html5 = true;
         $parser->keepListStartNumber = true;
+        $parse->enableNewlines = false;
         return $parser->parse($text);
     }
 
