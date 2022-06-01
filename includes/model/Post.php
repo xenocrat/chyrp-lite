@@ -253,13 +253,18 @@
 
             $post = new self($id, array("skip_where" => true));
 
-            # Attempt to send pingbacks to URLs discovered in post attribute values.
+            # Notify URLs discovered in the feather fields.
             if ($config->send_pingbacks and $pingbacks and $post->status == self::STATUS_PUBLIC) {
-                foreach ($post->attribute_values as $value)
-                    if (is_string($value)) {
-                        #send_pingbacks($value, $post);
-                        webmention_send($value, $post);
+                if (feather_enabled($post->feather)) {
+                    $feather = Feathers::$instances[$post->feather];
+
+                    foreach ($feather->fields as $field => $vals) {
+                        if (isset($post->$field) and is_string($post->$field)) {
+                            send_pingbacks($post->$field, $post);
+                            webmention_send($post->$field, $post);
+                        }
                     }
+                }
             }
 
             $trigger->call("add_post", $post, $options);
@@ -357,13 +362,18 @@
                                                         "attribute_names"  => $attribute_names,
                                                         "attribute_values" => $attribute_values))));
 
-            # Attempt to send pingbacks to URLs discovered in post attribute values.
+            # Notify URLs discovered in the feather fields.
             if ($config->send_pingbacks and $pingbacks and $post->status == self::STATUS_PUBLIC) {
-                foreach ($post->attribute_values as $value)
-                    if (is_string($value)) {
-                        #send_pingbacks($value, $post);
-                        webmention_send($value, $post);
+                if (feather_enabled($post->feather)) {
+                    $feather = Feathers::$instances[$post->feather];
+
+                    foreach ($feather->fields as $field => $vals) {
+                        if (isset($post->$field) and is_string($post->$field)) {
+                            send_pingbacks($post->$field, $post);
+                            webmention_send($post->$field, $post);
+                        }
                     }
+                }
             }
 
             if ($this->status == self::STATUS_SCHEDULED and $post->status == self::STATUS_PUBLIC)
