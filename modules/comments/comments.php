@@ -777,7 +777,7 @@
             return $values;
         }
 
-        public function pingback($post, $to, $from, $title, $excerpt)/*: string|IXR_Error */{
+        public function pingback($post, $to, $from, $title, $excerpt): string|IXR_Error {
             $count = SQL::current()->count("comments",
                                            array("post_id" => $post->id,
                                                  "status" => Comment::STATUS_PINGBACK,
@@ -813,7 +813,7 @@
             if (strlen($from) > 2048)
                 error(__("Error"), __("Your URL is too long to be stored in our database.", "comments"), null, 413);
 
-            Comment::create("Webmention",
+            Comment::create(__("Webmention", "comments"),
                             preg_replace("~(https?://|^)([^/:]+).*~", "$2", $from),
                             $from,
                             "",
