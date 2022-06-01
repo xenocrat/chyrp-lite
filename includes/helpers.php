@@ -1512,19 +1512,11 @@
      *     An array of all URLs found in the string.
      */
     function grab_urls($string): array {
-        # These expressions capture hyperlinks in HTML and unfiltered Markdown.
-        $expressions = array("/<a(?= )[^>]* href=(\"[^\"]+\"|\'[^\']+\')[^>]*>[^<]+<\/a>/i",
-                             "/\[[^\]]+\]\(([^\)]+)\)/");
-
-        # Modules can support other syntaxes.
-        Trigger::current()->filter($expressions, "link_regexp");
-
         $urls = array();
+        $regx = "/<a(?= )[^>]* href=(\"[^\"]+\"|\'[^\']+\')[^>]*>[^<]+<\/a>/i";
 
-        foreach ($expressions as $expression) {
-            preg_match_all($expression, stripslashes($string), $matches);
-            $urls = array_merge($urls, $matches[1]);
-        }
+        if (preg_match_all($regx, $string, $matches))
+            $urls = $matches[1];
 
         foreach ($urls as &$url)
             $url = trim($url, " \"'");
@@ -1584,7 +1576,7 @@
             fwrite($connect,
                 "POST ".$path." HTTP/1.0\r\n".
                 "Host: ".$host."\r\n".
-                "Content-Type: Content-Type: application/x-www-form-urlencoded\r\n".
+                "Content-Type: application/x-www-form-urlencoded\r\n".
                 "Content-Length: ".strlen($wm_query)."\r\n".
                 "Connection: close"."\r\n".
                 "User-Agent: ".CHYRP_IDENTITY."\r\n\r\n");
@@ -1618,8 +1610,8 @@
         if (DEBUG)
             error_log("WEBMENTION received; source:".$source." target:".$target);
 
-        $source_url = add_scheme(unfix($source), true);
-        $target_url = add_scheme(unfix($target), true);
+        $source_url = add_scheme(unfix($source, true));
+        $target_url = add_scheme(unfix($target, true));
 
         if ($target == $source)
             error(__("Error"), __("The source and target URLs cannot be the same."), null, 400);
