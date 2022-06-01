@@ -93,7 +93,14 @@
         }
 
         public function feed_content($post): string {
-            return $post->description;
+            $content = '<a rel="external" href="'.
+                       fix($post->source, true).'">'.
+                       oneof($post->name, $post->source).'</a>';
+
+            if (!empty($post->description))
+                $content.= '<figcaption>'.$post->description.'</figcaption>';
+
+            return '<figure>'.$content.'</figure>';
         }
 
         public function link_related($post, $feed): void {
