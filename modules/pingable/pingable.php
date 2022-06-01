@@ -27,7 +27,7 @@
             return $names;
         }
 
-        public function pingback($post, $to, $from, $title, $excerpt)/*: string|IXR_Error */{
+        public function pingback($post, $to, $from, $title, $excerpt): string|IXR_Error {
             $count = SQL::current()->count("pingbacks",
                                            array("post_id" => $post->id,
                                                  "source" => $from));

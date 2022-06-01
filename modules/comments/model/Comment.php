@@ -240,7 +240,7 @@
                                $status = null,
                                $notify = null,
                                $created_at = null,
-                               $updated_at = null)/*: self|false */{
+                               $updated_at = null): self|false {
             if ($this->no_results)
                 return false;
 
@@ -383,7 +383,7 @@
          * Function: url
          * Returns a comment's URL.
          */
-        public function url()/*: string|false */{
+        public function url(): string|false {
             if ($this->no_results)
                 return false;
 
@@ -394,7 +394,7 @@
          * Function: author_link
          * Returns the commenter's name enclosed in a hyperlink to their website.
          */
-        public function author_link()/*: string|false */{
+        public function author_link(): string|false {
             if ($this->no_results)
                 return false;
 

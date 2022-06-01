@@ -29,7 +29,7 @@
          * Returns:
          *     @mixed@
          */
-        public function __get($name) {
+        public function __get($name): mixed {
             if (isset($this->data[$name]))
                 return $this->data[$name];
 
@@ -41,7 +41,7 @@
          * Function: __isset
          * Handles access to the configuration data.
          */
-        public function __isset($name) {
+        public function __isset($name): bool {
             return isset($this->data[$name]);
         }
 
@@ -49,7 +49,7 @@
          * Function: read
          * Reads the configuration file and decodes the settings.
          */
-        private function read()/*: array|false */{
+        private function read(): array|false {
             $security = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
             $contents = @file_get_contents(INCLUDES_DIR.DIR."config.json.php");
 
@@ -68,7 +68,7 @@
          * Function: write
          * Encodes the settings and writes the configuration file.
          */
-        private function write()/*: int|false */{
+        private function write(): int|false {
             $contents = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
             $contents.= json_set($this->data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
@@ -84,7 +84,7 @@
          *     $value - The value to set.
          *     $fallback - Add the setting only if it doesn't exist.
          */
-        public function set($setting, $value, $fallback = false)/*: int|false */{
+        public function set($setting, $value, $fallback = false): int|false {
             if (isset($this->data[$setting]) and $fallback)
                 return true;
 
@@ -103,7 +103,7 @@
          * Parameters:
          *     $setting - The setting name.
          */
-        public function remove($setting)/*: int|false */{
+        public function remove($setting): int|false {
             unset($this->data[$setting]);
             return $this->write();
         }

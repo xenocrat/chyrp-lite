@@ -51,8 +51,7 @@
          * Parameters:
          *     $id - Session ID.
          */
-        #[\ReturnTypeWillChange]
-        public function read($id)/*: string|false */{
+        public function read($id): string|false {
             $result = SQL::current()->select("sessions",
                                              array("data", "created_at"),
                                              array("id" => $id))->fetch();
@@ -108,8 +107,7 @@
          * Parameters:
          *     $lifetime - The configured maximum session lifetime in seconds.
          */
-        #[\ReturnTypeWillChange]
-        public function gc($lifetime)/*: int|false */{
+        public function gc($lifetime): int|false {
             SQL::current()->delete("sessions",
                                    "updated_at <= :thirty_days OR data = '' OR data IS NULL",
                                    array(":thirty_days" => datetime(strtotime("-30 days"))));
@@ -127,7 +125,7 @@
          * Returns:
          *     An authentication token, or the validity of the supplied token.
          */
-        public static function authenticate($hash = null)/*: bool|string*/{
+        public static function authenticate($hash = null): bool|string{
             $id = session_id();
 
             if (isset($hash))

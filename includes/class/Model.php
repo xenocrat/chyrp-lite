@@ -38,7 +38,7 @@
          * Returns:
          *     @mixed@
          */
-        public function &__get($name) {
+        public function &__get($name): mixed {
             $model_name = get_class($this);
             $placeholders = (isset($this->__placeholders) and $this->__placeholders);
 
@@ -119,7 +119,7 @@
          * Function __set
          * Handles dynamic attributes.
          */
-        public function __set($name, $value) {
+        public function __set($name, $value): void {
             $this->data[$name] = $value;
         }
 
@@ -127,7 +127,7 @@
          * Function: __isset
          * Handles model relationships, deferred and dynamic attributes.
          */
-        public function __isset($name) {
+        public function __isset($name): bool {
             $model_name = get_class($this);
 
             if (Trigger::current()->exists($model_name."_".$name."_attr"))
@@ -165,7 +165,7 @@
          * See Also:
          *     <Model.__get>
          */
-        public function __getPlaceholders($name) {
+        public function __getPlaceholders($name): mixed {
             $this->__placeholders = true;
             $return = $this->__get($name);
             unset($this->__placeholders);

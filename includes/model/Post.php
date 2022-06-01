@@ -257,7 +257,7 @@
             if ($config->send_pingbacks and $pingbacks and $post->status == self::STATUS_PUBLIC) {
                 foreach ($post->attribute_values as $value)
                     if (is_string($value)) {
-                        send_pingbacks($value, $post);
+                        #send_pingbacks($value, $post);
                         webmention_send($value, $post);
                     }
             }
@@ -301,7 +301,7 @@
                                $created_at = null,
                                $updated_at = null,
                                $options    = null,
-                               $pingbacks  = true)/*: self|false */{
+                               $pingbacks  = true): self|false {
             if ($this->no_results)
                 return false;
 
@@ -361,7 +361,7 @@
             if ($config->send_pingbacks and $pingbacks and $post->status == self::STATUS_PUBLIC) {
                 foreach ($post->attribute_values as $value)
                     if (is_string($value)) {
-                        send_pingbacks($value, $post);
+                        #send_pingbacks($value, $post);
                         webmention_send($value, $post);
                     }
             }
@@ -528,7 +528,7 @@
          * Function: url
          * Returns a post's URL.
          */
-        public function url()/*: string|false */{
+        public function url(): string|false {
             if ($this->no_results)
                 return false;
 
@@ -564,7 +564,7 @@
          *     The post's excerpt:
          *     filtered -> first line -> ftags stripped -> truncated to 75 characters -> normalized.
          */
-        public function title_from_excerpt()/*: string|false */{
+        public function title_from_excerpt(): string|false {
             if ($this->no_results)
                 return false;
 
@@ -589,7 +589,7 @@
          * Function: title
          * Returns the given post's title, provided by its Feather.
          */
-        public function title()/*: string|false */{
+        public function title(): string|false {
             if ($this->no_results)
                 return false;
 
@@ -606,7 +606,7 @@
          * Function: excerpt
          * Returns the given post's excerpt, provided by its Feather.
          */
-        public function excerpt()/*: string|false */{
+        public function excerpt(): string|false {
             if ($this->no_results)
                 return false;
 
@@ -623,7 +623,7 @@
          * Function: feed_content
          * Returns the given post's feed content, provided by its Feather.
          */
-        public function feed_content()/*: string|false */{
+        public function feed_content(): string|false {
             if ($this->no_results)
                 return false;
 
@@ -641,7 +641,7 @@
          * Returns:
          *     The next post (the post made before this one).
          */
-        public function next()/*: self|false */{
+        public function next(): self|false {
             if ($this->no_results)
                 return false;
 
@@ -663,7 +663,7 @@
          * Returns:
          *     The previous post (the post made after this one).
          */
-        public function prev()/*: self|false */{
+        public function prev(): self|false {
             if ($this->no_results)
                 return false;
 
@@ -739,7 +739,7 @@
          *     $route - The route object to respond to, or null to return a Post object.
          *     $options - Additional options for the Post object (optional).
          */
-        static function from_url($request, $route = null, $options = array())/*: self|array|false */{
+        static function from_url($request, $route = null, $options = array()): self|array|false {
             $config = Config::current();
 
             # Dirty URL?
@@ -855,7 +855,7 @@
          * Function: author
          * Returns a post's author. Example: $post->author->name
          */
-        public function author()/*: object|false */{
+        public function author(): object|false {
             if ($this->no_results)
                 return false;
 
@@ -873,7 +873,7 @@
          * Function: groups
          * Returns the IDs of any groups given viewing permission in the post's status.
          */
-        public function groups()/*: string|false */{
+        public function groups(): string|false {
             if ($this->no_results)
                 return false;
 

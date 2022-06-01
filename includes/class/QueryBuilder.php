@@ -386,7 +386,7 @@
          *     $sql - The SQL instance calling this method.
          *     $name - Name of the column.
          */
-        public static function safecol($sql, $name)/*: string|array|null */{
+        public static function safecol($sql, $name): string|array|null {
             $keywords = "join|into|set|from|where|groups?|having|order|limit|offset";
             return preg_replace("/(([^a-zA-Z0-9_]|^)($keywords)([^a-zA-Z0-9_]|$))/i",
                                 '\\2"\\3"\\4',

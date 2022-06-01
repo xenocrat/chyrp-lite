@@ -35,7 +35,7 @@
         * Function: pingback_ping
         * Receive and register pingbacks. Calls the @pingback@ trigger.
         */
-        public function pingback_ping($args)/*: string|IXR_Error */{
+        public function pingback_ping($args): string|IXR_Error {
             $trigger    = Trigger::current();
             $source     = add_scheme(unfix(fallback($args[0], ""), true));
             $target     = add_scheme(unfix(fallback($args[1], ""), true));
@@ -174,7 +174,7 @@
         * Function: metaWeblog_newMediaObject
         * Uploads a file to the server.
         */
-        public function metaWeblog_newMediaObject($args)/*: array|IXR_Error */{
+        public function metaWeblog_newMediaObject($args): array|IXR_Error {
             $this->auth(fallback($args[1]), fallback($args[2]));
             global $user;
 
@@ -205,13 +205,13 @@
         * Function: metaWeblog_getPost
         * Retrieves a specified post for editing.
         */
-        public function metaWeblog_getPost($args)/*: array|IXR_Error */{
+        public function metaWeblog_getPost($args): array|IXR_Error {
             $this->auth(fallback($args[1]), fallback($args[2]));
             global $user;
 
             $post = new Post(fallback($args[0]), array("filter" => false,
                                                        "where" => array(Post::feathers())));
-
+file_put_contents(MAIN_DIR.DIR."post.txt", print_r($post, true));
             if ($post->no_results)
                 return new IXR_Error(404, __("Post not found."));
 
@@ -235,7 +235,7 @@
         * Function: metaWeblog_newPost
         * Creates a new post.
         */
-        public function metaWeblog_newPost($args)/*: int|IXR_Error */{
+        public function metaWeblog_newPost($args): int|IXR_Error {
             $this->auth(fallback($args[1]), fallback($args[2]));
             global $user;
 
@@ -299,7 +299,7 @@
         * Function: metaWeblog_editPost
         * Updates a specified post.
         */
-        public function metaWeblog_editPost($args)/*: bool|IXR_Error */{
+        public function metaWeblog_editPost($args): bool|IXR_Error {
             $this->auth(fallback($args[1]), fallback($args[2]));
             global $user;
 
@@ -367,7 +367,7 @@
         * Function: metaWeblog_deletePost
         * Deletes a specified post.
         */
-        public function metaWeblog_deletePost($args)/*: bool|IXR_Error */{
+        public function metaWeblog_deletePost($args): bool|IXR_Error {
             $this->auth(fallback($args[2]), fallback($args[3]));
             global $user;
 

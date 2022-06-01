@@ -167,7 +167,7 @@
      * Returns:
      *     True if no action was needed, bytes written on success, false on failure.
      */
-    function htaccess_conf($url_path = null)/*: int|bool*/{
+    function htaccess_conf($url_path = null): int|bool {
         $url_path = oneof($url_path,
                           parse_url(Config::current()->chyrp_url, PHP_URL_PATH),
                           "/");
@@ -204,7 +204,7 @@
      * Returns:
      *     True if no action was needed, bytes written on success, false on failure.
      */
-    function caddyfile_conf($url_path = null)/*: int|bool*/{
+    function caddyfile_conf($url_path = null): int|bool {
         $url_path = oneof($url_path,
                           parse_url(Config::current()->chyrp_url, PHP_URL_PATH),
                           "/");
@@ -241,7 +241,7 @@
      * Returns:
      *     True if no action was needed, bytes written on success, false on failure.
      */
-    function nginx_conf($url_path = null)/*: int|bool*/{
+    function nginx_conf($url_path = null): int|bool {
         $url_path = oneof($url_path,
                           parse_url(Config::current()->chyrp_url, PHP_URL_PATH),
                           "/");
@@ -468,7 +468,7 @@
      * Returns:
      *     A time/date string with the supplied formatting.
      */
-    function when($formatting, $when)/*: string|false*/{
+    function when($formatting, $when): string|false {
         $time = is_numeric($when) ? $when : strtotime($when) ;
         return date($formatting, $time);
     }
@@ -483,7 +483,7 @@
      * Returns:
      *     A standard datetime string.
      */
-    function datetime($when = null)/*: string|false*/{
+    function datetime($when = null): string|false {
         fallback($when, time());
 
         $time = is_numeric($when) ? $when : strtotime($when) ;
@@ -494,7 +494,7 @@
      * Function: now
      * Alias to strtotime, for prettiness like now("+1 day").
      */
-    function now($when)/*: string|false*/{
+    function now($when): string|false {
         return strtotime($when);
     }
 
@@ -559,7 +559,7 @@
      *     The value will be the first non-empty argument,
      *     or the last, or null if no arguments are supplied.
      */
-    function fallback(&$variable)/*: mixed*/{
+    function fallback(&$variable): mixed {
         if (is_bool($variable))
             return $variable;
 
@@ -597,7 +597,7 @@
      *     It will guess where to stop based on types,
      *     e.g. "" has priority over array() but not 1.
      */
-    function oneof()/*: mixed*/{
+    function oneof(): mixed {
         $last = null;
         $args = func_get_args();
 
@@ -689,7 +689,7 @@
      * Function: authenticate
      * Mask for Session::authenticate().
      */
-    function authenticate($hash = null)/*: bool|string*/{
+    function authenticate($hash = null): bool|string {
         if (!class_exists("Session"))
             return false;
 
@@ -730,7 +730,7 @@
      * Returns:
      *     A byte value or the input if decoding failed.
      */
-    function shorthand_bytes($value)/*: mixed*/ {
+    function shorthand_bytes($value): mixed {
         switch (substr($value, -1)) {
             case "K": case "k":
                 return (int) $value * 1024;
@@ -1433,7 +1433,7 @@
      * Returns:
      *     The response content, or false on failure.
      */
-    function get_remote($url, $redirects = 0, $timeout = 10, $headers = false)/*: string|false*/{
+    function get_remote($url, $redirects = 0, $timeout = 10, $headers = false): string|false {
         extract(parse_url(add_scheme($url)), EXTR_SKIP);
         fallback($path, "/");
         fallback($scheme, "http");
@@ -1652,7 +1652,7 @@
      * Returns:
      *     The Webmention endpoint URL, or false on failure.
      */
-    function webmention_discover($url, $redirects = 3)/*: string|false*/{
+    function webmention_discover($url, $redirects = 3): string|false {
         extract(parse_url(add_scheme($url)), EXTR_SKIP);
         fallback($path, "/");
         fallback($scheme, "http");
@@ -1855,7 +1855,7 @@
      * Returns:
      *     The pingback target, or false on failure.
      */
-    function pingback_url($url)/*: string|false*/{
+    function pingback_url($url): string|false {
         extract(parse_url(add_scheme($url)), EXTR_SKIP);
         fallback($path, "/");
         fallback($scheme, "http");
@@ -2143,7 +2143,7 @@
      * Returns:
      *     The filename of the copied file, or false on failure.
      */
-    function upload_from_url($url, $redirects = 3, $timeout = 10)/*: string|false*/{
+    function upload_from_url($url, $redirects = 3, $timeout = 10): string|false {
         if (!preg_match("~[^ /\?]+(?=($|\?))~", $url, $match))
             return false;
 
@@ -2304,7 +2304,7 @@
      * Returns:
      *     A sanitized unique filename, or false on failure.
      */
-    function upload_filename($filename, $filter = array())/*: string|false*/{
+    function upload_filename($filename, $filter = array()): string|false {
         if (empty($filter))
             $filter = upload_filter_whitelist();
 
@@ -2525,7 +2525,7 @@
      * Returns:
      *     A JSON encoded string or false on failure.
      */
-    function json_set($value, $options = 0, $depth = 512)/*: string|false*/{
+    function json_set($value, $options = 0, $depth = 512): string|false {
         $encoded = json_encode($value, $options, $depth);
 
         if (json_last_error())
@@ -2547,7 +2547,7 @@
      * Returns:
      *     A JSON decoded value of the appropriate PHP type.
      */
-    function json_get($value, $assoc = false, $depth = 512, $options = 0)/*: mixed*/{
+    function json_get($value, $assoc = false, $depth = 512, $options = 0): mixed {
         $decoded = json_decode($value, $assoc, $depth, $options);
 
         if (json_last_error())

@@ -104,7 +104,7 @@
          * Parameters:
          *     $column - The offset of the column to grab. Default 0.
          */
-        public function fetchColumn($column = 0)/*: mixed */{
+        public function fetchColumn($column = 0): mixed {
             return $this->query->fetchColumn($column);
         }
 
@@ -120,7 +120,7 @@
          * Function: fetchObject
          * Returns the current row as an object.
          */
-        public function fetchObject()/*: object|false */{
+        public function fetchObject(): object|false {
             return $this->query->fetchObject();
         }
 

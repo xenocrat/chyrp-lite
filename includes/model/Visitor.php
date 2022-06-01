@@ -27,7 +27,7 @@
          * Function: __get
          * A detour around belongs_to "group" to account for the default Guest group.
          */
-        public function &__get($name) {
+        public function &__get($name): mixed {
             if ($name == "group") {
                 $this->data["group"] = isset($this->group_id) ?
                     new Group($this->group_id) :

@@ -133,7 +133,7 @@
                                $website   = null,
                                $group_id  = null,
                                $approved  = null,
-                               $joined_at = null)/*: self|false */{
+                               $joined_at = null): self|false {
             if ($this->no_results)
                 return false;
 

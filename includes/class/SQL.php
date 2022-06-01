@@ -143,7 +143,7 @@
          *     $params - An associative array of parameters used in the query.
          *     $throw_exceptions - Should an exception be thrown if the query fails?
          */
-        public function query($query, $params = array(), $throw_exceptions = false)/*: Query|false */{
+        public function query($query, $params = array(), $throw_exceptions = false): Query|false {
             if (!$this->connected)
                 return false;
 
@@ -172,7 +172,7 @@
          *     $params - An associative array of parameters used in the query.
          *     $throw_exceptions - Should exceptions be thrown on error?
          */
-        public function count($tables, $conds = null, $params = array(), $throw_exceptions = false)/*: mixed */{
+        public function count($tables, $conds = null, $params = array(), $throw_exceptions = false): mixed {
             $build = QueryBuilder::build_count($this, $tables, $conds, $params);
             $query = $this->query($build, $params, $throw_exceptions);
 
@@ -204,7 +204,7 @@
                                $offset = null,
                                $group = null,
                                $left_join = array(),
-                               $throw_exceptions = false)/*: Query|false */{
+                               $throw_exceptions = false): Query|false {
             $build = QueryBuilder::build_select($this,
                                                 $tables,
                                                 $fields,
@@ -229,7 +229,7 @@
          *     $params - An associative array of parameters used in the query.
          *     $throw_exceptions - Should exceptions be thrown on error?
          */
-        public function insert($table, $data, $params = array(), $throw_exceptions = false)/*: Query|false */{
+        public function insert($table, $data, $params = array(), $throw_exceptions = false): Query|false {
             $build = QueryBuilder::build_insert($this, $table, $data, $params);
             return $this->query($build, $params, $throw_exceptions);
         }
@@ -245,16 +245,16 @@
          *     $params - An associative array of parameters to be used in the query.
          *     $throw_exceptions - Should exceptions be thrown on error?
          */
-        public function replace($table, $keys, $data, $params = array(), $throw_exceptions = false)/*: Query|false */{
+        public function replace($table, $keys, $data, $params = array(), $throw_exceptions = false): Query|false {
             $match = array();
 
             foreach ((array) $keys as $key)
                 $match[$key] = $data[$key];
 
             if ($this->count($table, $match, $params))
-                $this->update($table, $match, $data, $params, $throw_exceptions);
-            else
-                $this->insert($table, $data, $params, $throw_exceptions);
+                return $this->update($table, $match, $data, $params, $throw_exceptions);
+
+            return $this->insert($table, $data, $params, $throw_exceptions);
         }
 
         /**
@@ -268,7 +268,7 @@
          *     $params - An associative array of parameters used in the query.
          *     $throw_exceptions - Should exceptions be thrown on error?
          */
-        public function update($table, $conds, $data, $params = array(), $throw_exceptions = false)/*: Query|false */{
+        public function update($table, $conds, $data, $params = array(), $throw_exceptions = false): Query|false {
             $build = QueryBuilder::build_update($this, $table, $conds, $data, $params);
             return $this->query($build, $params, $throw_exceptions);
         }
@@ -283,7 +283,7 @@
          *     $params - An associative array of parameters used in the query.
          *     $throw_exceptions - Should exceptions be thrown on error?
          */
-        public function delete($table, $conds, $params = array(), $throw_exceptions = false)/*: Query|false */{
+        public function delete($table, $conds, $params = array(), $throw_exceptions = false): Query|false {
             $build = QueryBuilder::build_delete($this, $table, $conds, $params);
             return $this->query($build, $params, $throw_exceptions);
         }
@@ -296,7 +296,7 @@
          *     $table - Table to drop.
          *     $throw_exceptions - Should exceptions be thrown on error?
          */
-        public function drop($table, $throw_exceptions = false)/*: Query|false */{
+        public function drop($table, $throw_exceptions = false): Query|false {
             $build = QueryBuilder::build_drop($this, $table);
             return $this->query($build, array(), $throw_exceptions);
         }
@@ -310,7 +310,7 @@
          *     $cols - An array of column declarations.
          *     $throw_exceptions - Should exceptions be thrown on error?
          */
-        public function create($table, $cols, $throw_exceptions = false)/*: Query|false */{
+        public function create($table, $cols, $throw_exceptions = false): Query|false {
             $build = QueryBuilder::build_create($this, $table, $cols);
             return $this->query($build, array(), $throw_exceptions);
         }
@@ -323,7 +323,7 @@
          *     $table - Table to get the latest value from.
          *     $seq - Name of the sequence.
          */
-        public function latest($table, $seq = "id_seq")/*: string|false */ {
+        public function latest($table, $seq = "id_seq"): string|false {
             if (!isset($this->db))
                 $this->connect();
 

@@ -42,7 +42,7 @@
                              $_POST['option']);
         }
 
-        public function update($post)/*: Post|false */{
+        public function update($post): Post|false {
             if (empty($_POST['body']))
                 error(__("Error"), __("Body can't be blank.", "text"), null, 422);
 

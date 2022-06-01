@@ -153,7 +153,7 @@
                                $clean        = null,
                                $url          = null,
                                $created_at   = null,
-                               $updated_at   = null)/*: self|false */{
+                               $updated_at   = null): self|false {
             if ($this->no_results)
                 return false;
 
@@ -283,7 +283,7 @@
          *     $request - The request URI to parse.
          *     $route - The route object to respond to, or null to return a Page object.
          */
-        static function from_url($request, $route = null)/*: self|array|false */{
+        static function from_url($request, $route = null): self|array|false {
             # Dirty URL?
             if (preg_match("/(\?|&)url=([^&#]+)/", $request, $slug)) {
                 $page = new self(array("url" => $slug[2]));
@@ -308,7 +308,7 @@
          * Function: url
          * Returns a page's URL.
          */
-        public function url()/*: string|false */{
+        public function url(): string|false {
             if ($this->no_results)
                 return false;
 
@@ -333,7 +333,7 @@
          * Function: author
          * Returns a page's author. Example: $page->author->name
          */
-        public function author()/*: object|false */{
+        public function author(): object|false {
             if ($this->no_results)
                 return false;
 

@@ -8,7 +8,7 @@
      *
      * Versions: 2017.01 => 2017.02
      */
-    function comments_migrate_config() {
+    function comments_migrate_config(): void {
         $config = Config::current();
 
         if (isset($config->default_comment_status) and
@@ -46,7 +46,7 @@
      *
      * Versions: 2022.01 => 2022.02
      */
-    function fix_comment_updated() {
+    function fix_comment_updated(): void {
         $sql = SQL::current();
 
         if ($sql->adapter == "pgsql")

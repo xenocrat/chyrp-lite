@@ -573,7 +573,7 @@
             return sprintf($str, $count, fix($tag, true));
         }
 
-        public function tag_find($clean)/*: array|false */{
+        public function tag_find($clean): array|false {
             $cloud = $this->tag_cloud();
 
             foreach ($cloud as $tag)

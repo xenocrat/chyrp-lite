@@ -45,7 +45,7 @@
                              $_POST['option']);
         }
 
-        public function update($post)/*: Post|false */{
+        public function update($post): Post|false {
             if (empty($_POST['quote']))
                 error(__("Error"), __("Quote can't be empty."), null, 422);
 
