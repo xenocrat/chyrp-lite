@@ -253,17 +253,11 @@
 
             $post = new self($id, array("skip_where" => true));
 
-            # Notify URLs discovered in the feather fields.
+            # Notify URLs discovered in the structured feed content.
             if ($config->send_pingbacks and $pingbacks and $post->status == self::STATUS_PUBLIC) {
                 if (feather_enabled($post->feather)) {
-                    $feather = Feathers::$instances[$post->feather];
-
-                    foreach ($feather->fields as $field => $vals) {
-                        if (isset($post->$field) and is_string($post->$field)) {
-                            send_pingbacks($post->$field, $post);
-                            webmention_send($post->$field, $post);
-                        }
-                    }
+                    send_pingbacks($post->feed_content(), $post);
+                    webmention_send($post->feed_content(), $post);
                 }
             }
 
@@ -362,17 +356,11 @@
                                                         "attribute_names"  => $attribute_names,
                                                         "attribute_values" => $attribute_values))));
 
-            # Notify URLs discovered in the feather fields.
+            # Notify URLs discovered in the structured feed content.
             if ($config->send_pingbacks and $pingbacks and $post->status == self::STATUS_PUBLIC) {
                 if (feather_enabled($post->feather)) {
-                    $feather = Feathers::$instances[$post->feather];
-
-                    foreach ($feather->fields as $field => $vals) {
-                        if (isset($post->$field) and is_string($post->$field)) {
-                            send_pingbacks($post->$field, $post);
-                            webmention_send($post->$field, $post);
-                        }
-                    }
+                    send_pingbacks($post->feed_content(), $post);
+                    webmention_send($post->feed_content(), $post);
                 }
             }
 
