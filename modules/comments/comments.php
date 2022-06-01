@@ -813,7 +813,7 @@
             if (strlen($from) > 2048)
                 error(__("Error"), __("Your URL is too long to be stored in our database.", "comments"), null, 413);
 
-            Comment::create(__("Webmention", "comments"),
+            Comment::create(__("Mentioned this post.", "comments"),
                             preg_replace("~(https?://|^)([^/:]+).*~", "$2", $from),
                             $from,
                             "",
