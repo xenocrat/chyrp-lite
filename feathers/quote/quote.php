@@ -79,9 +79,9 @@
             $content = '<blockquote>'.$post->quote.'</blockquote>';
 
             if (!empty($post->source))
-                $content.= '<cite>'.$post->source.'</cite>';
+                $content.= '<figcaption><cite>'.$post->source.'</cite></figcaption>';
 
-            return $content;
+            return '<figure>'.$content.'</figure>';
         }
 
         public function metaWeblog_getValues($struct, $post): array {
