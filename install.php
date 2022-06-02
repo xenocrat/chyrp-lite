@@ -25,8 +25,8 @@
     define('CAN_USE_ZLIB',     false);
     define('USE_ZLIB',         false);
 
-    if (version_compare(PHP_VERSION, "7.4", "<"))
-        exit("Chyrp Lite requires PHP 7.4 or greater. Installation cannot continue.");
+    if (version_compare(PHP_VERSION, "8.0", "<"))
+        exit("Chyrp Lite requires PHP 8.0 or greater. Installation cannot continue.");
 
     ob_start();
     define('OB_BASE_LEVEL', ob_get_level());
