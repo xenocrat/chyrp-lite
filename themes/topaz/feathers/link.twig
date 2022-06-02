@@ -2,7 +2,7 @@
 
 {% block content %}
 <h2 class="post_title">
-<a href="{{ post.source | fix(true) }}" class="link">{{ post.name }}</a>
+<a href="{{ post.source | fix(true) }}" rel="external">{{ post.name }}</a>
 </h2>
 <h6 class="post_byline">{{ "Written by %s" | translate | format(post.author.name) }}</h6>
 <section class="description">
