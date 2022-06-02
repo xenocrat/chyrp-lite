@@ -13,7 +13,20 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
-#: modules/read_more/info.php:3
+#: modules/read_more/admin/pages/read_more_settings.twig:3
+#: modules/read_more/admin/pages/read_more_settings.twig:6
+msgid "Read More Settings"
+msgstr "Impostazioni continua a leggere"
+
+#: modules/read_more/admin/pages/read_more_settings.twig:10
+msgid "Apply to Feeds"
+msgstr "Applica ai feed"
+
+#: modules/read_more/admin/pages/read_more_settings.twig:15
+msgid "Default Text"
+msgstr "Testo predefinito"
+
+#: modules/read_more/info.php:3 modules/read_more/read_more.php:41
 msgid "Read More"
 msgstr "Continua a leggere"
 
@@ -27,6 +40,6 @@ msgstr ""
 "<code>&lt;!--more--&gt;</code> o <code>&lt;!--more testo personalizzato--&gt;"
 "</code> nei tuoi post."
 
-#: modules/read_more/read_more.php:21
+#: modules/read_more/read_more.php:57
 msgid "&hellip;more"
-msgstr "&hellip; altro"
+msgstr "&hellip;altro"

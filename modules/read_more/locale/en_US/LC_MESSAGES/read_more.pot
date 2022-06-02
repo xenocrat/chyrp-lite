@@ -1,6 +1,20 @@
 #. This file is distributed under the same license as the Chyrp Lite package.
 
+#: modules/read_more/admin/pages/read_more_settings.twig:3
+#: modules/read_more/admin/pages/read_more_settings.twig:6
+msgid "Read More Settings"
+msgstr ""
+
+#: modules/read_more/admin/pages/read_more_settings.twig:10
+msgid "Apply to Feeds"
+msgstr ""
+
+#: modules/read_more/admin/pages/read_more_settings.twig:15
+msgid "Default Text"
+msgstr ""
+
 #: modules/read_more/info.php:3
+#: modules/read_more/read_more.php:41
 msgid "Read More"
 msgstr ""
 
@@ -8,7 +22,7 @@ msgstr ""
 msgid "Add &#8220;&hellip;more&#8221; links to your blog index by typing <code>&lt;!--more--&gt;</code> or <code>&lt;!--more custom text--&gt;</code> in your posts."
 msgstr ""
 
-#: modules/read_more/read_more.php:21
+#: modules/read_more/read_more.php:57
 msgid "&hellip;more"
 msgstr ""
 

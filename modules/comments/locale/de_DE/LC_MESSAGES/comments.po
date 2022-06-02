@@ -342,11 +342,11 @@ msgstr ""
 msgid "Comment #%d"
 msgstr ""
 
-#: modules/comments/comments.php:787
+#: modules/comments/comments.php:787 modules/comments/comments.php:811
 msgid "A ping from your URL is already registered."
 msgstr ""
 
-#: modules/comments/comments.php:790
+#: modules/comments/comments.php:790 modules/comments/comments.php:814
 msgid "Your URL is too long to be stored in our database."
 msgstr ""
 
@@ -354,37 +354,41 @@ msgstr ""
 msgid "Pingback registered!"
 msgstr ""
 
-#: modules/comments/comments.php:811
+#: modules/comments/comments.php:816
+msgid "Mentioned this post."
+msgstr ""
+
+#: modules/comments/comments.php:833
 msgid "Open"
 msgstr ""
 
-#: modules/comments/comments.php:814
+#: modules/comments/comments.php:836
 msgid "Closed"
 msgstr ""
 
-#: modules/comments/comments.php:817
+#: modules/comments/comments.php:839
 msgid "Private"
 msgstr ""
 
-#: modules/comments/comments.php:820
+#: modules/comments/comments.php:842
 msgid "Registered Only"
 msgstr ""
 
-#: modules/comments/comments.php:826
+#: modules/comments/comments.php:848
 msgid "Comment Status"
 msgstr ""
 
-#: modules/comments/comments.php:999
+#: modules/comments/comments.php:1021
 #, php-format
 msgid "New Comment at %s"
 msgstr ""
 
-#: modules/comments/comments.php:1000
+#: modules/comments/comments.php:1022
 #, php-format
 msgid "%s commented on a blog post:"
 msgstr ""
 
-#: modules/comments/comments.php:1008
+#: modules/comments/comments.php:1030
 msgid "Unsubscribe from this conversation:"
 msgstr ""
 

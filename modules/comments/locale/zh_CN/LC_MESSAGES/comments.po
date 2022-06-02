@@ -342,11 +342,11 @@ msgstr "您已取消订阅对话。"
 msgid "Comment #%d"
 msgstr "评论 #%d"
 
-#: modules/comments/comments.php:787
+#: modules/comments/comments.php:787 modules/comments/comments.php:811
 msgid "A ping from your URL is already registered."
 msgstr "您的URL中的ping已被注册。"
 
-#: modules/comments/comments.php:790
+#: modules/comments/comments.php:790 modules/comments/comments.php:814
 msgid "Your URL is too long to be stored in our database."
 msgstr "您的网址太长，无法存储在我们的数据库中。"
 
@@ -354,37 +354,41 @@ msgstr "您的网址太长，无法存储在我们的数据库中。"
 msgid "Pingback registered!"
 msgstr "Pingback已注册！"
 
-#: modules/comments/comments.php:811
+#: modules/comments/comments.php:816
+msgid "Mentioned this post."
+msgstr "提到了这个帖子。"
+
+#: modules/comments/comments.php:833
 msgid "Open"
 msgstr "打开"
 
-#: modules/comments/comments.php:814
+#: modules/comments/comments.php:836
 msgid "Closed"
 msgstr "已关闭"
 
-#: modules/comments/comments.php:817
+#: modules/comments/comments.php:839
 msgid "Private"
 msgstr "私人"
 
-#: modules/comments/comments.php:820
+#: modules/comments/comments.php:842
 msgid "Registered Only"
 msgstr "仅注册"
 
-#: modules/comments/comments.php:826
+#: modules/comments/comments.php:848
 msgid "Comment Status"
 msgstr "评论状态"
 
-#: modules/comments/comments.php:999
+#: modules/comments/comments.php:1021
 #, php-format
 msgid "New Comment at %s"
 msgstr "%s 上的新注释"
 
-#: modules/comments/comments.php:1000
+#: modules/comments/comments.php:1022
 #, php-format
 msgid "%s commented on a blog post:"
 msgstr "%s 在博客文章上评论："
 
-#: modules/comments/comments.php:1008
+#: modules/comments/comments.php:1030
 msgid "Unsubscribe from this conversation:"
 msgstr "取消订阅此对话："
 

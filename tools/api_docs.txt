@@ -9,7 +9,20 @@ Holds all of the configuration settings for the entire site.
 
 Function: __construct
 ---------------------
-Loads the configuration JSON file.
+Loads the configuration file from disk.
+
+
+Function: __get
+---------------
+Handles access to the configuration data.
+
+Returns:
+    @mixed@
+
+
+Function: __isset
+-----------------
+Handles access to the configuration data.
 
 
 Function: read
@@ -211,15 +224,20 @@ The basis for the Models system.
 
 Function: __get
 ---------------
-Automatically handle model relationships when grabbing attributes of an object.
+Handles model relationships, deferred and dynamic attributes.
 
 Returns:
     @mixed@
 
 
+Function __set
+--------------
+Handles dynamic attributes.
+
+
 Function: __isset
 -----------------
-Automatically handle model relationships when testing attributes of an object.
+Handles model relationships, deferred and dynamic attributes.
 
 
 Function: __getPlaceholders
@@ -876,6 +894,17 @@ Parameters:
     $lifetime - The configured maximum session lifetime in seconds.
 
 
+Function: authenticate
+----------------------
+Generates or validates an authentication token for this session.
+
+Parameters:
+    $hash - A previously generated token to be validated (optional).
+
+Returns:
+    An authentication token, or the validity of the supplied token.
+
+
 ==============================================
 includes/class/SQL.php
 ==============================================
@@ -1209,15 +1238,6 @@ Returns:
 
 Notes:
     Any additional arguments are passed on to the functions being called.
-
-
-Function: remove
-----------------
-Unregisters a given $action from a $trigger.
-
-Parameters:
-    $trigger - The trigger to unregister from.
-    $action - The action name.
 
 
 Function: exists
@@ -1695,6 +1715,11 @@ Function: main_lost_password
 Emails a password reset link to the registered address of a user.
 
 
+Function: main_webmention
+-------------------------
+Webmention receiver endpoint.
+
+
 Function: main_feed
 -------------------
 Grabs posts and serves a feed.
@@ -1777,7 +1802,7 @@ Parameters:
 
 Function: logged_in
 -------------------
-Returns whether or not the visitor is logged in.
+Mask for Visitor::logged_in().
 
 
 Function: redirect
@@ -2015,17 +2040,20 @@ Notes:
 
 Function: derezz
 ----------------
-Strips tags and junk from the supplied variable and tests it for emptiness.
+Strips tags and junk from the supplied string and tests it for emptiness.
 
 Parameters:
-    &$variable - The variable, supplied by reference.
+    &$string - The string, supplied by reference.
 
 Returns:
-    Whether or not the stripped variable is empty.
+    Whether or not the stripped string is empty.
 
 Notes:
     Useful for data that will be stripped later on by its model
     but which needs to be tested for uniqueness/emptiness first.
+
+See Also:
+    <Group::add> <User::add>
 
 
 Function: token
@@ -2052,13 +2080,7 @@ Returns:
 
 Function: authenticate
 ----------------------
-Generates or validates an authentication token for the visitor.
-
-Parameters:
-    $hash - A previously generated token to be validated (optional).
-
-Returns:
-    An authentication token, or the validity of the supplied token.
+Mask for Session::authenticate().
 
 
 Function: random
@@ -2313,6 +2335,52 @@ Parameters:
 
 Returns:
     An array of all URLs found in the string.
+
+
+Function: webmention_send
+-------------------------
+Sends Webmentions to the URLs discovered in a string.
+
+Parameters:
+    $string - The string to crawl for Webmention URLs.
+    $post - The post this string belongs to.
+    $limit - Execution time limit in seconds (optional).
+
+
+Function: webmention_receive
+----------------------------
+Receives and validates Webmentions.
+
+Parameters:
+    $source - The sender's URL.
+    $target - The URL of our post.
+
+
+Function: webmention_discover
+-----------------------------
+Determines if a URL is capable of receiving Webmentions.
+
+Parameters:
+    $url - The URL to check.
+    $redirects - The maximum number of redirects to follow.
+
+Returns:
+    The Webmention endpoint URL, or false on failure.
+
+
+Function: merge_urls
+--------------------
+Combines a base URL and relative path into a target URL.
+
+Parameters:
+    $base - The base URL.
+    $rel - The relative path.
+
+Returns:
+    A merged target URL, or false on failure.
+
+Notes:
+    Does not attempt to resolve dot segments in the path.
 
 
 Function: send_pingbacks
@@ -3033,8 +3101,8 @@ Function: twig_filter_filesize_format
 Returns a string containing a formatted filesize value.
 
 
-Function: twig_filter_match
----------------------------
+Function: twig_filter_preg_match
+--------------------------------
 Try to match a string against an array of regular expressions, or a single regular expression.
 
 
@@ -3474,7 +3542,7 @@ Filters the page attributes through filter_page and markup filters.
 
 Function: from_url
 ------------------
-Attempts to grab a page from its clean URL.
+Attempts to grab a page from its clean or dirty  URL.
 
 Parameters:
     $request - The request URI to parse.
@@ -3674,10 +3742,10 @@ Filters the post attributes through filter_post and any Feather filters.
 
 Function: from_url
 ------------------
-Attempts to grab a post from its clean URL.
+Attempts to grab a post from its clean or dirty URL.
 
 Parameters:
-    $request - The request URI to parse, or an array of matches already found.
+    $request - The request URI to parse.
     $route - The route object to respond to, or null to return a Post object.
     $options - Additional options for the Post object (optional).
 
@@ -3798,8 +3866,8 @@ See Also:
     <Model::destroy>
 
 
-Function: hashPassword
-----------------------
+Function: hash_password
+-----------------------
 Creates a hash of a user's password for the database.
 
 Parameters:
@@ -3812,8 +3880,8 @@ Notes:
     <random> tries to be cryptographically secure.
 
 
-Function: checkPassword
------------------------
+Function: check_password
+------------------------
 Checks a given password against the user's stored hash.
 
 Parameters:
@@ -3824,7 +3892,7 @@ Returns:
     @true@ or @false@
 
 Notes:
-    Uses <hash_equals> if available to mitigate timing attacks.
+    Uses <hash_equals> to mitigate timing attacks.
 
 
 ==============================================
@@ -3857,6 +3925,11 @@ Function: find
 
 See Also:
     <Model::search>
+
+
+Function: logged_in
+-------------------
+Returns whether or not the visitor is logged in.
 
 
 Function: current

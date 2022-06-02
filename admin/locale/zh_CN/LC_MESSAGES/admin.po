@@ -282,7 +282,7 @@ msgstr "每个博客页面的帖子"
 
 #: admin/pages/content_settings.twig:14
 msgid "Posts in Feed"
-msgstr "订阅中的帖子"
+msgstr "Feed中的帖子"
 
 #: admin/pages/content_settings.twig:18
 msgid "Items Per Admin Page"
@@ -308,7 +308,7 @@ msgstr "(M)"
 
 #: admin/pages/content_settings.twig:34
 msgid "Feed Format"
-msgstr "订阅格式"
+msgstr "Feed格式"
 
 #: admin/pages/content_settings.twig:42
 msgid "Search Pages"

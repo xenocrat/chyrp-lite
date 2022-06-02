@@ -197,7 +197,7 @@ Arguments:
 change_setting
 --------------
 Called from:
-	includes/class/Config.php on line 87
+	includes/class/Config.php on line 94
 
 Arguments:
 	$setting, $value
@@ -308,15 +308,15 @@ Called from:
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 404
+	includes/controller/Main.php on line 394
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 548
-	includes/controller/Main.php on line 582
-	includes/controller/Main.php on line 650
+	includes/controller/Main.php on line 538
+	includes/controller/Main.php on line 572
+	includes/controller/Main.php on line 640
 
 Arguments:
 	$user
@@ -325,13 +325,13 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 638
+	includes/controller/Main.php on line 628
 
 
 user_logged_out
 ---------------
 Called from:
-	includes/controller/Main.php on line 672
+	includes/controller/Main.php on line 662
 
 Arguments:
 	$user
@@ -340,34 +340,37 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 836
+	includes/controller/Main.php on line 834
 
 Arguments:
 	$post, $feed
 
 
-visitor_authenticate
---------------------
+webmention
+----------
 Called from:
-	includes/helpers.php on line 691
+	includes/helpers.php on line 1633
+
+Arguments:
+	$post, $source, $target
 
 
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 2177
+	includes/helpers.php on line 2456
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 2194
+	includes/helpers.php on line 2473
 
 
 send_correspondence
 -------------------
 Called from:
-	includes/helpers.php on line 2477
+	includes/helpers.php on line 2756
 
 Arguments:
 	$action, $params
@@ -376,7 +379,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 2505
+	includes/helpers.php on line 2784
 
 Arguments:
 	$ob
@@ -385,7 +388,7 @@ Arguments:
 pingback
 --------
 Called from:
-	includes/lib/XMLRPC.php on line 111
+	includes/lib/XMLRPC.php on line 108
 
 Arguments:
 	$post, $target, $source, $title, $excerpt
@@ -394,7 +397,7 @@ Arguments:
 metaWeblog_newPost
 ------------------
 Called from:
-	includes/lib/XMLRPC.php on line 297
+	includes/lib/XMLRPC.php on line 294
 
 Arguments:
 	$struct, $post
@@ -403,7 +406,7 @@ Arguments:
 metaWeblog_editPost
 -------------------
 Called from:
-	includes/lib/XMLRPC.php on line 365
+	includes/lib/XMLRPC.php on line 362
 
 Arguments:
 	$struct, $post
@@ -454,7 +457,7 @@ Arguments:
 add_post
 --------
 Called from:
-	includes/model/Post.php on line 262
+	includes/model/Post.php on line 264
 
 Arguments:
 	$post, $options
@@ -463,7 +466,7 @@ Arguments:
 publish_post
 ------------
 Called from:
-	includes/model/Post.php on line 364
+	includes/model/Post.php on line 368
 
 Arguments:
 	$post, $this, $options
@@ -472,7 +475,7 @@ Arguments:
 update_post
 -----------
 Called from:
-	includes/model/Post.php on line 366
+	includes/model/Post.php on line 370
 
 Arguments:
 	$post, $this, $options
@@ -481,7 +484,7 @@ Arguments:
 add_user
 --------
 Called from:
-	includes/model/User.php on line 108
+	includes/model/User.php on line 106
 
 Arguments:
 	$user
@@ -490,7 +493,7 @@ Arguments:
 update_user
 -----------
 Called from:
-	includes/model/User.php on line 166
+	includes/model/User.php on line 164
 
 Arguments:
 	$user, $this
@@ -1041,7 +1044,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 911
+	includes/controller/Main.php on line 909
 
 Target:
 	$this->context
@@ -1050,7 +1053,7 @@ Target:
 keyword_search
 --------------
 Called from:
-	includes/helpers.php on line 926
+	includes/helpers.php on line 928
 
 Target:
 	$search
@@ -1059,19 +1062,10 @@ Arguments:
 	$query, $plain
 
 
-link_regexp
------------
-Called from:
-	includes/helpers.php on line 1517
-
-Target:
-	$expressions
-
-
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 2407
+	includes/helpers.php on line 2686
 
 Target:
 	$function
@@ -1080,7 +1074,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 2506
+	includes/helpers.php on line 2785
 
 Target:
 	$nonce
@@ -1098,8 +1092,8 @@ Target:
 metaWeblog_getPost
 ------------------
 Called from:
-	includes/lib/XMLRPC.php on line 159
-	includes/lib/XMLRPC.php on line 233
+	includes/lib/XMLRPC.php on line 156
+	includes/lib/XMLRPC.php on line 230
 
 Target:
 	$struct
@@ -1111,7 +1105,7 @@ Arguments:
 metaWeblog_getCategories
 ------------------------
 Called from:
-	includes/lib/XMLRPC.php on line 173
+	includes/lib/XMLRPC.php on line 170
 
 Target:
 	$categories
@@ -1120,7 +1114,7 @@ Target:
 metaWeblog_before_newPost
 -------------------------
 Called from:
-	includes/lib/XMLRPC.php on line 284
+	includes/lib/XMLRPC.php on line 281
 
 Target:
 	$values
@@ -1132,7 +1126,7 @@ Arguments:
 metaWeblog_before_editPost
 --------------------------
 Called from:
-	includes/lib/XMLRPC.php on line 355
+	includes/lib/XMLRPC.php on line 352
 
 Target:
 	$values
@@ -1261,7 +1255,7 @@ Target:
 before_update_post
 ------------------
 Called from:
-	includes/model/Post.php on line 329
+	includes/model/Post.php on line 331
 
 Target:
 	$new_values
@@ -1270,7 +1264,7 @@ Target:
 before_update_post_attributes
 -----------------------------
 Called from:
-	includes/model/Post.php on line 337
+	includes/model/Post.php on line 339
 
 Target:
 	$attributes
@@ -1279,7 +1273,7 @@ Target:
 title_from_excerpt
 ------------------
 Called from:
-	includes/model/Post.php on line 570
+	includes/model/Post.php on line 574
 
 Target:
 	$excerpt
@@ -1288,7 +1282,7 @@ Target:
 title
 -----
 Called from:
-	includes/model/Post.php on line 595
+	includes/model/Post.php on line 599
 
 Target:
 	$title
@@ -1300,7 +1294,7 @@ Arguments:
 excerpt
 -------
 Called from:
-	includes/model/Post.php on line 612
+	includes/model/Post.php on line 616
 
 Target:
 	$excerpt
@@ -1312,7 +1306,7 @@ Arguments:
 feed_content
 ------------
 Called from:
-	includes/model/Post.php on line 629
+	includes/model/Post.php on line 633
 
 Target:
 	$feed_content
@@ -1324,7 +1318,7 @@ Arguments:
 filter_post
 -----------
 Called from:
-	includes/model/Post.php on line 693
+	includes/model/Post.php on line 697
 
 Target:
 	$this
@@ -1351,7 +1345,7 @@ Target:
 before_update_user
 ------------------
 Called from:
-	includes/model/User.php on line 156
+	includes/model/User.php on line 154
 
 Target:
 	$new_values

@@ -13,7 +13,20 @@ msgstr ""
 "X-Generator: Poedit 3.0.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
-#: modules/read_more/info.php:3
+#: modules/read_more/admin/pages/read_more_settings.twig:3
+#: modules/read_more/admin/pages/read_more_settings.twig:6
+msgid "Read More Settings"
+msgstr "阅读更多设置"
+
+#: modules/read_more/admin/pages/read_more_settings.twig:10
+msgid "Apply to Feeds"
+msgstr "应用于Feed"
+
+#: modules/read_more/admin/pages/read_more_settings.twig:15
+msgid "Default Text"
+msgstr "默认文本"
+
+#: modules/read_more/info.php:3 modules/read_more/read_more.php:41
 msgid "Read More"
 msgstr "阅读更多"
 
@@ -26,6 +39,6 @@ msgstr ""
 "添加&#8220;&hellip;更多&#8221; 通过在您的帖子中定义<code>&lt;!--more--&gt;</"
 "code> 或 <code>&lt;!--more custom text--&gt;</code>来链接到您的博客索引。"
 
-#: modules/read_more/read_more.php:21
+#: modules/read_more/read_more.php:57
 msgid "&hellip;more"
 msgstr "&hellip;更多"
