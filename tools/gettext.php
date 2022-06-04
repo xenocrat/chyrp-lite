@@ -435,26 +435,26 @@
                 font-style: italic;
             }
             @font-face {
-                font-family: 'Hack webfont';
-                src: url('../fonts/Hack-Regular.woff') format('woff');
+                font-family: 'Cousine webfont';
+                src: url('../fonts/Cousine-Regular.woff') format('woff');
                 font-weight: normal;
                 font-style: normal;
             }
             @font-face {
-                font-family: 'Hack webfont';
-                src: url('../fonts/Hack-Bold.woff') format('woff');
+                font-family: 'Cousine webfont';
+                src: url('../fonts/Cousine-Bold.woff') format('woff');
                 font-weight: bold;
                 font-style: normal;
             }
             @font-face {
-                font-family: 'Hack webfont';
-                src: url('../fonts/Hack-Italic.woff') format('woff');
+                font-family: 'Cousine webfont';
+                src: url('../fonts/Cousine-Italic.woff') format('woff');
                 font-weight: normal;
                 font-style: italic;
             }
             @font-face {
-                font-family: 'Hack webfont';
-                src: url('../fonts/Hack-BoldItalic.woff') format('woff');
+                font-family: 'Cousine webfont';
+                src: url('../fonts/Cousine-BoldItalic.woff') format('woff');
                 font-weight: bold;
                 font-style: italic;
             }
@@ -510,7 +510,7 @@
                 margin-bottom: 0rem;
             }
             code {
-                font-family: "Hack webfont", monospace;
+                font-family: "Cousine webfont", monospace;
                 font-style: normal;
                 font-size: 0.8rem;
                 word-wrap: break-word;
