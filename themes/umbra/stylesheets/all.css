@@ -23,26 +23,26 @@
     font-style: italic;
 }
 @font-face {
-    font-family: 'Hack webfont';
-    src: url('../../../fonts/Hack-Regular.woff') format('woff');
+    font-family: 'Cousine webfont';
+    src: url('../../../fonts/Cousine-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
-    font-family: 'Hack webfont';
-    src: url('../../../fonts/Hack-Bold.woff') format('woff');
+    font-family: 'Cousine webfont';
+    src: url('../../../fonts/Cousine-Bold.woff') format('woff');
     font-weight: bold;
     font-style: normal;
 }
 @font-face {
-    font-family: 'Hack webfont';
-    src: url('../../../fonts/Hack-Italic.woff') format('woff');
+    font-family: 'Cousine webfont';
+    src: url('../../../fonts/Cousine-Italic.woff') format('woff');
     font-weight: normal;
     font-style: italic;
 }
 @font-face {
-    font-family: 'Hack webfont';
-    src: url('../../../fonts/Hack-BoldItalic.woff') format('woff');
+    font-family: 'Cousine webfont';
+    src: url('../../../fonts/Cousine-BoldItalic.woff') format('woff');
     font-weight: bold;
     font-style: italic;
 }
@@ -167,22 +167,22 @@ blockquote:last-child {
     margin-bottom: 0em;
 }
 pre {
-    font-family: "Hack webfont", monospace;
+    font-family: "Cousine webfont", monospace;
     margin: 1em 0em;
     overflow-x: auto;
 }
 code {
-    font-family: "Hack webfont", monospace;
+    font-family: "Cousine webfont", monospace;
     font-size: 0.75em;
     font-style: normal;
     background-color: #666667;
-    padding: 0.2em 0.4em;
-    margin: 0.2em 0em;
+    padding: 0.1em 0.2em 0em 0.2em;
     display: inline-block;
 }
 pre > code {
     box-sizing: border-box;
     width: 100%;
+    padding: 0.5rem;
 }
 hr {
     width: 100%;
