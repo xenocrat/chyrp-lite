@@ -5,7 +5,7 @@
 var ChyrpHighlighter = {
     init: function() {
         $("pre > code").each(function(index, block) {
-            hljs.highlightBlock(block);
+            hljs.highlightElement(block);
         });
         ChyrpHighlighter.watch();
     },
@@ -18,7 +18,7 @@ var ChyrpHighlighter = {
                     for (var i = 0; i < mutation.addedNodes.length; ++i) {
                         var item = mutation.addedNodes[i];
                         $(item).find("pre > code").each(function(y, block) {
-                            hljs.highlightBlock(block);
+                            hljs.highlightElement(block);
                         });
                     }
                 });

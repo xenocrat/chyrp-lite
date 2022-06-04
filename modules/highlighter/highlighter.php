@@ -4,7 +4,7 @@
             $config = Config::current();
 
             $config->set("module_highlighter",
-                         array("stylesheet" => "monokai-sublime.min.css"));
+                         array("stylesheet" => "default.min.css"));
         }
 
         static function __uninstall(): void {
@@ -22,7 +22,7 @@
 
         public function stylesheets($stylesheets): array {
             $config = Config::current();
-            $stylesheet = urlencode($config->module_highlighter["stylesheet"]);
+            $stylesheet = $config->module_highlighter["stylesheet"];
             $path = $config->chyrp_url."/modules/highlighter/styles/".$stylesheet;
 
             $stylesheets[] = $path;
@@ -61,13 +61,33 @@
             return $navs;
         }
 
-        private function highlighter_stylesheets(): array {
-            $config = Config::current();
+        private function highlighter_stylesheets($base = null, $prefix = ""): array {
+            fallback($base, MODULES_DIR.DIR."highlighter".DIR."styles");
             $styles = array();
-            $filepaths = glob(MODULES_DIR.DIR."highlighter".DIR."styles".DIR."*.css");
+            $dir = new DirectoryIterator($base);
 
-            foreach ($filepaths as $filepath)
-                $styles[] = basename($filepath);
+            foreach ($dir as $item) {
+                if (!$item->isDot()) {
+                    switch ($item->getType()) {
+                        case "file":
+                            $filename = $item->getFilename();
+
+                            if (preg_match("/.+\.(css)$/i", $filename))
+                                $styles[] = $prefix.$filename;
+
+                            break;
+
+                        case "dir":
+                            $filename = $item->getFilename();
+                            $pathname = $item->getPathname();
+                            $addprefix = $prefix.$filename."/";
+                            $addstyles = $this->highlighter_stylesheets($pathname, $addprefix);
+                            $styles = array_merge($styles, $addstyles);
+
+                            break;
+                    }
+                }
+            }
 
             return $styles;
         }
