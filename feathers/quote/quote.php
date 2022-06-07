@@ -3,13 +3,11 @@
         public function __init() {
             $this->setField(array("attr" => "quote",
                                   "type" => "text_block",
-                                  "rows" => 5,
                                   "label" => __("Quote", "quote"),
                                   "preview" => true));
 
             $this->setField(array("attr" => "source",
                                   "type" => "text_block",
-                                  "rows" => 5,
                                   "label" => __("Source", "quote"),
                                   "optional" => true,
                                   "preview" => true));
