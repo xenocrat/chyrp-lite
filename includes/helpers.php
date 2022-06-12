@@ -64,6 +64,17 @@
         return Visitor::logged_in();
     }
 
+    /**
+     * Function: authenticate
+     * Mask for Session::authenticate().
+     */
+    function authenticate($hash = null): bool|string {
+        if (!class_exists("Session"))
+            return false;
+
+        return Session::authenticate();
+    }
+
     #---------------------------------------------
     # Routing
     #---------------------------------------------
@@ -683,17 +694,6 @@
      */
     function slug($length): string {
         return strtolower(random($length));
-    }
-
-    /**
-     * Function: authenticate
-     * Mask for Session::authenticate().
-     */
-    function authenticate($hash = null): bool|string {
-        if (!class_exists("Session"))
-            return false;
-
-        return Session::authenticate();
     }
 
     /**
