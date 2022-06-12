@@ -9,6 +9,8 @@
 
             $this->lastmod = $config->module_cacher["cache_lastmod"];
             $this->prepare_cache_triggers();
+            $this->setPriority("route_init", 5);
+            $this->setPriority("route_done", 5);
         }
 
         static function __install(): void {
