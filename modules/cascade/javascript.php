@@ -48,7 +48,7 @@ var ChyrpAjaxScroll = {
                     if (!!history.replaceState)
                         history.replaceState({ "page": this_next_num }, ajax_next_title, this_next_url);
 
-                    $(data).filter("script").each(function(){
+                    $(data).filter("body script").each(function(){
                         $.globalEval(this.text || this.textContent || this.innerHTML || "");
                     });
 
