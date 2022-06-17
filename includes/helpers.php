@@ -699,9 +699,6 @@
      *     Polynomials- 0x1021 (CCITT), 0x8005 (ANSI), 0x3d65 (DNP).
      */
     function crc16($str, $polynomial = 0x1021, $ini = 0, $xor = 0): int {
-        $polynomial = 0x1021;
-        $ini = 0;
-        $xor = 0;
         $crc = $ini;
 
         for ($i = 0; $i < strlen($str); $i++) {
