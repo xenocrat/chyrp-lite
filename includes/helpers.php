@@ -684,7 +684,7 @@
 
     /**
      * Function: crc16
-     * Performs a 16-bit cyclic redundancy check and returns the result.
+     * Performs a 16-bit cyclic redundancy check.
      *
      * Parameters:
      *     $str - The data to check.
@@ -693,10 +693,10 @@
      *     $xor - The value for the final XOR.
      *
      * Returns:
-     *     An integer representing the check result.
+     *     The integer value of the check result.
      * 
-     * Notes:
-     *     Polynomials- 0x1021 (CCITT), 0x8005 (ANSI), 0x3d65 (DNP).
+     * Polynomials:
+     *     0x1021 (CCITT), 0x8005 (ANSI), 0x3d65 (DNP).
      */
     function crc16($str, $polynomial = 0x1021, $ini = 0, $xor = 0): int {
         $crc = $ini;
