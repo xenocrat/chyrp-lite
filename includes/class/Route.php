@@ -225,8 +225,9 @@
          */
         public function remove($path): void {
             $config = Config::current();
-            unset($config->routes[$path]);
-            $config->set("routes", $config->routes);
+            $new_routes = $config->routes;
+            unset($new_routes[$path]);
+            $config->set("routes", $new_routes);
         }
 
         /**
