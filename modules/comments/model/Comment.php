@@ -114,7 +114,7 @@
                                  $author,
                                  $author_url,
                                  $author_email,
-                                 crc16($_SERVER['REMOTE_ADDR']),
+                                 crc24($_SERVER['REMOTE_ADDR']),
                                  isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "",
                                  $status,
                                  $post->id,
@@ -135,7 +135,7 @@
          *     $author - The name of the commenter.
          *     $author_url - The commenter's website.
          *     $author_email - The commenter's email.
-         *     $ip - CRC-16 result of the commenter's IP address.
+         *     $ip - Hash value of the commenter's IP address.
          *     $agent - The commenter's user agent.
          *     $status - The new comment's status.
          *     $post_id - The ID of the <Post> they're commenting on.
