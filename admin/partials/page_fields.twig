@@ -6,12 +6,15 @@
 </p>
 <p class="main_options">
 <label for="body">
+{{ "Body" | translate }}
+</label>
+<span id="body_toolbar" class="options_toolbar">
 {% if field_markdown %}
 <a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="{{ 'Markdown' | translate }}"></a>
 {% endif %}
-{{ "Body" | translate }}
-</label>
+</span>
 <textarea rows="12" name="body" id="body" data-preview{{ field_markdown }} required>{{ page is defined ? page.body | fix(false, true) : "" }}</textarea>
+<span id="body_tray" class="options_tray"></span>
 </p>
 {{ trigger.call("after_page_fields") }}
 <div id="more_options" class="more_options">

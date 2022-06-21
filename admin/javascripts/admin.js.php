@@ -219,12 +219,12 @@ var Write = {
             $("#write_form *[data-preview], #edit_form *[data-preview]").each(function() {
                 var target = $(this);
 
-                $("label[for='" + target.attr("id") + "']").append(
+                $("#" + target.attr("id") + "_toolbar").append(
                     $("<a>", {
                         "href": "#",
                         "role": "button",
                         "aria-label": '<?php echo __("Preview", "admin"); ?>'
-                    }).addClass("emblem preview").click(function(e) {
+                    }).addClass("emblem toolbar").click(function(e) {
                         var content  = target.val();
                         var field    = target.attr("name");
                         var safename = $("input#feather").val() || "page";
@@ -258,10 +258,6 @@ var Write = {
         // Add a word counter to textarea elements.
         $("#write_form textarea, #edit_form textarea").each(function() {
             var target = $(this);
-
-            target.after(
-                $("<span>", {"id": target.attr("id") + "_tray"}
-            ).addClass("options_tray"));
 
             var tray = $("#" + target.attr("id") + "_tray");
             var regex = /\p{White_Space}+/gu;

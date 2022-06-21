@@ -22,20 +22,15 @@
 {% set field_name = (field_multiple is not empty ? field.attr ~ "[]" : field.attr) | fix(true) %}
 <p class="main_options">
 <label for="{{ field_id }}">
-{% if field_markdown is not empty %}
-<a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="{{ 'Markdown' | translate }}"></a>
-{% endif %}
 {% if field.help is defined %}
-<span class="sub">
 <a href="{{ url('help/id/' ~ (field.help | url_encode)) }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
-</span>
 {% endif %}
 {{ field.label }}
 {% if field.optional is defined and field.optional %}
-<span class="sub">{{ "(optional)" | translate }}</span>
+{{ "(optional)" | translate }}
 {% endif %}
 {% if field.note is defined %}
-<span class="sub">{{ field.note }}</span>
+{{ field.note }}
 {% endif %}
 </label>
 {% if field.type == "text" %}
@@ -43,7 +38,13 @@
 {% elseif field.type == "file" %}
 <input id="{{ field_id }}" type="file" name="{{ field_name }}"{{ field_accept ~ field_multiple ~ field_required }} value="">
 {% elseif field.type == "text_block" %}
+<span id="{{ field_name }}_field_toolbar" class="options_toolbar">
+{% if field_markdown is not empty %}
+<a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="{{ 'Markdown' | translate }}"></a>
+{% endif %}
+</span>
 <textarea id="{{ field_id }}" name="{{ field_name }}" rows="12"{{ field_preview ~ field_markdown ~ field_required }}>{{ field_value | fix(false, true) }}</textarea>
+<span id="{{ field_name }}_field_tray" class="options_tray"></span>
 {% elseif field.type == "checkbox" %}
 <input id="{{ field_id }}" type="checkbox" name="{{ field_name }}"{{ field.checked | checked }}>
 {% elseif field.type == "select" %}
@@ -89,7 +90,7 @@
 <p class="more_options_option">
 <label for="pinned">
 {{ "Pinned?" | translate }}
-<span class="sub">{{ "(shows this post above all others)" | translate }}</span>
+{{ "(shows this post above all others)" | translate }}
 </label>
 <input id="pinned" type="checkbox" name="pinned"{{ post is defined ? post.pinned | checked : "" }}>
 </p>
@@ -114,13 +115,11 @@
 <p class="more_options_option">
 <label for="{{ field_id }}">
 {% if field.help is defined %}
-<span class="sub">
 <a href="{{ url('help/id/' ~ (field.help | url_encode)) }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
-</span>
 {% endif %}
 {{ field.label }}
 {% if field.note is defined %}
-<span class="sub">{{ field.note }}</span>
+{{ field.note }}
 {% endif %}
 </label>
 {% if field.type == "text" %}

@@ -813,6 +813,21 @@ span.options_extra {
 span.options_extra:empty {
     display: none;
 }
+span.options_toolbar {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    font-size: 0.67rem;
+    background-color: #fbfbfb;
+    border: 1px solid #cfcfcf;
+    border-bottom: none;
+    padding: 0.25rem 0.5rem;
+    border-top-left-radius: 0.6rem;
+    border-top-right-radius: 0.6rem;
+}
+span.options_toolbar:empty {
+    display: none;
+}
 span.options_tray {
     box-sizing: border-box;
     display: block;
@@ -821,8 +836,11 @@ span.options_tray {
     border: 1px solid #cfcfcf;
     border-top: none;
     padding: 0.25rem 0.5rem;
-    border-bottom-left-radius: 0.8em;
-    border-bottom-right-radius: 0.8em;
+    border-bottom-left-radius: 0.6rem;
+    border-bottom-right-radius: 0.6rem;
+}
+span.options_tray:empty {
+    display: none;
 }
 textarea:invalid + span.options_tray {
     border-color: #ff7f00;
@@ -863,9 +881,9 @@ img.emblem {
 a.emblem.markdown > img {
     width: 26px;
 }
-a.emblem.preview {
+a.emblem.toolbar {
     float: right;
-    margin-left: 4px;
+    margin-left: 1rem;
 }
 a.emblem:focus {
     outline: none;
