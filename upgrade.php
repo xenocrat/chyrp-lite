@@ -508,7 +508,7 @@
                 font-size: 1rem;
                 font-family: "Open Sans webfont", sans-serif;
                 line-height: 1.5;
-                color: #4a4747;
+                color: #1f1f23;
                 background: #efefef;
                 padding: 2rem;
             }
@@ -548,7 +548,7 @@
                 word-wrap: break-word;
                 background-color: #efefef;
                 padding: 0px 2px;
-                color: #4f4f4f;
+                color: #1f1f23;
                 border: 1px solid #cfcfcf;
             }
             strong {
@@ -567,7 +567,7 @@
                 overflow: auto;
                 margin: 1rem -2rem 1rem -2rem;
                 padding: 2rem;
-                background: #4a4747;
+                background: #1f1f23;
                 color: #ffffff;
             }
             pre.pane:empty {
@@ -578,7 +578,7 @@
             }
             a:link,
             a:visited {
-                color: #4a4747;
+                color: #1f1f23;
                 text-decoration: underline;
             }
             a:focus {
@@ -602,7 +602,7 @@
                 display: block;
                 font-size: 1.25em;
                 text-align: center;
-                color: #4a4747;
+                color: #1f1f23;
                 text-decoration: none;
                 line-height: 1.25;
                 margin: 1rem 0rem;
