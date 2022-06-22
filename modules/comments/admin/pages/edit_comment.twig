@@ -64,7 +64,7 @@
 <input type="hidden" name="id" value="{{ comment.id }}" id="id_field">
 <div class="buttons confirmation">
 <button type="submit" class="yay">
-<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Save" | translate("comments") }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="">{{ "Save" | translate("comments") }}
 </button>
 {{ comment.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="">' ~ ("Delete" | translate("comments")), null, null, "button boo") }}
 </div>

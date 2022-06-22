@@ -99,7 +99,7 @@ body {
     font-family: "Open Sans webfont", sans-serif;
     font-size: 1rem;
     line-height: 1.5;
-    color: #4a4747;
+    color: #1f1f23;
     background-color: #efefef;
     min-width: 320px;
 }
@@ -145,7 +145,7 @@ p {
 }
 a:link,
 a:visited {
-    color: #4a4747;
+    color: #1f1f23;
     text-decoration: underline;
 }
 a:focus {
@@ -364,10 +364,6 @@ ul#modules_disabled > li.error div.controls {
 
 /* Group: Forms */
 
-input:placeholder {
-    color: #dddddd;
-    opacity: 1;
-}
 select,
 textarea,
 input[type="text"],
@@ -381,11 +377,16 @@ input[type="range"],
 input[type="password"] {
     box-sizing: border-box;
     width: 10em;
+    color: #1f1f23;
     font-size: 1.25rem;
     padding: 0.4em;
     border-radius: 0em;
     border: 1px solid #cfcfcf;
     background-color: #ffffff;
+}
+input:placeholder {
+    color: #dddddd;
+    opacity: 1;
 }
 input:invalid,
 textarea:invalid {
@@ -461,7 +462,7 @@ code {
     font-size: 0.8rem;
     background-color: #efefef;
     padding: 0px 2px;
-    color: #4f4f4f;
+    color: #1f1f23;
     border: 1px solid #cfcfcf;
 }
 form.split label {
@@ -643,7 +644,7 @@ a.prev_page {
     display: inline-block;
     font-family: inherit;
     font-size: 1.25rem;
-    color: #4a4747;
+    color: #1f1f23;
     line-height: 1.5;
     margin: 0em;
     padding: 0.4em 0.6em;
@@ -673,7 +674,7 @@ div.pagination a.prev_page + a.next_page {
 }
 button.boo,
 a.button.boo {
-    color: #3e3634;
+    color: #1f1f23;
     background-color: #faebe4;
     border: 2px solid #d6bdb5;
 }
@@ -687,7 +688,7 @@ a.button.boo:active {
 }
 button.yay,
 a.button.yay {
-    color: #363e34;
+    color: #1f1f23;
     background-color: #ebfae4;
     border: 2px solid #bdd6b5;
 }
@@ -706,7 +707,7 @@ a.button > img {
     width: 16px;
     height: 16px;
     float: left;
-    margin-right: 0.6em;
+    margin-right: 0.4em;
 }
 button[disabled],
 button.disabled {
@@ -726,7 +727,7 @@ div.confirmation a.button {
     min-width: 15em;
     margin-left: 0.5rem;
     margin-right: 0.5rem;
-    padding-right: calc(16px + 0.6em);
+    padding-right: calc(16px + 0.4em);
 }
 *.tag {
     display: inline-block;
