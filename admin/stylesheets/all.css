@@ -891,10 +891,6 @@ a.emblem:focus {
 }
 a.emblem:hover > img,
 a.emblem:focus > img {
-    filter: brightness(100%) sepia(100%) saturate(350%) hue-rotate(180deg);
-}
-a.emblem.markdown:hover > img,
-a.emblem.markdown:focus > img {
     filter: invert(25%) sepia(100%) saturate(330%) hue-rotate(180deg) brightness(125%);
 }
 .drag_highlight {
