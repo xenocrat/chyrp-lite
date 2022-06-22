@@ -60,7 +60,7 @@ html[lang="he"] {
 body {
     font-family: "Open Sans webfont", sans-serif;
     font-size: 1rem;
-    color: #4e5a66;
+    color: #1f1f23;
     line-height: 1.5;
     background-color: #fcfbfa;
     margin: 0rem 2rem 2rem 16rem;
@@ -184,7 +184,7 @@ code {
     font-family: "Cousine webfont", monospace;
     font-size: 0.75em;
     font-style: normal;
-    color: #39434d;
+    color: #1f1f23;
     background-color: #e1e5e5;
     padding: 0.1em 0.2em 0em 0.2em;
     display: inline-block;
@@ -362,7 +362,7 @@ select, input {
     text-align: start;
     font: inherit;
     font-size: inherit;
-    color: #4e5a66;
+    color: #1f1f23;
     background-color: #ffffff;
     border: 1px solid #c6ccc8;
     border-radius: 0em;
@@ -370,7 +370,7 @@ select, input {
 select:focus, input:focus {
     outline: none;
     background-color: #ffffff;
-    border: 1px solid #4e5a66;
+    border: 1px solid #1f1f23;
 }
 input:placeholder {
     color: #c6ccc8;
@@ -397,7 +397,7 @@ textarea {
     height: 320px;
     font: inherit;
     font-size: inherit;
-    color: #4e5a66;
+    color: #1f1f23;
     margin: 0.5em 0em;
     padding: 0.4em;
     background-color: #ffffff;
@@ -616,7 +616,7 @@ a {
     border-bottom: 1px transparent solid;
 }
 a:link, a:visited {
-    color: #5c6773;
+    color: #1f1f23;
     text-decoration: none;
 }
 a:hover, a:focus, a:active {
@@ -640,7 +640,7 @@ div.traversal a {
     margin: 0em 0.5rem;
     min-width: 8em;
     color: #ffffff;
-    background-color: #5c6773;
+    background-color: #1f1f23;
     border: none;
     border-radius: 0.4em;
 }
@@ -660,8 +660,8 @@ div.traversal a:last-child {
 }
 section a:link, p a:link,
 section a:visited, p a:visited {
-    color: #5c6773;
-    border-bottom: 1px #5c6773 solid;
+    color: #1f1f23;
+    border-bottom: 1px #1f1f23 solid;
 }
 section a:hover, p a:hover,
 section a:focus, p a:focus,

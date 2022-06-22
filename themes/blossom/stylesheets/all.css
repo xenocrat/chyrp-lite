@@ -60,7 +60,7 @@ html[lang="he"] {
 body {
     font-family: "Open Sans webfont", sans-serif;
     font-size: 1rem;
-    color: #4e5a66;
+    color: #1f1f23;
     line-height: 1.5;
     background-color: #f7f5ed;
     margin: 0rem 2rem 2rem 16rem;
@@ -159,7 +159,7 @@ code {
     font-family: "Cousine webfont", monospace;
     font-size: 0.75em;
     font-style: normal;
-    color: #39434d;
+    color: #1f1f23;
     background-color: #e5e2dc;
     padding: 0.1em 0.2em 0em 0.2em;
     display: inline-block;
@@ -339,7 +339,7 @@ select, input {
     text-align: start;
     font: inherit;
     font-size: inherit;
-    color: #4e5a66;
+    color: #1f1f23;
     background-color: #ffffff;
     border: 1px solid #c6ccc8;
     border-radius: 0em;
@@ -374,7 +374,7 @@ textarea {
     height: 320px;
     font: inherit;
     font-size: inherit;
-    color: #4e5a66;
+    color: #1f1f23;
     margin: 0.5em 0em;
     padding: 0.4em;
     background-color: #ffffff;
@@ -604,7 +604,7 @@ a {
     border-bottom: 1px transparent solid;
 }
 a:link, a:visited {
-    color: #5c6773;
+    color: #1f1f23;
     text-decoration: none;
 }
 a:hover, a:focus, a:active {
@@ -639,8 +639,8 @@ div.traversal a:active {
 }
 section a:link, p a:link,
 section a:visited, p a:visited {
-    color: #5c6773;
-    border-bottom: 1px #5c6773 solid;
+    color: #1f1f23;
+    border-bottom: 1px #1f1f23 solid;
 }
 section a:hover, p a:hover,
 section a:focus, p a:focus,

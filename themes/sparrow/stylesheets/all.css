@@ -55,12 +55,12 @@ html[lang="he"] {
 }
 *::selection {
     color: #ffffff;
-    background-color: #4e5a66;
+    background-color: #1f1f23;
 }
 body {
     font-family: "Open Sans webfont", sans-serif;
     font-size: 1rem;
-    color: #4e5a66;
+    color: #1f1f23;
     line-height: 1.5;
     background-color: #fcfbf7;
     margin: 0em 0em 2rem 0em;
@@ -178,7 +178,7 @@ code {
     font-family: "Cousine webfont", monospace;
     font-size: 0.75em;
     font-style: normal;
-    color: #39434d;
+    color: #1f1f23;
     background-color: #ebe8e6;
     padding: 0.1em 0.2em 0em 0.2em;
     display: inline-block;
@@ -333,7 +333,7 @@ select, input {
     text-align: start;
     font: inherit;
     font-size: inherit;
-    color: #4e5a66;
+    color: #1f1f23;
     background-color: #ffffff;
     border: 1px solid #c2bcb8;
     border-radius: 0em;
@@ -367,7 +367,7 @@ textarea {
     height: 320px;
     font: inherit;
     font-size: inherit;
-    color: #4e5a66;
+    color: #1f1f23;
     margin: 0.5em 0em;
     padding: 0.4em;
     background-color: #ffffff;
@@ -546,7 +546,7 @@ article.audio audio {
     width: 100%;
 }
 a:link, a:visited {
-    color: #4e5a66;
+    color: #1f1f23;
     text-decoration: none;
 }
 a:hover, a:focus, a:active {
@@ -570,8 +570,8 @@ h3.flash a:active {
 }
 section a:link, p a:link,
 section a:visited, p a:visited {
-    color: #5c6773;
-    border-bottom: 1px #5c6773 solid;
+    color: #1f1f23;
+    border-bottom: 1px #1f1f23 solid;
 }
 section a:hover, p a:hover,
 section a:focus, p a:focus,
@@ -612,7 +612,7 @@ div.doaction a, button {
 div.doaction a:hover, button:hover,
 div.doaction a:focus, button:focus,
 div.doaction a:active, button:active {
-    background-color: #4e5a66;
+    background-color: #1f1f23;
     border: none;
 }
 div.doaction a.post_delete_link,
