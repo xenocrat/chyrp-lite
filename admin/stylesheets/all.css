@@ -823,8 +823,8 @@ span.options_toolbar {
     border: 1px solid #cfcfcf;
     border-bottom: none;
     padding: 0.25rem 0.5rem;
-    border-top-left-radius: 0.6rem;
-    border-top-right-radius: 0.6rem;
+    border-top-left-radius: 0.3rem;
+    border-top-right-radius: 0.3rem;
 }
 span.options_toolbar:empty {
     display: none;
@@ -837,8 +837,8 @@ span.options_tray {
     border: 1px solid #cfcfcf;
     border-top: none;
     padding: 0.25rem 0.5rem;
-    border-bottom-left-radius: 0.6rem;
-    border-bottom-right-radius: 0.6rem;
+    border-bottom-left-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
 }
 span.options_tray:empty {
     display: none;
