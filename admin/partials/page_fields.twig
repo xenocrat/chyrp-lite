@@ -8,11 +8,9 @@
 <label for="body">
 {{ "Body" | translate }}
 </label>
-<span id="body_toolbar" class="options_toolbar">
-{% if field_markdown %}
+<span id="body_toolbar" class="options_toolbar">{% if field_markdown %}
 <a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="{{ 'Markdown' | translate }}"></a>
-{% endif %}
-</span>
+{% endif %}</span>
 <textarea rows="12" name="body" id="body" data-preview{{ field_markdown }} required>{{ page is defined ? page.body | fix(false, true) : "" }}</textarea>
 <span id="body_tray" class="options_tray"></span>
 </p>
@@ -72,14 +70,14 @@
 <img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="">{{ "Publish" | translate }}
 </button>
 <button type="submit" name="private" value="true">
-<img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="">{{ "Save" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/draft.svg" alt="">{{ "Save" | translate }}
 </button>
 {% else %}
 <button type="submit">
-<img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="">{{ "Save" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="">{{ "Save" | translate }}
 </button>
 <button type="submit" class="boo" name="cancel" value="true" data-confirm="">
-<img src="{{ site.chyrp_url }}/admin/images/icons/cancel.svg" alt="">{{ "Cancel" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/discard.svg" alt="">{{ "Cancel" | translate }}
 </button>
 {% endif %}
 </div>

@@ -9,11 +9,11 @@
 {% set comment_markdown = site.enable_markdown ? " data-markdown" : "" %}
 <p class="main_options">
 <label for="body_field">
-{% if site.enable_markdown %}
-<a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="{{ 'Markdown' | translate }}"></a>
-{% endif %}
 {{ "Body" | translate("comments") }}
 </label>
+<span id="body_toolbar" class="options_toolbar">{% if site.enable_markdown %}
+<a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="{{ 'Markdown' | translate }}"></a>
+{% endif %}</span>
 <textarea rows="12" name="body" id="body_field"{{ comment_markdown }} required>{{ comment.body | fix(false, true) }}</textarea>
 </p>
 <div id="more_options" class="more_options">
@@ -63,8 +63,8 @@
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash_field">
 <input type="hidden" name="id" value="{{ comment.id }}" id="id_field">
 <div class="buttons confirmation">
-<button type="submit" class="yay">
-<img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="">{{ "Save" | translate("comments") }}
+<button type="submit">
+<img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="">{{ "Save" | translate("comments") }}
 </button>
 {{ comment.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="">' ~ ("Delete" | translate("comments")), null, null, "button boo") }}
 </div>

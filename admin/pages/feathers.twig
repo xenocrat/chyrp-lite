@@ -24,7 +24,7 @@
 <input type="hidden" name="hash" value="{{ authenticate() }}">
 {% if feather.confirm is not empty %}
 <button name="confirm" value="1" type="submit" data-confirm="{{ feather.confirm | fix(true) }}">
-<img src="{{ site.chyrp_url }}/admin/images/icons/warning.svg" alt="">{{ "Uninstall" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/destroy.svg" alt="">{{ "Uninstall" | translate }}
 </button>
 {% endif %}
 <button type="submit">

@@ -39,10 +39,8 @@
 <input id="{{ field_id }}" type="file" name="{{ field_name }}"{{ field_accept ~ field_multiple ~ field_required }} value="">
 {% elseif field.type == "text_block" %}
 <span id="{{ field_name }}_field_toolbar" class="options_toolbar">
-{% if field_markdown is not empty %}
-<a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="{{ 'Markdown' | translate }}"></a>
-{% endif %}
-</span>
+{% if field_markdown is not empty %}<a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="{{ 'Markdown' | translate }}"></a>
+{% endif %}</span>
 <textarea id="{{ field_id }}" name="{{ field_name }}" rows="12"{{ field_preview ~ field_markdown ~ field_required }}>{{ field_value | fix(false, true) }}</textarea>
 <span id="{{ field_name }}_field_tray" class="options_tray"></span>
 {% elseif field.type == "checkbox" %}
@@ -158,7 +156,7 @@
 <img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="">{{ "Save" | translate }}
 </button>
 <button type="submit" class="boo" name="cancel" value="true" data-confirm="">
-<img src="{{ site.chyrp_url }}/admin/images/icons/cancel.svg" alt="">{{ "Cancel" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/discard.svg" alt="">{{ "Cancel" | translate }}
 </button>
 {% endif %}
 {% else %}
@@ -168,7 +166,7 @@
 </button>
 {% endif %}
 <button type="submit" name="draft" value="true">
-<img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="">{{ "Save" | translate }}
+<img src="{{ site.chyrp_url }}/admin/images/icons/draft.svg" alt="">{{ "Save" | translate }}
 </button>
 {% endif %}
 </div>
