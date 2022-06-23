@@ -871,7 +871,7 @@
          * Function: groups
          * Returns the IDs of any groups given viewing permission in the post's status.
          */
-        public function groups(): string|false {
+        public function groups(): array|false {
             if ($this->no_results)
                 return false;
 
