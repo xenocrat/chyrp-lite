@@ -550,6 +550,7 @@
                 padding: 0px 2px;
                 color: #1f1f23;
                 border: 1px solid #cfcfcf;
+                display: inline-block;
             }
             strong {
                 font-weight: normal;
