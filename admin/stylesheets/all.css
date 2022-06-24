@@ -137,9 +137,6 @@ strong {
 small, .small {
     font-size: 0.8em;
 }
-small li code, .small li code {
-    line-height: 2;
-}
 p {
     margin: 0em 0em 1em 0em;
 }
@@ -464,6 +461,7 @@ code {
     padding: 0px 2px;
     color: #1f1f23;
     border: 1px solid #cfcfcf;
+    display: inline-block;
 }
 form.split label {
     box-sizing: border-box;
