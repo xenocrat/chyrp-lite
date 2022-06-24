@@ -875,7 +875,7 @@ a.emblem > img,
 img.emblem {
     display: inline;
     position: relative;
-    top: 2px;
+    top: 3px;
     width: 16px;
     height: 16px;
 }
@@ -1046,6 +1046,28 @@ a.emblem:focus > img {
     select,
     textarea {
         width: 100% !important;
+    }
+    input.text + a.help.emblem {
+        float:  right;
+        padding: 4px;
+        position: relative;
+        top: -2.5rem;
+        left: -0.5rem;
+        background-color: #ffffff;
+    }
+    input.text.error + a.help.emblem,
+    input.text.error + a.help.emblem,
+    input.text.error + a.help.emblem,
+    input.text.error + a.help.emblem,
+    input.text.error + a.help.emblem,
+    input.text.error + a.help.emblem,
+    input.text.error + a.help.emblem,
+    input.text.error + a.help.emblem,
+    input.text.error + a.help.emblem {
+        background-color: #faebe4;
+    }
+    input.text.strong + a.help.emblem {
+        background-color: #ebfae4;
     }
     #content table thead tr th:not(.main):not(.controls):not(.toggler),
     #content table tbody tr td:not(.main):not(.controls):not(.checkbox):not(.placeholder) {
