@@ -741,7 +741,6 @@
 
                 if ($crc & 0x1000000)
                     $crc ^= $polynomial;
-
             }
         }
 
