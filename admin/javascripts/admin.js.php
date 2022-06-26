@@ -214,6 +214,87 @@ var Help = {
 }
 var Write = {
     init: function() {
+        // Insert buttons for text formatting.
+        $("#write_form .options_toolbar, #edit_form .options_toolbar").each(function() {
+            var toolbar = $(this);
+            var target = $("#" + toolbar.attr("id").replace("_toolbar", ""));
+
+            toolbar.append(
+                $("<a>", {
+                    "href": "#",
+                    "role": "button",
+                    "aria-label": '<?php echo __("Bold", "admin"); ?>'
+                }).addClass("emblem toolbar").click(function(e) {
+                    Write.formatting(target, "bold");
+                }).append(
+                    $("<img>", {
+                        "src": Site.chyrp_url + '/admin/images/icons/bold.svg',
+                        "alt": '<?php echo __("bold", "admin"); ?>'
+                    })
+                )
+            );
+
+            toolbar.append(
+                $("<a>", {
+                    "href": "#",
+                    "role": "button",
+                    "aria-label": '<?php echo __("Italic", "admin"); ?>'
+                }).addClass("emblem toolbar").click(function(e) {
+                    Write.formatting(target, "italic");
+                }).append(
+                    $("<img>", {
+                        "src": Site.chyrp_url + '/admin/images/icons/italic.svg',
+                        "alt": '<?php echo __("italic", "admin"); ?>'
+                    })
+                )
+            );
+
+            toolbar.append(
+                $("<a>", {
+                    "href": "#",
+                    "role": "button",
+                    "aria-label": '<?php echo __("Code", "admin"); ?>'
+                }).addClass("emblem toolbar").click(function(e) {
+                    Write.formatting(target, "code");
+                }).append(
+                    $("<img>", {
+                        "src": Site.chyrp_url + '/admin/images/icons/code.svg',
+                        "alt": '<?php echo __("code", "code"); ?>'
+                    })
+                )
+            );
+
+            toolbar.append(
+                $("<a>", {
+                    "href": "#",
+                    "role": "button",
+                    "aria-label": '<?php echo __("Link", "admin"); ?>'
+                }).addClass("emblem toolbar").click(function(e) {
+                    Write.formatting(target, "link");
+                }).append(
+                    $("<img>", {
+                        "src": Site.chyrp_url + '/admin/images/icons/link.svg',
+                        "alt": '<?php echo __("link", "code"); ?>'
+                    })
+                )
+            );
+
+            toolbar.append(
+                $("<a>", {
+                    "href": "#",
+                    "role": "button",
+                    "aria-label": '<?php echo __("Image", "admin"); ?>'
+                }).addClass("emblem toolbar").click(function(e) {
+                    Write.formatting(target, "image");
+                }).append(
+                    $("<img>", {
+                        "src": Site.chyrp_url + '/admin/images/icons/image.svg',
+                        "alt": '<?php echo __("image", "code"); ?>'
+                    })
+                )
+            );
+        });
+
         // Insert buttons for ajax previews.
         if (<?php echo($theme->file_exists("content".DIR."preview") ? "true" : "false"); ?>)
             $("#write_form *[data-preview], #edit_form *[data-preview]").each(function() {
@@ -327,6 +408,66 @@ var Write = {
                 });
             }
         }
+    },
+    formatting: function(target, effect) {
+        var markdown = <?php echo(($config->enable_markdown) ? "true" : "false"); ?>;
+        var opening = "";
+        var closing = "";
+        var after = "";
+        var start = target[0].selectionStart;
+        var end = target[0].selectionEnd;
+        var selection = target.val().substring(start, end);
+
+        // Test for a trailing space caused by double-click word selection.
+        if (selection.length > 0) {
+            if (selection.slice(-1) == " ") {
+                after = " ";
+                selection = selection.substring(0, selection.length - 1);
+            }
+        }
+
+        switch (effect) {
+            case 'bold':
+                opening = (markdown) ? "**" : '<strong>' ;
+                closing = (markdown) ? "**" : '</strong>' ;
+                break;
+
+            case 'italic':
+                opening = (markdown) ? "*" : '<em>' ;
+                closing = (markdown) ? "*" : '</em>' ;
+                break;
+
+            case 'code':
+                opening = (markdown) ? "`" : '<code>' ;
+                closing = (markdown) ? "`" : '</code>' ;
+                break;
+
+            case 'link':
+                if (isURL(selection)) {
+                    opening = (markdown) ? "[](" : '<a href="' ;
+                    closing = (markdown) ? ")" : '"></a>' ;
+                } else {
+                    opening = (markdown) ? "[" : '<a href="">' ;
+                    closing = (markdown) ? "]()" : '</a>' ;
+                }
+
+                break;
+
+            case 'image':
+                if (isURL(selection)) {
+                    opening = (markdown) ? "![](" : '<img alt="" src="' ;
+                    closing = (markdown) ? ")" : '">' ;
+                } else {
+                    opening = (markdown) ? "![" : '<img alt="' ;
+                    closing = (markdown) ? "]()" : '" src="">' ;
+                }
+
+                break;
+        }
+
+        var text = opening + selection + closing + after;
+        target[0].setRangeText(text);
+        $(target).focus().trigger("input");
     },
     show: function(action, safename, field, content) {
         var uid = Date.now().toString(16);
