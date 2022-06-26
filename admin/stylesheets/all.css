@@ -881,8 +881,10 @@ a.emblem.markdown > img {
     width: 26px;
 }
 a.emblem.toolbar {
-    float: right;
-    margin-left: 1rem;
+    margin-left: 16px;
+}
+a.emblem.toolbar:first-child {
+    margin-left: 0rem;
 }
 a.emblem:focus {
     outline: none;
