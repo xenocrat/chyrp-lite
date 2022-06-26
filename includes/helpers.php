@@ -729,7 +729,7 @@
      * Returns:
      *     The integer value of the check result.
      */
-    function crc24($str, $polynomial = 0x1864cfb, $ini = 0xb704ce, $xor = 0): int {
+    function crc24($str, $polynomial = 0x864cfb, $ini = 0xb704ce, $xor = 0): int {
         $crc = $ini;
 
         for ($i = 0; $i < strlen($str); $i++) {
