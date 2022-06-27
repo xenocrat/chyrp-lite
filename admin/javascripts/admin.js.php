@@ -184,7 +184,7 @@ var Help = {
     },
     show: function(href) {
         $("<div>", {
-            "role": "region",
+            "role": "region"
         }).addClass("iframe_background").append(
             [$("<iframe>", {
                 "src": href,
@@ -214,7 +214,7 @@ var Help = {
 }
 var Write = {
     init: function() {
-        // Insert buttons for text formatting.
+        // Insert toolbar buttons for text formatting.
         $("#write_form .options_toolbar, #edit_form .options_toolbar").each(function() {
             var toolbar = $(this);
             var target = $("#" + toolbar.attr("id").replace("_toolbar", ""));
@@ -293,6 +293,52 @@ var Write = {
                     })
                 )
             );
+
+            // Insert toolbar buttons for image uploads.
+            $("<label>", {
+                "role": "button",
+                "aria-label": '<?php echo __("Upload", "admin"); ?>'
+            }).addClass("emblem toolbar").append(
+                $("<img>", {
+                    "src": Site.chyrp_url + '/admin/images/icons/upload.svg',
+                    "alt": '<?php echo __("image", "code"); ?>'
+                }),
+                [$("<input>", {
+                    "name": toolbar.attr("id") + "_upload",
+                    "type": "file",
+                    "accept": "image/*",
+                    "style": "display: none;"
+                }).change(function(e) {
+                    if (!!e.target.files && e.target.files.length > 0) {
+                        var file = e.target.files[0];
+                        var form = new FormData();
+                        var tray = $("#" + target.attr("id") + "_tray");
+
+                        form.set("action", "file_upload");
+                        form.set("hash", Visitor.token);
+                        form.set("file", file, file.name);
+
+                        tray.loader().html('<?php echo __("Uploading...", "admin"); ?>');
+
+                        // Upload the file and insert the tag if successful.
+                        $.ajax({
+                            type: "POST",
+                            url: "<?php echo url('/', 'AjaxController'); ?>",
+                            data: form,
+                            processData: false,
+                            contentType: false,
+                            dataType: "json",
+                        }).done(function(response) {
+                            Write.formatting(target, "image", response.data.url);
+                        }).fail(function(response) {
+                            tray.html('<?php echo __("Oops! Something went wrong on this web page."); ?>');
+                        }).always(function(response) {
+                            tray.loader(true);
+                            e.target.value = null;
+                        });
+                    }
+                })]
+            ).appendTo(toolbar);
         });
 
         // Insert buttons for ajax previews.
@@ -326,7 +372,7 @@ var Write = {
                 );
             });
 
-        // Support drag-and-drop image file uploads.
+        // Support drag-and-drop image image uploads.
         $("#write_form textarea, #edit_form textarea").each(function() {
             var target = $(this);
 
@@ -394,12 +440,7 @@ var Write = {
                     contentType: false,
                     dataType: "json",
                 }).done(function(response) {
-                    var text = (e.target.selectionStart != e.target.selectionEnd) ?
-                        response.data.url :
-                        '<img alt="" src="' + response.data.url + '">' ;
-
-                    e.target.setRangeText(text);
-                    $(e.target).trigger("input");
+                    Write.formatting($(e.target), "image", response.data.url);
                 }).fail(function(response) {
                     tray.html('<?php echo __("Oops! Something went wrong on this web page."); ?>');
                 }).always(function(response) {
@@ -409,7 +450,7 @@ var Write = {
             }
         }
     },
-    formatting: function(target, effect) {
+    formatting: function(target, effect, url = "") {
         var markdown = <?php echo(($config->enable_markdown) ? "true" : "false"); ?>;
         var opening = "";
         var closing = "";
@@ -444,22 +485,28 @@ var Write = {
 
             case 'link':
                 if (isURL(selection)) {
+                    if (url)
+                        selection = url;
+
                     opening = (markdown) ? "[](" : '<a href="' ;
                     closing = (markdown) ? ")" : '"></a>' ;
                 } else {
-                    opening = (markdown) ? "[" : '<a href="">' ;
-                    closing = (markdown) ? "]()" : '</a>' ;
+                    opening = (markdown) ? "[" : '<a href="' + url + '">' ;
+                    closing = (markdown) ? "](" + url + ")" : '</a>' ;
                 }
 
                 break;
 
             case 'image':
                 if (isURL(selection)) {
+                    if (url)
+                        selection = url;
+
                     opening = (markdown) ? "![](" : '<img alt="" src="' ;
                     closing = (markdown) ? ")" : '">' ;
                 } else {
                     opening = (markdown) ? "![" : '<img alt="' ;
-                    closing = (markdown) ? "]()" : '" src="">' ;
+                    closing = (markdown) ? "](" + url + ")" : '" src="' + url + '">' ;
                 }
 
                 break;
@@ -510,7 +557,7 @@ var Write = {
 
         // Build and display the named iframe.
         $("<div>", {
-            "role": "region",
+            "role": "region"
         }).addClass("iframe_background").append(
             [$("<iframe>", {
                 "name": uid,
