@@ -870,27 +870,30 @@ a.emblem {
     text-decoration: none;
 }
 a.emblem > img,
+label.emblem > img,
 img.emblem {
     display: inline;
     position: relative;
     top: 3px;
-    width: 16px;
     height: 16px;
 }
-a.emblem.markdown > img {
-    width: 26px;
-}
-a.emblem.toolbar {
+a.emblem.toolbar,
+label.emblem.toolbar {
     margin-left: 16px;
+    cursor: pointer;
 }
-a.emblem.toolbar:first-child {
+a.emblem.toolbar:first-child,
+label.emblem.toolbar:first-child {
     margin-left: 0rem;
 }
-a.emblem:focus {
+a.emblem:focus,
+label.emblem:focus {
     outline: none;
 }
 a.emblem:hover > img,
-a.emblem:focus > img {
+a.emblem:focus > img,
+label.emblem:hover > img,
+label.emblem:focus > img {
     filter: invert(25%) sepia(100%) saturate(330%) hue-rotate(180deg) brightness(125%);
 }
 .drag_highlight {
