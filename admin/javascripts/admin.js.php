@@ -259,7 +259,7 @@ var Write = {
                 }).append(
                     $("<img>", {
                         "src": Site.chyrp_url + '/admin/images/icons/code.svg',
-                        "alt": '<?php echo __("code", "code"); ?>'
+                        "alt": '<?php echo __("code", "admin"); ?>'
                     })
                 )
             );
@@ -274,7 +274,7 @@ var Write = {
                 }).append(
                     $("<img>", {
                         "src": Site.chyrp_url + '/admin/images/icons/link.svg',
-                        "alt": '<?php echo __("link", "code"); ?>'
+                        "alt": '<?php echo __("link", "admin"); ?>'
                     })
                 )
             );
@@ -289,7 +289,7 @@ var Write = {
                 }).append(
                     $("<img>", {
                         "src": Site.chyrp_url + '/admin/images/icons/image.svg',
-                        "alt": '<?php echo __("image", "code"); ?>'
+                        "alt": '<?php echo __("image", "admin"); ?>'
                     })
                 )
             );
@@ -301,7 +301,7 @@ var Write = {
             }).addClass("emblem toolbar").append(
                 $("<img>", {
                     "src": Site.chyrp_url + '/admin/images/icons/upload.svg',
-                    "alt": '<?php echo __("image", "code"); ?>'
+                    "alt": '<?php echo __("image", "admin"); ?>'
                 }),
                 [$("<input>", {
                     "name": toolbar.attr("id") + "_upload",
@@ -365,7 +365,7 @@ var Write = {
                             target.focus();
                     }).append(
                         $("<img>", {
-                            "src": Site.chyrp_url + '/admin/images/icons/magnifier.svg',
+                            "src": Site.chyrp_url + '/admin/images/icons/view.svg',
                             "alt": '<?php echo __("preview", "admin"); ?>'
                         })
                     )

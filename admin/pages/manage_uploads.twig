@@ -1,0 +1,52 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block title %}{{ "Manage Uploads" | translate }}{% endblock %}
+
+{% block content %}
+<form class="filters" action="{{ url('manage_uploads') }}" method="post" accept-charset="UTF-8" role="search">
+<fieldset role="presentation">
+<h3>{{ "Search&hellip;" | translate }}</h3>
+<input class="text filter_text" type="text" name="search" value="{{ GET.search is defined ? GET.search | fix(true) : '' }}" id="search" aria-label="{{ 'Query' | translate | fix(true) }}">
+<button type="submit">{{ "Search" | translate }}</button>
+</fieldset>
+</form>
+<h2>{{ GET.search is defined ? "Search Results" | translate : "Uploads" | translate }}</h2>
+<table>
+<thead>
+<tr class="head">
+<th class="group_name name main">{{ "Filename" | translate }}</th>
+{{ trigger.call("manage_uploads_column_header") }}
+<th class="controls" colspan="2">{{ "Controls" | translate }}</th>
+</tr>
+</thead>
+<tbody>
+{% for filename in uploaded.paginated %}
+<tr id="uploaded_{{ filename | sanitize }}" class="uploaded">
+<td class="uploaded_filename name main">
+{{ filename | fix }}
+</td>
+{{ trigger.call("manage_uploads_column", filename) }}
+<td class="controls">
+<a target="_blank" href="{{ filename | uploaded }}"><img src="{{ site.chyrp_url }}/admin/images/icons/view.svg" alt="{{ 'download' | translate }}"></a></td>
+<td class="controls">
+<a href="{{ filename | download }}"><img src="{{ site.chyrp_url }}/admin/images/icons/download.svg" alt="{{ 'download' | translate }}"></a>
+</td>
+</tr>
+{% else %}
+<tr>
+<td class="placeholder">
+<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/failure.svg" alt="">
+{{ "[None]" | translate }}
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% if uploaded.paginated is not empty and uploaded.pages > 1 %}
+<div class="pagination">
+<span class="pages">{{ "Page %d of %s" | translate | format(uploaded.page, uploaded.final_link(uploaded.pages)) }}</span>
+{{ uploaded.prev_link }}
+{{ uploaded.next_link }}
+</div>
+{% endif %}
+{% endblock %}

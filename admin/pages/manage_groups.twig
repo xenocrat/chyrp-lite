@@ -54,6 +54,13 @@
 {{ group.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
 </td>
 </tr>
+{% else %}
+<tr>
+<td class="placeholder">
+<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/failure.svg" alt="">
+{{ "[None]" | translate }}
+</td>
+</tr>
 {% endfor %}
 </tbody>
 </table>
