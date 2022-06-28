@@ -1225,6 +1225,29 @@
         }
 
         /**
+         * Function: admin_manage_uploads
+         * Upload management.
+         */
+        public function admin_manage_uploads(): void {
+            $visitor = Visitor::current();
+
+            if (!$visitor->group->can("export_content"))
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to export content."));
+
+            # Redirect searches to a clean URL or dirty GET depending on configuration.
+            if (isset($_POST['search']))
+                redirect("manage_uploads/search/".str_ireplace("%2F", "", urlencode($_POST['search']))."/");
+
+            if (!empty($_GET['search']))
+                $uploaded = new Paginator(uploaded_search($_GET['search']));
+            else
+                $uploaded = new Paginator(uploaded_search());
+
+            $this->display("pages".DIR."manage_uploads", array("uploaded" => $uploaded));
+        }
+
+        /**
          * Function: admin_export
          * Export content from this installation.
          */
@@ -1232,7 +1255,7 @@
             $config  = Config::current();
             $trigger = Trigger::current();
             $visitor = Visitor::current();
-            $exports = array(); # Use this to store export data. It will be tested to determine if anything was selected.
+            $exports = array(); # Use this to store export data.
 
             if (!$visitor->group->can("export_content"))
                 show_403(__("Access Denied"),
@@ -2244,6 +2267,9 @@
                                                  "selected" => array("edit_group",
                                                                      "delete_group",
                                                                      "new_group"));
+
+            if ($visitor->group->can("export_content"))
+                $manage["manage_uploads"] = array("title" => __("Uploads"));
 
             $trigger->filter($manage, "manage_nav");
 
