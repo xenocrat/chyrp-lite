@@ -2278,7 +2278,8 @@
 
                 $results[] = array("name" => $filename,
                                    "type" => $item->getExtension(),
-                                   "size" => $item->getSize());
+                                   "size" => $item->getSize(),
+                                   "modified" => $item->getMTime());
             }
         }
 
