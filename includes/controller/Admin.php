@@ -1240,11 +1240,11 @@
                 redirect("manage_uploads/search/".str_ireplace("%2F", "", urlencode($_POST['search']))."/");
 
             if (!empty($_GET['search']))
-                $uploaded = new Paginator(uploaded_search($_GET['search']));
+                $uploads = new Paginator(uploaded_search($_GET['search']));
             else
-                $uploaded = new Paginator(uploaded_search());
+                $uploads = new Paginator(uploaded_search());
 
-            $this->display("pages".DIR."manage_uploads", array("uploaded" => $uploaded));
+            $this->display("pages".DIR."manage_uploads", array("uploads" => $uploads));
         }
 
         /**
