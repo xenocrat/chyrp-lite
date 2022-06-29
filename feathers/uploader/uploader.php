@@ -235,10 +235,12 @@
             foreach ($filenames as $filename) {
                 $filepath = uploaded($filename, false);
                 $filetype = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+                $exists = file_exists($filepath);
 
                 $list[] = array("name" => $filename,
                                 "type" => $filetype,
-                                "size" => (file_exists($filepath) ? filesize($filepath) : 0 ));
+                                "size" => ($exists) ? filesize($filepath) : 0,
+                                "modified" => ($exists) ? filemtime($filepath) : 0);
             }
 
             return $list;
