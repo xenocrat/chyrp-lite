@@ -2276,7 +2276,9 @@
                 if (!($search == "") and stripos($filename, $search) === false)
                     continue;
 
-                $results[] = $filename;
+                $results[] = array("name" => $filename,
+                                   "type" => $item->getExtension(),
+                                   "size" => $item->getSize());
             }
         }
 
