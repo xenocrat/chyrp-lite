@@ -14,22 +14,30 @@
 <table>
 <thead>
 <tr class="head">
-<th class="group_name name main">{{ "Filename" | translate }}</th>
+<th class="uploads_name name main">{{ "Name" | translate }}</th>
+<th class="uploads_modified date">{{ "Last Modified" | translate }}</th>
+<th class="uploads_size value">{{ "Size" | translate }}</th>
 {{ trigger.call("manage_uploads_column_header") }}
 <th class="controls" colspan="2">{{ "Controls" | translate }}</th>
 </tr>
 </thead>
 <tbody>
-{% for filename in uploaded.paginated %}
-<tr id="uploaded_{{ filename | sanitize }}" class="uploaded">
-<td class="uploaded_filename name main">
-{{ filename | fix }}
+{% for upload in uploads.paginated %}
+<tr id="uploads_{{ loop.index }}" class="uploads">
+<td class="uploads_name name main">
+{{ upload.name | fix }}
 </td>
-{{ trigger.call("manage_uploads_column", filename) }}
+<td class="uploads_modified value">
+{{ upload.modified | dateformat("Y-m-d H:i:s") }}
+</td>
+<td class="uploads_size value">
+{{ upload.size | filesizeformat }}
+</td>
+{{ trigger.call("manage_uploads_column", upload) }}
 <td class="controls">
-<a target="_blank" href="{{ filename | uploaded }}"><img src="{{ site.chyrp_url }}/admin/images/icons/view.svg" alt="{{ 'download' | translate }}"></a></td>
+<a target="_blank" href="{{ upload.name | uploaded }}"><img src="{{ site.chyrp_url }}/admin/images/icons/view.svg" alt="{{ 'preview' | translate }}"></a></td>
 <td class="controls">
-<a href="{{ filename | download }}"><img src="{{ site.chyrp_url }}/admin/images/icons/download.svg" alt="{{ 'download' | translate }}"></a>
+<a href="{{ upload.name | download }}"><img src="{{ site.chyrp_url }}/admin/images/icons/download.svg" alt="{{ 'download' | translate }}"></a>
 </td>
 </tr>
 {% else %}
@@ -42,11 +50,11 @@
 {% endfor %}
 </tbody>
 </table>
-{% if uploaded.paginated is not empty and uploaded.pages > 1 %}
+{% if uploads.paginated is not empty and uploads.pages > 1 %}
 <div class="pagination">
-<span class="pages">{{ "Page %d of %s" | translate | format(uploaded.page, uploaded.final_link(uploaded.pages)) }}</span>
-{{ uploaded.prev_link }}
-{{ uploaded.next_link }}
+<span class="pages">{{ "Page %d of %s" | translate | format(uploads.page, uploads.final_link(uploads.pages)) }}</span>
+{{ uploads.prev_link }}
+{{ uploads.next_link }}
 </div>
 {% endif %}
 {% endblock %}
