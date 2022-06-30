@@ -869,22 +869,41 @@ hr {
 a.emblem {
     text-decoration: none;
 }
+label.emblem {
+    display: inline;
+    cursor: pointer;
+}
+button.emblem {
+    display: inline;
+    font-family: inherit;
+    font-size: 1em;
+    color: #1f1f23;
+    line-height: inherit;
+    margin: 0em;
+    padding: 0em;
+    background-color: transparent;
+    border: none;
+    border-radius: none;
+    cursor: pointer;
+}
+img.emblem,
 a.emblem > img,
 label.emblem > img,
-img.emblem {
+button.emblem > img {
+    float: none;
     display: inline;
     position: relative;
     top: 3px;
     height: 16px;
 }
 a.emblem.toolbar,
-label.emblem.toolbar {
-    display:  inline;
+label.emblem.toolbar,
+button.emblem.toolbar {
     margin-left: 16px;
-    cursor: pointer;
 }
 a.emblem.toolbar:first-child,
-label.emblem.toolbar:first-child {
+label.emblem.toolbar:first-child,
+button.emblem.toolbar:first-child {
     margin-left: 0rem;
 }
 a.emblem:focus,
@@ -894,7 +913,9 @@ label.emblem:focus {
 a.emblem:hover > img,
 a.emblem:focus > img,
 label.emblem:hover > img,
-label.emblem:focus > img {
+label.emblem:focus > img,
+button.emblem:hover > img,
+button.emblem:focus > img {
     filter: invert(25%) sepia(100%) saturate(330%) hue-rotate(180deg) brightness(125%);
 }
 .drag_highlight {
@@ -1088,7 +1109,7 @@ label.emblem:focus > img {
     #content table tbody tr td.emblem {
         min-width: 3rem;
     }
-    button, a.button,
+    button:not(.toolbar), a.button,
     a.prev_page, a.next_page {
         display: block !important;
         width: 100% !important;

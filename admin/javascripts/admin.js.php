@@ -220,9 +220,8 @@ var Write = {
             var target = $("#" + toolbar.attr("id").replace("_toolbar", ""));
 
             toolbar.append(
-                $("<a>", {
-                    "href": "#",
-                    "role": "button",
+                $("<button>", {
+                    "type": "button",
                     "aria-label": '<?php echo __("Bold", "admin"); ?>'
                 }).addClass("emblem toolbar").click(function(e) {
                     Write.formatting(target, "bold");
@@ -235,9 +234,8 @@ var Write = {
             );
 
             toolbar.append(
-                $("<a>", {
-                    "href": "#",
-                    "role": "button",
+                $("<button>", {
+                    "type": "button",
                     "aria-label": '<?php echo __("Italic", "admin"); ?>'
                 }).addClass("emblem toolbar").click(function(e) {
                     Write.formatting(target, "italic");
@@ -250,9 +248,8 @@ var Write = {
             );
 
             toolbar.append(
-                $("<a>", {
-                    "href": "#",
-                    "role": "button",
+                $("<button>", {
+                    "type": "button",
                     "aria-label": '<?php echo __("Code", "admin"); ?>'
                 }).addClass("emblem toolbar").click(function(e) {
                     Write.formatting(target, "code");
@@ -265,9 +262,8 @@ var Write = {
             );
 
             toolbar.append(
-                $("<a>", {
-                    "href": "#",
-                    "role": "button",
+                $("<button>", {
+                    "type": "button",
                     "aria-label": '<?php echo __("Link", "admin"); ?>'
                 }).addClass("emblem toolbar").click(function(e) {
                     Write.formatting(target, "link");
@@ -280,9 +276,8 @@ var Write = {
             );
 
             toolbar.append(
-                $("<a>", {
-                    "href": "#",
-                    "role": "button",
+                $("<button>", {
+                    "type": "button",
                     "aria-label": '<?php echo __("Image", "admin"); ?>'
                 }).addClass("emblem toolbar").click(function(e) {
                     Write.formatting(target, "image");
@@ -347,9 +342,8 @@ var Write = {
                 var target = $(this);
 
                 $("#" + target.attr("id") + "_toolbar").append(
-                    $("<a>", {
-                        "href": "#",
-                        "role": "button",
+                    $("<button>", {
+                        "type": "button",
                         "aria-label": '<?php echo __("Preview", "admin"); ?>'
                     }).addClass("emblem toolbar").click(function(e) {
                         var content  = target.val();
