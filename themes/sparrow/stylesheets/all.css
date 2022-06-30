@@ -588,7 +588,7 @@ div.tag_cloud a.tag {
     margin: 2px 0em;
     border: 1px #e5d7a1 solid;
     border-radius: 0.2em;
-    color: #807d73;
+    color: #1f1f23;
     background-color: #fffecd;
 }
 div.tags a.tag:hover,
@@ -598,7 +598,7 @@ div.tag_cloud a.tag:hover,
 div.tag_cloud a.tag:focus,
 div.tag_cloud a.tag:active {
     top: 1px;
-    color: #000000;;
+    color: #cc5252;;
 }
 div.doaction a, button {
     display: inline-block;
