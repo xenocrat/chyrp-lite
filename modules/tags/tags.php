@@ -509,7 +509,7 @@
             return $ids;
         }
 
-        public function tag_cloud($limit = false, $sort = "popularity_desc", $scale = 400): array {
+        public function tag_cloud($limit = false, $sort = "popularity_desc", $scale = 300): array {
             if (isset($this->tag_cache))
                 $cloud = $this->tag_cache;
 
@@ -546,14 +546,14 @@
                 $popularity = array_count_values($names);
                 $min = min($popularity);
                 $max = max($popularity);
-                $dif = (int) $scale / (($min === $max) ? 1 : ($max - $min));
+                $step = (int) $scale / (($min === $max) ? 1 : ($max - $min));
 
                 $main = MainController::current();
 
                 foreach ($popularity as $tag => $count) {
                     $title = $this->tag_title_post_count($tag, $count);
 
-                    $cloud[] = array("size" => floor($dif * ($count - $min)),
+                    $cloud[] = array("size" => floor($step * ($count - $min)),
                                      "popularity" => $count,
                                      "name" => $tag,
                                      "title" => $title,
