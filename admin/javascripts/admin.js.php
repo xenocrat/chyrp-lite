@@ -294,16 +294,12 @@ var Write = {
                 "role": "button",
                 "aria-label": '<?php echo __("Upload", "admin"); ?>'
             }).addClass("emblem toolbar").append(
-                $("<img>", {
-                    "src": Site.chyrp_url + '/admin/images/icons/upload.svg',
-                    "alt": '<?php echo __("image", "admin"); ?>'
-                }),
                 [$("<input>", {
                     "name": toolbar.attr("id") + "_upload",
                     "type": "file",
                     "accept": "image/*",
-                    "style": "display: none;"
-                }).change(function(e) {
+                    "style": "display:inline;width: 0px;height: 16px;outline: none;"
+                }).addClass("toolbar").change(function(e) {
                     if (!!e.target.files && e.target.files.length > 0) {
                         var file = e.target.files[0];
                         var form = new FormData();
@@ -332,6 +328,10 @@ var Write = {
                             e.target.value = null;
                         });
                     }
+                }),
+                $("<img>", {
+                    "src": Site.chyrp_url + '/admin/images/icons/upload.svg',
+                    "alt": '<?php echo __("image", "admin"); ?>'
                 })]
             ).appendTo(toolbar);
         });

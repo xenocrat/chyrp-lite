@@ -915,7 +915,8 @@ a.emblem:focus > img,
 label.emblem:hover > img,
 label.emblem:focus > img,
 button.emblem:hover > img,
-button.emblem:focus > img {
+button.emblem:focus > img,
+label.emblem.toolbar > input:focus + img {
     filter: invert(25%) sepia(100%) saturate(330%) hue-rotate(180deg) brightness(125%);
 }
 .drag_highlight {
@@ -1067,7 +1068,7 @@ button.emblem:focus > img {
     input[type="number"],
     input[type="range"],
     input[type="password"],
-    input[type="file"],
+    input[type="file"]:not(.toolbar),
     select,
     textarea {
         width: 100% !important;
