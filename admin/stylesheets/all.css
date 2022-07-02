@@ -390,6 +390,9 @@ textarea:invalid {
     border-color: #ff7f00;
     box-shadow: none;
 }
+input[type="checkbox"]:focus {
+    outline: #ff7f00 dashed 2px;
+}
 select:focus,
 textarea:focus,
 input[type="text"]:focus,
@@ -816,7 +819,6 @@ span.options_toolbar {
     box-sizing: border-box;
     display: block;
     width: 100%;
-    font-size: 0.67rem;
     background-color: #fbfbfb;
     border: 1px solid #cfcfcf;
     border-bottom: none;
@@ -907,17 +909,14 @@ button.emblem.toolbar:first-child {
     margin-left: 0rem;
 }
 a.emblem:focus,
-label.emblem:focus {
+label.emblem:focus,
+button.emblem:focus {
     outline: none;
 }
-a.emblem:hover > img,
 a.emblem:focus > img,
-label.emblem:hover > img,
-label.emblem:focus > img,
-button.emblem:hover > img,
 button.emblem:focus > img,
 label.emblem.toolbar > input:focus + img {
-    filter: invert(25%) sepia(100%) saturate(330%) hue-rotate(180deg) brightness(125%);
+    outline: #ff7f00 dashed 2px;
 }
 .drag_highlight {
     background-color: #fffceb;

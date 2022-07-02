@@ -23,12 +23,12 @@
 </td>
 <td class="controls">
 {% if visitor.group.can("edit_post") %}
-<a class="tag_edit_link edit_link" href="{{ url('rename_tag/clean/' ~ (tag.clean | url_encode)) }}"><img src="{{ site.chyrp_url }}/admin/images/icons/edit.svg" alt="{{ 'edit' | translate }}"></a>
+<a class="tag_edit_link edit_link emblem" href="{{ url('rename_tag/clean/' ~ (tag.clean | url_encode)) }}"><img src="{{ site.chyrp_url }}/admin/images/icons/edit.svg" alt="{{ 'edit' | translate }}"></a>
 {% endif %}
 </td>
 <td class="controls">
 {% if visitor.group.can("edit_post") %}
-<a class="tag_delete_link delete_link" href="{{ url('delete_tag/clean/' ~ (tag.clean | url_encode)) }}"><img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg" alt="{{ 'delete' | translate }}"></a>
+<a class="tag_delete_link delete_link emblem" href="{{ url('delete_tag/clean/' ~ (tag.clean | url_encode)) }}"><img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg" alt="{{ 'delete' | translate }}"></a>
 {% endif %}
 </td>
 </tr>
@@ -69,7 +69,7 @@
 </td>
 <td class="controls">
 {% if post.editable() %}
-<a class="tags_edit_link edit_link" href="{{ url('edit_tags/id/' ~ post.id) }}">{{ '<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">' }}</a>
+<a class="tags_edit_link edit_link emblem" href="{{ url('edit_tags/id/' ~ post.id) }}">{{ '<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">' }}</a>
 {% endif %}
 </td>
 </tr>

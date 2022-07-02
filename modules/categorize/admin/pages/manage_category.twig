@@ -42,10 +42,10 @@
 {{ category.post_count }}
 </td>
 <td class="controls">
-{{ category.edit_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
+{{ category.edit_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">', null, null, "emblem") }}
 </td>
 <td class="controls">
-{{ category.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
+{{ category.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">', null, null, "emblem") }}
 </td>
 </tr>
 {% else %}

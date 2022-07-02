@@ -35,9 +35,9 @@
 </td>
 {{ trigger.call("manage_uploads_column", upload) }}
 <td class="controls">
-<a target="_blank" href="{{ upload.name | uploaded }}"><img src="{{ site.chyrp_url }}/admin/images/icons/view.svg" alt="{{ 'preview' | translate }}"></a></td>
+<a class="emblem" target="_blank" href="{{ upload.name | uploaded }}"><img src="{{ site.chyrp_url }}/admin/images/icons/view.svg" alt="{{ 'preview' | translate }}"></a></td>
 <td class="controls">
-<a href="{{ upload.name | download }}"><img src="{{ site.chyrp_url }}/admin/images/icons/download.svg" alt="{{ 'download' | translate }}"></a>
+<a class="emblem" href="{{ upload.name | download }}"><img src="{{ site.chyrp_url }}/admin/images/icons/download.svg" alt="{{ 'download' | translate }}"></a>
 </td>
 </tr>
 {% else %}

@@ -42,10 +42,10 @@
 </td>
 {{ trigger.call("manage_posts_column", post) }}
 <td class="controls">
-{{ post.edit_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
+{{ post.edit_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">', null, null, "emblem") }}
 </td>
 <td class="controls">
-{{ post.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
+{{ post.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">', null, null, "emblem") }}
 </td>
 </tr>
 {% else %}

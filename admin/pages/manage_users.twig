@@ -58,10 +58,10 @@
 {% endif %}
 {{ trigger.call("manage_users_column", user) }}
 <td class="controls">
-{{ user.edit_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
+{{ user.edit_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">', null, null, "emblem") }}
 </td>
 <td class="controls">
-{{ user.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
+{{ user.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">', null, null, "emblem") }}
 </td>
 </tr>
 {% else %}

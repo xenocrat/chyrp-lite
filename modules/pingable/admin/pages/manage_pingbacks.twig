@@ -42,10 +42,10 @@
 </td>
 {{ trigger.call("manage_pingbacks_column", pingback) }}
 <td class="controls">
-{{ pingback.edit_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
+{{ pingback.edit_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">', null, null, "emblem") }}
 </td>
 <td class="controls">
-{{ pingback.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
+{{ pingback.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">', null, null, "emblem") }}
 </td>
 </tr>
 {% else %}

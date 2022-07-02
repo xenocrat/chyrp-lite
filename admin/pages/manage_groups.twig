@@ -48,10 +48,10 @@
 </td>
 {{ trigger.call("manage_groups_column", groups) }}
 <td class="controls">
-{{ group.edit_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">') }}
+{{ group.edit_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">', null, null, "emblem") }}
 </td>
 <td class="controls">
-{{ group.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">') }}
+{{ group.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">', null, null, "emblem") }}
 </td>
 </tr>
 {% else %}
