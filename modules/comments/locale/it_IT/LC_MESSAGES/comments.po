@@ -73,7 +73,7 @@ msgstr "Modifica commento"
 msgid "Editing Comment on &#8220;%s&#8221;"
 msgstr "Modifica del commento &#8220;%s&#8221;"
 
-#: modules/comments/admin/pages/edit_comment.twig:15
+#: modules/comments/admin/pages/edit_comment.twig:12
 msgid "Body"
 msgstr "Testo"
 

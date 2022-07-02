@@ -17,7 +17,7 @@ Arguments:
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 433
+	admin/javascripts/admin.js.php on line 611
 
 
 admin_head
@@ -44,7 +44,7 @@ Arguments:
 export_choose
 -------------
 Called from:
-	admin/pages/export.twig on line 43
+	admin/pages/export.twig on line 42
 
 
 import_choose
@@ -98,6 +98,21 @@ Arguments:
 	post
 
 
+manage_uploads_column_header
+----------------------------
+Called from:
+	admin/pages/manage_uploads.twig on line 20
+
+
+manage_uploads_column
+---------------------
+Called from:
+	admin/pages/manage_uploads.twig on line 36
+
+Arguments:
+	upload
+
+
 manage_users_column_header
 --------------------------
 Called from:
@@ -128,19 +143,19 @@ Called from:
 after_page_fields
 -----------------
 Called from:
-	admin/partials/page_fields.twig on line 16
+	admin/partials/page_fields.twig on line 17
 
 
 new_page_options
 ----------------
 Called from:
-	admin/partials/page_fields.twig on line 61
+	admin/partials/page_fields.twig on line 62
 
 
 edit_page_options
 -----------------
 Called from:
-	admin/partials/page_fields.twig on line 63
+	admin/partials/page_fields.twig on line 64
 
 Arguments:
 	page
@@ -158,7 +173,7 @@ Arguments:
 after_post_fields
 -----------------
 Called from:
-	admin/partials/post_fields.twig on line 62
+	admin/partials/post_fields.twig on line 61
 
 Arguments:
 	feather
@@ -245,13 +260,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 1249
+	includes/controller/Admin.php on line 1272
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1529
+	includes/controller/Admin.php on line 1552
 
 Arguments:
 	$group
@@ -260,7 +275,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1554
+	includes/controller/Admin.php on line 1577
 
 Arguments:
 	$user
@@ -269,7 +284,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1599
+	includes/controller/Admin.php on line 1622
 
 Arguments:
 	$entry, $post
@@ -278,7 +293,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1629
+	includes/controller/Admin.php on line 1652
 
 Arguments:
 	$entry, $page
@@ -287,7 +302,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1633
+	includes/controller/Admin.php on line 1656
 
 Arguments:
 	$imports
@@ -296,13 +311,13 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1916
+	includes/controller/Admin.php on line 1939
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1924
+	includes/controller/Admin.php on line 1947
 
 
 can_not_view_page
@@ -349,7 +364,7 @@ Arguments:
 webmention
 ----------
 Called from:
-	includes/helpers.php on line 1633
+	includes/helpers.php on line 1664
 
 Arguments:
 	$post, $source, $target
@@ -358,19 +373,19 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 2456
+	includes/helpers.php on line 2490
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 2473
+	includes/helpers.php on line 2507
 
 
 send_correspondence
 -------------------
 Called from:
-	includes/helpers.php on line 2756
+	includes/helpers.php on line 2790
 
 Arguments:
 	$action, $params
@@ -379,7 +394,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 2784
+	includes/helpers.php on line 2818
 
 Arguments:
 	$ob
@@ -906,7 +921,7 @@ Arguments:
 posts_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 1311
+	includes/controller/Admin.php on line 1334
 
 Target:
 	$posts_atom
@@ -918,7 +933,7 @@ Arguments:
 pages_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 1361
+	includes/controller/Admin.php on line 1384
 
 Target:
 	$pages_atom
@@ -930,7 +945,7 @@ Arguments:
 export
 ------
 Called from:
-	includes/controller/Admin.php on line 1428
+	includes/controller/Admin.php on line 1451
 
 Target:
 	$exports
@@ -939,7 +954,7 @@ Target:
 before_import
 -------------
 Called from:
-	includes/controller/Admin.php on line 1508
+	includes/controller/Admin.php on line 1531
 
 Target:
 	$imports
@@ -948,7 +963,7 @@ Target:
 stylesheets_nonce
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2170
+	includes/controller/Admin.php on line 2193
 	modules/tags/tags.php on line 463
 
 Target:
@@ -958,7 +973,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 2211
+	includes/controller/Admin.php on line 2234
 
 Target:
 	$write
@@ -967,7 +982,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2248
+	includes/controller/Admin.php on line 2274
 
 Target:
 	$manage
@@ -976,7 +991,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 2273
+	includes/controller/Admin.php on line 2299
 
 Target:
 	$settings
@@ -985,7 +1000,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2291
+	includes/controller/Admin.php on line 2317
 
 Target:
 	$extend
@@ -994,7 +1009,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2352
+	includes/controller/Admin.php on line 2378
 
 Target:
 	$this->context
@@ -1053,7 +1068,7 @@ Target:
 keyword_search
 --------------
 Called from:
-	includes/helpers.php on line 928
+	includes/helpers.php on line 959
 
 Target:
 	$search
@@ -1065,7 +1080,7 @@ Arguments:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 2686
+	includes/helpers.php on line 2720
 
 Target:
 	$function
@@ -1074,7 +1089,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 2785
+	includes/helpers.php on line 2819
 
 Target:
 	$nonce
@@ -1354,7 +1369,7 @@ Target:
 cache_regenerate_triggers
 -------------------------
 Called from:
-	modules/cacher/cacher.php on line 116
+	modules/cacher/cacher.php on line 118
 
 Target:
 	$regenerate
@@ -1363,7 +1378,7 @@ Target:
 cache_exclude_triggers
 ----------------------
 Called from:
-	modules/cacher/cacher.php on line 125
+	modules/cacher/cacher.php on line 127
 
 Target:
 	$exclude

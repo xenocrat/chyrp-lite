@@ -80,7 +80,7 @@ msgstr ""
 
 #: admin/help/markdown.twig:3 admin/help/markdown.twig:6
 #: admin/help/markdown.twig:13 admin/pages/content_settings.twig:72
-#: admin/partials/page_fields.twig:10 admin/partials/post_fields.twig:26
+#: admin/partials/page_fields.twig:12 admin/partials/post_fields.twig:42
 msgid "Markdown"
 msgstr "Markdown"
 
@@ -152,7 +152,7 @@ msgstr "Collegamento ipertestuale"
 msgid "![description](URL)"
 msgstr "![descrizione](URL)"
 
-#: admin/help/markdown.twig:48
+#: admin/help/markdown.twig:48 admin/javascripts/admin.js.php:281
 msgid "Image"
 msgstr "Immagine"
 
@@ -160,7 +160,7 @@ msgstr "Immagine"
 msgid "`Code`"
 msgstr "`Codice`"
 
-#: admin/help/markdown.twig:52
+#: admin/help/markdown.twig:52 admin/javascripts/admin.js.php:253
 msgid "Code"
 msgstr "Codice"
 
@@ -216,21 +216,6 @@ msgstr "Emoticon"
 msgid "Emoji"
 msgstr "Emoji"
 
-#: admin/help/uploads_manifest.twig:3 admin/help/uploads_manifest.twig:6
-#: admin/pages/export.twig:38
-msgid "Uploads Manifest"
-msgstr "Manifesto per i caricamenti dati"
-
-#: admin/help/uploads_manifest.twig:10
-msgid "Filename"
-msgstr "Nome del file"
-
-#: admin/help/uploads_manifest.twig:24 admin/pages/manage_pages.twig:67
-#: admin/pages/manage_posts.twig:55 admin/pages/manage_users.twig:71
-#: admin/partials/page_fields.twig:52
-msgid "[None]"
-msgstr "[Nessuno]"
-
 #: admin/help/xmlrpc.twig:3 admin/help/xmlrpc.twig:6
 #: admin/pages/content_settings.twig:56
 msgid "XML-RPC Support"
@@ -259,29 +244,65 @@ msgstr "Spunta tutto"
 msgid "Are you sure you want to proceed?"
 msgstr "Sei sicuro di volere procedere?"
 
-#: admin/javascripts/admin.js.php:199 admin/javascripts/admin.js.php:389
+#: admin/javascripts/admin.js.php:199 admin/javascripts/admin.js.php:567
 msgid "Close"
 msgstr "Chiudi"
 
-#: admin/javascripts/admin.js.php:206 admin/javascripts/admin.js.php:396
+#: admin/javascripts/admin.js.php:206 admin/javascripts/admin.js.php:574
 msgid "close"
 msgstr "chiudi"
 
-#: admin/javascripts/admin.js.php:226 admin/pages/themes.twig:25
+#: admin/javascripts/admin.js.php:225
+msgid "Bold"
+msgstr "Grassetto"
+
+#: admin/javascripts/admin.js.php:231
+msgid "bold"
+msgstr "grassetto"
+
+#: admin/javascripts/admin.js.php:239
+msgid "Italic"
+msgstr "Italico"
+
+#: admin/javascripts/admin.js.php:245
+msgid "italic"
+msgstr "italico"
+
+#: admin/javascripts/admin.js.php:259
+msgid "code"
+msgstr "codice"
+
+#: admin/javascripts/admin.js.php:267
+msgid "Link"
+msgstr "Link"
+
+#: admin/javascripts/admin.js.php:273
+msgid "link"
+msgstr "link"
+
+#: admin/javascripts/admin.js.php:287 admin/javascripts/admin.js.php:334
+msgid "image"
+msgstr "immagine"
+
+#: admin/javascripts/admin.js.php:295
+msgid "Upload"
+msgstr "Carica"
+
+#: admin/javascripts/admin.js.php:312 admin/javascripts/admin.js.php:426
+msgid "Uploading..."
+msgstr "Caricamento in corso…."
+
+#: admin/javascripts/admin.js.php:347 admin/pages/themes.twig:25
 msgid "Preview"
 msgstr "Anteprima"
 
-#: admin/javascripts/admin.js.php:242
+#: admin/javascripts/admin.js.php:363 admin/pages/manage_uploads.twig:38
 msgid "preview"
 msgstr "anteprima"
 
-#: admin/javascripts/admin.js.php:268
+#: admin/javascripts/admin.js.php:385
 msgid "Words:"
 msgstr "Parole:"
-
-#: admin/javascripts/admin.js.php:309
-msgid "Uploading..."
-msgstr "Caricamento in corso…."
 
 #: admin/layouts/default.twig:60
 #, php-format
@@ -347,11 +368,11 @@ msgstr "Tenta di notificare i siti a cui si collegano i tuoi post."
 #: admin/pages/content_settings.twig:58 admin/pages/content_settings.twig:66
 #: admin/pages/content_settings.twig:74 admin/pages/export.twig:14
 #: admin/pages/export.twig:20 admin/pages/export.twig:26
-#: admin/pages/export.twig:32 admin/pages/export.twig:41
-#: admin/pages/general_settings.twig:27 admin/pages/manage_pages.twig:10
-#: admin/pages/manage_posts.twig:10 admin/pages/manage_users.twig:10
-#: admin/partials/page_fields.twig:20 admin/partials/post_fields.twig:30
-#: admin/partials/post_fields.twig:98 admin/partials/post_fields.twig:118
+#: admin/pages/export.twig:32 admin/pages/general_settings.twig:27
+#: admin/pages/manage_pages.twig:10 admin/pages/manage_posts.twig:10
+#: admin/pages/manage_users.twig:10 admin/partials/page_fields.twig:21
+#: admin/partials/post_fields.twig:26 admin/partials/post_fields.twig:97
+#: admin/partials/post_fields.twig:116
 msgid "help"
 msgstr "aiuto"
 
@@ -405,7 +426,7 @@ msgstr "Elimina!"
 
 #: admin/pages/delete_group.twig:47 admin/pages/delete_page.twig:23
 #: admin/pages/delete_post.twig:17 admin/pages/delete_user.twig:44
-#: admin/partials/page_fields.twig:79 admin/partials/post_fields.twig:162
+#: admin/partials/page_fields.twig:80 admin/partials/post_fields.twig:159
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -470,7 +491,8 @@ msgstr "Modifica del gruppo &#8220;%s&#8221;"
 msgid "Are you sure you want to make these changes to your group?"
 msgstr "Sei sicuro di voler apportare queste modifiche al tuo gruppo?"
 
-#: admin/pages/edit_group.twig:10 admin/pages/new_group.twig:10
+#: admin/pages/edit_group.twig:10 admin/pages/manage_uploads.twig:17
+#: admin/pages/new_group.twig:10
 msgid "Name"
 msgstr "Titolo"
 
@@ -532,7 +554,7 @@ msgstr "Nome completo"
 #: admin/pages/edit_user.twig:36 admin/pages/edit_user.twig:43
 #: admin/pages/general_settings.twig:24 admin/pages/import.twig:41
 #: admin/pages/new_user.twig:37 admin/pages/new_user.twig:44
-#: admin/partials/post_fields.twig:35
+#: admin/partials/post_fields.twig:30
 msgid "(optional)"
 msgstr "(opzionale)"
 
@@ -546,7 +568,7 @@ msgstr "Sito web"
 msgid "Activated?"
 msgstr "Attivato?"
 
-#: admin/pages/export.twig:3 admin/pages/export.twig:45
+#: admin/pages/export.twig:3 admin/pages/export.twig:44
 msgid "Export"
 msgstr "Esporta"
 
@@ -581,6 +603,10 @@ msgid ""
 msgstr ""
 "Il file degli utenti conterrà la password contrassegnata da hash per ogni "
 "utente. Tieni il file al sicuro!"
+
+#: admin/pages/export.twig:38
+msgid "Uploads Manifest"
+msgstr "Manifesto per i caricamenti dati"
 
 #: admin/pages/feathers.twig:3 admin/pages/feathers.twig:6
 msgid "Feathers"
@@ -701,12 +727,14 @@ msgid "Search all groups for user&hellip;"
 msgstr "Cerca tutti i gruppi per l'utente &hellip;"
 
 #: admin/pages/manage_groups.twig:9 admin/pages/manage_pages.twig:12
-#: admin/pages/manage_posts.twig:12 admin/pages/manage_users.twig:12
+#: admin/pages/manage_posts.twig:12 admin/pages/manage_uploads.twig:9
+#: admin/pages/manage_users.twig:12
 msgid "Query"
 msgstr "Domanda"
 
 #: admin/pages/manage_groups.twig:10 admin/pages/manage_pages.twig:13
-#: admin/pages/manage_posts.twig:13 admin/pages/manage_users.twig:13
+#: admin/pages/manage_posts.twig:13 admin/pages/manage_uploads.twig:10
+#: admin/pages/manage_users.twig:13
 msgid "Search"
 msgstr "Cerca"
 
@@ -716,7 +744,8 @@ msgid "New Group"
 msgstr "Nuovo gruppo"
 
 #: admin/pages/manage_groups.twig:18 admin/pages/manage_pages.twig:16
-#: admin/pages/manage_posts.twig:16 admin/pages/manage_users.twig:21
+#: admin/pages/manage_posts.twig:16 admin/pages/manage_uploads.twig:13
+#: admin/pages/manage_users.twig:21
 msgid "Search Results"
 msgstr "Risultati di ricerca"
 
@@ -733,7 +762,8 @@ msgid "Guests?"
 msgstr "Ospiti?"
 
 #: admin/pages/manage_groups.twig:27 admin/pages/manage_pages.twig:27
-#: admin/pages/manage_posts.twig:25 admin/pages/manage_users.twig:33
+#: admin/pages/manage_posts.twig:25 admin/pages/manage_uploads.twig:21
+#: admin/pages/manage_users.twig:33
 msgid "Controls"
 msgstr "Controlli"
 
@@ -753,8 +783,15 @@ msgstr "modifica"
 msgid "delete"
 msgstr "elimina"
 
-#: admin/pages/manage_groups.twig:62 admin/pages/manage_pages.twig:75
-#: admin/pages/manage_posts.twig:63 admin/pages/manage_users.twig:79
+#: admin/pages/manage_groups.twig:61 admin/pages/manage_pages.twig:67
+#: admin/pages/manage_posts.twig:55 admin/pages/manage_uploads.twig:47
+#: admin/pages/manage_users.twig:71
+msgid "No results"
+msgstr "Nessun risultato"
+
+#: admin/pages/manage_groups.twig:69 admin/pages/manage_pages.twig:75
+#: admin/pages/manage_posts.twig:63 admin/pages/manage_uploads.twig:55
+#: admin/pages/manage_users.twig:79
 #, php-format
 msgid "Page %d of %s"
 msgstr "Pagina %d di %s"
@@ -764,7 +801,7 @@ msgid "Manage Pages"
 msgstr "Gestisci pagine"
 
 #: admin/pages/manage_pages.twig:9 admin/pages/manage_posts.twig:9
-#: admin/pages/manage_users.twig:9
+#: admin/pages/manage_uploads.twig:8 admin/pages/manage_users.twig:9
 msgid "Search&hellip;"
 msgstr "Cerca&hellip;"
 
@@ -805,10 +842,30 @@ msgstr "Gestisci post"
 msgid "Posted"
 msgstr "Pubblicato"
 
-#: admin/pages/manage_posts.twig:22 admin/partials/page_fields.twig:26
-#: admin/partials/post_fields.twig:66
+#: admin/pages/manage_posts.twig:22 admin/partials/page_fields.twig:27
+#: admin/partials/post_fields.twig:65
 msgid "Status"
 msgstr "Stato"
+
+#: admin/pages/manage_uploads.twig:3
+msgid "Manage Uploads"
+msgstr "Gestire i caricamenti"
+
+#: admin/pages/manage_uploads.twig:13
+msgid "Uploads"
+msgstr "Caricamenti"
+
+#: admin/pages/manage_uploads.twig:18
+msgid "Last Modified"
+msgstr "Ultima modifica"
+
+#: admin/pages/manage_uploads.twig:19
+msgid "Size"
+msgstr "Dimensione"
+
+#: admin/pages/manage_uploads.twig:40
+msgid "download"
+msgstr "scaricare"
 
 #: admin/pages/manage_users.twig:3
 msgid "Manage Users"
@@ -1038,85 +1095,92 @@ msgstr "Aggiungi pagina"
 msgid "Write"
 msgstr "Scrivi"
 
-#: admin/partials/page_fields.twig:12
+#: admin/partials/page_fields.twig:9
 msgid "Body"
 msgstr "Testo"
 
-#: admin/partials/page_fields.twig:21 admin/partials/post_fields.twig:99
+#: admin/partials/page_fields.twig:22 admin/partials/post_fields.twig:98
 msgid "Slug"
 msgstr "Slug"
 
-#: admin/partials/page_fields.twig:29
+#: admin/partials/page_fields.twig:30
 msgid "Public and visible in pages list"
 msgstr "Pubblico e visibile nell'elenco delle pagine"
 
-#: admin/partials/page_fields.twig:31 admin/partials/post_fields.twig:71
+#: admin/partials/page_fields.twig:32 admin/partials/post_fields.twig:70
 msgid "Public"
 msgstr "Pubblico"
 
-#: admin/partials/page_fields.twig:33
+#: admin/partials/page_fields.twig:34
 msgid "Private and visible in pages list"
 msgstr "Privato e visibile nell'elenco delle pagine"
 
-#: admin/partials/page_fields.twig:35 admin/partials/post_fields.twig:73
+#: admin/partials/page_fields.twig:36 admin/partials/post_fields.twig:72
 msgid "Private"
 msgstr "Privato"
 
-#: admin/partials/page_fields.twig:39
+#: admin/partials/page_fields.twig:40
 msgid "Priority in pages list"
 msgstr "Priorità nell'elenco delle pagine"
 
-#: admin/partials/page_fields.twig:42
+#: admin/partials/page_fields.twig:43
 msgid "High"
 msgstr "Alta"
 
-#: admin/partials/page_fields.twig:44
+#: admin/partials/page_fields.twig:45
 msgid "Medium"
 msgstr "Medio"
 
-#: admin/partials/page_fields.twig:46
+#: admin/partials/page_fields.twig:47
 msgid "Low"
 msgstr "Bassa"
 
-#: admin/partials/page_fields.twig:50
+#: admin/partials/page_fields.twig:51
 msgid "Parent"
 msgstr "Principale"
 
-#: admin/partials/page_fields.twig:69 admin/partials/post_fields.twig:152
-#: admin/partials/post_fields.twig:168
+#: admin/partials/page_fields.twig:53
+msgid "[None]"
+msgstr "[Nessuno]"
+
+#: admin/partials/page_fields.twig:70 admin/partials/post_fields.twig:149
+#: admin/partials/post_fields.twig:165
 msgid "Publish"
 msgstr "Pubblica"
 
-#: admin/partials/page_fields.twig:72 admin/partials/page_fields.twig:76
-#: admin/partials/post_fields.twig:155 admin/partials/post_fields.twig:159
-#: admin/partials/post_fields.twig:172
+#: admin/partials/page_fields.twig:73 admin/partials/page_fields.twig:77
+#: admin/partials/post_fields.twig:152 admin/partials/post_fields.twig:156
+#: admin/partials/post_fields.twig:169
 msgid "Save"
 msgstr "Salva"
 
-#: admin/partials/post_fields.twig:69
+#: admin/partials/post_fields.twig:68
 msgid "Draft"
 msgstr "Bozza"
 
-#: admin/partials/post_fields.twig:75
+#: admin/partials/post_fields.twig:74
 msgid "Scheduled"
 msgstr "Programmato"
 
-#: admin/partials/post_fields.twig:76
+#: admin/partials/post_fields.twig:75
 msgid "Visible only to a group of users:"
 msgstr "Visibile solo per un gruppo di utenti:"
 
-#: admin/partials/post_fields.twig:78
+#: admin/partials/post_fields.twig:77
 msgid "All registered users"
 msgstr "Tutti gli utenti registrati"
 
-#: admin/partials/post_fields.twig:91
+#: admin/partials/post_fields.twig:90
 msgid "Pinned?"
 msgstr "Pinned?"
 
-#: admin/partials/post_fields.twig:92
+#: admin/partials/post_fields.twig:91
 msgid "(shows this post above all others)"
 msgstr "(mostra questo post sopra tutti gli altri)"
 
-#: admin/partials/post_fields.twig:104
+#: admin/partials/post_fields.twig:103
 msgid "Timestamp"
 msgstr "Date e ora"
+
+#~ msgid "Filename"
+#~ msgstr "Nome del file"

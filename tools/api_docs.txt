@@ -1458,6 +1458,11 @@ Function: admin_manage_groups
 Group management.
 
 
+Function: admin_manage_uploads
+------------------------------
+Upload management.
+
+
 Function: admin_export
 ----------------------
 Export content from this installation.
@@ -1805,6 +1810,11 @@ Function: logged_in
 Mask for Visitor::logged_in().
 
 
+Function: authenticate
+----------------------
+Mask for Session::authenticate().
+
+
 Function: redirect
 ------------------
 Redirects to the supplied URL and exits immediately.
@@ -2067,6 +2077,20 @@ Returns:
     A unique token salted with the site's secure hashkey.
 
 
+Function: crc24
+---------------
+Performs a 24-bit cyclic redundancy check.
+
+Parameters:
+    $str - The data to check.
+    $polynomial - The polynomial to use.
+    $ini - The initial remainder value.
+    $xor - The value for the final XOR.
+
+Returns:
+    The integer value of the check result.
+
+
 Function: slug
 --------------
 Generates a random slug value for posts and pages.
@@ -2076,11 +2100,6 @@ Parameters:
 
 Returns:
     A string of the requested length.
-
-
-Function: authenticate
-----------------------
-Mask for Session::authenticate().
 
 
 Function: random
