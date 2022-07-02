@@ -683,40 +683,6 @@
     }
 
     /**
-     * Function: crc16
-     * Performs a 16-bit cyclic redundancy check.
-     *
-     * Parameters:
-     *     $str - The data to check.
-     *     $polynomial - The polynomial to use.
-     *     $ini - The initial remainder value.
-     *     $xor - The value for the final XOR.
-     *
-     * Returns:
-     *     The integer value of the check result.
-     *
-     * Notes:
-     *     Defaults are for XMODEM implementation.
-     */
-    function crc16($str, $polynomial = 0x1021, $ini = 0, $xor = 0): int {
-        $crc = $ini;
-
-        for ($i = 0; $i < strlen($str); $i++) {
-            $c = ord($str[$i]);
-            $crc ^= $c << 8;
-
-            for ($j = 0; $j < 8; $j++) {
-                if ($crc & 0x8000)
-                    $crc = (($crc << 1) & 0xffff) ^ $polynomial;
-                else
-                    $crc = ($crc << 1) & 0xffff;
-            }
-        }
-
-        return ($crc ^ $xor) & 0xffff;
-    }
-
-    /**
      * Function: crc24
      * Performs a 24-bit cyclic redundancy check.
      *
