@@ -347,8 +347,14 @@ input.error, input:invalid {
     background-color: #ff8080;
     box-shadow: none;
 }
-input[type="radio"], input[type="checkbox"] {
+input[type="radio"],
+input[type="checkbox"] {
     width: auto;
+}
+input[type="radio"]:focus,
+input[type="checkbox"]:focus {
+    outline: lightgreen; solid 4px;
+    outline-offset: 2px;
 }
 input#search_field {
     display: inline;
