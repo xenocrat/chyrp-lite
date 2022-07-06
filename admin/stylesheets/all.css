@@ -390,8 +390,10 @@ textarea:invalid {
     border-color: #ff7f00;
     box-shadow: none;
 }
+input[type="radio"]:focus,
 input[type="checkbox"]:focus {
     outline: #ff7f00 dashed 2px;
+    outline-offset: 1px;
 }
 select:focus,
 textarea:focus,
