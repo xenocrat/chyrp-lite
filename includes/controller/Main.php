@@ -217,7 +217,7 @@
             if (is_numeric($_GET['day'])) {
                 $depth = "day";
                 $limit = strtotime("tomorrow", $timestamp);
-                $title = _f("Archive of %s", when("d F Y", $timestamp));
+                $title = _f("Archive of %s", _w("d F Y", $timestamp));
                 $posts = new Paginator(
                     Post::find(array("placeholders" => true,
                                      "where" => array("created_at LIKE" => when("Y-m-d%", $timestamp)),
@@ -225,7 +225,7 @@
             } elseif (is_numeric($_GET['month'])) {
                 $depth = "month";
                 $limit = strtotime("midnight first day of next month", $timestamp);
-                $title = _f("Archive of %s", when("F Y", $timestamp));
+                $title = _f("Archive of %s", _w("F Y", $timestamp));
                 $posts = new Paginator(
                     Post::find(array("placeholders" => true,
                                      "where" => array("created_at LIKE" => when("Y-m-%", $timestamp)),
@@ -233,7 +233,7 @@
             } else {
                 $depth = "year";
                 $limit = strtotime("midnight first day of next year", $timestamp);
-                $title = _f("Archive of %s", when("Y", $timestamp));
+                $title = _f("Archive of %s", _w("Y", $timestamp));
                 $month = $timestamp;
 
                 while ($month < $limit) {
