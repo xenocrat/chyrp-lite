@@ -464,6 +464,37 @@
         return call_user_func_array("sprintf", $args);
     }
 
+    /**
+     * Function: _w
+     * Formats and internationalizes a string that isn't a regular time() value.
+     *
+     * Parameters:
+     *     $formatting - The date()-compatible formatting.
+     *     $when - A time value to be strtotime() converted.
+     *
+     * Returns:
+     *     An internationalized time/date string with the supplied formatting.
+     */
+    function _w($formatting, $when): string|false {
+        static $locale;
+        $time = is_numeric($when) ? $when : strtotime($when) ;
+
+        if (!class_exists("IntlDateFormatter"))
+            return date($formatting, $time);
+
+        if (!isset($locale))
+            $locale = get_locale();
+
+        $formatter = new IntlDateFormatter($locale,
+                                           IntlDateFormatter::FULL,
+                                           IntlDateFormatter::FULL,
+                                           get_timezone(),
+                                           IntlDateFormatter::GREGORIAN,
+                                           i18n_datetime($formatting));
+
+        return $formatter->format($time);
+    }
+
     #---------------------------------------------
     # Time/Date
     #---------------------------------------------
@@ -473,7 +504,7 @@
      * Formats a string that isn't a regular time() value.
      *
      * Parameters:
-     *     $formatting - The formatting for date() or strftime().
+     *     $formatting - The formatting for date().
      *     $when - A time value to be strtotime() converted.
      *
      * Returns:
@@ -507,6 +538,48 @@
      */
     function now($when): string|false {
         return strtotime($when);
+    }
+
+    /**
+     * Function: i18n_datetime
+     * Translates a datetime pattern from PHP to ICU format.
+     *
+     * Parameters:
+     *     $formatting - The datetime formatting.
+     *
+     * See Also:
+     *     https://unicode-org.github.io/icu/userguide/format_parse/datetime/
+     *     https://www.php.net/manual/en/datetime.format.php
+     */
+    function i18n_datetime($formatting): string {
+        return strtr($formatting, array(
+            "A" => "'A'",  "a" => "a",
+            "B" => "'B'",  "b" => "'b'",
+            "C" => "'C'",  "c" => "'c'",
+            "D" => "EEE",  "d" => "dd",
+            "E" => "'E'",  "e" => "VV",
+            "F" => "MMMM", "f" => "'f'",
+            "G" => "H",    "g" => "h",
+            "H" => "HH",   "h" => "hh",
+            "I" => "'I'",  "i" => "mm",
+            "J" => "'J'",  "j" => "d",
+            "K" => "'K'",  "k" => "'k'",
+            "L" => "'L'",  "l" => "EEEE",
+            "M" => "MMM",  "m" => "MM",
+            "N" => "'N'",  "n" => "M",
+            "O" => "xx",   "o" => "'o'",
+            "P" => "xxx",  "p" => "XXX",
+            "Q" => "'Q'",  "q" => "'q'",
+            "R" => "'R'",  "r" => "'r'",
+            "S" => "'S'",  "s" => "ss",
+            "T" => "zzz",  "t" => "'t'",
+            "U" => "'U'",  "u" => "SSSSSS",
+            "V" => "'V'",  "v" => "SSS",
+            "W" => "'W'",  "w" => "'w'",
+            "X" => "'X'",  "x" => "'x'",
+            "Y" => "yyyy", "y" => "yy",
+            "Z" => "'Z'",  "z" => "D"
+        ));
     }
 
     /**
