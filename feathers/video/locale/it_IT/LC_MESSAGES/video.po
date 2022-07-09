@@ -44,4 +44,4 @@ msgstr "Non è stato selezionato alcun video da caricare."
 
 #: feathers/video/video.php:162
 msgid "Your web browser does not support the <code>video</code> element."
-msgstr "Il browser web non supporta l'elemento </code>video<code>."
+msgstr "Il browser web non supporta l'elemento <code>video</code>."
