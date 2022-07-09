@@ -490,7 +490,7 @@
                                            IntlDateFormatter::FULL,
                                            get_timezone(),
                                            IntlDateFormatter::GREGORIAN,
-                                           i18n_datetime($formatting));
+                                           translate_format($formatting));
 
         return $formatter->format($time);
     }
@@ -541,8 +541,8 @@
     }
 
     /**
-     * Function: i18n_datetime
-     * Translates a datetime pattern from PHP to ICU format.
+     * Function: translate_format
+     * Translates datetime formatting from PHP to ICU format.
      *
      * Parameters:
      *     $formatting - The datetime formatting.
@@ -551,7 +551,7 @@
      *     https://unicode-org.github.io/icu/userguide/format_parse/datetime/
      *     https://www.php.net/manual/en/datetime.format.php
      */
-    function i18n_datetime($formatting): string {
+    function translate_format($formatting): string {
         return strtr($formatting, array(
             "A" => "'A'",  "a" => "a",
             "B" => "'B'",  "b" => "'b'",
