@@ -8,7 +8,7 @@
 {% for when, month in months %}
 <h2 id="label_{{ when }}_archive" class="archive">
 <a href="{{ url('archive/%s/' | format(when | dateformat('Y/m'))) }}">
-{{ when | dateformat("F Y" | translate) }}
+{{ when | time("F Y" | translate) | title }}
 </a>
 </h2>
 <ul aria-labelledby="label_{{ when }}_archive" class="archive">
@@ -39,12 +39,12 @@
 <div role="navigation" class="prev_next traversal">
 {% if archive.prev is not empty %}
 <a href="{{ url('archive/%s/' | format(archive.prev | dateformat('Y'))) }}">
-{{ "Archive of %s" | translate | format(archive.prev | dateformat("Y")) }}
+{{ "Archive of %s" | translate | format(archive.prev | time("Y")) }}
 </a>
 {% endif %}
 {% if archive.next is not empty %}
 <a href="{{ url('archive/%s/' | format(archive.next | dateformat('Y'))) }}">
-{{ "Archive of %s" | translate | format(archive.next | dateformat("Y")) }}
+{{ "Archive of %s" | translate | format(archive.next | time("Y")) }}
 </a>
 {% endif %}
 </div>
@@ -54,7 +54,7 @@
 {% if posts.paginated is not empty %}
 <div class="ribbon">
 <h3 role="status" class="ribbon">
-{{ "Archive of %s" | translate | format(archive.when | dateformat(archive.depth == "day" ? "d F Y" : "F Y")) }}
+{{ "Archive of %s" | translate | format(archive.when | time(archive.depth == "day" ? "d F Y" : "F Y")) }}
 </h3>
 </div>
 {% for post in posts.paginated %}

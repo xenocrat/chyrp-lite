@@ -8,7 +8,7 @@
 {% for when, month in months %}
 <h2 id="label_{{ when }}_archive" class="archive">
 <a href="{{ url('archive/%s/' | format(when | dateformat('Y/m'))) }}">
-{{ when | dateformat("F Y" | translate) }}
+{{ when | time("F Y" | translate) | title }}
 </a>
 </h2>
 <ul aria-labelledby="label_{{ when }}_archive" class="archive">
@@ -39,7 +39,7 @@
 {% if archive.next is not empty %}
 <div role="navigation" class="next traversal">
 <a href="{{ url('archive/%s/' | format(archive.next | dateformat('Y'))) }}">
-{{ archive.next | dateformat("Y") }}
+{{ archive.next | time("Y") }}
 </a>
 </div>
 {% endif %}
@@ -48,7 +48,7 @@
 {# Posts? (For daily/monthly archives) #}
 {% if posts.paginated is not empty %}
 <h3 role="status" class="filter">
-{{ "Archive of %s" | translate | format(archive.when | dateformat(archive.depth == "day" ? "d F Y" : "F Y")) }}
+{{ "Archive of %s" | translate | format(archive.when | time(archive.depth == "day" ? "d F Y" : "F Y")) }}
 </h3>
 {% for post in posts.paginated %}
 {% include(["feathers" ~ DIR ~ post.feather ~ ".twig", "feathers" ~ DIR ~ "missing.twig"]) %}
