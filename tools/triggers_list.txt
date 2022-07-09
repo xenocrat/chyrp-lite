@@ -364,7 +364,7 @@ Arguments:
 webmention
 ----------
 Called from:
-	includes/helpers.php on line 1664
+	includes/helpers.php on line 1737
 
 Arguments:
 	$post, $source, $target
@@ -373,19 +373,19 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 2490
+	includes/helpers.php on line 2563
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 2507
+	includes/helpers.php on line 2580
 
 
 send_correspondence
 -------------------
 Called from:
-	includes/helpers.php on line 2790
+	includes/helpers.php on line 2863
 
 Arguments:
 	$action, $params
@@ -394,7 +394,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 2818
+	includes/helpers.php on line 2891
 
 Arguments:
 	$ob
@@ -1068,7 +1068,7 @@ Target:
 keyword_search
 --------------
 Called from:
-	includes/helpers.php on line 959
+	includes/helpers.php on line 1032
 
 Target:
 	$search
@@ -1080,7 +1080,7 @@ Arguments:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 2720
+	includes/helpers.php on line 2793
 
 Target:
 	$function
@@ -1089,7 +1089,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 2819
+	includes/helpers.php on line 2892
 
 Target:
 	$nonce

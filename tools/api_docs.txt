@@ -1975,12 +1975,24 @@ Returns:
     The translated string or the original.
 
 
+Function: _w
+------------
+Formats and internationalizes a string that isn't a regular time() value.
+
+Parameters:
+    $formatting - The date()-compatible formatting.
+    $when - A time value to be strtotime() converted.
+
+Returns:
+    An internationalized time/date string with the supplied formatting.
+
+
 Function: when
 --------------
 Formats a string that isn't a regular time() value.
 
 Parameters:
-    $formatting - The formatting for date() or strftime().
+    $formatting - The formatting for date().
     $when - A time value to be strtotime() converted.
 
 Returns:
@@ -2001,6 +2013,18 @@ Returns:
 Function: now
 -------------
 Alias to strtotime, for prettiness like now("+1 day").
+
+
+Function: translate_format
+--------------------------
+Translates datetime formatting from PHP to ICU format.
+
+Parameters:
+    $formatting - The datetime formatting.
+
+See Also:
+    https://unicode-org.github.io/icu/userguide/format_parse/datetime/
+    https://www.php.net/manual/en/datetime.format.php
 
 
 Function: timezones
@@ -3097,14 +3121,14 @@ Function: twig_filter_translate_plural
 Returns a plural (or not) form of a translated string.
 
 
+Function: twig_filter_time
+--------------------------
+Returns a <time> HTML element containing an internationalized time representation.
+
+
 Function: twig_filter_date_format
 ---------------------------------
 Returns date formatting for a string that isn't a regular time() value.
-
-
-Function: twig_filter_time
---------------------------
-Returns a <time> HTML element, created using twig_filter_date_format().
 
 
 Function: twig_filter_strftime_format
