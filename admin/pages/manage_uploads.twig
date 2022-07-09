@@ -28,7 +28,7 @@
 {{ upload.name | fix }}
 </td>
 <td class="uploads_modified value">
-{{ upload.modified | dateformat("Y-m-d H:i:s") }}
+{{ upload.modified | time("Y-m-d H:i:s") }}
 </td>
 <td class="uploads_size value">
 {{ upload.size | filesizeformat }}
