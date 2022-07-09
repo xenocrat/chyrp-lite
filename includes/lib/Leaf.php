@@ -62,8 +62,8 @@
                 # Custom filters:
                 new \Twig\TwigFilter("translate",           "twig_filter_translate"),
                 new \Twig\TwigFilter("translate_plural",    "twig_filter_translate_plural"),
-                new \Twig\TwigFilter("dateformat",          "twig_filter_date_format"),
                 new \Twig\TwigFilter("time",                "twig_filter_time"),
+                new \Twig\TwigFilter("dateformat",          "twig_filter_date_format"),
                 new \Twig\TwigFilter("strftimeformat",      "twig_filter_strftime_format"),
                 new \Twig\TwigFilter("filesizeformat",      "twig_filter_filesize_format"),
                 new \Twig\TwigFilter("preg_match",          "twig_filter_preg_match"),
@@ -252,40 +252,27 @@
     }
 
     /**
+     * Function: twig_filter_time
+     * Returns a <time> HTML element containing an internationalized time representation.
+     */
+    function twig_filter_time($timestamp, $format = null): string {
+        if (!isset($format))
+            $format = (ADMIN) ? "Y-m-d" : "d F Y" ;
+
+        $string = _w($format, $timestamp);
+        $datetime = when("c", $timestamp);
+        return "<time datetime=\"".$datetime."\">".$string."</time>";
+    }
+
+    /**
      * Function: twig_filter_date_format
      * Returns date formatting for a string that isn't a regular time() value.
      */
     function twig_filter_date_format($timestamp, $format = null): string {
-        static $tomorrow = null;
-        static $today    = null;
-
-        if (!isset($tomorrow))
-            $tomorrow = strtotime("tomorrow");
-
-        if (!isset($today))
-            $today = strtotime("today");
-
-        $time = is_numeric($timestamp) ? $timestamp : strtotime($timestamp) ;
-
-        if (!isset($format)) {
-            if ($time < $tomorrow and $time >= $today)
-                return __("Today");
-
+        if (!isset($format))
             $format = (ADMIN) ? "Y-m-d" : "d F Y" ;
-        }
 
-        return when($format, $time);
-    }
-
-    /**
-     * Function: twig_filter_time
-     * Returns a <time> HTML element, created using twig_filter_date_format().
-     */
-    function twig_filter_time($timestamp, $format = null): string {
-        $string = twig_filter_date_format($timestamp, $format);
-        $datetime = twig_filter_date_format($timestamp, "c");
-
-        return "<time datetime=\"".$datetime."\">".$string."</time>";
+        return when($format, $timestamp);
     }
 
     /**
