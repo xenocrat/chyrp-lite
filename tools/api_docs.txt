@@ -2015,9 +2015,9 @@ Function: now
 Alias to strtotime, for prettiness like now("+1 day").
 
 
-Function: translate_format
+Function: convert_datetime
 --------------------------
-Translates datetime formatting from PHP to ICU format.
+Converts datetime formatting from PHP to ICU format.
 
 Parameters:
     $formatting - The datetime formatting.
