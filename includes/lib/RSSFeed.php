@@ -49,7 +49,7 @@
             if (!empty($subtitle))
                 echo '<description>'.strip_tags($subtitle).'</description>'."\n";
 
-            echo '<lastBuildDate>'.when("r", oneof($updated, time())).'</lastBuildDate>'."\n";
+            echo '<lastBuildDate>'.when(DATE_RSS, oneof($updated, time())).'</lastBuildDate>'."\n";
             echo '<link>'.url("/", MainController::current()).'</link>'."\n";
             echo '<generator>'.CHYRP_IDENTITY.'</generator>'."\n";
         }
@@ -86,7 +86,7 @@
             echo '<item>'."\n";
             echo '<title>'.strip_tags($title).'</title>'."\n";
             echo '<guid>'.fix($id).'</guid>'."\n";
-            echo '<pubDate>'.when("r", $published).'</pubDate>'."\n";
+            echo '<pubDate>'.when(DATE_RSS, $published).'</pubDate>'."\n";
             echo '<link>'.fix($link).'</link>'."\n";
             echo '<description>'.fix($content, false, true).'</description>'."\n";
 
