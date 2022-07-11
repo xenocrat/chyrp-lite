@@ -48,7 +48,7 @@
                 echo '<subtitle>'.fix($subtitle).'</subtitle>'."\n";
 
             echo '<id>'.fix(oneof($id, self_url())).'</id>'."\n";
-            echo '<updated>'.when("c", oneof($updated, time())).'</updated>'."\n";
+            echo '<updated>'.when(DATE_ATOM, oneof($updated, time())).'</updated>'."\n";
             echo '<link href="'.self_url().'" rel="self" type="application/atom+xml" />'."\n";
             echo '<generator uri="http://chyrplite.net/" version="'.CHYRP_VERSION.'">'.
                  CHYRP_IDENTITY.
@@ -87,8 +87,8 @@
             echo '<entry>'."\n";
             echo '<title type="html">'.fix($title, false, true).'</title>'."\n";
             echo '<id>'.fix($id).'</id>'."\n";
-            echo '<updated>'.when("c", oneof($updated, $published)).'</updated>'."\n";
-            echo '<published>'.when("c", $published).'</published>'."\n";
+            echo '<updated>'.when(DATE_ATOM, oneof($updated, $published)).'</updated>'."\n";
+            echo '<published>'.when(DATE_ATOM, $published).'</published>'."\n";
             echo '<link rel="alternate" type="text/html" href="'.fix($link, true).'" />'."\n";
             echo '<author>'."\n";
             echo '<name>'.fix(oneof($name, __("Guest"))).'</name>'."\n";
