@@ -1300,7 +1300,7 @@
                 $posts_atom.= '<title>'.fix($config->name).' | Posts</title>'."\n";
                 $posts_atom.= '<subtitle>'.fix($config->description).'</subtitle>'."\n";
                 $posts_atom.= '<id>'.fix($config->url).'</id>'."\n";
-                $posts_atom.= '<updated>'.date("c").'</updated>'."\n";
+                $posts_atom.= '<updated>'.date(DATE_ATOM).'</updated>'."\n";
                 $posts_atom.= '<link href="'.fix($config->url, true).'" rel="alternate" type="text/html" />'."\n";
                 $posts_atom.= '<generator uri="http://chyrp.net/" version="'.CHYRP_VERSION.'">Chyrp</generator>'."\n";
 
@@ -1311,8 +1311,8 @@
                     $posts_atom.= '<entry xml:base="'.$post->url().'">'."\n";
                     $posts_atom.= '<title type="html">'.fix($title, false, true).'</title>'."\n";
                     $posts_atom.= '<id>'.fix(url("id/post/".$post->id, MainController::current())).'</id>'."\n";
-                    $posts_atom.= '<updated>'.when("c", $updated).'</updated>'."\n";
-                    $posts_atom.= '<published>'.when("c", $post->created_at).'</published>'."\n";
+                    $posts_atom.= '<updated>'.when(DATE_ATOM, $updated).'</updated>'."\n";
+                    $posts_atom.= '<published>'.when(DATE_ATOM, $post->created_at).'</published>'."\n";
                     $posts_atom.= '<author chyrp:user_id="'.$post->user_id.'">'."\n";
                     $posts_atom.= '<name>'.fix(oneof($post->user->full_name, $post->user->login)).'</name>'."\n";
 
@@ -1355,7 +1355,7 @@
                 $pages_atom.= '<title>'.fix($config->name).' | Pages</title>'."\n";
                 $pages_atom.= '<subtitle>'.fix($config->description).'</subtitle>'."\n";
                 $pages_atom.= '<id>'.fix($config->url).'</id>'."\n";
-                $pages_atom.= '<updated>'.date("c").'</updated>'."\n";
+                $pages_atom.= '<updated>'.date(DATE_ATOM).'</updated>'."\n";
                 $pages_atom.= '<link href="'.fix($config->url, true).'" rel="alternate" type="text/html" />'."\n";
                 $pages_atom.= '<generator uri="http://chyrp.net/" version="'.CHYRP_VERSION.'">Chyrp</generator>'."\n";
 
@@ -1365,8 +1365,8 @@
                     $pages_atom.= '<entry xml:base="'.$page->url().'" chyrp:parent_id="'.$page->parent_id.'">'."\n";
                     $pages_atom.= '<title type="html">'.fix($page->title, false, true).'</title>'."\n";
                     $pages_atom.= '<id>'.fix(url("id/page/".$page->id, MainController::current())).'</id>'."\n";
-                    $pages_atom.= '<updated>'.when("c", $updated).'</updated>'."\n";
-                    $pages_atom.= '<published>'.when("c", $page->created_at).'</published>'."\n";
+                    $pages_atom.= '<updated>'.when(DATE_ATOM, $updated).'</updated>'."\n";
+                    $pages_atom.= '<published>'.when(DATE_ATOM, $page->created_at).'</published>'."\n";
                     $pages_atom.= '<author chyrp:user_id="'.fix($page->user_id).'">'."\n";
                     $pages_atom.= '<name>'.fix(oneof($page->user->full_name, $page->user->login)).'</name>'."\n";
 
