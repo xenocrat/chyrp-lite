@@ -89,8 +89,8 @@
                 "url"            => $link,
                 "title"          => strip_tags($title),
                 "content_html"   => $content,
-                "date_published" => $published,
-                "date_modified"  => when("c", oneof($updated, $published)),
+                "date_published" => when(DATE_RFC3339, $published),
+                "date_modified"  => when(DATE_RFC3339, oneof($updated, $published)),
                 "authors"        => array(array("name" => oneof($name, __("Guest"))))
             );
 
