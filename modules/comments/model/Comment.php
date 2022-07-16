@@ -182,38 +182,29 @@
                                "created_at"   => fallback($created_at, datetime()),
                                "updated_at"   => fallback($updated_at, "0001-01-01 00:00:00")));
 
-            $new = new self($sql->latest("comments"), array("skip_where" => true));
+            $comment = new self($sql->latest("comments"), array("skip_where" => true));
 
-            if ($new->status == self::STATUS_APPROVED) {
-                $comments = self::find(array("skip_where" => true,
-                                             "where"      => array("post_id"    => $new->post_id,
-                                                                   "user_id !=" => $new->user_id,
-                                                                   "status"     => self::STATUS_APPROVED,
-                                                                   "notify"     => true)),
-                                       array("filter" => false));
+            if ($comment->status == self::STATUS_APPROVED) {
+                $done = array();
 
-                $notifications = array();
+                $list = self::find(array("skip_where" => true,
+                                         "where"  => array("post_id"    => $comment->post_id,
+                                                           "user_id !=" => $comment->user_id,
+                                                           "status"     => self::STATUS_APPROVED,
+                                                           "notify"     => true)));
 
-                foreach ($comments as $comment)
-                    $notifications[$comment->author_email] = $comment->user_id;
+                foreach ($list as $earlier) {
+                    if (in_array($earlier->author_email, $done))
+                        continue;
 
-                foreach ($notifications as $to => $id)
-                    correspond("comment", array("to"      => $to,
-                                                "user_id" => $id,
-                                                "post_id" => $new->post_id,
-                                                "author"  => $new->author,
-                                                "body"    => $new->body,
-                                                "link1"   => $new->url(),
-                                                "link2"   => $config->url.
-                                                             "/?action=unsubscribe&amp;email=".
-                                                             urlencode($to).
-                                                             "&amp;id=".$new->post_id.
-                                                             "&amp;token=".token($to)));
+                    Modules::$instances["comments"]::email_new_comment($comment, $earlier);
+                    $done[] = $earlier->author_email;
+                }
             }
 
-            Trigger::current()->call("add_comment", $new);
+            Trigger::current()->call("add_comment", $comment);
 
-            return $new;
+            return $comment;
         }
 
         /**

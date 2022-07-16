@@ -521,16 +521,7 @@
                                       ($config->email_activation) ? false : true);
 
                     if (!$user->approved) {
-                        correspond("activate",
-                                   array("to"      => $user->email,
-                                         "user_id" => $user->id,
-                                         "login"   => $user->login,
-                                         "link"    => $config->url.
-                                                      "/?action=activate&amp;login=".
-                                                      urlencode($user->login).
-                                                      "&amp;token=".
-                                                      token(array($user->login, $user->email))));
-
+                        email_activate_account($user);
                         Flash::notice(__("We have emailed you an activation link."), "/");
                     }
 
@@ -594,14 +585,8 @@
                 Flash::warning(__("Invalid authentication token."), "/");
 
             $new_password = random(8);
-
-            correspond("password",
-                       array("to"       => $user->email,
-                             "user_id"  => $user->id,
-                             "login"    => $user->login,
-                             "password" => $new_password));
-
             $user = $user->update(null, User::hash_password($new_password));
+            email_new_password($user, $new_password);
 
             Flash::notice(__("We have emailed you a new password."), "login");
         }
@@ -740,15 +725,7 @@
                     $user = new User(array("login" => $_POST['login']));
 
                     if (!$user->no_results)
-                        correspond("reset",
-                                   array("to"      => $user->email,
-                                         "user_id" => $user->id,
-                                         "login"   => $user->login,
-                                         "link"    => $config->url.
-                                                      "/?action=reset&amp;login=".
-                                                      urlencode($user->login).
-                                                      "&amp;token=".
-                                                      token(array($user->login, $user->email))));
+                        email_reset_password($user);
 
                     Flash::notice(__("If that username is in our database, we will email you a password reset link."), "/");
                 }

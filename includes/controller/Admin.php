@@ -748,13 +748,7 @@
                               ($config->email_activation and empty($_POST['activated'])) ? false : true);
 
             if (!$user->approved)
-                correspond("activate",
-                           array("to"      => $user->email,
-                                 "user_id" => $user->id,
-                                 "login"   => $user->login,
-                                 "link"    => $config->url.
-                                              "/?action=activate&amp;login=".urlencode($user->login).
-                                              "&amp;token=".token(array($user->login, $user->email))));
+                email_activate_account($user);
 
             Flash::notice(__("User added."), "manage_users");
         }
@@ -854,13 +848,7 @@
                                   ($config->email_activation and empty($_POST['activated'])) ? false : true);
 
             if (!$user->approved)
-                correspond("activate",
-                           array("to"      => $user->email,
-                                 "user_id" => $user->id,
-                                 "login"   => $user->login,
-                                 "link"    => $config->url.
-                                              "/?action=activate&amp;login=".urlencode($user->login).
-                                              "&amp;token=".token(array($user->login, $user->email))));
+                email_activate_account($user);
 
             Flash::notice(__("User updated."), "manage_users");
         }

@@ -1017,20 +1017,30 @@
             return $atom;
         }
 
-        public function correspond_comment($params): array {
-            $params["subject"] = _f("New Comment at %s", Config::current()->name, "comments");
-            $params["message"] = _f("%s commented on a blog post:", $params["author"], "comments").
-                                 "\r\n".
-                                 unfix($params["link1"]).
-                                 "\r\n".
-                                 "\r\n".
-                                 truncate(strip_tags($params["body"]), 60).
-                                 "\r\n".
-                                 "\r\n".
-                                 __("Unsubscribe from this conversation:", "comments").
-                                 "\r\n".
-                                 unfix($params["link2"]);
+        public static function email_new_comment($new_comment, $earlier_comment): bool {
+            $config  = Config::current();
+            $trigger = Trigger::current();
+            $mailto  = $earlier_comment->author_email;
 
-            return $params;
+            if ($trigger->exists("correspond_new_comment"))
+                return $trigger->call("correspond_new_comment", $new_comment, $earlier_comment);
+
+            $email_headers = "From: ".$config->email."\r\n"."X-Mailer: ".CHYRP_IDENTITY;
+            $email_subject = __f("New Comment at %s", $config->name, "comments");
+            $email_message = _f("%s commented on a blog post:", $new_comment->author, "comments").
+                             "\r\n".
+                             unfix($new_comment->url()).
+                             "\r\n".
+                             "\r\n".
+                             truncate(strip_tags($new_comment->body), 60).
+                             "\r\n".
+                             "\r\n".
+                             __("Unsubscribe from this conversation:", "comments").
+                             "\r\n".
+                             $config->url.
+                             "/?action=unsubscribe&amp;email=".urlencode($mailto).
+                             "&amp;id=".$new_comment->post_id."&amp;token=".token($mailto);
+
+            return email($mailto, $email_subject, $email_message, $email_headers);
         }
     }

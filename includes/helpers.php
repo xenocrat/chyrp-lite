@@ -2786,7 +2786,7 @@
 
     /**
      * Function: email
-     * Send an email using PHP's mail() function or an alternative.
+     * Sends an email using PHP's mail() function or an alternative.
      */
     function email(): bool {
         $function = "mail";
@@ -2795,74 +2795,92 @@
     }
 
     /**
-     * Function: correspond
-     * Send an email correspondence to a user about an action we took.
+     * Function: email_activate_account
+     * Sends an activation email to a newly registered user.
      *
      * Parameters:
-     *     $action - About which action are we corresponding with the user?
-     *     $params - An indexed array of parameters associated with this action.
-     *               $params["to"] is required: the address to be emailed.
+     *     $user - The user to receive the email.
      */
-    function correspond($action, $params): bool {
+    function email_activate_account($user): bool {
         $config  = Config::current();
         $trigger = Trigger::current();
 
-        if (!$config->email_correspondence or !isset($params["to"]))
-            return false;
+        $url = $config->url.
+               "/?action=activate&amp;login=".urlencode($user->login).
+               "&amp;token=".token(array($user->login, $user->email));
 
-        $params["headers"] = "From: ".$config->email."\r\n".
-                             "Reply-To: ".$config->email."\r\n".
-                             "X-Mailer: ".CHYRP_IDENTITY;
+        if ($trigger->exists("correspond_activate_account"))
+            return $trigger->call("correspond_activate_account", $user, $url);
 
-        fallback($params["subject"], "");
-        fallback($params["message"], "");
+        $email_headers = "From: ".$config->email."\r\n"."X-Mailer: ".CHYRP_IDENTITY;
+        $email_subject = _f("Activate your account at %s", $config->name);
+        $email_message = _f("Hello, %s.", $user->login).
+                         "\r\n".
+                         "\r\n".
+                         __("You are receiving this message because you registered a new account.").
+                         "\r\n".
+                         "\r\n".
+                         __("Visit this link to activate your account:").
+                         "\r\n".$url;
 
-        switch ($action) {
-            case "activate":
-                $params["subject"] = _f("Activate your account at %s", $config->name);
-                $params["message"] = _f("Hello, %s.", $params["login"]).
-                                     "\r\n".
-                                     "\r\n".
-                                     __("You are receiving this message because you registered a new account.").
-                                     "\r\n".
-                                     "\r\n".
-                                     __("Visit this link to activate your account:").
-                                     "\r\n".
-                                     unfix($params["link"]);
+        return email($user->email, $email_subject, $email_message, $email_headers);
+    }
 
-                break;
+    /**
+     * Function: email_reset_password
+     * Sends a password reset email to a user.
+     *
+     * Parameters:
+     *     $user - The user to receive the email.
+     */
+    function email_reset_password($user): bool {
+        $config  = Config::current();
+        $trigger = Trigger::current();
 
-            case "reset":
-                $params["subject"] = _f("Reset your password at %s", $config->name);
-                $params["message"] = _f("Hello, %s.", $params["login"]).
-                                     "\r\n".
-                                     "\r\n".
-                                     __("You are receiving this message because you requested a new password.").
-                                     "\r\n".
-                                     "\r\n".
-                                     __("Visit this link to reset your password:").
-                                     "\r\n".
-                                     unfix($params["link"]);
+        $url = $config->url.
+               "/?action=reset&amp;login=".urlencode($user->login).
+               "&amp;token=".token(array($user->login, $user->email));
 
-                break;
+        if ($trigger->exists("correspond_reset_password"))
+            return $trigger->call("correspond_reset_password", $user, $url);
 
-            case "password":
-                $params["subject"] = _f("Your new password for %s", $config->name);
-                $params["message"] = _f("Hello, %s.", $params["login"]).
-                                     "\r\n".
-                                     "\r\n".
-                                     _f("Your new password is: %s", $params["password"]);
+        $email_headers = "From: ".$config->email."\r\n"."X-Mailer: ".CHYRP_IDENTITY;
+        $email_subject = _f("Reset your password at %s", $config->name);
+        $email_message = _f("Hello, %s.", $user->login).
+                         "\r\n".
+                         "\r\n".
+                         __("You are receiving this message because you requested a new password.").
+                         "\r\n".
+                         "\r\n".
+                         __("Visit this link to reset your password:").
+                         "\r\n".$url;
 
-                break;
+        return email($user->email, $email_subject, $email_message, $email_headers);
+    }
 
-            default:
-                $trigger->filter($params, "correspond_".$action);
-        }
+    /**
+     * Function: email_new_password
+     * Sends a new password to a user.
+     *
+     * Parameters:
+     *     $user - The user to receive the email.
+     *     $new_password - The new password in clear text.
+     */
+    function email_new_password($user, $new_password): bool {
+        $config  = Config::current();
+        $trigger = Trigger::current();
 
-        if ($trigger->exists("send_correspondence"))
-            return $trigger->call("send_correspondence", $action, $params);
+        if ($trigger->exists("correspond_new_password"))
+            return $trigger->call("correspond_new_password", $user, $new_password);
 
-        return email($params["to"], $params["subject"], $params["message"], $params["headers"]);
+        $email_headers = "From: ".$config->email."\r\n"."X-Mailer: ".CHYRP_IDENTITY;
+        $email_subject = _f("Your new password for %s", $config->name);
+        $email_message = _f("Hello, %s.", $user->login).
+                         "\r\n".
+                         "\r\n".
+                         _f("Your new password is: %s", $new_password);
+
+        return email($user->email, $email_subject, $email_message, $email_headers);
     }
 
     /**
