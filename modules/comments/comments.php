@@ -1022,11 +1022,14 @@
             $trigger = Trigger::current();
             $mailto  = $earlier_comment->author_email;
 
+            $url = "/?action=unsubscribe&amp;email=".urlencode($mailto).
+                   "&amp;id=".$new_comment->post_id."&amp;token=".token($mailto);
+
             if ($trigger->exists("correspond_new_comment"))
-                return $trigger->call("correspond_new_comment", $new_comment, $earlier_comment);
+                return $trigger->call("correspond_new_comment", $new_comment, $earlier_comment, $url);
 
             $email_headers = "From: ".$config->email."\r\n"."X-Mailer: ".CHYRP_IDENTITY;
-            $email_subject = __f("New Comment at %s", $config->name, "comments");
+            $email_subject = _f("New Comment at %s", $config->name, "comments");
             $email_message = _f("%s commented on a blog post:", $new_comment->author, "comments").
                              "\r\n".
                              unfix($new_comment->url()).
@@ -1037,9 +1040,7 @@
                              "\r\n".
                              __("Unsubscribe from this conversation:", "comments").
                              "\r\n".
-                             $config->url.
-                             "/?action=unsubscribe&amp;email=".urlencode($mailto).
-                             "&amp;id=".$new_comment->post_id."&amp;token=".token($mailto);
+                             unfix($url);
 
             return email($mailto, $email_subject, $email_message, $email_headers);
         }

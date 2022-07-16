@@ -2821,7 +2821,8 @@
                          "\r\n".
                          "\r\n".
                          __("Visit this link to activate your account:").
-                         "\r\n".$url;
+                         "\r\n".
+                         unfix($url);
 
         return email($user->email, $email_subject, $email_message, $email_headers);
     }
@@ -2853,7 +2854,8 @@
                          "\r\n".
                          "\r\n".
                          __("Visit this link to reset your password:").
-                         "\r\n".$url;
+                         "\r\n".
+                         unfix($url);
 
         return email($user->email, $email_subject, $email_message, $email_headers);
     }
