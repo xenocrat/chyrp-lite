@@ -551,7 +551,9 @@
             if ($user->no_results)
                 Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
 
-            if ($_GET['token'] != token(array($user->login, $user->email)))
+            $hash = token($user->login);
+
+            if (!hash_equals($hash, $_GET['token'])
                 Flash::warning(__("Invalid authentication token."), "/");
 
             if ($user->approved)
@@ -728,10 +730,10 @@
             if ($user->no_results)
                 Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
 
-            $hash = token(array($_REQUEST['issue'], $user->login, $user->email));
+            $hash = token(array($_REQUEST['issue'], $user->login));
 
             if (!hash_equals($hash, $_REQUEST['token']))
-                Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
+                Flash::warning(__("Invalid authentication token."), "/");
 
             if (!empty($_POST)) {
                 if (!isset($_POST['hash']) or !authenticate($_POST['hash']))

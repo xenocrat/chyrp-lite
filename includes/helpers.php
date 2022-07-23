@@ -2807,7 +2807,7 @@
 
         $url = $config->url."/?action=activate".
                "&amp;login=".urlencode($user->login).
-               "&amp;token=".token(array($user->login, $user->email));
+               "&amp;token=".token($user->login);
 
         if ($trigger->exists("correspond_activate_account"))
             return $trigger->call("correspond_activate_account", $user, $url);
@@ -2842,7 +2842,7 @@
         $url = $config->url."/?action=reset_password".
                "&amp;issue=".$issue.
                "&amp;login=".urlencode($user->login).
-               "&amp;token=".token(array($issue, $user->login, $user->email));
+               "&amp;token=".token(array($issue, $user->login));
 
         if ($trigger->exists("correspond_reset_password"))
             return $trigger->call("correspond_reset_password", $user, $url);
