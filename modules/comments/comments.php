@@ -714,7 +714,7 @@
             $hash = token($_GET['email']);
 
             if (!hash_equals($hash, $_GET['token']))
-                Flash::notice(__("Invalid authentication token."), "/");
+                Flash::warning(__("Invalid authentication token."), "/");
 
             SQL::current()->update("comments",
                                    array("post_id" => $post->id,
