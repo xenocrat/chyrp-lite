@@ -186,7 +186,6 @@
 
             if ($comment->status == self::STATUS_APPROVED) {
                 $done = array();
-
                 $list = self::find(array("skip_where" => true,
                                          "where"  => array("post_id"    => $comment->post_id,
                                                            "user_id !=" => $comment->user_id,
