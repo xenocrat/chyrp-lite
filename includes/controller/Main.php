@@ -553,7 +553,7 @@
 
             $hash = token($user->login);
 
-            if (!hash_equals($hash, $_GET['token'])
+            if (!hash_equals($hash, $_GET['token']))
                 Flash::warning(__("Invalid authentication token."), "/");
 
             if ($user->approved)
