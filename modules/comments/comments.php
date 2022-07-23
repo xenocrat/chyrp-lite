@@ -711,7 +711,9 @@
             if (!is_email($_GET['email']))
                 Flash::warning(__("Invalid email address."), "/");
 
-            if ($_GET['token'] != token($_GET['email']))
+            $hash = token($_GET['email']);
+
+            if (!hash_equals($hash, $_GET['token']))
                 Flash::notice(__("Invalid authentication token."), "/");
 
             SQL::current()->update("comments",
@@ -1018,9 +1020,9 @@
         }
 
         public static function email_new_comment($new_comment, $earlier_comment): bool {
-            $config  = Config::current();
+            $config = Config::current();
             $trigger = Trigger::current();
-            $mailto  = $earlier_comment->author_email;
+            $mailto = $earlier_comment->author_email;
 
             $url = "/?action=unsubscribe&amp;email=".urlencode($mailto).
                    "&amp;id=".$new_comment->post_id."&amp;token=".token($mailto);
