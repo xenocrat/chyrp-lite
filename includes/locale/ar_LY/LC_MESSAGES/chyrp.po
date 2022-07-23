@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: chyrplite\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-07-23 14:47+0100\n"
+"PO-Revision-Date: 2022-07-23 22:55+0100\n"
 "Last-Translator: Anas Mohammed Almzoghy <a.almzoghy@gmail.com>\n"
 "Language-Team: Arabic\n"
 "Language: ar_LY\n"
@@ -240,9 +240,9 @@ msgstr "الريشة غير موجودة."
 #: includes/controller/Ajax.php:48 includes/controller/Ajax.php:74
 #: includes/controller/Ajax.php:94 includes/controller/Ajax.php:132
 #: includes/controller/Ajax.php:163 includes/controller/Main.php:480
-#: includes/controller/Main.php:555 includes/controller/Main.php:577
-#: includes/controller/Main.php:633 includes/controller/Main.php:689
-#: includes/controller/Main.php:738
+#: includes/controller/Main.php:557 includes/controller/Main.php:579
+#: includes/controller/Main.php:635 includes/controller/Main.php:691
+#: includes/controller/Main.php:736 includes/controller/Main.php:740
 msgid "Invalid authentication token."
 msgstr "رمز المصادقة غير صالح."
 
@@ -385,13 +385,13 @@ msgid "That username is already in use."
 msgstr "اسم المستخدم هذا مُسجل مسبقاً."
 
 #: includes/controller/Admin.php:711 includes/controller/Main.php:491
-#: includes/controller/Main.php:741 install.php:600
+#: includes/controller/Main.php:743 install.php:600
 msgid "Passwords cannot be blank."
 msgstr "لا يمكن أن تكون كلمات المرور فارغة."
 
 #: includes/controller/Admin.php:714 includes/controller/Admin.php:814
-#: includes/controller/Main.php:493 includes/controller/Main.php:637
-#: includes/controller/Main.php:743 install.php:535 install.php:602
+#: includes/controller/Main.php:493 includes/controller/Main.php:639
+#: includes/controller/Main.php:745 install.php:535 install.php:602
 msgid "Passwords do not match."
 msgstr "كلمة المرور غير متطابقة."
 
@@ -401,18 +401,18 @@ msgstr "الرجاء وضع كلمة مرور أقوى لهذا المستخدم
 
 #: includes/controller/Admin.php:720 includes/controller/Admin.php:822
 #: includes/controller/Admin.php:1960 includes/controller/Main.php:498
-#: includes/controller/Main.php:643 install.php:605
+#: includes/controller/Main.php:645 install.php:605
 msgid "Email address cannot be blank."
 msgstr "لا يمكن أن يكون عنوان البريد الإلكتروني فارغاً."
 
 #: includes/controller/Admin.php:723 includes/controller/Admin.php:825
 #: includes/controller/Admin.php:1963 includes/controller/Main.php:500
-#: includes/controller/Main.php:645 install.php:607
+#: includes/controller/Main.php:647 install.php:607
 msgid "Invalid email address."
 msgstr "عنوان البريد الإلكتروني غير صالح."
 
 #: includes/controller/Admin.php:726 includes/controller/Admin.php:828
-#: includes/controller/Main.php:506 includes/controller/Main.php:648
+#: includes/controller/Main.php:506 includes/controller/Main.php:650
 msgid "Invalid website URL."
 msgstr "رابط الموقع غير صالح."
 
@@ -693,7 +693,7 @@ msgstr "لا شيء هنا بعد!"
 msgid "Page created."
 msgstr "تم إنشاء الصفحة."
 
-#: includes/controller/Admin.php:2157 includes/controller/Main.php:573
+#: includes/controller/Admin.php:2157 includes/controller/Main.php:575
 msgid "You are already logged in."
 msgstr "أنت مُسجل الدخول بالفعل."
 
@@ -842,8 +842,8 @@ msgstr "لا يمكنك التسجيل لأنك بالفعل مُسجل الدخ
 msgid "Please enter a username for your account."
 msgstr "الرجاء إدخال اسم المستخدم للحساب الخاص بك."
 
-#: includes/controller/Main.php:495 includes/controller/Main.php:639
-#: includes/controller/Main.php:745
+#: includes/controller/Main.php:495 includes/controller/Main.php:641
+#: includes/controller/Main.php:747
 msgid "Please consider setting a stronger password for your account."
 msgstr "الرجاء وضع كلمة مرور أقوى لحسابك."
 
@@ -855,7 +855,7 @@ msgstr "كلمة التحقق غير صحيحة."
 msgid "We have emailed you an activation link."
 msgstr "تم إرسال رابط التفعيل بريدك الإلكتروني."
 
-#: includes/controller/Main.php:531 includes/controller/Main.php:561
+#: includes/controller/Main.php:531 includes/controller/Main.php:563
 msgid "Your account is now active."
 msgstr "حسابك مُفعل الآن."
 
@@ -867,72 +867,72 @@ msgstr "تسجيل"
 msgid "You cannot activate an account because you are already logged in."
 msgstr "لا يمكنك تفعيل الحساب لأنك مسجل الدخول مسبقاً."
 
-#: includes/controller/Main.php:552 includes/controller/Main.php:685
-#: includes/controller/Main.php:729 includes/controller/Main.php:734
+#: includes/controller/Main.php:552 includes/controller/Main.php:687
+#: includes/controller/Main.php:731
 msgid "Please contact the blog administrator for help with your account."
 msgstr "الرجاء الاتصال بمسؤول المدونة للحصول على المساعدة بخصوص حسابك."
 
-#: includes/controller/Main.php:558
+#: includes/controller/Main.php:560
 msgid "Your account has already been activated."
 msgstr "تم تفعيل حسابك مسبقاً."
 
-#: includes/controller/Main.php:586 includes/lib/XMLRPC.php:419
+#: includes/controller/Main.php:588 includes/lib/XMLRPC.php:419
 msgid "Incorrect username and/or password."
 msgstr "خطأ في اسم المستخدم أو كلمة المرور."
 
-#: includes/controller/Main.php:592
+#: includes/controller/Main.php:594
 msgid "You must activate your account before you log in."
 msgstr "يجب عليك تفعيل حسابك قبل تسجيل الدخول."
 
-#: includes/controller/Main.php:596
+#: includes/controller/Main.php:598
 msgid "Logged in."
 msgstr "تم تسجيل الدخول."
 
-#: includes/controller/Main.php:600 includes/error.php:371
+#: includes/controller/Main.php:602 includes/error.php:371
 msgid "Log in"
 msgstr "تسجيل الدخول"
 
-#: includes/controller/Main.php:611
+#: includes/controller/Main.php:613
 msgid "You aren't logged in."
 msgstr "لم تقم بتسجيل الدخول."
 
-#: includes/controller/Main.php:618
+#: includes/controller/Main.php:620
 msgid "Logged out."
 msgstr "تم تسجيل الخروج."
 
-#: includes/controller/Main.php:629
+#: includes/controller/Main.php:631
 msgid "You must be logged in to access user controls."
 msgstr "يجب عليك تسجيل الدخول للوصول إلى الملف الشخصي."
 
-#: includes/controller/Main.php:667 includes/controller/Main.php:749
+#: includes/controller/Main.php:669 includes/controller/Main.php:751
 msgid "Your profile has been updated."
 msgstr "تم تحديث ملفك الشخصي."
 
-#: includes/controller/Main.php:671
+#: includes/controller/Main.php:673
 msgid "Controls"
 msgstr "الملف الشخصي"
 
-#: includes/controller/Main.php:682 includes/controller/Main.php:715
+#: includes/controller/Main.php:684 includes/controller/Main.php:717
 msgid "You cannot reset your password because you are already logged in."
 msgstr "لا يمكنك إعادة تعيين كلمة المرور الخاصة بك لأنك مسجل الدخول مسبقاً."
 
-#: includes/controller/Main.php:692
+#: includes/controller/Main.php:694
 msgid "Please enter your username."
 msgstr "رجاءاً أدخل اسم المستخدم الخاص بك."
 
-#: includes/controller/Main.php:700
+#: includes/controller/Main.php:702
 msgid "We have emailed you a password reset link."
 msgstr "لقد أرسلنا إليك عبر البريد الإلكتروني رابط إعادة تعيين كلمة المرور."
 
-#: includes/controller/Main.php:704
+#: includes/controller/Main.php:706
 msgid "Lost password"
 msgstr "نسيت كلمة المرور"
 
-#: includes/controller/Main.php:724
+#: includes/controller/Main.php:726
 msgid "The link has expired. Please try again."
 msgstr "انتهت صلاحية الرابط. يرجى المحاولة مرة أخرى."
 
-#: includes/controller/Main.php:757
+#: includes/controller/Main.php:759
 msgid "Reset password"
 msgstr "إعادة تعيين كلمة المرور"
 

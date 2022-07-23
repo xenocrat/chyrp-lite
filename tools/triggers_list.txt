@@ -330,7 +330,7 @@ user_logged_in
 --------------
 Called from:
 	includes/controller/Main.php on line 529
-	includes/controller/Main.php on line 595
+	includes/controller/Main.php on line 597
 
 Arguments:
 	$user
@@ -339,13 +339,13 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 583
+	includes/controller/Main.php on line 585
 
 
 user_logged_out
 ---------------
 Called from:
-	includes/controller/Main.php on line 616
+	includes/controller/Main.php on line 618
 
 Arguments:
 	$user
@@ -354,7 +354,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 834
+	includes/controller/Main.php on line 836
 
 Arguments:
 	$post, $feed
@@ -1076,7 +1076,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 909
+	includes/controller/Main.php on line 911
 
 Target:
 	$this->context
