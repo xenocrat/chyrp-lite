@@ -303,10 +303,12 @@ msgid "Website"
 msgstr ""
 
 #: themes/topaz/forms/user/controls.twig:13
+#: themes/topaz/forms/user/reset_password.twig:7
 msgid "New password?"
 msgstr ""
 
 #: themes/topaz/forms/user/controls.twig:15
+#: themes/topaz/forms/user/reset_password.twig:9
 msgid "Confirm"
 msgstr ""
 
@@ -315,7 +317,7 @@ msgid "Update"
 msgstr ""
 
 #: themes/topaz/forms/user/login.twig:7
-#: themes/topaz/forms/user/lost_password.twig:8
+#: themes/topaz/forms/user/lost_password.twig:7
 #: themes/topaz/forms/user/register.twig:7
 msgid "Username"
 msgstr ""
@@ -334,16 +336,17 @@ msgstr ""
 msgid "Lost password"
 msgstr ""
 
-#: themes/topaz/forms/user/lost_password.twig:7
-msgid "Please enter your username below and we will email you a new password for your account."
-msgstr ""
-
-#: themes/topaz/forms/user/lost_password.twig:12
+#: themes/topaz/forms/user/lost_password.twig:11
+#: themes/topaz/forms/user/reset_password.twig:16
 msgid "Submit"
 msgstr ""
 
 #: themes/topaz/forms/user/register.twig:11
 msgid "(again)"
+msgstr ""
+
+#: themes/topaz/forms/user/reset_password.twig:5
+msgid "Reset password"
 msgstr ""
 
 #: themes/topaz/info.php:3

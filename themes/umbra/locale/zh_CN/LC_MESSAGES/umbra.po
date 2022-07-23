@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/umbra/content/comment.twig:3
@@ -182,10 +182,12 @@ msgid "Website"
 msgstr "站点"
 
 #: themes/umbra/forms/user/controls.twig:13
+#: themes/umbra/forms/user/reset_password.twig:7
 msgid "New password?"
 msgstr "新密码？"
 
 #: themes/umbra/forms/user/controls.twig:15
+#: themes/umbra/forms/user/reset_password.twig:9
 msgid "Confirm"
 msgstr "确认密码"
 
@@ -199,7 +201,7 @@ msgid "Log in"
 msgstr "登陆"
 
 #: themes/umbra/forms/user/login.twig:7
-#: themes/umbra/forms/user/lost_password.twig:8
+#: themes/umbra/forms/user/lost_password.twig:7
 #: themes/umbra/forms/user/register.twig:7
 msgid "Username"
 msgstr "用户名"
@@ -217,13 +219,8 @@ msgstr "需要帮助！"
 msgid "Lost password"
 msgstr "忘记密码"
 
-#: themes/umbra/forms/user/lost_password.twig:7
-msgid ""
-"Please enter your username below and we will email you a new password for "
-"your account."
-msgstr "请在下面输入您的用户名，我们会通过电子邮件向您发送新帐户的密码。"
-
-#: themes/umbra/forms/user/lost_password.twig:12
+#: themes/umbra/forms/user/lost_password.twig:11
+#: themes/umbra/forms/user/reset_password.twig:16
 msgid "Submit"
 msgstr "提交"
 
@@ -236,6 +233,10 @@ msgstr "注册"
 #: themes/umbra/forms/user/register.twig:11
 msgid "(again)"
 msgstr "(再一次)"
+
+#: themes/umbra/forms/user/reset_password.twig:5
+msgid "Reset password"
+msgstr "重置密码"
 
 #: themes/umbra/info.php:3
 msgid "Umbra"

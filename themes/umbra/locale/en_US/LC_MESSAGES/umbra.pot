@@ -176,10 +176,12 @@ msgid "Website"
 msgstr ""
 
 #: themes/umbra/forms/user/controls.twig:13
+#: themes/umbra/forms/user/reset_password.twig:7
 msgid "New password?"
 msgstr ""
 
 #: themes/umbra/forms/user/controls.twig:15
+#: themes/umbra/forms/user/reset_password.twig:9
 msgid "Confirm"
 msgstr ""
 
@@ -194,7 +196,7 @@ msgid "Log in"
 msgstr ""
 
 #: themes/umbra/forms/user/login.twig:7
-#: themes/umbra/forms/user/lost_password.twig:8
+#: themes/umbra/forms/user/lost_password.twig:7
 #: themes/umbra/forms/user/register.twig:7
 msgid "Username"
 msgstr ""
@@ -213,11 +215,8 @@ msgstr ""
 msgid "Lost password"
 msgstr ""
 
-#: themes/umbra/forms/user/lost_password.twig:7
-msgid "Please enter your username below and we will email you a new password for your account."
-msgstr ""
-
-#: themes/umbra/forms/user/lost_password.twig:12
+#: themes/umbra/forms/user/lost_password.twig:11
+#: themes/umbra/forms/user/reset_password.twig:16
 msgid "Submit"
 msgstr ""
 
@@ -229,6 +228,10 @@ msgstr ""
 
 #: themes/umbra/forms/user/register.twig:11
 msgid "(again)"
+msgstr ""
+
+#: themes/umbra/forms/user/reset_password.twig:5
+msgid "Reset password"
 msgstr ""
 
 #: themes/umbra/info.php:3

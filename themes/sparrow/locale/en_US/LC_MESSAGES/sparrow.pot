@@ -202,10 +202,12 @@ msgid "Website"
 msgstr ""
 
 #: themes/sparrow/forms/user/controls.twig:13
+#: themes/sparrow/forms/user/reset_password.twig:7
 msgid "New password?"
 msgstr ""
 
 #: themes/sparrow/forms/user/controls.twig:15
+#: themes/sparrow/forms/user/reset_password.twig:9
 msgid "Confirm"
 msgstr ""
 
@@ -220,7 +222,7 @@ msgid "Log in"
 msgstr ""
 
 #: themes/sparrow/forms/user/login.twig:7
-#: themes/sparrow/forms/user/lost_password.twig:8
+#: themes/sparrow/forms/user/lost_password.twig:7
 #: themes/sparrow/forms/user/register.twig:7
 msgid "Username"
 msgstr ""
@@ -239,11 +241,8 @@ msgstr ""
 msgid "Lost password"
 msgstr ""
 
-#: themes/sparrow/forms/user/lost_password.twig:7
-msgid "Please enter your username below and we will email you a new password for your account."
-msgstr ""
-
-#: themes/sparrow/forms/user/lost_password.twig:12
+#: themes/sparrow/forms/user/lost_password.twig:11
+#: themes/sparrow/forms/user/reset_password.twig:16
 msgid "Submit"
 msgstr ""
 
@@ -255,6 +254,10 @@ msgstr ""
 
 #: themes/sparrow/forms/user/register.twig:11
 msgid "(again)"
+msgstr ""
+
+#: themes/sparrow/forms/user/reset_password.twig:5
+msgid "Reset password"
 msgstr ""
 
 #: themes/sparrow/info.php:3

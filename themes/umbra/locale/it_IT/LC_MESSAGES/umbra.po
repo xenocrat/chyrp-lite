@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/umbra/content/comment.twig:3
@@ -182,10 +182,12 @@ msgid "Website"
 msgstr "Sito web"
 
 #: themes/umbra/forms/user/controls.twig:13
+#: themes/umbra/forms/user/reset_password.twig:7
 msgid "New password?"
 msgstr "Nuova password?"
 
 #: themes/umbra/forms/user/controls.twig:15
+#: themes/umbra/forms/user/reset_password.twig:9
 msgid "Confirm"
 msgstr "Conferma"
 
@@ -199,7 +201,7 @@ msgid "Log in"
 msgstr "Accedi"
 
 #: themes/umbra/forms/user/login.twig:7
-#: themes/umbra/forms/user/lost_password.twig:8
+#: themes/umbra/forms/user/lost_password.twig:7
 #: themes/umbra/forms/user/register.twig:7
 msgid "Username"
 msgstr "Nome utente"
@@ -217,15 +219,8 @@ msgstr "Aiuto!"
 msgid "Lost password"
 msgstr "Password dimenticata"
 
-#: themes/umbra/forms/user/lost_password.twig:7
-msgid ""
-"Please enter your username below and we will email you a new password for "
-"your account."
-msgstr ""
-"Inserisci il tuo nome utente qui sotto e ti invieremo una nuova password per "
-"il tuo account."
-
-#: themes/umbra/forms/user/lost_password.twig:12
+#: themes/umbra/forms/user/lost_password.twig:11
+#: themes/umbra/forms/user/reset_password.twig:16
 msgid "Submit"
 msgstr "Invia"
 
@@ -238,6 +233,10 @@ msgstr "Registrati"
 #: themes/umbra/forms/user/register.twig:11
 msgid "(again)"
 msgstr "(ripeti)"
+
+#: themes/umbra/forms/user/reset_password.twig:5
+msgid "Reset password"
+msgstr "Ripristina password"
 
 #: themes/umbra/info.php:3
 msgid "Umbra"

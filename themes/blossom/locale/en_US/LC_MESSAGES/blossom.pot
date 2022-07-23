@@ -292,10 +292,12 @@ msgid "Website"
 msgstr ""
 
 #: themes/blossom/forms/user/controls.twig:13
+#: themes/blossom/forms/user/reset_password.twig:7
 msgid "New password?"
 msgstr ""
 
 #: themes/blossom/forms/user/controls.twig:15
+#: themes/blossom/forms/user/reset_password.twig:9
 msgid "Confirm"
 msgstr ""
 
@@ -304,7 +306,7 @@ msgid "Update"
 msgstr ""
 
 #: themes/blossom/forms/user/login.twig:7
-#: themes/blossom/forms/user/lost_password.twig:8
+#: themes/blossom/forms/user/lost_password.twig:7
 #: themes/blossom/forms/user/register.twig:7
 msgid "Username"
 msgstr ""
@@ -323,16 +325,17 @@ msgstr ""
 msgid "Lost password"
 msgstr ""
 
-#: themes/blossom/forms/user/lost_password.twig:7
-msgid "Please enter your username below and we will email you a new password for your account."
-msgstr ""
-
-#: themes/blossom/forms/user/lost_password.twig:12
+#: themes/blossom/forms/user/lost_password.twig:11
+#: themes/blossom/forms/user/reset_password.twig:16
 msgid "Submit"
 msgstr ""
 
 #: themes/blossom/forms/user/register.twig:11
 msgid "(again)"
+msgstr ""
+
+#: themes/blossom/forms/user/reset_password.twig:5
+msgid "Reset password"
 msgstr ""
 
 #: themes/blossom/info.php:3

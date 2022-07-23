@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/topaz/content/comment.twig:3
@@ -290,10 +290,12 @@ msgid "Website"
 msgstr "Sito web"
 
 #: themes/topaz/forms/user/controls.twig:13
+#: themes/topaz/forms/user/reset_password.twig:7
 msgid "New password?"
 msgstr "Nuova password?"
 
 #: themes/topaz/forms/user/controls.twig:15
+#: themes/topaz/forms/user/reset_password.twig:9
 msgid "Confirm"
 msgstr "Conferma"
 
@@ -302,7 +304,7 @@ msgid "Update"
 msgstr "Aggiorna"
 
 #: themes/topaz/forms/user/login.twig:7
-#: themes/topaz/forms/user/lost_password.twig:8
+#: themes/topaz/forms/user/lost_password.twig:7
 #: themes/topaz/forms/user/register.twig:7
 msgid "Username"
 msgstr "Nome utente"
@@ -320,21 +322,18 @@ msgstr "Aiuto!"
 msgid "Lost password"
 msgstr "Password dimenticata"
 
-#: themes/topaz/forms/user/lost_password.twig:7
-msgid ""
-"Please enter your username below and we will email you a new password for "
-"your account."
-msgstr ""
-"Inserisci il tuo nome utente qui sotto e ti invieremo una nuova password per "
-"il tuo account."
-
-#: themes/topaz/forms/user/lost_password.twig:12
+#: themes/topaz/forms/user/lost_password.twig:11
+#: themes/topaz/forms/user/reset_password.twig:16
 msgid "Submit"
 msgstr "Invia"
 
 #: themes/topaz/forms/user/register.twig:11
 msgid "(again)"
 msgstr "(ripeti)"
+
+#: themes/topaz/forms/user/reset_password.twig:5
+msgid "Reset password"
+msgstr "Ripristina password"
 
 #: themes/topaz/info.php:3
 msgid "Topaz"

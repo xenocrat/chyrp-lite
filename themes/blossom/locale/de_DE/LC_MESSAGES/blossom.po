@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/blossom/content/comment.twig:3
@@ -294,10 +294,12 @@ msgid "Website"
 msgstr "Website"
 
 #: themes/blossom/forms/user/controls.twig:13
+#: themes/blossom/forms/user/reset_password.twig:7
 msgid "New password?"
 msgstr "Neues Passwort?"
 
 #: themes/blossom/forms/user/controls.twig:15
+#: themes/blossom/forms/user/reset_password.twig:9
 msgid "Confirm"
 msgstr "Bestätigen"
 
@@ -306,7 +308,7 @@ msgid "Update"
 msgstr "Aktualisieren"
 
 #: themes/blossom/forms/user/login.twig:7
-#: themes/blossom/forms/user/lost_password.twig:8
+#: themes/blossom/forms/user/lost_password.twig:7
 #: themes/blossom/forms/user/register.twig:7
 msgid "Username"
 msgstr "Benutzername"
@@ -325,21 +327,18 @@ msgstr "Hilfe!"
 msgid "Lost password"
 msgstr "Passwort vergessen"
 
-#: themes/blossom/forms/user/lost_password.twig:7
-msgid ""
-"Please enter your username below and we will email you a new password for "
-"your account."
-msgstr ""
-"Bitte gib deinen Benutzernamen ein und wir werden dir eine E-Mail mit einem "
-"neuen Passwort senden."
-
-#: themes/blossom/forms/user/lost_password.twig:12
+#: themes/blossom/forms/user/lost_password.twig:11
+#: themes/blossom/forms/user/reset_password.twig:16
 msgid "Submit"
 msgstr "Absenden"
 
 #: themes/blossom/forms/user/register.twig:11
 msgid "(again)"
 msgstr "(wiederholen)"
+
+#: themes/blossom/forms/user/reset_password.twig:5
+msgid "Reset password"
+msgstr "Passwort zurücksetzen"
 
 #: themes/blossom/info.php:3
 msgid "Blossom"

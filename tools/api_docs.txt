@@ -1695,11 +1695,6 @@ Function: main_activate
 Activates (approves) a given login.
 
 
-Function: main_reset
---------------------
-Resets the password for a given login.
-
-
 Function: main_login
 --------------------
 Logs in a user if they provide the username and password.
@@ -1718,6 +1713,11 @@ Updates the current user when the form is submitted.
 Function: main_lost_password
 ----------------------------
 Emails a password reset link to the registered address of a user.
+
+
+Function: main_reset_password
+-----------------------------
+Resets the password for a given login.
 
 
 Function: main_webmention
@@ -2732,17 +2732,23 @@ See Also:
 
 Function: email
 ---------------
-Send an email using PHP's mail() function or an alternative.
+Sends an email using PHP's mail() function or an alternative.
 
 
-Function: correspond
---------------------
-Send an email correspondence to a user about an action we took.
+Function: email_activate_account
+--------------------------------
+Sends an activation email to a newly registered user.
 
 Parameters:
-    $action - About which action are we corresponding with the user?
-    $params - An indexed array of parameters associated with this action.
-              $params["to"] is required: the address to be emailed.
+    $user - The user to receive the email.
+
+
+Function: email_reset_password
+------------------------------
+Sends a password reset email to a user.
+
+Parameters:
+    $user - The user to receive the email.
 
 
 Function: javascripts
