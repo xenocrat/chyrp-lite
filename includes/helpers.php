@@ -2802,11 +2802,11 @@
      *     $user - The user to receive the email.
      */
     function email_activate_account($user): bool {
-        $config  = Config::current();
+        $config = Config::current();
         $trigger = Trigger::current();
 
-        $url = $config->url.
-               "/?action=activate&amp;login=".urlencode($user->login).
+        $url = $config->url."/?action=activate".
+               "&amp;login=".urlencode($user->login).
                "&amp;token=".token(array($user->login, $user->email));
 
         if ($trigger->exists("correspond_activate_account"))
@@ -2835,12 +2835,14 @@
      *     $user - The user to receive the email.
      */
     function email_reset_password($user): bool {
-        $config  = Config::current();
+        $config = Config::current();
         $trigger = Trigger::current();
+        $issue = strval(time());
 
-        $url = $config->url.
-               "/?action=reset&amp;login=".urlencode($user->login).
-               "&amp;token=".token(array($user->login, $user->email));
+        $url = $config->url."/?action=reset_password".
+               "&amp;issue=".$issue.
+               "&amp;login=".urlencode($user->login).
+               "&amp;token=".token(array($issue, $user->login, $user->email));
 
         if ($trigger->exists("correspond_reset_password"))
             return $trigger->call("correspond_reset_password", $user, $url);
@@ -2856,31 +2858,6 @@
                          __("Visit this link to reset your password:").
                          "\r\n".
                          unfix($url);
-
-        return email($user->email, $email_subject, $email_message, $email_headers);
-    }
-
-    /**
-     * Function: email_new_password
-     * Sends a new password to a user.
-     *
-     * Parameters:
-     *     $user - The user to receive the email.
-     *     $new_password - The new password in clear text.
-     */
-    function email_new_password($user, $new_password): bool {
-        $config  = Config::current();
-        $trigger = Trigger::current();
-
-        if ($trigger->exists("correspond_new_password"))
-            return $trigger->call("correspond_new_password", $user, $new_password);
-
-        $email_headers = "From: ".$config->email."\r\n"."X-Mailer: ".CHYRP_IDENTITY;
-        $email_subject = _f("Your new password for %s", $config->name);
-        $email_message = _f("Hello, %s.", $user->login).
-                         "\r\n".
-                         "\r\n".
-                         _f("Your new password is: %s", $new_password);
 
         return email($user->email, $email_subject, $email_message, $email_headers);
     }
