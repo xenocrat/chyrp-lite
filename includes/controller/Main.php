@@ -155,7 +155,7 @@
          * Route constructor calls this to determine "view_site" exemptions.
          */
         public function exempt($action): bool {
-            $exemptions = array("login", "logout", "register", "activate", "lost_password", "reset");
+            $exemptions = array("login", "logout", "register", "activate", "lost_password", "reset_password");
             return in_array($action, $exemptions);
         }
 
@@ -558,37 +558,7 @@
                 Flash::notice(__("Your account has already been activated."), "/");
 
             $user = $user->update(null, null, null, null, null, null, true);
-
-            $_SESSION['user_id'] = $user->id;
-            Trigger::current()->call("user_logged_in", $user);
-
-            Flash::notice(__("Your account is now active."), "/");
-        }
-
-        /**
-         * Function: main_reset
-         * Resets the password for a given login.
-         */
-        public function main_reset()/*: never */{
-            if (logged_in())
-                Flash::notice(__("You cannot reset your password because you are already logged in."), "/");
-
-            fallback($_GET['login']);
-            fallback($_GET['token']);
-
-            $user = new User(array("login" => $_GET['login']));
-
-            if ($user->no_results)
-                Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
-
-            if ($_GET['token'] != token(array($user->login, $user->email)))
-                Flash::warning(__("Invalid authentication token."), "/");
-
-            $new_password = random(8);
-            $user = $user->update(null, User::hash_password($new_password));
-            email_new_password($user, $new_password);
-
-            Flash::notice(__("We have emailed you a new password."), "login");
+            Flash::notice(__("Your account is now active."), "login");
         }
 
         /**
@@ -623,7 +593,6 @@
 
                     $_SESSION['user_id'] = $user->id;
                     $trigger->call("user_logged_in", $user);
-
                     Flash::notice(__("Logged in."), fallback($_SESSION['redirect_to'], "/"));
                 }
             }
@@ -663,11 +632,12 @@
                 if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                     Flash::warning(__("Invalid authentication token."));
 
-                if (!empty($_POST['new_password1']))
+                if (!empty($_POST['new_password1'])) {
                     if (empty($_POST['new_password2']) or $_POST['new_password1'] != $_POST['new_password2'])
                         Flash::warning(__("Passwords do not match."));
                     elseif (password_strength($_POST['new_password1']) < 100)
                         Flash::message(__("Please consider setting a stronger password for your account."));
+                }
 
                 if (empty($_POST['email']))
                     Flash::warning(__("Email address cannot be blank."));
@@ -727,11 +697,64 @@
                     if (!$user->no_results)
                         email_reset_password($user);
 
-                    Flash::notice(__("If that username is in our database, we will email you a password reset link."), "/");
+                    Flash::notice(__("We have emailed you a password reset link."), "/");
                 }
             }
 
             $this->display("forms".DIR."user".DIR."lost_password", array(), __("Lost password"));
+        }
+
+        /**
+         * Function: main_reset_password
+         * Resets the password for a given login.
+         */
+        public function main_reset_password(): void {
+            $config = Config::current();
+
+            if (logged_in())
+                Flash::notice(__("You cannot reset your password because you are already logged in."), "/");
+
+            fallback($_REQUEST['issue']);
+            fallback($_REQUEST['login']);
+            fallback($_REQUEST['token']);
+
+            $life = time() - intval($_REQUEST['issue']);
+
+            if ($life > 3600)
+                Flash::notice(__("The link has expired. Please try again."), "lost_password");
+
+            $user = new User(array("login" => $_REQUEST['login']));
+
+            if ($user->no_results)
+                Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
+
+            $hash = token(array($_REQUEST['issue'], $user->login, $user->email));
+
+            if (!hash_equals($hash, $_REQUEST['token']))
+                Flash::notice(__("Please contact the blog administrator for help with your account."), "/");
+
+            if (!empty($_POST)) {
+                if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+                    Flash::warning(__("Invalid authentication token."));
+
+                if (empty($_POST['new_password1']) or empty($_POST['new_password2']))
+                    Flash::warning(__("Passwords cannot be blank."));
+                elseif ($_POST['new_password1'] != $_POST['new_password2'])
+                    Flash::warning(__("Passwords do not match."));
+                elseif (password_strength($_POST['new_password1']) < 100)
+                    Flash::message(__("Please consider setting a stronger password for your account."));
+
+                if (!Flash::exists("warning")) {
+                    $user->update(null, User::hash_password($_POST['new_password1']));
+                    Flash::notice(__("Your profile has been updated."), "login");
+                }
+            }
+
+            $this->display("forms".DIR."user".DIR."reset_password",
+                           array("issue" => $_REQUEST['issue'],
+                                 "login" => $_REQUEST['login'],
+                                 "token" => $_REQUEST['token']),
+                           __("Reset password"));
         }
 
         /**
