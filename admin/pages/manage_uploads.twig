@@ -18,7 +18,7 @@
 <th class="uploads_modified date">{{ "Last Modified" | translate }}</th>
 <th class="uploads_size value">{{ "Size" | translate }}</th>
 {{ trigger.call("manage_uploads_column_header") }}
-<th class="controls" colspan="2">{{ "Controls" | translate }}</th>
+<th class="controls" colspan="3">{{ "Controls" | translate }}</th>
 </tr>
 </thead>
 <tbody>
@@ -38,6 +38,9 @@
 <a class="emblem" target="_blank" href="{{ upload.name | uploaded }}"><img src="{{ site.chyrp_url }}/admin/images/icons/view.svg" alt="{{ 'preview' | translate }}"></a></td>
 <td class="controls">
 <a class="emblem" href="{{ upload.name | download }}"><img src="{{ site.chyrp_url }}/admin/images/icons/download.svg" alt="{{ 'download' | translate }}"></a>
+</td>
+<td class="controls">
+<a class="upload_delete_link delete_link emblem" href="{{ url('delete_upload/file/' ~ (upload.name | url_encode)) }}"><img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg" alt="{{ 'delete' | translate }}"></a>
 </td>
 </tr>
 {% else %}

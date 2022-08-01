@@ -1,0 +1,24 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block title %}{{ "Delete Upload?" | translate }}{% endblock %}
+
+{% block content %}
+<h1>{{ "Delete Upload?" | translate }}</h1>
+<p>
+{{ "Are you sure you want to delete the file &#8220;%s&#8221;?" | translate | format(filename | fix) }}
+</p>
+<form class="delete" action="{{ url('destroy_upload') }}" method="post" accept-charset="UTF-8">
+<fieldset role="presentation">
+<div class="confirmation">
+<button name="destroy" value="indubitably" class="boo">
+<img src="{{ site.chyrp_url }}/admin/images/icons/destroy.svg" alt="">{{ "Delete!" | translate }}
+</button>
+<button name="destroy" value="undecidedly" type="submit" class="yay">
+<img src="{{ site.chyrp_url }}/admin/images/icons/cancel.svg" alt="">{{ "Cancel" | translate }}
+</button>
+</div>
+<input type="hidden" name="file" value="{{ filename | fix(true) }}" id="id">
+<input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
+</fieldset>
+</form>
+{% endblock %}
