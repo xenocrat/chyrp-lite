@@ -24,7 +24,6 @@
             $this->setFilter("title", array("markup_post_title", "markup_title"));
             $this->setFilter("description", array("markup_post_text", "markup_text"));
 
-            $this->respondTo("delete_post", "delete_file");
             $this->respondTo("feed_item", "enclose_audio");
             $this->respondTo("filter_post", "filter_post");
             $this->respondTo("metaWeblog_getPost", "metaWeblog_getValues");
@@ -61,19 +60,16 @@
         }
 
         public function update($post): Post|false {
-            if (isset($_FILES['audio']) and upload_tester($_FILES['audio'])) {
-                $filename = upload($_FILES['audio'], $this->audio_extensions());
-                $this->delete_file($post);
-            } else {
-                $filename = $post->filename;
-            }
-
             fallback($_POST['title'], "");
             fallback($_POST['description'], "");
             fallback($_POST['slug'], $post->clean);
             fallback($_POST['status'], $post->status);
             fallback($_POST['created_at'], $post->created_at);
             fallback($_POST['option'], array());
+            $filename = $post->filename;
+
+            if (isset($_FILES['audio']) and upload_tester($_FILES['audio']))
+                $filename = upload($_FILES['audio'], $this->audio_extensions());
 
             return $post->update(array("title" => $_POST['title'],
                                        "filename" => $filename,
@@ -110,19 +106,6 @@
             $feed->enclosure(uploaded($post->filename),
                              filesize($filepath),
                              $this->audio_type($post->filename));
-        }
-
-        public function delete_file($post): void {
-            if ($post->feather != "audio")
-                return;
-
-            $trigger = Trigger::current();
-            $filepath = uploaded($post->filename, false);
-
-            if (file_exists($filepath)) {
-                $trigger->call("delete_upload", $post->filename);
-                unlink($filepath);
-            }
         }
 
         public function filter_post($post): void {

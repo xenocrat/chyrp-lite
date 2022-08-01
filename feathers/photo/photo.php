@@ -24,7 +24,6 @@
             $this->setFilter("title", array("markup_post_title", "markup_title"));
             $this->setFilter("caption", array("markup_post_text", "markup_text"));
 
-            $this->respondTo("delete_post", "delete_file");
             $this->respondTo("post_options", "add_option");
             $this->respondTo("metaWeblog_getPost", "metaWeblog_getValues");
             $this->respondTo("metaWeblog_before_editPost", "metaWeblog_setValues");
@@ -63,22 +62,19 @@
         }
 
         public function update($post): Post|false {
-            if (isset($_FILES['photo']) and upload_tester($_FILES['photo'])) {
-                $filename = upload($_FILES['photo'], $this->photo_extensions());
-                $this->delete_file($post);
-            } else {
-                $filename = $post->filename;
-            }
-
-            if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
-                $_POST['option']['source'] = add_scheme($_POST['option']['source']);
-
             fallback($_POST['title'], "");
             fallback($_POST['caption'], "");
             fallback($_POST['slug'], $post->clean);
             fallback($_POST['status'], $post->status);
             fallback($_POST['created_at'], $post->created_at);
             fallback($_POST['option'], array());
+            $filename = $post->filename;
+
+            if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
+                $_POST['option']['source'] = add_scheme($_POST['option']['source']);
+
+            if (isset($_FILES['photo']) and upload_tester($_FILES['photo']))
+                $filename = upload($_FILES['photo'], $this->photo_extensions());
 
             return $post->update(array("title" => $_POST['title'],
                                        "filename" => $filename,
@@ -110,19 +106,6 @@
                 $content.= '<figcaption>'.$post->caption.'</figcaption>';
 
             return '<figure>'.$content.'</figure>';
-        }
-
-        public function delete_file($post): void {
-            if ($post->feather != "photo")
-                return;
-
-            $trigger = Trigger::current();
-            $filepath = uploaded($post->filename, false);
-
-            if (file_exists($filepath)) {
-                $trigger->call("delete_upload", $post->filename);
-                unlink($filepath);
-            }
         }
 
         public function add_option($options, $post = null, $feather = null): array {

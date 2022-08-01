@@ -24,7 +24,6 @@
             $this->setFilter("title", array("markup_post_title", "markup_title"));
             $this->setFilter("caption", array("markup_post_text", "markup_text"));
 
-            $this->respondTo("delete_post", "delete_files");
             $this->respondTo("feed_item", "enclose_uploaded");
             $this->respondTo("post","post");
             $this->respondTo("filter_post","filter_post");
@@ -88,6 +87,17 @@
         }
 
         public function update($post): Post|false {
+            fallback($_POST['title'], "");
+            fallback($_POST['caption'], "");
+            fallback($_POST['slug'], $post->clean);
+            fallback($_POST['status'], $post->status);
+            fallback($_POST['created_at'], $post->created_at);
+            fallback($_POST['option'], array());
+            $filenames = $post->filenames;
+
+            if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
+                $_POST['option']['source'] = add_scheme($_POST['option']['source']);
+
             if (isset($_FILES['uploads']) and upload_tester($_FILES['uploads'])) {
                 $filenames = array();
 
@@ -103,21 +113,7 @@
                 } else {
                     $filenames[] = upload($_FILES['uploads']);
                 }
-
-                $this->delete_files($post);
-            } else {
-                $filenames = $post->filenames;
             }
-
-            if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
-                $_POST['option']['source'] = add_scheme($_POST['option']['source']);
-
-            fallback($_POST['title'], "");
-            fallback($_POST['caption'], "");
-            fallback($_POST['slug'], $post->clean);
-            fallback($_POST['status'], $post->status);
-            fallback($_POST['created_at'], $post->created_at);
-            fallback($_POST['option'], array());
 
             return $post->update(array("filenames" => $this->filenames_serialize($filenames),
                                        "caption" => $_POST['caption'],
@@ -157,22 +153,6 @@
                     continue;
 
                 $feed->enclosure(uploaded($filename), filesize($filepath));
-            }
-        }
-
-        public function delete_files($post): void {
-            if ($post->feather != "uploader")
-                return;
-
-            $trigger = Trigger::current();
-
-            foreach ($post->filenames as $filename) {
-                $filepath = uploaded($filename, false);
-
-                if (file_exists($filepath)) {
-                    $trigger->call("delete_upload", $filename);
-                    unlink($filepath);
-                }
             }
         }
 
