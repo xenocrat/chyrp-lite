@@ -442,8 +442,10 @@
         if (USE_GETTEXT_SHIM)
             return Translation::current()->text($domain, $single, $plural, $int);
 
-        return function_exists("dngettext") ?
-            dngettext($domain, $single, $plural, $int) : (($int != 1) ? $plural : $single) ;
+        if (function_exists("dngettext"))
+            return dngettext($domain, $single, $plural, $int);
+
+        return ($int != 1) ? $plural : $single ;
     }
 
     /**
