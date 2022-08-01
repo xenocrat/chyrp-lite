@@ -1213,15 +1213,64 @@
         }
 
         /**
+         * Function: admin_delete_upload
+         * Upload deletion (confirm page).
+         */
+        public function admin_delete_upload(): void {
+            if (!Visitor::current()->group->can("edit_post", "edit_page", true))
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to delete uploads."));
+
+            if (empty($_GET['file']))
+                error(__("Error"), __("Missing argument."), null, 400);
+
+            $filename = str_replace(array(DIR, "/"), "", $_GET['file']);
+            $filepath = uploaded($filename, false);
+
+            if (!is_readable($filepath) or !is_file($filepath))
+                Flash::warning(__("File not found."), "manage_uploads");
+
+            $this->display("pages".DIR."delete_upload", array("filename" => $filename));
+        }
+
+        /**
+         * Function: admin_destroy_upload
+         * Destroys a post.
+         */
+        public function admin_destroy_upload()/*: never */{
+            if (!Visitor::current()->group->can("edit_post", "edit_page", true))
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to delete uploads."));
+
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+                show_403(__("Access Denied"), __("Invalid authentication token."));
+
+            if (empty($_POST['file']))
+                error(__("Error"), __("Missing argument."), null, 400);
+
+            if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
+                redirect("manage_uploads");
+
+            $filename = str_replace(array(DIR, "/"), "", $_POST['file']);
+            $filepath = uploaded($filename, false);
+
+            if (!is_readable($filepath) or !is_file($filepath))
+                Flash::warning(__("File not found."), "manage_uploads");
+
+            if (!delete_upload($filename))
+                Flash::warning(__("Could not delete file."), "manage_uploads");
+
+            Flash::notice(__("File deleted."), "manage_uploads");
+        }
+
+        /**
          * Function: admin_manage_uploads
          * Upload management.
          */
         public function admin_manage_uploads(): void {
-            $visitor = Visitor::current();
-
-            if (!$visitor->group->can("export_content"))
+            if (!Visitor::current()->group->can("edit_post", "edit_page", true))
                 show_403(__("Access Denied"),
-                         __("You do not have sufficient privileges to export content."));
+                         __("You do not have sufficient privileges to manage uploads."));
 
             # Redirect searches to a clean URL or dirty GET depending on configuration.
             if (isset($_POST['search']))
