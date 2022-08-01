@@ -2272,18 +2272,18 @@
      * Generates an absolute URL or filesystem path to an uploaded file.
      *
      * Parameters:
-     *     $file - Filename relative to the uploads directory.
+     *     $filename - Filename relative to the uploads directory.
      *     $url - Whether to return a URL or a filesystem path.
      *
      * Returns:
      *     The supplied filename prepended with URL or filesystem path.
      */
-    function uploaded($file, $url = true): string {
+    function uploaded($filename, $url = true): string {
         $config = Config::current();
 
         return ($url) ?
-            fix($config->chyrp_url.str_replace(DIR, "/", $config->uploads_path).urlencode($file), true) :
-            MAIN_DIR.$config->uploads_path.$file ;
+            fix($config->chyrp_url.str_replace(DIR, "/", $config->uploads_path).urlencode($filename), true) :
+            MAIN_DIR.$config->uploads_path.$filename ;
     }
 
     /**
@@ -2431,7 +2431,7 @@
 
     /**
      * Function: upload_filter_whitelist
-     * Returns an array containing a default list of allowed extensions.
+     * Returns an array containing a default list of allowed file extensions.
      */
     function upload_filter_whitelist(): array {
         return array(
@@ -2447,6 +2447,28 @@
             # Video and audio formats:
             "mp4", "ogv", "webm", "3gp", "mkv", "mov", "mp3", "m4a", "oga", "ogg", "mka", "flac", "wav"
         );
+    }
+
+    /**
+     * Function: delete_upload
+     * Deletes an uploaded file.
+     *
+     * Parameters:
+     *     $filename - Filename relative to the uploads directory.
+     *
+     * Returns:
+     *     Whether or not the file was deleted successfully.
+     */
+    function delete_upload($filename): bool {
+        $trigger = Trigger::current();
+        $filepath = uploaded($filename, false);
+
+        if (file_exists($filepath)) {
+            $trigger->call("delete_upload", $filename);
+            return @unlink($filepath);
+        }
+
+        return false;
     }
 
     #---------------------------------------------
