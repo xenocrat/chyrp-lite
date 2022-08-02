@@ -5,7 +5,7 @@
 {% block content %}
 <h1>{{ "Delete User?" | translate }}</h1>
 <p>
-{{ "Are you sure you want to delete user &#8220;%s&#8221;?" | translate | format(user.login) }}
+{{ "&#8220;%s&#8221; will be permanently deleted." | translate | format(user.login) }}
 </p>
 <form class="delete split" action="{{ url('destroy_user') }}" method="post" accept-charset="UTF-8">
 <fieldset role="presentation">

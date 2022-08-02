@@ -5,7 +5,7 @@
 {% block content %}
 <h1>{{ "Delete Tag?" | translate("tags") }}</h1>
 <p>
-{{ "Are you sure you want to delete the tag &#8220;%s&#8221;?" | translate("tags") | format(tag.name) }}
+{{ "&#8220;%s&#8221; will be permanently deleted." | translate("tags") | format(tag.name) }}
 </p>
 <form class="delete" action="{{ url('destroy_tag') }}" method="post" accept-charset="UTF-8">
 <fieldset role="presentation">

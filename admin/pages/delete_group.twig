@@ -5,7 +5,7 @@
 {% block content %}
 <h1>{{ "Delete Group?" | translate }}</h1>
 <p>
-{{ "Are you sure you want to delete the &#8220;%s&#8221; group?" | translate | format(group.name) }}
+{{ "&#8220;%s&#8221; will be permanently deleted." | translate | format(group.name) }}
 </p>
 <form class="delete split" action="{{ url('destroy_group') }}" method="post" accept-charset="UTF-8">
 <fieldset role="presentation">
