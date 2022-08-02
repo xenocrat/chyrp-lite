@@ -1217,6 +1217,8 @@
          * Upload deletion (confirm page).
          */
         public function admin_delete_upload(): void {
+            $sql = SQL::current();
+
             if (!Visitor::current()->group->can("edit_post", "edit_page", true))
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to delete uploads."));
@@ -1229,6 +1231,22 @@
 
             if (!is_readable($filepath) or !is_file($filepath))
                 Flash::warning(__("File not found."), "manage_uploads");
+
+            $post_count = $sql->count("post_attributes", "value LIKE :query",
+                                      array(":query" => "%".$filename."%"));
+
+            $page_count = $sql->count("pages", "body LIKE :query",
+                                      array(":query" => "%".$filename."%"));
+
+            if ($post_count > 0)
+                Flash::message(__("A post is using this upload.").' <a href="'.
+                              url("manage_posts/query/".urlencode($filename)).'">'.
+                              __("View post &rarr;").'</a>');
+
+            if ($page_count > 0)
+                Flash::message(__("A page is using this upload.").' <a href="'.
+                              url("manage_pages/query/".urlencode($filename)).'">'.
+                              __("View page &rarr;").'</a>');
 
             $this->display("pages".DIR."delete_upload", array("filename" => $filename));
         }
