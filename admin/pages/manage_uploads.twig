@@ -38,7 +38,7 @@
 <a class="emblem" href="{{ upload.name | download }}"><img src="{{ site.chyrp_url }}/admin/images/icons/download.svg" alt="{{ 'download' | translate }}"></a>
 </td>
 <td class="controls">
-<a class="upload_delete_link delete_link emblem" href="{{ url('delete_upload/file/' ~ (upload.name | url_encode)) }}"><img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg" alt="{{ 'search' | translate }}"></a>
+<a class="upload_delete_link delete_link emblem" href="{{ url('delete_upload/file/' ~ (upload.name | url_encode)) }}"><img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg" alt="{{ 'delete' | translate }}"></a>
 </td>
 </tr>
 {% else %}
