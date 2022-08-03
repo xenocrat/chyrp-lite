@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/tags/admin/help/tagging_posts.twig:3
@@ -38,8 +38,8 @@ msgstr "删除标签？"
 
 #: modules/tags/admin/pages/delete_tag.twig:8
 #, php-format
-msgid "Are you sure you want to delete the tag &#8220;%s&#8221;?"
-msgstr "您确定您想删除标签 &#8220;%s&#8221;?"
+msgid "&#8220;%s&#8221; will be permanently deleted."
+msgstr "&#8220;%s&#8221; 将被永久删除。"
 
 #: modules/tags/admin/pages/edit_tags.twig:3
 msgid "Edit Tags"

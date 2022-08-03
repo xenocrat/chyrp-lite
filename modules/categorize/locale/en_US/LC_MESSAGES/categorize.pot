@@ -20,7 +20,7 @@ msgstr ""
 
 #: modules/categorize/admin/pages/delete_category.twig:8
 #, php-format
-msgid "Are you sure you want to delete the category &#8220;%s&#8221;?"
+msgid "&#8220;%s&#8221; will be permanently deleted."
 msgstr ""
 
 #: modules/categorize/admin/pages/edit_category.twig:3

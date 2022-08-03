@@ -179,22 +179,10 @@ Arguments:
 	feather
 
 
-delete_upload
--------------
-Called from:
-	feathers/audio/audio.php on line 123
-	feathers/photo/photo.php on line 123
-	feathers/uploader/uploader.php on line 173
-	feathers/video/video.php on line 123
-
-Arguments:
-	$post->filename
-
-
 audio_player
 ------------
 Called from:
-	feathers/audio/audio.php on line 159
+	feathers/audio/audio.php on line 142
 
 Arguments:
 	$post
@@ -203,7 +191,7 @@ Arguments:
 video_player
 ------------
 Called from:
-	feathers/video/video.php on line 159
+	feathers/video/video.php on line 142
 
 Arguments:
 	$post
@@ -260,13 +248,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 1260
+	includes/controller/Admin.php on line 1323
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 1540
+	includes/controller/Admin.php on line 1603
 
 Arguments:
 	$group
@@ -275,7 +263,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1565
+	includes/controller/Admin.php on line 1628
 
 Arguments:
 	$user
@@ -284,7 +272,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1610
+	includes/controller/Admin.php on line 1673
 
 Arguments:
 	$entry, $post
@@ -293,7 +281,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 1640
+	includes/controller/Admin.php on line 1703
 
 Arguments:
 	$entry, $page
@@ -302,7 +290,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 1644
+	includes/controller/Admin.php on line 1707
 
 Arguments:
 	$imports
@@ -311,13 +299,13 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1927
+	includes/controller/Admin.php on line 1990
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 1935
+	includes/controller/Admin.php on line 1998
 
 
 can_not_view_page
@@ -363,28 +351,37 @@ Arguments:
 webmention
 ----------
 Called from:
-	includes/helpers.php on line 1737
+	includes/helpers.php on line 1739
 
 Arguments:
 	$post, $source, $target
 
 
+delete_upload
+-------------
+Called from:
+	includes/helpers.php on line 2469
+
+Arguments:
+	$filename
+
+
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 2563
+	includes/helpers.php on line 2587
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 2580
+	includes/helpers.php on line 2604
 
 
 correspond_activate_account
 ---------------------------
 Called from:
-	includes/helpers.php on line 2813
+	includes/helpers.php on line 2837
 
 Arguments:
 	$user, $url
@@ -393,7 +390,7 @@ Arguments:
 correspond_reset_password
 -------------------------
 Called from:
-	includes/helpers.php on line 2848
+	includes/helpers.php on line 2872
 
 Arguments:
 	$user, $url
@@ -402,7 +399,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 2888
+	includes/helpers.php on line 2912
 
 Arguments:
 	$ob
@@ -938,7 +935,7 @@ Arguments:
 posts_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 1322
+	includes/controller/Admin.php on line 1385
 
 Target:
 	$posts_atom
@@ -950,7 +947,7 @@ Arguments:
 pages_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 1372
+	includes/controller/Admin.php on line 1435
 
 Target:
 	$pages_atom
@@ -962,7 +959,7 @@ Arguments:
 export
 ------
 Called from:
-	includes/controller/Admin.php on line 1439
+	includes/controller/Admin.php on line 1502
 
 Target:
 	$exports
@@ -971,7 +968,7 @@ Target:
 before_import
 -------------
 Called from:
-	includes/controller/Admin.php on line 1519
+	includes/controller/Admin.php on line 1582
 
 Target:
 	$imports
@@ -980,7 +977,7 @@ Target:
 stylesheets_nonce
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2181
+	includes/controller/Admin.php on line 2244
 	modules/tags/tags.php on line 463
 
 Target:
@@ -990,7 +987,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 2222
+	includes/controller/Admin.php on line 2285
 
 Target:
 	$write
@@ -999,7 +996,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2262
+	includes/controller/Admin.php on line 2325
 
 Target:
 	$manage
@@ -1008,7 +1005,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 2287
+	includes/controller/Admin.php on line 2350
 
 Target:
 	$settings
@@ -1017,7 +1014,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 2305
+	includes/controller/Admin.php on line 2368
 
 Target:
 	$extend
@@ -1026,7 +1023,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2366
+	includes/controller/Admin.php on line 2429
 
 Target:
 	$this->context
@@ -1085,7 +1082,7 @@ Target:
 keyword_search
 --------------
 Called from:
-	includes/helpers.php on line 1032
+	includes/helpers.php on line 1034
 
 Target:
 	$search
@@ -1097,7 +1094,7 @@ Arguments:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 2793
+	includes/helpers.php on line 2817
 
 Target:
 	$function
@@ -1106,7 +1103,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 2889
+	includes/helpers.php on line 2913
 
 Target:
 	$nonce

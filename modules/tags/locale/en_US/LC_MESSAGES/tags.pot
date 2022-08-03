@@ -16,7 +16,7 @@ msgstr ""
 
 #: modules/tags/admin/pages/delete_tag.twig:8
 #, php-format
-msgid "Are you sure you want to delete the tag &#8220;%s&#8221;?"
+msgid "&#8220;%s&#8221; will be permanently deleted."
 msgstr ""
 
 #: modules/tags/admin/pages/edit_tags.twig:3

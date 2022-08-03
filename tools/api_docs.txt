@@ -1458,6 +1458,16 @@ Function: admin_manage_groups
 Group management.
 
 
+Function: admin_delete_upload
+-----------------------------
+Upload deletion (confirm page).
+
+
+Function: admin_destroy_upload
+------------------------------
+Destroys a post.
+
+
 Function: admin_manage_uploads
 ------------------------------
 Upload management.
@@ -2533,7 +2543,7 @@ Function: uploaded
 Generates an absolute URL or filesystem path to an uploaded file.
 
 Parameters:
-    $file - Filename relative to the uploads directory.
+    $filename - Filename relative to the uploads directory.
     $url - Whether to return a URL or a filesystem path.
 
 Returns:
@@ -2577,7 +2587,18 @@ Returns:
 
 Function: upload_filter_whitelist
 ---------------------------------
-Returns an array containing a default list of allowed extensions.
+Returns an array containing a default list of allowed file extensions.
+
+
+Function: delete_upload
+-----------------------
+Deletes an uploaded file.
+
+Parameters:
+    $filename - Filename relative to the uploads directory.
+
+Returns:
+    Whether or not the file was deleted successfully.
 
 
 Function: password_strength

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: admin/help/canonical_url.twig:3 admin/help/canonical_url.twig:6
@@ -280,7 +280,7 @@ msgstr "上传中..."
 msgid "Preview"
 msgstr "预览"
 
-#: admin/javascripts/admin.js.php:363 admin/pages/manage_uploads.twig:38
+#: admin/javascripts/admin.js.php:363
 msgid "preview"
 msgstr "预览"
 
@@ -380,10 +380,11 @@ msgstr "更新"
 msgid "Delete Group?"
 msgstr "删除这个组？"
 
-#: admin/pages/delete_group.twig:8
+#: admin/pages/delete_group.twig:8 admin/pages/delete_post.twig:8
+#: admin/pages/delete_upload.twig:8 admin/pages/delete_user.twig:8
 #, php-format
-msgid "Are you sure you want to delete the &#8220;%s&#8221; group?"
-msgstr "您确定您想删除 &#8220;%s&#8221; 这个组?"
+msgid "&#8220;%s&#8221; will be permanently deleted."
+msgstr "&#8220;%s&#8221; 将被永久删除。"
 
 #: admin/pages/delete_group.twig:14
 msgid "Move members to:"
@@ -398,13 +399,15 @@ msgid "New &#8220;guest&#8221; group:"
 msgstr "新 &#8220;guest&#8221; 组："
 
 #: admin/pages/delete_group.twig:44 admin/pages/delete_page.twig:20
-#: admin/pages/delete_post.twig:14 admin/pages/delete_user.twig:41
+#: admin/pages/delete_post.twig:14 admin/pages/delete_upload.twig:14
+#: admin/pages/delete_user.twig:41
 msgid "Delete!"
 msgstr "删除！"
 
 #: admin/pages/delete_group.twig:47 admin/pages/delete_page.twig:23
-#: admin/pages/delete_post.twig:17 admin/pages/delete_user.twig:44
-#: admin/partials/page_fields.twig:80 admin/partials/post_fields.twig:159
+#: admin/pages/delete_post.twig:17 admin/pages/delete_upload.twig:17
+#: admin/pages/delete_user.twig:44 admin/partials/page_fields.twig:80
+#: admin/partials/post_fields.twig:159
 msgid "Cancel"
 msgstr "取消"
 
@@ -418,7 +421,7 @@ msgstr "删除这个页面？"
 msgid "[Untitled]"
 msgstr "[无标题]"
 
-#: admin/pages/delete_page.twig:8 admin/pages/delete_post.twig:8
+#: admin/pages/delete_page.twig:8
 #, php-format
 msgid "Are you sure you want to delete &#8220;%s&#8221;?"
 msgstr "您确定您想删除 &#8220;%s&#8221;?"
@@ -431,14 +434,13 @@ msgstr "删除子？"
 msgid "Delete Post?"
 msgstr "删除帖子？"
 
+#: admin/pages/delete_upload.twig:3 admin/pages/delete_upload.twig:6
+msgid "Delete Upload?"
+msgstr "删除上传？"
+
 #: admin/pages/delete_user.twig:3 admin/pages/delete_user.twig:6
 msgid "Delete User?"
 msgstr "删除用户？"
-
-#: admin/pages/delete_user.twig:8
-#, php-format
-msgid "Are you sure you want to delete user &#8220;%s&#8221;?"
-msgstr "您确定您想删除用户 &#8220;%s&#8221;?"
 
 #: admin/pages/delete_user.twig:14
 msgid "Attribute posts to:"
@@ -753,18 +755,19 @@ msgid "edit"
 msgstr "编辑"
 
 #: admin/pages/manage_groups.twig:54 admin/pages/manage_pages.twig:60
-#: admin/pages/manage_posts.twig:48 admin/pages/manage_users.twig:64
+#: admin/pages/manage_posts.twig:48 admin/pages/manage_uploads.twig:41
+#: admin/pages/manage_users.twig:64
 msgid "delete"
 msgstr "删除"
 
 #: admin/pages/manage_groups.twig:61 admin/pages/manage_pages.twig:67
-#: admin/pages/manage_posts.twig:55 admin/pages/manage_uploads.twig:47
+#: admin/pages/manage_posts.twig:55 admin/pages/manage_uploads.twig:48
 #: admin/pages/manage_users.twig:71
 msgid "No results"
 msgstr "没有结果"
 
 #: admin/pages/manage_groups.twig:69 admin/pages/manage_pages.twig:75
-#: admin/pages/manage_posts.twig:63 admin/pages/manage_uploads.twig:55
+#: admin/pages/manage_posts.twig:63 admin/pages/manage_uploads.twig:56
 #: admin/pages/manage_users.twig:79
 #, php-format
 msgid "Page %d of %s"
@@ -837,7 +840,7 @@ msgstr "上一次更改"
 msgid "Size"
 msgstr "大小"
 
-#: admin/pages/manage_uploads.twig:40
+#: admin/pages/manage_uploads.twig:38
 msgid "download"
 msgstr "下载"
 
@@ -1155,6 +1158,3 @@ msgstr "（置顶显示）"
 #: admin/partials/post_fields.twig:103
 msgid "Timestamp"
 msgstr "时间戳"
-
-#~ msgid "Filename"
-#~ msgstr "文件名"

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/pingable/admin/pages/delete_pingback.twig:3
@@ -20,8 +20,8 @@ msgstr "删除Pingback？"
 
 #: modules/pingable/admin/pages/delete_pingback.twig:8
 #, php-format
-msgid "Are you sure you want to delete the pingback from &#8220;%s&#8221;?"
-msgstr "您确定想要从&#8220;%s&#8221;删除pingback？"
+msgid "&#8220;%s&#8221; will be permanently deleted."
+msgstr "&#8220;%s&#8221; 将被永久删除。"
 
 #: modules/pingable/admin/pages/edit_pingback.twig:3
 msgid "Edit Pingback"

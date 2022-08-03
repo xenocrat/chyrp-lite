@@ -61,8 +61,8 @@ msgstr "删除评论？"
 
 #: modules/comments/admin/pages/delete_comment.twig:8
 #, php-format
-msgid "Are you sure you want to delete the comment from &#8220;%s&#8221;?"
-msgstr "您确定想要从 &#8220;%s&#8221; 删除评论?"
+msgid "&#8220;%s&#8221; will be permanently deleted."
+msgstr "&#8220;%s&#8221; 将被永久删除。"
 
 #: modules/comments/admin/pages/edit_comment.twig:3
 msgid "Edit Comment"

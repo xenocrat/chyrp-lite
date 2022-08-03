@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: admin/help/canonical_url.twig:3 admin/help/canonical_url.twig:6
@@ -296,7 +296,7 @@ msgstr "Caricamento in corso…."
 msgid "Preview"
 msgstr "Anteprima"
 
-#: admin/javascripts/admin.js.php:363 admin/pages/manage_uploads.twig:38
+#: admin/javascripts/admin.js.php:363
 msgid "preview"
 msgstr "anteprima"
 
@@ -402,10 +402,11 @@ msgstr "Aggiorna"
 msgid "Delete Group?"
 msgstr "Eliminare gruppo?"
 
-#: admin/pages/delete_group.twig:8
+#: admin/pages/delete_group.twig:8 admin/pages/delete_post.twig:8
+#: admin/pages/delete_upload.twig:8 admin/pages/delete_user.twig:8
 #, php-format
-msgid "Are you sure you want to delete the &#8220;%s&#8221; group?"
-msgstr "Sei sicuro di voler eliminare il gruppo &#8220;%s&#8221;?"
+msgid "&#8220;%s&#8221; will be permanently deleted."
+msgstr "&#8220;%s&#8221; verrà eliminato definitivamente."
 
 #: admin/pages/delete_group.twig:14
 msgid "Move members to:"
@@ -420,13 +421,15 @@ msgid "New &#8220;guest&#8221; group:"
 msgstr "Nuovo gruppo &#8220;ospite&#8221;:"
 
 #: admin/pages/delete_group.twig:44 admin/pages/delete_page.twig:20
-#: admin/pages/delete_post.twig:14 admin/pages/delete_user.twig:41
+#: admin/pages/delete_post.twig:14 admin/pages/delete_upload.twig:14
+#: admin/pages/delete_user.twig:41
 msgid "Delete!"
 msgstr "Elimina!"
 
 #: admin/pages/delete_group.twig:47 admin/pages/delete_page.twig:23
-#: admin/pages/delete_post.twig:17 admin/pages/delete_user.twig:44
-#: admin/partials/page_fields.twig:80 admin/partials/post_fields.twig:159
+#: admin/pages/delete_post.twig:17 admin/pages/delete_upload.twig:17
+#: admin/pages/delete_user.twig:44 admin/partials/page_fields.twig:80
+#: admin/partials/post_fields.twig:159
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -440,7 +443,7 @@ msgstr "Elimina pagina?"
 msgid "[Untitled]"
 msgstr "[Senza titolo]"
 
-#: admin/pages/delete_page.twig:8 admin/pages/delete_post.twig:8
+#: admin/pages/delete_page.twig:8
 #, php-format
 msgid "Are you sure you want to delete &#8220;%s&#8221;?"
 msgstr "Sei sicuro di voler eliminare &#8220;%s&#8221;?"
@@ -453,14 +456,13 @@ msgstr "Eliminare le pagine secondarie?"
 msgid "Delete Post?"
 msgstr "Eliminare i post?"
 
+#: admin/pages/delete_upload.twig:3 admin/pages/delete_upload.twig:6
+msgid "Delete Upload?"
+msgstr "Eliminare il caricamento?"
+
 #: admin/pages/delete_user.twig:3 admin/pages/delete_user.twig:6
 msgid "Delete User?"
 msgstr "Eliminare utente?"
-
-#: admin/pages/delete_user.twig:8
-#, php-format
-msgid "Are you sure you want to delete user &#8220;%s&#8221;?"
-msgstr "Sei sicuro di voler eliminare l'utente &#8220;%s&#8221;?"
 
 #: admin/pages/delete_user.twig:14
 msgid "Attribute posts to:"
@@ -779,18 +781,19 @@ msgid "edit"
 msgstr "modifica"
 
 #: admin/pages/manage_groups.twig:54 admin/pages/manage_pages.twig:60
-#: admin/pages/manage_posts.twig:48 admin/pages/manage_users.twig:64
+#: admin/pages/manage_posts.twig:48 admin/pages/manage_uploads.twig:41
+#: admin/pages/manage_users.twig:64
 msgid "delete"
 msgstr "elimina"
 
 #: admin/pages/manage_groups.twig:61 admin/pages/manage_pages.twig:67
-#: admin/pages/manage_posts.twig:55 admin/pages/manage_uploads.twig:47
+#: admin/pages/manage_posts.twig:55 admin/pages/manage_uploads.twig:48
 #: admin/pages/manage_users.twig:71
 msgid "No results"
 msgstr "Nessun risultato"
 
 #: admin/pages/manage_groups.twig:69 admin/pages/manage_pages.twig:75
-#: admin/pages/manage_posts.twig:63 admin/pages/manage_uploads.twig:55
+#: admin/pages/manage_posts.twig:63 admin/pages/manage_uploads.twig:56
 #: admin/pages/manage_users.twig:79
 #, php-format
 msgid "Page %d of %s"
@@ -863,7 +866,7 @@ msgstr "Ultima modifica"
 msgid "Size"
 msgstr "Dimensione"
 
-#: admin/pages/manage_uploads.twig:40
+#: admin/pages/manage_uploads.twig:38
 msgid "download"
 msgstr "scaricare"
 
@@ -1181,6 +1184,3 @@ msgstr "(mostra questo post sopra tutti gli altri)"
 #: admin/partials/post_fields.twig:103
 msgid "Timestamp"
 msgstr "Date e ora"
-
-#~ msgid "Filename"
-#~ msgstr "Nome del file"

@@ -246,7 +246,6 @@ msgid "Preview"
 msgstr ""
 
 #: admin/javascripts/admin.js.php:363
-#: admin/pages/manage_uploads.twig:38
 msgid "preview"
 msgstr ""
 
@@ -357,8 +356,11 @@ msgid "Delete Group?"
 msgstr ""
 
 #: admin/pages/delete_group.twig:8
+#: admin/pages/delete_post.twig:8
+#: admin/pages/delete_upload.twig:8
+#: admin/pages/delete_user.twig:8
 #, php-format
-msgid "Are you sure you want to delete the &#8220;%s&#8221; group?"
+msgid "&#8220;%s&#8221; will be permanently deleted."
 msgstr ""
 
 #: admin/pages/delete_group.twig:14
@@ -376,6 +378,7 @@ msgstr ""
 #: admin/pages/delete_group.twig:44
 #: admin/pages/delete_page.twig:20
 #: admin/pages/delete_post.twig:14
+#: admin/pages/delete_upload.twig:14
 #: admin/pages/delete_user.twig:41
 msgid "Delete!"
 msgstr ""
@@ -383,6 +386,7 @@ msgstr ""
 #: admin/pages/delete_group.twig:47
 #: admin/pages/delete_page.twig:23
 #: admin/pages/delete_post.twig:17
+#: admin/pages/delete_upload.twig:17
 #: admin/pages/delete_user.twig:44
 #: admin/partials/page_fields.twig:80
 #: admin/partials/post_fields.twig:159
@@ -404,7 +408,6 @@ msgid "[Untitled]"
 msgstr ""
 
 #: admin/pages/delete_page.twig:8
-#: admin/pages/delete_post.twig:8
 #, php-format
 msgid "Are you sure you want to delete &#8220;%s&#8221;?"
 msgstr ""
@@ -418,14 +421,14 @@ msgstr ""
 msgid "Delete Post?"
 msgstr ""
 
+#: admin/pages/delete_upload.twig:3
+#: admin/pages/delete_upload.twig:6
+msgid "Delete Upload?"
+msgstr ""
+
 #: admin/pages/delete_user.twig:3
 #: admin/pages/delete_user.twig:6
 msgid "Delete User?"
-msgstr ""
-
-#: admin/pages/delete_user.twig:8
-#, php-format
-msgid "Are you sure you want to delete user &#8220;%s&#8221;?"
 msgstr ""
 
 #: admin/pages/delete_user.twig:14
@@ -783,6 +786,7 @@ msgstr ""
 #: admin/pages/manage_groups.twig:54
 #: admin/pages/manage_pages.twig:60
 #: admin/pages/manage_posts.twig:48
+#: admin/pages/manage_uploads.twig:41
 #: admin/pages/manage_users.twig:64
 msgid "delete"
 msgstr ""
@@ -790,7 +794,7 @@ msgstr ""
 #: admin/pages/manage_groups.twig:61
 #: admin/pages/manage_pages.twig:67
 #: admin/pages/manage_posts.twig:55
-#: admin/pages/manage_uploads.twig:47
+#: admin/pages/manage_uploads.twig:48
 #: admin/pages/manage_users.twig:71
 msgid "No results"
 msgstr ""
@@ -798,7 +802,7 @@ msgstr ""
 #: admin/pages/manage_groups.twig:69
 #: admin/pages/manage_pages.twig:75
 #: admin/pages/manage_posts.twig:63
-#: admin/pages/manage_uploads.twig:55
+#: admin/pages/manage_uploads.twig:56
 #: admin/pages/manage_users.twig:79
 #, php-format
 msgid "Page %d of %s"
@@ -876,7 +880,7 @@ msgstr ""
 msgid "Size"
 msgstr ""
 
-#: admin/pages/manage_uploads.twig:40
+#: admin/pages/manage_uploads.twig:38
 msgid "download"
 msgstr ""
 

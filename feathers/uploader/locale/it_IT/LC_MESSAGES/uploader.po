@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: feathers/uploader/admin/help/uploader_source.twig:3
@@ -51,10 +51,10 @@ msgstr "(Dimensione massima del file:%d megabyte)"
 msgid "Caption"
 msgstr "Didascalia"
 
-#: feathers/uploader/uploader.php:63
+#: feathers/uploader/uploader.php:62
 msgid "You did not select any files to upload."
 msgstr "Non è stato selezionato alcun file da caricare."
 
-#: feathers/uploader/uploader.php:204
+#: feathers/uploader/uploader.php:184
 msgid "Source"
 msgstr "Sorgente"

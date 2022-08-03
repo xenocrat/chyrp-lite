@@ -7,7 +7,7 @@ msgstr ""
 
 #: modules/pingable/admin/pages/delete_pingback.twig:8
 #, php-format
-msgid "Are you sure you want to delete the pingback from &#8220;%s&#8221;?"
+msgid "&#8220;%s&#8221; will be permanently deleted."
 msgstr ""
 
 #: modules/pingable/admin/pages/edit_pingback.twig:3
