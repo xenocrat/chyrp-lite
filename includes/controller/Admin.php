@@ -1223,9 +1223,7 @@
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to delete uploads."));
 
-            if (empty($_GET['file']))
-                error(__("Error"), __("Missing argument."), null, 400);
-
+            fallback($_GET['file'], "");
             $filename = str_replace(array(DIR, "/"), "", $_GET['file']);
             $filepath = uploaded($filename, false);
 
@@ -1263,12 +1261,10 @@
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(__("Access Denied"), __("Invalid authentication token."));
 
-            if (empty($_POST['file']))
-                error(__("Error"), __("Missing argument."), null, 400);
-
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
                 redirect("manage_uploads");
 
+            fallback($_POST['file'], "");
             $filename = str_replace(array(DIR, "/"), "", $_POST['file']);
             $filepath = uploaded($filename, false);
 
@@ -1276,9 +1272,9 @@
                 Flash::warning(__("File not found."), "manage_uploads");
 
             if (!delete_upload($filename))
-                Flash::warning(__("Could not delete file."), "manage_uploads");
+                Flash::warning(__("Failed to delete upload."), "manage_uploads");
 
-            Flash::notice(__("File deleted."), "manage_uploads");
+            Flash::notice(__("Upload deleted."), "manage_uploads");
         }
 
         /**
