@@ -2462,11 +2462,11 @@
      *     Whether or not the file was deleted successfully.
      */
     function delete_upload($filename): bool {
-        $trigger = Trigger::current();
+        $filename = str_replace(array(DIR, "/"), "", $filename);
         $filepath = uploaded($filename, false);
 
         if (file_exists($filepath)) {
-            $trigger->call("delete_upload", $filename);
+            Trigger::current()->call("delete_upload", $filename);
             return @unlink($filepath);
         }
 
