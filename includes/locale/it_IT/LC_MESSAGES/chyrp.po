@@ -735,79 +735,79 @@ msgstr "Hai già effettuato l’accesso."
 msgid "Missing argument."
 msgstr "Argomento mancante."
 
-#: includes/controller/Admin.php:2246
+#: includes/controller/Admin.php:2243
 msgid "Help"
 msgstr "Aiuto"
 
-#: includes/controller/Admin.php:2259
+#: includes/controller/Admin.php:2256
 msgid "Write"
 msgstr "Scrivi"
 
-#: includes/controller/Admin.php:2260
+#: includes/controller/Admin.php:2257
 msgid "Manage"
 msgstr "Gestisci"
 
-#: includes/controller/Admin.php:2261
+#: includes/controller/Admin.php:2258
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: includes/controller/Admin.php:2262
+#: includes/controller/Admin.php:2259
 msgid "Extend"
 msgstr "Estendi"
 
-#: includes/controller/Admin.php:2272
+#: includes/controller/Admin.php:2269
 msgid "Page"
 msgstr "Pagina"
 
-#: includes/controller/Admin.php:2301
+#: includes/controller/Admin.php:2298
 msgid "Posts"
 msgstr "Post"
 
-#: includes/controller/Admin.php:2306
+#: includes/controller/Admin.php:2303
 msgid "Pages"
 msgstr "Pagine"
 
-#: includes/controller/Admin.php:2311 includes/controller/Admin.php:2346
+#: includes/controller/Admin.php:2308 includes/controller/Admin.php:2343
 msgid "Users"
 msgstr "Utenti"
 
-#: includes/controller/Admin.php:2317
+#: includes/controller/Admin.php:2314
 msgid "Groups"
 msgstr "Gruppi"
 
-#: includes/controller/Admin.php:2323
+#: includes/controller/Admin.php:2320
 msgid "Uploads"
 msgstr "Caricamenti"
 
-#: includes/controller/Admin.php:2328
+#: includes/controller/Admin.php:2325
 msgid "Import"
 msgstr "Importa"
 
-#: includes/controller/Admin.php:2331
+#: includes/controller/Admin.php:2328
 msgid "Export"
 msgstr "Esporta"
 
-#: includes/controller/Admin.php:2344
+#: includes/controller/Admin.php:2341
 msgid "General"
 msgstr "Generale"
 
-#: includes/controller/Admin.php:2345
+#: includes/controller/Admin.php:2342
 msgid "Content"
 msgstr "Contenuto"
 
-#: includes/controller/Admin.php:2347
+#: includes/controller/Admin.php:2344
 msgid "Routes"
 msgstr "Percorso"
 
-#: includes/controller/Admin.php:2363
+#: includes/controller/Admin.php:2360
 msgid "Modules"
 msgstr "Moduli"
 
-#: includes/controller/Admin.php:2364
+#: includes/controller/Admin.php:2361
 msgid "Feathers"
 msgstr "Feather"
 
-#: includes/controller/Admin.php:2365
+#: includes/controller/Admin.php:2362
 msgid "Themes"
 msgstr "Temi"
 
@@ -1190,22 +1190,22 @@ msgstr "Visita questo link per reimpostare la password:"
 msgid "Guest"
 msgstr "Ospite"
 
-#: includes/lib/Leaf.php:302
+#: includes/lib/Leaf.php:322
 #, php-format
 msgid "%s GB"
 msgstr "%s GB"
 
-#: includes/lib/Leaf.php:307
+#: includes/lib/Leaf.php:327
 #, php-format
 msgid "%s MB"
 msgstr "%s MB"
 
-#: includes/lib/Leaf.php:311
+#: includes/lib/Leaf.php:331
 #, php-format
 msgid "%s KB"
 msgstr "%s KB"
 
-#: includes/lib/Leaf.php:418
+#: includes/lib/Leaf.php:438
 msgid "Image source"
 msgstr "Fonte immagine"
 

@@ -3138,6 +3138,16 @@ Function: twig_function_uploaded_search
 Returns an array of matches, if the visitor has the "export_content" privilege.
 
 
+Function: twig_function_javascripts_nonce
+-----------------------------------------
+Returns a nonce value to enable inline JavaScript with a Content Security Policy.
+
+
+Function: twig_function_stylesheets_nonce
+-----------------------------------------
+Returns a nonce value to enable inline stylesheets with a Content Security Policy.
+
+
 Function: twig_filter_translate
 -------------------------------
 Returns a translated string.

@@ -33,7 +33,7 @@ msgstr ""
 #: modules/tags/tags.php:143
 #: modules/tags/tags.php:188
 #: modules/tags/tags.php:195
-#: modules/tags/tags.php:468
+#: modules/tags/tags.php:464
 msgid "Tags"
 msgstr ""
 
@@ -188,7 +188,7 @@ msgstr ""
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr ""
 
-#: modules/tags/tags.php:572
+#: modules/tags/tags.php:568
 #, php-format
 msgid "%d post tagged with &#8220;%s&#8221;"
 msgid_plural "%d posts tagged with &#8220;%s&#8221;"

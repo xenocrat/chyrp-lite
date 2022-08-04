@@ -930,80 +930,80 @@ msgstr ""
 msgid "Missing argument."
 msgstr ""
 
-#: includes/controller/Admin.php:2246
+#: includes/controller/Admin.php:2243
 msgid "Help"
 msgstr ""
 
-#: includes/controller/Admin.php:2259
+#: includes/controller/Admin.php:2256
 msgid "Write"
 msgstr ""
 
-#: includes/controller/Admin.php:2260
+#: includes/controller/Admin.php:2257
 msgid "Manage"
 msgstr ""
 
-#: includes/controller/Admin.php:2261
+#: includes/controller/Admin.php:2258
 msgid "Settings"
 msgstr ""
 
-#: includes/controller/Admin.php:2262
+#: includes/controller/Admin.php:2259
 msgid "Extend"
 msgstr ""
 
-#: includes/controller/Admin.php:2272
+#: includes/controller/Admin.php:2269
 msgid "Page"
 msgstr ""
 
-#: includes/controller/Admin.php:2301
+#: includes/controller/Admin.php:2298
 msgid "Posts"
 msgstr ""
 
-#: includes/controller/Admin.php:2306
+#: includes/controller/Admin.php:2303
 msgid "Pages"
 msgstr ""
 
-#: includes/controller/Admin.php:2311
-#: includes/controller/Admin.php:2346
+#: includes/controller/Admin.php:2308
+#: includes/controller/Admin.php:2343
 msgid "Users"
 msgstr ""
 
-#: includes/controller/Admin.php:2317
+#: includes/controller/Admin.php:2314
 msgid "Groups"
 msgstr ""
 
-#: includes/controller/Admin.php:2323
+#: includes/controller/Admin.php:2320
 msgid "Uploads"
 msgstr ""
 
-#: includes/controller/Admin.php:2328
+#: includes/controller/Admin.php:2325
 msgid "Import"
 msgstr ""
 
-#: includes/controller/Admin.php:2331
+#: includes/controller/Admin.php:2328
 msgid "Export"
 msgstr ""
 
-#: includes/controller/Admin.php:2344
+#: includes/controller/Admin.php:2341
 msgid "General"
 msgstr ""
 
-#: includes/controller/Admin.php:2345
+#: includes/controller/Admin.php:2342
 msgid "Content"
 msgstr ""
 
-#: includes/controller/Admin.php:2347
+#: includes/controller/Admin.php:2344
 msgid "Routes"
 msgstr ""
 
-#: includes/controller/Admin.php:2363
+#: includes/controller/Admin.php:2360
 msgid "Modules"
 msgstr ""
 
-#: includes/controller/Admin.php:2364
+#: includes/controller/Admin.php:2361
 msgid "Feathers"
 msgstr ""
 
-#: includes/controller/Admin.php:2365
+#: includes/controller/Admin.php:2362
 msgid "Themes"
 msgstr ""
 
@@ -1394,22 +1394,22 @@ msgstr ""
 msgid "Guest"
 msgstr ""
 
-#: includes/lib/Leaf.php:302
+#: includes/lib/Leaf.php:322
 #, php-format
 msgid "%s GB"
 msgstr ""
 
-#: includes/lib/Leaf.php:307
+#: includes/lib/Leaf.php:327
 #, php-format
 msgid "%s MB"
 msgstr ""
 
-#: includes/lib/Leaf.php:311
+#: includes/lib/Leaf.php:331
 #, php-format
 msgid "%s KB"
 msgstr ""
 
-#: includes/lib/Leaf.php:418
+#: includes/lib/Leaf.php:438
 msgid "Image source"
 msgstr ""
 

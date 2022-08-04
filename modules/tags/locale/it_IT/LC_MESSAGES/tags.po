@@ -55,7 +55,7 @@ msgstr "Modifica dei tag per &#8220;%s&#8221;"
 #: modules/tags/admin/pages/edit_tags.twig:10
 #: modules/tags/admin/pages/manage_tags.twig:52 modules/tags/tags.php:143
 #: modules/tags/tags.php:188 modules/tags/tags.php:195
-#: modules/tags/tags.php:468
+#: modules/tags/tags.php:464
 msgid "Tags"
 msgstr "Tag"
 
@@ -202,7 +202,7 @@ msgstr "Non sono presenti post con il tag specificato."
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr "Post taggati con &#8220;%s&#8221;"
 
-#: modules/tags/tags.php:572
+#: modules/tags/tags.php:568
 #, php-format
 msgid "%d post tagged with &#8220;%s&#8221;"
 msgid_plural "%d posts tagged with &#8220;%s&#8221;"

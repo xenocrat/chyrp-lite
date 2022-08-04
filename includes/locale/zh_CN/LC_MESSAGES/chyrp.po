@@ -729,79 +729,79 @@ msgstr "您已登陆。"
 msgid "Missing argument."
 msgstr "缺少参数。"
 
-#: includes/controller/Admin.php:2246
+#: includes/controller/Admin.php:2243
 msgid "Help"
 msgstr "帮助"
 
-#: includes/controller/Admin.php:2259
+#: includes/controller/Admin.php:2256
 msgid "Write"
 msgstr "写作"
 
-#: includes/controller/Admin.php:2260
+#: includes/controller/Admin.php:2257
 msgid "Manage"
 msgstr "管理所有"
 
-#: includes/controller/Admin.php:2261
+#: includes/controller/Admin.php:2258
 msgid "Settings"
 msgstr "设置"
 
-#: includes/controller/Admin.php:2262
+#: includes/controller/Admin.php:2259
 msgid "Extend"
 msgstr "扩展"
 
-#: includes/controller/Admin.php:2272
+#: includes/controller/Admin.php:2269
 msgid "Page"
 msgstr "页面"
 
-#: includes/controller/Admin.php:2301
+#: includes/controller/Admin.php:2298
 msgid "Posts"
 msgstr "所有帖子"
 
-#: includes/controller/Admin.php:2306
+#: includes/controller/Admin.php:2303
 msgid "Pages"
 msgstr "所有页面"
 
-#: includes/controller/Admin.php:2311 includes/controller/Admin.php:2346
+#: includes/controller/Admin.php:2308 includes/controller/Admin.php:2343
 msgid "Users"
 msgstr "用户"
 
-#: includes/controller/Admin.php:2317
+#: includes/controller/Admin.php:2314
 msgid "Groups"
 msgstr "所有组"
 
-#: includes/controller/Admin.php:2323
+#: includes/controller/Admin.php:2320
 msgid "Uploads"
 msgstr "上传"
 
-#: includes/controller/Admin.php:2328
+#: includes/controller/Admin.php:2325
 msgid "Import"
 msgstr "导入"
 
-#: includes/controller/Admin.php:2331
+#: includes/controller/Admin.php:2328
 msgid "Export"
 msgstr "导出"
 
-#: includes/controller/Admin.php:2344
+#: includes/controller/Admin.php:2341
 msgid "General"
 msgstr "通用"
 
-#: includes/controller/Admin.php:2345
+#: includes/controller/Admin.php:2342
 msgid "Content"
 msgstr "内容"
 
-#: includes/controller/Admin.php:2347
+#: includes/controller/Admin.php:2344
 msgid "Routes"
 msgstr "路由"
 
-#: includes/controller/Admin.php:2363
+#: includes/controller/Admin.php:2360
 msgid "Modules"
 msgstr "模块"
 
-#: includes/controller/Admin.php:2364
+#: includes/controller/Admin.php:2361
 msgid "Feathers"
 msgstr "羽毛"
 
-#: includes/controller/Admin.php:2365
+#: includes/controller/Admin.php:2362
 msgid "Themes"
 msgstr "主题"
 
@@ -1171,22 +1171,22 @@ msgstr "访问这个链接重置您的密码："
 msgid "Guest"
 msgstr "访问者"
 
-#: includes/lib/Leaf.php:302
+#: includes/lib/Leaf.php:322
 #, php-format
 msgid "%s GB"
 msgstr "%s GB"
 
-#: includes/lib/Leaf.php:307
+#: includes/lib/Leaf.php:327
 #, php-format
 msgid "%s MB"
 msgstr "%s MB"
 
-#: includes/lib/Leaf.php:311
+#: includes/lib/Leaf.php:331
 #, php-format
 msgid "%s KB"
 msgstr "%s KB"
 
-#: includes/lib/Leaf.php:418
+#: includes/lib/Leaf.php:438
 msgid "Image source"
 msgstr "图片来源"
 
