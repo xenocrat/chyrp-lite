@@ -26,7 +26,9 @@
                 new \Twig\TwigFunction("paginate",          "twig_function_paginate"),
                 new \Twig\TwigFunction("posted",            "twig_function_posted"),
                 new \Twig\TwigFunction("mailto",            "twig_function_mailto"),
-                new \Twig\TwigFunction("uploaded_search",   "twig_function_uploaded_search")
+                new \Twig\TwigFunction("uploaded_search",   "twig_function_uploaded_search"),
+                new \Twig\TwigFunction("javascripts_nonce", "twig_function_javascripts_nonce"),
+                new \Twig\TwigFunction("stylesheets_nonce", "twig_function_stylesheets_nonce")
             );
         }
 
@@ -227,6 +229,24 @@
             return array();
 
         return uploaded_search($search, $filter);
+    }
+
+    /**
+     * Function: twig_function_javascripts_nonce
+     * Returns a nonce value to enable inline JavaScript with a Content Security Policy.
+     */
+    function twig_function_javascripts_nonce(): string {
+        $nonce = "";
+        return Trigger::current()->filter($nonce, "javascripts_nonce");
+    }
+
+    /**
+     * Function: twig_function_stylesheets_nonce
+     * Returns a nonce value to enable inline stylesheets with a Content Security Policy.
+     */
+    function twig_function_stylesheets_nonce(): string {
+        $nonce = "";
+        return Trigger::current()->filter($nonce, "stylesheets_nonce");
     }
 
     /**
