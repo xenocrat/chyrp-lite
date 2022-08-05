@@ -44,7 +44,6 @@
                      MAIN_DIR.DIR."uploads",
                      MAIN_DIR.DIR."includes".DIR."caches",
                      MAIN_DIR.DIR."includes".DIR."lib".DIR."Twig",
-                     MAIN_DIR.DIR."includes".DIR."lib".DIR."TwigLegacy",
                      MAIN_DIR.DIR."includes".DIR."lib".DIR."IXR",
                      MAIN_DIR.DIR."includes".DIR."lib".DIR."cebe");
 

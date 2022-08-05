@@ -42,7 +42,6 @@
     # Paths to be excluded from directory recursion.
     $exclude = array(INCLUDES_DIR.DIR."caches",
                      INCLUDES_DIR.DIR."lib".DIR."Twig",
-                     INCLUDES_DIR.DIR."lib".DIR."TwigLegacy",
                      INCLUDES_DIR.DIR."lib".DIR."IXR",
                      INCLUDES_DIR.DIR."lib".DIR."cebe");
 
