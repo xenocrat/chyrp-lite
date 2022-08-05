@@ -214,11 +214,11 @@ msgstr ""
 msgid "Are you sure you want to proceed?"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:199 admin/javascripts/admin.js.php:567
+#: admin/javascripts/admin.js.php:199 admin/javascripts/admin.js.php:566
 msgid "Close"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:206 admin/javascripts/admin.js.php:574
+#: admin/javascripts/admin.js.php:206 admin/javascripts/admin.js.php:573
 msgid "close"
 msgstr ""
 
@@ -250,7 +250,7 @@ msgstr ""
 msgid "link"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:287 admin/javascripts/admin.js.php:334
+#: admin/javascripts/admin.js.php:287 admin/javascripts/admin.js.php:333
 msgid "image"
 msgstr ""
 
@@ -258,19 +258,19 @@ msgstr ""
 msgid "Upload"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:312 admin/javascripts/admin.js.php:426
+#: admin/javascripts/admin.js.php:311 admin/javascripts/admin.js.php:425
 msgid "Uploading..."
 msgstr ""
 
-#: admin/javascripts/admin.js.php:347 admin/pages/themes.twig:25
+#: admin/javascripts/admin.js.php:346 admin/pages/themes.twig:25
 msgid "Preview"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:363
+#: admin/javascripts/admin.js.php:362
 msgid "preview"
 msgstr ""
 
-#: admin/javascripts/admin.js.php:385
+#: admin/javascripts/admin.js.php:384
 msgid "Words:"
 msgstr ""
 
