@@ -297,9 +297,8 @@ var Write = {
                 [$("<input>", {
                     "name": toolbar.attr("id") + "_upload",
                     "type": "file",
-                    "accept": "image/*",
-                    "style": "display:inline; width:0px; height:16px; outline:none; border:none; padding:0em; margin:0em"
-                }).addClass("toolbar").change(function(e) {
+                    "accept": "image/*"
+                }).addClass("toolbar hidden").change(function(e) {
                     if (!!e.target.files && e.target.files.length > 0) {
                         var file = e.target.files[0];
                         var form = new FormData();
