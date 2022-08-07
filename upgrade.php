@@ -450,7 +450,7 @@
             }
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('./fonts/OpenSans-SemiBold.woff') format('woff');
+                src: url('./fonts/OpenSans-Bold.woff') format('woff');
                 font-weight: bold;
                 font-style: normal;
             }
@@ -462,7 +462,7 @@
             }
             @font-face {
                 font-family: 'Open Sans webfont';
-                src: url('./fonts/OpenSans-SemiBoldItalic.woff') format('woff');
+                src: url('./fonts/OpenSans-BoldItalic.woff') format('woff');
                 font-weight: bold;
                 font-style: italic;
             }
