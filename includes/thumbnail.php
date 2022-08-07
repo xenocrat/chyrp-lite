@@ -191,9 +191,6 @@
         if ($original === false)
             error(__("Error"), __("Failed to create image thumbnail."));
 
-        if (DEBUG)
-            error_log("IMAGE created ".$cache_fn);
-
         # Create the thumbnail image resource.
         $thumb = imagecreatetruecolor($thumb_w, $thumb_h);
 
@@ -239,6 +236,9 @@
         # Destroy resources.
         imagedestroy($original);
         imagedestroy($thumb);
+
+        if (DEBUG)
+            error_log("IMAGE created ".$cache_fp);
     }
 
     # Serve a fresh thumbnail file.
