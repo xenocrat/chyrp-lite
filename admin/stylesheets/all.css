@@ -555,7 +555,9 @@ table tbody tr td.title,
 table thead tr th.name,
 table tbody tr td.name,
 table thead tr th.list,
-table tbody tr td.list {
+table tbody tr td.list,
+table thead tr th.filename,
+table tbody tr td.filename {
     text-align: left;
     text-align: start;
 }
@@ -580,6 +582,9 @@ table tbody tr td.controls {
 }
 table tbody tr td.controls {
     width: 4rem;
+}
+table tbody tr td.filename {
+    word-wrap: anywhere;
 }
 table tbody tr td.placeholder {
     display: block;
@@ -615,7 +620,7 @@ td.controls img {
     width: 16px;
     height: 16px;
 }
-td.thumbnail img.image {
+td.filename img.image {
     width: 70px;
     height: 70px;
     margin-right: 0.5rem;
@@ -623,7 +628,7 @@ td.thumbnail img.image {
     outline: #ff7f00 solid 1px;
     outline-offset: 0px;
 }
-td.thumbnail img.placeholder {
+td.filename img.placeholder {
     width: 16px;
     height: 16px;
     padding: 27px;
