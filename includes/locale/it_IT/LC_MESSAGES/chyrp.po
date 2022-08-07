@@ -97,7 +97,7 @@ msgstr "Il percorso è stato avviato con un Controller non valido."
 #: includes/helpers.php:2383 includes/helpers.php:2386
 #: includes/helpers.php:2391 includes/thumbnail.php:15
 #: includes/thumbnail.php:18 includes/thumbnail.php:33
-#: includes/thumbnail.php:192 includes/thumbnail.php:237 install.php:834
+#: includes/thumbnail.php:192 includes/thumbnail.php:234 install.php:834
 #: upgrade.php:179 upgrade.php:192 upgrade.php:205 upgrade.php:218
 #: upgrade.php:231 upgrade.php:245 upgrade.php:271 upgrade.php:284
 #: upgrade.php:298 upgrade.php:311 upgrade.php:324 upgrade.php:337
@@ -1354,7 +1354,7 @@ msgstr "Esporta contenuto"
 msgid "Maximum size cannot be zero."
 msgstr "La dimensione massima non può essere zero."
 
-#: includes/thumbnail.php:192 includes/thumbnail.php:237
+#: includes/thumbnail.php:192 includes/thumbnail.php:234
 msgid "Failed to create image thumbnail."
 msgstr "Impossibile creare l'immagine in forato ridotto."
 

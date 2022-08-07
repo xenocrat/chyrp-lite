@@ -119,7 +119,7 @@ msgstr ""
 #: includes/thumbnail.php:18
 #: includes/thumbnail.php:33
 #: includes/thumbnail.php:192
-#: includes/thumbnail.php:237
+#: includes/thumbnail.php:234
 #: install.php:834
 #: upgrade.php:179
 #: upgrade.php:192
@@ -1559,7 +1559,7 @@ msgid "Maximum size cannot be zero."
 msgstr ""
 
 #: includes/thumbnail.php:192
-#: includes/thumbnail.php:237
+#: includes/thumbnail.php:234
 msgid "Failed to create image thumbnail."
 msgstr ""
 
