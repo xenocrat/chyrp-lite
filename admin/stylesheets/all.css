@@ -579,7 +579,7 @@ table tbody tr td.controls {
     vertical-align: middle;
 }
 table tbody tr td.controls {
-    width: 4em;
+    width: 4rem;
 }
 table tbody tr td.placeholder {
     display: block;
@@ -614,6 +614,21 @@ td.controls img {
     top: 2px;
     width: 16px;
     height: 16px;
+}
+td.thumbnail img.image {
+    width: 70px;
+    height: 70px;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+    outline: #ff7f00 solid 1px;
+    outline-offset: 0px;
+}
+td.thumbnail img.placeholder {
+    width: 16px;
+    height: 16px;
+    padding: 27px;
+    margin-right: 0.5rem;
+    vertical-align: middle;
 }
 
 /* Group: Flashes */

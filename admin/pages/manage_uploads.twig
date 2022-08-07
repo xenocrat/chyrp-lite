@@ -14,7 +14,7 @@
 <table>
 <thead>
 <tr class="head">
-<th class="uploads_name name main">{{ "Name" | translate }}</th>
+<th class="uploads_name name main thumbnail">{{ "Name" | translate }}</th>
 <th class="uploads_modified date">{{ "Last Modified" | translate }}</th>
 <th class="uploads_size value">{{ "Size" | translate }}</th>
 {{ trigger.call("manage_uploads_column_header") }}
@@ -24,7 +24,12 @@
 <tbody>
 {% for upload in uploads.paginated %}
 <tr id="uploads_{{ loop.index }}" class="uploads">
-<td class="uploads_name name main">
+<td class="uploads_name name main thumbnail">
+{% if ["jpg", "jpeg", "png", "gif", "webp"] | contains(upload.type) %}
+{{ upload.name | thumbnail("", false, ["max_width=70", "quality=60", "square=1"], "70px") }}
+{% else %}
+<img class="placeholder" src="{{ site.chyrp_url }}/admin/images/icons/file.svg" alt="">
+{% endif %}
 <a target="_blank" href="{{ upload.name | uploaded }}">{{ upload.name | fix }}</a>
 </td>
 <td class="uploads_modified value">
