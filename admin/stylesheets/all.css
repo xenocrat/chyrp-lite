@@ -59,7 +59,7 @@ html[lang="he"] {
     direction: rtl;
 }
 body, div, dl, dt, dd, ul, ol, li,
-h1, h2, h3, h4, h5, h6,
+aside, h1, h2, h3, h4, h5, h6,
 pre, code, form, fieldset, legend,
 input, textarea, p, blockquote, th, td {
     margin: 0em;
@@ -266,6 +266,36 @@ a:active {
     border-top: none;
     position: relative;
     overflow: hidden;
+}
+hr {
+    border: none;
+    clear: both;
+    border-top: 1px solid #cfcfcf;
+    margin: 2rem 0rem;
+}
+aside {
+    margin-bottom: 1rem;
+    padding: 0.5em 1em;
+    border: 1px solid #e5d7a1;
+    border-radius: 0.25em;
+    background-color: #fffecd;
+}
+*.tag {
+    display: inline-block;
+    margin-top: 0.25rem;
+    padding: 0px 2px;
+    padding: 0em 0.25em;
+    border-radius: 0.25em;
+    border: 1px solid #cfcfcf;
+    background-color: #efefef;
+}
+*.tag:link,
+*.tag:visited {
+    text-decoration: none;
+}
+*.tag_added {
+    background-color: #f2fbff;
+    border-color: #b8cdd9;
 }
 div.pagination {
     text-align: center;
@@ -753,23 +783,6 @@ div.confirmation a.button {
     margin-right: 0.5rem;
     padding-right: calc(16px + 0.4em);
 }
-*.tag {
-    display: inline-block;
-    margin-top: 0.25rem;
-    padding: 0px 2px;
-    padding: 0em 0.25em;
-    border-radius: 0.25em;
-    border: 1px solid #cfcfcf;
-    background-color: #efefef;
-}
-*.tag:link,
-*.tag:visited {
-    text-decoration: none;
-}
-*.tag_added {
-    background-color: #f2fbff;
-    border-color: #b8cdd9;
-}
 
 /* Group: Options */
 
@@ -884,12 +897,6 @@ table.interactive + div.controls {
 div.confirmation {
     text-align: center;
     margin-top: 1rem;
-}
-hr {
-    border: none;
-    clear: both;
-    border-top: 1px solid #cfcfcf;
-    margin: 2rem 0rem;
 }
 a.emblem {
     text-decoration: none;
