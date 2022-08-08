@@ -289,14 +289,6 @@ aside {
     border: 1px solid #cfcfcf;
     background-color: #efefef;
 }
-*.tag:link,
-*.tag:visited {
-    text-decoration: none;
-}
-*.tag_added {
-    background-color: #f2fbff;
-    border-color: #b8cdd9;
-}
 div.pagination {
     text-align: center;
     margin-top: 1em;
@@ -888,6 +880,14 @@ textarea:focus + span.options_tray {
 
 /* Group: Helpers & General */
 
+*.tag:link,
+*.tag:visited {
+    text-decoration: none;
+}
+*.tag_added {
+    background-color: #f2fbff;
+    border-color: #b8cdd9;
+}
 table.interactive + div.controls {
     background-color: #fffceb;
     padding: 1rem;
