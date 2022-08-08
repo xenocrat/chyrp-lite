@@ -620,7 +620,7 @@ td.controls img {
     width: 16px;
     height: 16px;
 }
-td.filename img.image {
+td img.image {
     width: 70px;
     height: 70px;
     margin-right: 0.5rem;
@@ -628,7 +628,7 @@ td.filename img.image {
     outline: #ff7f00 solid 1px;
     outline-offset: 0px;
 }
-td.filename img.placeholder {
+td img.placeholder {
     width: 16px;
     height: 16px;
     padding: 27px;
