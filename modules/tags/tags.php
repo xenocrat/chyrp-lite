@@ -395,7 +395,7 @@
             if (empty($_POST['post']))
                 Flash::warning(__("No posts selected.", "tags"), "manage_tags");
 
-            if (empty($_POST['name']))
+            if (!isset($_POST['name']) or $_POST['name'] == "")
                 Flash::warning(__("No tags specified.", "tags"), "manage_tags");
 
             foreach ($_POST['post'] as $post_id) {
