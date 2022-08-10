@@ -67,7 +67,7 @@
 
                 foreach ($params as $name => $val)
                     $logQuery = preg_replace("/{$name}([^a-zA-Z0-9_]|$)/",
-                                 str_replace("\\", "\\\\", $this->sql->escape($val))."\\1", $logQuery);
+                                 str_replace("\\", "\\\\", $this->sql->escape($val))."$1", $logQuery);
 
                 $this->sql->debug[] = array("number" => $this->sql->queries,
                                             "file" => str_replace(MAIN_DIR."/", "", $target["file"]),
@@ -86,7 +86,7 @@
                     $this->queryString = preg_replace("/{$name}([^a-zA-Z0-9_]|$)/",
                                           str_replace(array("\\", "\$"),
                                                       array("\\\\", "\\\$"),
-                                                      $this->sql->escape($val))."\\1",
+                                                      $this->sql->escape($val))."$1",
                                                       $this->queryString);
 
                 if (!$this->result)
