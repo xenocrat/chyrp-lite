@@ -44,7 +44,7 @@
 </table>
 <h2>{{ GET.query is not empty ? "Search Results" | translate : "Posts" | translate }}</h2>
 <form action="{{ url('bulk_tag') }}" method="post" accept-charset="UTF-8" data-toggler="tag_toggler">
-<table class="interactive">
+<table class="interactive{{ posts.paginated is empty ? ' empty' : '' }}">
 <thead>
 <tr class="head">
 <th class="toggler" id="tag_toggler"></th>
