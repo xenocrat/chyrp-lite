@@ -15,7 +15,7 @@
 </form>
 <h2>{{ GET.query is not empty ? "Search Results" | translate : "Spam" | translate("comments") }}</h2>
 <form action="{{ url('bulk_comments') }}" method="post" accept-charset="UTF-8" data-toggler="spam_toggler">
-<table class="interactive">
+<table class="interactive{{ comments.paginated is empty ? ' empty' : '' }}">
 <thead>
 <tr class="head">
 <th class="toggler" id="spam_toggler"></th>
