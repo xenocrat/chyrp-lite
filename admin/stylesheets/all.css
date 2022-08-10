@@ -549,7 +549,7 @@ table {
     overflow-x: scroll;
 }
 table:last-child,
-table.interactive {
+table.interactive:not(.empty) {
     margin-bottom: 0em;
 }
 table thead tr {
@@ -893,6 +893,9 @@ table.interactive + div.controls {
     padding: 1rem;
     border: 1px solid #cfcfcf;
     border-top: none;
+}
+table.interactive.empty + div.controls {
+    display: none;
 }
 div.confirmation {
     text-align: center;
