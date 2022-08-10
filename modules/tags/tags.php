@@ -67,8 +67,8 @@
         }
 
         private function tags_encoded($text): string {
-            # Recreate JSON encoding and do SQL double-escaping for the search term.
-            return SQL::current()->escape(trim(json_set((string) $text), "\""), false);
+            # Recreate JSON encoding for the search term.
+            return trim(json_set((string) $text), "\"");
         }
 
         private function prepare_tags($tags): array {
@@ -206,8 +206,8 @@
                          __("You do not have sufficient privileges to manage tags.", "tags"));
 
             fallback($_GET['query'], "");
-            list($where, $params) = keywords($this->tags_encoded($_GET['query']),
-                                    "post_attributes.name = 'tags' AND post_attributes.value LIKE :query");
+            $where = array("post_attributes.name = 'tags' AND post_attributes.value LIKE :query");
+            $query = array(":query" => $this->tags_clean_match($_GET['query']));
 
             $visitor = Visitor::current();
 
@@ -216,7 +216,7 @@
 
             $results = Post::find(array("placeholders" => true,
                                         "where" => $where,
-                                        "params" => $params));
+                                        "params" => $query));
 
             $ids = array();
 
