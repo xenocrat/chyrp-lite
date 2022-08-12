@@ -8,7 +8,9 @@
         # An array of clean URL => dirty URL translations.
         public $urls = array(
             '|/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/$|' => '/?action=$1&amp;$2=$3&amp;$4=$5',
-            '|/([^/]+)/([^/]+)/([^/]+)/$|'                 => '/?action=$1&amp;$2=$3'
+            '|/([^/]+)/([^/]+)/([^/]+)/([^/]+)/$|'         => '/?action=$1&amp;$2=$3&amp;$4',
+            '|/([^/]+)/([^/]+)/([^/]+)/$|'                 => '/?action=$1&amp;$2=$3',
+            '|/([^/]+)/([^/]+)/$|'                         => '/?action=$1&amp;$2'
         );
 
         # Boolean: $displayed
@@ -1195,7 +1197,7 @@
             if (isset($_POST['search']))
                 redirect("manage_groups/search/".str_ireplace("%2F", "", urlencode($_POST['search']))."/");
 
-            if (!empty($_GET['search'])) {
+            if (isset($_GET['search']) and $_GET['search'] != "") {
                 $user = new User(array("login" => $_GET['search']));
 
                 if (!$user->no_results) {
@@ -1290,7 +1292,7 @@
             if (isset($_POST['search']))
                 redirect("manage_uploads/search/".str_ireplace("%2F", "", urlencode($_POST['search']))."/");
 
-            if (!empty($_GET['search']))
+            if (isset($_GET['search']))
                 $uploads = new Paginator(uploaded_search($_GET['search']));
             else
                 $uploads = new Paginator(uploaded_search());
