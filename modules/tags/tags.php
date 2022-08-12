@@ -205,13 +205,12 @@
                 show_403(__("Access Denied"),
                          __("You do not have sufficient privileges to manage tags.", "tags"));
 
-            fallback($_GET['query'], "");
             $where = array();
             $params = array();
 
-            if (!empty($_GET['query'])) {
+            if (isset($_GET['search']) and $_GET['search'] != "") {
                 $where[] = "post_attributes.name = 'tags' AND post_attributes.value LIKE :query";
-                $params[":query"] = $this->tags_clean_match($_GET['query']);
+                $params[":query"] = $this->tags_clean_match($_GET['search']);
             }
 
             $visitor = Visitor::current();
@@ -307,7 +306,7 @@
                 error(__("No Tag Specified", "tags"),
                       __("Please specify the tag you want to rename.", "tags"), null, 400);
 
-            if (empty($_POST['name']))
+            if (!isset($_POST['name']) or $_POST['name'] == "")
                 error(__("Error"), __("Name cannot be blank.", "tags"), null, 422);
 
             $results = SQL::current()->select(

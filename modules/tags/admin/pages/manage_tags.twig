@@ -16,7 +16,7 @@
 {% for tag in tag_cloud %}
 <tr>
 <td class="tag_name name main">
-<a class="tag" href="{{ url('manage_tags/query/' ~ (tag.clean | url_encode)) }}" title="{{ tag.title }}">{{ tag.name }}</a>
+<a class="tag" href="{{ url('manage_tags/search/' ~ (tag.clean | url_encode)) }}" title="{{ tag.title }}">{{ tag.name }}</a>
 </td>
 <td class="tag_count value">
 {{ tag.popularity }}
@@ -42,7 +42,7 @@
 {% endfor %}
 </tbody>
 </table>
-<h2>{{ GET.query is not empty ? "Search Results" | translate : "Posts" | translate }}</h2>
+<h2>{{ GET.search is defined ? "Search Results" | translate : "Posts" | translate }}</h2>
 <form action="{{ url('bulk_tag') }}" method="post" accept-charset="UTF-8" data-toggler="tag_toggler">
 <table class="interactive{{ posts.paginated is empty ? ' empty' : '' }}">
 <thead>
