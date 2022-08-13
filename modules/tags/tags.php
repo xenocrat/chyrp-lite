@@ -1,5 +1,9 @@
 <?php
     class Tags extends Modules {
+        # Array: $caches
+        # Query caches for methods.
+        private $caches = array();
+
         public function __init(): void {
             $this->addAlias("metaWeblog_before_newPost", "metaWeblog_before_editPost");
         }
@@ -158,24 +162,23 @@
         }
 
         public function post_tags_link_attr($attr, $post): array {
-            $main = MainController::current();
-            $tags = array();
+            $urls = array();
 
             if ($post->no_results)
-                return $tags;
+                return $urls;
 
-            foreach ($post->tags as $tag => $clean)
-                $tags[] = '<a class="tag" href="'.
-                          url("tag/".urlencode($clean), $main).'" rel="tag">'.$tag.'</a>';
+            foreach ($post->tags as $name => $clean) {
+                $tag = $this->tag_find_by_name($name);
 
-            return $tags;
+                if ($tag)
+                    $urls[] = '<a class="tag" href="'.$tag["url"].'" rel="tag">'.$tag["name"].'</a>';
+            }
+
+            return $urls;
         }
 
-        public function twig_context_main($context): array {
-            if (!isset($context["tag_cloud"]))
-                $context["tag_cloud"] = $this->tag_cloud(10);
-
-            return $context;
+        public function twig_function_tag_cloud($limit = false, $sort = "name_asc", $scale = 300): array {
+            return $this->tag_cloud($limit, $sort, $scale);
         }
 
         public function parse_urls($urls): array {
@@ -240,23 +243,6 @@
                             array("tag_cloud" => $this->tag_cloud(), "posts" => $posts));
         }
 
-        public function admin_rename_tag($admin): void {
-            if (!Post::any_editable())
-                show_403(__("Access Denied"),
-                         __("You do not have sufficient privileges to rename tags.", "tags"));
-
-            if (empty($_GET['clean']))
-                error(__("No Tag Specified", "tags"),
-                      __("Please specify the tag you want to rename.", "tags"), null, 400);
-
-            $tag = $this->tag_find($_GET['clean']);
-
-            if (empty($tag))
-                Flash::warning(__("Tag not found.", "tags"), "manage_tags");
-
-            $admin->display("pages".DIR."rename_tag", array("tag" => $tag));
-        }
-
         public function admin_edit_tags($admin): void {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(__("No ID Specified"), __("An ID is required to edit tags.", "tags"), null, 400);
@@ -292,6 +278,23 @@
             $post->update();
 
             Flash::notice(__("Tags updated.", "tags"), "manage_tags");
+        }
+
+        public function admin_rename_tag($admin): void {
+            if (!Post::any_editable())
+                show_403(__("Access Denied"),
+                         __("You do not have sufficient privileges to rename tags.", "tags"));
+
+            if (empty($_GET['clean']))
+                error(__("No Tag Specified", "tags"),
+                      __("Please specify the tag you want to rename.", "tags"), null, 400);
+
+            $tag = $this->tag_find_by_clean($_GET['clean']);
+
+            if (empty($tag))
+                Flash::warning(__("Tag not found.", "tags"), "manage_tags");
+
+            $admin->display("pages".DIR."rename_tag", array("tag" => $tag));
         }
 
         public function admin_update_tag($admin)/*: never */{
@@ -339,7 +342,7 @@
                 error(__("No Tag Specified", "tags"),
                       __("Please specify the tag you want to delete.", "tags"), null, 400);
 
-            $tag = $this->tag_find($_GET['clean']);
+            $tag = $this->tag_find_by_clean($_GET['clean']);
 
             if (empty($tag))
                 Flash::warning(__("Tag not found.", "tags"), "manage_tags");
@@ -419,7 +422,7 @@
                 return true;
             }
 
-            $tag = $this->tag_find($_GET['name']);
+            $tag = $this->tag_find_by_clean($_GET['name']);
 
             if (empty($tag)) {
                 $main->display(array("pages".DIR."tag", "pages".DIR."index"),
@@ -510,10 +513,24 @@
         }
 
         public function tag_cloud($limit = false, $sort = "popularity_desc", $scale = 300): array {
-            if (isset($this->tag_cache))
-                $cloud = $this->tag_cache;
+            switch ($sort) {
+                case 'name_asc':
+                    $method = array($this, "sort_tags_name_asc");
+                    break;
 
-            if (empty($cloud)) {
+                case 'name_desc':
+                    $method = array($this, "sort_tags_name_desc");
+                    break;
+
+                case 'popularity_asc':
+                    $method = array($this, "sort_tags_popularity_asc");
+                    break;
+
+                default:
+                    $method = array($this, "sort_tags_popularity_desc");
+            }
+
+            if (!isset($this->caches["tag_cloud"])) {
                 $results = SQL::current()->select(
                     "posts",
                     "post_attributes.*",
@@ -540,45 +557,51 @@
                         $names[] = $name;
                 }
 
-                if (empty($found))
-                    return $cloud;
+                if (!empty($found)) {
+                    $popularity = array_count_values($names);
+                    $min = min($popularity);
+                    $max = max($popularity);
+                    $step = (int) $scale / (($min === $max) ? 1 : ($max - $min));
 
-                $popularity = array_count_values($names);
-                $min = min($popularity);
-                $max = max($popularity);
-                $step = (int) $scale / (($min === $max) ? 1 : ($max - $min));
+                    $main = MainController::current();
 
-                $main = MainController::current();
-
-                foreach ($popularity as $tag => $count) {
-                    $title = $this->tag_title_post_count($tag, $count);
-
-                    $cloud[] = array("size" => floor($step * ($count - $min)),
-                                     "popularity" => $count,
-                                     "name" => $tag,
-                                     "title" => $title,
-                                     "clean" => $found[$tag],
-                                     "url" => url("tag/".$found[$tag], $main));
+                    foreach ($popularity as $name => $count) {
+                        $t = _p("%d post tagged with &#8220;%s&#8221;", "%d posts tagged with &#8220;%s&#8221;", $count, "tags");
+                        $cloud[] = array("size" => floor($step * ($count - $min)),
+                                         "popularity" => $count,
+                                         "name" => $name,
+                                         "title" => sprintf($t, $count, fix($name, true)),
+                                         "clean" => $found[$name],
+                                         "url" => url("tag/".$found[$name], $main));
+                    }
                 }
 
-                $this->tag_cache = $cloud;
+                $this->caches["tag_cloud"] = $cloud;
             }
 
-            usort($cloud, array($this, "sort_tags_".$sort));
-            return ($limit) ? array_slice($cloud, 0, $limit) : $cloud ;
+            $array = $this->caches["tag_cloud"];
+            usort($array, $method);
+            return ($limit) ? array_slice($array, 0, $limit) : $array ;
         }
 
-        private function tag_title_post_count($tag, $count): string {
-            $str = _p("%d post tagged with &#8220;%s&#8221;", "%d posts tagged with &#8220;%s&#8221;", $count, "tags");
-            return sprintf($str, $count, fix($tag, true));
-        }
-
-        public function tag_find($clean): array|false {
+        public function tag_find_by_clean($clean): array|false {
             $cloud = $this->tag_cloud();
 
-            foreach ($cloud as $tag)
+            foreach ($cloud as $tag) {
                 if ($tag["clean"] === $clean)
                     return $tag;
+            }
+
+            return false;
+        }
+
+        public function tag_find_by_name($name): array|false {
+            $cloud = $this->tag_cloud();
+
+            foreach ($cloud as $tag) {
+                if ($tag["name"] === $name)
+                    return $tag;
+            }
 
             return false;
         }
