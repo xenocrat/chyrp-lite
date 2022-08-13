@@ -58,6 +58,7 @@
 {% for caller in sql_debug %}
 {{ caller.query | replace({"\t": "    "}) | fix }}
 {{ "Called from %s on line %d at %s seconds." | translate | format(caller.file, caller.line, caller.time) }}
+
 {% endfor %}
 -->
 {% endif %}
