@@ -491,9 +491,6 @@
             if (empty($post->tags))
                 return $ids;
 
-            if (count($ids) >= $limit)
-                return $ids;
-
             foreach ($post->tags as $name => $clean) {
                 $results = SQL::current()->select(
                     "post_attributes",
