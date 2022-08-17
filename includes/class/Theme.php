@@ -93,7 +93,7 @@
          * Generates an array listing each month with entries in the archives.
          *
          * Parameters:
-         *     $limit - Number of months to list.
+         *     $limit - Maximum number of months to list.
          */
         public function archives_list($limit = 12): array {
             if (isset($this->caches["archives_list"][$limit]))
@@ -104,24 +104,32 @@
             $feathers = Post::feathers();
             $statuses = Post::statuses();
 
-            $array = array();
-            $month = strtotime("midnight first day of this month");
+            $results = $sql->select("posts",
+                                    array("created_at"),
+                                    array($feathers,
+                                          $statuses),
+                                    "created_at DESC")->fetchAll();
 
-            for ($i = 0; $i < $limit; $i++) {
-                $count = $sql->count("posts",
-                                     array("created_at LIKE" => when("Y-m-%", $month),
-                                           $feathers,
-                                           $statuses));
+            $archives = array();
 
-                if (!empty($count))
-                    $array[] = array("when"  => $month,
-                                     "url"   => url("archive/".when("Y/m/", $month), $main),
-                                     "count" => $count);
+            foreach ($results as $result) {
+                $created_at = strtotime($result["created_at"]);
+                $this_month = strtotime("midnight first day of this month", $created_at);
 
-                $month = strtotime("midnight first day of last month", $month);
+                if (!isset($archives[$this_month]))
+                    $archives[$this_month] = array(
+                        "when"  => $this_month,
+                        "url"   => url("archive/".when("Y/m/", $this_month), $main),
+                        "count" => 0
+                    );
+
+                $archives[$this_month]["count"]++;
+
+                if (count($archives) == $limit)
+                    break;
             }
 
-            return $this->caches["archives_list"][$limit] = $array;
+            return $this->caches["archives_list"][$limit] = array_values($archives);
         }
 
         /**
@@ -129,7 +137,7 @@
          * Generates an array of recent posts.
          *
          * Parameters:
-         *     $limit - Number of posts to list.
+         *     $limit - Maximum number of recent posts to list.
          */
         public function recent_posts($limit = 5): array {
             if (isset($this->caches["recent_posts"][$limit]))
@@ -154,7 +162,7 @@
          *
          * Parameters:
          *     $post - The post to use as the basis.
-         *     $limit - Number of related posts to list.
+         *     $limit - Maximum number of related posts to list.
          */
         public function related_posts($post, $limit = 5): array {
             if ($post->no_results)
