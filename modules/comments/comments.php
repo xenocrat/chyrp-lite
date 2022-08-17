@@ -7,8 +7,6 @@
         private $caches = array();
 
         public function __init(): void {
-            fallback($_SESSION['comments'], array());
-
             $this->addAlias("metaWeblog_before_newPost", "metaWeblog_before_editPost");
         }
 
@@ -53,6 +51,10 @@
             Group::remove_permission("code_in_comments");
 
             Route::current()->remove("comment/(id)/");
+        }
+
+        public function user_logged_in($user): void {
+            $_SESSION['comments'] = array();
         }
 
         public function list_permissions($names = array()): array {
@@ -139,7 +141,7 @@
                 return array($post, false, __("Incorrect captcha response.", "comments"));
 
             fallback($_POST['author_url'], "");
-            fallback($parent, (int) $_POST['parent_id'], 0);
+            $parent = (int) oneof($_POST['parent_id'], 0);
             $notify = (!empty($_POST['notify']) and logged_in());
 
             $comment = Comment::create($_POST['body'],
@@ -952,7 +954,8 @@
 
         public function visitor_comment_count_attr($attr, $visitor): int {
             return ($visitor->id == 0) ?
-                count($_SESSION['comments']) : $this->user_comment_count_attr($attr, $visitor) ;
+                count(fallback($_SESSION['comments'], array())) :
+                $this->user_comment_count_attr($attr, $visitor) ;
         }
 
         public function post_commentable_attr($attr, $post): bool {

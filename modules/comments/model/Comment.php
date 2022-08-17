@@ -16,8 +16,6 @@
         const OPTION_PRIVATE  = "private";
         const OPTION_REG_ONLY = "registered_only";
 
-        public $no_results = false;
-
         public $belongs_to = array("post", "user", "parent" => array("model" => "comment"));
 
         public $has_many = array("children" => array("model" => "comment", "by" => "parent"));
@@ -97,6 +95,7 @@
                             "author_url"   => $author_url,
                             "author_email" => $author_email);
 
+            fallback($_SESSION['comments'], array());
             fallback($status, ($post->user_id == $visitor->id) ?
                                     self::STATUS_APPROVED :
                                     $config->module_comments["default_comment_status"]);
@@ -362,11 +361,13 @@
          */
         static function redactions(): string {
             $user_id = (int) Visitor::current()->id;
-            $list = empty($_SESSION['comments']) ?
-                "(0)" : QueryBuilder::build_list(SQL::current(), $_SESSION['comments']) ;
+            $id_list = "(0)";
+
+            if (!logged_in() and !empty($_SESSION['comments']))
+                $id_list = QueryBuilder::build_list(SQL::current(), $_SESSION['comments']);
 
             return "status != '".self::STATUS_DENIED.
-                   "' OR ((user_id != 0 AND user_id = ".$user_id.") OR (id IN ".$list."))";
+                   "' OR ((user_id != 0 AND user_id = ".$user_id.") OR (id IN ".$id_list."))";
         }
 
         /**
