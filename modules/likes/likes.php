@@ -6,10 +6,6 @@
         # Query caches for methods.
         private $caches = array();
 
-        public function __init(): void {
-            fallback($_SESSION["likes"], array());
-        }
-
         static function __install(): void {
             $config = Config::current();
 
@@ -31,6 +27,10 @@
             Group::remove_permission("like_post");
             Group::remove_permission("unlike_post");
             Config::current()->remove("module_likes");
+        }
+
+        public function user_logged_in($user): void {
+            $_SESSION['likes'] = array();
         }
 
         public function list_permissions($names = array()): array {
@@ -246,7 +246,7 @@
 
         public function visitor_like_count_attr($attr, $visitor): int {
             return ($visitor->id == 0) ?
-                count(array_diff($_SESSION["likes"], array(null))) :
+                count(fallback($_SESSION['likes'], array())) :
                 $this->user_like_count_attr($attr, $visitor) ;
         }
 
@@ -265,7 +265,7 @@
 
             $html = '<div class="likes" id="likes_'.$post->id.'">';
 
-            if (!Like::discover($post->id)) {
+            if (!Like::exists($post->id)) {
                 if ($visitor->group->can("like_post")) {
                     $html.= '<a class="likes like" href="'.
                                 url("/?action=like&post_id=".$post->id, $main).
@@ -389,11 +389,6 @@
             }
 
             return $atom;
-        }
-
-        public function user_logged_in($user): void {
-            # Erase the visitor's session values to avoid misattribution.
-            $_SESSION["likes"] = array();
         }
 
         public function stylesheets($styles): array {
