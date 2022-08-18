@@ -136,8 +136,8 @@
             !file_exists(INCLUDES_DIR.DIR."config.json.php") or
             !class_exists("Config") or
             !method_exists("Config", "current") or
-            !property_exists(Config::current(), "locale") or
-            !property_exists(Config::current(), "chyrp_url")) {
+            !isset(Config::current()->locale) or
+            !isset(Config::current()->chyrp_url)) {
 
             exit("ERROR: ".strip_tags($body));
         }
