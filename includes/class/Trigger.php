@@ -13,7 +13,7 @@
         private $called = array();
 
         # Array: $exists
-        # Caches trigger exist states.
+        # Caches trigger existence states.
         private $exists = array();
 
         /**
@@ -185,9 +185,10 @@
             if (isset($this->exists[$name]))
                 return $this->exists[$name];
 
-            foreach (Modules::$instances as $module)
+            foreach (Modules::$instances as $module) {
                 if (is_callable(array($module, $name)))
                     return $this->exists[$name] = true;
+            }
 
             if (isset($this->priorities[$name]))
                 return $this->exists[$name] = true;
