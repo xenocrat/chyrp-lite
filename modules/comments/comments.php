@@ -57,6 +57,14 @@
             $_SESSION['comments'] = array();
         }
 
+        public function user($user): void {
+            $user->has_many[] = "comments";
+        }
+
+        public function post($post): void {
+            $post->has_many[] = "comments";
+        }
+
         public function list_permissions($names = array()): array {
             $names["add_comment"]         = __("Add Comments", "comments");
             $names["add_comment_private"] = __("Add Comments to Private Posts", "comments");
@@ -862,10 +870,6 @@
 
         public function delete_user($user): void {
             SQL::current()->update("comments", array("user_id" => $user->id), array("user_id" => 0));
-        }
-
-        public function post($post): void {
-            $post->has_many[] = "comments";
         }
 
         private function get_post_comment_count($post_id): int {
