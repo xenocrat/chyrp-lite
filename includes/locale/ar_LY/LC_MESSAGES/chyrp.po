@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: chyrplite\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-08-18 09:25+0100\n"
+"PO-Revision-Date: 2022-08-18 16:23+0100\n"
 "Last-Translator: Anas Mohammed Almzoghy <a.almzoghy@gmail.com>\n"
 "Language-Team: Arabic\n"
 "Language: ar_LY\n"
@@ -27,11 +27,11 @@ msgstr "تعذر قراءة ملف الإعدادات."
 msgid "Requested configuration setting not found."
 msgstr "لم يتم العثور على إعداد التكوين المطلوب."
 
-#: includes/class/Model.php:462
+#: includes/class/Model.php:460
 msgid "Edit"
 msgstr "تحرير"
 
-#: includes/class/Model.php:487
+#: includes/class/Model.php:485
 msgid "Delete"
 msgstr "حذف"
 

@@ -21,11 +21,11 @@ msgstr "不能读取配置文件。"
 msgid "Requested configuration setting not found."
 msgstr "未找到请求的配置设置。"
 
-#: includes/class/Model.php:462
+#: includes/class/Model.php:460
 msgid "Edit"
 msgstr "编辑"
 
-#: includes/class/Model.php:487
+#: includes/class/Model.php:485
 msgid "Delete"
 msgstr "删除"
 

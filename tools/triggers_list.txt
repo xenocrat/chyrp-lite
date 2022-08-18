@@ -242,7 +242,7 @@ Arguments:
 runtime
 -------
 Called from:
-	includes/common.php on line 348
+	includes/common.php on line 345
 
 
 before_export
@@ -576,7 +576,7 @@ Arguments:
 comments_false_positives
 ------------------------
 Called from:
-	modules/comments/comments.php on line 464
+	modules/comments/comments.php on line 472
 
 Arguments:
 	$false_positives
@@ -585,7 +585,7 @@ Arguments:
 comments_false_negatives
 ------------------------
 Called from:
-	modules/comments/comments.php on line 467
+	modules/comments/comments.php on line 475
 
 Arguments:
 	$false_negatives
@@ -594,7 +594,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 764
+	modules/comments/comments.php on line 772
 
 Arguments:
 	$comment, $feed
@@ -603,7 +603,7 @@ Arguments:
 correspond_new_comment
 ----------------------
 Called from:
-	modules/comments/comments.php on line 1034
+	modules/comments/comments.php on line 1038
 
 Arguments:
 	$new_comment, $earlier_comment, $url
@@ -875,15 +875,6 @@ Called from:
 
 Target:
 	$links
-
-
-visitor
--------
-Called from:
-	includes/common.php on line 345
-
-Target:
-	$visitor
 
 
 admin_determine_action
@@ -1378,6 +1369,15 @@ Called from:
 
 Target:
 	$new_values
+
+
+visitor
+-------
+Called from:
+	includes/model/Visitor.php on line 24
+
+Target:
+	$this
 
 
 cache_regenerate_triggers

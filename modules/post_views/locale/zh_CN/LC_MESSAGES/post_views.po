@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/post_views/info.php:3
@@ -34,10 +34,10 @@ msgstr "查看计数"
 msgid "Download view count for &#8220;%s&#8221;"
 msgstr "从&#8220;%s&#8221;下载查看计数"
 
-#: modules/post_views/post_views.php:47
+#: modules/post_views/post_views.php:51
 msgid "An ID is required to download a view count."
 msgstr "下载查看计数需要一个ID。"
 
-#: modules/post_views/post_views.php:56
+#: modules/post_views/post_views.php:60
 msgid "You do not have sufficient privileges to download this view count."
 msgstr "您没有足够的权限下载查看计数。"

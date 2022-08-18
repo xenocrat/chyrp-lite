@@ -21,11 +21,11 @@ msgstr "Konfigurationsdatei konnte nicht gelesen werden."
 msgid "Requested configuration setting not found."
 msgstr "Angeforderte Konfigurationseinstellung nicht gefunden."
 
-#: includes/class/Model.php:462
+#: includes/class/Model.php:460
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: includes/class/Model.php:487
+#: includes/class/Model.php:485
 msgid "Delete"
 msgstr "Löschen"
 
