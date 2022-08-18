@@ -33,6 +33,10 @@
                 echo '<td class="post_views value">'.$post->view_count.'</td>';
         }
 
+        public function user($user): void {
+            $user->has_many[] = "views";
+        }
+
         public function post($post): void {
             $post->has_many[] = "views";
         }
