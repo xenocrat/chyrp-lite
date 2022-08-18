@@ -329,17 +329,17 @@
     # Instantiate the theme.
     $theme = Theme::current();
 
-    # Instantiate the visitor.
-    $visitor = Visitor::current();
-
     # Instantiate notifications.
     $flash = Flash::current();
+
+    # Instantiate triggers.
+    $trigger = Trigger::current();
 
     # Initialize extensions.
     init_extensions();
 
-    # Instantiate triggers.
-    $trigger = Trigger::current();
+    # Instantiate the visitor.
+    $visitor = Visitor::current();
 
     # Filter the visitor immediately after extensions are initialized.
     $trigger->filter($visitor, "visitor");
