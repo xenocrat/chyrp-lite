@@ -96,4 +96,36 @@
 
             return $this->get_post_view_count($post->id);
         }
+
+        private function get_user_view_count($user_id): int {
+            if (!isset($this->caches["user_view_counts"])) {
+                $counts = SQL::current()->select("views",
+                                                 "COUNT(user_id) AS total, user_id as user_id",
+                                                 null,
+                                                 null,
+                                                 array(),
+                                                 null,
+                                                 null,
+                                                 "user_id")->fetchAll();
+
+                $this->caches["user_view_counts"] = array();
+
+                foreach ($counts as $count)
+                    $this->caches["user_view_counts"][$count["user_id"]] = (int) $count["total"];
+            }
+
+            return fallback($this->caches["user_view_counts"][$user_id], 0);
+        }
+
+        public function user_view_count_attr($attr, $user): int {
+            if ($user->no_results)
+                return 0;
+
+            return $this->get_user_view_count($user->id);
+        }
+
+        public function visitor_view_count_attr($attr, $visitor): int {
+            return ($visitor->id == 0) ?
+                0 : $this->user_view_count_attr($attr, $visitor) ;
+        }
     }
