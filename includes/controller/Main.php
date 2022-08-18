@@ -270,7 +270,7 @@
 
             $this->display("pages".DIR."archive",
                            array("posts" => $posts,
-                                 "months" => array_reverse($months, true),
+                                 "months" => $months,
                                  "archive" => array("when"  => $start,
                                                     "depth" => $depth,
                                                     "next"  => $next,
