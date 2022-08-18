@@ -10,15 +10,14 @@
      *     <User>
      */
     class Visitor extends User {
-        # Integer: $id
-        # The ID of the currently visiting "user". 0 if not logged in.
-        public $id = 0;
-
         /**
          * Function: __construct
          * Checks if a valid user is logged in.
          */
-        public function __construct() {
+        private function __construct() {
+            # The user ID of the current visitor. 0 if not logged in.
+            $this->id = 0;
+
             if (!empty($_SESSION['user_id']))
                 parent::__construct($_SESSION['user_id']);
         }
