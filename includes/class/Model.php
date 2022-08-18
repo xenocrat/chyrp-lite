@@ -59,8 +59,6 @@
             $this->has_one    = (array) $this->has_one;
 
             if (in_array($name, $this->belongs_to) or isset($this->belongs_to[$name])) {
-                $class = (isset($this->belongs_to[$name])) ? $this->belongs_to[$name] : $name ;
-
                 if (isset($this->belongs_to[$name])) {
                     $opts =& $this->belongs_to[$name];
                     $model = isset($opts["model"]) ? $opts["model"] : $name ;
@@ -86,8 +84,8 @@
                     fallback($opts["placeholders"], $placeholders);
                 } else {
                     $model = depluralize($name);
-                    $match = $model_name;
-                    $opts = array("where" => array(strtolower($match)."_id" => $this->data["id"]),
+                    $match = ($model_name == "Visitor") ? "user" : strtolower($model_name) ;
+                    $opts = array("where" => array($match."_id" => $this->data["id"]),
                                   "placeholders" => $placeholders);
                 }
 
@@ -103,8 +101,8 @@
                     $opts["where"] = (array) $opts["where"];
                 } else {
                     $model = depluralize($name);
-                    $match = $model_name;
-                    $opts = array("where" => array(strtolower($match)."_id" => $this->data["id"]));
+                    $match = ($model_name == "Visitor") ? "user" : strtolower($model_name) ;
+                    $opts = array("where" => array($match."_id" => $this->data["id"]));
                 }
 
                 $this->data[$name] = new $model(null, $opts);
