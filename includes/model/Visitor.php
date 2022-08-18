@@ -20,6 +20,8 @@
 
             if (!empty($_SESSION['user_id']))
                 parent::__construct($_SESSION['user_id']);
+
+            Trigger::current()->filter($this, "visitor");
         }
 
         /**
