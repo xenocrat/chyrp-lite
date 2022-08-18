@@ -33,6 +33,14 @@
             $_SESSION['likes'] = array();
         }
 
+        public function user($user): void {
+            $user->has_many[] = "likes";
+        }
+
+        public function post($post): void {
+            $post->has_many[] = "likes";
+        }
+
         public function list_permissions($names = array()): array {
             $names["like_post"]   = __("Like Posts", "likes");
             $names["unlike_post"] = __("Unlike Posts", "likes");
@@ -176,10 +184,6 @@
                 sprintf(_p("%d person likes this.", "%d people like this.", $count, "likes"), $count) ;
 
             json_response($text, true);
-        }
-
-        public function post($post): void {
-            $post->has_many[] = "likes";
         }
 
         public function delete_post($post): void {
