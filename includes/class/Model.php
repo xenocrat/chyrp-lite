@@ -39,7 +39,7 @@
          *     @mixed@
          */
         public function &__get($name): mixed {
-            $model_name = get_class($this);
+            $model_name = strtolower(get_class($this));
             $placeholders = (isset($this->__placeholders) and $this->__placeholders);
 
             $trigger = Trigger::current();
@@ -84,7 +84,7 @@
                     fallback($opts["placeholders"], $placeholders);
                 } else {
                     $model = depluralize($name);
-                    $match = ($model_name == "Visitor") ? "user" : strtolower($model_name) ;
+                    $match = ($model_name == "visitor") ? "user" : $model_name ;
                     $opts = array("where" => array($match."_id" => $this->data["id"]),
                                   "placeholders" => $placeholders);
                 }
@@ -101,7 +101,7 @@
                     $opts["where"] = (array) $opts["where"];
                 } else {
                     $model = depluralize($name);
-                    $match = ($model_name == "Visitor") ? "user" : strtolower($model_name) ;
+                    $match = ($model_name == "visitor") ? "user" : $model_name ;
                     $opts = array("where" => array($match."_id" => $this->data["id"]));
                 }
 
@@ -126,7 +126,7 @@
          * Handles model relationships, deferred and dynamic attributes.
          */
         public function __isset($name): bool {
-            $model_name = get_class($this);
+            $model_name = strtolower(get_class($this));
 
             if (Trigger::current()->exists($model_name."_".$name."_attr"))
                 return true;
