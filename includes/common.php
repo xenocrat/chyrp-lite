@@ -341,9 +341,6 @@
     # Instantiate the visitor.
     $visitor = Visitor::current();
 
-    # Filter the visitor immediately after extensions are initialized.
-    $trigger->filter($visitor, "visitor");
-
     # First general-purpose trigger.
     $trigger->call("runtime");
 
