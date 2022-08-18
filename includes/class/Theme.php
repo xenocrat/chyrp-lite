@@ -110,26 +110,30 @@
                                           $statuses),
                                     "created_at DESC")->fetchAll();
 
-            $archives = array();
+            $nums = array();
 
             foreach ($results as $result) {
                 $created_at = strtotime($result["created_at"]);
                 $this_month = strtotime("midnight first day of this month", $created_at);
 
-                if (!isset($archives[$this_month]))
-                    $archives[$this_month] = array(
-                        "when"  => $this_month,
-                        "url"   => url("archive/".when("Y/m/", $this_month), $main),
-                        "count" => 0
-                    );
+                if (!isset($nums[$this_month]))
+                    $nums[$this_month] = 0;
 
-                $archives[$this_month]["count"]++;
+                $nums[$this_month]++;
 
-                if (count($archives) == $limit)
+                if (count($nums) == $limit)
                     break;
             }
 
-            return $this->caches["archives_list"][$limit] = array_values($archives);
+            $list = array();
+
+            foreach ($nums as $when => $count) {
+                $list[] = array("when"  => $when,
+                                "url"   => url("archive/".when("Y/m/", $when), $main),
+                                "count" => $count);
+            }
+
+            return $this->caches["archives_list"][$limit] = $list;
         }
 
         /**
