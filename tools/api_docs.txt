@@ -1092,7 +1092,7 @@ Function: archive_list
 Generates an array listing each month with entries in the archives.
 
 Parameters:
-    $limit - Number of months to list.
+    $limit - Maximum number of months to list.
 
 
 Function: recent_posts
@@ -1100,7 +1100,7 @@ Function: recent_posts
 Generates an array of recent posts.
 
 Parameters:
-    $limit - Number of posts to list.
+    $limit - Maximum number of recent posts to list.
 
 
 Function: related_posts
@@ -1109,7 +1109,7 @@ Ask modules to contribute to a list of related posts.
 
 Parameters:
     $post - The post to use as the basis.
-    $limit - Number of related posts to list.
+    $limit - Maximum number of related posts to list.
 
 
 Function: file_exists

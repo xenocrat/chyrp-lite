@@ -200,7 +200,7 @@ msgstr "没有您指定标签的帖子。"
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr "&#8220;%s&#8221; 的帖子标签"
 
-#: modules/tags/tags.php:569
+#: modules/tags/tags.php:566
 #, php-format
 msgid "%d post tagged with &#8220;%s&#8221;"
 msgid_plural "%d posts tagged with &#8220;%s&#8221;"

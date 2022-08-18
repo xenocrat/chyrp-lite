@@ -311,14 +311,14 @@ Called from:
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 394
+	includes/controller/Main.php on line 392
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 529
-	includes/controller/Main.php on line 597
+	includes/controller/Main.php on line 527
+	includes/controller/Main.php on line 595
 
 Arguments:
 	$user
@@ -327,13 +327,13 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 585
+	includes/controller/Main.php on line 583
 
 
 user_logged_out
 ---------------
 Called from:
-	includes/controller/Main.php on line 618
+	includes/controller/Main.php on line 616
 
 Arguments:
 	$user
@@ -342,7 +342,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 836
+	includes/controller/Main.php on line 834
 
 Arguments:
 	$post, $feed
@@ -576,7 +576,7 @@ Arguments:
 comments_false_positives
 ------------------------
 Called from:
-	modules/comments/comments.php on line 462
+	modules/comments/comments.php on line 464
 
 Arguments:
 	$false_positives
@@ -585,7 +585,7 @@ Arguments:
 comments_false_negatives
 ------------------------
 Called from:
-	modules/comments/comments.php on line 465
+	modules/comments/comments.php on line 467
 
 Arguments:
 	$false_negatives
@@ -594,7 +594,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 762
+	modules/comments/comments.php on line 764
 
 Arguments:
 	$comment, $feed
@@ -603,7 +603,7 @@ Arguments:
 correspond_new_comment
 ----------------------
 Called from:
-	modules/comments/comments.php on line 1031
+	modules/comments/comments.php on line 1034
 
 Arguments:
 	$new_comment, $earlier_comment, $url
@@ -612,7 +612,7 @@ Arguments:
 add_comment
 -----------
 Called from:
-	modules/comments/model/Comment.php on line 204
+	modules/comments/model/Comment.php on line 203
 
 Arguments:
 	$comment
@@ -621,7 +621,7 @@ Arguments:
 update_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 262
+	modules/comments/model/Comment.php on line 261
 
 Arguments:
 	$comment, $this
@@ -630,7 +630,7 @@ Arguments:
 add_like
 --------
 Called from:
-	modules/likes/model/Like.php on line 67
+	modules/likes/model/Like.php on line 58
 
 Arguments:
 	$new
@@ -639,7 +639,7 @@ Arguments:
 like_post
 ---------
 Called from:
-	modules/likes/model/Like.php on line 125
+	modules/likes/model/Like.php on line 114
 
 Arguments:
 	$post_id
@@ -648,7 +648,7 @@ Arguments:
 unlike_post
 -----------
 Called from:
-	modules/likes/model/Like.php on line 144
+	modules/likes/model/Like.php on line 134
 
 Arguments:
 	$post_id
@@ -841,7 +841,7 @@ Target:
 related_posts
 -------------
 Called from:
-	includes/class/Theme.php on line 168
+	includes/class/Theme.php on line 180
 
 Target:
 	$ids
@@ -853,7 +853,7 @@ Arguments:
 stylesheets
 -----------
 Called from:
-	includes/class/Theme.php on line 207
+	includes/class/Theme.php on line 219
 
 Target:
 	$stylesheets
@@ -862,7 +862,7 @@ Target:
 scripts
 -------
 Called from:
-	includes/class/Theme.php on line 245
+	includes/class/Theme.php on line 257
 
 Target:
 	$scripts
@@ -871,7 +871,7 @@ Target:
 links
 -----
 Called from:
-	includes/class/Theme.php on line 303
+	includes/class/Theme.php on line 315
 
 Target:
 	$links
@@ -1054,7 +1054,7 @@ markup_text
 Called from:
 	includes/controller/Ajax.php on line 149
 	includes/model/Page.php on line 275
-	modules/comments/model/Comment.php on line 409
+	modules/comments/model/Comment.php on line 410
 
 Target:
 	$content
@@ -1063,7 +1063,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 911
+	includes/controller/Main.php on line 909
 
 Target:
 	$this->context
@@ -1401,7 +1401,7 @@ Target:
 comment
 -------
 Called from:
-	modules/comments/model/Comment.php on line 46
+	modules/comments/model/Comment.php on line 44
 
 Target:
 	$this
@@ -1410,7 +1410,7 @@ Target:
 comment_is_spam
 ---------------
 Called from:
-	modules/comments/model/Comment.php on line 105
+	modules/comments/model/Comment.php on line 104
 
 Target:
 	$spam
@@ -1422,7 +1422,7 @@ Arguments:
 filter_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 406
+	modules/comments/model/Comment.php on line 407
 
 Target:
 	$this
@@ -1431,7 +1431,7 @@ Target:
 markup_comment_text
 -------------------
 Called from:
-	modules/comments/model/Comment.php on line 409
+	modules/comments/model/Comment.php on line 410
 
 Target:
 	$this->body
