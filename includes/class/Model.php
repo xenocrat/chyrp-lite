@@ -200,19 +200,16 @@
             if (!isset($id) and isset($options["where"]["id"]))
                 $id = $options["where"]["id"];
 
-            $cache = (is_numeric($id) and isset(self::$caches[$model_name][$id])) ?
-                        self::$caches[$model_name][$id] :
-                        (($id !== null and isset(self::$caches[$model_name][serialize($id)])) ?
-                            self::$caches[$model_name][serialize($id)] :
-                            array()) ;
+            $cache_id = (isset($id) and !is_numeric($id)) ? serialize($id) : $id ;
 
-            # Is this model already in the cache?
-            if (!empty($cache)) {
-                foreach ($cache as $attr => $val)
-                    $model->$attr = $val;
+            # Return cached results if available.
+            if (isset($cache_id))
+                if (isset(self::$caches[$model_name][$cache_id])) {
+                    foreach (self::$caches[$model_name][$cache_id] as $attr => $val)
+                        $model->$attr = $val;
 
-                return;
-            }
+                    return;
+                }
 
             fallback($options["select"], "*");
             fallback($options["from"], ($model_name == "visitor" ? "users" : pluralize($model_name)));
@@ -239,9 +236,9 @@
 
             $trigger->filter($options, $model_name."_grab");
 
-            if (!empty($options["read_from"]))
+            if (!empty($options["read_from"])) {
                 $read = $options["read_from"];
-            else {
+            } else {
                 $query = $sql->select($options["from"],
                                       $options["select"],
                                       $options["where"],
@@ -253,14 +250,15 @@
                                       $options["left_join"]);
                 $all = $query->fetchAll();
 
-                if (count($all) == 1)
+                if (count($all) == 1) {
                     $read = $all[0];
-                else {
+                } else {
                     $merged = array();
 
-                    foreach ($all as $index => $row)
+                    foreach ($all as $index => $row) {
                         foreach ($row as $column => $val)
                             $merged[$row["id"]][$column][] = $val;
+                    }
 
                     foreach ($all as $index => &$row)
                         $row = $merged[$row["id"]];
@@ -270,12 +268,11 @@
                         $read = $all[$keys[0]];
 
                         foreach ($read as $name => &$column) {
-                            $column = (!in_array($name, $options["ignore_dupes"]) ?
-                                          array_unique($column) :
-                                          $column);
-                            $column = (count($column) == 1) ?
-                                          $column[0] :
-                                          $column ;
+                            if (!in_array($name, $options["ignore_dupes"]))
+                                $column = array_unique($column);
+
+                            if (count($column) == 1)
+                                $column = $column[0];
                         }
                     } else {
                         $read = false;
@@ -290,9 +287,10 @@
                 $model->no_results = false;
             }
 
-            foreach ($read as $key => $val)
+            foreach ($read as $key => $val) {
                 if (!is_int($key))
                     $model->$key = $val;
+            }
 
             if (isset($query) and isset($query->queryString))
                 $model->queryString = $query->queryString;
@@ -302,12 +300,14 @@
                                     $model->updated_at != "0000-00-00 00:00:00" and
                                     $model->updated_at != "0001-01-01 00:00:00");
 
-            $clone = clone $model;
+            # Cache the model if loaded from database.
+            if (empty($options["read_from"])) {
+                $clone = clone $model;
+                self::$caches[$model_name][$read["id"]] = $clone;
 
-            self::$caches[$model_name][$read["id"]] = $clone;
-
-            if (!is_numeric($id) and !isset($options["read_from"]["id"]) and $id !== null)
-                self::$caches[$model_name][serialize($id)] = $clone;
+                if (isset($id) and !is_numeric($id))
+                    self::$caches[$model_name][$cache_id] = $clone;
+            }
         }
 
         /**
