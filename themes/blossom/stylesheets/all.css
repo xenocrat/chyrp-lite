@@ -162,9 +162,9 @@ code {
     color: #1f1f23;
     background-color: #e5e2dc;
     padding: 0.1em 0.2em 0em 0.2em;
-    display: inline-block;
 }
 pre > code {
+    display: block;
     box-sizing: border-box;
     width: 100%;
     padding: 0.5rem;
