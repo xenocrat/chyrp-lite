@@ -280,6 +280,24 @@ aside {
     border-radius: 0.25em;
     background-color: #fffecd;
 }
+pre {
+  font-family: "Cousine webfont", monospace;
+  font-size: 0.8rem;
+  background-color: #efefef;
+  margin: 1rem 0rem;
+  padding: 1rem;
+  overflow-x: auto;
+}
+code {
+  font-family: "Cousine webfont", monospace;
+  font-size: 0.8rem;
+  background-color: #efefef;
+  padding: 0px 2px;
+  border: 1px solid #cfcfcf;
+}
+pre > code {
+  border: none;
+}
 *.tag {
     display: inline-block;
     margin-top: 0.25rem;
@@ -478,17 +496,9 @@ input.disabled {
     cursor: not-allowed;
 }
 input.code,
-textarea.code,
-code {
+textarea.code {
     font-family: "Cousine webfont", monospace;
     font-style: normal;
-}
-code {
-    font-size: 0.8rem;
-    background-color: #efefef;
-    padding: 0px 2px;
-    color: #1f1f23;
-    border: 1px solid #cfcfcf;
 }
 form.split label {
     box-sizing: border-box;

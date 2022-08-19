@@ -226,7 +226,7 @@
             }
             html, body, ul, ol, li,
             h1, h2, h3, h4, h5, h6,
-            form, fieldset, a, p {
+            form, fieldset, a, p, pre {
                 margin: 0em;
                 padding: 0em;
                 border: 0em;
@@ -268,15 +268,23 @@
             p:empty {
                 margin-bottom: 0rem;
             }
+            pre {
+              font-family: "Cousine webfont", monospace;
+              font-size: 0.8rem;
+              background-color: #efefef;
+              margin: 1rem 0rem;
+              padding: 1rem;
+              overflow-x: auto;
+            }
             code {
-                font-family: "Cousine webfont", monospace;
-                font-style: normal;
-                font-size: 0.8rem;
-                word-wrap: break-word;
-                background-color: #efefef;
-                padding: 0px 2px;
-                color: #1f1f23;
-                border: 1px solid #cfcfcf;
+              font-family: "Cousine webfont", monospace;
+              font-size: 0.8rem;
+              background-color: #efefef;
+              padding: 0px 2px;
+              border: 1px solid #cfcfcf;
+            }
+            pre > code {
+              border: none;
             }
             strong {
                 font-weight: normal;
@@ -292,9 +300,6 @@
             }
             ol.backtrace {
                 margin-top: 0.5rem;
-            }
-            pre {
-                overflow-x: auto;
             }
             a:link,
             a:visited {

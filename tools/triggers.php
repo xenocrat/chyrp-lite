@@ -382,7 +382,7 @@
             }
             html, body, ul, ol, li,
             h1, h2, h3, h4, h5, h6,
-            form, fieldset, a, p {
+            form, fieldset, a, p, pre {
                 margin: 0em;
                 padding: 0em;
                 border: 0em;
@@ -424,16 +424,6 @@
             p:empty {
                 margin-bottom: 0rem;
             }
-            code {
-                font-family: "Cousine webfont", monospace;
-                font-style: normal;
-                font-size: 0.8rem;
-                word-wrap: break-word;
-                background-color: #efefef;
-                padding: 0px 2px;
-                color: #1f1f23;
-                border: 1px solid #cfcfcf;
-            }
             strong {
                 font-weight: normal;
                 color: #d94c4c;
@@ -445,18 +435,24 @@
             li {
                 margin-bottom: 1rem;
             }
-            pre.pane {
-                overflow: auto;
-                margin: 1rem -2rem 1rem -2rem;
-                padding: 2rem;
-                background: #1f1f23;
-                color: #ffffff;
+            pre {
+                font-family: "Cousine webfont", monospace;
+                font-size: 0.8rem;
+                background-color: #efefef;
+                margin: 1rem 0rem;
+                padding: 1rem;
+                overflow-x: auto;
             }
-            pre.pane:empty {
-                display: none;
+            code {
+                font-family: "Cousine webfont", monospace;
+                font-size: 0.8rem;
+                background-color: #efefef;
+                padding: 0px 2px;
+                border: 1px solid #cfcfcf;
             }
-            pre.pane:empty + h1 {
-                margin-top: 0rem;
+            pre > code {
+                border: none;
+                padding: 0px;
             }
             a:link,
             a:visited {
@@ -472,11 +468,6 @@
             a:active {
                 color: #2f61c4;
                 text-decoration: underline;
-            }
-            pre.pane a {
-                color: #ffffff;
-                font-weight: bold;
-                text-decoration: none;
             }
             a.big,
             button {
