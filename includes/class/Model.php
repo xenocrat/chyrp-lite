@@ -203,8 +203,9 @@
             $cache_id = (isset($id) and !is_numeric($id)) ? serialize($id) : $id ;
 
             # Return cached results if available.
-            if (isset($cache_id))
-                if (isset(self::$caches[$model_name][$cache_id])) {
+            if (empty($options["read_from"]))
+                if (isset($cache_id) and isset(self::$caches[$model_name][$cache_id])) {
+
                     foreach (self::$caches[$model_name][$cache_id] as $attr => $val)
                         $model->$attr = $val;
 
@@ -300,14 +301,12 @@
                                     $model->updated_at != "0000-00-00 00:00:00" and
                                     $model->updated_at != "0001-01-01 00:00:00");
 
-            # Cache the model if loaded from database.
-            if (empty($options["read_from"])) {
-                $clone = clone $model;
-                self::$caches[$model_name][$read["id"]] = $clone;
+            # Clone the object and cache it.
+            $clone = clone $model;
+            self::$caches[$model_name][$read["id"]] = $clone;
 
-                if (isset($id) and !is_numeric($id))
-                    self::$caches[$model_name][$cache_id] = $clone;
-            }
+            if (isset($id) and !is_numeric($id))
+                self::$caches[$model_name][$cache_id] = $clone;
         }
 
         /**
