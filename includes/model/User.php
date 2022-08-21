@@ -31,7 +31,10 @@
          * See Also:
          *     <Model::search>
          */
-        static function find($options = array(), $options_for_object = array()): array {
+        static function find(
+            $options = array(),
+            $options_for_object = array()
+        ): array {
             fallback($options["order"], "id ASC");
             return parent::search(get_class(), $options, $options_for_object);
         }
@@ -78,33 +81,35 @@
          * See Also:
          *     <update>
          */
-        static function add($login,
-                            $password,
-                            $email,
-                            $full_name = "",
-                            $website = "",
-                            $group_id = null,
-                            $approved = true,
-                            $joined_at = null): self {
+        static function add(
+            $login,
+            $password,
+            $email,
+            $full_name = "",
+            $website = "",
+            $group_id = null,
+            $approved = true,
+            $joined_at = null
+        ): self {
             $config = Config::current();
             $sql = SQL::current();
             $trigger = Trigger::current();
             
-            $new_values = array("login"     => strip_tags($login),
-                                "password"  => $password,
-                                "email"     => strip_tags($email),
-                                "full_name" => strip_tags($full_name),
-                                "website"   => strip_tags($website),
-                                "group_id"  => oneof($group_id, $config->default_group),
-                                "approved"  => oneof($approved, true),
-                                "joined_at" => oneof($joined_at, datetime()));
+            $new_values = array(
+                "login"     => strip_tags($login),
+                "password"  => $password,
+                "email"     => strip_tags($email),
+                "full_name" => strip_tags($full_name),
+                "website"   => strip_tags($website),
+                "group_id"  => oneof($group_id, $config->default_group),
+                "approved"  => oneof($approved, true),
+                "joined_at" => oneof($joined_at, datetime())
+            );
 
             $trigger->filter($new_values, "before_add_user");
             $sql->insert("users", $new_values);
-
             $user = new self($sql->latest("users"));
             $trigger->call("add_user", $user);
-
             return $user;
         }
 
@@ -126,14 +131,16 @@
          * See Also:
          *     <add>
          */
-        public function update($login     = null,
-                               $password  = null,
-                               $email     = null,
-                               $full_name = null,
-                               $website   = null,
-                               $group_id  = null,
-                               $approved  = null,
-                               $joined_at = null): self|false {
+        public function update(
+            $login     = null,
+            $password  = null,
+            $email     = null,
+            $full_name = null,
+            $website   = null,
+            $group_id  = null,
+            $approved  = null,
+            $joined_at = null
+        ): self|false {
             if ($this->no_results)
                 return false;
 
@@ -153,16 +160,23 @@
 
             $trigger->filter($new_values, "before_update_user");
 
-            $sql->update("users",
-                         array("id" => $this->id),
-                         $new_values);
+            $sql->update(
+                "users",
+                array("id" => $this->id),
+                $new_values
+            );
 
-            $user = new self(null,
-                             array("read_from" => array_merge($new_values,
-                                                  array("id" => $this->id))));
+            $user = new self(
+                null,
+                array(
+                    "read_from" => array_merge(
+                        $new_values,
+                        array("id" => $this->id)
+                    )
+                )
+            );
 
             $trigger->call("update_user", $user, $this);
-
             return $user;
         }
 

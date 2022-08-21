@@ -14,7 +14,10 @@
          */
         private function __construct() {
             if (!$this->read() and !INSTALLING)
-                trigger_error(__("Could not read the configuration file."), E_USER_ERROR);
+                trigger_error(
+                    __("Could not read the configuration file."),
+                    E_USER_ERROR
+                );
 
             fallback($this->data["sql"],              array());
             fallback($this->data["enabled_modules"],  array());
@@ -33,7 +36,11 @@
             if (isset($this->data[$name]))
                 return $this->data[$name];
 
-            trigger_error(__("Requested configuration setting not found."), E_USER_NOTICE);
+            trigger_error(
+                __("Requested configuration setting not found."),
+                E_USER_NOTICE
+            );
+
             return null;
         }
 
@@ -70,7 +77,10 @@
          */
         private function write(): int|false {
             $contents = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
-            $contents.= json_set($this->data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+            $contents.= json_set(
+                $this->data,
+                JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
+            );
 
             return @file_put_contents(INCLUDES_DIR.DIR."config.json.php", $contents);
         }

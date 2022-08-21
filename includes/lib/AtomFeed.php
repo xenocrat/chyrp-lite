@@ -41,18 +41,34 @@
             $language = lang_base(Config::current()->locale);
 
             echo '<?xml version="1.0" encoding="UTF-8"?>'."\n";
-            echo '<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="'.fix($language, true).'">'."\n";
+
+            echo '<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="'.
+                 fix($language, true).'">'.
+                 "\n";
+
             echo '<title>'.fix($title).'</title>'."\n";
 
             if (!empty($subtitle))
                 echo '<subtitle>'.fix($subtitle).'</subtitle>'."\n";
 
             echo '<id>'.fix(oneof($id, self_url())).'</id>'."\n";
-            echo '<updated>'.when(DATE_ATOM, oneof($updated, time())).'</updated>'."\n";
-            echo '<link href="'.self_url().'" rel="self" type="application/atom+xml" />'."\n";
-            echo '<generator uri="http://chyrplite.net/" version="'.CHYRP_VERSION.'">'.
+
+            echo '<updated>'.
+                 when(DATE_ATOM, oneof($updated, time())).
+                 '</updated>'.
+                 "\n";
+
+            echo '<link href="'.
+                 self_url().
+                 '" rel="self" type="application/atom+xml" />'.
+                 "\n";
+
+            echo '<generator uri="http://chyrplite.net/" version="'.
+                 CHYRP_VERSION.
+                 '">'.
                  CHYRP_IDENTITY.
-                 '</generator>'."\n";
+                 '</generator>'.
+                 "\n";
         }
 
         /**
@@ -73,23 +89,38 @@
          * Notes:
          *     The entry remains open to allow triggered insertions.
          */
-        public function entry($title,
-                              $id,
-                              $content,
-                              $link,
-                              $published,
-                              $updated = null,
-                              $name = "",
-                              $uri = "",
-                              $email = ""): void {
+        public function entry(
+            $title,
+            $id,
+            $content,
+            $link,
+            $published,
+            $updated = null,
+            $name = "",
+            $uri = "",
+            $email = ""
+        ): void {
             $this->split();
 
             echo '<entry>'."\n";
             echo '<title type="html">'.fix($title, false, true).'</title>'."\n";
             echo '<id>'.fix($id).'</id>'."\n";
-            echo '<updated>'.when(DATE_ATOM, oneof($updated, $published)).'</updated>'."\n";
-            echo '<published>'.when(DATE_ATOM, $published).'</published>'."\n";
-            echo '<link rel="alternate" type="text/html" href="'.fix($link, true).'" />'."\n";
+
+            echo '<updated>'.
+                 when(DATE_ATOM, oneof($updated, $published)).
+                 '</updated>'.
+                 "\n";
+
+            echo '<published>'.
+                 when(DATE_ATOM, $published).
+                 '</published>'.
+                 "\n";
+
+            echo '<link rel="alternate" type="text/html" href="'.
+                 fix($link, true).
+                 '" />'.
+                 "\n";
+
             echo '<author>'."\n";
             echo '<name>'.fix(oneof($name, __("Guest"))).'</name>'."\n";
 
@@ -100,7 +131,11 @@
                 echo '<email>'.fix($email).'</email>'."\n";
 
             echo '</author>'."\n";
-            echo '<content type="html">'.fix($content, false, true).'</content>'."\n";
+
+            echo '<content type="html">'.
+                 fix($content, false, true).
+                 '</content>'.
+                 "\n";
 
             $this->count++;
         }

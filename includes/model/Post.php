@@ -25,18 +25,20 @@
 
         # Array: $url_attrs
         # The translation array of the post URL setting to regular expressions.
-        static $url_attrs = array('(year)'     => '([0-9]{4})',
-                                  '(month)'    => '([0-9]{1,2})',
-                                  '(day)'      => '([0-9]{1,2})',
-                                  '(hour)'     => '([0-9]{1,2})',
-                                  '(minute)'   => '([0-9]{1,2})',
-                                  '(second)'   => '([0-9]{1,2})',
-                                  '(id)'       => '([0-9]+)',
-                                  '(author)'   => '([^\/]+)',
-                                  '(clean)'    => '([^\/]+)',
-                                  '(url)'      => '([^\/]+)',
-                                  '(feather)'  => '([^\/]+)',
-                                  '(feathers)' => '([^\/]+)');
+        static $url_attrs = array(
+            '(year)'     => '([0-9]{4})',
+            '(month)'    => '([0-9]{1,2})',
+            '(day)'      => '([0-9]{1,2})',
+            '(hour)'     => '([0-9]{1,2})',
+            '(minute)'   => '([0-9]{1,2})',
+            '(second)'   => '([0-9]{1,2})',
+            '(id)'       => '([0-9]+)',
+            '(author)'   => '([^\/]+)',
+            '(clean)'    => '([^\/]+)',
+            '(url)'      => '([^\/]+)',
+            '(feather)'  => '([^\/]+)',
+            '(feathers)' => '([^\/]+)'
+        );
 
         /**
          * Function: __construct
@@ -53,11 +55,17 @@
                 $options["where"] = array();
 
             $has_status = false;
-            $skip_where = (isset($options["skip_where"]) and $options["skip_where"]);
+            $skip_where = (
+                isset($options["skip_where"]) and $options["skip_where"]
+            );
 
-            foreach ($options["where"] as $key => $val)
-                if (is_int($key) and substr_count($val, "status") or $key == "status")
+            foreach ($options["where"] as $key => $val) {
+                if (
+                    (is_int($key) and substr_count($val, "status")) or
+                    $key == "status"
+                )
                     $has_status = true;
+            }
 
             # Construct SQL query "chunks" for enabled feathers and user privileges.
             if (!XML_RPC and !$skip_where) {
@@ -65,29 +73,42 @@
 
                 if (!$has_status) {
                     $visitor = Visitor::current();
-                    $private = (isset($options["drafts"]) and
-                                $options["drafts"] and
-                                $visitor->group->can("view_draft")) ?
-                                   self::statuses(array(self::STATUS_DRAFT)) :
-                                   self::statuses() ;
-
-                    if (isset($options["drafts"]) and
+                    $private = (
+                        isset($options["drafts"]) and
                         $options["drafts"] and
-                        $visitor->group->can("view_own_draft")) {
-                            $private.= " OR (status = '".self::STATUS_DRAFT."' AND user_id = :visitor_id)";
-                            $options["params"][":visitor_id"] = $visitor->id;
+                        $visitor->group->can("view_draft")
+                    ) ?
+                        self::statuses(array(self::STATUS_DRAFT)) :
+                        self::statuses() ;
+
+                    if (
+                        isset($options["drafts"]) and
+                        $options["drafts"] and
+                        $visitor->group->can("view_own_draft")
+                    ) {
+                        $private.= " OR (status = '".
+                                   self::STATUS_DRAFT.
+                                   "' AND user_id = :visitor_id)";
+
+                        $options["params"][":visitor_id"] = $visitor->id;
                     }
 
                     $options["where"][] = $private;
                 }
             }
 
-            $options["left_join"][] = array("table" => "post_attributes",
-                                            "where" => "post_id = posts.id");
-            $options["select"] = array_merge(array("posts.*",
-                                                   "post_attributes.name AS attribute_names",
-                                                   "post_attributes.value AS attribute_values"),
-                                             fallback($options["select"], array()));
+            $options["left_join"][] = array(
+                "table" => "post_attributes",
+                "where" => "post_id = posts.id"
+            );
+            $options["select"] = array_merge(
+                array(
+                    "posts.*",
+                    "post_attributes.name AS attribute_names",
+                    "post_attributes.value AS attribute_values"
+                ),
+                fallback($options["select"], array())
+            );
             $options["ignore_dupes"] = array("attribute_names", "attribute_values");
 
             parent::grab($this, $post_id, $options);
@@ -96,18 +117,21 @@
                 return;
 
             $this->slug = $this->url;
-
             $this->filtered = (!isset($options["filter"]) or $options["filter"]);
-
             $this->attribute_values = (array) $this->attribute_values;
             $this->attribute_names  = (array) $this->attribute_names;
 
             $this->attributes = ($this->attribute_names) ?
-                array_combine($this->attribute_names, $this->attribute_values) : array() ;
+                array_combine(
+                    $this->attribute_names,
+                    $this->attribute_values
+                ) :
+                array() ;
 
-            foreach($this->attributes as $key => $val)
+            foreach($this->attributes as $key => $val) {
                 if (!empty($key))
                     $this->$key = $val;
+            }
 
             Trigger::current()->filter($this, "post");
 
@@ -120,7 +144,10 @@
          * See Also:
          *     <Model::search>
          */
-        static function find($options = array(), $options_for_object = array()): array {
+        static function find(
+            $options = array(),
+            $options_for_object = array()
+        ): array {
             if (isset($options["where"]) and !is_array($options["where"]))
                 $options["where"] = array($options["where"]);
             elseif (!isset($options["where"]))
@@ -130,7 +157,10 @@
             $skip_where = (isset($options["skip_where"]) and $options["skip_where"]);
 
             foreach ($options["where"] as $key => $val)
-                if ((is_int($key) and substr_count($val, "status")) or $key === "status")
+                if (
+                    (is_int($key) and substr_count($val, "status")) or
+                    $key === "status"
+                )
                     $has_status = true;
 
             # Construct SQL query "chunks" for enabled feathers and user privileges.
@@ -139,29 +169,42 @@
 
                 if (!$has_status) {
                     $visitor = Visitor::current();
-                    $private = (isset($options["drafts"]) and
-                                $options["drafts"] and
-                                $visitor->group->can("view_draft")) ?
-                                   self::statuses(array(self::STATUS_DRAFT)) :
-                                   self::statuses() ;
-
-                    if (isset($options["drafts"]) and
+                    $private = (
+                        isset($options["drafts"]) and
                         $options["drafts"] and
-                        $visitor->group->can("view_own_draft")) {
-                            $private.= " OR (status = '".self::STATUS_DRAFT."' AND user_id = :visitor_id)";
-                            $options["params"][":visitor_id"] = $visitor->id;
+                        $visitor->group->can("view_draft")
+                    ) ?
+                        self::statuses(array(self::STATUS_DRAFT)) :
+                        self::statuses() ;
+
+                    if (
+                        isset($options["drafts"]) and
+                        $options["drafts"] and
+                        $visitor->group->can("view_own_draft")
+                    ) {
+                        $private.= " OR (status = '".
+                                   self::STATUS_DRAFT.
+                                   "' AND user_id = :visitor_id)";
+
+                        $options["params"][":visitor_id"] = $visitor->id;
                     }
 
                     $options["where"][] = $private;
                 }
             }
 
-            $options["left_join"][] = array("table" => "post_attributes",
-                                            "where" => "post_id = posts.id");
-            $options["select"] = array_merge(array("posts.*",
-                                                   "post_attributes.name AS attribute_names",
-                                                   "post_attributes.value AS attribute_values"),
-                                             fallback($options["select"], array()));
+            $options["left_join"][] = array(
+                "table" => "post_attributes",
+                "where" => "post_id = posts.id"
+            );
+            $options["select"] = array_merge(
+                array(
+                    "posts.*",
+                    "post_attributes.name AS attribute_names",
+                    "post_attributes.value AS attribute_values"
+                ),
+                fallback($options["select"], array())
+            );
             $options["ignore_dupes"] = array("attribute_names", "attribute_values");
 
             fallback($options["order"], "pinned DESC, created_at DESC, id DESC");
@@ -195,17 +238,19 @@
          * See Also:
          *     <update>
          */
-        static function add($values     = array(),
-                            $clean      = "",
-                            $url        = "",
-                            $feather    = null,
-                            $user       = null,
-                            $pinned     = null,
-                            $status     = "",
-                            $created_at = null,
-                            $updated_at = null,
-                            $pingbacks  = true,
-                            $options    = array()): self {
+        static function add(
+            $values     = array(),
+            $clean      = "",
+            $url        = "",
+            $feather    = null,
+            $user       = null,
+            $pinned     = null,
+            $status     = "",
+            $created_at = null,
+            $updated_at = null,
+            $pingbacks  = true,
+            $options    = array()
+        ): self {
             $user_id = ($user instanceof User) ? $user->id : $user ;
 
             fallback($clean,        slug(8));
@@ -222,23 +267,21 @@
             $config = Config::current();
             $trigger = Trigger::current();
 
-            $new_values = array("feather"    => $feather,
-                                "user_id"    => $user_id,
-                                "pinned"     => $pinned,
-                                "status"     => $status,
-                                "clean"      => $clean,
-                                "url"        => $url,
-                                "created_at" => $created_at,
-                                "updated_at" => $updated_at);
+            $new_values = array(
+                "feather"    => $feather,
+                "user_id"    => $user_id,
+                "pinned"     => $pinned,
+                "status"     => $status,
+                "clean"      => $clean,
+                "url"        => $url,
+                "created_at" => $created_at,
+                "updated_at" => $updated_at
+            );
 
             $trigger->filter($new_values, "before_add_post");
-
             $sql->insert("posts", $new_values);
-
             $id = $sql->latest("posts");
-
             $attributes = array_merge($values, $options);
-
             $trigger->filter($attributes, "before_add_post_attributes");
 
             $attribute_values = array_values($attributes);
@@ -246,23 +289,29 @@
 
             # Insert the post attributes.
             foreach ($attributes as $name => $value)
-                $sql->insert("post_attributes",
-                             array("post_id" => $id,
-                                   "name"    => $name,
-                                   "value"   => $value));
+                $sql->insert(
+                    "post_attributes",
+                    array(
+                        "post_id" => $id,
+                        "name"    => $name,
+                        "value"   => $value
+                    )
+                );
 
             $post = new self($id, array("skip_where" => true));
 
             # Notify URLs discovered in the structured feed content.
-            if ($config->send_pingbacks and $pingbacks and $post->status == self::STATUS_PUBLIC) {
-                if (feather_enabled($post->feather)) {
-                    send_pingbacks($post->feed_content(), $post);
-                    webmention_send($post->feed_content(), $post);
-                }
+            if (
+                $config->send_pingbacks and
+                $pingbacks and
+                $post->status == self::STATUS_PUBLIC and
+                feather_enabled($post->feather)
+            ) {
+                send_pingbacks($post->feed_content(), $post);
+                webmention_send($post->feed_content(), $post);
             }
 
             $trigger->call("add_post", $post, $options);
-
             return $post;
         }
 
@@ -291,16 +340,18 @@
          * See Also:
          *     <add>
          */
-        public function update($values     = null,
-                               $user       = null,
-                               $pinned     = null,
-                               $status     = null,
-                               $clean      = null,
-                               $url        = null,
-                               $created_at = null,
-                               $updated_at = null,
-                               $options    = null,
-                               $pingbacks  = true): self|false {
+        public function update(
+            $values     = null,
+            $user       = null,
+            $pinned     = null,
+            $status     = null,
+            $clean      = null,
+            $url        = null,
+            $created_at = null,
+            $updated_at = null,
+            $options    = null,
+            $pingbacks  = true
+        ): self|false {
             if ($this->no_results)
                 return false;
 
@@ -311,7 +362,11 @@
             fallback($pinned,       $this->pinned);
             fallback($status,       $this->status);
             fallback($clean,        $this->clean);
-            fallback($url,          ($clean != $this->clean) ? self::check_url($clean) : $this->url);
+            fallback($url,
+                ($clean != $this->clean) ?
+                                    self::check_url($clean) :
+                                    $this->url
+            );
             fallback($created_at,   $this->created_at);
             fallback($updated_at,   datetime());
             fallback($options,      array());
@@ -320,22 +375,25 @@
             $config = Config::current();
             $trigger = Trigger::current();
 
-            $new_values = array("user_id"    => $user_id,
-                                "pinned"     => $pinned,
-                                "status"     => $status,
-                                "clean"      => $clean,
-                                "url"        => $url,
-                                "created_at" => $created_at,
-                                "updated_at" => $updated_at);
+            $new_values = array(
+                "user_id"    => $user_id,
+                "pinned"     => $pinned,
+                "status"     => $status,
+                "clean"      => $clean,
+                "url"        => $url,
+                "created_at" => $created_at,
+                "updated_at" => $updated_at
+            );
 
             $trigger->filter($new_values, "before_update_post");
 
-            $sql->update("posts",
-                         array("id" => $this->id),
-                         $new_values);
+            $sql->update(
+                "posts",
+                array("id" => $this->id),
+                $new_values
+            );
 
             $attributes = array_merge($values, $options);
-
             $trigger->filter($attributes, "before_update_post_attributes");
 
             $attribute_values = array_values($attributes);
@@ -343,31 +401,50 @@
 
             # Replace the post attributes.
             foreach ($attributes as $name => $value)
-                $sql->replace("post_attributes",
-                              array("post_id", "name"),
-                              array("post_id" => $this->id,
-                                    "name" => $name,
-                                    "value" => $value));
+                $sql->replace(
+                    "post_attributes",
+                    array("post_id", "name"),
+                    array(
+                        "post_id" => $this->id,
+                        "name" => $name,
+                        "value" => $value
+                    )
+                );
 
-            $post = new self(null,
-                             array("read_from" => array_merge($new_values,
-                                                  array("id"               => $this->id,
-                                                        "feather"          => $this->feather,
-                                                        "attribute_names"  => $attribute_names,
-                                                        "attribute_values" => $attribute_values))));
+            $post = new self(
+                null,
+                array(
+                    "read_from" => array_merge(
+                        $new_values,
+                        array(
+                            "id" => $this->id,
+                            "feather" => $this->feather,
+                            "attribute_names" => $attribute_names,
+                            "attribute_values" => $attribute_values
+                        )
+                    )
+                )
+            );
 
             # Notify URLs discovered in the structured feed content.
-            if ($config->send_pingbacks and $pingbacks and $post->status == self::STATUS_PUBLIC) {
-                if (feather_enabled($post->feather)) {
-                    send_pingbacks($post->feed_content(), $post);
-                    webmention_send($post->feed_content(), $post);
-                }
+            if (
+                $config->send_pingbacks and
+                $pingbacks and
+                $post->status == self::STATUS_PUBLIC and
+                feather_enabled($post->feather)
+            ) {
+                send_pingbacks($post->feed_content(), $post);
+                webmention_send($post->feed_content(), $post);
             }
 
-            if ($this->status == self::STATUS_SCHEDULED and $post->status == self::STATUS_PUBLIC)
+            if (
+                $this->status == self::STATUS_SCHEDULED and
+                $post->status == self::STATUS_PUBLIC
+            ) {
                 $trigger->call("publish_post", $post, $this, $options);
-            else
+            } else {
                 $trigger->call("update_post", $post, $this, $options);
+            }
 
             return $post;
         }
@@ -397,10 +474,21 @@
             if ($user->group->can("delete_post"))
                 return true;
 
-            return ($this->status == self::STATUS_DRAFT and $user->group->can("delete_draft")) or
-                   ($user->group->can("delete_own_post") and $this->user_id == $user->id) or
-                   (($user->group->can("delete_own_draft") and $this->status == self::STATUS_DRAFT) and
-                    $this->user_id == $user->id);
+            return (
+                (
+                    $this->status == self::STATUS_DRAFT and
+                    $user->group->can("delete_draft")
+                ) or
+                (
+                    $user->group->can("delete_own_post") and
+                    $this->user_id == $user->id
+                ) or
+                (
+                    $user->group->can("delete_own_draft") and
+                    $this->status == self::STATUS_DRAFT and
+                    $this->user_id == $user->id
+                )
+            );
         }
 
         /**
@@ -416,10 +504,21 @@
             if ($user->group->can("edit_post"))
                 return true;
 
-            return ($this->status == self::STATUS_DRAFT and $user->group->can("edit_draft")) or
-                   ($user->group->can("edit_own_post") and $this->user_id == $user->id) or
-                   (($user->group->can("edit_own_draft") and $this->status == self::STATUS_DRAFT) and
-                    $this->user_id == $user->id);
+            return (
+                (
+                    $this->status == self::STATUS_DRAFT and
+                    $user->group->can("edit_draft")
+                ) or
+                (
+                    $user->group->can("edit_own_post") and
+                    $this->user_id == $user->id
+                ) or
+                (
+                    $user->group->can("edit_own_draft") and
+                    $this->status == self::STATUS_DRAFT and
+                    $this->user_id == $user->id
+                )
+            );
         }
 
         /**
@@ -436,17 +535,32 @@
 
             # Can they edit drafts?
             if ($visitor->group->can("edit_draft") and
-                $sql->count("posts", array("status" => self::STATUS_DRAFT)))
+                $sql->count(
+                    "posts",
+                    array("status" => self::STATUS_DRAFT)
+                )
+            )
                 return true;
 
             # Can they edit their own posts, and do they have any?
             if ($visitor->group->can("edit_own_post") and
-                $sql->count("posts", array("user_id" => $visitor->id)))
+                $sql->count(
+                    "posts",
+                    array("user_id" => $visitor->id)
+                )
+            )
                 return true;
 
             # Can they edit their own drafts, and do they have any?
             if ($visitor->group->can("edit_own_draft") and
-                $sql->count("posts", array("status" => self::STATUS_DRAFT, "user_id" => $visitor->id)))
+                $sql->count(
+                    "posts",
+                    array(
+                        "status" => self::STATUS_DRAFT,
+                        "user_id" => $visitor->id
+                    )
+                )
+            )
                 return true;
 
             return false;
@@ -466,18 +580,33 @@
 
             # Can they delete drafts?
             if ($visitor->group->can("delete_draft") and
-                $sql->count("posts", array("status" => self::STATUS_DRAFT)))
-                    return true;
+                $sql->count(
+                    "posts",
+                    array("status" => self::STATUS_DRAFT)
+                )
+            )
+                return true;
 
             # Can they delete their own posts, and do they have any?
             if ($visitor->group->can("delete_own_post") and
-                $sql->count("posts", array("user_id" => $visitor->id)))
-                    return true;
+                $sql->count(
+                    "posts",
+                    array("user_id" => $visitor->id)
+                )
+            )
+                return true;
 
             # Can they delete their own drafts, and do they have any?
             if ($visitor->group->can("delete_own_draft") and
-                $sql->count("posts", array("status" => self::STATUS_DRAFT, "user_id" => $visitor->id)))
-                    return true;
+                $sql->count(
+                    "posts",
+                    array(
+                        "status" => self::STATUS_DRAFT,
+                        "user_id" => $visitor->id
+                    )
+                )
+            )
+                return true;
 
             return false;
         }
@@ -493,7 +622,10 @@
          *     true - if a post with that ID is in the database.
          */
         static function exists($post_id): bool {
-            return SQL::current()->count("posts", array("id" => $post_id)) == 1;
+            return SQL::current()->count(
+                "posts",
+                array("id" => $post_id)
+            ) == 1;
         }
 
         /**
@@ -514,7 +646,12 @@
             $count = 1;
             $unique = substr($url, 0, 128);
 
-            while (SQL::current()->count("posts", array("url" => $unique))) {
+            while (
+                SQL::current()->count(
+                    "posts",
+                    array("url" => $unique)
+                )
+            ) {
                 $count++;
                 $unique = substr($url, 0, (127 - strlen($count)))."-".$count;
             }
@@ -534,24 +671,36 @@
             $visitor = Visitor::current();
 
             if (!$config->clean_urls)
-                return fix($config->url."/?action=view&url=".urlencode($this->url), true);
+                return fix(
+                    $config->url."/?action=view&url=".urlencode($this->url),
+                    true
+                );
 
-            $login = (strpos($config->post_url, "(author)") !== false) ? $this->user->login : null ;
-            $vals = array(when("Y", $this->created_at),
-                          when("m", $this->created_at),
-                          when("d", $this->created_at),
-                          when("H", $this->created_at),
-                          when("i", $this->created_at),
-                          when("s", $this->created_at),
-                          $this->id,
-                          urlencode($login),
-                          urlencode($this->clean),
-                          urlencode($this->url),
-                          urlencode($this->feather),
-                          urlencode(pluralize($this->feather)));
+            $login = (strpos($config->post_url, "(author)") !== false) ?
+                $this->user->login : null ;
 
-            return fix($config->url."/".
-                       str_replace(array_keys(self::$url_attrs), $vals, $config->post_url), true);
+            $vals = array(
+                when("Y", $this->created_at),
+                when("m", $this->created_at),
+                when("d", $this->created_at),
+                when("H", $this->created_at),
+                when("i", $this->created_at),
+                when("s", $this->created_at),
+                $this->id,
+                urlencode($login),
+                urlencode($this->clean),
+                urlencode($this->url),
+                urlencode($this->feather),
+                urlencode(pluralize($this->feather))
+            );
+
+            $post_url = str_replace(
+                array_keys(self::$url_attrs),
+                $vals,
+                $config->post_url
+            );
+
+            return fix($config->url."/".$post_url, true);
         }
 
         /**
@@ -559,16 +708,17 @@
          * Generates an acceptable title from the post's excerpt.
          *
          * Returns:
-         *     The post's excerpt:
-         *     filtered -> first line -> ftags stripped -> truncated to 75 characters -> normalized.
+         *     filtered -> first line -> ftags stripped ->
+         *     truncated to 75 characters -> normalized.
          */
         public function title_from_excerpt(): string|false {
             if ($this->no_results)
                 return false;
 
-            # Excerpts are likely to have some sort of markup module applied to them;
+            # Excerpts are likely to have some sort of markup module applied;
             # if the current instantiation is not filtered, make one that is.
-            $post = ($this->filtered) ? $this : new self($this->id, array("skip_where" => true)) ;
+            $post = ($this->filtered) ?
+                $this : new self($this->id, array("skip_where" => true)) ;
 
             $excerpt = $post->excerpt();
             Trigger::current()->filter($excerpt, "title_from_excerpt");
@@ -576,9 +726,9 @@
             $split_lines = explode("\n", $excerpt);
             $first_line = $split_lines[0];
 
-            $stripped = strip_tags($first_line); # Strip tags from the first line.
-            $truncated = truncate($stripped, 75); # Truncate the line to 75 characters.
-            $normalized = normalize($truncated); # Trim and normalize whitespace.
+            $stripped = strip_tags($first_line);
+            $truncated = truncate($stripped, 75);
+            $normalized = normalize($truncated);
 
             return $normalized;
         }
@@ -591,9 +741,10 @@
             if ($this->no_results)
                 return false;
 
-            # Excerpts are likely to have some sort of markup module applied to them;
+            # Excerpts are likely to have some sort of markup module applied;
             # if the current instantiation is not filtered, make one that is.
-            $post = ($this->filtered) ? $this : new self($this->id, array("skip_where" => true)) ;
+            $post = ($this->filtered) ?
+                $this : new self($this->id, array("skip_where" => true)) ;
 
             $title = Feathers::$instances[$this->feather]->title($post);
             return Trigger::current()->filter($title, "title", $post);
@@ -608,9 +759,10 @@
             if ($this->no_results)
                 return false;
 
-            # Excerpts are likely to have some sort of markup module applied to them;
+            # Excerpts are likely to have some sort of markup module applied;
             # if the current instantiation is not filtered, make one that is.
-            $post = ($this->filtered) ? $this : new self($this->id, array("skip_where" => true)) ;
+            $post = ($this->filtered) ?
+                $this : new self($this->id, array("skip_where" => true)) ;
 
             $excerpt = Feathers::$instances[$this->feather]->excerpt($post);
             return Trigger::current()->filter($excerpt, "excerpt", $post);
@@ -625,9 +777,10 @@
             if ($this->no_results)
                 return false;
 
-            # Excerpts are likely to have some sort of markup module applied to them;
+            # Excerpts are likely to have some sort of markup module applied;
             # if the current instantiation is not filtered, make one that is.
-            $post = ($this->filtered) ? $this : new self($this->id, array("skip_where" => true)) ;
+            $post = ($this->filtered) ?
+                $this : new self($this->id, array("skip_where" => true)) ;
 
             $feed_content = Feathers::$instances[$this->feather]->feed_content($post);
             return Trigger::current()->filter($feed_content, "feed_content", $post);
@@ -644,12 +797,20 @@
                 return false;
 
             if (!isset($this->next)) {
-                $this->next = new self(null,
-                                       array("where" => array("created_at <" => $this->created_at,
-                                                              ($this->status == self::STATUS_DRAFT ?
-                                                                 self::statuses(array(self::STATUS_DRAFT)) :
-                                                                 self::statuses())),
-                                             "order" => "created_at DESC, id DESC"));
+                $this->next = new self(
+                    null,
+                    array(
+                        "where" => array(
+                            "created_at <" => $this->created_at,
+                            (
+                                $this->status == self::STATUS_DRAFT ?
+                                    self::statuses(array(self::STATUS_DRAFT)) :
+                                    self::statuses()
+                            )
+                        ),
+                        "order" => "created_at DESC, id DESC"
+                    )
+                );
             }
 
             return $this->next;
@@ -666,12 +827,20 @@
                 return false;
 
             if (!isset($this->prev)) {
-                $this->prev = new self(null,
-                                       array("where" => array("created_at >" => $this->created_at,
-                                                             ($this->status == self::STATUS_DRAFT ?
-                                                                 self::statuses(array(self::STATUS_DRAFT)) :
-                                                                 self::statuses())),
-                                             "order" => "created_at ASC, id ASC"));
+                $this->prev = new self(
+                    null,
+                    array(
+                        "where" => array(
+                            "created_at >" => $this->created_at,
+                            (
+                                $this->status == self::STATUS_DRAFT ?
+                                    self::statuses(array(self::STATUS_DRAFT)) :
+                                    self::statuses()
+                            )
+                        ),
+                        "order" => "created_at ASC, id ASC"
+                    )
+                );
             }
 
             return $this->prev;
@@ -682,7 +851,10 @@
          * Checks if the current post's feather theme file exists.
          */
         public function theme_exists(): bool {
-            return !$this->no_results and Theme::current()->file_exists("feathers".DIR.$this->feather);
+            return (
+                !$this->no_results and
+                Theme::current()->file_exists("feathers".DIR.$this->feather)
+            );
         }
 
         /**
@@ -703,13 +875,19 @@
                     $field_unfiltered = $field."_unfiltered";
 
                     if (!in_array($field_unfiltered, $touched)) {
-                        $this->$field_unfiltered = isset($this->$field) ? $this->$field : null ;
+                        $this->$field_unfiltered = isset($this->$field) ?
+                            $this->$field : null ;
+
                         $touched[] = $field_unfiltered;
                     }
 
-                    $this->$field = call_user_func_array(array(Feathers::$instances[$this->feather],
-                                                               $custom_filter["name"]),
-                                                         array($this->$field, $this));
+                    $this->$field = call_user_func_array(
+                        array(
+                            Feathers::$instances[$this->feather],
+                            $custom_filter["name"]
+                        ),
+                        array($this->$field, $this)
+                    );
                 }
 
             # Trigger filters.
@@ -719,7 +897,9 @@
                     $field_unfiltered = $field."_unfiltered";
 
                     if (!in_array($field_unfiltered, $touched)) {
-                        $this->$field_unfiltered = isset($this->$field) ? $this->$field : null ;
+                        $this->$field_unfiltered = isset($this->$field) ?
+                            $this->$field : null ;
+
                         $touched[] = $field_unfiltered;
                     }
 
@@ -737,22 +917,30 @@
          *     $route - The route object to respond to, or null to return a Post object.
          *     $options - Additional options for the Post object (optional).
          */
-        static function from_url($request, $route = null, $options = array()): self|array|false {
+        static function from_url(
+            $request,
+            $route = null,
+            $options = array()
+        ): self|array|false {
             $config = Config::current();
 
             # Dirty URL?
             if (preg_match("/(\?|&)url=([^&#]+)/", $request, $slug)) {
                 $post = new self(array("url" => $slug[2]), $options);
-                return isset($route) ? $route->try["view"] = array($post) : $post ;
+
+                return isset($route) ?
+                    $route->try["view"] = array($post) : $post ;
             }
 
             $regex = "";      # Request validity is tested with this.
             $attrs = array(); # Post attributes present in post_url.
             $found = array(); # Post attributes found in the request.
-            $parts = preg_split("|(\([^)]+\))|",
-                                $config->post_url,
-                                0,
-                                PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+            $parts = preg_split(
+                "|(\([^)]+\))|",
+                $config->post_url,
+                0,
+                PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY
+            );
 
             # Differentiate between post attributes and junk in post_url.
             foreach ($parts as $part)
@@ -764,7 +952,13 @@
                 }
 
             # Test the request and return false if it isn't valid.
-            if (!preg_match("|^$regex|", ltrim(str_replace($config->url, "/", $request), "/"), $matches))
+            if (
+                !preg_match(
+                    "|^$regex|",
+                    ltrim(str_replace($config->url, "/", $request), "/"),
+                    $matches
+                )
+            )
                 return false;
 
             # Populate $found using the array of sub-pattern matches.
@@ -774,24 +968,28 @@
             $where = array();
             $dates = array("year", "month", "day", "hour", "minute", "second");
 
-            $created_at = array("year"   => "____",
-                                "month"  => "__",
-                                "day"    => "__",
-                                "hour"   => "__",
-                                "minute" => "__",
-                                "second" => "__");
+            $created_at = array(
+                "year"   => "____",
+                "month"  => "__",
+                "day"    => "__",
+                "hour"   => "__",
+                "minute" => "__",
+                "second" => "__"
+            );
 
             # Conversions of some attributes.
             foreach ($found as $part => $value)
                 if (in_array($part, $dates)) {
                     # Filter by date/time of creation.
                     $created_at[$part] = $value;
-                    $where["created_at LIKE"] = $created_at["year"]."-".
-                                                $created_at["month"]."-".
-                                                $created_at["day"]." ".
-                                                $created_at["hour"].":".
-                                                $created_at["minute"].":".
-                                                $created_at["second"]."%";
+                    $where["created_at LIKE"] = (
+                        $created_at["year"]."-".
+                        $created_at["month"]."-".
+                        $created_at["day"]." ".
+                        $created_at["hour"].":".
+                        $created_at["minute"].":".
+                        $created_at["second"]."%"
+                    );
                 } elseif ($part == "author") {
                     # Filter by "author" (login).
                     $user = new User(array("login" => $value));
@@ -804,8 +1002,13 @@
                     $where[$part] = $value;
                 }
 
-            $post = new self(null, array_merge($options, array("where" => $where)));
-            return isset($route) ? $route->try["view"] = array($post) : $post ;
+            $post = new self(
+                null,
+                array_merge($options, array("where" => $where))
+            );
+
+            return isset($route) ?
+                $route->try["view"] = array($post) : $post ;
         }
 
         /**
@@ -857,12 +1060,14 @@
             if ($this->no_results)
                 return false;
 
-            $author = array("nick"    => $this->user->login,
-                            "name"    => oneof($this->user->full_name, $this->user->login),
-                            "website" => $this->user->website,
-                            "email"   => $this->user->email,
-                            "joined"  => $this->user->joined_at,
-                            "group"   => $this->user->group->name);
+            $author = array(
+                "nick"    => $this->user->login,
+                "name"    => oneof($this->user->full_name, $this->user->login),
+                "website" => $this->user->website,
+                "email"   => $this->user->email,
+                "joined"  => $this->user->joined_at,
+                "group"   => $this->user->group->name
+            );
 
             return (object) $author;
         }
@@ -875,7 +1080,12 @@
             if ($this->no_results)
                 return false;
 
-            preg_match_all("/\{([0-9]+)\}/", $this->status, $groups, PREG_PATTERN_ORDER);
+            preg_match_all(
+                "/\{([0-9]+)\}/",
+                $this->status,
+                $groups,
+                PREG_PATTERN_ORDER
+            );
 
             return empty($groups[1]) ? false : $groups[1] ;
         }
@@ -888,17 +1098,36 @@
          */
         static function publish_scheduled($pingbacks = true): void {
             $sql = SQL::current();
-            $ids = $sql->select("posts",
-                                "id",
-                                array("created_at <=" => datetime(),
-                                      "status" => self::STATUS_SCHEDULED))->fetchAll();
+            $ids = $sql->select(
+                "posts",
+                "id",
+                array(
+                    "created_at <=" => datetime(),
+                    "status" => self::STATUS_SCHEDULED
+                )
+            )->fetchAll();
 
             foreach ($ids as $id) {
-                $post = new self($id, array("skip_where" => true,
-                                            "filter" => false));
+                $post = new self(
+                    $id,
+                    array(
+                        "skip_where" => true,
+                        "filter" => false
+                    )
+                );
 
-                $post->update(null, null, null, self::STATUS_PUBLIC,
-                              null, null, null, null, null, $pingbacks);
+                $post->update(
+                    null,
+                    null,
+                    null,
+                    self::STATUS_PUBLIC,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    $pingbacks
+                );
             }
         }
     }

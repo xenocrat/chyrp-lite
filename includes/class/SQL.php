@@ -104,31 +104,45 @@
 
             try {
                 if (!in_array($this->adapter, PDO::getAvailableDrivers()))
-                    throw new PDOException(__("PDO driver is unavailable for this database."));
+                    throw new PDOException(
+                        __("PDO driver is unavailable for this database.")
+                    );
 
                 if ($this->adapter == "sqlite")
-                    $this->db = new PDO("sqlite:".$this->database);
+                    $this->db = new PDO(
+                        "sqlite:".$this->database
+                    );
                 else
-                    $this->db = new PDO($this->adapter.":host=".$this->host.";".
-                                        ((!empty($this->port)) ? "port=".$this->port.";" : "").
-                                        "dbname=".$this->database.
-                                        (($this->adapter == "mysql") ? ";charset=utf8mb4" : ""),
-                                        $this->username,
-                                        $this->password);
+                    $this->db = new PDO(
+                        $this->adapter.":host=".$this->host.";".
+                        ((!empty($this->port)) ? "port=".$this->port.";" : "").
+                        "dbname=".$this->database.
+                        (($this->adapter == "mysql") ? ";charset=utf8mb4" : ""),
+                        $this->username,
+                        $this->password
+                    );
 
-                $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                $this->db->setAttribute(
+                    PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION
+                );
             } catch (PDOException $error) {
                 $this->error = $error->getMessage();
 
                 if ($checking)
                     return false;
 
-                trigger_error(_f("Database error: %s", fix($this->error, false, true)), E_USER_ERROR);
+                trigger_error(
+                    _f("Database error: %s", fix($this->error, false, true)),
+                    E_USER_ERROR
+                );
             }
 
             if ($this->adapter == "mysql") {
                 # This is not added to the query debug/count.
-                new Query($this, "SET SESSION sql_mode = 'ANSI,STRICT_TRANS_TABLES'");
+                new Query(
+                    $this,
+                    "SET SESSION sql_mode = 'ANSI,STRICT_TRANS_TABLES'"
+                );
             }
 
             return $this->connected = true;
@@ -143,7 +157,11 @@
          *     $params - An associative array of parameters used in the query.
          *     $throw_exceptions - Should an exception be thrown if the query fails?
          */
-        public function query($query, $params = array(), $throw_exceptions = false): Query|false {
+        public function query(
+            $query,
+            $params = array(),
+            $throw_exceptions = false
+        ): Query|false {
             if (!$this->connected)
                 return false;
 
@@ -151,9 +169,10 @@
             $this->error = null;
 
             # Unset parameters that do not exist in the query.
-            foreach ($params as $name => $val)
+            foreach ($params as $name => $val) {
                 if (!strpos($query, $name))
                     unset($params[$name]);
+            }
 
             # Add the table prefix to the query.
             $query = str_replace("__", $this->prefix, $query);
@@ -172,9 +191,18 @@
          *     $params - An associative array of parameters used in the query.
          *     $throw_exceptions - Should exceptions be thrown on error?
          */
-        public function count($tables, $conds = null, $params = array(), $throw_exceptions = false): mixed {
-            $build = QueryBuilder::build_count($this, $tables, $conds, $params);
-            $query = $this->query($build, $params, $throw_exceptions);
+        public function count(
+            $tables,
+            $conds = null,
+            $params = array(),
+            $throw_exceptions = false
+        ): mixed {
+            $build = QueryBuilder::build_count(
+                $this, $tables, $conds, $params
+            );
+            $query = $this->query(
+                $build, $params, $throw_exceptions
+            );
 
             return isset($query->query) ? $query->fetchColumn() : false ;
         }
@@ -195,28 +223,33 @@
          *     $left_join - An array of additional LEFT JOINs.
          *     $throw_exceptions - Should exceptions be thrown on error?
          */
-        public function select($tables,
-                               $fields = "*",
-                               $conds = null,
-                               $order = null,
-                               $params = array(),
-                               $limit = null,
-                               $offset = null,
-                               $group = null,
-                               $left_join = array(),
-                               $throw_exceptions = false): Query|false {
-            $build = QueryBuilder::build_select($this,
-                                                $tables,
-                                                $fields,
-                                                $conds,
-                                                $order,
-                                                $limit,
-                                                $offset,
-                                                $group,
-                                                $left_join,
-                                                $params);
-
-            return $this->query($build, $params, $throw_exceptions);
+        public function select(
+            $tables,
+            $fields = "*",
+            $conds = null,
+            $order = null,
+            $params = array(),
+            $limit = null,
+            $offset = null,
+            $group = null,
+            $left_join = array(),
+            $throw_exceptions = false
+        ): Query|false {
+            $build = QueryBuilder::build_select(
+                $this,
+                $tables,
+                $fields,
+                $conds,
+                $order,
+                $limit,
+                $offset,
+                $group,
+                $left_join,
+                $params
+            );
+            return $this->query(
+                $build, $params, $throw_exceptions
+            );
         }
 
         /**
@@ -229,9 +262,18 @@
          *     $params - An associative array of parameters used in the query.
          *     $throw_exceptions - Should exceptions be thrown on error?
          */
-        public function insert($table, $data, $params = array(), $throw_exceptions = false): Query|false {
-            $build = QueryBuilder::build_insert($this, $table, $data, $params);
-            return $this->query($build, $params, $throw_exceptions);
+        public function insert(
+            $table,
+            $data,
+            $params = array(),
+            $throw_exceptions = false
+        ): Query|false {
+            $build = QueryBuilder::build_insert(
+                $this, $table, $data, $params
+            );
+            return $this->query(
+                $build, $params, $throw_exceptions
+            );
         }
 
         /**
@@ -245,16 +287,26 @@
          *     $params - An associative array of parameters to be used in the query.
          *     $throw_exceptions - Should exceptions be thrown on error?
          */
-        public function replace($table, $keys, $data, $params = array(), $throw_exceptions = false): Query|false {
+        public function replace(
+            $table,
+            $keys,
+            $data,
+            $params = array(),
+            $throw_exceptions = false
+        ): Query|false {
             $match = array();
 
             foreach ((array) $keys as $key)
                 $match[$key] = $data[$key];
 
             if ($this->count($table, $match, $params))
-                return $this->update($table, $match, $data, $params, $throw_exceptions);
+                return $this->update(
+                    $table, $match, $data, $params, $throw_exceptions
+                );
 
-            return $this->insert($table, $data, $params, $throw_exceptions);
+            return $this->insert(
+                $table, $data, $params, $throw_exceptions
+            );
         }
 
         /**
@@ -268,9 +320,19 @@
          *     $params - An associative array of parameters used in the query.
          *     $throw_exceptions - Should exceptions be thrown on error?
          */
-        public function update($table, $conds, $data, $params = array(), $throw_exceptions = false): Query|false {
-            $build = QueryBuilder::build_update($this, $table, $conds, $data, $params);
-            return $this->query($build, $params, $throw_exceptions);
+        public function update(
+            $table,
+            $conds,
+            $data,
+            $params = array(),
+            $throw_exceptions = false
+        ): Query|false {
+            $build = QueryBuilder::build_update(
+                $this, $table, $conds, $data, $params
+            );
+            return $this->query(
+                $build, $params, $throw_exceptions
+            );
         }
 
         /**
@@ -283,9 +345,18 @@
          *     $params - An associative array of parameters used in the query.
          *     $throw_exceptions - Should exceptions be thrown on error?
          */
-        public function delete($table, $conds, $params = array(), $throw_exceptions = false): Query|false {
-            $build = QueryBuilder::build_delete($this, $table, $conds, $params);
-            return $this->query($build, $params, $throw_exceptions);
+        public function delete(
+            $table,
+            $conds,
+            $params = array(),
+            $throw_exceptions = false
+        ): Query|false {
+            $build = QueryBuilder::build_delete(
+                $this, $table, $conds, $params
+            );
+            return $this->query(
+                $build, $params, $throw_exceptions
+            );
         }
 
         /**
@@ -296,9 +367,16 @@
          *     $table - Table to drop.
          *     $throw_exceptions - Should exceptions be thrown on error?
          */
-        public function drop($table, $throw_exceptions = false): Query|false {
-            $build = QueryBuilder::build_drop($this, $table);
-            return $this->query($build, array(), $throw_exceptions);
+        public function drop(
+            $table,
+            $throw_exceptions = false
+        ): Query|false {
+            $build = QueryBuilder::build_drop(
+                $this, $table
+            );
+            return $this->query(
+                $build, array(), $throw_exceptions
+            );
         }
 
         /**
@@ -310,9 +388,17 @@
          *     $cols - An array of column declarations.
          *     $throw_exceptions - Should exceptions be thrown on error?
          */
-        public function create($table, $cols, $throw_exceptions = false): Query|false {
-            $build = QueryBuilder::build_create($this, $table, $cols);
-            return $this->query($build, array(), $throw_exceptions);
+        public function create(
+            $table,
+            $cols,
+            $throw_exceptions = false
+        ): Query|false {
+            $build = QueryBuilder::build_create(
+                $this, $table, $cols
+            );
+            return $this->query(
+                $build, array(), $throw_exceptions
+            );
         }
 
         /**
@@ -323,11 +409,16 @@
          *     $table - Table to get the latest value from.
          *     $seq - Name of the sequence.
          */
-        public function latest($table, $seq = "id_seq"): string|false {
+        public function latest(
+            $table,
+            $seq = "id_seq"
+        ): string|false {
             if (!isset($this->db))
                 $this->connect();
 
-            return $this->db->lastInsertId($this->prefix.$table."_".$seq);
+            return $this->db->lastInsertId(
+                $this->prefix.$table."_".$seq
+            );
         }
 
         /**
@@ -338,7 +429,10 @@
          *     $string - String to escape.
          *     $quotes - Auto-wrap the string in single quotes?
          */
-        public function escape($string, $quotes = true): string {
+        public function escape(
+            $string,
+            $quotes = true
+        ): string {
             if (!isset($this->db))
                 $this->connect();
 

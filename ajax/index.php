@@ -1,7 +1,9 @@
 <?php
     define('AJAX', true);
 
-    require_once dirname(dirname(__FILE__)).DIRECTORY_SEPARATOR."includes".DIRECTORY_SEPARATOR."common.php";
+    require_once dirname(dirname(__FILE__)).
+                 DIRECTORY_SEPARATOR."includes".
+                 DIRECTORY_SEPARATOR."common.php";
 
     # Prepare the controller.
     $ajax = AjaxController::current();

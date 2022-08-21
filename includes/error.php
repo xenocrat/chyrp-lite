@@ -29,7 +29,9 @@
         $normalized = str_replace(array("\t", "\n", "\r", "\0", "\x0B"), " ", $message);
 
         if (DEBUG)
-            error_log("ERROR: ".$errno." ".strip_tags($normalized)." (".$file." on line ".$line.")");
+            error_log(
+                "ERROR: ".$errno." ".strip_tags($normalized)." (".$file." on line ".$line.")"
+            );
 
         error(null, $message, debug_backtrace());
     }
@@ -46,7 +48,9 @@
         $normalized = str_replace(array("\t", "\n", "\r", "\0", "\x0B"), " ", $message);
 
         if (DEBUG)
-            error_log("ERROR: ".$errno." ".strip_tags($normalized)." (".$file." on line ".$line.")");
+            error_log(
+                "ERROR: ".$errno." ".strip_tags($normalized)." (".$file." on line ".$line.")"
+            );
 
         error(null, $message, $e->getTrace());
     }
@@ -155,7 +159,9 @@
             if (!isset($trace["file"]) or !isset($trace["line"]))
                 unset($backtrace[$index]);
             else
-                $trace["file"] = fix(str_replace(MAIN_DIR.DIR, "", $trace["file"]), false, true);
+                $trace["file"] = fix(
+                    str_replace(MAIN_DIR.DIR, "", $trace["file"]), false, true
+                );
         }
 
         #---------------------------------------------

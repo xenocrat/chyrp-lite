@@ -58,22 +58,34 @@
          * Returns:
          *     A paginated array of length $per_page or smaller.
          */
-        public function __construct($array, $per_page = 10, $name = "page", $model = null, $page = null) {
+        public function __construct(
+            $array,
+            $per_page = 10,
+            $name = "page",
+            $model = null,
+            $page = null
+        ) {
             self::$names[] = $name;
 
             $this->array = (array) $array;
 
             $this->per_page = $per_page;
             $this->name = $name;
-            $this->model = fallback($model, (count($this->array) == 2 and
-                                            is_array($this->array[0]) and
-                                            is_string($this->array[1]) and
-                                            class_exists($this->array[1])));
+            $this->model = fallback(
+                $model,
+                (
+                    count($this->array) == 2 and
+                    is_array($this->array[0]) and
+                    is_string($this->array[1]) and
+                    class_exists($this->array[1])
+                )
+            );
 
             if ($model)
                 list($this->array, $model_name) = $this->array;
 
-            $request = (isset($_GET[$name]) and is_numeric($_GET[$name])) ? $_GET[$name] : null ;
+            $request = (isset($_GET[$name]) and is_numeric($_GET[$name])) ?
+                $_GET[$name] : null ;
 
             $this->total = count($this->array);
             $this->page = intval(oneof($page, $request, 1));
@@ -88,7 +100,10 @@
             if ($model) {
                 for ($i = $offset; $i < ($offset + $this->per_page); $i++)
                     if (isset($this->array[$i]))
-                        $this->result[] = new $model_name(null, array("read_from" => $this->array[$i]));
+                        $this->result[] = new $model_name(
+                            null,
+                            array("read_from" => $this->array[$i])
+                        );
             } else {
                 $this->result = array_slice($this->array, $offset, $this->per_page);
             }
@@ -101,7 +116,13 @@
          * Returns the next pagination sequence.
          */
         public function next(): self {
-            return new self($this->array, $this->per_page, $this->name, $this->model, $this->page + 1);
+            return new self(
+                $this->array,
+                $this->per_page,
+                $this->name,
+                $this->model,
+                $this->page + 1
+            );
         }
 
         /**
@@ -109,7 +130,13 @@
          * Returns the previous pagination sequence.
          */
         public function prev(): self {
-            return new self($this->array, $this->per_page, $this->name, $this->model, $this->page - 1);
+            return new self(
+                $this->array,
+                $this->per_page,
+                $this->name,
+                $this->model,
+                $this->page - 1
+            );
         }
 
         /**
@@ -117,7 +144,9 @@
          * Checks whether or not it makes sense to show the Next Page link.
          */
         public function next_page(): bool {
-            return ($this->page < $this->pages and $this->pages != 1 and $this->pages != 0);
+            return (
+                $this->page < $this->pages and $this->pages != 1 and $this->pages != 0
+            );
         }
 
         /**
@@ -125,7 +154,9 @@
          * Checks whether or not it makes sense to show the Previous Page link.
          */
         public function prev_page(): bool {
-            return ($this->page != 1 and $this->page <= $this->pages);
+            return (
+                $this->page != 1 and $this->page <= $this->pages
+            );
         }
 
         /**
@@ -138,7 +169,12 @@
          *     $page - Page number to link to.
          *     $anchor - An anchor target.
          */
-        public function next_link($text = null, $class = "next_page", $page = null, $anchor = ""): ?string {
+        public function next_link(
+            $text = null,
+            $class = "next_page",
+            $page = null,
+            $anchor = ""
+        ): ?string {
             if (!$this->next_page())
                 return null;
 
@@ -147,8 +183,10 @@
 
             fallback($text, __("Next &rarr;"));
 
-            return '<a rel="next" class="'.fix($class, true).'" id="pagination_next_'.$this->name.
-                   '" href="'.$this->next_page_url($page).fix($anchor, true).'">'.$text.'</a>';
+            return '<a rel="next" class="'.fix($class, true).
+                   '" id="pagination_next_'.$this->name.
+                   '" href="'.$this->next_page_url($page).fix($anchor, true).
+                   '">'.$text.'</a>';
         }
 
         /**
@@ -161,7 +199,12 @@
          *     $page - Page number to link to.
          *     $anchor - An anchor target.
          */
-        public function prev_link($text = null, $class = "prev_page", $page = null, $anchor = ""): ?string {
+        public function prev_link(
+            $text = null,
+            $class = "prev_page",
+            $page = null,
+            $anchor = ""
+        ): ?string {
             if (!$this->prev_page())
                 return null;
 
@@ -170,8 +213,10 @@
 
             fallback($text, __("&larr; Previous"));
 
-            return '<a rel="prev" class="'.fix($class, true).'" id="pagination_prev_'.$this->name.
-                   '" href="'.$this->prev_page_url($page).fix($anchor, true).'">'.$text.'</a>';
+            return '<a rel="prev" class="'.fix($class, true).
+                   '" id="pagination_prev_'.$this->name.
+                   '" href="'.$this->prev_page_url($page).fix($anchor, true).
+                   '">'.$text.'</a>';
         }
 
         /**
@@ -183,7 +228,11 @@
          *     $class - The CSS class for the link.
          *     $anchor - An anchor target.
          */
-        public function final_link($text = null, $class = "final_page", $anchor = ""): ?string {
+        public function final_link(
+            $text = null,
+            $class = "final_page",
+            $anchor = ""
+        ): ?string {
             if (!$this->pages)
                 return null;
 
@@ -192,8 +241,10 @@
 
             fallback($text, __("Final &rarr;"));
 
-            return '<a rel="next" class="'.fix($class, true).'" id="pagination_final_'.$this->name.
-                   '" href="'.$this->next_page_url($this->pages).fix($anchor, true).'">'.$text.'</a>';
+            return '<a rel="next" class="'.fix($class, true).
+                   '" id="pagination_final_'.$this->name.
+                   '" href="'.$this->next_page_url($this->pages).fix($anchor, true).
+                   '">'.$text.'</a>';
         }
 
         /**
@@ -205,7 +256,11 @@
          *     $class - The CSS class for the link.
          *     $anchor - An anchor target.
          */
-        public function first_link($text = null, $class = "first_page", $anchor = ""): ?string {
+        public function first_link(
+            $text = null,
+            $class = "first_page",
+            $anchor = ""
+        ): ?string {
             if (!$this->pages)
                 return null;
 
@@ -214,8 +269,10 @@
 
             fallback($text, __("&larr; First"));
 
-            return '<a rel="prev" class="'.fix($class, true).'" id="pagination_first_'.$this->name.
-                   '" href="'.$this->prev_page_url(1).fix($anchor, true).'">'.$text.'</a>';
+            return '<a rel="prev" class="'.fix($class, true).
+                   '" id="pagination_first_'.$this->name.
+                   '" href="'.$this->prev_page_url(1).fix($anchor, true).
+                   '">'.$text.'</a>';
         }
 
         /**
@@ -232,16 +289,33 @@
             # Determine how we should append the page to dirty URLs.
             $mark = (substr_count($request, "?")) ? "&" : "?" ;
 
-            fallback($page, (($this->page < $this->pages) ? $this->page + 1 : $this->pages));
+            fallback(
+                $page,
+                (($this->page < $this->pages) ? $this->page + 1 : $this->pages)
+            );
 
             # Generate a URL with the page number appended or replaced.
             $url = !isset($_GET[$this->name]) ?
-                (($config->clean_urls and !empty(Route::current()->controller->clean)) ?
-                    rtrim($request, "/")."/".$this->name."/".$page."/" :
-                    $request.$mark.$this->name."=".$page) : 
-                (($config->clean_urls and !empty(Route::current()->controller->clean)) ?
-                    preg_replace("/(\/{$this->name}\/([0-9]+)|$)/", "/".$this->name."/".$page, $request, 1) :
-                    preg_replace("/((\?|&){$this->name}=([0-9]+)|$)/", "\\2".$this->name."=".$page, $request, 1)) ;
+                (
+                    ($config->clean_urls and !empty(Route::current()->controller->clean)) ?
+                        rtrim($request, "/")."/".$this->name."/".$page."/" :
+                        $request.$mark.$this->name."=".$page
+                ) : 
+                (
+                    ($config->clean_urls and !empty(Route::current()->controller->clean)) ?
+                    preg_replace(
+                        "/(\/{$this->name}\/([0-9]+)|$)/",
+                        "/".$this->name."/".$page,
+                        $request,
+                        1
+                    ) :
+                    preg_replace(
+                        "/((\?|&){$this->name}=([0-9]+)|$)/",
+                        "\\2".$this->name."=".$page,
+                        $request,
+                        1
+                    )
+                ) ;
 
             return fix($url, true);
         }
@@ -264,12 +338,26 @@
 
             # Generate a URL with the page number appended or replaced.
             $url = !isset($_GET[$this->name]) ?
-                (($config->clean_urls and !empty(Route::current()->controller->clean)) ?
-                    rtrim($request, "/")."/".$this->name."/".$page."/" :
-                    $request.$mark.$this->name."=".$page) :
-                (($config->clean_urls and !empty(Route::current()->controller->clean)) ?
-                    preg_replace("/(\/{$this->name}\/([0-9]+)|$)/", "/".$this->name."/".$page, $request, 1) :
-                    preg_replace("/((\?|&){$this->name}=([0-9]+)|$)/", "\\2".$this->name."=".$page, $request, 1)) ;
+                (
+                    ($config->clean_urls and !empty(Route::current()->controller->clean)) ?
+                        rtrim($request, "/")."/".$this->name."/".$page."/" :
+                        $request.$mark.$this->name."=".$page
+                ) :
+                (
+                    ($config->clean_urls and !empty(Route::current()->controller->clean)) ?
+                        preg_replace(
+                            "/(\/{$this->name}\/([0-9]+)|$)/",
+                            "/".$this->name."/".$page,
+                            $request,
+                            1
+                        ) :
+                        preg_replace(
+                            "/((\?|&){$this->name}=([0-9]+)|$)/",
+                            "\\2".$this->name."=".$page,
+                            $request,
+                            1
+                        )
+                ) ;
 
             return fix($url, true);
         }

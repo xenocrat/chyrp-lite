@@ -22,19 +22,22 @@
 
         # Boolean: $exists
         # Do any Flashes exist?
-        static $exists = array("message" => false,
-                               "notice" => false,
-                               "warning" => false,
-                               null => false);
+        static $exists = array(
+            "message" => false,
+            "notice" => false,
+            "warning" => false,
+            null => false
+        );
 
         /**
          * Function: __construct
          * Removes empty notification variables from the session.
          */
         private function __construct() {
-            foreach (array("messages", "notices", "warnings") as $type)
+            foreach (array("messages", "notices", "warnings") as $type) {
                 if (isset($_SESSION[$type]) and empty($_SESSION[$type]))
                     unset($_SESSION[$type]);
+            }
         }
 
         /**
@@ -59,8 +62,9 @@
          */
         static function message($message, $redirect_to = null): void {
             self::prepare("messages");
+            $trigger = Trigger::current();
 
-            $_SESSION['messages'][] = Trigger::current()->filter($message, "flash_message", $redirect_to);
+            $_SESSION['messages'][] = $trigger->filter($message, "flash_message", $redirect_to);
 
             if (DEBUG and !headers_sent())
                 header("X-Chyrp-Flash-Messages: ".count($_SESSION['messages']));
@@ -79,8 +83,9 @@
          */
         static function notice($message, $redirect_to = null): void {
             self::prepare("notices");
+            $trigger = Trigger::current();
 
-            $_SESSION['notices'][] = Trigger::current()->filter($message, "flash_notice_message", $redirect_to);
+            $_SESSION['notices'][] = $trigger->filter($message, "flash_notice_message", $redirect_to);
 
             if (DEBUG and !headers_sent())
                 header("X-Chyrp-Flash-Notices: ".count($_SESSION['notices']));
@@ -99,8 +104,9 @@
          */
         static function warning($message, $redirect_to = null): void {
             self::prepare("warnings");
+            $trigger = Trigger::current();
 
-            $_SESSION['warnings'][] = Trigger::current()->filter($message, "flash_warning_message", $redirect_to);
+            $_SESSION['warnings'][] = $trigger->filter($message, "flash_warning_message", $redirect_to);
 
             if (DEBUG and !headers_sent())
                 header("X-Chyrp-Flash-Warnings: ".count($_SESSION['warnings']));
@@ -141,9 +147,11 @@
          *     An array of every message available, in the form of [type => [messages]].
          */
         public function all(): array {
-            return array("messages" => $this->messages(),
-                         "notices" => $this->notices(),
-                         "warnings" => $this->warnings());
+            return array(
+                "messages" => $this->messages(),
+                "notices" => $this->notices(),
+                "warnings" => $this->warnings()
+            );
         }
 
         /**
@@ -179,12 +187,14 @@
             if (self::$exists[$type])
                 return self::$exists[$type];
 
-            if (isset($type))
+            if (isset($type)) {
                 return self::$exists[$type] = !empty($_SESSION[pluralize($type)]);
-            else
-                foreach (array("messages", "notices", "warnings") as $type)
+            } else {
+                foreach (array("messages", "notices", "warnings") as $type) {
                     if (!empty($_SESSION[$type]))
                         return self::$exists[depluralize($type)] = self::$exists[null] = true;
+                }
+            }
 
             return false;
         }

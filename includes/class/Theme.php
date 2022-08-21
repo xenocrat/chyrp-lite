@@ -26,7 +26,8 @@
          */
         private function __construct() {
             $this->url = THEME_URL;
-            $this->safename = PREVIEWING ? $_SESSION['theme'] : Config::current()->theme ;
+            $this->safename = PREVIEWING ?
+                $_SESSION['theme'] : Config::current()->theme ;
         }
 
         /**
@@ -57,13 +58,18 @@
             if (empty($pages))
                 return $this->caches["pages_list"][$cache_id] = array();
 
-            foreach ($pages as $page)
+            foreach ($pages as $page) {
                 if ($page->parent_id != 0)
                     $this->caches["pages"]["children"][$page->parent_id][] = $page;
+            }
 
-            foreach ($pages as $page)
-                if (($page_id == 0 and $page->parent_id == 0) or ($page->id == $page_id))
+            foreach ($pages as $page) {
+                if (
+                    ($page_id == 0 and $page->parent_id == 0) or
+                    ($page->id == $page_id)
+                )
                     $this->recurse_pages($page);
+            }
 
             return $this->caches["pages_list"][$cache_id] = $this->caches["pages"]["flat"];
         }
@@ -104,11 +110,12 @@
             $feathers = Post::feathers();
             $statuses = Post::statuses();
 
-            $results = $sql->select("posts",
-                                    array("created_at"),
-                                    array($feathers,
-                                          $statuses),
-                                    "created_at DESC")->fetchAll();
+            $results = $sql->select(
+                "posts",
+                array("created_at"),
+                array($feathers, $statuses),
+                "created_at DESC"
+            )->fetchAll();
 
             $nums = array();
 
@@ -128,9 +135,11 @@
             $list = array();
 
             foreach ($nums as $when => $count) {
-                $list[] = array("when"  => $when,
-                                "url"   => url("archive/".when("Y/m/", $when), $main),
-                                "count" => $count);
+                $list[] = array(
+                    "when"  => $when,
+                    "url"   => url("archive/".when("Y/m/", $when), $main),
+                    "count" => $count
+                );
             }
 
             return $this->caches["archives_list"][$limit] = $list;
@@ -147,15 +156,22 @@
             if (isset($this->caches["recent_posts"][$limit]))
                 return $this->caches["recent_posts"][$limit];
 
-            $results = Post::find(array("placeholders" => true,
-                                        "where" => array("status" => "public"),
-                                        "order" => "created_at DESC, id DESC"));
+            $results = Post::find(
+                array(
+                    "placeholders" => true,
+                    "where" => array("status" => "public"),
+                    "order" => "created_at DESC, id DESC"
+                )
+            );
 
             $posts = array();
 
             for ($i = 0; $i < $limit; $i++)
                 if (isset($results[0][$i]))
-                    $posts[] = new Post(null, array("read_from" => $results[0][$i]));
+                    $posts[] = new Post(
+                        null,
+                        array("read_from" => $results[0][$i])
+                    );
 
             return $this->caches["recent_posts"][$limit] = $posts;
         }
@@ -182,15 +198,21 @@
             if (empty($ids))
                 return array();
 
-            $results = Post::find(array("placeholders" => true,
-                                        "where" => array("id" => $ids),
-                                        "order" => "created_at DESC, id DESC"));
+            $results = Post::find(
+                array(
+                    "placeholders" => true,
+                    "where" => array("id" => $ids),
+                    "order" => "created_at DESC, id DESC")
+            );
 
             $posts = array();
 
             for ($i = 0; $i < $limit; $i++)
                 if (isset($results[0][$i]))
-                    $posts[] = new Post(null, array("read_from" => $results[0][$i]));
+                    $posts[] = new Post(
+                        null,
+                        array("read_from" => $results[0][$i])
+                    );
 
             return $this->caches["related_posts"][$post->id][$limit] = $posts;
         }
@@ -222,21 +244,32 @@
             $tags = array();
 
             foreach ($stylesheets as $stylesheet)
-                $tags[] = '<link rel="stylesheet" href="'.fix($stylesheet, true).'" type="text/css" media="all">';
+                $tags[] = '<link rel="stylesheet" href="'.
+                          fix($stylesheet, true).
+                          '" type="text/css" media="all">';
 
             if (is_dir(THEME_DIR.DIR."stylesheets") or is_dir(THEME_DIR.DIR."css")) {
-                foreach(array_merge((array) glob(THEME_DIR.DIR."stylesheets".DIR."*.css"),
-                                    (array) glob(THEME_DIR.DIR."css".DIR."*.css")) as $filepath) {
-
+                foreach(
+                    array_merge(
+                        (array) glob(THEME_DIR.DIR."stylesheets".DIR."*.css"),
+                        (array) glob(THEME_DIR.DIR."css".DIR."*.css")
+                    ) as $filepath
+                ) {
                     $filename = basename($filepath);
 
                     if (empty($filename) or substr_count($filename, ".inc.css"))
                         continue;
 
                     $qdir = preg_quote(DIR, "/");
-                    $path = preg_replace("/(.+)".$qdir."themes".$qdir."(.+)/", "$2", $filepath);
+                    $path = preg_replace(
+                        "/(.+)".$qdir."themes".$qdir."(.+)/",
+                        "$2",
+                        $filepath
+                    );
                     $href = $config->chyrp_url."/themes/".str_replace(DIR, "/", $path);
-                    $tags[] = '<link rel="stylesheet" href="'.fix($href, true).'" type="text/css" media="all">';
+                    $tags[] = '<link rel="stylesheet" href="'.
+                              fix($href, true).
+                              '" type="text/css" media="all">';
                 }
             }
 
@@ -260,21 +293,32 @@
             $tags = array();
 
             foreach ($scripts as $script)
-                $tags[] = '<script src="'.fix($script, true).'" type="text/javascript" charset="UTF-8"></script>';
+                $tags[] = '<script src="'.
+                          fix($script, true).
+                          '" type="text/javascript" charset="UTF-8"></script>';
 
             if (is_dir(THEME_DIR.DIR."javascripts") or is_dir(THEME_DIR.DIR."js")) {
-                foreach(array_merge((array) glob(THEME_DIR.DIR."javascripts".DIR."*.js"),
-                                    (array) glob(THEME_DIR.DIR."js".DIR."*.js")) as $filepath) {
-
+                foreach(
+                    array_merge(
+                        (array) glob(THEME_DIR.DIR."javascripts".DIR."*.js"),
+                        (array) glob(THEME_DIR.DIR."js".DIR."*.js")
+                    ) as $filepath
+                ) {
                     $filename = basename($filepath);
 
                     if (empty($filename) or substr_count($filename, ".inc.js"))
                         continue;
 
                     $qdir = preg_quote(DIR, "/");
-                    $path = preg_replace("/(.+)".$qdir."themes".$qdir."(.+)/", "$2", $filepath);
+                    $path = preg_replace(
+                        "/(.+)".$qdir."themes".$qdir."(.+)/",
+                        "$2",
+                        $filepath
+                    );
                     $href = $config->chyrp_url."/themes/".str_replace(DIR, "/", $path);
-                    $tags[] = '<script src="'.fix($href, true).'" type="text/javascript" charset="UTF-8"></script>';
+                    $tags[] = '<script src="'.
+                              fix($href, true).
+                              '" type="text/javascript" charset="UTF-8"></script>';
                 }
             }
 
@@ -291,13 +335,23 @@
             $main = MainController::current();
 
             # Generate the main feed that appears everywhere.
-            $links = array(array("href" => url("feed", $main),
-                                 "type" => BlogFeed::type(),
-                                 "title" => $config->name));
+            $links = array(
+                array(
+                    "href" => url("feed", $main),
+                    "type" => BlogFeed::type(),
+                    "title" => $config->name
+                )
+            );
 
             # Generate a feed for this route action if it seems appropriate.
-            if ($route->action != "index" and !$main->feed and !empty($main->context["posts"]) and
-                !($main->context["posts"] instanceof Paginator and $main->context["posts"]->total == 0)) {
+            if (
+                $route->action != "index" and
+                !$main->feed and !empty($main->context["posts"]) and
+                !(
+                    $main->context["posts"] instanceof Paginator and
+                    $main->context["posts"]->total == 0
+                )
+            ) {
                     # Rewind to page 1 (most recent) if the posts are paginated.
                     $page_url = ($main->context["posts"] instanceof Paginator) ?
                         $main->context["posts"]->prev_page_url(1) : self_url() ;
@@ -306,9 +360,11 @@
                         rtrim($page_url, "/")."/feed/" :
                         $page_url.(substr_count($page_url, "?") ? "&feed" : "?feed") ;
 
-                        $links[] = array("href" => $feed_url,
-                                         "type" => BlogFeed::type(),
-                                         "title" => oneof($this->title, $config->name));
+                        $links[] = array(
+                            "href" => $feed_url,
+                            "type" => BlogFeed::type(),
+                            "title" => oneof($this->title, $config->name)
+                        );
             }
 
             # Ask extensions to provide additional links.
@@ -325,9 +381,16 @@
                 fallback($link["type"]);
                 fallback($link["title"]);
 
-                $tags[] = '<link rel="'.fix($link["rel"], true).'" href="'.fix($link["href"], true).'"'.
-                            (!empty($link["type"]) ? ' type="'.fix($link["type"], true).'"' : "").
-                            (!empty($link["title"]) ? ' title="'.fix($link["title"], true).'"' : "").'>';
+                $tag = '<link rel="'.fix($link["rel"], true).
+                       '" href="'.fix($link["href"], true).'"';
+
+                if (!empty($link["type"]))
+                    $tag.= ' type="'.fix($link["type"], true).'"';
+
+                if (!empty($link["title"]))
+                    $tag.= ' title="'.fix($link["title"], true).'"';
+
+                $tags[] = $tag;
             }
 
             return implode("\n", $tags);

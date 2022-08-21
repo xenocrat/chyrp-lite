@@ -117,27 +117,38 @@
 
     # Test for basic database access requirements.
     if (empty($drivers))
-        alert(__("PDO is required for database access."));
+        alert(
+            __("PDO is required for database access."));
 
     # Test if we can write to MAIN_DIR (needed for the .htaccess file).
     if (!is_writable(MAIN_DIR))
-        alert(__("Please CHMOD or CHOWN the installation directory to make it writable."));
+        alert(
+            __("Please CHMOD or CHOWN the installation directory to make it writable.")
+        );
 
     # Test if we can write to INCLUDES_DIR (needed for config.json.php).
     if (!is_writable(INCLUDES_DIR))
-        alert(__("Please CHMOD or CHOWN the <em>includes</em> directory to make it writable."));
+        alert(
+            __("Please CHMOD or CHOWN the <em>includes</em> directory to make it writable.")
+        );
 
     # Test if we can write to CACHES_DIR (needed by some extensions).
     if (!is_writable(CACHES_DIR))
-        alert(__("Please CHMOD or CHOWN the <em>caches</em> directory to make it writable."));
+        alert(
+            __("Please CHMOD or CHOWN the <em>caches</em> directory to make it writable.")
+        );
 
     # Test if we can write to twig cache.
     if (!is_writable(CACHES_DIR.DIR."twig"))
-        alert(__("Please CHMOD or CHOWN the <em>twig</em> directory to make it writable."));
+        alert(
+            __("Please CHMOD or CHOWN the <em>twig</em> directory to make it writable.")
+        );
 
     # Test if we can write to thumbs cache.
     if (!is_writable(CACHES_DIR.DIR."thumbs"))
-        alert(__("Please CHMOD or CHOWN the <em>thumbs</em> directory to make it writable."));
+        alert(
+            __("Please CHMOD or CHOWN the <em>thumbs</em> directory to make it writable.")
+        );
 
     /**
      * Function: alert
@@ -625,20 +636,24 @@
         if (!alert()) {
             # Build the SQL settings based on user input.
             $settings = ($_POST['adapter'] == "sqlite") ?
-                array("host"     => "",
-                      "port"     => "",
-                      "username" => "",
-                      "password" => "",
-                      "database" => $_POST['database'],
-                      "prefix"   => "",
-                      "adapter"  => $_POST['adapter']) :
-                array("host"     => $_POST['host'],
-                      "port"     => $_POST['port'],
-                      "username" => $_POST['username'],
-                      "password" => $_POST['password'],
-                      "database" => $_POST['database'],
-                      "prefix"   => $_POST['prefix'],
-                      "adapter"  => $_POST['adapter']) ;
+                array(
+                    "host"     => "",
+                    "port"     => "",
+                    "username" => "",
+                    "password" => "",
+                    "database" => $_POST['database'],
+                    "prefix"   => "",
+                    "adapter"  => $_POST['adapter']
+                ) :
+                array(
+                    "host"     => $_POST['host'],
+                    "port"     => $_POST['port'],
+                    "username" => $_POST['username'],
+                    "password" => $_POST['password'],
+                    "database" => $_POST['database'],
+                    "prefix"   => $_POST['prefix'],
+                    "adapter"  => $_POST['adapter']
+                ) ;
 
             # Configure the SQL interface.
             $sql = SQL::current($settings);
@@ -653,131 +668,179 @@
             $sql->connect();
 
             # Posts table.
-            $sql->create("posts",
-                         array("id INTEGER PRIMARY KEY AUTO_INCREMENT",
-                               "feather VARCHAR(32) DEFAULT ''",
-                               "clean VARCHAR(128) DEFAULT ''",
-                               "url VARCHAR(128) DEFAULT ''",
-                               "pinned BOOLEAN DEFAULT FALSE",
-                               "status VARCHAR(32) DEFAULT 'public'",
-                               "user_id INTEGER DEFAULT 0",
-                               "created_at DATETIME DEFAULT NULL",
-                               "updated_at DATETIME DEFAULT NULL"));
+            $sql->create(
+                "posts",
+                array(
+                    "id INTEGER PRIMARY KEY AUTO_INCREMENT",
+                    "feather VARCHAR(32) DEFAULT ''",
+                    "clean VARCHAR(128) DEFAULT ''",
+                    "url VARCHAR(128) DEFAULT ''",
+                    "pinned BOOLEAN DEFAULT FALSE",
+                    "status VARCHAR(32) DEFAULT 'public'",
+                    "user_id INTEGER DEFAULT 0",
+                    "created_at DATETIME DEFAULT NULL",
+                    "updated_at DATETIME DEFAULT NULL"
+                )
+            );
 
             # Post attributes table.
-            $sql->create("post_attributes",
-                         array("post_id INTEGER NOT NULL",
-                               "name VARCHAR(100) DEFAULT ''",
-                               "value LONGTEXT",
-                               "PRIMARY KEY (post_id, name)"));
+            $sql->create(
+                "post_attributes",
+                array(
+                    "post_id INTEGER NOT NULL",
+                    "name VARCHAR(100) DEFAULT ''",
+                    "value LONGTEXT",
+                    "PRIMARY KEY (post_id, name)"
+                )
+            );
 
             # Pages table.
-            $sql->create("pages",
-                         array("id INTEGER PRIMARY KEY AUTO_INCREMENT",
-                               "title VARCHAR(250) DEFAULT ''",
-                               "body LONGTEXT",
-                               "public BOOLEAN DEFAULT '1'",
-                               "show_in_list BOOLEAN DEFAULT '1'",
-                               "list_order INTEGER DEFAULT 0",
-                               "clean VARCHAR(128) DEFAULT ''",
-                               "url VARCHAR(128) DEFAULT ''",
-                               "user_id INTEGER DEFAULT 0",
-                               "parent_id INTEGER DEFAULT 0",
-                               "created_at DATETIME DEFAULT NULL",
-                               "updated_at DATETIME DEFAULT NULL"));
+            $sql->create(
+                "pages",
+                array(
+                    "id INTEGER PRIMARY KEY AUTO_INCREMENT",
+                    "title VARCHAR(250) DEFAULT ''",
+                    "body LONGTEXT",
+                    "public BOOLEAN DEFAULT '1'",
+                    "show_in_list BOOLEAN DEFAULT '1'",
+                    "list_order INTEGER DEFAULT 0",
+                    "clean VARCHAR(128) DEFAULT ''",
+                    "url VARCHAR(128) DEFAULT ''",
+                    "user_id INTEGER DEFAULT 0",
+                    "parent_id INTEGER DEFAULT 0",
+                    "created_at DATETIME DEFAULT NULL",
+                    "updated_at DATETIME DEFAULT NULL"
+                )
+            );
 
             # Users table.
-            $sql->create("users",
-                         array("id INTEGER PRIMARY KEY AUTO_INCREMENT",
-                               "login VARCHAR(64) DEFAULT ''",
-                               "password VARCHAR(128) DEFAULT ''",
-                               "full_name VARCHAR(250) DEFAULT ''",
-                               "email VARCHAR(128) DEFAULT ''",
-                               "website VARCHAR(128) DEFAULT ''",
-                               "group_id INTEGER DEFAULT 0",
-                               "approved BOOLEAN DEFAULT '1'",
-                               "joined_at DATETIME DEFAULT NULL",
-                               "UNIQUE (login)"));
+            $sql->create(
+                "users",
+                array(
+                    "id INTEGER PRIMARY KEY AUTO_INCREMENT",
+                    "login VARCHAR(64) DEFAULT ''",
+                    "password VARCHAR(128) DEFAULT ''",
+                    "full_name VARCHAR(250) DEFAULT ''",
+                    "email VARCHAR(128) DEFAULT ''",
+                    "website VARCHAR(128) DEFAULT ''",
+                    "group_id INTEGER DEFAULT 0",
+                    "approved BOOLEAN DEFAULT '1'",
+                    "joined_at DATETIME DEFAULT NULL",
+                    "UNIQUE (login)"
+                )
+            );
 
             # Groups table.
-            $sql->create("groups",
-                         array("id INTEGER PRIMARY KEY AUTO_INCREMENT",
-                               "name VARCHAR(100) DEFAULT ''",
-                               "UNIQUE (name)"));
+            $sql->create(
+                "groups",
+                array(
+                    "id INTEGER PRIMARY KEY AUTO_INCREMENT",
+                    "name VARCHAR(100) DEFAULT ''",
+                    "UNIQUE (name)"
+                )
+            );
 
             # Permissions table.
-            $sql->create("permissions",
-                         array("id VARCHAR(100) DEFAULT ''",
-                               "name VARCHAR(100) DEFAULT ''",
-                               "group_id INTEGER DEFAULT 0",
-                               "PRIMARY KEY (id, group_id)"));
+            $sql->create(
+                "permissions",
+                array(
+                    "id VARCHAR(100) DEFAULT ''",
+                    "name VARCHAR(100) DEFAULT ''",
+                    "group_id INTEGER DEFAULT 0",
+                    "PRIMARY KEY (id, group_id)"
+                )
+            );
 
             # Sessions table.
-            $sql->create("sessions",
-                         array("id VARCHAR(40) DEFAULT ''",
-                               "data LONGTEXT",
-                               "user_id INTEGER DEFAULT 0",
-                               "created_at DATETIME DEFAULT NULL",
-                               "updated_at DATETIME DEFAULT NULL",
-                               "PRIMARY KEY (id)"));
+            $sql->create(
+                "sessions",
+                array(
+                    "id VARCHAR(40) DEFAULT ''",
+                    "data LONGTEXT",
+                    "user_id INTEGER DEFAULT 0",
+                    "created_at DATETIME DEFAULT NULL",
+                    "updated_at DATETIME DEFAULT NULL",
+                    "PRIMARY KEY (id)"
+                )
+            );
 
             # Add the default permissions.
-            $names = array("change_settings" => "Change Settings",
-                           "toggle_extensions" => "Toggle Extensions",
-                           "view_site" => "View Site",
-                           "view_private" => "View Private Posts",
-                           "view_scheduled" => "View Scheduled Posts",
-                           "view_draft" => "View Drafts",
-                           "view_own_draft" => "View Own Drafts",
-                           "add_post" => "Add Posts",
-                           "add_draft" => "Add Drafts",
-                           "edit_post" => "Edit Posts",
-                           "edit_draft" => "Edit Drafts",
-                           "edit_own_post" => "Edit Own Posts",
-                           "edit_own_draft" => "Edit Own Drafts",
-                           "delete_post" => "Delete Posts",
-                           "delete_draft" => "Delete Drafts",
-                           "delete_own_post" => "Delete Own Posts",
-                           "delete_own_draft" => "Delete Own Drafts",
-                           "view_page" => "View Pages",
-                           "add_page" => "Add Pages",
-                           "edit_page" => "Edit Pages",
-                           "delete_page" => "Delete Pages",
-                           "add_user" => "Add Users",
-                           "edit_user" => "Edit Users",
-                           "delete_user" => "Delete Users",
-                           "add_group" => "Add Groups",
-                           "edit_group" => "Edit Groups",
-                           "delete_group" => "Delete Groups",
-                           "export_content" => "Export Content");
+            $names = array(
+                "change_settings" => "Change Settings",
+                "toggle_extensions" => "Toggle Extensions",
+                "view_site" => "View Site",
+                "view_private" => "View Private Posts",
+                "view_scheduled" => "View Scheduled Posts",
+                "view_draft" => "View Drafts",
+                "view_own_draft" => "View Own Drafts",
+                "add_post" => "Add Posts",
+                "add_draft" => "Add Drafts",
+                "edit_post" => "Edit Posts",
+                "edit_draft" => "Edit Drafts",
+                "edit_own_post" => "Edit Own Posts",
+                "edit_own_draft" => "Edit Own Drafts",
+                "delete_post" => "Delete Posts",
+                "delete_draft" => "Delete Drafts",
+                "delete_own_post" => "Delete Own Posts",
+                "delete_own_draft" => "Delete Own Drafts",
+                "view_page" => "View Pages",
+                "add_page" => "Add Pages",
+                "edit_page" => "Edit Pages",
+                "delete_page" => "Delete Pages",
+                "add_user" => "Add Users",
+                "edit_user" => "Edit Users",
+                "delete_user" => "Delete Users",
+                "add_group" => "Add Groups",
+                "edit_group" => "Edit Groups",
+                "delete_group" => "Delete Groups",
+                "export_content" => "Export Content"
+            );
 
             foreach ($names as $id => $name)
-                $sql->replace("permissions",
-                              array("id", "group_id"),
-                              array("id" => $id,
-                                    "name" => $name,
-                                    "group_id" => 0));
+                $sql->replace(
+                    "permissions",
+                    array(
+                        "id",
+                        "group_id"
+                    ),
+                    array(
+                        "id" => $id,
+                        "name" => $name,
+                        "group_id" => 0
+                    )
+                );
 
-            $groups = array("admin"  => array_keys($names),
-                            "member" => array("view_site"),
-                            "friend" => array("view_site", "view_private", "view_scheduled"),
-                            "banned" => array(),
-                            "guest"  => array("view_site"));
+            $groups = array(
+                "admin"  => array_keys($names),
+                "member" => array("view_site"),
+                "friend" => array("view_site", "view_private", "view_scheduled"),
+                "banned" => array(),
+                "guest"  => array("view_site")
+            );
 
             # Add the default groups.
             $group_id = array();
 
             foreach ($groups as $name => $permissions) {
-                $sql->replace("groups", "name", array("name" => ucfirst($name)));
+                $sql->replace(
+                    "groups", "name", array("name" => ucfirst($name))
+                );
 
                 $group_id[$name] = $sql->latest("groups");
 
                 foreach ($permissions as $permission)
-                    $sql->replace("permissions",
-                                  array("id", "group_id"),
-                                  array("id" => $permission,
-                                        "name" => $names[$permission],
-                                        "group_id" => $group_id[$name]));
+                    $sql->replace(
+                        "permissions",
+                        array(
+                            "id",
+                            "group_id"
+                        ),
+                        array(
+                            "id" => $permission,
+                            "name" => $names[$permission],
+                            "group_id" => $group_id[$name]
+                        )
+                    );
             }
 
             # Normalize the Chyrp URL.
@@ -785,52 +848,61 @@
 
             # Add the admin user account.
             if (!$sql->select("users", "id", array("login" => $_POST['login']))->fetchColumn())
-                $sql->insert("users",
-                             array("login" => $_POST['login'],
-                                   "password" => User::hash_password($_POST['password1']),
-                                   "email" => $_POST['email'],
-                                   "group_id" => $group_id["admin"],
-                                   "approved" => true,
-                                   "joined_at" => datetime()));
+                $sql->insert(
+                    "users",
+                    array(
+                        "login" => $_POST['login'],
+                        "password" => User::hash_password($_POST['password1']),
+                        "email" => $_POST['email'],
+                        "group_id" => $group_id["admin"],
+                        "approved" => true,
+                        "joined_at" => datetime()
+                    )
+                );
 
             # Build the configuration file.
-            $set = array($config->set("sql", $settings),
-                         $config->set("name", strip_tags($_POST['name'])),
-                         $config->set("description", strip_tags($_POST['description'])),
-                         $config->set("url", $chyrp_url),
-                         $config->set("chyrp_url", $chyrp_url),
-                         $config->set("email", $_POST['email']),
-                         $config->set("timezone", $_POST['timezone']),
-                         $config->set("locale", $_POST['locale']),
-                         $config->set("check_updates", true),
-                         $config->set("check_updates_last", 0),
-                         $config->set("theme", "blossom"),
-                         $config->set("posts_per_page", 5),
-                         $config->set("admin_per_page", 25),
-                         $config->set("feed_format", "AtomFeed"),
-                         $config->set("feed_items", 20),
-                         $config->set("uploads_path", DIR."uploads".DIR),
-                         $config->set("uploads_limit", 10),
-                         $config->set("search_pages", false),
-                         $config->set("send_pingbacks", false),
-                         $config->set("enable_xmlrpc", true),
-                         $config->set("enable_emoji", true),
-                         $config->set("enable_markdown", true),
-                         $config->set("can_register", false),
-                         $config->set("email_activation", false),
-                         $config->set("email_correspondence", true),
-                         $config->set("default_group", $group_id["member"]),
-                         $config->set("guest_group", $group_id["guest"]),
-                         $config->set("clean_urls", false),
-                         $config->set("enable_homepage", false),
-                         $config->set("post_url", "(year)/(month)/(day)/(url)/"),
-                         $config->set("enabled_modules", array()),
-                         $config->set("enabled_feathers", array("text")),
-                         $config->set("routes", array()),
-                         $config->set("secure_hashkey", random(32)));
+            $set = array(
+                $config->set("sql", $settings),
+                $config->set("name", strip_tags($_POST['name'])),
+                $config->set("description", strip_tags($_POST['description'])),
+                $config->set("url", $chyrp_url),
+                $config->set("chyrp_url", $chyrp_url),
+                $config->set("email", $_POST['email']),
+                $config->set("timezone", $_POST['timezone']),
+                $config->set("locale", $_POST['locale']),
+                $config->set("check_updates", true),
+                $config->set("check_updates_last", 0),
+                $config->set("theme", "blossom"),
+                $config->set("posts_per_page", 5),
+                $config->set("admin_per_page", 25),
+                $config->set("feed_format", "AtomFeed"),
+                $config->set("feed_items", 20),
+                $config->set("uploads_path", DIR."uploads".DIR),
+                $config->set("uploads_limit", 10),
+                $config->set("search_pages", false),
+                $config->set("send_pingbacks", false),
+                $config->set("enable_xmlrpc", true),
+                $config->set("enable_emoji", true),
+                $config->set("enable_markdown", true),
+                $config->set("can_register", false),
+                $config->set("email_activation", false),
+                $config->set("email_correspondence", true),
+                $config->set("default_group", $group_id["member"]),
+                $config->set("guest_group", $group_id["guest"]),
+                $config->set("clean_urls", false),
+                $config->set("enable_homepage", false),
+                $config->set("post_url", "(year)/(month)/(day)/(url)/"),
+                $config->set("enabled_modules", array()),
+                $config->set("enabled_feathers", array("text")),
+                $config->set("routes", array()),
+                $config->set("secure_hashkey", random(32))
+            );
 
             if (in_array(false, $set, true))
-                error(__("Error"), __("Could not write the configuration file."));
+                error(
+                    __("Error"),
+                    __("Could not write the configuration file.")
+                );
 
             @unlink(INCLUDES_DIR.DIR."upgrading.lock");
             $installed = true;

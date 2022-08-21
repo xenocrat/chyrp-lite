@@ -42,7 +42,10 @@
          * See Also:
          *     <Model::search>
          */
-        static function find($options = array(), $options_for_object = array()): array {
+        static function find(
+            $options = array(),
+            $options_for_object = array()
+        ): array {
             return parent::search(get_class(), $options, $options_for_object);
         }
 
@@ -72,17 +75,19 @@
          * See Also:
          *     <update>
          */
-        static function add($title,
-                            $body,
-                            $user         = null,
-                            $parent_id    = 0,
-                            $public       = true,
-                            $show_in_list = true,
-                            $list_order   = 0,
-                            $clean        = "",
-                            $url          = "",
-                            $created_at   = null,
-                            $updated_at   = null): self {
+        static function add(
+            $title,
+            $body,
+            $user         = null,
+            $parent_id    = 0,
+            $public       = true,
+            $show_in_list = true,
+            $list_order   = 0,
+            $clean        = "",
+            $url          = "",
+            $created_at   = null,
+            $updated_at   = null
+        ): self {
             $user_id = ($user instanceof User) ? $user->id : $user ;
 
             fallback($user_id,      Visitor::current()->id);
@@ -98,26 +103,24 @@
             $sql = SQL::current();
             $trigger = Trigger::current();
 
-            $new_values = array("title"        => $title,
-                                "body"         => $body,
-                                "user_id"      => $user_id,
-                                "parent_id"    => $parent_id,
-                                "public"       => $public,
-                                "show_in_list" => $show_in_list,
-                                "list_order"   => $list_order,
-                                "clean"        => $clean,
-                                "url"          => $url,
-                                "created_at"   => $created_at,
-                                "updated_at"   => $updated_at);
+            $new_values = array(
+                "title"        => $title,
+                "body"         => $body,
+                "user_id"      => $user_id,
+                "parent_id"    => $parent_id,
+                "public"       => $public,
+                "show_in_list" => $show_in_list,
+                "list_order"   => $list_order,
+                "clean"        => $clean,
+                "url"          => $url,
+                "created_at"   => $created_at,
+                "updated_at"   => $updated_at
+            );
 
             $trigger->filter($new_values, "before_add_page");
-
             $sql->insert("pages", $new_values);
-
             $page = new self($sql->latest("pages"));
-
             $trigger->call("add_page", $page);
-
             return $page;
         }
 
@@ -143,61 +146,87 @@
          * Notes:
          *     The caller is responsible for validating all supplied values.
          */
-        public function update($title        = null,
-                               $body         = null,
-                               $user         = null,
-                               $parent_id    = null,
-                               $public       = null,
-                               $show_in_list = null,
-                               $list_order   = null,
-                               $clean        = null,
-                               $url          = null,
-                               $created_at   = null,
-                               $updated_at   = null): self|false {
+        public function update(
+            $title        = null,
+            $body         = null,
+            $user         = null,
+            $parent_id    = null,
+            $public       = null,
+            $show_in_list = null,
+            $list_order   = null,
+            $clean        = null,
+            $url          = null,
+            $created_at   = null,
+            $updated_at   = null
+        ): self|false {
             if ($this->no_results)
                 return false;
 
             $user_id = ($user instanceof User) ? $user->id : $user ;
 
-            fallback($title,        ($this->filtered) ? $this->title_unfiltered : $this->title);
-            fallback($body,         ($this->filtered) ? $this->body_unfiltered : $this->body);
+            fallback(
+                $title,
+                ($this->filtered) ?
+                                    $this->title_unfiltered :
+                                    $this->title
+            );
+            fallback(
+                $body,
+                ($this->filtered) ?
+                                    $this->body_unfiltered :
+                                    $this->body
+            );
             fallback($user_id,      $this->user_id);
             fallback($parent_id,    $this->parent_id);
             fallback($public,       $this->public);
             fallback($show_in_list, $this->show_in_list);
             fallback($list_order,   $this->list_order);
             fallback($clean,        $this->clean);
-            fallback($url,          ($clean != $this->clean) ? self::check_url($clean) : $this->url);
+            fallback(
+                $url,
+                ($clean != $this->clean) ?
+                                    self::check_url($clean) :
+                                    $this->url
+            );
             fallback($created_at,   $this->created_at);
             fallback($updated_at,   datetime());
 
             $sql = SQL::current();
             $trigger = Trigger::current();
 
-            $new_values = array("title"        => $title,
-                                "body"         => $body,
-                                "user_id"      => $user_id,
-                                "parent_id"    => $parent_id,
-                                "public"       => $public,
-                                "show_in_list" => $show_in_list,
-                                "list_order"   => $list_order,
-                                "clean"        => $clean,
-                                "url"          => $url,
-                                "created_at"   => $created_at,
-                                "updated_at"   => $updated_at);
+            $new_values = array(
+                "title"        => $title,
+                "body"         => $body,
+                "user_id"      => $user_id,
+                "parent_id"    => $parent_id,
+                "public"       => $public,
+                "show_in_list" => $show_in_list,
+                "list_order"   => $list_order,
+                "clean"        => $clean,
+                "url"          => $url,
+                "created_at"   => $created_at,
+                "updated_at"   => $updated_at
+            );
 
             $trigger->filter($new_values, "before_update_page");
 
-            $sql->update("pages",
-                         array("id" => $this->id),
-                         $new_values);
+            $sql->update(
+                "pages",
+                array("id" => $this->id),
+                $new_values
+            );
 
-            $page = new self(null,
-                             array("read_from" => array_merge($new_values,
-                                                  array("id" => $this->id))));
+            $page = new self(
+                null,
+                array(
+                    "read_from" => array_merge(
+                        $new_values,
+                        array("id" => $this->id)
+                    )
+                )
+            );
 
             $trigger->call("update_page", $page, $this);
-
             return $page;
         }
 
@@ -287,11 +316,19 @@
             # Dirty URL?
             if (preg_match("/(\?|&)url=([^&#]+)/", $request, $slug)) {
                 $page = new self(array("url" => $slug[2]));
-                return isset($route) ? $route->try["view"] = array($page) : $page ;
+
+                return isset($route) ?
+                    $route->try["view"] = array($page) : $page ;
             }
 
-            $hierarchy = explode("/", trim(str_replace(Config::current()->url, "/", $request), "/"));
-            $pages = self::find(array("where" => array("url" => $hierarchy)));
+            $hierarchy = explode(
+                "/",
+                trim(str_replace(Config::current()->url, "/", $request), "/")
+            );
+
+            $pages = self::find(
+                array("where" => array("url" => $hierarchy))
+            );
 
             # One of the URLs in the page hierarchy is invalid.
             if (!(count($pages) == count($hierarchy)))
@@ -300,7 +337,8 @@
             # Loop over the pages until we find the one we want.
             foreach ($pages as $page) {
                 if ($page->url == end($hierarchy))
-                    return isset($route) ? $route->try["page"] = array($page) : $page ;
+                    return isset($route) ?
+                        $route->try["page"] = array($page) : $page ;
             }
         }
 
@@ -315,7 +353,10 @@
             $config = Config::current();
 
             if (!$config->clean_urls)
-                return fix($config->url."/?action=page&url=".urlencode($this->url), true);
+                return fix(
+                    $config->url."/?action=page&url=".urlencode($this->url),
+                    true
+                );
 
             $url = array("", urlencode($this->url));
 
@@ -326,7 +367,10 @@
                 $page = $page->parent;
             }
 
-            return fix($config->url."/".implode("/", array_reverse($url)), true);
+            return fix(
+                $config->url."/".implode("/", array_reverse($url)),
+                true
+            );
         }
 
         /**
@@ -337,12 +381,14 @@
             if ($this->no_results)
                 return false;
 
-            $author = array("nick"    => $this->user->login,
-                            "name"    => oneof($this->user->full_name, $this->user->login),
-                            "website" => $this->user->website,
-                            "email"   => $this->user->email,
-                            "joined"  => $this->user->joined_at,
-                            "group"   => $this->user->group->name);
+            $author = array(
+                "nick"    => $this->user->login,
+                "name"    => oneof($this->user->full_name, $this->user->login),
+                "website" => $this->user->website,
+                "email"   => $this->user->email,
+                "joined"  => $this->user->joined_at,
+                "group"   => $this->user->group->name
+            );
 
             return (object) $author;
         }

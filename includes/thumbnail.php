@@ -12,13 +12,26 @@
         ini_set("memory_limit", "48M");
 
     if (isset($_SERVER['REQUEST_METHOD']) and $_SERVER['REQUEST_METHOD'] !== "GET")
-        error(__("Error"), __("This resource accepts GET requests only."), null, 405);
+        error(
+            __("Error"),
+            __("This resource accepts GET requests only."),
+            null,
+            405
+        );
 
     if (empty($_GET['file']))
-        error(__("Error"), __("Missing argument."), null, 400);
+        error(
+            __("Error"),
+            __("Missing argument."),
+            null,
+            400
+        );
 
     if (!$visitor->group->can("view_site"))
-        show_403(__("Access Denied"), __("You are not allowed to view this site."));
+        show_403(
+            __("Access Denied"),
+            __("You are not allowed to view this site.")
+        );
 
     $quality = abs((int) fallback($_GET["quality"], 80));
     $filename = str_replace(array(DIR, "/"), "", $_GET['file']);
@@ -27,10 +40,18 @@
     $thumb_h = abs((int) fallback($_GET["max_height"], 0));
 
     if (!is_readable($filepath) or !is_file($filepath))
-        show_404(__("Not Found"), __("File not found."));
+        show_404(
+            __("Not Found"),
+            __("File not found.")
+        );
 
     if ($thumb_w == 0 and $thumb_h == 0)
-        error(__("Error"), __("Maximum size cannot be zero."), null, 422);
+        error(
+            __("Error"),
+            __("Maximum size cannot be zero."),
+            null,
+            422
+        );
 
     if (!function_exists("gd_info")) {
         header($_SERVER['SERVER_PROTOCOL']." 301 Moved Permanently");
@@ -189,7 +210,10 @@
         }
 
         if ($original === false)
-            error(__("Error"), __("Failed to create image thumbnail."));
+            error(
+                __("Error"),
+                __("Failed to create image thumbnail.")
+            );
 
         # Create the thumbnail image resource.
         $thumb = imagecreatetruecolor($thumb_w, $thumb_h);
@@ -210,16 +234,18 @@
         }
 
         # Do the crop and resize.
-        imagecopyresampled($thumb,
-                           $original,
-                           0,
-                           0,
-                           $crop_x,
-                           $crop_y,
-                           $thumb_w,
-                           $thumb_h,
-                           $orig_w,
-                           $orig_h);
+        imagecopyresampled(
+            $thumb,
+            $original,
+            0,
+            0,
+            $crop_x,
+            $crop_y,
+            $thumb_w,
+            $thumb_h,
+            $orig_w,
+            $orig_h
+        );
 
         # Create the thumbnail file.
         switch ($function) {
@@ -231,7 +257,10 @@
         }
 
         if ($result === false)
-            error(__("Error"), __("Failed to create image thumbnail."));
+            error(
+                __("Error"),
+                __("Failed to create image thumbnail.")
+            );
 
         # Destroy resources.
         imagedestroy($original);

@@ -17,7 +17,10 @@
      */
     function session($secure = null): void {
         if (session_status() == PHP_SESSION_ACTIVE) {
-            trigger_error(__("Session cannot be started more than once."), E_USER_NOTICE);
+            trigger_error(
+                __("Session cannot be started more than once."),
+                E_USER_NOTICE
+            );
             return;
         }
 
@@ -31,13 +34,15 @@
         if (!is_bool($secure))
             $secure = ($parsed["scheme"] == "https");
 
-        $options = array("lifetime" => 2592000,
-                         "expires"  => time() + 2592000,
-                         "path"     => "/",
-                         "domain"   => $parsed["host"],
-                         "secure"   => $secure,
-                         "httponly" => true,
-                         "samesite" => "Lax");
+        $options = array(
+            "lifetime" => 2592000,
+            "expires"  => time() + 2592000,
+            "path"     => "/",
+            "domain"   => $parsed["host"],
+            "secure"   => $secure,
+            "httponly" => true,
+            "samesite" => "Lax"
+        );
 
         $options_params = $options;
         $options_cookie = $options;
@@ -179,9 +184,11 @@
      *     True if no action was needed, bytes written on success, false on failure.
      */
     function htaccess_conf($url_path = null): int|bool {
-        $url_path = oneof($url_path,
-                          parse_url(Config::current()->chyrp_url, PHP_URL_PATH),
-                          "/");
+        $url_path = oneof(
+            $url_path,
+            parse_url(Config::current()->chyrp_url, PHP_URL_PATH),
+            "/"
+        );
 
         $filepath = MAIN_DIR.DIR.".htaccess";
         $template = INCLUDES_DIR.DIR."htaccess.conf";
@@ -189,9 +196,11 @@
         if (!is_file($template) or !is_readable($template))
             return false;
 
-        $htaccess = preg_replace('~%\\{CHYRP_PATH\\}/?~',
-                                 ltrim($url_path."/", "/"),
-                                 file_get_contents($template));
+        $htaccess = preg_replace(
+            '~%\\{CHYRP_PATH\\}/?~',
+            ltrim($url_path."/", "/"),
+            file_get_contents($template)
+        );
 
         if (!file_exists($filepath))
             return @file_put_contents($filepath, $htaccess);
@@ -199,7 +208,12 @@
         if (!is_file($filepath) or !is_readable($filepath))
             return false;
 
-        if (!preg_match("~".preg_quote($htaccess, "~")."~", file_get_contents($filepath)))
+        if (
+            !preg_match(
+                "~".preg_quote($htaccess, "~")."~",
+                file_get_contents($filepath)
+            )
+        )
             return @file_put_contents($filepath, $htaccess);
 
         return true;
@@ -216,9 +230,11 @@
      *     True if no action was needed, bytes written on success, false on failure.
      */
     function caddyfile_conf($url_path = null): int|bool {
-        $url_path = oneof($url_path,
-                          parse_url(Config::current()->chyrp_url, PHP_URL_PATH),
-                          "/");
+        $url_path = oneof(
+            $url_path,
+            parse_url(Config::current()->chyrp_url, PHP_URL_PATH),
+            "/"
+        );
 
         $filepath = MAIN_DIR.DIR."caddyfile";
         $template = INCLUDES_DIR.DIR."caddyfile.conf";
@@ -226,9 +242,11 @@
         if (!is_file($template) or !is_readable($template))
             return false;
 
-        $caddyfile = preg_replace('~\\{chyrp_path\\}/?~',
-                                 ltrim($url_path."/", "/"),
-                                 file_get_contents($template));
+        $caddyfile = preg_replace(
+            '~\\{chyrp_path\\}/?~',
+            ltrim($url_path."/", "/"),
+            file_get_contents($template)
+        );
 
         if (!file_exists($filepath))
             return @file_put_contents($filepath, $caddyfile);
@@ -236,7 +254,12 @@
         if (!is_file($filepath) or !is_readable($filepath))
             return false;
 
-        if (!preg_match("~".preg_quote($caddyfile, "~")."~", file_get_contents($filepath)))
+        if (
+            !preg_match(
+                "~".preg_quote($caddyfile, "~")."~",
+                file_get_contents($filepath)
+            )
+        )
             return @file_put_contents($filepath, $caddyfile);
 
         return true;
@@ -253,9 +276,11 @@
      *     True if no action was needed, bytes written on success, false on failure.
      */
     function nginx_conf($url_path = null): int|bool {
-        $url_path = oneof($url_path,
-                          parse_url(Config::current()->chyrp_url, PHP_URL_PATH),
-                          "/");
+        $url_path = oneof(
+            $url_path,
+            parse_url(Config::current()->chyrp_url, PHP_URL_PATH),
+            "/"
+        );
 
         $filepath = MAIN_DIR.DIR."include.conf";
         $template = INCLUDES_DIR.DIR."nginx.conf";
@@ -263,9 +288,11 @@
         if (!is_file($template) or !is_readable($template))
             return false;
 
-        $caddyfile = preg_replace('~\\$chyrp_path/?~',
-                                 ltrim($url_path."/", "/"),
-                                 file_get_contents($template));
+        $caddyfile = preg_replace(
+            '~\\$chyrp_path/?~',
+            ltrim($url_path."/", "/"),
+            file_get_contents($template)
+        );
 
         if (!file_exists($filepath))
             return @file_put_contents($filepath, $caddyfile);
@@ -273,7 +300,12 @@
         if (!is_file($filepath) or !is_readable($filepath))
             return false;
 
-        if (!preg_match("~".preg_quote($caddyfile, "~")."~", file_get_contents($filepath)))
+        if (
+            !preg_match(
+                "~".preg_quote($caddyfile, "~")."~",
+                file_get_contents($filepath)
+            )
+        )
             return @file_put_contents($filepath, $caddyfile);
 
         return true;
@@ -289,8 +321,12 @@
      */
     function locales(): array {
         # Ensure the default locale is always present in the list.
-        $locales = array(array("code" => "en_US",
-                               "name" => lang_code("en_US")));
+        $locales = array(
+            array(
+                "code" => "en_US",
+                "name" => lang_code("en_US")
+            )
+        );
 
         $dir = new DirectoryIterator(INCLUDES_DIR.DIR."locale");
 
@@ -302,8 +338,10 @@
                     continue;
 
                 if (preg_match("/^[a-z]{2}(_|-)[a-z]{2}$/i", $dirname))
-                    $locales[] = array("code" => $dirname,
-                                       "name" => lang_code($dirname));
+                    $locales[] = array(
+                        "code" => $dirname,
+                        "name" => lang_code($dirname)
+                    );
             }
         }
 
@@ -318,15 +356,17 @@
      *     $locale - The locale name, e.g. @en_US@, @uk_UA@, @fr_FR@
      */
     function set_locale($locale = "en_US"): void {
-        $list = array($locale.".UTF-8",
-                      $locale.".utf-8",
-                      $locale.".UTF8",
-                      $locale.".utf8");
+        $list = array(
+            $locale.".UTF-8",
+            $locale.".utf-8",
+            $locale.".UTF8",
+            $locale.".utf8"
+        );
 
         if (class_exists("Locale")) {
             # Generate a locale string for Windows.
             $list[] = Locale::getDisplayLanguage($locale, "en_US").
-                    "_".Locale::getDisplayRegion($locale, "en_US").".utf8";
+                      "_".Locale::getDisplayRegion($locale, "en_US").".utf8";
 
             # Set the ICU locale.
             Locale::setDefault($locale);
@@ -487,12 +527,14 @@
         if (!isset($locale))
             $locale = get_locale();
 
-        $formatter = new IntlDateFormatter($locale,
-                                           IntlDateFormatter::FULL,
-                                           IntlDateFormatter::FULL,
-                                           get_timezone(),
-                                           IntlDateFormatter::GREGORIAN,
-                                           convert_datetime($formatting));
+        $formatter = new IntlDateFormatter(
+            $locale,
+            IntlDateFormatter::FULL,
+            IntlDateFormatter::FULL,
+            get_timezone(),
+            IntlDateFormatter::GREGORIAN,
+            convert_datetime($formatting)
+        );
 
         return $formatter->format($time);
     }
@@ -593,8 +635,7 @@
         $zone_list = timezone_identifiers_list(DateTimeZone::ALL);
 
         foreach ($zone_list as $zone) {
-            $name = str_replace(array("_", "St "),
-                                array(" ", "St. "), $zone);
+            $name = str_replace(array("_", "St "), array(" ", "St. "), $zone);
 
             $timezones[] = array("code" => $zone,
                                  "name" => $name);
@@ -649,8 +690,10 @@
         if (is_bool($variable))
             return $variable;
 
-        $unset = (!isset($variable) or $variable === array() or
-                 (is_string($variable) and trim($variable) === ""));
+        $unset = (
+            !isset($variable) or $variable === array() or
+            (is_string($variable) and trim($variable) === "")
+        );
 
         if (!$unset)
             return $variable;
@@ -662,8 +705,10 @@
         foreach ($args as $arg) {
             $fallback = $arg;
 
-            $nonempty = (isset($arg) and $arg !== array() and
-                        (!is_string($arg) or (is_string($arg) and trim($arg) !== "")));
+            $nonempty = (
+                isset($arg) and $arg !== array() and
+                (!is_string($arg) or (is_string($arg) and trim($arg) !== ""))
+            );
 
             if ($nonempty)
                 break;
@@ -688,11 +733,13 @@
         $args = func_get_args();
 
         foreach ($args as $index => $arg) {
-            $unset = (!isset($arg) or $arg === array() or
-                     (is_string($arg) and trim($arg) === "") or
-                     (is_object($arg) and empty($arg)) or
-                     ($arg === "0000-00-00 00:00:00") or
-                     ($arg === "0001-01-01 00:00:00"));
+            $unset = (
+                !isset($arg) or $arg === array() or
+                (is_string($arg) and trim($arg) === "") or
+                (is_object($arg) and empty($arg)) or
+                ($arg === "0000-00-00 00:00:00") or
+                ($arg === "0001-01-01 00:00:00")
+            );
 
             if (!$unset)
                 return $arg;
@@ -707,12 +754,14 @@
             # This is a big check but it should cover most "incomparable" cases.
             # Using simple type comparison wouldn't work too well, for example:
             # in oneof("", 1) "" would take priority over 1 because of type difference.
-            $incomparable = ((is_array($arg) and !is_array($next)) or
-                             (!is_array($arg) and is_array($next)) or
-                             (is_object($arg) and !is_object($next)) or
-                             (!is_object($arg) and is_object($next)) or
-                             (is_resource($arg) and !is_resource($next)) or
-                             (!is_resource($arg) and is_resource($next)));
+            $incomparable = (
+                (is_array($arg) and !is_array($next)) or
+                (!is_array($arg) and is_array($next)) or
+                (is_object($arg) and !is_object($next)) or
+                (!is_object($arg) and is_object($next)) or
+                (is_resource($arg) and !is_resource($next)) or
+                (!is_resource($arg) and is_resource($next))
+            );
 
             if (isset($arg) and isset($next) and $incomparable)
                 return $arg;
@@ -889,9 +938,10 @@
      *     Whether or not the match succeeded.
      */
     function match_any($try, $haystack): bool {
-        foreach ((array) $try as $needle)
+        foreach ((array) $try as $needle) {
             if (preg_match($needle, $haystack))
                 return true;
+        }
 
         return false;
     }
@@ -904,21 +954,24 @@
      *     $class - The name of the class to load.
      */
     function autoload($class): void {
-        $filepath = str_replace(array("_", "\\", "\0"),
-                                array(DIR, DIR, ""),
-                                ltrim($class, "\\")).".php";
+        $filepath = str_replace(
+            array("_", "\\", "\0"),
+            array(DIR, DIR, ""),
+            ltrim($class, "\\")
+        ).".php";
 
         if (is_file(INCLUDES_DIR.DIR."lib".DIR.$filepath)) {
             require INCLUDES_DIR.DIR."lib".DIR.$filepath;
             return;
         }
 
-        if (!INSTALLING and !UPGRADING)
+        if (!INSTALLING and !UPGRADING) {
             foreach (Config::current()->enabled_modules as $module)
                 if (is_file(MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath)) {
                     require MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath;
                     return;
                 }
+        }
     }
 
     /**
@@ -967,7 +1020,8 @@
             "day"    => "__",
             "hour"   => "__",
             "minute" => "__",
-            "second" => "__");
+            "second" => "__"
+        );
 
         $joined_at = array(
             "year"   => "____",
@@ -975,7 +1029,8 @@
             "day"    => "__",
             "hour"   => "__",
             "minute" => "__",
-            "second" => "__");
+            "second" => "__"
+        );
 
         # Contextual conversions of some keywords.
         foreach ($keywords as $keyword) {
@@ -995,21 +1050,25 @@
             } elseif (isset($columns["created_at"]) and in_array($attr, $dates)) {
                 # Filter by date/time of creation.
                 $created_at[$attr] = $val;
-                $where["created_at LIKE"] = $created_at["year"]."-".
-                                            $created_at["month"]."-".
-                                            $created_at["day"]." ".
-                                            $created_at["hour"].":".
-                                            $created_at["minute"].":".
-                                            $created_at["second"]."%";
+                $where["created_at LIKE"] = (
+                    $created_at["year"]."-".
+                    $created_at["month"]."-".
+                    $created_at["day"]." ".
+                    $created_at["hour"].":".
+                    $created_at["minute"].":".
+                    $created_at["second"]."%"
+                );
             } elseif (isset($columns["joined_at"]) and in_array($attr, $dates)) {
                 # Filter by date/time of joining.
                 $joined_at[$attr] = $val;
-                $where["joined_at LIKE"] = $joined_at["year"]."-".
-                                           $joined_at["month"]."-".
-                                           $joined_at["day"]." ".
-                                           $joined_at["hour"].":".
-                                           $joined_at["minute"].":".
-                                           $joined_at["second"]."%";
+                $where["joined_at LIKE"] = (
+                    $joined_at["year"]."-".
+                    $joined_at["month"]."-".
+                    $joined_at["day"]." ".
+                    $joined_at["hour"].":".
+                    $joined_at["minute"].":".
+                    $joined_at["second"]."%"
+                );
             } else {
                 # Key => Val expression.
                 $filters[$attr] = $val;
@@ -1030,9 +1089,7 @@
         }
 
         $search = array($where, $params);
-
         Trigger::current()->filter($search, "keyword_search", $query, $plain);
-
         return $search;
     }
 
@@ -1052,8 +1109,10 @@
      *     The supplied word with a trailing "s" added, or a non-normative pluralization.
      */
     function pluralize($string, $number = null): string {
-        $uncountable = array("audio", "equipment", "fish", "information", "money",
-                             "moose", "news", "rice", "series", "sheep", "species");
+        $uncountable = array(
+            "audio", "equipment", "fish", "information", "money",
+            "moose", "news", "rice", "series", "sheep", "species"
+        );
 
         if (in_array($string, $uncountable) or $number == 1)
             return $string;
@@ -1083,8 +1142,12 @@
             "/(quiz)$/i"                   => "\\1zes"
         );
 
-        $replaced = preg_replace(array_keys($replacements),
-                                 array_values($replacements), $string, 1);
+        $replaced = preg_replace(
+            array_keys($replacements),
+            array_values($replacements),
+            $string,
+            1
+        );
 
         if ($replaced == $string)
             $replaced = $string."s";
@@ -1134,8 +1197,12 @@
             "/(quiz)zes$/i"           => "\\1"
         );
 
-        $replaced = preg_replace(array_keys($replacements),
-                                 array_values($replacements), $string, 1);
+        $replaced = preg_replace(
+            array_keys($replacements),
+            array_values($replacements),
+            $string,
+            1
+        );
 
         if ($replaced == $string and substr($string, -1) == "s")
             $replaced = substr($string, 0, -1);
@@ -1211,7 +1278,13 @@
      * Returns:
      *     A truncated string with ellipsis appended.
      */
-    function truncate($text, $length = 100, $ellipsis = "...", $exact = false, $encoding = "UTF-8"): string {
+    function truncate(
+        $text,
+        $length = 100,
+        $ellipsis = "...",
+        $exact = false,
+        $encoding = "UTF-8"
+    ): string {
         if (function_exists("mb_strlen") and function_exists("mb_substr")) {
             if (mb_strlen($text, $encoding) <= $length)
                 return $text;
@@ -1354,86 +1427,94 @@
      *     A sanitized version of the string.
      */
     function sanitize($string, $lowercase = true, $strict = false, $truncate = 100): string {
-        $strip = array("&amp;", "&#8216;", "&#8217;", "&#8220;", "&#8221;", "&#8211;", "&#8212;", "&",
-                       "~", "`", "!", "@", "#", "$", "%", "^", "*", "(", ")", "_", "=", "+", "[", "{",
-                       "]", "}", "\\", "|", ";", ":", "\"", "'", "—", "–", ",", "<", ".", ">", "/", "?");
+        $strip = array(
+            "&amp;", "&#8216;", "&#8217;", "&#8220;", "&#8221;", "&#8211;", "&#8212;", "&",
+            "~", "`", "!", "@", "#", "$", "%", "^", "*", "(", ")", "_", "=", "+", "[", "{",
+            "]", "}", "\\", "|", ";", ":", "\"", "'", "—", "–", ",", "<", ".", ">", "/", "?"
+        );
+
+        $utf8mb = array(
+            # Latin-1 Supplement.
+            chr(194).chr(170) => "a",  chr(194).chr(186) => "o",  chr(195).chr(128) => "A",
+            chr(195).chr(129) => "A",  chr(195).chr(130) => "A",  chr(195).chr(131) => "A",
+            chr(195).chr(132) => "A",  chr(195).chr(133) => "A",  chr(195).chr(134) => "AE",
+            chr(195).chr(135) => "C",  chr(195).chr(136) => "E",  chr(195).chr(137) => "E",
+            chr(195).chr(138) => "E",  chr(195).chr(139) => "E",  chr(195).chr(140) => "I",
+            chr(195).chr(141) => "I",  chr(195).chr(142) => "I",  chr(195).chr(143) => "I",
+            chr(195).chr(144) => "D",  chr(195).chr(145) => "N",  chr(195).chr(146) => "O",
+            chr(195).chr(147) => "O",  chr(195).chr(148) => "O",  chr(195).chr(149) => "O",
+            chr(195).chr(150) => "O",  chr(195).chr(153) => "U",  chr(195).chr(154) => "U",
+            chr(195).chr(155) => "U",  chr(195).chr(156) => "U",  chr(195).chr(157) => "Y",
+            chr(195).chr(158) => "TH", chr(195).chr(159) => "s",  chr(195).chr(160) => "a",
+            chr(195).chr(161) => "a",  chr(195).chr(162) => "a",  chr(195).chr(163) => "a",
+            chr(195).chr(164) => "a",  chr(195).chr(165) => "a",  chr(195).chr(166) => "ae",
+            chr(195).chr(167) => "c",  chr(195).chr(168) => "e",  chr(195).chr(169) => "e",
+            chr(195).chr(170) => "e",  chr(195).chr(171) => "e",  chr(195).chr(172) => "i",
+            chr(195).chr(173) => "i",  chr(195).chr(174) => "i",  chr(195).chr(175) => "i",
+            chr(195).chr(176) => "d",  chr(195).chr(177) => "n",  chr(195).chr(178) => "o",
+            chr(195).chr(179) => "o",  chr(195).chr(180) => "o",  chr(195).chr(181) => "o",
+            chr(195).chr(182) => "o",  chr(195).chr(184) => "o",  chr(195).chr(185) => "u",
+            chr(195).chr(186) => "u",  chr(195).chr(187) => "u",  chr(195).chr(188) => "u",
+            chr(195).chr(189) => "y",  chr(195).chr(190) => "th", chr(195).chr(191) => "y",
+            chr(195).chr(152) => "O",
+            # Latin Extended-A.
+            chr(196).chr(128) => "A",  chr(196).chr(129) => "a",  chr(196).chr(130) => "A",
+            chr(196).chr(131) => "a",  chr(196).chr(132) => "A",  chr(196).chr(133) => "a",
+            chr(196).chr(134) => "C",  chr(196).chr(135) => "c",  chr(196).chr(136) => "C",
+            chr(196).chr(137) => "c",  chr(196).chr(138) => "C",  chr(196).chr(139) => "c",
+            chr(196).chr(140) => "C",  chr(196).chr(141) => "c",  chr(196).chr(142) => "D",
+            chr(196).chr(143) => "d",  chr(196).chr(144) => "D",  chr(196).chr(145) => "d",
+            chr(196).chr(146) => "E",  chr(196).chr(147) => "e",  chr(196).chr(148) => "E",
+            chr(196).chr(149) => "e",  chr(196).chr(150) => "E",  chr(196).chr(151) => "e",
+            chr(196).chr(152) => "E",  chr(196).chr(153) => "e",  chr(196).chr(154) => "E",
+            chr(196).chr(155) => "e",  chr(196).chr(156) => "G",  chr(196).chr(157) => "g",
+            chr(196).chr(158) => "G",  chr(196).chr(159) => "g",  chr(196).chr(160) => "G",
+            chr(196).chr(161) => "g",  chr(196).chr(162) => "G",  chr(196).chr(163) => "g",
+            chr(196).chr(164) => "H",  chr(196).chr(165) => "h",  chr(196).chr(166) => "H",
+            chr(196).chr(167) => "h",  chr(196).chr(168) => "I",  chr(196).chr(169) => "i",
+            chr(196).chr(170) => "I",  chr(196).chr(171) => "i",  chr(196).chr(172) => "I",
+            chr(196).chr(173) => "i",  chr(196).chr(174) => "I",  chr(196).chr(175) => "i",
+            chr(196).chr(176) => "I",  chr(196).chr(177) => "i",  chr(196).chr(178) => "IJ",
+            chr(196).chr(179) => "ij", chr(196).chr(180) => "J",  chr(196).chr(181) => "j",
+            chr(196).chr(182) => "K",  chr(196).chr(183) => "k",  chr(196).chr(184) => "k",
+            chr(196).chr(185) => "L",  chr(196).chr(186) => "l",  chr(196).chr(187) => "L",
+            chr(196).chr(188) => "l",  chr(196).chr(189) => "L",  chr(196).chr(190) => "l",
+            chr(196).chr(191) => "L",  chr(197).chr(128) => "l",  chr(197).chr(129) => "L",
+            chr(197).chr(130) => "l",  chr(197).chr(131) => "N",  chr(197).chr(132) => "n",
+            chr(197).chr(133) => "N",  chr(197).chr(134) => "n",  chr(197).chr(135) => "N",
+            chr(197).chr(136) => "n",  chr(197).chr(137) => "N",  chr(197).chr(138) => "n",
+            chr(197).chr(139) => "N",  chr(197).chr(140) => "O",  chr(197).chr(141) => "o",
+            chr(197).chr(142) => "O",  chr(197).chr(143) => "o",  chr(197).chr(144) => "O",
+            chr(197).chr(145) => "o",  chr(197).chr(146) => "OE", chr(197).chr(147) => "oe",
+            chr(197).chr(148) => "R",  chr(197).chr(149) => "r",  chr(197).chr(150) => "R",
+            chr(197).chr(151) => "r",  chr(197).chr(152) => "R",  chr(197).chr(153) => "r",
+            chr(197).chr(154) => "S",  chr(197).chr(155) => "s",  chr(197).chr(156) => "S",
+            chr(197).chr(157) => "s",  chr(197).chr(158) => "S",  chr(197).chr(159) => "s",
+            chr(197).chr(160) => "S",  chr(197).chr(161) => "s",  chr(197).chr(162) => "T",
+            chr(197).chr(163) => "t",  chr(197).chr(164) => "T",  chr(197).chr(165) => "t",
+            chr(197).chr(166) => "T",  chr(197).chr(167) => "t",  chr(197).chr(168) => "U",
+            chr(197).chr(169) => "u",  chr(197).chr(170) => "U",  chr(197).chr(171) => "u",
+            chr(197).chr(172) => "U",  chr(197).chr(173) => "u",  chr(197).chr(174) => "U",
+            chr(197).chr(175) => "u",  chr(197).chr(176) => "U",  chr(197).chr(177) => "u",
+            chr(197).chr(178) => "U",  chr(197).chr(179) => "u",  chr(197).chr(180) => "W",
+            chr(197).chr(181) => "w",  chr(197).chr(182) => "Y",  chr(197).chr(183) => "y",
+            chr(197).chr(184) => "Y",  chr(197).chr(185) => "Z",  chr(197).chr(186) => "z",
+            chr(197).chr(187) => "Z",  chr(197).chr(188) => "z",  chr(197).chr(189) => "Z",
+            chr(197).chr(190) => "z",  chr(197).chr(191) => "s"
+            # Generate additional substitution keys: e.g. echo implode(",", unpack("C*", "€"));
+        );
 
         # Strip tags, remove punctuation and HTML entities, replace spaces with hyphen-minus.
-        $clean = preg_replace("/\s+/", "-", trim(str_replace($strip, "", strip_tags($string))));
+        $clean = preg_replace(
+            "/\s+/",
+            "-",
+            trim(str_replace($strip, "", strip_tags($string)))
+        );
 
         if ($strict) {
             # Discover UTF-8 multi-byte encodings and attempt substitutions.
             if (preg_match("/[\x80-\xff]/", $clean))
-                $clean = strtr($clean, array(
-                    # Latin-1 Supplement.
-                    chr(194).chr(170) => "a",  chr(194).chr(186) => "o",  chr(195).chr(128) => "A",
-                    chr(195).chr(129) => "A",  chr(195).chr(130) => "A",  chr(195).chr(131) => "A",
-                    chr(195).chr(132) => "A",  chr(195).chr(133) => "A",  chr(195).chr(134) => "AE",
-                    chr(195).chr(135) => "C",  chr(195).chr(136) => "E",  chr(195).chr(137) => "E",
-                    chr(195).chr(138) => "E",  chr(195).chr(139) => "E",  chr(195).chr(140) => "I",
-                    chr(195).chr(141) => "I",  chr(195).chr(142) => "I",  chr(195).chr(143) => "I",
-                    chr(195).chr(144) => "D",  chr(195).chr(145) => "N",  chr(195).chr(146) => "O",
-                    chr(195).chr(147) => "O",  chr(195).chr(148) => "O",  chr(195).chr(149) => "O",
-                    chr(195).chr(150) => "O",  chr(195).chr(153) => "U",  chr(195).chr(154) => "U",
-                    chr(195).chr(155) => "U",  chr(195).chr(156) => "U",  chr(195).chr(157) => "Y",
-                    chr(195).chr(158) => "TH", chr(195).chr(159) => "s",  chr(195).chr(160) => "a",
-                    chr(195).chr(161) => "a",  chr(195).chr(162) => "a",  chr(195).chr(163) => "a",
-                    chr(195).chr(164) => "a",  chr(195).chr(165) => "a",  chr(195).chr(166) => "ae",
-                    chr(195).chr(167) => "c",  chr(195).chr(168) => "e",  chr(195).chr(169) => "e",
-                    chr(195).chr(170) => "e",  chr(195).chr(171) => "e",  chr(195).chr(172) => "i",
-                    chr(195).chr(173) => "i",  chr(195).chr(174) => "i",  chr(195).chr(175) => "i",
-                    chr(195).chr(176) => "d",  chr(195).chr(177) => "n",  chr(195).chr(178) => "o",
-                    chr(195).chr(179) => "o",  chr(195).chr(180) => "o",  chr(195).chr(181) => "o",
-                    chr(195).chr(182) => "o",  chr(195).chr(184) => "o",  chr(195).chr(185) => "u",
-                    chr(195).chr(186) => "u",  chr(195).chr(187) => "u",  chr(195).chr(188) => "u",
-                    chr(195).chr(189) => "y",  chr(195).chr(190) => "th", chr(195).chr(191) => "y",
-                    chr(195).chr(152) => "O",
-                    # Latin Extended-A.
-                    chr(196).chr(128) => "A",  chr(196).chr(129) => "a",  chr(196).chr(130) => "A",
-                    chr(196).chr(131) => "a",  chr(196).chr(132) => "A",  chr(196).chr(133) => "a",
-                    chr(196).chr(134) => "C",  chr(196).chr(135) => "c",  chr(196).chr(136) => "C",
-                    chr(196).chr(137) => "c",  chr(196).chr(138) => "C",  chr(196).chr(139) => "c",
-                    chr(196).chr(140) => "C",  chr(196).chr(141) => "c",  chr(196).chr(142) => "D",
-                    chr(196).chr(143) => "d",  chr(196).chr(144) => "D",  chr(196).chr(145) => "d",
-                    chr(196).chr(146) => "E",  chr(196).chr(147) => "e",  chr(196).chr(148) => "E",
-                    chr(196).chr(149) => "e",  chr(196).chr(150) => "E",  chr(196).chr(151) => "e",
-                    chr(196).chr(152) => "E",  chr(196).chr(153) => "e",  chr(196).chr(154) => "E",
-                    chr(196).chr(155) => "e",  chr(196).chr(156) => "G",  chr(196).chr(157) => "g",
-                    chr(196).chr(158) => "G",  chr(196).chr(159) => "g",  chr(196).chr(160) => "G",
-                    chr(196).chr(161) => "g",  chr(196).chr(162) => "G",  chr(196).chr(163) => "g",
-                    chr(196).chr(164) => "H",  chr(196).chr(165) => "h",  chr(196).chr(166) => "H",
-                    chr(196).chr(167) => "h",  chr(196).chr(168) => "I",  chr(196).chr(169) => "i",
-                    chr(196).chr(170) => "I",  chr(196).chr(171) => "i",  chr(196).chr(172) => "I",
-                    chr(196).chr(173) => "i",  chr(196).chr(174) => "I",  chr(196).chr(175) => "i",
-                    chr(196).chr(176) => "I",  chr(196).chr(177) => "i",  chr(196).chr(178) => "IJ",
-                    chr(196).chr(179) => "ij", chr(196).chr(180) => "J",  chr(196).chr(181) => "j",
-                    chr(196).chr(182) => "K",  chr(196).chr(183) => "k",  chr(196).chr(184) => "k",
-                    chr(196).chr(185) => "L",  chr(196).chr(186) => "l",  chr(196).chr(187) => "L",
-                    chr(196).chr(188) => "l",  chr(196).chr(189) => "L",  chr(196).chr(190) => "l",
-                    chr(196).chr(191) => "L",  chr(197).chr(128) => "l",  chr(197).chr(129) => "L",
-                    chr(197).chr(130) => "l",  chr(197).chr(131) => "N",  chr(197).chr(132) => "n",
-                    chr(197).chr(133) => "N",  chr(197).chr(134) => "n",  chr(197).chr(135) => "N",
-                    chr(197).chr(136) => "n",  chr(197).chr(137) => "N",  chr(197).chr(138) => "n",
-                    chr(197).chr(139) => "N",  chr(197).chr(140) => "O",  chr(197).chr(141) => "o",
-                    chr(197).chr(142) => "O",  chr(197).chr(143) => "o",  chr(197).chr(144) => "O",
-                    chr(197).chr(145) => "o",  chr(197).chr(146) => "OE", chr(197).chr(147) => "oe",
-                    chr(197).chr(148) => "R",  chr(197).chr(149) => "r",  chr(197).chr(150) => "R",
-                    chr(197).chr(151) => "r",  chr(197).chr(152) => "R",  chr(197).chr(153) => "r",
-                    chr(197).chr(154) => "S",  chr(197).chr(155) => "s",  chr(197).chr(156) => "S",
-                    chr(197).chr(157) => "s",  chr(197).chr(158) => "S",  chr(197).chr(159) => "s",
-                    chr(197).chr(160) => "S",  chr(197).chr(161) => "s",  chr(197).chr(162) => "T",
-                    chr(197).chr(163) => "t",  chr(197).chr(164) => "T",  chr(197).chr(165) => "t",
-                    chr(197).chr(166) => "T",  chr(197).chr(167) => "t",  chr(197).chr(168) => "U",
-                    chr(197).chr(169) => "u",  chr(197).chr(170) => "U",  chr(197).chr(171) => "u",
-                    chr(197).chr(172) => "U",  chr(197).chr(173) => "u",  chr(197).chr(174) => "U",
-                    chr(197).chr(175) => "u",  chr(197).chr(176) => "U",  chr(197).chr(177) => "u",
-                    chr(197).chr(178) => "U",  chr(197).chr(179) => "u",  chr(197).chr(180) => "W",
-                    chr(197).chr(181) => "w",  chr(197).chr(182) => "Y",  chr(197).chr(183) => "y",
-                    chr(197).chr(184) => "Y",  chr(197).chr(185) => "Z",  chr(197).chr(186) => "z",
-                    chr(197).chr(187) => "Z",  chr(197).chr(188) => "z",  chr(197).chr(189) => "Z",
-                    chr(197).chr(190) => "z",  chr(197).chr(191) => "s"
-                    # Generate additional substitution keys using: e.g. echo implode(",", unpack("C*", "€"));
-                ));
+                $clean = strtr($clean, $utf8mb);
 
             # Remove any characters that remain after substitution.
             $clean = preg_replace("/[^a-zA-Z0-9\\-]/", "", $clean);
@@ -1477,7 +1558,12 @@
             $name = strtolower($element[1]);
             $whitelist = "";
 
-            preg_match_all("/ ([a-z]+)=(\"[^\"]+\"|\'[^\']+\')/i", $element[0], $attributes, PREG_SET_ORDER);
+            preg_match_all(
+                "/ ([a-z]+)=(\"[^\"]+\"|\'[^\']+\')/i",
+                $element[0],
+                $attributes,
+                PREG_SET_ORDER
+            );
 
             foreach ($attributes as $attribute) {
                 $label = strtolower($attribute[1]);
@@ -1485,33 +1571,39 @@
 
                 switch ($label) {
                     case "src":
-                        if (in_array($name, array("audio",
-                                                  "iframe",
-                                                  "img",
-                                                  "source",
-                                                  "track",
-                                                  "video")) and is_url($content)) {
+                        $array = array(
+                            "audio",
+                            "iframe",
+                            "img",
+                            "source",
+                            "track",
+                            "video"
+                        );
 
+                        if (in_array($name, $array) and is_url($content))
                             $whitelist.= $attribute[0];
-                        }
 
                         break;
 
                     case "href":
-                        if (in_array($name, array("a",
-                                                  "area")) and is_url($content)) {
+                        $array = array(
+                            "a",
+                            "area"
+                        );
 
+                        if (in_array($name, $array) and is_url($content))
                             $whitelist.= $attribute[0];
-                        }
 
                         break;
 
                     case "alt":
-                        if (in_array($name, array("area",
-                                                  "img"))) {
+                        $array = array(
+                            "area",
+                            "img"
+                        );
 
+                        if (in_array($name, $array))
                             $whitelist.= $attribute[0];
-                        }
 
                         break;
                 }
@@ -1558,7 +1650,10 @@
         $connect = @fsockopen($prefix.$host, $port, $errno, $errstr, $timeout);
 
         if (!$connect) {
-            trigger_error(_f("Socket error: %s", fix($errstr, false, true)), E_USER_NOTICE);
+            trigger_error(
+                _f("Socket error: %s", fix($errstr, false, true)),
+                E_USER_NOTICE
+            );
             return false;
         }
 
@@ -1566,11 +1661,13 @@
         $remote_content = "";
 
         # Send the GET headers.
-        fwrite($connect,
+        fwrite(
+            $connect,
             "GET ".$path." HTTP/1.0\r\n".
             "Host: ".$host."\r\n".
             "Connection: close"."\r\n".
-            "User-Agent: ".CHYRP_IDENTITY."\r\n\r\n");
+            "User-Agent: ".CHYRP_IDENTITY."\r\n\r\n"
+        );
 
         # Receive response headers.
         while (!feof($connect) and strpos($remote_headers, "\r\n\r\n") === false)
@@ -1671,7 +1768,10 @@
             $connect = @fsockopen($prefix.$host, $port, $errno, $errstr, 3);
 
             if (!$connect) {
-                trigger_error(_f("Socket error: %s", fix($errstr, false, true)), E_USER_NOTICE);
+                trigger_error(
+                    _f("Socket error: %s", fix($errstr, false, true)),
+                    E_USER_NOTICE
+                );
                 continue;
             }
 
@@ -1679,13 +1779,15 @@
             $wm_query = http_build_query($wm_array);
 
             # Send the Webmention.
-            fwrite($connect,
+            fwrite(
+                $connect,
                 "POST ".$path." HTTP/1.0\r\n".
                 "Host: ".$host."\r\n".
                 "Content-Type: application/x-www-form-urlencoded\r\n".
                 "Content-Length: ".strlen($wm_query)."\r\n".
                 "Connection: close"."\r\n".
-                "User-Agent: ".CHYRP_IDENTITY."\r\n\r\n");
+                "User-Agent: ".CHYRP_IDENTITY."\r\n\r\n"
+            );
 
             fwrite($connect, $wm_query);
             fclose($connect);
@@ -1705,13 +1807,28 @@
 
         # No need to continue without a responder for the Webmention trigger.
         if (!$trigger->exists("webmention"))
-            error(__("Error"), __("Webmention support is disabled for this site."), null, 503);
+            error(
+                __("Error"),
+                __("Webmention support is disabled for this site."),
+                null,
+                503
+            );
 
         if (!is_url($source))
-            error(__("Error"), __("The URL for your page is not valid."), null, 400);
+            error(
+                __("Error"),
+                __("The URL for your page is not valid."),
+                null,
+                400
+            );
 
         if (!is_url($target))
-            error(__("Error"), __("The URL for our page is not valid."), null, 400);
+            error(
+                __("Error"),
+                __("The URL for our page is not valid."),
+                null,
+                400
+            );
 
         if (DEBUG)
             error_log("WEBMENTION received; source:".$source." target:".$target);
@@ -1720,21 +1837,41 @@
         $target_url = add_scheme(unfix($target, true));
 
         if ($target == $source)
-            error(__("Error"), __("The source and target URLs cannot be the same."), null, 400);
+            error(
+                __("Error"),
+                __("The source and target URLs cannot be the same."),
+                null,
+                400
+            );
 
         $post = Post::from_url($target_url);
 
         if ($post->no_results)
-            error(__("Error"), __("We have not published at that URL."), null, 404);
+            error(
+                __("Error"),
+                __("We have not published at that URL."),
+                null,
+                404
+            );
 
         # Retrieve the page that linked here.
         $content = get_remote($source_url, 0, 10);
 
         if (empty($content))
-            error(__("Error"), __("You have not published at that URL."), null, 404);
+            error(
+                __("Error"),
+                __("You have not published at that URL."),
+                null,
+                404
+            );
 
         if (strpos($content, $target) === false)
-            error(__("Error"), __("Your page does not link to our page."), null, 400);
+            error(
+                __("Error"),
+                __("Your page does not link to our page."),
+                null,
+                400
+            );
 
         $trigger->call("webmention", $post, $source, $target);
     }
@@ -1769,7 +1906,10 @@
         $connect = @fsockopen($prefix.$host, $port, $errno, $errstr, 3);
 
         if (!$connect) {
-            trigger_error(_f("Socket error: %s", fix($errstr, false, true)), E_USER_NOTICE);
+            trigger_error(
+                _f("Socket error: %s", fix($errstr, false, true)),
+                E_USER_NOTICE
+            );
             return false;
         }
 
@@ -1777,11 +1917,13 @@
         $remote_content = "";
 
         # Send the GET headers.
-        fwrite($connect,
+        fwrite(
+            $connect,
             "GET ".$path." HTTP/1.0\r\n".
             "Host: ".$host."\r\n".
             "Connection: close"."\r\n".
-            "User-Agent: ".CHYRP_IDENTITY."\r\n\r\n");
+            "User-Agent: ".CHYRP_IDENTITY."\r\n\r\n"
+        );
 
         # Check for Link header containing the endpoint.
         while (!feof($connect) and strpos($remote_headers, "\r\n\r\n") === false) {
@@ -1972,7 +2114,10 @@
         $connect = @fsockopen($prefix.$host, $port, $errno, $errstr, 3);
 
         if (!$connect) {
-            trigger_error(_f("Socket error: %s", fix($errstr, false, true)), E_USER_NOTICE);
+            trigger_error(
+                _f("Socket error: %s", fix($errstr, false, true)),
+                E_USER_NOTICE
+            );
             return false;
         }
 
@@ -1980,11 +2125,13 @@
         $remote_content = "";
 
         # Send the GET headers.
-        fwrite($connect,
+        fwrite(
+            $connect,
             "GET ".$path." HTTP/1.0\r\n".
             "Host: ".$host."\r\n".
             "Connection: close"."\r\n".
-            "User-Agent: ".CHYRP_IDENTITY."\r\n\r\n");
+            "User-Agent: ".CHYRP_IDENTITY."\r\n\r\n"
+        );
 
         # Check for X-Pingback header.
         while (!feof($connect) and strpos($remote_headers, "\r\n\r\n") === false) {
@@ -2110,14 +2257,16 @@
         }
 
         # Initialize all Modules.
-        foreach (Modules::$instances as $module)
+        foreach (Modules::$instances as $module) {
             if (method_exists($module, "__init"))
                 $module->__init();
+        }
 
         # Initialize all Feathers.
-        foreach (Feathers::$instances as $feather)
+        foreach (Feathers::$instances as $feather) {
             if (method_exists($feather, "__init"))
                 $feather->__init();
+        }
     }
 
     /**
@@ -2131,8 +2280,10 @@
      *     Whether or not the supplied module is enabled.
      */
     function module_enabled($name): bool {
-        return (!empty(Modules::$instances[$name]) and
-                 empty(Modules::$instances[$name]->cancelled));
+        return (
+            !empty(Modules::$instances[$name]) and
+            empty(Modules::$instances[$name]->cancelled)
+        );
     }
 
     /**
@@ -2146,8 +2297,10 @@
      *     Whether or not the supplied feather is enabled.
      */
     function feather_enabled($name): bool {
-        return (!empty(Feathers::$instances[$name]) and
-                 empty(Feathers::$instances[$name]->cancelled));
+        return (
+            !empty(Feathers::$instances[$name]) and
+            empty(Feathers::$instances[$name]->cancelled)
+        );
     }
 
     /**
@@ -2212,19 +2365,34 @@
         $filename = upload_filename($file['name'], $filter);
 
         if ($filename === false)
-            error(__("Error"), __("Uploaded file is of an unsupported type."));
+            error(
+                __("Error"),
+                __("Uploaded file is of an unsupported type.")
+            );
 
         if (!is_uploaded_file($file['tmp_name']))
-            show_403(__("Access Denied"), __("Only uploaded files are accepted."));
+            show_403(
+                __("Access Denied"),
+                __("Only uploaded files are accepted.")
+            );
 
         if (!is_dir($uploads_path))
-            error(__("Error"), __("Upload path does not exist."));
+            error(
+                __("Error"),
+                __("Upload path does not exist.")
+            );
 
         if (!is_writable($uploads_path))
-            error(__("Error"), __("Upload path is not writable."));
+            error(
+                __("Error"),
+                __("Upload path is not writable.")
+            );
 
         if (!move_uploaded_file($file['tmp_name'], $uploads_path.$filename))
-            error(__("Error"), __("Failed to write file to disk."));
+            error(
+                __("Error"),
+                __("Failed to write file to disk.")
+            );
 
         return $filename;
     }
@@ -2258,13 +2426,22 @@
         $uploads_path = MAIN_DIR.Config::current()->uploads_path;
 
         if (!is_dir($uploads_path))
-            error(__("Error"), __("Upload path does not exist."));
+            error(
+                __("Error"),
+                __("Upload path does not exist.")
+            );
 
         if (!is_writable($uploads_path))
-            error(__("Error"), __("Upload path is not writable."));
+            error(
+                __("Error"),
+                __("Upload path is not writable.")
+            );
 
         if (!@file_put_contents($uploads_path.$filename, $contents))
-            error(__("Error"), __("Failed to write file to disk."));
+            error(
+                __("Error"),
+                __("Failed to write file to disk.")
+            );
 
         return $filename;
     }
@@ -2284,7 +2461,12 @@
         $config = Config::current();
 
         return ($url) ?
-            fix($config->chyrp_url.str_replace(DIR, "/", $config->uploads_path).urlencode($filename), true) :
+            fix(
+                $config->chyrp_url.
+                str_replace(DIR, "/", $config->uploads_path).
+                urlencode($filename),
+                true
+            ) :
             MAIN_DIR.$config->uploads_path.$filename ;
     }
 
@@ -2317,10 +2499,12 @@
                 if (!($search == "") and stripos($filename, $search) === false)
                     continue;
 
-                $results[] = array("name" => $filename,
-                                   "type" => $item->getExtension(),
-                                   "size" => $item->getSize(),
-                                   "modified" => $item->getMTime());
+                $results[] = array(
+                    "name" => $filename,
+                    "type" => $item->getExtension(),
+                    "size" => $item->getSize(),
+                    "modified" => $item->getMTime()
+                );
             }
         }
 
@@ -2348,11 +2532,15 @@
         # Recurse to test multiple uploads file by file using a one-dimensional array.
         if (is_array($file['name'])) {
             for ($i = 0; $i < count($file['name']); $i++)
-                $results[] = upload_tester(array('name' => $file['name'][$i],
-                                                 'type' => $file['type'][$i],
-                                                 'tmp_name' => $file['tmp_name'][$i],
-                                                 'error' => $file['error'][$i],
-                                                 'size' => $file['size'][$i]));
+                $results[] = upload_tester(
+                    array(
+                        'name' => $file['name'][$i],
+                        'type' => $file['type'][$i],
+                        'tmp_name' => $file['tmp_name'][$i],
+                        'error' => $file['error'][$i],
+                        'size' => $file['size'][$i]
+                    )
+                );
 
             return (!in_array(false, $results));
         }
@@ -2365,31 +2553,55 @@
                 $success = false;
                 break;
             case UPLOAD_ERR_INI_SIZE:
-                error(__("Error"),
-                      __("The uploaded file exceeds the <code>upload_max_filesize</code> directive in php.ini."), null, 413);
+                error(
+                    __("Error"),
+                    __("The uploaded file exceeds the <code>upload_max_filesize</code> directive in php.ini."),
+                    null,
+                    413
+                );
             case UPLOAD_ERR_FORM_SIZE:
-                error(__("Error"),
-                      __("The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the HTML form."), null, 413);
+                error(
+                    __("Error"),
+                    __("The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the HTML form."),
+                    null,
+                    413
+                );
             case UPLOAD_ERR_PARTIAL:
-                error(__("Error"),
-                      __("The uploaded file was only partially uploaded."), null, 400);
+                error(
+                    __("Error"),
+                    __("The uploaded file was only partially uploaded."),
+                    null,
+                    400
+                );
             case UPLOAD_ERR_NO_TMP_DIR:
-                error(__("Error"),
-                      __("Missing a temporary folder."));
+                error(
+                    __("Error"),
+                    __("Missing a temporary folder.")
+                );
             case UPLOAD_ERR_CANT_WRITE:
-                error(__("Error"),
-                      __("Failed to write file to disk."));
+                error(
+                    __("Error"),
+                    __("Failed to write file to disk.")
+                );
             case UPLOAD_ERR_EXTENSION:
-                error(__("Error"),
-                      __("File upload was stopped by a PHP extension."));
+                error(
+                    __("Error"),
+                    __("File upload was stopped by a PHP extension.")
+                );
             default:
-                error(__("Error"),
-                      _f("File upload failed with error %d.", $file['error']));
+                error(
+                    __("Error"),
+                    _f("File upload failed with error %d.", $file['error'])
+                );
         }
 
         if ($file['size'] > ($maximum * 1000000))
-            error(__("Error"),
-                  _f("The uploaded file exceeds the maximum size of %d Megabytes allowed by this site.", $maximum), null, 413);
+            error(
+                __("Error"),
+                _f("The uploaded file exceeds the maximum size of %d Megabytes allowed by this site.", $maximum),
+                null,
+                413
+            );
 
         return $success;
     }
@@ -2438,16 +2650,21 @@
     function upload_filter_whitelist(): array {
         return array(
             # Binary and text formats:
-            "bin", "exe", "txt", "rtf", "md", "pdf",
+            "bin", "exe", "txt",
+            "rtf", "md", "pdf",
 
             # Archive and compression formats:
-            "zip", "tar", "rar", "dmg", "cab", "bz2", "gz",
+            "zip", "tar", "rar",
+            "dmg", "cab", "bz2", "gz",
 
             # Image formats:
-            "jpg", "jpeg", "png", "gif", "webp", "avif", "tif", "tiff", "bmp",
+            "jpg", "jpeg", "png", "gif", "webp",
+            "avif", "tif", "tiff", "bmp",
 
             # Video and audio formats:
-            "mp4", "ogv", "webm", "3gp", "mkv", "mov", "mp3", "m4a", "oga", "ogg", "mka", "flac", "wav"
+            "mp4", "ogv", "webm", "3gp",
+            "mkv", "mov", "mp3", "m4a",
+            "oga", "ogg", "mka", "flac", "wav"
         );
     }
 
@@ -2501,10 +2718,12 @@
             $score += (11 - $occurrences);
 
         # Award bonus points for different character types.
-        $variations = array("digits" => preg_match("/\d/", $password),
-                            "lower" => preg_match("/[a-z]/", $password),
-                            "upper" => preg_match("/[A-Z]/", $password),
-                            "nonWords" => preg_match("/\W/", $password));
+        $variations = array(
+            "digits" => preg_match("/\d/", $password),
+            "lower" => preg_match("/[a-z]/", $password),
+            "upper" => preg_match("/[A-Z]/", $password),
+            "nonWords" => preg_match("/\W/", $password)
+        );
 
         $score += (array_sum($variations) - 1) * 10;
 
@@ -2529,9 +2748,18 @@
      */
     function is_url($string): bool {
         return (
-            preg_match('~^(https?://)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)(:[0-9]{1,5})?($|/)~i', $string) or
-            preg_match('~^(https?://)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(:[0-9]{1,5})?($|/)~', $string) or
-            preg_match('~^(https?://)?(\[[a-f0-9\:]{3,39}\])(:[0-9]{1,5})?($|/)~i', $string)
+            preg_match(
+                '~^(https?://)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)(:[0-9]{1,5})?($|/)~i',
+                $string
+            ) or
+            preg_match(
+                '~^(https?://)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(:[0-9]{1,5})?($|/)~',
+                $string
+            ) or
+            preg_match(
+                '~^(https?://)?(\[[a-f0-9\:]{3,39}\])(:[0-9]{1,5})?($|/)~i',
+                $string
+            )
         );
     }
 
@@ -2570,9 +2798,18 @@
      */
     function is_email($string): bool {
         return (
-            preg_match('~^[^ <>@]+@([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)$~i', $string) or
-            preg_match('~^[^ <>@]+@([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$~', $string) or
-            preg_match('~^[^ <>@]+@(\[[a-f0-9\:]{3,39}\])$~i', $string)
+            preg_match(
+                '~^[^ <>@]+@([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)$~i',
+                $string
+            ) or
+            preg_match(
+                '~^[^ <>@]+@([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$~',
+                $string
+            ) or
+            preg_match(
+                '~^[^ <>@]+@(\[[a-f0-9\:]{3,39}\])$~i',
+                $string
+            )
         );
     }
 
@@ -2586,9 +2823,10 @@
     function generate_captcha(): string {
         Trigger::current()->call("before_generate_captcha");
 
-        foreach (get_declared_classes() as $class)
+        foreach (get_declared_classes() as $class) {
             if (in_array("CaptchaProvider", class_implements($class)))
                 return call_user_func($class."::generateCaptcha");
+        }
 
         return "";
     }
@@ -2603,9 +2841,10 @@
     function check_captcha(): bool {
         Trigger::current()->call("before_check_captcha");
 
-        foreach (get_declared_classes() as $class)
+        foreach (get_declared_classes() as $class) {
             if (in_array("CaptchaProvider", class_implements($class)))
                 return call_user_func($class."::checkCaptcha");
+        }
 
         return true;
     }
@@ -2628,8 +2867,11 @@
      *     http://gravatar.com/site/implement/images/php/
      */
     function get_gravatar($email, $s = 80, $img = false, $d = "mm", $r = "g"): string {
-        $url = "https://www.gravatar.com/avatar/".md5(strtolower(trim($email)))."?s=$s&d=$d&r=$r";
-        return ($img) ? '<img class="gravatar" src="'.fix($url, true, true).'" alt="">' : $url ;
+        $url = "https://www.gravatar.com/avatar/".
+               md5(strtolower(trim($email)))."?s=$s&d=$d&r=$r";
+
+        return ($img) ?
+            '<img class="gravatar" src="'.fix($url, true, true).'" alt="">' : $url ;
     }
 
     #---------------------------------------------
@@ -2652,7 +2894,10 @@
         $encoded = json_encode($value, $options, $depth);
 
         if (json_last_error())
-            trigger_error(_f("JSON encoding error: %s", fix(json_last_error_msg(), false, true)), E_USER_WARNING);
+            trigger_error(
+                _f("JSON encoding error: %s", fix(json_last_error_msg(), false, true)),
+                E_USER_WARNING
+            );
 
         return $encoded;
     }
@@ -2674,7 +2919,10 @@
         $decoded = json_decode($value, $assoc, $depth, $options);
 
         if (json_last_error())
-            trigger_error(_f("JSON decoding error: %s", fix(json_last_error_msg(), false, true)), E_USER_WARNING);
+            trigger_error(
+                _f("JSON decoding error: %s", fix(json_last_error_msg(), false, true)),
+                E_USER_WARNING
+            );
 
         return $decoded;
     }
@@ -2704,7 +2952,10 @@
         header("Content-Type: application/octet-stream");
         header("Content-Disposition: attachment; filename=\"".addslashes($filename)."\"");
 
-        if (!in_array("ob_gzhandler", ob_list_handlers()) and !ini_get("zlib.output_compression"))
+        if (
+            !in_array("ob_gzhandler", ob_list_handlers()) and
+            !ini_get("zlib.output_compression")
+        )
             header("Content-Length: ".strlen($contents));
 
         echo $contents;
@@ -2740,7 +2991,10 @@
             $method = "\x00\x00";
 
             if (strlen($name) > 0xffff or strlen($orig) > 0xffffffff)
-                trigger_error(__("Failed to create Zip archive."), E_USER_WARNING);
+                trigger_error(
+                    __("Failed to create Zip archive."),
+                    E_USER_WARNING
+                );
 
             if (function_exists("gzcompress")) {
                 $zlib = gzcompress($orig, 6, ZLIB_ENCODING_DEFLATE);

@@ -46,7 +46,10 @@
          * See Also:
          *     <Model::search>
          */
-        static function find($options = array(), $options_for_object = array()): array {
+        static function find(
+            $options = array(),
+            $options_for_object = array()
+        ): array {
             fallback($options["order"], "id ASC");
             return parent::search("user", $options, $options_for_object);
         }

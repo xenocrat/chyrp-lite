@@ -85,9 +85,13 @@
      * Scans enabled modules for a callable method matching the name of a missing Twig function.
      */
     function twig_callback_missing_function($name): \Twig\TwigFunction|false {
-        foreach (Modules::$instances as $module)
+        foreach (Modules::$instances as $module) {
             if (is_callable(array($module, "twig_function_".$name)))
-                return new \Twig\TwigFunction($name, array($module, "twig_function_".$name));
+                return new \Twig\TwigFunction(
+                    $name,
+                    array($module, "twig_function_".$name)
+                );
+        }
 
         return false;
     }
@@ -97,9 +101,13 @@
      * Scans enabled modules for a callable method matching the name of a missing Twig filter.
      */
     function twig_callback_missing_filter($name): \Twig\TwigFilter|false {
-        foreach (Modules::$instances as $module)
+        foreach (Modules::$instances as $module) {
             if (is_callable(array($module, "twig_filter_".$name)))
-                return new \Twig\TwigFilter($name, array($module, "twig_filter_".$name));
+                return new \Twig\TwigFilter(
+                    $name,
+                    array($module, "twig_filter_".$name)
+                );
+        }
 
         return false;
     }
@@ -369,7 +377,9 @@
      * Exports a variable for inspection.
      */
     function twig_filter_inspect($variable): string {
-        return '<pre class="chyrp_inspect"><code>'.fix(var_export($variable, true)).'</code></pre>';
+        return '<pre class="chyrp_inspect"><code>'.
+               fix(var_export($variable, true)).
+               '</code></pre>';
     }
 
     /**
@@ -388,9 +398,13 @@
         $try = func_get_args();
         array_shift($try);
 
-        foreach ($try as $value)
-            if ((is_array($value) and in_array($test, $value)) or ($test == $value))
+        foreach ($try as $value) {
+            if (
+                (is_array($value) and in_array($test, $value)) or
+                ($test == $value)
+            )
                 return " selected";
+        }
 
         return "";
     }
@@ -400,28 +414,47 @@
      * Returns a download link for a file located in the uploads directory.
      */
     function twig_filter_download($filename): string {
-        return fix(Config::current()->chyrp_url."/includes/download.php?file=".urlencode($filename), true);
+        $filepath = Config::current()->chyrp_url.
+                    "/includes/download.php?file=".
+                    urlencode($filename);
+
+        return fix($filepath, true);
     }
 
     /**
      * Function: twig_filter_thumbnail
      * Returns a thumbnail <img> tag for an uploaded image, optionally with enclosing <a> tag.
      */
-    function twig_filter_thumbnail($filename, $alt_text = "", $url = null, $args = array(), $sizes = "100vw"): string {
-        $filepath = Config::current()->chyrp_url."/includes/thumbnail.php?file=".urlencode($filename);
+    function twig_filter_thumbnail(
+        $filename,
+        $alt_text = "",
+        $url = null,
+        $args = array(),
+        $sizes = "100vw"
+    ): string {
+        $filepath = Config::current()->chyrp_url.
+                    "/includes/thumbnail.php?file=".
+                    urlencode($filename);
+
         $src_args = implode("&", $args);
-        $set_args = preg_replace(array("/max_width=[^&]*(&)?/i",
-                                       "/max_height=[^&]*(&)?/i"),
-                                 "",
-                                 $src_args);
+        $set_args = preg_replace(
+            array(
+                "/max_width=[^&]*(&)?/i",
+                "/max_height=[^&]*(&)?/i"
+            ),
+            "",
+            $src_args
+        );
 
         $src_args = !empty($src_args) ? "&".$src_args : $src_args ;
         $set_args = !empty($set_args) ? "&".$set_args : $set_args ;
 
         # Source set for responsive images.
-        $srcset = array($filepath."&max_width=960".$set_args." 960w",
-                        $filepath."&max_width=640".$set_args." 640w",
-                        $filepath."&max_width=320".$set_args." 320w");
+        $srcset = array(
+            $filepath."&max_width=960".$set_args." 960w",
+            $filepath."&max_width=640".$set_args." 640w",
+            $filepath."&max_width=320".$set_args." 320w"
+        );
 
         $img = '<img src="'.fix($filepath.$src_args, true).
                '" srcset="'.fix(implode(", ", $srcset), true).
@@ -430,11 +463,17 @@
                '" class="image" loading="lazy">';
 
         # Enclose in <a> tag? Provide @true@ or a candidate URL.
-        if (isset($url) and $url !== false)
-            $href = (is_string($url) and is_url($url)) ? $url : uploaded($filename) ;
+        if (isset($url) and $url !== false) {
+            $href = (is_string($url) and is_url($url)) ?
+                $url : uploaded($filename) ;
+        }
 
-        return isset($href) ?
-            '<a href="'.fix($href, true).
-            '" class="image_link" aria-label="'.__("Image source").'">'.$img.'</a>' :
-            $img ;
+        $return = $img;
+
+        if (isset($href))
+            $return = '<a href="'.fix($href, true).
+                      '" class="image_link" aria-label="'.
+                      __("Image source").'">'.$img.'</a>';
+
+        return $return;
     }

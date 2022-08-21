@@ -42,9 +42,10 @@
         protected function setFilter($field, $name): void {
             self::$filters[get_class($this)][] = array("field" => $field, "name" => $name);
 
-            if (isset($this->fields[$field]))
+            if (isset($this->fields[$field])) {
                 foreach ((array) $name as $filter)
                     $this->fields[$field]["filters"][] = $filter;
+            }
         }
 
         /**
@@ -61,9 +62,10 @@
         protected function customFilter($field, $name): void {
             self::$custom_filters[get_class($this)][] = array("field" => $field, "name" => $name);
 
-            if (isset($this->fields[$field]))
+            if (isset($this->fields[$field])) {
                 foreach ((array) $name as $filter)
                     $this->fields[$field]["custom_filters"][] = $filter;
+            }
         }
 
         /**
@@ -80,8 +82,10 @@
          */
         protected function respondTo($name, $function = null, $priority = 10): void {
             fallback($function, $name);
-            Trigger::current()->priorities[$name][] = array("priority" => $priority,
-                                                            "function" => array($this, $function));
+            Trigger::current()->priorities[$name][] = array(
+                "priority" => $priority,
+                "function" => array($this, $function)
+            );
         }
 
         /**

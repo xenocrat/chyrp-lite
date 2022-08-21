@@ -56,7 +56,12 @@
                 $target = $trace[$index = 0];
 
                 # Getting a trace from these files doesn't help much.
-                while (match_any(array("/SQL\.php/", "/Model\.php/", "/\/model\//"), $target["file"])) {
+                while (
+                    match_any(
+                        array("/SQL\.php/", "/Model\.php/", "/\/model\//"),
+                        $target["file"]
+                    )
+                ) {
                     if (isset($trace[$index + 1]["file"]))
                         $target = $trace[$index++];
                     else
@@ -66,14 +71,23 @@
                 $logQuery = $query;
 
                 foreach ($params as $name => $val)
-                    $logQuery = preg_replace("/{$name}([^a-zA-Z0-9_]|$)/",
-                                 str_replace("\\", "\\\\", $this->sql->escape($val))."$1", $logQuery);
+                    $logQuery = preg_replace(
+                        "/{$name}([^a-zA-Z0-9_]|$)/",
+                        str_replace(
+                            "\\",
+                            "\\\\",
+                            $this->sql->escape($val)
+                        )."$1",
+                        $logQuery
+                    );
 
-                $this->sql->debug[] = array("number" => $this->sql->queries,
-                                            "file" => str_replace(MAIN_DIR."/", "", $target["file"]),
-                                            "line" => $target["line"],
-                                            "query" => $logQuery,
-                                            "time" => timer_stop());
+                $this->sql->debug[] = array(
+                    "number" => $this->sql->queries,
+                    "file" => str_replace(MAIN_DIR."/", "", $target["file"]),
+                    "line" => $target["line"],
+                    "query" => $logQuery,
+                    "time" => timer_stop()
+                );
             }
 
             try {
@@ -83,14 +97,20 @@
                 $this->queryString = $query;
 
                 foreach ($params as $name => $val)
-                    $this->queryString = preg_replace("/{$name}([^a-zA-Z0-9_]|$)/",
-                                          str_replace(array("\\", "\$"),
-                                                      array("\\\\", "\\\$"),
-                                                      $this->sql->escape($val))."$1",
-                                                      $this->queryString);
+                    $this->queryString = preg_replace(
+                        "/{$name}([^a-zA-Z0-9_]|$)/",
+                        str_replace(
+                            array("\\", "\$"),
+                            array("\\\\", "\\\$"),
+                            $this->sql->escape($val)
+                        )."$1",
+                        $this->queryString
+                    );
 
                 if (!$this->result)
-                    throw new PDOException(__("PDO failed to execute the prepared statement."));
+                    throw new PDOException(
+                        __("PDO failed to execute the prepared statement.")
+                    );
 
             } catch (PDOException $e) {
                 return $this->exception_handler($e);

@@ -94,21 +94,27 @@
                 if ($tr_str_end > $mo_length)
                     return false;
 
-                $or_str_data = substr($mo_file,
-                                      $or_str_meta["offset"],
-                                      $or_str_meta["length"]);
+                $or_str_data = substr(
+                    $mo_file,
+                    $or_str_meta["offset"],
+                    $or_str_meta["length"]
+                );
 
-                $tr_str_data = substr($mo_file,
-                                      $tr_str_meta["offset"],
-                                      $tr_str_meta["length"]);
+                $tr_str_data = substr(
+                    $mo_file,
+                    $tr_str_meta["offset"],
+                    $tr_str_meta["length"]
+                );
 
                 # Discover null-separated plural forms.
                 $or_str_data = explode("\0", $or_str_data);
                 $tr_str_data = explode("\0", $tr_str_data);
 
                 # Add discovered messages to the data.
-                $mo_data[] = array("or" => $or_str_data,
-                                   "tr" => $tr_str_data);
+                $mo_data[] = array(
+                    "or" => $or_str_data,
+                    "tr" => $tr_str_data
+                );
             }
 
             $this->mo[$domain] = $mo_data;

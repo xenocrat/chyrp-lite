@@ -21,14 +21,21 @@
          * Route constructor calls this to determine the action in the case of a POST request.
          */
         public function parse($route): ?string {
-            if (isset($_SERVER['HTTP_SEC_FETCH_SITE']) and $_SERVER['HTTP_SEC_FETCH_SITE'] != "same-origin")
-                show_403();
+            if (isset($_SERVER['HTTP_SEC_FETCH_SITE'])) {
+                if ($_SERVER['HTTP_SEC_FETCH_SITE'] != "same-origin")
+                    show_403();
+            }
 
             if (empty($route->action) and isset($_POST['action']))
                 return $route->action = $_POST['action'];
 
             if (!isset($route->action))
-                error(__("Error"), __("Missing argument."), null, 400);
+                error(
+                    __("Error"),
+                    __("Missing argument."),
+                    null,
+                    400
+                );
         }
 
         /**
@@ -45,18 +52,34 @@
          */
         public function ajax_destroy_post(): void {
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
-                show_403(__("Access Denied"), __("Invalid authentication token."));
+                show_403(
+                    __("Access Denied"),
+                    __("Invalid authentication token.")
+                );
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a post."), null, 400);
+                error(
+                    __("No ID Specified"),
+                    __("An ID is required to delete a post."),
+                    null,
+                    400
+                );
 
-            $post = new Post($_POST['id'], array("drafts" => true));
+            $post = new Post(
+                $_POST['id'], array("drafts" => true)
+            );
 
             if ($post->no_results)
-                show_404(__("Not Found"), __("Post not found."));
+                show_404(
+                    __("Not Found"),
+                    __("Post not found.")
+                );
 
             if (!$post->deletable())
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete this post."));
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to delete this post.")
+                );
 
             Post::delete($post->id);
             json_response(__("Post deleted."), true);
@@ -68,18 +91,32 @@
          */
         public function ajax_destroy_page(): void {
             if (!Visitor::current()->group->can("delete_page"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to delete pages."));
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to delete pages.")
+                );
 
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
-                show_403(__("Access Denied"), __("Invalid authentication token."));
+                show_403(
+                    __("Access Denied"),
+                    __("Invalid authentication token.")
+                );
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to delete a page."), null, 400);
+                error(
+                    __("No ID Specified"),
+                    __("An ID is required to delete a page."),
+                    null,
+                    400
+                );
 
             $page = new Page($_POST['id']);
 
             if ($page->no_results)
-                show_404(__("Not Found"), __("Page not found."));
+                show_404(
+                    __("Not Found"),
+                    __("Page not found.")
+                );
 
             Page::delete($page->id, true);
             json_response(__("Page deleted."), true);
@@ -91,10 +128,16 @@
          */
         public function ajax_preview_post(): void {
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
-                show_403(__("Access Denied"), __("Invalid authentication token."));
+                show_403(
+                    __("Access Denied"),
+                    __("Invalid authentication token.")
+                );
 
             if (!Visitor::current()->group->can("add_post", "add_draft"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to add posts."));
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to add posts.")
+                );
 
             $trigger = Trigger::current();
             $main = MainController::current();
@@ -104,23 +147,35 @@
             $content = fallback($_POST['content'], "");
 
             # Custom filters.
-            if (isset(Feathers::$custom_filters[$class]))
-                foreach (Feathers::$custom_filters[$class] as $custom_filter)
+            if (isset(Feathers::$custom_filters[$class])) {
+                foreach (Feathers::$custom_filters[$class] as $custom_filter) {
                     if ($custom_filter["field"] == $field)
-                        $content = call_user_func_array(array(Feathers::$instances[$_POST['safename']],
-                                                              $custom_filter["name"]),
-                                                        array($content));
+                        $content = call_user_func_array(
+                            array(
+                                Feathers::$instances[$_POST['safename']],
+                                $custom_filter["name"]
+                            ),
+                            array($content)
+                        );
+                }
+            }
 
             # Trigger filters.
-            if (isset(Feathers::$filters[$class]))
-                foreach (Feathers::$filters[$class] as $filter)
+            if (isset(Feathers::$filters[$class])) {
+                foreach (Feathers::$filters[$class] as $filter) {
                     if ($filter["field"] == $field and !empty($content))
                         $trigger->filter($content, $filter["name"]);
+                }
+            }
 
             header("Cache-Control: no-cache, must-revalidate");
             header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
 
-            $main->display("content".DIR."preview", array("content" => $content), __("Preview"));
+            $main->display(
+                "content".DIR."preview",
+                array("content" => $content),
+                __("Preview")
+            );
         }
 
         /**
@@ -129,10 +184,16 @@
          */
         public function ajax_preview_page(): void {
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
-                show_403(__("Access Denied"), __("Invalid authentication token."));
+                show_403(
+                    __("Access Denied"),
+                    __("Invalid authentication token.")
+                );
 
             if (!Visitor::current()->group->can("add_page"))
-                show_403(__("Access Denied"), __("You do not have sufficient privileges to add pages."));
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to add pages.")
+                );
 
             $trigger = Trigger::current();
             $main = MainController::current();
@@ -151,7 +212,11 @@
             header("Cache-Control: no-cache, must-revalidate");
             header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
 
-            $main->display("content".DIR."preview", array("content" => $content), __("Preview"));
+            $main->display(
+                "content".DIR."preview",
+                array("content" => $content),
+                __("Preview")
+            );
         }
 
         /**
@@ -160,14 +225,24 @@
          */
         public function ajax_file_upload(): void {
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
-                show_403(__("Access Denied"), __("Invalid authentication token."));
+                show_403(
+                    __("Access Denied"),
+                    __("Invalid authentication token.")
+                );
 
             if (!Visitor::current()->group->can("add_post", "add_page"))
-                show_403(__("Access Denied"),
-                         __("You do not have sufficient privileges to import files."));
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to import files.")
+                );
 
             if (!isset($_FILES['file']))
-                error(__("Error"), __("Missing argument."), null, 400);
+                error(
+                    __("Error"),
+                    __("Missing argument."),
+                    null,
+                    400
+                );
 
             if (upload_tester($_FILES['file'])) {
                 $filename = upload($_FILES['file']);

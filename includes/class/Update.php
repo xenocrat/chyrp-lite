@@ -64,9 +64,11 @@
          * Flash the user about the newer version.
          */
         private static function message($item): void {
-            Flash::message(_f("Chyrp Lite &#8220;%s&#8221; is available.", fix($item->title)).
-                           ' <a href="'.fix($item->link, true).'" target="_blank">'.
-                           __("Go to GitHub &rarr;").'</a>');
+            Flash::message(
+                _f("Chyrp Lite &#8220;%s&#8221; is available.", fix($item->title)).
+                ' <a href="'.fix($item->link, true).'" target="_blank">'.
+                __("Go to GitHub &rarr;").'</a>'
+            );
         }
 
         /**
@@ -74,8 +76,10 @@
          * Flash the user about the failed check.
          */
         private static function warning(): void {
-            Flash::warning(__("Unable to check for new Chyrp Lite versions.").
-                           ' <a href="'.fix(UPDATE_PAGE, true).'" target="_blank">'.
-                           __("Go to GitHub &rarr;").'</a>');
+            Flash::warning(
+                __("Unable to check for new Chyrp Lite versions.").
+                ' <a href="'.fix(UPDATE_PAGE, true).'" target="_blank">'.
+                __("Go to GitHub &rarr;").'</a>'
+            );
         }
     }

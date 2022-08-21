@@ -96,23 +96,33 @@
     function test_directories(): void {
         # Test if we can write to MAIN_DIR (needed for the .htaccess file).
         if (!is_writable(MAIN_DIR))
-            alert(__("Please CHMOD or CHOWN the installation directory to make it writable."));
+            alert(
+                __("Please CHMOD or CHOWN the installation directory to make it writable.")
+            );
 
         # Test if we can write to INCLUDES_DIR (needed for config.json.php).
         if (!is_writable(INCLUDES_DIR))
-            alert(__("Please CHMOD or CHOWN the <em>includes</em> directory to make it writable."));
+            alert(
+                __("Please CHMOD or CHOWN the <em>includes</em> directory to make it writable.")
+            );
 
         # Test if we can write to CACHES_DIR (needed by some extensions).
         if (!is_writable(CACHES_DIR))
-            alert(__("Please CHMOD or CHOWN the <em>caches</em> directory to make it writable."));
+            alert(
+                __("Please CHMOD or CHOWN the <em>caches</em> directory to make it writable.")
+            );
 
         # Test if we can write to twig cache.
         if (!is_writable(CACHES_DIR.DIR."twig"))
-            alert(__("Please CHMOD or CHOWN the <em>twig</em> directory to make it writable."));
+            alert(
+                __("Please CHMOD or CHOWN the <em>twig</em> directory to make it writable.")
+            );
 
         # Test if we can write to thumbs cache.
         if (!is_writable(CACHES_DIR.DIR."thumbs"))
-            alert(__("Please CHMOD or CHOWN the <em>thumbs</em> directory to make it writable."));
+            alert(
+                __("Please CHMOD or CHOWN the <em>thumbs</em> directory to make it writable.")
+            );
     }
 
     /**
@@ -176,7 +186,10 @@
         $set = Config::current()->set("enable_markdown", true, true);
 
         if ($set === false)
-            error(__("Error"), __("Could not write the configuration file."));
+            error(
+                __("Error"),
+                __("Could not write the configuration file.")
+            );
     }
 
     /**
@@ -189,7 +202,10 @@
         $set = Config::current()->set("enable_homepage", false, true);
 
         if ($set === false)
-            error(__("Error"), __("Could not write the configuration file."));
+            error(
+                __("Error"),
+                __("Could not write the configuration file.")
+            );
     }
 
     /**
@@ -202,7 +218,10 @@
         $set = Config::current()->set("uploads_limit", 10, true);
 
         if ($set === false)
-            error(__("Error"), __("Could not write the configuration file."));
+            error(
+                __("Error"),
+                __("Could not write the configuration file.")
+            );
     }
 
     /**
@@ -215,7 +234,10 @@
         $set = Config::current()->remove("enable_trackbacking");
 
         if ($set === false)
-            error(__("Error"), __("Could not write the configuration file."));
+            error(
+                __("Error"),
+                __("Could not write the configuration file.")
+            );
     }
 
     /**
@@ -228,7 +250,10 @@
         $set = Config::current()->set("admin_per_page", 25, true);
 
         if ($set === false)
-            error(__("Error"), __("Could not write the configuration file."));
+            error(
+                __("Error"),
+                __("Could not write the configuration file.")
+            );
     }
 
     /**
@@ -242,7 +267,10 @@
         $set = $config->set("enabled_modules", array_diff($config->enabled_modules, array("importers")));
 
         if ($set === false)
-            error(__("Error"), __("Could not write the configuration file."));
+            error(
+                __("Error"),
+                __("Could not write the configuration file.")
+            );
     }
 
     /**
@@ -255,7 +283,14 @@
         $sql = SQL::current();
 
         if (!$sql->count("permissions", array("id" => "export_content", "group_id" => 0)))
-            $sql->insert("permissions", array("id" => "export_content", "name" => "Export Content", "group_id" => 0));
+            $sql->insert(
+                "permissions",
+                array(
+                    "id" => "export_content",
+                    "name" => "Export Content",
+                    "group_id" => 0
+                )
+            );
     }
 
     /**
@@ -268,7 +303,10 @@
         $set = Config::current()->set("feed_format", "AtomFeed", true);
 
         if ($set === false)
-            error(__("Error"), __("Could not write the configuration file."));
+            error(
+                __("Error"),
+                __("Could not write the configuration file.")
+            );
     }
 
     /**
@@ -281,7 +319,10 @@
         $set = Config::current()->remove("enable_captcha");
 
         if ($set === false)
-            error(__("Error"), __("Could not write the configuration file."));
+            error(
+                __("Error"),
+                __("Could not write the configuration file.")
+            );
     }
 
     /**
@@ -292,10 +333,16 @@
      */
     function disable_recaptcha(): void {
         $config = Config::current();
-        $set = $config->set("enabled_modules", array_diff($config->enabled_modules, array("recaptcha")));
+        $set = $config->set(
+            "enabled_modules",
+            array_diff($config->enabled_modules, array("recaptcha"))
+        );
 
         if ($set === false)
-            error(__("Error"), __("Could not write the configuration file."));
+            error(
+                __("Error"),
+                __("Could not write the configuration file.")
+            );
     }
 
     /**
@@ -308,7 +355,10 @@
         $set = Config::current()->remove("feed_url");
 
         if ($set === false)
-            error(__("Error"), __("Could not write the configuration file."));
+            error(
+                __("Error"),
+                __("Could not write the configuration file.")
+            );
     }
 
     /**
@@ -321,7 +371,10 @@
         $set = Config::current()->remove("cookies_notification");
 
         if ($set === false)
-            error(__("Error"), __("Could not write the configuration file."));
+            error(
+                __("Error"),
+                __("Could not write the configuration file.")
+            );
     }
 
     /**
@@ -334,7 +387,10 @@
         $set = Config::current()->remove("enable_ajax");
 
         if ($set === false)
-            error(__("Error"), __("Could not write the configuration file."));
+            error(
+                __("Error"),
+                __("Could not write the configuration file.")
+            );
     }
 
     /**
@@ -345,10 +401,16 @@
      */
     function disable_simplemde(): void {
         $config = Config::current();
-        $set = $config->set("enabled_modules", array_diff($config->enabled_modules, array("simplemde")));
+        $set = $config->set(
+            "enabled_modules",
+            array_diff($config->enabled_modules, array("simplemde"))
+        );
 
         if ($set === false)
-            error(__("Error"), __("Could not write the configuration file."));
+            error(
+                __("Error"),
+                __("Could not write the configuration file.")
+            );
     }
 
     /**
@@ -361,7 +423,10 @@
         $set = Config::current()->set("search_pages", false, true);
 
         if ($set === false)
-            error(__("Error"), __("Could not write the configuration file."));
+            error(
+                __("Error"),
+                __("Could not write the configuration file.")
+            );
     }
 
     /**
@@ -376,14 +441,18 @@
         if ($sql->adapter != "sqlite")
             return;
 
-        $results = $sql->select("posts",
-                                "id",
-                                array("pinned" => ""))->fetchAll();
+        $results = $sql->select(
+            "posts",
+            "id",
+            array("pinned" => "")
+        )->fetchAll();
 
         foreach ($results as $result)
-            $sql->update("posts",
-                         array("id" => $result["id"]),
-                         array("pinned" => false));
+            $sql->update(
+                "posts",
+                array("id" => $result["id"]),
+                array("pinned" => false)
+            );
     }
 
     /**
@@ -398,14 +467,18 @@
         if ($sql->adapter == "pgsql")
             return;
 
-        $results = $sql->select("posts",
-                                "id",
-                                array("updated_at" => "0000-00-00 00:00:00"))->fetchAll();
+        $results = $sql->select(
+            "posts",
+            "id",
+            array("updated_at" => "0000-00-00 00:00:00")
+        )->fetchAll();
 
         foreach ($results as $result)
-            $sql->update("posts",
-                         array("id" => $result["id"]),
-                         array("updated_at" => "0001-01-01 00:00:00"));
+            $sql->update(
+                "posts",
+                array("id" => $result["id"]),
+                array("updated_at" => "0001-01-01 00:00:00")
+            );
     }
 
     /**
@@ -426,8 +499,10 @@
             if (strpos($table["Collation"], "utf8mb4_") === 0)
                 continue;
 
-            $sql->query("ALTER TABLE \"".$table["Name"].
-                        "\" CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci");
+            $sql->query(
+                "ALTER TABLE \"".$table["Name"].
+                "\" CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci"
+            );
         }
     }
 
@@ -678,14 +753,16 @@
         mysql_utf8mb4();
 
         # Perform module upgrades.
-        foreach ($config->enabled_modules as $module)
+        foreach ($config->enabled_modules as $module) {
             if (file_exists(MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php"))
                 require MAIN_DIR.DIR."modules".DIR.$module.DIR."upgrades.php";
+        }
 
         # Perform feather upgrades.
-        foreach ($config->enabled_feathers as $feather)
+        foreach ($config->enabled_feathers as $feather) {
             if (file_exists(MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php"))
                 require MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php";
+        }
 
         @unlink(INCLUDES_DIR.DIR."upgrading.lock");
         $upgraded = true;

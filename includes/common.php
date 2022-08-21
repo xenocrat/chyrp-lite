@@ -50,8 +50,10 @@
 
     # Constant: BOT_UA
     # Are we being visited by a probable robot?
-    define('BOT_UA', isset($_SERVER['HTTP_USER_AGENT']) and
-        preg_match("/(bots?|crawler|slurp|spider)\b/i", $_SERVER['HTTP_USER_AGENT']));
+    define('BOT_UA',
+        isset($_SERVER['HTTP_USER_AGENT']) and
+        preg_match("/(bots?|crawler|slurp|spider)\b/i", $_SERVER['HTTP_USER_AGENT'])
+    );
 
     # Constant: DIR
     # Native directory separator.
@@ -114,17 +116,21 @@
     # Does the user agent accept deflate encoding?
     define('HTTP_ACCEPT_DEFLATE',
         isset($_SERVER['HTTP_ACCEPT_ENCODING']) and
-        substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "deflate"));
+        substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "deflate")
+    );
 
     # Constant: HTTP_ACCEPT_GZIP
     # Does the user agent accept gzip encoding?
     define('HTTP_ACCEPT_GZIP',
         isset($_SERVER['HTTP_ACCEPT_ENCODING']) and
-        substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "gzip"));
+        substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "gzip")
+    );
 
     # Constant: CAN_USE_ZLIB
     # Can we use zlib to compress output?
-    define('CAN_USE_ZLIB', (HTTP_ACCEPT_DEFLATE or HTTP_ACCEPT_GZIP) and extension_loaded("zlib"));
+    define('CAN_USE_ZLIB',
+        (HTTP_ACCEPT_DEFLATE or HTTP_ACCEPT_GZIP) and extension_loaded("zlib")
+    );
 
     # Constant: USE_ZLIB
     # Use zlib to provide content compression?
@@ -276,13 +282,21 @@
 
     # Exit if an upgrade is in progress.
     if (file_exists(INCLUDES_DIR.DIR."upgrading.lock"))
-        error(__("Service Unavailable"),
-              __("This resource is temporarily unable to serve your request."), null, 503);
+        error(
+            __("Service Unavailable"),
+            __("This resource is temporarily unable to serve your request."),
+            null,
+            503
+        );
 
     # Exit if the config file is missing.
     if (!file_exists(INCLUDES_DIR.DIR."config.json.php"))
-        error(__("Service Unavailable"),
-              __("This resource cannot respond because it is not configured."), null, 503);
+        error(
+            __("Service Unavailable"),
+            __("This resource cannot respond because it is not configured."),
+            null,
+            503
+        );
 
     # Start the timer that keeps track of Chyrp's load time.
     timer_start();
@@ -320,11 +334,15 @@
 
     # Constant: THEME_DIR
     # Absolute path to the theme (current or previewed).
-    define('THEME_DIR', MAIN_DIR.DIR."themes".DIR.(PREVIEWING ? $_SESSION['theme'] : $config->theme));
+    define('THEME_DIR',
+        MAIN_DIR.DIR."themes".DIR.(PREVIEWING ? $_SESSION['theme'] : $config->theme)
+    );
 
     # Constant: THEME_URL
     # Absolute URL to the theme (current or previewed).
-    define('THEME_URL', $config->chyrp_url."/themes/".(PREVIEWING ? $_SESSION['theme'] : $config->theme));
+    define('THEME_URL',
+        $config->chyrp_url."/themes/".(PREVIEWING ? $_SESSION['theme'] : $config->theme)
+    );
 
     # Instantiate the theme.
     $theme = Theme::current();

@@ -73,15 +73,17 @@
          *     $uri - URI of the author (optional).
          *     $email - Email address of the author (optional).
          */
-        public function entry($title,
-                              $id,
-                              $content,
-                              $link,
-                              $published,
-                              $updated = null,
-                              $name = "",
-                              $uri = "",
-                              $email = ""): void {
+        public function entry(
+            $title,
+            $id,
+            $content,
+            $link,
+            $published,
+            $updated = null,
+            $name = "",
+            $uri = "",
+            $email = ""
+        ): void {
             $this->count++;
 
             $item = array(
@@ -113,7 +115,10 @@
             if ($this->count == 0)
                 return;
 
-            fallback($this->json["items"][($this->count - 1)]["tags"], array());
+            fallback(
+                $this->json["items"][($this->count - 1)]["tags"],
+                array()
+            );
 
             $this->json["items"][($this->count - 1)]["tags"][] = $term;
         }
@@ -140,7 +145,10 @@
             if ($this->count == 0)
                 return;
 
-            fallback($this->json["items"][($this->count - 1)]["attachments"], array());
+            fallback(
+                $this->json["items"][($this->count - 1)]["attachments"],
+                array()
+            );
 
             $attachment = array(
                 "url"       => $link,

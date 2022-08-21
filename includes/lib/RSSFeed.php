@@ -49,7 +49,11 @@
             if (!empty($subtitle))
                 echo '<description>'.strip_tags($subtitle).'</description>'."\n";
 
-            echo '<lastBuildDate>'.when(DATE_RSS, oneof($updated, time())).'</lastBuildDate>'."\n";
+            echo '<lastBuildDate>'.
+                 when(DATE_RSS, oneof($updated, time())).
+                 '</lastBuildDate>'.
+                 "\n";
+
             echo '<link>'.url("/", MainController::current()).'</link>'."\n";
             echo '<generator>'.CHYRP_IDENTITY.'</generator>'."\n";
         }
@@ -72,15 +76,17 @@
          * Notes:
          *     The item remains open to allow triggered insertions.
          */
-        public function entry($title,
-                              $id,
-                              $content,
-                              $link,
-                              $published,
-                              $updated = null,
-                              $name = "",
-                              $uri = "",
-                              $email = ""): void {
+        public function entry(
+            $title,
+            $id,
+            $content,
+            $link,
+            $published,
+            $updated = null,
+            $name = "",
+            $uri = "",
+            $email = ""
+        ): void {
             $this->split();
 
             echo '<item>'."\n";
@@ -138,7 +144,10 @@
         public function enclosure($link, $length = 0, $type = "", $title = ""): void {
             echo '<enclosure url="'.fix($link, true).'"'.
                  ' length="'.fix($length, true).'"'.
-                 ' type="'.fix(oneof($type, "application/octet-stream"), true).'" />'."\n";
+                 ' type="'.
+                 fix(oneof($type, "application/octet-stream"), true).
+                 '" />'.
+                 "\n";
         }
 
         /**

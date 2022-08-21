@@ -20,7 +20,17 @@
          * Function: entry
          * Adds an individual entry to the feed.
          */
-        public function entry($title, $id, $content, $link, $published, $updated, $name, $uri, $email): void;
+        public function entry(
+            $title,
+            $id,
+            $content,
+            $link,
+            $published,
+            $updated,
+            $name,
+            $uri,
+            $email
+        ): void;
 
         /**
          * Function: category

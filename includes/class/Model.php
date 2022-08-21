@@ -85,8 +85,10 @@
                 } else {
                     $model = depluralize($name);
                     $match = ($model_name == "visitor") ? "user" : $model_name ;
-                    $opts = array("where" => array($match."_id" => $this->data["id"]),
-                                  "placeholders" => $placeholders);
+                    $opts = array(
+                        "where" => array($match."_id" => $this->data["id"]),
+                        "placeholders" => $placeholders
+                    );
                 }
 
                 $this->data[$name] = call_user_func(array($model, "find"), $opts);
@@ -203,7 +205,7 @@
             $cache_id = (isset($id) and !is_numeric($id)) ? serialize($id) : $id ;
 
             # Return cached results if available.
-            if (empty($options["read_from"]))
+            if (empty($options["read_from"])) {
                 if (isset($cache_id) and isset(self::$caches[$model_name][$cache_id])) {
 
                     foreach (self::$caches[$model_name][$cache_id] as $attr => $val)
@@ -211,9 +213,13 @@
 
                     return;
                 }
+            }
 
             fallback($options["select"], "*");
-            fallback($options["from"], ($model_name == "visitor" ? "users" : pluralize($model_name)));
+            fallback(
+                $options["from"],
+                ($model_name == "visitor" ? "users" : pluralize($model_name))
+            );
             fallback($options["left_join"], array());
             fallback($options["where"], array());
             fallback($options["params"], array());
@@ -240,15 +246,17 @@
             if (!empty($options["read_from"])) {
                 $read = $options["read_from"];
             } else {
-                $query = $sql->select($options["from"],
-                                      $options["select"],
-                                      $options["where"],
-                                      $options["order"],
-                                      $options["params"],
-                                      null,
-                                      $options["offset"],
-                                      $options["group"],
-                                      $options["left_join"]);
+                $query = $sql->select(
+                    $options["from"],
+                    $options["select"],
+                    $options["where"],
+                    $options["order"],
+                    $options["params"],
+                    null,
+                    $options["offset"],
+                    $options["group"],
+                    $options["left_join"]
+                );
                 $all = $query->fetchAll();
 
                 if (count($all) == 1) {
@@ -297,9 +305,11 @@
                 $model->queryString = $query->queryString;
 
             if (isset($model->updated_at))
-                $model->updated = (!empty($model->updated_at) and
-                                    $model->updated_at != "0000-00-00 00:00:00" and
-                                    $model->updated_at != "0001-01-01 00:00:00");
+                $model->updated = (
+                    !empty($model->updated_at) and
+                    $model->updated_at != "0000-00-00 00:00:00" and
+                    $model->updated_at != "0001-01-01 00:00:00"
+                );
 
             # Clone the object and cache it.
             $clone = clone $model;
@@ -333,7 +343,11 @@
          * See Also:
          *     <Model.grab>
          */
-        protected static function search($model, $options = array(), $options_for_object = array()): array {
+        protected static function search(
+            $model,
+            $options = array(),
+            $options_for_object = array()
+        ): array {
             $model_name = strtolower($model);
 
             fallback($options["select"], "*");
@@ -354,32 +368,35 @@
 
             Trigger::current()->filter($options, pluralize(strtolower($model_name))."_get");
 
-            $grab = SQL::current()->select($options["from"],
-                                           $options["select"],
-                                           $options["where"],
-                                           $options["order"],
-                                           $options["params"],
-                                           $options["limit"],
-                                           $options["offset"],
-                                           $options["group"],
-                                           $options["left_join"])->fetchAll();
+            $grab = SQL::current()->select(
+                $options["from"],
+                $options["select"],
+                $options["where"],
+                $options["order"],
+                $options["params"],
+                $options["limit"],
+                $options["offset"],
+                $options["group"],
+                $options["left_join"]
+            )->fetchAll();
 
             $results = array();
             $rows = array();
 
-            foreach ($grab as $row)
+            foreach ($grab as $row) {
                 foreach ($row as $column => $val)
                     $rows[$row["id"]][$column][] = $val;
+            }
 
-            foreach ($rows as &$row)
+            foreach ($rows as &$row) {
                 foreach ($row as $name => &$column) {
-                    $column = (!in_array($name, $options["ignore_dupes"]) ?
-                                  array_unique($column) :
-                                  $column) ;
-                    $column = (count($column) == 1) ?
-                                  $column[0] :
-                                  $column ;
+                    if (!in_array($name, $options["ignore_dupes"]))
+                        $column = array_unique($column);
+
+                    if (count($column) == 1)
+                        $column = $column[0];
                 }
+            }
 
             foreach ($rows as $result) {
                 if ($options["placeholders"]) {
@@ -404,7 +421,11 @@
          *     $id - The ID of the object to delete.
          *     $options_for_object - An array of options for the instantiation of the model.
          */
-        protected static function destroy($model, $id, $options_for_object = array()): void {
+        protected static function destroy(
+            $model,
+            $id,
+            $options_for_object = array()
+        ): void {
             $model = strtolower($model);
             $trigger = Trigger::current();
 
@@ -452,7 +473,12 @@
          *     $after - If the link can be shown, show this after it.
          *     $classes - Extra CSS classes for the link, space-delimited.
          */
-        public function edit_link($text = null, $before = null, $after = null, $classes = ""): void {
+        public function edit_link(
+            $text = null,
+            $before = null,
+            $after = null,
+            $classes = ""
+        ): void {
             if (!$this->editable())
                 return;
 
@@ -477,7 +503,12 @@
          *     $after - If the link can be shown, show this after it.
          *     $classes - Extra CSS classes for the link, space-delimited.
          */
-        public function delete_link($text = null, $before = null, $after = null, $classes = ""): void {
+        public function delete_link(
+            $text = null,
+            $before = null,
+            $after = null,
+            $classes = ""
+        ): void {
             if (!$this->deletable())
                 return;
 

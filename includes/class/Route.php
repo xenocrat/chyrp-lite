@@ -41,7 +41,10 @@
          */
         private function __construct($controller) {
             if (!in_array("Controller", class_implements($controller)))
-                trigger_error(__("Route was initiated with an invalid Controller."), E_USER_ERROR);
+                trigger_error(
+                    __("Route was initiated with an invalid Controller."),
+                    E_USER_ERROR
+                );
 
             $config = Config::current();
 
@@ -54,21 +57,31 @@
             # Determining the action can be this simple if clean URLs are disabled.
             $this->action =& $_GET['action'];
 
-            $base = empty($controller->base) ? $config->url : $config->chyrp_url."/".$controller->base ;
-            $regex = "~^".preg_quote(oneof(parse_url($base, PHP_URL_PATH), ""), "~")."((/)index.php)?~";
+            $base = empty($controller->base) ?
+                $config->url : $config->chyrp_url."/".$controller->base ;
+
+            $regex = "~^".preg_quote(
+                oneof(parse_url($base, PHP_URL_PATH), ""),
+                "~"
+            )."((/)index.php)?~";
 
             # Extract the request.
             $this->request = preg_replace($regex, '$2', $_SERVER['REQUEST_URI']);
 
             # Decompose clean URLs.
-            $this->arg = array_map("urldecode", explode("/", trim($this->request, "/")));
+            $this->arg = array_map(
+                "urldecode",
+                explode("/", trim($this->request, "/"))
+            );
 
-            # Give the controller an opportunity to parse this route and determine the action.
+            # Give the controller an opportunity to parse this route
+            # and determine the action.
             $controller->parse($this);
 
             Trigger::current()->call("parse_route", $this);
 
-            # Support single parameter actions without custom routes or parsing by the controller.
+            # Support single parameter actions without custom routes
+            # or parsing by the controller.
             if (empty($this->action) and !empty($this->arg[0]))
                 $this->try[] = $this->arg[0];
         }
@@ -87,27 +100,53 @@
                 array_unshift($this->try, $this->action);
 
             foreach ($this->try as $key => $val) {
-                list($method, $args) = is_numeric($key) ? array($val, array()) : array($key, $val) ;
+                list($method, $args) = is_numeric($key) ?
+                    array($val, array()) : array($key, $val) ;
 
                 $this->action = $method;
 
                 # Don't try to call anything except a valid PHP function.
                 if (preg_match("/[^\w]/", $this->action))
-                    error(__("Error"), __("Invalid action."), null, 400);
+                    error(
+                        __("Error"),
+                        __("Invalid action."),
+                        null,
+                        400
+                    );
 
-                # Return 403 if the visitor cannot view the site and this is not an exempt action.
-                if (!$visitor->group->can("view_site") and !$this->controller->exempt($this->action)) {
+                # Return 403 if the visitor cannot view the site
+                # and this is not an exempt action.
+                if (
+                    !$visitor->group->can("view_site") and
+                    !$this->controller->exempt($this->action)
+                ) {
                     $trigger->call("can_not_view_site");
-                    show_403(__("Access Denied"), __("You are not allowed to view this site."));
+                    show_403(
+                        __("Access Denied"),
+                        __("You are not allowed to view this site.")
+                    );
                 }
 
-                $name = strtolower(str_replace("Controller", "", get_class($this->controller)));
+                $name = strtolower(
+                    str_replace(
+                        "Controller",
+                        "",
+                        get_class($this->controller)
+                    )
+                );
 
                 # This discovers responders provided by extensions.
-                if ($trigger->exists($name."_".$method) or $trigger->exists("route_".$method))
-                    $call = $trigger->call(array($name."_".$method, "route_".$method), $this->controller);
-                else
+                if (
+                    $trigger->exists($name."_".$method) or
+                    $trigger->exists("route_".$method)
+                ) {
+                    $call = $trigger->call(
+                        array($name."_".$method, "route_".$method),
+                        $this->controller
+                    );
+                } else {
                     $call = false;
+                }
 
                 if ($call !== false) {
                     $this->success = true;
@@ -115,10 +154,14 @@
                 }
 
                 # This discovers responders native to the controller.
-                if (method_exists($this->controller, $name."_".$method))
-                    $response = call_user_func_array(array($this->controller, $name."_".$method), $args);
-                else
+                if (method_exists($this->controller, $name."_".$method)) {
+                    $response = call_user_func_array(
+                        array($this->controller, $name."_".$method),
+                        $args
+                    );
+                } else {
                     $response = false;
+                }
 
                 if ($response !== false) {
                     $this->success = true;
@@ -130,10 +173,14 @@
             if (!$this->success and !$this->controller->displayed)
                 show_404();
 
-            # Set redirect_to for actions that visitors might want to come back to after login.
-            if (!$this->controller->feed and $this->controller->displayed and
-                !$this->controller->exempt($this->action) and empty($_POST)) {
-
+            # Set redirect_to for actions that visitors
+            # might want to return to after they log in.
+            if (
+                !$this->controller->feed and
+                $this->controller->displayed and
+                !$this->controller->exempt($this->action) and
+                empty($_POST)
+            ) {
                 $_SESSION['redirect_to'] = self_url();
             }
 
@@ -144,14 +191,14 @@
 
         /**
          * Function: url
-         * Constructs an absolute URL from a relative one, translating clean to dirty URLs as necessary.
+         * Constructs an absolute URL from a relative one. Can translate clean to dirty URLs.
          *
          * Parameters:
-         *     $url - The relative URL. This is assumed to be a dirty URL if it begins with "/".
-         *     $controller - The controller to use. If omitted the current controller will be used.
+         *     $url - The relative URL. Assumed to be dirty if it begins with "/".
+         *     $controller - The controller to use. Current controller used if omitted.
          *
          * Returns:
-         *     An absolute clean or dirty URL, depending on @Config->clean_urls@ and controller support.
+         *     An absolute clean or dirty URL, depending on @Config->clean_urls@ and controller.
          */
         static function url($url, $controller = null): string {
             $config = Config::current();
@@ -162,7 +209,8 @@
             if (is_string($controller))
                 $controller = $controller::current();
 
-            $base = empty($controller->base) ? $config->url : $config->chyrp_url."/".$controller->base ;
+            $base = empty($controller->base) ?
+                $config->url : $config->chyrp_url."/".$controller->base ;
 
             # Assume this is a dirty URL and return it without translation.
             if (strpos($url, "/") === 0)
@@ -171,7 +219,8 @@
             # Assume this is a clean URL and ensure it ends with a slash.
             $url = rtrim($url, "/")."/";
 
-            # Translation is unnecessary if clean URLs are enabled and the controller supports them.
+            # Translation is unnecessary if clean URLs are enabled
+            # and the controller supports them.
             if ($config->clean_urls and !empty($controller->clean))
                 return fix($base."/".$url, true);
 
@@ -180,15 +229,29 @@
             Trigger::current()->filter($urls, "parse_urls");
 
             # Generate a feed variant of all dirty translations not native to the controller.
-            foreach (array_diff_assoc($urls, $controller->urls) as $key => $value) {
+            foreach (
+                array_diff_assoc($urls, $controller->urls) as $key => $value
+            ) {
                 $delimiter = substr($key, 0, 1);
-                $urls[substr($key, 0, -1).preg_quote("feed/", $delimiter).$delimiter] = $value."&amp;feed";
+                $index = substr($key, 0, -1).
+                         preg_quote("feed/", $delimiter).
+                         $delimiter;
+
+                $urls[$index] = $value."&amp;feed";
             }
 
             # Add a fallback for single parameter translations.
             $urls['|/([^/]+)/$|'] = '/?action=$1';
 
-            return fix($base.preg_replace(array_keys($urls), array_values($urls), "/".$url, 1), true);
+            # Do the translation.
+            $translation = preg_replace(
+                array_keys($urls),
+                array_values($urls),
+                "/".$url,
+                1
+            );
+
+            return fix($base.$translation, true);
         }
 
         /**
@@ -196,12 +259,12 @@
          * Adds a route to the blog.
          *
          * Parameters:
-         *     $path - The path to add. Wrap variables with parentheses e.g. "tag/(name)/".
-         *     $action - The action. Add parameters with semicolons e.g "tag;foo=bar;baz=boo".
+         *     $path - The path to add. Wrap variables with () e.g. "tag/(name)/".
+         *     $action - The action. Add parameters with ; e.g "tag;foo=bar;baz=boo".
          *
          * Notes:
          *     Required for actions that have more than one parameter.
-         *     For example, for /tags/ you won't need to do this, but you will for /tag/(name)/.
+         *     For example, not needed for /tags/ but needed for /tag/(name)/.
          *
          * See Also:
          *     <remove>
@@ -248,17 +311,21 @@
 
                 $exp = ($path == "/") ?
                         "\$" :
-                        preg_replace("/\\\\\(([^\)]+)\\\\\)/", "([^\/]+)",
-                        preg_quote(oneof(trim($path, "/"), "/"), "/")) ;
+                        preg_replace(
+                            "/\\\\\(([^\)]+)\\\\\)/",
+                            "([^\/]+)",
+                            preg_quote(oneof(trim($path, "/"), "/"), "/")
+                        ) ;
 
                 # Expression matches?
                 if (preg_match("/^\/{$exp}/", $this->request, $args)) {
                     array_shift($args);
 
                     # Populate $_GET variables discovered in the path.
-                    if (isset($variables[1]))
+                    if (isset($variables[1])) {
                         foreach ($variables[1] as $index => $variable)
                             $_GET[$variable] = urldecode($args[$index]);
+                    }
 
                     # Populate $_GET variables contained in the action.
                     $params = explode(";", $action);

@@ -52,9 +52,11 @@
          *     $id - Session ID.
          */
         public function read($id): string|false {
-            $result = SQL::current()->select("sessions",
-                                             array("data", "created_at"),
-                                             array("id" => $id))->fetch();
+            $result = SQL::current()->select(
+                "sessions",
+                array("data", "created_at"),
+                array("id" => $id)
+            )->fetch();
 
             if (!empty($result)) {
                 $this->data = $result["data"];
@@ -77,13 +79,17 @@
             $visitor = Visitor::current();
 
             if (!$this->deny and isset($data) and $data != $this->data)
-                $sql->replace("sessions",
-                              array("id"),
-                              array("id" => $id,
-                                    "data" => $data,
-                                    "user_id" => $visitor->id,
-                                    "created_at" => $this->created_at,
-                                    "updated_at" => datetime()));
+                $sql->replace(
+                    "sessions",
+                    array("id"),
+                    array(
+                        "id" => $id,
+                        "data" => $data,
+                        "user_id" => $visitor->id,
+                        "created_at" => $this->created_at,
+                        "updated_at" => datetime()
+                    )
+                );
 
             return true;
         }
@@ -108,9 +114,11 @@
          *     $lifetime - The configured maximum session lifetime in seconds.
          */
         public function gc($lifetime): int|false {
-            SQL::current()->delete("sessions",
-                                   "updated_at <= :thirty_days OR data = '' OR data IS NULL",
-                                   array(":thirty_days" => datetime(strtotime("-30 days"))));
+            SQL::current()->delete(
+                "sessions",
+                "updated_at <= :thirty_days OR data = '' OR data IS NULL",
+                array(":thirty_days" => datetime(strtotime("-30 days")))
+            );
 
             return true;
         }

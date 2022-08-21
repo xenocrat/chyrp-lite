@@ -24,10 +24,16 @@
             $config = Config::current();
 
             if ($config->enable_emoji)
-                $this->priorities["markup_text"][] = array("priority" => 10, "function" => "emote");   
+                $this->priorities["markup_text"][] = array(
+                    "priority" => 10,
+                    "function" => "emote"
+                );   
 
             if ($config->enable_markdown)
-                $this->priorities["markup_text"][] = array("priority" => 5, "function" => "markdown"); 
+                $this->priorities["markup_text"][] = array(
+                    "priority" => 5,
+                    "function" => "markdown"
+                ); 
         }
 
         /**
@@ -75,7 +81,10 @@
             array_shift($arguments);
             $this->called[$name] = array();
 
-            if (isset($this->priorities[$name]) and usort($this->priorities[$name], array($this, "cmp")))
+            if (
+                isset($this->priorities[$name]) and
+                usort($this->priorities[$name], array($this, "cmp"))
+            )
                 foreach ($this->priorities[$name] as $action) {
                     $function = $action["function"];
 
@@ -91,7 +100,10 @@
                 }
 
             foreach (Modules::$instances as $module)
-                if (!in_array(array($module, $name), $this->called[$name]) and is_callable(array($module, $name))) {
+                if (
+                    !in_array(array($module, $name), $this->called[$name]) and
+                    is_callable(array($module, $name))
+                ) {
                     if (!empty($module->cancelled))
                         continue;
 
@@ -137,7 +149,9 @@
 
             $this->called[$name] = array();
 
-            if (isset($this->priorities[$name]) and usort($this->priorities[$name], array($this, "cmp")))
+            if (isset($this->priorities[$name]) and
+                usort($this->priorities[$name], array($this, "cmp"))
+            )
                 foreach ($this->priorities[$name] as $action) {
                     $function = $action["function"];
 
@@ -148,22 +162,26 @@
                             continue;
                     }
 
-                    $call = call_user_func_array($function,
-                                                 array_merge(array(&$target),
-                                                                    $arguments));
+                    $call = call_user_func_array(
+                        $function,
+                        array_merge(array(&$target), $arguments)
+                    );
 
                     $this->called[$name][] = $function;
                     $target = fallback($call, $target);
                 }
 
             foreach (Modules::$instances as $module)
-                if (!in_array(array($module, $name), $this->called[$name]) and is_callable(array($module, $name))) {
+                if (!in_array(array($module, $name), $this->called[$name]) and
+                    is_callable(array($module, $name))
+                ) {
                     if (!empty($module->cancelled))
                         continue;
 
-                    $call = call_user_func_array(array($module, $name),
-                                                 array_merge(array(&$target),
-                                                                    $arguments));
+                    $call = call_user_func_array(
+                        array($module, $name),
+                        array_merge(array(&$target), $arguments)
+                    );
 
                     $target = fallback($call, $target);
                 }

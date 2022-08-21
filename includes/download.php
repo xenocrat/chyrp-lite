@@ -9,19 +9,35 @@
     require_once "common.php";
 
     if (isset($_SERVER['REQUEST_METHOD']) and $_SERVER['REQUEST_METHOD'] !== "GET")
-        error(__("Error"), __("This resource accepts GET requests only."), null, 405);
+        error(
+            __("Error"),
+            __("This resource accepts GET requests only."),
+            null,
+            405
+        );
 
     if (empty($_GET['file']))
-        error(__("Error"), __("Missing argument."), null, 400);
+        error(
+            __("Error"),
+            __("Missing argument."),
+            null,
+            400
+        );
 
     if (!$visitor->group->can("view_site"))
-        show_403(__("Access Denied"), __("You are not allowed to view this site."));
+        show_403(
+            __("Access Denied"),
+            __("You are not allowed to view this site.")
+        );
 
     $filename = str_replace(array(DIR, "/"), "", $_GET['file']);
     $filepath = uploaded($filename, false);
 
     if (!is_readable($filepath) or !is_file($filepath))
-        show_404(__("Not Found"), __("File not found."));
+        show_404(
+            __("Not Found"),
+            __("File not found.")
+        );
 
     if (DEBUG)
         error_log("DOWNLOAD served ".$filename);
