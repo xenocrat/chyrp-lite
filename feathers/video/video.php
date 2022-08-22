@@ -3,26 +3,44 @@
         public function __init() {
             $maximum = Config::current()->uploads_limit;
 
-            $this->setField(array("attr" => "title",
-                                  "type" => "text",
-                                  "label" => __("Title", "video"),
-                                  "optional" => true));
+            $this->setField(
+                array(
+                    "attr" => "title",
+                    "type" => "text",
+                    "label" => __("Title", "video"),
+                    "optional" => true
+                )
+            );
 
-            $this->setField(array("attr" => "video",
-                                  "type" => "file",
-                                  "label" => __("Video File", "video"),
-                                  "multiple" => false,
-                                  "accept" => ".".implode(",.", $this->video_extensions()),
-                                  "note" => _f("(Max. file size: %d Megabytes)", $maximum, "video")));
+            $this->setField(
+                array(
+                    "attr" => "video",
+                    "type" => "file",
+                    "label" => __("Video File", "video"),
+                    "multiple" => false,
+                    "accept" => ".".implode(",.", $this->video_extensions()),
+                    "note" => _f("(Max. file size: %d Megabytes)", $maximum, "video")
+                )
+            );
 
-            $this->setField(array("attr" => "description",
-                                  "type" => "text_block",
-                                  "label" => __("Description", "video"),
-                                  "optional" => true,
-                                  "preview" => true));
+            $this->setField(
+                array(
+                    "attr" => "description",
+                    "type" => "text_block",
+                    "label" => __("Description", "video"),
+                    "optional" => true,
+                    "preview" => true
+                )
+            );
 
-            $this->setFilter("title", array("markup_post_title", "markup_title"));
-            $this->setFilter("description", array("markup_post_text", "markup_text"));
+            $this->setFilter(
+                "title",
+                array("markup_post_title", "markup_title")
+            );
+            $this->setFilter(
+                "description",
+                array("markup_post_text", "markup_text")
+            );
 
             $this->respondTo("feed_item", "enclose_video");
             $this->respondTo("filter_post", "filter_post");
@@ -32,10 +50,18 @@
 
         public function submit(): Post {
             if (isset($_FILES['video']) and upload_tester($_FILES['video']))
-                $filename = upload($_FILES['video'], $this->video_extensions());
+                $filename = upload(
+                    $_FILES['video'],
+                    $this->video_extensions()
+                );
 
             if (!isset($filename))
-                error(__("Error"), __("You did not select a video to upload.", "video"), null, 422);
+                error(
+                    __("Error"),
+                    __("You did not select a video to upload.", "video"),
+                    null,
+                    422
+                );
 
             fallback($_POST['title'], "");
             fallback($_POST['description'], "");
@@ -44,19 +70,23 @@
             fallback($_POST['created_at'], datetime());
             fallback($_POST['option'], array());
 
-            return Post::add(array("title" => $_POST['title'],
-                                   "filename" => $filename,
-                                   "description" => $_POST['description']),
-                             sanitize($_POST['slug']),
-                             "",
-                             "video",
-                             null,
-                             !empty($_POST['pinned']),
-                             $_POST['status'],
-                             datetime($_POST['created_at']),
-                             null,
-                             true,
-                             $_POST['option']);
+            return Post::add(
+                array(
+                    "title" => $_POST['title'],
+                    "filename" => $filename,
+                    "description" => $_POST['description']
+                ),
+                sanitize($_POST['slug']),
+                "",
+                "video",
+                null,
+                !empty($_POST['pinned']),
+                $_POST['status'],
+                datetime($_POST['created_at']),
+                null,
+                true,
+                $_POST['option']
+            );
         }
 
         public function update($post): Post|false {
@@ -69,19 +99,26 @@
             $filename = $post->filename;
 
             if (isset($_FILES['video']) and upload_tester($_FILES['video']))
-                $filename = upload($_FILES['video'], $this->video_extensions());
+                $filename = upload(
+                    $_FILES['video'],
+                    $this->video_extensions()
+                );
 
-            return $post->update(array("title" => $_POST['title'],
-                                       "filename" => $filename,
-                                       "description" => $_POST['description']),
-                                 null,
-                                 !empty($_POST['pinned']),
-                                 $_POST['status'],
-                                 sanitize($_POST['slug']),
-                                 "",
-                                 datetime($_POST['created_at']),
-                                 null,
-                                 $_POST['option']);
+            return $post->update(
+                array(
+                    "title" => $_POST['title'],
+                    "filename" => $filename,
+                    "description" => $_POST['description']
+                ),
+                null,
+                !empty($_POST['pinned']),
+                $_POST['status'],
+                sanitize($_POST['slug']),
+                "",
+                datetime($_POST['created_at']),
+                null,
+                $_POST['option']
+            );
         }
 
         public function title($post): string {
@@ -103,9 +140,11 @@
             if ($post->feather != "video" or !file_exists($filepath))
                 return;
 
-            $feed->enclosure(uploaded($post->filename),
-                             filesize($filepath),
-                             $this->video_type($post->filename));
+            $feed->enclosure(
+                uploaded($post->filename),
+                filesize($filepath),
+                $this->video_type($post->filename)
+            );
         }
 
         public function filter_post($post): void {
@@ -141,10 +180,18 @@
             if ($trigger->exists("video_player"))
                 return $trigger->call("video_player", $post);
 
-            return '<video controls>'."\n".
-                   __("Your web browser does not support the <code>video</code> element.", "video")."\n".
-                   '<source src="'.uploaded($post->filename).'" type="'.$this->video_type($post->filename).
-                   '">'."\n".'</video>'."\n";
+            return '<video controls>'.
+                   "\n".
+                   __("Your web browser does not support the <code>video</code> element.", "video").
+                   "\n".
+                   '<source src="'.
+                   uploaded($post->filename).
+                   '" type="'.
+                   $this->video_type($post->filename).
+                   '">'.
+                   "\n".
+                   '</video>'.
+                   "\n";
         }
 
         private function video_type($filename): string {

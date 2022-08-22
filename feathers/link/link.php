@@ -1,23 +1,41 @@
 <?php
     class Link extends Feathers implements Feather {
         public function __init() {
-            $this->setField(array("attr" => "name",
-                                  "type" => "text",
-                                  "label" => __("Title", "link"),
-                                  "optional" => true));
+            $this->setField(
+                array(
+                    "attr" => "name",
+                    "type" => "text",
+                    "label" => __("Title", "link"),
+                    "optional" => true
+                )
+            );
 
-            $this->setField(array("attr" => "source",
-                                  "type" => "text",
-                                  "label" => __("URL", "link")));
+            $this->setField(
+                array(
+                    "attr" => "source",
+                    "type" => "text",
+                    "label" => __("URL", "link")
+                )
+            );
 
-            $this->setField(array("attr" => "description",
-                                  "type" => "text_block",
-                                  "label" => __("Description", "link"),
-                                  "optional" => true,
-                                  "preview" => true));
+            $this->setField(
+                array(
+                    "attr" => "description",
+                    "type" => "text_block",
+                    "label" => __("Description", "link"),
+                    "optional" => true,
+                    "preview" => true
+                )
+            );
 
-            $this->setFilter("name", array("markup_post_title", "markup_title"));
-            $this->setFilter("description", array("markup_post_text", "markup_text"));
+            $this->setFilter(
+                "name",
+                array("markup_post_title", "markup_title")
+            );
+            $this->setFilter(
+                "description",
+                array("markup_post_text", "markup_text")
+            );
 
             $this->respondTo("feed_item", "link_related");
             $this->respondTo("metaWeblog_getPost", "metaWeblog_getValues");
@@ -26,10 +44,18 @@
 
         public function submit(): Post {
             if (empty($_POST['source']))
-                error(__("Error"), __("URL can't be empty.", "link"), null, 422);
+                error(
+                    __("Error"),
+                    __("URL can't be empty.", "link"),
+                    null,
+                    422
+                );
 
             if (!is_url($_POST['source']))
-                error(__("Error"), __("Invalid URL.", "link"));
+                error(
+                    __("Error"),
+                    __("Invalid URL.", "link")
+                );
 
             fallback($_POST['name'], "");
             fallback($_POST['description'], "");
@@ -40,27 +66,39 @@
 
             $_POST['source'] = add_scheme($_POST['source']);
 
-            return Post::add(array("name" => $_POST['name'],
-                                   "source" => $_POST['source'],
-                                   "description" => $_POST['description']),
-                             sanitize($_POST['slug']),
-                             "",
-                             "link",
-                             null,
-                             !empty($_POST['pinned']),
-                             $_POST['status'],
-                             datetime($_POST['created_at']),
-                             null,
-                             true,
-                             $_POST['option']);
+            return Post::add(
+                array(
+                    "name" => $_POST['name'],
+                    "source" => $_POST['source'],
+                    "description" => $_POST['description']
+                ),
+                sanitize($_POST['slug']),
+                "",
+                "link",
+                null,
+                !empty($_POST['pinned']),
+                $_POST['status'],
+                datetime($_POST['created_at']),
+                null,
+                true,
+                $_POST['option']
+            );
         }
 
         public function update($post): Post|false {
             if (empty($_POST['source']))
-                error(__("Error"), __("URL can't be empty.", "link"), null, 422);
+                error(
+                    __("Error"),
+                    __("URL can't be empty.", "link"),
+                    null,
+                    422
+                );
 
             if (!is_url($_POST['source']))
-                error(__("Error"), __("Invalid URL.", "link"));
+                error(
+                    __("Error"),
+                    __("Invalid URL.", "link")
+                );
 
             fallback($_POST['name'], "");
             fallback($_POST['description'], "");
@@ -71,21 +109,29 @@
 
             $_POST['source'] = add_scheme($_POST['source']);
 
-            return $post->update(array("name" => $_POST['name'],
-                                       "source" => $_POST['source'],
-                                       "description" => $_POST['description']),
-                                 null,
-                                 !empty($_POST['pinned']),
-                                 $_POST['status'],
-                                 sanitize($_POST['slug']),
-                                 "",
-                                 datetime($_POST['created_at']),
-                                 null,
-                                 $_POST['option']);
+            return $post->update(
+                array(
+                    "name" => $_POST['name'],
+                    "source" => $_POST['source'],
+                    "description" => $_POST['description']
+                ),
+                null,
+                !empty($_POST['pinned']),
+                $_POST['status'],
+                sanitize($_POST['slug']),
+                "",
+                datetime($_POST['created_at']),
+                null,
+                $_POST['option']
+            );
         }
 
         public function title($post): string {
-            return oneof($post->name, $post->title_from_excerpt(), $post->source);
+            return oneof(
+                $post->name,
+                $post->title_from_excerpt(),
+                $post->source
+            );
         }
 
         public function excerpt($post): string {
@@ -98,7 +144,9 @@
                        oneof($post->name, $post->source).'</a>';
 
             if (!empty($post->description))
-                $content.= '<figcaption>'.$post->description.'</figcaption>';
+                $content.= '<figcaption>'.
+                           $post->description.
+                           '</figcaption>';
 
             return '<figure>'.$content.'</figure>';
         }

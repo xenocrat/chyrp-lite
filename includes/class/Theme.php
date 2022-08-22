@@ -249,7 +249,7 @@
                           '" type="text/css" media="all">';
 
             if (is_dir(THEME_DIR.DIR."stylesheets") or is_dir(THEME_DIR.DIR."css")) {
-                foreach(
+                foreach (
                     array_merge(
                         (array) glob(THEME_DIR.DIR."stylesheets".DIR."*.css"),
                         (array) glob(THEME_DIR.DIR."css".DIR."*.css")
@@ -298,7 +298,7 @@
                           '" type="text/javascript" charset="UTF-8"></script>';
 
             if (is_dir(THEME_DIR.DIR."javascripts") or is_dir(THEME_DIR.DIR."js")) {
-                foreach(
+                foreach (
                     array_merge(
                         (array) glob(THEME_DIR.DIR."javascripts".DIR."*.js"),
                         (array) glob(THEME_DIR.DIR."js".DIR."*.js")
@@ -389,6 +389,8 @@
 
                 if (!empty($link["title"]))
                     $tag.= ' title="'.fix($link["title"], true).'"';
+
+                $tag.= '>';
 
                 $tags[] = $tag;
             }

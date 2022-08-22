@@ -43,27 +43,45 @@
 
             # No need to continue without a responder for the pingback trigger.
             if (!$trigger->exists("pingback"))
-                return new IXR_Error(49, __("Pingback support is disabled for this site."));
+                return new IXR_Error(
+                    49,
+                    __("Pingback support is disabled for this site.")
+                );
 
             if ($target == $source)
-                return new IXR_Error(0, __("The from and to URLs cannot be the same."));
+                return new IXR_Error(
+                    0,
+                    __("The from and to URLs cannot be the same.")
+                );
 
             if (!is_url($target) or !substr_count($target, $url_host))
-                return new IXR_Error(32, __("The URL for our page is not valid."));
+                return new IXR_Error(
+                    32,
+                    __("The URL for our page is not valid.")
+                );
 
             if (!is_url($source))
-                return new IXR_Error(16, __("The URL for your page is not valid."));
+                return new IXR_Error(
+                    16,
+                    __("The URL for your page is not valid.")
+                );
 
             $post = Post::from_url($target);
 
             if ($post->no_results)
-                return new IXR_Error(33, __("We have not published at that URL."));
+                return new IXR_Error(
+                    33,
+                    __("We have not published at that URL.")
+                );
 
             # Retrieve the page that linked here.
             $content = get_remote($source, 0, 10, true);
 
             if (empty($content))
-                return new IXR_Error(16, __("You have not published at that URL."));
+                return new IXR_Error(
+                    16,
+                    __("You have not published at that URL.")
+                );
 
             # Get the title, body, and charset of the page.
             preg_match("/<title[^>]*>([^<]+)<\/title>/i", $content, $title);
@@ -83,7 +101,10 @@
             $url     = preg_quote($args[1], "/");
 
             # Convert the source encoding to UTF-8 if possible to ensure we render it correctly.
-            if (function_exists("mb_convert_encoding") and strcasecmp($charset, "UTF-8") != 0) {
+            if (
+                function_exists("mb_convert_encoding") and
+                strcasecmp($charset, "UTF-8") != 0
+            ) {
                 $title = mb_convert_encoding($title, "UTF-8", $charset);
                 $body = mb_convert_encoding($body, "UTF-8", $charset);
             }
@@ -144,14 +165,16 @@
             }
 
             foreach ($posts as $post) {
-                $struct = array("postid"      => $post->id,
-                                "userid"      => $post->user_id,
-                                "title"       => "",
-                                "dateCreated" => new IXR_Date(when("Ymd\TH:i:se", $post->created_at)),
-                                "description" => "",
-                                "link"        => unfix($post->url()),
-                                "permaLink"   => unfix(url("id/post/".$post->id, MainController::current())),
-                                "mt_basename" => $post->clean);
+                $struct = array(
+                    "postid"      => $post->id,
+                    "userid"      => $post->user_id,
+                    "title"       => "",
+                    "dateCreated" => new IXR_Date(when("Ymd\TH:i:se", $post->created_at)),
+                    "description" => "",
+                    "link"        => unfix($post->url()),
+                    "permaLink"   => unfix(url("id/post/".$post->id, MainController::current())),
+                    "mt_basename" => $post->clean
+                );
 
                 $array[] = $trigger->filter($struct, "metaWeblog_getPost", $post);
             }
@@ -179,7 +202,10 @@
             global $user;
 
             if (!$user->group->can("add_post", "add_draft"))
-                return new IXR_Error(403, __("You do not have sufficient privileges to import files."));
+                return new IXR_Error(
+                    403,
+                    __("You do not have sufficient privileges to import files.")
+                );
 
             fallback($args[3], array());
             fallback($args[3]["name"]);
@@ -190,13 +216,22 @@
             $contents = base64_decode($args[3]["bits"]);
 
             if (!is_dir($uploads_path))
-                throw new Exception(__("Upload path does not exist."), 500);
+                throw new Exception(
+                    __("Upload path does not exist."),
+                    500
+                );
 
             if (!is_writable($uploads_path))
-                throw new Exception(__("Upload path is not writable."), 500);
+                throw new Exception(
+                    __("Upload path is not writable."),
+                    500
+                );
 
             if (!@file_put_contents($uploads_path.$filename, $contents))
-                throw new Exception(__("Failed to write file to disk."), 500);
+                throw new Exception(
+                    __("Failed to write file to disk."),
+                    500
+                );
 
             return array("file" => $filename, "url" => uploaded($filename));
         }
@@ -209,23 +244,36 @@
             $this->auth(fallback($args[1]), fallback($args[2]));
             global $user;
 
-            $post = new Post(fallback($args[0]), array("filter" => false,
-                                                       "where" => array(Post::feathers())));
-file_put_contents(MAIN_DIR.DIR."post.txt", print_r($post, true));
+            $post = new Post(
+                fallback($args[0]),
+                array(
+                    "filter" => false,
+                    "where" => array(Post::feathers())
+                )
+            );
+
             if ($post->no_results)
-                return new IXR_Error(404, __("Post not found."));
+                return new IXR_Error(
+                    404,
+                    __("Post not found.")
+                );
 
             if (!$post->editable($user))
-                return new IXR_Error(403, __("You do not have sufficient privileges to edit this post."));
+                return new IXR_Error(
+                    403,
+                    __("You do not have sufficient privileges to edit this post.")
+                );
 
-            $struct = array("postid"      => $post->id,
-                            "userid"      => $post->user_id,
-                            "title"       => "",
-                            "dateCreated" => new IXR_Date(when("Ymd\TH:i:se", $post->created_at)),
-                            "description" => "",
-                            "link"        => unfix($post->url()),
-                            "permaLink"   => unfix(url("id/post/".$post->id, MainController::current())),
-                            "mt_basename" => $post->clean);
+            $struct = array(
+                "postid"      => $post->id,
+                "userid"      => $post->user_id,
+                "title"       => "",
+                "dateCreated" => new IXR_Date(when("Ymd\TH:i:se", $post->created_at)),
+                "description" => "",
+                "link"        => unfix($post->url()),
+                "permaLink"   => unfix(url("id/post/".$post->id, MainController::current())),
+                "mt_basename" => $post->clean
+            );
 
             Trigger::current()->filter($struct, "metaWeblog_getPost", $post);
             return $struct;
@@ -240,7 +288,10 @@ file_put_contents(MAIN_DIR.DIR."post.txt", print_r($post, true));
             global $user;
 
             if (!$user->group->can("add_post", "add_draft"))
-                return new IXR_Error(403, __("You do not have sufficient privileges to add posts."));
+                return new IXR_Error(
+                    403,
+                    __("You do not have sufficient privileges to add posts.")
+                );
 
             fallback($args[3], array());
             fallback($args[3]["description"], "");
@@ -280,16 +331,18 @@ file_put_contents(MAIN_DIR.DIR."post.txt", print_r($post, true));
 
             $trigger->filter($values, "metaWeblog_before_newPost", $struct);
 
-            $post = Post::add($values,
-                              $slug,
-                              "",
-                              "text",
-                              $user->id,
-                              null,
-                              $status,
-                              $created_at,
-                              null,
-                              $pings);
+            $post = Post::add(
+                $values,
+                $slug,
+                "",
+                "text",
+                $user->id,
+                null,
+                $status,
+                $created_at,
+                null,
+                $pings
+            );
 
             $trigger->call("metaWeblog_newPost", $struct, $post);
             return (int) $post->id;
@@ -317,14 +370,25 @@ file_put_contents(MAIN_DIR.DIR."post.txt", print_r($post, true));
             if (isset($struct["mt_text_more"]))
                 $struct["description"].= "<!--more-->".$struct["mt_text_more"];
 
-            $post = new Post($args[0], array("filter" => false,
-                                             "where" => array(Post::feathers())));
+            $post = new Post(
+                $args[0],
+                array(
+                    "filter" => false,
+                    "where" => array(Post::feathers())
+                )
+            );
 
             if ($post->no_results)
-                return new IXR_Error(404, __("Post not found."));
+                return new IXR_Error(
+                    404,
+                    __("Post not found.")
+                );
 
             if (!$post->editable($user))
-                return new IXR_Error(403, __("You do not have sufficient privileges to edit this post."));
+                return new IXR_Error(
+                    403,
+                    __("You do not have sufficient privileges to edit this post.")
+                );
 
             # Convert statuses from WordPress to Chyrp equivalents.
             switch ($struct["post_status"]) {
@@ -351,13 +415,15 @@ file_put_contents(MAIN_DIR.DIR."post.txt", print_r($post, true));
 
             $trigger->filter($values, "metaWeblog_before_editPost", $struct, $post);
 
-            $post = $post->update($values,
-                                  null,
-                                  $post->pinned,
-                                  $status,
-                                  $slug,
-                                  null,
-                                  $updated_at);
+            $post = $post->update(
+                $values,
+                null,
+                $post->pinned,
+                $status,
+                $slug,
+                null,
+                $updated_at
+            );
 
             $trigger->call("metaWeblog_editPost", $struct, $post);
             return true;
@@ -375,10 +441,16 @@ file_put_contents(MAIN_DIR.DIR."post.txt", print_r($post, true));
                                                        "where" => array(Post::feathers())));
 
             if ($post->no_results)
-                return new IXR_Error(404, __("Post not found."));
+                return new IXR_Error(
+                    404,
+                    __("Post not found.")
+                );
 
             if (!$post->deletable($user))
-                return new IXR_Error(403, __("You do not have sufficient privileges to delete this post."));
+                return new IXR_Error(
+                    403,
+                    __("You do not have sufficient privileges to delete this post.")
+                );
 
             Post::delete($post->id);
             return true;
@@ -391,9 +463,13 @@ file_put_contents(MAIN_DIR.DIR."post.txt", print_r($post, true));
         public function metaWeblog_getUsersBlogs($args): array {
             $this->auth(fallback($args[1]), fallback($args[2]));
 
-            return array(array("url"      => unfix(url("/", MainController::current())),
-                               "blogName" => Config::current()->name,
-                               "blogid"   => "1"));
+            return array(
+                array(
+                    "url" => unfix(url("/", MainController::current())),
+                    "blogName" => Config::current()->name,
+                    "blogid"   => "1"
+                )
+            );
         }
 
        /**
@@ -413,13 +489,22 @@ file_put_contents(MAIN_DIR.DIR."post.txt", print_r($post, true));
         */
         private function auth($login, $password): void {
             if (!Config::current()->enable_xmlrpc)
-                throw new Exception(__("XML-RPC support is disabled for this site."), 501);
+                throw new Exception(
+                    __("XML-RPC support is disabled for this site."),
+                    501
+                );
 
             if (!User::authenticate($login, $password))
-                throw new Exception(__("Incorrect username and/or password."), 403);
+                throw new Exception(
+                    __("Incorrect username and/or password."),
+                    403
+                );
 
             global $user;
-            $user = new User(null, array("where" => array("login" => $login)));
+            $user = new User(
+                null,
+                array("where" => array("login" => $login))
+            );
         }
 
        /**
@@ -434,7 +519,9 @@ file_put_contents(MAIN_DIR.DIR."post.txt", print_r($post, true));
             $normalized = str_replace(array("\t", "\n", "\r", "\0", "\x0B"), " ", $message);
 
             if (DEBUG)
-                error_log("ERROR: ".$errno." ".strip_tags($normalized)." (".$file." on line ".$line.")");
+                error_log(
+                    "ERROR: ".$errno." ".strip_tags($normalized)." (".$file." on line ".$line.")"
+                );
 
             throw new Exception($message, 500);
         }

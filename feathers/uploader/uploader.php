@@ -3,26 +3,44 @@
         public function __init() {
             $maximum = Config::current()->uploads_limit;
 
-            $this->setField(array("attr" => "title",
-                                  "type"=> "text",
-                                  "label" => __("Title", "uploader"),
-                                  "optional" => true));
+            $this->setField(
+                array(
+                    "attr" => "title",
+                    "type"=> "text",
+                    "label" => __("Title", "uploader"),
+                    "optional" => true
+                )
+            );
 
-            $this->setField(array("attr" => "uploads",
-                                  "type" => "file",
-                                  "label" => __("Files", "uploader"),
-                                  "multiple" => true,
-                                  "accept" => ".".implode(",.", upload_filter_whitelist()),
-                                  "note" => _f("(Max. file size: %d Megabytes)", $maximum, "uploader")));
+            $this->setField(
+                array(
+                    "attr" => "uploads",
+                    "type" => "file",
+                    "label" => __("Files", "uploader"),
+                    "multiple" => true,
+                    "accept" => ".".implode(",.", upload_filter_whitelist()),
+                    "note" => _f("(Max. file size: %d Megabytes)", $maximum, "uploader")
+                )
+            );
 
-            $this->setField(array("attr" => "caption",
-                                  "type" => "text_block",
-                                  "label" => __("Caption", "uploader"),
-                                  "optional" => true,
-                                  "preview" => true));
+            $this->setField(
+                array(
+                    "attr" => "caption",
+                    "type" => "text_block",
+                    "label" => __("Caption", "uploader"),
+                    "optional" => true,
+                    "preview" => true
+                )
+            );
 
-            $this->setFilter("title", array("markup_post_title", "markup_title"));
-            $this->setFilter("caption", array("markup_post_text", "markup_text"));
+            $this->setFilter(
+                "title",
+                array("markup_post_title", "markup_title")
+            );
+            $this->setFilter(
+                "caption",
+                array("markup_post_text", "markup_text")
+            );
 
             $this->respondTo("feed_item", "enclose_uploaded");
             $this->respondTo("post","post");
@@ -46,20 +64,27 @@
 
                 if (is_array($_FILES['uploads']['name'])) {
                     for ($i = 0; $i < count($_FILES['uploads']['name']); $i++)
-                        $filenames[] = upload(array(
-                            'name' => $_FILES['uploads']['name'][$i],
-                            'type' => $_FILES['uploads']['type'][$i],
-                            'tmp_name' => $_FILES['uploads']['tmp_name'][$i],
-                            'error' => $_FILES['uploads']['error'][$i],
-                            'size' => $_FILES['uploads']['size'][$i]
-                        ));
+                        $filenames[] = upload(
+                            array(
+                                'name' => $_FILES['uploads']['name'][$i],
+                                'type' => $_FILES['uploads']['type'][$i],
+                                'tmp_name' => $_FILES['uploads']['tmp_name'][$i],
+                                'error' => $_FILES['uploads']['error'][$i],
+                                'size' => $_FILES['uploads']['size'][$i]
+                            )
+                        );
                 } else {
                     $filenames[] = upload($_FILES['uploads']);
                 }
             }
 
             if (empty($filenames))
-                error(__("Error"), __("You did not select any files to upload.", "uploader"), null, 422);
+                error(
+                    __("Error"),
+                    __("You did not select any files to upload.", "uploader"),
+                    null,
+                    422
+                );
 
             if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
                 $_POST['option']['source'] = add_scheme($_POST['option']['source']);
@@ -71,19 +96,23 @@
             fallback($_POST['created_at'], datetime());
             fallback($_POST['option'], array());
 
-            return Post::add(array("filenames" => $this->filenames_serialize($filenames),
-                                   "caption" => $_POST['caption'],
-                                   "title" => $_POST['title']),
-                             sanitize($_POST['slug']),
-                             "",
-                             "uploader",
-                             null,
-                             !empty($_POST['pinned']),
-                             $_POST['status'],
-                             datetime($_POST['created_at']),
-                             null,
-                             true,
-                             $_POST['option']);
+            return Post::add(
+                array(
+                    "filenames" => $this->filenames_serialize($filenames),
+                    "caption" => $_POST['caption'],
+                    "title" => $_POST['title']
+                ),
+                sanitize($_POST['slug']),
+                "",
+                "uploader",
+                null,
+                !empty($_POST['pinned']),
+                $_POST['status'],
+                datetime($_POST['created_at']),
+                null,
+                true,
+                $_POST['option']
+            );
         }
 
         public function update($post): Post|false {
@@ -103,29 +132,35 @@
 
                 if (is_array($_FILES['uploads']['name'])) {
                     for($i=0; $i < count($_FILES['uploads']['name']); $i++)
-                        $filenames[] = upload(array(
-                            'name' => $_FILES['uploads']['name'][$i],
-                            'type' => $_FILES['uploads']['type'][$i],
-                            'tmp_name' => $_FILES['uploads']['tmp_name'][$i],
-                            'error' => $_FILES['uploads']['error'][$i],
-                            'size' => $_FILES['uploads']['size'][$i]
-                        ));
+                        $filenames[] = upload(
+                            array(
+                                'name' => $_FILES['uploads']['name'][$i],
+                                'type' => $_FILES['uploads']['type'][$i],
+                                'tmp_name' => $_FILES['uploads']['tmp_name'][$i],
+                                'error' => $_FILES['uploads']['error'][$i],
+                                'size' => $_FILES['uploads']['size'][$i]
+                            )
+                        );
                 } else {
                     $filenames[] = upload($_FILES['uploads']);
                 }
             }
 
-            return $post->update(array("filenames" => $this->filenames_serialize($filenames),
-                                       "caption" => $_POST['caption'],
-                                       "title" => $_POST['title']),
-                                 null,
-                                 !empty($_POST['pinned']),
-                                 $_POST['status'],
-                                 sanitize($_POST['slug']),
-                                 "",
-                                 datetime($_POST['created_at']),
-                                 null,
-                                 $_POST['option']);
+            return $post->update(
+                array(
+                    "filenames" => $this->filenames_serialize($filenames),
+                    "caption" => $_POST['caption'],
+                    "title" => $_POST['title']
+                ),
+                null,
+                !empty($_POST['pinned']),
+                $_POST['status'],
+                sanitize($_POST['slug']),
+                "",
+                datetime($_POST['created_at']),
+                null,
+                $_POST['option']
+            );
         }
 
         public function title($post): string {
@@ -152,7 +187,10 @@
                 if (!file_exists($filepath))
                     continue;
 
-                $feed->enclosure(uploaded($filename), filesize($filepath));
+                $feed->enclosure(
+                    uploaded($filename),
+                    filesize($filepath)
+                );
             }
         }
 
@@ -170,7 +208,12 @@
             $post->files = $this->list_files($post->filenames);
 
             foreach ($post->files as $file)
-                if (in_array($file["type"], array("jpg", "jpeg", "png", "gif", "webp", "avif"))) {
+                if (
+                    in_array(
+                        $file["type"],
+                        array("jpg", "jpeg", "png", "gif", "webp", "avif")
+                    )
+                ) {
                     $post->image = $file["name"];
                     break;
                 }
@@ -180,11 +223,13 @@
             if ($feather != "uploader")
                 return $options;
 
-            $options[] = array("attr" => "option[source]",
-                               "label" => __("Source", "uploader"),
-                               "help" => "uploader_source",
-                               "type" => "text",
-                               "value" => (isset($post) ? $post->source : ""));
+            $options[] = array(
+                "attr" => "option[source]",
+                "label" => __("Source", "uploader"),
+                "help" => "uploader_source",
+                "type" => "text",
+                "value" => (isset($post) ? $post->source : "")
+            );
 
             return $options;
         }
@@ -217,10 +262,12 @@
                 $filetype = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
                 $exists = file_exists($filepath);
 
-                $list[] = array("name" => $filename,
-                                "type" => $filetype,
-                                "size" => ($exists) ? filesize($filepath) : 0,
-                                "modified" => ($exists) ? filemtime($filepath) : 0);
+                $list[] = array(
+                    "name" => $filename,
+                    "type" => $filetype,
+                    "size" => ($exists) ? filesize($filepath) : 0,
+                    "modified" => ($exists) ? filemtime($filepath) : 0
+                );
             }
 
             return $list;
