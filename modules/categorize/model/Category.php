@@ -20,7 +20,9 @@
             if ($this->no_results)
                 return;
 
-            $this->url = url("category/".$this->clean, MainController::current());
+            $this->url = url(
+                "category/".$this->clean, MainController::current()
+            );
         }
 
         /**
@@ -29,7 +31,10 @@
          * See Also:
          *     <Model::search>
          */
-        static function find($options = array(), $options_for_object = array()): array {
+        static function find(
+            $options = array(),
+            $options_for_object = array()
+        ): array {
             $options["from"] = "categorize";
             return parent::search(get_class(), $options, $options_for_object);
         }
@@ -52,10 +57,14 @@
         static function add($name, $clean, $show_on_home): self {
             $sql = SQL::current();
 
-            $sql->insert("categorize",
-                         array("name"         => strip_tags($name),
-                               "clean"        => $clean,
-                               "show_on_home" => $show_on_home));
+            $sql->insert(
+                "categorize",
+                array(
+                    "name"         => strip_tags($name),
+                    "clean"        => $clean,
+                    "show_on_home" => $show_on_home
+                )
+            );
 
             $new = new self($sql->latest("categorize"));
             Trigger::current()->call("add_category", $new);
@@ -78,20 +87,29 @@
             if ($this->no_results)
                 return false;
 
-            $new_values = array("name"         => strip_tags($name),
-                                "clean"        => $clean,
-                                "show_on_home" => $show_on_home);
+            $new_values = array(
+                "name"         => strip_tags($name),
+                "clean"        => $clean,
+                "show_on_home" => $show_on_home
+            );
 
-            SQL::current()->update("categorize",
-                                   array("id" => $this->id),
-                                   $new_values);
+            SQL::current()->update(
+                "categorize",
+                array("id" => $this->id),
+                $new_values
+            );
 
-            $category = new self(null,
-                                 array("read_from" => array_merge($new_values,
-                                                      array("id" => $this->id))));
+            $category = new self(
+                null,
+                array(
+                    "read_from" => array_merge(
+                        $new_values,
+                        array("id" => $this->id)
+                    )
+                )
+            );
 
             Trigger::current()->call("update_category", $category, $this);
-
             return $category;
         }
 
@@ -108,12 +126,18 @@
                 $trigger->call("delete_category", $category);
             }
 
-            $sql->delete("categorize",
-                         array("id" => $category_id));
+            $sql->delete(
+                "categorize",
+                array("id" => $category_id)
+            );
 
-            $sql->delete("post_attributes",
-                         array("name" => "category_id",
-                               "value" => $category_id));
+            $sql->delete(
+                "post_attributes",
+                array(
+                    "name" => "category_id",
+                    "value" => $category_id
+                )
+            );
         }
 
         /**
@@ -158,9 +182,15 @@
             $count = 1;
             $unique = substr($clean, 0, 128);
 
-            while (SQL::current()->count("categorize", array("clean" => $unique))) {
+            while (
+                SQL::current()->count(
+                    "categorize", array("clean" => $unique)
+                )
+            ) {
                 $count++;
-                $unique = substr($clean, 0, (127 - strlen($count)))."-".$count;
+                $unique = substr($clean, 0, (127 - strlen($count))).
+                          "-".
+                          $count;
             }
 
             return $unique;
@@ -171,11 +201,15 @@
          * Creates the database table.
          */
         static function install(): void {
-            SQL::current()->create("categorize",
-                                   array("id INTEGER PRIMARY KEY AUTO_INCREMENT",
-                                         "name  VARCHAR(128) NOT NULL",
-                                         "clean VARCHAR(128) NOT NULL UNIQUE",
-                                         "show_on_home BOOLEAN DEFAULT '1'"));
+            SQL::current()->create(
+                "categorize",
+                array(
+                    "id INTEGER PRIMARY KEY AUTO_INCREMENT",
+                    "name  VARCHAR(128) NOT NULL",
+                    "clean VARCHAR(128) NOT NULL UNIQUE",
+                    "show_on_home BOOLEAN DEFAULT '1'"
+                )
+            );
         }
 
         /**
@@ -186,6 +220,9 @@
             $sql = SQL::current();
 
             $sql->drop("categorize");
-            $sql->delete("post_attributes", array("name" => "category_id"));
+            $sql->delete(
+                "post_attributes",
+                array("name" => "category_id")
+            );
         }
     }

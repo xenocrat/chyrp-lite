@@ -32,8 +32,11 @@
 
         public function feed_item($post, $feed): void {
             if (!empty($post->category))
-                $feed->category($post->category->clean,
-                                url("category", MainController::current()), $post->category->name);
+                $feed->category(
+                    $post->category->clean,
+                    url("category", MainController::current()),
+                    $post->category->name
+                );
         }
 
         public function metaWeblog_getPost($struct, $post): array {
@@ -60,9 +63,11 @@
 
         public function metaWeblog_getCategories($struct): array {
             foreach (Category::find() as $category)
-                $struct[] = array("categoryId"   => $category->id,
-                                  "categoryName" => $category->name,
-                                  "htmlUrl"      => $category->url);
+                $struct[] = array(
+                    "categoryId"   => $category->id,
+                    "categoryName" => $category->name,
+                    "htmlUrl"      => $category->url
+                );
 
             return $struct;
         }
@@ -71,14 +76,18 @@
             if (empty($post->category_id))
                 return $ids;
 
-            $results = SQL::current()->select("post_attributes",
-                                              array("post_id"),
-                                              array("name" => "category_id",
-                                                    "value" => $post->category_id,
-                                                    "post_id !=" => $post->id),
-                                              array("post_id DESC"),
-                                              array(),
-                                              $limit)->fetchAll();
+            $results = SQL::current()->select(
+                "post_attributes",
+                array("post_id"),
+                array(
+                    "name" => "category_id",
+                    "value" => $post->category_id,
+                    "post_id !=" => $post->id
+                ),
+                array("post_id DESC"),
+                array(),
+                $limit
+            )->fetchAll();
 
             foreach ($results as $result)
                 $ids[] = $result["post_id"];
@@ -92,13 +101,19 @@
         }
 
         public function manage_posts_column_header(): void {
-            echo '<th class="post_category value">'.__("Category", "categorize").'</th>';
+            echo '<th class="post_category value">'.
+                 __("Category", "categorize").'</th>';
         }
 
         public function manage_posts_column($post): void {
-            echo (isset($post->category->name)) ?
-                '<td class="post_category value">'.fix($post->category->name).'</td>' :
-                '<td class="post_category value"></td>' ;
+            $td = '<td class="post_category value">';
+
+            if (isset($post->category->name))
+                $td.= fix($post->category->name);
+
+            $td.= '</td>';
+
+            echo $td;
         }
 
         public function post_options($fields, $post = null): array {
@@ -107,17 +122,21 @@
             $options[0]["selected"] = empty($post->category_id);
 
             foreach (Category::find() as $category) {
-                $selected = ($post) ? $post->category_id == $category->id : false ;
+                $name = oneof($category->name, __("[Untitled]"));
+                $selected = (isset($post) and ($post->category_id == $category->id));
+
                 $options[$category->id]["value"] = $category->id;
-                $options[$category->id]["name"] = oneof($category->name, __("[Untitled]"));
+                $options[$category->id]["name"] = $name;
                 $options[$category->id]["selected"] = $selected;
             }
 
-            $fields[] = array("attr" => "option[category_id]",
-                              "label" => __("Category", "categorize"),
-                              "help" => "categorizing_posts",
-                              "type" => "select",
-                              "options" => $options);
+            $fields[] = array(
+                "attr" => "option[category_id]",
+                "label" => __("Category", "categorize"),
+                "help" => "categorizing_posts",
+                "type" => "select",
+                "options" => $options
+            );
 
             return $fields;
         }
@@ -133,19 +152,24 @@
 
         private function get_category_post_count($category_id): int {
             if (!isset($this->caches["category_post_counts"])) {
-                $counts = SQL::current()->select("post_attributes",
-                                                 "COUNT(value) AS total, value AS category_id",
-                                                 array("name" => "category_id"),
-                                                 null,
-                                                 array(),
-                                                 null,
-                                                 null,
-                                                 "value")->fetchAll();
+                $counts = SQL::current()->select(
+                    "post_attributes",
+                    "COUNT(value) AS total, value AS category_id",
+                    array("name" => "category_id"),
+                    null,
+                    array(),
+                    null,
+                    null,
+                    "value"
+                )->fetchAll();
 
                 $this->caches["category_post_counts"] = array();
 
-                foreach ($counts as $count)
-                    $this->caches["category_post_counts"][$count["category_id"]] = (int) $count["total"];
+                foreach ($counts as $count) {
+                    $id = $count["category_id"];
+                    $total = (int) $count["total"];
+                    $this->caches["category_post_counts"][$id] = $total;
+                }
             }
 
             return fallback($this->caches["category_post_counts"][$category_id], 0);
@@ -161,36 +185,51 @@
         public function twig_context_main($context): array {
             $context["categorize"] = array();
 
-            foreach (Category::find() as $category)
+            foreach (Category::find() as $category) {
                 if ($category->show_on_home)
                     $context["categorize"][] = $category;
+            }
 
             return $context;
         }
 
         public function main_category($main): bool {
             if (!isset($_GET['name'])) {
-                $main->display(array("pages".DIR."category", "pages".DIR."index"),
-                    array("reason" => __("You did not specify a category.", "categorize")),
-                    __("Invalid Category", "categorize"));
+                $reason = __("You did not specify a category.", "categorize");
+
+                $main->display(
+                    array("pages".DIR."category","pages".DIR."index"),
+                    array("reason" => $reason),
+                    __("Invalid Category", "categorize")
+                );
 
                 return true;
             }
 
-            $category = new Category(array("clean" => $_GET['name']));
+            $category = new Category(
+                array("clean" => $_GET['name'])
+            );
 
             if ($category->no_results) {
-                $main->display(array("pages".DIR."category", "pages".DIR."index"),
-                    array("reason" => __("The category you specified was not found.", "categorize")),
-                    __("Invalid Category", "categorize"));
+                $reason = __("The category you specified was not found.", "categorize");
+
+                $main->display(
+                    array("pages".DIR."category","pages".DIR."index"),
+                    array("reason" => $reason),
+                    __("Invalid Category", "categorize")
+                );
 
                 return true;
             }
 
-            $results = SQL::current()->select("post_attributes",
-                                              array("post_id"),
-                                              array("name" => "category_id",
-                                                    "value" => $category->id))->fetchAll();
+            $results = SQL::current()->select(
+                "post_attributes",
+                array("post_id"),
+                array(
+                    "name" => "category_id",
+                    "value" => $category->id
+                )
+            )->fetchAll();
 
             $ids = array();
 
@@ -198,39 +237,60 @@
                 $ids[] = $result["post_id"];
 
             if (empty($ids)) {
-                $main->display(array("pages".DIR."category", "pages".DIR."index"),
-                    array("reason" => __("There are no posts in the category you specified.", "categorize")),
-                    __("Invalid Category", "categorize"));
+                $reason = __("There are no posts in the category you specified.", "categorize");
+
+                $main->display(
+                    array("pages".DIR."category", "pages".DIR."index"),
+                    array("reason" => $reason),
+                    __("Invalid Category", "categorize")
+                );
 
                 return true;
             }
 
             $posts = new Paginator(
-                Post::find(array("placeholders" => true,
-                                 "where" => array("id" => $ids))), $main->post_limit);
+                Post::find(
+                    array(
+                        "placeholders" => true,
+                        "where" => array("id" => $ids)
+                    )
+                ),
+                $main->post_limit
+            );
 
             if (empty($posts))
                 return false;
 
-            $main->display(array("pages".DIR."category", "pages".DIR."index"),
-                array("posts" => $posts, "category" => $category->name),
-                _f("Posts in category &#8220;%s&#8221;", fix($category->name), "categorize"));
+            $main->display(
+                array("pages".DIR."category", "pages".DIR."index"),
+                array(
+                    "posts" => $posts,
+                    "category" => $category->name
+                ),
+                _f("Posts in category &#8220;%s&#8221;", fix($category->name), "categorize")
+            );
 
             return true;
         }
 
         public function manage_nav($navs): array {
             if (Visitor::current()->group->can("manage_categorize"))
-                $navs["manage_category"] = array("title" => __("Categories", "categorize"),
-                                                 "selected" => array("new_category",
-                                                                     "delete_category",
-                                                                     "edit_category"));
+                $navs["manage_category"] = array(
+                    "title" => __("Categories", "categorize"),
+                    "selected" => array(
+                        "new_category",
+                        "delete_category",
+                        "edit_category"
+                    )
+                );
 
             return $navs;
         }
 
         public function admin_determine_action($action): ?string {
-            if ($action == "manage" and Visitor::current()->group->can("manage_categorize"))
+            $visitor = Visitor::current();
+
+            if ($action == "manage" and $visitor->group->can("manage_categorize"))
                 return "manage_category";
 
             return null;
@@ -238,125 +298,214 @@
 
         public function admin_manage_category($admin): void {
             if (!Visitor::current()->group->can("manage_categorize"))
-                show_403(__("Access Denied"),
-                         __("You do not have sufficient privileges to manage categories.", "categorize"));
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to manage categories.", "categorize")
+                );
 
             # Redirect searches to a clean URL or dirty GET depending on configuration.
             if (isset($_POST['query']))
-                redirect("manage_category/query/".str_ireplace("%2F", "", urlencode($_POST['query']))."/");
+                redirect(
+                    "manage_category/query/".
+                    str_ireplace("%2F", "", urlencode($_POST['query'])).
+                    "/"
+                );
 
             fallback($_GET['query'], "");
-            list($where, $params) = keywords($_GET['query'], "name LIKE :query", "categorize");
+            list($where, $params) = keywords(
+                $_GET['query'],
+                "name LIKE :query",
+                "categorize"
+            );
 
-            $admin->display("pages".DIR."manage_category",
-                            array("categorize" => Category::find(array("where" => $where,
-                                                                       "params" => $params))));
+            $categorize = Category::find(
+                array(
+                    "where" => $where,
+                    "params" => $params
+                )
+            );
+
+            $admin->display(
+                "pages".DIR."manage_category",
+                array("categorize" => $categorize)
+            );
         }
 
         public function admin_new_category($admin): void {
             if (!Visitor::current()->group->can("manage_categorize"))
-                show_403(__("Access Denied"),
-                         __("You do not have sufficient privileges to add categories.", "categorize"));
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to add categories.", "categorize")
+                );
 
             $admin->display("pages".DIR."new_category");
         }
 
         public function admin_add_category($admin)/*: never */ {
             if (!Visitor::current()->group->can("manage_categorize"))
-                show_403(__("Access Denied"),
-                         __("You do not have sufficient privileges to add categories.", "categorize"));
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to add categories.", "categorize")
+                );
 
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
-                show_403(__("Access Denied"), __("Invalid authentication token."));
+                show_403(
+                    __("Access Denied"),
+                    __("Invalid authentication token.")
+                );
 
             if (empty($_POST['name']))
-                error(__("No Name Specified", "categorize"),
-                      __("A name is required to add a category.", "categorize"), null, 400);
+                error(
+                    __("No Name Specified", "categorize"),
+                    __("A name is required to add a category.", "categorize"),
+                    null,
+                    400
+                );
 
             $clean = (!empty($_POST['clean'])) ? $_POST['clean'] : $_POST['name'] ;
             $clean = Category::check_clean(sanitize($clean, true, true));
 
-            Category::add($_POST['name'],
-                          $clean,
-                          !empty($_POST['show_on_home']));
+            Category::add(
+                $_POST['name'],
+                $clean,
+                !empty($_POST['show_on_home'])
+            );
 
-            Flash::notice(__("Category added.", "categorize"), "manage_category");
+            Flash::notice(
+                __("Category added.", "categorize"),
+                "manage_category"
+            );
         }
 
         public function admin_edit_category($admin): void {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"),
-                      __("An ID is required to edit a category.", "categorize"), null, 400);
+                error(
+                    __("No ID Specified"),
+                    __("An ID is required to edit a category.", "categorize"),
+                    null,
+                    400
+                );
 
             $category = new Category($_GET['id']);
 
             if ($category->no_results)
-                Flash::warning(__("Category not found.", "categorize"), "manage_category");
+                Flash::warning(
+                    __("Category not found.", "categorize"),
+                    "manage_category"
+                );
 
             if (!$category->editable())
-                show_403(__("Access Denied"),
-                         __("You do not have sufficient privileges to edit this category.", "categorize"));
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to edit this category.", "categorize")
+                );
 
-            $admin->display("pages".DIR."edit_category", array("category" => $category));
+            $admin->display(
+                "pages".DIR."edit_category",
+                array("category" => $category)
+            );
         }
 
         public function admin_update_category($admin)/*: never */ {
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
-                show_403(__("Access Denied"), __("Invalid authentication token."));
+                show_403(
+                    __("Access Denied"),
+                    __("Invalid authentication token.")
+                );
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"),
-                      __("An ID is required to update a category.", "categorize"), null, 400);
+                error(
+                    __("No ID Specified"),
+                    __("An ID is required to update a category.", "categorize"),
+                    null,
+                    400
+                );
 
             if (empty($_POST['name']))
-                error(__("No Name Specified", "categorize"),
-                      __("A name is required to update a category.", "categorize"), null, 400);
+                error(
+                    __("No Name Specified", "categorize"),
+                    __("A name is required to update a category.", "categorize"),
+                    null,
+                    400
+                );
 
             $category = new Category($_POST['id']);
 
             if ($category->no_results)
-                show_404(__("Not Found"), __("Category not found.", "categorize"));
+                show_404(
+                    __("Not Found"),
+                    __("Category not found.", "categorize")
+                );
 
             if (!$category->editable())
-                show_403(__("Access Denied"),
-                         __("You do not have sufficient privileges to edit this category.", "categorize"));
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to edit this category.", "categorize")
+                );
 
-            $clean = (!empty($_POST['clean'])) ? $_POST['clean'] : $_POST['name'] ;
+            $clean = (empty($_POST['clean'])) ?
+                $_POST['name'] :
+                $_POST['clean'] ;
 
-            $clean = ($clean != $category->clean) ?
-                Category::check_clean(sanitize($clean, true, true)) : $category->clean ;
+            $clean = ($clean == $category->clean) ?
+                $category->clean :
+                Category::check_clean(sanitize($clean, true, true)) ;
 
-            $category = $category->update($_POST['name'],
-                                          $clean,
-                                          !empty($_POST['show_on_home']));
+            $category = $category->update(
+                $_POST['name'],
+                $clean,
+                !empty($_POST['show_on_home'])
+            );
 
-            Flash::notice(__("Category updated.", "categorize"), "manage_category");
+            Flash::notice(
+                __("Category updated.", "categorize"),
+                "manage_category"
+            );
         }
 
         public function admin_delete_category($admin): void {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"),
-                      __("An ID is required to delete a category.", "categorize"), null, 400);
+                error(
+                    __("No ID Specified"),
+                    __("An ID is required to delete a category.", "categorize"),
+                    null,
+                    400
+                );
 
             $category = new Category($_GET['id']);
 
             if ($category->no_results)
-                Flash::warning(__("Category not found.", "categorize"), "manage_category");
+                Flash::warning(
+                    __("Category not found.", "categorize"),
+                    "manage_category"
+                );
 
             if (!$category->deletable())
-                show_403(__("Access Denied"),
-                         __("You do not have sufficient privileges to delete this category.", "categorize"));
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to delete this category.", "categorize")
+                );
 
-            $admin->display("pages".DIR."delete_category", array("category" => $category));
+            $admin->display(
+                "pages".DIR."delete_category",
+                array("category" => $category)
+            );
         }
 
         public function admin_destroy_category()/*: never */ {
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
-                show_403(__("Access Denied"), __("Invalid authentication token."));
+                show_403(
+                    __("Access Denied"),
+                    __("Invalid authentication token.")
+                );
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"),
-                      __("An ID is required to delete a category.", "categorize"), null, 400);
+                error(
+                    __("No ID Specified"),
+                    __("An ID is required to delete a category.", "categorize"),
+                    null,
+                    400
+                );
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
                 redirect("manage_category");
@@ -364,13 +513,21 @@
             $category = new Category($_POST['id']);
 
             if ($category->no_results)
-                show_404(__("Not Found"), __("Category not found.", "categorize"));
+                show_404(
+                    __("Not Found"),
+                    __("Category not found.", "categorize")
+                );
 
             if (!$category->deletable())
-                show_403(__("Access Denied"),
-                         __("You do not have sufficient privileges to delete this category.", "categorize"));
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to delete this category.", "categorize")
+                );
 
             Category::delete($category->id);
-            Flash::notice(__("Category deleted.", "categorize"), "manage_category");
+            Flash::notice(
+                __("Category deleted.", "categorize"),
+                "manage_category"
+            );
         }
     }

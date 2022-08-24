@@ -14,8 +14,10 @@
         }
 
         static function __install(): void {
-            Config::current()->set("module_cacher",
-                                   array("cache_lastmod" => time()));
+            Config::current()->set(
+                "module_cacher",
+                array("cache_lastmod" => time())
+            );
         }
 
         static function __uninstall(): void {

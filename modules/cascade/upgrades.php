@@ -12,13 +12,21 @@
         $config = Config::current();
 
         if (isset($config->ajax_scroll_auto)) {
-            $set = $config->set("module_cascade", array("ajax_scroll_auto" => $config->ajax_scroll_auto));
+            $set = $config->set(
+                "module_cascade",
+                array(
+                    "ajax_scroll_auto" => $config->ajax_scroll_auto
+                )
+            );
 
             if ($set !== false)
                 $set = $config->remove("ajax_scroll_auto");
 
             if ($set === false)
-                error(__("Error"), __("Could not write the configuration file."));
+                error(
+                    __("Error"),
+                    __("Could not write the configuration file.")
+                );
         }
     }
 

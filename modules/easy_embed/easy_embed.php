@@ -19,7 +19,9 @@
             );
 
             foreach ($urls as $view => &$embed)
-                $embed = '<iframe class="video_embed" src="'.fix($embed, true).'" allowfullscreen></iframe>';
+                $embed = '<iframe class="video_embed" src="'.
+                         fix($embed, true).
+                         '" allowfullscreen></iframe>';
 
             return preg_replace(array_keys($urls), array_values($urls), $text);
         }

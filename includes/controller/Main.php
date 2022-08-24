@@ -335,7 +335,11 @@
 
             # Redirect searches to a clean URL or dirty GET depending on configuration.
             if (isset($_POST['query']))
-                redirect("search/".str_ireplace("%2F", "", urlencode($_POST['query']))."/");
+                redirect(
+                    "search/".
+                    str_ireplace("%2F", "", urlencode($_POST['query'])).
+                    "/"
+                );
 
             if (!isset($_GET['query']) or $_GET['query'] == "")
                 Flash::warning(

@@ -470,7 +470,11 @@
 
             # Redirect searches to a clean URL or dirty GET depending on configuration.
             if (isset($_POST['query']))
-                redirect("manage_posts/query/".str_ireplace("%2F", "", urlencode($_POST['query']))."/");
+                redirect(
+                    "manage_posts/query/".
+                    str_ireplace("%2F", "", urlencode($_POST['query'])).
+                    "/"
+                );
 
             fallback($_GET['query'], "");
             list($where, $params) = keywords(
@@ -881,7 +885,11 @@
 
             # Redirect searches to a clean URL or dirty GET depending on configuration.
             if (isset($_POST['query']))
-                redirect("manage_pages/query/".str_ireplace("%2F", "", urlencode($_POST['query']))."/");
+                redirect(
+                    "manage_pages/query/".
+                    str_ireplace("%2F", "", urlencode($_POST['query'])).
+                    "/"
+                );
 
             fallback($_GET['query'], "");
             list($where, $params) = keywords(
@@ -1369,7 +1377,11 @@
 
             # Redirect searches to a clean URL or dirty GET depending on configuration.
             if (isset($_POST['query']))
-                redirect("manage_users/query/".str_ireplace("%2F", "", urlencode($_POST['query']))."/");
+                redirect(
+                    "manage_users/query/".
+                    str_ireplace("%2F", "", urlencode($_POST['query'])).
+                    "/"
+                );
 
             fallback($_GET['query'], "");
             list($where, $params) = keywords(
@@ -1768,7 +1780,11 @@
 
             # Redirect searches to a clean URL or dirty GET depending on configuration.
             if (isset($_POST['search']))
-                redirect("manage_groups/search/".str_ireplace("%2F", "", urlencode($_POST['search']))."/");
+                redirect(
+                    "manage_groups/search/".
+                    str_ireplace("%2F", "", urlencode($_POST['search'])).
+                    "/"
+                );
 
             if (isset($_GET['search']) and $_GET['search'] != "") {
                 $user = new User(
@@ -1908,7 +1924,11 @@
 
             # Redirect searches to a clean URL or dirty GET depending on configuration.
             if (isset($_POST['search']))
-                redirect("manage_uploads/search/".str_ireplace("%2F", "", urlencode($_POST['search']))."/");
+                redirect(
+                    "manage_uploads/search/".
+                    str_ireplace("%2F", "", urlencode($_POST['search'])).
+                    "/"
+                );
 
             if (isset($_GET['search']))
                 $uploads = new Paginator(uploaded_search($_GET['search']));
@@ -1984,44 +2004,80 @@
                     $posts = array();
                 }
 
-                $posts_atom = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
-                $posts_atom.= '<feed xmlns="http://www.w3.org/2005/Atom" xmlns:chyrp="http://chyrp.net/export/1.0/">'."\n";
-                $posts_atom.= '<title>'.fix($config->name).' | Posts</title>'."\n";
-                $posts_atom.= '<subtitle>'.fix($config->description).'</subtitle>'."\n";
-                $posts_atom.= '<id>'.fix($config->url).'</id>'."\n";
-                $posts_atom.= '<updated>'.date(DATE_ATOM).'</updated>'."\n";
-                $posts_atom.= '<link href="'.fix($config->url, true).'" rel="alternate" type="text/html" />'."\n";
-                $posts_atom.= '<generator uri="http://chyrp.net/" version="'.CHYRP_VERSION.'">Chyrp</generator>'."\n";
+                $posts_atom = '<?xml version="1.0" encoding="UTF-8"?>'."\n".
+                    '<feed xmlns="http://www.w3.org/2005/Atom"'.
+                    ' xmlns:chyrp="http://chyrp.net/export/1.0/">'."\n".
+                    '<title>'.
+                    fix($config->name).' | Posts</title>'."\n".
+                    '<subtitle>'.
+                    fix($config->description).
+                    '</subtitle>'."\n".
+                    '<id>'.
+                    fix($config->url).
+                    '</id>'."\n".
+                    '<updated>'.
+                    date(DATE_ATOM).
+                    '</updated>'."\n".
+                    '<link href="'.
+                    fix($config->url, true).
+                    '" rel="alternate" type="text/html" />'."\n".
+                    '<generator uri="http://chyrp.net/" version="'.
+                    CHYRP_VERSION.
+                    '">Chyrp</generator>'."\n";
 
                 foreach ($posts as $post) {
                     $updated = ($post->updated) ? $post->updated_at : $post->created_at ;
                     $title = oneof($post->title(), ucfirst($post->feather));
 
-                    $posts_atom.= '<entry xml:base="'.$post->url().'">'."\n";
-                    $posts_atom.= '<title type="html">'.fix($title, false, true).'</title>'."\n";
-                    $posts_atom.= '<id>'.fix(url("id/post/".$post->id, MainController::current())).'</id>'."\n";
-                    $posts_atom.= '<updated>'.when(DATE_ATOM, $updated).'</updated>'."\n";
-                    $posts_atom.= '<published>'.when(DATE_ATOM, $post->created_at).'</published>'."\n";
-                    $posts_atom.= '<author chyrp:user_id="'.$post->user_id.'">'."\n";
-                    $posts_atom.= '<name>'.fix(oneof($post->user->full_name, $post->user->login)).'</name>'."\n";
+                    $posts_atom.= '<entry xml:base="'.$post->url().'">'."\n".
+                        '<title type="html">'.
+                        fix($title, false, true).
+                        '</title>'."\n".
+                        '<id>'.
+                        fix(url("id/post/".$post->id, MainController::current())).
+                        '</id>'."\n".
+                        '<updated>'.
+                        when(DATE_ATOM, $updated).
+                        '</updated>'."\n".
+                        '<published>'.
+                        when(DATE_ATOM, $post->created_at).
+                        '</published>'."\n".
+                        '<author chyrp:user_id="'.$post->user_id.'">'."\n".
+                        '<name>'.
+                        fix(oneof($post->user->full_name, $post->user->login)).
+                        '</name>'."\n";
 
                     if (!empty($post->user->website))
                         $posts_atom.= '<uri>'.fix($post->user->website).'</uri>'."\n";
 
-                    $posts_atom.= '<chyrp:login>'.fix($post->user->login, false, true).'</chyrp:login>'."\n";
-                    $posts_atom.= '</author>'."\n";
-                    $posts_atom.= '<content type="application/xml">'."\n";
+                    $posts_atom.= '<chyrp:login>'.
+                        fix($post->user->login, false, true).
+                        '</chyrp:login>'."\n".
+                        '</author>'."\n".
+                        '<content type="application/xml">'."\n";
 
                     foreach ($post->attributes as $key => $val)
-                        $posts_atom.= '<'.$key.'>'.fix($val, false, true).'</'.$key.'>'."\n";
+                        $posts_atom.= '<'.$key.'>'.
+                                      fix($val, false, true).
+                                      '</'.$key.'>'."\n";
 
                     $posts_atom.= '</content>'."\n";
 
-                    foreach (array("feather", "clean", "url", "pinned", "status") as $attr)
-                        $posts_atom.= '<chyrp:'.$attr.'>'.fix($post->$attr, false, true).'</chyrp:'.$attr.'>'."\n";
+                    foreach (
+                        array(
+                            "feather",
+                            "clean",
+                            "url",
+                            "pinned",
+                            "status"
+                        ) as $attr
+                    ) {
+                        $posts_atom.= '<chyrp:'.$attr.'>'.
+                                      fix($post->$attr, false, true).
+                                      '</chyrp:'.$attr.'>'."\n";
+                    }
 
                     $trigger->filter($posts_atom, "posts_export", $post);
-
                     $posts_atom.= '</entry>'."\n";
                 }
 
@@ -2046,39 +2102,79 @@
                     array("filter" => false)
                 );
 
-                $pages_atom = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
-                $pages_atom.= '<feed xmlns="http://www.w3.org/2005/Atom" xmlns:chyrp="http://chyrp.net/export/1.0/">'."\n";
-                $pages_atom.= '<title>'.fix($config->name).' | Pages</title>'."\n";
-                $pages_atom.= '<subtitle>'.fix($config->description).'</subtitle>'."\n";
-                $pages_atom.= '<id>'.fix($config->url).'</id>'."\n";
-                $pages_atom.= '<updated>'.date(DATE_ATOM).'</updated>'."\n";
-                $pages_atom.= '<link href="'.fix($config->url, true).'" rel="alternate" type="text/html" />'."\n";
-                $pages_atom.= '<generator uri="http://chyrp.net/" version="'.CHYRP_VERSION.'">Chyrp</generator>'."\n";
+                $pages_atom = '<?xml version="1.0" encoding="UTF-8"?>'."\n".
+                    '<feed xmlns="http://www.w3.org/2005/Atom"'.
+                    ' xmlns:chyrp="http://chyrp.net/export/1.0/">'."\n".
+                    '<title>'.
+                    fix($title, false, true).
+                    '</title>'."\n".
+                    '<subtitle>'.
+                    fix($config->description).
+                    '</subtitle>'."\n".
+                    '<id>'.
+                    fix($config->url).
+                    '</id>'."\n".
+                    '<updated>'.
+                    date(DATE_ATOM).
+                    '</updated>'."\n".
+                    '<link href="'.
+                    fix($config->url, true).
+                    '" rel="alternate" type="text/html" />'."\n".
+                    '<generator uri="http://chyrp.net/" version="'.
+                    CHYRP_VERSION.
+                    '">Chyrp</generator>'."\n";
 
                 foreach ($pages as $page) {
                     $updated = ($page->updated) ? $page->updated_at : $page->created_at ;
 
-                    $pages_atom.= '<entry xml:base="'.$page->url().'" chyrp:parent_id="'.$page->parent_id.'">'."\n";
-                    $pages_atom.= '<title type="html">'.fix($page->title, false, true).'</title>'."\n";
-                    $pages_atom.= '<id>'.fix(url("id/page/".$page->id, MainController::current())).'</id>'."\n";
-                    $pages_atom.= '<updated>'.when(DATE_ATOM, $updated).'</updated>'."\n";
-                    $pages_atom.= '<published>'.when(DATE_ATOM, $page->created_at).'</published>'."\n";
-                    $pages_atom.= '<author chyrp:user_id="'.fix($page->user_id).'">'."\n";
-                    $pages_atom.= '<name>'.fix(oneof($page->user->full_name, $page->user->login)).'</name>'."\n";
+                    $pages_atom.= '<entry xml:base="'.$page->url().
+                        '" chyrp:parent_id="'.$page->parent_id.'">'."\n".
+                        '<title type="html">'.
+                        fix($page->title, false, true).
+                        '</title>'."\n".
+                        '<id>'.
+                        fix(url("id/page/".$page->id, MainController::current())).
+                        '</id>'."\n".
+                        '<updated>'.
+                        when(DATE_ATOM, $updated).
+                        '</updated>'."\n".
+                        '<published>'.
+                        when(DATE_ATOM, $page->created_at).
+                        '</published>'."\n".
+                        '<author chyrp:user_id="'.fix($page->user_id).'">'."\n".
+                        '<name>'.
+                        fix(oneof($page->user->full_name, $page->user->login)).
+                        '</name>'."\n";
 
                     if (!empty($page->user->website))
-                        $pages_atom.= '<uri>'.fix($page->user->website).'</uri>'."\n";
+                        $pages_atom.= '<uri>'.
+                                      fix($page->user->website).
+                                      '</uri>'."\n";
 
-                    $pages_atom.= '<chyrp:login>'.fix($page->user->login, false, true).'</chyrp:login>'."\n";
-                    $pages_atom.= '</author>'."\n";
-                    $pages_atom.= '<content type="html">'.fix($page->body, false, true).'</content>'."\n";
+                    $pages_atom.= '<chyrp:login>'.
+                                  fix($page->user->login, false, true).
+                                  '</chyrp:login>'."\n".
+                                  '</author>'."\n".
+                                  '<content type="html">'.
+                                  fix($page->body, false, true).
+                                  '</content>'."\n";
 
-                    foreach (array("public", "show_in_list", "list_order", "clean", "url") as $attr)
-                        $pages_atom.= '<chyrp:'.$attr.'>'.fix($page->$attr, false, true).'</chyrp:'.$attr.'>'."\n";
+                    foreach (
+                        array(
+                            "public",
+                            "show_in_list",
+                            "list_order",
+                            "clean",
+                            "url"
+                        ) as $attr
+                    ) {
+                        $pages_atom.= '<chyrp:'.$attr.'>'.
+                                      fix($page->$attr, false, true).
+                                      '</chyrp:'.$attr.'>'."\n";
+                    }
 
 
                     $trigger->filter($pages_atom, "pages_export", $page);
-
                     $pages_atom.= '</entry>'."\n";
                 }
 

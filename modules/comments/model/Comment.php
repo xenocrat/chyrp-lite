@@ -27,7 +27,10 @@
          *     <Model::grab>
          */
         public function __construct($comment_id, $options = array()) {
-            $skip_where = (ADMIN or (isset($options["skip_where"]) and $options["skip_where"]));
+            $skip_where = (
+                ADMIN or
+                (isset($options["skip_where"]) and $options["skip_where"])
+            );
 
             if (!$skip_where) {
                 $options["where"]["status not"] = self::STATUS_SPAM;
@@ -53,8 +56,14 @@
          * See Also:
          *     <Model::search>
          */
-        static function find($options = array(), $options_for_object = array()): array {
-            $skip_where = (ADMIN or (isset($options["skip_where"]) and $options["skip_where"]));
+        static function find(
+            $options = array(),
+            $options_for_object = array()
+        ): array {
+            $skip_where = (
+                ADMIN or
+                (isset($options["skip_where"]) and $options["skip_where"])
+            );
 
             if (!$skip_where) {
                 $options["where"]["status not"] = self::STATUS_SPAM;
@@ -79,26 +88,32 @@
          *     $notify - Send correspondence if additional comments are added?
          *     $status - A string describing the comment status (optional).
          */
-        static function create($body,
-                               $author,
-                               $author_url,
-                               $author_email,
-                               $post,
-                               $parent,
-                               $notify,
-                               $status = null): self {
+        static function create(
+            $body,
+            $author,
+            $author_url,
+            $author_email,
+            $post,
+            $parent,
+            $notify,
+            $status = null
+        ): self {
             $config = Config::current();
             $visitor = Visitor::current();
             $trigger = Trigger::current();
-            $values = array("body"         => $body,
-                            "author"       => $author,
-                            "author_url"   => $author_url,
-                            "author_email" => $author_email);
+            $values = array(
+                "body"         => $body,
+                "author"       => $author,
+                "author_url"   => $author_url,
+                "author_email" => $author_email
+            );
 
             fallback($_SESSION['comments'], array());
-            fallback($status, ($post->user_id == $visitor->id) ?
-                                    self::STATUS_APPROVED :
-                                    $config->module_comments["default_comment_status"]);
+            fallback($status,
+                ($post->user_id == $visitor->id) ?
+                    self::STATUS_APPROVED :
+                    $config->module_comments["default_comment_status"]
+            );
 
             $spam = ($status == self::STATUS_SPAM);
             $trigger->filter($spam, "comment_is_spam", $values);
@@ -109,17 +124,19 @@
             if (!logged_in() or !$config->email_correspondence)
                 $notify = false;
 
-            $comment = self::add($body,
-                                 $author,
-                                 $author_url,
-                                 $author_email,
-                                 crc24($_SERVER['REMOTE_ADDR']),
-                                 isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "",
-                                 $status,
-                                 $post->id,
-                                 $visitor->id,
-                                 $parent,
-                                 $notify);
+            $comment = self::add(
+                $body,
+                $author,
+                $author_url,
+                $author_email,
+                crc24($_SERVER['REMOTE_ADDR']),
+                isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "",
+                $status,
+                $post->id,
+                $visitor->id,
+                $parent,
+                $notify
+            );
 
             $_SESSION['comments'][] = $comment->id;
             return $comment;
@@ -150,52 +167,69 @@
          * See Also:
          *     <update>
          */
-        static function add($body,
-                            $author,
-                            $author_url,
-                            $author_email,
-                            $ip,
-                            $agent,
-                            $status,
-                            $post_id,
-                            $user_id,
-                            $parent = null,
-                            $notify = null,
-                            $created_at = null,
-                            $updated_at = null): self {
+        static function add(
+            $body,
+            $author,
+            $author_url,
+            $author_email,
+            $ip,
+            $agent,
+            $status,
+            $post_id,
+            $user_id,
+            $parent = null,
+            $notify = null,
+            $created_at = null,
+            $updated_at = null
+        ): self {
             $sql = SQL::current();
             $config = Config::current();
 
-            $sql->insert("comments",
-                         array("body"         => $body,
-                               "author"       => strip_tags($author),
-                               "author_url"   => strip_tags($author_url),
-                               "author_email" => strip_tags($author_email),
-                               "author_ip"    => $ip,
-                               "author_agent" => $agent,
-                               "status"       => $status,
-                               "post_id"      => $post_id,
-                               "user_id"      => $user_id,
-                               "parent_id"    => fallback($parent, 0),
-                               "notify"       => fallback($notify, false),
-                               "created_at"   => fallback($created_at, datetime()),
-                               "updated_at"   => fallback($updated_at, "0001-01-01 00:00:00")));
+            $sql->insert(
+                "comments",
+                array(
+                    "body"         => $body,
+                    "author"       => strip_tags($author),
+                    "author_url"   => strip_tags($author_url),
+                    "author_email" => strip_tags($author_email),
+                    "author_ip"    => $ip,
+                    "author_agent" => $agent,
+                    "status"       => $status,
+                    "post_id"      => $post_id,
+                    "user_id"      => $user_id,
+                    "parent_id"    => fallback($parent, 0),
+                    "notify"       => fallback($notify, false),
+                    "created_at"   => fallback($created_at, datetime()),
+                    "updated_at"   => fallback($updated_at, "0001-01-01 00:00:00")
+                )
+            );
 
-            $comment = new self($sql->latest("comments"), array("skip_where" => true));
+            $comment = new self(
+                $sql->latest("comments"),
+                array("skip_where" => true)
+            );
 
             if ($comment->status == self::STATUS_APPROVED) {
                 $done = array();
-                $list = self::find(array("skip_where" => true,
-                                         "where"  => array("post_id"    => $comment->post_id,
-                                                           "user_id !=" => $comment->user_id,
-                                                           "status"     => self::STATUS_APPROVED,
-                                                           "notify"     => true)));
+                $list = self::find(
+                    array(
+                        "skip_where" => true,
+                        "where"  => array(
+                            "post_id"    => $comment->post_id,
+                            "user_id !=" => $comment->user_id,
+                            "status"     => self::STATUS_APPROVED,
+                            "notify"     => true
+                        )
+                    )
+                );
 
                 foreach ($list as $earlier) {
                     if (in_array($earlier->author_email, $done))
                         continue;
 
-                    Modules::$instances["comments"]::email_new_comment($comment, $earlier);
+                    Modules::$instances["comments"]::email_new_comment(
+                        $comment, $earlier
+                    );
                     $done[] = $earlier->author_email;
                 }
             }
@@ -222,44 +256,57 @@
          * Returns:
          *     The updated <Comment>.
          */
-        public function update($body,
-                               $author,
-                               $author_url,
-                               $author_email,
-                               $status = null,
-                               $notify = null,
-                               $created_at = null,
-                               $updated_at = null): self|false {
+        public function update(
+            $body,
+            $author,
+            $author_url,
+            $author_email,
+            $status = null,
+            $notify = null,
+            $created_at = null,
+            $updated_at = null
+        ): self|false {
             if ($this->no_results)
                 return false;
 
             if ($this->status == self::STATUS_PINGBACK)
                 $status = $this->status;
 
-            $new_values = array("body"         => $body,
-                                "author"       => strip_tags($author),
-                                "author_url"   => strip_tags($author_url),
-                                "author_email" => strip_tags($author_email),
-                                "status"       => fallback($status, $this->status),
-                                "notify"       => fallback($notify, $this->notify),
-                                "created_at"   => fallback($created_at, $this->created_at),
-                                "updated_at"   => fallback($updated_at, datetime()));
+            $new_values = array(
+                "body"         => $body,
+                "author"       => strip_tags($author),
+                "author_url"   => strip_tags($author_url),
+                "author_email" => strip_tags($author_email),
+                "status"       => fallback($status, $this->status),
+                "notify"       => fallback($notify, $this->notify),
+                "created_at"   => fallback($created_at, $this->created_at),
+                "updated_at"   => fallback($updated_at, datetime())
+            );
 
-            SQL::current()->update("comments",
-                                   array("id" => $this->id),
-                                   $new_values);
+            SQL::current()->update(
+                "comments",
+                array("id" => $this->id),
+                $new_values
+            );
 
-            $comment = new self(null,
-                                array("read_from" => array_merge($new_values,
-                                                     array("id"           => $this->id,
-                                                           "author_ip"    => $this->author_ip,
-                                                           "author_agent" => $this->author_agent,
-                                                           "post_id"      => $this->post_id,
-                                                           "user_id"      => $this->user_id,
-                                                           "parent_id"    => $this->parent_id))));
+            $comment = new self(
+                null,
+                array(
+                    "read_from" => array_merge(
+                        $new_values,
+                        array(
+                            "id"           => $this->id,
+                            "author_ip"    => $this->author_ip,
+                            "author_agent" => $this->author_agent,
+                            "post_id"      => $this->post_id,
+                            "user_id"      => $this->user_id,
+                            "parent_id"    => $this->parent_id
+                        )
+                    )
+                )
+            );
 
             Trigger::current()->call("update_comment", $comment, $this);
-
             return $comment;
         }
 
@@ -271,7 +318,11 @@
          *     <Model::destroy>
          */
         static function delete($comment_id): void {
-            parent::destroy(get_class(), $comment_id, array("skip_where" => true));
+            parent::destroy(
+                get_class(),
+                $comment_id,
+                array("skip_where" => true)
+            );
         }
 
         /**
@@ -283,8 +334,14 @@
                 return false;
 
             fallback($user, Visitor::current());
-            return ($user->group->can("edit_comment") or
-                    (logged_in() and $user->group->can("edit_own_comment") and $user->id == $this->user_id));
+            return (
+                $user->group->can("edit_comment") or
+                (
+                    logged_in() and
+                    $user->group->can("edit_own_comment") and
+                    $user->id == $this->user_id
+                )
+            );
         }
 
         /**
@@ -296,8 +353,14 @@
                 return false;
 
             fallback($user, Visitor::current());
-            return ($user->group->can("delete_comment") or
-                    (logged_in() and $user->group->can("delete_own_comment") and $user->id == $this->user_id));
+            return (
+                $user->group->can("delete_comment") or
+                (
+                    logged_in() and
+                    $user->group->can("delete_own_comment") and
+                    $user->id == $this->user_id
+                )
+            );
         }
 
         /**
@@ -312,8 +375,13 @@
                 return true;
 
             # Can they edit their own comments, and do they have any?
-            if ($visitor->group->can("edit_own_comment") and
-                SQL::current()->count("comments", array("user_id" => $visitor->id)))
+            if (
+                $visitor->group->can("edit_own_comment") and
+                SQL::current()->count(
+                    "comments",
+                    array("user_id" => $visitor->id)
+                )
+            )
                 return true;
 
             return false;
@@ -331,8 +399,13 @@
                 return true;
 
             # Can they delete their own comments, and do they have any?
-            if ($visitor->group->can("delete_own_comment") and
-                SQL::current()->count("comments", array("user_id" => $visitor->id)))
+            if (
+                $visitor->group->can("delete_own_comment") and
+                SQL::current()->count(
+                    "comments",
+                    array("user_id" => $visitor->id)
+                )
+            )
                 return true;
 
             return false;
@@ -349,10 +422,20 @@
                 return false;
 
             # Assume allowed comments by default.
-            return empty($post->comment_status) or
-                       !($post->comment_status == self::OPTION_CLOSED or
-                        ($post->comment_status == self::OPTION_REG_ONLY and !logged_in()) or
-                        ($post->comment_status == self::OPTION_PRIVATE and !$visitor->group->can("add_comment_private")));
+            return (
+                empty($post->comment_status) or
+                !(
+                    $post->comment_status == self::OPTION_CLOSED or
+                    (
+                        $post->comment_status == self::OPTION_REG_ONLY and
+                        !logged_in()
+                    ) or
+                    (
+                        $post->comment_status == self::OPTION_PRIVATE and
+                        !$visitor->group->can("add_comment_private")
+                    )
+                )
+            );
         }
 
         /**
@@ -364,10 +447,18 @@
             $id_list = "(0)";
 
             if (!logged_in() and !empty($_SESSION['comments']))
-                $id_list = QueryBuilder::build_list(SQL::current(), $_SESSION['comments']);
+                $id_list = QueryBuilder::build_list(
+                    SQL::current(),
+                    $_SESSION['comments']
+                );
 
-            return "status != '".self::STATUS_DENIED.
-                   "' OR ((user_id != 0 AND user_id = ".$user_id.") OR (id IN ".$id_list."))";
+            return "status != '".
+                   self::STATUS_DENIED.
+                   "' OR ((user_id != 0 AND user_id = ".
+                   $user_id.
+                   ") OR (id IN ".
+                   $id_list.
+                   "))";
         }
 
         /**
@@ -378,7 +469,9 @@
             if ($this->no_results)
                 return false;
 
-            return url("comment/".$this->id, MainController::current());
+            return url(
+                "comment/".$this->id, MainController::current()
+            );
         }
 
         /**
@@ -393,7 +486,11 @@
                 return __("Anon", "comments");
 
             if (is_url($this->author_url))
-                return '<a href="'.fix($this->author_url, true).'">'.$this->author.'</a>';
+                return '<a href="'.
+                       fix($this->author_url, true).
+                       '">'.
+                       $this->author.
+                       '</a>';
             else
                 return $this->author;
         }
@@ -415,9 +512,15 @@
                 $this->user->group :
                 new Group($config->guest_group) ;
 
-            if ($this->status != "pingback" and !$group->can("code_in_comments")) {
+            if (
+                $this->status != "pingback" and
+                !$group->can("code_in_comments")
+            ) {
                 $allowed = $config->module_comments["allowed_comment_html"];
-                $this->body = strip_tags($this->body, "<".implode("><", $allowed).">");
+                $this->body = strip_tags(
+                    $this->body,
+                    "<".implode("><", $allowed).">"
+                );
             }
 
             $this->body = sanitize_html($this->body);
@@ -428,21 +531,25 @@
          * Creates the database table.
          */
         static function install(): void {
-            SQL::current()->create("comments",
-                                   array("id INTEGER PRIMARY KEY AUTO_INCREMENT",
-                                         "body LONGTEXT",
-                                         "author VARCHAR(250) DEFAULT ''",
-                                         "author_url VARCHAR(2048) DEFAULT ''",
-                                         "author_email VARCHAR(128) DEFAULT ''",
-                                         "author_ip INTEGER DEFAULT 0",
-                                         "author_agent VARCHAR(255) DEFAULT ''",
-                                         "status VARCHAR(32) default '".self::STATUS_DENIED."'",
-                                         "post_id INTEGER DEFAULT 0",
-                                         "user_id INTEGER DEFAULT 0",
-                                         "parent_id INTEGER DEFAULT 0",
-                                         "notify BOOLEAN DEFAULT FALSE",
-                                         "created_at DATETIME DEFAULT NULL",
-                                         "updated_at DATETIME DEFAULT NULL"));
+            SQL::current()->create(
+                "comments",
+                array(
+                    "id INTEGER PRIMARY KEY AUTO_INCREMENT",
+                    "body LONGTEXT",
+                    "author VARCHAR(250) DEFAULT ''",
+                    "author_url VARCHAR(2048) DEFAULT ''",
+                    "author_email VARCHAR(128) DEFAULT ''",
+                    "author_ip INTEGER DEFAULT 0",
+                    "author_agent VARCHAR(255) DEFAULT ''",
+                    "status VARCHAR(32) default '".self::STATUS_DENIED."'",
+                    "post_id INTEGER DEFAULT 0",
+                    "user_id INTEGER DEFAULT 0",
+                    "parent_id INTEGER DEFAULT 0",
+                    "notify BOOLEAN DEFAULT FALSE",
+                    "created_at DATETIME DEFAULT NULL",
+                    "updated_at DATETIME DEFAULT NULL"
+                )
+            );
         }
 
         /**
@@ -453,6 +560,9 @@
             $sql = SQL::current();
 
             $sql->drop("comments");
-            $sql->delete("post_attributes", array("name" => "comment_status"));
+            $sql->delete(
+                "post_attributes",
+                array("name" => "comment_status")
+            );
         }
     }
