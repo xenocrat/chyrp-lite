@@ -156,12 +156,13 @@
             $has_status = false;
             $skip_where = (isset($options["skip_where"]) and $options["skip_where"]);
 
-            foreach ($options["where"] as $key => $val)
+            foreach ($options["where"] as $key => $val) {
                 if (
                     (is_int($key) and substr_count($val, "status")) or
                     $key === "status"
                 )
                     $has_status = true;
+            }
 
             # Construct SQL query "chunks" for enabled feathers and user privileges.
             if (!XML_RPC and !$skip_where) {
@@ -677,7 +678,7 @@
                 );
 
             $login = (strpos($config->post_url, "(author)") !== false) ?
-                $this->user->login : null ;
+                $this->user->login : "" ;
 
             $vals = array(
                 when("Y", $this->created_at),
