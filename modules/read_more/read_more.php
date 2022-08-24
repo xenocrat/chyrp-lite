@@ -52,7 +52,7 @@
 
             $settings = Config::current()->module_read_more;
 
-            $more = oneof(trim(fallback($matches[1])),
+            $more = oneof(trim(fallback($matches[1], "")),
                           $settings["default_text"],
                           __("&hellip;more", "read_more"));
 
