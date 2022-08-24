@@ -9,7 +9,6 @@
                     "optional" => true
                 )
             );
-
             $this->setField(
                 array(
                     "attr" => "source",
@@ -17,7 +16,6 @@
                     "label" => __("URL", "link")
                 )
             );
-
             $this->setField(
                 array(
                     "attr" => "description",
@@ -27,7 +25,6 @@
                     "preview" => true
                 )
             );
-
             $this->setFilter(
                 "name",
                 array("markup_post_title", "markup_title")
@@ -36,7 +33,6 @@
                 "description",
                 array("markup_post_text", "markup_text")
             );
-
             $this->respondTo("feed_item", "link_related");
             $this->respondTo("metaWeblog_getPost", "metaWeblog_getValues");
             $this->respondTo("metaWeblog_before_editPost", "metaWeblog_setValues");

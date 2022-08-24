@@ -9,7 +9,6 @@
                     "optional" => true
                 )
             );
-
             $this->setField(
                 array(
                     "attr" => "body",
@@ -18,7 +17,6 @@
                     "preview" => true
                 )
             );
-
             $this->setFilter(
                 "title",
                 array("markup_post_title", "markup_title")
@@ -27,7 +25,6 @@
                 "body",
                 array("markup_post_text", "markup_text")
             );
-
             $this->respondTo("metaWeblog_getPost", "metaWeblog_getValues");
             $this->respondTo("metaWeblog_before_editPost", "metaWeblog_setValues");
         }

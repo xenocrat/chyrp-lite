@@ -9,7 +9,6 @@
                     "preview" => true
                 )
             );
-
             $this->setField(
                 array(
                     "attr" => "source",
@@ -19,7 +18,6 @@
                     "preview" => true
                 )
             );
-
             $this->setFilter(
                 "quote",
                 array("markup_post_text", "markup_text")
@@ -28,7 +26,6 @@
                 "source",
                 array("markup_post_text", "markup_text")
             );
-
             $this->respondTo("metaWeblog_getPost", "metaWeblog_getValues");
             $this->respondTo("metaWeblog_before_editPost", "metaWeblog_setValues");
         }

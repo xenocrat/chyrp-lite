@@ -11,7 +11,6 @@
                     "optional" => true
                 )
             );
-
             $this->setField(
                 array(
                     "attr" => "video",
@@ -22,7 +21,6 @@
                     "note" => _f("(Max. file size: %d Megabytes)", $maximum, "video")
                 )
             );
-
             $this->setField(
                 array(
                     "attr" => "description",
@@ -32,7 +30,6 @@
                     "preview" => true
                 )
             );
-
             $this->setFilter(
                 "title",
                 array("markup_post_title", "markup_title")
@@ -41,7 +38,6 @@
                 "description",
                 array("markup_post_text", "markup_text")
             );
-
             $this->respondTo("feed_item", "enclose_video");
             $this->respondTo("filter_post", "filter_post");
             $this->respondTo("metaWeblog_getPost", "metaWeblog_getValues");

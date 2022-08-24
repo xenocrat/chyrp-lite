@@ -11,7 +11,6 @@
                     "optional" => true
                 )
             );
-
             $this->setField(
                 array(
                     "attr" => "photo",
@@ -22,7 +21,6 @@
                     "note" => _f("(Max. file size: %d Megabytes)", $maximum, "photo")
                 )
             );
-
             $this->setField(
                 array(
                     "attr" => "caption",
@@ -32,7 +30,6 @@
                     "preview" => true
                 )
             );
-
             $this->setFilter(
                 "title",
                 array("markup_post_title", "markup_title")
@@ -41,7 +38,6 @@
                 "caption",
                 array("markup_post_text", "markup_text")
             );
-
             $this->respondTo("post_options", "add_option");
             $this->respondTo("metaWeblog_getPost", "metaWeblog_getValues");
             $this->respondTo("metaWeblog_before_editPost", "metaWeblog_setValues");
@@ -62,7 +58,7 @@
                     422
                 );
 
-            if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
+            if (isset($_POST['option']['source']) and is_url($_POST['option']['source']))
                 $_POST['option']['source'] = add_scheme($_POST['option']['source']);
 
             fallback($_POST['title'], "");
@@ -100,7 +96,7 @@
             fallback($_POST['option'], array());
             $filename = $post->filename;
 
-            if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
+            if (isset($_POST['option']['source']) and is_url($_POST['option']['source']))
                 $_POST['option']['source'] = add_scheme($_POST['option']['source']);
 
             if (isset($_FILES['photo']) and upload_tester($_FILES['photo']))

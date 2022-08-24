@@ -11,7 +11,6 @@
                     "optional" => true
                 )
             );
-
             $this->setField(
                 array(
                     "attr" => "uploads",
@@ -22,7 +21,6 @@
                     "note" => _f("(Max. file size: %d Megabytes)", $maximum, "uploader")
                 )
             );
-
             $this->setField(
                 array(
                     "attr" => "caption",
@@ -32,7 +30,6 @@
                     "preview" => true
                 )
             );
-
             $this->setFilter(
                 "title",
                 array("markup_post_title", "markup_title")
@@ -41,7 +38,6 @@
                 "caption",
                 array("markup_post_text", "markup_text")
             );
-
             $this->respondTo("feed_item", "enclose_uploaded");
             $this->respondTo("post","post");
             $this->respondTo("filter_post","filter_post");
@@ -86,7 +82,7 @@
                     422
                 );
 
-            if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
+            if (isset($_POST['option']['source']) and is_url($_POST['option']['source']))
                 $_POST['option']['source'] = add_scheme($_POST['option']['source']);
 
             fallback($_POST['title'], "");
@@ -124,7 +120,7 @@
             fallback($_POST['option'], array());
             $filenames = $post->filenames;
 
-            if (!empty($_POST['option']['source']) and is_url($_POST['option']['source']))
+            if (isset($_POST['option']['source']) and is_url($_POST['option']['source']))
                 $_POST['option']['source'] = add_scheme($_POST['option']['source']);
 
             if (isset($_FILES['uploads']) and upload_tester($_FILES['uploads'])) {
