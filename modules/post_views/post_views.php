@@ -16,8 +16,23 @@
         }
 
         public function twig_context_main($context): void {
-            if (isset($context["post"]) and ($context["post"] instanceof Post) and !$context["post"]->no_results)
-                View::add($context["post"]->id, Visitor::current()->id);
+            $visitor = Visitor::current();
+
+            if (
+                !isset($context["post"]) or
+                !($context["post"] instanceof Post)
+            )
+                return;
+
+            $post = $context["post"];
+
+            if (
+                $post->no_results or
+                $post->user->id == $visitor->id
+            )
+                return;
+
+            View::add($context["post"]->id, $visitor->id);
         }
 
         public function manage_posts_column_header(): void {
