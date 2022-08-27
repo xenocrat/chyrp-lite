@@ -71,7 +71,11 @@
             }
 
             fallback($options["order"], "created_at ASC");
-            return parent::search(get_class(), $options, $options_for_object);
+            return parent::search(
+                get_class(),
+                $options,
+                $options_for_object
+            );
         }
 
         /**

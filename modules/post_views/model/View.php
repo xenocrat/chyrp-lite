@@ -28,8 +28,15 @@
          * See Also:
          *     <Model::search>
          */
-        static function find($options = array(), $options_for_object = array()): array {
-            return parent::search(get_class(), $options, $options_for_object);
+        static function find(
+            $options = array(),
+            $options_for_object = array()
+        ): array {
+            return parent::search(
+                get_class(),
+                $options,
+                $options_for_object
+            );
         }
 
         /**
@@ -47,10 +54,14 @@
         static function add($post_id, $user_id, $created_at = null): self {
             $sql = SQL::current();
 
-            $sql->insert("views",
-                         array("post_id"    => $post_id,
-                               "user_id"    => $user_id,
-                               "created_at" => oneof($created_at, datetime())));
+            $sql->insert(
+                "views",
+                array(
+                    "post_id"    => $post_id,
+                    "user_id"    => $user_id,
+                    "created_at" => oneof($created_at, datetime())
+                )
+            );
 
             return new self($sql->latest("views"));
         }
@@ -71,11 +82,15 @@
          * Creates the database table.
          */
         static function install(): void {
-            SQL::current()->create("views",
-                                   array("id INTEGER PRIMARY KEY AUTO_INCREMENT",
-                                         "post_id INTEGER NOT NULL",
-                                         "user_id INTEGER DEFAULT 0",
-                                         "created_at DATETIME DEFAULT NULL"));
+            SQL::current()->create(
+                "views",
+                array(
+                    "id INTEGER PRIMARY KEY AUTO_INCREMENT",
+                    "post_id INTEGER NOT NULL",
+                    "user_id INTEGER DEFAULT 0",
+                    "created_at DATETIME DEFAULT NULL"
+                )
+            );
         }
 
         /**

@@ -51,7 +51,11 @@
             $options_for_object = array()
         ): array {
             fallback($options["order"], "id ASC");
-            return parent::search("user", $options, $options_for_object);
+            return parent::search(
+                "user",
+                $options,
+                $options_for_object
+            );
         }
 
         /**

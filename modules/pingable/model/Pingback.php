@@ -28,8 +28,15 @@
          * See Also:
          *     <Model::search>
          */
-        static function find($options = array(), $options_for_object = array()): array {
-            return parent::search(get_class(), $options, $options_for_object);
+        static function find(
+            $options = array(),
+            $options_for_object = array()
+        ): array {
+            return parent::search(
+                get_class(),
+                $options,
+                $options_for_object
+            );
         }
 
         /**
@@ -48,11 +55,15 @@
         static function add($post_id, $source, $title, $created_at = null): self {
             $sql = SQL::current();
 
-            $sql->insert("pingbacks",
-                         array("post_id"    => $post_id,
-                               "source"     => $source,
-                               "title"      => strip_tags($title),
-                               "created_at" => oneof($created_at, datetime())));
+            $sql->insert(
+                "pingbacks",
+                array(
+                    "post_id"    => $post_id,
+                    "source"     => $source,
+                    "title"      => strip_tags($title),
+                    "created_at" => oneof($created_at, datetime())
+                )
+            );
 
             $new = new self($sql->latest("pingbacks"));
             Trigger::current()->call("add_pingback", $new);
@@ -75,19 +86,26 @@
 
             $title = strip_tags($title);
 
-            SQL::current()->update("pingbacks",
-                                   array("id"    => $this->id),
-                                   array("title" => $title));
+            SQL::current()->update(
+                "pingbacks",
+                array("id"    => $this->id),
+                array("title" => $title)
+            );
 
-            $pingback = new self(null,
-                                 array("read_from" => array("id"         => $this->id,
-                                                            "post_id"    => $this->post_id,
-                                                            "source"     => $this->source,
-                                                            "title"      => $title,
-                                                            "created_at" => $this->created_at)));
+            $pingback = new self(
+                null,
+                array(
+                    "read_from" => array(
+                        "id"         => $this->id,
+                        "post_id"    => $this->post_id,
+                        "source"     => $this->source,
+                        "title"      => $title,
+                        "created_at" => $this->created_at
+                    )
+                )
+            );
 
             Trigger::current()->call("update_pingback", $pingback, $this);
-
             return $pingback;
         }
 
@@ -107,12 +125,16 @@
          * Creates the database table.
          */
         static function install(): void {
-            SQL::current()->create("pingbacks",
-                                   array("id INTEGER PRIMARY KEY AUTO_INCREMENT",
-                                         "post_id INTEGER NOT NULL",
-                                         "source VARCHAR(2048) DEFAULT ''",
-                                         "title LONGTEXT",
-                                         "created_at DATETIME DEFAULT NULL"));
+            SQL::current()->create(
+                "pingbacks",
+                array(
+                    "id INTEGER PRIMARY KEY AUTO_INCREMENT",
+                    "post_id INTEGER NOT NULL",
+                    "source VARCHAR(2048) DEFAULT ''",
+                    "title LONGTEXT",
+                    "created_at DATETIME DEFAULT NULL"
+                )
+            );
         }
 
         /**

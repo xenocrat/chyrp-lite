@@ -54,7 +54,11 @@
             $options["select"][] = "groups.*";
             $options["select"][] = "permissions.id AS permissions";
 
-            return parent::search(get_class(), $options, $options_for_object);
+            return parent::search(
+                get_class(),
+                $options,
+                $options_for_object
+            );
         }
 
         /**

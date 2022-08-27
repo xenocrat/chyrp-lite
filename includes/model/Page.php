@@ -46,7 +46,11 @@
             $options = array(),
             $options_for_object = array()
         ): array {
-            return parent::search(get_class(), $options, $options_for_object);
+            return parent::search(
+                get_class(),
+                $options,
+                $options_for_object
+            );
         }
 
         /**

@@ -28,8 +28,15 @@
          * See Also:
          *     <Model::search>
          */
-        static function find($options = array(), $options_for_object = array()): array {
-            return parent::search(get_class(), $options, $options_for_object);
+        static function find(
+            $options = array(),
+            $options_for_object = array()
+        ): array {
+            return parent::search(
+                get_class(),
+                $options,
+                $options_for_object
+            );
         }
 
         /**
@@ -45,14 +52,23 @@
          * Returns:
          *     The newly created <Like>.
          */
-        static function add($post_id, $user_id, $timestamp, $session_hash): self {
+        static function add(
+            $post_id,
+            $user_id,
+            $timestamp,
+            $session_hash
+        ): self {
             $sql = SQL::current();
 
-            $sql->insert("likes",
-                         array("post_id"      => $post_id,
-                               "user_id"      => $user_id,
-                               "timestamp"    => $timestamp,
-                               "session_hash" => $session_hash));
+            $sql->insert(
+                "likes",
+                array(
+                    "post_id"      => $post_id,
+                    "user_id"      => $user_id,
+                    "timestamp"    => $timestamp,
+                    "session_hash" => $session_hash
+                )
+            );
 
             $new = new self($sql->latest("likes"));
             Trigger::current()->call("add_like", $new);
@@ -105,10 +121,12 @@
             if (self::exists($post_id))
                 return;
 
-            $new = self::add($post_id,
-                             Visitor::current()->id,
-                             datetime(),
-                             self::session_hash());
+            $new = self::add(
+                $post_id,
+                Visitor::current()->id,
+                datetime(),
+                self::session_hash()
+            );
 
             $_SESSION['likes'][$post_id] = $new->id;
             Trigger::current()->call("like_post", $post_id);
@@ -143,13 +161,18 @@
             fallback($_SESSION['likes'], array());
 
             if (logged_in() and !isset($results)) {
-                $results = SQL::current()->select("likes",
-                                                  array("id", "post_id"),
-                                                  array("user_id" => Visitor::current()->id),
-                                                  "post_id ASC")->fetchAll();
+                $results = SQL::current()->select(
+                    "likes",
+                    array("id", "post_id"),
+                    array("user_id" => Visitor::current()->id),
+                    "post_id ASC"
+                )->fetchAll();
 
-                foreach ($results as $result)
-                    $_SESSION['likes'][$result["post_id"]] = $result["id"];
+                foreach ($results as $result) {
+                    $id = $result["id"];
+                    $post_id = $result["post_id"];
+                    $_SESSION['likes'][$post_id] = $id;
+                }
             }
 
             return isset($_SESSION['likes'][$post_id]);
@@ -168,12 +191,16 @@
          * Creates the database table.
          */
         static function install(): void {
-            SQL::current()->create("likes",
-                                   array("id INTEGER PRIMARY KEY AUTO_INCREMENT",
-                                         "post_id INTEGER NOT NULL",
-                                         "user_id INTEGER NOT NULL",
-                                         "timestamp DATETIME DEFAULT NULL",
-                                         "session_hash VARCHAR(32) NOT NULL"));
+            SQL::current()->create(
+                "likes",
+                array(
+                    "id INTEGER PRIMARY KEY AUTO_INCREMENT",
+                    "post_id INTEGER NOT NULL",
+                    "user_id INTEGER NOT NULL",
+                    "timestamp DATETIME DEFAULT NULL",
+                    "session_hash VARCHAR(32) NOT NULL"
+                )
+            );
         }
 
         /**
