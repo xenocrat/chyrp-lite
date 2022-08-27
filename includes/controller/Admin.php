@@ -2502,9 +2502,15 @@
                     );
 
                 foreach ($imports["pages"]->entry as $entry) {
-                    $chyrp = $entry->children("http://chyrp.net/export/1.0/");
-                    $attr  = $entry->attributes("http://chyrp.net/export/1.0/");
-                    $login = $entry->author->children("http://chyrp.net/export/1.0/")->login;
+                    $chyrp = $entry->children(
+                        "http://chyrp.net/export/1.0/"
+                    );
+                    $attr  = $entry->attributes(
+                        "http://chyrp.net/export/1.0/"
+                    );
+                    $login = $entry->author->children(
+                        "http://chyrp.net/export/1.0/"
+                    )->login;
 
                     $user = new User(
                         array("login" => unfix((string) $login))

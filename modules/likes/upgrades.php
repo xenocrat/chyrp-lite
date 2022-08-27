@@ -12,16 +12,23 @@
         $config = Config::current();
 
         if (isset($config->module_like)) {
-            $set = $config->set("module_likes",
-                                array("show_on_index" => $config->module_like["showOnFront"],
-                                      "like_with_text" => $config->module_like["likeWithText"],
-                                      "like_image" => $config->module_like["likeImage"]));
+            $set = $config->set(
+                "module_likes",
+                array(
+                    "show_on_index" => $config->module_like["showOnFront"],
+                    "like_with_text" => $config->module_like["likeWithText"],
+                    "like_image" => $config->module_like["likeImage"]
+                )
+            );
 
             if ($set !== false)
                 $set = $config->remove("module_like");
 
             if ($set === false)
-                error(__("Error"), __("Could not write the configuration file."));
+                error(
+                    __("Error"),
+                    __("Could not write the configuration file.")
+                );
         }
     }
 
@@ -35,19 +42,26 @@
         $config = Config::current();
         $array = $config->module_likes;
 
-        $array["like_image"] = preg_replace("~^https?://.+/modules/likes/images/(.+)$~", "$1", $array["like_image"]);
+        $array["like_image"] = preg_replace(
+            "~^https?://.+/modules/likes/images/(.+)$~",
+            "$1",
+            $array["like_image"]
+        );
 
         $set = $config->set("module_likes", $array);
 
         if ($set === false)
-            error(__("Error"), __("Could not write the configuration file."));
+            error(
+                __("Error"),
+                __("Could not write the configuration file.")
+            );
     }
 
     /**
      * Function: likes_clean_indexes
      * Cleans the database table of deprecated indexes.
      *
-     * Versions: 2020.01 => 2020.02
+     * Versions: 2020.01 => 2020.02 / 2022.03
      */
     function likes_clean_indexes(): void {
         $sql = SQL::current();
@@ -55,7 +69,7 @@
         if ($sql->adapter == "sqlite") {
             $sql->query("DROP INDEX IF EXISTS key_post_id");
             $sql->query("DROP INDEX IF EXISTS key_user_id");
-            $sql->query("CREATE INDEX IF NOT EXISTS key_post_user ON \"__likes\" (post_id, user_id)");
+            $sql->query("DROP INDEX IF EXISTS key_post_user");
         }
     }
 

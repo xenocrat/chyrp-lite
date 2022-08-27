@@ -3,8 +3,10 @@
         static function __install(): void {
             $config = Config::current();
 
-            $config->set("module_highlighter",
-                         array("stylesheet" => "default.min.css"));
+            $config->set(
+                "module_highlighter",
+                array("stylesheet" => "default.min.css")
+            );
         }
 
         static function __uninstall(): void {
@@ -12,7 +14,9 @@
         }
 
         public function scripts($scripts): array {
-            $scripts[] = Config::current()->chyrp_url."/modules/highlighter/highlight.min.js";
+            $scripts[] = Config::current()->chyrp_url.
+                         "/modules/highlighter/highlight.min.js";
+
             return $scripts;
         }
 
@@ -23,7 +27,9 @@
         public function stylesheets($stylesheets): array {
             $config = Config::current();
             $stylesheet = $config->module_highlighter["stylesheet"];
-            $path = $config->chyrp_url."/modules/highlighter/styles/".$stylesheet;
+
+            $path = $config->chyrp_url.
+                    "/modules/highlighter/styles/".$stylesheet;
 
             $stylesheets[] = $path;
             return $stylesheets;
@@ -33,30 +39,46 @@
             $config = Config::current();
 
             if (!Visitor::current()->group->can("change_settings"))
-                show_403(__("Access Denied"),
-                         __("You do not have sufficient privileges to change settings."));
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to change settings.")
+                );
 
             if (empty($_POST)) {
-                $admin->display("pages".DIR."highlighter_settings",
-                                array("highlighter_stylesheets" => $this->highlighter_stylesheets()));
+                $admin->display(
+                    "pages".DIR."highlighter_settings",
+                    array(
+                        "highlighter_stylesheets" => $this->highlighter_stylesheets()
+                    )
+                );
 
                 return;
             }
 
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
-                show_403(__("Access Denied"), __("Invalid authentication token."));
+                show_403(
+                    __("Access Denied"),
+                    __("Invalid authentication token.")
+                );
 
             fallback($_POST['stylesheet'], "monokai-sublime.css");
 
-            $config->set("module_highlighter",
-                         array("stylesheet" => $_POST['stylesheet']));
+            $config->set(
+                "module_highlighter",
+                array("stylesheet" => $_POST['stylesheet'])
+            );
 
-            Flash::notice(__("Settings updated."), "highlighter_settings");
+            Flash::notice(
+                __("Settings updated."),
+                "highlighter_settings"
+            );
         }
 
         public function settings_nav($navs): array {
             if (Visitor::current()->group->can("change_settings"))
-                $navs["highlighter_settings"] = array("title" => __("Syntax Highlighting", "highlighter"));
+                $navs["highlighter_settings"] = array(
+                    "title" => __("Syntax Highlighting", "highlighter")
+                );
 
             return $navs;
         }
@@ -81,7 +103,9 @@
                             $filename = $item->getFilename();
                             $pathname = $item->getPathname();
                             $addprefix = $prefix.$filename."/";
-                            $addstyles = $this->highlighter_stylesheets($pathname, $addprefix);
+                            $addstyles = $this->highlighter_stylesheets(
+                                $pathname, $addprefix
+                            );
                             $styles = array_merge($styles, $addstyles);
 
                             break;

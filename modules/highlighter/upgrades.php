@@ -12,11 +12,16 @@
         $config = Config::current();
 
         if (!isset($config->module_highlighter)) {
-            $set = $config->set("module_highlighter",
-                                array("stylesheet" => "monokai-sublime.css"));
+            $set = $config->set(
+                "module_highlighter",
+                array("stylesheet" => "monokai-sublime.css")
+            );
 
             if ($set === false)
-                error(__("Error"), __("Could not write the configuration file."));
+                error(
+                    __("Error"),
+                    __("Could not write the configuration file.")
+                );
         }
     }
 

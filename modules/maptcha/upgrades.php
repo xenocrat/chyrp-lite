@@ -12,13 +12,19 @@
         $config = Config::current();
 
         if (isset($config->maptcha_hashkey)) {
-            $set = $config->set("module_maptcha", array("maptcha_hashkey" => $config->maptcha_hashkey));
+            $set = $config->set(
+                "module_maptcha",
+                array("maptcha_hashkey" => $config->maptcha_hashkey)
+            );
 
             if ($set !== false)
                 $set = $config->remove("maptcha_hashkey");
 
             if ($set === false)
-                error(__("Error"), __("Could not write the configuration file."));
+                error(
+                    __("Error"),
+                    __("Could not write the configuration file.")
+                );
         }
     }
 

@@ -17,7 +17,10 @@
         $set = $config->set("module_sitemap", $array);
 
         if ($set === false)
-            error(__("Error"), __("Could not write the configuration file."));
+            error(
+                __("Error"),
+                __("Could not write the configuration file.")
+            );
     }
 
     sitemap_update_config();

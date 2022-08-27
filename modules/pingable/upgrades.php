@@ -11,8 +11,23 @@
     function add_edit_pingback(): void {
         $sql = SQL::current();
 
-        if (!$sql->count("permissions", array("id" => "edit_pingback", "group_id" => 0)))
-            $sql->insert("permissions", array("id" => "edit_pingback", "name" => "Edit Pingbacks", "group_id" => 0));
+        if (
+            !$sql->count(
+                "permissions",
+                array(
+                    "id" => "edit_pingback",
+                    "group_id" => 0
+                )
+            )
+        )
+            $sql->insert(
+                "permissions",
+                array(
+                    "id" => "edit_pingback",
+                    "name" => "Edit Pingbacks",
+                    "group_id" => 0
+                )
+            );
     }
 
     add_edit_pingback();

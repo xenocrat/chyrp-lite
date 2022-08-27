@@ -16,7 +16,10 @@
             Route::current()->remove("tag/(name)/");
 
             if ($confirm)
-                SQL::current()->delete("post_attributes", array("name" => "tags"));
+                SQL::current()->delete(
+                    "post_attributes",
+                    array("name" => "tags")
+                );
         }
 
         private function tags_serialize($tags) {
@@ -28,25 +31,33 @@
         }
 
         private function sort_tags_name_asc($a, $b): int {
-            return $this->mb_strcasecmp($a["name"], $b["name"]);
+            return $this->mb_strcasecmp(
+                $a["name"],
+                $b["name"]
+            );
         }
 
         private function sort_tags_name_desc($a, $b): int {
-            return $this->mb_strcasecmp($b["name"], $a["name"]);
+            return $this->mb_strcasecmp(
+                $b["name"],
+                $a["name"]
+            );
         }
 
         private function sort_tags_popularity_asc($a, $b): int {
             if ($a["popularity"] == $b["popularity"])
                 return 0;
 
-            return ($a["popularity"] < $b["popularity"]) ? -1 : 1 ;
+            return ($a["popularity"] < $b["popularity"]) ?
+                -1 : 1 ;
         }
 
         private function sort_tags_popularity_desc($a, $b): int {
             if ($a["popularity"] == $b["popularity"])
                 return 0;
 
-            return ($a["popularity"] > $b["popularity"]) ? -1 : 1 ;
+            return ($a["popularity"] > $b["popularity"]) ?
+                -1 : 1 ;
         }
 
         private function mb_strcasecmp($str1, $str2, $encoding = "UTF-8"): int {
@@ -54,10 +65,17 @@
             $str2 = preg_replace("/[[:punct:]]+/", "", $str2);
 
             if (!function_exists("mb_strtoupper"))
-                return substr_compare(strtoupper($str1), strtoupper($str2), 0);
+                return substr_compare(
+                    strtoupper($str1),
+                    strtoupper($str2),
+                    0
+                );
 
-            return substr_compare(mb_strtoupper($str1, $encoding),
-                                  mb_strtoupper($str2, $encoding), 0);
+            return substr_compare(
+                mb_strtoupper($str1, $encoding),
+                mb_strtoupper($str2, $encoding),
+                0
+            );
         }
 
         private function tags_name_match($name): string {
@@ -104,8 +122,10 @@
             $assoc = array_combine($names, $clean);
 
             # Replace any slugs that have been sanitized into nothingness with a hash.
-            foreach ($assoc as $name => &$slug)
-                $slug = preg_match("/[^\-0-9]+/", $slug) ? $slug : md5($name) ;
+            foreach ($assoc as $name => &$slug) {
+                if (!preg_match("/[^\-0-9]+/", $slug))
+                    $slug = md5($name);
+            }
 
             return $assoc;
         }
@@ -130,32 +150,44 @@
 
         public function post_options($fields, $post = null): array {
             $cloud = $this->tag_cloud(false, "name_asc");
-            $names = isset($post->tags) ? array_keys($post->tags) : array();
+            $names = isset($post->tags) ?
+                array_keys($post->tags) :
+                array();
 
             $selector = "\n".'<span class="options_extra tags_select">';
 
             foreach ($cloud as $tag) {
-                $selected = (in_array($tag["name"], $names)) ? " tag_added" : "" ;
+                $selected = (in_array($tag["name"], $names)) ?
+                    " tag_added" :
+                    "" ;
 
-                $selector.= '<a class="tag'.$selected.
-                            '" href="#" role="button">'.$tag["name"].'</a> ';
+                $selector.= '<a class="tag'.
+                            $selected.
+                            '" href="#" role="button">'.
+                            $tag["name"].
+                            '</a> ';
             }
 
             $selector.= "</span>"."\n";
 
-            $fields[] = array("attr" => "tags",
-                              "label" => __("Tags", "tags"),
-                              "help" => "tagging_posts",
-                              "note" => __("(comma separated)", "tags"),
-                              "type" => "text",
-                              "value" => implode(", ", $names),
-                              "extra" => $selector);
+            $fields[] = array(
+                "attr" => "tags",
+                "label" => __("Tags", "tags"),
+                "help" => "tagging_posts",
+                "note" => __("(comma separated)", "tags"),
+                "type" => "text",
+                "value" => implode(", ", $names),
+                "extra" => $selector
+            );
 
             return $fields;
         }
 
         public function post($post): void {
-            $post->tags = !empty($post->tags) ? $this->tags_unserialize($post->tags) : array() ;
+            $post->tags = !empty($post->tags) ?
+                $this->tags_unserialize($post->tags) :
+                array() ;
+
             uksort($post->tags, function($a, $b) {
                 return $this->mb_strcasecmp($a, $b);
             });
@@ -171,13 +203,21 @@
                 $tag = $this->tag_find_by_name($name);
 
                 if ($tag)
-                    $urls[] = '<a class="tag" href="'.$tag["url"].'" rel="tag">'.$tag["name"].'</a>';
+                    $urls[] = '<a class="tag" href="'.
+                              $tag["url"].
+                              '" rel="tag">'.
+                              $tag["name"].
+                              '</a>';
             }
 
             return $urls;
         }
 
-        public function twig_function_tag_cloud($limit = false, $sort = "name_asc", $scale = 300): array {
+        public function twig_function_tag_cloud(
+            $limit = false,
+            $sort = "name_asc",
+            $scale = 300
+        ): array {
             return $this->tag_cloud($limit, $sort, $scale);
         }
 
@@ -188,25 +228,38 @@
 
         public function manage_nav($navs): array {
             if (Post::any_editable())
-                $navs["manage_tags"] = array("title" => __("Tags", "tags"),
-                                             "selected" => array("rename_tag", "delete_tag", "edit_tags"));
+                $navs["manage_tags"] = array(
+                    "title" => __("Tags", "tags"),
+                    "selected" => array(
+                        "rename_tag",
+                        "delete_tag",
+                        "edit_tags"
+                    )
+                );
 
             return $navs;
         }
 
         public function manage_posts_column_header(): void {
-            echo '<th class="post_tags list">'.__("Tags", "tags").'</th>';
+            echo '<th class="post_tags list">'.
+                 __("Tags", "tags").
+                 '</th>';
         }
 
         public function manage_posts_column($post): void {
-            $tags = !empty($post->tags_link) ? implode(" ", $post->tags_link) : "" ;
+            $tags = !empty($post->tags_link) ?
+                implode(" ", $post->tags_link) :
+                "" ;
+
             echo '<td class="post_tags list">'.$tags.'</td>';
         }
 
         public function admin_manage_tags($admin): void {
             if (!Post::any_editable())
-                show_403(__("Access Denied"),
-                         __("You do not have sufficient privileges to manage tags.", "tags"));
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to manage tags.", "tags")
+                );
 
             $where = array();
             $params = array();
@@ -221,9 +274,13 @@
             if (!$visitor->group->can("edit_draft", "edit_post", "delete_draft", "delete_post"))
                 $where["user_id"] = $visitor->id;
 
-            $results = Post::find(array("placeholders" => true,
-                                        "where" => $where,
-                                        "params" => $params));
+            $results = Post::find(
+                array(
+                    "placeholders" => true,
+                    "where" => $where,
+                    "params" => $params
+                )
+            );
 
             $ids = array();
 
@@ -232,91 +289,160 @@
 
             if (!empty($ids)) {
                 $posts = new Paginator(
-                    Post::find(array("placeholders" => true,
-                                     "drafts" => true,
-                                     "where" => array("id" => $ids))), $admin->post_limit);
+                    Post::find(
+                        array(
+                            "placeholders" => true,
+                            "drafts" => true,
+                            "where" => array("id" => $ids)
+                        )
+                    ),
+                    $admin->post_limit
+                );
             } else {
                 $posts = new Paginator(array());
             }
 
-            $admin->display("pages".DIR."manage_tags",
-                            array("tag_cloud" => $this->tag_cloud(), "posts" => $posts));
+            $admin->display(
+                "pages".DIR."manage_tags",
+                array(
+                    "tag_cloud" => $this->tag_cloud(),
+                    "posts" => $posts
+                )
+            );
         }
 
         public function admin_edit_tags($admin): void {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                error(__("No ID Specified"), __("An ID is required to edit tags.", "tags"), null, 400);
+                error(
+                    __("No ID Specified"),
+                    __("An ID is required to edit tags.", "tags"),
+                    null,
+                    400
+                );
 
             $post = new Post($_GET['id']);
 
             if ($post->no_results)
-                Flash::warning(__("Post not found."), "manage_tags");
+                Flash::warning(
+                    __("Post not found."),
+                    "manage_tags"
+                );
 
             if (!$post->editable())
-                show_403(__("Access Denied"),
-                         __("You do not have sufficient privileges to edit this post."));
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to edit this post.")
+                );
 
-            $admin->display("pages".DIR."edit_tags", array("post" => $post));
+            $admin->display(
+                "pages".DIR."edit_tags",
+                array("post" => $post)
+            );
         }
 
         public function admin_update_tags($admin)/*: never */{
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
-                show_403(__("Access Denied"), __("Invalid authentication token."));
+                show_403(
+                    __("Access Denied"),
+                    __("Invalid authentication token.")
+                );
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
-                error(__("No ID Specified"), __("An ID is required to update tags.", "tags"), null, 400);
+                error(
+                    __("No ID Specified"),
+                    __("An ID is required to update tags.", "tags"),
+                    null,
+                    400
+                );
 
             $post = new Post($_POST['id']);
 
             if ($post->no_results)
-                show_404(__("Not Found"), __("Post not found."));
+                show_404(
+                    __("Not Found"),
+                    __("Post not found.")
+                );
 
             if (!$post->editable())
-                show_403(__("Access Denied"),
-                         __("You do not have sufficient privileges to edit this post."));
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to edit this post.")
+                );
 
             $post->update();
 
-            Flash::notice(__("Tags updated.", "tags"), "manage_tags");
+            Flash::notice(
+                __("Tags updated.", "tags"),
+                "manage_tags"
+            );
         }
 
         public function admin_rename_tag($admin): void {
             if (!Post::any_editable())
-                show_403(__("Access Denied"),
-                         __("You do not have sufficient privileges to rename tags.", "tags"));
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to rename tags.", "tags")
+                );
 
             if (empty($_GET['clean']))
-                error(__("No Tag Specified", "tags"),
-                      __("Please specify the tag you want to rename.", "tags"), null, 400);
+                error(
+                    __("No Tag Specified", "tags"),
+                    __("Please specify the tag you want to rename.", "tags"),
+                    null,
+                    400
+                );
 
             $tag = $this->tag_find_by_clean($_GET['clean']);
 
             if (empty($tag))
-                Flash::warning(__("Tag not found.", "tags"), "manage_tags");
+                Flash::warning(
+                    __("Tag not found.", "tags"),
+                    "manage_tags"
+                );
 
-            $admin->display("pages".DIR."rename_tag", array("tag" => $tag));
+            $admin->display(
+                "pages".DIR."rename_tag",
+                array("tag" => $tag)
+            );
         }
 
         public function admin_update_tag($admin)/*: never */{
             if (!Post::any_editable())
-                show_403(__("Access Denied"),
-                         __("You do not have sufficient privileges to rename tags.", "tags"));
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to rename tags.", "tags")
+                );
 
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
-                show_403(__("Access Denied"), __("Invalid authentication token."));
+                show_403(
+                    __("Access Denied"),
+                    __("Invalid authentication token.")
+                );
 
             if (empty($_POST['original']))
-                error(__("No Tag Specified", "tags"),
-                      __("Please specify the tag you want to rename.", "tags"), null, 400);
+                error(
+                    __("No Tag Specified", "tags"),
+                    __("Please specify the tag you want to rename.", "tags"),
+                    null,
+                    400
+                );
 
             if (!isset($_POST['name']) or $_POST['name'] == "")
-                error(__("Error"), __("Name cannot be blank.", "tags"), null, 422);
+                error(
+                    __("Error"),
+                    __("Name cannot be blank.", "tags"),
+                    null,
+                    422
+                );
 
             $results = SQL::current()->select(
                 "post_attributes",
                 "post_id",
-                array("name" => "tags",
-                      "value LIKE" => $this->tags_name_match($_POST['original'])))->fetchAll();
+                array(
+                    "name" => "tags",
+                    "value LIKE" => $this->tags_name_match($_POST['original'])
+                )
+            )->fetchAll();
 
             foreach ($results as $result) {
                 $post = new Post($result["post_id"]);
@@ -325,42 +451,67 @@
                     continue;
 
                 unset($post->tags[$_POST['original']]);
+                $post_tags = implode(", ", array_keys($post->tags));
+                $_POST['tags'] = $post_tags.", ".$_POST['name'];
 
-                $_POST['tags'] = implode(", ", array_keys($post->tags)).", ".$_POST['name'];
                 $post->update();
             }
 
-            Flash::notice(__("Tag renamed.", "tags"), "manage_tags");
+            Flash::notice(
+                __("Tag renamed.", "tags"),
+                "manage_tags"
+            );
         }
 
         public function admin_delete_tag($admin): void {
             if (!Post::any_editable())
-                show_403(__("Access Denied"),
-                         __("You do not have sufficient privileges to delete tags.", "tags"));
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to delete tags.", "tags")
+                );
 
             if (empty($_GET['clean']))
-                error(__("No Tag Specified", "tags"),
-                      __("Please specify the tag you want to delete.", "tags"), null, 400);
+                error(
+                    __("No Tag Specified", "tags"),
+                    __("Please specify the tag you want to delete.", "tags"),
+                    null,
+                    400
+                );
 
             $tag = $this->tag_find_by_clean($_GET['clean']);
 
             if (empty($tag))
-                Flash::warning(__("Tag not found.", "tags"), "manage_tags");
+                Flash::warning(
+                    __("Tag not found.", "tags"),
+                    "manage_tags"
+                );
 
-            $admin->display("pages".DIR."delete_tag", array("tag" => $tag));
+            $admin->display(
+                "pages".DIR."delete_tag",
+                array("tag" => $tag)
+            );
         }
 
         public function admin_destroy_tag()/*: never */{
             if (!Post::any_editable())
-                show_403(__("Access Denied"),
-                         __("You do not have sufficient privileges to delete tags.", "tags"));
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to delete tags.", "tags")
+                );
 
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
-                show_403(__("Access Denied"), __("Invalid authentication token."));
+                show_403(
+                    __("Access Denied"),
+                    __("Invalid authentication token.")
+                );
 
             if (empty($_POST['name']))
-                error(__("No Tag Specified", "tags"),
-                      __("Please specify the tag you want to delete.", "tags"), null, 400);
+                error(
+                    __("No Tag Specified", "tags"),
+                    __("Please specify the tag you want to delete.", "tags"),
+                    null,
+                    400
+                );
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
                 redirect("manage_tags");
@@ -368,8 +519,11 @@
             $results = SQL::current()->select(
                 "post_attributes",
                 "post_id",
-                array("name" => "tags",
-                      "value LIKE" => $this->tags_name_match($_POST['name'])))->fetchAll();
+                array(
+                    "name" => "tags",
+                    "value LIKE" => $this->tags_name_match($_POST['name'])
+                )
+            )->fetchAll();
 
             foreach ($results as $result)  {
                 $post = new Post($result["post_id"]);
@@ -383,22 +537,36 @@
                 $post->update();
             }
 
-            Flash::notice(__("Tag deleted.", "tags"), "manage_tags");
+            Flash::notice(
+                __("Tag deleted.", "tags"),
+                "manage_tags"
+            );
         }
 
         public function admin_bulk_tag($admin)/*: never */{
             if (!Post::any_editable())
-                show_403(__("Access Denied"),
-                         __("You do not have sufficient privileges to add tags.", "tags"));
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to add tags.", "tags")
+                );
 
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
-                show_403(__("Access Denied"), __("Invalid authentication token."));
+                show_403(
+                    __("Access Denied"),
+                    __("Invalid authentication token.")
+                );
 
             if (empty($_POST['post']))
-                Flash::warning(__("No posts selected.", "tags"), "manage_tags");
+                Flash::warning(
+                    __("No posts selected.", "tags"),
+                    "manage_tags"
+                );
 
             if (!isset($_POST['name']) or $_POST['name'] == "")
-                Flash::warning(__("No tags specified.", "tags"), "manage_tags");
+                Flash::warning(
+                    __("No tags specified.", "tags"),
+                    "manage_tags"
+                );
 
             foreach ($_POST['post'] as $post_id) {
                 $post = new Post($post_id);
@@ -406,18 +574,26 @@
                 if (!$post->editable())
                     continue;
 
-                $_POST['tags'] = implode(", ", array_keys($post->tags)).", ".$_POST['name'];
+                $post_tags = implode(", ", array_keys($post->tags));
+                $_POST['tags'] = $post_tags.", ".$_POST['name'];
                 $post->update();
             }
 
-            Flash::notice(__("Posts tagged.", "tags"), "manage_tags");
+            Flash::notice(
+                __("Posts tagged.", "tags"),
+                "manage_tags"
+            );
         }
 
         public function main_tag($main): bool {
             if (!isset($_GET['name'])) {
-                $main->display(array("pages".DIR."tag", "pages".DIR."index"),
-                               array("reason" => __("You did not specify a tag.", "tags")),
-                               __("Invalid Tag", "tags"));
+                $reason = __("You did not specify a tag.", "tags");
+
+                $main->display(
+                    array("pages".DIR."tag", "pages".DIR."index"),
+                    array("reason" => $reason),
+                    __("Invalid Tag", "tags")
+                );
 
                 return true;
             }
@@ -425,9 +601,13 @@
             $tag = $this->tag_find_by_clean($_GET['name']);
 
             if (empty($tag)) {
-                $main->display(array("pages".DIR."tag", "pages".DIR."index"),
-                    array("reason" => __("The tag you specified was not found.", "tags")),
-                    __("Invalid Tag", "tags"));
+                $reason = __("The tag you specified was not found.", "tags");
+
+                $main->display(
+                    array("pages".DIR."tag", "pages".DIR."index"),
+                    array("reason" => $reason),
+                    __("Invalid Tag", "tags")
+                );
 
                 return true;
             }
@@ -435,8 +615,11 @@
             $results = SQL::current()->select(
                 "post_attributes",
                 array("value", "post_id"),
-                array("name" => "tags",
-                      "value LIKE" => $this->tags_clean_match($_GET['name'])))->fetchAll();
+                array(
+                    "name" => "tags",
+                    "value LIKE" => $this->tags_clean_match($_GET['name'])
+                )
+            )->fetchAll();
 
             $ids = array();
 
@@ -444,31 +627,45 @@
                 $ids[] = $result["post_id"];
 
             if (empty($ids)) {
-                $main->display(array("pages".DIR."tag", "pages".DIR."index"),
-                    array("reason" => __("There are no posts with the tag you specified.", "tags")),
-                    __("Invalid Tag", "tags"));
+                $reason = __("There are no posts with the tag you specified.", "tags");
+
+                $main->display(
+                    array("pages".DIR."tag", "pages".DIR."index"),
+                    array("reason" => $reason),
+                    __("Invalid Tag", "tags")
+                );
 
                 return true;
             }
 
             $posts = new Paginator(
-                Post::find(array("placeholders" => true,
-                                 "where" => array("id" => $ids))), $main->post_limit);
+                Post::find(
+                    array(
+                        "placeholders" => true,
+                        "where" => array("id" => $ids)
+                    )
+                ),
+                $main->post_limit
+            );
 
             if (empty($posts))
                 return false;
 
-            $main->display(array("pages".DIR."tag", "pages".DIR."index"),
-                           array("posts" => $posts, "tag" => $tag),
-                           _f("Posts tagged with &#8220;%s&#8221;", array($tag["name"]), "tags"));
+            $main->display(
+                array("pages".DIR."tag", "pages".DIR."index"),
+                array("posts" => $posts, "tag" => $tag),
+                _f("Posts tagged with &#8220;%s&#8221;", array($tag["name"]), "tags")
+            );
 
             return true;
         }
 
         public function main_tags($main): void {
-            $main->display("pages".DIR."tags",
-                           array("tag_cloud" => $this->tag_cloud(false, "name_asc")),
-                           __("Tags", "tags"));
+            $main->display(
+                "pages".DIR."tags",
+                array("tag_cloud" => $this->tag_cloud(false, "name_asc")),
+                __("Tags", "tags")
+            );
         }
 
         public function metaWeblog_getPost($struct, $post): array {
@@ -495,12 +692,15 @@
                 $results = SQL::current()->select(
                     "post_attributes",
                     array("post_id"),
-                    array("name" => "tags",
-                          "value LIKE" => $this->tags_name_match($name),
-                          "post_id !=" => $post->id),
+                    array(
+                        "name" => "tags",
+                        "value LIKE" => $this->tags_name_match($name),
+                        "post_id !=" => $post->id
+                    ),
                     array("post_id DESC"),
                     array(),
-                    $limit)->fetchAll();
+                    $limit
+                )->fetchAll();
 
                 foreach ($results as $result)
                     $ids[] = $result["post_id"];
@@ -509,7 +709,11 @@
             return $ids;
         }
 
-        public function tag_cloud($limit = false, $sort = "popularity_desc", $scale = 300): array {
+        public function tag_cloud(
+            $limit = false,
+            $sort = "popularity_desc",
+            $scale = 300
+        ): array {
             switch ($sort) {
                 case 'name_asc':
                     $method = array($this, "sort_tags_name_asc");
@@ -531,16 +735,23 @@
                 $results = SQL::current()->select(
                     "posts",
                     "post_attributes.*",
-                    array("post_attributes.name" => "tags",
-                          Post::statuses(),
-                          Post::feathers()),
+                    array(
+                        "post_attributes.name" => "tags",
+                        Post::statuses(),
+                        Post::feathers()
+                    ),
                     null,
                     array(),
                     null,
                     null,
                     null,
-                    array(array("table" => "post_attributes",
-                                "where" => "post_id = posts.id")))->fetchAll();
+                    array(
+                        array(
+                            "table" => "post_attributes",
+                            "where" => "post_id = posts.id"
+                        )
+                    )
+                )->fetchAll();
 
                 $found = array();
                 $names = array();
@@ -558,18 +769,22 @@
                     $popularity = array_count_values($names);
                     $min = min($popularity);
                     $max = max($popularity);
-                    $step = (int) $scale / (($min === $max) ? 1 : ($max - $min));
+                    $step = (int) $scale / (
+                        ($min === $max) ? 1 : ($max - $min)
+                    );
 
                     $main = MainController::current();
 
                     foreach ($popularity as $name => $count) {
                         $t = _p("%d post tagged with &#8220;%s&#8221;", "%d posts tagged with &#8220;%s&#8221;", $count, "tags");
-                        $cloud[] = array("size" => floor($step * ($count - $min)),
-                                         "popularity" => $count,
-                                         "name" => $name,
-                                         "title" => sprintf($t, $count, fix($name, true)),
-                                         "clean" => $found[$name],
-                                         "url" => url("tag/".$found[$name], $main));
+                        $cloud[] = array(
+                            "size" => floor($step * ($count - $min)),
+                            "popularity" => $count,
+                            "name" => $name,
+                            "title" => sprintf($t, $count, fix($name, true)),
+                            "clean" => $found[$name],
+                            "url" => url("tag/".$found[$name], $main)
+                        );
                     }
                 }
 
@@ -578,7 +793,9 @@
 
             $array = $this->caches["tag_cloud"];
             usort($array, $method);
-            return ($limit) ? array_slice($array, 0, $limit) : $array ;
+            return ($limit) ?
+                array_slice($array, 0, $limit) :
+                $array ;
         }
 
         public function tag_find_by_clean($clean): array|false {
