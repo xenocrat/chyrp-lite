@@ -40,10 +40,12 @@
 
     # Array: $exclude
     # Paths to be excluded from directory recursion.
-    $exclude = array(INCLUDES_DIR.DIR."caches",
-                     INCLUDES_DIR.DIR."lib".DIR."Twig",
-                     INCLUDES_DIR.DIR."lib".DIR."IXR",
-                     INCLUDES_DIR.DIR."lib".DIR."cebe");
+    $exclude = array(
+        INCLUDES_DIR.DIR."caches",
+        INCLUDES_DIR.DIR."lib".DIR."Twig",
+        INCLUDES_DIR.DIR."lib".DIR."IXR",
+        INCLUDES_DIR.DIR."lib".DIR."cebe"
+    );
 
     # Array: $docs
     # Contains the gathered documentation.
@@ -98,7 +100,11 @@
      * Makes a string detailing the file where the documentation was found.
      */
     function make_place($pathname) {
-        return str_replace(array(MAIN_DIR.DIR, DIR), array("", "/"), $pathname);
+        return str_replace(
+            array(MAIN_DIR.DIR, DIR),
+            array("", "/"),
+            $pathname
+        );
     }
 
     /**
@@ -108,7 +114,14 @@
     function scan_docs($pathname, $file) {
         global $docs;
 
-        if (preg_match_all('/\n +\/\*\*\n.+?\n +\*\//s', $file, $matches, PREG_SET_ORDER)) {
+        if (
+            preg_match_all(
+                '/\n +\/\*\*\n.+?\n +\*\//s',
+                $file,
+                $matches,
+                PREG_SET_ORDER
+            )
+        ) {
             # Add a header for this file.
             $docs.= "==============================================\n".
                     make_place($pathname)."\n".
@@ -120,7 +133,9 @@
                 # Underline the title.
                 $doc = preg_replace_callback('/\n +\/\*\*\n +\* +(.+)\n/',
                     function ($matches) {
-                        return $matches[1]."\n".str_repeat("-", strlen($matches[1]))."\n";
+                        return $matches[1]."\n".str_repeat(
+                            "-", strlen($matches[1])
+                        )."\n";
                     }, $doc);
 
                 # Remove leading asterisks.
@@ -137,7 +152,10 @@
      */
     function create_file() {
         global $docs;
-        @file_put_contents(MAIN_DIR.DIR."tools".DIR."api_docs.txt", $docs);
+        @file_put_contents(
+            MAIN_DIR.DIR."tools".DIR."api_docs.txt",
+            $docs
+        );
         echo fix($docs);
     }
 

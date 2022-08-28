@@ -40,16 +40,21 @@
 
     # Array: $exclude
     # Paths to be excluded from directory recursion.
-    $exclude = array(MAIN_DIR.DIR."tools",
-                     MAIN_DIR.DIR."uploads",
-                     MAIN_DIR.DIR."includes".DIR."caches",
-                     MAIN_DIR.DIR."includes".DIR."lib".DIR."Twig",
-                     MAIN_DIR.DIR."includes".DIR."lib".DIR."IXR",
-                     MAIN_DIR.DIR."includes".DIR."lib".DIR."cebe");
+    $exclude = array(
+        MAIN_DIR.DIR."tools",
+        MAIN_DIR.DIR."uploads",
+        MAIN_DIR.DIR."includes".DIR."caches",
+        MAIN_DIR.DIR."includes".DIR."lib".DIR."Twig",
+        MAIN_DIR.DIR."includes".DIR."lib".DIR."IXR",
+        MAIN_DIR.DIR."includes".DIR."lib".DIR."cebe"
+    );
 
     # Array: $trigger
     # Contains the calls and filters.
-    $trigger = array("call" => array(), "filter" => array());
+    $trigger = array(
+        "call" => array(),
+        "filter" => array()
+    );
 
     # String: $str_reg
     # Regular expression representing a string.
@@ -127,7 +132,11 @@
      * Makes a string detailing the place a trigger was found.
      */
     function make_place($pathname, $line) {
-        return str_replace(array(MAIN_DIR.DIR, DIR), array("", "/"), $pathname)." on line ".$line;
+        return str_replace(
+            array(MAIN_DIR.DIR, DIR),
+            array("", "/"),
+            $pathname
+        )." on line ".$line;
     }
 
     /**
@@ -138,17 +147,27 @@
         global $trigger;
         global $str_reg;
 
-        if (preg_match_all("/(\\\$trigger|Trigger::current\(\))->call\($str_reg(,\s*(.+))?\)/",
-                           $text, $matches, PREG_SET_ORDER)) {
-
+        if (
+            preg_match_all(
+                "/(\\\$trigger|Trigger::current\(\))->call\($str_reg(,\s*(.+))?\)/",
+                $text,
+                $matches,
+                PREG_SET_ORDER
+            )
+        ) {
             foreach ($matches as $match) {
                 $call = trim($match[2], "'\"");
 
                 if (isset($trigger["call"][$call]))
-                    $trigger["call"][$call]["places"][] = make_place($pathname, $line);
+                    $trigger["call"][$call]["places"][] = make_place(
+                        $pathname,
+                        $line
+                    );
                 else
-                    $trigger["call"][$call] = array("places"    => array(make_place($pathname, $line)),
-                                                    "arguments" => trim(fallback($match[4], ""), ", "));
+                    $trigger["call"][$call] = array(
+                        "places"    => array(make_place($pathname, $line)),
+                        "arguments" => trim(fallback($match[4], ""), ", ")
+                    );
             }
         }
     }
@@ -161,9 +180,14 @@
         global $trigger;
         global $arr_reg;
 
-        if (preg_match_all("/(\\\$trigger|Trigger::current\(\))->call\($arr_reg(,\s*(.+))?\)/",
-                           $text, $matches, PREG_SET_ORDER)) {
-
+        if (
+            preg_match_all(
+                "/(\\\$trigger|Trigger::current\(\))->call\($arr_reg(,\s*(.+))?\)/",
+                $text,
+                $matches,
+                PREG_SET_ORDER
+            )
+        ) {
             foreach ($matches as $match) {
                 $calls = explode(",", $match[2]);
 
@@ -174,10 +198,15 @@
                         continue;
 
                     if (isset($trigger["call"][$call]))
-                        $trigger["call"][$call]["places"][] = make_place($pathname, $line);
+                        $trigger["call"][$call]["places"][] = make_place(
+                            $pathname,
+                            $line
+                        );
                     else
-                        $trigger["call"][$call] = array("places"    => array(make_place($pathname, $line)),
-                                                        "arguments" => trim(fallback($match[4], ""), ", "));
+                        $trigger["call"][$call] = array(
+                            "places"    => array(make_place($pathname, $line)),
+                            "arguments" => trim(fallback($match[4], ""), ", ")
+                        );
                 }
             }
         }
@@ -191,18 +220,28 @@
         global $trigger;
         global $str_reg;
 
-        if (preg_match_all("/(\\\$trigger|Trigger::current\(\))->filter\(([^,]+),\s*$str_reg(,\s*(.+))?\)/",
-                           $text, $matches, PREG_SET_ORDER)) {
-
+        if (
+            preg_match_all(
+                "/(\\\$trigger|Trigger::current\(\))->filter\(([^,]+),\s*$str_reg(,\s*(.+))?\)/",
+                $text,
+                $matches,
+                PREG_SET_ORDER
+            )
+        ) {
             foreach ($matches as $match) {
                 $filter = trim($match[3], "'\"");
 
                 if (isset($trigger["filter"][$filter]))
-                    $trigger["filter"][$filter]["places"][] = make_place($pathname, $line);
+                    $trigger["filter"][$filter]["places"][] = make_place(
+                        $pathname,
+                        $line
+                    );
                 else
-                    $trigger["filter"][$filter] = array("places"    => array(make_place($pathname, $line)),
-                                                        "target"    => trim($match[2], ", "),
-                                                        "arguments" => trim(fallback($match[5], ""), ", "));
+                    $trigger["filter"][$filter] = array(
+                        "places"    => array(make_place($pathname, $line)),
+                        "target"    => trim($match[2], ", "),
+                        "arguments" => trim(fallback($match[5], ""), ", ")
+                    );
             }
         }
     }
@@ -215,9 +254,14 @@
         global $trigger;
         global $arr_reg;
 
-        if (preg_match_all("/(\\\$trigger|Trigger::current\(\))->filter\(([^,]+),\s*$arr_reg(,\s*(.+))?\)/",
-                           $text, $matches, PREG_SET_ORDER)) {
-
+        if (
+            preg_match_all(
+                "/(\\\$trigger|Trigger::current\(\))->filter\(([^,]+),\s*$arr_reg(,\s*(.+))?\)/",
+                $text,
+                $matches,
+                PREG_SET_ORDER
+            )
+        ) {
             foreach ($matches as $match) {
                 $filters = explode(",", $match[3]);
 
@@ -228,11 +272,16 @@
                         continue;
 
                     if (isset($trigger["filter"][$filter]))
-                        $trigger["filter"][$filter]["places"][] = make_place($pathname, $line);
+                        $trigger["filter"][$filter]["places"][] = make_place(
+                            $pathname,
+                            $line
+                        );
                     else
-                        $trigger["filter"][$filter] = array("places"    => array(make_place($pathname, $line)),
-                                                            "target"    => trim($match[2], ", "),
-                                                            "arguments" => trim(fallback($match[5], ""), ", "));
+                        $trigger["filter"][$filter] = array(
+                            "places"    => array(make_place($pathname, $line)),
+                            "target"    => trim($match[2], ", "),
+                            "arguments" => trim(fallback($match[5], ""), ", ")
+                        );
                 }
             }
         }
@@ -246,17 +295,27 @@
         global $trigger;
         global $str_reg;
 
-        if (preg_match_all("/\{\{\s*trigger\.call\($str_reg(,\s*(.+))?\)\s*\}\}/",
-                           $text, $matches, PREG_SET_ORDER)) {
-
+        if (
+            preg_match_all(
+                "/\{\{\s*trigger\.call\($str_reg(,\s*(.+))?\)\s*\}\}/",
+                $text,
+                $matches,
+                PREG_SET_ORDER
+            )
+        ) {
             foreach ($matches as $match) {
                 $call = trim($match[1], "'\"");
 
                 if (isset($trigger["call"][$call]))
-                    $trigger["call"][$call]["places"][] = make_place($pathname, $line);
+                    $trigger["call"][$call]["places"][] = make_place(
+                        $pathname,
+                        $line
+                    );
                 else
-                    $trigger["call"][$call] = array("places"    => array(make_place($pathname, $line)),
-                                                    "arguments" => trim(fallback($match[3], ""), ", "));
+                    $trigger["call"][$call] = array(
+                        "places"    => array(make_place($pathname, $line)),
+                        "arguments" => trim(fallback($match[3], ""), ", ")
+                    );
             }
         }
     }
@@ -310,7 +369,10 @@
             }
         }
 
-        @file_put_contents(MAIN_DIR.DIR."tools".DIR."triggers_list.txt", $contents);
+        @file_put_contents(
+            MAIN_DIR.DIR."tools".DIR."triggers_list.txt",
+            $contents
+        );
         echo fix($contents);
     }
 

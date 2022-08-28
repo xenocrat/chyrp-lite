@@ -40,21 +40,25 @@
 
     # Array: $domains
     # An associative array of domains and their paths.
-    $domains = array("chyrp" => MAIN_DIR,
-                     "admin" => MAIN_DIR.DIR."admin");
+    $domains = array(
+        "chyrp" => MAIN_DIR,
+        "admin" => MAIN_DIR.DIR."admin"
+    );
 
     # Array: $exclude
     # Paths to be excluded from directory recursion.
-    $exclude = array(MAIN_DIR.DIR."admin",
-                     MAIN_DIR.DIR."modules",
-                     MAIN_DIR.DIR."feathers",
-                     MAIN_DIR.DIR."themes",
-                     MAIN_DIR.DIR."tools",
-                     MAIN_DIR.DIR."uploads",
-                     MAIN_DIR.DIR."includes".DIR."caches",
-                     MAIN_DIR.DIR."includes".DIR."lib".DIR."Twig",
-                     MAIN_DIR.DIR."includes".DIR."lib".DIR."IXR",
-                     MAIN_DIR.DIR."includes".DIR."lib".DIR."cebe");
+    $exclude = array(
+        MAIN_DIR.DIR."admin",
+        MAIN_DIR.DIR."modules",
+        MAIN_DIR.DIR."feathers",
+        MAIN_DIR.DIR."themes",
+        MAIN_DIR.DIR."tools",
+        MAIN_DIR.DIR."uploads",
+        MAIN_DIR.DIR."includes".DIR."caches",
+        MAIN_DIR.DIR."includes".DIR."lib".DIR."Twig",
+        MAIN_DIR.DIR."includes".DIR."lib".DIR."IXR",
+        MAIN_DIR.DIR."includes".DIR."lib".DIR."cebe"
+    );
 
     # Array: $strings
     # Contains the translations for each gettext domain.
@@ -166,7 +170,11 @@
      * Makes a string detailing the place a translation was found.
      */
     function make_place($pathname, $line) {
-        return str_replace(array(MAIN_DIR.DIR, DIR), array("", "/"), $pathname).":".$line;
+        return str_replace(
+            array(MAIN_DIR.DIR, DIR),
+            array("", "/"),
+            $pathname
+        ).":".$line;
     }
 
     /**
@@ -174,7 +182,10 @@
      * Checks if a pathname is part of a theme.
      */
     function is_theme($pathname) {
-        return (strpos($pathname, THEMES_DIR) === 0 or strpos($pathname, MAIN_DIR.DIR."admin") === 0);
+        return (
+            strpos($pathname, THEMES_DIR) === 0 or
+            strpos($pathname, MAIN_DIR.DIR."admin") === 0
+        );
     }
 
     /**
@@ -187,20 +198,31 @@
         global $str_reg;
 
         $escaped = preg_quote($domain, "/");
-        $dom_reg = ($domain == "chyrp") ? '' : ',\s*(\"'.$escaped.'\"|\''.$escaped.'\')' ;
+        $dom_reg = ($domain == "chyrp") ?
+            '' :
+            ',\s*(\"'.$escaped.'\"|\''.$escaped.'\')' ;
 
-        if (preg_match_all("/__\($str_reg$dom_reg\)/",
-                           $text, $matches, PREG_SET_ORDER)) {
-
+        if (
+            preg_match_all(
+                "/__\($str_reg$dom_reg\)/",
+                $text,
+                $matches,
+                PREG_SET_ORDER
+            )
+        ) {
             foreach ($matches as $match) {
                 $string = trim($match[1], "'\"");
 
                 if (isset($strings[$domain][$string]))
-                    $strings[$domain][$string]["places"][] = make_place($pathname, $line);
+                    $strings[$domain][$string]["places"][] = make_place(
+                        $pathname, $line
+                    );
                 else
-                    $strings[$domain][$string] = array("places" => array(make_place($pathname, $line)),
-                                                       "filter" => false,
-                                                       "plural" => false);
+                    $strings[$domain][$string] = array(
+                        "places" => array(make_place($pathname, $line)),
+                        "filter" => false,
+                        "plural" => false
+                    );
             }
         }
     }
@@ -215,20 +237,32 @@
         global $str_reg;
 
         $escaped = preg_quote($domain, "/");
-        $dom_reg = ($domain == "chyrp") ? '.+?' : '.+?,\s*(\"'.$escaped.'\"|\''.$escaped.'\')' ;
+        $dom_reg = ($domain == "chyrp") ?
+            '.+?' :
+            '.+?,\s*(\"'.$escaped.'\"|\''.$escaped.'\')' ;
 
-        if (preg_match_all("/_f\($str_reg$dom_reg\)/",
-                           $text, $matches, PREG_SET_ORDER)) {
-
+        if (
+            preg_match_all(
+                "/_f\($str_reg$dom_reg\)/",
+                $text,
+                $matches,
+                PREG_SET_ORDER
+            )
+        ) {
             foreach ($matches as $match) {
                 $string = trim($match[1], "'\"");
 
                 if (isset($strings[$domain][$string]))
-                    $strings[$domain][$string]["places"][] = make_place($pathname, $line);
+                    $strings[$domain][$string]["places"][] = make_place(
+                        $pathname,
+                        $line
+                    );
                 else
-                    $strings[$domain][$string] = array("places" => array(make_place($pathname, $line)),
-                                                       "filter" => true,
-                                                       "plural" => false);
+                    $strings[$domain][$string] = array(
+                        "places" => array(make_place($pathname, $line)),
+                        "filter" => true,
+                        "plural" => false
+                    );
             }
         }
     }
@@ -243,21 +277,33 @@
         global $str_reg;
 
         $escaped = preg_quote($domain, "/");
-        $dom_reg = ($domain == "chyrp") ? '.+?' : '.+?,\s*(\"'.$escaped.'\"|\''.$escaped.'\')' ;
+        $dom_reg = ($domain == "chyrp") ?
+            '.+?' :
+            '.+?,\s*(\"'.$escaped.'\"|\''.$escaped.'\')' ;
 
-        if (preg_match_all("/_p\($str_reg,\s*$str_reg$dom_reg\)/",
-                           $text, $matches, PREG_SET_ORDER)) {
-
+        if (
+            preg_match_all(
+                "/_p\($str_reg,\s*$str_reg$dom_reg\)/",
+                $text,
+                $matches,
+                PREG_SET_ORDER
+            )
+        ) {
             foreach ($matches as $match) {
                 $string = trim($match[1], "'\"");
                 $plural = trim($match[2], "'\"");
 
                 if (isset($strings[$domain][$string]))
-                    $strings[$domain][$string]["places"][] = make_place($pathname, $line);
+                    $strings[$domain][$string]["places"][] = make_place(
+                        $pathname,
+                        $line
+                    );
                 else
-                    $strings[$domain][$string] = array("places" => array(make_place($pathname, $line)),
-                                                       "filter" => true,
-                                                       "plural" => $plural);
+                    $strings[$domain][$string] = array(
+                        "places" => array(make_place($pathname, $line)),
+                        "filter" => true,
+                        "plural" => $plural
+                    );
             }
         }
     }
@@ -277,18 +323,28 @@
         if (is_theme($pathname))
             $dom_reg.= '?';
 
-        if (preg_match_all("/$str_reg\s*\|\s*translate(?!_plural)$dom_reg(?!\s*\|\s*format)/",
-                           $text, $matches, PREG_SET_ORDER)) {
-
+        if (
+            preg_match_all(
+                "/$str_reg\s*\|\s*translate(?!_plural)$dom_reg(?!\s*\|\s*format)/",
+                $text,
+                $matches,
+                PREG_SET_ORDER
+            )
+        ) {
             foreach ($matches as $match) {
                 $string = trim($match[1], "'\"");
 
                 if (isset($strings[$domain][$string]))
-                    $strings[$domain][$string]["places"][] = make_place($pathname, $line);
+                    $strings[$domain][$string]["places"][] = make_place(
+                        $pathname,
+                        $line
+                    );
                 else
-                    $strings[$domain][$string] = array("places" => array(make_place($pathname, $line)),
-                                                       "filter" => false,
-                                                       "plural" => false);
+                    $strings[$domain][$string] = array(
+                        "places" => array(make_place($pathname, $line)),
+                        "filter" => false,
+                        "plural" => false
+                    );
             }
         }
     }
@@ -308,18 +364,28 @@
         if (is_theme($pathname))
             $dom_reg.= '?';
 
-        if (preg_match_all("/$str_reg\s*\|\s*translate$dom_reg\s*\|\s*format/",
-                           $text, $matches, PREG_SET_ORDER)) {
-
+        if (
+            preg_match_all(
+                "/$str_reg\s*\|\s*translate$dom_reg\s*\|\s*format/",
+                $text,
+                $matches,
+                PREG_SET_ORDER
+            )
+        ) {
             foreach ($matches as $match) {
                 $string = trim($match[1], "'\"");
 
                 if (isset($strings[$domain][$string]))
-                    $strings[$domain][$string]["places"][] = make_place($pathname, $line);
+                    $strings[$domain][$string]["places"][] = make_place(
+                        $pathname,
+                        $line
+                    );
                 else
-                    $strings[$domain][$string] = array("places" => array(make_place($pathname, $line)),
-                                                       "filter" => true,
-                                                       "plural" => false);
+                    $strings[$domain][$string] = array(
+                        "places" => array(make_place($pathname, $line)),
+                        "filter" => true,
+                        "plural" => false
+                    );
             }
         }
     }
@@ -339,19 +405,29 @@
         if (is_theme($pathname))
             $dom_reg.= '?';
 
-        if (preg_match_all("/$str_reg\s*\|\s*translate_plural\(\s*$str_reg\s*,.+?$dom_reg\s*\)\s*\|\s*format/",
-                           $text, $matches, PREG_SET_ORDER)) {
-
+        if (
+            preg_match_all(
+                "/$str_reg\s*\|\s*translate_plural\(\s*$str_reg\s*,.+?$dom_reg\s*\)\s*\|\s*format/",
+                $text,
+                $matches,
+                PREG_SET_ORDER
+            )
+        ) {
             foreach ($matches as $match) {
                 $string = trim($match[1], "'\"");
                 $plural = trim($match[2], "'\"");
 
                 if (isset($strings[$domain][$string]))
-                    $strings[$domain][$string]["places"][] = make_place($pathname, $line);
+                    $strings[$domain][$string]["places"][] = make_place(
+                        $pathname,
+                        $line
+                    );
                 else
-                    $strings[$domain][$string] = array("places" => array(make_place($pathname, $line)),
-                                                       "filter" => true,
-                                                       "plural" => $plural);
+                    $strings[$domain][$string] = array(
+                        "places" => array(make_place($pathname, $line)),
+                        "filter" => true,
+                        "plural" => $plural
+                    );
             }
         }
     }
@@ -365,7 +441,8 @@
         global $strings;
 
         foreach ($domains as $filename => $pathname) {
-            $contents = "#. This file is distributed under the same license as the Chyrp Lite package.\n\n";
+            $contents = "#. This file is distributed under the".
+                        " same license as the Chyrp Lite package.\n\n";
 
             foreach ($strings[$filename] as $string => $attributes) {
                 foreach ($attributes["places"] as $place)
@@ -387,14 +464,18 @@
                 $contents.= "\n";
             }
 
-            $pot_file = $pathname.DIR.(($filename == "chyrp") ? "includes".DIR : "").
-                        "locale".DIR."en_US".DIR."LC_MESSAGES".DIR.$filename.".pot";
+            $pot_file = $pathname.DIR.
+                        (($filename == "chyrp") ? "includes".DIR : "").
+                        "locale".DIR."en_US".DIR."LC_MESSAGES".DIR.
+                        $filename.".pot";
 
             $result = @file_put_contents($pot_file, $contents);
 
-            echo $filename.".pot ".(($result === false) ?
-                                    '<span style="background-color:#c11600;">Boo!</span>' :
-                                    '<span style="background-color:#108600;">Yay!</span>')."\n";
+            echo $filename.".pot ".(
+                    ($result === false) ?
+                        '<span style="background-color:#c11600;">Boo!</span>' :
+                        '<span style="background-color:#108600;">Yay!</span>'
+                 )."\n";
         }
     }
 
