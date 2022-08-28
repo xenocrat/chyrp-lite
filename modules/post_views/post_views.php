@@ -66,6 +66,25 @@
             $post->has_many[] = "views";
         }
 
+        public function post_options($fields, $post = null): array {
+            $fields[] = array(
+                "attr" => "reset_views",
+                "label" => __("Reset view count?", "post_views"),
+                "type" => "checkbox",
+                "checked" => false
+            );
+
+            return $fields;
+        }
+
+        public function update_post($post): void {
+            if (isset($_POST['reset_views']))
+                SQL::current()->delete(
+                    "views",
+                    array("post_id" => $post->id)
+                );
+        }
+
         static function delete_post($post): void {
             SQL::current()->delete(
                 "views",
