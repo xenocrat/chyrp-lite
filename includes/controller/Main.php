@@ -85,11 +85,20 @@
                 return $route->action = "index";
 
             # Discover feed requests.
-            if ($route->action == "feed" or preg_match("/\/feed\/?$/", $route->request))
+            if (
+                $route->action == "feed" or
+                preg_match("/\/feed\/?$/", $route->request)
+            )
                 $this->feed = true;
 
             # Discover pagination.
-            if (preg_match_all("/\/((([^_\/]+)_)?page)\/([0-9]+)/", $route->request, $pages)) {
+            if (
+                preg_match_all(
+                    "/\/((([^_\/]+)_)?page)\/([0-9]+)/",
+                    $route->request,
+                    $pages
+                )
+            ) {
                 foreach ($pages[1] as $index => $variable)
                     $_GET[$variable] = (int) $pages[4][$index];
 
@@ -230,24 +239,44 @@
                     array("created_at DESC")
                 )->fetch();
 
-                $latest = ($latest === false) ? time() : $latest["created_at"];
+                $latest = ($latest === false) ?
+                    time() :
+                    $latest["created_at"] ;
             }
 
-            $start = mktime(0, 0, 0,
-                (is_numeric($_GET['month']) ? (int) $_GET['month'] : 1),
-                (is_numeric($_GET['day']) ? (int) $_GET['day'] : 1),
-                (is_numeric($_GET['year']) ? (int) $_GET['year'] : (int) when("Y", $latest))
+            $start = mktime(
+                0, 0, 0,
+                (
+                    is_numeric($_GET['month']) ?
+                        (int) $_GET['month'] :
+                        1
+                ),
+                (
+                    is_numeric($_GET['day']) ?
+                        (int) $_GET['day'] :
+                        1
+                ),
+                (
+                    is_numeric($_GET['year']) ?
+                        (int) $_GET['year'] :
+                        (int) when("Y", $latest)
+                )
             );
 
             if (is_numeric($_GET['day'])) {
                 $depth = "day";
-                $limit = strtotime("tomorrow", $start);
+                $limit = strtotime(
+                    "tomorrow",
+                    $start
+                );
                 $title = _f("Archive of %s", _w("d F Y", $start));
                 $posts = new Paginator(
                     Post::find(
                         array(
                             "placeholders" => true,
-                            "where" => array("created_at LIKE" => when("Y-m-d%", $start)),
+                            "where" => array(
+                                "created_at LIKE" => when("Y-m-d%", $start)
+                            ),
                             "order" => "created_at DESC, id DESC"
                         )
                     ),
@@ -255,13 +284,18 @@
                 );
             } elseif (is_numeric($_GET['month'])) {
                 $depth = "month";
-                $limit = strtotime("midnight first day of next month", $start);
+                $limit = strtotime(
+                    "midnight first day of next month",
+                    $start
+                );
                 $title = _f("Archive of %s", _w("F Y", $start));
                 $posts = new Paginator(
                     Post::find(
                         array(
                             "placeholders" => true,
-                            "where" => array("created_at LIKE" => when("Y-m-%", $start)),
+                            "where" => array(
+                                "created_at LIKE" => when("Y-m-%", $start)
+                            ),
                             "order" => "created_at DESC, id DESC"
                         )
                     ),
@@ -269,19 +303,27 @@
                 );
             } else {
                 $depth = "year";
-                $limit = strtotime("midnight first day of next year", $start);
+                $limit = strtotime(
+                    "midnight first day of next year",
+                    $start
+                );
                 $title = _f("Archive of %s", _w("Y", $start));
 
                 $results = Post::find(
                     array(
-                        "where" => array("created_at LIKE" => when("Y-%-%", $start)),
+                        "where" => array(
+                            "created_at LIKE" => when("Y-%-%", $start)
+                        ),
                         "order" => "created_at DESC, id DESC"
                     )
                 );
 
                 foreach ($results as $result) {
                     $created_at = strtotime($result->created_at);
-                    $this_month = strtotime("midnight first day of this month", $created_at);
+                    $this_month = strtotime(
+                        "midnight first day of this month",
+                        $created_at
+                    );
 
                     if (!isset($months[$this_month]))
                         $months[$this_month] = array();
@@ -294,7 +336,11 @@
             $next = $sql->select(
                 "posts",
                 "created_at",
-                array("created_at <" => datetime($start), $statuses, $feathers),
+                array(
+                    "created_at <" => datetime($start),
+                    $statuses,
+                    $feathers
+                ),
                 array("created_at DESC")
             )->fetch();
 
@@ -302,12 +348,20 @@
             $prev = $sql->select(
                 "posts",
                 "created_at",
-                array("created_at >=" => datetime($limit), $statuses, $feathers),
+                array(
+                    "created_at >=" => datetime($limit),
+                    $statuses,
+                    $feathers
+                ),
                 array("created_at ASC")
             )->fetch();
 
-            $prev = ($prev === false) ? null : strtotime($prev["created_at"]);
-            $next = ($next === false) ? null : strtotime($next["created_at"]);
+            $prev = ($prev === false) ?
+                null :
+                strtotime($prev["created_at"]) ;
+            $next = ($next === false) ?
+                null :
+                strtotime($next["created_at"]) ;
 
             $this->display(
                 "pages".DIR."archive",
@@ -492,7 +546,11 @@
             if ($page->no_results)
                 return false;
 
-            if (!$page->public and !$visitor->group->can("view_page") and $page->user_id != $visitor->id) {
+            if (
+                !$page->public and
+                !$visitor->group->can("view_page") and
+                $page->user_id != $visitor->id
+            ) {
                 $trigger->call("can_not_view_page");
                 show_403(
                     __("Access Denied"),
@@ -543,7 +601,11 @@
             $conds = array(Post::statuses());
 
             if (isset($_GET['feather']))
-                $conds["feather"] = preg_replace("|[^a-z_\-]|i", "", $_GET['feather']);
+                $conds["feather"] = preg_replace(
+                    "|[^a-z_\-]|i",
+                    "",
+                    $_GET['feather']
+                );
             else
                 $conds[] = Post::feathers();
 
@@ -837,14 +899,20 @@
                     );
 
                 if (!empty($_POST['new_password1'])) {
-                    if (empty($_POST['new_password2']) or $_POST['new_password1'] != $_POST['new_password2'])
+                    if (
+                        empty($_POST['new_password2']) or
+                        $_POST['new_password1'] != $_POST['new_password2']
+                    ) {
                         Flash::warning(
                             __("Passwords do not match.")
                         );
-                    elseif (password_strength($_POST['new_password1']) < 100)
+                    } elseif (
+                        password_strength($_POST['new_password1']) < 100
+                    ) {
                         Flash::message(
                             __("Please consider setting a stronger password for your account.")
                         );
+                    }
                 }
 
                 if (empty($_POST['email']))
@@ -1148,7 +1216,10 @@
 
             if (is_array($template)) {
                 foreach (array_values($template) as $index => $try)
-                    if ($theme->file_exists($try) or ($index + 1) == count($template)) {
+                    if (
+                        $theme->file_exists($try) or
+                        ($index + 1) == count($template)
+                    ) {
                         $this->display($try, $context, $title);
                         return;
                     }

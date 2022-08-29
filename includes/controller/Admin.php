@@ -1155,17 +1155,23 @@
                 );
 
             if (!empty($_POST['new_password1'])) {
-                if (empty($_POST['new_password2']) or $_POST['new_password1'] != $_POST['new_password2'])
+                if (
+                    empty($_POST['new_password2']) or
+                    $_POST['new_password1'] != $_POST['new_password2']
+                ) {
                     error(
                         __("Error"),
                         __("Passwords do not match."),
                         null,
                         422
                     );
-                elseif (password_strength($_POST['new_password1']) < 100)
+                } elseif (
+                    password_strength($_POST['new_password1']) < 100
+                ) {
                     Flash::message(
                         __("Please consider setting a stronger password for this user.")
                     );
+                }
             }
 
             $password = (!empty($_POST['new_password1'])) ?
