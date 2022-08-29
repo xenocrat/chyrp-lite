@@ -17,28 +17,28 @@ msgstr ""
 msgid "Upload files and make them available for visitors to download."
 msgstr ""
 
-#: feathers/uploader/uploader.php:8
+#: feathers/uploader/uploader.php:10
 msgid "Title"
 msgstr ""
 
-#: feathers/uploader/uploader.php:13
+#: feathers/uploader/uploader.php:18
 msgid "Files"
 msgstr ""
 
-#: feathers/uploader/uploader.php:16
+#: feathers/uploader/uploader.php:21
 #, php-format
 msgid "(Max. file size: %d Megabytes)"
 msgstr ""
 
-#: feathers/uploader/uploader.php:20
+#: feathers/uploader/uploader.php:28
 msgid "Caption"
 msgstr ""
 
-#: feathers/uploader/uploader.php:62
+#: feathers/uploader/uploader.php:80
 msgid "You did not select any files to upload."
 msgstr ""
 
-#: feathers/uploader/uploader.php:184
+#: feathers/uploader/uploader.php:224
 msgid "Source"
 msgstr ""
 

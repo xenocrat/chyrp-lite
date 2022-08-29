@@ -8,25 +8,25 @@ msgstr ""
 msgid "Link to other sites and add an optional description."
 msgstr ""
 
-#: feathers/link/link.php:6
+#: feathers/link/link.php:8
 msgid "Title"
 msgstr ""
 
-#: feathers/link/link.php:11
+#: feathers/link/link.php:16
 msgid "URL"
 msgstr ""
 
-#: feathers/link/link.php:15
+#: feathers/link/link.php:23
 msgid "Description"
 msgstr ""
 
-#: feathers/link/link.php:29
-#: feathers/link/link.php:60
+#: feathers/link/link.php:45
+#: feathers/link/link.php:88
 msgid "URL can't be empty."
 msgstr ""
 
-#: feathers/link/link.php:32
-#: feathers/link/link.php:63
+#: feathers/link/link.php:53
+#: feathers/link/link.php:96
 msgid "Invalid URL."
 msgstr ""
 

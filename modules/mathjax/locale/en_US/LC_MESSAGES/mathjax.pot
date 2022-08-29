@@ -14,7 +14,7 @@ msgid "MathML Support"
 msgstr ""
 
 #: modules/mathjax/info.php:3
-#: modules/mathjax/mathjax.php:59
+#: modules/mathjax/mathjax.php:78
 msgid "MathJax"
 msgstr ""
 

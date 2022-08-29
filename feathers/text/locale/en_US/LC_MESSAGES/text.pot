@@ -8,15 +8,15 @@ msgstr ""
 msgid "A basic text feather."
 msgstr ""
 
-#: feathers/text/text.php:6
+#: feathers/text/text.php:8
 msgid "Title"
 msgstr ""
 
-#: feathers/text/text.php:11
+#: feathers/text/text.php:16
 msgid "Body"
 msgstr ""
 
-#: feathers/text/text.php:47
+#: feathers/text/text.php:69
 msgid "Body can't be blank."
 msgstr ""
 

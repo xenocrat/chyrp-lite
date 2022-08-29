@@ -2,7 +2,7 @@
 
 #: feathers/photo/admin/help/photo_alt_text.twig:3
 #: feathers/photo/admin/help/photo_alt_text.twig:6
-#: feathers/photo/photo.php:116
+#: feathers/photo/photo.php:156
 msgid "Alternative Text"
 msgstr ""
 
@@ -20,7 +20,7 @@ msgid "This can be a URL that will take visitors to the original resource or it 
 msgstr ""
 
 #: feathers/photo/info.php:3
-#: feathers/photo/photo.php:13
+#: feathers/photo/photo.php:18
 msgid "Photo"
 msgstr ""
 
@@ -28,24 +28,24 @@ msgstr ""
 msgid "Upload and display an image with a caption."
 msgstr ""
 
-#: feathers/photo/photo.php:8
+#: feathers/photo/photo.php:10
 msgid "Title"
 msgstr ""
 
-#: feathers/photo/photo.php:16
+#: feathers/photo/photo.php:21
 #, php-format
 msgid "(Max. file size: %d Megabytes)"
 msgstr ""
 
-#: feathers/photo/photo.php:20
+#: feathers/photo/photo.php:28
 msgid "Caption"
 msgstr ""
 
-#: feathers/photo/photo.php:37
+#: feathers/photo/photo.php:56
 msgid "You did not select a photo to upload."
 msgstr ""
 
-#: feathers/photo/photo.php:122
+#: feathers/photo/photo.php:164
 msgid "Source"
 msgstr ""
 

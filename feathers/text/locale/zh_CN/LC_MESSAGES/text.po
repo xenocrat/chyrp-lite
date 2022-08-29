@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: feathers/text/info.php:3
@@ -21,14 +21,14 @@ msgstr ""
 msgid "A basic text feather."
 msgstr "一个基本的文本羽毛。"
 
-#: feathers/text/text.php:6
+#: feathers/text/text.php:8
 msgid "Title"
 msgstr "标题"
 
-#: feathers/text/text.php:11
+#: feathers/text/text.php:16
 msgid "Body"
 msgstr "正文"
 
-#: feathers/text/text.php:47
+#: feathers/text/text.php:69
 msgid "Body can't be blank."
 msgstr "正文不能为空。"

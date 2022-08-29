@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/sitemap/admin/pages/sitemap_settings.twig:3
@@ -58,34 +58,34 @@ msgstr ""
 "Crea un file <em>sitemap.xml</em> sul tuo server per aiutare i motori di "
 "ricerca a indicizzare il tuo blog."
 
-#: modules/sitemap/sitemap.php:29
+#: modules/sitemap/sitemap.php:36
 msgid "Sitemap"
 msgstr "Sitemap"
 
-#: modules/sitemap/sitemap.php:41
+#: modules/sitemap/sitemap.php:54
 msgid "Hourly"
 msgstr "Ogni ora"
 
-#: modules/sitemap/sitemap.php:42
+#: modules/sitemap/sitemap.php:55
 msgid "Daily"
 msgstr "Giornaliero"
 
-#: modules/sitemap/sitemap.php:43
+#: modules/sitemap/sitemap.php:56
 msgid "Weekly"
 msgstr "Settimanale"
 
-#: modules/sitemap/sitemap.php:44
+#: modules/sitemap/sitemap.php:57
 msgid "Monthly"
 msgstr "Mensile"
 
-#: modules/sitemap/sitemap.php:45
+#: modules/sitemap/sitemap.php:58
 msgid "Yearly"
 msgstr "Annuale"
 
-#: modules/sitemap/sitemap.php:46
+#: modules/sitemap/sitemap.php:59
 msgid "Never"
 msgstr "Mai"
 
-#: modules/sitemap/sitemap.php:63
+#: modules/sitemap/sitemap.php:83
 msgid "Could not determine the absolute path to the Sitemap."
 msgstr "Impossibile determinare il percorso assoluto del Sitemap."

@@ -25,20 +25,24 @@ msgstr "Conta il numero di volte che i tuoi post sono stati visualizzati."
 msgid "Do you want to remove view counts from the database?"
 msgstr "Si desidera rimuovere i conteggi delle visualizzazioni dal database?"
 
-#: modules/post_views/post_views.php:24
+#: modules/post_views/post_views.php:40
 msgid "View Count"
 msgstr "Mostra contatore"
 
-#: modules/post_views/post_views.php:30
+#: modules/post_views/post_views.php:45
 #, php-format
 msgid "Download view count for &#8220;%s&#8221;"
 msgstr "Download il conteggio delle visualizzazioni per il &#8220;%s&#8221;"
 
-#: modules/post_views/post_views.php:51
+#: modules/post_views/post_views.php:73
+msgid "Reset View Count?"
+msgstr "Ripristinare il conteggio delle visualizzazioni?"
+
+#: modules/post_views/post_views.php:100
 msgid "An ID is required to download a view count."
 msgstr "Per scaricare il conteggio delle visualizzazioni è necessario un ID."
 
-#: modules/post_views/post_views.php:60
+#: modules/post_views/post_views.php:116
 msgid "You do not have sufficient privileges to download this view count."
 msgstr ""
 "Non si dispone di privilegi sufficienti per scaricare il conteggio delle "

@@ -788,14 +788,14 @@ Attempt to call a responder for the action(s) until one of them doesn't return f
 
 Function: url
 -------------
-Constructs an absolute URL from a relative one, translating clean to dirty URLs as necessary.
+Constructs an absolute URL from a relative one. Can translate clean to dirty URLs.
 
 Parameters:
-    $url - The relative URL. This is assumed to be a dirty URL if it begins with "/".
-    $controller - The controller to use. If omitted the current controller will be used.
+    $url - The relative URL. Assumed to be dirty if it begins with "/".
+    $controller - The controller to use. Current controller used if omitted.
 
 Returns:
-    An absolute clean or dirty URL, depending on @Config->clean_urls@ and controller support.
+    An absolute clean or dirty URL, depending on @Config->clean_urls@ and controller.
 
 
 Function: add
@@ -803,12 +803,12 @@ Function: add
 Adds a route to the blog.
 
 Parameters:
-    $path - The path to add. Wrap variables with parentheses e.g. "tag/(name)/".
-    $action - The action. Add parameters with semicolons e.g "tag;foo=bar;baz=boo".
+    $path - The path to add. Wrap variables with () e.g. "tag/(name)/".
+    $action - The action. Add parameters with ; e.g "tag;foo=bar;baz=boo".
 
 Notes:
     Required for actions that have more than one parameter.
-    For example, for /tags/ you won't need to do this, but you will for /tag/(name)/.
+    For example, not needed for /tags/ but needed for /tag/(name)/.
 
 See Also:
     <remove>
@@ -3777,8 +3777,8 @@ Function: title_from_excerpt
 Generates an acceptable title from the post's excerpt.
 
 Returns:
-    The post's excerpt:
-    filtered -> first line -> ftags stripped -> truncated to 75 characters -> normalized.
+    filtered -> first line -> ftags stripped ->
+    truncated to 75 characters -> normalized.
 
 
 Function: title

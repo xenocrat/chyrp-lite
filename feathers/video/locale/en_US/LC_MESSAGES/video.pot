@@ -8,28 +8,28 @@ msgstr ""
 msgid "A feather for video."
 msgstr ""
 
-#: feathers/video/video.php:8
+#: feathers/video/video.php:10
 msgid "Title"
 msgstr ""
 
-#: feathers/video/video.php:13
+#: feathers/video/video.php:18
 msgid "Video File"
 msgstr ""
 
-#: feathers/video/video.php:16
+#: feathers/video/video.php:21
 #, php-format
 msgid "(Max. file size: %d Megabytes)"
 msgstr ""
 
-#: feathers/video/video.php:20
+#: feathers/video/video.php:28
 msgid "Description"
 msgstr ""
 
-#: feathers/video/video.php:38
+#: feathers/video/video.php:57
 msgid "You did not select a video to upload."
 msgstr ""
 
-#: feathers/video/video.php:145
+#: feathers/video/video.php:181
 msgid "Your web browser does not support the <code>video</code> element."
 msgstr ""
 

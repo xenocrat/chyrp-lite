@@ -66,102 +66,107 @@ msgstr ""
 msgid "Enables import from Wordpress, MovableType, TextPattern, and Tumblr."
 msgstr ""
 
-#: modules/migrator/migrator.php:13
+#: modules/migrator/migrator.php:16
 msgid "Migration"
 msgstr ""
 
-#: modules/migrator/migrator.php:29
-#: modules/migrator/migrator.php:173
-#: modules/migrator/migrator.php:313
-#: modules/migrator/migrator.php:416
+#: modules/migrator/migrator.php:34
+#: modules/migrator/migrator.php:257
+#: modules/migrator/migrator.php:460
+#: modules/migrator/migrator.php:633
 msgid "You do not have sufficient privileges to import content."
 msgstr ""
 
-#: modules/migrator/migrator.php:38
-#: modules/migrator/migrator.php:185
-#: modules/migrator/migrator.php:322
-#: modules/migrator/migrator.php:425
+#: modules/migrator/migrator.php:48
+#: modules/migrator/migrator.php:276
+#: modules/migrator/migrator.php:474
+#: modules/migrator/migrator.php:647
 msgid "Missing Feather"
 msgstr ""
 
-#: modules/migrator/migrator.php:39
+#: modules/migrator/migrator.php:49
 msgid "Text feather must be enabled to import from WordPress."
 msgstr ""
 
-#: modules/migrator/migrator.php:42
+#: modules/migrator/migrator.php:57
 msgid "You must select a WordPress export file."
 msgstr ""
 
-#: modules/migrator/migrator.php:89
+#: modules/migrator/migrator.php:134
 msgid "The file does not seem to be a valid WordPress export file."
 msgstr ""
 
-#: modules/migrator/migrator.php:161
+#: modules/migrator/migrator.php:241
 msgid "WordPress content successfully imported!"
 msgstr ""
 
-#: modules/migrator/migrator.php:186
+#: modules/migrator/migrator.php:277
 msgid "Text, Photo, Quote, and Link feathers must be enabled to import from Tumblr."
 msgstr ""
 
-#: modules/migrator/migrator.php:189
+#: modules/migrator/migrator.php:285
 msgid "Invalid URL."
 msgstr ""
 
-#: modules/migrator/migrator.php:205
+#: modules/migrator/migrator.php:313
 msgid "Could not retrieve content from the Tumblr URL."
 msgstr ""
 
-#: modules/migrator/migrator.php:300
+#: modules/migrator/migrator.php:444
 msgid "Tumblr content successfully imported!"
 msgstr ""
 
-#: modules/migrator/migrator.php:323
+#: modules/migrator/migrator.php:475
 msgid "Text feather must be enabled to import from TextPattern."
 msgstr ""
 
-#: modules/migrator/migrator.php:326
-#: modules/migrator/migrator.php:429
+#: modules/migrator/migrator.php:483
+#: modules/migrator/migrator.php:656
+msgid "MySQLi is required for database migration."
+msgstr ""
+
+#: modules/migrator/migrator.php:491
+#: modules/migrator/migrator.php:664
 msgid "Host cannot be empty."
 msgstr ""
 
-#: modules/migrator/migrator.php:329
-#: modules/migrator/migrator.php:432
+#: modules/migrator/migrator.php:499
+#: modules/migrator/migrator.php:672
 msgid "Username cannot be empty."
 msgstr ""
 
-#: modules/migrator/migrator.php:332
-#: modules/migrator/migrator.php:435
+#: modules/migrator/migrator.php:507
+#: modules/migrator/migrator.php:680
 msgid "Password cannot be empty."
 msgstr ""
 
-#: modules/migrator/migrator.php:335
-#: modules/migrator/migrator.php:438
+#: modules/migrator/migrator.php:515
+#: modules/migrator/migrator.php:688
 msgid "Database cannot be empty."
 msgstr ""
 
-#: modules/migrator/migrator.php:346
+#: modules/migrator/migrator.php:535
 msgid "Could not connect to the TextPattern database."
 msgstr ""
 
-#: modules/migrator/migrator.php:354
-#: modules/migrator/migrator.php:456
+#: modules/migrator/migrator.php:550
+#: modules/migrator/migrator.php:720
 msgid "Database Error"
 msgstr ""
 
-#: modules/migrator/migrator.php:402
+#: modules/migrator/migrator.php:616
 msgid "TextPattern content successfully imported!"
 msgstr ""
 
-#: modules/migrator/migrator.php:426
+#: modules/migrator/migrator.php:648
 msgid "Text feather must be enabled to import from MovableType."
 msgstr ""
 
-#: modules/migrator/migrator.php:449
+#: modules/migrator/migrator.php:708
 msgid "Could not connect to the MovableType database."
 msgstr ""
 
-#: modules/migrator/migrator.php:531
+#: modules/migrator/migrator.php:814
 msgid "MovableType content successfully imported!"
 msgstr ""
 

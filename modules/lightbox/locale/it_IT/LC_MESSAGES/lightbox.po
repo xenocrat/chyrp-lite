@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/lightbox/admin/pages/lightbox_settings.twig:3
@@ -38,7 +38,7 @@ msgstr "Proteggi immagini"
 msgid "Prevent visitors from saving images?"
 msgstr "Impedire ai visitatori di salvare le immagini?"
 
-#: modules/lightbox/info.php:3 modules/lightbox/lightbox.php:48
+#: modules/lightbox/info.php:3 modules/lightbox/lightbox.php:72
 msgid "Lightbox"
 msgstr "Tavolo luminoso"
 
@@ -50,18 +50,18 @@ msgstr "Un tavolo luminoso per le tue immagini."
 msgid "Close"
 msgstr "Chiudi"
 
-#: modules/lightbox/lightbox.php:22
+#: modules/lightbox/lightbox.php:30
 msgid "Black"
 msgstr "Nero"
 
-#: modules/lightbox/lightbox.php:23
+#: modules/lightbox/lightbox.php:31
 msgid "Gray"
 msgstr "Grigio"
 
-#: modules/lightbox/lightbox.php:24
+#: modules/lightbox/lightbox.php:32
 msgid "White"
 msgstr "Bianco"
 
-#: modules/lightbox/lightbox.php:25
+#: modules/lightbox/lightbox.php:33
 msgid "Inherit"
 msgstr "Sfondo riprodotto"

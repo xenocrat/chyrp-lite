@@ -10,10 +10,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
-#: feathers/quote/info.php:3 feathers/quote/quote.php:6
+#: feathers/quote/info.php:3 feathers/quote/quote.php:8
 msgid "Quote"
 msgstr "Citazione"
 
@@ -21,10 +21,10 @@ msgstr "Citazione"
 msgid "Post quotes and cite sources."
 msgstr "Pubblicare una citazione e citare fonti."
 
-#: feathers/quote/quote.php:11
+#: feathers/quote/quote.php:16
 msgid "Source"
 msgstr "Sorgente"
 
-#: feathers/quote/quote.php:24
+#: feathers/quote/quote.php:37
 msgid "Quote can't be empty."
 msgstr "La citazione non può essere vuota."

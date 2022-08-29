@@ -13,28 +13,28 @@ msgstr ""
 "X-Generator: Poedit 3.1.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
-#: feathers/audio/audio.php:8
+#: feathers/audio/audio.php:10
 msgid "Title"
 msgstr "标题"
 
-#: feathers/audio/audio.php:13
+#: feathers/audio/audio.php:18
 msgid "Audio File"
 msgstr "音频文件"
 
-#: feathers/audio/audio.php:16
+#: feathers/audio/audio.php:21
 #, php-format
 msgid "(Max. file size: %d Megabytes)"
 msgstr "（最大文件大小：%d M）"
 
-#: feathers/audio/audio.php:20
+#: feathers/audio/audio.php:28
 msgid "Description"
 msgstr "描述"
 
-#: feathers/audio/audio.php:38
+#: feathers/audio/audio.php:57
 msgid "You did not select any audio to upload."
 msgstr "你灭有选择任何上传的音频文件。"
 
-#: feathers/audio/audio.php:145
+#: feathers/audio/audio.php:184
 msgid "Your web browser does not support the <code>audio</code> element."
 msgstr "你的浏览器不支持 <code>audio</code> 元素。"
 

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/rights/admin/help/choosing_a_licence.twig:3
@@ -51,7 +51,7 @@ msgstr ""
 "restrizioni. Ecco un grafico che confronta le licenze:"
 
 #: modules/rights/admin/help/choosing_a_licence.twig:17
-#: modules/rights/rights.php:61
+#: modules/rights/rights.php:123
 msgid "License"
 msgstr "Licenza"
 
@@ -93,37 +93,37 @@ msgid "NoDerivatives"
 msgstr "NoDerivatives"
 
 #: modules/rights/admin/help/choosing_a_licence.twig:37
-#: modules/rights/rights.php:18 modules/rights/rights.php:79
+#: modules/rights/rights.php:32 modules/rights/rights.php:143
 msgid "Creative Commons BY"
 msgstr "Creative Commons BY"
 
 #: modules/rights/admin/help/choosing_a_licence.twig:48
-#: modules/rights/rights.php:21 modules/rights/rights.php:85
+#: modules/rights/rights.php:39 modules/rights/rights.php:150
 msgid "Creative Commons BY-ND"
 msgstr "Creative Commons BY-ND"
 
 #: modules/rights/admin/help/choosing_a_licence.twig:63
-#: modules/rights/rights.php:24 modules/rights/rights.php:91
+#: modules/rights/rights.php:46 modules/rights/rights.php:157
 msgid "Creative Commons BY-SA"
 msgstr "Creative Commons BY-SA"
 
 #: modules/rights/admin/help/choosing_a_licence.twig:78
-#: modules/rights/rights.php:27 modules/rights/rights.php:97
+#: modules/rights/rights.php:53 modules/rights/rights.php:164
 msgid "Creative Commons BY-NC"
 msgstr "Creative Commons BY-NC"
 
 #: modules/rights/admin/help/choosing_a_licence.twig:93
-#: modules/rights/rights.php:30 modules/rights/rights.php:103
+#: modules/rights/rights.php:60 modules/rights/rights.php:171
 msgid "Creative Commons BY-NC-ND"
 msgstr "Creative Commons BY-NC-ND"
 
 #: modules/rights/admin/help/choosing_a_licence.twig:110
-#: modules/rights/rights.php:33 modules/rights/rights.php:109
+#: modules/rights/rights.php:67 modules/rights/rights.php:178
 msgid "Creative Commons BY-NC-SA"
 msgstr "Creative Commons BY-NC-SA"
 
 #: modules/rights/admin/help/choosing_a_licence.twig:127
-#: modules/rights/rights.php:36 modules/rights/rights.php:115
+#: modules/rights/rights.php:74 modules/rights/rights.php:185
 msgid "Creative Commons CC0"
 msgstr "Creative Commons CC0"
 
@@ -142,26 +142,26 @@ msgstr ""
 msgid "Do you want to remove rights data from the database?"
 msgstr "Si desidera rimuovere i dati dei diritti di copyright dal database?"
 
-#: modules/rights/rights.php:15 modules/rights/rights.php:125
+#: modules/rights/rights.php:25 modules/rights/rights.php:196
 msgid "All rights reserved"
 msgstr "Tutti i diritti riservati"
 
-#: modules/rights/rights.php:39
+#: modules/rights/rights.php:81
 msgid "Orphan Work"
 msgstr "Opere orfane"
 
-#: modules/rights/rights.php:42 modules/rights/rights.php:121
+#: modules/rights/rights.php:88 modules/rights/rights.php:192
 msgid "Public Domain"
 msgstr "Dominio pubblico"
 
-#: modules/rights/rights.php:45
+#: modules/rights/rights.php:95
 msgid "Crown Copyright"
 msgstr "Crown Copyright"
 
-#: modules/rights/rights.php:51
+#: modules/rights/rights.php:105
 msgid "Original Work"
 msgstr "Opera originale"
 
-#: modules/rights/rights.php:56
+#: modules/rights/rights.php:114
 msgid "Rights Holder"
 msgstr "Titolare dei diritti"

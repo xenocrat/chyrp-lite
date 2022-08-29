@@ -34,27 +34,27 @@ msgstr "Caricamento dati"
 msgid "Upload files and make them available for visitors to download."
 msgstr "Carica i file li rende disponibili da scaricare per i visitatori."
 
-#: feathers/uploader/uploader.php:8
+#: feathers/uploader/uploader.php:10
 msgid "Title"
 msgstr "Titolo"
 
-#: feathers/uploader/uploader.php:13
+#: feathers/uploader/uploader.php:18
 msgid "Files"
 msgstr "File"
 
-#: feathers/uploader/uploader.php:16
+#: feathers/uploader/uploader.php:21
 #, php-format
 msgid "(Max. file size: %d Megabytes)"
 msgstr "(Dimensione massima del file:%d megabyte)"
 
-#: feathers/uploader/uploader.php:20
+#: feathers/uploader/uploader.php:28
 msgid "Caption"
 msgstr "Didascalia"
 
-#: feathers/uploader/uploader.php:62
+#: feathers/uploader/uploader.php:80
 msgid "You did not select any files to upload."
 msgstr "Non è stato selezionato alcun file da caricare."
 
-#: feathers/uploader/uploader.php:184
+#: feathers/uploader/uploader.php:224
 msgid "Source"
 msgstr "Sorgente"

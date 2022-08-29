@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/rights/admin/help/choosing_a_licence.twig:3
@@ -47,7 +47,7 @@ msgstr ""
 "表："
 
 #: modules/rights/admin/help/choosing_a_licence.twig:17
-#: modules/rights/rights.php:61
+#: modules/rights/rights.php:123
 msgid "License"
 msgstr "许可证"
 
@@ -84,37 +84,37 @@ msgid "NoDerivatives"
 msgstr "非衍生品"
 
 #: modules/rights/admin/help/choosing_a_licence.twig:37
-#: modules/rights/rights.php:18 modules/rights/rights.php:79
+#: modules/rights/rights.php:32 modules/rights/rights.php:143
 msgid "Creative Commons BY"
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:48
-#: modules/rights/rights.php:21 modules/rights/rights.php:85
+#: modules/rights/rights.php:39 modules/rights/rights.php:150
 msgid "Creative Commons BY-ND"
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:63
-#: modules/rights/rights.php:24 modules/rights/rights.php:91
+#: modules/rights/rights.php:46 modules/rights/rights.php:157
 msgid "Creative Commons BY-SA"
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:78
-#: modules/rights/rights.php:27 modules/rights/rights.php:97
+#: modules/rights/rights.php:53 modules/rights/rights.php:164
 msgid "Creative Commons BY-NC"
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:93
-#: modules/rights/rights.php:30 modules/rights/rights.php:103
+#: modules/rights/rights.php:60 modules/rights/rights.php:171
 msgid "Creative Commons BY-NC-ND"
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:110
-#: modules/rights/rights.php:33 modules/rights/rights.php:109
+#: modules/rights/rights.php:67 modules/rights/rights.php:178
 msgid "Creative Commons BY-NC-SA"
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:127
-#: modules/rights/rights.php:36 modules/rights/rights.php:115
+#: modules/rights/rights.php:74 modules/rights/rights.php:185
 msgid "Creative Commons CC0"
 msgstr ""
 
@@ -131,26 +131,26 @@ msgstr "添加帖子的归属和分配知识产权选项。"
 msgid "Do you want to remove rights data from the database?"
 msgstr "您想从数据库中删除权利数据吗？"
 
-#: modules/rights/rights.php:15 modules/rights/rights.php:125
+#: modules/rights/rights.php:25 modules/rights/rights.php:196
 msgid "All rights reserved"
 msgstr "版权所有"
 
-#: modules/rights/rights.php:39
+#: modules/rights/rights.php:81
 msgid "Orphan Work"
 msgstr ""
 
-#: modules/rights/rights.php:42 modules/rights/rights.php:121
+#: modules/rights/rights.php:88 modules/rights/rights.php:192
 msgid "Public Domain"
 msgstr ""
 
-#: modules/rights/rights.php:45
+#: modules/rights/rights.php:95
 msgid "Crown Copyright"
 msgstr ""
 
-#: modules/rights/rights.php:51
+#: modules/rights/rights.php:105
 msgid "Original Work"
 msgstr "原作"
 
-#: modules/rights/rights.php:56
+#: modules/rights/rights.php:114
 msgid "Rights Holder"
 msgstr "权利持有人"
