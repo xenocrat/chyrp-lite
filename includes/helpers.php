@@ -2981,8 +2981,18 @@
 
         # Generate MS-DOS date/time format.
         $now  = getdate();
-        $time = 0 | $now["seconds"] >> 1 | $now["minutes"] << 5 | $now["hours"] << 11;
-        $date = 0 | $now["mday"] | $now["mon"] << 5 | ($now["year"] - 1980) << 9;
+        $time = (
+            0 |
+            $now["seconds"] >> 1 |
+            $now["minutes"] << 5 |
+            $now["hours"] << 11
+        );
+        $date = (
+            0 |
+            $now["mday"] |
+            $now["mon"] << 5 |
+            ($now["year"] - 1980) << 9
+        );
 
         foreach ($array as $name => $orig) {
             # Remove directory separators.
