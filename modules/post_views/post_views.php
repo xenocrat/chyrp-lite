@@ -67,12 +67,13 @@
         }
 
         public function post_options($fields, $post = null): array {
-            $fields[] = array(
-                "attr" => "reset_views",
-                "label" => __("Reset view count?", "post_views"),
-                "type" => "checkbox",
-                "checked" => false
-            );
+            if (isset($post))
+                $fields[] = array(
+                    "attr" => "reset_views",
+                    "label" => __("Reset View Count?", "post_views"),
+                    "type" => "checkbox",
+                    "checked" => false
+                );
 
             return $fields;
         }
