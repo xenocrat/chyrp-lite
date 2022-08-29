@@ -168,8 +168,13 @@
      * Returns a best guess of the current URL.
      */
     function guess_url(): string {
-        $scheme = (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off") ? "https" : "http" ;
-        $host = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'] ;
+        $scheme = (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off") ?
+            "https" :
+            "http" ;
+
+        $host = isset($_SERVER['HTTP_HOST']) ?
+            $_SERVER['HTTP_HOST'] :
+            $_SERVER['SERVER_NAME'] ;
 
         return $scheme."://".$host.$_SERVER['REQUEST_URI'];
     }
@@ -183,7 +188,9 @@
      *     $fallback - The value to echo if the $_POST value is not set.
      */
     function posted($index, $fallback = ""): void {
-        echo fix(isset($_POST[$index]) ? $_POST[$index] : $fallback, true);
+        echo fix(
+            isset($_POST[$index]) ? $_POST[$index] : $fallback, true
+        );
     }
 
     /**
@@ -196,7 +203,7 @@
      */
     function selected($val1, $val2): void {
         if ($val1 == $val2)
-                echo " selected";
+            echo " selected";
     }
 
     #---------------------------------------------
@@ -311,7 +318,7 @@
             }
             strong {
                 font-weight: normal;
-                color: #d94c4c;
+                color: #c11600;
             }
             ul, ol {
                 margin: 0rem 0rem 2rem 2rem;
@@ -813,7 +820,11 @@
             $groups = array(
                 "admin"  => array_keys($names),
                 "member" => array("view_site"),
-                "friend" => array("view_site", "view_private", "view_scheduled"),
+                "friend" => array(
+                    "view_site",
+                    "view_private",
+                    "view_scheduled"
+                ),
                 "banned" => array(),
                 "guest"  => array("view_site")
             );
@@ -847,7 +858,13 @@
             $chyrp_url = rtrim(add_scheme($_POST['url']), "/");
 
             # Add the admin user account.
-            if (!$sql->select("users", "id", array("login" => $_POST['login']))->fetchColumn())
+            if (
+                !$sql->select(
+                    "users",
+                    "id",
+                    array("login" => $_POST['login'])
+                )->fetchColumn()
+            )
                 $sql->insert(
                     "users",
                     array(

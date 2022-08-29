@@ -264,7 +264,10 @@
      */
     function disable_importers(): void {
         $config = Config::current();
-        $set = $config->set("enabled_modules", array_diff($config->enabled_modules, array("importers")));
+        $set = $config->set(
+            "enabled_modules",
+            array_diff($config->enabled_modules, array("importers"))
+        );
 
         if ($set === false)
             error(
@@ -282,7 +285,12 @@
     function add_export_content(): void {
         $sql = SQL::current();
 
-        if (!$sql->count("permissions", array("id" => "export_content", "group_id" => 0)))
+        if (
+            !$sql->count(
+                "permissions",
+                array("id" => "export_content", "group_id" => 0)
+            )
+        )
             $sql->insert(
                 "permissions",
                 array(
@@ -618,7 +626,7 @@
             }
             strong {
                 font-weight: normal;
-                color: #d94c4c;
+                color: #c11600;
             }
             ul, ol {
                 margin: 0rem 0rem 2rem 2rem;

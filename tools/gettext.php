@@ -473,8 +473,8 @@
 
             echo $filename.".pot ".(
                     ($result === false) ?
-                        '<span style="background-color:#c11600;">Boo!</span>' :
-                        '<span style="background-color:#108600;">Yay!</span>'
+                        '<strong>Boo!</strong>' :
+                        '<em>Yay!</em>'
                  )."\n";
         }
     }
@@ -589,9 +589,14 @@
             p:empty {
                 margin-bottom: 0rem;
             }
+            em {
+                font-weight: normal;
+                font-style: normal;
+                color: #108600;
+            }
             strong {
                 font-weight: normal;
-                color: #d94c4c;
+                color: #c11600;
             }
             ul, ol {
                 margin: 0rem 0rem 2rem 2rem;
