@@ -35,8 +35,13 @@
 
         # Array: $result
         # The result of the pagination.
-        # @paginated@, @paginate@, and @list@ are references to this.
+        # @paginated@ is a reference to this.
         public $result = array();
+
+        # Array: $paginated
+        # The result of the pagination.
+        # Reference to @result@. Enables ".paginated" in Twig.
+        public $paginated = array();
 
         # Array: $names
         # An array of the currently-used pagination URL parameters.
@@ -108,7 +113,7 @@
                 $this->result = array_slice($this->array, $offset, $this->per_page);
             }
 
-            $this->paginated = $this->paginate = $this->list =& $this->result;
+            $this->paginated =& $this->result;
         }
 
         /**
