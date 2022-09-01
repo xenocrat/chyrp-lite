@@ -31,6 +31,11 @@
         # The models should have a [thismodel]_id column.
         public $has_one = array();
 
+
+        # Boolean: __placeholders
+        # Used internally by the method __getPlaceholders().
+        private $__placeholders = false;
+
         /**
          * Function: __get
          * Handles model relationships, deferred and dynamic attributes.
@@ -40,7 +45,7 @@
          */
         public function &__get($name): mixed {
             $model_name = strtolower(get_class($this));
-            $placeholders = (isset($this->__placeholders) and $this->__placeholders);
+            $placeholders = $this->__placeholders;
 
             $trigger = Trigger::current();
 
@@ -168,7 +173,7 @@
         public function __getPlaceholders($name): mixed {
             $this->__placeholders = true;
             $return = $this->__get($name);
-            unset($this->__placeholders);
+            $this->__placeholders = false;
             return $return;
         }
 
