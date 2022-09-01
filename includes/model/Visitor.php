@@ -63,7 +63,10 @@
          * Returns whether or not the visitor is logged in.
          */
         public static function logged_in(): bool {
-            return (isset(Visitor::current()->id) and Visitor::current()->id != 0);
+            return (
+                isset(Visitor::current()->id) and
+                Visitor::current()->id != 0
+            );
         }
 
         /**
