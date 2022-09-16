@@ -513,7 +513,7 @@ Arguments:
 update_user
 -----------
 Called from:
-	includes/model/User.php on line 183
+	includes/model/User.php on line 212
 
 Arguments:
 	$user, $this
@@ -1365,7 +1365,7 @@ Target:
 before_update_user
 ------------------
 Called from:
-	includes/model/User.php on line 165
+	includes/model/User.php on line 194
 
 Target:
 	$new_values

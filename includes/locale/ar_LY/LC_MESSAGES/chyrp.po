@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: chyrplite\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-08-29 17:47+0100\n"
+"PO-Revision-Date: 2022-09-16 17:50+0100\n"
 "Last-Translator: Anas Mohammed Almzoghy <a.almzoghy@gmail.com>\n"
 "Language-Team: Arabic\n"
 "Language: ar_LY\n"
@@ -27,27 +27,27 @@ msgstr "تعذر قراءة ملف الإعدادات."
 msgid "Requested configuration setting not found."
 msgstr "لم يتم العثور على إعداد التكوين المطلوب."
 
-#: includes/class/Model.php:485
+#: includes/class/Model.php:490
 msgid "Edit"
 msgstr "تحرير"
 
-#: includes/class/Model.php:515
+#: includes/class/Model.php:520
 msgid "Delete"
 msgstr "حذف"
 
-#: includes/class/Paginator.php:184
+#: includes/class/Paginator.php:189
 msgid "Next &rarr;"
 msgstr "التالي &rarr;"
 
-#: includes/class/Paginator.php:214
+#: includes/class/Paginator.php:219
 msgid "&larr; Previous"
 msgstr "&larr; السابق"
 
-#: includes/class/Paginator.php:242
+#: includes/class/Paginator.php:247
 msgid "Final &rarr;"
 msgstr "الأخيرة &rarr;"
 
-#: includes/class/Paginator.php:270
+#: includes/class/Paginator.php:275
 msgid "&larr; First"
 msgstr "&larr; الأولى"
 
@@ -90,7 +90,7 @@ msgstr "المُتحكم بالمسار المُدخل غير صالح."
 #: includes/controller/Admin.php:2994 includes/controller/Admin.php:3002
 #: includes/controller/Admin.php:3278 includes/controller/Ajax.php:34
 #: includes/controller/Ajax.php:241 includes/download.php:13
-#: includes/download.php:21 includes/error.php:153 includes/helpers.php:1811
+#: includes/download.php:21 includes/error.php:163 includes/helpers.php:1811
 #: includes/helpers.php:1819 includes/helpers.php:1827
 #: includes/helpers.php:1841 includes/helpers.php:1851
 #: includes/helpers.php:1862 includes/helpers.php:1870
@@ -920,7 +920,7 @@ msgstr "يجب عليك تفعيل حسابك قبل تسجيل الدخول."
 msgid "Logged in."
 msgstr "تم تسجيل الدخول."
 
-#: includes/controller/Main.php:854 includes/error.php:381
+#: includes/controller/Main.php:854 includes/error.php:391
 msgid "Log in"
 msgstr "تسجيل الدخول"
 
@@ -972,15 +972,15 @@ msgstr "إعادة تعيين كلمة المرور"
 msgid "This resource accepts GET requests only."
 msgstr "هذا المورد يقبل طلبات GET فقط."
 
-#: includes/error.php:154
+#: includes/error.php:164
 msgid "An unspecified error has occurred."
 msgstr "حدث خطأ غير محدد."
 
-#: includes/error.php:373
+#: includes/error.php:383
 msgid "Backtrace"
 msgstr ""
 
-#: includes/error.php:376
+#: includes/error.php:386
 #, php-format
 msgid "%s on line %d"
 msgstr "%s في السطر %d"
