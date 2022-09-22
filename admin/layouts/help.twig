@@ -60,9 +60,9 @@ html[lang="he"] {
     direction: rtl;
 }
 body, div, dl, dt, dd, ul, ol, li,
-h1, h2, h3, h4, h5, h6, th, td,
+aside, h1, h2, h3, h4, h5, h6,
 pre, code, form, fieldset, legend,
-input, textarea, p, blockquote {
+input, textarea, p, blockquote, th, td {
     margin: 0em;
     padding: 0em;
 }
@@ -183,6 +183,19 @@ dl dt {
 dl dd {
     margin-left: 1em;
 }
+hr {
+    border: none;
+    clear: both;
+    border-top: 1px solid #dddddd;
+    margin: 2em 0em;
+}
+aside {
+    margin-bottom: 1rem;
+    padding: 0.5em 1em;
+    border: 1px solid #e5d7a1;
+    border-radius: 0.25em;
+    background-color: #fffecd;
+}
 pre {
     font-family: "Cousine webfont", monospace;
     font-size: 0.8rem;
@@ -211,12 +224,6 @@ blockquote em {
 }
 img {
     max-width: 100%;
-}
-hr {
-    border: none;
-    clear: both;
-    border-top: 1px solid #dddddd;
-    margin: 2em 0em;
 }
 table {
     width: 100%;
@@ -250,7 +257,7 @@ a:focus {
     outline-offset: 1px;
 }
 a:hover, a:focus, a:active {
-    color: #2f61c4;
+    color: #1e57ba;
     text-decoration: underline;
 }
 a.emblem > img,
@@ -264,6 +271,23 @@ img.emblem {
 @media screen and (min-width: 1080px) {
    body {
         margin: 2rem auto;
+    }
+}
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #dfdfdf;
+    }
+    hr {
+        border-color: #afafaf;
+    }
+    aside {
+        border-color: #afafaf;
+    }
+    code {
+        border-color: #afafaf;
+    }
+    table tbody tr td {
+        border-color: #afafaf;
     }
 }
 </style>

@@ -152,7 +152,7 @@ a:focus {
 a:hover,
 a:focus,
 a:active {
-    color: #2f61c4;
+    color: #1e57ba;
     text-decoration: underline;
 }
 
@@ -297,15 +297,6 @@ code {
 }
 pre > code {
   border: none;
-}
-*.tag {
-    display: inline-block;
-    margin-top: 0.25rem;
-    padding: 0px 2px;
-    padding: 0em 0.25em;
-    border-radius: 0.25em;
-    border: 1px solid #cfcfcf;
-    background-color: #efefef;
 }
 div.pagination {
     text-align: center;
@@ -871,6 +862,7 @@ span.options_tray {
     display: block;
     width: 100%;
     font-size: 0.67rem;
+    background-color: #fbfbfb;
     border: 1px solid #cfcfcf;
     border-top: none;
     padding: 0.25rem 0.5rem;
@@ -889,13 +881,22 @@ textarea:focus + span.options_tray {
 
 /* Group: Helpers & General */
 
+*.tag {
+    display: inline-block;
+    margin-top: 0.25rem;
+    padding: 0px 2px;
+    padding: 0em 0.25em;
+    border-radius: 0.25em;
+    border: 1px solid #cfcfcf;
+    background-color: #efefef;
+}
 *.tag:link,
 *.tag:visited {
     text-decoration: none;
 }
 *.tag_added {
     background-color: #f2fbff;
-    border-color: #b8cdd9;
+    border-color: #1e57ba;
 }
 table.interactive + div.controls {
     background-color: #fffceb;
@@ -1176,5 +1177,120 @@ input.toolbar.hidden {
     li.module div.controls,
     li.feather div.controls {
         padding-top: 0em;
+    }
+}
+
+/* Group: Dark */
+
+@media (prefers-color-scheme: dark) {
+    body {
+        color: #ffffff;
+        background-color: #1f1f23;
+    }
+    #header #navigation li a:link,
+    #header #navigation li a:visited {
+        color: #ffffff;
+        background-color: #2f2f2f;
+    }
+    #header #navigation li.selected a:link,
+    #header #navigation li.selected a:visited,
+    #header #navigation li a:hover,
+    #header #navigation li a:focus {
+        background-color: #1f1f23;
+    }
+    #sub_nav li a {
+        border-color: #ffffff;
+    }
+    #sub_nav li a:link,
+    #sub_nav li a:visited {
+        background-color: #afafaf;
+    }
+    #sub_nav li.selected a:link,
+    #sub_nav li.selected a:visited,
+    #sub_nav li a:hover,
+    #sub_nav li a:focus {
+        background-color: #dfdfdf;
+    }
+    #content {
+        color: #1f1f23;
+        background-color: #dfdfdf;
+        border-color: #ffffff;
+    }
+    hr {
+        border-color: #afafaf;
+    }
+    aside {
+        border-color: #afafaf;
+    }
+    code {
+        border-color: #afafaf;
+    }
+    #content ul.extend > li {
+        background-color: #cfcfcf;
+        border-color: #afafaf;
+    }
+    #content ul#modules_enabled > li,
+    #content ul#feathers_enabled > li,
+    #content ul.themes > li.current {
+        border-color: #afafaf;
+    }
+    #content ul#modules_enabled > li.error,
+    #content ul#modules_disabled > li.error  {
+        border-color: #afafaf;
+    }
+    li.module div.controls,
+    li.feather div.controls,
+    li.theme div.controls {
+        border-color: #afafaf;
+    }
+    select,
+    textarea,
+    input[type="text"],
+    input[type="email"],
+    input[type="url"],
+    input[type="tel"],
+    input[type="date"],
+    input[type="time"],
+    input[type="number"],
+    input[type="range"],
+    input[type="password"] {
+        background-color: #cfcfcf;
+        border-color: #afafaf;
+    }
+    table tbody tr td {
+        border-color: #afafaf;
+    }
+    table tbody tr:nth-child(even) td {
+        background-color: #ebebeb;
+    }
+    span.options_toolbar {
+        background-color: #ebebeb;
+        border-color: #afafaf;
+    }
+    span.options_tray {
+        background-color: #ebebeb;
+        border-color: #afafaf;
+    }
+    span.options_extra {
+        border-color: #afafaf;
+    }
+    *.tag {
+        border-color: #afafaf;
+    }
+    table.interactive + div.controls {
+        border-color: #afafaf;
+    }
+    .iframe_background {
+        background-color: rgba(175, 175, 175, 0.75);
+    }
+    @media screen and (max-width: 960px) {
+        input.text + a.help.emblem {
+            float:  right;
+            padding: 4px;
+            position: relative;
+            top: -2.5rem;
+            left: -0.5rem;
+            background-color: #cfcfcf;
+        }
     }
 }
