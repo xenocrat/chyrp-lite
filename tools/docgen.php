@@ -311,7 +311,7 @@
             a:hover,
             a:focus,
             a:active {
-                color: #2f61c4;
+                color: #1e57ba;
                 text-decoration: underline;
             }
             a.big,
