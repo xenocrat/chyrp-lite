@@ -66,16 +66,14 @@
                 error(
                     __("Error"),
                     __("A ping from your URL is already registered.", "pingable"),
-                    null,
-                    422
+                    code:422
                 );
 
             if (strlen($from) > 2048)
                 error(
                     __("Error"),
                     __("Your URL is too long to be stored in our database.", "pingable"),
-                    null,
-                    413
+                    code:413
                 );
 
             Pingback::add(
@@ -90,8 +88,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to edit a pingback.", "pingable"),
-                    null,
-                    400
+                    code:400
                 );
 
             $pingback = new Pingback($_GET['id']);
@@ -125,16 +122,14 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to update a pingback.", "pingable"),
-                    null,
-                    400
+                    code:400
                 );
 
             if (empty($_POST['title']))
                 error(
                     __("No Title Specified", "pingable"),
                     __("A title is required to update a pingback.", "pingable"),
-                    null,
-                    400
+                    code:400
                 );
 
             $pingback = new Pingback($_POST['id']);
@@ -164,8 +159,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to delete a pingback.", "pingable"),
-                    null,
-                    400
+                    code:400
                 );
 
             $pingback = new Pingback($_GET['id']);
@@ -199,8 +193,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to delete a pingback.", "pingable"),
-                    null,
-                    400
+                    code:400
                 );
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
@@ -316,12 +309,7 @@
                 $counts = SQL::current()->select(
                     "pingbacks",
                     "COUNT(post_id) AS total, post_id as post_id",
-                    null,
-                    null,
-                    array(),
-                    null,
-                    null,
-                    "post_id"
+                    group:"post_id"
                 )->fetchAll();
 
                 $this->caches["post_pingback_counts"] = array();

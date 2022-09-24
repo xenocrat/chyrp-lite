@@ -128,8 +128,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to add a comment.", "comments"),
-                    null,
-                    400
+                    code:400
                 );
 
             $post = new Post(
@@ -224,8 +223,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to update a comment.", "comments"),
-                    null,
-                    400
+                    code:400
                 );
 
             $comment = new Comment($_POST['id']);
@@ -331,8 +329,7 @@
                 error(
                     __("Error"),
                     $message,
-                    null,
-                    422
+                    code:422
                 );
 
             Flash::notice(
@@ -356,8 +353,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to edit a comment.", "comments"),
-                    null,
-                    400
+                    code:400
                 );
 
             $comment = new Comment(
@@ -388,8 +384,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to delete a comment.", "comments"),
-                    null,
-                    400
+                    code:400
                 );
 
             $comment = new Comment($_GET['id']);
@@ -423,8 +418,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to delete a comment.", "comments"),
-                    null,
-                    400
+                    code:400
                 );
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
@@ -843,8 +837,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to reload comments.", "comments"),
-                    null,
-                    400
+                    code:400
                 );
 
             $post = new Post(
@@ -895,8 +888,7 @@
                 error(
                     __("Error"),
                     __("An ID is required to show a comment.", "comments"),
-                    null,
-                    400
+                    code:400
                 );
 
             $comment = new Comment($_POST['comment_id']);
@@ -925,8 +917,7 @@
                 error(
                     __("Error"),
                     __("An ID is required to edit a comment.", "comments"),
-                    null,
-                    400
+                    code:400
                 );
 
             $comment = new Comment(
@@ -964,8 +955,7 @@
                 error(
                     __("Error"),
                     __("An ID is required to delete a comment.", "comments"),
-                    null,
-                    400
+                    code:400
                 );
 
             $comment = new Comment($_POST['id']);
@@ -1200,16 +1190,14 @@
                 error(
                     __("Error"),
                     __("A ping from your URL is already registered.", "comments"),
-                    null,
-                    422
+                    code:422
                 );
 
             if (strlen($from) > 2048)
                 error(
                     __("Error"),
                     __("Your URL is too long to be stored in our database.", "comments"),
-                    null,
-                    413
+                    code:413
                 );
 
             Comment::create(
@@ -1291,11 +1279,7 @@
                         "status not" => Comment::STATUS_SPAM,
                         Comment::redactions()
                     ),
-                    null,
-                    array(),
-                    null,
-                    null,
-                    "post_id"
+                    group:"post_id"
                 );
 
                 $this->caches["post_comment_counts"] = array();
@@ -1326,11 +1310,7 @@
                         "status not" => Comment::STATUS_SPAM,
                         Comment::redactions()
                     ),
-                    null,
-                    array(),
-                    null,
-                    null,
-                    "post_id"
+                    group:"post_id"
                 );
 
                 $this->caches["latest_comments"] = array();
@@ -1363,11 +1343,7 @@
                         "status not" => Comment::STATUS_SPAM,
                         Comment::redactions()
                     ),
-                    null,
-                    array(),
-                    null,
-                    null,
-                    "user_id"
+                    group:"user_id"
                 );
 
                 foreach ($counts->fetchAll() as $count) {

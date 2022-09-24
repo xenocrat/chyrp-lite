@@ -38,7 +38,7 @@
                 " (".$file." on line ".$line.")"
             );
 
-        error(null, $message, debug_backtrace());
+        error(body:$message, backtrace:debug_backtrace());
     }
 
     /**
@@ -62,7 +62,7 @@
                 " (".$file." on line ".$line.")"
             );
 
-        error(null, $message, $e->getTrace());
+        error(body:$message, backtrace:$e->getTrace());
     }
 
     /**

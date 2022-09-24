@@ -126,8 +126,7 @@
                 error(
                     __("Error"),
                     __("An ID is required to like a post.", "likes"),
-                    null,
-                    400
+                    code:400
                 );
 
             if (!Visitor::current()->group->can("like_post"))
@@ -156,8 +155,7 @@
                 error(
                     __("Error"),
                     __("An ID is required to unlike a post.", "likes"),
-                    null,
-                    400
+                    code:400
                 );
 
             if (!Visitor::current()->group->can("unlike_post"))
@@ -186,8 +184,7 @@
                 error(
                     __("Error"),
                     __("An ID is required to like a post.", "likes"),
-                    null,
-                    400
+                    code:400
                 );
 
             # JavaScript can't know if this is allowed, so don't throw an error here.
@@ -225,8 +222,7 @@
                 error(
                     __("Error"),
                     __("An ID is required to unlike a post.", "likes"),
-                    null,
-                    400
+                    code:400
                 );
 
             # JavaScript can't know if this is allowed, so don't throw an error here.
@@ -276,12 +272,7 @@
                 $counts = SQL::current()->select(
                     "likes",
                     "COUNT(post_id) AS total, post_id as post_id",
-                    null,
-                    null,
-                    array(),
-                    null,
-                    null,
-                    "post_id"
+                    group:"post_id"
                 )->fetchAll();
 
                 $this->caches["post_like_counts"] = array();
@@ -308,12 +299,7 @@
                 $counts = SQL::current()->select(
                     "likes",
                     "COUNT(user_id) AS total, user_id as user_id",
-                    null,
-                    null,
-                    array(),
-                    null,
-                    null,
-                    "user_id"
+                    group:"user_id"
                 )->fetchAll();
 
                 $this->caches["user_like_counts"] = array();

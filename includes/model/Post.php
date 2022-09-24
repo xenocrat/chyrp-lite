@@ -1118,16 +1118,8 @@
                 );
 
                 $post->update(
-                    null,
-                    null,
-                    null,
-                    self::STATUS_PUBLIC,
-                    null,
-                    null,
-                    null,
-                    null,
-                    null,
-                    $pingbacks
+                    status:self::STATUS_PUBLIC,
+                    pingbacks:$pingbacks
                 );
             }
         }

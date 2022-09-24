@@ -15,16 +15,14 @@
         error(
             __("Error"),
             __("This resource accepts GET requests only."),
-            null,
-            405
+            code:405
         );
 
     if (empty($_GET['file']))
         error(
             __("Error"),
             __("Missing argument."),
-            null,
-            400
+            code:400
         );
 
     if (!$visitor->group->can("view_site"))
@@ -49,8 +47,7 @@
         error(
             __("Error"),
             __("Maximum size cannot be zero."),
-            null,
-            422
+            code:422
         );
 
     if (!function_exists("gd_info")) {

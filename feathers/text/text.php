@@ -34,8 +34,7 @@
                 error(
                     __("Error"),
                     __("Body can't be blank."),
-                    null,
-                    422
+                    code:422
                 );
 
             fallback($_POST['title'], "");
@@ -67,8 +66,7 @@
                 error(
                     __("Error"),
                     __("Body can't be blank.", "text"),
-                    null,
-                    422
+                    code:422
                 );
 
             fallback($_POST['title'], "");

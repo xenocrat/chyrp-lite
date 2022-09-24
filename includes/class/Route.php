@@ -110,8 +110,7 @@
                     error(
                         __("Error"),
                         __("Invalid action."),
-                        null,
-                        400
+                        code:400
                     );
 
                 # Return 403 if the visitor cannot view the site

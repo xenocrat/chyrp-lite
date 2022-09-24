@@ -283,8 +283,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to edit a post."),
-                    null,
-                    400
+                    code:400
                 );
 
             $post = new Post(
@@ -342,8 +341,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to update a post."),
-                    null,
-                    400
+                    code:400
                 );
 
             $post = new Post(
@@ -386,8 +384,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to delete a post."),
-                    null,
-                    400
+                    code:400
                 );
 
             $post = new Post(
@@ -428,8 +425,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to delete a post."),
-                    null,
-                    400
+                    code:400
                 );
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
@@ -607,16 +603,14 @@
                 error(
                     __("Error"),
                     __("Title cannot be blank."),
-                    null,
-                    422
+                    code:422
                 );
 
             if (empty($_POST['body']))
                 error(
                     __("Error"),
                     __("Body cannot be blank."),
-                    null,
-                    422
+                    code:422
                 );
 
             fallback($_POST['parent_id'], 0);
@@ -667,8 +661,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to edit a page."),
-                    null,
-                    400
+                    code:400
                 );
 
             $page = new Page(
@@ -721,24 +714,21 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to edit a page."),
-                    null,
-                    400
+                    code:400
                 );
 
             if (empty($_POST['title']))
                 error(
                     __("Error"),
                     __("Title cannot be blank."),
-                    null,
-                    422
+                    code:422
                 );
 
             if (empty($_POST['body']))
                 error(
                     __("Error"),
                     __("Body cannot be blank."),
-                    null,
-                    422
+                    code:422
                 );
 
             $page = new Page($_POST['id']);
@@ -792,8 +782,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to delete a page."),
-                    null,
-                    400
+                    code:400
                 );
 
             $page = new Page($_GET['id']);
@@ -831,8 +820,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to delete a page."),
-                    null,
-                    400
+                    code:400
                 );
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
@@ -960,8 +948,7 @@
                 error(
                     __("Error"),
                     __("Please enter a username for the account."),
-                    null,
-                    422
+                    code:422
                 );
 
             $check = new User(array("login" => $_POST['login']));
@@ -970,24 +957,21 @@
                 error(
                     __("Error"),
                     __("That username is already in use."),
-                    null,
-                    409
+                    code:409
                 );
 
             if (empty($_POST['password1']) or empty($_POST['password2']))
                 error(
                     __("Error"),
                     __("Passwords cannot be blank."),
-                    null,
-                    422
+                    code:422
                 );
 
             if ($_POST['password1'] != $_POST['password2'])
                 error(
                     __("Error"),
                     __("Passwords do not match."),
-                    null,
-                    422
+                    code:422
                 );
 
             if (password_strength($_POST['password1']) < 100)
@@ -999,24 +983,21 @@
                 error(
                     __("Error"),
                     __("Email address cannot be blank."),
-                    null,
-                    422
+                    code:422
                 );
 
             if (!is_email($_POST['email']))
                 error(
                     __("Error"),
                     __("Invalid email address."),
-                    null,
-                    422
+                    code:422
                 );
 
             if (!empty($_POST['website']) and !is_url($_POST['website']))
                 error(
                     __("Error"),
                     __("Invalid website URL."),
-                    null,
-                    422
+                    code:422
                 );
 
             if (!empty($_POST['website']))
@@ -1070,8 +1051,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to edit a user."),
-                    null,
-                    400
+                    code:400
                 );
 
             $user = new User($_GET['id']);
@@ -1108,8 +1088,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to edit a user."),
-                    null,
-                    400
+                    code:400
                 );
 
             $visitor = Visitor::current();
@@ -1125,16 +1104,13 @@
                 error(
                     __("Error"),
                     __("Please enter a username for the account."),
-                    null,
-                    422
+                    code:422
                 );
 
             $check = new User(
-                null,
                 array(
-                    "where" => array(
-                        "login" => $_POST['login'],
-                        "id not" => $_POST['id'])
+                    "login" => $_POST['login'],
+                    "id not" => $_POST['id']
                 )
             );
 
@@ -1142,8 +1118,7 @@
                 error(
                     __("Error"),
                     __("That username is already in use."),
-                    null,
-                    409
+                    code:409
                 );
 
             $user = new User($_POST['id']);
@@ -1162,8 +1137,7 @@
                     error(
                         __("Error"),
                         __("Passwords do not match."),
-                        null,
-                        422
+                        code:422
                     );
                 } elseif (
                     password_strength($_POST['new_password1']) < 100
@@ -1181,24 +1155,21 @@
                 error(
                     __("Error"),
                     __("Email address cannot be blank."),
-                    null,
-                    422
+                    code:422
                 );
 
             if (!is_email($_POST['email']))
                 error(
                     __("Error"),
                     __("Invalid email address."),
-                    null,
-                    422
+                    code:422
                 );
 
             if (!empty($_POST['website']) and !is_url($_POST['website']))
                 error(
                     __("Error"),
                     __("Invalid website URL."),
-                    null,
-                    422
+                    code:422
                 );
 
             if (!empty($_POST['website']))
@@ -1250,8 +1221,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to delete a user."),
-                    null,
-                    400
+                    code:400
                 );
 
             $user = new User($_GET['id']);
@@ -1297,8 +1267,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to delete a user."),
-                    null,
-                    400
+                    code:400
                 );
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
@@ -1322,8 +1291,7 @@
                         error(
                             __("Gone"),
                             __("New owner for posts does not exist."),
-                            null,
-                            410
+                            code:410
                         );
 
                     foreach ($user->posts as $post)
@@ -1345,8 +1313,7 @@
                         error(
                             __("Gone"),
                             __("New owner for pages does not exist."),
-                            null,
-                            410
+                            code:410
                         );
 
                     foreach ($user->pages as $page)
@@ -1451,23 +1418,20 @@
                 error(
                     __("Error"),
                     __("Please enter a name for the group."),
-                    null,
-                    422
+                    code:422
                 );
 
             fallback($_POST['permissions'], array());
 
             $check = new Group(
-                null,
-                array("where" => array("name" => $_POST['name']))
+                array("name" => $_POST['name'])
             );
 
             if (!$check->no_results)
                 error(
                     __("Error"),
                     __("That group name is already in use."),
-                    null,
-                    409
+                    code:409
                 );
 
             Group::add(
@@ -1496,8 +1460,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to edit a group."),
-                    null,
-                    400
+                    code:400
                 );
 
             $group = new Group($_GET['id']);
@@ -1538,26 +1501,22 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to edit a group."),
-                    null,
-                    400
+                    code:400
                 );
 
             if (empty($_POST['name']) or derezz($_POST['name']))
                 error(
                     __("Error"),
                     __("Please enter a name for the group."),
-                    null,
-                    422
+                    code:422
                 );
 
             fallback($_POST['permissions'], array());
 
             $check = new Group(
-                null,
                 array(
-                    "where" => array(
-                        "name" => $_POST['name'],
-                        "id not" => $_POST['id'])
+                    "name" => $_POST['name'],
+                    "id not" => $_POST['id']
                 )
             );
 
@@ -1565,8 +1524,7 @@
                 error(
                     __("Error"),
                     __("That group name is already in use."),
-                    null,
-                    409
+                    code:409
                 );
 
             $group = new Group($_POST['id']);
@@ -1600,8 +1558,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to delete a group."),
-                    null,
-                    400
+                    code:400
                 );
 
             $group = new Group($_GET['id']);
@@ -1653,8 +1610,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to delete a group."),
-                    null,
-                    400
+                    code:400
                 );
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
@@ -1677,8 +1633,7 @@
                         error(
                             __("Gone"),
                             __("New member group does not exist."),
-                            null,
-                            410
+                            code:410
                         );
 
                     foreach ($group->users as $user)
@@ -1694,8 +1649,7 @@
                     error(
                         __("Error"),
                         __("New member group must be specified."),
-                        null,
-                        422
+                        code:422
                     );
                 }
 
@@ -1710,8 +1664,7 @@
                         error(
                             __("Gone"),
                             __("New default group does not exist."),
-                            null,
-                            410
+                            code:410
                         );
 
                     $config->set("default_group", $default_group->id);
@@ -1719,8 +1672,7 @@
                     error(
                         __("Error"),
                         __("New default group must be specified."),
-                        null,
-                        422
+                        code:422
                     );
                 }
 
@@ -1733,8 +1685,7 @@
                         error(
                             __("Gone"),
                             __("New guest group does not exist."),
-                            null,
-                            410
+                            code:410
                         );
 
                     $config->set("guest_group", $guest_group->id);
@@ -1742,8 +1693,7 @@
                     error(
                         __("Error"),
                         __("New guest group must be specified."),
-                        null,
-                        422
+                        code:422
                     );
                 }
 
@@ -2749,8 +2699,7 @@
                 error(
                     __("No Extension Specified"),
                     __("You did not specify an extension to enable."),
-                    null,
-                    400
+                    code:400
                 );
 
             $type          = ($_POST['type'] == "module") ? "module" : "feather" ;
@@ -2763,8 +2712,7 @@
                 error(
                     __("Error"),
                     __("Extension already enabled."),
-                    null,
-                    409
+                    code:409
                 );
 
             if (!file_exists($folder.DIR.$name.DIR.$name.".php"))
@@ -2818,8 +2766,7 @@
                 error(
                     __("No Extension Specified"),
                     __("You did not specify an extension to disable."),
-                    null,
-                    400
+                    code:400
                 );
 
             $type          = ($_POST['type'] == "module") ? "module" : "feather" ;
@@ -2832,8 +2779,7 @@
                 error(
                     __("Error"),
                     __("Extension already disabled."),
-                    null,
-                    409
+                    code:409
                 );
 
             if (!file_exists($folder.DIR.$name.DIR.$name.".php"))
@@ -2877,8 +2823,7 @@
                 error(
                     __("No Theme Specified"),
                     __("You did not specify which theme to select."),
-                    null,
-                    400
+                    code:400
                 );
 
             if (!isset($_POST['change']) or $_POST['change'] != "indubitably")
@@ -2969,40 +2914,35 @@
                 error(
                     __("Error"),
                     __("Email address cannot be blank."),
-                    null,
-                    422
+                    code:422
                 );
 
             if (!is_email($_POST['email']))
                 error(
                     __("Error"),
                     __("Invalid email address."),
-                    null,
-                    422
+                    code:422
                 );
 
             if (empty($_POST['chyrp_url']))
                 error(
                     __("Error"),
                     __("Chyrp URL cannot be blank."),
-                    null,
-                    422
+                    code:422
                 );
 
             if (!is_url($_POST['chyrp_url']))
                 error(
                     __("Error"),
                     __("Invalid Chyrp URL."),
-                    null,
-                    422
+                    code:422
                 );
 
             if (!empty($_POST['url']) and !is_url($_POST['url']))
                 error(
                     __("Error"),
                     __("Invalid canonical URL."),
-                    null,
-                    422
+                    code:422
                 );
 
             $config = Config::current();
@@ -3144,8 +3084,7 @@
                 error(
                     __("Gone"),
                     __("New default group does not exist."),
-                    null,
-                    410
+                    code:410
                 );
 
             $guest_group = new Group($_POST['guest_group']);
@@ -3154,8 +3093,7 @@
                 error(
                     __("Gone"),
                     __("New guest group does not exist."),
-                    null,
-                    410
+                    code:410
                 );
 
             $correspond = (
@@ -3277,8 +3215,7 @@
                 error(
                     __("Error"),
                     __("Missing argument."),
-                    null,
-                    400
+                    code:400
                 );
 
             $template = str_replace(array(DIR, "/"), "", $_GET['id']);

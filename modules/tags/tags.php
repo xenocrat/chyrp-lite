@@ -316,8 +316,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to edit tags.", "tags"),
-                    null,
-                    400
+                    code:400
                 );
 
             $post = new Post($_GET['id']);
@@ -351,8 +350,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to update tags.", "tags"),
-                    null,
-                    400
+                    code:400
                 );
 
             $post = new Post($_POST['id']);
@@ -388,8 +386,7 @@
                 error(
                     __("No Tag Specified", "tags"),
                     __("Please specify the tag you want to rename.", "tags"),
-                    null,
-                    400
+                    code:400
                 );
 
             $tag = $this->tag_find_by_clean($_GET['clean']);
@@ -423,16 +420,14 @@
                 error(
                     __("No Tag Specified", "tags"),
                     __("Please specify the tag you want to rename.", "tags"),
-                    null,
-                    400
+                    code:400
                 );
 
             if (!isset($_POST['name']) or $_POST['name'] == "")
                 error(
                     __("Error"),
                     __("Name cannot be blank.", "tags"),
-                    null,
-                    422
+                    code:422
                 );
 
             $results = SQL::current()->select(
@@ -474,8 +469,7 @@
                 error(
                     __("No Tag Specified", "tags"),
                     __("Please specify the tag you want to delete.", "tags"),
-                    null,
-                    400
+                    code:400
                 );
 
             $tag = $this->tag_find_by_clean($_GET['clean']);
@@ -509,8 +503,7 @@
                 error(
                     __("No Tag Specified", "tags"),
                     __("Please specify the tag you want to delete.", "tags"),
-                    null,
-                    400
+                    code:400
                 );
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
@@ -740,12 +733,7 @@
                         Post::statuses(),
                         Post::feathers()
                     ),
-                    null,
-                    array(),
-                    null,
-                    null,
-                    null,
-                    array(
+                    left_join:array(
                         array(
                             "table" => "post_attributes",
                             "where" => "post_id = posts.id"

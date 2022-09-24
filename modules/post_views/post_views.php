@@ -98,8 +98,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to download a view count.", "post_views"),
-                    null,
-                    400
+                    code:400
                 );
 
             $post = new Post($_GET['id'], array("drafts" => true));
@@ -143,12 +142,7 @@
                 $counts = SQL::current()->select(
                     "views",
                     "COUNT(post_id) AS total, post_id as post_id",
-                    null,
-                    null,
-                    array(),
-                    null,
-                    null,
-                    "post_id"
+                    group:"post_id"
                 )->fetchAll();
 
                 $this->caches["post_view_counts"] = array();
@@ -175,12 +169,7 @@
                 $counts = SQL::current()->select(
                     "views",
                     "COUNT(user_id) AS total, user_id as user_id",
-                    null,
-                    null,
-                    array(),
-                    null,
-                    null,
-                    "user_id"
+                    group:"user_id"
                 )->fetchAll();
 
                 $this->caches["user_view_counts"] = array();

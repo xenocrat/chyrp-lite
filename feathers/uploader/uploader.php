@@ -78,8 +78,7 @@
                 error(
                     __("Error"),
                     __("You did not select any files to upload.", "uploader"),
-                    null,
-                    422
+                    code:422
                 );
 
             if (isset($_POST['option']['source']) and is_url($_POST['option']['source']))

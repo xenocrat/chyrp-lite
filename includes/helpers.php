@@ -115,7 +115,7 @@
         $main = MainController::current();
 
         if (!MAIN or !$theme->file_exists("pages".DIR."403"))
-            error($title, $body, null, 403);
+            error($title, $body, code:403);
 
         header($_SERVER['SERVER_PROTOCOL']." 403 Forbidden");
         $main->feed = false; # Tell the controller not to serve feeds.
@@ -139,7 +139,7 @@
         $main = MainController::current();
 
         if (!MAIN or !$theme->file_exists("pages".DIR."404"))
-            error($title, $body, null, 404);
+            error($title, $body, code:404);
 
         header($_SERVER['SERVER_PROTOCOL']." 404 Not Found");
         $main->feed = false; # Tell the controller not to serve feeds.
@@ -1810,24 +1810,21 @@
             error(
                 __("Error"),
                 __("Webmention support is disabled for this site."),
-                null,
-                503
+                code:503
             );
 
         if (!is_url($source))
             error(
                 __("Error"),
                 __("The URL for your page is not valid."),
-                null,
-                400
+                code:400
             );
 
         if (!is_url($target))
             error(
                 __("Error"),
                 __("The URL for our page is not valid."),
-                null,
-                400
+                code:400
             );
 
         if (DEBUG)
@@ -1840,8 +1837,7 @@
             error(
                 __("Error"),
                 __("The source and target URLs cannot be the same."),
-                null,
-                400
+                code:400
             );
 
         $post = Post::from_url($target_url);
@@ -1850,8 +1846,7 @@
             error(
                 __("Error"),
                 __("We have not published at that URL."),
-                null,
-                404
+                code:404
             );
 
         # Retrieve the page that linked here.
@@ -1861,16 +1856,14 @@
             error(
                 __("Error"),
                 __("You have not published at that URL."),
-                null,
-                404
+                code:404
             );
 
         if (strpos($content, $target) === false)
             error(
                 __("Error"),
                 __("Your page does not link to our page."),
-                null,
-                400
+                code:400
             );
 
         $trigger->call("webmention", $post, $source, $target);
@@ -2556,22 +2549,19 @@
                 error(
                     __("Error"),
                     __("The uploaded file exceeds the <code>upload_max_filesize</code> directive in php.ini."),
-                    null,
-                    413
+                    code:413
                 );
             case UPLOAD_ERR_FORM_SIZE:
                 error(
                     __("Error"),
                     __("The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the HTML form."),
-                    null,
-                    413
+                    code:413
                 );
             case UPLOAD_ERR_PARTIAL:
                 error(
                     __("Error"),
                     __("The uploaded file was only partially uploaded."),
-                    null,
-                    400
+                    code:400
                 );
             case UPLOAD_ERR_NO_TMP_DIR:
                 error(
@@ -2599,8 +2589,7 @@
             error(
                 __("Error"),
                 _f("The uploaded file exceeds the maximum size of %d Megabytes allowed by this site.", $maximum),
-                null,
-                413
+                code:413
             );
 
         return $success;

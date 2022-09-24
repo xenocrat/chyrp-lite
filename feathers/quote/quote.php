@@ -35,8 +35,7 @@
                 error(
                     __("Error"),
                     __("Quote can't be empty.", "quote"),
-                    null,
-                    422
+                    code:422
                 );
 
             fallback($_POST['source'], "");
@@ -68,8 +67,7 @@
                 error(
                     __("Error"),
                     __("Quote can't be empty."),
-                    null,
-                    422
+                    code:422
                 );
 
             fallback($_POST['source'], "");

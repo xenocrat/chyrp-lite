@@ -156,11 +156,7 @@
                     "post_attributes",
                     "COUNT(value) AS total, value AS category_id",
                     array("name" => "category_id"),
-                    null,
-                    array(),
-                    null,
-                    null,
-                    "value"
+                    group:"value"
                 )->fetchAll();
 
                 $this->caches["category_post_counts"] = array();
@@ -358,8 +354,7 @@
                 error(
                     __("No Name Specified", "categorize"),
                     __("A name is required to add a category.", "categorize"),
-                    null,
-                    400
+                    code:400
                 );
 
             $clean = (!empty($_POST['clean'])) ? $_POST['clean'] : $_POST['name'] ;
@@ -382,8 +377,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to edit a category.", "categorize"),
-                    null,
-                    400
+                    code:400
                 );
 
             $category = new Category($_GET['id']);
@@ -417,16 +411,14 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to update a category.", "categorize"),
-                    null,
-                    400
+                    code:400
                 );
 
             if (empty($_POST['name']))
                 error(
                     __("No Name Specified", "categorize"),
                     __("A name is required to update a category.", "categorize"),
-                    null,
-                    400
+                    code:400
                 );
 
             $category = new Category($_POST['id']);
@@ -468,8 +460,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to delete a category.", "categorize"),
-                    null,
-                    400
+                    code:400
                 );
 
             $category = new Category($_GET['id']);
@@ -503,8 +494,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to delete a category.", "categorize"),
-                    null,
-                    400
+                    code:400
                 );
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")

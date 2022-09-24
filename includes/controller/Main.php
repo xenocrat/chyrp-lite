@@ -788,7 +788,7 @@
                     "/"
                 );
 
-            $user = $user->update(null, null, null, null, null, null, true);
+            $user = $user->update(approved:true);
 
             Flash::notice(
                 __("Your account is now active."),
@@ -1077,7 +1077,7 @@
                     );
 
                 if (!Flash::exists("warning")) {
-                    $user->update(null, User::hash_password($_POST['new_password1']));
+                    $user->update(password:User::hash_password($_POST['new_password1']));
 
                     Flash::notice(
                         __("Your profile has been updated."),

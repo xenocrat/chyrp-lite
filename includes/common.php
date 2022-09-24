@@ -285,8 +285,7 @@
         error(
             __("Service Unavailable"),
             __("This resource is temporarily unable to serve your request."),
-            null,
-            503
+            code:503
         );
 
     # Exit if the config file is missing.
@@ -294,8 +293,7 @@
         error(
             __("Service Unavailable"),
             __("This resource cannot respond because it is not configured."),
-            null,
-            503
+            code:503
         );
 
     # Start the timer that keeps track of Chyrp's load time.

@@ -33,8 +33,7 @@
                 error(
                     __("Error"),
                     __("Missing argument."),
-                    null,
-                    400
+                    code:400
                 );
         }
 
@@ -61,8 +60,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to delete a post."),
-                    null,
-                    400
+                    code:400
                 );
 
             $post = new Post(
@@ -106,8 +104,7 @@
                 error(
                     __("No ID Specified"),
                     __("An ID is required to delete a page."),
-                    null,
-                    400
+                    code:400
                 );
 
             $page = new Page($_POST['id']);
@@ -240,8 +237,7 @@
                 error(
                     __("Error"),
                     __("Missing argument."),
-                    null,
-                    400
+                    code:400
                 );
 
             if (upload_tester($_FILES['file'])) {

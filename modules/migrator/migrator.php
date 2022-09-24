@@ -47,16 +47,14 @@
                 error(
                     __("Missing Feather", "migrator"),
                     __("Text feather must be enabled to import from WordPress.", "migrator"),
-                    null,
-                    501
+                    code:501
                 );
 
             if (empty($_FILES['xml_file']) or !upload_tester($_FILES['xml_file']))
                 error(
                     __("Error"),
                     __("You must select a WordPress export file.", "migrator"),
-                    null,
-                    422
+                    code:422
                 );
 
             if (shorthand_bytes(ini_get("memory_limit")) < 104857600)
@@ -275,16 +273,14 @@
                 error(
                     __("Missing Feather", "migrator"),
                     __("Text, Photo, Quote, and Link feathers must be enabled to import from Tumblr.", "migrator"),
-                    null,
-                    501
+                    code:501
                 );
 
             if (empty($_POST['tumblr_url']) or !is_url($_POST['tumblr_url']))
                 error(
                     __("Error"),
                     __("Invalid URL.", "migrator"),
-                    null,
-                    422
+                    code:422
                 );
 
             $_POST['tumblr_url'] = add_scheme($_POST['tumblr_url'], "http://");
@@ -473,48 +469,42 @@
                 error(
                     __("Missing Feather", "migrator"),
                     __("Text feather must be enabled to import from TextPattern.", "migrator"),
-                    null,
-                    501
+                    code:501
                 );
 
             if (!class_exists("mysqli"))
                 error(
                     __("Error"),
                     __("MySQLi is required for database migration.", "migrator"),
-                    null,
-                    501
+                    code:501
                 );
 
             if (empty($_POST['host']))
                 error(
                     __("Error"),
                     __("Host cannot be empty.", "migrator"),
-                    null,
-                    422
+                    code:422
                 );
 
             if (empty($_POST['username']))
                 error(
                     __("Error"),
                     __("Username cannot be empty.", "migrator"),
-                    null,
-                    422
+                    code:422
                 );
 
             if (empty($_POST['password']))
                 error(
                     __("Error"),
                     __("Password cannot be empty.", "migrator"),
-                    null,
-                    422
+                    code:422
                 );
 
             if (empty($_POST['database']))
                 error(
                     __("Error"),
                     __("Database cannot be empty.", "migrator"),
-                    null,
-                    422
+                    code:422
                 );
 
             if (shorthand_bytes(ini_get("memory_limit")) < 104857600)
@@ -646,48 +636,42 @@
                 error(
                     __("Missing Feather", "migrator"),
                     __("Text feather must be enabled to import from MovableType.", "migrator"),
-                    null,
-                    501
+                    code:501
                 );
 
             if (!class_exists("mysqli"))
                 error(
                     __("Error"),
                     __("MySQLi is required for database migration.", "migrator"),
-                    null,
-                    501
+                    code:501
                 );
 
             if (empty($_POST['host']))
                 error(
                     __("Error"),
                     __("Host cannot be empty.", "migrator"),
-                    null,
-                    422
+                    code:422
                 );
 
             if (empty($_POST['username']))
                 error(
                     __("Error"),
                     __("Username cannot be empty.", "migrator"),
-                    null,
-                    422
+                    code:422
                 );
 
             if (empty($_POST['password']))
                 error(
                     __("Error"),
                     __("Password cannot be empty.", "migrator"),
-                    null,
-                    422
+                    code:422
                 );
 
             if (empty($_POST['database']))
                 error(
                     __("Error"),
                     __("Database cannot be empty.", "migrator"),
-                    null,
-                    422
+                    code:422
                 );
 
             if (shorthand_bytes(ini_get("memory_limit")) < 104857600)

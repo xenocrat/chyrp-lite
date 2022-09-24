@@ -55,8 +55,7 @@
                 error(
                     __("Error"),
                     __("You did not select a video to upload.", "video"),
-                    null,
-                    422
+                    code:422
                 );
 
             fallback($_POST['title'], "");

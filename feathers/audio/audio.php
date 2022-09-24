@@ -55,8 +55,7 @@
                 error(
                     __("Error"),
                     __("You did not select any audio to upload.", "audio"),
-                    null,
-                    422
+                    code:422
                 );
 
             fallback($_POST['title'], "");

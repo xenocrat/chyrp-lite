@@ -43,8 +43,7 @@
                 error(
                     __("Error"),
                     __("URL can't be empty.", "link"),
-                    null,
-                    422
+                    code:422
                 );
 
             if (!is_url($_POST['source']))
@@ -86,8 +85,7 @@
                 error(
                     __("Error"),
                     __("URL can't be empty.", "link"),
-                    null,
-                    422
+                    code:422
                 );
 
             if (!is_url($_POST['source']))
