@@ -55,6 +55,9 @@
 
     if (!function_exists("gd_info")) {
         header($_SERVER['SERVER_PROTOCOL']." 301 Moved Permanently");
+        header("Cache-Control: public");
+        header("Pragma: no-cache");
+        header("Expires: ".date("r", now("+7 days")));
         redirect(uploaded($filename));
     }
 
