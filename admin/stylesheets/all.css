@@ -140,6 +140,13 @@ small, .small {
 p {
     margin: 0em 0em 1em 0em;
 }
+blockquote {
+    margin: 2em;
+    font-style: italic;
+}
+blockquote em {
+    font-style: normal;
+}
 a:link,
 a:visited {
     color: #1f1f23;
@@ -1285,11 +1292,6 @@ input.toolbar.hidden {
     }
     @media screen and (max-width: 960px) {
         input.text + a.help.emblem {
-            float:  right;
-            padding: 4px;
-            position: relative;
-            top: -2.5rem;
-            left: -0.5rem;
             background-color: #cfcfcf;
         }
     }
