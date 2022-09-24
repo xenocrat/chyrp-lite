@@ -1026,11 +1026,11 @@ input.toolbar.hidden {
 .ajax_loading {
     background-size: 30px 30px;
     background-image: linear-gradient(-45deg,
-        #fbfbfb 25%,
+        #efefef 25%,
         transparent 25%,
         transparent 50%,
-        #fbfbfb 50%,
-        #fbfbfb 75%,
+        #efefef 50%,
+        #efefef 75%,
         transparent 75%,
         transparent) !important;
     animation: ajax_loading 2s linear infinite;
@@ -1289,6 +1289,9 @@ input.toolbar.hidden {
     }
     .iframe_background {
         background-color: rgba(175, 175, 175, 0.75);
+    }
+    .iframe_foreground {
+        background-color: #dfdfdf;
     }
     @media screen and (max-width: 960px) {
         input.text + a.help.emblem {
