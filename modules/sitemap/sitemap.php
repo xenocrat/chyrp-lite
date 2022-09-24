@@ -199,9 +199,10 @@
 
             $xml.= '</urlset>'."\n";
 
-            @file_put_contents(
-                $settings["sitemap_path"].DIR."sitemap.xml",
-                $xml
-            );
+            $filepath = $settings["sitemap_path"].DIR."sitemap.xml";
+            $success = file_put_contents($filepath, $xml);
+
+            if (DEBUG and $success !== false)
+                error_log("SITEMAP updated ".$filepath);
         }
     }
