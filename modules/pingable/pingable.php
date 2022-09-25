@@ -307,8 +307,8 @@
         private function get_post_pingback_count($post_id): int {
             if (!isset($this->caches["post_pingback_counts"])) {
                 $counts = SQL::current()->select(
-                    "pingbacks",
-                    "COUNT(post_id) AS total, post_id as post_id",
+                    tables:"pingbacks",
+                    fields:array("COUNT(post_id) AS total", "post_id AS post_id"),
                     group:"post_id"
                 )->fetchAll();
 

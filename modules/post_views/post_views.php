@@ -140,8 +140,8 @@
         private function get_post_view_count($post_id): int {
             if (!isset($this->caches["post_view_counts"])) {
                 $counts = SQL::current()->select(
-                    "views",
-                    "COUNT(post_id) AS total, post_id as post_id",
+                    tables:"views",
+                    fields:array("COUNT(post_id) AS total", "post_id AS post_id"),
                     group:"post_id"
                 )->fetchAll();
 
@@ -167,8 +167,8 @@
         private function get_user_view_count($user_id): int {
             if (!isset($this->caches["user_view_counts"])) {
                 $counts = SQL::current()->select(
-                    "views",
-                    "COUNT(user_id) AS total, user_id as user_id",
+                    tables:"views",
+                    fields:array("COUNT(user_id) AS total", "user_id AS user_id"),
                     group:"user_id"
                 )->fetchAll();
 

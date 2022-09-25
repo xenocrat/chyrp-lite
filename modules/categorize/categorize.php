@@ -153,9 +153,9 @@
         private function get_category_post_count($category_id): int {
             if (!isset($this->caches["category_post_counts"])) {
                 $counts = SQL::current()->select(
-                    "post_attributes",
-                    "COUNT(value) AS total, value AS category_id",
-                    array("name" => "category_id"),
+                    tables:"post_attributes",
+                    fields:array("COUNT(value) AS total", "value AS category_id"),
+                    conds:array("name" => "category_id"),
                     group:"value"
                 )->fetchAll();
 

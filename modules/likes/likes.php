@@ -270,8 +270,8 @@
         private function get_post_like_count($post_id): int {
             if (!isset($this->caches["post_like_counts"])) {
                 $counts = SQL::current()->select(
-                    "likes",
-                    "COUNT(post_id) AS total, post_id as post_id",
+                    tables:"likes",
+                    fields:array("COUNT(post_id) AS total", "post_id AS post_id"),
                     group:"post_id"
                 )->fetchAll();
 
@@ -297,8 +297,8 @@
         public function get_user_like_count($user_id): int {
             if (!isset($this->caches["user_like_counts"])) {
                 $counts = SQL::current()->select(
-                    "likes",
-                    "COUNT(user_id) AS total, user_id as user_id",
+                    tables:"likes",
+                    fields:array("COUNT(user_id) AS total", "user_id AS user_id"),
                     group:"user_id"
                 )->fetchAll();
 

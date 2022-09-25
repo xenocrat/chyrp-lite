@@ -1273,9 +1273,9 @@
         private function get_post_comment_count($post_id): int {
             if (!isset($this->caches["post_comment_counts"])) {
                 $counts = SQL::current()->select(
-                    "comments",
-                    array("COUNT(post_id) AS total", "post_id as post_id"),
-                    array(
+                    tables:"comments",
+                    fields:array("COUNT(post_id) AS total", "post_id AS post_id"),
+                    conds:array(
                         "status not" => Comment::STATUS_SPAM,
                         Comment::redactions()
                     ),
@@ -1304,9 +1304,9 @@
         private function get_latest_comments($post_id): ?string {
             if (!isset($this->caches["latest_comments"])) {
                 $times = SQL::current()->select(
-                    "comments",
-                    array("MAX(created_at) AS latest", "post_id"),
-                    array(
+                    tables:"comments",
+                    fields:array("MAX(created_at) AS latest", "post_id"),
+                    conds:array(
                         "status not" => Comment::STATUS_SPAM,
                         Comment::redactions()
                     ),
@@ -1337,9 +1337,9 @@
                 $this->caches["user_comment_counts"] = array();
 
                 $counts = SQL::current()->select(
-                    "comments",
-                    array("COUNT(user_id) AS total", "user_id as user_id"),
-                    array(
+                    tables:"comments",
+                    fields:array("COUNT(user_id) AS total", "user_id as user_id"),
+                    conds:array(
                         "status not" => Comment::STATUS_SPAM,
                         Comment::redactions()
                     ),
