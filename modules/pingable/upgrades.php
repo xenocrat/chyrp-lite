@@ -13,16 +13,16 @@
 
         if (
             !$sql->count(
-                "permissions",
-                array(
+                tables:"permissions",
+                conds:array(
                     "id" => "edit_pingback",
                     "group_id" => 0
                 )
             )
         )
             $sql->insert(
-                "permissions",
-                array(
+                table:"permissions",
+                data:array(
                     "id" => "edit_pingback",
                     "name" => "Edit Pingbacks",
                     "group_id" => 0

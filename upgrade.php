@@ -450,16 +450,16 @@
             return;
 
         $results = $sql->select(
-            "posts",
-            "id",
-            array("pinned" => "")
+            tables:"posts",
+            fields:"id",
+            conds:array("pinned" => "")
         )->fetchAll();
 
         foreach ($results as $result)
             $sql->update(
-                "posts",
-                array("id" => $result["id"]),
-                array("pinned" => false)
+                table:"posts",
+                conds:array("id" => $result["id"]),
+                data:array("pinned" => false)
             );
     }
 
@@ -476,16 +476,16 @@
             return;
 
         $results = $sql->select(
-            "posts",
-            "id",
-            array("updated_at" => "0000-00-00 00:00:00")
+            tables:"posts",
+            fields:"id",
+            conds:array("updated_at" => "0000-00-00 00:00:00")
         )->fetchAll();
 
         foreach ($results as $result)
             $sql->update(
-                "posts",
-                array("id" => $result["id"]),
-                array("updated_at" => "0001-01-01 00:00:00")
+                table:"posts",
+                conds:array("id" => $result["id"]),
+                data:array("updated_at" => "0001-01-01 00:00:00")
             );
     }
 

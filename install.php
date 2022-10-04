@@ -676,8 +676,8 @@
 
             # Posts table.
             $sql->create(
-                "posts",
-                array(
+                table:"posts",
+                cols:array(
                     "id INTEGER PRIMARY KEY AUTO_INCREMENT",
                     "feather VARCHAR(32) DEFAULT ''",
                     "clean VARCHAR(128) DEFAULT ''",
@@ -692,8 +692,8 @@
 
             # Post attributes table.
             $sql->create(
-                "post_attributes",
-                array(
+                table:"post_attributes",
+                cols:array(
                     "post_id INTEGER NOT NULL",
                     "name VARCHAR(100) DEFAULT ''",
                     "value LONGTEXT",
@@ -703,8 +703,8 @@
 
             # Pages table.
             $sql->create(
-                "pages",
-                array(
+                table:"pages",
+                cols:array(
                     "id INTEGER PRIMARY KEY AUTO_INCREMENT",
                     "title VARCHAR(250) DEFAULT ''",
                     "body LONGTEXT",
@@ -722,8 +722,8 @@
 
             # Users table.
             $sql->create(
-                "users",
-                array(
+                table:"users",
+                cols:array(
                     "id INTEGER PRIMARY KEY AUTO_INCREMENT",
                     "login VARCHAR(64) DEFAULT ''",
                     "password VARCHAR(128) DEFAULT ''",
@@ -739,8 +739,8 @@
 
             # Groups table.
             $sql->create(
-                "groups",
-                array(
+                table:"groups",
+                cols:array(
                     "id INTEGER PRIMARY KEY AUTO_INCREMENT",
                     "name VARCHAR(100) DEFAULT ''",
                     "UNIQUE (name)"
@@ -749,8 +749,8 @@
 
             # Permissions table.
             $sql->create(
-                "permissions",
-                array(
+                table:"permissions",
+                cols:array(
                     "id VARCHAR(100) DEFAULT ''",
                     "name VARCHAR(100) DEFAULT ''",
                     "group_id INTEGER DEFAULT 0",
@@ -760,8 +760,8 @@
 
             # Sessions table.
             $sql->create(
-                "sessions",
-                array(
+                table:"sessions",
+                cols:array(
                     "id VARCHAR(40) DEFAULT ''",
                     "data LONGTEXT",
                     "user_id INTEGER DEFAULT 0",
@@ -805,12 +805,12 @@
 
             foreach ($names as $id => $name)
                 $sql->replace(
-                    "permissions",
-                    array(
+                    table:"permissions",
+                    keys:array(
                         "id",
                         "group_id"
                     ),
-                    array(
+                    data:array(
                         "id" => $id,
                         "name" => $name,
                         "group_id" => 0
@@ -834,19 +834,21 @@
 
             foreach ($groups as $name => $permissions) {
                 $sql->replace(
-                    "groups", "name", array("name" => ucfirst($name))
+                    table:"groups",
+                    keys:"name",
+                    data:array("name" => ucfirst($name))
                 );
 
                 $group_id[$name] = $sql->latest("groups");
 
                 foreach ($permissions as $permission)
                     $sql->replace(
-                        "permissions",
-                        array(
+                        table:"permissions",
+                        keys:array(
                             "id",
                             "group_id"
                         ),
-                        array(
+                        data:array(
                             "id" => $permission,
                             "name" => $names[$permission],
                             "group_id" => $group_id[$name]
@@ -860,14 +862,14 @@
             # Add the admin user account.
             if (
                 !$sql->select(
-                    "users",
-                    "id",
-                    array("login" => $_POST['login'])
+                    tables:"users",
+                    fields:"id",
+                    conds:array("login" => $_POST['login'])
                 )->fetchColumn()
             )
                 $sql->insert(
-                    "users",
-                    array(
+                    table:"users",
+                    data:array(
                         "login" => $_POST['login'],
                         "password" => User::hash_password($_POST['password1']),
                         "email" => $_POST['email'],
