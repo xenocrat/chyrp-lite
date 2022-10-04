@@ -123,13 +123,14 @@
                 $created_at = strtotime($result["created_at"]);
                 $this_month = strtotime("midnight first day of this month", $created_at);
 
-                if (!isset($nums[$this_month]))
+                if (!isset($nums[$this_month])) {
+                    if (count($nums) == $limit)
+                        break;
+
                     $nums[$this_month] = 0;
+                }
 
                 $nums[$this_month]++;
-
-                if (count($nums) == $limit)
-                    break;
             }
 
             $list = array();
