@@ -182,7 +182,7 @@ Arguments:
 audio_player
 ------------
 Called from:
-	feathers/audio/audio.php on line 179
+	feathers/audio/audio.php on line 173
 
 Arguments:
 	$post
@@ -191,7 +191,7 @@ Arguments:
 video_player
 ------------
 Called from:
-	feathers/video/video.php on line 176
+	feathers/video/video.php on line 170
 
 Arguments:
 	$post
@@ -248,13 +248,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 1927
+	includes/controller/Admin.php on line 1917
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2365
+	includes/controller/Admin.php on line 2355
 
 Arguments:
 	$group
@@ -263,7 +263,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2398
+	includes/controller/Admin.php on line 2388
 
 Arguments:
 	$user
@@ -272,7 +272,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2449
+	includes/controller/Admin.php on line 2439
 
 Arguments:
 	$entry, $post
@@ -281,7 +281,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2491
+	includes/controller/Admin.php on line 2481
 
 Arguments:
 	$entry, $page
@@ -290,7 +290,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 2495
+	includes/controller/Admin.php on line 2485
 
 Arguments:
 	$imports
@@ -299,13 +299,13 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 2861
+	includes/controller/Admin.php on line 2851
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 2876
+	includes/controller/Admin.php on line 2866
 
 
 can_not_view_page
@@ -841,7 +841,7 @@ Target:
 related_posts
 -------------
 Called from:
-	includes/class/Theme.php on line 196
+	includes/class/Theme.php on line 197
 
 Target:
 	$ids
@@ -853,7 +853,7 @@ Arguments:
 stylesheets
 -----------
 Called from:
-	includes/class/Theme.php on line 241
+	includes/class/Theme.php on line 242
 
 Target:
 	$stylesheets
@@ -862,7 +862,7 @@ Target:
 scripts
 -------
 Called from:
-	includes/class/Theme.php on line 290
+	includes/class/Theme.php on line 291
 
 Target:
 	$scripts
@@ -871,7 +871,7 @@ Target:
 links
 -----
 Called from:
-	includes/class/Theme.php on line 371
+	includes/class/Theme.php on line 372
 
 Target:
 	$links
@@ -926,7 +926,7 @@ Arguments:
 posts_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 2036
+	includes/controller/Admin.php on line 2026
 
 Target:
 	$posts_atom
@@ -938,7 +938,7 @@ Arguments:
 pages_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 2133
+	includes/controller/Admin.php on line 2123
 
 Target:
 	$pages_atom
@@ -950,7 +950,7 @@ Arguments:
 export
 ------
 Called from:
-	includes/controller/Admin.php on line 2225
+	includes/controller/Admin.php on line 2215
 
 Target:
 	$exports
@@ -959,7 +959,7 @@ Target:
 before_import
 -------------
 Called from:
-	includes/controller/Admin.php on line 2337
+	includes/controller/Admin.php on line 2327
 
 Target:
 	$imports
@@ -968,7 +968,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 3277
+	includes/controller/Admin.php on line 3265
 
 Target:
 	$write
@@ -977,7 +977,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3335
+	includes/controller/Admin.php on line 3323
 
 Target:
 	$manage
@@ -986,7 +986,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 3363
+	includes/controller/Admin.php on line 3351
 
 Target:
 	$settings
@@ -995,7 +995,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3384
+	includes/controller/Admin.php on line 3372
 
 Target:
 	$extend
@@ -1004,7 +1004,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 3448
+	includes/controller/Admin.php on line 3436
 
 Target:
 	$this->context

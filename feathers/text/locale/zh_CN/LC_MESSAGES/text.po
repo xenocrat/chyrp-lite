@@ -29,6 +29,6 @@ msgstr "标题"
 msgid "Body"
 msgstr "正文"
 
-#: feathers/text/text.php:36 feathers/text/text.php:68
+#: feathers/text/text.php:36 feathers/text/text.php:65
 msgid "Body can't be blank."
 msgstr "正文不能为空。"

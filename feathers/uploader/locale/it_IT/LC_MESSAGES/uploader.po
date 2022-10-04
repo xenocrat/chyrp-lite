@@ -55,6 +55,6 @@ msgstr "Didascalia"
 msgid "You did not select any files to upload."
 msgstr "Non è stato selezionato alcun file da caricare."
 
-#: feathers/uploader/uploader.php:223
+#: feathers/uploader/uploader.php:217
 msgid "Source"
 msgstr "Sorgente"
