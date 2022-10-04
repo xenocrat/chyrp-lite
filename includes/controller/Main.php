@@ -716,13 +716,13 @@
 
                 if (!Flash::exists("warning")) {
                     $user = User::add(
-                        $_POST['login'],
-                        User::hash_password($_POST['password1']),
-                        $_POST['email'],
-                        $_POST['full_name'],
-                        $_POST['website'],
-                        $config->default_group,
-                        ($config->email_activation) ? false : true
+                        login:$_POST['login'],
+                        password:User::hash_password($_POST['password1']),
+                        email:$_POST['email'],
+                        full_name:$_POST['full_name'],
+                        website:$_POST['website'],
+                        group_id:$config->default_group,
+                        approved:($config->email_activation) ? false : true
                     );
 
                     if (!$user->approved) {
@@ -940,12 +940,12 @@
                         User::hash_password($_POST['new_password1']) : $visitor->password ;
 
                     $visitor = $visitor->update(
-                        $visitor->login,
-                        $password,
-                        $_POST['email'],
-                        $_POST['full_name'],
-                        $_POST['website'],
-                        $visitor->group->id
+                        login:$visitor->login,
+                        password:$password,
+                        email:$_POST['email'],
+                        full_name:$_POST['full_name'],
+                        website:$_POST['website'],
+                        group_id:$visitor->group->id
                     );
 
                     Flash::notice(

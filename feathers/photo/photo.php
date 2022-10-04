@@ -68,21 +68,18 @@
             fallback($_POST['option'], array());
 
             return Post::add(
-                array(
+                values:array(
                     "title" => $_POST['title'],
                     "filename" => $filename,
                     "caption" => $_POST['caption']
                 ),
-                sanitize($_POST['slug']),
-                "",
-                "photo",
-                null,
-                !empty($_POST['pinned']),
-                $_POST['status'],
-                datetime($_POST['created_at']),
-                null,
-                true,
-                $_POST['option']
+                clean:sanitize($_POST['slug']),
+                feather:"photo",
+                pinned:!empty($_POST['pinned']),
+                status:$_POST['status'],
+                created_at:datetime($_POST['created_at']),
+                pingbacks:true,
+                options:$_POST['option']
             );
         }
 
@@ -105,19 +102,16 @@
                 );
 
             return $post->update(
-                array(
+                values:array(
                     "title" => $_POST['title'],
                     "filename" => $filename,
                     "caption" => $_POST['caption']
                 ),
-                null,
-                !empty($_POST['pinned']),
-                $_POST['status'],
-                sanitize($_POST['slug']),
-                "",
-                datetime($_POST['created_at']),
-                null,
-                $_POST['option']
+                pinned:!empty($_POST['pinned']),
+                status:$_POST['status'],
+                clean:sanitize($_POST['slug']),
+                created_at:datetime($_POST['created_at']),
+                options:$_POST['option']
             );
         }
 

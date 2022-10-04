@@ -630,14 +630,13 @@
                 (int) $_POST['list_priority'] : (int) $_POST['list_order'] ;
 
             $page = Page::add(
-                $_POST['title'],
-                $_POST['body'],
-                null,
-                $_POST['parent_id'],
-                $public,
-                $listed,
-                $list_order,
-                sanitize($_POST['slug'])
+                title:$_POST['title'],
+                body:$_POST['body'],
+                parent_id:$_POST['parent_id'],
+                public:$public,
+                show_in_list:$listed,
+                list_order:$list_order,
+                clean:sanitize($_POST['slug'])
             );
 
             Flash::notice(
@@ -751,14 +750,13 @@
                 (int) $_POST['list_priority'] : (int) $_POST['list_order'] ;
 
             $page = $page->update(
-                $_POST['title'],
-                $_POST['body'],
-                null,
-                $_POST['parent_id'],
-                $public,
-                $listed,
-                $list_order,
-                sanitize($_POST['slug'])
+                title:$_POST['title'],
+                body:$_POST['body'],
+                parent_id:$_POST['parent_id'],
+                public:$public,
+                show_in_list:$listed,
+                list_order:$list_order,
+                clean:sanitize($_POST['slug'])
             );
 
             Flash::notice(
@@ -839,15 +837,13 @@
                     Page::delete($child->id, true);
                 else
                     $child->update(
-                        $child->title,
-                        $child->body,
-                        null,
-                        0,
-                        $child->public,
-                        $child->show_in_list,
-                        $child->list_order,
-                        null,
-                        $child->url
+                        title:$child->title,
+                        body:$child->body,
+                        parent_id:0,
+                        public:$child->public,
+                        show_in_list:$child->show_in_list,
+                        list_order:$child->list_order,
+                        url:$child->url
                     );
 
             Page::delete($page->id);
@@ -1018,13 +1014,13 @@
                 );
 
             $user = User::add(
-                $_POST['login'],
-                User::hash_password($_POST['password1']),
-                $_POST['email'],
-                $_POST['full_name'],
-                $_POST['website'],
-                $group->id,
-                ($config->email_activation and empty($_POST['activated'])) ? false : true
+                login:$_POST['login'],
+                password:User::hash_password($_POST['password1']),
+                email:$_POST['email'],
+                full_name:$_POST['full_name'],
+                website:$_POST['website'],
+                group_id:$group->id,
+                approved:($config->email_activation and empty($_POST['activated'])) ? false : true
             );
 
             if (!$user->approved)
@@ -1188,13 +1184,13 @@
                 );
 
             $user = $user->update(
-                $_POST['login'],
-                $password,
-                $_POST['email'],
-                $_POST['full_name'],
-                $_POST['website'],
-                $group->id,
-                ($config->email_activation and empty($_POST['activated'])) ? false : true
+                login:$_POST['login'],
+                password:$password,
+                email:$_POST['email'],
+                full_name:$_POST['full_name'],
+                website:$_POST['website'],
+                group_id:$group->id,
+                approved:($config->email_activation and empty($_POST['activated'])) ? false : true
             );
 
             if (!$user->approved)
@@ -1637,14 +1633,8 @@
                         );
 
                     foreach ($group->users as $user)
-                        $user->update(
-                            $user->login,
-                            $user->password,
-                            $user->email,
-                            $user->full_name,
-                            $user->website,
-                            $member_group->id
-                        );
+                        $user->update(group_id:$member_group->id);
+
                 } else {
                     error(
                         __("Error"),
@@ -2434,16 +2424,16 @@
                     $updated = ((string) $entry->updated != (string) $entry->published);
 
                     $post = Post::add(
-                        $values,
-                        unfix((string) $chyrp->clean),
-                        Post::check_url(unfix((string) $chyrp->url)),
-                        unfix((string) $chyrp->feather),
-                        (!$user->no_results) ? $user->id : $visitor->id,
-                        (bool) unfix((string) $chyrp->pinned),
-                        unfix((string) $chyrp->status),
-                        datetime((string) $entry->published),
-                        ($updated) ? datetime((string) $entry->updated) : null,
-                        false
+                        values:$values,
+                        clean:unfix((string) $chyrp->clean),
+                        url:Post::check_url(unfix((string) $chyrp->url)),
+                        feather:unfix((string) $chyrp->feather),
+                        user:(!$user->no_results) ? $user->id : $visitor->id,
+                        pinned:(bool) unfix((string) $chyrp->pinned),
+                        status:unfix((string) $chyrp->status),
+                        created_at:datetime((string) $entry->published),
+                        updated_at:($updated) ? datetime((string) $entry->updated) : null,
+                        pingbacks:false
                     );
 
                     $trigger->call("import_chyrp_post", $entry, $post);
@@ -2475,17 +2465,17 @@
                     $updated = ((string) $entry->updated != (string) $entry->published);
 
                     $page = Page::add(
-                        unfix((string) $entry->title),
-                        unfix((string) $entry->content),
-                        (!$user->no_results) ? $user->id : $visitor->id,
-                        (int) unfix((string) $attr->parent_id),
-                        (bool) unfix((string) $chyrp->public),
-                        (bool) unfix((string) $chyrp->show_in_list),
-                        (int) unfix((string) $chyrp->list_order),
-                        unfix((string) $chyrp->clean),
-                        Page::check_url(unfix((string) $chyrp->url)),
-                        datetime((string) $entry->published),
-                        ($updated) ? datetime((string) $entry->updated) : null
+                        title:unfix((string) $entry->title),
+                        body:unfix((string) $entry->content),
+                        user:(!$user->no_results) ? $user->id : $visitor->id,
+                        parent_id:(int) unfix((string) $attr->parent_id),
+                        public:(bool) unfix((string) $chyrp->public),
+                        show_in_list:(bool) unfix((string) $chyrp->show_in_list),
+                        list_order:(int) unfix((string) $chyrp->list_order),
+                        clean:unfix((string) $chyrp->clean),
+                        url:Page::check_url(unfix((string) $chyrp->url)),
+                        created_at:datetime((string) $entry->published),
+                        updated_at:($updated) ? datetime((string) $entry->updated) : null
                     );
 
                     $trigger->call("import_chyrp_page", $entry, $page);
@@ -3151,14 +3141,12 @@
 
                 if (Page::check_url("home") == "home" ) {
                     $page = Page::add(
-                        __("My Awesome Homepage"),
-                        __("Nothing here yet!"),
-                        null,
-                        0,
-                        true,
-                        true,
-                        0,
-                        "home"
+                        title:__("My Awesome Homepage"),
+                        body:__("Nothing here yet!"),
+                        parent_id:0,
+                        public:true,
+                        show_in_list:true,
+                        clean:"home"
                     );
 
                     Flash::notice(

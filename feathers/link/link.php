@@ -62,21 +62,18 @@
             $_POST['source'] = add_scheme($_POST['source']);
 
             return Post::add(
-                array(
+                values:array(
                     "name" => $_POST['name'],
                     "source" => $_POST['source'],
                     "description" => $_POST['description']
                 ),
-                sanitize($_POST['slug']),
-                "",
-                "link",
-                null,
-                !empty($_POST['pinned']),
-                $_POST['status'],
-                datetime($_POST['created_at']),
-                null,
-                true,
-                $_POST['option']
+                clean:sanitize($_POST['slug']),
+                feather:"link",
+                pinned:!empty($_POST['pinned']),
+                status:$_POST['status'],
+                created_at:datetime($_POST['created_at']),
+                pingbacks:true,
+                options:$_POST['option']
             );
         }
 
@@ -104,19 +101,16 @@
             $_POST['source'] = add_scheme($_POST['source']);
 
             return $post->update(
-                array(
+                values:array(
                     "name" => $_POST['name'],
                     "source" => $_POST['source'],
                     "description" => $_POST['description']
                 ),
-                null,
-                !empty($_POST['pinned']),
-                $_POST['status'],
-                sanitize($_POST['slug']),
-                "",
-                datetime($_POST['created_at']),
-                null,
-                $_POST['option']
+                pinned:!empty($_POST['pinned']),
+                status:$_POST['status'],
+                clean:sanitize($_POST['slug']),
+                created_at:datetime($_POST['created_at']),
+                options:$_POST['option']
             );
         }
 
