@@ -83,13 +83,13 @@ msgstr "允许您从Wordpress, MovableType, TextPattern, 和 Tumblr中导入数�
 msgid "Migration"
 msgstr "迁移"
 
-#: modules/migrator/migrator.php:34 modules/migrator/migrator.php:257
-#: modules/migrator/migrator.php:460 modules/migrator/migrator.php:633
+#: modules/migrator/migrator.php:34 modules/migrator/migrator.php:255
+#: modules/migrator/migrator.php:456 modules/migrator/migrator.php:623
 msgid "You do not have sufficient privileges to import content."
 msgstr "您没有足够的权限导入内容。"
 
-#: modules/migrator/migrator.php:48 modules/migrator/migrator.php:276
-#: modules/migrator/migrator.php:474 modules/migrator/migrator.php:647
+#: modules/migrator/migrator.php:48 modules/migrator/migrator.php:274
+#: modules/migrator/migrator.php:470 modules/migrator/migrator.php:637
 msgid "Missing Feather"
 msgstr "缺少羽毛"
 
@@ -97,78 +97,78 @@ msgstr "缺少羽毛"
 msgid "Text feather must be enabled to import from WordPress."
 msgstr "从WordPress中导入时必须启用文本羽毛。"
 
-#: modules/migrator/migrator.php:57
+#: modules/migrator/migrator.php:56
 msgid "You must select a WordPress export file."
 msgstr "您必须选择一个WordPress导出文件。"
 
-#: modules/migrator/migrator.php:134
+#: modules/migrator/migrator.php:132
 msgid "The file does not seem to be a valid WordPress export file."
 msgstr "该文件似乎不是一个有效的WordPress导出文件。"
 
-#: modules/migrator/migrator.php:241
+#: modules/migrator/migrator.php:239
 msgid "WordPress content successfully imported!"
 msgstr "WordPress内容已成功导入！"
 
-#: modules/migrator/migrator.php:277
+#: modules/migrator/migrator.php:275
 msgid "Text, Photo, Quote, and Link feathers must be enabled to import from Tumblr."
 msgstr "从Tumblr中导入时必须启用文本，照片，引用和链接羽毛。"
 
-#: modules/migrator/migrator.php:285
+#: modules/migrator/migrator.php:282
 msgid "Invalid URL."
 msgstr "无效的URL。"
 
-#: modules/migrator/migrator.php:313
+#: modules/migrator/migrator.php:309
 msgid "Could not retrieve content from the Tumblr URL."
 msgstr "无法从Tumblr网址中获取内容。"
 
-#: modules/migrator/migrator.php:444
+#: modules/migrator/migrator.php:440
 msgid "Tumblr content successfully imported!"
 msgstr "Tumblr内容已成功导入！"
 
-#: modules/migrator/migrator.php:475
+#: modules/migrator/migrator.php:471
 msgid "Text feather must be enabled to import from TextPattern."
 msgstr "从TextPattern中导入时必须启用文本羽毛。"
 
-#: modules/migrator/migrator.php:483 modules/migrator/migrator.php:656
+#: modules/migrator/migrator.php:478 modules/migrator/migrator.php:645
 msgid "MySQLi is required for database migration."
 msgstr "数据库迁移需要 MySQLi。"
 
-#: modules/migrator/migrator.php:491 modules/migrator/migrator.php:664
+#: modules/migrator/migrator.php:485 modules/migrator/migrator.php:652
 msgid "Host cannot be empty."
 msgstr "主机不能为空。"
 
-#: modules/migrator/migrator.php:499 modules/migrator/migrator.php:672
+#: modules/migrator/migrator.php:492 modules/migrator/migrator.php:659
 msgid "Username cannot be empty."
 msgstr "用户名不能为空。"
 
-#: modules/migrator/migrator.php:507 modules/migrator/migrator.php:680
+#: modules/migrator/migrator.php:499 modules/migrator/migrator.php:666
 msgid "Password cannot be empty."
 msgstr "密码不能为空。"
 
-#: modules/migrator/migrator.php:515 modules/migrator/migrator.php:688
+#: modules/migrator/migrator.php:506 modules/migrator/migrator.php:673
 msgid "Database cannot be empty."
 msgstr "数据库不能为空。"
 
-#: modules/migrator/migrator.php:535
+#: modules/migrator/migrator.php:525
 msgid "Could not connect to the TextPattern database."
 msgstr "不能连接至TextPattern数据库。"
 
-#: modules/migrator/migrator.php:550 modules/migrator/migrator.php:720
+#: modules/migrator/migrator.php:540 modules/migrator/migrator.php:704
 msgid "Database Error"
 msgstr "数据库错误"
 
-#: modules/migrator/migrator.php:616
+#: modules/migrator/migrator.php:606
 msgid "TextPattern content successfully imported!"
 msgstr "TextPattern内容已成功导入！"
 
-#: modules/migrator/migrator.php:648
+#: modules/migrator/migrator.php:638
 msgid "Text feather must be enabled to import from MovableType."
 msgstr "从MovableType中导入时必须启用文本羽毛。"
 
-#: modules/migrator/migrator.php:708
+#: modules/migrator/migrator.php:692
 msgid "Could not connect to the MovableType database."
 msgstr "不能连接至MovableType数据库。"
 
-#: modules/migrator/migrator.php:814
+#: modules/migrator/migrator.php:798
 msgid "MovableType content successfully imported!"
 msgstr "MovableType 内容已成功导入！"

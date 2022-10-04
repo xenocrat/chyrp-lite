@@ -86,18 +86,18 @@ msgid "Status"
 msgstr ""
 
 #: modules/comments/admin/pages/edit_comment.twig:45
-#: modules/comments/comments.php:711
+#: modules/comments/comments.php:705
 msgid "Approved"
 msgstr ""
 
 #: modules/comments/admin/pages/edit_comment.twig:47
-#: modules/comments/comments.php:712
+#: modules/comments/comments.php:706
 msgid "Denied"
 msgstr ""
 
 #: modules/comments/admin/pages/edit_comment.twig:49
 #: modules/comments/admin/pages/manage_spam.twig:16
-#: modules/comments/comments.php:713
+#: modules/comments/comments.php:707
 msgid "Spam"
 msgstr ""
 
@@ -120,9 +120,9 @@ msgid "Manage Comments"
 msgstr ""
 
 #: modules/comments/admin/pages/manage_comments.twig:16
-#: modules/comments/comments.php:782
-#: modules/comments/comments.php:817
-#: modules/comments/comments.php:831
+#: modules/comments/comments.php:776
+#: modules/comments/comments.php:811
+#: modules/comments/comments.php:825
 #: modules/comments/info.php:3
 msgid "Comments"
 msgstr ""
@@ -200,201 +200,201 @@ msgstr ""
 msgid "An ID is required to add a comment."
 msgstr ""
 
-#: modules/comments/comments.php:145
+#: modules/comments/comments.php:144
 msgid "You cannot comment on this post."
 msgstr ""
 
-#: modules/comments/comments.php:152
-#: modules/comments/comments.php:254
+#: modules/comments/comments.php:151
+#: modules/comments/comments.php:252
 msgid "Message can't be blank."
 msgstr ""
 
-#: modules/comments/comments.php:159
-#: modules/comments/comments.php:261
+#: modules/comments/comments.php:158
+#: modules/comments/comments.php:259
 msgid "Author can't be blank."
 msgstr ""
 
-#: modules/comments/comments.php:166
-#: modules/comments/comments.php:268
+#: modules/comments/comments.php:165
+#: modules/comments/comments.php:266
 msgid "Email address can't be blank."
 msgstr ""
 
-#: modules/comments/comments.php:173
-#: modules/comments/comments.php:275
+#: modules/comments/comments.php:172
+#: modules/comments/comments.php:273
 msgid "Invalid email address."
 msgstr ""
 
-#: modules/comments/comments.php:180
-#: modules/comments/comments.php:282
+#: modules/comments/comments.php:179
+#: modules/comments/comments.php:280
 msgid "Invalid website URL."
 msgstr ""
 
-#: modules/comments/comments.php:190
+#: modules/comments/comments.php:189
 msgid "Incorrect captcha response."
 msgstr ""
 
-#: modules/comments/comments.php:211
+#: modules/comments/comments.php:210
 msgid "Comment added."
 msgstr ""
 
-#: modules/comments/comments.php:212
+#: modules/comments/comments.php:211
 msgid "Your comment is awaiting moderation."
 msgstr ""
 
-#: modules/comments/comments.php:226
+#: modules/comments/comments.php:225
 msgid "An ID is required to update a comment."
 msgstr ""
 
-#: modules/comments/comments.php:236
-#: modules/comments/comments.php:370
-#: modules/comments/comments.php:399
-#: modules/comments/comments.php:438
-#: modules/comments/comments.php:907
-#: modules/comments/comments.php:940
-#: modules/comments/comments.php:976
+#: modules/comments/comments.php:234
+#: modules/comments/comments.php:366
+#: modules/comments/comments.php:394
+#: modules/comments/comments.php:432
+#: modules/comments/comments.php:899
+#: modules/comments/comments.php:931
+#: modules/comments/comments.php:966
 msgid "Comment not found."
 msgstr ""
 
-#: modules/comments/comments.php:242
-#: modules/comments/comments.php:377
-#: modules/comments/comments.php:946
+#: modules/comments/comments.php:240
+#: modules/comments/comments.php:373
+#: modules/comments/comments.php:937
 msgid "You do not have sufficient privileges to edit this comment."
 msgstr ""
 
-#: modules/comments/comments.php:313
+#: modules/comments/comments.php:311
 msgid "Comment updated."
 msgstr ""
 
-#: modules/comments/comments.php:358
-#: modules/comments/comments.php:927
+#: modules/comments/comments.php:355
+#: modules/comments/comments.php:919
 msgid "An ID is required to edit a comment."
 msgstr ""
 
-#: modules/comments/comments.php:390
-#: modules/comments/comments.php:425
-#: modules/comments/comments.php:966
+#: modules/comments/comments.php:386
+#: modules/comments/comments.php:420
+#: modules/comments/comments.php:957
 msgid "An ID is required to delete a comment."
 msgstr ""
 
-#: modules/comments/comments.php:406
-#: modules/comments/comments.php:444
-#: modules/comments/comments.php:982
+#: modules/comments/comments.php:401
+#: modules/comments/comments.php:438
+#: modules/comments/comments.php:972
 msgid "You do not have sufficient privileges to delete this comment."
 msgstr ""
 
-#: modules/comments/comments.php:453
-#: modules/comments/comments.php:987
+#: modules/comments/comments.php:447
+#: modules/comments/comments.php:977
 msgid "Comment deleted."
 msgstr ""
 
-#: modules/comments/comments.php:460
-#: modules/comments/comments.php:507
+#: modules/comments/comments.php:454
+#: modules/comments/comments.php:501
 msgid "You do not have sufficient privileges to manage any comments."
 msgstr ""
 
-#: modules/comments/comments.php:578
+#: modules/comments/comments.php:572
 msgid "Selected comments deleted."
 msgstr ""
 
-#: modules/comments/comments.php:618
+#: modules/comments/comments.php:612
 msgid "Selected comments denied."
 msgstr ""
 
-#: modules/comments/comments.php:653
+#: modules/comments/comments.php:647
 msgid "Selected comments approved."
 msgstr ""
 
-#: modules/comments/comments.php:686
+#: modules/comments/comments.php:680
 msgid "Selected comments marked as spam."
 msgstr ""
 
-#: modules/comments/comments.php:803
+#: modules/comments/comments.php:797
 #, php-format
 msgid "Comments (%d)"
 msgstr ""
 
-#: modules/comments/comments.php:809
+#: modules/comments/comments.php:803
 #, php-format
 msgid "Spam (%d)"
 msgstr ""
 
-#: modules/comments/comments.php:845
+#: modules/comments/comments.php:839
 msgid "An ID is required to reload comments."
 msgstr ""
 
-#: modules/comments/comments.php:864
+#: modules/comments/comments.php:857
 #, php-format
 msgid "Comments added since %s"
 msgstr ""
 
-#: modules/comments/comments.php:897
+#: modules/comments/comments.php:890
 msgid "An ID is required to show a comment."
 msgstr ""
 
-#: modules/comments/comments.php:1006
-#: modules/comments/comments.php:1096
+#: modules/comments/comments.php:996
+#: modules/comments/comments.php:1086
 #, php-format
 msgid "Comments on &#8220;%s&#8221;"
 msgstr ""
 
-#: modules/comments/comments.php:1078
+#: modules/comments/comments.php:1068
 msgid "You have unsubscribed from the conversation."
 msgstr ""
 
-#: modules/comments/comments.php:1118
+#: modules/comments/comments.php:1108
 #, php-format
 msgid "Comment #%d"
 msgstr ""
 
-#: modules/comments/comments.php:1166
-#: modules/comments/comments.php:1202
+#: modules/comments/comments.php:1156
+#: modules/comments/comments.php:1192
 msgid "A ping from your URL is already registered."
 msgstr ""
 
-#: modules/comments/comments.php:1172
-#: modules/comments/comments.php:1210
+#: modules/comments/comments.php:1162
+#: modules/comments/comments.php:1199
 msgid "Your URL is too long to be stored in our database."
 msgstr ""
 
-#: modules/comments/comments.php:1186
+#: modules/comments/comments.php:1176
 msgid "Pingback registered!"
 msgstr ""
 
-#: modules/comments/comments.php:1216
+#: modules/comments/comments.php:1204
 msgid "Mentioned this post."
 msgstr ""
 
-#: modules/comments/comments.php:1235
+#: modules/comments/comments.php:1223
 msgid "Open"
 msgstr ""
 
-#: modules/comments/comments.php:1241
+#: modules/comments/comments.php:1229
 msgid "Closed"
 msgstr ""
 
-#: modules/comments/comments.php:1247
+#: modules/comments/comments.php:1235
 msgid "Private"
 msgstr ""
 
-#: modules/comments/comments.php:1253
+#: modules/comments/comments.php:1241
 msgid "Registered Only"
 msgstr ""
 
-#: modules/comments/comments.php:1262
+#: modules/comments/comments.php:1250
 msgid "Comment Status"
 msgstr ""
 
-#: modules/comments/comments.php:1496
+#: modules/comments/comments.php:1472
 #, php-format
 msgid "New Comment at %s"
 msgstr ""
 
-#: modules/comments/comments.php:1497
+#: modules/comments/comments.php:1473
 #, php-format
 msgid "%s commented on a blog post:"
 msgstr ""
 
-#: modules/comments/comments.php:1505
+#: modules/comments/comments.php:1481
 msgid "Unsubscribe from this conversation:"
 msgstr ""
 

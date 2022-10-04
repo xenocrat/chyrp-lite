@@ -25,6 +25,6 @@ msgstr "发表引文和引用来源。"
 msgid "Source"
 msgstr "来源"
 
-#: feathers/quote/quote.php:37
+#: feathers/quote/quote.php:37 feathers/quote/quote.php:69
 msgid "Quote can't be empty."
 msgstr "Quote 不能为空。"

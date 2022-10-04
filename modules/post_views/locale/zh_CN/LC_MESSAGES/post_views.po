@@ -42,6 +42,6 @@ msgstr "重置查看次数？"
 msgid "An ID is required to download a view count."
 msgstr "下载查看计数需要一个ID。"
 
-#: modules/post_views/post_views.php:116
+#: modules/post_views/post_views.php:115
 msgid "You do not have sufficient privileges to download this view count."
 msgstr "您没有足够的权限下载查看计数。"

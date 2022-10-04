@@ -42,6 +42,6 @@ msgstr "Anzahl der Aufrufe zurücksetzen?"
 msgid "An ID is required to download a view count."
 msgstr "Es wird eine ID benötigt, um die View Zahlen runterzuladen."
 
-#: modules/post_views/post_views.php:116
+#: modules/post_views/post_views.php:115
 msgid "You do not have sufficient privileges to download this view count."
 msgstr "Du hast nicht die nötigen Rechte, um die View Zahlen runterzuladen."

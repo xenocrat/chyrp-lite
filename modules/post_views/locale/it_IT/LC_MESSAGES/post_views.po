@@ -42,7 +42,7 @@ msgstr "Ripristinare il conteggio delle visualizzazioni?"
 msgid "An ID is required to download a view count."
 msgstr "Per scaricare il conteggio delle visualizzazioni è necessario un ID."
 
-#: modules/post_views/post_views.php:116
+#: modules/post_views/post_views.php:115
 msgid "You do not have sufficient privileges to download this view count."
 msgstr ""
 "Non si dispone di privilegi sufficienti per scaricare il conteggio delle "

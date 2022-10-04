@@ -33,10 +33,10 @@ msgstr "URL"
 msgid "Description"
 msgstr "描述"
 
-#: feathers/link/link.php:45 feathers/link/link.php:88
+#: feathers/link/link.php:45 feathers/link/link.php:87
 msgid "URL can't be empty."
 msgstr "URL不能为空。"
 
-#: feathers/link/link.php:53 feathers/link/link.php:96
+#: feathers/link/link.php:52 feathers/link/link.php:94
 msgid "Invalid URL."
 msgstr "无效的URL。"

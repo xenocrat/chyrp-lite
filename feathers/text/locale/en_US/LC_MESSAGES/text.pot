@@ -16,7 +16,8 @@ msgstr ""
 msgid "Body"
 msgstr ""
 
-#: feathers/text/text.php:69
+#: feathers/text/text.php:36
+#: feathers/text/text.php:68
 msgid "Body can't be blank."
 msgstr ""
 

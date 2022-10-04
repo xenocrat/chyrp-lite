@@ -32,8 +32,8 @@ msgid "Manage Pingbacks"
 msgstr ""
 
 #: modules/pingable/admin/pages/manage_pingbacks.twig:16
-#: modules/pingable/pingable.php:273
-#: modules/pingable/pingable.php:294
+#: modules/pingable/pingable.php:266
+#: modules/pingable/pingable.php:287
 msgid "Pingbacks"
 msgstr ""
 
@@ -79,7 +79,7 @@ msgid "A ping from your URL is already registered."
 msgstr ""
 
 #: modules/pingable/pingable.php:48
-#: modules/pingable/pingable.php:76
+#: modules/pingable/pingable.php:75
 msgid "Your URL is too long to be stored in our database."
 msgstr ""
 
@@ -87,53 +87,53 @@ msgstr ""
 msgid "Pingback registered!"
 msgstr ""
 
-#: modules/pingable/pingable.php:92
+#: modules/pingable/pingable.php:90
 msgid "An ID is required to edit a pingback."
 msgstr ""
 
-#: modules/pingable/pingable.php:101
-#: modules/pingable/pingable.php:145
-#: modules/pingable/pingable.php:175
-#: modules/pingable/pingable.php:214
+#: modules/pingable/pingable.php:98
+#: modules/pingable/pingable.php:140
+#: modules/pingable/pingable.php:169
+#: modules/pingable/pingable.php:207
 msgid "Pingback not found."
 msgstr ""
 
-#: modules/pingable/pingable.php:108
-#: modules/pingable/pingable.php:151
+#: modules/pingable/pingable.php:105
+#: modules/pingable/pingable.php:146
 msgid "You do not have sufficient privileges to edit this pingback."
 msgstr ""
 
-#: modules/pingable/pingable.php:127
+#: modules/pingable/pingable.php:124
 msgid "An ID is required to update a pingback."
 msgstr ""
 
-#: modules/pingable/pingable.php:134
+#: modules/pingable/pingable.php:130
 msgid "No Title Specified"
 msgstr ""
 
-#: modules/pingable/pingable.php:135
+#: modules/pingable/pingable.php:131
 msgid "A title is required to update a pingback."
 msgstr ""
 
-#: modules/pingable/pingable.php:157
+#: modules/pingable/pingable.php:152
 msgid "Pingback updated."
 msgstr ""
 
-#: modules/pingable/pingable.php:166
-#: modules/pingable/pingable.php:201
+#: modules/pingable/pingable.php:161
+#: modules/pingable/pingable.php:195
 msgid "An ID is required to delete a pingback."
 msgstr ""
 
-#: modules/pingable/pingable.php:182
-#: modules/pingable/pingable.php:220
+#: modules/pingable/pingable.php:176
+#: modules/pingable/pingable.php:213
 msgid "You do not have sufficient privileges to delete this pingback."
 msgstr ""
 
-#: modules/pingable/pingable.php:226
+#: modules/pingable/pingable.php:219
 msgid "Pingback deleted."
 msgstr ""
 
-#: modules/pingable/pingable.php:235
+#: modules/pingable/pingable.php:228
 msgid "You do not have sufficient privileges to manage pingbacks."
 msgstr ""
 
