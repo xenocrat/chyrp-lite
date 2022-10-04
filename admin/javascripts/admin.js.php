@@ -151,7 +151,7 @@ function confirm_submit() {
             e.preventDefault();
     });
 }
-// Prevent forms being submitted multiple times in a short interval.
+// Prevents forms being submitted multiple times in a short interval.
 function solo_submit() {
     $("form").on("submit.solo", function(e) {
         var last = $(this).attr("data-submitted") || 0 ;
