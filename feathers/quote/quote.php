@@ -66,7 +66,7 @@
             if (empty($_POST['quote']))
                 error(
                     __("Error"),
-                    __("Quote can't be empty."),
+                    __("Quote can't be empty.", "quote"),
                     code:422
                 );
 
