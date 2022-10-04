@@ -53,9 +53,9 @@
          */
         public function read($id): string|false {
             $result = SQL::current()->select(
-                "sessions",
-                array("data", "created_at"),
-                array("id" => $id)
+                tables:"sessions",
+                fields:array("data", "created_at"),
+                conds:array("id" => $id)
             )->fetch();
 
             if (!empty($result)) {
@@ -80,9 +80,9 @@
 
             if (!$this->deny and isset($data) and $data != $this->data)
                 $sql->replace(
-                    "sessions",
-                    array("id"),
-                    array(
+                    table:"sessions",
+                    keys:array("id"),
+                    data:array(
                         "id" => $id,
                         "data" => $data,
                         "user_id" => $visitor->id,

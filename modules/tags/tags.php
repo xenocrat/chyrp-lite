@@ -431,9 +431,9 @@
                 );
 
             $results = SQL::current()->select(
-                "post_attributes",
-                "post_id",
-                array(
+                tables:"post_attributes",
+                fields:"post_id",
+                conds:array(
                     "name" => "tags",
                     "value LIKE" => $this->tags_name_match($_POST['original'])
                 )
@@ -510,9 +510,9 @@
                 redirect("manage_tags");
 
             $results = SQL::current()->select(
-                "post_attributes",
-                "post_id",
-                array(
+                tables:"post_attributes",
+                fields:"post_id",
+                conds:array(
                     "name" => "tags",
                     "value LIKE" => $this->tags_name_match($_POST['name'])
                 )
@@ -606,9 +606,9 @@
             }
 
             $results = SQL::current()->select(
-                "post_attributes",
-                array("value", "post_id"),
-                array(
+                tables:"post_attributes",
+                fields:array("value", "post_id"),
+                conds:array(
                     "name" => "tags",
                     "value LIKE" => $this->tags_clean_match($_GET['name'])
                 )
@@ -683,16 +683,15 @@
 
             foreach ($post->tags as $name => $clean) {
                 $results = SQL::current()->select(
-                    "post_attributes",
-                    array("post_id"),
-                    array(
+                    tables:"post_attributes",
+                    fields:array("post_id"),
+                    conds:array(
                         "name" => "tags",
                         "value LIKE" => $this->tags_name_match($name),
                         "post_id !=" => $post->id
                     ),
-                    array("post_id DESC"),
-                    array(),
-                    $limit
+                    order:array("post_id DESC"),
+                    limit:$limit
                 )->fetchAll();
 
                 foreach ($results as $result)
@@ -726,9 +725,9 @@
 
             if (!isset($this->caches["tag_cloud"])) {
                 $results = SQL::current()->select(
-                    "posts",
-                    "post_attributes.*",
-                    array(
+                    tables:"posts",
+                    fields:"post_attributes.*",
+                    conds:array(
                         "post_attributes.name" => "tags",
                         Post::statuses(),
                         Post::feathers()

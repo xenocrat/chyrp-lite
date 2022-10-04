@@ -111,10 +111,10 @@
             $statuses = Post::statuses();
 
             $results = $sql->select(
-                "posts",
-                array("created_at"),
-                array($feathers, $statuses),
-                "created_at DESC"
+                tables:"posts",
+                fields:array("created_at"),
+                conds:array($feathers, $statuses),
+                order:"created_at DESC"
             )->fetchAll();
 
             $nums = array();

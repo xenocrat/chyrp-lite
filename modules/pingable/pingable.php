@@ -361,9 +361,8 @@
 
         public function posts_export($atom, $post): string {
             $pingbacks = SQL::current()->select(
-                "pingbacks",
-                "*",
-                array("post_id" => $post->id)
+                tables:"pingbacks",
+                conds:array("post_id" => $post->id)
             )->fetchAll();
 
             foreach ($pingbacks as $pingback) {

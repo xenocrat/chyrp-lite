@@ -261,9 +261,9 @@
 
         public function delete_user($user): void {
             SQL::current()->update(
-                "likes",
-                array("user_id" => $user->id),
-                array("user_id" => 0)
+                table:"likes",
+                conds:array("user_id" => $user->id),
+                data:array("user_id" => 0)
             );
         }
 
@@ -485,9 +485,8 @@
 
         public function posts_export($atom, $post): string {
             $likes = SQL::current()->select(
-                "likes",
-                "*",
-                array("post_id" => $post->id)
+                tables:"likes",
+                conds:array("post_id" => $post->id)
             )->fetchAll();
 
             foreach ($likes as $like) {

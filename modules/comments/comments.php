@@ -860,15 +860,15 @@
 
             if ($post->latest_comment > $last) {
                 $times = SQL::current()->select(
-                    "comments",
-                    array("id", "created_at"),
-                    array(
+                    tables:"comments",
+                    fields:array("id", "created_at"),
+                    conds:array(
                         "post_id" => $post->id,
                         "created_at >" => $last,
                         "status not" => Comment::STATUS_SPAM,
                           Comment::redactions()
                     ),
-                    array("created_at ASC")
+                    order:array("created_at ASC")
                 );
 
                 while ($row = $times->fetchObject()) {
@@ -1056,12 +1056,12 @@
                 );
 
             SQL::current()->update(
-                "comments",
-                array(
+                table:"comments",
+                conds:array(
                     "post_id" => $post->id,
                     "author_email" => $_GET['email']
                 ),
-                array("notify" => false)
+                data:array("notify" => false)
             );
 
             Flash::notice(
@@ -1264,9 +1264,9 @@
 
         public function delete_user($user): void {
             SQL::current()->update(
-                "comments",
-                array("user_id" => $user->id),
-                array("user_id" => 0)
+                table:"comments",
+                conds:array("user_id" => $user->id),
+                data:array("user_id" => 0)
             );
         }
 

@@ -77,16 +77,15 @@
                 return $ids;
 
             $results = SQL::current()->select(
-                "post_attributes",
-                array("post_id"),
-                array(
+                tables:"post_attributes",
+                fields:array("post_id"),
+                conds:array(
                     "name" => "category_id",
                     "value" => $post->category_id,
                     "post_id !=" => $post->id
                 ),
-                array("post_id DESC"),
-                array(),
-                $limit
+                order:array("post_id DESC"),
+                limit:$limit
             )->fetchAll();
 
             foreach ($results as $result)
@@ -219,9 +218,9 @@
             }
 
             $results = SQL::current()->select(
-                "post_attributes",
-                array("post_id"),
-                array(
+                tables:"post_attributes",
+                fields:array("post_id"),
+                conds:array(
                     "name" => "category_id",
                     "value" => $category->id
                 )

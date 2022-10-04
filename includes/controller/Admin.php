@@ -1296,9 +1296,9 @@
 
                     foreach ($user->posts as $post)
                         $sql->update(
-                            "posts",
-                            array("id" => $post->id),
-                            array("user_id" => $posts_user->id)
+                            table:"posts",
+                            conds:array("id" => $post->id),
+                            data:array("user_id" => $posts_user->id)
                         );
                 } else {
                     foreach ($user->posts as $post)
@@ -1318,9 +1318,9 @@
 
                     foreach ($user->pages as $page)
                         $sql->update(
-                            "pages",
-                            array("id" => $page->id),
-                            array("user_id" => $pages_user->id)
+                            table:"pages",
+                            conds:array("id" => $page->id),
+                            data:array("user_id" => $pages_user->id)
                         );
                 } else {
                     foreach ($user->pages as $page)
@@ -1701,15 +1701,15 @@
 
             # Set group-specific posts to private status.
             foreach ($sql->select(
-                "posts",
-                "id",
-                array("status LIKE" => "%{".$group->id."}%")
+                tables:"posts",
+                fields:"id",
+                conds:array("status LIKE" => "%{".$group->id."}%")
             )->fetchAll() as $post) {
 
                 $sql->update(
-                    "posts",
-                    array("id" => $post["id"]),
-                    array("status" => Post::STATUS_PRIVATE)
+                    table:"posts",
+                    conds:array("id" => $post["id"]),
+                    data:array("status" => Post::STATUS_PRIVATE)
                 );
             }
 

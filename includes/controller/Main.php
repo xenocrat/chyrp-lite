@@ -233,10 +233,10 @@
             # Default to either the year of the latest post or the current year.
             if (!isset($_GET['year'])) {
                 $latest = $sql->select(
-                    "posts",
-                    "created_at",
-                    array($feathers, $statuses),
-                    array("created_at DESC")
+                    tables:"posts",
+                    fields:"created_at",
+                    conds:array($feathers, $statuses),
+                    order:array("created_at DESC")
                 )->fetch();
 
                 $latest = ($latest === false) ?
@@ -334,26 +334,26 @@
 
             # Are there posts older than those displayed?
             $next = $sql->select(
-                "posts",
-                "created_at",
-                array(
+                tables:"posts",
+                fields:"created_at",
+                conds:array(
                     "created_at <" => datetime($start),
                     $statuses,
                     $feathers
                 ),
-                array("created_at DESC")
+                order:array("created_at DESC")
             )->fetch();
 
             # Are there posts newer than those displayed?
             $prev = $sql->select(
-                "posts",
-                "created_at",
-                array(
+                tables:"posts",
+                fields:"created_at",
+                conds:array(
                     "created_at >=" => datetime($limit),
                     $statuses,
                     $feathers
                 ),
-                array("created_at ASC")
+                order:array("created_at ASC")
             )->fetch();
 
             $prev = ($prev === false) ?
@@ -610,9 +610,9 @@
                 $conds[] = Post::feathers();
 
             $results = SQL::current()->select(
-                "posts",
-                "id",
-                $conds
+                tables:"posts",
+                fields:"id",
+                conds:$conds
             )->fetchAll();
 
             if (!empty($results)) {
@@ -1120,12 +1120,11 @@
             # Fetch posts if we are being called as a responder.
             if (!isset($posts)) {
                 $results = SQL::current()->select(
-                    "posts",
-                    "id",
-                    array("status" => Post::STATUS_PUBLIC),
-                    array("id DESC"),
-                    array(),
-                    $config->feed_items
+                    tables:"posts",
+                    fields:"id",
+                    conds:array("status" => Post::STATUS_PUBLIC),
+                    order:array("id DESC"),
+                    limit:$config->feed_items
                 )->fetchAll();
 
                 $ids = array();
