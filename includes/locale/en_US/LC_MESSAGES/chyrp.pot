@@ -120,7 +120,7 @@ msgstr ""
 #: includes/thumbnail.php:48
 #: includes/thumbnail.php:214
 #: includes/thumbnail.php:261
-#: install.php:920
+#: install.php:922
 #: upgrade.php:190
 #: upgrade.php:206
 #: upgrade.php:222
@@ -1624,7 +1624,7 @@ msgstr ""
 msgid "Please enter a username and password for the database."
 msgstr ""
 
-#: install.php:921
+#: install.php:923
 #: upgrade.php:191
 #: upgrade.php:207
 #: upgrade.php:223
@@ -1642,124 +1642,124 @@ msgstr ""
 msgid "Could not write the configuration file."
 msgstr ""
 
-#: install.php:939
+#: install.php:941
 msgid "Database Setup"
 msgstr ""
 
-#: install.php:941
+#: install.php:943
 msgid "Adapter"
 msgstr ""
 
-#: install.php:955
+#: install.php:957
 msgid "Host"
 msgstr ""
 
-#: install.php:959
+#: install.php:961
 msgid "Port"
 msgstr ""
 
-#: install.php:959
-#: install.php:988
+#: install.php:961
+#: install.php:990
 msgid "(optional)"
 msgstr ""
 
-#: install.php:963
-#: install.php:1028
+#: install.php:965
+#: install.php:1030
 msgid "Username"
 msgstr ""
 
-#: install.php:967
-#: install.php:1032
-#: install.php:1036
+#: install.php:969
+#: install.php:1034
+#: install.php:1038
 msgid "Password"
 msgstr ""
 
-#: install.php:971
+#: install.php:973
 msgid "Database"
 msgstr ""
 
-#: install.php:973
+#: install.php:975
 msgid "(absolute or relative path)"
 msgstr ""
 
-#: install.php:979
+#: install.php:981
 msgid "Make sure your PostgreSQL database uses UTF-8 encoding."
 msgstr ""
 
-#: install.php:982
+#: install.php:984
 msgid "The collation <code>utf8mb4_general_ci</code> is recommended for your MySQL database."
 msgstr ""
 
-#: install.php:985
+#: install.php:987
 msgid "Be sure to put your SQLite database outside the document root directory, otherwise visitors will be able to download it."
 msgstr ""
 
-#: install.php:988
+#: install.php:990
 msgid "Table Prefix"
 msgstr ""
 
-#: install.php:992
+#: install.php:994
 msgid "Website Setup"
 msgstr ""
 
-#: install.php:994
+#: install.php:996
 msgid "Chyrp URL"
 msgstr ""
 
-#: install.php:998
+#: install.php:1000
 msgid "Site Name"
 msgstr ""
 
-#: install.php:999
+#: install.php:1001
 msgid "My Awesome Site"
 msgstr ""
 
-#: install.php:1002
+#: install.php:1004
 msgid "Description"
 msgstr ""
 
-#: install.php:1006
+#: install.php:1008
 msgid "Time Zone"
 msgstr ""
 
-#: install.php:1016
+#: install.php:1018
 msgid "Language"
 msgstr ""
 
-#: install.php:1026
+#: install.php:1028
 msgid "Admin Account"
 msgstr ""
 
-#: install.php:1036
+#: install.php:1038
 msgid "(again)"
 msgstr ""
 
-#: install.php:1040
+#: install.php:1042
 msgid "Email Address"
 msgstr ""
 
-#: install.php:1043
+#: install.php:1045
 msgid "Install me!"
 msgstr ""
 
-#: install.php:1046
+#: install.php:1048
 msgid "Installation Complete"
 msgstr ""
 
-#: install.php:1047
+#: install.php:1049
 #: upgrade.php:799
 msgid "What now?"
 msgstr ""
 
-#: install.php:1049
+#: install.php:1051
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr ""
 
-#: install.php:1050
+#: install.php:1052
 msgid "Log in to your site and configure things to your liking."
 msgstr ""
 
-#: install.php:1052
+#: install.php:1054
 #: upgrade.php:805
 msgid "Take me to my site!"
 msgstr ""

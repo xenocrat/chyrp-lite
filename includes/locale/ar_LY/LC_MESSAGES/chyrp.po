@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: chyrplite\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-10-04 10:38+0100\n"
+"PO-Revision-Date: 2022-10-04 11:19+0100\n"
 "Last-Translator: Anas Mohammed Almzoghy <a.almzoghy@gmail.com>\n"
 "Language-Team: Arabic\n"
 "Language: ar_LY\n"
@@ -103,7 +103,7 @@ msgstr "المُتحكم بالمسار المُدخل غير صالح."
 #: includes/helpers.php:2578 includes/helpers.php:2583
 #: includes/helpers.php:2590 includes/thumbnail.php:16
 #: includes/thumbnail.php:23 includes/thumbnail.php:48
-#: includes/thumbnail.php:214 includes/thumbnail.php:261 install.php:920
+#: includes/thumbnail.php:214 includes/thumbnail.php:261 install.php:922
 #: upgrade.php:190 upgrade.php:206 upgrade.php:222 upgrade.php:238
 #: upgrade.php:254 upgrade.php:274 upgrade.php:315 upgrade.php:331
 #: upgrade.php:351 upgrade.php:367 upgrade.php:383 upgrade.php:399
@@ -1404,60 +1404,60 @@ msgstr "الرجاء جعل قاعدة بيانات قابلة للكتابة ب
 msgid "Please enter a username and password for the database."
 msgstr "الرجاء إدخال اسم المستخدم وكلمة المرور لقاعدة بيانات."
 
-#: install.php:921 upgrade.php:191 upgrade.php:207 upgrade.php:223
+#: install.php:923 upgrade.php:191 upgrade.php:207 upgrade.php:223
 #: upgrade.php:239 upgrade.php:255 upgrade.php:275 upgrade.php:316
 #: upgrade.php:332 upgrade.php:352 upgrade.php:368 upgrade.php:384
 #: upgrade.php:400 upgrade.php:420 upgrade.php:436
 msgid "Could not write the configuration file."
 msgstr "تعذر إنشاء ملف الإعدادات."
 
-#: install.php:939
+#: install.php:941
 msgid "Database Setup"
 msgstr "إعداد قاعدة البيانات"
 
-#: install.php:941
+#: install.php:943
 msgid "Adapter"
 msgstr ""
 
-#: install.php:955
+#: install.php:957
 msgid "Host"
 msgstr "الخادم"
 
-#: install.php:959
+#: install.php:961
 msgid "Port"
 msgstr ""
 
-#: install.php:959 install.php:988
+#: install.php:961 install.php:990
 msgid "(optional)"
 msgstr "(اختياري)"
 
-#: install.php:963 install.php:1028
+#: install.php:965 install.php:1030
 msgid "Username"
 msgstr "اسم المستخدم"
 
-#: install.php:967 install.php:1032 install.php:1036
+#: install.php:969 install.php:1034 install.php:1038
 msgid "Password"
 msgstr "كلمة المرور"
 
-#: install.php:971
+#: install.php:973
 msgid "Database"
 msgstr "قاعدة البيانات"
 
-#: install.php:973
+#: install.php:975
 msgid "(absolute or relative path)"
 msgstr "(المسار المطلق أو النسبي)"
 
-#: install.php:979
+#: install.php:981
 msgid "Make sure your PostgreSQL database uses UTF-8 encoding."
 msgstr "تأكد من قاعدة بيانات PostgreSQL يستخدم الترميز UTF-8."
 
-#: install.php:982
+#: install.php:984
 msgid ""
 "The collation <code>utf8mb4_general_ci</code> is recommended for your MySQL "
 "database."
 msgstr "يوصى بالترتيب <code>utf8mb4_general_ci</code> لقاعدة بيانات MySQL."
 
-#: install.php:985
+#: install.php:987
 msgid ""
 "Be sure to put your SQLite database outside the document root directory, "
 "otherwise visitors will be able to download it."
@@ -1465,71 +1465,71 @@ msgstr ""
 "تأكد من وضع قاعدة بيانات SQLite خارج المجلد الأساسي، وإلا سيتمكن الزوار من "
 "تنزيلها."
 
-#: install.php:988
+#: install.php:990
 msgid "Table Prefix"
 msgstr "بادئة الجدول"
 
-#: install.php:992
+#: install.php:994
 msgid "Website Setup"
 msgstr "إعداد الموقع"
 
-#: install.php:994
+#: install.php:996
 msgid "Chyrp URL"
 msgstr "رابط Chyrp"
 
-#: install.php:998
+#: install.php:1000
 msgid "Site Name"
 msgstr "اسم الموقع"
 
-#: install.php:999
+#: install.php:1001
 msgid "My Awesome Site"
 msgstr "موقعي الرائع"
 
-#: install.php:1002
+#: install.php:1004
 msgid "Description"
 msgstr "الوصف"
 
-#: install.php:1006
+#: install.php:1008
 msgid "Time Zone"
 msgstr "المنطقة الزمنية"
 
-#: install.php:1016
+#: install.php:1018
 msgid "Language"
 msgstr "اللغة"
 
-#: install.php:1026
+#: install.php:1028
 msgid "Admin Account"
 msgstr "حساب المدير"
 
-#: install.php:1036
+#: install.php:1038
 msgid "(again)"
 msgstr "(مرة أخرى)"
 
-#: install.php:1040
+#: install.php:1042
 msgid "Email Address"
 msgstr "البريد الإلكتروني"
 
-#: install.php:1043
+#: install.php:1045
 msgid "Install me!"
 msgstr "قم بتثبيتي!"
 
-#: install.php:1046
+#: install.php:1048
 msgid "Installation Complete"
 msgstr "اكتمل التثبيت"
 
-#: install.php:1047 upgrade.php:799
+#: install.php:1049 upgrade.php:799
 msgid "What now?"
 msgstr "ماذا الآن؟"
 
-#: install.php:1049
+#: install.php:1051
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr "احذف <em>install.php</em>، لن تحتاج إليه بعد الآن."
 
-#: install.php:1050
+#: install.php:1052
 msgid "Log in to your site and configure things to your liking."
 msgstr "سجّل الدخول إلى موقعك وقم بتهيئة الأشياء كيفما أحببت."
 
-#: install.php:1052 upgrade.php:805
+#: install.php:1054 upgrade.php:805
 msgid "Take me to my site!"
 msgstr "خذني إلى موقعي!"
 

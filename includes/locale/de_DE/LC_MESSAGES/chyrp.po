@@ -97,7 +97,7 @@ msgstr "Route wurde mit einem ungültigen Controller initiiert."
 #: includes/helpers.php:2578 includes/helpers.php:2583
 #: includes/helpers.php:2590 includes/thumbnail.php:16
 #: includes/thumbnail.php:23 includes/thumbnail.php:48
-#: includes/thumbnail.php:214 includes/thumbnail.php:261 install.php:920
+#: includes/thumbnail.php:214 includes/thumbnail.php:261 install.php:922
 #: upgrade.php:190 upgrade.php:206 upgrade.php:222 upgrade.php:238
 #: upgrade.php:254 upgrade.php:274 upgrade.php:315 upgrade.php:331
 #: upgrade.php:351 upgrade.php:367 upgrade.php:383 upgrade.php:399
@@ -1429,55 +1429,55 @@ msgstr "Bitte mache die Datenbank vom Server beschreibbar."
 msgid "Please enter a username and password for the database."
 msgstr "Bitte gib einen Benutzernamen und ein Passwort für die Datenbank ein."
 
-#: install.php:921 upgrade.php:191 upgrade.php:207 upgrade.php:223
+#: install.php:923 upgrade.php:191 upgrade.php:207 upgrade.php:223
 #: upgrade.php:239 upgrade.php:255 upgrade.php:275 upgrade.php:316
 #: upgrade.php:332 upgrade.php:352 upgrade.php:368 upgrade.php:384
 #: upgrade.php:400 upgrade.php:420 upgrade.php:436
 msgid "Could not write the configuration file."
 msgstr "Konfigurationsdatei konnte nicht geschrieben werden."
 
-#: install.php:939
+#: install.php:941
 msgid "Database Setup"
 msgstr "Datenbank Setup"
 
-#: install.php:941
+#: install.php:943
 msgid "Adapter"
 msgstr "Adapter"
 
-#: install.php:955
+#: install.php:957
 msgid "Host"
 msgstr "Host"
 
-#: install.php:959
+#: install.php:961
 msgid "Port"
 msgstr ""
 
-#: install.php:959 install.php:988
+#: install.php:961 install.php:990
 msgid "(optional)"
 msgstr "(optional)"
 
-#: install.php:963 install.php:1028
+#: install.php:965 install.php:1030
 msgid "Username"
 msgstr "Benutzername"
 
-#: install.php:967 install.php:1032 install.php:1036
+#: install.php:969 install.php:1034 install.php:1038
 msgid "Password"
 msgstr "Passwort"
 
-#: install.php:971
+#: install.php:973
 msgid "Database"
 msgstr "Datenbank"
 
-#: install.php:973
+#: install.php:975
 msgid "(absolute or relative path)"
 msgstr "(absoluter oder relativer Pfad)"
 
-#: install.php:979
+#: install.php:981
 msgid "Make sure your PostgreSQL database uses UTF-8 encoding."
 msgstr ""
 "Stellen Sie sicher, dass Ihre PostgreSQL-Datenbank UTF-8-Codierung verwendet."
 
-#: install.php:982
+#: install.php:984
 msgid ""
 "The collation <code>utf8mb4_general_ci</code> is recommended for your MySQL "
 "database."
@@ -1485,7 +1485,7 @@ msgstr ""
 "Für die MySQL-Datenbank wird die Sortierung <code>utf8mb4_general_ci</code> "
 "empfohlen."
 
-#: install.php:985
+#: install.php:987
 msgid ""
 "Be sure to put your SQLite database outside the document root directory, "
 "otherwise visitors will be able to download it."
@@ -1493,72 +1493,72 @@ msgstr ""
 "Bitte stelle sicher, dass die SQLite Datenbank außerhalb des "
 "Webserververzeichnisses ist, so dass Benutzer sie nicht herunterladen können."
 
-#: install.php:988
+#: install.php:990
 msgid "Table Prefix"
 msgstr "Tabellenpräfix"
 
-#: install.php:992
+#: install.php:994
 msgid "Website Setup"
 msgstr "Website Setup"
 
-#: install.php:994
+#: install.php:996
 msgid "Chyrp URL"
 msgstr "Chyrp URL"
 
-#: install.php:998
+#: install.php:1000
 msgid "Site Name"
 msgstr "Blogname"
 
-#: install.php:999
+#: install.php:1001
 msgid "My Awesome Site"
 msgstr "Meine coole Seite"
 
-#: install.php:1002
+#: install.php:1004
 msgid "Description"
 msgstr "Beschreibung"
 
-#: install.php:1006
+#: install.php:1008
 msgid "Time Zone"
 msgstr "Zeitzone"
 
-#: install.php:1016
+#: install.php:1018
 msgid "Language"
 msgstr "Sprache"
 
-#: install.php:1026
+#: install.php:1028
 msgid "Admin Account"
 msgstr "Admin Account"
 
-#: install.php:1036
+#: install.php:1038
 msgid "(again)"
 msgstr "(nochmal)"
 
-#: install.php:1040
+#: install.php:1042
 msgid "Email Address"
 msgstr "E-Mail Addresse"
 
-#: install.php:1043
+#: install.php:1045
 msgid "Install me!"
 msgstr "Installieren!"
 
-#: install.php:1046
+#: install.php:1048
 msgid "Installation Complete"
 msgstr "Installation vollständig"
 
-#: install.php:1047 upgrade.php:799
+#: install.php:1049 upgrade.php:799
 msgid "What now?"
 msgstr "Und weiter?"
 
-#: install.php:1049
+#: install.php:1051
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr "Lösche die <em>install.php</em>. Die brauchst Du nicht mehr."
 
-#: install.php:1050
+#: install.php:1052
 msgid "Log in to your site and configure things to your liking."
 msgstr ""
 "Logge Dich auf deiner Seite ein und passe die Dinge deiner Vorstellung an."
 
-#: install.php:1052 upgrade.php:805
+#: install.php:1054 upgrade.php:805
 msgid "Take me to my site!"
 msgstr "Bring mich zur Seite!"
 
