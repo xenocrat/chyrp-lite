@@ -194,13 +194,13 @@
             $notify = (!empty($_POST['notify']) and logged_in());
 
             $comment = Comment::create(
-                $_POST['body'],
-                $_POST['author'],
-                $_POST['author_url'],
-                $_POST['author_email'],
-                $post,
-                $parent,
-                $notify
+                body:$_POST['body'],
+                author:$_POST['author'],
+                author_url:$_POST['author_url'],
+                author_email:$_POST['author_email'],
+                post:$post,
+                parent:$parent,
+                notify:$notify
             );
 
             return array(
@@ -296,13 +296,13 @@
                 $comment->created_at ;
 
             $comment = $comment->update(
-                $_POST['body'],
-                $_POST['author'],
-                $_POST['author_url'],
-                $_POST['author_email'],
-                $status,
-                $notify,
-                $created_at
+                body:$_POST['body'],
+                author:$_POST['author'],
+                author_url:$_POST['author_url'],
+                author_email:$_POST['author_email'],
+                status:$status,
+                notify:$notify,
+                created_at:$created_at
             );
 
             return array(
@@ -576,8 +576,6 @@
             $false_positives = array();
             $false_negatives = array();
 
-            $sql = SQL::current();
-
             if (isset($_POST['deny'])) {
                 $count_deny = 0;
 
@@ -597,11 +595,11 @@
                         $false_positives[] = $comment;
 
                     $comment->update(
-                        $comment->body,
-                        $comment->author,
-                        $comment->author_url,
-                        $comment->author_email,
-                        Comment::STATUS_DENIED
+                        body:$comment->body,
+                        author:$comment->author,
+                        author_url:$comment->author_url,
+                        author_email:$comment->author_email,
+                        status:Comment::STATUS_DENIED
                     );
 
                     $count_deny++;
@@ -632,11 +630,11 @@
                         $false_positives[] = $comment;
 
                     $comment->update(
-                        $comment->body,
-                        $comment->author,
-                        $comment->author_url,
-                        $comment->author_email,
-                        Comment::STATUS_APPROVED
+                        body:$comment->body,
+                        author:$comment->author,
+                        author_url:$comment->author_url,
+                        author_email:$comment->author_email,
+                        status:Comment::STATUS_APPROVED
                     );
 
                     $count_approve++;
@@ -664,11 +662,11 @@
                         continue;
 
                     $comment->update(
-                        $comment->body,
-                        $comment->author,
-                        $comment->author_url,
-                        $comment->author_email,
-                        Comment::STATUS_SPAM
+                        body:$comment->body,
+                        author:$comment->author,
+                        author_url:$comment->author_url,
+                        author_email:$comment->author_email,
+                        status:Comment::STATUS_SPAM
                     );
 
                     $count_spam++;
@@ -700,7 +698,10 @@
                 );
 
             $config = Config::current();
-            $comments_html = implode(", ", $config->module_comments["allowed_comment_html"]);
+            $comments_html = implode(
+                ", ",
+                $config->module_comments["allowed_comment_html"]
+            );
             $comments_status = array(
                 Comment::STATUS_APPROVED => __("Approved", "comments"),
                 Comment::STATUS_DENIED   => __("Denied", "comments"),
@@ -1093,10 +1094,10 @@
             $feed = new BlogFeed();
 
             $feed->open(
-                $title,
-                Config::current()->description,
-                null,
-                $latest_timestamp
+                title:$title,
+                subtitle:Config::current()->description,
+                id:null,
+                updated:$latest_timestamp
             );
 
             foreach ($comments as $comment) {
@@ -1105,14 +1106,14 @@
                     $comment->created_at ;
 
                 $feed->entry(
-                    _f("Comment #%d", $comment->id, "comments"),
-                    url("comment/".$comment->id),
-                    $comment->body,
-                    $comment->post->url()."#comment_".$comment->id,
-                    $comment->created_at,
-                    $updated,
-                    $comment->author,
-                    $comment->author_url
+                    title:_f("Comment #%d", $comment->id, "comments"),
+                    id:url("comment/".$comment->id),
+                    content:$comment->body,
+                    link:$comment->post->url()."#comment_".$comment->id,
+                    published:$comment->created_at,
+                    updated:$updated,
+                    name:$comment->author,
+                    uri:$comment->author_url
                 );
 
                 $trigger->call("comments_feed_item", $comment, $feed);
@@ -1142,8 +1143,8 @@
 
         public function pingback($post, $to, $from, $title, $excerpt): string|IXR_Error {
             $count = SQL::current()->count(
-                "comments",
-                array(
+                tables:"comments",
+                conds:array(
                     "post_id" => $post->id,
                     "status" => Comment::STATUS_PINGBACK,
                     "author_url" => $from
@@ -1163,14 +1164,14 @@
                 );
 
             Comment::create(
-                $excerpt,
-                $title,
-                $from,
-                "",
-                $post,
-                0,
-                0,
-                Comment::STATUS_PINGBACK
+                body:$excerpt,
+                author:$title,
+                author_url:$from,
+                author_email:"",
+                post:$post,
+                parent:0,
+                notify:0,
+                status:Comment::STATUS_PINGBACK
             );
 
             return __("Pingback registered!", "comments");
@@ -1178,8 +1179,8 @@
 
         public function webmention($post, $from, $to): void {
             $count = SQL::current()->count(
-                "comments",
-                array(
+                tables:"comments",
+                conds:array(
                     "post_id" => $post->id,
                     "status" => Comment::STATUS_PINGBACK,
                     "author_url" => $from
@@ -1201,14 +1202,14 @@
                 );
 
             Comment::create(
-                __("Mentioned this post.", "comments"),
-                preg_replace("~(https?://|^)([^/:]+).*~", "$2", $from),
-                $from,
-                "",
-                $post,
-                0,
-                0,
-                Comment::STATUS_PINGBACK
+                body:__("Mentioned this post.", "comments"),
+                author:preg_replace("~(https?://|^)([^/:]+).*~", "$2", $from),
+                author_url:$from,
+                author_email:"",
+                post:$post,
+                parent:0,
+                notify:0,
+                status:Comment::STATUS_PINGBACK
             );
         }
 
@@ -1257,8 +1258,8 @@
 
         public function delete_post($post): void {
             SQL::current()->delete(
-                "comments",
-                array("post_id" => $post->id)
+                table:"comments",
+                conds:array("post_id" => $post->id)
             );
         }
 
@@ -1392,19 +1393,19 @@
                 $updated = ((string) $comment->updated != (string) $comment->published);
 
                 Comment::add(
-                    unfix((string) $comment->content),
-                    unfix((string) $comment->author->name),
-                    unfix((string) $comment->author->uri),
-                    unfix((string) $comment->author->email),
-                    0,
-                    "",
-                    unfix((string) $chyrp->status),
-                    $post->id,
-                    (!$user->no_results) ? $user->id : 0,
-                    0,
-                    false,
-                    datetime((string) $comment->published),
-                    ($updated) ? datetime((string) $comment->updated) : null
+                    body:unfix((string) $comment->content),
+                    author:unfix((string) $comment->author->name),
+                    author_url:unfix((string) $comment->author->uri),
+                    author_email:unfix((string) $comment->author->email),
+                    ip:0,
+                    agent:"",
+                    status:unfix((string) $chyrp->status),
+                    post_id:$post->id,
+                    user_id:(!$user->no_results) ? $user->id : 0,
+                    parent:0,
+                    notify:false,
+                    created_at:datetime((string) $comment->published),
+                    updated_at:($updated) ? datetime((string) $comment->updated) : null
                 );
             }
         }

@@ -129,9 +129,9 @@
 
             # Grab valid permissions.
             $results = $sql->select(
-                "permissions",
-                "id, name",
-                array("group_id" => 0)
+                tables:"permissions",
+                fields:array("id", "name"),
+                conds:array("group_id" => 0)
             )->fetchAll();
 
             $valid_permissions = array();
@@ -147,8 +147,8 @@
             # Insert the permissions for the new group.
             foreach ($permissions as $id)
                 $sql->insert(
-                    "permissions",
-                    array(
+                    table:"permissions",
+                    data:array(
                         "id" => $id,
                         "name" => $valid_permissions[$id],
                         "group_id" => $group_id
@@ -184,9 +184,9 @@
 
             # Grab valid permissions.
             $results = $sql->select(
-                "permissions",
-                "id, name",
-                array("group_id" => 0)
+                tables:"permissions",
+                fields:array("id", "name"),
+                conds:array("group_id" => 0)
             )->fetchAll();
 
             $valid_permissions = array();
@@ -200,19 +200,22 @@
             );
 
             $sql->update(
-                "groups",
-                array("id" => $this->id),
-                array("name" => $name)
+                table:"groups",
+                conds:array("id" => $this->id),
+                data:array("name" => $name)
             );
 
             # Delete the old permissions for this group.
-            $sql->delete("permissions", array("group_id" => $this->id));
+            $sql->delete(
+                table:"permissions",
+                conds:array("group_id" => $this->id)
+            );
 
             # Insert the new permissions for this group.
             foreach ($permissions as $id)
                 $sql->insert(
-                    "permissions",
-                    array(
+                    table:"permissions",
+                    data:array(
                         "id" => $id,
                         "name" => $valid_permissions[$id],
                         "group_id" => $this->id
@@ -244,8 +247,8 @@
         static function delete($group_id): void {
             if (!empty($group_id))
                 SQL::current()->delete(
-                    "permissions",
-                    array("group_id" => $group_id)
+                    table:"permissions",
+                    conds:array("group_id" => $group_id)
                 );
 
             parent::destroy(get_class(), $group_id);
@@ -264,16 +267,23 @@
 
             if (
                 $sql->count(
-                    "permissions",
-                    array("id" => $id, "group_id" => 0)
+                    tables:"permissions",
+                    conds:array(
+                        "id" => $id,
+                        "group_id" => 0
+                    )
                 )
             )
                 return; # Permission already exists.
 
             fallback($name, camelize($id, true));
             $sql->insert(
-                "permissions",
-                array("id" => $id, "name" => $name, "group_id" => 0)
+                table:"permissions",
+                data:array(
+                    "id" => $id,
+                    "name" => $name,
+                    "group_id" => 0
+                )
             );
         }
 
@@ -285,7 +295,10 @@
          *     $id - The ID of the permission to remove.
          */
         static function remove_permission($id): void {
-            SQL::current()->delete("permissions", array("id" => $id));
+            SQL::current()->delete(
+                table:"permissions",
+                conds:array("id" => $id)
+            );
         }
 
         /**
@@ -297,9 +310,8 @@
          */
         static function list_permissions($group_id = 0): array {
             $permissions = SQL::current()->select(
-                "permissions",
-                "*",
-                array("group_id" => $group_id)
+                tables:"permissions",
+                conds:array("group_id" => $group_id)
             )->fetchAll();
 
             $names = array(
@@ -353,8 +365,8 @@
 
             if (!isset($this->size))
                 $this->size = SQL::current()->count(
-                    "users",
-                    array("group_id" => $this->id)
+                    tables:"users",
+                    conds:array("group_id" => $this->id)
                 );
 
             return (int) $this->size;

@@ -280,7 +280,7 @@
             );
 
             $trigger->filter($new_values, "before_add_post");
-            $sql->insert("posts", $new_values);
+            $sql->insert(table:"posts", data:$new_values);
             $id = $sql->latest("posts");
             $attributes = array_merge($values, $options);
             $trigger->filter($attributes, "before_add_post_attributes");
@@ -291,8 +291,8 @@
             # Insert the post attributes.
             foreach ($attributes as $name => $value)
                 $sql->insert(
-                    "post_attributes",
-                    array(
+                    table:"post_attributes",
+                    data:array(
                         "post_id" => $id,
                         "name"    => $name,
                         "value"   => $value
@@ -389,9 +389,9 @@
             $trigger->filter($new_values, "before_update_post");
 
             $sql->update(
-                "posts",
-                array("id" => $this->id),
-                $new_values
+                table:"posts",
+                conds:array("id" => $this->id),
+                data:$new_values
             );
 
             $attributes = array_merge($values, $options);
@@ -403,9 +403,9 @@
             # Replace the post attributes.
             foreach ($attributes as $name => $value)
                 $sql->replace(
-                    "post_attributes",
-                    array("post_id", "name"),
-                    array(
+                    table:"post_attributes",
+                    keys:array("post_id", "name"),
+                    data:array(
                         "post_id" => $this->id,
                         "name" => $name,
                         "value" => $value
@@ -459,7 +459,10 @@
          */
         static function delete($id): void {
             parent::destroy(get_class(), $id, array("skip_where" => true));
-            SQL::current()->delete("post_attributes", array("post_id" => $id));
+            SQL::current()->delete(
+                table:"post_attributes",
+                conds:array("post_id" => $id)
+            );
         }
 
         /**
@@ -537,8 +540,8 @@
             # Can they edit drafts?
             if ($visitor->group->can("edit_draft") and
                 $sql->count(
-                    "posts",
-                    array("status" => self::STATUS_DRAFT)
+                    tables:"posts",
+                    conds:array("status" => self::STATUS_DRAFT)
                 )
             )
                 return true;
@@ -546,8 +549,8 @@
             # Can they edit their own posts, and do they have any?
             if ($visitor->group->can("edit_own_post") and
                 $sql->count(
-                    "posts",
-                    array("user_id" => $visitor->id)
+                    tables:"posts",
+                    conds:array("user_id" => $visitor->id)
                 )
             )
                 return true;
@@ -555,8 +558,8 @@
             # Can they edit their own drafts, and do they have any?
             if ($visitor->group->can("edit_own_draft") and
                 $sql->count(
-                    "posts",
-                    array(
+                    tables:"posts",
+                    conds:array(
                         "status" => self::STATUS_DRAFT,
                         "user_id" => $visitor->id
                     )
@@ -582,8 +585,8 @@
             # Can they delete drafts?
             if ($visitor->group->can("delete_draft") and
                 $sql->count(
-                    "posts",
-                    array("status" => self::STATUS_DRAFT)
+                    tables:"posts",
+                    conds:array("status" => self::STATUS_DRAFT)
                 )
             )
                 return true;
@@ -591,8 +594,8 @@
             # Can they delete their own posts, and do they have any?
             if ($visitor->group->can("delete_own_post") and
                 $sql->count(
-                    "posts",
-                    array("user_id" => $visitor->id)
+                    tables:"posts",
+                    conds:array("user_id" => $visitor->id)
                 )
             )
                 return true;
@@ -600,8 +603,8 @@
             # Can they delete their own drafts, and do they have any?
             if ($visitor->group->can("delete_own_draft") and
                 $sql->count(
-                    "posts",
-                    array(
+                    tables:"posts",
+                    conds:array(
                         "status" => self::STATUS_DRAFT,
                         "user_id" => $visitor->id
                     )
@@ -624,8 +627,8 @@
          */
         static function exists($post_id): bool {
             return SQL::current()->count(
-                "posts",
-                array("id" => $post_id)
+                tables:"posts",
+                conds:array("id" => $post_id)
             ) == 1;
         }
 
@@ -649,8 +652,8 @@
 
             while (
                 SQL::current()->count(
-                    "posts",
-                    array("url" => $unique)
+                    tables:"posts",
+                    conds:array("url" => $unique)
                 )
             ) {
                 $count++;
@@ -1100,9 +1103,9 @@
         static function publish_scheduled($pingbacks = true): void {
             $sql = SQL::current();
             $ids = $sql->select(
-                "posts",
-                "id",
-                array(
+                tables:"posts",
+                fields:"id",
+                conds:array(
                     "created_at <=" => datetime(),
                     "status" => self::STATUS_SCHEDULED
                 )

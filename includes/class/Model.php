@@ -252,15 +252,14 @@
                 $read = $options["read_from"];
             } else {
                 $query = $sql->select(
-                    $options["from"],
-                    $options["select"],
-                    $options["where"],
-                    $options["order"],
-                    $options["params"],
-                    null,
-                    $options["offset"],
-                    $options["group"],
-                    $options["left_join"]
+                    tables:$options["from"],
+                    fields:$options["select"],
+                    conds:$options["where"],
+                    order:$options["order"],
+                    params:$options["params"],
+                    offset:$options["offset"],
+                    group:$options["group"],
+                    left_join:$options["left_join"]
                 );
                 $all = $query->fetchAll();
 
@@ -374,15 +373,15 @@
             Trigger::current()->filter($options, pluralize(strtolower($model_name))."_get");
 
             $grab = SQL::current()->select(
-                $options["from"],
-                $options["select"],
-                $options["where"],
-                $options["order"],
-                $options["params"],
-                $options["limit"],
-                $options["offset"],
-                $options["group"],
-                $options["left_join"]
+                tables:$options["from"],
+                fields:$options["select"],
+                conds:$options["where"],
+                order:$options["order"],
+                params:$options["params"],
+                limit:$options["limit"],
+                offset:$options["offset"],
+                group:$options["group"],
+                left_join:$options["left_join"]
             )->fetchAll();
 
             $results = array();
@@ -437,7 +436,10 @@
             if ($trigger->exists("delete_".$model))
                 $trigger->call("delete_".$model, new $model($id, $options_for_object));
 
-            SQL::current()->delete(pluralize($model), array("id" => $id));
+            SQL::current()->delete(
+                table:pluralize($model),
+                conds:array("id" => $id)
+            );
         }
 
         /**

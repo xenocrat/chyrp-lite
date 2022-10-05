@@ -62,8 +62,8 @@
             $sql = SQL::current();
 
             $sql->insert(
-                "categorize",
-                array(
+                table:"categorize",
+                data:array(
                     "name"         => strip_tags($name),
                     "clean"        => $clean,
                     "show_on_home" => $show_on_home
@@ -98,9 +98,9 @@
             );
 
             SQL::current()->update(
-                "categorize",
-                array("id" => $this->id),
-                $new_values
+                table:"categorize",
+                conds:array("id" => $this->id),
+                data:$new_values
             );
 
             $category = new self(
@@ -131,13 +131,13 @@
             }
 
             $sql->delete(
-                "categorize",
-                array("id" => $category_id)
+                table:"categorize",
+                conds:array("id" => $category_id)
             );
 
             $sql->delete(
-                "post_attributes",
-                array(
+                table:"post_attributes",
+                conds:array(
                     "name" => "category_id",
                     "value" => $category_id
                 )
@@ -188,7 +188,8 @@
 
             while (
                 SQL::current()->count(
-                    "categorize", array("clean" => $unique)
+                    tables:"categorize",
+                    conds:array("clean" => $unique)
                 )
             ) {
                 $count++;
@@ -206,8 +207,8 @@
          */
         static function install(): void {
             SQL::current()->create(
-                "categorize",
-                array(
+                table:"categorize",
+                cols:array(
                     "id INTEGER PRIMARY KEY AUTO_INCREMENT",
                     "name  VARCHAR(128) NOT NULL",
                     "clean VARCHAR(128) NOT NULL UNIQUE",
@@ -225,8 +226,8 @@
 
             $sql->drop("categorize");
             $sql->delete(
-                "post_attributes",
-                array("name" => "category_id")
+                table:"post_attributes",
+                conds:array("name" => "category_id")
             );
         }
     }

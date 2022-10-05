@@ -111,7 +111,7 @@
             );
 
             $trigger->filter($new_values, "before_add_user");
-            $sql->insert("users", $new_values);
+            $sql->insert(table:"users", data:$new_values);
             $user = new self($sql->latest("users"));
             $trigger->call("add_user", $user);
             return $user;
@@ -194,9 +194,9 @@
             $trigger->filter($new_values, "before_update_user");
 
             $sql->update(
-                "users",
-                array("id" => $this->id),
-                $new_values
+                table:"users",
+                conds:array("id" => $this->id),
+                data:$new_values
             );
 
             $user = new self(

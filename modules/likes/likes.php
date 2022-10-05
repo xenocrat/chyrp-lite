@@ -254,8 +254,8 @@
 
         public function delete_post($post): void {
             SQL::current()->delete(
-                "likes",
-                array("post_id" => $post->id)
+                table:"likes",
+                conds:array("post_id" => $post->id)
             );
         }
 
@@ -475,10 +475,10 @@
                 $user = new User(array("login" => unfix((string) $login)));
 
                 Like::add(
-                    $post->id,
-                    (!$user->no_results) ? $user->id : 0,
-                    datetime((string) $timestamp),
-                    uniqid("imported_", true)
+                    post_id:$post->id,
+                    user_id:(!$user->no_results) ? $user->id : 0,
+                    timestamp:datetime((string) $timestamp),
+                    session_hash:uniqid("imported_", true)
                 );
             }
         }

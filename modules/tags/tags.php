@@ -17,8 +17,8 @@
 
             if ($confirm)
                 SQL::current()->delete(
-                    "post_attributes",
-                    array("name" => "tags")
+                    table:"post_attributes",
+                    conds:array("name" => "tags")
                 );
         }
 

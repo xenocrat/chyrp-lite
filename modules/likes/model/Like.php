@@ -61,8 +61,8 @@
             $sql = SQL::current();
 
             $sql->insert(
-                "likes",
-                array(
+                table:"likes",
+                data:array(
                     "post_id"      => $post_id,
                     "user_id"      => $user_id,
                     "timestamp"    => $timestamp,
@@ -122,10 +122,10 @@
                 return;
 
             $new = self::add(
-                $post_id,
-                Visitor::current()->id,
-                datetime(),
-                self::session_hash()
+                post_id:$post_id,
+                user_id:Visitor::current()->id,
+                timestamp:datetime(),
+                session_hash:self::session_hash()
             );
 
             $_SESSION['likes'][$post_id] = $new->id;
@@ -162,10 +162,10 @@
 
             if (logged_in() and !isset($results)) {
                 $results = SQL::current()->select(
-                    "likes",
-                    array("id", "post_id"),
-                    array("user_id" => Visitor::current()->id),
-                    "post_id ASC"
+                    tables:"likes",
+                    fields:array("id", "post_id"),
+                    conds:array("user_id" => Visitor::current()->id),
+                    order:"post_id ASC"
                 )->fetchAll();
 
                 foreach ($results as $result) {
@@ -192,8 +192,8 @@
          */
         static function install(): void {
             SQL::current()->create(
-                "likes",
-                array(
+                table:"likes",
+                cols:array(
                     "id INTEGER PRIMARY KEY AUTO_INCREMENT",
                     "post_id INTEGER NOT NULL",
                     "user_id INTEGER NOT NULL",

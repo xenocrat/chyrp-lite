@@ -360,9 +360,9 @@
             $clean = Category::check_clean(sanitize($clean, true, true));
 
             Category::add(
-                $_POST['name'],
-                $clean,
-                !empty($_POST['show_on_home'])
+                name:$_POST['name'],
+                clean:$clean,
+                show_on_home:!empty($_POST['show_on_home'])
             );
 
             Flash::notice(
@@ -443,9 +443,9 @@
                 Category::check_clean(sanitize($clean, true, true)) ;
 
             $category = $category->update(
-                $_POST['name'],
-                $clean,
-                !empty($_POST['show_on_home'])
+                name:$_POST['name'],
+                clean:$clean,
+                show_on_home:!empty($_POST['show_on_home'])
             );
 
             Flash::notice(

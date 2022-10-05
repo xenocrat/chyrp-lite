@@ -122,7 +122,7 @@
             );
 
             $trigger->filter($new_values, "before_add_page");
-            $sql->insert("pages", $new_values);
+            $sql->insert(table:"pages", data:$new_values);
             $page = new self($sql->latest("pages"));
             $trigger->call("add_page", $page);
             return $page;
@@ -215,9 +215,9 @@
             $trigger->filter($new_values, "before_update_page");
 
             $sql->update(
-                "pages",
-                array("id" => $this->id),
-                $new_values
+                table:"pages",
+                conds:array("id" => $this->id),
+                data:$new_values
             );
 
             $page = new self(
@@ -264,7 +264,10 @@
          *     $page_id - The page ID to check
          */
         static function exists($page_id): bool {
-            return SQL::current()->count("pages", array("id" => $page_id)) == 1;
+            return SQL::current()->count(
+                tables:"pages",
+                conds:array("id" => $page_id)
+            ) == 1;
         }
 
         /**
@@ -285,7 +288,12 @@
             $count = 1;
             $unique = substr($url, 0, 128);
 
-            while (SQL::current()->count("pages", array("url" => $unique))) {
+            while (
+                SQL::current()->count(
+                    tables:"pages",
+                    conds:array("url" => $unique)
+                )
+            ) {
                 $count++;
                 $unique = substr($url, 0, (127 - strlen($count)))."-".$count;
             }

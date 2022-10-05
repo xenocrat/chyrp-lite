@@ -29,8 +29,8 @@
 
         public function pingback($post, $to, $from, $title, $excerpt): string|IXR_Error {
             $count = SQL::current()->count(
-                "pingbacks",
-                array(
+                tables:"pingbacks",
+                conds:array(
                     "post_id" => $post->id,
                     "source" => $from
                 )
@@ -48,15 +48,15 @@
                     __("Your URL is too long to be stored in our database.", "pingable")
                 );
 
-            Pingback::add($post->id, $from, $title);
+            Pingback::add(post_id:$post->id, source:$from, title:$title);
 
             return __("Pingback registered!", "pingable");
         }
 
         public function webmention($post, $from, $to): void {
             $count = SQL::current()->count(
-                "pingbacks",
-                array(
+                tables:"pingbacks",
+                conds:array(
                     "post_id" => $post->id,
                     "source" => $from
                 )
@@ -77,9 +77,9 @@
                 );
 
             Pingback::add(
-                $post->id,
-                $from,
-                preg_replace("~(https?://|^)([^/:]+).*~", "$2", $from)
+                post_id:$post->id,
+                source:$from,
+                title:preg_replace("~(https?://|^)([^/:]+).*~", "$2", $from)
             );
         }
 
@@ -301,7 +301,10 @@
         }
 
         static function delete_post($post): void {
-            SQL::current()->delete("pingbacks", array("post_id" => $post->id));
+            SQL::current()->delete(
+                table:"pingbacks",
+                conds:array("post_id" => $post->id)
+            );
         }
 
         private function get_post_pingback_count($post_id): int {
@@ -351,10 +354,10 @@
                 )->published;
 
                 Pingback::add(
-                    $post->id,
-                    unfix((string) $source),
-                    unfix((string) $title),
-                    datetime((string) $created_at)
+                    post_id:$post->id,
+                    source:unfix((string) $source),
+                    title:unfix((string) $title),
+                    created_at:datetime((string) $created_at)
                 );
             }
         }

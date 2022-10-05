@@ -32,7 +32,10 @@
             )
                 return;
 
-            View::add($context["post"]->id, $visitor->id);
+            View::add(
+                post_id:$context["post"]->id,
+                user_id:$visitor->id
+            );
         }
 
         public function manage_posts_column_header(): void {
@@ -81,15 +84,15 @@
         public function update_post($post): void {
             if (isset($_POST['reset_views']))
                 SQL::current()->delete(
-                    "views",
-                    array("post_id" => $post->id)
+                    table:"views",
+                    conds:array("post_id" => $post->id)
                 );
         }
 
         static function delete_post($post): void {
             SQL::current()->delete(
-                "views",
-                array("post_id" => $post->id)
+                table:"views",
+                conds:array("post_id" => $post->id)
             );
         }
 

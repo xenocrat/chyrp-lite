@@ -55,8 +55,8 @@
             $sql = SQL::current();
 
             $sql->insert(
-                "views",
-                array(
+                table:"views",
+                data:array(
                     "post_id"    => $post_id,
                     "user_id"    => $user_id,
                     "created_at" => oneof($created_at, datetime())
@@ -83,8 +83,8 @@
          */
         static function install(): void {
             SQL::current()->create(
-                "views",
-                array(
+                table:"views",
+                cols:array(
                     "id INTEGER PRIMARY KEY AUTO_INCREMENT",
                     "post_id INTEGER NOT NULL",
                     "user_id INTEGER DEFAULT 0",

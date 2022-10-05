@@ -1157,10 +1157,10 @@
             $feed = new BlogFeed();
 
             $feed->open(
-                oneof($theme->title, $config->name),
-                $config->description,
-                null,
-                $latest_timestamp
+                title:oneof($theme->title, $config->name),
+                subtitle:$config->description,
+                id:null,
+                updated:$latest_timestamp
             );
 
             foreach ($posts as $post) {
@@ -1175,14 +1175,14 @@
                 }
 
                 $feed->entry(
-                    oneof($post->title(), ucfirst($post->feather)),
-                    url("id/post/".$post->id),
-                    $post->feed_content(),
-                    $post->url(),
-                    $post->created_at,
-                    $updated,
-                    $author,
-                    $website
+                    title:oneof($post->title(), ucfirst($post->feather)),
+                    id:url("id/post/".$post->id),
+                    content:$post->feed_content(),
+                    link:$post->url(),
+                    published:$post->created_at,
+                    updated:$updated,
+                    name:$author,
+                    uri:$website
                 );
 
                 $trigger->call("feed_item", $post, $feed);

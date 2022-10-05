@@ -129,17 +129,17 @@
                 $notify = false;
 
             $comment = self::add(
-                $body,
-                $author,
-                $author_url,
-                $author_email,
-                crc24($_SERVER['REMOTE_ADDR']),
-                isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "",
-                $status,
-                $post->id,
-                $visitor->id,
-                $parent,
-                $notify
+                body:$body,
+                author:$author,
+                author_url:$author_url,
+                author_email:$author_email,
+                ip:crc24($_SERVER['REMOTE_ADDR']),
+                agent:isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "",
+                status:$status,
+                post_id:$post->id,
+                user_id:$visitor->id,
+                parent:$parent,
+                notify:$notify
             );
 
             $_SESSION['comments'][] = $comment->id;
@@ -190,8 +190,8 @@
             $config = Config::current();
 
             $sql->insert(
-                "comments",
-                array(
+                table:"comments",
+                data:array(
                     "body"         => $body,
                     "author"       => strip_tags($author),
                     "author_url"   => strip_tags($author_url),
@@ -288,9 +288,9 @@
             );
 
             SQL::current()->update(
-                "comments",
-                array("id" => $this->id),
-                $new_values
+                table:"comments",
+                conds:array("id" => $this->id),
+                data:$new_values
             );
 
             $comment = new self(
@@ -382,8 +382,8 @@
             if (
                 $visitor->group->can("edit_own_comment") and
                 SQL::current()->count(
-                    "comments",
-                    array("user_id" => $visitor->id)
+                    tables:"comments",
+                    conds:array("user_id" => $visitor->id)
                 )
             )
                 return true;
@@ -406,8 +406,8 @@
             if (
                 $visitor->group->can("delete_own_comment") and
                 SQL::current()->count(
-                    "comments",
-                    array("user_id" => $visitor->id)
+                    tables:"comments",
+                    conds:array("user_id" => $visitor->id)
                 )
             )
                 return true;
@@ -536,8 +536,8 @@
          */
         static function install(): void {
             SQL::current()->create(
-                "comments",
-                array(
+                table:"comments",
+                cols:array(
                     "id INTEGER PRIMARY KEY AUTO_INCREMENT",
                     "body LONGTEXT",
                     "author VARCHAR(250) DEFAULT ''",
@@ -565,8 +565,8 @@
 
             $sql->drop("comments");
             $sql->delete(
-                "post_attributes",
-                array("name" => "comment_status")
+                table:"post_attributes",
+                conds:array("name" => "comment_status")
             );
         }
     }

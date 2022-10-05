@@ -56,8 +56,8 @@
             $sql = SQL::current();
 
             $sql->insert(
-                "pingbacks",
-                array(
+                table:"pingbacks",
+                data:array(
                     "post_id"    => $post_id,
                     "source"     => $source,
                     "title"      => strip_tags($title),
@@ -87,9 +87,9 @@
             $title = strip_tags($title);
 
             SQL::current()->update(
-                "pingbacks",
-                array("id"    => $this->id),
-                array("title" => $title)
+                table:"pingbacks",
+                conds:array("id"    => $this->id),
+                data:array("title" => $title)
             );
 
             $pingback = new self(
@@ -126,8 +126,8 @@
          */
         static function install(): void {
             SQL::current()->create(
-                "pingbacks",
-                array(
+                table:"pingbacks",
+                cols:array(
                     "id INTEGER PRIMARY KEY AUTO_INCREMENT",
                     "post_id INTEGER NOT NULL",
                     "source VARCHAR(2048) DEFAULT ''",
