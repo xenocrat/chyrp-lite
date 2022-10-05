@@ -2374,15 +2374,22 @@
                             array("name" => (string) fallback($attributes["group"]))
                         );
 
+                        fallback($attributes["password"], User::hash_password(random(8)));
+                        fallback($attributes["email"], "");
+                        fallback($attributes["full_name"], "");
+                        fallback($attributes["website"], "");
+                        fallback($attributes["approved"], false);
+                        fallback($attributes["joined_at"], datetime());
+
                         $user = User::add(
-                            $login,
-                            fallback($attributes["password"], User::hash_password(random(8))),
-                            fallback($attributes["email"], ""),
-                            fallback($attributes["full_name"], ""),
-                            fallback($attributes["website"], ""),
-                            (!$group->no_results) ? $group->id : $config->default_group,
-                            fallback($attributes["approved"], false),
-                            fallback($attributes["joined_at"]), datetime()
+                            login:$login,
+                            password:$attributes["password"],
+                            email:$attributes["email"],
+                            full_name:$attributes["full_name"],
+                            website:$attributes["website"],
+                            group_id:(!$group->no_results) ? $group->id : $config->default_group,
+                            approved:$attributes["approved"],
+                            joined_at:$attributes["joined_at"]
                         );
 
                         $trigger->call("import_chyrp_user", $user);
