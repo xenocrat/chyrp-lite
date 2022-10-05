@@ -27,11 +27,11 @@ msgstr "تعذر قراءة ملف الإعدادات."
 msgid "Requested configuration setting not found."
 msgstr "لم يتم العثور على إعداد التكوين المطلوب."
 
-#: includes/class/Model.php:490
+#: includes/class/Model.php:492
 msgid "Edit"
 msgstr "تحرير"
 
-#: includes/class/Model.php:520
+#: includes/class/Model.php:522
 msgid "Delete"
 msgstr "حذف"
 
@@ -84,11 +84,11 @@ msgstr "المُتحكم بالمسار المُدخل غير صالح."
 #: includes/controller/Admin.php:1415 includes/controller/Admin.php:1428
 #: includes/controller/Admin.php:1505 includes/controller/Admin.php:1521
 #: includes/controller/Admin.php:1640 includes/controller/Admin.php:1663
-#: includes/controller/Admin.php:1684 includes/controller/Admin.php:2703
-#: includes/controller/Admin.php:2770 includes/controller/Admin.php:2905
-#: includes/controller/Admin.php:2912 includes/controller/Admin.php:2919
-#: includes/controller/Admin.php:2926 includes/controller/Admin.php:2933
-#: includes/controller/Admin.php:3204 includes/controller/Ajax.php:34
+#: includes/controller/Admin.php:1684 includes/controller/Admin.php:2710
+#: includes/controller/Admin.php:2777 includes/controller/Admin.php:2912
+#: includes/controller/Admin.php:2919 includes/controller/Admin.php:2926
+#: includes/controller/Admin.php:2933 includes/controller/Admin.php:2940
+#: includes/controller/Admin.php:3211 includes/controller/Ajax.php:34
 #: includes/controller/Ajax.php:238 includes/download.php:13
 #: includes/download.php:20 includes/error.php:163 includes/helpers.php:1811
 #: includes/helpers.php:1818 includes/helpers.php:1825
@@ -141,17 +141,17 @@ msgstr "إجراء غير صحيح."
 #: includes/controller/Admin.php:1902 includes/controller/Admin.php:1913
 #: includes/controller/Admin.php:2241 includes/controller/Admin.php:2252
 #: includes/controller/Admin.php:2305 includes/controller/Admin.php:2344
-#: includes/controller/Admin.php:2363 includes/controller/Admin.php:2396
-#: includes/controller/Admin.php:2446 includes/controller/Admin.php:2500
-#: includes/controller/Admin.php:2594 includes/controller/Admin.php:2637
-#: includes/controller/Admin.php:2678 includes/controller/Admin.php:2684
-#: includes/controller/Admin.php:2745 includes/controller/Admin.php:2751
-#: includes/controller/Admin.php:2802 includes/controller/Admin.php:2808
-#: includes/controller/Admin.php:2843 includes/controller/Admin.php:2861
-#: includes/controller/Admin.php:2881 includes/controller/Admin.php:2899
-#: includes/controller/Admin.php:2972 includes/controller/Admin.php:3002
-#: includes/controller/Admin.php:3049 includes/controller/Admin.php:3064
-#: includes/controller/Admin.php:3114 includes/controller/Admin.php:3128
+#: includes/controller/Admin.php:2363 includes/controller/Admin.php:2403
+#: includes/controller/Admin.php:2453 includes/controller/Admin.php:2507
+#: includes/controller/Admin.php:2601 includes/controller/Admin.php:2644
+#: includes/controller/Admin.php:2685 includes/controller/Admin.php:2691
+#: includes/controller/Admin.php:2752 includes/controller/Admin.php:2758
+#: includes/controller/Admin.php:2809 includes/controller/Admin.php:2815
+#: includes/controller/Admin.php:2850 includes/controller/Admin.php:2868
+#: includes/controller/Admin.php:2888 includes/controller/Admin.php:2906
+#: includes/controller/Admin.php:2979 includes/controller/Admin.php:3009
+#: includes/controller/Admin.php:3056 includes/controller/Admin.php:3071
+#: includes/controller/Admin.php:3121 includes/controller/Admin.php:3135
 #: includes/controller/Ajax.php:55 includes/controller/Ajax.php:78
 #: includes/controller/Ajax.php:93 includes/controller/Ajax.php:99
 #: includes/controller/Ajax.php:129 includes/controller/Ajax.php:135
@@ -201,7 +201,7 @@ msgid "You do not have sufficient privileges to view this area."
 msgstr "ليس لديك الصلاحيات الكافية."
 
 #: includes/controller/Admin.php:195 includes/controller/Admin.php:246
-#: includes/controller/Admin.php:2397 includes/controller/Ajax.php:136
+#: includes/controller/Admin.php:2404 includes/controller/Ajax.php:136
 #: includes/lib/XMLRPC.php:293
 msgid "You do not have sufficient privileges to add posts."
 msgstr "ليس لديك الصلاحيات كافية لإضافة المنشورات."
@@ -216,8 +216,8 @@ msgstr "يجب عليك تمكين ريشة واحدة على الأقل من أ
 #: includes/controller/Admin.php:1012 includes/controller/Admin.php:1124
 #: includes/controller/Admin.php:1182 includes/controller/Admin.php:1276
 #: includes/controller/Admin.php:1530 includes/controller/Admin.php:1564
-#: includes/controller/Admin.php:1619 includes/controller/Admin.php:2710
-#: includes/controller/Admin.php:2777 includes/controller/Ajax.php:72
+#: includes/controller/Admin.php:1619 includes/controller/Admin.php:2717
+#: includes/controller/Admin.php:2784 includes/controller/Ajax.php:72
 #: includes/controller/Ajax.php:114 includes/download.php:36
 #: includes/helpers.php:135 includes/thumbnail.php:42
 msgid "Not Found"
@@ -234,11 +234,11 @@ msgstr "الريشة غير موجودة."
 #: includes/controller/Admin.php:1259 includes/controller/Admin.php:1410
 #: includes/controller/Admin.php:1493 includes/controller/Admin.php:1602
 #: includes/controller/Admin.php:1832 includes/controller/Admin.php:1914
-#: includes/controller/Admin.php:2253 includes/controller/Admin.php:2685
-#: includes/controller/Admin.php:2752 includes/controller/Admin.php:2809
-#: includes/controller/Admin.php:2862 includes/controller/Admin.php:2900
-#: includes/controller/Admin.php:3003 includes/controller/Admin.php:3065
-#: includes/controller/Admin.php:3129 includes/controller/Ajax.php:56
+#: includes/controller/Admin.php:2253 includes/controller/Admin.php:2692
+#: includes/controller/Admin.php:2759 includes/controller/Admin.php:2816
+#: includes/controller/Admin.php:2869 includes/controller/Admin.php:2907
+#: includes/controller/Admin.php:3010 includes/controller/Admin.php:3072
+#: includes/controller/Admin.php:3136 includes/controller/Ajax.php:56
 #: includes/controller/Ajax.php:100 includes/controller/Ajax.php:130
 #: includes/controller/Ajax.php:186 includes/controller/Ajax.php:227
 #: includes/controller/Main.php:662 includes/controller/Main.php:781
@@ -312,7 +312,7 @@ msgid "You do not have sufficient privileges to manage any posts."
 msgstr "ليس لديك الصلاحيات كافية لإدارة المنشورات."
 
 #: includes/controller/Admin.php:576 includes/controller/Admin.php:593
-#: includes/controller/Admin.php:2447 includes/controller/Ajax.php:192
+#: includes/controller/Admin.php:2454 includes/controller/Ajax.php:192
 msgid "You do not have sufficient privileges to add pages."
 msgstr "ليس لديك الصلاحيات كافية لإضافة الصفحات."
 
@@ -329,7 +329,7 @@ msgid "Page created!"
 msgstr "تم إنشاء الصفحة!"
 
 #: includes/controller/Admin.php:643 includes/controller/Admin.php:763
-#: includes/controller/Admin.php:1809 includes/controller/Admin.php:3154
+#: includes/controller/Admin.php:1809 includes/controller/Admin.php:3161
 msgid "View page &rarr;"
 msgstr "عرض الصفحة &rarr;"
 
@@ -403,13 +403,13 @@ msgid "Please consider setting a stronger password for this user."
 msgstr "الرجاء وضع كلمة مرور أقوى لهذا المستخدم."
 
 #: includes/controller/Admin.php:981 includes/controller/Admin.php:1153
-#: includes/controller/Admin.php:2906 includes/controller/Main.php:694
+#: includes/controller/Admin.php:2913 includes/controller/Main.php:694
 #: includes/controller/Main.php:920 install.php:622
 msgid "Email address cannot be blank."
 msgstr "لا يمكن أن يكون عنوان البريد الإلكتروني فارغاً."
 
 #: includes/controller/Admin.php:988 includes/controller/Admin.php:1160
-#: includes/controller/Admin.php:2913 includes/controller/Main.php:698
+#: includes/controller/Admin.php:2920 includes/controller/Main.php:698
 #: includes/controller/Main.php:924 install.php:624
 msgid "Invalid email address."
 msgstr "عنوان البريد الإلكتروني غير صالح."
@@ -460,8 +460,8 @@ msgstr "لا يمكنك حذف حسابك الخاص."
 
 #: includes/controller/Admin.php:1288 includes/controller/Admin.php:1310
 #: includes/controller/Admin.php:1630 includes/controller/Admin.php:1655
-#: includes/controller/Admin.php:1676 includes/controller/Admin.php:3075
-#: includes/controller/Admin.php:3084
+#: includes/controller/Admin.php:1676 includes/controller/Admin.php:3082
+#: includes/controller/Admin.php:3091
 msgid "Gone"
 msgstr ""
 
@@ -530,7 +530,7 @@ msgstr "مجموعة الأعضاء الجديدة غير موجودة."
 msgid "New member group must be specified."
 msgstr "يجب تحديد مجموعة الأعضاء الجديدة."
 
-#: includes/controller/Admin.php:1656 includes/controller/Admin.php:3076
+#: includes/controller/Admin.php:1656 includes/controller/Admin.php:3083
 msgid "New default group does not exist."
 msgstr "المجموعة الافتراضية الجديدة غير موجودة."
 
@@ -538,7 +538,7 @@ msgstr "المجموعة الافتراضية الجديدة غير موجودة
 msgid "New default group must be specified."
 msgstr "يجب تحديد مجموعة افتراضية جديدة."
 
-#: includes/controller/Admin.php:1677 includes/controller/Admin.php:3085
+#: includes/controller/Admin.php:1677 includes/controller/Admin.php:3092
 msgid "New guest group does not exist."
 msgstr "مجموعة الزوار الجديدة غير موجودة."
 
@@ -620,194 +620,194 @@ msgstr "ليس لديك الصلاحيات كافية لاستيراد المل�
 msgid "You did not select anything to import."
 msgstr "لم تقم باختيار مُحتوى لاستيراده."
 
-#: includes/controller/Admin.php:2488
+#: includes/controller/Admin.php:2495
 msgid "Chyrp Lite content successfully imported!"
 msgstr "تم استيراد محتوى Chyrp Lite بنجاح!"
 
-#: includes/controller/Admin.php:2501 includes/controller/Admin.php:2595
-#: includes/controller/Admin.php:2679 includes/controller/Admin.php:2746
+#: includes/controller/Admin.php:2508 includes/controller/Admin.php:2602
+#: includes/controller/Admin.php:2686 includes/controller/Admin.php:2753
 msgid "You do not have sufficient privileges to toggle extensions."
 msgstr "ليس لديك الصلاحيات كافية لتبديل الإضافات."
 
-#: includes/controller/Admin.php:2638 includes/controller/Admin.php:2803
-#: includes/controller/Admin.php:2844 includes/controller/Admin.php:2882
-#: includes/controller/Admin.php:2973 includes/controller/Admin.php:3050
-#: includes/controller/Admin.php:3115
+#: includes/controller/Admin.php:2645 includes/controller/Admin.php:2810
+#: includes/controller/Admin.php:2851 includes/controller/Admin.php:2889
+#: includes/controller/Admin.php:2980 includes/controller/Admin.php:3057
+#: includes/controller/Admin.php:3122
 msgid "You do not have sufficient privileges to change settings."
 msgstr "ليس لديك الصلاحيات كافية لتغيير الإعدادات."
 
-#: includes/controller/Admin.php:2643
+#: includes/controller/Admin.php:2650
 msgid "You are currently previewing a theme."
 msgstr "أنت حالياً تقوم بمعاينة السمة."
 
-#: includes/controller/Admin.php:2644
+#: includes/controller/Admin.php:2651
 msgid "Stop &rarr;"
 msgstr "إيقاف &rarr;"
 
-#: includes/controller/Admin.php:2690 includes/controller/Admin.php:2757
+#: includes/controller/Admin.php:2697 includes/controller/Admin.php:2764
 msgid "No Extension Specified"
 msgstr "لم يتم تحديد ملحقات"
 
-#: includes/controller/Admin.php:2691
+#: includes/controller/Admin.php:2698
 msgid "You did not specify an extension to enable."
 msgstr "لم تقم بتحديد ملحق لتفعيله."
 
-#: includes/controller/Admin.php:2704
+#: includes/controller/Admin.php:2711
 msgid "Extension already enabled."
 msgstr "الملحق مفعل مسبقاً."
 
-#: includes/controller/Admin.php:2711 includes/controller/Admin.php:2778
+#: includes/controller/Admin.php:2718 includes/controller/Admin.php:2785
 msgid "Extension not found."
 msgstr "لم يتم العثور على الملحق."
 
-#: includes/controller/Admin.php:2730
+#: includes/controller/Admin.php:2737
 msgid "Extension enabled."
 msgstr "تم تفعيل المُلحق."
 
-#: includes/controller/Admin.php:2758
+#: includes/controller/Admin.php:2765
 msgid "You did not specify an extension to disable."
 msgstr "لم تقم بتحديد ملحق لتعطيله."
 
-#: includes/controller/Admin.php:2771
+#: includes/controller/Admin.php:2778
 msgid "Extension already disabled."
 msgstr "الملحق معطل مسبقاً."
 
-#: includes/controller/Admin.php:2790
+#: includes/controller/Admin.php:2797
 msgid "Extension disabled."
 msgstr "تم تعطيل الملحق."
 
-#: includes/controller/Admin.php:2814
+#: includes/controller/Admin.php:2821
 msgid "No Theme Specified"
 msgstr "لا يوجد سمة محددة"
 
-#: includes/controller/Admin.php:2815
+#: includes/controller/Admin.php:2822
 msgid "You did not specify which theme to select."
 msgstr "لم تقم بإختيار السمة التي تريد تحديدها."
 
-#: includes/controller/Admin.php:2831
+#: includes/controller/Admin.php:2838
 msgid "Theme changed."
 msgstr "تم تغيير السمة."
 
-#: includes/controller/Admin.php:2854
+#: includes/controller/Admin.php:2861
 msgid "Preview stopped."
 msgstr "تم إيقاف المعاينة."
 
-#: includes/controller/Admin.php:2869
+#: includes/controller/Admin.php:2876
 msgid "Preview started."
 msgstr "تم بدء المعاينة."
 
-#: includes/controller/Admin.php:2920 install.php:600
+#: includes/controller/Admin.php:2927 install.php:600
 msgid "Chyrp URL cannot be blank."
 msgstr "لا يمكن أن يكون رابط Chyrp فارغاً."
 
-#: includes/controller/Admin.php:2927 install.php:602
+#: includes/controller/Admin.php:2934 install.php:602
 msgid "Invalid Chyrp URL."
 msgstr "رابط Chyrp غير صحيح."
 
-#: includes/controller/Admin.php:2934
+#: includes/controller/Admin.php:2941
 msgid "Invalid canonical URL."
 msgstr "عنوان URL الأساسي غير صالح."
 
-#: includes/controller/Admin.php:2960 includes/controller/Admin.php:3037
-#: includes/controller/Admin.php:3102 includes/controller/Admin.php:3169
+#: includes/controller/Admin.php:2967 includes/controller/Admin.php:3044
+#: includes/controller/Admin.php:3109 includes/controller/Admin.php:3176
 msgid "Settings updated."
 msgstr "تم تحديث الإعدادات."
 
-#: includes/controller/Admin.php:3144
+#: includes/controller/Admin.php:3151
 msgid "My Awesome Homepage"
 msgstr "موقعي الرائع"
 
-#: includes/controller/Admin.php:3145 includes/lib/XMLRPC.php:330
+#: includes/controller/Admin.php:3152 includes/lib/XMLRPC.php:330
 msgid "Nothing here yet!"
 msgstr "لا شيء هنا بعد!"
 
-#: includes/controller/Admin.php:3153
+#: includes/controller/Admin.php:3160
 msgid "Page created."
 msgstr "تم إنشاء الصفحة."
 
-#: includes/controller/Admin.php:3181 includes/controller/Main.php:809
+#: includes/controller/Admin.php:3188 includes/controller/Main.php:809
 msgid "You are already logged in."
 msgstr "أنت مُسجل الدخول بالفعل."
 
-#: includes/controller/Admin.php:3205 includes/controller/Ajax.php:35
+#: includes/controller/Admin.php:3212 includes/controller/Ajax.php:35
 #: includes/controller/Ajax.php:239 includes/download.php:21
 #: includes/thumbnail.php:24
 msgid "Missing argument."
 msgstr ""
 
-#: includes/controller/Admin.php:3214
+#: includes/controller/Admin.php:3221
 msgid "Help"
 msgstr "مساعدة"
 
-#: includes/controller/Admin.php:3229
+#: includes/controller/Admin.php:3236
 msgid "Write"
 msgstr "الكتابة"
 
-#: includes/controller/Admin.php:3232
+#: includes/controller/Admin.php:3239
 msgid "Manage"
 msgstr "الإدارة"
 
-#: includes/controller/Admin.php:3235
+#: includes/controller/Admin.php:3242
 msgid "Settings"
 msgstr "الإعدادات"
 
-#: includes/controller/Admin.php:3238
+#: includes/controller/Admin.php:3245
 msgid "Extend"
 msgstr "التخصيص"
 
-#: includes/controller/Admin.php:3249
+#: includes/controller/Admin.php:3256
 msgid "Page"
 msgstr "الصفحة"
 
-#: includes/controller/Admin.php:3284
+#: includes/controller/Admin.php:3291
 msgid "Posts"
 msgstr "المنشورات"
 
-#: includes/controller/Admin.php:3293
+#: includes/controller/Admin.php:3300
 msgid "Pages"
 msgstr "الصفحات"
 
-#: includes/controller/Admin.php:3302 includes/controller/Admin.php:3347
+#: includes/controller/Admin.php:3309 includes/controller/Admin.php:3354
 msgid "Users"
 msgstr "المستخدمون"
 
-#: includes/controller/Admin.php:3312
+#: includes/controller/Admin.php:3319
 msgid "Groups"
 msgstr "المجموعات"
 
-#: includes/controller/Admin.php:3321
+#: includes/controller/Admin.php:3328
 msgid "Uploads"
 msgstr ""
 
-#: includes/controller/Admin.php:3326
+#: includes/controller/Admin.php:3333
 msgid "Import"
 msgstr "استيراد"
 
-#: includes/controller/Admin.php:3329
+#: includes/controller/Admin.php:3336
 msgid "Export"
 msgstr "تصدير"
 
-#: includes/controller/Admin.php:3345
+#: includes/controller/Admin.php:3352
 msgid "General"
 msgstr "عام"
 
-#: includes/controller/Admin.php:3346
+#: includes/controller/Admin.php:3353
 msgid "Content"
 msgstr "المحتوى"
 
-#: includes/controller/Admin.php:3348
+#: includes/controller/Admin.php:3355
 msgid "Routes"
 msgstr "المسارات"
 
-#: includes/controller/Admin.php:3367
+#: includes/controller/Admin.php:3374
 msgid "Modules"
 msgstr "الملحقات"
 
-#: includes/controller/Admin.php:3368
+#: includes/controller/Admin.php:3375
 msgid "Feathers"
 msgstr "الريش"
 
-#: includes/controller/Admin.php:3369
+#: includes/controller/Admin.php:3376
 msgid "Themes"
 msgstr "السمات"
 
@@ -1225,115 +1225,115 @@ msgstr "عفواً! حدث خطأ ما في هذه الصفحة."
 msgid "Are you sure you want to delete this page and its child pages?"
 msgstr "هل أنت متأكد من أنك تريد حذف هذه الصفحة وصفحاتها الفرعية؟"
 
-#: includes/model/Group.php:306
+#: includes/model/Group.php:318
 msgid "Change Settings"
 msgstr "تغيير الإعدادات"
 
-#: includes/model/Group.php:307
+#: includes/model/Group.php:319
 msgid "Toggle Extensions"
 msgstr "تفعيل الملحقات"
 
-#: includes/model/Group.php:308
+#: includes/model/Group.php:320
 msgid "View Site"
 msgstr "عرض الموقع"
 
-#: includes/model/Group.php:309
+#: includes/model/Group.php:321
 msgid "View Private Posts"
 msgstr "عرض المنشورات الخاصة"
 
-#: includes/model/Group.php:310
+#: includes/model/Group.php:322
 msgid "View Scheduled Posts"
 msgstr "رؤية المنشورات المجدولة"
 
-#: includes/model/Group.php:311
+#: includes/model/Group.php:323
 msgid "View Drafts"
 msgstr "عرض المسودات"
 
-#: includes/model/Group.php:312
+#: includes/model/Group.php:324
 msgid "View Own Drafts"
 msgstr "عرض المسودات الخاصة به"
 
-#: includes/model/Group.php:313
+#: includes/model/Group.php:325
 msgid "Add Posts"
 msgstr "إضافة منشورات"
 
-#: includes/model/Group.php:314
+#: includes/model/Group.php:326
 msgid "Add Drafts"
 msgstr "إضافة مسودات"
 
-#: includes/model/Group.php:315
+#: includes/model/Group.php:327
 msgid "Edit Posts"
 msgstr "تحرير المنشورات"
 
-#: includes/model/Group.php:316
+#: includes/model/Group.php:328
 msgid "Edit Drafts"
 msgstr "تحرير المسودات"
 
-#: includes/model/Group.php:317
+#: includes/model/Group.php:329
 msgid "Edit Own Posts"
 msgstr "تحرير المنشورات الخاصة به"
 
-#: includes/model/Group.php:318
+#: includes/model/Group.php:330
 msgid "Edit Own Drafts"
 msgstr "تحرير المسودات الخاصة به"
 
-#: includes/model/Group.php:319
+#: includes/model/Group.php:331
 msgid "Delete Posts"
 msgstr "حذف المنشورات"
 
-#: includes/model/Group.php:320
+#: includes/model/Group.php:332
 msgid "Delete Drafts"
 msgstr "حذف المسودات"
 
-#: includes/model/Group.php:321
+#: includes/model/Group.php:333
 msgid "Delete Own Posts"
 msgstr "حذف المشاركات الخاصة به"
 
-#: includes/model/Group.php:322
+#: includes/model/Group.php:334
 msgid "Delete Own Drafts"
 msgstr "حذف المسودات الخاصة به"
 
-#: includes/model/Group.php:323
+#: includes/model/Group.php:335
 msgid "View Pages"
 msgstr "عرض الصفحات"
 
-#: includes/model/Group.php:324
+#: includes/model/Group.php:336
 msgid "Add Pages"
 msgstr "إضافة صفحات"
 
-#: includes/model/Group.php:325
+#: includes/model/Group.php:337
 msgid "Edit Pages"
 msgstr "تحرير الصفحات"
 
-#: includes/model/Group.php:326
+#: includes/model/Group.php:338
 msgid "Delete Pages"
 msgstr "حذف الصفحات"
 
-#: includes/model/Group.php:327
+#: includes/model/Group.php:339
 msgid "Add Users"
 msgstr "إضافة مستخدمين"
 
-#: includes/model/Group.php:328
+#: includes/model/Group.php:340
 msgid "Edit Users"
 msgstr "تحرير المستخدمين"
 
-#: includes/model/Group.php:329
+#: includes/model/Group.php:341
 msgid "Delete Users"
 msgstr "حذف المستخدمين"
 
-#: includes/model/Group.php:330
+#: includes/model/Group.php:342
 msgid "Add Groups"
 msgstr "إضافة مجموعات"
 
-#: includes/model/Group.php:331
+#: includes/model/Group.php:343
 msgid "Edit Groups"
 msgstr "تحرير المجموعات"
 
-#: includes/model/Group.php:332
+#: includes/model/Group.php:344
 msgid "Delete Groups"
 msgstr "حذف المجموعات"
 
-#: includes/model/Group.php:333
+#: includes/model/Group.php:345
 msgid "Export Content"
 msgstr "تصدير المحتوى"
 

@@ -263,7 +263,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2388
+	includes/controller/Admin.php on line 2395
 
 Arguments:
 	$user
@@ -272,7 +272,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2439
+	includes/controller/Admin.php on line 2446
 
 Arguments:
 	$entry, $post
@@ -281,7 +281,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2481
+	includes/controller/Admin.php on line 2488
 
 Arguments:
 	$entry, $page
@@ -290,7 +290,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 2485
+	includes/controller/Admin.php on line 2492
 
 Arguments:
 	$imports
@@ -299,13 +299,13 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 2851
+	includes/controller/Admin.php on line 2858
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 2866
+	includes/controller/Admin.php on line 2873
 
 
 can_not_view_page
@@ -450,7 +450,7 @@ Arguments:
 update_group
 ------------
 Called from:
-	includes/model/Group.php on line 233
+	includes/model/Group.php on line 236
 
 Arguments:
 	$group, $this
@@ -576,7 +576,7 @@ Arguments:
 comments_false_positives
 ------------------------
 Called from:
-	modules/comments/comments.php on line 687
+	modules/comments/comments.php on line 685
 
 Arguments:
 	$false_positives
@@ -585,7 +585,7 @@ Arguments:
 comments_false_negatives
 ------------------------
 Called from:
-	modules/comments/comments.php on line 690
+	modules/comments/comments.php on line 688
 
 Arguments:
 	$false_negatives
@@ -594,7 +594,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 1118
+	modules/comments/comments.php on line 1119
 
 Arguments:
 	$comment, $feed
@@ -603,7 +603,7 @@ Arguments:
 correspond_new_comment
 ----------------------
 Called from:
-	modules/comments/comments.php on line 1469
+	modules/comments/comments.php on line 1470
 
 Arguments:
 	$comment, $earlier, $url
@@ -968,7 +968,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 3265
+	includes/controller/Admin.php on line 3272
 
 Target:
 	$write
@@ -977,7 +977,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3323
+	includes/controller/Admin.php on line 3330
 
 Target:
 	$manage
@@ -986,7 +986,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 3351
+	includes/controller/Admin.php on line 3358
 
 Target:
 	$settings
@@ -995,7 +995,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3372
+	includes/controller/Admin.php on line 3379
 
 Target:
 	$extend
@@ -1004,7 +1004,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 3436
+	includes/controller/Admin.php on line 3443
 
 Target:
 	$this->context
@@ -1014,7 +1014,7 @@ markup_page_title
 -----------------
 Called from:
 	includes/controller/Ajax.php on line 203
-	includes/model/Page.php on line 307
+	includes/model/Page.php on line 315
 
 Target:
 	$content
@@ -1024,7 +1024,7 @@ markup_title
 ------------
 Called from:
 	includes/controller/Ajax.php on line 203
-	includes/model/Page.php on line 307
+	includes/model/Page.php on line 315
 
 Target:
 	$content
@@ -1034,7 +1034,7 @@ markup_page_text
 ----------------
 Called from:
 	includes/controller/Ajax.php on line 207
-	includes/model/Page.php on line 308
+	includes/model/Page.php on line 316
 
 Target:
 	$content
@@ -1044,7 +1044,7 @@ markup_text
 -----------
 Called from:
 	includes/controller/Ajax.php on line 207
-	includes/model/Page.php on line 308
+	includes/model/Page.php on line 316
 	modules/comments/model/Comment.php on line 511
 
 Target:
@@ -1203,7 +1203,7 @@ Target:
 list_permissions
 ----------------
 Called from:
-	includes/model/Group.php on line 336
+	includes/model/Group.php on line 348
 
 Target:
 	$names
@@ -1239,7 +1239,7 @@ Target:
 filter_page
 -----------
 Called from:
-	includes/model/Page.php on line 302
+	includes/model/Page.php on line 310
 
 Target:
 	$this
@@ -1293,7 +1293,7 @@ Target:
 title_from_excerpt
 ------------------
 Called from:
-	includes/model/Post.php on line 725
+	includes/model/Post.php on line 728
 
 Target:
 	$excerpt
@@ -1302,7 +1302,7 @@ Target:
 title
 -----
 Called from:
-	includes/model/Post.php on line 751
+	includes/model/Post.php on line 754
 
 Target:
 	$title
@@ -1314,7 +1314,7 @@ Arguments:
 excerpt
 -------
 Called from:
-	includes/model/Post.php on line 769
+	includes/model/Post.php on line 772
 
 Target:
 	$excerpt
@@ -1326,7 +1326,7 @@ Arguments:
 feed_content
 ------------
 Called from:
-	includes/model/Post.php on line 787
+	includes/model/Post.php on line 790
 
 Target:
 	$feed_content
@@ -1338,7 +1338,7 @@ Arguments:
 filter_post
 -----------
 Called from:
-	includes/model/Post.php on line 870
+	includes/model/Post.php on line 873
 
 Target:
 	$this
