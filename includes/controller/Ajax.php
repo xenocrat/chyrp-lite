@@ -241,7 +241,7 @@
             )
                 show_403(
                     __("Access Denied"),
-                    __("You do not have sufficient privileges to import files.")
+                    __("You do not have sufficient privileges to upload files.")
                 );
 
             if (!isset($_FILES['file']))
