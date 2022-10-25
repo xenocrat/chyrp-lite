@@ -140,7 +140,7 @@
                     return $route->action = "manage_groups";
 
                 # Can they import content?
-                if ($visitor->group->can("add_post", "add_page", "add_group", "add_user"))
+                if ($visitor->group->can("import_content"))
                     return $route->action = "import";
 
                 # Can they export content?
@@ -2236,7 +2236,7 @@
             $sql = SQL::current();
             $imports = array(); # This array will be tested to determine if anything was selected.
 
-            if (!$visitor->group->can("add_post", "add_page", "add_group", "add_user"))
+            if (!$visitor->group->can("import_content"))
                 show_403(
                     __("Access Denied"),
                     __("You do not have sufficient privileges to import content.")
@@ -2300,12 +2300,6 @@
             }
 
             if (isset($_FILES['uploads']) and upload_tester($_FILES['uploads'])) {
-                if (!$visitor->group->can("add_post", "add_page"))
-                    show_403(
-                        __("Access Denied"),
-                        __("You do not have sufficient privileges to import files.")
-                    );
-
                 $imports["uploads"] = array();
 
                 if (is_array($_FILES['uploads']['name'])) {
@@ -2339,12 +2333,6 @@
                 set_time_limit(300);
 
             if (isset($imports["groups"])) {
-                if (!$visitor->group->can("add_group"))
-                    show_403(
-                        __("Access Denied"),
-                        __("You do not have sufficient privileges to add groups.")
-                    );
-
                 foreach ($imports["groups"] as $name => $permissions) {
                     $group = new Group(
                         array("name" => (string) $name)
@@ -2358,12 +2346,6 @@
             }
 
             if (isset($imports["users"])) {
-                if (!$visitor->group->can("add_user"))
-                    show_403(
-                        __("Access Denied"),
-                        __("You do not have sufficient privileges to add users.")
-                    );
-
                 foreach ($imports["users"] as $login => $attributes) {
                     $user = new User(
                         array("login" => (string) $login)
@@ -2398,12 +2380,6 @@
             }
 
             if (isset($imports["posts"])) {
-                if (!$visitor->group->can("add_post"))
-                    show_403(
-                        __("Access Denied"),
-                        __("You do not have sufficient privileges to add posts.")
-                    );
-
                 foreach ($imports["posts"]->entry as $entry) {
                     $chyrp = $entry->children("http://chyrp.net/export/1.0/");
                     $login = $entry->author->children("http://chyrp.net/export/1.0/")->login;
@@ -2448,12 +2424,6 @@
             }
 
             if (isset($imports["pages"])) {
-                if (!$visitor->group->can("add_page"))
-                    show_403(
-                        __("Access Denied"),
-                        __("You do not have sufficient privileges to add pages.")
-                    );
-
                 foreach ($imports["pages"]->entry as $entry) {
                     $chyrp = $entry->children(
                         "http://chyrp.net/export/1.0/"
@@ -3324,12 +3294,12 @@
                     )
                 );
 
-            if ($visitor->group->can("export_content"))
+            if ($visitor->group->can("edit_post", "edit_page", true))
                 $manage["manage_uploads"] = array("title" => __("Uploads"));
 
             $trigger->filter($manage, "manage_nav");
 
-            if ($visitor->group->can("add_post", "add_page", "add_group", "add_user"))
+            if ($visitor->group->can("import_content"))
                 $manage["import"] = array("title" => __("Import"));
 
             if ($visitor->group->can("export_content"))
