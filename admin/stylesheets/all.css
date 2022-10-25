@@ -1299,3 +1299,11 @@ input.toolbar.hidden {
         }
     }
 }
+
+/* Group: Reduced motion */
+
+@media (prefers-reduced-motion) {
+    .ajax_loading {
+        animation: none;
+    }
+}
