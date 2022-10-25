@@ -6,36 +6,26 @@
 <h2>{{ "What would you like to import?" | translate }}</h2>
 <form id="import_chyrp_form" class="split" action="{{ url('import') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <fieldset role="presentation">
-{% if visitor.group.can("add_post") %}
 <p>
 <label for="posts_file">{{ "Posts .atom File" | translate }}</label>
 <input type="file" name="posts_file" value="" id="posts_file" accept=".atom,.xml">
 </p>
-{% endif %}
-{% if visitor.group.can("add_page") %}
 <p>
 <label for="pages_file">{{ "Pages .atom File" | translate }}</label>
 <input type="file" name="pages_file" value="" id="pages_file" accept=".atom,.xml">
 </p>
-{% endif %}
-{% if visitor.group.can("add_group") %}
 <p>
 <label for="groups_file">{{ "Groups .json File" | translate }}</label>
 <input type="file" name="groups_file" value="" id="groups_file" accept=".json,.js">
 </p>
-{% endif %}
-{% if visitor.group.can("add_user") %}
 <p>
 <label for="users_file">{{ "Users .json File" | translate }}</label>
 <input type="file" name="users_file" value="" id="users_file" accept=".json,.js">
 </p>
-{% endif %}
-{% if visitor.group.can("add_post", "add_page") %}
 <p>
 <label for="uploads">{{ "Bulk File Upload" | translate }}</label>
 <input type="file" name="uploads[]" multiple value="" id="uploads">
 </p>
-{% endif %}
 <p>
 <label for="media_url">{{ "URL for Embedded Media" | translate }}
 <span class="sub">{{ "(optional)" | translate }}</span>
