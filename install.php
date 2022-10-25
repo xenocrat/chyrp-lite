@@ -800,6 +800,7 @@
                 "add_group" => "Add Groups",
                 "edit_group" => "Edit Groups",
                 "delete_group" => "Delete Groups",
+                "import_content" => "Import Content",
                 "export_content" => "Export Content"
             );
 
