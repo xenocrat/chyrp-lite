@@ -3148,6 +3148,7 @@
         $route = Route::current();
         $theme = Theme::current();
         $trigger = Trigger::current();
+        $visitor = Visitor::current();
         $nonce = "";
 
         $script = (ADMIN) ?
