@@ -1,7 +1,7 @@
 <?php
     class Migrator extends Modules {
         public function admin_manage_migration($admin): void {
-            if (!Visitor::current()->group->can("add_post"))
+            if (!Visitor::current()->group->can("import_content"))
                 show_403(
                     __("Access Denied"),
                     __("You do not have sufficient privileges to import content.")
@@ -11,7 +11,7 @@
         }
 
         public function manage_nav($navs): array {
-            if (Visitor::current()->group->can("add_post"))
+            if (Visitor::current()->group->can("import_content"))
                 $navs["manage_migration"] = array(
                     "title" => __("Migration", "migrator")
                 );
@@ -26,9 +26,8 @@
         public function admin_import_wordpress()/*: never */{
             $config = Config::current();
             $trigger = Trigger::current();
-            $visitor = Visitor::current();
 
-            if (!$visitor->group->can("add_post"))
+            if (!Visitor::current()->group->can("import_content"))
                 show_403(
                     __("Access Denied"),
                     __("You do not have sufficient privileges to import content.", "migrator")
@@ -214,7 +213,7 @@
 
                     $trigger->call("import_wordpress_post", $post, $new_post);
 
-                } elseif ($wordpress->post_type == "page" and $visitor->group->can("add_page")) {
+                } elseif ($wordpress->post_type == "page") {
                     $created_at = ($wordpress->post_date == "0000-00-00 00:00:00") ?
                             datetime() :
                             (string) $wordpress->post_date ;
@@ -249,7 +248,7 @@
             $config = Config::current();
             $trigger = Trigger::current();
 
-            if (!Visitor::current()->group->can("add_post"))
+            if (!Visitor::current()->group->can("import_content"))
                 show_403(
                     __("Access Denied"),
                     __("You do not have sufficient privileges to import content.", "migrator")
@@ -450,7 +449,7 @@
             $config  = Config::current();
             $trigger = Trigger::current();
 
-            if (!Visitor::current()->group->can("add_post"))
+            if (!Visitor::current()->group->can("import_content"))
                 show_403(
                     __("Access Denied"),
                     __("You do not have sufficient privileges to import content.", "migrator")
@@ -615,9 +614,8 @@
         public function admin_import_movabletype()/*: never */{
             $config  = Config::current();
             $trigger = Trigger::current();
-            $visitor = Visitor::current();
 
-            if (!$visitor->group->can("add_post"))
+            if (!Visitor::current()->group->can("import_content"))
                 show_403(
                     __("Access Denied"),
                     __("You do not have sufficient privileges to import content.", "migrator")
@@ -776,7 +774,7 @@
 
                     $trigger->call("import_movabletype_post", $post, $new_post);
 
-                } elseif ($post["entry_class"] == "page" and $visitor->group->can("add_page")) {
+                } elseif ($post["entry_class"] == "page") {
                     $new_page = Page::add(
                         $post["entry_title"],
                         $body,
