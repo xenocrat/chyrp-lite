@@ -932,3 +932,8 @@ article.archive img {
         width: 100%;
     }
 }
+@media (prefers-reduced-motion) {
+    .ajax_loading {
+        animation: none;
+    }
+}

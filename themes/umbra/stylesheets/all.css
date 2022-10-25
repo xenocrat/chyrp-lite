@@ -781,3 +781,8 @@ div.metadata img.gravatar {
         max-height: 432px;
     }
 }
+@media (prefers-reduced-motion) {
+    .ajax_loading {
+        animation: none;
+    }
+}
