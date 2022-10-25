@@ -204,7 +204,7 @@
             if (!$user->group->can("add_post", "add_draft"))
                 return new IXR_Error(
                     403,
-                    __("You do not have sufficient privileges to import files.")
+                    __("You do not have sufficient privileges to upload files.")
                 );
 
             fallback($args[3], array());
