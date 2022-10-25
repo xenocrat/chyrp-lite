@@ -227,7 +227,18 @@
                     __("Invalid authentication token.")
                 );
 
-            if (!Visitor::current()->group->can("add_post", "add_page"))
+            if (
+                !Visitor::current()->group->can(
+                    "add_post",
+                    "edit_post",
+                    "add_draft",
+                    "edit_draft",
+                    "edit_own_post",
+                    "edit_own_draft",
+                    "add_page",
+                    "edit_page"
+                )
+            )
                 show_403(
                     __("Access Denied"),
                     __("You do not have sufficient privileges to import files.")
