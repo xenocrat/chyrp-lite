@@ -514,6 +514,31 @@
         }
     }
 
+    /**
+     * Function: add_import_content
+     * Adds the import_content permission.
+     *
+     * Versions: 2022.02 => 2022.03
+     */
+    function add_import_content(): void {
+        $sql = SQL::current();
+
+        if (
+            !$sql->count(
+                "permissions",
+                array("id" => "import_content", "group_id" => 0)
+            )
+        )
+            $sql->insert(
+                "permissions",
+                array(
+                    "id" => "import_content",
+                    "name" => "Import Content",
+                    "group_id" => 0
+                )
+            );
+    }
+
     #---------------------------------------------
     # Output Starts
     #---------------------------------------------
@@ -759,6 +784,7 @@
         fix_sqlite_post_pinned();
         fix_post_updated();
         mysql_utf8mb4();
+        add_import_content();
 
         # Perform module upgrades.
         foreach ($config->enabled_modules as $module) {
