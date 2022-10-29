@@ -50,7 +50,7 @@ Called from:
 import_choose
 -------------
 Called from:
-	admin/pages/import.twig on line 48
+	admin/pages/import.twig on line 38
 
 
 manage_groups_column_header
@@ -254,7 +254,7 @@ Called from:
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2355
+	includes/controller/Admin.php on line 2343
 
 Arguments:
 	$group
@@ -263,7 +263,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2395
+	includes/controller/Admin.php on line 2377
 
 Arguments:
 	$user
@@ -272,7 +272,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2446
+	includes/controller/Admin.php on line 2422
 
 Arguments:
 	$entry, $post
@@ -281,7 +281,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2488
+	includes/controller/Admin.php on line 2458
 
 Arguments:
 	$entry, $page
@@ -290,7 +290,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 2492
+	includes/controller/Admin.php on line 2462
 
 Arguments:
 	$imports
@@ -299,13 +299,13 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 2858
+	includes/controller/Admin.php on line 2828
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 2873
+	includes/controller/Admin.php on line 2843
 
 
 can_not_view_page
@@ -399,7 +399,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 3165
+	includes/helpers.php on line 3166
 
 Arguments:
 	$ob
@@ -657,7 +657,7 @@ Arguments:
 import_wordpress_post
 ---------------------
 Called from:
-	modules/migrator/migrator.php on line 215
+	modules/migrator/migrator.php on line 214
 
 Arguments:
 	$post, $new_post
@@ -666,7 +666,7 @@ Arguments:
 import_wordpress_page
 ---------------------
 Called from:
-	modules/migrator/migrator.php on line 234
+	modules/migrator/migrator.php on line 233
 
 Arguments:
 	$post, $new_page
@@ -675,7 +675,7 @@ Arguments:
 import_tumble
 -------------
 Called from:
-	modules/migrator/migrator.php on line 436
+	modules/migrator/migrator.php on line 435
 
 Arguments:
 	$post, $new_post
@@ -684,7 +684,7 @@ Arguments:
 import_textpattern_post
 -----------------------
 Called from:
-	modules/migrator/migrator.php on line 602
+	modules/migrator/migrator.php on line 601
 
 Arguments:
 	$post, $new_post
@@ -693,7 +693,7 @@ Arguments:
 import_movabletype_post
 -----------------------
 Called from:
-	modules/migrator/migrator.php on line 777
+	modules/migrator/migrator.php on line 775
 
 Arguments:
 	$post, $new_post
@@ -702,7 +702,7 @@ Arguments:
 import_movabletype_page
 -----------------------
 Called from:
-	modules/migrator/migrator.php on line 793
+	modules/migrator/migrator.php on line 791
 
 Arguments:
 	$post, $new_page
@@ -959,7 +959,7 @@ Target:
 before_import
 -------------
 Called from:
-	includes/controller/Admin.php on line 2327
+	includes/controller/Admin.php on line 2321
 
 Target:
 	$imports
@@ -968,7 +968,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 3272
+	includes/controller/Admin.php on line 3242
 
 Target:
 	$write
@@ -977,7 +977,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3330
+	includes/controller/Admin.php on line 3300
 
 Target:
 	$manage
@@ -986,7 +986,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 3358
+	includes/controller/Admin.php on line 3328
 
 Target:
 	$settings
@@ -995,7 +995,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3379
+	includes/controller/Admin.php on line 3349
 
 Target:
 	$extend
@@ -1004,7 +1004,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 3443
+	includes/controller/Admin.php on line 3413
 
 Target:
 	$this->context
@@ -1084,7 +1084,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 3166
+	includes/helpers.php on line 3167
 	includes/lib/Leaf.php on line 248
 
 Target:
@@ -1203,7 +1203,7 @@ Target:
 list_permissions
 ----------------
 Called from:
-	includes/model/Group.php on line 348
+	includes/model/Group.php on line 349
 
 Target:
 	$names

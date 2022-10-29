@@ -518,7 +518,7 @@ msgid "Full Name"
 msgstr ""
 
 #: admin/pages/edit_user.twig:36 admin/pages/edit_user.twig:43
-#: admin/pages/general_settings.twig:24 admin/pages/import.twig:41
+#: admin/pages/general_settings.twig:24 admin/pages/import.twig:31
 #: admin/pages/new_user.twig:37 admin/pages/new_user.twig:44
 #: admin/partials/post_fields.twig:30
 msgid "(optional)"
@@ -643,7 +643,7 @@ msgstr ""
 msgid "Current version: %s"
 msgstr ""
 
-#: admin/pages/import.twig:3 admin/pages/import.twig:50
+#: admin/pages/import.twig:3 admin/pages/import.twig:40
 msgid "Import"
 msgstr ""
 
@@ -651,31 +651,31 @@ msgstr ""
 msgid "What would you like to import?"
 msgstr ""
 
-#: admin/pages/import.twig:11
+#: admin/pages/import.twig:10
 msgid "Posts .atom File"
 msgstr ""
 
-#: admin/pages/import.twig:17
+#: admin/pages/import.twig:14
 msgid "Pages .atom File"
 msgstr ""
 
-#: admin/pages/import.twig:23
+#: admin/pages/import.twig:18
 msgid "Groups .json File"
 msgstr ""
 
-#: admin/pages/import.twig:29
+#: admin/pages/import.twig:22
 msgid "Users .json File"
 msgstr ""
 
-#: admin/pages/import.twig:35
+#: admin/pages/import.twig:26
 msgid "Bulk File Upload"
 msgstr ""
 
-#: admin/pages/import.twig:40
+#: admin/pages/import.twig:30
 msgid "URL for Embedded Media"
 msgstr ""
 
-#: admin/pages/import.twig:45
+#: admin/pages/import.twig:35
 #, php-format
 msgid "Usually something like <code>%s/uploads/</code>."
 msgstr ""
