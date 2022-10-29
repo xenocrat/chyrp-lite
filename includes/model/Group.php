@@ -342,6 +342,7 @@
                 "add_group"         => __("Add Groups"),
                 "edit_group"        => __("Edit Groups"),
                 "delete_group"      => __("Delete Groups"),
+                "import_content"    => __("Import Content"),
                 "export_content"    => __("Export Content")
             );
 
