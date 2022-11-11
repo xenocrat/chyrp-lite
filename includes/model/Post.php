@@ -940,8 +940,8 @@
             $attrs = array(); # Post attributes present in post_url.
             $found = array(); # Post attributes found in the request.
             $parts = preg_split(
-                "|(\([^)]+\))|",
-                $config->post_url,
+                "~(\([^)]+\))~",
+                rtrim($config->post_url, "/"),
                 0,
                 PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY
             );
@@ -952,13 +952,13 @@
                     $regex .= self::$url_attrs[$part];
                     $attrs[] = trim($part, "()");
                 } else {
-                    $regex .= preg_quote($part, "|");
+                    $regex .= preg_quote($part, "~");
                 }
 
             # Test the request and return false if it isn't valid.
             if (
                 !preg_match(
-                    "|^$regex|",
+                    "~^$regex(/|$)~",
                     ltrim(str_replace($config->url, "/", $request), "/"),
                     $matches
                 )
