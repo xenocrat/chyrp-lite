@@ -330,7 +330,7 @@
                 $page = new self(array("url" => $slug[2]));
 
                 return isset($route) ?
-                    $route->try["view"] = array($page) : $page ;
+                    $route->try["page"] = array($page) : $page ;
             }
 
             $hierarchy = explode(
