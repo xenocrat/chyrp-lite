@@ -16,9 +16,7 @@ giunti sul tuo sito.
 Puoi avere quattro differenti tipi di temi e una console facile da amministrare, tutto facilmente
 navigabile su una vasta gamma di dispositivi grazie al Responsive HTML5. Semantic Markup e un
 comprensivo modo di etichettatura tramite ARIA rende il tuo blog accessibile agli utenti che usano
-tecnologie assistive. Inoltre Chyrp Lite implementa un'API XML-RPC completo e compatibile con
-WordPress MetaWeblog che ti permette di gestire il tuo blog in modo remoto senza dover visitare il
-sito web del tuo blog.
+tecnologie assistive.
 
 ## Quali sono le caratteristiche fondamentali?
 

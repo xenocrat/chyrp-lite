@@ -15,8 +15,6 @@ visitors will see when they first arrive at your website.
 You get four beautiful blog themes and a friendly administration console, all fully navigable on
 a broad range of devices, thanks to the power of responsive HTML5. Semantic markup and comprehensive
 ARIA labelling ensure your blog will be accessible to visitors who use assistive technologies.
-Chyrp Lite also implements a complete WordPress-compatible MetaWeblog XML-RPC API that allows you to
-do many blogging tasks remotely without having to visit your blog's website.
 
 ## What are the key features?
 
