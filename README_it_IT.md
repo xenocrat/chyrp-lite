@@ -5,6 +5,10 @@
 Chyrp Lite rende possibile ospitare un blog sul tuo server con il minimo fastidio. Puoi avere
 un blog tradizionale, tumbleblog, o puoi aggiungere una miriade di caratterizzazioni personali
 e costruire una piattaforma web adatta alla pubblicazione con in più le catteristiche di un blog.
+Puoi avere quattro differenti tipi di temi e una console facile da amministrare, tutto facilmente
+navigabile su una vasta gamma di dispositivi grazie al Responsive HTML5. Semantic Markup e un
+comprensivo modo di etichettatura tramite ARIA rende il tuo blog accessibile agli utenti che usano
+tecnologie assistive.
 
 Con un sistem flessibile di Feathers e pagine puoi rendere il tuo website come più desideri.
 Le Feathers abilitano differenti tipi di contenuti blog - puoi limitarti al solo testo, o puoi
@@ -12,11 +16,6 @@ ricreare un'intero universo multimediale. Le pagine ti consentono di pubblicare 
 dal contenuto del tuo blog - si tratti di un semplice citazione o di una gerarchia di più pagine,
 con in più la possibilità di includere una homepage che i tuoi utenti potranno vedere non appena
 giunti sul tuo sito.
-
-Puoi avere quattro differenti tipi di temi e una console facile da amministrare, tutto facilmente
-navigabile su una vasta gamma di dispositivi grazie al Responsive HTML5. Semantic Markup e un
-comprensivo modo di etichettatura tramite ARIA rende il tuo blog accessibile agli utenti che usano
-tecnologie assistive.
 
 ## Quali sono le caratteristiche fondamentali?
 
