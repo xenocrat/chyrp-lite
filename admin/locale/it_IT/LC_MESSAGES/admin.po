@@ -781,19 +781,19 @@ msgid "edit"
 msgstr "modifica"
 
 #: admin/pages/manage_groups.twig:54 admin/pages/manage_pages.twig:60
-#: admin/pages/manage_posts.twig:48 admin/pages/manage_uploads.twig:46
+#: admin/pages/manage_posts.twig:48 admin/pages/manage_uploads.twig:52
 #: admin/pages/manage_users.twig:64
 msgid "delete"
 msgstr "elimina"
 
 #: admin/pages/manage_groups.twig:61 admin/pages/manage_pages.twig:67
-#: admin/pages/manage_posts.twig:55 admin/pages/manage_uploads.twig:53
+#: admin/pages/manage_posts.twig:55 admin/pages/manage_uploads.twig:59
 #: admin/pages/manage_users.twig:71
 msgid "No results"
 msgstr "Nessun risultato"
 
 #: admin/pages/manage_groups.twig:69 admin/pages/manage_pages.twig:75
-#: admin/pages/manage_posts.twig:63 admin/pages/manage_uploads.twig:61
+#: admin/pages/manage_posts.twig:63 admin/pages/manage_uploads.twig:67
 #: admin/pages/manage_users.twig:79
 #, php-format
 msgid "Page %d of %s"
@@ -866,7 +866,7 @@ msgstr "Ultima modifica"
 msgid "Size"
 msgstr "Dimensione"
 
-#: admin/pages/manage_uploads.twig:43
+#: admin/pages/manage_uploads.twig:49
 msgid "download"
 msgstr "scaricare"
 

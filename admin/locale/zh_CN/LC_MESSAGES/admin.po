@@ -755,19 +755,19 @@ msgid "edit"
 msgstr "编辑"
 
 #: admin/pages/manage_groups.twig:54 admin/pages/manage_pages.twig:60
-#: admin/pages/manage_posts.twig:48 admin/pages/manage_uploads.twig:46
+#: admin/pages/manage_posts.twig:48 admin/pages/manage_uploads.twig:52
 #: admin/pages/manage_users.twig:64
 msgid "delete"
 msgstr "删除"
 
 #: admin/pages/manage_groups.twig:61 admin/pages/manage_pages.twig:67
-#: admin/pages/manage_posts.twig:55 admin/pages/manage_uploads.twig:53
+#: admin/pages/manage_posts.twig:55 admin/pages/manage_uploads.twig:59
 #: admin/pages/manage_users.twig:71
 msgid "No results"
 msgstr "没有结果"
 
 #: admin/pages/manage_groups.twig:69 admin/pages/manage_pages.twig:75
-#: admin/pages/manage_posts.twig:63 admin/pages/manage_uploads.twig:61
+#: admin/pages/manage_posts.twig:63 admin/pages/manage_uploads.twig:67
 #: admin/pages/manage_users.twig:79
 #, php-format
 msgid "Page %d of %s"
@@ -840,7 +840,7 @@ msgstr "上一次更改"
 msgid "Size"
 msgstr "大小"
 
-#: admin/pages/manage_uploads.twig:43
+#: admin/pages/manage_uploads.twig:49
 msgid "download"
 msgstr "下载"
 
