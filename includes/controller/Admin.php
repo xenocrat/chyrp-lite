@@ -2173,27 +2173,22 @@
 
                 $users_json = array();
 
-                $exclude = array(
-                    "no_results",
+                $include = array(
+                    "password",
+                    "full_name",
+                    "email",
+                    "website",
                     "group_id",
-                    "group",
-                    "id",
-                    "login",
-                    "belongs_to",
-                    "has_many",
-                    "has_one",
-                    "queryString"
+                    "approved",
+                    "joined_at"
                 );
 
                 foreach ($users as $user) {
                     $users_json[$user->login] = array();
+                    $users_json[$user->login]["group"] = $user->group->name;
 
-                    foreach ($user as $name => $attr) {
-                        if (!in_array($name, $exclude))
-                            $users_json[$user->login][$name] = $attr;
-                        elseif ($name == "group_id")
-                            $users_json[$user->login]["group"] = $user->group->name;
-                    }
+                    foreach ($include as $attr)
+                        $users_json[$user->login][$attr] = $user->$attr;
                 }
 
                 $exports["users.json"] = json_set(
