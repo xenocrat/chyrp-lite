@@ -499,7 +499,7 @@
             }
             pre {
                 font-family: "Cousine webfont", monospace;
-                font-size: 0.8rem;
+                font-size: 0.85em;
                 background-color: #efefef;
                 margin: 1rem 0rem;
                 padding: 1rem;
@@ -507,12 +507,14 @@
             }
             code {
                 font-family: "Cousine webfont", monospace;
-                font-size: 0.8rem;
+                font-size: 0.85em;
                 background-color: #efefef;
                 padding: 0px 2px;
                 border: 1px solid #cfcfcf;
+                vertical-align: text-bottom;
             }
             pre > code {
+                font-size: 0.85rem;
                 border: none;
                 padding: 0px;
             }
