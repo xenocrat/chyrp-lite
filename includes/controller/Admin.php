@@ -2178,7 +2178,6 @@
                     "full_name",
                     "email",
                     "website",
-                    "group_id",
                     "approved",
                     "joined_at"
                 );
