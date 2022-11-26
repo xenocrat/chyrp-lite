@@ -254,7 +254,7 @@ Called from:
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2338
+	includes/controller/Admin.php on line 2337
 
 Arguments:
 	$group
@@ -263,7 +263,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2372
+	includes/controller/Admin.php on line 2371
 
 Arguments:
 	$user
@@ -272,7 +272,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2417
+	includes/controller/Admin.php on line 2416
 
 Arguments:
 	$entry, $post
@@ -281,7 +281,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2453
+	includes/controller/Admin.php on line 2452
 
 Arguments:
 	$entry, $page
@@ -290,7 +290,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 2457
+	includes/controller/Admin.php on line 2456
 
 Arguments:
 	$imports
@@ -299,13 +299,13 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 2823
+	includes/controller/Admin.php on line 2822
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 2838
+	includes/controller/Admin.php on line 2837
 
 
 can_not_view_page
@@ -950,7 +950,7 @@ Arguments:
 export
 ------
 Called from:
-	includes/controller/Admin.php on line 2210
+	includes/controller/Admin.php on line 2209
 
 Target:
 	$exports
@@ -959,7 +959,7 @@ Target:
 before_import
 -------------
 Called from:
-	includes/controller/Admin.php on line 2316
+	includes/controller/Admin.php on line 2315
 
 Target:
 	$imports
@@ -968,7 +968,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 3237
+	includes/controller/Admin.php on line 3236
 
 Target:
 	$write
@@ -977,7 +977,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3295
+	includes/controller/Admin.php on line 3294
 
 Target:
 	$manage
@@ -986,7 +986,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 3323
+	includes/controller/Admin.php on line 3322
 
 Target:
 	$settings
@@ -995,7 +995,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3344
+	includes/controller/Admin.php on line 3343
 
 Target:
 	$extend
@@ -1004,7 +1004,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 3408
+	includes/controller/Admin.php on line 3407
 
 Target:
 	$this->context
