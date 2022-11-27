@@ -285,22 +285,26 @@
                 margin-bottom: 0rem;
             }
             pre {
-              font-family: "Cousine webfont", monospace;
-              font-size: 0.8rem;
-              background-color: #efefef;
-              margin: 1rem 0rem;
-              padding: 1rem;
-              overflow-x: auto;
+                font-family: "Cousine webfont", monospace;
+                font-size: 0.9em;
+                background-color: #efefef;
+                margin: 1rem 0rem;
+                padding: 1rem;
+                overflow-x: auto;
             }
             code {
-              font-family: "Cousine webfont", monospace;
-              font-size: 0.8rem;
-              background-color: #efefef;
-              padding: 0px 2px;
-              border: 1px solid #cfcfcf;
+                font-family: "Cousine webfont", monospace;
+                font-size: 0.9em;
+                background-color: #efefef;
+                padding: 0px 2px;
+                border: 1px solid #cfcfcf;
+                vertical-align: bottom;
             }
             pre > code {
-              border: none;
+                font-size: 0.9rem;
+                display: block;
+                border: none;
+                padding: 0px;
             }
             strong {
                 font-weight: normal;
