@@ -127,7 +127,7 @@
          * Function: rights
          * Not implemented in RSS 2.0.11.
          */
-        public function rights($text) {
+        public function rights($text): void {
             return;
         }
 
