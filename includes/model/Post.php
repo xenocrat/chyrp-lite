@@ -308,8 +308,8 @@
                 $post->status == self::STATUS_PUBLIC and
                 feather_enabled($post->feather)
             ) {
-                send_pingbacks($post->feed_content(), $post);
                 webmention_send($post->feed_content(), $post);
+                send_pingbacks($post->feed_content(), $post);
             }
 
             $trigger->call("add_post", $post, $options);
@@ -434,8 +434,8 @@
                 $post->status == self::STATUS_PUBLIC and
                 feather_enabled($post->feather)
             ) {
-                send_pingbacks($post->feed_content(), $post);
                 webmention_send($post->feed_content(), $post);
+                send_pingbacks($post->feed_content(), $post);
             }
 
             if (
