@@ -861,7 +861,7 @@ article.archive img {
         width: 100%;
         height: auto;
         padding: 0em;
-        background-color: #fcfbfa;
+        background-color: #ffffff;
         border-right: none;
         border-bottom: none;
         border-left: none;
@@ -881,9 +881,7 @@ article.archive img {
         border-bottom: 1px solid #d2d9d4;
     }
     ul#nav.mobile_nav.on li#mobile_toggle {
-        height: 0em;
-        border-bottom: none;
-        transition: height 125ms ease 0s;
+        background-color: #fcfbfa;
     }
     div#mast {
         display: block;

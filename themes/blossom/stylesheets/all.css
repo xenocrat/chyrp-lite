@@ -861,9 +861,7 @@ article.archive img {
         border-bottom: 1px solid #d2d9d4;
     }
     ul#nav.mobile_nav.on li#mobile_toggle {
-        height: 0em;
-        border-bottom: none;
-        transition: height 125ms ease 0s;
+        background-color: #f7f5ed;
     }
     div#mast {
         display: block;
