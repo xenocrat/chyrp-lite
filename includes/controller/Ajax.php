@@ -4,6 +4,14 @@
      * The logic controlling AJAX requests.
      */
     class AjaxController implements Controller {
+        # Array: $urls
+        # An array of clean URL => dirty URL translations.
+        public $urls = array();
+
+        # Boolean: $displayed
+        # Has anything been displayed?
+        public $displayed = false;
+
         # Boolean: $clean
         # Does this controller support clean URLs?
         public $clean = false;
