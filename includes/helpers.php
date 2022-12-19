@@ -1705,29 +1705,6 @@
     }
 
     /**
-     * Function: grab_urls
-     * Crawls a string and grabs hyperlinks from it.
-     *
-     * Parameters:
-     *     $string - The string to crawl.
-     *
-     * Returns:
-     *     An array of all URLs found in the string.
-     */
-    function grab_urls($string): array {
-        $urls = array();
-        $regx = "/<a(?= )[^>]* href=(\"[^\"]+\"|\'[^\']+\')[^>]*>[^<]+<\/a>/i";
-
-        if (preg_match_all($regx, $string, $matches))
-            $urls = $matches[1];
-
-        foreach ($urls as &$url)
-            $url = trim($url, " \"'");
-
-        return array_filter(array_unique($urls), "is_url");
-    }
-
-    /**
      * Function: webmention_send
      * Sends Webmentions to the URLs discovered in a string.
      *
@@ -2009,6 +1986,29 @@
     }
 
     /**
+     * Function: grab_urls
+     * Crawls a string and grabs hyperlinks from it.
+     *
+     * Parameters:
+     *     $string - The string to crawl.
+     *
+     * Returns:
+     *     An array of all URLs found in the string.
+     */
+    function grab_urls($string): array {
+        $urls = array();
+        $regx = "/<a(?= )[^>]* href=(\"[^\"]+\"|\'[^\']+\')[^>]*>[^<]+<\/a>/i";
+
+        if (preg_match_all($regx, $string, $matches))
+            $urls = $matches[1];
+
+        foreach ($urls as &$url)
+            $url = trim($url, " \"'");
+
+        return array_filter(array_unique($urls), "is_url");
+    }
+
+    /**
      * Function: merge_urls
      * Combines a base URL and relative path into a target URL.
      *
@@ -2049,112 +2049,6 @@
         return $scheme."://".$host.(isset($port) ? ":".$port : "").$path;
     }
 
-    /**
-     * Function: send_pingbacks
-     * Sends pingback requests to the URLs in a string.
-     *
-     * Parameters:
-     *     $string - The string to crawl for pingback URLs.
-     *     $post - The post we're sending from.
-     *     $limit - Timer limit for this function (optional).
-     */
-    function send_pingbacks($string, $post, $limit = 30): void {
-        foreach (grab_urls($string) as $url) {
-            if (timer_stop() > $limit)
-                break;
-
-            $ping_url = pingback_url(unfix($url, true));
-
-            if ($ping_url !== false and is_url($ping_url)) {
-                $client = new IXR_Client(add_scheme($ping_url));
-
-                if ($client->transport == "tls" and !extension_loaded("openssl"))
-                    continue;
-
-                $client->timeout = 3;
-                $client->useragent = CHYRP_IDENTITY;
-                $client->query("pingback.ping", unfix($post->url()), $url);
-            }
-        }
-    }
-
-    /**
-     * Function: pingback_url
-     * Checks if a URL is pingback-capable.
-     *
-     * Parameters:
-     *     $url - The URL to check.
-     *
-     * Returns:
-     *     The pingback target, or false on failure.
-     */
-    function pingback_url($url): string|false {
-        extract(parse_url(add_scheme($url)), EXTR_SKIP);
-        fallback($path, "/");
-        fallback($scheme, "http");
-        fallback($port, ($scheme == "https") ? 443 : 80);
-
-        if (isset($query))
-            $path.= "?".$query;
-
-        if (!isset($host))
-            return false;
-
-        if ($scheme == "https" and !extension_loaded("openssl"))
-            return false;
-
-        $prefix  = ($scheme == "https") ? "tls://" : "tcp://" ;
-        $connect = @fsockopen($prefix.$host, $port, $errno, $errstr, 3);
-
-        if (!$connect) {
-            trigger_error(
-                _f("Socket error: %s", fix($errstr, false, true)),
-                E_USER_NOTICE
-            );
-            return false;
-        }
-
-        $remote_headers = "";
-        $remote_content = "";
-
-        # Send the GET headers.
-        fwrite(
-            $connect,
-            "GET ".$path." HTTP/1.0\r\n".
-            "Host: ".$host."\r\n".
-            "Connection: close"."\r\n".
-            "User-Agent: ".CHYRP_IDENTITY."\r\n\r\n"
-        );
-
-        # Check for X-Pingback header.
-        while (!feof($connect) and strpos($remote_headers, "\r\n\r\n") === false) {
-            $line = fgets($connect);
-            $remote_headers.= $line;
-
-            if (preg_match("/^X-Pingback: (.+)/i", $line, $header)) {
-                fclose($connect);
-                return trim($header[1]);
-            }
-        }
-
-        # Check <link> elements if the content can be parsed.
-        if (preg_match("~^Content-Type: text/(html|sgml|xml|plain)~im", $remote_headers)) {
-            while (!feof($connect) and strlen($remote_content) < 2048) {
-                $line = fgets($connect);
-                $remote_content.= $line;
-
-                if (preg_match("/<link[^>]* href=(\"[^\"]+\"|\'[^\']+\')[^>]*>/i", $line, $link))
-                    if (preg_match("/ rel=(\"pingback\"|\'pingback\')/i", $link[0])) {
-                        fclose($connect);
-                        return unfix(trim($link[1], "\"'"));
-                    }
-            }
-        }
-
-        fclose($connect);
-        return false;
-    }
-
     #---------------------------------------------
     # Extensions
     #---------------------------------------------
@@ -2171,7 +2065,7 @@
             $info = array();
 
         fallback($info["name"],          fix(basename(dirname($filepath))));
-        fallback($info["version"],       0);
+        fallback($info["version"],       "");
         fallback($info["url"],           "");
         fallback($info["description"],   "");
         fallback($info["author"],        array("name" => "", "url" => ""));
