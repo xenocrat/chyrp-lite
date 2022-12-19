@@ -68,7 +68,7 @@
             }
 
             # Construct SQL query "chunks" for enabled feathers and user privileges.
-            if (!XML_RPC and !$skip_where) {
+            if (!$skip_where) {
                 $options["where"][] = self::feathers();
 
                 if (!$has_status) {
@@ -165,7 +165,7 @@
             }
 
             # Construct SQL query "chunks" for enabled feathers and user privileges.
-            if (!XML_RPC and !$skip_where) {
+            if (!$skip_where) {
                 $options["where"][] = self::feathers();
 
                 if (!$has_status) {
@@ -307,10 +307,8 @@
                 $pingbacks and
                 $post->status == self::STATUS_PUBLIC and
                 feather_enabled($post->feather)
-            ) {
+            )
                 webmention_send($post->feed_content(), $post);
-                send_pingbacks($post->feed_content(), $post);
-            }
 
             $trigger->call("add_post", $post, $options);
             return $post;
@@ -433,10 +431,8 @@
                 $pingbacks and
                 $post->status == self::STATUS_PUBLIC and
                 feather_enabled($post->feather)
-            ) {
+            )
                 webmention_send($post->feed_content(), $post);
-                send_pingbacks($post->feed_content(), $post);
-            }
 
             if (
                 $this->status == self::STATUS_SCHEDULED and
