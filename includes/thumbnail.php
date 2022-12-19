@@ -1,7 +1,7 @@
 <?php
     /**
      * File: thumbnail
-     * Generates compressed image thumbnails for uploaded files.
+     * Serves compressed image thumbnails for uploaded files.
      */
 
     define('USE_ZLIB', false);
@@ -10,13 +10,6 @@
 
     if (shorthand_bytes(ini_get("memory_limit")) < 50331648)
         ini_set("memory_limit", "48M");
-
-    if (isset($_SERVER['REQUEST_METHOD']) and $_SERVER['REQUEST_METHOD'] !== "GET")
-        error(
-            __("Error"),
-            __("This resource accepts GET requests only."),
-            code:405
-        );
 
     if (empty($_GET['file']))
         error(
@@ -43,14 +36,21 @@
             __("File not found.")
         );
 
-    if ($thumb_w == 0 and $thumb_h == 0)
-        error(
-            __("Error"),
-            __("Maximum size cannot be zero."),
-            code:422
-        );
+    # Halve the quality if reduced data usage is preferred.
+    if (isset($_SERVER['HTTP_SAVE_DATA'])) {
+        if (!preg_match("/^(off|0)$/i", $_SERVER['HTTP_SAVE_DATA']))
+           $quality = floor($quality * 0.5);
+    }
 
-    if (!function_exists("gd_info")) {
+    $thumb = new ThumbnailFile(
+        $filename,
+        $thumb_w,
+        $thumb_h,
+        $quality,
+        !empty($_GET['square'])
+    );
+
+    if (!$thumb->creatable() or $thumb->upscaling()) {
         header($_SERVER['SERVER_PROTOCOL']." 301 Moved Permanently");
         header("Cache-Control: public");
         header("Pragma: no-cache");
@@ -72,203 +72,12 @@
         }
     }
 
-    # Half the quality if reduced data usage is preferred.
-    if (isset($_SERVER['HTTP_SAVE_DATA'])) {
-        if (!preg_match("/^(off|0)$/i", $_SERVER['HTTP_SAVE_DATA']))
-           $quality = ($quality > 0) ? floor($quality / 2) : 0 ;
-    }
-
-    function thumb_creatable($type): bool {
-        if ($type == IMAGETYPE_GIF and (imagetypes() & IMG_GIF))
-            return true;
-
-        if ($type == IMAGETYPE_JPEG and (imagetypes() & IMG_JPEG))
-            return true;
-
-        if ($type == IMAGETYPE_PNG and (imagetypes() & IMG_PNG))
-            return true;
-
-        if ($type == IMAGETYPE_WEBP and (imagetypes() & IMG_WEBP))
-            return true;
-
-        return false;
-    }
-
-    function thumb_resize(&$crop_x, &$crop_y, &$thumb_w, &$thumb_h, &$orig_w, &$orig_h): void {
-        # getimagesize() could not determine the image dimensions.
-        if ($orig_w == 0 or $orig_h == 0) {
-            $orig_w = 1;
-            $orig_h = 1;
-        }
-
-        $scale_x = ($thumb_w > 0) ? $thumb_w / $orig_w : 0 ;
-        $scale_y = ($thumb_h > 0) ? $thumb_h / $orig_h : 0 ;
-
-        if (!empty($_GET['square'])) {
-            if ($thumb_w > $thumb_h)
-                $thumb_h = $thumb_w;
-
-            if ($thumb_h > $thumb_w)
-                $thumb_w = $thumb_h;
-
-            # Portrait orientation.
-            if ($orig_w > $orig_h) {
-                $crop_x = round(($orig_w - $orig_h) / 2);
-                $orig_w = $orig_h;
-            }
-
-            # Landscape orientation.
-            if ($orig_h > $orig_w) {
-                $crop_y = round(($orig_h - $orig_w) / 2);
-                $orig_h = $orig_w;
-            }
-
-            return;
-        }
-
-        if ($thumb_h == 0) {
-            $thumb_h = round(($thumb_w / $orig_w) * $orig_h);
-            return;
-        }
-
-        if ($thumb_w == 0) {
-            $thumb_w = round(($thumb_h / $orig_h) * $orig_w);
-            return;
-        }
-
-        # Recompute to retain aspect ratio and stay within bounds.
-        if ($scale_x != $scale_y) {
-            if ($orig_w * $scale_y <= $thumb_w) {
-                $thumb_w = round($orig_w * $scale_y);
-                return;
-            }
-
-            if ($orig_h * $scale_x <= $thumb_h) {
-                $thumb_h = round($orig_h * $scale_x);
-                return;
-            }
-        }
-    }
-
-    function thumb_serve($filepath)/*: never */{
-        if (DEBUG)
-            error_log("IMAGE served ".$filepath);
-
-        readfile($filepath);
-        ob_end_flush();
-        exit;
-    }
-
-    # Fetch original image metadata (does not require GD library).
-    list($orig_w, $orig_h, $type, $attr) = getimagesize($filepath);
-
-    $crop_x = 0;
-    $crop_y = 0;
-    $quality = ($quality > 100) ? 100 : $quality ;
-
-    # Call our function to determine the final scale of the thumbnail.
-    thumb_resize($crop_x, $crop_y, $thumb_w, $thumb_h, $orig_w, $orig_h);
-
-    $cache_fn = md5($filename.$thumb_w.$thumb_h.$quality).image_type_to_extension($type);
-    $cache_fp = CACHES_DIR.DIR."thumbs".DIR.$cache_fn;
-    $cache_ok = (file_exists($cache_fp) and filemtime($cache_fp) >= filemtime($filepath));
-
+    $safename = addslashes($thumb->name());
     header("Last-Modified: ".date("r", filemtime($filepath)));
-    header("Content-Type: ".image_type_to_mime_type($type));
     header("Cache-Control: public");
     header("Pragma: no-cache");
     header("Expires: ".date("r", now("+30 days")));
-    header("Content-Disposition: inline; filename=\"".addslashes($cache_fn)."\"");
-
-    # Serve the original file if the size is already smaller than requested.
-    if ($orig_w <= $thumb_w and $orig_h <= $thumb_h and empty($_GET['square']))
-        thumb_serve($filepath);
-
-    # Serve the original file if GD support is unavailable or type is not handled.
-    if (!thumb_creatable($type))
-        thumb_serve($filepath);
-
-    # (Re)create a thumbnail if the file is missing or stale.
-    if (!$cache_ok) {
-        switch ($type) {
-            case IMAGETYPE_GIF:
-                $original = imagecreatefromgif($filepath);
-                $function = "imagegif";
-                break;
-            case IMAGETYPE_JPEG:
-                $original = imagecreatefromjpeg($filepath);
-                $function = "imagejpeg";
-                break;
-            case IMAGETYPE_PNG:
-                $original = imagecreatefrompng($filepath);
-                $function = "imagepng";
-                break;
-            case IMAGETYPE_WEBP:
-                $original = imagecreatefromwebp($filepath);
-                $function = "imagewebp";
-                break;
-        }
-
-        if ($original === false)
-            error(
-                __("Error"),
-                __("Failed to create image thumbnail.")
-            );
-
-        # Create the thumbnail image resource.
-        $thumb = imagecreatetruecolor($thumb_w, $thumb_h);
-
-        switch ($function) {
-            case "imagejpeg":
-                imageinterlace($thumb, true);
-                break;
-            case "imagepng":
-                imagealphablending($thumb, false);
-                imagesavealpha($thumb, true);
-                $quality = 10 - (($quality > 0) ? ceil($quality / 10) : 1);
-                break;
-            case "imagewebp":
-                imagealphablending($thumb, false);
-                imagesavealpha($thumb, true);
-                break;
-        }
-
-        # Do the crop and resize.
-        imagecopyresampled(
-            $thumb,
-            $original,
-            0,
-            0,
-            $crop_x,
-            $crop_y,
-            $thumb_w,
-            $thumb_h,
-            $orig_w,
-            $orig_h
-        );
-
-        # Create the thumbnail file.
-        switch ($function) {
-            case "imagegif":
-                $result = $function($thumb, $cache_fp);
-                break;
-            default:
-                $result = $function($thumb, $cache_fp, $quality);
-        }
-
-        if ($result === false)
-            error(
-                __("Error"),
-                __("Failed to create image thumbnail.")
-            );
-
-        # Destroy resources.
-        imagedestroy($original);
-        imagedestroy($thumb);
-
-        if (DEBUG)
-            error_log("IMAGE created ".$cache_fp);
-    }
-
-    # Serve a fresh thumbnail file.
-    thumb_serve($cache_fp);
+    header("Content-Disposition: inline; filename=\"".$safename."\"");
+    $thumb->create();
+    $thumb->serve();
+    ob_end_flush();
