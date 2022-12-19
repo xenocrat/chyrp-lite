@@ -1141,42 +1141,6 @@
             return $values;
         }
 
-        public function pingback($post, $to, $from, $title, $excerpt): string|IXR_Error {
-            $count = SQL::current()->count(
-                tables:"comments",
-                conds:array(
-                    "post_id" => $post->id,
-                    "status" => Comment::STATUS_PINGBACK,
-                    "author_url" => $from
-                )
-            );
-
-            if (!empty($count))
-                return new IXR_Error(
-                    48,
-                    __("A ping from your URL is already registered.", "comments")
-                );
-
-            if (strlen($from) > 2048)
-                return new IXR_Error(
-                    0,
-                    __("Your URL is too long to be stored in our database.", "comments")
-                );
-
-            Comment::create(
-                body:$excerpt,
-                author:$title,
-                author_url:$from,
-                author_email:"",
-                post:$post,
-                parent:0,
-                notify:0,
-                status:Comment::STATUS_PINGBACK
-            );
-
-            return __("Pingback registered!", "comments");
-        }
-
         public function webmention($post, $from, $to): void {
             $count = SQL::current()->count(
                 tables:"comments",

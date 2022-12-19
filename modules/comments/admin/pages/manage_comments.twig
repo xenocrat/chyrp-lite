@@ -41,7 +41,11 @@
 {{ comment.created_at | time }}
 </td>
 <td class="comment_status status">
+{% if comment.status == "pingback" %}
+{{ "Webmention" | translate("comments") }}
+{% else %}
 {{ comment.status | capitalize | translate("comments") }}
+{% endif %}
 </td>
 {{ trigger.call("manage_comments_column", comment) }}
 <td class="controls">
