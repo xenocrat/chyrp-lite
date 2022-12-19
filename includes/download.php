@@ -8,13 +8,6 @@
 
     require_once "common.php";
 
-    if (isset($_SERVER['REQUEST_METHOD']) and $_SERVER['REQUEST_METHOD'] !== "GET")
-        error(
-            __("Error"),
-            __("This resource accepts GET requests only."),
-            code:405
-        );
-
     if (empty($_GET['file']))
         error(
             __("Error"),
@@ -40,11 +33,15 @@
     if (DEBUG)
         error_log("DOWNLOAD served ".$filename);
 
-    if (!in_array("ob_gzhandler", ob_list_handlers()) and !ini_get("zlib.output_compression"))
+    if (
+        !in_array("ob_gzhandler", ob_list_handlers()) and 
+        !ini_get("zlib.output_compression")
+    )
         header("Content-Length: ".filesize($filepath));
 
+    $safename = addslashes($filename);
     header("Last-Modified: ".date("r", filemtime($filepath)));
     header("Content-Type: application/octet-stream");
-    header("Content-Disposition: attachment; filename=\"".addslashes($filename)."\"");
+    header("Content-Disposition: attachment; filename=\"".$safename."\"");
     readfile($filepath);
     flush();
