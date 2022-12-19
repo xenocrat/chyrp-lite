@@ -6,7 +6,7 @@
     class Model {
         # Array: $caches
         # Caches every loaded model into a clone of the object.
-        static $caches = array();
+        private static $caches = array();
 
         # Array: $data
         # Stores dynamic attributes for the loaded model.
@@ -31,11 +31,6 @@
         # The models should have a [thismodel]_id column.
         public $has_one = array();
 
-
-        # Boolean: __placeholders
-        # Used internally by the method __getPlaceholders().
-        private $__placeholders = false;
-
         /**
          * Function: __get
          * Handles model relationships, deferred and dynamic attributes.
@@ -44,10 +39,8 @@
          *     @mixed@
          */
         public function &__get($name): mixed {
-            $model_name = strtolower(get_class($this));
-            $placeholders = $this->__placeholders;
-
             $trigger = Trigger::current();
+            $model_name = strtolower(get_class($this));
 
             if (isset($this->data[$name]))
                 return $this->data[$name];
@@ -70,10 +63,11 @@
                     $match = isset($opts["by"]) ? $opts["by"] : strtolower($name) ;
                     fallback($opts["where"], array("id" => $this->data[$match."_id"]));
                     $opts["where"] = (array) $opts["where"];
-                    fallback($opts["placeholders"], $placeholders);
                 } else {
                     $model = $name;
-                    $opts = array("where" => array("id" => $this->data[$name."_id"]));
+                    $opts = array(
+                        "where" => array("id" => $this->data[$name."_id"])
+                    );
                 }
 
                 $this->data[$name] = new $model(null, $opts);
@@ -86,13 +80,11 @@
                     $match = isset($opts["by"]) ? $opts["by"] : strtolower($name) ;
                     fallback($opts["where"], array($match."_id" => $this->data["id"]));
                     $opts["where"] = (array) $opts["where"];
-                    fallback($opts["placeholders"], $placeholders);
                 } else {
                     $model = depluralize($name);
                     $match = ($model_name == "visitor") ? "user" : $model_name ;
                     $opts = array(
-                        "where" => array($match."_id" => $this->data["id"]),
-                        "placeholders" => $placeholders
+                        "where" => array($match."_id" => $this->data["id"])
                     );
                 }
 
@@ -155,26 +147,6 @@
                 return true;
 
             return false;
-        }
-
-        /**
-         * Function: __getPlaceholders
-         * Calls __get with the requested $name, but grabs everything as placeholders.
-         *
-         * Parameters:
-         *     $name - Name to call <Model.__get> with.
-         *
-         * Returns:
-         *     @mixed@
-         *
-         * See Also:
-         *     <Model.__get>
-         */
-        public function __getPlaceholders($name): mixed {
-            $this->__placeholders = true;
-            $return = $this->__get($name);
-            $this->__placeholders = false;
-            return $return;
         }
 
         /**
