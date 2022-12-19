@@ -2,8 +2,8 @@
 return array(
     "name"          => __("Comments", "comments"),
     "url"           => "http://chyrplite.net/",
-    "version"       => 1.8,
-    "description"   => __("Adds commenting functionality to your posts, with pingback support.", "comments"),
+    "version"       => "2023.01",
+    "description"   => __("Adds commenting functionality to your posts, with webmention support.", "comments"),
     "author"        => array(
         "name"      => "Chyrp Team",
         "url"       => "http://chyrp.net/"),

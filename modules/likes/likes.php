@@ -129,7 +129,7 @@
                     code:400
                 );
 
-            if (!Visitor::current()->group->can("like_post"))
+            if (BOT_UA or !Visitor::current()->group->can("like_post"))
                 show_403(
                     __("Access Denied"),
                     __("You do not have sufficient privileges to like posts.", "likes")
@@ -158,7 +158,7 @@
                     code:400
                 );
 
-            if (!Visitor::current()->group->can("unlike_post"))
+            if (BOT_UA or !Visitor::current()->group->can("unlike_post"))
                 show_403(
                     __("Access Denied"),
                     __("You do not have sufficient privileges to unlike posts.", "likes")
@@ -188,7 +188,7 @@
                 );
 
             # JavaScript can't know if this is allowed, so don't throw an error here.
-            if (!Visitor::current()->group->can("like_post")) {
+            if (BOT_UA or !Visitor::current()->group->can("like_post")) {
                 json_response(
                     __("You do not have sufficient privileges to like posts.", "likes"),
                     false
@@ -226,7 +226,7 @@
                 );
 
             # JavaScript can't know if this is allowed, so don't throw an error here.
-            if (!Visitor::current()->group->can("unlike_post")) {
+            if (BOT_UA or !Visitor::current()->group->can("unlike_post")) {
                 json_response(
                     __("You do not have sufficient privileges to unlike posts.", "likes"),
                     false

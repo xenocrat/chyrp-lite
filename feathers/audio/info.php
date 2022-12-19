@@ -2,7 +2,7 @@
 return array(
     "name"          => __("Audio", "audio"),
     "url"           => "http://chyrplite.net/",
-    "version"       => 1.3,
+    "version"       => "2023.01",
     "description"   => __("A feather for audio.", "audio"),
     "author"        => array(
         "name"      => "Daniel Pimley",

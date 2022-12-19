@@ -2,7 +2,7 @@
 return array(
     "name"          => __("Lightbox", "lightbox"),
     "url"           => "http://chyrplite.net/",
-    "version"       => 1.2,
+    "version"       => "2023.01",
     "description"   => __("A lightbox for your images.", "lightbox"),
     "author"        => array(
         "name"      => "Daniel Pimley",

@@ -2,7 +2,7 @@
 return array(
     "name"          => __("Post Views", "post_views"),
     "url"           => "http://chyrplite.net/",
-    "version"       => 1.1,
+    "version"       => "2023.01",
     "description"   => __("Counts the number of times your posts have been viewed.", "post_views"),
     "author"        => array(
         "name"      => "Daniel Pimley",
