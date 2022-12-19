@@ -140,7 +140,8 @@
         }
 
         # Report in plain text if desirable or necessary because of a deep error.
-        if (XML_RPC or AJAX or
+        if (
+            AJAX or
             !function_exists("__") or
             !function_exists("_f") or
             !function_exists("fallback") or
@@ -151,10 +152,9 @@
             !class_exists("Config") or
             !method_exists("Config", "current") or
             !isset(Config::current()->locale) or
-            !isset(Config::current()->chyrp_url)) {
-
+            !isset(Config::current()->chyrp_url)
+        )
             exit("ERROR: ".strip_tags($body));
-        }
 
         # We need this for the pretty error page.
         $chyrp_url = fix(Config::current()->chyrp_url, true);
@@ -170,7 +170,9 @@
                 unset($backtrace[$index]);
             else
                 $trace["file"] = fix(
-                    str_replace(MAIN_DIR.DIR, "", $trace["file"]), false, true
+                    str_replace(MAIN_DIR.DIR, "", $trace["file"]),
+                    false,
+                    true
                 );
         }
 
@@ -238,7 +240,7 @@
                 background-color: #ff7f00;
             }
             html {
-                font-size: 14px;
+                font-size: 16px;
             }
             html, body, ul, ol, li,
             h1, h2, h3, h4, h5, h6,

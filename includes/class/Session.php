@@ -26,12 +26,7 @@
          */
         public function open($path, $name): bool {
             $this->created_at = datetime();
-
-            if (SESSION_DENY_BOT and BOT_UA)
-                    $this->deny = true;
-
-            if (SESSION_DENY_RPC and XML_RPC)
-                $this->deny = true;
+            $this->deny = (SESSION_DENY_BOT and BOT_UA);
 
             return true;
         }

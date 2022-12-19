@@ -48,7 +48,7 @@
                 ++$this->sql->queries;
 
             $this->params = $params;
-            $this->throw_exceptions = (XML_RPC) ? true : $throw_exceptions ;
+            $this->throw_exceptions = $throw_exceptions;
             $this->queryString = $query;
 
             if ($count and DEBUG) {

@@ -35,11 +35,6 @@
     if (!defined('AJAX'))
         define('AJAX', false);
 
-    # Constant: XML_RPC
-    # Is this request XML-RPC?
-    if (!defined('XML_RPC'))
-        define('XML_RPC', false);
-
     # Constant: UPGRADING
     # Is the user running the upgrader? (false)
     define('UPGRADING', false);
@@ -98,10 +93,6 @@
     # Constant: SESSION_DENY_BOT
     # Deny session storage to robots?
     define('SESSION_DENY_BOT', true);
-
-    # Constant: SESSION_DENY_RPC
-    # Deny session storage to XML-RPC?
-    define('SESSION_DENY_RPC', true);
 
     # Constant: USE_GETTEXT_SHIM
     # Use a shim for translation support?
@@ -234,6 +225,11 @@
     # See Also:
     #     <Trigger>
     require_once INCLUDES_DIR.DIR."class".DIR."Trigger.php";
+
+    # File: Controllers
+    # See Also:
+    #     <Controllers>
+    require_once INCLUDES_DIR.DIR."class".DIR."Controllers.php";
 
     # File: Modules
     # See Also:
@@ -368,5 +364,4 @@
     header("Content-Type: text/html; charset=UTF-8");
     header("Referrer-Policy: strict-origin-when-cross-origin");
     header("Vary: Accept-Encoding, Cookie, Save-Data");
-    header("X-Pingback: ".$config->chyrp_url."/includes/rpc.php");
     header("Link: <".$config->chyrp_url."/?action=webmention>; rel=\"webmention\"");
