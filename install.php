@@ -270,7 +270,7 @@
                 background-color: #ff7f00;
             }
             html {
-                font-size: 14px;
+                font-size: 16px;
             }
             html, body, ul, ol, li,
             h1, h2, h3, h4, h5, h6,
@@ -329,8 +329,7 @@
             }
             label {
                 display: block;
-                font-weight: bold;
-                line-height: 1.5;
+                font-weight: inherit;
             }
             input, textarea, select {
                 font-family: inherit;
@@ -388,6 +387,17 @@
             input[type="password"].strong:focus {
                 border: 1px solid #108600;
             }
+            /*
+            form:has(#adapter > option[value="sqlite"]:checked) *.not-sqlite {
+                display: none;
+            }
+            form:has(#adapter > option[value="mysql"]:checked) *.not-mysql {
+                display: none;
+            }
+            form:has(#adapter > option[value="pgsql"]:checked) *.not-pgsql {
+                display: none;
+            }
+            */
             form hr {
                 border: none;
                 clear: both;
@@ -491,10 +501,6 @@
                 margin: 0rem auto 0rem auto;
                 border-radius: 2rem;
             }
-            .sub {
-                font-size: 0.8em;
-                font-weight: normal;
-            }
         </style>
         <script src="includes/common.js" type="text/javascript" charset="UTF-8"></script>
         <script type="text/javascript">
@@ -504,24 +510,16 @@
                 var adapter = $("#adapter").val();
 
                 if (adapter == "sqlite") {
-                    $("#database_sub").fadeIn("fast");
-                    $("#host_field, #port_field, #username_field, #password_field, #prefix_field").fadeOut("fast");
-                } else {
-                    $("#database_sub").fadeOut("fast");
-                    $("#host_field, #port_field, #username_field, #password_field, #prefix_field").fadeIn("fast"); 
-                }
-
-                if (adapter == "sqlite") {
-                    $("#db_aside_sqlite").fadeIn("fast");
-                    $("#db_aside_mysql, #db_aside_pgsql").fadeOut("fast");
+                    $(".not-mysql, .not-pgsql").fadeIn("fast");
+                    $(".not-sqlite").fadeOut("fast");
                 } else if (adapter == "mysql") {
-                    $("#db_aside_mysql").fadeIn("fast");
-                    $("#db_aside_sqlite, #db_aside_pgsql").fadeOut("fast");
+                    $(".not-sqlite, .not-pgsql").fadeIn("fast");
+                    $(".not-mysql").fadeOut("fast");
                 } else if (adapter == "pgsql") {
-                    $("#db_aside_pgsql").fadeIn("fast");
-                    $("#db_aside_mysql, #db_aside_sqlite").fadeOut("fast");
+                    $(".not-mysql, .not-sqlite").fadeIn("fast");
+                    $(".not-pgsql").fadeOut("fast");
                 } else {
-                    $("#db_aside_mysql, #db_aside_pgsql, #db_aside_sqlite").fadeOut("fast");
+                    $(".not-sqlite, .not-mysql, .not-sqlite").fadeOut("fast");
                 }
             }
             $(function() {
@@ -904,7 +902,6 @@
                 $config->set("uploads_limit", 10),
                 $config->set("search_pages", false),
                 $config->set("send_pingbacks", false),
-                $config->set("enable_xmlrpc", true),
                 $config->set("enable_emoji", true),
                 $config->set("enable_markdown", true),
                 $config->set("can_register", false),
@@ -957,37 +954,37 @@
                         <?php endif; ?>
                     </select>
                 </p>
-                <p id="host_field">
+                <p id="host_field" class="not-sqlite">
                     <label for="host"><?php echo __("Host"); ?></label>
                     <input type="text" name="host" value="<?php posted("host", (isset($_ENV['DATABASE_SERVER']) ? $_ENV['DATABASE_SERVER'] : "localhost")); ?>" id="host">
                 </p>
-                <p id="port_field">
+                <p id="port_field" class="not-sqlite">
                     <label for="port"><?php echo __("Port"); ?> <span class="sub"><?php echo __("(optional)"); ?></span></label>
                     <input type="text" name="port" value="<?php posted("port"); ?>" id="port">
                 </p>
-                <p id="username_field">
+                <p id="username_field" class="not-sqlite">
                     <label for="username"><?php echo __("Username"); ?></label>
                     <input type="text" name="username" value="<?php posted("username"); ?>" id="username">
                 </p>
-                <p id="password_field">
+                <p id="password_field" class="not-sqlite">
                     <label for="password"><?php echo __("Password"); ?></label>
                     <input type="password" name="password" value="<?php posted("password"); ?>" id="password">
                 </p>
                 <p id="database_field">
                     <label for="database"><?php echo __("Database"); ?>
-                        <span id="database_sub" class="sub">
+                        <span id="database_sub" class="sub not-mysql not-pgsql">
                             <?php echo __("(absolute or relative path)"); ?>
                         </span>
                     </label>
                     <input type="text" name="database" value="<?php posted("database"); ?>" id="database">
                 </p>
-                <aside id="db_aside_pgsql">
+                <aside id="db_aside_pgsql" class="not-sqlite not-mysql">
                     <?php echo __("Make sure your PostgreSQL database uses UTF-8 encoding."); ?>
                 </aside>
-                <aside id="db_aside_mysql">
+                <aside id="db_aside_mysql" class="not-sqlite not-pgsql">
                     <?php echo __("The collation <code>utf8mb4_general_ci</code> is recommended for your MySQL database."); ?>
                 </aside>
-                <aside id="db_aside_sqlite">
+                <aside id="db_aside_sqlite" class="not-mysql not-pgsql">
                     <?php echo __("Be sure to put your SQLite database outside the document root directory, otherwise visitors will be able to download it."); ?>
                 </aside>
                 <p id="prefix_field">
