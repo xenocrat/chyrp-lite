@@ -3,39 +3,30 @@
      * Class: AdminController
      * The logic controlling the administration console.
      */
-    class AdminController implements Controller {
+    class AdminController extends Controllers implements Controller {
         # Array: $urls
         # An array of clean URL => dirty URL translations.
         public $urls = array(
-            '|/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/$|' => '/?action=$1&amp;$2=$3&amp;$4=$5',
-            '|/([^/]+)/([^/]+)/([^/]+)/([^/]+)/$|'         => '/?action=$1&amp;$2=$3&amp;$4',
-            '|/([^/]+)/([^/]+)/([^/]+)/$|'                 => '/?action=$1&amp;$2=$3',
-            '|/([^/]+)/([^/]+)/$|'                         => '/?action=$1&amp;$2'
+            '|/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/$|'
+                => '/?action=$1&amp;$2=$3&amp;$4=$5',
+
+            '|/([^/]+)/([^/]+)/([^/]+)/([^/]+)/$|'
+                => '/?action=$1&amp;$2=$3&amp;$4',
+
+            '|/([^/]+)/([^/]+)/([^/]+)/$|'
+                => '/?action=$1&amp;$2=$3',
+
+            '|/([^/]+)/([^/]+)/$|'
+                => '/?action=$1&amp;$2'
         );
-
-        # Boolean: $displayed
-        # Has anything been displayed?
-        public $displayed = false;
-
-        # Array: $context
-        # Contains the context for various admin pages, to be passed to the Twig templates.
-        public $context = array();
-
-        # Boolean: $clean
-        # Does this controller support clean URLs?
-        public $clean = true;
-
-        # Boolean: $feed
-        # Is the current page a feed?
-        public $feed = false;
-
-        # Integer: $post_limit
-        # Item limit for pagination.
-        public $post_limit = 10;
 
         # String: $base
         # The base path for this controller.
         public $base = "admin";
+
+        # Boolean: $feed
+        # Serve a syndication feed?
+        public $feed = false;
 
         # Variable: $twig
         # Environment for the Twig template engine.
@@ -3000,7 +2991,6 @@
             $config->set("uploads_limit", (int) $_POST['uploads_limit']);
             $config->set("search_pages", !empty($_POST['search_pages']));
             $config->set("send_pingbacks", !empty($_POST['send_pingbacks']));
-            $config->set("enable_xmlrpc", !empty($_POST['enable_xmlrpc']));
             $config->set("enable_emoji", !empty($_POST['enable_emoji']));
             $config->set("enable_markdown", !empty($_POST['enable_markdown']));
 

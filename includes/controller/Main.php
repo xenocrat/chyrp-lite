@@ -3,39 +3,34 @@
      * Class: MainController
      * The logic controlling the blog.
      */
-    class MainController implements Controller {
+    class MainController extends Controllers implements Controller {
         # Array: $urls
         # An array of clean URL => dirty URL translations.
         public $urls = array(
-            '|/id/post/([0-9]+)/|'                         => '/?action=id&amp;post=$1',
-            '|/id/page/([0-9]+)/|'                         => '/?action=id&amp;page=$1',
-            '|/random/([^/]+)/|'                           => '/?action=random&amp;feather=$1',
-            '|/search/([^/]+)/|'                           => '/?action=search&amp;query=$1',
-            '|/archive/([0-9]{4})/([0-9]{2})/([0-9]{2})/|' => '/?action=archive&amp;year=$1&amp;month=$2&amp;day=$3',
-            '|/archive/([0-9]{4})/([0-9]{2})/|'            => '/?action=archive&amp;year=$1&amp;month=$2',
-            '|/archive/([0-9]{4})/|'                       => '/?action=archive&amp;year=$1',
-            '|/([^/]+)/feed/|'                             => '/?action=$1&amp;feed'
+            '|/id/post/([0-9]+)/|'
+                => '/?action=id&amp;post=$1',
+
+            '|/id/page/([0-9]+)/|'
+                => '/?action=id&amp;page=$1',
+
+            '|/random/([^/]+)/|'
+                => '/?action=random&amp;feather=$1',
+
+            '|/search/([^/]+)/|'
+                => '/?action=search&amp;query=$1',
+
+            '|/archive/([0-9]{4})/([0-9]{2})/([0-9]{2})/|'
+                => '/?action=archive&amp;year=$1&amp;month=$2&amp;day=$3',
+
+            '|/archive/([0-9]{4})/([0-9]{2})/|'
+                => '/?action=archive&amp;year=$1&amp;month=$2',
+
+            '|/archive/([0-9]{4})/|'
+                => '/?action=archive&amp;year=$1',
+
+            '|/([^/]+)/feed/|'
+                => '/?action=$1&amp;feed'
         );
-
-        # Boolean: $displayed
-        # Has anything been displayed?
-        public $displayed = false;
-
-        # Array: $context
-        # Context for displaying pages.
-        public $context = array();
-
-        # Boolean: $clean
-        # Does this controller support clean URLs?
-        public $clean = true;
-
-        # Boolean: $feed
-        # Is the current page a feed?
-        public $feed = null;
-
-        # Integer: $post_limit
-        # Item limit for pagination.
-        public $post_limit = 10;
 
         # Variable: $twig
         # Environment for the Twig template engine.

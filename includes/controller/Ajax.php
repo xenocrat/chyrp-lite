@@ -3,26 +3,18 @@
      * Class: AjaxController
      * The logic controlling AJAX requests.
      */
-    class AjaxController implements Controller {
-        # Array: $urls
-        # An array of clean URL => dirty URL translations.
-        public $urls = array();
-
-        # Boolean: $displayed
-        # Has anything been displayed?
-        public $displayed = false;
-
-        # Boolean: $clean
-        # Does this controller support clean URLs?
-        public $clean = false;
-
-        # Boolean: $feed
-        # Is the current page a feed?
-        public $feed = false;
-
+    class AjaxController extends Controllers implements Controller {
         # String: $base
         # The base path for this controller.
         public $base = "ajax";
+
+        # Boolean: $clean
+        # Does this controller support clean URLs?
+        public $clean_urls = false;
+
+        # Boolean: $feed
+        # Serve a syndication feed?
+        public $feed = false;
 
         /**
          * Function: parse
