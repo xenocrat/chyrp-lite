@@ -13,7 +13,6 @@
     define('MAIN',           false);
     define('ADMIN',          false);
     define('AJAX',           false);
-    define('XML_RPC',        false);
     define('UPGRADING',      false);
     define('INSTALLING',     false);
     define('DIR',            DIRECTORY_SEPARATOR);
@@ -440,7 +439,7 @@
                 background-color: #ff7f00;
             }
             html {
-                font-size: 14px;
+                font-size: 16px;
             }
             html, body, ul, ol, li,
             h1, h2, h3, h4, h5, h6,
