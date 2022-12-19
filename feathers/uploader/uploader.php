@@ -42,8 +42,6 @@
             $this->respondTo("post","post");
             $this->respondTo("filter_post","filter_post");
             $this->respondTo("post_options", "add_option");
-            $this->respondTo("metaWeblog_getPost", "metaWeblog_getValues");
-            $this->respondTo("metaWeblog_before_editPost", "metaWeblog_setValues");
         }
 
         private function filenames_serialize($files) {
@@ -216,31 +214,11 @@
                 "attr" => "option[source]",
                 "label" => __("Source", "uploader"),
                 "help" => "uploader_source",
-                "type" => "text",
+                "type" => "url",
                 "value" => (isset($post) ? $post->source : "")
             );
 
             return $options;
-        }
-
-        public function metaWeblog_getValues($struct, $post): array {
-            if ($post->feather != "uploader")
-                return $struct;
-
-            $struct["title"] = $post->title;
-            $struct["description"] = $post->caption;
-
-            return $struct;
-        }
-
-        public function metaWeblog_setValues($values, $struct, $post): array {
-            if ($post->feather != "uploader")
-                return $values;
-
-            $values["title"] = $struct["title"];
-            $values["caption"] = $struct["description"];
-
-            return $values;
         }
 
         private function list_files($filenames): array {

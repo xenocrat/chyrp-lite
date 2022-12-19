@@ -26,8 +26,6 @@
                 "source",
                 array("markup_post_text", "markup_text")
             );
-            $this->respondTo("metaWeblog_getPost", "metaWeblog_getValues");
-            $this->respondTo("metaWeblog_before_editPost", "metaWeblog_setValues");
         }
 
         public function submit(): Post {
@@ -105,27 +103,5 @@
                            '</cite></figcaption>';
 
             return '<figure>'.$content.'</figure>';
-        }
-
-        public function metaWeblog_getValues($struct, $post): array {
-            if ($post->feather != "quote")
-                return $struct;
-
-            $struct["title"] = $post->source;
-            $struct["description"] = $post->quote;
-
-            return $struct;
-        }
-
-        public function metaWeblog_setValues($values, $struct, $post): array {
-            if ($post->feather != "quote")
-                return $values;
-
-            if ($struct["description"] != "") {
-                $values["source"] = $struct["title"];
-                $values["quote"] = $struct["description"];
-            }
-
-            return $values;
         }
     }

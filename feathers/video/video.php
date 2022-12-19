@@ -40,8 +40,6 @@
             );
             $this->respondTo("feed_item", "enclose_video");
             $this->respondTo("filter_post", "filter_post");
-            $this->respondTo("metaWeblog_getPost", "metaWeblog_getValues");
-            $this->respondTo("metaWeblog_before_editPost", "metaWeblog_setValues");
         }
 
         public function submit(): Post {
@@ -141,26 +139,6 @@
                 return;
 
             $post->video_player = $this->video_player($post);
-        }
-
-        public function metaWeblog_getValues($struct, $post) {
-            if ($post->feather != "audio")
-                return;
-
-            $struct["title"] = $post->title;
-            $struct["description"] = $post->description;
-
-            return $struct;
-        }
-
-        public function metaWeblog_setValues($values, $struct, $post) {
-            if ($post->feather != "audio")
-                return;
-
-            $values["title"] = $struct["title"];
-            $values["description"] = $struct["description"];
-
-            return $values;
         }
 
         private function video_player($post): string {

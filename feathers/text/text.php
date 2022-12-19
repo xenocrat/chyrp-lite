@@ -25,8 +25,6 @@
                 "body",
                 array("markup_post_text", "markup_text")
             );
-            $this->respondTo("metaWeblog_getPost", "metaWeblog_getValues");
-            $this->respondTo("metaWeblog_before_editPost", "metaWeblog_setValues");
         }
 
         public function submit(): Post {
@@ -98,27 +96,5 @@
 
         public function feed_content($post): string {
             return $post->body;
-        }
-
-        public function metaWeblog_getValues($struct, $post) {
-            if ($post->feather != "text")
-                return;
-
-            $struct["title"] = $post->title;
-            $struct["description"] = $post->body;
-
-            return $struct;
-        }
-
-        public function metaWeblog_setValues($values, $struct, $post) {
-            if ($post->feather != "text")
-                return;
-
-            if ($struct["description"] != "") {
-                $values["title"] = $struct["title"];
-                $values["body"] = $struct["description"];
-            }
-
-            return $values;
         }
     }

@@ -34,8 +34,6 @@
                 array("markup_post_text", "markup_text")
             );
             $this->respondTo("feed_item", "link_related");
-            $this->respondTo("metaWeblog_getPost", "metaWeblog_getValues");
-            $this->respondTo("metaWeblog_before_editPost", "metaWeblog_setValues");
         }
 
         public function submit(): Post {
@@ -144,25 +142,5 @@
                 return;
 
             $feed->related($post->source);
-        }
-
-        public function metaWeblog_getValues($struct, $post): array {
-            if ($post->feather != "link")
-                return $struct;
-
-            $struct["title"] = $post->name;
-            $struct["description"] = $post->description;
-
-            return $struct;
-        }
-
-        public function metaWeblog_setValues($values, $struct, $post): array {
-            if ($post->feather != "link")
-                return $values;
-
-            $values["name"] = $struct["title"];
-            $values["description"] = $struct["description"];
-
-            return $values;
         }
     }

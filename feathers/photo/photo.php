@@ -39,8 +39,6 @@
                 array("markup_post_text", "markup_text")
             );
             $this->respondTo("post_options", "add_option");
-            $this->respondTo("metaWeblog_getPost", "metaWeblog_getValues");
-            $this->respondTo("metaWeblog_before_editPost", "metaWeblog_setValues");
         }
 
         public function submit(): Post {
@@ -156,31 +154,11 @@
                 "attr" => "option[source]",
                 "label" => __("Source", "photo"),
                 "help" => "photo_source",
-                "type" => "text",
+                "type" => "url",
                 "value" => (isset($post) ? $post->source : "")
             );
 
             return $options;
-        }
-
-        public function metaWeblog_getValues($struct, $post): array {
-            if ($post->feather != "photo")
-                return $struct;
-
-            $struct["title"] = $post->title;
-            $struct["description"] = $post->caption;
-
-            return $struct;
-        }
-
-        public function metaWeblog_setValues($values, $struct, $post): array {
-            if ($post->feather != "photo")
-                return $values;
-
-            $values["title"] = $struct["title"];
-            $values["caption"] = $struct["description"];
-
-            return $values;
         }
 
         private function photo_extensions(): array {
