@@ -52,7 +52,7 @@
 /* Group: Reset */
 
 html {
-    font-size: 14px;
+    font-size: 16px;
 }
 html[lang="ar"],
 html[lang="he"] {
@@ -173,7 +173,6 @@ a:active {
     position: relative;
 }
 #header h1 {
-    font-weight: normal;
     margin: 0rem 2rem 2rem 2rem;
 }
 #header h1 a {
@@ -403,6 +402,10 @@ ul#modules_disabled > li.error div.controls {
 
 /* Group: Forms */
 
+label {
+    display: inline;
+    font-weight: inherit;
+}
 select,
 textarea,
 input[type="text"],
@@ -861,7 +864,7 @@ span.options_toolbar {
     background-color: #fbfbfb;
     border: 1px solid #cfcfcf;
     border-bottom: none;
-    padding: 0.25rem 0.5rem;
+    padding: 0.25rem 0.5rem calc(0.25rem + 2px) 0.5rem;
     border-top-left-radius: 0.3rem;
     border-top-right-radius: 0.3rem;
 }
@@ -949,7 +952,7 @@ button.emblem > img {
     float: none;
     display: inline;
     position: relative;
-    top: 3px;
+    top: 2px;
     height: 16px;
 }
 a.emblem.toolbar,
