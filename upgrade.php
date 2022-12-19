@@ -545,6 +545,22 @@
             );
     }
 
+    /**
+     * Function: remove_xmlrpc
+     * Removes the enable_xmlrpc config setting.
+     *
+     * Versions: 2022.03 => 2023.01
+     */
+    function remove_xmlrpc(): void {
+        $set = Config::current()->remove("enable_xmlrpc");
+
+        if ($set === false)
+            error(
+                __("Error"),
+                __("Could not write the configuration file.")
+            );
+    }
+
     #---------------------------------------------
     # Output Starts
     #---------------------------------------------
@@ -609,7 +625,7 @@
                 background-color: #ff7f00;
             }
             html {
-                font-size: 14px;
+                font-size: 16px;
             }
             html, body, ul, ol, li,
             h1, h2, h3, h4, h5, h6,
@@ -794,6 +810,7 @@
         fix_post_updated();
         mysql_utf8mb4();
         add_import_content();
+        remove_xmlrpc();
 
         # Perform module upgrades.
         foreach ($config->enabled_modules as $module) {
