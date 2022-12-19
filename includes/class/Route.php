@@ -49,7 +49,6 @@
             $config = Config::current();
 
             fallback($controller->feed, isset($_GET['feed']));
-            fallback($controller->displayed, false);
 
             # Set the contoller for this route.
             $this->controller = $controller;
@@ -57,7 +56,7 @@
             # Determining the action can be this simple if clean URLs are disabled.
             $this->action =& $_GET['action'];
 
-            $base = empty($controller->base) ?
+            $base = ($controller->base == "") ?
                 $config->url : $config->chyrp_url."/".$controller->base ;
 
             $regex = "~^".preg_quote(
@@ -190,14 +189,15 @@
 
         /**
          * Function: url
-         * Constructs an absolute URL from a relative one. Can translate clean to dirty URLs.
+         * Constructs an absolute URL from a relative one. Translates clean to dirty URLs.
          *
          * Parameters:
          *     $url - The relative URL. Assumed to be dirty if it begins with "/".
          *     $controller - The controller to use. Current controller used if omitted.
          *
          * Returns:
-         *     An absolute clean or dirty URL, depending on @Config->clean_urls@ and controller.
+         *     An absolute clean or dirty URL, depending on value of @Config->clean_urls@
+         *     and @controller->clean_urls@.
          */
         static function url($url, $controller = null): string {
             $config = Config::current();
@@ -208,7 +208,7 @@
             if (is_string($controller))
                 $controller = $controller::current();
 
-            $base = empty($controller->base) ?
+            $base = ($controller->base == "") ?
                 $config->url : $config->chyrp_url."/".$controller->base ;
 
             # Assume this is a dirty URL and return it without translation.
@@ -220,10 +220,10 @@
 
             # Translation is unnecessary if clean URLs are enabled
             # and the controller supports them.
-            if ($config->clean_urls and !empty($controller->clean))
+            if ($config->clean_urls and $controller->clean_urls)
                 return fix($base."/".$url, true);
 
-            $urls = fallback($controller->urls, array());
+            $urls = $controller->urls;
 
             Trigger::current()->filter($urls, "parse_urls");
 
