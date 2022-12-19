@@ -41,7 +41,7 @@ giunti sul tuo sito.
 * Cacher: Cache delle pagine web, riduce il carico del server.
 * Categorizzazione: Categorizza i tuoi post.
 * Tag: Aggiunge la funzionalità per taggare i post.
-* Pingable: Registra gli avvisi dei blog che si collegano al tuo.
+* Mentionable: Registra gli avvisi dei blog che si collegano al tuo.
 * Commenti: Aggiunge funzionalità di commento ai tuoi post.
 * Like: Consenti agli utenti di aggiungere "like" a un post.
 * Continua a leggere: Estrae lunghi post dall'indice del blog.

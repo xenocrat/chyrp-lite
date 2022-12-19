@@ -38,7 +38,7 @@ visitors will see when they first arrive at your website.
 * Cacher: cache your blog pages for reduced server load.
 * Categorize: give each of your blog entries a category.
 * Tags: apply multiple searchable tags to your blog entries.
-* Pingable: register pingbacks from blogs that link to yours.
+* Mentionable: register webmentions from blogs that link to yours.
 * Comments: a comprehensive comments system for your blog.
 * Likes: allow your visitors to show their appreciation.
 * Read More: excerpt long blog entries on the blog index.
@@ -50,7 +50,7 @@ visitors will see when they first arrive at your website.
 * Highlighter: syntax highlighting for your code snippets.
 * Easy Embed: the easiest way to embed videos in your blog.
 * Post Views: maintain a view count for your blog entries.
-* MathJax: A JavaScript display engine for mathematics.
+* MathJax: a JavaScript display engine for mathematics.
 
 ## Requirements
 
