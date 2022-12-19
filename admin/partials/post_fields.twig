@@ -34,7 +34,11 @@
 {% endif %}
 </label>
 {% if field.type == "text" %}
-<input id="{{ field_id }}" class="text" type="text" name="{{ field_name }}"{{ field_preview ~ field_markdown ~ field_required }} value="{{ field_value | fix(true, true) }}">
+<input id="{{ field_id }}" class="text" type="text" name="{{ field_name }}"{{ field_markdown ~ field_required }} value="{{ field_value | fix(true, true) }}">
+{% elseif field.type == "url" %}
+<input id="{{ field_id }}" class="text" type="url" name="{{ field_name }}"{{ field_required }} value="{{ field_value | fix(true, true) }}">
+{% elseif field.type == "email" %}
+<input id="{{ field_id }}" class="text" type="email" name="{{ field_name }}"{{ field_required }} value="{{ field_value | fix(true, true) }}">
 {% elseif field.type == "file" %}
 <input id="{{ field_id }}" type="file" name="{{ field_name }}"{{ field_accept ~ field_multiple ~ field_required }} value="">
 {% elseif field.type == "text_block" %}
@@ -122,6 +126,10 @@
 </label>
 {% if field.type == "text" %}
 <input id="{{ field_id }}" class="text" type="text" name="{{ field_name }}" value="{{ field_value | fix(true, true) }}">
+{% elseif field.type == "url" %}
+<input id="{{ field_id }}" class="text" type="url" name="{{ field_name }}" value="{{ field_value | fix(true, true) }}">
+{% elseif field.type == "email" %}
+<input id="{{ field_id }}" class="text" type="email" name="{{ field_name }}" value="{{ field_value | fix(true, true) }}">
 {% elseif field.type == "file" %}
 <input id="{{ field_id }}" type="file" name="{{ field_name }}"{{ field_accept ~ field_multiple }} value="">
 {% elseif field.type == "text_block" %}
