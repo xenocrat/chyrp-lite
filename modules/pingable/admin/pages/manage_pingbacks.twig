@@ -1,6 +1,6 @@
 {% extends "layouts" ~ DIR ~ "default.twig" %}
 
-{% block title %}{{ "Manage Pingbacks" | translate("pingable") }}{% endblock %}
+{% block title %}{{ "Manage Webmentions" | translate("pingable") }}{% endblock %}
 
 {% block content %}
 <form class="filters" action="{{ url('manage_pingbacks') }}" method="post" accept-charset="UTF-8" role="search">
@@ -13,11 +13,11 @@
 <button type="submit" class="inline">{{ "Search" | translate }}</button>
 </fieldset>
 </form>
-<h2>{{ GET.query is not empty ? "Search Results" | translate : "Pingbacks" | translate("pingable") }}</h2>
+<h2>{{ GET.query is not empty ? "Search Results" | translate : "Webmentions" | translate("pingable") }}</h2>
 <table class="interactive">
 <thead>
 <tr class="head">
-<th class="pingback_source title main">{{ "Source" | translate("pingable") }}</th>
+<th class="pingback_title title main">{{ "Title" | translate("pingable") }}</th>
 <th class="pingback_post title">{{ "Post" | translate("pingable") }}</th>
 <th class="pingback_date date">{{ "Added" | translate("pingable") }}</th>
 {{ trigger.call("manage_pingbacks_column_header") }}
@@ -27,7 +27,7 @@
 <tbody>
 {% for pingback in pingbacks.paginated %}
 <tr id="pingback_{{ pingback.id }}" class="pingback">
-<td class="pingback_source title main">
+<td class="pingback_title title main">
 <a href="{{ pingback.source | fix(true) }}">
 {{ pingback.title | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
 </td>

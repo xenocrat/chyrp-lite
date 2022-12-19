@@ -1,9 +1,9 @@
 {% extends "layouts" ~ DIR ~ "default.twig" %}
 
-{% block title %}{{ "Edit Pingback" | translate("pingable") }}{% endblock %}
+{% block title %}{{ "Edit Webmention" | translate("pingable") }}{% endblock %}
 
 {% block content %}
-<h2>{{ "Editing Pingback to &#8220;%s&#8221;" | translate("pingable") | format(pingback.post.title() | oneof("[Untitled]" | translate)) }}</h2>
+<h2>{{ "Editing Webmention to &#8220;%s&#8221;" | translate("pingable") | format(pingback.post.title() | oneof("[Untitled]" | translate)) }}</h2>
 <form id="edit_pingback" class="split" action="{{ url('update_pingback') }}" method="post" accept-charset="UTF-8">
 <fieldset role="presentation">
 <p>

@@ -1,9 +1,9 @@
 {% extends "layouts" ~ DIR ~ "default.twig" %}
 
-{% block title %}{{ "Delete Pingback?" | translate("pingable") }}{% endblock %}
+{% block title %}{{ "Delete Webmention?" | translate("pingable") }}{% endblock %}
 
 {% block content %}
-<h1>{{ "Delete Pingback?" | translate("pingable") }}</h1>
+<h1>{{ "Delete Webmention?" | translate("pingable") }}</h1>
 <p>
 {{ "&#8220;%s&#8221; will be permanently deleted." | translate("pingable") | format(pingback.title | oneof("[Untitled]" | translate)) }}
 </p>

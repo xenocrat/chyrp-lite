@@ -9,8 +9,8 @@
         static function __install(): void {
             Pingback::install();
 
-            Group::add_permission("edit_pingback", "Edit Pingbacks");
-            Group::add_permission("delete_pingback", "Delete Pingbacks");
+            Group::add_permission("edit_pingback", "Edit Webmentions");
+            Group::add_permission("delete_pingback", "Delete Webmentions");
         }
 
         static function __uninstall($confirm): void {
@@ -22,35 +22,9 @@
         }
 
         public function list_permissions($names = array()): array {
-            $names["edit_pingback"] = __("Edit Pingbacks", "pingable");
-            $names["delete_pingback"] = __("Delete Pingbacks", "pingable");
+            $names["edit_pingback"] = __("Edit Webmentions", "pingable");
+            $names["delete_pingback"] = __("Delete Webmentions", "pingable");
             return $names;
-        }
-
-        public function pingback($post, $to, $from, $title, $excerpt): string|IXR_Error {
-            $count = SQL::current()->count(
-                tables:"pingbacks",
-                conds:array(
-                    "post_id" => $post->id,
-                    "source" => $from
-                )
-            );
-
-            if (!empty($count))
-                return new IXR_Error(
-                    48,
-                    __("A ping from your URL is already registered.", "pingable")
-                );
-
-            if (strlen($from) > 2048)
-                return new IXR_Error(
-                    0,
-                    __("Your URL is too long to be stored in our database.", "pingable")
-                );
-
-            Pingback::add(post_id:$post->id, source:$from, title:$title);
-
-            return __("Pingback registered!", "pingable");
         }
 
         public function webmention($post, $from, $to): void {
@@ -87,7 +61,7 @@
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(
                     __("No ID Specified"),
-                    __("An ID is required to edit a pingback.", "pingable"),
+                    __("An ID is required to edit a webmention.", "pingable"),
                     code:400
                 );
 
@@ -95,14 +69,14 @@
 
             if ($pingback->no_results)
                 Flash::warning(
-                    __("Pingback not found.", "pingable"),
+                    __("Webmention not found.", "pingable"),
                     "manage_pingbacks"
                 );
 
             if (!$pingback->editable())
                 show_403(
                     __("Access Denied"),
-                    __("You do not have sufficient privileges to edit this pingback.", "pingable")
+                    __("You do not have sufficient privileges to edit this webmention.", "pingable")
                 );
 
             $admin->display(
@@ -121,14 +95,14 @@
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(
                     __("No ID Specified"),
-                    __("An ID is required to update a pingback.", "pingable"),
+                    __("An ID is required to update a webmention.", "pingable"),
                     code:400
                 );
 
             if (empty($_POST['title']))
                 error(
                     __("No Title Specified", "pingable"),
-                    __("A title is required to update a pingback.", "pingable"),
+                    __("A title is required to update a webmention.", "pingable"),
                     code:400
                 );
 
@@ -137,13 +111,13 @@
             if ($pingback->no_results)
                 show_404(
                     __("Not Found"),
-                    __("Pingback not found.", "pingable")
+                    __("Webmention not found.", "pingable")
                 );
 
             if (!$pingback->editable())
                 show_403(
                     __("Access Denied"),
-                    __("You do not have sufficient privileges to edit this pingback.", "pingable")
+                    __("You do not have sufficient privileges to edit this webmention.", "pingable")
                 );
 
             $pingback = $pingback->update($_POST['title']);
@@ -158,7 +132,7 @@
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(
                     __("No ID Specified"),
-                    __("An ID is required to delete a pingback.", "pingable"),
+                    __("An ID is required to delete a webmention.", "pingable"),
                     code:400
                 );
 
@@ -166,14 +140,14 @@
 
             if ($pingback->no_results)
                 Flash::warning(
-                    __("Pingback not found.", "pingable"),
+                    __("Webmention not found.", "pingable"),
                     "manage_pingbacks"
                 );
 
             if (!$pingback->deletable())
                 show_403(
                     __("Access Denied"),
-                    __("You do not have sufficient privileges to delete this pingback.", "pingable")
+                    __("You do not have sufficient privileges to delete this webmention.", "pingable")
                 );
 
             $admin->display(
@@ -192,7 +166,7 @@
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(
                     __("No ID Specified"),
-                    __("An ID is required to delete a pingback.", "pingable"),
+                    __("An ID is required to delete a webmention.", "pingable"),
                     code:400
                 );
 
@@ -204,19 +178,19 @@
             if ($pingback->no_results)
                 show_404(
                     __("Not Found"),
-                    __("Pingback not found.", "pingable")
+                    __("Webmention not found.", "pingable")
                 );
 
             if (!$pingback->deletable())
                 show_403(
                     __("Access Denied"),
-                    __("You do not have sufficient privileges to delete this pingback.", "pingable")
+                    __("You do not have sufficient privileges to delete this webmention.", "pingable")
                 );
 
             Pingback::delete($pingback->id);
 
             Flash::notice(
-                __("Pingback deleted.", "pingable"),
+                __("Webmention deleted.", "pingable"),
                 "manage_pingbacks"
             );
         }
@@ -225,7 +199,7 @@
             if (!Visitor::current()->group->can("edit_pingback", "delete_pingback"))
                 show_403(
                     __("Access Denied"),
-                    __("You do not have sufficient privileges to manage pingbacks.", "pingable")
+                    __("You do not have sufficient privileges to manage webmentions.", "pingable")
                 );
 
             # Redirect searches to a clean URL or dirty GET depending on configuration.
@@ -263,7 +237,7 @@
         public function manage_nav($navs): array {
             if (Visitor::current()->group->can("edit_pingback", "delete_pingback"))
                 $navs["manage_pingbacks"] = array(
-                    "title" => __("Pingbacks", "pingable"),
+                    "title" => __("Webmentions", "pingable"),
                     "selected" => array(
                         "edit_pingback",
                         "delete_pingback"
@@ -284,7 +258,7 @@
 
         public function manage_posts_column_header(): void {
             echo '<th class="post_pingbacks value">'.
-                 __("Pingbacks", "pingable").
+                 __("Webmentions", "pingable").
                  '</th>';
         }
 
