@@ -13,7 +13,6 @@
     define('MAIN',             false);
     define('ADMIN',            false);
     define('AJAX',             false);
-    define('XML_RPC',          false);
     define('UPGRADING',        true);
     define('INSTALLING',       false);
     define('DIR',              DIRECTORY_SEPARATOR);
