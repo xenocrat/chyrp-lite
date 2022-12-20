@@ -141,7 +141,7 @@
                 return $this->creatable = true;
 
             if (!defined('IMAGETYPE_AVIF'))
-                define('IMAGETYPE_AVIF', PHP_INT_MAX);
+                return $this->creatable = false;
 
             if (!defined('IMG_AVIF'))
                 return $this->creatable = false;
