@@ -31,8 +31,8 @@
 {% endif %}
 {% if module_enabled("pingable") and post.pingback_count is defined %}
 &bull;
-<a href="{{ post.url() }}#pingbacks" rel="bookmark" title="{{ 'View pingbacks' | translate }}">
-{{ "%s pingback" | translate_plural("%s pingbacks", post.pingback_count) | format(post.pingback_count) }}
+<a href="{{ post.url() }}#pingbacks" rel="bookmark" title="{{ 'View webmentions' | translate }}">
+{{ "%s webmention" | translate_plural("%s webmentions", post.pingback_count) | format(post.pingback_count) }}
 </a>
 {% endif %}
 {% if module_enabled("comments") and post.comment_status is defined and post.comment_count is defined %}
