@@ -58,7 +58,7 @@
 
         /**
          * Function: __construct
-         * Receives the source filepath and requested thumbnail parameters.
+         * Receives the source filename and requested thumbnail parameters.
          *
          * Parameters:
          *     $filename - Filename relative to the uploads directory.
@@ -121,7 +121,7 @@
                 return $this->creatable;
 
             if (!isset($this->source))
-                return false;
+                return $this->creatable = false;
 
             if (!function_exists("gd_info"))
                 return $this->creatable = false;
