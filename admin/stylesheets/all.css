@@ -453,7 +453,8 @@ input[type="number"]:focus,
 input[type="range"]:focus,
 input[type="password"]:focus {
     border-color: #1e57ba;
-    outline: none;
+    outline: #1e57ba solid 1px;
+    outline-offset: 0px;
 }
 input[type="text"].error,
 input[type="email"].error,
@@ -478,12 +479,14 @@ input[type="range"].error:focus,
 input[type="password"].error:focus,
 textarea.error:focus {
     border: 1px solid #d51800;
+    outline-color: #d51800;
 }
 input[type="password"].strong {
     background-color: #ebfae4;
 }
 input[type="password"].strong:focus {
     border: 1px solid #108600;
+    outline-color: #108600;
 }
 input[type="file"] {
     box-sizing: border-box;
@@ -885,12 +888,6 @@ span.options_tray {
 }
 span.options_tray:empty {
     display: none;
-}
-textarea:invalid + span.options_tray {
-    border-color: #ff7f00;
-}
-textarea:focus + span.options_tray {
-    border-color: #1e57ba;
 }
 
 /* Group: Helpers & General */

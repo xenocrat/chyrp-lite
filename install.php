@@ -359,7 +359,8 @@
             textarea:focus,
             select:focus {
                 border-color: #1e57ba;
-                outline: none;
+                outline: #1e57ba solid 1px;
+                outline-offset: 0px;
             }
             input[type="text"].error,
             input[type="email"].error,
@@ -379,12 +380,14 @@
             input:invalid:focus,
             textarea.error:focus {
                 border: 1px solid #d51800;
+                outline-color: #d51800;
             }
             input[type="password"].strong {
                 background-color: #ebfae4;
             }
             input[type="password"].strong:focus {
                 border: 1px solid #108600;
+                outline-color: #108600;
             }
             /*
             form:has(#adapter > option[value="sqlite"]:checked) *.not-sqlite {
