@@ -147,10 +147,17 @@
             $route->custom();
 
             # Are we viewing a post?
-            Post::from_url($route->request, $route);
+            Post::from_url(
+                $route->request,
+                $route,
+                array("drafts" => true)
+            );
 
             # Are we viewing a page?
-            Page::from_url($route->request, $route);
+            Page::from_url(
+                $route->request,
+                $route
+            );
 
             return null;
         }
