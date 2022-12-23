@@ -359,8 +359,8 @@
             textarea:focus,
             select:focus {
                 border-color: #1e57ba;
-                outline: #1e57ba solid 1px;
-                outline-offset: 0px;
+                outline: #1e57ba solid 2px;
+                outline-offset: -2px;
             }
             input[type="text"].error,
             input[type="email"].error,
