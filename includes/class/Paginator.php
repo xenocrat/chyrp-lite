@@ -302,12 +302,12 @@
             # Generate a URL with the page number appended or replaced.
             $url = !isset($_GET[$this->name]) ?
                 (
-                    ($config->clean_urls and !empty(Route::current()->controller->clean)) ?
+                    ($config->clean_urls and Route::current()->controller->clean_urls) ?
                         rtrim($request, "/")."/".$this->name."/".$page."/" :
                         $request.$mark.$this->name."=".$page
                 ) : 
                 (
-                    ($config->clean_urls and !empty(Route::current()->controller->clean)) ?
+                    ($config->clean_urls and Route::current()->controller->clean_urls) ?
                     preg_replace(
                         "/(\/{$this->name}\/([0-9]+)|$)/",
                         "/".$this->name."/".$page,
@@ -344,12 +344,12 @@
             # Generate a URL with the page number appended or replaced.
             $url = !isset($_GET[$this->name]) ?
                 (
-                    ($config->clean_urls and !empty(Route::current()->controller->clean)) ?
+                    ($config->clean_urls and Route::current()->controller->clean_urls) ?
                         rtrim($request, "/")."/".$this->name."/".$page."/" :
                         $request.$mark.$this->name."=".$page
                 ) :
                 (
-                    ($config->clean_urls and !empty(Route::current()->controller->clean)) ?
+                    ($config->clean_urls and Route::current()->controller->clean_urls) ?
                         preg_replace(
                             "/(\/{$this->name}\/([0-9]+)|$)/",
                             "/".$this->name."/".$page,
