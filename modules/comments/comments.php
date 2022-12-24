@@ -6,10 +6,6 @@
         # Query caches for methods.
         private $caches = array();
 
-        public function __init(): void {
-            $this->addAlias("metaWeblog_before_newPost", "metaWeblog_before_editPost");
-        }
-
         static function __install() {
             Comment::install();
 
@@ -1120,25 +1116,6 @@
             }
 
             $feed->close();
-        }
-
-        public function metaWeblog_getPost($struct, $post): array {
-            $struct["mt_allow_comments"] = isset($post->comment_status) ?
-                intval($post->comment_status == "open") :
-                1 ;
-
-            return $struct;
-        }
-
-        public function metaWeblog_before_editPost($values, $struct): array {
-            if (isset($struct["mt_allow_comments"]))
-                $values['comment_status'] = ($struct["mt_allow_comments"] == "open") ?
-                    "open" :
-                    "closed" ;
-            else
-                $values['comment_status'] = "closed";
-
-            return $values;
         }
 
         public function webmention($post, $from, $to): void {
