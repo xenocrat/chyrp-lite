@@ -3,7 +3,7 @@
 {% block title %}{{ "Manage Tags" | translate("tags") }}{% endblock %}
 
 {% block content %}
-<h2>{{ "Manage Tags" | translate("tags") }}</h2>
+<h2>{{ "Tags" | translate("tags") }}</h2>
 <table>
 <thead> 
 <tr class="head">
@@ -42,6 +42,16 @@
 {% endfor %}
 </tbody>
 </table>
+<form class="filters" action="{{ url('manage_tags') }}" method="post" accept-charset="UTF-8" role="search">
+<fieldset role="presentation">
+<h3>
+{{ "Search&hellip;" | translate }}
+<a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
+</h3>
+<input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true) }}" id="query" aria-label="{{ 'Query' | translate | fix(true) }}">
+<button type="submit">{{ "Search" | translate }}</button>
+</fieldset>
+</form>
 <h2>{{ GET.search is defined ? "Search Results" | translate : "Posts" | translate }}</h2>
 <form action="{{ url('bulk_tag') }}" method="post" accept-charset="UTF-8" data-toggler="tag_toggler">
 <table class="interactive{{ posts.paginated is empty ? ' empty' : '' }}">
