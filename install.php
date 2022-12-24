@@ -389,7 +389,6 @@
                 border: 1px solid #108600;
                 outline-color: #108600;
             }
-            /*
             form:has(#adapter > option[value="sqlite"]:checked) *.not-sqlite {
                 display: none;
             }
@@ -399,7 +398,6 @@
             form:has(#adapter > option[value="pgsql"]:checked) *.not-pgsql {
                 display: none;
             }
-            */
             form hr {
                 border: none;
                 clear: both;
@@ -508,25 +506,7 @@
         <script type="text/javascript">
             'use strict';
 
-            function toggle_adapter() {
-                var adapter = $("#adapter").val();
-
-                if (adapter == "sqlite") {
-                    $(".not-mysql, .not-pgsql").fadeIn("fast");
-                    $(".not-sqlite").fadeOut("fast");
-                } else if (adapter == "mysql") {
-                    $(".not-sqlite, .not-pgsql").fadeIn("fast");
-                    $(".not-mysql").fadeOut("fast");
-                } else if (adapter == "pgsql") {
-                    $(".not-mysql, .not-sqlite").fadeIn("fast");
-                    $(".not-pgsql").fadeOut("fast");
-                } else {
-                    $(".not-sqlite, .not-mysql, .not-sqlite").fadeOut("fast");
-                }
-            }
             $(function() {
-                $("#adapter").change(toggle_adapter).trigger("change");
-
                 $("#password1").keyup(function(e) {
                     var password = $(this).val();
 
