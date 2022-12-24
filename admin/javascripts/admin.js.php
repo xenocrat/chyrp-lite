@@ -222,13 +222,13 @@ var Write = {
             toolbar.append(
                 $("<button>", {
                     "type": "button",
-                    "aria-label": '<?php echo __("Bold", "admin"); ?>'
+                    "aria-label": '<?php echo __("Heading", "admin"); ?>'
                 }).addClass("emblem toolbar").click(function(e) {
-                    Write.formatting(target, "bold");
+                    Write.formatting(target, "h3");
                 }).append(
                     $("<img>", {
-                        "src": Site.chyrp_url + '/admin/images/icons/bold.svg',
-                        "alt": '<?php echo __("bold", "admin"); ?>'
+                        "src": Site.chyrp_url + '/admin/images/icons/heading.svg',
+                        "alt": '<?php echo __("heading", "admin"); ?>'
                     })
                 )
             );
@@ -236,13 +236,41 @@ var Write = {
             toolbar.append(
                 $("<button>", {
                     "type": "button",
-                    "aria-label": '<?php echo __("Italic", "admin"); ?>'
+                    "aria-label": '<?php echo __("Strong", "admin"); ?>'
                 }).addClass("emblem toolbar").click(function(e) {
-                    Write.formatting(target, "italic");
+                    Write.formatting(target, "strong");
+                }).append(
+                    $("<img>", {
+                        "src": Site.chyrp_url + '/admin/images/icons/bold.svg',
+                        "alt": '<?php echo __("strong", "admin"); ?>'
+                    })
+                )
+            );
+
+            toolbar.append(
+                $("<button>", {
+                    "type": "button",
+                    "aria-label": '<?php echo __("Emphasis", "admin"); ?>'
+                }).addClass("emblem toolbar").click(function(e) {
+                    Write.formatting(target, "em");
                 }).append(
                     $("<img>", {
                         "src": Site.chyrp_url + '/admin/images/icons/italic.svg',
-                        "alt": '<?php echo __("italic", "admin"); ?>'
+                        "alt": '<?php echo __("emphasis", "admin"); ?>'
+                    })
+                )
+            );
+
+            toolbar.append(
+                $("<button>", {
+                    "type": "button",
+                    "aria-label": '<?php echo __("Strikethrough", "admin"); ?>'
+                }).addClass("emblem toolbar").click(function(e) {
+                    Write.formatting(target, "del");
+                }).append(
+                    $("<img>", {
+                        "src": Site.chyrp_url + '/admin/images/icons/strikethrough.svg',
+                        "alt": '<?php echo __("strikethrough", "admin"); ?>'
                     })
                 )
             );
@@ -264,13 +292,13 @@ var Write = {
             toolbar.append(
                 $("<button>", {
                     "type": "button",
-                    "aria-label": '<?php echo __("Link", "admin"); ?>'
+                    "aria-label": '<?php echo __("Hyperlink", "admin"); ?>'
                 }).addClass("emblem toolbar").click(function(e) {
-                    Write.formatting(target, "link");
+                    Write.formatting(target, "hyperlink");
                 }).append(
                     $("<img>", {
                         "src": Site.chyrp_url + '/admin/images/icons/link.svg',
-                        "alt": '<?php echo __("link", "admin"); ?>'
+                        "alt": '<?php echo __("hyperlink", "admin"); ?>'
                     })
                 )
             );
@@ -280,7 +308,7 @@ var Write = {
                     "type": "button",
                     "aria-label": '<?php echo __("Image", "admin"); ?>'
                 }).addClass("emblem toolbar").click(function(e) {
-                    Write.formatting(target, "image");
+                    Write.formatting(target, "img");
                 }).append(
                     $("<img>", {
                         "src": Site.chyrp_url + '/admin/images/icons/image.svg',
@@ -319,7 +347,7 @@ var Write = {
                             contentType: false,
                             dataType: "json",
                         }).done(function(response) {
-                            Write.formatting(target, "image", response.data.url);
+                            Write.formatting(target, "img", response.data.url);
                         }).fail(function(response) {
                             tray.html('<?php echo __("Oops! Something went wrong on this web page."); ?>');
                         }).always(function(response) {
@@ -433,7 +461,7 @@ var Write = {
                     contentType: false,
                     dataType: "json",
                 }).done(function(response) {
-                    Write.formatting($(e.target), "image", response.data.url);
+                    Write.formatting($(e.target), "img", response.data.url);
                 }).fail(function(response) {
                     tray.html('<?php echo __("Oops! Something went wrong on this web page."); ?>');
                 }).always(function(response) {
@@ -461,12 +489,12 @@ var Write = {
         }
 
         switch (effect) {
-            case 'bold':
+            case 'strong':
                 opening = (markdown) ? "**" : '<strong>' ;
                 closing = (markdown) ? "**" : '</strong>' ;
                 break;
 
-            case 'italic':
+            case 'em':
                 opening = (markdown) ? "*" : '<em>' ;
                 closing = (markdown) ? "*" : '</em>' ;
                 break;
@@ -476,10 +504,22 @@ var Write = {
                 closing = (markdown) ? "`" : '</code>' ;
                 break;
 
-            case 'link':
+            case 'h3':
+                opening = (markdown) ? "### " : '<h3>' ;
+                closing = (markdown) ? "" : '</h3>' ;
+                break;
+
+            case 'del':
+                opening = (markdown) ? "~~" : '<del>' ;
+                closing = (markdown) ? "~~" : '</del>' ;
+                break;
+
+            case 'hyperlink':
                 if (isURL(selection)) {
-                    if (url)
+                    if (url) {
                         selection = url;
+                        break;
+                    }
 
                     opening = (markdown) ? "[](" : '<a href="' ;
                     closing = (markdown) ? ")" : '"></a>' ;
@@ -490,10 +530,12 @@ var Write = {
 
                 break;
 
-            case 'image':
+            case 'img':
                 if (isURL(selection)) {
-                    if (url)
+                    if (url) {
                         selection = url;
+                        break;
+                    }
 
                     opening = (markdown) ? "![](" : '<img alt="" src="' ;
                     closing = (markdown) ? ")" : '">' ;
