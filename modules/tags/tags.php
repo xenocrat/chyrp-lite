@@ -4,10 +4,6 @@
         # Query caches for methods.
         private $caches = array();
 
-        public function __init(): void {
-            $this->addAlias("metaWeblog_before_newPost", "metaWeblog_before_editPost");
-        }
-
         static function __install(): void {
             Route::current()->add("tag/(name)/", "tag");
         }
@@ -261,13 +257,20 @@
                     __("You do not have sufficient privileges to manage tags.", "tags")
                 );
 
-            $where = array();
-            $params = array();
+            # Redirect searches to a clean URL or dirty GET depending on configuration.
+            if (isset($_POST['query']))
+                redirect(
+                    "manage_tags/query/".
+                    str_ireplace("%2F", "", urlencode($_POST['query'])).
+                    "/"
+                );
 
-            if (isset($_GET['search']) and $_GET['search'] != "") {
-                $where[] = "post_attributes.name = 'tags' AND post_attributes.value LIKE :query";
-                $params[":query"] = $this->tags_clean_match($_GET['search']);
-            }
+            fallback($_GET['query'], "");
+            list($where, $params) = keywords(
+                $_GET['query'],
+                "post_attributes.value LIKE :query OR url LIKE :query",
+                "posts"
+            );
 
             $visitor = Visitor::current();
 
@@ -659,22 +662,6 @@
                 array("tag_cloud" => $this->tag_cloud(false, "name_asc")),
                 __("Tags", "tags")
             );
-        }
-
-        public function metaWeblog_getPost($struct, $post): array {
-            if (!empty($post->tags))
-                $struct['mt_keywords'] = implode(", ", array_keys($post->tags));
-
-            return $struct;
-        }
-
-        public function metaWeblog_before_editPost($values, $struct): array {
-            if (isset($struct["mt_keywords"])) {
-                $tags = $this->prepare_tags($struct["mt_keywords"]);
-                $values["tags"] = $this->tags_serialize($tags);
-            }
-
-            return $values;
         }
 
         public function related_posts($ids, $post, $limit): array {
