@@ -50,6 +50,7 @@
         !empty($_GET['square'])
     );
 
+    # Redirect to original if thumbnail cannot or should not be created.
     if (!$thumb->creatable() or $thumb->upscaling()) {
         header($_SERVER['SERVER_PROTOCOL']." 301 Moved Permanently");
         header("Cache-Control: public");
