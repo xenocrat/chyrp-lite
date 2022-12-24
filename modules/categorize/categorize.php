@@ -6,10 +6,6 @@
         # Query caches for methods.
         private $caches = array();
 
-        public function __init(): void {
-            $this->addAlias("metaWeblog_before_newPost", "metaWeblog_before_editPost");
-        }
-
         static function __install(): void {
             Category::install();
 
@@ -37,39 +33,6 @@
                     url("category", MainController::current()),
                     $post->category->name
                 );
-        }
-
-        public function metaWeblog_getPost($struct, $post): array {
-            if (!empty($post->category))
-                $struct["categories"] = array($post->category->name);
-
-            return $struct;
-        }
-
-        public function metaWeblog_before_editPost($values, $struct): array {
-            $category_id = 0;
-
-            if (isset($struct["categories"][0])) {
-                foreach (Category::find() as $category)
-                    if ($category->name == $struct["categories"][0]) {
-                        $category_id = $category->id;
-                        break;
-                    }
-            }
-
-            $values['category_id'] = $category_id;
-            return $values;
-        }
-
-        public function metaWeblog_getCategories($struct): array {
-            foreach (Category::find() as $category)
-                $struct[] = array(
-                    "categoryId"   => $category->id,
-                    "categoryName" => $category->name,
-                    "htmlUrl"      => $category->url
-                );
-
-            return $struct;
         }
 
         public function related_posts($ids, $post, $limit): array {
