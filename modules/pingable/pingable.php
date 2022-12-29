@@ -250,7 +250,10 @@
         public function admin_determine_action($action): ?string {
             $visitor = Visitor::current();
 
-            if ($action == "manage" and $visitor->group->can("edit_pingback", "delete_pingback"))
+            if (
+                $action == "manage" and 
+                $visitor->group->can("edit_pingback", "delete_pingback")
+            )
                 return "manage_pingbacks";
 
             return null;
@@ -264,8 +267,8 @@
 
         public function manage_posts_column($post): void {
             echo '<td class="post_pingbacks value"><a href="'.
-                 $post->url().
-                 '#pingbacks">'.
+                 url("manage_pingbacks/query/".urlencode("post_id:".$post->id)).
+                 '">'.
                  $post->pingback_count.
                  '</a></td>';
         }
