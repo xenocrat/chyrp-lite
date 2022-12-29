@@ -317,6 +317,9 @@ var Write = {
                 )
             );
 
+            if (typeof target.attr("data-no_uploads") !== "undefined")
+                return;
+
             // Insert toolbar buttons for image uploads.
             $("<label>", {
                 "role": "button",
@@ -396,6 +399,9 @@ var Write = {
         // Support drag-and-drop image image uploads.
         $("#write_form textarea, #edit_form textarea").each(function() {
             var target = $(this);
+
+            if (typeof target.attr("data-no_uploads") !== "undefined")
+                return;
 
             target.on("dragover", Write.dragover).
                    on("dragenter", Write.dragenter).
@@ -492,16 +498,28 @@ var Write = {
             case 'strong':
                 opening = (markdown) ? "**" : '<strong>' ;
                 closing = (markdown) ? "**" : '</strong>' ;
+
+                if (selection == "")
+                    selection = " ";
+
                 break;
 
             case 'em':
                 opening = (markdown) ? "*" : '<em>' ;
                 closing = (markdown) ? "*" : '</em>' ;
+
+                if (selection == "")
+                    selection = " ";
+
                 break;
 
             case 'code':
                 opening = (markdown) ? "`" : '<code>' ;
                 closing = (markdown) ? "`" : '</code>' ;
+
+                if (selection == "")
+                    selection = " ";
+
                 break;
 
             case 'h3':
@@ -512,6 +530,10 @@ var Write = {
             case 'del':
                 opening = (markdown) ? "~~" : '<del>' ;
                 closing = (markdown) ? "~~" : '</del>' ;
+
+                if (selection == "")
+                    selection = " ";
+
                 break;
 
             case 'hyperlink':
