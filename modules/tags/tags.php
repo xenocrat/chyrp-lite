@@ -229,7 +229,8 @@
                     "selected" => array(
                         "rename_tag",
                         "delete_tag",
-                        "edit_tags"
+                        "edit_tags",
+                        "posts_tagged"
                     )
                 );
 
@@ -243,11 +244,18 @@
         }
 
         public function manage_posts_column($post): void {
-            $tags = !empty($post->tags_link) ?
-                implode(" ", $post->tags_link) :
-                "" ;
+            $tags = array();
 
-            echo '<td class="post_tags list">'.$tags.'</td>';
+            foreach ($post->tags as $name => $clean)
+                $tags[] = '<a class="tag" href="'.
+                          url("posts_tagged/clean/".urlencode($clean)).
+                          '">'.
+                          $name.
+                          '</a>';
+
+            echo '<td class="post_tags list">'.
+                 implode(" ", $tags).
+                 '</td>';
         }
 
         public function admin_manage_tags($admin): void {
@@ -258,10 +266,56 @@
                 );
 
             # Redirect searches to a clean URL or dirty GET depending on configuration.
+            if (isset($_POST['search']))
+                redirect(
+                    "manage_tags/search/".
+                    str_ireplace("%2F", "", urlencode($_POST['search'])).
+                    "/"
+                );
+
+            if (isset($_GET['search']) and $_GET['search'] != "") {
+                $tag_cloud = array();
+                $encoded = $this->tags_encoded($_GET['search']);
+
+                foreach ($this->tag_cloud() as $tag) {
+                    if (
+                        substr_count($tag["name"], $encoded) or
+                        substr_count($tag["clean"], $encoded)
+                    )
+                        $tag_cloud[] = $tag;
+                }
+            } else {
+                $tag_cloud = $this->tag_cloud();
+            }
+
+            $admin->display(
+                "pages".DIR."manage_tags",
+                array(
+                    "tag_cloud" => $tag_cloud,
+                )
+            );
+        }
+
+        public function admin_posts_tagged($admin): void {
+            if (!Post::any_editable())
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to manage tags.", "tags")
+                );
+
+            # Redirect searches to a clean URL or dirty GET depending on configuration.
             if (isset($_POST['query']))
                 redirect(
-                    "manage_tags/query/".
+                    "posts_tagged/query/".
                     str_ireplace("%2F", "", urlencode($_POST['query'])).
+                    "/"
+                );
+
+            # Redirect without a search if both tag filter and search term are present.
+            if (isset($_GET['clean']) and isset($_GET['query']))
+                redirect(
+                    "posts_tagged/clean/".
+                    str_ireplace("%2F", "", urlencode($_GET['clean'])).
                     "/"
                 );
 
@@ -271,6 +325,14 @@
                 "post_attributes.value LIKE :query OR url LIKE :query",
                 "posts"
             );
+
+            $tag = false;
+
+            if (isset($_GET['clean']) and $_GET['clean'] != "") {
+                $where[] = "post_attributes.name = 'tags' AND post_attributes.value LIKE :tag";
+                $params[":tag"] = $this->tags_clean_match($_GET['clean']);
+                $tag = $this->tag_find_by_clean($_GET['clean']);
+            }
 
             $visitor = Visitor::current();
 
@@ -306,11 +368,8 @@
             }
 
             $admin->display(
-                "pages".DIR."manage_tags",
-                array(
-                    "tag_cloud" => $this->tag_cloud(),
-                    "posts" => $posts
-                )
+                "pages".DIR."posts_tagged",
+                array("posts" => $posts,"tag" => $tag)
             );
         }
 
@@ -327,7 +386,7 @@
             if ($post->no_results)
                 Flash::warning(
                     __("Post not found."),
-                    "manage_tags"
+                    "posts_tagged"
                 );
 
             if (!$post->editable())
@@ -374,7 +433,7 @@
 
             Flash::notice(
                 __("Tags updated.", "tags"),
-                "manage_tags"
+                "posts_tagged"
             );
         }
 
@@ -555,13 +614,13 @@
             if (empty($_POST['post']))
                 Flash::warning(
                     __("No posts selected.", "tags"),
-                    "manage_tags"
+                    "posts_tagged"
                 );
 
             if (!isset($_POST['name']) or $_POST['name'] == "")
                 Flash::warning(
                     __("No tags specified.", "tags"),
-                    "manage_tags"
+                    "posts_tagged"
                 );
 
             foreach ($_POST['post'] as $post_id) {
@@ -577,7 +636,7 @@
 
             Flash::notice(
                 __("Posts tagged.", "tags"),
-                "manage_tags"
+                "posts_tagged"
             );
         }
 

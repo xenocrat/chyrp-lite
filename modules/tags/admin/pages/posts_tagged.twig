@@ -1,0 +1,77 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block title %}{{ "Posts Tagged" | translate("tags") }}{% endblock %}
+
+{% block content %}
+<form class="filters" action="{{ url('posts_tagged') }}" method="post" accept-charset="UTF-8" role="search">
+<fieldset role="presentation">
+<h3>
+{{ "Search&hellip;" | translate }}
+<a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
+</h3>
+<input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true) }}" id="query" aria-label="{{ 'Query' | translate | fix(true) }}">
+<button type="submit">{{ "Search" | translate }}</button>
+</fieldset>
+</form>
+<h2>
+{% if tag is not empty %}
+{{ "Posts tagged with &#8220;%s&#8221;" | translate("tags") | format(tag.name) }}
+{% else %}
+{{ GET.query is not empty ? "Search Results" | translate : "Posts" | translate }}
+{% endif %}
+</h2>
+<form action="{{ url('bulk_tag') }}" method="post" accept-charset="UTF-8" data-toggler="tag_toggler">
+<table class="interactive{{ posts.paginated is empty ? ' empty' : '' }}">
+<thead>
+<tr class="head">
+<th class="toggler" id="tag_toggler"></th>
+<th class="post_title title main">{{ "Post" | translate }}</th>
+<th class="post_tags list">{{ "Tags" | translate("tags") }}</th>
+<th class="controls">{{ "Controls" | translate }}</th>
+</tr>
+</thead>
+<tbody>
+{% for post in posts.paginated %}
+<tr class="post">
+<td class="checkbox">
+<input type="checkbox" name="post[{{ loop.index0 }}]" value="{{ post.id }}" id="post_checkbox_{{ post.id }}" aria-label="{{ 'Select' | translate | fix(true) }}">
+</td>
+<td class="post_title title main">
+<a class="edit_tag" href="{{ post.url() }}">{{ post.title() | striptags | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
+</td>
+<td class="post_tags list">
+{% for name, clean in post.tags %}
+<a class="tag" href="{{ url('posts_tagged/clean/' ~ (clean | url_encode)) }}">{{ name }}</a>
+{% endfor %}
+</td>
+<td class="controls">
+{% if post.editable() %}
+<a class="tags_edit_link edit_link emblem" href="{{ url('edit_tags/id/' ~ post.id) }}">{{ '<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">' }}</a>
+{% endif %}
+</td>
+</tr>
+{% else %}
+<tr>
+<td class="placeholder">
+<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/failure.svg" alt="">
+{{ "No results" | translate }}
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<div class="controls">
+<h4>{{ "Tag Selected Post(s) with:" | translate("tags") }}</h4>
+<input type="text" name="name" value="" id="name"  aria-label="{{ 'Name' | translate('tags') | fix(true) }}">
+<button type="submit">{{ "Tag" | translate("tags") }}</button>
+<input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
+</div>
+</form>
+{% if posts.paginated is not empty and posts.pages > 1 %}
+<div class="pagination">
+<span class="pages">{{ "Page %d of %s" | translate | format(posts.page, posts.final_link(posts.pages)) }}</span>
+{{ posts.prev_link }}
+{{ posts.next_link }}
+</div>
+{% endif %}
+{% endblock %}
