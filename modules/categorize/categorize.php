@@ -71,7 +71,11 @@
             $td = '<td class="post_category value">';
 
             if (isset($post->category->name))
-                $td.= fix($post->category->name);
+                $td.= '<a href="'.
+                      url("manage_category/query/".urlencode("id:".$post->category->id)).
+                      '">'.
+                      $post->category->name.
+                      '</a>';
 
             $td.= '</td>';
 
