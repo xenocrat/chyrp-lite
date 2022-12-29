@@ -8,22 +8,22 @@
 <fieldset role="presentation">
 <p>
 <label for="name">{{ "Site Name" | translate }}</label>
-<input class="text" type="text" name="name" value="{{ site.name | fix(true) }}" id="name">
+<input class="text" type="text" name="name" value="{{ site.name | fix(true, true) }}" id="name">
 </p>
 <p>
 <label for="description">{{ "Description" | translate }}</label>
-<input class="text" type="text" name="description" value="{{ site.description | fix(true) }}" id="description">
+<input class="text" type="text" name="description" value="{{ site.description | fix(true, true) }}" id="description">
 </p>
 <p>
 <label for="chyrp_url">{{ "Chyrp URL" | translate }}</label>
-<input class="text" type="url" name="chyrp_url" value="{{ site.chyrp_url | fix(true) }}" id="chyrp_url" required>
+<input class="text" type="url" name="chyrp_url" value="{{ site.chyrp_url | fix(true, true) }}" id="chyrp_url" required>
 </p>
 <p>
 <label for="url">
 {{ "Canonical URL" | translate }}
 <span class="sub">{{ "(optional)" | translate }}</span>
 </label>
-<input class="text" type="url" name="url" value="{{ site.url != site.chyrp_url ? site.url | fix(true) : '' }}" id="url">
+<input class="text" type="url" name="url" value="{{ site.url != site.chyrp_url ? site.url | fix(true, true) : '' }}" id="url">
 <a href="{{ url('help/id/canonical_url') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
 <small>
 {{ "Have your site URLs point someplace other than your install directory." | translate }}
@@ -31,7 +31,7 @@
 </p>
 <p>
 <label for="email">{{ "Contact Email Address" | translate }}</label>
-<input class="text" type="email" name="email" value="{{ site.email | fix(true) }}" id="email" required>
+<input class="text" type="email" name="email" value="{{ site.email | fix(true, true) }}" id="email" required>
 </p>
 <p>
 <label for="timezone">{{ "Time Zone" | translate }}</label>

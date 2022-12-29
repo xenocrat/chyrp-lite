@@ -20,7 +20,7 @@
 </p>
 <p>
 <label for="uploads_path">{{ "Uploads Path" | translate }}</label>
-<input class="text" type="text" name="uploads_path" value="{{ site.uploads_path | fix(true) }}" id="uploads_path">
+<input class="text" type="text" name="uploads_path" value="{{ site.uploads_path | fix(true, true) }}" id="uploads_path">
 <small>
 {{ "The directory to which files are uploaded, relative to your installation directory." | translate }}
 </small>

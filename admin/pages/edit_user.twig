@@ -8,11 +8,11 @@
 <fieldset role="presentation">
 <p>
 <label for="login">{{ "Login" | translate }}</label>
-<input class="text" type="text" name="login" value="{{ user.login | fix(true) }}" id="login" maxlength="64" required>
+<input class="text" type="text" name="login" value="{{ user.login | fix(true, true) }}" id="login" maxlength="64" required>
 </p>
 <p>
 <label for="email">{{ "Email" | translate }}</label>
-<input class="text" type="email" name="email" value="{{ user.email | fix(true) }}" id="email" maxlength="128" required>
+<input class="text" type="email" name="email" value="{{ user.email | fix(true, true) }}" id="email" maxlength="128" required>
 </p>
 <p>
 <label for="group">{{ "Group" | translate }}</label>
@@ -35,14 +35,14 @@
 {{ "Full Name" | translate }}
 <span class="sub">{{ "(optional)" | translate }}</span>
 </label>
-<input class="text" type="text" name="full_name" value="{{ user.full_name | fix(true) }}" id="full_name" maxlength="250">
+<input class="text" type="text" name="full_name" value="{{ user.full_name | fix(true, true) }}" id="full_name" maxlength="250">
 </p>
 <p>
 <label for="website">
 {{ "Website" | translate }}
 <span class="sub">{{ "(optional)" | translate }}</span>
 </label>
-<input class="text" type="url" name="website" value="{{ user.website | fix(true) }}" id="website" maxlength="128">
+<input class="text" type="url" name="website" value="{{ user.website | fix(true, true) }}" id="website" maxlength="128">
 </p>
 {% if site.email_activation %}
 <p>

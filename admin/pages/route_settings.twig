@@ -26,7 +26,7 @@
 {{ "Post View URL" | translate }}
 <span class="sub">{{ "(requires clean URLs)" | translate }}</span>
 </label>
-<input class="text" type="text" name="post_url" value="{{ site.post_url | fix(true) }}" size="30" id="post_url">
+<input class="text" type="text" name="post_url" value="{{ site.post_url | fix(true, true) }}" size="30" id="post_url">
 </p>
 <div class="small">
 <strong>{{ "Syntax:" | translate }}</strong>

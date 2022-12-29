@@ -16,7 +16,7 @@
 </button>
 </p>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
-<input type="hidden" name="original" value="{{ tag.name | fix(true) }}" id="original">
+<input type="hidden" name="original" value="{{ tag.name | fix(true, true) }}" id="original">
 </fieldset>
 </form>
 {% endblock %}
