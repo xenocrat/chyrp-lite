@@ -811,8 +811,8 @@
 
         public function manage_posts_column($post): void {
             echo '<td class="post_comments value"><a href="'.
-                 $post->url().
-                 '#comments">'.
+                 url("manage_comments/query/".urlencode("post_id:".$post->id)).
+                 '">'.
                  $post->comment_count.
                  '</a></td>';
         }
