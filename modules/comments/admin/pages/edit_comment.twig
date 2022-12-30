@@ -20,23 +20,23 @@
 <div id="more_options" class="more_options">
 <p class="more_options_option">
 <label for="author">{{ "Author" | translate("comments") }}</label>
-<input class="text" type="text" name="author" value="{{ comment.author | fix(true) }}" id="author" maxlength="250" required>
+<input class="text" type="text" name="author" value="{{ comment.author | fix(true, true) }}" id="author" maxlength="250" required>
 </p>
 {% if comment.status != "pingback" %}
 <p class="more_options_option">
 <label for="author_email">{{ "Author Email" | translate("comments") }}</label>
-<input class="text" type="email" name="author_email" value="{{ comment.author_email | fix(true) }}" id="author_email" maxlength="128" required>
+<input class="text" type="email" name="author_email" value="{{ comment.author_email | fix(true, true) }}" id="author_email" maxlength="128" required>
 </p>
 <p class="more_options_option">
 <label for="author_url">{{ "Author Website" | translate("comments") }}</label>
-<input class="text" type="url" name="author_url" value="{{ comment.author_url | fix(true) }}" id="author_url" maxlength="2048">
+<input class="text" type="url" name="author_url" value="{{ comment.author_url | fix(true, true) }}" id="author_url" maxlength="2048">
 </p>
 {% endif %}
 {% if visitor.group.can("edit_comment") %}
 {# User can edit all comments, not just their own. #}
 <p class="more_options_option">
 <label for="created_at">{{ "Timestamp" | translate("comments") }}</label>
-<input class="text" type="text" name="created_at" value="{{ comment.created_at | dateformat('Y-m-d H:i:s') | fix(true) }}" id="created_at">
+<input class="text" type="text" name="created_at" value="{{ comment.created_at | dateformat('Y-m-d H:i:s') | fix(true, true) }}" id="created_at">
 </p>
 {% if comment.status != "pingback" %}
 <p class="more_options_option">
