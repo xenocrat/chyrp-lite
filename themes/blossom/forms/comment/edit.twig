@@ -13,7 +13,7 @@
 {% if visitor.group.can("edit_comment") %}
 {# User can edit all comments, not just their own. #}
 <label for="comment_created_at_{{ comment.id }}">{{ "Timestamp" | translate }}</label>
-<input class="text" type="text" name="created_at" value="{{ comment.created_at | dateformat('Y-m-d H:i:s') | fix(true) }}" id="comment_created_at_{{ comment.id }}">
+<input class="text" type="text" name="created_at" value="{{ comment.created_at | dateformat('Y-m-d H:i:s') | fix(true, true) }}" id="comment_created_at_{{ comment.id }}">
 {% if comment.status != "pingback" %}
 <label for="comment_status_{{ comment.id }}">{{ "Status" | translate }}</label>
 <select name="status" id="comment_status_{{ comment.id }}">
