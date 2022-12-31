@@ -39,7 +39,7 @@
             if (!empty($count))
                 error(
                     __("Error"),
-                    __("A ping from your URL is already registered.", "pingable"),
+                    __("A webmention from your URL is already registered.", "pingable"),
                     code:422
                 );
 
@@ -123,7 +123,7 @@
             $pingback = $pingback->update($_POST['title']);
 
             Flash::notice(
-                __("Pingback updated.", "pingable"),
+                __("Webmention updated.", "pingable"),
                 "manage_pingbacks"
             );
         }
