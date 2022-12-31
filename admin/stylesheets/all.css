@@ -308,6 +308,17 @@ pre > code {
     border: none;
     padding: 0px;
 }
+a:link > code,
+a:visited > code {
+    text-decoration: none;
+    border-color: #1f1f23;
+}
+a:hover > code,
+a:focus > code,
+a:active > code {
+    text-decoration: none;
+    border-color: #1e57ba;
+}
 div.pagination {
     text-align: center;
     margin-top: 1em;
