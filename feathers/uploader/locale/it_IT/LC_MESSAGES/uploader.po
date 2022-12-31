@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: feathers/uploader/admin/help/uploader_source.twig:3
@@ -19,12 +19,8 @@ msgid "Upload Source"
 msgstr "Carica fonte"
 
 #: feathers/uploader/admin/help/uploader_source.twig:8
-msgid ""
-"This can be a URL that will take visitors to the original resource or it can "
-"be a human-readable description of the upload's origin."
-msgstr ""
-"Questo può essere un URL che porterà i visitatori alla risorsa originale o "
-"può essere una descrizione leggibile dell'origine del file caricato."
+msgid "This is a URL that will take visitors to the original resource."
+msgstr "Questo è un URL che porterà i visitatori alla risorsa originale."
 
 #: feathers/uploader/info.php:3
 msgid "Uploader"
@@ -51,10 +47,10 @@ msgstr "(Dimensione massima del file:%d megabyte)"
 msgid "Caption"
 msgstr "Didascalia"
 
-#: feathers/uploader/uploader.php:80
+#: feathers/uploader/uploader.php:78
 msgid "You did not select any files to upload."
 msgstr "Non è stato selezionato alcun file da caricare."
 
-#: feathers/uploader/uploader.php:217
+#: feathers/uploader/uploader.php:215
 msgid "Source"
 msgstr "Sorgente"

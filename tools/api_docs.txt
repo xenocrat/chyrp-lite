@@ -59,6 +59,15 @@ Returns a singleton reference to the current configuration.
 
 
 ==============================================
+includes/class/Controllers.php
+==============================================
+
+Class: Controllers
+------------------
+Acts as the backbone for all controllers.
+
+
+==============================================
 includes/class/Feathers.php
 ==============================================
 
@@ -238,20 +247,6 @@ Handles dynamic attributes.
 Function: __isset
 -----------------
 Handles model relationships, deferred and dynamic attributes.
-
-
-Function: __getPlaceholders
----------------------------
-Calls __get with the requested $name, but grabs everything as placeholders.
-
-Parameters:
-    $name - Name to call <Model.__get> with.
-
-Returns:
-    @mixed@
-
-See Also:
-    <Model.__get>
 
 
 Function: grab
@@ -788,14 +783,15 @@ Attempt to call a responder for the action(s) until one of them doesn't return f
 
 Function: url
 -------------
-Constructs an absolute URL from a relative one. Can translate clean to dirty URLs.
+Constructs an absolute URL from a relative one. Translates clean to dirty URLs.
 
 Parameters:
     $url - The relative URL. Assumed to be dirty if it begins with "/".
     $controller - The controller to use. Current controller used if omitted.
 
 Returns:
-    An absolute clean or dirty URL, depending on @Config->clean_urls@ and controller.
+    An absolute clean or dirty URL, depending on value of @Config->clean_urls@
+    and @controller->clean_urls@.
 
 
 Function: add
@@ -2379,17 +2375,6 @@ Returns:
     The response content, or false on failure.
 
 
-Function: grab_urls
--------------------
-Crawls a string and grabs hyperlinks from it.
-
-Parameters:
-    $string - The string to crawl.
-
-Returns:
-    An array of all URLs found in the string.
-
-
 Function: webmention_send
 -------------------------
 Sends Webmentions to the URLs discovered in a string.
@@ -2421,6 +2406,17 @@ Returns:
     The Webmention endpoint URL, or false on failure.
 
 
+Function: grab_urls
+-------------------
+Crawls a string and grabs hyperlinks from it.
+
+Parameters:
+    $string - The string to crawl.
+
+Returns:
+    An array of all URLs found in the string.
+
+
 Function: merge_urls
 --------------------
 Combines a base URL and relative path into a target URL.
@@ -2434,27 +2430,6 @@ Returns:
 
 Notes:
     Does not attempt to resolve dot segments in the path.
-
-
-Function: send_pingbacks
-------------------------
-Sends pingback requests to the URLs in a string.
-
-Parameters:
-    $string - The string to crawl for pingback URLs.
-    $post - The post we're sending from.
-    $limit - Timer limit for this function (optional).
-
-
-Function: pingback_url
-----------------------
-Checks if a URL is pingback-capable.
-
-Parameters:
-    $url - The URL to check.
-
-Returns:
-    The pingback target, or false on failure.
 
 
 Function: load_info
@@ -3315,82 +3290,67 @@ Outputs the closing channel element.
 
 
 ==============================================
-includes/lib/XMLRPC.php
+includes/lib/ThumbnailFile.php
 ==============================================
 
-Class: XMLRPC
--------------
-Extensible XML-RPC interface for remotely managing posts.
+Class: ThumbnailFile
+--------------------
+Creates and serves compressed image thumbnails.
 
 
 Function: __construct
 ---------------------
-Sets appropriate error and exception handlers and registers the methods.
+Receives the source filename and requested thumbnail parameters.
+
+Parameters:
+    $filename - Filename relative to the uploads directory.
+    $thumb_w - Requested thumbnail width (0 = auto).
+    $thumb_h - Requested thumbnail height (0 = auto).
+    $quality - Quality factor for the thumbnail file.
+    $square - Create a square crop of the original image?
 
 
-Function: pingback_ping
------------------------
-Receive and register pingbacks. Calls the @pingback@ trigger.
+Function: upscaling
+-------------------
+Will the thumbnail be larger than the original?
 
 
-Function: metaWeblog_getRecentPosts
------------------------------------
-Returns a list of recent posts that the user can edit/delete.
+Function: creatable
+-------------------
+Can the thumbnail file be created?
 
 
-Function: metaWeblog_getCategories
-----------------------------------
-Returns a list of available categories.
+Function: extension
+-------------------
+Returns the correct extension for the image.
 
 
-Function: metaWeblog_newMediaObject
------------------------------------
-Uploads a file to the server.
+Function: mime_type
+-------------------
+Returns the correct MIME type for the image.
 
 
-Function: metaWeblog_getPost
-----------------------------
-Retrieves a specified post for editing.
-
-
-Function: metaWeblog_newPost
-----------------------------
-Creates a new post.
-
-
-Function: metaWeblog_editPost
------------------------------
-Updates a specified post.
-
-
-Function: metaWeblog_deletePost
--------------------------------
-Deletes a specified post.
-
-
-Function: metaWeblog_getUsersBlogs
-----------------------------------
-Returns information about the blog.
-
-
-Function: convertFromDateCreated
---------------------------------
-Converts an IXR_Date (in $args["dateCreated"]) to SQL date format.
-
-
-Function: auth
+Function: name
 --------------
-Authenticates a user's login and password.
+Generates and returns a unique name for the thumbnail file.
 
 
-Function: error_handler
------------------------
-Handles errors encountered during XML-RPC requests.
+Function: create
+----------------
+Creates a thumbnail file using the supplied parameters.
+
+Parameters:
+    $overwrite - Overwrite an existing thumbnail file?
 
 
-Function: exception_handler
----------------------------
-Handles exceptions encountered during XML-RPC requests.
+Function: serve
+---------------
+Serves a thumbnail file with correct Content-Type header.
+
+
+Function: resize
+----------------
+Computes the final dimensions based on supplied parameters.
 
 
 ==============================================
@@ -4018,20 +3978,11 @@ Returns a singleton reference to the current visitor.
 
 
 ==============================================
-includes/rpc.php
-==============================================
-
-File: rpc
----------
-Handles XML-RPC requests.
-
-
-==============================================
 includes/thumbnail.php
 ==============================================
 
 File: thumbnail
 ---------------
-Generates compressed image thumbnails for uploaded files.
+Serves compressed image thumbnails for uploaded files.
 
 

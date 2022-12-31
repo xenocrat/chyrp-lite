@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/sparrow/content/comment.twig:3
@@ -57,15 +57,15 @@ msgid "[Untitled]"
 msgstr "[Unbenannt]"
 
 #: themes/sparrow/content/post.twig:37
-msgid "View pingbacks"
-msgstr "Pingbacks anzeigen"
+msgid "View webmentions"
+msgstr "Webmentions anzeigen"
 
 #: themes/sparrow/content/post.twig:38
 #, php-format
-msgid "%s pingback"
-msgid_plural "%s pingbacks"
-msgstr[0] "%s Pingback"
-msgstr[1] "%s Pingbacks"
+msgid "%s webmention"
+msgid_plural "%s webmentions"
+msgstr[0] "%s Webmention"
+msgstr[1] "%s Webmentions"
 
 #: themes/sparrow/content/post.twig:43
 msgid "Comments closed"
@@ -413,5 +413,5 @@ msgid "Previous post &rarr;"
 msgstr "Vorheriger Post &rarr;"
 
 #: themes/sparrow/pages/view.twig:18
-msgid "Pingbacks"
-msgstr "Pingbacks"
+msgid "Webmentions"
+msgstr "Webmentions"

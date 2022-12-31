@@ -20,13 +20,13 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: feathers/link/link.php:45
-#: feathers/link/link.php:84
+#: feathers/link/link.php:43
+#: feathers/link/link.php:82
 msgid "URL can't be empty."
 msgstr ""
 
-#: feathers/link/link.php:52
-#: feathers/link/link.php:91
+#: feathers/link/link.php:50
+#: feathers/link/link.php:89
 msgid "Invalid URL."
 msgstr ""
 

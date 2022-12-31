@@ -10,13 +10,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/pingable/admin/pages/delete_pingback.twig:3
 #: modules/pingable/admin/pages/delete_pingback.twig:6
-msgid "Delete Pingback?"
-msgstr "Eliminare Pingback?"
+msgid "Delete Webmention?"
+msgstr "Eliminare Webmention?"
 
 #: modules/pingable/admin/pages/delete_pingback.twig:8
 #, php-format
@@ -24,15 +24,16 @@ msgid "&#8220;%s&#8221; will be permanently deleted."
 msgstr "&#8220;%s&#8221; verrà eliminato definitivamente."
 
 #: modules/pingable/admin/pages/edit_pingback.twig:3
-msgid "Edit Pingback"
-msgstr "Modifica Pingback"
+msgid "Edit Webmention"
+msgstr "Modifica Webmention"
 
 #: modules/pingable/admin/pages/edit_pingback.twig:6
 #, php-format
-msgid "Editing Pingback to &#8220;%s&#8221;"
-msgstr "Modifica del Pingback al &#8220;%s&#8221;"
+msgid "Editing Webmention to &#8220;%s&#8221;"
+msgstr "Modifica del Webmention al &#8220;%s&#8221;"
 
 #: modules/pingable/admin/pages/edit_pingback.twig:10
+#: modules/pingable/admin/pages/manage_pingbacks.twig:20
 msgid "Title"
 msgstr "Titolo"
 
@@ -41,17 +42,13 @@ msgid "Update"
 msgstr "Aggiorna"
 
 #: modules/pingable/admin/pages/manage_pingbacks.twig:3
-msgid "Manage Pingbacks"
-msgstr "Gestisci Pingbacks"
+msgid "Manage Webmentions"
+msgstr "Gestisci Webmentions"
 
 #: modules/pingable/admin/pages/manage_pingbacks.twig:16
-#: modules/pingable/pingable.php:266 modules/pingable/pingable.php:287
-msgid "Pingbacks"
-msgstr "Pingback"
-
-#: modules/pingable/admin/pages/manage_pingbacks.twig:20
-msgid "Source"
-msgstr "Sorgente"
+#: modules/pingable/pingable.php:240 modules/pingable/pingable.php:264
+msgid "Webmentions"
+msgstr "Webmention"
 
 #: modules/pingable/admin/pages/manage_pingbacks.twig:21
 msgid "Post"
@@ -62,11 +59,11 @@ msgid "Added"
 msgstr "Aggiunto"
 
 #: modules/pingable/info.php:3
-msgid "Pingable"
-msgstr "Pingable"
+msgid "Mentionable"
+msgstr "Mentionable"
 
 #: modules/pingable/info.php:6
-msgid "Register pingbacks from blogs that link to yours."
+msgid "Register webmentions from blogs that link to yours."
 msgstr "Registra gli avvisi dei blog che si collegano al tuo."
 
 #: modules/pingable/info.php:11
@@ -76,71 +73,68 @@ msgstr ""
 "ogni gruppo."
 
 #: modules/pingable/info.php:12
-msgid "Do you want to remove pingbacks from the database?"
+msgid "Do you want to remove webmentions from the database?"
 msgstr "Si desidera rimuovere gli avvisi dal database?"
 
 #: modules/pingable/pingable.php:25
-msgid "Edit Pingbacks"
-msgstr "Modifica dei Pingbacks"
+msgid "Edit Webmentions"
+msgstr "Modifica dei Webmentions"
 
 #: modules/pingable/pingable.php:26
-msgid "Delete Pingbacks"
-msgstr "Elimina Pingbacks"
+msgid "Delete Webmentions"
+msgstr "Elimina Webmentions"
 
-#: modules/pingable/pingable.php:42 modules/pingable/pingable.php:68
-msgid "A ping from your URL is already registered."
-msgstr "Un ping dall'URL è già registrato."
+#: modules/pingable/pingable.php:42
+msgid "A webmention from your URL is already registered."
+msgstr "Un Webmention dall'URL è già registrato."
 
-#: modules/pingable/pingable.php:48 modules/pingable/pingable.php:75
+#: modules/pingable/pingable.php:49
 msgid "Your URL is too long to be stored in our database."
 msgstr "Il tuo URL è troppo lungo per essere memorizzato nel nostro database."
 
-#: modules/pingable/pingable.php:53
-msgid "Pingback registered!"
-msgstr "Pingback registrato!"
+#: modules/pingable/pingable.php:64
+msgid "An ID is required to edit a webmention."
+msgstr "È necessario un ID per modificare un Webmention."
 
-#: modules/pingable/pingable.php:90
-msgid "An ID is required to edit a pingback."
-msgstr "È necessario un ID per modificare un Pingback."
+#: modules/pingable/pingable.php:72 modules/pingable/pingable.php:114
+#: modules/pingable/pingable.php:143 modules/pingable/pingable.php:181
+msgid "Webmention not found."
+msgstr "Webmention non trovato."
 
-#: modules/pingable/pingable.php:98 modules/pingable/pingable.php:140
-#: modules/pingable/pingable.php:169 modules/pingable/pingable.php:207
-msgid "Pingback not found."
-msgstr "Pingback non trovato."
-
-#: modules/pingable/pingable.php:105 modules/pingable/pingable.php:146
-msgid "You do not have sufficient privileges to edit this pingback."
+#: modules/pingable/pingable.php:79 modules/pingable/pingable.php:120
+msgid "You do not have sufficient privileges to edit this webmention."
 msgstr ""
-"Non si dispone di privilegi sufficienti per modificare questo Pingback."
+"Non si dispone di privilegi sufficienti per modificare questo Webmention."
 
-#: modules/pingable/pingable.php:124
-msgid "An ID is required to update a pingback."
-msgstr "È necessario un ID per aggiornare un Pingback."
+#: modules/pingable/pingable.php:98
+msgid "An ID is required to update a webmention."
+msgstr "È necessario un ID per aggiornare un Webmention."
 
-#: modules/pingable/pingable.php:130
+#: modules/pingable/pingable.php:104
 msgid "No Title Specified"
 msgstr "Nessun titolo specificato"
 
-#: modules/pingable/pingable.php:131
-msgid "A title is required to update a pingback."
-msgstr "È necessario un titolo per aggiornare un Pingback."
+#: modules/pingable/pingable.php:105
+msgid "A title is required to update a webmention."
+msgstr "È necessario un titolo per aggiornare un Webmention."
 
-#: modules/pingable/pingable.php:152
-msgid "Pingback updated."
-msgstr "Pingback aggiornato."
+#: modules/pingable/pingable.php:126
+msgid "Webmention updated."
+msgstr "Webmention aggiornato."
 
-#: modules/pingable/pingable.php:161 modules/pingable/pingable.php:195
-msgid "An ID is required to delete a pingback."
-msgstr "È necessario un ID per eliminare un Pingback."
+#: modules/pingable/pingable.php:135 modules/pingable/pingable.php:169
+msgid "An ID is required to delete a webmention."
+msgstr "È necessario un ID per eliminare un Webmention."
 
-#: modules/pingable/pingable.php:176 modules/pingable/pingable.php:213
-msgid "You do not have sufficient privileges to delete this pingback."
-msgstr "Non si dispone di privilegi sufficienti per eliminare questo Pingback."
+#: modules/pingable/pingable.php:150 modules/pingable/pingable.php:187
+msgid "You do not have sufficient privileges to delete this webmention."
+msgstr ""
+"Non si dispone di privilegi sufficienti per eliminare questo Webmention."
 
-#: modules/pingable/pingable.php:219
-msgid "Pingback deleted."
-msgstr "Pingback eliminato."
+#: modules/pingable/pingable.php:193
+msgid "Webmention deleted."
+msgstr "Webmention eliminato."
 
-#: modules/pingable/pingable.php:228
-msgid "You do not have sufficient privileges to manage pingbacks."
-msgstr "Non si dispone di privilegi sufficienti per gestire i Pingbacks."
+#: modules/pingable/pingable.php:202
+msgid "You do not have sufficient privileges to manage webmentions."
+msgstr "Non si dispone di privilegi sufficienti per gestire i Webmentions."

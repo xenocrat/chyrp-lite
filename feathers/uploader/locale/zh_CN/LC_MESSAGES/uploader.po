@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: feathers/uploader/admin/help/uploader_source.twig:3
@@ -19,10 +19,8 @@ msgid "Upload Source"
 msgstr "上传来源"
 
 #: feathers/uploader/admin/help/uploader_source.twig:8
-msgid ""
-"This can be a URL that will take visitors to the original resource or it can "
-"be a human-readable description of the upload's origin."
-msgstr "这可以是将访客带到原始资源的URL，也可以是人类可读的对上传来源的描述。"
+msgid "This is a URL that will take visitors to the original resource."
+msgstr "这是一个将访问者带到原始资源的 URL。"
 
 #: feathers/uploader/info.php:3
 msgid "Uploader"
@@ -49,10 +47,10 @@ msgstr "（最大文件大小：%d M）"
 msgid "Caption"
 msgstr "说明"
 
-#: feathers/uploader/uploader.php:80
+#: feathers/uploader/uploader.php:78
 msgid "You did not select any files to upload."
 msgstr "您没有选择任何文件上传。"
 
-#: feathers/uploader/uploader.php:217
+#: feathers/uploader/uploader.php:215
 msgid "Source"
 msgstr "来源"

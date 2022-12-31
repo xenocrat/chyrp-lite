@@ -50,13 +50,13 @@ msgid "[Untitled]"
 msgstr ""
 
 #: themes/sparrow/content/post.twig:37
-msgid "View pingbacks"
+msgid "View webmentions"
 msgstr ""
 
 #: themes/sparrow/content/post.twig:38
 #, php-format
-msgid "%s pingback"
-msgid_plural "%s pingbacks"
+msgid "%s webmention"
+msgid_plural "%s webmentions"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -404,6 +404,6 @@ msgid "Previous post &rarr;"
 msgstr ""
 
 #: themes/sparrow/pages/view.twig:18
-msgid "Pingbacks"
+msgid "Webmentions"
 msgstr ""
 

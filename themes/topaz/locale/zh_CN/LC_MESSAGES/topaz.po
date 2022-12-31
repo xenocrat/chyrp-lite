@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/topaz/content/comment.twig:3
@@ -59,13 +59,13 @@ msgid "[Untitled]"
 msgstr "[无标题]"
 
 #: themes/topaz/content/post.twig:34
-msgid "View pingbacks"
+msgid "View webmentions"
 msgstr "查看引用"
 
 #: themes/topaz/content/post.twig:35
 #, php-format
-msgid "%s pingback"
-msgid_plural "%s pingbacks"
+msgid "%s webmention"
+msgid_plural "%s webmentions"
 msgstr[0] "%s 包括引用"
 
 #: themes/topaz/content/post.twig:40
@@ -432,7 +432,7 @@ msgid "Previous post"
 msgstr "上一篇"
 
 #: themes/topaz/pages/view.twig:11
-msgid "Pingbacks"
+msgid "Webmentions"
 msgstr "引用"
 
 #: themes/topaz/pages/view.twig:35

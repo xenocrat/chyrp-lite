@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: admin/help/canonical_url.twig:3 admin/help/canonical_url.twig:6
@@ -69,8 +69,8 @@ msgstr ""
 "显示2016年由Foo创建的帖子。"
 
 #: admin/help/markdown.twig:3 admin/help/markdown.twig:6
-#: admin/help/markdown.twig:13 admin/pages/content_settings.twig:72
-#: admin/partials/page_fields.twig:12 admin/partials/post_fields.twig:42
+#: admin/help/markdown.twig:13 admin/pages/content_settings.twig:64
+#: admin/partials/page_fields.twig:12 admin/partials/post_fields.twig:46
 msgid "Markdown"
 msgstr "Markdown"
 
@@ -89,6 +89,7 @@ msgid "## Heading"
 msgstr ""
 
 #: admin/help/markdown.twig:20 admin/help/markdown.twig:24
+#: admin/javascripts/admin.js.php:225
 msgid "Heading"
 msgstr ""
 
@@ -97,60 +98,60 @@ msgid "### Heading"
 msgstr ""
 
 #: admin/help/markdown.twig:27
-msgid "*Emphasis*"
-msgstr ""
-
-#: admin/help/markdown.twig:28
-msgid "Emphasis"
-msgstr ""
-
-#: admin/help/markdown.twig:31
-msgid "~~Strikethrough~~"
-msgstr ""
-
-#: admin/help/markdown.twig:32
-msgid "Strikethrough"
-msgstr ""
-
-#: admin/help/markdown.twig:35
 msgid "**Strong**"
 msgstr ""
 
-#: admin/help/markdown.twig:36
+#: admin/help/markdown.twig:28 admin/javascripts/admin.js.php:239
 msgid "Strong"
 msgstr ""
 
+#: admin/help/markdown.twig:31
+msgid "*Emphasis*"
+msgstr ""
+
+#: admin/help/markdown.twig:32 admin/javascripts/admin.js.php:253
+msgid "Emphasis"
+msgstr ""
+
+#: admin/help/markdown.twig:35
+msgid "~~Strikethrough~~"
+msgstr ""
+
+#: admin/help/markdown.twig:36 admin/javascripts/admin.js.php:267
+msgid "Strikethrough"
+msgstr ""
+
 #: admin/help/markdown.twig:39
-msgid "Blank line"
-msgstr "隐藏线"
-
-#: admin/help/markdown.twig:40
-msgid "New paragraph"
-msgstr "新行"
-
-#: admin/help/markdown.twig:43
-msgid "[title](URL)"
-msgstr ""
-
-#: admin/help/markdown.twig:44
-msgid "Hyperlink"
-msgstr ""
-
-#: admin/help/markdown.twig:47
-msgid "![description](URL)"
-msgstr ""
-
-#: admin/help/markdown.twig:48 admin/javascripts/admin.js.php:281
-msgid "Image"
-msgstr "图像"
-
-#: admin/help/markdown.twig:51
 msgid "`Code`"
 msgstr ""
 
-#: admin/help/markdown.twig:52 admin/javascripts/admin.js.php:253
+#: admin/help/markdown.twig:40 admin/javascripts/admin.js.php:281
 msgid "Code"
 msgstr "代码"
+
+#: admin/help/markdown.twig:43
+msgid "Blank line"
+msgstr "隐藏线"
+
+#: admin/help/markdown.twig:44
+msgid "New paragraph"
+msgstr "新行"
+
+#: admin/help/markdown.twig:47
+msgid "[title](URL)"
+msgstr ""
+
+#: admin/help/markdown.twig:48 admin/javascripts/admin.js.php:295
+msgid "Hyperlink"
+msgstr ""
+
+#: admin/help/markdown.twig:51
+msgid "![description](URL)"
+msgstr ""
+
+#: admin/help/markdown.twig:52 admin/javascripts/admin.js.php:309
+msgid "Image"
+msgstr "图像"
 
 #: admin/help/markdown.twig:55
 msgid "- List of items"
@@ -179,7 +180,7 @@ msgstr ""
 "时自动生成。 一个slug 只能包含字母a-z，数字0-9和连字符减号（“ - ”）。"
 
 #: admin/help/unicode_emoticons.twig:3 admin/help/unicode_emoticons.twig:6
-#: admin/pages/content_settings.twig:64
+#: admin/pages/content_settings.twig:56
 msgid "Unicode Emoticons"
 msgstr "Unicode表情符号"
 
@@ -200,26 +201,6 @@ msgstr "表情"
 msgid "Emoji"
 msgstr "表情符号"
 
-#: admin/help/xmlrpc.twig:3 admin/help/xmlrpc.twig:6
-#: admin/pages/content_settings.twig:56
-msgid "XML-RPC Support"
-msgstr "XML-RPC支持"
-
-#: admin/help/xmlrpc.twig:8
-msgid ""
-"Chyrp Lite implements a complete WordPress-compatible MetaWeblog XML-RPC API "
-"that allows you to do many blogging tasks remotely without having to visit "
-"your blog's website."
-msgstr ""
-"Chyrp Lite实现了一个完整的与WordPress兼容的MetaWeblog XML-RPC API，可以让您轻"
-"松实现\n"
-"远程执行许多博客任务，而无需访问您博客的网站。"
-
-#: admin/help/xmlrpc.twig:11
-#, php-format
-msgid "Your blog's XML-RPC URL is <code>%s/includes/rpc.php</code>."
-msgstr "您的博客的XML-RPC URL是 <code>%s/includes/rpc.php</code>。"
-
 #: admin/javascripts/admin.js.php:47 admin/javascripts/admin.js.php:53
 msgid "Toggle All"
 msgstr "全部切换"
@@ -228,63 +209,59 @@ msgstr "全部切换"
 msgid "Are you sure you want to proceed?"
 msgstr "确定继续？"
 
-#: admin/javascripts/admin.js.php:199 admin/javascripts/admin.js.php:566
+#: admin/javascripts/admin.js.php:199 admin/javascripts/admin.js.php:630
 msgid "Close"
 msgstr "关闭"
 
-#: admin/javascripts/admin.js.php:206 admin/javascripts/admin.js.php:573
+#: admin/javascripts/admin.js.php:206 admin/javascripts/admin.js.php:637
 msgid "close"
 msgstr "关闭"
 
-#: admin/javascripts/admin.js.php:225
-msgid "Bold"
-msgstr "粗体"
-
 #: admin/javascripts/admin.js.php:231
-msgid "bold"
-msgstr "粗体"
-
-#: admin/javascripts/admin.js.php:239
-msgid "Italic"
-msgstr "斜体"
+msgid "heading"
+msgstr ""
 
 #: admin/javascripts/admin.js.php:245
-msgid "italic"
-msgstr "斜体"
+msgid "strong"
+msgstr ""
 
 #: admin/javascripts/admin.js.php:259
+msgid "emphasis"
+msgstr ""
+
+#: admin/javascripts/admin.js.php:273
+msgid "strikethrough"
+msgstr ""
+
+#: admin/javascripts/admin.js.php:287
 msgid "code"
 msgstr "代码"
 
-#: admin/javascripts/admin.js.php:267
-msgid "Link"
+#: admin/javascripts/admin.js.php:301
+msgid "hyperlink"
 msgstr "链接"
 
-#: admin/javascripts/admin.js.php:273
-msgid "link"
-msgstr "链接"
-
-#: admin/javascripts/admin.js.php:287 admin/javascripts/admin.js.php:333
+#: admin/javascripts/admin.js.php:315 admin/javascripts/admin.js.php:364
 msgid "image"
 msgstr "图像"
 
-#: admin/javascripts/admin.js.php:295
+#: admin/javascripts/admin.js.php:326
 msgid "Upload"
 msgstr "上传"
 
-#: admin/javascripts/admin.js.php:311 admin/javascripts/admin.js.php:425
+#: admin/javascripts/admin.js.php:342 admin/javascripts/admin.js.php:459
 msgid "Uploading..."
 msgstr "上传中..."
 
-#: admin/javascripts/admin.js.php:346 admin/pages/themes.twig:25
+#: admin/javascripts/admin.js.php:377 admin/pages/themes.twig:25
 msgid "Preview"
 msgstr "预览"
 
-#: admin/javascripts/admin.js.php:362
+#: admin/javascripts/admin.js.php:393
 msgid "preview"
 msgstr "预览"
 
-#: admin/javascripts/admin.js.php:384
+#: admin/javascripts/admin.js.php:418
 msgid "Words:"
 msgstr ""
 
@@ -340,7 +317,7 @@ msgid "Include pages in search results."
 msgstr "在搜索结果中包括页面。"
 
 #: admin/pages/content_settings.twig:49
-msgid "Send Pingbacks"
+msgid "Send Webmentions"
 msgstr "发送引用"
 
 #: admin/pages/content_settings.twig:52
@@ -348,29 +325,24 @@ msgid "Attempts to notify sites to which your posts link."
 msgstr "尝试您帖子链接到的站点。"
 
 #: admin/pages/content_settings.twig:58 admin/pages/content_settings.twig:66
-#: admin/pages/content_settings.twig:74 admin/pages/export.twig:14
-#: admin/pages/export.twig:20 admin/pages/export.twig:26
-#: admin/pages/export.twig:32 admin/pages/general_settings.twig:27
-#: admin/pages/manage_pages.twig:10 admin/pages/manage_posts.twig:10
-#: admin/pages/manage_users.twig:10 admin/partials/page_fields.twig:21
-#: admin/partials/post_fields.twig:26 admin/partials/post_fields.twig:97
-#: admin/partials/post_fields.twig:116
+#: admin/pages/export.twig:14 admin/pages/export.twig:20
+#: admin/pages/export.twig:26 admin/pages/export.twig:32
+#: admin/pages/general_settings.twig:27 admin/pages/manage_pages.twig:10
+#: admin/pages/manage_posts.twig:10 admin/pages/manage_users.twig:10
+#: admin/partials/page_fields.twig:21 admin/partials/post_fields.twig:26
+#: admin/partials/post_fields.twig:101 admin/partials/post_fields.twig:120
 msgid "help"
 msgstr "帮助"
 
 #: admin/pages/content_settings.twig:60
-msgid "XML-RPC support allows you to manipulate your blog content remotely."
-msgstr "XML-RPC支持允许您远程操作您的博客内容。"
-
-#: admin/pages/content_settings.twig:68
 msgid "Display emoticons as Unicode emoji."
 msgstr "将表情符号显示为Unicode表情符号。"
 
-#: admin/pages/content_settings.twig:76
+#: admin/pages/content_settings.twig:68
 msgid "Compose blog content using Markdown text formatting."
 msgstr "使用Markdown语法撰写博客内容。"
 
-#: admin/pages/content_settings.twig:81 admin/pages/edit_group.twig:24
+#: admin/pages/content_settings.twig:73 admin/pages/edit_group.twig:24
 #: admin/pages/edit_user.twig:55 admin/pages/general_settings.twig:60
 #: admin/pages/route_settings.twig:85 admin/pages/user_settings.twig:47
 msgid "Update"
@@ -407,7 +379,7 @@ msgstr "删除！"
 #: admin/pages/delete_group.twig:47 admin/pages/delete_page.twig:23
 #: admin/pages/delete_post.twig:17 admin/pages/delete_upload.twig:17
 #: admin/pages/delete_user.twig:44 admin/partials/page_fields.twig:80
-#: admin/partials/post_fields.twig:159
+#: admin/partials/post_fields.twig:167
 msgid "Cancel"
 msgstr "取消"
 
@@ -820,7 +792,7 @@ msgid "Posted"
 msgstr "已发布的"
 
 #: admin/pages/manage_posts.twig:22 admin/partials/page_fields.twig:27
-#: admin/partials/post_fields.twig:65
+#: admin/partials/post_fields.twig:69
 msgid "Status"
 msgstr "状态"
 
@@ -1076,7 +1048,7 @@ msgstr "写作"
 msgid "Body"
 msgstr "正文"
 
-#: admin/partials/page_fields.twig:22 admin/partials/post_fields.twig:98
+#: admin/partials/page_fields.twig:22 admin/partials/post_fields.twig:102
 msgid "Slug"
 msgstr ""
 
@@ -1084,7 +1056,7 @@ msgstr ""
 msgid "Public and visible in pages list"
 msgstr "公开并在页面列表中显示"
 
-#: admin/partials/page_fields.twig:32 admin/partials/post_fields.twig:70
+#: admin/partials/page_fields.twig:32 admin/partials/post_fields.twig:74
 msgid "Public"
 msgstr "公开"
 
@@ -1092,7 +1064,7 @@ msgstr "公开"
 msgid "Private and visible in pages list"
 msgstr "隐藏并在页面列表中显示"
 
-#: admin/partials/page_fields.twig:36 admin/partials/post_fields.twig:72
+#: admin/partials/page_fields.twig:36 admin/partials/post_fields.twig:76
 msgid "Private"
 msgstr "隐藏"
 
@@ -1120,41 +1092,41 @@ msgstr "父级"
 msgid "[None]"
 msgstr "[空]"
 
-#: admin/partials/page_fields.twig:70 admin/partials/post_fields.twig:149
-#: admin/partials/post_fields.twig:165
+#: admin/partials/page_fields.twig:70 admin/partials/post_fields.twig:157
+#: admin/partials/post_fields.twig:173
 msgid "Publish"
 msgstr "公开"
 
 #: admin/partials/page_fields.twig:73 admin/partials/page_fields.twig:77
-#: admin/partials/post_fields.twig:152 admin/partials/post_fields.twig:156
-#: admin/partials/post_fields.twig:169
+#: admin/partials/post_fields.twig:160 admin/partials/post_fields.twig:164
+#: admin/partials/post_fields.twig:177
 msgid "Save"
 msgstr "保存"
 
-#: admin/partials/post_fields.twig:68
+#: admin/partials/post_fields.twig:72
 msgid "Draft"
 msgstr "草稿"
 
-#: admin/partials/post_fields.twig:74
+#: admin/partials/post_fields.twig:78
 msgid "Scheduled"
 msgstr "定时发布"
 
-#: admin/partials/post_fields.twig:75
+#: admin/partials/post_fields.twig:79
 msgid "Visible only to a group of users:"
 msgstr "仅可见于一组用户："
 
-#: admin/partials/post_fields.twig:77
+#: admin/partials/post_fields.twig:81
 msgid "All registered users"
 msgstr "所有注册的用户"
 
-#: admin/partials/post_fields.twig:90
+#: admin/partials/post_fields.twig:94
 msgid "Pinned?"
 msgstr "置顶？"
 
-#: admin/partials/post_fields.twig:91
+#: admin/partials/post_fields.twig:95
 msgid "(shows this post above all others)"
 msgstr "（置顶显示）"
 
-#: admin/partials/post_fields.twig:103
+#: admin/partials/post_fields.twig:107
 msgid "Timestamp"
 msgstr "时间戳"

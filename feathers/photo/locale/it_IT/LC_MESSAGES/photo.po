@@ -10,11 +10,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: feathers/photo/admin/help/photo_alt_text.twig:3
-#: feathers/photo/admin/help/photo_alt_text.twig:6 feathers/photo/photo.php:149
+#: feathers/photo/admin/help/photo_alt_text.twig:6 feathers/photo/photo.php:147
 msgid "Alternative Text"
 msgstr "Testo Alternative"
 
@@ -36,12 +36,8 @@ msgid "Photo Source"
 msgstr "Sorgente Foto"
 
 #: feathers/photo/admin/help/photo_source.twig:8
-msgid ""
-"This can be a URL that will take visitors to the original resource or it can "
-"be a human-readable description of the photo's origin."
-msgstr ""
-"Questo può essere un URL che porterà i visitatori alla risorsa originale o "
-"può essere una descrizione leggibile dell'origine della foto."
+msgid "This is a URL that will take visitors to the original resource."
+msgstr "Questo è un URL che porterà i visitatori alla risorsa originale."
 
 #: feathers/photo/info.php:3 feathers/photo/photo.php:18
 msgid "Photo"
@@ -64,10 +60,10 @@ msgstr "(Dimensione massima del file:%d megabyte)"
 msgid "Caption"
 msgstr "Didascalia"
 
-#: feathers/photo/photo.php:56
+#: feathers/photo/photo.php:54
 msgid "You did not select a photo to upload."
 msgstr "Non é stata selezionata alcuna foto da caricare."
 
-#: feathers/photo/photo.php:157
+#: feathers/photo/photo.php:155
 msgid "Source"
 msgstr "Sorgente"

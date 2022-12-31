@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: admin/help/canonical_url.twig:3 admin/help/canonical_url.twig:6
@@ -79,8 +79,8 @@ msgstr ""
 "visualizzare solo i post creati da Foo in 2016."
 
 #: admin/help/markdown.twig:3 admin/help/markdown.twig:6
-#: admin/help/markdown.twig:13 admin/pages/content_settings.twig:72
-#: admin/partials/page_fields.twig:12 admin/partials/post_fields.twig:42
+#: admin/help/markdown.twig:13 admin/pages/content_settings.twig:64
+#: admin/partials/page_fields.twig:12 admin/partials/post_fields.twig:46
 msgid "Markdown"
 msgstr "Markdown"
 
@@ -101,6 +101,7 @@ msgid "## Heading"
 msgstr "## Intestazione"
 
 #: admin/help/markdown.twig:20 admin/help/markdown.twig:24
+#: admin/javascripts/admin.js.php:225
 msgid "Heading"
 msgstr "Intestazione"
 
@@ -109,60 +110,60 @@ msgid "### Heading"
 msgstr "### Intestazione"
 
 #: admin/help/markdown.twig:27
-msgid "*Emphasis*"
-msgstr "*Enfasi*"
-
-#: admin/help/markdown.twig:28
-msgid "Emphasis"
-msgstr "Enfasi"
-
-#: admin/help/markdown.twig:31
-msgid "~~Strikethrough~~"
-msgstr "~~Barrato~~"
-
-#: admin/help/markdown.twig:32
-msgid "Strikethrough"
-msgstr "Barrato"
-
-#: admin/help/markdown.twig:35
 msgid "**Strong**"
 msgstr "**Forte**"
 
-#: admin/help/markdown.twig:36
+#: admin/help/markdown.twig:28 admin/javascripts/admin.js.php:239
 msgid "Strong"
 msgstr "Forte"
 
+#: admin/help/markdown.twig:31
+msgid "*Emphasis*"
+msgstr "*Enfasi*"
+
+#: admin/help/markdown.twig:32 admin/javascripts/admin.js.php:253
+msgid "Emphasis"
+msgstr "Enfasi"
+
+#: admin/help/markdown.twig:35
+msgid "~~Strikethrough~~"
+msgstr "~~Barrato~~"
+
+#: admin/help/markdown.twig:36 admin/javascripts/admin.js.php:267
+msgid "Strikethrough"
+msgstr "Barrato"
+
 #: admin/help/markdown.twig:39
-msgid "Blank line"
-msgstr "Riga vuota"
-
-#: admin/help/markdown.twig:40
-msgid "New paragraph"
-msgstr "Nuovo paragrafo"
-
-#: admin/help/markdown.twig:43
-msgid "[title](URL)"
-msgstr "[titolo](URL)"
-
-#: admin/help/markdown.twig:44
-msgid "Hyperlink"
-msgstr "Collegamento ipertestuale"
-
-#: admin/help/markdown.twig:47
-msgid "![description](URL)"
-msgstr "![descrizione](URL)"
-
-#: admin/help/markdown.twig:48 admin/javascripts/admin.js.php:281
-msgid "Image"
-msgstr "Immagine"
-
-#: admin/help/markdown.twig:51
 msgid "`Code`"
 msgstr "`Codice`"
 
-#: admin/help/markdown.twig:52 admin/javascripts/admin.js.php:253
+#: admin/help/markdown.twig:40 admin/javascripts/admin.js.php:281
 msgid "Code"
 msgstr "Codice"
+
+#: admin/help/markdown.twig:43
+msgid "Blank line"
+msgstr "Riga vuota"
+
+#: admin/help/markdown.twig:44
+msgid "New paragraph"
+msgstr "Nuovo paragrafo"
+
+#: admin/help/markdown.twig:47
+msgid "[title](URL)"
+msgstr "[titolo](URL)"
+
+#: admin/help/markdown.twig:48 admin/javascripts/admin.js.php:295
+msgid "Hyperlink"
+msgstr "Collegamento ipertestuale"
+
+#: admin/help/markdown.twig:51
+msgid "![description](URL)"
+msgstr "![descrizione](URL)"
+
+#: admin/help/markdown.twig:52 admin/javascripts/admin.js.php:309
+msgid "Image"
+msgstr "Immagine"
 
 #: admin/help/markdown.twig:55
 msgid "- List of items"
@@ -193,7 +194,7 @@ msgstr ""
 "numeri 0-9 e trattino-meno (&#8220;-&#8221;)."
 
 #: admin/help/unicode_emoticons.twig:3 admin/help/unicode_emoticons.twig:6
-#: admin/pages/content_settings.twig:64
+#: admin/pages/content_settings.twig:56
 msgid "Unicode Emoticons"
 msgstr "Emoticon Unicode"
 
@@ -216,26 +217,6 @@ msgstr "Emoticon"
 msgid "Emoji"
 msgstr "Emoji"
 
-#: admin/help/xmlrpc.twig:3 admin/help/xmlrpc.twig:6
-#: admin/pages/content_settings.twig:56
-msgid "XML-RPC Support"
-msgstr "Supporto XML-RPC"
-
-#: admin/help/xmlrpc.twig:8
-msgid ""
-"Chyrp Lite implements a complete WordPress-compatible MetaWeblog XML-RPC API "
-"that allows you to do many blogging tasks remotely without having to visit "
-"your blog's website."
-msgstr ""
-"Chyrp Lite implementa un'API XML-RPC completo e compatibile con WordPress "
-"MetaWeblog che ti permette di gestire il tuo blog in modo remoto senza dover "
-"visitare il sito web del tuo blog."
-
-#: admin/help/xmlrpc.twig:11
-#, php-format
-msgid "Your blog's XML-RPC URL is <code>%s/includes/rpc.php</code>."
-msgstr "L'URL XML-RPC del tuo blog è <code>%s/includes/RPC.php</code>."
-
 #: admin/javascripts/admin.js.php:47 admin/javascripts/admin.js.php:53
 msgid "Toggle All"
 msgstr "Spunta tutto"
@@ -244,63 +225,59 @@ msgstr "Spunta tutto"
 msgid "Are you sure you want to proceed?"
 msgstr "Sei sicuro di volere procedere?"
 
-#: admin/javascripts/admin.js.php:199 admin/javascripts/admin.js.php:566
+#: admin/javascripts/admin.js.php:199 admin/javascripts/admin.js.php:630
 msgid "Close"
 msgstr "Chiudi"
 
-#: admin/javascripts/admin.js.php:206 admin/javascripts/admin.js.php:573
+#: admin/javascripts/admin.js.php:206 admin/javascripts/admin.js.php:637
 msgid "close"
 msgstr "chiudi"
 
-#: admin/javascripts/admin.js.php:225
-msgid "Bold"
-msgstr "Grassetto"
-
 #: admin/javascripts/admin.js.php:231
-msgid "bold"
-msgstr "grassetto"
-
-#: admin/javascripts/admin.js.php:239
-msgid "Italic"
-msgstr "Italico"
+msgid "heading"
+msgstr "intestazione"
 
 #: admin/javascripts/admin.js.php:245
-msgid "italic"
-msgstr "italico"
+msgid "strong"
+msgstr "forte"
 
 #: admin/javascripts/admin.js.php:259
+msgid "emphasis"
+msgstr "enfasi"
+
+#: admin/javascripts/admin.js.php:273
+msgid "strikethrough"
+msgstr "barrato"
+
+#: admin/javascripts/admin.js.php:287
 msgid "code"
 msgstr "codice"
 
-#: admin/javascripts/admin.js.php:267
-msgid "Link"
-msgstr "Link"
+#: admin/javascripts/admin.js.php:301
+msgid "hyperlink"
+msgstr "collegamento ipertestuale"
 
-#: admin/javascripts/admin.js.php:273
-msgid "link"
-msgstr "link"
-
-#: admin/javascripts/admin.js.php:287 admin/javascripts/admin.js.php:333
+#: admin/javascripts/admin.js.php:315 admin/javascripts/admin.js.php:364
 msgid "image"
 msgstr "immagine"
 
-#: admin/javascripts/admin.js.php:295
+#: admin/javascripts/admin.js.php:326
 msgid "Upload"
 msgstr "Carica"
 
-#: admin/javascripts/admin.js.php:311 admin/javascripts/admin.js.php:425
+#: admin/javascripts/admin.js.php:342 admin/javascripts/admin.js.php:459
 msgid "Uploading..."
 msgstr "Caricamento in corso…."
 
-#: admin/javascripts/admin.js.php:346 admin/pages/themes.twig:25
+#: admin/javascripts/admin.js.php:377 admin/pages/themes.twig:25
 msgid "Preview"
 msgstr "Anteprima"
 
-#: admin/javascripts/admin.js.php:362
+#: admin/javascripts/admin.js.php:393
 msgid "preview"
 msgstr "anteprima"
 
-#: admin/javascripts/admin.js.php:384
+#: admin/javascripts/admin.js.php:418
 msgid "Words:"
 msgstr "Parole:"
 
@@ -358,41 +335,34 @@ msgid "Include pages in search results."
 msgstr "Includi pagine nei risultati della ricerca."
 
 #: admin/pages/content_settings.twig:49
-msgid "Send Pingbacks"
-msgstr "Invia Pingback"
+msgid "Send Webmentions"
+msgstr "Invia Webmention"
 
 #: admin/pages/content_settings.twig:52
 msgid "Attempts to notify sites to which your posts link."
 msgstr "Tenta di notificare i siti a cui si collegano i tuoi post."
 
 #: admin/pages/content_settings.twig:58 admin/pages/content_settings.twig:66
-#: admin/pages/content_settings.twig:74 admin/pages/export.twig:14
-#: admin/pages/export.twig:20 admin/pages/export.twig:26
-#: admin/pages/export.twig:32 admin/pages/general_settings.twig:27
-#: admin/pages/manage_pages.twig:10 admin/pages/manage_posts.twig:10
-#: admin/pages/manage_users.twig:10 admin/partials/page_fields.twig:21
-#: admin/partials/post_fields.twig:26 admin/partials/post_fields.twig:97
-#: admin/partials/post_fields.twig:116
+#: admin/pages/export.twig:14 admin/pages/export.twig:20
+#: admin/pages/export.twig:26 admin/pages/export.twig:32
+#: admin/pages/general_settings.twig:27 admin/pages/manage_pages.twig:10
+#: admin/pages/manage_posts.twig:10 admin/pages/manage_users.twig:10
+#: admin/partials/page_fields.twig:21 admin/partials/post_fields.twig:26
+#: admin/partials/post_fields.twig:101 admin/partials/post_fields.twig:120
 msgid "help"
 msgstr "aiuto"
 
 #: admin/pages/content_settings.twig:60
-msgid "XML-RPC support allows you to manipulate your blog content remotely."
-msgstr ""
-"Il supporto XML-RPC consente di manipolare il contenuto del blog in modalitá "
-"remota."
-
-#: admin/pages/content_settings.twig:68
 msgid "Display emoticons as Unicode emoji."
 msgstr "Visualizza emoticon come emoji Unicode."
 
-#: admin/pages/content_settings.twig:76
+#: admin/pages/content_settings.twig:68
 msgid "Compose blog content using Markdown text formatting."
 msgstr ""
 "Comporre il contenuto del blog utilizzando la formattazione del testo "
 "tramite Markdown."
 
-#: admin/pages/content_settings.twig:81 admin/pages/edit_group.twig:24
+#: admin/pages/content_settings.twig:73 admin/pages/edit_group.twig:24
 #: admin/pages/edit_user.twig:55 admin/pages/general_settings.twig:60
 #: admin/pages/route_settings.twig:85 admin/pages/user_settings.twig:47
 msgid "Update"
@@ -429,7 +399,7 @@ msgstr "Elimina!"
 #: admin/pages/delete_group.twig:47 admin/pages/delete_page.twig:23
 #: admin/pages/delete_post.twig:17 admin/pages/delete_upload.twig:17
 #: admin/pages/delete_user.twig:44 admin/partials/page_fields.twig:80
-#: admin/partials/post_fields.twig:159
+#: admin/partials/post_fields.twig:167
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -846,7 +816,7 @@ msgid "Posted"
 msgstr "Pubblicato"
 
 #: admin/pages/manage_posts.twig:22 admin/partials/page_fields.twig:27
-#: admin/partials/post_fields.twig:65
+#: admin/partials/post_fields.twig:69
 msgid "Status"
 msgstr "Stato"
 
@@ -1102,7 +1072,7 @@ msgstr "Scrivi"
 msgid "Body"
 msgstr "Testo"
 
-#: admin/partials/page_fields.twig:22 admin/partials/post_fields.twig:98
+#: admin/partials/page_fields.twig:22 admin/partials/post_fields.twig:102
 msgid "Slug"
 msgstr "Slug"
 
@@ -1110,7 +1080,7 @@ msgstr "Slug"
 msgid "Public and visible in pages list"
 msgstr "Pubblico e visibile nell'elenco delle pagine"
 
-#: admin/partials/page_fields.twig:32 admin/partials/post_fields.twig:70
+#: admin/partials/page_fields.twig:32 admin/partials/post_fields.twig:74
 msgid "Public"
 msgstr "Pubblico"
 
@@ -1118,7 +1088,7 @@ msgstr "Pubblico"
 msgid "Private and visible in pages list"
 msgstr "Privato e visibile nell'elenco delle pagine"
 
-#: admin/partials/page_fields.twig:36 admin/partials/post_fields.twig:72
+#: admin/partials/page_fields.twig:36 admin/partials/post_fields.twig:76
 msgid "Private"
 msgstr "Privato"
 
@@ -1146,41 +1116,41 @@ msgstr "Principale"
 msgid "[None]"
 msgstr "[Nessuno]"
 
-#: admin/partials/page_fields.twig:70 admin/partials/post_fields.twig:149
-#: admin/partials/post_fields.twig:165
+#: admin/partials/page_fields.twig:70 admin/partials/post_fields.twig:157
+#: admin/partials/post_fields.twig:173
 msgid "Publish"
 msgstr "Pubblica"
 
 #: admin/partials/page_fields.twig:73 admin/partials/page_fields.twig:77
-#: admin/partials/post_fields.twig:152 admin/partials/post_fields.twig:156
-#: admin/partials/post_fields.twig:169
+#: admin/partials/post_fields.twig:160 admin/partials/post_fields.twig:164
+#: admin/partials/post_fields.twig:177
 msgid "Save"
 msgstr "Salva"
 
-#: admin/partials/post_fields.twig:68
+#: admin/partials/post_fields.twig:72
 msgid "Draft"
 msgstr "Bozza"
 
-#: admin/partials/post_fields.twig:74
+#: admin/partials/post_fields.twig:78
 msgid "Scheduled"
 msgstr "Programmato"
 
-#: admin/partials/post_fields.twig:75
+#: admin/partials/post_fields.twig:79
 msgid "Visible only to a group of users:"
 msgstr "Visibile solo per un gruppo di utenti:"
 
-#: admin/partials/post_fields.twig:77
+#: admin/partials/post_fields.twig:81
 msgid "All registered users"
 msgstr "Tutti gli utenti registrati"
 
-#: admin/partials/post_fields.twig:90
+#: admin/partials/post_fields.twig:94
 msgid "Pinned?"
 msgstr "Pinned?"
 
-#: admin/partials/post_fields.twig:91
+#: admin/partials/post_fields.twig:95
 msgid "(shows this post above all others)"
 msgstr "(mostra questo post sopra tutti gli altri)"
 
-#: admin/partials/post_fields.twig:103
+#: admin/partials/post_fields.twig:107
 msgid "Timestamp"
 msgstr "Date e ora"

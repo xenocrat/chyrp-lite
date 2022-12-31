@@ -10,13 +10,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/pingable/admin/pages/delete_pingback.twig:3
 #: modules/pingable/admin/pages/delete_pingback.twig:6
-msgid "Delete Pingback?"
-msgstr "删除Pingback？"
+msgid "Delete Webmention?"
+msgstr "删除Webmention？"
 
 #: modules/pingable/admin/pages/delete_pingback.twig:8
 #, php-format
@@ -24,15 +24,16 @@ msgid "&#8220;%s&#8221; will be permanently deleted."
 msgstr "&#8220;%s&#8221; 将被永久删除。"
 
 #: modules/pingable/admin/pages/edit_pingback.twig:3
-msgid "Edit Pingback"
-msgstr "编辑Pingback"
+msgid "Edit Webmention"
+msgstr "编辑Webmention"
 
 #: modules/pingable/admin/pages/edit_pingback.twig:6
 #, php-format
-msgid "Editing Pingback to &#8220;%s&#8221;"
-msgstr "编辑Pingback为&#8220;%s&#8221;"
+msgid "Editing Webmention to &#8220;%s&#8221;"
+msgstr "编辑Webmention为&#8220;%s&#8221;"
 
 #: modules/pingable/admin/pages/edit_pingback.twig:10
+#: modules/pingable/admin/pages/manage_pingbacks.twig:20
 msgid "Title"
 msgstr "标题"
 
@@ -41,17 +42,13 @@ msgid "Update"
 msgstr "更新"
 
 #: modules/pingable/admin/pages/manage_pingbacks.twig:3
-msgid "Manage Pingbacks"
-msgstr "管理Pingback"
+msgid "Manage Webmentions"
+msgstr "管理Webmention"
 
 #: modules/pingable/admin/pages/manage_pingbacks.twig:16
-#: modules/pingable/pingable.php:266 modules/pingable/pingable.php:287
-msgid "Pingbacks"
+#: modules/pingable/pingable.php:240 modules/pingable/pingable.php:264
+msgid "Webmentions"
 msgstr "引用"
-
-#: modules/pingable/admin/pages/manage_pingbacks.twig:20
-msgid "Source"
-msgstr "来源"
 
 #: modules/pingable/admin/pages/manage_pingbacks.twig:21
 msgid "Post"
@@ -62,82 +59,78 @@ msgid "Added"
 msgstr "增加"
 
 #: modules/pingable/info.php:3
-msgid "Pingable"
+msgid "Mentionable"
 msgstr ""
 
 #: modules/pingable/info.php:6
-msgid "Register pingbacks from blogs that link to yours."
-msgstr "为所有链接到您的博客注册Pingbacks。"
+msgid "Register webmentions from blogs that link to yours."
+msgstr "为所有链接到您的博客注册Webmentions。"
 
 #: modules/pingable/info.php:11
 msgid "Please remember to update the permission settings for each group."
 msgstr "请记住更新每个组的权限设置。"
 
 #: modules/pingable/info.php:12
-msgid "Do you want to remove pingbacks from the database?"
-msgstr "您想从数据库中删除pingbacks？"
+msgid "Do you want to remove webmentions from the database?"
+msgstr "您想从数据库中删除webmentions？"
 
 #: modules/pingable/pingable.php:25
-msgid "Edit Pingbacks"
-msgstr "编辑Pingback"
+msgid "Edit Webmentions"
+msgstr "编辑Webmention"
 
 #: modules/pingable/pingable.php:26
-msgid "Delete Pingbacks"
-msgstr "删除Pingback"
+msgid "Delete Webmentions"
+msgstr "删除Webmention"
 
-#: modules/pingable/pingable.php:42 modules/pingable/pingable.php:68
-msgid "A ping from your URL is already registered."
-msgstr "您的URL中的ping已被注册。"
+#: modules/pingable/pingable.php:42
+msgid "A webmention from your URL is already registered."
+msgstr "您的URL中的webmention已被注册。"
 
-#: modules/pingable/pingable.php:48 modules/pingable/pingable.php:75
+#: modules/pingable/pingable.php:49
 msgid "Your URL is too long to be stored in our database."
 msgstr "您的网址太长，无法存储在我们的数据库中。"
 
-#: modules/pingable/pingable.php:53
-msgid "Pingback registered!"
-msgstr "Pingback已注册！"
+#: modules/pingable/pingable.php:64
+msgid "An ID is required to edit a webmention."
+msgstr "编辑webmention需要一个ID。"
 
-#: modules/pingable/pingable.php:90
-msgid "An ID is required to edit a pingback."
-msgstr "编辑pingback需要一个ID。"
+#: modules/pingable/pingable.php:72 modules/pingable/pingable.php:114
+#: modules/pingable/pingable.php:143 modules/pingable/pingable.php:181
+msgid "Webmention not found."
+msgstr "Webmention未找到。"
 
-#: modules/pingable/pingable.php:98 modules/pingable/pingable.php:140
-#: modules/pingable/pingable.php:169 modules/pingable/pingable.php:207
-msgid "Pingback not found."
-msgstr "Pingback未找到。"
+#: modules/pingable/pingable.php:79 modules/pingable/pingable.php:120
+msgid "You do not have sufficient privileges to edit this webmention."
+msgstr "您没有足够的权限编辑这个webmention。"
 
-#: modules/pingable/pingable.php:105 modules/pingable/pingable.php:146
-msgid "You do not have sufficient privileges to edit this pingback."
-msgstr "您没有足够的权限编辑这个pingback。"
+#: modules/pingable/pingable.php:98
+msgid "An ID is required to update a webmention."
+msgstr "更新webmention需要一个ID。"
 
-#: modules/pingable/pingable.php:124
-msgid "An ID is required to update a pingback."
-msgstr "更新pingback需要一个ID。"
-
-#: modules/pingable/pingable.php:130
+#: modules/pingable/pingable.php:104
 msgid "No Title Specified"
 msgstr "未指定标题。"
 
-#: modules/pingable/pingable.php:131
-msgid "A title is required to update a pingback."
-msgstr "更新pingback需要一个标题。"
+#: modules/pingable/pingable.php:105
+msgid "A title is required to update a webmention."
+msgstr "更新webmention需要一个标题。"
 
-#: modules/pingable/pingable.php:152
-msgid "Pingback updated."
-msgstr "Pingback已更新。"
+#: modules/pingable/pingable.php:126
+msgid "Webmention updated."
+msgstr "Webmention已更新。"
 
-#: modules/pingable/pingable.php:161 modules/pingable/pingable.php:195
-msgid "An ID is required to delete a pingback."
-msgstr "删除pingback需要一个ID。"
+#: modules/pingable/pingable.php:135 modules/pingable/pingable.php:169
+msgid "An ID is required to delete a webmention."
+msgstr "删除webmention需要一个ID。"
 
-#: modules/pingable/pingable.php:176 modules/pingable/pingable.php:213
-msgid "You do not have sufficient privileges to delete this pingback."
-msgstr "您没有足够的权限删除这个pingback。"
+#: modules/pingable/pingable.php:150 modules/pingable/pingable.php:187
+msgid "You do not have sufficient privileges to delete this webmention."
+msgstr "您没有足够的权限删除这个webmention。"
 
-#: modules/pingable/pingable.php:219
-msgid "Pingback deleted."
-msgstr "Pingback已删除。"
+#: modules/pingable/pingable.php:193
+msgid "Webmention deleted."
+msgstr "Webmention已删除。"
 
-#: modules/pingable/pingable.php:228
-msgid "You do not have sufficient privileges to manage pingbacks."
-msgstr "您没有足够的权限来管理pingback。"
+#: modules/pingable/pingable.php:202
+msgid "You do not have sufficient privileges to manage webmentions."
+msgstr "您没有足够的权限来管理webmention。"
