@@ -788,7 +788,7 @@
      *     <Group::add> <User::add>
      */
     function derezz(&$string): bool {
-        $string = str_replace(array("\n", "\r", "\0"), "", strip_tags($string));
+        $string = str_replace("\x00..\x1f", "", strip_tags($string));
         return ($string == "");
     }
 
