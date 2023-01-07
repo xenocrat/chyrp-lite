@@ -247,7 +247,7 @@
                 line-height: 1;
             }
             h1:first-child {
-                margin-top: 0em;
+                margin-top: 0rem;
             }
             h2 {
                 font-size: 1.5em;
@@ -337,7 +337,7 @@
             }
             a.big:last-child,
             button:last-child {
-                margin-bottom: 0em;
+                margin-bottom: 0rem;
             }
             a.big:hover,
             button:hover,
@@ -350,7 +350,7 @@
             }
             aside {
                 margin-bottom: 1rem;
-                padding: 0.5em 1em;
+                padding: 0.5rem 1rem;
                 border: 1px solid #e5d7a1;
                 border-radius: 0.25em;
                 background-color: #fffecd;
