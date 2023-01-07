@@ -107,7 +107,7 @@ h1, h2, h3, h4, h5, h6 {
     font-style: normal;
     font-variant: normal;
     margin: 1rem 0em;
-    padding: 0em;
+    padding: 0rem;
 }
 h1 {
     font-size: 2em;
@@ -153,23 +153,23 @@ small {
     font-size: 0.8em;
 }
 p {
-    margin: 0em 0em 1em 0em;
+    margin-bottom: 1rem;
 }
 p:last-child, p:empty {
-    margin-bottom: 0em;
+    margin-bottom: 0rem;
 }
 ul {
     list-style: disc outside;
-    margin: 1em 0em 1em 2em;
-    padding: 0em;
+    margin: 1rem 0rem 1rem 2rem;
+    padding: 0rem;
 }
 ul li > ul {
     list-style-type: circle;
 }
 ol {
     list-style: decimal outside;
-    margin: 1em 0em 1em 2em;
-    padding: 0em;
+    margin: 1rem 0rem 1rem 2rem;
+    padding: 0rem;
 }
 ol li > ol {
     list-style-type: lower-roman;
@@ -181,17 +181,17 @@ dl dt {
     font-weight: bold;
 }
 dl dd {
-    margin-left: 1em;
+    margin-left: 1rem;
 }
 hr {
     border: none;
     clear: both;
     border-top: 1px solid #dddddd;
-    margin: 2em 0em;
+    margin: 2rem 0rem;
 }
 aside {
     margin-bottom: 1rem;
-    padding: 0.5em 1em;
+    padding: 0.5rem 1rem;
     border: 1px solid #e5d7a1;
     border-radius: 0.25em;
     background-color: #fffecd;
@@ -219,7 +219,7 @@ pre > code {
     padding: 0px;
 }
 blockquote {
-    margin: 2em;
+    margin: 2rem;
     font-style: italic;
 }
 blockquote em {
@@ -230,7 +230,7 @@ img {
 }
 table {
     width: 100%;
-    margin: 0em 0em 1em 0em;
+    margin: 0rem 0rem 1rem 0rem;
     overflow-x: scroll;
 }
 table thead tr {
@@ -239,12 +239,12 @@ table thead tr {
     border: 1px solid #4f4f4f;
 }
 table thead tr th {
-    padding: 0.5em;
+    padding: 0.5rem;
     font-weight: bold;
     text-align: center;
 }
 table tbody tr td {
-    padding: 0.5em;
+    padding: 0.5rem;
     border: 1px solid #cfcfcf;
     vertical-align: middle;
 }
@@ -274,12 +274,11 @@ a:active > code {
     text-decoration: none;
     border-color: #1e57ba;
 }
-a.emblem > img,
-img.emblem {
+img.emblem,
+a.emblem > img {
     display: inline;
     position: relative;
-    top: 4px;
-    width: 16px;
+    top: 2px;
     height: 16px;
 }
 @media screen and (min-width: 1080px) {
@@ -297,7 +296,11 @@ img.emblem {
     aside {
         border-color: #afafaf;
     }
+    pre {
+        background-color: #cfcfcf;
+    }
     code {
+        background-color: #cfcfcf;
         border-color: #afafaf;
     }
     table tbody tr td {
