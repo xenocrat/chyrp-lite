@@ -760,9 +760,15 @@
                 border-color: #1e57ba;
                 outline: none;
             }
+            hr {
+                border: none;
+                clear: both;
+                border-top: 1px solid #cfcfcf;
+                margin: 2rem 0rem;
+            }
             aside {
                 margin-bottom: 1rem;
-                padding: 0.5em 1em;
+                padding: 0.5rem 1rem;
                 border: 1px solid #e5d7a1;
                 border-radius: 0.25em;
                 background-color: #fffecd;
@@ -773,6 +779,29 @@
                 padding: 2rem;
                 margin: 0rem auto 0rem auto;
                 border-radius: 2rem;
+            }
+            @media (prefers-color-scheme: dark) {
+                body {
+                    color: #ffffff;
+                    background-color: #1f1f23;
+                }
+                .window {
+                    color: #1f1f23;
+                    background-color: #dfdfdf;
+                }
+                hr {
+                    border-color: #afafaf;
+                }
+                aside {
+                    border-color: #afafaf;
+                }
+                pre {
+                    background-color: #cfcfcf;
+                }
+                code {
+                    background-color: #cfcfcf;
+                    border-color: #afafaf;
+                }
             }
         </style>
     </head>

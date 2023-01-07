@@ -398,15 +398,6 @@
             form:has(#adapter > option[value="pgsql"]:checked) *.not-pgsql {
                 display: none;
             }
-            form hr {
-                border: none;
-                clear: both;
-                border-top: 1px solid #cfcfcf;
-                margin: 2rem 0rem;
-            }
-            form p {
-                padding-bottom: 1rem;
-            }
             pre {
                 font-family: "Cousine webfont", monospace;
                 font-size: 0.9em;
@@ -487,9 +478,15 @@
                 border-color: #1e57ba;
                 outline: none;
             }
+            hr {
+                border: none;
+                clear: both;
+                border-top: 1px solid #cfcfcf;
+                margin: 2rem 0rem;
+            }
             aside {
                 margin-bottom: 1rem;
-                padding: 0.5em 1em;
+                padding: 0.5rem 1rem;
                 border: 1px solid #e5d7a1;
                 border-radius: 0.25em;
                 background-color: #fffecd;
@@ -500,6 +497,39 @@
                 padding: 2rem;
                 margin: 0rem auto 0rem auto;
                 border-radius: 2rem;
+            }
+            @media (prefers-color-scheme: dark) {
+                body {
+                    color: #ffffff;
+                    background-color: #1f1f23;
+                }
+                .window {
+                    color: #1f1f23;
+                    background-color: #dfdfdf;
+                }
+                hr {
+                    border-color: #afafaf;
+                }
+                aside {
+                    border-color: #afafaf;
+                }
+                pre {
+                    background-color: #cfcfcf;
+                }
+                code {
+                    background-color: #cfcfcf;
+                    border-color: #afafaf;
+                }
+                select,
+                textarea,
+                input[type="text"],
+                input[type="email"],
+                input[type="url"],
+                input[type="number"],
+                input[type="password"] {
+                    background-color: #cfcfcf;
+                    border-color: #afafaf;
+                }
             }
         </style>
         <script src="includes/common.js" type="text/javascript" charset="UTF-8"></script>
