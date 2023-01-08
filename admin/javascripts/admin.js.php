@@ -396,7 +396,7 @@ var Write = {
                 );
             });
 
-        // Support drag-and-drop image image uploads.
+        // Support drag-and-drop image uploads.
         $("#write_form textarea, #edit_form textarea").each(function() {
             var target = $(this);
 
