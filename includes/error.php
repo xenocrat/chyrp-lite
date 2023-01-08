@@ -255,7 +255,7 @@
                 line-height: 1.5;
                 color: #1f1f23;
                 background: #efefef;
-                padding: 2rem;
+                margin: 2rem;
             }
             h1 {
                 font-size: 2em;
