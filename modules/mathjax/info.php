@@ -6,5 +6,6 @@ return array(
     "description"   => __("A JavaScript display engine for mathematics.", "mathjax"),
     "author"        => array(
         "name"      => "Daniel Pimley",
-        "url"       => "http://www.pimley.net/")
+        "url"       => "http://www.pimley.net/"
+    )
 );

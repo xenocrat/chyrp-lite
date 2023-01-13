@@ -6,5 +6,6 @@ return array(
     "description" 	=> __("A dark tumbleblog theme for Chyrp Lite.", "umbra"),
     "author"      	=> array(
         "name"    	=> "Daniel Pimley",
-        "url"     	=> "http://pimley.net/")
+        "url"     	=> "http://pimley.net/"
+    )
 );

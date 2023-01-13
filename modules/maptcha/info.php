@@ -6,5 +6,6 @@ return array(
     "description"   => __("Ask users to solve simple mathematics problems to prevent spam.", "maptcha"),
     "author"        => array(
         "name"      => "Daniel Pimley",
-        "url"       => "http://www.pimley.net/")
+        "url"       => "http://www.pimley.net/"
+    )
 );

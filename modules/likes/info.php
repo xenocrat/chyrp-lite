@@ -6,8 +6,10 @@ return array(
     "description"   => __("Allow users to &#8220;like&#8221; a post.", "likes"),
     "author"        => array(
         "name"      => "Chyrp team",
-        "url"       => "http://chyrp.net/"),
+        "url"       => "http://chyrp.net/"
+    ),
     "notifications" => array(
-                       __("Please remember to update the permission settings for each group.", "likes")),
+                       __("Please remember to update the permission settings for each group.", "likes")
+    ),
     "confirm"       => __("Do you want to remove likes from the database?", "comments")
 );

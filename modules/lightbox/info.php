@@ -6,5 +6,6 @@ return array(
     "description"   => __("A lightbox for your images.", "lightbox"),
     "author"        => array(
         "name"      => "Daniel Pimley",
-        "url"       => "http://www.pimley.net/")
+        "url"       => "http://www.pimley.net/"
+    )
 );

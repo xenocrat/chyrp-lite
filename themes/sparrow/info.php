@@ -6,5 +6,6 @@ return array(
     "description" 	=> __("An unobtrusive tumbleblog theme for Chyrp Lite.", "sparrow"),
     "author"      	=> array(
         "name"    	=> "Daniel Pimley",
-        "url"     	=> "http://pimley.net/")
+        "url"     	=> "http://pimley.net/"
+    )
 );

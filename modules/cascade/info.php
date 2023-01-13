@@ -6,5 +6,6 @@ return array(
     "description"   => __("Adds ajax-powered infinite scrolling to your blog.", "cascade"),
     "author"        => array(
         "name"      => "Daniel Pimley",
-        "url"       => "http://www.pimley.net/")
+        "url"       => "http://www.pimley.net/"
+    )
 );

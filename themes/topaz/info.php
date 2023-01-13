@@ -6,5 +6,6 @@ return array(
     "description"   => __("A minimalist responsive theme for Chyrp Lite.", "topaz"),
     "author"        => array(
         "name"      => "Daniel Pimley",
-        "url"       => "http://pimley.net/")
+        "url"       => "http://pimley.net/"
+    )
 );

@@ -6,5 +6,6 @@ return array(
     "description"   => __("Embed a video in your blog content by pasting its URL surrounded by <code>&lt;!--</code> and <code>--&gt;</code>.", "easy_embed"),
     "author"        => array(
         "name"      => "Daniel Pimley",
-        "url"       => "http://www.pimley.net/")
+        "url"       => "http://www.pimley.net/"
+    )
 );

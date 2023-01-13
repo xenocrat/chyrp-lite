@@ -6,5 +6,6 @@ return array(
     "description"   => __("Post quotes and cite sources.", "quote"),
     "author"        => array(
         "name"      => "Alex Suraci",
-        "url"       => "http://ecks.tc/")
+        "url"       => "http://ecks.tc/"
+    )
 );

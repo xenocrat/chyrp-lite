@@ -6,5 +6,6 @@ return array(
     "description"   => __("Add &#8220;&hellip;more&#8221; links to your blog index by typing <code>&lt;!--more--&gt;</code> or <code>&lt;!--more custom text--&gt;</code> in your posts.", "read_more"),
     "author"        => array(
         "name"      => "Chyrp Team",
-        "url"       => "http://chyrp.net/")
+        "url"       => "http://chyrp.net/"
+    )
 );

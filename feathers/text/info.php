@@ -6,5 +6,6 @@ return array(
     "description"   => __("A basic text feather.", "text"),
     "author"        => array(
         "name"      => "Chyrp Team",
-        "url"       => "http://chyrp.net/")
+        "url"       => "http://chyrp.net/"
+    )
 );

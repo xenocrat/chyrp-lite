@@ -6,6 +6,7 @@ return array(
     "description"   => __("A feather for video.", "video"),
     "author"        => array(
         "name"      => "Daniel Pimley",
-        "url"       => "http://pimley.net/"),
+        "url"       => "http://pimley.net/"
+    ),
     "uploader"      => true
 );

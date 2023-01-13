@@ -6,5 +6,6 @@ return array(
     "description"   => __("Enables import from Wordpress, MovableType, TextPattern, and Tumblr.", "migrator"),
     "author"        => array(
         "name"      => "Daniel Pimley",
-        "url"       => "http://www.pimley.net/")
+        "url"       => "http://www.pimley.net/"
+    )
 );

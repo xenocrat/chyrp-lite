@@ -6,5 +6,6 @@ return array(
     "description"   => __("Adds syntax highlighting to nested <code>&lt;pre&gt;&lt;code&gt;</code> blocks.", "highlighter"),
     "author"        => array(
         "name"      => "Daniel Pimley",
-        "url"       => "http://www.pimley.net/")
+        "url"       => "http://www.pimley.net/"
+    )
 );

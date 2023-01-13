@@ -6,5 +6,6 @@ return array(
     "description"   => __("Caches pages, drastically reducing server load.", "cacher"),
     "author"        => array(
         "name"      => "Daniel Pimley",
-        "url"       => "http://chyrplite.net/")
+        "url"       => "http://chyrplite.net/"
+    )
 );

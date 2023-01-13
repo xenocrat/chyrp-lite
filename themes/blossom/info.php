@@ -6,5 +6,6 @@ return array(
     "description"   => __("The default theme provided with Chyrp Lite.", "blossom"),
     "author"        => array(
         "name"      => "Daniel Pimley",
-        "url"       => "http://pimley.net/")
+        "url"       => "http://pimley.net/"
+    )
 );
