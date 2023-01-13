@@ -452,7 +452,7 @@ label {
     margin-top: 1em;
 }
 div.shim {
-    margin-top: 2em;
+    margin-top: 2rem;
 }
 div#mast {
     display: none;
@@ -819,6 +819,9 @@ article.archive img {
     }
     body.mobile_nav {
         margin-bottom: 5rem;
+    }
+    div.shim {
+        margin-top: 1rem;
     }
     h2 {
         font-size: 1.25em;
