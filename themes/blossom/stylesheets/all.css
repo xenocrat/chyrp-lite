@@ -63,7 +63,7 @@ body {
     color: #1f1f23;
     line-height: 1.5;
     background-color: #f7f5ed;
-    margin: 0rem 2rem 2rem 16rem;
+    margin: 2rem 2rem 2rem 16rem;
     min-width: 288px;
     max-width: 1024px;
 }
@@ -214,10 +214,9 @@ ul#nav {
 }
 ul.navigation {
     list-style: none;
-    font-size: 1em;
     box-sizing: border-box;
     background-color: #fbfbf7;
-    margin: 0em 0em 2em 0em;
+    margin: 0rem 0rem 2rem 0rem;
     padding: 0em;
     border: 1px solid #c6ccc8;
     border-radius: 6px;
@@ -318,7 +317,7 @@ form.search_box {
     display: inline-block;
     position: relative;
     text-align: center;
-    margin-bottom: 2em;
+    margin-bottom: 2rem;
 }
 form.comment_edit {
     width: 100%;
@@ -428,9 +427,6 @@ label {
     display: block;
     margin-top: 1em;
 }
-div.shim {
-    margin-top: 2rem;
-}
 div#mast {
     display: none;
     width: 100%;
@@ -466,7 +462,7 @@ div.ribbon {
     color: #ffffff;
     background-color: #426aa6;
     padding: 0.5em;
-    margin-bottom: 1em;
+    margin-bottom: 2rem;
     border-radius: 0.2em;
 }
 div.flash {
@@ -799,13 +795,10 @@ article.archive img {
 }
 @media screen and (max-width: 959px) {
     body {
-        margin: 0rem 1rem 1rem 1rem;
+        margin: 1rem;
     }
     body.mobile_nav {
         margin-bottom: 5rem;
-    }
-    div.shim {
-        margin-top: 1rem;
     }
     h2 {
         font-size: 1.25em;
