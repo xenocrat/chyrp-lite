@@ -15,7 +15,6 @@
 </head>
 <body class="route_{{ route.action }}">
 <!-- Mast -->
-<div class="shim">
 {% for notice in flash.notices %}
 <div class="ribbon flash notice">
 <h3 role="alert" class="ribbon">{{ notice }}</h3>
@@ -31,7 +30,6 @@
 <h3 role="alert" class="ribbon">{{ message }}</h3>
 </div>
 {% endfor %}
-</div>
 {% if not ["login", "controls", "register", "lost_password"] | contains(route.action) %}
 <div id="mast" role="banner">
 <h1 class="banner"><a href="{{ url('/') }}">{{ site.name }}</a></h1>
