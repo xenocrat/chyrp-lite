@@ -120,10 +120,7 @@ h1 {
 #content h1, h2 {
     font-size: 1.5em;
 }
-h3 {
-    font-size: 1em;
-}
-h4, h5, h6 {
+h3, h4, h5, h6 {
     font-size: 1em;
 }
 em {
@@ -288,7 +285,7 @@ aside {
 }
 pre {
     font-family: "Cousine webfont", monospace;
-    font-size: 0.9em;
+    font-size: 0.85em;
     background-color: #efefef;
     margin: 1rem 0rem;
     padding: 1rem;
@@ -296,14 +293,14 @@ pre {
 }
 code {
     font-family: "Cousine webfont", monospace;
-    font-size: 0.9em;
+    font-size: 0.85em;
     background-color: #efefef;
     padding: 0px 2px;
     border: 1px solid #cfcfcf;
     vertical-align: bottom;
 }
 pre > code {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     display: block;
     border: none;
     padding: 0px;
