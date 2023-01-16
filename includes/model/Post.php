@@ -723,14 +723,11 @@
             $excerpt = $post->excerpt();
             Trigger::current()->filter($excerpt, "title_from_excerpt");
 
-            $split_lines = explode("\n", $excerpt);
-            $first_line = $split_lines[0];
-
-            $stripped = strip_tags($first_line);
+            $stripped = strip_tags($excerpt);
             $truncated = truncate($stripped, 75);
             $normalized = normalize($truncated);
 
-            return $normalized;
+            return ($normalized == "") ? $post->url : $normalized ;
         }
 
         /**
@@ -914,7 +911,7 @@
          *
          * Parameters:
          *     $request - The request URI to parse.
-         *     $route - The route object to respond to, or null to return a Post object.
+         *     $route - The route to respond to, or null to return a Post.
          *     $options - Additional options for the Post object (optional).
          */
         static function from_url(
