@@ -19,8 +19,9 @@
 </section>
 {% else %}
 <section class="attachment">
-{{ "File attachment:" | translate }}
-&quot;<a href="{{ ['txt', 'htm', 'html', 'xhtml', 'dhtml', 'markdown', 'md'] | contains(file.type) ? file.name | uploaded : file.name | download }}">{{ file.name | fix | truncate(40, "&hellip;", true) }}</a>&quot; ({{ file.size | filesizeformat }})
+<h6>{{ "File attachment:" | translate }}</h6>
+<a href="{{ file.name | download }}">{{ file.name | fix | truncate(40, "&hellip;", true) }}</a>
+({{ file.size | filesizeformat }})
 </section>
 {% endif %}
 {% endfor %}
