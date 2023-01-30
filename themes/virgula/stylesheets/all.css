@@ -368,8 +368,8 @@ section.photo > a:focus {
     border-bottom: 1px solid #0b0c0c;
 }
 #tag_cloud > a.tag {
-    padding: 0.3rem;
-    border: 1px solid #0b0c0c;
+    padding: 0rem 0.3rem;
+    border: 1px solid #b1b4b6;
     border-radius: 0.1rem;
 }
 .ajax_loading {
