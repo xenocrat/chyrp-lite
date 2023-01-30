@@ -364,7 +364,11 @@ section.photo > a:focus {
 #comment_shim {
     display: none;
 }
+#comments {
+    list-style: none;
+}
 #comments > li {
+    margin-left: 0rem;
     border-bottom: 1px solid #0b0c0c;
 }
 #tag_cloud > a.tag {
