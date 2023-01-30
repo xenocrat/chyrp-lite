@@ -135,8 +135,7 @@ h3:first-child, h4:first-child,
 h5:first-child, h6:first-child {
     margin-top: 0em;
 }
-sup {
-    vertical-align: super;
+sup, sub {
     font-size: 0.5em;
 }
 em {
@@ -202,7 +201,7 @@ ul {
     margin: 1em 2em;
     padding: 0em;
 }
-ul li > ul {
+ul ul {
     list-style-type: circle;
 }
 ol {
@@ -210,7 +209,7 @@ ol {
     margin: 1em 2em;
     padding: 0em;
 }
-ol li > ol {
+ol ol {
     list-style-type: lower-latin;
 }
 html[lang="ar"] ol li > ol {
@@ -233,7 +232,7 @@ ul.navigation {
     margin: 0em;
     display: inline;
 }
-ul.navigation li {
+ul.navigation > li {
     display: inline;
     padding: 0em;
 }
@@ -245,7 +244,7 @@ ul.archive {
     gap: 2rem;
     margin: 2rem 0rem 0rem 0rem;
 }
-ul.archive li {
+ul.archive > li {
     margin: 0em;
     flex: none;
 }
@@ -255,7 +254,7 @@ ol.comments {
     margin: 0em;
     border-bottom: 1px solid #666667;
 }
-ol.comments li {
+ol.comments > li {
     box-sizing: border-box;
     display: block;
     position: relative;
@@ -268,13 +267,13 @@ ol.comments li {
 ol.comments label:first-child {
     margin-top:  0em;
 }
-ol.comments li#comment_shim {
+ol.comments > li#comment_shim {
     display: none;
 }
-ol.comments li.comment_form {
+ol.comments > li.comment_form {
     padding: 2rem;
 }
-ol.comments li > h3 {
+ol.comments > li > h3 {
     margin-right: 4rem;
 }
 table {
@@ -541,7 +540,7 @@ a:hover, a:focus, a:active {
     color: lightgreen;
     text-decoration: none;
 }
-ul.navigation li > a {
+ul.navigation > li > a {
     display: inline-block;
     margin: 0rem 0.5rem 1rem 0.5rem;
 }
@@ -631,10 +630,10 @@ div.doaction a.post_delete_link,
 div.doaction a.delete_link {
     font-weight: bold;
 }
-article > section.photo > a {
+section.photo > a {
     border-bottom: none;
 }
-article > section.photo > a:focus {
+section.photo > a:focus {
     outline: lightgreen solid 4px;
 }
 div.doaction a.post_delete_link:hover,
@@ -765,7 +764,7 @@ div.metadata img.gravatar {
     iframe.video_embed {
         height: calc((100vw - 4rem) * 0.5625);
     }
-    ul.archive li {
+    ul.archive > li {
         flex: 100%;
     }
     ul.archive article.post.archive {

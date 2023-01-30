@@ -6,12 +6,12 @@
 {% include(["feathers" ~ DIR ~ post.feather ~ ".twig", "feathers" ~ DIR ~ "missing.twig"]) %}
 {% else %}
 <div class="ribbon">
-<h3 class="ribbon">{{ "No posts" | translate }}</h3>
+<h3 role="status" class="ribbon">{{ "No posts" | translate }}</h3>
 </div>
 {% endfor %}
 {% else %}
 <div class="ribbon">
-<h3 class="ribbon">{{ reason }}</h3>
+<h3 role="status" class="ribbon">{{ reason }}</h3>
 </div>
 {% endif %}
 {% endblock %}

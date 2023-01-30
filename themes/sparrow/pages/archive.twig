@@ -54,7 +54,7 @@
 
 {# Posts? (For daily/monthly archives) #}
 {% if posts.paginated is not empty %}
-<h3 role="status" class="filter">
+<h3 class="filter">
 {{ "Archive of %s" | translate | format(archive.when | time(archive.depth == "day" ? "d F Y" : "F Y")) }}
 </h3>
 {% for post in posts.paginated %}

@@ -53,7 +53,7 @@
 {# Posts? (For daily/monthly archives) #}
 {% if posts.paginated is not empty %}
 <div class="ribbon">
-<h3 role="status" class="ribbon">
+<h3 class="ribbon">
 {{ "Archive of %s" | translate | format(archive.when | time(archive.depth == "day" ? "d F Y" : "F Y")) }}
 </h3>
 </div>

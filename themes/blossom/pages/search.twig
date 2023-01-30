@@ -3,7 +3,7 @@
 {% block content %}
 {% if posts.paginated is not empty or pages is not empty %}
 <div class="ribbon">
-<h3 role="status" class="ribbon">{{ "Search results for &#8220;%s&#8221;" | translate | format(search | fix) }}</h3>
+<h3 class="ribbon">{{ "Search results for &#8220;%s&#8221;" | translate | format(search | fix) }}</h3>
 </div>
 {% else %}
 <div class="ribbon flash">
@@ -19,7 +19,7 @@
 </div>
 {% endif %}
 {% for page in pages %}
-<article id="page_{{ page.id }}" class="page"> 
+<article id="page_{{ page.id }}" class="page">
 <h2>
 <a href="{{ page.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(page.title | striptags | normalize | fix(true)) }}">{{ page.title }}</a>
 </h2>

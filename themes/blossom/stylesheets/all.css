@@ -119,8 +119,7 @@ h3:first-child, h4:first-child,
 h5:first-child, h6:first-child {
     margin-top: 0em;
 }
-sup {
-    vertical-align: super;
+sup, sub {
     font-size: 0.5em;
 }
 em {
@@ -183,7 +182,7 @@ ul {
     margin: 1em 2em;
     padding: 0em;
 }
-ul li > ul {
+ul ul {
     list-style-type: circle;
 }
 ol {
@@ -191,13 +190,13 @@ ol {
     margin: 1em 2em;
     padding: 0em;
 }
-ol li > ol {
+ol ol {
     list-style-type: lower-latin;
 }
-html[lang="ar"] ol li > ol {
+html[lang="ar"] ol ol {
     list-style-type: arabic-indic;
 }
-html[lang="he"] ol li > ol {
+html[lang="he"] ol ol {
     list-style-type: hebrew;
 }
 dl {
@@ -223,7 +222,7 @@ ul.navigation {
     background-image: linear-gradient(to bottom, #ffffff 0em, #fbfbf7 10em);
     box-shadow: 0px 2px 4px 2px rgba(57,67,77,0.05);
 }
-ul.navigation li {
+ul.navigation > li {
     display: block;
     min-width: 4em;
     padding: 0.67em 1em;
@@ -232,15 +231,15 @@ ul.navigation li {
     text-overflow: ellipsis;
     border-bottom: 1px solid #d2d9d4;
 }
-ul.navigation li:last-child {
+ul.navigation > li:last-child {
     border-bottom: none;
 }
-ul.sidebar li {
+ul.sidebar > li {
     text-align: left;
     text-align: start;
     font-size: 0.75em;
 }
-ul#nav li {
+ul#nav > li {
     text-align: center;
     padding-top: 0em;
     padding-bottom: 0em;
@@ -254,7 +253,7 @@ ul.archive {
     gap: 1rem;
     margin: 1rem 0rem 0rem 0rem;
 }
-ul.archive li {
+ul.archive > li {
     margin: 0em;
     flex: none;
 }
@@ -263,7 +262,7 @@ ol.comments {
     padding: 0em;
     margin: 0em;
 }
-ol.comments li {
+ol.comments > li {
     box-sizing: border-box;
     display: block;
     width: 100%;
@@ -275,13 +274,13 @@ ol.comments li {
 ol.comments label:first-child {
     margin-top:  0em;
 }
-ol.comments li:last-child {
+ol.comments > li:last-child {
     border-bottom: none;
 }
-ol.comments li#comment_shim {
+ol.comments > li#comment_shim {
     display: none;
 }
-ol.comments li.comment_form {
+ol.comments > li.comment_form {
     padding: 2rem;
 }
 table {
@@ -696,10 +695,10 @@ div.doaction a.post_delete_link:active,
 div.doaction a.delete_link:active {
     background-color: #af2d2d;
 }
-article > section.photo > a {
+section.photo > a {
     border-bottom: none;
 }
-article > section.photo > a:focus {
+section.photo > a:focus {
     outline: #d94c7b solid 4px;
 }
 a.likes > img {
@@ -817,18 +816,18 @@ article.archive img {
     input#sidebar_search_field {
         width: 12em;
     }
-    ol.comments li {
+    ol.comments > li {
         margin: 0em;
         padding: 1rem 1rem 0rem 1rem;
     }
-    ol.comments li.comment_form {
+    ol.comments > li.comment_form {
         padding: 1rem;
     }
     ul#nav {
         display: block;
         margin: 2em 0em 0em 0em;
     }
-    ul#nav li#mobile_toggle {
+    ul#nav > li#mobile_toggle {
         display: none;
     }
     ul#nav.mobile_nav {
@@ -843,20 +842,20 @@ article.archive img {
         border-left: none;
         border-radius: 0em;
     }
-    ul#nav.mobile_nav li {
+    ul#nav.mobile_nav > li {
         height: 0em;
         overflow: hidden;
         border-bottom: none;
         box-sizing: border-box;
         transition: height 250ms ease 125ms, border-bottom 0ms 125ms;
     }
-    ul#nav.mobile_nav.on li,
-    ul#nav.mobile_nav li#mobile_toggle {
+    ul#nav.mobile_nav.on > li,
+    ul#nav.mobile_nav > li#mobile_toggle {
         display: block;
         height: 3em;
         border-bottom: 1px solid #d2d9d4;
     }
-    ul#nav.mobile_nav.on li#mobile_toggle {
+    ul#nav.mobile_nav.on > li#mobile_toggle {
         background-color: #f7f5ed;
     }
     div#mast {
@@ -888,7 +887,7 @@ article.archive img {
     }
 }
 @media screen and (max-width: 559px) {
-    ul.archive li {
+    ul.archive > li {
         flex: 100%;
     }
     ul.archive article.post.archive {
