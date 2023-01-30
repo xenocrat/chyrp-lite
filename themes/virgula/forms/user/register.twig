@@ -1,0 +1,21 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block content %}
+<h2>{{ "Register" | translate }}</h2>
+<form action="{{ url('register') }}" method="post" accept-charset="UTF-8">
+<label for="login">{{ "Username" | translate }}</label>
+<input type="text" name="login" value="{{ posted('login') | fix(true, true) }}" id="login" maxlength="64" autofocus>
+<label for="password1">{{ "Password" | translate }}</label>
+<input type="password" name="password1" value="" id="password1" maxlength="128">
+<label for="password2">{{ "Password" | translate }} <span class="sub">{{ "(again)" | translate }}</span></label>
+<input type="password" name="password2" value="" id="password2" maxlength="128">
+<label for="email">{{ "Email" | translate }}</label>
+<input type="email" name="email" value="{{ posted('email') | fix(true, true) }}" id="email" maxlength="128">
+<input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
+{{ generate_captcha() }}
+{{ trigger.call("user_register") }}
+<div class="doaction">
+<button type="submit">{{ "Register" | translate }}</button>
+</div>
+</form>
+{% endblock %}

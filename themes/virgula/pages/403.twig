@@ -1,0 +1,5 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block content %}
+<h3 role="status">{{ reason is defined ? reason | fix : "Forbidden." | translate }}</h3>
+{% endblock %}

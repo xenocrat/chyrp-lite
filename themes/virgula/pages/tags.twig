@@ -1,0 +1,21 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block content %}
+{% if tag_cloud is not empty %}
+<h2>{{ "Tag cloud" | translate }}</h2>
+<style type="text/css" nonce="{{ stylesheets_nonce() }}">
+{% for tag in tag_cloud %}
+a.tag.tag-{{ tag.clean }} {
+font-size: {{ tag.size + 100 }}%;
+}
+{% endfor %}
+</style>
+<div id="tag_cloud">
+{% for tag in tag_cloud %}
+<a class="tag tag-{{ tag.clean }}" href="{{ tag.url }}" title="{{ tag.title }}">{{ tag.name }}</a>
+{% endfor %}
+</div>
+{% else %}
+<h3 role="status">{{ "Nothing here yet!" | translate }}</h3>
+{% endif %}
+{% endblock %}

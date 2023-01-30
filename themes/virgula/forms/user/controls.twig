@@ -1,0 +1,22 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block content %}
+<h2>{{ "Controls" | translate }}</h2>
+<form action="{{ url('controls') }}" method="post" accept-charset="UTF-8">
+<label for="full_name">{{ "Full name" | translate }}</label>
+<input type="text" name="full_name" value="{{ posted('full_name', visitor.full_name) | fix(true, true) }}" id="full_name" maxlength="250">
+<label for="email">{{ "Email" | translate }}</label>
+<input type="email" name="email" value="{{ posted('email', visitor.email) | fix(true, true) }}" id="email" maxlength="128">
+<label for="website">{{ "Website" | translate }}</label>
+<input type="url" name="website" value="{{ posted('website', visitor.website) | fix(true, true) }}" id="website" maxlength="128">
+<label for="new_password1">{{ "New password?" | translate }}</label>
+<input type="password" name="new_password1" value="" id="new_password1" maxlength="128">
+<label for="new_password2">{{ "Confirm" | translate }}</label>
+<input type="password" name="new_password2" value="" id="new_password2" maxlength="128">
+<input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
+{{ trigger.call("user_controls") }}
+<div class="doaction">
+<button name="submit" type="submit" id="submit">{{ "Update" | translate }}</button>
+</div>
+</form>
+{% endblock %}

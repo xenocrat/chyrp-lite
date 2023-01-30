@@ -1,0 +1,29 @@
+<form id="add_comment" action="{{ self_url() }}" method="post" accept-charset="UTF-8">
+{% if not visitor.logged_in %}
+<label for="comment_author_field">{{ "Your name" | translate }}</label>
+<input type="text" name="author" value="{{ posted('author') | fix(true) }}" id="comment_author_field" class="text" maxlength="250">
+<label for="comment_author_email_field">{{ "Your email" | translate }}</label>
+<input type="email" name="author_email" value="{{ posted('author_email') | fix(true) }}" id="comment_author_email_field" class="text" maxlength="128">
+<label for="comment_author_url_field">{{ "Your website" | translate }}</label>
+<input type="url" name="author_url" value="{{ posted('author_url') | fix(true) }}" id="comment_author_url_field" class="text" maxlength="2048">
+{{ generate_captcha() }}
+{% endif %}
+<label for="comment_body_field">{{ "Your comment" | translate }}</label>
+<textarea name="body" id="comment_body_field">{{ posted("body") | fix(false, true) }}</textarea>
+{% if visitor.logged_in and site.email_correspondence %}
+<label for="comment_notify_field">{{ "Notify me when others comment" | translate }}</label>
+<input type="checkbox" name="notify" id="comment_notify_field">
+{% endif %}
+<div class="doaction speak">
+{% if visitor.logged_in %}
+<input type="hidden" name="author" value="{{ visitor.full_name | oneof(visitor.login) | fix(true) }}">
+<input type="hidden" name="author_email" value="{{ visitor.email | fix(true) }}">
+<input type="hidden" name="author_url" value="{{ visitor.website | fix(true) }}">
+{% endif %}
+<input type="hidden" name="parent_id" value="0">
+<input type="hidden" name="post_id" value="{{ post.id }}">
+<input type="hidden" name="hash" value="{{ authenticate() }}">
+<input type="hidden" name="action" value="add_comment">
+<button type="submit">{{ "Speak" | translate }}</button>
+</div>
+</form>

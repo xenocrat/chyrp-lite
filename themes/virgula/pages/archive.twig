@@ -1,0 +1,66 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block content %}
+
+{# Months? (For yearly archives) #}
+{% if months is not empty %}
+<h2>{{ "Archive of %s" | translate | format(archive.when | time("Y")) }}</h2>
+<ul>
+{% for when, month in months %}
+<li>
+<h3>
+<a href="{{ url('archive/%s/' | format(when | dateformat('Y/m'))) }}">
+{{ when | time("F" | translate) | title }}
+</a>
+</h3>
+<ul>
+{% for post in month %}
+<li>
+<a href="{{ post.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(post.title() | striptags | fix(true)) }}">
+{{ post.title() }}
+</a>
+</li>
+{% endfor %}
+</ul>
+</li>
+{% endfor %}
+</ul>
+{% if archive.prev is not empty or archive.next is not empty %}
+<nav class="traversal">
+{% if archive.prev is not empty %}
+<a href="{{ url('archive/%s/' | format(archive.prev | dateformat('Y'))) }}">
+{{ "&xlarr; Newer posts" | translate }}
+</a>
+{% endif %}
+{% if archive.next is not empty %}
+<a href="{{ url('archive/%s/' | format(archive.next | dateformat('Y'))) }}">
+{{ "Older posts &xrarr;" | translate }}
+</a>
+{% endif %}
+</nav>
+{% endif %}
+{% endif %}
+
+{# Posts? (For daily/monthly archives) #}
+{% if posts.paginated is not empty %}
+<h2 class="filter">
+{{ "Archive of %s" | translate | format(archive.when | time(archive.depth == "day" ? "d F Y" : "F Y")) }}
+</h2>
+{% for post in posts.paginated %}
+{% include(["feathers" ~ DIR ~ post.feather ~ ".twig", "feathers" ~ DIR ~ "missing.twig"]) %}
+{% endfor %}
+{% if posts.prev_page() or posts.next_page() %}
+<!-- Navigation -->
+<nav class="traversal">
+{{ posts.prev_link("&xlarr; Newer posts" | translate) }}
+{{ posts.next_link("Older posts &xrarr;" | translate) }}
+</nav>
+{% endif %}
+{% endif %}
+
+{# No results #}
+{% if months is empty and posts.paginated is empty %}
+<h3 role="status">{{ "There aren't any posts in the timeframe you specified." | translate }}</h3>
+{% endif %}
+
+{% endblock %}
