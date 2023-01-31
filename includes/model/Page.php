@@ -327,7 +327,7 @@
          *
          * Parameters:
          *     $request - The request URI to parse.
-         *     $route - The route object to respond to, or null to return a Page object.
+         *     $route - The route to respond to, or null to return a Page.
          */
         static function from_url($request, $route = null): self|array|false {
             # Dirty URL?
