@@ -4,7 +4,7 @@
 
 Chyrp Lite makes it possible to host a blog on your own web server with minimal fuss. You can have
 a traditional blog, a tumbleblog, or you can add oodles of customisation and build a general-purpose
-web publishing platform with blogging features on the side. You get four beautiful blog themes and
+web publishing platform with blogging features on the side. You get five beautiful blog themes and
 a friendly administration console, all fully navigable on a broad range of devices, thanks to the
 power of responsive HTML5. Semantic markup and comprehensive ARIA labelling ensure your blog will be
 accessible to visitors who use assistive technologies.
