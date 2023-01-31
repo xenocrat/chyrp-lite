@@ -721,6 +721,7 @@ Called from:
 	themes/sparrow/forms/user/controls.twig on line 18
 	themes/topaz/forms/user/controls.twig on line 18
 	themes/umbra/forms/user/controls.twig on line 18
+	themes/virgula/forms/user/controls.twig on line 17
 
 
 user_login
@@ -730,6 +731,7 @@ Called from:
 	themes/sparrow/forms/user/login.twig on line 12
 	themes/topaz/forms/user/login.twig on line 12
 	themes/umbra/forms/user/login.twig on line 12
+	themes/virgula/forms/user/login.twig on line 11
 
 
 user_register
@@ -739,6 +741,7 @@ Called from:
 	themes/sparrow/forms/user/register.twig on line 17
 	themes/topaz/forms/user/register.twig on line 17
 	themes/umbra/forms/user/register.twig on line 17
+	themes/virgula/forms/user/register.twig on line 16
 
 
 end_head
@@ -748,15 +751,17 @@ Called from:
 	themes/sparrow/layouts/default.twig on line 14
 	themes/topaz/layouts/default.twig on line 14
 	themes/umbra/layouts/default.twig on line 14
+	themes/virgula/layouts/default.twig on line 14
 
 
 end_content
 -----------
 Called from:
-	themes/blossom/layouts/default.twig on line 115
+	themes/blossom/layouts/default.twig on line 113
 	themes/sparrow/layouts/default.twig on line 98
-	themes/topaz/layouts/default.twig on line 114
+	themes/topaz/layouts/default.twig on line 112
 	themes/umbra/layouts/default.twig on line 92
+	themes/virgula/layouts/default.twig on line 72
 
 
 
@@ -1220,7 +1225,7 @@ Target:
 title
 -----
 Called from:
-	includes/model/Post.php on line 750
+	includes/model/Post.php on line 747
 
 Target:
 	$title
@@ -1232,7 +1237,7 @@ Arguments:
 excerpt
 -------
 Called from:
-	includes/model/Post.php on line 768
+	includes/model/Post.php on line 765
 
 Target:
 	$excerpt
@@ -1244,7 +1249,7 @@ Arguments:
 feed_content
 ------------
 Called from:
-	includes/model/Post.php on line 786
+	includes/model/Post.php on line 783
 
 Target:
 	$feed_content
@@ -1256,7 +1261,7 @@ Arguments:
 filter_post
 -----------
 Called from:
-	includes/model/Post.php on line 869
+	includes/model/Post.php on line 866
 
 Target:
 	$this

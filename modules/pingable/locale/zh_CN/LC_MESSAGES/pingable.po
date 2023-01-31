@@ -66,11 +66,11 @@ msgstr ""
 msgid "Register webmentions from blogs that link to yours."
 msgstr "为所有链接到您的博客注册Webmentions。"
 
-#: modules/pingable/info.php:11
+#: modules/pingable/info.php:12
 msgid "Please remember to update the permission settings for each group."
 msgstr "请记住更新每个组的权限设置。"
 
-#: modules/pingable/info.php:12
+#: modules/pingable/info.php:14
 msgid "Do you want to remove webmentions from the database?"
 msgstr "您想从数据库中删除webmentions？"
 

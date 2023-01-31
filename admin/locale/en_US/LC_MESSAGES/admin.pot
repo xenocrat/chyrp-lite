@@ -141,6 +141,22 @@ msgstr ""
 msgid "1. List of items"
 msgstr ""
 
+#: admin/help/markdown.twig:64
+msgid "> Blockquote"
+msgstr ""
+
+#: admin/help/markdown.twig:65
+msgid "Blockquote"
+msgstr ""
+
+#: admin/help/markdown.twig:69
+msgid "````<br>Code block<br>````"
+msgstr ""
+
+#: admin/help/markdown.twig:70
+msgid "Code block"
+msgstr ""
+
 #: admin/help/slugs.twig:3
 #: admin/help/slugs.twig:6
 msgid "Slugs"
@@ -326,7 +342,7 @@ msgstr ""
 #: admin/pages/edit_group.twig:24
 #: admin/pages/edit_user.twig:55
 #: admin/pages/general_settings.twig:60
-#: admin/pages/route_settings.twig:85
+#: admin/pages/route_settings.twig:84
 #: admin/pages/user_settings.twig:47
 msgid "Update"
 msgstr ""
@@ -919,127 +935,123 @@ msgstr ""
 msgid "Clean URLs"
 msgstr ""
 
-#: admin/pages/route_settings.twig:12
-msgid "(recommended)"
-msgstr ""
-
-#: admin/pages/route_settings.twig:14
+#: admin/pages/route_settings.twig:13
 msgid "Gives your site prettier URLs."
 msgstr ""
 
-#: admin/pages/route_settings.twig:14
+#: admin/pages/route_settings.twig:13
 msgid "Requires URL rewrite support."
 msgstr ""
 
-#: admin/pages/route_settings.twig:18
+#: admin/pages/route_settings.twig:17
 msgid "Homepage"
 msgstr ""
 
-#: admin/pages/route_settings.twig:21
+#: admin/pages/route_settings.twig:20
 msgid "Make the default route a homepage instead of the blog index."
 msgstr ""
 
-#: admin/pages/route_settings.twig:26
+#: admin/pages/route_settings.twig:25
 msgid "Post View URL"
 msgstr ""
 
-#: admin/pages/route_settings.twig:27
+#: admin/pages/route_settings.twig:26
 msgid "(requires clean URLs)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:32
+#: admin/pages/route_settings.twig:31
 msgid "Syntax:"
 msgstr ""
 
-#: admin/pages/route_settings.twig:36
+#: admin/pages/route_settings.twig:35
 msgid "Year submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:36
+#: admin/pages/route_settings.twig:35
 msgid "(e.g. 2007)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:40
+#: admin/pages/route_settings.twig:39
 msgid "Month submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:40
+#: admin/pages/route_settings.twig:39
 msgid "(e.g. 12)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:44
+#: admin/pages/route_settings.twig:43
 msgid "Day submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:44
+#: admin/pages/route_settings.twig:43
 msgid "(e.g. 25)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:48
+#: admin/pages/route_settings.twig:47
 msgid "Hour submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:48
+#: admin/pages/route_settings.twig:47
 msgid "(e.g. 03)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:52
+#: admin/pages/route_settings.twig:51
 msgid "Minute submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:52
+#: admin/pages/route_settings.twig:51
 msgid "(e.g. 59)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:56
+#: admin/pages/route_settings.twig:55
 msgid "Second submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:56
+#: admin/pages/route_settings.twig:55
 msgid "(e.g. 30)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:60
+#: admin/pages/route_settings.twig:59
 msgid "Post ID"
 msgstr ""
 
-#: admin/pages/route_settings.twig:64
+#: admin/pages/route_settings.twig:63
 msgid "Post author (username)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:64
+#: admin/pages/route_settings.twig:63
 msgid "(e.g. Alex)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:68
+#: admin/pages/route_settings.twig:67
 msgid "The non-unique slug"
 msgstr ""
 
-#: admin/pages/route_settings.twig:68
+#: admin/pages/route_settings.twig:67
 msgid "(e.g. this_is_clean)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:72
+#: admin/pages/route_settings.twig:71
 msgid "The unique form of (clean)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:72
+#: admin/pages/route_settings.twig:71
 msgid "(e.g. this_one_is_taken_2)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:76
+#: admin/pages/route_settings.twig:75
 msgid "The post's feather"
 msgstr ""
 
-#: admin/pages/route_settings.twig:76
+#: admin/pages/route_settings.twig:75
 msgid "(e.g. text)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:80
+#: admin/pages/route_settings.twig:79
 msgid "The plural form of the post's feather"
 msgstr ""
 
-#: admin/pages/route_settings.twig:80
+#: admin/pages/route_settings.twig:79
 msgid "(e.g. links)"
 msgstr ""
 

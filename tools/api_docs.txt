@@ -3586,7 +3586,7 @@ Attempts to grab a page from its clean or dirty  URL.
 
 Parameters:
     $request - The request URI to parse.
-    $route - The route object to respond to, or null to return a Page object.
+    $route - The route to respond to, or null to return a Page.
 
 
 Function: url
@@ -3786,7 +3786,7 @@ Attempts to grab a post from its clean or dirty URL.
 
 Parameters:
     $request - The request URI to parse.
-    $route - The route object to respond to, or null to return a Post object.
+    $route - The route to respond to, or null to return a Post.
     $options - Additional options for the Post object (optional).
 
 

@@ -396,11 +396,11 @@ msgstr "取消订阅此对话："
 msgid "Adds commenting functionality to your posts, with webmention support."
 msgstr "为您的帖子添加评论功能，并提供webmention支持。"
 
-#: modules/comments/info.php:11
+#: modules/comments/info.php:12
 msgid "Please remember to update the permission settings for each group."
 msgstr "请记住更新每个组的权限设置。"
 
-#: modules/comments/info.php:12
+#: modules/comments/info.php:14
 msgid "Do you want to remove comments from the database?"
 msgstr "您想从数据库中删除评论吗？"
 

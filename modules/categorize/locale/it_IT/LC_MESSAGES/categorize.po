@@ -215,12 +215,12 @@ msgstr "Categorizzazione"
 msgid "Categorize your posts."
 msgstr "Categorizza i tuoi post."
 
-#: modules/categorize/info.php:11
+#: modules/categorize/info.php:12
 msgid "Please remember to update the permission settings for each group."
 msgstr ""
 "Si prega di ricordare di aggiornare le impostazioni di autorizzazione per "
 "ogni gruppo."
 
-#: modules/categorize/info.php:12
+#: modules/categorize/info.php:14
 msgid "Do you want to remove your categories from the database?"
 msgstr "Vuoi rimuovere le categorie dal database?"

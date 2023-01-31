@@ -177,6 +177,22 @@ msgstr "Elenco degli articoli"
 msgid "1. List of items"
 msgstr "1. Elenco degli articoli"
 
+#: admin/help/markdown.twig:64
+msgid "> Blockquote"
+msgstr "> Blockquote"
+
+#: admin/help/markdown.twig:65
+msgid "Blockquote"
+msgstr "Blockquote"
+
+#: admin/help/markdown.twig:69
+msgid "````<br>Code block<br>````"
+msgstr "````<br>Blocco di codice<br>````"
+
+#: admin/help/markdown.twig:70
+msgid "Code block"
+msgstr "Blocco di codice"
+
 #: admin/help/slugs.twig:3 admin/help/slugs.twig:6
 msgid "Slugs"
 msgstr "Slug"
@@ -364,7 +380,7 @@ msgstr ""
 
 #: admin/pages/content_settings.twig:73 admin/pages/edit_group.twig:24
 #: admin/pages/edit_user.twig:55 admin/pages/general_settings.twig:60
-#: admin/pages/route_settings.twig:85 admin/pages/user_settings.twig:47
+#: admin/pages/route_settings.twig:84 admin/pages/user_settings.twig:47
 msgid "Update"
 msgstr "Aggiorna"
 
@@ -888,127 +904,123 @@ msgstr "Impostazioni percorso"
 msgid "Clean URLs"
 msgstr "URL conformati"
 
-#: admin/pages/route_settings.twig:12
-msgid "(recommended)"
-msgstr "(raccomandato)"
-
-#: admin/pages/route_settings.twig:14
+#: admin/pages/route_settings.twig:13
 msgid "Gives your site prettier URLs."
 msgstr "Fornisce il sito di URL piú ordinati e migliori."
 
-#: admin/pages/route_settings.twig:14
+#: admin/pages/route_settings.twig:13
 msgid "Requires URL rewrite support."
 msgstr "Richiede il supporto URL Rewrite."
 
-#: admin/pages/route_settings.twig:18
+#: admin/pages/route_settings.twig:17
 msgid "Homepage"
 msgstr "Homepage"
 
-#: admin/pages/route_settings.twig:21
+#: admin/pages/route_settings.twig:20
 msgid "Make the default route a homepage instead of the blog index."
 msgstr "Rendi il percorso predefinito una homepage anziché l'indice del blog."
 
-#: admin/pages/route_settings.twig:26
+#: admin/pages/route_settings.twig:25
 msgid "Post View URL"
 msgstr "URL di visualizzazione post"
 
-#: admin/pages/route_settings.twig:27
+#: admin/pages/route_settings.twig:26
 msgid "(requires clean URLs)"
 msgstr "(richiede URL conformati)"
 
-#: admin/pages/route_settings.twig:32
+#: admin/pages/route_settings.twig:31
 msgid "Syntax:"
 msgstr "Sintassi:"
 
-#: admin/pages/route_settings.twig:36
+#: admin/pages/route_settings.twig:35
 msgid "Year submitted"
 msgstr "Anno di creazione"
 
-#: admin/pages/route_settings.twig:36
+#: admin/pages/route_settings.twig:35
 msgid "(e.g. 2007)"
 msgstr "(es. 2007)"
 
-#: admin/pages/route_settings.twig:40
+#: admin/pages/route_settings.twig:39
 msgid "Month submitted"
 msgstr "Mese di crezione"
 
-#: admin/pages/route_settings.twig:40
+#: admin/pages/route_settings.twig:39
 msgid "(e.g. 12)"
 msgstr "(es. 12)"
 
-#: admin/pages/route_settings.twig:44
+#: admin/pages/route_settings.twig:43
 msgid "Day submitted"
 msgstr "Giorno di creazione"
 
-#: admin/pages/route_settings.twig:44
+#: admin/pages/route_settings.twig:43
 msgid "(e.g. 25)"
 msgstr "(es. 25)"
 
-#: admin/pages/route_settings.twig:48
+#: admin/pages/route_settings.twig:47
 msgid "Hour submitted"
 msgstr "Ora di creazione"
 
-#: admin/pages/route_settings.twig:48
+#: admin/pages/route_settings.twig:47
 msgid "(e.g. 03)"
 msgstr "(es. 03)"
 
-#: admin/pages/route_settings.twig:52
+#: admin/pages/route_settings.twig:51
 msgid "Minute submitted"
 msgstr "Minuto di creazione"
 
-#: admin/pages/route_settings.twig:52
+#: admin/pages/route_settings.twig:51
 msgid "(e.g. 59)"
 msgstr "(es. 59)"
 
-#: admin/pages/route_settings.twig:56
+#: admin/pages/route_settings.twig:55
 msgid "Second submitted"
 msgstr "Secondo di creazione"
 
-#: admin/pages/route_settings.twig:56
+#: admin/pages/route_settings.twig:55
 msgid "(e.g. 30)"
 msgstr "(es. 30)"
 
-#: admin/pages/route_settings.twig:60
+#: admin/pages/route_settings.twig:59
 msgid "Post ID"
 msgstr "Post ID"
 
-#: admin/pages/route_settings.twig:64
+#: admin/pages/route_settings.twig:63
 msgid "Post author (username)"
 msgstr "Autore del post (nome utente)"
 
-#: admin/pages/route_settings.twig:64
+#: admin/pages/route_settings.twig:63
 msgid "(e.g. Alex)"
 msgstr "(es. Alex)"
 
-#: admin/pages/route_settings.twig:68
+#: admin/pages/route_settings.twig:67
 msgid "The non-unique slug"
 msgstr "Slug non unico"
 
-#: admin/pages/route_settings.twig:68
+#: admin/pages/route_settings.twig:67
 msgid "(e.g. this_is_clean)"
 msgstr "(es. this_is_clean)"
 
-#: admin/pages/route_settings.twig:72
+#: admin/pages/route_settings.twig:71
 msgid "The unique form of (clean)"
 msgstr "La forma unica (clean)"
 
-#: admin/pages/route_settings.twig:72
+#: admin/pages/route_settings.twig:71
 msgid "(e.g. this_one_is_taken_2)"
 msgstr "(es. this_one_is_taken_2)"
 
-#: admin/pages/route_settings.twig:76
+#: admin/pages/route_settings.twig:75
 msgid "The post's feather"
 msgstr "Feather del post"
 
-#: admin/pages/route_settings.twig:76
+#: admin/pages/route_settings.twig:75
 msgid "(e.g. text)"
 msgstr "(es. testo)"
 
-#: admin/pages/route_settings.twig:80
+#: admin/pages/route_settings.twig:79
 msgid "The plural form of the post's feather"
 msgstr "La forma plurale della Feather del post"
 
-#: admin/pages/route_settings.twig:80
+#: admin/pages/route_settings.twig:79
 msgid "(e.g. links)"
 msgstr "(es. collegamenti)"
 

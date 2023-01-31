@@ -34,7 +34,7 @@ msgstr ""
 msgid "Allow users to &#8220;like&#8221; a post."
 msgstr ""
 
-#: modules/likes/info.php:11
+#: modules/likes/info.php:12
 msgid "Please remember to update the permission settings for each group."
 msgstr ""
 
