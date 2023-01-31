@@ -4,7 +4,7 @@
 ?>
 var ChyrpLightbox = {
     background: "<?php echo $config->module_lightbox["background"]; ?>",
-    spacing: Math.abs("<?php echo $config->module_lightbox["spacing"]; ?>"),
+    spacing: 48 + Math.abs("<?php echo $config->module_lightbox["spacing"]; ?>"),
     protect: <?php echo($config->module_lightbox["protect"] ? "true" : "false"); ?>,
     active: false,
     styles: {
@@ -15,7 +15,7 @@ var ChyrpLightbox = {
             "left": "0px",
             "width": "auto",
             "height": "auto",
-            "cursor": "default",
+            "cursor": "crosshair",
             "visibility": "hidden"
         },
         bg: {
@@ -28,17 +28,19 @@ var ChyrpLightbox = {
             "opacity": 0,
             "transition-property": "opacity",
             "transition-duration": "500ms",
-            "cursor": "wait"
-            },
+            "cursor": "wait",
+            "background-repeat": "no-repeat",
+            "background-position": "right 12px top 12px",
+            "background-image": "url('" + Site.chyrp_url + "/modules/lightbox/images/close.svg')"
+        },
         image: {
-            "cursor": "url('" + Site.chyrp_url + "/modules/lightbox/images/zoom-in.svg') 6 6, pointer",
-            "-webkit-tap-highlight-color": "rgba(0,0,0,0)"
+            "cursor": "pointer",
         },
         black: {
-            "background-color": "#000000"
+            "background-color": "#2f2f2f"
         },
         grey: {
-            "background-color": "#3f3f3f"
+            "background-color": "#7f7f7f"
         },
         white: {
             "background-color": "#ffffff"
@@ -48,10 +50,15 @@ var ChyrpLightbox = {
         },
     },
     init: function() {
-        $.extend(ChyrpLightbox.styles.bg, ChyrpLightbox.styles[ChyrpLightbox.background]);
+        $.extend(
+            ChyrpLightbox.styles.bg,
+            ChyrpLightbox.styles[ChyrpLightbox.background]
+        );
 
         $("section img").not(".suppress_lightbox").each(function() {
-            $(this).on("click", ChyrpLightbox.load).css(ChyrpLightbox.styles.image);
+            $(this).on("click", ChyrpLightbox.load).css(
+                ChyrpLightbox.styles.image
+            );
 
             if (ChyrpLightbox.protect && !$(this).hasClass("suppress_protect"))
                 $(this).on("contextmenu", ChyrpLightbox.prevent);
@@ -77,8 +84,11 @@ var ChyrpLightbox = {
                 mutations.forEach(function(mutation) {
                     for (var i = 0; i < mutation.addedNodes.length; ++i) {
                         var item = mutation.addedNodes[i];
+
                         $(item).find("section img").not(".suppress_lightbox").each(function() {
-                            $(this).on("click", ChyrpLightbox.load).css(ChyrpLightbox.styles.image);
+                            $(this).on("click", ChyrpLightbox.load).css(
+                                ChyrpLightbox.styles.image
+                            );
 
                             if (ChyrpLightbox.protect && !$(this).hasClass("suppress_protect"))
                                 $(this).on("contextmenu", ChyrpLightbox.prevent);
@@ -96,37 +106,38 @@ var ChyrpLightbox = {
 
             var src = $(this).attr("src");
             var alt = $(this).attr("alt");
-            var ref = $(this).parent("a.image_link").attr("href");
 
             $("<div>", {
                 "id": "ChyrpLightbox-bg",
                 "role": "button",
+                "tabindex": "0",
                 "accesskey": "x",
                 "aria-label": '<?php echo __("Close", "lightbox"); ?>'
-            }).css(ChyrpLightbox.styles.bg).on("click", function(e) {
+            }).css(
+                ChyrpLightbox.styles.bg
+            ).on("click", function(e) {
                 if (e.target === e.currentTarget)
                     ChyrpLightbox.hide();
-            }).append($("<img>", {
-                "id": "ChyrpLightbox-fg",
-                "src": src,
-                "alt": alt
-            }).css(ChyrpLightbox.styles.fg).on("click", function(e) {
-                if (e.target === e.currentTarget) {
-                    if (e.altKey && ref) {
-                        if (!ChyrpLightbox.protect || ref.indexOf(Site.chyrp_url) != 0)
-                            window.location.assign(ref);
-                    }
-
-                    ChyrpLightbox.hide();
-                }
-            }).on("load", ChyrpLightbox.show)).appendTo("body");
+            }).append(
+                $("<img>", {
+                    "id": "ChyrpLightbox-fg",
+                    "src": src,
+                    "alt": alt
+                }).css(
+                    ChyrpLightbox.styles.fg
+                ).on("load", ChyrpLightbox.show)
+            ).appendTo("body");
 
             ChyrpLightbox.active = true;
         }
     },
     show: function() {
-        var fg = $("#ChyrpLightbox-fg"), fgWidth = fg.outerWidth(), fgHeight = fg.outerHeight();
-        var bg = $("#ChyrpLightbox-bg"), bgWidth = bg.outerWidth(), bgHeight = bg.outerHeight();
+        var fg = $("#ChyrpLightbox-fg");
+        var fgWidth = fg.outerWidth();
+        var fgHeight = fg.outerHeight();
+        var bg = $("#ChyrpLightbox-bg");
+        var bgWidth = bg.outerWidth();
+        var bgHeight = bg.outerHeight();
         var sp = ChyrpLightbox.spacing * 2;
 
         if (ChyrpLightbox.protect)
@@ -145,11 +156,10 @@ var ChyrpLightbox = {
             "width": fgWidth + "px",
             "height": fgHeight + "px",
             "visibility": "visible",
-            "cursor": "pointer"
         });
         bg.css({
             "opacity": 1,
-            "cursor": "url('" + Site.chyrp_url + "/modules/lightbox/images/zoom-out.svg') 6 6, pointer"
+            "cursor": "pointer"
         });
     },
     hide: function() {
