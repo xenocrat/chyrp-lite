@@ -184,6 +184,9 @@ ul.navigation > li:not(:last-child):after {
 li {
     margin: 0.5rem 0rem 0.5rem 2rem;
 }
+li::marker {
+    color: #505a5f;
+}
 table {
     border-collapse: collapse;
     border-spacing: 0em;
@@ -204,9 +207,6 @@ table tbody tr td {
     text-align: start;
     padding: 0.5em;
     border: 1px solid #b1b4b6;
-}
-p {
-    margin: 1rem 0rem;
 }
 hr {
     width: 100%;
@@ -242,7 +242,7 @@ select, input {
     display: block;
     width: 30ch;
     max-width: 100%;
-    margin: 1rem 0rem;
+    margin: 0rem 0rem 1rem 0rem;
     padding: 0.3em;
     background: none;
     font: inherit;
@@ -256,7 +256,7 @@ input:placeholder {
     color: #505a5f;
     opacity: 1;
 }
-input.error, input:invalid {
+input:invalid {
     border-color: #d4351c;
     box-shadow: none;
 }
@@ -272,16 +272,11 @@ textarea {
     font: inherit;
     font-size: inherit;
     color: #0b0c0c;
-    margin: 1rem 0rem;
+    margin: 0rem 0rem 1rem 0rem;
     padding: 0.3em;
     background-color: #ffffff;
     border: 2px solid #0b0c0c;
     border-radius: 0em;
-}
-label + select,
-label + input,
-label + textarea {
-    margin-top: 0rem;
 }
 button {
     font: inherit;
@@ -292,7 +287,8 @@ nav,
 main,
 article,
 section,
-form {
+form,
+p {
     margin: 1rem 0rem;
 }
 header {
@@ -346,7 +342,12 @@ nav.traversal a:focus {
 nav.traversal a:active {
     background-color: #0b0c0c;
 }
-article img {
+img {
+    border-style: none;
+    margin: 0em;
+    padding: 0em;
+}
+section img {
     display: block;
     max-width: 100%;
 }

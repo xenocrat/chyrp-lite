@@ -1,5 +1,8 @@
 <article class="post {{ post.feather }}{{ post.pinned ? ' pinned' : '' }}" id="post_{{ post.id }}">
 <header>
+<span class="permalink">
+<a href="{{ post.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(post.title | striptags | normalize | fix(true)) }}">&dagger;</a>
+</span>
 <span class="time">
 {% if post.status == "draft" %}
 {{ "Drafted on %s." | translate | format(post.created_at | time) }}
