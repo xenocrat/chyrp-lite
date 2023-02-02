@@ -54,6 +54,7 @@ html[lang="he"] {
     direction: rtl;
 }
 *::selection {
+    color: #0b0c0c;
     background-color: #ffdd00;
 }
 body {
@@ -187,6 +188,14 @@ li {
 li::marker {
     color: #505a5f;
 }
+main > details > summary {
+    color: #ffffff;
+    background-color: #0b0c0c;
+    margin: 0rem;
+    padding: 0.3rem;
+    cursor: pointer;
+    list-style-position: inside;
+}
 table {
     border-collapse: collapse;
     border-spacing: 0em;
@@ -287,7 +296,9 @@ nav,
 main,
 article,
 section,
+footer,
 form,
+details,
 p {
     margin: 1rem 0rem;
 }
@@ -303,9 +314,7 @@ header > * {
     margin: 0rem;
     padding: 0rem;
 }
-footer {
-    margin: 1rem 0rem 2rem 0rem;
-}
+main > details,
 div.doaction,
 nav.traversal {
     margin: 2rem 0rem;

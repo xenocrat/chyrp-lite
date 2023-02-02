@@ -283,6 +283,29 @@ ol.comments > li#comment_shim {
 ol.comments > li.comment_form {
     padding: 2rem;
 }
+div#main > details {
+    display: block;
+    box-sizing: border-box;
+    background-color: #fbfbf7;
+    margin: 0rem 0rem 2rem 0rem;
+    padding: 0em;
+    border: 1px solid #c6ccc8;
+    border-radius: 6px;
+    background-image: linear-gradient(to bottom, #ffffff 0em, #fbfbf7 10em);
+    box-shadow: 0px 2px 4px 2px rgba(57,67,77,0.05);
+}
+div#main > details > summary {
+    box-sizing: border-box;
+    margin: 0.5rem 2rem;
+    cursor: pointer;
+    list-style-position: outside;
+}
+div#main > details > article {
+    display: block;
+    padding: 2rem;
+    margin: 0em;
+    border-top: 1px solid #d2d9d4;
+}
 table {
     border-collapse: collapse;
     border-spacing: 0em;
@@ -615,13 +638,13 @@ a:hover, a:focus, a:active {
     text-decoration: none;
     border-bottom: 1px #d94c7b solid;
 }
-h3.ribbon a {
+div.ribbon a {
     color: #ffffff;
     font-weight: bold;
 }
-h3.ribbon a:hover,
-h3.ribbon a:focus,
-h3.ribbon a:active {
+div.ribbon a:hover,
+div.ribbon a:focus,
+div.ribbon a:active {
     border-bottom: 1px #ffffff solid;
 }
 div.traversal a {
@@ -902,5 +925,8 @@ article.archive img {
 @media (prefers-reduced-motion) {
     .ajax_loading {
         animation: none;
+    }
+    ul#nav.mobile_nav > li {
+        transition: none;
     }
 }
