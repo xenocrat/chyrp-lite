@@ -35,7 +35,7 @@ msgstr "标签"
 #: themes/topaz/feathers/photo.twig:6 themes/topaz/feathers/quote.twig:6
 #: themes/topaz/feathers/text.twig:6 themes/topaz/feathers/uploader.twig:6
 #: themes/topaz/feathers/video.twig:6 themes/topaz/pages/archive.twig:31
-#: themes/topaz/pages/page.twig:6 themes/topaz/pages/search.twig:24
+#: themes/topaz/pages/page.twig:6 themes/topaz/pages/search.twig:19
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "永久链接至 &#8220;%s&#8221;"
@@ -154,7 +154,7 @@ msgstr "登陆"
 msgid "Categories"
 msgstr "分类"
 
-#: themes/topaz/content/sidebar.twig:59 themes/topaz/pages/search.twig:18
+#: themes/topaz/content/sidebar.twig:59
 msgid "Pages"
 msgstr "页面"
 
@@ -172,7 +172,7 @@ msgstr "档案"
 
 #: themes/topaz/content/sidebar.twig:94 themes/topaz/pages/archive.twig:11
 msgid "F Y"
-msgstr ""
+msgstr "F Y"
 
 #: themes/topaz/feathers/audio.twig:8 themes/topaz/feathers/link.twig:7
 #: themes/topaz/feathers/photo.twig:8 themes/topaz/feathers/quote.twig:8
@@ -386,12 +386,12 @@ msgid "Drafts"
 msgstr "草稿"
 
 #: themes/topaz/pages/drafts.twig:13
-msgid "You don't have any drafts"
-msgstr "您没有任何草稿"
+msgid "You don't have any drafts."
+msgstr "您没有任何草稿。"
 
-#: themes/topaz/pages/index.twig:9
-msgid "No posts"
-msgstr "没有帖子"
+#: themes/topaz/pages/index.twig:9 themes/topaz/pages/tags.twig:20
+msgid "Nothing here yet!"
+msgstr "然而这里什么也没有！"
 
 #: themes/topaz/pages/search.twig:6
 #, php-format
@@ -402,6 +402,10 @@ msgstr "&#8220;%s&#8221; 的搜索结果"
 msgid "Your search did not return any results."
 msgstr "空空如也"
 
+#: themes/topaz/pages/search.twig:15
+msgid "Pages containing the search term"
+msgstr "包含搜索词的网页"
+
 #: themes/topaz/pages/tag.twig:6
 #, php-format
 msgid "Posts tagged with &#8220;%s&#8221;"
@@ -411,17 +415,13 @@ msgstr "&#8220;%s&#8221; 的帖子标签"
 msgid "Tag cloud"
 msgstr "标签云"
 
-#: themes/topaz/pages/tags.twig:20
-msgid "Nothing here yet!"
-msgstr "然而这里什么也没有！"
-
 #: themes/topaz/pages/updated.twig:6
 msgid "Updated posts"
 msgstr "更新后的帖子"
 
 #: themes/topaz/pages/updated.twig:13
-msgid "There aren't any updated posts"
-msgstr "没有任何更新的帖子"
+msgid "There aren't any updated posts."
+msgstr "没有任何更新的帖子。"
 
 #: themes/topaz/pages/view.twig:6
 msgid "Next post"
@@ -442,6 +442,3 @@ msgstr "较新的评论"
 #: themes/topaz/pages/view.twig:36
 msgid "Older comments"
 msgstr "较旧的评论"
-
-#~ msgid "Please enter your username below and we will email you a new password for your account."
-#~ msgstr "请在下面输入您的用户名，我们会通过电子邮件向您发送新帐户的密码。"

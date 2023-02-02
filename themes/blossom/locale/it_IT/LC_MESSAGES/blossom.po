@@ -35,7 +35,7 @@ msgstr "Tag"
 #: themes/blossom/feathers/photo.twig:6 themes/blossom/feathers/quote.twig:6
 #: themes/blossom/feathers/text.twig:6 themes/blossom/feathers/uploader.twig:6
 #: themes/blossom/feathers/video.twig:6 themes/blossom/pages/archive.twig:38
-#: themes/blossom/pages/page.twig:6 themes/blossom/pages/search.twig:24
+#: themes/blossom/pages/page.twig:6 themes/blossom/pages/search.twig:19
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "Link permanente &#8220;%s&#8221;"
@@ -165,7 +165,7 @@ msgstr "Accedi"
 msgid "Categories"
 msgstr "Categorie"
 
-#: themes/blossom/content/sidebar.twig:59 themes/blossom/pages/search.twig:18
+#: themes/blossom/content/sidebar.twig:59
 msgid "Pages"
 msgstr "Pagine"
 
@@ -184,7 +184,7 @@ msgstr "Archivio"
 
 #: themes/blossom/content/sidebar.twig:94 themes/blossom/pages/archive.twig:18
 msgid "F Y"
-msgstr ""
+msgstr "F Y"
 
 #: themes/blossom/feathers/missing.twig:4
 msgid "The post cannot be displayed because the theme does not support it."
@@ -391,12 +391,12 @@ msgid "Drafts"
 msgstr "Bozze"
 
 #: themes/blossom/pages/drafts.twig:13
-msgid "You don't have any drafts"
-msgstr "Non hai bozze"
+msgid "You don't have any drafts."
+msgstr "Non hai bozze."
 
-#: themes/blossom/pages/index.twig:9
-msgid "No posts"
-msgstr "Nessun post"
+#: themes/blossom/pages/index.twig:9 themes/blossom/pages/tags.twig:20
+msgid "Nothing here yet!"
+msgstr "Non c'è ancora niente!"
 
 #: themes/blossom/pages/search.twig:6
 #, php-format
@@ -407,6 +407,10 @@ msgstr "Risultati della ricerca per &#8220;%s&#8221;"
 msgid "Your search did not return any results."
 msgstr "La ricerca non ha restituito alcun risultato."
 
+#: themes/blossom/pages/search.twig:15
+msgid "Pages containing the search term"
+msgstr "Pagine contenenti il termine di ricerca"
+
 #: themes/blossom/pages/tag.twig:6
 #, php-format
 msgid "Posts tagged with &#8220;%s&#8221;"
@@ -416,17 +420,13 @@ msgstr "Post contrassegnati con &#8220;%s&#8221;"
 msgid "Tag cloud"
 msgstr "Tag cloud"
 
-#: themes/blossom/pages/tags.twig:20
-msgid "Nothing here yet!"
-msgstr "Non c'è ancora niente!"
-
 #: themes/blossom/pages/updated.twig:6
 msgid "Updated posts"
 msgstr "Post aggiornati"
 
 #: themes/blossom/pages/updated.twig:13
-msgid "There aren't any updated posts"
-msgstr "Non ci sono post aggiornati"
+msgid "There aren't any updated posts."
+msgstr "Non ci sono post aggiornati."
 
 #: themes/blossom/pages/view.twig:6
 msgid "Next post"

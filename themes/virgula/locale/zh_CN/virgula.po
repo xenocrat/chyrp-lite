@@ -22,6 +22,7 @@ msgstr "这个评论正在等待审核。"
 #: themes/virgula/feathers/text.twig:6 themes/virgula/feathers/uploader.twig:6
 #: themes/virgula/feathers/video.twig:6 themes/virgula/pages/archive.twig:19
 #: themes/virgula/pages/index.twig:10 themes/virgula/pages/page.twig:6
+#: themes/virgula/pages/search.twig:15
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "永久链接至 &#8220;%s&#8221;"
@@ -272,13 +273,13 @@ msgid "F"
 msgstr "F"
 
 #: themes/virgula/pages/archive.twig:32 themes/virgula/pages/archive.twig:55
-#: themes/virgula/pages/category.twig:12 themes/virgula/pages/search.twig:12
+#: themes/virgula/pages/category.twig:12 themes/virgula/pages/search.twig:28
 #: themes/virgula/pages/tag.twig:12 themes/virgula/pages/updated.twig:12
 msgid "&xlarr; Newer posts"
 msgstr "&xlarr; 较新的帖子"
 
 #: themes/virgula/pages/archive.twig:37 themes/virgula/pages/archive.twig:56
-#: themes/virgula/pages/category.twig:13 themes/virgula/pages/search.twig:13
+#: themes/virgula/pages/category.twig:13 themes/virgula/pages/search.twig:29
 #: themes/virgula/pages/tag.twig:13 themes/virgula/pages/updated.twig:13
 msgid "Older posts &xrarr;"
 msgstr "较旧的帖子 &xrarr;"
@@ -297,16 +298,16 @@ msgid "Drafts"
 msgstr "草稿"
 
 #: themes/virgula/pages/drafts.twig:10
-msgid "You don't have any drafts"
-msgstr "您没有任何草稿"
+msgid "You don't have any drafts."
+msgstr "您没有任何草稿。"
 
 #: themes/virgula/pages/index.twig:6
 msgid "Posts"
 msgstr "所有帖子"
 
-#: themes/virgula/pages/index.twig:17
-msgid "No posts"
-msgstr "没有帖子"
+#: themes/virgula/pages/index.twig:17 themes/virgula/pages/tags.twig:19
+msgid "Nothing here yet!"
+msgstr "然而这里什么也没有！"
 
 #: themes/virgula/pages/index.twig:21
 msgid "Pages"
@@ -321,9 +322,13 @@ msgstr "更多帖子&hellip;"
 msgid "Search results for &#8220;%s&#8221;"
 msgstr "&#8220;%s&#8221; 的搜索结果"
 
-#: themes/virgula/pages/search.twig:17
+#: themes/virgula/pages/search.twig:7
 msgid "Your search did not return any results."
 msgstr "空空如也"
+
+#: themes/virgula/pages/search.twig:11
+msgid "Pages containing the search term"
+msgstr "包含搜索词的网页"
 
 #: themes/virgula/pages/tag.twig:5
 #, php-format
@@ -334,17 +339,13 @@ msgstr "&#8220;%s&#8221; 的帖子标签"
 msgid "Tag cloud"
 msgstr "标签云"
 
-#: themes/virgula/pages/tags.twig:19
-msgid "Nothing here yet!"
-msgstr "然而这里什么也没有！"
-
 #: themes/virgula/pages/updated.twig:5
 msgid "Updated posts"
 msgstr "更新后的帖子"
 
 #: themes/virgula/pages/updated.twig:17
-msgid "There aren't any updated posts"
-msgstr "没有任何更新的帖子"
+msgid "There aren't any updated posts."
+msgstr "没有任何更新的帖子。"
 
 #: themes/virgula/pages/view.twig:8
 msgid "Webmentions"

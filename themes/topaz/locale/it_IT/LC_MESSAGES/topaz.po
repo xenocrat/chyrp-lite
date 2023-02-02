@@ -35,7 +35,7 @@ msgstr "Tag"
 #: themes/topaz/feathers/photo.twig:6 themes/topaz/feathers/quote.twig:6
 #: themes/topaz/feathers/text.twig:6 themes/topaz/feathers/uploader.twig:6
 #: themes/topaz/feathers/video.twig:6 themes/topaz/pages/archive.twig:31
-#: themes/topaz/pages/page.twig:6 themes/topaz/pages/search.twig:24
+#: themes/topaz/pages/page.twig:6 themes/topaz/pages/search.twig:19
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "Link permanente &#8220;%s&#8221;"
@@ -156,7 +156,7 @@ msgstr "Accedi"
 msgid "Categories"
 msgstr "Categorie"
 
-#: themes/topaz/content/sidebar.twig:59 themes/topaz/pages/search.twig:18
+#: themes/topaz/content/sidebar.twig:59
 msgid "Pages"
 msgstr "Pagine"
 
@@ -174,7 +174,7 @@ msgstr "Archivio"
 
 #: themes/topaz/content/sidebar.twig:94 themes/topaz/pages/archive.twig:11
 msgid "F Y"
-msgstr ""
+msgstr "F Y"
 
 #: themes/topaz/feathers/audio.twig:8 themes/topaz/feathers/link.twig:7
 #: themes/topaz/feathers/photo.twig:8 themes/topaz/feathers/quote.twig:8
@@ -388,12 +388,12 @@ msgid "Drafts"
 msgstr "Bozze"
 
 #: themes/topaz/pages/drafts.twig:13
-msgid "You don't have any drafts"
-msgstr "Non hai bozze"
+msgid "You don't have any drafts."
+msgstr "Non hai bozze."
 
-#: themes/topaz/pages/index.twig:9
-msgid "No posts"
-msgstr "Nessun post"
+#: themes/topaz/pages/index.twig:9 themes/topaz/pages/tags.twig:20
+msgid "Nothing here yet!"
+msgstr "Non c'è ancora niente!"
 
 #: themes/topaz/pages/search.twig:6
 #, php-format
@@ -404,6 +404,10 @@ msgstr "Risultati della ricerca per &#8220;%s&#8221;"
 msgid "Your search did not return any results."
 msgstr "La ricerca non ha restituito alcun risultato."
 
+#: themes/topaz/pages/search.twig:15
+msgid "Pages containing the search term"
+msgstr "Pagine contenenti il termine di ricerca"
+
 #: themes/topaz/pages/tag.twig:6
 #, php-format
 msgid "Posts tagged with &#8220;%s&#8221;"
@@ -413,17 +417,13 @@ msgstr "Post contrassegnati con &#8220;%s&#8221;"
 msgid "Tag cloud"
 msgstr "Tag cloud"
 
-#: themes/topaz/pages/tags.twig:20
-msgid "Nothing here yet!"
-msgstr "Non c'è ancora niente!"
-
 #: themes/topaz/pages/updated.twig:6
 msgid "Updated posts"
 msgstr "Post aggiornati"
 
 #: themes/topaz/pages/updated.twig:13
-msgid "There aren't any updated posts"
-msgstr "Non ci sono post aggiornati"
+msgid "There aren't any updated posts."
+msgstr "Non ci sono post aggiornati."
 
 #: themes/topaz/pages/view.twig:6
 msgid "Next post"

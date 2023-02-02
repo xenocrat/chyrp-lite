@@ -27,7 +27,7 @@ msgstr ""
 #: themes/blossom/feathers/video.twig:6
 #: themes/blossom/pages/archive.twig:38
 #: themes/blossom/pages/page.twig:6
-#: themes/blossom/pages/search.twig:24
+#: themes/blossom/pages/search.twig:19
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr ""
@@ -164,7 +164,6 @@ msgid "Categories"
 msgstr ""
 
 #: themes/blossom/content/sidebar.twig:59
-#: themes/blossom/pages/search.twig:18
 msgid "Pages"
 msgstr ""
 
@@ -392,11 +391,12 @@ msgid "Drafts"
 msgstr ""
 
 #: themes/blossom/pages/drafts.twig:13
-msgid "You don't have any drafts"
+msgid "You don't have any drafts."
 msgstr ""
 
 #: themes/blossom/pages/index.twig:9
-msgid "No posts"
+#: themes/blossom/pages/tags.twig:20
+msgid "Nothing here yet!"
 msgstr ""
 
 #: themes/blossom/pages/search.twig:6
@@ -408,6 +408,10 @@ msgstr ""
 msgid "Your search did not return any results."
 msgstr ""
 
+#: themes/blossom/pages/search.twig:15
+msgid "Pages containing the search term"
+msgstr ""
+
 #: themes/blossom/pages/tag.twig:6
 #, php-format
 msgid "Posts tagged with &#8220;%s&#8221;"
@@ -417,16 +421,12 @@ msgstr ""
 msgid "Tag cloud"
 msgstr ""
 
-#: themes/blossom/pages/tags.twig:20
-msgid "Nothing here yet!"
-msgstr ""
-
 #: themes/blossom/pages/updated.twig:6
 msgid "Updated posts"
 msgstr ""
 
 #: themes/blossom/pages/updated.twig:13
-msgid "There aren't any updated posts"
+msgid "There aren't any updated posts."
 msgstr ""
 
 #: themes/blossom/pages/view.twig:6

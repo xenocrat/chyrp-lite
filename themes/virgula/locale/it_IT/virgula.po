@@ -22,6 +22,7 @@ msgstr "Questo commento è in attesa di verifica da un moderatore."
 #: themes/virgula/feathers/text.twig:6 themes/virgula/feathers/uploader.twig:6
 #: themes/virgula/feathers/video.twig:6 themes/virgula/pages/archive.twig:19
 #: themes/virgula/pages/index.twig:10 themes/virgula/pages/page.twig:6
+#: themes/virgula/pages/search.twig:15
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "Link permanente &#8220;%s&#8221;"
@@ -272,13 +273,13 @@ msgid "F"
 msgstr "F"
 
 #: themes/virgula/pages/archive.twig:32 themes/virgula/pages/archive.twig:55
-#: themes/virgula/pages/category.twig:12 themes/virgula/pages/search.twig:12
+#: themes/virgula/pages/category.twig:12 themes/virgula/pages/search.twig:28
 #: themes/virgula/pages/tag.twig:12 themes/virgula/pages/updated.twig:12
 msgid "&xlarr; Newer posts"
 msgstr "&xlarr; Post più recenti"
 
 #: themes/virgula/pages/archive.twig:37 themes/virgula/pages/archive.twig:56
-#: themes/virgula/pages/category.twig:13 themes/virgula/pages/search.twig:13
+#: themes/virgula/pages/category.twig:13 themes/virgula/pages/search.twig:29
 #: themes/virgula/pages/tag.twig:13 themes/virgula/pages/updated.twig:13
 msgid "Older posts &xrarr;"
 msgstr "Post più vecchi &xrarr;"
@@ -297,16 +298,16 @@ msgid "Drafts"
 msgstr "Bozze"
 
 #: themes/virgula/pages/drafts.twig:10
-msgid "You don't have any drafts"
-msgstr "Non hai bozze"
+msgid "You don't have any drafts."
+msgstr "Non hai bozze."
 
 #: themes/virgula/pages/index.twig:6
 msgid "Posts"
 msgstr "Post"
 
-#: themes/virgula/pages/index.twig:17
-msgid "No posts"
-msgstr "Nessun post"
+#: themes/virgula/pages/index.twig:17 themes/virgula/pages/tags.twig:19
+msgid "Nothing here yet!"
+msgstr "Non c'è ancora niente!"
 
 #: themes/virgula/pages/index.twig:21
 msgid "Pages"
@@ -321,9 +322,13 @@ msgstr "Altri post&hellip;"
 msgid "Search results for &#8220;%s&#8221;"
 msgstr "Risultati della ricerca per &#8220;%s&#8221;"
 
-#: themes/virgula/pages/search.twig:17
+#: themes/virgula/pages/search.twig:7
 msgid "Your search did not return any results."
 msgstr "La ricerca non ha restituito alcun risultato."
+
+#: themes/virgula/pages/search.twig:11
+msgid "Pages containing the search term"
+msgstr "Pagine contenenti il termine di ricerca"
 
 #: themes/virgula/pages/tag.twig:5
 #, php-format
@@ -334,17 +339,13 @@ msgstr "Post contrassegnati con &#8220;%s&#8221;"
 msgid "Tag cloud"
 msgstr "Tag cloud"
 
-#: themes/virgula/pages/tags.twig:19
-msgid "Nothing here yet!"
-msgstr "Non c'è ancora niente!"
-
 #: themes/virgula/pages/updated.twig:5
 msgid "Updated posts"
 msgstr "Post aggiornati"
 
 #: themes/virgula/pages/updated.twig:17
-msgid "There aren't any updated posts"
-msgstr "Non ci sono post aggiornati"
+msgid "There aren't any updated posts."
+msgstr "Non ci sono post aggiornati."
 
 #: themes/virgula/pages/view.twig:8
 msgid "Webmentions"

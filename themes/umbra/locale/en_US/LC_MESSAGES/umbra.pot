@@ -319,11 +319,12 @@ msgid "Drafts"
 msgstr ""
 
 #: themes/umbra/pages/drafts.twig:10
-msgid "You don't have any drafts"
+msgid "You don't have any drafts."
 msgstr ""
 
 #: themes/umbra/pages/index.twig:8
-msgid "No posts"
+#: themes/umbra/pages/tags.twig:19
+msgid "Nothing here yet!"
 msgstr ""
 
 #: themes/umbra/pages/search.twig:5
@@ -344,16 +345,12 @@ msgstr ""
 msgid "Tag cloud"
 msgstr ""
 
-#: themes/umbra/pages/tags.twig:19
-msgid "Nothing here yet!"
-msgstr ""
-
 #: themes/umbra/pages/updated.twig:5
 msgid "Updated posts"
 msgstr ""
 
 #: themes/umbra/pages/updated.twig:10
-msgid "There aren't any updated posts"
+msgid "There aren't any updated posts."
 msgstr ""
 
 #: themes/umbra/pages/view.twig:8

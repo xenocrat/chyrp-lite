@@ -27,7 +27,7 @@ msgstr ""
 #: themes/topaz/feathers/video.twig:6
 #: themes/topaz/pages/archive.twig:31
 #: themes/topaz/pages/page.twig:6
-#: themes/topaz/pages/search.twig:24
+#: themes/topaz/pages/search.twig:19
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr ""
@@ -164,7 +164,6 @@ msgid "Categories"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:59
-#: themes/topaz/pages/search.twig:18
 msgid "Pages"
 msgstr ""
 
@@ -403,11 +402,12 @@ msgid "Drafts"
 msgstr ""
 
 #: themes/topaz/pages/drafts.twig:13
-msgid "You don't have any drafts"
+msgid "You don't have any drafts."
 msgstr ""
 
 #: themes/topaz/pages/index.twig:9
-msgid "No posts"
+#: themes/topaz/pages/tags.twig:20
+msgid "Nothing here yet!"
 msgstr ""
 
 #: themes/topaz/pages/search.twig:6
@@ -419,6 +419,10 @@ msgstr ""
 msgid "Your search did not return any results."
 msgstr ""
 
+#: themes/topaz/pages/search.twig:15
+msgid "Pages containing the search term"
+msgstr ""
+
 #: themes/topaz/pages/tag.twig:6
 #, php-format
 msgid "Posts tagged with &#8220;%s&#8221;"
@@ -428,16 +432,12 @@ msgstr ""
 msgid "Tag cloud"
 msgstr ""
 
-#: themes/topaz/pages/tags.twig:20
-msgid "Nothing here yet!"
-msgstr ""
-
 #: themes/topaz/pages/updated.twig:6
 msgid "Updated posts"
 msgstr ""
 
 #: themes/topaz/pages/updated.twig:13
-msgid "There aren't any updated posts"
+msgid "There aren't any updated posts."
 msgstr ""
 
 #: themes/topaz/pages/view.twig:6

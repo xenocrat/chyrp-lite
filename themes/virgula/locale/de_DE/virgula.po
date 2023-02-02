@@ -22,6 +22,7 @@ msgstr "Dieser Kommentar wartet auf die Freigabe durch die Moderation."
 #: themes/virgula/feathers/text.twig:6 themes/virgula/feathers/uploader.twig:6
 #: themes/virgula/feathers/video.twig:6 themes/virgula/pages/archive.twig:19
 #: themes/virgula/pages/index.twig:10 themes/virgula/pages/page.twig:6
+#: themes/virgula/pages/search.twig:15
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "Permanentlink zu &#8220;%s&#8221;"
@@ -62,7 +63,9 @@ msgstr "Getaggt mit %s."
 
 #: themes/virgula/feathers/missing.twig:4
 msgid "The post cannot be displayed because the theme does not support it."
-msgstr "Der Post kann nicht angezeigt werden, weil dies vom Theme nicht unterstützt wird."
+msgstr ""
+"Der Post kann nicht angezeigt werden, weil dies vom Theme nicht unterstützt "
+"wird."
 
 #: themes/virgula/feathers/uploader.twig:21
 msgid "File attachment:"
@@ -272,13 +275,13 @@ msgid "F"
 msgstr "F"
 
 #: themes/virgula/pages/archive.twig:32 themes/virgula/pages/archive.twig:55
-#: themes/virgula/pages/category.twig:12 themes/virgula/pages/search.twig:12
+#: themes/virgula/pages/category.twig:12 themes/virgula/pages/search.twig:28
 #: themes/virgula/pages/tag.twig:12 themes/virgula/pages/updated.twig:12
 msgid "&xlarr; Newer posts"
 msgstr "&xlarr; Neuere Beiträge"
 
 #: themes/virgula/pages/archive.twig:37 themes/virgula/pages/archive.twig:56
-#: themes/virgula/pages/category.twig:13 themes/virgula/pages/search.twig:13
+#: themes/virgula/pages/category.twig:13 themes/virgula/pages/search.twig:29
 #: themes/virgula/pages/tag.twig:13 themes/virgula/pages/updated.twig:13
 msgid "Older posts &xrarr;"
 msgstr "Ältere Beiträge &xrarr;"
@@ -297,16 +300,16 @@ msgid "Drafts"
 msgstr "Entwürfe"
 
 #: themes/virgula/pages/drafts.twig:10
-msgid "You don't have any drafts"
-msgstr "Du hast keine Entwürfe"
+msgid "You don't have any drafts."
+msgstr "Du hast keine Entwürfe."
 
 #: themes/virgula/pages/index.twig:6
 msgid "Posts"
 msgstr "Posts"
 
-#: themes/virgula/pages/index.twig:17
-msgid "No posts"
-msgstr "Keine Posts"
+#: themes/virgula/pages/index.twig:17 themes/virgula/pages/tags.twig:19
+msgid "Nothing here yet!"
+msgstr "Hier ist noch nichts!"
 
 #: themes/virgula/pages/index.twig:21
 msgid "Pages"
@@ -321,9 +324,13 @@ msgstr "Weitere Beiträge&hellip;"
 msgid "Search results for &#8220;%s&#8221;"
 msgstr "Suchergebnisse für &#8220;%s&#8221;"
 
-#: themes/virgula/pages/search.twig:17
+#: themes/virgula/pages/search.twig:7
 msgid "Your search did not return any results."
 msgstr "Deine Suche erzielte keine Ergebnisse."
+
+#: themes/virgula/pages/search.twig:11
+msgid "Pages containing the search term"
+msgstr "Seiten, die den Suchbegriff enthalten"
 
 #: themes/virgula/pages/tag.twig:5
 #, php-format
@@ -334,17 +341,13 @@ msgstr "Posts mit den Tags &#8220;%s&#8221;"
 msgid "Tag cloud"
 msgstr "Tagcloud"
 
-#: themes/virgula/pages/tags.twig:19
-msgid "Nothing here yet!"
-msgstr "Hier ist noch nichts!"
-
 #: themes/virgula/pages/updated.twig:5
 msgid "Updated posts"
 msgstr "Aktualisierte Posts"
 
 #: themes/virgula/pages/updated.twig:17
-msgid "There aren't any updated posts"
-msgstr "Es gibt keine aktualisierten Posts"
+msgid "There aren't any updated posts."
+msgstr "Es gibt keine aktualisierten Posts."
 
 #: themes/virgula/pages/view.twig:8
 msgid "Webmentions"

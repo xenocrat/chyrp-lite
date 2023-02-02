@@ -358,11 +358,12 @@ msgid "Drafts"
 msgstr ""
 
 #: themes/sparrow/pages/drafts.twig:10
-msgid "You don't have any drafts"
+msgid "You don't have any drafts."
 msgstr ""
 
 #: themes/sparrow/pages/index.twig:8
-msgid "No posts"
+#: themes/sparrow/pages/tags.twig:19
+msgid "Nothing here yet!"
 msgstr ""
 
 #: themes/sparrow/pages/search.twig:5
@@ -383,16 +384,12 @@ msgstr ""
 msgid "Tag cloud"
 msgstr ""
 
-#: themes/sparrow/pages/tags.twig:19
-msgid "Nothing here yet!"
-msgstr ""
-
 #: themes/sparrow/pages/updated.twig:5
 msgid "Updated posts"
 msgstr ""
 
 #: themes/sparrow/pages/updated.twig:10
-msgid "There aren't any updated posts"
+msgid "There aren't any updated posts."
 msgstr ""
 
 #: themes/sparrow/pages/view.twig:6

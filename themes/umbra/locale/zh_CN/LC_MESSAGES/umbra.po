@@ -323,12 +323,12 @@ msgid "Drafts"
 msgstr "草稿"
 
 #: themes/umbra/pages/drafts.twig:10
-msgid "You don't have any drafts"
-msgstr "您没有任何草稿"
+msgid "You don't have any drafts."
+msgstr "您没有任何草稿。"
 
-#: themes/umbra/pages/index.twig:8
-msgid "No posts"
-msgstr "没有帖子"
+#: themes/umbra/pages/index.twig:8 themes/umbra/pages/tags.twig:19
+msgid "Nothing here yet!"
+msgstr "然而这里什么也没有！"
 
 #: themes/umbra/pages/search.twig:5
 #, php-format
@@ -348,17 +348,13 @@ msgstr "&#8220;%s&#8221; 的帖子标签"
 msgid "Tag cloud"
 msgstr "标签云"
 
-#: themes/umbra/pages/tags.twig:19
-msgid "Nothing here yet!"
-msgstr "然而这里什么也没有！"
-
 #: themes/umbra/pages/updated.twig:5
 msgid "Updated posts"
 msgstr "更新后的帖子"
 
 #: themes/umbra/pages/updated.twig:10
-msgid "There aren't any updated posts"
-msgstr "没有任何更新的帖子"
+msgid "There aren't any updated posts."
+msgstr "没有任何更新的帖子。"
 
 #: themes/umbra/pages/view.twig:8
 msgid "Webmentions"
