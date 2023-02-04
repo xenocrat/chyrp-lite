@@ -276,7 +276,7 @@ msgstr "搜索&hellip;"
 
 #: themes/umbra/layouts/default.twig:77
 msgid "Search this blog"
-msgstr "搜索"
+msgstr "搜索此博客"
 
 #: themes/umbra/layouts/default.twig:78
 msgid "Search"

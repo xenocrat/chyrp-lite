@@ -302,7 +302,7 @@ msgstr "Non trovato."
 
 #: themes/umbra/pages/archive.twig:11
 msgid "F Y"
-msgstr ""
+msgstr "F Y"
 
 #: themes/umbra/pages/archive.twig:51
 #, php-format

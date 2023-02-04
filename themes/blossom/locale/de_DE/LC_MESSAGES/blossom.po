@@ -100,7 +100,7 @@ msgstr "Suchen&hellip;"
 
 #: themes/blossom/content/sidebar.twig:4 themes/blossom/layouts/default.twig:37
 msgid "Search this blog"
-msgstr "Suchen"
+msgstr "Durchsuchen Sie diesen Blog"
 
 #: themes/blossom/content/sidebar.twig:5 themes/blossom/layouts/default.twig:38
 msgid "Search"

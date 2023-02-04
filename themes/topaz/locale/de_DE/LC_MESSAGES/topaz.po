@@ -100,7 +100,7 @@ msgstr "Suchen&hellip;"
 
 #: themes/topaz/content/sidebar.twig:4 themes/topaz/layouts/default.twig:37
 msgid "Search this blog"
-msgstr "Suchen"
+msgstr "Durchsuchen Sie diesen Blog"
 
 #: themes/topaz/content/sidebar.twig:5 themes/topaz/layouts/default.twig:38
 msgid "Search"

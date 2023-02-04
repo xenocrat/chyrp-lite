@@ -98,7 +98,7 @@ msgstr "搜索&hellip;"
 
 #: themes/topaz/content/sidebar.twig:4 themes/topaz/layouts/default.twig:37
 msgid "Search this blog"
-msgstr "搜索"
+msgstr "搜索此博客"
 
 #: themes/topaz/content/sidebar.twig:5 themes/topaz/layouts/default.twig:38
 msgid "Search"
