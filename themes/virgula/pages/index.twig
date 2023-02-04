@@ -13,8 +13,11 @@
 </li>
 {% endfor %}
 </ul>
-{% else %}
-<h3 role="status">{{ "Nothing here yet!" | translate }}</h3>
+{% if posts.prev_page() or posts.next_page() %}
+<nav class="traversal">
+<a href="{{ url('archive') }}" rel="archives">{{ "More posts&hellip;" | translate }}</a>
+</nav>
+{% endif %}
 {% endif %}
 {% set pages_list = theme.pages_list() %}
 {% if pages_list is not empty %}
@@ -27,7 +30,7 @@
 {% if this_page_depth > prev_page_depth %}
 {{ "<ul><li>" | repeat(this_page_depth - prev_page_depth) }}
 {% endif %}
-{% if this_page_depth <= prev_page_depth  %}
+{% if this_page_depth <= prev_page_depth %}
 <li>
 {% endif %}
 <a href="{{ item.url() }}">{{ item.title }}</a>
@@ -39,12 +42,16 @@
 {% endif %}
 {% endfor %}
 </ul>
-{% if posts.prev_page() or posts.next_page() %}
-<nav class="traversal">
-<a href="{{ url('archive') }}" rel="archives">{{ "More posts&hellip;" | translate }}</a>
-</nav>
 {% endif %}
+{% if posts.paginated is empty and pages_list is empty %}
+<h3 role="status">{{ "Nothing here yet!" | translate }}</h3>
 {% endif %}
+<h2>{{ "Search" | translate }}</h2>
+<form class="search_box" action="{{ url('search') }}" method="post" accept-charset="UTF-8" role="search">
+<label for="search_field">{{ "Search this blog" | translate }}</label>
+<input type="text" id="search_field" name="query" value="">
+<button type="submit" id="search_submit">{{ "Find" | translate }}</button>
+</form>
 {% else %}
 <h3 role="status">{{ reason }}</h3>
 {% endif %}
