@@ -13,15 +13,15 @@ namespace Twig\Node\Expression\Binary;
 
 use Twig\Compiler;
 
-class MatchesBinary extends AbstractBinary
+class HasSomeBinary extends AbstractBinary
 {
     public function compile(Compiler $compiler): void
     {
         $compiler
-            ->raw('twig_matches(')
-            ->subcompile($this->getNode('right'))
-            ->raw(', ')
+            ->raw('twig_array_some($this->env, ')
             ->subcompile($this->getNode('left'))
+            ->raw(', ')
+            ->subcompile($this->getNode('right'))
             ->raw(')')
         ;
     }
