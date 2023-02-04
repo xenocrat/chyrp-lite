@@ -325,7 +325,7 @@ msgstr "搜索"
 msgid "Search this blog"
 msgstr "搜索此博客"
 
-#: themes/virgula/pages/index.twig:53
+#: themes/virgula/pages/index.twig:54
 msgid "Find"
 msgstr "查找"
 

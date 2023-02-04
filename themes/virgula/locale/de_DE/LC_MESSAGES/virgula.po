@@ -307,17 +307,29 @@ msgstr "Du hast keine Entwürfe."
 msgid "Posts"
 msgstr "Posts"
 
-#: themes/virgula/pages/index.twig:17 themes/virgula/pages/tags.twig:19
-msgid "Nothing here yet!"
-msgstr "Hier ist noch nichts!"
+#: themes/virgula/pages/index.twig:18
+msgid "More posts&hellip;"
+msgstr "Weitere Beiträge&hellip;"
 
-#: themes/virgula/pages/index.twig:21
+#: themes/virgula/pages/index.twig:24
 msgid "Pages"
 msgstr "Seiten"
 
-#: themes/virgula/pages/index.twig:44
-msgid "More posts&hellip;"
-msgstr "Weitere Beiträge&hellip;"
+#: themes/virgula/pages/index.twig:47 themes/virgula/pages/tags.twig:19
+msgid "Nothing here yet!"
+msgstr "Hier ist noch nichts!"
+
+#: themes/virgula/pages/index.twig:49
+msgid "Search"
+msgstr ""
+
+#: themes/virgula/pages/index.twig:51
+msgid "Search this blog"
+msgstr ""
+
+#: themes/virgula/pages/index.twig:54
+msgid "Find"
+msgstr ""
 
 #: themes/virgula/pages/search.twig:5
 #, php-format

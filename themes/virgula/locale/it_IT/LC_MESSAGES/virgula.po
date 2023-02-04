@@ -325,7 +325,7 @@ msgstr "Cerca"
 msgid "Search this blog"
 msgstr "Cerca questo blog"
 
-#: themes/virgula/pages/index.twig:53
+#: themes/virgula/pages/index.twig:54
 msgid "Find"
 msgstr "Trova"
 
