@@ -182,16 +182,17 @@ a:active {
 #header #navigation {
     position: absolute;
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     justify-content: space-between;
+    gap: 0.5rem;
     bottom: 0em;
     left: 4rem;
     right: 4rem;
 }
 #header #navigation li {
     display: block;
-    width: 24%;
-    flex: none;
+    flex: 25%;
+    min-width: 4rem;
 }
 #header #navigation li a {
     box-sizing: border-box;
@@ -223,27 +224,32 @@ a:active {
 /* Group: Sub-Navigation */
 
 #sub_nav {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    gap: 0rem;
     margin: 4rem 4rem 0rem 4rem;
-    height: 3rem;
     overflow: hidden;
 }
 #sub_nav li {
     display: block;
-    float: left;
-    position: relative;
-    top: 0px;
     height: 3rem;
+    text-align: center;
+    flex: fit-content;
+    min-width: 4rem;
 }
 #sub_nav li a {
-    display: inline-block;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
     text-decoration: none;
     font-size: 0.8em;
     line-height: 3rem;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin: 0em 0.5em 0em 0em;
-    padding: 0rem 1rem;
+    margin: 0rem;
+    padding: 0rem 1rem 2rem 1rem;
     border: 1px solid #cfcfcf;
     border-bottom: none;
     border-top-left-radius: 0.8em;
@@ -574,7 +580,6 @@ form.split div.confirmation {
 table {
     width: 100%;
     margin: 0rem 0rem 1rem 0rem;
-    overflow-x: scroll;
 }
 table:last-child,
 table.interactive:not(.empty) {
@@ -588,11 +593,14 @@ table thead tr {
 table thead tr th {
     padding: 0.5rem;
     font-weight: bold;
+    vertical-align: middle;
+    border: 1px solid #cfcfcf;
+    border-top: none;
 }
 table tbody tr td {
     padding: 0.5rem;
-    border: 1px solid #cfcfcf;
     vertical-align: middle;
+    border: 1px solid #cfcfcf;
 }
 table tbody tr:nth-child(even) td {
     background-color: #fbfbfb;
@@ -1066,14 +1074,10 @@ input.toolbar.hidden {
 
 /* Group: Breakpoints */
 
-@media screen and (max-width: 960px) {
+@media screen and (max-width: 959px) {
     #header #navigation {
         left: 1rem;
         right: 1rem;
-    }
-    #sub_nav {
-        margin-top: 1rem;
-        height: auto;
     }
     #sub_nav, #content {
         margin-left: 1rem;
@@ -1082,25 +1086,7 @@ input.toolbar.hidden {
     #content {
         margin-bottom: 1rem;
     }
-    #sub_nav li {
-        box-sizing: border-box;
-        width: 50%;
-        height: 3rem;
-        text-align: center;
-        overflow: visible;
-    }
-    #sub_nav li:nth-child(odd) {
-        clear: both;
-    }
-    #sub_nav li:nth-child(odd):last-child {
-        width: 100%;
-    }
     #sub_nav li a {
-        box-sizing: border-box;
-        display: block;
-        width: 100%;
-        margin: 0rem;
-        padding: 0rem 1rem 2rem 1rem;
         font-size: 1rem;
     }
     #sub_nav li:nth-child(odd) a {
