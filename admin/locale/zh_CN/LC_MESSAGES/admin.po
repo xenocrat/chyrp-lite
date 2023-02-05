@@ -345,8 +345,9 @@ msgstr "尝试您帖子链接到的站点。"
 #: admin/pages/export.twig:26 admin/pages/export.twig:32
 #: admin/pages/general_settings.twig:27 admin/pages/manage_pages.twig:10
 #: admin/pages/manage_posts.twig:10 admin/pages/manage_users.twig:10
-#: admin/partials/page_fields.twig:21 admin/partials/post_fields.twig:26
-#: admin/partials/post_fields.twig:101 admin/partials/post_fields.twig:120
+#: admin/pages/route_settings.twig:12 admin/partials/page_fields.twig:21
+#: admin/partials/post_fields.twig:26 admin/partials/post_fields.twig:101
+#: admin/partials/post_fields.twig:120
 msgid "help"
 msgstr "帮助"
 
@@ -360,7 +361,7 @@ msgstr "使用Markdown语法撰写博客内容。"
 
 #: admin/pages/content_settings.twig:73 admin/pages/edit_group.twig:24
 #: admin/pages/edit_user.twig:55 admin/pages/general_settings.twig:60
-#: admin/pages/route_settings.twig:84 admin/pages/user_settings.twig:47
+#: admin/pages/route_settings.twig:85 admin/pages/user_settings.twig:47
 msgid "Update"
 msgstr "更新"
 
@@ -880,123 +881,123 @@ msgstr "路由设置"
 msgid "Clean URLs"
 msgstr "优雅链接"
 
-#: admin/pages/route_settings.twig:13
+#: admin/pages/route_settings.twig:14
 msgid "Gives your site prettier URLs."
 msgstr "为您的网站提供更漂亮的URL。"
 
-#: admin/pages/route_settings.twig:13
+#: admin/pages/route_settings.twig:14
 msgid "Requires URL rewrite support."
 msgstr "需要 URL rewrite 支持。"
 
-#: admin/pages/route_settings.twig:17
+#: admin/pages/route_settings.twig:18
 msgid "Homepage"
 msgstr "主页"
 
-#: admin/pages/route_settings.twig:20
+#: admin/pages/route_settings.twig:21
 msgid "Make the default route a homepage instead of the blog index."
 msgstr "使默认路由成为主页而不是博客索引。"
 
-#: admin/pages/route_settings.twig:25
+#: admin/pages/route_settings.twig:26
 msgid "Post View URL"
 msgstr "帖子查看链接"
 
-#: admin/pages/route_settings.twig:26
+#: admin/pages/route_settings.twig:27
 msgid "(requires clean URLs)"
 msgstr "(需要优雅链接)"
 
-#: admin/pages/route_settings.twig:31
+#: admin/pages/route_settings.twig:32
 msgid "Syntax:"
 msgstr "符号："
 
-#: admin/pages/route_settings.twig:35
+#: admin/pages/route_settings.twig:36
 msgid "Year submitted"
 msgstr "提交的年份"
 
-#: admin/pages/route_settings.twig:35
+#: admin/pages/route_settings.twig:36
 msgid "(e.g. 2007)"
 msgstr "(例如：2007)"
 
-#: admin/pages/route_settings.twig:39
+#: admin/pages/route_settings.twig:40
 msgid "Month submitted"
 msgstr "提交的月份"
 
-#: admin/pages/route_settings.twig:39
+#: admin/pages/route_settings.twig:40
 msgid "(e.g. 12)"
 msgstr "(例如 12)"
 
-#: admin/pages/route_settings.twig:43
+#: admin/pages/route_settings.twig:44
 msgid "Day submitted"
 msgstr "提交的天"
 
-#: admin/pages/route_settings.twig:43
+#: admin/pages/route_settings.twig:44
 msgid "(e.g. 25)"
 msgstr "(例如 25)"
 
-#: admin/pages/route_settings.twig:47
+#: admin/pages/route_settings.twig:48
 msgid "Hour submitted"
 msgstr "提交的小时"
 
-#: admin/pages/route_settings.twig:47
+#: admin/pages/route_settings.twig:48
 msgid "(e.g. 03)"
 msgstr "(例如 03)"
 
-#: admin/pages/route_settings.twig:51
+#: admin/pages/route_settings.twig:52
 msgid "Minute submitted"
 msgstr "提交的分"
 
-#: admin/pages/route_settings.twig:51
+#: admin/pages/route_settings.twig:52
 msgid "(e.g. 59)"
 msgstr "(例如 59)"
 
-#: admin/pages/route_settings.twig:55
+#: admin/pages/route_settings.twig:56
 msgid "Second submitted"
 msgstr "提交的秒"
 
-#: admin/pages/route_settings.twig:55
+#: admin/pages/route_settings.twig:56
 msgid "(e.g. 30)"
 msgstr "(例如 30)"
 
-#: admin/pages/route_settings.twig:59
+#: admin/pages/route_settings.twig:60
 msgid "Post ID"
 msgstr "帖子ID"
 
-#: admin/pages/route_settings.twig:63
+#: admin/pages/route_settings.twig:64
 msgid "Post author (username)"
 msgstr "帖子作者（用户名）"
 
-#: admin/pages/route_settings.twig:63
+#: admin/pages/route_settings.twig:64
 msgid "(e.g. Alex)"
 msgstr "(例如 Alex)"
 
-#: admin/pages/route_settings.twig:67
+#: admin/pages/route_settings.twig:68
 msgid "The non-unique slug"
 msgstr "非独特 slug"
 
-#: admin/pages/route_settings.twig:67
+#: admin/pages/route_settings.twig:68
 msgid "(e.g. this_is_clean)"
 msgstr "(例如 this_is_clean)"
 
-#: admin/pages/route_settings.twig:71
+#: admin/pages/route_settings.twig:72
 msgid "The unique form of (clean)"
 msgstr "独特的(优雅)"
 
-#: admin/pages/route_settings.twig:71
+#: admin/pages/route_settings.twig:72
 msgid "(e.g. this_one_is_taken_2)"
 msgstr "(例如 this_one_is_taken_2)"
 
-#: admin/pages/route_settings.twig:75
+#: admin/pages/route_settings.twig:76
 msgid "The post's feather"
 msgstr "帖子的羽毛"
 
-#: admin/pages/route_settings.twig:75
+#: admin/pages/route_settings.twig:76
 msgid "(e.g. text)"
 msgstr "(例如 text)"
 
-#: admin/pages/route_settings.twig:79
+#: admin/pages/route_settings.twig:80
 msgid "The plural form of the post's feather"
 msgstr "帖子羽毛的复数形式"
 
-#: admin/pages/route_settings.twig:79
+#: admin/pages/route_settings.twig:80
 msgid "(e.g. links)"
 msgstr "(例如 links)"
 
