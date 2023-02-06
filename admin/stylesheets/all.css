@@ -394,7 +394,6 @@ li.module:not(.error) .module_conflicts_list {
 li.module div.controls,
 li.feather div.controls,
 li.theme div.controls {
-    text-align: right;
     text-align: end;
     margin-top: 1rem;
     padding-top: 1rem;
@@ -529,7 +528,6 @@ form.split label {
     box-sizing: border-box;
     display: inline-block;
     width: 45%;
-    text-align: right;
     text-align: end;
     padding: 0rem 1rem;
 }
@@ -616,7 +614,6 @@ table thead tr th.list,
 table tbody tr td.list,
 table thead tr th.filename,
 table tbody tr td.filename {
-    text-align: left;
     text-align: start;
 }
 table thead tr th.date,
@@ -1102,7 +1099,6 @@ input.toolbar.hidden {
     }
     form.split label {
         width: 100%;
-        text-align: left;
         text-align: start;
         padding: 0rem;
     }
