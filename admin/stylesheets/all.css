@@ -638,8 +638,10 @@ table tbody tr td.checkbox,
 table tbody tr td.controls {
     vertical-align: middle;
 }
-table tbody tr td.controls {
-    width: 4rem;
+table tbody tr td.controls,
+table tbody tr td.checkbox,
+table tbody tr td.emblem {
+    width: 2rem;
 }
 table tbody tr td.filename {
     word-wrap: anywhere;
@@ -1153,20 +1155,11 @@ input.toolbar.hidden {
     input.text.strong + a.help.emblem {
         background-color: #ebfae4;
     }
-    #content table thead tr th:not(.main):not(.controls):not(.toggler),
-    #content table tbody tr td:not(.main):not(.controls):not(.checkbox):not(.placeholder) {
-        display: none;
-    }
     #content table tbody tr td {
         padding: 1rem 0.5rem;
     }
     #content table tbody tr td.main {
         min-width: 4rem;
-    }
-    #content table tbody tr td.controls,
-    #content table tbody tr td.checkbox,
-    #content table tbody tr td.emblem {
-        min-width: 3rem;
     }
     button:not(.toolbar), a.button,
     a.prev_page, a.next_page {
@@ -1184,6 +1177,13 @@ input.toolbar.hidden {
     li.module div.controls,
     li.feather div.controls {
         padding-top: 0rem;
+    }
+}
+
+@media screen and (max-width: 1199px) {
+    #content table thead tr th:not(.main, .controls, .toggler),
+    #content table tbody tr td:not(.main, .controls, .checkbox, .placeholder) {
+        display: none;
     }
 }
 
