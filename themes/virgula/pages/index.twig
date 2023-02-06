@@ -2,6 +2,7 @@
 
 {% block content %}
 {% if reason is not defined %}{# Some modules define reason in error states #}
+{% set pages_list = theme.pages_list() %}
 {% if posts.paginated is not empty %}
 <h2>{{ "Posts" | translate }}</h2>
 <ul>
@@ -19,7 +20,16 @@
 </nav>
 {% endif %}
 {% endif %}
-{% set pages_list = theme.pages_list() %}
+{% if posts.paginated is not empty and pages_list is not empty %}
+<h2>{{ "Search" | translate }}</h2>
+<form class="search_box" action="{{ url('search') }}" method="post" accept-charset="UTF-8" role="search">
+<label for="search_field">{{ "Search this blog" | translate }}</label>
+<input type="text" id="search_field" name="query" value="">
+<div class="doaction">
+<button type="submit" id="search_submit">{{ "Find" | translate }}</button>
+</div>
+</form>
+{% endif %}
 {% if pages_list is not empty %}
 <h2>{{ "Pages" | translate }}</h2>
 <ul>
@@ -46,14 +56,6 @@
 {% if posts.paginated is empty and pages_list is empty %}
 <h3 role="status">{{ "Nothing here yet!" | translate }}</h3>
 {% endif %}
-<h2>{{ "Search" | translate }}</h2>
-<form class="search_box" action="{{ url('search') }}" method="post" accept-charset="UTF-8" role="search">
-<label for="search_field">{{ "Search this blog" | translate }}</label>
-<input type="text" id="search_field" name="query" value="">
-<div class="doaction">
-<button type="submit" id="search_submit">{{ "Find" | translate }}</button>
-</div>
-</form>
 {% else %}
 <h3 role="status">{{ reason }}</h3>
 {% endif %}
