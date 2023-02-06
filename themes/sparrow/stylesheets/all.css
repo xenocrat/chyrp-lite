@@ -327,7 +327,6 @@ select, input {
     margin: 0.5em 0em;
     padding: 0.4em;
     background: none;
-    text-align: left;
     text-align: start;
     font: inherit;
     font-size: inherit;
@@ -537,7 +536,6 @@ article > section.photo {
 article > footer {
     display: block;
     width: 100%;
-    text-align: left;
     text-align: start;
     margin: 0em 0em 1em 0em;
     padding: 0em;

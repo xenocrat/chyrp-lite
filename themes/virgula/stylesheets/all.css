@@ -204,7 +204,6 @@ table {
     overflow-x: scroll;
 }
 table thead tr th {
-    text-align: left;
     text-align: start;
     padding: 0.5em;
     font-weight: bold;
@@ -212,7 +211,6 @@ table thead tr th {
     border: 1px solid #b1b4b6;
 }
 table tbody tr td {
-    text-align: left;
     text-align: start;
     padding: 0.5em;
     border: 1px solid #b1b4b6;
