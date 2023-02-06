@@ -88,7 +88,7 @@ h3, h4, h5, h6 {
 h3[role="alert"],
 h3[role="status"] {
     font-size: 0.7rem;
-    padding: 0.3rem;
+    padding: 0.3rem 0.7rem;
     background-color: #f3f2f1;
     border: 1px solid #b1b4b6;
     border-radius: 0.1rem;
@@ -138,7 +138,7 @@ code {
 pre > code {
     font-size: 0.85rem;
     display: block;
-    padding: 0.5rem;
+    padding: 0.3rem 0.7rem;
 }
 small {
     font-size: 0.7em;
@@ -188,13 +188,17 @@ li {
 li::marker {
     color: #505a5f;
 }
-main > details > summary {
+summary {
     color: #ffffff;
-    background-color: #0b0c0c;
+    background-color: #505a5f;
     margin: 0rem;
-    padding: 0.3rem;
+    padding: 0.3rem 0.7rem;
     cursor: pointer;
     list-style-position: inside;
+}
+summary:hover,
+summary:focus {
+    background-color: #0b0c0c;
 }
 table {
     border-collapse: collapse;
@@ -205,14 +209,14 @@ table {
 }
 table thead tr th {
     text-align: start;
-    padding: 0.5em;
+    padding: 0.3rem 0.7rem;
     font-weight: bold;
     background-color: #f3f2f1;
     border: 1px solid #b1b4b6;
 }
 table tbody tr td {
     text-align: start;
-    padding: 0.5em;
+    padding: 0.3rem 0.7rem;
     border: 1px solid #b1b4b6;
 }
 hr {
@@ -250,7 +254,7 @@ select, input {
     width: 30ch;
     max-width: 100%;
     margin: 0rem 0rem 1rem 0rem;
-    padding: 0.3em;
+    padding: 0.3rem 0.7rem;
     background: none;
     font: inherit;
     font-size: inherit;
@@ -280,7 +284,7 @@ textarea {
     font-size: inherit;
     color: #0b0c0c;
     margin: 0rem 0rem 1rem 0rem;
-    padding: 0.3em;
+    padding: 0.3rem 0.7rem;
     background-color: #ffffff;
     border: 2px solid #0b0c0c;
     border-radius: 0em;
@@ -290,14 +294,9 @@ button {
     font-size: inherit;
     cursor: pointer;
 }
-nav,
-main,
-article,
-section,
-footer,
-form,
-details,
-p {
+nav, main, article,
+section, footer,
+form, details, p {
     margin: 1rem 0rem;
 }
 header {
@@ -320,34 +319,37 @@ nav.traversal {
 div.doaction a, button {
     display: inline-block;
     white-space: nowrap;
-    padding: 0.3em 0.7em;
+    padding: 0.3rem 0.7rem;
     border: none;
     border-radius: 0em;
     color: #ffffff;
     background-color: #1d70b8;
 }
-div.doaction a:hover, button:hover,
-div.doaction a:focus, button:focus {
+div.doaction a:hover,
+button:hover,
+div.doaction a:focus,
+button:focus {
     background-color: #003078;
 }
-div.doaction a:active, button:active {
+div.doaction a:active,
+button:active {
     background-color: #0b0c0c;
 }
 nav.traversal a {
     display: inline-block;
     white-space: nowrap;
-    padding: 0.3em 0.7em;
+    padding: 0.3rem 0.7rem;
     border: none;
     border-radius: 0em;
     color: #ffffff;
-    background-color: #505a5f;
+    background-color: #1d70b8;
 }
 nav.traversal a:hover,
 nav.traversal a:focus {
-    background-color: #0b0c0c;
+    background-color: #003078;
 }
 nav.traversal a:active {
-    background-color: #0b0c0c;
+    background-color: #003078;
 }
 img {
     border-style: none;
@@ -361,10 +363,8 @@ section img {
 section.photo img {
     width: 100%;
 }
-select:focus, input:focus,
-textarea:focus,
+*:focus,
 div.doaction a:focus,
-button:focus,
 nav.traversal a:focus,
 section.photo > a:focus {
     outline: #ffdd00 solid 4px;
@@ -386,7 +386,8 @@ section.photo > a:focus {
 }
 .ajax_loading {
     background-size: 10px 10px;
-    background-image: linear-gradient(-45deg,
+    background-image: linear-gradient(
+        -45deg,
         #f3f2f1 5%,
         transparent 5%,
         transparent 45%,
@@ -395,7 +396,8 @@ section.photo > a:focus {
         transparent 55%,
         transparent 95%,
         #f3f2f1 95%,
-        #f3f2f1) !important;
+        #f3f2f1
+    ) !important;
 }
 .ajax_loading .doaction {
     visibility: hidden;

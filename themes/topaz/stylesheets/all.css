@@ -73,7 +73,8 @@ body.preview {
 p {
     margin: 0em 0em 1em 0em;
 }
-p:last-child, p:empty {
+p:last-child,
+p:empty {
     margin-bottom: 0em;
 }
 h1 {
@@ -138,9 +139,12 @@ h6.post_byline {
     padding-bottom: 2rem;
     border-bottom: 1px solid #ebedec;
 }
-h1:first-child, h2:first-child,
-h3:first-child, h4:first-child,
-h5:first-child, h6:first-child {
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+h6:first-child {
     margin-top: 0em;
 }
 sup, sub {
@@ -199,7 +203,8 @@ hr {
     border-top: 1px solid #ebedec;
     margin: 1em 0em;
 }
-hr:last-child, hr + hr  {
+hr:last-child,
+hr + hr  {
     display: none;
 }
 ul {
@@ -392,7 +397,8 @@ input:placeholder {
     color: #c6ccc8;
     opacity: 1;
 }
-input.error, input:invalid {
+input.error,
+input:invalid {
     background-color: #ffb2b2;
     box-shadow: none;
 }
@@ -716,9 +722,12 @@ div.doaction a, button {
     background-color: #ffffff;
     border: 1px #c6ccc8 solid;
 }
-div.doaction a:hover, button:hover,
-div.doaction a:focus, button:focus,
-div.doaction a:active, button:active {
+div.doaction a:hover,
+button:hover,
+div.doaction a:focus,
+button:focus,
+div.doaction a:active,
+button:active {
     color: #000000;
     background-color: #7ac2e5;
     border: 1px #7ac2e5 solid;
@@ -788,14 +797,16 @@ article.archive img {
 }
 .ajax_loading {
     background-size: 30px 30px;
-    background-image: linear-gradient(-45deg,
+    background-image: linear-gradient(
+        -45deg,
         #f2f1f0 25%,
         transparent 25%,
         transparent 50%,
         #f2f1f0 50%,
         #f2f1f0 75%,
         transparent 75%,
-        transparent) !important;
+        transparent
+    ) !important;
     animation: ajax_loading 2s linear infinite;
 }
 .ajax_loading .doaction {

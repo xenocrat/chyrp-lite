@@ -73,7 +73,8 @@ body.preview {
 p {
     margin: 0em 0em 1em 0em;
 }
-p:last-child, p:empty {
+p:last-child,
+p:empty {
     margin-bottom: 0em;
 }
 h1 {
@@ -114,9 +115,12 @@ h4, h5, h6 {
 h4.archive {
     font-size: 1.33em;
 }
-h1:first-child, h2:first-child,
-h3:first-child, h4:first-child,
-h5:first-child, h6:first-child {
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+h6:first-child {
     margin-top: 0em;
 }
 sup, sub {
@@ -174,7 +178,8 @@ hr {
     border-top: 1px solid #ddd;
     margin: 1em 0em;
 }
-hr:last-child, hr + hr {
+hr:last-child,
+hr + hr {
     display: none;
 }
 ul {
@@ -219,7 +224,11 @@ ul.navigation {
     padding: 0em;
     border: 1px solid #c6ccc8;
     border-radius: 6px;
-    background-image: linear-gradient(to bottom, #ffffff 0em, #fbfbf7 10em);
+    background-image: linear-gradient(
+        to bottom,
+        #ffffff 0em,
+        #fbfbf7 10em
+    );
     box-shadow: 0px 2px 4px 2px rgba(57,67,77,0.05);
 }
 ul.navigation > li {
@@ -290,7 +299,11 @@ div#main > details {
     padding: 0em;
     border: 1px solid #c6ccc8;
     border-radius: 6px;
-    background-image: linear-gradient(to bottom, #ffffff 0em, #fbfbf7 10em);
+    background-image: linear-gradient(
+        to bottom,
+        #ffffff 0em,
+        #fbfbf7 10em
+    );
     box-shadow: 0px 2px 4px 2px rgba(57,67,77,0.05);
 }
 div#main > details > summary {
@@ -371,7 +384,8 @@ input:placeholder {
     color: #c6ccc8;
     opacity: 1;
 }
-input.error, input:invalid {
+input.error,
+input:invalid {
     background-color: #ffb2b2;
     box-shadow: none;
 }
@@ -540,7 +554,11 @@ div#main > article, div.standalone {
     padding: 2rem 2rem 0rem 2rem;
     border: 1px solid #c6ccc8;
     border-radius: 6px;
-    background-image: linear-gradient(to bottom, #ffffff 0em, #fbfbf7 10em);
+    background-image: linear-gradient(
+        to bottom,
+        #ffffff 0em,
+        #fbfbf7 10em
+    );
     box-shadow: 0px 2px 4px 2px rgba(57,67,77,0.05);
 }
 div#main > article:last-child {
@@ -578,7 +596,11 @@ ul.archive article.post.archive {
     padding: 8px;
     border: 1px solid #c6ccc8;
     border-radius: 6px;
-    background-image: linear-gradient(to bottom, #ffffff 0em, #fbfbf7 10em);
+    background-image: linear-gradient(
+        to bottom,
+        #ffffff 0em,
+        #fbfbf7 10em
+    );
 }
 div.post_archive_container {
     height: 100%;
@@ -625,11 +647,14 @@ a {
     text-decoration: none;
     border-bottom: 1px transparent solid;
 }
-a:link, a:visited {
+a:link,
+a:visited {
     color: #1f1f23;
     text-decoration: none;
 }
-a:hover, a:focus, a:active {
+a:hover,
+a:focus,
+a:active {
     outline: none;
     color: #d94c7b;
     text-decoration: none;
@@ -659,14 +684,19 @@ div.traversal a:active {
     color: #ffffff;
     background-color: #006428;
 }
-section a:link, p a:link,
-section a:visited, p a:visited {
+section a:link,
+p a:link,
+section a:visited,
+p a:visited {
     color: #1f1f23;
     border-bottom: 1px #1f1f23 solid;
 }
-section a:hover, p a:hover,
-section a:focus, p a:focus,
-section a:active, p a:active {
+section a:hover,
+p a:hover,
+section a:focus,
+p a:focus,
+section a:active,
+p a:active {
     color: #d94c7b;
     border-bottom: 1px #d94c7b solid;
 }
@@ -698,9 +728,12 @@ div.doaction a, button {
     color: #ffffff;
     background-color: #39434d;
 }
-div.doaction a:hover, button:hover,
-div.doaction a:focus, button:focus,
-div.doaction a:active, button:active {
+div.doaction a:hover,
+button:hover,
+div.doaction a:focus,
+button:focus,
+div.doaction a:active,
+button:active {
     background-color: #000000;
 }
 div.doaction a.post_delete_link,
@@ -776,14 +809,16 @@ article.archive img {
 }
 .ajax_loading {
     background-size: 30px 30px;
-    background-image: linear-gradient(-45deg,
+    background-image: linear-gradient(
+        -45deg,
         #f2f0e6 25%,
         transparent 25%,
         transparent 50%,
         #f2f0e6 50%,
         #f2f0e6 75%,
         transparent 75%,
-        transparent) !important;
+        transparent
+    ) !important;
     animation: ajax_loading 2s linear infinite;
 }
 .ajax_loading .doaction {

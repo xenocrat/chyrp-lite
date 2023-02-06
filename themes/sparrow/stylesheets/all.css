@@ -72,7 +72,8 @@ body.preview {
 p {
     margin: 0em 0em 1em 0em;
 }
-p:last-child, p:empty {
+p:last-child,
+p:empty {
     margin-bottom: 0em;
 }
 h1 {
@@ -133,9 +134,12 @@ h5, h6 {
     margin: 1em 0em;
     padding: 0em;
 }
-h1:first-child, h2:first-child,
-h3:first-child, h4:first-child,
-h5:first-child, h6:first-child {
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+h6:first-child {
     margin-top: 0em;
 }
 sup, sub {
@@ -196,7 +200,9 @@ hr {
 hr.post {
     margin: 0em;
 }
-hr:last-child, hr.post:last-of-type, hr + hr {
+hr:last-child,
+hr.post:last-of-type,
+hr + hr {
     display: none;
 }
 ul {
@@ -344,7 +350,8 @@ input:placeholder {
     color: #c6ccc8;
     opacity: 1;
 }
-input.error, input:invalid {
+input.error,
+input:invalid {
     color: #ffffff;
     background-color: #ff8080;
     box-shadow: none;
@@ -548,11 +555,14 @@ article.video video,
 article.audio audio {
     width: 100%;
 }
-a:link, a:visited {
+a:link,
+a:visited {
     color: #1f1f23;
     text-decoration: none;
 }
-a:hover, a:focus, a:active {
+a:hover,
+a:focus,
+a:active {
     outline: none;
     color: #cc5252;
     text-decoration: none;
@@ -571,14 +581,19 @@ h3.flash a:focus,
 h3.flash a:active {
     border-bottom: 1px #ffffff solid;
 }
-section a:link, p a:link,
-section a:visited, p a:visited {
+section a:link,
+p a:link,
+section a:visited,
+p a:visited {
     color: #1f1f23;
     border-bottom: 1px #1f1f23 solid;
 }
-section a:hover, p a:hover,
-section a:focus, p a:focus,
-section a:active, p a:active {
+section a:hover,
+p a:hover,
+section a:focus,
+p a:focus,
+section a:active,
+p a:active {
     color: #cc5252;
     border-bottom: 1px #cc5252 solid;
 }
@@ -610,9 +625,12 @@ div.doaction a, button {
     background-color: #98716c;
     border: none;
 }
-div.doaction a:hover, button:hover,
-div.doaction a:focus, button:focus,
-div.doaction a:active, button:active {
+div.doaction a:hover,
+button:hover,
+div.doaction a:focus,
+button:focus,
+div.doaction a:active,
+button:active {
     background-color: #1f1f23;
     border: none;
 }
@@ -693,14 +711,16 @@ div.metadata img.gravatar {
 }
 .ajax_loading {
     background-size: 30px 30px;
-    background-image: linear-gradient(-45deg,
+    background-image: linear-gradient(
+        -45deg,
         #ebeae6 25%,
         transparent 25%,
         transparent 50%,
         #ebeae6 50%,
         #ebeae6 75%,
         transparent 75%,
-        transparent) !important;
+        transparent
+    ) !important;
     animation: ajax_loading 2s linear infinite;
 }
 .ajax_loading .doaction {
