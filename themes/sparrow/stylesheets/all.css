@@ -80,14 +80,14 @@ h1 {
     font-size: 2em;
     font-weight: bold;
     text-transform: none;
-    margin: 0.5em 0em;
+    margin: 1em 0em;
     padding: 0em;
 }
 h2, h1.banner {
     font-size: 1.5em;
     font-weight: bold;
     text-transform: none;
-    margin: 0.67em 0em;
+    margin: 1em 0em;
     padding: 0em;
 }
 h3 {
@@ -182,7 +182,7 @@ code {
     font-family: "Cousine webfont", monospace;
     font-size: 0.85em;
     background-color: #ebe8e6;
-    padding: 0.1em 0.2em 0em 0.2em;
+    padding: 0.1em 0.25em 0em 0.25em;
     vertical-align: bottom;
 }
 pre > code {
@@ -331,7 +331,7 @@ select, input {
     display: block;
     width: 320px;
     margin: 0.5em 0em;
-    padding: 0.4em;
+    padding: 0.5em;
     background: none;
     text-align: start;
     font: inherit;
@@ -341,20 +341,21 @@ select, input {
     border: 1px solid #c2bcb8;
     border-radius: 0em;
 }
+input.error,
+input:invalid {
+    border-color: #cc5252;
+    box-shadow: none;
+}
 select:focus, input:focus {
     outline: none;
     background-color: #ffffff;
-    border: 1px solid #98716c;
+    border-color: #98716c;
+    outline: #98716c solid 1px;
+    outline-offset: 0px;
 }
 input:placeholder {
     color: #c6ccc8;
     opacity: 1;
-}
-input.error,
-input:invalid {
-    color: #ffffff;
-    background-color: #ff8080;
-    box-shadow: none;
 }
 input[type="radio"],
 input[type="checkbox"] {
@@ -363,7 +364,7 @@ input[type="checkbox"] {
 input[type="file"]:focus,
 input[type="radio"]:focus,
 input[type="checkbox"]:focus {
-    outline: #cc5252 solid 4px;
+    outline: #cc5252 solid 2px;
     outline-offset: 2px;
 }
 input#search_field {
@@ -380,14 +381,16 @@ textarea {
     font-size: inherit;
     color: #1f1f23;
     margin: 0.5em 0em;
-    padding: 0.4em;
+    padding: 0.5em;
     background-color: #ffffff;
     border: 1px solid #c6ccc8;
     border-radius: 0em;
 }
 textarea:focus {
     outline: none;
-    border: 1px solid #98716c;
+    border-color: #98716c;
+    outline: #98716c solid 1px;
+    outline-offset: 0px;
 }
 button {
     font: inherit;
@@ -453,7 +456,7 @@ div.metadata {
     font-size: 0.75em;
     text-align: center;
     margin-top: 2rem;
-    padding: 0.2rem;
+    padding: 0.25rem;
     background-color: #f5f4f0;
     border: 1px solid #c2bcb8;
     border-radius: 1.5rem;
@@ -579,7 +582,7 @@ h3.flash a {
 h3.flash a:hover,
 h3.flash a:focus,
 h3.flash a:active {
-    border-bottom: 1px #ffffff solid;
+    border-color: #ffffff;
 }
 section a:link,
 p a:link,
@@ -595,17 +598,17 @@ p a:focus,
 section a:active,
 p a:active {
     color: #cc5252;
-    border-bottom: 1px #cc5252 solid;
+    border-color: #cc5252;
 }
 div.tags a.tag,
 div.tag_cloud a.tag {
     display: inline-block;
     position: relative;
     top: 0px;
-    padding: 0.2em 0.4em;
+    padding: 0.25em 0.5em;
     margin: 2px 0em;
     border: 1px #e5d7a1 solid;
-    border-radius: 0.2em;
+    border-radius: 0.25em;
     background-color: #fffecd;
 }
 div.tags a.tag:hover,
@@ -619,8 +622,8 @@ div.tag_cloud a.tag:active {
 div.doaction a, button {
     display: inline-block;
     white-space: nowrap;
-    padding: 0.4em 1.2em;
-    border-radius: 0.2em;
+    padding: 0.5em 1.25em;
+    border-radius: 0.25em;
     color: #ffffff;
     background-color: #98716c;
     border: none;

@@ -81,18 +81,17 @@ h1 {
     font-size: 2em;
     font-weight: bold;
     text-transform: none;
-    margin: 0.5em 0em;
+    margin: 1em 0em;
     padding: 0em;
 }
 h1.banner {
     font-size: 1em;
-    margin: 1em 0em;
 }
 h2 {
     font-size: 1.5em;
     font-weight: bold;
     text-transform: none;
-    margin: 0.67em 0em;
+    margin: 1em 0em;
     padding: 0em;
 }
 h2.post_title,
@@ -188,7 +187,7 @@ code {
     font-family: "Cousine webfont", monospace;
     font-size: 0.85em;
     background-color: #e1e5e5;
-    padding: 0.1em 0.2em 0em 0.2em;
+    padding: 0.1em 0.25em 0em 0.25em;
     vertical-align: bottom;
 }
 pre > code {
@@ -317,7 +316,7 @@ div#main > details {
     margin: 0rem 0rem 2rem 0rem;
     padding: 0em;
     border: 1px solid #c6ccc8;
-    border-radius: 0.4em;
+    border-radius: 0.5em;
 }
 div#main > details > summary {
     box-sizing: border-box;
@@ -378,7 +377,7 @@ select, input {
     display: block;
     width: 320px;
     margin: 0.5em 0em;
-    padding: 0.4em;
+    padding: 0.5em;
     background: none;
     text-align: start;
     font: inherit;
@@ -392,6 +391,8 @@ select:focus, input:focus {
     outline: none;
     background-color: #ffffff;
     border: 1px solid #1f1f23;
+    outline: #1f1f23 solid 1px;
+    outline-offset: 0px;
 }
 input:placeholder {
     color: #c6ccc8;
@@ -399,7 +400,7 @@ input:placeholder {
 }
 input.error,
 input:invalid {
-    background-color: #ffb2b2;
+    background-color: #ffdede;
     box-shadow: none;
 }
 input[type="radio"],
@@ -409,7 +410,7 @@ input[type="checkbox"] {
 input[type="file"]:focus,
 input[type="radio"]:focus,
 input[type="checkbox"]:focus {
-    outline: #0070c4 solid 4px;
+    outline: #1f1f23 solid 2px;
     outline-offset: 2px;
 }
 input#search_field,
@@ -428,14 +429,16 @@ textarea {
     font-size: inherit;
     color: #1f1f23;
     margin: 0.5em 0em;
-    padding: 0.4em;
+    padding: 0.5em;
     background-color: #ffffff;
     border: 1px solid #c6ccc8;
     border-radius: 0em;
 }
 textarea:focus {
     outline: none;
-    border: 1px solid #548eb8;
+    border-color: #1f1f23;
+    outline: #1f1f23 solid 1px;
+    outline-offset: 0px;
 }
 button {
     font: inherit;
@@ -510,7 +513,7 @@ div.ribbon {
     background-color: #0070c4;
     padding: 0.5em;
     margin-bottom: 2rem;
-    border-radius: 0.2em;
+    border-radius: 0.25em;
 }
 div.flash {
     background-color: #0070c4;
@@ -555,7 +558,7 @@ div#main > article, div.standalone {
     margin: 0rem auto 2rem 0rem;
     padding: 2rem 2rem 0rem 2rem;
     border: 1px solid #c6ccc8;
-    border-radius: 0.4em;
+    border-radius: 0.5em;
 }
 div#main > article:last-child {
     margin-bottom: 0rem;
@@ -594,7 +597,7 @@ ul.archive article.post.archive {
     font-size: 0.75em;
     padding: 8px;
     border: 1px solid #c6ccc8;
-    border-radius: 6px;
+    border-radius: 0.5rem;
 }
 div.post_archive_container {
     height: 100%;
@@ -648,7 +651,7 @@ a:hover, a:focus, a:active {
     outline: none;
     color: #0070c4;
     text-decoration: none;
-    border-bottom: 1px #0070c4 solid;
+    border-color: #0070c4;
 }
 div.ribbon a {
     color: #ffffff;
@@ -657,17 +660,17 @@ div.ribbon a {
 div.ribbon a:hover,
 div.ribbon a:focus,
 div.ribbon a:active {
-    border-bottom: 1px #ffffff solid;
+    border-color: #ffffff;
 }
 div.traversal a {
     display: inline-block;
-    padding: 0.4em 1.2em;
+    padding: 0.5em 1.25em;
     margin: 0em 0.5rem;
     min-width: 8em;
     color: #ffffff;
     background-color: #1f1f23;
     border: none;
-    border-radius: 0.4em;
+    border-radius: 0.5em;
 }
 div.traversal a:hover,
 div.traversal a:focus,
@@ -692,14 +695,15 @@ section a:hover, p a:hover,
 section a:focus, p a:focus,
 section a:active, p a:active {
     color: #0070c4;
+    border-color: #0070c4;
 }
 div.tags a,
 div.tag_cloud a {
     display: inline-block;
-    padding: 0.2em 0.4em;
+    padding: 0.25em 0.5em;
     margin-bottom: 4px;
     border: none;
-    border-radius: 0.2em;
+    border-radius: 0.25em;
     color: #39434d;
     border: 1px #c6ccc8 solid;
 }
@@ -711,12 +715,12 @@ div.tag_cloud a:focus,
 div.tag_cloud a:active {
     color: #000000;
     background-color: #7ac2e5;
-    border: 1px #7ac2e5 solid;
+    border-color: #7ac2e5;
 }
 div.doaction a, button {
     display: inline-block;
     white-space: nowrap;
-    padding: 0.4em 1.2em;
+    padding: 0.5em 1.25em;
     border-radius: 2em;
     color: #39434d;
     background-color: #ffffff;
@@ -730,7 +734,7 @@ div.doaction a:active,
 button:active {
     color: #000000;
     background-color: #7ac2e5;
-    border: 1px #7ac2e5 solid;
+    border-color: #7ac2e5;
 }
 div.doaction a.post_delete_link,
 div.doaction a.delete_link {
@@ -740,7 +744,7 @@ section.photo > a {
     border-bottom: none;
 }
 section.photo > a:focus {
-    outline: #0070c4 solid 4px;
+    outline: #7ac2e5 solid 4px;
 }
 a.likes > img {
     display: inline-block;
@@ -760,14 +764,14 @@ a.archive_post_link {
     left: 0px;
     bottom: 0px;
     right: 0px;
-    border-radius: 6px;
+    border-radius: 0.5rem;
     color: transparent;
     background-color: transparent;
 }
 a.archive_post_link:hover,
 a.archive_post_link:focus,
 a.archive_post_link:active {
-    outline: #0070c4 solid 4px;
+    outline: #7ac2e5 solid 4px;
 }
 iframe {
     width: 100%;

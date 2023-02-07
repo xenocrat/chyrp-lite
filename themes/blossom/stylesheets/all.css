@@ -80,17 +80,16 @@ p:empty {
 h1 {
     font-size: 2em;
     font-weight: bold;
-    margin: 0.5em 0em;
+    margin: 1em 0em;
     padding: 0em;
 }
 h1.banner {
     font-size: 1em;
-    margin: 1em 0em;
 }
 h2 {
     font-size: 1.5em;
     font-weight: bold;
-    margin: 0.67em 0em;
+    margin: 1em 0em;
     padding: 0em;
 }
 h3 {
@@ -163,7 +162,7 @@ code {
     font-family: "Cousine webfont", monospace;
     font-size: 0.85em;
     background-color: #e5e2dc;
-    padding: 0.1em 0.2em 0em 0.2em;
+    padding: 0.1em 0.25em 0em 0.25em;
     vertical-align: bottom;
 }
 pre > code {
@@ -223,7 +222,7 @@ ul.navigation {
     margin: 0rem 0rem 2rem 0rem;
     padding: 0em;
     border: 1px solid #c6ccc8;
-    border-radius: 6px;
+    border-radius: 0.5rem;
     background-image: linear-gradient(
         to bottom,
         #ffffff 0em,
@@ -298,7 +297,7 @@ div#main > details {
     margin: 0rem 0rem 2rem 0rem;
     padding: 0em;
     border: 1px solid #c6ccc8;
-    border-radius: 6px;
+    border-radius: 0.5rem;
     background-image: linear-gradient(
         to bottom,
         #ffffff 0em,
@@ -365,7 +364,7 @@ select, input {
     display: block;
     width: 320px;
     margin: 0.5em 0em;
-    padding: 0.4em;
+    padding: 0.5em;
     background: none;
     text-align: start;
     font: inherit;
@@ -379,6 +378,8 @@ select:focus, input:focus {
     outline: none;
     background-color: #ffffff;
     border: 1px solid #d94c7b;
+    outline: #d94c7b solid 1px;
+    outline-offset: 0px;
 }
 input:placeholder {
     color: #c6ccc8;
@@ -386,7 +387,7 @@ input:placeholder {
 }
 input.error,
 input:invalid {
-    background-color: #ffb2b2;
+    background-color: #ffdede;
     box-shadow: none;
 }
 input[type="radio"],
@@ -396,7 +397,7 @@ input[type="checkbox"] {
 input[type="file"]:focus,
 input[type="radio"]:focus,
 input[type="checkbox"]:focus {
-    outline: #d94c7b solid 4px;
+    outline: #d94c7b solid 2px;
     outline-offset: 2px;
 }
 input#search_field,
@@ -415,7 +416,7 @@ textarea {
     font-size: inherit;
     color: #1f1f23;
     margin: 0.5em 0em;
-    padding: 0.4em;
+    padding: 0.5em;
     background-color: #ffffff;
     border: 1px solid #c6ccc8;
     border-radius: 0em;
@@ -423,6 +424,8 @@ textarea {
 textarea:focus {
     outline: none;
     border: 1px solid #d94c7b;
+    outline: #d94c7b solid 1px;
+    outline-offset: 0px;
 }
 button {
     font: inherit;
@@ -497,7 +500,7 @@ div.ribbon {
     background-color: #426aa6;
     padding: 0.5em;
     margin-bottom: 2rem;
-    border-radius: 0.2em;
+    border-radius: 0.25em;
 }
 div.flash {
     background-color: #d94c7b;
@@ -553,7 +556,7 @@ div#main > article, div.standalone {
     margin: 0rem auto 2rem 0rem;
     padding: 2rem 2rem 0rem 2rem;
     border: 1px solid #c6ccc8;
-    border-radius: 6px;
+    border-radius: 0.5rem;
     background-image: linear-gradient(
         to bottom,
         #ffffff 0em,
@@ -595,7 +598,7 @@ ul.archive article.post.archive {
     background-color: #fbfbf7;
     padding: 8px;
     border: 1px solid #c6ccc8;
-    border-radius: 6px;
+    border-radius: 0.5rem;
     background-image: linear-gradient(
         to bottom,
         #ffffff 0em,
@@ -671,10 +674,10 @@ div.ribbon a:active {
 }
 div.traversal a {
     display: inline-block;
-    padding: 0.4em 0.8em;
+    padding: 0.5em 1em;
     min-width: 8em;
     border: none;
-    border-radius: 0.2em;
+    border-radius: 0.25em;
     color: #ffffff;
     background-color: #208448;
 }
@@ -698,15 +701,15 @@ p a:focus,
 section a:active,
 p a:active {
     color: #d94c7b;
-    border-bottom: 1px #d94c7b solid;
+    border-color: #d94c7b;
 }
 div.tags a,
 div.tag_cloud a {
     display: inline-block;
-    padding: 0.2em 0.4em;
+    padding: 0.25em 0.5em;
     margin-bottom: 4px;
     border: none;
-    border-radius: 0.2em;
+    border-radius: 0.25em;
     color: #ffffff;
     background-color: #208448;
 }
@@ -722,9 +725,9 @@ div.tag_cloud a:active {
 div.doaction a, button {
     display: inline-block;
     white-space: nowrap;
-    padding: 0.4em 0.8em;
+    padding: 0.5em 1em;
     border: none;
-    border-radius: 0.2em;
+    border-radius: 0.25em;
     color: #ffffff;
     background-color: #39434d;
 }
@@ -772,7 +775,7 @@ a.archive_post_link {
     left: 0px;
     bottom: 0px;
     right: 0px;
-    border-radius: 6px;
+    border-radius: 0.5rem;
     color: transparent;
     background-color: transparent;
 }

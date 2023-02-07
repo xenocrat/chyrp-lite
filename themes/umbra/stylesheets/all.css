@@ -54,8 +54,8 @@ html[lang="he"] {
     direction: rtl;
 }
 *::selection {
-    color: #ffffff;
-    background-color: #cc5252;
+    color: #202021;
+    background-color: lightgreen;
 }
 body {
     font-family: "Open Sans webfont", sans-serif;
@@ -179,7 +179,7 @@ code {
     font-family: "Cousine webfont", monospace;
     font-size: 0.85em;
     background-color: #666667;
-    padding: 0.1em 0.2em 0em 0.2em;
+    padding: 0.1em 0.25em 0em 0.25em;
     vertical-align: bottom;
 }
 pre > code {
@@ -326,31 +326,31 @@ select, input {
     display: block;
     width: 320px;
     margin: 0.5em 0em;
-    padding: 0.4em;
+    padding: 0.5em;
     background: none;
     text-align: start;
     font: inherit;
     font-size: inherit;
     color: #c6ccc8;
     background-color: #666667;
-    border: 1px #666667 solid;
-    border-radius: 0.2em;
+    border: none;
+    border-radius: 0.25em;
+}
+input.error,
+input:invalid {
+    color: #ffffff;
+    background-color: #cc5252;
+    box-shadow: none;
 }
 select:focus, input:focus {
     outline: none;
     color: #202021;
     background-color: #ffffff;
-    border-color: #ffffff;
+    border: none;
 }
 input:placeholder {
     color: #adafae;
     opacity: 1;
-}
-input.error,
-input:invalid {
-    color: #202021;
-    background-color: #ff8080;
-    box-shadow: none;
 }
 input[type="radio"],
 input[type="checkbox"] {
@@ -359,7 +359,7 @@ input[type="checkbox"] {
 input[type="file"]:focus,
 input[type="radio"]:focus,
 input[type="checkbox"]:focus {
-    outline: lightgreen solid 4px;
+    outline: lightgreen solid 2px;
     outline-offset: 2px;
 }
 input#search_field {
@@ -376,15 +376,16 @@ textarea {
     font-size: inherit;
     color: #adafae;
     margin: 0.5em 0em;
-    padding: 0.4em;
+    padding: 0.5em;
     background-color: #666667;
     border: none;
-    border-radius: 0.2em;
+    border-radius: 0.25em;
 }
 textarea:focus {
     outline: none;
     color: #202021;
     background-color: #ffffff;
+    border: none;
 }
 button {
     font: inherit;
@@ -436,8 +437,8 @@ div.metadata {
     font-size: 0.75em;
     text-align: center;
     margin-top: 2rem;
-    padding: 0.2rem;
-    border-radius: 0.2rem;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
     background-color: #383839;
 }
 div.comments_pagination {
@@ -493,7 +494,7 @@ ul.archive article.post.archive {
     height: 196px;
     font-size: 0.75em;
     padding: 8px;
-    border: 1px solid lightgreen;
+    border: 1px solid #ffffff;
 }
 div.post_archive_container {
     height: 100%;
@@ -559,7 +560,7 @@ h3.flash a:hover,
 h3.flash a:focus,
 h3.flash a:active {
     color: lightgreen;
-    border-bottom: 1px lightgreen solid;
+    border-color: lightgreen;
 }
 div.traversal a {
     display: inline-block;
@@ -577,8 +578,9 @@ div.traversal a {
 div.traversal a:hover,
 div.traversal a:focus,
 div.traversal a:active {
-    background-color: #666667;
-    border-color: #666667;
+    color: #202021;
+    background-color: lightgreen;
+    border-color: lightgreen;
     transition: top 250ms cubic-bezier(0.5, -8, 0.2, 4);
 }
 div.next a:hover,
@@ -599,28 +601,30 @@ p a:focus,
 section a:active,
 p a:active {
     color: lightgreen;
-    border-bottom: 1px lightgreen solid;
+    border-color: lightgreen;
 }
 div.tag_cloud a.tag {
     display: inline-block;
     position: relative;
     top: 0px;
-    padding: 0.2em 0.4em;
+    padding: 0.25em 0.5em;
     margin: 2px 0em;
     color: #ffffff;
-    border: 1px solid lightgreen;
+    border: 1px solid #ffffff;
 }
 div.tag_cloud a.tag:hover,
 div.tag_cloud a.tag:focus,
 div.tag_cloud a.tag:active {
-    background-color: #cc5252;
+    color: #202021;
+    background-color: lightgreen;
+    border-color: lightgreen;
 }
 div.metadata a.category {
     display: inline-block;
     position: absolute;
     top: 0px;
     right: 4rem;
-    padding: 0.2em 0.6em;
+    padding: 0.25em 0.75em;
     margin: 0em;
     border: 1px solid #666667;
     border-top: none;
@@ -628,11 +632,11 @@ div.metadata a.category {
 div.doaction a, button {
     display: inline-block;
     white-space: nowrap;
-    padding: 0.4em 1.2em;
-    border-radius: 0.2em;
+    padding: 0.5em 1.25em;
+    border-radius: 0.25em;
     color: #ffffff;
     background-color: #383839;
-    border: 1px solid #383839;
+    border: none;
 }
 div.doaction a:hover,
 button:hover,
@@ -640,8 +644,9 @@ div.doaction a:focus,
 button:focus,
 div.doaction a:active,
 button:active {
-    background-color: #666667;
-    border: 1px solid #666667;
+    color: #202021;
+    background-color: lightgreen;
+    border: none;
 }
 div.doaction a.post_delete_link,
 div.doaction a.delete_link {
@@ -652,15 +657,6 @@ section.photo > a {
 }
 section.photo > a:focus {
     outline: lightgreen solid 4px;
-}
-div.doaction a.post_delete_link:hover,
-div.doaction a.delete_link:hover,
-div.doaction a.post_delete_link:focus,
-div.doaction a.delete_link:focus,
-div.doaction a.post_delete_link:active,
-div.doaction a.delete_link:active {
-    background-color: #cc5252;
-    border: 1px solid #cc5252;
 }
 a.likes > img {
     display: inline-block;
