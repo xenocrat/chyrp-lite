@@ -346,7 +346,7 @@
                 width: 100%;
                 margin: 0rem;
                 font-size: 1.25em;
-                padding: 0.2em;
+                padding: 0.5em;
                 border-radius: 0em;
                 border: 1px solid #cfcfcf;
                 background-color: #ffffff;
@@ -456,7 +456,7 @@
                 text-decoration: none;
                 line-height: 1.25;
                 margin: 1rem 0rem;
-                padding: 0.4em 0.6em;
+                padding: 0.5em;
                 background-color: #f2fbff;
                 border: 2px solid #b8cdd9;
                 border-radius: 0.3em;

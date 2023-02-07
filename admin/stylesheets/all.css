@@ -437,7 +437,7 @@ input[type="password"] {
     width: 10em;
     color: #1f1f23;
     font-size: 1.25rem;
-    padding: 0.4em;
+    padding: 0.5em;
     border-radius: 0em;
     border: 1px solid #cfcfcf;
     background-color: #ffffff;
@@ -696,7 +696,7 @@ td img.placeholder {
 /* Group: Flashes */
 
 p.flash {
-    padding: 0.6rem;
+    padding: 0.5rem;
     margin-bottom: 1rem;
     background-color: #1e57ba;
     color: #ffffff;
@@ -728,7 +728,7 @@ a.prev_page {
     color: #1f1f23;
     line-height: 1.5;
     margin: 0rem;
-    padding: 0.4em 0.6em;
+    padding: 0.5em;
     background-color: #f2fbff;
     border: 2px solid #b8cdd9;
     border-radius: 0.3em;
@@ -808,7 +808,7 @@ div.confirmation a.button {
     min-width: 15em;
     margin-left: 0.5rem;
     margin-right: 0.5rem;
-    padding-right: calc(16px + 0.4em);
+    padding-right: calc(16px + 0.5em);
 }
 
 /* Group: Options */
