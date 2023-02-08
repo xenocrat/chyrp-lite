@@ -224,7 +224,7 @@ hr {
     border: none;
     clear: both;
     border-top: 1px solid #b1b4b6;
-    margin: 1rem 0rem;
+    margin: 2rem 0rem;
 }
 a:link {
     color: #1d70b8;
@@ -298,6 +298,9 @@ nav, main, article,
 section, footer,
 form, details, p {
     margin: 1rem 0rem;
+}
+article:not(:last-child) {
+    margin-bottom: 2rem;
 }
 header {
     font-size: 0.7rem;
