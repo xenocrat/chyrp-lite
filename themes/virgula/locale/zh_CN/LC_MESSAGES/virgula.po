@@ -223,7 +223,7 @@ msgid "Virgula"
 msgstr "Virgula"
 
 #: themes/virgula/info.php:6
-msgid "A high contrast theme for Chyrp Lite."
+msgid "A high-contrast theme for Chyrp Lite."
 msgstr "Chyrp Lite的高对比度主题。"
 
 #: themes/virgula/layouts/default.twig:22
@@ -309,15 +309,11 @@ msgstr "所有帖子"
 msgid "More posts&hellip;"
 msgstr "更多帖子&hellip;"
 
-#: themes/virgula/pages/index.twig:24
+#: themes/virgula/pages/index.twig:25
 msgid "Pages"
 msgstr "页面"
 
-#: themes/virgula/pages/index.twig:47 themes/virgula/pages/tags.twig:19
-msgid "Nothing here yet!"
-msgstr "然而这里什么也没有！"
-
-#: themes/virgula/pages/index.twig:49
+#: themes/virgula/pages/index.twig:50
 msgid "Search"
 msgstr "搜索"
 
@@ -328,6 +324,10 @@ msgstr "搜索此博客"
 #: themes/virgula/pages/index.twig:54
 msgid "Find"
 msgstr "查找"
+
+#: themes/virgula/pages/index.twig:59 themes/virgula/pages/tags.twig:19
+msgid "Nothing here yet!"
+msgstr "然而这里什么也没有！"
 
 #: themes/virgula/pages/search.twig:5
 #, php-format
