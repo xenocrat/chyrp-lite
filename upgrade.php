@@ -648,9 +648,6 @@
                 text-align: center;
                 line-height: 1;
             }
-            h1:first-child {
-                margin-top: 0rem;
-            }
             h2 {
                 font-size: 1.5em;
                 font-weight: bold;
@@ -666,7 +663,6 @@
             p {
                 margin-bottom: 1rem;
             }
-            p:last-child,
             p:empty {
                 margin-bottom: 0rem;
             }
@@ -747,10 +743,6 @@
             button {
                 width: 100%;
             }
-            a.big:last-child,
-            button:last-child {
-                margin-bottom: 0em;
-            }
             a.big:hover,
             button:hover,
             a.big:focus,
@@ -779,6 +771,12 @@
                 padding: 2rem;
                 margin: 0rem auto 0rem auto;
                 border-radius: 2rem;
+            }
+            .window > *:first-child {
+                margin-top: 0rem;
+            }
+            .window > *:last-child {
+                margin-bottom: 0rem;
             }
             @media (prefers-color-scheme: dark) {
                 body {

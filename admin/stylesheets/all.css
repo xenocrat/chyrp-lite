@@ -118,9 +118,12 @@ h1 {
 h3, h4, h5, h6 {
     font-size: 1em;
 }
-h1:first-child, h2:first-child,
-h3:first-child, h4:first-child,
-h5:first-child, h6:first-child {
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+h6:first-child {
     margin-top: 0rem;
 }
 sup, sub {
@@ -412,7 +415,7 @@ ul#modules_disabled > li.error div.controls {
 #content ul.extend > li > h3 a {
     text-decoration: none;
 }
-#content ul.extend > li p:last-child {
+#content ul.extend > li > *:last-child {
     margin-bottom: 0rem;
 }
 
@@ -1089,12 +1092,6 @@ input.toolbar.hidden {
     }
     #sub_nav li a {
         font-size: 1rem;
-    }
-    #sub_nav li:nth-child(odd) a {
-        border-right: none;
-    }
-    #sub_nav li:nth-child(odd):last-child a {
-        border-right: 1px solid #cfcfcf;
     }
     label {
         display: block;

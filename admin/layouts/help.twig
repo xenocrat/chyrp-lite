@@ -112,16 +112,6 @@ h2 {
 h3, h4, h5, h6 {
     font-size: 1em;
 }
-h1:first-child, h2:first-child,
-h3:first-child, h4:first-child,
-h5:first-child, h6:first-child {
-    margin-top: 0em;
-}
-h1:last-child, h2:last-child,
-h3:last-child, h4:last-child,
-h5:last-child, h6:last-child {
-    margin-bottom: 0em;
-}
 sup, sub {
     font-size: 0.5em;
 }
@@ -138,9 +128,6 @@ small {
 }
 p {
     margin-bottom: 1rem;
-}
-p:last-child, p:empty {
-    margin-bottom: 0rem;
 }
 ul {
     list-style: disc outside;
@@ -235,7 +222,8 @@ table tbody tr td {
 table tbody tr td.emblem {
     text-align: center;
 }
-a:link, a:visited {
+a:link,
+a:visited {
     color: #1f1f23;
     text-decoration: underline;
 }
@@ -243,7 +231,9 @@ a:focus {
     outline: #ff7f00 dashed 2px;
     outline-offset: 1px;
 }
-a:hover, a:focus, a:active {
+a:hover,
+a:focus,
+a:active {
     color: #1e57ba;
     text-decoration: underline;
 }
