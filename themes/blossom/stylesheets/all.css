@@ -73,7 +73,6 @@ body.preview {
 p {
     margin: 0em 0em 1em 0em;
 }
-p:last-child,
 p:empty {
     margin-bottom: 0em;
 }
@@ -114,14 +113,6 @@ h4, h5, h6 {
 h4.archive {
     font-size: 1.33em;
 }
-h1:first-child,
-h2:first-child,
-h3:first-child,
-h4:first-child,
-h5:first-child,
-h6:first-child {
-    margin-top: 0em;
-}
 sup, sub {
     font-size: 0.5em;
 }
@@ -149,9 +140,6 @@ blockquote {
     padding: 0em 2em;
     margin: 0em 0em 1em 0em;
 }
-blockquote:last-child {
-    margin-bottom: 0em;
-}
 pre {
     font-family: "Cousine webfont", monospace;
     font-size: 0.85em;
@@ -162,7 +150,7 @@ code {
     font-family: "Cousine webfont", monospace;
     font-size: 0.85em;
     background-color: #e5e2dc;
-    padding: 0.1em 0.25em 0em 0.25em;
+    padding: 0.125em 0.25em 0em 0.25em;
     vertical-align: bottom;
 }
 pre > code {
@@ -278,9 +266,6 @@ ol.comments > li {
     padding: 2rem 2rem 0rem 2rem;
     border-bottom: 1px solid #c6ccc8;
 }
-ol.comments label:first-child {
-    margin-top:  0em;
-}
 ol.comments > li:last-child {
     border-bottom: none;
 }
@@ -323,9 +308,6 @@ table {
     width: 100%;
     margin: 0em 0em 1em 0em;
     overflow-x: scroll;
-}
-table:last-child {
-    margin-bottom: 0em;
 }
 table thead tr {
     background-color: #39434d;
@@ -540,9 +522,6 @@ div.doaction {
     font-family: inherit;
     margin: 1em 0em;
 }
-div.doaction:last-child {
-    margin-bottom: 0em;
-}
 div.admin, div.downloads {
     margin: 1em 0em 0em 0em;
 }
@@ -563,9 +542,6 @@ div#main > article, div.standalone {
         #fbfbf7 10em
     );
     box-shadow: 0px 2px 4px 2px rgba(57,67,77,0.05);
-}
-div#main > article:last-child {
-    margin-bottom: 0rem;
 }
 div#main > article.discourse {
     padding: 2rem;
@@ -622,9 +598,6 @@ article > section {
     margin: 1em 0em 0em 0em;
     padding: 0em;
 }
-article > section:first-child {
-    margin-top: 0em;
-}
 article section.comment {
     margin-bottom: 1em;
 }
@@ -635,12 +608,9 @@ article > footer {
     display: block;
     width: 100%;
     text-align: start;
-    margin: 0em 0em 1em 0em;
+    margin: 1em 0em 0em 0em;
     padding: 0em;
     border: none;
-}
-article > footer:last-child {
-    margin: 0em;
 }
 article.video video,
 article.audio audio {
@@ -809,6 +779,18 @@ section img {
 section.photo img,
 article.archive img {
     width: 100%;
+}
+article > *:first-child,
+section > *:first-child,
+form > *:first-child,
+div.standalone > *:first-child {
+    margin-top: 0rem;
+}
+article > *:last-child,
+section > *:last-child,
+form > *:last-child,
+div.standalone > *:last-child {
+    margin-bottom: 0rem;
 }
 .ajax_loading {
     background-size: 30px 30px;
