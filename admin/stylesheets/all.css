@@ -319,13 +319,11 @@ pre > code {
 }
 a:link > code,
 a:visited > code {
-    text-decoration: none;
     border-color: #1f1f23;
 }
 a:hover > code,
 a:focus > code,
 a:active > code {
-    text-decoration: none;
     border-color: #1e57ba;
 }
 div.pagination {
@@ -445,7 +443,7 @@ input[type="password"] {
     border: 1px solid #cfcfcf;
     background-color: #ffffff;
 }
-input:placeholder {
+input::placeholder {
     color: #dddddd;
     opacity: 1;
 }
