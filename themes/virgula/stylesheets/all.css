@@ -223,7 +223,7 @@ hr {
     width: 100%;
     border: none;
     clear: both;
-    border-top: 1px solid #b1b4b6;
+    border-top: 3px double #b1b4b6;
     margin: 2rem 0rem;
 }
 a:link {
@@ -245,7 +245,7 @@ a:active {
     color: #0b0c0c;
 }
 label {
-    display: block;
+    display: inline;
     margin: 0rem;
 }
 select, input {
@@ -263,8 +263,8 @@ select, input {
     border: 2px solid #0b0c0c;
     border-radius: 0em;
 }
-input:placeholder {
-    color: #505a5f;
+input::placeholder {
+    color: #0b0c0c;
     opacity: 1;
 }
 input:invalid {
@@ -299,8 +299,12 @@ section, footer,
 form, details, p {
     margin: 1rem 0rem;
 }
-article:not(:last-child) {
-    margin-bottom: 2rem;
+article.post + article.post::before {
+    display: block;
+    content: "\2021";
+    text-align: center;
+    font-size: 1rem;
+    margin: 2rem 0rem;
 }
 header {
     font-size: 0.7rem;
@@ -318,6 +322,32 @@ main > details,
 div.doaction,
 nav.traversal {
     margin: 2rem 0rem;
+}
+form.search_box {
+    position: relative;
+    max-width: 30ch;
+}
+input#search_field {
+    padding: 0.3rem 0rem;
+    border: none;
+    border-bottom: 2px solid #b1b4b6;
+}
+button#search_submit {
+    position: absolute;
+    width: 2rem;
+    top: 0px;
+    right: 0px;
+    padding: 0.3rem 0rem;
+    color: transparent;
+    background: #ffffff url(../images/search.svg) center no-repeat;
+    background-size: 1rem;
+    border: none;
+    border-bottom: 2px solid #b1b4b6;
+}
+input#search_field:focus,
+button#search_submit:focus {
+    outline: none;
+    border-bottom: 2px solid #0b0c0c;
 }
 div.doaction a, button {
     display: inline-block;

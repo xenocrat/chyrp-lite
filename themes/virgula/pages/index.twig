@@ -12,13 +12,12 @@
 </a>
 </li>
 {% endfor %}
-</ul>
 {% if posts.prev_page() or posts.next_page() %}
-<nav class="traversal">
+<li>
 <a href="{{ url('archive') }}" rel="archives">{{ "More posts&hellip;" | translate }}</a>
-</nav>
+</li>
 {% endif %}
-<hr>
+</ul>
 {% endif %}
 {% set pages_list = theme.pages_list() %}
 {% if pages_list is not empty %}
@@ -43,17 +42,6 @@
 {% endif %}
 {% endfor %}
 </ul>
-<hr>
-{% endif %}
-{% if posts.paginated is not empty or pages_list is not empty %}
-<form class="search_box" action="{{ url('search') }}" method="post" accept-charset="UTF-8" role="search">
-<h2>{{ "Search" | translate }}</h2>
-<label for="search_field">{{ "Search this blog" | translate }}</label>
-<input type="text" id="search_field" name="query" value="">
-<div class="doaction">
-<button type="submit" id="search_submit">{{ "Find" | translate }}</button>
-</div>
-</form>
 {% endif %}
 {% if posts.paginated is empty and pages_list is empty %}
 <h3 role="status">{{ "Nothing here yet!" | translate }}</h3>
