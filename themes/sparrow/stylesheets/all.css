@@ -332,7 +332,7 @@ select:focus, input:focus {
     outline: #98716c solid 1px;
     outline-offset: 0px;
 }
-input:placeholder {
+input::placeholder {
     color: #c6ccc8;
     opacity: 1;
 }

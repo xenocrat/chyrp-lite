@@ -330,7 +330,7 @@ select:focus, input:focus {
     background-color: #ffffff;
     border: none;
 }
-input:placeholder {
+input::placeholder {
     color: #adafae;
     opacity: 1;
 }
