@@ -250,7 +250,15 @@ msgstr "Bozza"
 msgid "Log out"
 msgstr "Esci"
 
-#: themes/virgula/layouts/default.twig:79
+#: themes/virgula/layouts/default.twig:59
+msgid "Search this blog"
+msgstr "Cerca questo blog"
+
+#: themes/virgula/layouts/default.twig:60
+msgid "Find"
+msgstr "Trova"
+
+#: themes/virgula/layouts/default.twig:83
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "Chiamato da %s sulla riga %d a %s secondi."
@@ -305,27 +313,15 @@ msgstr "Non hai bozze."
 msgid "Posts"
 msgstr "Post"
 
-#: themes/virgula/pages/index.twig:18
+#: themes/virgula/pages/index.twig:17
 msgid "More posts&hellip;"
 msgstr "Altri post&hellip;"
 
-#: themes/virgula/pages/index.twig:25
+#: themes/virgula/pages/index.twig:24
 msgid "Pages"
 msgstr "Pagine"
 
-#: themes/virgula/pages/index.twig:50
-msgid "Search"
-msgstr "Cerca"
-
-#: themes/virgula/pages/index.twig:51
-msgid "Search this blog"
-msgstr "Cerca questo blog"
-
-#: themes/virgula/pages/index.twig:54
-msgid "Find"
-msgstr "Trova"
-
-#: themes/virgula/pages/index.twig:59 themes/virgula/pages/tags.twig:19
+#: themes/virgula/pages/index.twig:47 themes/virgula/pages/tags.twig:19
 msgid "Nothing here yet!"
 msgstr "Non c'è ancora niente!"
 

@@ -761,7 +761,7 @@ Called from:
 	themes/sparrow/layouts/default.twig on line 98
 	themes/topaz/layouts/default.twig on line 112
 	themes/umbra/layouts/default.twig on line 92
-	themes/virgula/layouts/default.twig on line 72
+	themes/virgula/layouts/default.twig on line 76
 
 
 

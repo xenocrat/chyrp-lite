@@ -243,7 +243,16 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
-#: themes/virgula/layouts/default.twig:79
+#: themes/virgula/layouts/default.twig:59
+#: themes/virgula/layouts/default.twig:59
+msgid "Search this blog"
+msgstr ""
+
+#: themes/virgula/layouts/default.twig:60
+msgid "Find"
+msgstr ""
+
+#: themes/virgula/layouts/default.twig:83
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr ""
@@ -305,27 +314,15 @@ msgstr ""
 msgid "Posts"
 msgstr ""
 
-#: themes/virgula/pages/index.twig:18
+#: themes/virgula/pages/index.twig:17
 msgid "More posts&hellip;"
 msgstr ""
 
-#: themes/virgula/pages/index.twig:25
+#: themes/virgula/pages/index.twig:24
 msgid "Pages"
 msgstr ""
 
-#: themes/virgula/pages/index.twig:50
-msgid "Search"
-msgstr ""
-
-#: themes/virgula/pages/index.twig:51
-msgid "Search this blog"
-msgstr ""
-
-#: themes/virgula/pages/index.twig:54
-msgid "Find"
-msgstr ""
-
-#: themes/virgula/pages/index.twig:59
+#: themes/virgula/pages/index.twig:47
 #: themes/virgula/pages/tags.twig:19
 msgid "Nothing here yet!"
 msgstr ""

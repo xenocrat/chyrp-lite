@@ -250,7 +250,15 @@ msgstr "草稿"
 msgid "Log out"
 msgstr "退出登陆"
 
-#: themes/virgula/layouts/default.twig:79
+#: themes/virgula/layouts/default.twig:59
+msgid "Search this blog"
+msgstr "搜索此博客"
+
+#: themes/virgula/layouts/default.twig:60
+msgid "Find"
+msgstr "查找"
+
+#: themes/virgula/layouts/default.twig:83
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "调用 %s 在行 %d 在 %s 秒."
@@ -305,27 +313,15 @@ msgstr "您没有任何草稿。"
 msgid "Posts"
 msgstr "所有帖子"
 
-#: themes/virgula/pages/index.twig:18
+#: themes/virgula/pages/index.twig:17
 msgid "More posts&hellip;"
 msgstr "更多帖子&hellip;"
 
-#: themes/virgula/pages/index.twig:25
+#: themes/virgula/pages/index.twig:24
 msgid "Pages"
 msgstr "页面"
 
-#: themes/virgula/pages/index.twig:50
-msgid "Search"
-msgstr "搜索"
-
-#: themes/virgula/pages/index.twig:51
-msgid "Search this blog"
-msgstr "搜索此博客"
-
-#: themes/virgula/pages/index.twig:54
-msgid "Find"
-msgstr "查找"
-
-#: themes/virgula/pages/index.twig:59 themes/virgula/pages/tags.twig:19
+#: themes/virgula/pages/index.twig:47 themes/virgula/pages/tags.twig:19
 msgid "Nothing here yet!"
 msgstr "然而这里什么也没有！"
 
