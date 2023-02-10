@@ -299,12 +299,13 @@ section, footer,
 form, details, p {
     margin: 1rem 0rem;
 }
+details[open] + article.post,
 article.post + article.post {
     padding-top: 6rem;
-    border-top: 1px solid #b1b4b6;
+    border-top: 2px solid #f3f2f1;
     background-image: radial-gradient(
         ellipse 50% 2rem at top center,
-        #f3f2f1,
+        rgba(243, 242, 241, 0.5),
         transparent
     );
 }
