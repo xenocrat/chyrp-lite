@@ -1942,8 +1942,8 @@
             $remote_content.= fgets($connect);
 
         # Check for <link> element containing the endpoint.
-        if (preg_match_all("/<link [^>]+>/i", $remote_content, $links)) {
-            foreach ($links as $link) {
+        if (preg_match_all("/<link [^>]+>/i", $remote_content, $links, PREG_PATTERN_ORDER)) {
+            foreach ($links[0] as $link) {
                 if (!preg_match("/ rel=(\"webmention\"|\'webmention\')/i", $link))
                     continue;
 
@@ -1962,8 +1962,8 @@
         }
 
         # Check for <a> element containing the endpoint.
-        if (preg_match_all("/<a [^>]+>/i", $remote_content, $anchors)) {
-            foreach ($anchors as $anchor) {
+        if (preg_match_all("/<a [^>]+>/i", $remote_content, $anchors, PREG_PATTERN_ORDER)) {
+            foreach ($anchors[0] as $anchor) {
                 if (!preg_match("/ rel=(\"webmention\"|\'webmention\')/i", $anchor))
                     continue;
 
@@ -1999,7 +1999,7 @@
         $urls = array();
         $regx = "/<a(?= )[^>]* href=(\"[^\"]+\"|\'[^\']+\')[^>]*>[^<]+<\/a>/i";
 
-        if (preg_match_all($regx, $string, $matches))
+        if (preg_match_all($regx, $string, $matches, PREG_PATTERN_ORDER))
             $urls = $matches[1];
 
         foreach ($urls as &$url)
