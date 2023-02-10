@@ -1966,7 +1966,7 @@
 
         # Check for <link> element containing the endpoint.
         if (preg_match_all("/<link [^>]+>/i", $remote_content, $links)) {
-            foreach ($links as $link) {
+            foreach ($links[0] as $link) {
                 if (!preg_match("/ rel=(\"webmention\"|\'webmention\')/i", $link))
                     continue;
 
@@ -1986,7 +1986,7 @@
 
         # Check for <a> element containing the endpoint.
         if (preg_match_all("/<a [^>]+>/i", $remote_content, $anchors)) {
-            foreach ($anchors as $anchor) {
+            foreach ($anchors[0] as $anchor) {
                 if (!preg_match("/ rel=(\"webmention\"|\'webmention\')/i", $anchor))
                     continue;
 
