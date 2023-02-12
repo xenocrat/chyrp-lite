@@ -261,6 +261,25 @@
             }
         }
 
+        public function ajax_uploads_modal(): void {
+            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+                show_403(
+                    __("Access Denied"),
+                    __("Invalid authentication token.")
+                );
+
+            if (!Visitor::current()->group->can("edit_post", "edit_page", true))
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to manage uploads.")
+                );
+
+            $admin = AdminController::current();
+            $admin->display("partials".DIR."uploads_modal",
+                array("uploads" => uploaded_search())
+            );
+        }
+
         /**
          * Function: current
          * Returns a singleton reference to the current class.
