@@ -46,7 +46,7 @@
 {% if field_markdown is not empty %}<a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="{{ 'Markdown' | translate }}"></a>
 {% endif %}</span>
 <textarea id="{{ field_id }}" name="{{ field_name }}" rows="12"{{ field_preview ~ field_markdown ~ field_required }}>{{ field_value | fix(false, true) }}</textarea>
-<span id="{{ field_name }}_field_tray" class="options_tray" role="note"></span>
+<span id="{{ field_name }}_field_tray" class="options_tray" role="status"></span>
 {% elseif field.type == "checkbox" %}
 <input id="{{ field_id }}" type="checkbox" name="{{ field_name }}"{{ field.checked | checked }}>
 {% elseif field.type == "select" %}

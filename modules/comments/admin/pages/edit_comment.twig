@@ -15,7 +15,7 @@
 <a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="{{ 'Markdown' | translate }}"></a>
 {% endif %}</span>
 <textarea rows="12" name="body" id="body" data-no_uploads{{ comment_markdown }} required>{{ comment.body | fix(false, true) }}</textarea>
-<span id="body_tray" class="options_tray" role="note"></span>
+<span id="body_tray" class="options_tray" role="status"></span>
 </p>
 <div id="more_options" class="more_options">
 <p class="more_options_option">
