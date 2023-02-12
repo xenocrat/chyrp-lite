@@ -183,7 +183,7 @@ var ChyrpComment = {
     panic: function(message) {
         message = (typeof message === "string") ?
             message :
-            '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;
+            Oops.message ;
 
         ChyrpComment.failed = true;
         alert(message);

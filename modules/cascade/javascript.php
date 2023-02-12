@@ -69,7 +69,7 @@ var ChyrpAjaxScroll = {
     },
     panic: function() {
         ChyrpAjaxScroll.failed = true;
-        alert('<?php echo __("Oops! Something went wrong on this web page."); ?>');
+        alert(Oops.message);
     }
 };
 $(document).ready(ChyrpAjaxScroll.init);

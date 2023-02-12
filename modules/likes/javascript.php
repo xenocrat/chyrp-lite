@@ -74,7 +74,7 @@ var ChyrpLikes = {
     },
     panic: function() {
         ChyrpLikes.failed = true;
-        alert('<?php echo __("Oops! Something went wrong on this web page."); ?>');
+        alert(Oops.message);
     }
 };
 $(document).ready(ChyrpLikes.init);

@@ -22,6 +22,9 @@ var Site = {
     url: '<?php echo addslashes($config->url); ?>',
     chyrp_url: '<?php echo addslashes($config->chyrp_url); ?>'
 }
+var Oops = {
+    message: '<?php echo __("Oops! Something went wrong on this web page."); ?>'
+}
 var Post = {
     failed: false,
     init: function() {
@@ -56,7 +59,7 @@ var Post = {
     panic: function(message) {
         message = (typeof message === "string") ?
             message :
-            '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;
+            Oops.message ;
 
         Post.failed = true;
         alert(message);
@@ -95,7 +98,7 @@ var Page = {
     panic: function(message) {
         message = (typeof message === "string") ?
             message :
-            '<?php echo __("Oops! Something went wrong on this web page."); ?>' ;
+            Oops.message ;
 
         Page.failed = true;
         alert(message);
