@@ -175,6 +175,9 @@ var Site = {
     url: '<?php echo addslashes($config->url); ?>',
     chyrp_url: '<?php echo addslashes($config->chyrp_url); ?>'
 }
+var Oops = {
+    message: '<?php echo __("Oops! Something went wrong on this web page."); ?>'
+}
 var Help = {
     init: function() {
         $(".help").on("click", function(e) {
@@ -186,26 +189,28 @@ var Help = {
         $("<div>", {
             "role": "region"
         }).addClass("iframe_background").append(
-            [$("<iframe>", {
-                "src": href,
-                "sandbox": "allow-same-origin allow-popups allow-popups-to-escape-sandbox"
-            }).addClass("iframe_foreground").loader().on("load", function() {
-                $(this).loader(true);
-            }),
-            $("<a>", {
-                "href": "#",
-                "role": "button",
-                "accesskey": "x",
-                "aria-label": '<?php echo __("Close", "admin"); ?>'
-            }).addClass("iframe_close_gadget").click(function(e) {
-                e.preventDefault();
-                $(this).parent().remove();
-            }).append(
-                $("<img>", {
-                    "src": Site.chyrp_url + '/admin/images/icons/close.svg',
-                    "alt": '<?php echo __("close", "admin"); ?>'
-                })
-            )]
+            [
+                $("<iframe>", {
+                    "src": href,
+                    "sandbox": "allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+                }).addClass("iframe_foreground").loader().on("load", function() {
+                    $(this).loader(true);
+                }),
+                $("<a>", {
+                    "href": "#",
+                    "role": "button",
+                    "accesskey": "x",
+                    "aria-label": '<?php echo __("Close", "admin"); ?>'
+                }).addClass("iframe_close_gadget").click(function(e) {
+                    e.preventDefault();
+                    $(this).parent().remove();
+                }).append(
+                    $("<img>", {
+                        "src": Site.chyrp_url + '/admin/images/icons/close.svg',
+                        "alt": '<?php echo __("close", "admin"); ?>'
+                    })
+                )
+            ]
         ).click(function(e) {
             if (e.target === e.currentTarget)
                 $(this).remove();
@@ -317,6 +322,7 @@ var Write = {
                 )
             );
 
+            // Do not continue if the textarea has <data-no_uploads>.
             if (typeof target.attr("data-no_uploads") !== "undefined")
                 return;
 
@@ -352,7 +358,7 @@ var Write = {
                         }).done(function(response) {
                             Write.formatting(target, "img", response.data.url);
                         }).fail(function(response) {
-                            tray.html('<?php echo __("Oops! Something went wrong on this web page."); ?>');
+                            tray.html(Oops.message);
                         }).always(function(response) {
                             tray.loader(true);
                             e.target.value = null;
@@ -364,6 +370,61 @@ var Write = {
                     "alt": '<?php echo __("image", "admin"); ?>'
                 })]
             ).appendTo(toolbar);
+
+            // Insert button to open the uploads modal.
+            if (<?php echo($visitor->group->can("edit_post", "edit_page", true) ? "true" : "false"); ?>)
+                toolbar.append(
+                    $("<button>", {
+                        "type": "button",
+                        "aria-label": '<?php echo __("Insert", "admin"); ?>'
+                    }).addClass("emblem toolbar").click(function(e) {
+                        var tray = $("#" + target.attr("id") + "_tray");
+
+                        $.post("<?php echo url('/', 'AjaxController'); ?>", {
+                            action: "uploads_modal",
+                            hash: Visitor.token
+                        }, function(data) {
+                            $("<div>", {
+                                "role": "region"
+                            }).addClass("iframe_background").append(
+                                [
+                                    $("<div>", {
+                                        "role": "dialog",
+                                        "aria-label": '<?php echo __("Uploads", "admin"); ?>'
+                                    }).addClass("iframe_foreground").on("click", "a", function(e) {
+                                        e.preventDefault();
+                                        Write.formatting(target, "text", $(e.target).attr("href"));
+                                        $(this).parents(".iframe_background").remove();
+                                    }).append(data),
+                                    $("<a>", {
+                                        "href": "#",
+                                        "role": "button",
+                                        "accesskey": "x",
+                                        "aria-label": '<?php echo __("Close", "admin"); ?>'
+                                    }).addClass("iframe_close_gadget").click(function(e) {
+                                        e.preventDefault();
+                                        $(this).parent().remove();
+                                    }).append(
+                                        $("<img>", {
+                                            "src": Site.chyrp_url + '/admin/images/icons/close.svg',
+                                            "alt": '<?php echo __("close", "admin"); ?>'
+                                        })
+                                    )
+                                ]
+                            ).click(function(e) {
+                                if (e.target === e.currentTarget)
+                                    $(this).remove();
+                            }).insertAfter("#content");
+                        }, "html").fail(function(response) {
+                            tray.html(Oops.message);
+                        });
+                    }).append(
+                        $("<img>", {
+                            "src": Site.chyrp_url + '/admin/images/icons/archive.svg',
+                            "alt": '<?php echo __("uploads", "admin"); ?>'
+                        })
+                    )
+                );
         });
 
         // Insert buttons for ajax previews.
@@ -400,6 +461,7 @@ var Write = {
         $("#write_form textarea, #edit_form textarea").each(function() {
             var target = $(this);
 
+            // Do not continue if the textarea has <data-no_uploads>.
             if (typeof target.attr("data-no_uploads") !== "undefined")
                 return;
 
@@ -469,7 +531,7 @@ var Write = {
                 }).done(function(response) {
                     Write.formatting($(e.target), "img", response.data.url);
                 }).fail(function(response) {
-                    tray.html('<?php echo __("Oops! Something went wrong on this web page."); ?>');
+                    tray.html(Oops.message);
                 }).always(function(response) {
                     tray.loader(true);
                     $(e.target).removeClass("drag_highlight");
@@ -477,7 +539,7 @@ var Write = {
             }
         }
     },
-    formatting: function(target, effect, url = "") {
+    formatting: function(target, effect, fragment = "") {
         var markdown = <?php echo(($config->enable_markdown) ? "true" : "false"); ?>;
         var opening = "";
         var closing = "";
@@ -495,6 +557,10 @@ var Write = {
         }
 
         switch (effect) {
+            case 'text':
+                selection = fragment;
+                break;
+
             case 'strong':
                 opening = (markdown) ? "**" : '<strong>' ;
                 closing = (markdown) ? "**" : '</strong>' ;
@@ -538,24 +604,24 @@ var Write = {
 
             case 'hyperlink':
                 if (isURL(selection)) {
-                    if (url) {
-                        selection = url;
+                    if (fragment) {
+                        selection = fragment;
                         break;
                     }
 
                     opening = (markdown) ? "[](" : '<a href="' ;
                     closing = (markdown) ? ")" : '"></a>' ;
                 } else {
-                    opening = (markdown) ? "[" : '<a href="' + url + '">' ;
-                    closing = (markdown) ? "](" + url + ")" : '</a>' ;
+                    opening = (markdown) ? "[" : '<a href="' + fragment + '">' ;
+                    closing = (markdown) ? "](" + fragment + ")" : '</a>' ;
                 }
 
                 break;
 
             case 'img':
                 if (isURL(selection)) {
-                    if (url) {
-                        selection = url;
+                    if (fragment) {
+                        selection = fragment;
                         break;
                     }
 
@@ -563,7 +629,7 @@ var Write = {
                     closing = (markdown) ? ")" : '">' ;
                 } else {
                     opening = (markdown) ? "![" : '<img alt="' ;
-                    closing = (markdown) ? "](" + url + ")" : '" src="' + url + '">' ;
+                    closing = (markdown) ? "](" + fragment + ")" : '" src="' + fragment + '">' ;
                 }
 
                 break;
@@ -616,27 +682,29 @@ var Write = {
         $("<div>", {
             "role": "region"
         }).addClass("iframe_background").append(
-            [$("<iframe>", {
-                "name": uid,
-                "sandbox": "allow-same-origin allow-popups allow-popups-to-escape-sandbox"
-            }).addClass("iframe_foreground").loader().on("load", function() {
-                if (!!this.contentWindow.location && this.contentWindow.location != "about:blank")
-                    $(this).loader(true);
-            }),
-            $("<a>", {
-                "href": "#",
-                "role": "button",
-                "accesskey": "x",
-                "aria-label": '<?php echo __("Close", "admin"); ?>'
-            }).addClass("iframe_close_gadget").click(function(e) {
-                e.preventDefault();
-                $(this).parent().remove();
-            }).append(
-                $("<img>", {
-                    "src": Site.chyrp_url + '/admin/images/icons/close.svg',
-                    "alt": '<?php echo __("close", "admin"); ?>'
-                })
-            )]
+            [
+                $("<iframe>", {
+                    "name": uid,
+                    "sandbox": "allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+                }).addClass("iframe_foreground").loader().on("load", function() {
+                    if (!!this.contentWindow.location && this.contentWindow.location != "about:blank")
+                        $(this).loader(true);
+                }),
+                $("<a>", {
+                    "href": "#",
+                    "role": "button",
+                    "accesskey": "x",
+                    "aria-label": '<?php echo __("Close", "admin"); ?>'
+                }).addClass("iframe_close_gadget").click(function(e) {
+                    e.preventDefault();
+                    $(this).parent().remove();
+                }).append(
+                    $("<img>", {
+                        "src": Site.chyrp_url + '/admin/images/icons/close.svg',
+                        "alt": '<?php echo __("close", "admin"); ?>'
+                    })
+                )
+            ]
         ).click(function(e) {
             if (e.target === e.currentTarget)
                 $(this).remove();
