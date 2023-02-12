@@ -309,6 +309,9 @@ article.post + article.post {
         transparent
     );
 }
+article.fragment + article.fragment {
+    border-top: 2px solid #f3f2f1;
+}
 header {
     font-size: 0.7rem;
     margin: 0rem;
