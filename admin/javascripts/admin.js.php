@@ -227,6 +227,7 @@ var Write = {
             toolbar.append(
                 $("<button>", {
                     "type": "button",
+                    "title": '<?php echo __("Heading", "admin"); ?>',
                     "aria-label": '<?php echo __("Heading", "admin"); ?>'
                 }).addClass("emblem toolbar").click(function(e) {
                     Write.formatting(target, "h3");
@@ -241,6 +242,7 @@ var Write = {
             toolbar.append(
                 $("<button>", {
                     "type": "button",
+                    "title": '<?php echo __("Strong", "admin"); ?>',
                     "aria-label": '<?php echo __("Strong", "admin"); ?>'
                 }).addClass("emblem toolbar").click(function(e) {
                     Write.formatting(target, "strong");
@@ -255,6 +257,7 @@ var Write = {
             toolbar.append(
                 $("<button>", {
                     "type": "button",
+                    "title": '<?php echo __("Emphasis", "admin"); ?>',
                     "aria-label": '<?php echo __("Emphasis", "admin"); ?>'
                 }).addClass("emblem toolbar").click(function(e) {
                     Write.formatting(target, "em");
@@ -269,6 +272,7 @@ var Write = {
             toolbar.append(
                 $("<button>", {
                     "type": "button",
+                    "title": '<?php echo __("Strikethrough", "admin"); ?>',
                     "aria-label": '<?php echo __("Strikethrough", "admin"); ?>'
                 }).addClass("emblem toolbar").click(function(e) {
                     Write.formatting(target, "del");
@@ -283,6 +287,7 @@ var Write = {
             toolbar.append(
                 $("<button>", {
                     "type": "button",
+                    "title": '<?php echo __("Code", "admin"); ?>',
                     "aria-label": '<?php echo __("Code", "admin"); ?>'
                 }).addClass("emblem toolbar").click(function(e) {
                     Write.formatting(target, "code");
@@ -297,6 +302,7 @@ var Write = {
             toolbar.append(
                 $("<button>", {
                     "type": "button",
+                    "title": '<?php echo __("Hyperlink", "admin"); ?>',
                     "aria-label": '<?php echo __("Hyperlink", "admin"); ?>'
                 }).addClass("emblem toolbar").click(function(e) {
                     Write.formatting(target, "hyperlink");
@@ -311,6 +317,7 @@ var Write = {
             toolbar.append(
                 $("<button>", {
                     "type": "button",
+                    "title": '<?php echo __("Image", "admin"); ?>',
                     "aria-label": '<?php echo __("Image", "admin"); ?>'
                 }).addClass("emblem toolbar").click(function(e) {
                     Write.formatting(target, "img");
@@ -329,6 +336,7 @@ var Write = {
             // Insert toolbar buttons for image uploads.
             $("<label>", {
                 "role": "button",
+                "title": '<?php echo __("Upload", "admin"); ?>',
                 "aria-label": '<?php echo __("Upload", "admin"); ?>'
             }).addClass("emblem toolbar").append(
                 [$("<input>", {
@@ -376,6 +384,7 @@ var Write = {
                 toolbar.append(
                     $("<button>", {
                         "type": "button",
+                        "title": '<?php echo __("Insert", "admin"); ?>',
                         "aria-label": '<?php echo __("Insert", "admin"); ?>'
                     }).addClass("emblem toolbar").click(function(e) {
                         var tray = $("#" + target.attr("id") + "_tray");
@@ -435,6 +444,7 @@ var Write = {
                 $("#" + target.attr("id") + "_toolbar").append(
                     $("<button>", {
                         "type": "button",
+                        "title": '<?php echo __("Preview", "admin"); ?>',
                         "aria-label": '<?php echo __("Preview", "admin"); ?>'
                     }).addClass("emblem toolbar").click(function(e) {
                         var content  = target.val();
