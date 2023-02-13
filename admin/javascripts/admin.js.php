@@ -187,7 +187,8 @@ var Help = {
     },
     show: function(href) {
         $("<div>", {
-            "role": "region"
+            "role": "region",
+            "aria-label": '<?php echo __("Modal window", "admin"); ?>'
         }).addClass("iframe_background").append(
             [
                 $("<iframe>", {
@@ -223,6 +224,7 @@ var Write = {
         $("#write_form .options_toolbar, #edit_form .options_toolbar").each(function() {
             var toolbar = $(this);
             var target = $("#" + toolbar.attr("id").replace("_toolbar", ""));
+            var tray = $("#" + target.attr("id") + "_tray");
 
             toolbar.append(
                 $("<button>", {
@@ -347,7 +349,6 @@ var Write = {
                     if (!!e.target.files && e.target.files.length > 0) {
                         var file = e.target.files[0];
                         var form = new FormData();
-                        var tray = $("#" + target.attr("id") + "_tray");
 
                         form.set("action", "file_upload");
                         form.set("hash", Visitor.token);
@@ -387,22 +388,18 @@ var Write = {
                         "title": '<?php echo __("Insert", "admin"); ?>',
                         "aria-label": '<?php echo __("Insert", "admin"); ?>'
                     }).addClass("emblem toolbar").click(function(e) {
-                        var tray = $("#" + target.attr("id") + "_tray");
-
                         $.post("<?php echo url('/', 'AjaxController'); ?>", {
                             action: "uploads_modal",
                             hash: Visitor.token
                         }, function(data) {
                             $("<div>", {
-                                "role": "region"
+                                "role": "region",
+                                "aria-label": '<?php echo __("Modal window", "admin"); ?>'
                             }).addClass("iframe_background").append(
                                 [
-                                    $("<div>", {
-                                        "role": "dialog",
-                                        "aria-label": '<?php echo __("Uploads", "admin"); ?>'
-                                    }).addClass("iframe_foreground").on("click", "a", function(e) {
+                                    $("<div>").addClass("iframe_foreground").on("click", "a", function(e) {
                                         e.preventDefault();
-                                        Write.formatting(target, "text", $(e.target).attr("href"));
+                                        Write.formatting(target, "insert", $(e.target).attr("href"));
                                         $(this).parents(".iframe_background").remove();
                                     }).append(data),
                                     $("<a>", {
@@ -430,7 +427,7 @@ var Write = {
                     }).append(
                         $("<img>", {
                             "src": Site.chyrp_url + '/admin/images/icons/archive.svg',
-                            "alt": '<?php echo __("uploads", "admin"); ?>'
+                            "alt": '<?php echo __("insert", "admin"); ?>'
                         })
                     )
                 );
@@ -567,10 +564,6 @@ var Write = {
         }
 
         switch (effect) {
-            case 'text':
-                selection = fragment;
-                break;
-
             case 'strong':
                 opening = (markdown) ? "**" : '<strong>' ;
                 closing = (markdown) ? "**" : '</strong>' ;
@@ -643,6 +636,10 @@ var Write = {
                 }
 
                 break;
+
+            case 'insert':
+                selection = fragment;
+                break;
         }
 
         var text = opening + selection + closing + after;
@@ -690,7 +687,8 @@ var Write = {
 
         // Build and display the named iframe.
         $("<div>", {
-            "role": "region"
+            "role": "region",
+            "aria-label": '<?php echo __("Modal window", "admin"); ?>'
         }).addClass("iframe_background").append(
             [
                 $("<iframe>", {
