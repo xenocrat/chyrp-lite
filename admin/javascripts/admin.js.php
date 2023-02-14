@@ -388,6 +388,8 @@ var Write = {
                         "title": '<?php echo __("Insert", "admin"); ?>',
                         "aria-label": '<?php echo __("Insert", "admin"); ?>'
                     }).addClass("emblem toolbar").click(function(e) {
+                        tray.loader();
+
                         $.post("<?php echo url('/', 'AjaxController'); ?>", {
                             action: "uploads_modal",
                             hash: Visitor.token
@@ -423,6 +425,8 @@ var Write = {
                             }).insertAfter("#content");
                         }, "html").fail(function(response) {
                             tray.html(Oops.message);
+                        }).always(function(response) {
+                            tray.loader(true);
                         });
                     }).append(
                         $("<img>", {
@@ -565,8 +569,13 @@ var Write = {
 
         switch (effect) {
             case 'strong':
-                opening = (markdown) ? "**" : '<strong>' ;
-                closing = (markdown) ? "**" : '</strong>' ;
+                opening = (markdown) ?
+                    "**" :
+                    '<strong>' ;
+
+                closing = (markdown) ?
+                    "**" :
+                    '</strong>' ;
 
                 if (selection == "")
                     selection = " ";
@@ -574,8 +583,13 @@ var Write = {
                 break;
 
             case 'em':
-                opening = (markdown) ? "*" : '<em>' ;
-                closing = (markdown) ? "*" : '</em>' ;
+                opening = (markdown) ?
+                    "*" :
+                    '<em>' ;
+
+                closing = (markdown) ?
+                    "*" :
+                    '</em>' ;
 
                 if (selection == "")
                     selection = " ";
@@ -583,8 +597,13 @@ var Write = {
                 break;
 
             case 'code':
-                opening = (markdown) ? "`" : '<code>' ;
-                closing = (markdown) ? "`" : '</code>' ;
+                opening = (markdown) ?
+                    "`" :
+                    '<code>' ;
+
+                closing = (markdown) ?
+                    "`" :
+                    '</code>' ;
 
                 if (selection == "")
                     selection = " ";
@@ -592,13 +611,24 @@ var Write = {
                 break;
 
             case 'h3':
-                opening = (markdown) ? "### " : '<h3>' ;
-                closing = (markdown) ? "" : '</h3>' ;
+                opening = (markdown) ?
+                    "### " :
+                    '<h3>' ;
+
+                closing = (markdown) ?
+                    "" :
+                    '</h3>' ;
+
                 break;
 
             case 'del':
-                opening = (markdown) ? "~~" : '<del>' ;
-                closing = (markdown) ? "~~" : '</del>' ;
+                opening = (markdown) ?
+                    "~~" :
+                    '<del>' ;
+
+                closing = (markdown) ?
+                    "~~" :
+                    '</del>' ;
 
                 if (selection == "")
                     selection = " ";
@@ -612,11 +642,21 @@ var Write = {
                         break;
                     }
 
-                    opening = (markdown) ? "[](" : '<a href="' ;
-                    closing = (markdown) ? ")" : '"></a>' ;
+                    opening = (markdown) ?
+                        "[](" :
+                        '<a href="' ;
+
+                    closing = (markdown) ?
+                        ")" :
+                        '"></a>' ;
                 } else {
-                    opening = (markdown) ? "[" : '<a href="' + fragment + '">' ;
-                    closing = (markdown) ? "](" + fragment + ")" : '</a>' ;
+                    opening = (markdown) ?
+                        "[" :
+                        '<a href="' + fragment + '">' ;
+
+                    closing = (markdown) ?
+                        "](" + fragment + ")" :
+                        '</a>' ;
                 }
 
                 break;
@@ -628,11 +668,21 @@ var Write = {
                         break;
                     }
 
-                    opening = (markdown) ? "![](" : '<img alt="" src="' ;
-                    closing = (markdown) ? ")" : '">' ;
+                    opening = (markdown) ?
+                        "![](" :
+                        '<img alt="" src="' ;
+
+                    closing = (markdown) ?
+                        ")" :
+                        '">' ;
                 } else {
-                    opening = (markdown) ? "![" : '<img alt="' ;
-                    closing = (markdown) ? "](" + fragment + ")" : '" src="' + fragment + '">' ;
+                    opening = (markdown) ?
+                        "![" :
+                        '<img alt="' ;
+
+                    closing = (markdown) ?
+                        "](" + fragment + ")" :
+                        '" src="' + fragment + '">' ;
                 }
 
                 break;
