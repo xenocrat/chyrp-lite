@@ -446,6 +446,7 @@
                 box-sizing: border-box;
                 display: block;
                 clear: both;
+                font: inherit;
                 font-size: 1.25em;
                 text-align: center;
                 color: #1f1f23;

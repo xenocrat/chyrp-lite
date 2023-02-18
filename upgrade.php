@@ -728,6 +728,7 @@
             button {
                 box-sizing: border-box;
                 display: block;
+                font: inherit;
                 font-size: 1.25em;
                 text-align: center;
                 color: #1f1f23;
