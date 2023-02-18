@@ -112,7 +112,7 @@ var ChyrpLightbox = {
                 "role": "button",
                 "tabindex": "0",
                 "accesskey": "x",
-                "aria-label": '<?php echo __("Close", "lightbox"); ?>'
+                "aria-label": '<?php echo __("Stop displaying this image", "lightbox"); ?>'
             }).css(
                 ChyrpLightbox.styles.bg
             ).on("click", function(e) {
