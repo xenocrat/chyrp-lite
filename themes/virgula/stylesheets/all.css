@@ -396,8 +396,10 @@ img {
     padding: 0em;
 }
 section img {
+    box-sizing: border-box;
     display: block;
     max-width: 100%;
+    border: 1px solid #b1b4b6;
 }
 section.photo img {
     width: 100%;
