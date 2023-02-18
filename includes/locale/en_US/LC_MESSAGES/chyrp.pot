@@ -220,6 +220,8 @@ msgstr ""
 #: includes/controller/Ajax.php:191
 #: includes/controller/Ajax.php:226
 #: includes/controller/Ajax.php:243
+#: includes/controller/Ajax.php:267
+#: includes/controller/Ajax.php:273
 #: includes/controller/Main.php:479
 #: includes/controller/Main.php:558
 #: includes/download.php:20
@@ -335,6 +337,7 @@ msgstr ""
 #: includes/controller/Ajax.php:130
 #: includes/controller/Ajax.php:186
 #: includes/controller/Ajax.php:227
+#: includes/controller/Ajax.php:268
 #: includes/controller/Main.php:664
 #: includes/controller/Main.php:783
 #: includes/controller/Main.php:818
@@ -742,6 +745,7 @@ msgid "Upload deleted."
 msgstr ""
 
 #: includes/controller/Admin.php:1859
+#: includes/controller/Ajax.php:274
 msgid "You do not have sufficient privileges to manage uploads."
 msgstr ""
 
@@ -1384,16 +1388,15 @@ msgstr ""
 msgid "Failed to create image thumbnail."
 msgstr ""
 
-#: includes/main.js.php:32
-msgid "Are you sure you want to delete this post?"
-msgstr ""
-
-#: includes/main.js.php:59
-#: includes/main.js.php:98
+#: includes/main.js.php:26
 msgid "Oops! Something went wrong on this web page."
 msgstr ""
 
-#: includes/main.js.php:73
+#: includes/main.js.php:35
+msgid "Are you sure you want to delete this post?"
+msgstr ""
+
+#: includes/main.js.php:76
 msgid "Are you sure you want to delete this page and its child pages?"
 msgstr ""
 

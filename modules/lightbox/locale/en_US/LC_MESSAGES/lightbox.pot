@@ -35,7 +35,7 @@ msgid "A lightbox for your images."
 msgstr ""
 
 #: modules/lightbox/javascript.php:115
-msgid "Close"
+msgid "Stop displaying this image"
 msgstr ""
 
 #: modules/lightbox/lightbox.php:30

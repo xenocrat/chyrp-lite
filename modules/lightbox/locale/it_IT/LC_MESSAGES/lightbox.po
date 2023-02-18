@@ -47,8 +47,8 @@ msgid "A lightbox for your images."
 msgstr "Un tavolo luminoso per le tue immagini."
 
 #: modules/lightbox/javascript.php:115
-msgid "Close"
-msgstr "Chiudi"
+msgid "Stop displaying this image"
+msgstr "Interrompi la visualizzazione di questa immagine"
 
 #: modules/lightbox/lightbox.php:30
 msgid "Black"

@@ -47,8 +47,8 @@ msgid "A lightbox for your images."
 msgstr "为您的图片提供灯箱。"
 
 #: modules/lightbox/javascript.php:115
-msgid "Close"
-msgstr "关闭"
+msgid "Stop displaying this image"
+msgstr "停止显示此图像"
 
 #: modules/lightbox/lightbox.php:30
 msgid "Black"
