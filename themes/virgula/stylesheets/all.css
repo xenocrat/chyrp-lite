@@ -423,8 +423,11 @@ section.photo > a:focus {
 }
 #tag_cloud > a.tag {
     padding: 0rem 0.3rem;
-    border: 1px solid #b1b4b6;
+    background-color: #f3f2f1;
     border-radius: 0.1rem;
+}
+#tag_cloud > a.tag:focus {
+    background-color: #ffdd00;
 }
 .ajax_loading {
     background-size: 10px 10px;
