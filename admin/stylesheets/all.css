@@ -724,7 +724,7 @@ a.next_page,
 a.prev_page {
     box-sizing: border-box;
     display: inline-block;
-    font-family: inherit;
+    font: inherit;
     font-size: 1.25rem;
     color: #1f1f23;
     line-height: 1.5;
