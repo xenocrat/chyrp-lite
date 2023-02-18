@@ -341,9 +341,10 @@ input#search_field {
 button#search_submit {
     position: absolute;
     width: 2rem;
-    top: 0px;
+    height: 100%;
     right: 0px;
-    padding: 0.3rem 0rem;
+    bottom: 0px;
+    padding: 0rem;
     color: transparent;
     background: #ffffff url(../images/search.svg) center no-repeat;
     background-size: 1rem;
@@ -399,7 +400,7 @@ section img {
     box-sizing: border-box;
     display: block;
     max-width: 100%;
-    border: 1px solid #b1b4b6;
+    border: 1px solid #f3f2f1;
 }
 section.photo img {
     width: 100%;
