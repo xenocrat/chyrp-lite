@@ -275,7 +275,8 @@
                 );
 
             $admin = AdminController::current();
-            $admin->display("partials".DIR."uploads_modal",
+            $admin->display(
+                "partials".DIR."uploads_modal",
                 array("uploads" => uploaded_search())
             );
         }
