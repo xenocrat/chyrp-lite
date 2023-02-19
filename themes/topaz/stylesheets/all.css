@@ -772,12 +772,14 @@ article.archive img {
 article > *:first-child,
 section > *:first-child,
 form > *:first-child,
+#sidebar > *:first-child,
 div.standalone > *:first-child {
     margin-top: 0rem;
 }
 article > *:last-child,
 section > *:last-child,
 form > *:last-child,
+#sidebar > *:last-child,
 div.standalone > *:last-child {
     margin-bottom: 0rem;
 }
