@@ -233,7 +233,7 @@
      * Returns an array of matches, if the visitor has the "export_content" privilege.
      */
     function twig_function_uploaded_search($search = "", $filter = array()): array {
-        if (!Visitor::current()->group->can("export_content"))
+        if (!Visitor::current()->group->can("edit_post", "edit_page", true))
             return array();
 
         return uploaded_search($search, $filter);
