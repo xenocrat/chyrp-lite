@@ -430,7 +430,6 @@
             a:visited {
                 color: #1f1f23;
                 text-decoration: underline;
-                text-decoration-thickness: 1px;
             }
             a:focus {
                 outline: #ff7f00 dashed 2px;
@@ -441,7 +440,6 @@
             a:active {
                 color: #1e57ba;
                 text-decoration: underline;
-                text-decoration-thickness: 1px;
             }
             a.big,
             button {
