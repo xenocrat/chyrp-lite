@@ -580,14 +580,12 @@ table.interactive:not(.empty) {
 table thead tr {
     background-color: #4f4f4f;
     color: #ffffff;
-    border: 1px solid #4f4f4f;
 }
 table thead tr th {
     padding: 0.5rem;
     font-weight: bold;
     vertical-align: middle;
     border: 1px solid #cfcfcf;
-    border-top: none;
 }
 table tbody tr td {
     padding: 0.5rem;
