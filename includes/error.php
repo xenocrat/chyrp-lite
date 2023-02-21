@@ -262,7 +262,6 @@
                 font-weight: bold;
                 margin: 1rem 0rem;
                 text-align: center;
-                line-height: 1;
             }
             h2 {
                 font-size: 1.5em;
@@ -342,7 +341,7 @@
                 text-align: center;
                 color: #1f1f23;
                 text-decoration: none;
-                line-height: 1.25;
+                line-height: 1.5;
                 margin: 1rem 0rem;
                 padding: 0.4em 0.6em;
                 background-color: #f2fbff;
