@@ -774,10 +774,12 @@
                 margin: 0rem auto 0rem auto;
                 border-radius: 2rem;
             }
-            .window > *:first-child {
+            .window > *:first-child,
+            form > *:first-child {
                 margin-top: 0rem;
             }
-            .window > *:last-child {
+            .window > *:last-child,
+            form > *:last-child {
                 margin-bottom: 0rem;
             }
             @media (prefers-color-scheme: dark) {
@@ -807,7 +809,7 @@
     </head>
     <body>
         <div class="window">
-            <pre role="status" class="pane"><?php
+            <pre class="pane"><?php
 
     #---------------------------------------------
     # Upgrading Starts

@@ -413,22 +413,26 @@
         </style>
     </head>
     <body>
-        <div class="window">
+        <div role="alert" class="window">
             <h1><?php echo sanitize_html($title); ?></h1>
-            <div role="alert" class="message">
-                <?php echo sanitize_html($body); ?>
-            <?php if (!empty($backtrace) and DEBUG): ?>
-                <h3><?php echo __("Backtrace"); ?></h3>
-                <ol class="backtrace">
-                <?php foreach ($backtrace as $trace): ?>
-                    <li><code><?php echo _f("%s on line %d", array($trace["file"], (int) $trace["line"])); ?></code></li>
-                <?php endforeach; ?>
-                </ol>
-            <?php endif; ?>
-            <?php if (!logged_in() and ADMIN and $code == 403): ?>
-                <a href="<?php echo $chyrp_url.'/admin/?action=login'; ?>" class="big login"><?php echo __("Log in"); ?></a>
-            <?php endif; ?>
-            </div>
+            <?php echo sanitize_html($body); ?>
+    <?php if (!empty($backtrace) and DEBUG): ?>
+            <h3><?php echo __("Backtrace"); ?></h3>
+            <ol class="backtrace">
+            <?php foreach ($backtrace as $trace): ?>
+                <li>
+                    <code>
+                        <?php echo _f("%s on line %d", array($trace["file"], (int) $trace["line"])); ?>
+                    </code>
+                </li>
+            <?php endforeach; ?>
+            </ol>
+    <?php endif; ?>
+    <?php if (!logged_in() and ADMIN and $code == 403): ?>
+            <a class="big" href="<?php echo $chyrp_url.'/admin/?action=login'; ?>">
+                <?php echo __("Log in"); ?>
+            </a>
+    <?php endif; ?>
         </div>
     </body>
 </html>
