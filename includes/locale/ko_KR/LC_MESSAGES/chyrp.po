@@ -1,0 +1,1517 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ko_KR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: includes/class/Config.php:18
+msgid "Could not read the configuration file."
+msgstr "구성 파일을 읽을 수 없습니다."
+
+#: includes/class/Config.php:40
+msgid "Requested configuration setting not found."
+msgstr "요청한 구성 사항을 찾을 수 없습니다."
+
+#: includes/class/Model.php:492
+msgid "Edit"
+msgstr "편집"
+
+#: includes/class/Model.php:522
+msgid "Delete"
+msgstr "삭제"
+
+#: includes/class/Paginator.php:189
+msgid "Next &rarr;"
+msgstr "다음 &rarr;"
+
+#: includes/class/Paginator.php:219
+msgid "&larr; Previous"
+msgstr "&larr; 이전"
+
+#: includes/class/Paginator.php:247
+msgid "Final &rarr;"
+msgstr "마지막 &rarr;"
+
+#: includes/class/Paginator.php:275
+msgid "&larr; First"
+msgstr "&larr; 처음"
+
+#: includes/class/Query.php:112
+msgid "PDO failed to execute the prepared statement."
+msgstr "PDO가 준비된 명령문을 실행하지 못했습니다."
+
+#: includes/class/Query.php:186
+msgid "Query String"
+msgstr "쿼리문"
+
+#: includes/class/Query.php:188
+msgid "Parameters"
+msgstr "파라미터"
+
+#: includes/class/Query.php:192 includes/class/SQL.php:135 install.php:673
+#, php-format
+msgid "Database error: %s"
+msgstr "데이터베이스 오류: %s"
+
+#: includes/class/Route.php:45
+msgid "Route was initiated with an invalid Controller."
+msgstr "경로가 잘못된 컨트롤러로 시작되었습니다."
+
+#: includes/class/Route.php:111 includes/controller/Admin.php:604
+#: includes/controller/Admin.php:611 includes/controller/Admin.php:721
+#: includes/controller/Admin.php:728 includes/controller/Admin.php:945
+#: includes/controller/Admin.php:954 includes/controller/Admin.php:961
+#: includes/controller/Admin.php:968 includes/controller/Admin.php:980
+#: includes/controller/Admin.php:987 includes/controller/Admin.php:994
+#: includes/controller/Admin.php:1101 includes/controller/Admin.php:1115
+#: includes/controller/Admin.php:1134 includes/controller/Admin.php:1152
+#: includes/controller/Admin.php:1159 includes/controller/Admin.php:1166
+#: includes/controller/Admin.php:1415 includes/controller/Admin.php:1428
+#: includes/controller/Admin.php:1505 includes/controller/Admin.php:1521
+#: includes/controller/Admin.php:1640 includes/controller/Admin.php:1663
+#: includes/controller/Admin.php:1684 includes/controller/Admin.php:2674
+#: includes/controller/Admin.php:2741 includes/controller/Admin.php:2876
+#: includes/controller/Admin.php:2883 includes/controller/Admin.php:2890
+#: includes/controller/Admin.php:2897 includes/controller/Admin.php:2904
+#: includes/controller/Admin.php:3175 includes/controller/Ajax.php:34
+#: includes/controller/Ajax.php:249 includes/download.php:13
+#: includes/download.php:20 includes/error.php:163 includes/helpers.php:1811
+#: includes/helpers.php:1818 includes/helpers.php:1825
+#: includes/helpers.php:1838 includes/helpers.php:1847
+#: includes/helpers.php:1857 includes/helpers.php:1864
+#: includes/helpers.php:2362 includes/helpers.php:2374
+#: includes/helpers.php:2380 includes/helpers.php:2386
+#: includes/helpers.php:2423 includes/helpers.php:2429
+#: includes/helpers.php:2435 includes/helpers.php:2550
+#: includes/helpers.php:2556 includes/helpers.php:2562
+#: includes/helpers.php:2568 includes/helpers.php:2573
+#: includes/helpers.php:2578 includes/helpers.php:2583
+#: includes/helpers.php:2590 includes/thumbnail.php:16
+#: includes/thumbnail.php:23 includes/thumbnail.php:48
+#: includes/thumbnail.php:214 includes/thumbnail.php:261 install.php:926
+#: upgrade.php:190 upgrade.php:206 upgrade.php:222 upgrade.php:238
+#: upgrade.php:254 upgrade.php:274 upgrade.php:318 upgrade.php:334
+#: upgrade.php:354 upgrade.php:370 upgrade.php:386 upgrade.php:402
+#: upgrade.php:422 upgrade.php:438
+msgid "Error"
+msgstr "오류"
+
+#: includes/class/Route.php:112
+msgid "Invalid action."
+msgstr "올바르지 않은 액션입니다."
+
+#: includes/class/Route.php:124 includes/controller/Admin.php:168
+#: includes/controller/Admin.php:194 includes/controller/Admin.php:245
+#: includes/controller/Admin.php:251 includes/controller/Admin.php:302
+#: includes/controller/Admin.php:333 includes/controller/Admin.php:360
+#: includes/controller/Admin.php:403 includes/controller/Admin.php:420
+#: includes/controller/Admin.php:444 includes/controller/Admin.php:463
+#: includes/controller/Admin.php:575 includes/controller/Admin.php:592
+#: includes/controller/Admin.php:598 includes/controller/Admin.php:655
+#: includes/controller/Admin.php:699 includes/controller/Admin.php:705
+#: includes/controller/Admin.php:775 includes/controller/Admin.php:807
+#: includes/controller/Admin.php:813 includes/controller/Admin.php:866
+#: includes/controller/Admin.php:906 includes/controller/Admin.php:933
+#: includes/controller/Admin.php:939 includes/controller/Admin.php:1042
+#: includes/controller/Admin.php:1079 includes/controller/Admin.php:1095
+#: includes/controller/Admin.php:1212 includes/controller/Admin.php:1252
+#: includes/controller/Admin.php:1258 includes/controller/Admin.php:1343
+#: includes/controller/Admin.php:1386 includes/controller/Admin.php:1403
+#: includes/controller/Admin.php:1409 includes/controller/Admin.php:1451
+#: includes/controller/Admin.php:1486 includes/controller/Admin.php:1492
+#: includes/controller/Admin.php:1549 includes/controller/Admin.php:1595
+#: includes/controller/Admin.php:1601 includes/controller/Admin.php:1723
+#: includes/controller/Admin.php:1772 includes/controller/Admin.php:1825
+#: includes/controller/Admin.php:1831 includes/controller/Admin.php:1867
+#: includes/controller/Admin.php:1902 includes/controller/Admin.php:1913
+#: includes/controller/Admin.php:2235 includes/controller/Admin.php:2246
+#: includes/controller/Admin.php:2471 includes/controller/Admin.php:2565
+#: includes/controller/Admin.php:2608 includes/controller/Admin.php:2649
+#: includes/controller/Admin.php:2655 includes/controller/Admin.php:2716
+#: includes/controller/Admin.php:2722 includes/controller/Admin.php:2773
+#: includes/controller/Admin.php:2779 includes/controller/Admin.php:2814
+#: includes/controller/Admin.php:2832 includes/controller/Admin.php:2852
+#: includes/controller/Admin.php:2870 includes/controller/Admin.php:2943
+#: includes/controller/Admin.php:2973 includes/controller/Admin.php:3020
+#: includes/controller/Admin.php:3035 includes/controller/Admin.php:3085
+#: includes/controller/Admin.php:3099 includes/controller/Ajax.php:55
+#: includes/controller/Ajax.php:78 includes/controller/Ajax.php:93
+#: includes/controller/Ajax.php:99 includes/controller/Ajax.php:129
+#: includes/controller/Ajax.php:135 includes/controller/Ajax.php:185
+#: includes/controller/Ajax.php:191 includes/controller/Ajax.php:226
+#: includes/controller/Ajax.php:243 includes/controller/Main.php:477
+#: includes/controller/Main.php:556 includes/download.php:27
+#: includes/helpers.php:2368 includes/thumbnail.php:30
+msgid "Access Denied"
+msgstr "접근 불가"
+
+#: includes/class/Route.php:125 includes/download.php:28
+#: includes/thumbnail.php:31
+msgid "You are not allowed to view this site."
+msgstr "사이트를 볼 수 없습니다."
+
+#: includes/class/SQL.php:108
+msgid "PDO driver is unavailable for this database."
+msgstr "데이터베이스에 PDO 드라이버를 사용할 수 없습니다."
+
+#: includes/class/Update.php:68
+#, php-format
+msgid "Chyrp Lite &#8220;%s&#8221; is available."
+msgstr "Chyrp Live '%s' 이(가) 사용 가능합니다."
+
+#: includes/class/Update.php:70 includes/class/Update.php:82
+msgid "Go to GitHub &rarr;"
+msgstr "GitHub으로 가기 &rarr;"
+
+#: includes/class/Update.php:80
+msgid "Unable to check for new Chyrp Lite versions."
+msgstr "새로운 Chyrp Lite 버전을 확인할 수 없습니다."
+
+#: includes/common.php:286 includes/common.php:294
+msgid "Service Unavailable"
+msgstr "서비스 불가"
+
+#: includes/common.php:287
+msgid "This resource is temporarily unable to serve your request."
+msgstr "자원이 일시적으로 요청을 처리할 수 없습니다."
+
+#: includes/common.php:295
+msgid "This resource cannot respond because it is not configured."
+msgstr "자원이 구성되지 않았기 때문에 응답할 수 없습니다."
+
+#: includes/controller/Admin.php:169
+msgid "You do not have sufficient privileges to view this area."
+msgstr "영역을 볼 수 있는 충분한 권한이 없습니다."
+
+#: includes/controller/Admin.php:195 includes/controller/Admin.php:246
+#: includes/controller/Ajax.php:136 includes/lib/XMLRPC.php:293
+msgid "You do not have sufficient privileges to add posts."
+msgstr "게시물을 추가할 수 있는 충분한 권한이 없습니다."
+
+#: includes/controller/Admin.php:202
+msgid "You must enable at least one feather in order to write a post."
+msgstr "게시물을 작성하려면 하나 이상의 깃털을 활성화해야 합니다."
+
+#: includes/controller/Admin.php:216 includes/controller/Admin.php:257
+#: includes/controller/Admin.php:354 includes/controller/Admin.php:438
+#: includes/controller/Admin.php:737 includes/controller/Admin.php:831
+#: includes/controller/Admin.php:1012 includes/controller/Admin.php:1124
+#: includes/controller/Admin.php:1182 includes/controller/Admin.php:1276
+#: includes/controller/Admin.php:1530 includes/controller/Admin.php:1564
+#: includes/controller/Admin.php:1619 includes/controller/Admin.php:2681
+#: includes/controller/Admin.php:2748 includes/controller/Ajax.php:72
+#: includes/controller/Ajax.php:114 includes/download.php:36
+#: includes/helpers.php:135 includes/thumbnail.php:42
+msgid "Not Found"
+msgstr "찾을 수 없음"
+
+#: includes/controller/Admin.php:217 includes/controller/Admin.php:258
+msgid "Feather not found."
+msgstr "깃털을 찾을 수 없습니다."
+
+#: includes/controller/Admin.php:252 includes/controller/Admin.php:334
+#: includes/controller/Admin.php:421 includes/controller/Admin.php:599
+#: includes/controller/Admin.php:706 includes/controller/Admin.php:814
+#: includes/controller/Admin.php:940 includes/controller/Admin.php:1080
+#: includes/controller/Admin.php:1259 includes/controller/Admin.php:1410
+#: includes/controller/Admin.php:1493 includes/controller/Admin.php:1602
+#: includes/controller/Admin.php:1832 includes/controller/Admin.php:1914
+#: includes/controller/Admin.php:2247 includes/controller/Admin.php:2656
+#: includes/controller/Admin.php:2723 includes/controller/Admin.php:2780
+#: includes/controller/Admin.php:2833 includes/controller/Admin.php:2871
+#: includes/controller/Admin.php:2974 includes/controller/Admin.php:3036
+#: includes/controller/Admin.php:3100 includes/controller/Ajax.php:56
+#: includes/controller/Ajax.php:100 includes/controller/Ajax.php:130
+#: includes/controller/Ajax.php:186 includes/controller/Ajax.php:227
+#: includes/controller/Main.php:662 includes/controller/Main.php:781
+#: includes/controller/Main.php:816 includes/controller/Main.php:898
+#: includes/controller/Main.php:987 includes/controller/Main.php:1056
+#: includes/controller/Main.php:1063
+msgid "Invalid authentication token."
+msgstr "잘못된 인증 토큰입니다."
+
+#: includes/controller/Admin.php:270
+msgid "Post created!"
+msgstr "게시물이 생성되었습니다."
+
+#: includes/controller/Admin.php:270 includes/controller/Admin.php:373
+#: includes/controller/Admin.php:1802
+msgid "View post &rarr;"
+msgstr "게시물 보기 &rarr;"
+
+#: includes/controller/Admin.php:284 includes/controller/Admin.php:342
+#: includes/controller/Admin.php:385 includes/controller/Admin.php:426
+#: includes/controller/Admin.php:661 includes/controller/Admin.php:714
+#: includes/controller/Admin.php:781 includes/controller/Admin.php:819
+#: includes/controller/Admin.php:1048 includes/controller/Admin.php:1085
+#: includes/controller/Admin.php:1218 includes/controller/Admin.php:1264
+#: includes/controller/Admin.php:1457 includes/controller/Admin.php:1498
+#: includes/controller/Admin.php:1555 includes/controller/Admin.php:1607
+#: includes/controller/Ajax.php:61 includes/controller/Ajax.php:105
+msgid "No ID Specified"
+msgstr "지정된 ID 없음"
+
+#: includes/controller/Admin.php:285
+msgid "An ID is required to edit a post."
+msgstr "게시물을 수정하기 위한 권한이 필요합니다."
+
+#: includes/controller/Admin.php:296 includes/controller/Admin.php:355
+#: includes/controller/Admin.php:397 includes/controller/Admin.php:439
+#: includes/controller/Ajax.php:73 includes/lib/XMLRPC.php:258
+#: includes/lib/XMLRPC.php:384 includes/lib/XMLRPC.php:446
+msgid "Post not found."
+msgstr "게시물을 찾을 수 없습니다."
+
+#: includes/controller/Admin.php:303 includes/controller/Admin.php:361
+#: includes/lib/XMLRPC.php:264 includes/lib/XMLRPC.php:390
+msgid "You do not have sufficient privileges to edit this post."
+msgstr "게시물을 편집할 수 있는 권한이 없습니다."
+
+#: includes/controller/Admin.php:343
+msgid "An ID is required to update a post."
+msgstr "게시물을 업데이트하기 위한 권한이 필요합니다."
+
+#: includes/controller/Admin.php:373
+msgid "Post updated."
+msgstr "게시물이 업데이트되었습니다."
+
+#: includes/controller/Admin.php:386 includes/controller/Admin.php:427
+#: includes/controller/Ajax.php:62
+msgid "An ID is required to delete a post."
+msgstr "게시물을 삭제하기 위한 권한이 필요합니다."
+
+#: includes/controller/Admin.php:404 includes/controller/Admin.php:445
+#: includes/controller/Ajax.php:79 includes/lib/XMLRPC.php:452
+msgid "You do not have sufficient privileges to delete this post."
+msgstr "게시물을 삭제할 권한이 없습니다."
+
+#: includes/controller/Admin.php:451 includes/controller/Ajax.php:83
+msgid "Post deleted."
+msgstr "게시물이 삭제되었습니다."
+
+#: includes/controller/Admin.php:464
+msgid "You do not have sufficient privileges to manage any posts."
+msgstr "게시물을 관리할 수 있는 충분한 권한이 없습니다."
+
+#: includes/controller/Admin.php:576 includes/controller/Admin.php:593
+#: includes/controller/Ajax.php:192
+msgid "You do not have sufficient privileges to add pages."
+msgstr "페이지를 추가할 수 있는 충분한 권한이 없습니다."
+
+#: includes/controller/Admin.php:605 includes/controller/Admin.php:722
+msgid "Title cannot be blank."
+msgstr "제목은 비워둘 수 없습니다."
+
+#: includes/controller/Admin.php:612 includes/controller/Admin.php:729
+msgid "Body cannot be blank."
+msgstr "내용은 비워둘 수 없습니다."
+
+#: includes/controller/Admin.php:643
+msgid "Page created!"
+msgstr "페이지가 생성되었습니다."
+
+#: includes/controller/Admin.php:643 includes/controller/Admin.php:763
+#: includes/controller/Admin.php:1809 includes/controller/Admin.php:3125
+msgid "View page &rarr;"
+msgstr "페이지 보기 &rarr;"
+
+#: includes/controller/Admin.php:656
+msgid "You do not have sufficient privileges to edit this page."
+msgstr "페이지를 편집할 수 있는 충분한 권한이 없습니다."
+
+#: includes/controller/Admin.php:662 includes/controller/Admin.php:715
+msgid "An ID is required to edit a page."
+msgstr "페이지를 수정하기 위한 권한이 필요합니다."
+
+#: includes/controller/Admin.php:673 includes/controller/Admin.php:738
+#: includes/controller/Admin.php:790 includes/controller/Admin.php:832
+#: includes/controller/Ajax.php:115
+msgid "Page not found."
+msgstr "페이지를 찾을 수 없습니다."
+
+#: includes/controller/Admin.php:700
+msgid "You do not have sufficient privileges to edit pages."
+msgstr "페이지를 편집할 수 있는 충분한 권한이 없습니다."
+
+#: includes/controller/Admin.php:763
+msgid "Page updated."
+msgstr "페이지가 업데이트되었습니다."
+
+#: includes/controller/Admin.php:776 includes/controller/Admin.php:808
+#: includes/controller/Ajax.php:94
+msgid "You do not have sufficient privileges to delete pages."
+msgstr "페이지를 삭제할 권한이 없습니다."
+
+#: includes/controller/Admin.php:782 includes/controller/Admin.php:820
+#: includes/controller/Ajax.php:106
+msgid "An ID is required to delete a page."
+msgstr "페이지를 삭제하기 위한 권한이 필요합니다."
+
+#: includes/controller/Admin.php:852 includes/controller/Ajax.php:119
+msgid "Page deleted."
+msgstr "페이지가 삭제되었습니다."
+
+#: includes/controller/Admin.php:867
+msgid "You do not have sufficient privileges to manage pages."
+msgstr "페이지를 관리할 수 있는 충분한 권한이 없습니다."
+
+#: includes/controller/Admin.php:907 includes/controller/Admin.php:934
+msgid "You do not have sufficient privileges to add users."
+msgstr "사용자를 추가할 권한이 없습니다."
+
+#: includes/controller/Admin.php:946 includes/controller/Admin.php:1102
+msgid "Please enter a username for the account."
+msgstr "계정의 사용자명을 입력하세요."
+
+#: includes/controller/Admin.php:955 includes/controller/Admin.php:1116
+#: includes/controller/Main.php:676
+msgid "That username is already in use."
+msgstr "이미 사용 중인 이름입니다."
+
+#: includes/controller/Admin.php:962 includes/controller/Main.php:681
+#: includes/controller/Main.php:1068 install.php:620
+msgid "Passwords cannot be blank."
+msgstr "비밀번호는 비워둘 수 없습니다."
+
+#: includes/controller/Admin.php:969 includes/controller/Admin.php:1135
+#: includes/controller/Main.php:685 includes/controller/Main.php:907
+#: includes/controller/Main.php:1072 install.php:555 install.php:622
+msgid "Passwords do not match."
+msgstr "비밀번호가 일치하지 않습니다."
+
+#: includes/controller/Admin.php:975 includes/controller/Admin.php:1142
+msgid "Please consider setting a stronger password for this user."
+msgstr "보안을 위하여 더욱 강력한 암호를 설정하는 것이 좋습니다."
+
+#: includes/controller/Admin.php:981 includes/controller/Admin.php:1153
+#: includes/controller/Admin.php:2877 includes/controller/Main.php:694
+#: includes/controller/Main.php:920 install.php:625
+msgid "Email address cannot be blank."
+msgstr "이메일 주소는 비워둘 수 없습니다."
+
+#: includes/controller/Admin.php:988 includes/controller/Admin.php:1160
+#: includes/controller/Admin.php:2884 includes/controller/Main.php:698
+#: includes/controller/Main.php:924 install.php:627
+msgid "Invalid email address."
+msgstr "올바르지 않은 이메일 주소입니다."
+
+#: includes/controller/Admin.php:995 includes/controller/Admin.php:1167
+#: includes/controller/Main.php:708 includes/controller/Main.php:929
+msgid "Invalid website URL."
+msgstr "올바르지 않은 사이트 주소입니다."
+
+#: includes/controller/Admin.php:1013 includes/controller/Admin.php:1183
+#: includes/controller/Admin.php:1466 includes/controller/Admin.php:1531
+#: includes/controller/Admin.php:1565 includes/controller/Admin.php:1620
+msgid "Group not found."
+msgstr "그룹을 찾을 수 없습니다."
+
+#: includes/controller/Admin.php:1030
+msgid "User added."
+msgstr "사용자가 추가되었습니다."
+
+#: includes/controller/Admin.php:1043 includes/controller/Admin.php:1096
+msgid "You do not have sufficient privileges to edit users."
+msgstr "사용자를 편집할 수 있는 충분한 권한이 없습니다."
+
+#: includes/controller/Admin.php:1049 includes/controller/Admin.php:1086
+msgid "An ID is required to edit a user."
+msgstr "사용자를 편집하기 위한 권한이 필요합니다."
+
+#: includes/controller/Admin.php:1057 includes/controller/Admin.php:1125
+#: includes/controller/Admin.php:1227 includes/controller/Admin.php:1277
+msgid "User not found."
+msgstr "사용자를 찾을 수 없습니다."
+
+#: includes/controller/Admin.php:1200
+msgid "User updated."
+msgstr "사용자가 업데이트되었습니다."
+
+#: includes/controller/Admin.php:1213 includes/controller/Admin.php:1253
+msgid "You do not have sufficient privileges to delete users."
+msgstr "사용자를 삭제할 권한이 없습니다."
+
+#: includes/controller/Admin.php:1219 includes/controller/Admin.php:1265
+msgid "An ID is required to delete a user."
+msgstr "사용자를 삭제하기 위한 권한이 필요합니다."
+
+#: includes/controller/Admin.php:1233
+msgid "You cannot delete your own account."
+msgstr "자신의 계정을 삭제할 수 없습니다."
+
+#: includes/controller/Admin.php:1288 includes/controller/Admin.php:1310
+#: includes/controller/Admin.php:1630 includes/controller/Admin.php:1655
+#: includes/controller/Admin.php:1676 includes/controller/Admin.php:3046
+#: includes/controller/Admin.php:3055
+msgid "Gone"
+msgstr ""
+
+#: includes/controller/Admin.php:1289
+msgid "New owner for posts does not exist."
+msgstr "게시물의 새 소유자가 없습니다."
+
+#: includes/controller/Admin.php:1311
+msgid "New owner for pages does not exist."
+msgstr "페이지의 새 소유자가 없습니다."
+
+#: includes/controller/Admin.php:1329
+msgid "User deleted."
+msgstr "사용자가 삭제되었습니다."
+
+#: includes/controller/Admin.php:1344
+msgid "You do not have sufficient privileges to manage users."
+msgstr "사용자를 관리할 수 있는 충분한 권한이 없습니다."
+
+#: includes/controller/Admin.php:1387 includes/controller/Admin.php:1404
+msgid "You do not have sufficient privileges to add groups."
+msgstr "그룹을 추가할 권한이 없습니다."
+
+#: includes/controller/Admin.php:1416 includes/controller/Admin.php:1506
+msgid "Please enter a name for the group."
+msgstr "그룹명을 입력하세요."
+
+#: includes/controller/Admin.php:1429 includes/controller/Admin.php:1522
+msgid "That group name is already in use."
+msgstr "이미 사용 중인 이름입니다."
+
+#: includes/controller/Admin.php:1439
+msgid "Group added."
+msgstr "그룹이 추가되었습니다."
+
+#: includes/controller/Admin.php:1452 includes/controller/Admin.php:1487
+msgid "You do not have sufficient privileges to edit groups."
+msgstr "그룹을 편집할 수 있는 권한이 없습니다."
+
+#: includes/controller/Admin.php:1458 includes/controller/Admin.php:1499
+msgid "An ID is required to edit a group."
+msgstr "그룹을 추가하기 위한 권한이 필요합니다."
+
+#: includes/controller/Admin.php:1537
+msgid "Group updated."
+msgstr "그룹이 업데이트되었습니다."
+
+#: includes/controller/Admin.php:1550 includes/controller/Admin.php:1596
+msgid "You do not have sufficient privileges to delete groups."
+msgstr "그룹을 삭제할 권한이 없습니다."
+
+#: includes/controller/Admin.php:1556 includes/controller/Admin.php:1608
+msgid "An ID is required to delete a group."
+msgstr "그룹을 삭제하기 위한 권한이 필요합니다."
+
+#: includes/controller/Admin.php:1570
+msgid "You cannot delete your own group."
+msgstr "자신의 그룹은 삭제할 수 없습니다."
+
+#: includes/controller/Admin.php:1631
+msgid "New member group does not exist."
+msgstr "새 구성원의 그룹이 존재하지 않습니다."
+
+#: includes/controller/Admin.php:1641
+msgid "New member group must be specified."
+msgstr "새 구성원의 그룹을 지정해야 합니다."
+
+#: includes/controller/Admin.php:1656 includes/controller/Admin.php:3047
+msgid "New default group does not exist."
+msgstr "기본 그룹이 존재하지 않습니다."
+
+#: includes/controller/Admin.php:1664
+msgid "New default group must be specified."
+msgstr "기본 그룹을 지정해야 합니다."
+
+#: includes/controller/Admin.php:1677 includes/controller/Admin.php:3056
+msgid "New guest group does not exist."
+msgstr "게스트 그룹이 존재하지 않습니다."
+
+#: includes/controller/Admin.php:1685
+msgid "New guest group must be specified."
+msgstr "게스트 그룹을 지정해야 합니다."
+
+#: includes/controller/Admin.php:1709
+msgid "Group deleted."
+msgstr "그룹이 삭제되었습니다."
+
+#: includes/controller/Admin.php:1724
+msgid "You do not have sufficient privileges to manage groups."
+msgstr "그룹을 관리할 수 있는 권한이 없습니다."
+
+#: includes/controller/Admin.php:1773 includes/controller/Admin.php:1826
+msgid "You do not have sufficient privileges to delete uploads."
+msgstr "그룹을 삭제할 수 있는 권한이 없습니다."
+
+#: includes/controller/Admin.php:1782 includes/controller/Admin.php:1844
+#: includes/download.php:37 includes/thumbnail.php:43
+msgid "File not found."
+msgstr "파일을 찾을 수 없습니다."
+
+#: includes/controller/Admin.php:1800
+msgid "A post is using this upload."
+msgstr "게시물이 이 파일을 사용 중입니다."
+
+#: includes/controller/Admin.php:1807
+msgid "A page is using this upload."
+msgstr "페이지가 이 파일을 사용 중입니다."
+
+#: includes/controller/Admin.php:1850
+msgid "Failed to delete upload."
+msgstr "파일을 삭제하지 못했습니다."
+
+#: includes/controller/Admin.php:1855
+msgid "Upload deleted."
+msgstr "파일이 삭제되었습니다."
+
+#: includes/controller/Admin.php:1868
+msgid "You do not have sufficient privileges to manage uploads."
+msgstr "파일을 관리할 권한이 없습니다."
+
+#: includes/controller/Admin.php:1903
+msgid "You do not have sufficient privileges to export content."
+msgstr "콘텐츠를 내보낼 권한이 없습니다."
+
+#: includes/controller/Admin.php:2213
+msgid "You did not select anything to export."
+msgstr "내보낼 항목을 선택하지 않았습니다."
+
+#: includes/controller/Admin.php:2236
+msgid "You do not have sufficient privileges to import content."
+msgstr "콘텐츠를 가져올 수 있는 권한이 없습니다."
+
+#: includes/controller/Admin.php:2255
+msgid "Posts export file is invalid."
+msgstr "게시물을 내보내기 위한 파일이 유효하지 않습니다."
+
+#: includes/controller/Admin.php:2265
+msgid "Pages export file is invalid."
+msgstr "페이지를 내보내기 위한 파일이 유효하지 않습니다."
+
+#: includes/controller/Admin.php:2278
+msgid "Groups export file is invalid."
+msgstr "그룹을 내보내기 위한 파일이 유효하지 않습니다."
+
+#: includes/controller/Admin.php:2291
+msgid "Users export file is invalid."
+msgstr "사용자를 내보내기 위한 파일이 유효하지 않습니다."
+
+#: includes/controller/Admin.php:2319
+msgid "You did not select anything to import."
+msgstr "가져올 항목을 선택하지 않았습니다."
+
+#: includes/controller/Admin.php:2459
+msgid "Chyrp Lite content successfully imported!"
+msgstr "Chyrp Lite 콘텐츠를 성공적으로 가져왔습니다."
+
+#: includes/controller/Admin.php:2472 includes/controller/Admin.php:2566
+#: includes/controller/Admin.php:2650 includes/controller/Admin.php:2717
+msgid "You do not have sufficient privileges to toggle extensions."
+msgstr "확장 프로그램을 전환할 권한이 없습니다."
+
+#: includes/controller/Admin.php:2609 includes/controller/Admin.php:2774
+#: includes/controller/Admin.php:2815 includes/controller/Admin.php:2853
+#: includes/controller/Admin.php:2944 includes/controller/Admin.php:3021
+#: includes/controller/Admin.php:3086
+msgid "You do not have sufficient privileges to change settings."
+msgstr "설정을 변경할 권한이 없습니다."
+
+#: includes/controller/Admin.php:2614
+msgid "You are currently previewing a theme."
+msgstr "현재 미리 보기 중입니다."
+
+#: includes/controller/Admin.php:2615
+msgid "Stop &rarr;"
+msgstr "멈춤 &rarr;"
+
+#: includes/controller/Admin.php:2661 includes/controller/Admin.php:2728
+msgid "No Extension Specified"
+msgstr "확장 기능이 지정되지 않았습니다"
+
+#: includes/controller/Admin.php:2662
+msgid "You did not specify an extension to enable."
+msgstr "활성화할 확장 기능을 지정하지 않았습니다."
+
+#: includes/controller/Admin.php:2675
+msgid "Extension already enabled."
+msgstr "확장 기능이 이미 활성화되었습니다."
+
+#: includes/controller/Admin.php:2682 includes/controller/Admin.php:2749
+msgid "Extension not found."
+msgstr "확장 기능을 찾을 수 없습니다."
+
+#: includes/controller/Admin.php:2701
+msgid "Extension enabled."
+msgstr "확장 기능이 활성화되었습니다."
+
+#: includes/controller/Admin.php:2729
+msgid "You did not specify an extension to disable."
+msgstr "사용 중지할 확장 기능을 지정하지 않았습니다."
+
+#: includes/controller/Admin.php:2742
+msgid "Extension already disabled."
+msgstr "확장 기능이 이미 사용 중지되었습니다."
+
+#: includes/controller/Admin.php:2761
+msgid "Extension disabled."
+msgstr "확장 기능이 사용 중지되었습니다."
+
+#: includes/controller/Admin.php:2785
+msgid "No Theme Specified"
+msgstr "지정된 테마 없음"
+
+#: includes/controller/Admin.php:2786
+msgid "You did not specify which theme to select."
+msgstr "선택할 테마를 지정하지 않았습니다."
+
+#: includes/controller/Admin.php:2802
+msgid "Theme changed."
+msgstr "테마가 변경되었습니다."
+
+#: includes/controller/Admin.php:2825
+msgid "Preview stopped."
+msgstr "미리 보기가 중지되었습니다."
+
+#: includes/controller/Admin.php:2840
+msgid "Preview started."
+msgstr "미리 보기를 시작합니다."
+
+#: includes/controller/Admin.php:2891 install.php:603
+msgid "Chyrp URL cannot be blank."
+msgstr "Chyrp URL은 비워둘 수 없습니다."
+
+#: includes/controller/Admin.php:2898 install.php:605
+msgid "Invalid Chyrp URL."
+msgstr "올바르지 않은 Chyrp URL입니다."
+
+#: includes/controller/Admin.php:2905
+msgid "Invalid canonical URL."
+msgstr "올바르지 않은 표준 URL입니다."
+
+#: includes/controller/Admin.php:2931 includes/controller/Admin.php:3008
+#: includes/controller/Admin.php:3073 includes/controller/Admin.php:3140
+msgid "Settings updated."
+msgstr "설정이 업데이트되었습니다."
+
+#: includes/controller/Admin.php:3115
+msgid "My Awesome Homepage"
+msgstr "나의 멋진 홈페이지"
+
+#: includes/controller/Admin.php:3116 includes/lib/XMLRPC.php:330
+msgid "Nothing here yet!"
+msgstr "아직 아무것도 없습니다."
+
+#: includes/controller/Admin.php:3124
+msgid "Page created."
+msgstr "페이지가 생성되었습니다."
+
+#: includes/controller/Admin.php:3152 includes/controller/Main.php:809
+msgid "You are already logged in."
+msgstr "이미 로그인했습니다."
+
+#: includes/controller/Admin.php:3176 includes/controller/Ajax.php:35
+#: includes/controller/Ajax.php:250 includes/download.php:21
+#: includes/thumbnail.php:24
+msgid "Missing argument."
+msgstr "인수가 누락되었습니다."
+
+#: includes/controller/Admin.php:3185
+msgid "Help"
+msgstr "도움말"
+
+#: includes/controller/Admin.php:3200
+msgid "Write"
+msgstr "글"
+
+#: includes/controller/Admin.php:3203
+msgid "Manage"
+msgstr "관리"
+
+#: includes/controller/Admin.php:3206
+msgid "Settings"
+msgstr "설정"
+
+#: includes/controller/Admin.php:3209
+msgid "Extend"
+msgstr "확장 기능"
+
+#: includes/controller/Admin.php:3220
+msgid "Page"
+msgstr "페이지"
+
+#: includes/controller/Admin.php:3255
+msgid "Posts"
+msgstr "게시물"
+
+#: includes/controller/Admin.php:3264
+msgid "Pages"
+msgstr "페이지"
+
+#: includes/controller/Admin.php:3273 includes/controller/Admin.php:3318
+msgid "Users"
+msgstr "사용자"
+
+#: includes/controller/Admin.php:3283
+msgid "Groups"
+msgstr "그룹"
+
+#: includes/controller/Admin.php:3292
+msgid "Uploads"
+msgstr "파일"
+
+#: includes/controller/Admin.php:3297
+msgid "Import"
+msgstr "가져오기"
+
+#: includes/controller/Admin.php:3300
+msgid "Export"
+msgstr "내보내기"
+
+#: includes/controller/Admin.php:3316
+msgid "General"
+msgstr "일반"
+
+#: includes/controller/Admin.php:3317
+msgid "Content"
+msgstr "내용"
+
+#: includes/controller/Admin.php:3319
+msgid "Routes"
+msgstr "고유주소"
+
+#: includes/controller/Admin.php:3338
+msgid "Modules"
+msgstr "모듈"
+
+#: includes/controller/Admin.php:3339
+msgid "Feathers"
+msgstr "깃털"
+
+#: includes/controller/Admin.php:3340
+msgid "Themes"
+msgstr "테마"
+
+#: includes/controller/Ajax.php:174 includes/controller/Ajax.php:215
+msgid "Preview"
+msgstr "미리 보기"
+
+#: includes/controller/Ajax.php:244 includes/lib/XMLRPC.php:207
+msgid "You do not have sufficient privileges to upload files."
+msgstr "파일을 업로드할 권한이 없습니다."
+
+#: includes/controller/Ajax.php:260
+msgid "File uploaded."
+msgstr "파일이 업로드되었습니다."
+
+#: includes/controller/Main.php:213
+msgid "Updated posts"
+msgstr "업데이트된 게시물"
+
+#: includes/controller/Main.php:272 includes/controller/Main.php:291
+#: includes/controller/Main.php:310
+#, php-format
+msgid "Archive of %s"
+msgstr "%s 아카이브"
+
+#: includes/controller/Main.php:400
+msgid "Please enter a search term."
+msgstr "검색어를 입력하세요."
+
+#: includes/controller/Main.php:464
+#, php-format
+msgid "Search results for &#8220;%s&#8221;"
+msgstr "e#8220;%s &#8221;에 대한 검색 결과"
+
+#: includes/controller/Main.php:478
+msgid "You do not have sufficient privileges to view drafts."
+msgstr "초안을 볼 수 있는 권한이 없습니다."
+
+#: includes/controller/Main.php:496
+msgid "Drafts"
+msgstr "초안"
+
+#: includes/controller/Main.php:516
+msgid "This post is not published."
+msgstr "아직 공개되지 않은 내용입니다."
+
+#: includes/controller/Main.php:521
+msgid "This post is scheduled to be published."
+msgstr "게시일이 존재하는 내용입니다."
+
+#: includes/controller/Main.php:557
+msgid "You are not allowed to view this page."
+msgstr "페이지를 볼 수 없습니다."
+
+#: includes/controller/Main.php:635
+msgid "There aren't enough posts for random selection."
+msgstr "임의 선택을 위한 게시물이 충분하지 않습니다."
+
+#: includes/controller/Main.php:649
+msgid "This site does not allow registration."
+msgstr "계정 등록이 불가능합니다."
+
+#: includes/controller/Main.php:655
+msgid "You cannot register an account because you are already logged in."
+msgstr "이미 로그인되어 있기 때문에 계정을 등록할 수 없습니다."
+
+#: includes/controller/Main.php:667 install.php:617
+msgid "Please enter a username for your account."
+msgstr "사용자명을 입력하세요."
+
+#: includes/controller/Main.php:689 includes/controller/Main.php:913
+#: includes/controller/Main.php:1076
+msgid "Please consider setting a stronger password for your account."
+msgstr "보안을 위하여 더욱 강력한 암호를 설정하는 것이 좋습니다."
+
+#: includes/controller/Main.php:703
+msgid "Incorrect captcha response."
+msgstr "잘못된 보안 문자 응답입니다."
+
+#: includes/controller/Main.php:731
+msgid "We have emailed you an activation link."
+msgstr "활성화 링크를 이메일로 보냈습니다."
+
+#: includes/controller/Main.php:740 includes/controller/Main.php:794
+msgid "Your account is now active."
+msgstr "계정이 활성화되었습니다."
+
+#: includes/controller/Main.php:749
+msgid "Register"
+msgstr "회원가입"
+
+#: includes/controller/Main.php:760
+msgid "You cannot activate an account because you are already logged in."
+msgstr "이미 로그인되어 있기 때문에 계정을 활성화할 수 없습니다."
+
+#: includes/controller/Main.php:773 includes/controller/Main.php:980
+#: includes/controller/Main.php:1048
+msgid "Please contact the blog administrator for help with your account."
+msgstr "계정에 대한 도움이 필요하면 사이트 관리자에게 문의하세요."
+
+#: includes/controller/Main.php:787
+msgid "Your account has already been activated."
+msgstr "계정이 이미 활성화되었습니다."
+
+#: includes/controller/Main.php:827 includes/lib/XMLRPC.php:499
+msgid "Incorrect username and/or password."
+msgstr "아이디 또는 비밀번호가 일치하지 않습니다."
+
+#: includes/controller/Main.php:837
+msgid "You must activate your account before you log in."
+msgstr "로그인하기 전에 계정을 활성화해야 합니다."
+
+#: includes/controller/Main.php:845
+msgid "Logged in."
+msgstr "로그인되었습니다."
+
+#: includes/controller/Main.php:854 includes/error.php:395
+msgid "Log in"
+msgstr "로그인"
+
+#: includes/controller/Main.php:867
+msgid "You aren't logged in."
+msgstr "로그인할 수 없습니다."
+
+#: includes/controller/Main.php:877
+msgid "Logged out."
+msgstr "로그아웃되었습니다."
+
+#: includes/controller/Main.php:891
+msgid "You must be logged in to access user controls."
+msgstr "사용자 설정을 위하여 로그인해야 합니다."
+
+#: includes/controller/Main.php:952 includes/controller/Main.php:1083
+msgid "Your profile has been updated."
+msgstr "프로필이 업데이트되었습니다."
+
+#: includes/controller/Main.php:961
+msgid "Controls"
+msgstr "사용자 관리"
+
+#: includes/controller/Main.php:974 includes/controller/Main.php:1026
+msgid "You cannot reset your password because you are already logged in."
+msgstr "이미 로그인되어 있으므로 비밀번호를 재설정할 수 없습니다."
+
+#: includes/controller/Main.php:992
+msgid "Please enter your username."
+msgstr "사용자명을 입력하세요."
+
+#: includes/controller/Main.php:1004
+msgid "We have emailed you a password reset link."
+msgstr "비밀번호 재설정 링크를 이메일로 보냈습니다."
+
+#: includes/controller/Main.php:1013
+msgid "Lost password"
+msgstr "비밀번호 분실"
+
+#: includes/controller/Main.php:1038
+msgid "The link has expired. Please try again."
+msgstr "링크가 만료되었습니다. 다시 시도해 주세요."
+
+#: includes/controller/Main.php:1096
+msgid "Reset password"
+msgstr "비밀번호 변경"
+
+#: includes/download.php:14 includes/thumbnail.php:17
+msgid "This resource accepts GET requests only."
+msgstr "자원은 GET 요청만을 수락합니다."
+
+#: includes/error.php:164
+msgid "An unspecified error has occurred."
+msgstr "알 수 없는 오류가 발생했습니다."
+
+#: includes/error.php:387
+msgid "Backtrace"
+msgstr "역추적"
+
+#: includes/error.php:390
+#, php-format
+msgid "%s on line %d"
+msgstr "%s: %d번 줄"
+
+#: includes/helpers.php:21
+msgid "Session cannot be started more than once."
+msgstr "세션은 두 번 이상 시작할 수 없습니다."
+
+#: includes/helpers.php:111
+msgid "Forbidden"
+msgstr "금지"
+
+#: includes/helpers.php:112
+msgid "You do not have permission to access this resource."
+msgstr "자원에 접근할 수 있는 권한이 없습니다."
+
+#: includes/helpers.php:136
+msgid "The requested resource was not found."
+msgstr "요청한 자원을 찾을 수 없습니다."
+
+#: includes/helpers.php:1654 includes/helpers.php:1772
+#: includes/helpers.php:1903 includes/helpers.php:2111
+#, php-format
+msgid "Socket error: %s"
+msgstr "소켓 오류: %s"
+
+#: includes/helpers.php:1812
+msgid "Webmention support is disabled for this site."
+msgstr "사이트에 대한 Webmention 지원이 비활성화되었습니다."
+
+#: includes/helpers.php:1819 includes/lib/XMLRPC.php:66
+msgid "The URL for your page is not valid."
+msgstr "페이지 URL이 올바르지 않습니다."
+
+#: includes/helpers.php:1826 includes/lib/XMLRPC.php:60
+msgid "The URL for our page is not valid."
+msgstr "페이지 URL이 올바르지 않습니다."
+
+#: includes/helpers.php:1839
+msgid "The source and target URLs cannot be the same."
+msgstr "출발지와 목적지 URL은 같을 수 없습니다."
+
+#: includes/helpers.php:1848 includes/lib/XMLRPC.php:74
+msgid "We have not published at that URL."
+msgstr "지정된 URL에 게시하지 않았습니다."
+
+#: includes/helpers.php:1858 includes/lib/XMLRPC.php:83
+msgid "You have not published at that URL."
+msgstr "지정된 URL에 게시하지 않았습니다."
+
+#: includes/helpers.php:1865 includes/lib/XMLRPC.php:120
+msgid "Your page does not link to our page."
+msgstr "페이지가 올바르게 링크되지 않았습니다."
+
+#: includes/helpers.php:2192
+msgid "Please create the uploads directory."
+msgstr "업로드 디렉토리를 생성하십시오."
+
+#: includes/helpers.php:2194
+msgid "Please make the uploads directory writable."
+msgstr "업로드 디렉토리에 쓰기 가능한 권한이 필요합니다."
+
+#: includes/helpers.php:2212
+#, php-format
+msgid "%s module is missing."
+msgstr "%s 모듈이 없습니다."
+
+#: includes/helpers.php:2221
+#, php-format
+msgid "%s module is damaged."
+msgstr "%s 모듈이 손상되었습니다."
+
+#: includes/helpers.php:2235
+#, php-format
+msgid "%s feather is missing."
+msgstr "%s 깃털이 없습니다."
+
+#: includes/helpers.php:2244
+#, php-format
+msgid "%s feather is damaged."
+msgstr "%s 깃털이 손상되었습니다."
+
+#: includes/helpers.php:2312 includes/helpers.php:2333
+#, php-format
+msgid "Execution of %s has been cancelled."
+msgstr "%s 실행이 취소되었습니다."
+
+#: includes/helpers.php:2363
+msgid "Uploaded file is of an unsupported type."
+msgstr "올바르지 않은 파일 유형입니다."
+
+#: includes/helpers.php:2369
+msgid "Only uploaded files are accepted."
+msgstr "업로드한 파일만 허용됩니다."
+
+#: includes/helpers.php:2375 includes/helpers.php:2424
+#: includes/lib/XMLRPC.php:220
+msgid "Upload path does not exist."
+msgstr "업로드 경로가 존재하지 않습니다."
+
+#: includes/helpers.php:2381 includes/helpers.php:2430
+#: includes/lib/XMLRPC.php:226
+msgid "Upload path is not writable."
+msgstr "업로드 경로에 쓰기 가능한 권한이 없습니다."
+
+#: includes/helpers.php:2387 includes/helpers.php:2436
+#: includes/helpers.php:2574 includes/lib/XMLRPC.php:232 upgrade.php:141
+#: upgrade.php:158 upgrade.php:175
+msgid "Failed to write file to disk."
+msgstr "파일을 디스크에 쓰지 못했습니다."
+
+#: includes/helpers.php:2563
+msgid "The uploaded file was only partially uploaded."
+msgstr "파일이 일부만 업로드되었습니다."
+
+#: includes/helpers.php:2569
+msgid "Missing a temporary folder."
+msgstr "임시 폴더가 없습니다."
+
+#: includes/helpers.php:2579
+msgid "File upload was stopped by a PHP extension."
+msgstr "파일 업로드가 PHP 확장자에 의해 중지되었습니다."
+
+#: includes/helpers.php:2584
+#, php-format
+msgid "File upload failed with error %d."
+msgstr "%d 오류로 파일 업로드에 실패했습니다."
+
+#: includes/helpers.php:2887
+#, php-format
+msgid "JSON encoding error: %s"
+msgstr "JSON 인코딩 오류: %s"
+
+#: includes/helpers.php:2912
+#, php-format
+msgid "JSON decoding error: %s"
+msgstr "JSON 디코딩 오류: %s"
+
+#: includes/helpers.php:2994
+msgid "Failed to create Zip archive."
+msgstr "압축 파일을 만들지 못했습니다."
+
+#: includes/helpers.php:3093
+#, php-format
+msgid "Activate your account at %s"
+msgstr "%s에서 계정을 활성화하세요"
+
+#: includes/helpers.php:3094 includes/helpers.php:3129
+#, php-format
+msgid "Hello, %s."
+msgstr "%s님 안녕하세요."
+
+#: includes/helpers.php:3097
+msgid "You are receiving this message because you registered a new account."
+msgstr "새 계정을 등록하셨기 때문에 이 메시지를 받으셨습니다."
+
+#: includes/helpers.php:3100
+msgid "Visit this link to activate your account:"
+msgstr "계정을 활성화하려면 다음 링크를 방문하세요:"
+
+#: includes/helpers.php:3128
+#, php-format
+msgid "Reset your password at %s"
+msgstr "%s에 비밀번호 재설정"
+
+#: includes/helpers.php:3132
+msgid "You are receiving this message because you requested a new password."
+msgstr "새 비밀번호를 요청하셨기 때문에 이 메시지를 받으셨습니다."
+
+#: includes/helpers.php:3135
+msgid "Visit this link to reset your password:"
+msgstr "비밀번호를 변경하려면 다음 링크를 방문하세요:"
+
+#: includes/lib/AtomFeed.php:125 includes/lib/JSONFeed.php:96
+msgid "Guest"
+msgstr "게스트"
+
+#: includes/lib/Leaf.php:330
+#, php-format
+msgid "%s GB"
+msgstr ""
+
+#: includes/lib/Leaf.php:335
+#, php-format
+msgid "%s MB"
+msgstr ""
+
+#: includes/lib/Leaf.php:339
+#, php-format
+msgid "%s KB"
+msgstr ""
+
+#: includes/lib/Leaf.php:476
+msgid "Image source"
+msgstr "이미지 출처"
+
+#: includes/lib/XMLRPC.php:48
+msgid "Pingback support is disabled for this site."
+msgstr "사이트에 대한 핑백 지원이 비활성화되었습니다."
+
+#: includes/lib/XMLRPC.php:54
+msgid "The from and to URLs cannot be the same."
+msgstr "From 및 To URL은 동일할 수 없습니다."
+
+#: includes/lib/XMLRPC.php:93
+msgid "Your page could not be parsed."
+msgstr "페이지를 파싱할 수 없습니다."
+
+#: includes/lib/XMLRPC.php:493
+msgid "XML-RPC support is disabled for this site."
+msgstr "사이트에 대해 XML-RPC 지원이 비활성화되어 있습니다."
+
+#: includes/main.js.php:32
+msgid "Are you sure you want to delete this post?"
+msgstr "게시물을 삭제하시겠습니까?"
+
+#: includes/main.js.php:59 includes/main.js.php:98
+msgid "Oops! Something went wrong on this web page."
+msgstr "이런! 웹 페이지에서 문제가 발생했습니다."
+
+#: includes/main.js.php:73
+msgid "Are you sure you want to delete this page and its child pages?"
+msgstr "페이지와 하위 페이지를 모두 삭제하시겠습니까?"
+
+#: includes/model/Group.php:318
+msgid "Change Settings"
+msgstr "설정 변경"
+
+#: includes/model/Group.php:319
+msgid "Toggle Extensions"
+msgstr "확장 기능 전환"
+
+#: includes/model/Group.php:320
+msgid "View Site"
+msgstr "사이트 보기"
+
+#: includes/model/Group.php:321
+msgid "View Private Posts"
+msgstr "비공개 게시물 보기"
+
+#: includes/model/Group.php:322
+msgid "View Scheduled Posts"
+msgstr "예약된 게시물 보기"
+
+#: includes/model/Group.php:323
+msgid "View Drafts"
+msgstr "초안 보기"
+
+#: includes/model/Group.php:324
+msgid "View Own Drafts"
+msgstr "자신의 초안 보기"
+
+#: includes/model/Group.php:325
+msgid "Add Posts"
+msgstr "게시물 추가"
+
+#: includes/model/Group.php:326
+msgid "Add Drafts"
+msgstr "초안 추가"
+
+#: includes/model/Group.php:327
+msgid "Edit Posts"
+msgstr "게시물 편집"
+
+#: includes/model/Group.php:328
+msgid "Edit Drafts"
+msgstr "초안 편집"
+
+#: includes/model/Group.php:329
+msgid "Edit Own Posts"
+msgstr "자신의 게시물 편집"
+
+#: includes/model/Group.php:330
+msgid "Edit Own Drafts"
+msgstr "자신의 초안 편집"
+
+#: includes/model/Group.php:331
+msgid "Delete Posts"
+msgstr "게시물 삭제"
+
+#: includes/model/Group.php:332
+msgid "Delete Drafts"
+msgstr "초안 삭제"
+
+#: includes/model/Group.php:333
+msgid "Delete Own Posts"
+msgstr "자신의 게시물 삭제"
+
+#: includes/model/Group.php:334
+msgid "Delete Own Drafts"
+msgstr "자신의 초안 삭제"
+
+#: includes/model/Group.php:335
+msgid "View Pages"
+msgstr "페이지 보기"
+
+#: includes/model/Group.php:336
+msgid "Add Pages"
+msgstr "페이지 추가"
+
+#: includes/model/Group.php:337
+msgid "Edit Pages"
+msgstr "페이지 편집"
+
+#: includes/model/Group.php:338
+msgid "Delete Pages"
+msgstr "페이지 삭제"
+
+#: includes/model/Group.php:339
+msgid "Add Users"
+msgstr "사용자 추가"
+
+#: includes/model/Group.php:340
+msgid "Edit Users"
+msgstr "사용자 편집"
+
+#: includes/model/Group.php:341
+msgid "Delete Users"
+msgstr "사용자 삭제"
+
+#: includes/model/Group.php:342
+msgid "Add Groups"
+msgstr "그룹 추가"
+
+#: includes/model/Group.php:343
+msgid "Edit Groups"
+msgstr "그룹 편집"
+
+#: includes/model/Group.php:344
+msgid "Delete Groups"
+msgstr "그룹 삭제"
+
+#: includes/model/Group.php:345
+msgid "Import Content"
+msgstr "내용 가져오기"
+
+#: includes/model/Group.php:346
+msgid "Export Content"
+msgstr "내용 내보내기"
+
+#: includes/thumbnail.php:49
+msgid "Maximum size cannot be zero."
+msgstr "최대 크기는 0일 수 없습니다."
+
+#: includes/thumbnail.php:215 includes/thumbnail.php:262
+msgid "Failed to create image thumbnail."
+msgstr "이미지 섬네일을 만들지 못했습니다."
+
+#: install.php:121
+msgid "PDO is required for database access."
+msgstr "데이터베이스 액세스에 PDO가 필요합니다."
+
+#: install.php:126 upgrade.php:100
+msgid "Please CHMOD or CHOWN the installation directory to make it writable."
+msgstr "설치 디렉토리에 쓰기 가능한 권한을 위하여 CHMOD 또는 CHOWN하십시오."
+
+#: install.php:144 upgrade.php:118
+msgid "Please CHMOD or CHOWN the <em>twig</em> directory to make it writable."
+msgstr "twig 디렉토리에 쓰기 가능한 권한을 위하여 CHMOD 또는 CHOWN하십시오."
+
+#: install.php:217
+msgid "Chyrp Lite Installer"
+msgstr "Chyrp 라이트 설치 도구"
+
+#: install.php:600
+msgid "Database cannot be blank."
+msgstr "데이터베이스는 비워 둘 수 없습니다."
+
+#: install.php:608
+msgid "Please enter a name for your website."
+msgstr "웹사이트의 이름을 입력하세요."
+
+#: install.php:611
+msgid "Time zone cannot be blank."
+msgstr "시간대는 비워둘 수 없습니다."
+
+#: install.php:614
+msgid "Language cannot be blank."
+msgstr "언어 설정은 비워둘 수 없습니다."
+
+#: install.php:633
+msgid "Could not determine the absolute path to the database."
+msgstr "데이터베이스의 절대 경로를 결정할 수 없습니다."
+
+#: install.php:640
+msgid "Please make the database writable by the server."
+msgstr "서버에서 데이터베이스를 쓰기 가능하게 만드십시오."
+
+#: install.php:644
+msgid "Please enter a username and password for the database."
+msgstr "데이터베이스의 사용자명과 암호를 입력하십시오."
+
+#: install.php:927 upgrade.php:191 upgrade.php:207 upgrade.php:223
+#: upgrade.php:239 upgrade.php:255 upgrade.php:275 upgrade.php:319
+#: upgrade.php:335 upgrade.php:355 upgrade.php:371 upgrade.php:387
+#: upgrade.php:403 upgrade.php:423 upgrade.php:439
+msgid "Could not write the configuration file."
+msgstr "구성 파일을 쓸 수 없습니다."
+
+#: install.php:945
+msgid "Database Setup"
+msgstr "데이터베이스 설정"
+
+#: install.php:947
+msgid "Adapter"
+msgstr "어댑터"
+
+#: install.php:961
+msgid "Host"
+msgstr "호스트"
+
+#: install.php:965
+msgid "Port"
+msgstr "포트"
+
+#: install.php:965 install.php:994
+msgid "(optional)"
+msgstr "(선택 사항)"
+
+#: install.php:969 install.php:1034
+msgid "Username"
+msgstr "사용자명"
+
+#: install.php:973 install.php:1038 install.php:1042
+msgid "Password"
+msgstr "비밀번호"
+
+#: install.php:977
+msgid "Database"
+msgstr "데이터베이스"
+
+#: install.php:979
+msgid "(absolute or relative path)"
+msgstr "(상대 경로 또는 절대 경로)"
+
+#: install.php:985
+msgid "Make sure your PostgreSQL database uses UTF-8 encoding."
+msgstr "PostgreSQL 데이터베이스가 UTF-8 인코딩을 사용하는지 확인하십시오."
+
+#: install.php:994
+msgid "Table Prefix"
+msgstr "테이블 접두사"
+
+#: install.php:998
+msgid "Website Setup"
+msgstr "웹사이트 설정"
+
+#: install.php:1000
+msgid "Chyrp URL"
+msgstr ""
+
+#: install.php:1004
+msgid "Site Name"
+msgstr "사이트명"
+
+#: install.php:1005
+msgid "My Awesome Site"
+msgstr "나의 멋진 사이트"
+
+#: install.php:1008
+msgid "Description"
+msgstr "설명"
+
+#: install.php:1012
+msgid "Time Zone"
+msgstr "시간대"
+
+#: install.php:1022
+msgid "Language"
+msgstr "언어"
+
+#: install.php:1032
+msgid "Admin Account"
+msgstr "관리자 계정"
+
+#: install.php:1042
+msgid "(again)"
+msgstr "비밀번호 확인"
+
+#: install.php:1046
+msgid "Email Address"
+msgstr "이메일 주소"
+
+#: install.php:1049
+msgid "Install me!"
+msgstr "설치가 필요합니다."
+
+#: install.php:1052
+msgid "Installation Complete"
+msgstr "설치가 완료되었습니다"
+
+#: install.php:1053 upgrade.php:834
+msgid "What now?"
+msgstr ""
+
+#: install.php:1055
+msgid "Delete <em>install.php</em>, you won't need it anymore."
+msgstr "더 이상 필요하지 않은 경우 <em>install.php</em>를 삭제하세요."
+
+#: install.php:1056
+msgid "Log in to your site and configure things to your liking."
+msgstr "사이트에 로그인하고 원하는 대로 구성하세요."
+
+#: install.php:1058 upgrade.php:840
+msgid "Take me to my site!"
+msgstr "사이트로 이동합니다."
+
+#: upgrade.php:556
+msgid "Chyrp Lite Upgrader"
+msgstr "Chyrp Lite 업그레이드"
+
+#: upgrade.php:823
+msgid "Halt!"
+msgstr "정지!"
+
+#: upgrade.php:824
+msgid "Please take these precautionary measures before you upgrade:"
+msgstr "업그레이드하기 전에 다음 예방 조치를 취하십시오:"
+
+#: upgrade.php:826
+msgid "<strong>Backup your database before proceeding!</strong>"
+msgstr "<strong>진행하기 전에 데이터베이스를 백업하세요.</strong>"
+
+#: upgrade.php:827
+msgid "Tell your users that your site is offline for maintenance."
+msgstr "유지 관리를 위해 사이트가 오프라인 상태임을 사용자에게 알립니다."
+
+#: upgrade.php:830
+msgid "Upgrade me!"
+msgstr "새로운 버전이 있습니다."
+
+#: upgrade.php:833
+msgid "Upgrade Complete"
+msgstr "업그레이드가 완료되었습니다"
+
+#: upgrade.php:836
+msgid "Take action to resolve any errors reported on this page."
+msgstr "이 페이지에 보고된 오류를 해결하기 위한 조치를 취하십시오."
+
+#: upgrade.php:837
+msgid "Run this upgrader again if you need to."
+msgstr "필요한 경우 업그레이드를 다시 실행하십시오."
+
+#: upgrade.php:838
+msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
+msgstr "업그레이드가 완료되면 <em>upgrade.php</em>를 삭제해야 합니다."
