@@ -107,7 +107,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
     font-style: normal;
     font-variant: normal;
-    margin: 1rem 0rem;
+    margin: 0rem 0rem 1rem 0rem;
 }
 h1 {
     font-size: 2em;
@@ -117,14 +117,6 @@ h1 {
 }
 h3, h4, h5, h6 {
     font-size: 1em;
-}
-h1:first-child,
-h2:first-child,
-h3:first-child,
-h4:first-child,
-h5:first-child,
-h6:first-child {
-    margin-top: 0rem;
 }
 sup, sub {
     font-size: 0.5em;
@@ -351,9 +343,6 @@ span.pages {
     margin: 1rem 0rem;
     border-radius: 0.4em;
 }
-#content ul.extend > li:first-of-type {
-    margin-top: 0rem;
-}
 #content ul.extend > li {
     background-color: #efefef;
     border: 1px solid #cfcfcf;
@@ -368,12 +357,6 @@ span.pages {
 #content ul#modules_disabled > li.error  {
     background-color: #ffbd9e;
     border: 1px solid #d9a086;
-}
-li.module p:last-of-type,
-li.feather p:last-of-type,
-li.module p.module_conflicts_message,
-li.module p.module_dependencies_message {
-    margin-bottom: 0rem;
 }
 li.module ol.module_conflicts_list,
 li.module ol.module_dependencies_list {
@@ -518,6 +501,9 @@ textarea.code {
     font-family: "Cousine webfont", monospace;
     font-style: normal;
 }
+form.filters {
+    margin-bottom: 1rem;
+}
 form.split label {
     box-sizing: border-box;
     display: inline-block;
@@ -571,11 +557,7 @@ form.split div.confirmation {
 
 table {
     width: 100%;
-    margin: 0rem 0rem 1rem 0rem;
-}
-table:last-child,
-table.interactive:not(.empty) {
-    margin-bottom: 0rem;
+    margin: 0rem;
 }
 table thead tr {
     background-color: #4f4f4f;
@@ -961,15 +943,10 @@ button.emblem > img {
     top: 2px;
     height: 16px;
 }
-a.emblem.toolbar,
-label.emblem.toolbar,
-button.emblem.toolbar {
+a.emblem.toolbar:not(:first-child),
+label.emblem.toolbar:not(:first-child),
+button.emblem.toolbar:not(:first-child) {
     margin-left: 16px;
-}
-a.emblem.toolbar:first-child,
-label.emblem.toolbar:first-child,
-button.emblem.toolbar:first-child {
-    margin-left: 0rem;
 }
 a.emblem:focus,
 label.emblem:focus,
