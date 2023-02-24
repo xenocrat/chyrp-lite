@@ -74,6 +74,7 @@
                 new \Twig\TwigFilter("inspect",             "twig_filter_inspect"),
                 new \Twig\TwigFilter("selected",            "twig_filter_selected"),
                 new \Twig\TwigFilter("checked",             "twig_filter_checked"),
+                new \Twig\TwigFilter("disabled",            "twig_filter_disabled"),
                 new \Twig\TwigFilter("download",            "twig_filter_download"),
                 new \Twig\TwigFilter("thumbnail",           "twig_filter_thumbnail")
             );
@@ -404,6 +405,25 @@
                 ($test == $value)
             )
                 return " selected";
+        }
+
+        return "";
+    }
+
+    /**
+     * Function: twig_filter_disabled
+     * Returns a HTML @disabled@ attribute if the test matches any of the supplied arguments.
+     */
+    function twig_filter_disabled($test): string {
+        $try = func_get_args();
+        array_shift($try);
+
+        foreach ($try as $value) {
+            if (
+                (is_array($value) and in_array($test, $value)) or
+                ($test == $value)
+            )
+                return " disabled";
         }
 
         return "";
