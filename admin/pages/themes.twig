@@ -16,20 +16,18 @@
 <p class="theme_description">
 {{ theme.description }}{# translation is done in the controller #}
 </p>
-{% if safename != site.theme %}
 <div class="controls">
 <form action="{{ url('change_theme') }}" method="post" accept-charset="UTF-8">
 <input type="hidden" name="theme" value="{{ safename }}">
 <input type="hidden" name="hash" value="{{ authenticate() }}">
-<button name="change" value="undecidedly">
+<button name="change" value="undecidedly"{{ safename | disabled(site.theme) }}>
 <img src="{{ site.chyrp_url }}/admin/images/icons/view.svg" alt="">{{ "Preview" | translate }}
 </button>
-<button name="change" value="indubitably" type="submit">
+<button name="change" value="indubitably" type="submit"{{ safename | disabled(site.theme) }}>
 <img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Select" | translate }}
 </button>
 </form>
 </div>
-{% endif %}
 </li>
 {% endfor %}
 </ul>

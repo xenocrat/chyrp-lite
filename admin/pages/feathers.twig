@@ -4,6 +4,7 @@
 
 {% block content %}
 <h2>{{ "Feathers" | translate }}</h2>
+{% if enabled_feathers is not empty %}
 <ul id="feathers_enabled" class="extend feathers">
 <h5>{{ "Enabled" | translate }}</h5>
 {% for safename, feather in enabled_feathers %}
@@ -35,6 +36,8 @@
 </li>
 {% endfor %}
 </ul>
+{% endif %}
+{% if disabled_feathers is not empty %}
 <ul id="feathers_disabled" class="extend feathers">
 <h5>{{ "Disabled" | translate }}</h5>
 {% for safename, feather in disabled_feathers %}
@@ -61,4 +64,5 @@
 </li>
 {% endfor %}
 </ul>
+{% endif %}
 {% endblock %}

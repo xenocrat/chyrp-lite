@@ -330,9 +330,6 @@ span.pages {
     box-sizing: border-box;
     width: 100%;
 }
-#content ul.extend > h5:only-child {
-    display: none;
-}
 #content ul.extend > li {
     box-sizing: border-box;
     display: block;
@@ -388,9 +385,6 @@ ul#modules_disabled > li.error div.controls {
 #content ul.extend li a.emblem img,
 #content ul.extend > li > h3 a {
     text-decoration: none;
-}
-#content ul.extend > li > *:last-child {
-    margin-bottom: 0rem;
 }
 
 /* Group: Forms */
@@ -768,7 +762,6 @@ button[disabled],
 button.disabled {
     background-color: #efefef;
     border-color: #cfcfcf;
-    color: #7f7f7f;
     cursor: not-allowed;
 }
 button[disabled]:hover,
