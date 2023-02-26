@@ -227,6 +227,7 @@ a:active {
     gap: 0rem;
     margin: 4rem 4rem 0rem 4rem;
     overflow: hidden;
+    border-bottom: 1px solid #efefef;
 }
 #sub_nav li {
     display: block;
