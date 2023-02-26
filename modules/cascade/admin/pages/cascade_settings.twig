@@ -7,8 +7,8 @@
 <form id="cascade_settings" class="split" action="{{ url('cascade_settings') }}" method="post" accept-charset="UTF-8">
 <fieldset role="presentation">
 <p>
-<label for="cascade_auto">{{ "Automatic" | translate("cascade") }}</label>
-<input type="checkbox" class="checkbox" name="auto" id="cascade_auto"{{ site.module_cascade.ajax_scroll_auto | checked }}>
+<label for="cascade_auto">{{ "Automatic" | translate("cascade") }}
+</label><input type="checkbox" class="checkbox" name="auto" id="cascade_auto"{{ site.module_cascade.ajax_scroll_auto | checked }}>
 <small>{{ "Load more posts when the visitor scrolls to the bottom of the page?" | translate("cascade") }}</small>
 </p>
 <p class="buttons">

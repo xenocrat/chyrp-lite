@@ -7,21 +7,21 @@
 <form id="lightbox_settings" class="split" action="{{ url('lightbox_settings') }}" method="post" accept-charset="UTF-8">
 <fieldset role="presentation">
 <p>
-<label for="lightbox_background">{{ "Background" | translate("lightbox") }}</label>
-<select name="background" id="lightbox_background">
+<label for="lightbox_background">{{ "Background" | translate("lightbox") }}
+</label><select name="background" id="lightbox_background">
 {% for key, val in lightbox_background %}
 <option value="{{ key }}"{{ key | selected(site.module_lightbox['background']) }}>{{ val }}</option>
 {% endfor %}
 </select>
 </p>
 <p>
-<label for="lightbox_spacing">{{ "Edge Spacing" | translate("lightbox") }}</label>
-<input class="text digits" type="number" name="spacing" value="{{ site.module_lightbox['spacing'] | fix(true) }}" size="2" id="lightbox_spacing">
+<label for="lightbox_spacing">{{ "Edge Spacing" | translate("lightbox") }}
+</label><input class="text digits" type="number" name="spacing" value="{{ site.module_lightbox['spacing'] | fix(true) }}" size="2" id="lightbox_spacing">
 <span class="sub">{{ "(pixels)" | translate("lightbox") }}</span>
 </p>
 <p>
-<label for="lightbox_protect">{{ "Protect Images" | translate("lightbox") }}</label>
-<input type="checkbox" class="checkbox" name="protect" id="lightbox_protect"{{ site.module_lightbox['protect'] | checked }}>
+<label for="lightbox_protect">{{ "Protect Images" | translate("lightbox") }}
+</label><input type="checkbox" class="checkbox" name="protect" id="lightbox_protect"{{ site.module_lightbox['protect'] | checked }}>
 <small>{{ "Prevent visitors from saving images?" | translate("lightbox") }}</small>
 </p>
 <p class="buttons">

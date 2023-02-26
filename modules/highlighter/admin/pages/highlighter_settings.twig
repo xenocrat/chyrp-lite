@@ -7,8 +7,8 @@
 <form id="highlighter_settings" class="split" action="{{ url('highlighter_settings') }}" method="post" accept-charset="UTF-8">
 <fieldset role="presentation">
 <p>
-<label for="highlighter_stylesheet">{{ "Stylesheet" | translate("highlighter") }}</label>
-<select name="stylesheet" id="highlighter_stylesheet">
+<label for="highlighter_stylesheet">{{ "Stylesheet" | translate("highlighter") }}
+</label><select name="stylesheet" id="highlighter_stylesheet">
 {% for filename in highlighter_stylesheets %}
 {% set option_selected = filename | selected(site.module_highlighter.stylesheet) %}
 <option value="{{ filename | fix(true) }}"{{ option_selected }}>{{ filename | preg_replace("/(.+?)(\\.min)?\\.css$/i", "$1") }}</option>

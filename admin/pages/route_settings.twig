@@ -7,16 +7,16 @@
 <form id="route_settings" class="split" action="{{ url('route_settings') }}" method="post" accept-charset="UTF-8">
 <fieldset role="presentation">
 <p>
-<label for="clean_urls">{{ "Clean URLs" | translate }}</label>
-<input type="checkbox" name="clean_urls" id="clean_urls"{{ site.clean_urls | checked }}>
+<label for="clean_urls">{{ "Clean URLs" | translate }}
+</label><input type="checkbox" name="clean_urls" id="clean_urls"{{ site.clean_urls | checked }}>
 <a href="https://chyrplite.net/wiki/Supporting-Clean-URLs.html" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
 <small>
 {{ "Gives your site prettier URLs." | translate }} {{ "Requires URL rewrite support." | translate }}
 </small>
 </p>
 <p>
-<label for="enable_homepage">{{ "Homepage" | translate }}</label>
-<input class="checkbox" type="checkbox" name="enable_homepage" id="enable_homepage"{{ site.enable_homepage | checked }}>
+<label for="enable_homepage">{{ "Homepage" | translate }}
+</label><input class="checkbox" type="checkbox" name="enable_homepage" id="enable_homepage"{{ site.enable_homepage | checked }}>
 <small>
 {{ "Make the default route a homepage instead of the blog index." | translate }}
 </small>
@@ -25,8 +25,7 @@
 <label for="post_url">
 {{ "Post View URL" | translate }}
 <span class="sub">{{ "(requires clean URLs)" | translate }}</span>
-</label>
-<input class="text" type="text" name="post_url" value="{{ site.post_url | fix(true, true) }}" size="30" id="post_url">
+</label><input class="text" type="text" name="post_url" value="{{ site.post_url | fix(true, true) }}" size="30" id="post_url">
 </p>
 <div class="small">
 <strong>{{ "Syntax:" | translate }}</strong>

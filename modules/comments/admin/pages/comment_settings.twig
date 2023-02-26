@@ -7,13 +7,13 @@
 <form id="comment_settings" class="split" action="{{ url('comment_settings') }}" method="post" accept-charset="UTF-8">
 <fieldset role="presentation">
 <p>
-<label for="allowed_comment_html">{{ "Allowed HTML Tags" | translate("comments") }}</label>
-<input class="text code" type="text" name="allowed_comment_html" value="{{ comments_html | fix(true) }}" id="allowed_comment_html">
+<label for="allowed_comment_html">{{ "Allowed HTML Tags" | translate("comments") }}
+</label><input class="text code" type="text" name="allowed_comment_html" value="{{ comments_html | fix(true, true) }}" id="allowed_comment_html">
 <small>{{ "Format: <code>strong, blockquote, em</code>" | translate("comments") }}</small>
 </p>
 <p>
-<label for="default_comment_status">{{ "Default Comment Status" | translate("comments") }}</label>
-<select name="default_comment_status" id="default_comment_status">
+<label for="default_comment_status">{{ "Default Comment Status" | translate("comments") }}
+</label><select name="default_comment_status" id="default_comment_status">
 {% set default_comment_status = site.module_comments.default_comment_status %}
 {% for key, val in comments_status %}
 <option value="{{ key }}"{{ key | selected(default_comment_status) }}>{{ val }}</option>
@@ -21,18 +21,18 @@
 </select>
 </p>
 <p>
-<label for="comments_per_page">{{ "Comments Per Page" | translate("comments") }}</label>
-<input class="text digits" type="number" min="0" name="comments_per_page" value="{{ site.module_comments.comments_per_page | fix(true) }}" id="comments_per_page">
+<label for="comments_per_page">{{ "Comments Per Page" | translate("comments") }}
+</label><input class="text digits" type="number" min="0" name="comments_per_page" value="{{ site.module_comments.comments_per_page | fix(true) }}" id="comments_per_page">
 <small>{{ "Themes decide whether or not to paginate comments." | translate("comments") }}</small>
 </p>
 <p>
-<label for="enable_reload_comments">{{ "Reload Comments" | translate("comments") }}</label>
-<input type="checkbox" class="checkbox" name="enable_reload_comments"  id="enable_reload_comments"{{ site.module_comments.enable_reload_comments | checked }}>
+<label for="enable_reload_comments">{{ "Reload Comments" | translate("comments") }}
+</label><input type="checkbox" class="checkbox" name="enable_reload_comments"  id="enable_reload_comments"{{ site.module_comments.enable_reload_comments | checked }}>
 <small>{{ "Show newly added comments (up to the maximum number per page)." | translate("comments") }}</small>
 </p>
 <p>
-<label for="auto_reload_comments">{{ "Reload interval" | translate("comments") }}</label>
-<input class="text digits" type="number" min="10" max="3600" name="auto_reload_comments" value="{{ site.module_comments.auto_reload_comments | fix(true) }}" id="auto_reload_comments">
+<label for="auto_reload_comments">{{ "Reload interval" | translate("comments") }}
+</label><input class="text digits" type="number" min="10" max="3600" name="auto_reload_comments" value="{{ site.module_comments.auto_reload_comments | fix(true) }}" id="auto_reload_comments">
 <span class="sub">{{ "(seconds)" | translate("comments") }}</span>
 </p>
 <p class="buttons">

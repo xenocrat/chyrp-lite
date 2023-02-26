@@ -7,62 +7,62 @@
 <form id="content_settings" class="split" action="{{ url('content_settings') }}" method="post" accept-charset="utf-8">
 <fieldset role="presentation">
 <p>
-<label for="posts_per_page">{{ "Posts Per Blog Page" | translate }}</label>
-<input class="text digits" type="number" min="0" name="posts_per_page" value="{{ site.posts_per_page | fix(true) }}" size="2" id="posts_per_page">
+<label for="posts_per_page">{{ "Posts Per Blog Page" | translate }}
+</label><input class="text digits" type="number" min="0" name="posts_per_page" value="{{ site.posts_per_page | fix(true) }}" size="2" id="posts_per_page">
 </p>
 <p>
-<label for="feed_items">{{ "Posts in Feed" | translate }}</label>
-<input class="text digits" type="number" min="0" name="feed_items" value="{{ site.feed_items | fix(true) }}" size="2" id="feed_items">
+<label for="feed_items">{{ "Posts in Feed" | translate }}
+</label><input class="text digits" type="number" min="0" name="feed_items" value="{{ site.feed_items | fix(true) }}" size="2" id="feed_items">
 </p>
 <p>
-<label for="admin_per_page">{{ "Items Per Admin Page" | translate }}</label>
-<input class="text digits" type="number" min="0" name="admin_per_page" value="{{ site.admin_per_page | fix(true) }}" size="2" id="admin_per_page">
+<label for="admin_per_page">{{ "Items Per Admin Page" | translate }}
+</label><input class="text digits" type="number" min="0" name="admin_per_page" value="{{ site.admin_per_page | fix(true) }}" size="2" id="admin_per_page">
 </p>
 <p>
-<label for="uploads_path">{{ "Uploads Path" | translate }}</label>
-<input class="text" type="text" name="uploads_path" value="{{ site.uploads_path | fix(true, true) }}" id="uploads_path">
+<label for="uploads_path">{{ "Uploads Path" | translate }}
+</label><input class="text" type="text" name="uploads_path" value="{{ site.uploads_path | fix(true, true) }}" id="uploads_path">
 <small>
 {{ "The directory to which files are uploaded, relative to your installation directory." | translate }}
 </small>
 </p>
 <p>
-<label for="uploads_limit">{{ "Upload Size Limit" | translate }}</label>
-<input class="text digits" type="number" min="0" name="uploads_limit" value="{{ site.uploads_limit | fix(true) }}" size="3" id="uploads_limit">
+<label for="uploads_limit">{{ "Upload Size Limit" | translate }}
+</label><input class="text digits" type="number" min="0" name="uploads_limit" value="{{ site.uploads_limit | fix(true) }}" size="3" id="uploads_limit">
 <span class="sub">{{ "(Megabytes)" | translate }}</span>
 </p>
 <p>
-<label for="feed_format">{{ "Feed Format" | translate }}</label>
-<select name="feed_format" id="feed_format">
+<label for="feed_format">{{ "Feed Format" | translate }}
+</label><select name="feed_format" id="feed_format">
 {% for feed_format in feed_formats %}
 <option value="{{ feed_format.class }}"{{ feed_format.class | selected(site.feed_format) }}>{{ feed_format.name }}</option>
 {% endfor %}
 </select>
 </p>
 <p>
-<label for="search_pages">{{ "Search Pages" | translate }}</label>
-<input class="checkbox" type="checkbox" name="search_pages" id="search_pages"{{ site.search_pages | checked }}>
+<label for="search_pages">{{ "Search Pages" | translate }}
+</label><input class="checkbox" type="checkbox" name="search_pages" id="search_pages"{{ site.search_pages | checked }}>
 <small>
 {{ "Include pages in search results." | translate }}
 </small>
 </p>
 <p>
-<label for="send_pingbacks">{{ "Send Webmentions" | translate }}</label>
-<input class="checkbox" type="checkbox" name="send_pingbacks" id="send_pingbacks"{{ site.send_pingbacks | checked }}>
+<label for="send_pingbacks">{{ "Send Webmentions" | translate }}
+</label><input class="checkbox" type="checkbox" name="send_pingbacks" id="send_pingbacks"{{ site.send_pingbacks | checked }}>
 <small>
 {{ "Attempts to notify sites to which your posts link." | translate }}
 </small>
 </p>
 <p>
-<label for="enable_emoji">{{ "Unicode Emoticons" | translate }}</label>
-<input class="checkbox" type="checkbox" name="enable_emoji" id="enable_emoji"{{ site.enable_emoji | checked }}>
+<label for="enable_emoji">{{ "Unicode Emoticons" | translate }}
+</label><input class="checkbox" type="checkbox" name="enable_emoji" id="enable_emoji"{{ site.enable_emoji | checked }}>
 <a href="{{ url('help/id/unicode_emoticons') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
 <small>
 {{ "Display emoticons as Unicode emoji." | translate }}
 </small>
 </p>
 <p>
-<label for="enable_markdown">{{ "Markdown" | translate }}</label>
-<input class="checkbox" type="checkbox" name="enable_markdown" id="enable_markdown"{{ site.enable_markdown | checked }}>
+<label for="enable_markdown">{{ "Markdown" | translate }}
+</label><input class="checkbox" type="checkbox" name="enable_markdown" id="enable_markdown"{{ site.enable_markdown | checked }}>
 <a href="{{ url('help/id/markdown') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
 <small>
 {{ "Compose blog content using Markdown text formatting." | translate }}

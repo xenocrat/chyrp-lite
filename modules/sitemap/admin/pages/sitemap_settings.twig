@@ -7,31 +7,31 @@
 <form id="sitemap_settings" class="split" action="{{ url('sitemap_settings') }}" method="post" accept-charset="UTF-8">
 <fieldset role="presentation">
 <p>
-<label for="sitemap_path">{{ "Sitemap Path" | translate("sitemap") }}</label>
-<input class="text" type="text" name="sitemap_path" id="sitemap_path" value="{{ site.module_sitemap['sitemap_path'] | fix(true) }}" id="sitemap_path">
+<label for="sitemap_path">{{ "Sitemap Path" | translate("sitemap") }}
+</label><input class="text" type="text" name="sitemap_path" id="sitemap_path" value="{{ site.module_sitemap['sitemap_path'] | fix(true) }}" id="sitemap_path">
 <small>
 {{ "The directory to which the sitemap is written." | translate("sitemap") }}
 </small>
 </p>
 <p>
-<label for="blog_changefreq">{{ "Blog is Updated" | translate("sitemap") }}</label>
-<select name="blog_changefreq" id="blog_changefreq">
+<label for="blog_changefreq">{{ "Blog is Updated" | translate("sitemap") }}
+</label><select name="blog_changefreq" id="blog_changefreq">
 {% for key, val in sitemap_changefreq %}
 <option value="{{ key }}"{{ key | selected(site.module_sitemap['blog_changefreq']) }}>{{ val }}</option>
 {% endfor %}
 </select>
 </p>
 <p>
-<label for="pages_changefreq">{{ "Pages are Edited" | translate("sitemap") }}</label>
-<select name="pages_changefreq" id="pages_changefreq">
+<label for="pages_changefreq">{{ "Pages are Edited" | translate("sitemap") }}
+</label><select name="pages_changefreq" id="pages_changefreq">
 {% for key, val in sitemap_changefreq %}
 <option value="{{ key }}"{{ key | selected(site.module_sitemap['pages_changefreq']) }}>{{ val }}</option>
 {% endfor %}
 </select>
 </p>
 <p>
-<label for="posts_changefreq">{{ "Posts are Edited" | translate("sitemap") }}</label>
-<select name="posts_changefreq" id="posts_changefreq">
+<label for="posts_changefreq">{{ "Posts are Edited" | translate("sitemap") }}
+</label><select name="posts_changefreq" id="posts_changefreq">
 {% for key, val in sitemap_changefreq %}
 <option value="{{ key }}"{{ key | selected(site.module_sitemap['posts_changefreq']) }}>{{ val }}</option>
 {% endfor %}
