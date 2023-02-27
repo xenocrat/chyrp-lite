@@ -181,7 +181,7 @@ a:active {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    gap: 0.5rem;
+    gap: 4px;
     bottom: 0em;
     left: 4rem;
     right: 4rem;
@@ -224,10 +224,10 @@ a:active {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
-    gap: 0rem;
+    gap: 4px;
     margin: 4rem 4rem 0rem 4rem;
     overflow: hidden;
-    border-bottom: 1px solid #efefef;
+    border-bottom: 1px solid #cfcfcf;
 }
 #sub_nav li {
     display: block;
@@ -247,7 +247,7 @@ a:active {
     overflow: hidden;
     text-overflow: ellipsis;
     margin: 0rem;
-    padding: 0rem 1rem 2rem 1rem;
+    padding: 0rem 1rem 4rem 1rem;
     border: 1px solid #cfcfcf;
     border-bottom: none;
     border-top-left-radius: 0.8em;
@@ -1163,6 +1163,9 @@ input.toolbar.hidden {
     #header #navigation li a:focus {
         background-color: #1f1f23;
     }
+    #sub_nav {
+        border-bottom-color: #afafaf;
+    }
     #sub_nav li a {
         border-color: #ffffff;
     }
@@ -1225,6 +1228,9 @@ input.toolbar.hidden {
     input[type="password"] {
         background-color: #cfcfcf;
         border-color: #afafaf;
+    }
+    input::placeholder {
+        color: #aaaaaa;
     }
     table tbody tr td {
         border-color: #afafaf;
