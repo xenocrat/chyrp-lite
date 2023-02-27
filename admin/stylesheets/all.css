@@ -247,7 +247,7 @@ a:active {
     overflow: hidden;
     text-overflow: ellipsis;
     margin: 0rem;
-    padding: 0rem 1rem 4rem 1rem;
+    padding: 0rem 1rem 100vh 1rem;
     border: 1px solid #cfcfcf;
     border-bottom: none;
     border-top-left-radius: 0.8em;
