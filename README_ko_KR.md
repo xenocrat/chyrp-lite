@@ -1,3 +1,5 @@
+[English](README.md), [Italiano](README_it_IT.md), [简体中文](README_zh_CN.md).
+
 ## Chyrp Lite는 나를 위해 무엇을 할 수 있습니까?
 
 Chyrp Lite를 사용하면 번거로움을 최소화하면서 자신의 웹 서버에서 블로그를 호스팅할 수 있습니다.
