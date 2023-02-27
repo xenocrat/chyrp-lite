@@ -3186,6 +3186,11 @@ Function: twig_filter_selected
 Returns a HTML @selected@ attribute if the test matches any of the supplied arguments.
 
 
+Function: twig_filter_disabled
+------------------------------
+Returns a HTML @disabled@ attribute if the test matches any of the supplied arguments.
+
+
 Function: twig_filter_download
 ------------------------------
 Returns a download link for a file located in the uploads directory.

@@ -291,7 +291,7 @@ msgid "insert"
 msgstr "插入"
 
 #: admin/javascripts/admin.js.php:448 admin/javascripts/admin.js.php:449
-#: admin/pages/themes.twig:25
+#: admin/pages/themes.twig:24
 msgid "Preview"
 msgstr "预览"
 
@@ -365,7 +365,7 @@ msgstr "尝试您帖子链接到的站点。"
 #: admin/pages/content_settings.twig:58 admin/pages/content_settings.twig:66
 #: admin/pages/export.twig:14 admin/pages/export.twig:20
 #: admin/pages/export.twig:26 admin/pages/export.twig:32
-#: admin/pages/general_settings.twig:27 admin/pages/manage_pages.twig:10
+#: admin/pages/general_settings.twig:26 admin/pages/manage_pages.twig:10
 #: admin/pages/manage_posts.twig:10 admin/pages/manage_users.twig:10
 #: admin/pages/route_settings.twig:12 admin/partials/page_fields.twig:21
 #: admin/partials/post_fields.twig:26 admin/partials/post_fields.twig:101
@@ -382,8 +382,8 @@ msgid "Compose blog content using Markdown text formatting."
 msgstr "使用Markdown语法撰写博客内容。"
 
 #: admin/pages/content_settings.twig:73 admin/pages/edit_group.twig:24
-#: admin/pages/edit_user.twig:55 admin/pages/general_settings.twig:60
-#: admin/pages/route_settings.twig:85 admin/pages/user_settings.twig:47
+#: admin/pages/edit_user.twig:55 admin/pages/general_settings.twig:59
+#: admin/pages/route_settings.twig:84 admin/pages/user_settings.twig:47
 msgid "Update"
 msgstr "更新"
 
@@ -601,29 +601,29 @@ msgstr "上传清单"
 msgid "Feathers"
 msgstr "羽毛"
 
-#: admin/pages/feathers.twig:8 admin/pages/modules.twig:8
+#: admin/pages/feathers.twig:9 admin/pages/modules.twig:9
 msgid "Enabled"
 msgstr "已启用"
 
-#: admin/pages/feathers.twig:13 admin/pages/feathers.twig:44
-#: admin/pages/modules.twig:13 admin/pages/modules.twig:64
+#: admin/pages/feathers.twig:14 admin/pages/feathers.twig:47
+#: admin/pages/modules.twig:14 admin/pages/modules.twig:67
 #: admin/pages/themes.twig:12
 msgid "info"
 msgstr "信息"
 
-#: admin/pages/feathers.twig:27 admin/pages/modules.twig:47
+#: admin/pages/feathers.twig:28 admin/pages/modules.twig:48
 msgid "Uninstall"
 msgstr "卸载"
 
-#: admin/pages/feathers.twig:31 admin/pages/modules.twig:51
+#: admin/pages/feathers.twig:32 admin/pages/modules.twig:52
 msgid "Disable"
 msgstr "禁用"
 
-#: admin/pages/feathers.twig:39 admin/pages/modules.twig:59
+#: admin/pages/feathers.twig:42 admin/pages/modules.twig:62
 msgid "Disabled"
 msgstr "已禁用"
 
-#: admin/pages/feathers.twig:57 admin/pages/modules.twig:98
+#: admin/pages/feathers.twig:60 admin/pages/modules.twig:101
 msgid "Enable"
 msgstr "启用"
 
@@ -643,32 +643,32 @@ msgstr "描述"
 msgid "Chyrp URL"
 msgstr ""
 
-#: admin/pages/general_settings.twig:29
+#: admin/pages/general_settings.twig:28
 msgid "Have your site URLs point someplace other than your install directory."
 msgstr "让您的网站网址指向安装目录以外的其他位置。"
 
-#: admin/pages/general_settings.twig:33
+#: admin/pages/general_settings.twig:32
 msgid "Contact Email Address"
 msgstr "联系的邮件地址"
 
-#: admin/pages/general_settings.twig:37
+#: admin/pages/general_settings.twig:36
 msgid "Time Zone"
 msgstr "时区"
 
-#: admin/pages/general_settings.twig:45
+#: admin/pages/general_settings.twig:44
 msgid "Language"
 msgstr "语言"
 
-#: admin/pages/general_settings.twig:53
+#: admin/pages/general_settings.twig:52
 msgid "Check for Updates?"
 msgstr "检查更新？"
 
-#: admin/pages/general_settings.twig:56
+#: admin/pages/general_settings.twig:55
 #, php-format
 msgid "Current version: %s"
 msgstr "当前版本： %s"
 
-#: admin/pages/import.twig:3 admin/pages/import.twig:40
+#: admin/pages/import.twig:3 admin/pages/import.twig:39
 msgid "Import"
 msgstr "导入"
 
@@ -700,7 +700,7 @@ msgstr "批量文件上传"
 msgid "URL for Embedded Media"
 msgstr "嵌入式媒体的URL"
 
-#: admin/pages/import.twig:35
+#: admin/pages/import.twig:34
 #, php-format
 msgid "Usually something like <code>%s/uploads/</code>."
 msgstr "一般类似于 <code>%s/uploads/</code>."
@@ -875,11 +875,11 @@ msgstr "加入时间"
 msgid "Modules"
 msgstr "模块"
 
-#: admin/pages/modules.twig:22 admin/pages/modules.twig:73
+#: admin/pages/modules.twig:23 admin/pages/modules.twig:76
 msgid "This module conflicts with the following modules:"
 msgstr "该模块与以下模块冲突："
 
-#: admin/pages/modules.twig:32 admin/pages/modules.twig:83
+#: admin/pages/modules.twig:33 admin/pages/modules.twig:86
 msgid "This module requires the following modules to be enabled:"
 msgstr "这个模块需要以下模块启用："
 
@@ -927,99 +927,99 @@ msgstr "帖子查看链接"
 msgid "(requires clean URLs)"
 msgstr "(需要优雅链接)"
 
-#: admin/pages/route_settings.twig:32
+#: admin/pages/route_settings.twig:31
 msgid "Syntax:"
 msgstr "符号："
 
-#: admin/pages/route_settings.twig:36
+#: admin/pages/route_settings.twig:35
 msgid "Year submitted"
 msgstr "提交的年份"
 
-#: admin/pages/route_settings.twig:36
+#: admin/pages/route_settings.twig:35
 msgid "(e.g. 2007)"
 msgstr "(例如：2007)"
 
-#: admin/pages/route_settings.twig:40
+#: admin/pages/route_settings.twig:39
 msgid "Month submitted"
 msgstr "提交的月份"
 
-#: admin/pages/route_settings.twig:40
+#: admin/pages/route_settings.twig:39
 msgid "(e.g. 12)"
 msgstr "(例如 12)"
 
-#: admin/pages/route_settings.twig:44
+#: admin/pages/route_settings.twig:43
 msgid "Day submitted"
 msgstr "提交的天"
 
-#: admin/pages/route_settings.twig:44
+#: admin/pages/route_settings.twig:43
 msgid "(e.g. 25)"
 msgstr "(例如 25)"
 
-#: admin/pages/route_settings.twig:48
+#: admin/pages/route_settings.twig:47
 msgid "Hour submitted"
 msgstr "提交的小时"
 
-#: admin/pages/route_settings.twig:48
+#: admin/pages/route_settings.twig:47
 msgid "(e.g. 03)"
 msgstr "(例如 03)"
 
-#: admin/pages/route_settings.twig:52
+#: admin/pages/route_settings.twig:51
 msgid "Minute submitted"
 msgstr "提交的分"
 
-#: admin/pages/route_settings.twig:52
+#: admin/pages/route_settings.twig:51
 msgid "(e.g. 59)"
 msgstr "(例如 59)"
 
-#: admin/pages/route_settings.twig:56
+#: admin/pages/route_settings.twig:55
 msgid "Second submitted"
 msgstr "提交的秒"
 
-#: admin/pages/route_settings.twig:56
+#: admin/pages/route_settings.twig:55
 msgid "(e.g. 30)"
 msgstr "(例如 30)"
 
-#: admin/pages/route_settings.twig:60
+#: admin/pages/route_settings.twig:59
 msgid "Post ID"
 msgstr "帖子ID"
 
-#: admin/pages/route_settings.twig:64
+#: admin/pages/route_settings.twig:63
 msgid "Post author (username)"
 msgstr "帖子作者（用户名）"
 
-#: admin/pages/route_settings.twig:64
+#: admin/pages/route_settings.twig:63
 msgid "(e.g. Alex)"
 msgstr "(例如 Alex)"
 
-#: admin/pages/route_settings.twig:68
+#: admin/pages/route_settings.twig:67
 msgid "The non-unique slug"
 msgstr "非独特 slug"
 
-#: admin/pages/route_settings.twig:68
+#: admin/pages/route_settings.twig:67
 msgid "(e.g. this_is_clean)"
 msgstr "(例如 this_is_clean)"
 
-#: admin/pages/route_settings.twig:72
+#: admin/pages/route_settings.twig:71
 msgid "The unique form of (clean)"
 msgstr "独特的(优雅)"
 
-#: admin/pages/route_settings.twig:72
+#: admin/pages/route_settings.twig:71
 msgid "(e.g. this_one_is_taken_2)"
 msgstr "(例如 this_one_is_taken_2)"
 
-#: admin/pages/route_settings.twig:76
+#: admin/pages/route_settings.twig:75
 msgid "The post's feather"
 msgstr "帖子的羽毛"
 
-#: admin/pages/route_settings.twig:76
+#: admin/pages/route_settings.twig:75
 msgid "(e.g. text)"
 msgstr "(例如 text)"
 
-#: admin/pages/route_settings.twig:80
+#: admin/pages/route_settings.twig:79
 msgid "The plural form of the post's feather"
 msgstr "帖子羽毛的复数形式"
 
-#: admin/pages/route_settings.twig:80
+#: admin/pages/route_settings.twig:79
 msgid "(e.g. links)"
 msgstr "(例如 links)"
 
@@ -1031,7 +1031,7 @@ msgstr "主题"
 msgid "Blog Themes"
 msgstr "博客主题"
 
-#: admin/pages/themes.twig:28
+#: admin/pages/themes.twig:27
 msgid "Select"
 msgstr "选择"
 

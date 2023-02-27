@@ -307,7 +307,7 @@ msgid "insert"
 msgstr "inserisci"
 
 #: admin/javascripts/admin.js.php:448 admin/javascripts/admin.js.php:449
-#: admin/pages/themes.twig:25
+#: admin/pages/themes.twig:24
 msgid "Preview"
 msgstr "Anteprima"
 
@@ -383,7 +383,7 @@ msgstr "Tenta di notificare i siti a cui si collegano i tuoi post."
 #: admin/pages/content_settings.twig:58 admin/pages/content_settings.twig:66
 #: admin/pages/export.twig:14 admin/pages/export.twig:20
 #: admin/pages/export.twig:26 admin/pages/export.twig:32
-#: admin/pages/general_settings.twig:27 admin/pages/manage_pages.twig:10
+#: admin/pages/general_settings.twig:26 admin/pages/manage_pages.twig:10
 #: admin/pages/manage_posts.twig:10 admin/pages/manage_users.twig:10
 #: admin/pages/route_settings.twig:12 admin/partials/page_fields.twig:21
 #: admin/partials/post_fields.twig:26 admin/partials/post_fields.twig:101
@@ -402,8 +402,8 @@ msgstr ""
 "tramite Markdown."
 
 #: admin/pages/content_settings.twig:73 admin/pages/edit_group.twig:24
-#: admin/pages/edit_user.twig:55 admin/pages/general_settings.twig:60
-#: admin/pages/route_settings.twig:85 admin/pages/user_settings.twig:47
+#: admin/pages/edit_user.twig:55 admin/pages/general_settings.twig:59
+#: admin/pages/route_settings.twig:84 admin/pages/user_settings.twig:47
 msgid "Update"
 msgstr "Aggiorna"
 
@@ -623,29 +623,29 @@ msgstr "Manifesto per i caricamenti dati"
 msgid "Feathers"
 msgstr "Feather"
 
-#: admin/pages/feathers.twig:8 admin/pages/modules.twig:8
+#: admin/pages/feathers.twig:9 admin/pages/modules.twig:9
 msgid "Enabled"
 msgstr "Abilitato"
 
-#: admin/pages/feathers.twig:13 admin/pages/feathers.twig:44
-#: admin/pages/modules.twig:13 admin/pages/modules.twig:64
+#: admin/pages/feathers.twig:14 admin/pages/feathers.twig:47
+#: admin/pages/modules.twig:14 admin/pages/modules.twig:67
 #: admin/pages/themes.twig:12
 msgid "info"
 msgstr "info"
 
-#: admin/pages/feathers.twig:27 admin/pages/modules.twig:47
+#: admin/pages/feathers.twig:28 admin/pages/modules.twig:48
 msgid "Uninstall"
 msgstr "Disinstalla"
 
-#: admin/pages/feathers.twig:31 admin/pages/modules.twig:51
+#: admin/pages/feathers.twig:32 admin/pages/modules.twig:52
 msgid "Disable"
 msgstr "Disabilita"
 
-#: admin/pages/feathers.twig:39 admin/pages/modules.twig:59
+#: admin/pages/feathers.twig:42 admin/pages/modules.twig:62
 msgid "Disabled"
 msgstr "Disabilitato"
 
-#: admin/pages/feathers.twig:57 admin/pages/modules.twig:98
+#: admin/pages/feathers.twig:60 admin/pages/modules.twig:101
 msgid "Enable"
 msgstr "Abilita"
 
@@ -665,34 +665,34 @@ msgstr "Descrizione"
 msgid "Chyrp URL"
 msgstr "URL Chyrp"
 
-#: admin/pages/general_settings.twig:29
+#: admin/pages/general_settings.twig:28
 msgid "Have your site URLs point someplace other than your install directory."
 msgstr ""
 "Gli URL del tuo sito sono indirizzati in una directory diversa da quella di "
 "installazione."
 
-#: admin/pages/general_settings.twig:33
+#: admin/pages/general_settings.twig:32
 msgid "Contact Email Address"
 msgstr "Contatto di Indirizzo email"
 
-#: admin/pages/general_settings.twig:37
+#: admin/pages/general_settings.twig:36
 msgid "Time Zone"
 msgstr "Fuso orario"
 
-#: admin/pages/general_settings.twig:45
+#: admin/pages/general_settings.twig:44
 msgid "Language"
 msgstr "Lingua"
 
-#: admin/pages/general_settings.twig:53
+#: admin/pages/general_settings.twig:52
 msgid "Check for Updates?"
 msgstr "Verificare la disponibilità di aggiornamenti?"
 
-#: admin/pages/general_settings.twig:56
+#: admin/pages/general_settings.twig:55
 #, php-format
 msgid "Current version: %s"
 msgstr "Versione corrente: %s"
 
-#: admin/pages/import.twig:3 admin/pages/import.twig:40
+#: admin/pages/import.twig:3 admin/pages/import.twig:39
 msgid "Import"
 msgstr "Importa"
 
@@ -724,7 +724,7 @@ msgstr "Caricamento dati in blocco"
 msgid "URL for Embedded Media"
 msgstr "URL per I Media incorporati"
 
-#: admin/pages/import.twig:35
+#: admin/pages/import.twig:34
 #, php-format
 msgid "Usually something like <code>%s/uploads/</code>."
 msgstr "Di solito appare come <code>%s/uploads/</code>."
@@ -899,11 +899,11 @@ msgstr "Iscritto"
 msgid "Modules"
 msgstr "Moduli"
 
-#: admin/pages/modules.twig:22 admin/pages/modules.twig:73
+#: admin/pages/modules.twig:23 admin/pages/modules.twig:76
 msgid "This module conflicts with the following modules:"
 msgstr "Questo modulo è in conflitto con i seguenti moduli:"
 
-#: admin/pages/modules.twig:32 admin/pages/modules.twig:83
+#: admin/pages/modules.twig:33 admin/pages/modules.twig:86
 msgid "This module requires the following modules to be enabled:"
 msgstr "Questo modulo richiede che i seguenti moduli siano abilitati:"
 
@@ -951,99 +951,99 @@ msgstr "URL di visualizzazione post"
 msgid "(requires clean URLs)"
 msgstr "(richiede URL conformati)"
 
-#: admin/pages/route_settings.twig:32
+#: admin/pages/route_settings.twig:31
 msgid "Syntax:"
 msgstr "Sintassi:"
 
-#: admin/pages/route_settings.twig:36
+#: admin/pages/route_settings.twig:35
 msgid "Year submitted"
 msgstr "Anno di creazione"
 
-#: admin/pages/route_settings.twig:36
+#: admin/pages/route_settings.twig:35
 msgid "(e.g. 2007)"
 msgstr "(es. 2007)"
 
-#: admin/pages/route_settings.twig:40
+#: admin/pages/route_settings.twig:39
 msgid "Month submitted"
 msgstr "Mese di crezione"
 
-#: admin/pages/route_settings.twig:40
+#: admin/pages/route_settings.twig:39
 msgid "(e.g. 12)"
 msgstr "(es. 12)"
 
-#: admin/pages/route_settings.twig:44
+#: admin/pages/route_settings.twig:43
 msgid "Day submitted"
 msgstr "Giorno di creazione"
 
-#: admin/pages/route_settings.twig:44
+#: admin/pages/route_settings.twig:43
 msgid "(e.g. 25)"
 msgstr "(es. 25)"
 
-#: admin/pages/route_settings.twig:48
+#: admin/pages/route_settings.twig:47
 msgid "Hour submitted"
 msgstr "Ora di creazione"
 
-#: admin/pages/route_settings.twig:48
+#: admin/pages/route_settings.twig:47
 msgid "(e.g. 03)"
 msgstr "(es. 03)"
 
-#: admin/pages/route_settings.twig:52
+#: admin/pages/route_settings.twig:51
 msgid "Minute submitted"
 msgstr "Minuto di creazione"
 
-#: admin/pages/route_settings.twig:52
+#: admin/pages/route_settings.twig:51
 msgid "(e.g. 59)"
 msgstr "(es. 59)"
 
-#: admin/pages/route_settings.twig:56
+#: admin/pages/route_settings.twig:55
 msgid "Second submitted"
 msgstr "Secondo di creazione"
 
-#: admin/pages/route_settings.twig:56
+#: admin/pages/route_settings.twig:55
 msgid "(e.g. 30)"
 msgstr "(es. 30)"
 
-#: admin/pages/route_settings.twig:60
+#: admin/pages/route_settings.twig:59
 msgid "Post ID"
 msgstr "Post ID"
 
-#: admin/pages/route_settings.twig:64
+#: admin/pages/route_settings.twig:63
 msgid "Post author (username)"
 msgstr "Autore del post (nome utente)"
 
-#: admin/pages/route_settings.twig:64
+#: admin/pages/route_settings.twig:63
 msgid "(e.g. Alex)"
 msgstr "(es. Alex)"
 
-#: admin/pages/route_settings.twig:68
+#: admin/pages/route_settings.twig:67
 msgid "The non-unique slug"
 msgstr "Slug non unico"
 
-#: admin/pages/route_settings.twig:68
+#: admin/pages/route_settings.twig:67
 msgid "(e.g. this_is_clean)"
 msgstr "(es. this_is_clean)"
 
-#: admin/pages/route_settings.twig:72
+#: admin/pages/route_settings.twig:71
 msgid "The unique form of (clean)"
 msgstr "La forma unica (clean)"
 
-#: admin/pages/route_settings.twig:72
+#: admin/pages/route_settings.twig:71
 msgid "(e.g. this_one_is_taken_2)"
 msgstr "(es. this_one_is_taken_2)"
 
-#: admin/pages/route_settings.twig:76
+#: admin/pages/route_settings.twig:75
 msgid "The post's feather"
 msgstr "Feather del post"
 
-#: admin/pages/route_settings.twig:76
+#: admin/pages/route_settings.twig:75
 msgid "(e.g. text)"
 msgstr "(es. testo)"
 
-#: admin/pages/route_settings.twig:80
+#: admin/pages/route_settings.twig:79
 msgid "The plural form of the post's feather"
 msgstr "La forma plurale della Feather del post"
 
-#: admin/pages/route_settings.twig:80
+#: admin/pages/route_settings.twig:79
 msgid "(e.g. links)"
 msgstr "(es. collegamenti)"
 
@@ -1055,7 +1055,7 @@ msgstr "Temi"
 msgid "Blog Themes"
 msgstr "Temi del blog"
 
-#: admin/pages/themes.twig:28
+#: admin/pages/themes.twig:27
 msgid "Select"
 msgstr "Seleziona"
 
