@@ -299,14 +299,40 @@ section, footer,
 form, details, p {
     margin: 1rem 0rem;
 }
+main > article:first-child {
+    margin-top: 4rem;
+}
 details[open] + article.post,
 article.post + article.post {
-    padding-top: 6rem;
+    padding-top: 4rem;
     border-top: 2px solid #f3f2f1;
-    background-image: radial-gradient(
-        ellipse 50% 2rem at top center,
-        rgba(243, 242, 241, 0.5),
-        transparent
+    background-image: linear-gradient(
+        to bottom,
+        transparent,
+        transparent 0.5rem,
+        #f3f2f1 0.5rem,
+        #f3f2f1 0.5625rem,
+        transparent 0.5625rem,
+        transparent 1.0625rem,
+        #f3f2f1 1.0625rem,
+        #f3f2f1 1.125rem,
+        transparent 1.125rem,
+        transparent 1.625rem,
+        #f3f2f1 1.625rem,
+        #f3f2f1 1.6875rem,
+        transparent 1.6875rem,
+        transparent 2.1875rem,
+        #f3f2f1 2.1875rem,
+        #f3f2f1 2.25rem,
+        transparent 2.25rem,
+        transparent 2.75rem,
+        #f3f2f1 2.75rem,
+        #f3f2f1 2.8125rem,
+        transparent 2.8125rem,
+        transparent 3.3125rem,
+        #f3f2f1 3.3125rem,
+        #f3f2f1 3.375rem,
+        transparent 3.375rem
     );
 }
 article.fragment + article.fragment {
