@@ -40,7 +40,7 @@ msgstr ""
 #: admin/help/markdown.twig:13
 #: admin/pages/content_settings.twig:64
 #: admin/partials/page_fields.twig:12
-#: admin/partials/post_fields.twig:46
+#: admin/partials/post_fields.twig:58
 msgid "Markdown"
 msgstr ""
 
@@ -352,8 +352,8 @@ msgstr ""
 #: admin/pages/route_settings.twig:12
 #: admin/partials/page_fields.twig:21
 #: admin/partials/post_fields.twig:26
-#: admin/partials/post_fields.twig:101
-#: admin/partials/post_fields.twig:120
+#: admin/partials/post_fields.twig:113
+#: admin/partials/post_fields.twig:132
 msgid "help"
 msgstr ""
 
@@ -413,7 +413,7 @@ msgstr ""
 #: admin/pages/delete_upload.twig:17
 #: admin/pages/delete_user.twig:44
 #: admin/partials/page_fields.twig:80
-#: admin/partials/post_fields.twig:167
+#: admin/partials/post_fields.twig:179
 msgid "Cancel"
 msgstr ""
 
@@ -885,7 +885,7 @@ msgstr ""
 
 #: admin/pages/manage_posts.twig:22
 #: admin/partials/page_fields.twig:27
-#: admin/partials/post_fields.twig:69
+#: admin/partials/post_fields.twig:81
 msgid "Status"
 msgstr ""
 
@@ -1145,7 +1145,7 @@ msgid "Body"
 msgstr ""
 
 #: admin/partials/page_fields.twig:22
-#: admin/partials/post_fields.twig:102
+#: admin/partials/post_fields.twig:114
 msgid "Slug"
 msgstr ""
 
@@ -1154,7 +1154,7 @@ msgid "Public and visible in pages list"
 msgstr ""
 
 #: admin/partials/page_fields.twig:32
-#: admin/partials/post_fields.twig:74
+#: admin/partials/post_fields.twig:86
 msgid "Public"
 msgstr ""
 
@@ -1163,7 +1163,7 @@ msgid "Private and visible in pages list"
 msgstr ""
 
 #: admin/partials/page_fields.twig:36
-#: admin/partials/post_fields.twig:76
+#: admin/partials/post_fields.twig:88
 msgid "Private"
 msgstr ""
 
@@ -1192,44 +1192,53 @@ msgid "[None]"
 msgstr ""
 
 #: admin/partials/page_fields.twig:70
-#: admin/partials/post_fields.twig:157
-#: admin/partials/post_fields.twig:173
+#: admin/partials/post_fields.twig:169
+#: admin/partials/post_fields.twig:185
 msgid "Publish"
 msgstr ""
 
 #: admin/partials/page_fields.twig:73
 #: admin/partials/page_fields.twig:77
-#: admin/partials/post_fields.twig:160
-#: admin/partials/post_fields.twig:164
-#: admin/partials/post_fields.twig:177
+#: admin/partials/post_fields.twig:172
+#: admin/partials/post_fields.twig:176
+#: admin/partials/post_fields.twig:189
 msgid "Save"
 msgstr ""
 
-#: admin/partials/post_fields.twig:72
+#: admin/partials/post_fields.twig:46
+msgid "Saved selection"
+msgstr ""
+
+#: admin/partials/post_fields.twig:49
+#, php-format
+msgid "(%d)"
+msgstr ""
+
+#: admin/partials/post_fields.twig:84
 msgid "Draft"
 msgstr ""
 
-#: admin/partials/post_fields.twig:78
+#: admin/partials/post_fields.twig:90
 msgid "Scheduled"
 msgstr ""
 
-#: admin/partials/post_fields.twig:79
+#: admin/partials/post_fields.twig:91
 msgid "Visible only to a group of users:"
 msgstr ""
 
-#: admin/partials/post_fields.twig:81
+#: admin/partials/post_fields.twig:93
 msgid "All registered users"
 msgstr ""
 
-#: admin/partials/post_fields.twig:94
+#: admin/partials/post_fields.twig:106
 msgid "Pinned?"
 msgstr ""
 
-#: admin/partials/post_fields.twig:95
+#: admin/partials/post_fields.twig:107
 msgid "(shows this post above all others)"
 msgstr ""
 
-#: admin/partials/post_fields.twig:107
+#: admin/partials/post_fields.twig:119
 msgid "Timestamp"
 msgstr ""
 
