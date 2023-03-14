@@ -13,7 +13,7 @@
             );
             $this->setField(
                 array(
-                    "attr" => "audio",
+                    "attr" => "filename",
                     "type" => "file",
                     "label" => __("Audio File", "audio"),
                     "multiple" => false,
@@ -43,9 +43,9 @@
         }
 
         public function submit(): Post {
-            if (isset($_FILES['audio']) and upload_tester($_FILES['audio']))
+            if (isset($_FILES['filename']) and upload_tester($_FILES['filename']))
                 $filename = upload(
-                    $_FILES['audio'],
+                    $_FILES['filename'],
                     $this->audio_extensions()
                 );
 
@@ -88,9 +88,9 @@
             fallback($_POST['option'], array());
             $filename = $post->filename;
 
-            if (isset($_FILES['audio']) and upload_tester($_FILES['audio']))
+            if (isset($_FILES['filename']) and upload_tester($_FILES['filename']))
                 $filename = upload(
-                    $_FILES['audio'],
+                    $_FILES['filename'],
                     $this->audio_extensions()
                 );
 

@@ -13,7 +13,7 @@
             );
             $this->setField(
                 array(
-                    "attr" => "video",
+                    "attr" => "filename",
                     "type" => "file",
                     "label" => __("Video File", "video"),
                     "multiple" => false,
@@ -43,9 +43,9 @@
         }
 
         public function submit(): Post {
-            if (isset($_FILES['video']) and upload_tester($_FILES['video']))
+            if (isset($_FILES['filename']) and upload_tester($_FILES['filename']))
                 $filename = upload(
-                    $_FILES['video'],
+                    $_FILES['filename'],
                     $this->video_extensions()
                 );
 
@@ -88,9 +88,9 @@
             fallback($_POST['option'], array());
             $filename = $post->filename;
 
-            if (isset($_FILES['video']) and upload_tester($_FILES['video']))
+            if (isset($_FILES['filename']) and upload_tester($_FILES['filename']))
                 $filename = upload(
-                    $_FILES['video'],
+                    $_FILES['filename'],
                     $this->video_extensions()
                 );
 

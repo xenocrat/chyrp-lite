@@ -13,7 +13,7 @@
             );
             $this->setField(
                 array(
-                    "attr" => "uploads",
+                    "attr" => "filenames",
                     "type" => "file",
                     "label" => __("Files", "uploader"),
                     "multiple" => true,
@@ -53,22 +53,22 @@
         }
 
         public function submit(): Post {
-            if (isset($_FILES['uploads']) and upload_tester($_FILES['uploads'])) {
+            if (isset($_FILES['filenames']) and upload_tester($_FILES['filenames'])) {
                 $filenames = array();
 
-                if (is_array($_FILES['uploads']['name'])) {
-                    for ($i = 0; $i < count($_FILES['uploads']['name']); $i++)
+                if (is_array($_FILES['filenames']['name'])) {
+                    for ($i = 0; $i < count($_FILES['filenames']['name']); $i++)
                         $filenames[] = upload(
                             array(
-                                'name' => $_FILES['uploads']['name'][$i],
-                                'type' => $_FILES['uploads']['type'][$i],
-                                'tmp_name' => $_FILES['uploads']['tmp_name'][$i],
-                                'error' => $_FILES['uploads']['error'][$i],
-                                'size' => $_FILES['uploads']['size'][$i]
+                                'name' => $_FILES['filenames']['name'][$i],
+                                'type' => $_FILES['filenames']['type'][$i],
+                                'tmp_name' => $_FILES['filenames']['tmp_name'][$i],
+                                'error' => $_FILES['filenames']['error'][$i],
+                                'size' => $_FILES['filenames']['size'][$i]
                             )
                         );
                 } else {
-                    $filenames[] = upload($_FILES['uploads']);
+                    $filenames[] = upload($_FILES['filenames']);
                 }
             }
 
@@ -117,22 +117,22 @@
             if (isset($_POST['option']['source']) and is_url($_POST['option']['source']))
                 $_POST['option']['source'] = add_scheme($_POST['option']['source']);
 
-            if (isset($_FILES['uploads']) and upload_tester($_FILES['uploads'])) {
+            if (isset($_FILES['filenames']) and upload_tester($_FILES['filenames'])) {
                 $filenames = array();
 
-                if (is_array($_FILES['uploads']['name'])) {
-                    for($i=0; $i < count($_FILES['uploads']['name']); $i++)
+                if (is_array($_FILES['filenames']['name'])) {
+                    for($i=0; $i < count($_FILES['filenames']['name']); $i++)
                         $filenames[] = upload(
                             array(
-                                'name' => $_FILES['uploads']['name'][$i],
-                                'type' => $_FILES['uploads']['type'][$i],
-                                'tmp_name' => $_FILES['uploads']['tmp_name'][$i],
-                                'error' => $_FILES['uploads']['error'][$i],
-                                'size' => $_FILES['uploads']['size'][$i]
+                                'name' => $_FILES['filenames']['name'][$i],
+                                'type' => $_FILES['filenames']['type'][$i],
+                                'tmp_name' => $_FILES['filenames']['tmp_name'][$i],
+                                'error' => $_FILES['filenames']['error'][$i],
+                                'size' => $_FILES['filenames']['size'][$i]
                             )
                         );
                 } else {
-                    $filenames[] = upload($_FILES['uploads']);
+                    $filenames[] = upload($_FILES['filenames']);
                 }
             }
 

@@ -13,7 +13,7 @@
             );
             $this->setField(
                 array(
-                    "attr" => "photo",
+                    "attr" => "filename",
                     "type" => "file",
                     "label" => __("Photo", "photo"),
                     "multiple" => false,
@@ -42,9 +42,9 @@
         }
 
         public function submit(): Post {
-            if (isset($_FILES['photo']) and upload_tester($_FILES['photo']))
+            if (isset($_FILES['filename']) and upload_tester($_FILES['filename']))
                 $filename = upload(
-                    $_FILES['photo'],
+                    $_FILES['filename'],
                     $this->photo_extensions()
                 );
 
@@ -93,9 +93,9 @@
             if (isset($_POST['option']['source']) and is_url($_POST['option']['source']))
                 $_POST['option']['source'] = add_scheme($_POST['option']['source']);
 
-            if (isset($_FILES['photo']) and upload_tester($_FILES['photo']))
+            if (isset($_FILES['filename']) and upload_tester($_FILES['filename']))
                 $filename = upload(
-                    $_FILES['photo'],
+                    $_FILES['filename'],
                     $this->photo_extensions()
                 );
 
