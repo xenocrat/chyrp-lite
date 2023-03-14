@@ -248,7 +248,7 @@ a:active {
     text-overflow: ellipsis;
     margin: 0rem;
     padding: 0rem 1rem 100vh 1rem;
-    border: 1px solid #cfcfcf;
+    border: 1px solid #afafaf;
     border-bottom: none;
     border-top-left-radius: 0.8em;
     border-top-right-radius: 0.8em;
@@ -272,7 +272,7 @@ a:active {
     background-color: #ffffff;
     padding: 1rem;
     margin: 0rem 4rem 4rem 4rem;
-    border: 1px solid #cfcfcf;
+    border: 1px solid #afafaf;
     border-top: none;
     position: relative;
     overflow: hidden;
@@ -423,7 +423,6 @@ textarea:invalid {
     border-color: #ff7f00;
     box-shadow: none;
 }
-input[type="file"]:focus,
 input[type="radio"]:focus,
 input[type="checkbox"]:focus {
     outline: #ff7f00 dashed 2px;
@@ -439,7 +438,8 @@ input[type="date"]:focus,
 input[type="time"]:focus,
 input[type="number"]:focus,
 input[type="range"]:focus,
-input[type="password"]:focus {
+input[type="password"]:focus,
+input[type="file"]:focus {
     border-color: #1e57ba;
     outline: #1e57ba solid 2px;
     outline-offset: -2px;
@@ -478,14 +478,16 @@ input[type="password"].strong:focus {
 }
 input[type="file"] {
     box-sizing: border-box;
-    border: none;
+    color: #1f1f23;
+    padding: 0.5rem;
+    border: 1px solid #cfcfcf;
     transition-property: padding-left;
     transition-duration: 250ms;
     transition-delay: 250ms;
 }
 input[type="file"]:invalid {
-    padding-left: 1.5rem;
-    background: transparent url(../images/icons/invalid.svg) center left/16px no-repeat;
+    padding-left: 2rem;
+    background: url(../images/icons/invalid.svg) center left 0.5rem/16px no-repeat;
 }
 input[disabled],
 input.disabled {
