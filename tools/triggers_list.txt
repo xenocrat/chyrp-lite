@@ -173,7 +173,7 @@ Arguments:
 after_post_fields
 -----------------
 Called from:
-	admin/partials/post_fields.twig on line 77
+	admin/partials/post_fields.twig on line 71
 
 Arguments:
 	feather

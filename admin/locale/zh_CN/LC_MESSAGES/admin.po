@@ -70,7 +70,7 @@ msgstr ""
 
 #: admin/help/markdown.twig:3 admin/help/markdown.twig:6
 #: admin/help/markdown.twig:13 admin/pages/content_settings.twig:64
-#: admin/partials/page_fields.twig:12 admin/partials/post_fields.twig:58
+#: admin/partials/page_fields.twig:12 admin/partials/post_fields.twig:52
 msgid "Markdown"
 msgstr "Markdown"
 
@@ -368,8 +368,8 @@ msgstr "尝试您帖子链接到的站点。"
 #: admin/pages/general_settings.twig:26 admin/pages/manage_pages.twig:10
 #: admin/pages/manage_posts.twig:10 admin/pages/manage_users.twig:10
 #: admin/pages/route_settings.twig:12 admin/partials/page_fields.twig:21
-#: admin/partials/post_fields.twig:26 admin/partials/post_fields.twig:113
-#: admin/partials/post_fields.twig:132
+#: admin/partials/post_fields.twig:27 admin/partials/post_fields.twig:107
+#: admin/partials/post_fields.twig:126
 msgid "help"
 msgstr "帮助"
 
@@ -418,7 +418,7 @@ msgstr "删除！"
 #: admin/pages/delete_group.twig:47 admin/pages/delete_page.twig:23
 #: admin/pages/delete_post.twig:17 admin/pages/delete_upload.twig:17
 #: admin/pages/delete_user.twig:44 admin/partials/page_fields.twig:80
-#: admin/partials/post_fields.twig:179
+#: admin/partials/post_fields.twig:173
 msgid "Cancel"
 msgstr "取消"
 
@@ -545,7 +545,7 @@ msgstr "全名"
 #: admin/pages/edit_user.twig:36 admin/pages/edit_user.twig:43
 #: admin/pages/general_settings.twig:24 admin/pages/import.twig:31
 #: admin/pages/new_user.twig:37 admin/pages/new_user.twig:44
-#: admin/partials/post_fields.twig:30
+#: admin/partials/post_fields.twig:31
 msgid "(optional)"
 msgstr "(可选)"
 
@@ -831,7 +831,7 @@ msgid "Posted"
 msgstr "已发布的"
 
 #: admin/pages/manage_posts.twig:22 admin/partials/page_fields.twig:27
-#: admin/partials/post_fields.twig:81
+#: admin/partials/post_fields.twig:75
 msgid "Status"
 msgstr "状态"
 
@@ -1083,7 +1083,7 @@ msgstr "写作"
 msgid "Body"
 msgstr "正文"
 
-#: admin/partials/page_fields.twig:22 admin/partials/post_fields.twig:114
+#: admin/partials/page_fields.twig:22 admin/partials/post_fields.twig:108
 msgid "Slug"
 msgstr ""
 
@@ -1091,7 +1091,7 @@ msgstr ""
 msgid "Public and visible in pages list"
 msgstr "公开并在页面列表中显示"
 
-#: admin/partials/page_fields.twig:32 admin/partials/post_fields.twig:86
+#: admin/partials/page_fields.twig:32 admin/partials/post_fields.twig:80
 msgid "Public"
 msgstr "公开"
 
@@ -1099,7 +1099,7 @@ msgstr "公开"
 msgid "Private and visible in pages list"
 msgstr "隐藏并在页面列表中显示"
 
-#: admin/partials/page_fields.twig:36 admin/partials/post_fields.twig:88
+#: admin/partials/page_fields.twig:36 admin/partials/post_fields.twig:82
 msgid "Private"
 msgstr "隐藏"
 
@@ -1127,50 +1127,47 @@ msgstr "父级"
 msgid "[None]"
 msgstr "[空]"
 
-#: admin/partials/page_fields.twig:70 admin/partials/post_fields.twig:169
-#: admin/partials/post_fields.twig:185
+#: admin/partials/page_fields.twig:70 admin/partials/post_fields.twig:163
+#: admin/partials/post_fields.twig:179
 msgid "Publish"
 msgstr "公开"
 
 #: admin/partials/page_fields.twig:73 admin/partials/page_fields.twig:77
-#: admin/partials/post_fields.twig:172 admin/partials/post_fields.twig:176
-#: admin/partials/post_fields.twig:189
+#: admin/partials/post_fields.twig:166 admin/partials/post_fields.twig:170
+#: admin/partials/post_fields.twig:183
 msgid "Save"
 msgstr "保存"
 
-#: admin/partials/post_fields.twig:46
-msgid "Saved selection"
-msgstr "保存的选择"
-
-#: admin/partials/post_fields.twig:49
+#: admin/partials/post_fields.twig:47
 #, php-format
-msgid "(%d)"
-msgstr "(%d)"
+msgid "%d file previously uploaded with this post."
+msgid_plural "%d files previously uploaded with this post."
+msgstr[0] "%d之前随此帖子上传的文件。"
 
-#: admin/partials/post_fields.twig:84
+#: admin/partials/post_fields.twig:78
 msgid "Draft"
 msgstr "草稿"
 
-#: admin/partials/post_fields.twig:90
+#: admin/partials/post_fields.twig:84
 msgid "Scheduled"
 msgstr "定时发布"
 
-#: admin/partials/post_fields.twig:91
+#: admin/partials/post_fields.twig:85
 msgid "Visible only to a group of users:"
 msgstr "仅可见于一组用户："
 
-#: admin/partials/post_fields.twig:93
+#: admin/partials/post_fields.twig:87
 msgid "All registered users"
 msgstr "所有注册的用户"
 
-#: admin/partials/post_fields.twig:106
+#: admin/partials/post_fields.twig:100
 msgid "Pinned?"
 msgstr "置顶？"
 
-#: admin/partials/post_fields.twig:107
+#: admin/partials/post_fields.twig:101
 msgid "(shows this post above all others)"
 msgstr "（置顶显示）"
 
-#: admin/partials/post_fields.twig:119
+#: admin/partials/post_fields.twig:113
 msgid "Timestamp"
 msgstr "时间戳"
