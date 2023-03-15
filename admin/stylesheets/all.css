@@ -459,7 +459,7 @@ input[type="time"].error,
 input[type="number"].error,
 input[type="range"].error,
 input[type="password"].error,
-input[type="file"]:focus {
+input[type="file"].error {
     background-color: #faebe4;
 }
 textarea.error:focus,
