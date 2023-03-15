@@ -414,6 +414,12 @@ input[type="password"] {
     border: 1px solid #cfcfcf;
     background-color: #ffffff;
 }
+input[type="file"] {
+    box-sizing: border-box;
+    color: #1f1f23;
+    padding: 0.5rem;
+    border: 1px solid #cfcfcf;
+}
 input::placeholder {
     color: #dddddd;
     opacity: 1;
@@ -421,7 +427,6 @@ input::placeholder {
 input:invalid,
 textarea:invalid {
     border-color: #ff7f00;
-    box-shadow: none;
 }
 input[type="radio"]:focus,
 input[type="checkbox"]:focus {
@@ -444,6 +449,7 @@ input[type="file"]:focus {
     outline: #1e57ba solid 2px;
     outline-offset: -2px;
 }
+textarea.error,
 input[type="text"].error,
 input[type="email"].error,
 input[type="url"].error,
@@ -453,9 +459,10 @@ input[type="time"].error,
 input[type="number"].error,
 input[type="range"].error,
 input[type="password"].error,
-textarea.error {
+input[type="file"]:focus {
     background-color: #faebe4;
 }
+textarea.error:focus,
 input[type="text"].error:focus,
 input[type="email"].error:focus,
 input[type="url"].error:focus,
@@ -465,7 +472,7 @@ input[type="time"].error:focus,
 input[type="number"].error:focus,
 input[type="range"].error:focus,
 input[type="password"].error:focus,
-textarea.error:focus {
+input[type="file"].error:focus {
     border: 1px solid #d51800;
     outline-color: #d51800;
 }
@@ -475,19 +482,6 @@ input[type="password"].strong {
 input[type="password"].strong:focus {
     border: 1px solid #108600;
     outline-color: #108600;
-}
-input[type="file"] {
-    box-sizing: border-box;
-    color: #1f1f23;
-    padding: 0.5rem;
-    border: 1px solid #cfcfcf;
-    transition-property: padding-left;
-    transition-duration: 250ms;
-    transition-delay: 250ms;
-}
-input[type="file"]:invalid {
-    padding-left: 2rem;
-    background: url(../images/icons/invalid.svg) center left 0.5rem/16px no-repeat;
 }
 input[disabled],
 input.disabled {
