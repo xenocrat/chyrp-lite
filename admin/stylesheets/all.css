@@ -394,6 +394,9 @@ label {
     display: inline;
     font-weight: inherit;
 }
+select, input {
+    display: inline-block;
+}
 select,
 textarea,
 input[type="text"],
@@ -507,6 +510,7 @@ form.split input[type="email"],
 form.split input[type="url"],
 form.split input[type="tel"],
 form.split input[type="password"],
+form.split input[type="file"],
 form.split select,
 form.split textarea {
     width: 33%;
