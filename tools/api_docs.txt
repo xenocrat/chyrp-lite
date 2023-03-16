@@ -3158,7 +3158,8 @@ Returns a string containing a formatted filesize value.
 
 Function: twig_filter_preg_match
 --------------------------------
-Try to match a string against an array of regular expressions, or a single regular expression.
+Try to match a string against an array of regular expressions,
+or a single regular expression.
 
 
 Function: twig_filter_preg_replace
@@ -3183,12 +3184,14 @@ Returns a HTML @checked@ attribute if the test evalutaes to true.
 
 Function: twig_filter_selected
 ------------------------------
-Returns a HTML @selected@ attribute if the test matches any of the supplied arguments.
+Returns a HTML @selected@ attribute if the
+test matches any of the supplied arguments.
 
 
 Function: twig_filter_disabled
 ------------------------------
-Returns a HTML @disabled@ attribute if the test matches any of the supplied arguments.
+Returns a HTML @disabled@ attribute if the
+test matches any of the supplied arguments.
 
 
 Function: twig_filter_download
@@ -3198,7 +3201,8 @@ Returns a download link for a file located in the uploads directory.
 
 Function: twig_filter_thumbnail
 -------------------------------
-Returns a thumbnail <img> tag for an uploaded image, optionally with enclosing <a> tag.
+Returns a thumbnail <img> tag for an uploaded image,
+optionally with enclosing <a> tag.
 
 
 ==============================================
