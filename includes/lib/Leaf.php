@@ -224,7 +224,11 @@
         $chars = str_split($email);
 
         foreach ($chars as &$char)
-            $char = preg_replace(array_keys($double_encode), array_values($double_encode), $char);
+            $char = preg_replace(
+                array_keys($double_encode),
+                array_values($double_encode),
+                $char
+            );
 
         return $mailto.implode("", $chars);
     }
@@ -342,7 +346,8 @@
 
     /**
      * Function: twig_filter_preg_match
-     * Try to match a string against an array of regular expressions, or a single regular expression.
+     * Try to match a string against an array of regular expressions,
+     * or a single regular expression.
      */
     function twig_filter_preg_match($haystack, $try): bool {
         return match_any($try, $haystack);
@@ -393,7 +398,8 @@
 
     /**
      * Function: twig_filter_selected
-     * Returns a HTML @selected@ attribute if the test matches any of the supplied arguments.
+     * Returns a HTML @selected@ attribute if the
+     * test matches any of the supplied arguments.
      */
     function twig_filter_selected($test): string {
         $try = func_get_args();
@@ -412,7 +418,8 @@
 
     /**
      * Function: twig_filter_disabled
-     * Returns a HTML @disabled@ attribute if the test matches any of the supplied arguments.
+     * Returns a HTML @disabled@ attribute if the
+     * test matches any of the supplied arguments.
      */
     function twig_filter_disabled($test): string {
         $try = func_get_args();
@@ -443,7 +450,8 @@
 
     /**
      * Function: twig_filter_thumbnail
-     * Returns a thumbnail <img> tag for an uploaded image, optionally with enclosing <a> tag.
+     * Returns a thumbnail <img> tag for an uploaded image,
+     * optionally with enclosing <a> tag.
      */
     function twig_filter_thumbnail(
         $filename,
