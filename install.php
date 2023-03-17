@@ -341,7 +341,7 @@
                 width: 100%;
                 margin: 0rem;
                 font-size: 1.25em;
-                padding: 0.5em;
+                padding: 0.5rem;
                 border-radius: 0em;
                 border: 1px solid #cfcfcf;
                 background-color: #ffffff;
