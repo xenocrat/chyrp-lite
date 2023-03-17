@@ -288,6 +288,7 @@ textarea {
     background-color: #ffffff;
     border: 2px solid #0b0c0c;
     border-radius: 0em;
+    resize: vertical;
 }
 button {
     font: inherit;

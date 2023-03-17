@@ -415,6 +415,7 @@ textarea {
     background-color: #ffffff;
     border: 1px solid #c6ccc8;
     border-radius: 0em;
+    resize: vertical;
 }
 textarea:focus {
     outline: none;
