@@ -394,6 +394,10 @@ label {
     display: inline;
     font-weight: inherit;
 }
+textarea {
+    display: block;
+    resize: vertical;
+}
 select, input {
     display: inline-block;
 }
@@ -409,10 +413,10 @@ input[type="number"],
 input[type="range"],
 input[type="password"] {
     box-sizing: border-box;
-    width: 10em;
+    width: 20ch;
     color: #1f1f23;
     font-size: 1.25rem;
-    padding: 0.5em;
+    padding: 0.5rem;
     border-radius: 0em;
     border: 1px solid #cfcfcf;
     background-color: #ffffff;
