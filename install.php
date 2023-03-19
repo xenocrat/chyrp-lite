@@ -325,17 +325,17 @@
                 display: block;
                 font-weight: inherit;
             }
-            input, textarea, select {
+            input, select {
                 font-family: inherit;
                 font-size: inherit;
                 font-weight: inherit;
+                display: inline-block;
             }
             input[type="text"],
             input[type="email"],
             input[type="url"],
             input[type="number"],
             input[type="password"],
-            textarea,
             select {
                 box-sizing: border-box;
                 width: 100%;
