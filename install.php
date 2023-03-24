@@ -593,7 +593,7 @@
                         $(this).removeClass("error");
                 });
 
-                $("#locale").change(function(e) {
+                $("#locale, #adapter_field").change(function(e) {
                     $("#installer").submit();
                 });
             });
