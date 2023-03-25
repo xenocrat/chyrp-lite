@@ -8,6 +8,12 @@
 }
 @font-face {
     font-family: 'Open Sans webfont';
+    src: url('../../fonts/OpenSans-SemiBold.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Open Sans webfont';
     src: url('../../fonts/OpenSans-Bold.woff') format('woff');
     font-weight: bold;
     font-style: normal;
@@ -16,6 +22,12 @@
     font-family: 'Open Sans webfont';
     src: url('../../fonts/OpenSans-Italic.woff') format('woff');
     font-weight: normal;
+    font-style: italic;
+}
+@font-face {
+    font-family: 'Open Sans webfont';
+    src: url('../../fonts/OpenSans-SemiBoldItalic.woff') format('woff');
+    font-weight: 600;
     font-style: italic;
 }
 @font-face {
@@ -117,6 +129,7 @@ h1 {
 }
 h3, h4, h5, h6 {
     font-size: 1em;
+    font-weight: 600;
 }
 sup, sub {
     font-size: 0.5em;
@@ -392,7 +405,7 @@ ul#modules_disabled > li.error div.controls {
 
 label {
     display: inline;
-    font-weight: inherit;
+    font-weight: 600;
 }
 textarea {
     display: block;
