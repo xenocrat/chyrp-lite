@@ -505,6 +505,12 @@ form.filters {
 form.filters label {
     display: block;
 }
+form.split h3,
+form.split h4,
+form.split h5,
+form.split h6 {
+    margin-left: 45%;
+}
 form.split label {
     box-sizing: border-box;
     display: inline-block;
@@ -1065,6 +1071,12 @@ input.toolbar.hidden {
     }
     label {
         display: block;
+    }
+    form.split h3,
+    form.split h4,
+    form.split h5,
+    form.split h6 {
+        margin-left: 0rem;
     }
     form.split label {
         width: 100%;
