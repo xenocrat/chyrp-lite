@@ -713,12 +713,6 @@ msgstr "管理所有组"
 msgid "Search all groups for user&hellip;"
 msgstr "搜索所有用户组&hellip;"
 
-#: admin/pages/manage_groups.twig:9 admin/pages/manage_pages.twig:12
-#: admin/pages/manage_posts.twig:12 admin/pages/manage_uploads.twig:9
-#: admin/pages/manage_users.twig:12
-msgid "Query"
-msgstr "查询"
-
 #: admin/pages/manage_groups.twig:10 admin/pages/manage_pages.twig:13
 #: admin/pages/manage_posts.twig:13 admin/pages/manage_uploads.twig:10
 #: admin/pages/manage_users.twig:13

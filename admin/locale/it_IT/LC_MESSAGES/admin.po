@@ -737,12 +737,6 @@ msgstr "Gestisci Gruppi"
 msgid "Search all groups for user&hellip;"
 msgstr "Cerca tutti i gruppi per l'utente &hellip;"
 
-#: admin/pages/manage_groups.twig:9 admin/pages/manage_pages.twig:12
-#: admin/pages/manage_posts.twig:12 admin/pages/manage_uploads.twig:9
-#: admin/pages/manage_users.twig:12
-msgid "Query"
-msgstr "Domanda"
-
 #: admin/pages/manage_groups.twig:10 admin/pages/manage_pages.twig:13
 #: admin/pages/manage_posts.twig:13 admin/pages/manage_uploads.twig:10
 #: admin/pages/manage_users.twig:13
