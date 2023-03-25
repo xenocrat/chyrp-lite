@@ -343,7 +343,7 @@
                 text-decoration: none;
                 line-height: 1.5;
                 margin: 1rem 0rem;
-                padding: 0.4em 0.6em;
+                padding: 0.5rem;
                 background-color: #f2fbff;
                 border: 2px solid #b8cdd9;
                 border-radius: 0.3em;
