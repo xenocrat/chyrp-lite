@@ -5,11 +5,11 @@
 {% block content %}
 <form class="filters" action="{{ url('manage_pingbacks') }}" method="post" accept-charset="UTF-8" role="search">
 <fieldset role="presentation">
-<h3>
+<label for="query">
 {{ "Search&hellip;" | translate }}
 <a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
-</h3>
-<input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true, true) }}" id="query" aria-label="{{ 'Query' | translate | fix(true) }}">
+</label>
+<input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true, true) }}" id="query">
 <button type="submit" class="inline">{{ "Search" | translate }}</button>
 </fieldset>
 </form>

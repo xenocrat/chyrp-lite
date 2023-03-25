@@ -5,8 +5,8 @@
 {% block content %}
 <form class="filters" action="{{ url('manage_uploads') }}" method="post" accept-charset="UTF-8" role="search">
 <fieldset role="presentation">
-<h3>{{ "Search&hellip;" | translate }}</h3>
-<input class="text filter_text" type="text" name="search" value="{{ GET.search is defined ? GET.search | fix(true, true) : '' }}" id="search" aria-label="{{ 'Query' | translate | fix(true) }}">
+<label for="search">{{ "Search&hellip;" | translate }}</label>
+<input class="text filter_text" type="text" name="search" value="{{ GET.search is defined ? GET.search | fix(true, true) : '' }}" id="search">
 <button type="submit">{{ "Search" | translate }}</button>
 </fieldset>
 </form>

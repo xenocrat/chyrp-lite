@@ -5,8 +5,8 @@
 {% block content %}
 <form class="filters" action="{{ url('manage_groups') }}" method="post" accept-charset="UTF-8" role="search">
 <fieldset role="presentation">
-<h3>{{ "Search all groups for user&hellip;" | translate }}</h3>
-<input class="text filter_text" type="text" name="search" value="{{ GET.search is defined ? GET.search | fix(true, true) : '' }}" id="search" aria-label="{{ 'Query' | translate | fix(true) }}">
+<label for="search">{{ "Search all groups for user&hellip;" | translate }}</label>
+<input class="text filter_text" type="text" name="search" value="{{ GET.search is defined ? GET.search | fix(true, true) : '' }}" id="search">
 <button type="submit">{{ "Search" | translate }}</button>
 {% if visitor.group.can("add_group") %}
 <a href="{{ url('new_group') }}" class="button yay">
