@@ -586,7 +586,7 @@ table thead tr {
 }
 table thead tr th {
     padding: 0.5rem;
-    font-weight: bold;
+    font-weight: 600;
     vertical-align: middle;
     border: 1px solid #cfcfcf;
 }
@@ -706,7 +706,7 @@ p.flash.warning {
 }
 p.flash a {
     color: #ffffff;
-    font-weight: bold;
+    font-weight: 600;
     text-decoration: none;
 }
 
