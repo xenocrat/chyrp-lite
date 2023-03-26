@@ -1997,7 +1997,7 @@
      */
     function grab_urls($string): array {
         $urls = array();
-        $regx = "/<a(?= )[^>]* href=(\"[^\"]+\"|\'[^\']+\')[^>]*>[^<]+<\/a>/i";
+        $regx = "/<a(?= )[^>]* href=(\"[^\"]+\"|\'[^\']+\')[^>]*>.+?<\/a>/i";
 
         if (preg_match_all($regx, $string, $matches, PREG_PATTERN_ORDER))
             $urls = $matches[1];
