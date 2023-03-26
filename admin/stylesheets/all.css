@@ -778,12 +778,13 @@ a.button.yay:active {
 }
 button > img,
 a.button > img {
+    display: block;
     position: relative;
-    top: 6px;
+    top: 8px;
     width: 16px;
     height: 16px;
     float: left;
-    margin-right: 0.4em;
+    margin-right: 0.25rem;
 }
 button[disabled],
 button.disabled {
@@ -800,9 +801,9 @@ button.disabled:focus {
 div.confirmation button,
 div.confirmation a.button {
     min-width: 15em;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
-    padding-right: calc(16px + 0.5em);
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding-right: calc(16px + 0.5rem);
 }
 
 /* Group: Options */
