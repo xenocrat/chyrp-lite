@@ -497,6 +497,12 @@
             }
             @font-face {
                 font-family: 'Open Sans webfont';
+                src: url('../fonts/OpenSans-SemiBold.woff') format('woff');
+                font-weight: 600;
+                font-style: normal;
+            }
+            @font-face {
+                font-family: 'Open Sans webfont';
                 src: url('../fonts/OpenSans-Bold.woff') format('woff');
                 font-weight: bold;
                 font-style: normal;
@@ -505,6 +511,12 @@
                 font-family: 'Open Sans webfont';
                 src: url('../fonts/OpenSans-Italic.woff') format('woff');
                 font-weight: normal;
+                font-style: italic;
+            }
+            @font-face {
+                font-family: 'Open Sans webfont';
+                src: url('../fonts/OpenSans-SemiBoldItalic.woff') format('woff');
+                font-weight: 600;
                 font-style: italic;
             }
             @font-face {
@@ -573,7 +585,7 @@
             }
             h3 {
                 font-size: 1em;
-                font-weight: bold;
+                font-weight: 600;
                 margin: 1rem 0rem;
                 border-bottom: 1px solid #cfcfcf;
             }
