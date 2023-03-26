@@ -945,7 +945,7 @@ msgstr "URL di visualizzazione post"
 msgid "(requires clean URLs)"
 msgstr "(richiede URL conformati)"
 
-#: admin/pages/route_settings.twig:31
+#: admin/pages/route_settings.twig:30
 msgid "Syntax:"
 msgstr "Sintassi:"
 

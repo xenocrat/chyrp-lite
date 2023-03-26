@@ -921,7 +921,7 @@ msgstr "帖子查看链接"
 msgid "(requires clean URLs)"
 msgstr "(需要优雅链接)"
 
-#: admin/pages/route_settings.twig:31
+#: admin/pages/route_settings.twig:30
 msgid "Syntax:"
 msgstr "符号："
 
