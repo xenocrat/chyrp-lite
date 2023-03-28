@@ -745,9 +745,6 @@ a.prev_page:active {
     border-color: #1e57ba;
     outline: none;
 }
-div.pagination a.prev_page + a.next_page {
-    margin-left: 1rem;
-}
 button.boo,
 a.button.boo {
     color: #1f1f23;
@@ -804,6 +801,11 @@ div.confirmation a.button {
     margin-left: 1rem;
     margin-right: 1rem;
     padding-right: calc(16px + 0.5rem);
+}
+div.pagination a.prev_page,
+div.pagination a.next_page {
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
 
 /* Group: Options */
