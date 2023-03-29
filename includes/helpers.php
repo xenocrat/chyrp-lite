@@ -1719,12 +1719,17 @@
             if (timer_stop() > $limit)
                 break;
 
-            # Reset URL variables.
-            $scheme = null;
-            $host   = null;
-            $port   = null;
-            $path   = null;
-            $query  = null;
+            # Reset URL variables for each iteration.
+            unset(
+                $scheme,
+                $host,
+                $port,
+                $user,
+                $pass,
+                $path,
+                $query,
+                $fragment
+            );
 
             $endpoint = webmention_discover(unfix($url, true));
 
@@ -1734,7 +1739,7 @@
             if (DEBUG)
                 error_log("WEBMENTION @ ".$endpoint." (".$url.")");
 
-            extract(parse_url(add_scheme($endpoint)), EXTR_OVERWRITE);
+            extract(parse_url(add_scheme($endpoint)), EXTR_SKIP);
             fallback($path, "/");
             fallback($scheme, "http");
             fallback($port, ($scheme == "https") ? 443 : 80);
