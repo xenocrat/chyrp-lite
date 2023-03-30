@@ -344,7 +344,7 @@
                     $feathers
                 ),
                 order:array("created_at DESC")
-            )->fetch();
+            )->fetchColumn();
 
             # Are there posts newer than those displayed?
             $prev = $sql->select(
@@ -356,14 +356,14 @@
                     $feathers
                 ),
                 order:array("created_at ASC")
-            )->fetch();
+            )->fetchColumn();
 
             $prev = ($prev === false) ?
                 null :
-                strtotime($prev["created_at"]) ;
+                strtotime($prev) ;
             $next = ($next === false) ?
                 null :
-                strtotime($next["created_at"]) ;
+                strtotime($next) ;
 
             $this->display(
                 "pages".DIR."archive",
