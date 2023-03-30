@@ -1522,7 +1522,10 @@
                     __("Group not found.")
                 );
 
-            $group = $group->update($_POST['name'], array_keys($_POST['permissions']));
+            $group = $group->update(
+                $_POST['name'],
+                array_keys($_POST['permissions'])
+            );
 
             Flash::notice(
                 __("Group updated."),
