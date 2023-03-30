@@ -845,37 +845,51 @@
                     )
                 );
 
+            # Define and insert the default groups.
             $groups = array(
-                "admin"  => array_keys($names),
-                "member" => array("view_site"),
-                "friend" => array(
+                "Admin"  => array_keys($names),
+                "Member" => array("view_site"),
+                "Friend" => array(
                     "view_site",
                     "view_private",
                     "view_scheduled"
                 ),
-                "banned" => array(),
-                "guest"  => array("view_site")
+                "Banned" => array(),
+                "Guest"  => array("view_site")
             );
 
-            # Add the default groups.
             $group_id = array();
 
             foreach ($groups as $name => $permissions) {
-                $sql->replace(
-                    table:"groups",
-                    keys:"name",
-                    data:array("name" => ucfirst($name))
+                # Insert the group if it does not exist.
+                if (
+                    !$sql->count(
+                        tables:"groups",
+                        conds:array("name" => $name)
+                    )
+                )
+                    $sql->insert(
+                        table:"groups",
+                        data:array("name" => $name)
+                    );
+
+                # Fetch the group's ID for permission creation.
+                $group_id[$name] = $sql->select(
+                    tables:"groups",
+                    fields:"id",
+                    conds:array("name" => $name),
+                )->fetchColumn();
+
+                # Delete old permissions for this group.
+                $sql->delete(
+                    table:"permissions",
+                    conds:array("group_id" => $group_id[$name])
                 );
 
-                $group_id[$name] = $sql->latest("groups");
-
+                # Insert new permissions for this group.
                 foreach ($permissions as $permission)
-                    $sql->replace(
+                    $sql->insert(
                         table:"permissions",
-                        keys:array(
-                            "id",
-                            "group_id"
-                        ),
                         data:array(
                             "id" => $permission,
                             "name" => $names[$permission],
@@ -884,16 +898,12 @@
                     );
             }
 
-            # Normalize the Chyrp URL.
-            $chyrp_url = rtrim(add_scheme($_POST['url']), "/");
-
-            # Add the admin user account.
+            # Add the admin user account if it does not exist.
             if (
-                !$sql->select(
+                !$sql->count(
                     tables:"users",
-                    fields:"id",
                     conds:array("login" => $_POST['login'])
-                )->fetchColumn()
+                )
             )
                 $sql->insert(
                     table:"users",
@@ -901,11 +911,14 @@
                         "login" => $_POST['login'],
                         "password" => User::hash_password($_POST['password1']),
                         "email" => $_POST['email'],
-                        "group_id" => $group_id["admin"],
+                        "group_id" => $group_id["Admin"],
                         "approved" => true,
                         "joined_at" => datetime()
                     )
                 );
+
+            # Normalize the Chyrp URL.
+            $chyrp_url = rtrim(add_scheme($_POST['url']), "/");
 
             # Build the configuration file.
             $set = array(
@@ -933,8 +946,8 @@
                 $config->set("can_register", false),
                 $config->set("email_activation", false),
                 $config->set("email_correspondence", true),
-                $config->set("default_group", $group_id["member"]),
-                $config->set("guest_group", $group_id["guest"]),
+                $config->set("default_group", $group_id["Member"]),
+                $config->set("guest_group", $group_id["Guest"]),
                 $config->set("clean_urls", false),
                 $config->set("enable_homepage", false),
                 $config->set("post_url", "(year)/(month)/(day)/(url)/"),
