@@ -132,7 +132,7 @@
          * Function: fetch
          * Returns the current row as an array.
          */
-        public function fetch()/*: mixed */{
+        public function fetch(): mixed {
             return $this->query->fetch();
         }
 
