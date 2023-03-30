@@ -278,7 +278,8 @@
 
         /**
          * Function: replace
-         * Performs either an INSERT or an UPDATE depending on whether a row exists with the specified keys.
+         * Performs either an INSERT or an UPDATE depending
+         * on whether a row exists with the specified keys.
          *
          * Parameters:
          *     $table - Table to update or insert into.
