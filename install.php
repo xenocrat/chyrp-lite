@@ -798,7 +798,7 @@
                 )
             );
 
-            # Add the default permissions.
+            # Define and insert the default permissions.
             $names = array(
                 "change_settings" => "Change Settings",
                 "toggle_extensions" => "Toggle Extensions",
@@ -831,13 +831,16 @@
                 "export_content" => "Export Content"
             );
 
+            # Delete the old default permissions.
+            $sql->delete(
+                table:"permissions",
+                conds:array("group_id" => 0)
+            );
+
+            # Insert the new default permissions.
             foreach ($names as $id => $name)
-                $sql->replace(
+                $sql->insert(
                     table:"permissions",
-                    keys:array(
-                        "id",
-                        "group_id"
-                    ),
                     data:array(
                         "id" => $id,
                         "name" => $name,
@@ -880,13 +883,13 @@
                     conds:array("name" => $name),
                 )->fetchColumn();
 
-                # Delete old permissions for this group.
+                # Delete the old permissions for this group.
                 $sql->delete(
                     table:"permissions",
                     conds:array("group_id" => $group_id[$name])
                 );
 
-                # Insert new permissions for this group.
+                # Insert the new permissions for this group.
                 foreach ($permissions as $permission)
                     $sql->insert(
                         table:"permissions",
