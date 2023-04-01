@@ -831,10 +831,10 @@
                 "export_content" => "Export Content"
             );
 
-            # Delete the old default permissions.
+            # Delete all existing permissions.
             $sql->delete(
                 table:"permissions",
-                conds:array("group_id" => 0)
+                conds:false
             );
 
             # Insert the new default permissions.
@@ -882,12 +882,6 @@
                     fields:"id",
                     conds:array("name" => $name),
                 )->fetchColumn();
-
-                # Delete the old permissions for this group.
-                $sql->delete(
-                    table:"permissions",
-                    conds:array("group_id" => $group_id[$name])
-                );
 
                 # Insert the new permissions for this group.
                 foreach ($permissions as $permission)
