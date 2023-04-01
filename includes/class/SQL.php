@@ -154,8 +154,8 @@
          *
          * Parameters:
          *     $query - Query to execute.
-         *     $params - An associative array of parameters used in the query.
-         *     $throw_exceptions - Should an exception be thrown if the query fails?
+         *     $params - An associative array of query parameters.
+         *     $throw_exceptions - Should exceptions be thrown on error?
          */
         public function query(
             $query,
@@ -187,8 +187,8 @@
          *
          * Parameters:
          *     $tables - An array (or string) of tables to count results on.
-         *     $conds - An array (or string) of conditions to match.
-         *     $params - An associative array of parameters used in the query.
+         *     $conds - Rows to count. Supply @false@ to count all rows.
+         *     $params - An associative array of query parameters.
          *     $throw_exceptions - Should exceptions be thrown on error?
          */
         public function count(
@@ -214,9 +214,9 @@
          * Parameters:
          *     $tables - An array (or string) of tables to grab results from.
          *     $fields - Fields to select.
-         *     $conds - An array (or string) of conditions to match.
+         *     $conds - Rows to select. Supply @false@ to select all rows.
          *     $order - ORDER BY statement. Can be an array.
-         *     $params - An associative array of parameters used in the query.
+         *     $params - An associative array of query parameters.
          *     $limit - Limit for results.
          *     $offset - Offset for the select statement.
          *     $group - GROUP BY statement. Can be an array.
@@ -259,7 +259,7 @@
          * Parameters:
          *     $table - Table to insert to.
          *     $data - An associative array of data to insert.
-         *     $params - An associative array of parameters used in the query.
+         *     $params - An associative array of query parameters.
          *     $throw_exceptions - Should exceptions be thrown on error?
          */
         public function insert(
@@ -285,7 +285,7 @@
          *     $table - Table to update or insert into.
          *     $keys - Columns to match on.
          *     $data - Data for the insert and value matches for the keys.
-         *     $params - An associative array of parameters to be used in the query.
+         *     $params - An associative array of query parameters.
          *     $throw_exceptions - Should exceptions be thrown on error?
          */
         public function replace(
@@ -316,9 +316,9 @@
          *
          * Parameters:
          *     $table - Table to update.
-         *     $conds - Rows to update.
+         *     $conds - Rows to update. Supply @false@ to update all rows.
          *     $data - An associative array of data to update.
-         *     $params - An associative array of parameters used in the query.
+         *     $params - An associative array of query parameters.
          *     $throw_exceptions - Should exceptions be thrown on error?
          */
         public function update(
@@ -342,8 +342,8 @@
          *
          * Parameters:
          *     $table - Table to delete from.
-         *     $conds - Rows to delete..
-         *     $params - An associative array of parameters used in the query.
+         *     $conds - Rows to delete. Supply @false@ to delete all rows.
+         *     $params - An associative array of query parameters.
          *     $throw_exceptions - Should exceptions be thrown on error?
          */
         public function delete(
