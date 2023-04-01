@@ -96,7 +96,7 @@ msgstr "경로가 잘못된 컨트롤러로 시작되었습니다."
 #: includes/helpers.php:2479 includes/helpers.php:2484
 #: includes/helpers.php:2489 includes/helpers.php:2496
 #: includes/lib/ThumbnailFile.php:219 includes/lib/ThumbnailFile.php:250
-#: includes/lib/ThumbnailFile.php:310 includes/thumbnail.php:16 install.php:965
+#: includes/lib/ThumbnailFile.php:310 includes/thumbnail.php:16 install.php:959
 #: upgrade.php:189 upgrade.php:205 upgrade.php:221 upgrade.php:237
 #: upgrade.php:253 upgrade.php:273 upgrade.php:317 upgrade.php:333
 #: upgrade.php:353 upgrade.php:369 upgrade.php:385 upgrade.php:401
@@ -1374,130 +1374,130 @@ msgstr "서버에서 데이터베이스를 쓰기 가능하게 만드십시오."
 msgid "Please enter a username and password for the database."
 msgstr "데이터베이스의 사용자명과 암호를 입력하십시오."
 
-#: install.php:966 upgrade.php:190 upgrade.php:206 upgrade.php:222
+#: install.php:960 upgrade.php:190 upgrade.php:206 upgrade.php:222
 #: upgrade.php:238 upgrade.php:254 upgrade.php:274 upgrade.php:318
 #: upgrade.php:334 upgrade.php:354 upgrade.php:370 upgrade.php:386
 #: upgrade.php:402 upgrade.php:422 upgrade.php:438 upgrade.php:559
 msgid "Could not write the configuration file."
 msgstr "구성 파일을 쓸 수 없습니다."
 
-#: install.php:984
+#: install.php:978
 msgid "Database Setup"
 msgstr "데이터베이스 설정"
 
-#: install.php:986
+#: install.php:980
 msgid "Adapter"
 msgstr "어댑터"
 
-#: install.php:1000
+#: install.php:994
 msgid "Host"
 msgstr "호스트"
 
-#: install.php:1004
+#: install.php:998
 msgid "Port"
 msgstr "포트"
 
-#: install.php:1004 install.php:1033
+#: install.php:998 install.php:1027
 msgid "(optional)"
 msgstr "(선택 사항)"
 
-#: install.php:1008 install.php:1073
+#: install.php:1002 install.php:1067
 msgid "Username"
 msgstr "사용자명"
 
-#: install.php:1012 install.php:1077 install.php:1081
+#: install.php:1006 install.php:1071 install.php:1075
 msgid "Password"
 msgstr "비밀번호"
 
-#: install.php:1016
+#: install.php:1010
 msgid "Database"
 msgstr "데이터베이스"
 
-#: install.php:1018
+#: install.php:1012
 msgid "(absolute or relative path)"
 msgstr "(상대 경로 또는 절대 경로)"
 
-#: install.php:1024
+#: install.php:1018
 msgid "Make sure your PostgreSQL database uses UTF-8 encoding."
 msgstr "PostgreSQL 데이터베이스가 UTF-8 인코딩을 사용하는지 확인하십시오."
 
-#: install.php:1027
+#: install.php:1021
 msgid ""
 "The collation <code>utf8mb4_general_ci</code> is recommended for your MySQL "
 "database."
 msgstr ""
 
-#: install.php:1030
+#: install.php:1024
 msgid ""
 "Be sure to put your SQLite database outside the document root directory, "
 "otherwise visitors will be able to download it."
 msgstr ""
 
-#: install.php:1033
+#: install.php:1027
 msgid "Table Prefix"
 msgstr "테이블 접두사"
 
-#: install.php:1037
+#: install.php:1031
 msgid "Website Setup"
 msgstr "웹사이트 설정"
 
-#: install.php:1039
+#: install.php:1033
 msgid "Chyrp URL"
 msgstr ""
 
-#: install.php:1043
+#: install.php:1037
 msgid "Site Name"
 msgstr "사이트명"
 
-#: install.php:1044
+#: install.php:1038
 msgid "My Awesome Site"
 msgstr "나의 멋진 사이트"
 
-#: install.php:1047
+#: install.php:1041
 msgid "Description"
 msgstr "설명"
 
-#: install.php:1051
+#: install.php:1045
 msgid "Time Zone"
 msgstr "시간대"
 
-#: install.php:1061
+#: install.php:1055
 msgid "Language"
 msgstr "언어"
 
-#: install.php:1071
+#: install.php:1065
 msgid "Admin Account"
 msgstr "관리자 계정"
 
-#: install.php:1081
+#: install.php:1075
 msgid "(again)"
 msgstr "비밀번호 확인"
 
-#: install.php:1085
+#: install.php:1079
 msgid "Email Address"
 msgstr "이메일 주소"
 
-#: install.php:1088
+#: install.php:1082
 msgid "Install me!"
 msgstr "설치가 필요합니다."
 
-#: install.php:1091
+#: install.php:1085
 msgid "Installation Complete"
 msgstr "설치가 완료되었습니다"
 
-#: install.php:1092 upgrade.php:893
+#: install.php:1086 upgrade.php:893
 msgid "What now?"
 msgstr ""
 
-#: install.php:1094
+#: install.php:1088
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr "더 이상 필요하지 않은 경우 <em>install.php</em>를 삭제하세요."
 
-#: install.php:1095
+#: install.php:1089
 msgid "Log in to your site and configure things to your liking."
 msgstr "사이트에 로그인하고 원하는 대로 구성하세요."
 
-#: install.php:1097 upgrade.php:899
+#: install.php:1091 upgrade.php:899
 msgid "Take me to my site!"
 msgstr "사이트로 이동합니다."
 
