@@ -458,7 +458,8 @@
         $alt_text = "",
         $url = null,
         $args = array(),
-        $sizes = "100vw"
+        $sizes = "100vw",
+        $lazy = true
     ): string {
         $filepath = Config::current()->chyrp_url.
                     "/includes/thumbnail.php?file=".
@@ -488,12 +489,13 @@
                '" srcset="'.fix(implode(", ", $srcset), true).
                '" sizes="'.fix($sizes, true).
                '" alt="'.fix($alt_text, true).
-               '" class="image" loading="lazy">';
+               '" class="image" loading="'.($lazy ? 'lazy' : 'eager').'">';
 
         # Enclose in <a> tag? Provide @true@ or a candidate URL.
         if (isset($url) and $url !== false) {
             $href = (is_string($url) and is_url($url)) ?
-                $url : uploaded($filename) ;
+                $url :
+                uploaded($filename) ;
         }
 
         $return = $img;
