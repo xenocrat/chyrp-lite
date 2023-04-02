@@ -1178,7 +1178,7 @@ msgstr "%s ميجابايت"
 msgid "%s KB"
 msgstr "%s كيلوبايت"
 
-#: includes/lib/Leaf.php:504
+#: includes/lib/Leaf.php:506
 msgid "Image source"
 msgstr "مصدر الصورة"
 
