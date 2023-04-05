@@ -169,9 +169,9 @@
                 )->fetchAll();
 
                 foreach ($results as $result) {
-                    $id = $result["id"];
-                    $post_id = $result["post_id"];
-                    $_SESSION['likes'][$post_id] = $id;
+                    $this_id = $result["id"];
+                    $this_post_id = $result["post_id"];
+                    $_SESSION['likes'][$this_post_id] = $this_id;
                 }
             }
 
