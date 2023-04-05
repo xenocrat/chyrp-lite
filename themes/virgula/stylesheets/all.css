@@ -147,28 +147,34 @@ small {
 sup, sub {
     font-size: 0.7em;
 }
-ol {
+ol,
+#comments ol {
     margin: 1rem 0rem;
     padding: 0rem;
     list-style-type: decimal;
     list-style-position: outside;
 }
-ul {
+ul,
+#comments ul {
     margin: 1rem 0rem;
     padding: 0rem;
     list-style-type: disc;
     list-style-position: outside;
 }
-ul ul {
+ul ul,
+#comments ul ul {
     list-style-type: circle;
 }
-ol ol {
+ol ol,
+#comments ol ol {
     list-style-type: lower-latin;
 }
-html[lang="ar"] ol ol {
+html[lang="ar"] ol ol,
+html[lang="ar"] #comments ol ol {
     list-style-type: arabic-indic;
 }
-html[lang="he"] ol ol {
+html[lang="he"] ol ol,
+html[lang="he"] #comments ol ol {
     list-style-type: hebrew;
 }
 ul.navigation {
@@ -183,7 +189,7 @@ ul.navigation > li:not(:last-child):after {
     content: " / ";
 }
 li {
-    margin: 0.5rem 0rem 0.5rem 2rem;
+    margin: 0.5rem 2rem;
 }
 li::marker {
     color: #505a5f;
@@ -426,7 +432,7 @@ section.photo > a:focus {
     list-style: none;
 }
 #comments > li {
-    margin-left: 0rem;
+    margin: 0rem;
     border-bottom: 1px solid #0b0c0c;
 }
 #tag_cloud > a.tag {

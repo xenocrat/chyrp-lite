@@ -169,26 +169,32 @@ hr:last-child,
 hr + hr {
     display: none;
 }
-ul {
+ul,
+#comments ul {
     list-style: disc outside;
     margin: 1em 2em;
     padding: 0em;
 }
-ul ul {
+ul ul,
+#comments ul ul {
     list-style-type: circle;
 }
-ol {
+ol,
+#comments ol {
     list-style: decimal outside;
     margin: 1em 2em;
     padding: 0em;
 }
-ol ol {
+ol ol,
+#comments ol ol {
     list-style-type: lower-latin;
 }
-html[lang="ar"] ol ol {
+html[lang="ar"] ol ol,
+html[lang="ar"] #comments ol ol {
     list-style-type: arabic-indic;
 }
-html[lang="he"] ol ol {
+html[lang="he"] ol ol,
+html[lang="he"] #comments ol ol {
     list-style-type: hebrew;
 }
 dl {
