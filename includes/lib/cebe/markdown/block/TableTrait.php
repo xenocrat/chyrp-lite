@@ -140,6 +140,11 @@ trait TableTrait
 		return "<table>\n<thead>\n$head</thead>\n<tbody>\n$body</tbody>\n</table>\n";
 	}
 
+	protected function parseTdMarkers()
+	{
+		return array('|');
+	}
+
 	/**
 	 * @marker |
 	 */

@@ -12,6 +12,11 @@ namespace cebe\markdown\inline;
  */
 trait CodeTrait
 {
+	protected function parseInlineCodeMarkers()
+	{
+		return array('`');
+	}
+
 	/**
 	 * Parses an inline code span `` ` ``.
 	 * @marker `

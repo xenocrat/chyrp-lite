@@ -12,6 +12,11 @@ namespace cebe\markdown\inline;
  */
 trait StrikeoutTrait
 {
+	protected function parseStrikeMarkers()
+	{
+		return array('~~');
+	}
+
 	/**
 	 * Parses the strikethrough feature.
 	 * @marker ~~

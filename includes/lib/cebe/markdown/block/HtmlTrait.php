@@ -117,6 +117,11 @@ trait HtmlTrait
 		return $block['content'] . "\n";
 	}
 
+	protected function parseEntityMarkers()
+	{
+		return array('&');
+	}
+
 	/**
 	 * Parses an & or a html entity definition.
 	 * @marker &
@@ -139,6 +144,11 @@ trait HtmlTrait
 		return $block[1];
 	}
 
+	protected function parseInlineHtmlMarkers()
+	{
+		return array('<');
+	}
+
 	/**
 	 * Parses inline HTML.
 	 * @marker <
@@ -155,6 +165,11 @@ trait HtmlTrait
 			}
 		}
 		return [['text', '&lt;'], 1];
+	}
+
+	protected function parseGtMarkers()
+	{
+		return array('>');
 	}
 
 	/**

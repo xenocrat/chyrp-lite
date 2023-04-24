@@ -12,6 +12,11 @@ namespace cebe\markdown\inline;
  */
 trait EmphStrongTrait
 {
+	protected function parseEmphStrongMarkers()
+	{
+		return array('_', '*');
+	}
+
 	/**
 	 * Parses emphasized and strong elements.
 	 * @marker _

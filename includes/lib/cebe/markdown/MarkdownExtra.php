@@ -179,6 +179,10 @@ class MarkdownExtra extends Markdown
 
 	// inline parsing
 
+	protected function parseSpecialAttributesMarkers()
+	{
+		return array('{');
+	}
 
 	/**
 	 * @marker {

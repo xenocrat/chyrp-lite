@@ -262,8 +262,8 @@ abstract class Parser
 	 * you may want to use [[renderText]] to deal with them.
 	 *
 	 * You may override this method to define a set of markers and parsing methods.
-	 * The default implementation looks for protected methods starting with `parse` that
-	 * also have an `@marker` annotation in PHPDoc.
+	 * The default implementation looks for protected methods starting with `parse`
+	 * with a matching `Markers` method. E.g. parseEscape() and parseEscapeMarkers().
 	 *
 	 * @return array a map of markers to parser methods
 	 */
@@ -275,9 +275,11 @@ abstract class Parser
 		foreach($reflection->getMethods(ReflectionMethod::IS_PROTECTED) as $method) {
 			$methodName = $method->getName();
 			if (strncmp($methodName, 'parse', 5) === 0) {
-				preg_match_all('/@marker ([^\s]+)/', $method->getDocComment(), $matches);
-				foreach($matches[1] as $match) {
-					$markers[$match] = $methodName;
+				if (method_exists($this, $methodName.'Markers')) {
+					$array = call_user_func(array($this, $methodName.'Markers'));
+					foreach($array as $marker) {
+						$markers[$marker] = $methodName;
+					}
 				}
 			}
 		}
@@ -363,6 +365,16 @@ abstract class Parser
 		$this->_depth--;
 
 		return $paragraph;
+	}
+
+	/**
+	 * Declares inline markers for the corresponding parser method.
+	 *
+	 * @return array
+	 */
+	protected function parseEscapeMarkers()
+	{
+		return array('\\');
 	}
 
 	/**

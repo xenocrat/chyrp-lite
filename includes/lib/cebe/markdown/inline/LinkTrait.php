@@ -56,6 +56,11 @@ trait LinkTrait
 		return strtr($text, $strtr);
 	}
 
+	protected function parseLinkMarkers()
+	{
+		return array('[');
+	}
+
 	/**
 	 * Parses a link indicated by `[`.
 	 * @marker [
@@ -85,6 +90,11 @@ trait LinkTrait
 			}
 			return [['text', $result], $i];
 		}
+	}
+
+	protected function parseImageMarkers()
+	{
+		return array('![');
 	}
 
 	/**
@@ -159,6 +169,11 @@ REGEXP;
 			}
 		}
 		return false;
+	}
+
+	protected function parseLtMarkers()
+	{
+		return array('<');
 	}
 
 	/**

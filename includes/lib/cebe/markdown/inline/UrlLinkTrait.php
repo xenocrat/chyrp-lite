@@ -15,6 +15,11 @@ defined('ENT_HTML401') || define('ENT_HTML401', 0);
  */
 trait UrlLinkTrait
 {
+	protected function parseUrlMarkers()
+	{
+		return array('http', 'ftp');
+	}
+
 	/**
 	 * Parses urls and adds auto linking feature.
 	 * @marker http
