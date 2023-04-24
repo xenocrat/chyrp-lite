@@ -1322,10 +1322,15 @@
      *     https://github.github.com/gfm/
      */
     function markdown($text): string {
-        $parser = new \cebe\markdown\GithubMarkdown();
-        $parser->html5 = true;
-        $parser->keepListStartNumber = true;
-        $parser->enableNewlines = false;
+        static $parser;
+
+        if (!isset($parser)) {
+            $parser = new \cebe\markdown\GithubMarkdown();
+            $parser->html5 = true;
+            $parser->keepListStartNumber = true;
+            $parser->enableNewlines = false;
+        }
+
         return $parser->parse($text);
     }
 
