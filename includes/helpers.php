@@ -1325,7 +1325,7 @@
         static $parser;
 
         if (!isset($parser)) {
-            $parser = new \cebe\markdown\GithubMarkdown();
+            $parser = new \cebe\markdown\ChyrpMarkdown();
             $parser->html5 = true;
             $parser->keepListStartNumber = true;
             $parser->enableNewlines = false;
