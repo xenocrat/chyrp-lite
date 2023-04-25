@@ -51,8 +51,6 @@ class GithubMarkdown extends Markdown
 		'|', // pipe
 	];
 
-
-
 	/**
 	 * Consume lines for a paragraph
 	 *
@@ -98,7 +96,7 @@ class GithubMarkdown extends Markdown
 	}
 
 	/**
-	 * @inheritdocs
+	 * @inheritDoc
 	 *
 	 * Parses a newline indicated by two spaces on the end of a markdown line.
 	 */
@@ -123,15 +121,15 @@ class GithubMarkdown extends Markdown
 	{
 		$br = $this->html5 ? "<br>\n" : "<br />\n";
 
-		# If the backslash is followed by a newline.
-		# Note: GFM doesn't allow spaces after the backslash.
+		// If the backslash is followed by a newline.
+		// Note: GFM doesn't allow spaces after the backslash.
 		if ($text[1] === "\n") {
 
 			# Return the line break
 			return [["text", $br], 2];
 		}
 
-		# Otherwise parse the sequence normally
+		// Otherwise parse the sequence normally
 		return parent::parseEscape($text);
 
 	}

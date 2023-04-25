@@ -1,9 +1,12 @@
 <?php
+/**
+ * @copyright Copyright (c) 2023 Carsten Brandt and other contributors
+ */
 
 namespace cebe\markdown;
 
 /**
- * Markdown parser for Chyrp Lite flavored markdown.
+ * Markdown parser to extend Github flavored markdown for Chyrp Lite.
  */
 class ChyrpMarkdown extends GithubMarkdown
 {
@@ -11,7 +14,7 @@ class ChyrpMarkdown extends GithubMarkdown
 	use block\FootnoteTrait;
 
     /**
-     * @inheritdoc
+     * @inheritDoc
      */
     function parse($text)
     {
