@@ -76,6 +76,9 @@ p {
 p:empty {
     margin-bottom: 0em;
 }
+p.footnote-backrefs {
+    font-size: 0.75em;
+}
 h1 {
     font-size: 2em;
     font-weight: bold;
@@ -114,7 +117,8 @@ h4.archive {
     font-size: 1.33em;
 }
 sup, sub {
-    font-size: 0.5em;
+    line-height: 1;
+    font-size: 0.75em;
 }
 em {
     font: inherit;

@@ -149,6 +149,7 @@ mark {
     background-color: #ffdd00;
 }
 sup, sub {
+    line-height: 1;
     font-size: 0.7em;
 }
 ol,
@@ -346,6 +347,9 @@ main > details,
 div.doaction,
 nav.traversal {
     margin: 2rem 0rem;
+}
+p.footnote-backrefs {
+    font-size: 0.7em;
 }
 form.search_box {
     position: relative;
