@@ -151,6 +151,10 @@ small {
     font-weight: normal;
     font-size: 0.8em;
 }
+mark {
+    color: #1f1f23;
+    background-color: #ffee11;
+}
 blockquote {
     font-size: 1em;
     font-style: italic;
