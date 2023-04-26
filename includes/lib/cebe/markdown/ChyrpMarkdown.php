@@ -15,6 +15,9 @@ class ChyrpMarkdown extends GithubMarkdown
 	// include block element parsing using traits
 	use block\FootnoteTrait;
 
+    // include inline element parsing using traits
+    use inline\HighlightTrait;
+
     /**
      * @inheritDoc
      */
