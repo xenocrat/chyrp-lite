@@ -54,7 +54,7 @@ visitors will see when they first arrive at your website.
 
 ## Requirements
 
-* [PHP](https://www.php.net/supported-versions.php) with default extensions (Session, JSON, Ctype, libxml, SimpleXML)
+* [PHP 8.0+](https://www.php.net/supported-versions.php) with default extensions (Session, JSON, Ctype, libxml, SimpleXML)
 * [PDO](https://www.php.net/manual/en/book.pdo.php)
 * MySQL 4.1+
 * SQLite 3+
