@@ -87,7 +87,7 @@ trait FootnoteTrait
     protected function getFootnotesHtml(array $footnotesSorted)
     {
         $hr = $this->html5 ? "<hr>\n" : "<hr />\n";
-        $footnotesHtml = "\n<div class=\"footnotes\" role=\"doc-endnotes\">\n$hr<ol>\n\n";
+        $footnotesHtml = "\n<div class=\"footnotes\" role=\"doc-endnotes\">\n$hr<ol>\n";
         foreach ($footnotesSorted as $footnoteInfo) {
             $backLinks = [];
             foreach ($footnoteInfo['refs'] as $refIndex => $refNum) {
@@ -97,7 +97,7 @@ trait FootnoteTrait
                 $backLinks[] = '<a href="#fnref'.'-'.$fnref.'" role="doc-backlink">&#8617;&#xFE0E;</a>';
             }
             $linksPara = '<p class="footnote-backrefs">'.join("\n", $backLinks)."</p>";
-            $footnotesHtml .= "<li id=\"fn-{$footnoteInfo['num']}\" role=\"doc-endnote\">\n{$footnoteInfo['html']}$linksPara\n</li>\n\n";
+            $footnotesHtml .= "<li id=\"fn-{$footnoteInfo['num']}\" role=\"doc-endnote\">\n{$footnoteInfo['html']}$linksPara\n</li>\n";
         }
         $footnotesHtml .= "</ol>\n</div>\n";
         return $footnotesHtml;
