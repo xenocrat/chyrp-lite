@@ -54,8 +54,8 @@ html[lang="he"] {
     direction: rtl;
 }
 *::selection {
-    color: #ffffff;
-    background-color: #0070c4;
+    color: #1f1f23;
+    background-color: #ffdd00;
 }
 body {
     font-family: "Open Sans webfont", sans-serif;
@@ -165,7 +165,7 @@ small {
 }
 mark {
     color: #1f1f23;
-    background-color: #ffee11;
+    background-color: #ffdd00;
 }
 blockquote {
     font-size: 1em;
