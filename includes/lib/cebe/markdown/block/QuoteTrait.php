@@ -44,7 +44,6 @@ trait QuoteTrait
 		$block = [
 			'quote',
 			'content' => $this->parseBlocks($content),
-			'simple' => true,
 		];
 		return [$block, $i];
 	}

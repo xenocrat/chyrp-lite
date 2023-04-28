@@ -13,16 +13,18 @@ namespace cebe\markdown;
 class ChyrpMarkdown extends GithubMarkdown
 {
 	// include block element parsing using traits
+	use block\FigureTrait;
 	use block\FootnoteTrait;
 
-    // include inline element parsing using traits
-    use inline\HighlightTrait;
+	// include inline element parsing using traits
+	use inline\HighlightTrait;
+	use inline\SupSubTrait;
 
-    /**
-     * @inheritDoc
-     */
-    function parse($text)
-    {
-        return $this->addParsedFootnotes(parent::parse($text));
-    }
+	/**
+	 * @inheritDoc
+	 */
+	function parse($text)
+	{
+		return $this->addParsedFootnotes(parent::parse($text));
+	}
 }
