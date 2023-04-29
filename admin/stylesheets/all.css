@@ -134,7 +134,7 @@ h3, h4, h5, h6 {
 sup, sub {
     font-size: 0.5em;
 }
-em {
+em, dfn {
     font: inherit;
     font-style: italic;
 }
@@ -149,15 +149,23 @@ mark {
     color: #1f1f23;
     background-color: #ffdd00;
 }
-p {
-    margin-bottom: 1rem;
+figure, blockquote {
+    margin: 1rem;
+    font: inherit;
+    font-size: 1rem;
 }
 blockquote {
-    margin: 1rem;
     font-style: italic;
+}
+figcaption {
+    font-size: 0.8em;
+    margin: 1rem 0rem;
 }
 blockquote em {
     font-style: normal;
+}
+p {
+    margin-bottom: 1rem;
 }
 a:link,
 a:visited {

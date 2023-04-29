@@ -126,11 +126,27 @@ h3, h4, h5, h6 {
     font-weight: 600;
 }
 sup, sub {
-    font-size: 0.5em;
+    line-height: 1;
+    font-size: 0.7em;
 }
-em {
+em, dfn {
     font: inherit;
     font-style: italic;
+}
+figure, blockquote {
+    margin: 1rem;
+    font: inherit;
+    font-size: 1rem;
+}
+blockquote {
+    font-style: italic;
+}
+figcaption {
+    font-size: 0.8em;
+    margin: 1rem 0rem;
+}
+blockquote em {
+    font-style: normal;
 }
 strong {
     font: inherit;
@@ -205,13 +221,6 @@ pre > code {
     display: block;
     border: none;
     padding: 0px;
-}
-blockquote {
-    margin: 1rem;
-    font-style: italic;
-}
-blockquote em {
-    font-style: normal;
 }
 img {
     max-width: 100%;
