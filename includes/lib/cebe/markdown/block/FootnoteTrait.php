@@ -76,8 +76,16 @@ trait FootnoteTrait
 			}
 		}, $html);
 
-		// Get the footnote HTML and add it to the end of the document.
-		return $referencedHtml . $this->getFootnotesHtml($footnotesSorted);
+		// Get the footnote HTML.
+		$footnotes = $referencedHtml . $this->getFootnotesHtml($footnotesSorted);
+
+		// Reset footnote properties in case this parser instance is reused.
+		$this->footnotes = [];
+		$this->footnoteLinkNum = 0;
+		$this->footnoteLinks = [];
+
+		// Add the footnote HTML to the end of the document.
+		return $footnotes;
 	}
 
 	/**
