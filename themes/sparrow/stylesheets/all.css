@@ -141,9 +141,6 @@ em {
     font: inherit;
     font-style: italic;
 }
-blockquote em {
-    font-style: normal;
-}
 strong {
     font: inherit;
     font-weight: bold;
@@ -159,11 +156,21 @@ mark {
     color: #1f1f23;
     background-color: #ffdd00;
 }
-blockquote {
-    font-size: 1em;
+figure, blockquote {
+    margin: 1rem;
+    font: inherit;
+    font-size: 1.5rem;
     font-style: italic;
-    padding: 0em 2em;
-    margin: 0em 0em 1em 0em;
+    page-break-inside: avoid;
+}
+figcaption {
+    margin: 1rem 0rem;
+    font-size: 1rem;
+    font-style: normal;
+}
+figure em,
+blockquote em {
+    font-style: normal;
 }
 pre {
     font-family: "Cousine webfont", monospace;
@@ -755,9 +762,6 @@ div.standalone > *:last-child {
     }
     body {
         margin-bottom: 2rem;
-    }
-    blockquote {
-        padding: 0em 1em;
     }
     input, select {
         width: 100%;

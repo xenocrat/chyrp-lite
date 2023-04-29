@@ -8,13 +8,15 @@
 <h6 class="post_byline">{{ "Written by %s" | translate | format(post.author.name) }}</h6>
 {% endif %}
 <section class="quote">
+<figure>
 <blockquote>
 {{ post.quote }}
 </blockquote>
 {% if post.source is not empty %}
-<cite>
+<figcaption>
 {{ post.source }}
-</cite>
+</figcaption>
 {% endif %}
+</figure>
 </section>
 {% endblock %}

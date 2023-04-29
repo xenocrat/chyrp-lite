@@ -107,6 +107,9 @@ strong {
     font: inherit;
     font-weight: bold;
 }
+cite {
+    font: inherit;
+}
 em, dfn {
     font: inherit;
     font-style: italic;
@@ -121,6 +124,11 @@ figure, blockquote {
 figcaption {
     margin: 1rem 0rem;
     font-size: 1rem;
+    font-style: normal;
+}
+figure em,
+blockquote em {
+    font-style: normal;
 }
 pre {
     font-family: "Cousine webfont", monospace;
