@@ -144,7 +144,7 @@ sup, sub {
     line-height: 1;
     font-size: 0.75em;
 }
-em {
+em, dfn {
     font: inherit;
     font-style: italic;
 }
@@ -166,16 +166,16 @@ mark {
 figure, blockquote {
     margin: 1rem;
     font: inherit;
-    font-size: 1.5rem;
-    font-style: italic;
+    font-size: 1rem;
     page-break-inside: avoid;
 }
-figcaption {
-    margin: 1rem 0rem;
-    font-size: 1rem;
-    font-style: normal;
+blockquote {
+    font-style: italic;
 }
-figure em,
+figcaption {
+    font-size: 0.8em;
+    margin: 1rem 0rem;
+}
 blockquote em {
     font-style: normal;
 }
