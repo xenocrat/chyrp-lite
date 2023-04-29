@@ -124,7 +124,7 @@ blockquote {
     font-style: italic;
 }
 figcaption {
-    font-size: 0.8em;
+    font-size: 0.7em;
     margin: 1rem 0rem;
 }
 blockquote em {
@@ -132,7 +132,7 @@ blockquote em {
 }
 pre {
     font-family: "Cousine webfont", monospace;
-    font-size: 0.9em;
+    font-size: 0.85em;
     margin: 1rem 0rem;
     overflow-x: auto;
 }

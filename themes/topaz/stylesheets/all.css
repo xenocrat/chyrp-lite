@@ -157,7 +157,7 @@ cite {
 }
 small {
     font-weight: normal;
-    font-size: 0.8em;
+    font-size: 0.75em;
 }
 mark {
     color: #1f1f23;
@@ -173,7 +173,7 @@ blockquote {
     font-style: italic;
 }
 figcaption {
-    font-size: 0.8em;
+    font-size: 0.75em;
     margin: 1rem 0rem;
 }
 blockquote em {
