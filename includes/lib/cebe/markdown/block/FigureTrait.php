@@ -48,29 +48,42 @@ trait FigureTrait
 			}
 		}
 
-		// Add a figcaption discovered at top or bottom of the figure
-		if (!empty($caption) && (isset($caption[$current]) or isset($caption[$i-1]))) {
-			if (isset($caption[$current])) {
-				$content = array_merge(array("<figcaption>"), $caption, array("</figcaption>"), $content);
-			} else {
-				$content = array_merge($content, array("<figcaption>"), $caption, array("</figcaption>"));
-			}
+		// determine caption placement
+		if (isset($caption[$current])) {
+			$endcap = false;
+		} elseif (isset($caption[$i-1])) {
+			$endcap = true;
+		} else {
+			$endcap = null;
 		}
 
 		$block = [
 			'figure',
+			'endcap' => $endcap,
 			'content' => $this->parseBlocks($content),
+			'caption' => $this->parseBlocks(array_values($caption)),
 		];
 		return [$block, $i];
 	}
-
 
 	/**
 	 * Renders a figure
 	 */
 	protected function renderFigure($block)
 	{
-		return '<figure>' . $this->renderAbsy($block['content']) . "</figure>\n";
+		if ($block['endcap'] !== null) {
+			$caption = '<figcaption>' . $this->renderAbsy($block['caption']) . "</figcaption>\n";
+		} else {
+			$caption = "";
+		}
+
+		if ($block['endcap'] === false) {
+			$figure = '<figure>' . $caption . $this->renderAbsy($block['content']) . "</figure>\n";
+		} else {
+			$figure = '<figure>' . $this->renderAbsy($block['content']) . $caption . "</figure>\n";
+		}
+
+		return $figure;
 	}
 
 	abstract protected function parseBlocks($lines);

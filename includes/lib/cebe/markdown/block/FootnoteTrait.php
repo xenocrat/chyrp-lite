@@ -97,7 +97,8 @@ trait FootnoteTrait
 				$backLinks[] = '<a href="#fnref'.'-'.$fnref.'" role="doc-backlink">&#8617;&#xFE0E;</a>';
 			}
 			$linksPara = '<p class="footnote-backrefs">'.join("\n", $backLinks)."</p>";
-			$footnotesHtml .= "<li id=\"fn-{$footnoteInfo['num']}\" role=\"doc-endnote\">\n{$footnoteInfo['html']}\n$linksPara\n</li>\n";
+			$footnotesHtml .= "<li id=\"fn-{$footnoteInfo['num']}\" role=\"doc-endnote\">";
+			$footnotesHtml .= "\n{$footnoteInfo['html']}\n$linksPara\n</li>\n";
 		}
 		$footnotesHtml .= "</ol>\n</div>\n";
 		return $footnotesHtml;
