@@ -17,7 +17,10 @@ trait FigureTrait
 	 */
 	protected function identifyFigure($line)
 	{
-		return $line[0] === ':' && (!isset($line[1]) || ($l1 = $line[1]) === ' ' || $l1 === "\t");
+		return $line[0] === ':' &&
+			(!isset($line[1]) || ($l1 = $line[1]) === ' ' || $l1 === "\t" ||
+				($l1 === ":" && (!isset($line[2]) || ($l2 = $line[2]) === ' ' || $l2 === "\t"))
+			);
 	}
 
 	/**
