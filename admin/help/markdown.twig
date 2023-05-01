@@ -87,6 +87,10 @@
 <td>{{ "````<br>Code block<br>````" | translate }}</td>
 <td><pre><code>{{ "Code block" | translate }}</code></pre></td>
 </tr>
+<tr>
+<td>{{ "A footnote label. [^label]" | translate }}<br><br>{{ "[^label]: The footnote." | translate }}</td>
+<td>{{ "A footnote label." | translate }} <sup><a href="#">1</a></sup></td>
+</tr>
 </tbody>
 </table>
 {% endblock %}
