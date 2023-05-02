@@ -39,9 +39,10 @@ trait FigureTrait
 				} elseif (strncmp($line, ': ', 2) === 0) {
 					$line = substr($line, 2);
 				} elseif (strncmp($line, ':: ', 3) === 0) {
+					$line = substr($line, 3);
 					// allow contiguous caption lines only
 					if (empty($caption) || isset($caption[$i-1])) {
-						$caption[$i] = $line = substr($line, 3);
+						$caption[$i] = $line;
 						continue;
 					}
 				}
