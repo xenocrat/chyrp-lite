@@ -27,9 +27,6 @@
 <a href="{{ url('help/id/' ~ (field.help | url_encode)) }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
 {% endif %}
 {{ field.label }}
-{% if field.optional is defined and field.optional %}
-{{ "(optional)" | translate }}
-{% endif %}
 {% if field.note is defined %}
 {{ field.note }}
 {% endif %}
