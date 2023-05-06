@@ -288,6 +288,7 @@
                 border-bottom: 1px solid #cfcfcf;
             }
             p {
+                text-align: center;
                 margin-bottom: 1rem;
             }
             p:empty {
@@ -427,7 +428,7 @@
     <body>
         <div role="alert" class="window">
             <h1><?php echo sanitize_html($title); ?></h1>
-            <?php echo sanitize_html($body); ?>
+            <p><?php echo sanitize_html($body); ?></p>
     <?php if (!empty($backtrace) and DEBUG): ?>
             <h3><?php echo __("Backtrace"); ?></h3>
             <ol class="backtrace">
