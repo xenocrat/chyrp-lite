@@ -428,7 +428,7 @@
     <body>
         <div role="alert" class="window">
             <h1><?php echo sanitize_html($title); ?></h1>
-            <p><?php echo sanitize_html($body); ?></p>
+            <p><?php echo sanitize_html($body); ?>
     <?php if (!empty($backtrace) and DEBUG): ?>
             <h3><?php echo __("Backtrace"); ?></h3>
             <ol class="backtrace">
