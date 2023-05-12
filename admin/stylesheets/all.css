@@ -592,17 +592,15 @@ table {
     width: 100%;
     margin: 0rem;
 }
-table thead tr {
+table th {
     background-color: #4f4f4f;
     color: #ffffff;
-}
-table thead tr th {
     padding: 0.5rem;
     font-weight: 600;
     vertical-align: middle;
     border: 1px solid #cfcfcf;
 }
-table tbody tr td {
+table td {
     padding: 0.5rem;
     vertical-align: middle;
     border: 1px solid #cfcfcf;
