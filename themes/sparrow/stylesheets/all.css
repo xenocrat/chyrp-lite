@@ -296,16 +296,17 @@ table {
     margin: 0em 0em 1em 0em;
     overflow-x: scroll;
 }
-table thead tr {
+table th {
+    text-align: start;
+    padding: 0.5em;
+    font-weight: bold;
     background-color: #98716c;
     color: #ffffff;
     border: 1px solid #98716c;
+    vertical-align: middle;
 }
-table thead tr th {
-    padding: 0.5em;
-    font-weight: bold;
-}
-table tbody tr td {
+table td {
+    text-align: start;
     padding: 0.5em;
     border: 1px solid #98716c;
     vertical-align: middle;
