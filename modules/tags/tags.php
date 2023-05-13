@@ -60,13 +60,6 @@
             $str1 = preg_replace("/[[:punct:]]+/", "", $str1);
             $str2 = preg_replace("/[[:punct:]]+/", "", $str2);
 
-            if (!function_exists("mb_strtoupper"))
-                return substr_compare(
-                    strtoupper($str1),
-                    strtoupper($str2),
-                    0
-                );
-
             return substr_compare(
                 mb_strtoupper($str1, $encoding),
                 mb_strtoupper($str2, $encoding),
