@@ -1285,21 +1285,12 @@
         $exact = false,
         $encoding = "UTF-8"
     ): string {
-        if (function_exists("mb_strlen") and function_exists("mb_substr")) {
-            if (mb_strlen($text, $encoding) <= $length)
-                return $text;
+        if (mb_strlen($text, $encoding) <= $length)
+            return $text;
 
-            $breakpoint = $length - mb_strlen($ellipsis, $encoding);
-            $truncation = mb_substr($text, 0, $breakpoint, $encoding);
-            $remainder  = mb_substr($text, $breakpoint, null, $encoding);
-        } else {
-            if (strlen($text) <= $length)
-                return $text;
-
-            $breakpoint = $length - strlen($ellipsis);
-            $truncation = substr($text, 0, $breakpoint);
-            $remainder  = substr($text, $breakpoint);
-        }
+        $breakpoint = $length - mb_strlen($ellipsis, $encoding);
+        $truncation = mb_substr($text, 0, $breakpoint, $encoding);
+        $remainder  = mb_substr($text, $breakpoint, null, $encoding);
 
         if (!$exact and !preg_match("/^\s/", $remainder))
             $truncation = preg_replace("/(.+)\s.*/s", "$1", $truncation);
@@ -1526,12 +1517,10 @@
         }
 
         if ($lowercase)
-            $clean = function_exists("mb_strtolower") ?
-                mb_strtolower($clean, "UTF-8") : strtolower($clean) ;
+            $clean = mb_strtolower($clean, "UTF-8");
 
         if ($truncate)
-            $clean = function_exists("mb_substr") ?
-                mb_substr($clean, 0, $truncate, "UTF-8") : substr($clean, 0, $truncate) ;
+            $clean = mb_substr($clean, 0, $truncate, "UTF-8");
 
         return $clean;
     }
