@@ -58,6 +58,7 @@ Chyrp Lite를 사용하면 번거로움을 최소화하면서 자신의 웹 서�
 ## 요구 사항
 
 * 기본 확장 기능이 존재하는 [PHP 8.0+](https://www.php.net/supported-versions.php) (Session, JSON, Ctype, libxml, SimpleXML)
+* [Multibyte String](https://www.php.net/manual/en/book.mbstring.php)
 * [PDO](https://www.php.net/manual/en/book.pdo.php)
 * MySQL 4.1+
 * SQLite 3+
