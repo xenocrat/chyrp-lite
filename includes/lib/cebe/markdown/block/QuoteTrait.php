@@ -48,7 +48,6 @@ trait QuoteTrait
 		return [$block, $i];
 	}
 
-
 	/**
 	 * Renders a blockquote
 	 */

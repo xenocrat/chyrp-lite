@@ -200,13 +200,13 @@ class MarkdownExtra extends Markdown
 		return '{' . $block[1] . '}';
 	}
 
-    /**
-     * @inheritdoc
-     */
-    function parse($text)
-    {
-        return $this->addParsedFootnotes(parent::parse($text));
-    }
+	/**
+	 * @inheritDoc
+	 */
+	function parse($text)
+	{
+		return $this->addParsedFootnotes(parent::parse($text));
+	}
 
 	protected function parseInline($text)
 	{
