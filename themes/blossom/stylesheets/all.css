@@ -152,7 +152,17 @@ figcaption {
     font-size: 0.75em;
     margin: 1rem 0rem;
 }
-blockquote em {
+aside {
+    max-width: 40%;
+    float: right;
+    font-style: italic;
+    margin: 0rem 0rem 1rem 1rem;
+    padding: 1rem;
+    background-color: #e5e2dc;
+    border-left: 2px solid #1f1f23;
+}
+blockquote em,
+aside em {
     font-style: normal;
 }
 pre {
@@ -187,7 +197,8 @@ hr + hr {
 ul,
 #comments ul {
     list-style: disc outside;
-    margin: 1em 2em;
+    margin: 1em 0em;
+    margin-inline-start: 2em;
     padding: 0em;
 }
 ul ul,
@@ -197,7 +208,8 @@ ul ul,
 ol,
 #comments ol {
     list-style: decimal outside;
-    margin: 1em 2em;
+    margin: 1em 0em;
+    margin-inline-start: 2em;
     padding: 0em;
 }
 ol ol,
@@ -634,6 +646,7 @@ article > footer {
     margin: 1em 0em 0em 0em;
     padding: 0em;
     border: none;
+    clear: both;
 }
 article.video video,
 article.audio audio {
@@ -806,6 +819,7 @@ article.archive img {
 article > *:first-child,
 section > *:first-child,
 form > *:first-child,
+aside > *:first-child,
 #sidebar > *:first-child,
 div.standalone > *:first-child {
     margin-top: 0rem;
@@ -813,6 +827,7 @@ div.standalone > *:first-child {
 article > *:last-child,
 section > *:last-child,
 form > *:last-child,
+aside > *:last-child,
 #sidebar > *:last-child,
 div.standalone > *:last-child {
     margin-bottom: 0rem;
@@ -949,6 +964,11 @@ div.standalone > *:last-child {
     }
 }
 @media screen and (max-width: 559px) {
+    aside {
+        float: none;
+        max-width: 100%;
+        margin-left: 0rem;
+    }
     ul.archive > li {
         flex: 100%;
     }

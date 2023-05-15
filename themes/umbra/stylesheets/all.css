@@ -169,7 +169,16 @@ figcaption {
     font-size: 0.75em;
     margin: 1rem 0rem;
 }
-blockquote em {
+aside {
+    max-width: 40%;
+    float: right;
+    font-style: italic;
+    margin: 0rem 0rem 1rem 1rem;
+    padding: 1rem;
+    background-color: #383839;
+}
+blockquote em,
+aside em {
     font-style: normal;
 }
 pre {
@@ -208,7 +217,8 @@ hr + hr {
 ul,
 #comments ul {
     list-style: disc outside;
-    margin: 1em 2em;
+    margin: 1em 0em;
+    margin-inline-start: 2em;
     padding: 0em;
 }
 ul ul,
@@ -218,7 +228,8 @@ ul ul,
 ol,
 #comments ol {
     list-style: decimal outside;
-    margin: 1em 2em;
+    margin: 1em 0em;
+    margin-inline-start: 2em;
     padding: 0em;
 }
 ol ol,
@@ -528,6 +539,7 @@ article > footer {
     margin: 1em 0em 0em 0em;
     padding: 0em;
     border: none;
+    clear: both;
 }
 article.video video,
 article.audio audio {
@@ -714,12 +726,14 @@ div.metadata img.gravatar {
 article > *:first-child,
 section > *:first-child,
 form > *:first-child,
+aside > *:first-child,
 div.standalone > *:first-child {
     margin-top: 0rem;
 }
 article > *:last-child,
 section > *:last-child,
 form > *:last-child,
+aside > *:last-child,
 div.standalone > *:last-child {
     margin-bottom: 0rem;
 }
@@ -763,6 +777,13 @@ div.standalone > *:last-child {
     }
     body {
         margin-bottom: 2rem;
+    }
+    aside {
+        float: none;
+        max-width: 100%;
+        margin-left: 0rem;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
     }
     input, select {
         width: 100%;

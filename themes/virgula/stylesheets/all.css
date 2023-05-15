@@ -127,7 +127,17 @@ figcaption {
     font-size: 0.7em;
     margin: 1rem 0rem;
 }
-blockquote em {
+aside {
+    max-width: 40%;
+    float: right;
+    font-style: italic;
+    margin: 0rem 0rem 1rem 1rem;
+    padding: 1rem;
+    background-color: #f3f2f1;
+    border-left: 2px solid #b1b4b6;
+}
+blockquote em,
+aside em {
     font-style: normal;
 }
 pre {
@@ -226,14 +236,14 @@ table {
     margin: 1em 0em;
     overflow-x: scroll;
 }
-table thead tr th {
+table th {
     text-align: start;
     padding: 0.3rem 0.7rem;
     font-weight: bold;
     background-color: #f3f2f1;
     border: 1px solid #b1b4b6;
 }
-table tbody tr td {
+table td {
     text-align: start;
     padding: 0.3rem 0.7rem;
     border: 1px solid #b1b4b6;
@@ -318,6 +328,9 @@ nav, main, article,
 section, footer,
 form, details, p {
     margin: 1rem 0rem;
+}
+footer {
+    clear: both;
 }
 main > article:first-child {
     margin-top: 4.25rem;
@@ -465,4 +478,11 @@ section.photo > a:focus {
 }
 .ajax_loading .doaction {
     visibility: hidden;
+}
+@media screen and (max-width: 559px) {
+    aside {
+        float: none;
+        max-width: 100%;
+        margin: 1rem 0rem;
+    }
 }
