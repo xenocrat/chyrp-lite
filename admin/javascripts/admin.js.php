@@ -289,6 +289,21 @@ var Write = {
             toolbar.append(
                 $("<button>", {
                     "type": "button",
+                    "title": '<?php echo __("Highlight", "admin"); ?>',
+                    "aria-label": '<?php echo __("Highlight", "admin"); ?>'
+                }).addClass("emblem toolbar").click(function(e) {
+                    Write.formatting(target, "mark");
+                }).append(
+                    $("<img>", {
+                        "src": Site.chyrp_url + '/admin/images/icons/highlight.svg',
+                        "alt": '<?php echo __("highlight", "admin"); ?>'
+                    })
+                )
+            );
+
+            toolbar.append(
+                $("<button>", {
+                    "type": "button",
                     "title": '<?php echo __("Code", "admin"); ?>',
                     "aria-label": '<?php echo __("Code", "admin"); ?>'
                 }).addClass("emblem toolbar").click(function(e) {
@@ -629,6 +644,20 @@ var Write = {
                 closing = (markdown) ?
                     "~~" :
                     '</del>' ;
+
+                if (selection == "")
+                    selection = " ";
+
+                break;
+
+            case 'mark':
+                opening = (markdown) ?
+                    "==" :
+                    '<mark>' ;
+
+                closing = (markdown) ?
+                    "==" :
+                    '</mark>' ;
 
                 if (selection == "")
                     selection = " ";
