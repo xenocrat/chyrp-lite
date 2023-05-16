@@ -107,10 +107,7 @@ strong {
     font: inherit;
     font-weight: bold;
 }
-cite {
-    font: inherit;
-}
-em, dfn {
+em, dfn, cite {
     font: inherit;
     font-style: italic;
 }

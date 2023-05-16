@@ -137,16 +137,13 @@ sup, sub {
     line-height: 1;
     font-size: 0.75em;
 }
-em, dfn {
+em, dfn, cite {
     font: inherit;
     font-style: italic;
 }
 strong {
     font: inherit;
     font-weight: bold;
-}
-cite {
-    font: inherit;
 }
 small {
     font-weight: normal;
