@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright (c) 2014 Carsten Brandt
+ * @copyright Copyright 2023 Daniel Pimley
  * @license https://github.com/cebe/markdown/blob/master/LICENSE
  * @link https://github.com/cebe/markdown#readme
  */
