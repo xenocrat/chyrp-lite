@@ -23,6 +23,31 @@ class ChyrpMarkdown extends GithubMarkdown
 	use inline\SupSubTrait;
 
 	/**
+	 * @inheritDoc
+	 */
+	protected $escapeCharacters = [
+		// from Markdown
+		'\\', // backslash
+		'`', // backtick
+		'*', // asterisk
+		'_', // underscore
+		'{', '}', // curly braces
+		'[', ']', // square brackets
+		'(', ')', // parentheses
+		'#', // hash mark
+		'+', // plus sign
+		'-', // minus sign (hyphen)
+		'.', // dot
+		'!', // exclamation mark
+		'<', '>',
+		// added by GithubMarkdown
+		':', // colon
+		'|', // pipe
+		// added by ChyrpMarkdown
+		'='
+	];
+
+	/**
 	 * Consume lines for a paragraph
 	 *
 	 * Allow headlines, lists, code, figures and asides to break paragraphs
