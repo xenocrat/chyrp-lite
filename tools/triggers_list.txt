@@ -17,7 +17,7 @@ Arguments:
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 800
+	admin/javascripts/admin.js.php on line 829
 
 
 admin_head
@@ -173,7 +173,7 @@ Arguments:
 after_post_fields
 -----------------
 Called from:
-	admin/partials/post_fields.twig on line 71
+	admin/partials/post_fields.twig on line 68
 
 Arguments:
 	feather
@@ -351,7 +351,7 @@ Arguments:
 webmention
 ----------
 Called from:
-	includes/helpers.php on line 1858
+	includes/helpers.php on line 1852
 
 Arguments:
 	$post, $source, $target
@@ -360,7 +360,7 @@ Arguments:
 delete_upload
 -------------
 Called from:
-	includes/helpers.php on line 2581
+	includes/helpers.php on line 2575
 
 Arguments:
 	$filename
@@ -369,19 +369,19 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 2719
+	includes/helpers.php on line 2713
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 2737
+	includes/helpers.php on line 2731
 
 
 correspond_activate_account
 ---------------------------
 Called from:
-	includes/helpers.php on line 2996
+	includes/helpers.php on line 2990
 
 Arguments:
 	$user, $url
@@ -390,7 +390,7 @@ Arguments:
 correspond_reset_password
 -------------------------
 Called from:
-	includes/helpers.php on line 3031
+	includes/helpers.php on line 3025
 
 Arguments:
 	$user, $url
@@ -399,7 +399,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 3072
+	includes/helpers.php on line 3066
 
 Arguments:
 	$ob
@@ -1053,7 +1053,7 @@ Arguments:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 2976
+	includes/helpers.php on line 2970
 
 Target:
 	$function
@@ -1062,7 +1062,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 3073
+	includes/helpers.php on line 3067
 	includes/lib/Leaf.php on line 253
 
 Target:
