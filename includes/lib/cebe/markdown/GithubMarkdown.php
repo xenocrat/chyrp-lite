@@ -131,6 +131,5 @@ class GithubMarkdown extends Markdown
 
 		// Otherwise parse the sequence normally
 		return parent::parseEscape($text);
-
 	}
 }

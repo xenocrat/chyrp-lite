@@ -111,7 +111,7 @@ trait FootnoteTrait
 					. $fnref
 					. '" role="doc-backlink">&#8617;&#xFE0E;</a>';
 			}
-			$linksPara = '<p class="footnote-backrefs">'. join("\n", $backLinks) . "</p>";
+			$linksPara = '<p class="footnote-backrefs">'. join("\n", $backLinks) . '</p>';
 			$footnotesHtml .= "<li id=\"fn-{$footnoteInfo['num']}\">";
 			$footnotesHtml .= "\n{$footnoteInfo['html']}\n$linksPara\n</li>\n";
 		}
