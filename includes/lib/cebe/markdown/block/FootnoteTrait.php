@@ -59,22 +59,26 @@ trait FootnoteTrait
 		}
 
 		// Replace the footnote substitution markers with their actual numbers.
-		$referencedHtml = preg_replace_callback('/\x1Afootnote-(refnum|num)(.*?)\x1A/', function ($match) use ($footnotesSorted) {
-			$footnoteName = $this->footnoteLinks[$match[2]];
-			// Replace only the footnote number.
-			if ($match[1] === 'num') {
-				return $footnotesSorted[$footnoteName]['num'];
-			}
-			// For backlinks, some have a footnote number and an additional link number.
-			if (count($footnotesSorted[$footnoteName]['refs']) > 1) {
-				// If this footnote is referenced more than once, use the `-x` suffix.
-				$linkNum = array_search($match[2], $footnotesSorted[$footnoteName]['refs']);
-				return $footnotesSorted[$footnoteName]['num'] . '-' . $linkNum;
-			} else {
-				// Otherwise, just the number.
-				return $footnotesSorted[$footnoteName]['num'];
-			}
-		}, $html);
+		$referencedHtml = preg_replace_callback(
+			'/\x1Afootnote-(refnum|num)(.*?)\x1A/',
+			function ($match) use ($footnotesSorted) {
+				$footnoteName = $this->footnoteLinks[$match[2]];
+				// Replace only the footnote number.
+				if ($match[1] === 'num') {
+					return $footnotesSorted[$footnoteName]['num'];
+				}
+				// For backlinks, some have a footnote number and an additional link number.
+				if (count($footnotesSorted[$footnoteName]['refs']) > 1) {
+					// If this footnote is referenced more than once, use the `-x` suffix.
+					$linkNum = array_search($match[2], $footnotesSorted[$footnoteName]['refs']);
+					return $footnotesSorted[$footnoteName]['num'] . '-' . $linkNum;
+				} else {
+					// Otherwise, just the number.
+					return $footnotesSorted[$footnoteName]['num'];
+				}
+			},
+			$html
+		);
 
 		// Get the footnote HTML.
 		$footnotes = $referencedHtml . $this->getFootnotesHtml($footnotesSorted);
@@ -102,9 +106,12 @@ trait FootnoteTrait
 				$fnref = count($footnoteInfo['refs']) > 1
 					? $footnoteInfo['num'] . '-' . $refIndex
 					: $footnoteInfo['num'];
-				$backLinks[] = '<a href="#fnref'.'-'.$fnref.'" role="doc-backlink">&#8617;&#xFE0E;</a>';
+				$backLinks[] = '<a href="#fnref'
+					. '-'
+					. $fnref
+					. '" role="doc-backlink">&#8617;&#xFE0E;</a>';
 			}
-			$linksPara = '<p class="footnote-backrefs">'.join("\n", $backLinks)."</p>";
+			$linksPara = '<p class="footnote-backrefs">'. join("\n", $backLinks) . "</p>";
 			$footnotesHtml .= "<li id=\"fn-{$footnoteInfo['num']}\">";
 			$footnotesHtml .= "\n{$footnoteInfo['html']}\n$linksPara\n</li>\n";
 		}
@@ -149,10 +156,10 @@ trait FootnoteTrait
 	protected function renderFootnoteLink($block)
 	{
 		$substituteRefnum = "\x1Afootnote-refnum".$block['num']."\x1A";
-		$substituteNum = "\x1Afootnote-num".$block['num']."\x1A";
+		$substituteNum = "\x1Afootnote-num" . $block['num'] . "\x1A";
 		return '<sup id="fnref-' . $substituteRefnum . '" class="footnote-ref">'
-			.'<a href="#fn-' . $substituteNum . '" role="doc-noteref">' . $substituteNum . '</a>'
-			.'</sup>';
+			. '<a href="#fn-' . $substituteNum . '" role="doc-noteref">' . $substituteNum . '</a>'
+			. '</sup>';
 	}
 
 	/**

@@ -124,9 +124,9 @@ class GithubMarkdown extends Markdown
 		// If the backslash is followed by a newline.
 		// Note: GFM doesn't allow spaces after the backslash.
 		if (isset($text[1]) && $text[1] === "\n") {
-			return [["text", $br], 2];
+			return [['text', $br], 2];
 		} elseif (!isset($text[1])) {
-			return [["text", $br], 1];
+			return [['text', $br], 1];
 		}
 
 		// Otherwise parse the sequence normally
