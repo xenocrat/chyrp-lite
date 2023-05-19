@@ -338,7 +338,7 @@
                 padding: 0.4em 0.6em;
                 background-color: #f2fbff;
                 border: 2px solid #b8cdd9;
-                border-radius: 0.3em;
+                border-radius: 0.25em;
                 cursor: pointer;
             }
             button {

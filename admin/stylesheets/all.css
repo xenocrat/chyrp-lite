@@ -133,7 +133,7 @@ h3, h4, h5, h6 {
 }
 sup, sub {
     line-height: 1;
-    font-size: 0.7em;
+    font-size: 0.75em;
 }
 em, dfn, cite {
     font: inherit;
@@ -144,7 +144,7 @@ strong {
     font-weight: bold;
 }
 small, .small {
-    font-size: 0.8em;
+    font-size: 0.75em;
 }
 mark {
     color: #1f1f23;
@@ -159,7 +159,7 @@ blockquote {
     font-style: italic;
 }
 figcaption {
-    font-size: 0.8em;
+    font-size: 0.75em;
     margin: 1rem 0rem;
 }
 blockquote em {
@@ -229,8 +229,8 @@ a:active {
     overflow: hidden;
     text-overflow: ellipsis;
     text-decoration: none;
-    border-top-left-radius: 0.8em;
-    border-top-right-radius: 0.8em;
+    border-top-left-radius: 0.75em;
+    border-top-right-radius: 0.75em;
 }
 #header #navigation li a:link,
 #header #navigation li a:visited {
@@ -267,7 +267,7 @@ a:active {
     display: block;
     width: 100%;
     text-decoration: none;
-    font-size: 0.8em;
+    font-size: 0.75em;
     line-height: 3rem;
     white-space: nowrap;
     overflow: hidden;
@@ -276,8 +276,8 @@ a:active {
     padding: 0rem 1rem 100vh 1rem;
     border: 1px solid #afafaf;
     border-bottom: none;
-    border-top-left-radius: 0.8em;
-    border-top-right-radius: 0.8em;
+    border-top-left-radius: 0.75em;
+    border-top-right-radius: 0.75em;
 }
 #sub_nav li a:link,
 #sub_nav li a:visited {
@@ -365,7 +365,7 @@ span.pages {
     list-style: none;
     padding: 1rem;
     margin: 1rem 0rem;
-    border-radius: 0.4em;
+    border-radius: 0.5em;
 }
 #content ul.extend > li {
     background-color: #efefef;
@@ -707,7 +707,7 @@ p.flash {
     background-color: #1e57ba;
     color: #ffffff;
     border: none;
-    border-radius: 0.3em;
+    border-radius: 0.25em;
 }
 p.flash.notice {
     background-color: #108600;
@@ -737,7 +737,7 @@ a.prev_page {
     padding: 0.5rem;
     background-color: #f2fbff;
     border: 2px solid #b8cdd9;
-    border-radius: 0.3em;
+    border-radius: 0.25em;
     cursor: pointer;
     text-decoration: none;
 }
@@ -894,8 +894,8 @@ span.options_toolbar {
     border: 1px solid #cfcfcf;
     border-bottom: none;
     padding: 0.25rem 0.5rem calc(0.25rem + 2px) 0.5rem;
-    border-top-left-radius: 0.3rem;
-    border-top-right-radius: 0.3rem;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
 }
 span.options_toolbar:empty {
     display: none;
@@ -909,8 +909,8 @@ span.options_tray {
     border: 1px solid #cfcfcf;
     border-top: none;
     padding: 0.25rem 0.5rem;
-    border-bottom-left-radius: 0.3rem;
-    border-bottom-right-radius: 0.3rem;
+    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
 }
 span.options_tray:empty {
     display: none;

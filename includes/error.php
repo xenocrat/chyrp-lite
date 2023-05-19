@@ -359,7 +359,7 @@
                 padding: 0.5rem;
                 background-color: #f2fbff;
                 border: 2px solid #b8cdd9;
-                border-radius: 0.3em;
+                border-radius: 0.25em;
                 cursor: pointer;
             }
             button {
