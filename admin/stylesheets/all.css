@@ -442,6 +442,7 @@ input[type="password"] {
     width: 20ch;
     color: #1f1f23;
     font-size: 1.25rem;
+    line-height: 1.5;
     padding: 0.5rem;
     border-radius: 0em;
     border: 1px solid #cfcfcf;

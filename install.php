@@ -353,6 +353,7 @@
                 width: 100%;
                 margin: 0rem;
                 font-size: 1.25em;
+                line-height: 1.5;
                 padding: 0.5rem;
                 border-radius: 0em;
                 border: 1px solid #cfcfcf;
