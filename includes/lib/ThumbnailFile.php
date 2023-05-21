@@ -137,8 +137,33 @@
             if ($this->type == IMAGETYPE_PNG and ($imagetypes & IMG_PNG))
                 return $this->creatable = true;
 
-            if ($this->type == IMAGETYPE_WEBP and ($imagetypes & IMG_WEBP))
-                return $this->creatable = true;
+            if ($this->type == IMAGETYPE_WEBP and ($imagetypes & IMG_WEBP)) {
+                # Probe the file and return false if it is an animated WEBP file
+                # because GD will throw a PHP Fatal error on imagecreatefromwebp().
+
+                $data = @file_get_contents(filename:$this->source, length:21);
+
+                if ($data === false or strlen($data) < 21)
+                    return false;
+
+                # Unpack the following data from the first 21 bytes of the WEBP file:
+                #     > File header (12 bytes)
+                #     > First chunk:
+                #         > Chunk header (4 bytes)
+                #         > Chunk size (4 bytes)
+                #         > Chunk payload (1 byte only)
+                #
+                # See also:
+                #     https://developers.google.com/speed/webp/docs/riff_container
+                #
+                $header = unpack("A4riff/Lfilesize/A4webp/A4header/Lsize/Cpayload", $data);
+
+                # Discover if VP8X head is present and animation bit is set.
+                if ($header['header'] == "VP8X" and $header['payload'] & 0x02)
+                    return false;
+
+                return true;
+            }
 
             if (!defined('IMAGETYPE_AVIF'))
                 return $this->creatable = false;
