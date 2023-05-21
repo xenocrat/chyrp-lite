@@ -546,11 +546,11 @@
             button {
                 box-sizing: border-box;
                 display: block;
+                font: inherit;
                 font-size: 1.25em;
                 text-align: center;
                 color: #1f1f23;
                 text-decoration: none;
-                line-height: 1.5;
                 margin: 1rem 0rem;
                 padding: 0.4em 0.6em;
                 background-color: #f2fbff;

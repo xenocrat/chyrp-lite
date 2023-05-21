@@ -354,7 +354,6 @@
                 text-align: center;
                 color: #1f1f23;
                 text-decoration: none;
-                line-height: 1.5;
                 margin: 1rem 0rem;
                 padding: 0.5rem;
                 background-color: #f2fbff;

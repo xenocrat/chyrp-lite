@@ -352,8 +352,8 @@
                 box-sizing: border-box;
                 width: 100%;
                 margin: 0rem;
+                font: inherit;
                 font-size: 1.25em;
-                line-height: 1.5;
                 padding: 0.5rem;
                 border-radius: 0em;
                 border: 1px solid #cfcfcf;
@@ -465,7 +465,6 @@
                 text-align: center;
                 color: #1f1f23;
                 text-decoration: none;
-                line-height: 1.5;
                 margin: 1rem 0rem;
                 padding: 0.5rem;
                 background-color: #f2fbff;

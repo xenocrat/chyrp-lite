@@ -441,8 +441,8 @@ input[type="password"] {
     box-sizing: border-box;
     width: 20ch;
     color: #1f1f23;
+    font: inherit;
     font-size: 1.25rem;
-    line-height: 1.5;
     padding: 0.5rem;
     border-radius: 0em;
     border: 1px solid #cfcfcf;
@@ -733,7 +733,6 @@ a.prev_page {
     font: inherit;
     font-size: 1.25rem;
     color: #1f1f23;
-    line-height: 1.5;
     margin: 0rem;
     padding: 0.5rem;
     background-color: #f2fbff;
@@ -957,15 +956,14 @@ label.emblem {
 }
 button.emblem {
     display: inline;
-    font-family: inherit;
+    font: inherit;
     font-size: 1em;
     color: #1f1f23;
-    line-height: inherit;
     margin: 0rem;
     padding: 0rem;
     background-color: transparent;
     border: none;
-    border-radius: none;
+    border-radius: 0rem;
     cursor: pointer;
 }
 img.emblem,
