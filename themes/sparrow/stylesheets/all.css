@@ -491,8 +491,8 @@ div#main > article, div.standalone {
     position: relative;
     width: 100%;
     max-width: 832px;
-    margin: 0em auto 0em auto;
-    padding: 2rem;
+    margin: 2rem auto;
+    padding: 0rem 2rem;
 }
 div#main > article.discourse,
 div#main > article.commentary {
@@ -702,7 +702,7 @@ iframe {
     margin: 1rem 0rem;
 }
 iframe.video_embed {
-    max-height: none;
+    max-height: 432px;
     height: calc((100vw - 4rem) * 0.5625);
 }
 div.metadata img.gravatar {
@@ -713,6 +713,7 @@ div.metadata img.gravatar {
     height: 2.5rem;
     border-radius: 50%;
 }
+div#mast > *:first-child,
 article > *:first-child,
 section > *:first-child,
 form > *:first-child,
@@ -720,6 +721,7 @@ aside > *:first-child,
 div.standalone > *:first-child {
     margin-top: 0rem;
 }
+div#mast > *:last-child,
 article > *:last-child,
 section > *:last-child,
 form > *:last-child,
@@ -773,9 +775,6 @@ div.standalone > *:last-child {
     html {
         font-size: 14px;
     }
-    body {
-        margin-bottom: 2rem;
-    }
     aside {
         float: none;
         max-width: 100%;
@@ -786,17 +785,6 @@ div.standalone > *:last-child {
     }
     button#search_submit {
         display: none;
-    }
-    h3.filter {
-        margin: 2rem 0.5rem 0rem 0.5rem;
-    }
-    div#main > article, div.standalone {
-        margin: 0em auto 2rem auto;
-        padding: 2rem 2rem 0rem 2rem;
-    }
-    div#main > article.discourse,
-    div#main > article.commentary {
-        padding: 0rem 2rem;
     }
     ul.archive > li {
         flex: 100%;
@@ -816,9 +804,6 @@ div.standalone > *:last-child {
         max-width: 960px;
         margin-left: auto;
         margin-right: auto;
-    }
-    iframe.video_embed {
-        max-height: 432px;
     }
 }
 @media (prefers-reduced-motion) {

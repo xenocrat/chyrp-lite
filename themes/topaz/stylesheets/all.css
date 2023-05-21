@@ -782,11 +782,11 @@ iframe {
     margin: 1rem 0rem;
 }
 iframe.video_embed {
-    max-height: 538px;
+    max-height: 540px;
     height: calc((100vw - 22rem) * 0.5625);
 }
 body.preview iframe.video_embed {
-    height: auto;
+    height: calc((100vw - 4rem) * 0.5625);
 }
 img {
     border-style: none;

@@ -252,6 +252,16 @@ hr {
     border-top: 1px solid #b1b4b6;
     margin: 2rem 0rem;
 }
+iframe {
+    width: 100%;
+    height: auto;
+    border: none;
+    margin: 1rem 0rem;
+}
+iframe.video_embed {
+    max-height: 412px;
+    height: calc((100vw - 2rem) * 0.5625);
+}
 a:link {
     color: #1d70b8;
     text-decoration: none;
