@@ -906,7 +906,7 @@ msgstr "로그인하기 전에 계정을 활성화해야 합니다."
 msgid "Logged in."
 msgstr "로그인되었습니다."
 
-#: includes/controller/Main.php:856 includes/error.php:446
+#: includes/controller/Main.php:856 includes/error.php:445
 msgid "Log in"
 msgstr "로그인"
 
@@ -958,11 +958,11 @@ msgstr "비밀번호 변경"
 msgid "An unspecified error has occurred."
 msgstr "알 수 없는 오류가 발생했습니다."
 
-#: includes/error.php:433
+#: includes/error.php:432
 msgid "Backtrace"
 msgstr "역추적"
 
-#: includes/error.php:438
+#: includes/error.php:437
 #, php-format
 msgid "%s on line %d"
 msgstr "%s: %d번 줄"
@@ -1485,7 +1485,7 @@ msgstr "설치가 필요합니다."
 msgid "Installation Complete"
 msgstr "설치가 완료되었습니다"
 
-#: install.php:1086 upgrade.php:893
+#: install.php:1086 upgrade.php:892
 msgid "What now?"
 msgstr ""
 
@@ -1497,7 +1497,7 @@ msgstr "더 이상 필요하지 않은 경우 <em>install.php</em>를 삭제하�
 msgid "Log in to your site and configure things to your liking."
 msgstr "사이트에 로그인하고 원하는 대로 구성하세요."
 
-#: install.php:1091 upgrade.php:899
+#: install.php:1091 upgrade.php:898
 msgid "Take me to my site!"
 msgstr "사이트로 이동합니다."
 
@@ -1505,38 +1505,38 @@ msgstr "사이트로 이동합니다."
 msgid "Chyrp Lite Upgrader"
 msgstr "Chyrp Lite 업그레이드"
 
-#: upgrade.php:882
+#: upgrade.php:881
 msgid "Halt!"
 msgstr "정지!"
 
-#: upgrade.php:883
+#: upgrade.php:882
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr "업그레이드하기 전에 다음 예방 조치를 취하십시오:"
 
-#: upgrade.php:885
+#: upgrade.php:884
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr "<strong>진행하기 전에 데이터베이스를 백업하세요.</strong>"
 
-#: upgrade.php:886
+#: upgrade.php:885
 msgid "Tell your users that your site is offline for maintenance."
 msgstr "유지 관리를 위해 사이트가 오프라인 상태임을 사용자에게 알립니다."
 
-#: upgrade.php:889
+#: upgrade.php:888
 msgid "Upgrade me!"
 msgstr "새로운 버전이 있습니다."
 
-#: upgrade.php:892
+#: upgrade.php:891
 msgid "Upgrade Complete"
 msgstr "업그레이드가 완료되었습니다"
 
-#: upgrade.php:895
+#: upgrade.php:894
 msgid "Take action to resolve any errors reported on this page."
 msgstr "이 페이지에 보고된 오류를 해결하기 위한 조치를 취하십시오."
 
-#: upgrade.php:896
+#: upgrade.php:895
 msgid "Run this upgrader again if you need to."
 msgstr "필요한 경우 업그레이드를 다시 실행하십시오."
 
-#: upgrade.php:897
+#: upgrade.php:896
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr "업그레이드가 완료되면 <em>upgrade.php</em>를 삭제해야 합니다."

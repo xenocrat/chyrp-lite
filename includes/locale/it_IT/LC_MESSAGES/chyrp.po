@@ -915,7 +915,7 @@ msgstr "Si deve attivare un tuo account prima di poter accedere."
 msgid "Logged in."
 msgstr "L'accesso é stato effettuato."
 
-#: includes/controller/Main.php:856 includes/error.php:446
+#: includes/controller/Main.php:856 includes/error.php:445
 msgid "Log in"
 msgstr "Accedi"
 
@@ -970,11 +970,11 @@ msgstr "Ripristina password"
 msgid "An unspecified error has occurred."
 msgstr "Si è verificato un errore non specificato."
 
-#: includes/error.php:433
+#: includes/error.php:432
 msgid "Backtrace"
 msgstr "Backtrace"
 
-#: includes/error.php:438
+#: includes/error.php:437
 #, php-format
 msgid "%s on line %d"
 msgstr "%s riga %d"
@@ -1512,7 +1512,7 @@ msgstr "Installami!"
 msgid "Installation Complete"
 msgstr "Installazione completata"
 
-#: install.php:1086 upgrade.php:893
+#: install.php:1086 upgrade.php:892
 msgid "What now?"
 msgstr "E adesso?"
 
@@ -1524,7 +1524,7 @@ msgstr "Elimina <em>install.php</em>, non ne avrai più bisogno."
 msgid "Log in to your site and configure things to your liking."
 msgstr "Accedi al tuo sito e configura a tuo piacimento."
 
-#: install.php:1091 upgrade.php:899
+#: install.php:1091 upgrade.php:898
 msgid "Take me to my site!"
 msgstr "Guidami al mio sito!"
 
@@ -1532,38 +1532,38 @@ msgstr "Guidami al mio sito!"
 msgid "Chyrp Lite Upgrader"
 msgstr "Chyrp Lite Upgrader"
 
-#: upgrade.php:882
+#: upgrade.php:881
 msgid "Halt!"
 msgstr "Stop!"
 
-#: upgrade.php:883
+#: upgrade.php:882
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr "Si prega di seguire queste indicazioni prima di effettuare l'upgrade:"
 
-#: upgrade.php:885
+#: upgrade.php:884
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr "<strong>Fare un backup del database prima di procedere!</strong>"
 
-#: upgrade.php:886
+#: upgrade.php:885
 msgid "Tell your users that your site is offline for maintenance."
 msgstr "Informa gli utenti che il sito è offline per la manutenzione."
 
-#: upgrade.php:889
+#: upgrade.php:888
 msgid "Upgrade me!"
 msgstr "Aggiornami!"
 
-#: upgrade.php:892
+#: upgrade.php:891
 msgid "Upgrade Complete"
 msgstr "Aggiornamento completato"
 
-#: upgrade.php:895
+#: upgrade.php:894
 msgid "Take action to resolve any errors reported on this page."
 msgstr "Risolvere eventuali errori segnalati in questa pagina."
 
-#: upgrade.php:896
+#: upgrade.php:895
 msgid "Run this upgrader again if you need to."
 msgstr "Eseguire nuovamente questo Upgrader se necessario."
 
-#: upgrade.php:897
+#: upgrade.php:896
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr "Eliminare <em>upgrade.php</em> una volta terminato l'aggiornamento."

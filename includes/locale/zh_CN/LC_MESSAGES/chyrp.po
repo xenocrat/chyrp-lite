@@ -906,7 +906,7 @@ msgstr "在登陆前必须激活您的账户。"
 msgid "Logged in."
 msgstr "已登陆。"
 
-#: includes/controller/Main.php:856 includes/error.php:446
+#: includes/controller/Main.php:856 includes/error.php:445
 msgid "Log in"
 msgstr "登陆"
 
@@ -958,11 +958,11 @@ msgstr "重置密码"
 msgid "An unspecified error has occurred."
 msgstr "发生未指定错误。"
 
-#: includes/error.php:433
+#: includes/error.php:432
 msgid "Backtrace"
 msgstr "回溯"
 
-#: includes/error.php:438
+#: includes/error.php:437
 #, php-format
 msgid "%s on line %d"
 msgstr "%s 在行 %d"
@@ -1478,7 +1478,7 @@ msgstr "安装！"
 msgid "Installation Complete"
 msgstr "安装完成"
 
-#: install.php:1086 upgrade.php:893
+#: install.php:1086 upgrade.php:892
 msgid "What now?"
 msgstr "现在做什么？"
 
@@ -1490,7 +1490,7 @@ msgstr "删除 <em>install.php</em>，您不再需要它。"
 msgid "Log in to your site and configure things to your liking."
 msgstr "登陆您的站点并且配置您喜欢的东西。"
 
-#: install.php:1091 upgrade.php:899
+#: install.php:1091 upgrade.php:898
 msgid "Take me to my site!"
 msgstr "前往我的站点！"
 
@@ -1498,38 +1498,38 @@ msgstr "前往我的站点！"
 msgid "Chyrp Lite Upgrader"
 msgstr "Chyrp Lite升级程序"
 
-#: upgrade.php:882
+#: upgrade.php:881
 msgid "Halt!"
 msgstr "等一下！"
 
-#: upgrade.php:883
+#: upgrade.php:882
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr "升级前请采取以下预防措施："
 
-#: upgrade.php:885
+#: upgrade.php:884
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr "<strong>开始前备份您的数据库！</strong>"
 
-#: upgrade.php:886
+#: upgrade.php:885
 msgid "Tell your users that your site is offline for maintenance."
 msgstr "告知您的用户站点处于离线状态以进行维护。"
 
-#: upgrade.php:889
+#: upgrade.php:888
 msgid "Upgrade me!"
 msgstr "升级！"
 
-#: upgrade.php:892
+#: upgrade.php:891
 msgid "Upgrade Complete"
 msgstr "升级完成"
 
-#: upgrade.php:895
+#: upgrade.php:894
 msgid "Take action to resolve any errors reported on this page."
 msgstr "采取措施解决此页面上报告的任何错误。"
 
-#: upgrade.php:896
+#: upgrade.php:895
 msgid "Run this upgrader again if you need to."
 msgstr "如果需要，再次运行此升级程序。"
 
-#: upgrade.php:897
+#: upgrade.php:896
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr "删除 <em>upgrade.php</em> 一旦您升级完成后。"

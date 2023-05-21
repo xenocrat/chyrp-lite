@@ -912,7 +912,7 @@ msgstr "يجب عليك تفعيل حسابك قبل تسجيل الدخول."
 msgid "Logged in."
 msgstr "تم تسجيل الدخول."
 
-#: includes/controller/Main.php:856 includes/error.php:446
+#: includes/controller/Main.php:856 includes/error.php:445
 msgid "Log in"
 msgstr "تسجيل الدخول"
 
@@ -964,11 +964,11 @@ msgstr "إعادة تعيين كلمة المرور"
 msgid "An unspecified error has occurred."
 msgstr "حدث خطأ غير محدد."
 
-#: includes/error.php:433
+#: includes/error.php:432
 msgid "Backtrace"
 msgstr ""
 
-#: includes/error.php:438
+#: includes/error.php:437
 #, php-format
 msgid "%s on line %d"
 msgstr "%s في السطر %d"
@@ -1487,7 +1487,7 @@ msgstr "قم بتثبيتي!"
 msgid "Installation Complete"
 msgstr "اكتمل التثبيت"
 
-#: install.php:1086 upgrade.php:893
+#: install.php:1086 upgrade.php:892
 msgid "What now?"
 msgstr "ماذا الآن؟"
 
@@ -1499,7 +1499,7 @@ msgstr "احذف <em>install.php</em>، لن تحتاج إليه بعد الآن
 msgid "Log in to your site and configure things to your liking."
 msgstr "سجّل الدخول إلى موقعك وقم بتهيئة الأشياء كيفما أحببت."
 
-#: install.php:1091 upgrade.php:899
+#: install.php:1091 upgrade.php:898
 msgid "Take me to my site!"
 msgstr "خذني إلى موقعي!"
 
@@ -1507,38 +1507,38 @@ msgstr "خذني إلى موقعي!"
 msgid "Chyrp Lite Upgrader"
 msgstr "ترقية Chyrp Lite"
 
-#: upgrade.php:882
+#: upgrade.php:881
 msgid "Halt!"
 msgstr "إيقاف!"
 
-#: upgrade.php:883
+#: upgrade.php:882
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr "يرجى اتخاذ هذه التدابير الاحترازية قبل الترقية:"
 
-#: upgrade.php:885
+#: upgrade.php:884
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr "<strong>قم بنسخ قاعدة البيانات الخاصة بك قبل المتابعة!</strong>"
 
-#: upgrade.php:886
+#: upgrade.php:885
 msgid "Tell your users that your site is offline for maintenance."
 msgstr "أخبر المستخدمين أن موقعك متوقف للصيانة."
 
-#: upgrade.php:889
+#: upgrade.php:888
 msgid "Upgrade me!"
 msgstr "قم بالترقية!"
 
-#: upgrade.php:892
+#: upgrade.php:891
 msgid "Upgrade Complete"
 msgstr "تمت الترقية"
 
-#: upgrade.php:895
+#: upgrade.php:894
 msgid "Take action to resolve any errors reported on this page."
 msgstr "إتخذ إجراءات لحل أي أخطاء تظهر في هذه الصفحة."
 
-#: upgrade.php:896
+#: upgrade.php:895
 msgid "Run this upgrader again if you need to."
 msgstr "قم بتشغيل الترقية مرة أخرى إذا كنت بحاجة إلى ذلك."
 
-#: upgrade.php:897
+#: upgrade.php:896
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr "احذف <em>upgrade.php</em> بمجرد الانتهاء من الترقية."

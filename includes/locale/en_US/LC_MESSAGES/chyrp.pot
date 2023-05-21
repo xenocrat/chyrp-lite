@@ -1107,7 +1107,7 @@ msgid "Logged in."
 msgstr ""
 
 #: includes/controller/Main.php:856
-#: includes/error.php:446
+#: includes/error.php:445
 msgid "Log in"
 msgstr ""
 
@@ -1161,11 +1161,11 @@ msgstr ""
 msgid "An unspecified error has occurred."
 msgstr ""
 
-#: includes/error.php:433
+#: includes/error.php:432
 msgid "Backtrace"
 msgstr ""
 
-#: includes/error.php:438
+#: includes/error.php:437
 #, php-format
 msgid "%s on line %d"
 msgstr ""
@@ -1701,7 +1701,7 @@ msgid "Installation Complete"
 msgstr ""
 
 #: install.php:1086
-#: upgrade.php:893
+#: upgrade.php:892
 msgid "What now?"
 msgstr ""
 
@@ -1714,7 +1714,7 @@ msgid "Log in to your site and configure things to your liking."
 msgstr ""
 
 #: install.php:1091
-#: upgrade.php:899
+#: upgrade.php:898
 msgid "Take me to my site!"
 msgstr ""
 
@@ -1722,39 +1722,39 @@ msgstr ""
 msgid "Chyrp Lite Upgrader"
 msgstr ""
 
-#: upgrade.php:882
+#: upgrade.php:881
 msgid "Halt!"
 msgstr ""
 
-#: upgrade.php:883
+#: upgrade.php:882
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr ""
 
-#: upgrade.php:885
+#: upgrade.php:884
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr ""
 
-#: upgrade.php:886
+#: upgrade.php:885
 msgid "Tell your users that your site is offline for maintenance."
 msgstr ""
 
-#: upgrade.php:889
+#: upgrade.php:888
 msgid "Upgrade me!"
 msgstr ""
 
-#: upgrade.php:892
+#: upgrade.php:891
 msgid "Upgrade Complete"
 msgstr ""
 
-#: upgrade.php:895
+#: upgrade.php:894
 msgid "Take action to resolve any errors reported on this page."
 msgstr ""
 
-#: upgrade.php:896
+#: upgrade.php:895
 msgid "Run this upgrader again if you need to."
 msgstr ""
 
-#: upgrade.php:897
+#: upgrade.php:896
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr ""
 
