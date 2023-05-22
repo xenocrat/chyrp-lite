@@ -138,7 +138,7 @@
                 return $this->creatable = true;
 
             if ($this->type == IMAGETYPE_WEBP and ($imagetypes & IMG_WEBP)) {
-                # Probe the file and return false if it is an animated WEBP file
+                # Probe the file and return false if WEBP VP8X with animation
                 # because GD will throw a PHP Fatal error on imagecreatefromwebp().
 
                 $data = @file_get_contents(filename:$this->source, length:21);
@@ -156,9 +156,9 @@
                 # See also:
                 #     https://developers.google.com/speed/webp/docs/riff_container
                 #
-                $header = unpack("A4riff/Lfilesize/A4webp/A4header/Lsize/Cpayload", $data);
+                $header = unpack("A4riff/Vfilesize/A4webp/A4header/Vsize/Cpayload", $data);
 
-                # Discover if VP8X head is present and animation bit is set.
+                # Discover if VP8X header is present and animation bit is set.
                 if ($header['header'] == "VP8X" and $header['payload'] & 0x02)
                     return false;
 
