@@ -884,6 +884,7 @@
                 <li><?php echo __("<strong>Backup your database before proceeding!</strong>"); ?></li>
                 <li><?php echo __("Tell your users that your site is offline for maintenance."); ?></li>
             </ol>
+            <hr>
             <form action="upgrade.php" method="post">
                 <button type="submit" name="upgrade" value="yes"><?php echo __("Upgrade me!"); ?></button>
             </form>
@@ -895,6 +896,7 @@
                 <li><?php echo __("Run this upgrader again if you need to."); ?></li>
                 <li><?php echo __("Delete <em>upgrade.php</em> once you are finished upgrading."); ?></li>
             </ol>
+            <hr>
             <a class="big" href="<?php echo $config->url.'/'; ?>"><?php echo __("Take me to my site!"); ?></a>
 <?php endif; ?>
         </div>

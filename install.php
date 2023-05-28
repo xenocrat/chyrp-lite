@@ -1027,7 +1027,6 @@
                     <label for="prefix"><?php echo __("Table Prefix"); ?> <span class="sub"><?php echo __("(optional)"); ?></span></label>
                     <input type="text" name="prefix" value="<?php posted("prefix"); ?>" id="prefix">
                 </p>
-                <hr>
                 <h1><?php echo __("Website Setup"); ?></h1>
                 <p id="url_field">
                     <label for="url"><?php echo __("Chyrp URL"); ?></label>
@@ -1061,7 +1060,6 @@
                         <?php endforeach; ?>
                     </select>
                 </p>
-                <hr>
                 <h1><?php echo __("Admin Account"); ?></h1>
                 <p id="login_field">
                     <label for="login"><?php echo __("Username"); ?></label>
@@ -1088,6 +1086,7 @@
                 <li><?php echo __("Delete <em>install.php</em>, you won't need it anymore."); ?></li>
                 <li><?php echo __("Log in to your site and configure things to your liking."); ?></a></li>
             </ol>
+            <hr>
             <a class="big" href="<?php echo $config->url.'/'; ?>"><?php echo __("Take me to my site!"); ?></a>
 <?php endif; ?>
         </div>
