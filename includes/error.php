@@ -441,8 +441,14 @@
             </ol>
     <?php endif; ?>
     <?php if (!logged_in() and ADMIN and $code == 403): ?>
+            <hr>
             <a class="big" href="<?php echo $chyrp_url.'/admin/?action=login'; ?>">
                 <?php echo __("Log in"); ?>
+            </a>
+    <?php else: ?>
+            <hr>
+            <a class="big" href="javascript:history.back()">
+                <?php echo __("Go back"); ?>
             </a>
     <?php endif; ?>
         </div>
