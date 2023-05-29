@@ -447,7 +447,7 @@
             </a>
     <?php else: ?>
             <hr>
-            <a class="big" href="javascript:history.back()">
+            <a class="big" href="javascript:history.back();">
                 <?php echo __("Go back"); ?>
             </a>
     <?php endif; ?>
