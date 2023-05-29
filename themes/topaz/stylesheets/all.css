@@ -245,14 +245,23 @@ html[lang="he"] ol ol,
 html[lang="he"] #comments ol ol {
     list-style-type: hebrew;
 }
+li {
+    margin: 0em;
+    padding: 0em;
+}
 dl {
     list-style: none;
+    margin: 1em 0em;
 }
 dl dt {
     font-weight: bold;
+    margin: 0em;
+    padding: 0em;
 }
 dl dd {
-    margin-left: 1em;
+    margin: 0em;
+    padding: 0em;
+    margin-inline-start: 2em;
 }
 ul#nav {
     display: none;
@@ -606,7 +615,7 @@ ul.archive article.post.archive {
     border: 1px solid #c6ccc8;
     border-radius: 0.5rem;
 }
-div.post_archive_container {
+section.post_archive_container {
     height: 100%;
     overflow: hidden;
 }
@@ -622,12 +631,6 @@ article > section {
     width: 100%;
     margin: 1em 0em 0em 0em;
     padding: 0em;
-}
-article section.comment {
-    margin-bottom: 1em;
-}
-article > section.photo {
-    width: 100%;
 }
 article > footer {
     display: block;
@@ -851,11 +854,7 @@ div.standalone > *:last-child {
     }
     div#main > article,
     div.standalone {
-        background-color: #ffffff;
         page-break-inside: avoid;
-    }
-    ol.comments > li.comment_form {
-       background-color: #ffffff; 
     }
 }
 @media screen and (max-width: 959px) {
@@ -889,11 +888,12 @@ div.standalone > *:last-child {
     ol.comments > li.comment_form {
         padding: 1rem;
     }
+
     ul#nav {
         display: block;
         margin: 2em 0em 0em 0em;
     }
-    ul#nav > li#mobile_toggle {
+    ul#nav:not(.mobile_nav) > li#mobile_toggle {
         display: none;
     }
     ul#nav.mobile_nav {
@@ -910,17 +910,15 @@ div.standalone > *:last-child {
         border-radius: 0em;
     }
     ul#nav.mobile_nav > li {
-        height: 0em;
+        display: block;
+        height: 3em;
         overflow: hidden;
-        border-bottom: none;
         box-sizing: border-box;
         transition: height 250ms ease 125ms, border-bottom 0ms 125ms;
     }
-    ul#nav.mobile_nav.on > li,
-    ul#nav.mobile_nav > li#mobile_toggle {
-        display: block;
-        height: 3em;
-        border-bottom: 1px solid #d2d9d4;
+    ul#nav.mobile_nav:not(.on) > li:not(#mobile_toggle) {
+        height: 0em;
+        border-bottom: none;
     }
     ul#nav.mobile_nav.on > li#mobile_toggle {
         background-color: #fcfbfa;

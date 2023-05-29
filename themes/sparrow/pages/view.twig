@@ -14,14 +14,14 @@
 {% endif %}
 {% if module_enabled("pingable") and post.pingback_count > 0 %}
 <article role="complementary" class="discourse">
-<div>
+<section class="webmentions">
 <h3>{{ "Webmentions" | translate }}:</h3>
 <ol id="pingbacks">
 {% for pingback in post.pingbacks %}
 <li><a id="pingback_{{ pingback.id }}" href="{{ pingback.source | fix(true) }}">{{ pingback.title | oneof("[Untitled]" | translate) }}</a></li>
 {% endfor %}
 </ol>
-</div>
+</section>
 </article>
 {% endif %}
 {% if module_enabled("comments") and (post.comment_count > 0 or post.commentable) %}

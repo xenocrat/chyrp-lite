@@ -242,14 +242,23 @@ html[lang="he"] ol ol,
 html[lang="he"] #comments ol ol {
     list-style-type: hebrew;
 }
+li {
+    margin: 0em;
+    padding: 0em;
+}
 dl {
     list-style: none;
+    margin: 1em 0em;
 }
 dl dt {
     font-weight: bold;
+    margin: 0em;
+    padding: 0em;
 }
 dl dd {
-    margin-left: 1em;
+    margin: 0em;
+    padding: 0em;
+    margin-inline-start: 2em;
 }
 ul.navigation {
     list-style: none;
@@ -258,7 +267,6 @@ ul.navigation {
 }
 ul.navigation > li {
     display: inline;
-    padding: 0em;
 }
 ul.archive {
     list-style: none;
@@ -269,7 +277,6 @@ ul.archive {
     margin: 2rem 0rem 0rem 0rem;
 }
 ul.archive > li {
-    margin: 0em;
     flex: none;
 }
 ol.comments {
@@ -281,7 +288,6 @@ ol.comments {
 ol.comments > li {
     box-sizing: border-box;
     display: block;
-    position: relative;
     width: 100%;
     margin: 0em;
     padding: 2rem;
@@ -291,12 +297,6 @@ ol.comments > li {
 }
 ol.comments > li#comment_shim {
     display: none;
-}
-ol.comments > li.comment_form {
-    padding: 2rem;
-}
-ol.comments > li > h3 {
-    margin-right: 4rem;
 }
 table {
     border-collapse: collapse;
@@ -469,11 +469,6 @@ div.metadata {
     border: 1px solid #c2bcb8;
     border-radius: 1.5rem;
 }
-div.comments_pagination {
-    width: 100%;
-    padding-top: 2rem;
-    text-align: center;
-}
 div.tags {
     margin: 1rem 0rem 0rem 0rem;
     font-size: 0.75em;
@@ -494,25 +489,6 @@ div#main > article, div.standalone {
     margin: 2rem auto;
     padding: 0rem 2rem;
 }
-div#main > article.discourse,
-div#main > article.commentary {
-    padding: 0rem 2rem;
-    overflow: hidden;
-    border-bottom: none;
-}
-div#main > article.discourse > div {
-    box-sizing: border-box;
-    display: block;
-    position: relative;
-    width: 100%;
-    margin: 0em;
-    padding: 2rem;
-    background-color: #f5f4f0;
-    border: 1px solid #c2bcb8;
-}
-div#main > article + article {
-    margin-top: 2rem;
-}
 ul.archive article.post.archive {
     display: block;
     position: relative;
@@ -521,10 +497,6 @@ ul.archive article.post.archive {
     font-size: 0.75em;
     padding: 8px;
     border: 1px solid #c2bcb8;
-}
-div.post_archive_container {
-    height: 100%;
-    overflow: hidden;
 }
 article > header {
     display: block;
@@ -539,12 +511,17 @@ article > section {
     margin: 1em 0em 0em 0em;
     padding: 0em;
 }
-
-article section.comment {
-    margin-bottom: 1em;
-}
-article > section.photo {
+article > section.webmentions {
+    box-sizing: border-box;
+    display: block;
     width: 100%;
+    padding: 2rem;
+    background-color: #f5f4f0;
+    border: 1px solid #c2bcb8;
+}
+section.post_archive_container {
+    height: 100%;
+    overflow: hidden;
 }
 article > footer {
     display: block;
@@ -688,11 +665,7 @@ img {
     padding: 0em;
 }
 section img {
-    display:  block;
-    max-width: 100%;
-}
-section.photo img,
-article.archive img {
+    display: block;
     width: 100%;
 }
 iframe {
@@ -704,14 +677,6 @@ iframe {
 iframe.video_embed {
     max-height: 432px;
     height: calc((100vw - 4rem) * 0.5625);
-}
-div.metadata img.gravatar {
-    position: absolute;
-    top: 1rem;
-    right: 2rem;
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 50%;
 }
 div#mast > *:first-child,
 article > *:first-child,
@@ -765,11 +730,6 @@ div.standalone > *:last-child {
     div.standalone {
         page-break-inside: avoid;
     }
-    div#main > article.discourse > div,
-    ol.comments > li,
-    div.metadata {
-        background-color: #ffffff;
-    }
 }
 @media screen and (max-width: 639px) {
     html {
@@ -794,9 +754,6 @@ div.standalone > *:last-child {
         width: 100%;
         height: auto;
         margin-left: 0em;
-    }
-    ul.archive article.post.archive img {
-        width: 100%;
     }
 }
 @media screen and (min-width: 1024px) {
