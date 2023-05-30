@@ -265,6 +265,8 @@ dl dd {
 }
 ul#nav {
     display: none;
+    margin: 2rem 0rem 0rem 0rem;
+    border-bottom: none;
 }
 ul.navigation {
     list-style: none;
@@ -276,11 +278,11 @@ ul.navigation {
     border-right: none;
 }
 ul.navigation > li {
+    box-sizing: border-box;
     display: block;
-    min-width: 4em;
     padding: 0.67em 0em;
     margin: 0em;
-    white-space: normal;
+    overflow: hidden;
     text-overflow: ellipsis;
     border-bottom: 1px solid #d2d9d4;
 }
@@ -295,7 +297,7 @@ ul#nav > li {
     text-align: center;
     padding-top: 0em;
     padding-bottom: 0em;
-    line-height: 3em;
+    line-height: 3rem;
 }
 ul.archive {
     list-style: none;
@@ -861,7 +863,7 @@ div.standalone > *:last-child {
     body {
         margin: 1rem;
     }
-    body.mobile_nav {
+    body.js_nav {
         margin-bottom: 5rem;
     }
     h2 {
@@ -888,15 +890,13 @@ div.standalone > *:last-child {
     ol.comments > li.comment_form {
         padding: 1rem;
     }
-
     ul#nav {
         display: block;
-        margin: 2em 0em 0em 0em;
     }
-    ul#nav:not(.mobile_nav) > li#mobile_toggle {
+    ul#nav:not(.js_nav) > li#mobile_toggle {
         display: none;
     }
-    ul#nav.mobile_nav {
+    ul#nav.js_nav {
         position: fixed;
         bottom: 0px;
         left: 0px;
@@ -904,23 +904,17 @@ div.standalone > *:last-child {
         height: auto;
         padding: 0em;
         background-color: #ffffff;
-        border-right: none;
-        border-bottom: none;
-        border-left: none;
-        border-radius: 0em;
+        border-radius: 0rem;
     }
-    ul#nav.mobile_nav > li {
-        display: block;
-        height: 3em;
-        overflow: hidden;
-        box-sizing: border-box;
+    ul#nav.js_nav > li {
+        height: 3rem;
         transition: height 250ms ease 125ms, border-bottom 0ms 125ms;
     }
-    ul#nav.mobile_nav:not(.on) > li:not(#mobile_toggle) {
-        height: 0em;
+    ul#nav.js_nav:not(.on) > li:not(#mobile_toggle) {
+        height: 0rem;
         border-bottom: none;
     }
-    ul#nav.mobile_nav.on > li#mobile_toggle {
+    ul#nav.js_nav.on > li#mobile_toggle {
         background-color: #fcfbfa;
     }
     div#mast {
@@ -981,7 +975,7 @@ div.standalone > *:last-child {
     .ajax_loading {
         animation: none;
     }
-    ul#nav.mobile_nav > li {
+    ul#nav.js_nav > li {
         transition: none;
     }
 }
