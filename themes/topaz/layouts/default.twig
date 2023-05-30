@@ -30,7 +30,6 @@
 <h3 role="alert" class="ribbon">{{ message }}</h3>
 </div>
 {% endfor %}
-{% if not ["login", "controls", "register", "lost_password"] | contains(route.action) %}
 <div id="mast" role="banner">
 <h1 class="banner"><a href="{{ url('/') }}">{{ site.name }}</a></h1>
 <form class="search_box" action="{{ url('search') }}" method="post" accept-charset="UTF-8" role="search">
@@ -38,7 +37,6 @@
 <button type="submit" id="search_submit">{{ "Search" | translate }}</button>
 </form>
 </div>
-{% endif %}
 <!-- Sidebar -->
 {% include "content/sidebar.twig" %}
 <!-- Content -->
