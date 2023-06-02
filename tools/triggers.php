@@ -489,9 +489,6 @@
             p {
                 margin-bottom: 1rem;
             }
-            p:empty {
-                margin-bottom: 0rem;
-            }
             strong {
                 font-weight: normal;
                 color: #c11600;

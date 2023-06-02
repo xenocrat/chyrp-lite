@@ -291,9 +291,6 @@
                 text-align: center;
                 margin-bottom: 1rem;
             }
-            p:empty {
-                margin-bottom: 0rem;
-            }
             pre {
                 font-family: "Cousine webfont", monospace;
                 font-size: 0.85em;

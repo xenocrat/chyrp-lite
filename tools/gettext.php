@@ -592,9 +592,6 @@
             p {
                 margin-bottom: 1rem;
             }
-            p:empty {
-                margin-bottom: 0rem;
-            }
             em {
                 font-weight: normal;
                 font-style: normal;
