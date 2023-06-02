@@ -70,10 +70,7 @@ body.preview {
     margin: 0rem;
 }
 p {
-    margin: 0em 0em 1em 0em;
-}
-p:empty {
-    margin-bottom: 0em;
+    margin: 1rem 0rem;
 }
 p.footnote-backrefs {
     font-size: 0.75em;
@@ -493,7 +490,7 @@ article > header {
 article > section {
     display: block;
     width: 100%;
-    margin: 1em 0em 0em 0em;
+    margin: 1rem 0rem 0rem 0rem;
     padding: 0em;
 }
 section.webmentions {
@@ -513,7 +510,7 @@ article > footer {
     display: block;
     width: 100%;
     text-align: start;
-    margin: 1em 0em 0em 0em;
+    margin: 1rem 0rem 0rem 0rem;
     padding: 0em;
     border: none;
     clear: both;
