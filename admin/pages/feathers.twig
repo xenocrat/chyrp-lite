@@ -5,8 +5,8 @@
 {% block content %}
 <h2>{{ "Feathers" | translate }}</h2>
 {% if enabled_feathers is not empty %}
-<ul id="feathers_enabled" class="extend feathers">
 <h5>{{ "Enabled" | translate }}</h5>
+<ul id="feathers_enabled" class="extend feathers">
 {% for safename, feather in enabled_feathers %}
 <li class="feather{{ feather.classes is defined ? ' ' ~ feather.classes | join(' ') : '' }}" id="feather_{{ safename }}">
 <h3>
@@ -38,8 +38,8 @@
 </ul>
 {% endif %}
 {% if disabled_feathers is not empty %}
-<ul id="feathers_disabled" class="extend feathers">
 <h5>{{ "Disabled" | translate }}</h5>
+<ul id="feathers_disabled" class="extend feathers">
 {% for safename, feather in disabled_feathers %}
 <li class="feather{{ feather.classes is defined ? ' ' ~ feather.classes | join(' ') : '' }}" id="feather_{{ safename }}">
 <h3>

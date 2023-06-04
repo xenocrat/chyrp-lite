@@ -5,8 +5,8 @@
 {% block content %}
 <h2>{{ "Modules" | translate }}</h2>
 {% if enabled_modules is not empty %}
-<ul id="modules_enabled" class="extend modules">
 <h5>{{ "Enabled" | translate }}</h5>
+<ul id="modules_enabled" class="extend modules">
 {% for safename, module in enabled_modules %}
 <li class="module{{ module.classes is defined ? ' ' ~ module.classes | join(' ') : '' }}" id="module_{{ safename }}">
 <h3>
@@ -58,8 +58,8 @@
 </ul>
 {% endif %}
 {% if disabled_modules is not empty %}
-<ul id="modules_disabled" class="extend modules">
 <h5>{{ "Disabled" | translate }}</h5>
+<ul id="modules_disabled" class="extend modules">
 {% for safename, module in disabled_modules %}
 <li class="module{{ module.classes is defined ? ' ' ~ module.classes | join(' ') : '' }}" id="module_{{ safename }}">
 <h3>

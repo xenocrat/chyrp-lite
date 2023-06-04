@@ -84,9 +84,11 @@ table {
     border-spacing: 0em;
 }
 ul {
+    margin-bottom: 1rem;
     list-style: none;
 }
 ol {
+    margin-bottom: 1rem;
     list-style: decimal outside;
 }
 
@@ -148,7 +150,7 @@ ins {
     text-decoration: #108600 wavy underline;
 }
 figure, blockquote {
-    margin: 1rem;
+    margin-bottom: 1rem;
     font: inherit;
     font-size: 1rem;
 }
@@ -157,7 +159,7 @@ blockquote {
 }
 figcaption {
     font-size: 0.75em;
-    margin: 1rem 0rem;
+    margin: 0rem;
 }
 blockquote em {
     font-style: normal;
@@ -181,6 +183,14 @@ a:active {
     color: #1e57ba;
     text-decoration: underline;
     text-underline-offset: 0.125em;
+}
+*:where(form, table) + h1,
+*:where(form, table) + h2,
+*:where(form, table) + h3,
+*:where(form, table) + h4,
+*:where(form, table) + h5,
+*:where(form, table) + h6 {
+    margin-top: 1rem;
 }
 
 /* Group: Header */
@@ -208,6 +218,7 @@ a:active {
     bottom: 0em;
     left: 4rem;
     right: 4rem;
+    margin: 0rem;
 }
 #header #navigation li {
     display: block;
@@ -347,6 +358,12 @@ span.pages {
     display: block;
     margin-bottom: 1rem;
 }
+#content > *:first-child {
+    margin-top: 0rem;
+}
+#content > *:last-child {
+    margin-bottom: 0rem;
+}
 
 /* Group: Extend */
 
@@ -361,7 +378,7 @@ span.pages {
     min-height: 4em;
     list-style: none;
     padding: 1rem;
-    margin: 1rem 0rem;
+    margin: 1rem 0rem 0rem 0rem;
     border-radius: 0.5em;
 }
 #content ul.extend > li {
@@ -527,9 +544,6 @@ textarea.code {
     font-family: "Cousine webfont", monospace;
     font-style: normal;
 }
-form.filters {
-    margin-bottom: 1rem;
-}
 form.filters label {
     display: block;
 }
@@ -561,10 +575,6 @@ form.split input[type="time"],
 form.split input[type="number"],
 form.split input[type="range"] {
     width: 16%;
-}
-form.split ul,
-form.split ol {
-    margin-bottom: 1rem;
 }
 form.split small,
 form.split .small {
