@@ -233,15 +233,17 @@
                 color: #ffffff;
                 background-color: #ff7f00;
             }
-            html {
-                font-size: 16px;
-            }
-            html, body, ul, ol, li,
-            h1, h2, h3, h4, h5, h6,
-            form, fieldset, a, p, pre {
+            html, body, div, dl, dt, dd, ul, ol, li, p,
+            h1, h2, h3, h4, h5, h6, img, pre, code,
+            form, fieldset, input, select, textarea,
+            table, tbody, tr, th, td, legend, caption,
+            blockquote, aside, figure, figcaption {
                 margin: 0em;
                 padding: 0em;
                 border: 0em;
+            }
+            html {
+                font-size: 16px;
             }
             body {
                 font-size: 1rem;
@@ -272,9 +274,14 @@
             p {
                 margin-bottom: 1rem;
             }
-            strong {
-                font-weight: normal;
+            strong, address {
+                font: inherit;
+                font-weight: bold;
                 color: #c11600;
+            }
+            em, dfn, cite, var {
+                font: inherit;
+                font-style: italic;
             }
             ul, ol {
                 margin: 0rem 0rem 2rem 2rem;

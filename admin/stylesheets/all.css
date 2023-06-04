@@ -63,6 +63,15 @@
 
 /* Group: Reset */
 
+html, body, div, dl, dt, dd, ul, ol, li, p,
+h1, h2, h3, h4, h5, h6, img, pre, code,
+form, fieldset, input, select, textarea,
+table, tbody, tr, th, td, legend, caption,
+blockquote, aside, figure, figcaption {
+    margin: 0em;
+    padding: 0em;
+    border: 0em;
+}
 html {
     font-size: 16px;
 }
@@ -70,35 +79,15 @@ html[lang="ar"],
 html[lang="he"] {
     direction: rtl;
 }
-body, div, dl, dt, dd, ul, ol, li,
-aside, h1, h2, h3, h4, h5, h6,
-pre, code, form, fieldset, legend,
-input, textarea, p, blockquote, th, td {
-    margin: 0em;
-    padding: 0em;
-}
 table {
     border-collapse: collapse;
     border-spacing: 0em;
-}
-fieldset, img {
-    border: 0em;
-}
-address, caption, cite, code, 
-dfn, em, strong, th, var {
-    font-style: normal;
-    font-weight: normal;
 }
 ul {
     list-style: none;
 }
 ol {
     list-style: decimal outside;
-}
-input, textarea, select {
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
 }
 
 /* Group: Core */
@@ -135,11 +124,11 @@ sup, sub {
     line-height: 1;
     font-size: 0.75em;
 }
-em, dfn, cite {
+em, dfn, cite, var {
     font: inherit;
     font-style: italic;
 }
-strong {
+strong, address {
     font: inherit;
     font-weight: bold;
 }
@@ -149,6 +138,14 @@ small, .small {
 mark {
     color: #1f1f23;
     background-color: #ffdd00;
+}
+del {
+    font: inherit;
+    text-decoration: line-through;
+}
+ins {
+    font: inherit;
+    text-decoration: #108600 wavy underline;
 }
 figure, blockquote {
     margin: 1rem;
@@ -451,7 +448,11 @@ input[type="password"] {
 input[type="file"] {
     box-sizing: border-box;
     color: #1f1f23;
+    font: inherit;
+    font-size: 1rem;
     padding: 0.5rem;
+    border-radius: 0em;
+    background-color: #ffffff;
     border: 1px solid #cfcfcf;
 }
 input::placeholder {
@@ -592,18 +593,19 @@ form.split div.confirmation {
 
 table {
     width: 100%;
-    margin: 0rem;
 }
 table th {
     background-color: #4f4f4f;
     color: #ffffff;
     padding: 0.5rem;
+    font: inherit;
     font-weight: 600;
     vertical-align: middle;
     border: 1px solid #cfcfcf;
 }
 table td {
     padding: 0.5rem;
+    font: inherit;
     vertical-align: middle;
     border: 1px solid #cfcfcf;
 }
