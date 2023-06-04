@@ -150,6 +150,10 @@ mark {
     color: #202021;
     background-color: lightgreen;
 }
+del {
+    font: inherit;
+    text-decoration: line-through;
+}
 figure, blockquote {
     margin: 1rem;
     font: inherit;

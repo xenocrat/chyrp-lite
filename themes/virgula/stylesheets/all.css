@@ -163,6 +163,10 @@ mark {
     color: #0b0c0c;
     background-color: #ffdd00;
 }
+del {
+    font: inherit;
+    text-decoration: line-through;
+}
 sup, sub {
     line-height: 1;
     font-size: 0.7em;
