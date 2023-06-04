@@ -325,11 +325,9 @@
                 font-style: italic;
             }
             ul, ol {
-                margin: 0rem 0rem 2rem 2rem;
+                margin-bottom: 1rem;
+                margin-inline-start: 2rem;
                 list-style-position: outside;
-            }
-            ol.backtrace {
-                margin-top: 0.5rem;
             }
             a:link,
             a:visited {

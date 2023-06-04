@@ -604,11 +604,9 @@
                 font-style: italic;
             }
             ul, ol {
-                margin: 0rem 0rem 2rem 2rem;
-                list-style-position: outside;
-            }
-            li {
                 margin-bottom: 1rem;
+                margin-inline-start: 2rem;
+                list-style-position: outside;
             }
             pre {
                 font-family: "Cousine webfont", monospace;
