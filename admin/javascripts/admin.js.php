@@ -518,6 +518,50 @@ var Write = {
 
             target.trigger("input");
         });
+
+        // Remember unsaved text entered in the primary text input and textarea.
+        if (!!sessionStorage) {
+            $("#write_form .main_options input[type='text']").first(
+            ).val(function() {
+                try {
+                    return sessionStorage.getItem("write_title");
+                } catch(e) {
+                    console.log("Caught Exception: Window.sessionStorage.getItem()");
+                    return "";
+                }
+            }).on("change", function(e) {
+                try {
+                    sessionStorage.setItem("write_title", $(this).val());
+                } catch(e) {
+                    console.log("Caught Exception: Window.sessionStorage.setItem()");
+                }
+            });
+
+            $("#write_form .main_options textarea").first(
+            ).val(function(index, value) {
+                try {
+                    return sessionStorage.getItem("write_body");
+                } catch(e) {
+                    console.log("Caught Exception: Window.sessionStorage.getItem()");
+                    return "";
+                }
+            }).on("change", function(e) {
+                try {
+                    sessionStorage.setItem("write_body", $(this).val());
+                } catch(e) {
+                    console.log("Caught Exception: Window.sessionStorage.setItem()");
+                }
+            });
+
+            $("#write_form").on("submit.sessionStorage", function(e) {
+                try {
+                    sessionStorage.removeItem("write_title");
+                    sessionStorage.removeItem("write_body");
+                } catch(e) {
+                    console.log("Caught Exception: Window.sessionStorage.removeItem()");
+                }
+            });
+        }
     },
     dragenter: function(e) {
         $(e.target).addClass("drag_highlight");
