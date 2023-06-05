@@ -1,11 +1,11 @@
 #. This file is distributed under the same license as the Chyrp Lite package.
 
-#: themes/umbra/content/comment.twig:3
+#: themes/umbra/content/comment.twig:4
 #, php-format
 msgid "%s:"
 msgstr ""
 
-#: themes/umbra/content/comment.twig:5
+#: themes/umbra/content/comment.twig:6
 #, php-format
 msgid "%s said:"
 msgstr ""

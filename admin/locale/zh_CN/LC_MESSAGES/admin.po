@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: admin/help/canonical_url.twig:3 admin/help/canonical_url.twig:6
@@ -301,17 +301,17 @@ msgid "Are you sure you want to proceed?"
 msgstr "确定继续？"
 
 #: admin/javascripts/admin.js.php:191 admin/javascripts/admin.js.php:414
-#: admin/javascripts/admin.js.php:770
+#: admin/javascripts/admin.js.php:814
 msgid "Modal window"
 msgstr "模态窗口"
 
 #: admin/javascripts/admin.js.php:204 admin/javascripts/admin.js.php:426
-#: admin/javascripts/admin.js.php:784
+#: admin/javascripts/admin.js.php:828
 msgid "Close"
 msgstr "关闭"
 
 #: admin/javascripts/admin.js.php:211 admin/javascripts/admin.js.php:433
-#: admin/javascripts/admin.js.php:791
+#: admin/javascripts/admin.js.php:835
 msgid "close"
 msgstr "关闭"
 
@@ -351,7 +351,7 @@ msgstr "图像"
 msgid "Upload"
 msgstr "上传"
 
-#: admin/javascripts/admin.js.php:372 admin/javascripts/admin.js.php:547
+#: admin/javascripts/admin.js.php:372 admin/javascripts/admin.js.php:591
 msgid "Uploading..."
 msgstr "上传中..."
 
@@ -673,7 +673,7 @@ msgstr "上传清单"
 msgid "Feathers"
 msgstr "羽毛"
 
-#: admin/pages/feathers.twig:9 admin/pages/modules.twig:9
+#: admin/pages/feathers.twig:8 admin/pages/modules.twig:8
 msgid "Enabled"
 msgstr "已启用"
 
@@ -691,7 +691,7 @@ msgstr "卸载"
 msgid "Disable"
 msgstr "禁用"
 
-#: admin/pages/feathers.twig:42 admin/pages/modules.twig:62
+#: admin/pages/feathers.twig:41 admin/pages/modules.twig:61
 msgid "Disabled"
 msgstr "已禁用"
 

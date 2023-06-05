@@ -1,11 +1,11 @@
 #. This file is distributed under the same license as the Chyrp Lite package.
 
-#: themes/topaz/content/comment.twig:3
+#: themes/topaz/content/comment.twig:4
 #, php-format
 msgid "%s:"
 msgstr ""
 
-#: themes/topaz/content/comment.twig:5
+#: themes/topaz/content/comment.twig:6
 #, php-format
 msgid "%s said:"
 msgstr ""
@@ -34,7 +34,7 @@ msgstr ""
 
 #: themes/topaz/content/post.twig:17
 #: themes/topaz/content/sidebar.twig:27
-#: themes/topaz/layouts/default.twig:88
+#: themes/topaz/layouts/default.twig:86
 msgid "Draft"
 msgstr ""
 
@@ -89,17 +89,17 @@ msgid "&copy; %s."
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:4
-#: themes/topaz/layouts/default.twig:37
+#: themes/topaz/layouts/default.twig:36
 msgid "Search&hellip;"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:4
-#: themes/topaz/layouts/default.twig:37
+#: themes/topaz/layouts/default.twig:36
 msgid "Search this blog"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:5
-#: themes/topaz/layouts/default.twig:38
+#: themes/topaz/layouts/default.twig:37
 msgid "Search"
 msgstr ""
 
@@ -108,54 +108,54 @@ msgid "Links"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:9
-#: themes/topaz/layouts/default.twig:58
+#: themes/topaz/layouts/default.twig:56
 msgid "Blog"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:12
 #: themes/topaz/forms/user/controls.twig:9
 #: themes/topaz/forms/user/register.twig:13
-#: themes/topaz/layouts/default.twig:70
+#: themes/topaz/layouts/default.twig:68
 msgid "Email"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:15
-#: themes/topaz/layouts/default.twig:73
+#: themes/topaz/layouts/default.twig:71
 msgid "Feed"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:19
-#: themes/topaz/layouts/default.twig:80
+#: themes/topaz/layouts/default.twig:78
 msgid "Admin"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:23
-#: themes/topaz/layouts/default.twig:84
+#: themes/topaz/layouts/default.twig:82
 msgid "Write"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:32
 #: themes/topaz/forms/user/controls.twig:5
-#: themes/topaz/layouts/default.twig:93
+#: themes/topaz/layouts/default.twig:91
 msgid "Controls"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:35
-#: themes/topaz/layouts/default.twig:96
+#: themes/topaz/layouts/default.twig:94
 msgid "Log out"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:40
 #: themes/topaz/forms/user/register.twig:5
 #: themes/topaz/forms/user/register.twig:19
-#: themes/topaz/layouts/default.twig:101
+#: themes/topaz/layouts/default.twig:99
 msgid "Register"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:44
 #: themes/topaz/forms/user/login.twig:5
 #: themes/topaz/forms/user/login.twig:14
-#: themes/topaz/layouts/default.twig:105
+#: themes/topaz/layouts/default.twig:103
 msgid "Log in"
 msgstr ""
 
@@ -176,7 +176,7 @@ msgid "Recent Posts"
 msgstr ""
 
 #: themes/topaz/content/sidebar.twig:89
-#: themes/topaz/layouts/default.twig:76
+#: themes/topaz/layouts/default.twig:74
 msgid "Archive"
 msgstr ""
 
@@ -356,19 +356,19 @@ msgstr ""
 msgid "A minimalist responsive theme for Chyrp Lite."
 msgstr ""
 
-#: themes/topaz/layouts/default.twig:51
+#: themes/topaz/layouts/default.twig:49
 msgid "Newer posts"
 msgstr ""
 
-#: themes/topaz/layouts/default.twig:52
+#: themes/topaz/layouts/default.twig:50
 msgid "Older posts"
 msgstr ""
 
-#: themes/topaz/layouts/default.twig:109
+#: themes/topaz/layouts/default.twig:107
 msgid "Menu"
 msgstr ""
 
-#: themes/topaz/layouts/default.twig:119
+#: themes/topaz/layouts/default.twig:117
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr ""

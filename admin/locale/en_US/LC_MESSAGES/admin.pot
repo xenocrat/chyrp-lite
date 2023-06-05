@@ -273,19 +273,19 @@ msgstr ""
 
 #: admin/javascripts/admin.js.php:191
 #: admin/javascripts/admin.js.php:414
-#: admin/javascripts/admin.js.php:770
+#: admin/javascripts/admin.js.php:814
 msgid "Modal window"
 msgstr ""
 
 #: admin/javascripts/admin.js.php:204
 #: admin/javascripts/admin.js.php:426
-#: admin/javascripts/admin.js.php:784
+#: admin/javascripts/admin.js.php:828
 msgid "Close"
 msgstr ""
 
 #: admin/javascripts/admin.js.php:211
 #: admin/javascripts/admin.js.php:433
-#: admin/javascripts/admin.js.php:791
+#: admin/javascripts/admin.js.php:835
 msgid "close"
 msgstr ""
 
@@ -328,7 +328,7 @@ msgid "Upload"
 msgstr ""
 
 #: admin/javascripts/admin.js.php:372
-#: admin/javascripts/admin.js.php:547
+#: admin/javascripts/admin.js.php:591
 msgid "Uploading..."
 msgstr ""
 
@@ -694,8 +694,8 @@ msgstr ""
 msgid "Feathers"
 msgstr ""
 
-#: admin/pages/feathers.twig:9
-#: admin/pages/modules.twig:9
+#: admin/pages/feathers.twig:8
+#: admin/pages/modules.twig:8
 msgid "Enabled"
 msgstr ""
 
@@ -717,8 +717,8 @@ msgstr ""
 msgid "Disable"
 msgstr ""
 
-#: admin/pages/feathers.twig:42
-#: admin/pages/modules.twig:62
+#: admin/pages/feathers.twig:41
+#: admin/pages/modules.twig:61
 msgid "Disabled"
 msgstr ""
 

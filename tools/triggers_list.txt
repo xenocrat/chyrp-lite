@@ -17,7 +17,7 @@ Arguments:
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 829
+	admin/javascripts/admin.js.php on line 873
 
 
 admin_head
@@ -248,13 +248,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 1911
+	includes/controller/Admin.php on line 1927
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2331
+	includes/controller/Admin.php on line 2347
 
 Arguments:
 	$group
@@ -263,7 +263,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2365
+	includes/controller/Admin.php on line 2381
 
 Arguments:
 	$user
@@ -272,7 +272,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2410
+	includes/controller/Admin.php on line 2426
 
 Arguments:
 	$entry, $post
@@ -281,7 +281,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2446
+	includes/controller/Admin.php on line 2462
 
 Arguments:
 	$entry, $page
@@ -290,7 +290,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 2450
+	includes/controller/Admin.php on line 2466
 
 Arguments:
 	$imports
@@ -299,13 +299,13 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 2816
+	includes/controller/Admin.php on line 2832
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 2831
+	includes/controller/Admin.php on line 2847
 
 
 can_not_view_page
@@ -757,9 +757,9 @@ Called from:
 end_content
 -----------
 Called from:
-	themes/blossom/layouts/default.twig on line 113
+	themes/blossom/layouts/default.twig on line 111
 	themes/sparrow/layouts/default.twig on line 98
-	themes/topaz/layouts/default.twig on line 112
+	themes/topaz/layouts/default.twig on line 110
 	themes/umbra/layouts/default.twig on line 92
 	themes/virgula/layouts/default.twig on line 76
 
@@ -880,7 +880,7 @@ post_options
 ------------
 Called from:
 	includes/controller/Admin.php on line 214
-	includes/controller/Admin.php on line 301
+	includes/controller/Admin.php on line 304
 
 Target:
 	$options
@@ -892,7 +892,7 @@ Arguments:
 edit_post_options
 -----------------
 Called from:
-	includes/controller/Admin.php on line 301
+	includes/controller/Admin.php on line 304
 
 Target:
 	$options
@@ -904,7 +904,7 @@ Arguments:
 posts_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 2020
+	includes/controller/Admin.php on line 2036
 
 Target:
 	$posts_atom
@@ -916,7 +916,7 @@ Arguments:
 pages_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 2117
+	includes/controller/Admin.php on line 2133
 
 Target:
 	$pages_atom
@@ -928,7 +928,7 @@ Arguments:
 export
 ------
 Called from:
-	includes/controller/Admin.php on line 2203
+	includes/controller/Admin.php on line 2219
 
 Target:
 	$exports
@@ -937,7 +937,7 @@ Target:
 before_import
 -------------
 Called from:
-	includes/controller/Admin.php on line 2309
+	includes/controller/Admin.php on line 2325
 
 Target:
 	$imports
@@ -946,7 +946,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 3229
+	includes/controller/Admin.php on line 3245
 
 Target:
 	$write
@@ -955,7 +955,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3287
+	includes/controller/Admin.php on line 3303
 
 Target:
 	$manage
@@ -964,7 +964,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 3315
+	includes/controller/Admin.php on line 3331
 
 Target:
 	$settings
@@ -973,7 +973,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3336
+	includes/controller/Admin.php on line 3352
 
 Target:
 	$extend
@@ -982,7 +982,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 3400
+	includes/controller/Admin.php on line 3416
 
 Target:
 	$this->context

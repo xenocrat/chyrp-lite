@@ -10,15 +10,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
-#: themes/sparrow/content/comment.twig:3
+#: themes/sparrow/content/comment.twig:4
 #, php-format
 msgid "%s:"
 msgstr "%s:"
 
-#: themes/sparrow/content/comment.twig:5
+#: themes/sparrow/content/comment.twig:6
 #, php-format
 msgid "%s said:"
 msgstr "%s 说："
