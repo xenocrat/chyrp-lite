@@ -257,9 +257,12 @@
 
             $post = Feathers::$instances[$_POST['feather']]->submit();
 
+            $post_redirect = (Post::any_editable() or Post::any_deletable()) ?
+                "manage_posts" : "/" ;
+
             Flash::notice(
                 __("Post created!").' <a href="'.$post->url().'">'.__("View post &rarr;").'</a>',
-                "manage_posts"
+                $post_redirect
             );
         }
 
@@ -317,7 +320,11 @@
          */
         public function admin_update_post()/*: never */{
             $visitor = Visitor::current();
-            fallback($_SESSION['post_redirect'], "manage_posts");
+
+            $post_redirect = (Post::any_editable() or Post::any_deletable()) ?
+                "manage_posts" : "/" ;
+
+            fallback($_SESSION['post_redirect'], $post_redirect);
 
             if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
                 show_403(
@@ -578,7 +585,9 @@
          * Adds a page when the form is submitted.
          */
         public function admin_add_page()/*: never */{
-            if (!Visitor::current()->group->can("add_page"))
+            $visitor = Visitor::current();
+
+            if (!$visitor->group->can("add_page"))
                 show_403(
                     __("Access Denied"),
                     __("You do not have sufficient privileges to add pages.")
@@ -630,9 +639,12 @@
                 clean:sanitize($_POST['slug'])
             );
 
+            $page_redirect = ($visitor->group->can("edit_page", "delete_page")) ?
+                "manage_pages" : "/" ;
+
             Flash::notice(
                 __("Page created!").' <a href="'.$page->url().'">'.__("View page &rarr;").'</a>',
-                "manage_pages"
+                $page_redirect
             );
         }
 
@@ -683,7 +695,11 @@
          */
         public function admin_update_page()/*: never */{
             $visitor = Visitor::current();
-            fallback($_SESSION['page_redirect'], "manage_pages");
+
+            $page_redirect = ($visitor->group->can("edit_page", "delete_page")) ?
+                "manage_pages" : "/" ;
+
+            fallback($_SESSION['page_redirect'], $page_redirect);
 
             if (!$visitor->group->can("edit_page"))
                 show_403(
