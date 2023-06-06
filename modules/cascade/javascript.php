@@ -39,7 +39,7 @@ var ChyrpAjaxScroll = {
                 $.get(this_next_url, function(data) {
                     var this_next_num = Number(this_next_url.match(/page[=\/]([0-9]+)/i)[1]);
                     var ajax_next_obj = $(data).find("#pagination_next_page");
-                    var ajax_next_title = $(data).filter("html > head > title").text();
+                    var ajax_next_title = $(data).filter("title").text();
 
                     // Insert new posts, update the page title and location, and execute inline scripts.
                     this_post_obj.after($(data).find(".post"));
@@ -48,7 +48,7 @@ var ChyrpAjaxScroll = {
                     if (!!history.replaceState)
                         history.replaceState({ "page": this_next_num }, ajax_next_title, this_next_url);
 
-                    $(data).filter("html > body script").each(function(){
+                    $(data).find("script").each(function(){
                         $.globalEval(this.text || this.textContent || this.innerHTML || "");
                     });
 
@@ -63,7 +63,7 @@ var ChyrpAjaxScroll = {
                         // That's all folks!
                         this_next_obj.remove();
                     }
-                }).fail(ChyrpAjaxScroll.panic);
+                }, "html").fail(ChyrpAjaxScroll.panic);
             }
         }
     },
