@@ -527,7 +527,7 @@ var Write = {
                     return sessionStorage.getItem("write_title");
                 } catch(e) {
                     console.log("Caught Exception: Window.sessionStorage.getItem()");
-                    return "";
+                    return null;
                 }
             }).on("change", function(e) {
                 try {
@@ -543,7 +543,7 @@ var Write = {
                     return sessionStorage.getItem("write_body");
                 } catch(e) {
                     console.log("Caught Exception: Window.sessionStorage.getItem()");
-                    return "";
+                    return null;
                 }
             }).on("change", function(e) {
                 try {
