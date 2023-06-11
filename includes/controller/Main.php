@@ -16,6 +16,9 @@
             '|/random/([^/]+)/|'
                 => '/?action=random&amp;feather=$1',
 
+            '|/author/([^/]+)/|'
+                => '/?action=author&amp;login=$1',
+
             '|/search/([^/]+)/|'
                 => '/?action=search&amp;query=$1',
 
@@ -127,6 +130,14 @@
                 return $route->action = "search";
             }
 
+            # Author.
+            if ($route->arg[0] == "author") {
+                if (isset($route->arg[1]))
+                    $_GET['login'] = $route->arg[1];
+
+                return $route->action = "author";
+            }
+
             # Random.
             if ($route->arg[0] == "random") {
                 if (isset($route->arg[1]))
@@ -207,12 +218,45 @@
                             array(
                                 "placeholders" => true,
                                 "where" => array("updated_at >" => "0001-01-01 00:00:00"),
-                                "order" => "updated_at DESC, created_at DESC, id DESC")
+                                "order" => "updated_at DESC, created_at DESC, id DESC"
+                            )
                         ),
                         $this->post_limit
                     )
                 ),
                 __("Updated posts")
+            );
+        }
+
+        /**
+         * Function: main_author
+         * Grabs the posts created by the named user.
+         */
+        public function main_author(): void {
+            $user = new User(
+                array("login" => fallback($_GET['login']))
+            );
+
+            if ($user->no_results)
+                Flash::warning(
+                    __("User not found."),
+                    "/"
+                );
+
+            $this->display(
+                array("pages".DIR."author", "pages".DIR."index"),
+                array(
+                    "posts" => new Paginator(
+                        Post::find(
+                            array(
+                                "placeholders" => true,
+                                "where" => array("user_id" => $user->id)
+                            )
+                        ),
+                        $this->post_limit
+                    )
+                ),
+                _f("Posts created by &#8220;%s&#8221;", fix(oneof($user->full_name, $user->login)))
             );
         }
 
