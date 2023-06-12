@@ -35,6 +35,8 @@
                     __("Missing argument."),
                     code:400
                 );
+
+            return null;
         }
 
         /**
