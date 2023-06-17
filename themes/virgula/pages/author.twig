@@ -1,0 +1,19 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block content %}
+{% if posts.paginated is not empty %}
+<h2 class="filter">{{ "Posts created by &#8220;%s&#8221;" | translate | format(author.full_name | oneof(author.login) | fix) }}</h2>
+{% for post in posts.paginated %}
+{% include(["feathers" ~ DIR ~ post.feather ~ ".twig", "feathers" ~ DIR ~ "missing.twig"]) %}
+{% endfor %}
+{% if posts.prev_page() or posts.next_page() %}
+<!-- Navigation -->
+<nav class="traversal">
+{{ posts.prev_link("&xlarr; Newer posts" | translate) }}
+{{ posts.next_link("Older posts &xrarr;" | translate) }}
+</nav>
+{% endif %}
+{% else %}
+<h3 role="status">{{ "This user hasn't created any posts." | translate }}</h3>
+{% endif %}
+{% endblock %}
