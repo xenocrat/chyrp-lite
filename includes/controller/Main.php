@@ -246,6 +246,7 @@
             $this->display(
                 array("pages".DIR."author", "pages".DIR."index"),
                 array(
+                    "author" => $user,
                     "posts" => new Paginator(
                         Post::find(
                             array(
