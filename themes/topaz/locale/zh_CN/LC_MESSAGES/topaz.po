@@ -174,10 +174,10 @@ msgstr "档案"
 msgid "F Y"
 msgstr "F Y"
 
-#: themes/topaz/feathers/audio.twig:8 themes/topaz/feathers/link.twig:7
-#: themes/topaz/feathers/photo.twig:8 themes/topaz/feathers/quote.twig:8
-#: themes/topaz/feathers/text.twig:8 themes/topaz/feathers/uploader.twig:8
-#: themes/topaz/feathers/video.twig:8
+#: themes/topaz/feathers/audio.twig:9 themes/topaz/feathers/link.twig:8
+#: themes/topaz/feathers/photo.twig:9 themes/topaz/feathers/quote.twig:9
+#: themes/topaz/feathers/text.twig:9 themes/topaz/feathers/uploader.twig:9
+#: themes/topaz/feathers/video.twig:9
 #, php-format
 msgid "Written by %s"
 msgstr "由%s撰写"
@@ -186,7 +186,7 @@ msgstr "由%s撰写"
 msgid "The post cannot be displayed because the theme does not support it."
 msgstr "这篇帖子无法显示，因为主题不支持。"
 
-#: themes/topaz/feathers/uploader.twig:22
+#: themes/topaz/feathers/uploader.twig:24
 msgid "File attachment:"
 msgstr "文件附件："
 
@@ -375,6 +375,15 @@ msgstr "%s的档案"
 #: themes/topaz/pages/archive.twig:68
 msgid "There aren't any posts in the timeframe you specified."
 msgstr "在指定的时间范围内没有任何帖子。"
+
+#: themes/topaz/pages/author.twig:6
+#, php-format
+msgid "Posts created by &#8220;%s&#8221;"
+msgstr "由&#8220;%s&#8221;创建的帖子"
+
+#: themes/topaz/pages/author.twig:13
+msgid "This user hasn't created any posts."
+msgstr "此用户尚未创建任何帖子。"
 
 #: themes/topaz/pages/category.twig:6
 #, php-format

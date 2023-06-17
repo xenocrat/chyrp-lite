@@ -348,6 +348,15 @@ msgstr ""
 msgid "There aren't any posts in the timeframe you specified."
 msgstr ""
 
+#: themes/sparrow/pages/author.twig:5
+#, php-format
+msgid "Posts created by &#8220;%s&#8221;"
+msgstr ""
+
+#: themes/sparrow/pages/author.twig:10
+msgid "This user hasn't created any posts."
+msgstr ""
+
 #: themes/sparrow/pages/category.twig:5
 #, php-format
 msgid "Posts in category &#8220;%s&#8221;"

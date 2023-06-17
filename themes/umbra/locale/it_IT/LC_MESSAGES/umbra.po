@@ -313,6 +313,15 @@ msgstr "Archivio %s"
 msgid "There aren't any posts in the timeframe you specified."
 msgstr "Non ci sono post nell'intervallo di tempo specificato."
 
+#: themes/umbra/pages/author.twig:5
+#, php-format
+msgid "Posts created by &#8220;%s&#8221;"
+msgstr "Post creati da &#8220;%s&#8221;"
+
+#: themes/umbra/pages/author.twig:10
+msgid "This user hasn't created any posts."
+msgstr "Questo utente non ha creato alcun post."
+
 #: themes/umbra/pages/category.twig:5
 #, php-format
 msgid "Posts in category &#8220;%s&#8221;"

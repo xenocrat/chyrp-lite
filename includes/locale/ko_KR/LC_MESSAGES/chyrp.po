@@ -83,7 +83,7 @@ msgstr "경로가 잘못된 컨트롤러로 시작되었습니다."
 #: includes/controller/Admin.php:2893 includes/controller/Admin.php:2900
 #: includes/controller/Admin.php:2907 includes/controller/Admin.php:2914
 #: includes/controller/Admin.php:3184 includes/controller/Ajax.php:34
-#: includes/controller/Ajax.php:249 includes/download.php:13
+#: includes/controller/Ajax.php:251 includes/download.php:13
 #: includes/error.php:163 includes/helpers.php:1794 includes/helpers.php:1801
 #: includes/helpers.php:1808 includes/helpers.php:1821
 #: includes/helpers.php:1830 includes/helpers.php:1840
@@ -142,14 +142,14 @@ msgstr "올바르지 않은 액션입니다."
 #: includes/controller/Admin.php:2880 includes/controller/Admin.php:2953
 #: includes/controller/Admin.php:2983 includes/controller/Admin.php:3029
 #: includes/controller/Admin.php:3044 includes/controller/Admin.php:3094
-#: includes/controller/Admin.php:3108 includes/controller/Ajax.php:55
-#: includes/controller/Ajax.php:78 includes/controller/Ajax.php:93
-#: includes/controller/Ajax.php:99 includes/controller/Ajax.php:129
-#: includes/controller/Ajax.php:135 includes/controller/Ajax.php:185
-#: includes/controller/Ajax.php:191 includes/controller/Ajax.php:226
-#: includes/controller/Ajax.php:243 includes/controller/Ajax.php:267
-#: includes/controller/Ajax.php:273 includes/controller/Main.php:479
-#: includes/controller/Main.php:558 includes/download.php:20
+#: includes/controller/Admin.php:3108 includes/controller/Ajax.php:57
+#: includes/controller/Ajax.php:80 includes/controller/Ajax.php:95
+#: includes/controller/Ajax.php:101 includes/controller/Ajax.php:131
+#: includes/controller/Ajax.php:137 includes/controller/Ajax.php:187
+#: includes/controller/Ajax.php:193 includes/controller/Ajax.php:228
+#: includes/controller/Ajax.php:245 includes/controller/Ajax.php:269
+#: includes/controller/Ajax.php:275 includes/controller/Main.php:524
+#: includes/controller/Main.php:603 includes/download.php:20
 #: includes/helpers.php:2268 includes/thumbnail.php:23
 msgid "Access Denied"
 msgstr "접근 불가"
@@ -193,7 +193,7 @@ msgid "You do not have sufficient privileges to view this area."
 msgstr "영역을 볼 수 있는 충분한 권한이 없습니다."
 
 #: includes/controller/Admin.php:186 includes/controller/Admin.php:237
-#: includes/controller/Ajax.php:136
+#: includes/controller/Ajax.php:138
 msgid "You do not have sufficient privileges to add posts."
 msgstr "게시물을 추가할 수 있는 충분한 권한이 없습니다."
 
@@ -208,8 +208,8 @@ msgstr "게시물을 작성하려면 하나 이상의 깃털을 활성화해야 
 #: includes/controller/Admin.php:1189 includes/controller/Admin.php:1283
 #: includes/controller/Admin.php:1537 includes/controller/Admin.php:1574
 #: includes/controller/Admin.php:1629 includes/controller/Admin.php:2691
-#: includes/controller/Admin.php:2758 includes/controller/Ajax.php:72
-#: includes/controller/Ajax.php:114 includes/download.php:29
+#: includes/controller/Admin.php:2758 includes/controller/Ajax.php:74
+#: includes/controller/Ajax.php:116 includes/download.php:29
 #: includes/helpers.php:135 includes/thumbnail.php:35
 msgid "Not Found"
 msgstr "찾을 수 없음"
@@ -229,13 +229,13 @@ msgstr "깃털을 찾을 수 없습니다."
 #: includes/controller/Admin.php:2733 includes/controller/Admin.php:2790
 #: includes/controller/Admin.php:2843 includes/controller/Admin.php:2881
 #: includes/controller/Admin.php:2984 includes/controller/Admin.php:3045
-#: includes/controller/Admin.php:3109 includes/controller/Ajax.php:56
-#: includes/controller/Ajax.php:100 includes/controller/Ajax.php:130
-#: includes/controller/Ajax.php:186 includes/controller/Ajax.php:227
-#: includes/controller/Ajax.php:268 includes/controller/Main.php:664
-#: includes/controller/Main.php:783 includes/controller/Main.php:818
-#: includes/controller/Main.php:900 includes/controller/Main.php:989
-#: includes/controller/Main.php:1058 includes/controller/Main.php:1065
+#: includes/controller/Admin.php:3109 includes/controller/Ajax.php:58
+#: includes/controller/Ajax.php:102 includes/controller/Ajax.php:132
+#: includes/controller/Ajax.php:188 includes/controller/Ajax.php:229
+#: includes/controller/Ajax.php:270 includes/controller/Main.php:709
+#: includes/controller/Main.php:828 includes/controller/Main.php:863
+#: includes/controller/Main.php:945 includes/controller/Main.php:1034
+#: includes/controller/Main.php:1103 includes/controller/Main.php:1110
 msgid "Invalid authentication token."
 msgstr "잘못된 인증 토큰입니다."
 
@@ -256,7 +256,7 @@ msgstr "게시물 보기 &rarr;"
 #: includes/controller/Admin.php:1225 includes/controller/Admin.php:1271
 #: includes/controller/Admin.php:1464 includes/controller/Admin.php:1505
 #: includes/controller/Admin.php:1565 includes/controller/Admin.php:1617
-#: includes/controller/Ajax.php:61 includes/controller/Ajax.php:105
+#: includes/controller/Ajax.php:63 includes/controller/Ajax.php:107
 msgid "No ID Specified"
 msgstr "지정된 ID 없음"
 
@@ -266,7 +266,7 @@ msgstr "게시물을 수정하기 위한 권한이 필요합니다."
 
 #: includes/controller/Admin.php:290 includes/controller/Admin.php:353
 #: includes/controller/Admin.php:395 includes/controller/Admin.php:437
-#: includes/controller/Ajax.php:73
+#: includes/controller/Ajax.php:75
 msgid "Post not found."
 msgstr "게시물을 찾을 수 없습니다."
 
@@ -283,16 +283,16 @@ msgid "Post updated."
 msgstr "게시물이 업데이트되었습니다."
 
 #: includes/controller/Admin.php:384 includes/controller/Admin.php:425
-#: includes/controller/Ajax.php:62
+#: includes/controller/Ajax.php:64
 msgid "An ID is required to delete a post."
 msgstr "게시물을 삭제하기 위한 권한이 필요합니다."
 
 #: includes/controller/Admin.php:402 includes/controller/Admin.php:443
-#: includes/controller/Ajax.php:79
+#: includes/controller/Ajax.php:81
 msgid "You do not have sufficient privileges to delete this post."
 msgstr "게시물을 삭제할 권한이 없습니다."
 
-#: includes/controller/Admin.php:449 includes/controller/Ajax.php:83
+#: includes/controller/Admin.php:449 includes/controller/Ajax.php:85
 msgid "Post deleted."
 msgstr "게시물이 삭제되었습니다."
 
@@ -301,7 +301,7 @@ msgid "You do not have sufficient privileges to manage any posts."
 msgstr "게시물을 관리할 수 있는 충분한 권한이 없습니다."
 
 #: includes/controller/Admin.php:574 includes/controller/Admin.php:593
-#: includes/controller/Ajax.php:192
+#: includes/controller/Ajax.php:194
 msgid "You do not have sufficient privileges to add pages."
 msgstr "페이지를 추가할 수 있는 충분한 권한이 없습니다."
 
@@ -332,7 +332,7 @@ msgstr "페이지를 수정하기 위한 권한이 필요합니다."
 
 #: includes/controller/Admin.php:676 includes/controller/Admin.php:745
 #: includes/controller/Admin.php:797 includes/controller/Admin.php:839
-#: includes/controller/Ajax.php:115
+#: includes/controller/Ajax.php:117
 msgid "Page not found."
 msgstr "페이지를 찾을 수 없습니다."
 
@@ -345,16 +345,16 @@ msgid "Page updated."
 msgstr "페이지가 업데이트되었습니다."
 
 #: includes/controller/Admin.php:783 includes/controller/Admin.php:815
-#: includes/controller/Ajax.php:94
+#: includes/controller/Ajax.php:96
 msgid "You do not have sufficient privileges to delete pages."
 msgstr "페이지를 삭제할 권한이 없습니다."
 
 #: includes/controller/Admin.php:789 includes/controller/Admin.php:827
-#: includes/controller/Ajax.php:106
+#: includes/controller/Ajax.php:108
 msgid "An ID is required to delete a page."
 msgstr "페이지를 삭제하기 위한 권한이 필요합니다."
 
-#: includes/controller/Admin.php:859 includes/controller/Ajax.php:119
+#: includes/controller/Admin.php:859 includes/controller/Ajax.php:121
 msgid "Page deleted."
 msgstr "페이지가 삭제되었습니다."
 
@@ -371,18 +371,18 @@ msgid "Please enter a username for the account."
 msgstr "계정의 사용자명을 입력하세요."
 
 #: includes/controller/Admin.php:962 includes/controller/Admin.php:1123
-#: includes/controller/Main.php:678
+#: includes/controller/Main.php:723
 msgid "That username is already in use."
 msgstr "이미 사용 중인 이름입니다."
 
-#: includes/controller/Admin.php:969 includes/controller/Main.php:683
-#: includes/controller/Main.php:1070 install.php:646
+#: includes/controller/Admin.php:969 includes/controller/Main.php:728
+#: includes/controller/Main.php:1115 install.php:646
 msgid "Passwords cannot be blank."
 msgstr "비밀번호는 비워둘 수 없습니다."
 
 #: includes/controller/Admin.php:976 includes/controller/Admin.php:1142
-#: includes/controller/Main.php:687 includes/controller/Main.php:909
-#: includes/controller/Main.php:1074 install.php:581 install.php:648
+#: includes/controller/Main.php:732 includes/controller/Main.php:954
+#: includes/controller/Main.php:1119 install.php:581 install.php:648
 msgid "Passwords do not match."
 msgstr "비밀번호가 일치하지 않습니다."
 
@@ -391,19 +391,19 @@ msgid "Please consider setting a stronger password for this user."
 msgstr "보안을 위하여 더욱 강력한 암호를 설정하는 것이 좋습니다."
 
 #: includes/controller/Admin.php:988 includes/controller/Admin.php:1160
-#: includes/controller/Admin.php:2887 includes/controller/Main.php:696
-#: includes/controller/Main.php:922 install.php:651
+#: includes/controller/Admin.php:2887 includes/controller/Main.php:741
+#: includes/controller/Main.php:967 install.php:651
 msgid "Email address cannot be blank."
 msgstr "이메일 주소는 비워둘 수 없습니다."
 
 #: includes/controller/Admin.php:995 includes/controller/Admin.php:1167
-#: includes/controller/Admin.php:2894 includes/controller/Main.php:700
-#: includes/controller/Main.php:926 install.php:653
+#: includes/controller/Admin.php:2894 includes/controller/Main.php:745
+#: includes/controller/Main.php:971 install.php:653
 msgid "Invalid email address."
 msgstr "올바르지 않은 이메일 주소입니다."
 
 #: includes/controller/Admin.php:1002 includes/controller/Admin.php:1174
-#: includes/controller/Main.php:710 includes/controller/Main.php:931
+#: includes/controller/Main.php:755 includes/controller/Main.php:976
 msgid "Invalid website URL."
 msgstr "올바르지 않은 사이트 주소입니다."
 
@@ -427,6 +427,7 @@ msgstr "사용자를 편집하기 위한 권한이 필요합니다."
 
 #: includes/controller/Admin.php:1064 includes/controller/Admin.php:1132
 #: includes/controller/Admin.php:1234 includes/controller/Admin.php:1284
+#: includes/controller/Main.php:242
 msgid "User not found."
 msgstr "사용자를 찾을 수 없습니다."
 
@@ -566,7 +567,7 @@ msgstr "파일을 삭제하지 못했습니다."
 msgid "Upload deleted."
 msgstr "파일이 삭제되었습니다."
 
-#: includes/controller/Admin.php:1878 includes/controller/Ajax.php:274
+#: includes/controller/Admin.php:1878 includes/controller/Ajax.php:276
 msgid "You do not have sufficient privileges to manage uploads."
 msgstr "파일을 관리할 권한이 없습니다."
 
@@ -707,12 +708,12 @@ msgstr "아직 아무것도 없습니다."
 msgid "Page created."
 msgstr "페이지가 생성되었습니다."
 
-#: includes/controller/Admin.php:3161 includes/controller/Main.php:811
+#: includes/controller/Admin.php:3161 includes/controller/Main.php:856
 msgid "You are already logged in."
 msgstr "이미 로그인했습니다."
 
 #: includes/controller/Admin.php:3185 includes/controller/Ajax.php:35
-#: includes/controller/Ajax.php:250 includes/download.php:14
+#: includes/controller/Ajax.php:252 includes/download.php:14
 #: includes/thumbnail.php:17
 msgid "Missing argument."
 msgstr "인수가 누락되었습니다."
@@ -793,164 +794,169 @@ msgstr "깃털"
 msgid "Themes"
 msgstr "테마"
 
-#: includes/controller/Ajax.php:174 includes/controller/Ajax.php:215
+#: includes/controller/Ajax.php:176 includes/controller/Ajax.php:217
 msgid "Preview"
 msgstr "미리 보기"
 
-#: includes/controller/Ajax.php:244
+#: includes/controller/Ajax.php:246
 msgid "You do not have sufficient privileges to upload files."
 msgstr "파일을 업로드할 권한이 없습니다."
 
-#: includes/controller/Ajax.php:260
+#: includes/controller/Ajax.php:262
 msgid "File uploaded."
 msgstr "파일이 업로드되었습니다."
 
-#: includes/controller/Main.php:215
+#: includes/controller/Main.php:227
 msgid "Updated posts"
 msgstr "업데이트된 게시물"
 
-#: includes/controller/Main.php:274 includes/controller/Main.php:293
-#: includes/controller/Main.php:312
+#: includes/controller/Main.php:260
+#, php-format
+msgid "Posts created by &#8220;%s&#8221;"
+msgstr "&#8220;%s&#8221;님이 작성한 게시물"
+
+#: includes/controller/Main.php:319 includes/controller/Main.php:338
+#: includes/controller/Main.php:357
 #, php-format
 msgid "Archive of %s"
 msgstr "%s 아카이브"
 
-#: includes/controller/Main.php:402
+#: includes/controller/Main.php:447
 msgid "Please enter a search term."
 msgstr "검색어를 입력하세요."
 
-#: includes/controller/Main.php:466
+#: includes/controller/Main.php:511
 #, php-format
 msgid "Search results for &#8220;%s&#8221;"
-msgstr "e#8220;%s &#8221;에 대한 검색 결과"
+msgstr "&#8220;%s&#8221;에 대한 검색 결과"
 
-#: includes/controller/Main.php:480
+#: includes/controller/Main.php:525
 msgid "You do not have sufficient privileges to view drafts."
 msgstr "초안을 볼 수 있는 권한이 없습니다."
 
-#: includes/controller/Main.php:498
+#: includes/controller/Main.php:543
 msgid "Drafts"
 msgstr "초안"
 
-#: includes/controller/Main.php:518
+#: includes/controller/Main.php:563
 msgid "This post is not published."
 msgstr "아직 공개되지 않은 내용입니다."
 
-#: includes/controller/Main.php:523
+#: includes/controller/Main.php:568
 msgid "This post is scheduled to be published."
 msgstr "게시일이 존재하는 내용입니다."
 
-#: includes/controller/Main.php:559
+#: includes/controller/Main.php:604
 msgid "You are not allowed to view this page."
 msgstr "페이지를 볼 수 없습니다."
 
-#: includes/controller/Main.php:637
+#: includes/controller/Main.php:682
 msgid "There aren't enough posts for random selection."
 msgstr "임의 선택을 위한 게시물이 충분하지 않습니다."
 
-#: includes/controller/Main.php:651
+#: includes/controller/Main.php:696
 msgid "This site does not allow registration."
 msgstr "계정 등록이 불가능합니다."
 
-#: includes/controller/Main.php:657
+#: includes/controller/Main.php:702
 msgid "You cannot register an account because you are already logged in."
 msgstr "이미 로그인되어 있기 때문에 계정을 등록할 수 없습니다."
 
-#: includes/controller/Main.php:669 install.php:643
+#: includes/controller/Main.php:714 install.php:643
 msgid "Please enter a username for your account."
 msgstr "사용자명을 입력하세요."
 
-#: includes/controller/Main.php:691 includes/controller/Main.php:915
-#: includes/controller/Main.php:1078
+#: includes/controller/Main.php:736 includes/controller/Main.php:960
+#: includes/controller/Main.php:1123
 msgid "Please consider setting a stronger password for your account."
 msgstr "보안을 위하여 더욱 강력한 암호를 설정하는 것이 좋습니다."
 
-#: includes/controller/Main.php:705
+#: includes/controller/Main.php:750
 msgid "Incorrect captcha response."
 msgstr "잘못된 보안 문자 응답입니다."
 
-#: includes/controller/Main.php:733
+#: includes/controller/Main.php:778
 msgid "We have emailed you an activation link."
 msgstr "활성화 링크를 이메일로 보냈습니다."
 
-#: includes/controller/Main.php:742 includes/controller/Main.php:796
+#: includes/controller/Main.php:787 includes/controller/Main.php:841
 msgid "Your account is now active."
 msgstr "계정이 활성화되었습니다."
 
-#: includes/controller/Main.php:751
+#: includes/controller/Main.php:796
 msgid "Register"
 msgstr "회원가입"
 
-#: includes/controller/Main.php:762
+#: includes/controller/Main.php:807
 msgid "You cannot activate an account because you are already logged in."
 msgstr "이미 로그인되어 있기 때문에 계정을 활성화할 수 없습니다."
 
-#: includes/controller/Main.php:775 includes/controller/Main.php:982
-#: includes/controller/Main.php:1050
+#: includes/controller/Main.php:820 includes/controller/Main.php:1027
+#: includes/controller/Main.php:1095
 msgid "Please contact the blog administrator for help with your account."
 msgstr "계정에 대한 도움이 필요하면 사이트 관리자에게 문의하세요."
 
-#: includes/controller/Main.php:789
+#: includes/controller/Main.php:834
 msgid "Your account has already been activated."
 msgstr "계정이 이미 활성화되었습니다."
 
-#: includes/controller/Main.php:829
+#: includes/controller/Main.php:874
 msgid "Incorrect username and/or password."
 msgstr "아이디 또는 비밀번호가 일치하지 않습니다."
 
-#: includes/controller/Main.php:839
+#: includes/controller/Main.php:884
 msgid "You must activate your account before you log in."
 msgstr "로그인하기 전에 계정을 활성화해야 합니다."
 
-#: includes/controller/Main.php:847
+#: includes/controller/Main.php:892
 msgid "Logged in."
 msgstr "로그인되었습니다."
 
-#: includes/controller/Main.php:856 includes/error.php:448
+#: includes/controller/Main.php:901 includes/error.php:448
 msgid "Log in"
 msgstr "로그인"
 
-#: includes/controller/Main.php:869
+#: includes/controller/Main.php:914
 msgid "You aren't logged in."
 msgstr "로그인할 수 없습니다."
 
-#: includes/controller/Main.php:879
+#: includes/controller/Main.php:924
 msgid "Logged out."
 msgstr "로그아웃되었습니다."
 
-#: includes/controller/Main.php:893
+#: includes/controller/Main.php:938
 msgid "You must be logged in to access user controls."
 msgstr "사용자 설정을 위하여 로그인해야 합니다."
 
-#: includes/controller/Main.php:954 includes/controller/Main.php:1085
+#: includes/controller/Main.php:999 includes/controller/Main.php:1130
 msgid "Your profile has been updated."
 msgstr "프로필이 업데이트되었습니다."
 
-#: includes/controller/Main.php:963
+#: includes/controller/Main.php:1008
 msgid "Controls"
 msgstr "사용자 관리"
 
-#: includes/controller/Main.php:976 includes/controller/Main.php:1028
+#: includes/controller/Main.php:1021 includes/controller/Main.php:1073
 msgid "You cannot reset your password because you are already logged in."
 msgstr "이미 로그인되어 있으므로 비밀번호를 재설정할 수 없습니다."
 
-#: includes/controller/Main.php:994
+#: includes/controller/Main.php:1039
 msgid "Please enter your username."
 msgstr "사용자명을 입력하세요."
 
-#: includes/controller/Main.php:1006
+#: includes/controller/Main.php:1051
 msgid "We have emailed you a password reset link."
 msgstr "비밀번호 재설정 링크를 이메일로 보냈습니다."
 
-#: includes/controller/Main.php:1015
+#: includes/controller/Main.php:1060
 msgid "Lost password"
 msgstr "비밀번호 분실"
 
-#: includes/controller/Main.php:1040
+#: includes/controller/Main.php:1085
 msgid "The link has expired. Please try again."
 msgstr "링크가 만료되었습니다. 다시 시도해 주세요."
 
-#: includes/controller/Main.php:1098
+#: includes/controller/Main.php:1143
 msgid "Reset password"
 msgstr "비밀번호 변경"
 
@@ -969,7 +975,7 @@ msgstr "%s: %d번 줄"
 
 #: includes/error.php:453
 msgid "Go back"
-msgstr ""
+msgstr "뒤로 가기"
 
 #: includes/helpers.php:21
 msgid "Session cannot be started more than once."

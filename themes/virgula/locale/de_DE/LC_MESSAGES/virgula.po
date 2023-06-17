@@ -283,20 +283,31 @@ msgid "F"
 msgstr "F"
 
 #: themes/virgula/pages/archive.twig:32 themes/virgula/pages/archive.twig:55
-#: themes/virgula/pages/category.twig:12 themes/virgula/pages/search.twig:28
-#: themes/virgula/pages/tag.twig:12 themes/virgula/pages/updated.twig:12
+#: themes/virgula/pages/author.twig:12 themes/virgula/pages/category.twig:12
+#: themes/virgula/pages/search.twig:28 themes/virgula/pages/tag.twig:12
+#: themes/virgula/pages/updated.twig:12
 msgid "&xlarr; Newer posts"
 msgstr "&xlarr; Neuere Beiträge"
 
 #: themes/virgula/pages/archive.twig:37 themes/virgula/pages/archive.twig:56
-#: themes/virgula/pages/category.twig:13 themes/virgula/pages/search.twig:29
-#: themes/virgula/pages/tag.twig:13 themes/virgula/pages/updated.twig:13
+#: themes/virgula/pages/author.twig:13 themes/virgula/pages/category.twig:13
+#: themes/virgula/pages/search.twig:29 themes/virgula/pages/tag.twig:13
+#: themes/virgula/pages/updated.twig:13
 msgid "Older posts &xrarr;"
 msgstr "Ältere Beiträge &xrarr;"
 
 #: themes/virgula/pages/archive.twig:63
 msgid "There aren't any posts in the timeframe you specified."
 msgstr "In dem angegebenen Zeitfenster gibt es keine Posts."
+
+#: themes/virgula/pages/author.twig:5
+#, php-format
+msgid "Posts created by &#8220;%s&#8221;"
+msgstr "Posts erstellt von &#8220;%s&#8221;"
+
+#: themes/virgula/pages/author.twig:17
+msgid "This user hasn't created any posts."
+msgstr "Dieser Benutzer hat noch keine Posts erstellt."
 
 #: themes/virgula/pages/category.twig:5
 #, php-format

@@ -281,20 +281,31 @@ msgid "F"
 msgstr "F"
 
 #: themes/virgula/pages/archive.twig:32 themes/virgula/pages/archive.twig:55
-#: themes/virgula/pages/category.twig:12 themes/virgula/pages/search.twig:28
-#: themes/virgula/pages/tag.twig:12 themes/virgula/pages/updated.twig:12
+#: themes/virgula/pages/author.twig:12 themes/virgula/pages/category.twig:12
+#: themes/virgula/pages/search.twig:28 themes/virgula/pages/tag.twig:12
+#: themes/virgula/pages/updated.twig:12
 msgid "&xlarr; Newer posts"
 msgstr "&xlarr; 较新的帖子"
 
 #: themes/virgula/pages/archive.twig:37 themes/virgula/pages/archive.twig:56
-#: themes/virgula/pages/category.twig:13 themes/virgula/pages/search.twig:29
-#: themes/virgula/pages/tag.twig:13 themes/virgula/pages/updated.twig:13
+#: themes/virgula/pages/author.twig:13 themes/virgula/pages/category.twig:13
+#: themes/virgula/pages/search.twig:29 themes/virgula/pages/tag.twig:13
+#: themes/virgula/pages/updated.twig:13
 msgid "Older posts &xrarr;"
 msgstr "较旧的帖子 &xrarr;"
 
 #: themes/virgula/pages/archive.twig:63
 msgid "There aren't any posts in the timeframe you specified."
 msgstr "在指定的时间范围内没有任何帖子。"
+
+#: themes/virgula/pages/author.twig:5
+#, php-format
+msgid "Posts created by &#8220;%s&#8221;"
+msgstr "由&#8220;%s&#8221;创建的帖子"
+
+#: themes/virgula/pages/author.twig:17
+msgid "This user hasn't created any posts."
+msgstr "此用户尚未创建任何帖子。"
 
 #: themes/virgula/pages/category.twig:5
 #, php-format

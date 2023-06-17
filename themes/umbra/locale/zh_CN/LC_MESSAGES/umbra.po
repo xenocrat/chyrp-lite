@@ -313,6 +313,15 @@ msgstr "%s的档案"
 msgid "There aren't any posts in the timeframe you specified."
 msgstr "在指定的时间范围内没有任何帖子。"
 
+#: themes/umbra/pages/author.twig:5
+#, php-format
+msgid "Posts created by &#8220;%s&#8221;"
+msgstr "由&#8220;%s&#8221;创建的帖子"
+
+#: themes/umbra/pages/author.twig:10
+msgid "This user hasn't created any posts."
+msgstr "此用户尚未创建任何帖子。"
+
 #: themes/umbra/pages/category.twig:5
 #, php-format
 msgid "Posts in category &#8220;%s&#8221;"

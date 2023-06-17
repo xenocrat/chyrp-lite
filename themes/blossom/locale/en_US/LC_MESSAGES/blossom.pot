@@ -381,6 +381,15 @@ msgstr ""
 msgid "There aren't any posts in the timeframe you specified."
 msgstr ""
 
+#: themes/blossom/pages/author.twig:6
+#, php-format
+msgid "Posts created by &#8220;%s&#8221;"
+msgstr ""
+
+#: themes/blossom/pages/author.twig:13
+msgid "This user hasn't created any posts."
+msgstr ""
+
 #: themes/blossom/pages/category.twig:6
 #, php-format
 msgid "Posts in category &#8220;%s&#8221;"

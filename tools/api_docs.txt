@@ -1657,6 +1657,11 @@ Function: main_updated
 Grabs the posts that have been updated.
 
 
+Function: main_author
+---------------------
+Grabs the posts created by the named user.
+
+
 Function: main_archive
 ----------------------
 Grabs the posts for the archive page.

@@ -311,14 +311,14 @@ Called from:
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 556
+	includes/controller/Main.php on line 601
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 739
-	includes/controller/Main.php on line 844
+	includes/controller/Main.php on line 784
+	includes/controller/Main.php on line 889
 
 Arguments:
 	$user
@@ -327,13 +327,13 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 825
+	includes/controller/Main.php on line 870
 
 
 user_logged_out
 ---------------
 Called from:
-	includes/controller/Main.php on line 876
+	includes/controller/Main.php on line 921
 
 Arguments:
 	$user
@@ -342,7 +342,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 1190
+	includes/controller/Main.php on line 1235
 
 Arguments:
 	$post, $feed
@@ -991,7 +991,7 @@ Target:
 markup_page_title
 -----------------
 Called from:
-	includes/controller/Ajax.php on line 203
+	includes/controller/Ajax.php on line 205
 	includes/model/Page.php on line 320
 
 Target:
@@ -1001,7 +1001,7 @@ Target:
 markup_title
 ------------
 Called from:
-	includes/controller/Ajax.php on line 203
+	includes/controller/Ajax.php on line 205
 	includes/model/Page.php on line 320
 
 Target:
@@ -1011,7 +1011,7 @@ Target:
 markup_page_text
 ----------------
 Called from:
-	includes/controller/Ajax.php on line 207
+	includes/controller/Ajax.php on line 209
 	includes/model/Page.php on line 321
 
 Target:
@@ -1021,7 +1021,7 @@ Target:
 markup_text
 -----------
 Called from:
-	includes/controller/Ajax.php on line 207
+	includes/controller/Ajax.php on line 209
 	includes/model/Page.php on line 321
 	modules/comments/model/Comment.php on line 511
 
@@ -1032,7 +1032,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 1269
+	includes/controller/Main.php on line 1314
 
 Target:
 	$this->context

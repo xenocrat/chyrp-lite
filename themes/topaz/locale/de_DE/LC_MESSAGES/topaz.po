@@ -176,10 +176,10 @@ msgstr "Archiv"
 msgid "F Y"
 msgstr "F Y"
 
-#: themes/topaz/feathers/audio.twig:8 themes/topaz/feathers/link.twig:7
-#: themes/topaz/feathers/photo.twig:8 themes/topaz/feathers/quote.twig:8
-#: themes/topaz/feathers/text.twig:8 themes/topaz/feathers/uploader.twig:8
-#: themes/topaz/feathers/video.twig:8
+#: themes/topaz/feathers/audio.twig:9 themes/topaz/feathers/link.twig:8
+#: themes/topaz/feathers/photo.twig:9 themes/topaz/feathers/quote.twig:9
+#: themes/topaz/feathers/text.twig:9 themes/topaz/feathers/uploader.twig:9
+#: themes/topaz/feathers/video.twig:9
 #, php-format
 msgid "Written by %s"
 msgstr "Publiziert von %s"
@@ -190,7 +190,7 @@ msgstr ""
 "Der Post kann nicht angezeigt werden, weil dies vom Theme nicht unterstützt "
 "wird."
 
-#: themes/topaz/feathers/uploader.twig:22
+#: themes/topaz/feathers/uploader.twig:24
 msgid "File attachment:"
 msgstr "Dateianhänge:"
 
@@ -379,6 +379,15 @@ msgstr "Archiv vom %s"
 #: themes/topaz/pages/archive.twig:68
 msgid "There aren't any posts in the timeframe you specified."
 msgstr "In dem angegebenen Zeitfenster gibt es keine Posts."
+
+#: themes/topaz/pages/author.twig:6
+#, php-format
+msgid "Posts created by &#8220;%s&#8221;"
+msgstr "Posts erstellt von &#8220;%s&#8221;"
+
+#: themes/topaz/pages/author.twig:13
+msgid "This user hasn't created any posts."
+msgstr "Dieser Benutzer hat noch keine Posts erstellt."
 
 #: themes/topaz/pages/category.twig:6
 #, php-format
