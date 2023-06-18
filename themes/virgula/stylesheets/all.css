@@ -353,17 +353,10 @@ article.post + article.post::before {
     display: block;
     height: 4.25rem;
     content: " ";
-    border-top: 2px solid #f3f2f1;
-    background-image: linear-gradient(
-        to right,
-        transparent 0%,
-        #fbfbfa 20%,
-        #fbfbfa 80%,
-        transparent 100%
-    );
+    border-top: 1px solid #f3f2f1;
 }
 article.fragment + article.fragment {
-    border-top: 2px solid #f3f2f1;
+    border-top: 1px solid #f3f2f1;
 }
 header {
     font-size: 0.7rem;
