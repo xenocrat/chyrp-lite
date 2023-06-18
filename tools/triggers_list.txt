@@ -311,14 +311,14 @@ Called from:
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 601
+	includes/controller/Main.php on line 610
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 784
-	includes/controller/Main.php on line 889
+	includes/controller/Main.php on line 793
+	includes/controller/Main.php on line 898
 
 Arguments:
 	$user
@@ -327,13 +327,13 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 870
+	includes/controller/Main.php on line 879
 
 
 user_logged_out
 ---------------
 Called from:
-	includes/controller/Main.php on line 921
+	includes/controller/Main.php on line 930
 
 Arguments:
 	$user
@@ -342,7 +342,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 1235
+	includes/controller/Main.php on line 1244
 
 Arguments:
 	$post, $feed
@@ -1032,7 +1032,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 1314
+	includes/controller/Main.php on line 1323
 
 Target:
 	$this->context
