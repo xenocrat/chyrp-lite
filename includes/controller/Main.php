@@ -243,10 +243,19 @@
                     "/"
                 );
 
+            $author = (object) array(
+                "nick"    => $user->login,
+                "name"    => oneof($user->full_name, $user->login),
+                "website" => $user->website,
+                "email"   => $user->email,
+                "joined"  => $user->joined_at,
+                "group"   => $user->group->name
+            );
+
             $this->display(
                 array("pages".DIR."author", "pages".DIR."index"),
                 array(
-                    "author" => $user,
+                    "author" => $author,
                     "posts" => new Paginator(
                         Post::find(
                             array(
@@ -257,7 +266,7 @@
                         $this->post_limit
                     )
                 ),
-                _f("Posts created by &#8220;%s&#8221;", fix(oneof($user->full_name, $user->login)))
+                _f("Posts created by &#8220;%s&#8221;", fix($author->name))
             );
         }
 
