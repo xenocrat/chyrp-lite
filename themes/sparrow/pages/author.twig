@@ -2,7 +2,7 @@
 
 {% block content %}
 {% if posts.paginated is not empty %}
-<h3 class="filter">{{ "Posts created by &#8220;%s&#8221;" | translate | format(author.full_name | oneof(author.login) | fix) }}</h3>
+<h3 class="filter">{{ "Posts created by &#8220;%s&#8221;" | translate | format(author.name | fix) }}</h3>
 {% endif %}
 {% for post in posts.paginated %}
 {% include(["feathers" ~ DIR ~ post.feather ~ ".twig", "feathers" ~ DIR ~ "missing.twig"]) %}

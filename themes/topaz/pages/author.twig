@@ -3,7 +3,7 @@
 {% block content %}
 {% if posts.paginated is not empty %}
 <div class="ribbon">
-<h3 class="ribbon">{{ "Posts created by &#8220;%s&#8221;" | translate | format(author.full_name | oneof(author.login) | fix) }}</h3>
+<h3 class="ribbon">{{ "Posts created by &#8220;%s&#8221;" | translate | format(author.name | fix) }}</h3>
 </div>
 {% endif %}
 {% for post in posts.paginated %}
