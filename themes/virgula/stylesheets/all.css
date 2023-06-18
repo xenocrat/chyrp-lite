@@ -240,6 +240,7 @@ table {
 table th {
     text-align: start;
     padding: 0.3rem 0.7rem;
+    font: inherit;
     font-weight: bold;
     background-color: #f3f2f1;
     border: 1px solid #b1b4b6;
@@ -247,6 +248,7 @@ table th {
 table td {
     text-align: start;
     padding: 0.3rem 0.7rem;
+    font: inherit;
     border: 1px solid #b1b4b6;
 }
 hr {

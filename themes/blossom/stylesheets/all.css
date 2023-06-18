@@ -64,11 +64,12 @@ body {
     line-height: 1.5;
     background-color: #f7f5ed;
     margin: 2rem 2rem 2rem 16rem;
-    min-width: 288px;
-    max-width: 1024px;
+    min-width: 280px;
+    max-width: 980px;
 }
 body.preview {
     margin: 1rem;
+    max-width: none;
 }
 p {
     margin: 1rem 0rem;
@@ -354,6 +355,7 @@ table {
 table th {
     text-align: start;
     padding: 0.5em;
+    font: inherit;
     font-weight: bold;
     background-color: #39434d;
     color: #ffffff;
@@ -363,6 +365,7 @@ table th {
 table td {
     text-align: start;
     padding: 0.5em;
+    font: inherit;
     border: 1px solid #39434d;
     vertical-align: middle;
 }
@@ -574,7 +577,6 @@ div#main > article, div.standalone {
     position: relative;
     box-sizing: border-box;
     width: 100%;
-    max-width: 1024px;
     background-color: #fbfbf7;
     margin: 0rem auto 2rem 0rem;
     padding: 2rem 2rem 0rem 2rem;
@@ -800,11 +802,12 @@ iframe {
     margin: 1rem 0rem;
 }
 iframe.video_embed {
-    max-height: 540px;
+    max-height: 515px;
     height: calc((100vw - 22rem) * 0.5625);
 }
 body.preview iframe.video_embed {
-    height: calc((100vw - 4rem) * 0.5625);
+    max-height: none;
+    height: calc((100vw - 6rem) * 0.5625);
 }
 section img {
     display:  block;

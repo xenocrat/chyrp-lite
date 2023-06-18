@@ -63,8 +63,8 @@ body {
     color: #ffffff;
     line-height: 1.5;
     background-color: #202021;
-    margin: 0em 0em 4rem 0em;
-    min-width: 288px;
+    margin: 0em 0em 2rem 0em;
+    min-width: 280px;
 }
 body.preview {
     margin: 0rem;
@@ -307,6 +307,7 @@ table {
 table th {
     text-align: start;
     padding: 0.5em;
+    font: inherit;
     font-weight: bold;
     background-color: #666667;
     border: 1px solid #666667;
@@ -315,6 +316,7 @@ table th {
 table td {
     text-align: start;
     padding: 0.5em;
+    font: inherit;
     border: 1px solid #666667;
     vertical-align: middle;
 }
@@ -471,9 +473,9 @@ div#main > article, div.standalone {
     display: block;
     position: relative;
     width: 100%;
-    max-width: 896px;
-    margin: 4rem auto;
-    padding: 0rem 4rem;
+    max-width: 780px;
+    margin: 2rem auto;
+    padding: 0rem 2rem;
 }
 ul.archive article.post.archive {
     display: block;
@@ -608,8 +610,8 @@ div.tag_cloud a.tag:active {
 div.metadata a.category {
     display: inline-block;
     position: absolute;
-    top: 0px;
-    right: 4rem;
+    top: -2rem;
+    right: 2rem;
     padding: 0.25em 0.75em;
     margin: 0em;
     border: 1px solid #666667;
@@ -686,8 +688,8 @@ iframe {
     margin: 1rem 0rem;
 }
 iframe.video_embed {
-    max-height: 432px;
-    height: calc((100vw - 8rem) * 0.5625);
+    max-height: 403px;
+    height: calc((100vw - 4rem) * 0.5625);
 }
 div#mast > *:first-child,
 article > *:first-child,
@@ -744,9 +746,6 @@ div.standalone > *:last-child {
     html {
         font-size: 14px;
     }
-    body {
-        margin-bottom: 2rem;
-    }
     aside {
         float: none;
         max-width: 100%;
@@ -759,16 +758,6 @@ div.standalone > *:last-child {
     }
     button#search_submit {
         display: none;
-    }
-    div#main > article, div.standalone {
-        margin: 2rem auto;
-        padding: 0rem 2rem;
-    }
-    div.metadata a.category {
-        right: 2rem;
-    }
-    iframe.video_embed {
-        height: calc((100vw - 4rem) * 0.5625);
     }
     ul.archive > li {
         flex: 100%;

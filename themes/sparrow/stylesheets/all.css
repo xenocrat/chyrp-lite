@@ -64,7 +64,7 @@ body {
     line-height: 1.5;
     background-color: #fcfbf7;
     margin: 0em 0em 2rem 0em;
-    min-width: 288px;
+    min-width: 280px;
 }
 body.preview {
     margin: 0rem;
@@ -102,6 +102,7 @@ h3.flash {
 }
 h3.filter {
     box-sizing: border-box;
+    max-width: 960px;
     text-align: center;
     margin: 2rem 1rem 0rem 1rem;
     padding: 0.5rem;
@@ -309,6 +310,7 @@ table {
 table th {
     text-align: start;
     padding: 0.5em;
+    font: inherit;
     font-weight: bold;
     background-color: #98716c;
     color: #ffffff;
@@ -318,6 +320,7 @@ table th {
 table td {
     text-align: start;
     padding: 0.5em;
+    font: inherit;
     border: 1px solid #98716c;
     vertical-align: middle;
 }
@@ -486,7 +489,7 @@ div#main > article, div.standalone {
     display: block;
     position: relative;
     width: 100%;
-    max-width: 832px;
+    max-width: 780px;
     margin: 2rem auto;
     padding: 0rem 2rem;
 }
@@ -676,7 +679,7 @@ iframe {
     margin: 1rem 0rem;
 }
 iframe.video_embed {
-    max-height: 432px;
+    max-height: 403px;
     height: calc((100vw - 4rem) * 0.5625);
 }
 div#mast > *:first-child,
@@ -757,9 +760,8 @@ div.standalone > *:last-child {
         margin-left: 0em;
     }
 }
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 994px) {
     h3.filter {
-        max-width: 960px;
         margin-left: auto;
         margin-right: auto;
     }
