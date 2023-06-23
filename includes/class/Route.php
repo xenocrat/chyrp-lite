@@ -174,8 +174,8 @@
             # Set redirect_to for actions that visitors
             # might want to return to after they log in.
             if (
-                !$this->controller->feed and
                 $this->controller->displayed and
+                !$this->controller->feed and
                 !$this->controller->exempt($this->action) and
                 empty($_POST)
             ) {
