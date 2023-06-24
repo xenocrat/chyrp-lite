@@ -69,6 +69,7 @@
             header("Cache-Control: public");
             header("Pragma: no-cache");
             header("Expires: ".date("r", now("+30 days")));
+            header("Vary: Accept-Encoding, Cookie, Save-Data");
             exit;
         }
     }
