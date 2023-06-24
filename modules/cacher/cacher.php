@@ -34,9 +34,10 @@
                 if ($lastmod >= $this->lastmod) {
                     header_remove();
                     header($_SERVER['SERVER_PROTOCOL']." 304 Not Modified");
-                    header("Cache-Control: no-cache");
+                    header("Cache-Control: no-cache, private");
                     header("Pragma: no-cache");
                     header("Expires: ".date("r", now("+30 days")));
+                    header("Vary: Accept-Encoding, Cookie, Save-Data");
                     exit;
                 }
             }
@@ -56,7 +57,7 @@
 
             if (!headers_sent()) {
                 header("Last-Modified: ".date("r", $this->lastmod));
-                header("Cache-Control: no-cache");
+                header("Cache-Control: no-cache, private");
                 header("Pragma: no-cache");
                 header("Expires: ".date("r", now("+30 days")));
             }
@@ -123,6 +124,7 @@
                 $this->addAlias($action, "cache_regenerate");
 
             $exclude = array(
+                "user_login",
                 "before_generate_captcha"
             );
 
