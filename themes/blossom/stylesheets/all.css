@@ -810,7 +810,7 @@ body.preview iframe.video_embed {
     height: calc((100vw - 6rem) * 0.5625);
 }
 section img {
-    display:  block;
+    display: block;
     width: 100%;
 }
 article > *:first-child,
