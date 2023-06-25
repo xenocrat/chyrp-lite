@@ -60,6 +60,7 @@
                 header("Cache-Control: no-cache, private");
                 header("Pragma: no-cache");
                 header("Expires: ".date("r", now("+30 days")));
+                header("X-Chyrp-Cacher-Hint: ".$this->generate_hint());
             }
         }
 
@@ -77,6 +78,15 @@
                 return false;
 
             return true;
+        }
+
+        private function generate_hint(): string {
+            $items = array(
+                Visitor::current()->group->id,
+                get_class(Route::current()->controller)
+            );
+
+            return token($items);
         }
 
         private function prepare_cache_triggers(): void {
