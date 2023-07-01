@@ -917,7 +917,8 @@
             $config = Config::current();
             $options = array(
                 "where" => array(
-                    "id not" => array($config->guest_group, $config->default_group)),
+                    "id not" => array($config->guest_group, $config->default_group)
+                ),
                 "order" => "id DESC"
             );
 
