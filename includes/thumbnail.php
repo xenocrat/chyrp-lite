@@ -52,11 +52,10 @@
 
     # Redirect to original if thumbnail cannot or should not be created.
     if (!$thumb->creatable() or $thumb->upscaling()) {
-        header($_SERVER['SERVER_PROTOCOL']." 301 Moved Permanently");
         header("Cache-Control: public");
         header("Pragma: no-cache");
         header("Expires: ".date("r", now("+7 days")));
-        redirect(uploaded($filename));
+        redirect(uploaded($filename), code:301);
     }
 
     # Respond to If-Modified-Since so the user agent will use cache.
