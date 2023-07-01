@@ -90,10 +90,28 @@
      *
      * Parameters:
      *     $url - The absolute or relative URL to redirect to.
+     *     $code - Numeric HTTP status code to set (optional).
      */
-    function redirect($url)/*: never*/{
+    function redirect($url, $code = null)/*: never*/{
         if (!substr_count($url, "://"))
             $url = url($url);
+
+        switch ($code) {
+            case 301:
+                header($_SERVER['SERVER_PROTOCOL']." 301 Moved Permanently");
+                break;
+            case 303:
+                header($_SERVER['SERVER_PROTOCOL']." 303 See Other");
+                break;
+            case 307:
+                header($_SERVER['SERVER_PROTOCOL']." 307 Temporary Redirect");
+                break;
+            case 308:
+                header($_SERVER['SERVER_PROTOCOL']." 308 Permanent Redirect");
+                break;
+            default:
+                header($_SERVER['SERVER_PROTOCOL']." 302 Found");
+        }
 
         header("Location: ".unfix($url, true));
         exit;
