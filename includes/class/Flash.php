@@ -59,8 +59,9 @@
          * Parameters:
          *     $message - Message to display.
          *     $redirect_to - URL to redirect to after the message is stored.
+         *     $code - Numeric HTTP status code to set.
          */
-        static function message($message, $redirect_to = null): void {
+        static function message($message, $redirect_to = null, $code = null): void {
             self::prepare("messages");
             $trigger = Trigger::current();
 
@@ -70,7 +71,7 @@
                 header("X-Chyrp-Flash-Messages: ".count($_SESSION['messages']));
 
             if (isset($redirect_to))
-                redirect($redirect_to);
+                redirect($redirect_to, $code);
         }
 
         /**
@@ -80,8 +81,9 @@
          * Parameters:
          *     $message - Message to display.
          *     $redirect_to - URL to redirect to after the message is stored.
+         *     $code - Numeric HTTP status code to set.
          */
-        static function notice($message, $redirect_to = null): void {
+        static function notice($message, $redirect_to = null, $code = null): void {
             self::prepare("notices");
             $trigger = Trigger::current();
 
@@ -91,7 +93,7 @@
                 header("X-Chyrp-Flash-Notices: ".count($_SESSION['notices']));
 
             if (isset($redirect_to))
-                redirect($redirect_to);
+                redirect($redirect_to, $code);
         }
 
         /**
@@ -101,8 +103,9 @@
          * Parameters:
          *     $message - Message to display.
          *     $redirect_to - URL to redirect to after the message is stored.
+         *     $code - Numeric HTTP status code to set.
          */
-        static function warning($message, $redirect_to = null): void {
+        static function warning($message, $redirect_to = null, $code = null): void {
             self::prepare("warnings");
             $trigger = Trigger::current();
 
@@ -112,7 +115,7 @@
                 header("X-Chyrp-Flash-Warnings: ".count($_SESSION['warnings']));
 
             if (isset($redirect_to))
-                redirect($redirect_to);
+                redirect($redirect_to, $code);
         }
 
         /**
