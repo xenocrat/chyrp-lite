@@ -1678,7 +1678,9 @@
             "GET ".$path." HTTP/1.0\r\n".
             "Host: ".$host."\r\n".
             "Connection: close"."\r\n".
-            "User-Agent: ".CHYRP_IDENTITY."\r\n\r\n"
+            "User-Agent: ".CHYRP_IDENTITY."\r\n".
+            "From: ".Config::current()->email."\r\n".
+            "\r\n"
         );
 
         # Receive response headers.
@@ -1691,8 +1693,8 @@
             return false;
         }
 
-        # Search for 301/302 and recurse with new location unless redirects are exhausted.
-        if (preg_match("~^HTTP/[0-9]\.[0-9] 30[1-2]~m", $remote_headers)) {
+        # Search for redirect and recurse with new location unless redirects are exhausted.
+        if (preg_match("~^HTTP/[0-9]\.[0-9] 30[12378]~m", $remote_headers)) {
             if ($redirects > 0) {
                 if (preg_match("~^Location: (.+)$~mi", $remote_headers, $matches)) {
                     $location = trim($matches[1]);
@@ -1787,7 +1789,9 @@
                 "Content-Type: application/x-www-form-urlencoded\r\n".
                 "Content-Length: ".strlen($wm_query)."\r\n".
                 "Connection: close"."\r\n".
-                "User-Agent: ".CHYRP_IDENTITY."\r\n\r\n"
+                "User-Agent: ".CHYRP_IDENTITY."\r\n".
+                "From: ".Config::current()->email."\r\n".
+                "\r\n"
             );
 
             fwrite($connect, $wm_query);
@@ -1916,7 +1920,9 @@
             "GET ".$path." HTTP/1.0\r\n".
             "Host: ".$host."\r\n".
             "Connection: close"."\r\n".
-            "User-Agent: ".CHYRP_IDENTITY."\r\n\r\n"
+            "User-Agent: ".CHYRP_IDENTITY."\r\n".
+            "From: ".Config::current()->email."\r\n".
+            "\r\n"
         );
 
         # Check for Link header containing the endpoint.
@@ -1938,8 +1944,8 @@
             }
         }
 
-        # Search for 301/302 and recurse with new location unless redirects are exhausted.
-        if (preg_match("~^HTTP/[0-9]\.[0-9] 30[1-2]~m", $remote_headers)) {
+        # Search for redirect and recurse with new location unless redirects are exhausted.
+        if (preg_match("~^HTTP/[0-9]\.[0-9] 30[12378]~m", $remote_headers)) {
             if ($redirects > 0) {
                 if (preg_match("~^Location: (.+)$~mi", $remote_headers, $matches)) {
                     $location = trim($matches[1]);
