@@ -299,13 +299,13 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 2839
+	includes/controller/Admin.php on line 2843
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 2854
+	includes/controller/Admin.php on line 2858
 
 
 can_not_view_page
@@ -946,7 +946,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 3252
+	includes/controller/Admin.php on line 3256
 
 Target:
 	$write
@@ -955,7 +955,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3310
+	includes/controller/Admin.php on line 3314
 
 Target:
 	$manage
@@ -964,7 +964,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 3338
+	includes/controller/Admin.php on line 3342
 
 Target:
 	$settings
@@ -973,7 +973,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3359
+	includes/controller/Admin.php on line 3363
 
 Target:
 	$extend
@@ -982,7 +982,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 3423
+	includes/controller/Admin.php on line 3427
 
 Target:
 	$this->context
