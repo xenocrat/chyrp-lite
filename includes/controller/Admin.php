@@ -2705,8 +2705,10 @@
                 array_merge($config->$array,array($name))
             );
 
-            foreach (load_info($folder.DIR.$name.DIR."info.php")["notifications"] as $message)
-                Flash::message($message);
+            $load_info = load_info($folder.DIR.$name.DIR."info.php");
+
+            foreach ($load_info["notifications"] as $notification)
+                Flash::message($notification);
 
             Flash::notice(
                 __("Extension enabled."),
@@ -2763,7 +2765,7 @@
             if (method_exists($class, "__uninstall"))
                 call_user_func(array($class, "__uninstall"), !empty($_POST['confirm']));
 
-            # Cancel the extension to prevent it responding to triggers after __uninstall.
+            # Cancel the extension to prevent trigger responses after __uninstall().
             if ($type == "module")
                 cancel_module($name);
             else
@@ -2812,8 +2814,10 @@
 
             load_translator($theme, THEMES_DIR.DIR.$theme.DIR."locale");
 
-            foreach (load_info(THEMES_DIR.DIR.$theme.DIR."info.php")["notifications"] as $message)
-                Flash::message($message);
+            $load_info = load_info(THEMES_DIR.DIR.$theme.DIR."info.php");
+
+            foreach ($load_info["notifications"] as $notification)
+                Flash::message($notification);
 
             Flash::notice(
                 __("Theme changed."),
