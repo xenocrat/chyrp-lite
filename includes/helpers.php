@@ -2238,7 +2238,8 @@
         if (isset(Modules::$instances[$target]))
             Modules::$instances[$target]->cancelled = true;
 
-        trigger_error($message, E_USER_NOTICE);
+        if (DEBUG)
+            error_log($message);
     }
 
     /**
@@ -2259,7 +2260,8 @@
         if (isset(Feathers::$instances[$target]))
             Feathers::$instances[$target]->cancelled = true;
 
-        trigger_error($message, E_USER_NOTICE);
+        if (DEBUG)
+            error_log($message);
     }
 
     #---------------------------------------------
