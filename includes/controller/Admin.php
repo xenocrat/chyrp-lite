@@ -2674,13 +2674,13 @@
                     code:400
                 );
 
-            $type          = ($_POST['type'] == "module") ? "module" : "feather" ;
-            $name          = str_replace(array(".", DIR), "", $_POST['extension']);
-            $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
-            $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
-            $class_name    = camelize($name);
+            $type   = ($_POST['type'] == "module") ? "module" : "feather" ;
+            $name   = str_replace(array(".", DIR), "", $_POST['extension']);
+            $array  = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
+            $folder = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
+            $class  = camelize($name);
 
-            if (in_array($name, $config->$enabled_array))
+            if (in_array($name, $config->$array))
                 error(
                     __("Error"),
                     __("Extension already enabled."),
@@ -2697,12 +2697,12 @@
 
             require $folder.DIR.$name.DIR.$name.".php";
 
-            if (method_exists($class_name, "__install"))
-                call_user_func(array($class_name, "__install"));
+            if (method_exists($class, "__install"))
+                call_user_func(array($class, "__install"));
 
             $config->set(
-                $enabled_array,
-                array_merge($config->$enabled_array,array($name))
+                $array,
+                array_merge($config->$array,array($name))
             );
 
             foreach (load_info($folder.DIR.$name.DIR."info.php")["notifications"] as $message)
@@ -2741,13 +2741,13 @@
                     code:400
                 );
 
-            $type          = ($_POST['type'] == "module") ? "module" : "feather" ;
-            $name          = str_replace(array(".", DIR), "", $_POST['extension']);
-            $enabled_array = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
-            $folder        = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
-            $class_name    = camelize($name);
+            $type   = ($_POST['type'] == "module") ? "module" : "feather" ;
+            $name   = str_replace(array(".", DIR), "", $_POST['extension']);
+            $array  = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
+            $folder = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
+            $class  = camelize($name);
 
-            if (!in_array($name, $config->$enabled_array))
+            if (!in_array($name, $config->$array))
                 error(
                     __("Error"),
                     __("Extension already disabled."),
@@ -2760,12 +2760,18 @@
                     __("Extension not found.")
                 );
 
-            if (method_exists($class_name, "__uninstall"))
-                call_user_func(array($class_name, "__uninstall"), !empty($_POST['confirm']));
+            if (method_exists($class, "__uninstall"))
+                call_user_func(array($class, "__uninstall"), !empty($_POST['confirm']));
+
+            # Cancel the extension to prevent it responding to triggers after __uninstall.
+            if ($type == "module")
+                cancel_module($name);
+            else
+                cancel_feather($name);
 
             $config->set(
-                $enabled_array,
-                array_diff($config->$enabled_array, array($name))
+                $array,
+                array_diff($config->$array, array($name))
             );
 
             Flash::notice(
