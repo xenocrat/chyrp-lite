@@ -155,6 +155,7 @@ Add a message (neutral) to the session.
 Parameters:
     $message - Message to display.
     $redirect_to - URL to redirect to after the message is stored.
+    $code - Numeric HTTP status code to set.
 
 
 Function: notice
@@ -164,6 +165,7 @@ Add a notice (positive) message to the session.
 Parameters:
     $message - Message to display.
     $redirect_to - URL to redirect to after the message is stored.
+    $code - Numeric HTTP status code to set.
 
 
 Function: warning
@@ -173,6 +175,7 @@ Add a warning (negative) message to the session.
 Parameters:
     $message - Message to display.
     $redirect_to - URL to redirect to after the message is stored.
+    $code - Numeric HTTP status code to set.
 
 
 Function: messages
@@ -1833,6 +1836,7 @@ Redirects to the supplied URL and exits immediately.
 
 Parameters:
     $url - The absolute or relative URL to redirect to.
+    $code - Numeric HTTP status code to set (optional).
 
 
 Function: show_403
