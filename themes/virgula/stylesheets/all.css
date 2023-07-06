@@ -454,6 +454,10 @@ section img {
 section.photo img {
     width: 100%;
 }
+article.video video,
+article.audio audio {
+    width: 100%;
+}
 *:focus,
 div.doaction a:focus,
 nav.traversal a:focus,
