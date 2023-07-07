@@ -447,9 +447,9 @@
             <a class="big" href="<?php echo $chyrp_url.'/admin/?action=login'; ?>">
                 <?php echo __("Log in"); ?>
             </a>
-    <?php else: ?>
+    <?php elseif (isset($_SESSION['redirect_to'])): ?>
             <hr>
-            <a class="big" href="javascript:history.back();">
+            <a class="big" href="<?php echo $_SESSION['redirect_to']; ?>">
                 <?php echo __("Go back"); ?>
             </a>
     <?php endif; ?>
