@@ -13,11 +13,11 @@
             '|/id/page/([0-9]+)/|'
                 => '/?action=id&amp;page=$1',
 
+            '|/author/([0-9]+)/|'
+                => '/?action=author&amp;id=$1',
+
             '|/random/([^/]+)/|'
                 => '/?action=random&amp;feather=$1',
-
-            '|/author/([^/]+)/|'
-                => '/?action=author&amp;login=$1',
 
             '|/search/([^/]+)/|'
                 => '/?action=search&amp;query=$1',
@@ -133,7 +133,7 @@
             # Author.
             if ($route->arg[0] == "author") {
                 if (isset($route->arg[1]))
-                    $_GET['login'] = $route->arg[1];
+                    $_GET['id'] = $route->arg[1];
 
                 return $route->action = "author";
             }
@@ -233,9 +233,13 @@
          * Grabs the posts created by the named user.
          */
         public function main_author(): void {
-            $user = new User(
-                array("login" => fallback($_GET['login']))
-            );
+            if (empty($_GET['id']) or !is_numeric($_GET['id']))
+                Flash::warning(
+                    __("You did not specify a user ID."),
+                    "/"
+                );
+
+            $user = new User($_GET['id']);
 
             if ($user->no_results)
                 Flash::warning(
@@ -244,12 +248,11 @@
                 );
 
             $author = (object) array(
-                "nick"    => $user->login,
+                "id"      => $user->id,
                 "name"    => oneof($user->full_name, $user->login),
                 "website" => $user->website,
                 "email"   => $user->email,
-                "joined"  => $user->joined_at,
-                "group"   => $user->group->name
+                "joined"  => $user->joined_at
             );
 
             $this->display(
