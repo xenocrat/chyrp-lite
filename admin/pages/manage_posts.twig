@@ -38,7 +38,7 @@
 {{ post.status_name }}
 </td>
 <td class="post_author value">
-{{ post.author.nick is defined ? post.author.nick : "" }}
+{{ post.author.name }}
 </td>
 {{ trigger.call("manage_posts_column", post) }}
 <td class="controls">

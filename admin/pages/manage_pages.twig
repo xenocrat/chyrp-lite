@@ -50,7 +50,7 @@
 {% endif %}
 </td>
 <td class="page_author value">
-{{ page.author.nick is defined ? page.author.nick : "" }}
+{{ page.author.name }}
 </td>
 {{ trigger.call("manage_pages_column", page) }}
 <td class="controls">
