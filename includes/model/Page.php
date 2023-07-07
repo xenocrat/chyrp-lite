@@ -398,14 +398,21 @@
             if ($this->no_results)
                 return false;
 
-            $author = array(
-                "nick"    => $this->user->login,
-                "name"    => oneof($this->user->full_name, $this->user->login),
-                "website" => $this->user->website,
-                "email"   => $this->user->email,
-                "joined"  => $this->user->joined_at,
-                "group"   => $this->user->group->name
-            );
+            $author = (!$this->user->no_results) ?
+                array(
+                    "id"        => $this->user->id,
+                    "name"      => oneof($this->user->full_name, $this->user->login),
+                    "website"   => $this->user->website,
+                    "email"     => $this->user->email,
+                    "joined"    => $this->user->joined_at
+                ) :
+                array(
+                    "id"      => 0,
+                    "name"    => __("[Guest]"),
+                    "website" => "",
+                    "email"   => "",
+                    "joined"  => $this->created_at
+                ) ;
 
             return (object) $author;
         }

@@ -1059,20 +1059,18 @@
 
             $author = (!$this->user->no_results) ?
                 array(
-                    "nick"    => $this->user->login,
-                    "name"    => oneof($this->user->full_name, $this->user->login),
-                    "website" => $this->user->website,
-                    "email"   => $this->user->email,
-                    "joined"  => $this->user->joined_at,
-                    "group"   => $this->user->group->name
+                    "id"        => $this->user->id,
+                    "name"      => oneof($this->user->full_name, $this->user->login),
+                    "website"   => $this->user->website,
+                    "email"     => $this->user->email,
+                    "joined"    => $this->user->joined_at
                 ) :
                 array(
-                    "nick"    => __("[Guest]"),
+                    "id"      => 0,
                     "name"    => __("[Guest]"),
                     "website" => "",
                     "email"   => "",
-                    "joined"  => $this->created_at,
-                    "group"   => Config::current()->guest_group
+                    "joined"  => $this->created_at
                 ) ;
 
             return (object) $author;
