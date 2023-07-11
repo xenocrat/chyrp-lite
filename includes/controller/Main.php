@@ -932,6 +932,8 @@
             session();
             $trigger->call("user_logged_out", $user);
 
+            header('Clear-Site-Data: "storage"');
+
             Flash::notice(
                 __("Logged out."),
                 "/"
