@@ -1696,7 +1696,7 @@
         # Search for redirect and recurse with new location unless redirects are exhausted.
         if (preg_match("~^HTTP/[0-9]\.[0-9] 30[12378]~m", $remote_headers)) {
             if ($redirects > 0) {
-                if (preg_match("~^Location: (.+)$~mi", $remote_headers, $matches)) {
+                if (preg_match("~^Location:(.+)$~mi", $remote_headers, $matches)) {
                     $location = trim($matches[1]);
 
                     if (is_url($location)) {
@@ -1930,7 +1930,7 @@
             $line = fgets($connect);
             $remote_headers.= $line;
 
-            if (preg_match("/^Link: <(.+)>; rel=\"webmention\"/i", $line, $header)) {
+            if (preg_match("/^Link: *<(.+)> *; *rel=\"webmention\"/i", $line, $header)) {
                 fclose($connect);
 
                 $endpoint = trim($header[1]);
@@ -1947,7 +1947,7 @@
         # Search for redirect and recurse with new location unless redirects are exhausted.
         if (preg_match("~^HTTP/[0-9]\.[0-9] 30[12378]~m", $remote_headers)) {
             if ($redirects > 0) {
-                if (preg_match("~^Location: (.+)$~mi", $remote_headers, $matches)) {
+                if (preg_match("~^Location:(.+)$~mi", $remote_headers, $matches)) {
                     $location = trim($matches[1]);
 
                     if (is_url($location)) {
@@ -1962,7 +1962,7 @@
         }
 
         # Check if the content is UTF-8 encoded text/html before continuing.
-        if (!preg_match("~^Content-Type: text/html; charset=UTF-8~im", $remote_headers)) {
+        if (!preg_match("~^Content-Type: *text/html *; *charset=UTF-8~im", $remote_headers)) {
             fclose($connect);
             return false;
         }
