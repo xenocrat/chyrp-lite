@@ -23,6 +23,11 @@ class ChyrpMarkdown extends GithubMarkdown
 	use inline\SupSubTrait;
 
 	/**
+	 * @var string optional context identifier for this instance.
+	 */
+	public $contextID = "";
+
+	/**
 	 * @inheritDoc
 	 */
 	protected $escapeCharacters = [
