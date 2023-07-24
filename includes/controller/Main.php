@@ -230,7 +230,7 @@
 
         /**
          * Function: main_author
-         * Grabs the posts created by the named user.
+         * Grabs the posts created by a user.
          */
         public function main_author(): void {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
