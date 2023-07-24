@@ -1322,6 +1322,7 @@
      *
      * Parameters:
      *     $text - The body of the post/page to parse.
+     *     $context - Model instance for context (optional).
      *
      * Returns:
      *     The text with Markdown formatting applied.
@@ -1330,7 +1331,7 @@
      *     https://github.com/commonmark/CommonMark
      *     https://github.github.com/gfm/
      */
-    function markdown($text): string {
+    function markdown($text, $context = null): string {
         static $parser;
 
         if (!isset($parser)) {
@@ -1338,6 +1339,13 @@
             $parser->html5 = true;
             $parser->keepListStartNumber = true;
             $parser->enableNewlines = false;
+        }
+
+        if ($context instanceof Model) {
+            $name = strtolower(get_class($context));
+            $parser->contextID = $name."_".$context->id;
+        } else {
+            $parser->contextID = "";
         }
 
         return $parser->parse($text);
