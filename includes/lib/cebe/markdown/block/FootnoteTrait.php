@@ -98,6 +98,7 @@ trait FootnoteTrait
 	 */
 	protected function getFootnotesHtml(array $footnotesSorted)
 	{
+		$prefix = !empty($this->contextID) ? $this->contextID . "-" : "";
 		$hr = $this->html5 ? "<hr>\n" : "<hr />\n";
 		$footnotesHtml = "\n<div class=\"footnotes\" role=\"doc-endnotes\">\n$hr<ol>\n";
 		foreach ($footnotesSorted as $footnoteInfo) {
@@ -106,13 +107,15 @@ trait FootnoteTrait
 				$fnref = count($footnoteInfo['refs']) > 1
 					? $footnoteInfo['num'] . '-' . $refIndex
 					: $footnoteInfo['num'];
-				$backLinks[] = '<a href="#fnref'
+				$backLinks[] = '<a href="#'
+					. $prefix
+					. 'fnref'
 					. '-'
 					. $fnref
 					. '" role="doc-backlink">&#8617;&#xFE0E;</a>';
 			}
 			$linksPara = '<p class="footnote-backrefs">'. join("\n", $backLinks) . '</p>';
-			$footnotesHtml .= "<li id=\"fn-{$footnoteInfo['num']}\">";
+			$footnotesHtml .= "<li id=\"{$prefix}fn-{$footnoteInfo['num']}\">";
 			$footnotesHtml .= "\n{$footnoteInfo['html']}\n$linksPara\n</li>\n";
 		}
 		$footnotesHtml .= "</ol>\n</div>\n";
@@ -155,10 +158,21 @@ trait FootnoteTrait
 	 */
 	protected function renderFootnoteLink($block)
 	{
+		$prefix = !empty($this->contextID) ? $this->contextID . "-" : "";
 		$substituteRefnum = "\x1Afootnote-refnum".$block['num']."\x1A";
 		$substituteNum = "\x1Afootnote-num" . $block['num'] . "\x1A";
-		return '<sup id="fnref-' . $substituteRefnum . '" class="footnote-ref">'
-			. '<a href="#fn-' . $substituteNum . '" role="doc-noteref">' . $substituteNum . '</a>'
+		return '<sup id="'
+			. $prefix
+			. 'fnref-'
+			. $substituteRefnum
+			. '" class="footnote-ref">'
+			. '<a href="#'
+			. $prefix
+			. 'fn-'
+			. $substituteNum
+			. '" role="doc-noteref">'
+			. $substituteNum
+			. '</a>'
 			. '</sup>';
 	}
 
