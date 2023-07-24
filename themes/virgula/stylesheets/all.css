@@ -255,7 +255,7 @@ hr {
     width: 100%;
     border: none;
     clear: both;
-    border-top: 1px dashed #b1b4b6;
+    border-top: 4px dotted #b1b4b6;
     margin: 2rem 0rem;
 }
 iframe {
@@ -353,10 +353,10 @@ article.post + article.post::before {
     display: block;
     height: 4.25rem;
     content: " ";
-    border-top: 1px dashed #b1b4b6;
+    border-top: 4px dotted #b1b4b6;
 }
 article.fragment + article.fragment {
-    border-top: 1px dashed #b1b4b6;
+    border-top: 4px dotted #b1b4b6;
 }
 header {
     font-size: 0.7rem;
