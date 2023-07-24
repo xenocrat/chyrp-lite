@@ -92,28 +92,28 @@ msgstr ""
 #: includes/controller/Ajax.php:251
 #: includes/download.php:13
 #: includes/error.php:163
-#: includes/helpers.php:1816
-#: includes/helpers.php:1823
-#: includes/helpers.php:1830
-#: includes/helpers.php:1843
-#: includes/helpers.php:1852
-#: includes/helpers.php:1862
-#: includes/helpers.php:1869
-#: includes/helpers.php:2288
-#: includes/helpers.php:2300
-#: includes/helpers.php:2306
-#: includes/helpers.php:2312
-#: includes/helpers.php:2349
-#: includes/helpers.php:2355
-#: includes/helpers.php:2361
-#: includes/helpers.php:2476
-#: includes/helpers.php:2482
-#: includes/helpers.php:2488
-#: includes/helpers.php:2494
-#: includes/helpers.php:2499
-#: includes/helpers.php:2504
-#: includes/helpers.php:2509
-#: includes/helpers.php:2516
+#: includes/helpers.php:1824
+#: includes/helpers.php:1831
+#: includes/helpers.php:1838
+#: includes/helpers.php:1851
+#: includes/helpers.php:1860
+#: includes/helpers.php:1870
+#: includes/helpers.php:1877
+#: includes/helpers.php:2296
+#: includes/helpers.php:2308
+#: includes/helpers.php:2314
+#: includes/helpers.php:2320
+#: includes/helpers.php:2357
+#: includes/helpers.php:2363
+#: includes/helpers.php:2369
+#: includes/helpers.php:2484
+#: includes/helpers.php:2490
+#: includes/helpers.php:2496
+#: includes/helpers.php:2502
+#: includes/helpers.php:2507
+#: includes/helpers.php:2512
+#: includes/helpers.php:2517
+#: includes/helpers.php:2524
 #: includes/lib/ThumbnailFile.php:244
 #: includes/lib/ThumbnailFile.php:275
 #: includes/lib/ThumbnailFile.php:335
@@ -222,10 +222,10 @@ msgstr ""
 #: includes/controller/Ajax.php:245
 #: includes/controller/Ajax.php:269
 #: includes/controller/Ajax.php:275
-#: includes/controller/Main.php:533
-#: includes/controller/Main.php:612
+#: includes/controller/Main.php:536
+#: includes/controller/Main.php:615
 #: includes/download.php:20
-#: includes/helpers.php:2294
+#: includes/helpers.php:2302
 #: includes/thumbnail.php:23
 msgid "Access Denied"
 msgstr ""
@@ -338,13 +338,13 @@ msgstr ""
 #: includes/controller/Ajax.php:188
 #: includes/controller/Ajax.php:229
 #: includes/controller/Ajax.php:270
-#: includes/controller/Main.php:718
-#: includes/controller/Main.php:837
-#: includes/controller/Main.php:872
-#: includes/controller/Main.php:954
-#: includes/controller/Main.php:1043
-#: includes/controller/Main.php:1112
-#: includes/controller/Main.php:1119
+#: includes/controller/Main.php:721
+#: includes/controller/Main.php:840
+#: includes/controller/Main.php:875
+#: includes/controller/Main.php:959
+#: includes/controller/Main.php:1048
+#: includes/controller/Main.php:1117
+#: includes/controller/Main.php:1124
 msgid "Invalid authentication token."
 msgstr ""
 
@@ -510,22 +510,22 @@ msgstr ""
 
 #: includes/controller/Admin.php:963
 #: includes/controller/Admin.php:1124
-#: includes/controller/Main.php:732
+#: includes/controller/Main.php:735
 msgid "That username is already in use."
 msgstr ""
 
 #: includes/controller/Admin.php:970
-#: includes/controller/Main.php:737
-#: includes/controller/Main.php:1124
+#: includes/controller/Main.php:740
+#: includes/controller/Main.php:1129
 #: install.php:646
 msgid "Passwords cannot be blank."
 msgstr ""
 
 #: includes/controller/Admin.php:977
 #: includes/controller/Admin.php:1143
-#: includes/controller/Main.php:741
-#: includes/controller/Main.php:963
-#: includes/controller/Main.php:1128
+#: includes/controller/Main.php:744
+#: includes/controller/Main.php:968
+#: includes/controller/Main.php:1133
 #: install.php:581
 #: install.php:648
 msgid "Passwords do not match."
@@ -539,8 +539,8 @@ msgstr ""
 #: includes/controller/Admin.php:989
 #: includes/controller/Admin.php:1161
 #: includes/controller/Admin.php:2898
-#: includes/controller/Main.php:750
-#: includes/controller/Main.php:976
+#: includes/controller/Main.php:753
+#: includes/controller/Main.php:981
 #: install.php:651
 msgid "Email address cannot be blank."
 msgstr ""
@@ -548,16 +548,16 @@ msgstr ""
 #: includes/controller/Admin.php:996
 #: includes/controller/Admin.php:1168
 #: includes/controller/Admin.php:2905
-#: includes/controller/Main.php:754
-#: includes/controller/Main.php:980
+#: includes/controller/Main.php:757
+#: includes/controller/Main.php:985
 #: install.php:653
 msgid "Invalid email address."
 msgstr ""
 
 #: includes/controller/Admin.php:1003
 #: includes/controller/Admin.php:1175
-#: includes/controller/Main.php:764
-#: includes/controller/Main.php:985
+#: includes/controller/Main.php:767
+#: includes/controller/Main.php:990
 msgid "Invalid website URL."
 msgstr ""
 
@@ -588,7 +588,7 @@ msgstr ""
 #: includes/controller/Admin.php:1133
 #: includes/controller/Admin.php:1235
 #: includes/controller/Admin.php:1285
-#: includes/controller/Main.php:242
+#: includes/controller/Main.php:246
 msgid "User not found."
 msgstr ""
 
@@ -899,7 +899,7 @@ msgid "Page created."
 msgstr ""
 
 #: includes/controller/Admin.php:3172
-#: includes/controller/Main.php:865
+#: includes/controller/Main.php:868
 msgid "You are already logged in."
 msgstr ""
 
@@ -1005,161 +1005,165 @@ msgstr ""
 msgid "Updated posts"
 msgstr ""
 
-#: includes/controller/Main.php:269
+#: includes/controller/Main.php:238
+msgid "You did not specify a user ID."
+msgstr ""
+
+#: includes/controller/Main.php:272
 #, php-format
 msgid "Posts created by &#8220;%s&#8221;"
 msgstr ""
 
-#: includes/controller/Main.php:328
-#: includes/controller/Main.php:347
-#: includes/controller/Main.php:366
+#: includes/controller/Main.php:331
+#: includes/controller/Main.php:350
+#: includes/controller/Main.php:369
 #, php-format
 msgid "Archive of %s"
 msgstr ""
 
-#: includes/controller/Main.php:456
+#: includes/controller/Main.php:459
 msgid "Please enter a search term."
 msgstr ""
 
-#: includes/controller/Main.php:520
+#: includes/controller/Main.php:523
 #, php-format
 msgid "Search results for &#8220;%s&#8221;"
 msgstr ""
 
-#: includes/controller/Main.php:534
+#: includes/controller/Main.php:537
 msgid "You do not have sufficient privileges to view drafts."
 msgstr ""
 
-#: includes/controller/Main.php:552
+#: includes/controller/Main.php:555
 msgid "Drafts"
 msgstr ""
 
-#: includes/controller/Main.php:572
+#: includes/controller/Main.php:575
 msgid "This post is not published."
 msgstr ""
 
-#: includes/controller/Main.php:577
+#: includes/controller/Main.php:580
 msgid "This post is scheduled to be published."
 msgstr ""
 
-#: includes/controller/Main.php:613
+#: includes/controller/Main.php:616
 msgid "You are not allowed to view this page."
 msgstr ""
 
-#: includes/controller/Main.php:691
+#: includes/controller/Main.php:694
 msgid "There aren't enough posts for random selection."
 msgstr ""
 
-#: includes/controller/Main.php:705
+#: includes/controller/Main.php:708
 msgid "This site does not allow registration."
 msgstr ""
 
-#: includes/controller/Main.php:711
+#: includes/controller/Main.php:714
 msgid "You cannot register an account because you are already logged in."
 msgstr ""
 
-#: includes/controller/Main.php:723
+#: includes/controller/Main.php:726
 #: install.php:643
 msgid "Please enter a username for your account."
 msgstr ""
 
-#: includes/controller/Main.php:745
-#: includes/controller/Main.php:969
-#: includes/controller/Main.php:1132
+#: includes/controller/Main.php:748
+#: includes/controller/Main.php:974
+#: includes/controller/Main.php:1137
 msgid "Please consider setting a stronger password for your account."
 msgstr ""
 
-#: includes/controller/Main.php:759
+#: includes/controller/Main.php:762
 msgid "Incorrect captcha response."
 msgstr ""
 
-#: includes/controller/Main.php:787
+#: includes/controller/Main.php:790
 msgid "We have emailed you an activation link."
 msgstr ""
 
-#: includes/controller/Main.php:796
-#: includes/controller/Main.php:850
+#: includes/controller/Main.php:799
+#: includes/controller/Main.php:853
 msgid "Your account is now active."
 msgstr ""
 
-#: includes/controller/Main.php:805
+#: includes/controller/Main.php:808
 msgid "Register"
 msgstr ""
 
-#: includes/controller/Main.php:816
+#: includes/controller/Main.php:819
 msgid "You cannot activate an account because you are already logged in."
 msgstr ""
 
-#: includes/controller/Main.php:829
-#: includes/controller/Main.php:1036
-#: includes/controller/Main.php:1104
+#: includes/controller/Main.php:832
+#: includes/controller/Main.php:1041
+#: includes/controller/Main.php:1109
 msgid "Please contact the blog administrator for help with your account."
 msgstr ""
 
-#: includes/controller/Main.php:843
+#: includes/controller/Main.php:846
 msgid "Your account has already been activated."
 msgstr ""
 
-#: includes/controller/Main.php:883
+#: includes/controller/Main.php:886
 msgid "Incorrect username and/or password."
 msgstr ""
 
-#: includes/controller/Main.php:893
+#: includes/controller/Main.php:896
 msgid "You must activate your account before you log in."
 msgstr ""
 
-#: includes/controller/Main.php:901
+#: includes/controller/Main.php:904
 msgid "Logged in."
 msgstr ""
 
-#: includes/controller/Main.php:910
+#: includes/controller/Main.php:913
 #: includes/error.php:448
 msgid "Log in"
 msgstr ""
 
-#: includes/controller/Main.php:923
+#: includes/controller/Main.php:926
 msgid "You aren't logged in."
 msgstr ""
 
-#: includes/controller/Main.php:933
+#: includes/controller/Main.php:938
 msgid "Logged out."
 msgstr ""
 
-#: includes/controller/Main.php:947
+#: includes/controller/Main.php:952
 msgid "You must be logged in to access user controls."
 msgstr ""
 
-#: includes/controller/Main.php:1008
-#: includes/controller/Main.php:1139
+#: includes/controller/Main.php:1013
+#: includes/controller/Main.php:1144
 msgid "Your profile has been updated."
 msgstr ""
 
-#: includes/controller/Main.php:1017
+#: includes/controller/Main.php:1022
 msgid "Controls"
 msgstr ""
 
-#: includes/controller/Main.php:1030
-#: includes/controller/Main.php:1082
+#: includes/controller/Main.php:1035
+#: includes/controller/Main.php:1087
 msgid "You cannot reset your password because you are already logged in."
 msgstr ""
 
-#: includes/controller/Main.php:1048
+#: includes/controller/Main.php:1053
 msgid "Please enter your username."
 msgstr ""
 
-#: includes/controller/Main.php:1060
+#: includes/controller/Main.php:1065
 msgid "We have emailed you a password reset link."
 msgstr ""
 
-#: includes/controller/Main.php:1069
+#: includes/controller/Main.php:1074
 msgid "Lost password"
 msgstr ""
 
-#: includes/controller/Main.php:1094
+#: includes/controller/Main.php:1099
 msgid "The link has expired. Please try again."
 msgstr ""
 
-#: includes/controller/Main.php:1152
+#: includes/controller/Main.php:1157
 msgid "Reset password"
 msgstr ""
 
@@ -1196,175 +1200,175 @@ msgstr ""
 msgid "The requested resource was not found."
 msgstr ""
 
-#: includes/helpers.php:1666
-#: includes/helpers.php:1775
-#: includes/helpers.php:1908
+#: includes/helpers.php:1674
+#: includes/helpers.php:1783
+#: includes/helpers.php:1916
 #, php-format
 msgid "Socket error: %s"
 msgstr ""
 
-#: includes/helpers.php:1817
+#: includes/helpers.php:1825
 msgid "Webmention support is disabled for this site."
 msgstr ""
 
-#: includes/helpers.php:1824
+#: includes/helpers.php:1832
 msgid "The URL for your page is not valid."
 msgstr ""
 
-#: includes/helpers.php:1831
+#: includes/helpers.php:1839
 msgid "The URL for our page is not valid."
 msgstr ""
 
-#: includes/helpers.php:1844
+#: includes/helpers.php:1852
 msgid "The source and target URLs cannot be the same."
 msgstr ""
 
-#: includes/helpers.php:1853
+#: includes/helpers.php:1861
 msgid "We have not published at that URL."
 msgstr ""
 
-#: includes/helpers.php:1863
+#: includes/helpers.php:1871
 msgid "You have not published at that URL."
 msgstr ""
 
-#: includes/helpers.php:1870
+#: includes/helpers.php:1878
 msgid "Your page does not link to our page."
 msgstr ""
 
-#: includes/helpers.php:2116
+#: includes/helpers.php:2124
 msgid "Please create the uploads directory."
 msgstr ""
 
-#: includes/helpers.php:2118
+#: includes/helpers.php:2126
 msgid "Please make the uploads directory writable."
 msgstr ""
 
-#: includes/helpers.php:2136
+#: includes/helpers.php:2144
 #, php-format
 msgid "%s module is missing."
 msgstr ""
 
-#: includes/helpers.php:2145
+#: includes/helpers.php:2153
 #, php-format
 msgid "%s module is damaged."
 msgstr ""
 
-#: includes/helpers.php:2159
+#: includes/helpers.php:2167
 #, php-format
 msgid "%s feather is missing."
 msgstr ""
 
-#: includes/helpers.php:2168
+#: includes/helpers.php:2176
 #, php-format
 msgid "%s feather is damaged."
 msgstr ""
 
-#: includes/helpers.php:2236
-#: includes/helpers.php:2258
+#: includes/helpers.php:2244
+#: includes/helpers.php:2266
 #, php-format
 msgid "Execution of %s has been cancelled."
 msgstr ""
 
-#: includes/helpers.php:2289
+#: includes/helpers.php:2297
 msgid "Uploaded file is of an unsupported type."
 msgstr ""
 
-#: includes/helpers.php:2295
+#: includes/helpers.php:2303
 msgid "Only uploaded files are accepted."
 msgstr ""
 
-#: includes/helpers.php:2301
-#: includes/helpers.php:2350
+#: includes/helpers.php:2309
+#: includes/helpers.php:2358
 msgid "Upload path does not exist."
 msgstr ""
 
-#: includes/helpers.php:2307
-#: includes/helpers.php:2356
+#: includes/helpers.php:2315
+#: includes/helpers.php:2364
 msgid "Upload path is not writable."
 msgstr ""
 
-#: includes/helpers.php:2313
-#: includes/helpers.php:2362
-#: includes/helpers.php:2500
+#: includes/helpers.php:2321
+#: includes/helpers.php:2370
+#: includes/helpers.php:2508
 #: upgrade.php:140
 #: upgrade.php:157
 #: upgrade.php:174
 msgid "Failed to write file to disk."
 msgstr ""
 
-#: includes/helpers.php:2477
+#: includes/helpers.php:2485
 msgid "The uploaded file exceeds the <code>upload_max_filesize</code> directive in php.ini."
 msgstr ""
 
-#: includes/helpers.php:2483
+#: includes/helpers.php:2491
 msgid "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the HTML form."
 msgstr ""
 
-#: includes/helpers.php:2489
+#: includes/helpers.php:2497
 msgid "The uploaded file was only partially uploaded."
 msgstr ""
 
-#: includes/helpers.php:2495
+#: includes/helpers.php:2503
 msgid "Missing a temporary folder."
 msgstr ""
 
-#: includes/helpers.php:2505
+#: includes/helpers.php:2513
 msgid "File upload was stopped by a PHP extension."
 msgstr ""
 
-#: includes/helpers.php:2510
+#: includes/helpers.php:2518
 #, php-format
 msgid "File upload failed with error %d."
 msgstr ""
 
-#: includes/helpers.php:2517
+#: includes/helpers.php:2525
 #, php-format
 msgid "The uploaded file exceeds the maximum size of %d Megabytes allowed by this site."
 msgstr ""
 
-#: includes/helpers.php:2813
+#: includes/helpers.php:2821
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr ""
 
-#: includes/helpers.php:2838
+#: includes/helpers.php:2846
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr ""
 
-#: includes/helpers.php:2920
+#: includes/helpers.php:2928
 msgid "Failed to create Zip archive."
 msgstr ""
 
-#: includes/helpers.php:3019
+#: includes/helpers.php:3027
 #, php-format
 msgid "Activate your account at %s"
 msgstr ""
 
-#: includes/helpers.php:3020
-#: includes/helpers.php:3055
+#: includes/helpers.php:3028
+#: includes/helpers.php:3063
 #, php-format
 msgid "Hello, %s."
 msgstr ""
 
-#: includes/helpers.php:3023
+#: includes/helpers.php:3031
 msgid "You are receiving this message because you registered a new account."
 msgstr ""
 
-#: includes/helpers.php:3026
+#: includes/helpers.php:3034
 msgid "Visit this link to activate your account:"
 msgstr ""
 
-#: includes/helpers.php:3054
+#: includes/helpers.php:3062
 #, php-format
 msgid "Reset your password at %s"
 msgstr ""
 
-#: includes/helpers.php:3058
+#: includes/helpers.php:3066
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 
-#: includes/helpers.php:3061
+#: includes/helpers.php:3069
 msgid "Visit this link to reset your password:"
 msgstr ""
 
@@ -1526,8 +1530,8 @@ msgstr ""
 msgid "Export Content"
 msgstr ""
 
+#: includes/model/Page.php:411
 #: includes/model/Post.php:1070
-#: includes/model/Post.php:1071
 msgid "[Guest]"
 msgstr ""
 

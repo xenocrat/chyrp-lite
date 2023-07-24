@@ -311,14 +311,14 @@ Called from:
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 610
+	includes/controller/Main.php on line 613
 
 
 user_logged_in
 --------------
 Called from:
-	includes/controller/Main.php on line 793
-	includes/controller/Main.php on line 898
+	includes/controller/Main.php on line 796
+	includes/controller/Main.php on line 901
 
 Arguments:
 	$user
@@ -327,13 +327,13 @@ Arguments:
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 879
+	includes/controller/Main.php on line 882
 
 
 user_logged_out
 ---------------
 Called from:
-	includes/controller/Main.php on line 930
+	includes/controller/Main.php on line 933
 
 Arguments:
 	$user
@@ -342,7 +342,7 @@ Arguments:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 1244
+	includes/controller/Main.php on line 1249
 
 Arguments:
 	$post, $feed
@@ -351,7 +351,7 @@ Arguments:
 webmention
 ----------
 Called from:
-	includes/helpers.php on line 1874
+	includes/helpers.php on line 1882
 
 Arguments:
 	$post, $source, $target
@@ -360,7 +360,7 @@ Arguments:
 delete_upload
 -------------
 Called from:
-	includes/helpers.php on line 2601
+	includes/helpers.php on line 2609
 
 Arguments:
 	$filename
@@ -369,19 +369,19 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 2739
+	includes/helpers.php on line 2747
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 2757
+	includes/helpers.php on line 2765
 
 
 correspond_activate_account
 ---------------------------
 Called from:
-	includes/helpers.php on line 3016
+	includes/helpers.php on line 3024
 
 Arguments:
 	$user, $url
@@ -390,7 +390,7 @@ Arguments:
 correspond_reset_password
 -------------------------
 Called from:
-	includes/helpers.php on line 3051
+	includes/helpers.php on line 3059
 
 Arguments:
 	$user, $url
@@ -399,7 +399,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 3092
+	includes/helpers.php on line 3100
 
 Arguments:
 	$ob
@@ -1032,7 +1032,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 1323
+	includes/controller/Main.php on line 1328
 
 Target:
 	$this->context
@@ -1053,7 +1053,7 @@ Arguments:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 2996
+	includes/helpers.php on line 3004
 
 Target:
 	$function
@@ -1062,7 +1062,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 3093
+	includes/helpers.php on line 3101
 	includes/lib/Leaf.php on line 253
 
 Target:

@@ -1662,7 +1662,7 @@ Grabs the posts that have been updated.
 
 Function: main_author
 ---------------------
-Grabs the posts created by the named user.
+Grabs the posts created by a user.
 
 
 Function: main_archive
@@ -2298,6 +2298,7 @@ Implements the Markdown content parsing filter.
 
 Parameters:
     $text - The body of the post/page to parse.
+    $context - Model instance for context (optional).
 
 Returns:
     The text with Markdown formatting applied.
