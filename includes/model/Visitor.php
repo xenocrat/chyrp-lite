@@ -70,6 +70,35 @@
         }
 
         /**
+         * Function: log_in
+         * Logs in a visitor as a registered user.
+         *
+         * Parameters:
+         *     $user - The <User> to log in.
+         */
+        public static function log_in($user): void {
+            if ($user->no_results)
+                return;
+
+            $_SESSION['user_id'] = $user->id;
+            Trigger::current()->call("user_logged_in", $user);
+        }
+
+        /**
+         * Function: log_out
+         * Logs out a registered user.
+         */
+        public static function log_out(): void {
+            $user = new User($_SESSION['user_id']);
+            session_destroy();
+            session();
+            Trigger::current()->call("user_logged_out", $user);
+
+            if (!headers_sent())
+                header('Clear-Site-Data: "storage"');
+        }
+
+        /**
          * Function: current
          * Returns a singleton reference to the current visitor.
          */
