@@ -46,7 +46,10 @@ var ChyrpAjaxScroll = {
                     document.title = ajax_next_title;
 
                     if (!!history.replaceState)
-                        history.replaceState({ "page": this_next_num }, ajax_next_title, this_next_url);
+                        history.replaceState({
+                            "page": this_next_num,
+                            "action": Route.action
+                        }, ajax_next_title, this_next_url);
 
                     $(data).find("script").each(function(){
                         $.globalEval(this.text || this.textContent || this.innerHTML || "");

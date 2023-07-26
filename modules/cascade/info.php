@@ -2,7 +2,7 @@
 return array(
     "name"          => __("Cascade", "cascade"),
     "url"           => "http://chyrplite.net/",
-    "version"       => "2023.01",
+    "version"       => "2023.02",
     "description"   => __("Adds ajax-powered infinite scrolling to your blog.", "cascade"),
     "author"        => array(
         "name"      => "Daniel Pimley",
