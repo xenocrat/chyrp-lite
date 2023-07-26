@@ -897,8 +897,7 @@
                             "/"
                         );
 
-                    $_SESSION['user_id'] = $user->id;
-                    $trigger->call("user_logged_in", $user);
+                    Visitor::log_in($user);
 
                     Flash::notice(
                         __("Logged in."),
@@ -919,20 +918,13 @@
          * Logs out the current user.
          */
         public function main_logout()/*: never */{
-            $trigger = Trigger::current();
-
             if (!logged_in())
                 Flash::notice(
                     __("You aren't logged in."),
                     "/"
                 );
 
-            $user = new User($_SESSION['user_id']);
-            session_destroy();
-            session();
-            $trigger->call("user_logged_out", $user);
-
-            header('Clear-Site-Data: "storage"');
+            Visitor::log_out();
 
             Flash::notice(
                 __("Logged out."),
