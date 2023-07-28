@@ -75,18 +75,25 @@
          *
          * Parameters:
          *     $user - The <User> to log in.
+         *
+         * Notes:
+         *     You must redirect the visitor after calling this method.
          */
-        public static function log_in($user): void {
+        public static function log_in($user): bool {
             if ($user->no_results)
-                return;
+                return false;
 
             $_SESSION['user_id'] = $user->id;
             Trigger::current()->call("user_logged_in", $user);
+            return true;
         }
 
         /**
          * Function: log_out
          * Logs out a registered user.
+         * 
+         * Notes:
+         *     You must redirect the visitor after calling this method.
          */
         public static function log_out(): void {
             $user = new User($_SESSION['user_id']);
