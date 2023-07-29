@@ -77,7 +77,7 @@
          *     $user - The <User> to log in.
          *
          * Notes:
-         *     You must redirect the visitor after calling this method.
+         *     A redirect() is required after calling this method.
          */
         public static function log_in($user): bool {
             if ($user->no_results)
@@ -93,7 +93,7 @@
          * Logs out a registered user.
          * 
          * Notes:
-         *     You must redirect the visitor after calling this method.
+         *     A redirect() is required after calling this method.
          */
         public static function log_out(): void {
             $user = new User($_SESSION['user_id']);
