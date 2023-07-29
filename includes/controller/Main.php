@@ -792,8 +792,7 @@
                         );
                     }
 
-                    $_SESSION['user_id'] = $user->id;
-                    Trigger::current()->call("user_logged_in", $user);
+                    Visitor::log_in($user);
 
                     Flash::notice(
                         __("Your account is now active."),
