@@ -314,35 +314,16 @@ Called from:
 	includes/controller/Main.php on line 613
 
 
-user_logged_in
---------------
-Called from:
-	includes/controller/Main.php on line 796
-	includes/controller/Main.php on line 901
-
-Arguments:
-	$user
-
-
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 882
-
-
-user_logged_out
----------------
-Called from:
-	includes/controller/Main.php on line 933
-
-Arguments:
-	$user
+	includes/controller/Main.php on line 881
 
 
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 1249
+	includes/controller/Main.php on line 1240
 
 Arguments:
 	$post, $feed
@@ -490,6 +471,24 @@ Called from:
 
 Arguments:
 	$user, $this
+
+
+user_logged_in
+--------------
+Called from:
+	includes/model/Visitor.php on line 87
+
+Arguments:
+	$user
+
+
+user_logged_out
+---------------
+Called from:
+	includes/model/Visitor.php on line 102
+
+Arguments:
+	$user
 
 
 manage_comments_column_header
@@ -1032,7 +1031,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 1328
+	includes/controller/Main.php on line 1319
 
 Target:
 	$this->context

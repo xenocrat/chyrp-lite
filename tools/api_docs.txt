@@ -3992,6 +3992,25 @@ Function: logged_in
 Returns whether or not the visitor is logged in.
 
 
+Function: log_in
+----------------
+Logs in a visitor as a registered user.
+
+Parameters:
+    $user - The <User> to log in.
+
+Notes:
+    A redirect() is required after calling this method.
+
+
+Function: log_out
+-----------------
+Logs out a registered user.
+
+Notes:
+    A redirect() is required after calling this method.
+
+
 Function: current
 -----------------
 Returns a singleton reference to the current visitor.

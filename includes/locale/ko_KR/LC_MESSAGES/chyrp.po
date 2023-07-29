@@ -233,9 +233,9 @@ msgstr "깃털을 찾을 수 없습니다."
 #: includes/controller/Ajax.php:102 includes/controller/Ajax.php:132
 #: includes/controller/Ajax.php:188 includes/controller/Ajax.php:229
 #: includes/controller/Ajax.php:270 includes/controller/Main.php:721
-#: includes/controller/Main.php:840 includes/controller/Main.php:875
-#: includes/controller/Main.php:959 includes/controller/Main.php:1048
-#: includes/controller/Main.php:1117 includes/controller/Main.php:1124
+#: includes/controller/Main.php:839 includes/controller/Main.php:874
+#: includes/controller/Main.php:950 includes/controller/Main.php:1039
+#: includes/controller/Main.php:1108 includes/controller/Main.php:1115
 msgid "Invalid authentication token."
 msgstr "잘못된 인증 토큰입니다."
 
@@ -376,13 +376,13 @@ msgid "That username is already in use."
 msgstr "이미 사용 중인 이름입니다."
 
 #: includes/controller/Admin.php:970 includes/controller/Main.php:740
-#: includes/controller/Main.php:1129 install.php:646
+#: includes/controller/Main.php:1120 install.php:646
 msgid "Passwords cannot be blank."
 msgstr "비밀번호는 비워둘 수 없습니다."
 
 #: includes/controller/Admin.php:977 includes/controller/Admin.php:1143
-#: includes/controller/Main.php:744 includes/controller/Main.php:968
-#: includes/controller/Main.php:1133 install.php:581 install.php:648
+#: includes/controller/Main.php:744 includes/controller/Main.php:959
+#: includes/controller/Main.php:1124 install.php:581 install.php:648
 msgid "Passwords do not match."
 msgstr "비밀번호가 일치하지 않습니다."
 
@@ -392,18 +392,18 @@ msgstr "보안을 위하여 더욱 강력한 암호를 설정하는 것이 좋�
 
 #: includes/controller/Admin.php:989 includes/controller/Admin.php:1161
 #: includes/controller/Admin.php:2898 includes/controller/Main.php:753
-#: includes/controller/Main.php:981 install.php:651
+#: includes/controller/Main.php:972 install.php:651
 msgid "Email address cannot be blank."
 msgstr "이메일 주소는 비워둘 수 없습니다."
 
 #: includes/controller/Admin.php:996 includes/controller/Admin.php:1168
 #: includes/controller/Admin.php:2905 includes/controller/Main.php:757
-#: includes/controller/Main.php:985 install.php:653
+#: includes/controller/Main.php:976 install.php:653
 msgid "Invalid email address."
 msgstr "올바르지 않은 이메일 주소입니다."
 
 #: includes/controller/Admin.php:1003 includes/controller/Admin.php:1175
-#: includes/controller/Main.php:767 includes/controller/Main.php:990
+#: includes/controller/Main.php:767 includes/controller/Main.php:981
 msgid "Invalid website URL."
 msgstr "올바르지 않은 사이트 주소입니다."
 
@@ -708,7 +708,7 @@ msgstr "아직 아무것도 없습니다."
 msgid "Page created."
 msgstr "페이지가 생성되었습니다."
 
-#: includes/controller/Admin.php:3172 includes/controller/Main.php:868
+#: includes/controller/Admin.php:3172 includes/controller/Main.php:867
 msgid "You are already logged in."
 msgstr "이미 로그인했습니다."
 
@@ -870,8 +870,8 @@ msgstr "이미 로그인되어 있기 때문에 계정을 등록할 수 없습�
 msgid "Please enter a username for your account."
 msgstr "사용자명을 입력하세요."
 
-#: includes/controller/Main.php:748 includes/controller/Main.php:974
-#: includes/controller/Main.php:1137
+#: includes/controller/Main.php:748 includes/controller/Main.php:965
+#: includes/controller/Main.php:1128
 msgid "Please consider setting a stronger password for your account."
 msgstr "보안을 위하여 더욱 강력한 암호를 설정하는 것이 좋습니다."
 
@@ -883,84 +883,84 @@ msgstr "잘못된 보안 문자 응답입니다."
 msgid "We have emailed you an activation link."
 msgstr "활성화 링크를 이메일로 보냈습니다."
 
-#: includes/controller/Main.php:799 includes/controller/Main.php:853
+#: includes/controller/Main.php:798 includes/controller/Main.php:852
 msgid "Your account is now active."
 msgstr "계정이 활성화되었습니다."
 
-#: includes/controller/Main.php:808
+#: includes/controller/Main.php:807
 msgid "Register"
 msgstr "회원가입"
 
-#: includes/controller/Main.php:819
+#: includes/controller/Main.php:818
 msgid "You cannot activate an account because you are already logged in."
 msgstr "이미 로그인되어 있기 때문에 계정을 활성화할 수 없습니다."
 
-#: includes/controller/Main.php:832 includes/controller/Main.php:1041
-#: includes/controller/Main.php:1109
+#: includes/controller/Main.php:831 includes/controller/Main.php:1032
+#: includes/controller/Main.php:1100
 msgid "Please contact the blog administrator for help with your account."
 msgstr "계정에 대한 도움이 필요하면 사이트 관리자에게 문의하세요."
 
-#: includes/controller/Main.php:846
+#: includes/controller/Main.php:845
 msgid "Your account has already been activated."
 msgstr "계정이 이미 활성화되었습니다."
 
-#: includes/controller/Main.php:886
+#: includes/controller/Main.php:885
 msgid "Incorrect username and/or password."
 msgstr "아이디 또는 비밀번호가 일치하지 않습니다."
 
-#: includes/controller/Main.php:896
+#: includes/controller/Main.php:895
 msgid "You must activate your account before you log in."
 msgstr "로그인하기 전에 계정을 활성화해야 합니다."
 
-#: includes/controller/Main.php:904
+#: includes/controller/Main.php:902
 msgid "Logged in."
 msgstr "로그인되었습니다."
 
-#: includes/controller/Main.php:913 includes/error.php:448
+#: includes/controller/Main.php:911 includes/error.php:448
 msgid "Log in"
 msgstr "로그인"
 
-#: includes/controller/Main.php:926
+#: includes/controller/Main.php:922
 msgid "You aren't logged in."
 msgstr "로그인할 수 없습니다."
 
-#: includes/controller/Main.php:938
+#: includes/controller/Main.php:929
 msgid "Logged out."
 msgstr "로그아웃되었습니다."
 
-#: includes/controller/Main.php:952
+#: includes/controller/Main.php:943
 msgid "You must be logged in to access user controls."
 msgstr "사용자 설정을 위하여 로그인해야 합니다."
 
-#: includes/controller/Main.php:1013 includes/controller/Main.php:1144
+#: includes/controller/Main.php:1004 includes/controller/Main.php:1135
 msgid "Your profile has been updated."
 msgstr "프로필이 업데이트되었습니다."
 
-#: includes/controller/Main.php:1022
+#: includes/controller/Main.php:1013
 msgid "Controls"
 msgstr "사용자 관리"
 
-#: includes/controller/Main.php:1035 includes/controller/Main.php:1087
+#: includes/controller/Main.php:1026 includes/controller/Main.php:1078
 msgid "You cannot reset your password because you are already logged in."
 msgstr "이미 로그인되어 있으므로 비밀번호를 재설정할 수 없습니다."
 
-#: includes/controller/Main.php:1053
+#: includes/controller/Main.php:1044
 msgid "Please enter your username."
 msgstr "사용자명을 입력하세요."
 
-#: includes/controller/Main.php:1065
+#: includes/controller/Main.php:1056
 msgid "We have emailed you a password reset link."
 msgstr "비밀번호 재설정 링크를 이메일로 보냈습니다."
 
-#: includes/controller/Main.php:1074
+#: includes/controller/Main.php:1065
 msgid "Lost password"
 msgstr "비밀번호 분실"
 
-#: includes/controller/Main.php:1099
+#: includes/controller/Main.php:1090
 msgid "The link has expired. Please try again."
 msgstr "링크가 만료되었습니다. 다시 시도해 주세요."
 
-#: includes/controller/Main.php:1157
+#: includes/controller/Main.php:1148
 msgid "Reset password"
 msgstr "비밀번호 변경"
 
