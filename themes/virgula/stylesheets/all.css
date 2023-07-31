@@ -255,7 +255,7 @@ hr {
     width: 100%;
     border: none;
     clear: both;
-    border-top: 4px dotted #b1b4b6;
+    border-top: 3px dotted #b1b4b6;
     margin: 2rem 0rem;
 }
 iframe {
@@ -337,10 +337,12 @@ button {
     font-size: inherit;
     cursor: pointer;
 }
-nav, main, article,
-section, footer,
+nav, main, section, footer,
 form, details, p {
     margin: 1rem 0rem;
+}
+article {
+    margin: 2rem 0rem;
 }
 footer {
     clear: both;
@@ -348,15 +350,10 @@ footer {
 main > article:first-child {
     margin-top: 4.25rem;
 }
-details[open] + article.post::before,
-article.post + article.post::before {
-    display: block;
-    height: 4.25rem;
-    content: " ";
-    border-top: 4px dotted #b1b4b6;
-}
-article.fragment + article.fragment {
-    border-top: 4px dotted #b1b4b6;
+article.fragment {
+    margin: 1rem 0rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px dotted #b1b4b6;
 }
 header {
     font-size: 0.7rem;
