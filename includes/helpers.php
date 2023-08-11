@@ -737,14 +737,15 @@
 
     /**
      * Function: oneof
-     * Returns a value from the supplied set of arguments.
+     * Returns a substantial value from the supplied set of arguments.
      *
      * Returns:
      *     The first non-empty argument, or the last, or null.
      *
      * Notes:
-     *     It will guess where to stop based on types,
-     *     e.g. "" has priority over array() but not 1.
+     *     Some type combinations will halt comparison and immediately return.
+     *     - All scalar types are comparable.
+     *     - All types are comparable with null.
      */
     function oneof(): mixed {
         $last = null;
@@ -769,9 +770,8 @@
 
             $next = $args[$index + 1];
 
-            # This is a big check but it should cover most "incomparable" cases.
-            # Using simple type comparison wouldn't work too well, for example:
-            # in oneof("", 1) "" would take priority over 1 because of type difference.
+            # Using simple type comparison wouldn't work too well here, e.g:
+            # oneof("", 1) should return 1 regardless of the type difference.
             $incomparable = (
                 (is_array($arg) and !is_array($next)) or
                 (!is_array($arg) and is_array($next)) or
