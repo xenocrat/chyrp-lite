@@ -332,7 +332,7 @@ Arguments:
 webmention
 ----------
 Called from:
-	includes/helpers.php on line 1882
+	includes/helpers.php on line 1885
 
 Arguments:
 	$post, $source, $target
@@ -341,7 +341,7 @@ Arguments:
 delete_upload
 -------------
 Called from:
-	includes/helpers.php on line 2609
+	includes/helpers.php on line 2612
 
 Arguments:
 	$filename
@@ -350,19 +350,19 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 2747
+	includes/helpers.php on line 2750
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 2765
+	includes/helpers.php on line 2768
 
 
 correspond_activate_account
 ---------------------------
 Called from:
-	includes/helpers.php on line 3024
+	includes/helpers.php on line 3027
 
 Arguments:
 	$user, $url
@@ -371,7 +371,7 @@ Arguments:
 correspond_reset_password
 -------------------------
 Called from:
-	includes/helpers.php on line 3059
+	includes/helpers.php on line 3062
 
 Arguments:
 	$user, $url
@@ -380,7 +380,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 3100
+	includes/helpers.php on line 3103
 
 Arguments:
 	$ob
@@ -1040,7 +1040,7 @@ Target:
 keyword_search
 --------------
 Called from:
-	includes/helpers.php on line 1110
+	includes/helpers.php on line 1113
 
 Target:
 	$search
@@ -1052,7 +1052,7 @@ Arguments:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 3004
+	includes/helpers.php on line 3007
 
 Target:
 	$function
@@ -1061,7 +1061,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 3101
+	includes/helpers.php on line 3104
 	includes/lib/Leaf.php on line 253
 
 Target:
