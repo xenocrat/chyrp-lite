@@ -695,14 +695,15 @@
      * Sets the supplied variable if it is not already set.
      *
      * Parameters:
-     *     &$variable - The variable to return or set.
+     *     &$variable - The variable to set and return.
      *
      * Returns:
      *     The value that was assigned to the variable.
      *
      * Notes:
-     *     The value will be the first non-empty argument,
-     *     or the last, or null if no arguments are supplied.
+     *     Additional arguments supplied to this function will be considered as
+     *     candidate values. The variable will be set to the value of the first
+     *     non-empty argument, or the last, or null if no arguments are supplied.
      */
     function fallback(&$variable): mixed {
         if (is_bool($variable))
@@ -737,15 +738,16 @@
 
     /**
      * Function: oneof
-     * Returns a substantial value from the supplied set of arguments.
+     * Inspects the supplied arguments and returns the first substantial value.
      *
      * Returns:
-     *     The first non-empty argument, or the last, or null.
+     *     The first substantial value in the set, or the last, or null.
      *
      * Notes:
-     *     Some type combinations will halt comparison and immediately return.
-     *     - All scalar types are comparable.
+     *     Some type combinations will halt inspection of the full set:
      *     - All types are comparable with null.
+     *     - All scalar types are comparable.
+     *     - Arrays, objects, and resources are incomparable with other types.
      */
     function oneof(): mixed {
         $last = null;
@@ -781,6 +783,7 @@
                 (!is_resource($arg) and is_resource($next))
             );
 
+            # A null value invalidates the incomparability test.
             if (isset($arg) and isset($next) and $incomparable)
                 return $arg;
         }
