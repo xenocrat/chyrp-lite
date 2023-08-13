@@ -1699,7 +1699,7 @@
             $remote_headers.= fgets($connect);
 
         # Search for 4XX or 5XX error codes.
-        if (preg_match("~^HTTP/[0-9]\.[0-9] [4-5][0-9][0-9]~m", $remote_headers)) {
+        if (preg_match("~^HTTP/[0-9]\.[0-9] [45][0-9]{2}~m", $remote_headers)) {
             fclose($connect);
             return false;
         }
