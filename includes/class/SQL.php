@@ -452,7 +452,8 @@
          */
         public static function & current($settings = false): self {
             if ($settings) {
-                return new self($settings);
+                $loaded = new self($settings);
+                return $loaded;
             } else {
                 static $instance = null;
                 $instance = (empty($instance)) ? new self() : $instance ;
