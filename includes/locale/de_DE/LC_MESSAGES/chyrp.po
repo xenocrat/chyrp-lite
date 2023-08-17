@@ -1213,15 +1213,15 @@ msgstr "Bildquelle"
 msgid "Failed to create image thumbnail."
 msgstr "Vorschaubild konnte erstellt werden."
 
-#: includes/main.js.php:26
+#: includes/main.js.php:27
 msgid "Oops! Something went wrong on this web page."
 msgstr "Oops! Etwas lief falsch auf dieser Website."
 
-#: includes/main.js.php:35
+#: includes/main.js.php:36
 msgid "Are you sure you want to delete this post?"
 msgstr "Bist du Dir sicher, dass Du diesen Post löschen willst?"
 
-#: includes/main.js.php:76
+#: includes/main.js.php:77
 msgid "Are you sure you want to delete this page and its child pages?"
 msgstr ""
 "Bist Du Dir sicher, dass Du diese Seite und alle Unterseiten löschen willst?"

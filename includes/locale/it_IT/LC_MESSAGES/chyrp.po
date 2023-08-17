@@ -1213,15 +1213,15 @@ msgstr "Fonte immagine"
 msgid "Failed to create image thumbnail."
 msgstr "Impossibile creare l'immagine in forato ridotto."
 
-#: includes/main.js.php:26
+#: includes/main.js.php:27
 msgid "Oops! Something went wrong on this web page."
 msgstr "Oops! Qualcosa è andato storto su questa pagina web."
 
-#: includes/main.js.php:35
+#: includes/main.js.php:36
 msgid "Are you sure you want to delete this post?"
 msgstr "Sei sicuro di voler rimuovere questo post?"
 
-#: includes/main.js.php:76
+#: includes/main.js.php:77
 msgid "Are you sure you want to delete this page and its child pages?"
 msgstr ""
 "Sei sicuro di voler eliminare questa pagina e le sue pagine secondarie?"

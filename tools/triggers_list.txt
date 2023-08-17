@@ -17,7 +17,7 @@ Arguments:
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 873
+	admin/javascripts/admin.js.php on line 876
 
 
 admin_head
@@ -389,7 +389,7 @@ Arguments:
 javascript
 ----------
 Called from:
-	includes/main.js.php on line 108
+	includes/main.js.php on line 109
 
 
 add_group
