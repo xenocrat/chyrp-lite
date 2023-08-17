@@ -16,6 +16,7 @@ var Route = {
     action: '<?php echo $route->action; ?>'
 }
 var Visitor = {
+    id: <?php echo $visitor->id; ?>,
     token: '<?php echo authenticate(); ?>'
 }
 var Site = {

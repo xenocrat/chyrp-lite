@@ -169,6 +169,7 @@ var Route = {
     action: '<?php echo $route->action; ?>'
 }
 var Visitor = {
+    id: <?php echo $visitor->id; ?>,
     token: '<?php echo authenticate(); ?>'
 }
 var Site = {
@@ -521,17 +522,19 @@ var Write = {
 
         // Remember unsaved text entered in the primary text input and textarea.
         if (!!sessionStorage) {
+            var prefix = "user_" + Visitor.id;
+
             $("#write_form .main_options input[type='text']").first(
             ).val(function() {
                 try {
-                    return sessionStorage.getItem("write_title");
+                    return sessionStorage.getItem(prefix + "_write_title");
                 } catch(e) {
                     console.log("Caught Exception: Window.sessionStorage.getItem()");
                     return null;
                 }
             }).on("change", function(e) {
                 try {
-                    sessionStorage.setItem("write_title", $(this).val());
+                    sessionStorage.setItem(prefix + "_write_title", $(this).val());
                 } catch(e) {
                     console.log("Caught Exception: Window.sessionStorage.setItem()");
                 }
@@ -540,14 +543,14 @@ var Write = {
             $("#write_form .main_options textarea").first(
             ).val(function(index, value) {
                 try {
-                    return sessionStorage.getItem("write_body");
+                    return sessionStorage.getItem(prefix + "_write_body");
                 } catch(e) {
                     console.log("Caught Exception: Window.sessionStorage.getItem()");
                     return null;
                 }
             }).on("change", function(e) {
                 try {
-                    sessionStorage.setItem("write_body", $(this).val());
+                    sessionStorage.setItem(prefix + "_write_body", $(this).val());
                 } catch(e) {
                     console.log("Caught Exception: Window.sessionStorage.setItem()");
                 }
@@ -555,8 +558,8 @@ var Write = {
 
             $("#write_form").on("submit.sessionStorage", function(e) {
                 try {
-                    sessionStorage.removeItem("write_title");
-                    sessionStorage.removeItem("write_body");
+                    sessionStorage.removeItem(prefix + "_write_title");
+                    sessionStorage.removeItem(prefix + "_write_body");
                 } catch(e) {
                     console.log("Caught Exception: Window.sessionStorage.removeItem()");
                 }
