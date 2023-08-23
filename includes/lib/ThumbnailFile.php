@@ -108,7 +108,7 @@
             return (
                 $this->orig_w <= $this->thumb_w and
                 $this->orig_h <= $this->thumb_h and
-                !$this->square
+                !($this->square and $this->orig_w != $this->orig_h)
             );
         }
 
