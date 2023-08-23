@@ -64,6 +64,7 @@
                 # Custom filters:
                 new \Twig\TwigFilter("translate",           "twig_filter_translate"),
                 new \Twig\TwigFilter("translate_plural",    "twig_filter_translate_plural"),
+                new \Twig\TwigFilter("text_direction",      "twig_filter_text_direction"),
                 new \Twig\TwigFilter("time",                "twig_filter_time"),
                 new \Twig\TwigFilter("dateformat",          "twig_filter_date_format"),
                 new \Twig\TwigFilter("strftimeformat",      "twig_filter_strftime_format"),
@@ -282,6 +283,28 @@
             $domain = (ADMIN) ? "admin" : Theme::current()->safename ;
 
         return _p($single, $plural, $number, $domain);
+    }
+
+    /**
+     * Function: twig_filter_text_direction
+     * Returns the correct text direction for the supplied language code.
+     * 
+     * Parameters:
+     *     $code - The language code of the text.
+     */
+    function twig_filter_text_direction($code): string {
+        $base = lang_base($code);
+
+        switch ($base) {
+            case 'ar':
+            case 'he':
+                $dir = "rtl";
+                break;
+            default:
+                $dir = "ltr";
+        }
+
+        return $dir;
     }
 
     /**
