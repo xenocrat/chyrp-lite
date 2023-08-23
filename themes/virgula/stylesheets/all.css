@@ -49,10 +49,6 @@
 html {
     font-size: 16px;
 }
-html[lang="ar"],
-html[lang="he"] {
-    direction: rtl;
-}
 *::selection {
     color: #0b0c0c;
     background-color: #ffdd00;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ site.locale | lang_base }}">
+<html lang="{{ site.locale | lang_base }}" dir="{{ site.locale | text_direction }}">
 <head>
 <meta charset="UTF-8">
 <title>{{ site.name }}: {% block title %}{{ title }}{% endblock %}</title>
@@ -75,10 +75,6 @@ blockquote, aside, figure, figcaption {
 }
 html {
     font-size: 16px;
-}
-html[lang="ar"],
-html[lang="he"] {
-    direction: rtl;
 }
 table {
     border-collapse: collapse;

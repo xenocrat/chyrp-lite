@@ -75,10 +75,6 @@ blockquote, aside, figure, figcaption {
 html {
     font-size: 16px;
 }
-html[lang="ar"],
-html[lang="he"] {
-    direction: rtl;
-}
 table {
     border-collapse: collapse;
     border-spacing: 0em;

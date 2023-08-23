@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ site.locale | lang_base }}">
+<html lang="{{ site.locale | lang_base }}" dir="{{ site.locale | text_direction }}">
 <head>
 <meta charset="UTF-8">
 <title>{% block title %}{{ site.name | fix }}{{ title is not empty ? " | " ~ title | striptags | fix : "" }}{% endblock %}</title>
