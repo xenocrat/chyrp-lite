@@ -464,6 +464,31 @@
     }
 
     /**
+     * Function: text_direction
+     * Returns the correct text direction for the supplied language code.
+     *
+     * Parameters:
+     *     $code - The language code.
+     *
+     * Returns:
+     *     Either the string "ltr" or "rtl".
+     */
+    function text_direction($code): string {
+        $base = lang_base($code);
+
+        switch ($base) {
+            case 'ar':
+            case 'he':
+                $dir = "rtl";
+                break;
+            default:
+                $dir = "ltr";
+        }
+
+        return $dir;
+    }
+
+    /**
      * Function: __
      * Translates a string using gettext.
      *
