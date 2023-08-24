@@ -60,11 +60,11 @@
                 new \Twig\TwigFilter("gravatar",            "get_gravatar"),
                 new \Twig\TwigFilter("add_scheme",          "add_scheme"),
                 new \Twig\TwigFilter("lang_base",           "lang_base"),
+                new \Twig\TwigFilter("text_direction",      "text_direction"),
 
                 # Custom filters:
                 new \Twig\TwigFilter("translate",           "twig_filter_translate"),
                 new \Twig\TwigFilter("translate_plural",    "twig_filter_translate_plural"),
-                new \Twig\TwigFilter("text_direction",      "twig_filter_text_direction"),
                 new \Twig\TwigFilter("time",                "twig_filter_time"),
                 new \Twig\TwigFilter("dateformat",          "twig_filter_date_format"),
                 new \Twig\TwigFilter("strftimeformat",      "twig_filter_strftime_format"),
@@ -84,7 +84,10 @@
 
     /**
      * Function: twig_callback_missing_function
-     * Scans enabled modules for a callable method matching the name of a missing Twig function.
+     * Scans callable methods of enabled modules in search of a missing Twig function.
+     *
+     * Parameters:
+     *     $name - The name of the missing Twig function.
      */
     function twig_callback_missing_function($name): \Twig\TwigFunction|false {
         foreach (Modules::$instances as $module) {
@@ -100,7 +103,10 @@
 
     /**
      * Function: twig_callback_missing_filter
-     * Scans enabled modules for a callable method matching the name of a missing Twig filter.
+     * Scans callable methods of enabled modules in search of a missing Twig filter.
+     *
+     * Parameters:
+     *     $name - The name of the missing Twig filter.
      */
     function twig_callback_missing_filter($name): \Twig\TwigFilter|false {
         foreach (Modules::$instances as $module) {
@@ -117,6 +123,11 @@
     /**
      * Function: twig_function_paginate
      * Paginates an array of items using the Paginator class.
+     *
+     * Parameters:
+     *     $array - The array to paginate.
+     *     $per_page - The number of items per page.
+     *     $name - The $_GET value for the current page.
      */
     function twig_function_paginate($array, $per_page = 10, $name = "twig"): Paginator {
         # This is important for clean URL parsing in MainController.
@@ -136,6 +147,10 @@
     /**
      * Function: twig_function_posted
      * Returns a $_POST value if set, otherwise returns the fallback value.
+     *
+     * Parameters:
+     *     $key - The key to test in the $_POST array.
+     *     $fallback - The value to return if the $_POST value is not set.
      */
     function twig_function_posted($index, $fallback = ""): string {
         return isset($_POST[$index]) ? $_POST[$index] : $fallback ;
@@ -144,6 +159,9 @@
     /**
      * Function: twig_function_mailto
      * Returns an obfuscated mailto: URL.
+     *
+     * Parameters:
+     *     $email - The email address to obfuscate.
      */
     function twig_function_mailto($email): ?string {
         if (!is_email($email))
@@ -237,6 +255,10 @@
     /**
      * Function: twig_function_uploaded_search
      * Returns an array of matches, if the visitor has the "export_content" privilege.
+     *
+     * Parameters:
+     *     $search - A search term.
+     *     $filter - An array of valid extensions (case insensitive).
      */
     function twig_function_uploaded_search($search = "", $filter = array()): array {
         if (!Visitor::current()->group->can("edit_post", "edit_page", true))
@@ -266,6 +288,10 @@
     /**
      * Function: twig_filter_translate
      * Returns a translated string.
+     *
+     * Parameters:
+     *     $text - The string to translate.
+     *     $domain - The translation domain to read from.
      */
     function twig_filter_translate($string, $domain = null): string {
         if (!isset($domain))
@@ -277,6 +303,12 @@
     /**
      * Function: twig_filter_translate_plural
      * Returns a plural (or not) form of a translated string.
+     *
+     * Parameters:
+     *     $single - Singular string.
+     *     $plural - Pluralized string.
+     *     $number - The number to judge by.
+     *     $domain - The translation domain to read from.
      */
     function twig_filter_translate_plural($single, $plural, $number, $domain = null): string {
         if (!isset($domain))
@@ -286,30 +318,12 @@
     }
 
     /**
-     * Function: twig_filter_text_direction
-     * Returns the correct text direction for the supplied language code.
-     * 
-     * Parameters:
-     *     $code - The language code of the text.
-     */
-    function twig_filter_text_direction($code): string {
-        $base = lang_base($code);
-
-        switch ($base) {
-            case 'ar':
-            case 'he':
-                $dir = "rtl";
-                break;
-            default:
-                $dir = "ltr";
-        }
-
-        return $dir;
-    }
-
-    /**
      * Function: twig_filter_time
      * Returns a <time> HTML element containing an internationalized time representation.
+     *
+     * Parameters:
+     *     $timestamp - A time value to be strtotime() converted.
+     *     $format - The formatting for the <time> representation.
      */
     function twig_filter_time($timestamp, $format = null): string {
         if (!isset($format))
@@ -323,6 +337,10 @@
     /**
      * Function: twig_filter_date_format
      * Returns date formatting for a string that isn't a regular time() value.
+     *
+     * Parameters:
+     *     $timestamp - A time value to be strtotime() converted.
+     *     $formatting - The formatting for date().
      */
     function twig_filter_date_format($timestamp, $format = null): string {
         if (!isset($format))
@@ -334,6 +352,9 @@
     /**
      * Function: twig_filter_strftime_format
      * Returns date formatting for a string that isn't a regular time() value.
+     *
+     * Parameters:
+     *     $timestamp - A time value to be strtotime() converted.
      * 
      * Notes:
      *     Uses date() instead of strftime(). Retained for backwards compatibility.
@@ -345,6 +366,9 @@
     /**
      * Function: twig_filter_filesize_format
      * Returns a string containing a formatted filesize value.
+     *
+     * Parameters:
+     *     $bytes - The filesize in bytes.
      */
     function twig_filter_filesize_format($bytes): string {
         if (is_array($bytes))
@@ -369,8 +393,11 @@
 
     /**
      * Function: twig_filter_preg_match
-     * Try to match a string against an array of regular expressions,
-     * or a single regular expression.
+     * Try to match a string against an array of regular expressions.
+     *
+     * Parameters:
+     *     $try - An array of regular expressions, or a single regular expression.
+     *     $haystack - The string to test.
      */
     function twig_filter_preg_match($haystack, $try): bool {
         return match_any($try, $haystack);
@@ -379,6 +406,12 @@
     /**
      * Function: twig_filter_preg_replace
      * Performs a <preg_replace> on the supplied string or array.
+     *
+     * Parameters:
+     *     $subject - The input string.
+     *     $pattern - The regular expression to match.
+     *     $replacement - The replacement string.
+     *     $limit - The maximum number of replacements.
      */
     function twig_filter_preg_replace($subject, $pattern, $replacement, $limit = -1): ?string {
         return preg_replace($pattern, $replacement, $subject, $limit);
@@ -387,6 +420,10 @@
     /**
      * Function: twig_filter_contains
      * Does the haystack variable contain the needle variable?
+     *
+     * Parameters:
+     *     $haystack - The variable to search within.
+     *     $needle - The variable to search for.
      */
     function twig_filter_contains($haystack, $needle): int|bool {
         if (is_array($haystack))
@@ -404,6 +441,9 @@
     /**
      * Function: twig_filter_inspect
      * Exports a variable for inspection.
+     *
+     * Parameters:
+     *     $variable - The variable to inspect.
      */
     function twig_filter_inspect($variable): string {
         return '<pre class="chyrp_inspect"><code>'.
@@ -414,6 +454,9 @@
     /**
      * Function: twig_filter_checked
      * Returns a HTML @checked@ attribute if the test evalutaes to true.
+     *
+     * Parameters:
+     *     $test - The variable to test.
      */
     function twig_filter_checked($test): string {
         return ($test) ? " checked" : "" ;
@@ -423,6 +466,9 @@
      * Function: twig_filter_selected
      * Returns a HTML @selected@ attribute if the
      * test matches any of the supplied arguments.
+     *
+     * Parameters:
+     *     $test - The variable to test.
      */
     function twig_filter_selected($test): string {
         $try = func_get_args();
@@ -443,6 +489,9 @@
      * Function: twig_filter_disabled
      * Returns a HTML @disabled@ attribute if the
      * test matches any of the supplied arguments.
+     *
+     * Parameters:
+     *     $test - The variable to test.
      */
     function twig_filter_disabled($test): string {
         $try = func_get_args();
@@ -462,6 +511,9 @@
     /**
      * Function: twig_filter_download
      * Returns a download link for a file located in the uploads directory.
+     *
+     * Parameters:
+     *     $filename - The uploaded filename.
      */
     function twig_filter_download($filename): string {
         $filepath = Config::current()->chyrp_url.
@@ -475,6 +527,14 @@
      * Function: twig_filter_thumbnail
      * Returns a thumbnail <img> tag for an uploaded image,
      * optionally with enclosing <a> tag.
+     *
+     * Parameters:
+     *     $filename - The uploaded filename.
+     *     $alt_text - The alternative text for the image.
+     *     $url - Either a valid URL or @true@ to link to the uploaded file.
+     *     $args - An array of additional arguments.
+     *     $sizes - A string containing comma-separated source sizes.
+     *     $lazy - Specify lazy-loading for this image?
      */
     function twig_filter_thumbnail(
         $filename,
