@@ -183,12 +183,12 @@
      * Echoes a $_POST value if set, otherwise echoes the fallback value.
      *
      * Parameters:
-     *     $index - The named index to test in the $_POST array.
+     *     $key - The key to test in the $_POST array.
      *     $fallback - The value to echo if the $_POST value is not set.
      */
-    function posted($index, $fallback = ""): void {
+    function posted($key, $fallback = ""): void {
         echo fix(
-            isset($_POST[$index]) ? $_POST[$index] : $fallback, true
+            isset($_POST[$key]) ? $_POST[$key] : $fallback, true
         );
     }
 
@@ -210,7 +210,7 @@
     #---------------------------------------------
 ?>
 <!DOCTYPE html>
-<html>
+<html dir="auto">
     <head>
         <meta charset="UTF-8">
         <title><?php echo __("Chyrp Lite Installer"); ?></title>

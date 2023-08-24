@@ -181,7 +181,7 @@
         #---------------------------------------------
 ?>
 <!DOCTYPE html>
-<html>
+<html dir="auto">
     <head>
         <meta charset="UTF-8">
         <title><?php echo strip_tags($title); ?></title>

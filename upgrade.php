@@ -565,7 +565,7 @@
     #---------------------------------------------
 ?>
 <!DOCTYPE html>
-<html>
+<html dir="auto">
     <head>
         <meta charset="UTF-8">
         <title><?php echo __("Chyrp Lite Upgrader"); ?></title>
