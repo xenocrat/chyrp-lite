@@ -364,4 +364,6 @@
     header("Content-Type: text/html; charset=UTF-8");
     header("Referrer-Policy: strict-origin-when-cross-origin");
     header("Vary: Accept-Encoding, Cookie, Save-Data");
-    header("Link: <".$config->chyrp_url."/?action=webmention>; rel=\"webmention\"");
+
+    if ($config->send_pingbacks)
+        header("Link: <".$config->chyrp_url."/?action=webmention>; rel=\"webmention\"");
