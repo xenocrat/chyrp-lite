@@ -1,0 +1,117 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.3.2\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/likes/admin/pages/like_settings.twig:3
+#: modules/likes/admin/pages/like_settings.twig:6
+msgid "Like Settings"
+msgstr "Vind ik leuk Instellingen"
+
+#: modules/likes/admin/pages/like_settings.twig:10
+msgid "Like Image"
+msgstr "Vind ik leuk Afbeelding"
+
+#: modules/likes/admin/pages/like_settings.twig:19
+msgid "Like with Text"
+msgstr "Vind ik leuk met tekst"
+
+#: modules/likes/admin/pages/like_settings.twig:21
+msgid "Enables text descriptions in like/unlike links."
+msgstr "Activeert tekst-beschrijvingen bij vind-ik-leuks."
+
+#: modules/likes/admin/pages/like_settings.twig:24
+msgid "Show on Index Pages"
+msgstr "Toon op indexpagina's"
+
+#: modules/likes/admin/pages/like_settings.twig:26
+msgid "Enables like functionality on blog index pages."
+msgstr "Activeert functionaliteit op blog-index pagina's."
+
+#: modules/likes/info.php:3 modules/likes/likes.php:98
+msgid "Likes"
+msgstr "Vind ik leuks"
+
+#: modules/likes/info.php:6
+msgid "Allow users to &#8220;like&#8221; a post."
+msgstr "Sta gebruikers toe om een bericht &#8220;leuk&#8221; te vinden."
+
+#: modules/likes/info.php:12
+msgid "Please remember to update the permission settings for each group."
+msgstr "Denk er alsjeblieft aan om de instellingen per gebruikersgroep ook aan te passen."
+
+#: modules/likes/likes.php:49
+msgid "Like Posts"
+msgstr "Vind blogposts leuk"
+
+#: modules/likes/likes.php:50
+msgid "Unlike Posts"
+msgstr "Vind blogposts niet meer leuk"
+
+#: modules/likes/likes.php:120
+msgid "Most liked posts"
+msgstr "Berichten met meeste vind-ik-leuks"
+
+#: modules/likes/likes.php:128 modules/likes/likes.php:186
+msgid "An ID is required to like a post."
+msgstr "Een ID is noodzakelijk om een blogpost leuk te vinden."
+
+#: modules/likes/likes.php:135 modules/likes/likes.php:193
+msgid "You do not have sufficient privileges to like posts."
+msgstr "Je hebt onvoldoende rechten om blogposts leuk te vinden."
+
+#: modules/likes/likes.php:148
+msgid "Post liked."
+msgstr "Blogposts geliked."
+
+#: modules/likes/likes.php:157 modules/likes/likes.php:224
+msgid "An ID is required to unlike a post."
+msgstr "Een ID is noodzakelijk om een blogpost niet meer leuk te vinden."
+
+#: modules/likes/likes.php:164 modules/likes/likes.php:231
+msgid "You do not have sufficient privileges to unlike posts."
+msgstr "Je hebt onvoldoende rechten om blogposts leuk te vinden."
+
+#: modules/likes/likes.php:177
+msgid "Post unliked."
+msgstr "Blogpost niet meer leuk gevonden."
+
+#: modules/likes/likes.php:211 modules/likes/likes.php:424
+msgid "You like this."
+msgstr "Je vindt dit leuk."
+
+#: modules/likes/likes.php:213 modules/likes/likes.php:426
+#, php-format
+msgid "You and %d person like this."
+msgid_plural "You and %d people like this."
+msgstr[0] "Jij en %d persoon vindt dit leuk."
+msgstr[1] "Jij en %d personen vinden dit leuk."
+
+#: modules/likes/likes.php:246 modules/likes/likes.php:381
+msgid "No likes yet."
+msgstr "Nog geen likes."
+
+#: modules/likes/likes.php:248 modules/likes/likes.php:383
+#, php-format
+msgid "%d person likes this."
+msgid_plural "%d people like this."
+msgstr[0] "%d persoon vindt dit leuk."
+msgstr[1] "%d personen vinden dit leuk."
+
+#: modules/likes/likes.php:366 modules/likes/likes.php:409
+msgid "Like!"
+msgstr "Vind dit leuk!"
+
+#: modules/likes/likes.php:370 modules/likes/likes.php:413
+msgid "Unlike!"
+msgstr "Vind dit niet meer leuk!"

@@ -1,0 +1,166 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.3.2\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/rights/admin/help/choosing_a_licence.twig:3
+msgid "Filtering Results"
+msgstr "Resultaten Filteren"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:6
+msgid "Choosing a License"
+msgstr "Een License kiezen"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:8
+msgid ""
+"When you create a piece of content for your blog, you get to decide whether "
+"or not you want your name associated with it, and whether or not it can be "
+"reproduced and reused by other people. As the &#8220;rights holder&#8221;, "
+"the license you choose to apply to your work determines which of those "
+"rights you retain and which of them you waive."
+msgstr ""
+"Wanneer je een bepaalde inhoud voor je Blog aanmaakt, dan kun je kiezen of "
+"je je naam eraan verbonden wilt zien en of het wél of niet door anderen "
+"hergebruikt kan worden.\n"
+"Als de &#8220;rechthebbende&#8221;,bepaalt de License die je kiest welke van "
+"deze rechten je exclusief voor jezelf behoudt en welke je deelt met anderen."
+
+#: modules/rights/admin/help/choosing_a_licence.twig:11
+msgid ""
+"Creative Commons is a family of licenses that you can use to donate your "
+"work to &#8220;the commons&#8221; — the body of work freely available for "
+"legal use, sharing, repurposing, and remixing. With a Creative Commons "
+"license, you can give other people permission to reproduce or reuse your "
+"work with certain restrictions. Here is a chart comparing the licenses:"
+msgstr ""
+"Creative Commons is een familie van Licenses die je kunt gebruiken om je "
+"werk aan de &#8220;the commons&#8221; — ter beschikking te stellen, "
+"vrijelijk beschikbaar voor legaal gebruik, delen, aanpassen en herindelen. "
+"Met een Creative Common License, kun je anderen toestemming geven om je werk "
+"te reproduceren of te hergebruiken onder bepaalde voorwaarden. Hier volgt "
+"een vergelijking tussen de verschillende Licenses:"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:17
+#: modules/rights/rights.php:123
+msgid "License"
+msgstr "License (vergunning)"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:19
+msgid "Others who use your work in any way must give you credit."
+msgstr ""
+"Anderen die op wat voor manier ook jouw werk gebruiken, moeten je daarbij "
+"vermelden."
+
+#: modules/rights/admin/help/choosing_a_licence.twig:20
+msgid "Attribution"
+msgstr "Vermelding"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:22
+msgid "Derivative works must be licensed under the same terms."
+msgstr ""
+"Afgeleide werken moeten een License bevatten onder dezelfde voorwaarden."
+
+#: modules/rights/admin/help/choosing_a_licence.twig:23
+msgid "ShareAlike"
+msgstr "ShareAlike"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:25
+msgid "Your work may not be reproduced or reused for commercial gain."
+msgstr ""
+"Je werk mag niet voor commerciële doeleinden worden gereproduceerd of "
+"hergebruikt."
+
+#: modules/rights/admin/help/choosing_a_licence.twig:26
+msgid "NonCommercial"
+msgstr "NietCommercieel"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:28
+msgid "Your work may be reproduced but it may not be modified."
+msgstr "Je werk mag gereproduceerd worden, maar niet worden gewijzigd."
+
+#: modules/rights/admin/help/choosing_a_licence.twig:29
+msgid "NoDerivatives"
+msgstr "GeenAfgeleiden"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:37
+#: modules/rights/rights.php:32 modules/rights/rights.php:143
+msgid "Creative Commons BY"
+msgstr "Creative Commons DOOR"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:48
+#: modules/rights/rights.php:39 modules/rights/rights.php:150
+msgid "Creative Commons BY-ND"
+msgstr "Creative Commons DOOR-ND"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:63
+#: modules/rights/rights.php:46 modules/rights/rights.php:157
+msgid "Creative Commons BY-SA"
+msgstr "Creative Commons DOOR-SA"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:78
+#: modules/rights/rights.php:53 modules/rights/rights.php:164
+msgid "Creative Commons BY-NC"
+msgstr "Creative Commons DOOR-NC"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:93
+#: modules/rights/rights.php:60 modules/rights/rights.php:171
+msgid "Creative Commons BY-NC-ND"
+msgstr "Creative Commons DOOR-NC-ND"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:110
+#: modules/rights/rights.php:67 modules/rights/rights.php:178
+msgid "Creative Commons BY-NC-SA"
+msgstr "Creative Commons DOOR-NC-SA"
+
+#: modules/rights/admin/help/choosing_a_licence.twig:127
+#: modules/rights/rights.php:74 modules/rights/rights.php:185
+msgid "Creative Commons CC0"
+msgstr "Creative Commons CC0"
+
+#: modules/rights/info.php:3
+msgid "Rights"
+msgstr "Rechten"
+
+#: modules/rights/info.php:6
+msgid ""
+"Adds post options for attribution and assigning intellectual property rights."
+msgstr ""
+"Voegt Blogpost-opties toe m.b.t. rechten inzake attributie en intellectueel "
+"eigendom."
+
+#: modules/rights/info.php:11
+msgid "Do you want to remove rights data from the database?"
+msgstr "Wil je de rechten- data uit de database verwijderen?"
+
+#: modules/rights/rights.php:25 modules/rights/rights.php:196
+msgid "All rights reserved"
+msgstr "Alle rechten voorbehouden"
+
+#: modules/rights/rights.php:81
+msgid "Orphan Work"
+msgstr "Orphan werk"
+
+#: modules/rights/rights.php:88 modules/rights/rights.php:192
+msgid "Public Domain"
+msgstr "Publiek Domein"
+
+#: modules/rights/rights.php:95
+msgid "Crown Copyright"
+msgstr "Crown kopijrechten"
+
+#: modules/rights/rights.php:105
+msgid "Original Work"
+msgstr "Origineel Werk"
+
+#: modules/rights/rights.php:114
+msgid "Rights Holder"
+msgstr "Rechtshebbende"

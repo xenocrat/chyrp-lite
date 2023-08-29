@@ -1,0 +1,34 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.3.2\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/cascade/admin/pages/cascade_settings.twig:3
+#: modules/cascade/admin/pages/cascade_settings.twig:6
+msgid "Cascade Settings"
+msgstr "Cascade Instellingen"
+
+#: modules/cascade/admin/pages/cascade_settings.twig:10
+msgid "Automatic"
+msgstr "Automatisch"
+
+#: modules/cascade/admin/pages/cascade_settings.twig:12
+msgid "Load more posts when the visitor scrolls to the bottom of the page?"
+msgstr "Laadt meer berichten, wanneer de bezoeker naar de onderkant van de pagina gaat?"
+
+#: modules/cascade/cascade.php:46 modules/cascade/info.php:3
+msgid "Cascade"
+msgstr "Cascade"
+
+#: modules/cascade/info.php:6
+msgid "Adds ajax-powered infinite scrolling to your blog."
+msgstr "Voegt ajax-powered oneindig scrollen aan je blog toe."

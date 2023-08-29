@@ -1,0 +1,211 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.3.2\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/tags/admin/help/tagging_posts.twig:3
+#: modules/tags/admin/help/tagging_posts.twig:6
+msgid "Tagging Posts"
+msgstr "Blogposts Taggen"
+
+#: modules/tags/admin/help/tagging_posts.twig:8
+msgid ""
+"A tag is a word or phrase that you want to associate with your blog post. A "
+"good use for tags is to reference people, things, or topics you mention in a "
+"post. Multiple comma separated tags can be added to a post, and if you add "
+"the same tag to more than one post, your visitors will be able to filter "
+"your blog to easily view all the posts with that tag applied."
+msgstr ""
+"Een Tag is een woord of uitdrukking die je wilt koppelen aan je Blogpost. "
+"Goed gebruik is tags maken voor mensen, dingen of onderwerpen die je noemt "
+"in je Blogpost. Meerdere, door een komma gescheiden tags kunnen aan je "
+"Blogpost worden gekoppeld en als je dezelfde tag aan verschillende Blogposts "
+"koppelt, dan zullen je bezoekers eenvoudig alle Blogposts met diezelfde tag "
+"terug kunnen vinden."
+
+#: modules/tags/admin/pages/delete_tag.twig:3
+#: modules/tags/admin/pages/delete_tag.twig:6
+msgid "Delete Tag?"
+msgstr "Verwijder Tag?"
+
+#: modules/tags/admin/pages/delete_tag.twig:8
+#, php-format
+msgid "&#8220;%s&#8221; will be permanently deleted."
+msgstr "&#8220;%s&#8221; zal permanent worden verwijderd."
+
+#: modules/tags/admin/pages/edit_tags.twig:3
+msgid "Edit Tags"
+msgstr "Wijzig Tags"
+
+#: modules/tags/admin/pages/edit_tags.twig:6
+#, php-format
+msgid "Editing Tags for &#8220;%s&#8221;"
+msgstr "Wijzigen Tags voor &#8220;%s&#8221;"
+
+#: modules/tags/admin/pages/edit_tags.twig:10
+#: modules/tags/admin/pages/manage_tags.twig:18
+#: modules/tags/admin/pages/posts_tagged.twig:29 modules/tags/tags.php:164
+#: modules/tags/tags.php:221 modules/tags/tags.php:235
+#: modules/tags/tags.php:715
+msgid "Tags"
+msgstr "Tags"
+
+#: modules/tags/admin/pages/manage_tags.twig:3
+msgid "Manage Tags"
+msgstr "Beheer Tags"
+
+#: modules/tags/admin/pages/manage_tags.twig:22
+#: modules/tags/admin/pages/posts_tagged.twig:65
+#: modules/tags/admin/pages/rename_tag.twig:10
+msgid "Name"
+msgstr "Naam"
+
+#: modules/tags/admin/pages/manage_tags.twig:23
+#: modules/tags/admin/pages/posts_tagged.twig:3
+msgid "Posts Tagged"
+msgstr "Blogposts getagged"
+
+#: modules/tags/admin/pages/posts_tagged.twig:18 modules/tags/tags.php:705
+#, php-format
+msgid "Posts tagged with &#8220;%s&#8221;"
+msgstr "Blogposts getagged met &#8220;%s&#8221;"
+
+#: modules/tags/admin/pages/posts_tagged.twig:64
+msgid "Tag Selected Post(s) with:"
+msgstr "Tag de geselecteerde Blogpost(s) met:"
+
+#: modules/tags/admin/pages/posts_tagged.twig:66
+msgid "Tag"
+msgstr "Tag"
+
+#: modules/tags/admin/pages/rename_tag.twig:3
+msgid "Rename Tag"
+msgstr "Hernoem Tag"
+
+#: modules/tags/admin/pages/rename_tag.twig:6
+#, php-format
+msgid "Renaming Tag &#8220;%s&#8221;"
+msgstr "Hernoemen Tag &#8220;%s&#8221;"
+
+#: modules/tags/admin/pages/rename_tag.twig:15
+msgid "Rename"
+msgstr "Hernoemen"
+
+#: modules/tags/info.php:3
+msgid "Tagginator"
+msgstr "Tagginator"
+
+#: modules/tags/info.php:6
+msgid "Adds tagging functionality to posts."
+msgstr "Voegt Tag-functionaliteit toe aan je Blogposts."
+
+#: modules/tags/info.php:11
+msgid "Do you want to remove your tags from the database?"
+msgstr "Wil je jouw Tags verwijderen uit de database?"
+
+#: modules/tags/tags.php:166
+msgid "(comma separated)"
+msgstr "(komma gescheiden)"
+
+#: modules/tags/tags.php:258 modules/tags/tags.php:296
+msgid "You do not have sufficient privileges to manage tags."
+msgstr "Je hebt onvoldoende rechten om Tags te beheren."
+
+#: modules/tags/tags.php:373
+msgid "An ID is required to edit tags."
+msgstr "Een ID is noodzakelijk om Tags aan te passen."
+
+#: modules/tags/tags.php:407
+msgid "An ID is required to update tags."
+msgstr "Een ID is noodzakelijk om Tags te updaten."
+
+#: modules/tags/tags.php:428
+msgid "Tags updated."
+msgstr "Tags bijgewerkt."
+
+#: modules/tags/tags.php:437 modules/tags/tags.php:465
+msgid "You do not have sufficient privileges to rename tags."
+msgstr "Je hebt onvoldoende rechten om Tags te hernoemen."
+
+#: modules/tags/tags.php:442 modules/tags/tags.php:476
+#: modules/tags/tags.php:525 modules/tags/tags.php:559
+msgid "No Tag Specified"
+msgstr "Geen Tag geselecteerd"
+
+#: modules/tags/tags.php:443 modules/tags/tags.php:477
+msgid "Please specify the tag you want to rename."
+msgstr "Selecteer alsjeblieft de Tag die je hernoemen wilt."
+
+#: modules/tags/tags.php:451 modules/tags/tags.php:534
+msgid "Tag not found."
+msgstr "Tag niet gevonden."
+
+#: modules/tags/tags.php:484
+msgid "Name cannot be blank."
+msgstr "Naam kan niet leeg zijn."
+
+#: modules/tags/tags.php:511
+msgid "Tag renamed."
+msgstr "Tag hernoemd."
+
+#: modules/tags/tags.php:520 modules/tags/tags.php:548
+msgid "You do not have sufficient privileges to delete tags."
+msgstr "Je hebt onvoldoende rechten om Tags te verwijderen."
+
+#: modules/tags/tags.php:526 modules/tags/tags.php:560
+msgid "Please specify the tag you want to delete."
+msgstr "Selecteer alsjeblieft de Tag die je verwijderen wilt."
+
+#: modules/tags/tags.php:589
+msgid "Tag deleted."
+msgstr "Tag verwijderd."
+
+#: modules/tags/tags.php:598
+msgid "You do not have sufficient privileges to add tags."
+msgstr "Je hebt onvoldoende rechten om Tags toe te voegen."
+
+#: modules/tags/tags.php:609
+msgid "No posts selected."
+msgstr "Geen Blogposts geselecteerd."
+
+#: modules/tags/tags.php:615
+msgid "No tags specified."
+msgstr "Geen Tags geselecteerd."
+
+#: modules/tags/tags.php:631
+msgid "Posts tagged."
+msgstr "Blogposts getagged."
+
+#: modules/tags/tags.php:638
+msgid "You did not specify a tag."
+msgstr "Je hebt geen Tag geselecteerd."
+
+#: modules/tags/tags.php:643 modules/tags/tags.php:657
+#: modules/tags/tags.php:683
+msgid "Invalid Tag"
+msgstr "Ongeldige Tag"
+
+#: modules/tags/tags.php:652
+msgid "The tag you specified was not found."
+msgstr "De Tag die je gekozen hebt is niet gevonden."
+
+#: modules/tags/tags.php:678
+msgid "There are no posts with the tag you specified."
+msgstr "Er zijn geen Blogposts met de geselecteerde Tag."
+
+#: modules/tags/tags.php:805
+#, php-format
+msgid "%d post tagged with &#8220;%s&#8221;"
+msgid_plural "%d posts tagged with &#8220;%s&#8221;"
+msgstr[0] "%d blogpost getagged met &#8220;%s&#8221;"
+msgstr[1] "%d blogposts getagged met &#8220;%s&#8221;"

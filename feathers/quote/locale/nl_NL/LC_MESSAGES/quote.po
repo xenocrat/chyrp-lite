@@ -1,0 +1,29 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.3.2\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: feathers/quote/info.php:3 feathers/quote/quote.php:8
+msgid "Quote"
+msgstr "Quote"
+
+#: feathers/quote/info.php:6
+msgid "Post quotes and cite sources."
+msgstr "Blogpost quotes en citeer-bronnen."
+
+#: feathers/quote/quote.php:16
+msgid "Source"
+msgstr "Bron"
+
+#: feathers/quote/quote.php:35 feathers/quote/quote.php:64
+msgid "Quote can't be empty."
+msgstr "Quote kan niet leeg zijn."

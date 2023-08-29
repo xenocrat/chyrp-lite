@@ -1,0 +1,55 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.3.2\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: feathers/uploader/admin/help/uploader_source.twig:3
+#: feathers/uploader/admin/help/uploader_source.twig:6
+msgid "Upload Source"
+msgstr "Upload bron"
+
+#: feathers/uploader/admin/help/uploader_source.twig:8
+msgid "This is a URL that will take visitors to the original resource."
+msgstr "Deze URL brengt bezoekers naar de originele bron."
+
+#: feathers/uploader/info.php:3
+msgid "Uploader"
+msgstr "Uploader"
+
+#: feathers/uploader/info.php:6
+msgid "Upload files and make them available for visitors to download."
+msgstr "Upload bestanden en maak ze beschikbaar voor bezoekers om te downloaden."
+
+#: feathers/uploader/uploader.php:10
+msgid "Title"
+msgstr "Titel"
+
+#: feathers/uploader/uploader.php:18
+msgid "Files"
+msgstr "Bestanden"
+
+#: feathers/uploader/uploader.php:21
+#, php-format
+msgid "(Max. file size: %d Megabytes)"
+msgstr "(Max. bestandsgrootte: %d Megabytes)"
+
+#: feathers/uploader/uploader.php:28
+msgid "Caption"
+msgstr "Toelichting"
+
+#: feathers/uploader/uploader.php:78
+msgid "You did not select any files to upload."
+msgstr "Je hebt geen bestanden geselecteerd om te uploaden."
+
+#: feathers/uploader/uploader.php:215
+msgid "Source"
+msgstr "Bron"

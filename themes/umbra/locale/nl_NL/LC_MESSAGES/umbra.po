@@ -1,0 +1,369 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.3.2\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: themes/umbra/content/comment.twig:4
+#, php-format
+msgid "%s:"
+msgstr "%s:"
+
+#: themes/umbra/content/comment.twig:6
+#, php-format
+msgid "%s said:"
+msgstr "%s zei:"
+
+#: themes/umbra/content/comment.twig:9
+msgid "This comment is awaiting moderation."
+msgstr "Deze opmerking is in afwachting van moderatie."
+
+#: themes/umbra/content/post.twig:6
+msgid "Tags"
+msgstr "Tags"
+
+#: themes/umbra/content/post.twig:15 themes/umbra/feathers/audio.twig:6
+#: themes/umbra/feathers/photo.twig:6 themes/umbra/feathers/quote.twig:6
+#: themes/umbra/feathers/text.twig:6 themes/umbra/feathers/uploader.twig:6
+#: themes/umbra/feathers/video.twig:6 themes/umbra/pages/archive.twig:31
+#: themes/umbra/pages/page.twig:6
+#, php-format
+msgid "Permanent link to &#8220;%s&#8221;"
+msgstr "Permalink naar &#8220;%s&#8221;"
+
+#: themes/umbra/content/post.twig:17 themes/umbra/layouts/default.twig:55
+msgid "Draft"
+msgstr "Concept"
+
+#: themes/umbra/content/post.twig:19
+msgid "Scheduled"
+msgstr "Geagendeerd"
+
+#: themes/umbra/content/post.twig:21
+msgid "Pinned"
+msgstr "Gepind"
+
+#: themes/umbra/content/post.twig:27 themes/umbra/pages/view.twig:11
+msgid "[Untitled]"
+msgstr "[Zonder titel]"
+
+#: themes/umbra/content/post.twig:35
+#, php-format
+msgid "&copy; %s, %s."
+msgstr "&copy; %s, %s."
+
+#: themes/umbra/content/post.twig:37
+#, php-format
+msgid "&copy; %s."
+msgstr "&copy; %s."
+
+#: themes/umbra/feathers/missing.twig:4
+msgid "The post cannot be displayed because the theme does not support it."
+msgstr "Deze Blogpost kan niet getoond worden, omdat het thema hem niet ondersteunt."
+
+#: themes/umbra/feathers/uploader.twig:21
+msgid "File attachment:"
+msgstr "Berichts- bijlage:"
+
+#: themes/umbra/forms/comment/edit.twig:2
+msgid "Comment"
+msgstr "Opmerking"
+
+#: themes/umbra/forms/comment/edit.twig:5
+msgid "Author"
+msgstr "Schrijver"
+
+#: themes/umbra/forms/comment/edit.twig:8
+msgid "Author's website"
+msgstr "Schrijvers' website"
+
+#: themes/umbra/forms/comment/edit.twig:10
+msgid "Author's email"
+msgstr "Schrijvers' email"
+
+#: themes/umbra/forms/comment/edit.twig:15
+msgid "Timestamp"
+msgstr "Tijdstempel"
+
+#: themes/umbra/forms/comment/edit.twig:18
+msgid "Status"
+msgstr "Status"
+
+#: themes/umbra/forms/comment/edit.twig:20
+msgid "Approved"
+msgstr "Goedgekeurd"
+
+#: themes/umbra/forms/comment/edit.twig:21
+msgid "Denied"
+msgstr "Afgewezen"
+
+#: themes/umbra/forms/comment/edit.twig:22
+msgid "Spam"
+msgstr "Spam"
+
+#: themes/umbra/forms/comment/edit.twig:27
+msgid "Email Notifications"
+msgstr "Email Notificaties"
+
+#: themes/umbra/forms/comment/edit.twig:35
+msgid "Save"
+msgstr "Opslaan"
+
+#: themes/umbra/forms/comment/edit.twig:36
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: themes/umbra/forms/comment/new.twig:3
+#, php-format
+msgid "%s's comment"
+msgstr "%s's opmerking"
+
+#: themes/umbra/forms/comment/new.twig:5
+msgid "Your name"
+msgstr "Je naam"
+
+#: themes/umbra/forms/comment/new.twig:7
+msgid "Your email"
+msgstr "Je email"
+
+#: themes/umbra/forms/comment/new.twig:9
+msgid "Your website"
+msgstr "Je website"
+
+#: themes/umbra/forms/comment/new.twig:12
+msgid "Your comment"
+msgstr "Je opmerking"
+
+#: themes/umbra/forms/comment/new.twig:16
+msgid "Markdown is allowed."
+msgstr "Markdown is toegestaan."
+
+#: themes/umbra/forms/comment/new.twig:18
+msgid "HTML tags allowed:"
+msgstr "Toegestane HTML-Tags:"
+
+#: themes/umbra/forms/comment/new.twig:20
+msgid "HTML is not allowed."
+msgstr "HTML is niet toegestaan."
+
+#: themes/umbra/forms/comment/new.twig:24
+msgid "Notify me when others comment"
+msgstr "Bericht me wanneer anderen een opmerking plaatsen"
+
+#: themes/umbra/forms/comment/new.twig:37
+msgid "Speak"
+msgstr "Praat"
+
+#: themes/umbra/forms/user/controls.twig:5 themes/umbra/layouts/default.twig:60
+msgid "Controls"
+msgstr "Instellingen"
+
+#: themes/umbra/forms/user/controls.twig:7
+msgid "Full name"
+msgstr "Volledige naam"
+
+#: themes/umbra/forms/user/controls.twig:9
+#: themes/umbra/forms/user/register.twig:13
+#: themes/umbra/layouts/default.twig:37
+msgid "Email"
+msgstr "Email"
+
+#: themes/umbra/forms/user/controls.twig:11
+msgid "Website"
+msgstr "Website"
+
+#: themes/umbra/forms/user/controls.twig:13
+#: themes/umbra/forms/user/reset_password.twig:7
+msgid "New password?"
+msgstr "Nieuw wachtwoord?"
+
+#: themes/umbra/forms/user/controls.twig:15
+#: themes/umbra/forms/user/reset_password.twig:9
+msgid "Confirm"
+msgstr "Bevestig"
+
+#: themes/umbra/forms/user/controls.twig:20
+msgid "Update"
+msgstr "Bijwerken"
+
+#: themes/umbra/forms/user/login.twig:5 themes/umbra/forms/user/login.twig:14
+#: themes/umbra/layouts/default.twig:72
+msgid "Log in"
+msgstr "Log in"
+
+#: themes/umbra/forms/user/login.twig:7
+#: themes/umbra/forms/user/lost_password.twig:7
+#: themes/umbra/forms/user/register.twig:7
+msgid "Username"
+msgstr "Gebruikersnaam"
+
+#: themes/umbra/forms/user/login.twig:9 themes/umbra/forms/user/register.twig:9
+#: themes/umbra/forms/user/register.twig:11
+msgid "Password"
+msgstr "Wachtwoord"
+
+#: themes/umbra/forms/user/login.twig:15
+msgid "Help!"
+msgstr "Help!"
+
+#: themes/umbra/forms/user/lost_password.twig:5
+msgid "Lost password"
+msgstr "Wachtwoord verloren"
+
+#: themes/umbra/forms/user/lost_password.twig:11
+#: themes/umbra/forms/user/reset_password.twig:16
+msgid "Submit"
+msgstr "Bevestig"
+
+#: themes/umbra/forms/user/register.twig:5
+#: themes/umbra/forms/user/register.twig:19
+#: themes/umbra/layouts/default.twig:68
+msgid "Register"
+msgstr "Registreer"
+
+#: themes/umbra/forms/user/register.twig:11
+msgid "(again)"
+msgstr "(opnieuw)"
+
+#: themes/umbra/forms/user/reset_password.twig:5
+msgid "Reset password"
+msgstr "Wijzig wachtwoord"
+
+#: themes/umbra/info.php:3
+msgid "Umbra"
+msgstr "Umbra"
+
+#: themes/umbra/info.php:6
+msgid "A dark tumbleblog theme for Chyrp Lite."
+msgstr "Een donker Tumbleblog thema voor Chyrp Lite."
+
+#: themes/umbra/layouts/default.twig:35
+msgid "Links"
+msgstr "Links"
+
+#: themes/umbra/layouts/default.twig:40
+msgid "Feed"
+msgstr "Feed"
+
+#: themes/umbra/layouts/default.twig:43
+msgid "Archive"
+msgstr "Archief"
+
+#: themes/umbra/layouts/default.twig:47
+msgid "Admin"
+msgstr "Beheer"
+
+#: themes/umbra/layouts/default.twig:51
+msgid "Write"
+msgstr "Schrijf"
+
+#: themes/umbra/layouts/default.twig:63
+msgid "Log out"
+msgstr "Log uit"
+
+#: themes/umbra/layouts/default.twig:77
+msgid "Search&hellip;"
+msgstr "Zoek&hellip;"
+
+#: themes/umbra/layouts/default.twig:77
+msgid "Search this blog"
+msgstr "Doorzoek deze Blog"
+
+#: themes/umbra/layouts/default.twig:78
+msgid "Search"
+msgstr "Zoek"
+
+#: themes/umbra/layouts/default.twig:88
+#, php-format
+msgid "Page %d"
+msgstr "Pagina %d"
+
+#: themes/umbra/layouts/default.twig:99
+#, php-format
+msgid "Called from %s on line %d at %s seconds."
+msgstr "Aangeroepen vanuit %s op regel %d bij %s seconden."
+
+#: themes/umbra/pages/403.twig:4
+msgid "Forbidden."
+msgstr "Verboden."
+
+#: themes/umbra/pages/404.twig:4
+msgid "Not found."
+msgstr "Niet gevonden."
+
+#: themes/umbra/pages/archive.twig:11
+msgid "F Y"
+msgstr "F Y"
+
+#: themes/umbra/pages/archive.twig:51
+#, php-format
+msgid "Archive of %s"
+msgstr "Archief van %s"
+
+#: themes/umbra/pages/archive.twig:60
+msgid "There aren't any posts in the timeframe you specified."
+msgstr "Er zijn geen Blogposts in het door jou gespecificeerde tijdvak."
+
+#: themes/umbra/pages/author.twig:5
+#, php-format
+msgid "Posts created by &#8220;%s&#8221;"
+msgstr "Blogposts gemaakt door &#8220;%s&#8221;"
+
+#: themes/umbra/pages/author.twig:10
+msgid "This user hasn't created any posts."
+msgstr "Deze gebruiker heeft geen Blogposts gemaakt."
+
+#: themes/umbra/pages/category.twig:5
+#, php-format
+msgid "Posts in category &#8220;%s&#8221;"
+msgstr "Blogposts in categorie &#8220;%s&#8221;"
+
+#: themes/umbra/pages/drafts.twig:5
+msgid "Drafts"
+msgstr "Concepten"
+
+#: themes/umbra/pages/drafts.twig:10
+msgid "You don't have any drafts."
+msgstr "Je hebt geen concepten."
+
+#: themes/umbra/pages/index.twig:8 themes/umbra/pages/tags.twig:19
+msgid "Nothing here yet!"
+msgstr "Nog niets te zien hier!"
+
+#: themes/umbra/pages/search.twig:5
+#, php-format
+msgid "Search results for &#8220;%s&#8221;"
+msgstr "Zoekresultaten voor &#8220;%s&#8221;"
+
+#: themes/umbra/pages/search.twig:7
+msgid "Your search did not return any results."
+msgstr "Er zijn geen resultaten voor jouw zoekopdracht."
+
+#: themes/umbra/pages/tag.twig:5
+#, php-format
+msgid "Posts tagged with &#8220;%s&#8221;"
+msgstr "Blogposts getagged met &#8220;%s&#8221;"
+
+#: themes/umbra/pages/tags.twig:6
+msgid "Tag cloud"
+msgstr "Tag Wolk"
+
+#: themes/umbra/pages/updated.twig:5
+msgid "Updated posts"
+msgstr "Bijgewerkte Blogposts"
+
+#: themes/umbra/pages/updated.twig:10
+msgid "There aren't any updated posts."
+msgstr "Er zijn geen bijgewerkte Blogposts."
+
+#: themes/umbra/pages/view.twig:8
+msgid "Webmentions"
+msgstr "Webmentions"

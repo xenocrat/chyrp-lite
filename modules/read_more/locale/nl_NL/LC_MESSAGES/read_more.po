@@ -1,0 +1,44 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.3.2\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/read_more/admin/pages/read_more_settings.twig:3
+#: modules/read_more/admin/pages/read_more_settings.twig:6
+msgid "Read More Settings"
+msgstr "Lees Meer Instellingen"
+
+#: modules/read_more/admin/pages/read_more_settings.twig:10
+msgid "Apply to Feeds"
+msgstr "Pas ook toe bij Feeds"
+
+#: modules/read_more/admin/pages/read_more_settings.twig:15
+msgid "Default Text"
+msgstr "Standaard tekst"
+
+#: modules/read_more/info.php:3 modules/read_more/read_more.php:60
+msgid "Read More"
+msgstr "Lees Meer"
+
+#: modules/read_more/info.php:6
+msgid ""
+"Add &#8220;&hellip;more&#8221; links to your blog index by typing "
+"<code>&lt;!--more--&gt;</code> or <code>&lt;!--more custom text--&gt;</code> "
+"in your posts."
+msgstr ""
+"Voeg &#8220;&hellip;meer&#8221; links aan je blogindex toe, door te typen "
+"<code>&lt;!--more--&gt;</code> of <code>&lt;!--more eigen tekst--&gt;</code> "
+"in je Blogposts."
+
+#: modules/read_more/read_more.php:81
+msgid "&hellip;more"
+msgstr "&hellip;meer"

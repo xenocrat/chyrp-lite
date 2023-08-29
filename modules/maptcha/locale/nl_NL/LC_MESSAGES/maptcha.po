@@ -1,0 +1,70 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.3.2\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/maptcha/info.php:3
+msgid "MAPTCHA"
+msgstr "MAPTCHA"
+
+#: modules/maptcha/info.php:6
+msgid "Ask users to solve simple mathematics problems to prevent spam."
+msgstr "Vraag gebruikers om een eenvoudig rekenkundig probleem op te lossen, om spam te voorkomen."
+
+#: modules/maptcha/maptcha.php:25
+#, php-format
+msgid "How much is %d&nbsp;&#43;&nbsp;%d&nbsp;?"
+msgstr "Hoe veel is %d&nbsp;&#43;&nbsp;%d&nbsp;?"
+
+#: modules/maptcha/maptcha.php:29
+#, php-format
+msgid "How much is %d&nbsp;&#8722;&nbsp;%d&nbsp;?"
+msgstr "Hoe veel is %d&nbsp;&#8722;&nbsp;%d&nbsp;?"
+
+#: modules/maptcha/maptcha.php:33
+#, php-format
+msgid "How much is %d&nbsp;&#215;&nbsp;%d&nbsp;?"
+msgstr "Hoe veel is %d&nbsp;&#215;&nbsp;%d&nbsp;?"
+
+#: modules/maptcha/maptcha.php:37
+#, php-format
+msgid "How much is %d&nbsp;&plus;&nbsp;%d&nbsp;?"
+msgstr "Hoe veel is %d&nbsp;&plus;&nbsp;%d&nbsp;?"
+
+#: modules/maptcha/maptcha.php:41
+#, php-format
+msgid "How much is %d&nbsp;&minus;&nbsp;%d&nbsp;?"
+msgstr "Hoe veel is %d&nbsp;&minus;&nbsp;%d&nbsp;?"
+
+#: modules/maptcha/maptcha.php:45
+#, php-format
+msgid "How much is %d&nbsp;&times;&nbsp;%d&nbsp;?"
+msgstr "Hoe veel is %d&nbsp;&times;&nbsp;%d&nbsp;?"
+
+#: modules/maptcha/maptcha.php:49
+#, php-format
+msgid "How much is %d&nbsp;&#x0002B;&nbsp;%d&nbsp;?"
+msgstr "Hoe veel is %d&nbsp;&#x0002B;&nbsp;%d&nbsp;?"
+
+#: modules/maptcha/maptcha.php:53
+#, php-format
+msgid "How much is %d&nbsp;&#x02212;&nbsp;%d&nbsp;?"
+msgstr "Hoe veel is %d&nbsp;&#x02212;&nbsp;%d&nbsp;?"
+
+#: modules/maptcha/maptcha.php:57
+#, php-format
+msgid "How much is %d&nbsp;&#x000D7;&nbsp;%d&nbsp;?"
+msgstr "Hoe veel is %d&nbsp;&#x000D7;&nbsp;%d&nbsp;?"
+
+#: modules/maptcha/maptcha.php:65
+msgid "Yay mathemetics!"
+msgstr "Jippie, rekenkunde!"

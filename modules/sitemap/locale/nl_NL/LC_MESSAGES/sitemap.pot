@@ -1,0 +1,71 @@
+#. This file is distributed under the same license as the Chyrp Lite package.
+
+#: modules/sitemap/admin/pages/sitemap_settings.twig:3
+#: modules/sitemap/admin/pages/sitemap_settings.twig:6
+msgid "Sitemap Settings"
+msgstr ""
+
+#: modules/sitemap/admin/pages/sitemap_settings.twig:10
+msgid "Sitemap Path"
+msgstr ""
+
+#: modules/sitemap/admin/pages/sitemap_settings.twig:13
+msgid "The directory to which the sitemap is written."
+msgstr ""
+
+#: modules/sitemap/admin/pages/sitemap_settings.twig:17
+msgid "Blog is Updated"
+msgstr ""
+
+#: modules/sitemap/admin/pages/sitemap_settings.twig:25
+msgid "Pages are Edited"
+msgstr ""
+
+#: modules/sitemap/admin/pages/sitemap_settings.twig:33
+msgid "Posts are Edited"
+msgstr ""
+
+#: modules/sitemap/admin/pages/sitemap_settings.twig:42
+msgid "These values hint to search engines how frequently they should crawl your site."
+msgstr ""
+
+#: modules/sitemap/info.php:3
+msgid "Sitemap Generator"
+msgstr ""
+
+#: modules/sitemap/info.php:6
+msgid "Creates a <em>sitemap.xml</em> file on your server to help search engines index your blog."
+msgstr ""
+
+#: modules/sitemap/sitemap.php:36
+msgid "Sitemap"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:54
+msgid "Hourly"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:55
+msgid "Daily"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:56
+msgid "Weekly"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:57
+msgid "Monthly"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:58
+msgid "Yearly"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:59
+msgid "Never"
+msgstr ""
+
+#: modules/sitemap/sitemap.php:83
+msgid "Could not determine the absolute path to the Sitemap."
+msgstr ""
+
