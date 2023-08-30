@@ -2830,6 +2830,17 @@
     #---------------------------------------------
 
     /**
+     * Function: esce
+     * Escapes a string with backslashes and echoes it to output.
+     *
+     * Parameters:
+     *     $string - The string to escape and echo.
+     */
+    function esce($string): void {
+        echo addslashes($string);
+    }
+
+    /**
      * Function: json_set
      * JSON encodes a value and checks for errors.
      *
