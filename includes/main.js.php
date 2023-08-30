@@ -13,18 +13,19 @@ $(function() {
     Page.init();
 });
 var Route = {
-    action: '<?php echo $route->action; ?>'
+    action: '<?php esce($route->action); ?>'
 }
 var Visitor = {
-    id: <?php echo $visitor->id; ?>,
-    token: '<?php echo authenticate(); ?>'
+    id: <?php esce($visitor->id); ?>,
+    token: '<?php esce(authenticate()); ?>'
 }
 var Site = {
-    url: '<?php echo addslashes($config->url); ?>',
-    chyrp_url: '<?php echo addslashes($config->chyrp_url); ?>'
+    url: '<?php esce($config->url); ?>',
+    chyrp_url: '<?php esce($config->chyrp_url); ?>',
+    ajax_url: '<?php esce(unfix(url('/', 'AjaxController'))); ?>'
 }
 var Oops = {
-    message: '<?php echo __("Oops! Something went wrong on this web page."); ?>'
+    message: '<?php esce(__("Oops! Something went wrong on this web page.")); ?>'
 }
 var Post = {
     failed: false,
@@ -33,7 +34,7 @@ var Post = {
             if (!Post.failed) {
                 e.preventDefault();
 
-                if (confirm('<?php echo __("Are you sure you want to delete this post?"); ?>')) {
+                if (confirm('<?php esce(__("Are you sure you want to delete this post?")); ?>')) {
                     var id = $(this).attr("id");
                     var post_id = (!!id) ? id.replace(/^post_delete_/, "") : "0" ;
                     Post.destroy(post_id);
@@ -44,16 +45,20 @@ var Post = {
     destroy: function(id) {
         var thisPost = $("#post_" + id).loader();
 
-        $.post("<?php echo url('/', 'AjaxController'); ?>", {
+        $.post(Site.ajax_url, {
             action: "destroy_post",
             id: id,
             hash: Visitor.token
         }, function(response) {
             thisPost.loader(true).fadeOut("fast", function() {
+                var prev_bookmark = $(this).prev("article.post").find("a[rel='bookmark']").first();
                 $(this).remove();
 
                 if (!$("article.post").length)
                     window.location.href = Site.url;
+
+                if (prev_bookmark.length)
+                    prev_bookmark.focus();
             });
         }, "json").fail(Post.panic);
     },
@@ -74,7 +79,7 @@ var Page = {
             if (!Page.failed) {
                 e.preventDefault();
 
-                if (confirm('<?php echo __("Are you sure you want to delete this page and its child pages?"); ?>')) {
+                if (confirm('<?php esce(__("Are you sure you want to delete this page and its child pages?"));?>')) {
                     var id = $(this).attr("id");
                     var page_id = (!!id) ? id.replace(/^page_delete_/, "") : "0" ;
                     Page.destroy(page_id);
@@ -85,7 +90,7 @@ var Page = {
     destroy: function(id) {
         var thisPage = $("#page_" + id).loader();
 
-        $.post("<?php echo url('/', 'AjaxController'); ?>", {
+        $.post(Site.ajax_url, {
             action: "destroy_page",
             id: id,
             hash: Visitor.token

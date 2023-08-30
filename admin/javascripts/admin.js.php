@@ -44,13 +44,13 @@ function toggle_all() {
         parent.append(
             [$("<label>", {
                 "for": master
-            }).text('<?php echo __("Toggle All", "admin"); ?>'),
+            }).text('<?php esce(__("Toggle All", "admin")); ?>'),
             $("<input>", {
                 "type": "checkbox",
                 "name": "toggle",
                 "id": master,
                 "class": "checkbox",
-                "aria-label": '<?php echo __("Toggle All", "admin"); ?>'
+                "aria-label": '<?php esce(__("Toggle All", "admin")); ?>'
             }).prop("checked", all_on).click(function(e) {
                 slaves.prop("checked", $(this).prop("checked"));
             })]
@@ -129,7 +129,7 @@ function validate_passwords() {
 
         if (password1 != password2) {
             e.preventDefault();
-            alert('<?php echo __("Passwords do not match."); ?>');
+            alert('<?php esce(__("Passwords do not match.")); ?>');
         }
     });
 }
@@ -137,7 +137,7 @@ function validate_passwords() {
 function confirm_submit() {
     $("form[data-confirm]").on("submit.confirm", function(e) {
         var text = $(this).attr("data-confirm") ||
-                   '<?php echo __("Are you sure you want to proceed?", "admin"); ?>' ;
+                   '<?php esce(__("Are you sure you want to proceed?", "admin")); ?>' ;
 
         if (!confirm(text.replace(/<[^>]+>/g, "")))
             e.preventDefault();
@@ -145,7 +145,7 @@ function confirm_submit() {
 
     $("button[data-confirm]").on("click.confirm", function(e) {
         var text = $(this).attr("data-confirm") ||
-                   '<?php echo __("Are you sure you want to proceed?", "admin"); ?>' ;
+                   '<?php esce(__("Are you sure you want to proceed?", "admin")); ?>' ;
 
         if (!confirm(text.replace(/<[^>]+>/g, "")))
             e.preventDefault();
@@ -166,18 +166,19 @@ function solo_submit() {
     });
 }
 var Route = {
-    action: '<?php echo $route->action; ?>'
+    action: '<?php esce($route->action); ?>'
 }
 var Visitor = {
-    id: <?php echo $visitor->id; ?>,
-    token: '<?php echo authenticate(); ?>'
+    id: <?php esce($visitor->id); ?>,
+    token: '<?php esce(authenticate()); ?>'
 }
 var Site = {
-    url: '<?php echo addslashes($config->url); ?>',
-    chyrp_url: '<?php echo addslashes($config->chyrp_url); ?>'
+    url: '<?php esce($config->url); ?>',
+    chyrp_url: '<?php esce($config->chyrp_url); ?>',
+    ajax_url: '<?php esce(unfix(url('/', 'AjaxController'))); ?>'
 }
 var Oops = {
-    message: '<?php echo __("Oops! Something went wrong on this web page."); ?>'
+    message: '<?php esce(__("Oops! Something went wrong on this web page.")); ?>'
 }
 var Help = {
     init: function() {
@@ -189,7 +190,7 @@ var Help = {
     show: function(href) {
         $("<div>", {
             "role": "region",
-            "aria-label": '<?php echo __("Modal window", "admin"); ?>'
+            "aria-label": '<?php esce(__("Modal window", "admin")); ?>'
         }).addClass("iframe_background").append(
             [
                 $("<iframe>", {
@@ -202,14 +203,14 @@ var Help = {
                     "href": "#",
                     "role": "button",
                     "accesskey": "x",
-                    "aria-label": '<?php echo __("Close", "admin"); ?>'
+                    "aria-label": '<?php esce(__("Close", "admin")); ?>'
                 }).addClass("iframe_close_gadget").click(function(e) {
                     e.preventDefault();
                     $(this).parent().remove();
                 }).append(
                     $("<img>", {
                         "src": Site.chyrp_url + '/admin/images/icons/close.svg',
-                        "alt": '<?php echo __("close", "admin"); ?>'
+                        "alt": '<?php esce(__("close", "admin")); ?>'
                     })
                 )
             ]
@@ -230,14 +231,14 @@ var Write = {
             toolbar.append(
                 $("<button>", {
                     "type": "button",
-                    "title": '<?php echo __("Heading", "admin"); ?>',
-                    "aria-label": '<?php echo __("Heading", "admin"); ?>'
+                    "title": '<?php esce(__("Heading", "admin")); ?>',
+                    "aria-label": '<?php esce(__("Heading", "admin")); ?>'
                 }).addClass("emblem toolbar").click(function(e) {
                     Write.formatting(target, "h3");
                 }).append(
                     $("<img>", {
                         "src": Site.chyrp_url + '/admin/images/icons/heading.svg',
-                        "alt": '<?php echo __("heading", "admin"); ?>'
+                        "alt": '<?php esce(__("heading", "admin")); ?>'
                     })
                 )
             );
@@ -245,14 +246,14 @@ var Write = {
             toolbar.append(
                 $("<button>", {
                     "type": "button",
-                    "title": '<?php echo __("Strong", "admin"); ?>',
-                    "aria-label": '<?php echo __("Strong", "admin"); ?>'
+                    "title": '<?php esce(__("Strong", "admin")); ?>',
+                    "aria-label": '<?php esce(__("Strong", "admin")); ?>'
                 }).addClass("emblem toolbar").click(function(e) {
                     Write.formatting(target, "strong");
                 }).append(
                     $("<img>", {
                         "src": Site.chyrp_url + '/admin/images/icons/bold.svg',
-                        "alt": '<?php echo __("strong", "admin"); ?>'
+                        "alt": '<?php esce(__("strong", "admin")); ?>'
                     })
                 )
             );
@@ -260,14 +261,14 @@ var Write = {
             toolbar.append(
                 $("<button>", {
                     "type": "button",
-                    "title": '<?php echo __("Emphasis", "admin"); ?>',
-                    "aria-label": '<?php echo __("Emphasis", "admin"); ?>'
+                    "title": '<?php esce(__("Emphasis", "admin")); ?>',
+                    "aria-label": '<?php esce(__("Emphasis", "admin")); ?>'
                 }).addClass("emblem toolbar").click(function(e) {
                     Write.formatting(target, "em");
                 }).append(
                     $("<img>", {
                         "src": Site.chyrp_url + '/admin/images/icons/italic.svg',
-                        "alt": '<?php echo __("emphasis", "admin"); ?>'
+                        "alt": '<?php esce(__("emphasis", "admin")); ?>'
                     })
                 )
             );
@@ -275,14 +276,14 @@ var Write = {
             toolbar.append(
                 $("<button>", {
                     "type": "button",
-                    "title": '<?php echo __("Strikethrough", "admin"); ?>',
-                    "aria-label": '<?php echo __("Strikethrough", "admin"); ?>'
+                    "title": '<?php esce(__("Strikethrough", "admin")); ?>',
+                    "aria-label": '<?php esce(__("Strikethrough", "admin")); ?>'
                 }).addClass("emblem toolbar").click(function(e) {
                     Write.formatting(target, "del");
                 }).append(
                     $("<img>", {
                         "src": Site.chyrp_url + '/admin/images/icons/strikethrough.svg',
-                        "alt": '<?php echo __("strikethrough", "admin"); ?>'
+                        "alt": '<?php esce(__("strikethrough", "admin")); ?>'
                     })
                 )
             );
@@ -290,14 +291,14 @@ var Write = {
             toolbar.append(
                 $("<button>", {
                     "type": "button",
-                    "title": '<?php echo __("Highlight", "admin"); ?>',
-                    "aria-label": '<?php echo __("Highlight", "admin"); ?>'
+                    "title": '<?php esce(__("Highlight", "admin")); ?>',
+                    "aria-label": '<?php esce(__("Highlight", "admin")); ?>'
                 }).addClass("emblem toolbar").click(function(e) {
                     Write.formatting(target, "mark");
                 }).append(
                     $("<img>", {
                         "src": Site.chyrp_url + '/admin/images/icons/highlight.svg',
-                        "alt": '<?php echo __("highlight", "admin"); ?>'
+                        "alt": '<?php esce(__("highlight", "admin")); ?>'
                     })
                 )
             );
@@ -305,14 +306,14 @@ var Write = {
             toolbar.append(
                 $("<button>", {
                     "type": "button",
-                    "title": '<?php echo __("Code", "admin"); ?>',
-                    "aria-label": '<?php echo __("Code", "admin"); ?>'
+                    "title": '<?php esce(__("Code", "admin")); ?>',
+                    "aria-label": '<?php esce(__("Code", "admin")); ?>'
                 }).addClass("emblem toolbar").click(function(e) {
                     Write.formatting(target, "code");
                 }).append(
                     $("<img>", {
                         "src": Site.chyrp_url + '/admin/images/icons/code.svg',
-                        "alt": '<?php echo __("code", "admin"); ?>'
+                        "alt": '<?php esce(__("code", "admin")); ?>'
                     })
                 )
             );
@@ -320,14 +321,14 @@ var Write = {
             toolbar.append(
                 $("<button>", {
                     "type": "button",
-                    "title": '<?php echo __("Hyperlink", "admin"); ?>',
-                    "aria-label": '<?php echo __("Hyperlink", "admin"); ?>'
+                    "title": '<?php esce(__("Hyperlink", "admin")); ?>',
+                    "aria-label": '<?php esce(__("Hyperlink", "admin")); ?>'
                 }).addClass("emblem toolbar").click(function(e) {
                     Write.formatting(target, "hyperlink");
                 }).append(
                     $("<img>", {
                         "src": Site.chyrp_url + '/admin/images/icons/link.svg',
-                        "alt": '<?php echo __("hyperlink", "admin"); ?>'
+                        "alt": '<?php esce(__("hyperlink", "admin")); ?>'
                     })
                 )
             );
@@ -335,14 +336,14 @@ var Write = {
             toolbar.append(
                 $("<button>", {
                     "type": "button",
-                    "title": '<?php echo __("Image", "admin"); ?>',
-                    "aria-label": '<?php echo __("Image", "admin"); ?>'
+                    "title": '<?php esce(__("Image", "admin")); ?>',
+                    "aria-label": '<?php esce(__("Image", "admin")); ?>'
                 }).addClass("emblem toolbar").click(function(e) {
                     Write.formatting(target, "img");
                 }).append(
                     $("<img>", {
                         "src": Site.chyrp_url + '/admin/images/icons/image.svg',
-                        "alt": '<?php echo __("image", "admin"); ?>'
+                        "alt": '<?php esce(__("image", "admin")); ?>'
                     })
                 )
             );
@@ -354,8 +355,8 @@ var Write = {
             // Insert toolbar buttons for image uploads.
             $("<label>", {
                 "role": "button",
-                "title": '<?php echo __("Upload", "admin"); ?>',
-                "aria-label": '<?php echo __("Upload", "admin"); ?>'
+                "title": '<?php esce(__("Upload", "admin")); ?>',
+                "aria-label": '<?php esce(__("Upload", "admin")); ?>'
             }).addClass("emblem toolbar").append(
                 [$("<input>", {
                     "name": toolbar.attr("id") + "_upload",
@@ -370,12 +371,12 @@ var Write = {
                         form.set("hash", Visitor.token);
                         form.set("file", file, file.name);
 
-                        tray.loader().html('<?php echo __("Uploading...", "admin"); ?>');
+                        tray.loader().html('<?php esce(__("Uploading...", "admin")); ?>');
 
                         // Upload the file and insert the tag if successful.
                         $.ajax({
                             type: "POST",
-                            url: "<?php echo url('/', 'AjaxController'); ?>",
+                            url: Site.ajax_url,
                             data: form,
                             processData: false,
                             contentType: false,
@@ -392,27 +393,27 @@ var Write = {
                 }),
                 $("<img>", {
                     "src": Site.chyrp_url + '/admin/images/icons/upload.svg',
-                    "alt": '<?php echo __("image", "admin"); ?>'
+                    "alt": '<?php esce(__("image", "admin")); ?>'
                 })]
             ).appendTo(toolbar);
 
             // Insert button to open the uploads modal.
-            if (<?php echo($visitor->group->can("edit_post", "edit_page", true) ? "true" : "false"); ?>)
+            if (<?php esce($visitor->group->can("edit_post", "edit_page", true) ? "true" : "false"); ?>)
                 toolbar.append(
                     $("<button>", {
                         "type": "button",
-                        "title": '<?php echo __("Insert", "admin"); ?>',
-                        "aria-label": '<?php echo __("Insert", "admin"); ?>'
+                        "title": '<?php esce(__("Insert", "admin")); ?>',
+                        "aria-label": '<?php esce(__("Insert", "admin")); ?>'
                     }).addClass("emblem toolbar").click(function(e) {
                         tray.loader();
 
-                        $.post("<?php echo url('/', 'AjaxController'); ?>", {
+                        $.post(Site.ajax_url, {
                             action: "uploads_modal",
                             hash: Visitor.token
                         }, function(data) {
                             $("<div>", {
                                 "role": "region",
-                                "aria-label": '<?php echo __("Modal window", "admin"); ?>'
+                                "aria-label": '<?php esce(__("Modal window", "admin")); ?>'
                             }).addClass("iframe_background").append(
                                 [
                                     $("<div>").addClass("iframe_foreground").on("click", "a", function(e) {
@@ -424,14 +425,14 @@ var Write = {
                                         "href": "#",
                                         "role": "button",
                                         "accesskey": "x",
-                                        "aria-label": '<?php echo __("Close", "admin"); ?>'
+                                        "aria-label": '<?php esce(__("Close", "admin")); ?>'
                                     }).addClass("iframe_close_gadget").click(function(e) {
                                         e.preventDefault();
                                         $(this).parent().remove();
                                     }).append(
                                         $("<img>", {
                                             "src": Site.chyrp_url + '/admin/images/icons/close.svg',
-                                            "alt": '<?php echo __("close", "admin"); ?>'
+                                            "alt": '<?php esce(__("close", "admin")); ?>'
                                         })
                                     )
                                 ]
@@ -447,22 +448,22 @@ var Write = {
                     }).append(
                         $("<img>", {
                             "src": Site.chyrp_url + '/admin/images/icons/archive.svg',
-                            "alt": '<?php echo __("insert", "admin"); ?>'
+                            "alt": '<?php esce(__("insert", "admin")); ?>'
                         })
                     )
                 );
         });
 
         // Insert buttons for ajax previews.
-        if (<?php echo($theme->file_exists("content".DIR."preview") ? "true" : "false"); ?>)
+        if (<?php esce($theme->file_exists("content".DIR."preview") ? "true" : "false"); ?>)
             $("#write_form *[data-preview], #edit_form *[data-preview]").each(function() {
                 var target = $(this);
 
                 $("#" + target.attr("id") + "_toolbar").append(
                     $("<button>", {
                         "type": "button",
-                        "title": '<?php echo __("Preview", "admin"); ?>',
-                        "aria-label": '<?php echo __("Preview", "admin"); ?>'
+                        "title": '<?php esce(__("Preview", "admin")); ?>',
+                        "aria-label": '<?php esce(__("Preview", "admin")); ?>'
                     }).addClass("emblem toolbar").click(function(e) {
                         var content  = target.val();
                         var field    = target.attr("name");
@@ -478,7 +479,7 @@ var Write = {
                     }).append(
                         $("<img>", {
                             "src": Site.chyrp_url + '/admin/images/icons/view.svg',
-                            "alt": '<?php echo __("preview", "admin"); ?>'
+                            "alt": '<?php esce(__("preview", "admin")); ?>'
                         })
                     )
                 );
@@ -504,7 +505,7 @@ var Write = {
 
             var tray = $("#" + target.attr("id") + "_tray");
             var regex = /\p{White_Space}+/gu;
-            var label = '<?php echo __("Words:", "admin"); ?>';
+            var label = '<?php esce(__("Words:", "admin")); ?>';
 
             target.on("input", function(e) {
                 var words = target.val();
@@ -591,12 +592,12 @@ var Write = {
                 form.set("hash", Visitor.token);
                 form.set("file", file, file.name);
 
-                tray.loader().html('<?php echo __("Uploading...", "admin"); ?>');
+                tray.loader().html('<?php esce(__("Uploading...", "admin")); ?>');
 
                 // Upload the file and insert the tag if successful.
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo url('/', 'AjaxController'); ?>",
+                    url: Site.ajax_url,
                     data: form,
                     processData: false,
                     contentType: false,
@@ -613,7 +614,7 @@ var Write = {
         }
     },
     formatting: function(target, effect, fragment = "") {
-        var markdown = <?php echo(($config->enable_markdown) ? "true" : "false"); ?>;
+        var markdown = <?php esce(($config->enable_markdown) ? "true" : "false"); ?>;
         var opening = "";
         var closing = "";
         var after = "";
@@ -778,7 +779,7 @@ var Write = {
         // Build a form targeting a named iframe.
         $("<form>", {
             "id": uid,
-            "action": "<?php echo url('/', 'AjaxController'); ?>",
+            "action": Site.ajax_url,
             "method": "post",
             "accept-charset": "UTF-8",
             "target": uid,
@@ -814,7 +815,7 @@ var Write = {
         // Build and display the named iframe.
         $("<div>", {
             "role": "region",
-            "aria-label": '<?php echo __("Modal window", "admin"); ?>'
+            "aria-label": '<?php esce(__("Modal window", "admin")); ?>'
         }).addClass("iframe_background").append(
             [
                 $("<iframe>", {
@@ -828,14 +829,14 @@ var Write = {
                     "href": "#",
                     "role": "button",
                     "accesskey": "x",
-                    "aria-label": '<?php echo __("Close", "admin"); ?>'
+                    "aria-label": '<?php esce(__("Close", "admin")); ?>'
                 }).addClass("iframe_close_gadget").click(function(e) {
                     e.preventDefault();
                     $(this).parent().remove();
                 }).append(
                     $("<img>", {
                         "src": Site.chyrp_url + '/admin/images/icons/close.svg',
-                        "alt": '<?php echo __("close", "admin"); ?>'
+                        "alt": '<?php esce(__("close", "admin")); ?>'
                     })
                 )
             ]

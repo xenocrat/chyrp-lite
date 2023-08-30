@@ -7,9 +7,9 @@ var ChyrpComment = {
     notice: 0,
     interval: null,
     failed: false,
-    reload: <?php echo($config->module_comments["enable_reload_comments"] ? "true" : "false" ); ?>,
-    delay: Math.abs(<?php echo($config->module_comments["auto_reload_comments"] * 1000); ?>),
-    per_page: <?php echo $config->module_comments["comments_per_page"]; ?>,
+    reload: <?php esce($config->module_comments["enable_reload_comments"] ? "true" : "false" ); ?>,
+    delay: Math.abs(<?php esce($config->module_comments["auto_reload_comments"] * 1000); ?>),
+    per_page: <?php esce($config->module_comments["comments_per_page"]); ?>,
     init: function() {
         if (ChyrpComment.reload && ChyrpComment.delay > 0)
             ChyrpComment.interval = setInterval(ChyrpComment.fetch, ChyrpComment.delay);
@@ -23,7 +23,7 @@ var ChyrpComment = {
                 $.ajax({
                     error: ChyrpComment.panic,
                     type: "POST",
-                    url: "<?php echo url('/', 'AjaxController'); ?>",
+                    url: Site.ajax_url,
                     data: new FormData(this),
                     processData: false,
                     contentType: false,
@@ -50,7 +50,7 @@ var ChyrpComment = {
                 e.preventDefault();
                 ChyrpComment.notice++;
 
-                if (confirm('<?php echo __("Are you sure you want to permanently delete this comment?", "comments"); ?>')) {
+                if (confirm('<?php esce(__("Are you sure you want to permanently delete this comment?", "comments")); ?>')) {
                     var id = $(this).attr("id").replace(/comment_delete_/, "");
                     ChyrpComment.destroy(id);
                 }
@@ -75,7 +75,7 @@ var ChyrpComment = {
                     error: ChyrpComment.panic,
                     type: "POST",
                     dataType: "json",
-                    url: "<?php echo url('/', 'AjaxController'); ?>",
+                    url: Site.ajax_url,
                     data: {
                         action: "reload_comments",
                         post_id: id,
@@ -85,7 +85,7 @@ var ChyrpComment = {
                     if (response.data.comment_ids.length > 0) {
                         $("#comments").attr("data-timestamp", response.data.last_comment);
                         $.each(response.data.comment_ids, function(i, id) {
-                            $.post("<?php echo url('/', 'AjaxController'); ?>", {
+                            $.post(Site.ajax_url, {
                                 action: "show_comment",
                                 comment_id: id
                             }, function(data){
@@ -101,7 +101,7 @@ var ChyrpComment = {
 
         var thisItem = $("#comment_" + id).loader();
 
-        $.post("<?php echo url('/', 'AjaxController'); ?>", {
+        $.post(Site.ajax_url, {
             action: "edit_comment",
             comment_id: id,
             hash: Visitor.token
@@ -120,7 +120,7 @@ var ChyrpComment = {
                             $.ajax({
                                 error: ChyrpComment.panic,
                                 type: "POST",
-                                url: "<?php echo url('/', 'AjaxController'); ?>",
+                                url: Site.ajax_url,
                                 data: new FormData(thisForm[0]),
                                 processData: false,
                                 contentType: false,
@@ -136,7 +136,7 @@ var ChyrpComment = {
                                 ChyrpComment.editing--;
 
                                 // Load the updated post in place of the edit form.
-                                $.post("<?php echo url('/', 'AjaxController'); ?>", {
+                                $.post(Site.ajax_url, {
                                     action: "show_comment",
                                     comment_id: id
                                 }, function(data) {
@@ -152,7 +152,7 @@ var ChyrpComment = {
 
                         if (!ChyrpComment.failed) {
                             thisItem.loader();
-                            $.post("<?php echo url('/', 'AjaxController'); ?>", {
+                            $.post(Site.ajax_url, {
                                 action: "show_comment",
                                 comment_id: id
                             }, function(data){
@@ -170,7 +170,7 @@ var ChyrpComment = {
     destroy: function(id) {
         var thisItem = $("#comment_" + id).loader();
 
-        $.post("<?php echo url('/', 'AjaxController'); ?>", {
+        $.post(Site.ajax_url, {
             action: "destroy_comment",
             id: id,
             hash: Visitor.token
@@ -178,6 +178,7 @@ var ChyrpComment = {
             thisItem.fadeOut("fast", function() {
                 $(this).remove();
             });
+            $("#comments").focus();
         }, "json").fail(ChyrpComment.panic);
     },
     panic: function(message) {

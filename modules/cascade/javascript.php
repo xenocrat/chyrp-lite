@@ -5,7 +5,7 @@
 var ChyrpAjaxScroll = {
     busy: false,
     failed: false,
-    auto: <?php echo(Config::current()->module_cascade["ajax_scroll_auto"] ? "true" : "false"); ?>,
+    auto: <?php esce(Config::current()->module_cascade["ajax_scroll_auto"] ? "true" : "false"); ?>,
     init: function() {
         if (ChyrpAjaxScroll.auto)
             $(window).on("scroll", window, ChyrpAjaxScroll.watch);

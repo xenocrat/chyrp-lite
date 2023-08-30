@@ -3,9 +3,9 @@
         exit;
 ?>
 var ChyrpLightbox = {
-    background: "<?php echo $config->module_lightbox["background"]; ?>",
-    spacing: 48 + Math.abs("<?php echo $config->module_lightbox["spacing"]; ?>"),
-    protect: <?php echo($config->module_lightbox["protect"] ? "true" : "false"); ?>,
+    background: "<?php esce($config->module_lightbox["background"]); ?>",
+    spacing: 48 + Math.abs("<?php esce($config->module_lightbox["spacing"]); ?>"),
+    protect: <?php esce($config->module_lightbox["protect"] ? "true" : "false"); ?>,
     active: false,
     styles: {
         fg: {
@@ -112,7 +112,7 @@ var ChyrpLightbox = {
                 "role": "button",
                 "tabindex": "0",
                 "accesskey": "x",
-                "aria-label": '<?php echo __("Stop displaying this image", "lightbox"); ?>'
+                "aria-label": '<?php esce(__("Stop displaying this image", "lightbox")); ?>'
             }).css(
                 ChyrpLightbox.styles.bg
             ).on("click", function(e) {
