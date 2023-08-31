@@ -1,4 +1,4 @@
-[English](README.md), [Italiano](README_it_IT.md), [简体中文](README_zh_CN.md).
+[English](README.md), [Italiano](README_it_IT.md), [한국인](README_ko_KR.md), [Nederlands](README_nl_NL.md), [简体中文](README_zh_CN.md).
 
 ## Chyrp Lite는 나를 위해 무엇을 할 수 있습니까?
 
