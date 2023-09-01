@@ -37,7 +37,7 @@
         ): array {
             $options["from"] = "categorize";
             return parent::search(
-                get_class(),
+                get_class($this),
                 $options,
                 $options_for_object
             );

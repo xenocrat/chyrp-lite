@@ -37,7 +37,7 @@
         ): array {
             fallback($options["order"], "id ASC");
             return parent::search(
-                get_class(),
+                get_class($this),
                 $options,
                 $options_for_object
             );
@@ -221,7 +221,7 @@
          *     <Model::destroy>
          */
         static function delete($user_id): void {
-            parent::destroy(get_class(), $user_id);
+            parent::destroy(get_class($this), $user_id);
         }
 
         /**

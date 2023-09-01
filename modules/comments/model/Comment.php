@@ -72,7 +72,7 @@
 
             fallback($options["order"], "created_at ASC");
             return parent::search(
-                get_class(),
+                get_class($this),
                 $options,
                 $options_for_object
             );
@@ -323,7 +323,7 @@
          */
         static function delete($comment_id): void {
             parent::destroy(
-                get_class(),
+                get_class($this),
                 $comment_id,
                 array("skip_where" => true)
             );

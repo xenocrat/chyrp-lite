@@ -210,7 +210,11 @@
 
             fallback($options["order"], "pinned DESC, created_at DESC, id DESC");
 
-            return parent::search(get_class(), $options, $options_for_object);
+            return parent::search(
+                get_class($this),
+                $options,
+                $options_for_object
+            );
         }
 
         /**
@@ -454,7 +458,12 @@
          *     <Model::destroy>
          */
         static function delete($id): void {
-            parent::destroy(get_class(), $id, array("skip_where" => true));
+            parent::destroy(
+                get_class($this),
+                $id,
+                array("skip_where" => true)
+            );
+
             SQL::current()->delete(
                 table:"post_attributes",
                 conds:array("post_id" => $id)

@@ -33,7 +33,7 @@
             $options_for_object = array()
         ): array {
             return parent::search(
-                get_class(),
+                get_class($this),
                 $options,
                 $options_for_object
             );
@@ -74,7 +74,7 @@
          *     <Model::destroy>
          */
         static function delete($view_id): void {
-            parent::destroy(get_class(), $view_id);
+            parent::destroy(get_class($this), $view_id);
         }
 
         /**
