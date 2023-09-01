@@ -52,7 +52,7 @@
             $options_for_object = array()
         ): array {
             return parent::search(
-                get_class($this),
+                self::class,
                 $options,
                 $options_for_object
             );
@@ -258,7 +258,7 @@
                     self::delete($child->id);
             }
 
-            parent::destroy(get_class($this), $page_id);
+            parent::destroy(self::class, $page_id);
         }
 
         /**

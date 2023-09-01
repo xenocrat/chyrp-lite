@@ -211,7 +211,7 @@
             fallback($options["order"], "pinned DESC, created_at DESC, id DESC");
 
             return parent::search(
-                get_class($this),
+                self::class,
                 $options,
                 $options_for_object
             );
@@ -459,7 +459,7 @@
          */
         static function delete($id): void {
             parent::destroy(
-                get_class($this),
+                self::class,
                 $id,
                 array("skip_where" => true)
             );

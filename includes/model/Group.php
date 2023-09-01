@@ -55,7 +55,7 @@
             $options["select"][] = "permissions.id AS permissions";
 
             return parent::search(
-                get_class($this),
+                self::class,
                 $options,
                 $options_for_object
             );
@@ -251,7 +251,7 @@
                     conds:array("group_id" => $group_id)
                 );
 
-            parent::destroy(get_class($this), $group_id);
+            parent::destroy(self::class, $group_id);
         }
 
         /**
