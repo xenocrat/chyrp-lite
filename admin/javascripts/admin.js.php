@@ -771,7 +771,7 @@ var Write = {
 
         var text = opening + selection + closing + after;
         target[0].setRangeText(text);
-        $(target).focus().trigger("input");
+        $(target).focus().trigger("input").trigger("change");
     },
     show: function(action, safename, field, content) {
         var uid = Date.now().toString(16);
