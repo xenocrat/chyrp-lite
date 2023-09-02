@@ -5,7 +5,7 @@
             $this->setPriority("markup_text", 4);
         }
 
-        public function markup_text($text): string {
+        public function markup_text($text): mixed {
             if (!is_string($text))
                 return $text;
 
@@ -21,9 +21,6 @@
 
                 '|<!--[^>]*twitch.tv/[^/]+/v/([0-9]{9})[^>]*-->|i'
                     => 'https://player.twitch.tv/?video=v$1',
-
-                '|<!--[^>]*gfycat.com/([a-z]+)[^>]*-->|i'
-                    => 'https://gfycat.com/ifr/$1',
 
                 '|<!--[^>]*archive.org/details/([a-z0-9_\-]+)[^>]*-->|i'
                     => 'https://archive.org/embed/$1'
