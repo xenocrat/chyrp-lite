@@ -63,15 +63,15 @@
             return $navs;
         }
 
-        public function markup_post_text($text, $post = null): string {
-            if (
-                !is_string($text) or
-                !preg_match("/<!-- *more([^>]*)?-->/i", $text, $matches)
-            )
+        public function markup_post_text($text, $post = null): mixed {
+            if (!is_string($text))
+                return $text;
+
+            if (!preg_match("/<!-- *more([^>]*)?-->/i", $text, $matches))
                 return $text;
 
             if (!isset($post) or !$this->eligible())
-                return preg_replace("/<!-- *more([^>]*)?-->/i", "", $text);
+                return preg_replace("/<!-- *more([^>]*)?-->/i", "", $text, 1);
 
             $settings = Config::current()->module_read_more;
 
@@ -82,13 +82,7 @@
             );
 
             $url = (!$post->no_results) ? $post->url() : "#" ;
-
-            $split = preg_split(
-                "/<!-- *more([^>]*)?-->/i",
-                $text,
-                -1,
-                PREG_SPLIT_NO_EMPTY
-            );
+            $split = preg_split("/<!-- *more([^>]*)?-->/i", $text, 2);
 
             return $split[0].
                    '<a class="read_more" href="'.$url.'">'.
