@@ -63,10 +63,7 @@
             return $navs;
         }
 
-        public function markup_post_text($text, $post = null): mixed {
-            if (!is_string($text))
-                return $text;
-
+        public function markup_post_text($text, $post = null): string {
             if (!preg_match("/<!-- *more([^>]*)?-->/i", $text, $matches))
                 return $text;
 
@@ -91,7 +88,7 @@
         }
 
         public function title_from_excerpt($text): string {
-            $split = preg_split('/<a class="read_more"/', $text);
+            $split = preg_split('/<a class="read_more"/', $text, 2);
             return $split[0];
         }
 
