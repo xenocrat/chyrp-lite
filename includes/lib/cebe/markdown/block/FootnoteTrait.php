@@ -116,7 +116,7 @@ trait FootnoteTrait
 			}
 			$linksPara = '<p class="footnote-backrefs">'. join("\n", $backLinks) . '</p>';
 			$footnotesHtml .= "<li id=\"{$prefix}fn-{$footnoteInfo['num']}\">";
-			$footnotesHtml .= "\n{$footnoteInfo['html']}\n$linksPara\n</li>\n";
+			$footnotesHtml .= "\n{$footnoteInfo['html']}$linksPara\n</li>\n";
 		}
 		$footnotesHtml .= "</ol>\n</div>\n";
 		return $footnotesHtml;
