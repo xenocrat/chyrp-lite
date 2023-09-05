@@ -1355,9 +1355,10 @@
      * Returns:
      *     The text with Markdown formatting applied.
      *
-     * Se Also:
+     * See Also:
      *     https://github.com/commonmark/CommonMark
      *     https://github.github.com/gfm/
+     *     https://chyrplite.net/wiki/Chyrp-Flavoured-Markdown.html
      */
     function markdown($text, $context = null): string {
         static $parser;
