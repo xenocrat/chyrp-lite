@@ -51,14 +51,14 @@ var Post = {
             hash: Visitor.token
         }, function(response) {
             thisPost.loader(true).fadeOut("fast", function() {
-                var prev_bookmark = $(this).prev("article.post").find("a[rel='bookmark']").first();
+                var prev_post = $(this).prev("article.post");
                 $(this).remove();
 
                 if (!$("article.post").length)
                     window.location.href = Site.url;
 
-                if (prev_bookmark.length)
-                    prev_bookmark.focus();
+                if (prev_post.length)
+                    prev_post.focus();
             });
         }, "json").fail(Post.panic);
     },
