@@ -184,8 +184,8 @@
 <html dir="auto">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width = 640">
         <title><?php echo strip_tags($title); ?></title>
-        <meta name="viewport" content="width = 800">
         <style type="text/css">
             @font-face {
                 font-family: 'Open Sans webfont';
