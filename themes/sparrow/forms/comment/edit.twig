@@ -23,7 +23,7 @@
 </select>
 {% endif %}
 {% endif %}
-{% if site.email_correspondence %}
+{% if comment.status != "pingback" and site.email_correspondence %}
 <label for="comment_notify_{{ comment.id }}">{{ "Email Notifications" | translate }}</label>
 <input type="checkbox" name="notify" id="comment_notify_{{ comment.id }}"{{ comment.notify | checked }}>
 {% endif %}
