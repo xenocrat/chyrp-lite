@@ -3040,6 +3040,9 @@
      * Sends an email using PHP's mail() function or an alternative.
      */
     function email(): bool {
+        if (!Config::current()->email_correspondence)
+            return false;
+
         $function = "mail";
         Trigger::current()->filter($function, "send_mail");
         return call_user_func_array($function, func_get_args());
