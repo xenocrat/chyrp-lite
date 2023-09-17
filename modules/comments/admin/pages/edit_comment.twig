@@ -52,7 +52,7 @@
 </p>
 {% endif %}
 {% endif %}
-{% if site.email_correspondence %}
+{% if comment.status != "pingback" and site.email_correspondence %}
 <p class="more_options_option">
 <label for="notify">{{ "Email Notifications" | translate("comments") }}</label>
 <input type="checkbox" name="notify" id="notify"{{ comment.notify | checked }}>
