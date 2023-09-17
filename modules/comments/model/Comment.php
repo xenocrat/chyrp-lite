@@ -213,28 +213,54 @@
                 array("skip_where" => true)
             );
 
-            if ($comment->status == self::STATUS_APPROVED) {
+            if ($config->email_correspondence) {
                 $done = array();
-                $list = self::find(
-                    array(
-                        "skip_where" => true,
-                        "where"  => array(
-                            "post_id"    => $comment->post_id,
-                            "user_id !=" => $comment->user_id,
-                            "status"     => self::STATUS_APPROVED,
-                            "notify"     => true
+
+                if ($config->module_comments["notify_site_contact"]) {
+                    if (!in_array($config->email, $done)) {
+                        Modules::$instances["comments"]::email_site_new_comment(
+                            $comment
+                        );
+                        $done[] = $config->email;
+                    }
+                }
+
+                if ($config->module_comments["notify_post_author"]) {
+                    if (
+                        !$comment->post->no_results and
+                        !$comment->post->user->no_results and
+                        !in_array($comment->post->user->email, $done)
+                    ) {
+                        Modules::$instances["comments"]::email_user_new_comment(
+                            $comment,
+                            $comment->post->user
+                        );
+                        $done[] = $comment->post->user->email;
+                    }
+                }
+
+                if ($comment->status == self::STATUS_APPROVED) {
+                    $peers = self::find(
+                        array(
+                            "skip_where" => true,
+                            "where"  => array(
+                                "post_id"    => $comment->post_id,
+                                "user_id !=" => $comment->user_id,
+                                "status"     => self::STATUS_APPROVED,
+                                "notify"     => true
+                            )
                         )
-                    )
-                );
-
-                foreach ($list as $earlier) {
-                    if (in_array($earlier->author_email, $done))
-                        continue;
-
-                    Modules::$instances["comments"]::email_new_comment(
-                        $comment, $earlier
                     );
-                    $done[] = $earlier->author_email;
+
+                    foreach ($peers as $peer) {
+                        if (!in_array($peer->author_email, $done)) {
+                            Modules::$instances["comments"]::email_peer_new_comment(
+                                $comment,
+                                $peer
+                            );
+                            $done[] = $peer->author_email;
+                        }
+                    }
                 }
             }
 

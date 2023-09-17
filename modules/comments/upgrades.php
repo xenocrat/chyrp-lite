@@ -76,5 +76,28 @@
             );
     }
 
+    /**
+     * Function: comments_update_config
+     * Updates config settings for 2023.03 and upwards.
+     *
+     * Versions: 2023.02 => 2023.03
+     */
+    function comments_update_config(): void {
+        $config = Config::current();
+        $array = $config->module_comments;
+
+        fallback($array["notify_site_contact"], false);
+        fallback($array["notify_post_author"], false);
+
+        $set = $config->set("module_comments", $array);
+
+        if ($set === false)
+            error(
+                __("Error"),
+                __("Could not write the configuration file.")
+            );
+    }
+
     comments_migrate_config();
     fix_comment_updated();
+    comments_update_config();

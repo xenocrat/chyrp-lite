@@ -12,13 +12,15 @@
             Config::current()->set(
                 "module_comments",
                 array(
+                    "notify_site_contact" => false,
+                    "notify_post_author" => false,
                     "default_comment_status" => Comment::STATUS_DENIED,
-                    "comments_per_page" => 25,
-                    "auto_reload_comments" => 30,
-                    "enable_reload_comments" => false,
                     "allowed_comment_html" => array(
                         "strong", "em", "blockquote", "code", "pre", "a"
-                    )
+                    ),
+                    "comments_per_page" => 25,
+                    "enable_reload_comments" => false,
+                    "auto_reload_comments" => 30
                 )
             );
 
@@ -85,6 +87,9 @@
             if ($comment->no_results)
                 return false;
 
+            if ($comment->post->no_results)
+                return false;
+
             redirect($comment->post->url()."#comment_".$comment->id);
         }
 
@@ -142,35 +147,30 @@
 
             if (empty($_POST['body']))
                 return array(
-                    $post,
                     false,
                     __("Message can't be blank.", "comments")
                 );
 
             if (empty($_POST['author']) or derezz($_POST['author']))
                 return array(
-                    $post,
                     false,
                     __("Author can't be blank.", "comments")
                 );
 
             if (empty($_POST['author_email']))
                 return array(
-                    $post,
                     false,
                     __("Email address can't be blank.", "comments")
                 );
 
             if (!is_email($_POST['author_email']))
                 return array(
-                    $post,
                     false,
                     __("Invalid email address.", "comments")
                 );
 
             if (!empty($_POST['author_url']) and !is_url($_POST['author_url']))
                 return array(
-                    $post,
                     false,
                     __("Invalid website URL.", "comments")
                 );
@@ -180,7 +180,6 @@
 
             if (!logged_in() and !check_captcha())
                 return array(
-                    $post,
                     false,
                     __("Incorrect captcha response.", "comments")
                 );
@@ -200,7 +199,6 @@
             );
 
             return array(
-                $comment,
                 true,
                 ($comment->status == Comment::STATUS_APPROVED) ?
                     __("Comment added.", "comments") :
@@ -243,35 +241,30 @@
 
             if (empty($_POST['body']))
                 return array(
-                    $comment,
                     false,
                     __("Message can't be blank.", "comments")
                 );
 
             if (empty($_POST['author']) or derezz($_POST['author']))
                 return array(
-                    $comment,
                     false,
                     __("Author can't be blank.", "comments")
                 );
 
             if (empty($_POST['author_email']) and $_POST['status'] != Comment::STATUS_PINGBACK)
                 return array(
-                    $comment,
                     false,
                     __("Email address can't be blank.", "comments")
                 );
 
             if (!empty($_POST['author_email']) and !is_email($_POST['author_email']))
                 return array(
-                    $comment,
                     false,
                     __("Invalid email address.", "comments")
                 );
 
             if (!empty($_POST['author_url']) and !is_url($_POST['author_url']))
                 return array(
-                    $comment,
                     false,
                     __("Invalid website URL.", "comments")
                 );
@@ -302,24 +295,13 @@
             );
 
             return array(
-                $comment,
                 true,
                 __("Comment updated.", "comments")
             );
         }
 
-        public function main_update_comment()/*: never */{
-            list($comment, $success, $message) = $this->update_comment();
-            $type = ($success) ? "notice" : "warning" ;
-
-            Flash::$type(
-                $message,
-                $comment->post->url()
-            );
-        }
-
         public function admin_update_comment()/*: never */{
-            list($comment, $success, $message) = $this->update_comment();
+            list($success, $message) = $this->update_comment();
 
             if (!$success)
                 error(
@@ -335,12 +317,12 @@
         }
 
         public function ajax_add_comment(): void {
-            list($comment, $success, $message) = $this->add_comment();
+            list($success, $message) = $this->add_comment();
             json_response($message, $success);
         }
 
         public function ajax_update_comment(): void {
-            list($comment, $success, $message) = $this->update_comment();
+            list($success, $message) = $this->update_comment();
             json_response($message, $success);
         }
 
@@ -743,11 +725,13 @@
             $config->set(
                 "module_comments",
                 array(
+                    "notify_site_contact" => isset($_POST['notify_site_contact']),
+                    "notify_post_author" => isset($_POST['notify_post_author']),
                     "default_comment_status" => $_POST['default_comment_status'],
                     "allowed_comment_html" => $allowed_comment_html,
                     "comments_per_page" => (int) $_POST['comments_per_page'],
-                    "auto_reload_comments" => (int) $_POST['auto_reload_comments'],
-                    "enable_reload_comments" => isset($_POST['enable_reload_comments'])
+                    "enable_reload_comments" => isset($_POST['enable_reload_comments']),
+                    "auto_reload_comments" => (int) $_POST['auto_reload_comments']
                 )
             );
 
@@ -1004,16 +988,31 @@
         }
 
         public function main_view(): bool {
-            if (isset($_POST['action']) and $_POST['action'] == "add_comment") {
-                list($comment, $success, $message) = $this->add_comment();
-                $type = ($success) ? "notice" : "warning" ;
-                Flash::$type($message);
+            if (isset($_POST['action'])) {
+                if ($_POST['action'] == "add_comment") {
+                    list($success, $message) = $this->add_comment();
+                    $type = ($success) ? "notice" : "warning" ;
+                    Flash::$type($message);
 
-                if ($success) {
-                    unset($_POST['body']);
-                    unset($_POST['author']);
-                    unset($_POST['author_email']);
-                    unset($_POST['author_url']);
+                    if ($success) {
+                        unset($_POST['body']);
+                        unset($_POST['author']);
+                        unset($_POST['author_email']);
+                        unset($_POST['author_url']);
+                    }
+                }
+
+                if ($_POST['action'] == "update_comment") {
+                    list($success, $message) = $this->update_comment();
+                    $type = ($success) ? "notice" : "warning" ;
+                    Flash::$type($message);
+
+                    if ($success) {
+                        unset($_POST['body']);
+                        unset($_POST['author']);
+                        unset($_POST['author_email']);
+                        unset($_POST['author_url']);
+                    }
                 }
             }
 
@@ -1149,7 +1148,7 @@
                 author_email:"",
                 post:$post,
                 parent:0,
-                notify:0,
+                notify:false,
                 status:Comment::STATUS_PINGBACK
             );
         }
@@ -1398,17 +1397,57 @@
             return $atom;
         }
 
-        public static function email_new_comment($comment, $earlier): bool {
+        public static function email_site_new_comment($comment): bool {
             $config = Config::current();
             $trigger = Trigger::current();
-            $mailto = $earlier->author_email;
+            $mailto = $config->email;
+
+            if ($trigger->exists("correspond_site_new_comment"))
+                return $trigger->call("correspond_site_new_comment", $comment);
+
+            $email_headers = "From: ".$config->email."\r\n"."X-Mailer: ".CHYRP_IDENTITY;
+            $email_subject = _f("New Comment at %s", $config->name, "comments");
+            $email_message = _f("%s commented on a blog post:", $comment->author, "comments").
+                             "\r\n".
+                             unfix($comment->url()).
+                             "\r\n".
+                             "\r\n".
+                             truncate(strip_tags($comment->body), 60);
+
+            return email($mailto, $email_subject, $email_message, $email_headers);
+        }
+
+        public static function email_user_new_comment($comment, $user): bool {
+            $config = Config::current();
+            $trigger = Trigger::current();
+            $mailto = $user->email;
+
+            if ($trigger->exists("correspond_user_new_comment"))
+                return $trigger->call("correspond_user_new_comment", $comment, $user);
+
+            $email_headers = "From: ".$config->email."\r\n"."X-Mailer: ".CHYRP_IDENTITY;
+            $email_subject = _f("New Comment at %s", $config->name, "comments");
+            $email_message = _f("%s commented on a blog post:", $comment->author, "comments").
+                             "\r\n".
+                             unfix($comment->url()).
+                             "\r\n".
+                             "\r\n".
+                             truncate(strip_tags($comment->body), 60);
+
+            return email($mailto, $email_subject, $email_message, $email_headers);
+        }
+
+        public static function email_peer_new_comment($comment, $peer): bool {
+            $config = Config::current();
+            $trigger = Trigger::current();
+            $mailto = $peer->author_email;
 
             $url = "/?action=unsubscribe&amp;email=".urlencode($mailto).
                    "&amp;id=".$comment->post_id.
                    "&amp;token=".token($mailto);
 
-            if ($trigger->exists("correspond_new_comment"))
-                return $trigger->call("correspond_new_comment", $comment, $earlier, $url);
+            if ($trigger->exists("correspond_peer_new_comment"))
+                return $trigger->call("correspond_peer_new_comment", $comment, $peer, $url);
 
             $email_headers = "From: ".$config->email."\r\n"."X-Mailer: ".CHYRP_IDENTITY;
             $email_subject = _f("New Comment at %s", $config->name, "comments");
