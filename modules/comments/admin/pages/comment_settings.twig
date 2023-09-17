@@ -7,9 +7,14 @@
 <form id="comment_settings" class="split" action="{{ url('comment_settings') }}" method="post" accept-charset="UTF-8">
 <fieldset role="presentation">
 <p>
-<label for="allowed_comment_html">{{ "Allowed HTML Tags" | translate("comments") }}
-</label><input class="text code" type="text" name="allowed_comment_html" value="{{ comments_html | fix(true, true) }}" id="allowed_comment_html">
-<small>{{ "Format: <code>strong, blockquote, em</code>" | translate("comments") }}</small>
+<label for="notify_site_contact">{{ "Site Notifications" | translate("comments") }}
+</label><input type="checkbox" class="checkbox" name="notify_site_contact"  id="notify_site_contact"{{ site.module_comments.notify_site_contact | checked }}>
+<small>{{ "Notify the site contact by email when a comment is added." | translate("comments") }}</small>
+</p>
+<p>
+<label for="notify_post_author">{{ "Author Notifications" | translate("comments") }}
+</label><input type="checkbox" class="checkbox" name="notify_post_author"  id="notify_post_author"{{ site.module_comments.notify_post_author | checked }}>
+<small>{{ "Notify the post author by email when a comment is added." | translate("comments") }}</small>
 </p>
 <p>
 <label for="default_comment_status">{{ "Default Comment Status" | translate("comments") }}
@@ -19,6 +24,11 @@
 <option value="{{ key }}"{{ key | selected(default_comment_status) }}>{{ val }}</option>
 {% endfor %}
 </select>
+</p>
+<p>
+<label for="allowed_comment_html">{{ "Allowed HTML Tags" | translate("comments") }}
+</label><input class="text code" type="text" name="allowed_comment_html" value="{{ comments_html | fix(true, true) }}" id="allowed_comment_html">
+<small>{{ "Format: <code>strong, blockquote, em</code>" | translate("comments") }}</small>
 </p>
 <p>
 <label for="comments_per_page">{{ "Comments Per Page" | translate("comments") }}
@@ -31,7 +41,7 @@
 <small>{{ "Show newly added comments (up to the maximum number per page)." | translate("comments") }}</small>
 </p>
 <p>
-<label for="auto_reload_comments">{{ "Reload interval" | translate("comments") }}
+<label for="auto_reload_comments">{{ "Reload Interval" | translate("comments") }}
 </label><input class="text digits" type="number" min="10" max="3600" name="auto_reload_comments" value="{{ site.module_comments.auto_reload_comments | fix(true) }}" id="auto_reload_comments">
 <span class="sub">{{ "(seconds)" | translate("comments") }}</span>
 </p>
