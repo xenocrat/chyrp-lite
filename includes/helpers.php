@@ -3134,7 +3134,7 @@
 
         $common = '<script src="'.
                   fix($config->chyrp_url."/includes/common.js", true).
-                  '" type="text/javascript" charset="UTF-8"></script>';
+                  '"></script>';
 
         ob_start();
         include $script;

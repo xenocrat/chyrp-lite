@@ -294,9 +294,7 @@
             $tags = array();
 
             foreach ($scripts as $script)
-                $tags[] = '<script src="'.
-                          fix($script, true).
-                          '" type="text/javascript" charset="UTF-8"></script>';
+                $tags[] = '<script src="'.fix($script, true).'"></script>';
 
             if (is_dir(THEME_DIR.DIR."javascripts") or is_dir(THEME_DIR.DIR."js")) {
                 foreach (
@@ -317,9 +315,7 @@
                         $filepath
                     );
                     $href = $config->chyrp_url."/themes/".str_replace(DIR, "/", $path);
-                    $tags[] = '<script src="'.
-                              fix($href, true).
-                              '" type="text/javascript" charset="UTF-8"></script>';
+                    $tags[] = '<script src="'.fix($href, true).'"></script>';
                 }
             }
 
