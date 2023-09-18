@@ -38,7 +38,7 @@
 
     /**
      * Function: cacher_update_config
-     * Updates config settings for for v2.0 and upwards.
+     * Updates config settings for 2021.01 and upwards.
      *
      * Versions: 2020.04 => 2021.01
      */

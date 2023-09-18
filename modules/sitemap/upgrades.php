@@ -4,7 +4,7 @@
 
     /**
      * Function: sitemap_update_config
-     * Updates config settings for for v1.2 and upwards.
+     * Updates config settings for 2020.02 and upwards.
      *
      * Versions: 2020.01 => 2020.02
      */
