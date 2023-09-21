@@ -17,7 +17,7 @@ Arguments:
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 876
+	admin/javascripts/admin.js.php on line 877
 
 
 admin_head
@@ -332,7 +332,7 @@ Arguments:
 webmention
 ----------
 Called from:
-	includes/helpers.php on line 1885
+	includes/helpers.php on line 1911
 
 Arguments:
 	$post, $source, $target
@@ -341,7 +341,7 @@ Arguments:
 delete_upload
 -------------
 Called from:
-	includes/helpers.php on line 2612
+	includes/helpers.php on line 2638
 
 Arguments:
 	$filename
@@ -350,19 +350,19 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 2750
+	includes/helpers.php on line 2776
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 2768
+	includes/helpers.php on line 2794
 
 
 correspond_activate_account
 ---------------------------
 Called from:
-	includes/helpers.php on line 3027
+	includes/helpers.php on line 3067
 
 Arguments:
 	$user, $url
@@ -371,7 +371,7 @@ Arguments:
 correspond_reset_password
 -------------------------
 Called from:
-	includes/helpers.php on line 3062
+	includes/helpers.php on line 3102
 
 Arguments:
 	$user, $url
@@ -380,7 +380,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 3103
+	includes/helpers.php on line 3143
 
 Arguments:
 	$ob
@@ -389,7 +389,7 @@ Arguments:
 javascript
 ----------
 Called from:
-	includes/main.js.php on line 109
+	includes/main.js.php on line 114
 
 
 add_group
@@ -431,7 +431,7 @@ Arguments:
 add_post
 --------
 Called from:
-	includes/model/Post.php on line 313
+	includes/model/Post.php on line 317
 
 Arguments:
 	$post, $options
@@ -440,7 +440,7 @@ Arguments:
 publish_post
 ------------
 Called from:
-	includes/model/Post.php on line 441
+	includes/model/Post.php on line 445
 
 Arguments:
 	$post, $this, $options
@@ -449,7 +449,7 @@ Arguments:
 update_post
 -----------
 Called from:
-	includes/model/Post.php on line 443
+	includes/model/Post.php on line 447
 
 Arguments:
 	$post, $this, $options
@@ -548,7 +548,7 @@ Arguments:
 comments_false_positives
 ------------------------
 Called from:
-	modules/comments/comments.php on line 681
+	modules/comments/comments.php on line 663
 
 Arguments:
 	$false_positives
@@ -557,7 +557,7 @@ Arguments:
 comments_false_negatives
 ------------------------
 Called from:
-	modules/comments/comments.php on line 684
+	modules/comments/comments.php on line 666
 
 Arguments:
 	$false_negatives
@@ -566,25 +566,43 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 1115
+	modules/comments/comments.php on line 1114
 
 Arguments:
 	$comment, $feed
 
 
-correspond_new_comment
-----------------------
+correspond_site_new_comment
+---------------------------
 Called from:
-	modules/comments/comments.php on line 1411
+	modules/comments/comments.php on line 1406
 
 Arguments:
-	$comment, $earlier, $url
+	$comment
+
+
+correspond_user_new_comment
+---------------------------
+Called from:
+	modules/comments/comments.php on line 1426
+
+Arguments:
+	$comment, $user
+
+
+correspond_peer_new_comment
+---------------------------
+Called from:
+	modules/comments/comments.php on line 1450
+
+Arguments:
+	$comment, $peer, $url
 
 
 add_comment
 -----------
 Called from:
-	modules/comments/model/Comment.php on line 241
+	modules/comments/model/Comment.php on line 267
 
 Arguments:
 	$comment
@@ -593,7 +611,7 @@ Arguments:
 update_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 313
+	modules/comments/model/Comment.php on line 339
 
 Arguments:
 	$comment, $this
@@ -848,7 +866,7 @@ Target:
 links
 -----
 Called from:
-	includes/class/Theme.php on line 372
+	includes/class/Theme.php on line 368
 
 Target:
 	$links
@@ -1022,7 +1040,7 @@ markup_text
 Called from:
 	includes/controller/Ajax.php on line 209
 	includes/model/Page.php on line 321
-	modules/comments/model/Comment.php on line 511
+	modules/comments/model/Comment.php on line 537
 
 Target:
 	$content
@@ -1040,7 +1058,7 @@ Target:
 keyword_search
 --------------
 Called from:
-	includes/helpers.php on line 1113
+	includes/helpers.php on line 1138
 
 Target:
 	$search
@@ -1052,7 +1070,7 @@ Arguments:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 3007
+	includes/helpers.php on line 3047
 
 Target:
 	$function
@@ -1061,8 +1079,8 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 3104
-	includes/lib/Leaf.php on line 253
+	includes/helpers.php on line 3144
+	includes/lib/Leaf.php on line 276
 
 Target:
 	$nonce
@@ -1071,7 +1089,7 @@ Target:
 stylesheets_nonce
 -----------------
 Called from:
-	includes/lib/Leaf.php on line 262
+	includes/lib/Leaf.php on line 285
 
 Target:
 	$nonce
@@ -1179,7 +1197,7 @@ Target:
 before_add_post
 ---------------
 Called from:
-	includes/model/Post.php on line 282
+	includes/model/Post.php on line 286
 
 Target:
 	$new_values
@@ -1188,7 +1206,7 @@ Target:
 before_add_post_attributes
 --------------------------
 Called from:
-	includes/model/Post.php on line 286
+	includes/model/Post.php on line 290
 
 Target:
 	$attributes
@@ -1197,7 +1215,7 @@ Target:
 before_update_post
 ------------------
 Called from:
-	includes/model/Post.php on line 387
+	includes/model/Post.php on line 391
 
 Target:
 	$new_values
@@ -1206,7 +1224,7 @@ Target:
 before_update_post_attributes
 -----------------------------
 Called from:
-	includes/model/Post.php on line 396
+	includes/model/Post.php on line 400
 
 Target:
 	$attributes
@@ -1215,7 +1233,7 @@ Target:
 title_from_excerpt
 ------------------
 Called from:
-	includes/model/Post.php on line 724
+	includes/model/Post.php on line 733
 
 Target:
 	$excerpt
@@ -1224,7 +1242,7 @@ Target:
 title
 -----
 Called from:
-	includes/model/Post.php on line 747
+	includes/model/Post.php on line 756
 
 Target:
 	$title
@@ -1236,7 +1254,7 @@ Arguments:
 excerpt
 -------
 Called from:
-	includes/model/Post.php on line 765
+	includes/model/Post.php on line 774
 
 Target:
 	$excerpt
@@ -1248,7 +1266,7 @@ Arguments:
 feed_content
 ------------
 Called from:
-	includes/model/Post.php on line 783
+	includes/model/Post.php on line 792
 
 Target:
 	$feed_content
@@ -1260,7 +1278,7 @@ Arguments:
 filter_post
 -----------
 Called from:
-	includes/model/Post.php on line 866
+	includes/model/Post.php on line 875
 
 Target:
 	$this
@@ -1344,7 +1362,7 @@ Arguments:
 filter_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 508
+	modules/comments/model/Comment.php on line 534
 
 Target:
 	$this
@@ -1353,7 +1371,7 @@ Target:
 markup_comment_text
 -------------------
 Called from:
-	modules/comments/model/Comment.php on line 511
+	modules/comments/model/Comment.php on line 537
 
 Target:
 	$this->body

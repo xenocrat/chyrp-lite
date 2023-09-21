@@ -101,7 +101,7 @@ msgid "## Heading"
 msgstr "## Intestazione"
 
 #: admin/help/markdown.twig:20 admin/help/markdown.twig:24
-#: admin/javascripts/admin.js.php:233 admin/javascripts/admin.js.php:234
+#: admin/javascripts/admin.js.php:234 admin/javascripts/admin.js.php:235
 msgid "Heading"
 msgstr "Intestazione"
 
@@ -113,8 +113,8 @@ msgstr "### Intestazione"
 msgid "**Strong**"
 msgstr "**Forte**"
 
-#: admin/help/markdown.twig:28 admin/javascripts/admin.js.php:248
-#: admin/javascripts/admin.js.php:249
+#: admin/help/markdown.twig:28 admin/javascripts/admin.js.php:249
+#: admin/javascripts/admin.js.php:250
 msgid "Strong"
 msgstr "Forte"
 
@@ -122,8 +122,8 @@ msgstr "Forte"
 msgid "*Emphasis*"
 msgstr "*Enfasi*"
 
-#: admin/help/markdown.twig:32 admin/javascripts/admin.js.php:263
-#: admin/javascripts/admin.js.php:264
+#: admin/help/markdown.twig:32 admin/javascripts/admin.js.php:264
+#: admin/javascripts/admin.js.php:265
 msgid "Emphasis"
 msgstr "Enfasi"
 
@@ -139,8 +139,8 @@ msgstr "Citazione"
 msgid "~~Strikethrough~~"
 msgstr "~~Barrato~~"
 
-#: admin/help/markdown.twig:40 admin/javascripts/admin.js.php:278
-#: admin/javascripts/admin.js.php:279
+#: admin/help/markdown.twig:40 admin/javascripts/admin.js.php:279
+#: admin/javascripts/admin.js.php:280
 msgid "Strikethrough"
 msgstr "Barrato"
 
@@ -148,8 +148,8 @@ msgstr "Barrato"
 msgid "`Code`"
 msgstr "`Codice`"
 
-#: admin/help/markdown.twig:44 admin/javascripts/admin.js.php:308
-#: admin/javascripts/admin.js.php:309
+#: admin/help/markdown.twig:44 admin/javascripts/admin.js.php:309
+#: admin/javascripts/admin.js.php:310
 msgid "Code"
 msgstr "Codice"
 
@@ -157,8 +157,8 @@ msgstr "Codice"
 msgid "==Highlight=="
 msgstr "==Evidenziare=="
 
-#: admin/help/markdown.twig:48 admin/javascripts/admin.js.php:293
-#: admin/javascripts/admin.js.php:294
+#: admin/help/markdown.twig:48 admin/javascripts/admin.js.php:294
+#: admin/javascripts/admin.js.php:295
 msgid "Highlight"
 msgstr "Evidenziare"
 
@@ -190,8 +190,8 @@ msgstr "Nuovo paragrafo"
 msgid "[title](URL)"
 msgstr "[titolo](URL)"
 
-#: admin/help/markdown.twig:65 admin/javascripts/admin.js.php:323
-#: admin/javascripts/admin.js.php:324
+#: admin/help/markdown.twig:65 admin/javascripts/admin.js.php:324
+#: admin/javascripts/admin.js.php:325
 msgid "Hyperlink"
 msgstr "Collegamento ipertestuale"
 
@@ -199,8 +199,8 @@ msgstr "Collegamento ipertestuale"
 msgid "![description](URL)"
 msgstr "![descrizione](URL)"
 
-#: admin/help/markdown.twig:69 admin/javascripts/admin.js.php:338
-#: admin/javascripts/admin.js.php:339
+#: admin/help/markdown.twig:69 admin/javascripts/admin.js.php:339
+#: admin/javascripts/admin.js.php:340
 msgid "Image"
 msgstr "Immagine"
 
@@ -316,79 +316,79 @@ msgstr "Spunta tutto"
 msgid "Are you sure you want to proceed?"
 msgstr "Sei sicuro di volere procedere?"
 
-#: admin/javascripts/admin.js.php:192 admin/javascripts/admin.js.php:415
-#: admin/javascripts/admin.js.php:817
+#: admin/javascripts/admin.js.php:193 admin/javascripts/admin.js.php:416
+#: admin/javascripts/admin.js.php:818
 msgid "Modal window"
 msgstr "Finestra modale"
 
-#: admin/javascripts/admin.js.php:205 admin/javascripts/admin.js.php:427
-#: admin/javascripts/admin.js.php:831
+#: admin/javascripts/admin.js.php:206 admin/javascripts/admin.js.php:428
+#: admin/javascripts/admin.js.php:832
 msgid "Close"
 msgstr "Chiudi"
 
-#: admin/javascripts/admin.js.php:212 admin/javascripts/admin.js.php:434
-#: admin/javascripts/admin.js.php:838
+#: admin/javascripts/admin.js.php:213 admin/javascripts/admin.js.php:435
+#: admin/javascripts/admin.js.php:839
 msgid "close"
 msgstr "chiudi"
 
-#: admin/javascripts/admin.js.php:240
+#: admin/javascripts/admin.js.php:241
 msgid "heading"
 msgstr "intestazione"
 
-#: admin/javascripts/admin.js.php:255
+#: admin/javascripts/admin.js.php:256
 msgid "strong"
 msgstr "forte"
 
-#: admin/javascripts/admin.js.php:270
+#: admin/javascripts/admin.js.php:271
 msgid "emphasis"
 msgstr "enfasi"
 
-#: admin/javascripts/admin.js.php:285
+#: admin/javascripts/admin.js.php:286
 msgid "strikethrough"
 msgstr "barrato"
 
-#: admin/javascripts/admin.js.php:300
+#: admin/javascripts/admin.js.php:301
 msgid "highlight"
 msgstr "evidenza"
 
-#: admin/javascripts/admin.js.php:315
+#: admin/javascripts/admin.js.php:316
 msgid "code"
 msgstr "codice"
 
-#: admin/javascripts/admin.js.php:330
+#: admin/javascripts/admin.js.php:331
 msgid "hyperlink"
 msgstr "collegamento ipertestuale"
 
-#: admin/javascripts/admin.js.php:345 admin/javascripts/admin.js.php:395
+#: admin/javascripts/admin.js.php:346 admin/javascripts/admin.js.php:396
 msgid "image"
 msgstr "immagine"
 
-#: admin/javascripts/admin.js.php:357 admin/javascripts/admin.js.php:358
+#: admin/javascripts/admin.js.php:358 admin/javascripts/admin.js.php:359
 msgid "Upload"
 msgstr "Carica"
 
-#: admin/javascripts/admin.js.php:373 admin/javascripts/admin.js.php:594
+#: admin/javascripts/admin.js.php:374 admin/javascripts/admin.js.php:595
 msgid "Uploading..."
 msgstr "Caricamento in corso…."
 
-#: admin/javascripts/admin.js.php:404 admin/javascripts/admin.js.php:405
+#: admin/javascripts/admin.js.php:405 admin/javascripts/admin.js.php:406
 msgid "Insert"
 msgstr "Inserisci"
 
-#: admin/javascripts/admin.js.php:450
+#: admin/javascripts/admin.js.php:451
 msgid "insert"
 msgstr "inserisci"
 
-#: admin/javascripts/admin.js.php:464 admin/javascripts/admin.js.php:465
+#: admin/javascripts/admin.js.php:465 admin/javascripts/admin.js.php:466
 #: admin/pages/themes.twig:24
 msgid "Preview"
 msgstr "Anteprima"
 
-#: admin/javascripts/admin.js.php:481
+#: admin/javascripts/admin.js.php:482
 msgid "preview"
 msgstr "anteprima"
 
-#: admin/javascripts/admin.js.php:507
+#: admin/javascripts/admin.js.php:508
 msgid "Words:"
 msgstr "Parole:"
 
@@ -446,12 +446,12 @@ msgid "Include pages in search results."
 msgstr "Includi pagine nei risultati della ricerca."
 
 #: admin/pages/content_settings.twig:49
-msgid "Send Webmentions"
-msgstr "Invia Webmention"
+msgid "Webmentions"
+msgstr "Webmention"
 
 #: admin/pages/content_settings.twig:52
-msgid "Attempts to notify sites to which your posts link."
-msgstr "Tenta di notificare i siti a cui si collegano i tuoi post."
+msgid "Send and receive notifications when URLs are mentioned."
+msgstr "Invia e ricevi notifiche quando vengono menzionati gli URL."
 
 #: admin/pages/content_settings.twig:58 admin/pages/content_settings.twig:66
 #: admin/pages/export.twig:14 admin/pages/export.twig:20

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/comments/admin/pages/comment_settings.twig:3
@@ -19,38 +19,54 @@ msgid "Comment Settings"
 msgstr "评论设置"
 
 #: modules/comments/admin/pages/comment_settings.twig:10
-msgid "Allowed HTML Tags"
-msgstr "允许HTML标签"
+msgid "Site Notifications"
+msgstr "站点通知"
 
 #: modules/comments/admin/pages/comment_settings.twig:12
-msgid "Format: <code>strong, blockquote, em</code>"
-msgstr "格式： <code>strong, blockquote, em</code>"
+msgid "Notify the site contact by email when a comment is added."
+msgstr "添加注释时通过电子邮件通知站点联系人。"
 
 #: modules/comments/admin/pages/comment_settings.twig:15
+msgid "Author Notifications"
+msgstr "作者通知"
+
+#: modules/comments/admin/pages/comment_settings.twig:17
+msgid "Notify the post author by email when a comment is added."
+msgstr "添加评论时通过电子邮件通知帖子作者。"
+
+#: modules/comments/admin/pages/comment_settings.twig:20
 msgid "Default Comment Status"
 msgstr "默认评论状态"
 
-#: modules/comments/admin/pages/comment_settings.twig:24
+#: modules/comments/admin/pages/comment_settings.twig:29
+msgid "Allowed HTML Tags"
+msgstr "允许HTML标签"
+
+#: modules/comments/admin/pages/comment_settings.twig:31
+msgid "Format: <code>strong, blockquote, em</code>"
+msgstr "格式： <code>strong, blockquote, em</code>"
+
+#: modules/comments/admin/pages/comment_settings.twig:34
 msgid "Comments Per Page"
 msgstr "每页评论"
 
-#: modules/comments/admin/pages/comment_settings.twig:26
+#: modules/comments/admin/pages/comment_settings.twig:36
 msgid "Themes decide whether or not to paginate comments."
 msgstr "主题决定是否分页评论。"
 
-#: modules/comments/admin/pages/comment_settings.twig:29
+#: modules/comments/admin/pages/comment_settings.twig:39
 msgid "Reload Comments"
 msgstr "重新加载评论"
 
-#: modules/comments/admin/pages/comment_settings.twig:31
+#: modules/comments/admin/pages/comment_settings.twig:41
 msgid "Show newly added comments (up to the maximum number per page)."
 msgstr "显示新添加的评论（直到每页最多）。"
 
-#: modules/comments/admin/pages/comment_settings.twig:34
-msgid "Reload interval"
+#: modules/comments/admin/pages/comment_settings.twig:44
+msgid "Reload Interval"
 msgstr "重新加载间隔"
 
-#: modules/comments/admin/pages/comment_settings.twig:36
+#: modules/comments/admin/pages/comment_settings.twig:46
 msgid "(seconds)"
 msgstr "（秒）"
 
@@ -99,18 +115,18 @@ msgid "Status"
 msgstr "状态"
 
 #: modules/comments/admin/pages/edit_comment.twig:46
-#: modules/comments/comments.php:702
+#: modules/comments/comments.php:684
 msgid "Approved"
 msgstr "已批准的"
 
 #: modules/comments/admin/pages/edit_comment.twig:48
-#: modules/comments/comments.php:703
+#: modules/comments/comments.php:685
 msgid "Denied"
 msgstr "已否决的"
 
 #: modules/comments/admin/pages/edit_comment.twig:50
 #: modules/comments/admin/pages/manage_spam.twig:16
-#: modules/comments/comments.php:704
+#: modules/comments/comments.php:686
 msgid "Spam"
 msgstr "垃圾评论"
 
@@ -133,8 +149,8 @@ msgid "Manage Comments"
 msgstr "管理评论"
 
 #: modules/comments/admin/pages/manage_comments.twig:16
-#: modules/comments/comments.php:773 modules/comments/comments.php:808
-#: modules/comments/comments.php:822 modules/comments/info.php:3
+#: modules/comments/comments.php:757 modules/comments/comments.php:792
+#: modules/comments/comments.php:806 modules/comments/info.php:3
 msgid "Comments"
 msgstr "评论"
 
@@ -175,220 +191,222 @@ msgstr "标记为垃圾评论"
 msgid "Manage Spam"
 msgstr "管理垃圾评论"
 
-#: modules/comments/comments.php:66
+#: modules/comments/comments.php:68
 msgid "Add Comments"
 msgstr "增加评论"
 
-#: modules/comments/comments.php:67
+#: modules/comments/comments.php:69
 msgid "Add Comments to Private Posts"
 msgstr "增加评论到私人帖子"
 
-#: modules/comments/comments.php:68
+#: modules/comments/comments.php:70
 msgid "Edit Comments"
 msgstr "编辑评论"
 
-#: modules/comments/comments.php:69
+#: modules/comments/comments.php:71
 msgid "Edit Own Comments"
 msgstr "编辑自己的评论"
 
-#: modules/comments/comments.php:70
+#: modules/comments/comments.php:72
 msgid "Delete Comments"
 msgstr "删除评论"
 
-#: modules/comments/comments.php:71
+#: modules/comments/comments.php:73
 msgid "Delete Own Comments"
 msgstr "删除自己的评论"
 
-#: modules/comments/comments.php:72
+#: modules/comments/comments.php:74
 msgid "Can Use HTML in Comments"
 msgstr "可以在评论中使用HTML"
 
-#: modules/comments/comments.php:79
+#: modules/comments/comments.php:81
 msgid "Please enter an ID to find a comment."
 msgstr "请输入需要查找的评论ID。"
 
-#: modules/comments/comments.php:107
+#: modules/comments/comments.php:112
 msgid "Most commented on posts"
 msgstr "对帖子的评论最多"
 
-#: modules/comments/comments.php:126
+#: modules/comments/comments.php:131
 msgid "An ID is required to add a comment."
 msgstr "添加评论必须要一个ID。"
 
-#: modules/comments/comments.php:140
+#: modules/comments/comments.php:145
 msgid "You cannot comment on this post."
 msgstr "您不能评论这篇帖子。"
 
-#: modules/comments/comments.php:147 modules/comments/comments.php:248
+#: modules/comments/comments.php:151 modules/comments/comments.php:245
 msgid "Message can't be blank."
 msgstr "消息不能为空。"
 
-#: modules/comments/comments.php:154 modules/comments/comments.php:255
+#: modules/comments/comments.php:157 modules/comments/comments.php:251
 msgid "Author can't be blank."
 msgstr "作者不能为空。"
 
-#: modules/comments/comments.php:161 modules/comments/comments.php:262
+#: modules/comments/comments.php:163 modules/comments/comments.php:257
 msgid "Email address can't be blank."
 msgstr "邮件地址不能为空。"
 
-#: modules/comments/comments.php:168 modules/comments/comments.php:269
+#: modules/comments/comments.php:169 modules/comments/comments.php:263
 msgid "Invalid email address."
 msgstr "无效的邮件地址。"
 
-#: modules/comments/comments.php:175 modules/comments/comments.php:276
+#: modules/comments/comments.php:175 modules/comments/comments.php:269
 msgid "Invalid website URL."
 msgstr "无效的网站URL。"
 
-#: modules/comments/comments.php:185
+#: modules/comments/comments.php:184
 msgid "Incorrect captcha response."
 msgstr "验证码不正确。"
 
-#: modules/comments/comments.php:206
+#: modules/comments/comments.php:204
 msgid "Comment added."
 msgstr "评论已增加。"
 
-#: modules/comments/comments.php:207
+#: modules/comments/comments.php:205
 msgid "Your comment is awaiting moderation."
 msgstr "您的评论正在等待审核。"
 
-#: modules/comments/comments.php:221
+#: modules/comments/comments.php:219
 msgid "An ID is required to update a comment."
 msgstr "更新评论必须要一个ID。"
 
-#: modules/comments/comments.php:230 modules/comments/comments.php:362
-#: modules/comments/comments.php:390 modules/comments/comments.php:428
-#: modules/comments/comments.php:896 modules/comments/comments.php:928
-#: modules/comments/comments.php:963
+#: modules/comments/comments.php:228 modules/comments/comments.php:344
+#: modules/comments/comments.php:372 modules/comments/comments.php:410
+#: modules/comments/comments.php:880 modules/comments/comments.php:912
+#: modules/comments/comments.php:947
 msgid "Comment not found."
 msgstr "评论未找到。"
 
-#: modules/comments/comments.php:236 modules/comments/comments.php:369
-#: modules/comments/comments.php:934
+#: modules/comments/comments.php:234 modules/comments/comments.php:351
+#: modules/comments/comments.php:918
 msgid "You do not have sufficient privileges to edit this comment."
 msgstr "你没有足够的权限来编辑这段评论。"
 
-#: modules/comments/comments.php:307
+#: modules/comments/comments.php:299
 msgid "Comment updated."
 msgstr "评论已更新。"
 
-#: modules/comments/comments.php:351 modules/comments/comments.php:916
+#: modules/comments/comments.php:333 modules/comments/comments.php:900
 msgid "An ID is required to edit a comment."
 msgstr "编辑评论必须要一个ID。"
 
-#: modules/comments/comments.php:382 modules/comments/comments.php:416
-#: modules/comments/comments.php:954
+#: modules/comments/comments.php:364 modules/comments/comments.php:398
+#: modules/comments/comments.php:938
 msgid "An ID is required to delete a comment."
 msgstr "删除评论必须要一个ID。"
 
-#: modules/comments/comments.php:397 modules/comments/comments.php:434
-#: modules/comments/comments.php:969
+#: modules/comments/comments.php:379 modules/comments/comments.php:416
+#: modules/comments/comments.php:953
 msgid "You do not have sufficient privileges to delete this comment."
 msgstr "你没有足够的权限来删除这段评论。"
 
-#: modules/comments/comments.php:443 modules/comments/comments.php:974
+#: modules/comments/comments.php:425 modules/comments/comments.php:958
 msgid "Comment deleted."
 msgstr "评论已删除。"
 
-#: modules/comments/comments.php:450 modules/comments/comments.php:497
+#: modules/comments/comments.php:432 modules/comments/comments.php:479
 msgid "You do not have sufficient privileges to manage any comments."
 msgstr "你没有足够的权限来管理任何评论。"
 
-#: modules/comments/comments.php:568
+#: modules/comments/comments.php:550
 msgid "Selected comments deleted."
 msgstr "选择的评论已删除。"
 
-#: modules/comments/comments.php:606
+#: modules/comments/comments.php:588
 msgid "Selected comments denied."
 msgstr "选择的评论已否决。"
 
-#: modules/comments/comments.php:641
+#: modules/comments/comments.php:623
 msgid "Selected comments approved."
 msgstr "选择的评论已批准。"
 
-#: modules/comments/comments.php:674
+#: modules/comments/comments.php:656
 msgid "Selected comments marked as spam."
 msgstr "选择的评论已标记为垃圾评论。"
 
-#: modules/comments/comments.php:794
+#: modules/comments/comments.php:778
 #, php-format
 msgid "Comments (%d)"
 msgstr "评论数 (%d)"
 
-#: modules/comments/comments.php:800
+#: modules/comments/comments.php:784
 #, php-format
 msgid "Spam (%d)"
 msgstr "垃圾评论数 (%d)"
 
-#: modules/comments/comments.php:836
+#: modules/comments/comments.php:820
 msgid "An ID is required to reload comments."
 msgstr "重新加载评论必须要一个ID。"
 
-#: modules/comments/comments.php:854
+#: modules/comments/comments.php:838
 #, php-format
 msgid "Comments added since %s"
 msgstr "自 %s 添加了评论"
 
-#: modules/comments/comments.php:887
+#: modules/comments/comments.php:871
 msgid "An ID is required to show a comment."
 msgstr "显示评论必须要一个ID。"
 
-#: modules/comments/comments.php:993 modules/comments/comments.php:1083
+#: modules/comments/comments.php:977 modules/comments/comments.php:1082
 #, php-format
 msgid "Comments on &#8220;%s&#8221;"
 msgstr "对 &#8220;%s&#8221; 的评论"
 
-#: modules/comments/comments.php:1065
+#: modules/comments/comments.php:1064
 msgid "You have unsubscribed from the conversation."
 msgstr "您已取消订阅对话。"
 
-#: modules/comments/comments.php:1105
+#: modules/comments/comments.php:1104
 #, php-format
 msgid "Comment #%d"
 msgstr "评论 #%d"
 
-#: modules/comments/comments.php:1134
+#: modules/comments/comments.php:1133
 msgid "A ping from your URL is already registered."
 msgstr "您的URL中的ping已被注册。"
 
-#: modules/comments/comments.php:1141
+#: modules/comments/comments.php:1140
 msgid "Your URL is too long to be stored in our database."
 msgstr "您的网址太长，无法存储在我们的数据库中。"
 
-#: modules/comments/comments.php:1146
+#: modules/comments/comments.php:1145
 msgid "Mentioned this post."
 msgstr "提到了这个帖子。"
 
-#: modules/comments/comments.php:1165
+#: modules/comments/comments.php:1164
 msgid "Open"
 msgstr "打开"
 
-#: modules/comments/comments.php:1171
+#: modules/comments/comments.php:1170
 msgid "Closed"
 msgstr "已关闭"
 
-#: modules/comments/comments.php:1177
+#: modules/comments/comments.php:1176
 msgid "Private"
 msgstr "私人"
 
-#: modules/comments/comments.php:1183
+#: modules/comments/comments.php:1182
 msgid "Registered Only"
 msgstr "仅注册"
 
-#: modules/comments/comments.php:1192
+#: modules/comments/comments.php:1191
 msgid "Comment Status"
 msgstr "评论状态"
 
-#: modules/comments/comments.php:1414
+#: modules/comments/comments.php:1409 modules/comments/comments.php:1429
+#: modules/comments/comments.php:1453
 #, php-format
 msgid "New Comment at %s"
 msgstr "%s 上的新注释"
 
-#: modules/comments/comments.php:1415
+#: modules/comments/comments.php:1410 modules/comments/comments.php:1430
+#: modules/comments/comments.php:1454
 #, php-format
 msgid "%s commented on a blog post:"
 msgstr "%s 在博客文章上评论："
 
-#: modules/comments/comments.php:1423
+#: modules/comments/comments.php:1462
 msgid "Unsubscribe from this conversation:"
 msgstr "取消订阅此对话："
 
@@ -408,6 +426,6 @@ msgstr "您想从数据库中删除评论吗？"
 msgid "Are you sure you want to permanently delete this comment?"
 msgstr "您确定要永久删除这个评论？"
 
-#: modules/comments/model/Comment.php:490
+#: modules/comments/model/Comment.php:516
 msgid "Anon"
 msgstr "不久"

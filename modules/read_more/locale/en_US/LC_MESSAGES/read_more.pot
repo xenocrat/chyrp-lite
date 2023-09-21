@@ -22,7 +22,7 @@ msgstr ""
 msgid "Add &#8220;&hellip;more&#8221; links to your blog index by typing <code>&lt;!--more--&gt;</code> or <code>&lt;!--more custom text--&gt;</code> in your posts."
 msgstr ""
 
-#: modules/read_more/read_more.php:81
+#: modules/read_more/read_more.php:78
 msgid "&hellip;more"
 msgstr ""
 

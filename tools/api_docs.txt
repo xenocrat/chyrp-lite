@@ -1952,6 +1952,17 @@ Returns:
     The primary subtag for this code, e.g. "en" from "en_US".
 
 
+Function: text_direction
+------------------------
+Returns the correct text direction for the supplied language code.
+
+Parameters:
+    $code - The language code.
+
+Returns:
+    Either the string "ltr" or "rtl".
+
+
 Function: __
 ------------
 Translates a string using gettext.
@@ -2306,9 +2317,10 @@ Parameters:
 Returns:
     The text with Markdown formatting applied.
 
-Se Also:
+See Also:
     https://github.com/commonmark/CommonMark
     https://github.github.com/gfm/
+    https://chyrplite.net/wiki/Chyrp-Flavoured-Markdown.html
 
 
 Function: emote
@@ -2679,6 +2691,14 @@ Returns:
 
 Source:
     http://gravatar.com/site/implement/images/php/
+
+
+Function: esce
+--------------
+Escapes a string with backslashes and echoes it to output.
+
+Parameters:
+    $string - The string to escape and echo.
 
 
 Function: json_set
@@ -3099,32 +3119,54 @@ Returns a list of filters to add to the existing list.
 
 Function: twig_callback_missing_function
 ----------------------------------------
-Scans enabled modules for a callable method matching the name of a missing Twig function.
+Scans callable methods of enabled modules in search of a missing Twig function.
+
+Parameters:
+    $name - The name of the missing Twig function.
 
 
 Function: twig_callback_missing_filter
 --------------------------------------
-Scans enabled modules for a callable method matching the name of a missing Twig filter.
+Scans callable methods of enabled modules in search of a missing Twig filter.
+
+Parameters:
+    $name - The name of the missing Twig filter.
 
 
 Function: twig_function_paginate
 --------------------------------
 Paginates an array of items using the Paginator class.
 
+Parameters:
+    $array - The array to paginate.
+    $per_page - The number of items per page.
+    $name - The $_GET value for the current page.
+
 
 Function: twig_function_posted
 ------------------------------
 Returns a $_POST value if set, otherwise returns the fallback value.
+
+Parameters:
+    $key - The key to test in the $_POST array.
+    $fallback - The value to return if the $_POST value is not set.
 
 
 Function: twig_function_mailto
 ------------------------------
 Returns an obfuscated mailto: URL.
 
+Parameters:
+    $email - The email address to obfuscate.
+
 
 Function: twig_function_uploaded_search
 ---------------------------------------
 Returns an array of matches, if the visitor has the "export_content" privilege.
+
+Parameters:
+    $search - A search term.
+    $filter - An array of valid extensions (case insensitive).
 
 
 Function: twig_function_javascripts_nonce
@@ -3141,25 +3183,46 @@ Function: twig_filter_translate
 -------------------------------
 Returns a translated string.
 
+Parameters:
+    $text - The string to translate.
+    $domain - The translation domain to read from.
+
 
 Function: twig_filter_translate_plural
 --------------------------------------
 Returns a plural (or not) form of a translated string.
+
+Parameters:
+    $single - Singular string.
+    $plural - Pluralized string.
+    $number - The number to judge by.
+    $domain - The translation domain to read from.
 
 
 Function: twig_filter_time
 --------------------------
 Returns a <time> HTML element containing an internationalized time representation.
 
+Parameters:
+    $timestamp - A time value to be strtotime() converted.
+    $format - The formatting for the <time> representation.
+
 
 Function: twig_filter_date_format
 ---------------------------------
 Returns date formatting for a string that isn't a regular time() value.
 
+Parameters:
+    $timestamp - A time value to be strtotime() converted.
+    $formatting - The formatting for date().
+
 
 Function: twig_filter_strftime_format
 -------------------------------------
 Returns date formatting for a string that isn't a regular time() value.
+
+Parameters:
+    $timestamp - A time value to be strtotime() converted.
 
 Notes:
     Uses date() instead of strftime(). Retained for backwards compatibility.
@@ -3169,31 +3232,53 @@ Function: twig_filter_filesize_format
 -------------------------------------
 Returns a string containing a formatted filesize value.
 
+Parameters:
+    $bytes - The filesize in bytes.
+
 
 Function: twig_filter_preg_match
 --------------------------------
-Try to match a string against an array of regular expressions,
-or a single regular expression.
+Try to match a string against an array of regular expressions.
+
+Parameters:
+    $try - An array of regular expressions, or a single regular expression.
+    $haystack - The string to test.
 
 
 Function: twig_filter_preg_replace
 ----------------------------------
 Performs a <preg_replace> on the supplied string or array.
 
+Parameters:
+    $subject - The input string.
+    $pattern - The regular expression to match.
+    $replacement - The replacement string.
+    $limit - The maximum number of replacements.
+
 
 Function: twig_filter_contains
 ------------------------------
 Does the haystack variable contain the needle variable?
+
+Parameters:
+    $haystack - The variable to search within.
+    $needle - The variable to search for.
 
 
 Function: twig_filter_inspect
 -----------------------------
 Exports a variable for inspection.
 
+Parameters:
+    $variable - The variable to inspect.
+
 
 Function: twig_filter_checked
 -----------------------------
 Returns a HTML @checked@ attribute if the test evalutaes to true.
+
+Parameters:
+    $test - The variable to test.
 
 
 Function: twig_filter_selected
@@ -3201,22 +3286,39 @@ Function: twig_filter_selected
 Returns a HTML @selected@ attribute if the
 test matches any of the supplied arguments.
 
+Parameters:
+    $test - The variable to test.
+
 
 Function: twig_filter_disabled
 ------------------------------
 Returns a HTML @disabled@ attribute if the
 test matches any of the supplied arguments.
 
+Parameters:
+    $test - The variable to test.
+
 
 Function: twig_filter_download
 ------------------------------
 Returns a download link for a file located in the uploads directory.
+
+Parameters:
+    $filename - The uploaded filename.
 
 
 Function: twig_filter_thumbnail
 -------------------------------
 Returns a thumbnail <img> tag for an uploaded image,
 optionally with enclosing <a> tag.
+
+Parameters:
+    $filename - The uploaded filename.
+    $alt_text - The alternative text for the image.
+    $url - Either a valid URL or @true@ to link to the uploaded file.
+    $args - An array of additional arguments.
+    $sizes - A string containing comma-separated source sizes.
+    $lazy - Specify lazy-loading for this image?
 
 
 ==============================================
