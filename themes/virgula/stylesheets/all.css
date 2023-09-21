@@ -442,7 +442,7 @@ section img {
     box-sizing: border-box;
     display: block;
     max-width: 100%;
-    border: 1px solid #f3f2f1;
+    border: 2px solid #f3f2f1;
 }
 section.photo img {
     width: 100%;
@@ -465,7 +465,7 @@ section.photo > a:focus {
 }
 #comments > li {
     margin: 0rem;
-    border-bottom: 1px solid #0b0c0c;
+    border-bottom: 3px dotted #b1b4b6;
 }
 #tag_cloud > a.tag {
     padding: 0rem 0.3rem;
@@ -475,8 +475,7 @@ section.photo > a:focus {
 #tag_cloud > a.tag:focus {
     background-color: #ffdd00;
 }
-.ajax_loading {
-    background-size: 10px 10px;
+.ajax_loading * {
     filter: blur(2px) !important;
 }
 .ajax_loading .doaction {
