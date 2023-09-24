@@ -76,7 +76,6 @@ p.footnote-backrefs {
 h1 {
     font-size: 2em;
     font-weight: bold;
-    text-transform: none;
     margin: 1em 0em;
     padding: 0em;
 }
@@ -86,7 +85,6 @@ h1.banner {
 h2 {
     font-size: 1.5em;
     font-weight: bold;
-    text-transform: none;
     margin: 1em 0em;
     padding: 0em;
 }
@@ -99,33 +97,26 @@ h2.page_title {
     margin-bottom: 2rem;
     border-bottom: 1px solid #ebedec;
 }
-h3 {
-    font-size: 1em;
-    font-weight: bold;
-    text-transform: none;
-    margin: 1em 0em;
-    padding: 0em;
-}
-h3.ribbon {
-    font-weight: normal;
-    margin: 0em;
-}
 h2.archive {
     margin: 2rem 0rem 0rem 0rem;
 }
-h4, h5, h6 {
+h3 {
     font-size: 1em;
     font-weight: bold;
     margin: 1em 0em;
     padding: 0em;
 }
-h4.archive {
+h3.archive {
     font-size: 1.33em;
     text-align: center;
     padding-bottom: 0.5em;
     border-bottom: 1px solid #ebedec;
 }
-h6.post_byline {
+h3.ribbon {
+    font-weight: normal;
+    margin: 0em;
+}
+h3.post_byline {
     font-weight: normal;
     font-style: italic;
     font-size: 0.75em;
@@ -133,6 +124,12 @@ h6.post_byline {
     margin-bottom: 2rem;
     padding-bottom: 2rem;
     border-bottom: 1px solid #ebedec;
+}
+h4, h5, h6 {
+    font-size: 1em;
+    font-weight: bold;
+    margin: 1em 0em;
+    padding: 0em;
 }
 sup, sub {
     line-height: 1;

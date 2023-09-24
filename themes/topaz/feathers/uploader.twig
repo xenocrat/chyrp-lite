@@ -5,9 +5,9 @@
 <h2 class="post_title">
 <a href="{{ post.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(post.title | striptags | normalize | fix(true)) }}">{{ post.title }}</a>
 </h2>
-<h6 class="post_byline">
+<h3 class="post_byline">
 <a href="{{ url('author/' ~ post.author.id) }}">{{ "Written by %s" | translate | format(post.author.name) }}</a>
-</h6>
+</h3>
 {% endif %}
 {% if post.caption is not empty %}
 <section class="caption">
@@ -21,7 +21,7 @@
 </section>
 {% else %}
 <section class="attachment">
-<h6>{{ "File attachment:" | translate }}</h6>
+<h3>{{ "File attachment:" | translate }}</h3>
 <a href="{{ file.name | download }}">{{ file.name | fix | truncate(40, "&hellip;", true) }}</a>
 ({{ file.size | filesizeformat }})
 </section>

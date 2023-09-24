@@ -74,23 +74,27 @@ p.footnote-backrefs {
 h1 {
     font-size: 2em;
     font-weight: bold;
-    text-transform: none;
     margin: 1em 0em;
     padding: 0em;
 }
 h2, h1.banner {
     font-size: 1.5em;
     font-weight: bold;
-    text-transform: none;
     margin: 1em 0em;
     padding: 0em;
+}
+h2.archive {
+    margin: 2rem 0rem 0rem 0rem;
 }
 h3 {
     font-size: 1em;
     font-weight: bold;
-    text-transform: none;
     margin: 1em 0em;
     padding: 0em;
+}
+h3.archive {
+    font-size: 1.33em;
+    margin-bottom: 0.75em;
 }
 h3.flash {
     font-weight: normal;
@@ -106,24 +110,15 @@ h3.filter {
     border: 1px solid #c2bcb8;
     border-radius: 1.5rem;
 }
-h2.archive {
-    margin: 2rem 0rem 0rem 0rem;
-}
 h4 {
     font-size: 1em;
     font-weight: bold;
-    text-transform: none;
     margin: 1em 0em;
     padding: 0em;
-}
-h4.archive {
-    font-size: 1.33em;
-    margin-bottom: 0.75em;
 }
 h5, h6 {
     font-size: 1em;
     font-weight: bold;
-    text-transform: none;
     margin: 1em 0em;
     padding: 0em;
 }

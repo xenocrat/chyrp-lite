@@ -22,7 +22,7 @@
 {{ post.image | thumbnail("", false, ["max_width=196", "quality=60", "square=1"], "(max-width: 599px) 95vw, 196px") }}
 {% else %}
 {% if post.title is not empty %}
-<h4 class="archive">{{ post.title | striptags | normalize | truncate(20) }}</h4>
+<h3 class="archive">{{ post.title | striptags | normalize | truncate(20) }}</h3>
 {% endif %}
 <p>{{ post.excerpt() | striptags | normalize | truncate(1000) | oneof(post.slug) }}</p>
 {% endif %}

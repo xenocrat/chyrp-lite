@@ -4,9 +4,9 @@
 <h2 class="post_title">
 <a href="{{ post.source | fix(true) }}" rel="external">{{ post.name }}</a>
 </h2>
-<h6 class="post_byline">
+<h3 class="post_byline">
 <a href="{{ url('author/' ~ post.author.id) }}">{{ "Written by %s" | translate | format(post.author.name) }}</a>
-</h6>
+</h3>
 <section class="description">
 {{ post.description }}
 </section>
