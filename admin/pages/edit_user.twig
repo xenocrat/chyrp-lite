@@ -3,7 +3,7 @@
 {% block title %}{{ "Edit User" | translate }}{% endblock %}
 
 {% block content %}
-<h1>{{ "Editing User &#8220;%s&#8221;" | translate | format(user.login) }}</h1>
+<h2>{{ "Editing User &#8220;%s&#8221;" | translate | format(user.login) }}</h2>
 <form id="user_edit" class="split" action="{{ url('update_user') }}" method="post" accept-charset="UTF-8"{% if user.id == visitor.id %} data-confirm="{{'Are you sure you want to make these changes to your account?' | translate | fix(true) }}"{% endif %}>
 <fieldset role="presentation">
 <p>

@@ -5,23 +5,23 @@
 {% block content %}
 <h2>{{ "Modules" | translate }}</h2>
 {% if enabled_modules is not empty %}
-<h5>{{ "Enabled" | translate }}</h5>
+<h3>{{ "Enabled" | translate }}</h3>
 <ul id="modules_enabled" class="extend modules">
 {% for safename, module in enabled_modules %}
 <li class="module{{ module.classes is defined ? ' ' ~ module.classes | join(' ') : '' }}" id="module_{{ safename }}">
-<h3>
+<h4>
 <a class="emblem module_url" href="{{ module.url }}" target="_blank">
 <img src="{{ site.chyrp_url }}/admin/images/icons/info.svg" alt="{{ 'info' | translate }}">
 {{ module.name }}{# translation is done in the controller #}
 </a>
-</h3>
+</h4>
 <p class="module_description">
 {{ module.description }}{# translation is done in the controller #}
 </p>
 {% if module.conflicts is not empty %}
-<h4 class="module_conflicts_message">
+<h5 class="module_conflicts_message">
 {{ "This module conflicts with the following modules:" | translate }}
-</h4>
+</h5>
 <ol class="module_conflicts_list">
 {% for conflict in module.conflicts %}
 <li class="{{ conflict }}">{{ conflict | camelize }}</li>
@@ -29,9 +29,9 @@
 </ol>
 {% endif %}
 {% if module.dependencies is not empty %}
-<h4 class="module_dependencies_message">
+<h5 class="module_dependencies_message">
 {{ "This module requires the following modules to be enabled:" | translate }}
-</h4>
+</h5>
 <ol class="module_dependencies_list">
 {% for dependency in module.dependencies %}
 <li class="{{ dependency }}">{{ dependency | camelize }}</li>
@@ -58,23 +58,23 @@
 </ul>
 {% endif %}
 {% if disabled_modules is not empty %}
-<h5>{{ "Disabled" | translate }}</h5>
+<h3>{{ "Disabled" | translate }}</h3>
 <ul id="modules_disabled" class="extend modules">
 {% for safename, module in disabled_modules %}
 <li class="module{{ module.classes is defined ? ' ' ~ module.classes | join(' ') : '' }}" id="module_{{ safename }}">
-<h3>
+<h4>
 <a class="emblem module_url" href="{{ module.url }}" target="_blank">
 <img src="{{ site.chyrp_url }}/admin/images/icons/info.svg" alt="{{ 'info' | translate }}">
 {{ module.name }}{# translation is done in the controller #}
 </a>
-</h3>
+</h4>
 <p class="module_description">
 {{ module.description }}{# translation is done in the controller #}
 </p>
 {% if module.conflicts is not empty %}
-<h4 class="module_conflicts_message">
+<h5 class="module_conflicts_message">
 {{ "This module conflicts with the following modules:" | translate }}
-</h4>
+</h5>
 <ol class="module_conflicts_list">
 {% for conflict in module.conflicts %}
 <li class="{{ conflict }}">{{ conflict | camelize }}</li>
@@ -82,9 +82,9 @@
 </ol>
 {% endif %}
 {% if module.dependencies is not empty %}
-<h4 class="module_dependencies_message">
+<h5 class="module_dependencies_message">
 {{ "This module requires the following modules to be enabled:" | translate }}
-</h4>
+</h5>
 <ol class="module_dependencies_list">
 {% for dependency in module.dependencies %}
 <li class="{{ dependency }}">{{ dependency | camelize }}</li>

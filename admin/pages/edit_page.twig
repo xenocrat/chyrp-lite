@@ -3,7 +3,7 @@
 {% block title %}{{ "Edit Page" | translate }}{% endblock %}
 
 {% block content %}
-<h1>{{ "Editing &#8220;%s&#8221;" | translate | format(page.title | striptags | oneof("[Untitled]" | translate)) }}</h1>
+<h2>{{ "Editing &#8220;%s&#8221;" | translate | format(page.title | striptags | oneof("[Untitled]" | translate)) }}</h2>
 <form id="edit_form" action="{{ url('update_page') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <fieldset role="presentation">
 {% include "partials" ~ DIR ~ "page_fields.twig" %}

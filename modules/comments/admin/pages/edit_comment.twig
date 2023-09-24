@@ -3,7 +3,7 @@
 {% block title %}{{ "Edit Comment" | translate("comments") }}{% endblock %}
 
 {% block content %}
-<h1>{{ "Editing Comment on &#8220;%s&#8221;" | translate("comments") | format(comment.post.title() | striptags | oneof("[Untitled]" | translate)) }}</h1>
+<h2>{{ "Editing Comment on &#8220;%s&#8221;" | translate("comments") | format(comment.post.title() | striptags | oneof("[Untitled]" | translate)) }}</h2>
 <form id="edit_form" action="{{ url('update_comment') }}" method="post" accept-charset="UTF-8">
 <fieldset role="presentation">
 {% set comment_markdown = site.enable_markdown ? " data-markdown" : "" %}
