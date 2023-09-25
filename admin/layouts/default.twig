@@ -41,13 +41,13 @@
 </ul>
 <div id="content" role="main">
 {% for notice in flash.notices %}
-<p role="alert" class="flash notice">{{ notice }}</p>
+<div role="alert" class="flash notice">{{ notice }}</div>
 {% endfor %}
 {% for warning in flash.warnings %}
-<p role="alert" class="flash warning">{{ warning }}</p>
+<div role="alert" class="flash warning">{{ warning }}</div>
 {% endfor %}
 {% for message in flash.messages %}
-<p role="alert" class="flash message">{{ message }}</p>
+<div role="alert" class="flash message">{{ message }}</div>
 {% endfor %}
 {% block content %}{% endblock %}
 </div>

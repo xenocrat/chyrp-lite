@@ -711,7 +711,7 @@ td img.placeholder {
 
 /* Group: Flashes */
 
-p.flash {
+div.flash {
     padding: 0.5rem;
     margin-bottom: 1rem;
     background-color: #1e57ba;
@@ -719,13 +719,13 @@ p.flash {
     border: none;
     border-radius: 0.25em;
 }
-p.flash.notice {
+div.flash.notice {
     background-color: #108600;
 }
-p.flash.warning {
+div.flash.warning {
     background-color: #c11600;
 }
-p.flash a {
+div.flash a {
     color: #ffffff;
     font-weight: 600;
     text-decoration: none;
