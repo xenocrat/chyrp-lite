@@ -79,14 +79,15 @@ h1 {
     margin: 1em 0em;
     padding: 0em;
 }
-h1.banner {
-    font-size: 1em;
-}
 h2 {
     font-size: 1.5em;
     font-weight: bold;
     margin: 1em 0em;
     padding: 0em;
+}
+#sidebar > h1,
+#sidebar > h2 {
+    font-size: 1em;
 }
 h2.post_title,
 h2.page_title {
@@ -865,7 +866,7 @@ div.standalone > *:last-child {
         font-size: 1.25em;
         margin: 0.8em 0em;
     }
-    h6.post_byline {
+    h3.post_byline {
         padding-bottom: 1rem;
     }
     form.comment_edit {
@@ -912,10 +913,12 @@ div.standalone > *:last-child {
     ul#nav.js_nav.on > li#mobile_toggle {
         background-color: #fcfbfa;
     }
-    div#mast {
-        display: block;
-    }
     div#sidebar {
+        position: static;
+        width: 100%;
+        text-align: center;
+    }
+    div#sidebar > *:not(h1):not(form) {
         display: none;
     }
     div#tail {

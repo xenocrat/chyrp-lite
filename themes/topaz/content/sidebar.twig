@@ -46,7 +46,7 @@
 {% endif %}
 </ul>
 {% if module_enabled("categorize") and categorize is not empty %}
-<h4 id="label_categories">{{ "Categories" | translate }}</h4>
+<h2 id="label_categories">{{ "Categories" | translate }}</h2>
 <ul class="navigation sidebar categories" aria-labelledby="label_categories">
 {% for category in categorize %}
 <li>
@@ -56,7 +56,7 @@
 </ul>
 {% endif %}
 {% if theme.pages_list() is not empty %}
-<h4 id="label_my_pages">{{ "Pages" | translate }}</h4>
+<h2 id="label_my_pages">{{ "Pages" | translate }}</h2>
 <ul class="navigation sidebar my_pages" aria-labelledby="label_my_pages">
 {% for item in theme.pages_list() %}
 <li class="page">
@@ -66,7 +66,7 @@
 </ul>
 {% endif %}
 {% if route.action == "view" and post is defined and theme.related_posts(post) is not empty %}
-<h4 id="label_related_posts">{{ "Related Posts" | translate }}</h4>
+<h2 id="label_related_posts">{{ "Related Posts" | translate }}</h2>
 <ul class="navigation sidebar related_posts" aria-labelledby="label_related_posts">
 {% for post in theme.related_posts(post) %}
 <li>
@@ -75,7 +75,7 @@
 {% endfor %}
 </ul>
 {% elseif theme.recent_posts() is not empty %}
-<h4 id="label_recent_posts">{{ "Recent Posts" | translate }}</h4>
+<h2 id="label_recent_posts">{{ "Recent Posts" | translate }}</h2>
 <ul class="navigation sidebar recent_posts" aria-labelledby="label_recent_posts">
 {% for post in theme.recent_posts() %}
 <li>
@@ -85,9 +85,9 @@
 </ul>
 {% endif %}
 {% if theme.archives_list() is not empty %}
-<h4 id="label_archive_list">
+<h2 id="label_archive_list">
 <a href="{{ url('archive') }}" rel="archives">{{ "Archive" | translate }}</a>
-</h4>
+</h2>
 <ul class="navigation sidebar archive_list" aria-labelledby="label_archive_list">
 {% for archive in theme.archives_list() %}
 <li>

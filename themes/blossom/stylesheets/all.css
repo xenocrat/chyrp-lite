@@ -79,14 +79,15 @@ h1 {
     margin: 1em 0em;
     padding: 0em;
 }
-h1.banner {
-    font-size: 1em;
-}
 h2 {
     font-size: 1.5em;
     font-weight: bold;
     margin: 1em 0em;
     padding: 0em;
+}
+#sidebar > h1,
+#sidebar > h2 {
+    font-size: 1em;
 }
 h2.archive {
     margin: 2rem 0rem 0rem 0rem;
@@ -484,11 +485,6 @@ button#sidebar_search_submit:hover {
 label {
     display: block;
     margin-top: 1em;
-}
-div#mast {
-    display: none;
-    width: 100%;
-    text-align: center;
 }
 div#main {
     width: 100%;
@@ -914,10 +910,12 @@ div.standalone > *:last-child {
     ul#nav.js_nav.on > li#mobile_toggle {
         background-color: #f7f5ed;
     }
-    div#mast {
-        display: block;
-    }
     div#sidebar {
+        position: static;
+        width: 100%;
+        text-align: center;
+    }
+    div#sidebar > *:not(h1):not(form) {
         display: none;
     }
     div#main > article {
