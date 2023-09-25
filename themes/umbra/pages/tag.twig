@@ -2,11 +2,11 @@
 
 {% block content %}
 {% if posts.paginated is defined and posts.paginated is not empty %}
-<h3 class="filter">{{ "Posts tagged with &#8220;%s&#8221;" | translate | format(tag.name | fix) }}</h3>
+<div class="filter">{{ "Posts tagged with &#8220;%s&#8221;" | translate | format(tag.name | fix) }}</div>
 {% for post in posts.paginated %}
 {% include(["feathers" ~ DIR ~ post.feather ~ ".twig", "feathers" ~ DIR ~ "missing.twig"]) %}
 {% endfor %}
 {% elseif reason is defined %}
-<h3 role="status" class="filter">{{ reason }}</h3>
+<div role="status" class="filter">{{ reason }}</div>
 {% endif %}
 {% endblock %}

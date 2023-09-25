@@ -3,11 +3,11 @@
 {% block content %}
 {% if posts.paginated is not empty or pages is not empty %}
 <div class="ribbon">
-<h3 class="ribbon">{{ "Search results for &#8220;%s&#8221;" | translate | format(search | fix) }}</h3>
+{{ "Search results for &#8220;%s&#8221;" | translate | format(search | fix) }}
 </div>
 {% else %}
-<div class="ribbon flash">
-<h3 role="status" class="ribbon">{{ "Your search did not return any results." | translate }}</h3>
+<div role="status" class="ribbon flash">
+{{ "Your search did not return any results." | translate }}
 </div>
 {% endif %}
 {% if pages is not empty %}

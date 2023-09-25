@@ -96,20 +96,6 @@ h3.archive {
     font-size: 1.33em;
     margin-bottom: 0.75em;
 }
-h3.flash {
-    font-weight: normal;
-    margin: 0em;
-}
-h3.filter {
-    box-sizing: border-box;
-    max-width: 960px;
-    text-align: center;
-    margin: 2rem 1rem 0rem 1rem;
-    padding: 0.5rem;
-    background-color: #f5f4f0;
-    border: 1px solid #c2bcb8;
-    border-radius: 1.5rem;
-}
 h4 {
     font-size: 1em;
     font-weight: bold;
@@ -451,6 +437,17 @@ div.flash {
 div.flash + div.flash {
     border-top: 1px solid #ffffff;
 }
+div.filter {
+    box-sizing: border-box;
+    max-width: 960px;
+    text-align: center;
+    font-weight: bold;
+    margin: 2rem 1rem 0rem 1rem;
+    padding: 0.5rem;
+    background-color: #f5f4f0;
+    border: 1px solid #c2bcb8;
+    border-radius: 1.5rem;
+}
 div.metadata {
     box-sizing: border-box;
     display: block;
@@ -752,7 +749,7 @@ div.standalone > *:last-child {
     }
 }
 @media screen and (min-width: 994px) {
-    h3.filter {
+    div.filter {
         margin-left: auto;
         margin-right: auto;
     }

@@ -44,9 +44,9 @@
 </ul>
 {% endif %}
 {% if posts.paginated is empty and pages_list is empty %}
-<h3 role="status">{{ "Nothing here yet!" | translate }}</h3>
+<div role="status">{{ "Nothing here yet!" | translate }}</div>
 {% endif %}
 {% else %}
-<h3 role="status">{{ reason }}</h3>
+<div role="status">{{ reason }}</div>
 {% endif %}
 {% endblock %}

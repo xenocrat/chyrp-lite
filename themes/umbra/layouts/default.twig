@@ -16,18 +16,18 @@
 <body class="route_{{ route.action }}">
 <!-- Mast -->
 {% for notice in flash.notices %}
-<div class="flash notice">
-<h3 role="alert" class="flash">{{ notice }}</h3>
+<div role="alert" class="flash notice">
+{{ notice }}
 </div>
 {% endfor %}
 {% for warning in flash.warnings %}
-<div class="flash warning">
-<h3 role="alert" class="flash">{{ warning }}</h3>
+<div role="alert" class="flash warning">
+{{ warning }}
 </div>
 {% endfor %}
 {% for message in flash.messages %}
-<div class="flash message">
-<h3 role="alert" class="flash">{{ message }}</h3>
+<div role="alert" class="flash message">
+{{ message }}
 </div>
 {% endfor %}
 <div id="mast" role="banner">

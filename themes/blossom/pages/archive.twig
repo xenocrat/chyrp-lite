@@ -55,9 +55,7 @@
 {# Posts? (For daily/monthly archives) #}
 {% if posts.paginated is not empty %}
 <div class="ribbon">
-<h3 class="ribbon">
 {{ "Archive of %s" | translate | format(archive.when | time(archive.depth == "day" ? "d F Y" : "F Y")) }}
-</h3>
 </div>
 {% for post in posts.paginated %}
 {% include(["feathers" ~ DIR ~ post.feather ~ ".twig", "feathers" ~ DIR ~ "missing.twig"]) %}
@@ -66,8 +64,8 @@
 
 {# No results #}
 {% if months is empty and posts.paginated is empty %}
-<div class="ribbon">
-<h3 role="status" class="ribbon">{{ "There aren't any posts in the timeframe you specified." | translate }}</h3>
+<div role="status" class="ribbon">
+{{ "There aren't any posts in the timeframe you specified." | translate }}
 </div>
 {% endif %}
 

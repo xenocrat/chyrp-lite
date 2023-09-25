@@ -3,14 +3,14 @@
 {% block content %}
 {% if posts.paginated is not empty %}
 <div class="ribbon">
-<h3 class="ribbon">{{ "Updated posts" | translate }}</h3>
+{{ "Updated posts" | translate }}
 </div>
 {% endif %}
 {% for post in posts.paginated %}
 {% include(["feathers" ~ DIR ~ post.feather ~ ".twig", "feathers" ~ DIR ~ "missing.twig"]) %}
 {% else %}
-<div class="ribbon">
-<h3 role="status" class="ribbon">{{ "There aren't any updated posts." | translate }}</h3>
+<div role="status" class="ribbon">
+{{ "There aren't any updated posts." | translate }}
 </div>
 {% endfor %}
 {% endblock %}

@@ -2,9 +2,9 @@
 
 {% block content %}
 {% if posts.paginated is not empty or pages is not empty %}
-<h2 class="filter">{{ "Search results for &#8220;%s&#8221;" | translate | format(search | fix) }}</h2>
+<div class="filter">{{ "Search results for &#8220;%s&#8221;" | translate | format(search | fix) }}</div>
 {% else %}
-<h3 role="status">{{ "Your search did not return any results." | translate }}</h3>
+<div role="status">{{ "Your search did not return any results." | translate }}</div>
 {% endif %}
 {% if pages is not empty %}
 <details{% if posts.paginated is empty %} open{% endif %}>

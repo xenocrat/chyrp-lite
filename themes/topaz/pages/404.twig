@@ -1,7 +1,7 @@
 {% extends "layouts" ~ DIR ~ "default.twig" %}
 
 {% block content %}
-<div class="ribbon flash">
-<h3 role="status" class="ribbon">{{ reason is defined ? reason | fix : "Not found." | translate }}</h3>
+<div role="status" class="ribbon flash">
+{{ reason is defined ? reason | fix : "Not found." | translate }}
 </div>
 {% endblock %}

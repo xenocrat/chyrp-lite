@@ -2,7 +2,7 @@
 
 {% block content %}
 {% if posts.paginated is not empty %}
-<h2 class="filter">{{ "Updated posts" | translate }}</h2>
+<div class="filter">{{ "Updated posts" | translate }}</div>
 {% for post in posts.paginated %}
 {% include(["feathers" ~ DIR ~ post.feather ~ ".twig", "feathers" ~ DIR ~ "missing.twig"]) %}
 {% endfor %}
@@ -14,6 +14,6 @@
 </nav>
 {% endif %}
 {% else %}
-<h3 role="status">{{ "There aren't any updated posts." | translate }}</h3>
+<div role="status">{{ "There aren't any updated posts." | translate }}</div>
 {% endif %}
 {% endblock %}

@@ -2,7 +2,7 @@
 
 {% block content %}
 {% if posts.paginated is defined and posts.paginated is not empty %}
-<h2 class="filter">{{ "Posts in category &#8220;%s&#8221;" | translate | format(category | fix) }}</h2>
+<div class="filter">{{ "Posts in category &#8220;%s&#8221;" | translate | format(category | fix) }}</div>
 {% for post in posts.paginated %}
 {% include(["feathers" ~ DIR ~ post.feather ~ ".twig", "feathers" ~ DIR ~ "missing.twig"]) %}
 {% endfor %}
@@ -14,6 +14,6 @@
 </nav>
 {% endif %}
 {% elseif reason is defined %}
-<h3 role="status">{{ reason }}</h3>
+<div role="status">{{ reason }}</div>
 {% endif %}
 {% endblock %}

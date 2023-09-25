@@ -61,13 +61,13 @@
 </form>
 </nav>
 {% for notice in flash.notices %}
-<h3 role="alert" class="flash notice">{{ notice }}</h3>
+<div role="alert" class="flash notice">{{ notice }}</div>
 {% endfor %}
 {% for warning in flash.warnings %}
-<h3 role="alert" class="flash warning">{{ warning }}</h3>
+<div role="alert" class="flash warning">{{ warning }}</div>
 {% endfor %}
 {% for message in flash.messages %}
-<h3 role="alert" class="flash message">{{ message }}</h3>
+<div role="alert" class="flash message">{{ message }}</div>
 {% endfor %}
 <!-- Content -->
 <main>

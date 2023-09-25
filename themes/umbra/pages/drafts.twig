@@ -2,11 +2,11 @@
 
 {% block content %}
 {% if posts.paginated is not empty %}
-<h3 class="filter">{{ "Drafts" | translate }}</h3>
+<div class="filter">{{ "Drafts" | translate }}</div>
 {% endif %}
 {% for post in posts.paginated %}
 {% include(["feathers" ~ DIR ~ post.feather ~ ".twig", "feathers" ~ DIR ~ "missing.twig"]) %}
 {% else %}
-<h3 role="status" class="filter">{{ "You don't have any drafts." | translate }}</h3>
+<div role="status" class="filter">{{ "You don't have any drafts." | translate }}</div>
 {% endfor %}
 {% endblock %}

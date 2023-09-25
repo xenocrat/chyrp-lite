@@ -96,19 +96,6 @@ h3.archive {
     font-size: 1.33em;
     margin-bottom: 0.75em;
 }
-h3.flash {
-    font-weight: normal;
-    margin: 0em;
-}
-h3.filter {
-    box-sizing: border-box;
-    width: 100%;
-    text-align: center;
-    margin: 0rem;
-    padding: 0.5em;
-    background-color: #383839;
-    border-bottom: 1px solid #666667;
-}
 h4 {
     font-size: 1em;
     font-weight: bold;
@@ -435,6 +422,16 @@ div.flash {
     background-color: #cc5252;
     padding: 0.5em;
     border-bottom: 1px solid transparent;
+}
+div.filter {
+    box-sizing: border-box;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    margin: 0rem;
+    padding: 0.5em;
+    background-color: #383839;
+    border-bottom: 1px solid #666667;
 }
 div.metadata {
     box-sizing: border-box;

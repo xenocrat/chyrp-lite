@@ -5,9 +5,9 @@
 {% for post in posts.paginated %}
 {% include(["feathers" ~ DIR ~ post.feather ~ ".twig", "feathers" ~ DIR ~ "missing.twig"]) %}
 {% else %}
-<h3 role="status" class="filter">{{ "Nothing here yet!" | translate }}</h3>
+<div role="status" class="filter">{{ "Nothing here yet!" | translate }}</div>
 {% endfor %}
 {% else %}
-<h3 role="status" class="filter">{{ reason }}</h3>
+<div role="status" class="filter">{{ reason }}</div>
 {% endif %}
 {% endblock %}
