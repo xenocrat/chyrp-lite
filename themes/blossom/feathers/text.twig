@@ -6,7 +6,7 @@
 <a href="{{ post.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(post.title | striptags | normalize | fix(true)) }}">{{ post.title }}</a>
 </h2>
 {% endif %}
-<section class="body">
+<section class="body" aria-label="{{ 'Text Content' | translate }}">
 {{ post.body }}
 </section>
 {% endblock %}

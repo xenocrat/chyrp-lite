@@ -7,17 +7,17 @@
 </h2>
 {% endif %}
 {% if post.caption is not empty %}
-<section class="caption">
+<section class="caption" aria-label="{{ 'Text Content' | translate }}">
 {{ post.caption }}
 </section>
 {% endif %}
 {% for file in post.files %}
 {% if ["jpg", "jpeg", "png", "gif", "webp", "avif"] | contains(file.type) %}
-<section class="photo">
+<section class="photo" aria-label="{{ 'File Attachment' | translate }}">
 {{ file.name | thumbnail(file.name, post.source) }}
 </section>
 {% else %}
-<section class="attachment">
+<section class="attachment" aria-label="{{ 'File Attachment' | translate }}">
 <h3>{{ "File attachment:" | translate }}</h3>
 <a href="{{ file.name | download }}">{{ file.name | fix | truncate(40, "&hellip;", true) }}</a>
 ({{ file.size | filesizeformat }})

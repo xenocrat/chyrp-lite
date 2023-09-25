@@ -9,7 +9,7 @@
 <a href="{{ url('author/' ~ post.author.id) }}">{{ "Written by %s" | translate | format(post.author.name) }}</a>
 </h3>
 {% endif %}
-<section class="body">
+<section class="body" aria-label="{{ 'Text Content' | translate }}">
 {{ post.body }}
 </section>
 {% endblock %}

@@ -7,7 +7,7 @@
 <h3 class="post_byline">
 <a href="{{ url('author/' ~ post.author.id) }}">{{ "Written by %s" | translate | format(post.author.name) }}</a>
 </h3>
-<section class="description">
+<section class="description" aria-label="{{ 'Text Content' | translate }}">
 {{ post.description }}
 </section>
 {% endblock %}

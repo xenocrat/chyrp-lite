@@ -6,11 +6,11 @@
 <a href="{{ post.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(post.title | striptags | normalize | fix(true)) }}">{{ post.title }}</a>
 </h2>
 {% endif %}
-<section class="photo">
+<section class="photo" aria-label="{{ 'File Attachment' | translate }}">
 {{ post.filename | thumbnail(post.alt_text, post.source, ["max_width=1280", "max_height=1920", "quality=80"], "(min-width: 1024px) 768px, 90vw") }}
 </section>
 {% if post.caption is not empty %}
-<section class="caption">
+<section class="caption" aria-label="{{ 'Text Content' | translate }}">
 {{ post.caption }}
 </section>
 {% endif %}

@@ -10,11 +10,11 @@
 </h3>
 {% endif %}
 {% if post.description is not empty %}
-<section class="description">
+<section class="description" aria-label="{{ 'Text Content' | translate }}">
 {{ post.description }}
 </section>
 {% endif %}
-<section class="audio">
+<section class="audio" aria-label="{{ 'File Attachment' | translate }}">
 {{ post.audio_player }}
 </section>
 {% endblock %}
