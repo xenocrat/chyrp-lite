@@ -430,7 +430,6 @@ input[type="checkbox"]:focus {
     outline: #1f1f23 solid 2px;
     outline-offset: 2px;
 }
-input#search_field,
 input#sidebar_search_field {
     display: inline;
     width: 100%;
@@ -466,7 +465,6 @@ button {
 button:focus {
     outline: none;
 }
-button#search_submit,
 button#sidebar_search_submit {
     display: block;
     position: absolute;
@@ -483,11 +481,9 @@ button#sidebar_search_submit {
     overflow: hidden;
     color: transparent;
 }
-button#search_submit:focus,
 button#sidebar_search_submit:focus {
     background-color: #c6ccc8;
 }
-button#search_submit:hover,
 button#sidebar_search_submit:hover {
     background-size: 60%;
 }
@@ -814,7 +810,6 @@ article > *:last-child,
 section > *:last-child,
 form > *:last-child,
 aside > *:last-child,
-#sidebar > *:last-child,
 div.standalone > *:last-child {
     margin-bottom: 0rem;
 }
