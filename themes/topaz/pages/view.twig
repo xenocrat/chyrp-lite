@@ -7,7 +7,7 @@
 {% if not post.next.no_results %}<a rel="next" href="{{ post.next.url() }}">{{ "Previous post" | translate }}</a>{% endif %}
 </div>
 {% if module_enabled("pingable") and post.pingback_count > 0 %}
-<article role="complementary" class="discourse">
+<article class="discourse">
 <h3>{{ "Webmentions" | translate }}:</h3>
 <ol id="pingbacks">
 {% for pingback in post.pingbacks %}
@@ -17,7 +17,7 @@
 </article>
 {% endif %}
 {% if module_enabled("comments") and (post.comment_count > 0 or post.commentable) %}
-<article role="complementary" class="commentary">
+<article class="commentary">
 <ol id="comments" class="comments paginated" data-post_id="{{ post.id }}" data-timestamp="{{ post.latest_comment }}">
 {% set comments = paginate(post.comments, site.module_comments.comments_per_page, "comments") %}
 {% for comment in comments.paginated %}

@@ -3,7 +3,7 @@
 {% block content %}
 {% include(["feathers" ~ DIR ~ post.feather ~ ".twig", "feathers" ~ DIR ~ "missing.twig"]) %}
 {% if module_enabled("pingable") and post.pingback_count > 0 %}
-<article role="complementary" class="discourse">
+<article class="discourse">
 <header>
 <h4>{{ "Webmentions" | translate }}</h4>
 </header>
@@ -15,7 +15,7 @@
 </article>
 {% endif %}
 {% if module_enabled("comments") and (post.comment_count > 0 or post.commentable) %}
-<article role="complementary" class="commentary">
+<article class="commentary">
 <header>
 <h4>{{ "Comments" | translate }}</h4>
 </header>

@@ -13,7 +13,7 @@
 </div>
 {% endif %}
 {% if module_enabled("pingable") and post.pingback_count > 0 %}
-<article role="complementary" class="discourse">
+<article class="discourse">
 <section class="webmentions">
 <h3>{{ "Webmentions" | translate }}:</h3>
 <ol id="pingbacks">
@@ -25,7 +25,7 @@
 </article>
 {% endif %}
 {% if module_enabled("comments") and (post.comment_count > 0 or post.commentable) %}
-<article role="complementary" class="commentary">
+<article class="commentary">
 <ol id="comments" class="comments" data-post_id="{{ post.id }}" data-timestamp="{{ post.latest_comment }}">
 {% for comment in post.comments %}
 {% include "content" ~ DIR ~ "comment.twig" %}
