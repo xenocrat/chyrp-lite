@@ -1109,7 +1109,7 @@
          *
          * Calls the @publish_post@ trigger with the updated <Post>.
          */
-        static function publish_scheduled($pingbacks = true): void {
+        static function publish_scheduled($pingbacks = false): void {
             $sql = SQL::current();
             $ids = $sql->select(
                 tables:"posts",
