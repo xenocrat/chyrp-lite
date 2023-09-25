@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/virgula/content/comment.twig:5
@@ -59,6 +59,20 @@ msgstr "Opgeslagen in %s."
 #, php-format
 msgid "Tagged with %s."
 msgstr "Getagged met %s."
+
+#: themes/virgula/feathers/audio.twig:10 themes/virgula/feathers/link.twig:7
+#: themes/virgula/feathers/photo.twig:13 themes/virgula/feathers/quote.twig:9
+#: themes/virgula/feathers/text.twig:9 themes/virgula/feathers/uploader.twig:10
+#: themes/virgula/feathers/video.twig:10
+msgid "Text Content"
+msgstr "Tekst Inhoud"
+
+#: themes/virgula/feathers/audio.twig:14 themes/virgula/feathers/photo.twig:9
+#: themes/virgula/feathers/uploader.twig:16
+#: themes/virgula/feathers/uploader.twig:20
+#: themes/virgula/feathers/video.twig:14
+msgid "File Attachment"
+msgstr "Bestands- Bijlage"
 
 #: themes/virgula/feathers/missing.twig:4
 msgid "The post cannot be displayed because the theme does not support it."

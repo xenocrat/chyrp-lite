@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/blossom/content/comment.twig:4
@@ -41,7 +41,7 @@ msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "Permalink naar &#8220;%s&#8221;"
 
 #: themes/blossom/content/post.twig:17 themes/blossom/content/sidebar.twig:27
-#: themes/blossom/layouts/default.twig:87
+#: themes/blossom/layouts/default.twig:79
 msgid "Draft"
 msgstr "Concept"
 
@@ -94,15 +94,15 @@ msgstr "&copy; %s, %s."
 msgid "&copy; %s."
 msgstr "&copy; %s."
 
-#: themes/blossom/content/sidebar.twig:4 themes/blossom/layouts/default.twig:36
+#: themes/blossom/content/sidebar.twig:4
 msgid "Search&hellip;"
 msgstr "Zoek&hellip;"
 
-#: themes/blossom/content/sidebar.twig:4 themes/blossom/layouts/default.twig:36
+#: themes/blossom/content/sidebar.twig:4
 msgid "Search this blog"
 msgstr "Zoek in deze Blog"
 
-#: themes/blossom/content/sidebar.twig:5 themes/blossom/layouts/default.twig:37
+#: themes/blossom/content/sidebar.twig:5
 msgid "Search"
 msgstr "Zoek"
 
@@ -110,54 +110,54 @@ msgstr "Zoek"
 msgid "Links"
 msgstr "Links"
 
-#: themes/blossom/content/sidebar.twig:9 themes/blossom/layouts/default.twig:57
+#: themes/blossom/content/sidebar.twig:9 themes/blossom/layouts/default.twig:49
 msgid "Blog"
 msgstr "Blog"
 
 #: themes/blossom/content/sidebar.twig:12
 #: themes/blossom/forms/user/controls.twig:9
 #: themes/blossom/forms/user/register.twig:13
-#: themes/blossom/layouts/default.twig:69
+#: themes/blossom/layouts/default.twig:61
 msgid "Email"
 msgstr "Email"
 
 #: themes/blossom/content/sidebar.twig:15
-#: themes/blossom/layouts/default.twig:72
+#: themes/blossom/layouts/default.twig:64
 msgid "Feed"
 msgstr "Feed"
 
 #: themes/blossom/content/sidebar.twig:19
-#: themes/blossom/layouts/default.twig:79
+#: themes/blossom/layouts/default.twig:71
 msgid "Admin"
 msgstr "Beheer"
 
 #: themes/blossom/content/sidebar.twig:23
-#: themes/blossom/layouts/default.twig:83
+#: themes/blossom/layouts/default.twig:75
 msgid "Write"
 msgstr "Schrijf"
 
 #: themes/blossom/content/sidebar.twig:32
 #: themes/blossom/forms/user/controls.twig:5
-#: themes/blossom/layouts/default.twig:92
+#: themes/blossom/layouts/default.twig:84
 msgid "Controls"
 msgstr "Instellingen"
 
 #: themes/blossom/content/sidebar.twig:35
-#: themes/blossom/layouts/default.twig:95
+#: themes/blossom/layouts/default.twig:87
 msgid "Log out"
 msgstr "Log uit"
 
 #: themes/blossom/content/sidebar.twig:40
 #: themes/blossom/forms/user/register.twig:5
 #: themes/blossom/forms/user/register.twig:19
-#: themes/blossom/layouts/default.twig:100
+#: themes/blossom/layouts/default.twig:92
 msgid "Register"
 msgstr "Registreer"
 
 #: themes/blossom/content/sidebar.twig:44
 #: themes/blossom/forms/user/login.twig:5
 #: themes/blossom/forms/user/login.twig:14
-#: themes/blossom/layouts/default.twig:104
+#: themes/blossom/layouts/default.twig:96
 msgid "Log in"
 msgstr "Log in"
 
@@ -178,13 +178,27 @@ msgid "Recent Posts"
 msgstr "Recente Blogposts"
 
 #: themes/blossom/content/sidebar.twig:89
-#: themes/blossom/layouts/default.twig:75
+#: themes/blossom/layouts/default.twig:67
 msgid "Archive"
 msgstr "Archief"
 
 #: themes/blossom/content/sidebar.twig:94 themes/blossom/pages/archive.twig:18
 msgid "F Y"
 msgstr "F Y"
+
+#: themes/blossom/feathers/audio.twig:10 themes/blossom/feathers/link.twig:7
+#: themes/blossom/feathers/photo.twig:13 themes/blossom/feathers/quote.twig:9
+#: themes/blossom/feathers/text.twig:9 themes/blossom/feathers/uploader.twig:10
+#: themes/blossom/feathers/video.twig:10
+msgid "Text Content"
+msgstr "Tekst Inhoud"
+
+#: themes/blossom/feathers/audio.twig:14 themes/blossom/feathers/photo.twig:9
+#: themes/blossom/feathers/uploader.twig:16
+#: themes/blossom/feathers/uploader.twig:20
+#: themes/blossom/feathers/video.twig:14
+msgid "File Attachment"
+msgstr "Bestands- Bijlage"
 
 #: themes/blossom/feathers/missing.twig:4
 msgid "The post cannot be displayed because the theme does not support it."
@@ -346,19 +360,19 @@ msgstr "Blossom"
 msgid "The default theme provided with Chyrp Lite."
 msgstr "Het standaard thema van Chyrp Lite."
 
-#: themes/blossom/layouts/default.twig:44
+#: themes/blossom/layouts/default.twig:36
 msgid "Newer posts"
 msgstr "Nieuwere blogposts"
 
-#: themes/blossom/layouts/default.twig:52
+#: themes/blossom/layouts/default.twig:44
 msgid "Older posts"
 msgstr "Oudere Blogposts"
 
-#: themes/blossom/layouts/default.twig:108
+#: themes/blossom/layouts/default.twig:100
 msgid "Menu"
 msgstr "Menu"
 
-#: themes/blossom/layouts/default.twig:118
+#: themes/blossom/layouts/default.twig:110
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "Aangeroepen vanuit %s op regel %d bij %s seconden."
@@ -372,12 +386,12 @@ msgid "Not found."
 msgstr "Niet gevonden."
 
 #: themes/blossom/pages/archive.twig:10 themes/blossom/pages/archive.twig:49
-#: themes/blossom/pages/archive.twig:59
+#: themes/blossom/pages/archive.twig:58
 #, php-format
 msgid "Archive of %s"
 msgstr "Archief van %s"
 
-#: themes/blossom/pages/archive.twig:70
+#: themes/blossom/pages/archive.twig:68
 msgid "There aren't any posts in the timeframe you specified."
 msgstr "Er zijn geen Blogposts in het door jou gespecificeerde tijdvak."
 

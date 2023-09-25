@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/sparrow/content/comment.twig:4
@@ -91,6 +91,20 @@ msgstr "&copy; %s, %s."
 #, php-format
 msgid "&copy; %s."
 msgstr "&copy; %s."
+
+#: themes/sparrow/feathers/audio.twig:10 themes/sparrow/feathers/link.twig:7
+#: themes/sparrow/feathers/photo.twig:13 themes/sparrow/feathers/quote.twig:9
+#: themes/sparrow/feathers/text.twig:9 themes/sparrow/feathers/uploader.twig:10
+#: themes/sparrow/feathers/video.twig:10
+msgid "Text Content"
+msgstr "Tekst Inhoud"
+
+#: themes/sparrow/feathers/audio.twig:14 themes/sparrow/feathers/photo.twig:9
+#: themes/sparrow/feathers/uploader.twig:16
+#: themes/sparrow/feathers/uploader.twig:20
+#: themes/sparrow/feathers/video.twig:14
+msgid "File Attachment"
+msgstr "Bestands- Bijlage"
 
 #: themes/sparrow/feathers/missing.twig:4
 msgid "The post cannot be displayed because the theme does not support it."

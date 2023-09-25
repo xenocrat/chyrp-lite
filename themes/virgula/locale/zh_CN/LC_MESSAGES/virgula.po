@@ -61,6 +61,20 @@ msgstr "%s年提交。"
 msgid "Tagged with %s."
 msgstr "标记为%s。"
 
+#: themes/virgula/feathers/audio.twig:10 themes/virgula/feathers/link.twig:7
+#: themes/virgula/feathers/photo.twig:13 themes/virgula/feathers/quote.twig:9
+#: themes/virgula/feathers/text.twig:9 themes/virgula/feathers/uploader.twig:10
+#: themes/virgula/feathers/video.twig:10
+msgid "Text Content"
+msgstr "文本内容"
+
+#: themes/virgula/feathers/audio.twig:14 themes/virgula/feathers/photo.twig:9
+#: themes/virgula/feathers/uploader.twig:16
+#: themes/virgula/feathers/uploader.twig:20
+#: themes/virgula/feathers/video.twig:14
+msgid "File Attachment"
+msgstr "文件附件"
+
 #: themes/virgula/feathers/missing.twig:4
 msgid "The post cannot be displayed because the theme does not support it."
 msgstr "这篇帖子无法显示，因为主题不支持。"

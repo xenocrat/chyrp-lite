@@ -92,6 +92,20 @@ msgstr "&copy; %s, %s."
 msgid "&copy; %s."
 msgstr "&copy; %s."
 
+#: themes/sparrow/feathers/audio.twig:10 themes/sparrow/feathers/link.twig:7
+#: themes/sparrow/feathers/photo.twig:13 themes/sparrow/feathers/quote.twig:9
+#: themes/sparrow/feathers/text.twig:9 themes/sparrow/feathers/uploader.twig:10
+#: themes/sparrow/feathers/video.twig:10
+msgid "Text Content"
+msgstr "Contenuto testuale"
+
+#: themes/sparrow/feathers/audio.twig:14 themes/sparrow/feathers/photo.twig:9
+#: themes/sparrow/feathers/uploader.twig:16
+#: themes/sparrow/feathers/uploader.twig:20
+#: themes/sparrow/feathers/video.twig:14
+msgid "File Attachment"
+msgstr "Allegato"
+
 #: themes/sparrow/feathers/missing.twig:4
 msgid "The post cannot be displayed because the theme does not support it."
 msgstr "Il post non può essere visualizzato perché il tema non lo supporta."

@@ -774,9 +774,9 @@ Called from:
 end_content
 -----------
 Called from:
-	themes/blossom/layouts/default.twig on line 111
+	themes/blossom/layouts/default.twig on line 103
 	themes/sparrow/layouts/default.twig on line 98
-	themes/topaz/layouts/default.twig on line 110
+	themes/topaz/layouts/default.twig on line 102
 	themes/umbra/layouts/default.twig on line 92
 	themes/virgula/layouts/default.twig on line 76
 

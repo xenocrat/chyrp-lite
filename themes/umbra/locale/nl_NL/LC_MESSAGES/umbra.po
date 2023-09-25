@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/umbra/content/comment.twig:4
@@ -64,6 +64,19 @@ msgstr "&copy; %s, %s."
 #, php-format
 msgid "&copy; %s."
 msgstr "&copy; %s."
+
+#: themes/umbra/feathers/audio.twig:10 themes/umbra/feathers/link.twig:7
+#: themes/umbra/feathers/photo.twig:13 themes/umbra/feathers/quote.twig:9
+#: themes/umbra/feathers/text.twig:9 themes/umbra/feathers/uploader.twig:10
+#: themes/umbra/feathers/video.twig:10
+msgid "Text Content"
+msgstr "Tekst Inhoud"
+
+#: themes/umbra/feathers/audio.twig:14 themes/umbra/feathers/photo.twig:9
+#: themes/umbra/feathers/uploader.twig:16
+#: themes/umbra/feathers/uploader.twig:20 themes/umbra/feathers/video.twig:14
+msgid "File Attachment"
+msgstr "Bestands- Bijlage"
 
 #: themes/umbra/feathers/missing.twig:4
 msgid "The post cannot be displayed because the theme does not support it."

@@ -61,6 +61,20 @@ msgstr "Classificati in %s."
 msgid "Tagged with %s."
 msgstr "Taggato con %s."
 
+#: themes/virgula/feathers/audio.twig:10 themes/virgula/feathers/link.twig:7
+#: themes/virgula/feathers/photo.twig:13 themes/virgula/feathers/quote.twig:9
+#: themes/virgula/feathers/text.twig:9 themes/virgula/feathers/uploader.twig:10
+#: themes/virgula/feathers/video.twig:10
+msgid "Text Content"
+msgstr "Contenuto testuale"
+
+#: themes/virgula/feathers/audio.twig:14 themes/virgula/feathers/photo.twig:9
+#: themes/virgula/feathers/uploader.twig:16
+#: themes/virgula/feathers/uploader.twig:20
+#: themes/virgula/feathers/video.twig:14
+msgid "File Attachment"
+msgstr "Allegato"
+
 #: themes/virgula/feathers/missing.twig:4
 msgid "The post cannot be displayed because the theme does not support it."
 msgstr "Il post non può essere visualizzato perché il tema non lo supporta."
