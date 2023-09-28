@@ -108,7 +108,7 @@
 </p>
 <p class="more_options_option">
 <label for="created_at">{{ "Timestamp" | translate }}</label>
-{% set post_created = post is defined and post.created_at is not empty ? post.created_at : now %}
+{% set post_created = post is defined and post.status != "draft" ? post.created_at : now %}
 <input id="created_at" class="text" type="text" name="created_at" value="{{ post_created | dateformat('Y-m-d H:i:s') | fix(true) }}">
 </p>
 {% for field in options %}
