@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/umbra/content/comment.twig:4
@@ -52,7 +52,7 @@ msgstr "计划"
 msgid "Pinned"
 msgstr "固定"
 
-#: themes/umbra/content/post.twig:27 themes/umbra/pages/view.twig:11
+#: themes/umbra/content/post.twig:27 themes/umbra/pages/view.twig:10
 msgid "[Untitled]"
 msgstr "[无标题]"
 
@@ -378,6 +378,10 @@ msgstr "更新后的帖子"
 msgid "There aren't any updated posts."
 msgstr "没有任何更新的帖子。"
 
-#: themes/umbra/pages/view.twig:8
+#: themes/umbra/pages/view.twig:7
 msgid "Webmentions"
 msgstr "引用"
+
+#: themes/umbra/pages/view.twig:17
+msgid "Comments"
+msgstr "评论"

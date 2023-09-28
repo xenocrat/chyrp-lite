@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/umbra/content/comment.twig:4
@@ -52,7 +52,7 @@ msgstr "Programmato"
 msgid "Pinned"
 msgstr "Pinned"
 
-#: themes/umbra/content/post.twig:27 themes/umbra/pages/view.twig:11
+#: themes/umbra/content/post.twig:27 themes/umbra/pages/view.twig:10
 msgid "[Untitled]"
 msgstr "[Senza titolo]"
 
@@ -378,6 +378,10 @@ msgstr "Post aggiornati"
 msgid "There aren't any updated posts."
 msgstr "Non ci sono post aggiornati."
 
-#: themes/umbra/pages/view.twig:8
+#: themes/umbra/pages/view.twig:7
 msgid "Webmentions"
 msgstr "Webmention"
+
+#: themes/umbra/pages/view.twig:17
+msgid "Comments"
+msgstr "Commenti"

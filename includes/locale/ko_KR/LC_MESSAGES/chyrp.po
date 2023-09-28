@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: includes/class/Config.php:18
@@ -84,7 +84,7 @@ msgstr "경로가 잘못된 컨트롤러로 시작되었습니다."
 #: includes/controller/Admin.php:2918 includes/controller/Admin.php:2925
 #: includes/controller/Admin.php:3195 includes/controller/Ajax.php:34
 #: includes/controller/Ajax.php:251 includes/download.php:13
-#: includes/error.php:163 includes/helpers.php:1853 includes/helpers.php:1860
+#: includes/error.php:169 includes/helpers.php:1853 includes/helpers.php:1860
 #: includes/helpers.php:1867 includes/helpers.php:1880
 #: includes/helpers.php:1889 includes/helpers.php:1899
 #: includes/helpers.php:1906 includes/helpers.php:2325
@@ -916,7 +916,7 @@ msgstr "로그인하기 전에 계정을 활성화해야 합니다."
 msgid "Logged in."
 msgstr "로그인되었습니다."
 
-#: includes/controller/Main.php:911 includes/error.php:448
+#: includes/controller/Main.php:911 includes/error.php:454
 msgid "Log in"
 msgstr "로그인"
 
@@ -964,20 +964,20 @@ msgstr "링크가 만료되었습니다. 다시 시도해 주세요."
 msgid "Reset password"
 msgstr "비밀번호 변경"
 
-#: includes/error.php:164
+#: includes/error.php:170
 msgid "An unspecified error has occurred."
 msgstr "알 수 없는 오류가 발생했습니다."
 
-#: includes/error.php:434
+#: includes/error.php:440
 msgid "Backtrace"
 msgstr "역추적"
 
-#: includes/error.php:439
+#: includes/error.php:445
 #, php-format
 msgid "%s on line %d"
 msgstr "%s: %d번 줄"
 
-#: includes/error.php:453
+#: includes/error.php:459
 msgid "Go back"
 msgstr "뒤로 가기"
 

@@ -45,7 +45,7 @@ msgid "Pinned"
 msgstr ""
 
 #: themes/sparrow/content/post.twig:29
-#: themes/sparrow/pages/view.twig:21
+#: themes/sparrow/pages/view.twig:20
 msgid "[Untitled]"
 msgstr ""
 
@@ -427,7 +427,11 @@ msgstr ""
 msgid "Previous post &rarr;"
 msgstr ""
 
-#: themes/sparrow/pages/view.twig:18
+#: themes/sparrow/pages/view.twig:17
 msgid "Webmentions"
+msgstr ""
+
+#: themes/sparrow/pages/view.twig:27
+msgid "Comments"
 msgstr ""
 

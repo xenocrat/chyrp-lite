@@ -16,7 +16,7 @@ msgstr ""
 "X-Crowdin-Language: ar\n"
 "X-Crowdin-File: chyrp.pot\n"
 "X-Crowdin-File-ID: 2\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: includes/class/Config.php:18
@@ -90,7 +90,7 @@ msgstr "المُتحكم بالمسار المُدخل غير صالح."
 #: includes/controller/Admin.php:2918 includes/controller/Admin.php:2925
 #: includes/controller/Admin.php:3195 includes/controller/Ajax.php:34
 #: includes/controller/Ajax.php:251 includes/download.php:13
-#: includes/error.php:163 includes/helpers.php:1853 includes/helpers.php:1860
+#: includes/error.php:169 includes/helpers.php:1853 includes/helpers.php:1860
 #: includes/helpers.php:1867 includes/helpers.php:1880
 #: includes/helpers.php:1889 includes/helpers.php:1899
 #: includes/helpers.php:1906 includes/helpers.php:2325
@@ -922,7 +922,7 @@ msgstr "يجب عليك تفعيل حسابك قبل تسجيل الدخول."
 msgid "Logged in."
 msgstr "تم تسجيل الدخول."
 
-#: includes/controller/Main.php:911 includes/error.php:448
+#: includes/controller/Main.php:911 includes/error.php:454
 msgid "Log in"
 msgstr "تسجيل الدخول"
 
@@ -970,20 +970,20 @@ msgstr "انتهت صلاحية الرابط. يرجى المحاولة مرة �
 msgid "Reset password"
 msgstr "إعادة تعيين كلمة المرور"
 
-#: includes/error.php:164
+#: includes/error.php:170
 msgid "An unspecified error has occurred."
 msgstr "حدث خطأ غير محدد."
 
-#: includes/error.php:434
+#: includes/error.php:440
 msgid "Backtrace"
 msgstr ""
 
-#: includes/error.php:439
+#: includes/error.php:445
 #, php-format
 msgid "%s on line %d"
 msgstr "%s في السطر %d"
 
-#: includes/error.php:453
+#: includes/error.php:459
 msgid "Go back"
 msgstr "الرجوع للخلف"
 

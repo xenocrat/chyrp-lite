@@ -461,15 +461,19 @@ msgstr ""
 msgid "Previous post"
 msgstr ""
 
-#: themes/blossom/pages/view.twig:17
+#: themes/blossom/pages/view.twig:16
 msgid "Webmentions"
 msgstr ""
 
-#: themes/blossom/pages/view.twig:41
-msgid "Newer comments"
+#: themes/blossom/pages/view.twig:26
+msgid "Comments"
 msgstr ""
 
 #: themes/blossom/pages/view.twig:42
+msgid "Newer comments"
+msgstr ""
+
+#: themes/blossom/pages/view.twig:43
 msgid "Older comments"
 msgstr ""
 

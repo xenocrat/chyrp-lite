@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/topaz/content/comment.twig:4
@@ -31,11 +31,11 @@ msgstr "Dieser Kommentar wartet auf die Freigabe durch die Moderation."
 msgid "Tags"
 msgstr "Tags"
 
-#: themes/topaz/content/post.twig:15 themes/topaz/feathers/audio.twig:6
-#: themes/topaz/feathers/photo.twig:6 themes/topaz/feathers/quote.twig:6
-#: themes/topaz/feathers/text.twig:6 themes/topaz/feathers/uploader.twig:6
-#: themes/topaz/feathers/video.twig:6 themes/topaz/pages/archive.twig:31
-#: themes/topaz/pages/page.twig:6 themes/topaz/pages/search.twig:19
+#: themes/topaz/content/post.twig:15 themes/topaz/feathers/audio.twig:7
+#: themes/topaz/feathers/photo.twig:7 themes/topaz/feathers/quote.twig:7
+#: themes/topaz/feathers/text.twig:7 themes/topaz/feathers/uploader.twig:7
+#: themes/topaz/feathers/video.twig:7 themes/topaz/pages/archive.twig:31
+#: themes/topaz/pages/page.twig:7 themes/topaz/pages/search.twig:19
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "Permanentlink zu &#8220;%s&#8221;"
@@ -176,24 +176,24 @@ msgstr "Archiv"
 msgid "F Y"
 msgstr "F Y"
 
-#: themes/topaz/feathers/audio.twig:9 themes/topaz/feathers/link.twig:8
-#: themes/topaz/feathers/photo.twig:9 themes/topaz/feathers/quote.twig:9
-#: themes/topaz/feathers/text.twig:9 themes/topaz/feathers/uploader.twig:9
-#: themes/topaz/feathers/video.twig:9
+#: themes/topaz/feathers/audio.twig:10 themes/topaz/feathers/link.twig:9
+#: themes/topaz/feathers/photo.twig:10 themes/topaz/feathers/quote.twig:10
+#: themes/topaz/feathers/text.twig:10 themes/topaz/feathers/uploader.twig:10
+#: themes/topaz/feathers/video.twig:10
 #, php-format
 msgid "Written by %s"
 msgstr "Publiziert von %s"
 
-#: themes/topaz/feathers/audio.twig:13 themes/topaz/feathers/link.twig:10
-#: themes/topaz/feathers/photo.twig:16 themes/topaz/feathers/quote.twig:12
-#: themes/topaz/feathers/text.twig:12 themes/topaz/feathers/uploader.twig:13
-#: themes/topaz/feathers/video.twig:13
+#: themes/topaz/feathers/audio.twig:15 themes/topaz/feathers/link.twig:12
+#: themes/topaz/feathers/photo.twig:18 themes/topaz/feathers/quote.twig:14
+#: themes/topaz/feathers/text.twig:14 themes/topaz/feathers/uploader.twig:15
+#: themes/topaz/feathers/video.twig:15
 msgid "Text Content"
 msgstr "Textinhalt"
 
-#: themes/topaz/feathers/audio.twig:17 themes/topaz/feathers/photo.twig:12
-#: themes/topaz/feathers/uploader.twig:19
-#: themes/topaz/feathers/uploader.twig:23 themes/topaz/feathers/video.twig:17
+#: themes/topaz/feathers/audio.twig:19 themes/topaz/feathers/photo.twig:14
+#: themes/topaz/feathers/uploader.twig:21
+#: themes/topaz/feathers/uploader.twig:25 themes/topaz/feathers/video.twig:19
 msgid "File Attachment"
 msgstr "Dateianhänge"
 
@@ -203,7 +203,7 @@ msgstr ""
 "Der Post kann nicht angezeigt werden, weil dies vom Theme nicht unterstützt "
 "wird."
 
-#: themes/topaz/feathers/uploader.twig:24
+#: themes/topaz/feathers/uploader.twig:26
 msgid "File attachment:"
 msgstr "Dateianhänge:"
 
@@ -457,14 +457,18 @@ msgstr "Nächster Post"
 msgid "Previous post"
 msgstr "Vorheriger Post"
 
-#: themes/topaz/pages/view.twig:11
+#: themes/topaz/pages/view.twig:10
 msgid "Webmentions"
 msgstr "Webmentions"
 
-#: themes/topaz/pages/view.twig:35
+#: themes/topaz/pages/view.twig:20
+msgid "Comments"
+msgstr "Kommentare"
+
+#: themes/topaz/pages/view.twig:36
 msgid "Newer comments"
 msgstr "Neuere Kommentare"
 
-#: themes/topaz/pages/view.twig:36
+#: themes/topaz/pages/view.twig:37
 msgid "Older comments"
 msgstr "Ältere Kommentare"

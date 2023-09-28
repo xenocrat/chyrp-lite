@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/sparrow/content/comment.twig:4
@@ -52,7 +52,7 @@ msgstr "Geagendeerd"
 msgid "Pinned"
 msgstr "Gepind"
 
-#: themes/sparrow/content/post.twig:29 themes/sparrow/pages/view.twig:21
+#: themes/sparrow/content/post.twig:29 themes/sparrow/pages/view.twig:20
 msgid "[Untitled]"
 msgstr "[Zonder titel]"
 
@@ -429,6 +429,10 @@ msgstr "&larr; Volgende Blogpost"
 msgid "Previous post &rarr;"
 msgstr "Vorige Blogpost &rarr;"
 
-#: themes/sparrow/pages/view.twig:18
+#: themes/sparrow/pages/view.twig:17
 msgid "Webmentions"
 msgstr "Webmentions"
+
+#: themes/sparrow/pages/view.twig:27
+msgid "Comments"
+msgstr "Opmerkingen"

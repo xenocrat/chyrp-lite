@@ -1323,7 +1323,7 @@ Target:
 cache_regenerate_triggers
 -------------------------
 Called from:
-	modules/cacher/cacher.php on line 131
+	modules/cacher/cacher.php on line 132
 
 Target:
 	$regenerate
@@ -1332,7 +1332,7 @@ Target:
 cache_exclude_triggers
 ----------------------
 Called from:
-	modules/cacher/cacher.php on line 141
+	modules/cacher/cacher.php on line 142
 
 Target:
 	$exclude

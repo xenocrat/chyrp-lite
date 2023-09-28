@@ -45,7 +45,7 @@ msgid "Pinned"
 msgstr ""
 
 #: themes/umbra/content/post.twig:27
-#: themes/umbra/pages/view.twig:11
+#: themes/umbra/pages/view.twig:10
 msgid "[Untitled]"
 msgstr ""
 
@@ -380,7 +380,11 @@ msgstr ""
 msgid "There aren't any updated posts."
 msgstr ""
 
-#: themes/umbra/pages/view.twig:8
+#: themes/umbra/pages/view.twig:7
 msgid "Webmentions"
+msgstr ""
+
+#: themes/umbra/pages/view.twig:17
+msgid "Comments"
 msgstr ""
 

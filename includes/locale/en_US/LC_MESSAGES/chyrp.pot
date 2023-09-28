@@ -91,7 +91,7 @@ msgstr ""
 #: includes/controller/Ajax.php:34
 #: includes/controller/Ajax.php:251
 #: includes/download.php:13
-#: includes/error.php:163
+#: includes/error.php:169
 #: includes/helpers.php:1853
 #: includes/helpers.php:1860
 #: includes/helpers.php:1867
@@ -1117,7 +1117,7 @@ msgid "Logged in."
 msgstr ""
 
 #: includes/controller/Main.php:911
-#: includes/error.php:448
+#: includes/error.php:454
 msgid "Log in"
 msgstr ""
 
@@ -1167,20 +1167,20 @@ msgstr ""
 msgid "Reset password"
 msgstr ""
 
-#: includes/error.php:164
+#: includes/error.php:170
 msgid "An unspecified error has occurred."
 msgstr ""
 
-#: includes/error.php:434
+#: includes/error.php:440
 msgid "Backtrace"
 msgstr ""
 
-#: includes/error.php:439
+#: includes/error.php:445
 #, php-format
 msgid "%s on line %d"
 msgstr ""
 
-#: includes/error.php:453
+#: includes/error.php:459
 msgid "Go back"
 msgstr ""
 

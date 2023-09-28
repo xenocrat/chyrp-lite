@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: includes/class/Config.php:18
@@ -84,7 +84,7 @@ msgstr "Il percorso è stato avviato con un Controller non valido."
 #: includes/controller/Admin.php:2918 includes/controller/Admin.php:2925
 #: includes/controller/Admin.php:3195 includes/controller/Ajax.php:34
 #: includes/controller/Ajax.php:251 includes/download.php:13
-#: includes/error.php:163 includes/helpers.php:1853 includes/helpers.php:1860
+#: includes/error.php:169 includes/helpers.php:1853 includes/helpers.php:1860
 #: includes/helpers.php:1867 includes/helpers.php:1880
 #: includes/helpers.php:1889 includes/helpers.php:1899
 #: includes/helpers.php:1906 includes/helpers.php:2325
@@ -925,7 +925,7 @@ msgstr "Si deve attivare un tuo account prima di poter accedere."
 msgid "Logged in."
 msgstr "L'accesso é stato effettuato."
 
-#: includes/controller/Main.php:911 includes/error.php:448
+#: includes/controller/Main.php:911 includes/error.php:454
 msgid "Log in"
 msgstr "Accedi"
 
@@ -976,20 +976,20 @@ msgstr "Il collegamento è scaduto. Riprova."
 msgid "Reset password"
 msgstr "Ripristina password"
 
-#: includes/error.php:164
+#: includes/error.php:170
 msgid "An unspecified error has occurred."
 msgstr "Si è verificato un errore non specificato."
 
-#: includes/error.php:434
+#: includes/error.php:440
 msgid "Backtrace"
 msgstr "Backtrace"
 
-#: includes/error.php:439
+#: includes/error.php:445
 #, php-format
 msgid "%s on line %d"
 msgstr "%s riga %d"
 
-#: includes/error.php:453
+#: includes/error.php:459
 msgid "Go back"
 msgstr "Torna indietro"
 
