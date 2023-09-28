@@ -477,7 +477,7 @@ ul.archive article.post.archive {
 article > header {
     display: block;
     width: 100%;
-    margin: 0em;
+    margin: 0rem 0rem 1rem 0rem;
     padding: 0em;
     border: none;
 }
@@ -487,19 +487,6 @@ article > section {
     margin: 1rem 0rem 0rem 0rem;
     padding: 0em;
 }
-section.webmentions {
-    box-sizing: border-box;
-    display: block;
-    position: relative;
-    width: 100%;
-    margin: 0em;
-    padding: 2rem;
-    border: 1px solid #666667;
-}
-section.post_archive_container {
-    height: 100%;
-    overflow: hidden;
-}
 article > footer {
     display: block;
     width: 100%;
@@ -508,6 +495,19 @@ article > footer {
     padding: 0em;
     border: none;
     clear: both;
+}
+article > ol.pingbacks {
+    box-sizing: border-box;
+    display: block;
+    list-style: none;
+    width: 100%;
+    margin: 0rem;
+    padding: 2rem;
+    border: 1px solid #666667;
+}
+section.post_archive_container {
+    height: 100%;
+    overflow: hidden;
 }
 article.video video,
 article.audio audio {

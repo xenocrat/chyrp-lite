@@ -1,6 +1,6 @@
 <li id="comment_{{ comment.id }}">
 <section class="comment" dir="auto">
-<h3>{{ comment.author_link }}</h3>
+<h4>{{ comment.author_link }}</h4>
 {% if comment.status == "denied" %}
 <em>{{ "This comment is awaiting moderation." | translate }}</em>
 {% else %}

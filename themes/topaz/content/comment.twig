@@ -1,9 +1,9 @@
 <li id="comment_{{ comment.id }}">
 <section class="comment" dir="auto">
 {% if comment.status == "pingback" %}
-<h3>{{ "%s:" | translate | format(comment.author_link) }}</h3>
+<h4>{{ "%s:" | translate | format(comment.author_link) }}</h4>
 {% else %}
-<h3>{{ "%s said:" | translate | format(comment.author_link) }}</h3>
+<h4>{{ "%s said:" | translate | format(comment.author_link) }}</h4>
 {% endif %}
 {% if comment.status == "denied" %}
 <em>{{ "This comment is awaiting moderation." | translate }}</em>

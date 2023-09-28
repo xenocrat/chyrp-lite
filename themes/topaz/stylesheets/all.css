@@ -89,12 +89,8 @@ h2 {
 #sidebar > h2 {
     font-size: 1em;
 }
-h2.post_title,
 h2.page_title {
-    text-align: center;
-}
-h2.page_title {
-    padding-bottom: 2rem;
+    padding-bottom: 1.5rem;
     margin-bottom: 2rem;
     border-bottom: 1px solid #ebedec;
 }
@@ -113,14 +109,8 @@ h3.archive {
     padding-bottom: 0.5em;
     border-bottom: 1px solid #ebedec;
 }
-h3.post_byline {
-    font-weight: normal;
-    font-style: italic;
-    font-size: 0.75em;
-    text-align: center;
-    margin-bottom: 2rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid #ebedec;
+h3.article_label {
+    margin-top: 2rem;
 }
 h4, h5, h6 {
     font-size: 1em;
@@ -302,6 +292,11 @@ ul.archive {
 ul.archive > li {
     margin: 0em;
     flex: none;
+}
+ol.pingbacks {
+    list-style: none;
+    margin: 0rem;
+    padding: 2rem;
 }
 ol.comments {
     list-style: none;
@@ -512,12 +507,12 @@ div#sidebar {
 div.prev {
     width: 100%;
     text-align: center;
-    margin-bottom: 2em;
+    margin-bottom: 2rem;
 }
 div.next, div.prev_next {
     width: 100%;
     text-align: center;
-    margin-top: 2em;
+    margin-top: 2rem;
 }
 div.ribbon {
     box-sizing: border-box;
@@ -535,11 +530,10 @@ div.flash {
 div.metadata {
     font-weight: normal;
     font-size: 0.75em;
-    font-style: italic;
     text-align: center;
     display: block;
     width: 100%;
-    padding: 2rem 0rem;
+    padding: 1.5rem 0rem;
     margin-top: 2rem;
     border-top: 1px solid #ebedec;
 }
@@ -573,13 +567,9 @@ div#main > article, div.standalone {
 div#main > article.post.pinned {
     border-color: #0070c4;
 }
-div#main > article.discourse {
-    padding: 2rem;
-    margin-top: 2rem;
-}
+div#main > article.discourse,
 div#main > article.commentary {
     padding: 0rem;
-    margin-top: 2rem;
     overflow: hidden;
 }
 div#main > article.page {
@@ -612,10 +602,10 @@ section.post_archive_container {
 }
 article > header {
     display: block;
-    width: 100%;
-    margin: 0em;
-    padding: 0em;
-    border: none;
+    text-align: center;
+    margin: 0rem 0rem 2rem 0rem;
+    padding: 0rem 0rem 2rem 0rem;
+    border-bottom: 1px solid #ebedec;
 }
 article > section {
     display: block;
@@ -625,7 +615,6 @@ article > section {
 }
 article > footer {
     display: block;
-    width: 100%;
     text-align: start;
     margin: 1rem 0rem 0rem 0rem;
     padding: 0em;
@@ -799,7 +788,9 @@ article.archive img {
     width: 100%;
 }
 article > *:first-child,
+header > *:first-child,
 section > *:first-child,
+footer > *:first-child,
 form > *:first-child,
 aside > *:first-child,
 #sidebar > *:first-child,
@@ -807,7 +798,9 @@ div.standalone > *:first-child {
     margin-top: 0rem;
 }
 article > *:last-child,
+header > *:last-child,
 section > *:last-child,
+footer > *:last-child,
 form > *:last-child,
 aside > *:last-child,
 div.standalone > *:last-child {
@@ -861,9 +854,6 @@ div.standalone > *:last-child {
         font-size: 1.25em;
         margin: 0.8em 0em;
     }
-    h3.post_byline {
-        padding-bottom: 1rem;
-    }
     form.comment_edit {
         padding: 0rem 0rem 1rem 0rem;
     }
@@ -873,6 +863,9 @@ div.standalone > *:last-child {
     input#search_field,
     input#sidebar_search_field {
         width: 12em;
+    }
+    ol.pingbacks {
+        padding: 1rem;
     }
     ol.comments > li {
         margin: 0em;
@@ -921,6 +914,10 @@ div.standalone > *:last-child {
     }
     div#main > article {
         padding: 1rem 1rem 0rem 1rem;
+    }
+    div#main > article > header {
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
     }
     div.standalone {
         padding: 1rem;

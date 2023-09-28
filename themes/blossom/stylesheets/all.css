@@ -101,6 +101,9 @@ h3 {
 h3.archive {
     font-size: 1.33em;
 }
+h3.article_label {
+    margin-top: 2rem;
+}
 h4, h5, h6 {
     font-size: 1em;
     font-weight: bold;
@@ -289,10 +292,15 @@ ul.archive > li {
     margin: 0em;
     flex: none;
 }
+ol.pingbacks {
+    list-style: none;
+    padding: 2rem;
+    margin: 0rem;
+}
 ol.comments {
     list-style: none;
-    padding: 0em;
-    margin: 0em;
+    padding: 0rem;
+    margin: 0rem;
 }
 ol.comments > li {
     box-sizing: border-box;
@@ -498,12 +506,12 @@ div#sidebar {
 div.prev {
     width: 100%;
     text-align: center;
-    margin-bottom: 2em;
+    margin-bottom: 2rem;
 }
 div.next {
     width: 100%;
     text-align: center;
-    margin-top: 2em;
+    margin-top: 2rem;
 }
 div.ribbon {
     box-sizing: border-box;
@@ -573,13 +581,10 @@ div#main > article, div.standalone {
     );
     box-shadow: 0px 2px 4px 2px rgba(57,67,77,0.05);
 }
-div#main > article.discourse {
-    padding: 2rem;
-    margin-top: 2rem;
-}
+div#main > article.discourse,
 div#main > article.commentary {
     padding: 0rem;
-    margin-top: 2rem;
+    overflow: hidden;
 }
 div#main > article.page {
     padding-bottom: 2rem;
@@ -617,23 +622,20 @@ section.post_archive_container {
 }
 article > header {
     display: block;
-    width: 100%;
-    margin: 0em;
-    padding: 0em;
-    border: none;
+    margin: 0rem 0rem 1rem 0rem;
+    padding: 0rem;
 }
 article > section {
     display: block;
     width: 100%;
     margin: 1rem 0rem 0rem 0rem;
-    padding: 0em;
+    padding: 0rem;
 }
 article > footer {
     display: block;
-    width: 100%;
     text-align: start;
     margin: 1rem 0rem 0rem 0rem;
-    padding: 0em;
+    padding: 0rem;
     border: none;
     clear: both;
 }
@@ -798,7 +800,9 @@ section img {
     width: 100%;
 }
 article > *:first-child,
+header > *:first-child,
 section > *:first-child,
+footer > *:first-child,
 form > *:first-child,
 aside > *:first-child,
 #sidebar > *:first-child,
@@ -806,7 +810,9 @@ div.standalone > *:first-child {
     margin-top: 0rem;
 }
 article > *:last-child,
+header > *:last-child,
 section > *:last-child,
+footer > *:last-child,
 form > *:last-child,
 aside > *:last-child,
 div.standalone > *:last-child {
@@ -872,6 +878,9 @@ div.standalone > *:last-child {
     input#search_field,
     input#sidebar_search_field {
         width: 12em;
+    }
+    ol.pingbacks {
+        padding: 1rem;
     }
     ol.comments > li {
         margin: 0em;

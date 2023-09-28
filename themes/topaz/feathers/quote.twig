@@ -2,12 +2,14 @@
 
 {% block content %}
 {% if post.title is not empty %}
-<h2 class="post_title">
+<header>
+<h2>
 <a href="{{ post.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(post.title | striptags | normalize | fix(true)) }}">{{ post.title }}</a>
 </h2>
-<h3 class="post_byline">
+<h3>
 <a href="{{ url('author/' ~ post.author.id) }}">{{ "Written by %s" | translate | format(post.author.name) }}</a>
 </h3>
+</header>
 {% endif %}
 <section class="quote" aria-label="{{ 'Text Content' | translate }}">
 <figure>

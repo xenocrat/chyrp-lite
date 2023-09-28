@@ -5,7 +5,7 @@
 {% if module_enabled("pingable") and post.pingback_count > 0 %}
 <article class="discourse">
 <header>
-<h4>{{ "Webmentions" | translate }}</h4>
+<h3>{{ "Webmentions" | translate }}</h3>
 </header>
 <ol id="pingbacks">
 {% for pingback in post.pingbacks %}
@@ -17,7 +17,7 @@
 {% if module_enabled("comments") and (post.comment_count > 0 or post.commentable) %}
 <article class="commentary">
 <header>
-<h4>{{ "Comments" | translate }}</h4>
+<h3>{{ "Comments" | translate }}</h3>
 </header>
 <ol id="comments" class="comments" data-post_id="{{ post.id }}" data-timestamp="{{ post.latest_comment }}">
 {% for comment in post.comments %}
