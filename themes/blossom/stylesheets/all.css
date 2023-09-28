@@ -101,7 +101,7 @@ h3 {
 h3.archive {
     font-size: 1.33em;
 }
-h3.article_label {
+* + h3.article_label {
     margin-top: 2rem;
 }
 h4, h5, h6 {

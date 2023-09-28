@@ -109,7 +109,7 @@ h3.archive {
     padding-bottom: 0.5em;
     border-bottom: 1px solid #ebedec;
 }
-h3.article_label {
+* + h3.article_label {
     margin-top: 2rem;
 }
 h4, h5, h6 {
