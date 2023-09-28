@@ -122,6 +122,12 @@
                 case 422:
                     header($_SERVER['SERVER_PROTOCOL']." 422 Unprocessable Entity");
                     break;
+                case 429:
+                    header($_SERVER['SERVER_PROTOCOL']." 429 Too Many Requests");
+                    break;
+                case 431:
+                    header($_SERVER['SERVER_PROTOCOL']." 431 Request Header Fields Too Large");
+                    break;
                 case 501:
                     header($_SERVER['SERVER_PROTOCOL']." 501 Not Implemented");
                     break;
