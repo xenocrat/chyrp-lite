@@ -72,6 +72,7 @@ var ChyrpAjaxScroll = {
     },
     panic: function() {
         ChyrpAjaxScroll.failed = true;
+        Oops.count++;
         alert(Oops.message);
     }
 };

@@ -13,7 +13,8 @@ $(function() {
     Page.init();
 });
 var Route = {
-    action: '<?php esce($route->action); ?>'
+    action: '<?php esce($route->action); ?>',
+    request: '<?php esce($route->request); ?>'
 }
 var Visitor = {
     id: <?php esce($visitor->id); ?>,
@@ -25,7 +26,8 @@ var Site = {
     ajax_url: '<?php esce(unfix(url('/', 'AjaxController'))); ?>'
 }
 var Oops = {
-    message: '<?php esce(__("Oops! Something went wrong on this web page.")); ?>'
+    message: '<?php esce(__("Oops! Something went wrong on this web page.")); ?>',
+    count: 0
 }
 var Post = {
     failed: false,
@@ -68,6 +70,7 @@ var Post = {
             Oops.message ;
 
         Post.failed = true;
+        Oops.count++;
         alert(message);
         $(".ajax_loading").loader(true);
     }
@@ -107,6 +110,7 @@ var Page = {
             Oops.message ;
 
         Page.failed = true;
+        Oops.count++;
         alert(message);
         $(".ajax_loading").loader(true);
     }

@@ -74,6 +74,7 @@ var ChyrpLikes = {
     },
     panic: function() {
         ChyrpLikes.failed = true;
+        Oops.count++;
         alert(Oops.message);
     }
 };

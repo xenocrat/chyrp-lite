@@ -166,7 +166,8 @@ function solo_submit() {
     });
 }
 var Route = {
-    action: '<?php esce($route->action); ?>'
+    action: '<?php esce($route->action); ?>',
+    request: '<?php esce($route->request); ?>'
 }
 var Visitor = {
     id: <?php esce($visitor->id); ?>,
@@ -178,7 +179,8 @@ var Site = {
     ajax_url: '<?php esce(unfix(url('/', 'AjaxController'))); ?>'
 }
 var Oops = {
-    message: '<?php esce(__("Oops! Something went wrong on this web page.")); ?>'
+    message: '<?php esce(__("Oops! Something went wrong on this web page.")); ?>',
+    count: 0
 }
 var Help = {
     init: function() {
@@ -384,6 +386,7 @@ var Write = {
                         }).done(function(response) {
                             Write.formatting(target, "img", response.data.url);
                         }).fail(function(response) {
+                            Oops.count++;
                             tray.html(Oops.message);
                         }).always(function(response) {
                             tray.loader(true);
@@ -441,6 +444,7 @@ var Write = {
                                     $(this).remove();
                             }).insertAfter("#content");
                         }, "html").fail(function(response) {
+                            Oops.count++;
                             tray.html(Oops.message);
                         }).always(function(response) {
                             tray.loader(true);
@@ -605,6 +609,7 @@ var Write = {
                 }).done(function(response) {
                     Write.formatting($(e.target), "img", response.data.url);
                 }).fail(function(response) {
+                    Oops.count++;
                     tray.html(Oops.message);
                 }).always(function(response) {
                     tray.loader(true);

@@ -187,6 +187,7 @@ var ChyrpComment = {
             Oops.message ;
 
         ChyrpComment.failed = true;
+        Oops.count++;
         alert(message);
         $(".ajax_loading").loader(true);
         $("#comments form input[name='ajax']").remove();
