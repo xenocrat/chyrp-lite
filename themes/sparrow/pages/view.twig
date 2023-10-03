@@ -14,8 +14,8 @@
 {% endif %}
 {% if module_enabled("pingable") and post.pingback_count > 0 %}
 <article class="discourse">
-<h3>{{ "Webmentions" | translate }}</h3>
-<ol id="pingbacks" class="pingbacks">
+<h3 id="pingbacks">{{ "Webmentions" | translate }}</h3>
+<ol class="pingbacks">
 {% for pingback in post.pingbacks %}
 <li><a id="pingback_{{ pingback.id }}" href="{{ pingback.source | fix(true) }}">{{ pingback.title | oneof("[Untitled]" | translate) }}</a></li>
 {% endfor %}
@@ -24,8 +24,8 @@
 {% endif %}
 {% if module_enabled("comments") and (post.comment_count > 0 or post.commentable) %}
 <article class="commentary">
-<h3>{{ "Comments" | translate }}</h3>
-<ol id="comments" class="comments" data-post_id="{{ post.id }}" data-timestamp="{{ post.latest_comment }}">
+<h3 id="comments">{{ "Comments" | translate }}</h3>
+<ol class="comments" data-post_id="{{ post.id }}" data-timestamp="{{ post.latest_comment }}">
 {% for comment in post.comments %}
 {% include "content" ~ DIR ~ "comment.twig" %}
 {% endfor %}

@@ -43,63 +43,6 @@
 <!-- Navigation -->
 <div role="navigation" class="next traversal">{{ posts.next_link("Older posts" | translate) }}</div>
 {% endif %}
-<!-- Footer -->
-<ul id="nav" role="menu" class="navigation">
-<li role="presentation">
-<a role="menuitem" href="{{ url('index') }}">{{ "Blog" | translate }}</a>
-</li>
-{% if theme.pages_list is not empty %}
-{% for item in theme.pages_list %}
-{% if item.depth == 1 %}
-<li role="presentation" class="page">
-<a role="menuitem" href="{{ item.url() }}">{{ item.title }}</a>
-</li>
-{% endif %}
-{% endfor %}
-{% endif %}
-<li role="presentation">
-<a role="menuitem" href="{{ mailto(site.email) }}">{{ "Email" | translate }}</a>
-</li>
-<li role="presentation">
-<a role="menuitem" href="{{ url('feed') }}" rel="alternate">{{ "Feed" | translate }}</a>
-</li>
-<li role="presentation">
-<a role="menuitem" href="{{ url('archive') }}" rel="archives">{{ "Archive" | translate }}</a>
-</li>
-{% if visitor.group.can("change_settings", "toggle_extensions") %}
-<li role="presentation">
-<a role="menuitem" href="{{ url('/', 'AdminController') }}">{{ "Admin" | translate }}</a>
-</li>
-{% elseif visitor.group.can("add_post") %}
-<li role="presentation">
-<a role="menuitem" href="{{ url('/', 'AdminController') }}">{{ "Write" | translate }}</a>
-</li>
-{% elseif visitor.group.can("add_draft") %}
-<li role="presentation">
-<a role="menuitem" href="{{ url('/', 'AdminController') }}">{{ "Draft" | translate }}</a>
-</li>
-{% endif %}
-{% if visitor.logged_in %}
-<li role="presentation">
-<a role="menuitem" href="{{ url('controls') }}">{{ "Controls" | translate }}</a>
-</li>
-<li role="presentation">
-<a role="menuitem" href="{{ url('logout') }}">{{ "Log out" | translate }}</a>
-</li>
-{% else %}
-{% if site.can_register %}
-<li role="presentation">
-<a role="menuitem" href="{{ url('register') }}">{{ "Register" | translate }}</a>
-</li>
-{% endif %}
-<li role="presentation">
-<a role="menuitem" href="{{ url('login') }}">{{ "Log in" | translate }}</a>
-</li>
-{% endif %}
-<li role="presentation" id="mobile_toggle" aria-hidden="true">
-<a role="menuitem" id="mobile_toggle_link" href="#">{{ "Menu" | translate }}</a>
-</li>
-</ul>
 {{ trigger.call("end_content") }}
 </body>
 <!-- Queries: {{ sql_queries }} | Load Time: {{ theme.load_time() }} -->

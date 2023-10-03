@@ -97,6 +97,9 @@ h2.page_title {
 h2.archive {
     margin: 2rem 0rem 0rem 0rem;
 }
+h2.menu_toggle {
+    display: none;
+}
 h3 {
     font-size: 1em;
     font-weight: bold;
@@ -198,33 +201,33 @@ hr + hr  {
     display: none;
 }
 ul,
-#comments ul {
+ol.comments ul {
     list-style: disc outside;
     margin: 1em 0em;
     margin-inline-start: 2em;
     padding: 0em;
 }
 ul ul,
-#comments ul ul {
+ol.comments ul ul {
     list-style-type: circle;
 }
 ol,
-#comments ol {
+ol.comments ol {
     list-style: decimal outside;
     margin: 1em 0em;
     margin-inline-start: 2em;
     padding: 0em;
 }
 ol ol,
-#comments ol ol {
+ol.comments ol ol {
     list-style-type: lower-latin;
 }
 html[lang="ar"] ol ol,
-html[lang="ar"] #comments ol ol {
+html[lang="ar"] ol.comments ol ol {
     list-style-type: arabic-indic;
 }
 html[lang="he"] ol ol,
-html[lang="he"] #comments ol ol {
+html[lang="he"] ol.comments ol ol {
     list-style-type: hebrew;
 }
 li {
@@ -244,11 +247,6 @@ dl dd {
     margin: 0em;
     padding: 0em;
     margin-inline-start: 2em;
-}
-ul#nav {
-    display: none;
-    margin: 2rem 0rem 0rem 0rem;
-    border-bottom: none;
 }
 ul.navigation {
     list-style: none;
@@ -274,12 +272,6 @@ ul.navigation > li:last-child {
 ul.sidebar > li {
     text-align: start;
     font-size: 0.75em;
-}
-ul#nav > li {
-    text-align: center;
-    padding-top: 0em;
-    padding-bottom: 0em;
-    line-height: 3rem;
 }
 ul.archive {
     list-style: none;
@@ -372,9 +364,9 @@ form, fieldset {
     border: none;
 }
 form.search_box {
-    display: inline-block;
+    display: block;
     position: relative;
-    text-align: center;
+    width: 12em;
     margin-bottom: 2rem;
 }
 form.comment_edit {
@@ -485,11 +477,6 @@ button#sidebar_search_submit:hover {
 label {
     display: block;
     margin-top: 1em;
-}
-div#mast {
-    display: none;
-    width: 100%;
-    text-align: center;
 }
 div#main {
     width: 100%;
@@ -860,9 +847,8 @@ div.standalone > *:last-child {
     input, select {
         width: 100%;
     }
-    input#search_field,
-    input#sidebar_search_field {
-        width: 12em;
+    form.search_box {
+        margin: 0rem auto 1rem auto;
     }
     ol.pingbacks {
         padding: 1rem;
@@ -874,42 +860,25 @@ div.standalone > *:last-child {
     ol.comments > li.comment_form {
         padding: 1rem;
     }
-    ul#nav {
-        display: block;
-    }
-    ul#nav:not(.js_nav) > li#mobile_toggle {
-        display: none;
-    }
-    ul#nav.js_nav {
-        position: fixed;
-        bottom: 0px;
-        left: 0px;
-        width: 100%;
-        height: auto;
-        padding: 0em;
-        background-color: #ffffff;
-        border-radius: 0rem;
-    }
-    ul#nav.js_nav > li {
-        height: 3rem;
-        transition: height 250ms ease 125ms, border-bottom 0ms 125ms;
-    }
-    ul#nav.js_nav:not(.on) > li:not(#mobile_toggle) {
-        height: 0rem;
-        border-bottom: none;
-    }
-    ul#nav.js_nav.on > li#mobile_toggle {
-        background-color: #fcfbfa;
+    ul.navigation > li {
+        text-align: center;
     }
     div#sidebar {
         position: static;
         width: 100%;
         text-align: center;
+        margin-bottom: 2rem;
     }
     div#sidebar > *:not(h1):not(form) {
         display: none;
     }
-    div#tail {
+    div#sidebar > #menu {
+        display: block;
+    }
+    div#sidebar > #menu:target {
+        display: none;
+    }
+    div#sidebar > #menu:target ~ * {
         display: block;
     }
     div#main > article {
@@ -964,8 +933,5 @@ div.standalone > *:last-child {
 @media (prefers-reduced-motion) {
     .ajax_loading {
         animation: none;
-    }
-    ul#nav.js_nav > li {
-        transition: none;
     }
 }

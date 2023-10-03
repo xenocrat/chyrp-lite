@@ -13,9 +13,9 @@
 </div>
 {% endif %}
 {% if module_enabled("pingable") and post.pingback_count > 0 %}
-<h3 class="article_label" id="discourse_label">{{ "Webmentions" | translate }}</h3>
-<article class="discourse" aria-labelledby="discourse_label">
-<ol id="pingbacks" class="pingbacks">
+<h3 id="pingbacks" class="article_label">{{ "Webmentions" | translate }}</h3>
+<article class="discourse" aria-labelledby="pingbacks">
+<ol class="pingbacks">
 {% for pingback in post.pingbacks %}
 <li><a id="pingback_{{ pingback.id }}" href="{{ pingback.source | fix(true) }}">{{ pingback.title | oneof("[Untitled]" | translate) }}</a></li>
 {% endfor %}
@@ -23,9 +23,9 @@
 </article>
 {% endif %}
 {% if module_enabled("comments") and (post.comment_count > 0 or post.commentable) %}
-<h3 class="article_label" id="commentary_label">{{ "Comments" | translate }}</h3>
-<article class="commentary" aria-labelledby="commentary_label">
-<ol id="comments" class="comments paginated" data-post_id="{{ post.id }}" data-timestamp="{{ post.latest_comment }}">
+<h3 id="comments" class="article_label">{{ "Comments" | translate }}</h3>
+<article class="commentary" aria-labelledby="comments">
+<ol class="comments paginated" data-post_id="{{ post.id }}" data-timestamp="{{ post.latest_comment }}">
 {% set comments = paginate(post.comments, site.module_comments.comments_per_page, "comments") %}
 {% for comment in comments.paginated %}
 {% include "content" ~ DIR ~ "comment.twig" %}

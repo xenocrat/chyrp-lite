@@ -81,24 +81,6 @@ h3, h4, h5, h6 {
     font-style: normal;
     margin: 1rem 0rem;
 }
-h3[role="alert"],
-h3[role="status"] {
-    font-size: 0.7rem;
-    padding: 0.3rem 0.7rem;
-    background-color: #f3f2f1;
-    border: 1px solid #b1b4b6;
-    border-radius: 0.1rem;
-}
-h3.notice {
-    color: #00703c;
-    border-color: #00703c;
-    background-color: #deede6;
-}
-h3.warning {
-    color: #d4351c;
-    border-color: #d4351c;
-    background-color: #f2dcd9;
-}
 strong {
     font: inherit;
     font-weight: bold;
@@ -168,34 +150,41 @@ sup, sub {
     font-size: 0.7em;
 }
 ol,
-#comments ol {
+ol.comments ol {
     margin: 1rem 0rem;
     padding: 0rem;
     list-style-type: decimal;
     list-style-position: outside;
 }
 ul,
-#comments ul {
+ol.comments ul {
     margin: 1rem 0rem;
     padding: 0rem;
     list-style-type: disc;
     list-style-position: outside;
 }
 ul ul,
-#comments ul ul {
+ol.comments ul ul {
     list-style-type: circle;
 }
 ol ol,
-#comments ol ol {
+ol.comments ol ol {
     list-style-type: lower-latin;
 }
 html[lang="ar"] ol ol,
-html[lang="ar"] #comments ol ol {
+html[lang="ar"] ol.comments ol ol {
     list-style-type: arabic-indic;
 }
 html[lang="he"] ol ol,
-html[lang="he"] #comments ol ol {
+html[lang="he"] ol.comments ol ol {
     list-style-type: hebrew;
+}
+ol.comments {
+    list-style: none;
+}
+ol.comments > li {
+    margin: 0rem;
+    border-bottom: 3px dotted #b1b4b6;
 }
 ul.navigation {
     list-style: none;
@@ -398,6 +387,32 @@ button#search_submit:focus {
     outline: none;
     border-bottom: 2px solid #0b0c0c;
 }
+div.filter {
+    font-size: 1.5em;
+    font-weight: bold;
+    font-style: normal;
+    margin: 1rem 0rem;
+}
+div[role="alert"],
+div[role="status"] {
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 0.3rem 0.7rem;
+    margin: 1rem 0rem;
+    background-color: #f3f2f1;
+    border: 1px solid #b1b4b6;
+    border-radius: 0.1rem;
+}
+div.notice {
+    color: #00703c;
+    border-color: #00703c;
+    background-color: #deede6;
+}
+div.warning {
+    color: #d4351c;
+    border-color: #d4351c;
+    background-color: #f2dcd9;
+}
 div.doaction a, button {
     display: inline-block;
     white-space: nowrap;
@@ -459,13 +474,6 @@ section.photo > a:focus {
 }
 #comment_shim {
     display: none;
-}
-#comments {
-    list-style: none;
-}
-#comments > li {
-    margin: 0rem;
-    border-bottom: 3px dotted #b1b4b6;
 }
 #tag_cloud > a.tag {
     padding: 0rem 0.3rem;

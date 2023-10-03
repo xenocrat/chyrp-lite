@@ -191,33 +191,33 @@ hr + hr {
     display: none;
 }
 ul,
-#comments ul {
+ol.comments ul {
     list-style: disc outside;
     margin: 1em 0em;
     margin-inline-start: 2em;
     padding: 0em;
 }
 ul ul,
-#comments ul ul {
+ol.comments ul ul {
     list-style-type: circle;
 }
 ol,
-#comments ol {
+ol.comments ol {
     list-style: decimal outside;
     margin: 1em 0em;
     margin-inline-start: 2em;
     padding: 0em;
 }
 ol ol,
-#comments ol ol {
+ol.comments ol ol {
     list-style-type: lower-latin;
 }
 html[lang="ar"] ol ol,
-html[lang="ar"] #comments ol ol {
+html[lang="ar"] ol.comments ol ol {
     list-style-type: arabic-indic;
 }
 html[lang="he"] ol ol,
-html[lang="he"] #comments ol ol {
+html[lang="he"] ol.comments ol ol {
     list-style-type: hebrew;
 }
 li {
