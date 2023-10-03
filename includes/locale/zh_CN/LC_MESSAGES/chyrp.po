@@ -1194,15 +1194,15 @@ msgstr "图片来源"
 msgid "Failed to create image thumbnail."
 msgstr "无法创建图片缩略图。"
 
-#: includes/main.js.php:28
+#: includes/main.js.php:29
 msgid "Oops! Something went wrong on this web page."
 msgstr "哎呀！这个网页出了点问题。"
 
-#: includes/main.js.php:37
+#: includes/main.js.php:39
 msgid "Are you sure you want to delete this post?"
 msgstr "您确定您想删除这篇帖子？"
 
-#: includes/main.js.php:82
+#: includes/main.js.php:85
 msgid "Are you sure you want to delete this page and its child pages?"
 msgstr "您确定您想要删除这个页面以及它的子页面？"
 

@@ -40,8 +40,7 @@ msgstr "Tag"
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "Link permanente &#8220;%s&#8221;"
 
-#: themes/topaz/content/post.twig:17 themes/topaz/content/sidebar.twig:27
-#: themes/topaz/layouts/default.twig:78
+#: themes/topaz/content/post.twig:17 themes/topaz/content/sidebar.twig:29
 msgid "Draft"
 msgstr "Bozza"
 
@@ -53,7 +52,7 @@ msgstr "Programmato"
 msgid "Pinned"
 msgstr "Pinned"
 
-#: themes/topaz/content/post.twig:27 themes/topaz/content/sidebar.twig:53
+#: themes/topaz/content/post.twig:27 themes/topaz/content/sidebar.twig:55
 #: themes/topaz/pages/view.twig:14
 msgid "[Untitled]"
 msgstr "[Senza titolo]"
@@ -106,73 +105,78 @@ msgstr "Cerca questo blog"
 msgid "Search"
 msgstr "Cerca"
 
-#: themes/topaz/content/sidebar.twig:7
+#: themes/topaz/content/sidebar.twig:7 themes/topaz/content/sidebar.twig:8
+msgid "Menu"
+msgstr "Menu"
+
+#: themes/topaz/content/sidebar.twig:8
+msgid "Close menu"
+msgstr "Chiudi il menu"
+
+#: themes/topaz/content/sidebar.twig:9
 msgid "Links"
 msgstr "Link"
 
-#: themes/topaz/content/sidebar.twig:9 themes/topaz/layouts/default.twig:48
+#: themes/topaz/content/sidebar.twig:11
 msgid "Blog"
 msgstr "Blog"
 
-#: themes/topaz/content/sidebar.twig:12 themes/topaz/forms/user/controls.twig:9
+#: themes/topaz/content/sidebar.twig:14 themes/topaz/forms/user/controls.twig:9
 #: themes/topaz/forms/user/register.twig:13
-#: themes/topaz/layouts/default.twig:60
 msgid "Email"
 msgstr "Email"
 
-#: themes/topaz/content/sidebar.twig:15 themes/topaz/layouts/default.twig:63
+#: themes/topaz/content/sidebar.twig:17
 msgid "Feed"
 msgstr "Feed"
 
-#: themes/topaz/content/sidebar.twig:19 themes/topaz/layouts/default.twig:70
+#: themes/topaz/content/sidebar.twig:21
 msgid "Admin"
 msgstr "Amministratore"
 
-#: themes/topaz/content/sidebar.twig:23 themes/topaz/layouts/default.twig:74
+#: themes/topaz/content/sidebar.twig:25
 msgid "Write"
 msgstr "Scrivi"
 
-#: themes/topaz/content/sidebar.twig:32 themes/topaz/forms/user/controls.twig:5
-#: themes/topaz/layouts/default.twig:83
+#: themes/topaz/content/sidebar.twig:34 themes/topaz/forms/user/controls.twig:5
 msgid "Controls"
 msgstr "Controlli"
 
-#: themes/topaz/content/sidebar.twig:35 themes/topaz/layouts/default.twig:86
+#: themes/topaz/content/sidebar.twig:37
 msgid "Log out"
 msgstr "Esci"
 
-#: themes/topaz/content/sidebar.twig:40 themes/topaz/forms/user/register.twig:5
+#: themes/topaz/content/sidebar.twig:42 themes/topaz/forms/user/register.twig:5
 #: themes/topaz/forms/user/register.twig:19
-#: themes/topaz/layouts/default.twig:91
 msgid "Register"
 msgstr "Registrati"
 
-#: themes/topaz/content/sidebar.twig:44 themes/topaz/forms/user/login.twig:5
-#: themes/topaz/forms/user/login.twig:14 themes/topaz/layouts/default.twig:95
+#: themes/topaz/content/sidebar.twig:46 themes/topaz/forms/user/login.twig:5
+#: themes/topaz/forms/user/login.twig:14
 msgid "Log in"
 msgstr "Accedi"
 
-#: themes/topaz/content/sidebar.twig:49
+#: themes/topaz/content/sidebar.twig:51
 msgid "Categories"
 msgstr "Categorie"
 
-#: themes/topaz/content/sidebar.twig:59
+#: themes/topaz/content/sidebar.twig:61
 msgid "Pages"
 msgstr "Pagine"
 
-#: themes/topaz/content/sidebar.twig:69
+#: themes/topaz/content/sidebar.twig:71
 msgid "Related Posts"
 msgstr "Post correlati"
 
-#: themes/topaz/content/sidebar.twig:78
+#: themes/topaz/content/sidebar.twig:80
 msgid "Recent Posts"
 msgstr "Post recenti"
 
-#: themes/topaz/content/sidebar.twig:89 themes/topaz/layouts/default.twig:66
+#: themes/topaz/content/sidebar.twig:91
 msgid "Archive"
 msgstr "Archivio"
 
-#: themes/topaz/content/sidebar.twig:94 themes/topaz/pages/archive.twig:11
+#: themes/topaz/content/sidebar.twig:96 themes/topaz/pages/archive.twig:11
 msgid "F Y"
 msgstr "F Y"
 
@@ -364,11 +368,7 @@ msgstr "Post recenti"
 msgid "Older posts"
 msgstr "Post precedenti"
 
-#: themes/topaz/layouts/default.twig:99
-msgid "Menu"
-msgstr "Menu"
-
-#: themes/topaz/layouts/default.twig:109
+#: themes/topaz/layouts/default.twig:52
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "Chiamato da %s sulla riga %d a %s secondi."

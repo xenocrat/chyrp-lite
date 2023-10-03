@@ -40,8 +40,7 @@ msgstr "标签"
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "永久链接至 &#8220;%s&#8221;"
 
-#: themes/topaz/content/post.twig:17 themes/topaz/content/sidebar.twig:27
-#: themes/topaz/layouts/default.twig:78
+#: themes/topaz/content/post.twig:17 themes/topaz/content/sidebar.twig:29
 msgid "Draft"
 msgstr "草稿"
 
@@ -53,7 +52,7 @@ msgstr "计划"
 msgid "Pinned"
 msgstr "固定"
 
-#: themes/topaz/content/post.twig:27 themes/topaz/content/sidebar.twig:53
+#: themes/topaz/content/post.twig:27 themes/topaz/content/sidebar.twig:55
 #: themes/topaz/pages/view.twig:14
 msgid "[Untitled]"
 msgstr "[无标题]"
@@ -104,73 +103,78 @@ msgstr "搜索此博客"
 msgid "Search"
 msgstr "搜索"
 
-#: themes/topaz/content/sidebar.twig:7
+#: themes/topaz/content/sidebar.twig:7 themes/topaz/content/sidebar.twig:8
+msgid "Menu"
+msgstr "菜单"
+
+#: themes/topaz/content/sidebar.twig:8
+msgid "Close menu"
+msgstr "关闭菜单"
+
+#: themes/topaz/content/sidebar.twig:9
 msgid "Links"
 msgstr "链接"
 
-#: themes/topaz/content/sidebar.twig:9 themes/topaz/layouts/default.twig:48
+#: themes/topaz/content/sidebar.twig:11
 msgid "Blog"
 msgstr "博客"
 
-#: themes/topaz/content/sidebar.twig:12 themes/topaz/forms/user/controls.twig:9
+#: themes/topaz/content/sidebar.twig:14 themes/topaz/forms/user/controls.twig:9
 #: themes/topaz/forms/user/register.twig:13
-#: themes/topaz/layouts/default.twig:60
 msgid "Email"
 msgstr "邮件"
 
-#: themes/topaz/content/sidebar.twig:15 themes/topaz/layouts/default.twig:63
+#: themes/topaz/content/sidebar.twig:17
 msgid "Feed"
 msgstr "订阅"
 
-#: themes/topaz/content/sidebar.twig:19 themes/topaz/layouts/default.twig:70
+#: themes/topaz/content/sidebar.twig:21
 msgid "Admin"
 msgstr "管理"
 
-#: themes/topaz/content/sidebar.twig:23 themes/topaz/layouts/default.twig:74
+#: themes/topaz/content/sidebar.twig:25
 msgid "Write"
 msgstr "写作"
 
-#: themes/topaz/content/sidebar.twig:32 themes/topaz/forms/user/controls.twig:5
-#: themes/topaz/layouts/default.twig:83
+#: themes/topaz/content/sidebar.twig:34 themes/topaz/forms/user/controls.twig:5
 msgid "Controls"
 msgstr "操作"
 
-#: themes/topaz/content/sidebar.twig:35 themes/topaz/layouts/default.twig:86
+#: themes/topaz/content/sidebar.twig:37
 msgid "Log out"
 msgstr "退出登陆"
 
-#: themes/topaz/content/sidebar.twig:40 themes/topaz/forms/user/register.twig:5
+#: themes/topaz/content/sidebar.twig:42 themes/topaz/forms/user/register.twig:5
 #: themes/topaz/forms/user/register.twig:19
-#: themes/topaz/layouts/default.twig:91
 msgid "Register"
 msgstr "注册"
 
-#: themes/topaz/content/sidebar.twig:44 themes/topaz/forms/user/login.twig:5
-#: themes/topaz/forms/user/login.twig:14 themes/topaz/layouts/default.twig:95
+#: themes/topaz/content/sidebar.twig:46 themes/topaz/forms/user/login.twig:5
+#: themes/topaz/forms/user/login.twig:14
 msgid "Log in"
 msgstr "登陆"
 
-#: themes/topaz/content/sidebar.twig:49
+#: themes/topaz/content/sidebar.twig:51
 msgid "Categories"
 msgstr "分类"
 
-#: themes/topaz/content/sidebar.twig:59
+#: themes/topaz/content/sidebar.twig:61
 msgid "Pages"
 msgstr "页面"
 
-#: themes/topaz/content/sidebar.twig:69
+#: themes/topaz/content/sidebar.twig:71
 msgid "Related Posts"
 msgstr "相关帖子"
 
-#: themes/topaz/content/sidebar.twig:78
+#: themes/topaz/content/sidebar.twig:80
 msgid "Recent Posts"
 msgstr "最近的帖子"
 
-#: themes/topaz/content/sidebar.twig:89 themes/topaz/layouts/default.twig:66
+#: themes/topaz/content/sidebar.twig:91
 msgid "Archive"
 msgstr "档案"
 
-#: themes/topaz/content/sidebar.twig:94 themes/topaz/pages/archive.twig:11
+#: themes/topaz/content/sidebar.twig:96 themes/topaz/pages/archive.twig:11
 msgid "F Y"
 msgstr "F Y"
 
@@ -362,11 +366,7 @@ msgstr "较新的帖子"
 msgid "Older posts"
 msgstr "较旧的帖子"
 
-#: themes/topaz/layouts/default.twig:99
-msgid "Menu"
-msgstr "菜单"
-
-#: themes/topaz/layouts/default.twig:109
+#: themes/topaz/layouts/default.twig:52
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "调用 %s 在行 %d 在 %s 秒."

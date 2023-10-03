@@ -17,7 +17,7 @@ Arguments:
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 877
+	admin/javascripts/admin.js.php on line 882
 
 
 admin_head
@@ -389,7 +389,7 @@ Arguments:
 javascript
 ----------
 Called from:
-	includes/main.js.php on line 114
+	includes/main.js.php on line 118
 
 
 add_group
@@ -774,9 +774,9 @@ Called from:
 end_content
 -----------
 Called from:
-	themes/blossom/layouts/default.twig on line 103
+	themes/blossom/layouts/default.twig on line 46
 	themes/sparrow/layouts/default.twig on line 98
-	themes/topaz/layouts/default.twig on line 102
+	themes/topaz/layouts/default.twig on line 45
 	themes/umbra/layouts/default.twig on line 92
 	themes/virgula/layouts/default.twig on line 76
 

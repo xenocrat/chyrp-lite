@@ -33,8 +33,7 @@ msgid "Permanent link to &#8220;%s&#8221;"
 msgstr ""
 
 #: themes/blossom/content/post.twig:17
-#: themes/blossom/content/sidebar.twig:27
-#: themes/blossom/layouts/default.twig:79
+#: themes/blossom/content/sidebar.twig:29
 msgid "Draft"
 msgstr ""
 
@@ -47,7 +46,7 @@ msgid "Pinned"
 msgstr ""
 
 #: themes/blossom/content/post.twig:27
-#: themes/blossom/content/sidebar.twig:53
+#: themes/blossom/content/sidebar.twig:55
 #: themes/blossom/pages/view.twig:20
 msgid "[Untitled]"
 msgstr ""
@@ -101,83 +100,82 @@ msgid "Search"
 msgstr ""
 
 #: themes/blossom/content/sidebar.twig:7
-msgid "Links"
+#: themes/blossom/content/sidebar.twig:8
+msgid "Menu"
+msgstr ""
+
+#: themes/blossom/content/sidebar.twig:8
+msgid "Close menu"
 msgstr ""
 
 #: themes/blossom/content/sidebar.twig:9
-#: themes/blossom/layouts/default.twig:49
+msgid "Links"
+msgstr ""
+
+#: themes/blossom/content/sidebar.twig:11
 msgid "Blog"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:12
+#: themes/blossom/content/sidebar.twig:14
 #: themes/blossom/forms/user/controls.twig:9
 #: themes/blossom/forms/user/register.twig:13
-#: themes/blossom/layouts/default.twig:61
 msgid "Email"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:15
-#: themes/blossom/layouts/default.twig:64
+#: themes/blossom/content/sidebar.twig:17
 msgid "Feed"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:19
-#: themes/blossom/layouts/default.twig:71
+#: themes/blossom/content/sidebar.twig:21
 msgid "Admin"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:23
-#: themes/blossom/layouts/default.twig:75
+#: themes/blossom/content/sidebar.twig:25
 msgid "Write"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:32
+#: themes/blossom/content/sidebar.twig:34
 #: themes/blossom/forms/user/controls.twig:5
-#: themes/blossom/layouts/default.twig:84
 msgid "Controls"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:35
-#: themes/blossom/layouts/default.twig:87
+#: themes/blossom/content/sidebar.twig:37
 msgid "Log out"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:40
+#: themes/blossom/content/sidebar.twig:42
 #: themes/blossom/forms/user/register.twig:5
 #: themes/blossom/forms/user/register.twig:19
-#: themes/blossom/layouts/default.twig:92
 msgid "Register"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:44
+#: themes/blossom/content/sidebar.twig:46
 #: themes/blossom/forms/user/login.twig:5
 #: themes/blossom/forms/user/login.twig:14
-#: themes/blossom/layouts/default.twig:96
 msgid "Log in"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:49
+#: themes/blossom/content/sidebar.twig:51
 msgid "Categories"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:59
+#: themes/blossom/content/sidebar.twig:61
 msgid "Pages"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:69
+#: themes/blossom/content/sidebar.twig:71
 msgid "Related Posts"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:78
+#: themes/blossom/content/sidebar.twig:80
 msgid "Recent Posts"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:89
-#: themes/blossom/layouts/default.twig:67
+#: themes/blossom/content/sidebar.twig:91
 msgid "Archive"
 msgstr ""
 
-#: themes/blossom/content/sidebar.twig:94
+#: themes/blossom/content/sidebar.twig:96
 #: themes/blossom/pages/archive.twig:18
 msgid "F Y"
 msgstr ""
@@ -368,11 +366,7 @@ msgstr ""
 msgid "Older posts"
 msgstr ""
 
-#: themes/blossom/layouts/default.twig:100
-msgid "Menu"
-msgstr ""
-
-#: themes/blossom/layouts/default.twig:110
+#: themes/blossom/layouts/default.twig:53
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr ""

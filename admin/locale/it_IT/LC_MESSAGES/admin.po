@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: admin/help/canonical_url.twig:3 admin/help/canonical_url.twig:6
@@ -101,7 +101,7 @@ msgid "## Heading"
 msgstr "## Intestazione"
 
 #: admin/help/markdown.twig:20 admin/help/markdown.twig:24
-#: admin/javascripts/admin.js.php:234 admin/javascripts/admin.js.php:235
+#: admin/javascripts/admin.js.php:236 admin/javascripts/admin.js.php:237
 msgid "Heading"
 msgstr "Intestazione"
 
@@ -113,8 +113,8 @@ msgstr "### Intestazione"
 msgid "**Strong**"
 msgstr "**Forte**"
 
-#: admin/help/markdown.twig:28 admin/javascripts/admin.js.php:249
-#: admin/javascripts/admin.js.php:250
+#: admin/help/markdown.twig:28 admin/javascripts/admin.js.php:251
+#: admin/javascripts/admin.js.php:252
 msgid "Strong"
 msgstr "Forte"
 
@@ -122,8 +122,8 @@ msgstr "Forte"
 msgid "*Emphasis*"
 msgstr "*Enfasi*"
 
-#: admin/help/markdown.twig:32 admin/javascripts/admin.js.php:264
-#: admin/javascripts/admin.js.php:265
+#: admin/help/markdown.twig:32 admin/javascripts/admin.js.php:266
+#: admin/javascripts/admin.js.php:267
 msgid "Emphasis"
 msgstr "Enfasi"
 
@@ -139,8 +139,8 @@ msgstr "Citazione"
 msgid "~~Strikethrough~~"
 msgstr "~~Barrato~~"
 
-#: admin/help/markdown.twig:40 admin/javascripts/admin.js.php:279
-#: admin/javascripts/admin.js.php:280
+#: admin/help/markdown.twig:40 admin/javascripts/admin.js.php:281
+#: admin/javascripts/admin.js.php:282
 msgid "Strikethrough"
 msgstr "Barrato"
 
@@ -148,8 +148,8 @@ msgstr "Barrato"
 msgid "`Code`"
 msgstr "`Codice`"
 
-#: admin/help/markdown.twig:44 admin/javascripts/admin.js.php:309
-#: admin/javascripts/admin.js.php:310
+#: admin/help/markdown.twig:44 admin/javascripts/admin.js.php:311
+#: admin/javascripts/admin.js.php:312
 msgid "Code"
 msgstr "Codice"
 
@@ -157,8 +157,8 @@ msgstr "Codice"
 msgid "==Highlight=="
 msgstr "==Evidenziare=="
 
-#: admin/help/markdown.twig:48 admin/javascripts/admin.js.php:294
-#: admin/javascripts/admin.js.php:295
+#: admin/help/markdown.twig:48 admin/javascripts/admin.js.php:296
+#: admin/javascripts/admin.js.php:297
 msgid "Highlight"
 msgstr "Evidenziare"
 
@@ -190,8 +190,8 @@ msgstr "Nuovo paragrafo"
 msgid "[title](URL)"
 msgstr "[titolo](URL)"
 
-#: admin/help/markdown.twig:65 admin/javascripts/admin.js.php:324
-#: admin/javascripts/admin.js.php:325
+#: admin/help/markdown.twig:65 admin/javascripts/admin.js.php:326
+#: admin/javascripts/admin.js.php:327
 msgid "Hyperlink"
 msgstr "Collegamento ipertestuale"
 
@@ -199,8 +199,8 @@ msgstr "Collegamento ipertestuale"
 msgid "![description](URL)"
 msgstr "![descrizione](URL)"
 
-#: admin/help/markdown.twig:69 admin/javascripts/admin.js.php:339
-#: admin/javascripts/admin.js.php:340
+#: admin/help/markdown.twig:69 admin/javascripts/admin.js.php:341
+#: admin/javascripts/admin.js.php:342
 msgid "Image"
 msgstr "Immagine"
 
@@ -316,79 +316,79 @@ msgstr "Spunta tutto"
 msgid "Are you sure you want to proceed?"
 msgstr "Sei sicuro di volere procedere?"
 
-#: admin/javascripts/admin.js.php:193 admin/javascripts/admin.js.php:416
-#: admin/javascripts/admin.js.php:818
+#: admin/javascripts/admin.js.php:195 admin/javascripts/admin.js.php:419
+#: admin/javascripts/admin.js.php:823
 msgid "Modal window"
 msgstr "Finestra modale"
 
-#: admin/javascripts/admin.js.php:206 admin/javascripts/admin.js.php:428
-#: admin/javascripts/admin.js.php:832
+#: admin/javascripts/admin.js.php:208 admin/javascripts/admin.js.php:431
+#: admin/javascripts/admin.js.php:837
 msgid "Close"
 msgstr "Chiudi"
 
-#: admin/javascripts/admin.js.php:213 admin/javascripts/admin.js.php:435
-#: admin/javascripts/admin.js.php:839
+#: admin/javascripts/admin.js.php:215 admin/javascripts/admin.js.php:438
+#: admin/javascripts/admin.js.php:844
 msgid "close"
 msgstr "chiudi"
 
-#: admin/javascripts/admin.js.php:241
+#: admin/javascripts/admin.js.php:243
 msgid "heading"
 msgstr "intestazione"
 
-#: admin/javascripts/admin.js.php:256
+#: admin/javascripts/admin.js.php:258
 msgid "strong"
 msgstr "forte"
 
-#: admin/javascripts/admin.js.php:271
+#: admin/javascripts/admin.js.php:273
 msgid "emphasis"
 msgstr "enfasi"
 
-#: admin/javascripts/admin.js.php:286
+#: admin/javascripts/admin.js.php:288
 msgid "strikethrough"
 msgstr "barrato"
 
-#: admin/javascripts/admin.js.php:301
+#: admin/javascripts/admin.js.php:303
 msgid "highlight"
 msgstr "evidenza"
 
-#: admin/javascripts/admin.js.php:316
+#: admin/javascripts/admin.js.php:318
 msgid "code"
 msgstr "codice"
 
-#: admin/javascripts/admin.js.php:331
+#: admin/javascripts/admin.js.php:333
 msgid "hyperlink"
 msgstr "collegamento ipertestuale"
 
-#: admin/javascripts/admin.js.php:346 admin/javascripts/admin.js.php:396
+#: admin/javascripts/admin.js.php:348 admin/javascripts/admin.js.php:399
 msgid "image"
 msgstr "immagine"
 
-#: admin/javascripts/admin.js.php:358 admin/javascripts/admin.js.php:359
+#: admin/javascripts/admin.js.php:360 admin/javascripts/admin.js.php:361
 msgid "Upload"
 msgstr "Carica"
 
-#: admin/javascripts/admin.js.php:374 admin/javascripts/admin.js.php:595
+#: admin/javascripts/admin.js.php:376 admin/javascripts/admin.js.php:599
 msgid "Uploading..."
 msgstr "Caricamento in corso…."
 
-#: admin/javascripts/admin.js.php:405 admin/javascripts/admin.js.php:406
+#: admin/javascripts/admin.js.php:408 admin/javascripts/admin.js.php:409
 msgid "Insert"
 msgstr "Inserisci"
 
-#: admin/javascripts/admin.js.php:451
+#: admin/javascripts/admin.js.php:455
 msgid "insert"
 msgstr "inserisci"
 
-#: admin/javascripts/admin.js.php:465 admin/javascripts/admin.js.php:466
+#: admin/javascripts/admin.js.php:469 admin/javascripts/admin.js.php:470
 #: admin/pages/themes.twig:24
 msgid "Preview"
 msgstr "Anteprima"
 
-#: admin/javascripts/admin.js.php:482
+#: admin/javascripts/admin.js.php:486
 msgid "preview"
 msgstr "anteprima"
 
-#: admin/javascripts/admin.js.php:508
+#: admin/javascripts/admin.js.php:512
 msgid "Words:"
 msgstr "Parole:"
 
