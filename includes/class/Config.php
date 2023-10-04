@@ -94,7 +94,7 @@
          *     $value - The value to set.
          *     $fallback - Add the setting only if it doesn't exist.
          */
-        public function set($setting, $value, $fallback = false): int|false {
+        public function set($setting, $value, $fallback = false): int|bool {
             if (isset($this->data[$setting]) and $fallback)
                 return true;
 
