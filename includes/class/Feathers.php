@@ -21,7 +21,7 @@
         public $fields = array();
 
         # Array: $filters
-        # Manages named Trigger filters for feather fields.
+        # Manages named trigger filters for feather fields.
         static $filters = array();
 
         # Array: $custom_filters
