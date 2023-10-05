@@ -188,6 +188,7 @@
         ): self {
             $sql = SQL::current();
             $config = Config::current();
+            $trigger = Trigger::current();
 
             $sql->insert(
                 table:"comments",
@@ -213,8 +214,12 @@
                 array("skip_where" => true)
             );
 
-            if ($config->email_correspondence) {
-                $done = array();
+            # Notify site contact, post author, and commenters of a new comment.
+            if (
+                $config->email_correspondence and
+                $comment->status != self::STATUS_PINGBACK
+            ) {
+                $done = array($comment->author_email);
 
                 if ($config->module_comments["notify_site_contact"]) {
                     if (!in_array($config->email, $done)) {
@@ -226,10 +231,15 @@
                 }
 
                 if ($config->module_comments["notify_post_author"]) {
+                    $post = new Post(
+                        $comment->post_id,
+                        array("skip_where" => true)
+                    );
+
                     if (
-                        !$comment->post->no_results and
-                        !$comment->post->user->no_results and
-                        !in_array($comment->post->user->email, $done)
+                        !$post->no_results and
+                        !$post->user->no_results and
+                        !in_array($post->user->email, $done)
                     ) {
                         Modules::$instances["comments"]::email_user_new_comment(
                             $comment,
@@ -264,8 +274,7 @@
                 }
             }
 
-            Trigger::current()->call("add_comment", $comment);
-
+            $trigger->call("add_comment", $comment);
             return $comment;
         }
 
@@ -302,6 +311,10 @@
             if ($this->status == self::STATUS_PINGBACK)
                 $status = $this->status;
 
+            $sql = SQL::current();
+            $config = Config::current();
+            $trigger = Trigger::current();
+
             $new_values = array(
                 "body"         => $body,
                 "author"       => strip_tags($author),
@@ -313,7 +326,7 @@
                 "updated_at"   => fallback($updated_at, datetime())
             );
 
-            SQL::current()->update(
+            $sql->update(
                 table:"comments",
                 conds:array("id" => $this->id),
                 data:$new_values
@@ -336,7 +349,38 @@
                 )
             );
 
-            Trigger::current()->call("update_comment", $comment, $this);
+            # Notify commenters of a newly approved comment.
+            if (
+                $config->email_correspondence and
+                $this->status != self::STATUS_APPROVED and
+                $comment->status == self::STATUS_APPROVED
+            ) {
+                $done = array($comment->author_email);
+
+                $peers = self::find(
+                    array(
+                        "skip_where" => true,
+                        "where"  => array(
+                            "post_id"    => $comment->post_id,
+                            "user_id !=" => $comment->user_id,
+                            "status"     => self::STATUS_APPROVED,
+                            "notify"     => true
+                        )
+                    )
+                );
+
+                foreach ($peers as $peer) {
+                    if (!in_array($peer->author_email, $done)) {
+                        Modules::$instances["comments"]::email_peer_new_comment(
+                            $comment,
+                            $peer
+                        );
+                        $done[] = $peer->author_email;
+                    }
+                }
+            }
+
+            $trigger->call("update_comment", $comment, $this);
             return $comment;
         }
 
