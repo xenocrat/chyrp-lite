@@ -91,6 +91,9 @@ ol {
 
 /* Group: Core */
 
+:root {
+  color-scheme: light dark;
+}
 *::selection {
     color: #1f1f23;
     background-color: #ffdd00;

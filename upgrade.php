@@ -631,6 +631,9 @@
                 font-weight: bold;
                 font-style: italic;
             }
+            :root {
+                color-scheme: light dark;
+            }
             *::selection {
                 color: #ffffff;
                 background-color: #ff7f00;
