@@ -848,6 +848,10 @@ div.standalone > *:last-child {
         page-break-inside: avoid;
         box-shadow: none;
     }
+    ul.navigation {
+        background-color: #ffffff;
+        background-image: none;
+    }
 }
 @media screen and (max-width: 959px) {
     body {
@@ -936,5 +940,19 @@ div.standalone > *:last-child {
 @media (prefers-reduced-motion) {
     .ajax_loading {
         animation: none;
+    }
+}
+@media (prefers-contrast: more) {
+    body {
+        background-color: #ffffff;
+    }
+    div#main > article,
+    div.standalone {
+        background-color: #ffffff;
+        background-image: none;
+    }
+    ul.navigation {
+        background-color: #ffffff;
+        background-image: none;
     }
 }

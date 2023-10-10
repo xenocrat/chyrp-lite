@@ -762,3 +762,8 @@ div.standalone > *:last-child {
         animation: none;
     }
 }
+@media (prefers-contrast: more) {
+    body {
+        background-color: #000000;
+    }
+}
