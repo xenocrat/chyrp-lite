@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/comments/admin/pages/comment_settings.twig:3
@@ -426,6 +426,6 @@ msgstr "您想从数据库中删除评论吗？"
 msgid "Are you sure you want to permanently delete this comment?"
 msgstr "您确定要永久删除这个评论？"
 
-#: modules/comments/model/Comment.php:516
+#: modules/comments/model/Comment.php:560
 msgid "Anon"
 msgstr "不久"
