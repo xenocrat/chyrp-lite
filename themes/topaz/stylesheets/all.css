@@ -834,9 +834,6 @@ div.standalone > *:last-child {
     body {
         margin: 1rem;
     }
-    body.js_nav {
-        margin-bottom: 5rem;
-    }
     h2 {
         font-size: 1.25em;
         margin: 0.8em 0em;

@@ -857,9 +857,6 @@ div.standalone > *:last-child {
     body {
         margin: 1rem;
     }
-    body.js_nav {
-        margin-bottom: 5rem;
-    }
     form.comment_edit {
         padding: 0rem 0rem 1rem 0rem;
     }
