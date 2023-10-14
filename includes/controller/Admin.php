@@ -3123,9 +3123,17 @@
             $route = Route::current();
             $config = Config::current();
 
-            if (!empty($_POST['clean_urls']) and
-                (htaccess_conf() === false or caddyfile_conf() === false or nginx_conf() === false))
-                    unset($_POST['clean_urls']);
+            if (!empty($_POST['clean_urls']) and !$config->clean_urls) {
+                $conf = array(htaccess_conf(), caddyfile_conf(), nginx_conf());
+
+                if (in_array(false, $conf, true)) {
+                    Flash::warning(
+                        __("Failed to write file to disk.")
+                    );
+
+                    unset($_POST['clean_urls']); 
+                }
+            }
 
             if (!empty($_POST['enable_homepage']) and !$config->enable_homepage) {
                 $route->add("/", "page;url=home");
