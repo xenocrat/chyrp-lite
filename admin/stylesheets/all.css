@@ -905,7 +905,7 @@ span.options_toolbar {
     background-color: #fbfbfb;
     border: 1px solid #cfcfcf;
     border-bottom: none;
-    padding: 0.25rem 0.5rem calc(0.25rem + 2px) 0.5rem;
+    padding: 0.25rem 1rem calc(0.5rem + 2px) 1rem;
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
 }
@@ -991,7 +991,7 @@ button.emblem > img {
 a.emblem.toolbar:not(:first-child),
 label.emblem.toolbar:not(:first-child),
 button.emblem.toolbar:not(:first-child) {
-    margin-left: 16px;
+    margin-left: 24px;
 }
 a.emblem:focus,
 label.emblem:focus,
