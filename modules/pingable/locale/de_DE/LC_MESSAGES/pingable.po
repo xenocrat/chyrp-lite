@@ -1,0 +1,135 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Erwin Maas <achillosilliasos@gmail.com>\n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/pingable/admin/pages/delete_pingback.twig:3
+#: modules/pingable/admin/pages/delete_pingback.twig:6
+msgid "Delete Webmention?"
+msgstr "Webmention löschen?"
+
+#: modules/pingable/admin/pages/delete_pingback.twig:8
+#, php-format
+msgid "&#8220;%s&#8221; will be permanently deleted."
+msgstr "&#8220;%s&#8221; würde permanent gelöscht."
+
+#: modules/pingable/admin/pages/edit_pingback.twig:3
+msgid "Edit Webmention"
+msgstr "Webmention ändern"
+
+#: modules/pingable/admin/pages/edit_pingback.twig:6
+#, php-format
+msgid "Editing Webmention to &#8220;%s&#8221;"
+msgstr "Bearbeiten von Webmention zu &#8220;%s&#8221;"
+
+#: modules/pingable/admin/pages/edit_pingback.twig:10
+#: modules/pingable/admin/pages/manage_pingbacks.twig:20
+msgid "Title"
+msgstr "Titel"
+
+#: modules/pingable/admin/pages/edit_pingback.twig:14
+msgid "Update"
+msgstr "Aktualisieren"
+
+#: modules/pingable/admin/pages/manage_pingbacks.twig:3
+msgid "Manage Webmentions"
+msgstr "Webmentions bearbeiten"
+
+#: modules/pingable/admin/pages/manage_pingbacks.twig:16
+#: modules/pingable/pingable.php:240 modules/pingable/pingable.php:264
+msgid "Webmentions"
+msgstr "Webmentions"
+
+#: modules/pingable/admin/pages/manage_pingbacks.twig:21
+msgid "Post"
+msgstr "Blogpost"
+
+#: modules/pingable/admin/pages/manage_pingbacks.twig:22
+msgid "Added"
+msgstr "Hinzugefügt"
+
+#: modules/pingable/info.php:3
+msgid "Mentionable"
+msgstr "Mentionable"
+
+#: modules/pingable/info.php:6
+msgid "Register webmentions from blogs that link to yours."
+msgstr "Registrieren Sie Web-Erwähnungen von Blogs, die auf Ihr Blog verlinken."
+
+#: modules/pingable/info.php:12
+msgid "Please remember to update the permission settings for each group."
+msgstr "Bitte denken Sie daran, die Berechtigungseinstellungen für jede Gruppe zu aktualisieren."
+
+#: modules/pingable/info.php:14
+msgid "Do you want to remove webmentions from the database?"
+msgstr "Möchten Sie Webmentions aus der Datenbank entfernen?"
+
+#: modules/pingable/pingable.php:25
+msgid "Edit Webmentions"
+msgstr "Webmentions bearbeiten"
+
+#: modules/pingable/pingable.php:26
+msgid "Delete Webmentions"
+msgstr "Webmentions löschen"
+
+#: modules/pingable/pingable.php:42
+msgid "A webmention from your URL is already registered."
+msgstr "Eine Web-Erwähnung von Ihrer URL ist bereits registriert."
+
+#: modules/pingable/pingable.php:49
+msgid "Your URL is too long to be stored in our database."
+msgstr "Ihre URL ist zu lang, um in unserer Datenbank gespeichert zu werden."
+
+#: modules/pingable/pingable.php:64
+msgid "An ID is required to edit a webmention."
+msgstr "Zum Bearbeiten einer Webmention ist eine ID erforderlich."
+
+#: modules/pingable/pingable.php:72 modules/pingable/pingable.php:114
+#: modules/pingable/pingable.php:143 modules/pingable/pingable.php:181
+msgid "Webmention not found."
+msgstr "Webmention nicht gefunden."
+
+#: modules/pingable/pingable.php:79 modules/pingable/pingable.php:120
+msgid "You do not have sufficient privileges to edit this webmention."
+msgstr "Sie verfügen nicht über ausreichende Berechtigungen zum Verwalten von Webmentions."
+
+#: modules/pingable/pingable.php:98
+msgid "An ID is required to update a webmention."
+msgstr "Zum Ändern einer Webmention ist eine ID erforderlich."
+
+#: modules/pingable/pingable.php:104
+msgid "No Title Specified"
+msgstr "Kein Titel angegeben"
+
+#: modules/pingable/pingable.php:105
+msgid "A title is required to update a webmention."
+msgstr "Zum Ändern einer Webmention ist eine ID erforderlich."
+
+#: modules/pingable/pingable.php:126
+msgid "Webmention updated."
+msgstr "Webmention aktualisiert."
+
+#: modules/pingable/pingable.php:135 modules/pingable/pingable.php:169
+msgid "An ID is required to delete a webmention."
+msgstr "Zum Löschen einer Webmention ist eine ID erforderlich."
+
+#: modules/pingable/pingable.php:150 modules/pingable/pingable.php:187
+msgid "You do not have sufficient privileges to delete this webmention."
+msgstr "Sie verfügen nicht über ausreichende Berechtigungen zum Löschen von Webmentions."
+
+#: modules/pingable/pingable.php:193
+msgid "Webmention deleted."
+msgstr "Webmention gelöscht."
+
+#: modules/pingable/pingable.php:202
+msgid "You do not have sufficient privileges to manage webmentions."
+msgstr "Sie verfügen nicht über ausreichende Berechtigungen zum Bearbeiten von Webmentions."

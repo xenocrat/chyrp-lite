@@ -1,0 +1,46 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Erwin Maas <achillosilliasos@gmail.com>\n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: feathers/video/info.php:3
+msgid "Video"
+msgstr "Video"
+
+#: feathers/video/info.php:6
+msgid "A feather for video."
+msgstr "Ein feather für Video."
+
+#: feathers/video/video.php:10
+msgid "Title"
+msgstr "Titel"
+
+#: feathers/video/video.php:18
+msgid "Video File"
+msgstr "Video Datei"
+
+#: feathers/video/video.php:21
+#, php-format
+msgid "(Max. file size: %d Megabytes)"
+msgstr "(Max. Dateigröße: %d Megabytes)"
+
+#: feathers/video/video.php:28
+msgid "Description"
+msgstr "Beschreibung"
+
+#: feathers/video/video.php:55
+msgid "You did not select a video to upload."
+msgstr "Sie haben keine Dateien zum hochladen selektiert."
+
+#: feathers/video/video.php:152
+msgid "Your web browser does not support the <code>video</code> element."
+msgstr "Ihr Webbrowser unterstützt das <code>video</code>-Element nicht."

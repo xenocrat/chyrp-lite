@@ -1,0 +1,117 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Erwin Maas <achillosilliasos@gmail.com>\n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.4\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/likes/admin/pages/like_settings.twig:3
+#: modules/likes/admin/pages/like_settings.twig:6
+msgid "Like Settings"
+msgstr "Like Einstellungen"
+
+#: modules/likes/admin/pages/like_settings.twig:10
+msgid "Like Image"
+msgstr "Like Bilder"
+
+#: modules/likes/admin/pages/like_settings.twig:19
+msgid "Like with Text"
+msgstr "Like mit Text"
+
+#: modules/likes/admin/pages/like_settings.twig:21
+msgid "Enables text descriptions in like/unlike links."
+msgstr "Ermöglicht Textbeschreibungen in Like/Unlike-Links."
+
+#: modules/likes/admin/pages/like_settings.twig:24
+msgid "Show on Index Pages"
+msgstr "Auf Indexseiten anzeigen"
+
+#: modules/likes/admin/pages/like_settings.twig:26
+msgid "Enables like functionality on blog index pages."
+msgstr "Aktiviert die Like-Funktion auf Blog-Indexseiten."
+
+#: modules/likes/info.php:3 modules/likes/likes.php:98
+msgid "Likes"
+msgstr "Likes"
+
+#: modules/likes/info.php:6
+msgid "Allow users to &#8220;like&#8221; a post."
+msgstr "Erlauben Sie Benutzern ein Blogpost zu &#8220;liken&#8221;."
+
+#: modules/likes/info.php:12
+msgid "Please remember to update the permission settings for each group."
+msgstr "Bitte denken Sie daran, die Berechtigungseinstellungen für jede Gruppe zu aktualisieren."
+
+#: modules/likes/likes.php:49
+msgid "Like Posts"
+msgstr "Like Blogposts"
+
+#: modules/likes/likes.php:50
+msgid "Unlike Posts"
+msgstr "Blogposts nicht mehr liken"
+
+#: modules/likes/likes.php:120
+msgid "Most liked posts"
+msgstr "Beiträge mit den meisten Likes"
+
+#: modules/likes/likes.php:128 modules/likes/likes.php:186
+msgid "An ID is required to like a post."
+msgstr "Zum liken einer Blogpost ist eine ID erforderlich."
+
+#: modules/likes/likes.php:135 modules/likes/likes.php:193
+msgid "You do not have sufficient privileges to like posts."
+msgstr "Sie verfügen nicht über ausreichende Berechtigungen zum Liken von Blogposts."
+
+#: modules/likes/likes.php:148
+msgid "Post liked."
+msgstr "Blogpost geliked."
+
+#: modules/likes/likes.php:157 modules/likes/likes.php:224
+msgid "An ID is required to unlike a post."
+msgstr "Zum unliken einer Blogpost ist eine ID erforderlich."
+
+#: modules/likes/likes.php:164 modules/likes/likes.php:231
+msgid "You do not have sufficient privileges to unlike posts."
+msgstr "Sie verfügen nicht über ausreichende Berechtigungen zum Unliken von Blogposts."
+
+#: modules/likes/likes.php:177
+msgid "Post unliked."
+msgstr "Blogpost unliked."
+
+#: modules/likes/likes.php:211 modules/likes/likes.php:424
+msgid "You like this."
+msgstr "Sie liken díeses."
+
+#: modules/likes/likes.php:213 modules/likes/likes.php:426
+#, php-format
+msgid "You and %d person like this."
+msgid_plural "You and %d people like this."
+msgstr[0] "Sie und %d Person like dieser."
+msgstr[1] "Sie und %d Personen like dieser."
+
+#: modules/likes/likes.php:246 modules/likes/likes.php:381
+msgid "No likes yet."
+msgstr "Noch keiner Likes."
+
+#: modules/likes/likes.php:248 modules/likes/likes.php:383
+#, php-format
+msgid "%d person likes this."
+msgid_plural "%d people like this."
+msgstr[0] "%d Person likes dieser."
+msgstr[1] "%d Personen likes dieser."
+
+#: modules/likes/likes.php:366 modules/likes/likes.php:409
+msgid "Like!"
+msgstr "Like!"
+
+#: modules/likes/likes.php:370 modules/likes/likes.php:413
+msgid "Unlike!"
+msgstr "Unlike!"

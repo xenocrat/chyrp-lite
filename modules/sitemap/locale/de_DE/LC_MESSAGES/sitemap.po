@@ -1,0 +1,90 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Erwin Maas <achillosilliasos@gmail.com>\n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/sitemap/admin/pages/sitemap_settings.twig:3
+#: modules/sitemap/admin/pages/sitemap_settings.twig:6
+msgid "Sitemap Settings"
+msgstr "Sitemap Einstellungen"
+
+#: modules/sitemap/admin/pages/sitemap_settings.twig:10
+msgid "Sitemap Path"
+msgstr "Sitemap Pfad"
+
+#: modules/sitemap/admin/pages/sitemap_settings.twig:13
+msgid "The directory to which the sitemap is written."
+msgstr "Der Ort in dem die Sitemap geschrieben wird."
+
+#: modules/sitemap/admin/pages/sitemap_settings.twig:17
+msgid "Blog is Updated"
+msgstr "Blogpost aktualisiert"
+
+#: modules/sitemap/admin/pages/sitemap_settings.twig:25
+msgid "Pages are Edited"
+msgstr "Seiten sind geändert"
+
+#: modules/sitemap/admin/pages/sitemap_settings.twig:33
+msgid "Posts are Edited"
+msgstr "Blogposts sind geändert"
+
+#: modules/sitemap/admin/pages/sitemap_settings.twig:42
+msgid ""
+"These values hint to search engines how frequently they should crawl your "
+"site."
+msgstr ""
+"Diese Werte geben Suchmaschinen Hinweise darauf, wie oft sie Ihre Website "
+"crawlen sollten."
+
+#: modules/sitemap/info.php:3
+msgid "Sitemap Generator"
+msgstr "Sitemap-Generator"
+
+#: modules/sitemap/info.php:6
+msgid ""
+"Creates a <em>sitemap.xml</em> file on your server to help search engines "
+"index your blog."
+msgstr ""
+"Erstellt eine <em>sitemap.xml</em>-Datei auf Ihrem Server, um "
+"Suchmaschinen bei der Indexierung Ihres Blogs zu unterstützen."
+
+#: modules/sitemap/sitemap.php:36
+msgid "Sitemap"
+msgstr "Sitemap"
+
+#: modules/sitemap/sitemap.php:54
+msgid "Hourly"
+msgstr "Stündlich"
+
+#: modules/sitemap/sitemap.php:55
+msgid "Daily"
+msgstr "Täglich"
+
+#: modules/sitemap/sitemap.php:56
+msgid "Weekly"
+msgstr "Wöchentlich"
+
+#: modules/sitemap/sitemap.php:57
+msgid "Monthly"
+msgstr "Monatlich"
+
+#: modules/sitemap/sitemap.php:58
+msgid "Yearly"
+msgstr "Jährlich"
+
+#: modules/sitemap/sitemap.php:59
+msgid "Never"
+msgstr "Niemals"
+
+#: modules/sitemap/sitemap.php:83
+msgid "Could not determine the absolute path to the Sitemap."
+msgstr "Der absolute Pfad zur Sitemap konnte nicht gefunden werden."

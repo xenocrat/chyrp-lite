@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: \n"
+"Last-Translator: Erwin Maas <achillosilliasos@gmail.com>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
@@ -317,7 +317,7 @@ msgstr "Nicht gefunden."
 
 #: themes/umbra/pages/archive.twig:11
 msgid "F Y"
-msgstr ""
+msgstr "F Y"
 
 #: themes/umbra/pages/archive.twig:51
 #, php-format

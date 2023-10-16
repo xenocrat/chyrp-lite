@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: \n"
+"Last-Translator: Erwin Maas <achillosilliasos@gmail.com>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
@@ -355,7 +355,7 @@ msgstr "&larr; Archiv vom %s"
 
 #: themes/sparrow/pages/archive.twig:18
 msgid "F Y"
-msgstr ""
+msgstr "F Y"
 
 #: themes/sparrow/pages/archive.twig:49
 #, php-format

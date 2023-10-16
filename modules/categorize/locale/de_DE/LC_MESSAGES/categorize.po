@@ -1,0 +1,232 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Erwin Maas <achillosilliasos@gmail.com>\n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/categorize/admin/help/categorizing_posts.twig:3
+#: modules/categorize/admin/help/categorizing_posts.twig:6
+msgid "Categorizing Posts"
+msgstr "Kategorisieren von Beiträgen"
+
+#: modules/categorize/admin/help/categorizing_posts.twig:8
+msgid ""
+"Categorization is a way of organising your blog posts. A good use for "
+"categorization is to gather together multiple posts that have a common theme "
+"or subject matter. Each post can have only one category applied to it, and "
+"your visitors will be able to filter your blog to easily view all the posts "
+"within a particular category."
+msgstr ""
+"Kategorisierung ist eine Möglichkeit, Ihre Blogbeiträge zu organisieren. "
+"Eine gute Verwendung zur Kategorisierung besteht darin, mehrere Beiträge "
+"zusammenzufassen, die ein gemeinsames Thema oder Thema haben. Auf jeden "
+"Beitrag kann nur eine Kategorie angewendet werden, und Ihre Besucher können "
+"Ihren Blog filtern, um problemlos alle Beiträge innerhalb einer bestimmten "
+"Kategorie anzuzeigen."
+
+#: modules/categorize/admin/help/categorizing_posts.twig:11
+msgid ""
+"Categories can be added, renamed, and deleted in the <strong>Manage</strong> "
+"tab of the administration console."
+msgstr ""
+"Kategorien können auf der Registerkarte <strong>Verwalten</strong> der "
+"Verwaltungskonsole hinzugefügt, umbenannt und gelöscht werden."
+
+#: modules/categorize/admin/pages/delete_category.twig:3
+#: modules/categorize/admin/pages/delete_category.twig:6
+msgid "Delete Category?"
+msgstr "Kategorie löschen?"
+
+#: modules/categorize/admin/pages/delete_category.twig:8
+#, php-format
+msgid "&#8220;%s&#8221; will be permanently deleted."
+msgstr "&#8220;%s&#8221; würde permanent gelöscht."
+
+#: modules/categorize/admin/pages/edit_category.twig:3
+msgid "Edit Category"
+msgstr "Kategorie ändern"
+
+#: modules/categorize/admin/pages/edit_category.twig:6
+#, php-format
+msgid "Editing Category &#8220;%s&#8221;"
+msgstr "Kategorie &#8220;%s&#8221; in bearbeitung;"
+
+#: modules/categorize/admin/pages/edit_category.twig:10
+#: modules/categorize/admin/pages/manage_category.twig:24
+#: modules/categorize/admin/pages/new_category.twig:10
+msgid "Name"
+msgstr "Name"
+
+#: modules/categorize/admin/pages/edit_category.twig:15
+#: modules/categorize/admin/pages/new_category.twig:15
+msgid "Slug"
+msgstr "Slug"
+
+#: modules/categorize/admin/pages/edit_category.twig:20
+#: modules/categorize/admin/pages/new_category.twig:20
+msgid "The slug is the URL-friendly identifying name for this category."
+msgstr ""
+"Der Slug ist der URL-freundliche Identifikationsname für diese Kategorie."
+
+#: modules/categorize/admin/pages/edit_category.twig:24
+#: modules/categorize/admin/pages/manage_category.twig:23
+#: modules/categorize/admin/pages/new_category.twig:24
+msgid "Listed?"
+msgstr "Aufgeführt?"
+
+#: modules/categorize/admin/pages/edit_category.twig:27
+#: modules/categorize/admin/pages/new_category.twig:27
+msgid "Do you want to include this category in the categories list?"
+msgstr "Möchten Sie diese Kategorie in die Kategorienliste aufnehmen?"
+
+#: modules/categorize/admin/pages/edit_category.twig:31
+msgid "Update"
+msgstr "Aktualisieren"
+
+#: modules/categorize/admin/pages/manage_category.twig:3
+#: modules/categorize/categorize.php:25
+msgid "Manage Categories"
+msgstr "Kategorien steuern"
+
+#: modules/categorize/admin/pages/manage_category.twig:15
+msgid "Add Category"
+msgstr "Kategorie hinfügen"
+
+#: modules/categorize/admin/pages/manage_category.twig:19
+#: modules/categorize/categorize.php:241
+msgid "Categories"
+msgstr "Kategorien"
+
+#: modules/categorize/admin/pages/manage_category.twig:25
+msgid "Posts"
+msgstr "Blogposts"
+
+#: modules/categorize/admin/pages/new_category.twig:3
+#: modules/categorize/admin/pages/new_category.twig:6
+msgid "New Category"
+msgstr "Neuer Kategorie"
+
+#: modules/categorize/admin/pages/new_category.twig:31
+msgid "Add"
+msgstr "Hinfügen"
+
+#: modules/categorize/categorize.php:67 modules/categorize/categorize.php:101
+msgid "Category"
+msgstr "Kategorie"
+
+#: modules/categorize/categorize.php:87
+msgid "[None]"
+msgstr "[Keine]"
+
+#: modules/categorize/categorize.php:160
+msgid "You did not specify a category."
+msgstr "Sie haben keine Dateien zum hochladen selektiert."
+
+#: modules/categorize/categorize.php:165 modules/categorize/categorize.php:181
+#: modules/categorize/categorize.php:207
+msgid "Invalid Category"
+msgstr "Ungültiger Kategorie"
+
+#: modules/categorize/categorize.php:176
+msgid "The category you specified was not found."
+msgstr "Die von Ihnen angegebene Kategorie wurde nicht gefunden."
+
+#: modules/categorize/categorize.php:202
+msgid "There are no posts in the category you specified."
+msgstr "Die von Ihnen angegebene Kategorie wurde nicht gefunden."
+
+#: modules/categorize/categorize.php:232
+#, php-format
+msgid "Posts in category &#8220;%s&#8221;"
+msgstr "Blogposts in Kategorie &#8220;%s&#8221;"
+
+#: modules/categorize/categorize.php:265
+msgid "You do not have sufficient privileges to manage categories."
+msgstr ""
+"Sie verfügen nicht über ausreichende Berechtigungen zum Verwalten von "
+"Kategorien."
+
+#: modules/categorize/categorize.php:300 modules/categorize/categorize.php:310
+msgid "You do not have sufficient privileges to add categories."
+msgstr ""
+"Sie verfügen nicht über ausreichende Berechtigungen um Kategorien hinfügen "
+"zu können."
+
+#: modules/categorize/categorize.php:321 modules/categorize/categorize.php:385
+msgid "No Name Specified"
+msgstr "Kein Name specifiziert"
+
+#: modules/categorize/categorize.php:322
+msgid "A name is required to add a category."
+msgstr "Zum Hinzufügen einer Kategorie ist ein Name erforderlich."
+
+#: modules/categorize/categorize.php:336
+msgid "Category added."
+msgstr "Kategorie hinzugefügt."
+
+#: modules/categorize/categorize.php:345
+msgid "An ID is required to edit a category."
+msgstr "Zum Bearbeiten einer Kategorie ist eine ID erforderlich."
+
+#: modules/categorize/categorize.php:353 modules/categorize/categorize.php:395
+#: modules/categorize/categorize.php:436 modules/categorize/categorize.php:474
+msgid "Category not found."
+msgstr "Kategorie nicht gefunden."
+
+#: modules/categorize/categorize.php:360 modules/categorize/categorize.php:401
+msgid "You do not have sufficient privileges to edit this category."
+msgstr ""
+"Sie verfügen nicht über ausreichende Berechtigungen zum Verwalten von "
+"Kategorien."
+
+#: modules/categorize/categorize.php:379
+msgid "An ID is required to update a category."
+msgstr "Zum Bearbeiten einer Kategorie ist eine ID erforderlich."
+
+#: modules/categorize/categorize.php:386
+msgid "A name is required to update a category."
+msgstr "Zum Hinzufügen einer Kategorie ist ein Name erforderlich."
+
+#: modules/categorize/categorize.php:419
+msgid "Category updated."
+msgstr "Kategorie aktualisiert."
+
+#: modules/categorize/categorize.php:428 modules/categorize/categorize.php:462
+msgid "An ID is required to delete a category."
+msgstr "Zum Bearbeiten einer Kategorie ist eine ID erforderlich."
+
+#: modules/categorize/categorize.php:443 modules/categorize/categorize.php:480
+msgid "You do not have sufficient privileges to delete this category."
+msgstr ""
+"Sie verfügen nicht über ausreichende Berechtigungen zum Verwalten von "
+"Kategorien."
+
+#: modules/categorize/categorize.php:485
+msgid "Category deleted."
+msgstr "Kategorie gelöscht."
+
+#: modules/categorize/info.php:3
+msgid "Categorize"
+msgstr "Kategorisieren"
+
+#: modules/categorize/info.php:6
+msgid "Categorize your posts."
+msgstr "Kategorisiere Ihre Blogposts."
+
+#: modules/categorize/info.php:12
+msgid "Please remember to update the permission settings for each group."
+msgstr ""
+"Bitte denken Sie daran, die Berechtigungseinstellungen für jede Gruppe zu "
+"aktualisieren."
+
+#: modules/categorize/info.php:14
+msgid "Do you want to remove your categories from the database?"
+msgstr "Möchten Sie Ihre Kategorien aus der Datenbank entfernen?"
