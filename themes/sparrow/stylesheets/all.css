@@ -289,16 +289,16 @@ table th {
     padding: 0.5em;
     font: inherit;
     font-weight: bold;
-    background-color: #98716c;
+    background-color: #8b6762;
     color: #ffffff;
-    border: 1px solid #98716c;
+    border: 1px solid #8b6762;
     vertical-align: middle;
 }
 table td {
     text-align: start;
     padding: 0.5em;
     font: inherit;
-    border: 1px solid #98716c;
+    border: 1px solid #8b6762;
     vertical-align: middle;
 }
 form, fieldset {
@@ -334,14 +334,14 @@ select, input {
 }
 input.error,
 input:invalid {
-    border-color: #cc5252;
+    border-color: #c04b4b;
     box-shadow: none;
 }
 select:focus, input:focus {
     outline: none;
     background-color: #ffffff;
-    border-color: #98716c;
-    outline: #98716c solid 1px;
+    border-color: #8b6762;
+    outline: #8b6762 solid 1px;
     outline-offset: 0px;
 }
 input::placeholder {
@@ -355,7 +355,7 @@ input[type="checkbox"] {
 input[type="file"]:focus,
 input[type="radio"]:focus,
 input[type="checkbox"]:focus {
-    outline: #cc5252 solid 2px;
+    outline: #c04b4b solid 2px;
     outline-offset: 2px;
 }
 input#search_field {
@@ -380,8 +380,8 @@ textarea {
 }
 textarea:focus {
     outline: none;
-    border-color: #98716c;
-    outline: #98716c solid 1px;
+    border-color: #8b6762;
+    outline: #8b6762 solid 1px;
     outline-offset: 0px;
 }
 button {
@@ -431,7 +431,7 @@ div.flash {
     width: 100%;
     text-align: center;
     color: #ffffff;
-    background-color: #cc5252;
+    background-color: #c04b4b;
     padding: 0.5em;
 }
 div.flash + div.flash {
@@ -539,21 +539,21 @@ a:hover,
 a:focus,
 a:active {
     outline: none;
-    color: #cc5252;
+    color: #c04b4b;
     text-decoration: none;
 }
 ul.navigation > li > a {
     display: inline-block;
     margin: 0rem 0.5rem 1rem 0.5rem;
 }
-h3.flash a {
+div.flash a {
     font-weight: bold;
     color: #ffffff;
-    border-bottom: 1px transparent solid;
+    border-bottom: 0.125em transparent solid;
 }
-h3.flash a:hover,
-h3.flash a:focus,
-h3.flash a:active {
+div.flash a:hover,
+div.flash a:focus,
+div.flash a:active {
     border-color: #ffffff;
 }
 section a:link,
@@ -561,7 +561,7 @@ p a:link,
 section a:visited,
 p a:visited {
     color: #1f1f23;
-    border-bottom: 1px #1f1f23 solid;
+    border-bottom: 0.125em #1f1f23 solid;
 }
 section a:hover,
 p a:hover,
@@ -569,8 +569,8 @@ section a:focus,
 p a:focus,
 section a:active,
 p a:active {
-    color: #cc5252;
-    border-color: #cc5252;
+    color: #c04b4b;
+    border-color: #c04b4b;
 }
 div.tags a.tag,
 div.tag_cloud a.tag {
@@ -597,7 +597,7 @@ div.doaction a, button {
     padding: 0.5em 1.25em;
     border-radius: 0.25em;
     color: #ffffff;
-    background-color: #98716c;
+    background-color: #8b6762;
     border: none;
 }
 div.doaction a:hover,
@@ -617,7 +617,7 @@ section.photo > a {
     border-bottom: none;
 }
 section.photo > a:focus {
-    outline: #cc5252 solid 4px;
+    outline: #c04b4b solid 4px;
 }
 div.doaction a.post_delete_link:hover,
 div.doaction a.delete_link:hover,
@@ -625,7 +625,7 @@ div.doaction a.post_delete_link:focus,
 div.doaction a.delete_link:focus,
 div.doaction a.post_delete_link:active,
 div.doaction a.delete_link:active {
-    background-color: #cc5252;
+    background-color: #c04b4b;
 }
 a.likes > img {
     display: inline-block;
@@ -651,7 +651,7 @@ a.archive_post_link {
 a.archive_post_link:hover,
 a.archive_post_link:focus,
 a.archive_post_link:active {
-    outline: #cc5252 solid 4px;
+    outline: #c04b4b solid 4px;
 }
 img {
     border-style: none;

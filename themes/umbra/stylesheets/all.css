@@ -332,7 +332,7 @@ select, input {
 input.error,
 input:invalid {
     color: #ffffff;
-    background-color: #cc5252;
+    background-color: #c04b4b;
     box-shadow: none;
 }
 select:focus, input:focus {
@@ -419,7 +419,7 @@ div.flash {
     box-sizing: border-box;
     width: 100%;
     text-align: center;
-    background-color: #cc5252;
+    background-color: #c04b4b;
     padding: 0.5em;
     border-bottom: 1px solid transparent;
 }
@@ -529,12 +529,12 @@ ul.navigation > li > a {
     display: inline-block;
     margin: 0rem 0.5rem 1rem 0.5rem;
 }
-h3.flash a {
-    border-bottom: 1px #ffffff solid;
+div.flash a {
+    border-bottom: 0.125em #ffffff solid;
 }
-h3.flash a:hover,
-h3.flash a:focus,
-h3.flash a:active {
+div.flash a:hover,
+div.flash a:focus,
+div.flash a:active {
     color: lightgreen;
     border-color: lightgreen;
 }
@@ -568,7 +568,7 @@ p a:link,
 section a:visited,
 p a:visited {
     color: #ffffff;
-    border-bottom: 1px #ffffff solid;
+    border-bottom: 0.125em #ffffff solid;
 }
 section a:hover,
 p a:hover,

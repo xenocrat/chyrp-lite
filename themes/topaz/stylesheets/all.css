@@ -613,7 +613,7 @@ article.audio audio {
     width: 100%;
 }
 a {
-    border-bottom: 1px transparent solid;
+    border-bottom: 0.125em transparent solid;
 }
 a:link, a:visited {
     color: #1f1f23;
@@ -663,7 +663,7 @@ div.traversal a:last-child {
 section a:link, p a:link,
 section a:visited, p a:visited {
     color: #1f1f23;
-    border-bottom: 1px #1f1f23 solid;
+    border-bottom: 0.125em #1f1f23 solid;
 }
 section a:hover, p a:hover,
 section a:focus, p a:focus,

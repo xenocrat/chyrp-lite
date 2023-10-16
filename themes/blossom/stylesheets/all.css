@@ -636,7 +636,7 @@ article.audio audio {
 }
 a {
     text-decoration: none;
-    border-bottom: 1px transparent solid;
+    border-bottom: 0.125em transparent solid;
 }
 a:link,
 a:visited {
@@ -649,7 +649,7 @@ a:active {
     outline: none;
     color: #d94c7b;
     text-decoration: none;
-    border-bottom: 1px #d94c7b solid;
+    border-bottom: 0.125em #d94c7b solid;
 }
 div.ribbon a {
     color: #ffffff;
@@ -658,7 +658,7 @@ div.ribbon a {
 div.ribbon a:hover,
 div.ribbon a:focus,
 div.ribbon a:active {
-    border-bottom: 1px #ffffff solid;
+    border-color: #ffffff;
 }
 div.traversal a {
     display: inline-block;
@@ -680,7 +680,7 @@ p a:link,
 section a:visited,
 p a:visited {
     color: #1f1f23;
-    border-bottom: 1px #1f1f23 solid;
+    border-bottom: 0.125em #1f1f23 solid;
 }
 section a:hover,
 p a:hover,
@@ -729,7 +729,7 @@ button:active {
 }
 div.doaction a.post_delete_link,
 div.doaction a.delete_link {
-    background-color: #cc5252;
+    background-color: #c04b4b;
 }
 div.doaction a.post_delete_link:hover,
 div.doaction a.delete_link:hover,
