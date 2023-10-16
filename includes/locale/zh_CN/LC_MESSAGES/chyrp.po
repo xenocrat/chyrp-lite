@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: includes/class/Config.php:18
@@ -82,7 +82,7 @@ msgstr "路由启动了一个无效的控制器。"
 #: includes/controller/Admin.php:2754 includes/controller/Admin.php:2897
 #: includes/controller/Admin.php:2904 includes/controller/Admin.php:2911
 #: includes/controller/Admin.php:2918 includes/controller/Admin.php:2925
-#: includes/controller/Admin.php:3195 includes/controller/Ajax.php:34
+#: includes/controller/Admin.php:3203 includes/controller/Ajax.php:34
 #: includes/controller/Ajax.php:251 includes/download.php:13
 #: includes/error.php:169 includes/helpers.php:1853 includes/helpers.php:1860
 #: includes/helpers.php:1867 includes/helpers.php:1880
@@ -318,7 +318,7 @@ msgid "Page created!"
 msgstr "页面已创建！"
 
 #: includes/controller/Admin.php:646 includes/controller/Admin.php:770
-#: includes/controller/Admin.php:1820 includes/controller/Admin.php:3145
+#: includes/controller/Admin.php:1820 includes/controller/Admin.php:3153
 msgid "View page &rarr;"
 msgstr "查看页面 &rarr;"
 
@@ -692,105 +692,111 @@ msgid "Invalid canonical URL."
 msgstr "无效的规范URL。"
 
 #: includes/controller/Admin.php:2952 includes/controller/Admin.php:3028
-#: includes/controller/Admin.php:3093 includes/controller/Admin.php:3160
+#: includes/controller/Admin.php:3093 includes/controller/Admin.php:3168
 msgid "Settings updated."
 msgstr "设置已更新。"
 
-#: includes/controller/Admin.php:3135
+#: includes/controller/Admin.php:3131 includes/helpers.php:2350
+#: includes/helpers.php:2399 includes/helpers.php:2537 upgrade.php:140
+#: upgrade.php:157 upgrade.php:174
+msgid "Failed to write file to disk."
+msgstr "写入文件到磁盘失败。"
+
+#: includes/controller/Admin.php:3143
 msgid "My Awesome Homepage"
 msgstr "我最棒的主页"
 
-#: includes/controller/Admin.php:3136
+#: includes/controller/Admin.php:3144
 msgid "Nothing here yet!"
 msgstr "然而这里什么也没有！"
 
-#: includes/controller/Admin.php:3144
+#: includes/controller/Admin.php:3152
 msgid "Page created."
 msgstr "页面已创建。"
 
-#: includes/controller/Admin.php:3172 includes/controller/Main.php:867
+#: includes/controller/Admin.php:3180 includes/controller/Main.php:867
 msgid "You are already logged in."
 msgstr "您已登陆。"
 
-#: includes/controller/Admin.php:3196 includes/controller/Ajax.php:35
+#: includes/controller/Admin.php:3204 includes/controller/Ajax.php:35
 #: includes/controller/Ajax.php:252 includes/download.php:14
 #: includes/thumbnail.php:17
 msgid "Missing argument."
 msgstr "缺少参数。"
 
-#: includes/controller/Admin.php:3205
+#: includes/controller/Admin.php:3213
 msgid "Help"
 msgstr "帮助"
 
-#: includes/controller/Admin.php:3220
+#: includes/controller/Admin.php:3228
 msgid "Write"
 msgstr "写作"
 
-#: includes/controller/Admin.php:3223
+#: includes/controller/Admin.php:3231
 msgid "Manage"
 msgstr "管理所有"
 
-#: includes/controller/Admin.php:3226
+#: includes/controller/Admin.php:3234
 msgid "Settings"
 msgstr "设置"
 
-#: includes/controller/Admin.php:3229
+#: includes/controller/Admin.php:3237
 msgid "Extend"
 msgstr "扩展"
 
-#: includes/controller/Admin.php:3240
+#: includes/controller/Admin.php:3248
 msgid "Page"
 msgstr "页面"
 
-#: includes/controller/Admin.php:3275
+#: includes/controller/Admin.php:3283
 msgid "Posts"
 msgstr "所有帖子"
 
-#: includes/controller/Admin.php:3284
+#: includes/controller/Admin.php:3292
 msgid "Pages"
 msgstr "所有页面"
 
-#: includes/controller/Admin.php:3293 includes/controller/Admin.php:3338
+#: includes/controller/Admin.php:3301 includes/controller/Admin.php:3346
 msgid "Users"
 msgstr "用户"
 
-#: includes/controller/Admin.php:3303
+#: includes/controller/Admin.php:3311
 msgid "Groups"
 msgstr "所有组"
 
-#: includes/controller/Admin.php:3312
+#: includes/controller/Admin.php:3320
 msgid "Uploads"
 msgstr "上传"
 
-#: includes/controller/Admin.php:3317
+#: includes/controller/Admin.php:3325
 msgid "Import"
 msgstr "导入"
 
-#: includes/controller/Admin.php:3320
+#: includes/controller/Admin.php:3328
 msgid "Export"
 msgstr "导出"
 
-#: includes/controller/Admin.php:3336
+#: includes/controller/Admin.php:3344
 msgid "General"
 msgstr "通用"
 
-#: includes/controller/Admin.php:3337
+#: includes/controller/Admin.php:3345
 msgid "Content"
 msgstr "内容"
 
-#: includes/controller/Admin.php:3339
+#: includes/controller/Admin.php:3347
 msgid "Routes"
 msgstr "路由"
 
-#: includes/controller/Admin.php:3358
+#: includes/controller/Admin.php:3366
 msgid "Modules"
 msgstr "模块"
 
-#: includes/controller/Admin.php:3359
+#: includes/controller/Admin.php:3367
 msgid "Feathers"
 msgstr "羽毛"
 
-#: includes/controller/Admin.php:3360
+#: includes/controller/Admin.php:3368
 msgid "Themes"
 msgstr "主题"
 
@@ -1079,11 +1085,6 @@ msgstr "上传路径不存在。"
 #: includes/helpers.php:2344 includes/helpers.php:2393
 msgid "Upload path is not writable."
 msgstr "上传路径不可写。"
-
-#: includes/helpers.php:2350 includes/helpers.php:2399
-#: includes/helpers.php:2537 upgrade.php:140 upgrade.php:157 upgrade.php:174
-msgid "Failed to write file to disk."
-msgstr "写入文件到磁盘失败。"
 
 #: includes/helpers.php:2514
 msgid ""

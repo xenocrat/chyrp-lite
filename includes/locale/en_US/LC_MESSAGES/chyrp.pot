@@ -87,7 +87,7 @@ msgstr ""
 #: includes/controller/Admin.php:2911
 #: includes/controller/Admin.php:2918
 #: includes/controller/Admin.php:2925
-#: includes/controller/Admin.php:3195
+#: includes/controller/Admin.php:3203
 #: includes/controller/Ajax.php:34
 #: includes/controller/Ajax.php:251
 #: includes/download.php:13
@@ -448,7 +448,7 @@ msgstr ""
 #: includes/controller/Admin.php:646
 #: includes/controller/Admin.php:770
 #: includes/controller/Admin.php:1820
-#: includes/controller/Admin.php:3145
+#: includes/controller/Admin.php:3153
 msgid "View page &rarr;"
 msgstr ""
 
@@ -882,28 +882,38 @@ msgstr ""
 #: includes/controller/Admin.php:2952
 #: includes/controller/Admin.php:3028
 #: includes/controller/Admin.php:3093
-#: includes/controller/Admin.php:3160
+#: includes/controller/Admin.php:3168
 msgid "Settings updated."
 msgstr ""
 
-#: includes/controller/Admin.php:3135
+#: includes/controller/Admin.php:3131
+#: includes/helpers.php:2350
+#: includes/helpers.php:2399
+#: includes/helpers.php:2537
+#: upgrade.php:140
+#: upgrade.php:157
+#: upgrade.php:174
+msgid "Failed to write file to disk."
+msgstr ""
+
+#: includes/controller/Admin.php:3143
 msgid "My Awesome Homepage"
 msgstr ""
 
-#: includes/controller/Admin.php:3136
+#: includes/controller/Admin.php:3144
 msgid "Nothing here yet!"
 msgstr ""
 
-#: includes/controller/Admin.php:3144
+#: includes/controller/Admin.php:3152
 msgid "Page created."
 msgstr ""
 
-#: includes/controller/Admin.php:3172
+#: includes/controller/Admin.php:3180
 #: includes/controller/Main.php:867
 msgid "You are already logged in."
 msgstr ""
 
-#: includes/controller/Admin.php:3196
+#: includes/controller/Admin.php:3204
 #: includes/controller/Ajax.php:35
 #: includes/controller/Ajax.php:252
 #: includes/download.php:14
@@ -911,80 +921,80 @@ msgstr ""
 msgid "Missing argument."
 msgstr ""
 
-#: includes/controller/Admin.php:3205
+#: includes/controller/Admin.php:3213
 msgid "Help"
 msgstr ""
 
-#: includes/controller/Admin.php:3220
+#: includes/controller/Admin.php:3228
 msgid "Write"
 msgstr ""
 
-#: includes/controller/Admin.php:3223
+#: includes/controller/Admin.php:3231
 msgid "Manage"
 msgstr ""
 
-#: includes/controller/Admin.php:3226
+#: includes/controller/Admin.php:3234
 msgid "Settings"
 msgstr ""
 
-#: includes/controller/Admin.php:3229
+#: includes/controller/Admin.php:3237
 msgid "Extend"
 msgstr ""
 
-#: includes/controller/Admin.php:3240
+#: includes/controller/Admin.php:3248
 msgid "Page"
 msgstr ""
 
-#: includes/controller/Admin.php:3275
+#: includes/controller/Admin.php:3283
 msgid "Posts"
 msgstr ""
 
-#: includes/controller/Admin.php:3284
+#: includes/controller/Admin.php:3292
 msgid "Pages"
 msgstr ""
 
-#: includes/controller/Admin.php:3293
-#: includes/controller/Admin.php:3338
+#: includes/controller/Admin.php:3301
+#: includes/controller/Admin.php:3346
 msgid "Users"
 msgstr ""
 
-#: includes/controller/Admin.php:3303
+#: includes/controller/Admin.php:3311
 msgid "Groups"
 msgstr ""
 
-#: includes/controller/Admin.php:3312
+#: includes/controller/Admin.php:3320
 msgid "Uploads"
 msgstr ""
 
-#: includes/controller/Admin.php:3317
+#: includes/controller/Admin.php:3325
 msgid "Import"
 msgstr ""
 
-#: includes/controller/Admin.php:3320
+#: includes/controller/Admin.php:3328
 msgid "Export"
 msgstr ""
 
-#: includes/controller/Admin.php:3336
+#: includes/controller/Admin.php:3344
 msgid "General"
 msgstr ""
 
-#: includes/controller/Admin.php:3337
+#: includes/controller/Admin.php:3345
 msgid "Content"
 msgstr ""
 
-#: includes/controller/Admin.php:3339
+#: includes/controller/Admin.php:3347
 msgid "Routes"
 msgstr ""
 
-#: includes/controller/Admin.php:3358
+#: includes/controller/Admin.php:3366
 msgid "Modules"
 msgstr ""
 
-#: includes/controller/Admin.php:3359
+#: includes/controller/Admin.php:3367
 msgid "Feathers"
 msgstr ""
 
-#: includes/controller/Admin.php:3360
+#: includes/controller/Admin.php:3368
 msgid "Themes"
 msgstr ""
 
@@ -1285,15 +1295,6 @@ msgstr ""
 #: includes/helpers.php:2344
 #: includes/helpers.php:2393
 msgid "Upload path is not writable."
-msgstr ""
-
-#: includes/helpers.php:2350
-#: includes/helpers.php:2399
-#: includes/helpers.php:2537
-#: upgrade.php:140
-#: upgrade.php:157
-#: upgrade.php:174
-msgid "Failed to write file to disk."
 msgstr ""
 
 #: includes/helpers.php:2514

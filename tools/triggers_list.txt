@@ -963,7 +963,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 3256
+	includes/controller/Admin.php on line 3264
 
 Target:
 	$write
@@ -972,7 +972,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3314
+	includes/controller/Admin.php on line 3322
 
 Target:
 	$manage
@@ -981,7 +981,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 3342
+	includes/controller/Admin.php on line 3350
 
 Target:
 	$settings
@@ -990,7 +990,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3363
+	includes/controller/Admin.php on line 3371
 
 Target:
 	$extend
@@ -999,7 +999,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 3427
+	includes/controller/Admin.php on line 3435
 
 Target:
 	$this->context

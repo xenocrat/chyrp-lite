@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: includes/class/Config.php:18
@@ -82,7 +82,7 @@ msgstr "Il percorso è stato avviato con un Controller non valido."
 #: includes/controller/Admin.php:2754 includes/controller/Admin.php:2897
 #: includes/controller/Admin.php:2904 includes/controller/Admin.php:2911
 #: includes/controller/Admin.php:2918 includes/controller/Admin.php:2925
-#: includes/controller/Admin.php:3195 includes/controller/Ajax.php:34
+#: includes/controller/Admin.php:3203 includes/controller/Ajax.php:34
 #: includes/controller/Ajax.php:251 includes/download.php:13
 #: includes/error.php:169 includes/helpers.php:1853 includes/helpers.php:1860
 #: includes/helpers.php:1867 includes/helpers.php:1880
@@ -319,7 +319,7 @@ msgid "Page created!"
 msgstr "Pagina creata!"
 
 #: includes/controller/Admin.php:646 includes/controller/Admin.php:770
-#: includes/controller/Admin.php:1820 includes/controller/Admin.php:3145
+#: includes/controller/Admin.php:1820 includes/controller/Admin.php:3153
 msgid "View page &rarr;"
 msgstr "Visualizza la pagina &rarr;"
 
@@ -698,105 +698,111 @@ msgid "Invalid canonical URL."
 msgstr "URL canonico non valido."
 
 #: includes/controller/Admin.php:2952 includes/controller/Admin.php:3028
-#: includes/controller/Admin.php:3093 includes/controller/Admin.php:3160
+#: includes/controller/Admin.php:3093 includes/controller/Admin.php:3168
 msgid "Settings updated."
 msgstr "Impostazioni aggiornate."
 
-#: includes/controller/Admin.php:3135
+#: includes/controller/Admin.php:3131 includes/helpers.php:2350
+#: includes/helpers.php:2399 includes/helpers.php:2537 upgrade.php:140
+#: upgrade.php:157 upgrade.php:174
+msgid "Failed to write file to disk."
+msgstr "Impossibile scrivere il file su disco."
+
+#: includes/controller/Admin.php:3143
 msgid "My Awesome Homepage"
 msgstr "La mia favolosa homepage"
 
-#: includes/controller/Admin.php:3136
+#: includes/controller/Admin.php:3144
 msgid "Nothing here yet!"
 msgstr "Non c'è ancora niente!"
 
-#: includes/controller/Admin.php:3144
+#: includes/controller/Admin.php:3152
 msgid "Page created."
 msgstr "Pagina creata."
 
-#: includes/controller/Admin.php:3172 includes/controller/Main.php:867
+#: includes/controller/Admin.php:3180 includes/controller/Main.php:867
 msgid "You are already logged in."
 msgstr "Hai già effettuato l’accesso."
 
-#: includes/controller/Admin.php:3196 includes/controller/Ajax.php:35
+#: includes/controller/Admin.php:3204 includes/controller/Ajax.php:35
 #: includes/controller/Ajax.php:252 includes/download.php:14
 #: includes/thumbnail.php:17
 msgid "Missing argument."
 msgstr "Argomento mancante."
 
-#: includes/controller/Admin.php:3205
+#: includes/controller/Admin.php:3213
 msgid "Help"
 msgstr "Aiuto"
 
-#: includes/controller/Admin.php:3220
+#: includes/controller/Admin.php:3228
 msgid "Write"
 msgstr "Scrivi"
 
-#: includes/controller/Admin.php:3223
+#: includes/controller/Admin.php:3231
 msgid "Manage"
 msgstr "Gestisci"
 
-#: includes/controller/Admin.php:3226
+#: includes/controller/Admin.php:3234
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: includes/controller/Admin.php:3229
+#: includes/controller/Admin.php:3237
 msgid "Extend"
 msgstr "Estendi"
 
-#: includes/controller/Admin.php:3240
+#: includes/controller/Admin.php:3248
 msgid "Page"
 msgstr "Pagina"
 
-#: includes/controller/Admin.php:3275
+#: includes/controller/Admin.php:3283
 msgid "Posts"
 msgstr "Post"
 
-#: includes/controller/Admin.php:3284
+#: includes/controller/Admin.php:3292
 msgid "Pages"
 msgstr "Pagine"
 
-#: includes/controller/Admin.php:3293 includes/controller/Admin.php:3338
+#: includes/controller/Admin.php:3301 includes/controller/Admin.php:3346
 msgid "Users"
 msgstr "Utenti"
 
-#: includes/controller/Admin.php:3303
+#: includes/controller/Admin.php:3311
 msgid "Groups"
 msgstr "Gruppi"
 
-#: includes/controller/Admin.php:3312
+#: includes/controller/Admin.php:3320
 msgid "Uploads"
 msgstr "Caricamenti"
 
-#: includes/controller/Admin.php:3317
+#: includes/controller/Admin.php:3325
 msgid "Import"
 msgstr "Importa"
 
-#: includes/controller/Admin.php:3320
+#: includes/controller/Admin.php:3328
 msgid "Export"
 msgstr "Esporta"
 
-#: includes/controller/Admin.php:3336
+#: includes/controller/Admin.php:3344
 msgid "General"
 msgstr "Generale"
 
-#: includes/controller/Admin.php:3337
+#: includes/controller/Admin.php:3345
 msgid "Content"
 msgstr "Contenuto"
 
-#: includes/controller/Admin.php:3339
+#: includes/controller/Admin.php:3347
 msgid "Routes"
 msgstr "Percorso"
 
-#: includes/controller/Admin.php:3358
+#: includes/controller/Admin.php:3366
 msgid "Modules"
 msgstr "Moduli"
 
-#: includes/controller/Admin.php:3359
+#: includes/controller/Admin.php:3367
 msgid "Feathers"
 msgstr "Feather"
 
-#: includes/controller/Admin.php:3360
+#: includes/controller/Admin.php:3368
 msgid "Themes"
 msgstr "Temi"
 
@@ -1091,11 +1097,6 @@ msgstr "Il percorso di caricamento non esiste."
 #: includes/helpers.php:2344 includes/helpers.php:2393
 msgid "Upload path is not writable."
 msgstr "Il percorso di caricamento non è scrivibile."
-
-#: includes/helpers.php:2350 includes/helpers.php:2399
-#: includes/helpers.php:2537 upgrade.php:140 upgrade.php:157 upgrade.php:174
-msgid "Failed to write file to disk."
-msgstr "Impossibile scrivere il file su disco."
 
 #: includes/helpers.php:2514
 msgid ""
