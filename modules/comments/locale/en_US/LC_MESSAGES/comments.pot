@@ -400,19 +400,19 @@ msgstr ""
 
 #: modules/comments/comments.php:1409
 #: modules/comments/comments.php:1429
-#: modules/comments/comments.php:1453
+#: modules/comments/comments.php:1454
 #, php-format
 msgid "New Comment at %s"
 msgstr ""
 
 #: modules/comments/comments.php:1410
 #: modules/comments/comments.php:1430
-#: modules/comments/comments.php:1454
+#: modules/comments/comments.php:1455
 #, php-format
 msgid "%s commented on a blog post:"
 msgstr ""
 
-#: modules/comments/comments.php:1462
+#: modules/comments/comments.php:1463
 msgid "Unsubscribe from this conversation:"
 msgstr ""
 

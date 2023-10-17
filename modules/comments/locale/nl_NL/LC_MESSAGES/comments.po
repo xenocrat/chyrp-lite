@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/comments/admin/pages/comment_settings.twig:3
@@ -398,18 +398,18 @@ msgid "Comment Status"
 msgstr "Status Opmerking"
 
 #: modules/comments/comments.php:1409 modules/comments/comments.php:1429
-#: modules/comments/comments.php:1453
+#: modules/comments/comments.php:1454
 #, php-format
 msgid "New Comment at %s"
 msgstr "Nieuwe opmerking op %s"
 
 #: modules/comments/comments.php:1410 modules/comments/comments.php:1430
-#: modules/comments/comments.php:1454
+#: modules/comments/comments.php:1455
 #, php-format
 msgid "%s commented on a blog post:"
 msgstr "%s heeft een opmerking geplaatst op een blogpost:"
 
-#: modules/comments/comments.php:1462
+#: modules/comments/comments.php:1463
 msgid "Unsubscribe from this conversation:"
 msgstr "Schrijf je uit van deze conversatie:"
 

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/comments/admin/pages/comment_settings.twig:3
@@ -395,18 +395,18 @@ msgid "Comment Status"
 msgstr "评论状态"
 
 #: modules/comments/comments.php:1409 modules/comments/comments.php:1429
-#: modules/comments/comments.php:1453
+#: modules/comments/comments.php:1454
 #, php-format
 msgid "New Comment at %s"
 msgstr "%s 上的新注释"
 
 #: modules/comments/comments.php:1410 modules/comments/comments.php:1430
-#: modules/comments/comments.php:1454
+#: modules/comments/comments.php:1455
 #, php-format
 msgid "%s commented on a blog post:"
 msgstr "%s 在博客文章上评论："
 
-#: modules/comments/comments.php:1462
+#: modules/comments/comments.php:1463
 msgid "Unsubscribe from this conversation:"
 msgstr "取消订阅此对话："
 

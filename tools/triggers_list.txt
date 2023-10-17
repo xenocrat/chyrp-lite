@@ -593,7 +593,7 @@ Arguments:
 correspond_peer_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1450
+	modules/comments/comments.php on line 1451
 
 Arguments:
 	$comment, $peer, $url
