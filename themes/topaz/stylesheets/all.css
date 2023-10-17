@@ -191,13 +191,13 @@ pre > code {
 }
 hr {
     width: 100%;
-    border: none;
     clear: both;
+    border: none;
     border-top: 1px solid #ebedec;
     margin: 1em 0em;
 }
 hr:last-child,
-hr + hr  {
+hr + hr {
     display: none;
 }
 ul,
@@ -632,7 +632,6 @@ div.traversal a {
     padding: 0.5em 1.25em;
     margin: 0em 0.5rem;
     min-width: 8em;
-    border: none;
     border-radius: 0.5em;
     color: #ffffff;
     text-decoration: none;
@@ -671,11 +670,10 @@ div.tag_cloud a {
     display: inline-block;
     padding: 0.25em 0.5em;
     margin-bottom: 4px;
-    border: none;
     border-radius: 0.25em;
+    border: 1px #c6ccc8 solid;
     color: #39434d;
     text-decoration: none;
-    border: 1px #c6ccc8 solid;
 }
 div.tags a:hover,
 div.tags a:focus,
@@ -692,10 +690,10 @@ div.doaction a, button {
     white-space: nowrap;
     padding: 0.5em 1.25em;
     border-radius: 2em;
+    border: 1px #c6ccc8 solid;
     color: #39434d;
     text-decoration: none;
     background-color: #ffffff;
-    border: 1px #c6ccc8 solid;
 }
 div.doaction a:hover,
 button:hover,
@@ -888,11 +886,6 @@ div.standalone > *:last-child {
     div.reset_password.standalone,
     div.user_register.standalone {
         margin-left: auto;
-    }
-    div#main > article hr, div.standalone hr {
-        position: relative;
-        left: -1rem;
-        padding: 0rem 1rem;
     }
     div.metadata {
         margin-top: 1rem;

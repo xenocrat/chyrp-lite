@@ -178,8 +178,8 @@ pre > code {
 }
 hr {
     width: 100%;
-    border: none;
     clear: both;
+    border: none;
     border-top: 1px solid #c2bcb8;
     margin: 2em 0em;
 }

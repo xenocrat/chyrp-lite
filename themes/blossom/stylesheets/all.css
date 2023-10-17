@@ -183,8 +183,8 @@ pre > code {
 }
 hr {
     width: 100%;
-    border: none;
     clear: both;
+    border: none;
     border-top: 1px solid #ddd;
     margin: 1em 0em;
 }
@@ -374,10 +374,7 @@ form.search_box {
 }
 form.comment_edit {
     width: 100%;
-    background-color: transparent;
-    margin-bottom: 0em;
     padding: 0rem 0rem 2rem 0rem;
-    border: none;
 }
 select, input {
     box-sizing: border-box;
@@ -656,7 +653,6 @@ div.traversal a {
     display: inline-block;
     padding: 0.5em 1em;
     min-width: 8em;
-    border: none;
     border-radius: 0.25em;
     color: #ffffff;
     text-decoration: none;
@@ -690,7 +686,6 @@ div.tag_cloud a {
     display: inline-block;
     padding: 0.25em 0.5em;
     margin-bottom: 4px;
-    border: none;
     border-radius: 0.25em;
     color: #ffffff;
     text-decoration: none;

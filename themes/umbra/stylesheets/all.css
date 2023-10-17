@@ -177,8 +177,8 @@ pre > code {
 }
 hr {
     width: 100%;
-    border: none;
     clear: both;
+    border: none;
     border-top: 1px solid #666667;
     margin: 2em 0em;
 }
@@ -309,10 +309,6 @@ form.search_box {
 }
 form.comment_edit {
     width: 100%;
-    background-color: transparent;
-    margin-bottom: 0em;
-    padding: 0em;
-    border: none;
 }
 select, input {
     box-sizing: border-box;
@@ -338,8 +334,8 @@ input:invalid {
 select:focus, input:focus {
     outline: none;
     color: #202021;
-    background-color: #ffffff;
     border: none;
+    background-color: #ffffff;
 }
 input::placeholder {
     color: #adafae;
@@ -370,16 +366,16 @@ textarea {
     color: #adafae;
     margin: 0.5em 0em;
     padding: 0.5em;
-    background-color: #666667;
     border: none;
     border-radius: 0.25em;
+    background-color: #666667;
     resize: vertical;
 }
 textarea:focus {
     outline: none;
     color: #202021;
-    background-color: #ffffff;
     border: none;
+    background-color: #ffffff;
 }
 button {
     font: inherit;
@@ -546,7 +542,6 @@ div.traversal a {
     text-decoration: none;
     background-color: #383839;
     line-height: 1;
-    border: none;
     border-radius: 50%;
 }
 div.traversal a:hover,
