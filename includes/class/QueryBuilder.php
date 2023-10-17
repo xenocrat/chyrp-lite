@@ -501,9 +501,18 @@
             $sql,
             $name
         ): string|array|null {
-            $keywords = "join|into|set|from|where|groups?|having|order|limit|offset";
+            $keywords = array(
+                "between", "case", "check", "collate", "constraint", "create",
+                "default", "delete", "distinct", "drop", "except", "from",
+                "groups?", "having", "insert", "intersect", "into", "join",
+                "left", "like", "limit", "null", "offset", "order", "primary",
+                "references", "select", "set", "table", "transaction", "union",
+                "unique", "update", "using", "values", "when", "where", "with"
+            );
+
+            $pattern = implode("|", $keywords);
             return preg_replace(
-                "/(([^a-zA-Z0-9_]|^)($keywords)([^a-zA-Z0-9_]|$))/i",
+                "/(([^a-zA-Z0-9_]|^)($pattern)([^a-zA-Z0-9_]|$))/i",
                 '\\2"\\3"\\4',
                 $name
             );
