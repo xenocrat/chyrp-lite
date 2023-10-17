@@ -525,15 +525,15 @@
 
     /**
      * Function: twig_filter_thumbnail
-     * Returns a thumbnail <img> tag for an uploaded image,
-     * optionally with enclosing <a> tag.
+     * Returns a thumbnail <img> tag for an uploaded image file,
+     * optionally with sizes/srcset attributes and enclosing <a> tag.
      *
      * Parameters:
      *     $filename - The uploaded filename.
      *     $alt_text - The alternative text for the image.
      *     $url - Either a valid URL or @true@ to link to the uploaded file.
      *     $args - An array of additional arguments.
-     *     $sizes - A string containing comma-separated source sizes.
+     *     $sizes - A string containing source sizes - null to disable srcset.
      *     $lazy - Specify lazy-loading for this image?
      */
     function twig_filter_thumbnail(
@@ -541,25 +541,33 @@
         $alt_text = "",
         $url = null,
         $args = array(),
-        $sizes = "100vw",
+        $sizes = null,
         $lazy = true
     ): string {
         $filepath = Config::current()->chyrp_url.
                     "/includes/thumbnail.php?file=".
                     urlencode($filename);
 
-        $src_args = implode("&", $args);
-        $set_args = preg_replace(
-            array(
-                "/max_width=[^&]*(&)?/i",
-                "/max_height=[^&]*(&)?/i"
-            ),
-            "",
-            $src_args
-        );
+        $args_filtered = array();
 
-        $src_args = !empty($src_args) ? "&".$src_args : $src_args ;
-        $set_args = !empty($set_args) ? "&".$set_args : $set_args ;
+        foreach ($args as $arg) {
+            if (strpos($arg, "max_width=") === 0)
+                continue;
+
+            if (strpos($arg, "max_height=") === 0)
+                continue;
+
+            $args_filtered[] = $arg;
+        }
+
+        $src_args = implode("&", $args);
+        $set_args = implode("&", $args_filtered);
+
+        if (!empty($src_args))
+            $src_args = "&".$src_args;
+
+        if (!empty($set_args))
+            $set_args = "&".$set_args;
 
         # Source set for responsive images.
         $srcset = array(
@@ -569,10 +577,15 @@
         );
 
         $img = '<img src="'.fix($filepath.$src_args, true).
-               '" srcset="'.fix(implode(", ", $srcset), true).
-               '" sizes="'.fix($sizes, true).
                '" alt="'.fix($alt_text, true).
-               '" class="image" loading="'.($lazy ? 'lazy' : 'eager').'">';
+               '" class="image" loading="'.($lazy ? 'lazy' : 'eager');
+
+        if (isset($sizes)) {
+            $img.= '" sizes="'.fix($sizes, true).
+                   '" srcset="'.fix(implode(", ", $srcset), true);
+        }
+
+        $img.= '">';
 
         # Enclose in <a> tag? Provide @true@ or a candidate URL.
         if (isset($url) and $url !== false) {
@@ -583,10 +596,11 @@
 
         $return = $img;
 
-        if (isset($href))
+        if (isset($href)) {
             $return = '<a href="'.fix($href, true).
                       '" class="image_link" aria-label="'.
                       __("Image source").'">'.$img.'</a>';
+        }
 
         return $return;
     }
