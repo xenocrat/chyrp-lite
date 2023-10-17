@@ -1442,7 +1442,8 @@
             $trigger = Trigger::current();
             $mailto = $peer->author_email;
 
-            $url = "/?action=unsubscribe&amp;email=".urlencode($mailto).
+            $url = $config->url."/?action=unsubscribe".
+                   "&amp;email=".urlencode($mailto).
                    "&amp;id=".$comment->post_id.
                    "&amp;token=".token($mailto);
 
