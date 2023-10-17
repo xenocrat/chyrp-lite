@@ -523,20 +523,17 @@ a:focus,
 a:active {
     outline: none;
     color: lightgreen;
-    text-decoration: none;
+    text-decoration: underline;
+    text-underline-offset: 0.125em;
+    text-decoration-thickness: 0.125em;
 }
 ul.navigation > li > a {
     display: inline-block;
     margin: 0rem 0.5rem 1rem 0.5rem;
 }
 div.flash a {
-    border-bottom: 0.125em #ffffff solid;
-}
-div.flash a:hover,
-div.flash a:focus,
-div.flash a:active {
-    color: lightgreen;
-    border-color: lightgreen;
+    font-weight: bold;
+    color: #ffffff;
 }
 div.traversal a {
     display: inline-block;
@@ -546,17 +543,17 @@ div.traversal a {
     height: 1em;
     top: 0px;
     color: #ffffff;
+    text-decoration: none;
     background-color: #383839;
     line-height: 1;
+    border: none;
     border-radius: 50%;
-    border: 1px #383839 solid;
 }
 div.traversal a:hover,
 div.traversal a:focus,
 div.traversal a:active {
     color: #202021;
     background-color: lightgreen;
-    border-color: lightgreen;
     transition: top 250ms cubic-bezier(0.5, -8, 0.2, 4);
 }
 div.next a:hover,
@@ -568,7 +565,9 @@ p a:link,
 section a:visited,
 p a:visited {
     color: #ffffff;
-    border-bottom: 0.125em #ffffff solid;
+    text-decoration: underline;
+    text-underline-offset: 0.125em;
+    text-decoration-thickness: 0.125em;
 }
 section a:hover,
 p a:hover,
@@ -577,7 +576,6 @@ p a:focus,
 section a:active,
 p a:active {
     color: lightgreen;
-    border-color: lightgreen;
 }
 div.tag_cloud a.tag {
     display: inline-block;
@@ -586,6 +584,7 @@ div.tag_cloud a.tag {
     padding: 0.25em 0.5em;
     margin: 2px 0em;
     color: #ffffff;
+    text-decoration: none;
     border: 1px solid #ffffff;
 }
 div.tag_cloud a.tag:hover,
@@ -609,10 +608,11 @@ div.doaction a, button {
     display: inline-block;
     white-space: nowrap;
     padding: 0.5em 1.25em;
+    border: none;
     border-radius: 0.25em;
     color: #ffffff;
+    text-decoration: none;
     background-color: #383839;
-    border: none;
 }
 div.doaction a:hover,
 button:hover,
@@ -622,14 +622,10 @@ div.doaction a:active,
 button:active {
     color: #202021;
     background-color: lightgreen;
-    border: none;
 }
 div.doaction a.post_delete_link,
 div.doaction a.delete_link {
     font-weight: bold;
-}
-section.photo > a {
-    border-bottom: none;
 }
 section.photo > a:focus {
     outline: lightgreen solid 4px;

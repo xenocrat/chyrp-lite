@@ -634,10 +634,6 @@ article.video video,
 article.audio audio {
     width: 100%;
 }
-a {
-    text-decoration: none;
-    border-bottom: 0.125em transparent solid;
-}
 a:link,
 a:visited {
     color: #1f1f23;
@@ -648,17 +644,13 @@ a:focus,
 a:active {
     outline: none;
     color: #d94c7b;
-    text-decoration: none;
-    border-bottom: 0.125em #d94c7b solid;
+    text-decoration: underline;
+    text-underline-offset: 0.125em;
+    text-decoration-thickness: 0.125em;
 }
 div.ribbon a {
     color: #ffffff;
     font-weight: bold;
-}
-div.ribbon a:hover,
-div.ribbon a:focus,
-div.ribbon a:active {
-    border-color: #ffffff;
 }
 div.traversal a {
     display: inline-block;
@@ -667,6 +659,7 @@ div.traversal a {
     border: none;
     border-radius: 0.25em;
     color: #ffffff;
+    text-decoration: none;
     background-color: #208448;
 }
 div.traversal a:hover,
@@ -680,7 +673,9 @@ p a:link,
 section a:visited,
 p a:visited {
     color: #1f1f23;
-    border-bottom: 0.125em #1f1f23 solid;
+    text-decoration: underline;
+    text-underline-offset: 0.125em;
+    text-decoration-thickness: 0.125em;
 }
 section a:hover,
 p a:hover,
@@ -689,7 +684,6 @@ p a:focus,
 section a:active,
 p a:active {
     color: #d94c7b;
-    border-color: #d94c7b;
 }
 div.tags a,
 div.tag_cloud a {
@@ -699,6 +693,7 @@ div.tag_cloud a {
     border: none;
     border-radius: 0.25em;
     color: #ffffff;
+    text-decoration: none;
     background-color: #208448;
 }
 div.tags a:hover,
@@ -717,6 +712,7 @@ div.doaction a, button {
     border: none;
     border-radius: 0.25em;
     color: #ffffff;
+    text-decoration: none;
     background-color: #39434d;
 }
 div.doaction a:hover,
@@ -738,9 +734,6 @@ div.doaction a.delete_link:focus,
 div.doaction a.post_delete_link:active,
 div.doaction a.delete_link:active {
     background-color: #af2d2d;
-}
-section.photo > a {
-    border-bottom: none;
 }
 section.photo > a:focus {
     outline: #d94c7b solid 4px;

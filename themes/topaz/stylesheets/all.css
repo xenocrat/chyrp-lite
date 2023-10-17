@@ -612,9 +612,6 @@ article.video video,
 article.audio audio {
     width: 100%;
 }
-a {
-    border-bottom: 0.125em transparent solid;
-}
 a:link, a:visited {
     color: #1f1f23;
     text-decoration: none;
@@ -622,27 +619,24 @@ a:link, a:visited {
 a:hover, a:focus, a:active {
     outline: none;
     color: #0070c4;
-    text-decoration: none;
-    border-color: #0070c4;
+    text-decoration: underline;
+    text-underline-offset: 0.125em;
+    text-decoration-thickness: 0.125em;
 }
 div.ribbon a {
     color: #ffffff;
     font-weight: bold;
-}
-div.ribbon a:hover,
-div.ribbon a:focus,
-div.ribbon a:active {
-    border-color: #ffffff;
 }
 div.traversal a {
     display: inline-block;
     padding: 0.5em 1.25em;
     margin: 0em 0.5rem;
     min-width: 8em;
-    color: #ffffff;
-    background-color: #1f1f23;
     border: none;
     border-radius: 0.5em;
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #1f1f23;
 }
 div.traversal a:hover,
 div.traversal a:focus,
@@ -663,13 +657,14 @@ div.traversal a:last-child {
 section a:link, p a:link,
 section a:visited, p a:visited {
     color: #1f1f23;
-    border-bottom: 0.125em #1f1f23 solid;
+    text-decoration: underline;
+    text-underline-offset: 0.125em;
+    text-decoration-thickness: 0.125em;
 }
 section a:hover, p a:hover,
 section a:focus, p a:focus,
 section a:active, p a:active {
     color: #0070c4;
-    border-color: #0070c4;
 }
 div.tags a,
 div.tag_cloud a {
@@ -679,6 +674,7 @@ div.tag_cloud a {
     border: none;
     border-radius: 0.25em;
     color: #39434d;
+    text-decoration: none;
     border: 1px #c6ccc8 solid;
 }
 div.tags a:hover,
@@ -697,6 +693,7 @@ div.doaction a, button {
     padding: 0.5em 1.25em;
     border-radius: 2em;
     color: #39434d;
+    text-decoration: none;
     background-color: #ffffff;
     border: 1px #c6ccc8 solid;
 }
@@ -713,9 +710,6 @@ button:active {
 div.doaction a.post_delete_link,
 div.doaction a.delete_link {
     font-weight: bold;
-}
-section.photo > a {
-    border-bottom: none;
 }
 section.photo > a:focus {
     outline: #7ac2e5 solid 4px;

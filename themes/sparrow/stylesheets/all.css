@@ -540,7 +540,9 @@ a:focus,
 a:active {
     outline: none;
     color: #c04b4b;
-    text-decoration: none;
+    text-decoration: underline;
+    text-underline-offset: 0.125em;
+    text-decoration-thickness: 0.125em;
 }
 ul.navigation > li > a {
     display: inline-block;
@@ -549,19 +551,15 @@ ul.navigation > li > a {
 div.flash a {
     font-weight: bold;
     color: #ffffff;
-    border-bottom: 0.125em transparent solid;
-}
-div.flash a:hover,
-div.flash a:focus,
-div.flash a:active {
-    border-color: #ffffff;
 }
 section a:link,
 p a:link,
 section a:visited,
 p a:visited {
     color: #1f1f23;
-    border-bottom: 0.125em #1f1f23 solid;
+    text-decoration: underline;
+    text-underline-offset: 0.125em;
+    text-decoration-thickness: 0.125em;
 }
 section a:hover,
 p a:hover,
@@ -570,7 +568,6 @@ p a:focus,
 section a:active,
 p a:active {
     color: #c04b4b;
-    border-color: #c04b4b;
 }
 div.tags a.tag,
 div.tag_cloud a.tag {
@@ -581,6 +578,7 @@ div.tag_cloud a.tag {
     margin: 2px 0em;
     border: 1px #e5d7a1 solid;
     border-radius: 0.25em;
+    text-decoration: none;
     background-color: #fffecd;
 }
 div.tags a.tag:hover,
@@ -595,10 +593,11 @@ div.doaction a, button {
     display: inline-block;
     white-space: nowrap;
     padding: 0.5em 1.25em;
+    border: none;
     border-radius: 0.25em;
     color: #ffffff;
+    text-decoration: none;
     background-color: #8b6762;
-    border: none;
 }
 div.doaction a:hover,
 button:hover,
@@ -607,14 +606,10 @@ button:focus,
 div.doaction a:active,
 button:active {
     background-color: #1f1f23;
-    border: none;
 }
 div.doaction a.post_delete_link,
 div.doaction a.delete_link {
     font-weight: bold;
-}
-section.photo > a {
-    border-bottom: none;
 }
 section.photo > a:focus {
     outline: #c04b4b solid 4px;
