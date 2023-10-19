@@ -1130,49 +1130,49 @@ msgstr ""
 "Het geuploade bestand overschrijdt de maximale grootte van %d Megabytes dat "
 "door deze website is toegestaan."
 
-#: includes/helpers.php:2861
+#: includes/helpers.php:2867
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr "JSON codeer-fout: %s"
 
-#: includes/helpers.php:2886
+#: includes/helpers.php:2892
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr "JSON decodeer-fout: %s"
 
-#: includes/helpers.php:2968
+#: includes/helpers.php:2974
 msgid "Failed to create Zip archive."
 msgstr "Zip-archief maken mislukt."
 
-#: includes/helpers.php:3070
+#: includes/helpers.php:3076
 #, php-format
 msgid "Activate your account at %s"
 msgstr "Activeer je account bij %s"
 
-#: includes/helpers.php:3071 includes/helpers.php:3106
+#: includes/helpers.php:3077 includes/helpers.php:3112
 #, php-format
 msgid "Hello, %s."
 msgstr "Hallo, %s."
 
-#: includes/helpers.php:3074
+#: includes/helpers.php:3080
 msgid "You are receiving this message because you registered a new account."
 msgstr "Je ontvangt dit bericht, omdat je een nieuwe account hebt aangemaakt."
 
-#: includes/helpers.php:3077
+#: includes/helpers.php:3083
 msgid "Visit this link to activate your account:"
 msgstr "Bezoek deze link om je account te activeren:"
 
-#: includes/helpers.php:3105
+#: includes/helpers.php:3111
 #, php-format
 msgid "Reset your password at %s"
 msgstr "Wijzig je wachtwoord van %s"
 
-#: includes/helpers.php:3109
+#: includes/helpers.php:3115
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 "Je ontangt dit bericht, omdat je een nieuw wachtwoord hebt aangevraagd."
 
-#: includes/helpers.php:3112
+#: includes/helpers.php:3118
 msgid "Visit this link to reset your password:"
 msgstr "Bezoek deze link om je wachtwoord te wijzigen:"
 
@@ -1195,7 +1195,7 @@ msgstr "%s MB"
 msgid "%s KB"
 msgstr "%s KB"
 
-#: includes/lib/Leaf.php:589
+#: includes/lib/Leaf.php:607
 msgid "Image source"
 msgstr "Afbeeldingsbron"
 

@@ -1140,49 +1140,49 @@ msgstr ""
 "Il file caricato supera la dimensione massima di %d megabyte consentiti da "
 "questo sito."
 
-#: includes/helpers.php:2861
+#: includes/helpers.php:2867
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr "Errore di codifica JSON: %s"
 
-#: includes/helpers.php:2886
+#: includes/helpers.php:2892
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr "Errore di decodifica JSON: %s"
 
-#: includes/helpers.php:2968
+#: includes/helpers.php:2974
 msgid "Failed to create Zip archive."
 msgstr "Impossibile creare l'archivio Zip."
 
-#: includes/helpers.php:3070
+#: includes/helpers.php:3076
 #, php-format
 msgid "Activate your account at %s"
 msgstr "Attiva il tuo account %s"
 
-#: includes/helpers.php:3071 includes/helpers.php:3106
+#: includes/helpers.php:3077 includes/helpers.php:3112
 #, php-format
 msgid "Hello, %s."
 msgstr "Ciao, %s."
 
-#: includes/helpers.php:3074
+#: includes/helpers.php:3080
 msgid "You are receiving this message because you registered a new account."
 msgstr "Si riceve questo messaggio perché è stato registrato un nuovo account."
 
-#: includes/helpers.php:3077
+#: includes/helpers.php:3083
 msgid "Visit this link to activate your account:"
 msgstr "Visita questo link per attivare il tuo account:"
 
-#: includes/helpers.php:3105
+#: includes/helpers.php:3111
 #, php-format
 msgid "Reset your password at %s"
 msgstr "Reimpostare la password per %s"
 
-#: includes/helpers.php:3109
+#: includes/helpers.php:3115
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 "Si riceve questo messaggio perché è stata richiesta una nuova password."
 
-#: includes/helpers.php:3112
+#: includes/helpers.php:3118
 msgid "Visit this link to reset your password:"
 msgstr "Visita questo link per reimpostare la password:"
 
@@ -1205,7 +1205,7 @@ msgstr "%s MB"
 msgid "%s KB"
 msgstr "%s KB"
 
-#: includes/lib/Leaf.php:589
+#: includes/lib/Leaf.php:607
 msgid "Image source"
 msgstr "Fonte immagine"
 

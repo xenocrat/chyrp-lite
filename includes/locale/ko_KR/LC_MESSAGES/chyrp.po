@@ -1122,48 +1122,48 @@ msgid ""
 "site."
 msgstr ""
 
-#: includes/helpers.php:2861
+#: includes/helpers.php:2867
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr "JSON 인코딩 오류: %s"
 
-#: includes/helpers.php:2886
+#: includes/helpers.php:2892
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr "JSON 디코딩 오류: %s"
 
-#: includes/helpers.php:2968
+#: includes/helpers.php:2974
 msgid "Failed to create Zip archive."
 msgstr "압축 파일을 만들지 못했습니다."
 
-#: includes/helpers.php:3070
+#: includes/helpers.php:3076
 #, php-format
 msgid "Activate your account at %s"
 msgstr "%s에서 계정을 활성화하세요"
 
-#: includes/helpers.php:3071 includes/helpers.php:3106
+#: includes/helpers.php:3077 includes/helpers.php:3112
 #, php-format
 msgid "Hello, %s."
 msgstr "%s님 안녕하세요."
 
-#: includes/helpers.php:3074
+#: includes/helpers.php:3080
 msgid "You are receiving this message because you registered a new account."
 msgstr "새 계정을 등록하셨기 때문에 이 메시지를 받으셨습니다."
 
-#: includes/helpers.php:3077
+#: includes/helpers.php:3083
 msgid "Visit this link to activate your account:"
 msgstr "계정을 활성화하려면 다음 링크를 방문하세요:"
 
-#: includes/helpers.php:3105
+#: includes/helpers.php:3111
 #, php-format
 msgid "Reset your password at %s"
 msgstr "%s에 비밀번호 재설정"
 
-#: includes/helpers.php:3109
+#: includes/helpers.php:3115
 msgid "You are receiving this message because you requested a new password."
 msgstr "새 비밀번호를 요청하셨기 때문에 이 메시지를 받으셨습니다."
 
-#: includes/helpers.php:3112
+#: includes/helpers.php:3118
 msgid "Visit this link to reset your password:"
 msgstr "비밀번호를 변경하려면 다음 링크를 방문하세요:"
 
@@ -1186,7 +1186,7 @@ msgstr ""
 msgid "%s KB"
 msgstr ""
 
-#: includes/lib/Leaf.php:589
+#: includes/lib/Leaf.php:607
 msgid "Image source"
 msgstr "이미지 출처"
 

@@ -1122,48 +1122,48 @@ msgid ""
 "site."
 msgstr "上传的文件超过本站点允许的 %d M。"
 
-#: includes/helpers.php:2861
+#: includes/helpers.php:2867
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr "JSON编码错误：%s"
 
-#: includes/helpers.php:2886
+#: includes/helpers.php:2892
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr "JSON解码错误：%s"
 
-#: includes/helpers.php:2968
+#: includes/helpers.php:2974
 msgid "Failed to create Zip archive."
 msgstr "无法创建 Zip 存档。"
 
-#: includes/helpers.php:3070
+#: includes/helpers.php:3076
 #, php-format
 msgid "Activate your account at %s"
 msgstr "在 %s 上激活您的账户"
 
-#: includes/helpers.php:3071 includes/helpers.php:3106
+#: includes/helpers.php:3077 includes/helpers.php:3112
 #, php-format
 msgid "Hello, %s."
 msgstr "您好，%s."
 
-#: includes/helpers.php:3074
+#: includes/helpers.php:3080
 msgid "You are receiving this message because you registered a new account."
 msgstr "您收到此邮件因为您已经注册了新账户。"
 
-#: includes/helpers.php:3077
+#: includes/helpers.php:3083
 msgid "Visit this link to activate your account:"
 msgstr "访问这个链接激活您的账户："
 
-#: includes/helpers.php:3105
+#: includes/helpers.php:3111
 #, php-format
 msgid "Reset your password at %s"
 msgstr "在 %s上重置您的密码"
 
-#: includes/helpers.php:3109
+#: includes/helpers.php:3115
 msgid "You are receiving this message because you requested a new password."
 msgstr "您收到此消息是因为您请求了新密码。"
 
-#: includes/helpers.php:3112
+#: includes/helpers.php:3118
 msgid "Visit this link to reset your password:"
 msgstr "访问这个链接重置您的密码："
 
@@ -1186,7 +1186,7 @@ msgstr "%s MB"
 msgid "%s KB"
 msgstr "%s KB"
 
-#: includes/lib/Leaf.php:589
+#: includes/lib/Leaf.php:607
 msgid "Image source"
 msgstr "图片来源"
 

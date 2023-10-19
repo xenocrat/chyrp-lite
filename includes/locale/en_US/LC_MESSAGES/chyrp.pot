@@ -1327,49 +1327,49 @@ msgstr ""
 msgid "The uploaded file exceeds the maximum size of %d Megabytes allowed by this site."
 msgstr ""
 
-#: includes/helpers.php:2861
+#: includes/helpers.php:2867
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr ""
 
-#: includes/helpers.php:2886
+#: includes/helpers.php:2892
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr ""
 
-#: includes/helpers.php:2968
+#: includes/helpers.php:2974
 msgid "Failed to create Zip archive."
 msgstr ""
 
-#: includes/helpers.php:3070
+#: includes/helpers.php:3076
 #, php-format
 msgid "Activate your account at %s"
 msgstr ""
 
-#: includes/helpers.php:3071
-#: includes/helpers.php:3106
+#: includes/helpers.php:3077
+#: includes/helpers.php:3112
 #, php-format
 msgid "Hello, %s."
 msgstr ""
 
-#: includes/helpers.php:3074
+#: includes/helpers.php:3080
 msgid "You are receiving this message because you registered a new account."
 msgstr ""
 
-#: includes/helpers.php:3077
+#: includes/helpers.php:3083
 msgid "Visit this link to activate your account:"
 msgstr ""
 
-#: includes/helpers.php:3105
+#: includes/helpers.php:3111
 #, php-format
 msgid "Reset your password at %s"
 msgstr ""
 
-#: includes/helpers.php:3109
+#: includes/helpers.php:3115
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 
-#: includes/helpers.php:3112
+#: includes/helpers.php:3118
 msgid "Visit this link to reset your password:"
 msgstr ""
 
@@ -1393,7 +1393,7 @@ msgstr ""
 msgid "%s KB"
 msgstr ""
 
-#: includes/lib/Leaf.php:589
+#: includes/lib/Leaf.php:607
 msgid "Image source"
 msgstr ""
 

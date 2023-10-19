@@ -350,19 +350,19 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 2776
+	includes/helpers.php on line 2782
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 2794
+	includes/helpers.php on line 2800
 
 
 correspond_activate_account
 ---------------------------
 Called from:
-	includes/helpers.php on line 3067
+	includes/helpers.php on line 3073
 
 Arguments:
 	$user, $url
@@ -371,7 +371,7 @@ Arguments:
 correspond_reset_password
 -------------------------
 Called from:
-	includes/helpers.php on line 3102
+	includes/helpers.php on line 3108
 
 Arguments:
 	$user, $url
@@ -380,7 +380,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 3143
+	includes/helpers.php on line 3149
 
 Arguments:
 	$ob
@@ -1070,7 +1070,7 @@ Arguments:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 3047
+	includes/helpers.php on line 3053
 
 Target:
 	$function
@@ -1079,7 +1079,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 3144
+	includes/helpers.php on line 3150
 	includes/lib/Leaf.php on line 276
 
 Target:
