@@ -14,7 +14,7 @@
 {% for file in post.files %}
 {% if ["jpg", "jpeg", "png", "gif", "webp", "avif"] | contains(file.type) %}
 <section class="photo" aria-label="{{ 'File Attachment' | translate }}">
-{{ file.name | thumbnail(file.name, post.source, ["max_width=1280", "max_height=1920", "quality=80"], "(min-width: 1024px) 768px, 90vw") }}
+{{ file.name | thumbnail(file.name, post.source, ["max_width=1280", "max_height=1920", "quality=80"], "(min-width: 780px) 716px, 90vw") }}
 </section>
 {% else %}
 <section class="attachment" aria-label="{{ 'File Attachment' | translate }}">

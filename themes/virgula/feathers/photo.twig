@@ -7,7 +7,7 @@
 </h2>
 {% endif %}
 <section class="photo" aria-label="{{ 'File Attachment' | translate }}">
-{{ post.filename | thumbnail(post.alt_text, post.source) }}
+{{ post.filename | thumbnail(post.alt_text, post.source, [], "(min-width: 764px) 728px, 95vw") }}
 </section>
 {% if post.caption is not empty %}
 <section class="caption" aria-label="{{ 'Text Content' | translate }}">
