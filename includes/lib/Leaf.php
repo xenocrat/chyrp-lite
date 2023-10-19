@@ -580,7 +580,12 @@
                '" alt="'.fix($alt_text, true).
                '" class="image" loading="'.($lazy ? 'lazy' : 'eager');
 
-        if (isset($sizes)) {
+        # Add srcset/sizes attributes? Provide @true@ or a string.
+        if (isset($sizes) and $sizes !== false) {
+            $sizes = is_string($sizes) ?
+                $sizes :
+                "100vw" ;
+
             $img.= '" sizes="'.fix($sizes, true).
                    '" srcset="'.fix(implode(", ", $srcset), true);
         }
@@ -589,15 +594,15 @@
 
         # Enclose in <a> tag? Provide @true@ or a candidate URL.
         if (isset($url) and $url !== false) {
-            $href = (is_string($url) and is_url($url)) ?
+            $url = (is_url($url)) ?
                 $url :
                 uploaded($filename) ;
         }
 
         $return = $img;
 
-        if (isset($href)) {
-            $return = '<a href="'.fix($href, true).
+        if (isset($url)) {
+            $return = '<a href="'.fix($url, true).
                       '" class="image_link" aria-label="'.
                       __("Image source").'">'.$img.'</a>';
         }
