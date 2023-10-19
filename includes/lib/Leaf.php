@@ -531,9 +531,9 @@
      * Parameters:
      *     $filename - The uploaded filename.
      *     $alt_text - The alternative text for the image.
-     *     $url - Either a valid URL or @true@ to link to the uploaded file.
-     *     $args - An array of additional arguments.
-     *     $sizes - A string containing source sizes - null to disable srcset.
+     *     $url - A URL, @true@ to link to the uploaded file, @false@ to disable.
+     *     $args - An array of additional arguments to be appended as GET parameters.
+     *     $sizes - A string, @true@ to use "100vw", @false@ to disable sizes/srcset.
      *     $lazy - Specify lazy-loading for this image?
      */
     function twig_filter_thumbnail(
