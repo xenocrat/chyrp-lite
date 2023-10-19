@@ -2699,6 +2699,9 @@
      *     <add_scheme>
      */
     function is_url($string): bool {
+        if (!is_string($string))
+            return false;
+
         return (
             preg_match(
                 '~^(https?://)?([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)(:[0-9]{1,5})?($|/)~i',
@@ -2749,6 +2752,9 @@
      *     Whether or not the string matches the criteria.
      */
     function is_email($string): bool {
+        if (!is_string($string))
+            return false;
+
         return (
             preg_match(
                 '~^[^ <>@]+@([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)$~i',
