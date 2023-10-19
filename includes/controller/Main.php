@@ -618,7 +618,7 @@
             }
 
             $this->display(
-                array("pages".DIR.$page->url, "pages".DIR."page"),
+                array("pages".DIR."page_".$page->url, "pages".DIR."page"),
                 array("page" => $page),
                 $page->title
             );
