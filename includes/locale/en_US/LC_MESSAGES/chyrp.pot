@@ -1393,7 +1393,7 @@ msgstr ""
 msgid "%s KB"
 msgstr ""
 
-#: includes/lib/Leaf.php:607
+#: includes/lib/Leaf.php:603
 msgid "Image source"
 msgstr ""
 
