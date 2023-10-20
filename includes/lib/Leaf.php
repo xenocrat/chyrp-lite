@@ -595,17 +595,13 @@
         # Enclose in <a> tag? Provide @true@ or a candidate URL.
         if (isset($url) and $url !== false) {
             $url = (is_url($url)) ?
-                $url :
+                fix($url, true) :
                 uploaded($filename) ;
+
+            $img = '<a href="'.$url.
+                   '" class="image_link" aria-label="'.
+                   __("Image source").'">'.$img.'</a>';
         }
 
-        $return = $img;
-
-        if (isset($url)) {
-            $return = '<a href="'.fix($url, true).
-                      '" class="image_link" aria-label="'.
-                      __("Image source").'">'.$img.'</a>';
-        }
-
-        return $return;
+        return $img;
     }
