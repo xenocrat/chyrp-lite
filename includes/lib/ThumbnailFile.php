@@ -106,9 +106,9 @@
          */
         public function upscaling(): bool {
             return (
-                $this->orig_w <= $this->thumb_w and
-                $this->orig_h <= $this->thumb_h and
-                !($this->square and $this->orig_w != $this->orig_h)
+                ($this->thumb_w == 0 or $this->orig_w <= $this->thumb_w) and
+                ($this->thumb_h == 0 or $this->orig_h <= $this->thumb_h) and
+                (!$this->square or $this->orig_w == $this->orig_h)
             );
         }
 
@@ -128,8 +128,49 @@
 
             $imagetypes = imagetypes();
 
-            if ($this->type == IMAGETYPE_GIF and ($imagetypes & IMG_GIF))
-                return $this->creatable = true;
+            if ($this->type == IMAGETYPE_GIF and ($imagetypes & IMG_GIF)) {
+                # If a square crop is requested, animation is irrelevant.
+                if ($this->square)
+                    return $this->creatable = true;
+
+                # Probe the file and return false if GIF89a with animation
+                # because GD will only operate on the first frame of the file.
+
+                $data = @fopen(filename:$this->source, mode:"rb");
+
+                if ($data === false)
+                    return $this->creatable = false;
+
+                $count = 0;
+                $contents = "";
+
+                # Count the number of graphic control extension blocks
+                # followed by an image descriptor or another extension:
+                #     > Graphic Control Extension
+                #         > Extension Introducer (0x21)
+                #         > Graphic Control Label (0xf9)
+                #         > Block Size (0x04)
+                #         > <Packed Fields> (1 byte)
+                #         > Delay Time (2 bytes)
+                #         > Transparent Color Index (1 byte)
+                #         > Block Terminator (0x00)
+                #    > Image Descriptor / Graphic Control Extension
+                #         > Extension Introducer (0x2c / 0x21)
+                #
+                # See also:
+                #     https://www.w3.org/Graphics/GIF/spec-gif89a.txt
+                #
+                while (!feof($data) and $count < 2) {
+                    $contents.= fread($data, 102400);
+
+                    $count = (int) preg_match_all(
+                        "/\\x21\\xf9\\x04.{4}\\x00(\\x2c|\\x21)/s",
+                        $contents
+                    );
+                }
+
+                return $this->creatable = ($count < 2) ? true : false ;
+            }
 
             if ($this->type == IMAGETYPE_JPEG and ($imagetypes & IMG_JPEG))
                 return $this->creatable = true;
@@ -144,7 +185,7 @@
                 $data = @file_get_contents(filename:$this->source, length:21);
 
                 if ($data === false or strlen($data) < 21)
-                    return false;
+                    return $this->creatable = false;
 
                 # Unpack the following data from the first 21 bytes of the WEBP file:
                 #     > File header (12 bytes)
@@ -156,13 +197,16 @@
                 # See also:
                 #     https://developers.google.com/speed/webp/docs/riff_container
                 #
-                $header = unpack("A4riff/Vfilesize/A4webp/A4header/Vsize/Cpayload", $data);
+                $header = unpack(
+                    "A4riff/Vfilesize/A4webp/A4header/Vsize/Cpayload",
+                    $data
+                );
 
                 # Discover if VP8X header is present and animation bit is set.
                 if ($header['header'] == "VP8X" and $header['payload'] & 0x02)
-                    return false;
+                    return $this->creatable = false;
 
-                return true;
+                return $this->creatable = true;
             }
 
             if (!defined('IMAGETYPE_AVIF'))
