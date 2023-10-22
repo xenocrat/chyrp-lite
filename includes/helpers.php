@@ -2699,7 +2699,10 @@
      *     <add_scheme>
      */
     function is_url($string): bool {
-        if (!is_string($string))
+        if (
+            !is_string($string) and
+            !$string instanceof Stringable
+        )
             return false;
 
         return (
@@ -2752,7 +2755,10 @@
      *     Whether or not the string matches the criteria.
      */
     function is_email($string): bool {
-        if (!is_string($string))
+        if (
+            !is_string($string) and
+            !$string instanceof Stringable
+        )
             return false;
 
         return (
