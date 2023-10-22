@@ -3130,8 +3130,18 @@
                     Flash::warning(
                         __("Failed to write file to disk.")
                     );
-
-                    unset($_POST['clean_urls']); 
+                    unset($_POST['clean_urls']);
+                } else {
+                    foreach ($conf as $return) {
+                        if (is_int($return)) {
+                           Flash::message(
+                                __("Files created.").' '.
+                                __("Please read the documentation before enabling clean URLs.")
+                            );
+                            unset($_POST['clean_urls']);
+                            break;
+                        }
+                    }
                 }
             }
 
