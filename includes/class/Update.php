@@ -25,6 +25,12 @@
             $config->set("check_updates_last", time());
 
             $rss = get_remote(UPDATE_XML, 3);
+
+            if ($rss === false) {
+                self::warning();
+                return;
+            }
+
             $xml = @simplexml_load_string($rss);
 
             if (!self::validate($xml)) {
@@ -51,10 +57,15 @@
                 return false;
 
             foreach ($xml->channel->item as $item)
-                if (!isset($item->guid) or
+                if (
+                    !isset($item->guid) or
                     !isset($item->title) or
-                    !isset($item->link) or !is_url($item->link))
-                        return false;
+                    !isset($item->link)
+                )
+                    return false;
+
+                if (!is_url($item->link))
+                    return false;
 
             return true;
         }
