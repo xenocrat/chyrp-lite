@@ -571,13 +571,12 @@
 
         # Source set for responsive images.
         $srcset = array(
-            $filepath."&max_width=2160".$set_args."2160w",
-            $filepath."&max_width=1440".$set_args."1440w",
-            $filepath."&max_width=960".$set_args." 960w",
-            $filepath."&max_width=640".$set_args." 640w",
-            $filepath."&max_width=320".$set_args." 320w",
-            $filepath."&max_width=240".$set_args." 240w",
-            $filepath."&max_width=160".$set_args." 160w"
+            $filepath."&max_width=2160".$set_args." 2160w",
+            $filepath."&max_width=1440".$set_args." 1440w",
+            $filepath."&max_width=1080".$set_args." 1080w",
+            $filepath."&max_width=720".$set_args." 720w",
+            $filepath."&max_width=360".$set_args." 360w",
+            $filepath."&max_width=180".$set_args." 180w"
         );
 
         $img = '<img src="'.fix($filepath.$src_args, true).
