@@ -105,7 +105,10 @@
 
             if (empty($route->action) or $route->action == "write") {
                 # Can they add posts or drafts and is at least one feather enabled?
-                if (!empty($config->enabled_feathers) and $visitor->group->can("add_post", "add_draft"))
+                if (
+                    !empty($config->enabled_feathers) and
+                    $visitor->group->can("add_post", "add_draft")
+                )
                     return $route->action = "write_post";
 
                 # Can they add pages?
@@ -261,7 +264,8 @@
                 "manage_posts" : "/" ;
 
             Flash::notice(
-                __("Post created!").' <a href="'.$post->url().'">'.__("View post &rarr;").'</a>',
+                __("Post created!").' <a href="'.$post->url().'">'.
+                __("View post &rarr;").'</a>',
                 $post_redirect
             );
         }
@@ -368,7 +372,8 @@
             $post = Feathers::$instances[$post->feather]->update($post);
 
             Flash::notice(
-                __("Post updated.").' <a href="'.$post->url().'">'.__("View post &rarr;").'</a>',
+                __("Post updated.").' <a href="'.$post->url().'">'.
+                __("View post &rarr;").'</a>',
                 $_SESSION['post_redirect']
             );
         }
@@ -643,7 +648,8 @@
                 "manage_pages" : "/" ;
 
             Flash::notice(
-                __("Page created!").' <a href="'.$page->url().'">'.__("View page &rarr;").'</a>',
+                __("Page created!").' <a href="'.$page->url().'">'.
+                __("View page &rarr;").'</a>',
                 $page_redirect
             );
         }
@@ -684,7 +690,9 @@
                 "pages".DIR."edit_page",
                 array(
                     "page" => $page,
-                    "pages" => Page::find(array("where" => array("id not" => $page->id)))
+                    "pages" => Page::find(
+                        array("where" => array("id not" => $page->id))
+                    )
                 )
             );
         }
@@ -767,7 +775,8 @@
             );
 
             Flash::notice(
-                __("Page updated.").' <a href="'.$page->url().'">'.__("View page &rarr;").'</a>',
+                __("Page updated.").' <a href="'.$page->url().'">'.
+                __("View page &rarr;").'</a>',
                 $_SESSION['page_redirect']
             );
         }
@@ -1021,6 +1030,9 @@
                     __("Group not found.")
                 );
 
+            $approved = ($config->email_activation and empty($_POST['activated'])) ?
+                false : true ;
+
             $user = User::add(
                 login:$_POST['login'],
                 password:User::hash_password($_POST['password1']),
@@ -1028,7 +1040,7 @@
                 full_name:$_POST['full_name'],
                 website:$_POST['website'],
                 group_id:$group->id,
-                approved:($config->email_activation and empty($_POST['activated'])) ? false : true
+                approved:$approved
             );
 
             if (!$user->approved)
@@ -1191,6 +1203,9 @@
                     __("Group not found.")
                 );
 
+            $approved = ($config->email_activation and empty($_POST['activated'])) ?
+                false : true ;
+
             $user = $user->update(
                 login:$_POST['login'],
                 password:$password,
@@ -1198,7 +1213,7 @@
                 full_name:$_POST['full_name'],
                 website:$_POST['website'],
                 group_id:$group->id,
-                approved:($config->email_activation and empty($_POST['activated'])) ? false : true
+                approved:$approved
             );
 
             if (!$user->approved)
@@ -2225,7 +2240,12 @@
                     "export"
                 );
 
-            $filename = sanitize(camelize($config->name), false, true)."_Export_".date("Y-m-d");
+            $filename = sanitize(
+                camelize($config->name),
+                false,
+                true
+            )."_Export_".date("Y-m-d");
+
             $archived = zip_archive($exports);
             file_attachment($archived, $filename.".zip");
         }
@@ -2368,13 +2388,16 @@
                         fallback($attributes["approved"], false);
                         fallback($attributes["joined_at"], datetime());
 
+                        $group_id = (!$group->no_results) ?
+                            $group->id : $config->default_group ;
+
                         $user = User::add(
                             login:$login,
                             password:$attributes["password"],
                             email:$attributes["email"],
                             full_name:$attributes["full_name"],
                             website:$attributes["website"],
-                            group_id:(!$group->no_results) ? $group->id : $config->default_group,
+                            group_id:$group_id,
                             approved:$attributes["approved"],
                             joined_at:$attributes["joined_at"]
                         );
@@ -2401,8 +2424,9 @@
                     if (!empty($_POST['media_url']))
                         array_walk_recursive($values, function (&$value) {
                             $config = Config::current();
+                            $uploads_path = str_replace(DIR, "/", $config->uploads_path);
                             $old_url = preg_quote($_POST['media_url'], "/");
-                            $new_url = fix($config->chyrp_url.str_replace(DIR, "/", $config->uploads_path));
+                            $new_url = fix($config->chyrp_url.$uploads_path);
                             $regex = "/{$old_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/";
                             $value = preg_replace($regex, $new_url."$1.$2", $value);
                         });
@@ -2705,9 +2729,9 @@
                 array_merge($config->$array,array($name))
             );
 
-            $load_info = load_info($folder.DIR.$name.DIR."info.php");
+            $info = load_info($folder.DIR.$name.DIR."info.php");
 
-            foreach ($load_info["notifications"] as $notification)
+            foreach ($info["notifications"] as $notification)
                 Flash::message($notification);
 
             Flash::notice(
@@ -2814,9 +2838,9 @@
 
             load_translator($theme, THEMES_DIR.DIR.$theme.DIR."locale");
 
-            $load_info = load_info(THEMES_DIR.DIR.$theme.DIR."info.php");
+            $info = load_info(THEMES_DIR.DIR.$theme.DIR."info.php");
 
-            foreach ($load_info["notifications"] as $notification)
+            foreach ($info["notifications"] as $notification)
                 Flash::message($notification);
 
             Flash::notice(
@@ -2938,10 +2962,13 @@
             $check_updates_last = (empty($_POST['check_updates'])) ?
                 0 : $config->check_updates_last ;
 
+            $chyrp_url = rtrim(add_scheme($_POST['chyrp_url']), "/");
+            $url = rtrim(add_scheme(oneof($_POST['url'], $_POST['chyrp_url'])), "/");
+
             $config->set("name", strip_tags($_POST['name']));
             $config->set("description", strip_tags($_POST['description']));
-            $config->set("chyrp_url", rtrim(add_scheme($_POST['chyrp_url']), "/"));
-            $config->set("url", rtrim(add_scheme(oneof($_POST['url'], $_POST['chyrp_url'])), "/"));
+            $config->set("chyrp_url", $chyrp_url);
+            $config->set("url", $url);
             $config->set("email", $_POST['email']);
             $config->set("timezone", $_POST['timezone']);
             $config->set("locale", $_POST['locale']);
@@ -3005,7 +3032,8 @@
             $separator = preg_quote(DIR, "~");
             preg_match(
                 "~^(".$separator.")?(.*?)(".$separator.")?$~",
-                $_POST['uploads_path'], $matches
+                $_POST['uploads_path'],
+                $matches
             );
 
             fallback($matches[1], DIR);
@@ -3235,16 +3263,24 @@
             $navigation = array();
 
             $navigation["write"] = array(
-                "children" => array(), "selected" => false, "title" => __("Write")
+                "children" => array(),
+                "selected" => false,
+                "title" => __("Write")
             );
             $navigation["manage"] = array(
-                "children" => array(), "selected" => false, "title" => __("Manage")
+                "children" => array(),
+                "selected" => false,
+                "title" => __("Manage")
             );
             $navigation["settings"] = array(
-                "children" => array(), "selected" => false, "title" => __("Settings")
+                "children" => array(),
+                "selected" => false,
+                "title" => __("Settings")
             );
             $navigation["extend"] = array(
-                "children" => array(), "selected" => false, "title" => __("Extend")
+                "children" => array(),
+                "selected" => false,
+                "title" => __("Extend")
             );
 
             $write    =& $navigation["write"]["children"];
@@ -3262,10 +3298,10 @@
                     if (!feather_enabled($feather))
                         continue;
 
-                    $name = load_info(FEATHERS_DIR.DIR.$feather.DIR."info.php")["name"];
+                    $info = load_info(FEATHERS_DIR.DIR.$feather.DIR."info.php");
 
                     $write["write_post/feather/".$feather] = array(
-                        "title" => $name,
+                        "title" => $info["name"],
                         "feather" => $feather
                     );
                 }
@@ -3276,10 +3312,15 @@
             foreach ($write as $child => &$attributes) {
                 $attributes["selected"] = (
                     $action == $child or
-                    (isset($attributes["selected"]) and
-                        in_array($action, (array) $attributes["selected"])) or
-                    (isset($_GET['feather']) and
-                        isset($attributes["feather"]) and $_GET['feather'] == $attributes["feather"])
+                    (
+                        isset($attributes["selected"]) and
+                        in_array($action, (array) $attributes["selected"])
+                    ) or
+                    (
+                        isset($_GET['feather']) and
+                        isset($attributes["feather"]) and
+                        $_GET['feather'] == $attributes["feather"]
+                    )
                 );
 
                 if ($attributes["selected"] == true)
@@ -3340,8 +3381,10 @@
             foreach ($manage as $child => &$attributes) {
                 $attributes["selected"] = (
                     $action == $child or
-                    (isset($attributes["selected"]) and
-                        in_array($action, (array) $attributes["selected"]))
+                    (
+                        isset($attributes["selected"]) and
+                        in_array($action, (array) $attributes["selected"])
+                    )
                 );
 
                 if ($attributes["selected"] == true)
@@ -3362,8 +3405,10 @@
             foreach ($settings as $child => &$attributes) {
                 $attributes["selected"] = (
                     $action == $child or
-                    (isset($attributes["selected"]) and
-                        in_array($action, (array) $attributes["selected"]))
+                    (
+                        isset($attributes["selected"]) and
+                        in_array($action, (array) $attributes["selected"])
+                    )
                 );
 
                 if ($attributes["selected"] == true)
@@ -3383,8 +3428,10 @@
             foreach ($extend as $child => &$attributes) {
                 $attributes["selected"] = (
                     $action == $child or
-                    (isset($attributes["selected"]) and
-                        in_array($action, (array) $attributes["selected"]))
+                    (
+                        isset($attributes["selected"]) and
+                        in_array($action, (array) $attributes["selected"])
+                    )
                 );
 
                 if ($attributes["selected"] == true)
