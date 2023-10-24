@@ -12,7 +12,7 @@
 </header>
 {% endif %}
 <section class="photo" aria-label="{{ 'File Attachment' | translate }}">
-{{ post.filename | thumbnail(post.alt_text, post.source, ["max_width=1280", "max_height=1920", "quality=80"], "(max-width: 959px) 95vw, 75vw") }}
+{{ post.filename | thumbnail(post.alt_text, post.source, ["max_width=960", "max_height=960", "quality=80"], "(max-width: 959px) 95vw, 75vw") }}
 </section>
 {% if post.caption is not empty %}
 <section class="caption" aria-label="{{ 'Text Content' | translate }}">
