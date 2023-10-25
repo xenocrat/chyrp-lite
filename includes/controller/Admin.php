@@ -2533,7 +2533,6 @@
                 $info = load_info(MODULES_DIR.DIR.$name.DIR."info.php");
 
                 # List of modules conflicting with this one (installed or not).
-
                 if (!empty($info["conflicts"])) {
                     $classes[$name][] = "conflicts";
 
@@ -2549,7 +2548,6 @@
                 }
 
                 # List of modules depended on by this one (installed or not).
-
                 if (!empty($info["dependencies"])) {
                     $classes[$name][] = "dependencies";
 
@@ -3030,6 +3028,7 @@
             fallback($_POST['uploads_limit'], 10);
 
             $separator = preg_quote(DIR, "~");
+
             preg_match(
                 "~^(".$separator.")?(.*?)(".$separator.")?$~",
                 $_POST['uploads_path'],
@@ -3451,8 +3450,11 @@
          *     $title - The title for the page.
          *
          * Notes:
-         *     $template is supplied sans ".twig" and relative to /admin/ for core and extensions.
-         *     $title defaults to a camelization of the template filename, e.g. foo_bar -> Foo Bar.
+         *     $template is supplied sans ".twig" and relative to /admin/
+         *     for core and extensions.
+         *
+         *     $title defaults to a camelization of the template filename,
+         *     e.g. foo_bar -> Foo Bar.
          */
         public function display($template, $context = array(), $title = ""): void {
             $config = Config::current();
