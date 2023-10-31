@@ -1692,6 +1692,9 @@
         if (!isset($host))
             return false;
 
+        if (is_ip_address($host) and !DEBUG and !GET_REMOTE_UNSAFE)
+            return false;
+
         if ($scheme == "https" and !extension_loaded("openssl"))
             return false;
 
@@ -1799,6 +1802,9 @@
                 $path.= "?".$query;
 
             if (!isset($host))
+                continue;
+
+            if (is_ip_address($host) and !DEBUG and !GET_REMOTE_UNSAFE)
                 continue;
 
             if ($scheme == "https" and !extension_loaded("openssl"))
@@ -1932,6 +1938,9 @@
             $path.= "?".$query;
 
         if (!isset($host))
+            return false;
+
+        if (is_ip_address($host) and !DEBUG and !GET_REMOTE_UNSAFE)
             return false;
 
         if ($scheme == "https" and !extension_loaded("openssl"))
@@ -2693,7 +2702,7 @@
      *     Whether or not the string matches the criteria.
      *
      * Notes:
-     *     Recognises FQDN, IPv4 and IPv6 hosts.
+     *     Recognises FQDN, IPv4 and IPv6.
      *
      * See Also:
      *     <add_scheme>
@@ -2742,6 +2751,29 @@
     }
 
     /**
+     * Function: is_ip_address
+     * Does the string look like an IP address?
+     *
+     * Parameters:
+     *     $string - The string to analyse.
+     *
+     * Notes:
+     *     Recognises IPv4 and IPv6.
+     *
+     * Returns:
+     *     Whether or not the string matches the criteria.
+     */
+    function is_ip_address($string): bool {
+        if (preg_match('/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/', $string))
+            return true;
+
+        if (preg_match('/^\[[a-fA-F0-9\:]{3,39}\]$/', $string))
+            return true;
+
+        return false;
+    }
+
+    /**
      * Function: is_email
      * Does the string look like an email address?
      *
@@ -2749,7 +2781,7 @@
      *     $string - The string to analyse.
      *
      * Notes:
-     *     Recognises FQDN, IPv4 and IPv6 hosts.
+     *     Recognises FQDN, IPv4 and IPv6.
      *
      * Returns:
      *     Whether or not the string matches the criteria.
@@ -2763,15 +2795,15 @@
 
         return (
             preg_match(
-                '~^[^ <>@]+@([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)$~i',
+                '/^[^ <>@]+@([a-z0-9][a-z0-9\-\.]*[a-z0-9]\.[a-z]{2,63}\.?)$/i',
                 $string
             ) or
             preg_match(
-                '~^[^ <>@]+@([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$~',
+                '/^[^ <>@]+@([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$/',
                 $string
             ) or
             preg_match(
-                '~^[^ <>@]+@(\[[a-f0-9\:]{3,39}\])$~i',
+                '/^[^ <>@]+@(\[[a-f0-9\:]{3,39}\])$/i',
                 $string
             )
         );
