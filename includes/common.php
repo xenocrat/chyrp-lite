@@ -94,6 +94,10 @@
     # Deny session storage to robots?
     define('SESSION_DENY_BOT', true);
 
+    # Constant: GET_REMOTE_UNSAFE
+    # Allow get_remote() to connect to naked IP addresses?
+    define('GET_REMOTE_UNSAFE', false);
+
     # Constant: USE_GETTEXT_SHIM
     # Use a shim for translation support?
     define('USE_GETTEXT_SHIM', stripos(PHP_OS, "Win") === 0);
