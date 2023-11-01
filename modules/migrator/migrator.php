@@ -114,14 +114,13 @@
             # Remove null (x00) characters
             $sane_xml = str_replace("", "", $sane_xml);
 
-            $xml = simplexml_load_string(
-                $sane_xml,
-                "SimpleXMLElement",
-                LIBXML_NOCDATA
+            $xml = @simplexml_load_string(
+                data:$sane_xml,
+                options:LIBXML_NOCDATA
             );
 
             if (
-                !$xml or
+                $xml === false or
                 !(
                     substr_count($xml->channel->generator, "wordpress.org") or
                     substr_count($xml->channel->generator, "wordpress.com")
@@ -291,19 +290,27 @@
                 set_time_limit(600);
 
             $url = rtrim($_POST['tumblr_url'], "/")."/api/read?num=50";
+            $get = get_remote($url);
+
+            if ($get === false)
+                Flash::warning(
+                    __("Could not retrieve content from the Tumblr URL.", "migrator"),
+                    "manage_migration"
+                );
+
             $api = preg_replace(
                 "/<(\/?)([a-z]+)\-([a-z]+)/",
                 "<\\1\\2_\\3",
-                get_remote($url)
+                $get
             );
             $api = preg_replace(
                 "/ ([a-z]+)\-([a-z]+)=/",
                 " \\1_\\2=",
                 $api
             );
-            $xml = simplexml_load_string($api);
+            $xml = @simplexml_load_string($api);
 
-            if (!isset($xml->tumblelog))
+            if ($xml === false or !isset($xml->tumblelog))
                 Flash::warning(
                     __("Could not retrieve content from the Tumblr URL.", "migrator"),
                     "manage_migration"
@@ -317,21 +324,34 @@
             }
 
             while ($xml->posts->attributes()->total > count($posts)) {
+                $get = get_remote($url."&start=".count($posts));
+
+                if ($get === false)
+                    Flash::warning(
+                        __("Could not retrieve content from the Tumblr URL.", "migrator"),
+                        "manage_migration"
+                    );
+
                 $api = preg_replace(
                     "/<(\/?)([a-z]+)\-([a-z]+)/",
                     "<\\1\\2_\\3",
-                    get_remote($url."&start=".count($posts))
+                    $get
                 );
                 $api = preg_replace(
                     "/ ([a-z]+)\-([a-z]+)=/",
                     " \\1_\\2=",
                     $api
                 );
-                $xml = simplexml_load_string(
-                    $api,
-                    "SimpleXMLElement",
-                    LIBXML_NOCDATA
+                $xml = @simplexml_load_string(
+                    data:$api,
+                    options:LIBXML_NOCDATA
                 );
+
+                if ($xml === false)
+                    Flash::warning(
+                        __("Could not retrieve content from the Tumblr URL.", "migrator"),
+                        "manage_migration"
+                    );
 
                 foreach ($xml->posts->post as $post)
                     if (!in_array($post->attributes()->id, $already_in)) {
