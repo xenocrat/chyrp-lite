@@ -1692,7 +1692,7 @@
         if (!isset($host))
             return false;
 
-        if (is_ip_address($host) and !DEBUG and !GET_REMOTE_UNSAFE)
+        if (is_ip_address($host) and !GET_REMOTE_UNSAFE)
             return false;
 
         if ($scheme == "https" and !extension_loaded("openssl"))
@@ -1804,7 +1804,7 @@
             if (!isset($host))
                 continue;
 
-            if (is_ip_address($host) and !DEBUG and !GET_REMOTE_UNSAFE)
+            if (is_ip_address($host) and !GET_REMOTE_UNSAFE)
                 continue;
 
             if ($scheme == "https" and !extension_loaded("openssl"))
@@ -1940,7 +1940,7 @@
         if (!isset($host))
             return false;
 
-        if (is_ip_address($host) and !DEBUG and !GET_REMOTE_UNSAFE)
+        if (is_ip_address($host) and !GET_REMOTE_UNSAFE)
             return false;
 
         if ($scheme == "https" and !extension_loaded("openssl"))
