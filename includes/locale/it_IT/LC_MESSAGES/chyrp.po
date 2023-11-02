@@ -66,37 +66,37 @@ msgstr "Errore di database: %s"
 msgid "Route was initiated with an invalid Controller."
 msgstr "Il percorso è stato avviato con un Controller non valido."
 
-#: includes/class/Route.php:110 includes/controller/Admin.php:604
-#: includes/controller/Admin.php:611 includes/controller/Admin.php:728
-#: includes/controller/Admin.php:735 includes/controller/Admin.php:953
-#: includes/controller/Admin.php:962 includes/controller/Admin.php:969
-#: includes/controller/Admin.php:976 includes/controller/Admin.php:988
-#: includes/controller/Admin.php:995 includes/controller/Admin.php:1002
-#: includes/controller/Admin.php:1109 includes/controller/Admin.php:1123
-#: includes/controller/Admin.php:1142 includes/controller/Admin.php:1160
-#: includes/controller/Admin.php:1167 includes/controller/Admin.php:1174
-#: includes/controller/Admin.php:1423 includes/controller/Admin.php:1436
-#: includes/controller/Admin.php:1513 includes/controller/Admin.php:1529
-#: includes/controller/Admin.php:1651 includes/controller/Admin.php:1674
-#: includes/controller/Admin.php:1695 includes/controller/Admin.php:2685
-#: includes/controller/Admin.php:2754 includes/controller/Admin.php:2897
-#: includes/controller/Admin.php:2904 includes/controller/Admin.php:2911
-#: includes/controller/Admin.php:2918 includes/controller/Admin.php:2925
-#: includes/controller/Admin.php:3203 includes/controller/Ajax.php:34
+#: includes/class/Route.php:110 includes/controller/Admin.php:609
+#: includes/controller/Admin.php:616 includes/controller/Admin.php:736
+#: includes/controller/Admin.php:743 includes/controller/Admin.php:962
+#: includes/controller/Admin.php:971 includes/controller/Admin.php:978
+#: includes/controller/Admin.php:985 includes/controller/Admin.php:997
+#: includes/controller/Admin.php:1004 includes/controller/Admin.php:1011
+#: includes/controller/Admin.php:1121 includes/controller/Admin.php:1135
+#: includes/controller/Admin.php:1154 includes/controller/Admin.php:1172
+#: includes/controller/Admin.php:1179 includes/controller/Admin.php:1186
+#: includes/controller/Admin.php:1438 includes/controller/Admin.php:1451
+#: includes/controller/Admin.php:1528 includes/controller/Admin.php:1544
+#: includes/controller/Admin.php:1666 includes/controller/Admin.php:1689
+#: includes/controller/Admin.php:1710 includes/controller/Admin.php:2707
+#: includes/controller/Admin.php:2776 includes/controller/Admin.php:2919
+#: includes/controller/Admin.php:2926 includes/controller/Admin.php:2933
+#: includes/controller/Admin.php:2940 includes/controller/Admin.php:2947
+#: includes/controller/Admin.php:3240 includes/controller/Ajax.php:34
 #: includes/controller/Ajax.php:251 includes/download.php:13
-#: includes/error.php:169 includes/helpers.php:1853 includes/helpers.php:1860
-#: includes/helpers.php:1867 includes/helpers.php:1880
-#: includes/helpers.php:1889 includes/helpers.php:1899
-#: includes/helpers.php:1906 includes/helpers.php:2325
-#: includes/helpers.php:2337 includes/helpers.php:2343
-#: includes/helpers.php:2349 includes/helpers.php:2386
-#: includes/helpers.php:2392 includes/helpers.php:2398
-#: includes/helpers.php:2513 includes/helpers.php:2519
-#: includes/helpers.php:2525 includes/helpers.php:2531
-#: includes/helpers.php:2536 includes/helpers.php:2541
-#: includes/helpers.php:2546 includes/helpers.php:2553
-#: includes/lib/ThumbnailFile.php:244 includes/lib/ThumbnailFile.php:275
-#: includes/lib/ThumbnailFile.php:335 includes/thumbnail.php:16 install.php:964
+#: includes/error.php:169 includes/helpers.php:1859 includes/helpers.php:1866
+#: includes/helpers.php:1873 includes/helpers.php:1886
+#: includes/helpers.php:1895 includes/helpers.php:1905
+#: includes/helpers.php:1912 includes/helpers.php:2334
+#: includes/helpers.php:2346 includes/helpers.php:2352
+#: includes/helpers.php:2358 includes/helpers.php:2395
+#: includes/helpers.php:2401 includes/helpers.php:2407
+#: includes/helpers.php:2522 includes/helpers.php:2528
+#: includes/helpers.php:2534 includes/helpers.php:2540
+#: includes/helpers.php:2545 includes/helpers.php:2550
+#: includes/helpers.php:2555 includes/helpers.php:2562
+#: includes/lib/ThumbnailFile.php:288 includes/lib/ThumbnailFile.php:319
+#: includes/lib/ThumbnailFile.php:379 includes/thumbnail.php:16 install.php:964
 #: upgrade.php:189 upgrade.php:205 upgrade.php:221 upgrade.php:237
 #: upgrade.php:253 upgrade.php:273 upgrade.php:317 upgrade.php:333
 #: upgrade.php:353 upgrade.php:369 upgrade.php:385 upgrade.php:401
@@ -108,41 +108,41 @@ msgstr "Errore"
 msgid "Invalid action."
 msgstr "Azione non valida."
 
-#: includes/class/Route.php:123 includes/controller/Admin.php:159
-#: includes/controller/Admin.php:185 includes/controller/Admin.php:236
-#: includes/controller/Admin.php:242 includes/controller/Admin.php:296
-#: includes/controller/Admin.php:331 includes/controller/Admin.php:358
-#: includes/controller/Admin.php:401 includes/controller/Admin.php:418
-#: includes/controller/Admin.php:442 includes/controller/Admin.php:461
-#: includes/controller/Admin.php:573 includes/controller/Admin.php:592
-#: includes/controller/Admin.php:598 includes/controller/Admin.php:658
-#: includes/controller/Admin.php:706 includes/controller/Admin.php:712
-#: includes/controller/Admin.php:782 includes/controller/Admin.php:814
-#: includes/controller/Admin.php:820 includes/controller/Admin.php:873
-#: includes/controller/Admin.php:913 includes/controller/Admin.php:941
-#: includes/controller/Admin.php:947 includes/controller/Admin.php:1050
-#: includes/controller/Admin.php:1087 includes/controller/Admin.php:1103
-#: includes/controller/Admin.php:1220 includes/controller/Admin.php:1260
-#: includes/controller/Admin.php:1266 includes/controller/Admin.php:1351
-#: includes/controller/Admin.php:1394 includes/controller/Admin.php:1411
-#: includes/controller/Admin.php:1417 includes/controller/Admin.php:1459
-#: includes/controller/Admin.php:1494 includes/controller/Admin.php:1500
-#: includes/controller/Admin.php:1560 includes/controller/Admin.php:1606
-#: includes/controller/Admin.php:1612 includes/controller/Admin.php:1734
-#: includes/controller/Admin.php:1783 includes/controller/Admin.php:1836
-#: includes/controller/Admin.php:1842 includes/controller/Admin.php:1878
-#: includes/controller/Admin.php:1913 includes/controller/Admin.php:1924
-#: includes/controller/Admin.php:2246 includes/controller/Admin.php:2257
-#: includes/controller/Admin.php:2482 includes/controller/Admin.php:2576
-#: includes/controller/Admin.php:2619 includes/controller/Admin.php:2660
-#: includes/controller/Admin.php:2666 includes/controller/Admin.php:2729
-#: includes/controller/Admin.php:2735 includes/controller/Admin.php:2792
-#: includes/controller/Admin.php:2798 includes/controller/Admin.php:2835
-#: includes/controller/Admin.php:2853 includes/controller/Admin.php:2873
-#: includes/controller/Admin.php:2891 includes/controller/Admin.php:2964
-#: includes/controller/Admin.php:2994 includes/controller/Admin.php:3040
-#: includes/controller/Admin.php:3055 includes/controller/Admin.php:3105
-#: includes/controller/Admin.php:3119 includes/controller/Ajax.php:57
+#: includes/class/Route.php:123 includes/controller/Admin.php:162
+#: includes/controller/Admin.php:188 includes/controller/Admin.php:239
+#: includes/controller/Admin.php:245 includes/controller/Admin.php:300
+#: includes/controller/Admin.php:335 includes/controller/Admin.php:362
+#: includes/controller/Admin.php:406 includes/controller/Admin.php:423
+#: includes/controller/Admin.php:447 includes/controller/Admin.php:466
+#: includes/controller/Admin.php:578 includes/controller/Admin.php:597
+#: includes/controller/Admin.php:603 includes/controller/Admin.php:664
+#: includes/controller/Admin.php:714 includes/controller/Admin.php:720
+#: includes/controller/Admin.php:791 includes/controller/Admin.php:823
+#: includes/controller/Admin.php:829 includes/controller/Admin.php:882
+#: includes/controller/Admin.php:922 includes/controller/Admin.php:950
+#: includes/controller/Admin.php:956 includes/controller/Admin.php:1062
+#: includes/controller/Admin.php:1099 includes/controller/Admin.php:1115
+#: includes/controller/Admin.php:1235 includes/controller/Admin.php:1275
+#: includes/controller/Admin.php:1281 includes/controller/Admin.php:1366
+#: includes/controller/Admin.php:1409 includes/controller/Admin.php:1426
+#: includes/controller/Admin.php:1432 includes/controller/Admin.php:1474
+#: includes/controller/Admin.php:1509 includes/controller/Admin.php:1515
+#: includes/controller/Admin.php:1575 includes/controller/Admin.php:1621
+#: includes/controller/Admin.php:1627 includes/controller/Admin.php:1749
+#: includes/controller/Admin.php:1798 includes/controller/Admin.php:1851
+#: includes/controller/Admin.php:1857 includes/controller/Admin.php:1893
+#: includes/controller/Admin.php:1928 includes/controller/Admin.php:1939
+#: includes/controller/Admin.php:2266 includes/controller/Admin.php:2277
+#: includes/controller/Admin.php:2506 includes/controller/Admin.php:2598
+#: includes/controller/Admin.php:2641 includes/controller/Admin.php:2682
+#: includes/controller/Admin.php:2688 includes/controller/Admin.php:2751
+#: includes/controller/Admin.php:2757 includes/controller/Admin.php:2814
+#: includes/controller/Admin.php:2820 includes/controller/Admin.php:2857
+#: includes/controller/Admin.php:2875 includes/controller/Admin.php:2895
+#: includes/controller/Admin.php:2913 includes/controller/Admin.php:2989
+#: includes/controller/Admin.php:3019 includes/controller/Admin.php:3067
+#: includes/controller/Admin.php:3082 includes/controller/Admin.php:3132
+#: includes/controller/Admin.php:3146 includes/controller/Ajax.php:57
 #: includes/controller/Ajax.php:80 includes/controller/Ajax.php:95
 #: includes/controller/Ajax.php:101 includes/controller/Ajax.php:131
 #: includes/controller/Ajax.php:137 includes/controller/Ajax.php:187
@@ -150,7 +150,7 @@ msgstr "Azione non valida."
 #: includes/controller/Ajax.php:245 includes/controller/Ajax.php:269
 #: includes/controller/Ajax.php:275 includes/controller/Main.php:536
 #: includes/controller/Main.php:615 includes/download.php:20
-#: includes/helpers.php:2331 includes/thumbnail.php:23
+#: includes/helpers.php:2340 includes/thumbnail.php:23
 msgid "Access Denied"
 msgstr "Accesso negato"
 
@@ -163,74 +163,74 @@ msgstr "Non è consentito visualizzare questo sito."
 msgid "PDO driver is unavailable for this database."
 msgstr "Il driver PDO non è disponibile per questo database."
 
-#: includes/class/Update.php:68
+#: includes/class/Update.php:79
 #, php-format
 msgid "Chyrp Lite &#8220;%s&#8221; is available."
 msgstr "Chyrp Lite &#8220;%s&#8221; è disponibile."
 
-#: includes/class/Update.php:70 includes/class/Update.php:82
+#: includes/class/Update.php:81 includes/class/Update.php:93
 msgid "Go to GitHub &rarr;"
 msgstr "Vai a GitHub &rarr;"
 
-#: includes/class/Update.php:80
+#: includes/class/Update.php:91
 msgid "Unable to check for new Chyrp Lite versions."
 msgstr "Impossibile controllare le nuove versioni di Chyrp Lite."
 
-#: includes/common.php:282 includes/common.php:290
+#: includes/common.php:286 includes/common.php:294
 msgid "Service Unavailable"
 msgstr "Servizio non disponibile"
 
-#: includes/common.php:283
+#: includes/common.php:287
 msgid "This resource is temporarily unable to serve your request."
 msgstr ""
 "Questa risorsa non è temporaneamente in grado di soddisfare la richiesta."
 
-#: includes/common.php:291
+#: includes/common.php:295
 msgid "This resource cannot respond because it is not configured."
 msgstr "Questa risorsa non può rispondere perché non configurata."
 
-#: includes/controller/Admin.php:160
+#: includes/controller/Admin.php:163
 msgid "You do not have sufficient privileges to view this area."
 msgstr "Non si dispone di privilegi sufficienti per visualizzare questa area."
 
-#: includes/controller/Admin.php:186 includes/controller/Admin.php:237
+#: includes/controller/Admin.php:189 includes/controller/Admin.php:240
 #: includes/controller/Ajax.php:138
 msgid "You do not have sufficient privileges to add posts."
 msgstr "Non si dispone di privilegi sufficienti per aggiungere post."
 
-#: includes/controller/Admin.php:193
+#: includes/controller/Admin.php:196
 msgid "You must enable at least one feather in order to write a post."
 msgstr "Per poter scrivere un post, devi abilitare almeno una Feather."
 
-#: includes/controller/Admin.php:207 includes/controller/Admin.php:248
-#: includes/controller/Admin.php:352 includes/controller/Admin.php:436
-#: includes/controller/Admin.php:744 includes/controller/Admin.php:838
-#: includes/controller/Admin.php:1020 includes/controller/Admin.php:1132
-#: includes/controller/Admin.php:1190 includes/controller/Admin.php:1284
-#: includes/controller/Admin.php:1538 includes/controller/Admin.php:1575
-#: includes/controller/Admin.php:1630 includes/controller/Admin.php:2692
-#: includes/controller/Admin.php:2761 includes/controller/Ajax.php:74
+#: includes/controller/Admin.php:210 includes/controller/Admin.php:251
+#: includes/controller/Admin.php:356 includes/controller/Admin.php:441
+#: includes/controller/Admin.php:752 includes/controller/Admin.php:847
+#: includes/controller/Admin.php:1029 includes/controller/Admin.php:1144
+#: includes/controller/Admin.php:1202 includes/controller/Admin.php:1299
+#: includes/controller/Admin.php:1553 includes/controller/Admin.php:1590
+#: includes/controller/Admin.php:1645 includes/controller/Admin.php:2714
+#: includes/controller/Admin.php:2783 includes/controller/Ajax.php:74
 #: includes/controller/Ajax.php:116 includes/download.php:29
 #: includes/helpers.php:153 includes/thumbnail.php:35
 msgid "Not Found"
 msgstr "Non trovato"
 
-#: includes/controller/Admin.php:208 includes/controller/Admin.php:249
+#: includes/controller/Admin.php:211 includes/controller/Admin.php:252
 msgid "Feather not found."
 msgstr "Feather non trovata."
 
-#: includes/controller/Admin.php:243 includes/controller/Admin.php:332
-#: includes/controller/Admin.php:419 includes/controller/Admin.php:599
-#: includes/controller/Admin.php:713 includes/controller/Admin.php:821
-#: includes/controller/Admin.php:948 includes/controller/Admin.php:1088
-#: includes/controller/Admin.php:1267 includes/controller/Admin.php:1418
-#: includes/controller/Admin.php:1501 includes/controller/Admin.php:1613
-#: includes/controller/Admin.php:1843 includes/controller/Admin.php:1925
-#: includes/controller/Admin.php:2258 includes/controller/Admin.php:2667
-#: includes/controller/Admin.php:2736 includes/controller/Admin.php:2799
-#: includes/controller/Admin.php:2854 includes/controller/Admin.php:2892
-#: includes/controller/Admin.php:2995 includes/controller/Admin.php:3056
-#: includes/controller/Admin.php:3120 includes/controller/Ajax.php:58
+#: includes/controller/Admin.php:246 includes/controller/Admin.php:336
+#: includes/controller/Admin.php:424 includes/controller/Admin.php:604
+#: includes/controller/Admin.php:721 includes/controller/Admin.php:830
+#: includes/controller/Admin.php:957 includes/controller/Admin.php:1100
+#: includes/controller/Admin.php:1282 includes/controller/Admin.php:1433
+#: includes/controller/Admin.php:1516 includes/controller/Admin.php:1628
+#: includes/controller/Admin.php:1858 includes/controller/Admin.php:1940
+#: includes/controller/Admin.php:2278 includes/controller/Admin.php:2689
+#: includes/controller/Admin.php:2758 includes/controller/Admin.php:2821
+#: includes/controller/Admin.php:2876 includes/controller/Admin.php:2914
+#: includes/controller/Admin.php:3020 includes/controller/Admin.php:3083
+#: includes/controller/Admin.php:3147 includes/controller/Ajax.php:58
 #: includes/controller/Ajax.php:102 includes/controller/Ajax.php:132
 #: includes/controller/Ajax.php:188 includes/controller/Ajax.php:229
 #: includes/controller/Ajax.php:270 includes/controller/Main.php:721
@@ -240,569 +240,579 @@ msgstr "Feather non trovata."
 msgid "Invalid authentication token."
 msgstr "Token di autenticazione non valido."
 
-#: includes/controller/Admin.php:264
+#: includes/controller/Admin.php:267
 msgid "Post created!"
 msgstr "Post creato!"
 
-#: includes/controller/Admin.php:264 includes/controller/Admin.php:371
-#: includes/controller/Admin.php:1813
+#: includes/controller/Admin.php:268 includes/controller/Admin.php:376
+#: includes/controller/Admin.php:1828
 msgid "View post &rarr;"
 msgstr "Visualizza il post &rarr;"
 
-#: includes/controller/Admin.php:278 includes/controller/Admin.php:340
-#: includes/controller/Admin.php:383 includes/controller/Admin.php:424
-#: includes/controller/Admin.php:664 includes/controller/Admin.php:721
-#: includes/controller/Admin.php:788 includes/controller/Admin.php:826
-#: includes/controller/Admin.php:1056 includes/controller/Admin.php:1093
-#: includes/controller/Admin.php:1226 includes/controller/Admin.php:1272
-#: includes/controller/Admin.php:1465 includes/controller/Admin.php:1506
-#: includes/controller/Admin.php:1566 includes/controller/Admin.php:1618
+#: includes/controller/Admin.php:282 includes/controller/Admin.php:344
+#: includes/controller/Admin.php:388 includes/controller/Admin.php:429
+#: includes/controller/Admin.php:670 includes/controller/Admin.php:729
+#: includes/controller/Admin.php:797 includes/controller/Admin.php:835
+#: includes/controller/Admin.php:1068 includes/controller/Admin.php:1105
+#: includes/controller/Admin.php:1241 includes/controller/Admin.php:1287
+#: includes/controller/Admin.php:1480 includes/controller/Admin.php:1521
+#: includes/controller/Admin.php:1581 includes/controller/Admin.php:1633
 #: includes/controller/Ajax.php:63 includes/controller/Ajax.php:107
 msgid "No ID Specified"
 msgstr "Nessun ID specificato"
 
-#: includes/controller/Admin.php:279
+#: includes/controller/Admin.php:283
 msgid "An ID is required to edit a post."
 msgstr "Per modificare un post è necessario un ID."
 
-#: includes/controller/Admin.php:290 includes/controller/Admin.php:353
-#: includes/controller/Admin.php:395 includes/controller/Admin.php:437
+#: includes/controller/Admin.php:294 includes/controller/Admin.php:357
+#: includes/controller/Admin.php:400 includes/controller/Admin.php:442
 #: includes/controller/Ajax.php:75
 msgid "Post not found."
 msgstr "Post non trovato."
 
-#: includes/controller/Admin.php:297 includes/controller/Admin.php:359
+#: includes/controller/Admin.php:301 includes/controller/Admin.php:363
 msgid "You do not have sufficient privileges to edit this post."
 msgstr "Non si dispone di privilegi sufficienti per modificare questo post."
 
-#: includes/controller/Admin.php:341
+#: includes/controller/Admin.php:345
 msgid "An ID is required to update a post."
 msgstr "È necessario un ID per aggiornare un post."
 
-#: includes/controller/Admin.php:371
+#: includes/controller/Admin.php:375
 msgid "Post updated."
 msgstr "Post aggiornato."
 
-#: includes/controller/Admin.php:384 includes/controller/Admin.php:425
+#: includes/controller/Admin.php:389 includes/controller/Admin.php:430
 #: includes/controller/Ajax.php:64
 msgid "An ID is required to delete a post."
 msgstr "È necessario un ID per eliminare un post."
 
-#: includes/controller/Admin.php:402 includes/controller/Admin.php:443
+#: includes/controller/Admin.php:407 includes/controller/Admin.php:448
 #: includes/controller/Ajax.php:81
 msgid "You do not have sufficient privileges to delete this post."
 msgstr "Non si dispone di privilegi sufficienti per eliminare questo post."
 
-#: includes/controller/Admin.php:449 includes/controller/Ajax.php:85
+#: includes/controller/Admin.php:454 includes/controller/Ajax.php:85
 msgid "Post deleted."
 msgstr "Post cancellato."
 
-#: includes/controller/Admin.php:462
+#: includes/controller/Admin.php:467
 msgid "You do not have sufficient privileges to manage any posts."
 msgstr "Non si dispone di privilegi sufficienti per gestire i post."
 
-#: includes/controller/Admin.php:574 includes/controller/Admin.php:593
+#: includes/controller/Admin.php:579 includes/controller/Admin.php:598
 #: includes/controller/Ajax.php:194
 msgid "You do not have sufficient privileges to add pages."
 msgstr "Non si dispone di privilegi sufficienti per aggiungere pagine."
 
-#: includes/controller/Admin.php:605 includes/controller/Admin.php:729
+#: includes/controller/Admin.php:610 includes/controller/Admin.php:737
 msgid "Title cannot be blank."
 msgstr "Il titolo non può essere vuoto."
 
-#: includes/controller/Admin.php:612 includes/controller/Admin.php:736
+#: includes/controller/Admin.php:617 includes/controller/Admin.php:744
 msgid "Body cannot be blank."
 msgstr "Il testo non può essere vuoto."
 
-#: includes/controller/Admin.php:646
+#: includes/controller/Admin.php:651
 msgid "Page created!"
 msgstr "Pagina creata!"
 
-#: includes/controller/Admin.php:646 includes/controller/Admin.php:770
-#: includes/controller/Admin.php:1820 includes/controller/Admin.php:3153
+#: includes/controller/Admin.php:652 includes/controller/Admin.php:779
+#: includes/controller/Admin.php:1835 includes/controller/Admin.php:3190
 msgid "View page &rarr;"
 msgstr "Visualizza la pagina &rarr;"
 
-#: includes/controller/Admin.php:659
+#: includes/controller/Admin.php:665
 msgid "You do not have sufficient privileges to edit this page."
 msgstr "Non si dispone di privilegi sufficienti per modificare questa pagina."
 
-#: includes/controller/Admin.php:665 includes/controller/Admin.php:722
+#: includes/controller/Admin.php:671 includes/controller/Admin.php:730
 msgid "An ID is required to edit a page."
 msgstr "Per modificare una pagina è necessario un ID."
 
-#: includes/controller/Admin.php:676 includes/controller/Admin.php:745
-#: includes/controller/Admin.php:797 includes/controller/Admin.php:839
+#: includes/controller/Admin.php:682 includes/controller/Admin.php:753
+#: includes/controller/Admin.php:806 includes/controller/Admin.php:848
 #: includes/controller/Ajax.php:117
 msgid "Page not found."
 msgstr "Pagina non trovata."
 
-#: includes/controller/Admin.php:707
+#: includes/controller/Admin.php:715
 msgid "You do not have sufficient privileges to edit pages."
 msgstr "Non si dispone di privilegi sufficienti per modificare le pagine."
 
-#: includes/controller/Admin.php:770
+#: includes/controller/Admin.php:778
 msgid "Page updated."
 msgstr "Pagina aggiornata."
 
-#: includes/controller/Admin.php:783 includes/controller/Admin.php:815
+#: includes/controller/Admin.php:792 includes/controller/Admin.php:824
 #: includes/controller/Ajax.php:96
 msgid "You do not have sufficient privileges to delete pages."
 msgstr "Non si dispone di privilegi sufficienti per eliminare le pagine."
 
-#: includes/controller/Admin.php:789 includes/controller/Admin.php:827
+#: includes/controller/Admin.php:798 includes/controller/Admin.php:836
 #: includes/controller/Ajax.php:108
 msgid "An ID is required to delete a page."
 msgstr "Per eliminare una pagina è necessario un ID."
 
-#: includes/controller/Admin.php:859 includes/controller/Ajax.php:121
+#: includes/controller/Admin.php:868 includes/controller/Ajax.php:121
 msgid "Page deleted."
 msgstr "Pagina eliminata."
 
-#: includes/controller/Admin.php:874
+#: includes/controller/Admin.php:883
 msgid "You do not have sufficient privileges to manage pages."
 msgstr "Non si dispone di privilegi sufficienti per gestire le pagine."
 
-#: includes/controller/Admin.php:914 includes/controller/Admin.php:942
+#: includes/controller/Admin.php:923 includes/controller/Admin.php:951
 msgid "You do not have sufficient privileges to add users."
 msgstr "Non si dispone di privilegi sufficienti per aggiungere utenti."
 
-#: includes/controller/Admin.php:954 includes/controller/Admin.php:1110
+#: includes/controller/Admin.php:963 includes/controller/Admin.php:1122
 msgid "Please enter a username for the account."
 msgstr "Inserisci un nome utente per l'account."
 
-#: includes/controller/Admin.php:963 includes/controller/Admin.php:1124
+#: includes/controller/Admin.php:972 includes/controller/Admin.php:1136
 #: includes/controller/Main.php:735
 msgid "That username is already in use."
 msgstr "Il nome utente è già in uso."
 
-#: includes/controller/Admin.php:970 includes/controller/Main.php:740
+#: includes/controller/Admin.php:979 includes/controller/Main.php:740
 #: includes/controller/Main.php:1120 install.php:649
 msgid "Passwords cannot be blank."
 msgstr "La casella della Password non puó essere vuota."
 
-#: includes/controller/Admin.php:977 includes/controller/Admin.php:1143
+#: includes/controller/Admin.php:986 includes/controller/Admin.php:1155
 #: includes/controller/Main.php:744 includes/controller/Main.php:959
 #: includes/controller/Main.php:1124 install.php:584 install.php:651
 msgid "Passwords do not match."
 msgstr "Le Password non corrispondono."
 
-#: includes/controller/Admin.php:983 includes/controller/Admin.php:1150
+#: includes/controller/Admin.php:992 includes/controller/Admin.php:1162
 msgid "Please consider setting a stronger password for this user."
 msgstr ""
 "Si prega di considerare l'impostazione di una password più sicura per questo "
 "utente."
 
-#: includes/controller/Admin.php:989 includes/controller/Admin.php:1161
-#: includes/controller/Admin.php:2898 includes/controller/Main.php:753
+#: includes/controller/Admin.php:998 includes/controller/Admin.php:1173
+#: includes/controller/Admin.php:2920 includes/controller/Main.php:753
 #: includes/controller/Main.php:972 install.php:654
 msgid "Email address cannot be blank."
 msgstr "La casella dell'indirizzo email non può essere vuota."
 
-#: includes/controller/Admin.php:996 includes/controller/Admin.php:1168
-#: includes/controller/Admin.php:2905 includes/controller/Main.php:757
+#: includes/controller/Admin.php:1005 includes/controller/Admin.php:1180
+#: includes/controller/Admin.php:2927 includes/controller/Main.php:757
 #: includes/controller/Main.php:976 install.php:656
 msgid "Invalid email address."
 msgstr "Indirizzo email non valido."
 
-#: includes/controller/Admin.php:1003 includes/controller/Admin.php:1175
+#: includes/controller/Admin.php:1012 includes/controller/Admin.php:1187
 #: includes/controller/Main.php:767 includes/controller/Main.php:981
 msgid "Invalid website URL."
 msgstr "URL del sito web non valido."
 
-#: includes/controller/Admin.php:1021 includes/controller/Admin.php:1191
-#: includes/controller/Admin.php:1474 includes/controller/Admin.php:1539
-#: includes/controller/Admin.php:1576 includes/controller/Admin.php:1631
+#: includes/controller/Admin.php:1030 includes/controller/Admin.php:1203
+#: includes/controller/Admin.php:1489 includes/controller/Admin.php:1554
+#: includes/controller/Admin.php:1591 includes/controller/Admin.php:1646
 msgid "Group not found."
 msgstr "Gruppo non trovato."
 
-#: includes/controller/Admin.php:1038
+#: includes/controller/Admin.php:1050
 msgid "User added."
 msgstr "Utente aggiunto."
 
-#: includes/controller/Admin.php:1051 includes/controller/Admin.php:1104
+#: includes/controller/Admin.php:1063 includes/controller/Admin.php:1116
 msgid "You do not have sufficient privileges to edit users."
 msgstr "Non si dispone di privilegi sufficienti per modificare gli utenti."
 
-#: includes/controller/Admin.php:1057 includes/controller/Admin.php:1094
+#: includes/controller/Admin.php:1069 includes/controller/Admin.php:1106
 msgid "An ID is required to edit a user."
 msgstr "Per modificare un utente è necessario un ID."
 
-#: includes/controller/Admin.php:1065 includes/controller/Admin.php:1133
-#: includes/controller/Admin.php:1235 includes/controller/Admin.php:1285
+#: includes/controller/Admin.php:1077 includes/controller/Admin.php:1145
+#: includes/controller/Admin.php:1250 includes/controller/Admin.php:1300
 #: includes/controller/Main.php:246
 msgid "User not found."
 msgstr "Utente non trovato."
 
-#: includes/controller/Admin.php:1208
+#: includes/controller/Admin.php:1223
 msgid "User updated."
 msgstr "Utente aggiornato."
 
-#: includes/controller/Admin.php:1221 includes/controller/Admin.php:1261
+#: includes/controller/Admin.php:1236 includes/controller/Admin.php:1276
 msgid "You do not have sufficient privileges to delete users."
 msgstr "Non si dispone di privilegi sufficienti per eliminare gli utenti."
 
-#: includes/controller/Admin.php:1227 includes/controller/Admin.php:1273
+#: includes/controller/Admin.php:1242 includes/controller/Admin.php:1288
 msgid "An ID is required to delete a user."
 msgstr "È necessario un ID per eliminare un utente."
 
-#: includes/controller/Admin.php:1241
+#: includes/controller/Admin.php:1256
 msgid "You cannot delete your own account."
 msgstr "Non è possibile eliminare il proprio account."
 
-#: includes/controller/Admin.php:1296 includes/controller/Admin.php:1318
-#: includes/controller/Admin.php:1641 includes/controller/Admin.php:1666
-#: includes/controller/Admin.php:1687 includes/controller/Admin.php:3066
-#: includes/controller/Admin.php:3075
+#: includes/controller/Admin.php:1311 includes/controller/Admin.php:1333
+#: includes/controller/Admin.php:1656 includes/controller/Admin.php:1681
+#: includes/controller/Admin.php:1702 includes/controller/Admin.php:3093
+#: includes/controller/Admin.php:3102
 msgid "Gone"
 msgstr "Gone"
 
-#: includes/controller/Admin.php:1297
+#: includes/controller/Admin.php:1312
 msgid "New owner for posts does not exist."
 msgstr "Il nuovo proprietario per i post non esiste."
 
-#: includes/controller/Admin.php:1319
+#: includes/controller/Admin.php:1334
 msgid "New owner for pages does not exist."
 msgstr "Il nuovo proprietario per le pagine non esiste."
 
-#: includes/controller/Admin.php:1337
+#: includes/controller/Admin.php:1352
 msgid "User deleted."
 msgstr "Conto utente eliminato."
 
-#: includes/controller/Admin.php:1352
+#: includes/controller/Admin.php:1367
 msgid "You do not have sufficient privileges to manage users."
 msgstr "Non si dispone di privilegi sufficienti per gestire gli utenti."
 
-#: includes/controller/Admin.php:1395 includes/controller/Admin.php:1412
+#: includes/controller/Admin.php:1410 includes/controller/Admin.php:1427
 msgid "You do not have sufficient privileges to add groups."
 msgstr "Non si dispone di privilegi sufficienti per aggiungere gruppi."
 
-#: includes/controller/Admin.php:1424 includes/controller/Admin.php:1514
+#: includes/controller/Admin.php:1439 includes/controller/Admin.php:1529
 msgid "Please enter a name for the group."
 msgstr "Si prega di inserire un nome per il gruppo."
 
-#: includes/controller/Admin.php:1437 includes/controller/Admin.php:1530
+#: includes/controller/Admin.php:1452 includes/controller/Admin.php:1545
 msgid "That group name is already in use."
 msgstr "Il nome del gruppo è già in uso."
 
-#: includes/controller/Admin.php:1447
+#: includes/controller/Admin.php:1462
 msgid "Group added."
 msgstr "Gruppo aggiunto."
 
-#: includes/controller/Admin.php:1460 includes/controller/Admin.php:1495
+#: includes/controller/Admin.php:1475 includes/controller/Admin.php:1510
 msgid "You do not have sufficient privileges to edit groups."
 msgstr "Non si dispone di privilegi sufficienti per modificare gruppi."
 
-#: includes/controller/Admin.php:1466 includes/controller/Admin.php:1507
+#: includes/controller/Admin.php:1481 includes/controller/Admin.php:1522
 msgid "An ID is required to edit a group."
 msgstr "Per modificare un gruppo è necessario un ID."
 
-#: includes/controller/Admin.php:1548
+#: includes/controller/Admin.php:1563
 msgid "Group updated."
 msgstr "Gruppo aggiornato."
 
-#: includes/controller/Admin.php:1561 includes/controller/Admin.php:1607
+#: includes/controller/Admin.php:1576 includes/controller/Admin.php:1622
 msgid "You do not have sufficient privileges to delete groups."
 msgstr "Non si dispone di privilegi sufficienti per eliminare gruppi."
 
-#: includes/controller/Admin.php:1567 includes/controller/Admin.php:1619
+#: includes/controller/Admin.php:1582 includes/controller/Admin.php:1634
 msgid "An ID is required to delete a group."
 msgstr "È necessario un ID per eliminare un gruppo."
 
-#: includes/controller/Admin.php:1581
+#: includes/controller/Admin.php:1596
 msgid "You cannot delete your own group."
 msgstr "Non è possibile eliminare il proprio gruppo."
 
-#: includes/controller/Admin.php:1642
+#: includes/controller/Admin.php:1657
 msgid "New member group does not exist."
 msgstr "Il nuovo gruppo per gli utenti selezionati non esiste."
 
-#: includes/controller/Admin.php:1652
+#: includes/controller/Admin.php:1667
 msgid "New member group must be specified."
 msgstr "È necessario specificare un nuovo gruppo per gli utenti selezionati."
 
-#: includes/controller/Admin.php:1667 includes/controller/Admin.php:3067
+#: includes/controller/Admin.php:1682 includes/controller/Admin.php:3094
 msgid "New default group does not exist."
 msgstr "Nuovo gruppo predefinito non esiste."
 
-#: includes/controller/Admin.php:1675
+#: includes/controller/Admin.php:1690
 msgid "New default group must be specified."
 msgstr "È necessario specificare un nuovo gruppo predefinito."
 
-#: includes/controller/Admin.php:1688 includes/controller/Admin.php:3076
+#: includes/controller/Admin.php:1703 includes/controller/Admin.php:3103
 msgid "New guest group does not exist."
 msgstr "Il nuovo gruppo Ospite non esiste."
 
-#: includes/controller/Admin.php:1696
+#: includes/controller/Admin.php:1711
 msgid "New guest group must be specified."
 msgstr "È necessario specificare un nuovo gruppo Ospite."
 
-#: includes/controller/Admin.php:1720
+#: includes/controller/Admin.php:1735
 msgid "Group deleted."
 msgstr "Gruppo eliminato."
 
-#: includes/controller/Admin.php:1735
+#: includes/controller/Admin.php:1750
 msgid "You do not have sufficient privileges to manage groups."
 msgstr "Non si dispone di privilegi sufficienti per gestire gruppi."
 
-#: includes/controller/Admin.php:1784 includes/controller/Admin.php:1837
+#: includes/controller/Admin.php:1799 includes/controller/Admin.php:1852
 msgid "You do not have sufficient privileges to delete uploads."
 msgstr "Non si dispone di privilegi sufficienti per eliminare i caricamenti."
 
-#: includes/controller/Admin.php:1793 includes/controller/Admin.php:1855
+#: includes/controller/Admin.php:1808 includes/controller/Admin.php:1870
 #: includes/download.php:30 includes/thumbnail.php:36
 msgid "File not found."
 msgstr "File non trovato."
 
-#: includes/controller/Admin.php:1811
+#: includes/controller/Admin.php:1826
 msgid "A post is using this upload."
 msgstr "Un post utilizza questo caricamento."
 
-#: includes/controller/Admin.php:1818
+#: includes/controller/Admin.php:1833
 msgid "A page is using this upload."
 msgstr "Una pagina utilizza questo caricamento."
 
-#: includes/controller/Admin.php:1861
+#: includes/controller/Admin.php:1876
 msgid "Failed to delete upload."
 msgstr "Impossibile eliminare il caricamento."
 
-#: includes/controller/Admin.php:1866
+#: includes/controller/Admin.php:1881
 msgid "Upload deleted."
 msgstr "Carica eliminato."
 
-#: includes/controller/Admin.php:1879 includes/controller/Ajax.php:276
+#: includes/controller/Admin.php:1894 includes/controller/Ajax.php:276
 msgid "You do not have sufficient privileges to manage uploads."
 msgstr "Non si dispone di privilegi sufficienti per gestire i caricamenti."
 
-#: includes/controller/Admin.php:1914
+#: includes/controller/Admin.php:1929
 msgid "You do not have sufficient privileges to export content."
 msgstr "Non si dispone di privilegi sufficienti per esportare il contenuto."
 
-#: includes/controller/Admin.php:2224
+#: includes/controller/Admin.php:2239
 msgid "You did not select anything to export."
 msgstr "Nessun oggetto selezionato da esportare."
 
-#: includes/controller/Admin.php:2247
+#: includes/controller/Admin.php:2267
 msgid "You do not have sufficient privileges to import content."
 msgstr "Non si dispone di privilegi sufficienti per importare contenuti."
 
-#: includes/controller/Admin.php:2266
+#: includes/controller/Admin.php:2286
 msgid "Posts export file is invalid."
 msgstr "Il file di esportazione dei post non è valido."
 
-#: includes/controller/Admin.php:2276
+#: includes/controller/Admin.php:2296
 msgid "Pages export file is invalid."
 msgstr "Il file di esportazione delle pagine non è valido."
 
-#: includes/controller/Admin.php:2289
+#: includes/controller/Admin.php:2309
 msgid "Groups export file is invalid."
 msgstr "File di esportazione dei gruppi non è valido."
 
-#: includes/controller/Admin.php:2302
+#: includes/controller/Admin.php:2322
 msgid "Users export file is invalid."
 msgstr "Il file di esportazione degli utenti non è valido."
 
-#: includes/controller/Admin.php:2330
+#: includes/controller/Admin.php:2350
 msgid "You did not select anything to import."
 msgstr "Nessun oggetto selezionato da importare."
 
-#: includes/controller/Admin.php:2470
+#: includes/controller/Admin.php:2494
 msgid "Chyrp Lite content successfully imported!"
 msgstr "Contenuto chyrp Lite importato con successo!"
 
-#: includes/controller/Admin.php:2483 includes/controller/Admin.php:2577
-#: includes/controller/Admin.php:2661 includes/controller/Admin.php:2730
+#: includes/controller/Admin.php:2507 includes/controller/Admin.php:2599
+#: includes/controller/Admin.php:2683 includes/controller/Admin.php:2752
 msgid "You do not have sufficient privileges to toggle extensions."
 msgstr ""
 "Non si dispone di privilegi sufficienti per attivare o disattivare le "
 "estensioni."
 
-#: includes/controller/Admin.php:2620 includes/controller/Admin.php:2793
-#: includes/controller/Admin.php:2836 includes/controller/Admin.php:2874
-#: includes/controller/Admin.php:2965 includes/controller/Admin.php:3041
-#: includes/controller/Admin.php:3106
+#: includes/controller/Admin.php:2642 includes/controller/Admin.php:2815
+#: includes/controller/Admin.php:2858 includes/controller/Admin.php:2896
+#: includes/controller/Admin.php:2990 includes/controller/Admin.php:3068
+#: includes/controller/Admin.php:3133
 msgid "You do not have sufficient privileges to change settings."
 msgstr ""
 "Non si dispone di privilegi sufficienti per modificare le impostazioni."
 
-#: includes/controller/Admin.php:2625
+#: includes/controller/Admin.php:2647
 msgid "You are currently previewing a theme."
 msgstr "Stai visualizzando un anteprima di tema."
 
-#: includes/controller/Admin.php:2626
+#: includes/controller/Admin.php:2648
 msgid "Stop &rarr;"
 msgstr "Stop &rarr;"
 
-#: includes/controller/Admin.php:2672 includes/controller/Admin.php:2741
+#: includes/controller/Admin.php:2694 includes/controller/Admin.php:2763
 msgid "No Extension Specified"
 msgstr "Nessuna estensione specificata"
 
-#: includes/controller/Admin.php:2673
+#: includes/controller/Admin.php:2695
 msgid "You did not specify an extension to enable."
 msgstr "Non è stata specificata un'estensione da abilitare."
 
-#: includes/controller/Admin.php:2686
+#: includes/controller/Admin.php:2708
 msgid "Extension already enabled."
 msgstr "Estensione già abilitata."
 
-#: includes/controller/Admin.php:2693 includes/controller/Admin.php:2762
+#: includes/controller/Admin.php:2715 includes/controller/Admin.php:2784
 msgid "Extension not found."
 msgstr "Estensione non trovata."
 
-#: includes/controller/Admin.php:2714
+#: includes/controller/Admin.php:2736
 msgid "Extension enabled."
 msgstr "Estensione abilitata."
 
-#: includes/controller/Admin.php:2742
+#: includes/controller/Admin.php:2764
 msgid "You did not specify an extension to disable."
 msgstr "Non è stata specificata un'estensione da disabilitare."
 
-#: includes/controller/Admin.php:2755
+#: includes/controller/Admin.php:2777
 msgid "Extension already disabled."
 msgstr "Estensione già disabilitata."
 
-#: includes/controller/Admin.php:2780
+#: includes/controller/Admin.php:2802
 msgid "Extension disabled."
 msgstr "Estensione disabilitata."
 
-#: includes/controller/Admin.php:2804
+#: includes/controller/Admin.php:2826
 msgid "No Theme Specified"
 msgstr "Nessun tema specificato"
 
-#: includes/controller/Admin.php:2805
+#: includes/controller/Admin.php:2827
 msgid "You did not specify which theme to select."
 msgstr "Non è stato specificato quale tema selezionare."
 
-#: includes/controller/Admin.php:2823
+#: includes/controller/Admin.php:2845
 msgid "Theme changed."
 msgstr "Il tema è stato cambiato."
 
-#: includes/controller/Admin.php:2846
+#: includes/controller/Admin.php:2868
 msgid "Preview stopped."
 msgstr "Anteprima interrotta."
 
-#: includes/controller/Admin.php:2861
+#: includes/controller/Admin.php:2883
 msgid "Preview started."
 msgstr "Anteprima avviata."
 
-#: includes/controller/Admin.php:2912 install.php:632
+#: includes/controller/Admin.php:2934 install.php:632
 msgid "Chyrp URL cannot be blank."
 msgstr "L'URL di Chyrp non può essere vuoto."
 
-#: includes/controller/Admin.php:2919 install.php:634
+#: includes/controller/Admin.php:2941 install.php:634
 msgid "Invalid Chyrp URL."
 msgstr "URL di Chyrp non valido."
 
-#: includes/controller/Admin.php:2926
+#: includes/controller/Admin.php:2948
 msgid "Invalid canonical URL."
 msgstr "URL canonico non valido."
 
-#: includes/controller/Admin.php:2952 includes/controller/Admin.php:3028
-#: includes/controller/Admin.php:3093 includes/controller/Admin.php:3168
+#: includes/controller/Admin.php:2977 includes/controller/Admin.php:3055
+#: includes/controller/Admin.php:3120 includes/controller/Admin.php:3205
 msgid "Settings updated."
 msgstr "Impostazioni aggiornate."
 
-#: includes/controller/Admin.php:3131 includes/helpers.php:2350
-#: includes/helpers.php:2399 includes/helpers.php:2537 upgrade.php:140
+#: includes/controller/Admin.php:3158 includes/helpers.php:2359
+#: includes/helpers.php:2408 includes/helpers.php:2546 upgrade.php:140
 #: upgrade.php:157 upgrade.php:174
 msgid "Failed to write file to disk."
 msgstr "Impossibile scrivere il file su disco."
 
-#: includes/controller/Admin.php:3143
+#: includes/controller/Admin.php:3165
+#, fuzzy
+#| msgid "Page created."
+msgid "Files created."
+msgstr "Pagina creata."
+
+#: includes/controller/Admin.php:3166
+msgid "Please read the documentation before enabling clean URLs."
+msgstr ""
+
+#: includes/controller/Admin.php:3180
 msgid "My Awesome Homepage"
 msgstr "La mia favolosa homepage"
 
-#: includes/controller/Admin.php:3144
+#: includes/controller/Admin.php:3181
 msgid "Nothing here yet!"
 msgstr "Non c'è ancora niente!"
 
-#: includes/controller/Admin.php:3152
+#: includes/controller/Admin.php:3189
 msgid "Page created."
 msgstr "Pagina creata."
 
-#: includes/controller/Admin.php:3180 includes/controller/Main.php:867
+#: includes/controller/Admin.php:3217 includes/controller/Main.php:867
 msgid "You are already logged in."
 msgstr "Hai già effettuato l’accesso."
 
-#: includes/controller/Admin.php:3204 includes/controller/Ajax.php:35
+#: includes/controller/Admin.php:3241 includes/controller/Ajax.php:35
 #: includes/controller/Ajax.php:252 includes/download.php:14
 #: includes/thumbnail.php:17
 msgid "Missing argument."
 msgstr "Argomento mancante."
 
-#: includes/controller/Admin.php:3213
+#: includes/controller/Admin.php:3250
 msgid "Help"
 msgstr "Aiuto"
 
-#: includes/controller/Admin.php:3228
+#: includes/controller/Admin.php:3267
 msgid "Write"
 msgstr "Scrivi"
 
-#: includes/controller/Admin.php:3231
+#: includes/controller/Admin.php:3272
 msgid "Manage"
 msgstr "Gestisci"
 
-#: includes/controller/Admin.php:3234
+#: includes/controller/Admin.php:3277
 msgid "Settings"
 msgstr "Impostazioni"
 
-#: includes/controller/Admin.php:3237
+#: includes/controller/Admin.php:3282
 msgid "Extend"
 msgstr "Estendi"
 
-#: includes/controller/Admin.php:3248
+#: includes/controller/Admin.php:3293
 msgid "Page"
 msgstr "Pagina"
 
-#: includes/controller/Admin.php:3283
+#: includes/controller/Admin.php:3333
 msgid "Posts"
 msgstr "Post"
 
-#: includes/controller/Admin.php:3292
+#: includes/controller/Admin.php:3342
 msgid "Pages"
 msgstr "Pagine"
 
-#: includes/controller/Admin.php:3301 includes/controller/Admin.php:3346
+#: includes/controller/Admin.php:3351 includes/controller/Admin.php:3398
 msgid "Users"
 msgstr "Utenti"
 
-#: includes/controller/Admin.php:3311
+#: includes/controller/Admin.php:3361
 msgid "Groups"
 msgstr "Gruppi"
 
-#: includes/controller/Admin.php:3320
+#: includes/controller/Admin.php:3370
 msgid "Uploads"
 msgstr "Caricamenti"
 
-#: includes/controller/Admin.php:3325
+#: includes/controller/Admin.php:3375
 msgid "Import"
 msgstr "Importa"
 
-#: includes/controller/Admin.php:3328
+#: includes/controller/Admin.php:3378
 msgid "Export"
 msgstr "Esporta"
 
-#: includes/controller/Admin.php:3344
+#: includes/controller/Admin.php:3396
 msgid "General"
 msgstr "Generale"
 
-#: includes/controller/Admin.php:3345
+#: includes/controller/Admin.php:3397
 msgid "Content"
 msgstr "Contenuto"
 
-#: includes/controller/Admin.php:3347
+#: includes/controller/Admin.php:3399
 msgid "Routes"
 msgstr "Percorso"
 
-#: includes/controller/Admin.php:3366
+#: includes/controller/Admin.php:3420
 msgid "Modules"
 msgstr "Moduli"
 
-#: includes/controller/Admin.php:3367
+#: includes/controller/Admin.php:3421
 msgid "Feathers"
 msgstr "Feather"
 
-#: includes/controller/Admin.php:3368
+#: includes/controller/Admin.php:3422
 msgid "Themes"
 msgstr "Temi"
 
@@ -1015,90 +1025,90 @@ msgstr "Non si dispone dell'autorizzazione per accedere a questa risorsa."
 msgid "The requested resource was not found."
 msgstr "La risorsa richiesta non è stata trovata."
 
-#: includes/helpers.php:1703 includes/helpers.php:1812
-#: includes/helpers.php:1945
+#: includes/helpers.php:1706 includes/helpers.php:1818
+#: includes/helpers.php:1954
 #, php-format
 msgid "Socket error: %s"
 msgstr "Errore socket: %s"
 
-#: includes/helpers.php:1854
+#: includes/helpers.php:1860
 msgid "Webmention support is disabled for this site."
 msgstr "Il supporto di Webmention è disabilitato per questo sito."
 
-#: includes/helpers.php:1861
+#: includes/helpers.php:1867
 msgid "The URL for your page is not valid."
 msgstr "L'URL della tua pagina non è valido."
 
-#: includes/helpers.php:1868
+#: includes/helpers.php:1874
 msgid "The URL for our page is not valid."
 msgstr "L'URL della nostra pagina non è valido."
 
-#: includes/helpers.php:1881
+#: includes/helpers.php:1887
 msgid "The source and target URLs cannot be the same."
 msgstr "Gli URL di origine e di destinazione non possono essere gli stessi."
 
-#: includes/helpers.php:1890
+#: includes/helpers.php:1896
 msgid "We have not published at that URL."
 msgstr "L'URL non è stato pubblicato sul nostro sito."
 
-#: includes/helpers.php:1900
+#: includes/helpers.php:1906
 msgid "You have not published at that URL."
 msgstr "L'URL non è stato pubblicato."
 
-#: includes/helpers.php:1907
+#: includes/helpers.php:1913
 msgid "Your page does not link to our page."
 msgstr "La tua pagina non si collega alla nostra pagina."
 
-#: includes/helpers.php:2153
+#: includes/helpers.php:2162
 msgid "Please create the uploads directory."
 msgstr "Si prega di creare la directory per il caricamento dati."
 
-#: includes/helpers.php:2155
+#: includes/helpers.php:2164
 msgid "Please make the uploads directory writable."
 msgstr "Si prega di rendere la directory per il caricamento dati scrivibile."
 
-#: includes/helpers.php:2173
+#: includes/helpers.php:2182
 #, php-format
 msgid "%s module is missing."
 msgstr "Modulo %s mancante."
 
-#: includes/helpers.php:2182
+#: includes/helpers.php:2191
 #, php-format
 msgid "%s module is damaged."
 msgstr "Il modulo %s è danneggiato."
 
-#: includes/helpers.php:2196
+#: includes/helpers.php:2205
 #, php-format
 msgid "%s feather is missing."
 msgstr "%s Feather mancante."
 
-#: includes/helpers.php:2205
+#: includes/helpers.php:2214
 #, php-format
 msgid "%s feather is damaged."
 msgstr "Feather %s è danneggiata."
 
-#: includes/helpers.php:2273 includes/helpers.php:2295
+#: includes/helpers.php:2282 includes/helpers.php:2304
 #, php-format
 msgid "Execution of %s has been cancelled."
 msgstr "L'esecuzione di %s è stata annullata."
 
-#: includes/helpers.php:2326
+#: includes/helpers.php:2335
 msgid "Uploaded file is of an unsupported type."
 msgstr "Il file caricato è di tipo non supportato."
 
-#: includes/helpers.php:2332
+#: includes/helpers.php:2341
 msgid "Only uploaded files are accepted."
 msgstr "Vengono accettati solo file giá caricati."
 
-#: includes/helpers.php:2338 includes/helpers.php:2387
+#: includes/helpers.php:2347 includes/helpers.php:2396
 msgid "Upload path does not exist."
 msgstr "Il percorso di caricamento non esiste."
 
-#: includes/helpers.php:2344 includes/helpers.php:2393
+#: includes/helpers.php:2353 includes/helpers.php:2402
 msgid "Upload path is not writable."
 msgstr "Il percorso di caricamento non è scrivibile."
 
-#: includes/helpers.php:2514
+#: includes/helpers.php:2523
 msgid ""
 "The uploaded file exceeds the <code>upload_max_filesize</code> directive in "
 "php.ini."
@@ -1106,7 +1116,7 @@ msgstr ""
 "Il file caricato supera la <code>upload_max_filesize</code> direttiva in php."
 "ini."
 
-#: includes/helpers.php:2520
+#: includes/helpers.php:2529
 msgid ""
 "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the "
 "HTML form."
@@ -1114,24 +1124,24 @@ msgstr ""
 "Il file caricato supera la direttiva <code>MAX_FILE_SIZE</code> nel modulo "
 "HTML."
 
-#: includes/helpers.php:2526
+#: includes/helpers.php:2535
 msgid "The uploaded file was only partially uploaded."
 msgstr "File caricato parzialmente."
 
-#: includes/helpers.php:2532
+#: includes/helpers.php:2541
 msgid "Missing a temporary folder."
 msgstr "Manca una cartella temporanea."
 
-#: includes/helpers.php:2542
+#: includes/helpers.php:2551
 msgid "File upload was stopped by a PHP extension."
 msgstr "Il caricamento dei file è stato interrotto da un'estensione PHP."
 
-#: includes/helpers.php:2547
+#: includes/helpers.php:2556
 #, php-format
 msgid "File upload failed with error %d."
 msgstr "Caricamento file non riuscito con errore %d."
 
-#: includes/helpers.php:2554
+#: includes/helpers.php:2563
 #, php-format
 msgid ""
 "The uploaded file exceeds the maximum size of %d Megabytes allowed by this "
@@ -1140,49 +1150,49 @@ msgstr ""
 "Il file caricato supera la dimensione massima di %d megabyte consentiti da "
 "questo sito."
 
-#: includes/helpers.php:2867
+#: includes/helpers.php:2905
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr "Errore di codifica JSON: %s"
 
-#: includes/helpers.php:2892
+#: includes/helpers.php:2930
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr "Errore di decodifica JSON: %s"
 
-#: includes/helpers.php:2974
+#: includes/helpers.php:3012
 msgid "Failed to create Zip archive."
 msgstr "Impossibile creare l'archivio Zip."
 
-#: includes/helpers.php:3076
+#: includes/helpers.php:3114
 #, php-format
 msgid "Activate your account at %s"
 msgstr "Attiva il tuo account %s"
 
-#: includes/helpers.php:3077 includes/helpers.php:3112
+#: includes/helpers.php:3115 includes/helpers.php:3150
 #, php-format
 msgid "Hello, %s."
 msgstr "Ciao, %s."
 
-#: includes/helpers.php:3080
+#: includes/helpers.php:3118
 msgid "You are receiving this message because you registered a new account."
 msgstr "Si riceve questo messaggio perché è stato registrato un nuovo account."
 
-#: includes/helpers.php:3083
+#: includes/helpers.php:3121
 msgid "Visit this link to activate your account:"
 msgstr "Visita questo link per attivare il tuo account:"
 
-#: includes/helpers.php:3111
+#: includes/helpers.php:3149
 #, php-format
 msgid "Reset your password at %s"
 msgstr "Reimpostare la password per %s"
 
-#: includes/helpers.php:3115
+#: includes/helpers.php:3153
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 "Si riceve questo messaggio perché è stata richiesta una nuova password."
 
-#: includes/helpers.php:3118
+#: includes/helpers.php:3156
 msgid "Visit this link to reset your password:"
 msgstr "Visita questo link per reimpostare la password:"
 
@@ -1205,12 +1215,12 @@ msgstr "%s MB"
 msgid "%s KB"
 msgstr "%s KB"
 
-#: includes/lib/Leaf.php:603
+#: includes/lib/Leaf.php:606
 msgid "Image source"
 msgstr "Fonte immagine"
 
-#: includes/lib/ThumbnailFile.php:245 includes/lib/ThumbnailFile.php:276
-#: includes/lib/ThumbnailFile.php:336
+#: includes/lib/ThumbnailFile.php:289 includes/lib/ThumbnailFile.php:320
+#: includes/lib/ThumbnailFile.php:380
 msgid "Failed to create image thumbnail."
 msgstr "Impossibile creare l'immagine in forato ridotto."
 

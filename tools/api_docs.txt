@@ -1568,8 +1568,11 @@ Parameters:
     $title - The title for the page.
 
 Notes:
-    $template is supplied sans ".twig" and relative to /admin/ for core and extensions.
-    $title defaults to a camelization of the template filename, e.g. foo_bar -> Foo Bar.
+    $template is supplied sans ".twig" and relative to /admin/
+    for core and extensions.
+
+    $title defaults to a camelization of the template filename,
+    e.g. foo_bar -> Foo Bar.
 
 
 Function: current
@@ -2624,7 +2627,7 @@ Returns:
     Whether or not the string matches the criteria.
 
 Notes:
-    Recognises FQDN, IPv4 and IPv6 hosts.
+    Recognises FQDN, IPv4 and IPv6.
 
 See Also:
     <add_scheme>
@@ -2645,6 +2648,20 @@ See Also:
     <is_url>
 
 
+Function: is_ip_address
+-----------------------
+Does the string look like an IP address?
+
+Parameters:
+    $string - The string to analyse.
+
+Notes:
+    Recognises IPv4 and IPv6.
+
+Returns:
+    Whether or not the string matches the criteria.
+
+
 Function: is_email
 ------------------
 Does the string look like an email address?
@@ -2653,7 +2670,7 @@ Parameters:
     $string - The string to analyse.
 
 Notes:
-    Recognises FQDN, IPv4 and IPv6 hosts.
+    Recognises FQDN, IPv4 and IPv6.
 
 Returns:
     Whether or not the string matches the criteria.

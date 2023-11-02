@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/migrator/admin/pages/manage_migration.twig:10
@@ -84,13 +84,13 @@ msgstr ""
 msgid "Migration"
 msgstr "Migrazione"
 
-#: modules/migrator/migrator.php:33 modules/migrator/migrator.php:254
-#: modules/migrator/migrator.php:455 modules/migrator/migrator.php:621
+#: modules/migrator/migrator.php:33 modules/migrator/migrator.php:253
+#: modules/migrator/migrator.php:436 modules/migrator/migrator.php:602
 msgid "You do not have sufficient privileges to import content."
 msgstr "Non si dispone di privilegi sufficienti per importare contenuti."
 
-#: modules/migrator/migrator.php:47 modules/migrator/migrator.php:273
-#: modules/migrator/migrator.php:469 modules/migrator/migrator.php:635
+#: modules/migrator/migrator.php:47 modules/migrator/migrator.php:272
+#: modules/migrator/migrator.php:450 modules/migrator/migrator.php:616
 msgid "Missing Feather"
 msgstr "Feather mancante"
 
@@ -103,79 +103,79 @@ msgstr ""
 msgid "You must select a WordPress export file."
 msgstr "È necessario selezionare un file di esportazione WordPress."
 
-#: modules/migrator/migrator.php:131
+#: modules/migrator/migrator.php:130
 msgid "The file does not seem to be a valid WordPress export file."
 msgstr "Il file non sembra essere un file di esportazione WordPress valido."
 
-#: modules/migrator/migrator.php:238
+#: modules/migrator/migrator.php:237
 msgid "WordPress content successfully imported!"
 msgstr "Contenuti WordPress importati con successo!"
 
-#: modules/migrator/migrator.php:274
+#: modules/migrator/migrator.php:273
 msgid ""
 "Text, Photo, Quote, and Link feathers must be enabled to import from Tumblr."
 msgstr ""
 "La Feather di Testo, Foto, Citazione e Link devono essere abilitate per "
 "l'importazione da Tumblr."
 
-#: modules/migrator/migrator.php:281
+#: modules/migrator/migrator.php:280
 msgid "Invalid URL."
 msgstr "URL non valido."
 
-#: modules/migrator/migrator.php:308
+#: modules/migrator/migrator.php:301 modules/migrator/migrator.php:312
 msgid "Could not retrieve content from the Tumblr URL."
 msgstr "Impossibile recuperare il contenuto dall'URL di Tumblr."
 
-#: modules/migrator/migrator.php:439
+#: modules/migrator/migrator.php:420
 msgid "Tumblr content successfully imported!"
 msgstr "Contenuti Tumblr importati con successo!"
 
-#: modules/migrator/migrator.php:470
+#: modules/migrator/migrator.php:451
 msgid "Text feather must be enabled to import from TextPattern."
 msgstr ""
 "La Feather di Testo deve essere abilitata per l'importazione da TextPattern."
 
-#: modules/migrator/migrator.php:477 modules/migrator/migrator.php:643
+#: modules/migrator/migrator.php:458 modules/migrator/migrator.php:624
 msgid "MySQLi is required for database migration."
 msgstr "MySQLi è necessario per la migrazione del database."
 
-#: modules/migrator/migrator.php:484 modules/migrator/migrator.php:650
+#: modules/migrator/migrator.php:465 modules/migrator/migrator.php:631
 msgid "Host cannot be empty."
 msgstr "L'Host non può essere vuoto."
 
-#: modules/migrator/migrator.php:491 modules/migrator/migrator.php:657
+#: modules/migrator/migrator.php:472 modules/migrator/migrator.php:638
 msgid "Username cannot be empty."
 msgstr "Il nome utente non può essere vuoto."
 
-#: modules/migrator/migrator.php:498 modules/migrator/migrator.php:664
+#: modules/migrator/migrator.php:479 modules/migrator/migrator.php:645
 msgid "Password cannot be empty."
 msgstr "Inserire la password."
 
-#: modules/migrator/migrator.php:505 modules/migrator/migrator.php:671
+#: modules/migrator/migrator.php:486 modules/migrator/migrator.php:652
 msgid "Database cannot be empty."
 msgstr "Il database non può essere vuoto."
 
-#: modules/migrator/migrator.php:524
+#: modules/migrator/migrator.php:505
 msgid "Could not connect to the TextPattern database."
 msgstr "Impossibile connettersi al database TextPattern."
 
-#: modules/migrator/migrator.php:539 modules/migrator/migrator.php:702
+#: modules/migrator/migrator.php:520 modules/migrator/migrator.php:683
 msgid "Database Error"
 msgstr "Errore di database"
 
-#: modules/migrator/migrator.php:605
+#: modules/migrator/migrator.php:586
 msgid "TextPattern content successfully imported!"
 msgstr "Contenuto TextPattern importato con successo!"
 
-#: modules/migrator/migrator.php:636
+#: modules/migrator/migrator.php:617
 msgid "Text feather must be enabled to import from MovableType."
 msgstr ""
 "La Feather di Testo deve essere abilitata per l'importazione da MovableType."
 
-#: modules/migrator/migrator.php:690
+#: modules/migrator/migrator.php:671
 msgid "Could not connect to the MovableType database."
 msgstr "Impossibile connettersi al database MovableType."
 
-#: modules/migrator/migrator.php:796
+#: modules/migrator/migrator.php:785
 msgid "MovableType content successfully imported!"
 msgstr "Il contenuto di MovableType è stato importato con successo!"
