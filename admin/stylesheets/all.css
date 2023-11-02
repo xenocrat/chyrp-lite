@@ -1228,10 +1228,6 @@ input.toolbar.hidden {
     #sub_nav li a {
         border-color: #ffffff;
     }
-    #sub_nav li a:link,
-    #sub_nav li a:visited {
-        background-color: #afafaf;
-    }
     #sub_nav li.selected a:link,
     #sub_nav li.selected a:visited,
     #sub_nav li a:hover,
@@ -1250,23 +1246,14 @@ input.toolbar.hidden {
         border-color: #afafaf;
     }
     pre {
-        background-color: #cfcfcf;
+        background-color: #dfdfdf;
     }
     code {
-        background-color: #cfcfcf;
+        background-color: #dfdfdf;
         border-color: #afafaf;
     }
     #content ul.extend > li {
-        background-color: #cfcfcf;
-        border-color: #afafaf;
-    }
-    #content ul#modules_enabled > li,
-    #content ul#feathers_enabled > li,
-    #content ul.themes > li.current {
-        border-color: #afafaf;
-    }
-    #content ul#modules_enabled > li.error,
-    #content ul#modules_disabled > li.error  {
+        background-color: #dfdfdf;
         border-color: #afafaf;
     }
     li.module div.controls,
@@ -1286,7 +1273,7 @@ input.toolbar.hidden {
     input[type="range"],
     input[type="password"],
     input[type="file"] {
-        background-color: #cfcfcf;
+        background-color: #dfdfdf;
         border-color: #afafaf;
     }
     input::placeholder {
@@ -1295,15 +1282,11 @@ input.toolbar.hidden {
     input:invalid {
         border-color: #ff7f00;
     }
-    table th {
-        background-color: #afafaf;
-        border-color: #656565;
-    }
     table tbody tr td {
         border-color: #afafaf;
     }
     table tbody tr:nth-child(even) td {
-        background-color: #ebebeb;
+        background-color: #dfdfdf;
     }
     span.options_toolbar {
         background-color: #ebebeb;
@@ -1326,7 +1309,7 @@ input.toolbar.hidden {
         background-color: rgba(175, 175, 175, 0.75);
     }
     .iframe_foreground {
-        background-color: #dfdfdf;
+        background-color: #ebebeb;
     }
     @media screen and (max-width: 960px) {
         input.text + a.help.emblem {

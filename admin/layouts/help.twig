@@ -226,20 +226,22 @@ table {
     overflow-x: scroll;
 }
 table th {
-    background-color: #4f4f4f;
-    color: #ffffff;
+    background-color: #dfdfdf;
     padding: 0.5rem;
     font: inherit;
     font-weight: 600;
     text-align: center;
     vertical-align: middle;
-    border: 1px solid #cfcfcf;
+    border: 1px solid #afafaf;
 }
 table td {
     padding: 0.5rem;
     font: inherit;
     vertical-align: middle;
     border: 1px solid #cfcfcf;
+}
+table tbody tr:nth-child(even) td {
+    background-color: #fbfbfb;
 }
 table tbody tr td.emblem {
     text-align: center;
@@ -281,7 +283,7 @@ a.emblem > img {
 }
 @media (prefers-color-scheme: dark) {
     body {
-        background-color: #dfdfdf;
+        background-color: #ebebeb;
     }
     hr {
         border-color: #afafaf;
@@ -290,14 +292,17 @@ a.emblem > img {
         border-color: #afafaf;
     }
     pre {
-        background-color: #cfcfcf;
+        background-color: #dfdfdf;
     }
     code {
-        background-color: #cfcfcf;
+        background-color: #dfdfdf;
         border-color: #afafaf;
     }
     table tbody tr td {
         border-color: #afafaf;
+    }
+    table tbody tr:nth-child(even) td {
+        background-color: #dfdfdf;
     }
 }
 </style>
