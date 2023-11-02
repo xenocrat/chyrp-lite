@@ -417,7 +417,7 @@
                 }
                 .window {
                     color: #1f1f23;
-                    background-color: #dfdfdf;
+                    background-color: #ebebeb;
                 }
                 hr {
                     border-color: #afafaf;
@@ -426,10 +426,10 @@
                     border-color: #afafaf;
                 }
                 pre {
-                    background-color: #cfcfcf;
+                    background-color: #dfdfdf;
                 }
                 code {
-                    background-color: #cfcfcf;
+                    background-color: #dfdfdf;
                     border-color: #afafaf;
                 }
             }
