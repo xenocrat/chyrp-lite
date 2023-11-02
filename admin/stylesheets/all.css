@@ -261,7 +261,7 @@ a:active {
     gap: 4px;
     margin: 4rem 4rem 0rem 4rem;
     overflow: hidden;
-    border-bottom: 1px solid #cfcfcf;
+    border-bottom: 1px solid #afafaf;
 }
 #sub_nav li {
     display: block;
@@ -605,13 +605,12 @@ table {
     width: 100%;
 }
 table th {
-    background-color: #656565;
-    color: #ffffff;
+    background-color: #dfdfdf;
     padding: 0.5rem;
     font: inherit;
     font-weight: 600;
     vertical-align: middle;
-    border: 1px solid #1f1f23;
+    border: 1px solid #afafaf;
 }
 table td {
     padding: 0.5rem;
@@ -1224,7 +1223,7 @@ input.toolbar.hidden {
         background-color: #1f1f23;
     }
     #sub_nav {
-        border-bottom-color: #afafaf;
+        border-bottom-color: #ffffff;
     }
     #sub_nav li a {
         border-color: #ffffff;
@@ -1237,11 +1236,11 @@ input.toolbar.hidden {
     #sub_nav li.selected a:visited,
     #sub_nav li a:hover,
     #sub_nav li a:focus {
-        background-color: #dfdfdf;
+        background-color: #ebebeb;
     }
     #content {
         color: #1f1f23;
-        background-color: #dfdfdf;
+        background-color: #ebebeb;
         border-color: #ffffff;
     }
     hr {
@@ -1285,12 +1284,20 @@ input.toolbar.hidden {
     input[type="time"],
     input[type="number"],
     input[type="range"],
-    input[type="password"] {
+    input[type="password"],
+    input[type="file"] {
         background-color: #cfcfcf;
         border-color: #afafaf;
     }
     input::placeholder {
         color: #aaaaaa;
+    }
+    input:invalid {
+        border-color: #ff7f00;
+    }
+    table th {
+        background-color: #afafaf;
+        border-color: #656565;
     }
     table tbody tr td {
         border-color: #afafaf;
