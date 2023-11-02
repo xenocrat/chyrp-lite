@@ -136,10 +136,10 @@
                 $wordpress = $post->children(
                     "http://wordpress.org/export/1.2/"
                 );
-                $content   = $post->children(
+                $content = $post->children(
                     "http://purl.org/rss/1.0/modules/content/"
                 );
-                $encoded   = $content->encoded;
+                $encoded = $content->encoded;
 
                 if (
                     $wordpress->post_type == "attachment" or
@@ -290,75 +290,36 @@
                 set_time_limit(600);
 
             $url = rtrim($_POST['tumblr_url'], "/")."/api/read?num=50";
-            $get = get_remote($url);
+            $posts = array();
+            $already_in = array();
 
-            if ($get === false)
-                Flash::warning(
-                    __("Could not retrieve content from the Tumblr URL.", "migrator"),
-                    "manage_migration"
-                );
+            do {
+                $api = get_remote($url."&start=".count($posts));
 
-            $api = preg_replace(
-                "/<(\/?)([a-z]+)\-([a-z]+)/",
-                "<\\1\\2_\\3",
-                $get
-            );
-            $api = preg_replace(
-                "/ ([a-z]+)\-([a-z]+)=/",
-                " \\1_\\2=",
-                $api
-            );
-            $xml = @simplexml_load_string($api);
-
-            if ($xml === false or !isset($xml->tumblelog))
-                Flash::warning(
-                    __("Could not retrieve content from the Tumblr URL.", "migrator"),
-                    "manage_migration"
-                );
-
-            $already_in = $posts = array();
-
-            foreach ($xml->posts->post as $post) {
-                $posts[] = $post;
-                $already_in[] = $post->attributes()->id;
-            }
-
-            while ($xml->posts->attributes()->total > count($posts)) {
-                $get = get_remote($url."&start=".count($posts));
-
-                if ($get === false)
+                if ($api === false)
                     Flash::warning(
                         __("Could not retrieve content from the Tumblr URL.", "migrator"),
                         "manage_migration"
                     );
 
-                $api = preg_replace(
-                    "/<(\/?)([a-z]+)\-([a-z]+)/",
-                    "<\\1\\2_\\3",
-                    $get
-                );
-                $api = preg_replace(
-                    "/ ([a-z]+)\-([a-z]+)=/",
-                    " \\1_\\2=",
-                    $api
-                );
                 $xml = @simplexml_load_string(
                     data:$api,
                     options:LIBXML_NOCDATA
                 );
 
-                if ($xml === false)
+                if ($xml === false or !isset($xml->tumblelog))
                     Flash::warning(
                         __("Could not retrieve content from the Tumblr URL.", "migrator"),
                         "manage_migration"
                     );
 
-                foreach ($xml->posts->post as $post)
+                foreach ($xml->posts->post as $post) {
                     if (!in_array($post->attributes()->id, $already_in)) {
                         $posts[] = $post;
                         $already_in[] = $post->attributes()->id;
                     }
-            }
+                }
+            } while ($xml->posts->attributes()->total > count($posts));
 
             function reverse($a, $b): int {
                 if (empty($a) or empty($b))
@@ -377,19 +338,19 @@
                 switch($post->attributes()->type) {
                     case "regular":
                         $feather = "text";
-                        $title = fallback($post->regular_title);
+                        $title = fallback($post->{'regular-title'});
                         $values = array(
                             "title" => $title,
-                            "body" => $post->regular_body
+                            "body" => $post->{'regular-body'}
                         );
                         $clean = sanitize($title, true, true, 80);
                         break;
                     case "conversation":
                         $feather = "text";
-                        $title = fallback($post->conversation_title);
+                        $title = fallback($post->{'conversation-title'});
                         $lines = array();
 
-                        foreach ($post->conversation_line as $line)
+                        foreach ($post->{'conversation-line'} as $line)
                             $lines[] = $line->attributes()->label." ".$line;
 
                         $values = array(
@@ -401,30 +362,30 @@
                     case "photo":
                         $feather = "photo";
                         $values = array(
-                            "filename" => upload_from_url($post->photo_url[0]),
-                            "caption" => fallback($post->photo_caption)
+                            "filename" => upload_from_url($post->{'photo-url'}[0]),
+                            "caption" => fallback($post->{'photo-caption'})
                         );
-                        $clean = sanitize($post->photo_caption, true, true, 80);
+                        $clean = sanitize($post->{'photo-caption'}, true, true, 80);
                         break;
                     case "quote":
                         $feather = "quote";
                         $values = array(
-                            "quote" => $post->quote_text,
+                            "quote" => $post->{'quote-text'},
                             "source" => preg_replace(
                                 "/^&mdash; /",
                                 "",
-                                fallback($post->quote_source)
+                                fallback($post->{'quote-source'})
                             )
                         );
-                        $clean = sanitize($post->quote_source, true, true, 80);
+                        $clean = sanitize($post->{'quote-source'}, true, true, 80);
                         break;
                     case "link":
                         $feather = "link";
-                        $name = fallback($post->link_text);
+                        $name = fallback($post->{'link-text'});
                         $values = array(
                             "name" => $name,
-                            "source" => $post->link_url,
-                            "description" => fallback($post->link_description)
+                            "source" => $post->{'link-url'},
+                            "description" => fallback($post->{'link-description'})
                         );
                         $clean = sanitize($name, true, true, 80);
                         break;
@@ -447,7 +408,7 @@
                     null,
                     null,
                     "public",
-                    datetime((int) $post->attributes()->unix_timestamp),
+                    datetime((int) $post->attributes()->{'unix-timestamp'}),
                     null,
                     false
                 );
@@ -787,7 +748,11 @@
                         null,
                         false,
                         $status_translate[$post["entry_status"]],
-                        oneof($post["entry_authored_on"], $post["entry_created_on"], datetime()),
+                        oneof(
+                            $post["entry_authored_on"],
+                            $post["entry_created_on"],
+                            datetime()
+                        ),
                         $post["entry_modified_on"],
                         false
                     );
@@ -804,7 +769,11 @@
                         0,
                         $clean,
                         Page::check_url($clean),
-                        oneof($post["entry_authored_on"], $post["entry_created_on"], datetime()),
+                        oneof(
+                            $post["entry_authored_on"],
+                            $post["entry_created_on"],
+                            datetime()
+                        ),
                         $post["entry_modified_on"]
                     );
 
