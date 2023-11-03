@@ -47,15 +47,11 @@
             fallback($_POST['background'], "grey");
             fallback($_POST['spacing'], 24);
 
-            $spacing = ((int) $_POST['spacing'] < 0) ?
-            0 :
-            (int) $_POST['spacing'] ;
-
             Config::current()->set(
                 "module_lightbox",
                 array(
                     "background" => $_POST['background'],
-                    "spacing" => $spacing,
+                    "spacing" => abs((int) $_POST['spacing']),
                     "protect" => isset($_POST['protect'])
                 )
             );
