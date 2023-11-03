@@ -1232,11 +1232,11 @@ input.toolbar.hidden {
     #sub_nav li.selected a:visited,
     #sub_nav li a:hover,
     #sub_nav li a:focus {
-        background-color: #ebebeb;
+        background-color: #efefef;
     }
     #content {
         color: #1f1f23;
-        background-color: #ebebeb;
+        background-color: #efefef;
         border-color: #ffffff;
     }
     hr {
@@ -1289,11 +1289,11 @@ input.toolbar.hidden {
         background-color: #dfdfdf;
     }
     span.options_toolbar {
-        background-color: #ebebeb;
+        background-color: #efefef;
         border-color: #afafaf;
     }
     span.options_tray {
-        background-color: #ebebeb;
+        background-color: #efefef;
         border-color: #afafaf;
     }
     span.options_extra {
@@ -1306,10 +1306,22 @@ input.toolbar.hidden {
         border-color: #afafaf;
     }
     .iframe_background {
-        background-color: rgba(175, 175, 175, 0.75);
+        background-color: rgba(159, 159, 159, 0.75);
     }
     .iframe_foreground {
-        background-color: #ebebeb;
+        background-color: #efefef;
+    }
+    .ajax_loading {
+        background-image: linear-gradient(
+            -45deg,
+            #dfdfdf 25%,
+            transparent 25%,
+            transparent 50%,
+            #dfdfdf 50%,
+            #dfdfdf 75%,
+            transparent 75%,
+            transparent
+        ) !important;
     }
     @media screen and (max-width: 960px) {
         input.text + a.help.emblem {
