@@ -729,7 +729,7 @@
                     "notify_post_author" => isset($_POST['notify_post_author']),
                     "default_comment_status" => $_POST['default_comment_status'],
                     "allowed_comment_html" => $allowed_comment_html,
-                    "comments_per_page" => (int) $_POST['comments_per_page'],
+                    "comments_per_page" => abs((int) $_POST['comments_per_page']),
                     "enable_reload_comments" => isset($_POST['enable_reload_comments']),
                     "auto_reload_comments" => (int) $_POST['auto_reload_comments']
                 )

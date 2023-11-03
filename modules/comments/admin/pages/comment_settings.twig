@@ -32,7 +32,7 @@
 </p>
 <p>
 <label for="comments_per_page">{{ "Comments Per Page" | translate("comments") }}
-</label><input class="text digits" type="number" min="0" name="comments_per_page" value="{{ site.module_comments.comments_per_page | fix(true) }}" id="comments_per_page">
+</label><input class="text digits" type="number" min="1" name="comments_per_page" value="{{ site.module_comments.comments_per_page | fix(true) }}" id="comments_per_page">
 <small>{{ "Themes decide whether or not to paginate comments." | translate("comments") }}</small>
 </p>
 <p>
