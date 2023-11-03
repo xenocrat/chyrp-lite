@@ -8,15 +8,15 @@
 <fieldset role="presentation">
 <p>
 <label for="posts_per_page">{{ "Posts Per Blog Page" | translate }}
-</label><input class="text digits" type="number" min="0" name="posts_per_page" value="{{ site.posts_per_page | fix(true) }}" size="2" id="posts_per_page">
+</label><input class="text digits" type="number" min="1" name="posts_per_page" value="{{ site.posts_per_page | fix(true) }}" size="2" id="posts_per_page">
 </p>
 <p>
 <label for="feed_items">{{ "Posts in Feed" | translate }}
-</label><input class="text digits" type="number" min="0" name="feed_items" value="{{ site.feed_items | fix(true) }}" size="2" id="feed_items">
+</label><input class="text digits" type="number" min="1" name="feed_items" value="{{ site.feed_items | fix(true) }}" size="2" id="feed_items">
 </p>
 <p>
 <label for="admin_per_page">{{ "Items Per Admin Page" | translate }}
-</label><input class="text digits" type="number" min="0" name="admin_per_page" value="{{ site.admin_per_page | fix(true) }}" size="2" id="admin_per_page">
+</label><input class="text digits" type="number" min="1" name="admin_per_page" value="{{ site.admin_per_page | fix(true) }}" size="2" id="admin_per_page">
 </p>
 <p>
 <label for="uploads_path">{{ "Uploads Path" | translate }}
@@ -27,7 +27,7 @@
 </p>
 <p>
 <label for="uploads_limit">{{ "Upload Size Limit" | translate }}
-</label><input class="text digits" type="number" min="0" name="uploads_limit" value="{{ site.uploads_limit | fix(true) }}" size="3" id="uploads_limit">
+</label><input class="text digits" type="number" min="1" name="uploads_limit" value="{{ site.uploads_limit | fix(true) }}" size="3" id="uploads_limit">
 <span class="sub">{{ "(Megabytes)" | translate }}</span>
 </p>
 <p>
