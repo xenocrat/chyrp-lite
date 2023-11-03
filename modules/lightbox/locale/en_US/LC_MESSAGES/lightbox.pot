@@ -26,7 +26,7 @@ msgid "Prevent visitors from saving images?"
 msgstr ""
 
 #: modules/lightbox/info.php:3
-#: modules/lightbox/lightbox.php:72
+#: modules/lightbox/lightbox.php:68
 msgid "Lightbox"
 msgstr ""
 

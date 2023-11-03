@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/lightbox/admin/pages/lightbox_settings.twig:3
@@ -37,7 +37,7 @@ msgstr "Bescherm afbeeldingen"
 msgid "Prevent visitors from saving images?"
 msgstr "Bezoekers verhinderen om afbeeldingen te downloaden?"
 
-#: modules/lightbox/info.php:3 modules/lightbox/lightbox.php:72
+#: modules/lightbox/info.php:3 modules/lightbox/lightbox.php:68
 msgid "Lightbox"
 msgstr "Lightbox"
 

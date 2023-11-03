@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/lightbox/admin/pages/lightbox_settings.twig:3
@@ -38,7 +38,7 @@ msgstr "Proteggi immagini"
 msgid "Prevent visitors from saving images?"
 msgstr "Impedire ai visitatori di salvare le immagini?"
 
-#: modules/lightbox/info.php:3 modules/lightbox/lightbox.php:72
+#: modules/lightbox/info.php:3 modules/lightbox/lightbox.php:68
 msgid "Lightbox"
 msgstr "Tavolo luminoso"
 
