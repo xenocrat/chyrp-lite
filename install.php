@@ -524,7 +524,7 @@
                 }
                 .window {
                     color: #1f1f23;
-                    background-color: #ebebeb;
+                    background-color: #efefef;
                 }
                 hr {
                     border-color: #afafaf;
