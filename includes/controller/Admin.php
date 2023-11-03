@@ -3040,9 +3040,9 @@
             fallback($matches[3], DIR);
 
             $config = Config::current();
-            $config->set("posts_per_page", (int) $_POST['posts_per_page']);
-            $config->set("admin_per_page", (int) $_POST['admin_per_page']);
-            $config->set("feed_items", (int) $_POST['feed_items']);
+            $config->set("posts_per_page", abs((int) $_POST['posts_per_page']));
+            $config->set("admin_per_page", abs((int) $_POST['admin_per_page']));
+            $config->set("feed_items", abs((int) $_POST['feed_items']));
             $config->set("feed_format", $_POST['feed_format']);
             $config->set("uploads_path", $matches[1].$matches[2].$matches[3]);
             $config->set("uploads_limit", (int) $_POST['uploads_limit']);
