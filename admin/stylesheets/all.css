@@ -441,6 +441,20 @@ textarea {
 select, input {
     display: inline-block;
 }
+input[type="checkbox"] {
+    appearance: none;
+    box-sizing: border-box;
+    color: #1f1f23;
+    font: inherit;
+    font-size: 1.25rem;
+    position: relative;
+    top: 0.2em;
+    width: 1em;
+    height: 1em;
+    border-radius: 0em;
+    border: 1px solid #cfcfcf;
+    background-color: #ffffff;
+}
 select,
 textarea,
 input[type="text"],
@@ -469,8 +483,20 @@ input[type="file"] {
     font-size: 1.25rem;
     padding: 0.5rem;
     border-radius: 0em;
-    background-color: #ffffff;
     border: 1px solid #cfcfcf;
+    background-color: #ffffff;
+}
+select {
+    appearance: none;
+    padding-right: 1em;
+    background-image: url(../images/icons/selector.svg);
+    background-position: center right 0.1em;
+    background-repeat: no-repeat;
+}
+input[type="checkbox"]:checked {
+    background-image: url(../images/icons/checkbox.svg);
+    background-position: center;
+    background-repeat: no-repeat;
 }
 input::placeholder {
     color: #dddddd;
@@ -480,13 +506,9 @@ input:invalid,
 textarea:invalid {
     border-color: #ff7f00;
 }
-input[type="radio"]:focus,
-input[type="checkbox"]:focus {
-    outline: #ff7f00 dashed 2px;
-    outline-offset: 1px;
-}
 select:focus,
 textarea:focus,
+input[type="checkbox"]:focus,
 input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="url"]:focus,
@@ -502,6 +524,7 @@ input[type="file"]:focus {
     outline-offset: -2px;
 }
 textarea.error,
+input[type="checkbox"].error,
 input[type="text"].error,
 input[type="email"].error,
 input[type="url"].error,
@@ -515,6 +538,7 @@ input[type="file"].error {
     background-color: #faebe4;
 }
 textarea.error:focus,
+input[type="checkbox"].error:focus,
 input[type="text"].error:focus,
 input[type="email"].error:focus,
 input[type="url"].error:focus,
@@ -1265,6 +1289,7 @@ input.toolbar.hidden {
     }
     select,
     textarea,
+    input[type="checkbox"],
     input[type="text"],
     input[type="email"],
     input[type="url"],
