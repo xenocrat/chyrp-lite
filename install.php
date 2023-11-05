@@ -342,10 +342,11 @@
                 display: block;
                 font-weight: 600;
             }
+            textarea {
+                display: block;
+                resize: vertical;
+            }
             input, select {
-                font-family: inherit;
-                font-size: inherit;
-                font-weight: inherit;
                 display: inline-block;
             }
             input[type="text"],
@@ -353,7 +354,8 @@
             input[type="url"],
             input[type="number"],
             input[type="password"],
-            select {
+            select,
+            textarea {
                 box-sizing: border-box;
                 width: 100%;
                 margin: 0rem;
@@ -364,13 +366,17 @@
                 border: 1px solid #cfcfcf;
                 background-color: #ffffff;
             }
+            input:invalid,
+            textarea:invalid {
+                border-color: #ff7f00;
+            }
             input[type="text"]:focus,
             input[type="email"]:focus,
             input[type="url"]:focus,
             input[type="number"]:focus,
             input[type="password"]:focus,
-            textarea:focus,
-            select:focus {
+            select:focus,
+            textarea:focus {
                 border-color: #1e57ba;
                 outline: #1e57ba solid 2px;
                 outline-offset: -2px;
@@ -380,17 +386,14 @@
             input[type="url"].error,
             input[type="number"].error,
             input[type="password"].error,
-            input:invalid,
             textarea.error {
                 background-color: #faebe4;
-                box-shadow: none;
             }
             input[type="text"].error:focus,
             input[type="email"].error:focus,
             input[type="url"].error:focus,
             input[type="number"].error:focus,
             input[type="password"].error:focus,
-            input:invalid:focus,
             textarea.error:focus {
                 border: 1px solid #d51800;
                 outline-color: #d51800;
@@ -548,6 +551,9 @@
                 input[type="password"] {
                     background-color: #dfdfdf;
                     border-color: #afafaf;
+                }
+                input:invalid {
+                    border-color: #ff7f00;
                 }
             }
         </style>
