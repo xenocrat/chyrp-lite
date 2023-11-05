@@ -359,6 +359,7 @@
                 box-sizing: border-box;
                 width: 100%;
                 margin: 0rem;
+                color: #1f1f23;
                 font: inherit;
                 font-size: 1.25em;
                 padding: 0.5rem;
