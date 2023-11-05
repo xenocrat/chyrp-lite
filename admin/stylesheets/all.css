@@ -986,6 +986,8 @@ button.emblem > img {
     position: relative;
     top: 2px;
     height: 16px;
+    margin: 0rem;
+    padding: 0rem;
 }
 a.emblem.toolbar:not(:first-child),
 label.emblem.toolbar:not(:first-child),
