@@ -332,13 +332,23 @@ select, input {
     border: 1px solid #c2bcb8;
     border-radius: 0em;
 }
+input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    padding: 0em;
+}
+input[type="checkbox"]:checked {
+    background-image: url(../images/checkbox.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+}
 input.error,
 input:invalid {
     border-color: #c04b4b;
     box-shadow: none;
 }
 select:focus, input:focus {
-    outline: none;
     background-color: #ffffff;
     border-color: #8b6762;
     outline: #8b6762 solid 1px;
@@ -347,16 +357,6 @@ select:focus, input:focus {
 input::placeholder {
     color: #c6ccc8;
     opacity: 1;
-}
-input[type="radio"],
-input[type="checkbox"] {
-    width: auto;
-}
-input[type="file"]:focus,
-input[type="radio"]:focus,
-input[type="checkbox"]:focus {
-    outline: #c04b4b solid 2px;
-    outline-offset: 2px;
 }
 input#search_field {
     display: inline;
@@ -379,7 +379,6 @@ textarea {
     resize: vertical;
 }
 textarea:focus {
-    outline: none;
     border-color: #8b6762;
     outline: #8b6762 solid 1px;
     outline-offset: 0px;

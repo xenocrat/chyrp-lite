@@ -238,8 +238,8 @@ table td {
 }
 hr {
     width: 100%;
-    border: none;
     clear: both;
+    border: none;
     border-top: 3px dotted #b1b4b6;
     margin: 2rem 0rem;
 }
@@ -290,6 +290,17 @@ select, input {
     border: 2px solid #0b0c0c;
     border-radius: 0em;
 }
+input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    padding: 0em;
+}
+input[type="checkbox"]:checked {
+    background-image: url(../images/checkbox.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+}
 input::placeholder {
     color: #0b0c0c;
     opacity: 1;
@@ -297,10 +308,6 @@ input::placeholder {
 input:invalid {
     border-color: #d4351c;
     box-shadow: none;
-}
-input[type="radio"],
-input[type="checkbox"] {
-    width: auto;
 }
 textarea {
     box-sizing: border-box;
@@ -436,7 +443,6 @@ nav.traversal a {
     display: inline-block;
     white-space: nowrap;
     padding: 0.3rem 0.7rem;
-    border: none;
     border-radius: 0em;
     color: #ffffff;
     background-color: #1d70b8;

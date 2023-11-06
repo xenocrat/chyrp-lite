@@ -391,8 +391,18 @@ select, input {
     border: 1px solid #c6ccc8;
     border-radius: 0em;
 }
+input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    padding: 0em;
+}
+input[type="checkbox"]:checked {
+    background-image: url(../images/checkbox.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+}
 select:focus, input:focus {
-    outline: none;
     background-color: #ffffff;
     border: 1px solid #1f1f23;
     outline: #1f1f23 solid 1px;
@@ -406,16 +416,6 @@ input.error,
 input:invalid {
     background-color: #ffdede;
     box-shadow: none;
-}
-input[type="radio"],
-input[type="checkbox"] {
-    width: auto;
-}
-input[type="file"]:focus,
-input[type="radio"]:focus,
-input[type="checkbox"]:focus {
-    outline: #1f1f23 solid 2px;
-    outline-offset: 2px;
 }
 input#sidebar_search_field {
     display: inline;
@@ -439,7 +439,6 @@ textarea {
     resize: vertical;
 }
 textarea:focus {
-    outline: none;
     border-color: #1f1f23;
     outline: #1f1f23 solid 1px;
     outline-offset: 0px;
