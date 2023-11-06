@@ -370,7 +370,7 @@
             select {
                 appearance: none;
                 padding-right: 1em;
-                background-image: url(admin/images/icons/selector.svg);
+                background-image: url(admin/images/icons/select.svg);
                 background-position: center right 0.1em;
                 background-repeat: no-repeat;
             }
