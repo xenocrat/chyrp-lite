@@ -697,11 +697,11 @@ div.standalone > *:last-child {
     background-size: 30px 30px;
     background-image: linear-gradient(
         -45deg,
-        #232324 25%,
+        #383839 25%,
         transparent 25%,
         transparent 50%,
-        #232324 50%,
-        #232324 75%,
+        #383839 50%,
+        #383839 75%,
         transparent 75%,
         transparent
     ) !important;

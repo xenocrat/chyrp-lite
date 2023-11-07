@@ -490,7 +490,8 @@ section.photo > a:focus {
     background-color: #ffdd00;
 }
 .ajax_loading * {
-    filter: blur(2px) !important;
+    filter: opacity(80%) blur(2px) !important;
+    transition: filter 500ms ease-out;
 }
 .ajax_loading .doaction {
     visibility: hidden;
