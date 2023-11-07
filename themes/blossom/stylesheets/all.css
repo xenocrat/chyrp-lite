@@ -528,8 +528,7 @@ div.metadata {
     border-bottom-left-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
 }
-html[lang="ar"] div.metadata,
-html[lang="he"] div.metadata {
+html[dir="rtl"] div.metadata {
     left: 2rem;
 }
 article.post.pinned div.metadata {
