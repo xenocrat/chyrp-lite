@@ -332,6 +332,20 @@ select, input {
     border: 1px solid #c2bcb8;
     border-radius: 0em;
 }
+html[dir="ltr"] select {
+    appearance: none;
+    padding-right: 1.5em;
+    background-image: url(../images/select.svg);
+    background-position: center right 0.25em;
+    background-repeat: no-repeat;
+}
+html[dir="rtl"] select {
+    appearance: none;
+    padding-left: 1.5em;
+    background-image: url(../images/select.svg);
+    background-position: center left 0.25em;
+    background-repeat: no-repeat;
+}
 input[type="checkbox"] {
     appearance: none;
     width: 20px;

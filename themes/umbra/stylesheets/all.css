@@ -325,6 +325,23 @@ select, input {
     border: none;
     border-radius: 0.25em;
 }
+html[dir="ltr"] select {
+    appearance: none;
+    padding-right: 1.5em;
+    background-image: url(../images/select.svg);
+    background-position: center right 0.25em;
+    background-repeat: no-repeat;
+}
+html[dir="rtl"] select {
+    appearance: none;
+    padding-left: 1.5em;
+    background-image: url(../images/select.svg);
+    background-position: center left 0.25em;
+    background-repeat: no-repeat;
+}
+html select:focus {
+    background-image: url(../images/select_focus.svg);
+}
 input[type="checkbox"] {
     appearance: none;
     width: 20px;
@@ -338,8 +355,6 @@ input[type="checkbox"]:checked {
 }
 input[type="checkbox"]:checked:focus {
     background-image: url(../images/checkbox_focus.svg);
-    background-position: center;
-    background-repeat: no-repeat;
 }
 input.error,
 input:invalid {
