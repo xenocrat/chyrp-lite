@@ -927,12 +927,15 @@ span.options_extra:empty {
 }
 span.options_toolbar {
     box-sizing: border-box;
-    display: block;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 24px;
+    justify-content: flex-start;
     width: 100%;
     background-color: #fbfbfb;
     border: 1px solid #cfcfcf;
     border-bottom: none;
-    padding: 0.25rem 1rem calc(0.5rem + 2px) 1rem;
+    padding: 0.5rem 0.75rem calc(0.5rem + 2px) 0.75rem;
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
 }
@@ -1017,11 +1020,6 @@ button.emblem > img {
     margin: 0rem;
     padding: 0rem;
 }
-a.emblem.toolbar:not(:first-child),
-label.emblem.toolbar:not(:first-child),
-button.emblem.toolbar:not(:first-child) {
-    margin-left: 24px;
-}
 a.emblem:focus,
 label.emblem:focus,
 button.emblem:focus {
@@ -1034,6 +1032,7 @@ label.emblem.toolbar > input:focus + img {
 }
 input.toolbar.hidden {
     display:inline !important;
+    font: inherit !important;
     width:0px !important;
     height:16px !important;
     outline:none !important;
@@ -1206,6 +1205,7 @@ input.toolbar.hidden {
     a.prev_page, a.next_page {
         display: block !important;
         width: 100% !important;
+        min-width: unset !important;
         margin: 1rem 0rem 0rem 0rem !important;
         text-align: center !important;
     }
