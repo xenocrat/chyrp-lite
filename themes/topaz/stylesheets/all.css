@@ -550,7 +550,7 @@ div.doaction {
     text-align: end;
     margin: 1em 0em;
 }
-div.admin, div.downloads {
+div.admin {
     margin: 1em 0em 0em 0em;
 }
 div#main > article, div.standalone {
