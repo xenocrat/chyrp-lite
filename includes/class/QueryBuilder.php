@@ -191,7 +191,7 @@
             $cols
         ): string {
             $query = "CREATE TABLE IF NOT EXISTS \"__$table\" (\n  ".
-                     implode(",\n  ", self::safecol($sql, (array) $cols))."\n)";
+                     implode(",\n  ", $cols)."\n)";
 
             switch ($sql->adapter) {
                 case "sqlite":
