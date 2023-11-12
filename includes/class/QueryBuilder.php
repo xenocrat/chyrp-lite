@@ -461,7 +461,7 @@
          *
          * Parameters:
          *     $sql - The SQL instance calling this method.
-         *     $data - An array of values.
+         *     $vals - An array of values.
          *     &$params - An associative array of parameters used in the query.
          *
          * Returns:
@@ -475,7 +475,7 @@
             $return = array();
 
             foreach ($vals as $val) {
-                if (is_object($val)) # Useful catch, e.g. empty SimpleXML objects.
+                if (is_object($val) and !$val instanceof Stringable)
                     $val = "";
 
                 if (is_bool($val))
