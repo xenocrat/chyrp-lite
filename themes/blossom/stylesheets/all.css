@@ -166,6 +166,7 @@ aside em {
 pre {
     font-family: "Cousine webfont", monospace;
     font-size: 0.85em;
+    background-color: #e5e2dc;
     margin: 1rem 0rem;
     overflow-x: auto;
 }
