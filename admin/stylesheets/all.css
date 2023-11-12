@@ -1031,14 +1031,15 @@ label.emblem.toolbar > input:focus + img {
     outline: #ff7f00 dashed 2px;
 }
 input.toolbar.hidden {
-    display:inline !important;
+    display: inline !important;
     font: inherit !important;
-    width:0px !important;
-    height:16px !important;
-    outline:none !important;
-    border:none !important;
-    padding:0rem !important;
-    margin:0rem !important;
+    width: 1px !important;
+    height: 16px !important;
+    outline: none !important;
+    border: none !important;
+    padding: 0rem !important;
+    margin: 0rem !important;
+    visibility: hidden !important;
 }
 .drag_highlight {
     background-color: #fffceb;
