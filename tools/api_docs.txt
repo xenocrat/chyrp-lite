@@ -724,7 +724,7 @@ Creates a list of values.
 
 Parameters:
     $sql - The SQL instance calling this method.
-    $data - An array of values.
+    $vals - An array of values.
     &$params - An associative array of parameters used in the query.
 
 Returns:
