@@ -1330,6 +1330,9 @@ input.toolbar.hidden {
     *.tag {
         border-color: #afafaf;
     }
+    *.tag_added {
+        border-color: #1e57ba;
+    }
     table.interactive + div.controls {
         border-color: #afafaf;
     }
