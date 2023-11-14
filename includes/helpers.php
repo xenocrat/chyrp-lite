@@ -3110,19 +3110,19 @@
         if ($trigger->exists("correspond_activate_account"))
             return $trigger->call("correspond_activate_account", $user, $url);
 
-        $email_headers = "From: ".$config->email."\r\n"."X-Mailer: ".CHYRP_IDENTITY;
-        $email_subject = _f("Activate your account at %s", $config->name);
-        $email_message = _f("Hello, %s.", $user->login).
-                         "\r\n".
-                         "\r\n".
-                         __("You are receiving this message because you registered a new account.").
-                         "\r\n".
-                         "\r\n".
-                         __("Visit this link to activate your account:").
-                         "\r\n".
-                         unfix($url);
+        $headers = array("From" => $config->email, "X-Mailer" => CHYRP_IDENTITY);
+        $subject = _f("Activate your account at %s", $config->name);
+        $message = _f("Hello, %s.", $user->login).
+                   "\r\n".
+                   "\r\n".
+                   __("You are receiving this message because you registered a new account.").
+                   "\r\n".
+                   "\r\n".
+                   __("Visit this link to activate your account:").
+                   "\r\n".
+                   unfix($url);
 
-        return email($user->email, $email_subject, $email_message, $email_headers);
+        return email($user->email, $subject, $message, $headers);
     }
 
     /**
@@ -3145,19 +3145,19 @@
         if ($trigger->exists("correspond_reset_password"))
             return $trigger->call("correspond_reset_password", $user, $url);
 
-        $email_headers = "From: ".$config->email."\r\n"."X-Mailer: ".CHYRP_IDENTITY;
-        $email_subject = _f("Reset your password at %s", $config->name);
-        $email_message = _f("Hello, %s.", $user->login).
-                         "\r\n".
-                         "\r\n".
-                         __("You are receiving this message because you requested a new password.").
-                         "\r\n".
-                         "\r\n".
-                         __("Visit this link to reset your password:").
-                         "\r\n".
-                         unfix($url);
+        $headers = array("From" => $config->email, "X-Mailer" => CHYRP_IDENTITY);
+        $subject = _f("Reset your password at %s", $config->name);
+        $message = _f("Hello, %s.", $user->login).
+                   "\r\n".
+                   "\r\n".
+                   __("You are receiving this message because you requested a new password.").
+                   "\r\n".
+                   "\r\n".
+                   __("Visit this link to reset your password:").
+                   "\r\n".
+                   unfix($url);
 
-        return email($user->email, $email_subject, $email_message, $email_headers);
+        return email($user->email, $subject, $message, $headers);
     }
 
     /**
