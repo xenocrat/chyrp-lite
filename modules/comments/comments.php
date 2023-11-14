@@ -1405,16 +1405,16 @@
             if ($trigger->exists("correspond_site_new_comment"))
                 return $trigger->call("correspond_site_new_comment", $comment);
 
-            $email_headers = "From: ".$config->email."\r\n"."X-Mailer: ".CHYRP_IDENTITY;
-            $email_subject = _f("New Comment at %s", $config->name, "comments");
-            $email_message = _f("%s commented on a blog post:", $comment->author, "comments").
-                             "\r\n".
-                             unfix($comment->url()).
-                             "\r\n".
-                             "\r\n".
-                             truncate(strip_tags($comment->body), 60);
+            $headers = array("From" => $config->email, "X-Mailer" => CHYRP_IDENTITY);
+            $subject = _f("New Comment at %s", $config->name, "comments");
+            $message = _f("%s commented on a blog post:", $comment->author, "comments").
+                       "\r\n".
+                       unfix($comment->url()).
+                       "\r\n".
+                       "\r\n".
+                       truncate(strip_tags($comment->body), 60);
 
-            return email($mailto, $email_subject, $email_message, $email_headers);
+            return email($mailto, $subject, $message, $headers);
         }
 
         public static function email_user_new_comment($comment, $user): bool {
@@ -1425,16 +1425,16 @@
             if ($trigger->exists("correspond_user_new_comment"))
                 return $trigger->call("correspond_user_new_comment", $comment, $user);
 
-            $email_headers = "From: ".$config->email."\r\n"."X-Mailer: ".CHYRP_IDENTITY;
-            $email_subject = _f("New Comment at %s", $config->name, "comments");
-            $email_message = _f("%s commented on a blog post:", $comment->author, "comments").
-                             "\r\n".
-                             unfix($comment->url()).
-                             "\r\n".
-                             "\r\n".
-                             truncate(strip_tags($comment->body), 60);
+            $headers = array("From" => $config->email, "X-Mailer" => CHYRP_IDENTITY);
+            $subject = _f("New Comment at %s", $config->name, "comments");
+            $message = _f("%s commented on a blog post:", $comment->author, "comments").
+                       "\r\n".
+                       unfix($comment->url()).
+                       "\r\n".
+                       "\r\n".
+                       truncate(strip_tags($comment->body), 60);
 
-            return email($mailto, $email_subject, $email_message, $email_headers);
+            return email($mailto, $subject, $message, $headers);
         }
 
         public static function email_peer_new_comment($comment, $peer): bool {
@@ -1450,20 +1450,20 @@
             if ($trigger->exists("correspond_peer_new_comment"))
                 return $trigger->call("correspond_peer_new_comment", $comment, $peer, $url);
 
-            $email_headers = "From: ".$config->email."\r\n"."X-Mailer: ".CHYRP_IDENTITY;
-            $email_subject = _f("New Comment at %s", $config->name, "comments");
-            $email_message = _f("%s commented on a blog post:", $comment->author, "comments").
-                             "\r\n".
-                             unfix($comment->url()).
-                             "\r\n".
-                             "\r\n".
-                             truncate(strip_tags($comment->body), 60).
-                             "\r\n".
-                             "\r\n".
-                             __("Unsubscribe from this conversation:", "comments").
-                             "\r\n".
-                             unfix($url);
+            $headers = array("From" => $config->email, "X-Mailer" => CHYRP_IDENTITY);
+            $subject = _f("New Comment at %s", $config->name, "comments");
+            $message = _f("%s commented on a blog post:", $comment->author, "comments").
+                       "\r\n".
+                       unfix($comment->url()).
+                       "\r\n".
+                       "\r\n".
+                       truncate(strip_tags($comment->body), 60).
+                       "\r\n".
+                       "\r\n".
+                       __("Unsubscribe from this conversation:", "comments").
+                       "\r\n".
+                       unfix($url);
 
-            return email($mailto, $email_subject, $email_message, $email_headers);
+            return email($mailto, $subject, $message, $headers);
         }
     }
