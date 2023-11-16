@@ -424,7 +424,7 @@ select:focus, input:focus {
     outline-offset: 0px;
 }
 input::placeholder {
-    color: #c6ccc8;
+    color: #1f1f23;
     opacity: 1;
 }
 input.error,

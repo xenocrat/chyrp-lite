@@ -370,8 +370,11 @@ select:focus, input:focus {
     background-color: #ffffff;
 }
 input::placeholder {
-    color: #adafae;
+    color: #ffffff;
     opacity: 1;
+}
+input:focus::placeholder {
+    color: #202021;
 }
 input#search_field {
     display: inline;
