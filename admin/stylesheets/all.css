@@ -506,7 +506,7 @@ input[type="checkbox"]:checked {
     background-repeat: no-repeat;
 }
 input::placeholder {
-    color: #dddddd;
+    color: #656565;
     opacity: 1;
 }
 input:invalid,
@@ -1304,9 +1304,6 @@ input.toolbar.hidden {
     input[type="file"] {
         background-color: #dfdfdf;
         border-color: #afafaf;
-    }
-    input::placeholder {
-        color: #aaaaaa;
     }
     input:invalid {
         border-color: #ff7f00;
