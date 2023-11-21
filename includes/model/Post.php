@@ -724,7 +724,7 @@
             if ($this->no_results)
                 return false;
 
-            # Excerpts are likely to have some sort of markup module applied;
+            # The text is likely to have some sort of markup module applied;
             # if the current instantiation is not filtered, make one that is.
             $post = ($this->filtered) ?
                 $this : new self($this->id, array("skip_where" => true)) ;
@@ -747,7 +747,7 @@
             if ($this->no_results)
                 return false;
 
-            # Excerpts are likely to have some sort of markup module applied;
+            # The text is likely to have some sort of markup module applied;
             # if the current instantiation is not filtered, make one that is.
             $post = ($this->filtered) ?
                 $this : new self($this->id, array("skip_where" => true)) ;
@@ -755,7 +755,6 @@
             $title = Feathers::$instances[$this->feather]->title($post);
             return Trigger::current()->filter($title, "title", $post);
         }
-
 
         /**
          * Function: excerpt
@@ -765,7 +764,7 @@
             if ($this->no_results)
                 return false;
 
-            # Excerpts are likely to have some sort of markup module applied;
+            # The text is likely to have some sort of markup module applied;
             # if the current instantiation is not filtered, make one that is.
             $post = ($this->filtered) ?
                 $this : new self($this->id, array("skip_where" => true)) ;
@@ -773,7 +772,6 @@
             $excerpt = Feathers::$instances[$this->feather]->excerpt($post);
             return Trigger::current()->filter($excerpt, "excerpt", $post);
         }
-
 
         /**
          * Function: feed_content
@@ -783,7 +781,7 @@
             if ($this->no_results)
                 return false;
 
-            # Excerpts are likely to have some sort of markup module applied;
+            # The text is likely to have some sort of markup module applied;
             # if the current instantiation is not filtered, make one that is.
             $post = ($this->filtered) ?
                 $this : new self($this->id, array("skip_where" => true)) ;
