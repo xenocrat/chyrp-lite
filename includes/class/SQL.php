@@ -428,7 +428,7 @@
          *
          * Parameters:
          *     $string - String to escape.
-         *     $quotes - Auto-wrap the string in single quotes?
+         *     $quotes - Wrap the string in single quotes?
          */
         public function escape(
             $string,
@@ -437,11 +437,11 @@
             if (!isset($this->db))
                 $this->connect();
 
-            $string = trim($this->db->quote($string), "'");
+            $string = $this->db->quote($string);
             $string = str_replace('$', '\$', $string);
 
-            if ($quotes and !is_numeric($string))
-                $string = "'".$string."'";
+            if (!$quotes)
+                $string = trim($string, "'");
 
             return $string;
         }

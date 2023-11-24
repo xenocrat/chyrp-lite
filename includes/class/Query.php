@@ -76,7 +76,7 @@
                         str_replace(
                             "\\",
                             "\\\\",
-                            $this->sql->escape($val)
+                            $this->sql->escape($val, !is_int($val))
                         )."$1",
                         $logQuery
                     );
@@ -102,7 +102,7 @@
                         str_replace(
                             array("\\", "\$"),
                             array("\\\\", "\\\$"),
-                            $this->sql->escape($val)
+                            $this->sql->escape($val, !is_int($val))
                         )."$1",
                         $this->queryString
                     );

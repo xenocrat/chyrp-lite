@@ -465,7 +465,7 @@
          *     &$params - An associative array of parameters used in the query.
          *
          * Returns:
-         *     ('one', 'two', '', 1, 0) from array("one", "two", null, true, false).
+         *     "('one', 'two', '', 1, 0)" from array("one", "two", null, true, false).
          */
         public static function build_list(
             $sql,
@@ -476,14 +476,17 @@
 
             foreach ($vals as $val) {
                 if (is_object($val) and !$val instanceof Stringable)
-                    $val = "";
+                    $val = null;
 
                 if (is_bool($val))
                     $val = (int) $val;
 
+                if (is_float($val))
+                    $val = (string) $val;
+
                 $return[] = isset($params[$val]) ?
                     $val :
-                    SQL::current()->escape($val) ;
+                    SQL::current()->escape($val, !is_int($val)) ;
             }
 
             return "(".join(", ", $return).")";
