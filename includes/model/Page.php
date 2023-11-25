@@ -7,6 +7,11 @@
      *     <Model>
      */
     class Page extends Model {
+        const STATUS_LISTED  = "listed";
+        const STATUS_PUBLIC  = "public";
+        const STATUS_TEASED  = "teased";
+        const STATUS_PRIVATE = "private";
+
         public $belongs_to = array(
             "user",
             "parent" => array("model" => "page")
@@ -32,8 +37,17 @@
                 return;
 
             $this->slug = $this->url;
-
             $this->filtered = (!isset($options["filter"]) or $options["filter"]);
+
+            if ($this->public) {
+                $this->status = ($this->show_in_list) ?
+                    self::STATUS_LISTED :
+                    self::STATUS_PUBLIC ;
+            } else {
+                $this->status = ($this->show_in_list) ?
+                    self::STATUS_TEASED :
+                    self::STATUS_PRIVATE ;
+            }
 
             Trigger::current()->filter($this, "page");
 
