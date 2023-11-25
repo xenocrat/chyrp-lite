@@ -946,6 +946,7 @@
                 $config->set("email", $_POST['email']),
                 $config->set("timezone", $_POST['timezone']),
                 $config->set("locale", $_POST['locale']),
+                $config->set("monospace_font", false),
                 $config->set("check_updates", true),
                 $config->set("check_updates_last", 0),
                 $config->set("theme", "blossom"),

@@ -8,6 +8,9 @@
 <link rel="icon" sizes="any" type="image/svg+xml" href="{{ site.chyrp_url }}/favicon.svg">
 <link rel="mask-icon" href="{{ site.chyrp_url }}/favicon.svg" color="#4f4f4f">
 <link rel="stylesheet" href="{{ site.chyrp_url }}/admin/stylesheets/all.css" type="text/css" media="all">
+{% if site.monospace_font %}
+<link rel="stylesheet" href="{{ site.chyrp_url }}/admin/stylesheets/monospace.css" type="text/css" media="all">
+{% endif %}
 {{ javascripts() }}
 {{ trigger.call("admin_head") }}
 </head>

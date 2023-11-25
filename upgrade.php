@@ -560,6 +560,16 @@
             );
     }
 
+    function add_monospace_font(): void {
+        $set = Config::current()->set("monospace_font", false, true);
+
+        if ($set === false)
+            error(
+                __("Error"),
+                __("Could not write the configuration file.")
+            );
+    }
+
     #---------------------------------------------
     # Output Starts
     #---------------------------------------------
@@ -857,6 +867,7 @@
         mysql_utf8mb4();
         add_import_content();
         remove_xmlrpc();
+        add_monospace_font();
 
         # Perform module upgrades.
         foreach ($config->enabled_modules as $module) {

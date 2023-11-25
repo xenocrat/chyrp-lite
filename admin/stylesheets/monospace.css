@@ -1,0 +1,5 @@
+/* Setting: monospace_font */
+
+textarea {
+    font-family: "Cousine webfont", monospace;
+}
