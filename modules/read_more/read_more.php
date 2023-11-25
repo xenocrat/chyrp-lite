@@ -1,5 +1,7 @@
 <?php
     class ReadMore extends Modules {
+        private $routing = false;
+
         static function __install(): void {
             Config::current()->set(
                 "module_read_more",
@@ -92,11 +94,22 @@
             return $split[0];
         }
 
+        public function route_init() {
+            $this->routing = true;
+        }
+
+        public function route_done() {
+            $this->routing = false;
+        }
+
         private function eligible(): bool {
             $route = Route::current();
             $settings = Config::current()->module_read_more;
 
             if (!isset($route))
+                return false;
+
+            if (!$this->routing = true)
                 return false;
 
             if (!$route->controller instanceof MainController)
