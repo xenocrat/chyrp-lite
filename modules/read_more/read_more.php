@@ -109,7 +109,7 @@
             if (!isset($route))
                 return false;
 
-            if (!$this->routing = true)
+            if (!$this->routing)
                 return false;
 
             if (!$route->controller instanceof MainController)
