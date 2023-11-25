@@ -758,8 +758,21 @@
             fallback($_POST['list_priority'], 0);
             fallback($_POST['slug'], $page->clean);
 
-            $public = in_array($_POST['status'], array("listed", "public"));
-            $listed = in_array($_POST['status'], array("listed", "teased"));
+            $public = in_array(
+                $_POST['status'],
+                array(
+                    Page::STATUS_LISTED,
+                    Page::STATUS_PUBLIC
+                )
+            );
+
+            $listed = in_array(
+                $_POST['status'],
+                array(
+                    Page::STATUS_LISTED,
+                    Page::STATUS_TEASED
+                )
+            );
 
             $list_order = empty($_POST['list_order']) ?
                 (int) $_POST['list_priority'] : (int) $_POST['list_order'] ;
