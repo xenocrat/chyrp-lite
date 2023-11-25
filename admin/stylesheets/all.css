@@ -589,7 +589,7 @@ form.split label {
     display: inline-block;
     width: 45%;
     text-align: end;
-    padding: 0rem 1rem;
+    padding: 0rem 1rem 0rem 0rem;
 }
 form.split input[type="text"],
 form.split input[type="email"],
