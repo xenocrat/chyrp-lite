@@ -560,6 +560,12 @@
             );
     }
 
+    /**
+     * Function: add_monospace_font
+     * Adds the monospace_font config setting.
+     *
+     * Versions: 2023.03 => 2024.01
+     */
     function add_monospace_font(): void {
         $set = Config::current()->set("monospace_font", false, true);
 
