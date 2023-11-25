@@ -362,7 +362,7 @@
 
     # Publish scheduled posts.
     if (MAIN or ADMIN)
-        Post::publish_scheduled();
+        Post::publish_scheduled(true);
 
     # Set headers.
     header("Content-Type: text/html; charset=UTF-8");
