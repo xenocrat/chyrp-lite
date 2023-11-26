@@ -79,14 +79,20 @@
         ): string {
             if (empty($params))
                 foreach ($data as $key => $val) {
+                    if (is_object($val) and !$val instanceof Stringable)
+                        $val = null;
+
                     if (is_bool($val))
                         $val = (int) $val;
 
+                    if (is_float($val))
+                        $val = (string) $val;
+
                     if (
                         $key == "updated_at" and
-                        $val === "0000-00-00 00:00:00"
+                        in_array($val, SQL_DATETIME_ZERO_VARIANTS)
                     )
-                        $val = "0001-01-01 00:00:00";
+                        $val = SQL_DATETIME_ZERO;
 
                     $param = ":".str_replace(array("(", ")", "."), "_", $key);
                     $params[$param] = $val;
@@ -553,8 +559,14 @@
                     if (is_string($val) and strlen($val) and strpos($val, ":") === 0) {
                         $cond = self::safecol($sql, $key)." = ".$val;
                     } else {
+                        if (is_object($val) and !$val instanceof Stringable)
+                            $val = null;
+
                         if (is_bool($val))
                             $val = (int) $val;
+
+                        if (is_float($val))
+                            $val = (string) $val;
 
                         $uck = strtoupper($key);
 
@@ -674,9 +686,9 @@
                                 if ($insert) {
                                     if (
                                         $key == "updated_at" and
-                                        $val === "0000-00-00 00:00:00"
+                                        in_array($val, SQL_DATETIME_ZERO_VARIANTS)
                                     )
-                                        $val = "0001-01-01 00:00:00";
+                                        $val = SQL_DATETIME_ZERO;
                                 }
 
                                 $params[":".$param] = $val;
