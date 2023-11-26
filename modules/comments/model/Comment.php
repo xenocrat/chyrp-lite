@@ -205,7 +205,7 @@
                     "parent_id"    => fallback($parent, 0),
                     "notify"       => fallback($notify, false),
                     "created_at"   => fallback($created_at, datetime()),
-                    "updated_at"   => fallback($updated_at, "0001-01-01 00:00:00")
+                    "updated_at"   => fallback($updated_at, SQL_DATETIME_ZERO)
                 )
             );
 
