@@ -43,6 +43,20 @@
     # Is the user running the installer? (false)
     define('INSTALLING', false);
 
+    # Constant: SQL_DATETIME_ZERO
+    # The preferred SQL datetime "zero" value.
+    define('SQL_DATETIME_ZERO', "1000-01-01 00:00:00");
+
+    # Constant: SQL_DATETIME_ZERO_VARIANTS
+    # An array of SQL datetime values corresponding to "zero".
+    define('SQL_DATETIME_ZERO_VARIANTS',
+        array(
+            "0000-00-00 00:00:00",
+            "0001-01-01 00:00:00",
+            "1000-01-01 00:00:00"
+        )
+    );
+
     # Constant: BOT_UA
     # Are we being visited by a probable robot?
     define('BOT_UA',
