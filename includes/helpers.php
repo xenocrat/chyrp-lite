@@ -783,8 +783,7 @@
                 !isset($arg) or $arg === array() or
                 (is_string($arg) and trim($arg) === "") or
                 (is_object($arg) and empty($arg)) or
-                ($arg === "0000-00-00 00:00:00") or
-                ($arg === "0001-01-01 00:00:00")
+                in_array($arg, SQL_DATETIME_ZERO_VARIANTS)
             );
 
             if (!$unset)

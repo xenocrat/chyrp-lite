@@ -283,8 +283,7 @@
             if (isset($model->updated_at))
                 $model->updated = (
                     !empty($model->updated_at) and
-                    $model->updated_at != "0000-00-00 00:00:00" and
-                    $model->updated_at != "0001-01-01 00:00:00"
+                    !in_array($model->updated_at, SQL_DATETIME_ZERO_VARIANTS)
                 );
 
             # Clone the object and cache it.

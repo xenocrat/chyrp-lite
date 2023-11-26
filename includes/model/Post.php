@@ -265,7 +265,7 @@
             fallback($pinned,       false);
             fallback($status,       self::STATUS_DRAFT);
             fallback($created_at,   datetime());
-            fallback($updated_at,   "0001-01-01 00:00:00"); # Model->updated will check this.
+            fallback($updated_at,   SQL_DATETIME_ZERO); # Model->updated will check this.
             fallback($options,      array());
 
             $sql = SQL::current();
