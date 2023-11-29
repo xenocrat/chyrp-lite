@@ -6,25 +6,34 @@
 
     header("Content-Type: text/html; charset=UTF-8");
 
-    define('DEBUG',          true);
-    define('CHYRP_VERSION',  "2023.03");
-    define('CHYRP_CODENAME', "Varied");
-    define('CHYRP_IDENTITY', "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
-    define('MAIN',           false);
-    define('ADMIN',          false);
-    define('AJAX',           false);
-    define('UPGRADING',      false);
-    define('INSTALLING',     false);
-    define('DIR',            DIRECTORY_SEPARATOR);
-    define('MAIN_DIR',       dirname(dirname(__FILE__)));
-    define('INCLUDES_DIR',   MAIN_DIR.DIR."includes");
-    define('CACHES_DIR',     INCLUDES_DIR.DIR."caches");
-    define('MODULES_DIR',    MAIN_DIR.DIR."modules");
-    define('FEATHERS_DIR',   MAIN_DIR.DIR."feathers");
-    define('THEMES_DIR',     MAIN_DIR.DIR."themes");
-    define('USE_OB',         true);
-    define('CAN_USE_ZLIB',   false);
-    define('USE_ZLIB',       false);
+    define('DEBUG',             true);
+    define('CHYRP_VERSION',     "2023.03");
+    define('CHYRP_CODENAME',    "Varied");
+    define('CHYRP_IDENTITY',    "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
+    define('MAIN',              false);
+    define('ADMIN',             false);
+    define('AJAX',              false);
+    define('UPGRADING',         false);
+    define('INSTALLING',        false);
+    define('DIR',               DIRECTORY_SEPARATOR);
+    define('MAIN_DIR',          dirname(dirname(__FILE__)));
+    define('INCLUDES_DIR',      MAIN_DIR.DIR."includes");
+    define('CACHES_DIR',        INCLUDES_DIR.DIR."caches");
+    define('MODULES_DIR',       MAIN_DIR.DIR."modules");
+    define('FEATHERS_DIR',      MAIN_DIR.DIR."feathers");
+    define('THEMES_DIR',        MAIN_DIR.DIR."themes");
+    define('USE_OB',            true);
+    define('CAN_USE_ZLIB',      false);
+    define('USE_ZLIB',          false);
+    define('SQL_DATETIME_ZERO', "1000-01-01 00:00:00");
+
+    define('SQL_DATETIME_ZERO_VARIANTS',
+        array(
+            "0000-00-00 00:00:00",
+            "0001-01-01 00:00:00",
+            "1000-01-01 00:00:00"
+        )
+    );
 
     ob_start();
     define('OB_BASE_LEVEL', ob_get_level());
