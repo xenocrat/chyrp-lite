@@ -353,6 +353,10 @@
                     $permission["name"] = $names[$permission["id"]];
             }
 
+            usort($permissions, function ($a, $b) {
+                return substr_compare($a["id"], $b["id"], 0);   
+            });
+
             return $permissions;
         }
 
