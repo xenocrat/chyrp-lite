@@ -5,12 +5,18 @@
 var ChyrpAjaxScroll = {
     busy: false,
     failed: false,
+    container: null,
     auto: <?php esce(Config::current()->module_cascade["ajax_scroll_auto"] ? "true" : "false"); ?>,
     init: function() {
+        ChyrpAjaxScroll.container = $(".post").last().parent()[0];
+
         if (ChyrpAjaxScroll.auto)
             $(window).on("scroll", window, ChyrpAjaxScroll.watch);
         else
             $("#pagination_next_page").click(ChyrpAjaxScroll.click);
+
+        ChyrpAjaxScroll.container.ariaLive = "polite";
+        ChyrpAjaxScroll.container.ariaBusy = "false";
     },
     click: function(e) {
         if (!ChyrpAjaxScroll.failed) {
@@ -31,6 +37,8 @@ var ChyrpAjaxScroll = {
     fetch: function() {
         if (!ChyrpAjaxScroll.busy && !ChyrpAjaxScroll.failed) {
             ChyrpAjaxScroll.busy = true;
+            ChyrpAjaxScroll.container.ariaBusy = "true";
+
             var this_post_obj = $(".post").last();
             var this_next_obj = $("#pagination_next_page");
             var this_next_url = this_next_obj.attr("href");
@@ -68,6 +76,8 @@ var ChyrpAjaxScroll = {
                     }
                 }, "html").fail(ChyrpAjaxScroll.panic);
             }
+
+            ChyrpAjaxScroll.container.ariaBusy = "false";
         }
     },
     panic: function() {
