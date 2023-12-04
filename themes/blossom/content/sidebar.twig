@@ -4,8 +4,8 @@
 <input type="text" id="sidebar_search_field" name="query" value="{{ search is defined ? search | fix(true, true) : '' }}" placeholder="{{ 'Search&hellip;' | translate }}" aria-label="{{ 'Search this blog' | translate }}">
 <button type="submit" id="sidebar_search_submit">{{ "Search" | translate }}</button>
 </form>
-<h2 class="menu_toggle" id="menu"><a href="#menu">{{ "Menu" | translate }}</a></h2>
-<h2 class="menu_toggle"><a href="#" aria-label="{{ 'Close menu' | translate }}">{{ "Menu" | translate }}</a></h2>
+<h2 class="menu_toggle" id="menu"><a role="button" href="#menu">{{ "Menu" | translate }}</a></h2>
+<h2 class="menu_toggle"><a role="button" href="#" aria-label="{{ 'Close menu' | translate }}">{{ "Menu" | translate }}</a></h2>
 <ul class="navigation sidebar" aria-label="{{ 'Links' | translate }}">
 <li>
 <a href="{{ url('index') }}">{{ "Blog" | translate }}</a>
