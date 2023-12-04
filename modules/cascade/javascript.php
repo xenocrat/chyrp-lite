@@ -15,8 +15,17 @@ var ChyrpAjaxScroll = {
         else
             $("#pagination_next_page").click(ChyrpAjaxScroll.click);
 
-        ChyrpAjaxScroll.container.ariaLive = "polite";
-        ChyrpAjaxScroll.container.ariaBusy = "false";
+        if ("ariaLive" in ChyrpAjaxScroll.container)
+            ChyrpAjaxScroll.container.ariaLive = "polite";
+
+        if ("ariaAtomic" in ChyrpAjaxScroll.container)
+            ChyrpAjaxScroll.container.ariaAtomic = "false";
+
+        if ("ariaRelevant" in ChyrpAjaxScroll.container)
+            ChyrpAjaxScroll.container.ariaRelevant = "additions";
+
+        if ("ariaBusy" in ChyrpAjaxScroll.container)
+            ChyrpAjaxScroll.container.ariaBusy = "false";
     },
     click: function(e) {
         if (!ChyrpAjaxScroll.failed) {
@@ -37,7 +46,9 @@ var ChyrpAjaxScroll = {
     fetch: function() {
         if (!ChyrpAjaxScroll.busy && !ChyrpAjaxScroll.failed) {
             ChyrpAjaxScroll.busy = true;
-            ChyrpAjaxScroll.container.ariaBusy = "true";
+
+            if ("ariaBusy" in ChyrpAjaxScroll.container)
+                ChyrpAjaxScroll.container.ariaBusy = "true";
 
             var this_post_obj = $(".post").last();
             var this_next_obj = $("#pagination_next_page");
@@ -77,7 +88,8 @@ var ChyrpAjaxScroll = {
                 }, "html").fail(ChyrpAjaxScroll.panic);
             }
 
-            ChyrpAjaxScroll.container.ariaBusy = "false";
+            if ("ariaBusy" in ChyrpAjaxScroll.container)
+                ChyrpAjaxScroll.container.ariaBusy = "false";
         }
     },
     panic: function() {
