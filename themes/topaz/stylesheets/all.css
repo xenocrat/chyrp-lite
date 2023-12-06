@@ -881,7 +881,7 @@ div.standalone > *:last-child {
     div#sidebar > #menu:target {
         display: none;
     }
-    div#sidebar > #menu:target ~ *:not(script) {
+    div#sidebar > #menu:target ~ *:not(script, style) {
         display: block;
     }
     div#main > article {
