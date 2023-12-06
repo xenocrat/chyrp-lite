@@ -903,7 +903,7 @@ div.standalone > *:last-child {
     div#sidebar > #menu:target {
         display: none;
     }
-    div#sidebar > #menu:target ~ * {
+    div#sidebar > #menu:target ~ *:not(script) {
         display: block;
     }
     div#main > article {
