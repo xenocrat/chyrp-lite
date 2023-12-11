@@ -2,7 +2,7 @@
 <html lang="{{ site.locale | lang_base }}" dir="{{ site.locale | text_direction }}">
 <head>
 <meta charset="UTF-8">
-<title>{{ site.name }}: {% block title %}{{ title }}{% endblock %}</title>
+<title>{% block title %}{{ title }}{% endblock %} | {{ site.name | fix }}</title>
 <style type="text/css" nonce="{{ stylesheets_nonce() }}">
 @font-face {
     font-family: 'Open Sans webfont';
