@@ -123,8 +123,25 @@
                     );
 
                 $this->db->setAttribute(
-                    PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION
+                    PDO::ATTR_ERRMODE,
+                    PDO::ERRMODE_EXCEPTION
                 );
+
+                $this->db->setAttribute(
+                    PDO::ATTR_CASE,
+                    PDO::CASE_NATURAL
+                );
+
+                $this->db->setAttribute(
+                    PDO::ATTR_ORACLE_NULLS,
+                    PDO::NULL_NATURAL
+                );
+
+                $this->db->setAttribute(
+                    PDO::ATTR_DEFAULT_FETCH_MODE,
+                    PDO::FETCH_ASSOC
+                );
+
             } catch (PDOException $error) {
                 $this->error = $error->getMessage();
 
