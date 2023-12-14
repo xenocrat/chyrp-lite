@@ -93,7 +93,6 @@
             try {
                 $this->query = $this->sql->db->prepare($query);
                 $this->result = $this->query->execute($params);
-                $this->query->setFetchMode(PDO::FETCH_ASSOC);
                 $this->queryString = $query;
 
                 foreach ($params as $name => $val)
@@ -132,8 +131,8 @@
          * Function: fetch
          * Returns the current row as an array.
          */
-        public function fetch(): mixed {
-            return $this->query->fetch();
+        public function fetch($mode = PDO::FETCH_ASSOC): mixed { # Can be PDO::FETCH_DEFAULT in PHP 8.0.7+
+            return $this->query->fetch($mode);
         }
 
         /**
@@ -148,8 +147,8 @@
          * Function: fetchAll
          * Returns an array of every result.
          */
-        public function fetchAll($style = PDO::FETCH_ASSOC): array { # Can be PDO::FETCH_DEFAULT in PHP 8.0.7+
-            return $this->query->fetchAll($style);
+        public function fetchAll($mode = PDO::FETCH_ASSOC): array { # Can be PDO::FETCH_DEFAULT in PHP 8.0.7+
+            return $this->query->fetchAll($mode);
         }
 
         /**
