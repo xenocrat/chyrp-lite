@@ -1082,8 +1082,10 @@
             $title = _f("Comments on &#8220;%s&#8221;", $text, "comments");
 
             foreach ($comments as $comment) {
-                if (strtotime($comment->created_at) > $latest_timestamp)
-                    $latest_timestamp = strtotime($comment->created_at);
+                $created_at = strtotime($comment->created_at);
+
+                if ($latest_timestamp < $created_at)
+                    $latest_timestamp = $created_at;
             }
 
             $feed = new BlogFeed();
@@ -1091,7 +1093,6 @@
             $feed->open(
                 title:$title,
                 subtitle:Config::current()->description,
-                id:null,
                 updated:$latest_timestamp
             );
 
