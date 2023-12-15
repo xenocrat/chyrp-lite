@@ -1196,14 +1196,18 @@
                 }
             }
 
-            if ($posts instanceof Paginator)
+            if ($posts instanceof Paginator) {
+                $posts = $posts->reslice($config->feed_items);
                 $posts = $posts->paginated;
+            }
 
             $latest_timestamp = 0;
 
             foreach ($posts as $post) {
-                if ($latest_timestamp < strtotime($post->created_at))
-                    $latest_timestamp = strtotime($post->created_at);
+                $created_at = strtotime($post->created_at);
+
+                if ($latest_timestamp < $created_at)
+                    $latest_timestamp = $created_at;
             }
 
             $feed = new BlogFeed();
@@ -1211,12 +1215,13 @@
             $feed->open(
                 title:oneof($theme->title, $config->name),
                 subtitle:$config->description,
-                id:null,
                 updated:$latest_timestamp
             );
 
             foreach ($posts as $post) {
-                $updated = ($post->updated) ? $post->updated_at : $post->created_at ;
+                $updated = ($post->updated) ?
+                    $post->updated_at :
+                    $post->created_at ;
 
                 if (!$post->user->no_results) {
                     $author = oneof($post->user->full_name, $post->user->login);
@@ -1227,7 +1232,7 @@
                 }
 
                 $feed->entry(
-                    title:oneof($post->title(), ucfirst($post->feather)),
+                    title:oneof($post->title(), $post->slug),
                     id:url("id/post/".$post->id),
                     content:$post->feed_content(),
                     link:$post->url(),
