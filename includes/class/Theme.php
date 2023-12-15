@@ -343,11 +343,8 @@
             # Generate a feed for this route action if it seems appropriate.
             if (
                 $route->action != "index" and
-                !$main->feed and !empty($main->context["posts"]) and
-                !(
-                    $main->context["posts"] instanceof Paginator and
-                    $main->context["posts"]->total == 0
-                )
+                !$main->feed and
+                !empty($main->context["posts"])
             ) {
                     # Rewind to page 1 (most recent) if the posts are paginated.
                     $page_url = ($main->context["posts"] instanceof Paginator) ?
