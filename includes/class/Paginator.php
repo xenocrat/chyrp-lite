@@ -72,10 +72,13 @@
         ) {
             self::$names[] = $name;
 
-            $this->array = (array) $array;
+            if (!is_array($array))
+                $array = (array) $array;
 
+            $this->array = $array;
             $this->per_page = $per_page;
             $this->name = $name;
+
             $this->model = fallback(
                 $model,
                 (
@@ -87,12 +90,12 @@
             );
 
             if ($model)
-                list($this->array, $model_name) = $this->array;
+                list($array, $model_name) = $this->array;
 
             $request = (isset($_GET[$name]) and is_numeric($_GET[$name])) ?
                 $_GET[$name] : null ;
 
-            $this->total = count($this->array);
+            $this->total = count($array);
             $this->page = intval(oneof($page, $request, 1));
             $this->pages = ceil($this->total / $this->per_page);
             $this->result = array();
@@ -104,16 +107,37 @@
 
             if ($model) {
                 for ($i = $offset; $i < ($offset + $this->per_page); $i++)
-                    if (isset($this->array[$i]))
+                    if (isset($array[$i]))
                         $this->result[] = new $model_name(
                             null,
-                            array("read_from" => $this->array[$i])
+                            array("read_from" => $array[$i])
                         );
             } else {
-                $this->result = array_slice($this->array, $offset, $this->per_page);
+                $this->result = array_slice(
+                    $array,
+                    $offset,
+                    $this->per_page
+                );
             }
 
             $this->paginated =& $this->result;
+        }
+
+        /**
+         * Function: reslice
+         * Reslices pagination with a new number of items per page.
+         *
+         * Parameters:
+         *     $per_page - Number of items per page.
+         */
+        public function reslice($per_page): self {
+            return new self(
+                $this->array,
+                $per_page,
+                $this->name,
+                $this->model,
+                $this->page
+            );
         }
 
         /**
