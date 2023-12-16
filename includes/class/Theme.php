@@ -27,7 +27,8 @@
         private function __construct() {
             $this->url = THEME_URL;
             $this->safename = PREVIEWING ?
-                $_SESSION['theme'] : Config::current()->theme ;
+                $_SESSION['theme'] :
+                Config::current()->theme ;
         }
 
         /**
