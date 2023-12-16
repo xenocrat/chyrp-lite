@@ -54,11 +54,14 @@
          * Parameters:
          *     $array - The array to paginate.
          *     $per_page - Number of items per page.
-         *     $name - The name of the $_GET parameter to use for determining the current page.
-         *     $model - If this is true, each item in $array that gets shown on the page will be
-         *              initialized as a model of whatever is passed as the second argument to $array.
-         *              The first argument of $array is expected to be an array of IDs.
+         *     $name - The name of the $_GET parameter to determin the current page.
+         *     $model - Does the array contain model placeholders to be initialized?
          *     $page - Page number to start at.
+         *
+         * Notes:
+         *      If $model is true, each $array item shown on the page will
+         *      be initialized as a model of the type specified in $array[1].
+         *      $array[0] is expected to be an array of model placeholders.
          *
          * Returns:
          *     A paginated array of length $per_page or smaller.
