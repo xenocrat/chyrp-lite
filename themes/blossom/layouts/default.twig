@@ -2,7 +2,19 @@
 <html lang="{{ site.locale | lang_base }}" dir="{{ site.locale | text_direction }}">
 <head>
 <meta charset="UTF-8">
-<title>{% block title %}{{ (title is not empty ? title ~ " | " ~ site.name : site.name) | fix }}{% endblock %}</title>
+<title>
+{%- block title -%}
+{%- if pagination is not empty and pagination.page > 1 -%}
+{{- "Page %d" | translate | format(pagination.page) -}}
+{{- " | " -}}
+{%- endif -%}
+{%- if title is not empty -%}
+{{- title | fix -}}
+{{- " | " -}}
+{%- endif -%}
+{{- site.name | fix -}}
+{%- endblock -%}
+</title>
 <meta name="description" content="{{ site.description }}">
 <meta name="viewport" content="initial-scale = 1.0">
 <link rel="icon" sizes="32x32" type="image/x-icon" href="{{ site.chyrp_url }}/favicon.ico">
