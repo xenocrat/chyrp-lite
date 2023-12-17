@@ -1256,12 +1256,19 @@
          *     $template - The template file to display.
          *     $context - The context to be supplied to Twig.
          *     $title - The title for the page (optional).
+         *     $pagination - <Paginator> instance (optional).
          *
          * Notes:
          *     $template is supplied sans ".twig" and relative to THEME_DIR.
          *     $template can be an array of fallback template filenames to try.
+         *     $pagination will be inferred from the context if not supplied.
          */
-        public function display($template, $context = array(), $title = ""): void {
+        public function display(
+            $template,
+            $context = array(),
+            $title = "",
+            $pagination = null
+        ): void {
             $config = Config::current();
             $route = Route::current();
             $trigger = Trigger::current();
@@ -1282,6 +1289,15 @@
             }
 
             $this->displayed = true;
+
+            if (!isset($pagination)) {
+                foreach ($context as $item) {
+                    if ($item instanceof Paginator) {
+                        $pagination = $item;
+                        break;
+                    }
+                }
+            }
 
             # Populate the theme title attribute for feeds.
             $theme->title = $title;
@@ -1313,7 +1329,8 @@
             $this->context["route"]              = $route;
             $this->context["visitor"]            = Visitor::current();
             $this->context["visitor"]->logged_in = logged_in();
-            $this->context["title"]              = $theme->title;
+            $this->context["title"]              = $title;
+            $this->context["pagination"]         = $pagination;
             $this->context["modules"]            = Modules::$instances;
             $this->context["feathers"]           = Feathers::$instances;
             $this->context["POST"]               = $_POST;
