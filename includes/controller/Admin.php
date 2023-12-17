@@ -2983,6 +2983,7 @@
             $config->set("email", $_POST['email']);
             $config->set("timezone", $_POST['timezone']);
             $config->set("locale", $_POST['locale']);
+            $config->set("monospace_font", !empty($_POST['check_updates']));
             $config->set("check_updates", !empty($_POST['check_updates']));
             $config->set("check_updates_last", $check_updates_last);
 
@@ -3460,7 +3461,8 @@
          * Parameters:
          *     $template - The template file to display.
          *     $context - The context to be supplied to Twig.
-         *     $title - The title for the page.
+         *     $title - The title for the page (optional).
+         *     $pagination - <Paginator> instance (optional).
          *
          * Notes:
          *     $template is supplied sans ".twig" and relative to /admin/
@@ -3468,8 +3470,15 @@
          *
          *     $title defaults to a camelization of the template filename,
          *     e.g. foo_bar -> Foo Bar.
+         *
+         *     $pagination will be inferred from the context if not supplied.
          */
-        public function display($template, $context = array(), $title = ""): void {
+        public function display(
+            $template,
+            $context = array(),
+            $title = "",
+            $pagination = null
+        ): void {
             $config = Config::current();
             $route = Route::current();
             $trigger = Trigger::current();
@@ -3478,6 +3487,15 @@
                 return;
 
             $this->displayed = true;
+
+            if (!isset($pagination)) {
+                foreach ($context as $item) {
+                    if ($item instanceof Paginator) {
+                        $pagination = $item;
+                        break;
+                    }
+                }
+            }
 
             $this->context                       = array_merge($context, $this->context);
             $this->context["ip"]                 = $_SERVER['REMOTE_ADDR'];
@@ -3494,6 +3512,7 @@
             $this->context["visitor"]            = Visitor::current();
             $this->context["visitor"]->logged_in = logged_in();
             $this->context["title"]              = fallback($title, camelize($template, true));
+            $this->context["pagination"]         = $pagination;
             $this->context["navigation"]         = $this->navigation_context($route->action);
             $this->context["feathers"]           = Feathers::$instances;
             $this->context["modules"]            = Modules::$instances;
