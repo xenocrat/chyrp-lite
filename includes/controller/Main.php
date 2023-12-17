@@ -989,7 +989,8 @@
 
                 if (!Flash::exists("warning")) {
                     $password = (!empty($_POST['new_password1'])) ?
-                        User::hash_password($_POST['new_password1']) : $visitor->password ;
+                        User::hash_password($_POST['new_password1']) :
+                        $visitor->password ;
 
                     $visitor = $visitor->update(
                         login:$visitor->login,
@@ -1129,7 +1130,9 @@
                     );
 
                 if (!Flash::exists("warning")) {
-                    $user->update(password:User::hash_password($_POST['new_password1']));
+                    $user->update(
+                        password:User::hash_password($_POST['new_password1'])
+                    );
 
                     Flash::notice(
                         __("Your profile has been updated."),
@@ -1224,7 +1227,10 @@
                     $post->created_at ;
 
                 if (!$post->user->no_results) {
-                    $author = oneof($post->user->full_name, $post->user->login);
+                    $author = oneof(
+                        $post->user->full_name,
+                        $post->user->login
+                    );
                     $website = $post->user->website;
                 } else {
                     $author = null;
