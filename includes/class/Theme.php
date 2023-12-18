@@ -358,7 +358,7 @@
                         $links[] = array(
                             "href" => $feed_url,
                             "type" => BlogFeed::type(),
-                            "title" => oneof($this->title, $config->name)
+                            "title" => $this->title
                         );
             }
 
