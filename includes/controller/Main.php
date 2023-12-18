@@ -1213,11 +1213,19 @@
                     $latest_timestamp = $created_at;
             }
 
+            if (strlen($theme->title)) {
+                $title = $theme->title;
+                $subtitle = "";
+            } else {
+                $title = $config->name;
+                $subtitle = $config->description;
+            }
+
             $feed = new BlogFeed();
 
             $feed->open(
-                title:oneof($theme->title, $config->name),
-                subtitle:$config->description,
+                title:$title,
+                subtitle:$subtitle,
                 updated:$latest_timestamp
             );
 
@@ -1283,6 +1291,7 @@
             if ($this->displayed == true)
                 return;
 
+            # Try fallback template filenames.
             if (is_array($template)) {
                 foreach (array_values($template) as $index => $try)
                     if (
@@ -1296,6 +1305,7 @@
 
             $this->displayed = true;
 
+            # Discover pagination in the context.
             if (!isset($pagination)) {
                 foreach ($context as $item) {
                     if ($item instanceof Paginator) {
@@ -1305,10 +1315,10 @@
                 }
             }
 
-            # Populate the theme title attribute for feeds.
+            # Populate the theme title attribute.
             $theme->title = $title;
 
-            # Serve feeds if a feed request was detected for this action.
+            # Serve a feed request if detected for this action.
             if ($this->feed) {
                 if ($trigger->exists($route->action."_feed")) {
                     $trigger->call($route->action."_feed", $context);
