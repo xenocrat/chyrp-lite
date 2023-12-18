@@ -3488,6 +3488,7 @@
 
             $this->displayed = true;
 
+            # Discover pagination in the context.
             if (!isset($pagination)) {
                 foreach ($context as $item) {
                     if ($item instanceof Paginator) {
