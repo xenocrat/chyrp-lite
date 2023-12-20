@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/comments/admin/pages/comment_settings.twig:3
@@ -360,56 +360,56 @@ msgstr "Opmerkingen op &#8220;%s&#8221;"
 msgid "You have unsubscribed from the conversation."
 msgstr "Je bent uitgeschreven van deze conversatie."
 
-#: modules/comments/comments.php:1104
+#: modules/comments/comments.php:1105
 #, php-format
 msgid "Comment #%d"
 msgstr "Opmerking #%d"
 
-#: modules/comments/comments.php:1133
+#: modules/comments/comments.php:1134
 msgid "A ping from your URL is already registered."
 msgstr "Een ping van je URL is reeds geregistreerd."
 
-#: modules/comments/comments.php:1140
+#: modules/comments/comments.php:1141
 msgid "Your URL is too long to be stored in our database."
 msgstr "Je URL is te lang om in de database te worden opgeslagen."
 
-#: modules/comments/comments.php:1145
+#: modules/comments/comments.php:1146
 msgid "Mentioned this post."
 msgstr "Heeft deze blogpost genoemd."
 
-#: modules/comments/comments.php:1164
+#: modules/comments/comments.php:1165
 msgid "Open"
 msgstr "Open"
 
-#: modules/comments/comments.php:1170
+#: modules/comments/comments.php:1171
 msgid "Closed"
 msgstr "Gesloten"
 
-#: modules/comments/comments.php:1176
+#: modules/comments/comments.php:1177
 msgid "Private"
 msgstr "Privé"
 
-#: modules/comments/comments.php:1182
+#: modules/comments/comments.php:1183
 msgid "Registered Only"
 msgstr "Uitsluitend geregistreerden"
 
-#: modules/comments/comments.php:1191
+#: modules/comments/comments.php:1192
 msgid "Comment Status"
 msgstr "Status Opmerking"
-
-#: modules/comments/comments.php:1409 modules/comments/comments.php:1429
-#: modules/comments/comments.php:1454
-#, php-format
-msgid "New Comment at %s"
-msgstr "Nieuwe opmerking op %s"
 
 #: modules/comments/comments.php:1410 modules/comments/comments.php:1430
 #: modules/comments/comments.php:1455
 #, php-format
+msgid "New Comment at %s"
+msgstr "Nieuwe opmerking op %s"
+
+#: modules/comments/comments.php:1411 modules/comments/comments.php:1431
+#: modules/comments/comments.php:1456
+#, php-format
 msgid "%s commented on a blog post:"
 msgstr "%s heeft een opmerking geplaatst op een blogpost:"
 
-#: modules/comments/comments.php:1463
+#: modules/comments/comments.php:1464
 msgid "Unsubscribe from this conversation:"
 msgstr "Schrijf je uit van deze conversatie:"
 

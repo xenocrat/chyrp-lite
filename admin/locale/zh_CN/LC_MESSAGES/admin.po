@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: admin/help/canonical_url.twig:3 admin/help/canonical_url.twig:6
@@ -376,7 +376,12 @@ msgstr "预览"
 msgid "Words:"
 msgstr ""
 
-#: admin/layouts/default.twig:60
+#: admin/layouts/default.twig:8
+#, php-format
+msgid "Page %d"
+msgstr "第%d页"
+
+#: admin/layouts/default.twig:73
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "调用 %s 在行 %d 在 %s 秒."
@@ -455,7 +460,7 @@ msgid "Compose blog content using Markdown text formatting."
 msgstr "使用Markdown语法撰写博客内容。"
 
 #: admin/pages/content_settings.twig:73 admin/pages/edit_group.twig:24
-#: admin/pages/edit_user.twig:55 admin/pages/general_settings.twig:59
+#: admin/pages/edit_user.twig:55 admin/pages/general_settings.twig:66
 #: admin/pages/route_settings.twig:84 admin/pages/user_settings.twig:47
 msgid "Update"
 msgstr "更新"
@@ -732,13 +737,21 @@ msgid "Language"
 msgstr "语言"
 
 #: admin/pages/general_settings.twig:52
-msgid "Check for Updates?"
-msgstr "检查更新？"
+msgid "Monospace Font"
+msgstr "等宽字体"
 
 #: admin/pages/general_settings.twig:55
+msgid "Write with a monospace font."
+msgstr "使用等宽字体书写。"
+
+#: admin/pages/general_settings.twig:59
+msgid "Check for Updates"
+msgstr "检查更新"
+
+#: admin/pages/general_settings.twig:62
 #, php-format
-msgid "Current version: %s"
-msgstr "当前版本： %s"
+msgid "Current version: %s."
+msgstr "当前版本： %s。"
 
 #: admin/pages/import.twig:3 admin/pages/import.twig:39
 msgid "Import"

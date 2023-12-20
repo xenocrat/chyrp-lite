@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/comments/admin/pages/comment_settings.twig:3
@@ -357,56 +357,56 @@ msgstr "对 &#8220;%s&#8221; 的评论"
 msgid "You have unsubscribed from the conversation."
 msgstr "您已取消订阅对话。"
 
-#: modules/comments/comments.php:1104
+#: modules/comments/comments.php:1105
 #, php-format
 msgid "Comment #%d"
 msgstr "评论 #%d"
 
-#: modules/comments/comments.php:1133
+#: modules/comments/comments.php:1134
 msgid "A ping from your URL is already registered."
 msgstr "您的URL中的ping已被注册。"
 
-#: modules/comments/comments.php:1140
+#: modules/comments/comments.php:1141
 msgid "Your URL is too long to be stored in our database."
 msgstr "您的网址太长，无法存储在我们的数据库中。"
 
-#: modules/comments/comments.php:1145
+#: modules/comments/comments.php:1146
 msgid "Mentioned this post."
 msgstr "提到了这个帖子。"
 
-#: modules/comments/comments.php:1164
+#: modules/comments/comments.php:1165
 msgid "Open"
 msgstr "打开"
 
-#: modules/comments/comments.php:1170
+#: modules/comments/comments.php:1171
 msgid "Closed"
 msgstr "已关闭"
 
-#: modules/comments/comments.php:1176
+#: modules/comments/comments.php:1177
 msgid "Private"
 msgstr "私人"
 
-#: modules/comments/comments.php:1182
+#: modules/comments/comments.php:1183
 msgid "Registered Only"
 msgstr "仅注册"
 
-#: modules/comments/comments.php:1191
+#: modules/comments/comments.php:1192
 msgid "Comment Status"
 msgstr "评论状态"
-
-#: modules/comments/comments.php:1409 modules/comments/comments.php:1429
-#: modules/comments/comments.php:1454
-#, php-format
-msgid "New Comment at %s"
-msgstr "%s 上的新注释"
 
 #: modules/comments/comments.php:1410 modules/comments/comments.php:1430
 #: modules/comments/comments.php:1455
 #, php-format
+msgid "New Comment at %s"
+msgstr "%s 上的新注释"
+
+#: modules/comments/comments.php:1411 modules/comments/comments.php:1431
+#: modules/comments/comments.php:1456
+#, php-format
 msgid "%s commented on a blog post:"
 msgstr "%s 在博客文章上评论："
 
-#: modules/comments/comments.php:1463
+#: modules/comments/comments.php:1464
 msgid "Unsubscribe from this conversation:"
 msgstr "取消订阅此对话："
 

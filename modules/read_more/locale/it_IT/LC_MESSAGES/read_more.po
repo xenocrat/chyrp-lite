@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.4.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/read_more/admin/pages/read_more_settings.twig:3
@@ -26,7 +26,7 @@ msgstr "Applica ai feed"
 msgid "Default Text"
 msgstr "Testo predefinito"
 
-#: modules/read_more/info.php:3 modules/read_more/read_more.php:60
+#: modules/read_more/info.php:3 modules/read_more/read_more.php:62
 msgid "Read More"
 msgstr "Continua a leggere"
 
@@ -40,6 +40,6 @@ msgstr ""
 "<code>&lt;!--more--&gt;</code> o <code>&lt;!--more testo personalizzato--&gt;"
 "</code> nei tuoi post."
 
-#: modules/read_more/read_more.php:78
+#: modules/read_more/read_more.php:80
 msgid "&hellip;more"
 msgstr "&hellip;altro"

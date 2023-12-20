@@ -358,15 +358,20 @@ msgstr ""
 msgid "The default theme provided with Chyrp Lite."
 msgstr ""
 
-#: themes/blossom/layouts/default.twig:36
+#: themes/blossom/layouts/default.twig:8
+#, php-format
+msgid "Page %d"
+msgstr ""
+
+#: themes/blossom/layouts/default.twig:48
 msgid "Newer posts"
 msgstr ""
 
-#: themes/blossom/layouts/default.twig:44
+#: themes/blossom/layouts/default.twig:56
 msgid "Older posts"
 msgstr ""
 
-#: themes/blossom/layouts/default.twig:53
+#: themes/blossom/layouts/default.twig:65
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr ""

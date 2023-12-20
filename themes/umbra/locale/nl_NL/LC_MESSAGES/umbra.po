@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/umbra/content/comment.twig:4
@@ -39,7 +39,7 @@ msgstr "Tags"
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "Permalink naar &#8220;%s&#8221;"
 
-#: themes/umbra/content/post.twig:17 themes/umbra/layouts/default.twig:55
+#: themes/umbra/content/post.twig:17 themes/umbra/layouts/default.twig:67
 msgid "Draft"
 msgstr "Concept"
 
@@ -175,7 +175,7 @@ msgstr "Bericht me wanneer anderen een opmerking plaatsen"
 msgid "Speak"
 msgstr "Praat"
 
-#: themes/umbra/forms/user/controls.twig:5 themes/umbra/layouts/default.twig:60
+#: themes/umbra/forms/user/controls.twig:5 themes/umbra/layouts/default.twig:72
 msgid "Controls"
 msgstr "Instellingen"
 
@@ -185,7 +185,7 @@ msgstr "Volledige naam"
 
 #: themes/umbra/forms/user/controls.twig:9
 #: themes/umbra/forms/user/register.twig:13
-#: themes/umbra/layouts/default.twig:37
+#: themes/umbra/layouts/default.twig:49
 msgid "Email"
 msgstr "Email"
 
@@ -208,7 +208,7 @@ msgid "Update"
 msgstr "Bijwerken"
 
 #: themes/umbra/forms/user/login.twig:5 themes/umbra/forms/user/login.twig:14
-#: themes/umbra/layouts/default.twig:72
+#: themes/umbra/layouts/default.twig:84
 msgid "Log in"
 msgstr "Log in"
 
@@ -238,7 +238,7 @@ msgstr "Bevestig"
 
 #: themes/umbra/forms/user/register.twig:5
 #: themes/umbra/forms/user/register.twig:19
-#: themes/umbra/layouts/default.twig:68
+#: themes/umbra/layouts/default.twig:80
 msgid "Register"
 msgstr "Registreer"
 
@@ -258,48 +258,48 @@ msgstr "Umbra"
 msgid "A dark tumbleblog theme for Chyrp Lite."
 msgstr "Een donker Tumbleblog thema voor Chyrp Lite."
 
-#: themes/umbra/layouts/default.twig:35
-msgid "Links"
-msgstr "Links"
-
-#: themes/umbra/layouts/default.twig:40
-msgid "Feed"
-msgstr "Feed"
-
-#: themes/umbra/layouts/default.twig:43
-msgid "Archive"
-msgstr "Archief"
-
-#: themes/umbra/layouts/default.twig:47
-msgid "Admin"
-msgstr "Beheer"
-
-#: themes/umbra/layouts/default.twig:51
-msgid "Write"
-msgstr "Schrijf"
-
-#: themes/umbra/layouts/default.twig:63
-msgid "Log out"
-msgstr "Log uit"
-
-#: themes/umbra/layouts/default.twig:77
-msgid "Search&hellip;"
-msgstr "Zoek&hellip;"
-
-#: themes/umbra/layouts/default.twig:77
-msgid "Search this blog"
-msgstr "Doorzoek deze Blog"
-
-#: themes/umbra/layouts/default.twig:78
-msgid "Search"
-msgstr "Zoek"
-
-#: themes/umbra/layouts/default.twig:88
+#: themes/umbra/layouts/default.twig:8 themes/umbra/layouts/default.twig:100
 #, php-format
 msgid "Page %d"
 msgstr "Pagina %d"
 
-#: themes/umbra/layouts/default.twig:99
+#: themes/umbra/layouts/default.twig:47
+msgid "Links"
+msgstr "Links"
+
+#: themes/umbra/layouts/default.twig:52
+msgid "Feed"
+msgstr "Feed"
+
+#: themes/umbra/layouts/default.twig:55
+msgid "Archive"
+msgstr "Archief"
+
+#: themes/umbra/layouts/default.twig:59
+msgid "Admin"
+msgstr "Beheer"
+
+#: themes/umbra/layouts/default.twig:63
+msgid "Write"
+msgstr "Schrijf"
+
+#: themes/umbra/layouts/default.twig:75
+msgid "Log out"
+msgstr "Log uit"
+
+#: themes/umbra/layouts/default.twig:89
+msgid "Search&hellip;"
+msgstr "Zoek&hellip;"
+
+#: themes/umbra/layouts/default.twig:89
+msgid "Search this blog"
+msgstr "Doorzoek deze Blog"
+
+#: themes/umbra/layouts/default.twig:90
+msgid "Search"
+msgstr "Zoek"
+
+#: themes/umbra/layouts/default.twig:111
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "Aangeroepen vanuit %s op regel %d bij %s seconden."

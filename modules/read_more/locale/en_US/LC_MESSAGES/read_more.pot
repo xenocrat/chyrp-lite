@@ -14,7 +14,7 @@ msgid "Default Text"
 msgstr ""
 
 #: modules/read_more/info.php:3
-#: modules/read_more/read_more.php:60
+#: modules/read_more/read_more.php:62
 msgid "Read More"
 msgstr ""
 
@@ -22,7 +22,7 @@ msgstr ""
 msgid "Add &#8220;&hellip;more&#8221; links to your blog index by typing <code>&lt;!--more--&gt;</code> or <code>&lt;!--more custom text--&gt;</code> in your posts."
 msgstr ""
 
-#: modules/read_more/read_more.php:78
+#: modules/read_more/read_more.php:80
 msgid "&hellip;more"
 msgstr ""
 

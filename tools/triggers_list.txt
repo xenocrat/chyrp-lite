@@ -23,7 +23,7 @@ Called from:
 admin_head
 ----------
 Called from:
-	admin/layouts/default.twig on line 12
+	admin/layouts/default.twig on line 25
 
 
 delete_user_form
@@ -242,19 +242,19 @@ Arguments:
 runtime
 -------
 Called from:
-	includes/common.php on line 361
+	includes/common.php on line 375
 
 
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 1943
+	includes/controller/Admin.php on line 1956
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2368
+	includes/controller/Admin.php on line 2381
 
 Arguments:
 	$group
@@ -263,7 +263,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2405
+	includes/controller/Admin.php on line 2418
 
 Arguments:
 	$user
@@ -272,7 +272,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2451
+	includes/controller/Admin.php on line 2464
 
 Arguments:
 	$entry, $post
@@ -281,7 +281,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2487
+	includes/controller/Admin.php on line 2500
 
 Arguments:
 	$entry, $page
@@ -290,7 +290,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 2491
+	includes/controller/Admin.php on line 2504
 
 Arguments:
 	$imports
@@ -299,13 +299,13 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 2865
+	includes/controller/Admin.php on line 2878
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 2880
+	includes/controller/Admin.php on line 2893
 
 
 can_not_view_page
@@ -323,7 +323,7 @@ Called from:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 1240
+	includes/controller/Main.php on line 1259
 
 Arguments:
 	$post, $feed
@@ -332,7 +332,7 @@ Arguments:
 webmention
 ----------
 Called from:
-	includes/helpers.php on line 1917
+	includes/helpers.php on line 1916
 
 Arguments:
 	$post, $source, $target
@@ -413,7 +413,7 @@ Arguments:
 add_page
 --------
 Called from:
-	includes/model/Page.php on line 132
+	includes/model/Page.php on line 146
 
 Arguments:
 	$page
@@ -422,7 +422,7 @@ Arguments:
 update_page
 -----------
 Called from:
-	includes/model/Page.php on line 238
+	includes/model/Page.php on line 252
 
 Arguments:
 	$page, $this
@@ -566,7 +566,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 1114
+	modules/comments/comments.php on line 1115
 
 Arguments:
 	$comment, $feed
@@ -575,7 +575,7 @@ Arguments:
 correspond_site_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1406
+	modules/comments/comments.php on line 1407
 
 Arguments:
 	$comment
@@ -584,7 +584,7 @@ Arguments:
 correspond_user_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1426
+	modules/comments/comments.php on line 1427
 
 Arguments:
 	$comment, $user
@@ -593,7 +593,7 @@ Arguments:
 correspond_peer_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1451
+	modules/comments/comments.php on line 1452
 
 Arguments:
 	$comment, $peer, $url
@@ -764,21 +764,21 @@ Called from:
 end_head
 --------
 Called from:
-	themes/blossom/layouts/default.twig on line 14
-	themes/sparrow/layouts/default.twig on line 14
-	themes/topaz/layouts/default.twig on line 14
-	themes/umbra/layouts/default.twig on line 14
-	themes/virgula/layouts/default.twig on line 14
+	themes/blossom/layouts/default.twig on line 26
+	themes/sparrow/layouts/default.twig on line 26
+	themes/topaz/layouts/default.twig on line 26
+	themes/umbra/layouts/default.twig on line 26
+	themes/virgula/layouts/default.twig on line 26
 
 
 end_content
 -----------
 Called from:
-	themes/blossom/layouts/default.twig on line 46
-	themes/sparrow/layouts/default.twig on line 98
-	themes/topaz/layouts/default.twig on line 45
-	themes/umbra/layouts/default.twig on line 92
-	themes/virgula/layouts/default.twig on line 76
+	themes/blossom/layouts/default.twig on line 58
+	themes/sparrow/layouts/default.twig on line 110
+	themes/topaz/layouts/default.twig on line 57
+	themes/umbra/layouts/default.twig on line 104
+	themes/virgula/layouts/default.twig on line 88
 
 
 
@@ -836,7 +836,7 @@ Target:
 related_posts
 -------------
 Called from:
-	includes/class/Theme.php on line 197
+	includes/class/Theme.php on line 198
 
 Target:
 	$ids
@@ -848,7 +848,7 @@ Arguments:
 stylesheets
 -----------
 Called from:
-	includes/class/Theme.php on line 242
+	includes/class/Theme.php on line 243
 
 Target:
 	$stylesheets
@@ -857,7 +857,7 @@ Target:
 scripts
 -------
 Called from:
-	includes/class/Theme.php on line 291
+	includes/class/Theme.php on line 292
 
 Target:
 	$scripts
@@ -866,7 +866,7 @@ Target:
 links
 -----
 Called from:
-	includes/class/Theme.php on line 368
+	includes/class/Theme.php on line 366
 
 Target:
 	$links
@@ -921,7 +921,7 @@ Arguments:
 posts_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 2052
+	includes/controller/Admin.php on line 2065
 
 Target:
 	$posts_atom
@@ -933,7 +933,7 @@ Arguments:
 pages_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 2149
+	includes/controller/Admin.php on line 2162
 
 Target:
 	$pages_atom
@@ -945,7 +945,7 @@ Arguments:
 export
 ------
 Called from:
-	includes/controller/Admin.php on line 2235
+	includes/controller/Admin.php on line 2248
 
 Target:
 	$exports
@@ -954,7 +954,7 @@ Target:
 before_import
 -------------
 Called from:
-	includes/controller/Admin.php on line 2346
+	includes/controller/Admin.php on line 2359
 
 Target:
 	$imports
@@ -963,7 +963,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 3309
+	includes/controller/Admin.php on line 3323
 
 Target:
 	$write
@@ -972,7 +972,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3372
+	includes/controller/Admin.php on line 3386
 
 Target:
 	$manage
@@ -981,7 +981,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 3402
+	includes/controller/Admin.php on line 3416
 
 Target:
 	$settings
@@ -990,7 +990,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3425
+	includes/controller/Admin.php on line 3439
 
 Target:
 	$extend
@@ -999,7 +999,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 3494
+	includes/controller/Admin.php on line 3527
 
 Target:
 	$this->context
@@ -1009,7 +1009,7 @@ markup_page_title
 -----------------
 Called from:
 	includes/controller/Ajax.php on line 205
-	includes/model/Page.php on line 320
+	includes/model/Page.php on line 334
 
 Target:
 	$content
@@ -1019,7 +1019,7 @@ markup_title
 ------------
 Called from:
 	includes/controller/Ajax.php on line 205
-	includes/model/Page.php on line 320
+	includes/model/Page.php on line 334
 
 Target:
 	$content
@@ -1029,7 +1029,7 @@ markup_page_text
 ----------------
 Called from:
 	includes/controller/Ajax.php on line 209
-	includes/model/Page.php on line 321
+	includes/model/Page.php on line 335
 
 Target:
 	$content
@@ -1039,7 +1039,7 @@ markup_text
 -----------
 Called from:
 	includes/controller/Ajax.php on line 209
-	includes/model/Page.php on line 321
+	includes/model/Page.php on line 335
 	modules/comments/model/Comment.php on line 581
 
 Target:
@@ -1049,7 +1049,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 1319
+	includes/controller/Main.php on line 1357
 
 Target:
 	$this->context
@@ -1058,7 +1058,7 @@ Target:
 keyword_search
 --------------
 Called from:
-	includes/helpers.php on line 1138
+	includes/helpers.php on line 1137
 
 Target:
 	$search
@@ -1152,7 +1152,7 @@ Target:
 page
 ----
 Called from:
-	includes/model/Page.php on line 38
+	includes/model/Page.php on line 52
 
 Target:
 	$this
@@ -1161,7 +1161,7 @@ Target:
 before_add_page
 ---------------
 Called from:
-	includes/model/Page.php on line 129
+	includes/model/Page.php on line 143
 
 Target:
 	$new_values
@@ -1170,7 +1170,7 @@ Target:
 before_update_page
 ------------------
 Called from:
-	includes/model/Page.php on line 220
+	includes/model/Page.php on line 234
 
 Target:
 	$new_values
@@ -1179,7 +1179,7 @@ Target:
 filter_page
 -----------
 Called from:
-	includes/model/Page.php on line 315
+	includes/model/Page.php on line 329
 
 Target:
 	$this
@@ -1254,7 +1254,7 @@ Arguments:
 excerpt
 -------
 Called from:
-	includes/model/Post.php on line 774
+	includes/model/Post.php on line 773
 
 Target:
 	$excerpt
@@ -1266,7 +1266,7 @@ Arguments:
 feed_content
 ------------
 Called from:
-	includes/model/Post.php on line 792
+	includes/model/Post.php on line 790
 
 Target:
 	$feed_content
@@ -1278,7 +1278,7 @@ Arguments:
 filter_post
 -----------
 Called from:
-	includes/model/Post.php on line 875
+	includes/model/Post.php on line 873
 
 Target:
 	$this

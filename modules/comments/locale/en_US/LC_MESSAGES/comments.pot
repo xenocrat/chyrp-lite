@@ -361,58 +361,58 @@ msgstr ""
 msgid "You have unsubscribed from the conversation."
 msgstr ""
 
-#: modules/comments/comments.php:1104
+#: modules/comments/comments.php:1105
 #, php-format
 msgid "Comment #%d"
 msgstr ""
 
-#: modules/comments/comments.php:1133
+#: modules/comments/comments.php:1134
 msgid "A ping from your URL is already registered."
 msgstr ""
 
-#: modules/comments/comments.php:1140
+#: modules/comments/comments.php:1141
 msgid "Your URL is too long to be stored in our database."
 msgstr ""
 
-#: modules/comments/comments.php:1145
+#: modules/comments/comments.php:1146
 msgid "Mentioned this post."
 msgstr ""
 
-#: modules/comments/comments.php:1164
+#: modules/comments/comments.php:1165
 msgid "Open"
 msgstr ""
 
-#: modules/comments/comments.php:1170
+#: modules/comments/comments.php:1171
 msgid "Closed"
 msgstr ""
 
-#: modules/comments/comments.php:1176
+#: modules/comments/comments.php:1177
 msgid "Private"
 msgstr ""
 
-#: modules/comments/comments.php:1182
+#: modules/comments/comments.php:1183
 msgid "Registered Only"
 msgstr ""
 
-#: modules/comments/comments.php:1191
+#: modules/comments/comments.php:1192
 msgid "Comment Status"
-msgstr ""
-
-#: modules/comments/comments.php:1409
-#: modules/comments/comments.php:1429
-#: modules/comments/comments.php:1454
-#, php-format
-msgid "New Comment at %s"
 msgstr ""
 
 #: modules/comments/comments.php:1410
 #: modules/comments/comments.php:1430
 #: modules/comments/comments.php:1455
 #, php-format
+msgid "New Comment at %s"
+msgstr ""
+
+#: modules/comments/comments.php:1411
+#: modules/comments/comments.php:1431
+#: modules/comments/comments.php:1456
+#, php-format
 msgid "%s commented on a blog post:"
 msgstr ""
 
-#: modules/comments/comments.php:1463
+#: modules/comments/comments.php:1464
 msgid "Unsubscribe from this conversation:"
 msgstr ""
 

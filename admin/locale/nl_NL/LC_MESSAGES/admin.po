@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: admin/help/canonical_url.twig:3 admin/help/canonical_url.twig:6
@@ -390,7 +390,12 @@ msgstr "vooruitblik"
 msgid "Words:"
 msgstr "Woorden:"
 
-#: admin/layouts/default.twig:60
+#: admin/layouts/default.twig:8
+#, php-format
+msgid "Page %d"
+msgstr "Pagina %d"
+
+#: admin/layouts/default.twig:73
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "Aangeroepen vanuit %s op regel %d in %s seconden."
@@ -470,7 +475,7 @@ msgid "Compose blog content using Markdown text formatting."
 msgstr "Stel een blogpost samen, gebruik makende van markup syntax."
 
 #: admin/pages/content_settings.twig:73 admin/pages/edit_group.twig:24
-#: admin/pages/edit_user.twig:55 admin/pages/general_settings.twig:59
+#: admin/pages/edit_user.twig:55 admin/pages/general_settings.twig:66
 #: admin/pages/route_settings.twig:84 admin/pages/user_settings.twig:47
 msgid "Update"
 msgstr "Update"
@@ -752,13 +757,21 @@ msgid "Language"
 msgstr "Taal"
 
 #: admin/pages/general_settings.twig:52
-msgid "Check for Updates?"
-msgstr "Controleer op updates?"
+msgid "Monospace Font"
+msgstr "Monospace-lettertype"
 
 #: admin/pages/general_settings.twig:55
+msgid "Write with a monospace font."
+msgstr "Schrijf met een monospace-lettertype."
+
+#: admin/pages/general_settings.twig:59
+msgid "Check for Updates"
+msgstr "Controleer op updates"
+
+#: admin/pages/general_settings.twig:62
 #, php-format
-msgid "Current version: %s"
-msgstr "Huidige versie: %s"
+msgid "Current version: %s."
+msgstr "Huidige versie: %s."
 
 #: admin/pages/import.twig:3 admin/pages/import.twig:39
 msgid "Import"

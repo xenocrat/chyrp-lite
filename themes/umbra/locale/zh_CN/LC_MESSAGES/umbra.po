@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/umbra/content/comment.twig:4
@@ -40,7 +40,7 @@ msgstr "标签"
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "永久链接至 &#8220;%s&#8221;"
 
-#: themes/umbra/content/post.twig:17 themes/umbra/layouts/default.twig:55
+#: themes/umbra/content/post.twig:17 themes/umbra/layouts/default.twig:67
 msgid "Draft"
 msgstr "草稿"
 
@@ -176,7 +176,7 @@ msgstr "当有其他人评论的时候通知我"
 msgid "Speak"
 msgstr "说话"
 
-#: themes/umbra/forms/user/controls.twig:5 themes/umbra/layouts/default.twig:60
+#: themes/umbra/forms/user/controls.twig:5 themes/umbra/layouts/default.twig:72
 msgid "Controls"
 msgstr "操作"
 
@@ -186,7 +186,7 @@ msgstr "全名"
 
 #: themes/umbra/forms/user/controls.twig:9
 #: themes/umbra/forms/user/register.twig:13
-#: themes/umbra/layouts/default.twig:37
+#: themes/umbra/layouts/default.twig:49
 msgid "Email"
 msgstr "邮件"
 
@@ -209,7 +209,7 @@ msgid "Update"
 msgstr "更新"
 
 #: themes/umbra/forms/user/login.twig:5 themes/umbra/forms/user/login.twig:14
-#: themes/umbra/layouts/default.twig:72
+#: themes/umbra/layouts/default.twig:84
 msgid "Log in"
 msgstr "登陆"
 
@@ -239,7 +239,7 @@ msgstr "提交"
 
 #: themes/umbra/forms/user/register.twig:5
 #: themes/umbra/forms/user/register.twig:19
-#: themes/umbra/layouts/default.twig:68
+#: themes/umbra/layouts/default.twig:80
 msgid "Register"
 msgstr "注册"
 
@@ -259,48 +259,48 @@ msgstr ""
 msgid "A dark tumbleblog theme for Chyrp Lite."
 msgstr ""
 
-#: themes/umbra/layouts/default.twig:35
-msgid "Links"
-msgstr "链接"
-
-#: themes/umbra/layouts/default.twig:40
-msgid "Feed"
-msgstr "订阅"
-
-#: themes/umbra/layouts/default.twig:43
-msgid "Archive"
-msgstr "档案"
-
-#: themes/umbra/layouts/default.twig:47
-msgid "Admin"
-msgstr "管理"
-
-#: themes/umbra/layouts/default.twig:51
-msgid "Write"
-msgstr "写作"
-
-#: themes/umbra/layouts/default.twig:63
-msgid "Log out"
-msgstr "退出登陆"
-
-#: themes/umbra/layouts/default.twig:77
-msgid "Search&hellip;"
-msgstr "搜索&hellip;"
-
-#: themes/umbra/layouts/default.twig:77
-msgid "Search this blog"
-msgstr "搜索此博客"
-
-#: themes/umbra/layouts/default.twig:78
-msgid "Search"
-msgstr "搜索"
-
-#: themes/umbra/layouts/default.twig:88
+#: themes/umbra/layouts/default.twig:8 themes/umbra/layouts/default.twig:100
 #, php-format
 msgid "Page %d"
 msgstr "第%d页"
 
-#: themes/umbra/layouts/default.twig:99
+#: themes/umbra/layouts/default.twig:47
+msgid "Links"
+msgstr "链接"
+
+#: themes/umbra/layouts/default.twig:52
+msgid "Feed"
+msgstr "订阅"
+
+#: themes/umbra/layouts/default.twig:55
+msgid "Archive"
+msgstr "档案"
+
+#: themes/umbra/layouts/default.twig:59
+msgid "Admin"
+msgstr "管理"
+
+#: themes/umbra/layouts/default.twig:63
+msgid "Write"
+msgstr "写作"
+
+#: themes/umbra/layouts/default.twig:75
+msgid "Log out"
+msgstr "退出登陆"
+
+#: themes/umbra/layouts/default.twig:89
+msgid "Search&hellip;"
+msgstr "搜索&hellip;"
+
+#: themes/umbra/layouts/default.twig:89
+msgid "Search this blog"
+msgstr "搜索此博客"
+
+#: themes/umbra/layouts/default.twig:90
+msgid "Search"
+msgstr "搜索"
+
+#: themes/umbra/layouts/default.twig:111
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "调用 %s 在行 %d 在 %s 秒."
@@ -315,7 +315,7 @@ msgstr "未找到."
 
 #: themes/umbra/pages/archive.twig:11
 msgid "F Y"
-msgstr ""
+msgstr "F Y"
 
 #: themes/umbra/pages/archive.twig:51
 #, php-format

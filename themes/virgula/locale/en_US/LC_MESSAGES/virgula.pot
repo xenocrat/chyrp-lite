@@ -153,7 +153,7 @@ msgid "Speak"
 msgstr ""
 
 #: themes/virgula/forms/user/controls.twig:4
-#: themes/virgula/layouts/default.twig:42
+#: themes/virgula/layouts/default.twig:54
 msgid "Controls"
 msgstr ""
 
@@ -186,7 +186,7 @@ msgstr ""
 
 #: themes/virgula/forms/user/login.twig:4
 #: themes/virgula/forms/user/login.twig:13
-#: themes/virgula/layouts/default.twig:54
+#: themes/virgula/layouts/default.twig:66
 msgid "Log in"
 msgstr ""
 
@@ -217,7 +217,7 @@ msgstr ""
 
 #: themes/virgula/forms/user/register.twig:4
 #: themes/virgula/forms/user/register.twig:18
-#: themes/virgula/layouts/default.twig:50
+#: themes/virgula/layouts/default.twig:62
 msgid "Register"
 msgstr ""
 
@@ -237,40 +237,45 @@ msgstr ""
 msgid "A high-contrast theme for Chyrp Lite."
 msgstr ""
 
-#: themes/virgula/layouts/default.twig:22
+#: themes/virgula/layouts/default.twig:8
+#, php-format
+msgid "Page %d"
+msgstr ""
+
+#: themes/virgula/layouts/default.twig:34
 msgid "Feed"
 msgstr ""
 
-#: themes/virgula/layouts/default.twig:25
+#: themes/virgula/layouts/default.twig:37
 msgid "Archive"
 msgstr ""
 
-#: themes/virgula/layouts/default.twig:29
+#: themes/virgula/layouts/default.twig:41
 msgid "Admin"
 msgstr ""
 
-#: themes/virgula/layouts/default.twig:33
+#: themes/virgula/layouts/default.twig:45
 msgid "Write"
 msgstr ""
 
-#: themes/virgula/layouts/default.twig:37
+#: themes/virgula/layouts/default.twig:49
 msgid "Draft"
 msgstr ""
 
-#: themes/virgula/layouts/default.twig:45
+#: themes/virgula/layouts/default.twig:57
 msgid "Log out"
 msgstr ""
 
-#: themes/virgula/layouts/default.twig:59
-#: themes/virgula/layouts/default.twig:59
+#: themes/virgula/layouts/default.twig:71
+#: themes/virgula/layouts/default.twig:71
 msgid "Search this blog"
 msgstr ""
 
-#: themes/virgula/layouts/default.twig:60
+#: themes/virgula/layouts/default.twig:72
 msgid "Find"
 msgstr ""
 
-#: themes/virgula/layouts/default.twig:83
+#: themes/virgula/layouts/default.twig:95
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr ""

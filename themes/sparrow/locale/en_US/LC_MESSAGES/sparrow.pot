@@ -32,7 +32,7 @@ msgid "Permanent link to &#8220;%s&#8221;"
 msgstr ""
 
 #: themes/sparrow/content/post.twig:17
-#: themes/sparrow/layouts/default.twig:55
+#: themes/sparrow/layouts/default.twig:67
 msgid "Draft"
 msgstr ""
 
@@ -201,7 +201,7 @@ msgid "Speak"
 msgstr ""
 
 #: themes/sparrow/forms/user/controls.twig:5
-#: themes/sparrow/layouts/default.twig:60
+#: themes/sparrow/layouts/default.twig:72
 msgid "Controls"
 msgstr ""
 
@@ -211,7 +211,7 @@ msgstr ""
 
 #: themes/sparrow/forms/user/controls.twig:9
 #: themes/sparrow/forms/user/register.twig:13
-#: themes/sparrow/layouts/default.twig:37
+#: themes/sparrow/layouts/default.twig:49
 msgid "Email"
 msgstr ""
 
@@ -235,7 +235,7 @@ msgstr ""
 
 #: themes/sparrow/forms/user/login.twig:5
 #: themes/sparrow/forms/user/login.twig:14
-#: themes/sparrow/layouts/default.twig:72
+#: themes/sparrow/layouts/default.twig:84
 msgid "Log in"
 msgstr ""
 
@@ -266,7 +266,7 @@ msgstr ""
 
 #: themes/sparrow/forms/user/register.twig:5
 #: themes/sparrow/forms/user/register.twig:19
-#: themes/sparrow/layouts/default.twig:68
+#: themes/sparrow/layouts/default.twig:80
 msgid "Register"
 msgstr ""
 
@@ -286,51 +286,56 @@ msgstr ""
 msgid "An unobtrusive tumbleblog theme for Chyrp Lite."
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:35
-msgid "Links"
-msgstr ""
-
-#: themes/sparrow/layouts/default.twig:40
-msgid "Feed"
-msgstr ""
-
-#: themes/sparrow/layouts/default.twig:43
-msgid "Archive"
+#: themes/sparrow/layouts/default.twig:8
+#, php-format
+msgid "Page %d"
 msgstr ""
 
 #: themes/sparrow/layouts/default.twig:47
+msgid "Links"
+msgstr ""
+
+#: themes/sparrow/layouts/default.twig:52
+msgid "Feed"
+msgstr ""
+
+#: themes/sparrow/layouts/default.twig:55
+msgid "Archive"
+msgstr ""
+
+#: themes/sparrow/layouts/default.twig:59
 msgid "Admin"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:51
+#: themes/sparrow/layouts/default.twig:63
 msgid "Write"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:63
+#: themes/sparrow/layouts/default.twig:75
 msgid "Log out"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:77
+#: themes/sparrow/layouts/default.twig:89
 msgid "Search&hellip;"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:77
+#: themes/sparrow/layouts/default.twig:89
 msgid "Search this blog"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:78
+#: themes/sparrow/layouts/default.twig:90
 msgid "Search"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:84
+#: themes/sparrow/layouts/default.twig:96
 msgid "&larr; Newer posts"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:94
+#: themes/sparrow/layouts/default.twig:106
 msgid "Older posts &rarr;"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:105
+#: themes/sparrow/layouts/default.twig:117
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr ""

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: admin/help/canonical_url.twig:3 admin/help/canonical_url.twig:6
@@ -103,7 +103,7 @@ msgid "## Heading"
 msgstr "## Kopf"
 
 #: admin/help/markdown.twig:20 admin/help/markdown.twig:24
-#: admin/javascripts/admin.js.php:233 admin/javascripts/admin.js.php:234
+#: admin/javascripts/admin.js.php:236 admin/javascripts/admin.js.php:237
 msgid "Heading"
 msgstr "Kopf"
 
@@ -115,8 +115,8 @@ msgstr "### Kopf"
 msgid "**Strong**"
 msgstr "**Stark**"
 
-#: admin/help/markdown.twig:28 admin/javascripts/admin.js.php:248
-#: admin/javascripts/admin.js.php:249
+#: admin/help/markdown.twig:28 admin/javascripts/admin.js.php:251
+#: admin/javascripts/admin.js.php:252
 msgid "Strong"
 msgstr "Stark"
 
@@ -124,8 +124,8 @@ msgstr "Stark"
 msgid "*Emphasis*"
 msgstr "*Schwerpunkt*"
 
-#: admin/help/markdown.twig:32 admin/javascripts/admin.js.php:263
-#: admin/javascripts/admin.js.php:264
+#: admin/help/markdown.twig:32 admin/javascripts/admin.js.php:266
+#: admin/javascripts/admin.js.php:267
 msgid "Emphasis"
 msgstr "Schwerpunkt"
 
@@ -141,8 +141,8 @@ msgstr "Zitat"
 msgid "~~Strikethrough~~"
 msgstr "~~Durchgestrichen~~"
 
-#: admin/help/markdown.twig:40 admin/javascripts/admin.js.php:278
-#: admin/javascripts/admin.js.php:279
+#: admin/help/markdown.twig:40 admin/javascripts/admin.js.php:281
+#: admin/javascripts/admin.js.php:282
 msgid "Strikethrough"
 msgstr "Durchgestrichen"
 
@@ -150,8 +150,8 @@ msgstr "Durchgestrichen"
 msgid "`Code`"
 msgstr "`Code`"
 
-#: admin/help/markdown.twig:44 admin/javascripts/admin.js.php:308
-#: admin/javascripts/admin.js.php:309
+#: admin/help/markdown.twig:44 admin/javascripts/admin.js.php:311
+#: admin/javascripts/admin.js.php:312
 msgid "Code"
 msgstr "Code"
 
@@ -159,8 +159,8 @@ msgstr "Code"
 msgid "==Highlight=="
 msgstr "==Markieren=="
 
-#: admin/help/markdown.twig:48 admin/javascripts/admin.js.php:293
-#: admin/javascripts/admin.js.php:294
+#: admin/help/markdown.twig:48 admin/javascripts/admin.js.php:296
+#: admin/javascripts/admin.js.php:297
 msgid "Highlight"
 msgstr "Markieren"
 
@@ -192,8 +192,8 @@ msgstr "Neuer Absatz"
 msgid "[title](URL)"
 msgstr "[title](URL)"
 
-#: admin/help/markdown.twig:65 admin/javascripts/admin.js.php:323
-#: admin/javascripts/admin.js.php:324
+#: admin/help/markdown.twig:65 admin/javascripts/admin.js.php:326
+#: admin/javascripts/admin.js.php:327
 msgid "Hyperlink"
 msgstr "Hyperlink"
 
@@ -201,8 +201,8 @@ msgstr "Hyperlink"
 msgid "![description](URL)"
 msgstr "![description](URL)"
 
-#: admin/help/markdown.twig:69 admin/javascripts/admin.js.php:338
-#: admin/javascripts/admin.js.php:339
+#: admin/help/markdown.twig:69 admin/javascripts/admin.js.php:341
+#: admin/javascripts/admin.js.php:342
 msgid "Image"
 msgstr "Bild"
 
@@ -319,83 +319,88 @@ msgstr "Alle umschalten"
 msgid "Are you sure you want to proceed?"
 msgstr "Sind Sie sicher, dass Sie fortfahren möchten?"
 
-#: admin/javascripts/admin.js.php:192 admin/javascripts/admin.js.php:415
-#: admin/javascripts/admin.js.php:817
+#: admin/javascripts/admin.js.php:195 admin/javascripts/admin.js.php:419
+#: admin/javascripts/admin.js.php:823
 msgid "Modal window"
 msgstr "Modales Fenster"
 
-#: admin/javascripts/admin.js.php:205 admin/javascripts/admin.js.php:427
-#: admin/javascripts/admin.js.php:831
+#: admin/javascripts/admin.js.php:208 admin/javascripts/admin.js.php:431
+#: admin/javascripts/admin.js.php:837
 msgid "Close"
 msgstr "Schliessen"
 
-#: admin/javascripts/admin.js.php:212 admin/javascripts/admin.js.php:434
-#: admin/javascripts/admin.js.php:838
+#: admin/javascripts/admin.js.php:215 admin/javascripts/admin.js.php:438
+#: admin/javascripts/admin.js.php:844
 msgid "close"
 msgstr "schliessen"
 
-#: admin/javascripts/admin.js.php:240
+#: admin/javascripts/admin.js.php:243
 msgid "heading"
 msgstr "kopf"
 
-#: admin/javascripts/admin.js.php:255
+#: admin/javascripts/admin.js.php:258
 msgid "strong"
 msgstr "stark"
 
-#: admin/javascripts/admin.js.php:270
+#: admin/javascripts/admin.js.php:273
 msgid "emphasis"
 msgstr "schwerpunkt"
 
-#: admin/javascripts/admin.js.php:285
+#: admin/javascripts/admin.js.php:288
 msgid "strikethrough"
 msgstr "durchgestrichen"
 
-#: admin/javascripts/admin.js.php:300
+#: admin/javascripts/admin.js.php:303
 msgid "highlight"
 msgstr "markieren"
 
-#: admin/javascripts/admin.js.php:315
+#: admin/javascripts/admin.js.php:318
 msgid "code"
 msgstr "code"
 
-#: admin/javascripts/admin.js.php:330
+#: admin/javascripts/admin.js.php:333
 msgid "hyperlink"
 msgstr "hyperlink"
 
-#: admin/javascripts/admin.js.php:345 admin/javascripts/admin.js.php:395
+#: admin/javascripts/admin.js.php:348 admin/javascripts/admin.js.php:399
 msgid "image"
 msgstr "bild"
 
-#: admin/javascripts/admin.js.php:357 admin/javascripts/admin.js.php:358
+#: admin/javascripts/admin.js.php:360 admin/javascripts/admin.js.php:361
 msgid "Upload"
 msgstr "Hochladen"
 
-#: admin/javascripts/admin.js.php:373 admin/javascripts/admin.js.php:594
+#: admin/javascripts/admin.js.php:376 admin/javascripts/admin.js.php:599
 msgid "Uploading..."
 msgstr "Hochladen..."
 
-#: admin/javascripts/admin.js.php:404 admin/javascripts/admin.js.php:405
+#: admin/javascripts/admin.js.php:408 admin/javascripts/admin.js.php:409
 msgid "Insert"
 msgstr "Einfügen"
 
-#: admin/javascripts/admin.js.php:450
+#: admin/javascripts/admin.js.php:455
 msgid "insert"
 msgstr "einfügen"
 
-#: admin/javascripts/admin.js.php:464 admin/javascripts/admin.js.php:465
+#: admin/javascripts/admin.js.php:469 admin/javascripts/admin.js.php:470
 #: admin/pages/themes.twig:24
 msgid "Preview"
 msgstr "Vorschau"
 
-#: admin/javascripts/admin.js.php:481
+#: admin/javascripts/admin.js.php:486
 msgid "preview"
 msgstr "vorschau"
 
-#: admin/javascripts/admin.js.php:507
+#: admin/javascripts/admin.js.php:512
 msgid "Words:"
 msgstr "Wörter:"
 
-#: admin/layouts/default.twig:60
+#: admin/layouts/default.twig:8
+#, php-format
+msgid "Page %d"
+msgstr "Seite %d"
+
+#: admin/layouts/default.twig:73
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "Von %s auf Leitung %d um %s Sekunden aufgerufen."
@@ -449,13 +454,12 @@ msgid "Include pages in search results."
 msgstr "Aufnahme von Seiten in die Suchergebnisse."
 
 #: admin/pages/content_settings.twig:49
-msgid "Send Webmentions"
-msgstr "Webmentions senden"
+msgid "Webmentions"
+msgstr "Webmentions"
 
 #: admin/pages/content_settings.twig:52
-msgid "Attempts to notify sites to which your posts link."
-msgstr ""
-"Versucht, Websites zu benachrichtigen, auf die Ihre Beiträge verweisen."
+msgid "Send and receive notifications when URLs are mentioned."
+msgstr "Senden und empfangen Sie Benachrichtigungen, wenn URLs erwähnt werden."
 
 #: admin/pages/content_settings.twig:58 admin/pages/content_settings.twig:66
 #: admin/pages/export.twig:14 admin/pages/export.twig:20
@@ -477,7 +481,7 @@ msgid "Compose blog content using Markdown text formatting."
 msgstr "Verfassen Sie Blog-Inhalte mithilfe der Markdown-Textformatierung."
 
 #: admin/pages/content_settings.twig:73 admin/pages/edit_group.twig:24
-#: admin/pages/edit_user.twig:55 admin/pages/general_settings.twig:59
+#: admin/pages/edit_user.twig:55 admin/pages/general_settings.twig:66
 #: admin/pages/route_settings.twig:84 admin/pages/user_settings.twig:47
 msgid "Update"
 msgstr "Aktualisieren"
@@ -760,13 +764,21 @@ msgid "Language"
 msgstr "Sprache"
 
 #: admin/pages/general_settings.twig:52
-msgid "Check for Updates?"
-msgstr "Auf Updates prüfen?"
+msgid "Monospace Font"
+msgstr "Monospace-Schriftart"
 
 #: admin/pages/general_settings.twig:55
+msgid "Write with a monospace font."
+msgstr "Schreiben Sie mit einer Monospace-Schriftart."
+
+#: admin/pages/general_settings.twig:59
+msgid "Check for Updates"
+msgstr "Auf Updates prüfen"
+
+#: admin/pages/general_settings.twig:62
 #, php-format
-msgid "Current version: %s"
-msgstr "Aktuelle Version: %s"
+msgid "Current version: %s."
+msgstr "Aktuelle Version: %s."
 
 #: admin/pages/import.twig:3 admin/pages/import.twig:39
 msgid "Import"
@@ -1268,3 +1280,7 @@ msgstr "(zeigt diesen Beitrag vor allen anderen)"
 #: admin/partials/post_fields.twig:110
 msgid "Timestamp"
 msgstr "Zeitstempel"
+
+#~ msgid "Attempts to notify sites to which your posts link."
+#~ msgstr ""
+#~ "Versucht, Websites zu benachrichtigen, auf die Ihre Beiträge verweisen."

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: admin/help/canonical_url.twig:3 admin/help/canonical_url.twig:6
@@ -392,7 +392,12 @@ msgstr "anteprima"
 msgid "Words:"
 msgstr "Parole:"
 
-#: admin/layouts/default.twig:60
+#: admin/layouts/default.twig:8
+#, php-format
+msgid "Page %d"
+msgstr "Pagina %d"
+
+#: admin/layouts/default.twig:73
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "Chiamato da %s sulla riga %d a %s secondi."
@@ -475,7 +480,7 @@ msgstr ""
 "tramite Markdown."
 
 #: admin/pages/content_settings.twig:73 admin/pages/edit_group.twig:24
-#: admin/pages/edit_user.twig:55 admin/pages/general_settings.twig:59
+#: admin/pages/edit_user.twig:55 admin/pages/general_settings.twig:66
 #: admin/pages/route_settings.twig:84 admin/pages/user_settings.twig:47
 msgid "Update"
 msgstr "Aggiorna"
@@ -756,13 +761,21 @@ msgid "Language"
 msgstr "Lingua"
 
 #: admin/pages/general_settings.twig:52
-msgid "Check for Updates?"
-msgstr "Verificare la disponibilità di aggiornamenti?"
+msgid "Monospace Font"
+msgstr "Carattere a spaziatura fissa"
 
 #: admin/pages/general_settings.twig:55
+msgid "Write with a monospace font."
+msgstr "Scrivi con un carattere a spaziatura fissa."
+
+#: admin/pages/general_settings.twig:59
+msgid "Check for Updates"
+msgstr "Verificare la disponibilità di aggiornamenti"
+
+#: admin/pages/general_settings.twig:62
 #, php-format
-msgid "Current version: %s"
-msgstr "Versione corrente: %s"
+msgid "Current version: %s."
+msgstr "Versione corrente: %s."
 
 #: admin/pages/import.twig:3 admin/pages/import.twig:39
 msgid "Import"
