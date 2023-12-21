@@ -60,21 +60,18 @@ var ChyrpAjaxScroll = {
                     var ajax_next_obj = $(data).find("#pagination_next_page");
                     var ajax_next_title = $(data).filter("title").text();
 
-                    // Insert new posts, update the page title and location, and execute inline scripts.
+                    // Insert new posts and update page title.
                     this_post_obj.after($(data).find(".post"));
                     document.title = ajax_next_title;
 
+                    // Update location history.
                     if (!!history.replaceState)
                         history.replaceState({
                             "page": this_next_num,
                             "action": Route.action
                         }, ajax_next_title, this_next_url);
 
-                    $(data).find("script").each(function(){
-                        $.globalEval(this.text || this.textContent || this.innerHTML || "");
-                    });
-
-                    // Replace the element #pagination_next_page if the ajax data contains a replacement.
+                    // Replace #pagination_next_page if a replacement is found.
                     if (ajax_next_obj) {
                         this_next_obj.replaceWith(ajax_next_obj);
                         ChyrpAjaxScroll.busy = false;
