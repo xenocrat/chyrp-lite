@@ -469,9 +469,6 @@
          *     $sql - The SQL instance calling this method.
          *     $vals - An array of values.
          *     &$params - An associative array of parameters used in the query.
-         *
-         * Returns:
-         *     "('one', 'two', '', 1, 0)" from array("one", "two", null, true, false).
          */
         public static function build_list(
             $sql,
@@ -500,7 +497,7 @@
 
         /**
          * Function: safecol
-         * Wraps a column in proper escaping if the name is a subset of SQL keywords.
+         * Encloses a column name in quotes if it is a subset of SQL keywords.
          *
          * Parameters:
          *     $sql - The SQL instance calling this method.
@@ -529,7 +526,7 @@
 
         /**
          * Function: build_conditions
-         * Builds an associative array of SQL values into PDO-esque parameterized query strings.
+         * Builds an associative array of SQL values into parameterized query strings.
          *
          * Parameters:
          *     $sql - The SQL instance calling this method.
@@ -708,7 +705,7 @@
 
         /**
          * Function: tablefy
-         * Automatically prepends tables and table prefixes to a field if it doesn't already have them.
+         * Prepends table names and prefixes to a field if it doesn't already have them.
          *
          * Parameters:
          *     $sql - The SQL instance calling this method.
