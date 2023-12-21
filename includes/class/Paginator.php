@@ -73,7 +73,7 @@
             self::$names[] = $name;
 
             if (!is_array($array))
-                $array = (array) $array;
+                $array = array($array);
 
             $this->array = $array;
             $this->per_page = $per_page;
