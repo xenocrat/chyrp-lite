@@ -484,7 +484,7 @@ input[type="file"] {
     padding: 0.5rem;
     border-radius: 0em;
     border: 1px solid #cfcfcf;
-    background-color: #ffffff;
+    background-color: #fbfbfb;
 }
 html[dir="ltr"] select {
     appearance: none;
