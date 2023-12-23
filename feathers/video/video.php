@@ -23,6 +23,17 @@
             );
             $this->setField(
                 array(
+                    "attr" => "captions",
+                    "type" => "file",
+                    "label" => __("Captions", "video"),
+                    "optional" => true,
+                    "multiple" => false,
+                    "accept" => ".vtt",
+                    "note" => _f("(Max. file size: %d Megabytes)", $maximum, "video")
+                )
+            );
+            $this->setField(
+                array(
                     "attr" => "description",
                     "type" => "text_block",
                     "label" => __("Description", "video"),
@@ -56,6 +67,12 @@
                     code:422
                 );
 
+            if (isset($_FILES['captions']) and upload_tester($_FILES['captions']))
+                $captions = upload(
+                    $_FILES['captions'],
+                    array(".vtt")
+                );
+
             fallback($_POST['title'], "");
             fallback($_POST['description'], "");
             fallback($_POST['slug'], $_POST['title']);
@@ -67,6 +84,7 @@
                 values:array(
                     "title" => $_POST['title'],
                     "filename" => $filename,
+                    "captions" => fallback($captions, ""),
                     "description" => $_POST['description']
                 ),
                 clean:sanitize($_POST['slug']),
@@ -87,6 +105,7 @@
             fallback($_POST['created_at'], $post->created_at);
             fallback($_POST['option'], array());
             $filename = $post->filename;
+            $captions = $post->captions;
 
             if (isset($_FILES['filename']) and upload_tester($_FILES['filename']))
                 $filename = upload(
@@ -94,10 +113,17 @@
                     $this->video_extensions()
                 );
 
+            if (isset($_FILES['captions']) and upload_tester($_FILES['captions']))
+                $captions = upload(
+                    $_FILES['captions'],
+                    array(".vtt")
+                );
+
             return $post->update(
                 values:array(
                     "title" => $_POST['title'],
                     "filename" => $filename,
+                    "captions" => fallback($captions, ""),
                     "description" => $_POST['description']
                 ),
                 pinned:!empty($_POST['pinned']),
@@ -121,17 +147,29 @@
         }
 
         public function enclose_video($post, $feed): void {
-            $config = Config::current();
-            $filepath = uploaded($post->filename, false);
-
-            if ($post->feather != "video" or !file_exists($filepath))
+            if ($post->feather != "video")
                 return;
 
-            $feed->enclosure(
-                uploaded($post->filename),
-                filesize($filepath),
-                $this->video_type($post->filename)
-            );
+            $filepath = uploaded($post->filename, false);
+
+            if (file_exists($filepath))
+                $feed->enclosure(
+                    uploaded($post->filename),
+                    filesize($filepath),
+                    $this->video_type($post->filename)
+                );
+
+            if (empty($post->captions))
+                return;
+
+            $filepath = uploaded($post->captions, false);
+
+            if (file_exists($filepath))
+                $feed->enclosure(
+                    uploaded($post->captions),
+                    filesize($filepath),
+                    $this->video_type($post->captions)
+                );
         }
 
         public function filter_post($post): void {
@@ -147,22 +185,30 @@
             if ($trigger->exists("video_player"))
                 return $trigger->call("video_player", $post);
 
-            return '<video controls>'.
-                   "\n".
-                   __("Your web browser does not support the <code>video</code> element.", "video").
-                   "\n".
-                   '<source src="'.
-                   uploaded($post->filename).
-                   '" type="'.
-                   $this->video_type($post->filename).
-                   '">'.
-                   "\n".
-                   '</video>'.
-                   "\n";
+            $player = '<video controls>'.
+                      "\n".
+                      __("Your web browser does not support the <code>video</code> element.", "video").
+                      "\n".
+                      '<source src="'.
+                      uploaded($post->filename).
+                      '" type="'.
+                      $this->video_type($post->filename).
+                      '">'.
+                      "\n";
+
+            if (!empty($post->captions))
+                $player.= '<track kind="captions" src="'.
+                          uploaded($post->captions).'">'."\n";
+
+            $player.= '</video>'."\n";
+
+            return $player;
         }
 
         private function video_type($filename): string {
-            $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+            $extension = strtolower(
+                pathinfo($filename, PATHINFO_EXTENSION)
+            );
 
             switch($extension) {
                 case "mp4":
