@@ -1300,9 +1300,12 @@ input.toolbar.hidden {
     input[type="time"],
     input[type="number"],
     input[type="range"],
-    input[type="password"],
-    input[type="file"] {
+    input[type="password"] {
         background-color: #dfdfdf;
+        border-color: #afafaf;
+    }
+    input[type="file"] {
+        background-color: #efefef;
         border-color: #afafaf;
     }
     input:invalid {
