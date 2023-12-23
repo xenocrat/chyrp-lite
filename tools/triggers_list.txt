@@ -182,7 +182,7 @@ Arguments:
 audio_player
 ------------
 Called from:
-	feathers/audio/audio.php on line 151
+	feathers/audio/audio.php on line 183
 
 Arguments:
 	$post
@@ -191,7 +191,7 @@ Arguments:
 video_player
 ------------
 Called from:
-	feathers/video/video.php on line 148
+	feathers/video/video.php on line 186
 
 Arguments:
 	$post

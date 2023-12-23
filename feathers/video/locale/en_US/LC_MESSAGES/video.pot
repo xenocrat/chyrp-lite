@@ -17,19 +17,24 @@ msgid "Video File"
 msgstr ""
 
 #: feathers/video/video.php:21
+#: feathers/video/video.php:32
 #, php-format
 msgid "(Max. file size: %d Megabytes)"
 msgstr ""
 
 #: feathers/video/video.php:28
+msgid "Captions"
+msgstr ""
+
+#: feathers/video/video.php:39
 msgid "Description"
 msgstr ""
 
-#: feathers/video/video.php:55
+#: feathers/video/video.php:66
 msgid "You did not select a video to upload."
 msgstr ""
 
-#: feathers/video/video.php:152
+#: feathers/video/video.php:190
 msgid "Your web browser does not support the <code>video</code> element."
 msgstr ""
 

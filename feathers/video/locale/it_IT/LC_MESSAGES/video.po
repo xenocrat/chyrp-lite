@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.1\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: feathers/video/info.php:3
@@ -29,19 +29,23 @@ msgstr "Titolo"
 msgid "Video File"
 msgstr "File Video"
 
-#: feathers/video/video.php:21
+#: feathers/video/video.php:21 feathers/video/video.php:32
 #, php-format
 msgid "(Max. file size: %d Megabytes)"
 msgstr "(Dimensione massima del file:%d megabyte)"
 
 #: feathers/video/video.php:28
+msgid "Captions"
+msgstr "Didascalie"
+
+#: feathers/video/video.php:39
 msgid "Description"
 msgstr "Descrizione"
 
-#: feathers/video/video.php:55
+#: feathers/video/video.php:66
 msgid "You did not select a video to upload."
 msgstr "Non è stato selezionato alcun video da caricare."
 
-#: feathers/video/video.php:152
+#: feathers/video/video.php:190
 msgid "Your web browser does not support the <code>video</code> element."
 msgstr "Il browser web non supporta l'elemento <code>video</code>."
