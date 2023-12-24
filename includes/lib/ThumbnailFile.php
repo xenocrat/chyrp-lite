@@ -291,24 +291,24 @@
 
             switch ($this->type) {
                 case IMAGETYPE_GIF:
-                    $original = imagecreatefromgif($this->source);
+                    $original = @imagecreatefromgif($this->source);
                     break;
                 case IMAGETYPE_JPEG:
-                    $original = imagecreatefromjpeg($this->source);
+                    $original = @imagecreatefromjpeg($this->source);
                     imageinterlace($thumb, true);
                     break;
                 case IMAGETYPE_PNG:
-                    $original = imagecreatefrompng($this->source);
+                    $original = @imagecreatefrompng($this->source);
                     imagealphablending($thumb, false);
                     imagesavealpha($thumb, true);
                     break;
                 case IMAGETYPE_WEBP:
-                    $original = imagecreatefromwebp($this->source);
+                    $original = @imagecreatefromwebp($this->source);
                     imagealphablending($thumb, false);
                     imagesavealpha($thumb, true);
                     break;
                 case IMAGETYPE_AVIF:
-                    $original = imagecreatefromavif($this->source);
+                    $original = @imagecreatefromavif($this->source);
                     imagealphablending($thumb, false);
                     imagesavealpha($thumb, true);
                     break;
