@@ -2764,13 +2764,22 @@
      *     Whether or not the string matches the criteria.
      */
     function is_ip_address($string): bool {
-        if (preg_match('/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/', $string))
-            return true;
+        if (
+            !is_string($string) and
+            !$string instanceof Stringable
+        )
+            return false;
 
-        if (preg_match('/^\[[a-fA-F0-9\:]{3,39}\]$/', $string))
-            return true;
-
-        return false;
+        return (
+            preg_match(
+                '/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/',
+                $string
+            ) or
+            preg_match(
+                '/^\[[a-fA-F0-9\:]{3,39}\]$/',
+                $string
+            )
+        );
     }
 
     /**
