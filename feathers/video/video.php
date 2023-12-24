@@ -28,8 +28,7 @@
                     "label" => __("Captions", "video"),
                     "optional" => true,
                     "multiple" => false,
-                    "accept" => ".vtt",
-                    "note" => _f("(Max. file size: %d Megabytes)", $maximum, "video")
+                    "accept" => ".vtt"
                 )
             );
             $this->setField(
@@ -70,7 +69,7 @@
             if (isset($_FILES['captions']) and upload_tester($_FILES['captions']))
                 $captions = upload(
                     $_FILES['captions'],
-                    array(".vtt")
+                    array("vtt")
                 );
 
             fallback($_POST['title'], "");
@@ -180,6 +179,7 @@
         }
 
         private function video_player($post): string {
+            $config = Config::current();
             $trigger = Trigger::current();
 
             if ($trigger->exists("video_player"))
@@ -198,7 +198,12 @@
 
             if (!empty($post->captions))
                 $player.= '<track kind="captions" src="'.
-                          uploaded($post->captions).'">'."\n";
+                          uploaded($post->captions).
+                          '" srclang="'.
+                          lang_base($config->locale).
+                          '" label="'.
+                          lang_code($config->locale).
+                          '">'."\n";
 
             $player.= '</video>'."\n";
 
