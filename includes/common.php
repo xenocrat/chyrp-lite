@@ -43,6 +43,10 @@
     # Is the user running the installer? (false)
     define('INSTALLING', false);
 
+    # Constant: MAX_MEMORY_LIMIT
+    # The maximum amount of memory that can be allocated.
+    define('MAX_MEMORY_LIMIT', "100M");
+
     # Constant: SQL_DATETIME_ZERO
     # The preferred SQL datetime "zero" value.
     define('SQL_DATETIME_ZERO', "1000-01-01 00:00:00");
