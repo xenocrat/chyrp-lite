@@ -2194,9 +2194,9 @@ Returns:
     A byte value or the input if decoding failed.
 
 
-Function: allocate_max_memory
------------------------------
-Allocates MAX_MEMORY_LIMIT for memory-intensive tasks.
+Function: set_max_memory
+------------------------
+Sets the PHP memory limit to MAX_MEMORY_LIMIT.
 
 
 Function: timer_start
