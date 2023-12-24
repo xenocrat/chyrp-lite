@@ -944,10 +944,10 @@
     }
 
     /**
-     * Function: allocate_max_memory
-     * Allocates MAX_MEMORY_LIMIT for memory-intensive tasks.
+     * Function: set_max_memory
+     * Sets the PHP memory limit to MAX_MEMORY_LIMIT.
      */
-    function allocate_max_memory(): void {
+    function set_max_memory(): void {
         $max = shorthand_bytes(MAX_MEMORY_LIMIT);
         $mem = shorthand_bytes(ini_get("memory_limit"));
 
