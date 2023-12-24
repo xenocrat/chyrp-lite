@@ -2364,7 +2364,7 @@
                     "import"
                 );
 
-            allocate_max_memory();
+            set_max_memory();
 
             if (ini_get("max_execution_time") !== 0)
                 set_time_limit(300);
