@@ -2364,8 +2364,7 @@
                     "import"
                 );
 
-            if (shorthand_bytes(ini_get("memory_limit")) < 20971520)
-                ini_set("memory_limit", "20M");
+            allocate_max_memory();
 
             if (ini_get("max_execution_time") !== 0)
                 set_time_limit(300);
