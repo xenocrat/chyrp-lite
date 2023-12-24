@@ -29,7 +29,7 @@ msgstr "标题"
 msgid "Video File"
 msgstr "视频文件"
 
-#: feathers/video/video.php:21 feathers/video/video.php:32
+#: feathers/video/video.php:21
 #, php-format
 msgid "(Max. file size: %d Megabytes)"
 msgstr "（最大文件大小：%d M）"
@@ -38,11 +38,11 @@ msgstr "（最大文件大小：%d M）"
 msgid "Captions"
 msgstr "字幕"
 
-#: feathers/video/video.php:39
+#: feathers/video/video.php:38
 msgid "Description"
 msgstr "描述"
 
-#: feathers/video/video.php:66
+#: feathers/video/video.php:65
 msgid "You did not select a video to upload."
 msgstr "您没有选择上传的视频。"
 

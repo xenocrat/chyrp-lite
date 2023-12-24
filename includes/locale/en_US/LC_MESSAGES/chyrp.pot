@@ -1336,49 +1336,49 @@ msgstr ""
 msgid "The uploaded file exceeds the maximum size of %d Megabytes allowed by this site."
 msgstr ""
 
-#: includes/helpers.php:2905
+#: includes/helpers.php:2914
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr ""
 
-#: includes/helpers.php:2930
+#: includes/helpers.php:2939
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr ""
 
-#: includes/helpers.php:3012
+#: includes/helpers.php:3021
 msgid "Failed to create Zip archive."
 msgstr ""
 
-#: includes/helpers.php:3114
+#: includes/helpers.php:3123
 #, php-format
 msgid "Activate your account at %s"
 msgstr ""
 
-#: includes/helpers.php:3115
-#: includes/helpers.php:3150
+#: includes/helpers.php:3124
+#: includes/helpers.php:3159
 #, php-format
 msgid "Hello, %s."
 msgstr ""
 
-#: includes/helpers.php:3118
+#: includes/helpers.php:3127
 msgid "You are receiving this message because you registered a new account."
 msgstr ""
 
-#: includes/helpers.php:3121
+#: includes/helpers.php:3130
 msgid "Visit this link to activate your account:"
 msgstr ""
 
-#: includes/helpers.php:3149
+#: includes/helpers.php:3158
 #, php-format
 msgid "Reset your password at %s"
 msgstr ""
 
-#: includes/helpers.php:3153
+#: includes/helpers.php:3162
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 
-#: includes/helpers.php:3156
+#: includes/helpers.php:3165
 msgid "Visit this link to reset your password:"
 msgstr ""
 

@@ -21,7 +21,7 @@ msgstr "标题"
 msgid "Audio File"
 msgstr "音频文件"
 
-#: feathers/audio/audio.php:21 feathers/audio/audio.php:32
+#: feathers/audio/audio.php:21
 #, php-format
 msgid "(Max. file size: %d Megabytes)"
 msgstr "（最大文件大小：%d M）"
@@ -30,11 +30,11 @@ msgstr "（最大文件大小：%d M）"
 msgid "Captions"
 msgstr "字幕"
 
-#: feathers/audio/audio.php:39
+#: feathers/audio/audio.php:38
 msgid "Description"
 msgstr "描述"
 
-#: feathers/audio/audio.php:66
+#: feathers/audio/audio.php:65
 msgid "You did not select any audio to upload."
 msgstr "你灭有选择任何上传的音频文件。"
 

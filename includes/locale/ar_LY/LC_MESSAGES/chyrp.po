@@ -1138,48 +1138,48 @@ msgid ""
 msgstr ""
 "الملف الذي رفعته يتجاوز الحد الأقصى (%d ميجابايت) المسموح به لهذا الموقع."
 
-#: includes/helpers.php:2905
+#: includes/helpers.php:2914
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr "خطأ ترميز JSON: %s"
 
-#: includes/helpers.php:2930
+#: includes/helpers.php:2939
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr "خطأ في فك الترميز JSON: %s"
 
-#: includes/helpers.php:3012
+#: includes/helpers.php:3021
 msgid "Failed to create Zip archive."
 msgstr "فشل إنشاء أرشيف مضغوط."
 
-#: includes/helpers.php:3114
+#: includes/helpers.php:3123
 #, php-format
 msgid "Activate your account at %s"
 msgstr "تفعيل حسابك في %s"
 
-#: includes/helpers.php:3115 includes/helpers.php:3150
+#: includes/helpers.php:3124 includes/helpers.php:3159
 #, php-format
 msgid "Hello, %s."
 msgstr "مرحباً، %s."
 
-#: includes/helpers.php:3118
+#: includes/helpers.php:3127
 msgid "You are receiving this message because you registered a new account."
 msgstr "لقد تلقيت هذه الرسالة لأنك سجلت حِساب جديد."
 
-#: includes/helpers.php:3121
+#: includes/helpers.php:3130
 msgid "Visit this link to activate your account:"
 msgstr "قم بزيارة هذا الرابط لتفعيل حسابك:"
 
-#: includes/helpers.php:3149
+#: includes/helpers.php:3158
 #, php-format
 msgid "Reset your password at %s"
 msgstr "إعادة تعيين كلمة مرورك في %s"
 
-#: includes/helpers.php:3153
+#: includes/helpers.php:3162
 msgid "You are receiving this message because you requested a new password."
 msgstr "لقد تلقيت هذه الرسالة لأنك طلبت كلمة مرور جديدة."
 
-#: includes/helpers.php:3156
+#: includes/helpers.php:3165
 msgid "Visit this link to reset your password:"
 msgstr "قم بزيارة هذا الرابط لإعادة تعيين كلمة مرورك:"
 

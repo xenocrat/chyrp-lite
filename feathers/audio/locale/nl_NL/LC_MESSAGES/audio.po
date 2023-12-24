@@ -20,7 +20,7 @@ msgstr "Titel"
 msgid "Audio File"
 msgstr "Audio bestand"
 
-#: feathers/audio/audio.php:21 feathers/audio/audio.php:32
+#: feathers/audio/audio.php:21
 #, php-format
 msgid "(Max. file size: %d Megabytes)"
 msgstr "(Max. bestandsgrootte: %d Megabytes)"
@@ -29,11 +29,11 @@ msgstr "(Max. bestandsgrootte: %d Megabytes)"
 msgid "Captions"
 msgstr "Onderschriften"
 
-#: feathers/audio/audio.php:39
+#: feathers/audio/audio.php:38
 msgid "Description"
 msgstr "Beschrijving"
 
-#: feathers/audio/audio.php:66
+#: feathers/audio/audio.php:65
 msgid "You did not select any audio to upload."
 msgstr "Je hebt geen audio geselecteerd om te uploaden."
 
