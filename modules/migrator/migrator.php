@@ -56,7 +56,7 @@
                     code:422
                 );
 
-            allocate_max_memory();
+            set_max_memory();
 
             if (ini_get("max_execution_time") !== 0)
                 set_time_limit(600);
@@ -282,7 +282,7 @@
 
             $_POST['tumblr_url'] = add_scheme($_POST['tumblr_url'], "http://");
 
-            allocate_max_memory();
+            set_max_memory();
 
             if (ini_get("max_execution_time") !== 0)
                 set_time_limit(600);
@@ -485,7 +485,7 @@
                     code:422
                 );
 
-            allocate_max_memory();
+            set_max_memory();
 
             if (ini_get("max_execution_time") !== 0)
                 set_time_limit(600);
@@ -650,7 +650,7 @@
                     code:422
                 );
 
-            allocate_max_memory();
+            set_max_memory();
 
             if (ini_get("max_execution_time") !== 0)
                 set_time_limit(600);
