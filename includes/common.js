@@ -65,6 +65,14 @@ function isEmail(text) {
     );
 }
 
+// Does the string look like an IP address?
+function isIpAddress(text) {
+    return (
+        /^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/.test(text) ||
+        /^\[[a-fA-F0-9\:]{3,39}\]$/.test(text)
+    );
+}
+
 // Prefixes a URL with a scheme if none was detected.
 function addScheme(url, scheme) {
     var regexp = /^([a-z]+:\/\/)?(.+)/i;
