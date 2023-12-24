@@ -944,6 +944,18 @@
     }
 
     /**
+     * Function: allocate_max_memory
+     * Allocates MAX_MEMORY_LIMIT for memory-intensive tasks.
+     */
+    function allocate_max_memory(): void {
+        $max = shorthand_bytes(MAX_MEMORY_LIMIT);
+        $mem = shorthand_bytes(ini_get("memory_limit"));
+
+        if ($mem < $max)
+            ini_set("memory_limit", MAX_MEMORY_LIMIT);
+    }
+
+    /**
      * Function: timer_start
      * Starts the internal timer and returns the microtime.
      */
