@@ -8,7 +8,7 @@
 
     require_once "common.php";
 
-    allocate_max_memory();
+    set_max_memory();
 
     if (empty($_GET['file']))
         error(
