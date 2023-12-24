@@ -8,8 +8,7 @@
 
     require_once "common.php";
 
-    if (shorthand_bytes(ini_get("memory_limit")) < 50331648)
-        ini_set("memory_limit", "48M");
+    allocate_max_memory();
 
     if (empty($_GET['file']))
         error(
