@@ -176,6 +176,7 @@
         }
 
         private function audio_player($post): string {
+            $config = Config::current();
             $trigger = Trigger::current();
 
             if ($trigger->exists("audio_player"))
