@@ -2194,6 +2194,11 @@ Returns:
     A byte value or the input if decoding failed.
 
 
+Function: allocate_max_memory
+-----------------------------
+Allocates MAX_MEMORY_LIMIT for memory-intensive tasks.
+
+
 Function: timer_start
 ---------------------
 Starts the internal timer and returns the microtime.
