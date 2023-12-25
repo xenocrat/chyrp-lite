@@ -2364,10 +2364,8 @@
                     "import"
                 );
 
+            set_max_time();
             set_max_memory();
-
-            if (ini_get("max_execution_time") !== 0)
-                set_time_limit(300);
 
             if (isset($imports["groups"])) {
                 foreach ($imports["groups"] as $name => $permissions) {
