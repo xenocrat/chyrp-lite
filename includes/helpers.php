@@ -944,14 +944,26 @@
     }
 
     /**
+     * Function: set_max_time
+     * Sets the PHP time limit to MAX_TIME_LIMIT.
+     */
+    function set_max_time(): void {
+        $const = MAX_TIME_LIMIT;
+        $limit = ini_get("max_execution_time");
+
+        if ($limit !== 0 and $limit < $const)
+            set_time_limit($const);
+    }
+
+    /**
      * Function: set_max_memory
      * Sets the PHP memory limit to MAX_MEMORY_LIMIT.
      */
     function set_max_memory(): void {
-        $max = shorthand_bytes(MAX_MEMORY_LIMIT);
-        $mem = shorthand_bytes(ini_get("memory_limit"));
+        $const = shorthand_bytes(MAX_MEMORY_LIMIT);
+        $limit = shorthand_bytes(ini_get("memory_limit"));
 
-        if ($mem < $max)
+        if ($limit < $const)
             ini_set("memory_limit", MAX_MEMORY_LIMIT);
     }
 
