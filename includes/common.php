@@ -43,6 +43,10 @@
     # Is the user running the installer? (false)
     define('INSTALLING', false);
 
+    # Constant: MAX_TIME_LIMIT
+    # The maximum allowed execution time in seconds.
+    define('MAX_TIME_LIMIT', 600);
+
     # Constant: MAX_MEMORY_LIMIT
     # The maximum amount of memory that can be allocated.
     define('MAX_MEMORY_LIMIT', "100M");

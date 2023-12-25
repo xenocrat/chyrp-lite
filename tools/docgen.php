@@ -15,6 +15,7 @@
     define('AJAX',                          false);
     define('UPGRADING',                     false);
     define('INSTALLING',                    false);
+    define('MAX_TIME_LIMIT',                600);
     define('MAX_MEMORY_LIMIT',              "100M");
     define('SQL_DATETIME_ZERO',             "1000-01-01 00:00:00");
     define('SQL_DATETIME_ZERO_VARIANTS',
