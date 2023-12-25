@@ -2194,6 +2194,11 @@ Returns:
     A byte value or the input if decoding failed.
 
 
+Function: set_max_time
+----------------------
+Sets the PHP time limit to MAX_TIME_LIMIT.
+
+
 Function: set_max_memory
 ------------------------
 Sets the PHP memory limit to MAX_MEMORY_LIMIT.
