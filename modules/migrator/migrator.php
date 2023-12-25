@@ -56,10 +56,8 @@
                     code:422
                 );
 
+            set_max_time();
             set_max_memory();
-
-            if (ini_get("max_execution_time") !== 0)
-                set_time_limit(600);
 
             $stupid_xml = file_get_contents($_FILES['xml_file']['tmp_name']);
 
@@ -282,10 +280,8 @@
 
             $_POST['tumblr_url'] = add_scheme($_POST['tumblr_url'], "http://");
 
+            set_max_time();
             set_max_memory();
-
-            if (ini_get("max_execution_time") !== 0)
-                set_time_limit(600);
 
             $url = rtrim($_POST['tumblr_url'], "/")."/api/read?num=50";
             $posts = array();
@@ -485,10 +481,8 @@
                     code:422
                 );
 
+            set_max_time();
             set_max_memory();
-
-            if (ini_get("max_execution_time") !== 0)
-                set_time_limit(600);
 
             @$mysqli = new mysqli(
                 $_POST['host'],
@@ -650,10 +644,8 @@
                     code:422
                 );
 
+            set_max_time();
             set_max_memory();
-
-            if (ini_get("max_execution_time") !== 0)
-                set_time_limit(600);
 
             @$mysqli = new mysqli(
                 $_POST['host'],
