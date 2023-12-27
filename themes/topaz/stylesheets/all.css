@@ -276,15 +276,14 @@ ul.sidebar > li {
 }
 ul.archive {
     list-style: none;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: start;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(214px, 1fr));
+    grid-auto-flow: row;
     gap: 1rem;
     margin: 1rem 0rem 0rem 0rem;
 }
 ul.archive > li {
     margin: 0em;
-    flex: none;
 }
 ol.pingbacks {
     list-style: none;
@@ -590,7 +589,6 @@ div.user_register.standalone {
 ul.archive article.post.archive {
     display: block;
     position: relative;
-    width: 196px;
     height: 196px;
     font-size: 0.75em;
     padding: 8px;
@@ -840,10 +838,6 @@ div.standalone > *:last-child {
     body {
         margin: 1rem;
     }
-    h2 {
-        font-size: 1.25em;
-        margin: 0.8em 0em;
-    }
     form.comment_edit {
         padding: 0rem 0rem 1rem 0rem;
     }
@@ -909,23 +903,11 @@ div.standalone > *:last-child {
         height: calc((100vw - 4rem) * 0.5625);
     }
 }
-@media screen and (max-width: 559px) {
+@media screen and (max-width: 639px) {
     aside {
         float: none;
         max-width: 100%;
         margin-left: 0rem;
-    }
-    ul.archive > li {
-        flex: 100%;
-    }
-    ul.archive article.post.archive {
-        box-sizing: border-box;
-        width: 100%;
-        height: auto;
-        margin-left: 0em;
-    }
-    ul.archive article.post.archive img {
-        width: 100%;
     }
 }
 @media (prefers-reduced-motion) {

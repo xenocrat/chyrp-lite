@@ -249,14 +249,11 @@ ul.navigation > li {
 }
 ul.archive {
     list-style: none;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: start;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(214px, 1fr));
+    grid-auto-flow: row;
     gap: 2rem;
     margin: 2rem 0rem 0rem 0rem;
-}
-ul.archive > li {
-    flex: none;
 }
 ol.comments {
     list-style: none;
@@ -489,7 +486,6 @@ div#main > article, div.standalone {
 ul.archive article.post.archive {
     display: block;
     position: relative;
-    width: 196px;
     height: 196px;
     font-size: 0.75em;
     padding: 8px;
@@ -762,15 +758,6 @@ div.standalone > *:last-child {
     }
     button#search_submit {
         display: none;
-    }
-    ul.archive > li {
-        flex: 100%;
-    }
-    ul.archive article.post.archive {
-        box-sizing: border-box;
-        width: 100%;
-        height: auto;
-        margin-left: 0em;
     }
 }
 @media (prefers-reduced-motion) {

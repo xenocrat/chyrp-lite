@@ -24,9 +24,9 @@
 <article class="post archive {{ post.feather }}" id="post_{{ post.id }}" role="presentation">
 <section class="post_archive_container" aria-hidden="true">
 {% if post.feather == "photo" %}
-{{ post.filename | thumbnail(post.alt_text, false, ["max_width=196", "quality=60", "square=1"], "(max-width: 559px) 95vw, 196px") }}
-{% elseif post.feather == "uploader" and post.image is defined %}
-{{ post.image | thumbnail("", false, ["max_width=196", "quality=60", "square=1"], "(max-width: 559px) 95vw, 196px") }}
+{{ post.filename | thumbnail("", false, ["max_width=196", "quality=60", "square=1"], "196px") }}
+{% elseif post.image is defined %}
+{{ post.image | thumbnail("", false, ["max_width=196", "quality=60", "square=1"], "196px") }}
 {% else %}
 {% if post.title is not empty %}
 <h3 class="archive">{{ post.title | striptags | normalize | truncate(20) }}</h3>
