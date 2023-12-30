@@ -38,6 +38,7 @@
                 "caption",
                 array("markup_post_text", "markup_text")
             );
+            $this->respondTo("filter_post","filter_post");
             $this->respondTo("post_options", "add_option");
         }
 
@@ -136,6 +137,13 @@
                            '</figcaption>';
 
             return '<figure>'.$content.'</figure>';
+        }
+
+        public function filter_post($post): void {
+            if ($post->feather != "photo")
+                return;
+
+            $post->image = $post->filename;
         }
 
         public function add_option($options, $post = null, $feather = null): array {
