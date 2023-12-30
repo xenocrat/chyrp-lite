@@ -16,9 +16,7 @@
 <li>
 <article class="post archive {{ post.feather }}" id="post_{{ post.id }}" role="presentation">
 <section class="post_archive_container" aria-hidden="true">
-{% if post.feather == "photo" %}
-{{ post.filename | thumbnail("", false, ["max_width=196", "quality=60", "square=1"], "196px") }}
-{% elseif post.image is defined %}
+{% if post.image is defined %}
 {{ post.image | thumbnail("", false, ["max_width=196", "quality=60", "square=1"], "196px") }}
 {% else %}
 {% if post.title is not empty %}
