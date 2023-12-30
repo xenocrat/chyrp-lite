@@ -112,7 +112,7 @@
                     );
 
             } catch (PDOException $e) {
-                return $this->exception_handler($e);
+                $this->exception_handler($e);
             }
         }
 
