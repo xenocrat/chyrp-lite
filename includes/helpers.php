@@ -951,8 +951,11 @@
         $const = MAX_TIME_LIMIT;
         $limit = ini_get("max_execution_time");
 
-        if ($limit !== 0 and $limit < $const)
-            set_time_limit($const);
+        if ($limit === 0)
+            return;
+
+        if ($limit < $const)
+            set_time_limit(MAX_TIME_LIMIT);
     }
 
     /**
