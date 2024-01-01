@@ -16,6 +16,7 @@ $(function() {
     validate_passwords();
     confirm_submit();
     solo_submit();
+    test_uploads();
     Help.init();
     Write.init();
     Settings.init();
@@ -165,6 +166,21 @@ function solo_submit() {
         }
     });
 }
+function test_uploads() {
+    $("input[type='file']:not(.toolbar)").on("change.uploads", function(e) {
+        if (!!e.target.files && e.target.files.length > 0) {
+            for (var i = 0; i < e.target.files.length; i++) {
+                var file = e.target.files[i];
+
+                if (file.size > Uploads.limit) {
+                    e.target.value = null;
+                    alert(Uploads.message);
+                    break;
+                }
+            }
+        }
+    });
+}
 var Route = {
     action: '<?php esce($route->action); ?>',
     request: '<?php esce($route->request); ?>'
@@ -177,6 +193,10 @@ var Site = {
     url: '<?php esce($config->url); ?>',
     chyrp_url: '<?php esce($config->chyrp_url); ?>',
     ajax_url: '<?php esce(unfix(url('/', 'AjaxController'))); ?>'
+}
+var Uploads = {
+    limit: <?php esce(intval($config->uploads_limit * 1000000)); ?>,
+    message: '<?php esce(_f("Maximum file size: %d Megabytes!", $config->uploads_limit)); ?>'
 }
 var Oops = {
     message: '<?php esce(__("Oops! Something went wrong on this web page.")); ?>',
@@ -368,6 +388,12 @@ var Write = {
                     if (!!e.target.files && e.target.files.length > 0) {
                         var file = e.target.files[0];
                         var form = new FormData();
+
+                        if (file.size > Uploads.limit) {
+                            e.target.value = null;
+                            tray.html(Uploads.message);
+                            return;
+                        }
 
                         form.set("action", "file_upload");
                         form.set("hash", Visitor.token);
@@ -590,6 +616,11 @@ var Write = {
             var file = dt.files[0];
             var form = new FormData();
             var tray = $("#" + $(e.target).attr("id") + "_tray");
+
+            if (file.size > Uploads.limit) {
+                tray.html(Uploads.message);
+                return;
+            }
 
             if (file.type.indexOf("image/") == 0) {
                 form.set("action", "file_upload");
