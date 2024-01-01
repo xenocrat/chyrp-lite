@@ -17,8 +17,7 @@
                     "type" => "file",
                     "label" => __("Files", "uploader"),
                     "multiple" => true,
-                    "accept" => ".".implode(",.", upload_filter_whitelist()),
-                    "note" => _f("(Max. file size: %d Megabytes)", $maximum, "uploader")
+                    "accept" => ".".implode(",.", upload_filter_whitelist())
                 )
             );
             $this->setField(

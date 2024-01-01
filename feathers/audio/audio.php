@@ -17,8 +17,7 @@
                     "type" => "file",
                     "label" => __("Audio File", "audio"),
                     "multiple" => false,
-                    "accept" => ".".implode(",.", $this->audio_extensions()),
-                    "note" => _f("(Max. file size: %d Megabytes)", $maximum, "audio")
+                    "accept" => ".".implode(",.", $this->audio_extensions())
                 )
             );
             $this->setField(

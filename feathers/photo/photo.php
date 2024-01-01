@@ -17,8 +17,7 @@
                     "type" => "file",
                     "label" => __("Photo", "photo"),
                     "multiple" => false,
-                    "accept" => ".".implode(",.", $this->photo_extensions()),
-                    "note" => _f("(Max. file size: %d Megabytes)", $maximum, "photo")
+                    "accept" => ".".implode(",.", $this->image_extensions())
                 )
             );
             $this->setField(
@@ -46,7 +45,7 @@
             if (isset($_FILES['filename']) and upload_tester($_FILES['filename']))
                 $filename = upload(
                     $_FILES['filename'],
-                    $this->photo_extensions()
+                    $this->image_extensions()
                 );
 
             if (!isset($filename))
@@ -97,7 +96,7 @@
             if (isset($_FILES['filename']) and upload_tester($_FILES['filename']))
                 $filename = upload(
                     $_FILES['filename'],
-                    $this->photo_extensions()
+                    $this->image_extensions()
                 );
 
             return $post->update(
@@ -169,7 +168,7 @@
             return $options;
         }
 
-        private function photo_extensions(): array {
+        private function image_extensions(): array {
             return array("jpg", "jpeg", "png", "gif", "webp", "avif");
         }
     }
