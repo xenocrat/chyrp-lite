@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: feathers/uploader/admin/help/uploader_source.twig:3
@@ -37,19 +37,14 @@ msgstr "Titel"
 msgid "Files"
 msgstr "Dateien"
 
-#: feathers/uploader/uploader.php:21
-#, php-format
-msgid "(Max. file size: %d Megabytes)"
-msgstr "(Max. Dateigröße: %d Megabytes)"
-
-#: feathers/uploader/uploader.php:28
+#: feathers/uploader/uploader.php:27
 msgid "Caption"
 msgstr "Unterschrift"
 
-#: feathers/uploader/uploader.php:78
+#: feathers/uploader/uploader.php:77
 msgid "You did not select any files to upload."
 msgstr "Sie haben keine Dateien zum hochladen selektiert."
 
-#: feathers/uploader/uploader.php:215
+#: feathers/uploader/uploader.php:214
 msgid "Source"
 msgstr "Quelle"

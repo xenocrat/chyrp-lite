@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/topaz/content/comment.twig:4
@@ -34,7 +34,7 @@ msgstr "标签"
 #: themes/topaz/content/post.twig:15 themes/topaz/feathers/audio.twig:7
 #: themes/topaz/feathers/photo.twig:7 themes/topaz/feathers/quote.twig:7
 #: themes/topaz/feathers/text.twig:7 themes/topaz/feathers/uploader.twig:7
-#: themes/topaz/feathers/video.twig:7 themes/topaz/pages/archive.twig:31
+#: themes/topaz/feathers/video.twig:7 themes/topaz/pages/archive.twig:29
 #: themes/topaz/pages/page.twig:7 themes/topaz/pages/search.twig:19
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
@@ -384,13 +384,13 @@ msgstr "被禁止."
 msgid "Not found."
 msgstr "未找到."
 
-#: themes/topaz/pages/archive.twig:42 themes/topaz/pages/archive.twig:47
-#: themes/topaz/pages/archive.twig:56
+#: themes/topaz/pages/archive.twig:40 themes/topaz/pages/archive.twig:45
+#: themes/topaz/pages/archive.twig:54
 #, php-format
 msgid "Archive of %s"
 msgstr "%s的档案"
 
-#: themes/topaz/pages/archive.twig:66
+#: themes/topaz/pages/archive.twig:64
 msgid "There aren't any posts in the timeframe you specified."
 msgstr "在指定的时间范围内没有任何帖子。"
 

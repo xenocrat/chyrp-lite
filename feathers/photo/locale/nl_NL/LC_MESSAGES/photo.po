@@ -9,11 +9,11 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: feathers/photo/admin/help/photo_alt_text.twig:3
-#: feathers/photo/admin/help/photo_alt_text.twig:6 feathers/photo/photo.php:147
+#: feathers/photo/admin/help/photo_alt_text.twig:6 feathers/photo/photo.php:154
 msgid "Alternative Text"
 msgstr "Alternatieve tekst"
 
@@ -50,12 +50,7 @@ msgstr "Upload en toon een afbeelding met een bijtekst."
 msgid "Title"
 msgstr "Titel"
 
-#: feathers/photo/photo.php:21
-#, php-format
-msgid "(Max. file size: %d Megabytes)"
-msgstr "(Max. bestandsgrootte: %d Megabytes)"
-
-#: feathers/photo/photo.php:28
+#: feathers/photo/photo.php:27
 msgid "Caption"
 msgstr "Toelichting"
 
@@ -63,6 +58,6 @@ msgstr "Toelichting"
 msgid "You did not select a photo to upload."
 msgstr "Je hebt geen afbeelding geslecteerd om te uploaden."
 
-#: feathers/photo/photo.php:155
+#: feathers/photo/photo.php:162
 msgid "Source"
 msgstr "Bron"

@@ -25,7 +25,7 @@ msgstr ""
 #: themes/umbra/feathers/text.twig:6
 #: themes/umbra/feathers/uploader.twig:6
 #: themes/umbra/feathers/video.twig:6
-#: themes/umbra/pages/archive.twig:31
+#: themes/umbra/pages/archive.twig:29
 #: themes/umbra/pages/page.twig:6
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
@@ -319,12 +319,12 @@ msgstr ""
 msgid "F Y"
 msgstr ""
 
-#: themes/umbra/pages/archive.twig:51
+#: themes/umbra/pages/archive.twig:49
 #, php-format
 msgid "Archive of %s"
 msgstr ""
 
-#: themes/umbra/pages/archive.twig:60
+#: themes/umbra/pages/archive.twig:58
 msgid "There aren't any posts in the timeframe you specified."
 msgstr ""
 

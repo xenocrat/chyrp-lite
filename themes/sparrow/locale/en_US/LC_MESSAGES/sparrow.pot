@@ -25,7 +25,7 @@ msgstr ""
 #: themes/sparrow/feathers/text.twig:6
 #: themes/sparrow/feathers/uploader.twig:6
 #: themes/sparrow/feathers/video.twig:6
-#: themes/sparrow/pages/archive.twig:38
+#: themes/sparrow/pages/archive.twig:36
 #: themes/sparrow/pages/page.twig:6
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
@@ -357,17 +357,17 @@ msgstr ""
 msgid "F Y"
 msgstr ""
 
-#: themes/sparrow/pages/archive.twig:49
+#: themes/sparrow/pages/archive.twig:47
 #, php-format
 msgid "Archive of %s &rarr;"
 msgstr ""
 
-#: themes/sparrow/pages/archive.twig:58
+#: themes/sparrow/pages/archive.twig:56
 #, php-format
 msgid "Archive of %s"
 msgstr ""
 
-#: themes/sparrow/pages/archive.twig:67
+#: themes/sparrow/pages/archive.twig:65
 msgid "There aren't any posts in the timeframe you specified."
 msgstr ""
 

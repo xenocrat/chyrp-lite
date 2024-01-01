@@ -25,7 +25,7 @@ msgstr ""
 #: themes/topaz/feathers/text.twig:7
 #: themes/topaz/feathers/uploader.twig:7
 #: themes/topaz/feathers/video.twig:7
-#: themes/topaz/pages/archive.twig:31
+#: themes/topaz/pages/archive.twig:29
 #: themes/topaz/pages/page.twig:7
 #: themes/topaz/pages/search.twig:19
 #, php-format
@@ -395,14 +395,14 @@ msgstr ""
 msgid "Not found."
 msgstr ""
 
-#: themes/topaz/pages/archive.twig:42
-#: themes/topaz/pages/archive.twig:47
-#: themes/topaz/pages/archive.twig:56
+#: themes/topaz/pages/archive.twig:40
+#: themes/topaz/pages/archive.twig:45
+#: themes/topaz/pages/archive.twig:54
 #, php-format
 msgid "Archive of %s"
 msgstr ""
 
-#: themes/topaz/pages/archive.twig:66
+#: themes/topaz/pages/archive.twig:64
 msgid "There aren't any posts in the timeframe you specified."
 msgstr ""
 

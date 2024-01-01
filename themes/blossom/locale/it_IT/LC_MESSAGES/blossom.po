@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/blossom/content/comment.twig:4
@@ -34,7 +34,7 @@ msgstr "Tag"
 #: themes/blossom/content/post.twig:15 themes/blossom/feathers/audio.twig:6
 #: themes/blossom/feathers/photo.twig:6 themes/blossom/feathers/quote.twig:6
 #: themes/blossom/feathers/text.twig:6 themes/blossom/feathers/uploader.twig:6
-#: themes/blossom/feathers/video.twig:6 themes/blossom/pages/archive.twig:38
+#: themes/blossom/feathers/video.twig:6 themes/blossom/pages/archive.twig:36
 #: themes/blossom/pages/page.twig:6 themes/blossom/pages/search.twig:19
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
@@ -384,13 +384,13 @@ msgstr "Negato."
 msgid "Not found."
 msgstr "Non trovato."
 
-#: themes/blossom/pages/archive.twig:10 themes/blossom/pages/archive.twig:49
-#: themes/blossom/pages/archive.twig:58
+#: themes/blossom/pages/archive.twig:10 themes/blossom/pages/archive.twig:47
+#: themes/blossom/pages/archive.twig:56
 #, php-format
 msgid "Archive of %s"
 msgstr "Archivio %s"
 
-#: themes/blossom/pages/archive.twig:68
+#: themes/blossom/pages/archive.twig:66
 msgid "There aren't any posts in the timeframe you specified."
 msgstr "Non ci sono post nell'intervallo di tempo specificato."
 

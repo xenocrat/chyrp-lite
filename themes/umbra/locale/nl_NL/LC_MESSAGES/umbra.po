@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/umbra/content/comment.twig:4
@@ -33,7 +33,7 @@ msgstr "Tags"
 #: themes/umbra/content/post.twig:15 themes/umbra/feathers/audio.twig:6
 #: themes/umbra/feathers/photo.twig:6 themes/umbra/feathers/quote.twig:6
 #: themes/umbra/feathers/text.twig:6 themes/umbra/feathers/uploader.twig:6
-#: themes/umbra/feathers/video.twig:6 themes/umbra/pages/archive.twig:31
+#: themes/umbra/feathers/video.twig:6 themes/umbra/pages/archive.twig:29
 #: themes/umbra/pages/page.twig:6
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
@@ -316,12 +316,12 @@ msgstr "Niet gevonden."
 msgid "F Y"
 msgstr "F Y"
 
-#: themes/umbra/pages/archive.twig:51
+#: themes/umbra/pages/archive.twig:49
 #, php-format
 msgid "Archive of %s"
 msgstr "Archief van %s"
 
-#: themes/umbra/pages/archive.twig:60
+#: themes/umbra/pages/archive.twig:58
 msgid "There aren't any posts in the timeframe you specified."
 msgstr "Er zijn geen Blogposts in het door jou gespecificeerde tijdvak."
 

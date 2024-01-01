@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: admin/help/canonical_url.twig:3 admin/help/canonical_url.twig:6
@@ -103,7 +103,7 @@ msgid "## Heading"
 msgstr "## Kopf"
 
 #: admin/help/markdown.twig:20 admin/help/markdown.twig:24
-#: admin/javascripts/admin.js.php:236 admin/javascripts/admin.js.php:237
+#: admin/javascripts/admin.js.php:256 admin/javascripts/admin.js.php:257
 msgid "Heading"
 msgstr "Kopf"
 
@@ -115,8 +115,8 @@ msgstr "### Kopf"
 msgid "**Strong**"
 msgstr "**Stark**"
 
-#: admin/help/markdown.twig:28 admin/javascripts/admin.js.php:251
-#: admin/javascripts/admin.js.php:252
+#: admin/help/markdown.twig:28 admin/javascripts/admin.js.php:271
+#: admin/javascripts/admin.js.php:272
 msgid "Strong"
 msgstr "Stark"
 
@@ -124,8 +124,8 @@ msgstr "Stark"
 msgid "*Emphasis*"
 msgstr "*Schwerpunkt*"
 
-#: admin/help/markdown.twig:32 admin/javascripts/admin.js.php:266
-#: admin/javascripts/admin.js.php:267
+#: admin/help/markdown.twig:32 admin/javascripts/admin.js.php:286
+#: admin/javascripts/admin.js.php:287
 msgid "Emphasis"
 msgstr "Schwerpunkt"
 
@@ -141,8 +141,8 @@ msgstr "Zitat"
 msgid "~~Strikethrough~~"
 msgstr "~~Durchgestrichen~~"
 
-#: admin/help/markdown.twig:40 admin/javascripts/admin.js.php:281
-#: admin/javascripts/admin.js.php:282
+#: admin/help/markdown.twig:40 admin/javascripts/admin.js.php:301
+#: admin/javascripts/admin.js.php:302
 msgid "Strikethrough"
 msgstr "Durchgestrichen"
 
@@ -150,8 +150,8 @@ msgstr "Durchgestrichen"
 msgid "`Code`"
 msgstr "`Code`"
 
-#: admin/help/markdown.twig:44 admin/javascripts/admin.js.php:311
-#: admin/javascripts/admin.js.php:312
+#: admin/help/markdown.twig:44 admin/javascripts/admin.js.php:331
+#: admin/javascripts/admin.js.php:332
 msgid "Code"
 msgstr "Code"
 
@@ -159,8 +159,8 @@ msgstr "Code"
 msgid "==Highlight=="
 msgstr "==Markieren=="
 
-#: admin/help/markdown.twig:48 admin/javascripts/admin.js.php:296
-#: admin/javascripts/admin.js.php:297
+#: admin/help/markdown.twig:48 admin/javascripts/admin.js.php:316
+#: admin/javascripts/admin.js.php:317
 msgid "Highlight"
 msgstr "Markieren"
 
@@ -192,8 +192,8 @@ msgstr "Neuer Absatz"
 msgid "[title](URL)"
 msgstr "[title](URL)"
 
-#: admin/help/markdown.twig:65 admin/javascripts/admin.js.php:326
-#: admin/javascripts/admin.js.php:327
+#: admin/help/markdown.twig:65 admin/javascripts/admin.js.php:346
+#: admin/javascripts/admin.js.php:347
 msgid "Hyperlink"
 msgstr "Hyperlink"
 
@@ -201,8 +201,8 @@ msgstr "Hyperlink"
 msgid "![description](URL)"
 msgstr "![description](URL)"
 
-#: admin/help/markdown.twig:69 admin/javascripts/admin.js.php:341
-#: admin/javascripts/admin.js.php:342
+#: admin/help/markdown.twig:69 admin/javascripts/admin.js.php:361
+#: admin/javascripts/admin.js.php:362
 msgid "Image"
 msgstr "Bild"
 
@@ -311,87 +311,87 @@ msgstr "Emoticon"
 msgid "Emoji"
 msgstr "Emoji"
 
-#: admin/javascripts/admin.js.php:47 admin/javascripts/admin.js.php:53
+#: admin/javascripts/admin.js.php:48 admin/javascripts/admin.js.php:54
 msgid "Toggle All"
 msgstr "Alle umschalten"
 
-#: admin/javascripts/admin.js.php:140 admin/javascripts/admin.js.php:148
+#: admin/javascripts/admin.js.php:141 admin/javascripts/admin.js.php:149
 msgid "Are you sure you want to proceed?"
 msgstr "Sind Sie sicher, dass Sie fortfahren möchten?"
 
-#: admin/javascripts/admin.js.php:195 admin/javascripts/admin.js.php:419
-#: admin/javascripts/admin.js.php:823
+#: admin/javascripts/admin.js.php:215 admin/javascripts/admin.js.php:445
+#: admin/javascripts/admin.js.php:854
 msgid "Modal window"
 msgstr "Modales Fenster"
 
-#: admin/javascripts/admin.js.php:208 admin/javascripts/admin.js.php:431
-#: admin/javascripts/admin.js.php:837
+#: admin/javascripts/admin.js.php:228 admin/javascripts/admin.js.php:457
+#: admin/javascripts/admin.js.php:868
 msgid "Close"
 msgstr "Schliessen"
 
-#: admin/javascripts/admin.js.php:215 admin/javascripts/admin.js.php:438
-#: admin/javascripts/admin.js.php:844
+#: admin/javascripts/admin.js.php:235 admin/javascripts/admin.js.php:464
+#: admin/javascripts/admin.js.php:875
 msgid "close"
 msgstr "schliessen"
 
-#: admin/javascripts/admin.js.php:243
+#: admin/javascripts/admin.js.php:263
 msgid "heading"
 msgstr "kopf"
 
-#: admin/javascripts/admin.js.php:258
+#: admin/javascripts/admin.js.php:278
 msgid "strong"
 msgstr "stark"
 
-#: admin/javascripts/admin.js.php:273
+#: admin/javascripts/admin.js.php:293
 msgid "emphasis"
 msgstr "schwerpunkt"
 
-#: admin/javascripts/admin.js.php:288
+#: admin/javascripts/admin.js.php:308
 msgid "strikethrough"
 msgstr "durchgestrichen"
 
-#: admin/javascripts/admin.js.php:303
+#: admin/javascripts/admin.js.php:323
 msgid "highlight"
 msgstr "markieren"
 
-#: admin/javascripts/admin.js.php:318
+#: admin/javascripts/admin.js.php:338
 msgid "code"
 msgstr "code"
 
-#: admin/javascripts/admin.js.php:333
+#: admin/javascripts/admin.js.php:353
 msgid "hyperlink"
 msgstr "hyperlink"
 
-#: admin/javascripts/admin.js.php:348 admin/javascripts/admin.js.php:399
+#: admin/javascripts/admin.js.php:368 admin/javascripts/admin.js.php:425
 msgid "image"
 msgstr "bild"
 
-#: admin/javascripts/admin.js.php:360 admin/javascripts/admin.js.php:361
+#: admin/javascripts/admin.js.php:380 admin/javascripts/admin.js.php:381
 msgid "Upload"
 msgstr "Hochladen"
 
-#: admin/javascripts/admin.js.php:376 admin/javascripts/admin.js.php:599
+#: admin/javascripts/admin.js.php:402 admin/javascripts/admin.js.php:630
 msgid "Uploading..."
 msgstr "Hochladen..."
 
-#: admin/javascripts/admin.js.php:408 admin/javascripts/admin.js.php:409
+#: admin/javascripts/admin.js.php:434 admin/javascripts/admin.js.php:435
 msgid "Insert"
 msgstr "Einfügen"
 
-#: admin/javascripts/admin.js.php:455
+#: admin/javascripts/admin.js.php:481
 msgid "insert"
 msgstr "einfügen"
 
-#: admin/javascripts/admin.js.php:469 admin/javascripts/admin.js.php:470
+#: admin/javascripts/admin.js.php:495 admin/javascripts/admin.js.php:496
 #: admin/pages/themes.twig:24
 msgid "Preview"
 msgstr "Vorschau"
 
-#: admin/javascripts/admin.js.php:486
+#: admin/javascripts/admin.js.php:512
 msgid "preview"
 msgstr "vorschau"
 
-#: admin/javascripts/admin.js.php:512
+#: admin/javascripts/admin.js.php:538
 msgid "Words:"
 msgstr "Wörter:"
 

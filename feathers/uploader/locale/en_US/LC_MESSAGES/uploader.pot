@@ -25,20 +25,15 @@ msgstr ""
 msgid "Files"
 msgstr ""
 
-#: feathers/uploader/uploader.php:21
-#, php-format
-msgid "(Max. file size: %d Megabytes)"
-msgstr ""
-
-#: feathers/uploader/uploader.php:28
+#: feathers/uploader/uploader.php:27
 msgid "Caption"
 msgstr ""
 
-#: feathers/uploader/uploader.php:78
+#: feathers/uploader/uploader.php:77
 msgid "You did not select any files to upload."
 msgstr ""
 
-#: feathers/uploader/uploader.php:215
+#: feathers/uploader/uploader.php:214
 msgid "Source"
 msgstr ""
 

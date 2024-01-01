@@ -8,24 +8,19 @@ msgstr ""
 msgid "Audio File"
 msgstr ""
 
-#: feathers/audio/audio.php:21
-#, php-format
-msgid "(Max. file size: %d Megabytes)"
-msgstr ""
-
-#: feathers/audio/audio.php:28
+#: feathers/audio/audio.php:27
 msgid "Captions"
 msgstr ""
 
-#: feathers/audio/audio.php:38
+#: feathers/audio/audio.php:37
 msgid "Description"
 msgstr ""
 
-#: feathers/audio/audio.php:65
+#: feathers/audio/audio.php:64
 msgid "You did not select any audio to upload."
 msgstr ""
 
-#: feathers/audio/audio.php:187
+#: feathers/audio/audio.php:186
 msgid "Your web browser does not support the <code>audio</code> element."
 msgstr ""
 

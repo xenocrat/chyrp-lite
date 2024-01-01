@@ -10,11 +10,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: feathers/photo/admin/help/photo_alt_text.twig:3
-#: feathers/photo/admin/help/photo_alt_text.twig:6 feathers/photo/photo.php:147
+#: feathers/photo/admin/help/photo_alt_text.twig:6 feathers/photo/photo.php:154
 msgid "Alternative Text"
 msgstr "Testo Alternative"
 
@@ -51,12 +51,7 @@ msgstr "Carica e visualizza un'immagine con una didascalia."
 msgid "Title"
 msgstr "Titolo"
 
-#: feathers/photo/photo.php:21
-#, php-format
-msgid "(Max. file size: %d Megabytes)"
-msgstr "(Dimensione massima del file:%d megabyte)"
-
-#: feathers/photo/photo.php:28
+#: feathers/photo/photo.php:27
 msgid "Caption"
 msgstr "Didascalia"
 
@@ -64,6 +59,6 @@ msgstr "Didascalia"
 msgid "You did not select a photo to upload."
 msgstr "Non é stata selezionata alcuna foto da caricare."
 
-#: feathers/photo/photo.php:155
+#: feathers/photo/photo.php:162
 msgid "Source"
 msgstr "Sorgente"

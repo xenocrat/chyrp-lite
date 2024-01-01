@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: feathers/audio/audio.php:10
@@ -21,24 +21,19 @@ msgstr "Titolo"
 msgid "Audio File"
 msgstr "File Audio"
 
-#: feathers/audio/audio.php:21
-#, php-format
-msgid "(Max. file size: %d Megabytes)"
-msgstr "(Dimensione massima del file:%d megabyte)"
-
-#: feathers/audio/audio.php:28
+#: feathers/audio/audio.php:27
 msgid "Captions"
 msgstr "Didascalie"
 
-#: feathers/audio/audio.php:38
+#: feathers/audio/audio.php:37
 msgid "Description"
 msgstr "Descrizione"
 
-#: feathers/audio/audio.php:65
+#: feathers/audio/audio.php:64
 msgid "You did not select any audio to upload."
 msgstr "Non è stato selezionato alcun audio da caricare."
 
-#: feathers/audio/audio.php:187
+#: feathers/audio/audio.php:186
 msgid "Your web browser does not support the <code>audio</code> element."
 msgstr "Il browser web non supporta l'elemento <code>audio</code>."
 

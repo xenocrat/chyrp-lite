@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/sparrow/content/comment.twig:4
@@ -34,7 +34,7 @@ msgstr "Tags"
 #: themes/sparrow/content/post.twig:15 themes/sparrow/feathers/audio.twig:6
 #: themes/sparrow/feathers/photo.twig:6 themes/sparrow/feathers/quote.twig:6
 #: themes/sparrow/feathers/text.twig:6 themes/sparrow/feathers/uploader.twig:6
-#: themes/sparrow/feathers/video.twig:6 themes/sparrow/pages/archive.twig:38
+#: themes/sparrow/feathers/video.twig:6 themes/sparrow/pages/archive.twig:36
 #: themes/sparrow/pages/page.twig:6
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
@@ -362,17 +362,17 @@ msgstr "&larr; Archiv vom %s"
 msgid "F Y"
 msgstr "F Y"
 
-#: themes/sparrow/pages/archive.twig:49
+#: themes/sparrow/pages/archive.twig:47
 #, php-format
 msgid "Archive of %s &rarr;"
 msgstr "Archiv vom %s &rarr;"
 
-#: themes/sparrow/pages/archive.twig:58
+#: themes/sparrow/pages/archive.twig:56
 #, php-format
 msgid "Archive of %s"
 msgstr "Archiv vom %s"
 
-#: themes/sparrow/pages/archive.twig:67
+#: themes/sparrow/pages/archive.twig:65
 msgid "There aren't any posts in the timeframe you specified."
 msgstr "In dem angegebenen Zeitfenster gibt es keine Posts."
 

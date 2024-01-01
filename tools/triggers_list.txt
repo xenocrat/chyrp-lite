@@ -17,7 +17,7 @@ Arguments:
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 882
+	admin/javascripts/admin.js.php on line 913
 
 
 admin_head
@@ -182,7 +182,7 @@ Arguments:
 audio_player
 ------------
 Called from:
-	feathers/audio/audio.php on line 183
+	feathers/audio/audio.php on line 182
 
 Arguments:
 	$post
@@ -191,7 +191,7 @@ Arguments:
 video_player
 ------------
 Called from:
-	feathers/video/video.php on line 186
+	feathers/video/video.php on line 215
 
 Arguments:
 	$post
@@ -332,7 +332,7 @@ Arguments:
 webmention
 ----------
 Called from:
-	includes/helpers.php on line 1940
+	includes/helpers.php on line 1943
 
 Arguments:
 	$post, $source, $target
@@ -341,7 +341,7 @@ Arguments:
 delete_upload
 -------------
 Called from:
-	includes/helpers.php on line 2671
+	includes/helpers.php on line 2674
 
 Arguments:
 	$filename
@@ -350,19 +350,19 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 2853
+	includes/helpers.php on line 2856
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 2871
+	includes/helpers.php on line 2874
 
 
 correspond_activate_account
 ---------------------------
 Called from:
-	includes/helpers.php on line 3144
+	includes/helpers.php on line 3147
 
 Arguments:
 	$user, $url
@@ -371,7 +371,7 @@ Arguments:
 correspond_reset_password
 -------------------------
 Called from:
-	includes/helpers.php on line 3179
+	includes/helpers.php on line 3182
 
 Arguments:
 	$user, $url
@@ -380,7 +380,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 3220
+	includes/helpers.php on line 3223
 
 Arguments:
 	$ob
@@ -389,7 +389,7 @@ Arguments:
 javascript
 ----------
 Called from:
-	includes/main.js.php on line 118
+	includes/main.js.php on line 122
 
 
 add_group
@@ -1058,7 +1058,7 @@ Target:
 keyword_search
 --------------
 Called from:
-	includes/helpers.php on line 1161
+	includes/helpers.php on line 1164
 
 Target:
 	$search
@@ -1070,7 +1070,7 @@ Arguments:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 3124
+	includes/helpers.php on line 3127
 
 Target:
 	$function
@@ -1079,7 +1079,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 3221
+	includes/helpers.php on line 3224
 	includes/lib/Leaf.php on line 276
 
 Target:
