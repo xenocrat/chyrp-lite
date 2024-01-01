@@ -17,8 +17,7 @@
                     "type" => "file",
                     "label" => __("Video File", "video"),
                     "multiple" => false,
-                    "accept" => ".".implode(",.", $this->video_extensions()),
-                    "note" => _f("(Max. file size: %d Megabytes)", $maximum, "video")
+                    "accept" => ".".implode(",.", $this->video_extensions())
                 )
             );
             $this->setField(
@@ -29,6 +28,16 @@
                     "optional" => true,
                     "multiple" => false,
                     "accept" => ".vtt"
+                )
+            );
+            $this->setField(
+                array(
+                    "attr" => "poster_image",
+                    "type" => "file",
+                    "label" => __("Poster Image", "video"),
+                    "optional" => true,
+                    "multiple" => false,
+                    "accept" => ".".implode(",.", $this->image_extensions())
                 )
             );
             $this->setField(
@@ -72,6 +81,12 @@
                     array("vtt")
                 );
 
+            if (isset($_FILES['poster_image']) and upload_tester($_FILES['poster_image']))
+                $poster_image = upload(
+                    $_FILES['poster_image'],
+                    $this->image_extensions()
+                );
+
             fallback($_POST['title'], "");
             fallback($_POST['description'], "");
             fallback($_POST['slug'], $_POST['title']);
@@ -84,6 +99,7 @@
                     "title" => $_POST['title'],
                     "filename" => $filename,
                     "captions" => fallback($captions, ""),
+                    "poster_image" => fallback($poster_image, ""),
                     "description" => $_POST['description']
                 ),
                 clean:sanitize($_POST['slug']),
@@ -105,6 +121,7 @@
             fallback($_POST['option'], array());
             $filename = $post->filename;
             $captions = $post->captions;
+            $poster_image = $post->$poster_image;
 
             if (isset($_FILES['filename']) and upload_tester($_FILES['filename']))
                 $filename = upload(
@@ -118,11 +135,18 @@
                     array(".vtt")
                 );
 
+            if (isset($_FILES['poster_image']) and upload_tester($_FILES['poster_image']))
+                $poster_image = upload(
+                    $_FILES['poster_image'],
+                    $this->image_extensions()
+                );
+
             return $post->update(
                 values:array(
                     "title" => $_POST['title'],
                     "filename" => $filename,
                     "captions" => fallback($captions, ""),
+                    "poster_image" => fallback($poster_image, ""),
                     "description" => $_POST['description']
                 ),
                 pinned:!empty($_POST['pinned']),
@@ -176,6 +200,11 @@
                 return;
 
             $post->video_player = $this->video_player($post);
+
+            if (empty($post->poster_image))
+                return;
+
+            $post->image = $post->poster_image;
         }
 
         private function video_player($post): string {
@@ -185,7 +214,15 @@
             if ($trigger->exists("video_player"))
                 return $trigger->call("video_player", $post);
 
-            $player = '<video controls>'.
+            $player = '<video controls';
+
+            if (!empty($post->poster_image))
+                $player.= ' poster="'.$config->chyrp_url.
+                          "/includes/thumbnail.php?file=".
+                          urlencode($post->poster_image).
+                          '"';
+
+            $player.= '>'.
                       "\n".
                       __("Your web browser does not support the <code>video</code> element.", "video").
                       "\n".
@@ -235,5 +272,9 @@
 
         private function video_extensions(): array {
             return array("mp4", "ogv", "webm", "3gp", "mkv", "mov");
+        }
+
+        private function image_extensions(): array {
+            return array("jpg", "jpeg", "png", "gif", "webp", "avif");
         }
     }
