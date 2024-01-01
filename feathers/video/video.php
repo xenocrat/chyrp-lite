@@ -121,7 +121,7 @@
             fallback($_POST['option'], array());
             $filename = $post->filename;
             $captions = $post->captions;
-            $poster_image = $post->$poster_image;
+            $poster_image = $post->poster_image;
 
             if (isset($_FILES['filename']) and upload_tester($_FILES['filename']))
                 $filename = upload(
