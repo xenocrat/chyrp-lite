@@ -2637,22 +2637,22 @@
     function upload_filter_whitelist(): array {
         return array(
             # Binary and text formats:
-            "bin", "exe", "txt", "rtf",
-            "md", "pdf", "epub", "mobi",
+            "bin",  "exe",  "txt",  "rtf",  "vtt",
+            "md",   "pdf",  "epub", "mobi", "kfx",
 
             # Archive and compression formats:
-            "zip", "tar", "rar", "gz",
-            "dmg", "cab", "bz2", "7z",
+            "zip",  "tar",  "rar",  "gz",   "bz2",
+            "7z",   "dmg",  "cab",  "iso",  "udf",
 
             # Image formats:
-            "jpg", "jpeg", "png", "gif", "webp",
-            "avif", "tif", "tiff", "bmp", "heif",
+            "jpg",  "jpeg", "png",  "webp", "gif",
+            "avif", "tif",  "tiff", "heif", "bmp",
 
             # Video and audio formats:
-            "mpg", "mpeg", "m4a", "m4v", "mp4",
-            "mp3", "webm", "3gp", "mov", "avi",
-            "oga", "ogv", "ogg", "mka", "mkv",
-            "flac", "wav"
+            "mpg",  "mpeg", "m4a",  "m4v",  "mp4",
+            "mp3",  "webm", "3gp",  "mov",  "avi",
+            "oga",  "ogv",  "ogg",  "mka",  "mkv",
+            "flac", "aiff", "wav"
         );
     }
 
