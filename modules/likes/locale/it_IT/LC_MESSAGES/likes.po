@@ -96,7 +96,7 @@ msgstr "Hai aggiunto like."
 #, php-format
 msgid "You and %d person like this."
 msgid_plural "You and %d people like this."
-msgstr[0] "Tu e %d avete aggiunto like."
+msgstr[0] "Tu e %d altra persona avete aggiunto like."
 msgstr[1] "Tu e altre %d persone avete aggiunto like."
 
 #: modules/likes/likes.php:246 modules/likes/likes.php:381
