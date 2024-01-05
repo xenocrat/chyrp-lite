@@ -55,15 +55,15 @@ msgstr "&larr; الأولى"
 msgid "PDO failed to execute the prepared statement."
 msgstr "فشل تنفيذ جملة إتصال PDO."
 
-#: includes/class/Query.php:185
+#: includes/class/Query.php:189
 msgid "Query String"
 msgstr "سلسلة الاستعلام"
 
-#: includes/class/Query.php:187
+#: includes/class/Query.php:196
 msgid "Parameters"
 msgstr "البارامترات"
 
-#: includes/class/Query.php:191 includes/class/SQL.php:152 install.php:740
+#: includes/class/Query.php:204 includes/class/SQL.php:152 install.php:740
 #, php-format
 msgid "Database error: %s"
 msgstr "خطأ في قاعدة البيانات: %s"

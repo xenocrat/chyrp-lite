@@ -36,15 +36,15 @@ msgstr ""
 msgid "PDO failed to execute the prepared statement."
 msgstr ""
 
-#: includes/class/Query.php:185
+#: includes/class/Query.php:189
 msgid "Query String"
 msgstr ""
 
-#: includes/class/Query.php:187
+#: includes/class/Query.php:196
 msgid "Parameters"
 msgstr ""
 
-#: includes/class/Query.php:191
+#: includes/class/Query.php:204
 #: includes/class/SQL.php:152
 #: install.php:740
 #, php-format

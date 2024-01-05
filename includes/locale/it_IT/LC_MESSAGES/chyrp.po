@@ -49,15 +49,15 @@ msgstr "&larr; Prima"
 msgid "PDO failed to execute the prepared statement."
 msgstr "PDO non ha eseguito l'istruzione predisposta."
 
-#: includes/class/Query.php:185
+#: includes/class/Query.php:189
 msgid "Query String"
 msgstr "Stringa di ricerca"
 
-#: includes/class/Query.php:187
+#: includes/class/Query.php:196
 msgid "Parameters"
 msgstr "Parametri"
 
-#: includes/class/Query.php:191 includes/class/SQL.php:152 install.php:740
+#: includes/class/Query.php:204 includes/class/SQL.php:152 install.php:740
 #, php-format
 msgid "Database error: %s"
 msgstr "Errore di database: %s"

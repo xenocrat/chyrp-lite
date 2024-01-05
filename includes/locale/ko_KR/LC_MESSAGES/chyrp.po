@@ -49,15 +49,15 @@ msgstr "&larr; 처음"
 msgid "PDO failed to execute the prepared statement."
 msgstr "PDO가 준비된 명령문을 실행하지 못했습니다."
 
-#: includes/class/Query.php:185
+#: includes/class/Query.php:189
 msgid "Query String"
 msgstr "쿼리문"
 
-#: includes/class/Query.php:187
+#: includes/class/Query.php:196
 msgid "Parameters"
 msgstr "파라미터"
 
-#: includes/class/Query.php:191 includes/class/SQL.php:152 install.php:740
+#: includes/class/Query.php:204 includes/class/SQL.php:152 install.php:740
 #, php-format
 msgid "Database error: %s"
 msgstr "데이터베이스 오류: %s"
