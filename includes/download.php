@@ -44,4 +44,6 @@
     header("Content-Type: application/octet-stream");
     header("Content-Disposition: attachment; filename=\"".$safename."\"");
     readfile($filepath);
+
+    $trigger->call("end");
     flush();
