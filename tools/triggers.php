@@ -161,6 +161,20 @@
     }
 
     /**
+     * Function: make_arguments
+     * Makes an array from a string of arguments.
+     */
+    function make_arguments($text) {
+        $array = explode(",", $text);
+
+        foreach ($array as &$arg) {
+            $arg = trim($arg, ", ");
+        }
+
+        return array_diff($array, array(""));
+    }
+
+    /**
      * Function: scan_call
      * Scans text for trigger calls.
      */
@@ -187,7 +201,7 @@
                 else
                     $trigger["call"][$call] = array(
                         "places"    => array(make_place($pathname, $line)),
-                        "arguments" => trim(fallback($match[4], ""), ", ")
+                        "arguments" => make_arguments(fallback($match[4], ""))
                     );
             }
         }
@@ -226,7 +240,7 @@
                     else
                         $trigger["call"][$call] = array(
                             "places"    => array(make_place($pathname, $line)),
-                            "arguments" => trim(fallback($match[4], ""), ", ")
+                            "arguments" => make_arguments(fallback($match[4], ""))
                         );
                 }
             }
@@ -261,7 +275,7 @@
                     $trigger["filter"][$filter] = array(
                         "places"    => array(make_place($pathname, $line)),
                         "target"    => trim($match[2], ", "),
-                        "arguments" => trim(fallback($match[5], ""), ", ")
+                        "arguments" => make_arguments(fallback($match[5], ""))
                     );
             }
         }
@@ -301,7 +315,7 @@
                         $trigger["filter"][$filter] = array(
                             "places"    => array(make_place($pathname, $line)),
                             "target"    => trim($match[2], ", "),
-                            "arguments" => trim(fallback($match[5], ""), ", ")
+                            "arguments" => make_arguments(fallback($match[5], ""))
                         );
                 }
             }
@@ -335,7 +349,7 @@
                 else
                     $trigger["call"][$call] = array(
                         "places"    => array(make_place($pathname, $line)),
-                        "arguments" => trim(fallback($match[3], ""), ", ")
+                        "arguments" => make_arguments(fallback($match[3], ""))
                     );
             }
         }
@@ -363,8 +377,9 @@
 
             if (!empty($attributes["arguments"])) {
                 $contents.= "\nArguments:\n";
-                $contents.= "\t".$attributes["arguments"]."\n";
-            }
+
+                foreach ($attributes["arguments"] as $argument)
+                    $contents.= "\t".$argument."\n";            }
         }
 
         $contents.= "\n\n\n\n";
@@ -386,7 +401,9 @@
 
             if (!empty($attributes["arguments"])) {
                 $contents.= "\nArguments:\n";
-                $contents.= "\t".$attributes["arguments"]."\n";
+
+                foreach ($attributes["arguments"] as $argument)
+                    $contents.= "\t".$argument."\n";
             }
         }
 
