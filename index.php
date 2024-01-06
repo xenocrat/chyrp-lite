@@ -12,6 +12,5 @@
     # Respond to the request.
     $route->init();
 
-    $trigger->call("end", $route);
-
+    $trigger->call("end");
     ob_end_flush();
