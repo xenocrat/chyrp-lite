@@ -100,8 +100,8 @@ msgstr "Il percorso è stato avviato con un Controller non valido."
 #: install.php:1003 upgrade.php:210 upgrade.php:226 upgrade.php:242
 #: upgrade.php:258 upgrade.php:274 upgrade.php:294 upgrade.php:338
 #: upgrade.php:354 upgrade.php:374 upgrade.php:390 upgrade.php:406
-#: upgrade.php:422 upgrade.php:442 upgrade.php:458 upgrade.php:581
-#: upgrade.php:597
+#: upgrade.php:422 upgrade.php:442 upgrade.php:458 upgrade.php:585
+#: upgrade.php:601
 msgid "Error"
 msgstr "Errore"
 
@@ -1432,8 +1432,8 @@ msgstr "Inserisci un nome utente e una password per il database."
 #: install.php:1004 upgrade.php:211 upgrade.php:227 upgrade.php:243
 #: upgrade.php:259 upgrade.php:275 upgrade.php:295 upgrade.php:339
 #: upgrade.php:355 upgrade.php:375 upgrade.php:391 upgrade.php:407
-#: upgrade.php:423 upgrade.php:443 upgrade.php:459 upgrade.php:582
-#: upgrade.php:598
+#: upgrade.php:423 upgrade.php:443 upgrade.php:459 upgrade.php:586
+#: upgrade.php:602
 msgid "Could not write the configuration file."
 msgstr "Impossibile scrivere il file di configurazione."
 
@@ -1546,7 +1546,7 @@ msgstr "Installami!"
 msgid "Installation Complete"
 msgstr "Installazione completata"
 
-#: install.php:1128 upgrade.php:938
+#: install.php:1128 upgrade.php:942
 msgid "What now?"
 msgstr "E adesso?"
 
@@ -1558,46 +1558,46 @@ msgstr "Elimina <em>install.php</em>, non ne avrai più bisogno."
 msgid "Log in to your site and configure things to your liking."
 msgstr "Accedi al tuo sito e configura a tuo piacimento."
 
-#: install.php:1134 upgrade.php:945
+#: install.php:1134 upgrade.php:949
 msgid "Take me to my site!"
 msgstr "Guidami al mio sito!"
 
-#: upgrade.php:611
+#: upgrade.php:615
 msgid "Chyrp Lite Upgrader"
 msgstr "Chyrp Lite Upgrader"
 
-#: upgrade.php:926
+#: upgrade.php:930
 msgid "Halt!"
 msgstr "Stop!"
 
-#: upgrade.php:927
+#: upgrade.php:931
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr "Si prega di seguire queste indicazioni prima di effettuare l'upgrade:"
 
-#: upgrade.php:929
+#: upgrade.php:933
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr "<strong>Fare un backup del database prima di procedere!</strong>"
 
-#: upgrade.php:930
+#: upgrade.php:934
 msgid "Tell your users that your site is offline for maintenance."
 msgstr "Informa gli utenti che il sito è offline per la manutenzione."
 
-#: upgrade.php:934
+#: upgrade.php:938
 msgid "Upgrade me!"
 msgstr "Aggiornami!"
 
-#: upgrade.php:937
+#: upgrade.php:941
 msgid "Upgrade Complete"
 msgstr "Aggiornamento completato"
 
-#: upgrade.php:940
+#: upgrade.php:944
 msgid "Take action to resolve any errors reported on this page."
 msgstr "Risolvere eventuali errori segnalati in questa pagina."
 
-#: upgrade.php:941
+#: upgrade.php:945
 msgid "Run this upgrader again if you need to."
 msgstr "Eseguire nuovamente questo Upgrader se necessario."
 
-#: upgrade.php:942
+#: upgrade.php:946
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr "Eliminare <em>upgrade.php</em> una volta terminato l'aggiornamento."

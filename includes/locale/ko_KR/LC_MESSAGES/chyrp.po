@@ -100,8 +100,8 @@ msgstr "경로가 잘못된 컨트롤러로 시작되었습니다."
 #: install.php:1003 upgrade.php:210 upgrade.php:226 upgrade.php:242
 #: upgrade.php:258 upgrade.php:274 upgrade.php:294 upgrade.php:338
 #: upgrade.php:354 upgrade.php:374 upgrade.php:390 upgrade.php:406
-#: upgrade.php:422 upgrade.php:442 upgrade.php:458 upgrade.php:581
-#: upgrade.php:597
+#: upgrade.php:422 upgrade.php:442 upgrade.php:458 upgrade.php:585
+#: upgrade.php:601
 msgid "Error"
 msgstr "오류"
 
@@ -1410,8 +1410,8 @@ msgstr "데이터베이스의 사용자명과 암호를 입력하십시오."
 #: install.php:1004 upgrade.php:211 upgrade.php:227 upgrade.php:243
 #: upgrade.php:259 upgrade.php:275 upgrade.php:295 upgrade.php:339
 #: upgrade.php:355 upgrade.php:375 upgrade.php:391 upgrade.php:407
-#: upgrade.php:423 upgrade.php:443 upgrade.php:459 upgrade.php:582
-#: upgrade.php:598
+#: upgrade.php:423 upgrade.php:443 upgrade.php:459 upgrade.php:586
+#: upgrade.php:602
 msgid "Could not write the configuration file."
 msgstr "구성 파일을 쓸 수 없습니다."
 
@@ -1519,7 +1519,7 @@ msgstr "설치가 필요합니다."
 msgid "Installation Complete"
 msgstr "설치가 완료되었습니다"
 
-#: install.php:1128 upgrade.php:938
+#: install.php:1128 upgrade.php:942
 msgid "What now?"
 msgstr ""
 
@@ -1531,46 +1531,46 @@ msgstr "더 이상 필요하지 않은 경우 <em>install.php</em>를 삭제하�
 msgid "Log in to your site and configure things to your liking."
 msgstr "사이트에 로그인하고 원하는 대로 구성하세요."
 
-#: install.php:1134 upgrade.php:945
+#: install.php:1134 upgrade.php:949
 msgid "Take me to my site!"
 msgstr "사이트로 이동합니다."
 
-#: upgrade.php:611
+#: upgrade.php:615
 msgid "Chyrp Lite Upgrader"
 msgstr "Chyrp Lite 업그레이드"
 
-#: upgrade.php:926
+#: upgrade.php:930
 msgid "Halt!"
 msgstr "정지!"
 
-#: upgrade.php:927
+#: upgrade.php:931
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr "업그레이드하기 전에 다음 예방 조치를 취하십시오:"
 
-#: upgrade.php:929
+#: upgrade.php:933
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr "<strong>진행하기 전에 데이터베이스를 백업하세요.</strong>"
 
-#: upgrade.php:930
+#: upgrade.php:934
 msgid "Tell your users that your site is offline for maintenance."
 msgstr "유지 관리를 위해 사이트가 오프라인 상태임을 사용자에게 알립니다."
 
-#: upgrade.php:934
+#: upgrade.php:938
 msgid "Upgrade me!"
 msgstr "새로운 버전이 있습니다."
 
-#: upgrade.php:937
+#: upgrade.php:941
 msgid "Upgrade Complete"
 msgstr "업그레이드가 완료되었습니다"
 
-#: upgrade.php:940
+#: upgrade.php:944
 msgid "Take action to resolve any errors reported on this page."
 msgstr "이 페이지에 보고된 오류를 해결하기 위한 조치를 취하십시오."
 
-#: upgrade.php:941
+#: upgrade.php:945
 msgid "Run this upgrader again if you need to."
 msgstr "필요한 경우 업그레이드를 다시 실행하십시오."
 
-#: upgrade.php:942
+#: upgrade.php:946
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr "업그레이드가 완료되면 <em>upgrade.php</em>를 삭제해야 합니다."

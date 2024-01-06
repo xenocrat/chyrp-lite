@@ -100,8 +100,8 @@ msgstr "路由启动了一个无效的控制器。"
 #: install.php:1003 upgrade.php:210 upgrade.php:226 upgrade.php:242
 #: upgrade.php:258 upgrade.php:274 upgrade.php:294 upgrade.php:338
 #: upgrade.php:354 upgrade.php:374 upgrade.php:390 upgrade.php:406
-#: upgrade.php:422 upgrade.php:442 upgrade.php:458 upgrade.php:581
-#: upgrade.php:597
+#: upgrade.php:422 upgrade.php:442 upgrade.php:458 upgrade.php:585
+#: upgrade.php:601
 msgid "Error"
 msgstr "错误"
 
@@ -1403,8 +1403,8 @@ msgstr "请输入数据库的用户名和密码。"
 #: install.php:1004 upgrade.php:211 upgrade.php:227 upgrade.php:243
 #: upgrade.php:259 upgrade.php:275 upgrade.php:295 upgrade.php:339
 #: upgrade.php:355 upgrade.php:375 upgrade.php:391 upgrade.php:407
-#: upgrade.php:423 upgrade.php:443 upgrade.php:459 upgrade.php:582
-#: upgrade.php:598
+#: upgrade.php:423 upgrade.php:443 upgrade.php:459 upgrade.php:586
+#: upgrade.php:602
 msgid "Could not write the configuration file."
 msgstr "不能写入配置文件。"
 
@@ -1512,7 +1512,7 @@ msgstr "安装！"
 msgid "Installation Complete"
 msgstr "安装完成"
 
-#: install.php:1128 upgrade.php:938
+#: install.php:1128 upgrade.php:942
 msgid "What now?"
 msgstr "现在做什么？"
 
@@ -1524,46 +1524,46 @@ msgstr "删除 <em>install.php</em>，您不再需要它。"
 msgid "Log in to your site and configure things to your liking."
 msgstr "登陆您的站点并且配置您喜欢的东西。"
 
-#: install.php:1134 upgrade.php:945
+#: install.php:1134 upgrade.php:949
 msgid "Take me to my site!"
 msgstr "前往我的站点！"
 
-#: upgrade.php:611
+#: upgrade.php:615
 msgid "Chyrp Lite Upgrader"
 msgstr "Chyrp Lite升级程序"
 
-#: upgrade.php:926
+#: upgrade.php:930
 msgid "Halt!"
 msgstr "等一下！"
 
-#: upgrade.php:927
+#: upgrade.php:931
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr "升级前请采取以下预防措施："
 
-#: upgrade.php:929
+#: upgrade.php:933
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr "<strong>开始前备份您的数据库！</strong>"
 
-#: upgrade.php:930
+#: upgrade.php:934
 msgid "Tell your users that your site is offline for maintenance."
 msgstr "告知您的用户站点处于离线状态以进行维护。"
 
-#: upgrade.php:934
+#: upgrade.php:938
 msgid "Upgrade me!"
 msgstr "升级！"
 
-#: upgrade.php:937
+#: upgrade.php:941
 msgid "Upgrade Complete"
 msgstr "升级完成"
 
-#: upgrade.php:940
+#: upgrade.php:944
 msgid "Take action to resolve any errors reported on this page."
 msgstr "采取措施解决此页面上报告的任何错误。"
 
-#: upgrade.php:941
+#: upgrade.php:945
 msgid "Run this upgrader again if you need to."
 msgstr "如果需要，再次运行此升级程序。"
 
-#: upgrade.php:942
+#: upgrade.php:946
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr "删除 <em>upgrade.php</em> 一旦您升级完成后。"
