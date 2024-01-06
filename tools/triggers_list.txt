@@ -6,12 +6,11 @@
 end
 ---
 Called from:
-	admin/index.php on line 17
-	ajax/index.php on line 17
+	admin/index.php on line 19
+	ajax/index.php on line 19
+	includes/download.php on line 48
+	includes/thumbnail.php on line 84
 	index.php on line 15
-
-Arguments:
-	$route
 
 
 admin_javascript
@@ -203,7 +202,8 @@ Called from:
 	includes/class/Config.php on line 104
 
 Arguments:
-	$setting, $value
+	$setting
+	$value
 
 
 parse_route
@@ -275,7 +275,8 @@ Called from:
 	includes/controller/Admin.php on line 2461
 
 Arguments:
-	$entry, $post
+	$entry
+	$post
 
 
 import_chyrp_page
@@ -284,7 +285,8 @@ Called from:
 	includes/controller/Admin.php on line 2497
 
 Arguments:
-	$entry, $page
+	$entry
+	$page
 
 
 import
@@ -326,7 +328,8 @@ Called from:
 	includes/controller/Main.php on line 1259
 
 Arguments:
-	$post, $feed
+	$post
+	$feed
 
 
 webmention
@@ -335,7 +338,9 @@ Called from:
 	includes/helpers.php on line 1943
 
 Arguments:
-	$post, $source, $target
+	$post
+	$source
+	$target
 
 
 delete_upload
@@ -365,7 +370,8 @@ Called from:
 	includes/helpers.php on line 3147
 
 Arguments:
-	$user, $url
+	$user
+	$url
 
 
 correspond_reset_password
@@ -374,7 +380,8 @@ Called from:
 	includes/helpers.php on line 3182
 
 Arguments:
-	$user, $url
+	$user
+	$url
 
 
 javascripts_hash
@@ -407,7 +414,8 @@ Called from:
 	includes/model/Group.php on line 236
 
 Arguments:
-	$group, $this
+	$group
+	$this
 
 
 add_page
@@ -425,7 +433,8 @@ Called from:
 	includes/model/Page.php on line 252
 
 Arguments:
-	$page, $this
+	$page
+	$this
 
 
 add_post
@@ -434,7 +443,8 @@ Called from:
 	includes/model/Post.php on line 317
 
 Arguments:
-	$post, $options
+	$post
+	$options
 
 
 publish_post
@@ -443,7 +453,9 @@ Called from:
 	includes/model/Post.php on line 445
 
 Arguments:
-	$post, $this, $options
+	$post
+	$this
+	$options
 
 
 update_post
@@ -452,7 +464,9 @@ Called from:
 	includes/model/Post.php on line 447
 
 Arguments:
-	$post, $this, $options
+	$post
+	$this
+	$options
 
 
 add_user
@@ -470,7 +484,8 @@ Called from:
 	includes/model/User.php on line 212
 
 Arguments:
-	$user, $this
+	$user
+	$this
 
 
 user_logged_in
@@ -514,7 +529,8 @@ Called from:
 	modules/categorize/model/Category.php on line 116
 
 Arguments:
-	$category, $this
+	$category
+	$this
 
 
 delete_category
@@ -569,7 +585,8 @@ Called from:
 	modules/comments/comments.php on line 1115
 
 Arguments:
-	$comment, $feed
+	$comment
+	$feed
 
 
 correspond_site_new_comment
@@ -587,7 +604,8 @@ Called from:
 	modules/comments/comments.php on line 1427
 
 Arguments:
-	$comment, $user
+	$comment
+	$user
 
 
 correspond_peer_new_comment
@@ -596,7 +614,9 @@ Called from:
 	modules/comments/comments.php on line 1452
 
 Arguments:
-	$comment, $peer, $url
+	$comment
+	$peer
+	$url
 
 
 add_comment
@@ -614,7 +634,8 @@ Called from:
 	modules/comments/model/Comment.php on line 383
 
 Arguments:
-	$comment, $this
+	$comment
+	$this
 
 
 add_like
@@ -650,7 +671,8 @@ Called from:
 	modules/migrator/migrator.php on line 210
 
 Arguments:
-	$post, $new_post
+	$post
+	$new_post
 
 
 import_wordpress_page
@@ -659,7 +681,8 @@ Called from:
 	modules/migrator/migrator.php on line 229
 
 Arguments:
-	$post, $new_page
+	$post
+	$new_page
 
 
 import_tumble
@@ -668,7 +691,8 @@ Called from:
 	modules/migrator/migrator.php on line 410
 
 Arguments:
-	$post, $new_post
+	$post
+	$new_post
 
 
 import_textpattern_post
@@ -677,7 +701,8 @@ Called from:
 	modules/migrator/migrator.php on line 573
 
 Arguments:
-	$post, $new_post
+	$post
+	$new_post
 
 
 import_movabletype_post
@@ -686,7 +711,8 @@ Called from:
 	modules/migrator/migrator.php on line 748
 
 Arguments:
-	$post, $new_post
+	$post
+	$new_post
 
 
 import_movabletype_page
@@ -695,7 +721,8 @@ Called from:
 	modules/migrator/migrator.php on line 768
 
 Arguments:
-	$post, $new_page
+	$post
+	$new_page
 
 
 manage_pingbacks_column_header
@@ -728,7 +755,8 @@ Called from:
 	modules/pingable/model/Pingback.php on line 108
 
 Arguments:
-	$pingback, $this
+	$pingback
+	$this
 
 
 user_controls
@@ -842,7 +870,8 @@ Target:
 	$ids
 
 Arguments:
-	$post, $limit
+	$post
+	$limit
 
 
 stylesheets
@@ -890,7 +919,8 @@ Target:
 	$options
 
 Arguments:
-	null, $_GET['feather']
+	null
+	$_GET['feather']
 
 
 post_options
@@ -903,7 +933,8 @@ Target:
 	$options
 
 Arguments:
-	null, $_GET['feather']
+	null
+	$_GET['feather']
 
 
 edit_post_options
@@ -915,7 +946,8 @@ Target:
 	$options
 
 Arguments:
-	$post, $post->feather
+	$post
+	$post->feather
 
 
 posts_export
@@ -1064,7 +1096,8 @@ Target:
 	$search
 
 Arguments:
-	$query, $plain
+	$query
+	$plain
 
 
 send_mail
