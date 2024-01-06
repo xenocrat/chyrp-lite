@@ -80,4 +80,6 @@
     header("Content-Disposition: inline; filename=\"".$safename."\"");
     $thumb->create();
     $thumb->serve();
+
+    $trigger->call("end");
     ob_end_flush();
