@@ -495,15 +495,19 @@
     function fix_post_updated(): void {
         $sql = SQL::current();
 
+        $values = ($sql->adapter == "pgsql") ?
+            array(
+                "0001-01-01 00:00:00"
+            ) :
+            array(
+                "0000-00-00 00:00:00",
+                "0001-01-01 00:00:00"
+            ) ;
+
         $results = $sql->select(
             tables:"posts",
             fields:"id",
-            conds:array(
-                "updated_at" => array(
-                    "0000-00-00 00:00:00",
-                    "0001-01-01 00:00:00"
-                )
-            )
+            conds:array("updated_at" => $values)
         )->fetchAll();
 
         foreach ($results as $result)
