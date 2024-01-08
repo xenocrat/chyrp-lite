@@ -130,7 +130,11 @@
      *     $per_page - The number of items per page.
      *     $name - The $_GET value for the current page.
      */
-    function twig_function_paginate($array, $per_page = 10, $name = "twig"): Paginator {
+    function twig_function_paginate(
+        $array,
+        $per_page = 10,
+        $name = "twig"
+    ): Paginator {
         # This is important for clean URL parsing in MainController.
         $name = str_replace("_", "-", $name)."_page";
 
@@ -153,7 +157,10 @@
      *     $key - The key to test in the $_POST array.
      *     $fallback - The value to return if the $_POST value is not set.
      */
-    function twig_function_posted($index, $fallback = ""): string {
+    function twig_function_posted(
+        $index,
+        $fallback = ""
+    ): string {
         return isset($_POST[$index]) ? $_POST[$index] : $fallback ;
     }
 
@@ -262,7 +269,11 @@
      *     $alt_text - The alternative text for the image.
      *     $class - The CSS class for the link.
      */
-    function twig_function_icon_img($filename, $alt_text = "", $class = null): string {
+    function twig_function_icon_img(
+        $filename,
+        $alt_text = "",
+        $class = null
+    ): string {
         $url = Config::current()->chyrp_url.
                "/admin/images/icons/".$filename;
 
@@ -285,7 +296,10 @@
      *     $search - A search term.
      *     $filter - An array of valid extensions (case insensitive).
      */
-    function twig_function_uploaded_search($search = "", $filter = array()): array {
+    function twig_function_uploaded_search(
+        $search = "",
+        $filter = array()
+    ): array {
         if (!Visitor::current()->group->can("edit_post", "edit_page", true))
             return array();
 
@@ -318,7 +332,10 @@
      *     $text - The string to translate.
      *     $domain - The translation domain to read from.
      */
-    function twig_filter_translate($string, $domain = null): string {
+    function twig_filter_translate(
+        $string,
+        $domain = null
+    ): string {
         if (!isset($domain))
             $domain = (ADMIN) ? "admin" : Theme::current()->safename ;
 
@@ -335,7 +352,12 @@
      *     $number - The number to judge by.
      *     $domain - The translation domain to read from.
      */
-    function twig_filter_translate_plural($single, $plural, $number, $domain = null): string {
+    function twig_filter_translate_plural(
+        $single,
+        $plural,
+        $number,
+        $domain = null
+    ): string {
         if (!isset($domain))
             $domain = (ADMIN) ? "admin" : Theme::current()->safename ;
 
@@ -350,7 +372,10 @@
      *     $timestamp - A time value to be strtotime() converted.
      *     $format - The formatting for the <time> representation.
      */
-    function twig_filter_time($timestamp, $format = null): string {
+    function twig_filter_time(
+        $timestamp,
+        $format = null
+    ): string {
         if (!isset($format))
             $format = (ADMIN) ? "Y-m-d" : "d F Y" ;
 
@@ -367,7 +392,10 @@
      *     $timestamp - A time value to be strtotime() converted.
      *     $formatting - The formatting for date().
      */
-    function twig_filter_date_format($timestamp, $format = null): string {
+    function twig_filter_date_format(
+        $timestamp,
+        $format = null
+    ): string {
         if (!isset($format))
             $format = (ADMIN) ? "Y-m-d" : "d F Y" ;
 
@@ -384,7 +412,10 @@
      * Notes:
      *     Uses date() instead of strftime(). Retained for backwards compatibility.
      */
-    function twig_filter_strftime_format($timestamp, $format = null): string {
+    function twig_filter_strftime_format(
+        $timestamp,
+        $format = null
+    ): string {
         return when("Y-m-d H:i:s", $timestamp);
     }
 
@@ -424,7 +455,10 @@
      *     $try - An array of regular expressions, or a single regular expression.
      *     $haystack - The string to test.
      */
-    function twig_filter_preg_match($haystack, $try): bool {
+    function twig_filter_preg_match(
+        $haystack,
+        $try
+    ): bool {
         return match_any($try, $haystack);
     }
 
@@ -438,7 +472,12 @@
      *     $replacement - The replacement string.
      *     $limit - The maximum number of replacements.
      */
-    function twig_filter_preg_replace($subject, $pattern, $replacement, $limit = -1): ?string {
+    function twig_filter_preg_replace(
+        $subject,
+        $pattern,
+        $replacement,
+        $limit = -1
+    ): ?string {
         return preg_replace($pattern, $replacement, $subject, $limit);
     }
 
@@ -450,7 +489,10 @@
      *     $haystack - The variable to search within.
      *     $needle - The variable to search for.
      */
-    function twig_filter_contains($haystack, $needle): int|bool {
+    function twig_filter_contains(
+        $haystack,
+        $needle
+    ): int|bool {
         if (is_array($haystack))
             return in_array($needle, $haystack);
 
