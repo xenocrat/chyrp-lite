@@ -26,6 +26,7 @@
                 new \Twig\TwigFunction("paginate",          "twig_function_paginate"),
                 new \Twig\TwigFunction("posted",            "twig_function_posted"),
                 new \Twig\TwigFunction("mailto",            "twig_function_mailto"),
+                new \Twig\TwigFunction("icon_img",          "twig_function_icon_img"),
                 new \Twig\TwigFunction("uploaded_search",   "twig_function_uploaded_search"),
                 new \Twig\TwigFunction("javascripts_nonce", "twig_function_javascripts_nonce"),
                 new \Twig\TwigFunction("stylesheets_nonce", "twig_function_stylesheets_nonce")
@@ -250,6 +251,30 @@
             );
 
         return $mailto.implode("", $chars);
+    }
+
+    /**
+     * Function: twig_function_icon_img
+     * Returns a URL to the requested icon resource.
+     *
+     * Parameters:
+     *     $filename - The icon filename.
+     *     $alt_text - The alternative text for the image.
+     *     $class - The CSS class for the link.
+     */
+    function twig_function_icon_img($filename, $alt_text = "", $class = null): string {
+        $url = Config::current()->chyrp_url.
+               "/admin/images/icons/".$filename;
+
+        $img = '<img src="'.fix($url, true).
+               '" alt="'.fix($alt_text, true);
+
+        if (isset($class) and $class !== false)
+            $img.= '" class="'.fix($class, true);
+
+        $img.= '">';
+
+        return $img;
     }
 
     /**
