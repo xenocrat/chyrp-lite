@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/lightbox/admin/pages/lightbox_settings.twig:3
@@ -22,19 +22,19 @@ msgstr "Impostazioni del tavolo luminoso"
 msgid "Background"
 msgstr "Sfondo"
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:18
+#: modules/lightbox/admin/pages/lightbox_settings.twig:21
 msgid "Edge Spacing"
 msgstr "Spaziatura del bordo"
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:20
+#: modules/lightbox/admin/pages/lightbox_settings.twig:24
 msgid "(pixels)"
 msgstr "(pixel)"
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:23
+#: modules/lightbox/admin/pages/lightbox_settings.twig:27
 msgid "Protect Images"
 msgstr "Proteggi immagini"
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:25
+#: modules/lightbox/admin/pages/lightbox_settings.twig:31
 msgid "Prevent visitors from saving images?"
 msgstr "Impedire ai visitatori di salvare le immagini?"
 

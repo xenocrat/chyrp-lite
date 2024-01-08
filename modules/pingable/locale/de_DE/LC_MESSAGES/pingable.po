@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/pingable/admin/pages/delete_pingback.twig:3
@@ -32,11 +32,11 @@ msgid "Editing Webmention to &#8220;%s&#8221;"
 msgstr "Bearbeiten von Webmention zu &#8220;%s&#8221;"
 
 #: modules/pingable/admin/pages/edit_pingback.twig:10
-#: modules/pingable/admin/pages/manage_pingbacks.twig:20
+#: modules/pingable/admin/pages/manage_pingbacks.twig:22
 msgid "Title"
 msgstr "Titel"
 
-#: modules/pingable/admin/pages/edit_pingback.twig:14
+#: modules/pingable/admin/pages/edit_pingback.twig:16
 msgid "Update"
 msgstr "Aktualisieren"
 
@@ -44,16 +44,16 @@ msgstr "Aktualisieren"
 msgid "Manage Webmentions"
 msgstr "Webmentions bearbeiten"
 
-#: modules/pingable/admin/pages/manage_pingbacks.twig:16
+#: modules/pingable/admin/pages/manage_pingbacks.twig:18
 #: modules/pingable/pingable.php:240 modules/pingable/pingable.php:264
 msgid "Webmentions"
 msgstr "Webmentions"
 
-#: modules/pingable/admin/pages/manage_pingbacks.twig:21
+#: modules/pingable/admin/pages/manage_pingbacks.twig:23
 msgid "Post"
 msgstr "Blogpost"
 
-#: modules/pingable/admin/pages/manage_pingbacks.twig:22
+#: modules/pingable/admin/pages/manage_pingbacks.twig:24
 msgid "Added"
 msgstr "Hinzugefügt"
 
@@ -63,11 +63,14 @@ msgstr "Mentionable"
 
 #: modules/pingable/info.php:6
 msgid "Register webmentions from blogs that link to yours."
-msgstr "Registrieren Sie Web-Erwähnungen von Blogs, die auf Ihr Blog verlinken."
+msgstr ""
+"Registrieren Sie Web-Erwähnungen von Blogs, die auf Ihr Blog verlinken."
 
 #: modules/pingable/info.php:12
 msgid "Please remember to update the permission settings for each group."
-msgstr "Bitte denken Sie daran, die Berechtigungseinstellungen für jede Gruppe zu aktualisieren."
+msgstr ""
+"Bitte denken Sie daran, die Berechtigungseinstellungen für jede Gruppe zu "
+"aktualisieren."
 
 #: modules/pingable/info.php:14
 msgid "Do you want to remove webmentions from the database?"
@@ -100,7 +103,9 @@ msgstr "Webmention nicht gefunden."
 
 #: modules/pingable/pingable.php:79 modules/pingable/pingable.php:120
 msgid "You do not have sufficient privileges to edit this webmention."
-msgstr "Sie verfügen nicht über ausreichende Berechtigungen zum Verwalten von Webmentions."
+msgstr ""
+"Sie verfügen nicht über ausreichende Berechtigungen zum Verwalten von "
+"Webmentions."
 
 #: modules/pingable/pingable.php:98
 msgid "An ID is required to update a webmention."
@@ -124,7 +129,9 @@ msgstr "Zum Löschen einer Webmention ist eine ID erforderlich."
 
 #: modules/pingable/pingable.php:150 modules/pingable/pingable.php:187
 msgid "You do not have sufficient privileges to delete this webmention."
-msgstr "Sie verfügen nicht über ausreichende Berechtigungen zum Löschen von Webmentions."
+msgstr ""
+"Sie verfügen nicht über ausreichende Berechtigungen zum Löschen von "
+"Webmentions."
 
 #: modules/pingable/pingable.php:193
 msgid "Webmention deleted."
@@ -132,4 +139,6 @@ msgstr "Webmention gelöscht."
 
 #: modules/pingable/pingable.php:202
 msgid "You do not have sufficient privileges to manage webmentions."
-msgstr "Sie verfügen nicht über ausreichende Berechtigungen zum Bearbeiten von Webmentions."
+msgstr ""
+"Sie verfügen nicht über ausreichende Berechtigungen zum Bearbeiten von "
+"Webmentions."

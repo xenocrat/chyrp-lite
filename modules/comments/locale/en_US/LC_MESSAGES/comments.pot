@@ -9,51 +9,51 @@ msgstr ""
 msgid "Site Notifications"
 msgstr ""
 
-#: modules/comments/admin/pages/comment_settings.twig:12
+#: modules/comments/admin/pages/comment_settings.twig:14
 msgid "Notify the site contact by email when a comment is added."
 msgstr ""
 
-#: modules/comments/admin/pages/comment_settings.twig:15
+#: modules/comments/admin/pages/comment_settings.twig:18
 msgid "Author Notifications"
 msgstr ""
 
-#: modules/comments/admin/pages/comment_settings.twig:17
+#: modules/comments/admin/pages/comment_settings.twig:21
 msgid "Notify the post author by email when a comment is added."
 msgstr ""
 
-#: modules/comments/admin/pages/comment_settings.twig:20
+#: modules/comments/admin/pages/comment_settings.twig:24
 msgid "Default Comment Status"
 msgstr ""
 
-#: modules/comments/admin/pages/comment_settings.twig:29
+#: modules/comments/admin/pages/comment_settings.twig:36
 msgid "Allowed HTML Tags"
 msgstr ""
 
-#: modules/comments/admin/pages/comment_settings.twig:31
+#: modules/comments/admin/pages/comment_settings.twig:40
 msgid "Format: <code>strong, blockquote, em</code>"
 msgstr ""
 
-#: modules/comments/admin/pages/comment_settings.twig:34
+#: modules/comments/admin/pages/comment_settings.twig:44
 msgid "Comments Per Page"
 msgstr ""
 
-#: modules/comments/admin/pages/comment_settings.twig:36
+#: modules/comments/admin/pages/comment_settings.twig:48
 msgid "Themes decide whether or not to paginate comments."
 msgstr ""
 
-#: modules/comments/admin/pages/comment_settings.twig:39
+#: modules/comments/admin/pages/comment_settings.twig:52
 msgid "Reload Comments"
 msgstr ""
 
-#: modules/comments/admin/pages/comment_settings.twig:41
+#: modules/comments/admin/pages/comment_settings.twig:56
 msgid "Show newly added comments (up to the maximum number per page)."
 msgstr ""
 
-#: modules/comments/admin/pages/comment_settings.twig:44
+#: modules/comments/admin/pages/comment_settings.twig:60
 msgid "Reload Interval"
 msgstr ""
 
-#: modules/comments/admin/pages/comment_settings.twig:46
+#: modules/comments/admin/pages/comment_settings.twig:63
 msgid "(seconds)"
 msgstr ""
 
@@ -97,7 +97,7 @@ msgid "Timestamp"
 msgstr ""
 
 #: modules/comments/admin/pages/edit_comment.twig:43
-#: modules/comments/admin/pages/manage_comments.twig:24
+#: modules/comments/admin/pages/manage_comments.twig:26
 msgid "Status"
 msgstr ""
 
@@ -112,7 +112,7 @@ msgid "Denied"
 msgstr ""
 
 #: modules/comments/admin/pages/edit_comment.twig:50
-#: modules/comments/admin/pages/manage_spam.twig:16
+#: modules/comments/admin/pages/manage_spam.twig:18
 #: modules/comments/comments.php:686
 msgid "Spam"
 msgstr ""
@@ -126,8 +126,8 @@ msgid "Save"
 msgstr ""
 
 #: modules/comments/admin/pages/edit_comment.twig:69
-#: modules/comments/admin/pages/manage_comments.twig:84
-#: modules/comments/admin/pages/manage_spam.twig:70
+#: modules/comments/admin/pages/manage_comments.twig:85
+#: modules/comments/admin/pages/manage_spam.twig:71
 msgid "Delete"
 msgstr ""
 
@@ -135,7 +135,7 @@ msgstr ""
 msgid "Manage Comments"
 msgstr ""
 
-#: modules/comments/admin/pages/manage_comments.twig:16
+#: modules/comments/admin/pages/manage_comments.twig:18
 #: modules/comments/comments.php:757
 #: modules/comments/comments.php:792
 #: modules/comments/comments.php:806
@@ -143,36 +143,36 @@ msgstr ""
 msgid "Comments"
 msgstr ""
 
-#: modules/comments/admin/pages/manage_comments.twig:22
-#: modules/comments/admin/pages/manage_spam.twig:22
+#: modules/comments/admin/pages/manage_comments.twig:24
+#: modules/comments/admin/pages/manage_spam.twig:24
 msgid "Post"
 msgstr ""
 
-#: modules/comments/admin/pages/manage_comments.twig:23
-#: modules/comments/admin/pages/manage_spam.twig:23
+#: modules/comments/admin/pages/manage_comments.twig:25
+#: modules/comments/admin/pages/manage_spam.twig:25
 msgid "Added"
 msgstr ""
 
-#: modules/comments/admin/pages/manage_comments.twig:45
+#: modules/comments/admin/pages/manage_comments.twig:47
 msgid "Webmention"
 msgstr ""
 
-#: modules/comments/admin/pages/manage_comments.twig:73
-#: modules/comments/admin/pages/manage_spam.twig:62
+#: modules/comments/admin/pages/manage_comments.twig:74
+#: modules/comments/admin/pages/manage_spam.twig:63
 msgid "With selected:"
 msgstr ""
 
-#: modules/comments/admin/pages/manage_comments.twig:75
-#: modules/comments/admin/pages/manage_spam.twig:64
+#: modules/comments/admin/pages/manage_comments.twig:76
+#: modules/comments/admin/pages/manage_spam.twig:65
 msgid "Deny"
 msgstr ""
 
-#: modules/comments/admin/pages/manage_comments.twig:78
-#: modules/comments/admin/pages/manage_spam.twig:67
+#: modules/comments/admin/pages/manage_comments.twig:79
+#: modules/comments/admin/pages/manage_spam.twig:68
 msgid "Approve"
 msgstr ""
 
-#: modules/comments/admin/pages/manage_comments.twig:81
+#: modules/comments/admin/pages/manage_comments.twig:82
 msgid "Mark as Spam"
 msgstr ""
 

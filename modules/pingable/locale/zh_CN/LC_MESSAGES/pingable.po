@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/pingable/admin/pages/delete_pingback.twig:3
@@ -33,11 +33,11 @@ msgid "Editing Webmention to &#8220;%s&#8221;"
 msgstr "编辑Webmention为&#8220;%s&#8221;"
 
 #: modules/pingable/admin/pages/edit_pingback.twig:10
-#: modules/pingable/admin/pages/manage_pingbacks.twig:20
+#: modules/pingable/admin/pages/manage_pingbacks.twig:22
 msgid "Title"
 msgstr "标题"
 
-#: modules/pingable/admin/pages/edit_pingback.twig:14
+#: modules/pingable/admin/pages/edit_pingback.twig:16
 msgid "Update"
 msgstr "更新"
 
@@ -45,16 +45,16 @@ msgstr "更新"
 msgid "Manage Webmentions"
 msgstr "管理Webmention"
 
-#: modules/pingable/admin/pages/manage_pingbacks.twig:16
+#: modules/pingable/admin/pages/manage_pingbacks.twig:18
 #: modules/pingable/pingable.php:240 modules/pingable/pingable.php:264
 msgid "Webmentions"
 msgstr "引用"
 
-#: modules/pingable/admin/pages/manage_pingbacks.twig:21
+#: modules/pingable/admin/pages/manage_pingbacks.twig:23
 msgid "Post"
 msgstr "帖子"
 
-#: modules/pingable/admin/pages/manage_pingbacks.twig:22
+#: modules/pingable/admin/pages/manage_pingbacks.twig:24
 msgid "Added"
 msgstr "增加"
 

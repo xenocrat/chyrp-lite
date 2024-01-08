@@ -9,7 +9,7 @@ msgstr ""
 msgid "Apply to Feeds"
 msgstr ""
 
-#: modules/read_more/admin/pages/read_more_settings.twig:15
+#: modules/read_more/admin/pages/read_more_settings.twig:16
 msgid "Default Text"
 msgstr ""
 

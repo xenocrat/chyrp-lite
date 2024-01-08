@@ -28,13 +28,13 @@ Called from:
 delete_user_form
 ----------------
 Called from:
-	admin/pages/delete_user.twig on line 38
+	admin/pages/delete_user.twig on line 44
 
 
 edit_user_fields
 ----------------
 Called from:
-	admin/pages/edit_user.twig on line 53
+	admin/pages/edit_user.twig on line 63
 
 Arguments:
 	user
@@ -43,13 +43,13 @@ Arguments:
 export_choose
 -------------
 Called from:
-	admin/pages/export.twig on line 42
+	admin/pages/export.twig on line 57
 
 
 import_choose
 -------------
 Called from:
-	admin/pages/import.twig on line 37
+	admin/pages/import.twig on line 45
 
 
 manage_groups_column_header
@@ -70,13 +70,13 @@ Arguments:
 manage_pages_column_header
 --------------------------
 Called from:
-	admin/pages/manage_pages.twig on line 26
+	admin/pages/manage_pages.twig on line 28
 
 
 manage_pages_column
 -------------------
 Called from:
-	admin/pages/manage_pages.twig on line 55
+	admin/pages/manage_pages.twig on line 61
 
 Arguments:
 	page
@@ -85,13 +85,13 @@ Arguments:
 manage_posts_column_header
 --------------------------
 Called from:
-	admin/pages/manage_posts.twig on line 24
+	admin/pages/manage_posts.twig on line 26
 
 
 manage_posts_column
 -------------------
 Called from:
-	admin/pages/manage_posts.twig on line 43
+	admin/pages/manage_posts.twig on line 45
 
 Arguments:
 	post
@@ -115,13 +115,13 @@ Arguments:
 manage_users_column_header
 --------------------------
 Called from:
-	admin/pages/manage_users.twig on line 32
+	admin/pages/manage_users.twig on line 34
 
 
 manage_users_column
 -------------------
 Called from:
-	admin/pages/manage_users.twig on line 59
+	admin/pages/manage_users.twig on line 61
 
 Arguments:
 	user
@@ -130,7 +130,7 @@ Arguments:
 new_user_fields
 ---------------
 Called from:
-	admin/pages/new_user.twig on line 54
+	admin/pages/new_user.twig on line 66
 
 
 before_page_fields
@@ -142,19 +142,19 @@ Called from:
 after_page_fields
 -----------------
 Called from:
-	admin/partials/page_fields.twig on line 17
+	admin/partials/page_fields.twig on line 19
 
 
 new_page_options
 ----------------
 Called from:
-	admin/partials/page_fields.twig on line 62
+	admin/partials/page_fields.twig on line 66
 
 
 edit_page_options
 -----------------
 Called from:
-	admin/partials/page_fields.twig on line 64
+	admin/partials/page_fields.twig on line 68
 
 Arguments:
 	page
@@ -172,7 +172,7 @@ Arguments:
 after_post_fields
 -----------------
 Called from:
-	admin/partials/post_fields.twig on line 68
+	admin/partials/post_fields.twig on line 74
 
 Arguments:
 	feather
@@ -335,7 +335,7 @@ Arguments:
 webmention
 ----------
 Called from:
-	includes/helpers.php on line 1943
+	includes/helpers.php on line 1946
 
 Arguments:
 	$post
@@ -346,7 +346,7 @@ Arguments:
 delete_upload
 -------------
 Called from:
-	includes/helpers.php on line 2674
+	includes/helpers.php on line 2677
 
 Arguments:
 	$filename
@@ -355,19 +355,19 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 2856
+	includes/helpers.php on line 2859
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 2874
+	includes/helpers.php on line 2877
 
 
 correspond_activate_account
 ---------------------------
 Called from:
-	includes/helpers.php on line 3147
+	includes/helpers.php on line 3150
 
 Arguments:
 	$user
@@ -377,7 +377,7 @@ Arguments:
 correspond_reset_password
 -------------------------
 Called from:
-	includes/helpers.php on line 3182
+	includes/helpers.php on line 3185
 
 Arguments:
 	$user
@@ -387,7 +387,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 3223
+	includes/helpers.php on line 3226
 
 Arguments:
 	$ob
@@ -509,9 +509,9 @@ Arguments:
 manage_comments_column_header
 -----------------------------
 Called from:
-	modules/categorize/admin/pages/manage_category.twig on line 26
-	modules/comments/admin/pages/manage_comments.twig on line 25
-	modules/comments/admin/pages/manage_spam.twig on line 24
+	modules/categorize/admin/pages/manage_category.twig on line 28
+	modules/comments/admin/pages/manage_comments.twig on line 27
+	modules/comments/admin/pages/manage_spam.twig on line 26
 
 
 add_category
@@ -554,8 +554,8 @@ Arguments:
 manage_comments_column
 ----------------------
 Called from:
-	modules/comments/admin/pages/manage_comments.twig on line 50
-	modules/comments/admin/pages/manage_spam.twig on line 40
+	modules/comments/admin/pages/manage_comments.twig on line 52
+	modules/comments/admin/pages/manage_spam.twig on line 42
 
 Arguments:
 	comment
@@ -728,13 +728,13 @@ Arguments:
 manage_pingbacks_column_header
 ------------------------------
 Called from:
-	modules/pingable/admin/pages/manage_pingbacks.twig on line 23
+	modules/pingable/admin/pages/manage_pingbacks.twig on line 25
 
 
 manage_pingbacks_column
 -----------------------
 Called from:
-	modules/pingable/admin/pages/manage_pingbacks.twig on line 43
+	modules/pingable/admin/pages/manage_pingbacks.twig on line 45
 
 Arguments:
 	pingback
@@ -1103,7 +1103,7 @@ Arguments:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 3127
+	includes/helpers.php on line 3130
 
 Target:
 	$function
@@ -1112,8 +1112,8 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 3224
-	includes/lib/Leaf.php on line 276
+	includes/helpers.php on line 3227
+	includes/lib/Leaf.php on line 315
 
 Target:
 	$nonce
@@ -1122,7 +1122,7 @@ Target:
 stylesheets_nonce
 -----------------
 Called from:
-	includes/lib/Leaf.php on line 285
+	includes/lib/Leaf.php on line 324
 
 Target:
 	$nonce

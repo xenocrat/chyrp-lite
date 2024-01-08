@@ -9,7 +9,7 @@ msgstr ""
 msgid "Automatic"
 msgstr ""
 
-#: modules/cascade/admin/pages/cascade_settings.twig:12
+#: modules/cascade/admin/pages/cascade_settings.twig:14
 msgid "Load more posts when the visitor scrolls to the bottom of the page?"
 msgstr ""
 

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/categorize/admin/help/categorizing_posts.twig:3
@@ -59,33 +59,33 @@ msgid "Editing Category &#8220;%s&#8221;"
 msgstr "Wijzigen categorie &#8220;%s&#8221;"
 
 #: modules/categorize/admin/pages/edit_category.twig:10
-#: modules/categorize/admin/pages/manage_category.twig:24
+#: modules/categorize/admin/pages/manage_category.twig:26
 #: modules/categorize/admin/pages/new_category.twig:10
 msgid "Name"
 msgstr "Naam"
 
-#: modules/categorize/admin/pages/edit_category.twig:15
-#: modules/categorize/admin/pages/new_category.twig:15
+#: modules/categorize/admin/pages/edit_category.twig:16
+#: modules/categorize/admin/pages/new_category.twig:16
 msgid "Slug"
 msgstr "Slug"
 
-#: modules/categorize/admin/pages/edit_category.twig:20
-#: modules/categorize/admin/pages/new_category.twig:20
+#: modules/categorize/admin/pages/edit_category.twig:22
+#: modules/categorize/admin/pages/new_category.twig:22
 msgid "The slug is the URL-friendly identifying name for this category."
 msgstr "De slug is de URL-vriendelijke naam van deze categorie."
 
-#: modules/categorize/admin/pages/edit_category.twig:24
-#: modules/categorize/admin/pages/manage_category.twig:23
-#: modules/categorize/admin/pages/new_category.twig:24
+#: modules/categorize/admin/pages/edit_category.twig:26
+#: modules/categorize/admin/pages/manage_category.twig:25
+#: modules/categorize/admin/pages/new_category.twig:26
 msgid "Listed?"
 msgstr "In de categorieënlijst?"
 
-#: modules/categorize/admin/pages/edit_category.twig:27
-#: modules/categorize/admin/pages/new_category.twig:27
+#: modules/categorize/admin/pages/edit_category.twig:30
+#: modules/categorize/admin/pages/new_category.twig:30
 msgid "Do you want to include this category in the categories list?"
 msgstr "Wil je deze categorie in de lijst met categorieën tonen?"
 
-#: modules/categorize/admin/pages/edit_category.twig:31
+#: modules/categorize/admin/pages/edit_category.twig:35
 msgid "Update"
 msgstr "Update"
 
@@ -94,16 +94,16 @@ msgstr "Update"
 msgid "Manage Categories"
 msgstr "Beheer categorieën"
 
-#: modules/categorize/admin/pages/manage_category.twig:15
+#: modules/categorize/admin/pages/manage_category.twig:17
 msgid "Add Category"
 msgstr "Voeg categorie toe"
 
-#: modules/categorize/admin/pages/manage_category.twig:19
+#: modules/categorize/admin/pages/manage_category.twig:21
 #: modules/categorize/categorize.php:241
 msgid "Categories"
 msgstr "Categorieën"
 
-#: modules/categorize/admin/pages/manage_category.twig:25
+#: modules/categorize/admin/pages/manage_category.twig:27
 msgid "Posts"
 msgstr "Blogposts"
 
@@ -112,7 +112,7 @@ msgstr "Blogposts"
 msgid "New Category"
 msgstr "Nieuwe categorie"
 
-#: modules/categorize/admin/pages/new_category.twig:31
+#: modules/categorize/admin/pages/new_category.twig:35
 msgid "Add"
 msgstr "Voeg toe"
 

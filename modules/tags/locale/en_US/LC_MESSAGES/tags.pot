@@ -30,7 +30,7 @@ msgstr ""
 
 #: modules/tags/admin/pages/edit_tags.twig:10
 #: modules/tags/admin/pages/manage_tags.twig:18
-#: modules/tags/admin/pages/posts_tagged.twig:29
+#: modules/tags/admin/pages/posts_tagged.twig:31
 #: modules/tags/tags.php:164
 #: modules/tags/tags.php:221
 #: modules/tags/tags.php:235
@@ -43,7 +43,7 @@ msgid "Manage Tags"
 msgstr ""
 
 #: modules/tags/admin/pages/manage_tags.twig:22
-#: modules/tags/admin/pages/posts_tagged.twig:65
+#: modules/tags/admin/pages/posts_tagged.twig:68
 #: modules/tags/admin/pages/rename_tag.twig:10
 msgid "Name"
 msgstr ""
@@ -53,17 +53,17 @@ msgstr ""
 msgid "Posts Tagged"
 msgstr ""
 
-#: modules/tags/admin/pages/posts_tagged.twig:18
+#: modules/tags/admin/pages/posts_tagged.twig:20
 #: modules/tags/tags.php:705
 #, php-format
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr ""
 
-#: modules/tags/admin/pages/posts_tagged.twig:64
+#: modules/tags/admin/pages/posts_tagged.twig:67
 msgid "Tag Selected Post(s) with:"
 msgstr ""
 
-#: modules/tags/admin/pages/posts_tagged.twig:66
+#: modules/tags/admin/pages/posts_tagged.twig:69
 msgid "Tag"
 msgstr ""
 
@@ -76,7 +76,7 @@ msgstr ""
 msgid "Renaming Tag &#8220;%s&#8221;"
 msgstr ""
 
-#: modules/tags/admin/pages/rename_tag.twig:15
+#: modules/tags/admin/pages/rename_tag.twig:16
 msgid "Rename"
 msgstr ""
 

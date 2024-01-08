@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/comments/admin/pages/comment_settings.twig:3
@@ -21,55 +21,55 @@ msgstr "Opmerkingen Instellingen"
 msgid "Site Notifications"
 msgstr "Site notificaties"
 
-#: modules/comments/admin/pages/comment_settings.twig:12
+#: modules/comments/admin/pages/comment_settings.twig:14
 msgid "Notify the site contact by email when a comment is added."
 msgstr ""
 "Breng de contactpersoon van de site per email op de hoogte wanneer een "
 "opmerking wordt toegevoegd."
 
-#: modules/comments/admin/pages/comment_settings.twig:15
+#: modules/comments/admin/pages/comment_settings.twig:18
 msgid "Author Notifications"
 msgstr "Notificaties van auteurs"
 
-#: modules/comments/admin/pages/comment_settings.twig:17
+#: modules/comments/admin/pages/comment_settings.twig:21
 msgid "Notify the post author by email when a comment is added."
 msgstr ""
 "Breng de auteur van het bericht per email op de hoogte wanneer een opmerking "
 "wordt toegevoegd."
 
-#: modules/comments/admin/pages/comment_settings.twig:20
+#: modules/comments/admin/pages/comment_settings.twig:24
 msgid "Default Comment Status"
 msgstr "Standaard opmerkingen status"
 
-#: modules/comments/admin/pages/comment_settings.twig:29
+#: modules/comments/admin/pages/comment_settings.twig:36
 msgid "Allowed HTML Tags"
 msgstr "Toegestane HTML tags"
 
-#: modules/comments/admin/pages/comment_settings.twig:31
+#: modules/comments/admin/pages/comment_settings.twig:40
 msgid "Format: <code>strong, blockquote, em</code>"
 msgstr "Formaat: <code>strong, blockquote, em</code>"
 
-#: modules/comments/admin/pages/comment_settings.twig:34
+#: modules/comments/admin/pages/comment_settings.twig:44
 msgid "Comments Per Page"
 msgstr "Opmerkingen per pagina"
 
-#: modules/comments/admin/pages/comment_settings.twig:36
+#: modules/comments/admin/pages/comment_settings.twig:48
 msgid "Themes decide whether or not to paginate comments."
 msgstr "Thema's bepalen of opmerkingen wel of niet gepagineerd moeten worden."
 
-#: modules/comments/admin/pages/comment_settings.twig:39
+#: modules/comments/admin/pages/comment_settings.twig:52
 msgid "Reload Comments"
 msgstr "Herlaadt Opmerkingen"
 
-#: modules/comments/admin/pages/comment_settings.twig:41
+#: modules/comments/admin/pages/comment_settings.twig:56
 msgid "Show newly added comments (up to the maximum number per page)."
 msgstr "Toon laatste opmerkingen (tot het maximum per pagina)."
 
-#: modules/comments/admin/pages/comment_settings.twig:44
+#: modules/comments/admin/pages/comment_settings.twig:60
 msgid "Reload Interval"
 msgstr "Herlaadt interval"
 
-#: modules/comments/admin/pages/comment_settings.twig:46
+#: modules/comments/admin/pages/comment_settings.twig:63
 msgid "(seconds)"
 msgstr "(secondes)"
 
@@ -113,7 +113,7 @@ msgid "Timestamp"
 msgstr "Tijdstempel"
 
 #: modules/comments/admin/pages/edit_comment.twig:43
-#: modules/comments/admin/pages/manage_comments.twig:24
+#: modules/comments/admin/pages/manage_comments.twig:26
 msgid "Status"
 msgstr "Status"
 
@@ -128,7 +128,7 @@ msgid "Denied"
 msgstr "Verworpen"
 
 #: modules/comments/admin/pages/edit_comment.twig:50
-#: modules/comments/admin/pages/manage_spam.twig:16
+#: modules/comments/admin/pages/manage_spam.twig:18
 #: modules/comments/comments.php:686
 msgid "Spam"
 msgstr "Spam"
@@ -142,8 +142,8 @@ msgid "Save"
 msgstr "Sla op"
 
 #: modules/comments/admin/pages/edit_comment.twig:69
-#: modules/comments/admin/pages/manage_comments.twig:84
-#: modules/comments/admin/pages/manage_spam.twig:70
+#: modules/comments/admin/pages/manage_comments.twig:85
+#: modules/comments/admin/pages/manage_spam.twig:71
 msgid "Delete"
 msgstr "Verwijder"
 
@@ -151,42 +151,42 @@ msgstr "Verwijder"
 msgid "Manage Comments"
 msgstr "Beheer Opmerkingen"
 
-#: modules/comments/admin/pages/manage_comments.twig:16
+#: modules/comments/admin/pages/manage_comments.twig:18
 #: modules/comments/comments.php:757 modules/comments/comments.php:792
 #: modules/comments/comments.php:806 modules/comments/info.php:3
 msgid "Comments"
 msgstr "Opmerkingen"
 
-#: modules/comments/admin/pages/manage_comments.twig:22
-#: modules/comments/admin/pages/manage_spam.twig:22
+#: modules/comments/admin/pages/manage_comments.twig:24
+#: modules/comments/admin/pages/manage_spam.twig:24
 msgid "Post"
 msgstr "Blogpost"
 
-#: modules/comments/admin/pages/manage_comments.twig:23
-#: modules/comments/admin/pages/manage_spam.twig:23
+#: modules/comments/admin/pages/manage_comments.twig:25
+#: modules/comments/admin/pages/manage_spam.twig:25
 msgid "Added"
 msgstr "Toegevoegd"
 
-#: modules/comments/admin/pages/manage_comments.twig:45
+#: modules/comments/admin/pages/manage_comments.twig:47
 msgid "Webmention"
 msgstr "Webmention"
 
-#: modules/comments/admin/pages/manage_comments.twig:73
-#: modules/comments/admin/pages/manage_spam.twig:62
+#: modules/comments/admin/pages/manage_comments.twig:74
+#: modules/comments/admin/pages/manage_spam.twig:63
 msgid "With selected:"
 msgstr "Met geselecteerd:"
 
-#: modules/comments/admin/pages/manage_comments.twig:75
-#: modules/comments/admin/pages/manage_spam.twig:64
+#: modules/comments/admin/pages/manage_comments.twig:76
+#: modules/comments/admin/pages/manage_spam.twig:65
 msgid "Deny"
 msgstr "Verwerp"
 
-#: modules/comments/admin/pages/manage_comments.twig:78
-#: modules/comments/admin/pages/manage_spam.twig:67
+#: modules/comments/admin/pages/manage_comments.twig:79
+#: modules/comments/admin/pages/manage_spam.twig:68
 msgid "Approve"
 msgstr "Keur goed"
 
-#: modules/comments/admin/pages/manage_comments.twig:81
+#: modules/comments/admin/pages/manage_comments.twig:82
 msgid "Mark as Spam"
 msgstr "Markeer als spam"
 

@@ -20,11 +20,11 @@ msgid "Editing Webmention to &#8220;%s&#8221;"
 msgstr ""
 
 #: modules/pingable/admin/pages/edit_pingback.twig:10
-#: modules/pingable/admin/pages/manage_pingbacks.twig:20
+#: modules/pingable/admin/pages/manage_pingbacks.twig:22
 msgid "Title"
 msgstr ""
 
-#: modules/pingable/admin/pages/edit_pingback.twig:14
+#: modules/pingable/admin/pages/edit_pingback.twig:16
 msgid "Update"
 msgstr ""
 
@@ -32,17 +32,17 @@ msgstr ""
 msgid "Manage Webmentions"
 msgstr ""
 
-#: modules/pingable/admin/pages/manage_pingbacks.twig:16
+#: modules/pingable/admin/pages/manage_pingbacks.twig:18
 #: modules/pingable/pingable.php:240
 #: modules/pingable/pingable.php:264
 msgid "Webmentions"
 msgstr ""
 
-#: modules/pingable/admin/pages/manage_pingbacks.twig:21
+#: modules/pingable/admin/pages/manage_pingbacks.twig:23
 msgid "Post"
 msgstr ""
 
-#: modules/pingable/admin/pages/manage_pingbacks.twig:22
+#: modules/pingable/admin/pages/manage_pingbacks.twig:24
 msgid "Added"
 msgstr ""
 

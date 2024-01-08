@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/likes/admin/pages/like_settings.twig:3
@@ -22,19 +22,19 @@ msgstr "Like Einstellungen"
 msgid "Like Image"
 msgstr "Like Bilder"
 
-#: modules/likes/admin/pages/like_settings.twig:19
+#: modules/likes/admin/pages/like_settings.twig:22
 msgid "Like with Text"
 msgstr "Like mit Text"
 
-#: modules/likes/admin/pages/like_settings.twig:21
+#: modules/likes/admin/pages/like_settings.twig:26
 msgid "Enables text descriptions in like/unlike links."
 msgstr "Ermöglicht Textbeschreibungen in Like/Unlike-Links."
 
-#: modules/likes/admin/pages/like_settings.twig:24
+#: modules/likes/admin/pages/like_settings.twig:30
 msgid "Show on Index Pages"
 msgstr "Auf Indexseiten anzeigen"
 
-#: modules/likes/admin/pages/like_settings.twig:26
+#: modules/likes/admin/pages/like_settings.twig:34
 msgid "Enables like functionality on blog index pages."
 msgstr "Aktiviert die Like-Funktion auf Blog-Indexseiten."
 
@@ -48,7 +48,9 @@ msgstr "Erlauben Sie Benutzern ein Blogpost zu &#8220;liken&#8221;."
 
 #: modules/likes/info.php:12
 msgid "Please remember to update the permission settings for each group."
-msgstr "Bitte denken Sie daran, die Berechtigungseinstellungen für jede Gruppe zu aktualisieren."
+msgstr ""
+"Bitte denken Sie daran, die Berechtigungseinstellungen für jede Gruppe zu "
+"aktualisieren."
 
 #: modules/likes/likes.php:49
 msgid "Like Posts"
@@ -68,7 +70,8 @@ msgstr "Zum liken einer Blogpost ist eine ID erforderlich."
 
 #: modules/likes/likes.php:135 modules/likes/likes.php:193
 msgid "You do not have sufficient privileges to like posts."
-msgstr "Sie verfügen nicht über ausreichende Berechtigungen zum Liken von Blogposts."
+msgstr ""
+"Sie verfügen nicht über ausreichende Berechtigungen zum Liken von Blogposts."
 
 #: modules/likes/likes.php:148
 msgid "Post liked."
@@ -80,7 +83,9 @@ msgstr "Zum unliken einer Blogpost ist eine ID erforderlich."
 
 #: modules/likes/likes.php:164 modules/likes/likes.php:231
 msgid "You do not have sufficient privileges to unlike posts."
-msgstr "Sie verfügen nicht über ausreichende Berechtigungen zum Unliken von Blogposts."
+msgstr ""
+"Sie verfügen nicht über ausreichende Berechtigungen zum Unliken von "
+"Blogposts."
 
 #: modules/likes/likes.php:177
 msgid "Post unliked."

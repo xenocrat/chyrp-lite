@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/likes/admin/pages/like_settings.twig:3
@@ -22,19 +22,19 @@ msgstr "喜欢的设置"
 msgid "Like Image"
 msgstr "喜欢的图片"
 
-#: modules/likes/admin/pages/like_settings.twig:19
+#: modules/likes/admin/pages/like_settings.twig:22
 msgid "Like with Text"
 msgstr "喜欢的文本"
 
-#: modules/likes/admin/pages/like_settings.twig:21
+#: modules/likes/admin/pages/like_settings.twig:26
 msgid "Enables text descriptions in like/unlike links."
 msgstr "在喜欢/不喜欢链接中启用文字说明。"
 
-#: modules/likes/admin/pages/like_settings.twig:24
+#: modules/likes/admin/pages/like_settings.twig:30
 msgid "Show on Index Pages"
 msgstr "显示索引页"
 
-#: modules/likes/admin/pages/like_settings.twig:26
+#: modules/likes/admin/pages/like_settings.twig:34
 msgid "Enables like functionality on blog index pages."
 msgstr "在博客索引页面上启用喜欢功能。"
 

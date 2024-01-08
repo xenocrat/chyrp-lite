@@ -3197,6 +3197,16 @@ Parameters:
     $email - The email address to obfuscate.
 
 
+Function: twig_function_icon_img
+--------------------------------
+Returns a URL to the requested icon resource.
+
+Parameters:
+    $filename - The icon filename.
+    $alt_text - The alternative text for the image.
+    $class - The CSS class for the link.
+
+
 Function: twig_function_uploaded_search
 ---------------------------------------
 Returns an array of matches, if the visitor has the "export_content" privilege.

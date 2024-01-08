@@ -9,63 +9,63 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/migrator/admin/pages/manage_migration.twig:10
 msgid "eXtended .XML File"
 msgstr "eXtended .XML-Datei"
 
-#: modules/migrator/admin/pages/manage_migration.twig:14
-#: modules/migrator/admin/pages/manage_migration.twig:73
-#: modules/migrator/admin/pages/manage_migration.twig:108
+#: modules/migrator/admin/pages/manage_migration.twig:16
+#: modules/migrator/admin/pages/manage_migration.twig:88
+#: modules/migrator/admin/pages/manage_migration.twig:131
 msgid "URL for Embedded Media"
 msgstr "URL für eingebettete Medien"
 
-#: modules/migrator/admin/pages/manage_migration.twig:19
+#: modules/migrator/admin/pages/manage_migration.twig:22
 #, php-format
 msgid "Usually something like <code>%s/wp-content/uploads/</code>."
 msgstr "Normalerweise so etwas wie <code>%s/wp-content/uploads/</code>."
 
-#: modules/migrator/admin/pages/manage_migration.twig:33
+#: modules/migrator/admin/pages/manage_migration.twig:38
 msgid "Your Tumblr URL"
 msgstr "Ihr Tumblr URL"
 
-#: modules/migrator/admin/pages/manage_migration.twig:36
+#: modules/migrator/admin/pages/manage_migration.twig:42
 #, php-format
 msgid "Something like <code>https://%s.tumblr.com/</code>."
 msgstr "Normalerweise so etwas wie <code>%s.tumblr.com/</code>."
 
-#: modules/migrator/admin/pages/manage_migration.twig:37
+#: modules/migrator/admin/pages/manage_migration.twig:43
 msgid "Audio and Video cannot be imported."
 msgstr "Audio und Video kann nicht importiert würden."
 
-#: modules/migrator/admin/pages/manage_migration.twig:51
-#: modules/migrator/admin/pages/manage_migration.twig:92
+#: modules/migrator/admin/pages/manage_migration.twig:59
+#: modules/migrator/admin/pages/manage_migration.twig:110
 msgid "Host"
 msgstr "Host"
 
-#: modules/migrator/admin/pages/manage_migration.twig:55
-#: modules/migrator/admin/pages/manage_migration.twig:96
+#: modules/migrator/admin/pages/manage_migration.twig:64
+#: modules/migrator/admin/pages/manage_migration.twig:115
 msgid "Username"
 msgstr "Benutzername"
 
-#: modules/migrator/admin/pages/manage_migration.twig:59
-#: modules/migrator/admin/pages/manage_migration.twig:100
+#: modules/migrator/admin/pages/manage_migration.twig:69
+#: modules/migrator/admin/pages/manage_migration.twig:120
 msgid "Password"
 msgstr "Kennwort"
 
-#: modules/migrator/admin/pages/manage_migration.twig:63
-#: modules/migrator/admin/pages/manage_migration.twig:104
+#: modules/migrator/admin/pages/manage_migration.twig:74
+#: modules/migrator/admin/pages/manage_migration.twig:125
 msgid "Database"
 msgstr "Datenbank"
 
-#: modules/migrator/admin/pages/manage_migration.twig:67
+#: modules/migrator/admin/pages/manage_migration.twig:80
 msgid "Table Prefix"
 msgstr "Tabelle Vorlauf"
 
-#: modules/migrator/admin/pages/manage_migration.twig:78
-#: modules/migrator/admin/pages/manage_migration.twig:113
+#: modules/migrator/admin/pages/manage_migration.twig:94
+#: modules/migrator/admin/pages/manage_migration.twig:137
 #, php-format
 msgid "Usually something like <code>%s/images/</code>."
 msgstr "Normalerweise so etwas wie <code>%s/images/</code>."

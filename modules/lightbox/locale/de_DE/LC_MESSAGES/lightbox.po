@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/lightbox/admin/pages/lightbox_settings.twig:3
@@ -21,19 +21,19 @@ msgstr "Lightbox einstellungen"
 msgid "Background"
 msgstr "Hintergrund"
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:18
+#: modules/lightbox/admin/pages/lightbox_settings.twig:21
 msgid "Edge Spacing"
 msgstr "Kantenabstand"
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:20
+#: modules/lightbox/admin/pages/lightbox_settings.twig:24
 msgid "(pixels)"
 msgstr "(pixels)"
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:23
+#: modules/lightbox/admin/pages/lightbox_settings.twig:27
 msgid "Protect Images"
 msgstr "Bilder schützen"
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:25
+#: modules/lightbox/admin/pages/lightbox_settings.twig:31
 msgid "Prevent visitors from saving images?"
 msgstr "Besucher hindern, Bilder zu speichern?"
 

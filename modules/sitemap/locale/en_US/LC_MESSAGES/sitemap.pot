@@ -9,23 +9,23 @@ msgstr ""
 msgid "Sitemap Path"
 msgstr ""
 
-#: modules/sitemap/admin/pages/sitemap_settings.twig:13
+#: modules/sitemap/admin/pages/sitemap_settings.twig:14
 msgid "The directory to which the sitemap is written."
 msgstr ""
 
-#: modules/sitemap/admin/pages/sitemap_settings.twig:17
+#: modules/sitemap/admin/pages/sitemap_settings.twig:18
 msgid "Blog is Updated"
 msgstr ""
 
-#: modules/sitemap/admin/pages/sitemap_settings.twig:25
+#: modules/sitemap/admin/pages/sitemap_settings.twig:29
 msgid "Pages are Edited"
 msgstr ""
 
-#: modules/sitemap/admin/pages/sitemap_settings.twig:33
+#: modules/sitemap/admin/pages/sitemap_settings.twig:40
 msgid "Posts are Edited"
 msgstr ""
 
-#: modules/sitemap/admin/pages/sitemap_settings.twig:42
+#: modules/sitemap/admin/pages/sitemap_settings.twig:52
 msgid "These values hint to search engines how frequently they should crawl your site."
 msgstr ""
 

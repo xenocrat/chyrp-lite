@@ -22,19 +22,19 @@ msgstr "Impostazioni dei like"
 msgid "Like Image"
 msgstr "Like immagine"
 
-#: modules/likes/admin/pages/like_settings.twig:19
+#: modules/likes/admin/pages/like_settings.twig:22
 msgid "Like with Text"
 msgstr "Like con testo"
 
-#: modules/likes/admin/pages/like_settings.twig:21
+#: modules/likes/admin/pages/like_settings.twig:26
 msgid "Enables text descriptions in like/unlike links."
 msgstr "Abilita le descrizioni di testo nei collegamenti like/unlike."
 
-#: modules/likes/admin/pages/like_settings.twig:24
+#: modules/likes/admin/pages/like_settings.twig:30
 msgid "Show on Index Pages"
 msgstr "Mostra sulle pagine di indice"
 
-#: modules/likes/admin/pages/like_settings.twig:26
+#: modules/likes/admin/pages/like_settings.twig:34
 msgid "Enables like functionality on blog index pages."
 msgstr "Abilita la funzionalità like nelle pagine di indice del blog."
 

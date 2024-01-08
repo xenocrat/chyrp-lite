@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/comments/admin/pages/comment_settings.twig:3
@@ -22,51 +22,51 @@ msgstr "评论设置"
 msgid "Site Notifications"
 msgstr "站点通知"
 
-#: modules/comments/admin/pages/comment_settings.twig:12
+#: modules/comments/admin/pages/comment_settings.twig:14
 msgid "Notify the site contact by email when a comment is added."
 msgstr "添加注释时通过电子邮件通知站点联系人。"
 
-#: modules/comments/admin/pages/comment_settings.twig:15
+#: modules/comments/admin/pages/comment_settings.twig:18
 msgid "Author Notifications"
 msgstr "作者通知"
 
-#: modules/comments/admin/pages/comment_settings.twig:17
+#: modules/comments/admin/pages/comment_settings.twig:21
 msgid "Notify the post author by email when a comment is added."
 msgstr "添加评论时通过电子邮件通知帖子作者。"
 
-#: modules/comments/admin/pages/comment_settings.twig:20
+#: modules/comments/admin/pages/comment_settings.twig:24
 msgid "Default Comment Status"
 msgstr "默认评论状态"
 
-#: modules/comments/admin/pages/comment_settings.twig:29
+#: modules/comments/admin/pages/comment_settings.twig:36
 msgid "Allowed HTML Tags"
 msgstr "允许HTML标签"
 
-#: modules/comments/admin/pages/comment_settings.twig:31
+#: modules/comments/admin/pages/comment_settings.twig:40
 msgid "Format: <code>strong, blockquote, em</code>"
 msgstr "格式： <code>strong, blockquote, em</code>"
 
-#: modules/comments/admin/pages/comment_settings.twig:34
+#: modules/comments/admin/pages/comment_settings.twig:44
 msgid "Comments Per Page"
 msgstr "每页评论"
 
-#: modules/comments/admin/pages/comment_settings.twig:36
+#: modules/comments/admin/pages/comment_settings.twig:48
 msgid "Themes decide whether or not to paginate comments."
 msgstr "主题决定是否分页评论。"
 
-#: modules/comments/admin/pages/comment_settings.twig:39
+#: modules/comments/admin/pages/comment_settings.twig:52
 msgid "Reload Comments"
 msgstr "重新加载评论"
 
-#: modules/comments/admin/pages/comment_settings.twig:41
+#: modules/comments/admin/pages/comment_settings.twig:56
 msgid "Show newly added comments (up to the maximum number per page)."
 msgstr "显示新添加的评论（直到每页最多）。"
 
-#: modules/comments/admin/pages/comment_settings.twig:44
+#: modules/comments/admin/pages/comment_settings.twig:60
 msgid "Reload Interval"
 msgstr "重新加载间隔"
 
-#: modules/comments/admin/pages/comment_settings.twig:46
+#: modules/comments/admin/pages/comment_settings.twig:63
 msgid "(seconds)"
 msgstr "（秒）"
 
@@ -110,7 +110,7 @@ msgid "Timestamp"
 msgstr "时间戳"
 
 #: modules/comments/admin/pages/edit_comment.twig:43
-#: modules/comments/admin/pages/manage_comments.twig:24
+#: modules/comments/admin/pages/manage_comments.twig:26
 msgid "Status"
 msgstr "状态"
 
@@ -125,7 +125,7 @@ msgid "Denied"
 msgstr "已否决的"
 
 #: modules/comments/admin/pages/edit_comment.twig:50
-#: modules/comments/admin/pages/manage_spam.twig:16
+#: modules/comments/admin/pages/manage_spam.twig:18
 #: modules/comments/comments.php:686
 msgid "Spam"
 msgstr "垃圾评论"
@@ -139,8 +139,8 @@ msgid "Save"
 msgstr "保存"
 
 #: modules/comments/admin/pages/edit_comment.twig:69
-#: modules/comments/admin/pages/manage_comments.twig:84
-#: modules/comments/admin/pages/manage_spam.twig:70
+#: modules/comments/admin/pages/manage_comments.twig:85
+#: modules/comments/admin/pages/manage_spam.twig:71
 msgid "Delete"
 msgstr "删除"
 
@@ -148,42 +148,42 @@ msgstr "删除"
 msgid "Manage Comments"
 msgstr "管理评论"
 
-#: modules/comments/admin/pages/manage_comments.twig:16
+#: modules/comments/admin/pages/manage_comments.twig:18
 #: modules/comments/comments.php:757 modules/comments/comments.php:792
 #: modules/comments/comments.php:806 modules/comments/info.php:3
 msgid "Comments"
 msgstr "评论"
 
-#: modules/comments/admin/pages/manage_comments.twig:22
-#: modules/comments/admin/pages/manage_spam.twig:22
+#: modules/comments/admin/pages/manage_comments.twig:24
+#: modules/comments/admin/pages/manage_spam.twig:24
 msgid "Post"
 msgstr "帖子"
 
-#: modules/comments/admin/pages/manage_comments.twig:23
-#: modules/comments/admin/pages/manage_spam.twig:23
+#: modules/comments/admin/pages/manage_comments.twig:25
+#: modules/comments/admin/pages/manage_spam.twig:25
 msgid "Added"
 msgstr "增加"
 
-#: modules/comments/admin/pages/manage_comments.twig:45
+#: modules/comments/admin/pages/manage_comments.twig:47
 msgid "Webmention"
 msgstr "Webmention"
 
-#: modules/comments/admin/pages/manage_comments.twig:73
-#: modules/comments/admin/pages/manage_spam.twig:62
+#: modules/comments/admin/pages/manage_comments.twig:74
+#: modules/comments/admin/pages/manage_spam.twig:63
 msgid "With selected:"
 msgstr "选择："
 
-#: modules/comments/admin/pages/manage_comments.twig:75
-#: modules/comments/admin/pages/manage_spam.twig:64
+#: modules/comments/admin/pages/manage_comments.twig:76
+#: modules/comments/admin/pages/manage_spam.twig:65
 msgid "Deny"
 msgstr "否决"
 
-#: modules/comments/admin/pages/manage_comments.twig:78
-#: modules/comments/admin/pages/manage_spam.twig:67
+#: modules/comments/admin/pages/manage_comments.twig:79
+#: modules/comments/admin/pages/manage_spam.twig:68
 msgid "Approve"
 msgstr "批准"
 
-#: modules/comments/admin/pages/manage_comments.twig:81
+#: modules/comments/admin/pages/manage_comments.twig:82
 msgid "Mark as Spam"
 msgstr "标记为垃圾评论"
 

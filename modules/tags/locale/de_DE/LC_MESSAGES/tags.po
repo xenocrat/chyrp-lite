@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/tags/admin/help/tagging_posts.twig:3
@@ -55,7 +55,7 @@ msgstr "Ändern von Tags für &#8220;%s&#8221;"
 
 #: modules/tags/admin/pages/edit_tags.twig:10
 #: modules/tags/admin/pages/manage_tags.twig:18
-#: modules/tags/admin/pages/posts_tagged.twig:29 modules/tags/tags.php:164
+#: modules/tags/admin/pages/posts_tagged.twig:31 modules/tags/tags.php:164
 #: modules/tags/tags.php:221 modules/tags/tags.php:235
 #: modules/tags/tags.php:715
 msgid "Tags"
@@ -66,7 +66,7 @@ msgid "Manage Tags"
 msgstr "Tags bearbeiten"
 
 #: modules/tags/admin/pages/manage_tags.twig:22
-#: modules/tags/admin/pages/posts_tagged.twig:65
+#: modules/tags/admin/pages/posts_tagged.twig:68
 #: modules/tags/admin/pages/rename_tag.twig:10
 msgid "Name"
 msgstr "Name"
@@ -76,16 +76,16 @@ msgstr "Name"
 msgid "Posts Tagged"
 msgstr "Blogpost getagged"
 
-#: modules/tags/admin/pages/posts_tagged.twig:18 modules/tags/tags.php:705
+#: modules/tags/admin/pages/posts_tagged.twig:20 modules/tags/tags.php:705
 #, php-format
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr "Blogposts getagged mit &#8220;%s&#8221;"
 
-#: modules/tags/admin/pages/posts_tagged.twig:64
+#: modules/tags/admin/pages/posts_tagged.twig:67
 msgid "Tag Selected Post(s) with:"
 msgstr "Taggen Sie die selektierten Blogpost(s) mit:"
 
-#: modules/tags/admin/pages/posts_tagged.twig:66
+#: modules/tags/admin/pages/posts_tagged.twig:69
 msgid "Tag"
 msgstr "Tag"
 
@@ -98,7 +98,7 @@ msgstr "Tagname ändern"
 msgid "Renaming Tag &#8220;%s&#8221;"
 msgstr "Ändern Name Tag &#8220;%s&#8221;"
 
-#: modules/tags/admin/pages/rename_tag.twig:15
+#: modules/tags/admin/pages/rename_tag.twig:16
 msgid "Rename"
 msgstr "Name ändern"
 

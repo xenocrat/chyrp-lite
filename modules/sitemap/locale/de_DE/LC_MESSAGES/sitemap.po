@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/sitemap/admin/pages/sitemap_settings.twig:3
@@ -21,23 +21,23 @@ msgstr "Sitemap Einstellungen"
 msgid "Sitemap Path"
 msgstr "Sitemap Pfad"
 
-#: modules/sitemap/admin/pages/sitemap_settings.twig:13
+#: modules/sitemap/admin/pages/sitemap_settings.twig:14
 msgid "The directory to which the sitemap is written."
 msgstr "Der Ort in dem die Sitemap geschrieben wird."
 
-#: modules/sitemap/admin/pages/sitemap_settings.twig:17
+#: modules/sitemap/admin/pages/sitemap_settings.twig:18
 msgid "Blog is Updated"
 msgstr "Blogpost aktualisiert"
 
-#: modules/sitemap/admin/pages/sitemap_settings.twig:25
+#: modules/sitemap/admin/pages/sitemap_settings.twig:29
 msgid "Pages are Edited"
 msgstr "Seiten sind geändert"
 
-#: modules/sitemap/admin/pages/sitemap_settings.twig:33
+#: modules/sitemap/admin/pages/sitemap_settings.twig:40
 msgid "Posts are Edited"
 msgstr "Blogposts sind geändert"
 
-#: modules/sitemap/admin/pages/sitemap_settings.twig:42
+#: modules/sitemap/admin/pages/sitemap_settings.twig:52
 msgid ""
 "These values hint to search engines how frequently they should crawl your "
 "site."
@@ -54,8 +54,8 @@ msgid ""
 "Creates a <em>sitemap.xml</em> file on your server to help search engines "
 "index your blog."
 msgstr ""
-"Erstellt eine <em>sitemap.xml</em>-Datei auf Ihrem Server, um "
-"Suchmaschinen bei der Indexierung Ihres Blogs zu unterstützen."
+"Erstellt eine <em>sitemap.xml</em>-Datei auf Ihrem Server, um Suchmaschinen "
+"bei der Indexierung Ihres Blogs zu unterstützen."
 
 #: modules/sitemap/sitemap.php:36
 msgid "Sitemap"

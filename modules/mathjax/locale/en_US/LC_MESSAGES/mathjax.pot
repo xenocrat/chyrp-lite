@@ -9,7 +9,7 @@ msgstr ""
 msgid "TeX and LaTeX Support"
 msgstr ""
 
-#: modules/mathjax/admin/pages/mathjax_settings.twig:15
+#: modules/mathjax/admin/pages/mathjax_settings.twig:18
 msgid "MathML Support"
 msgstr ""
 

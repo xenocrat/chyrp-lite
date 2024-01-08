@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/likes/admin/pages/like_settings.twig:3
@@ -22,19 +22,19 @@ msgstr "Vind ik leuk Instellingen"
 msgid "Like Image"
 msgstr "Vind ik leuk Afbeelding"
 
-#: modules/likes/admin/pages/like_settings.twig:19
+#: modules/likes/admin/pages/like_settings.twig:22
 msgid "Like with Text"
 msgstr "Vind ik leuk met tekst"
 
-#: modules/likes/admin/pages/like_settings.twig:21
+#: modules/likes/admin/pages/like_settings.twig:26
 msgid "Enables text descriptions in like/unlike links."
 msgstr "Activeert tekst-beschrijvingen bij vind-ik-leuks."
 
-#: modules/likes/admin/pages/like_settings.twig:24
+#: modules/likes/admin/pages/like_settings.twig:30
 msgid "Show on Index Pages"
 msgstr "Toon op indexpagina's"
 
-#: modules/likes/admin/pages/like_settings.twig:26
+#: modules/likes/admin/pages/like_settings.twig:34
 msgid "Enables like functionality on blog index pages."
 msgstr "Activeert functionaliteit op blog-index pagina's."
 
@@ -48,7 +48,9 @@ msgstr "Sta gebruikers toe om een bericht &#8220;leuk&#8221; te vinden."
 
 #: modules/likes/info.php:12
 msgid "Please remember to update the permission settings for each group."
-msgstr "Denk er alsjeblieft aan om de instellingen per gebruikersgroep ook aan te passen."
+msgstr ""
+"Denk er alsjeblieft aan om de instellingen per gebruikersgroep ook aan te "
+"passen."
 
 #: modules/likes/likes.php:49
 msgid "Like Posts"
