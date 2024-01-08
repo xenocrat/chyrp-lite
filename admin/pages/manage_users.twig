@@ -7,13 +7,15 @@
 <fieldset role="presentation">
 <label for="query">
 {{ "Search&hellip;" | translate }}
-<a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
+<a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem">
+{{- icon_img("help.svg", "help" | translate) -}}
+</a>
 </label>
 <input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true, true) }}" id="query">
 <button type="submit">{{ "Search" | translate }}</button>
 {% if visitor.group.can("add_user") %}
 <a href="{{ url('new_user') }}" class="button yay">
-<img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="">{{ "New User" | translate }}
+{{ icon_img("add.svg") }}{{ "New User" | translate }}
 </a>
 {% endif %}
 </fieldset>
@@ -52,23 +54,22 @@
 {% if site.email_activation %}
 <td class="user_activated emblem">
 {% if user.approved %}
-<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
+{{ icon_img("success.svg", "yes" | translate, "emblem") }}
 {% endif %}
 </td>
 {% endif %}
 {{ trigger.call("manage_users_column", user) }}
 <td class="controls">
-{{ user.edit_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">', null, null, "emblem") }}
+{{ user.edit_link(icon_img("edit.svg", "edit" | translate), null, null, "emblem") }}
 </td>
 <td class="controls">
-{{ user.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">', null, null, "emblem") }}
+{{ user.delete_link(icon_img("delete.svg", "delete" | translate), null, null, "emblem") }}
 </td>
 </tr>
 {% else %}
 <tr>
 <td class="placeholder">
-<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/failure.svg" alt="">
-{{ "No results" | translate }}
+{{ icon_img("failure.svg", "", "emblem") }} {{ "No results" | translate }}
 </td>
 </tr>
 {% endfor %}

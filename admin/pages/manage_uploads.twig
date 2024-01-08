@@ -28,13 +28,13 @@
 {% if ["jpg", "jpeg", "png", "gif", "webp"] | contains(upload.type) %}
 {{ upload.name | thumbnail("", false, ["max_width=70", "quality=60", "square=1"], "70px") }}
 {% elseif ["avif", "tif", "tiff", "bmp"] | contains(upload.type) %}
-<img class="placeholder" src="{{ site.chyrp_url }}/admin/images/icons/image.svg" alt="">
+{{ icon_img("image.svg", "", "placeholder") }}
 {% elseif ["mp3", "m4a", "oga", "ogg", "mka", "flac", "wav"] | contains(upload.type) %}
-<img class="placeholder" src="{{ site.chyrp_url }}/admin/images/icons/audio.svg" alt="">
+{{ icon_img("audio.svg", "", "placeholder") }}
 {% elseif ["mp4", "ogv", "webm", "3gp", "mkv", "mov"] | contains(upload.type) %}
-<img class="placeholder" src="{{ site.chyrp_url }}/admin/images/icons/video.svg" alt="">
+{{ icon_img("video.svg", "", "placeholder") }}
 {% else %}
-<img class="placeholder" src="{{ site.chyrp_url }}/admin/images/icons/file.svg" alt="">
+{{ icon_img("file.svg", "", "placeholder") }}
 {% endif %}
 <a target="_blank" href="{{ upload.name | uploaded }}">{{ upload.name | fix }}</a>
 </td>
@@ -46,17 +46,20 @@
 </td>
 {{ trigger.call("manage_uploads_column", upload) }}
 <td class="controls">
-<a class="emblem" href="{{ upload.name | download }}"><img src="{{ site.chyrp_url }}/admin/images/icons/download.svg" alt="{{ 'download' | translate }}"></a>
+<a class="emblem" href="{{ upload.name | download }}">
+{{- icon_img("download.svg", "download" | translate) -}}
+</a>
 </td>
 <td class="controls">
-<a class="upload_delete_link delete_link emblem" href="{{ url('delete_upload/file/' ~ (upload.name | url_encode)) }}"><img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg" alt="{{ 'delete' | translate }}"></a>
+<a class="upload_delete_link delete_link emblem" href="{{ url('delete_upload/file/' ~ (upload.name | url_encode)) }}">
+{{- icon_img("delete.svg", "delete" | translate) -}}
+</a>
 </td>
 </tr>
 {% else %}
 <tr>
 <td class="placeholder">
-<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/failure.svg" alt="">
-{{ "No results" | translate }}
+{{ icon_img("failure.svg", "", "emblem") }} {{ "No results" | translate }}
 </td>
 </tr>
 {% endfor %}

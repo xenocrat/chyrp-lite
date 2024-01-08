@@ -12,11 +12,14 @@
 {% if user.posts is not empty %}
 <p>
 <label for="move_posts">{{ "Attribute posts to:" | translate }}</label>
+{#- -#}
 <select name="move_posts" id="move_posts">
 <option value="0">{{ "[Delete Posts]" | translate }}</option>
 {% if users is not empty %}
 {% for user in users %}
-<option value="{{ user.id }}">{{ user.full_name is not empty ? user.full_name ~ " (" ~ user.login ~ ")" : user.login }}</option>
+<option value="{{ user.id }}">
+{{ user.full_name is not empty ? user.full_name ~ " (" ~ user.login ~ ")" : user.login }}
+</option>
 {% endfor %}
 {% endif %}
 </select>
@@ -25,11 +28,14 @@
 {% if user.pages is not empty %}
 <p>
 <label for="move_pages">{{ "Attribute pages to:" | translate }}</label>
+{#- -#}
 <select name="move_pages" id="move_pages">
 <option value="0">{{ "[Delete Pages]" | translate }}</option>
 {% if users is not empty %}
 {% for user in users %}
-<option value="{{ user.id }}">{{ user.full_name is not empty ? user.full_name ~ " (" ~ user.login ~ ")" : user.login }}</option>
+<option value="{{ user.id }}">
+{{ user.full_name is not empty ? user.full_name ~ " (" ~ user.login ~ ")" : user.login }}
+</option>
 {% endfor %}
 {% endif %}
 </select>
@@ -38,10 +44,10 @@
 {{ trigger.call("delete_user_form") }}
 <div class="confirmation">
 <button name="destroy" value="indubitably" class="boo">
-<img src="{{ site.chyrp_url }}/admin/images/icons/destroy.svg" alt="">{{ "Delete!" | translate }}
+{{ icon_img("destroy.svg") }}{{ "Delete!" | translate }}
 </button>
 <button name="destroy" value="undecidedly" type="submit" class="yay">
-<img src="{{ site.chyrp_url }}/admin/images/icons/cancel.svg" alt="">{{ "Cancel" | translate }}
+{{ icon_img("cancel.svg") }}{{ "Cancel" | translate }}
 </button>
 </div>
 <input type="hidden" name="id" value="{{ user.id }}" id="id">

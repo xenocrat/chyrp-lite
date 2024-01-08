@@ -8,6 +8,7 @@
 <fieldset role="presentation">
 <p>
 <label for="name">{{ "Name" | translate }}</label>
+{#- -#}
 <input class="text" type="text" name="name" value="{{ group.name | fix(true, true) }}" id="name" maxlength="100" required>
 </p>
 <h3>{{ "Permissions" | translate }}</h3>
@@ -17,11 +18,14 @@
 {% for permission in permissions %}
 <p>
 <label for="permission_{{ permission.id }}">{{ permission.name }}{# translation is done in Group #}</label>
+{#- -#}
 <input class="checkbox" type="checkbox" name="permissions[{{ permission.id }}]" id="permission_{{ permission.id }}"{{ group.can(permission.id) | checked }}>
 </p>
 {% endfor %}
 <p class="buttons">
-<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Update" | translate }}</button>
+<button type="submit" class="yay">
+{{ icon_img("success.svg") }}{{ "Update" | translate }}
+</button>
 </p>
 <input type="hidden" name="id" value="{{ group.id }}" id="id">
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">

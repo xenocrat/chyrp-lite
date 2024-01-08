@@ -8,19 +8,24 @@
 <fieldset role="presentation">
 <p>
 <label for="wordpress_xml_file">{{ "eXtended .XML File" | translate("migrator") }}</label>
+{#- -#}
 <input type="file" name="xml_file" value="" id="wordpress_xml_file" accept=".xml" required>
 </p>
 <p>
-<label for="wordpress_media_url">{{ "URL for Embedded Media" | translate("migrator") }}
+<label for="wordpress_media_url">
+{{ "URL for Embedded Media" | translate("migrator") }}
 <span class="sub">{{ "(optional)" | translate }}</span>
 </label>
+{#- -#}
 <input class="text" type="url" name="media_url" value="" id="wordpress_media_url">
 <small>
 {{ "Usually something like <code>%s/wp-content/uploads/</code>." | translate("migrator") | format("http://example.com") }}
 </small>
 </p>
 <p class="buttons">
-<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Import" | translate }}</button>
+<button type="submit" class="yay">
+{{ icon_img("success.svg") }}{{ "Import" | translate }}
+</button>
 </p>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="wordpress_hash">
 </fieldset>
@@ -31,6 +36,7 @@
 <fieldset role="presentation">
 <p>
 <label for="tumblr_url">{{ "Your Tumblr URL" | translate("migrator") }}</label>
+{#- -#}
 <input class="text" type="url" name="tumblr_url" value="" id="tumblr_url" required>
 <small>
 {{ "Something like <code>https://%s.tumblr.com/</code>." | translate("migrator") | format(visitor.login) }}
@@ -38,7 +44,9 @@
 </small>
 </p>
 <p class="buttons">
-<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Import" | translate }}</button>
+<button type="submit" class="yay">
+{{ icon_img("success.svg") }}{{ "Import" | translate }}
+</button>
 </p>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="tumblr_hash">
 </fieldset>
@@ -49,37 +57,47 @@
 <fieldset role="presentation">
 <p>
 <label for="textpattern_host">{{ "Host" | translate("migrator") }}</label>
+{#- -#}
 <input class="text" type="text" name="host" value="localhost" id="textpattern_host" required>
 </p>
 <p>
 <label for="textpattern_username">{{ "Username" | translate("migrator") }}</label>
+{#- -#}
 <input class="text" type="text" name="username" value="" id="textpattern_username" required>
 </p>
 <p>
 <label for="textpattern_password">{{ "Password" | translate("migrator") }}</label>
+{#- -#}
 <input class="text" type="password" name="password" value="" id="textpattern_password" required>
 </p>
 <p>
 <label for="textpattern_database">{{ "Database" | translate("migrator") }}</label>
+{#- -#}
 <input class="text" type="text" name="database" value="" id="textpattern_database" required>
 </p>
 <p>
-<label for="textpattern_prefix">{{ "Table Prefix" | translate("migrator") }}
+<label for="textpattern_prefix">
+{{ "Table Prefix" | translate("migrator") }}
 <span class="sub">{{ "(optional)" | translate }}</span>
 </label>
+{#- -#}
 <input class="text" type="text" name="prefix" value="" id="textpattern_prefix">
 </p>
 <p>
-<label for="textpattern_media_url">{{ "URL for Embedded Media" | translate("migrator") }}
+<label for="textpattern_media_url">
+{{ "URL for Embedded Media" | translate("migrator") }}
 <span class="sub">{{ "(optional)" | translate }}</span>
 </label>
+{#- -#}
 <input class="text" type="url" name="media_url" value="" id="textpattern_media_url">
 <small>
 {{ "Usually something like <code>%s/images/</code>." | translate("migrator") | format("http://example.com") }}
 </small>
 </p>
 <p class="buttons">
-<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Import" | translate }}</button>
+<button type="submit" class="yay">
+{{ icon_img("success.svg") }}{{ "Import" | translate }}
+</button>
 </p>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="textpattern_hash">
 </fieldset>
@@ -90,31 +108,39 @@
 <fieldset role="presentation">
 <p>
 <label for="movabletype_host">{{ "Host" | translate("migrator") }}</label>
+{#- -#}
 <input class="text" type="text" name="host" value="localhost" id="movabletype_host" required>
 </p>
 <p>
 <label for="movabletype_username">{{ "Username" | translate("migrator") }}</label>
+{#- -#}
 <input class="text" type="text" name="username" value="" id="movabletype_username" required>
 </p>
 <p>
 <label for="movabletype_password">{{ "Password" | translate("migrator") }}</label>
+{#- -#}
 <input class="text" type="password" name="password" value="" id="movabletype_password" required>
 </p>
 <p>
 <label for="movabletype_database">{{ "Database" | translate("migrator") }}</label>
+{#- -#}
 <input class="text" type="text" name="database" value="" id="movabletype_database" required>
 </p>
 <p>
-<label for="movabletype_media_url">{{ "URL for Embedded Media" | translate("migrator") }}
+<label for="movabletype_media_url">
+{{ "URL for Embedded Media" | translate("migrator") }}
 <span class="sub">{{ "(optional)" | translate }}</span>
 </label>
+{#- -#}
 <input class="text" type="url" name="media_url" value="" id="movabletype_media_url">
 <small>
 {{ "Usually something like <code>%s/images/</code>." | translate("migrator") | format("http://example.com") }}
 </small>
 </p>
 <p class="buttons">
-<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Import" | translate }}</button>
+<button type="submit" class="yay">
+{{ icon_img("success.svg") }}{{ "Import" | translate }}
+</button>
 </p>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="movabletype_hash">
 </fieldset>

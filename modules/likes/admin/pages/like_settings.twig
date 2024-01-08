@@ -7,26 +7,37 @@
 <form id="like_settings" class="split" action="{{ url('like_settings') }}" method="post" accept-charset="UTF-8">
 <fieldset role="presentation">
 <p>
-<label for="like_image">{{ "Like Image" | translate("likes") }}
-</label><select name="like_image" id="like_image">
+<label for="like_image">{{ "Like Image" | translate("likes") }}</label>
+{#- -#}
+<select name="like_image" id="like_image">
 {% for filename in like_images %}
 {% set option_selected = filename | selected(site.module_likes.like_image) %}
-<option value="{{ filename | fix(true) }}"{{ option_selected }}>{{ filename | preg_replace("/(.+)\\.[a-z]+$/i", "$1") | camelize(true) }}</option>
+<option value="{{ filename | fix(true) }}"{{ option_selected }}>
+{{ filename | preg_replace("/(.+)\\.[a-z]+$/i", "$1") | camelize(true) }}
+</option>
 {% endfor %}
 </select>
 </p>
 <p>
-<label for="like_with_text">{{ "Like with Text" | translate("likes") }}
-</label><input type="checkbox" class="checkbox" name="like_with_text" id="like_with_text"{{ site.module_likes.like_with_text | checked }}>
-<small>{{ "Enables text descriptions in like/unlike links." | translate("likes") }}</small>
+<label for="like_with_text">{{ "Like with Text" | translate("likes") }}</label>
+{#- -#}
+<input type="checkbox" class="checkbox" name="like_with_text" id="like_with_text"{{ site.module_likes.like_with_text | checked }}>
+<small>
+{{ "Enables text descriptions in like/unlike links." | translate("likes") }}
+</small>
 </p>
 <p>
-<label for="show_on_index">{{ "Show on Index Pages" | translate("likes") }}
-</label><input type="checkbox" class="checkbox" name="show_on_index" id="show_on_index"{{ site.module_likes.show_on_index | checked }}>
-<small>{{ "Enables like functionality on blog index pages." | translate("likes") }}</small>
+<label for="show_on_index">{{ "Show on Index Pages" | translate("likes") }}</label>
+{#- -#}
+<input type="checkbox" class="checkbox" name="show_on_index" id="show_on_index"{{ site.module_likes.show_on_index | checked }}>
+<small>
+{{ "Enables like functionality on blog index pages." | translate("likes") }}
+</small>
 </p>
 <p class="buttons">
-<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Update" | translate }}</button>
+<button type="submit" class="yay">
+{{ icon_img("success.svg") }}{{ "Update" | translate }}
+</button>
 </p>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
 </fieldset>

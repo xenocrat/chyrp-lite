@@ -8,11 +8,12 @@
 <fieldset role="presentation">
 <p>
 <label for="name">{{ "Name" | translate("tags") }}</label>
+{#- -#}
 <input type="text" name="name" value="{{ tag.name | fix(true, true) }}" id="name" required>
 </p>
 <p class="buttons">
 <button type="submit" class="yay">
-<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt=""> {{ "Rename" | translate("tags") }}
+{{ icon_img("success.svg") }}{{ "Rename" | translate("tags") }}
 </button>
 </p>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">

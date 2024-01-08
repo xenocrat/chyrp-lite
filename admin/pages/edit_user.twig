@@ -8,26 +8,33 @@
 <fieldset role="presentation">
 <p>
 <label for="login">{{ "Login" | translate }}</label>
+{#- -#}
 <input class="text" type="text" name="login" value="{{ user.login | fix(true, true) }}" id="login" maxlength="64" required>
 </p>
 <p>
 <label for="email">{{ "Email" | translate }}</label>
+{#- -#}
 <input class="text" type="email" name="email" value="{{ user.email | fix(true, true) }}" id="email" maxlength="128" required>
 </p>
 <p>
 <label for="group">{{ "Group" | translate }}</label>
+{#- -#}
 <select name="group" id="group">
 {% for group in groups %}
-<option value="{{ group.id }}"{{ group.id | selected(user.group_id) }}>{{ group.name }}</option>
+<option value="{{ group.id }}"{{ group.id | selected(user.group_id) }}>
+{{ group.name }}
+</option>
 {% endfor %}
 </select>
 </p>
 <p>
 <label for="new_password1">{{ "New Password?" | translate }}</label>
+{#- -#}
 <input class="text" type="password" name="new_password1" value="" id="new_password1" maxlength="128">
 </p>
 <p>
 <label for="new_password2">{{ "Confirm" | translate }}</label>
+{#- -#}
 <input class="text" type="password" name="new_password2" value="" id="new_password2" maxlength="128">
 </p>
 <p>
@@ -35,6 +42,7 @@
 {{ "Full Name" | translate }}
 <span class="sub">{{ "(optional)" | translate }}</span>
 </label>
+{#- -#}
 <input class="text" type="text" name="full_name" value="{{ user.full_name | fix(true, true) }}" id="full_name" maxlength="250">
 </p>
 <p>
@@ -42,17 +50,21 @@
 {{ "Website" | translate }}
 <span class="sub">{{ "(optional)" | translate }}</span>
 </label>
+{#- -#}
 <input class="text" type="url" name="website" value="{{ user.website | fix(true, true) }}" id="website" maxlength="128">
 </p>
 {% if site.email_activation %}
 <p>
 <label for="activated">{{ "Activated?" | translate }}</label>
+{#- -#}
 <input class="checkbox" type="checkbox" name="activated" id="activated"{{ user.approved | checked }}>
 </p>
 {% endif %}
 {{ trigger.call("edit_user_fields", user) }}
 <p class="buttons">
-<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Update" | translate }}</button>
+<button type="submit" class="yay">
+{{ icon_img("success.svg") }}{{ "Update" | translate }}
+</button>
 </p>
 <input type="hidden" name="id" value="{{ user.id }}" id="id">
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">

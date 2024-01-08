@@ -9,7 +9,9 @@
 {{ "Body" | translate }}
 </label>
 <span id="body_toolbar" class="options_toolbar" role="toolbar">{% if field_markdown %}
-<a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="{{ 'Markdown' | translate }}"></a>
+<a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown">
+{{- icon_img("markdown.svg", "Markdown" | translate) -}}
+</a>
 {% endif %}</span>
 <textarea rows="12" name="body" id="body" data-preview{{ field_markdown }} required>{{ page is defined ? page.body | fix(false, true) : "" }}</textarea>
 <span id="body_tray" class="options_tray" role="status"></span>
@@ -18,7 +20,9 @@
 <div id="more_options" class="more_options">
 <p class="more_options_option">
 <label for="slug">
-<a href="{{ url('help/id/slugs') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
+<a href="{{ url('help/id/slugs') }}" rel="help" target="_blank" class="help emblem">
+{{- icon_img("help.svg", "help" | translate) -}}
+</a>
 {{ "Slug" | translate }}
 </label>
 <input class="text" type="text" name="slug" value="{{ page is defined ? page.clean | fix(true) : '' }}" id="slug" maxlength="80">
@@ -67,17 +71,17 @@
 <div class="buttons confirmation">
 {% if route.action == "write_page" %}
 <button type="submit" class="yay">
-<img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="">{{ "Publish" | translate }}
+{{ icon_img("add.svg") }}{{ "Publish" | translate }}
 </button>
 <button type="submit" name="private" value="true">
-<img src="{{ site.chyrp_url }}/admin/images/icons/draft.svg" alt="">{{ "Save" | translate }}
+{{ icon_img("draft.svg") }}{{ "Save" | translate }}
 </button>
 {% else %}
 <button type="submit">
-<img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="">{{ "Save" | translate }}
+{{ icon_img("save.svg") }}{{ "Save" | translate }}
 </button>
 <button type="submit" class="boo" name="cancel" value="true" data-confirm="">
-<img src="{{ site.chyrp_url }}/admin/images/icons/discard.svg" alt="">{{ "Cancel" | translate }}
+{{ icon_img("discard.svg") }}{{ "Cancel" | translate }}
 </button>
 {% endif %}
 </div>

@@ -7,36 +7,46 @@
 <form id="import_chyrp_form" class="split" action="{{ url('import') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <fieldset role="presentation">
 <p>
-<label for="posts_file">{{ "Posts .atom File" | translate }}
-</label><input type="file" name="posts_file" value="" id="posts_file" accept=".atom,.xml">
+<label for="posts_file">{{ "Posts .atom File" | translate }}</label>
+{#- -#}
+<input type="file" name="posts_file" value="" id="posts_file" accept=".atom,.xml">
 </p>
 <p>
-<label for="pages_file">{{ "Pages .atom File" | translate }}
-</label><input type="file" name="pages_file" value="" id="pages_file" accept=".atom,.xml">
+<label for="pages_file">{{ "Pages .atom File" | translate }}</label>
+{#- -#}
+<input type="file" name="pages_file" value="" id="pages_file" accept=".atom,.xml">
 </p>
 <p>
-<label for="groups_file">{{ "Groups .json File" | translate }}
-</label><input type="file" name="groups_file" value="" id="groups_file" accept=".json,.js">
+<label for="groups_file">{{ "Groups .json File" | translate }}</label>
+{#- -#}
+<input type="file" name="groups_file" value="" id="groups_file" accept=".json,.js">
 </p>
 <p>
-<label for="users_file">{{ "Users .json File" | translate }}
-</label><input type="file" name="users_file" value="" id="users_file" accept=".json,.js">
+<label for="users_file">{{ "Users .json File" | translate }}</label>
+{#- -#}
+<input type="file" name="users_file" value="" id="users_file" accept=".json,.js">
 </p>
 <p>
-<label for="uploads">{{ "Bulk File Upload" | translate }}
-</label><input type="file" name="uploads[]" multiple value="" id="uploads">
+<label for="uploads">{{ "Bulk File Upload" | translate }}</label>
+{#- -#}
+<input type="file" name="uploads[]" multiple value="" id="uploads">
 </p>
 <p>
-<label for="media_url">{{ "URL for Embedded Media" | translate }}
+<label for="media_url">
+{{ "URL for Embedded Media" | translate }}
 <span class="sub">{{ "(optional)" | translate }}</span>
-</label><input class="text" type="url" name="media_url" value="" id="media_url">
+</label>
+{#- -#}
+<input class="text" type="url" name="media_url" value="" id="media_url">
 <small>
 {{ "Usually something like <code>%s/uploads/</code>." | translate | format(site.url) }}
 </small>
 </p>
 {{ trigger.call("import_choose") }}
 <p class="buttons">
-<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Import" | translate }}</button>
+<button type="submit" class="yay">
+{{ icon_img("success.svg") }}{{ "Import" | translate }}
+</button>
 </p>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
 </fieldset>

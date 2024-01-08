@@ -7,12 +7,14 @@
 <fieldset role="presentation">
 <label for="query">
 {{ "Search&hellip;" | translate }}
-<a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
+<a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem">
+{{- icon_img("help.svg", "help" | translate) -}}
+</a>
 </label>
 <input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true, true) }}" id="query">
 <button type="submit">{{ "Search" | translate }}</button>
 <a href="{{ url('new_category') }}" class="button yay"> 
-<img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="">{{ "Add Category" | translate("categorize") }}
+{{ icon_img("add.svg") }}{{ "Add Category" | translate("categorize") }}
 </a>
 </fieldset>
 </form>
@@ -32,27 +34,26 @@
 <tr id="category_{{ category.id }}">
 <td class="category_show emblem">
 {% if category.show_on_home %}
-<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="{{ 'yes' | translate }}">
+{{ icon_img("success.svg", "yes" | translate, "emblem") }}
 {% endif %}
 </td>
 <td class="category_name name main">
-<a href="{{ category.url }}">{{ category.name | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
+<a href="{{ category.url }}">{{ category.name | oneof("[Untitled]" | translate) | truncate(40) }}</a>
 </td>
 <td class="category_count value">
 {{ category.post_count }}
 </td>
 <td class="controls">
-{{ category.edit_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">', null, null, "emblem") }}
+{{ category.edit_link(icon_img("edit.svg", "edit" | translate), null, null, "emblem") }}
 </td>
 <td class="controls">
-{{ category.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">', null, null, "emblem") }}
+{{ category.delete_link(icon_img("delete.svg", "delete" | translate), null, null, "emblem") }}
 </td>
 </tr>
 {% else %}
 <tr>
 <td class="placeholder">
-<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/failure.svg" alt="">
-{{ "No results" | translate }}
+{{ icon_img("failure.svg", "", "emblem") }} {{ "No results" | translate }}
 </td>
 </tr>
 {% endfor %}

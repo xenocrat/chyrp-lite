@@ -9,7 +9,7 @@
 <li class="theme{{ safename == site.theme ? ' current' : '' }}" id="{{ safename }}">
 <h3>
 <a class="emblem module_author" href="{{ theme.url }}" target="_blank">
-<img src="{{ site.chyrp_url }}/admin/images/icons/info.svg" alt="{{ 'info' | translate }}">
+{{- icon_img("info.svg", "info" | translate) }}
 {{ theme.name }}{# translation is done in the controller #}
 </a>
 </h3>
@@ -21,10 +21,10 @@
 <input type="hidden" name="theme" value="{{ safename }}">
 <input type="hidden" name="hash" value="{{ authenticate() }}">
 <button name="change" value="undecidedly"{{ safename | disabled(site.theme) }}>
-<img src="{{ site.chyrp_url }}/admin/images/icons/view.svg" alt="">{{ "Preview" | translate }}
+{{ icon_img("view.svg") }}{{ "Preview" | translate }}
 </button>
 <button name="change" value="indubitably" type="submit"{{ safename | disabled(site.theme) }}>
-<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Select" | translate }}
+{{ icon_img("success.svg") }}{{ "Select" | translate }}
 </button>
 </form>
 </div>

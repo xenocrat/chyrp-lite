@@ -7,47 +7,64 @@
 <form id="comment_settings" class="split" action="{{ url('comment_settings') }}" method="post" accept-charset="UTF-8">
 <fieldset role="presentation">
 <p>
-<label for="notify_site_contact">{{ "Site Notifications" | translate("comments") }}
-</label><input type="checkbox" class="checkbox" name="notify_site_contact"  id="notify_site_contact"{{ site.module_comments.notify_site_contact | checked }}>
-<small>{{ "Notify the site contact by email when a comment is added." | translate("comments") }}</small>
+<label for="notify_site_contact">{{ "Site Notifications" | translate("comments") }}</label>
+{#- -#}
+<input type="checkbox" class="checkbox" name="notify_site_contact"  id="notify_site_contact"{{ site.module_comments.notify_site_contact | checked }}>
+<small>
+{{ "Notify the site contact by email when a comment is added." | translate("comments") }}
+</small>
 </p>
 <p>
-<label for="notify_post_author">{{ "Author Notifications" | translate("comments") }}
-</label><input type="checkbox" class="checkbox" name="notify_post_author"  id="notify_post_author"{{ site.module_comments.notify_post_author | checked }}>
+<label for="notify_post_author">{{ "Author Notifications" | translate("comments") }}</label>
+{#- -#}
+<input type="checkbox" class="checkbox" name="notify_post_author"  id="notify_post_author"{{ site.module_comments.notify_post_author | checked }}>
 <small>{{ "Notify the post author by email when a comment is added." | translate("comments") }}</small>
 </p>
 <p>
-<label for="default_comment_status">{{ "Default Comment Status" | translate("comments") }}
-</label><select name="default_comment_status" id="default_comment_status">
+<label for="default_comment_status">{{ "Default Comment Status" | translate("comments") }}</label>
+{#- -#}
+<select name="default_comment_status" id="default_comment_status">
 {% set default_comment_status = site.module_comments.default_comment_status %}
 {% for key, val in comments_status %}
-<option value="{{ key }}"{{ key | selected(default_comment_status) }}>{{ val }}</option>
+<option value="{{ key }}"{{ key | selected(default_comment_status) }}>
+{{ val }}
+</option>
 {% endfor %}
 </select>
 </p>
 <p>
-<label for="allowed_comment_html">{{ "Allowed HTML Tags" | translate("comments") }}
-</label><input class="text code" type="text" name="allowed_comment_html" value="{{ comments_html | fix(true, true) }}" id="allowed_comment_html">
-<small>{{ "Format: <code>strong, blockquote, em</code>" | translate("comments") }}</small>
+<label for="allowed_comment_html">{{ "Allowed HTML Tags" | translate("comments") }}</label>
+{#- -#}
+<input class="text code" type="text" name="allowed_comment_html" value="{{ comments_html | fix(true, true) }}" id="allowed_comment_html">
+<small>
+{{ "Format: <code>strong, blockquote, em</code>" | translate("comments") }}
+</small>
 </p>
 <p>
-<label for="comments_per_page">{{ "Comments Per Page" | translate("comments") }}
-</label><input class="text digits" type="number" min="1" name="comments_per_page" value="{{ site.module_comments.comments_per_page | fix(true) }}" id="comments_per_page">
-<small>{{ "Themes decide whether or not to paginate comments." | translate("comments") }}</small>
+<label for="comments_per_page">{{ "Comments Per Page" | translate("comments") }}</label>
+{#- -#}
+<input class="text digits" type="number" min="1" name="comments_per_page" value="{{ site.module_comments.comments_per_page | fix(true) }}" id="comments_per_page">
+<small>
+{{ "Themes decide whether or not to paginate comments." | translate("comments") }}
+</small>
 </p>
 <p>
-<label for="enable_reload_comments">{{ "Reload Comments" | translate("comments") }}
-</label><input type="checkbox" class="checkbox" name="enable_reload_comments"  id="enable_reload_comments"{{ site.module_comments.enable_reload_comments | checked }}>
-<small>{{ "Show newly added comments (up to the maximum number per page)." | translate("comments") }}</small>
+<label for="enable_reload_comments">{{ "Reload Comments" | translate("comments") }}</label>
+{#- -#}
+<input type="checkbox" class="checkbox" name="enable_reload_comments"  id="enable_reload_comments"{{ site.module_comments.enable_reload_comments | checked }}>
+<small>
+{{ "Show newly added comments (up to the maximum number per page)." | translate("comments") }}
+</small>
 </p>
 <p>
-<label for="auto_reload_comments">{{ "Reload Interval" | translate("comments") }}
-</label><input class="text digits" type="number" min="10" max="3600" name="auto_reload_comments" value="{{ site.module_comments.auto_reload_comments | fix(true) }}" id="auto_reload_comments">
+<label for="auto_reload_comments">{{ "Reload Interval" | translate("comments") }}</label>
+{#- -#}
+<input class="text digits" type="number" min="10" max="3600" name="auto_reload_comments" value="{{ site.module_comments.auto_reload_comments | fix(true) }}" id="auto_reload_comments">
 <span class="sub">{{ "(seconds)" | translate("comments") }}</span>
 </p>
 <p class="buttons">
 <button type="submit" class="yay">
-<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Update" | translate }}
+{{ icon_img("success.svg") }}{{ "Update" | translate }}
 </button>
 </p>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">

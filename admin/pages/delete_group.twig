@@ -12,9 +12,12 @@
 {% if group.users is not empty and groups is not empty %}
 <p>
 <label for="move_group">{{ "Move members to:" | translate }}</label>
+{#- -#}
 <select name="move_group" id="move_group">
 {% for group in groups %}
-<option value="{{ group.id }}"{{ group.id | selected(site.default_group) }}>{{ group.name }}</option>
+<option value="{{ group.id }}"{{ group.id | selected(site.default_group) }}>
+{{ group.name }}
+</option>
 {% endfor %}
 </select>
 </p>
@@ -22,9 +25,12 @@
 {% if group.id == site.default_group and groups is not empty %}
 <p>
 <label for="default_group">{{ "New default group:" | translate }}</label>
+{#- -#}
 <select name="default_group" id="default_group">
 {% for group in groups %}
-<option value="{{ group.id }}"{{ group.id | selected(site.guest_group) }}>{{ group.name }}</option>
+<option value="{{ group.id }}"{{ group.id | selected(site.guest_group) }}>
+{{ group.name }}
+</option>
 {% endfor %}
 </select>
 </p>
@@ -32,19 +38,22 @@
 {% if group.id == site.guest_group and groups is not empty %}
 <p>
 <label for="guest_group">{{ "New &#8220;guest&#8221; group:" | translate }}</label>
+{#- -#}
 <select name="guest_group" id="guest_group">
 {% for group in groups %}
-<option value="{{ group.id }}"{{ group.id | selected(site.default_group) }}>{{ group.name }}</option>
+<option value="{{ group.id }}"{{ group.id | selected(site.default_group) }}>
+{{ group.name }}
+</option>
 {% endfor %}
 </select>
 </p>
 {% endif %}
 <div class="confirmation">
 <button name="destroy" value="indubitably" class="boo">
-<img src="{{ site.chyrp_url }}/admin/images/icons/destroy.svg" alt="">{{ "Delete!" | translate }}
+{{ icon_img("destroy.svg") }}{{ "Delete!" | translate }}
 </button>
 <button name="destroy" value="undecidedly" type="submit" class="yay">
-<img src="{{ site.chyrp_url }}/admin/images/icons/cancel.svg" alt="">{{ "Cancel" | translate }}
+{{ icon_img("cancel.svg") }}{{ "Cancel" | translate }}
 </button>
 </div>
 <input type="hidden" name="id" value="{{ group.id }}" id="id">

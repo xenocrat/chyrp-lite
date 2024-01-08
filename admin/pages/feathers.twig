@@ -11,7 +11,7 @@
 <li class="feather{{ feather.classes is defined ? ' ' ~ feather.classes | join(' ') : '' }}" id="feather_{{ safename }}">
 <h4>
 <a class="emblem feather_url" href="{{ feather.url }}" target="_blank">
-<img src="{{ site.chyrp_url }}/admin/images/icons/info.svg" alt="{{ 'info' | translate }}">
+{{- icon_img("info.svg", "info" | translate) }}
 {{ feather.name }}{# translation is done in the controller #}
 </a>
 </h4>
@@ -25,11 +25,11 @@
 <input type="hidden" name="hash" value="{{ authenticate() }}">
 {% if feather.confirm is not empty %}
 <button name="confirm" value="1" type="submit" data-confirm="{{ feather.confirm | fix(true) }}">
-<img src="{{ site.chyrp_url }}/admin/images/icons/destroy.svg" alt="">{{ "Uninstall" | translate }}
+{{ icon_img("destroy.svg") }}{{ "Uninstall" | translate }}
 </button>
 {% endif %}
 <button type="submit">
-<img src="{{ site.chyrp_url }}/admin/images/icons/deny.svg" alt="">{{ "Disable" | translate }}
+{{ icon_img("deny.svg") }}{{ "Disable" | translate }}
 </button>
 </form>
 </div>
@@ -44,7 +44,7 @@
 <li class="feather{{ feather.classes is defined ? ' ' ~ feather.classes | join(' ') : '' }}" id="feather_{{ safename }}">
 <h4>
 <a class="emblem feather_url" href="{{ feather.url }}" target="_blank">
-<img src="{{ site.chyrp_url }}/admin/images/icons/info.svg" alt="{{ 'info' | translate }}">
+{{- icon_img("info.svg", "info" | translate) }}
 {{ feather.name }}{# translation is done in the controller #}
 </a>
 </h4>
@@ -57,7 +57,7 @@
 <input type="hidden" name="type" value="feather">
 <input type="hidden" name="hash" value="{{ authenticate() }}">
 <button type="submit">
-<img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="">{{ "Enable" | translate }}
+{{ icon_img("add.svg") }}{{ "Enable" | translate }}
 </button>
 </form>
 </div>

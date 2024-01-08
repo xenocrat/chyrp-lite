@@ -7,16 +7,21 @@
 <form id="highlighter_settings" class="split" action="{{ url('highlighter_settings') }}" method="post" accept-charset="UTF-8">
 <fieldset role="presentation">
 <p>
-<label for="highlighter_stylesheet">{{ "Stylesheet" | translate("highlighter") }}
-</label><select name="stylesheet" id="highlighter_stylesheet">
+<label for="highlighter_stylesheet">{{ "Stylesheet" | translate("highlighter") }}</label>
+{#- -#}
+<select name="stylesheet" id="highlighter_stylesheet">
 {% for filename in highlighter_stylesheets %}
 {% set option_selected = filename | selected(site.module_highlighter.stylesheet) %}
-<option value="{{ filename | fix(true) }}"{{ option_selected }}>{{ filename | preg_replace("/(.+?)(\\.min)?\\.css$/i", "$1") }}</option>
+<option value="{{ filename | fix(true) }}"{{ option_selected }}>
+{{ filename | preg_replace("/(.+?)(\\.min)?\\.css$/i", "$1") }}
+</option>
 {% endfor %}
 </select>
 </p>
 <p class="buttons">
-<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Update" | translate }}</button>
+<button type="submit" class="yay">
+{{ icon_img("success.svg") }}{{ "Update" | translate }}
+</button>
 </p>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
 </fieldset>

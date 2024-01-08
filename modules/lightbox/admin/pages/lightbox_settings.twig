@@ -7,25 +7,34 @@
 <form id="lightbox_settings" class="split" action="{{ url('lightbox_settings') }}" method="post" accept-charset="UTF-8">
 <fieldset role="presentation">
 <p>
-<label for="lightbox_background">{{ "Background" | translate("lightbox") }}
-</label><select name="background" id="lightbox_background">
+<label for="lightbox_background">{{ "Background" | translate("lightbox") }}</label>
+{#- -#}
+<select name="background" id="lightbox_background">
 {% for key, val in lightbox_background %}
-<option value="{{ key }}"{{ key | selected(site.module_lightbox['background']) }}>{{ val }}</option>
+<option value="{{ key }}"{{ key | selected(site.module_lightbox['background']) }}>
+{{ val }}
+</option>
 {% endfor %}
 </select>
 </p>
 <p>
-<label for="lightbox_spacing">{{ "Edge Spacing" | translate("lightbox") }}
-</label><input class="text digits" type="number" min="0" name="spacing" value="{{ site.module_lightbox['spacing'] | fix(true) }}" size="2" id="lightbox_spacing">
+<label for="lightbox_spacing">{{ "Edge Spacing" | translate("lightbox") }}</label>
+{#- -#}
+<input class="text digits" type="number" min="0" name="spacing" value="{{ site.module_lightbox['spacing'] | fix(true) }}" size="2" id="lightbox_spacing">
 <span class="sub">{{ "(pixels)" | translate("lightbox") }}</span>
 </p>
 <p>
-<label for="lightbox_protect">{{ "Protect Images" | translate("lightbox") }}
-</label><input type="checkbox" class="checkbox" name="protect" id="lightbox_protect"{{ site.module_lightbox['protect'] | checked }}>
-<small>{{ "Prevent visitors from saving images?" | translate("lightbox") }}</small>
+<label for="lightbox_protect">{{ "Protect Images" | translate("lightbox") }}</label>
+{#- -#}
+<input type="checkbox" class="checkbox" name="protect" id="lightbox_protect"{{ site.module_lightbox['protect'] | checked }}>
+<small>
+{{ "Prevent visitors from saving images?" | translate("lightbox") }}
+</small>
 </p>
 <p class="buttons">
-<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Update" | translate }}</button>
+<button type="submit" class="yay">
+{{ icon_img("success.svg") }}{{ "Update" | translate }}
+</button>
 </p>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
 </fieldset>

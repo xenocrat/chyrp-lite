@@ -7,7 +7,9 @@
 <fieldset role="presentation">
 <label for="query">
 {{ "Search&hellip;" | translate }}
-<a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
+<a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem">
+{{- icon_img("help.svg", "help" | translate) -}}
+</a>
 </label>
 <input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true, true) }}" id="query">
 <button type="submit" class="inline">{{ "Search" | translate }}</button>
@@ -35,7 +37,7 @@
 <td class="comment_post title main">
 {% if not comment.post.no_results %}
 <a href="{{ comment.post.url() }}#comment_{{ comment.id }}">
-{{ comment.post.title() | striptags | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
+{{ comment.post.title() | striptags | oneof("[Untitled]" | translate) | truncate(40) }}</a>
 {% endif %}
 <td class="comment_date date">
 {{ comment.created_at | time }}
@@ -49,20 +51,19 @@
 </td>
 {{ trigger.call("manage_comments_column", comment) }}
 <td class="controls">
-{{ comment.edit_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">', null, null, "emblem") }}
+{{ comment.edit_link(icon_img("edit.svg", "edit" | translate), null, null, "emblem") }}
 </td>
 <td class="controls">
-{{ comment.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">', null, null, "emblem") }}
+{{ comment.delete_link(icon_img("delete.svg", "delete" | translate), null, null, "emblem") }}
 </td>
 </tr>
 <tr class="comment_excerpt">
-<td class="main" colspan="5">{{ comment.body | striptags | truncate(100, "&hellip;") }}</td>
+<td class="main" colspan="5">{{ comment.body | striptags | truncate(100) }}</td>
 </tr>
 {% else %}
 <tr>
 <td class="placeholder">
-<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/failure.svg" alt="">
-{{ "No results" | translate }}
+{{ icon_img("failure.svg", "", "emblem") }} {{ "No results" | translate }}
 </td>
 </tr>
 {% endfor %}
@@ -72,16 +73,16 @@
 <div class="controls">
 <h4>{{ "With selected:" | translate("comments") }}</h4>
 <button name="deny">
-<img src="{{ site.chyrp_url }}/admin/images/icons/deny.svg" alt="">{{ "Deny" | translate("comments") }}
+{{ icon_img("deny.svg") }}{{ "Deny" | translate("comments") }}
 </button>
 <button class="yay" name="approve">
-<img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Approve" | translate("comments") }}
+{{ icon_img("success.svg") }}{{ "Approve" | translate("comments") }}
 </button>
 <button name="spam">
-<img src="{{ site.chyrp_url }}/admin/images/icons/block.svg" alt="">{{ "Mark as Spam" | translate("comments") }}
+{{ icon_img("block.svg") }}{{ "Mark as Spam" | translate("comments") }}
 </button>
 <button class="boo" name="delete">
-<img src="{{ site.chyrp_url }}/admin/images/icons/destroy.svg" alt="">{{ "Delete" | translate("comments") }}
+{{ icon_img("destroy.svg") }}{{ "Delete" | translate("comments") }}
 </button>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
 </div>

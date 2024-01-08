@@ -7,63 +7,95 @@
 <form id="general_settings" class="split" action="{{ url('general_settings') }}" method="post" accept-charset="UTF-8">
 <fieldset role="presentation">
 <p>
-<label for="name">{{ "Site Name" | translate }}
-</label><input class="text" type="text" name="name" value="{{ site.name | fix(true, true) }}" id="name">
+<label for="name">
+{{ "Site Name" | translate }}
+</label>
+{#- -#}
+<input class="text" type="text" name="name" value="{{ site.name | fix(true, true) }}" id="name">
 </p>
 <p>
-<label for="description">{{ "Description" | translate }}
-</label><input class="text" type="text" name="description" value="{{ site.description | fix(true, true) }}" id="description">
+<label for="description">
+{{ "Description" | translate }}
+</label>
+{#- -#}
+<input class="text" type="text" name="description" value="{{ site.description | fix(true, true) }}" id="description">
 </p>
 <p>
-<label for="chyrp_url">{{ "Chyrp URL" | translate }}
-</label><input class="text" type="url" name="chyrp_url" value="{{ site.chyrp_url | fix(true, true) }}" id="chyrp_url" required>
+<label for="chyrp_url">
+{{ "Chyrp URL" | translate }}
+</label>
+{#- -#}
+<input class="text" type="url" name="chyrp_url" value="{{ site.chyrp_url | fix(true, true) }}" id="chyrp_url" required>
 </p>
 <p>
 <label for="url">
 {{ "Canonical URL" | translate }}
 <span class="sub">{{ "(optional)" | translate }}</span>
-</label><input class="text" type="url" name="url" value="{{ site.url != site.chyrp_url ? site.url | fix(true, true) : '' }}" id="url">
+</label>
+{#- -#}
+<input class="text" type="url" name="url" value="{{ site.url != site.chyrp_url ? site.url | fix(true, true) : '' }}" id="url">
 <a href="{{ url('help/id/canonical_url') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
 <small>
 {{ "Have your site URLs point someplace other than your install directory." | translate }}
 </small>
 </p>
 <p>
-<label for="email">{{ "Contact Email Address" | translate }}
-</label><input class="text" type="email" name="email" value="{{ site.email | fix(true, true) }}" id="email" required>
+<label for="email">
+{{ "Contact Email Address" | translate }}
+</label>
+{#- -#}
+<input class="text" type="email" name="email" value="{{ site.email | fix(true, true) }}" id="email" required>
 </p>
 <p>
-<label for="timezone">{{ "Time Zone" | translate }}
-</label><select name="timezone" id="timezone">
+<label for="timezone">
+{{ "Time Zone" | translate }}
+</label>
+{#- -#}
+<select name="timezone" id="timezone">
 {% for zone in timezones %}
-<option value="{{ zone.code }}"{{ zone.code | selected(site.timezone) }}>{{ zone.name }}</option>
+<option value="{{ zone.code }}"{{ zone.code | selected(site.timezone) }}>
+{{ zone.name }}
+</option>
 {% endfor %}
 </select>
 </p>
 <p>
-<label for="locale">{{ "Language" | translate }}
-</label><select name="locale" id="locale">
+<label for="locale">
+{{ "Language" | translate }}
+</label>
+{#- -#}
+<select name="locale" id="locale">
 {% for locale in locales %}
-<option value="{{ locale.code }}"{{ locale.code | selected(site.locale) }}>{{ locale.name }}</option>
+<option value="{{ locale.code }}"{{ locale.code | selected(site.locale) }}>
+{{ locale.name }}
+</option>
 {% endfor %}
 </select>
 </p>
 <p>
-<label for="monospace_font">{{ "Monospace Font" | translate }}
-</label><input class="checkbox" type="checkbox" name="monospace_font" id="monospace_font"{{ site.monospace_font | checked }}>
+<label for="monospace_font">
+{{ "Monospace Font" | translate }}
+</label>
+{#- -#}
+<input class="checkbox" type="checkbox" name="monospace_font" id="monospace_font"{{ site.monospace_font | checked }}>
 <small>
 {{ "Write with a monospace font." | translate }}
 </small>
 </p>
 <p>
-<label for="check_updates">{{ "Check for Updates" | translate }}
-</label><input class="checkbox" type="checkbox" name="check_updates" id="check_updates"{{ site.check_updates | checked }}>
+<label for="check_updates">
+{{ "Check for Updates" | translate }}
+</label>
+{#- -#}
+<input class="checkbox" type="checkbox" name="check_updates" id="check_updates"{{ site.check_updates | checked }}>
 <small>
 {{ "Current version: %s." | translate | format(version) }}
 </small>
 </p>
 <p class="buttons">
-<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Update" | translate }}</button>
+<button type="submit" class="yay">
+{{ icon_img("success.svg") }}{{ "Update" | translate }}
+</button>
 </p>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
 </fieldset>

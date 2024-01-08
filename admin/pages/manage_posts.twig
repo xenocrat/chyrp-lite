@@ -7,7 +7,9 @@
 <fieldset role="presentation">
 <label for="query">
 {{ "Search&hellip;" | translate }}
-<a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
+<a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem">
+{{- icon_img("help.svg", "help" | translate) -}}
+</a>
 </label>
 <input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true, true) }}" id="query">
 <button type="submit">{{ "Search" | translate }}</button>
@@ -29,7 +31,7 @@
 {% for post in posts.paginated %}
 <tr id="post_{{ post.id }}" class="post {{ post.status_class }}">
 <td class="post_title title main">
-<a href="{{ post.url() }}">{{ post.title() | striptags | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
+<a href="{{ post.url() }}">{{ post.title() | striptags | oneof("[Untitled]" | translate) | truncate(40) }}</a>
 </td>
 <td class="post_date date">
 {{ post.created_at | time }}
@@ -42,10 +44,10 @@
 </td>
 {{ trigger.call("manage_posts_column", post) }}
 <td class="controls">
-{{ post.edit_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">', null, null, "emblem") }}
+{{ post.edit_link(icon_img("edit.svg", "edit" | translate), null, null, "emblem") }}
 </td>
 <td class="controls">
-{{ post.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="' ~ ('delete' | translate) ~ '">', null, null, "emblem") }}
+{{ post.delete_link(icon_img("delete.svg", "delete" | translate), null, null, "emblem") }}
 </td>
 </tr>
 {% else %}

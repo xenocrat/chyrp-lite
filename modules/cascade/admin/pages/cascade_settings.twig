@@ -7,12 +7,17 @@
 <form id="cascade_settings" class="split" action="{{ url('cascade_settings') }}" method="post" accept-charset="UTF-8">
 <fieldset role="presentation">
 <p>
-<label for="cascade_auto">{{ "Automatic" | translate("cascade") }}
-</label><input type="checkbox" class="checkbox" name="auto" id="cascade_auto"{{ site.module_cascade.ajax_scroll_auto | checked }}>
-<small>{{ "Load more posts when the visitor scrolls to the bottom of the page?" | translate("cascade") }}</small>
+<label for="cascade_auto">{{ "Automatic" | translate("cascade") }}</label>
+{#- -#}
+<input type="checkbox" class="checkbox" name="auto" id="cascade_auto"{{ site.module_cascade.ajax_scroll_auto | checked }}>
+<small>
+{{ "Load more posts when the visitor scrolls to the bottom of the page?" | translate("cascade") }}
+</small>
 </p>
 <p class="buttons">
-<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Update" | translate }}</button>
+<button type="submit" class="yay">
+{{ icon_img("success.svg") }}{{ "Update" | translate }}
+</button>
 </p>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
 </fieldset>

@@ -7,7 +7,9 @@
 <fieldset role="presentation">
 <label for="query">
 {{ "Search&hellip;" | translate }}
-<a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
+<a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem">
+{{- icon_img("help.svg", "help" | translate) -}}
+</a>
 </label>
 <input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true, true) }}" id="query">
 <button type="submit">{{ "Search" | translate }}</button>
@@ -37,7 +39,7 @@
 <input type="checkbox" name="post[{{ loop.index0 }}]" value="{{ post.id }}" id="post_checkbox_{{ post.id }}" aria-label="{{ 'Select' | translate | fix(true) }}">
 </td>
 <td class="post_title title main">
-<a class="edit_tag" href="{{ post.url() }}">{{ post.title() | striptags | oneof("[Untitled]" | translate) | truncate(40, "&hellip;", true) }}</a>
+<a class="edit_tag" href="{{ post.url() }}">{{ post.title() | striptags | oneof("[Untitled]" | translate) | truncate(40) }}</a>
 </td>
 <td class="post_tags list">
 {% for name, clean in post.tags %}
@@ -46,15 +48,16 @@
 </td>
 <td class="controls">
 {% if post.editable() %}
-<a class="tags_edit_link edit_link emblem" href="{{ url('edit_tags/id/' ~ post.id) }}">{{ '<img src="' ~ site.chyrp_url ~ '/admin/images/icons/edit.svg" alt="' ~ ('edit' | translate) ~ '">' }}</a>
+<a class="tags_edit_link edit_link emblem" href="{{ url('edit_tags/id/' ~ post.id) }}">
+{{- icon_img("edit.svg", "edit" | translate) -}}
+</a>
 {% endif %}
 </td>
 </tr>
 {% else %}
 <tr>
 <td class="placeholder">
-<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/failure.svg" alt="">
-{{ "No results" | translate }}
+{{ icon_img("failure.svg", "", "emblem") }} {{ "No results" | translate }}
 </td>
 </tr>
 {% endfor %}

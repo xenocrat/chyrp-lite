@@ -12,15 +12,16 @@
 {% if page.children is not empty %}
 <p>
 <label for="destroy_children">{{ "Delete children?" | translate }}</label>
+{#- -#}
 <input type="checkbox" name="destroy_children" id="destroy_children">
 </p>
 {% endif %}
 <div class="confirmation">
 <button name="destroy" value="indubitably" class="boo">
-<img src="{{ site.chyrp_url }}/admin/images/icons/destroy.svg" alt="">{{ "Delete!" | translate }}
+{{ icon_img("destroy.svg") }}{{ "Delete!" | translate }}
 </button>
 <button name="destroy" value="undecidedly" type="submit" class="yay">
-<img src="{{ site.chyrp_url }}/admin/images/icons/cancel.svg" alt="">{{ "Cancel" | translate }}
+{{ icon_img("cancel.svg") }}{{ "Cancel" | translate }}
 </button>
 </div>
 <input type="hidden" name="id" value="{{ page.id }}" id="id">

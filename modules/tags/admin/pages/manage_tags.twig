@@ -10,7 +10,7 @@
 <button type="submit">{{ "Search" | translate }}</button>
 {% if visitor.group.can("edit_draft", "edit_post", "delete_draft", "delete_post") %}
 <a href="{{ url('posts_tagged') }}" class="button yay">
-<img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="">{{ "New Tag" | translate }}
+{{ icon_img("add.svg") }}{{ "New Tag" | translate }}
 </a>
 {% endif %}
 </fieldset>
@@ -35,20 +35,23 @@
 </td>
 <td class="controls">
 {% if visitor.group.can("edit_post") %}
-<a class="tag_edit_link edit_link emblem" href="{{ url('rename_tag/clean/' ~ (tag.clean | url_encode)) }}"><img src="{{ site.chyrp_url }}/admin/images/icons/edit.svg" alt="{{ 'edit' | translate }}"></a>
+<a class="tag_edit_link edit_link emblem" href="{{ url('rename_tag/clean/' ~ (tag.clean | url_encode)) }}">
+{{- icon_img("edit.svg", "edit" | translate) -}}
+</a>
 {% endif %}
 </td>
 <td class="controls">
 {% if visitor.group.can("edit_post") %}
-<a class="tag_delete_link delete_link emblem" href="{{ url('delete_tag/clean/' ~ (tag.clean | url_encode)) }}"><img src="{{ site.chyrp_url }}/admin/images/icons/delete.svg" alt="{{ 'delete' | translate }}"></a>
+<a class="tag_delete_link delete_link emblem" href="{{ url('delete_tag/clean/' ~ (tag.clean | url_encode)) }}">
+{{- icon_img("delete.svg", "delete" | translate) -}}
+</a>
 {% endif %}
 </td>
 </tr>
 {% else %}
 <tr>
 <td class="placeholder">
-<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/failure.svg" alt="">
-{{ "No results" | translate }}
+{{ icon_img("failure.svg", "", "emblem") }} {{ "No results" | translate }}
 </td>
 </tr>
 {% endfor %}

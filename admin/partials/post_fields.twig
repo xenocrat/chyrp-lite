@@ -24,7 +24,9 @@
 <p class="main_options">
 <label for="{{ field_id }}">
 {% if field.help is defined %}
-<a href="{{ url('help/id/' ~ (field.help | url_encode)) }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
+<a href="{{ url('help/id/' ~ (field.help | url_encode)) }}" rel="help" target="_blank" class="help emblem">
+{{- icon_img("help.svg", "help" | translate) -}}
+</a>
 {% endif %}
 {{ field.label }}
 {% if field.note is defined %}
@@ -46,7 +48,9 @@
 {% endif %}
 {% elseif field.type == "text_block" %}
 <span id="{{ field_name }}_field_toolbar" class="options_toolbar" role="toolbar">
-{% if field_markdown is not empty %}<a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="{{ 'Markdown' | translate }}"></a>
+{% if field_markdown is not empty %}<a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown">
+{{- icon_img("markdown.svg", "Markdown" | translate) -}}
+</a>
 {% endif %}</span>
 <textarea id="{{ field_id }}" name="{{ field_name }}" rows="12"{{ field_preview ~ field_markdown ~ field_required }}>{{ field_value | fix(false, true) }}</textarea>
 <span id="{{ field_name }}_field_tray" class="options_tray" role="status"></span>
@@ -56,7 +60,9 @@
 <select id="{{ field_id }}" name="{{ field_name }}">
 {% for value, name in field.options %}
 {% set option_selected = attribute(post, field.attr) is defined ? value | selected(attribute(post, field.attr)) : "" %}
-<option value="{{ value | fix(true) }}"{{ option_selected }}>{{ name | fix }}</option>
+<option value="{{ value | fix(true) }}"{{ option_selected }}>
+{{ name | fix }}
+</option>
 {% endfor %}
 </select>
 {% endif %}
@@ -72,20 +78,32 @@
 <label for="status">{{ "Status" | translate }}</label>
 <select id="status" name="status">
 {% set option_selected = post is defined ? post.status | selected("draft") : "" %}
-<option value="draft"{{ option_selected }}>{{ "Draft" | translate }}</option>
+<option value="draft"{{ option_selected }}>
+{{ "Draft" | translate }}
+</option>
 {% set option_selected = post is defined ? post.status | selected("public") : " selected" %}
-<option value="public"{{ option_selected }}>{{ "Public" | translate }}</option>
+<option value="public"{{ option_selected }}>
+{{ "Public" | translate }}
+</option>
 {% set option_selected = post is defined ? post.status | selected("private") : "" %}
-<option value="private"{{ option_selected }}>{{ "Private" | translate }}</option>
+<option value="private"{{ option_selected }}>
+{{ "Private" | translate }}
+</option>
 {% set option_selected = post is defined ? post.status | selected("scheduled") : "" %}
-<option value="scheduled"{{ option_selected }}>{{ "Scheduled" | translate }}</option>
-<optgroup label="{{ "Visible only to a group of users:" | translate }}">
+<option value="scheduled"{{ option_selected }}>
+{{ "Scheduled" | translate }}
+</option>
+<optgroup label="{{ 'Visible only to a group of users:' | translate }}">
 {% set option_selected = post is defined ? post.status | selected("registered_only") : "" %}
-<option value="registered_only"{{ option_selected }}>{{ "All registered users" | translate }}</option>
+<option value="registered_only"{{ option_selected }}>
+{{ "All registered users" | translate }}
+</option>
 {% if groups is not empty %}
 {% for group in groups %}
 {% set option_selected = post is defined ? post.status | selected("{" ~ group.id ~ "}") : "" %}
-<option value="{{ '{' ~ group.id ~ '}' }}"{{ option_selected }}>{{ group.name | fix }}</option>
+<option value="{{ '{' ~ group.id ~ '}' }}"{{ option_selected }}>
+{{ group.name | fix }}
+</option>
 {% endfor %}
 {% endif %}
 </optgroup>
@@ -101,7 +119,9 @@
 </p>
 <p class="more_options_option">
 <label for="slug">
-<a href="{{ url('help/id/slugs') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
+<a href="{{ url('help/id/slugs') }}" rel="help" target="_blank" class="help emblem">
+{{- icon_img("help.svg", "help" | translate) -}}
+</a>
 {{ "Slug" | translate }}
 </label>
 <input id="slug" class="text" type="text" name="slug" value="{{ post is defined ? post.clean | fix(true) : '' }}" maxlength="80">
@@ -120,7 +140,9 @@
 <p class="more_options_option">
 <label for="{{ field_id }}">
 {% if field.help is defined %}
-<a href="{{ url('help/id/' ~ (field.help | url_encode)) }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
+<a href="{{ url('help/id/' ~ (field.help | url_encode)) }}" rel="help" target="_blank" class="help emblem">
+{{- icon_img("help.svg", "help" | translate) -}}
+</a>
 {% endif %}
 {{ field.label }}
 {% if field.note is defined %}
@@ -143,7 +165,9 @@
 <select id="{{ field_id }}" name="{{ field_name }}">
 {% for option in field.options %}
 {% set option_selected = option.selected | selected(true) %}
-<option value="{{ option.value | fix(true) }}"{{ option_selected }}>{{ option.name | fix }}</option>
+<option value="{{ option.value | fix(true) }}"{{ option_selected }}>
+{{ option.name | fix }}
+</option>
 {% endfor %}
 </select>
 {% endif %}
@@ -157,27 +181,27 @@
 {% if route.action == "edit_post" %}
 {% if visitor.group.can("add_post") and post.status == "draft" %}
 <button type="submit" class="yay" name="publish" value="true">
-<img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="">{{ "Publish" | translate }}
+{{ icon_img("add.svg") }}{{ "Publish" | translate }}
 </button>
 <button type="submit">
-<img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="">{{ "Save" | translate }}
+{{ icon_img("save.svg") }}{{ "Save" | translate }}
 </button>
 {% else %}
 <button type="submit">
-<img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="">{{ "Save" | translate }}
+{{ icon_img("save.svg") }}{{ "Save" | translate }}
 </button>
 <button type="submit" class="boo" name="cancel" value="true" data-confirm="">
-<img src="{{ site.chyrp_url }}/admin/images/icons/discard.svg" alt="">{{ "Cancel" | translate }}
+{{ icon_img("discard.svg") }}{{ "Cancel" | translate }}
 </button>
 {% endif %}
 {% else %}
 {% if visitor.group.can("add_post") %}
 <button type="submit" class="yay">
-<img src="{{ site.chyrp_url }}/admin/images/icons/add.svg" alt="">{{ "Publish" | translate }}
+{{ icon_img("add.svg") }}{{ "Publish" | translate }}
 </button>
 {% endif %}
 <button type="submit" name="draft" value="true">
-<img src="{{ site.chyrp_url }}/admin/images/icons/draft.svg" alt="">{{ "Save" | translate }}
+{{ icon_img("draft.svg") }}{{ "Save" | translate }}
 </button>
 {% endif %}
 </div>

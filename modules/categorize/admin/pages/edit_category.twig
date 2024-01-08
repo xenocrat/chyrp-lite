@@ -8,6 +8,7 @@
 <fieldset role="presentation">
 <p>
 <label for="name">{{ "Name" | translate("categorize") }}</label>
+{#- -#}
 <input class="text" type="text" name="name" value="{{ category.name | fix(true, true) }}" id="name" maxlength="128" required>
 </p>
 <p>
@@ -15,6 +16,7 @@
 {{ "Slug" | translate("categorize") }}
 <span class="sub">{{ "(optional)" | translate }}</span>
 </label>
+{#- -#}
 <input class="text" type="text" name="clean" value="{{ category.clean | fix(true) }}" id="clean" maxlength="128">
 <small>
 {{ "The slug is the URL-friendly identifying name for this category." | translate("categorize") }}
@@ -22,13 +24,16 @@
 </p>
 <p>
 <label for="show_on_home">{{ "Listed?" | translate("categorize") }}</label>
+{#- -#}
 <input class="checkbox" type="checkbox" name="show_on_home" id="show_on_home"{{ category.show_on_home | checked }}>
 <small>
 {{ "Do you want to include this category in the categories list?" | translate("categorize") }}
 </small>
 </p>
 <p class="buttons">
-<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Update" | translate("categorize") }}</button>
+<button type="submit" class="yay">
+{{ icon_img("success.svg") }}{{ "Update" | translate("categorize") }}
+</button>
 </p>
 <input type="hidden" name="id" value="{{ category.id }}" id="id">
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">

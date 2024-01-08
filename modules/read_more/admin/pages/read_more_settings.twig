@@ -7,17 +7,22 @@
 <form id="cascade_settings" class="split" action="{{ url('read_more_settings') }}" method="post" accept-charset="UTF-8">
 <fieldset role="presentation">
 <p>
-<label for="apply_to_feeds">{{ "Apply to Feeds" | translate("read_more") }}
-</label><input type="checkbox" class="checkbox" name="apply_to_feeds" id="apply_to_feeds"{{ site.module_read_more.apply_to_feeds | checked }}>
+<label for="apply_to_feeds">{{ "Apply to Feeds" | translate("read_more") }}</label>
+{#- -#}
+<input type="checkbox" class="checkbox" name="apply_to_feeds" id="apply_to_feeds"{{ site.module_read_more.apply_to_feeds | checked }}>
 </p>
 <p>
 <label for="default_text">
 {{ "Default Text" | translate("read_more") }}
 <span class="sub">{{ "(optional)" | translate }}</span>
-</label><input class="text" type="text" name="default_text" value="{{ site.module_read_more.default_text | fix(true, true) }}" id="default_text" maxlength="128">
+</label>
+{#- -#}
+<input class="text" type="text" name="default_text" value="{{ site.module_read_more.default_text | fix(true, true) }}" id="default_text" maxlength="128">
 </p>
 <p class="buttons">
-<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Update" | translate }}</button>
+<button type="submit" class="yay">
+{{ icon_img("success.svg") }}{{ "Update" | translate }}
+</button>
 </p>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
 </fieldset>

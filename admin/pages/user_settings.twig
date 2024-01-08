@@ -7,44 +7,55 @@
 <form id="user_settings" class="split" action="{{ url('user_settings') }}" method="post" accept-charset="UTF-8">
 <fieldset role="presentation">
 <p>
-<label for="can_register">{{ "Registration" | translate }}
-</label><input class="checkbox" type="checkbox" name="can_register" id="can_register"{{ site.can_register | checked }}>
+<label for="can_register">{{ "Registration" | translate }}</label>
+{#- -#}
+<input class="checkbox" type="checkbox" name="can_register" id="can_register"{{ site.can_register | checked }}>
 <small>
 {{ "Allow people to register." | translate }}
 </small>
 </p>
 <p>
-<label for="email_correspondence">{{ "Email Correspondence" | translate }}
-</label><input class="checkbox" type="checkbox" name="email_correspondence" id="email_correspondence"{{ site.email_correspondence | checked }}>
+<label for="email_correspondence">{{ "Email Correspondence" | translate }}</label>
+{#- -#}
+<input class="checkbox" type="checkbox" name="email_correspondence" id="email_correspondence"{{ site.email_correspondence | checked }}>
 <small>
 {{ "Allow the site to send email correspondence to users?" | translate }}
 </small>
 </p>
 <p>
-<label for="email_activation">{{ "Activate by Email" | translate }}
-</label><input class="checkbox" type="checkbox" name="email_activation" id="email_activation"{{ site.email_activation | checked }}>
+<label for="email_activation">{{ "Activate by Email" | translate }}</label>
+{#- -#}
+<input class="checkbox" type="checkbox" name="email_activation" id="email_activation"{{ site.email_activation | checked }}>
 <small>
 {{ "Should users activate by email?" | translate }}
 </small>
 </p>
 <p>
-<label for="default_group">{{ "Default User Group" | translate }}
-</label><select name="default_group" id="default_group">
+<label for="default_group">{{ "Default User Group" | translate }}</label>
+{#- -#}
+<select name="default_group" id="default_group">
 {% for group in groups %}
-<option value="{{ group.id }}"{{ group.id | selected(site.default_group) }}>{{ group.name }}</option>
+<option value="{{ group.id }}"{{ group.id | selected(site.default_group) }}>
+{{ group.name }}
+</option>
 {% endfor %}
 </select>
 </p>
 <p>
-<label for="guest_group">{{ "&#8220;Guest&#8221; Group" | translate }}
-</label><select name="guest_group" id="guest_group">
+<label for="guest_group">{{ "&#8220;Guest&#8221; Group" | translate }}</label>
+{#- -#}
+<select name="guest_group" id="guest_group">
 {% for group in groups %}
-<option value="{{ group.id }}"{{ group.id | selected(site.guest_group) }}>{{ group.name }}</option>
+<option value="{{ group.id }}"{{ group.id | selected(site.guest_group) }}>
+{{ group.name }}
+</option>
 {% endfor %}
 </select>
 </p>
 <p class="buttons">
-<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Update" | translate }}</button>
+<button type="submit" class="yay">
+{{ icon_img("success.svg") }}{{ "Update" | translate }}
+</button>
 </p>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
 </fieldset>

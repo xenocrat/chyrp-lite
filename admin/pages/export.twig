@@ -8,26 +8,38 @@
 <fieldset role="presentation">
 {% set field_aria = "filter (optional)" | translate %}
 <p>
-<label for="posts">{{ "Posts" | translate }}
-</label><input class="checkbox" type="checkbox" name="posts" value="" id="posts" checked="checked">
+<label for="posts">
+{{ "Posts" | translate }}
+</label>
+{#- -#}
+<input class="checkbox" type="checkbox" name="posts" value="" id="posts" checked="checked">
 <input class="text filter_text" type="text" name="filter_posts" value="" id="filter_posts" aria-label="{{ field_aria }}" placeholder="{{ field_aria }}">
 <a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
 </p>
 <p>
-<label for="pages">{{ "Pages" | translate }}
-</label><input class="checkbox" type="checkbox" name="pages" value="" id="pages" checked="checked">
+<label for="pages">
+{{ "Pages" | translate }}
+</label>
+{#- -#}
+<input class="checkbox" type="checkbox" name="pages" value="" id="pages" checked="checked">
 <input class="text filter_text" type="text" name="filter_pages" value="" id="filter_pages" aria-label="{{ field_aria }}" placeholder="{{ field_aria }}">
 <a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
 </p>
 <p>
-<label for="groups">{{ "Groups" | translate }}
-</label><input class="checkbox" type="checkbox" name="groups" value="" id="groups" checked="checked">
+<label for="groups">
+{{ "Groups" | translate }}
+</label>
+{#- -#}
+<input class="checkbox" type="checkbox" name="groups" value="" id="groups" checked="checked">
 <input class="text filter_text" type="text" name="filter_groups" value="" id="filter_groups" aria-label="{{ field_aria }}" placeholder="{{ field_aria }}">
 <a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
 </p>
 <p>
-<label for="users">{{ "Users" | translate }}
-</label><input class="checkbox" type="checkbox" name="users" value="" id="users" checked="checked">
+<label for="users">
+{{ "Users" | translate }}
+</label>
+{#- -#}
+<input class="checkbox" type="checkbox" name="users" value="" id="users" checked="checked">
 <input class="text filter_text" type="text" name="filter_users" value="" id="filter_users" aria-label="{{ field_aria }}" placeholder="{{ field_aria }}">
 <a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
 <small>
@@ -35,13 +47,18 @@
 </small>
 </p>
 <p>
-<label for="uploads">{{ "Uploads Manifest" | translate }}
-</label><input class="checkbox" type="checkbox" name="uploads" value="" id="uploads" checked="checked">
+<label for="uploads">
+{{ "Uploads Manifest" | translate }}
+</label>
+{#- -#}
+<input class="checkbox" type="checkbox" name="uploads" value="" id="uploads" checked="checked">
 <input class="text filter_text" type="text" name="filter_uploads" value="" id="filter_uploads" aria-label="{{ field_aria }}" placeholder="{{ field_aria }}">
 </p>
 {{ trigger.call("export_choose") }}
 <p class="buttons">
-<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Export" | translate }}</button>
+<button type="submit" class="yay">
+{{ icon_img("success.svg") }}{{ "Export" | translate }}
+</button>
 </p>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
 </fieldset>

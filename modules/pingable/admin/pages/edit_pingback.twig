@@ -8,10 +8,13 @@
 <fieldset role="presentation">
 <p>
 <label for="title">{{ "Title" | translate("pingable") }}</label>
+{#- -#}
 <input class="text" type="text" name="title" value="{{ pingback.title | fix(true, true) }}" id="title" maxlength="2048" required>
 </p>
 <p class="buttons">
-<button type="submit" class="yay"><img src="{{ site.chyrp_url }}/admin/images/icons/success.svg" alt="">{{ "Update" | translate("pingable") }}</button>
+<button type="submit" class="yay">
+{{ icon_img("success.svg") }}{{ "Update" | translate("pingable") }}
+</button>
 </p>
 <input type="hidden" name="id" value="{{ pingback.id }}" id="id">
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
