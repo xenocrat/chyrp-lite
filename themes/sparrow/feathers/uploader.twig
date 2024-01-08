@@ -19,7 +19,7 @@
 {% else %}
 <section class="attachment" aria-label="{{ 'File Attachment' | translate }}">
 <h3>{{ "File attachment:" | translate }}</h3>
-<a href="{{ file.name | download }}">{{ file.name | fix | truncate(40, "&hellip;", true) }}</a>
+<a href="{{ file.name | download }}">{{ file.name | fix | truncate(40) }}</a>
 ({{ file.size | filesizeformat }})
 </section>
 {% endif %}
