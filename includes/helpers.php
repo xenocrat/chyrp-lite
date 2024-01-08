@@ -1353,12 +1353,15 @@
     function truncate(
         $text,
         $length = 100,
-        $ellipsis = "...",
+        $ellipsis = null,
         $exact = false,
         $encoding = "UTF-8"
     ): string {
         if (mb_strlen($text, $encoding) <= $length)
             return $text;
+
+        if (!isset($ellipsis))
+            $ellipsis = mb_chr(0x2026, $encoding);
 
         $breakpoint = $length - mb_strlen($ellipsis, $encoding);
         $truncation = mb_substr($text, 0, $breakpoint, $encoding);
