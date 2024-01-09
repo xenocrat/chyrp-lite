@@ -313,7 +313,7 @@
                 );
 
             fallback($_GET['query'], "");
-            list($where, $params) = keywords(
+            list($where, $params, $order) = keywords(
                 $_GET['query'],
                 "post_attributes.value LIKE :query OR url LIKE :query",
                 "posts"
@@ -351,7 +351,8 @@
                         array(
                             "placeholders" => true,
                             "drafts" => true,
-                            "where" => array("id" => $ids)
+                            "where" => array("id" => $ids),
+                            "order" => $order
                         )
                     ),
                     $admin->post_limit
