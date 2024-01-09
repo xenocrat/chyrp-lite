@@ -476,7 +476,7 @@
                 );
 
             fallback($_GET['query'], "");
-            list($where, $params) = keywords(
+            list($where, $params, $order) = keywords(
                 $_GET['query'],
                 "post_attributes.value LIKE :query OR url LIKE :query",
                 "posts"
@@ -507,7 +507,8 @@
                         array(
                             "placeholders" => true,
                             "drafts" => true,
-                            "where" => array("id" => $ids)
+                            "where" => array("id" => $ids),
+                            "order" => $order
                         )
                     ),
                     $this->post_limit
@@ -905,7 +906,7 @@
                 );
 
             fallback($_GET['query'], "");
-            list($where, $params) = keywords(
+            list($where, $params, $order) = keywords(
                 $_GET['query'],
                 "title LIKE :query OR body LIKE :query",
                 "pages"
@@ -918,7 +919,8 @@
                         array(
                             "placeholders" => true,
                             "where" => $where,
-                            "params" => $params
+                            "params" => $params,
+                            "order" => $order
                         )
                     ),
                     $this->post_limit))
@@ -1389,7 +1391,7 @@
                 );
 
             fallback($_GET['query'], "");
-            list($where, $params) = keywords(
+            list($where, $params, $order) = keywords(
                 $_GET['query'],
                 "login LIKE :query OR full_name LIKE :query OR email LIKE :query OR website LIKE :query",
                 "users"
@@ -1403,7 +1405,8 @@
                             array(
                                 "placeholders" => true,
                                 "where" => $where,
-                                "params" => $params
+                                "params" => $params,
+                                "order" => $order
                             )
                         ),
                         $this->post_limit
