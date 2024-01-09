@@ -1126,14 +1126,20 @@
             ) {
                 # Filter by "author" (login).
                 $user = new User(array("login" => $val));
-                $where["user_id"] = ($user->no_results) ? 0 : $user->id ;
+
+                $where["user_id"] = ($user->no_results) ?
+                    0 :
+                    $user->id ;
             } elseif (
                 $attr == "group" and
                 isset($columns["group_id"])
             ) {
                 # Filter by group name.
                 $group = new Group(array("name" => $val));
-                $where["group_id"] = ($group->no_results) ? 0 : $group->id ;
+
+                $where["group_id"] = ($group->no_results) ?
+                    0 :
+                    $group->id ;
             } elseif (
                 in_array($attr, $dates) and
                 isset($columns["created_at"])
@@ -1198,7 +1204,10 @@
             $params[":query"] = "%".implode(" ", $strings)."%";
         }
 
-        $order = !empty($ordering) ? implode(",", $ordering) : null ;
+        $order = empty($ordering) ?
+            null :
+            implode(", ", $ordering) ;
+
         $search = array($where, $params, $order);
         Trigger::current()->filter($search, "keyword_search", $query, $plain);
         return $search;
@@ -1214,10 +1223,11 @@
      *
      * Parameters:
      *     $string - The lowercase string to pluralize.
-     *     $number - If supplied, and this number is 1, it will not pluralize.
+     *     $number - A number to determine pluralization.
      *
      * Returns:
-     *     The supplied word with a trailing "s" added, or a non-normative pluralization.
+     *     The supplied word with a trailing "s" added,
+     *     or the correct non-normative pluralization.
      */
     function pluralize($string, $number = null): string {
         $uncountable = array(
