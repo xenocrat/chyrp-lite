@@ -11,4 +11,7 @@
 <p>
 {{ "Use the syntax <code>keyword:value;</code> to quickly match specific results where <code>keyword</code> is equal to <code>value</code>. The keyword can be the name of a database column, the name of an author or a group, or a date/time. For example: <code>author:Foo;year:2016;</code> would filter the posts table to display only posts created by Foo in 2016." | translate }}
 </p>
+<p>
+{{ "Use the syntax <code>ASC:column;</code> or <code>DESC:column;</code> to sort the results in ascending or descending order. For example: <code>DESC:user_id;ASC:id;</code> would sort a table of posts in descending order of user ID and then ascending order of post ID." | translate }}
+</p>
 {% endblock %}
