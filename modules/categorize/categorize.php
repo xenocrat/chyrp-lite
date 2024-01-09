@@ -274,7 +274,7 @@
                 );
 
             fallback($_GET['query'], "");
-            list($where, $params) = keywords(
+            list($where, $params, $order) = keywords(
                 $_GET['query'],
                 "name LIKE :query",
                 "categorize"
@@ -283,7 +283,8 @@
             $categorize = Category::find(
                 array(
                     "where" => $where,
-                    "params" => $params
+                    "params" => $params,
+                    "order" => $order
                 )
             );
 
