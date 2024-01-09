@@ -441,13 +441,14 @@
                 );
 
             fallback($_GET['query'], "");
-            list($where, $params) = keywords(
+            list($where, $params, $order) = keywords(
                 $_GET['query'],
                 "body LIKE :query",
                 "comments"
             );
 
-            $where["status not"] = Comment::STATUS_SPAM;
+            $where[] = "status != '".Comment::STATUS_SPAM."'";
+            fallback($order, "post_id DESC, created_at ASC");
 
             $visitor = Visitor::current();
 
@@ -463,7 +464,7 @@
                                 "placeholders" => true,
                                 "where" => $where,
                                 "params" => $params,
-                                "order" => "post_id DESC, created_at ASC"
+                                "order" => $order
                             )
                         ),
                         $admin->post_limit
@@ -488,13 +489,14 @@
                 );
 
             fallback($_GET['query'], "");
-            list($where, $params) = keywords(
+            list($where, $params, $order) = keywords(
                 $_GET['query'],
                 "body LIKE :query",
                 "comments"
             );
 
-            $where["status"] = Comment::STATUS_SPAM;
+            $where[] = "status = '".Comment::STATUS_SPAM."'";
+            fallback($order, "post_id DESC, created_at ASC");
 
             $admin->display(
                 "pages".DIR."manage_spam",
@@ -505,7 +507,7 @@
                                 "placeholders" => true,
                                 "where" => $where,
                                 "params" => $params,
-                                "order" => "post_id DESC, created_at ASC"
+                                "order" => $order
                             )
                         ),
                         $admin->post_limit
@@ -846,8 +848,7 @@
                     conds:array(
                         "post_id" => $post->id,
                         "created_at >" => $last,
-                        "status not" => Comment::STATUS_SPAM,
-                          Comment::redactions()
+                        Comment::redactions()
                     ),
                     order:array("created_at ASC")
                 );
@@ -1217,10 +1218,7 @@
                 $counts = SQL::current()->select(
                     tables:"comments",
                     fields:array("COUNT(post_id) AS total", "post_id AS post_id"),
-                    conds:array(
-                        "status not" => Comment::STATUS_SPAM,
-                        Comment::redactions()
-                    ),
+                    conds:array(Comment::redactions()),
                     group:"post_id"
                 );
 
@@ -1248,10 +1246,7 @@
                 $times = SQL::current()->select(
                     tables:"comments",
                     fields:array("MAX(created_at) AS latest", "post_id"),
-                    conds:array(
-                        "status not" => Comment::STATUS_SPAM,
-                        Comment::redactions()
-                    ),
+                    conds:array(Comment::redactions()),
                     group:"post_id"
                 );
 
@@ -1281,10 +1276,7 @@
                 $counts = SQL::current()->select(
                     tables:"comments",
                     fields:array("COUNT(user_id) AS total", "user_id as user_id"),
-                    conds:array(
-                        "status not" => Comment::STATUS_SPAM,
-                        Comment::redactions()
-                    ),
+                    conds:array(Comment::redactions()),
                     group:"user_id"
                 );
 

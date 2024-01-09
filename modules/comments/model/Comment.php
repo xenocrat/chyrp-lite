@@ -32,10 +32,8 @@
                 (isset($options["skip_where"]) and $options["skip_where"])
             );
 
-            if (!$skip_where) {
-                $options["where"]["status not"] = self::STATUS_SPAM;
+            if (!$skip_where)
                 $options["where"][] = self::redactions();
-            }
 
             parent::grab($this, $comment_id, $options);
 
@@ -65,10 +63,8 @@
                 (isset($options["skip_where"]) and $options["skip_where"])
             );
 
-            if (!$skip_where) {
-                $options["where"]["status not"] = self::STATUS_SPAM;
+            if (!$skip_where)
                 $options["where"][] = self::redactions();
-            }
 
             fallback($options["order"], "created_at ASC");
             return parent::search(
@@ -526,13 +522,17 @@
                     $_SESSION['comments']
                 );
 
-            return "status != '".
-                   self::STATUS_DENIED.
-                   "' OR ((user_id != 0 AND user_id = ".
-                   $user_id.
-                   ") OR (id IN ".
-                   $id_list.
-                   "))";
+            return "(".
+                   "status != '".self::STATUS_SPAM."'".
+                   " AND ".
+                   "status != '".self::STATUS_DENIED."'".
+                   ")".
+                   " OR ".
+                   "(".
+                   "(user_id != 0 AND user_id = ".$user_id.")".
+                   " OR ".
+                   "(id IN ".$id_list.")".
+                   ")";
         }
 
         /**
