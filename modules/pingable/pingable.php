@@ -211,7 +211,7 @@
                 );
 
             fallback($_GET['query'], "");
-            list($where, $params) = keywords(
+            list($where, $params, $order) = keywords(
                 $_GET['query'],
                 "title LIKE :query",
                 "pingbacks"
@@ -225,7 +225,8 @@
                             array(
                                 "placeholders" => true,
                                 "where" => $where,
-                                "params" => $params
+                                "params" => $params,
+                                "order" => $order
                             )
                         ),
                         $admin->post_limit
