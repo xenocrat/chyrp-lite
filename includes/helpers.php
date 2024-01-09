@@ -1062,7 +1062,7 @@
         $trimmed = trim($query);
 
         if (empty($trimmed))
-            return array(array(), array());
+            return array(array(), array(), null);
 
         $sql = SQL::current();
 
@@ -1075,9 +1075,18 @@
         $where    = array(); # Parameters validated and added to WHERE.
         $filters  = array(); # Table column filters to be validated.
         $params   = array(); # Parameters for the non-keyword filter.
-        $columns  = !empty($table) ? $sql->select($table)->fetch() : array() ;
+        $ordering = array(); # Requested ordering for the query results.
 
-        foreach (preg_split("/\s(?=\w+:)|;/", $query, -1, PREG_SPLIT_NO_EMPTY) as $fragment) {
+        $columns  = !empty($table) ?
+            $sql->select($table)->fetch() : array() ;
+
+        foreach (
+            preg_split("/\s(?=\w+:)|;/",
+                $query,
+                -1,
+                PREG_SPLIT_NO_EMPTY
+            )
+        as $fragment) {
             if (!substr_count($fragment, ":"))
                 $strings[] = trim($fragment);
             else
@@ -1111,15 +1120,24 @@
             if ($attr == "password") {
                 # Prevent searches for hashed passwords.
                 $strings[] = $attr;
-            } elseif (isset($columns["user_id"]) and $attr == "author") {
+            } elseif (
+                $attr == "author" and
+                isset($columns["user_id"])
+            ) {
                 # Filter by "author" (login).
                 $user = new User(array("login" => $val));
                 $where["user_id"] = ($user->no_results) ? 0 : $user->id ;
-            } elseif (isset($columns["group_id"]) and $attr == "group") {
+            } elseif (
+                $attr == "group" and
+                isset($columns["group_id"])
+            ) {
                 # Filter by group name.
                 $group = new Group(array("name" => $val));
                 $where["group_id"] = ($group->no_results) ? 0 : $group->id ;
-            } elseif (isset($columns["created_at"]) and in_array($attr, $dates)) {
+            } elseif (
+                in_array($attr, $dates) and
+                isset($columns["created_at"])
+            ) {
                 # Filter by date/time of creation.
                 $created_at[$attr] = $val;
                 $where["created_at LIKE"] = (
@@ -1130,7 +1148,10 @@
                     $created_at["minute"].":".
                     $created_at["second"]."%"
                 );
-            } elseif (isset($columns["joined_at"]) and in_array($attr, $dates)) {
+            } elseif (
+                in_array($attr, $dates) and
+                isset($columns["joined_at"])
+            ) {
                 # Filter by date/time of joining.
                 $joined_at[$attr] = $val;
                 $where["joined_at LIKE"] = (
@@ -1141,18 +1162,35 @@
                     $joined_at["minute"].":".
                     $joined_at["second"]."%"
                 );
+            } elseif (
+                $attr == "ASC" and
+                !is_numeric($val) and
+                isset($columns[$val])
+            ) {
+                # Ascending order.
+                $ordering[] = $val." ASC";
+            } elseif (
+                $attr == "DESC" and
+                !is_numeric($val) and
+                isset($columns[$val])
+            ) {
+                # Descending order.
+                $ordering[] = $val." DESC";
             } else {
                 # Key => Val expression.
                 $filters[$attr] = $val;
             }
         }
 
-        # Check the validity of keywords if a table name was supplied.
+        # Check the keywords are valid columns of the table.
         foreach ($filters as $attr => $val) {
-            if (isset($columns[$attr]))
+            if (isset($columns[$attr])) {
+                # Column exists: add Key => Val expression.
                 $where[$attr] = $val;
-            else
-                $strings[] = $attr." ".$val; # No such column: add to non-keyword values.
+            } else {
+                # No such column: add to non-keyword values.
+                $strings[] = $attr.":".$val;
+            }
         }
 
         if (!empty($strings)) {
@@ -1160,7 +1198,8 @@
             $params[":query"] = "%".implode(" ", $strings)."%";
         }
 
-        $search = array($where, $params);
+        $order = !empty($ordering) ? implode(",", $ordering) : null ;
+        $search = array($where, $params, $order);
         Trigger::current()->filter($search, "keyword_search", $query, $plain);
         return $search;
     }
