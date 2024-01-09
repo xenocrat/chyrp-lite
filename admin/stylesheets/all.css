@@ -575,7 +575,8 @@ textarea.code {
     font-family: "Cousine webfont", monospace;
     font-style: normal;
 }
-form.filters label {
+form.filters label,
+form.filters small {
     display: block;
 }
 form.split h3,
@@ -906,6 +907,7 @@ div.more_options p input[type="time"],
 div.more_options p input[type="number"],
 div.more_options p input[type="range"],
 div.more_options p input[type="password"],
+div.more_options p input[type="file"],
 div.more_options p select,
 div.more_options p textarea {
     width: 100%;
