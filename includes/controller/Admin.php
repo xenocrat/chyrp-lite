@@ -1779,11 +1779,9 @@
                     array("login" => $_GET['search'])
                 );
 
-                if (!$user->no_results) {
-                    $groups = new Paginator(array($user->group));
-                } else {
-                    $groups = new Paginator(array());
-                }
+                $groups = ($user->no_results) ?
+                    new Paginator(array()) :
+                    new Paginator(array($user->group)) ;
             } else {
                 $groups = new Paginator(
                     Group::find(
@@ -1918,10 +1916,9 @@
                     "/"
                 );
 
-            if (isset($_GET['search']))
-                $uploads = new Paginator(uploaded_search($_GET['search']));
-            else
-                $uploads = new Paginator(uploaded_search());
+            $uploads = !isset($_GET['search']) ?
+                new Paginator(uploaded_search()) :
+                new Paginator(uploaded_search($_GET['search'])) ;
 
             $this->display(
                 "pages".DIR."manage_uploads",
