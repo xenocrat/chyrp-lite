@@ -8,6 +8,11 @@
 <label for="search">{{ "Search&hellip;" | translate }}</label>
 <input class="text filter_text" type="text" name="search" value="{{ GET.search is defined ? GET.search | fix(true, true) : '' }}" id="search">
 <button type="submit">{{ "Search" | translate }}</button>
+{% if visitor.group.can("import_content") %}
+<a href="{{ url('import') }}" class="button yay">
+{{ icon_img("add.svg") }}{{ "Add Files" | translate }}
+</a>
+{% endif %}
 </fieldset>
 </form>
 <h2>{{ GET.search is defined ? "Search Results" | translate : "Uploads" | translate }}</h2>
