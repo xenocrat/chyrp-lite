@@ -349,7 +349,8 @@
                 $page = new self(array("url" => $slug[2]));
 
                 return isset($route) ?
-                    $route->try["page"] = array($page) : $page ;
+                    $route->try["page"] = array($page) :
+                    $page ;
             }
 
             $hierarchy = explode(
@@ -369,7 +370,8 @@
             foreach ($pages as $page) {
                 if ($page->url == end($hierarchy))
                     return isset($route) ?
-                        $route->try["page"] = array($page) : $page ;
+                        $route->try["page"] = array($page) :
+                        $page ;
             }
         }
 
@@ -419,14 +421,16 @@
                     "website"   => $this->user->website,
                     "email"     => $this->user->email,
                     "joined"    => $this->user->joined_at
-                ) :
+                )
+                :
                 array(
                     "id"      => 0,
                     "name"    => __("[Guest]"),
                     "website" => "",
                     "email"   => "",
                     "joined"  => $this->created_at
-                ) ;
+                )
+                ;
 
             return (object) $author;
         }

@@ -161,7 +161,9 @@
         $index,
         $fallback = ""
     ): string {
-        return isset($_POST[$index]) ? $_POST[$index] : $fallback ;
+        return isset($_POST[$index]) ?
+            $_POST[$index] :
+            $fallback ;
     }
 
     /**
@@ -337,7 +339,9 @@
         $domain = null
     ): string {
         if (!isset($domain))
-            $domain = (ADMIN) ? "admin" : Theme::current()->safename ;
+            $domain = (ADMIN) ?
+                "admin" :
+                Theme::current()->safename ;
 
         return __($string, $domain);
     }
@@ -359,7 +363,9 @@
         $domain = null
     ): string {
         if (!isset($domain))
-            $domain = (ADMIN) ? "admin" : Theme::current()->safename ;
+            $domain = (ADMIN) ?
+                "admin" :
+                Theme::current()->safename ;
 
         return _p($single, $plural, $number, $domain);
     }

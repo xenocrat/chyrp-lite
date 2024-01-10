@@ -322,8 +322,7 @@
                 $date_a = $a->attributes()->date;
                 $date_b = $b->attributes()->date;
 
-                return (strtotime($date_a) < strtotime($date_b)) ?
-                    -1 : 1 ;
+                return (strtotime($date_a) < strtotime($date_b)) ? -1 : 1 ;
             }
 
             usort($posts, "reverse");

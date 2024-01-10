@@ -169,7 +169,9 @@
                     );
                 }
 
-                return $this->creatable = ($count < 2) ? true : false ;
+                return $this->creatable = ($count < 2) ?
+                    true :
+                    false ;
             }
 
             if ($this->type == IMAGETYPE_JPEG and ($imagetypes & IMG_JPEG))

@@ -159,7 +159,8 @@
 
             foreach ($posts as $post) {
                 $lastmod = ($post->updated) ?
-                    $post->updated_at : $post->created_at ;
+                    $post->updated_at :
+                    $post->created_at ;
 
                 $xml.= '<url>'."\n".
                        '<loc>'.
@@ -179,7 +180,8 @@
 
             foreach ($pages as $page) {
                 $lastmod = ($page->updated) ?
-                    $page->updated_at : $page->created_at ;
+                    $page->updated_at :
+                    $page->created_at ;
 
                 $xml.= '<url>'."\n".
                        '<loc>'.

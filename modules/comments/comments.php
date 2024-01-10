@@ -1166,25 +1166,29 @@
                     "name" => __("Open", "comments"),
                     "value" => Comment::OPTION_OPEN,
                     "selected" => isset($post) ?
-                        $post->comment_status == "open" : true
+                        $post->comment_status == "open" :
+                        true
                 ),
                 array(
                     "name" => __("Closed", "comments"),
                     "value" => Comment::OPTION_CLOSED,
                     "selected" => isset($post) ?
-                        $post->comment_status == "closed" : false
+                        $post->comment_status == "closed" :
+                        false
                 ),
                 array(
                     "name" => __("Private", "comments"),
                     "value" => Comment::OPTION_PRIVATE,
                     "selected" => isset($post) ?
-                        $post->comment_status == "private" : false
+                        $post->comment_status == "private" :
+                        false
                 ),
                 array(
                     "name" => __("Registered Only", "comments"),
                     "value" => Comment::OPTION_REG_ONLY,
                     "selected" => isset($post) ?
-                        $post->comment_status == "registered_only" : false
+                        $post->comment_status == "registered_only" :
+                        false
                 )
             );
 

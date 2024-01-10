@@ -324,7 +324,10 @@
                     code:400
                 );
 
-            $clean = (!empty($_POST['clean'])) ? $_POST['clean'] : $_POST['name'] ;
+            $clean = (!empty($_POST['clean'])) ?
+                $_POST['clean'] :
+                $_POST['name'] ;
+
             $clean = Category::check_clean(sanitize($clean, true, true));
 
             Category::add(

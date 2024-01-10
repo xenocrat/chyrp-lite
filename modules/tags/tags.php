@@ -44,16 +44,14 @@
             if ($a["popularity"] == $b["popularity"])
                 return 0;
 
-            return ($a["popularity"] < $b["popularity"]) ?
-                -1 : 1 ;
+            return ($a["popularity"] < $b["popularity"]) ? -1 : 1 ;
         }
 
         private function sort_tags_popularity_desc($a, $b): int {
             if ($a["popularity"] == $b["popularity"])
                 return 0;
 
-            return ($a["popularity"] > $b["popularity"]) ?
-                -1 : 1 ;
+            return ($a["popularity"] > $b["popularity"]) ? -1 : 1 ;
         }
 
         private function mb_strcasecmp($str1, $str2, $encoding = "UTF-8"): int {

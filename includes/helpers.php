@@ -406,8 +406,14 @@
      *     Does not use setlocale() because the return value is non-normative.
      */
     function get_locale(): string {
-        if (INSTALLING or !file_exists(INCLUDES_DIR.DIR."config.json.php"))
-            return isset($_REQUEST['locale']) ? $_REQUEST['locale'] : "en_US" ;
+        if (
+            INSTALLING or
+            !file_exists(INCLUDES_DIR.DIR."config.json.php")
+        ) {
+            return isset($_REQUEST['locale']) ?
+                $_REQUEST['locale'] :
+                "en_US" ;
+        }
 
         return Config::current()->locale;
     }
@@ -444,7 +450,9 @@
      *     A localised display name, e.g. "English (United States)".
      */
     function lang_code($code): string {
-        return class_exists("Locale") ? Locale::getDisplayName($code, $code) : $code ;
+        return class_exists("Locale") ?
+            Locale::getDisplayName($code, $code) :
+            $code ;
     }
 
     /**
@@ -503,7 +511,9 @@
         if (USE_GETTEXT_SHIM)
             return Translation::current()->text($domain, $text);
 
-        return function_exists("dgettext") ? dgettext($domain, $text) : $text ;
+        return function_exists("dgettext") ?
+            dgettext($domain, $text) :
+            $text ;
     }
 
     /**
@@ -528,7 +538,9 @@
         if (function_exists("dngettext"))
             return dngettext($domain, $single, $plural, $int);
 
-        return ($int != 1) ? $plural : $single ;
+        return ($int != 1) ?
+            $plural :
+            $single ;
     }
 
     /**
@@ -562,7 +574,10 @@
      */
     function _w($formatting, $when): string|false {
         static $locale;
-        $time = is_numeric($when) ? $when : strtotime($when) ;
+
+        $time = is_numeric($when) ?
+            $when :
+            strtotime($when) ;
 
         if (!class_exists("IntlDateFormatter"))
             return date($formatting, $time);
@@ -598,7 +613,10 @@
      *     A time/date string with the supplied formatting.
      */
     function when($formatting, $when): string|false {
-        $time = is_numeric($when) ? $when : strtotime($when) ;
+        $time = is_numeric($when) ?
+            $when :
+            strtotime($when) ;
+
         return date($formatting, $time);
     }
 
@@ -615,7 +633,10 @@
     function datetime($when = null): string|false {
         fallback($when, time());
 
-        $time = is_numeric($when) ? $when : strtotime($when) ;
+        $time = is_numeric($when) ?
+            $when :
+            strtotime($when) ;
+
         return date("Y-m-d H:i:s", $time);
     }
 
@@ -1078,7 +1099,8 @@
         $ordering = array(); # Requested ordering for the query results.
 
         $columns  = !empty($table) ?
-            $sql->select($table)->fetch() : array() ;
+            $sql->select($table)->fetch() :
+            array() ;
 
         foreach (
             preg_split("/\s(?=\w+:)|;/",
@@ -1521,8 +1543,16 @@
      *     A sanitized version of the string.
      */
     function fix($string, $quotes = false, $double = false): string {
-        $quotes = ($quotes) ? ENT_QUOTES : ENT_NOQUOTES ;
-        return htmlspecialchars((string) $string, $quotes | ENT_HTML5, "UTF-8", $double);
+        $quotes = ($quotes) ?
+            ENT_QUOTES :
+            ENT_NOQUOTES ;
+
+        return htmlspecialchars(
+            (string) $string,
+            $quotes | ENT_HTML5,
+            "UTF-8",
+            $double
+        );
     }
 
     /**
@@ -1538,8 +1568,17 @@
      */
     function unfix($string, $all = false): string {
         return ($all) ?
-            html_entity_decode((string) $string, ENT_QUOTES | ENT_HTML5, "UTF-8") :
-            htmlspecialchars_decode((string) $string, ENT_QUOTES | ENT_HTML5) ;
+            html_entity_decode(
+                (string) $string,
+                ENT_QUOTES | ENT_HTML5,
+                "UTF-8"
+            )
+            :
+            htmlspecialchars_decode(
+                (string) $string,
+                ENT_QUOTES | ENT_HTML5
+            )
+            ;
     }
 
     /**
@@ -1833,7 +1872,9 @@
             $remote_content.= fgets($connect);
 
         fclose($connect);
-        return ($headers) ? $remote_headers.$remote_content : $remote_content ;
+        return ($headers) ?
+            $remote_headers.$remote_content :
+            $remote_content ;
     }
 
     /**
@@ -2357,7 +2398,8 @@
      */
      function cancel_module($target, $reason = ""): void {
         $message = empty($reason) ?
-            _f("Execution of %s has been cancelled.", camelize($target)) : $reason ;
+            _f("Execution of %s has been cancelled.", camelize($target)) :
+            $reason ;
 
         if (isset(Modules::$instances[$target]))
             Modules::$instances[$target]->cancelled = true;
@@ -2379,7 +2421,8 @@
      */
      function cancel_feather($target, $reason = ""): void {
         $message = empty($reason) ?
-            _f("Execution of %s has been cancelled.", camelize($target)) : $reason ;
+            _f("Execution of %s has been cancelled.", camelize($target)) :
+            $reason ;
 
         if (isset(Feathers::$instances[$target]))
             Feathers::$instances[$target]->cancelled = true;
@@ -2509,8 +2552,10 @@
                 str_replace(DIR, "/", $config->uploads_path).
                 urlencode($filename),
                 true
-            ) :
-            MAIN_DIR.$config->uploads_path.$filename ;
+            )
+            :
+            MAIN_DIR.$config->uploads_path.$filename
+            ;
     }
 
     /**
@@ -2825,7 +2870,11 @@
      */
     function add_scheme($url, $scheme = null): string {
         preg_match('~^([a-z]+://)?(.+)~i', $url, $match);
-        $match[1] = isset($scheme) ? $scheme : oneof($match[1], "http://") ;
+
+        $match[1] = isset($scheme) ?
+            $scheme :
+            oneof($match[1], "http://") ;
+
         return $url = $match[1].$match[2];
     }
 
@@ -2955,7 +3004,8 @@
                md5(strtolower(trim($email)))."?s=$s&d=$d&r=$r";
 
         return ($img) ?
-            '<img class="gravatar" src="'.fix($url, true, true).'" alt="">' : $url ;
+            '<img class="gravatar" src="'.fix($url, true, true).'" alt="">' :
+            $url ;
     }
 
     #---------------------------------------------

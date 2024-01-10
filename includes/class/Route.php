@@ -57,7 +57,8 @@
             $this->action =& $_GET['action'];
 
             $base = ($controller->base == "") ?
-                $config->url : $config->chyrp_url."/".$controller->base ;
+                $config->url :
+                $config->chyrp_url."/".$controller->base ;
 
             $regex = "~^".preg_quote(
                 oneof(parse_url($base, PHP_URL_PATH), ""),
@@ -100,7 +101,8 @@
 
             foreach ($this->try as $key => $val) {
                 list($method, $args) = is_numeric($key) ?
-                    array($val, array()) : array($key, $val) ;
+                    array($val, array()) :
+                    array($key, $val) ;
 
                 $this->action = $method;
 
@@ -209,7 +211,8 @@
                 $controller = $controller::current();
 
             $base = ($controller->base == "") ?
-                $config->url : $config->chyrp_url."/".$controller->base ;
+                $config->url :
+                $config->chyrp_url."/".$controller->base ;
 
             # Assume this is a dirty URL and return it without translation.
             if (strpos($url, "/") === 0)

@@ -721,7 +721,8 @@
                     "database" => $_POST['database'],
                     "prefix"   => "",
                     "adapter"  => $_POST['adapter']
-                ) :
+                )
+                :
                 array(
                     "host"     => $_POST['host'],
                     "port"     => $_POST['port'],
@@ -730,7 +731,8 @@
                     "database" => $_POST['database'],
                     "prefix"   => $_POST['prefix'],
                     "adapter"  => $_POST['adapter']
-                ) ;
+                )
+                ;
 
             # Configure the SQL interface.
             $sql = SQL::current($settings);

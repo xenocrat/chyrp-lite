@@ -261,7 +261,8 @@
             $post = Feathers::$instances[$_POST['feather']]->submit();
 
             $post_redirect = (Post::any_editable() or Post::any_deletable()) ?
-                "manage_posts" : "/" ;
+                "manage_posts" :
+                "/" ;
 
             Flash::notice(
                 __("Post created!").' <a href="'.$post->url().'">'.
@@ -326,7 +327,8 @@
             $visitor = Visitor::current();
 
             $post_redirect = (Post::any_editable() or Post::any_deletable()) ?
-                "manage_posts" : "/" ;
+                "manage_posts" :
+                "/" ;
 
             fallback($_SESSION['post_redirect'], $post_redirect);
 
@@ -633,7 +635,8 @@
             }
 
             $list_order = empty($_POST['list_order']) ?
-                (int) $_POST['list_priority'] : (int) $_POST['list_order'] ;
+                (int) $_POST['list_priority'] :
+                (int) $_POST['list_order'] ;
 
             $page = Page::add(
                 title:$_POST['title'],
@@ -646,7 +649,8 @@
             );
 
             $page_redirect = ($visitor->group->can("edit_page", "delete_page")) ?
-                "manage_pages" : "/" ;
+                "manage_pages" :
+                "/" ;
 
             Flash::notice(
                 __("Page created!").' <a href="'.$page->url().'">'.
@@ -706,7 +710,8 @@
             $visitor = Visitor::current();
 
             $page_redirect = ($visitor->group->can("edit_page", "delete_page")) ?
-                "manage_pages" : "/" ;
+                "manage_pages" :
+                "/" ;
 
             fallback($_SESSION['page_redirect'], $page_redirect);
 
@@ -776,7 +781,8 @@
             );
 
             $list_order = empty($_POST['list_order']) ?
-                (int) $_POST['list_priority'] : (int) $_POST['list_order'] ;
+                (int) $_POST['list_priority'] :
+                (int) $_POST['list_order'] ;
 
             $page = $page->update(
                 title:$_POST['title'],
@@ -1046,7 +1052,8 @@
                 );
 
             $approved = ($config->email_activation and empty($_POST['activated'])) ?
-                false : true ;
+                false :
+                true ;
 
             $user = User::add(
                 login:$_POST['login'],
@@ -1180,7 +1187,8 @@
             }
 
             $password = (!empty($_POST['new_password1'])) ?
-                User::hash_password($_POST['new_password1']) : $user->password ;
+                User::hash_password($_POST['new_password1']) :
+                $user->password ;
 
             if (empty($_POST['email']))
                 error(
@@ -1219,7 +1227,8 @@
                 );
 
             $approved = ($config->email_activation and empty($_POST['activated'])) ?
-                false : true ;
+                false :
+                true ;
 
             $user = $user->update(
                 login:$_POST['login'],
@@ -2011,7 +2020,10 @@
                     '">Chyrp</generator>'."\n";
 
                 foreach ($posts as $post) {
-                    $updated = ($post->updated) ? $post->updated_at : $post->created_at ;
+                    $updated = ($post->updated) ?
+                        $post->updated_at :
+                        $post->created_at ;
+
                     $title = oneof($post->title(), ucfirst($post->feather));
 
                     $posts_atom.= '<entry xml:base="'.$post->url().'">'."\n".
@@ -2110,7 +2122,9 @@
                     '">Chyrp</generator>'."\n";
 
                 foreach ($pages as $page) {
-                    $updated = ($page->updated) ? $page->updated_at : $page->created_at ;
+                    $updated = ($page->updated) ?
+                        $page->updated_at :
+                        $page->created_at ;
 
                     $pages_atom.= '<entry xml:base="'.$page->url().
                         '" chyrp:parent_id="'.$page->parent_id.'">'."\n".
@@ -2399,7 +2413,8 @@
                         fallback($attributes["joined_at"], datetime());
 
                         $group_id = (!$group->no_results) ?
-                            $group->id : $config->default_group ;
+                            $group->id :
+                            $config->default_group ;
 
                         $user = User::add(
                             login:$login,
@@ -2585,7 +2600,8 @@
                 # We don't use the module_enabled() helper function - 
                 # this allows for disabling a module that has been cancelled.
                 $category = (in_array($name, $config->enabled_modules)) ?
-                    "enabled_modules" : "disabled_modules" ;
+                    "enabled_modules" :
+                    "disabled_modules" ;
 
                 $this->context[$category][$name] = array_merge(
                     $info,
@@ -2629,7 +2645,8 @@
                 # We don't use the feather_enabled() helper function - 
                 # this allows for disabling a feather that has been cancelled.
                 $category = (in_array($name, $config->enabled_feathers)) ?
-                    "enabled_feathers" : "disabled_feathers" ;
+                    "enabled_feathers" :
+                    "disabled_feathers" ;
 
                 $this->context[$category][$name] = load_info(
                     FEATHERS_DIR.DIR.$name.DIR."info.php"
@@ -2706,11 +2723,20 @@
                     code:400
                 );
 
-            $type   = ($_POST['type'] == "module") ? "module" : "feather" ;
-            $name   = str_replace(array(".", DIR), "", $_POST['extension']);
-            $array  = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
-            $folder = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
-            $class  = camelize($name);
+            $type = ($_POST['type'] == "module") ?
+                "module" :
+                "feather" ;
+
+            $array = ($type == "module") ?
+                "enabled_modules" :
+                "enabled_feathers" ;
+
+            $folder = ($type == "module") ?
+                MODULES_DIR :
+                FEATHERS_DIR ;
+
+            $name = str_replace(array(".", DIR), "", $_POST['extension']);
+            $class = camelize($name);
 
             if (in_array($name, $config->$array))
                 error(
@@ -2775,11 +2801,20 @@
                     code:400
                 );
 
-            $type   = ($_POST['type'] == "module") ? "module" : "feather" ;
-            $name   = str_replace(array(".", DIR), "", $_POST['extension']);
-            $array  = ($type == "module") ? "enabled_modules" : "enabled_feathers" ;
-            $folder = ($type == "module") ? MODULES_DIR : FEATHERS_DIR ;
-            $class  = camelize($name);
+            $type = ($_POST['type'] == "module") ?
+                "module" :
+                "feather" ;
+
+            $array = ($type == "module") ?
+                "enabled_modules" :
+                "enabled_feathers" ;
+
+            $folder = ($type == "module") ?
+                MODULES_DIR :
+                FEATHERS_DIR ;
+
+            $name = str_replace(array(".", DIR), "", $_POST['extension']);
+            $class = camelize($name);
 
             if (!in_array($name, $config->$array))
                 error(
@@ -2968,7 +3003,8 @@
             fallback($_POST['locale'], "en_US");
 
             $check_updates_last = (empty($_POST['check_updates'])) ?
-                0 : $config->check_updates_last ;
+                0 :
+                $config->check_updates_last ;
 
             $chyrp_url = rtrim(add_scheme($_POST['chyrp_url']), "/");
             $url = rtrim(add_scheme(oneof($_POST['url'], $_POST['chyrp_url'])), "/");
@@ -3118,7 +3154,9 @@
             $correspond = (
                 !empty($_POST['email_activation']) or
                 !empty($_POST['email_correspondence'])
-            ) ? true : false ;
+            ) ?
+                true :
+                false ;
 
             $config = Config::current();
             $config->set("can_register", !empty($_POST['can_register']));

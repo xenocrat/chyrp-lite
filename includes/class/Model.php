@@ -59,8 +59,15 @@
             if (in_array($name, $this->belongs_to) or isset($this->belongs_to[$name])) {
                 if (isset($this->belongs_to[$name])) {
                     $opts =& $this->belongs_to[$name];
-                    $model = isset($opts["model"]) ? $opts["model"] : $name ;
-                    $match = isset($opts["by"]) ? $opts["by"] : strtolower($name) ;
+
+                    $model = isset($opts["model"]) ?
+                        $opts["model"] :
+                        $name ;
+
+                    $match = isset($opts["by"]) ?
+                        $opts["by"] :
+                        strtolower($name) ;
+
                     fallback($opts["where"], array("id" => $this->data[$match."_id"]));
                     $opts["where"] = (array) $opts["where"];
                 } else {
@@ -76,8 +83,15 @@
             } elseif (in_array($name, $this->has_many) or isset($this->has_many[$name])) {
                 if (isset($this->has_many[$name])) {
                     $opts =& $this->has_many[$name];
-                    $model = isset($opts["model"]) ? $opts["model"] : depluralize($name) ;
-                    $match = isset($opts["by"]) ? $opts["by"] : strtolower($name) ;
+
+                    $model = isset($opts["model"]) ?
+                        $opts["model"] :
+                        depluralize($name) ;
+
+                    $match = isset($opts["by"]) ?
+                        $opts["by"] :
+                        strtolower($name) ;
+
                     fallback($opts["where"], array($match."_id" => $this->data["id"]));
                     $opts["where"] = (array) $opts["where"];
                 } else {
@@ -94,13 +108,24 @@
             } elseif (in_array($name, $this->has_one) or isset($this->has_one[$name])) {
                 if (isset($this->has_one[$name])) {
                     $opts =& $this->has_one[$name];
-                    $model = isset($opts["model"]) ? $opts["model"] : depluralize($name) ;
-                    $match = isset($opts["by"]) ? $opts["by"] : strtolower($name) ;
+
+                    $model = isset($opts["model"]) ?
+                        $opts["model"] :
+                        depluralize($name) ;
+
+                    $match = isset($opts["by"]) ?
+                        $opts["by"] :
+                        strtolower($name) ;
+
                     fallback($opts["where"], array($match."_id" => $this->data["id"]));
                     $opts["where"] = (array) $opts["where"];
                 } else {
                     $model = depluralize($name);
-                    $match = ($model_name == "visitor") ? "user" : $model_name ;
+
+                    $match = ($model_name == "visitor") ?
+                        "user" :
+                        $model_name ;
+
                     $opts = array("where" => array($match."_id" => $this->data["id"]));
                 }
 
@@ -179,7 +204,9 @@
             if (!isset($id) and isset($options["where"]["id"]))
                 $id = $options["where"]["id"];
 
-            $cache_id = (isset($id) and !is_numeric($id)) ? serialize($id) : $id ;
+            $cache_id = (isset($id) and !is_numeric($id)) ?
+                serialize($id) :
+                $id ;
 
             # Return cached results if available.
             if (empty($options["read_from"])) {
@@ -384,7 +411,9 @@
                 $results[] = $result;
             }
 
-            return ($options["placeholders"]) ? array($results, $model_name) : $results ;
+            return ($options["placeholders"]) ?
+                array($results, $model_name) :
+                $results ;
         }
 
         /**

@@ -686,7 +686,8 @@
                 );
 
             $login = (strpos($config->post_url, "(author)") !== false) ?
-                $this->user->login : "" ;
+                $this->user->login :
+                "" ;
 
             $vals = array(
                 when("Y", $this->created_at),
@@ -727,7 +728,8 @@
             # The text is likely to have some sort of markup module applied;
             # if the current instantiation is not filtered, make one that is.
             $post = ($this->filtered) ?
-                $this : new self($this->id, array("skip_where" => true)) ;
+                $this :
+                new self($this->id, array("skip_where" => true)) ;
 
             $excerpt = $post->excerpt();
             Trigger::current()->filter($excerpt, "title_from_excerpt");
@@ -750,7 +752,8 @@
             # The text is likely to have some sort of markup module applied;
             # if the current instantiation is not filtered, make one that is.
             $post = ($this->filtered) ?
-                $this : new self($this->id, array("skip_where" => true)) ;
+                $this :
+                new self($this->id, array("skip_where" => true)) ;
 
             $title = Feathers::$instances[$this->feather]->title($post);
             return Trigger::current()->filter($title, "title", $post);
@@ -767,7 +770,8 @@
             # The text is likely to have some sort of markup module applied;
             # if the current instantiation is not filtered, make one that is.
             $post = ($this->filtered) ?
-                $this : new self($this->id, array("skip_where" => true)) ;
+                $this :
+                new self($this->id, array("skip_where" => true)) ;
 
             $excerpt = Feathers::$instances[$this->feather]->excerpt($post);
             return Trigger::current()->filter($excerpt, "excerpt", $post);
@@ -784,7 +788,8 @@
             # The text is likely to have some sort of markup module applied;
             # if the current instantiation is not filtered, make one that is.
             $post = ($this->filtered) ?
-                $this : new self($this->id, array("skip_where" => true)) ;
+                $this :
+                new self($this->id, array("skip_where" => true)) ;
 
             $feed_content = Feathers::$instances[$this->feather]->feed_content($post);
             return Trigger::current()->filter($feed_content, "feed_content", $post);
@@ -880,7 +885,8 @@
 
                     if (!in_array($field_unfiltered, $touched)) {
                         $this->$field_unfiltered = isset($this->$field) ?
-                            $this->$field : null ;
+                            $this->$field :
+                            null ;
 
                         $touched[] = $field_unfiltered;
                     }
@@ -902,7 +908,8 @@
 
                     if (!in_array($field_unfiltered, $touched)) {
                         $this->$field_unfiltered = isset($this->$field) ?
-                            $this->$field : null ;
+                            $this->$field :
+                            null ;
 
                         $touched[] = $field_unfiltered;
                     }
@@ -933,7 +940,8 @@
                 $post = new self(array("url" => $slug[2]), $options);
 
                 return isset($route) ?
-                    $route->try["view"] = array($post) : $post ;
+                    $route->try["view"] = array($post) :
+                    $post ;
             }
 
             $regex = "";      # Request validity is tested with this.
@@ -997,7 +1005,10 @@
                 } elseif ($part == "author") {
                     # Filter by "author" (login).
                     $user = new User(array("login" => $value));
-                    $where["user_id"] = ($user->no_results) ? 0 : $user->id ;
+
+                    $where["user_id"] = ($user->no_results) ?
+                        0 :
+                        $user->id ;
                 } elseif ($part == "feathers") {
                     # Filter by feather.
                     $where["feather"] = depluralize($value);
@@ -1012,7 +1023,8 @@
             );
 
             return isset($route) ?
-                $route->try["view"] = array($post) : $post ;
+                $route->try["view"] = array($post) :
+                $post ;
         }
 
         /**
@@ -1071,14 +1083,16 @@
                     "website"   => $this->user->website,
                     "email"     => $this->user->email,
                     "joined"    => $this->user->joined_at
-                ) :
+                )
+                :
                 array(
                     "id"      => 0,
                     "name"    => __("[Guest]"),
                     "website" => "",
                     "email"   => "",
                     "joined"  => $this->created_at
-                ) ;
+                )
+                ;
 
             return (object) $author;
         }

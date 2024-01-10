@@ -221,7 +221,9 @@
                 $build, $params, $throw_exceptions
             );
 
-            return isset($query->query) ? $query->fetchColumn() : false ;
+            return isset($query->query) ?
+                $query->fetchColumn() :
+                false ;
         }
 
         /**

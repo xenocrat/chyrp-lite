@@ -136,7 +136,10 @@
                 $array = $this->find($domain, $plural);
                 $n = (int) $number;
                 $nplural = $this->nplural($n);
-                return fallback($array[$nplural], ($n != 1) ? $plural : $single);
+                return fallback(
+                    $array[$nplural],
+                    ($n != 1) ? $plural : $single
+                );
             }
 
             $array = $this->find($domain, $single);

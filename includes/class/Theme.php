@@ -83,7 +83,10 @@
          *     $page - Page to start recursion at.
          */
         private function recurse_pages($page): void {
-            $page->depth    = isset($page->depth) ? $page->depth : 1 ;
+            $page->depth = isset($page->depth) ?
+                $page->depth :
+                1 ;
+
             $page->children = isset($this->caches["pages"]["children"][$page->id]);
 
             $this->caches["pages"]["flat"][] = $page;
@@ -349,7 +352,8 @@
             ) {
                     # Rewind to page 1 (most recent) if the posts are paginated.
                     $page_url = ($main->context["posts"] instanceof Paginator) ?
-                        $main->context["posts"]->prev_page_url(1) : self_url() ;
+                        $main->context["posts"]->prev_page_url(1) :
+                        self_url() ;
 
                     $feed_url = ($config->clean_urls) ?
                         rtrim($page_url, "/")."/feed/" :

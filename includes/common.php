@@ -355,13 +355,15 @@
     # Constant: THEME_DIR
     # Absolute path to the theme (current or previewed).
     define('THEME_DIR',
-        MAIN_DIR.DIR."themes".DIR.(PREVIEWING ? $_SESSION['theme'] : $config->theme)
+        MAIN_DIR.DIR."themes".DIR.
+        (PREVIEWING ? $_SESSION['theme'] : $config->theme)
     );
 
     # Constant: THEME_URL
     # Absolute URL to the theme (current or previewed).
     define('THEME_URL',
-        $config->chyrp_url."/themes/".(PREVIEWING ? $_SESSION['theme'] : $config->theme)
+        $config->chyrp_url."/themes/".
+        (PREVIEWING ? $_SESSION['theme'] : $config->theme)
     );
 
     # Instantiate the theme.

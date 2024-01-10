@@ -93,7 +93,8 @@
                 list($array, $model_name) = $this->array;
 
             $request = (isset($_GET[$name]) and is_numeric($_GET[$name])) ?
-                $_GET[$name] : null ;
+                $_GET[$name] :
+                null ;
 
             $this->total = count($array);
             $this->page = intval(oneof($page, $request, 1));
@@ -329,7 +330,8 @@
                     ($config->clean_urls and Route::current()->controller->clean_urls) ?
                         rtrim($request, "/")."/".$this->name."/".$page."/" :
                         $request.$mark.$this->name."=".$page
-                ) : 
+                )
+                : 
                 (
                     ($config->clean_urls and Route::current()->controller->clean_urls) ?
                     preg_replace(
@@ -337,14 +339,16 @@
                         "/".$this->name."/".$page,
                         $request,
                         1
-                    ) :
+                    )
+                    :
                     preg_replace(
                         "/((\?|&){$this->name}=([0-9]+)|$)/",
                         "\\2".$this->name."=".$page,
                         $request,
                         1
                     )
-                ) ;
+                )
+                ;
 
             return fix($url, true);
         }
@@ -371,7 +375,8 @@
                     ($config->clean_urls and Route::current()->controller->clean_urls) ?
                         rtrim($request, "/")."/".$this->name."/".$page."/" :
                         $request.$mark.$this->name."=".$page
-                ) :
+                )
+                :
                 (
                     ($config->clean_urls and Route::current()->controller->clean_urls) ?
                         preg_replace(
@@ -379,14 +384,16 @@
                             "/".$this->name."/".$page,
                             $request,
                             1
-                        ) :
+                        )
+                        :
                         preg_replace(
                             "/((\?|&){$this->name}=([0-9]+)|$)/",
                             "\\2".$this->name."=".$page,
                             $request,
                             1
                         )
-                ) ;
+                )
+                ;
 
             return fix($url, true);
         }
