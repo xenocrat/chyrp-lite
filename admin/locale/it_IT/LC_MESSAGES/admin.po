@@ -78,6 +78,19 @@ msgstr ""
 "<code>author:Foo;year:2016;</code> filtrerebbe la tabella Posts per "
 "visualizzare solo i post creati da Foo in 2016."
 
+#: admin/help/filtering_results.twig:15
+msgid ""
+"Use the syntax <code>ASC:column;</code> or <code>DESC:column;</code> to sort "
+"the results in ascending or descending order. For example: <code>DESC:"
+"user_id;ASC:id;</code> would sort a table of posts in descending order of "
+"user ID and then ascending order of post ID."
+msgstr ""
+"Utilizzare la sintassi <code>ASC:column;</code> per ordinare i risultati in "
+"ordine crescente o <code>DESC:column;</code> per ordinare i risultati in "
+"ordine decrescente. Ad esempio: <code>DESC:user_id;ASC:id;</code> ordina una "
+"tabella di post in ordine decrescente di ID utente e quindi in ordine "
+"crescente di ID post."
+
 #: admin/help/markdown.twig:3 admin/help/markdown.twig:6
 #: admin/help/markdown.twig:13 admin/pages/content_settings.twig:77
 #: admin/partials/page_fields.twig:13 admin/partials/post_fields.twig:52
@@ -580,7 +593,7 @@ msgstr "Modifica del gruppo &#8220;%s&#8221;"
 msgid "Are you sure you want to make these changes to your group?"
 msgstr "Sei sicuro di voler apportare queste modifiche al tuo gruppo?"
 
-#: admin/pages/edit_group.twig:10 admin/pages/manage_uploads.twig:17
+#: admin/pages/edit_group.twig:10 admin/pages/manage_uploads.twig:22
 #: admin/pages/new_group.twig:10
 msgid "Name"
 msgstr "Titolo"
@@ -834,7 +847,7 @@ msgid "New Group"
 msgstr "Nuovo gruppo"
 
 #: admin/pages/manage_groups.twig:18 admin/pages/manage_pages.twig:18
-#: admin/pages/manage_posts.twig:18 admin/pages/manage_uploads.twig:13
+#: admin/pages/manage_posts.twig:18 admin/pages/manage_uploads.twig:18
 #: admin/pages/manage_users.twig:23
 msgid "Search Results"
 msgstr "Risultati di ricerca"
@@ -852,7 +865,7 @@ msgid "Guests?"
 msgstr "Ospiti?"
 
 #: admin/pages/manage_groups.twig:27 admin/pages/manage_pages.twig:29
-#: admin/pages/manage_posts.twig:27 admin/pages/manage_uploads.twig:21
+#: admin/pages/manage_posts.twig:27 admin/pages/manage_uploads.twig:26
 #: admin/pages/manage_users.twig:35
 msgid "Controls"
 msgstr "Controlli"
@@ -869,19 +882,19 @@ msgid "edit"
 msgstr "modifica"
 
 #: admin/pages/manage_groups.twig:54 admin/pages/manage_pages.twig:66
-#: admin/pages/manage_posts.twig:50 admin/pages/manage_uploads.twig:55
+#: admin/pages/manage_posts.twig:50 admin/pages/manage_uploads.twig:60
 #: admin/pages/manage_users.twig:66
 msgid "delete"
 msgstr "elimina"
 
 #: admin/pages/manage_groups.twig:60 admin/pages/manage_pages.twig:72
-#: admin/pages/manage_posts.twig:57 admin/pages/manage_uploads.twig:62
+#: admin/pages/manage_posts.twig:57 admin/pages/manage_uploads.twig:67
 #: admin/pages/manage_users.twig:72 admin/partials/uploads_modal.twig:28
 msgid "No results"
 msgstr "Nessun risultato"
 
 #: admin/pages/manage_groups.twig:68 admin/pages/manage_pages.twig:80
-#: admin/pages/manage_posts.twig:65 admin/pages/manage_uploads.twig:70
+#: admin/pages/manage_posts.twig:65 admin/pages/manage_uploads.twig:75
 #: admin/pages/manage_users.twig:80
 #, php-format
 msgid "Page %d of %s"
@@ -943,18 +956,22 @@ msgid "Manage Uploads"
 msgstr "Gestire i caricamenti"
 
 #: admin/pages/manage_uploads.twig:13
+msgid "Add Files"
+msgstr "Aggiungi file"
+
+#: admin/pages/manage_uploads.twig:18
 msgid "Uploads"
 msgstr "Caricamenti"
 
-#: admin/pages/manage_uploads.twig:18
+#: admin/pages/manage_uploads.twig:23
 msgid "Last Modified"
 msgstr "Ultima modifica"
 
-#: admin/pages/manage_uploads.twig:19
+#: admin/pages/manage_uploads.twig:24
 msgid "Size"
 msgstr "Dimensione"
 
-#: admin/pages/manage_uploads.twig:50
+#: admin/pages/manage_uploads.twig:55
 msgid "download"
 msgstr "scaricare"
 

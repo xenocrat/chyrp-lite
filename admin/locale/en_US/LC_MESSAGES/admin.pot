@@ -35,6 +35,10 @@ msgstr ""
 msgid "Use the syntax <code>keyword:value;</code> to quickly match specific results where <code>keyword</code> is equal to <code>value</code>. The keyword can be the name of a database column, the name of an author or a group, or a date/time. For example: <code>author:Foo;year:2016;</code> would filter the posts table to display only posts created by Foo in 2016."
 msgstr ""
 
+#: admin/help/filtering_results.twig:15
+msgid "Use the syntax <code>ASC:column;</code> or <code>DESC:column;</code> to sort the results in ascending or descending order. For example: <code>DESC:user_id;ASC:id;</code> would sort a table of posts in descending order of user ID and then ascending order of post ID."
+msgstr ""
+
 #: admin/help/markdown.twig:3
 #: admin/help/markdown.twig:6
 #: admin/help/markdown.twig:13
@@ -564,7 +568,7 @@ msgid "Are you sure you want to make these changes to your group?"
 msgstr ""
 
 #: admin/pages/edit_group.twig:10
-#: admin/pages/manage_uploads.twig:17
+#: admin/pages/manage_uploads.twig:22
 #: admin/pages/new_group.twig:10
 msgid "Name"
 msgstr ""
@@ -845,7 +849,7 @@ msgstr ""
 #: admin/pages/manage_groups.twig:18
 #: admin/pages/manage_pages.twig:18
 #: admin/pages/manage_posts.twig:18
-#: admin/pages/manage_uploads.twig:13
+#: admin/pages/manage_uploads.twig:18
 #: admin/pages/manage_users.twig:23
 msgid "Search Results"
 msgstr ""
@@ -865,7 +869,7 @@ msgstr ""
 #: admin/pages/manage_groups.twig:27
 #: admin/pages/manage_pages.twig:29
 #: admin/pages/manage_posts.twig:27
-#: admin/pages/manage_uploads.twig:21
+#: admin/pages/manage_uploads.twig:26
 #: admin/pages/manage_users.twig:35
 msgid "Controls"
 msgstr ""
@@ -888,7 +892,7 @@ msgstr ""
 #: admin/pages/manage_groups.twig:54
 #: admin/pages/manage_pages.twig:66
 #: admin/pages/manage_posts.twig:50
-#: admin/pages/manage_uploads.twig:55
+#: admin/pages/manage_uploads.twig:60
 #: admin/pages/manage_users.twig:66
 msgid "delete"
 msgstr ""
@@ -896,7 +900,7 @@ msgstr ""
 #: admin/pages/manage_groups.twig:60
 #: admin/pages/manage_pages.twig:72
 #: admin/pages/manage_posts.twig:57
-#: admin/pages/manage_uploads.twig:62
+#: admin/pages/manage_uploads.twig:67
 #: admin/pages/manage_users.twig:72
 #: admin/partials/uploads_modal.twig:28
 msgid "No results"
@@ -905,7 +909,7 @@ msgstr ""
 #: admin/pages/manage_groups.twig:68
 #: admin/pages/manage_pages.twig:80
 #: admin/pages/manage_posts.twig:65
-#: admin/pages/manage_uploads.twig:70
+#: admin/pages/manage_uploads.twig:75
 #: admin/pages/manage_users.twig:80
 #, php-format
 msgid "Page %d of %s"
@@ -972,18 +976,22 @@ msgid "Manage Uploads"
 msgstr ""
 
 #: admin/pages/manage_uploads.twig:13
-msgid "Uploads"
+msgid "Add Files"
 msgstr ""
 
 #: admin/pages/manage_uploads.twig:18
+msgid "Uploads"
+msgstr ""
+
+#: admin/pages/manage_uploads.twig:23
 msgid "Last Modified"
 msgstr ""
 
-#: admin/pages/manage_uploads.twig:19
+#: admin/pages/manage_uploads.twig:24
 msgid "Size"
 msgstr ""
 
-#: admin/pages/manage_uploads.twig:50
+#: admin/pages/manage_uploads.twig:55
 msgid "download"
 msgstr ""
 

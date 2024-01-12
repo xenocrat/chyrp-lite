@@ -68,6 +68,17 @@ msgstr ""
 "称，日期时间等。 例如： <code>author:Foo;year:2016;</code> 将过滤posts表，仅"
 "显示2016年由Foo创建的帖子。"
 
+#: admin/help/filtering_results.twig:15
+msgid ""
+"Use the syntax <code>ASC:column;</code> or <code>DESC:column;</code> to sort "
+"the results in ascending or descending order. For example: <code>DESC:"
+"user_id;ASC:id;</code> would sort a table of posts in descending order of "
+"user ID and then ascending order of post ID."
+msgstr ""
+"使用语法 <code>ASC:column;</code> 对结果进行升序排序，或使用 <code>DESC:"
+"column;</code> 对结果进行降序排序。 例如：<code>DESC:user_id;ASC:id;</code> "
+"将按用户 ID 降序对帖子表进行排序，然后按帖子 ID 升序排序。"
+
 #: admin/help/markdown.twig:3 admin/help/markdown.twig:6
 #: admin/help/markdown.twig:13 admin/pages/content_settings.twig:77
 #: admin/partials/page_fields.twig:13 admin/partials/post_fields.twig:52
@@ -560,7 +571,7 @@ msgstr "编辑组 &#8220;%s&#8221;"
 msgid "Are you sure you want to make these changes to your group?"
 msgstr "您确定您想改变您的组吗？"
 
-#: admin/pages/edit_group.twig:10 admin/pages/manage_uploads.twig:17
+#: admin/pages/edit_group.twig:10 admin/pages/manage_uploads.twig:22
 #: admin/pages/new_group.twig:10
 msgid "Name"
 msgstr "姓名"
@@ -810,7 +821,7 @@ msgid "New Group"
 msgstr "新组"
 
 #: admin/pages/manage_groups.twig:18 admin/pages/manage_pages.twig:18
-#: admin/pages/manage_posts.twig:18 admin/pages/manage_uploads.twig:13
+#: admin/pages/manage_posts.twig:18 admin/pages/manage_uploads.twig:18
 #: admin/pages/manage_users.twig:23
 msgid "Search Results"
 msgstr "搜索结果"
@@ -828,7 +839,7 @@ msgid "Guests?"
 msgstr "访问者？"
 
 #: admin/pages/manage_groups.twig:27 admin/pages/manage_pages.twig:29
-#: admin/pages/manage_posts.twig:27 admin/pages/manage_uploads.twig:21
+#: admin/pages/manage_posts.twig:27 admin/pages/manage_uploads.twig:26
 #: admin/pages/manage_users.twig:35
 msgid "Controls"
 msgstr "操作"
@@ -845,19 +856,19 @@ msgid "edit"
 msgstr "编辑"
 
 #: admin/pages/manage_groups.twig:54 admin/pages/manage_pages.twig:66
-#: admin/pages/manage_posts.twig:50 admin/pages/manage_uploads.twig:55
+#: admin/pages/manage_posts.twig:50 admin/pages/manage_uploads.twig:60
 #: admin/pages/manage_users.twig:66
 msgid "delete"
 msgstr "删除"
 
 #: admin/pages/manage_groups.twig:60 admin/pages/manage_pages.twig:72
-#: admin/pages/manage_posts.twig:57 admin/pages/manage_uploads.twig:62
+#: admin/pages/manage_posts.twig:57 admin/pages/manage_uploads.twig:67
 #: admin/pages/manage_users.twig:72 admin/partials/uploads_modal.twig:28
 msgid "No results"
 msgstr "没有结果"
 
 #: admin/pages/manage_groups.twig:68 admin/pages/manage_pages.twig:80
-#: admin/pages/manage_posts.twig:65 admin/pages/manage_uploads.twig:70
+#: admin/pages/manage_posts.twig:65 admin/pages/manage_uploads.twig:75
 #: admin/pages/manage_users.twig:80
 #, php-format
 msgid "Page %d of %s"
@@ -919,18 +930,22 @@ msgid "Manage Uploads"
 msgstr "管理上传"
 
 #: admin/pages/manage_uploads.twig:13
+msgid "Add Files"
+msgstr "添加文件"
+
+#: admin/pages/manage_uploads.twig:18
 msgid "Uploads"
 msgstr "上传"
 
-#: admin/pages/manage_uploads.twig:18
+#: admin/pages/manage_uploads.twig:23
 msgid "Last Modified"
 msgstr "上一次更改"
 
-#: admin/pages/manage_uploads.twig:19
+#: admin/pages/manage_uploads.twig:24
 msgid "Size"
 msgstr "大小"
 
-#: admin/pages/manage_uploads.twig:50
+#: admin/pages/manage_uploads.twig:55
 msgid "download"
 msgstr "下载"
 

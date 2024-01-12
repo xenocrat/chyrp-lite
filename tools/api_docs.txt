@@ -2259,10 +2259,11 @@ Pluralizes a word.
 
 Parameters:
     $string - The lowercase string to pluralize.
-    $number - If supplied, and this number is 1, it will not pluralize.
+    $number - A number to determine pluralization.
 
 Returns:
-    The supplied word with a trailing "s" added, or a non-normative pluralization.
+    The supplied word with a trailing "s" added,
+    or the correct non-normative pluralization.
 
 
 Function: depluralize
