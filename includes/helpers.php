@@ -1086,6 +1086,7 @@
             return array(array(), array(), null);
 
         $sql = SQL::current();
+        $trigger = Trigger::current();
 
         # PostgreSQL: use ILIKE operator for case-insensitivity.
         if ($sql->adapter == "pgsql")
@@ -1231,7 +1232,7 @@
             implode(", ", $ordering) ;
 
         $search = array($where, $params, $order);
-        Trigger::current()->filter($search, "keyword_search", $query, $plain);
+        $trigger->filter($search, "keyword_search", $query, $plain);
         return $search;
     }
 
