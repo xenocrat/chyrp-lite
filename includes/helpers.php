@@ -384,7 +384,9 @@
         if (class_exists("Locale")) {
             # Generate a locale string for Windows.
             $list[] = Locale::getDisplayLanguage($locale, "en_US").
-                      "_".Locale::getDisplayRegion($locale, "en_US").".utf8";
+                      "_".
+                      Locale::getDisplayRegion($locale, "en_US").
+                      ".utf8";
 
             # Set the ICU locale.
             Locale::setDefault($locale);
@@ -509,11 +511,18 @@
      */
     function __($text, $domain = "chyrp"): string {
         if (USE_GETTEXT_SHIM)
-            return Translation::current()->text($domain, $text);
+            return Translation::current()->text(
+                $domain,
+                $text
+            );
 
-        return function_exists("dgettext") ?
-            dgettext($domain, $text) :
-            $text ;
+        if (function_exists("dgettext"))
+            return dgettext(
+                $domain,
+                $text
+            );
+
+        return $text;
     }
 
     /**
@@ -533,10 +542,20 @@
         $int = (int) $number;
 
         if (USE_GETTEXT_SHIM)
-            return Translation::current()->text($domain, $single, $plural, $int);
+            return Translation::current()->text(
+                $domain,
+                $single,
+                $plural,
+                $int
+            );
 
         if (function_exists("dngettext"))
-            return dngettext($domain, $single, $plural, $int);
+            return dngettext(
+                $domain,
+                $single,
+                $plural,
+                $int
+            );
 
         return ($int != 1) ?
             $plural :
@@ -699,10 +718,16 @@
         $zone_list = timezone_identifiers_list(DateTimeZone::ALL);
 
         foreach ($zone_list as $zone) {
-            $name = str_replace(array("_", "St "), array(" ", "St. "), $zone);
+            $name = str_replace(
+                array("_", "St "),
+                array(" ", "St. "),
+                $zone
+            );
 
-            $timezones[] = array("code" => $zone,
-                                 "name" => $name);
+            $timezones[] = array(
+                "code" => $zone,
+                "name" => $name
+            );
         }
 
         return $timezones;
@@ -869,7 +894,10 @@
      *     A unique token salted with the site's secure hashkey.
      */
     function token($items): string {
-        return sha1(implode((array) $items).Config::current()->secure_hashkey);
+        return sha1(
+            implode((array) $items).
+            Config::current()->secure_hashkey
+        );
     }
 
     /**
@@ -1059,11 +1087,12 @@
         }
 
         if (!INSTALLING and !UPGRADING) {
-            foreach (Config::current()->enabled_modules as $module)
+            foreach (Config::current()->enabled_modules as $module) {
                 if (is_file(MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath)) {
                     require MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath;
                     return;
                 }
+            }
         }
     }
 
@@ -1116,7 +1145,14 @@
                 $keywords[] = trim($fragment);
         }
 
-        $dates = array("year", "month", "day", "hour", "minute", "second");
+        $dates = array(
+            "year",
+            "month",
+            "day",
+            "hour",
+            "minute",
+            "second"
+        );
 
         $created_at = array(
             "year"   => "____",
@@ -1405,7 +1441,9 @@
      *     <camelize>
      */
     function decamelize($string): string {
-        return strtolower(preg_replace("/([a-z])([A-Z])/", "\\1_\\2", $string));
+        return strtolower(
+            preg_replace("/([a-z])([A-Z])/", "\\1_\\2", $string)
+        );
     }
 
     /**
@@ -1440,7 +1478,11 @@
         $remainder  = mb_substr($text, $breakpoint, null, $encoding);
 
         if (!$exact and !preg_match("/^\s/", $remainder))
-            $truncation = preg_replace("/(.+)\s.*/s", "$1", $truncation);
+            $truncation = preg_replace(
+                "/(.+)\s.*/s",
+                "$1",
+                $truncation
+            );
 
         return $truncation.$ellipsis;
     }
@@ -1526,7 +1568,11 @@
         );
 
         foreach ($emoji as $key => $value)
-            $text = str_replace($key, '<span class="emoji">'.$value.'</span>', $text);
+            $text = str_replace(
+                $key,
+                '<span class="emoji">'.$value.'</span>',
+                $text
+            );
 
         return $text;
     }
@@ -3095,8 +3141,9 @@
      *     $filename - The name to be applied to the content upon download.
      */
     function file_attachment($contents = "", $filename = "caconym"): void {
+        $safename = addslashes($filename);
         header("Content-Type: application/octet-stream");
-        header("Content-Disposition: attachment; filename=\"".addslashes($filename)."\"");
+        header("Content-Disposition: attachment; filename=\"".$safename."\"");
 
         if (
             !in_array("ob_gzhandler", ob_list_handlers()) and
