@@ -2715,9 +2715,13 @@
         if (!preg_match("/(.+)(\.($patterns))$/i", $filename, $matches))
             return false;
 
-        $extension = $matches[3];
-        $sanitized = oneof(sanitize($matches[1], true, true, 80), md5($filename));
+        $sanitized = oneof(
+            sanitize($matches[1], true, true, 80),
+            md5($filename)
+        );
+
         $count = 1;
+        $extension = $matches[3];
         $unique = $sanitized.".".$extension;
 
         while (file_exists(uploaded($unique, false))) {
