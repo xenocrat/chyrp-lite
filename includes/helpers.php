@@ -2747,10 +2747,10 @@
             "avif", "tif",  "tiff", "heif", "bmp",
 
             # Video and audio formats:
-            "mpg",  "mpeg", "m4a",  "m4v",  "mp4",
-            "mp2",  "mp3",  "webm", "mov",  "avi",
-            "oga",  "ogv",  "ogg",  "mka",  "mkv",
-            "flac", "aiff", "wav",  "3gp",  "ts"
+            "mpg",  "mpeg", "mp2",  "mp3",  "mp4",
+            "m4a",  "m4v",  "ogg",  "oga",  "ogv",
+            "mka",  "mkv",  "mov",  "avi",  "wav",
+            "webm", "flac", "aiff", "3gp",  "ts"
         );
     }
 
