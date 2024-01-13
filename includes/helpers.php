@@ -2748,9 +2748,9 @@
 
             # Video and audio formats:
             "mpg",  "mpeg", "m4a",  "m4v",  "mp4",
-            "mp3",  "webm", "3gp",  "mov",  "avi",
+            "mp2",  "mp3",  "webm", "mov",  "avi",
             "oga",  "ogv",  "ogg",  "mka",  "mkv",
-            "flac", "aiff", "wav"
+            "flac", "aiff", "wav",  "3gp",  "ts"
         );
     }
 
