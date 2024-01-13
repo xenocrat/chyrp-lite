@@ -1798,7 +1798,12 @@
      * Returns:
      *     The response content, or false on failure.
      */
-    function get_remote($url, $redirects = 0, $timeout = 10, $headers = false): string|false {
+    function get_remote(
+        $url,
+        $redirects = 0,
+        $timeout = 10,
+        $headers = false
+    ): string|false {
         extract(parse_url(add_scheme($url)), EXTR_SKIP);
         fallback($path, "/");
         fallback($scheme, "http");
@@ -2277,11 +2282,12 @@
 
         $uploads_path = MAIN_DIR.Config::current()->uploads_path;
 
-        if ($info["uploader"])
+        if ($info["uploader"]) {
             if (!is_dir($uploads_path))
                 $info["notifications"][] = __("Please create the uploads directory.");
             elseif (!is_writable($uploads_path))
                 $info["notifications"][] = __("Please make the uploads directory writable.");
+        }
 
         return $info;
     }
@@ -2299,7 +2305,11 @@
             $filepath = MODULES_DIR.DIR.$module.DIR.$module.".php";
 
             if (!is_file($filepath) or !is_readable($filepath)) {
-                cancel_module($module, _f("%s module is missing.", $class_name));
+                cancel_module(
+                    $module,
+                    _f("%s module is missing.", $class_name)
+                );
+
                 continue;
             }
 
@@ -2308,7 +2318,11 @@
             require $filepath;
 
             if (!is_subclass_of($class_name, "Modules")) {
-                cancel_module($module, _f("%s module is damaged.", $class_name));
+                cancel_module(
+                    $module,
+                    _f("%s module is damaged.", $class_name)
+                );
+
                 continue;
             }
 
@@ -2322,7 +2336,11 @@
             $filepath = FEATHERS_DIR.DIR.$feather.DIR.$feather.".php";
 
             if (!is_file($filepath) or !is_readable($filepath)) {
-                cancel_feather($feather, _f("%s feather is missing.", $class_name));
+                cancel_feather(
+                    $feather,
+                    _f("%s feather is missing.", $class_name)
+                );
+
                 continue;
             }
 
@@ -2331,7 +2349,11 @@
             require $filepath;
 
             if (!is_subclass_of($class_name, "Feathers")) {
-                cancel_feather($feather, _f("%s feather is damaged.", $class_name));
+                cancel_feather(
+                    $feather,
+                    _f("%s feather is damaged.", $class_name)
+                );
+
                 continue;
             }
 
