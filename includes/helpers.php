@@ -3009,32 +3009,6 @@
         return true;
     }
 
-    /**
-     * Function: get_gravatar
-     * Get either a Gravatar URL or complete image tag for a specified email address.
-     *
-     * Parameters:
-     *     $email - The email address.
-     *     $s - Return an image of this size in pixels (512 maximum).
-     *     $d - Default image set: 404/mm/identicon/monsterid/wavatar.
-     *     $r - Maximum acceptable guidance rating for images: g/pg/r/x.
-     *     $img - Return a complete <img> tag?
-     *
-     * Returns:
-     *     String containing either just a URL or a complete image tag.
-     *
-     * Source:
-     *     http://gravatar.com/site/implement/images/php/
-     */
-    function get_gravatar($email, $s = 80, $img = false, $d = "mm", $r = "g"): string {
-        $url = "https://www.gravatar.com/avatar/".
-               md5(strtolower(trim($email)))."?s=$s&d=$d&r=$r";
-
-        return ($img) ?
-            '<img class="gravatar" src="'.fix($url, true, true).'" alt="">' :
-            $url ;
-    }
-
     #---------------------------------------------
     # Responding to Requests
     #---------------------------------------------
