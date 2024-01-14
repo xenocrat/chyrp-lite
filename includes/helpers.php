@@ -77,7 +77,7 @@
         if (!class_exists("Session"))
             return false;
 
-        return Session::authenticate();
+        return Session::authenticate($hash);
     }
 
     #---------------------------------------------
