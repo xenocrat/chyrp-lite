@@ -130,11 +130,15 @@
          */
         public static function authenticate($hash = null): bool|string{
             $id = session_id();
+
+            if ($id == "")
+                return false;
+
             $token = token($id);
 
-            if (isset($hash))
-                return hash_equals($token, $hash);
+            if (!isset($hash))
+                return $token;
 
-            return ($id == "") ? false : $token ;
+            return hash_equals($token, $hash);
         }
     }
