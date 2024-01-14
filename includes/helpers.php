@@ -1106,7 +1106,8 @@
      *     $table - Check this table to ensure the keywords are valid.
      *
      * Returns:
-     *     An array containing the "WHERE" queries and the corresponding parameters.
+     *     An array containing an array of "WHERE" conditions, an array
+     *     of "WHERE" parameters, and "ORDER BY" clause for the results.
      */
     function keywords($query, $plain, $table = null): array {
         $trimmed = trim($query);
