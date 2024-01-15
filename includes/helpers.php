@@ -35,8 +35,8 @@
             $secure = ($parsed["scheme"] == "https");
 
         $options = array(
-            "lifetime" => 2592000,
-            "expires"  => time() + 2592000,
+            "lifetime" => COOKIE_LIFETIME,
+            "expires"  => time() + COOKIE_LIFETIME,
             "path"     => "/",
             "domain"   => $parsed["host"],
             "secure"   => $secure,
