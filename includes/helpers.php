@@ -71,13 +71,16 @@
 
     /**
      * Function: authenticate
-     * Mask for Session::authenticate().
+     * Mask for Session::hash_token().
      */
     function authenticate($hash = null): bool|string {
         if (!class_exists("Session"))
             return false;
 
-        return Session::authenticate($hash);
+        if (isset($hash))
+            return false;
+
+        return Session::hash_token();
     }
 
     #---------------------------------------------

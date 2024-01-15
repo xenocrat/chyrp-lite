@@ -52,7 +52,7 @@
          * Destroys a post.
          */
         public function ajax_destroy_post(): void {
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -96,7 +96,7 @@
                     __("You do not have sufficient privileges to delete pages.")
                 );
 
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -126,7 +126,7 @@
          * Previews a post.
          */
         public function ajax_preview_post(): void {
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -182,7 +182,7 @@
          * Previews a page.
          */
         public function ajax_preview_page(): void {
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -223,7 +223,7 @@
          * Moves a file to the uploads directory.
          */
         public function ajax_file_upload(): void {
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -264,7 +264,7 @@
         }
 
         public function ajax_uploads_modal(): void {
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")

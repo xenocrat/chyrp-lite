@@ -311,7 +311,7 @@
                     __("You do not have sufficient privileges to add categories.", "categorize")
                 );
 
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -371,7 +371,7 @@
         }
 
         public function admin_update_category($admin)/*: never */ {
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -454,7 +454,7 @@
         }
 
         public function admin_destroy_category()/*: never */ {
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")

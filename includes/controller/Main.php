@@ -716,7 +716,7 @@
                 );
 
             if (!empty($_POST)) {
-                if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+                if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                     Flash::warning(
                         __("Invalid authentication token.")
                     );
@@ -869,7 +869,7 @@
                 );
 
             if (!empty($_POST)) {
-                if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+                if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                     Flash::warning(
                         __("Invalid authentication token.")
                     );
@@ -945,7 +945,7 @@
                 );
 
             if (!empty($_POST)) {
-                if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+                if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                     Flash::warning(
                         __("Invalid authentication token.")
                     );
@@ -1035,7 +1035,7 @@
                 );
 
             if (!empty($_POST)) {
-                if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+                if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                     Flash::warning(
                         __("Invalid authentication token.")
                     );
@@ -1111,7 +1111,7 @@
                 );
 
             if (!empty($_POST)) {
-                if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+                if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                     Flash::warning(
                         __("Invalid authentication token.")
                     );

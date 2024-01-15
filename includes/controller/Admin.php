@@ -240,7 +240,7 @@
                     __("You do not have sufficient privileges to add posts.")
                 );
 
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -332,7 +332,7 @@
 
             fallback($_SESSION['post_redirect'], $post_redirect);
 
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -420,7 +420,7 @@
          * Destroys a post.
          */
         public function admin_destroy_post()/*: never */{
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -601,7 +601,7 @@
                     __("You do not have sufficient privileges to add pages.")
                 );
 
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -721,7 +721,7 @@
                     __("You do not have sufficient privileges to edit pages.")
                 );
 
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -844,7 +844,7 @@
                     __("You do not have sufficient privileges to delete pages.")
                 );
 
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -972,7 +972,7 @@
                     __("You do not have sufficient privileges to add users.")
                 );
 
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -1116,7 +1116,7 @@
          * Updates a user when the form is submitted.
          */
         public function admin_update_user()/*: never */{
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -1300,7 +1300,7 @@
                     __("You do not have sufficient privileges to delete users.")
                 );
 
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -1452,7 +1452,7 @@
                     __("You do not have sufficient privileges to add groups.")
                 );
 
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -1535,7 +1535,7 @@
                     __("You do not have sufficient privileges to edit groups.")
                 );
 
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -1647,7 +1647,7 @@
                     __("You do not have sufficient privileges to delete groups.")
                 );
 
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -1875,7 +1875,7 @@
                     __("You do not have sufficient privileges to delete uploads.")
                 );
 
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -1956,7 +1956,7 @@
                 return;
             }
 
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -2299,7 +2299,7 @@
                 return;
             }
 
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -2710,7 +2710,7 @@
                     __("You do not have sufficient privileges to toggle extensions.")
                 );
 
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -2788,7 +2788,7 @@
                     __("You do not have sufficient privileges to toggle extensions.")
                 );
 
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -2860,7 +2860,7 @@
                     __("You do not have sufficient privileges to change settings.")
                 );
 
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -2915,7 +2915,7 @@
                 );
             }
 
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -2953,7 +2953,7 @@
                 return;
             }
 
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -3061,7 +3061,7 @@
                 return;
             }
 
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -3124,7 +3124,7 @@
                 return;
             }
 
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -3190,7 +3190,7 @@
                 return;
             }
 
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")

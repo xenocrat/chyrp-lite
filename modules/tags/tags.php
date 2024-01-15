@@ -394,7 +394,7 @@
         }
 
         public function admin_update_tags($admin)/*: never */{
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -464,7 +464,7 @@
                     __("You do not have sufficient privileges to rename tags.", "tags")
                 );
 
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -547,7 +547,7 @@
                     __("You do not have sufficient privileges to delete tags.", "tags")
                 );
 
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -597,7 +597,7 @@
                     __("You do not have sufficient privileges to add tags.", "tags")
                 );
 
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")

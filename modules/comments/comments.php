@@ -119,7 +119,7 @@
         }
 
         private function add_comment(): array {
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -207,7 +207,7 @@
         }
 
         private function update_comment(): array {
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -386,7 +386,7 @@
         }
 
         public function admin_destroy_comment()/*: never */{
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -517,7 +517,7 @@
         }
 
         public function admin_bulk_comments()/*: never */{
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -700,7 +700,7 @@
                 return;
             }
 
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -889,7 +889,7 @@
         }
 
         public function ajax_edit_comment(): void {
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")
@@ -927,7 +927,7 @@
         }
 
         public function ajax_destroy_comment(): void {
-            if (!isset($_POST['hash']) or !authenticate($_POST['hash']))
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
                     __("Invalid authentication token.")

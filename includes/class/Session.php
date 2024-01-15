@@ -119,25 +119,30 @@
         }
 
         /**
-         * Function: authenticate
-         * Generates or validates an authentication token for this session.
-         *
-         * Parameters:
-         *     $hash - A previously generated token to be validated (optional).
-         *
-         * Returns:
-         *     An authentication token, or the validity of the supplied token.
+         * Function: hash_token
+         * Generates an authentication token for this session.
          */
-        public static function authenticate($hash = null): bool|string{
+        public static function hash_token(): bool|string {
             $id = session_id();
 
-            if ($id == "")
+            if ($id === "")
                 return false;
 
-            $token = token($id);
+            return token($id);
+        }
 
-            if (!isset($hash))
-                return $token;
+        /**
+         * Function: check_token
+         * Validates an authentication token for this session.
+         *
+         * Parameters:
+         *     $hash - A previously generated token to be validated.
+         */
+        public static function check_token($hash): bool {
+            $token = self::hash_token();
+
+            if ($token === false)
+                return false;
 
             return hash_equals($token, $hash);
         }
