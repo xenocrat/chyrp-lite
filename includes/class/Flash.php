@@ -22,11 +22,10 @@
 
         # Boolean: $exists
         # Do any Flashes exist?
-        static $exists = array(
+        private static $exists = array(
             "message" => false,
             "notice" => false,
-            "warning" => false,
-            null => false
+            "warning" => false
         );
 
         /**
@@ -44,7 +43,7 @@
          * Function: prepare
          * Prepare the structure of the "flash" session value.
          */
-        static function prepare($type): void {
+        private static function prepare($type): void {
             if (!isset($_SESSION))
                 $_SESSION = array();
 
@@ -61,7 +60,7 @@
          *     $redirect_to - URL to redirect to after the message is stored.
          *     $code - Numeric HTTP status code to set.
          */
-        static function message($message, $redirect_to = null, $code = null): void {
+        public static function message($message, $redirect_to = null, $code = null): void {
             self::prepare("messages");
             $trigger = Trigger::current();
 
@@ -83,7 +82,7 @@
          *     $redirect_to - URL to redirect to after the message is stored.
          *     $code - Numeric HTTP status code to set.
          */
-        static function notice($message, $redirect_to = null, $code = null): void {
+        public static function notice($message, $redirect_to = null, $code = null): void {
             self::prepare("notices");
             $trigger = Trigger::current();
 
@@ -105,7 +104,7 @@
          *     $redirect_to - URL to redirect to after the message is stored.
          *     $code - Numeric HTTP status code to set.
          */
-        static function warning($message, $redirect_to = null, $code = null): void {
+        public static function warning($message, $redirect_to = null, $code = null): void {
             self::prepare("warnings");
             $trigger = Trigger::current();
 
@@ -167,16 +166,16 @@
          * Returns:
          *     An array of messages of the requested type.
          */
-        public function serve($type): array {
+        private function serve($type): array {
             if (!empty($_SESSION[$type]))
-                self::$exists[depluralize($type)] = self::$exists[null] = true;
+                self::$exists[depluralize($type)] = true;
 
             if (isset($_SESSION[$type])) {
                 $this->$type = $_SESSION[$type];
                 $_SESSION[$type] = array();
             }
 
-            return $this->$type;
+            return (array) $this->$type;
         }
 
         /**
@@ -186,16 +185,27 @@
          * Parameters:
          *     $type - The type of message to check for.
          */
-        static function exists($type = null): bool {
-            if (self::$exists[$type])
-                return self::$exists[$type];
-
+        public static function exists($type = null): bool {
             if (isset($type)) {
-                return self::$exists[$type] = !empty($_SESSION[pluralize($type)]);
+                if (!array_key_exists($type, self::$exists))
+                    return false;
+
+                if (self::$exists[$type])
+                    return true;
+
+                if (!empty($_SESSION[pluralize($type)])) {
+                    self::$exists[$type] = true;
+                    return true;
+                }
             } else {
-                foreach (array("messages", "notices", "warnings") as $type) {
-                    if (!empty($_SESSION[$type]))
-                        return self::$exists[depluralize($type)] = self::$exists[null] = true;
+                if (in_array(true, self::$exists))
+                    return true;
+
+                foreach (array_keys(self::$exists) as $type) {
+                    if (!empty($_SESSION[pluralize($type)])) {
+                        self::$exists[$type] = true;
+                        return true;
+                    }
                 }
             }
 
