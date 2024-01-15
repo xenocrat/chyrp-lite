@@ -66,6 +66,9 @@
         if (!class_exists("Visitor"))
             return false;
 
+        if (func_num_args())
+            return false;
+
         return Visitor::logged_in();
     }
 
@@ -73,11 +76,11 @@
      * Function: authenticate
      * Mask for Session::hash_token().
      */
-    function authenticate($hash = null): bool|string {
+    function authenticate(): bool|string {
         if (!class_exists("Session"))
             return false;
 
-        if (isset($hash))
+        if (func_num_args())
             return false;
 
         return Session::hash_token();
