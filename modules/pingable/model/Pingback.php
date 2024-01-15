@@ -28,7 +28,7 @@
          * See Also:
          *     <Model::search>
          */
-        static function find(
+        public static function find(
             $options = array(),
             $options_for_object = array()
         ): array {
@@ -52,7 +52,7 @@
          * Returns:
          *     The newly created <Pingback>.
          */
-        static function add($post_id, $source, $title, $created_at = null): self {
+        public static function add($post_id, $source, $title, $created_at = null): self {
             $sql = SQL::current();
 
             $sql->insert(
@@ -116,7 +116,7 @@
          * See Also:
          *     <Model::destroy>
          */
-        static function delete($pingback_id): void {
+        public static function delete($pingback_id): void {
             parent::destroy(self::class, $pingback_id);
         }
 
@@ -124,7 +124,7 @@
          * Function: install
          * Creates the database table.
          */
-        static function install(): void {
+        public static function install(): void {
             SQL::current()->create(
                 table:"pingbacks",
                 cols:array(
@@ -141,7 +141,7 @@
          * Function: uninstall
          * Drops the database table.
          */
-        static function uninstall(): void {
+        public static function uninstall(): void {
             SQL::current()->drop("pingbacks");
         }
     }

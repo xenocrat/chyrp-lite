@@ -1,6 +1,6 @@
 <?php
     class Rights extends Modules {
-        static function __uninstall($confirm): void {
+        public static function __uninstall($confirm): void {
             if ($confirm) {
                 $sql = SQL::current();
 

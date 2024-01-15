@@ -13,14 +13,14 @@
             $this->setPriority("route_done", 5);
         }
 
-        static function __install(): void {
+        public static function __install(): void {
             Config::current()->set(
                 "module_cacher",
                 array("cache_lastmod" => time())
             );
         }
 
-        static function __uninstall(): void {
+        public static function __uninstall(): void {
             Config::current()->remove("module_cacher");
         }
 

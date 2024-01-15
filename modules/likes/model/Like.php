@@ -28,7 +28,7 @@
          * See Also:
          *     <Model::search>
          */
-        static function find(
+        public static function find(
             $options = array(),
             $options_for_object = array()
         ): array {
@@ -52,7 +52,7 @@
          * Returns:
          *     The newly created <Like>.
          */
-        static function add(
+        public static function add(
             $post_id,
             $user_id,
             $timestamp,
@@ -82,7 +82,7 @@
          * See Also:
          *     <Model::destroy>
          */
-        static function delete($like_id): void {
+        public static function delete($like_id): void {
             parent::destroy(self::class, $like_id);
         }
 
@@ -117,7 +117,7 @@
          * Parameters:
          *     $post_id - The ID of the blog post that was liked.
          */
-        static function create($post_id): void {
+        public static function create($post_id): void {
             if (self::exists($post_id))
                 return;
 
@@ -142,7 +142,7 @@
          * Notes:
          *     Guests' likes are removable until the session is destroyed.
          */
-        static function remove($post_id): void {
+        public static function remove($post_id): void {
             if (!self::exists($post_id))
                 return;
 
@@ -156,7 +156,7 @@
          * Function: exists
          * Determines if the visitor has liked a post.
          */
-        static function exists($post_id): bool {
+        public static function exists($post_id): bool {
             static $results;
             fallback($_SESSION['likes'], array());
 
@@ -190,7 +190,7 @@
          * Function: install
          * Creates the database table.
          */
-        static function install(): void {
+        public static function install(): void {
             SQL::current()->create(
                 table:"likes",
                 cols:array(
@@ -207,7 +207,7 @@
          * Function: uninstall
          * Drops the database table.
          */
-        static function uninstall(): void {
+        public static function uninstall(): void {
             SQL::current()->drop("likes");
         }
     }

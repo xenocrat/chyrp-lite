@@ -28,7 +28,7 @@
          * See Also:
          *     <Model::search>
          */
-        static function find(
+        public static function find(
             $options = array(),
             $options_for_object = array()
         ): array {
@@ -51,7 +51,7 @@
          * Returns:
          *     The newly created <View>.
          */
-        static function add($post_id, $user_id, $created_at = null): self {
+        public static function add($post_id, $user_id, $created_at = null): self {
             $sql = SQL::current();
 
             $sql->insert(
@@ -73,7 +73,7 @@
          * See Also:
          *     <Model::destroy>
          */
-        static function delete($view_id): void {
+        public static function delete($view_id): void {
             parent::destroy(self::class, $view_id);
         }
 
@@ -81,7 +81,7 @@
          * Function: install
          * Creates the database table.
          */
-        static function install(): void {
+        public static function install(): void {
             SQL::current()->create(
                 table:"views",
                 cols:array(
@@ -97,7 +97,7 @@
          * Function: uninstall
          * Drops the database table.
          */
-        static function uninstall(): void {
+        public static function uninstall(): void {
             SQL::current()->drop("views");
         }
     }

@@ -6,7 +6,7 @@
     class Feathers {
         # Array: $instances
         # Holds all feather instantiations.
-        static $instances = array();
+        public static $instances = array();
 
         # Boolean: $cancelled
         # Is the feather's execution cancelled?
@@ -22,11 +22,11 @@
 
         # Array: $filters
         # Manages named trigger filters for feather fields.
-        static $filters = array();
+        public static $filters = array();
 
         # Array: $custom_filters
         # Manages custom feather-provided trigger filters.
-        static $custom_filters = array();
+        public static $custom_filters = array();
 
         /**
          * Function: setFilter

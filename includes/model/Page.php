@@ -61,7 +61,7 @@
          * See Also:
          *     <Model::search>
          */
-        static function find(
+        public static function find(
             $options = array(),
             $options_for_object = array()
         ): array {
@@ -98,7 +98,7 @@
          * See Also:
          *     <update>
          */
-        static function add(
+        public static function add(
             $title,
             $body,
             $user         = null,
@@ -264,7 +264,7 @@
          * See Also:
          *     <Model::destroy>
          */
-        static function delete($page_id, $recursive = false): void {
+        public static function delete($page_id, $recursive = false): void {
             if ($recursive) {
                 $page = new self($page_id);
 
@@ -282,7 +282,7 @@
          * Parameters:
          *     $page_id - The page ID to check
          */
-        static function exists($page_id): bool {
+        public static function exists($page_id): bool {
             return SQL::current()->count(
                 tables:"pages",
                 conds:array("id" => $page_id)
@@ -300,7 +300,7 @@
          *     The unique version of $url.
          *     If unused, it's the same as $url. If used, a number is appended to it.
          */
-        static function check_url($url): string {
+        public static function check_url($url): string {
             if (empty($url))
                 return $url;
 
@@ -343,7 +343,7 @@
          *     $request - The request URI to parse.
          *     $route - The route to respond to, or null to return a Page.
          */
-        static function from_url($request, $route = null): self|array|false {
+        public static function from_url($request, $route = null): self|array|false {
             # Dirty URL?
             if (preg_match("/(\?|&)url=([^&#]+)/", $request, $slug)) {
                 $page = new self(array("url" => $slug[2]));

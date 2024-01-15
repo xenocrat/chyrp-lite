@@ -31,7 +31,7 @@
          * See Also:
          *     <Model::search>
          */
-        static function find(
+        public static function find(
             $options = array(),
             $options_for_object = array()
         ): array {
@@ -58,7 +58,7 @@
          * See Also:
          *     <update>
          */
-        static function add($name, $clean, $show_on_home): self {
+        public static function add($name, $clean, $show_on_home): self {
             $sql = SQL::current();
 
             $sql->insert(
@@ -121,7 +121,7 @@
          * Function: delete
          * Deletes a category from the database.
          */
-        static function delete($category_id): void {
+        public static function delete($category_id): void {
             $trigger = Trigger::current();
             $sql = SQL::current();
 
@@ -179,7 +179,7 @@
          *     The unique version of the slug.
          *     If it's not used, it's the same as $clean. If it is, a number is appended.
          */
-        static function check_clean($clean): string {
+        public static function check_clean($clean): string {
             if (empty($clean))
                 return $clean;
 
@@ -205,7 +205,7 @@
          * Function: install
          * Creates the database table.
          */
-        static function install(): void {
+        public static function install(): void {
             SQL::current()->create(
                 table:"categorize",
                 cols:array(
@@ -221,7 +221,7 @@
          * Function: uninstall
          * Drops the database table.
          */
-        static function uninstall(): void {
+        public static function uninstall(): void {
             $sql = SQL::current();
 
             $sql->drop("categorize");

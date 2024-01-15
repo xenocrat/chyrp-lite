@@ -6,14 +6,14 @@
         # Query caches for methods.
         private $caches = array();
 
-        static function __install(): void {
+        public static function __install(): void {
             Pingback::install();
 
             Group::add_permission("edit_pingback", "Edit Webmentions");
             Group::add_permission("delete_pingback", "Delete Webmentions");
         }
 
-        static function __uninstall($confirm): void {
+        public static function __uninstall($confirm): void {
             if ($confirm)
                 Pingback::uninstall();
 
@@ -278,7 +278,7 @@
             $post->has_many[] = "pingbacks";
         }
 
-        static function delete_post($post): void {
+        public function delete_post($post): void {
             SQL::current()->delete(
                 table:"pingbacks",
                 conds:array("post_id" => $post->id)

@@ -8,7 +8,7 @@
          * Function: type
          * Returns the content type of the feed.
          */
-        static function type(): string;
+        public static function type(): string;
 
         /**
          * Function: open

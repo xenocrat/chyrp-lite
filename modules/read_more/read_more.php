@@ -2,7 +2,7 @@
     class ReadMore extends Modules {
         private $routing = false;
 
-        static function __install(): void {
+        public static function __install(): void {
             Config::current()->set(
                 "module_read_more",
                 array(
@@ -12,7 +12,7 @@
             );
         }
 
-        static function __uninstall(): void {
+        public static function __uninstall(): void {
             Config::current()->remove("module_read_more");
         }
 

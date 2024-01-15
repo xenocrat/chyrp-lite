@@ -25,7 +25,7 @@
 
         # Array: $url_attrs
         # The translation array of the post URL setting to regular expressions.
-        static $url_attrs = array(
+        public static $url_attrs = array(
             '(year)'     => '([0-9]{4})',
             '(month)'    => '([0-9]{1,2})',
             '(day)'      => '([0-9]{1,2})',
@@ -144,7 +144,7 @@
          * See Also:
          *     <Model::search>
          */
-        static function find(
+        public static function find(
             $options = array(),
             $options_for_object = array()
         ): array {
@@ -243,7 +243,7 @@
          * See Also:
          *     <update>
          */
-        static function add(
+        public static function add(
             $values     = array(),
             $clean      = "",
             $url        = "",
@@ -457,7 +457,7 @@
          * See Also:
          *     <Model::destroy>
          */
-        static function delete($id): void {
+        public static function delete($id): void {
             parent::destroy(
                 self::class,
                 $id,
@@ -534,7 +534,7 @@
          * Function: any_editable
          * Checks if the <Visitor> can edit any posts.
          */
-        static function any_editable(): bool {
+        public static function any_editable(): bool {
             $visitor = Visitor::current();
             $sql = SQL::current();
 
@@ -579,7 +579,7 @@
          * Function: any_deletable
          * Checks if the <Visitor> can delete any posts.
          */
-        static function any_deletable(): bool {
+        public static function any_deletable(): bool {
             $visitor = Visitor::current();
             $sql = SQL::current();
 
@@ -630,7 +630,7 @@
          * Returns:
          *     true - if a post with that ID is in the database.
          */
-        static function exists($post_id): bool {
+        public static function exists($post_id): bool {
             return SQL::current()->count(
                 tables:"posts",
                 conds:array("id" => $post_id)
@@ -648,7 +648,7 @@
          *     The unique version of the URL value.
          *     If unused, it's the same as $url. If used, a number is appended to it.
          */
-        static function check_url($url): string {
+        public static function check_url($url): string {
             if (empty($url))
                 return $url;
 
@@ -928,7 +928,7 @@
          *     $route - The route to respond to, or null to return a Post.
          *     $options - Additional options for the Post object (optional).
          */
-        static function from_url(
+        public static function from_url(
             $request,
             $route = null,
             $options = array()
@@ -1035,7 +1035,7 @@
          *     $start - An array of additional statuses to allow;
          *              "registered_only", "private" and "scheduled" are added deterministically.
          */
-        static function statuses($start = array()): string {
+        public static function statuses($start = array()): string {
             $visitor = Visitor::current();
 
             $statuses = array_merge(array(self::STATUS_PUBLIC), $start);
@@ -1058,7 +1058,7 @@
          * Function: feathers
          * Returns a SQL query "chunk" for the "feather" column so that it matches enabled feathers.
          */
-        static function feathers(): string {
+        public static function feathers(): string {
             $feathers = array();
 
             foreach (Config::current()->enabled_feathers as $feather)
@@ -1121,7 +1121,7 @@
          *
          * Calls the @publish_post@ trigger with the updated <Post>.
          */
-        static function publish_scheduled($pingbacks = false): void {
+        public static function publish_scheduled($pingbacks = false): void {
             $sql = SQL::current();
             $ids = $sql->select(
                 tables:"posts",

@@ -6,11 +6,11 @@
         # Query caches for methods.
         private $caches = array();
 
-        static function __install(): void {
+        public static function __install(): void {
             View::install();
         }
 
-        static function __uninstall($confirm): void {
+        public static function __uninstall($confirm): void {
             if ($confirm)
                 View::uninstall();
         }
@@ -89,7 +89,7 @@
                 );
         }
 
-        static function delete_post($post): void {
+        public function delete_post($post): void {
             SQL::current()->delete(
                 table:"views",
                 conds:array("post_id" => $post->id)

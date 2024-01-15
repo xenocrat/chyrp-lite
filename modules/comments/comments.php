@@ -6,7 +6,7 @@
         # Query caches for methods.
         private $caches = array();
 
-        static function __install() {
+        public static function __install() {
             Comment::install();
 
             Config::current()->set(
@@ -35,7 +35,7 @@
             Route::current()->add("comment/(id)/", "comment");
         }
 
-        static function __uninstall($confirm): void {
+        public static function __uninstall($confirm): void {
             if ($confirm)
                 Comment::uninstall();
 

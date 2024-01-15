@@ -6,7 +6,7 @@
     class Modules {
         # Array: $instances
         # Holds all Module instantiations.
-        static $instances = array();
+        public static $instances = array();
 
         # Boolean: $cancelled
         # Is the module's execution cancelled?

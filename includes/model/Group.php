@@ -43,7 +43,7 @@
          * See Also:
          *     <Model::search>
          */
-        static function find(
+        public static function find(
             $options = array(),
             $options_for_object = array()
         ): array {
@@ -115,7 +115,7 @@
          * See Also:
          *     <update>
          */
-        static function add($name, $permissions): self {
+        public static function add($name, $permissions): self {
             $sql = SQL::current();
             $trigger = Trigger::current();
             $name = strip_tags($name);
@@ -244,7 +244,7 @@
          * See Also:
          *     <Model::destroy>
          */
-        static function delete($group_id): void {
+        public static function delete($group_id): void {
             if (!empty($group_id))
                 SQL::current()->delete(
                     table:"permissions",
@@ -262,7 +262,7 @@
          *     $id - The ID for the permission, e.g "can_do_something".
          *     $name - The name for the permission, e.g. "Can Do Something".
          */
-        static function add_permission($id, $name = null): void {
+        public static function add_permission($id, $name = null): void {
             $sql = SQL::current();
 
             if (
@@ -294,7 +294,7 @@
          * Parameters:
          *     $id - The ID of the permission to remove.
          */
-        static function remove_permission($id): void {
+        public static function remove_permission($id): void {
             SQL::current()->delete(
                 table:"permissions",
                 conds:array("id" => $id)
@@ -308,7 +308,7 @@
          * Parameters:
          *     $group_id - List enabled permissions for this group ID.
          */
-        static function list_permissions($group_id = 0): array {
+        public static function list_permissions($group_id = 0): array {
             $permissions = SQL::current()->select(
                 tables:"permissions",
                 conds:array("group_id" => $group_id)

@@ -31,7 +31,7 @@
          * See Also:
          *     <Model::search>
          */
-        static function find(
+        public static function find(
             $options = array(),
             $options_for_object = array()
         ): array {
@@ -85,7 +85,7 @@
          * See Also:
          *     <update>
          */
-        static function add(
+        public static function add(
             $login,
             $password,
             $email,
@@ -220,7 +220,7 @@
          * See Also:
          *     <Model::destroy>
          */
-        static function delete($user_id): void {
+        public static function delete($user_id): void {
             parent::destroy(self::class, $user_id);
         }
 
@@ -237,7 +237,7 @@
          * Notes:
          *     <random> tries to be cryptographically secure.
          */
-        static function hash_password($password): string {
+        public static function hash_password($password): string {
             $salt = random(16);
             $prefix = '$6$rounds=50000$';
             return crypt($password, $prefix.$salt);
@@ -257,7 +257,7 @@
          * Notes:
          *     Uses <hash_equals> to mitigate timing attacks.
          */
-        static function check_password($password, $stored): bool {
+        public static function check_password($password, $stored): bool {
             return password_verify($password, $stored);
         }
     }

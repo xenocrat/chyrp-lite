@@ -14,7 +14,7 @@
                 $this->addAlias($action, "make_sitemap", 8);
         }
 
-        static function __install(): void {
+        public static function __install(): void {
             Config::current()->set(
                 "module_sitemap",
                 array(
@@ -26,7 +26,7 @@
             );
         }
 
-        static function __uninstall(): void {
+        public static function __uninstall(): void {
             Config::current()->remove("module_sitemap");
         }
 

@@ -54,7 +54,7 @@
          * See Also:
          *     <Model::search>
          */
-        static function find(
+        public static function find(
             $options = array(),
             $options_for_object = array()
         ): array {
@@ -88,7 +88,7 @@
          *     $notify - Send correspondence if additional comments are added?
          *     $status - A string describing the comment status (optional).
          */
-        static function create(
+        public static function create(
             $body,
             $author,
             $author_url,
@@ -167,7 +167,7 @@
          * See Also:
          *     <update>
          */
-        static function add(
+        public static function add(
             $body,
             $author,
             $author_url,
@@ -387,7 +387,7 @@
          * See Also:
          *     <Model::destroy>
          */
-        static function delete($comment_id): void {
+        public static function delete($comment_id): void {
             parent::destroy(
                 self::class,
                 $comment_id,
@@ -437,7 +437,7 @@
          * Function: any_editable
          * Checks if the <Visitor> can edit any comments.
          */
-        static function any_editable(): bool {
+        public static function any_editable(): bool {
             $visitor = Visitor::current();
 
             # Can they edit comments?
@@ -461,7 +461,7 @@
          * Function: any_deletable
          * Checks if the <Visitor> can delete any comments.
          */
-        static function any_deletable(): bool {
+        public static function any_deletable(): bool {
             $visitor = Visitor::current();
 
             # Can they delete comments?
@@ -485,7 +485,7 @@
          * Function: creatable
          * Checks if the <Visitor> can comment on a post.
          */
-        static function creatable($post): bool {
+        public static function creatable($post): bool {
             $visitor = Visitor::current();
             
             if (!$visitor->group->can("add_comment"))
@@ -512,7 +512,7 @@
          * Function: redactions
          * Returns a SQL query "chunk" that hides some comments from the <Visitor>.
          */
-        static function redactions(): string {
+        public static function redactions(): string {
             $user_id = (int) Visitor::current()->id;
             $id_list = "(0)";
 
@@ -604,7 +604,7 @@
          * Function: install
          * Creates the database table.
          */
-        static function install(): void {
+        public static function install(): void {
             SQL::current()->create(
                 table:"comments",
                 cols:array(
@@ -630,7 +630,7 @@
          * Function: uninstall
          * Drops the database table.
          */
-        static function uninstall(): void {
+        public static function uninstall(): void {
             $sql = SQL::current();
 
             $sql->drop("comments");

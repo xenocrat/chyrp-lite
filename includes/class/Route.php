@@ -201,7 +201,7 @@
          *     An absolute clean or dirty URL, depending on value of @Config->clean_urls@
          *     and @controller->clean_urls@.
          */
-        static function url($url, $controller = null): string {
+        public static function url($url, $controller = null): string {
             $config = Config::current();
 
             if (!isset($controller))

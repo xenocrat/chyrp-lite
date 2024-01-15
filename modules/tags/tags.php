@@ -4,11 +4,11 @@
         # Query caches for methods.
         private $caches = array();
 
-        static function __install(): void {
+        public static function __install(): void {
             Route::current()->add("tag/(name)/", "tag");
         }
 
-        static function __uninstall($confirm): void {
+        public static function __uninstall($confirm): void {
             Route::current()->remove("tag/(name)/");
 
             if ($confirm)

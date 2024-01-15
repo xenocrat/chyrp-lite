@@ -6,14 +6,14 @@
         # Query caches for methods.
         private $caches = array();
 
-        static function __install(): void {
+        public static function __install(): void {
             Category::install();
 
             Group::add_permission("manage_categorize", "Manage Categories");
             Route::current()->add("category/(name)/", "category");
         }
 
-        static function __uninstall($confirm): void {
+        public static function __uninstall($confirm): void {
             if ($confirm)
                 Category::uninstall();
 

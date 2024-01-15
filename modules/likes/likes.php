@@ -6,7 +6,7 @@
         # Query caches for methods.
         private $caches = array();
 
-        static function __install(): void {
+        public static function __install(): void {
             $config = Config::current();
 
             Like::install();
@@ -24,7 +24,7 @@
             );
         }
 
-        static function __uninstall($confirm): void {
+        public static function __uninstall($confirm): void {
             if ($confirm)
                 Like::uninstall();
 

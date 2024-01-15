@@ -45,7 +45,7 @@
 
         # Array: $names
         # An array of the currently-used pagination URL parameters.
-        static $names = array();
+        public static $names = array();
 
         /**
          * Function: __construct
