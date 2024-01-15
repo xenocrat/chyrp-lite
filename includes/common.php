@@ -43,6 +43,10 @@
     # Is the user running the installer? (false)
     define('INSTALLING', false);
 
+    # Constant: COOKIE_LIFETIME
+    # The lifetime of session cookies in seconds.
+    define('COOKIE_LIFETIME', 2592000);
+
     # Constant: MAX_TIME_LIMIT
     # The maximum allowed execution time in seconds.
     define('MAX_TIME_LIMIT', 600);
