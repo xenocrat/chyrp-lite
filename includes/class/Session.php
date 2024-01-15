@@ -111,8 +111,8 @@
         public function gc($lifetime): int|false {
             SQL::current()->delete(
                 "sessions",
-                "updated_at <= :thirty_days OR data = '' OR data IS NULL",
-                array(":thirty_days" => datetime(strtotime("-30 days")))
+                "updated_at < :expired_cookie OR data = '' OR data IS NULL",
+                array(":expired_cookie" => datetime(time() - COOKIE_LIFETIME))
             );
 
             return true;
