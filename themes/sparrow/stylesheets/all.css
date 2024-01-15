@@ -668,14 +668,14 @@ section img {
     width: 100%;
 }
 iframe {
-    width: 100%;
-    height: auto;
+    max-width: 100%;
     border: none;
     margin: 1rem 0rem;
 }
 iframe.video_embed {
-    max-height: 403px;
+    width: 100%;
     height: calc((100vw - 4rem) * 0.5625);
+    max-height: 403px;
 }
 div#mast > *:first-child,
 article > *:first-child,

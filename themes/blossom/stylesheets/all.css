@@ -771,14 +771,14 @@ a.archive_post_link:active {
     outline: #d94c7b solid 4px;
 }
 iframe {
-    width: 100%;
-    height: auto;
+    max-width: 100%;
     border: none;
     margin: 1rem 0rem;
 }
 iframe.video_embed {
-    max-height: 515px;
+    width: 100%;
     height: calc((100vw - 22rem) * 0.5625);
+    max-height: 515px;
 }
 body.preview iframe.video_embed {
     max-height: none;

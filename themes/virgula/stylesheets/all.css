@@ -245,14 +245,14 @@ hr {
     margin: 2rem 0rem;
 }
 iframe {
-    width: 100%;
-    height: auto;
+    max-width: 100%;
     border: none;
     margin: 1rem 0rem;
 }
 iframe.video_embed {
-    max-height: 412px;
+    width: 100%;
     height: calc((100vw - 2rem) * 0.5625);
+    max-height: 412px;
 }
 a:link {
     color: #1d70b8;
