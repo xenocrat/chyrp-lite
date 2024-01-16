@@ -1,42 +1,33 @@
 <?php
     /**
      * Class: Flash
-     * Stores messages (notice, warning, message) to display to the user after a redirect.
+     * Stores messages, notices, and warnings to display to the user after a redirect.
      */
     class Flash {
-        # Array: $notices
-        # Manages notices.
-        private $notices = array();
+        const FLASH_MESSAGE = "message";
+        const FLASH_NOTICE  = "notice";
+        const FLASH_WARNING = "warning";
 
-        # Array: $warnings
-        # Manages warnings.
-        private $warnings = array();
+        # Array: $message
+        # Served messages.
+        private static $message = array();
 
-        # Array: $messages
-        # Manages messages.
-        private $messages = array();
+        # Array: $notice
+        # Served notices.
+        private static $notice = array();
 
-        # Array: $all
-        # Manages all Flashes.
-        private $all = array();
-
-        # Boolean: $exists
-        # Do any Flashes exist?
-        private static $exists = array(
-            "message" => false,
-            "notice" => false,
-            "warning" => false
-        );
+        # Array: $warning
+        # Served warnings.
+        private static $warning = array();
 
         /**
          * Function: __construct
          * Removes empty notification variables from the session.
          */
         private function __construct() {
-            foreach (array("messages", "notices", "warnings") as $type) {
-                if (isset($_SESSION[$type]) and empty($_SESSION[$type]))
-                    unset($_SESSION[$type]);
-            }
+            self::prepare(self::FLASH_MESSAGE);
+            self::prepare(self::FLASH_NOTICE);
+            self::prepare(self::FLASH_WARNING);
         }
 
         /**
@@ -44,30 +35,32 @@
          * Prepare the structure of the "flash" session value.
          */
         private static function prepare($type): void {
-            if (!isset($_SESSION))
-                $_SESSION = array();
-
-            if (!isset($_SESSION[$type]))
+            if (
+                !isset($_SESSION[$type]) or
+                !is_countable($_SESSION[$type])
+            ) {
                 $_SESSION[$type] = array();
+            }
         }
 
         /**
          * Function: message
-         * Add a message (neutral) to the session.
+         * Create a message (neutral).
          *
          * Parameters:
-         *     $message - Message to display.
+         *     $message - Text of the message.
          *     $redirect_to - URL to redirect to after the message is stored.
          *     $code - Numeric HTTP status code to set.
          */
         public static function message($message, $redirect_to = null, $code = null): void {
-            self::prepare("messages");
             $trigger = Trigger::current();
+            $type = self::FLASH_MESSAGE;
+            self::prepare($type);
 
-            $_SESSION['messages'][] = $trigger->filter($message, "flash_message", $redirect_to);
+            $_SESSION[$type][] = $trigger->filter($message, "flash_message", $redirect_to);
 
             if (DEBUG and !headers_sent())
-                header("X-Chyrp-Flash-Messages: ".count($_SESSION['messages']));
+                header("X-Chyrp-Flash-Messages: ".self::count($type));
 
             if (isset($redirect_to))
                 redirect($redirect_to, $code);
@@ -75,21 +68,22 @@
 
         /**
          * Function: notice
-         * Add a notice (positive) message to the session.
+         * Create a notice (positive).
          *
          * Parameters:
-         *     $message - Message to display.
-         *     $redirect_to - URL to redirect to after the message is stored.
+         *     $message - Text of the notice.
+         *     $redirect_to - URL to redirect to after the notice is stored.
          *     $code - Numeric HTTP status code to set.
          */
         public static function notice($message, $redirect_to = null, $code = null): void {
-            self::prepare("notices");
             $trigger = Trigger::current();
+            $type = self::FLASH_NOTICE;
+            self::prepare($type);
 
-            $_SESSION['notices'][] = $trigger->filter($message, "flash_notice_message", $redirect_to);
+            $_SESSION[$type][] = $trigger->filter($message, "flash_notice", $redirect_to);
 
             if (DEBUG and !headers_sent())
-                header("X-Chyrp-Flash-Notices: ".count($_SESSION['notices']));
+                header("X-Chyrp-Flash-Notices: ".self::count($type));
 
             if (isset($redirect_to))
                 redirect($redirect_to, $code);
@@ -97,21 +91,22 @@
 
         /**
          * Function: warning
-         * Add a warning (negative) message to the session.
+         * Create a warning (negative).
          *
          * Parameters:
-         *     $message - Message to display.
-         *     $redirect_to - URL to redirect to after the message is stored.
+         *     $message - Text of the warning.
+         *     $redirect_to - URL to redirect to after the warning is stored.
          *     $code - Numeric HTTP status code to set.
          */
         public static function warning($message, $redirect_to = null, $code = null): void {
-            self::prepare("warnings");
             $trigger = Trigger::current();
+            $type = self::FLASH_WARNING;
+            self::prepare($type);
 
-            $_SESSION['warnings'][] = $trigger->filter($message, "flash_warning_message", $redirect_to);
+            $_SESSION[$type][] = $trigger->filter($message, "flash_warning", $redirect_to);
 
             if (DEBUG and !headers_sent())
-                header("X-Chyrp-Flash-Warnings: ".count($_SESSION['warnings']));
+                header("X-Chyrp-Flash-Warnings: ".self::count($type));
 
             if (isset($redirect_to))
                 redirect($redirect_to, $code);
@@ -122,7 +117,7 @@
          * Calls <Flash.serve> "messages".
          */
         public function messages(): array {
-            return $this->serve("messages");
+            return $this->serve(self::FLASH_MESSAGE);
         }
 
         /**
@@ -130,7 +125,7 @@
          * Calls <Flash.serve> "notices".
          */
         public function notices(): array {
-            return $this->serve("notices");
+            return $this->serve(self::FLASH_NOTICE);
         }
 
         /**
@@ -138,15 +133,16 @@
          * Calls <Flash.serve> "warnings".
          */
         public function warnings(): array {
-            return $this->serve("warnings");
+            return $this->serve(self::FLASH_WARNING);
         }
 
         /**
          * Function: all
-         * Returns an associative array of all messages and destroys their session values.
+         * Serves an associative array of all flashes.
          *
          * Returns:
-         *     An array of every message available, in the form of [type => [messages]].
+         *     An array of every flash available,
+         *     in the form of [type => [flashes]].
          */
         public function all(): array {
             return array(
@@ -158,58 +154,111 @@
 
         /**
          * Function: serve
-         * Serves a message of type $type and destroys it from the session.
+         * Serves flashes and removes them from the session.
          *
          * Parameters:
-         *     $type - Type of messages to serve.
+         *     $type - Type of flashes to serve.
          *
          * Returns:
-         *     An array of messages of the requested type.
+         *     An array of flashes of the requested type.
          */
         private function serve($type): array {
-            if (!empty($_SESSION[$type]))
-                self::$exists[depluralize($type)] = true;
+            if (
+                !empty($_SESSION[$type]) and
+                is_countable($_SESSION[$type])
+            ) {
+                $served = array_merge(
+                    self::$$type,
+                    $_SESSION[$type]
+                );
 
-            if (isset($_SESSION[$type])) {
-                $this->$type = $_SESSION[$type];
+                self::$$type = $served;
                 $_SESSION[$type] = array();
             }
 
-            return (array) $this->$type;
+            return self::$$type;
         }
 
         /**
          * Function: exists
-         * Checks for flash messages.
+         * Checks for the existence of stored flashes.
          *
          * Parameters:
-         *     $type - The type of message to check for.
+         *     $type - Type to check for (optional).
          */
         public static function exists($type = null): bool {
-            if (isset($type)) {
-                if (!array_key_exists($type, self::$exists))
+            switch ($type) {
+                case self::FLASH_MESSAGE:
+                case self::FLASH_NOTICE:
+                case self::FLASH_WARNING:
+                    $check = array($type);
+                    break;
+                case null:
+                    $check = array(
+                        self::FLASH_MESSAGE,
+                        self::FLASH_NOTICE,
+                        self::FLASH_WARNING
+                    );
+                    break;
+                default:
                     return false;
+            }
 
-                if (self::$exists[$type])
+            foreach ($check as $type) {
+                if (!empty(self::$$type))
                     return true;
 
-                if (!empty($_SESSION[pluralize($type)])) {
-                    self::$exists[$type] = true;
+                if (
+                    !empty($_SESSION[$type]) and
+                    is_countable($_SESSION[$type])
+                ) {
                     return true;
-                }
-            } else {
-                if (in_array(true, self::$exists))
-                    return true;
-
-                foreach (array_keys(self::$exists) as $type) {
-                    if (!empty($_SESSION[pluralize($type)])) {
-                        self::$exists[$type] = true;
-                        return true;
-                    }
                 }
             }
 
             return false;
+        }
+
+        /**
+         * Function: count
+         * Counts the total number of stored flashes.
+         *
+         * Parameters:
+         *     $type - Type to check for (optional).
+         */
+        public static function count($type = null): int {
+            $total = 0;
+
+            switch ($type) {
+                case self::FLASH_MESSAGE:
+                case self::FLASH_NOTICE:
+                case self::FLASH_WARNING:
+                    $count = array($type);
+                    break;
+                case null:
+                    $count = array(
+                        self::FLASH_MESSAGE,
+                        self::FLASH_NOTICE,
+                        self::FLASH_WARNING
+                    );
+                    break;
+                default:
+                    return $count;
+            }
+
+            foreach ($count as $type) {
+                if (!empty(self::$$type))
+                    $total+= count(self::$$type);
+
+                if (
+                    !empty($_SESSION[$type]) and
+                    is_countable($_SESSION[$type])
+                ) {
+                    $total+= count($_SESSION[$type]);
+                }
+            }
+
+            return $total;
         }
 
         /**
