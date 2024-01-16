@@ -243,7 +243,7 @@
                     );
                     break;
                 default:
-                    return $count;
+                    return $total;
             }
 
             foreach ($count as $type) {
