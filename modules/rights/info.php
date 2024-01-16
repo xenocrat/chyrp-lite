@@ -2,7 +2,7 @@
 return array(
     "name"          => __("Rights", "rights"),
     "url"           => "http://chyrplite.net/",
-    "version"       => "2023.01",
+    "version"       => "2024.02",
     "description"   => __("Adds post options for attribution and assigning intellectual property rights.", "rights"),
     "author"        => array(
         "name"      => "Daniel Pimley",
