@@ -37,7 +37,7 @@
         private static function prepare($type): void {
             if (
                 !isset($_SESSION[$type]) or
-                !is_countable($_SESSION[$type])
+                !is_array($_SESSION[$type])
             ) {
                 $_SESSION[$type] = array();
             }
@@ -165,7 +165,7 @@
         private function serve($type): array {
             if (
                 !empty($_SESSION[$type]) and
-                is_countable($_SESSION[$type])
+                is_array($_SESSION[$type])
             ) {
                 $served = array_merge(
                     self::$$type,
@@ -210,7 +210,7 @@
 
                 if (
                     !empty($_SESSION[$type]) and
-                    is_countable($_SESSION[$type])
+                    is_array($_SESSION[$type])
                 ) {
                     return true;
                 }
@@ -252,7 +252,7 @@
 
                 if (
                     !empty($_SESSION[$type]) and
-                    is_countable($_SESSION[$type])
+                    is_array($_SESSION[$type])
                 ) {
                     $total+= count($_SESSION[$type]);
                 }
