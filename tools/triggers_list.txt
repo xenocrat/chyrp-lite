@@ -242,7 +242,7 @@ Arguments:
 runtime
 -------
 Called from:
-	includes/common.php on line 385
+	includes/common.php on line 389
 
 
 before_export
@@ -335,7 +335,7 @@ Arguments:
 webmention
 ----------
 Called from:
-	includes/helpers.php on line 2089
+	includes/helpers.php on line 2095
 
 Arguments:
 	$post
@@ -346,7 +346,7 @@ Arguments:
 delete_upload
 -------------
 Called from:
-	includes/helpers.php on line 2845
+	includes/helpers.php on line 2851
 
 Arguments:
 	$filename
@@ -355,19 +355,19 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 3031
+	includes/helpers.php on line 3037
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 3049
+	includes/helpers.php on line 3055
 
 
 correspond_activate_account
 ---------------------------
 Called from:
-	includes/helpers.php on line 3298
+	includes/helpers.php on line 3304
 
 Arguments:
 	$user
@@ -377,7 +377,7 @@ Arguments:
 correspond_reset_password
 -------------------------
 Called from:
-	includes/helpers.php on line 3333
+	includes/helpers.php on line 3339
 
 Arguments:
 	$user
@@ -387,7 +387,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 3374
+	includes/helpers.php on line 3380
 
 Arguments:
 	$ob
@@ -819,7 +819,7 @@ Called from:
 flash_message
 -------------
 Called from:
-	includes/class/Flash.php on line 68
+	includes/class/Flash.php on line 60
 
 Target:
 	$message
@@ -828,10 +828,10 @@ Arguments:
 	$redirect_to
 
 
-flash_notice_message
---------------------
+flash_notice
+------------
 Called from:
-	includes/class/Flash.php on line 90
+	includes/class/Flash.php on line 83
 
 Target:
 	$message
@@ -840,10 +840,10 @@ Arguments:
 	$redirect_to
 
 
-flash_warning_message
----------------------
+flash_warning
+-------------
 Called from:
-	includes/class/Flash.php on line 112
+	includes/class/Flash.php on line 106
 
 Target:
 	$message
@@ -1090,7 +1090,7 @@ Target:
 keyword_search
 --------------
 Called from:
-	includes/helpers.php on line 1272
+	includes/helpers.php on line 1278
 
 Target:
 	$search
@@ -1103,7 +1103,7 @@ Arguments:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 3278
+	includes/helpers.php on line 3284
 
 Target:
 	$function
@@ -1112,7 +1112,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 3375
+	includes/helpers.php on line 3381
 	includes/lib/Leaf.php on line 317
 
 Target:

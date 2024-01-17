@@ -135,7 +135,7 @@ includes/class/Flash.php
 
 Class: Flash
 ------------
-Stores messages (notice, warning, message) to display to the user after a redirect.
+Stores messages, notices, and warnings to display to the user after a redirect.
 
 
 Function: __construct
@@ -150,31 +150,31 @@ Prepare the structure of the "flash" session value.
 
 Function: message
 -----------------
-Add a message (neutral) to the session.
+Create a message (neutral).
 
 Parameters:
-    $message - Message to display.
+    $message - Text of the message.
     $redirect_to - URL to redirect to after the message is stored.
     $code - Numeric HTTP status code to set.
 
 
 Function: notice
 ----------------
-Add a notice (positive) message to the session.
+Create a notice (positive).
 
 Parameters:
-    $message - Message to display.
-    $redirect_to - URL to redirect to after the message is stored.
+    $message - Text of the notice.
+    $redirect_to - URL to redirect to after the notice is stored.
     $code - Numeric HTTP status code to set.
 
 
 Function: warning
 -----------------
-Add a warning (negative) message to the session.
+Create a warning (negative).
 
 Parameters:
-    $message - Message to display.
-    $redirect_to - URL to redirect to after the message is stored.
+    $message - Text of the warning.
+    $redirect_to - URL to redirect to after the warning is stored.
     $code - Numeric HTTP status code to set.
 
 
@@ -195,29 +195,38 @@ Calls <Flash.serve> "warnings".
 
 Function: all
 -------------
-Returns an associative array of all messages and destroys their session values.
+Serves an associative array of all flashes.
 
 Returns:
-    An array of every message available, in the form of [type => [messages]].
+    An array of every flash available,
+    in the form of [type => [flashes]].
 
 
 Function: serve
 ---------------
-Serves a message of type $type and destroys it from the session.
+Serves flashes and removes them from the session.
 
 Parameters:
-    $type - Type of messages to serve.
+    $type - Type of flashes to serve.
 
 Returns:
-    An array of messages of the requested type.
+    An array of flashes of the requested type.
 
 
 Function: exists
 ----------------
-Checks for flash messages.
+Checks for the existence of stored flashes.
 
 Parameters:
-    $type - The type of message to check for.
+    $type - Type to check for (optional).
+
+
+Function: count
+---------------
+Counts the total number of stored flashes.
+
+Parameters:
+    $type - Type to check for (optional).
 
 
 Function: current
@@ -898,15 +907,17 @@ Parameters:
     $lifetime - The configured maximum session lifetime in seconds.
 
 
-Function: authenticate
-----------------------
-Generates or validates an authentication token for this session.
+Function: hash_token
+--------------------
+Generates an authentication token for this session.
+
+
+Function: check_token
+---------------------
+Validates an authentication token for this session.
 
 Parameters:
-    $hash - A previously generated token to be validated (optional).
-
-Returns:
-    An authentication token, or the validity of the supplied token.
+    $hash - The token to validate.
 
 
 ==============================================
@@ -1840,7 +1851,7 @@ Mask for Visitor::logged_in().
 
 Function: authenticate
 ----------------------
-Mask for Session::authenticate().
+Mask for Session::hash_token().
 
 
 Function: redirect
