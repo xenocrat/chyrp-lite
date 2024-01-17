@@ -73,7 +73,10 @@
             $sql = SQL::current();
             $visitor = Visitor::current();
 
-            if (!$this->deny and isset($data) and $data != $this->data)
+            if ($this->deny)
+                return true;
+
+            if (isset($data) and $data != $this->data) {
                 $sql->replace(
                     table:"sessions",
                     keys:array("id"),
@@ -85,6 +88,7 @@
                         "updated_at" => datetime()
                     )
                 );
+            }
 
             return true;
         }
@@ -136,7 +140,7 @@
          * Validates an authentication token for this session.
          *
          * Parameters:
-         *     $hash - A previously generated token to be validated.
+         *     $hash - The token to validate.
          */
         public static function check_token($hash): bool {
             $token = self::hash_token();
