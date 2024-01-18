@@ -1293,7 +1293,7 @@
 
             # Try fallback template filenames.
             if (is_array($template)) {
-                foreach (array_values($template) as $index => $try)
+                foreach (array_values($template) as $index => $try) {
                     if (
                         $theme->file_exists($try) or
                         ($index + 1) == count($template)
@@ -1301,6 +1301,7 @@
                         $this->display($try, $context, $title);
                         return;
                     }
+                }
             }
 
             $this->displayed = true;
