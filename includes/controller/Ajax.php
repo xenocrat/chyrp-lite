@@ -21,9 +21,11 @@
          * Route constructor calls this to determine the action in the case of a POST request.
          */
         public function parse($route): ?string {
-            if (isset($_SERVER['HTTP_SEC_FETCH_SITE'])) {
-                if ($_SERVER['HTTP_SEC_FETCH_SITE'] != "same-origin")
-                    show_403();
+            if (
+                isset($_SERVER['HTTP_SEC_FETCH_SITE']) and
+                $_SERVER['HTTP_SEC_FETCH_SITE'] != "same-origin"
+            ) {
+                show_403();
             }
 
             if (empty($route->action) and isset($_POST['action']))
@@ -276,10 +278,23 @@
                     __("You do not have sufficient privileges to manage uploads.")
                 );
 
+            $search = isset($_POST['search']) ?
+                $_POST['search'] :
+                "" ;
+
+            $filter = isset($_POST['filter']) ?
+                explode(",", $_POST['filter']) :
+                array() ;
+
+            foreach ($filter as &$value) {
+                $value = trim($value, " .");
+            }
+
+            $uploads = uploaded_search($search, $filter);
             $admin = AdminController::current();
             $admin->display(
                 "partials".DIR."uploads_modal",
-                array("uploads" => uploaded_search())
+                array("uploads" => $uploads)
             );
         }
 
