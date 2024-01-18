@@ -2646,9 +2646,10 @@
         $config = Config::current();
         $results = array();
 
-        if (!empty($filter))
+        if (!empty($filter)) {
             foreach ($filter as &$entry)
                 $entry = preg_quote($entry, "/");
+        }
 
         $patterns = !empty($filter) ? implode("|", $filter) : ".+" ;
         $dir = new DirectoryIterator(MAIN_DIR.$config->uploads_path);
