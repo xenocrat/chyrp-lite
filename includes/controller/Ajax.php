@@ -278,11 +278,11 @@
                     __("You do not have sufficient privileges to manage uploads.")
                 );
 
-            $search = isset($_POST['search']) ?
+            $search = !empty($_POST['search']) ?
                 $_POST['search'] :
                 "" ;
 
-            $filter = isset($_POST['filter']) ?
+            $filter = !empty($_POST['filter']) ?
                 explode(",", $_POST['filter']) :
                 array() ;
 
