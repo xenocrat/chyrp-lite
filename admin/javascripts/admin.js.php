@@ -436,9 +436,14 @@ var Write = {
                     }).addClass("emblem toolbar").click(function(e) {
                         tray.loader();
 
+                        var search = target.attr("data-uploads_search") || "" ;
+                        var filter = target.attr("data-uploads_filter") || "" ;
+
                         $.post(Site.ajax_url, {
                             action: "uploads_modal",
-                            hash: Visitor.token
+                            hash: Visitor.token,
+                            search: search,
+                            filter: filter
                         }, function(data) {
                             $("<div>", {
                                 "role": "region",
