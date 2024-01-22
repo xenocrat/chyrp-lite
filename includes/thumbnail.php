@@ -7,7 +7,7 @@
     define('USE_ZLIB', false);
 
     require_once "common.php";
-
+    $trigger->call("serve_thumbnail");
     set_max_memory();
 
     if (empty($_GET['file']))
