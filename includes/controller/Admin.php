@@ -1925,13 +1925,33 @@
                     "/"
                 );
 
-            $uploads = !isset($_GET['search']) ?
-                new Paginator(uploaded_search()) :
-                new Paginator(uploaded_search($_GET['search'])) ;
+            if (isset($_POST['sort']))
+                $_SESSION['uploads_sort'] = $_POST['sort'];
+
+            $search = isset($_GET['search']) ? $_GET['search'] : "" ;
+            $sort = fallback($_SESSION['uploads_sort'], "name");
+
+            $columns = array(
+                "name" => __("Name", "admin"),
+                "size" => __("Size", "admin"),
+                "type" => __("Type", "admin"),
+                "modified" => __("Last Modified", "admin")
+            );
+
+            $uploads = new Paginator(
+                    uploaded_search(
+                        search: $search,
+                        sort: $sort
+                    )
+                );
 
             $this->display(
                 "pages".DIR."manage_uploads",
-                array("uploads" => $uploads)
+                array(
+                    "uploads" => $uploads,
+                    "uploads_sort" => $sort,
+                    "uploads_columns" => $columns
+                )
             );
         }
 
