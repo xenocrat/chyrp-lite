@@ -278,19 +278,26 @@
                     __("You do not have sufficient privileges to manage uploads.")
                 );
 
-            $search = (isset($_POST['search']) and $_POST['search'] != "") ?
-                $_POST['search'] :
-                "" ;
+            $search = fallback($_POST['search'], "");
+            $filter = fallback($_POST['filter'], "");
+            $sort = fallback($_SESSION['uploads_sort'], "name");
 
-            $filter = (isset($_POST['filter']) and $_POST['filter'] != "") ?
-                explode(",", $_POST['filter']) :
-                array() ;
+            $extensions = array();
+            $exploded = explode(",", $filter);
 
-            foreach ($filter as &$value) {
+            foreach ($exploded as $value) {
                 $value = trim($value, " .");
+
+                if ($value != "")
+                    $extensions[] = $value;
             }
 
-            $uploads = uploaded_search($search, $filter);
+            $uploads = uploaded_search(
+                search: $search,
+                filter: $extensions,
+                sort: $sort
+            );
+
             $admin = AdminController::current();
             $admin->display(
                 "partials".DIR."uploads_modal",
