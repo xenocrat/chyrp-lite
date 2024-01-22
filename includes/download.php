@@ -1,12 +1,13 @@
 <?php
     /**
      * File: download
-     * Send an uploaded file to the visitor as a file attachment.
+     * Serve an uploaded file to the visitor as a file attachment.
      */
 
     define('USE_OB', false);
 
     require_once "common.php";
+    $trigger->call("serve_download");
 
     if (empty($_GET['file']))
         error(
