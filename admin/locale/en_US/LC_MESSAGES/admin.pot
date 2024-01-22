@@ -452,6 +452,7 @@ msgstr ""
 #: admin/pages/edit_group.twig:27
 #: admin/pages/edit_user.twig:66
 #: admin/pages/general_settings.twig:97
+#: admin/pages/manage_uploads.twig:84
 #: admin/pages/route_settings.twig:91
 #: admin/pages/user_settings.twig:57
 msgid "Update"
@@ -909,7 +910,7 @@ msgstr ""
 #: admin/pages/manage_groups.twig:68
 #: admin/pages/manage_pages.twig:80
 #: admin/pages/manage_posts.twig:65
-#: admin/pages/manage_uploads.twig:75
+#: admin/pages/manage_uploads.twig:89
 #: admin/pages/manage_users.twig:80
 #, php-format
 msgid "Page %d of %s"
@@ -993,6 +994,14 @@ msgstr ""
 
 #: admin/pages/manage_uploads.twig:55
 msgid "download"
+msgstr ""
+
+#: admin/pages/manage_uploads.twig:75
+msgid "Sort results by:"
+msgstr ""
+
+#: admin/pages/manage_uploads.twig:77
+msgid "Type"
 msgstr ""
 
 #: admin/pages/manage_users.twig:3

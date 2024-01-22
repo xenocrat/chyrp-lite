@@ -1794,7 +1794,7 @@ includes/download.php
 
 File: download
 --------------
-Send an uploaded file to the visitor as a file attachment.
+Serve an uploaded file to the visitor as a file attachment.
 
 
 ==============================================
@@ -2594,6 +2594,7 @@ Returns an array of files discovered in the uploads directory.
 Parameters:
     $search - A search term.
     $filter - An array of valid extensions (case insensitive).
+    $sort - One of "name", "type", "size", or "modified".
 
 
 Function: upload_tester

@@ -8,7 +8,7 @@ end
 Called from:
 	admin/index.php on line 19
 	ajax/index.php on line 19
-	includes/download.php on line 48
+	includes/download.php on line 49
 	includes/thumbnail.php on line 84
 	index.php on line 15
 
@@ -248,13 +248,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 1965
+	includes/controller/Admin.php on line 1985
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2392
+	includes/controller/Admin.php on line 2412
 
 Arguments:
 	$group
@@ -263,7 +263,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2430
+	includes/controller/Admin.php on line 2450
 
 Arguments:
 	$user
@@ -272,7 +272,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2476
+	includes/controller/Admin.php on line 2496
 
 Arguments:
 	$entry
@@ -282,7 +282,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2512
+	includes/controller/Admin.php on line 2532
 
 Arguments:
 	$entry
@@ -292,7 +292,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 2516
+	includes/controller/Admin.php on line 2536
 
 Arguments:
 	$imports
@@ -301,13 +301,13 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 2910
+	includes/controller/Admin.php on line 2930
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 2925
+	includes/controller/Admin.php on line 2945
 
 
 can_not_view_page
@@ -332,6 +332,12 @@ Arguments:
 	$feed
 
 
+serve_download
+--------------
+Called from:
+	includes/download.php on line 10
+
+
 webmention
 ----------
 Called from:
@@ -346,7 +352,7 @@ Arguments:
 delete_upload
 -------------
 Called from:
-	includes/helpers.php on line 2852
+	includes/helpers.php on line 2882
 
 Arguments:
 	$filename
@@ -355,19 +361,19 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 3038
+	includes/helpers.php on line 3068
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 3056
+	includes/helpers.php on line 3086
 
 
 correspond_activate_account
 ---------------------------
 Called from:
-	includes/helpers.php on line 3305
+	includes/helpers.php on line 3335
 
 Arguments:
 	$user
@@ -377,7 +383,7 @@ Arguments:
 correspond_reset_password
 -------------------------
 Called from:
-	includes/helpers.php on line 3340
+	includes/helpers.php on line 3370
 
 Arguments:
 	$user
@@ -387,7 +393,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 3381
+	includes/helpers.php on line 3411
 
 Arguments:
 	$ob
@@ -504,6 +510,12 @@ Called from:
 
 Arguments:
 	$user
+
+
+serve_thumbnail
+---------------
+Called from:
+	includes/thumbnail.php on line 10
 
 
 manage_comments_column_header
@@ -953,7 +965,7 @@ Arguments:
 posts_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 2077
+	includes/controller/Admin.php on line 2097
 
 Target:
 	$posts_atom
@@ -965,7 +977,7 @@ Arguments:
 pages_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 2176
+	includes/controller/Admin.php on line 2196
 
 Target:
 	$pages_atom
@@ -977,7 +989,7 @@ Arguments:
 export
 ------
 Called from:
-	includes/controller/Admin.php on line 2262
+	includes/controller/Admin.php on line 2282
 
 Target:
 	$exports
@@ -986,7 +998,7 @@ Target:
 before_import
 -------------
 Called from:
-	includes/controller/Admin.php on line 2373
+	includes/controller/Admin.php on line 2393
 
 Target:
 	$imports
@@ -995,7 +1007,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 3358
+	includes/controller/Admin.php on line 3378
 
 Target:
 	$write
@@ -1004,7 +1016,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3421
+	includes/controller/Admin.php on line 3441
 
 Target:
 	$manage
@@ -1013,7 +1025,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 3451
+	includes/controller/Admin.php on line 3471
 
 Target:
 	$settings
@@ -1022,7 +1034,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3474
+	includes/controller/Admin.php on line 3494
 
 Target:
 	$extend
@@ -1031,7 +1043,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 3562
+	includes/controller/Admin.php on line 3582
 
 Target:
 	$this->context
@@ -1103,7 +1115,7 @@ Arguments:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 3285
+	includes/helpers.php on line 3315
 
 Target:
 	$function
@@ -1112,7 +1124,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 3382
+	includes/helpers.php on line 3412
 	includes/lib/Leaf.php on line 317
 
 Target:
