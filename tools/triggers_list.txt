@@ -16,7 +16,7 @@ Called from:
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 913
+	admin/javascripts/admin.js.php on line 918
 
 
 admin_head
@@ -346,7 +346,7 @@ Arguments:
 delete_upload
 -------------
 Called from:
-	includes/helpers.php on line 2851
+	includes/helpers.php on line 2852
 
 Arguments:
 	$filename
@@ -355,19 +355,19 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 3037
+	includes/helpers.php on line 3038
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 3055
+	includes/helpers.php on line 3056
 
 
 correspond_activate_account
 ---------------------------
 Called from:
-	includes/helpers.php on line 3304
+	includes/helpers.php on line 3305
 
 Arguments:
 	$user
@@ -377,7 +377,7 @@ Arguments:
 correspond_reset_password
 -------------------------
 Called from:
-	includes/helpers.php on line 3339
+	includes/helpers.php on line 3340
 
 Arguments:
 	$user
@@ -387,7 +387,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 3380
+	includes/helpers.php on line 3381
 
 Arguments:
 	$ob
@@ -1040,7 +1040,7 @@ Target:
 markup_page_title
 -----------------
 Called from:
-	includes/controller/Ajax.php on line 205
+	includes/controller/Ajax.php on line 207
 	includes/model/Page.php on line 334
 
 Target:
@@ -1050,7 +1050,7 @@ Target:
 markup_title
 ------------
 Called from:
-	includes/controller/Ajax.php on line 205
+	includes/controller/Ajax.php on line 207
 	includes/model/Page.php on line 334
 
 Target:
@@ -1060,7 +1060,7 @@ Target:
 markup_page_text
 ----------------
 Called from:
-	includes/controller/Ajax.php on line 209
+	includes/controller/Ajax.php on line 211
 	includes/model/Page.php on line 335
 
 Target:
@@ -1070,7 +1070,7 @@ Target:
 markup_text
 -----------
 Called from:
-	includes/controller/Ajax.php on line 209
+	includes/controller/Ajax.php on line 211
 	includes/model/Page.php on line 335
 	modules/comments/model/Comment.php on line 581
 
@@ -1081,7 +1081,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 1357
+	includes/controller/Main.php on line 1358
 
 Target:
 	$this->context
@@ -1103,7 +1103,7 @@ Arguments:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 3284
+	includes/helpers.php on line 3285
 
 Target:
 	$function
@@ -1112,7 +1112,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 3381
+	includes/helpers.php on line 3382
 	includes/lib/Leaf.php on line 317
 
 Target:

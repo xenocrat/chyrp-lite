@@ -82,8 +82,8 @@ msgstr "Il percorso è stato avviato con un Controller non valido."
 #: includes/controller/Admin.php:2821 includes/controller/Admin.php:2964
 #: includes/controller/Admin.php:2971 includes/controller/Admin.php:2978
 #: includes/controller/Admin.php:2985 includes/controller/Admin.php:2992
-#: includes/controller/Admin.php:3289 includes/controller/Ajax.php:34
-#: includes/controller/Ajax.php:251 includes/download.php:13
+#: includes/controller/Admin.php:3289 includes/controller/Ajax.php:36
+#: includes/controller/Ajax.php:253 includes/download.php:13
 #: includes/error.php:169 includes/helpers.php:2037 includes/helpers.php:2044
 #: includes/helpers.php:2051 includes/helpers.php:2064
 #: includes/helpers.php:2073 includes/helpers.php:2083
@@ -91,10 +91,10 @@ msgstr "Il percorso è stato avviato con un Controller non valido."
 #: includes/helpers.php:2543 includes/helpers.php:2549
 #: includes/helpers.php:2555 includes/helpers.php:2592
 #: includes/helpers.php:2598 includes/helpers.php:2604
-#: includes/helpers.php:2721 includes/helpers.php:2727
-#: includes/helpers.php:2733 includes/helpers.php:2739
-#: includes/helpers.php:2744 includes/helpers.php:2749
-#: includes/helpers.php:2754 includes/helpers.php:2761
+#: includes/helpers.php:2722 includes/helpers.php:2728
+#: includes/helpers.php:2734 includes/helpers.php:2740
+#: includes/helpers.php:2745 includes/helpers.php:2750
+#: includes/helpers.php:2755 includes/helpers.php:2762
 #: includes/lib/ThumbnailFile.php:290 includes/lib/ThumbnailFile.php:321
 #: includes/lib/ThumbnailFile.php:381 includes/thumbnail.php:15
 #: install.php:1006 upgrade.php:211 upgrade.php:227 upgrade.php:243
@@ -143,13 +143,13 @@ msgstr "Azione non valida."
 #: includes/controller/Admin.php:2958 includes/controller/Admin.php:3036
 #: includes/controller/Admin.php:3066 includes/controller/Admin.php:3114
 #: includes/controller/Admin.php:3129 includes/controller/Admin.php:3181
-#: includes/controller/Admin.php:3195 includes/controller/Ajax.php:57
-#: includes/controller/Ajax.php:80 includes/controller/Ajax.php:95
-#: includes/controller/Ajax.php:101 includes/controller/Ajax.php:131
-#: includes/controller/Ajax.php:137 includes/controller/Ajax.php:187
-#: includes/controller/Ajax.php:193 includes/controller/Ajax.php:228
-#: includes/controller/Ajax.php:245 includes/controller/Ajax.php:269
-#: includes/controller/Ajax.php:275 includes/controller/Main.php:536
+#: includes/controller/Admin.php:3195 includes/controller/Ajax.php:59
+#: includes/controller/Ajax.php:82 includes/controller/Ajax.php:97
+#: includes/controller/Ajax.php:103 includes/controller/Ajax.php:133
+#: includes/controller/Ajax.php:139 includes/controller/Ajax.php:189
+#: includes/controller/Ajax.php:195 includes/controller/Ajax.php:230
+#: includes/controller/Ajax.php:247 includes/controller/Ajax.php:271
+#: includes/controller/Ajax.php:277 includes/controller/Main.php:536
 #: includes/controller/Main.php:615 includes/download.php:20
 #: includes/helpers.php:2537 includes/thumbnail.php:22
 msgid "Access Denied"
@@ -195,7 +195,7 @@ msgid "You do not have sufficient privileges to view this area."
 msgstr "Non si dispone di privilegi sufficienti per visualizzare questa area."
 
 #: includes/controller/Admin.php:189 includes/controller/Admin.php:240
-#: includes/controller/Ajax.php:138
+#: includes/controller/Ajax.php:140
 msgid "You do not have sufficient privileges to add posts."
 msgstr "Non si dispone di privilegi sufficienti per aggiungere post."
 
@@ -210,8 +210,8 @@ msgstr "Per poter scrivere un post, devi abilitare almeno una Feather."
 #: includes/controller/Admin.php:1225 includes/controller/Admin.php:1323
 #: includes/controller/Admin.php:1578 includes/controller/Admin.php:1615
 #: includes/controller/Admin.php:1670 includes/controller/Admin.php:2750
-#: includes/controller/Admin.php:2828 includes/controller/Ajax.php:74
-#: includes/controller/Ajax.php:116 includes/download.php:29
+#: includes/controller/Admin.php:2828 includes/controller/Ajax.php:76
+#: includes/controller/Ajax.php:118 includes/download.php:29
 #: includes/helpers.php:159 includes/thumbnail.php:34
 msgid "Not Found"
 msgstr "Non trovato"
@@ -231,10 +231,10 @@ msgstr "Feather non trovata."
 #: includes/controller/Admin.php:2794 includes/controller/Admin.php:2866
 #: includes/controller/Admin.php:2921 includes/controller/Admin.php:2959
 #: includes/controller/Admin.php:3067 includes/controller/Admin.php:3130
-#: includes/controller/Admin.php:3196 includes/controller/Ajax.php:58
-#: includes/controller/Ajax.php:102 includes/controller/Ajax.php:132
-#: includes/controller/Ajax.php:188 includes/controller/Ajax.php:229
-#: includes/controller/Ajax.php:270 includes/controller/Main.php:721
+#: includes/controller/Admin.php:3196 includes/controller/Ajax.php:60
+#: includes/controller/Ajax.php:104 includes/controller/Ajax.php:134
+#: includes/controller/Ajax.php:190 includes/controller/Ajax.php:231
+#: includes/controller/Ajax.php:272 includes/controller/Main.php:721
 #: includes/controller/Main.php:839 includes/controller/Main.php:874
 #: includes/controller/Main.php:950 includes/controller/Main.php:1040
 #: includes/controller/Main.php:1109 includes/controller/Main.php:1116
@@ -258,7 +258,7 @@ msgstr "Visualizza il post &rarr;"
 #: includes/controller/Admin.php:1265 includes/controller/Admin.php:1311
 #: includes/controller/Admin.php:1505 includes/controller/Admin.php:1546
 #: includes/controller/Admin.php:1606 includes/controller/Admin.php:1658
-#: includes/controller/Ajax.php:63 includes/controller/Ajax.php:107
+#: includes/controller/Ajax.php:65 includes/controller/Ajax.php:109
 msgid "No ID Specified"
 msgstr "Nessun ID specificato"
 
@@ -268,7 +268,7 @@ msgstr "Per modificare un post è necessario un ID."
 
 #: includes/controller/Admin.php:295 includes/controller/Admin.php:359
 #: includes/controller/Admin.php:402 includes/controller/Admin.php:444
-#: includes/controller/Ajax.php:75
+#: includes/controller/Ajax.php:77
 msgid "Post not found."
 msgstr "Post non trovato."
 
@@ -285,16 +285,16 @@ msgid "Post updated."
 msgstr "Post aggiornato."
 
 #: includes/controller/Admin.php:391 includes/controller/Admin.php:432
-#: includes/controller/Ajax.php:64
+#: includes/controller/Ajax.php:66
 msgid "An ID is required to delete a post."
 msgstr "È necessario un ID per eliminare un post."
 
 #: includes/controller/Admin.php:409 includes/controller/Admin.php:450
-#: includes/controller/Ajax.php:81
+#: includes/controller/Ajax.php:83
 msgid "You do not have sufficient privileges to delete this post."
 msgstr "Non si dispone di privilegi sufficienti per eliminare questo post."
 
-#: includes/controller/Admin.php:456 includes/controller/Ajax.php:85
+#: includes/controller/Admin.php:456 includes/controller/Ajax.php:87
 msgid "Post deleted."
 msgstr "Post cancellato."
 
@@ -303,7 +303,7 @@ msgid "You do not have sufficient privileges to manage any posts."
 msgstr "Non si dispone di privilegi sufficienti per gestire i post."
 
 #: includes/controller/Admin.php:582 includes/controller/Admin.php:601
-#: includes/controller/Ajax.php:194
+#: includes/controller/Ajax.php:196
 msgid "You do not have sufficient privileges to add pages."
 msgstr "Non si dispone di privilegi sufficienti per aggiungere pagine."
 
@@ -334,7 +334,7 @@ msgstr "Per modificare una pagina è necessario un ID."
 
 #: includes/controller/Admin.php:687 includes/controller/Admin.php:759
 #: includes/controller/Admin.php:826 includes/controller/Admin.php:868
-#: includes/controller/Ajax.php:117
+#: includes/controller/Ajax.php:119
 msgid "Page not found."
 msgstr "Pagina non trovata."
 
@@ -347,16 +347,16 @@ msgid "Page updated."
 msgstr "Pagina aggiornata."
 
 #: includes/controller/Admin.php:812 includes/controller/Admin.php:844
-#: includes/controller/Ajax.php:96
+#: includes/controller/Ajax.php:98
 msgid "You do not have sufficient privileges to delete pages."
 msgstr "Non si dispone di privilegi sufficienti per eliminare le pagine."
 
 #: includes/controller/Admin.php:818 includes/controller/Admin.php:856
-#: includes/controller/Ajax.php:108
+#: includes/controller/Ajax.php:110
 msgid "An ID is required to delete a page."
 msgstr "Per eliminare una pagina è necessario un ID."
 
-#: includes/controller/Admin.php:888 includes/controller/Ajax.php:121
+#: includes/controller/Admin.php:888 includes/controller/Ajax.php:123
 msgid "Page deleted."
 msgstr "Pagina eliminata."
 
@@ -571,7 +571,7 @@ msgstr "Impossibile eliminare il caricamento."
 msgid "Upload deleted."
 msgstr "Carica eliminato."
 
-#: includes/controller/Admin.php:1917 includes/controller/Ajax.php:276
+#: includes/controller/Admin.php:1917 includes/controller/Ajax.php:278
 msgid "You do not have sufficient privileges to manage uploads."
 msgstr "Non si dispone di privilegi sufficienti per gestire i caricamenti."
 
@@ -704,7 +704,7 @@ msgid "Settings updated."
 msgstr "Impostazioni aggiornate."
 
 #: includes/controller/Admin.php:3207 includes/helpers.php:2556
-#: includes/helpers.php:2605 includes/helpers.php:2745 upgrade.php:162
+#: includes/helpers.php:2605 includes/helpers.php:2746 upgrade.php:162
 #: upgrade.php:179 upgrade.php:196
 msgid "Failed to write file to disk."
 msgstr "Impossibile scrivere il file su disco."
@@ -733,8 +733,8 @@ msgstr "Pagina creata."
 msgid "You are already logged in."
 msgstr "Hai già effettuato l’accesso."
 
-#: includes/controller/Admin.php:3290 includes/controller/Ajax.php:35
-#: includes/controller/Ajax.php:252 includes/download.php:14
+#: includes/controller/Admin.php:3290 includes/controller/Ajax.php:37
+#: includes/controller/Ajax.php:254 includes/download.php:14
 #: includes/thumbnail.php:16
 msgid "Missing argument."
 msgstr "Argomento mancante."
@@ -815,15 +815,15 @@ msgstr "Feather"
 msgid "Themes"
 msgstr "Temi"
 
-#: includes/controller/Ajax.php:176 includes/controller/Ajax.php:217
+#: includes/controller/Ajax.php:178 includes/controller/Ajax.php:219
 msgid "Preview"
 msgstr "Anteprima"
 
-#: includes/controller/Ajax.php:246
+#: includes/controller/Ajax.php:248
 msgid "You do not have sufficient privileges to upload files."
 msgstr "Non si dispone di privilegi sufficienti per caricare file."
 
-#: includes/controller/Ajax.php:262
+#: includes/controller/Ajax.php:264
 msgid "File uploaded."
 msgstr "File caricato."
 
@@ -1107,7 +1107,7 @@ msgstr "Il percorso di caricamento non esiste."
 msgid "Upload path is not writable."
 msgstr "Il percorso di caricamento non è scrivibile."
 
-#: includes/helpers.php:2722
+#: includes/helpers.php:2723
 msgid ""
 "The uploaded file exceeds the <code>upload_max_filesize</code> directive in "
 "php.ini."
@@ -1115,7 +1115,7 @@ msgstr ""
 "Il file caricato supera la <code>upload_max_filesize</code> direttiva in php."
 "ini."
 
-#: includes/helpers.php:2728
+#: includes/helpers.php:2729
 msgid ""
 "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the "
 "HTML form."
@@ -1123,24 +1123,24 @@ msgstr ""
 "Il file caricato supera la direttiva <code>MAX_FILE_SIZE</code> nel modulo "
 "HTML."
 
-#: includes/helpers.php:2734
+#: includes/helpers.php:2735
 msgid "The uploaded file was only partially uploaded."
 msgstr "File caricato parzialmente."
 
-#: includes/helpers.php:2740
+#: includes/helpers.php:2741
 msgid "Missing a temporary folder."
 msgstr "Manca una cartella temporanea."
 
-#: includes/helpers.php:2750
+#: includes/helpers.php:2751
 msgid "File upload was stopped by a PHP extension."
 msgstr "Il caricamento dei file è stato interrotto da un'estensione PHP."
 
-#: includes/helpers.php:2755
+#: includes/helpers.php:2756
 #, php-format
 msgid "File upload failed with error %d."
 msgstr "Caricamento file non riuscito con errore %d."
 
-#: includes/helpers.php:2762
+#: includes/helpers.php:2763
 #, php-format
 msgid ""
 "The uploaded file exceeds the maximum size of %d Megabytes allowed by this "
@@ -1149,49 +1149,49 @@ msgstr ""
 "Il file caricato supera la dimensione massima di %d megabyte consentiti da "
 "questo sito."
 
-#: includes/helpers.php:3097
+#: includes/helpers.php:3098
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr "Errore di codifica JSON: %s"
 
-#: includes/helpers.php:3122
+#: includes/helpers.php:3123
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr "Errore di decodifica JSON: %s"
 
-#: includes/helpers.php:3205
+#: includes/helpers.php:3206
 msgid "Failed to create Zip archive."
 msgstr "Impossibile creare l'archivio Zip."
 
-#: includes/helpers.php:3307
+#: includes/helpers.php:3308
 #, php-format
 msgid "Activate your account at %s"
 msgstr "Attiva il tuo account %s"
 
-#: includes/helpers.php:3308 includes/helpers.php:3343
+#: includes/helpers.php:3309 includes/helpers.php:3344
 #, php-format
 msgid "Hello, %s."
 msgstr "Ciao, %s."
 
-#: includes/helpers.php:3311
+#: includes/helpers.php:3312
 msgid "You are receiving this message because you registered a new account."
 msgstr "Si riceve questo messaggio perché è stato registrato un nuovo account."
 
-#: includes/helpers.php:3314
+#: includes/helpers.php:3315
 msgid "Visit this link to activate your account:"
 msgstr "Visita questo link per attivare il tuo account:"
 
-#: includes/helpers.php:3342
+#: includes/helpers.php:3343
 #, php-format
 msgid "Reset your password at %s"
 msgstr "Reimpostare la password per %s"
 
-#: includes/helpers.php:3346
+#: includes/helpers.php:3347
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 "Si riceve questo messaggio perché è stata richiesta una nuova password."
 
-#: includes/helpers.php:3349
+#: includes/helpers.php:3350
 msgid "Visit this link to reset your password:"
 msgstr "Visita questo link per reimpostare la password:"
 

@@ -332,18 +332,18 @@ msgstr "Alle umschalten"
 msgid "Are you sure you want to proceed?"
 msgstr "Sind Sie sicher, dass Sie fortfahren möchten?"
 
-#: admin/javascripts/admin.js.php:215 admin/javascripts/admin.js.php:445
-#: admin/javascripts/admin.js.php:854
+#: admin/javascripts/admin.js.php:215 admin/javascripts/admin.js.php:450
+#: admin/javascripts/admin.js.php:859
 msgid "Modal window"
 msgstr "Modales Fenster"
 
-#: admin/javascripts/admin.js.php:228 admin/javascripts/admin.js.php:457
-#: admin/javascripts/admin.js.php:868
+#: admin/javascripts/admin.js.php:228 admin/javascripts/admin.js.php:462
+#: admin/javascripts/admin.js.php:873
 msgid "Close"
 msgstr "Schliessen"
 
-#: admin/javascripts/admin.js.php:235 admin/javascripts/admin.js.php:464
-#: admin/javascripts/admin.js.php:875
+#: admin/javascripts/admin.js.php:235 admin/javascripts/admin.js.php:469
+#: admin/javascripts/admin.js.php:880
 msgid "close"
 msgstr "schliessen"
 
@@ -383,7 +383,7 @@ msgstr "bild"
 msgid "Upload"
 msgstr "Hochladen"
 
-#: admin/javascripts/admin.js.php:402 admin/javascripts/admin.js.php:630
+#: admin/javascripts/admin.js.php:402 admin/javascripts/admin.js.php:635
 msgid "Uploading..."
 msgstr "Hochladen..."
 
@@ -391,20 +391,20 @@ msgstr "Hochladen..."
 msgid "Insert"
 msgstr "Einfügen"
 
-#: admin/javascripts/admin.js.php:481
+#: admin/javascripts/admin.js.php:486
 msgid "insert"
 msgstr "einfügen"
 
-#: admin/javascripts/admin.js.php:495 admin/javascripts/admin.js.php:496
+#: admin/javascripts/admin.js.php:500 admin/javascripts/admin.js.php:501
 #: admin/pages/themes.twig:24
 msgid "Preview"
 msgstr "Vorschau"
 
-#: admin/javascripts/admin.js.php:512
+#: admin/javascripts/admin.js.php:517
 msgid "preview"
 msgstr "vorschau"
 
-#: admin/javascripts/admin.js.php:538
+#: admin/javascripts/admin.js.php:543
 msgid "Words:"
 msgstr "Wörter:"
 
