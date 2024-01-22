@@ -2666,10 +2666,7 @@
                 if (!preg_match("/.+\.($patterns)$/i", $filename))
                     continue;
 
-                if (
-                    !($search == "") and
-                    stripos($filename, $search) === false
-                )
+                if (stripos($filename, $search) === false)
                     continue;
 
                 $results[] = array(
@@ -2692,12 +2689,15 @@
                         return ($a[$sort] < $b[$sort]) ? -1 : 1 ;
                     };
                     break;
-
                 case "name":
                 case "type":        
-                default:
                     return function ($a, $b) use ($sort) {
                         return strnatcmp($a[$sort], $b[$sort]);
+                    };
+                    break;
+                default:
+                    return function ($a, $b) {
+                        return strnatcmp($a["name"], $b["name"]);
                     };
             }
         }
