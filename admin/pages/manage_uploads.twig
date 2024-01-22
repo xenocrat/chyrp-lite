@@ -16,7 +16,7 @@
 </fieldset>
 </form>
 <h2>{{ GET.search is defined ? "Search Results" | translate : "Uploads" | translate }}</h2>
-<table>
+<table class="interactive{{ uploads.paginated is empty ? ' empty' : '' }}">
 <thead>
 <tr class="head">
 <th class="uploads_name filename main">{{ "Name" | translate }}</th>
@@ -70,6 +70,20 @@
 {% endfor %}
 </tbody>
 </table>
+<div class="controls">
+<form action="{{ self_url() }}" method="post" accept-charset="UTF-8">
+<label for="sort">{{ "Sort results by:" | translate }}</label>
+<select name="sort" id="uploads_sort">
+{# "Type" | translate #}{# Used in AdminController #}
+{% for value, label in uploads_columns %}
+<option value="{{ value }}"{{ value | selected(uploads_sort) }}>
+{{ label }}
+</option>
+{% endfor %}
+</select>
+<button type="submit">{{ "Update" | translate }}</button>
+</form>
+</div>
 {% if uploads.paginated is not empty and uploads.pages > 1 %}
 <div class="pagination">
 <span class="pages">{{ "Page %d of %s" | translate | format(uploads.page, uploads.final_link(uploads.pages)) }}</span>
