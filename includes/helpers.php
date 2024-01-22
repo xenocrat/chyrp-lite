@@ -2641,8 +2641,13 @@
      * Parameters:
      *     $search - A search term.
      *     $filter - An array of valid extensions (case insensitive).
+     *     $sort - One of "name", "type", "size", or "modified".
      */
-    function uploaded_search($search = "", $filter = array()): array {
+    function uploaded_search(
+        $search = "",
+        $filter = array(),
+        $sort = "name"
+    ): array {
         $config = Config::current();
         $results = array();
 
@@ -2661,7 +2666,10 @@
                 if (!preg_match("/.+\.($patterns)$/i", $filename))
                     continue;
 
-                if (!($search == "") and stripos($filename, $search) === false)
+                if (
+                    !($search == "") and
+                    stripos($filename, $search) === false
+                )
                     continue;
 
                 $results[] = array(
@@ -2673,6 +2681,28 @@
             }
         }
 
+        function build_sorter($sort) {
+            switch ($sort) {
+                case "size":
+                case "modified":
+                    return function ($a, $b) use ($sort) {
+                        if ($a[$sort] == $b[$sort])
+                            return 0;
+
+                        return ($a[$sort] < $b[$sort]) ? -1 : 1 ;
+                    };
+                    break;
+
+                case "name":
+                case "type":        
+                default:
+                    return function ($a, $b) use ($sort) {
+                        return strnatcmp($a[$sort], $b[$sort]);
+                    };
+            }
+        }
+
+        usort($results, build_sorter($sort));
         return $results;
     }
 
