@@ -22,7 +22,7 @@
 
         /**
          * Function: __construct
-         * Removes empty notification variables from the session.
+         * Prepares the structure of session values.
          */
         private function __construct() {
             self::prepare(self::FLASH_MESSAGE);
@@ -32,7 +32,7 @@
 
         /**
          * Function: prepare
-         * Prepare the structure of the "flash" session value.
+         * Prepare the structure of a session value.
          */
         private static function prepare($type): void {
             if (
@@ -163,10 +163,9 @@
          *     An array of flashes of the requested type.
          */
         private function serve($type): array {
-            if (
-                !empty($_SESSION[$type]) and
-                is_array($_SESSION[$type])
-            ) {
+            self::prepare($type);
+
+            if (!empty($_SESSION[$type])) {
                 $served = array_merge(
                     self::$$type,
                     $_SESSION[$type]
@@ -205,15 +204,13 @@
             }
 
             foreach ($check as $type) {
+                self::prepare($type);
+
                 if (!empty(self::$$type))
                     return true;
 
-                if (
-                    !empty($_SESSION[$type]) and
-                    is_array($_SESSION[$type])
-                ) {
+                if (!empty($_SESSION[$type]))
                     return true;
-                }
             }
 
             return false;
@@ -247,15 +244,13 @@
             }
 
             foreach ($count as $type) {
+                self::prepare($type);
+
                 if (!empty(self::$$type))
                     $total+= count(self::$$type);
 
-                if (
-                    !empty($_SESSION[$type]) and
-                    is_array($_SESSION[$type])
-                ) {
+                if (!empty($_SESSION[$type]))
                     $total+= count($_SESSION[$type]);
-                }
             }
 
             return $total;
