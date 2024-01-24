@@ -140,12 +140,12 @@ Stores messages, notices, and warnings to display to the user after a redirect.
 
 Function: __construct
 ---------------------
-Removes empty notification variables from the session.
+Prepares the structure of session values.
 
 
 Function: prepare
 -----------------
-Prepare the structure of the "flash" session value.
+Prepare the structure of a session value.
 
 
 Function: message
