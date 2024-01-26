@@ -64,8 +64,8 @@
 </tbody>
 </table>
 <div class="controls">
-<h3>{{ "Tag Selected Post(s) with:" | translate("tags") }}</h3>
-<input type="text" name="name" value="" id="name"  aria-label="{{ 'Name' | translate('tags') | fix(true) }}">
+<label for="tag_name">{{ "Tag Selected Post(s) with:" | translate("tags") }}</label>
+<input type="text" name="name" value="" id="tag_name">
 <button type="submit">{{ "Tag" | translate("tags") }}</button>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
 </div>
