@@ -22,6 +22,7 @@
 <th class="uploads_name filename main">{{ "Name" | translate }}</th>
 <th class="uploads_modified date">{{ "Last Modified" | translate }}</th>
 <th class="uploads_size value">{{ "Size" | translate }}</th>
+<th class="uploads_type value">{{ "Type" | translate }}</th>
 {{ trigger.call("manage_uploads_column_header") }}
 <th class="controls" colspan="2">{{ "Controls" | translate }}</th>
 </tr>
@@ -30,14 +31,16 @@
 {% for upload in uploads.paginated %}
 <tr id="uploads_{{ loop.index }}" class="uploads">
 <td class="uploads_name filename main">
-{% if ["jpg", "jpeg", "png", "gif", "webp"] | contains(upload.type) %}
+{% if ["jpg", "jpeg", "png", "webp", "gif"] | contains(upload.type) %}
 {{ upload.name | thumbnail("", false, ["max_width=70", "quality=60", "square=1"], "70px") }}
-{% elseif ["avif", "tif", "tiff", "bmp"] | contains(upload.type) %}
+{% elseif ["avif", "tif", "tiff", "heif", "bmp"] | contains(upload.type) %}
 {{ icon_img("image.svg", "", "placeholder") }}
-{% elseif ["mp3", "m4a", "oga", "ogg", "mka", "flac", "wav"] | contains(upload.type) %}
+{% elseif ["mp3", "m4a", "oga", "ogg", "mka", "flac", "wav", "aiff"] | contains(upload.type) %}
 {{ icon_img("audio.svg", "", "placeholder") }}
-{% elseif ["mp4", "ogv", "webm", "3gp", "mkv", "mov"] | contains(upload.type) %}
+{% elseif ["mpg", "mpeg", "mp2", "mp4", "m4v", "ogv", "webm", "3gp", "mkv", "mov", "avi", "ts"] | contains(upload.type) %}
 {{ icon_img("video.svg", "", "placeholder") }}
+{% elseif ["zip", "tar", "rar", "gz", "bz2", "7z", "dmg", "cab", "iso", "udf"] | contains(upload.type) %}
+{{ icon_img("container.svg", "", "placeholder") }}
 {% else %}
 {{ icon_img("file.svg", "", "placeholder") }}
 {% endif %}
@@ -48,6 +51,9 @@
 </td>
 <td class="uploads_size value">
 {{ upload.size | filesizeformat }}
+</td>
+<td class="uploads_type value">
+{{ upload.type | upper }}
 </td>
 {{ trigger.call("manage_uploads_column", upload) }}
 <td class="controls">
@@ -72,9 +78,8 @@
 </table>
 <div class="controls">
 <form action="{{ self_url() }}" method="post" accept-charset="UTF-8">
-<label for="sort">{{ "Sort results by:" | translate }}</label>
+<label for="uploads_sort">{{ "Sort results by:" | translate }}</label>
 <select name="sort" id="uploads_sort">
-{# "Type" | translate #}{# Used in AdminController #}
 {% for value, label in uploads_columns %}
 <option value="{{ value }}"{{ value | selected(uploads_sort) }}>
 {{ label }}
