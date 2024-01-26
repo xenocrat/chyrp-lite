@@ -495,7 +495,7 @@ msgstr "Verfassen Sie Blog-Inhalte mithilfe der Markdown-Textformatierung."
 
 #: admin/pages/content_settings.twig:89 admin/pages/edit_group.twig:27
 #: admin/pages/edit_user.twig:66 admin/pages/general_settings.twig:97
-#: admin/pages/manage_uploads.twig:84 admin/pages/route_settings.twig:91
+#: admin/pages/manage_uploads.twig:89 admin/pages/route_settings.twig:91
 #: admin/pages/user_settings.twig:57
 msgid "Update"
 msgstr "Aktualisieren"
@@ -869,7 +869,7 @@ msgid "Guests?"
 msgstr "Gäste?"
 
 #: admin/pages/manage_groups.twig:27 admin/pages/manage_pages.twig:29
-#: admin/pages/manage_posts.twig:27 admin/pages/manage_uploads.twig:26
+#: admin/pages/manage_posts.twig:27 admin/pages/manage_uploads.twig:27
 #: admin/pages/manage_users.twig:35
 msgid "Controls"
 msgstr "Kontroll"
@@ -886,19 +886,19 @@ msgid "edit"
 msgstr "ändern"
 
 #: admin/pages/manage_groups.twig:54 admin/pages/manage_pages.twig:66
-#: admin/pages/manage_posts.twig:50 admin/pages/manage_uploads.twig:60
+#: admin/pages/manage_posts.twig:50 admin/pages/manage_uploads.twig:66
 #: admin/pages/manage_users.twig:66
 msgid "delete"
 msgstr "löschen"
 
 #: admin/pages/manage_groups.twig:60 admin/pages/manage_pages.twig:72
-#: admin/pages/manage_posts.twig:57 admin/pages/manage_uploads.twig:67
+#: admin/pages/manage_posts.twig:57 admin/pages/manage_uploads.twig:73
 #: admin/pages/manage_users.twig:72 admin/partials/uploads_modal.twig:28
 msgid "No results"
 msgstr "Keine Ergebnisse"
 
 #: admin/pages/manage_groups.twig:68 admin/pages/manage_pages.twig:80
-#: admin/pages/manage_posts.twig:65 admin/pages/manage_uploads.twig:89
+#: admin/pages/manage_posts.twig:65 admin/pages/manage_uploads.twig:94
 #: admin/pages/manage_users.twig:80
 #, php-format
 msgid "Page %d of %s"
@@ -975,17 +975,17 @@ msgstr "Zuletzt bearbeitet"
 msgid "Size"
 msgstr "Größe"
 
-#: admin/pages/manage_uploads.twig:55
+#: admin/pages/manage_uploads.twig:25
+msgid "Type"
+msgstr "Typ"
+
+#: admin/pages/manage_uploads.twig:61
 msgid "download"
 msgstr "herunterladen"
 
-#: admin/pages/manage_uploads.twig:75
+#: admin/pages/manage_uploads.twig:81
 msgid "Sort results by:"
 msgstr "Sortieren Sie die Ergebnisse nach:"
-
-#: admin/pages/manage_uploads.twig:77
-msgid "Type"
-msgstr "Typ"
 
 #: admin/pages/manage_users.twig:3
 msgid "Manage Users"

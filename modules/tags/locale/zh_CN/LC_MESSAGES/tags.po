@@ -63,7 +63,6 @@ msgid "Manage Tags"
 msgstr "管理标签"
 
 #: modules/tags/admin/pages/manage_tags.twig:22
-#: modules/tags/admin/pages/posts_tagged.twig:68
 #: modules/tags/admin/pages/rename_tag.twig:10
 msgid "Name"
 msgstr "姓名"
@@ -191,7 +190,7 @@ msgstr "你没有指定一个标签。"
 #: modules/tags/tags.php:642 modules/tags/tags.php:656
 #: modules/tags/tags.php:682
 msgid "Invalid Tag"
-msgstr "无效的标签。"
+msgstr "无效的标签"
 
 #: modules/tags/tags.php:651
 msgid "The tag you specified was not found."

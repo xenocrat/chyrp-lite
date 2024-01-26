@@ -100,13 +100,13 @@ Arguments:
 manage_uploads_column_header
 ----------------------------
 Called from:
-	admin/pages/manage_uploads.twig on line 25
+	admin/pages/manage_uploads.twig on line 26
 
 
 manage_uploads_column
 ---------------------
 Called from:
-	admin/pages/manage_uploads.twig on line 52
+	admin/pages/manage_uploads.twig on line 58
 
 Arguments:
 	upload

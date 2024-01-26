@@ -65,7 +65,6 @@ msgid "Manage Tags"
 msgstr "Gestisci Tag"
 
 #: modules/tags/admin/pages/manage_tags.twig:22
-#: modules/tags/admin/pages/posts_tagged.twig:68
 #: modules/tags/admin/pages/rename_tag.twig:10
 msgid "Name"
 msgstr "Titolo"
