@@ -118,6 +118,14 @@
             $spam = ($status == self::STATUS_SPAM);
             $trigger->filter($spam, "comment_is_spam", $values);
 
+            $agent = "";
+
+            if (isset($_SERVER['HTTP_USER_AGENT']))
+                $agent = $_SERVER['HTTP_USER_AGENT'];
+
+            if (isset($_SERVER['Sec-CH-UA']))
+                $agent = $_SERVER['Sec-CH-UA'];
+
             if ($spam)
                 $status = self::STATUS_SPAM;
 
@@ -130,7 +138,7 @@
                 author_url:$author_url,
                 author_email:$author_email,
                 ip:crc24($_SERVER['REMOTE_ADDR']),
-                agent:isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : "",
+                agent:$agent,
                 status:$status,
                 post_id:$post->id,
                 user_id:$visitor->id,
