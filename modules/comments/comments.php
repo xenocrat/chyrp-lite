@@ -810,9 +810,11 @@
         }
 
         public function manage_users_column($user): void {
-            echo '<td class="user_comments value">'.
+            echo '<td class="user_comments value"><a href="'.
+                 url("manage_comments/query/".urlencode("user_id:".$user->id)).
+                 '">'.
                  $user->comment_count.
-                 '</td>';
+                 '</a></td>';
         }
 
         public function ajax_reload_comments(): void {
