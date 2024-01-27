@@ -293,9 +293,9 @@
             }
 
             $uploads = uploaded_search(
-                search: $search,
-                filter: $extensions,
-                sort: $sort
+                search:$search,
+                filter:$extensions,
+                sort:$sort
             );
 
             $admin = AdminController::current();
