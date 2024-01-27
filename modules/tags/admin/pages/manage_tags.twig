@@ -16,8 +16,8 @@
 </fieldset>
 </form>
 <h2>{{ "Tags" | translate("tags") }}</h2>
-<table>
-<thead> 
+<table class="interactive{{ tag_cloud is empty ? ' empty' : '' }}">
+<thead>
 <tr class="head">
 <th class="tag_name name main">{{ "Name" | translate("tags") }}</th>
 <th class="tag_count value">{{ "Posts Tagged" | translate("tags") }}</th>
@@ -57,4 +57,17 @@
 {% endfor %}
 </tbody>
 </table>
+<div class="controls">
+<form action="{{ self_url() }}" method="post" accept-charset="UTF-8">
+<label for="tags_sort">{{ "Sort results by:" | translate("tags") }}</label>
+<select name="sort" id="tags_sort">
+{% for value, label in tags_columns %}
+<option value="{{ value }}"{{ value | selected(tags_sort) }}>
+{{ label }}
+</option>
+{% endfor %}
+</select>
+<button type="submit">{{ "Update" | translate }}</button>
+</form>
+</div>
 {% endblock %}

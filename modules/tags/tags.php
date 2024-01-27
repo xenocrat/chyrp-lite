@@ -264,25 +264,39 @@
                     "/"
                 );
 
-            if (isset($_GET['search']) and $_GET['search'] != "") {
-                $tag_cloud = array();
-                $encoded = $this->tags_encoded($_GET['search']);
+            if (isset($_POST['sort']))
+                $_SESSION['tags_sort'] = $_POST['sort'];
 
-                foreach ($this->tag_cloud() as $tag) {
+            $search = isset($_GET['search']) ? $_GET['search'] : "" ;
+            $sort = fallback($_SESSION['tags_sort'], "popularity_desc");
+
+            $columns = array(
+                "name_asc" => __("Name", "tags"),
+                "popularity_desc" => __("Posts Tagged", "tags")
+            );
+
+            $tag_cloud = $this->tag_cloud(sort:$sort);
+
+            if ($search != "") {
+                $tags = $tag_cloud;
+                $tag_cloud = array();
+                $encoded = $this->tags_encoded($search);
+
+                foreach ($tags as $tag) {
                     if (
                         substr_count($tag["name"], $encoded) or
                         substr_count($tag["clean"], $encoded)
                     )
                         $tag_cloud[] = $tag;
                 }
-            } else {
-                $tag_cloud = $this->tag_cloud();
             }
 
             $admin->display(
                 "pages".DIR."manage_tags",
                 array(
                     "tag_cloud" => $tag_cloud,
+                    "tags_sort" => $sort,
+                    "tags_columns" => $columns
                 )
             );
         }
@@ -748,15 +762,12 @@
                 case 'name_asc':
                     $method = array($this, "sort_tags_name_asc");
                     break;
-
                 case 'name_desc':
                     $method = array($this, "sort_tags_name_desc");
                     break;
-
                 case 'popularity_asc':
                     $method = array($this, "sort_tags_popularity_asc");
                     break;
-
                 default:
                     $method = array($this, "sort_tags_popularity_desc");
             }
@@ -786,8 +797,9 @@
                     $these = $this->tags_unserialize($result["value"]);
                     $found = array_merge($found, $these);
 
-                    foreach ($these as $name => $clean)
+                    foreach ($these as $name => $clean) {
                         $names[] = $name;
+                    }
                 }
 
                 if (!empty($found)) {
@@ -801,14 +813,17 @@
                     $main = MainController::current();
 
                     foreach ($popularity as $name => $count) {
-                        $t = _p("%d post tagged with &#8220;%s&#8221;", "%d posts tagged with &#8220;%s&#8221;", $count, "tags");
+                        $size = floor($step * ($count - $min));
+                        $title = $this->tag_cloud_title($name, $count);
+                        $url = url("tag/".$found[$name], $main);
+
                         $cloud[] = array(
-                            "size" => floor($step * ($count - $min)),
+                            "size" => $size,
                             "popularity" => $count,
                             "name" => $name,
-                            "title" => sprintf($t, $count, fix($name, true)),
+                            "title" => $title,
                             "clean" => $found[$name],
-                            "url" => url("tag/".$found[$name], $main)
+                            "url" => $url
                         );
                     }
                 }
@@ -821,6 +836,12 @@
             return ($limit) ?
                 array_slice($array, 0, $limit) :
                 $array ;
+        }
+
+        private function tag_cloud_title($name, $count) {
+            $p = _p("%d post tagged with &#8220;%s&#8221;", "%d posts tagged with &#8220;%s&#8221;", $count, "tags");
+            $title = sprintf($p, $count, fix($name, true));
+            return $title;
         }
 
         public function tag_find_by_clean($clean): array|false {
