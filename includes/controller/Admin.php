@@ -1940,8 +1940,8 @@
 
             $uploads = new Paginator(
                     uploaded_search(
-                        search: $search,
-                        sort: $sort
+                        search:$search,
+                        sort:$sort
                     )
                 );
 
