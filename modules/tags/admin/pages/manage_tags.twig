@@ -10,7 +10,7 @@
 <button type="submit">{{ "Search" | translate }}</button>
 {% if visitor.group.can("edit_draft", "edit_post", "delete_draft", "delete_post") %}
 <a href="{{ url('posts_tagged') }}" class="button yay">
-{{ icon_img("add.svg") }}{{ "New Tag" | translate }}
+{{ icon_img("add.svg") }}{{ "Add Tags" | translate }}
 </a>
 {% endif %}
 </fieldset>
