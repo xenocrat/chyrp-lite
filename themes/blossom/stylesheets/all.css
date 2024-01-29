@@ -777,12 +777,7 @@ iframe {
 }
 iframe.video_embed {
     width: 100%;
-    height: calc((100vw - 22rem) * 0.5625);
-    max-height: 515px;
-}
-body.preview iframe.video_embed {
-    max-height: none;
-    height: calc((100vw - 6rem) * 0.5625);
+    aspect-ratio: 16 / 9;
 }
 img {
     border-style: none;
@@ -921,9 +916,6 @@ div.standalone > *:last-child {
         left: -1rem;
         margin-top: 1rem;
         padding: 0.25rem 1rem;
-    }
-    iframe.video_embed {
-        height: calc((100vw - 4rem) * 0.5625);
     }
 }
 @media screen and (max-width: 639px) {

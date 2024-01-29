@@ -251,8 +251,7 @@ iframe {
 }
 iframe.video_embed {
     width: 100%;
-    height: calc((100vw - 2rem) * 0.5625);
-    max-height: 412px;
+    aspect-ratio: 16 / 9;
 }
 a:link {
     color: #1d70b8;

@@ -688,8 +688,7 @@ iframe {
 }
 iframe.video_embed {
     width: 100%;
-    height: calc((100vw - 4rem) * 0.5625);
-    max-height: 403px;
+    aspect-ratio: 16 / 9;
 }
 div#mast > *:first-child,
 article > *:first-child,
