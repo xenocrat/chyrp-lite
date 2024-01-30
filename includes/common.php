@@ -398,4 +398,4 @@
     header("Vary: Accept-Encoding, Cookie, Save-Data");
 
     if ($config->send_pingbacks)
-        header("Link: <".$config->chyrp_url."/?action=webmention>; rel=\"webmention\"");
+        header("Link: <".$config->url."/?action=webmention>; rel=\"webmention\"");
