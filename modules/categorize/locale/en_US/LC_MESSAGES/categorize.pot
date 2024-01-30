@@ -69,7 +69,9 @@ msgid "Manage Categories"
 msgstr ""
 
 #: modules/categorize/admin/pages/manage_category.twig:17
-msgid "Add Category"
+#: modules/categorize/admin/pages/new_category.twig:3
+#: modules/categorize/admin/pages/new_category.twig:6
+msgid "New Category"
 msgstr ""
 
 #: modules/categorize/admin/pages/manage_category.twig:21
@@ -79,11 +81,6 @@ msgstr ""
 
 #: modules/categorize/admin/pages/manage_category.twig:27
 msgid "Posts"
-msgstr ""
-
-#: modules/categorize/admin/pages/new_category.twig:3
-#: modules/categorize/admin/pages/new_category.twig:6
-msgid "New Category"
 msgstr ""
 
 #: modules/categorize/admin/pages/new_category.twig:35

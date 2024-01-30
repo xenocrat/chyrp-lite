@@ -594,7 +594,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 1116
+	modules/comments/comments.php on line 1118
 
 Arguments:
 	$comment
@@ -604,7 +604,7 @@ Arguments:
 correspond_site_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1403
+	modules/comments/comments.php on line 1405
 
 Arguments:
 	$comment
@@ -613,7 +613,7 @@ Arguments:
 correspond_user_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1423
+	modules/comments/comments.php on line 1425
 
 Arguments:
 	$comment
@@ -623,7 +623,7 @@ Arguments:
 correspond_peer_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1448
+	modules/comments/comments.php on line 1450
 
 Arguments:
 	$comment
@@ -634,7 +634,7 @@ Arguments:
 add_comment
 -----------
 Called from:
-	modules/comments/model/Comment.php on line 273
+	modules/comments/model/Comment.php on line 281
 
 Arguments:
 	$comment
@@ -643,7 +643,7 @@ Arguments:
 update_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 379
+	modules/comments/model/Comment.php on line 387
 
 Arguments:
 	$comment
@@ -1084,7 +1084,7 @@ markup_text
 Called from:
 	includes/controller/Ajax.php on line 211
 	includes/model/Page.php on line 335
-	modules/comments/model/Comment.php on line 581
+	modules/comments/model/Comment.php on line 589
 
 Target:
 	$content
@@ -1407,7 +1407,7 @@ Arguments:
 filter_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 578
+	modules/comments/model/Comment.php on line 586
 
 Target:
 	$this
@@ -1416,7 +1416,7 @@ Target:
 markup_comment_text
 -------------------
 Called from:
-	modules/comments/model/Comment.php on line 581
+	modules/comments/model/Comment.php on line 589
 
 Target:
 	$this->body

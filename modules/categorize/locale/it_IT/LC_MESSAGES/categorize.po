@@ -97,8 +97,10 @@ msgid "Manage Categories"
 msgstr "Gestisci categorie"
 
 #: modules/categorize/admin/pages/manage_category.twig:17
-msgid "Add Category"
-msgstr "Aggiungi categoria"
+#: modules/categorize/admin/pages/new_category.twig:3
+#: modules/categorize/admin/pages/new_category.twig:6
+msgid "New Category"
+msgstr "Nuova Categoria"
 
 #: modules/categorize/admin/pages/manage_category.twig:21
 #: modules/categorize/categorize.php:241
@@ -108,11 +110,6 @@ msgstr "Categorie"
 #: modules/categorize/admin/pages/manage_category.twig:27
 msgid "Posts"
 msgstr "Post"
-
-#: modules/categorize/admin/pages/new_category.twig:3
-#: modules/categorize/admin/pages/new_category.twig:6
-msgid "New Category"
-msgstr "Nuova Categoria"
 
 #: modules/categorize/admin/pages/new_category.twig:35
 msgid "Add"
