@@ -1087,17 +1087,29 @@
             ltrim($class, "\\")
         ).".php";
 
-        if (is_file(INCLUDES_DIR.DIR."lib".DIR.$filepath)) {
-            require INCLUDES_DIR.DIR."lib".DIR.$filepath;
+        $libpath = INCLUDES_DIR.
+                   DIR."lib".
+                   DIR.$filepath;
+
+        if (is_file($libpath)) {
+            require $libpath;
             return;
         }
 
-        if (!INSTALLING and !UPGRADING) {
-            foreach (Config::current()->enabled_modules as $module) {
-                if (is_file(MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath)) {
-                    require MODULES_DIR.DIR.$module.DIR."lib".DIR.$filepath;
-                    return;
-                }
+        if (INSTALLING or UPGRADING)
+            return;
+
+        $config = Config::current();
+
+        foreach ($config->enabled_modules as $module) {
+            $modpath = MODULES_DIR.
+                       DIR.$module.
+                       DIR."lib".
+                       DIR.$filepath;
+
+            if (is_file($modpath)) {
+                require $modpath;
+                return;
             }
         }
     }
