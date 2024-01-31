@@ -529,137 +529,141 @@
                     "manage_comments"
                 );
 
-            $comments = array_keys($_POST['comment']);
-
-            if (isset($_POST['delete'])) {
-                $count_delete = 0;
-
-                foreach ($comments as $comment) {
-                    $comment = new Comment(
-                        $comment,
-                        array("filter" => false)
-                    );
-
-                    if (!$comment->deletable())
-                        continue;
-
-                    Comment::delete($comment->id);
-                    $count_delete++;
-                }
-
-                if (!empty($count_delete))
-                    Flash::notice(
-                        __("Selected comments deleted.", "comments")
-                    );
-            }
-
+            $trigger = Trigger::current();
             $false_positives = array();
             $false_negatives = array();
+            $comments = array_keys($_POST['comment']);
 
-            if (isset($_POST['deny'])) {
-                $count_deny = 0;
+            switch (fallback($_POST['task'])) {
+                case "delete":
+                    $count_delete = 0;
 
-                foreach ($comments as $comment) {
-                    $comment = new Comment(
-                        $comment,
-                        array("filter" => false)
-                    );
+                    foreach ($comments as $comment) {
+                        $comment = new Comment(
+                            $comment,
+                            array("filter" => false)
+                        );
 
-                    if (!$comment->editable())
-                        continue;
+                        if (!$comment->deletable())
+                            continue;
 
-                    if ($comment->status == Comment::STATUS_PINGBACK)
-                        continue;
+                        Comment::delete($comment->id);
+                        $count_delete++;
+                    }
 
-                    if ($comment->status == Comment::STATUS_SPAM)
-                        $false_positives[] = $comment;
+                    if (!empty($count_delete))
+                        Flash::notice(
+                            __("Selected comments deleted.", "comments")
+                        );
 
-                    $comment->update(
-                        body:$comment->body,
-                        author:$comment->author,
-                        author_url:$comment->author_url,
-                        author_email:$comment->author_email,
-                        status:Comment::STATUS_DENIED
-                    );
+                    break;
 
-                    $count_deny++;
-                }
+                case "deny":
+                    $count_deny = 0;
 
-                if (!empty($count_deny))
-                    Flash::notice(
-                        __("Selected comments denied.", "comments")
-                    );
+                    foreach ($comments as $comment) {
+                        $comment = new Comment(
+                            $comment,
+                            array("filter" => false)
+                        );
+
+                        if (!$comment->editable())
+                            continue;
+
+                        if ($comment->status == Comment::STATUS_PINGBACK)
+                            continue;
+
+                        if ($comment->status == Comment::STATUS_SPAM)
+                            $false_positives[] = $comment;
+
+                        $comment->update(
+                            body:$comment->body,
+                            author:$comment->author,
+                            author_url:$comment->author_url,
+                            author_email:$comment->author_email,
+                            status:Comment::STATUS_DENIED
+                        );
+
+                        $count_deny++;
+                    }
+
+                    if (!empty($count_deny))
+                        Flash::notice(
+                            __("Selected comments denied.", "comments")
+                        );
+
+                    break;
+
+                case "approve":
+                    $count_approve = 0;
+
+                    foreach ($comments as $comment) {
+                        $comment = new Comment(
+                            $comment,
+                            array("filter" => false)
+                        );
+
+                        if (!$comment->editable())
+                            continue;
+
+                        if ($comment->status == Comment::STATUS_PINGBACK)
+                            continue;
+
+                        if ($comment->status == Comment::STATUS_SPAM)
+                            $false_positives[] = $comment;
+
+                        $comment->update(
+                            body:$comment->body,
+                            author:$comment->author,
+                            author_url:$comment->author_url,
+                            author_email:$comment->author_email,
+                            status:Comment::STATUS_APPROVED
+                        );
+
+                        $count_approve++;
+                    }
+
+                    if (!empty($count_approve))
+                        Flash::notice(
+                            __("Selected comments approved.", "comments")
+                        );
+
+                    break;
+
+                case "spam":
+                    $count_spam = 0;
+
+                    foreach ($comments as $comment) {
+                        $comment = new Comment(
+                            $comment,
+                            array("filter" => false)
+                        );
+
+                        if (!$comment->editable())
+                            continue;
+
+                        if ($comment->status == Comment::STATUS_PINGBACK)
+                            continue;
+
+                        $comment->update(
+                            body:$comment->body,
+                            author:$comment->author,
+                            author_url:$comment->author_url,
+                            author_email:$comment->author_email,
+                            status:Comment::STATUS_SPAM
+                        );
+
+                        $count_spam++;
+                        $false_negatives[] = $comment;
+                    }
+
+                    if (!empty($count_spam))
+                        Flash::notice(
+                            __("Selected comments marked as spam.", "comments")
+                        );
+
+                    break;
             }
-
-            if (isset($_POST['approve'])) {
-                $count_approve = 0;
-
-                foreach ($comments as $comment) {
-                    $comment = new Comment(
-                        $comment,
-                        array("filter" => false)
-                    );
-
-                    if (!$comment->editable())
-                        continue;
-
-                    if ($comment->status == Comment::STATUS_PINGBACK)
-                        continue;
-
-                    if ($comment->status == Comment::STATUS_SPAM)
-                        $false_positives[] = $comment;
-
-                    $comment->update(
-                        body:$comment->body,
-                        author:$comment->author,
-                        author_url:$comment->author_url,
-                        author_email:$comment->author_email,
-                        status:Comment::STATUS_APPROVED
-                    );
-
-                    $count_approve++;
-                }
-
-                if (!empty($count_approve))
-                    Flash::notice(
-                        __("Selected comments approved.", "comments")
-                    );
-            }
-
-            if (isset($_POST['spam'])) {
-                $count_spam = 0;
-
-                foreach ($comments as $comment) {
-                    $comment = new Comment(
-                        $comment,
-                        array("filter" => false)
-                    );
-
-                    if (!$comment->editable())
-                        continue;
-
-                    if ($comment->status == Comment::STATUS_PINGBACK)
-                        continue;
-
-                    $comment->update(
-                        body:$comment->body,
-                        author:$comment->author,
-                        author_url:$comment->author_url,
-                        author_email:$comment->author_email,
-                        status:Comment::STATUS_SPAM
-                    );
-
-                    $count_spam++;
-                    $false_negatives[] = $comment;
-                }
-
-                if (!empty($count_spam))
-                    Flash::notice(
-                        __("Selected comments marked as spam.", "comments")
-                    );
-            }
-
-            $trigger = Trigger::current();
 
             if (!empty($false_positives))
                 $trigger->call("comments_false_positives", $false_positives);

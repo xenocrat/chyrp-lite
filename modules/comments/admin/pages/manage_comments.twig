@@ -71,19 +71,22 @@
 </table>
 {% if visitor.group.can("edit_comment", "delete_comment") %}
 <div class="controls">
-<h3>{{ "With selected:" | translate("comments") }}</h3>
-<button name="deny">
-{{ icon_img("deny.svg") }}{{ "Deny" | translate("comments") }}
-</button>
-<button class="yay" name="approve">
-{{ icon_img("success.svg") }}{{ "Approve" | translate("comments") }}
-</button>
-<button name="spam">
-{{ icon_img("block.svg") }}{{ "Mark as Spam" | translate("comments") }}
-</button>
-<button class="boo" name="delete">
-{{ icon_img("destroy.svg") }}{{ "Delete" | translate("comments") }}
-</button>
+<label for="bulk_task">{{ "With selected:" | translate("comments") }}</label>
+<select name="task" id="bulk_task">
+<option value="deny" selected>
+{{ "Deny" | translate("comments") }}
+</option>
+<option value="approve">
+{{ "Approve" | translate("comments") }}
+</option>
+<option value="spam">
+{{ "Mark as Spam" | translate("comments") }}
+</option>
+<option value="delete">
+{{ "Delete" | translate("comments") }}
+</option>
+</select>
+<button type="submit">{{ "Execute" | translate }}</button>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
 </div>
 {% endif %}
