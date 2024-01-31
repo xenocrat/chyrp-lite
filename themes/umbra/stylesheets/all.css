@@ -340,11 +340,15 @@ html[dir="rtl"] select {
 html select:focus {
     background-image: url(../images/select_focus.svg);
 }
-input[type="checkbox"] {
+input[type="checkbox"],
+input[type="radio"] {
     appearance: none;
     width: 20px;
     height: 20px;
     padding: 0em;
+}
+input[type="radio"] {
+    border-radius: 50%;
 }
 input[type="checkbox"]:checked {
     background-image: url(../images/checkbox.svg);
@@ -353,6 +357,16 @@ input[type="checkbox"]:checked {
 }
 input[type="checkbox"]:checked:focus {
     background-image: url(../images/checkbox_focus.svg);
+}
+input[type="radio"]:checked {
+    background-image: url(../images/radio.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+input[type="radio"]:checked:focus {
+    background-image: url(../images/radio_focus.svg);
+    background-position: center;
+    background-repeat: no-repeat;
 }
 input.error,
 input:invalid {

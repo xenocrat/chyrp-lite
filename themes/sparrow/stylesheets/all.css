@@ -344,14 +344,23 @@ html[dir="rtl"] select {
     background-position: center left 0.25em;
     background-repeat: no-repeat;
 }
-input[type="checkbox"] {
+input[type="checkbox"],
+input[type="radio"] {
     appearance: none;
     width: 20px;
     height: 20px;
     padding: 0em;
 }
+input[type="radio"] {
+    border-radius: 50%;
+}
 input[type="checkbox"]:checked {
     background-image: url(../images/checkbox.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+input[type="radio"]:checked {
+    background-image: url(../images/radio.svg);
     background-position: center;
     background-repeat: no-repeat;
 }
