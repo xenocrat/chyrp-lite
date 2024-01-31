@@ -67,7 +67,9 @@
 </option>
 {% endfor %}
 </select>
-<button type="submit">{{ "Execute" | translate }}</button>
+<button type="submit">
+{{ icon_img("list.svg") }}{{ "Sort" | translate }}
+</button>
 </form>
 </div>
 {% endblock %}
