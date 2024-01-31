@@ -1313,7 +1313,10 @@
             "moose", "news", "rice", "series", "sheep", "species"
         );
 
-        if (in_array($string, $uncountable) or $number == 1)
+        if ($number == 1)
+            return $string;
+
+        if (in_array($string, $uncountable))
             return $string;
 
         $replacements = array(
@@ -1360,15 +1363,19 @@
      *
      * Parameters:
      *     $string - The lowercase string to depluralize.
-     *     $number - If supplied, and this number is not 1, it will not depluralize.
+     *     $number - A number to determine depluralization.
      *
      * Returns:
-     *     The supplied word with trailing "s" removed, or a non-normative singularization.
+     *     The supplied word with trailing "s" removed,
+     *     or the correct non-normative singularization.
      */
     function depluralize($string, $number = null): string {
         $uncountable = array("news", "series", "species");
 
-        if (in_array($string, $uncountable) or (isset($number) and $number != 1))
+        if (isset($number) and $number != 1)
+            return $string;
+
+        if (in_array($string, $uncountable))
             return $string;
 
         $replacements = array(
@@ -1411,7 +1418,7 @@
 
     /**
      * Function: normalize
-     * Attempts to normalize all newlines and whitespace into single spaces.
+     * Attempts to normalize newlines and whitespace into single spaces.
      *
      * Returns:
      *     The normalized string.
@@ -1426,7 +1433,7 @@
      *
      * Parameters:
      *     $string - The string to camelize.
-     *     $keep_spaces - Whether or not to convert underscores to spaces or remove them.
+     *     $keep_spaces - Convert underscores to spaces?
      *
      * Returns:
      *     A CamelCased string.
@@ -1655,12 +1662,17 @@
      *     $string - The string to sanitize - must be ASCII or UTF-8!
      *     $lowercase - Force the string to lowercase?
      *     $strict - Remove all characters except "-" and alphanumerics?
-     *     $truncate - Number of characters to truncate to (default 100, 0 to disable).
+     *     $truncate - Number of characters to truncate to (0 to disable).
      *
      * Returns:
      *     A sanitized version of the string.
      */
-    function sanitize($string, $lowercase = true, $strict = false, $truncate = 100): string {
+    function sanitize(
+        $string,
+        $lowercase = true,
+        $strict = false,
+        $truncate = 100
+    ): string {
         $strip = array(
             "&amp;", "&#8216;", "&#8217;", "&#8220;", "&#8221;", "&#8211;", "&#8212;", "&",
             "~", "`", "!", "@", "#", "$", "%", "^", "*", "(", ")", "_", "=", "+", "[", "{",
@@ -1735,22 +1747,29 @@
             chr(197).chr(184) => "Y",  chr(197).chr(185) => "Z",  chr(197).chr(186) => "z",
             chr(197).chr(187) => "Z",  chr(197).chr(188) => "z",  chr(197).chr(189) => "Z",
             chr(197).chr(190) => "z",  chr(197).chr(191) => "s"
-            # Generate additional substitution keys: e.g. echo implode(",", unpack("C*", "€"));
+            # Generate additional substitution keys:
+            # E.g. echo implode(",", unpack("C*", "€"));
         );
 
-        # Strip tags, remove punctuation and HTML entities, replace spaces with hyphen-minus.
-        $clean = preg_replace(
-            "/\s+/",
-            "-",
-            trim(str_replace($strip, "", strip_tags($string)))
+        # Strip tags, remove punctuation and HTML entities.
+        $clean = str_replace(
+            $strip,
+            "",
+            strip_tags($string)
         );
+
+        # Trim.
+        $clean = trim($clean);
+
+        # Replace spaces with hyphen-minus.
+        $clean = preg_replace("/\s+/", "-", $clean);
 
         if ($strict) {
-            # Discover UTF-8 multi-byte encodings and attempt substitutions.
+            # Substitute UTF-8 multi-byte encodings.
             if (preg_match("/[\x80-\xff]/", $clean))
                 $clean = strtr($clean, $utf8mb);
 
-            # Remove any characters that remain after substitution.
+            # Remove non-ASCII characters that remain.
             $clean = preg_replace("/[^a-zA-Z0-9\\-]/", "", $clean);
         }
 
@@ -1771,79 +1790,95 @@
      *     $string - String containing HTML to sanitize.
      *
      * Returns:
-     *     A version of the string containing only valid tags and whitelisted attributes.
+     *     A version of the string containing only valid tags
+     *     and whitelisted attributes essential to tag function.
      */
     function sanitize_html($text): string {
         # Strip invalid tags.
-        $text = preg_replace("/<([^a-z\/!]|\/(?![a-z])|!(?!--))[^>]*>/i", " ", $text);
+        $text = preg_replace(
+            "/<([^a-z\/!]|\/(?![a-z])|!(?!--))[^>]*>/i",
+            " ",
+            $text
+        );
 
         # Strip style tags.
-        $text = preg_replace("/<\/?style[^>]*>/i", " ", $text);
+        $text = preg_replace(
+            "/<\/?style[^>]*>/i",
+            " ",
+            $text
+        );
 
         # Strip script tags.
-        $text = preg_replace("/<\/?script[^>]*>/i", " ", $text);
+        $text = preg_replace(
+            "/<\/?script[^>]*>/i",
+            " ",
+            $text
+        );
 
-        # Strip attributes from each tag, but allow attributes essential to a tag's function.
-        return preg_replace_callback("/<([a-z][a-z0-9]*)[^>]*?( ?\/)?>/i", function ($element) {
-            fallback($element[2], "");
+        # Strip attributes from each tag, unless essential to its function.
+        return preg_replace_callback(
+            "/<([a-z][a-z0-9]*)[^>]*?( ?\/)?>/i",
+            function ($element) {
+                fallback($element[2], "");
 
-            $name = strtolower($element[1]);
-            $whitelist = "";
+                $name = strtolower($element[1]);
+                $whitelist = "";
 
-            preg_match_all(
-                "/ ([a-z]+)=(\"[^\"]+\"|\'[^\']+\')/i",
-                $element[0],
-                $attributes,
-                PREG_SET_ORDER
-            );
+                preg_match_all(
+                    "/ ([a-z]+)=(\"[^\"]+\"|\'[^\']+\')/i",
+                    $element[0],
+                    $attributes,
+                    PREG_SET_ORDER
+                );
 
-            foreach ($attributes as $attribute) {
-                $label = strtolower($attribute[1]);
-                $content = trim($attribute[2], "\"'");
+                foreach ($attributes as $attribute) {
+                    $label = strtolower($attribute[1]);
+                    $content = trim($attribute[2], "\"'");
 
-                switch ($label) {
-                    case "src":
-                        $array = array(
-                            "audio",
-                            "iframe",
-                            "img",
-                            "source",
-                            "track",
-                            "video"
-                        );
+                    switch ($label) {
+                        case "src":
+                            $array = array(
+                                "audio",
+                                "iframe",
+                                "img",
+                                "source",
+                                "track",
+                                "video"
+                            );
 
-                        if (in_array($name, $array) and is_url($content))
-                            $whitelist.= $attribute[0];
+                            if (in_array($name, $array) and is_url($content))
+                                $whitelist.= $attribute[0];
 
-                        break;
+                            break;
 
-                    case "href":
-                        $array = array(
-                            "a",
-                            "area"
-                        );
+                        case "href":
+                            $array = array(
+                                "a",
+                                "area"
+                            );
 
-                        if (in_array($name, $array) and is_url($content))
-                            $whitelist.= $attribute[0];
+                            if (in_array($name, $array) and is_url($content))
+                                $whitelist.= $attribute[0];
 
-                        break;
+                            break;
 
-                    case "alt":
-                        $array = array(
-                            "area",
-                            "img"
-                        );
+                        case "alt":
+                            $array = array(
+                                "area",
+                                "img"
+                            );
 
-                        if (in_array($name, $array))
-                            $whitelist.= $attribute[0];
+                            if (in_array($name, $array))
+                                $whitelist.= $attribute[0];
 
-                        break;
+                            break;
+                    }
                 }
-            }
 
-            return "<".$element[1].$whitelist.$element[2].">";
-
-        }, $text);
+                return "<".$element[1].$whitelist.$element[2].">";
+            },
+            $text
+        );
     }
 
     #---------------------------------------------
