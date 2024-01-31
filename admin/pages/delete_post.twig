@@ -4,11 +4,11 @@
 
 {% block content %}
 <h2>{{ "Delete Post?" | translate }}</h2>
+<form class="delete" action="{{ url('destroy_post') }}" method="post" accept-charset="UTF-8">
+<fieldset role="presentation">
 <p>
 {{ "&#8220;%s&#8221; will be permanently deleted." | translate | format(post.title() | striptags | oneof("[Untitled]" | translate)) }}
 </p>
-<form class="delete" action="{{ url('destroy_post') }}" method="post" accept-charset="UTF-8">
-<fieldset role="presentation">
 <div class="confirmation">
 <button name="destroy" value="indubitably" class="boo">
 {{ icon_img("destroy.svg") }}{{ "Delete!" | translate }}

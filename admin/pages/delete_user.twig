@@ -4,11 +4,11 @@
 
 {% block content %}
 <h2>{{ "Delete User?" | translate }}</h2>
+<form class="delete split" action="{{ url('destroy_user') }}" method="post" accept-charset="UTF-8">
+<fieldset role="presentation">
 <p>
 {{ "&#8220;%s&#8221; will be permanently deleted." | translate | format(user.login) }}
 </p>
-<form class="delete split" action="{{ url('destroy_user') }}" method="post" accept-charset="UTF-8">
-<fieldset role="presentation">
 {% if user.posts is not empty %}
 <p>
 <label for="move_posts">{{ "Attribute posts to:" | translate }}</label>

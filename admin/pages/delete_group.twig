@@ -4,11 +4,11 @@
 
 {% block content %}
 <h2>{{ "Delete Group?" | translate }}</h2>
+<form class="delete split" action="{{ url('destroy_group') }}" method="post" accept-charset="UTF-8">
+<fieldset role="presentation">
 <p>
 {{ "&#8220;%s&#8221; will be permanently deleted." | translate | format(group.name) }}
 </p>
-<form class="delete split" action="{{ url('destroy_group') }}" method="post" accept-charset="UTF-8">
-<fieldset role="presentation">
 {% if group.users is not empty and groups is not empty %}
 <p>
 <label for="move_group">{{ "Move members to:" | translate }}</label>
