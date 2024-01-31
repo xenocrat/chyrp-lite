@@ -441,7 +441,8 @@ textarea {
 select, input {
     display: inline-block;
 }
-input[type="checkbox"] {
+input[type="checkbox"],
+input[type="radio"] {
     appearance: none;
     box-sizing: border-box;
     color: #1f1f23;
@@ -454,6 +455,9 @@ input[type="checkbox"] {
     border-radius: 0em;
     border: 1px solid #cfcfcf;
     background-color: #ffffff;
+}
+input[type="radio"] {
+    border-radius: 50%;
 }
 select,
 textarea,
@@ -505,6 +509,11 @@ input[type="checkbox"]:checked {
     background-position: center;
     background-repeat: no-repeat;
 }
+input[type="radio"]:checked {
+    background-image: url(../images/icons/radio.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+}
 input::placeholder {
     color: #656565;
     opacity: 1;
@@ -532,6 +541,7 @@ input[type="file"]:focus {
 }
 textarea.error,
 input[type="checkbox"].error,
+input[type="radio"].error,
 input[type="text"].error,
 input[type="email"].error,
 input[type="url"].error,
@@ -546,6 +556,7 @@ input[type="file"].error {
 }
 textarea.error:focus,
 input[type="checkbox"].error:focus,
+input[type="radio"].error:focus,
 input[type="text"].error:focus,
 input[type="email"].error:focus,
 input[type="url"].error:focus,
@@ -1294,6 +1305,7 @@ input.toolbar.hidden {
     select,
     textarea,
     input[type="checkbox"],
+    input[type="radio"],
     input[type="text"],
     input[type="email"],
     input[type="url"],
