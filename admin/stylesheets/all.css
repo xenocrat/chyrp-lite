@@ -214,7 +214,7 @@ a:active {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    gap: 4px;
+    column-gap: 4px;
     bottom: 0em;
     left: 4rem;
     right: 4rem;
@@ -258,7 +258,7 @@ a:active {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
-    gap: 4px;
+    column-gap: 4px;
     margin: 4rem 4rem 0rem 4rem;
     overflow: hidden;
     border-bottom: 1px solid #afafaf;
@@ -349,6 +349,11 @@ pre > code {
 div.pagination {
     text-align: center;
     margin-top: 1rem;
+    display: flex;
+    flex-flow: row wrap;
+    column-gap: 2rem;
+    row-gap: 1rem;
+    justify-content: space-between;
 }
 a.prev_page,
 a.next_page {
@@ -356,7 +361,7 @@ a.next_page {
 }
 span.pages {
     display: block;
-    margin-bottom: 1rem;
+    flex: 100%;
 }
 #content > *:first-child {
     margin-top: 0rem;
@@ -635,9 +640,6 @@ form.split p.buttons {
 html[dir="rtl"] form.split p.buttons {
     margin: 1rem 45% 0rem 0rem;
 }
-form.split div.confirmation {
-    margin-top: 1rem;
-}
 
 /* Group: Tables */
 
@@ -784,6 +786,7 @@ a.prev_page {
     font: inherit;
     font-size: 1.25rem;
     color: #1f1f23;
+    text-align: center;
     margin: 0rem;
     padding: 0.5rem;
     background-color: #f2fbff;
@@ -860,14 +863,12 @@ button.disabled:focus {
 div.confirmation button,
 div.confirmation a.button {
     min-width: 15em;
-    margin-left: 1rem;
-    margin-right: 1rem;
+    flex: 1 0 15rem;
     padding-right: calc(16px + 0.5rem);
 }
 div.pagination a.prev_page,
 div.pagination a.next_page {
-    margin-left: 1rem;
-    margin-right: 1rem;
+    flex: 1 0 15rem;
 }
 
 /* Group: Options */
@@ -894,6 +895,7 @@ div.pagination a.next_page {
 .more_options {
     display: flex;
     flex-flow: row wrap;
+    row-gap: 1rem;
     justify-content: space-between;
 }
 .more_options_option {
@@ -901,7 +903,6 @@ div.pagination a.next_page {
     display: block;
     width: calc(50% - 1rem);
     margin: 0rem;
-    padding-bottom: 1rem;
     flex: none;
 }
 div.more_options p input,
@@ -999,8 +1000,16 @@ table.interactive.empty + div.controls {
     display: none;
 }
 div.confirmation {
-    text-align: center;
     margin-top: 1rem;
+    display: flex;
+    flex-flow: row nowrap;
+    column-gap: 2rem;
+    row-gap: 1rem;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: #fbfbfb;
+    border: 1px solid #cfcfcf;
+    border-radius: 0.25rem;
 }
 a.emblem {
     text-decoration: none;
@@ -1187,27 +1196,14 @@ input.toolbar.hidden {
     textarea {
         width: 100% !important;
     }
+    p:has(input.text + a.help.emblem) input.text {
+        padding-right: 2rem;
+    }
     input.text + a.help.emblem {
         float:  right;
-        padding: 4px;
         position: relative;
-        top: -2.5rem;
+        top: -2.25rem;
         left: -0.5rem;
-        background-color: #ffffff;
-    }
-    input.text.error + a.help.emblem,
-    input.text.error + a.help.emblem,
-    input.text.error + a.help.emblem,
-    input.text.error + a.help.emblem,
-    input.text.error + a.help.emblem,
-    input.text.error + a.help.emblem,
-    input.text.error + a.help.emblem,
-    input.text.error + a.help.emblem,
-    input.text.error + a.help.emblem {
-        background-color: #faebe4;
-    }
-    input.text.strong + a.help.emblem {
-        background-color: #ebfae4;
     }
     #content table tbody tr td {
         padding: 1rem 0.5rem;
@@ -1223,11 +1219,18 @@ input.toolbar.hidden {
         margin: 1rem 0rem 0rem 0rem !important;
         text-align: center !important;
     }
-    span.pages {
-        margin-top: 1rem;
-    }
     div.more_options p.more_options_option {
         flex: 100%;
+    }
+    div.confirmation {
+        display: block;
+        padding: 0rem;
+        background-color: transparent;
+        border-width: 0rem;
+        border-radius: 0rem;
+    }
+    div.pagination {
+        display: block;
     }
     li.module div.controls,
     li.feather div.controls {
@@ -1319,7 +1322,7 @@ input.toolbar.hidden {
         border-color: #afafaf;
     }
     input[type="file"] {
-        background-color: #efefef;
+        background-color: transparent;
         border-color: #afafaf;
     }
     input:invalid {
@@ -1332,11 +1335,11 @@ input.toolbar.hidden {
         background-color: #dfdfdf;
     }
     span.options_toolbar {
-        background-color: #efefef;
+        background-color: transparent;
         border-color: #afafaf;
     }
     span.options_tray {
-        background-color: #efefef;
+        background-color: transparent;
         border-color: #afafaf;
     }
     span.options_extra {
@@ -1349,6 +1352,10 @@ input.toolbar.hidden {
         border-color: #1e57ba;
     }
     table.interactive + div.controls {
+        border-color: #afafaf;
+    }
+    div.confirmation {
+        background-color: transparent;
         border-color: #afafaf;
     }
     .iframe_background {
@@ -1368,11 +1375,6 @@ input.toolbar.hidden {
             transparent 75%,
             transparent
         ) !important;
-    }
-    @media screen and (max-width: 960px) {
-        input.text + a.help.emblem {
-            background-color: #dfdfdf;
-        }
     }
 }
 
