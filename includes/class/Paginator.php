@@ -187,7 +187,7 @@
          */
         public function prev_page(): bool {
             return (
-                $this->page != 1 and
+                $this->page > 1 and
                 $this->page <= $this->pages
             );
         }
