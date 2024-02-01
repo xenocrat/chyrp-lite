@@ -895,15 +895,15 @@ div.pagination a.next_page {
 .more_options {
     display: flex;
     flex-flow: row wrap;
+    column-gap: 2rem;
     row-gap: 1rem;
     justify-content: space-between;
 }
 .more_options_option {
     box-sizing: border-box;
     display: block;
-    width: calc(50% - 1rem);
     margin: 0rem;
-    flex: none;
+    flex: 1 0 35%;
 }
 div.more_options p input,
 div.more_options p select,
@@ -1004,7 +1004,6 @@ div.confirmation {
     display: flex;
     flex-flow: row nowrap;
     column-gap: 2rem;
-    row-gap: 1rem;
     justify-content: space-between;
     padding: 1rem;
     background-color: #fbfbfb;
