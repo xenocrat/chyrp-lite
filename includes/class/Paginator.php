@@ -211,7 +211,7 @@
             if (!empty($anchor))
                 $anchor = '#'.$anchor;
 
-            fallback($text, __("Next &rarr;"));
+            fallback($text, __("Next"));
 
             return '<a rel="next" class="'.fix($class, true).
                    '" id="pagination_next_'.$this->name.
@@ -241,7 +241,7 @@
             if (!empty($anchor))
                 $anchor = '#'.$anchor;
 
-            fallback($text, __("&larr; Previous"));
+            fallback($text, __("Previous"));
 
             return '<a rel="prev" class="'.fix($class, true).
                    '" id="pagination_prev_'.$this->name.
@@ -269,7 +269,7 @@
             if (!empty($anchor))
                 $anchor = '#'.$anchor;
 
-            fallback($text, __("Final &rarr;"));
+            fallback($text, __("Final"));
 
             return '<a rel="next" class="'.fix($class, true).
                    '" id="pagination_final_'.$this->name.
@@ -297,7 +297,7 @@
             if (!empty($anchor))
                 $anchor = '#'.$anchor;
 
-            fallback($text, __("&larr; First"));
+            fallback($text, __("First"));
 
             return '<a rel="prev" class="'.fix($class, true).
                    '" id="pagination_first_'.$this->name.
