@@ -44,6 +44,9 @@
             if (empty($a) or empty($b))
                 return 0;
 
+            if ($a["priority"] == $b["priority"])
+                return 0;
+
             return ($a["priority"] < $b["priority"]) ? -1 : 1 ;
         }
 
@@ -65,7 +68,10 @@
                     $args = func_get_args();
                     $args[0] = $call;
 
-                    $success = call_user_func_array(array($this, "call"), $args);
+                    $success = call_user_func_array(
+                        array($this, "call"),
+                        $args
+                    );
 
                     if ($success !== false)
                         $return = $success;
@@ -107,7 +113,10 @@
                     if (!empty($module->cancelled))
                         continue;
 
-                    $return = call_user_func_array(array($module, $name), $arguments);
+                    $return = call_user_func_array(
+                        array($module, $name),
+                        $arguments
+                    );
                 }
 
             return $return;
@@ -134,7 +143,10 @@
                     $args[0] =& $target;
                     $args[1] = $filter;
 
-                    $target = call_user_func_array(array($this, "filter"), $args);
+                    $target = call_user_func_array(
+                        array($this, "filter"),
+                        $args
+                    );
                 }
 
                 return $target;
@@ -172,7 +184,8 @@
                 }
 
             foreach (Modules::$instances as $module)
-                if (!in_array(array($module, $name), $this->called[$name]) and
+                if (
+                    !in_array(array($module, $name), $this->called[$name]) and
                     is_callable(array($module, $name))
                 ) {
                     if (!empty($module->cancelled))
