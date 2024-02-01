@@ -495,8 +495,7 @@ msgstr "Verfassen Sie Blog-Inhalte mithilfe der Markdown-Textformatierung."
 
 #: admin/pages/content_settings.twig:89 admin/pages/edit_group.twig:27
 #: admin/pages/edit_user.twig:66 admin/pages/general_settings.twig:97
-#: admin/pages/manage_uploads.twig:89 admin/pages/route_settings.twig:91
-#: admin/pages/user_settings.twig:57
+#: admin/pages/route_settings.twig:91 admin/pages/user_settings.twig:57
 msgid "Update"
 msgstr "Aktualisieren"
 
@@ -504,8 +503,8 @@ msgstr "Aktualisieren"
 msgid "Delete Group?"
 msgstr "Gruppe löschen?"
 
-#: admin/pages/delete_group.twig:8 admin/pages/delete_post.twig:8
-#: admin/pages/delete_upload.twig:8 admin/pages/delete_user.twig:8
+#: admin/pages/delete_group.twig:10 admin/pages/delete_post.twig:10
+#: admin/pages/delete_upload.twig:10 admin/pages/delete_user.twig:10
 #, php-format
 msgid "&#8220;%s&#8221; will be permanently deleted."
 msgstr "&#8220;%s&#8221; würde permanent gelöscht."
@@ -539,13 +538,13 @@ msgstr "Annulieren"
 msgid "Delete Page?"
 msgstr "Seite löschen?"
 
-#: admin/pages/delete_page.twig:8 admin/pages/delete_post.twig:8
+#: admin/pages/delete_page.twig:10 admin/pages/delete_post.twig:10
 #: admin/pages/edit_page.twig:6 admin/pages/edit_post.twig:6
 #: admin/pages/manage_pages.twig:36 admin/pages/manage_posts.twig:34
 msgid "[Untitled]"
 msgstr "ohne Titel"
 
-#: admin/pages/delete_page.twig:8
+#: admin/pages/delete_page.twig:10
 #, php-format
 msgid "Are you sure you want to delete &#8220;%s&#8221;?"
 msgstr "Siund Sie sicher das Sie &#8220;%s&#8221; löschen wollen?"
@@ -986,6 +985,10 @@ msgstr "herunterladen"
 #: admin/pages/manage_uploads.twig:81
 msgid "Sort results by:"
 msgstr "Sortieren Sie die Ergebnisse nach:"
+
+#: admin/pages/manage_uploads.twig:89
+msgid "Sort Results"
+msgstr "Sortiere Ergebnisse"
 
 #: admin/pages/manage_users.twig:3
 msgid "Manage Users"

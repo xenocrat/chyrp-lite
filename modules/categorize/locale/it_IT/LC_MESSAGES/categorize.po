@@ -45,7 +45,7 @@ msgstr ""
 msgid "Delete Category?"
 msgstr "Cancella categoria?"
 
-#: modules/categorize/admin/pages/delete_category.twig:8
+#: modules/categorize/admin/pages/delete_category.twig:10
 #, php-format
 msgid "&#8220;%s&#8221; will be permanently deleted."
 msgstr "&#8220;%s&#8221; verrà eliminato definitivamente."

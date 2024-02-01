@@ -17,7 +17,7 @@ msgstr ""
 msgid "Delete Webmention?"
 msgstr "Verwijder Webmention?"
 
-#: modules/pingable/admin/pages/delete_pingback.twig:8
+#: modules/pingable/admin/pages/delete_pingback.twig:10
 #, php-format
 msgid "&#8220;%s&#8221; will be permanently deleted."
 msgstr "&#8220;%s&#8221; zal permanent worden verwijderd."

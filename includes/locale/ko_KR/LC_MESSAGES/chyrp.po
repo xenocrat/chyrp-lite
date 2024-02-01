@@ -30,20 +30,20 @@ msgid "Delete"
 msgstr "삭제"
 
 #: includes/class/Paginator.php:214
-msgid "Next &rarr;"
-msgstr "다음 &rarr;"
+msgid "Next"
+msgstr "다음"
 
 #: includes/class/Paginator.php:244
-msgid "&larr; Previous"
-msgstr "&larr; 이전"
+msgid "Previous"
+msgstr "이전"
 
 #: includes/class/Paginator.php:272
-msgid "Final &rarr;"
-msgstr "마지막 &rarr;"
+msgid "Final"
+msgstr "마지막"
 
 #: includes/class/Paginator.php:300
-msgid "&larr; First"
-msgstr "&larr; 처음"
+msgid "First"
+msgstr "처음"
 
 #: includes/class/Query.php:111
 msgid "PDO failed to execute the prepared statement."
@@ -84,17 +84,17 @@ msgstr "경로가 잘못된 컨트롤러로 시작되었습니다."
 #: includes/controller/Admin.php:3005 includes/controller/Admin.php:3012
 #: includes/controller/Admin.php:3309 includes/controller/Ajax.php:36
 #: includes/controller/Ajax.php:253 includes/download.php:14
-#: includes/error.php:169 includes/helpers.php:2037 includes/helpers.php:2044
-#: includes/helpers.php:2051 includes/helpers.php:2064
-#: includes/helpers.php:2073 includes/helpers.php:2083
-#: includes/helpers.php:2090 includes/helpers.php:2531
-#: includes/helpers.php:2543 includes/helpers.php:2549
-#: includes/helpers.php:2555 includes/helpers.php:2592
-#: includes/helpers.php:2598 includes/helpers.php:2604
-#: includes/helpers.php:2752 includes/helpers.php:2758
-#: includes/helpers.php:2764 includes/helpers.php:2770
-#: includes/helpers.php:2775 includes/helpers.php:2780
-#: includes/helpers.php:2785 includes/helpers.php:2792
+#: includes/error.php:169 includes/helpers.php:2084 includes/helpers.php:2091
+#: includes/helpers.php:2098 includes/helpers.php:2111
+#: includes/helpers.php:2120 includes/helpers.php:2130
+#: includes/helpers.php:2137 includes/helpers.php:2578
+#: includes/helpers.php:2590 includes/helpers.php:2596
+#: includes/helpers.php:2602 includes/helpers.php:2639
+#: includes/helpers.php:2645 includes/helpers.php:2651
+#: includes/helpers.php:2799 includes/helpers.php:2805
+#: includes/helpers.php:2811 includes/helpers.php:2817
+#: includes/helpers.php:2822 includes/helpers.php:2827
+#: includes/helpers.php:2832 includes/helpers.php:2839
 #: includes/lib/ThumbnailFile.php:290 includes/lib/ThumbnailFile.php:321
 #: includes/lib/ThumbnailFile.php:381 includes/thumbnail.php:15
 #: install.php:1006 upgrade.php:211 upgrade.php:227 upgrade.php:243
@@ -151,7 +151,7 @@ msgstr "올바르지 않은 액션입니다."
 #: includes/controller/Ajax.php:247 includes/controller/Ajax.php:271
 #: includes/controller/Ajax.php:277 includes/controller/Main.php:536
 #: includes/controller/Main.php:615 includes/download.php:21
-#: includes/helpers.php:2537 includes/thumbnail.php:22
+#: includes/helpers.php:2584 includes/thumbnail.php:22
 msgid "Access Denied"
 msgstr "접근 불가"
 
@@ -697,8 +697,8 @@ msgstr "올바르지 않은 표준 URL입니다."
 msgid "Settings updated."
 msgstr "설정이 업데이트되었습니다."
 
-#: includes/controller/Admin.php:3227 includes/helpers.php:2556
-#: includes/helpers.php:2605 includes/helpers.php:2776 upgrade.php:162
+#: includes/controller/Admin.php:3227 includes/helpers.php:2603
+#: includes/helpers.php:2652 includes/helpers.php:2823 upgrade.php:162
 #: upgrade.php:179 upgrade.php:196
 msgid "Failed to write file to disk."
 msgstr "파일을 디스크에 쓰지 못했습니다."
@@ -1012,167 +1012,167 @@ msgstr "자원에 접근할 수 있는 권한이 없습니다."
 msgid "The requested resource was not found."
 msgstr "요청한 자원을 찾을 수 없습니다."
 
-#: includes/helpers.php:1882 includes/helpers.php:1996
-#: includes/helpers.php:2132
+#: includes/helpers.php:1929 includes/helpers.php:2043
+#: includes/helpers.php:2179
 #, php-format
 msgid "Socket error: %s"
 msgstr "소켓 오류: %s"
 
-#: includes/helpers.php:2038
+#: includes/helpers.php:2085
 msgid "Webmention support is disabled for this site."
 msgstr "사이트에 대한 Webmention 지원이 비활성화되었습니다."
 
-#: includes/helpers.php:2045
+#: includes/helpers.php:2092
 msgid "The URL for your page is not valid."
 msgstr "페이지 URL이 올바르지 않습니다."
 
-#: includes/helpers.php:2052
+#: includes/helpers.php:2099
 msgid "The URL for our page is not valid."
 msgstr "페이지 URL이 올바르지 않습니다."
 
-#: includes/helpers.php:2065
+#: includes/helpers.php:2112
 msgid "The source and target URLs cannot be the same."
 msgstr "출발지와 목적지 URL은 같을 수 없습니다."
 
-#: includes/helpers.php:2074
+#: includes/helpers.php:2121
 msgid "We have not published at that URL."
 msgstr "지정된 URL에 게시하지 않았습니다."
 
-#: includes/helpers.php:2084
+#: includes/helpers.php:2131
 msgid "You have not published at that URL."
 msgstr "지정된 URL에 게시하지 않았습니다."
 
-#: includes/helpers.php:2091
+#: includes/helpers.php:2138
 msgid "Your page does not link to our page."
 msgstr "페이지가 올바르게 링크되지 않았습니다."
 
-#: includes/helpers.php:2340
+#: includes/helpers.php:2387
 msgid "Please create the uploads directory."
 msgstr "업로드 디렉토리를 생성하십시오."
 
-#: includes/helpers.php:2342
+#: includes/helpers.php:2389
 msgid "Please make the uploads directory writable."
 msgstr "업로드 디렉토리에 쓰기 가능한 권한이 필요합니다."
 
-#: includes/helpers.php:2363
+#: includes/helpers.php:2410
 #, php-format
 msgid "%s module is missing."
 msgstr "%s 모듈이 없습니다."
 
-#: includes/helpers.php:2376
+#: includes/helpers.php:2423
 #, php-format
 msgid "%s module is damaged."
 msgstr "%s 모듈이 손상되었습니다."
 
-#: includes/helpers.php:2394
+#: includes/helpers.php:2441
 #, php-format
 msgid "%s feather is missing."
 msgstr "%s 깃털이 없습니다."
 
-#: includes/helpers.php:2407
+#: includes/helpers.php:2454
 #, php-format
 msgid "%s feather is damaged."
 msgstr "%s 깃털이 손상되었습니다."
 
-#: includes/helpers.php:2477 includes/helpers.php:2500
+#: includes/helpers.php:2524 includes/helpers.php:2547
 #, php-format
 msgid "Execution of %s has been cancelled."
 msgstr "%s 실행이 취소되었습니다."
 
-#: includes/helpers.php:2532
+#: includes/helpers.php:2579
 msgid "Uploaded file is of an unsupported type."
 msgstr "올바르지 않은 파일 유형입니다."
 
-#: includes/helpers.php:2538
+#: includes/helpers.php:2585
 msgid "Only uploaded files are accepted."
 msgstr "업로드한 파일만 허용됩니다."
 
-#: includes/helpers.php:2544 includes/helpers.php:2593
+#: includes/helpers.php:2591 includes/helpers.php:2640
 msgid "Upload path does not exist."
 msgstr "업로드 경로가 존재하지 않습니다."
 
-#: includes/helpers.php:2550 includes/helpers.php:2599
+#: includes/helpers.php:2597 includes/helpers.php:2646
 msgid "Upload path is not writable."
 msgstr "업로드 경로에 쓰기 가능한 권한이 없습니다."
 
-#: includes/helpers.php:2753
+#: includes/helpers.php:2800
 msgid ""
 "The uploaded file exceeds the <code>upload_max_filesize</code> directive in "
 "php.ini."
 msgstr ""
 
-#: includes/helpers.php:2759
+#: includes/helpers.php:2806
 msgid ""
 "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the "
 "HTML form."
 msgstr ""
 
-#: includes/helpers.php:2765
+#: includes/helpers.php:2812
 msgid "The uploaded file was only partially uploaded."
 msgstr "파일이 일부만 업로드되었습니다."
 
-#: includes/helpers.php:2771
+#: includes/helpers.php:2818
 msgid "Missing a temporary folder."
 msgstr "임시 폴더가 없습니다."
 
-#: includes/helpers.php:2781
+#: includes/helpers.php:2828
 msgid "File upload was stopped by a PHP extension."
 msgstr "파일 업로드가 PHP 확장자에 의해 중지되었습니다."
 
-#: includes/helpers.php:2786
+#: includes/helpers.php:2833
 #, php-format
 msgid "File upload failed with error %d."
 msgstr "%d 오류로 파일 업로드에 실패했습니다."
 
-#: includes/helpers.php:2793
+#: includes/helpers.php:2840
 #, php-format
 msgid ""
 "The uploaded file exceeds the maximum size of %d Megabytes allowed by this "
 "site."
 msgstr ""
 
-#: includes/helpers.php:3128
+#: includes/helpers.php:3175
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr "JSON 인코딩 오류: %s"
 
-#: includes/helpers.php:3153
+#: includes/helpers.php:3200
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr "JSON 디코딩 오류: %s"
 
-#: includes/helpers.php:3236
+#: includes/helpers.php:3283
 msgid "Failed to create Zip archive."
 msgstr "압축 파일을 만들지 못했습니다."
 
-#: includes/helpers.php:3338
+#: includes/helpers.php:3385
 #, php-format
 msgid "Activate your account at %s"
 msgstr "%s에서 계정을 활성화하세요"
 
-#: includes/helpers.php:3339 includes/helpers.php:3374
+#: includes/helpers.php:3386 includes/helpers.php:3421
 #, php-format
 msgid "Hello, %s."
 msgstr "%s님 안녕하세요."
 
-#: includes/helpers.php:3342
+#: includes/helpers.php:3389
 msgid "You are receiving this message because you registered a new account."
 msgstr "새 계정을 등록하셨기 때문에 이 메시지를 받으셨습니다."
 
-#: includes/helpers.php:3345
+#: includes/helpers.php:3392
 msgid "Visit this link to activate your account:"
 msgstr "계정을 활성화하려면 다음 링크를 방문하세요:"
 
-#: includes/helpers.php:3373
+#: includes/helpers.php:3420
 #, php-format
 msgid "Reset your password at %s"
 msgstr "%s에 비밀번호 재설정"
 
-#: includes/helpers.php:3377
+#: includes/helpers.php:3424
 msgid "You are receiving this message because you requested a new password."
 msgstr "새 비밀번호를 요청하셨기 때문에 이 메시지를 받으셨습니다."
 
-#: includes/helpers.php:3380
+#: includes/helpers.php:3427
 msgid "Visit this link to reset your password:"
 msgstr "비밀번호를 변경하려면 다음 링크를 방문하세요:"
 

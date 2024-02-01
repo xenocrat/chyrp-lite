@@ -14,7 +14,7 @@ msgstr ""
 msgid "Delete Tag?"
 msgstr ""
 
-#: modules/tags/admin/pages/delete_tag.twig:8
+#: modules/tags/admin/pages/delete_tag.twig:10
 #, php-format
 msgid "&#8220;%s&#8221; will be permanently deleted."
 msgstr ""
@@ -43,6 +43,7 @@ msgid "Manage Tags"
 msgstr ""
 
 #: modules/tags/admin/pages/manage_tags.twig:13
+#: modules/tags/admin/pages/posts_tagged.twig:70
 msgid "Add Tags"
 msgstr ""
 
@@ -70,10 +71,6 @@ msgstr ""
 
 #: modules/tags/admin/pages/posts_tagged.twig:67
 msgid "Tag Selected Post(s) with:"
-msgstr ""
-
-#: modules/tags/admin/pages/posts_tagged.twig:69
-msgid "Tag"
 msgstr ""
 
 #: modules/tags/admin/pages/rename_tag.twig:3

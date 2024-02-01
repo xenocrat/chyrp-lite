@@ -341,7 +341,7 @@ Called from:
 webmention
 ----------
 Called from:
-	includes/helpers.php on line 2095
+	includes/helpers.php on line 2142
 
 Arguments:
 	$post
@@ -352,7 +352,7 @@ Arguments:
 delete_upload
 -------------
 Called from:
-	includes/helpers.php on line 2882
+	includes/helpers.php on line 2929
 
 Arguments:
 	$filename
@@ -361,19 +361,19 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 3068
+	includes/helpers.php on line 3115
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 3086
+	includes/helpers.php on line 3133
 
 
 correspond_activate_account
 ---------------------------
 Called from:
-	includes/helpers.php on line 3335
+	includes/helpers.php on line 3382
 
 Arguments:
 	$user
@@ -383,7 +383,7 @@ Arguments:
 correspond_reset_password
 -------------------------
 Called from:
-	includes/helpers.php on line 3370
+	includes/helpers.php on line 3417
 
 Arguments:
 	$user
@@ -393,7 +393,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 3411
+	includes/helpers.php on line 3458
 
 Arguments:
 	$ob
@@ -576,7 +576,7 @@ Arguments:
 comments_false_positives
 ------------------------
 Called from:
-	modules/comments/comments.php on line 665
+	modules/comments/comments.php on line 669
 
 Arguments:
 	$false_positives
@@ -585,7 +585,7 @@ Arguments:
 comments_false_negatives
 ------------------------
 Called from:
-	modules/comments/comments.php on line 668
+	modules/comments/comments.php on line 672
 
 Arguments:
 	$false_negatives
@@ -594,7 +594,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 1118
+	modules/comments/comments.php on line 1122
 
 Arguments:
 	$comment
@@ -604,7 +604,7 @@ Arguments:
 correspond_site_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1405
+	modules/comments/comments.php on line 1409
 
 Arguments:
 	$comment
@@ -613,7 +613,7 @@ Arguments:
 correspond_user_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1425
+	modules/comments/comments.php on line 1429
 
 Arguments:
 	$comment
@@ -623,7 +623,7 @@ Arguments:
 correspond_peer_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1450
+	modules/comments/comments.php on line 1454
 
 Arguments:
 	$comment
@@ -1102,7 +1102,7 @@ Target:
 keyword_search
 --------------
 Called from:
-	includes/helpers.php on line 1278
+	includes/helpers.php on line 1290
 
 Target:
 	$search
@@ -1115,7 +1115,7 @@ Arguments:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 3315
+	includes/helpers.php on line 3362
 
 Target:
 	$function
@@ -1124,7 +1124,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 3412
+	includes/helpers.php on line 3459
 	includes/lib/Leaf.php on line 317
 
 Target:

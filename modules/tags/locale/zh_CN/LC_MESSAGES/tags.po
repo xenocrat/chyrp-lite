@@ -36,7 +36,7 @@ msgstr ""
 msgid "Delete Tag?"
 msgstr "删除标签？"
 
-#: modules/tags/admin/pages/delete_tag.twig:8
+#: modules/tags/admin/pages/delete_tag.twig:10
 #, php-format
 msgid "&#8220;%s&#8221; will be permanently deleted."
 msgstr "&#8220;%s&#8221; 将被永久删除。"
@@ -63,6 +63,7 @@ msgid "Manage Tags"
 msgstr "管理标签"
 
 #: modules/tags/admin/pages/manage_tags.twig:13
+#: modules/tags/admin/pages/posts_tagged.twig:70
 msgid "Add Tags"
 msgstr "添加标签"
 
@@ -88,10 +89,6 @@ msgstr "&#8220;%s&#8221; 的帖子标签"
 #: modules/tags/admin/pages/posts_tagged.twig:67
 msgid "Tag Selected Post(s) with:"
 msgstr "将选中的帖子标记为："
-
-#: modules/tags/admin/pages/posts_tagged.twig:69
-msgid "Tag"
-msgstr "标记"
 
 #: modules/tags/admin/pages/rename_tag.twig:3
 msgid "Rename Tag"

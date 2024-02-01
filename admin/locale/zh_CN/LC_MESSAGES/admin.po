@@ -472,8 +472,7 @@ msgstr "使用Markdown语法撰写博客内容。"
 
 #: admin/pages/content_settings.twig:89 admin/pages/edit_group.twig:27
 #: admin/pages/edit_user.twig:66 admin/pages/general_settings.twig:97
-#: admin/pages/manage_uploads.twig:89 admin/pages/route_settings.twig:91
-#: admin/pages/user_settings.twig:57
+#: admin/pages/route_settings.twig:91 admin/pages/user_settings.twig:57
 msgid "Update"
 msgstr "更新"
 
@@ -481,8 +480,8 @@ msgstr "更新"
 msgid "Delete Group?"
 msgstr "删除这个组？"
 
-#: admin/pages/delete_group.twig:8 admin/pages/delete_post.twig:8
-#: admin/pages/delete_upload.twig:8 admin/pages/delete_user.twig:8
+#: admin/pages/delete_group.twig:10 admin/pages/delete_post.twig:10
+#: admin/pages/delete_upload.twig:10 admin/pages/delete_user.twig:10
 #, php-format
 msgid "&#8220;%s&#8221; will be permanently deleted."
 msgstr "&#8220;%s&#8221; 将被永久删除。"
@@ -516,13 +515,13 @@ msgstr "取消"
 msgid "Delete Page?"
 msgstr "删除这个页面？"
 
-#: admin/pages/delete_page.twig:8 admin/pages/delete_post.twig:8
+#: admin/pages/delete_page.twig:10 admin/pages/delete_post.twig:10
 #: admin/pages/edit_page.twig:6 admin/pages/edit_post.twig:6
 #: admin/pages/manage_pages.twig:36 admin/pages/manage_posts.twig:34
 msgid "[Untitled]"
 msgstr "[无标题]"
 
-#: admin/pages/delete_page.twig:8
+#: admin/pages/delete_page.twig:10
 #, php-format
 msgid "Are you sure you want to delete &#8220;%s&#8221;?"
 msgstr "您确定您想删除 &#8220;%s&#8221;?"
@@ -957,6 +956,10 @@ msgstr "下载"
 #: admin/pages/manage_uploads.twig:81
 msgid "Sort results by:"
 msgstr "结果排序依据："
+
+#: admin/pages/manage_uploads.twig:89
+msgid "Sort Results"
+msgstr "对结果进行排序"
 
 #: admin/pages/manage_users.twig:3
 msgid "Manage Users"

@@ -2284,15 +2284,16 @@ Singularizes a word.
 
 Parameters:
     $string - The lowercase string to depluralize.
-    $number - If supplied, and this number is not 1, it will not depluralize.
+    $number - A number to determine depluralization.
 
 Returns:
-    The supplied word with trailing "s" removed, or a non-normative singularization.
+    The supplied word with trailing "s" removed,
+    or the correct non-normative singularization.
 
 
 Function: normalize
 -------------------
-Attempts to normalize all newlines and whitespace into single spaces.
+Attempts to normalize newlines and whitespace into single spaces.
 
 Returns:
     The normalized string.
@@ -2304,7 +2305,7 @@ Converts a string to camel-case.
 
 Parameters:
     $string - The string to camelize.
-    $keep_spaces - Whether or not to convert underscores to spaces or remove them.
+    $keep_spaces - Convert underscores to spaces?
 
 Returns:
     A CamelCased string.
@@ -2406,7 +2407,7 @@ Parameters:
     $string - The string to sanitize - must be ASCII or UTF-8!
     $lowercase - Force the string to lowercase?
     $strict - Remove all characters except "-" and alphanumerics?
-    $truncate - Number of characters to truncate to (default 100, 0 to disable).
+    $truncate - Number of characters to truncate to (0 to disable).
 
 Returns:
     A sanitized version of the string.
@@ -2420,7 +2421,8 @@ Parameters:
     $string - String containing HTML to sanitize.
 
 Returns:
-    A version of the string containing only valid tags and whitelisted attributes.
+    A version of the string containing only valid tags
+    and whitelisted attributes essential to tag function.
 
 
 Function: get_remote
