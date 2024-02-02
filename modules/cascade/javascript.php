@@ -6,9 +6,12 @@ var ChyrpAjaxScroll = {
     busy: false,
     failed: false,
     container: null,
-    auto: <?php esce(Config::current()->module_cascade["ajax_scroll_auto"] ? "true" : "false"); ?>,
+    auto: <?php esce($config->module_cascade["ajax_scroll_auto"] ? "true" : "false"); ?>,
     init: function() {
         ChyrpAjaxScroll.container = $(".post").last().parent()[0];
+
+        if (typeof ChyrpAjaxScroll.container === "undefined")
+            return;
 
         if (ChyrpAjaxScroll.auto)
             $(window).on("scroll", window, ChyrpAjaxScroll.watch);

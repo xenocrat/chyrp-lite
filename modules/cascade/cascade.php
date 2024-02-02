@@ -50,6 +50,7 @@
         }
 
         public function javascript(): void {
+            $config = Config::current();
             include MODULES_DIR.DIR."cascade".DIR."javascript.php";
         }
     }
