@@ -28,19 +28,19 @@ msgstr "Wijzig"
 msgid "Delete"
 msgstr "Verwijder"
 
-#: includes/class/Paginator.php:214
+#: includes/class/Paginator.php:217
 msgid "Next"
 msgstr "Volgende"
 
-#: includes/class/Paginator.php:244
+#: includes/class/Paginator.php:251
 msgid "Previous"
 msgstr "Vorige"
 
-#: includes/class/Paginator.php:272
+#: includes/class/Paginator.php:283
 msgid "Final"
 msgstr "Laatste"
 
-#: includes/class/Paginator.php:300
+#: includes/class/Paginator.php:315
 msgid "First"
 msgstr "Eerste"
 
