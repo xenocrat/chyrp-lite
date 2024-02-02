@@ -393,13 +393,13 @@ span.pages {
 #content ul#modules_enabled > li,
 #content ul#feathers_enabled > li,
 #content ul.themes > li.current {
-    background-color: #ebfae4;
+    background-color: #daf1d0;
     border: 1px solid #bdd6b5;
 }
 #content ul#modules_enabled > li.error,
 #content ul#modules_disabled > li.error  {
-    background-color: #ffbd9e;
-    border: 1px solid #d9a086;
+    background-color: #fcddcf;
+    border: 1px solid #d6bdb5;
 }
 li.module ol.module_conflicts_list,
 li.module ol.module_dependencies_list {
@@ -426,7 +426,7 @@ li.theme.current div.controls {
 }
 ul#modules_enabled > li.error div.controls,
 ul#modules_disabled > li.error div.controls {
-    border-top: 1px solid #d9a086;
+    border-top: 1px solid #d6bdb5;
 }
 #content ul.extend li a.emblem img,
 #content ul.extend > li > h3 a {
@@ -1215,6 +1215,7 @@ input.toolbar.hidden {
         display: block !important;
         width: 100% !important;
         min-width: unset !important;
+        padding: 0.5rem !important;
         margin: 1rem 0rem 0rem 0rem !important;
         text-align: center !important;
     }

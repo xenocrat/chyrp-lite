@@ -24,7 +24,7 @@
 <input type="hidden" name="type" value="feather">
 <input type="hidden" name="hash" value="{{ authenticate() }}">
 {% if feather.confirm is not empty %}
-<button name="confirm" value="1" type="submit" data-confirm="{{ feather.confirm | fix(true) }}">
+<button name="confirm" value="1" type="submit" class="boo" data-confirm="{{ feather.confirm | fix(true) }}">
 {{ icon_img("destroy.svg") }}{{ "Uninstall" | translate }}
 </button>
 {% endif %}
