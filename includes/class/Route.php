@@ -82,13 +82,18 @@
 
             # Support single parameter actions without custom routes
             # or parsing by the controller.
-            if (empty($this->action) and !empty($this->arg[0]))
-                $this->try[] = $this->arg[0];
+            if (empty($this->action)) {
+                if (
+                    !empty($this->arg[0]) and
+                    !preg_match("/[\W]/", $this->arg[0])
+                )
+                    $this->try[] = $this->arg[0];
+            }
         }
 
         /**
          * Function: init
-         * Attempt to call a responder for the action(s) until one of them doesn't return false.
+         * Attempt to call a responder until one of them doesn't return false.
          */
         public function init(): bool {
             $trigger = Trigger::current();
@@ -107,7 +112,7 @@
                 $this->action = $method;
 
                 # Don't try to call anything except a valid PHP function.
-                if (preg_match("/[^\w]/", $this->action))
+                if (preg_match("/[\W]/", $this->action))
                     error(
                         __("Error"),
                         __("Invalid action."),
@@ -191,7 +196,7 @@
 
         /**
          * Function: url
-         * Constructs an absolute URL from a relative one. Translates clean to dirty URLs.
+         * Constructs an absolute URL from a relative one. Converts clean URLs to dirty.
          *
          * Parameters:
          *     $url - The relative URL. Assumed to be dirty if it begins with "/".
@@ -230,7 +235,8 @@
 
             Trigger::current()->filter($urls, "parse_urls");
 
-            # Generate a feed variant of all dirty translations not native to the controller.
+            # Generate a feed variant of all dirty translations
+            # not native to the controller.
             foreach (
                 array_diff_assoc($urls, $controller->urls) as $key => $value
             ) {
