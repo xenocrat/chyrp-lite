@@ -148,8 +148,16 @@
 
             # Static ID of a post or page.
             if ($route->arg[0] == "id") {
-                if (isset($route->arg[1]) and isset($route->arg[2]))
-                    $_GET[$route->arg[1]] = $route->arg[2];
+                if (isset($route->arg[1]) and isset($route->arg[2])) {
+                    switch ($route->arg[1]) {
+                        case "post":
+                            $_GET["post"] = $route->arg[2];
+                            break;
+                        case "page":
+                            $_GET["page"] = $route->arg[2];
+                            break;
+                    }
+                }
 
                 return $route->action = "id";
             }
