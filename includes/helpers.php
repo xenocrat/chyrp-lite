@@ -3152,6 +3152,12 @@
      *     $string - The string to escape and echo.
      */
     function esce($string): void {
+        if (
+            !is_string($string) and
+            !$string instanceof Stringable
+        )
+            return;
+
         echo addslashes($string);
     }
 
