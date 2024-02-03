@@ -45,6 +45,8 @@
          */
         private function __construct() {
             $loader = new \Twig\Loader\FilesystemLoader(THEME_DIR);
+            $config = Config::current();
+            $theme = Theme::current();
 
             $this->twig = new \Twig\Environment(
                 $loader,
@@ -56,15 +58,23 @@
                     "autoescape" => false)
             );
 
-            $this->twig->addExtension(new Leaf());
-            $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
-            $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
+            $this->twig->addExtension(
+                new Leaf()
+            );
+
+            $this->twig->registerUndefinedFunctionCallback(
+                "twig_callback_missing_function"
+            );
+
+            $this->twig->registerUndefinedFilterCallback(
+                "twig_callback_missing_filter"
+            );
 
             # Load the theme translator.
-            load_translator(Theme::current()->safename, THEME_DIR.DIR."locale");
+            load_translator($theme->safename, THEME_DIR.DIR."locale");
 
             # Set the limit for pagination.
-            $this->post_limit = Config::current()->posts_per_page;
+            $this->post_limit = $config->posts_per_page;
         }
 
         /**

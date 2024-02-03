@@ -38,7 +38,6 @@
          */
         private function __construct() {
             $chain = array(new \Twig\Loader\FilesystemLoader(MAIN_DIR.DIR."admin"));
-
             $config = Config::current();
 
             foreach ($config->enabled_modules as $module) {
@@ -67,9 +66,17 @@
                     "autoescape" => false)
             );
 
-            $this->twig->addExtension(new Leaf());
-            $this->twig->registerUndefinedFunctionCallback("twig_callback_missing_function");
-            $this->twig->registerUndefinedFilterCallback("twig_callback_missing_filter");
+            $this->twig->addExtension(
+                new Leaf()
+            );
+
+            $this->twig->registerUndefinedFunctionCallback(
+                "twig_callback_missing_function"
+            );
+
+            $this->twig->registerUndefinedFilterCallback(
+                "twig_callback_missing_filter"
+            );
 
             # Load the theme translator.
             load_translator("admin", MAIN_DIR.DIR."admin".DIR."locale");
