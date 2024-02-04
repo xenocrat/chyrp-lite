@@ -23,6 +23,13 @@
         );
 
     $filename = str_replace(array(DIR, "/"), "", $_GET['file']);
+
+    if ($filename == "")
+        show_404(
+            __("Not Found"),
+            __("File not found.")
+        );
+
     $filepath = uploaded($filename, false);
 
     if (!is_readable($filepath) or !is_file($filepath))
