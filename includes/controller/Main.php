@@ -19,6 +19,9 @@
             '|/random/([^/]+)/|'
                 => '/?action=random&amp;feather=$1',
 
+            '|/matter/([^/]+)/|'
+                => '/?action=matter&amp;url=$1',
+
             '|/search/([^/]+)/|'
                 => '/?action=search&amp;query=$1',
 
@@ -154,6 +157,14 @@
                     $_GET['feather'] = $route->arg[1];
 
                 return $route->action = "random";
+            }
+
+            # Matter.
+            if ($route->arg[0] == "matter") {
+                if (isset($route->arg[1]))
+                    $_GET['url'] = $route->arg[1];
+
+                return $route->action = "matter";
             }
 
             # Static ID of a post or page.
@@ -576,7 +587,8 @@
 
         /**
          * Function: main_view
-         * Handles post viewing via dirty URL or clean URL e.g. /year/month/day/url/.
+         * Handles post viewing via dirty URL or clean URL.
+         * E.g. /year/month/day/url/.
          */
         public function main_view($post = null): bool {
             if (!isset($post))
@@ -609,7 +621,8 @@
 
         /**
          * Function: main_page
-         * Handles page viewing via dirty URL or clean URL e.g. /parent/child/child-of-child/.
+         * Handles page viewing via dirty URL or clean URL.
+         * E.g. /parent/child/child-of-child/.
          */
         public function main_page($page = null): bool {
             $trigger = Trigger::current();
@@ -712,6 +725,35 @@
                 __("There aren't enough posts for random selection."),
                 "/"
             );
+        }
+
+        /**
+         * Function: main_matter
+         * Displays a standalone Twig template from the "pages" directory.
+         */
+        public function main_matter(): bool {
+            $theme = Theme::current();
+
+            if (!isset($_GET['url']))
+                return false;
+
+            $matter = str_replace(array(DIR, "/"), "", $_GET['url']);
+
+            if ($matter == "")
+                return false;
+
+            $template = "pages".DIR."matter_".$matter;
+
+            if (!$theme->file_exists($template))
+                return false;
+
+            $this->display(
+                $template,
+                array(),
+                camelize($matter, true)
+            );
+
+            return true;
         }
 
         /**
