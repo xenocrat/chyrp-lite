@@ -2923,6 +2923,10 @@
      */
     function delete_upload($filename): bool {
         $filename = str_replace(array(DIR, "/"), "", $filename);
+
+        if ($filename == "")
+            return false;
+
         $filepath = uploaded($filename, false);
 
         if (file_exists($filepath)) {
