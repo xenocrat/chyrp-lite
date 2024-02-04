@@ -795,12 +795,12 @@ Parameters:
 
 Function: init
 --------------
-Attempt to call a responder for the action(s) until one of them doesn't return false.
+Attempt to call a responder until one of them doesn't return false.
 
 
 Function: url
 -------------
-Constructs an absolute URL from a relative one. Translates clean to dirty URLs.
+Constructs an absolute URL from a relative one. Converts clean URLs to dirty.
 
 Parameters:
     $url - The relative URL. Assumed to be dirty if it begins with "/".
@@ -1704,12 +1704,14 @@ Grabs the posts with draft status created by this user.
 
 Function: main_view
 -------------------
-Handles post viewing via dirty URL or clean URL e.g. /year/month/day/url/.
+Handles post viewing via dirty URL or clean URL.
+E.g. /year/month/day/url/.
 
 
 Function: main_page
 -------------------
-Handles page viewing via dirty URL or clean URL e.g. /parent/child/child-of-child/.
+Handles page viewing via dirty URL or clean URL.
+E.g. /parent/child/child-of-child/.
 
 
 Function: main_id
@@ -1720,6 +1722,11 @@ Views a post or page by its static ID.
 Function: main_random
 ---------------------
 Grabs a random post and redirects to it.
+
+
+Function: main_matter
+---------------------
+Displays a standalone Twig template from the "pages" directory.
 
 
 Function: main_register
