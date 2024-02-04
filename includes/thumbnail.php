@@ -25,6 +25,13 @@
 
     $quality = abs((int) fallback($_GET["quality"], 80));
     $filename = str_replace(array(DIR, "/"), "", $_GET['file']);
+
+    if ($filename == "")
+        show_404(
+            __("Not Found"),
+            __("File not found.")
+        );
+
     $filepath = uploaded($filename, false);
     $thumb_w = abs((int) fallback($_GET["max_width"], 960));
     $thumb_h = abs((int) fallback($_GET["max_height"], 0));
