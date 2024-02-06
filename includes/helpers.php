@@ -3150,19 +3150,27 @@
 
     /**
      * Function: esce
-     * Escapes a string with backslashes and echoes it to output.
+     * Outputs an escaped echo for JavaScripts.
      *
      * Parameters:
-     *     $string - The string to escape and echo.
+     *     $variable - The variable to echo.
+     *
+     * Notes:
+     *     Strings are escaped with backslashes,
+     *     booleans expanded to "true" or "false".
      */
-    function esce($string): void {
+    function esce($variable): void {
         if (
-            !is_scalar($string) and
-            !$string instanceof Stringable
+            !is_scalar($variable) and
+            !$variable instanceof Stringable
         )
             return;
 
-        echo addslashes((string) $string);
+        if (is_bool($variable)) {
+            echo ($variable) ? "true" : "false" ;
+        } else {
+            echo addslashes((string) $variable);
+        }
     }
 
     /**
