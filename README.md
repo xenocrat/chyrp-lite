@@ -1,3 +1,68 @@
+# Chyrp Lite - Docker
+Docker image for hosting Chyrp Lite on Docker.
+
+Docker Hub repository: https://hub.docker.com/r/diffusehyperion/chyrp-lite
+
+Also available on Github Packages: https://github.com/DiffuseHyperion/chyrp-lite-docker/pkgs/container/chyrp-lite
+
+# Usage
+It is highly recommended to use Docker Compose to group your database alongside Chyrp Lite.
+
+For the purposes of this tutorial, we will be using MySQL for our database. PostgreSQL is also supported out of the box.
+
+Example `docker-compose.yml` usage:
+```
+version: '3'
+services:
+  chyrp-lite:
+    image: diffusehyperion/chyrp-lite:latest
+    container_name: chyrp-lite
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - "data:/var/www/html"
+    networks:
+      - default
+  chyrp-lite_db:
+    image: mysql:latest
+    container_name: chyrp-lite_db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: 'db'
+      MYSQL_USER: 'chyrp-lite'
+      MYSQL_PASSWORD: 'CHANGEME'
+      MYSQL_ROOT_PASSWORD: 'CHANGEME'
+    volumes:
+      - "db:/var/lib/mysql"
+    networks:
+      - default
+      
+volumes:
+  data:
+    driver: local
+  db:
+    driver: local
+
+networks:
+  default:
+    external: false
+```
+
+Afterwards, navigate to https://localhost/install.php to start installation.
+
+For your database configuration, set it to the following: 
+
+![Set the host to "chyrp-lite_db", the username to "chyrp-lite", the password to "CHANGEME" and the database to "db".](assets/setup.png)
+
+You can then set the remaining values according to your needs.
+
+After finishing configuration, you can now use Chyrp Lite by going to https://localhost!
+
+You can delete `install.php` by running `docker exec chyrp-lite rm install.php`.
+
+# Original description
+
 [English](README.md), [Deutsch](README_de_DE.md), [Italiano](README_it_IT.md), [한국인](README_ko_KR.md), [Nederlands](README_nl_NL.md), [简体中文](README_zh_CN.md).
 
 ## What can Chyrp Lite do for me?
