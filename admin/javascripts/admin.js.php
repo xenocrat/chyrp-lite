@@ -427,7 +427,7 @@ var Write = {
             ).appendTo(toolbar);
 
             // Insert button to open the uploads modal.
-            if (<?php esce($visitor->group->can("edit_post", "edit_page", true) ? "true" : "false"); ?>)
+            if (<?php esce($visitor->group->can("edit_post", "edit_page", true)); ?>)
                 toolbar.append(
                     $("<button>", {
                         "type": "button",
@@ -490,7 +490,7 @@ var Write = {
         });
 
         // Insert buttons for ajax previews.
-        if (<?php esce($theme->file_exists("content".DIR."preview") ? "true" : "false"); ?>)
+        if (<?php esce($theme->file_exists("content".DIR."preview")); ?>)
             $("#write_form *[data-preview], #edit_form *[data-preview]").each(function() {
                 var target = $(this);
 
@@ -655,7 +655,7 @@ var Write = {
         }
     },
     formatting: function(target, effect, fragment = "") {
-        var markdown = <?php esce(($config->enable_markdown) ? "true" : "false"); ?>;
+        var markdown = <?php esce($config->enable_markdown); ?>;
         var opening = "";
         var closing = "";
         var after = "";

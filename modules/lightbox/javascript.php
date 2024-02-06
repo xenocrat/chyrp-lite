@@ -5,7 +5,7 @@
 var ChyrpLightbox = {
     background: "<?php esce($config->module_lightbox["background"]); ?>",
     spacing: 48 + Math.abs("<?php esce($config->module_lightbox["spacing"]); ?>"),
-    protect: <?php esce($config->module_lightbox["protect"] ? "true" : "false"); ?>,
+    protect: <?php esce($config->module_lightbox["protect"]); ?>,
     active: false,
     styles: {
         fg: {

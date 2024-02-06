@@ -7,7 +7,7 @@ var ChyrpComment = {
     notice: 0,
     interval: null,
     failed: false,
-    reload: <?php esce($config->module_comments["enable_reload_comments"] ? "true" : "false" ); ?>,
+    reload: <?php esce($config->module_comments["enable_reload_comments"]); ?>,
     delay: Math.abs(<?php esce($config->module_comments["auto_reload_comments"] * 1000); ?>),
     per_page: <?php esce($config->module_comments["comments_per_page"]); ?>,
     init: function() {

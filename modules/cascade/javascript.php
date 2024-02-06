@@ -6,7 +6,7 @@ var ChyrpAjaxScroll = {
     busy: false,
     failed: false,
     container: null,
-    auto: <?php esce($config->module_cascade["ajax_scroll_auto"] ? "true" : "false"); ?>,
+    auto: <?php esce($config->module_cascade["ajax_scroll_auto"]); ?>,
     init: function() {
         ChyrpAjaxScroll.container = $(".post").last().parent()[0];
 
