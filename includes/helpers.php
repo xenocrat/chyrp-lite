@@ -3157,12 +3157,12 @@
      */
     function esce($string): void {
         if (
-            !is_string($string) and
+            !is_scalar($string) and
             !$string instanceof Stringable
         )
             return;
 
-        echo addslashes($string);
+        echo addslashes((string) $string);
     }
 
     /**
