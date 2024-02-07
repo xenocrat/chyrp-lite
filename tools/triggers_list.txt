@@ -373,7 +373,7 @@ Called from:
 correspond_activate_account
 ---------------------------
 Called from:
-	includes/helpers.php on line 3392
+	includes/helpers.php on line 3400
 
 Arguments:
 	$user
@@ -383,7 +383,7 @@ Arguments:
 correspond_reset_password
 -------------------------
 Called from:
-	includes/helpers.php on line 3427
+	includes/helpers.php on line 3435
 
 Arguments:
 	$user
@@ -393,7 +393,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 3468
+	includes/helpers.php on line 3476
 
 Arguments:
 	$ob
@@ -1115,7 +1115,7 @@ Arguments:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 3372
+	includes/helpers.php on line 3380
 
 Target:
 	$function
@@ -1124,7 +1124,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 3469
+	includes/helpers.php on line 3477
 	includes/lib/Leaf.php on line 317
 
 Target:

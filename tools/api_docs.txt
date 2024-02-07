@@ -2737,10 +2737,14 @@ Returns:
 
 Function: esce
 --------------
-Escapes a string with backslashes and echoes it to output.
+Outputs an escaped echo for JavaScripts.
 
 Parameters:
-    $string - The string to escape and echo.
+    $variable - The variable to echo.
+
+Notes:
+    Strings are escaped with backslashes,
+    booleans expanded to "true" or "false".
 
 
 Function: json_set
