@@ -1,0 +1,12 @@
+.dockerignore
+Dockerfile
+.git
+.gitignore
+LICENSE.md
+README.md
+README_de_DE.md
+README_it_IT.md
+README_ko_KR.md
+README_nl_NL.md
+README_zh_CN.md
+SECURITY.md
