@@ -308,6 +308,13 @@ form.search_box {
 form.comment_edit {
     width: 100%;
 }
+select[disabled],
+textarea[disabled],
+input[disabled],
+button[disabled], {
+    cursor: not-allowed;
+    opacity: 0.33;
+}
 select, input {
     box-sizing: border-box;
     display: block;

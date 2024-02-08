@@ -315,6 +315,13 @@ form.comment_edit {
     padding: 0em;
     border: none;
 }
+select[disabled],
+textarea[disabled],
+input[disabled],
+button[disabled], {
+    cursor: not-allowed;
+    opacity: 0.33;
+}
 select, input {
     box-sizing: border-box;
     display: block;
