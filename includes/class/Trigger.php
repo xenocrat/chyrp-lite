@@ -58,9 +58,6 @@
             if ($return === false)
                 return $val;
 
-            if ($val === false)
-                return $return;
-
             if (is_string($return) and is_string($val))
                 return $return.$val;
 
@@ -80,7 +77,7 @@
          *     the most substantial returned value decided by oneof().
          *
          * Notes:
-         *     Any additional arguments are passed on to the functions being called.
+         *     Any additional arguments are passed on to the trigger responders.
          */
         public function call($name): mixed {
             $return = false;
@@ -95,7 +92,8 @@
                         $args
                     );
 
-                    $return = $this->decide($return, $val);
+                    if ($val !== false)
+                        $return = $this->decide($return, $val);
                 }
 
                 return $return;
@@ -149,7 +147,7 @@
 
         /**
          * Function: filter
-         * Modify a variable by filtering it through a stackable set of trigger actions.
+         * Modify a variable by filtering it through a stack of trigger actions.
          *
          * Parameters:
          *     &$target - The variable to filter.
@@ -159,7 +157,7 @@
          *     $target, filtered through any/all actions for the trigger $name.
          *
          * Notes:
-         *     Any additional arguments are passed on to the functions being called.
+         *     Any additional arguments are passed on to the trigger responders.
          */
         public function filter(&$target, $name): mixed {
             if (is_array($name)) {
