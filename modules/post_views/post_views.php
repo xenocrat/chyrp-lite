@@ -38,27 +38,27 @@
             );
         }
 
-        public function manage_posts_column_header(): void {
-            echo '<th class="post_views value">'.
-                 __("View Count", "post_views").
-                 '</th>';
+        public function manage_posts_column_header(): string {
+            return '<th class="post_views value">'.
+                   __("View Count", "post_views").
+                   '</th>';
         }
 
-        public function manage_posts_column($post): void {
+        public function manage_posts_column($post): string {
             $text = _f("Download view count for &#8220;%s&#8221;", $post->title(), "post_views");
 
             if ($post->view_count > 0)
-                echo '<td class="post_views value">'.
-                     '<a href="'.
-                     url("download_views/id/".
-                     $post->id).
-                     '" title="'.
-                     fix($text, true).
-                     '">'.
-                     $post->view_count.
-                     '</a></td>';
+                return '<td class="post_views value">'.
+                       '<a href="'.
+                       url("download_views/id/".
+                       $post->id).
+                       '" title="'.
+                       fix($text, true).
+                       '">'.
+                       $post->view_count.
+                       '</a></td>';
             else
-                echo '<td class="post_views value">'.$post->view_count.'</td>';
+                return '<td class="post_views value">'.$post->view_count.'</td>';
         }
 
         public function user($user): void {

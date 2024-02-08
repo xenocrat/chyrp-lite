@@ -450,12 +450,12 @@
             return $images;
         }
 
-        public function manage_posts_column_header(): void {
-            echo '<th class="post_likes value">'.__("Likes", "tags").'</th>';
+        public function manage_posts_column_header(): string {
+            return '<th class="post_likes value">'.__("Likes", "tags").'</th>';
         }
 
-        public function manage_posts_column($post): void {
-            echo '<td class="post_likes value">'.$post->like_count.'</td>';
+        public function manage_posts_column($post): string {
+            return '<td class="post_likes value">'.$post->like_count.'</td>';
         }
 
         public function import_chyrp_post($entry, $post): void {

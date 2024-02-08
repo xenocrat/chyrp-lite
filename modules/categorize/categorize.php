@@ -62,12 +62,12 @@
             return $urls;
         }
 
-        public function manage_posts_column_header(): void {
-            echo '<th class="post_category value">'.
-                 __("Category", "categorize").'</th>';
+        public function manage_posts_column_header(): string {
+            return '<th class="post_category value">'.
+                   __("Category", "categorize").'</th>';
         }
 
-        public function manage_posts_column($post): void {
+        public function manage_posts_column($post): string {
             $td = '<td class="post_category value">';
 
             if (isset($post->category->name))
@@ -79,7 +79,7 @@
 
             $td.= '</td>';
 
-            echo $td;
+            return $td;
         }
 
         public function post_options($fields, $post = null): array {

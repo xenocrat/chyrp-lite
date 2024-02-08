@@ -91,8 +91,9 @@
             $names = array_map("trim", $names);
 
             # Prevent numbers from being type-juggled to numeric keys.
-            foreach ($names as &$name)
+            foreach ($names as &$name) {
                 $name = is_numeric($name) ? "'".$name."'" : $name ;
+            }
 
             # Remove duplicates.
             $names = array_unique($names);
@@ -228,13 +229,13 @@
             return $navs;
         }
 
-        public function manage_posts_column_header(): void {
-            echo '<th class="post_tags list">'.
-                 __("Tags", "tags").
-                 '</th>';
+        public function manage_posts_column_header(): string {
+            return '<th class="post_tags list">'.
+                   __("Tags", "tags").
+                   '</th>';
         }
 
-        public function manage_posts_column($post): void {
+        public function manage_posts_column($post): string {
             $tags = array();
 
             foreach ($post->tags as $name => $clean)
@@ -244,9 +245,9 @@
                           $name.
                           '</a>';
 
-            echo '<td class="post_tags list">'.
-                 implode(" ", $tags).
-                 '</td>';
+            return '<td class="post_tags list">'.
+                   implode(" ", $tags).
+                   '</td>';
         }
 
         public function admin_manage_tags($admin): void {

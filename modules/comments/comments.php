@@ -793,32 +793,32 @@
             return $navs;
         }
 
-        public function manage_posts_column_header(): void {
-            echo '<th class="post_comments value">'.
-                 __("Comments", "comments").
-                 '</th>';
+        public function manage_posts_column_header(): string {
+            return '<th class="post_comments value">'.
+                   __("Comments", "comments").
+                   '</th>';
         }
 
-        public function manage_posts_column($post): void {
-            echo '<td class="post_comments value"><a href="'.
-                 url("manage_comments/query/".urlencode("post_id:".$post->id)).
-                 '">'.
-                 $post->comment_count.
-                 '</a></td>';
+        public function manage_posts_column($post): string {
+            return '<td class="post_comments value"><a href="'.
+                   url("manage_comments/query/".urlencode("post_id:".$post->id)).
+                   '">'.
+                   $post->comment_count.
+                   '</a></td>';
         }
 
-        public function manage_users_column_header(): void {
-            echo '<th class="user_comments value">'.
-                 __("Comments", "comments").
-                 '</th>';
+        public function manage_users_column_header(): string {
+            return '<th class="user_comments value">'.
+                   __("Comments", "comments").
+                   '</th>';
         }
 
-        public function manage_users_column($user): void {
-            echo '<td class="user_comments value"><a href="'.
-                 url("manage_comments/query/".urlencode("user_id:".$user->id)).
-                 '">'.
-                 $user->comment_count.
-                 '</a></td>';
+        public function manage_users_column($user): string {
+            return '<td class="user_comments value"><a href="'.
+                   url("manage_comments/query/".urlencode("user_id:".$user->id)).
+                   '">'.
+                   $user->comment_count.
+                   '</a></td>';
         }
 
         public function ajax_reload_comments(): void {

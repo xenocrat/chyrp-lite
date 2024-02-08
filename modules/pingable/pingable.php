@@ -260,18 +260,18 @@
             return null;
         }
 
-        public function manage_posts_column_header(): void {
-            echo '<th class="post_pingbacks value">'.
-                 __("Webmentions", "pingable").
-                 '</th>';
+        public function manage_posts_column_header(): string {
+            return '<th class="post_pingbacks value">'.
+                   __("Webmentions", "pingable").
+                   '</th>';
         }
 
-        public function manage_posts_column($post): void {
-            echo '<td class="post_pingbacks value"><a href="'.
-                 url("manage_pingbacks/query/".urlencode("post_id:".$post->id)).
-                 '">'.
-                 $post->pingback_count.
-                 '</a></td>';
+        public function manage_posts_column($post): string {
+            return '<td class="post_pingbacks value"><a href="'.
+                   url("manage_pingbacks/query/".urlencode("post_id:".$post->id)).
+                   '">'.
+                   $post->pingback_count.
+                   '</a></td>';
         }
 
         public function post($post): void {
