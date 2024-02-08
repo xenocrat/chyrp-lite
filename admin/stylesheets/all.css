@@ -582,10 +582,6 @@ input[type="password"].strong:focus {
     border: 1px solid #108600;
     outline-color: #108600;
 }
-input[disabled],
-input.disabled {
-    cursor: not-allowed;
-}
 input.code,
 textarea.code {
     font-family: "Cousine webfont", monospace;
@@ -639,6 +635,12 @@ form.split p.buttons {
 }
 html[dir="rtl"] form.split p.buttons {
     margin: 1rem 45% 0rem 0rem;
+}
+select[disabled],
+textarea[disabled],
+input[disabled] {
+    cursor: not-allowed;
+    opacity: 0.33;
 }
 
 /* Group: Tables */
@@ -848,18 +850,6 @@ a.button > img {
     float: left;
     margin-right: 0.25rem;
 }
-button[disabled],
-button.disabled {
-    background-color: #efefef;
-    border-color: #cfcfcf;
-    cursor: not-allowed;
-}
-button[disabled]:hover,
-button.disabled:hover,
-button[disabled]:focus,
-button.disabled:focus {
-    border-color: #7f7f7f;
-}
 div.confirmation button,
 div.confirmation a.button {
     min-width: 15em;
@@ -869,6 +859,10 @@ div.confirmation a.button {
 div.pagination a.prev_page,
 div.pagination a.next_page {
     flex: 1 0 15rem;
+}
+button[disabled] {
+    cursor: not-allowed;
+    opacity: 0.33;
 }
 
 /* Group: Options */
