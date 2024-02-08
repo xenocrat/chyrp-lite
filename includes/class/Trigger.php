@@ -51,11 +51,33 @@
         }
 
         /**
+         * Function: decide
+         * Decides what to do with a call return value.
+         */
+        private function decide($return, $val): mixed {
+            if ($return === false)
+                return $val;
+
+            if ($val === false)
+                return $return;
+
+            if (is_string($return) and is_string($val))
+                return $return.$val;
+
+            return oneof($val, $return);
+        }
+
+        /**
          * Function: call
          * Calls a trigger action.
          *
          * Parameters:
          *     $name - The name of the trigger, or an array of triggers to call.
+         *
+         * Returns:
+         *     A concatenated string if all calls return a string, or;
+         *     @false@ if none of the triggers exist, or;
+         *     the most substantial returned value decided by oneof().
          *
          * Notes:
          *     Any additional arguments are passed on to the functions being called.
@@ -68,13 +90,12 @@
                     $args = func_get_args();
                     $args[0] = $call;
 
-                    $success = call_user_func_array(
+                    $val = call_user_func_array(
                         array($this, "call"),
                         $args
                     );
 
-                    if ($success !== false)
-                        $return = $success;
+                    $return = $this->decide($return, $val);
                 }
 
                 return $return;
@@ -101,22 +122,26 @@
                             continue;
                     }
 
-                    $return = call_user_func_array($function, $arguments);
+                    $val = call_user_func_array($function, $arguments);
+                    $return = $this->decide($return, $val);
+
                     $this->called[$name][] = $function;
                 }
 
             foreach (Modules::$instances as $module)
                 if (
-                    !in_array(array($module, $name), $this->called[$name]) and
-                    is_callable(array($module, $name))
+                    is_callable(array($module, $name)) and
+                    !in_array(array($module, $name), $this->called[$name])
                 ) {
                     if (!empty($module->cancelled))
                         continue;
 
-                    $return = call_user_func_array(
+                    $val = call_user_func_array(
                         array($module, $name),
                         $arguments
                     );
+
+                    $return = $this->decide($return, $val);
                 }
 
             return $return;
@@ -174,29 +199,29 @@
                             continue;
                     }
 
-                    $call = call_user_func_array(
+                    $val = call_user_func_array(
                         $function,
                         array_merge(array(&$target), $arguments)
                     );
 
                     $this->called[$name][] = $function;
-                    $target = fallback($call, $target);
+                    $target = fallback($val, $target);
                 }
 
             foreach (Modules::$instances as $module)
                 if (
-                    !in_array(array($module, $name), $this->called[$name]) and
-                    is_callable(array($module, $name))
+                    is_callable(array($module, $name)) and
+                    !in_array(array($module, $name), $this->called[$name])
                 ) {
                     if (!empty($module->cancelled))
                         continue;
 
-                    $call = call_user_func_array(
+                    $val = call_user_func_array(
                         array($module, $name),
                         array_merge(array(&$target), $arguments)
                     );
 
-                    $target = fallback($call, $target);
+                    $target = fallback($val, $target);
                 }
 
             return $target;
