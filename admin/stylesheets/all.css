@@ -353,11 +353,12 @@ div.pagination {
     flex-flow: row wrap;
     column-gap: 2rem;
     row-gap: 1rem;
-    justify-content: space-between;
+    justify-content: center;
 }
 a.prev_page,
 a.next_page {
-    min-width: 15em;
+    min-width: 10em;
+    max-width: 50%;
 }
 span.pages {
     display: block;
@@ -666,7 +667,7 @@ table tbody tr:nth-child(even) td {
     background-color: #fbfbfb;
 }
 table tbody tr td.main {
-    min-width: 10rem;
+    min-width: 10em;
 }
 table thead tr th.title,
 table tbody tr td.title,
@@ -852,13 +853,13 @@ a.button > img {
 }
 div.confirmation button,
 div.confirmation a.button {
-    min-width: 15em;
-    flex: 1 0 15rem;
+    min-width: 10em;
+    flex: 1 0 10em;
     padding-right: calc(16px + 0.5rem);
 }
 div.pagination a.prev_page,
 div.pagination a.next_page {
-    flex: 1 0 15rem;
+    flex: 1 0 10em;
 }
 button[disabled] {
     cursor: not-allowed;
@@ -1209,6 +1210,7 @@ input.toolbar.hidden {
         display: block !important;
         width: 100% !important;
         min-width: unset !important;
+        max-width: unset !important;
         padding: 0.5rem !important;
         margin: 1rem 0rem 0rem 0rem !important;
         text-align: center !important;
