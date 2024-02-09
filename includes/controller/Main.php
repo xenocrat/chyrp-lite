@@ -1319,7 +1319,7 @@
                 $trigger->call("feed_item", $post, $feed);
             }
 
-            $feed->close();
+            $feed->display();
         }
 
         /**
