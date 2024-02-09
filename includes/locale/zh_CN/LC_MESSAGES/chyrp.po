@@ -1178,7 +1178,7 @@ msgstr "您收到此消息是因为您请求了新密码。"
 msgid "Visit this link to reset your password:"
 msgstr "访问这个链接重置您的密码："
 
-#: includes/lib/AtomFeed.php:125 includes/lib/JSONFeed.php:96
+#: includes/lib/AtomFeed.php:145 includes/lib/JSONFeed.php:104
 msgid "Guest"
 msgstr "访问者"
 

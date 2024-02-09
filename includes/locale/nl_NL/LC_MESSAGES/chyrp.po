@@ -1187,7 +1187,7 @@ msgstr ""
 msgid "Visit this link to reset your password:"
 msgstr "Bezoek deze link om je wachtwoord te wijzigen:"
 
-#: includes/lib/AtomFeed.php:125 includes/lib/JSONFeed.php:96
+#: includes/lib/AtomFeed.php:145 includes/lib/JSONFeed.php:104
 msgid "Guest"
 msgstr "Gast"
 

@@ -1230,6 +1230,11 @@ Function: cmp
 Sorts actions by priority when used with usort.
 
 
+Function: decide
+----------------
+Decides what to do with a call return value.
+
+
 Function: call
 --------------
 Calls a trigger action.
@@ -1237,13 +1242,18 @@ Calls a trigger action.
 Parameters:
     $name - The name of the trigger, or an array of triggers to call.
 
+Returns:
+    A concatenated string if all calls return a string, or;
+    @false@ if none of the triggers exist, or;
+    the most substantial returned value decided by oneof().
+
 Notes:
-    Any additional arguments are passed on to the functions being called.
+    Any additional arguments are passed on to the trigger responders.
 
 
 Function: filter
 ----------------
-Modify a variable by filtering it through a stackable set of trigger actions.
+Modify a variable by filtering it through a stack of trigger actions.
 
 Parameters:
     &$target - The variable to filter.
@@ -1253,7 +1263,7 @@ Returns:
     $target, filtered through any/all actions for the trigger $name.
 
 Notes:
-    Any additional arguments are passed on to the functions being called.
+    Any additional arguments are passed on to the trigger responders.
 
 
 Function: exists
@@ -2957,6 +2967,16 @@ Function: close
 Closes the feed.
 
 
+Function: feed
+--------------
+Returns the rendered feed.
+
+
+Function: display
+-----------------
+Displays the rendered feed.
+
+
 ==============================================
 includes/lib/AtomFeed.php
 ==============================================
@@ -2967,11 +2987,6 @@ Generates an Atom feed and outputs it piece by piece.
 
 See Also:
     https://tools.ietf.org/html/rfc4287
-
-
-Function: __construct
----------------------
-Sets the Atom feed header.
 
 
 Function: type
@@ -3056,6 +3071,16 @@ Function: close
 Outputs the closing feed element.
 
 
+Function: feed
+--------------
+Returns the rendered feed.
+
+
+Function: output
+----------------
+Displays the rendered feed.
+
+
 ==============================================
 includes/lib/JSONFeed.php
 ==============================================
@@ -3066,11 +3091,6 @@ Generates a JSON feed and outputs it on closing.
 
 See Also:
     https://jsonfeed.org/version/1.1
-
-
-Function: __construct
----------------------
-Sets the JSON feed header.
 
 
 Function: type
@@ -3142,6 +3162,16 @@ Parameters:
 Function: close
 ---------------
 Encodes and outputs the feed.
+
+
+Function: feed
+--------------
+Returns the rendered feed.
+
+
+Function: output
+----------------
+Displays the rendered feed.
 
 
 ==============================================
@@ -3383,15 +3413,10 @@ includes/lib/RSSFeed.php
 
 Class: RSSFeed
 --------------
-Generates an RSS feed and outputs it piece by piece.
+Generates an RSS feed and renders it piece by piece.
 
 See Also:
     http://www.rssboard.org/rss-2-0-11
-
-
-Function: __construct
----------------------
-Sets the RSS feed header.
 
 
 Function: type
@@ -3401,7 +3426,7 @@ Returns the content type of the feed.
 
 Function: open
 --------------
-Outputs the opening channel element and top-level elements.
+Renders the opening channel element and top-level elements.
 
 Parameters:
     $title - Title for this channel.
@@ -3412,7 +3437,7 @@ Parameters:
 
 Function: entry
 ---------------
-Outputs an individual feed item.
+Renders an individual feed item.
 
 Parameters:
     $title - Title for this item.
@@ -3431,7 +3456,7 @@ Notes:
 
 Function: category
 ------------------
-Outputs a category element for an item.
+Renders a category element for an item.
 
 Parameters:
     $term - String that identifies the category.
@@ -3446,7 +3471,7 @@ Not implemented in RSS 2.0.11.
 
 Function: enclosure
 -------------------
-Outputs an enclosure element for a resource that is potentially large in size.
+Renders an enclosure element for a resource that is potentially large in size.
 
 Parameters:
     $link - The URL to the resource.
@@ -3462,12 +3487,22 @@ Not implemented in RSS 2.0.11.
 
 Function: split
 ---------------
-Outputs a closing item element.
+Renders a closing item element.
 
 
 Function: close
 ---------------
-Outputs the closing channel element.
+Renders the closing channel element.
+
+
+Function: feed
+--------------
+Returns the rendered feed.
+
+
+Function: output
+----------------
+Displays the rendered feed.
 
 
 ==============================================
