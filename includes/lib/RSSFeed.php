@@ -1,23 +1,23 @@
 <?php
     /**
      * Class: RSSFeed
-     * Generates an RSS feed and outputs it piece by piece.
+     * Generates an RSS feed and renders it piece by piece.
      *
      * See Also:
      *     http://www.rssboard.org/rss-2-0-11
      */
     class RSSFeed implements FeedGenerator {
+        # Boolean: $open
+        # Has the feed been opened?
+        private $open = false;
+
         # Variable: $count
-        # The number of entries outputted.
+        # The number of entries rendered.
         private $count = 0;
 
-        /**
-         * Function: __construct
-         * Sets the RSS feed header.
-         */
-        public function __construct() {
-            header("Content-Type: ".self::type()."; charset=UTF-8");
-        }
+        # String: $xml
+        # The rendered XML.
+        private $xml = "";
 
         /**
          * Function: type
@@ -29,7 +29,7 @@
 
         /**
          * Function: open
-         * Outputs the opening channel element and top-level elements.
+         * Renders the opening channel element and top-level elements.
          *
          * Parameters:
          *     $title - Title for this channel.
@@ -37,30 +37,43 @@
          *     $id - Feed ID (optional).
          *     $updated - Time of update (optional).
          */
-        public function open($title, $subtitle = "", $id = "", $updated = null): void {
-            $language = lang_base(Config::current()->locale);
+        public function open(
+            $title,
+            $subtitle = "",
+            $id = "",
+            $updated = null
+        ): void {
+            if ($this->open)
+                return;
 
-            echo '<?xml version="1.0" encoding="UTF-8"?>'."\n";
-            echo '<rss version="2.0">'."\n";
-            echo '<channel>'."\n";
-            echo '<language>'.fix($language).'</language>'."\n";
-            echo '<title>'.strip_tags($title).'</title>'."\n";
+            $language = lang_base(Config::current()->locale);
+            $link = url("/", MainController::current());
+
+            $this->xml.= '<?xml version="1.0" encoding="UTF-8"?>'."\n";
+            $this->xml.= '<rss version="2.0">'."\n";
+            $this->xml.= '<channel>'."\n";
+            $this->xml.= '<language>'.fix($language).'</language>'."\n";
+            $this->xml.= '<title>'.strip_tags($title).'</title>'."\n";
 
             if (!empty($subtitle))
-                echo '<description>'.strip_tags($subtitle).'</description>'."\n";
+                $this->xml.= '<description>'.
+                             strip_tags($subtitle).
+                             '</description>'.
+                             "\n";
 
-            echo '<lastBuildDate>'.
-                 when(DATE_RSS, oneof($updated, time())).
-                 '</lastBuildDate>'.
-                 "\n";
+            $this->xml.= '<lastBuildDate>'.
+                         when(DATE_RSS, oneof($updated, time())).
+                         '</lastBuildDate>'.
+                         "\n";
 
-            echo '<link>'.url("/", MainController::current()).'</link>'."\n";
-            echo '<generator>'.CHYRP_IDENTITY.'</generator>'."\n";
+            $this->xml.= '<link>'.$link.'</link>'."\n";
+            $this->xml.= '<generator>'.CHYRP_IDENTITY.'</generator>'."\n";
+            $this->open = true;
         }
 
         /**
          * Function: entry
-         * Outputs an individual feed item.
+         * Renders an individual feed item.
          *
          * Parameters:
          *     $title - Title for this item.
@@ -87,24 +100,36 @@
             $uri = "",
             $email = ""
         ): void {
+            if (!$this->open)
+                return;
+
             $this->split();
 
-            echo '<item>'."\n";
-            echo '<title>'.strip_tags($title).'</title>'."\n";
-            echo '<guid>'.fix($id).'</guid>'."\n";
-            echo '<pubDate>'.when(DATE_RSS, $published).'</pubDate>'."\n";
-            echo '<link>'.fix($link).'</link>'."\n";
-            echo '<description>'.fix($content, false, true).'</description>'."\n";
+            $this->xml.= '<item>'."\n";
+            $this->xml.= '<title>'.strip_tags($title).'</title>'."\n";
+            $this->xml.= '<guid>'.fix($id).'</guid>'."\n";
+
+            $this->xml.= '<pubDate>'.
+                         when(DATE_RSS, $published).
+                         '</pubDate>'.
+                         "\n";
+
+            $this->xml.= '<link>'.fix($link).'</link>'."\n";
+
+            $this->xml.= '<description>'.
+                         fix($content, false, true).
+                         '</description>'.
+                         "\n";
 
             if (!empty($email) and is_email($email))
-                echo '<author>'.fix($email).'</author>'."\n";
+                $this->xml.= '<author>'.fix($email).'</author>'."\n";
 
             $this->count++;
         }
 
         /**
          * Function: category
-         * Outputs a category element for an item.
+         * Renders a category element for an item.
          *
          * Parameters:
          *     $term - String that identifies the category.
@@ -112,6 +137,9 @@
          *     $label - Human-readable label for the category (optional).
          */
         public function category($term, $scheme = "", $label = ""): void {
+            if (!$this->open)
+                return;
+
             if ($this->count == 0)
                 return;
 
@@ -120,7 +148,7 @@
             if (!empty($scheme))
                 $category.= ' domain="'.fix($scheme, true).'"';
 
-            echo $category.'>'.fix($term, true).'</category>'."\n";
+            $this->xml.= $category.'>'.fix($term, true).'</category>'."\n";
         }
 
         /**
@@ -133,7 +161,7 @@
 
         /**
          * Function: enclosure
-         * Outputs an enclosure element for a resource that is potentially large in size.
+         * Renders an enclosure element for a resource that is potentially large in size.
          *
          * Parameters:
          *     $link - The URL to the resource.
@@ -141,13 +169,21 @@
          *     $type - The media type of the resource (optional).
          *     $title - Title for the resource (optional).
          */
-        public function enclosure($link, $length = 0, $type = "", $title = ""): void {
-            echo '<enclosure url="'.fix($link, true).'"'.
-                 ' length="'.fix($length, true).'"'.
-                 ' type="'.
-                 fix(oneof($type, "application/octet-stream"), true).
-                 '" />'.
-                 "\n";
+        public function enclosure(
+            $link,
+            $length = 0,
+            $type = "",
+            $title = ""
+        ): void {
+            if (!$this->open)
+                return;
+
+            $this->xml.= '<enclosure url="'.fix($link, true).'"'.
+                         ' length="'.fix($length, true).'"'.
+                         ' type="'.
+                         fix(oneof($type, "application/octet-stream"), true).
+                         '" />'.
+                         "\n";
         }
 
         /**
@@ -160,20 +196,51 @@
 
         /**
          * Function: split
-         * Outputs a closing item element.
+         * Renders a closing item element.
          */
         private function split(): void {
+            if (!$this->open)
+                return;
+
             if ($this->count > 0)
-                echo '</item>'."\n";
+                $this->xml.= '</item>'."\n";
         }
 
         /**
          * Function: close
-         * Outputs the closing channel element.
+         * Renders the closing channel element.
          */
         public function close(): void {
+            if (!$this->open)
+                return;
+
             $this->split();
-            echo '</channel>'."\n";
-            echo '</rss>'."\n";
+            $this->xml.= '</channel>'."\n";
+            $this->xml.= '</rss>'."\n";
+            $this->open = false;
+        }
+
+        /**
+         * Function: feed
+         * Returns the rendered feed.
+         */
+        public function feed(): string {
+            return $this->xml;
+        }
+
+        /**
+         * Function: output
+         * Displays the rendered feed.
+         */
+        public function display(): bool {
+            if (headers_sent())
+                return false;
+
+            if ($this->open)
+                $this->close();
+
+            header("Content-Type: ".self::type()."; charset=UTF-8");
+            echo $this->feed();
+            return true;
         }
     }

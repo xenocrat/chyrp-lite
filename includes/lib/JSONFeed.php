@@ -7,6 +7,10 @@
      *     https://jsonfeed.org/version/1.1
      */
     class JSONFeed implements FeedGenerator {
+        # Boolean: $open
+        # Has the feed been opened?
+        private $open = false;
+
         # Variable: $count
         # The number of items generated.
         private $count = 0;
@@ -14,14 +18,6 @@
         # Array: $json
         # Holds the feed as a $key => $val array.
         private $json = array();
-
-        /**
-         * Function: __construct
-         * Sets the JSON feed header.
-         */
-        public function __construct() {
-            header("Content-Type: ".self::type()."; charset=UTF-8");
-        }
 
         /**
          * Function: type
@@ -41,7 +37,15 @@
          *     $id - Feed ID (optional).
          *     $updated - Time of update (optional).
          */
-        public function open($title, $subtitle = "", $id = "", $updated = null): void {
+        public function open(
+            $title,
+            $subtitle = "",
+            $id = "",
+            $updated = null
+        ): void {
+            if ($this->open)
+                return;
+
             $language = lang_base(Config::current()->locale);
 
             $this->json = array(
@@ -56,6 +60,7 @@
                 $this->json["description"] = strip_tags($subtitle);
 
             $this->json["items"] = array();
+            $this->open = true;
         }
 
         /**
@@ -84,9 +89,12 @@
             $uri = "",
             $email = ""
         ): void {
+            if (!$this->open)
+                return;
+
             $this->count++;
 
-            $item = array(
+            $entry = array(
                 "id"             => $id,
                 "url"            => $link,
                 "title"          => strip_tags($title),
@@ -97,9 +105,10 @@
             );
 
             if (!empty($uri) and is_url($uri))
-                $item["author"]["url"] = $uri;
+                $entry["author"]["url"] = $uri;
 
-            $this->json["items"][($this->count - 1)] = $item;
+            $item = $this->count - 1;
+            $this->json["items"][$item] = $entry;
         }
 
         /**
@@ -111,16 +120,25 @@
          *     $scheme - URI for the categorization scheme (optional).
          *     $label - Human-readable label for the category (optional).
          */
-        public function category($term, $scheme = "", $label = ""): void {
+        public function category(
+            $term,
+            $scheme = "",
+            $label = ""
+        ): void {
+            if (!$this->open)
+                return;
+
             if ($this->count == 0)
                 return;
 
+            $item = $this->count - 1;
+
             fallback(
-                $this->json["items"][($this->count - 1)]["tags"],
+                $this->json["items"][$item]["tags"],
                 array()
             );
 
-            $this->json["items"][($this->count - 1)]["tags"][] = $term;
+            $this->json["items"][$item]["tags"][] = $term;
         }
 
         /**
@@ -141,12 +159,22 @@
          *     $type - The media type of the resource (optional).
          *     $title - Title for the resource (optional).
          */
-        public function enclosure($link, $length = null, $type = "", $title = ""): void {
+        public function enclosure(
+            $link,
+            $length = null,
+            $type = "",
+            $title = ""
+        ): void {
+            if (!$this->open)
+                return;
+
             if ($this->count == 0)
                 return;
 
+            $item = $this->count - 1;
+
             fallback(
-                $this->json["items"][($this->count - 1)]["attachments"],
+                $this->json["items"][$item]["attachments"],
                 array()
             );
 
@@ -161,7 +189,7 @@
             if (!empty($title))
                 $attachment["title"] = $title;
 
-            $this->json["items"][($this->count - 1)]["attachments"][] = $attachment;
+            $this->json["items"][$item]["attachments"][] = $attachment;
         }
 
         /**
@@ -172,11 +200,16 @@
          *     $link - The external URL.
          */
         public function related($link): void {
+            if (!$this->open)
+                return;
+
             if ($this->count == 0)
                 return;
 
+            $item = $this->count - 1;
+
             if (!empty($link) and is_url($link))
-                $this->json["items"][($this->count - 1)]["external_url"] = $link;
+                $this->json["items"][$item]["external_url"] = $link;
         }
 
         /**
@@ -184,6 +217,35 @@
          * Encodes and outputs the feed.
          */
         public function close(): void {
-            echo json_set($this->json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+            $this->open = false;
+        }
+
+        /**
+         * Function: feed
+         * Returns the rendered feed.
+         */
+        public function feed(): string {
+            $encoded = json_set(
+                $this->json,
+                JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
+            );
+
+            return ($encoded === false) ? "" : $encoded ;
+        }
+
+        /**
+         * Function: output
+         * Displays the rendered feed.
+         */
+        public function display(): bool {
+            if (headers_sent())
+                return false;
+
+            if ($this->open)
+                $this->close();
+
+            header("Content-Type: ".self::type()."; charset=UTF-8");
+            echo $this->feed();
+            return true;
         }
     }
