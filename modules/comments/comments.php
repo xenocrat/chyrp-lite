@@ -1122,7 +1122,7 @@
                 $trigger->call("comments_feed_item", $comment, $feed);
             }
 
-            $feed->close();
+            $feed->display();
         }
 
         public function webmention($post, $from, $to): void {
