@@ -61,4 +61,16 @@
          * Closes the feed.
          */
         public function close(): void;
+
+        /**
+         * Function: feed
+         * Returns the rendered feed.
+         */
+        public function feed(): string;
+
+        /**
+         * Function: display
+         * Displays the rendered feed.
+         */
+        public function display(): bool;
     }
