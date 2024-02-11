@@ -1921,7 +1921,10 @@
         if (!function_exists("curl_version"))
             return false;
 
-        $curl = curl_init($url);
+        $curl = @curl_init($url);
+
+        if ($curl === false)
+            return false;
 
         $opts = array(
             CURLOPT_CAINFO => INCLUDES_DIR.DIR."cacert.pem",
