@@ -123,8 +123,8 @@
             if (isset($_SERVER['HTTP_USER_AGENT']))
                 $agent = $_SERVER['HTTP_USER_AGENT'];
 
-            if (isset($_SERVER['Sec-CH-UA']))
-                $agent = $_SERVER['Sec-CH-UA'];
+            if (isset($_SERVER['HTTP_SEC_CH_UA']))
+                $agent = $_SERVER['HTTP_SEC_CH_UA'];
 
             if ($spam)
                 $status = self::STATUS_SPAM;
