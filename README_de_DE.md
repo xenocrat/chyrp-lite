@@ -50,6 +50,7 @@ Feathern ermöglichen verschiedene Sorten von Blog-Inhalten – Sie können sich
 * [PHP 8.0+](https://www.php.net/supported-versions.php) mit standard extensionen (Session, JSON, Ctype, libxml, SimpleXML)
 * [Multibyte String](https://www.php.net/manual/en/book.mbstring.php)
 * [PDO](https://www.php.net/manual/en/book.pdo.php)
+* [cURL](https://www.php.net/manual/en/book.curl.php)
 * MySQL 4.1+
 * SQLite 3+
 * PostgreSQL 10+

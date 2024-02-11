@@ -49,6 +49,7 @@ Met een flexibel system van feathers en paginas, kun je je website precies zó m
 * [PHP 8.0+](https://www.php.net/supported-versions.php) met standaard extensies (Session, JSON, Ctype, libxml, SimpleXML)
 * [Multibyte String](https://www.php.net/manual/en/book.mbstring.php)
 * [PDO](https://www.php.net/manual/en/book.pdo.php)
+* [cURL](https://www.php.net/manual/en/book.curl.php)
 * MySQL 5.7+
 * SQLite 3+
 * PostgreSQL 10+
