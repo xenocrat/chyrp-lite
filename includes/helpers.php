@@ -1937,7 +1937,8 @@
             CURLOPT_TIMEOUT => (int) $timeout,
             CURLOPT_USERAGENT => CHYRP_IDENTITY,
             CURLOPT_HTTPHEADER => array(
-                "From: ".$config->email
+                "From: ".$config->email,
+                "Referer: ".$config->url
             )
         );
 
@@ -2059,7 +2060,11 @@
             );
 
         # Retrieve the page that linked here.
-        $content = get_remote($source_url, 0, 10);
+        $content = get_remote(
+            url:$source_url,
+            redirects:0,
+            timeout:10
+        );
 
         if (empty($content))
             error(
@@ -2120,7 +2125,7 @@
         }
 
         # Check if the content is UTF-8 encoded text/html before continuing.
-        if (!preg_match("~^Content-Type: *text/html *; *charset=UTF-8~im", $headers))
+        if (!preg_match("/^Content-Type: *text\/html *; *charset=UTF-8/im", $headers))
             return false;
 
         # Check for <link> element containing the endpoint.
