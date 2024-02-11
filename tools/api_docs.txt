@@ -2451,6 +2451,8 @@ Parameters:
     $redirects - The maximum number of redirects to follow.
     $timeout - The maximum number of seconds to wait.
     $headers - Include response headers with the content?
+    $post - Set the request type to POST instead of GET?
+    $data - An array or urlencoded string of POST data.
 
 Returns:
     The response content, or false on failure.

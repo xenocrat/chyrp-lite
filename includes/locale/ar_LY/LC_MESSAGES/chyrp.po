@@ -90,17 +90,17 @@ msgstr "المُتحكم بالمسار المُدخل غير صالح."
 #: includes/controller/Admin.php:3012 includes/controller/Admin.php:3019
 #: includes/controller/Admin.php:3316 includes/controller/Ajax.php:36
 #: includes/controller/Ajax.php:253 includes/download.php:14
-#: includes/error.php:169 includes/helpers.php:2084 includes/helpers.php:2091
-#: includes/helpers.php:2098 includes/helpers.php:2111
-#: includes/helpers.php:2120 includes/helpers.php:2130
-#: includes/helpers.php:2137 includes/helpers.php:2578
-#: includes/helpers.php:2590 includes/helpers.php:2596
-#: includes/helpers.php:2602 includes/helpers.php:2639
-#: includes/helpers.php:2645 includes/helpers.php:2651
-#: includes/helpers.php:2799 includes/helpers.php:2805
-#: includes/helpers.php:2811 includes/helpers.php:2817
-#: includes/helpers.php:2822 includes/helpers.php:2827
-#: includes/helpers.php:2832 includes/helpers.php:2839
+#: includes/error.php:169 includes/helpers.php:2019 includes/helpers.php:2026
+#: includes/helpers.php:2033 includes/helpers.php:2048
+#: includes/helpers.php:2057 includes/helpers.php:2071
+#: includes/helpers.php:2078 includes/helpers.php:2463
+#: includes/helpers.php:2475 includes/helpers.php:2481
+#: includes/helpers.php:2487 includes/helpers.php:2524
+#: includes/helpers.php:2530 includes/helpers.php:2536
+#: includes/helpers.php:2684 includes/helpers.php:2690
+#: includes/helpers.php:2696 includes/helpers.php:2702
+#: includes/helpers.php:2707 includes/helpers.php:2712
+#: includes/helpers.php:2717 includes/helpers.php:2724
 #: includes/lib/ThumbnailFile.php:290 includes/lib/ThumbnailFile.php:321
 #: includes/lib/ThumbnailFile.php:381 includes/thumbnail.php:15
 #: install.php:1006 upgrade.php:211 upgrade.php:227 upgrade.php:243
@@ -157,7 +157,7 @@ msgstr "إجراء غير صحيح."
 #: includes/controller/Ajax.php:247 includes/controller/Ajax.php:271
 #: includes/controller/Ajax.php:277 includes/controller/Main.php:565
 #: includes/controller/Main.php:646 includes/download.php:21
-#: includes/helpers.php:2584 includes/thumbnail.php:22
+#: includes/helpers.php:2469 includes/thumbnail.php:22
 msgid "Access Denied"
 msgstr "تم رفض الوصول"
 
@@ -705,8 +705,8 @@ msgstr "عنوان URL الأساسي غير صالح."
 msgid "Settings updated."
 msgstr "تم تحديث الإعدادات."
 
-#: includes/controller/Admin.php:3234 includes/helpers.php:2603
-#: includes/helpers.php:2652 includes/helpers.php:2823 upgrade.php:162
+#: includes/controller/Admin.php:3234 includes/helpers.php:2488
+#: includes/helpers.php:2537 includes/helpers.php:2708 upgrade.php:162
 #: upgrade.php:179 upgrade.php:196
 msgid "Failed to write file to disk."
 msgstr "فشل في كتابة الملف على القرص."
@@ -1020,119 +1020,113 @@ msgstr "ليس لديك الصلاحيّات الكافية للوصول إلى 
 msgid "The requested resource was not found."
 msgstr "لم يتم العثور على المورد المطلوب."
 
-#: includes/helpers.php:1929 includes/helpers.php:2043
-#: includes/helpers.php:2179
-#, php-format
-msgid "Socket error: %s"
-msgstr ""
-
-#: includes/helpers.php:2085
+#: includes/helpers.php:2020
 msgid "Webmention support is disabled for this site."
 msgstr "تم تعطيل دعم Webmention لهذا الموقع."
 
-#: includes/helpers.php:2092
+#: includes/helpers.php:2027
 msgid "The URL for your page is not valid."
 msgstr "عنوان URL لصفحتك غير صالح."
 
-#: includes/helpers.php:2099
+#: includes/helpers.php:2034
 msgid "The URL for our page is not valid."
 msgstr "عنوان URL لصفحتنا غير صالح."
 
-#: includes/helpers.php:2112
+#: includes/helpers.php:2049
 msgid "The source and target URLs cannot be the same."
 msgstr "لا يمكن أن تكون عناوين URL المصدر والهدف هي نفسها."
 
-#: includes/helpers.php:2121
+#: includes/helpers.php:2058
 msgid "We have not published at that URL."
 msgstr "لم ننشر في ذلك الرابط."
 
-#: includes/helpers.php:2131
+#: includes/helpers.php:2072
 msgid "You have not published at that URL."
 msgstr "لم تقم بالنشر في هذا الرابط."
 
-#: includes/helpers.php:2138
+#: includes/helpers.php:2079
 msgid "Your page does not link to our page."
 msgstr "الصفحة الخاصة بك غير مرتبطة بصفحتنا."
 
-#: includes/helpers.php:2387
+#: includes/helpers.php:2272
 msgid "Please create the uploads directory."
 msgstr "الرجاء إنشاء مجلد الرفع."
 
-#: includes/helpers.php:2389
+#: includes/helpers.php:2274
 msgid "Please make the uploads directory writable."
 msgstr "يرجى جعل مجلد الرفع قابل للكتابة."
 
-#: includes/helpers.php:2410
+#: includes/helpers.php:2295
 #, php-format
 msgid "%s module is missing."
 msgstr "الملحق %s غير موجود."
 
-#: includes/helpers.php:2423
+#: includes/helpers.php:2308
 #, php-format
 msgid "%s module is damaged."
 msgstr "الملحق %s معطوب."
 
-#: includes/helpers.php:2441
+#: includes/helpers.php:2326
 #, php-format
 msgid "%s feather is missing."
 msgstr "الريشة %s غير موجودة."
 
-#: includes/helpers.php:2454
+#: includes/helpers.php:2339
 #, php-format
 msgid "%s feather is damaged."
 msgstr "الريشة %s معطوبة."
 
-#: includes/helpers.php:2524 includes/helpers.php:2547
+#: includes/helpers.php:2409 includes/helpers.php:2432
 #, php-format
 msgid "Execution of %s has been cancelled."
 msgstr "تم إلغاء تنفيذ %s."
 
-#: includes/helpers.php:2579
+#: includes/helpers.php:2464
 msgid "Uploaded file is of an unsupported type."
 msgstr "إمتداد الملف المرفوع غير مدعوم."
 
-#: includes/helpers.php:2585
+#: includes/helpers.php:2470
 msgid "Only uploaded files are accepted."
 msgstr "يتم قبول الملفات المرفوعة فقط."
 
-#: includes/helpers.php:2591 includes/helpers.php:2640
+#: includes/helpers.php:2476 includes/helpers.php:2525
 msgid "Upload path does not exist."
 msgstr "مسار مجلد الرفع غير موجود."
 
-#: includes/helpers.php:2597 includes/helpers.php:2646
+#: includes/helpers.php:2482 includes/helpers.php:2531
 msgid "Upload path is not writable."
 msgstr "مسار مجلد الرفع غير قابل للكتابة."
 
-#: includes/helpers.php:2800
+#: includes/helpers.php:2685
 msgid ""
 "The uploaded file exceeds the <code>upload_max_filesize</code> directive in "
 "php.ini."
 msgstr "الملف الذي تم رفعه يتجاوز <code>upload_max_filesize</code> في php.ini."
 
-#: includes/helpers.php:2806
+#: includes/helpers.php:2691
 msgid ""
 "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the "
 "HTML form."
 msgstr "الملف الذي تم رفعه يتجاوز <code>MAX_FILE_SIZE</code> في نموذج HTML."
 
-#: includes/helpers.php:2812
+#: includes/helpers.php:2697
 msgid "The uploaded file was only partially uploaded."
 msgstr "تم رفع الملف بشكل جزئي."
 
-#: includes/helpers.php:2818
+#: includes/helpers.php:2703
 msgid "Missing a temporary folder."
 msgstr "المجلد المؤقت غير موجود."
 
-#: includes/helpers.php:2828
+#: includes/helpers.php:2713
 msgid "File upload was stopped by a PHP extension."
 msgstr "تم إيقاف رفع الملف من قبل ملحق PHP."
 
-#: includes/helpers.php:2833
+#: includes/helpers.php:2718
 #, php-format
 msgid "File upload failed with error %d."
 msgstr "فشل رفع الملف مع خطأ %d."
 
-#: includes/helpers.php:2840
+#: includes/helpers.php:2725
 #, php-format
 msgid ""
 "The uploaded file exceeds the maximum size of %d Megabytes allowed by this "
@@ -1140,48 +1134,48 @@ msgid ""
 msgstr ""
 "الملف الذي رفعته يتجاوز الحد الأقصى (%d ميجابايت) المسموح به لهذا الموقع."
 
-#: includes/helpers.php:3193
+#: includes/helpers.php:3078
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr "خطأ ترميز JSON: %s"
 
-#: includes/helpers.php:3218
+#: includes/helpers.php:3103
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr "خطأ في فك الترميز JSON: %s"
 
-#: includes/helpers.php:3301
+#: includes/helpers.php:3186
 msgid "Failed to create Zip archive."
 msgstr "فشل إنشاء أرشيف مضغوط."
 
-#: includes/helpers.php:3403
+#: includes/helpers.php:3288
 #, php-format
 msgid "Activate your account at %s"
 msgstr "تفعيل حسابك في %s"
 
-#: includes/helpers.php:3404 includes/helpers.php:3439
+#: includes/helpers.php:3289 includes/helpers.php:3324
 #, php-format
 msgid "Hello, %s."
 msgstr "مرحباً، %s."
 
-#: includes/helpers.php:3407
+#: includes/helpers.php:3292
 msgid "You are receiving this message because you registered a new account."
 msgstr "لقد تلقيت هذه الرسالة لأنك سجلت حِساب جديد."
 
-#: includes/helpers.php:3410
+#: includes/helpers.php:3295
 msgid "Visit this link to activate your account:"
 msgstr "قم بزيارة هذا الرابط لتفعيل حسابك:"
 
-#: includes/helpers.php:3438
+#: includes/helpers.php:3323
 #, php-format
 msgid "Reset your password at %s"
 msgstr "إعادة تعيين كلمة مرورك في %s"
 
-#: includes/helpers.php:3442
+#: includes/helpers.php:3327
 msgid "You are receiving this message because you requested a new password."
 msgstr "لقد تلقيت هذه الرسالة لأنك طلبت كلمة مرور جديدة."
 
-#: includes/helpers.php:3445
+#: includes/helpers.php:3330
 msgid "Visit this link to reset your password:"
 msgstr "قم بزيارة هذا الرابط لإعادة تعيين كلمة مرورك:"
 
