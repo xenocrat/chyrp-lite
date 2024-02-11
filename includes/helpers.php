@@ -1894,6 +1894,8 @@
      *     $redirects - The maximum number of redirects to follow.
      *     $timeout - The maximum number of seconds to wait.
      *     $headers - Include response headers with the content?
+     *     $post - Set the request type to POST instead of GET?
+     *     $data - An array or urlencoded string of POST data.
      *
      * Returns:
      *     The response content, or false on failure.
@@ -1902,85 +1904,59 @@
         $url,
         $redirects = 0,
         $timeout = 10,
-        $headers = false
+        $headers = false,
+        $post = false,
+        $data = null
     ): string|false {
-        extract(parse_url(add_scheme($url)), EXTR_SKIP);
-        fallback($path, "/");
-        fallback($scheme, "http");
-        fallback($port, ($scheme == "https") ? 443 : 80);
+        $config = Config::current();
+        $url = add_scheme($url);
+        $host = parse_url($url, PHP_URL_HOST);
 
-        if (isset($query))
-            $path.= "?".$query;
-
-        if (!isset($host))
+        if ($host === false)
             return false;
 
         if (is_ip_address($host) and !GET_REMOTE_UNSAFE)
             return false;
 
-        if ($scheme == "https" and !extension_loaded("openssl"))
+        if (!function_exists("curl_version"))
             return false;
 
-        $prefix  = ($scheme == "https") ? "tls://" : "tcp://" ;
-        $connect = @fsockopen($prefix.$host, $port, $errno, $errstr, $timeout);
+        $curl = curl_init($url);
 
-        if (!$connect) {
-            trigger_error(
-                _f("Socket error: %s", fix($errstr, false, true)),
-                E_USER_NOTICE
-            );
-            return false;
-        }
-
-        $remote_headers = "";
-        $remote_content = "";
-
-        # Send the GET headers.
-        fwrite(
-            $connect,
-            "GET ".$path." HTTP/1.0\r\n".
-            "Host: ".$host."\r\n".
-            "Connection: close"."\r\n".
-            "User-Agent: ".CHYRP_IDENTITY."\r\n".
-            "From: ".Config::current()->email."\r\n".
-            "\r\n"
+        $opts = array(
+            CURLOPT_CAINFO => INCLUDES_DIR.DIR."cacert.pem",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_VERBOSE => false,
+            CURLOPT_FAILONERROR => false,
+            CURLOPT_HEADER => (bool) $headers,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_MAXREDIRS => (int) $redirects,
+            CURLOPT_TIMEOUT => (int) $timeout,
+            CURLOPT_USERAGENT => CHYRP_IDENTITY,
+            CURLOPT_HTTPHEADER => array(
+                "From: ".$config->email
+            )
         );
 
-        # Receive response headers.
-        while (!feof($connect) and strpos($remote_headers, "\r\n\r\n") === false)
-            $remote_headers.= fgets($connect);
-
-        # Search for 4XX or 5XX error codes.
-        if (preg_match("~^HTTP/[0-9]\.[0-9] [45][0-9]{2}~m", $remote_headers)) {
-            fclose($connect);
-            return false;
+        if ($post) {
+            $opts[CURLOPT_POST] = true;
+            $opts[CURLOPT_POSTFIELDS] = $data;
         }
 
-        # Search for redirect and recurse with new location unless redirects are exhausted.
-        if (preg_match("~^HTTP/[0-9]\.[0-9] 30[12378]~m", $remote_headers)) {
-            if ($redirects > 0) {
-                if (preg_match("~^Location:(.+)$~mi", $remote_headers, $matches)) {
-                    $location = trim($matches[1]);
-
-                    if (is_url($location)) {
-                        fclose($connect);
-                        return get_remote($location, $redirects - 1, $timeout, $headers);
-                    }
-                }
-            }
-
-            fclose($connect);
+        if (!@curl_setopt_array($curl, $opts))
             return false;
-        }
 
-        # Receive the response content.
-        while (!feof($connect))
-            $remote_content.= fgets($connect);
+        $response = @curl_exec($curl);
+        $errornum = curl_errno($curl);
+        $errormsg = curl_error($curl);
+        $type = $post ? "POST" : "GET" ;
+        $result = oneof($errormsg, "OK");
+        curl_close($curl);
 
-        fclose($connect);
-        return ($headers) ?
-            $remote_headers.$remote_content :
-            $remote_content ;
+        if (DEBUG)
+            error_log($type." ".$url." (".$result.")");
+
+        return $errornum ? false : $response ;
     }
 
     /**
@@ -1998,18 +1974,6 @@
             if (timer_stop() > $limit)
                 break;
 
-            # Reset URL variables for each iteration.
-            unset(
-                $scheme,
-                $host,
-                $port,
-                $user,
-                $pass,
-                $path,
-                $query,
-                $fragment
-            );
-
             $endpoint = webmention_discover(unfix($url, true));
 
             if ($endpoint === false)
@@ -2018,52 +1982,19 @@
             if (DEBUG)
                 error_log("WEBMENTION @ ".$endpoint." (".$url.")");
 
-            extract(parse_url(add_scheme($endpoint)), EXTR_SKIP);
-            fallback($path, "/");
-            fallback($scheme, "http");
-            fallback($port, ($scheme == "https") ? 443 : 80);
-
-            if (isset($query))
-                $path.= "?".$query;
-
-            if (!isset($host))
-                continue;
-
-            if (is_ip_address($host) and !GET_REMOTE_UNSAFE)
-                continue;
-
-            if ($scheme == "https" and !extension_loaded("openssl"))
-                continue;
-
-            $prefix  = ($scheme == "https") ? "tls://" : "tcp://" ;
-            $connect = @fsockopen($prefix.$host, $port, $errno, $errstr, 3);
-
-            if (!$connect) {
-                trigger_error(
-                    _f("Socket error: %s", fix($errstr, false, true)),
-                    E_USER_NOTICE
-                );
-                continue;
-            }
-
-            $wm_array = array("source" => unfix($post->url()), "target" => $url);
-            $wm_query = http_build_query($wm_array);
-
-            # Send the Webmention.
-            fwrite(
-                $connect,
-                "POST ".$path." HTTP/1.0\r\n".
-                "Host: ".$host."\r\n".
-                "Content-Type: application/x-www-form-urlencoded\r\n".
-                "Content-Length: ".strlen($wm_query)."\r\n".
-                "Connection: close"."\r\n".
-                "User-Agent: ".CHYRP_IDENTITY."\r\n".
-                "From: ".Config::current()->email."\r\n".
-                "\r\n"
+            $wm_array = array(
+                "source" => unfix($post->url()),
+                "target" => $url
             );
 
-            fwrite($connect, $wm_query);
-            fclose($connect);
+            $wm_query = http_build_query($wm_array);
+
+            get_remote(
+                url:$endpoint,
+                timeout:3,
+                post:true,
+                data:$wm_query
+            );
         }
     }
 
@@ -2101,7 +2032,9 @@
             );
 
         if (DEBUG)
-            error_log("WEBMENTION received; source:".$source." target:".$target);
+            error_log(
+                "WEBMENTION received; source:".$source." target:".$target
+            );
 
         $source_url = add_scheme(unfix($source, true));
         $target_url = add_scheme(unfix($target, true));
@@ -2154,102 +2087,46 @@
      *     The Webmention endpoint URL, or false on failure.
      */
     function webmention_discover($url, $redirects = 3): string|false {
-        extract(parse_url(add_scheme($url)), EXTR_SKIP);
-        fallback($path, "/");
-        fallback($scheme, "http");
-        fallback($port, ($scheme == "https") ? 443 : 80);
-
-        if (isset($query))
-            $path.= "?".$query;
-
-        if (!isset($host))
-            return false;
-
-        if (is_ip_address($host) and !GET_REMOTE_UNSAFE)
-            return false;
-
-        if ($scheme == "https" and !extension_loaded("openssl"))
-            return false;
-
-        $prefix  = ($scheme == "https") ? "tls://" : "tcp://" ;
-        $connect = @fsockopen($prefix.$host, $port, $errno, $errstr, 3);
-
-        if (!$connect) {
-            trigger_error(
-                _f("Socket error: %s", fix($errstr, false, true)),
-                E_USER_NOTICE
-            );
-            return false;
-        }
-
-        $remote_headers = "";
-        $remote_content = "";
-
-        # Send the GET headers.
-        fwrite(
-            $connect,
-            "GET ".$path." HTTP/1.0\r\n".
-            "Host: ".$host."\r\n".
-            "Connection: close"."\r\n".
-            "User-Agent: ".CHYRP_IDENTITY."\r\n".
-            "From: ".Config::current()->email."\r\n".
-            "\r\n"
+        $response = get_remote(
+            url:$url,
+            redirects:$redirects,
+            timeout:3,
+            headers:true
         );
 
-        # Check for Link header containing the endpoint.
-        while (!feof($connect) and strpos($remote_headers, "\r\n\r\n") === false) {
-            $line = fgets($connect);
-            $remote_headers.= $line;
-
-            if (preg_match("/^Link: *<(.+)> *; *rel=\"webmention\"/i", $line, $header)) {
-                fclose($connect);
-
-                $endpoint = trim($header[1]);
-
-                # Absolute URL?
-                if (is_url($endpoint))
-                    return $endpoint;
-
-                # Relative URL?
-                return merge_urls($url, $endpoint);
-            }
-        }
-
-        # Search for redirect and recurse with new location unless redirects are exhausted.
-        if (preg_match("~^HTTP/[0-9]\.[0-9] 30[12378]~m", $remote_headers)) {
-            if ($redirects > 0) {
-                if (preg_match("~^Location:(.+)$~mi", $remote_headers, $matches)) {
-                    $location = trim($matches[1]);
-
-                    if (is_url($location)) {
-                        fclose($connect);
-                        return webmention_discover($location, $redirects - 1);
-                    }
-                }
-            }
-
-            fclose($connect);
+        if ($response === false)
             return false;
+
+        $parts = explode("\r\n\r\n", $response, 2);
+
+        if (count($parts) > 2)
+            return false;
+
+        $headers = $parts[0];
+        $content = $parts[1];
+
+        if (preg_match("/^Link: *<(.+)> *; *rel=\"webmention\"/im", $headers, $match)) {
+            $endpoint = trim($match[1]);
+
+            # Absolute URL?
+            if (is_url($endpoint))
+                return $endpoint;
+
+            # Relative URL?
+            return merge_urls($url, $endpoint);
         }
 
         # Check if the content is UTF-8 encoded text/html before continuing.
-        if (!preg_match("~^Content-Type: *text/html *; *charset=UTF-8~im", $remote_headers)) {
-            fclose($connect);
+        if (!preg_match("~^Content-Type: *text/html *; *charset=UTF-8~im", $headers))
             return false;
-        }
-
-        # Receive the response content.
-        while (!feof($connect))
-            $remote_content.= fgets($connect);
 
         # Check for <link> element containing the endpoint.
-        if (preg_match_all("/<link [^>]+>/i", $remote_content, $links, PREG_PATTERN_ORDER)) {
+        if (preg_match_all("/<link [^>]+>/i", $content, $links, PREG_PATTERN_ORDER)) {
             foreach ($links[0] as $link) {
                 if (!preg_match("/ rel=(\"webmention\"|\'webmention\')/i", $link))
                     continue;
 
                 if (preg_match("/ href=(\"[^\"]+\"|\'[^\']+\')/i", $link, $href)) {
-                    fclose($connect);
                     $endpoint = unfix(trim($href[1], "\"'"));
 
                     # Absolute URL?
@@ -2263,13 +2140,12 @@
         }
 
         # Check for <a> element containing the endpoint.
-        if (preg_match_all("/<a [^>]+>/i", $remote_content, $anchors, PREG_PATTERN_ORDER)) {
+        if (preg_match_all("/<a [^>]+>/i", $content, $anchors, PREG_PATTERN_ORDER)) {
             foreach ($anchors[0] as $anchor) {
                 if (!preg_match("/ rel=(\"webmention\"|\'webmention\')/i", $anchor))
                     continue;
 
                 if (preg_match("/ href=(\"[^\"]+\"|\'[^\']+\')/i", $anchor, $href)) {
-                    fclose($connect);
                     $endpoint = unfix(trim($href[1], "\"'"));
 
                     # Absolute URL?
@@ -2282,7 +2158,6 @@
             }
         }
 
-        fclose($connect);
         return false;
     }
 
@@ -2347,7 +2222,9 @@
         else
             $path.= $rel;
 
-        return $scheme."://".$host.(isset($port) ? ":".$port : "").$path;
+        return $scheme."://".$host.
+               (isset($port) ? ":".$port : "").
+               $path;
     }
 
     #---------------------------------------------
