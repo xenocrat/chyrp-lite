@@ -188,6 +188,7 @@
          */
         public function admin_write_post(): void {
             $visitor = Visitor::current();
+            $config = Config::current();
             $trigger = Trigger::current();
 
             if (!Visitor::current()->group->can("add_post", "add_draft"))
@@ -196,32 +197,33 @@
                     __("You do not have sufficient privileges to add posts.")
                 );
 
-            $feathers = Config::current()->enabled_feathers;
+            $enabled_feathers = $config->enabled_feathers;
 
-            if (empty($feathers))
+            if (empty($enabled_feathers))
                 Flash::notice(
                     __("You must enable at least one feather in order to write a post."),
                     "feathers"
                 );
 
             if (!isset($_SESSION['latest_feather']))
-                $_SESSION['latest_feather'] = reset($feathers);
+                $_SESSION['latest_feather'] = reset($enabled_feathers);
 
             if (!feather_enabled($_SESSION['latest_feather']))
-                $_SESSION['latest_feather'] = reset($feathers);
+                $_SESSION['latest_feather'] = reset($enabled_feathers);
 
-            fallback($_GET['feather'], $_SESSION['latest_feather']);
+            $feather = fallback($_GET['feather'], $_SESSION['latest_feather']);
 
-            if (!feather_enabled($_GET['feather']))
+            if (!feather_enabled($feather))
                 show_404(
                     __("Not Found"),
                     __("Feather not found.")
                 );
 
-            $_SESSION['latest_feather'] = $_GET['feather'];
+            $_SESSION['latest_feather'] = $feather;
 
             $options = array();
-            $trigger->filter($options, array("write_post_options", "post_options"), null, $_GET['feather']);
+            $trigger->filter($options, "write_post_options", null, $feather);
+            $trigger->filter($options, "post_options", null, $feather);
 
             $this->display(
                 "pages".DIR."write_post",
@@ -229,7 +231,7 @@
                     "groups" => Group::find(array("order" => "id ASC")),
                     "options" => $options,
                     "feathers" => Feathers::$instances,
-                    "feather" => Feathers::$instances[$_GET['feather']]
+                    "feather" => Feathers::$instances[$feather]
                 )
             );
         }
@@ -313,7 +315,8 @@
                 $_SESSION['post_redirect'] = $_SESSION['redirect_to'];
 
             $options = array();
-            $trigger->filter($options, array("edit_post_options", "post_options"), $post, $post->feather);
+            $trigger->filter($options, "edit_post_options", $post, $post->feather);
+            $trigger->filter($options, "post_options", $post, $post->feather);
 
             $this->display(
                 "pages".DIR."edit_post",
