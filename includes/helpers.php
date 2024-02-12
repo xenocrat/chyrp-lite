@@ -2107,7 +2107,7 @@
 
         $parts = explode("\r\n\r\n", $response, 2);
 
-        if (count($parts) > 2)
+        if (count($parts) < 2)
             return false;
 
         $headers = $parts[0];
