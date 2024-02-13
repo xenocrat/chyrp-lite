@@ -248,13 +248,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 1992
+	includes/controller/Admin.php on line 1995
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2419
+	includes/controller/Admin.php on line 2422
 
 Arguments:
 	$group
@@ -263,7 +263,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2457
+	includes/controller/Admin.php on line 2460
 
 Arguments:
 	$user
@@ -272,7 +272,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2503
+	includes/controller/Admin.php on line 2506
 
 Arguments:
 	$entry
@@ -282,7 +282,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2539
+	includes/controller/Admin.php on line 2542
 
 Arguments:
 	$entry
@@ -292,7 +292,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 2543
+	includes/controller/Admin.php on line 2546
 
 Arguments:
 	$imports
@@ -301,13 +301,13 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 2937
+	includes/controller/Admin.php on line 2940
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 2952
+	includes/controller/Admin.php on line 2955
 
 
 can_not_view_page
@@ -925,34 +925,34 @@ Target:
 write_post_options
 ------------------
 Called from:
-	includes/controller/Admin.php on line 224
+	includes/controller/Admin.php on line 225
 
 Target:
 	$options
 
 Arguments:
 	null
-	$_GET['feather']
+	$feather
 
 
 post_options
 ------------
 Called from:
-	includes/controller/Admin.php on line 224
-	includes/controller/Admin.php on line 316
+	includes/controller/Admin.php on line 226
+	includes/controller/Admin.php on line 319
 
 Target:
 	$options
 
 Arguments:
 	null
-	$_GET['feather']
+	$feather
 
 
 edit_post_options
 -----------------
 Called from:
-	includes/controller/Admin.php on line 316
+	includes/controller/Admin.php on line 318
 
 Target:
 	$options
@@ -965,7 +965,7 @@ Arguments:
 posts_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 2104
+	includes/controller/Admin.php on line 2107
 
 Target:
 	$posts_atom
@@ -977,7 +977,7 @@ Arguments:
 pages_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 2203
+	includes/controller/Admin.php on line 2206
 
 Target:
 	$pages_atom
@@ -989,7 +989,7 @@ Arguments:
 export
 ------
 Called from:
-	includes/controller/Admin.php on line 2289
+	includes/controller/Admin.php on line 2292
 
 Target:
 	$exports
@@ -998,7 +998,7 @@ Target:
 before_import
 -------------
 Called from:
-	includes/controller/Admin.php on line 2400
+	includes/controller/Admin.php on line 2403
 
 Target:
 	$imports
@@ -1007,7 +1007,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 3385
+	includes/controller/Admin.php on line 3388
 
 Target:
 	$write
@@ -1016,7 +1016,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3448
+	includes/controller/Admin.php on line 3451
 
 Target:
 	$manage
@@ -1025,7 +1025,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 3478
+	includes/controller/Admin.php on line 3481
 
 Target:
 	$settings
@@ -1034,7 +1034,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3501
+	includes/controller/Admin.php on line 3504
 
 Target:
 	$extend
@@ -1043,7 +1043,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 3589
+	includes/controller/Admin.php on line 3592
 
 Target:
 	$this->context
