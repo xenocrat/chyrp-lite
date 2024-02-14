@@ -428,8 +428,8 @@
             input[type="number"].error:focus,
             input[type="password"].error:focus,
             textarea.error:focus {
-                border: 1px solid #d51800;
-                outline-color: #d51800;
+                border: 1px solid #c11600;
+                outline-color: #c11600;
             }
             input[type="password"].strong {
                 background-color: #ebfae4;
@@ -536,7 +536,7 @@
                 padding: 0.5rem 1rem;
                 border: 1px solid #e5d7a1;
                 border-radius: 0.25em;
-                background-color: #fffecd;
+                background-color: #fffde6;
             }
             .window {
                 width: 30rem;
