@@ -112,10 +112,14 @@ ol {
     --cl-col-border-red: #d6bdb5;
     --cl-col-border-green: #bdd6b5;
     --cl-col-border-blue: #b8cdd9;
-    --cl-col-pastel-yellow: #fffde6;
-    --cl-col-pastel-red: #faebe4;
-    --cl-col-pastel-green: #ebfae4;
-    --cl-col-pastel-blue: #f2fbff;
+    --cl-col-pastel-soft-yellow: #fffde6;
+    --cl-col-pastel-hard-yellow: #fffbcc;
+    --cl-col-pastel-soft-red: #faebe4;
+    --cl-col-pastel-hard-red: #fcddcf;
+    --cl-col-pastel-soft-green: #ebfae4;
+    --cl-col-pastel-hard-green: #daf1d0;
+    --cl-col-pastel-soft-blue: #f2fbff;
+    --cl-col-pastel-hard-blue: #e1f2fa;
 }
 *::selection {
     color: #1f1f23;
