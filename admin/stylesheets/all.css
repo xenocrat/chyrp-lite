@@ -92,7 +92,30 @@ ol {
 /* Group: Core */
 
 :root {
-  color-scheme: light dark;
+    color-scheme: light dark;
+    --cl-col-pure-white: #ffffff;
+    --cl-col-pure-black: #000000;
+    --cl-col-inky-black: #1f1f23;
+    --cl-col-pencil-hard: #fbfbfb;
+    --cl-col-pencil-e: #efefef;
+    --cl-col-pencil-d: #dfdfdf;
+    --cl-col-pencil-c: #cfcfcf;
+    --cl-col-pencil-b: #bfbfbf;
+    --cl-col-pencil-a: #afafaf;
+    --cl-col-pencil-soft: #656565;
+    --cl-col-strong-yellow: #ffdd00;
+    --cl-col-strong-orange: #ff7f00;
+    --cl-col-strong-red: #c11600;
+    --cl-col-strong-green: #108600;
+    --cl-col-strong-blue: #1e57ba;
+    --cl-col-border-yellow: #e5d7a1;
+    --cl-col-border-red: #d6bdb5;
+    --cl-col-border-green: #bdd6b5;
+    --cl-col-border-blue: #b8cdd9;
+    --cl-col-pastel-yellow: #fffde6;
+    --cl-col-pastel-red: #faebe4;
+    --cl-col-pastel-green: #ebfae4;
+    --cl-col-pastel-blue: #f2fbff;
 }
 *::selection {
     color: #1f1f23;
@@ -322,7 +345,7 @@ aside {
     padding: 0.5rem 1rem;
     border: 1px solid #e5d7a1;
     border-radius: 0.25em;
-    background-color: #fffecd;
+    background-color: #fffde6;
 }
 pre {
     font-family: "Cousine webfont", monospace;
@@ -573,8 +596,8 @@ input[type="number"].error:focus,
 input[type="range"].error:focus,
 input[type="password"].error:focus,
 input[type="file"].error:focus {
-    border: 1px solid #d51800;
-    outline-color: #d51800;
+    border: 1px solid #c11600;
+    outline-color: #c11600;
 }
 input[type="password"].strong {
     background-color: #ebfae4;
@@ -717,7 +740,7 @@ table tbody tr.private td.status {
     background-color: #faebe4;
 }
 table tbody tr.registered_only td.status {
-    background-color: #fffceb;
+    background-color: #fffde6;
 }
 table tbody tr.public td.status {
     background-color: #ebfae4;
@@ -926,7 +949,7 @@ span.options_extra {
     width: 100%;
     max-height: 10rem;
     padding: 1rem;
-    background-color: #fffceb;
+    background-color: #fffde6;
     border: 1px solid #cfcfcf;
     border-top: none;
     overflow-y: auto;
@@ -986,7 +1009,7 @@ span.options_tray:empty {
     border-color: #1e57ba;
 }
 table.interactive + div.controls {
-    background-color: #fffceb;
+    background-color: #fffde6;
     padding: 1rem;
     border: 1px solid #cfcfcf;
     border-top: none;
@@ -1058,7 +1081,7 @@ input.toolbar.hidden {
     visibility: hidden !important;
 }
 .drag_highlight {
-    background-color: #fffceb;
+    background-color: #fffde6;
 }
 
 /* Group: iFrames */
