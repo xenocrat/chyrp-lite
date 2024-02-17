@@ -96,12 +96,12 @@ ol {
     --chyrp-pure-white: #ffffff;
     --chyrp-pure-black: #000000;
     --chyrp-inky-black: #1f1f23;
-    --chyrp-grey-fb: #fbfbfb;
-    --chyrp-grey-ef: #efefef;
-    --chyrp-grey-df: #dfdfdf;
-    --chyrp-grey-cf: #cfcfcf;
-    --chyrp-grey-af: #afafaf;
-    --chyrp-grey-65: #656565;
+    --chyrp-summer-grey: #fbfbfb;
+    --chyrp-english-grey: #efefef;
+    --chyrp-welsh-grey: #dfdfdf;
+    --chyrp-irish-grey: #cfcfcf;
+    --chyrp-scottish-grey: #afafaf;
+    --chyrp-winter-grey: #656565;
     --chyrp-strong-yellow: #ffdd00;
     --chyrp-strong-orange: #ff7f00;
     --chyrp-strong-red: #c11600;
