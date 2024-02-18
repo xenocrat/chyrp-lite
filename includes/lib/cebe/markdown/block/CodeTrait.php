@@ -27,22 +27,25 @@ trait CodeTrait
 	protected function consumeCode($lines, $current)
 	{
 		// consume until newline
-
 		$content = [];
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
-
-			// a line is considered to belong to this code block as long as it is intended by 4 spaces or a tab
+			// a line is belongs to this code block if it is indented by 4 spaces or a tab
 			if (isset($line[0]) && ($line[0] === "\t" || strncmp($line, '    ', 4) === 0)) {
 				$line = $line[0] === "\t" ? substr($line, 1) : substr($line, 4);
 				$content[] = $line;
-			// but also if it is empty and the next line is intended by 4 spaces or a tab
-			} elseif (($line === '' || rtrim($line) === '') && isset($lines[$i + 1][0]) &&
-				      ($lines[$i + 1][0] === "\t" || strncmp($lines[$i + 1], '    ', 4) === 0)) {
-				if ($line !== '') {
-					$line = $line[0] === "\t" ? substr($line, 1) : substr($line, 4);
+			// or if blank and the next is also blank or indented by 4 spaces or a tab
+			} elseif (($line === '' || rtrim($line) === '') && isset($lines[$i + 1])) {
+				if ($lines[$i + 1] === '' || rtrim($lines[$i + 1]) === '') {
+					if (isset($line[0]) && ($line[0] === "\t" || strncmp($line, '    ', 4) === 0)) {
+						$line = $line[0] === "\t" ? substr($line, 1) : substr($line, 4);
+					} else {
+						$line = '';
+					}
+					$content[] = $line;
+				} else {
+					break;
 				}
-				$content[] = $line;
 			} else {
 				break;
 			}
