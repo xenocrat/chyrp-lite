@@ -40,22 +40,22 @@ trait HtmlTrait
 	protected function identifyHtml($line, $lines, $current)
 	{
 		if ($line[0] !== '<' || isset($line[1]) && $line[1] == ' ') {
-			return false; // no html tag
+			return false; // no tag
 		}
 		if (strncmp($line, '<script', 7) === 0) {
-			return true; // type 1: script block
+			return true; // type 1: script
 		}
 		if (strncmp($line, '<pre', 4) === 0) {
-			return true; // type 1: pre block
+			return true; // type 1: pre
 		}
 		if (strncmp($line, '<style', 6) === 0) {
-			return true; // type 1: style block
+			return true; // type 1: style
 		}
 		if (strncmp($line, '<!--', 4) === 0) {
-			return true; // type 2: html comment
+			return true; // type 2: comment
 		}
 		if (strncmp($line, '<?', 2) === 0) {
-			return true; // type 3: pre-processor
+			return true; // type 3: processor
 		}
 		if (strncmp($line, '<!', 2) === 0 && ctype_alpha(substr($line, 2, 1))) {
 			return true; // type 4: declaration
@@ -89,7 +89,7 @@ trait HtmlTrait
 				}
 			}
 		} elseif (strncmp($lines[$current], '<pre', 4) === 0) {
-			// type 1: style
+			// type 1: pre
 			for ($i = $current, $count = count($lines); $i < $count; $i++) {
 				$line = $lines[$i];
 				$content[] = $line;
@@ -107,7 +107,7 @@ trait HtmlTrait
 				}
 			}
 		} elseif (strncmp($lines[$current], '<!--', 4) === 0) {
-			// type 2: html comment
+			// type 2: comment
 			for ($i = $current, $count = count($lines); $i < $count; $i++) {
 				$line = $lines[$i];
 				$content[] = $line;
@@ -116,7 +116,7 @@ trait HtmlTrait
 				}
 			}
 		} elseif (strncmp($lines[$current], '<?', 2) === 0) {
-			// type 3: pre-processor
+			// type 3: processor
 			for ($i = $current, $count = count($lines); $i < $count; $i++) {
 				$line = $lines[$i];
 				$content[] = $line;
