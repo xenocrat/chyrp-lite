@@ -30,13 +30,17 @@ trait CodeTrait
 		$content = [];
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
-			// a line is belongs to this code block if it is indented by 4 spaces or a tab
+			// a line belongs to this code block if it is indented by 4 spaces or a tab
 			if (isset($line[0]) && ($line[0] === "\t" || strncmp($line, '    ', 4) === 0)) {
 				$line = $line[0] === "\t" ? substr($line, 1) : substr($line, 4);
 				$content[] = $line;
-			// or if blank and the next is also blank or indented by 4 spaces or a tab
+			// ...or if blank and the next is also blank or indented by 4 spaces or a tab
 			} elseif (($line === '' || rtrim($line) === '') && isset($lines[$i + 1])) {
-				if ($lines[$i + 1] === '' || rtrim($lines[$i + 1]) === '') {
+				$next = $lines[$i + 1];
+				if ($next === ''
+					|| rtrim($next) === ''
+					|| $next[0] === "\t"
+					|| strncmp($next, '    ', 4) === 0) {
 					if (isset($line[0]) && ($line[0] === "\t" || strncmp($line, '    ', 4) === 0)) {
 						$line = $line[0] === "\t" ? substr($line, 1) : substr($line, 4);
 					} else {
