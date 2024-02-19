@@ -13,7 +13,7 @@ namespace cebe\markdown\block;
 trait HtmlTrait
 {
 	/**
-	 * @var array HTML elements considered as inline elements.
+	 * @var array HTML elements defined in CommonMark spec
 	 * @see https://spec.commonmark.org/0.31.2/#html-blocks
 	 */
 	protected $type6HtmlElements = [
