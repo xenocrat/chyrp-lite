@@ -67,7 +67,8 @@ trait HtmlTrait
 		if (preg_match("/^<\/?($patterns)(\s|>|\/>|$)/i", $line)) {
 			return true; // type 6
 		}
-		if (preg_match("/^<\/?[a-z][^>]*>(\s)*$/i", $line)) {
+		if (preg_match("/^<\/?[a-z][^>]*>(\s)*$/i", $line)
+			&& (!isset($lines[ $current - 1]) || ltrim($lines[ $current - 1]) === '')) {
 			return true; // type 7
 		}
 		return false;
