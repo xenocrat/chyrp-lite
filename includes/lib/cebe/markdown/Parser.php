@@ -53,12 +53,13 @@ abstract class Parser
 			return '';
 		}
 
-		$text = str_replace(["\r\n", "\n\r", "\r"], "\n", $text);
+		$text = $this->preprocess($text);
 
 		$this->prepareMarkers($text);
 
 		$absy = $this->parseBlocks(explode("\n", $text));
 		$markup = $this->renderAbsy($absy);
+		$markup = $this->postprocess($markup);
 
 		$this->cleanup();
 		return $markup;
@@ -78,14 +79,37 @@ abstract class Parser
 			return '';
 		}
 
-		$text = str_replace(["\r\n", "\n\r", "\r"], "\n", $text);
+		$text = $this->preprocess($text);
 
 		$this->prepareMarkers($text);
 
 		$absy = $this->parseInline($text);
 		$markup = $this->renderAbsy($absy);
+		$markup = $this->postprocess($markup);
 
 		$this->cleanup();
+		return $markup;
+	}
+
+	/**
+	 * Pre-processes text before parsing.
+	 *
+	 * @param string $text the text to parse
+	 * @return string pre-processed text
+	 */
+	protected function preprocess($text) {
+		$text = str_replace(["\r\n", "\n\r", "\r"], "\n", $text);
+		return $text;
+	}
+
+	/**
+	 * Post-processes markup after parsing.
+	 *
+	 * @param string $markup parsed markup
+	 * @return string post-processed markup
+	 */
+	protected function postprocess($markup) {
+		$markup = str_replace("\0", "&#xFFFD;", $markup);
 		return $markup;
 	}
 
