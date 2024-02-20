@@ -24,7 +24,7 @@ trait ListTrait
 	 */
 	protected function identifyOl($line)
 	{
-		return (($l = $line[0]) > '0' && $l <= '9' || $l === ' ') && preg_match('/^ {0,3}\d+\.[ \t]/', $line);
+		return preg_match('/^ {0,3}\d+\.[ \t]/', $line);
 	}
 
 	/**
@@ -32,9 +32,7 @@ trait ListTrait
 	 */
 	protected function identifyUl($line)
 	{
-		$l = $line[0];
-		return ($l === '-' || $l === '+' || $l === '*') && (isset($line[1]) && (($l1 = $line[1]) === ' ' || $l1 === "\t")) ||
-		       ($l === ' ' && preg_match('/^ {0,3}[\-\+\*][ \t]/', $line));
+		return preg_match('/^ {0,3}[\-\+\*][ \t]/', $line);
 	}
 
 	/**
@@ -81,7 +79,9 @@ trait ListTrait
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
 			// match list marker on the beginning of the line
-			$pattern = ($type === 'ol') ? '/^( {0,'.$leadSpace.'})(\d+)\.[ \t]+/' : '/^( {0,'.$leadSpace.'})\\'.$marker.'[ \t]+/';
+			$pattern = ($type === 'ol') ?
+				'/^( {0,'.$leadSpace.'})(\d+)\.[ \t]+/' :
+				'/^( {0,'.$leadSpace.'})\\'.$marker.'[ \t]+/';
 			if (preg_match($pattern, $line, $matches)) {
 				if (($len = substr_count($matches[0], "\t")) > 0) {
 					$indent = str_repeat("\t", $len);
@@ -119,10 +119,15 @@ trait ListTrait
 					$block['lazyItems'][$item] = true;
 
 				// next item is indented as much as this list -> lazy list if it is not a reference
-				} elseif (strncmp($lines[$i + 1], $indent, $len) === 0 || !empty($lines[$i + 1]) && $lines[$i + 1][0] == "\t") {
+				} elseif (strncmp($lines[$i + 1], $indent, $len) === 0 ||
+					!empty($lines[$i + 1]) && $lines[$i + 1][0] == "\t") {
 					$block['items'][$item][] = $line;
-					$nextLine = $lines[$i + 1][0] === "\t" ? substr($lines[$i + 1], 1) : substr($lines[$i + 1], $len);
-					$block['lazyItems'][$item] = empty($nextLine) || !method_exists($this, 'identifyReference') || !$this->identifyReference($nextLine);
+					$nextLine = $lines[$i + 1][0] === "\t" ?
+						substr($lines[$i + 1], 1) :
+						substr($lines[$i + 1], $len);
+					$block['lazyItems'][$item] = empty($nextLine) ||
+					!method_exists($this, 'identifyReference') ||
+					!$this->identifyReference($nextLine);
 
 				// everything else ends the list
 				} else {
@@ -139,7 +144,9 @@ trait ListTrait
 			}
 
 			// if next line is <hr>, end the list
-			if (!empty($lines[$i + 1]) && method_exists($this, 'identifyHr') && $this->identifyHr($lines[$i + 1])) {
+			if (!empty($lines[$i + 1])
+				&& method_exists($this, 'identifyHr')
+				&& $this->identifyHr($lines[$i + 1])) {
 				break;
 			}
 		}
@@ -148,7 +155,9 @@ trait ListTrait
 			$content = [];
 			if (!$block['lazyItems'][$itemId]) {
 				$firstPar = [];
-				while (!empty($itemLines) && rtrim($itemLines[0]) !== '' && $this->detectLineType($itemLines, 0) === 'paragraph') {
+				while (!empty($itemLines)
+					&& rtrim($itemLines[0]) !== ''
+					&& $this->detectLineType($itemLines, 0) === 'paragraph') {
 					$firstPar[] = array_shift($itemLines);
 				}
 				$content = $this->parseInline(implode("\n", $firstPar));
