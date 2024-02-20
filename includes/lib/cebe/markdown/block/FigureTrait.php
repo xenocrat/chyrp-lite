@@ -17,10 +17,9 @@ trait FigureTrait
 	 */
 	protected function identifyFigure($line)
 	{
-		return $line[0] === ':' &&
-			(!isset($line[1]) || ($l1 = $line[1]) === ' ' || $l1 === "\t" ||
-				($l1 === ":" && (!isset($line[2]) || ($l2 = $line[2]) === ' ' || $l2 === "\t"))
-			);
+		return $line[0] === ':'
+			&& (!isset($line[1]) || ($l1 = $line[1]) === ' ' || $l1 === "\t" ||
+				($l1 === ":" && (!isset($line[2]) || ($l2 = $line[2]) === ' ' || $l2 === "\t")));
 	}
 
 	/**
@@ -45,6 +44,9 @@ trait FigureTrait
 						$caption[$i] = $line;
 						continue;
 					}
+				} else {
+					--$i;
+					break;
 				}
 				$content[] = $line;
 			} else {

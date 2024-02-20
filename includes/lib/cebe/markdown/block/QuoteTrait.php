@@ -34,6 +34,9 @@ trait QuoteTrait
 					$line = '';
 				} elseif (strncmp($line, '> ', 2) === 0) {
 					$line = substr($line, 2);
+				} else {
+					--$i;
+					break;
 				}
 				$content[] = $line;
 			} else {
