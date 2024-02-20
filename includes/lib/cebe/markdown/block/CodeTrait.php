@@ -18,7 +18,7 @@ trait CodeTrait
 	protected function identifyCode($line)
 	{
 		// indentation >= 4 or one tab is code
-		return ($l = $line[0]) === ' ' && $line[1] === ' ' && $line[2] === ' ' && $line[3] === ' ' || $l === "\t";
+		return $line[0] === "\t" || strncmp($line, '    ', 4) === 0;
 	}
 
 	/**
@@ -37,10 +37,10 @@ trait CodeTrait
 			// ...or if blank and the next is also blank or indented by 4 spaces or a tab
 			} elseif (($line === '' || rtrim($line) === '') && isset($lines[$i + 1])) {
 				$next = $lines[$i + 1];
-				if ($next === ''
-					|| rtrim($next) === ''
-					|| $next[0] === "\t"
-					|| strncmp($next, '    ', 4) === 0) {
+				if ($next === '' ||
+					rtrim($next) === '' ||
+					$next[0] === "\t" ||
+					strncmp($next, '    ', 4) === 0) {
 					if (isset($line[0]) && ($line[0] === "\t" || strncmp($line, '    ', 4) === 0)) {
 						$line = $line[0] === "\t" ? substr($line, 1) : substr($line, 4);
 					} else {
@@ -68,6 +68,8 @@ trait CodeTrait
 	protected function renderCode($block)
 	{
 		$class = isset($block['language']) ? ' class="language-' . $block['language'] . '"' : '';
-		return "<pre><code$class>" . htmlspecialchars($block['content'] . "\n", ENT_NOQUOTES | ENT_SUBSTITUTE, 'UTF-8') . "</code></pre>\n";
+		return "<pre><code$class>"
+			. htmlspecialchars($block['content'] . "\n", ENT_NOQUOTES | ENT_SUBSTITUTE, 'UTF-8')
+			. "</code></pre>\n";
 	}
 }

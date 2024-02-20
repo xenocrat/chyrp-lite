@@ -68,7 +68,8 @@ trait TableTrait
 			if ($line[0] === '|') {
 				$line = substr($line, 1);
 			}
-			if (substr($line, -1, 1) === '|' && (substr($line, -2, 2) !== '\\|' || substr($line, -3, 3) === '\\\\|')) {
+			if (substr($line, -1, 1) === '|'
+				&& (substr($line, -2, 2) !== '\\|' || substr($line, -3, 3) === '\\\\|')) {
 				$line = substr($line, 0, -1);
 			}
 

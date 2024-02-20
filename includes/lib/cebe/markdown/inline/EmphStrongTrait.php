@@ -39,8 +39,10 @@ trait EmphStrongTrait
 				return [['text', $text[0] . $text[1]], 2];
 			}
 
-			if ($marker === '*' && preg_match('/^[*]{2}((?>\\\\[*]|[^*]|[*][^*]*[*])+?)[*]{2}/s', $text, $matches) ||
-				$marker === '_' && preg_match('/^__((?>\\\\_|[^_]|_[^_]*_)+?)__/us', $text, $matches)) {
+			if ($marker === '*'
+				&& preg_match('/^[*]{2}((?>\\\\[*]|[^*]|[*][^*]*[*])+?)[*]{2}/s', $text, $matches) ||
+				$marker === '_'
+				&& preg_match('/^__((?>\\\\_|[^_]|_[^_]*_)+?)__/us', $text, $matches)) {
 
 				return [
 					[
@@ -59,8 +61,10 @@ trait EmphStrongTrait
 				return [['text', $text[0]], 1];
 			}
 
-			if ($marker === '*' && preg_match('/^[*]((?>\\\\[*]|[^*]|[*][*][^*]+?[*][*])+?)[*](?![*][^*])/s', $text, $matches) ||
-				$marker === '_' && preg_match('/^_((?>\\\\_|[^_]|__[^_]*__)+?)_(?!_[^_])\b/us', $text, $matches)) {
+			if ($marker === '*'
+				&& preg_match('/^[*]((?>\\\\[*]|[^*]|[*][*][^*]+?[*][*])+?)[*](?![*][^*])/s', $text, $matches) ||
+				$marker === '_'
+				&& preg_match('/^_((?>\\\\_|[^_]|__[^_]*__)+?)_(?!_[^_])\b/us', $text, $matches)) {
 				// if only a single whitespace or nothing is contained in an emphasis, do not consider it valid
 				if ($matches[1] === '' || $matches[1] === ' ') {
 					return [['text', $text[0]], 1];

@@ -19,12 +19,11 @@ trait HeadlineTrait
 	{
 		return (
 			// heading with #
-			$line[0] === '#' && preg_match('/^#{1,6}[ \t]/', $line)
-			||
+			$line[0] === '#' && preg_match('/^#{1,6}[ \t]/', $line) ||
 			// underlined headline
-			!empty($lines[$current + 1]) &&
-			(($l = $lines[$current + 1][0]) === '=' || $l === '-') &&
-			preg_match('/^(\-+|=+)\s*$/', $lines[$current + 1])
+			!empty($lines[$current + 1])
+			&& (($l = $lines[$current + 1][0]) === '=' || $l === '-')
+			&& preg_match('/^(\-+|=+)\s*$/', $lines[$current + 1])
 		);
 	}
 
@@ -36,7 +35,8 @@ trait HeadlineTrait
 		if ($lines[$current][0] === '#') {
 			// ATX headline
 			$level = 1;
-			while (isset($lines[$current][$level]) && $lines[$current][$level] === '#' && $level < 6) {
+			while (isset($lines[$current][$level])
+				&& $lines[$current][$level] === '#' && $level < 6) {
 				$level++;
 			}
 			$block = [
