@@ -5,17 +5,10 @@
  * @link https://github.com/cebe/markdown#readme
  */
 
-namespace cebe\markdown\inline;
-
-// work around https://github.com/facebook/hhvm/issues/1120
-defined('ENT_HTML401') || define('ENT_HTML401', 0);
-
 /**
- * Addes links and images as well as url markers.
- *
  * This trait conflicts with the HtmlTrait. If both are used together,
- * you have to define a resolution, by defining the HtmlTrait::parseInlineHtml
- * as private so it is not used directly:
+ * you must define the HtmlTrait::parseInlineHtml method as private so
+ * it is not used directly:
  *
  * ```php
  * use block\HtmlTrait {
@@ -23,9 +16,19 @@ defined('ENT_HTML401') || define('ENT_HTML401', 0);
  * }
  * ```
  *
- * If the method exists it is called internally by this trait.
+ * If the HtmlTrait::parseInlineHtml method exists it will be called
+ * within LinkTrait::parseLt.
+ */
+
+namespace cebe\markdown\inline;
+
+// work around https://github.com/facebook/hhvm/issues/1120
+defined('ENT_HTML401') || define('ENT_HTML401', 0);
+
+/**
+ * Adds links and images as well as url markers. 
  *
- * Also make sure to reset references on prepare():
+ * Make sure to reset references on prepare():
  *
  * ```php
  * protected function prepare()
