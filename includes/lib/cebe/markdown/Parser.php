@@ -109,7 +109,10 @@ abstract class Parser
 	 * @return string post-processed markup
 	 */
 	protected function postprocess($markup) {
-		$markup = str_replace("\0", "&#xFFFD;", $markup);
+		$safe = function_exists("mb_chr") ?
+			mb_chr(0xFFFD, 'UTF-8') : "&#xFFFD;";
+
+		$markup = str_replace("\0", $safe, $markup);
 		return $markup;
 	}
 
