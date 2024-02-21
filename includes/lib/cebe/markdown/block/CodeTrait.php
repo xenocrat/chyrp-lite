@@ -41,8 +41,8 @@ trait CodeTrait
 					rtrim($next) === '' ||
 					$next[0] === "\t" ||
 					strncmp($next, '    ', 4) === 0) {
-					if (isset($line[0]) && ($line[0] === "\t" ||
-						strncmp($line, '    ', 4) === 0)) {
+					if (isset($line[0])
+						&& ($line[0] === "\t" || strncmp($line, '    ', 4) === 0)) {
 						$line = $line[0] === "\t" ? substr($line, 1) : substr($line, 4);
 					} else {
 						$line = '';
