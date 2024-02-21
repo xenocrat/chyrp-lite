@@ -106,12 +106,16 @@ trait ListTrait
 				$block['lazyItems'][$item] = $lastLineEmpty;
 				$lastLineEmpty = false;
 			} elseif (ltrim($line) === '') {
-				// line is empty, may be a lazy list
+				// line is blank: may be a lazy list
 				$lastLineEmpty = true;
 
-				// two empty lines will end the list
-				if (!isset($lines[$i + 1][0])) {
+				// no more lines: end of list
+				if (!isset($lines[$i + 1])) {
 					break;
+
+				// next line is also blank: may be a lazy list
+				} elseif ($lines[$i + 1] === '' || ltrim($lines[$i + 1]) === '') {
+					continue;
 
 				// next item is the continuation of this list -> lazy list
 				} elseif (preg_match($pattern, $lines[$i + 1])) {
