@@ -2,6 +2,21 @@
 
 namespace cebe\markdown\block;
 
+/**
+ * Adds footnotes.
+ * 
+ * Make sure to reset footnote properties on prepare():
+ *
+ * ```php
+ * protected function prepare()
+ * {
+ *		// reset footnote properties
+ *		$this->footnotes = [];
+ *		$this->footnoteLinkNum = 0;
+ *		$this->footnoteLinks = [];
+ * }
+ * ```
+ */
 trait FootnoteTrait
 {
 
@@ -82,11 +97,6 @@ trait FootnoteTrait
 
 		// Get the footnote HTML.
 		$footnotes = $referencedHtml . $this->getFootnotesHtml($footnotesSorted);
-
-		// Reset footnote properties in case this parser instance is reused.
-		$this->footnotes = [];
-		$this->footnoteLinkNum = 0;
-		$this->footnoteLinks = [];
 
 		// Add the footnote HTML to the end of the document.
 		return $footnotes;

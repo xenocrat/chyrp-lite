@@ -48,6 +48,20 @@ class ChyrpMarkdown extends GithubMarkdown
 	];
 
 	/**
+	 * @inheritDoc
+	 */
+	protected function prepare()
+	{
+		// reset references
+		$this->references = [];
+
+		// reset footnote properties
+		$this->footnotes = [];
+		$this->footnoteLinkNum = 0;
+		$this->footnoteLinks = [];
+	}
+
+	/**
 	 * Consume lines for a paragraph
 	 *
 	 * Allow headlines, lists, code, figures and asides to break paragraphs
