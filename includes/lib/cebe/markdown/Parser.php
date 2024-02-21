@@ -21,10 +21,20 @@ abstract class Parser
 	public $maximumNestingLevel = 32;
 
 	/**
+	 * @var boolean whether to convert all tabs into 4 spaces.
+	 */
+	public $convertTabsToSpaces = false;
+
+	/**
+	 * @var string optional context identifier for this instance.
+	 */
+	public $contextID = "";
+
+	/**
 	 * @var array the current context the parser is in.
-	 * TODO remove in favor of absy
 	 */
 	protected $context = [];
+
 	/**
 	 * @var array these are "escapeable" characters. When using one of these prefixed with a
 	 * backslash, the character will be outputted without the backslash and is not interpreted
@@ -98,6 +108,10 @@ abstract class Parser
 	 * @return string pre-processed text
 	 */
 	protected function preprocess($text) {
+		if ($this->convertTabsToSpaces) {
+			$text = str_replace("\t", "    ", $text);
+		}
+
 		$text = str_replace(["\r\n", "\n\r", "\r"], "\n", $text);
 		return $text;
 	}
