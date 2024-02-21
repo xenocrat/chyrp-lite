@@ -1534,6 +1534,7 @@
 
         if (!isset($parser)) {
             $parser = new \cebe\markdown\ChyrpMarkdown();
+            $parser->convertTabsToSpaces = false;
             $parser->html5 = true;
             $parser->keepListStartNumber = true;
             $parser->enableNewlines = false;
