@@ -5,25 +5,7 @@
  * @link https://github.com/cebe/markdown#readme
  */
 
-/**
- * This trait conflicts with the HtmlTrait. If both are used together,
- * you must define the HtmlTrait::parseInlineHtml method as private so
- * it is not used directly:
- *
- * ```php
- * use block\HtmlTrait {
- *     parseInlineHtml as private parseInlineHtml;
- * }
- * ```
- *
- * If the HtmlTrait::parseInlineHtml method exists it will be called
- * within LinkTrait::parseLt.
- */
-
 namespace cebe\markdown\inline;
-
-// work around https://github.com/facebook/hhvm/issues/1120
-defined('ENT_HTML401') || define('ENT_HTML401', 0);
 
 /**
  * Adds links and images as well as url markers. 
