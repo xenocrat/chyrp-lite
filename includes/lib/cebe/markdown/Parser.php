@@ -146,13 +146,16 @@ abstract class Parser
 	{
 	}
 
-
 	// block parsing
 
 	private $_blockTypes;
 
 	/**
 	 * @return array a list of block element types available.
+	 *
+	 * You can bust the alphabetical sort/call strategy with a `Priority` method
+	 * matching the identify method name, returning a different string to compare.
+	 * E.g. identifyUl() and identifyUlPriority().
 	 */
 	protected function blockTypes()
 	{
@@ -160,11 +163,21 @@ abstract class Parser
 			// detect block types via "identify" functions
 			$reflection = new \ReflectionClass($this);
 			$this->_blockTypes = array_filter(array_map(function($method) {
-				$name = $method->getName();
-				return strncmp($name, 'identify', 8) === 0 ? strtolower(substr($name, 8)) : false;
+				$methodName = $method->getName();
+				return (strncmp($methodName, 'identify', 8) === 0
+					&& substr_compare($methodName, 'Priority', -8) !== 0) ?
+					strtolower(substr($methodName, 8)) : false;
 			}, $reflection->getMethods(ReflectionMethod::IS_PROTECTED)));
 
-			sort($this->_blockTypes);
+			usort($this->_blockTypes, function($a, $b) {
+				$a_priority = method_exists($this, $a . 'Priority') ?
+					$this->{$a . 'Priority'}() : $a;
+
+				$b_priority = method_exists($this, $b . 'Priority') ?
+					$this->{$b . 'Priority'}() : $b;
+
+				return strcmp($a, $b);
+			});
 		}
 		return $this->_blockTypes;
 	}
@@ -283,9 +296,7 @@ abstract class Parser
 		return '<p>' . $this->renderAbsy($block['content']) . "</p>\n";
 	}
 
-
 	// inline parsing
-
 
 	/**
 	 * @var array the set of inline markers to use in different contexts.
@@ -315,7 +326,8 @@ abstract class Parser
 		$reflection = new \ReflectionClass($this);
 		foreach($reflection->getMethods(ReflectionMethod::IS_PROTECTED) as $method) {
 			$methodName = $method->getName();
-			if (strncmp($methodName, 'parse', 5) === 0) {
+			if (strncmp($methodName, 'parse', 5) === 0
+				&& substr_compare($methodName, 'Markers', -7) !== 0) {
 				if (method_exists($this, $methodName.'Markers')) {
 					$array = call_user_func(array($this, $methodName.'Markers'));
 					foreach($array as $marker) {
@@ -344,7 +356,9 @@ abstract class Parser
 				if (isset($this->_inlineMarkers[$m])) {
 					reset($this->_inlineMarkers[$m]);
 					if (strlen($marker) > strlen(key($this->_inlineMarkers[$m]))) {
-						$this->_inlineMarkers[$m] = array_merge([$marker => $method], $this->_inlineMarkers[$m]);
+						$this->_inlineMarkers[$m] = array_merge(
+							[$marker => $method], $this->_inlineMarkers[$m]
+						);
 						continue;
 					}
 				}

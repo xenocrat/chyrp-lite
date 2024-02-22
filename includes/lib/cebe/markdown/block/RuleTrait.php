@@ -13,6 +13,14 @@ namespace cebe\markdown\block;
 trait RuleTrait
 {
 	/**
+	 * Bust the alphabetical calling strategy.
+	 */
+	protected function identifyHrPriority()
+	{
+		return 'ahr';
+	}
+
+	/**
 	 * identify a line as a horizontal rule.
 	 */
 	protected function identifyHr($line)

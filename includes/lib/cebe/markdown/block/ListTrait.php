@@ -20,6 +20,14 @@ trait ListTrait
 	public $keepListStartNumber = false;
 
 	/**
+	 * Bust the alphabetical calling strategy.
+	 */
+	protected function identifyUlPriority()
+	{
+		return 'bul';
+	}
+
+	/**
 	 * identify a line as the beginning of an ordered list.
 	 */
 	protected function identifyOl($line)
