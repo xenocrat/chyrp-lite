@@ -8,7 +8,7 @@
 namespace cebe\markdown;
 
 /**
- * Markdown parser to extend Github flavored markdown for Chyrp Lite.
+ * Markdown parser for [Chyrp-Flavoured Markdown](https://chyrplite.net/wiki/Chyrp-Flavoured-Markdown.html).
  */
 class ChyrpMarkdown extends GithubMarkdown
 {
@@ -64,7 +64,7 @@ class ChyrpMarkdown extends GithubMarkdown
 	/**
 	 * Consume lines for a paragraph
 	 *
-	 * Allow headlines, lists, code, figures and asides to break paragraphs
+	 * Allow other block types to break paragraphs.
 	 */
 	protected function consumeParagraph($lines, $current)
 	{

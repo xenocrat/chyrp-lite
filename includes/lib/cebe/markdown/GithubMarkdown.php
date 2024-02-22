@@ -8,7 +8,7 @@
 namespace cebe\markdown;
 
 /**
- * Markdown parser for github flavored markdown.
+ * Markdown parser for [GitHub-Flavored Markdown](https://github.github.com/gfm/).
  *
  * @author Carsten Brandt <mail@cebe.cc>
  */
@@ -16,7 +16,6 @@ class GithubMarkdown extends Markdown
 {
 	// include block element parsing using traits
 	use block\TableTrait;
-	use block\FencedCodeTrait;
 
 	// include inline element parsing using traits
 	use inline\StrikeoutTrait;
@@ -54,7 +53,7 @@ class GithubMarkdown extends Markdown
 	/**
 	 * Consume lines for a paragraph
 	 *
-	 * Allow headlines, lists and code to break paragraphs
+	 * Allow other block types to break paragraphs.
 	 */
 	protected function consumeParagraph($lines, $current)
 	{
