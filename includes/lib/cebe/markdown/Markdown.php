@@ -8,7 +8,7 @@
 namespace cebe\markdown;
 
 /**
- * Markdown parser for the [initial markdown spec](http://daringfireball.net/projects/markdown/syntax).
+ * Markdown parser for [CommonMark](https://spec.commonmark.org/).
  *
  * @author Carsten Brandt <mail@cebe.cc>
  */
@@ -16,21 +16,30 @@ class Markdown extends Parser
 {
 	// include block element parsing using traits
 	use block\CodeTrait;
+	use block\FencedCodeTrait;
 	use block\HeadlineTrait;
+
+	/**
+	 * LinkTrait conflicts with HtmlTrait. If both traits are used together,
+	 * you must define the HtmlTrait::parseInlineHtml method as private so
+	 * it is not used directly:
+	 *
+	 * ```php
+	 * use block\HtmlTrait {
+	 *     parseInlineHtml as private parseInlineHtml;
+	 * }
+	 * ```
+	 *
+	 * If the HtmlTrait::parseInlineHtml method exists it will be called from
+	 * within LinkTrait::parseLt if needed.
+	 */
 	use block\HtmlTrait {
 		parseInlineHtml as private;
 	}
-	use block\ListTrait {
-		// Check Ul List before headline
-		identifyUl as protected identifyBUl;
-		consumeUl as protected consumeBUl;
-	}
+
+	use block\ListTrait;
 	use block\QuoteTrait;
-	use block\RuleTrait {
-		// Check Hr before checking lists
-		identifyHr as protected identifyAHr;
-		consumeHr as protected consumeAHr;
-	}
+	use block\RuleTrait;
 
 	// include inline element parsing using traits
 	use inline\CodeTrait;
@@ -76,7 +85,7 @@ class Markdown extends Parser
 	/**
 	 * Consume lines for a paragraph
 	 *
-	 * Allow headlines and code to break paragraphs
+	 * Allow other block types to break paragraphs.
 	 */
 	protected function consumeParagraph($lines, $current)
 	{
@@ -93,7 +102,14 @@ class Markdown extends Parser
 
 			if ($line === ''
 				|| ltrim($line) === ''
-				|| $this->identifyHtml($line, $lines, $i)
+				|| !ctype_alpha($line[0]) && (
+					$this->identifyQuote($line, $lines, $i) ||
+					$this->identifyFencedCode($line, $lines, $i) ||
+					$this->identifyUl($line, $lines, $i) ||
+					$this->identifyOl($line, $lines, $i) ||
+					$this->identifyHr($line, $lines, $i) ||
+					$this->identifyHtml($line, $lines, $i)
+				)
 				|| $this->identifyHeadline($line, $lines, $i)) {
 				break;
 			} else {
