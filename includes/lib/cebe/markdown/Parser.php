@@ -177,7 +177,7 @@ abstract class Parser
 				$b_priority = method_exists($this, $b . 'Priority') ?
 					$this->{$b . 'Priority'}() : $b;
 
-				return strcmp($a, $b);
+				return strcmp($a_priority, $b_priority);
 			});
 		}
 		return $this->_blockTypes;
