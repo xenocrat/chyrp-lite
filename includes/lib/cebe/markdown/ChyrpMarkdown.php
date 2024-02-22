@@ -50,7 +50,7 @@ class ChyrpMarkdown extends GithubMarkdown
 	/**
 	 * @inheritDoc
 	 */
-	protected function prepare()
+	protected function prepare(): void
 	{
 		// reset references
 		$this->references = [];
@@ -66,7 +66,7 @@ class ChyrpMarkdown extends GithubMarkdown
 	 *
 	 * Allow other block types to break paragraphs.
 	 */
-	protected function consumeParagraph($lines, $current)
+	protected function consumeParagraph($lines, $current): array
 	{
 		// consume until newline
 		$content = [];
@@ -101,7 +101,7 @@ class ChyrpMarkdown extends GithubMarkdown
 	/**
 	 * @inheritDoc
 	 */
-	function parse($text)
+	function parse($text): string
 	{
 		return $this->addParsedFootnotes(parent::parse($text));
 	}

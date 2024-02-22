@@ -12,16 +12,16 @@ namespace cebe\markdown\inline;
  */
 trait CiteTrait
 {
-	protected function parseCiteMarkers()
+	protected function parseCiteMarkers(): array
 	{
 		return array('*_');
 	}
 
 	/**
-	 * Parses the strikethrough feature.
+	 * Parses the cite feature.
 	 * @marker *_
 	 */
-	protected function parseCite($markdown)
+	protected function parseCite($markdown): array
 	{
 		if (preg_match('/^\*_(.+?)_\*/', $markdown, $matches)) {
 			return [
@@ -35,7 +35,7 @@ trait CiteTrait
 		return [['text', $markdown[0] . $markdown[1]], 2];
 	}
 
-	protected function renderCite($block)
+	protected function renderCite($block): string
 	{
 		return '<cite>' . $this->renderAbsy($block[1]) . '</cite>';
 	}

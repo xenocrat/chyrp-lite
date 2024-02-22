@@ -44,7 +44,7 @@ trait FootnoteTrait
 	 * @param string $html The HTML output of Markdown::parse().
 	 * @return string
 	 */
-	public function addParsedFootnotes($html)
+	public function addParsedFootnotes($html): string
 	{
 		// If no footnotes found, do nothing more.
 		if (count($this->footnotes) === 0) {
@@ -106,7 +106,7 @@ trait FootnoteTrait
 	 * @param mixed[] $footnotesSorted Array with 'html', 'num', and 'refs' keys.
 	 * @return string
 	 */
-	protected function getFootnotesHtml(array $footnotesSorted)
+	protected function getFootnotesHtml(array $footnotesSorted): string
 	{
 		$prefix = !empty($this->contextID) ? $this->contextID . "-" : "";
 		$hr = $this->html5 ? "<hr>\n" : "<hr />\n";
@@ -143,7 +143,7 @@ trait FootnoteTrait
 	 * @param $text
 	 * @return array
 	 */
-	protected function parseFootnoteLink($text)
+	protected function parseFootnoteLink($text): array
 	{
 		if (preg_match('/^\[\^(.+?)]/', $text, $matches)) {
 			$footnoteName = $matches[1];
@@ -166,7 +166,7 @@ trait FootnoteTrait
 	 * @param string[] $block Array with 'num' key.
 	 * @return string
 	 */
-	protected function renderFootnoteLink($block)
+	protected function renderFootnoteLink($block): string
 	{
 		$prefix = !empty($this->contextID) ? $this->contextID . "-" : "";
 		$substituteRefnum = "\x1Afootnote-refnum".$block['num']."\x1A";
@@ -192,7 +192,7 @@ trait FootnoteTrait
 	 * @param $line
 	 * @return false|int
 	 */
-	protected function identifyFootnoteList($line)
+	protected function identifyFootnoteList($line): bool
 	{
 		return preg_match('/^\[\^(.+?)]:/', $line);
 	}
@@ -202,7 +202,7 @@ trait FootnoteTrait
 	 * @return array Array of two elements, the first element contains the block,
 	 * the second contains the next line index to be parsed.
 	 */
-	protected function consumeFootnoteList($lines, $current)
+	protected function consumeFootnoteList($lines, $current): array
 	{
 		$name = '';
 		$footnotes = [];
@@ -250,7 +250,7 @@ trait FootnoteTrait
 	 * @param array $block
 	 * @return string
 	 */
-	protected function renderFootnoteList($block)
+	protected function renderFootnoteList($block): string
 	{
 		foreach ($block['content'] as $footnoteName => $footnote) {
 			$this->footnotes[$footnoteName] = $this->renderAbsy($footnote);

@@ -22,7 +22,7 @@ trait ListTrait
 	/**
 	 * Bust the alphabetical calling strategy.
 	 */
-	protected function identifyUlPriority()
+	protected function identifyUlPriority(): string
 	{
 		return 'bul';
 	}
@@ -30,7 +30,7 @@ trait ListTrait
 	/**
 	 * identify a line as the beginning of an ordered list.
 	 */
-	protected function identifyOl($line)
+	protected function identifyOl($line): bool
 	{
 		return preg_match('/^ {0,3}\d+\.[ \t]/', $line);
 	}
@@ -38,7 +38,7 @@ trait ListTrait
 	/**
 	 * identify a line as the beginning of an unordered list.
 	 */
-	protected function identifyUl($line)
+	protected function identifyUl($line): bool
 	{
 		return preg_match('/^ {0,3}[\-\+\*][ \t]/', $line);
 	}
@@ -46,7 +46,7 @@ trait ListTrait
 	/**
 	 * Consume lines for an ordered list
 	 */
-	protected function consumeOl($lines, $current)
+	protected function consumeOl($lines, $current): array
 	{
 		// consume until newline
 
@@ -62,7 +62,7 @@ trait ListTrait
 	/**
 	 * Consume lines for an unordered list
 	 */
-	protected function consumeUl($lines, $current)
+	protected function consumeUl($lines, $current): array
 	{
 		// consume until newline
 
@@ -74,7 +74,7 @@ trait ListTrait
 		return $this->consumeList($lines, $current, $block, 'ul');
 	}
 
-	private function consumeList($lines, $current, $block, $type)
+	private function consumeList($lines, $current, $block, $type): array
 	{
 		$item = 0;
 		$indent = '';
@@ -186,7 +186,7 @@ trait ListTrait
 	/**
 	 * Renders a list
 	 */
-	protected function renderList($block)
+	protected function renderList($block): string
 	{
 		$type = $block['list'];
 
@@ -208,7 +208,7 @@ trait ListTrait
 	 * @param array $attributes the attribute name-value pairs.
 	 * @return string
 	 */
-	private function generateHtmlAttributes($attributes)
+	private function generateHtmlAttributes($attributes): string
 	{
 		foreach ($attributes as $name => $value) {
 			$attributes[$name] = "$name=\"$value\"";

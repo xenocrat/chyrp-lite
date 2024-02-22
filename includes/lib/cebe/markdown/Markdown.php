@@ -76,7 +76,7 @@ class Markdown extends Parser
 	/**
 	 * @inheritDoc
 	 */
-	protected function prepare()
+	protected function prepare(): void
 	{
 		// reset references
 		$this->references = [];
@@ -87,7 +87,7 @@ class Markdown extends Parser
 	 *
 	 * Allow other block types to break paragraphs.
 	 */
-	protected function consumeParagraph($lines, $current)
+	protected function consumeParagraph($lines, $current): array
 	{
 		// consume until newline
 		$content = [];
@@ -129,7 +129,7 @@ class Markdown extends Parser
 	 *
 	 * Parses a newline indicated by two spaces on the end of a markdown line.
 	 */
-	protected function renderText($text)
+	protected function renderText($text): string
 	{
 		return str_replace("  \n", $this->html5 ? "<br>\n" : "<br />\n", $text[1]);
 	}

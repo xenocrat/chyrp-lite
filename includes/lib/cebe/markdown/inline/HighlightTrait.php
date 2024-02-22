@@ -12,7 +12,7 @@ namespace cebe\markdown\inline;
  */
 trait HighlightTrait
 {
-	protected function parseHighlightMarkers()
+	protected function parseHighlightMarkers(): array
 	{
 		return array('==');
 	}
@@ -21,7 +21,7 @@ trait HighlightTrait
 	 * Parses the highlight feature.
 	 * @marker ==
 	 */
-	protected function parseHighlight($markdown)
+	protected function parseHighlight($markdown): array
 	{
 		if (preg_match('/^==(.+?)==/', $markdown, $matches)) {
 			return [
@@ -35,7 +35,7 @@ trait HighlightTrait
 		return [['text', $markdown[0] . $markdown[1]], 2];
 	}
 
-	protected function renderHighlight($block)
+	protected function renderHighlight($block): string
 	{
 		return '<mark>' . $this->renderAbsy($block[1]) . '</mark>';
 	}

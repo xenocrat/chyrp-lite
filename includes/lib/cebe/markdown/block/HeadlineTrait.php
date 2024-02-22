@@ -15,7 +15,7 @@ trait HeadlineTrait
 	/**
 	 * identify a line as a headline
 	 */
-	protected function identifyHeadline($line, $lines, $current)
+	protected function identifyHeadline($line, $lines, $current): bool
 	{
 		return (
 			// heading with #
@@ -30,7 +30,7 @@ trait HeadlineTrait
 	/**
 	 * Consume lines for a headline
 	 */
-	protected function consumeHeadline($lines, $current)
+	protected function consumeHeadline($lines, $current): array
 	{
 		if ($lines[$current][0] === '#') {
 			// ATX headline
@@ -59,7 +59,7 @@ trait HeadlineTrait
 	/**
 	 * Renders a headline
 	 */
-	protected function renderHeadline($block)
+	protected function renderHeadline($block): string
 	{
 		$tag = 'h' . $block['level'];
 		return "<$tag>" . $this->renderAbsy($block['content']) . "</$tag>\n";

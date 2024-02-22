@@ -12,7 +12,7 @@ namespace cebe\markdown\inline;
  */
 trait SupSubTrait
 {
-	protected function parseSupMarkers()
+	protected function parseSupMarkers(): array
 	{
 		return array('++');
 	}
@@ -21,7 +21,7 @@ trait SupSubTrait
 	 * Parses the strikethrough feature.
 	 * @marker ++
 	 */
-	protected function parseSup($markdown)
+	protected function parseSup($markdown): array
 	{
 		if (preg_match('/^\+\+(.+?)\+\+/', $markdown, $matches)) {
 			return [
@@ -35,12 +35,12 @@ trait SupSubTrait
 		return [['text', $markdown[0] . $markdown[1]], 2];
 	}
 
-	protected function renderSup($block)
+	protected function renderSup($block): string
 	{
 		return '<sup>' . $this->renderAbsy($block[1]) . '</sup>';
 	}
 
-	protected function parseSubMarkers()
+	protected function parseSubMarkers(): array
 	{
 		return array('--');
 	}
@@ -49,7 +49,7 @@ trait SupSubTrait
 	 * Parses the strikethrough feature.
 	 * @marker ~~
 	 */
-	protected function parseSub($markdown)
+	protected function parseSub($markdown): array
 	{
 		if (preg_match('/^--(.+?)--/', $markdown, $matches)) {
 			return [
@@ -63,7 +63,7 @@ trait SupSubTrait
 		return [['text', $markdown[0] . $markdown[1]], 2];
 	}
 
-	protected function renderSub($block)
+	protected function renderSub($block): string
 	{
 		return '<sub>' . $this->renderAbsy($block[1]) . '</sub>';
 	}

@@ -55,7 +55,7 @@ class GithubMarkdown extends Markdown
 	 *
 	 * Allow other block types to break paragraphs.
 	 */
-	protected function consumeParagraph($lines, $current)
+	protected function consumeParagraph($lines, $current): array
 	{
 		// consume until newline
 		$content = [];
@@ -90,7 +90,7 @@ class GithubMarkdown extends Markdown
 	 *
 	 * Parses a newline indicated by two spaces on the end of a markdown line.
 	 */
-	protected function renderText($text)
+	protected function renderText($text): string
 	{
 		if ($this->enableNewlines) {
 			$br = $this->html5 ? "<br>\n" : "<br />\n";
@@ -107,7 +107,7 @@ class GithubMarkdown extends Markdown
 	 *
 	 * @marker \
 	 */
-	protected function parseEscape($text)
+	protected function parseEscape($text): array
 	{
 		$br = $this->html5 ? "<br>\n" : "<br />\n";
 

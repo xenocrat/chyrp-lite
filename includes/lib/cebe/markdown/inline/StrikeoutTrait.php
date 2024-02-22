@@ -12,7 +12,7 @@ namespace cebe\markdown\inline;
  */
 trait StrikeoutTrait
 {
-	protected function parseStrikeMarkers()
+	protected function parseStrikeMarkers(): array
 	{
 		return array('~~');
 	}
@@ -21,7 +21,7 @@ trait StrikeoutTrait
 	 * Parses the strikethrough feature.
 	 * @marker ~~
 	 */
-	protected function parseStrike($markdown)
+	protected function parseStrike($markdown): array
 	{
 		if (preg_match('/^~~(.+?)~~/', $markdown, $matches)) {
 			return [
@@ -35,7 +35,7 @@ trait StrikeoutTrait
 		return [['text', $markdown[0] . $markdown[1]], 2];
 	}
 
-	protected function renderStrike($block)
+	protected function renderStrike($block): string
 	{
 		return '<del>' . $this->renderAbsy($block[1]) . '</del>';
 	}

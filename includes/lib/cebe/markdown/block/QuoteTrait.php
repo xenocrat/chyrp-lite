@@ -15,7 +15,7 @@ trait QuoteTrait
 	/**
 	 * identify a line as the beginning of a block quote.
 	 */
-	protected function identifyQuote($line)
+	protected function identifyQuote($line): bool
 	{
 		return $line[0] === '>' && (!isset($line[1]) || ($l1 = $line[1]) === ' ' || $l1 === "\t");
 	}
@@ -23,7 +23,7 @@ trait QuoteTrait
 	/**
 	 * Consume lines for a blockquote element
 	 */
-	protected function consumeQuote($lines, $current)
+	protected function consumeQuote($lines, $current): array
 	{
 		// consume until newline
 		$content = [];
@@ -54,7 +54,7 @@ trait QuoteTrait
 	/**
 	 * Renders a blockquote
 	 */
-	protected function renderQuote($block)
+	protected function renderQuote($block): string
 	{
 		return '<blockquote>' . $this->renderAbsy($block['content']) . "</blockquote>\n";
 	}

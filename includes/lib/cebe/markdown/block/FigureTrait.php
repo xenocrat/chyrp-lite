@@ -15,7 +15,7 @@ trait FigureTrait
 	/**
 	 * identify a line as the beginning of a figure.
 	 */
-	protected function identifyFigure($line)
+	protected function identifyFigure($line): bool
 	{
 		return $line[0] === ':'
 			&& (!isset($line[1]) || ($l1 = $line[1]) === ' ' || $l1 === "\t" ||
@@ -25,7 +25,7 @@ trait FigureTrait
 	/**
 	 * Consume lines for a figure element
 	 */
-	protected function consumeFigure($lines, $current)
+	protected function consumeFigure($lines, $current): array
 	{
 		// consume until newline
 		$content = [];
@@ -75,7 +75,7 @@ trait FigureTrait
 	/**
 	 * Renders a figure
 	 */
-	protected function renderFigure($block)
+	protected function renderFigure($block): string
 	{
 		if ($block['endcap'] !== null) {
 			$caption = '<figcaption>' . $this->renderAbsy($block['caption']) . "</figcaption>\n";

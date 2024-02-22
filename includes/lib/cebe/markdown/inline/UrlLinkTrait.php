@@ -12,7 +12,7 @@ namespace cebe\markdown\inline;
  */
 trait UrlLinkTrait
 {
-	protected function parseUrlMarkers()
+	protected function parseUrlMarkers(): array
 	{
 		return array('http', 'ftp');
 	}
@@ -22,7 +22,7 @@ trait UrlLinkTrait
 	 * @marker http
 	 * @marker ftp
 	 */
-	protected function parseUrl($markdown)
+	protected function parseUrl($markdown): array
 	{
 		$pattern = <<<REGEXP
 			/(?(R) # in case of recursion match parentheses
@@ -41,7 +41,7 @@ REGEXP;
 		return [['text', substr($markdown, 0, 4)], 4];
 	}
 
-	protected function renderAutoUrl($block)
+	protected function renderAutoUrl($block): string
 	{
 		$href = htmlspecialchars($block[1], ENT_COMPAT | ENT_HTML401, 'UTF-8');
 		$decodedUrl = urldecode($block[1]);

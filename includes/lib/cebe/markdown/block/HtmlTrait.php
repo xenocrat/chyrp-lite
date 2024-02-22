@@ -37,7 +37,7 @@ trait HtmlTrait
 	/**
 	 * identify a line as the beginning of a HTML block.
 	 */
-	protected function identifyHtml($line, $lines, $current)
+	protected function identifyHtml($line, $lines, $current): bool
 	{
 		if ($line[0] !== '<' || isset($line[1]) && $line[1] == ' ') {
 			return false; // no tag
@@ -79,7 +79,7 @@ trait HtmlTrait
 	/**
 	 * Consume lines for an HTML block
 	 */
-	protected function consumeHtml($lines, $current)
+	protected function consumeHtml($lines, $current): array
 	{
 		$content = [];
 		if (strncmp($lines[$current], '<script', 7) === 0) {
@@ -167,12 +167,12 @@ trait HtmlTrait
 	/**
 	 * Renders an HTML block
 	 */
-	protected function renderHtml($block)
+	protected function renderHtml($block): string
 	{
 		return $block['content'] . "\n";
 	}
 
-	protected function parseEntityMarkers()
+	protected function parseEntityMarkers(): array
 	{
 		return array('&');
 	}
@@ -181,7 +181,7 @@ trait HtmlTrait
 	 * Parses an & or a html entity definition.
 	 * @marker &
 	 */
-	protected function parseEntity($text)
+	protected function parseEntity($text): array
 	{
 		// html entities e.g. &copy; &#169; &#x00A9;
 		if (preg_match('/^&#?[\w\d]+;/', $text, $matches)) {
@@ -194,12 +194,12 @@ trait HtmlTrait
 	/**
 	 * renders a html entity.
 	 */
-	protected function renderInlineHtml($block)
+	protected function renderInlineHtml($block): string
 	{
 		return $block[1];
 	}
 
-	protected function parseInlineHtmlMarkers()
+	protected function parseInlineHtmlMarkers(): array
 	{
 		return array('<');
 	}
@@ -208,7 +208,7 @@ trait HtmlTrait
 	 * Parses inline HTML.
 	 * @marker <
 	 */
-	protected function parseInlineHtml($text)
+	protected function parseInlineHtml($text): array
 	{
 		if (strpos($text, '>') !== false) {
 			if (preg_match('~^</?(\w+\d?)( .*?)?>~s', $text, $matches)) {
@@ -222,7 +222,7 @@ trait HtmlTrait
 		return [['text', '&lt;'], 1];
 	}
 
-	protected function parseGtMarkers()
+	protected function parseGtMarkers(): array
 	{
 		return array('>');
 	}
@@ -231,7 +231,7 @@ trait HtmlTrait
 	 * Escapes `>` characters.
 	 * @marker >
 	 */
-	protected function parseGt($text)
+	protected function parseGt($text): array
 	{
 		return [['text', '&gt;'], 1];
 	}

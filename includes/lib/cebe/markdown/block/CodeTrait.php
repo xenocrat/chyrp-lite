@@ -15,7 +15,7 @@ trait CodeTrait
 	/**
 	 * identify a line as the beginning of a code block.
 	 */
-	protected function identifyCode($line)
+	protected function identifyCode($line): bool
 	{
 		// indentation >= 4 or one tab is code
 		return $line[0] === "\t" || strncmp($line, '    ', 4) === 0;
@@ -24,7 +24,7 @@ trait CodeTrait
 	/**
 	 * Consume lines for a code block element
 	 */
-	protected function consumeCode($lines, $current)
+	protected function consumeCode($lines, $current): array
 	{
 		// consume until newline
 		$content = [];
@@ -66,7 +66,7 @@ trait CodeTrait
 	/**
 	 * Renders a code block
 	 */
-	protected function renderCode($block)
+	protected function renderCode($block): string
 	{
 		$class = isset($block['language']) ? ' class="language-' . $block['language'] . '"' : '';
 		return "<pre><code$class>"

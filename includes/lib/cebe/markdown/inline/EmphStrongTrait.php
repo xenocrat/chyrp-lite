@@ -12,7 +12,7 @@ namespace cebe\markdown\inline;
  */
 trait EmphStrongTrait
 {
-	protected function parseEmphStrongMarkers()
+	protected function parseEmphStrongMarkers(): array
 	{
 		return array('_', '*');
 	}
@@ -22,7 +22,7 @@ trait EmphStrongTrait
 	 * @marker _
 	 * @marker *
 	 */
-	protected function parseEmphStrong($text)
+	protected function parseEmphStrong($text): array
 	{
 		$marker = $text[0];
 
@@ -81,12 +81,12 @@ trait EmphStrongTrait
 		return [['text', $text[0]], 1];
 	}
 
-	protected function renderStrong($block)
+	protected function renderStrong($block): string
 	{
 		return '<strong>' . $this->renderAbsy($block[1]) . '</strong>';
 	}
 
-	protected function renderEmph($block)
+	protected function renderEmph($block): string
 	{
 		return '<em>' . $this->renderAbsy($block[1]) . '</em>';
 	}
