@@ -219,8 +219,9 @@ abstract class Parser
 		// convert lines to blocks
 		for ($i = 0, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
-			if ($line !== '' && rtrim($line) !== '') { // skip empty lines
-				// identify a blocks beginning and parse the content
+			if ($line !== '' && rtrim($line) !== '') {
+			// skip empty lines
+				// identify beginning of a block and parse the content
 				list($block, $i) = $this->parseBlock($lines, $i);
 				if ($block !== false) {
 					$blocks[] = $block;
