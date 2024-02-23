@@ -167,17 +167,19 @@ abstract class Parser
 				$methodName = $method->getName();
 				return (strncmp($methodName, 'identify', 8) === 0
 					&& substr_compare($methodName, 'Priority', -8) !== 0) ?
-					strtolower(substr($methodName, 8)) : false;
+					substr($methodName, 8) : false;
 			}, $reflection->getMethods(ReflectionMethod::IS_PROTECTED)));
 
 			usort($this->_blockTypes, function($a, $b) {
-				$a_priority = method_exists($this, $a . 'Priority') ?
-					$this->{$a . 'Priority'}() : $a;
+				$a_method = 'identify' . $a . 'Priority';
+				$a_priority = method_exists($this, $a_method) ?
+					$this->{$a_method}() : $a;
 
-				$b_priority = method_exists($this, $b . 'Priority') ?
-					$this->{$b . 'Priority'}() : $b;
+				$b_method = 'identify' . $b . 'Priority';
+				$b_priority = method_exists($this, $b_method) ?
+					$this->{$b_method}() : $b;
 
-				return strcmp($a_priority, $b_priority);
+				return strcasecmp($a_priority, $b_priority);
 			});
 		}
 		return $this->_blockTypes;

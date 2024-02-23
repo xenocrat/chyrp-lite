@@ -17,7 +17,7 @@ trait RuleTrait
 	 */
 	protected function identifyHrPriority(): string
 	{
-		return 'ahr';
+		return 'aHr';
 	}
 
 	/**

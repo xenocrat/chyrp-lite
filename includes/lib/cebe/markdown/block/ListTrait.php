@@ -13,7 +13,7 @@ namespace cebe\markdown\block;
 trait ListTrait
 {
 	/**
-	 * @var bool enable support `start` attribute of ordered lists. This means that lists
+	 * @var bool enable support for a `start` attribute of ordered lists. This means that lists
 	 * will start with the number you actually type in markdown and not the HTML generated one.
 	 * Defaults to `false` which means that numeration of all ordered lists(<ol>) starts with 1.
 	 */
@@ -24,7 +24,7 @@ trait ListTrait
 	 */
 	protected function identifyUlPriority(): string
 	{
-		return 'bul';
+		return 'bUl';
 	}
 
 	/**
