@@ -36,9 +36,9 @@ abstract class Parser
 	protected $context = [];
 
 	/**
-	 * @var array these are "escapeable" characters. When using one of these prefixed with a
-	 * backslash, the character will be outputted without the backslash and is not interpreted
-	 * as markdown.
+	 * @var array these are "escapeable" characters.
+	 * When using one of these prefixed with a backslash, the character is
+	 * not interpreted as markdown and will be outputted without backslash.
 	 */
 	protected $escapeCharacters = [
 		'\\', // backslash
@@ -124,8 +124,8 @@ abstract class Parser
 	 */
 	protected function postprocess($markup): string
 	{
-		$safe = function_exists("mb_chr") ?
-			mb_chr(0xFFFD, 'UTF-8') : "&#xFFFD;";
+		$safe = function_exists('mb_chr') ?
+			mb_chr(0xFFFD, 'UTF-8') : '&#xFFFD;';
 
 		$markup = str_replace("\0", $safe, $markup);
 		return $markup;
@@ -186,8 +186,8 @@ abstract class Parser
 	}
 
 	/**
-	 * Given a set of lines and an index of a current line it uses the registed block types to
-	 * detect the type of this line.
+	 * Given a set of lines and an index of a current line it uses the registed
+	 * block types to detect the type of this line.
 	 * @param array $lines
 	 * @param integer $current
 	 * @return string name of the block type in lower case
@@ -241,8 +241,9 @@ abstract class Parser
 	 * Parses the block at current line by identifying the block type and parsing the content
 	 * @param $lines
 	 * @param $current
-	 * @return array Array of two elements, the first element contains the block,
-	 * the second contains the next line index to be parsed.
+	 * @return array Array of two elements:
+	 * 			(array) the parsed block;
+	 * 			(int) the the next line index to be parsed.
 	 */
 	protected function parseBlock($lines, $current): array
 	{
@@ -315,7 +316,7 @@ abstract class Parser
 	 * starting at the position of the marker.
 	 *
 	 * Note that markers starting with whitespace may slow down the parser,
-	 * you may want to use [[renderText]] to deal with them.
+	 * so it may be better to use [[renderText]] to deal with them instead.
 	 *
 	 * You may override this method to define a set of markers and parsing methods.
 	 * The default implementation looks for protected methods starting with `parse`
@@ -450,8 +451,8 @@ abstract class Parser
 
 	/**
 	 * This function renders plain text sections in the markdown text.
-	 * It can be used to work on normal text sections for example to highlight keywords or
-	 * do special escaping.
+	 * It can be used to work on normal text sections.
+	 * E.g. to highlight keywords or do special escaping.
 	 */
 	protected function renderText($block): string
 	{
