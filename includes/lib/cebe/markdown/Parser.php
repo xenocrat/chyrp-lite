@@ -15,6 +15,9 @@ use ReflectionMethod;
  */
 abstract class Parser
 {
+	const VERSION_MAJOR = 2;
+	const VERSION_MINOR = 0;
+
 	/**
 	 * @var integer the maximum nesting level for language elements.
 	 */
