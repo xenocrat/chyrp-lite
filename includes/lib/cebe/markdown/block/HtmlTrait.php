@@ -1,8 +1,8 @@
 <?php
 /**
  * @copyright Copyright (c) 2014 Carsten Brandt
- * @license https://github.com/cebe/markdown/blob/master/LICENSE
- * @link https://github.com/cebe/markdown#readme
+ * @license https://github.com/xenocrat/chyrp-markdown/blob/master/LICENSE
+ * @link https://github.com/xenocrat/chyrp-markdown#readme
  */
 
 namespace cebe\markdown\block;

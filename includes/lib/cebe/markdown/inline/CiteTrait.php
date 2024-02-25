@@ -1,8 +1,8 @@
 <?php
 /**
  * @copyright Copyright 2023 Daniel Pimley
- * @license https://github.com/cebe/markdown/blob/master/LICENSE
- * @link https://github.com/cebe/markdown#readme
+ * @license https://github.com/xenocrat/chyrp-markdown/blob/master/LICENSE
+ * @link https://github.com/xenocrat/chyrp-markdown#readme
  */
 
 namespace cebe\markdown\inline;
