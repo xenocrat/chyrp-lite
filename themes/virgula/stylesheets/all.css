@@ -128,6 +128,7 @@ code {
     background-color: #f3f2f1;
     padding: 0.1em 0.3em 0em 0.3em;
     vertical-align: bottom;
+    white-space: break-spaces;
 }
 pre > code {
     font-size: 0.85rem;

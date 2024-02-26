@@ -754,6 +754,7 @@
                 padding: 0px 2px;
                 border: 1px solid #cfcfcf;
                 vertical-align: bottom;
+                white-space: break-spaces;
             }
             pre > code {
                 font-size: 0.85rem;

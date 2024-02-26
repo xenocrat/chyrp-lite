@@ -171,6 +171,7 @@ code {
     background-color: #f5f4f0;
     padding: 0.125em 0.25em 0em 0.25em;
     vertical-align: bottom;
+    white-space: break-spaces;
 }
 pre > code {
     font-size: 0.85rem;
