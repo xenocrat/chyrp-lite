@@ -23,19 +23,27 @@ trait CodeTrait
 	 */
 	protected function parseInlineCode($text): array
 	{
-		if (preg_match('/^(``+)\s(.+?)\s\1/s', $text, $matches)) { // code with enclosed backtick
+		if (preg_match('/^(`+)([^`](.+?)[^`]|[^`]+)\1(?!`)/s', $text, $matches)) {
+			$code = $matches[2];
+			if (ltrim($code, '`') === '') {
+				return [
+					[
+						'text',
+						$matches[0]
+					],
+					strlen($matches[0])
+				];
+			}
+			if (strlen($code) > 2
+				&& ltrim($code, ' ') !== ''
+				&& substr($code, 0, 1) === ' '
+				&& substr($code, -1) === ' ') {
+				$code = substr($code, 1, -1);
+			}
 			return [
 				[
 					'inlineCode',
-					$matches[2],
-				],
-				strlen($matches[0])
-			];
-		} elseif (preg_match('/^`(.+?)`/s', $text, $matches)) {
-			return [
-				[
-					'inlineCode',
-					$matches[1],
+					$code,
 				],
 				strlen($matches[0])
 			];
