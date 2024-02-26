@@ -1873,6 +1873,11 @@
                                 $whitelist.= $attribute[0];
 
                             break;
+
+                        case "dir":
+                        case "lang":
+                            $whitelist.= $attribute[0];
+                            break;
                     }
                 }
 
