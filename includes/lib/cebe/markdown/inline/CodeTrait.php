@@ -24,7 +24,7 @@ trait CodeTrait
 	protected function parseInlineCode($text): array
 	{
 		if (preg_match('/^(`+)([^`](.+?)[^`]|[^`]+)\1(?!`)/s', $text, $matches)) {
-			$code = $matches[2];
+			$code = str_replace("\n", ' ', $matches[2]);
 			if (ltrim($code, '`') === '') {
 				return [
 					[
