@@ -201,7 +201,8 @@ REGEXP;
 
 	protected function renderUrl($block): string
 	{
-		$url = htmlspecialchars($block[1], ENT_COMPAT | ENT_HTML401, 'UTF-8');
+		$ent = $this->html5 ? ENT_HTML5 : ENT_HTML401;
+		$url = htmlspecialchars($block[1], ENT_COMPAT | $ent, 'UTF-8');
 		$decodedUrl = urldecode($block[1]);
 		$secureUrlText = preg_match('//u', $decodedUrl) ? $decodedUrl : $block[1];
 		$text = htmlspecialchars($secureUrlText, ENT_NOQUOTES | ENT_SUBSTITUTE, 'UTF-8');
@@ -229,12 +230,13 @@ REGEXP;
 				return $block['orig'];
 			}
 		}
+		$ent = $this->html5 ? ENT_HTML5 : ENT_HTML401;
 		return '<a href="'
-			. htmlspecialchars($block['url'], ENT_COMPAT | ENT_HTML401, 'UTF-8') . '"'
+			. htmlspecialchars($block['url'], ENT_COMPAT | $ent, 'UTF-8') . '"'
 			. (empty($block['title']) ?
 				'' :
 				' title="' 
-				. htmlspecialchars($block['title'], ENT_COMPAT | ENT_HTML401 | ENT_SUBSTITUTE, 'UTF-8') . '"')
+				. htmlspecialchars($block['title'], ENT_COMPAT | $ent | ENT_SUBSTITUTE, 'UTF-8') . '"')
 			. '>' . $this->renderAbsy($block['text']) . '</a>';
 	}
 
@@ -250,13 +252,14 @@ REGEXP;
 				return $block['orig'];
 			}
 		}
-		return '<img src="' . htmlspecialchars($block['url'], ENT_COMPAT | ENT_HTML401, 'UTF-8') . '"'
+		$ent = $this->html5 ? ENT_HTML5 : ENT_HTML401;
+		return '<img src="' . htmlspecialchars($block['url'], ENT_COMPAT | $ent, 'UTF-8') . '"'
 			. ' alt="'
-			. htmlspecialchars($block['text'], ENT_COMPAT | ENT_HTML401 | ENT_SUBSTITUTE, 'UTF-8') . '"'
+			. htmlspecialchars($block['text'], ENT_COMPAT | $ent | ENT_SUBSTITUTE, 'UTF-8') . '"'
 			. (empty($block['title']) ?
 				'' :
 				' title="'
-				. htmlspecialchars($block['title'], ENT_COMPAT | ENT_HTML401 | ENT_SUBSTITUTE, 'UTF-8') . '"')
+				. htmlspecialchars($block['title'], ENT_COMPAT | $ent | ENT_SUBSTITUTE, 'UTF-8') . '"')
 			. ($this->html5 ? '>' : ' />');
 	}
 

@@ -47,12 +47,6 @@ class Markdown extends Parser
 	use inline\LinkTrait;
 
 	/**
-	 * @var boolean whether to format markup according to HTML5 spec.
-	 * Defaults to `false` which means that markup is formatted as HTML4.
-	 */
-	public $html5 = false;
-
-	/**
 	 * @var array these are "escapeable" characters. When using one of these prefixed with a
 	 * backslash, the character will be outputted without the backslash and is not interpreted
 	 * as markdown.

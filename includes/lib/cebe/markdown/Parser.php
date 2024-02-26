@@ -29,6 +29,12 @@ abstract class Parser
 	public $convertTabsToSpaces = false;
 
 	/**
+	 * @var boolean whether to format markup according to HTML5 spec.
+	 * Defaults to `false` which means that markup is formatted as HTML4.
+	 */
+	public $html5 = false;
+
+	/**
 	 * @var string optional context identifier for this instance.
 	 */
 	public $contextID = '';

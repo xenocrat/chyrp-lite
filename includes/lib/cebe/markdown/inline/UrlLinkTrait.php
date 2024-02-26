@@ -14,39 +14,45 @@ trait UrlLinkTrait
 {
 	protected function parseUrlMarkers(): array
 	{
-		return array('http', 'ftp');
+		return array('www.', 'http', 'ftp');
 	}
 
 	/**
 	 * Parses urls and adds auto linking feature.
+	 * @marker www.
 	 * @marker http
 	 * @marker ftp
 	 */
-	protected function parseUrl($markdown): array
+	protected function parseUrl($text): array
 	{
-		$pattern = <<<REGEXP
+		$regex = <<<REGEXP
 			/(?(R) # in case of recursion match parentheses
 				 \(((?>[^\s()]+)|(?R))*\)
 			|      # else match a link with title
-				^(https?|ftp):\/\/(([^\s<>()]+)|(?R))+(?<![\.,:;\'"!\?\s])
+				^(https?:\/\/|ftp:\/\/|www.)(([^\s<>()]+)|(?R))+(?<![\.,:;\'"!\?\s])
 			)/x
 REGEXP;
-
-		if (!in_array('parseLink', $this->context) && preg_match($pattern, $markdown, $matches)) {
+		if (!in_array('parseLink', $this->context) && preg_match($regex, $text, $matches)) {
 			return [
 				['autoUrl', $matches[0]],
 				strlen($matches[0])
 			];
 		}
-		return [['text', substr($markdown, 0, 4)], 4];
+		return [['text', substr($text, 0, 4)], 4];
 	}
 
 	protected function renderAutoUrl($block): string
 	{
-		$href = htmlspecialchars($block[1], ENT_COMPAT | ENT_HTML401, 'UTF-8');
-		$decodedUrl = urldecode($block[1]);
-		$secureUrlText = preg_match('//u', $decodedUrl) ? $decodedUrl : $block[1];
-		$text = htmlspecialchars($secureUrlText, ENT_NOQUOTES | ENT_SUBSTITUTE, 'UTF-8');
+		$href = $block[1];
+		$text = $href;
+		if (!preg_match('/^(http|ftp)/', $href)) {
+			$href = 'http://' . $href;
+		}
+		$ent = $this->html5 ? ENT_HTML5 : ENT_HTML401;
+		$href = htmlspecialchars($href, ENT_COMPAT | $ent, 'UTF-8');
+		$decoded = urldecode($text);
+		$secured = preg_match('//u', $decoded) ? $decoded : $text;
+		$text = htmlspecialchars($secured, ENT_NOQUOTES | ENT_SUBSTITUTE, 'UTF-8');
 		return "<a href=\"$href\">$text</a>";
 	}
 }
