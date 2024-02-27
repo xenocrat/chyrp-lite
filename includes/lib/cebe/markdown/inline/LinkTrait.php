@@ -183,7 +183,7 @@ REGEXP;
 						['email', $this->replaceEscape($matches[1])],
 						strlen($matches[0])
 					];
-				} elseif (preg_match('/^<([a-z]{3,}:\/\/[^\s]+?)>/', $text, $matches)) {
+				} elseif (preg_match('/^<([a-z][a-z0-9\+\.\-]{1,31}:\/\/[^\s]+?)>/', $text, $matches)) {
 					// URL
 					return [
 						['url', $this->replaceEscape($matches[1])],

@@ -14,14 +14,13 @@ trait AutoLinkTrait
 {
 	protected function parseUrlMarkers(): array
 	{
-		return array('www.', 'http', 'ftp');
+		return array('www.', 'http');
 	}
 
 	/**
 	 * Parses urls and adds auto linking feature.
 	 * @marker www.
 	 * @marker http
-	 * @marker ftp
 	 */
 	protected function parseUrl($text): array
 	{
@@ -29,7 +28,7 @@ trait AutoLinkTrait
 			/(?(R) # in case of recursion match parentheses
 				 \(((?>[^\s()]+)|(?R))*\)
 			|      # else match a link with title
-				^(https?:\/\/|ftp:\/\/|www.)(([^\s<>()]+)|(?R))+(?<![\.,:;\'"!\?\s])
+				^(www\.|https?:\/\/)(([^\s<>()]+)|(?R))+(?<![\.,:;\'"!\?\s])
 			)/x
 REGEXP;
 		if (!in_array('parseLink', $this->context) && preg_match($regex, $text, $matches)) {
@@ -45,7 +44,7 @@ REGEXP;
 	{
 		$href = $block[1];
 		$text = $href;
-		if (!preg_match('/^(http|ftp)/', $href)) {
+		if (strncmp($href, 'http', 4) !== 0) {
 			$href = 'http://' . $href;
 		}
 		$ent = $this->html5 ? ENT_HTML5 : ENT_HTML401;
