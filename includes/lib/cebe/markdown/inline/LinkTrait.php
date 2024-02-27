@@ -8,7 +8,7 @@
 namespace cebe\markdown\inline;
 
 /**
- * Adds links and images as well as url markers. 
+ * Adds links and images, and bracketed URLs.
  *
  * Make sure to reset references on prepare():
  *
@@ -132,12 +132,15 @@ trait LinkTrait
 REGEXP;
 			if (preg_match($pattern, $markdown, $refMatches)) {
 				// inline link
+				$url = isset($refMatches[2]) ? $this->replaceEscape($refMatches[2]) : '';
+				$title = empty($refMatches[5]) ? null : $refMatches[5];
+				$key = null;
 				return [
 					$text,
-					isset($refMatches[2]) ? $this->replaceEscape($refMatches[2]) : '', // url
-					empty($refMatches[5]) ? null: $refMatches[5], // title
-					$offset + strlen($refMatches[0]), // offset
-					null, // reference key
+					$url,
+					$title,
+					$offset + strlen($refMatches[0]),
+					$key,
 				];
 			} elseif (preg_match('/^([ \n]?\[(.*?)\])?/s', $markdown, $refMatches)) {
 				// reference style link
@@ -146,11 +149,13 @@ REGEXP;
 				} else {
 					$key = strtolower($refMatches[2]);
 				}
+				$url = null;
+				$title = null;
 				return [
 					$text,
-					null, // url
-					null, // title
-					$offset + strlen($refMatches[0]), // offset
+					$url,
+					$title,
+					$offset + strlen($refMatches[0]),
 					$key,
 				];
 			}
@@ -170,7 +175,8 @@ REGEXP;
 	protected function parseLt($text): array
 	{
 		if (strpos($text, '>') !== false) {
-			if (!in_array('parseLink', $this->context)) { // do not allow links in links
+			if (!in_array('parseLink', $this->context)) {
+			// do not allow links in links
 				if (preg_match('/^<([^\s>]*?@[^\s]*?\.\w+?)>/', $text, $matches)) {
 					// email address
 					return [

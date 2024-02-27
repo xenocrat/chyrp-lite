@@ -8,9 +8,9 @@
 namespace cebe\markdown\inline;
 
 /**
- * Adds auto linking for URLs
+ * Adds auto linking for unbracketed URLs.
  */
-trait UrlLinkTrait
+trait AutoLinkTrait
 {
 	protected function parseUrlMarkers(): array
 	{

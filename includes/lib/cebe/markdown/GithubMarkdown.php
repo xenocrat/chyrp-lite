@@ -19,7 +19,7 @@ class GithubMarkdown extends Markdown
 
 	// include inline element parsing using traits
 	use inline\StrikeoutTrait;
-	use inline\UrlLinkTrait;
+	use inline\AutoLinkTrait;
 
 	/**
 	 * @var boolean whether to interpret newlines as `<br />`-tags.
