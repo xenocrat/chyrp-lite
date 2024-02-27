@@ -56,7 +56,7 @@ msgstr "Zoekstring"
 msgid "Parameters"
 msgstr "Parameters"
 
-#: includes/class/Query.php:204 includes/class/SQL.php:152 install.php:743
+#: includes/class/Query.php:204 includes/class/SQL.php:152 install.php:744
 #, php-format
 msgid "Database error: %s"
 msgstr "Database fout: %s"
@@ -83,20 +83,20 @@ msgstr "Route gestart met een ongeldige controller."
 #: includes/controller/Admin.php:3015 includes/controller/Admin.php:3022
 #: includes/controller/Admin.php:3319 includes/controller/Ajax.php:36
 #: includes/controller/Ajax.php:253 includes/download.php:14
-#: includes/error.php:169 includes/helpers.php:2020 includes/helpers.php:2027
-#: includes/helpers.php:2034 includes/helpers.php:2049
-#: includes/helpers.php:2058 includes/helpers.php:2072
-#: includes/helpers.php:2079 includes/helpers.php:2464
-#: includes/helpers.php:2476 includes/helpers.php:2482
-#: includes/helpers.php:2488 includes/helpers.php:2525
-#: includes/helpers.php:2531 includes/helpers.php:2537
-#: includes/helpers.php:2685 includes/helpers.php:2691
-#: includes/helpers.php:2697 includes/helpers.php:2703
-#: includes/helpers.php:2708 includes/helpers.php:2713
-#: includes/helpers.php:2718 includes/helpers.php:2725
+#: includes/error.php:169 includes/helpers.php:2025 includes/helpers.php:2032
+#: includes/helpers.php:2039 includes/helpers.php:2054
+#: includes/helpers.php:2063 includes/helpers.php:2077
+#: includes/helpers.php:2084 includes/helpers.php:2469
+#: includes/helpers.php:2481 includes/helpers.php:2487
+#: includes/helpers.php:2493 includes/helpers.php:2530
+#: includes/helpers.php:2536 includes/helpers.php:2542
+#: includes/helpers.php:2690 includes/helpers.php:2696
+#: includes/helpers.php:2702 includes/helpers.php:2708
+#: includes/helpers.php:2713 includes/helpers.php:2718
+#: includes/helpers.php:2723 includes/helpers.php:2730
 #: includes/lib/ThumbnailFile.php:290 includes/lib/ThumbnailFile.php:321
 #: includes/lib/ThumbnailFile.php:381 includes/thumbnail.php:15
-#: install.php:1006 upgrade.php:211 upgrade.php:227 upgrade.php:243
+#: install.php:1007 upgrade.php:211 upgrade.php:227 upgrade.php:243
 #: upgrade.php:259 upgrade.php:275 upgrade.php:295 upgrade.php:339
 #: upgrade.php:355 upgrade.php:375 upgrade.php:391 upgrade.php:407
 #: upgrade.php:423 upgrade.php:443 upgrade.php:459 upgrade.php:588
@@ -150,7 +150,7 @@ msgstr "Ongeldige actie."
 #: includes/controller/Ajax.php:247 includes/controller/Ajax.php:271
 #: includes/controller/Ajax.php:277 includes/controller/Main.php:565
 #: includes/controller/Main.php:646 includes/download.php:21
-#: includes/helpers.php:2470 includes/thumbnail.php:22
+#: includes/helpers.php:2475 includes/thumbnail.php:22
 msgid "Access Denied"
 msgstr "Toegang geweigerd"
 
@@ -378,13 +378,13 @@ msgid "That username is already in use."
 msgstr "Deze gebruikersnaam is al in gebruik."
 
 #: includes/controller/Admin.php:1010 includes/controller/Main.php:800
-#: includes/controller/Main.php:1181 install.php:688
+#: includes/controller/Main.php:1181 install.php:689
 msgid "Passwords cannot be blank."
 msgstr "Wachtwoord mag niet leeg zijn."
 
 #: includes/controller/Admin.php:1017 includes/controller/Admin.php:1187
 #: includes/controller/Main.php:804 includes/controller/Main.php:1019
-#: includes/controller/Main.php:1185 install.php:623 install.php:690
+#: includes/controller/Main.php:1185 install.php:624 install.php:691
 msgid "Passwords do not match."
 msgstr "Wachtwoorden komen niet overeen."
 
@@ -394,13 +394,13 @@ msgstr "Bedenk een sterker wachtwoord voor deze gebruiker."
 
 #: includes/controller/Admin.php:1029 includes/controller/Admin.php:1206
 #: includes/controller/Admin.php:2995 includes/controller/Main.php:813
-#: includes/controller/Main.php:1032 install.php:693
+#: includes/controller/Main.php:1032 install.php:694
 msgid "Email address cannot be blank."
 msgstr "Emailadres mag niet leeg zijn."
 
 #: includes/controller/Admin.php:1036 includes/controller/Admin.php:1213
 #: includes/controller/Admin.php:3002 includes/controller/Main.php:817
-#: includes/controller/Main.php:1036 install.php:695
+#: includes/controller/Main.php:1036 install.php:696
 msgid "Invalid email address."
 msgstr "Ongeldig emailadres."
 
@@ -682,11 +682,11 @@ msgstr "Vooruitblik gestopt."
 msgid "Preview started."
 msgstr "Vooruitblik gestart."
 
-#: includes/controller/Admin.php:3009 install.php:671
+#: includes/controller/Admin.php:3009 install.php:672
 msgid "Chyrp URL cannot be blank."
 msgstr "Chyrp URL kan niet leeg zijn."
 
-#: includes/controller/Admin.php:3016 install.php:673
+#: includes/controller/Admin.php:3016 install.php:674
 msgid "Invalid Chyrp URL."
 msgstr "Ongeldige Chyrp URL."
 
@@ -699,8 +699,8 @@ msgstr "Ongeldige kanonieke URL."
 msgid "Settings updated."
 msgstr "Instellingen bijgewerkt."
 
-#: includes/controller/Admin.php:3237 includes/helpers.php:2489
-#: includes/helpers.php:2538 includes/helpers.php:2709 upgrade.php:162
+#: includes/controller/Admin.php:3237 includes/helpers.php:2494
+#: includes/helpers.php:2543 includes/helpers.php:2714 upgrade.php:162
 #: upgrade.php:179 upgrade.php:196
 msgid "Failed to write file to disk."
 msgstr "Bestand naar schijf wegschrijven niet gelukt."
@@ -883,7 +883,7 @@ msgstr "Deze website staat registreren niet toe."
 msgid "You cannot register an account because you are already logged in."
 msgstr "Je kunt geen account registreren, want je bent al ingelogd."
 
-#: includes/controller/Main.php:786 install.php:685
+#: includes/controller/Main.php:786 install.php:686
 msgid "Please enter a username for your account."
 msgstr "Geef alsjeblieft een gebruikersnaam in voor je account."
 
@@ -934,7 +934,7 @@ msgstr "Je moet eerst je account activeren voordat je kunt inloggen."
 msgid "Logged in."
 msgstr "Ingelogd."
 
-#: includes/controller/Main.php:971 includes/error.php:457
+#: includes/controller/Main.php:971 includes/error.php:458
 msgid "Log in"
 msgstr "Log in"
 
@@ -987,16 +987,16 @@ msgstr "Wijzig wachtwoord"
 msgid "An unspecified error has occurred."
 msgstr "Er is een onbekende fout opgetreden."
 
-#: includes/error.php:443
+#: includes/error.php:444
 msgid "Backtrace"
 msgstr "Backtrace"
 
-#: includes/error.php:448
+#: includes/error.php:449
 #, php-format
 msgid "%s on line %d"
 msgstr "%s op regel %d"
 
-#: includes/error.php:462
+#: includes/error.php:463
 msgid "Go back"
 msgstr "Ga terug"
 
@@ -1016,84 +1016,84 @@ msgstr "Je hebt geen toestemming om deze bron te benaderen."
 msgid "The requested resource was not found."
 msgstr "De opgevraagde bron is niet gevonden."
 
-#: includes/helpers.php:2021
+#: includes/helpers.php:2026
 msgid "Webmention support is disabled for this site."
 msgstr "Webmention ondersteuning is uitgeschakeld voor deze website."
 
-#: includes/helpers.php:2028
+#: includes/helpers.php:2033
 msgid "The URL for your page is not valid."
 msgstr "De URL voor je webpagina is ongeldig."
 
-#: includes/helpers.php:2035
+#: includes/helpers.php:2040
 msgid "The URL for our page is not valid."
 msgstr "De URL voor onze webpagina is ongeldig."
 
-#: includes/helpers.php:2050
+#: includes/helpers.php:2055
 msgid "The source and target URLs cannot be the same."
 msgstr "De bron- en doel- URLs kunnen niet gelijk zijn."
 
-#: includes/helpers.php:2059
+#: includes/helpers.php:2064
 msgid "We have not published at that URL."
 msgstr "We hebben niets onder deze URL gepubliceerd."
 
-#: includes/helpers.php:2073
+#: includes/helpers.php:2078
 msgid "You have not published at that URL."
 msgstr "Je hebt niets onder deze URL gepubliceerd."
 
-#: includes/helpers.php:2080
+#: includes/helpers.php:2085
 msgid "Your page does not link to our page."
 msgstr "Jouw pagina linkt niet naar onze pagina."
 
-#: includes/helpers.php:2273
+#: includes/helpers.php:2278
 msgid "Please create the uploads directory."
 msgstr "Maak alsjeblieft de uploadmap aan."
 
-#: includes/helpers.php:2275
+#: includes/helpers.php:2280
 msgid "Please make the uploads directory writable."
 msgstr "Maak alsjeblieft de uploadmap schrijfbaar."
 
-#: includes/helpers.php:2296
+#: includes/helpers.php:2301
 #, php-format
 msgid "%s module is missing."
 msgstr "%s module ontbreekt."
 
-#: includes/helpers.php:2309
+#: includes/helpers.php:2314
 #, php-format
 msgid "%s module is damaged."
 msgstr "%s module is beschadigd."
 
-#: includes/helpers.php:2327
+#: includes/helpers.php:2332
 #, php-format
 msgid "%s feather is missing."
 msgstr "%s feather ontbreekt."
 
-#: includes/helpers.php:2340
+#: includes/helpers.php:2345
 #, php-format
 msgid "%s feather is damaged."
 msgstr "%s feather is beschadigd."
 
-#: includes/helpers.php:2410 includes/helpers.php:2433
+#: includes/helpers.php:2415 includes/helpers.php:2438
 #, php-format
 msgid "Execution of %s has been cancelled."
 msgstr "Start van %s is geannuleerd."
 
-#: includes/helpers.php:2465
+#: includes/helpers.php:2470
 msgid "Uploaded file is of an unsupported type."
 msgstr "Geupload bestand is een ongeldig type."
 
-#: includes/helpers.php:2471
+#: includes/helpers.php:2476
 msgid "Only uploaded files are accepted."
 msgstr "Alleen geuploade bestanden worden geaccepteerd."
 
-#: includes/helpers.php:2477 includes/helpers.php:2526
+#: includes/helpers.php:2482 includes/helpers.php:2531
 msgid "Upload path does not exist."
 msgstr "Upload bestandspad bestaat niet."
 
-#: includes/helpers.php:2483 includes/helpers.php:2532
+#: includes/helpers.php:2488 includes/helpers.php:2537
 msgid "Upload path is not writable."
 msgstr "Upload bestandspad is niet schrijfbaar."
 
-#: includes/helpers.php:2686
+#: includes/helpers.php:2691
 msgid ""
 "The uploaded file exceeds the <code>upload_max_filesize</code> directive in "
 "php.ini."
@@ -1101,7 +1101,7 @@ msgstr ""
 "Het geuploade bestand overschrijdt <code>upload_max_filesize</code> grootte "
 "in php.ini."
 
-#: includes/helpers.php:2692
+#: includes/helpers.php:2697
 msgid ""
 "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the "
 "HTML form."
@@ -1109,24 +1109,24 @@ msgstr ""
 "Het geuploade bestand overschrijdt de <code>MAX_FILE_SIZE</code> grootte in "
 "het HTML-formulier."
 
-#: includes/helpers.php:2698
+#: includes/helpers.php:2703
 msgid "The uploaded file was only partially uploaded."
 msgstr "Het bestand is slechts gedeeltelijk geupload."
 
-#: includes/helpers.php:2704
+#: includes/helpers.php:2709
 msgid "Missing a temporary folder."
 msgstr "Er ontbreekt een tijdelijke map."
 
-#: includes/helpers.php:2714
+#: includes/helpers.php:2719
 msgid "File upload was stopped by a PHP extension."
 msgstr "Bestandsupload is afgebroken door een PHP-extensie."
 
-#: includes/helpers.php:2719
+#: includes/helpers.php:2724
 #, php-format
 msgid "File upload failed with error %d."
 msgstr "Bestandsupload mislukt met fout %d."
 
-#: includes/helpers.php:2726
+#: includes/helpers.php:2731
 #, php-format
 msgid ""
 "The uploaded file exceeds the maximum size of %d Megabytes allowed by this "
@@ -1135,49 +1135,49 @@ msgstr ""
 "Het geuploade bestand overschrijdt de maximale grootte van %d Megabytes dat "
 "door deze website is toegestaan."
 
-#: includes/helpers.php:3079
+#: includes/helpers.php:3084
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr "JSON codeer-fout: %s"
 
-#: includes/helpers.php:3104
+#: includes/helpers.php:3109
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr "JSON decodeer-fout: %s"
 
-#: includes/helpers.php:3187
+#: includes/helpers.php:3192
 msgid "Failed to create Zip archive."
 msgstr "Zip-archief maken mislukt."
 
-#: includes/helpers.php:3289
+#: includes/helpers.php:3294
 #, php-format
 msgid "Activate your account at %s"
 msgstr "Activeer je account bij %s"
 
-#: includes/helpers.php:3290 includes/helpers.php:3325
+#: includes/helpers.php:3295 includes/helpers.php:3330
 #, php-format
 msgid "Hello, %s."
 msgstr "Hallo, %s."
 
-#: includes/helpers.php:3293
+#: includes/helpers.php:3298
 msgid "You are receiving this message because you registered a new account."
 msgstr "Je ontvangt dit bericht, omdat je een nieuwe account hebt aangemaakt."
 
-#: includes/helpers.php:3296
+#: includes/helpers.php:3301
 msgid "Visit this link to activate your account:"
 msgstr "Bezoek deze link om je account te activeren:"
 
-#: includes/helpers.php:3324
+#: includes/helpers.php:3329
 #, php-format
 msgid "Reset your password at %s"
 msgstr "Wijzig je wachtwoord van %s"
 
-#: includes/helpers.php:3328
+#: includes/helpers.php:3333
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 "Je ontangt dit bericht, omdat je een nieuw wachtwoord hebt aangevraagd."
 
-#: includes/helpers.php:3331
+#: includes/helpers.php:3336
 msgid "Visit this link to reset your password:"
 msgstr "Bezoek deze link om je wachtwoord te wijzigen:"
 
@@ -1388,35 +1388,35 @@ msgstr ""
 msgid "Chyrp Lite Installer"
 msgstr "Chyrp Lite installatieprogramma"
 
-#: install.php:668
+#: install.php:669
 msgid "Database cannot be blank."
 msgstr "Database kan niet leeg zijn."
 
-#: install.php:676
+#: install.php:677
 msgid "Please enter a name for your website."
 msgstr "Geef alsjeblieft een naam in voor je website."
 
-#: install.php:679
+#: install.php:680
 msgid "Time zone cannot be blank."
 msgstr "Tijdzone kan niet leeg zijn."
 
-#: install.php:682
+#: install.php:683
 msgid "Language cannot be blank."
 msgstr "Taal kan niet leeg zijn."
 
-#: install.php:701
+#: install.php:702
 msgid "Could not determine the absolute path to the database."
 msgstr "Kan het absolute pad naar de database niet bepalen."
 
-#: install.php:708
+#: install.php:709
 msgid "Please make the database writable by the server."
 msgstr "Maak de database alsjeblieft schrijfbaar voor de server."
 
-#: install.php:712
+#: install.php:713
 msgid "Please enter a username and password for the database."
 msgstr "Geef alsjeblieft een gebruikersnaam en wachtwoord in voor de database."
 
-#: install.php:1007 upgrade.php:212 upgrade.php:228 upgrade.php:244
+#: install.php:1008 upgrade.php:212 upgrade.php:228 upgrade.php:244
 #: upgrade.php:260 upgrade.php:276 upgrade.php:296 upgrade.php:340
 #: upgrade.php:356 upgrade.php:376 upgrade.php:392 upgrade.php:408
 #: upgrade.php:424 upgrade.php:444 upgrade.php:460 upgrade.php:589
@@ -1424,48 +1424,48 @@ msgstr "Geef alsjeblieft een gebruikersnaam en wachtwoord in voor de database."
 msgid "Could not write the configuration file."
 msgstr "Kan het configuratiebestand niet schrijven."
 
-#: install.php:1025
+#: install.php:1026
 msgid "Database Setup"
 msgstr "Database Setup"
 
-#: install.php:1027
+#: install.php:1028
 msgid "Adapter"
 msgstr "Adapter"
 
-#: install.php:1041
+#: install.php:1042
 msgid "Host"
 msgstr "Hostnaam"
 
-#: install.php:1045
+#: install.php:1046
 msgid "Port"
 msgstr "Poort"
 
-#: install.php:1045 install.php:1074
+#: install.php:1046 install.php:1075
 msgid "(optional)"
 msgstr "(optioneel)"
 
-#: install.php:1049 install.php:1112
+#: install.php:1050 install.php:1113
 msgid "Username"
 msgstr "Gebruikersnaam"
 
-#: install.php:1053 install.php:1116 install.php:1120
+#: install.php:1054 install.php:1117 install.php:1121
 msgid "Password"
 msgstr "Wachtwoord"
 
-#: install.php:1057
+#: install.php:1058
 msgid "Database"
 msgstr "Datbasenaam"
 
-#: install.php:1059
+#: install.php:1060
 msgid "(absolute or relative path)"
 msgstr "(absoluut of relatief pad)"
 
-#: install.php:1065
+#: install.php:1066
 msgid "Make sure your PostgreSQL database uses UTF-8 encoding."
 msgstr ""
 "Verzeker jezelf ervan dat de PostgreSQL database UTF-8 codering gebruikt."
 
-#: install.php:1068
+#: install.php:1069
 msgid ""
 "The collation <code>utf8mb4_general_ci</code> is recommended for your MySQL "
 "database."
@@ -1473,7 +1473,7 @@ msgstr ""
 "De collatie <code>utf8mb4_general_ci</code> wordt aangeraden voor je MySQL "
 "database."
 
-#: install.php:1071
+#: install.php:1072
 msgid ""
 "Be sure to put your SQLite database outside the document root directory, "
 "otherwise visitors will be able to download it."
@@ -1481,71 +1481,71 @@ msgstr ""
 "Verzeker je ervan dat je SQLite database zich buiten de root map bevindt, "
 "anders kan iedereen hem downloaden."
 
-#: install.php:1074
+#: install.php:1075
 msgid "Table Prefix"
 msgstr "Tabel-prefix"
 
-#: install.php:1077
+#: install.php:1078
 msgid "Website Setup"
 msgstr "Website Setup"
 
-#: install.php:1079
+#: install.php:1080
 msgid "Chyrp URL"
 msgstr "Chyrp URL"
 
-#: install.php:1083
+#: install.php:1084
 msgid "Site Name"
 msgstr "Website naam"
 
-#: install.php:1084
+#: install.php:1085
 msgid "My Awesome Site"
 msgstr "Mijn gave website"
 
-#: install.php:1087
+#: install.php:1088
 msgid "Description"
 msgstr "Beschrijving"
 
-#: install.php:1091
+#: install.php:1092
 msgid "Time Zone"
 msgstr "Tijdzone"
 
-#: install.php:1101
+#: install.php:1102
 msgid "Language"
 msgstr "Taal"
 
-#: install.php:1110
+#: install.php:1111
 msgid "Admin Account"
 msgstr "Beheerders- account"
 
-#: install.php:1120
+#: install.php:1121
 msgid "(again)"
 msgstr "(opnieuw)"
 
-#: install.php:1124
+#: install.php:1125
 msgid "Email Address"
 msgstr "Emailadres"
 
-#: install.php:1127
+#: install.php:1128
 msgid "Install me!"
 msgstr "Installeer me!"
 
-#: install.php:1130
+#: install.php:1131
 msgid "Installation Complete"
 msgstr "Installatie voltooid"
 
-#: install.php:1131 upgrade.php:945
+#: install.php:1132 upgrade.php:946
 msgid "What now?"
 msgstr "Wat nu?"
 
-#: install.php:1133
+#: install.php:1134
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr "Verwijder <em>install.php</em>, je zult het niet meer nodig hebben."
 
-#: install.php:1134
+#: install.php:1135
 msgid "Log in to your site and configure things to your liking."
 msgstr "Login bij je website en maak de door jou gewenste aanpassingen."
 
-#: install.php:1137 upgrade.php:952
+#: install.php:1138 upgrade.php:953
 msgid "Take me to my site!"
 msgstr "Breng me naar mijn website!"
 
@@ -1553,42 +1553,42 @@ msgstr "Breng me naar mijn website!"
 msgid "Chyrp Lite Upgrader"
 msgstr "Chyrp Lite Upgrade-programma"
 
-#: upgrade.php:933
+#: upgrade.php:934
 msgid "Halt!"
 msgstr "Stop!"
 
-#: upgrade.php:934
+#: upgrade.php:935
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr ""
 "Neem alsjeblieft deze voorzorgsmaatregelen, voordat je met de upgrade begint:"
 
-#: upgrade.php:936
+#: upgrade.php:937
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr ""
 "<strong>Maak een backup van je database, voordat je verder gaat!</strong>"
 
-#: upgrade.php:937
+#: upgrade.php:938
 msgid "Tell your users that your site is offline for maintenance."
 msgstr ""
 "Vertel je gebruikers dat je website offline zal zijn, in verband met "
 "onderhoud."
 
-#: upgrade.php:941
+#: upgrade.php:942
 msgid "Upgrade me!"
 msgstr "Upgrade me!"
 
-#: upgrade.php:944
+#: upgrade.php:945
 msgid "Upgrade Complete"
 msgstr "Upgrade voltooid"
 
-#: upgrade.php:947
+#: upgrade.php:948
 msgid "Take action to resolve any errors reported on this page."
 msgstr "Onderneem acties om de fouten op deze pagina op te lossen."
 
-#: upgrade.php:948
+#: upgrade.php:949
 msgid "Run this upgrader again if you need to."
 msgstr "Herhaal het upgradeprogramma indien noodzakelijk."
 
-#: upgrade.php:949
+#: upgrade.php:950
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr "Verwijder <em>upgrade.php</em> nadat de upgrade-procedure voltooid is."

@@ -3163,7 +3163,7 @@ Parameters:
 
 Function: close
 ---------------
-Encodes and outputs the feed.
+Closes the feed.
 
 
 Function: feed
