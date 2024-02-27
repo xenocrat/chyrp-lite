@@ -214,7 +214,7 @@
 
         /**
          * Function: close
-         * Encodes and outputs the feed.
+         * Closes the feed.
          */
         public function close(): void {
             $this->open = false;
