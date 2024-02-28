@@ -127,12 +127,17 @@ trait LinkTrait
 				/(?(R) # in case of recursion match parentheses
 					 \(((?>[^\s()]+)|(?R))*\)
 				|      # else match a link with title
-					^\(\s*(((?>[^\s()]+)|(?R))*)(\s+"(.*?)")?\s*\)
-				)/x
+					^\(\s*(((?><[^<>\n]+>)|(?>[^\s()]+)|(?R))*)(\s+"(.*?)")?\s*\)
+				)/xs
 REGEXP;
 			if (preg_match($pattern, $markdown, $refMatches)) {
 				// inline link
 				$url = isset($refMatches[2]) ? $this->replaceEscape($refMatches[2]) : '';
+				if (strlen($url) > 2
+					&& substr($url, 0, 1) === '<'
+					&& substr($url, -1) === '>') {
+					$url = str_replace(' ', '%20', substr($url, 1, -1));
+				}
 				$title = empty($refMatches[5]) ? null : $refMatches[5];
 				$key = null;
 				return [
