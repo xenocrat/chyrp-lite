@@ -23,17 +23,8 @@ trait CodeTrait
 	 */
 	protected function parseInlineCode($text): array
 	{
-		if (preg_match('/^(`+)([^`](.+?)[^`]|[^`]+)\1(?!`)/s', $text, $matches)) {
+		if (preg_match('/^(`+)(?!`)(.*?[^`])\1(?!`)/s', $text, $matches)) {
 			$code = str_replace("\n", ' ', $matches[2]);
-			if (ltrim($code, '`') === '') {
-				return [
-					[
-						'text',
-						$matches[0]
-					],
-					strlen($matches[0])
-				];
-			}
 			if (strlen($code) > 2
 				&& ltrim($code, ' ') !== ''
 				&& substr($code, 0, 1) === ' '
