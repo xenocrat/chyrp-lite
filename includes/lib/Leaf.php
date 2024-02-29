@@ -27,6 +27,7 @@
                 new \Twig\TwigFunction("posted",            "twig_function_posted"),
                 new \Twig\TwigFunction("mailto",            "twig_function_mailto"),
                 new \Twig\TwigFunction("icon_img",          "twig_function_icon_img"),
+                new \Twig\TwigFunction("copyright_notice",  "twig_function_copyright_notice"),
                 new \Twig\TwigFunction("uploaded_search",   "twig_function_uploaded_search"),
                 new \Twig\TwigFunction("javascripts_nonce", "twig_function_javascripts_nonce"),
                 new \Twig\TwigFunction("stylesheets_nonce", "twig_function_stylesheets_nonce")
@@ -288,6 +289,46 @@
         $img.= '">';
 
         return $img;
+    }
+
+    /**
+     * Function: twig_function_copyright_notice
+     * Returns a copyright notice.
+     *
+     * Parameters:
+     *     $holder - The copyright holder's name.
+     *     $date1 - A date to use for the year.
+     *     $date2 - End date (for a span of years).
+     */
+    function twig_function_copyright_notice(
+        $holder = null,
+        $date1 = null,
+        $date2 = null,
+    ): string {
+        $notice = "&copy;";
+
+        if (in_array($date1, SQL_DATETIME_ZERO_VARIANTS))
+            unset($date1);
+
+        if (in_array($date2, SQL_DATETIME_ZERO_VARIANTS))
+            unset($date2);
+
+        if (isset($date1)) {
+            $year1 = _w("Y", $date1);
+            $notice.= "&nbsp;".$year1;
+
+            if (isset($date2)) {
+                $year2 = _w("Y", $date2);
+
+                if ($year1 != $year2)
+                    $notice.= "&ndash;".$year2;
+            }
+        }
+
+        if (isset($holder))
+            $notice.= "&nbsp;".$holder;
+
+        return $notice;
     }
 
     /**
