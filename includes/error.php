@@ -339,6 +339,10 @@
                 margin-inline-start: 2rem;
                 list-style-position: outside;
             }
+            ol.backtrace {
+                font-family: "Cousine webfont", monospace;
+                word-break: break-all;
+            }
             a:link,
             a:visited {
                 color: #1f1f23;
@@ -445,9 +449,7 @@
             <ol class="backtrace">
             <?php foreach ($backtrace as $trace): ?>
                 <li>
-                    <code>
-                        <?php echo _f("%s on line %d", array($trace["file"], (int) $trace["line"])); ?>
-                    </code>
+                    <?php echo _f("%s on line %d", array($trace["file"], (int) $trace["line"])); ?>
                 </li>
             <?php endforeach; ?>
             </ol>
