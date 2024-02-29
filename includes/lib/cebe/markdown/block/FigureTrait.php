@@ -18,8 +18,8 @@ trait FigureTrait
 	protected function identifyFigure($line): bool
 	{
 		return $line[0] === ':'
-			&& (!isset($line[1]) || ($l1 = $line[1]) === ' ' || $l1 === "\t" ||
-				($l1 === ":" && (!isset($line[2]) || ($l2 = $line[2]) === ' ' || $l2 === "\t")));
+			&& (!isset($line[1]) || ($l1 = $line[1]) === ' ' ||
+				($l1 === ":" && (!isset($line[2]) || $line[2] === ' ')));
 	}
 
 	/**
@@ -40,7 +40,7 @@ trait FigureTrait
 				} elseif (strncmp($line, ':: ', 3) === 0) {
 					$line = substr($line, 3);
 					// allow contiguous caption lines only
-					if (empty($caption) || isset($caption[$i-1])) {
+					if (empty($caption) || isset($caption[$i - 1])) {
 						$caption[$i] = $line;
 						continue;
 					}
@@ -57,7 +57,7 @@ trait FigureTrait
 		// determine caption placement
 		if (isset($caption[$current])) {
 			$endcap = false;
-		} elseif (isset($caption[$i-1])) {
+		} elseif (isset($caption[$i - 1])) {
 			$endcap = true;
 		} else {
 			$endcap = null;
@@ -80,7 +80,7 @@ trait FigureTrait
 		if ($block['endcap'] !== null) {
 			$caption = '<figcaption>' . $this->renderAbsy($block['caption']) . "</figcaption>\n";
 		} else {
-			$caption = "";
+			$caption = '';
 		}
 
 		if ($block['endcap'] === false) {
