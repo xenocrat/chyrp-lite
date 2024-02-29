@@ -48,13 +48,15 @@
 </a>
 {% endif %}
 {% endif %}
-{% if module_enabled("rights") and post.rights_holder is defined %}
+{% if module_enabled("rights") %}
 &bull;
-{% if post.rights_holder is not empty %}
-{{ "&copy; %s, %s." | translate | format(post.rights_holder, post.licence_link) }}
+{% if post.rights_holder is defined and post.rights_holder is not empty %}
+{{ copyright_notice(post.rights_holder) }}
 {% else %}
-{{ "&copy; %s." | translate | format(post.licence_link) }}
+{{ copyright_notice(post.author.name, post.created_at, post.updated_at) }}
 {% endif %}
+&bull;
+{{ post.licence_link }}
 {% endif %}
 </div>
 </footer>
