@@ -341,6 +341,7 @@
             }
             ol.backtrace {
                 font-family: "Cousine webfont", monospace;
+                font-size: 0.85em;
                 word-break: break-all;
             }
             a:link,
