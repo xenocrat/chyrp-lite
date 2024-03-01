@@ -307,12 +307,6 @@
     ): string {
         $notice = "&copy;";
 
-        if (in_array($date1, SQL_DATETIME_ZERO_VARIANTS))
-            unset($date1);
-
-        if (in_array($date2, SQL_DATETIME_ZERO_VARIANTS))
-            unset($date2);
-
         if (isset($date1)) {
             $year1 = _w("Y", $date1);
             $notice.= "&nbsp;".$year1;
