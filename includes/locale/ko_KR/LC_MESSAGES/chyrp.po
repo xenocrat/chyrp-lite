@@ -933,7 +933,7 @@ msgstr "로그인하기 전에 계정을 활성화해야 합니다."
 msgid "Logged in."
 msgstr "로그인되었습니다."
 
-#: includes/controller/Main.php:971 includes/error.php:458
+#: includes/controller/Main.php:971 includes/error.php:461
 msgid "Log in"
 msgstr "로그인"
 
@@ -985,16 +985,16 @@ msgstr "비밀번호 변경"
 msgid "An unspecified error has occurred."
 msgstr "알 수 없는 오류가 발생했습니다."
 
-#: includes/error.php:444
+#: includes/error.php:449
 msgid "Backtrace"
 msgstr "역추적"
 
-#: includes/error.php:449
+#: includes/error.php:453
 #, php-format
 msgid "%s on line %d"
 msgstr "%s: %d번 줄"
 
-#: includes/error.php:463
+#: includes/error.php:466
 msgid "Go back"
 msgstr "뒤로 가기"
 
@@ -1176,22 +1176,22 @@ msgstr "비밀번호를 변경하려면 다음 링크를 방문하세요:"
 msgid "Guest"
 msgstr "게스트"
 
-#: includes/lib/Leaf.php:444
+#: includes/lib/Leaf.php:479
 #, php-format
 msgid "%s GB"
 msgstr ""
 
-#: includes/lib/Leaf.php:449
+#: includes/lib/Leaf.php:484
 #, php-format
 msgid "%s MB"
 msgstr ""
 
-#: includes/lib/Leaf.php:453
+#: includes/lib/Leaf.php:488
 #, php-format
 msgid "%s KB"
 msgstr ""
 
-#: includes/lib/Leaf.php:679
+#: includes/lib/Leaf.php:714
 msgid "Image source"
 msgstr "이미지 출처"
 

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/virgula/content/comment.twig:5
@@ -155,7 +155,7 @@ msgid "Speak"
 msgstr "Praat"
 
 #: themes/virgula/forms/user/controls.twig:4
-#: themes/virgula/layouts/default.twig:54
+#: themes/virgula/layouts/default.twig:55
 msgid "Controls"
 msgstr "Instellingen"
 
@@ -188,7 +188,7 @@ msgstr "Bijwerken"
 
 #: themes/virgula/forms/user/login.twig:4
 #: themes/virgula/forms/user/login.twig:13
-#: themes/virgula/layouts/default.twig:66
+#: themes/virgula/layouts/default.twig:67
 msgid "Log in"
 msgstr "Log in"
 
@@ -219,7 +219,7 @@ msgstr "Bevestig"
 
 #: themes/virgula/forms/user/register.twig:4
 #: themes/virgula/forms/user/register.twig:18
-#: themes/virgula/layouts/default.twig:62
+#: themes/virgula/layouts/default.twig:63
 msgid "Register"
 msgstr "Registreer"
 
@@ -244,39 +244,39 @@ msgstr "Een hoog-contrast thema voor Chyrp Lite"
 msgid "Page %d"
 msgstr "Pagina %d"
 
-#: themes/virgula/layouts/default.twig:34
+#: themes/virgula/layouts/default.twig:35
 msgid "Feed"
 msgstr "Feed"
 
-#: themes/virgula/layouts/default.twig:37
+#: themes/virgula/layouts/default.twig:38
 msgid "Archive"
 msgstr "Archief"
 
-#: themes/virgula/layouts/default.twig:41
+#: themes/virgula/layouts/default.twig:42
 msgid "Admin"
 msgstr "Beheer"
 
-#: themes/virgula/layouts/default.twig:45
+#: themes/virgula/layouts/default.twig:46
 msgid "Write"
 msgstr "Schrijf"
 
-#: themes/virgula/layouts/default.twig:49
+#: themes/virgula/layouts/default.twig:50
 msgid "Draft"
 msgstr "Concept"
 
-#: themes/virgula/layouts/default.twig:57
+#: themes/virgula/layouts/default.twig:58
 msgid "Log out"
 msgstr "Log uit"
 
-#: themes/virgula/layouts/default.twig:71
+#: themes/virgula/layouts/default.twig:72
 msgid "Search this blog"
 msgstr "Doorzoek deze Blog"
 
-#: themes/virgula/layouts/default.twig:72
+#: themes/virgula/layouts/default.twig:73
 msgid "Find"
 msgstr "Vind"
 
-#: themes/virgula/layouts/default.twig:95
+#: themes/virgula/layouts/default.twig:96
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "Aangeroepen vanuit %s op regel %d bij %s seconden."

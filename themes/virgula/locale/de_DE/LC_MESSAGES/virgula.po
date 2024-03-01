@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/virgula/content/comment.twig:5
@@ -158,7 +158,7 @@ msgid "Speak"
 msgstr "Sprich"
 
 #: themes/virgula/forms/user/controls.twig:4
-#: themes/virgula/layouts/default.twig:54
+#: themes/virgula/layouts/default.twig:55
 msgid "Controls"
 msgstr "Details"
 
@@ -191,7 +191,7 @@ msgstr "Aktualisieren"
 
 #: themes/virgula/forms/user/login.twig:4
 #: themes/virgula/forms/user/login.twig:13
-#: themes/virgula/layouts/default.twig:66
+#: themes/virgula/layouts/default.twig:67
 msgid "Log in"
 msgstr "Einloggen"
 
@@ -222,7 +222,7 @@ msgstr "Absenden"
 
 #: themes/virgula/forms/user/register.twig:4
 #: themes/virgula/forms/user/register.twig:18
-#: themes/virgula/layouts/default.twig:62
+#: themes/virgula/layouts/default.twig:63
 msgid "Register"
 msgstr "Registrieren"
 
@@ -247,39 +247,39 @@ msgstr "Ein Design mit hohem Kontrast für Chyrp Lite."
 msgid "Page %d"
 msgstr "Seite %d"
 
-#: themes/virgula/layouts/default.twig:34
+#: themes/virgula/layouts/default.twig:35
 msgid "Feed"
 msgstr "Feed"
 
-#: themes/virgula/layouts/default.twig:37
+#: themes/virgula/layouts/default.twig:38
 msgid "Archive"
 msgstr "Archiv"
 
-#: themes/virgula/layouts/default.twig:41
+#: themes/virgula/layouts/default.twig:42
 msgid "Admin"
 msgstr "Administration"
 
-#: themes/virgula/layouts/default.twig:45
+#: themes/virgula/layouts/default.twig:46
 msgid "Write"
 msgstr "Schreiben"
 
-#: themes/virgula/layouts/default.twig:49
+#: themes/virgula/layouts/default.twig:50
 msgid "Draft"
 msgstr "Entwurf"
 
-#: themes/virgula/layouts/default.twig:57
+#: themes/virgula/layouts/default.twig:58
 msgid "Log out"
 msgstr "Ausloggen"
 
-#: themes/virgula/layouts/default.twig:71
+#: themes/virgula/layouts/default.twig:72
 msgid "Search this blog"
 msgstr "Durchsuchen Sie diesen Blog"
 
-#: themes/virgula/layouts/default.twig:72
+#: themes/virgula/layouts/default.twig:73
 msgid "Find"
 msgstr "Finden"
 
-#: themes/virgula/layouts/default.twig:95
+#: themes/virgula/layouts/default.twig:96
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "Aufgerufen von %s in Zeile %d in %s Sekunden."

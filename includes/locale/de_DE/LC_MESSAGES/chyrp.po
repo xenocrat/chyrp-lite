@@ -941,7 +941,7 @@ msgstr "Du musst Deinen Account aktivieren bevor Du Dich einloggen kannst."
 msgid "Logged in."
 msgstr "Eingeloggt."
 
-#: includes/controller/Main.php:971 includes/error.php:458
+#: includes/controller/Main.php:971 includes/error.php:461
 msgid "Log in"
 msgstr "Einloggen"
 
@@ -996,16 +996,16 @@ msgstr "Passwort zurücksetzen"
 msgid "An unspecified error has occurred."
 msgstr "Ein unbekannter Fehler ist aufgetreten."
 
-#: includes/error.php:444
+#: includes/error.php:449
 msgid "Backtrace"
 msgstr "Backtrace"
 
-#: includes/error.php:449
+#: includes/error.php:453
 #, php-format
 msgid "%s on line %d"
 msgstr "%s in Zeile %d"
 
-#: includes/error.php:463
+#: includes/error.php:466
 msgid "Go back"
 msgstr "Zurück"
 
@@ -1195,22 +1195,22 @@ msgstr "Besuche den folgenden Link um Dein Passwort zurückzusetzen:"
 msgid "Guest"
 msgstr "Gast"
 
-#: includes/lib/Leaf.php:444
+#: includes/lib/Leaf.php:479
 #, php-format
 msgid "%s GB"
 msgstr "%s GB"
 
-#: includes/lib/Leaf.php:449
+#: includes/lib/Leaf.php:484
 #, php-format
 msgid "%s MB"
 msgstr "%s MB"
 
-#: includes/lib/Leaf.php:453
+#: includes/lib/Leaf.php:488
 #, php-format
 msgid "%s KB"
 msgstr "%s KB"
 
-#: includes/lib/Leaf.php:679
+#: includes/lib/Leaf.php:714
 msgid "Image source"
 msgstr "Bildquelle"
 

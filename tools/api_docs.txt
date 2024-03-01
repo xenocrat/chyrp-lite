@@ -3248,6 +3248,16 @@ Parameters:
     $class - The CSS class for the link.
 
 
+Function: twig_function_copyright_notice
+----------------------------------------
+Returns a copyright notice.
+
+Parameters:
+    $holder - The copyright holder's name.
+    $date1 - A date to use for the year.
+    $date2 - End date (for a span of years).
+
+
 Function: twig_function_uploaded_search
 ---------------------------------------
 Returns an array of matches, if the visitor has the "export_content" privilege.

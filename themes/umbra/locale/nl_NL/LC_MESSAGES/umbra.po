@@ -39,7 +39,7 @@ msgstr "Tags"
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "Permalink naar &#8220;%s&#8221;"
 
-#: themes/umbra/content/post.twig:17 themes/umbra/layouts/default.twig:67
+#: themes/umbra/content/post.twig:17 themes/umbra/layouts/default.twig:68
 msgid "Draft"
 msgstr "Concept"
 
@@ -54,16 +54,6 @@ msgstr "Gepind"
 #: themes/umbra/content/post.twig:27 themes/umbra/pages/view.twig:10
 msgid "[Untitled]"
 msgstr "[Zonder titel]"
-
-#: themes/umbra/content/post.twig:35
-#, php-format
-msgid "&copy; %s, %s."
-msgstr "&copy; %s, %s."
-
-#: themes/umbra/content/post.twig:37
-#, php-format
-msgid "&copy; %s."
-msgstr "&copy; %s."
 
 #: themes/umbra/feathers/audio.twig:10 themes/umbra/feathers/link.twig:7
 #: themes/umbra/feathers/photo.twig:13 themes/umbra/feathers/quote.twig:9
@@ -175,7 +165,7 @@ msgstr "Bericht me wanneer anderen een opmerking plaatsen"
 msgid "Speak"
 msgstr "Praat"
 
-#: themes/umbra/forms/user/controls.twig:5 themes/umbra/layouts/default.twig:72
+#: themes/umbra/forms/user/controls.twig:5 themes/umbra/layouts/default.twig:73
 msgid "Controls"
 msgstr "Instellingen"
 
@@ -185,7 +175,7 @@ msgstr "Volledige naam"
 
 #: themes/umbra/forms/user/controls.twig:9
 #: themes/umbra/forms/user/register.twig:13
-#: themes/umbra/layouts/default.twig:49
+#: themes/umbra/layouts/default.twig:50
 msgid "Email"
 msgstr "Email"
 
@@ -208,7 +198,7 @@ msgid "Update"
 msgstr "Bijwerken"
 
 #: themes/umbra/forms/user/login.twig:5 themes/umbra/forms/user/login.twig:14
-#: themes/umbra/layouts/default.twig:84
+#: themes/umbra/layouts/default.twig:85
 msgid "Log in"
 msgstr "Log in"
 
@@ -238,7 +228,7 @@ msgstr "Bevestig"
 
 #: themes/umbra/forms/user/register.twig:5
 #: themes/umbra/forms/user/register.twig:19
-#: themes/umbra/layouts/default.twig:80
+#: themes/umbra/layouts/default.twig:81
 msgid "Register"
 msgstr "Registreer"
 
@@ -258,48 +248,48 @@ msgstr "Umbra"
 msgid "A dark tumbleblog theme for Chyrp Lite."
 msgstr "Een donker Tumbleblog thema voor Chyrp Lite."
 
-#: themes/umbra/layouts/default.twig:8 themes/umbra/layouts/default.twig:100
+#: themes/umbra/layouts/default.twig:8 themes/umbra/layouts/default.twig:101
 #, php-format
 msgid "Page %d"
 msgstr "Pagina %d"
 
-#: themes/umbra/layouts/default.twig:47
+#: themes/umbra/layouts/default.twig:48
 msgid "Links"
 msgstr "Links"
 
-#: themes/umbra/layouts/default.twig:52
+#: themes/umbra/layouts/default.twig:53
 msgid "Feed"
 msgstr "Feed"
 
-#: themes/umbra/layouts/default.twig:55
+#: themes/umbra/layouts/default.twig:56
 msgid "Archive"
 msgstr "Archief"
 
-#: themes/umbra/layouts/default.twig:59
+#: themes/umbra/layouts/default.twig:60
 msgid "Admin"
 msgstr "Beheer"
 
-#: themes/umbra/layouts/default.twig:63
+#: themes/umbra/layouts/default.twig:64
 msgid "Write"
 msgstr "Schrijf"
 
-#: themes/umbra/layouts/default.twig:75
+#: themes/umbra/layouts/default.twig:76
 msgid "Log out"
 msgstr "Log uit"
 
-#: themes/umbra/layouts/default.twig:89
+#: themes/umbra/layouts/default.twig:90
 msgid "Search&hellip;"
 msgstr "Zoek&hellip;"
 
-#: themes/umbra/layouts/default.twig:89
+#: themes/umbra/layouts/default.twig:90
 msgid "Search this blog"
 msgstr "Doorzoek deze Blog"
 
-#: themes/umbra/layouts/default.twig:90
+#: themes/umbra/layouts/default.twig:91
 msgid "Search"
 msgstr "Zoek"
 
-#: themes/umbra/layouts/default.twig:111
+#: themes/umbra/layouts/default.twig:112
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "Aangeroepen vanuit %s op regel %d bij %s seconden."

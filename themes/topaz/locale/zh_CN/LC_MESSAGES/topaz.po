@@ -81,16 +81,6 @@ msgid "%s comment"
 msgid_plural "%s comments"
 msgstr[0] "%s 评论"
 
-#: themes/topaz/content/post.twig:51
-#, php-format
-msgid "&copy; %s, %s."
-msgstr "&copy; %s, %s."
-
-#: themes/topaz/content/post.twig:53
-#, php-format
-msgid "&copy; %s."
-msgstr "&copy; %s."
-
 #: themes/topaz/content/sidebar.twig:4
 msgid "Search&hellip;"
 msgstr "搜索&hellip;"
@@ -363,15 +353,15 @@ msgstr ""
 msgid "Page %d"
 msgstr "第%d页"
 
-#: themes/topaz/layouts/default.twig:53
+#: themes/topaz/layouts/default.twig:54
 msgid "Newer posts"
 msgstr "较新的帖子"
 
-#: themes/topaz/layouts/default.twig:54
+#: themes/topaz/layouts/default.twig:55
 msgid "Older posts"
 msgstr "较旧的帖子"
 
-#: themes/topaz/layouts/default.twig:64
+#: themes/topaz/layouts/default.twig:65
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "调用 %s 在行 %d 在 %s 秒."

@@ -804,21 +804,21 @@ Called from:
 end_head
 --------
 Called from:
-	themes/blossom/layouts/default.twig on line 26
-	themes/sparrow/layouts/default.twig on line 26
-	themes/topaz/layouts/default.twig on line 26
-	themes/umbra/layouts/default.twig on line 26
-	themes/virgula/layouts/default.twig on line 26
+	themes/blossom/layouts/default.twig on line 27
+	themes/sparrow/layouts/default.twig on line 27
+	themes/topaz/layouts/default.twig on line 27
+	themes/umbra/layouts/default.twig on line 27
+	themes/virgula/layouts/default.twig on line 27
 
 
 end_content
 -----------
 Called from:
-	themes/blossom/layouts/default.twig on line 58
-	themes/sparrow/layouts/default.twig on line 110
-	themes/topaz/layouts/default.twig on line 57
-	themes/umbra/layouts/default.twig on line 104
-	themes/virgula/layouts/default.twig on line 88
+	themes/blossom/layouts/default.twig on line 59
+	themes/sparrow/layouts/default.twig on line 111
+	themes/topaz/layouts/default.twig on line 58
+	themes/umbra/layouts/default.twig on line 105
+	themes/virgula/layouts/default.twig on line 89
 
 
 
@@ -1125,7 +1125,7 @@ javascripts_nonce
 -----------------
 Called from:
 	includes/helpers.php on line 3368
-	includes/lib/Leaf.php on line 317
+	includes/lib/Leaf.php on line 352
 
 Target:
 	$nonce
@@ -1134,7 +1134,7 @@ Target:
 stylesheets_nonce
 -----------------
 Called from:
-	includes/lib/Leaf.php on line 326
+	includes/lib/Leaf.php on line 361
 
 Target:
 	$nonce

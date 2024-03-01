@@ -77,16 +77,6 @@ msgid_plural "%s comments"
 msgstr[0] ""
 msgstr[1] ""
 
-#: themes/topaz/content/post.twig:51
-#, php-format
-msgid "&copy; %s, %s."
-msgstr ""
-
-#: themes/topaz/content/post.twig:53
-#, php-format
-msgid "&copy; %s."
-msgstr ""
-
 #: themes/topaz/content/sidebar.twig:4
 msgid "Search&hellip;"
 msgstr ""
@@ -374,15 +364,15 @@ msgstr ""
 msgid "Page %d"
 msgstr ""
 
-#: themes/topaz/layouts/default.twig:53
+#: themes/topaz/layouts/default.twig:54
 msgid "Newer posts"
 msgstr ""
 
-#: themes/topaz/layouts/default.twig:54
+#: themes/topaz/layouts/default.twig:55
 msgid "Older posts"
 msgstr ""
 
-#: themes/topaz/layouts/default.twig:64
+#: themes/topaz/layouts/default.twig:65
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr ""

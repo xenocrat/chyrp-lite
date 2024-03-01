@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/virgula/content/comment.twig:5
@@ -156,7 +156,7 @@ msgid "Speak"
 msgstr "说话"
 
 #: themes/virgula/forms/user/controls.twig:4
-#: themes/virgula/layouts/default.twig:54
+#: themes/virgula/layouts/default.twig:55
 msgid "Controls"
 msgstr "操作"
 
@@ -189,7 +189,7 @@ msgstr "更新"
 
 #: themes/virgula/forms/user/login.twig:4
 #: themes/virgula/forms/user/login.twig:13
-#: themes/virgula/layouts/default.twig:66
+#: themes/virgula/layouts/default.twig:67
 msgid "Log in"
 msgstr "登陆"
 
@@ -220,7 +220,7 @@ msgstr "提交"
 
 #: themes/virgula/forms/user/register.twig:4
 #: themes/virgula/forms/user/register.twig:18
-#: themes/virgula/layouts/default.twig:62
+#: themes/virgula/layouts/default.twig:63
 msgid "Register"
 msgstr "注册"
 
@@ -245,39 +245,39 @@ msgstr "Chyrp Lite的高对比度主题。"
 msgid "Page %d"
 msgstr "第%d页"
 
-#: themes/virgula/layouts/default.twig:34
+#: themes/virgula/layouts/default.twig:35
 msgid "Feed"
 msgstr "订阅"
 
-#: themes/virgula/layouts/default.twig:37
+#: themes/virgula/layouts/default.twig:38
 msgid "Archive"
 msgstr "档案"
 
-#: themes/virgula/layouts/default.twig:41
+#: themes/virgula/layouts/default.twig:42
 msgid "Admin"
 msgstr "管理"
 
-#: themes/virgula/layouts/default.twig:45
+#: themes/virgula/layouts/default.twig:46
 msgid "Write"
 msgstr "写作"
 
-#: themes/virgula/layouts/default.twig:49
+#: themes/virgula/layouts/default.twig:50
 msgid "Draft"
 msgstr "草稿"
 
-#: themes/virgula/layouts/default.twig:57
+#: themes/virgula/layouts/default.twig:58
 msgid "Log out"
 msgstr "退出登陆"
 
-#: themes/virgula/layouts/default.twig:71
+#: themes/virgula/layouts/default.twig:72
 msgid "Search this blog"
 msgstr "搜索此博客"
 
-#: themes/virgula/layouts/default.twig:72
+#: themes/virgula/layouts/default.twig:73
 msgid "Find"
 msgstr "查找"
 
-#: themes/virgula/layouts/default.twig:95
+#: themes/virgula/layouts/default.twig:96
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "调用 %s 在行 %d 在 %s 秒."

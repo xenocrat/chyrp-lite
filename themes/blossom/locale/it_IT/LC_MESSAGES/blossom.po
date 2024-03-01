@@ -83,16 +83,6 @@ msgid_plural "%s comments"
 msgstr[0] "%s commento"
 msgstr[1] "%s commenti"
 
-#: themes/blossom/content/post.twig:51
-#, php-format
-msgid "&copy; %s, %s."
-msgstr "&copy; %s, %s."
-
-#: themes/blossom/content/post.twig:53
-#, php-format
-msgid "&copy; %s."
-msgstr "&copy; %s."
-
 #: themes/blossom/content/sidebar.twig:4
 msgid "Search&hellip;"
 msgstr "Cerca&hellip;"
@@ -363,15 +353,15 @@ msgstr "Tema predefinito fornito con Chyrp Lite."
 msgid "Page %d"
 msgstr "Pagina %d"
 
-#: themes/blossom/layouts/default.twig:48
+#: themes/blossom/layouts/default.twig:49
 msgid "Newer posts"
 msgstr "Post recenti"
 
-#: themes/blossom/layouts/default.twig:56
+#: themes/blossom/layouts/default.twig:57
 msgid "Older posts"
 msgstr "Post precedenti"
 
-#: themes/blossom/layouts/default.twig:65
+#: themes/blossom/layouts/default.twig:66
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "Chiamato da %s sulla riga %d a %s secondi."

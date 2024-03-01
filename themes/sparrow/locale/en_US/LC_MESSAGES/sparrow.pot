@@ -32,7 +32,7 @@ msgid "Permanent link to &#8220;%s&#8221;"
 msgstr ""
 
 #: themes/sparrow/content/post.twig:17
-#: themes/sparrow/layouts/default.twig:67
+#: themes/sparrow/layouts/default.twig:68
 msgid "Draft"
 msgstr ""
 
@@ -74,16 +74,6 @@ msgid "%s comment"
 msgid_plural "%s comments"
 msgstr[0] ""
 msgstr[1] ""
-
-#: themes/sparrow/content/post.twig:54
-#, php-format
-msgid "&copy; %s, %s."
-msgstr ""
-
-#: themes/sparrow/content/post.twig:56
-#, php-format
-msgid "&copy; %s."
-msgstr ""
 
 #: themes/sparrow/feathers/audio.twig:10
 #: themes/sparrow/feathers/link.twig:7
@@ -201,7 +191,7 @@ msgid "Speak"
 msgstr ""
 
 #: themes/sparrow/forms/user/controls.twig:5
-#: themes/sparrow/layouts/default.twig:72
+#: themes/sparrow/layouts/default.twig:73
 msgid "Controls"
 msgstr ""
 
@@ -211,7 +201,7 @@ msgstr ""
 
 #: themes/sparrow/forms/user/controls.twig:9
 #: themes/sparrow/forms/user/register.twig:13
-#: themes/sparrow/layouts/default.twig:49
+#: themes/sparrow/layouts/default.twig:50
 msgid "Email"
 msgstr ""
 
@@ -235,7 +225,7 @@ msgstr ""
 
 #: themes/sparrow/forms/user/login.twig:5
 #: themes/sparrow/forms/user/login.twig:14
-#: themes/sparrow/layouts/default.twig:84
+#: themes/sparrow/layouts/default.twig:85
 msgid "Log in"
 msgstr ""
 
@@ -266,7 +256,7 @@ msgstr ""
 
 #: themes/sparrow/forms/user/register.twig:5
 #: themes/sparrow/forms/user/register.twig:19
-#: themes/sparrow/layouts/default.twig:80
+#: themes/sparrow/layouts/default.twig:81
 msgid "Register"
 msgstr ""
 
@@ -291,51 +281,51 @@ msgstr ""
 msgid "Page %d"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:47
+#: themes/sparrow/layouts/default.twig:48
 msgid "Links"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:52
+#: themes/sparrow/layouts/default.twig:53
 msgid "Feed"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:55
+#: themes/sparrow/layouts/default.twig:56
 msgid "Archive"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:59
+#: themes/sparrow/layouts/default.twig:60
 msgid "Admin"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:63
+#: themes/sparrow/layouts/default.twig:64
 msgid "Write"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:75
+#: themes/sparrow/layouts/default.twig:76
 msgid "Log out"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:89
+#: themes/sparrow/layouts/default.twig:90
 msgid "Search&hellip;"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:89
+#: themes/sparrow/layouts/default.twig:90
 msgid "Search this blog"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:90
+#: themes/sparrow/layouts/default.twig:91
 msgid "Search"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:96
+#: themes/sparrow/layouts/default.twig:97
 msgid "&larr; Newer posts"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:106
+#: themes/sparrow/layouts/default.twig:107
 msgid "Older posts &rarr;"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:117
+#: themes/sparrow/layouts/default.twig:118
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr ""

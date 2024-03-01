@@ -939,7 +939,7 @@ msgstr "يجب عليك تفعيل حسابك قبل تسجيل الدخول."
 msgid "Logged in."
 msgstr "تم تسجيل الدخول."
 
-#: includes/controller/Main.php:971 includes/error.php:458
+#: includes/controller/Main.php:971 includes/error.php:461
 msgid "Log in"
 msgstr "تسجيل الدخول"
 
@@ -991,16 +991,16 @@ msgstr "إعادة تعيين كلمة المرور"
 msgid "An unspecified error has occurred."
 msgstr "حدث خطأ غير محدد."
 
-#: includes/error.php:444
+#: includes/error.php:449
 msgid "Backtrace"
 msgstr ""
 
-#: includes/error.php:449
+#: includes/error.php:453
 #, php-format
 msgid "%s on line %d"
 msgstr "%s في السطر %d"
 
-#: includes/error.php:463
+#: includes/error.php:466
 msgid "Go back"
 msgstr "الرجوع للخلف"
 
@@ -1183,22 +1183,22 @@ msgstr "قم بزيارة هذا الرابط لإعادة تعيين كلمة �
 msgid "Guest"
 msgstr "ضيف"
 
-#: includes/lib/Leaf.php:444
+#: includes/lib/Leaf.php:479
 #, php-format
 msgid "%s GB"
 msgstr "%s جيجابايت"
 
-#: includes/lib/Leaf.php:449
+#: includes/lib/Leaf.php:484
 #, php-format
 msgid "%s MB"
 msgstr "%s ميجابايت"
 
-#: includes/lib/Leaf.php:453
+#: includes/lib/Leaf.php:488
 #, php-format
 msgid "%s KB"
 msgstr "%s كيلوبايت"
 
-#: includes/lib/Leaf.php:679
+#: includes/lib/Leaf.php:714
 msgid "Image source"
 msgstr "مصدر الصورة"
 

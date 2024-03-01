@@ -83,16 +83,6 @@ msgid_plural "%s comments"
 msgstr[0] "%s Kommentar"
 msgstr[1] "%s Kommentare"
 
-#: themes/topaz/content/post.twig:51
-#, php-format
-msgid "&copy; %s, %s."
-msgstr "&copy; %s, %s."
-
-#: themes/topaz/content/post.twig:53
-#, php-format
-msgid "&copy; %s."
-msgstr "&copy; %s."
-
 #: themes/topaz/content/sidebar.twig:4
 msgid "Search&hellip;"
 msgstr "Suchen&hellip;"
@@ -367,15 +357,15 @@ msgstr "Eine minimalistische ansprechbar thema für Chyrp Lite."
 msgid "Page %d"
 msgstr "Seite %d"
 
-#: themes/topaz/layouts/default.twig:53
+#: themes/topaz/layouts/default.twig:54
 msgid "Newer posts"
 msgstr "Neuere Posts"
 
-#: themes/topaz/layouts/default.twig:54
+#: themes/topaz/layouts/default.twig:55
 msgid "Older posts"
 msgstr "Ältere Posts"
 
-#: themes/topaz/layouts/default.twig:64
+#: themes/topaz/layouts/default.twig:65
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "Aufgerufen von %s in Zeile %d in %s Sekunden."

@@ -40,7 +40,7 @@ msgstr "标签"
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "永久链接至 &#8220;%s&#8221;"
 
-#: themes/umbra/content/post.twig:17 themes/umbra/layouts/default.twig:67
+#: themes/umbra/content/post.twig:17 themes/umbra/layouts/default.twig:68
 msgid "Draft"
 msgstr "草稿"
 
@@ -55,16 +55,6 @@ msgstr "固定"
 #: themes/umbra/content/post.twig:27 themes/umbra/pages/view.twig:10
 msgid "[Untitled]"
 msgstr "[无标题]"
-
-#: themes/umbra/content/post.twig:35
-#, php-format
-msgid "&copy; %s, %s."
-msgstr "&copy; %s, %s."
-
-#: themes/umbra/content/post.twig:37
-#, php-format
-msgid "&copy; %s."
-msgstr "&copy; %s."
 
 #: themes/umbra/feathers/audio.twig:10 themes/umbra/feathers/link.twig:7
 #: themes/umbra/feathers/photo.twig:13 themes/umbra/feathers/quote.twig:9
@@ -176,7 +166,7 @@ msgstr "当有其他人评论的时候通知我"
 msgid "Speak"
 msgstr "说话"
 
-#: themes/umbra/forms/user/controls.twig:5 themes/umbra/layouts/default.twig:72
+#: themes/umbra/forms/user/controls.twig:5 themes/umbra/layouts/default.twig:73
 msgid "Controls"
 msgstr "操作"
 
@@ -186,7 +176,7 @@ msgstr "全名"
 
 #: themes/umbra/forms/user/controls.twig:9
 #: themes/umbra/forms/user/register.twig:13
-#: themes/umbra/layouts/default.twig:49
+#: themes/umbra/layouts/default.twig:50
 msgid "Email"
 msgstr "邮件"
 
@@ -209,7 +199,7 @@ msgid "Update"
 msgstr "更新"
 
 #: themes/umbra/forms/user/login.twig:5 themes/umbra/forms/user/login.twig:14
-#: themes/umbra/layouts/default.twig:84
+#: themes/umbra/layouts/default.twig:85
 msgid "Log in"
 msgstr "登陆"
 
@@ -239,7 +229,7 @@ msgstr "提交"
 
 #: themes/umbra/forms/user/register.twig:5
 #: themes/umbra/forms/user/register.twig:19
-#: themes/umbra/layouts/default.twig:80
+#: themes/umbra/layouts/default.twig:81
 msgid "Register"
 msgstr "注册"
 
@@ -259,48 +249,48 @@ msgstr ""
 msgid "A dark tumbleblog theme for Chyrp Lite."
 msgstr ""
 
-#: themes/umbra/layouts/default.twig:8 themes/umbra/layouts/default.twig:100
+#: themes/umbra/layouts/default.twig:8 themes/umbra/layouts/default.twig:101
 #, php-format
 msgid "Page %d"
 msgstr "第%d页"
 
-#: themes/umbra/layouts/default.twig:47
+#: themes/umbra/layouts/default.twig:48
 msgid "Links"
 msgstr "链接"
 
-#: themes/umbra/layouts/default.twig:52
+#: themes/umbra/layouts/default.twig:53
 msgid "Feed"
 msgstr "订阅"
 
-#: themes/umbra/layouts/default.twig:55
+#: themes/umbra/layouts/default.twig:56
 msgid "Archive"
 msgstr "档案"
 
-#: themes/umbra/layouts/default.twig:59
+#: themes/umbra/layouts/default.twig:60
 msgid "Admin"
 msgstr "管理"
 
-#: themes/umbra/layouts/default.twig:63
+#: themes/umbra/layouts/default.twig:64
 msgid "Write"
 msgstr "写作"
 
-#: themes/umbra/layouts/default.twig:75
+#: themes/umbra/layouts/default.twig:76
 msgid "Log out"
 msgstr "退出登陆"
 
-#: themes/umbra/layouts/default.twig:89
+#: themes/umbra/layouts/default.twig:90
 msgid "Search&hellip;"
 msgstr "搜索&hellip;"
 
-#: themes/umbra/layouts/default.twig:89
+#: themes/umbra/layouts/default.twig:90
 msgid "Search this blog"
 msgstr "搜索此博客"
 
-#: themes/umbra/layouts/default.twig:90
+#: themes/umbra/layouts/default.twig:91
 msgid "Search"
 msgstr "搜索"
 
-#: themes/umbra/layouts/default.twig:111
+#: themes/umbra/layouts/default.twig:112
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "调用 %s 在行 %d 在 %s 秒."
