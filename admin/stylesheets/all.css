@@ -470,6 +470,7 @@ label {
 textarea {
     display: block;
     resize: vertical;
+    height: calc(10lh + 1rem);
 }
 select, input {
     display: inline-block;
@@ -1258,6 +1259,23 @@ input.toolbar.hidden {
     li.module div.controls,
     li.feather div.controls {
         padding-top: 0rem;
+    }
+}
+
+@media screen and (max-width: 719px) {
+    #header #navigation {
+        left: 0.5rem;
+        right: 0.5rem;
+    }
+    #sub_nav, #content {
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
+    #content {
+        margin-bottom: 0.5rem;
+    }
+    textarea {
+        height: calc(100vh - 2lh);
     }
 }
 
