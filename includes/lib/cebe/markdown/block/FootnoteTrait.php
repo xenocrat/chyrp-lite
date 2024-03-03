@@ -71,7 +71,8 @@ trait FootnoteTrait
 							'refs' => [1 => $footnotePos],
 						];
 					} else {
-						// Subsequent times sorting this footnote (i.e. every time it's referenced).
+						// Subsequent times sorting this footnote
+						// (i.e. every time it's referenced).
 						$footnotesSorted[$footnoteName]['refs'][] = $footnotePos;
 					}
 				}
@@ -113,7 +114,7 @@ trait FootnoteTrait
 	 */
 	protected function getFootnotesHtml(array $footnotesSorted): string
 	{
-		$prefix = !empty($this->contextID) ? $this->contextID . "-" : "";
+		$prefix = !empty($this->contextID) ? $this->contextID . '-' : '';
 		$hr = $this->html5 ? "<hr>\n" : "<hr />\n";
 		$footnotesHtml = "\n<div class=\"footnotes\" role=\"doc-endnotes\">\n$hr<ol>\n";
 		foreach ($footnotesSorted as $footnoteInfo) {
@@ -153,7 +154,8 @@ trait FootnoteTrait
 		if (preg_match('/^\[\^(.+?)]/', $text, $matches)) {
 			$footnoteName = $matches[1];
 
-			// We will later order the footnotes according to the order that the footnote links appear in.
+			// We will later order the footnotes
+			// according to the order that the footnote links appear in.
 			$this->footnoteLinkNum++;
 			$this->footnoteLinks[$this->footnoteLinkNum] = $footnoteName;
 
@@ -173,7 +175,7 @@ trait FootnoteTrait
 	 */
 	protected function renderFootnoteLink($block): string
 	{
-		$prefix = !empty($this->contextID) ? $this->contextID . "-" : "";
+		$prefix = !empty($this->contextID) ? $this->contextID . '-' : '';
 		$substituteRefnum = "\x1Afootnote-refnum".$block['num']."\x1A";
 		$substituteNum = "\x1Afootnote-num" . $block['num'] . "\x1A";
 		return '<sup id="'
@@ -222,7 +224,8 @@ trait FootnoteTrait
 				$str = substr($line, strlen($matches[0]));
 				$footnotes[$name] = [ trim($str) ];
 			} else if (strlen(trim($line)) === 0) {
-				// Current line is empty and ends this list of footnotes unless the next line is indented.
+				// Current line is empty and ends this list of footnotes
+				// unless the next line is indented.
 				if (isset($lines[$i+1])) {
 					$nextLineIndented = preg_match('/^(\t| {4})/', $lines[$i + 1], $matches);
 					if ($nextLineIndented) {
@@ -260,7 +263,8 @@ trait FootnoteTrait
 		foreach ($block['content'] as $footnoteName => $footnote) {
 			$this->footnotes[$footnoteName] = $this->renderAbsy($footnote);
 		}
-		// Render nothing, because all footnote lists will be concatenated at the end of the text.
+		// Render nothing, because all footnote lists will be concatenated
+		// at the end of the text.
 		return '';
 	}
 }
