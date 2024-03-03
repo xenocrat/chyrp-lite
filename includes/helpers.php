@@ -835,7 +835,7 @@
                 !isset($arg) or $arg === array() or
                 (is_string($arg) and trim($arg) === "") or
                 (is_object($arg) and empty($arg)) or
-                in_array($arg, SQL_DATETIME_ZERO_VARIANTS)
+                in_array($arg, SQL_DATETIME_ZERO_VARIANTS, true)
             );
 
             if (!$unset)

@@ -310,7 +310,7 @@
             if (isset($model->updated_at))
                 $model->updated = (
                     !empty($model->updated_at) and
-                    !in_array($model->updated_at, SQL_DATETIME_ZERO_VARIANTS)
+                    !in_array($model->updated_at, SQL_DATETIME_ZERO_VARIANTS, true)
                 );
 
             # Clone the object and cache it.
