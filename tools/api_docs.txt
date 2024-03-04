@@ -2731,6 +2731,17 @@ Returns:
     Whether or not the string matches the criteria.
 
 
+Function: is_datetime_zero
+--------------------------
+Is the string a SQL datetime "zero" variant?
+
+Parameters:
+    $string - The string to analyse.
+
+Returns:
+    Whether or not the string matches the criteria.
+
+
 Function: generate_captcha
 --------------------------
 Generates a captcha form element.
