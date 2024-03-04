@@ -42,13 +42,13 @@ trait HtmlTrait
 		if ($line[0] !== '<' || isset($line[1]) && $line[1] == ' ') {
 			return false; // no tag
 		}
-		if (strncmp($line, '<script', 7) === 0) {
+		if (strncasecmp($line, '<script', 7) === 0) {
 			return true; // type 1: script
 		}
-		if (strncmp($line, '<pre', 4) === 0) {
+		if (strncasecmp($line, '<pre', 4) === 0) {
 			return true; // type 1: pre
 		}
-		if (strncmp($line, '<style', 6) === 0) {
+		if (strncasecmp($line, '<style', 6) === 0) {
 			return true; // type 1: style
 		}
 		if (strncmp($line, '<!--', 4) === 0) {
@@ -82,30 +82,30 @@ trait HtmlTrait
 	protected function consumeHtml($lines, $current): array
 	{
 		$content = [];
-		if (strncmp($lines[$current], '<script', 7) === 0) {
+		if (strncasecmp($lines[$current], '<script', 7) === 0) {
 			// type 1: script
 			for ($i = $current, $count = count($lines); $i < $count; $i++) {
 				$line = $lines[$i];
 				$content[] = $line;
-				if (strpos($line, '</script>') !== false) {
+				if (stripos($line, '</script>') !== false) {
 					break;
 				}
 			}
-		} elseif (strncmp($lines[$current], '<pre', 4) === 0) {
+		} elseif (strncasecmp($lines[$current], '<pre', 4) === 0) {
 			// type 1: pre
 			for ($i = $current, $count = count($lines); $i < $count; $i++) {
 				$line = $lines[$i];
 				$content[] = $line;
-				if (strpos($line, '</pre>') !== false) {
+				if (stripos($line, '</pre>') !== false) {
 					break;
 				}
 			}
-		} elseif (strncmp($lines[$current], '<style', 6) === 0) {
+		} elseif (strncasecmp($lines[$current], '<style', 6) === 0) {
 			// type 1: style
 			for ($i = $current, $count = count($lines); $i < $count; $i++) {
 				$line = $lines[$i];
 				$content[] = $line;
-				if (strpos($line, '</style>') !== false) {
+				if (stripos($line, '</style>') !== false) {
 					break;
 				}
 			}

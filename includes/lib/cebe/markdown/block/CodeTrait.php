@@ -26,7 +26,7 @@ trait CodeTrait
 	 */
 	protected function consumeCode($lines, $current): array
 	{
-		// consume until newline
+		// consume until end of markers
 		$content = [];
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];

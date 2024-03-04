@@ -121,16 +121,19 @@ trait ListTrait
 				if (!isset($lines[$i + 1])) {
 					break;
 
-				// next line is also blank: may be a lazy list
+				// next line is also blank
+				// -> lazy list?
 				} elseif ($lines[$i + 1] === '' || ltrim($lines[$i + 1]) === '') {
-					continue;
+					$block['items'][$item][] = $line;
 
-				// next item is the continuation of this list -> lazy list
+				// next item is the continuation of this list
+				// -> lazy list!
 				} elseif (preg_match($pattern, $lines[$i + 1])) {
 					$block['items'][$item][] = $line;
 					$block['lazyItems'][$item] = true;
 
-				// next item is indented as much as this list -> lazy list if it is not a reference
+				// next item is indented as much as this list
+				// -> lazy list if it is not a reference
 				} elseif (strncmp($lines[$i + 1], $indent, $len) === 0 ||
 					!empty($lines[$i + 1]) && $lines[$i + 1][0] == "\t") {
 					$block['items'][$item][] = $line;
