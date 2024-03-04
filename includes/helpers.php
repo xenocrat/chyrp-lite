@@ -787,7 +787,8 @@
             return $variable;
 
         $unset = (
-            !isset($variable) or $variable === array() or
+            !isset($variable) or
+            $variable === array() or
             (is_string($variable) and trim($variable) === "")
         );
 
@@ -803,7 +804,10 @@
 
             $nonempty = (
                 isset($arg) and $arg !== array() and
-                (!is_string($arg) or (is_string($arg) and trim($arg) !== ""))
+                (
+                    !is_string($arg) or
+                    (is_string($arg) and trim($arg) !== "")
+                )
             );
 
             if ($nonempty)
@@ -832,10 +836,11 @@
 
         foreach ($args as $index => $arg) {
             $unset = (
-                !isset($arg) or $arg === array() or
+                !isset($arg) or
+                $arg === array() or
                 (is_string($arg) and trim($arg) === "") or
                 (is_object($arg) and empty($arg)) or
-                in_array($arg, SQL_DATETIME_ZERO_VARIANTS, true)
+                is_datetime_zero($arg)
             );
 
             if (!$unset)
@@ -2997,6 +3002,31 @@
                 $string
             )
         );
+    }
+
+    /**
+     * Function: is_datetime_zero
+     * Is the string a SQL datetime "zero" variant?
+     *
+     * Parameters:
+     *     $string - The string to analyse.
+     *
+     * Returns:
+     *     Whether or not the string matches the criteria.
+     */
+    function is_datetime_zero($string): bool {
+        if (
+            !is_string($string) and
+            !$string instanceof Stringable
+        )
+            return false;
+
+        foreach (SQL_DATETIME_ZERO_VARIANTS as $variant) {
+            if (strcmp($variant, $string) === 0)
+                return true;
+        }
+
+        return false;
     }
 
     /**

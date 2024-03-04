@@ -90,7 +90,7 @@
 
                     if (
                         $key == "updated_at" and
-                        in_array($val, SQL_DATETIME_ZERO_VARIANTS, true)
+                        is_datetime_zero($val)
                     )
                         $val = SQL_DATETIME_ZERO;
 
@@ -683,7 +683,7 @@
                                 if ($insert) {
                                     if (
                                         $key == "updated_at" and
-                                        in_array($val, SQL_DATETIME_ZERO_VARIANTS, true)
+                                        is_datetime_zero($val)
                                     )
                                         $val = SQL_DATETIME_ZERO;
                                 }
