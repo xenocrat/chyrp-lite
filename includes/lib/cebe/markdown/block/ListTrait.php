@@ -32,7 +32,7 @@ trait ListTrait
 	 */
 	protected function identifyOl($line): bool
 	{
-		return preg_match('/^ {0,3}\d+\.[ \t]/', $line);
+		return preg_match('/^ {0,3}\d+[\.\)]([ \t]|$)/', $line);
 	}
 
 	/**
@@ -40,7 +40,7 @@ trait ListTrait
 	 */
 	protected function identifyUl($line): bool
 	{
-		return preg_match('/^ {0,3}[\-\+\*][ \t]/', $line);
+		return preg_match('/^ {0,3}[\-\+\*]([ \t]|$)/', $line);
 	}
 
 	/**
@@ -48,7 +48,7 @@ trait ListTrait
 	 */
 	protected function consumeOl($lines, $current): array
 	{
-		// consume until newline
+		// consume until newline or end condition
 
 		$block = [
 			'list',
@@ -64,7 +64,7 @@ trait ListTrait
 	 */
 	protected function consumeUl($lines, $current): array
 	{
-		// consume until newline
+		// consume until newline or end condition
 
 		$block = [
 			'list',
@@ -77,44 +77,44 @@ trait ListTrait
 	private function consumeList($lines, $current, $block, $type): array
 	{
 		$item = 0;
-		$indent = '';
-		$len = 0;
+		$mw = 0;
 		$lastLineEmpty = false;
-		// track the indentation of list markers, if indented more than previous element
-		// a list marker is considered to be long to a lower level
-		$leadSpace = 3;
-		$marker = $type === 'ul' ? ltrim($lines[$current])[0] : '';
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
-			// match list marker on the beginning of the line
+			// match a list marker on the beginning of the line
 			$pattern = ($type === 'ol') ?
-				'/^( {0,'.$leadSpace.'})(\d+)\.[ \t]+/' :
-				'/^( {0,'.$leadSpace.'})\\'.$marker.'[ \t]+/';
-			if (preg_match($pattern, $line, $matches)) {
-				if (($len = substr_count($matches[0], "\t")) > 0) {
-					$indent = str_repeat("\t", $len);
-					$line = substr($line, strlen($matches[0]));
-				} else {
-					$len = strlen($matches[0]);
-					$indent = str_repeat(' ', $len);
-					$line = substr($line, $len);
-				}
+				'/^( {0,3})(\d+)([\.\)])([ \t]+|$)/' :
+				'/^( {0,3})([\-\+\*])([ \t]+|$)/';
+			// if not the first item, marker indentation must be less than
+			// width of preceeding marker - otherwise it is a continuation
+			// of the current item containing a sub-list
+			if (preg_match($pattern, $line, $matches)
+				&& ($i === $current || strlen($matches[1]) < $mw)) {
 				if ($i === $current) {
-					$leadSpace = strlen($matches[1]) + 1;
-				}
-
-				if ($type === 'ol' && $this->keepListStartNumber) {
-					// attr `start` for ol
-					if (!isset($block['attr']['start']) && isset($matches[2])) {
+					// first item - store the marker for comparison
+					$marker = $type === 'ol' ? $matches[3] : $matches[2];
+					// store the ol start number
+					if ($type === 'ol' && $this->keepListStartNumber) {
+						// attr `start` for ol
 						$block['attr']['start'] = $matches[2];
+					}
+				} else {
+					$newMarker = $type === 'ol' ? $matches[3] : $matches[2];
+					// marker has changed: end of list
+					if (strcmp($marker, $newMarker) !== 0) {
+						--$i;
+						break;
 					}
 				}
 
+				// store the marker width
+				$mw = strlen($matches[0]);
+				$line = substr($line, $mw);
 				$block['items'][++$item][] = $line;
-				$block['lazyItems'][$item] = $lastLineEmpty;
+				$block['looseItems'][$item] = $lastLineEmpty;
 				$lastLineEmpty = false;
 			} elseif (ltrim($line) === '') {
-				// line is blank: may be a lazy list
+				// line is blank: may be a loose list
 				$lastLineEmpty = true;
 
 				// no more lines: end of list
@@ -122,53 +122,38 @@ trait ListTrait
 					break;
 
 				// next line is also blank
-				// -> lazy list?
 				} elseif ($lines[$i + 1] === '' || ltrim($lines[$i + 1]) === '') {
 					$block['items'][$item][] = $line;
 
-				// next item is the continuation of this list
-				// -> lazy list!
+				// next line is indented enough to continue this item
+				} elseif (ctype_space(substr($lines[$i + 1], 0, $mw))) {
+					$block['items'][$item][] = $line;
+
+				// next line starts the next item in this list
+				// -> loose list
 				} elseif (preg_match($pattern, $lines[$i + 1])) {
 					$block['items'][$item][] = $line;
-					$block['lazyItems'][$item] = true;
-
-				// next item is indented as much as this list
-				// -> lazy list if it is not a reference
-				} elseif (strncmp($lines[$i + 1], $indent, $len) === 0 ||
-					!empty($lines[$i + 1]) && $lines[$i + 1][0] == "\t") {
-					$block['items'][$item][] = $line;
-					$nextLine = $lines[$i + 1][0] === "\t" ?
-						substr($lines[$i + 1], 1) :
-						substr($lines[$i + 1], $len);
-					$block['lazyItems'][$item] = empty($nextLine) ||
-					!method_exists($this, 'identifyReference') ||
-					!$this->identifyReference($nextLine);
+					$block['looseItems'][$item] = true;
 
 				// everything else ends the list
 				} else {
 					break;
 				}
 			} else {
-				if ($line[0] === "\t") {
-					$line = substr($line, 1);
-				} elseif (strncmp($line, $indent, $len) === 0) {
-					$line = substr($line, $len);
+				// line is not indented enough to continue this item
+				if (strlen($line) < $mw || !ctype_space(substr($line, 0, $mw))) {
+					--$i;
+					break;
 				}
+				$line = substr($line, $mw);
 				$block['items'][$item][] = $line;
 				$lastLineEmpty = false;
 			}
-
-			// if next line is <hr>, end the list
-			if (!empty($lines[$i + 1])
-				&& method_exists($this, 'identifyHr')
-				&& $this->identifyHr($lines[$i + 1])) {
-				break;
-			}
 		}
 
-		foreach($block['items'] as $itemId => $itemLines) {
+		foreach ($block['items'] as $itemId => $itemLines) {
 			$content = [];
-			if (!$block['lazyItems'][$itemId]) {
+			if (!$block['looseItems'][$itemId]) {
 				$firstPar = [];
 				while (!empty($itemLines)
 					&& rtrim($itemLines[0]) !== ''
