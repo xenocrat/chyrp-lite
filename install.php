@@ -349,7 +349,7 @@
             p {
                 margin-bottom: 1rem;
             }
-            strong, address {
+            strong {
                 font: inherit;
                 font-weight: bold;
                 color: #c11600;

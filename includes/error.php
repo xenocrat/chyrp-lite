@@ -325,7 +325,7 @@
                 border: none;
                 padding: 0px;
             }
-            strong, address {
+            strong {
                 font: inherit;
                 font-weight: bold;
                 color: #c11600;
@@ -341,7 +341,7 @@
             }
             ol.backtrace {
                 font-family: "Cousine webfont", monospace;
-                font-size: 0.85em;
+                font-size: 0.85rem;
                 word-break: break-all;
             }
             a:link,
