@@ -1547,9 +1547,9 @@
 
         if ($context instanceof Model) {
             $name = strtolower(get_class($context));
-            $parser->contextID = $name."-".$context->id;
+            $parser->contextId = $name."-".$context->id;
         } else {
-            $parser->contextID = "";
+            $parser->contextId = "";
         }
 
         return $parser->parse($text);
