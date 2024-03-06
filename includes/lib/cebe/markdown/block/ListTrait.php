@@ -78,20 +78,20 @@ trait ListTrait
 	{
 		$item = 0;
 		$mw = 0;
-		$lastLineEmpty = false;
+		$looseList = false;
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
-			// match a list marker on the beginning of the line
 			$pattern = ($type === 'ol') ?
 				'/^( {0,3})(\d+)([\.\)])([ \t]+|$)/' :
 				'/^( {0,3})([\-\+\*])([ \t]+|$)/';
 			// if not the first item, marker indentation must be less than
 			// width of preceeding marker - otherwise it is a continuation
-			// of the current item containing a sub-list
+			// of the current item containing a marker for a sub-list item
 			if (preg_match($pattern, $line, $matches)
 				&& ($i === $current || strlen($matches[1]) < $mw)) {
 				if ($i === $current) {
-					// first item - store the marker for comparison
+				// first item
+					// store the marker for comparison
 					$marker = $type === 'ol' ? $matches[3] : $matches[2];
 					// store the ol start number
 					if ($type === 'ol' && $this->keepListStartNumber) {
@@ -106,37 +106,26 @@ trait ListTrait
 						break;
 					}
 				}
-
 				// store the marker width
 				$mw = strlen($matches[0]);
 				$line = substr($line, $mw);
 				$block['items'][++$item][] = $line;
-				$block['looseItems'][$item] = $lastLineEmpty;
-				$lastLineEmpty = false;
-			} elseif (ltrim($line) === '') {
-				// line is blank: may be a loose list
-				$lastLineEmpty = true;
-
-				// no more lines: end of list
+			} elseif ($line === '' || ltrim($line) === '') {
 				if (!isset($lines[$i + 1])) {
+				// no more lines: end of list
 					break;
-
-				// next line is also blank
 				} elseif ($lines[$i + 1] === '' || ltrim($lines[$i + 1]) === '') {
+				// next line is also blank
 					$block['items'][$item][] = $line;
-
-				// next line is indented enough to continue this item
 				} elseif (ctype_space(substr($lines[$i + 1], 0, $mw))) {
+				// next line is indented enough to continue this item
 					$block['items'][$item][] = $line;
-
-				// next line starts the next item in this list
-				// -> loose list
 				} elseif (preg_match($pattern, $lines[$i + 1])) {
+				// next line is the next item in this list: loose list
 					$block['items'][$item][] = $line;
-					$block['looseItems'][$item] = true;
-
-				// everything else ends the list
+					$looseList = true;
 				} else {
+				// everything else ends the list
 					break;
 				}
 			} else {
@@ -147,22 +136,23 @@ trait ListTrait
 				}
 				$line = substr($line, $mw);
 				$block['items'][$item][] = $line;
-				$lastLineEmpty = false;
 			}
 		}
 
 		foreach ($block['items'] as $itemId => $itemLines) {
 			$content = [];
-			if (!$block['looseItems'][$itemId]) {
-				$firstPar = [];
-				while (!empty($itemLines)
-					&& rtrim($itemLines[0]) !== ''
+			if (!$looseList) {
+			// tight list:
+			// parse inline unless a non-paragraph block marker is detected
+				$paragraph = [];
+				while (isset($itemLines[0]) && isset($itemLines[0][0])
 					&& $this->detectLineType($itemLines, 0) === 'paragraph') {
-					$firstPar[] = array_shift($itemLines);
+					$paragraph[] = array_shift($itemLines);
 				}
-				$content = $this->parseInline(implode("\n", $firstPar));
+				$content = $this->parseInline(implode("\n", $paragraph));
 			}
 			if (!empty($itemLines)) {
+				// render any blocks that remain in the item content
 				$content = array_merge($content, $this->parseBlocks($itemLines));
 			}
 			$block['items'][$itemId] = $content;
