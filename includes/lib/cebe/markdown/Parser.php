@@ -37,7 +37,7 @@ abstract class Parser
 	/**
 	 * @var string optional context identifier for this instance.
 	 */
-	public $contextID = '';
+	public $contextId = '';
 
 	/**
 	 * @var array the current context the parser is in.

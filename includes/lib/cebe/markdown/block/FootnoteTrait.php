@@ -114,7 +114,7 @@ trait FootnoteTrait
 	 */
 	protected function getFootnotesHtml(array $footnotesSorted): string
 	{
-		$prefix = !empty($this->contextID) ? $this->contextID . '-' : '';
+		$prefix = !empty($this->contextId) ? $this->contextId . '-' : '';
 		$hr = $this->html5 ? "<hr>\n" : "<hr />\n";
 		$footnotesHtml = "\n<div class=\"footnotes\" role=\"doc-endnotes\">\n$hr<ol>\n";
 		foreach ($footnotesSorted as $footnoteInfo) {
@@ -175,7 +175,7 @@ trait FootnoteTrait
 	 */
 	protected function renderFootnoteLink($block): string
 	{
-		$prefix = !empty($this->contextID) ? $this->contextID . '-' : '';
+		$prefix = !empty($this->contextId) ? $this->contextId . '-' : '';
 		$substituteRefnum = "\x1Afootnote-refnum".$block['num']."\x1A";
 		$substituteNum = "\x1Afootnote-num" . $block['num'] . "\x1A";
 		return '<sup id="'
