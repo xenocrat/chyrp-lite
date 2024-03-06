@@ -26,8 +26,8 @@ trait CodeTrait
 	 */
 	protected function consumeCode($lines, $current): array
 	{
-		// consume until end of markers
 		$content = [];
+		// consume until end of markers
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
 			// a line belongs to this code block if it is indented by 4 spaces or a tab
@@ -35,10 +35,10 @@ trait CodeTrait
 				$line = $line[0] === "\t" ? substr($line, 1) : substr($line, 4);
 				$content[] = $line;
 			// ...or if blank and the next is also blank or indented by 4 spaces or a tab
-			} elseif (($line === '' || rtrim($line) === '') && isset($lines[$i + 1])) {
+			} elseif (($line === '' || ltrim($line) === '') && isset($lines[$i + 1])) {
 				$next = $lines[$i + 1];
 				if ($next === '' ||
-					rtrim($next) === '' ||
+					ltrim($next) === '' ||
 					$next[0] === "\t" ||
 					strncmp($next, '    ', 4) === 0) {
 					if (isset($line[0])

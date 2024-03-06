@@ -37,8 +37,8 @@ trait FencedCodeTrait
 		$line = ltrim($lines[$current]);
 		$fence = substr($line, 0, $pos = strrpos($line, $line[0]) + 1);
 		$language = rtrim(substr($line, $pos));
-		// consume until end fence
 		$content = [];
+		// consume until end fence
 		for ($i = $current + 1, $count = count($lines); $i < $count; $i++) {
 			if (($pos = strpos($line = $lines[$i], $fence)) === false || $pos > 3) {
 				$content[] = $line;

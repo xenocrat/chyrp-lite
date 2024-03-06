@@ -48,8 +48,6 @@ trait ListTrait
 	 */
 	protected function consumeOl($lines, $current): array
 	{
-		// consume until newline or end condition
-
 		$block = [
 			'list',
 			'list' => 'ol',
@@ -64,8 +62,6 @@ trait ListTrait
 	 */
 	protected function consumeUl($lines, $current): array
 	{
-		// consume until newline or end condition
-
 		$block = [
 			'list',
 			'list' => 'ul',
@@ -79,6 +75,7 @@ trait ListTrait
 		$item = 0;
 		$mw = 0;
 		$looseList = false;
+		// consume until end condition
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
 			$pattern = ($type === 'ol') ?
@@ -179,7 +176,6 @@ trait ListTrait
 		}
 		return $output . "</$type>\n";
 	}
-
 
 	/**
 	 * Return html attributes string from [attrName => attrValue] list

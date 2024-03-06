@@ -83,17 +83,10 @@ class Markdown extends Parser
 	 */
 	protected function consumeParagraph($lines, $current): array
 	{
-		// consume until newline
 		$content = [];
+		// consume until blank line or end condition
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
-
-			// a list may break a paragraph when it is inside of a list
-			if (isset($this->context[1]) && $this->context[1] === 'list' && !ctype_alpha($line[0]) && (
-				$this->identifyUl($line, $lines, $i) || $this->identifyOl($line, $lines, $i))) {
-				break;
-			}
-
 			if ($line === ''
 				|| ltrim($line) === ''
 				|| !ctype_alpha($line[0]) && (

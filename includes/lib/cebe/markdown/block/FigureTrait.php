@@ -27,9 +27,9 @@ trait FigureTrait
 	 */
 	protected function consumeFigure($lines, $current): array
 	{
-		// consume until end of markers
 		$content = [];
 		$caption = [];
+		// consume until end of markers
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
 			if (ltrim($line) !== '') {

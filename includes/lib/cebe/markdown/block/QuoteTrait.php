@@ -25,8 +25,8 @@ trait QuoteTrait
 	 */
 	protected function consumeQuote($lines, $current): array
 	{
-		// consume until end of markers
 		$content = [];
+		// consume until end of markers
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
 			if (ltrim($line) !== '') {

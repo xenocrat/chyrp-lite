@@ -146,7 +146,7 @@ trait HtmlTrait
 				}
 			}
 		} else {
-			// type 6 or 7 tag - consume until newline
+			// type 6 or 7 tag - consume until blank line
 			$content = [];
 			for ($i = $current, $count = count($lines); $i < $count; $i++) {
 				$line = $lines[$i];

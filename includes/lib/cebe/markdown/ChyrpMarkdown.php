@@ -68,8 +68,8 @@ class ChyrpMarkdown extends GithubMarkdown
 	 */
 	protected function consumeParagraph($lines, $current): array
 	{
-		// consume until newline
 		$content = [];
+		// consume until blank line or end condition
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
 			if ($line === ''

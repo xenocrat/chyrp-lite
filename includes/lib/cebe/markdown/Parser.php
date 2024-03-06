@@ -284,8 +284,8 @@ abstract class Parser
 	 */
 	protected function consumeParagraph($lines, $current): array
 	{
-		// consume until newline
 		$content = [];
+		// consume until blank line
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			if (ltrim($lines[$i]) !== '') {
 				$content[] = $lines[$i];

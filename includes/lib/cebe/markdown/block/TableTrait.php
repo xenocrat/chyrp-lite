@@ -28,13 +28,12 @@ trait TableTrait
 	 */
 	protected function consumeTable($lines, $current): array
 	{
-		// consume until newline
-
 		$block = [
 			'table',
 			'cols' => [],
 			'rows' => [],
 		];
+		// consume until blank line
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = trim($lines[$i]);
 
