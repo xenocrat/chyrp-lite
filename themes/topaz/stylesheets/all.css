@@ -133,6 +133,9 @@ strong {
     font: inherit;
     font-weight: bold;
 }
+address {
+    font: inherit;
+}
 small {
     font-weight: normal;
     font-size: 0.75em;
