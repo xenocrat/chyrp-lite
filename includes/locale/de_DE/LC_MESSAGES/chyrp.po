@@ -57,7 +57,7 @@ msgstr "Abfragezeichenfolge"
 msgid "Parameters"
 msgstr "Parameter"
 
-#: includes/class/Query.php:204 includes/class/SQL.php:152 install.php:744
+#: includes/class/Query.php:204 includes/class/SQL.php:152 install.php:745
 #, php-format
 msgid "Database error: %s"
 msgstr "Datenbankfehler: %s"
@@ -97,7 +97,7 @@ msgstr "Route wurde mit einem ungültigen Controller initiiert."
 #: includes/helpers.php:2728 includes/helpers.php:2735
 #: includes/lib/ThumbnailFile.php:290 includes/lib/ThumbnailFile.php:321
 #: includes/lib/ThumbnailFile.php:381 includes/thumbnail.php:15
-#: install.php:1007 upgrade.php:211 upgrade.php:227 upgrade.php:243
+#: install.php:1008 upgrade.php:211 upgrade.php:227 upgrade.php:243
 #: upgrade.php:259 upgrade.php:275 upgrade.php:295 upgrade.php:339
 #: upgrade.php:355 upgrade.php:375 upgrade.php:391 upgrade.php:407
 #: upgrade.php:423 upgrade.php:443 upgrade.php:459 upgrade.php:588
@@ -380,13 +380,13 @@ msgid "That username is already in use."
 msgstr "Dieser Benutzername ist schon belegt."
 
 #: includes/controller/Admin.php:1010 includes/controller/Main.php:800
-#: includes/controller/Main.php:1181 install.php:689
+#: includes/controller/Main.php:1181 install.php:690
 msgid "Passwords cannot be blank."
 msgstr "Passwörter kann nicht leer sein."
 
 #: includes/controller/Admin.php:1017 includes/controller/Admin.php:1187
 #: includes/controller/Main.php:804 includes/controller/Main.php:1019
-#: includes/controller/Main.php:1185 install.php:624 install.php:691
+#: includes/controller/Main.php:1185 install.php:625 install.php:692
 msgid "Passwords do not match."
 msgstr "Passwörter stimmen nicht überein."
 
@@ -396,13 +396,13 @@ msgstr "Wähle bitte ein stärkeres Passwort für diesen Benutzer."
 
 #: includes/controller/Admin.php:1029 includes/controller/Admin.php:1206
 #: includes/controller/Admin.php:2995 includes/controller/Main.php:813
-#: includes/controller/Main.php:1032 install.php:694
+#: includes/controller/Main.php:1032 install.php:695
 msgid "Email address cannot be blank."
 msgstr "E-Mail Addresse kann nicht leer sein."
 
 #: includes/controller/Admin.php:1036 includes/controller/Admin.php:1213
 #: includes/controller/Admin.php:3002 includes/controller/Main.php:817
-#: includes/controller/Main.php:1036 install.php:696
+#: includes/controller/Main.php:1036 install.php:697
 msgid "Invalid email address."
 msgstr "E-Mail Adresse ungültig."
 
@@ -687,11 +687,11 @@ msgstr "Preview gestoppt."
 msgid "Preview started."
 msgstr "Preview gestartet."
 
-#: includes/controller/Admin.php:3009 install.php:672
+#: includes/controller/Admin.php:3009 install.php:673
 msgid "Chyrp URL cannot be blank."
 msgstr "Chyrp URL kann nicht leer sein."
 
-#: includes/controller/Admin.php:3016 install.php:674
+#: includes/controller/Admin.php:3016 install.php:675
 msgid "Invalid Chyrp URL."
 msgstr "Ungültige Chyrp URL."
 
@@ -889,7 +889,7 @@ msgid "You cannot register an account because you are already logged in."
 msgstr ""
 "Du kannst keinen Account registrieren, weil Du zur Zeit eingeloggt bist."
 
-#: includes/controller/Main.php:786 install.php:686
+#: includes/controller/Main.php:786 install.php:687
 msgid "Please enter a username for your account."
 msgstr "Bitte gib einen Benutzernamen für Deinen Account ein."
 
@@ -1398,35 +1398,35 @@ msgstr ""
 msgid "Chyrp Lite Installer"
 msgstr "Chyrp Lite Installer"
 
-#: install.php:669
+#: install.php:670
 msgid "Database cannot be blank."
 msgstr "Datenbank kann nicht leer sein."
 
-#: install.php:677
+#: install.php:678
 msgid "Please enter a name for your website."
 msgstr "Gib bitte einen Namen für den Blog ein."
 
-#: install.php:680
+#: install.php:681
 msgid "Time zone cannot be blank."
 msgstr "Die Zeitzone kann nicht leer sein."
 
-#: install.php:683
+#: install.php:684
 msgid "Language cannot be blank."
 msgstr "Sprache kann nicht leer sein."
 
-#: install.php:702
+#: install.php:703
 msgid "Could not determine the absolute path to the database."
 msgstr "Der absolute Pfad zur Datenbank konnte nicht festgestellt werden."
 
-#: install.php:709
+#: install.php:710
 msgid "Please make the database writable by the server."
 msgstr "Bitte mache die Datenbank vom Server beschreibbar."
 
-#: install.php:713
+#: install.php:714
 msgid "Please enter a username and password for the database."
 msgstr "Bitte gib einen Benutzernamen und ein Passwort für die Datenbank ein."
 
-#: install.php:1008 upgrade.php:212 upgrade.php:228 upgrade.php:244
+#: install.php:1009 upgrade.php:212 upgrade.php:228 upgrade.php:244
 #: upgrade.php:260 upgrade.php:276 upgrade.php:296 upgrade.php:340
 #: upgrade.php:356 upgrade.php:376 upgrade.php:392 upgrade.php:408
 #: upgrade.php:424 upgrade.php:444 upgrade.php:460 upgrade.php:589
@@ -1434,48 +1434,48 @@ msgstr "Bitte gib einen Benutzernamen und ein Passwort für die Datenbank ein."
 msgid "Could not write the configuration file."
 msgstr "Konfigurationsdatei konnte nicht geschrieben werden."
 
-#: install.php:1026
+#: install.php:1027
 msgid "Database Setup"
 msgstr "Datenbank Setup"
 
-#: install.php:1028
+#: install.php:1029
 msgid "Adapter"
 msgstr "Adapter"
 
-#: install.php:1042
+#: install.php:1043
 msgid "Host"
 msgstr "Host"
 
-#: install.php:1046
+#: install.php:1047
 msgid "Port"
 msgstr "Computeranschluss"
 
-#: install.php:1046 install.php:1075
+#: install.php:1047 install.php:1076
 msgid "(optional)"
 msgstr "(optional)"
 
-#: install.php:1050 install.php:1113
+#: install.php:1051 install.php:1114
 msgid "Username"
 msgstr "Benutzername"
 
-#: install.php:1054 install.php:1117 install.php:1121
+#: install.php:1055 install.php:1118 install.php:1122
 msgid "Password"
 msgstr "Passwort"
 
-#: install.php:1058
+#: install.php:1059
 msgid "Database"
 msgstr "Datenbank"
 
-#: install.php:1060
+#: install.php:1061
 msgid "(absolute or relative path)"
 msgstr "(absoluter oder relativer Pfad)"
 
-#: install.php:1066
+#: install.php:1067
 msgid "Make sure your PostgreSQL database uses UTF-8 encoding."
 msgstr ""
 "Stellen Sie sicher, dass Ihre PostgreSQL-Datenbank UTF-8-Codierung verwendet."
 
-#: install.php:1069
+#: install.php:1070
 msgid ""
 "The collation <code>utf8mb4_general_ci</code> is recommended for your MySQL "
 "database."
@@ -1483,7 +1483,7 @@ msgstr ""
 "Für die MySQL-Datenbank wird die Sortierung <code>utf8mb4_general_ci</code> "
 "empfohlen."
 
-#: install.php:1072
+#: install.php:1073
 msgid ""
 "Be sure to put your SQLite database outside the document root directory, "
 "otherwise visitors will be able to download it."
@@ -1491,72 +1491,72 @@ msgstr ""
 "Bitte stelle sicher, dass die SQLite Datenbank außerhalb des "
 "Webserververzeichnisses ist, so dass Benutzer sie nicht herunterladen können."
 
-#: install.php:1075
+#: install.php:1076
 msgid "Table Prefix"
 msgstr "Tabellenpräfix"
 
-#: install.php:1078
+#: install.php:1079
 msgid "Website Setup"
 msgstr "Website Setup"
 
-#: install.php:1080
+#: install.php:1081
 msgid "Chyrp URL"
 msgstr "Chyrp URL"
 
-#: install.php:1084
+#: install.php:1085
 msgid "Site Name"
 msgstr "Blogname"
 
-#: install.php:1085
+#: install.php:1086
 msgid "My Awesome Site"
 msgstr "Meine coole Seite"
 
-#: install.php:1088
+#: install.php:1089
 msgid "Description"
 msgstr "Beschreibung"
 
-#: install.php:1092
+#: install.php:1093
 msgid "Time Zone"
 msgstr "Zeitzone"
 
-#: install.php:1102
+#: install.php:1103
 msgid "Language"
 msgstr "Sprache"
 
-#: install.php:1111
+#: install.php:1112
 msgid "Admin Account"
 msgstr "Admin Account"
 
-#: install.php:1121
+#: install.php:1122
 msgid "(again)"
 msgstr "(nochmal)"
 
-#: install.php:1125
+#: install.php:1126
 msgid "Email Address"
 msgstr "E-Mail Addresse"
 
-#: install.php:1128
+#: install.php:1129
 msgid "Install me!"
 msgstr "Installieren!"
 
-#: install.php:1131
+#: install.php:1132
 msgid "Installation Complete"
 msgstr "Installation vollständig"
 
-#: install.php:1132 upgrade.php:946
+#: install.php:1133 upgrade.php:947
 msgid "What now?"
 msgstr "Und weiter?"
 
-#: install.php:1134
+#: install.php:1135
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr "Lösche die <em>install.php</em>. Die brauchst Du nicht mehr."
 
-#: install.php:1135
+#: install.php:1136
 msgid "Log in to your site and configure things to your liking."
 msgstr ""
 "Logge Dich auf deiner Seite ein und passe die Dinge deiner Vorstellung an."
 
-#: install.php:1138 upgrade.php:953
+#: install.php:1139 upgrade.php:954
 msgid "Take me to my site!"
 msgstr "Bring mich zur Seite!"
 
@@ -1564,39 +1564,39 @@ msgstr "Bring mich zur Seite!"
 msgid "Chyrp Lite Upgrader"
 msgstr "Chyrp Lite Upgrader"
 
-#: upgrade.php:934
+#: upgrade.php:935
 msgid "Halt!"
 msgstr "Halt!"
 
-#: upgrade.php:935
+#: upgrade.php:936
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr "Bitte beachte diese Vorsichtsmaßnahmen bevor Du das Upgrade ausführst:"
 
-#: upgrade.php:937
+#: upgrade.php:938
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr ""
 "<strong>Erstelle ein Backup Deiner Datenbank bevor Du fortfährst!</strong>"
 
-#: upgrade.php:938
+#: upgrade.php:939
 msgid "Tell your users that your site is offline for maintenance."
 msgstr "Sag Deinen Besuchern Bescheid, dass diese Seite offline sein wird."
 
-#: upgrade.php:942
+#: upgrade.php:943
 msgid "Upgrade me!"
 msgstr "Upgrade!"
 
-#: upgrade.php:945
+#: upgrade.php:946
 msgid "Upgrade Complete"
 msgstr "Upgrade vollständig"
 
-#: upgrade.php:948
+#: upgrade.php:949
 msgid "Take action to resolve any errors reported on this page."
 msgstr "Bitte löse alle auf dieser Seite stehenden Fehler."
 
-#: upgrade.php:949
+#: upgrade.php:950
 msgid "Run this upgrader again if you need to."
 msgstr "Führe diesen Upgrader erneut aus, wenn es benötigt wird."
 
-#: upgrade.php:950
+#: upgrade.php:951
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr "Lösche <em>upgrade.php</em>, wenn du fertig mit dem Upgraden bist."
