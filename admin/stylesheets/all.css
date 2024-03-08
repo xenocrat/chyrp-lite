@@ -628,12 +628,12 @@ form.split h3,
 form.split h4,
 form.split h5,
 form.split h6 {
-    margin-left: 45%;
+    margin-left: 40%;
 }
 form.split label {
     box-sizing: border-box;
     display: inline-block;
-    width: 45%;
+    width: 40%;
     text-align: end;
     padding: 0rem 1rem 0rem 0rem;
 }
@@ -645,29 +645,29 @@ form.split input[type="password"],
 form.split input[type="file"],
 form.split select,
 form.split textarea {
-    width: 33%;
+    width: 40%;
 }
 form.split input[type="date"],
 form.split input[type="time"],
 form.split input[type="number"],
 form.split input[type="range"] {
-    width: 16%;
+    width: 20%;
 }
 form.split small,
 form.split .small {
     display: block;
-    margin: 0.25rem 0rem 0rem 45%;
+    margin: 0.25rem 0rem 0rem 40%;
 }
 html[dir="rtl"] form.split small,
 html[dir="rtl"] form.split .small {
-    margin: 0.25rem 45% 0rem 0rem;
+    margin: 0.25rem 40% 0rem 0rem;
 }
 form.split p.buttons {
     display: block;
-    margin: 1rem 0rem 0rem 45%;
+    margin: 1rem 0rem 0rem 40%;
 }
 html[dir="rtl"] form.split p.buttons {
-    margin: 1rem 45% 0rem 0rem;
+    margin: 1rem 40% 0rem 0rem;
 }
 select[disabled],
 textarea[disabled],
