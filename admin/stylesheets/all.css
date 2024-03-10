@@ -129,6 +129,7 @@ body {
     font-size: 1rem;
     line-height: 1.5;
     color: #1f1f23;
+    tab-size: 4;
     background-color: #efefef;
     min-width: 320px;
 }
