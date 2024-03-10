@@ -507,6 +507,7 @@
                 font-family: "Open Sans webfont", sans-serif;
                 line-height: 1.5;
                 color: #1f1f23;
+                tab-size: 4;
                 background: #efefef;
                 margin: 2rem;
             }
