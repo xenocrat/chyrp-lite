@@ -58,6 +58,7 @@ body {
     font-size: 1rem;
     color: #ffffff;
     line-height: 1.5;
+    tab-size: 4;
     background-color: #202021;
     margin: 0em 0em 2rem 0em;
     min-width: 280px;
@@ -166,6 +167,7 @@ pre {
     background-color: #383839;
     margin: 1rem 0rem;
     overflow-x: auto;
+    white-space: pre;
 }
 code {
     font-family: "Cousine webfont", monospace;
@@ -179,6 +181,7 @@ pre > code {
     font-size: 0.85rem;
     display: block;
     padding: 0.5rem;
+    white-space: inherit;
 }
 hr {
     width: 100%;

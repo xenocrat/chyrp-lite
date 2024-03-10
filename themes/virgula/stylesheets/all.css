@@ -58,6 +58,7 @@ body {
     font-size: 1rem;
     color: #0b0c0c;
     line-height: 1.5;
+    tab-size: 4;
     max-width: 80ch;
     margin: 1rem auto;
     padding: 0rem 1rem;
@@ -124,6 +125,7 @@ pre {
     background-color: #f3f2f1;
     margin: 1rem 0rem;
     overflow-x: auto;
+    white-space: pre;
 }
 code {
     font-family: "Cousine webfont", monospace;
@@ -137,6 +139,7 @@ pre > code {
     font-size: 0.85rem;
     display: block;
     padding: 0.3rem 0.7rem;
+    white-space: inherit;
 }
 small {
     font-size: 0.7em;
