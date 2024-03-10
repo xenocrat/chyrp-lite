@@ -309,6 +309,7 @@
                 margin: 1rem 0rem;
                 padding: 1rem;
                 overflow-x: auto;
+                white-space: pre;
             }
             code {
                 font-family: "Cousine webfont", monospace;
@@ -324,6 +325,7 @@
                 display: block;
                 border: none;
                 padding: 0px;
+                white-space: inherit;
             }
             strong {
                 font: inherit;

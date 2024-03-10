@@ -553,6 +553,7 @@
                 margin: 1rem 0rem;
                 padding: 1rem;
                 overflow-x: auto;
+                white-space: pre;
             }
             code {
                 font-family: "Cousine webfont", monospace;
@@ -561,12 +562,14 @@
                 padding: 0px 2px;
                 border: 1px solid #cfcfcf;
                 vertical-align: bottom;
+                white-space: break-spaces;
             }
             pre > code {
                 font-size: 0.85rem;
                 display: block;
                 border: none;
                 padding: 0px;
+                white-space: inherit;
             }
             a:link,
             a:visited {
