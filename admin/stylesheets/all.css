@@ -1282,7 +1282,7 @@ input.toolbar.hidden {
         margin-bottom: 0.5rem;
     }
     textarea {
-        height: calc(100vh - 2lh);
+        height: max(calc(100vh - 2lh), calc(10lh + 1rem));
     }
 }
 
