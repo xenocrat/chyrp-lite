@@ -18,25 +18,7 @@ class Markdown extends Parser
 	use block\CodeTrait;
 	use block\FencedCodeTrait;
 	use block\HeadlineTrait;
-
-	/**
-	 * LinkTrait conflicts with HtmlTrait. If both traits are used together,
-	 * you must define the HtmlTrait::parseInlineHtml method as private so
-	 * it is not used directly:
-	 *
-	 * ```php
-	 * use block\HtmlTrait {
-	 *     parseInlineHtml as private parseInlineHtml;
-	 * }
-	 * ```
-	 *
-	 * If the HtmlTrait::parseInlineHtml method exists it will be called from
-	 * within LinkTrait::parseLt if needed.
-	 */
-	use block\HtmlTrait {
-		parseInlineHtml as private;
-	}
-
+	use block\HtmlTrait;
 	use block\ListTrait;
 	use block\QuoteTrait;
 	use block\RuleTrait;
@@ -64,7 +46,7 @@ class Markdown extends Parser
 		'-', // minus sign (hyphen)
 		'.', // dot
 		'!', // exclamation mark
-		'<', '>',
+		'<', '>', // angle brackets
 	];
 
 	/**
@@ -110,6 +92,27 @@ class Markdown extends Parser
 		return [$block, --$i];
 	}
 
+	/**
+	 * @inheritDoc
+	 *
+	 * Parses a newline indicated by a backslash on the end of a markdown line.
+	 *
+	 * @marker \
+	 */
+	protected function parseEscape($text): array
+	{
+		$br = $this->html5 ? "<br>\n" : "<br />\n";
+		if (isset($text[1]) && $text[1] === "\n") {
+		// backslash followed by newline
+			return [['text', $br], 2];
+		} elseif (!isset($text[1])) {
+		// backslash at end of the text
+			return [['text', $br], 1];
+		}
+
+		// Otherwise parse the sequence normally
+		return parent::parseEscape($text);
+	}
 
 	/**
 	 * @inheritDoc
@@ -118,6 +121,7 @@ class Markdown extends Parser
 	 */
 	protected function renderText($text): string
 	{
-		return str_replace("  \n", $this->html5 ? "<br>\n" : "<br />\n", $text[1]);
+		$br = $this->html5 ? "<br>\n" : "<br />\n";
+		return str_replace("  \n", $br, $text[1]);
 	}
 }

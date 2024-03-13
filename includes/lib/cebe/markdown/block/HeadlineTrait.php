@@ -13,17 +13,24 @@ namespace cebe\markdown\block;
 trait HeadlineTrait
 {
 	/**
+	 * Bust the alphabetical calling strategy.
+	 */
+	protected function identifyHeadlinePriority(): string
+	{
+		return 'zHeadline';
+	}
+
+	/**
 	 * identify a line as a headline
 	 */
 	protected function identifyHeadline($line, $lines, $current): bool
 	{
 		return (
-			// heading with #
-			$line[0] === '#' && preg_match('/^#{1,6}[ \t]/', $line) ||
-			// underlined headline
+			// ATX headline
+			preg_match('/^ {0,3}(#{1,6})([ \t]|$)/', $line) ||
+			// setext headline
 			!empty($lines[$current + 1])
-			&& (($l = $lines[$current + 1][0]) === '=' || $l === '-')
-			&& preg_match('/^(\-+|=+)\s*$/', $lines[$current + 1])
+			&& preg_match('/^ {0,3}(\-+|=+)\s*$/', $lines[$current + 1])
 		);
 	}
 
@@ -32,25 +39,20 @@ trait HeadlineTrait
 	 */
 	protected function consumeHeadline($lines, $current): array
 	{
-		if ($lines[$current][0] === '#') {
+		if (preg_match('/^ {0,3}(#{1,6})([ \t]|$)/', $lines[$current], $matches)) {
 			// ATX headline
-			$level = 1;
-			while (isset($lines[$current][$level])
-				&& $lines[$current][$level] === '#' && $level < 6) {
-				$level++;
-			}
 			$block = [
 				'headline',
 				'content' => $this->parseInline(trim($lines[$current], "# \t")),
-				'level' => $level,
+				'level' => strlen($matches[1]),
 			];
 			return [$block, $current];
 		} else {
-			// underlined headline
+			// setext headline
 			$block = [
 				'headline',
 				'content' => $this->parseInline($lines[$current]),
-				'level' => $lines[$current + 1][0] === '=' ? 1 : 2,
+				'level' => substr_count($lines[$current + 1], '=') ? 1 : 2,
 			];
 			return [$block, $current + 1];
 		}

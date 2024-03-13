@@ -67,7 +67,7 @@ trait HtmlTrait
 		if (preg_match("/^<\/?($patterns)(\s|>|\/>|$)/i", $line)) {
 			return true; // type 6
 		}
-		if (preg_match("/^<\/?[a-z][^>]*>(\s)*$/i", $line)
+		if (preg_match("/^<\/?[a-z][a-z0-9\-]*( [^>]*)?>(\s)*$/i", $line)
 			&& (!isset($lines[$current - 1]) ||
 				$lines[$current - 1] === '' ||
 				ltrim($lines[$current - 1]) === '')) {
@@ -185,7 +185,7 @@ trait HtmlTrait
 	{
 		// html entities e.g. &copy; &#169; &#x00A9;
 		if (preg_match('/^&#?[\w\d]+;/', $text, $matches)) {
-			return [['inlineHtml', $matches[0]], strlen($matches[0])];
+			return [['lt', $matches[0]], strlen($matches[0])];
 		} else {
 			return [['text', '&amp;'], 1];
 		}
@@ -194,12 +194,12 @@ trait HtmlTrait
 	/**
 	 * renders a html entity.
 	 */
-	protected function renderInlineHtml($block): string
+	protected function renderLt($block): string
 	{
 		return $block[1];
 	}
 
-	protected function parseInlineHtmlMarkers(): array
+	protected function parseLtMarkers(): array
 	{
 		return array('<');
 	}
@@ -208,15 +208,22 @@ trait HtmlTrait
 	 * Parses inline HTML.
 	 * @marker <
 	 */
-	protected function parseInlineHtml($text): array
+	protected function parseLt($text): array
 	{
 		if (strpos($text, '>') !== false) {
+			// first try bracketed link if we have LinkTrait.
+			if (method_exists($this, 'parseBracketedLink')) {
+				$block = $this->parseBracketedLink($text);
+				if ($block[0][0] !== 'text') {
+					return $block;
+				}
+			}
 			if (preg_match('~^</?(\w+\d?)( .*?)?>~s', $text, $matches)) {
 				// HTML tags
-				return [['inlineHtml', $matches[0]], strlen($matches[0])];
+				return [['lt', $matches[0]], strlen($matches[0])];
 			} elseif (preg_match('~^<!--.*?-->~s', $text, $matches)) {
 				// HTML comments
-				return [['inlineHtml', $matches[0]], strlen($matches[0])];
+				return [['lt', $matches[0]], strlen($matches[0])];
 			}
 		}
 		return [['text', '&lt;'], 1];

@@ -45,7 +45,7 @@ trait CodeTrait
 	protected function renderInlineCode($block): string
 	{
 		return '<code>'
-			. htmlspecialchars($block[1], ENT_NOQUOTES | ENT_SUBSTITUTE, 'UTF-8')
+			. $this->escapeHtmlEntities($block[1], ENT_NOQUOTES | ENT_SUBSTITUTE)
 			. '</code>';
 	}
 }

@@ -55,7 +55,14 @@ trait CodeTrait
 				break;
 			}
 		}
-
+		// remove leading blank lines
+		while (count($content) > 1 && ltrim(reset($content)) === '') {
+			array_shift($content);
+		}
+		// remove trailing blank lines
+		while (count($content) > 1 && ltrim(end($content)) === '') {
+			array_pop($content);
+		}
 		$block = [
 			'code',
 			'content' => implode("\n", $content),
@@ -68,9 +75,11 @@ trait CodeTrait
 	 */
 	protected function renderCode($block): string
 	{
-		$class = isset($block['language']) ? ' class="language-' . $block['language'] . '"' : '';
+		$class = isset($block['language']) ?
+			' class="language-' . $block['language'] . '"' : '';
 		return "<pre><code$class>"
-			. htmlspecialchars($block['content'] . "\n", ENT_NOQUOTES | ENT_SUBSTITUTE, 'UTF-8')
+			. $this->escapeHtmlEntities($block['content'], ENT_NOQUOTES | ENT_SUBSTITUTE)
+			. ($block['content'] === '' ? '' : "\n" )
 			. "</code></pre>\n";
 	}
 }

@@ -12,7 +12,7 @@ namespace cebe\markdown\inline;
  */
 trait AutoLinkTrait
 {
-	protected function parseUrlMarkers(): array
+	protected function parseAutoUrlMarkers(): array
 	{
 		return array('www.', 'http');
 	}
@@ -22,7 +22,7 @@ trait AutoLinkTrait
 	 * @marker www.
 	 * @marker http
 	 */
-	protected function parseUrl($text): array
+	protected function parseAutoUrl($text): array
 	{
 		$regex = <<<REGEXP
 			/(?(R) # in case of recursion match parentheses
@@ -32,6 +32,7 @@ trait AutoLinkTrait
 			)/x
 REGEXP;
 		if (!in_array('parseLink', $this->context) && preg_match($regex, $text, $matches)) {
+		// do not allow links in links
 			return [
 				['autoUrl', $matches[0]],
 				strlen($matches[0])
@@ -47,11 +48,10 @@ REGEXP;
 		if (strncmp($href, 'http', 4) !== 0) {
 			$href = 'http://' . $href;
 		}
-		$ent = $this->html5 ? ENT_HTML5 : ENT_HTML401;
-		$href = htmlspecialchars($href, ENT_COMPAT | $ent, 'UTF-8');
+		$href = $this->escapeHtmlEntities($href, ENT_COMPAT);
 		$decoded = urldecode($text);
 		$secured = preg_match('//u', $decoded) ? $decoded : $text;
-		$text = htmlspecialchars($secured, ENT_NOQUOTES | ENT_SUBSTITUTE, 'UTF-8');
+		$text = $this->escapeHtmlEntities($secured, ENT_NOQUOTES | ENT_SUBSTITUTE);
 		return "<a href=\"$href\">$text</a>";
 	}
 }

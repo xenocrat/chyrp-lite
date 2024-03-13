@@ -44,7 +44,7 @@ class GithubMarkdown extends Markdown
 		'-', // minus sign (hyphen)
 		'.', // dot
 		'!', // exclamation mark
-		'<', '>',
+		'<', '>', // angle brackets
 		// added by GithubMarkdown
 		':', // colon
 		'|', // pipe
@@ -98,28 +98,5 @@ class GithubMarkdown extends Markdown
 		} else {
 			return parent::renderText($text);
 		}
-	}
-
-	/**
-	 * @inheritDoc
-	 *
-	 * Allows escaping newlines to create line breaks.
-	 *
-	 * @marker \
-	 */
-	protected function parseEscape($text): array
-	{
-		$br = $this->html5 ? "<br>\n" : "<br />\n";
-
-		// If the backslash is followed by a newline.
-		// Note: GFM doesn't allow spaces after the backslash.
-		if (isset($text[1]) && $text[1] === "\n") {
-			return [['text', $br], 2];
-		} elseif (!isset($text[1])) {
-			return [['text', $br], 1];
-		}
-
-		// Otherwise parse the sequence normally
-		return parent::parseEscape($text);
 	}
 }

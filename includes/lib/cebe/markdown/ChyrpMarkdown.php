@@ -39,7 +39,7 @@ class ChyrpMarkdown extends GithubMarkdown
 		'-', // minus sign (hyphen)
 		'.', // dot
 		'!', // exclamation mark
-		'<', '>',
+		'<', '>', // angle brackets
 		// added by GithubMarkdown
 		':', // colon
 		'|', // pipe

@@ -21,12 +21,8 @@ trait FencedCodeTrait
 	 */
 	protected function identifyFencedCode($line): bool
 	{
-		return ($line[0] === '`' && strncmp($line, '```', 3) === 0) ||
-			   ($line[0] === '~' && strncmp($line, '~~~', 3) === 0) ||
-			   (isset($line[3]) && (
-					($line[3] === '`' && strncmp(ltrim($line), '```', 3) === 0) ||
-					($line[3] === '~' && strncmp(ltrim($line), '~~~', 3) === 0)
-			   ));
+		return (preg_match('/^~{3,}/', $line) ||
+				preg_match('/^`{3,}[^`]*$/', $line));
 	}
 
 	/**
@@ -35,12 +31,14 @@ trait FencedCodeTrait
 	protected function consumeFencedCode($lines, $current): array
 	{
 		$line = ltrim($lines[$current]);
-		$fence = substr($line, 0, $pos = strrpos($line, $line[0]) + 1);
-		$language = rtrim(substr($line, $pos));
+		$fence = substr($line, 0, $pos = strspn($line, $line[0]));
+		$language = trim(substr($line, $pos));
 		$content = [];
 		// consume until end fence
 		for ($i = $current + 1, $count = count($lines); $i < $count; $i++) {
-			if (($pos = strpos($line = $lines[$i], $fence)) === false || $pos > 3) {
+			$line = $lines[$i];
+			if (($pos = strspn($line, $fence[0])) < strlen($fence) ||
+				ltrim(substr($line, $pos)) !== '') {
 				$content[] = $line;
 			} else {
 				break;
@@ -50,8 +48,10 @@ trait FencedCodeTrait
 			'code',
 			'content' => implode("\n", $content),
 		];
-		if (!empty($language)) {
-			$block['language'] = $language;
+		if ($language !== '') {
+			if (preg_match('/^[^ ]+/', $language, $match)) {
+				$block['language'] = $this->unEscapeBackslash($match[0]);
+			}
 		}
 		return [$block, $i];
 	}

@@ -56,7 +56,7 @@ trait QuoteTrait
 	 */
 	protected function renderQuote($block): string
 	{
-		return '<blockquote>' . $this->renderAbsy($block['content']) . "</blockquote>\n";
+		return "<blockquote>\n" . $this->renderAbsy($block['content']) . "</blockquote>\n";
 	}
 
 	abstract protected function parseBlocks($lines);

@@ -136,6 +136,7 @@ abstract class Parser
 		$safe = function_exists('mb_chr') ?
 			mb_chr(0xFFFD, 'UTF-8') : '&#xFFFD;';
 
+		$markup = rtrim($markup, "\n");
 		$markup = str_replace("\0", $safe, $markup);
 		$markup = preg_replace('/&#[Xx]?0+;/', $safe, $markup);
 		return $markup;
@@ -454,7 +455,9 @@ abstract class Parser
 	protected function parseEscape($text): array
 	{
 		if (isset($text[1]) && in_array($text[1], $this->escapeCharacters)) {
-			return [['text', $text[1]], 2];
+			$ent = $this->html5 ? ENT_HTML5 : ENT_HTML401;
+			$chr = htmlspecialchars($text[1], ENT_NOQUOTES | $ent, 'UTF-8');
+			return [['text', $chr], 2];
 		}
 		return [['text', $text[0]], 1];
 	}
@@ -467,5 +470,32 @@ abstract class Parser
 	protected function renderText($block): string
 	{
 		return $block[1];
+	}
+
+	/**
+	 * Remove backslash from escaped characters in text.
+	 * @param $text
+	 * @return string
+	 */
+	protected function unEscapeBackslash($text): string
+	{
+		$strtr = [];
+		foreach($this->escapeCharacters as $chr) {
+			$strtr["\\$chr"] = $chr;
+		}
+		return strtr($text, $strtr);
+	}
+
+	/**
+	 * Encode HTML special characters as HTML entities.
+	 * @param $text
+	 * @param int $flags htmlspecialchars bitmask.
+	 * @return string
+	 */
+	protected function escapeHtmlEntities($text, $flags = 0): string
+	{
+		$ent = $this->html5 ? ENT_HTML5 : ENT_HTML401;
+		$text = htmlspecialchars($text, $flags | $ent, 'UTF-8');
+		return $text;
 	}
 }
