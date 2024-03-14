@@ -190,7 +190,7 @@
 <html dir="auto">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width = 640">
+        <meta name="viewport" content="width=640">
         <title><?php echo strip_tags($title); ?></title>
         <style type="text/css">
             @font-face {

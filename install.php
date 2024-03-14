@@ -238,7 +238,7 @@
 <html dir="auto">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width = 640">
+        <meta name="viewport" content="width=640">
         <title><?php echo __("Chyrp Lite Installer"); ?></title>
         <style type="text/css">
             @font-face {
