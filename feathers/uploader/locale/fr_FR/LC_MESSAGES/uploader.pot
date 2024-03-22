@@ -1,0 +1,39 @@
+#. This file is distributed under the same license as the Chyrp Lite package.
+
+#: feathers/uploader/admin/help/uploader_source.twig:3
+#: feathers/uploader/admin/help/uploader_source.twig:6
+msgid "Upload Source"
+msgstr ""
+
+#: feathers/uploader/admin/help/uploader_source.twig:8
+msgid "This is a URL that will take visitors to the original resource."
+msgstr ""
+
+#: feathers/uploader/info.php:3
+msgid "Uploader"
+msgstr ""
+
+#: feathers/uploader/info.php:6
+msgid "Upload files and make them available for visitors to download."
+msgstr ""
+
+#: feathers/uploader/uploader.php:10
+msgid "Title"
+msgstr ""
+
+#: feathers/uploader/uploader.php:18
+msgid "Files"
+msgstr ""
+
+#: feathers/uploader/uploader.php:27
+msgid "Caption"
+msgstr ""
+
+#: feathers/uploader/uploader.php:77
+msgid "You did not select any files to upload."
+msgstr ""
+
+#: feathers/uploader/uploader.php:214
+msgid "Source"
+msgstr ""
+

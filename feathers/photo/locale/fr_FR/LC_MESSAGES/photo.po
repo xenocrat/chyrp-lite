@@ -1,0 +1,64 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Cyril MAGUIRE <contact@ecyseo.net>\n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: feathers/photo/admin/help/photo_alt_text.twig:3
+#: feathers/photo/admin/help/photo_alt_text.twig:6 feathers/photo/photo.php:154
+msgid "Alternative Text"
+msgstr "Texte alternatif"
+
+#: feathers/photo/admin/help/photo_alt_text.twig:8
+msgid ""
+"This text provides a brief description of the photo; it is useful for "
+"visually impaired visitors, and it will be displayed if the image format is "
+"not supported by the visitor's web browser or if the image has not yet "
+"downloaded."
+msgstr ""
+"Ce texte donne une description brève de la photo; cela est utile pour les "
+"visiteurs déficients visuels et il s'affichera si le format d'image n'est "
+"pas supporté par le navigateur du visiteur ou si l'image n'a pas encore été "
+"téléchargée."
+
+#: feathers/photo/admin/help/photo_source.twig:3
+#: feathers/photo/admin/help/photo_source.twig:6
+msgid "Photo Source"
+msgstr "Source de la photo"
+
+#: feathers/photo/admin/help/photo_source.twig:8
+msgid "This is a URL that will take visitors to the original resource."
+msgstr "Ceci est une URL qui amènera le visiteur vers la ressource originale."
+
+#: feathers/photo/info.php:3 feathers/photo/photo.php:18
+msgid "Photo"
+msgstr "Photo"
+
+#: feathers/photo/info.php:6
+msgid "Upload and display an image with a caption."
+msgstr "Télécharger et afficher l'image avec une légende."
+
+#: feathers/photo/photo.php:10
+msgid "Title"
+msgstr "Titre"
+
+#: feathers/photo/photo.php:27
+msgid "Caption"
+msgstr "Légende"
+
+#: feathers/photo/photo.php:54
+msgid "You did not select a photo to upload."
+msgstr "Vous n'avez pas sélectionné de photo à télécharger."
+
+#: feathers/photo/photo.php:162
+msgid "Source"
+msgstr "Source"

@@ -1,0 +1,32 @@
+#. This file is distributed under the same license as the Chyrp Lite package.
+
+#: feathers/link/info.php:3
+msgid "Link"
+msgstr ""
+
+#: feathers/link/info.php:6
+msgid "Link to other sites and add an optional description."
+msgstr ""
+
+#: feathers/link/link.php:8
+msgid "Title"
+msgstr ""
+
+#: feathers/link/link.php:16
+msgid "URL"
+msgstr ""
+
+#: feathers/link/link.php:23
+msgid "Description"
+msgstr ""
+
+#: feathers/link/link.php:43
+#: feathers/link/link.php:82
+msgid "URL can't be empty."
+msgstr ""
+
+#: feathers/link/link.php:50
+#: feathers/link/link.php:89
+msgid "Invalid URL."
+msgstr ""
+
