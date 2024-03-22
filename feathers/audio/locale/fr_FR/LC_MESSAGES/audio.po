@@ -1,0 +1,46 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Cyril MAGUIRE <contact@ecyseo.net>\n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: feathers/audio/audio.php:10
+msgid "Title"
+msgstr "Titre"
+
+#: feathers/audio/audio.php:18
+msgid "Audio File"
+msgstr "Fichier audio"
+
+#: feathers/audio/audio.php:27
+msgid "Captions"
+msgstr "Légendes"
+
+#: feathers/audio/audio.php:37
+msgid "Description"
+msgstr "Description"
+
+#: feathers/audio/audio.php:64
+msgid "You did not select any audio to upload."
+msgstr "Vous n'avez sélectionné aucun fichier audio à télécharger."
+
+#: feathers/audio/audio.php:186
+msgid "Your web browser does not support the <code>audio</code> element."
+msgstr "Votre navigateur ne supporte pas cet élément <code>audio</audio>."
+
+#: feathers/audio/info.php:3
+msgid "Audio"
+msgstr "Audio"
+
+#: feathers/audio/info.php:6
+msgid "A feather for audio."
+msgstr "Une plume pour l'audio."

@@ -1,0 +1,50 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Cyril MAGUIRE <contact@ecyseo.net>\n"
+"Language-Team: \n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: feathers/video/info.php:3
+msgid "Video"
+msgstr "Vidéo"
+
+#: feathers/video/info.php:6
+msgid "A feather for video."
+msgstr "Une plume pour les vidéos."
+
+#: feathers/video/video.php:10
+msgid "Title"
+msgstr "Titre"
+
+#: feathers/video/video.php:18
+msgid "Video File"
+msgstr "Fichier vidéo"
+
+#: feathers/video/video.php:27
+msgid "Captions"
+msgstr "Sous-titres"
+
+#: feathers/video/video.php:37
+msgid "Poster Image"
+msgstr "Image de remplacement"
+
+#: feathers/video/video.php:47
+msgid "Description"
+msgstr "Description"
+
+#: feathers/video/video.php:74
+msgid "You did not select a video to upload."
+msgstr "Vous n'avez pas sélectionné de vidéo à télécharger."
+
+#: feathers/video/video.php:227
+msgid "Your web browser does not support the <code>video</code> element."
+msgstr "Votre navigateur ne supporte pas cet élément <code>vidéo</code>."

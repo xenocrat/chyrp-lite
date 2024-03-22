@@ -1,0 +1,38 @@
+#. This file is distributed under the same license as the Chyrp Lite package.
+
+#: feathers/video/info.php:3
+msgid "Video"
+msgstr ""
+
+#: feathers/video/info.php:6
+msgid "A feather for video."
+msgstr ""
+
+#: feathers/video/video.php:10
+msgid "Title"
+msgstr ""
+
+#: feathers/video/video.php:18
+msgid "Video File"
+msgstr ""
+
+#: feathers/video/video.php:27
+msgid "Captions"
+msgstr ""
+
+#: feathers/video/video.php:37
+msgid "Poster Image"
+msgstr ""
+
+#: feathers/video/video.php:47
+msgid "Description"
+msgstr ""
+
+#: feathers/video/video.php:74
+msgid "You did not select a video to upload."
+msgstr ""
+
+#: feathers/video/video.php:227
+msgid "Your web browser does not support the <code>video</code> element."
+msgstr ""
+
