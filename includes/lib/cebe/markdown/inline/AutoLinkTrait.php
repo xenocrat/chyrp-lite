@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright (c) 2014 Carsten Brandt
+ * @copyright Copyright (c) 2014 Carsten Brandt, 2024 Daniel Pimley
  * @license https://github.com/xenocrat/chyrp-markdown/blob/master/LICENSE
  * @link https://github.com/xenocrat/chyrp-markdown#readme
  */
@@ -31,7 +31,10 @@ trait AutoLinkTrait
 				^(www\.|https?:\/\/)(([^\s<>()]+)|(?R))+(?<![\.,:;\'"!\?\s])
 			)/x
 REGEXP;
-		if (!in_array('parseLink', $this->context) && preg_match($regex, $text, $matches)) {
+		if (
+			!in_array('parseLink', $this->context)
+			&& preg_match($regex, $text, $matches)
+		) {
 		// do not allow links in links
 			return [
 				['autoUrl', $matches[0]],
@@ -45,13 +48,16 @@ REGEXP;
 	{
 		$href = $block[1];
 		$text = $href;
-		if (strncmp($href, 'http', 4) !== 0) {
+		if (!str_starts_with($href, 'http')) {
 			$href = 'http://' . $href;
 		}
 		$href = $this->escapeHtmlEntities($href, ENT_COMPAT);
-		$decoded = urldecode($text);
+		$decoded = rawurldecode($text);
 		$secured = preg_match('//u', $decoded) ? $decoded : $text;
-		$text = $this->escapeHtmlEntities($secured, ENT_NOQUOTES | ENT_SUBSTITUTE);
+		$text = $this->escapeHtmlEntities(
+			$secured,
+			ENT_NOQUOTES | ENT_SUBSTITUTE
+		);
 		return "<a href=\"$href\">$text</a>";
 	}
 }

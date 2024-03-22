@@ -8,31 +8,50 @@
 namespace cebe\markdown\block;
 
 /**
- * Adds the aside elements
+ * Adds aside blocks.
  */
 trait AsideTrait
 {
 	/**
-	 * identify a line as the beginning of an aside.
+	 * Identify a line as the beginning of an aside.
 	 */
 	protected function identifyAside($line): bool
 	{
-		return $line[0] === '<' && (!isset($line[1]) || ($l1 = $line[1]) === ' ');
+		if (
+			$line[0] === ' '
+			&& strspn($line, ' ') < 4
+		) {
+		// trim up to three spaces
+			$line = ltrim($line, ' ');
+		}
+		return (
+			$line[0] === '<'
+			&& (!isset($line[1]) || ($l1 = $line[1]) === ' ')
+		);
 	}
 
 	/**
-	 * Consume lines for an aside element
+	 * Consume lines for an aside.
 	 */
 	protected function consumeAside($lines, $current): array
 	{
 		$content = [];
+
 		// consume until end of markers
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
+			if (
+				isset($line[0])
+				&& $line[0] === ' '
+				&& strspn($line, ' ') < 4
+			) {
+			// trim up to three spaces
+				$line = ltrim($line, ' ');
+			}
 			if (ltrim($line) !== '') {
 				if ($line[0] == '<' && !isset($line[1])) {
 					$line = '';
-				} elseif (strncmp($line, '< ', 2) === 0) {
+				} elseif (str_starts_with($line, '< ')) {
 					$line = substr($line, 2);
 				} else {
 					--$i;
@@ -43,20 +62,22 @@ trait AsideTrait
 				break;
 			}
 		}
-
 		$block = [
 			'aside',
 			'content' => $this->parseBlocks($content),
 		];
+
 		return [$block, $i];
 	}
 
 	/**
-	 * Renders an aside
+	 * Renders an aside.
 	 */
 	protected function renderAside($block): string
 	{
-		return '<aside>' . $this->renderAbsy($block['content']) . "</aside>\n";
+		return '<aside>'
+			. $this->renderAbsy($block['content'])
+			. "</aside>\n";
 	}
 
 	abstract protected function parseBlocks($lines);

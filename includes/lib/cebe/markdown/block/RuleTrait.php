@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright (c) 2014 Carsten Brandt
+ * @copyright Copyright (c) 2014 Carsten Brandt, 2024 Daniel Pimley
  * @license https://github.com/xenocrat/chyrp-markdown/blob/master/LICENSE
  * @link https://github.com/xenocrat/chyrp-markdown#readme
  */
@@ -8,7 +8,7 @@
 namespace cebe\markdown\block;
 
 /**
- * Adds horizontal rules
+ * Adds horizontal rules.
  */
 trait RuleTrait
 {
@@ -21,7 +21,7 @@ trait RuleTrait
 	}
 
 	/**
-	 * identify a line as a horizontal rule.
+	 * Identify a line as a horizontal rule.
 	 */
 	protected function identifyHr($line): bool
 	{
@@ -30,7 +30,7 @@ trait RuleTrait
 	}
 
 	/**
-	 * Consume a horizontal rule
+	 * Consume a horizontal rule.
 	 */
 	protected function consumeHr($lines, $current): array
 	{
@@ -38,7 +38,7 @@ trait RuleTrait
 	}
 
 	/**
-	 * Renders a horizontal rule
+	 * Renders a horizontal rule.
 	 */
 	protected function renderHr($block): string
 	{

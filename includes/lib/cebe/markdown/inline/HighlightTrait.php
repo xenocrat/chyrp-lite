@@ -8,7 +8,7 @@
 namespace cebe\markdown\inline;
 
 /**
- * Adds highlight inline elements
+ * Adds highlight inline elements.
  */
 trait HighlightTrait
 {
@@ -23,7 +23,13 @@ trait HighlightTrait
 	 */
 	protected function parseHighlight($markdown): array
 	{
-		if (preg_match('/^==(.+?)==/', $markdown, $matches)) {
+		if (
+			preg_match(
+				'/^==(?!=)(.*?[^=\\\\])==(?!=)/s',
+				$markdown,
+				$matches
+			)
+		) {
 			return [
 				[
 					'highlight',
@@ -37,7 +43,9 @@ trait HighlightTrait
 
 	protected function renderHighlight($block): string
 	{
-		return '<mark>' . $this->renderAbsy($block[1]) . '</mark>';
+		return '<mark>'
+			. $this->renderAbsy($block[1])
+			. '</mark>';
 	}
 
 	abstract protected function parseInline($text);

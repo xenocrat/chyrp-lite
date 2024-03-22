@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright (c) 2014 Carsten Brandt
+ * @copyright Copyright (c) 2014 Carsten Brandt, 2024 Daniel Pimley
  * @license https://github.com/xenocrat/chyrp-markdown/blob/master/LICENSE
  * @link https://github.com/xenocrat/chyrp-markdown#readme
  */
@@ -8,37 +8,53 @@
 namespace cebe\markdown\block;
 
 /**
- * Adds the fenced code blocks
+ * Adds fenced code blocks.
  *
- * automatically included 4 space indented code blocks
+ * Automatically includes indented code block support.
  */
 trait FencedCodeTrait
 {
 	use CodeTrait;
 
 	/**
-	 * identify a line as the beginning of a fenced code block.
+	 * Identify a line as the beginning of a fenced code block.
 	 */
 	protected function identifyFencedCode($line): bool
 	{
-		return (preg_match('/^~{3,}/', $line) ||
-				preg_match('/^`{3,}[^`]*$/', $line));
+		return (
+			preg_match('/^ {0,3}~{3,}/', $line)
+			|| preg_match('/^ {0,3}`{3,}[^`]*$/', $line)
+		);
 	}
 
 	/**
-	 * Consume lines for a fenced code block
+	 * Consume lines for a fenced code block.
 	 */
 	protected function consumeFencedCode($lines, $current): array
 	{
-		$line = ltrim($lines[$current]);
-		$fence = substr($line, 0, $pos = strspn($line, $line[0]));
-		$language = trim(substr($line, $pos));
+		$indent = strspn($lines[$current], ' ');
+		$line = substr($lines[$current], $indent);
+		$mw = strspn($line, $line[0]);
+		$fence = substr($line, 0, $mw);
+		$language = trim(substr($line, $mw));
 		$content = [];
+
 		// consume until end fence
 		for ($i = $current + 1, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
-			if (($pos = strspn($line, $fence[0])) < strlen($fence) ||
-				ltrim(substr($line, $pos)) !== '') {
+			$leadingSpaces = strspn($line, ' ');
+			if (
+				$leadingSpaces > 3
+				|| strspn(ltrim($line), $fence[0]) < $mw
+				|| !str_ends_with(rtrim($line), $fence[0])
+			) {
+				if ($indent > 0 && $leadingSpaces > 0) {
+					if ($leadingSpaces < $indent) {
+						$line = ltrim($line);
+					} else {
+						$line = substr($line, $indent);
+					}
+				}
 				$content[] = $line;
 			} else {
 				break;
@@ -53,6 +69,7 @@ trait FencedCodeTrait
 				$block['language'] = $this->unEscapeBackslash($match[0]);
 			}
 		}
+
 		return [$block, $i];
 	}
 }

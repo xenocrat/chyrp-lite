@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright (c) 2014 Carsten Brandt
+ * @copyright Copyright (c) 2014 Carsten Brandt, 2024 Daniel Pimley
  * @license https://github.com/xenocrat/chyrp-markdown/blob/master/LICENSE
  * @link https://github.com/xenocrat/chyrp-markdown#readme
  */
@@ -8,23 +8,34 @@
 namespace cebe\markdown\block;
 
 /**
- * Adds the table blocks
+ * Adds table blocks.
  */
 trait TableTrait
 {
 	/**
-	 * identify a line as the beginning of a table block.
+	 * Identify a line as the beginning of a table block.
 	 */
 	protected function identifyTable($line, $lines, $current): bool
 	{
-		return strpos($line, '|') !== false && isset($lines[$current + 1])
-			&& preg_match('~^\\s*\\|?(\\s*:?-[\\-\\s]*:?\\s*\\|?)*\\s*$~', $lines[$current + 1])
+		return (
+			strpos($line, '|') !== false && isset($lines[$current + 1])
+			&& preg_match(
+				'/^\s*\|?(\s*:?-[\-\s]*:?\s*\|?)*\s*$/',
+				$lines[$current + 1]
+			)
 			&& strpos($lines[$current + 1], '|') !== false
-			&& isset($lines[$current + 2]) && trim($lines[$current + 1]) !== '';
+			// attempt to detect a mismatch in the
+			// number of header and delimiter columns
+			&& (
+				preg_match_all('/(?<!^|\\\\)\|(?!$)/', $line)
+				===
+				preg_match_all('/(?<!^|\\\\)\|(?!$)/', $lines[$current + 1])
+			)
+		);
 	}
 
 	/**
-	 * Consume lines for a table
+	 * Consume lines for a table.
 	 */
 	protected function consumeTable($lines, $current): array
 	{
@@ -33,12 +44,12 @@ trait TableTrait
 			'cols' => [],
 			'rows' => [],
 		];
+
 		// consume until blank line
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = trim($lines[$i]);
-
 			// extract alignment from second line
-			if ($i == $current+1) {
+			if ($i == $current + 1) {
 				$cols = explode('|', trim($line, ' |'));
 				foreach($cols as $col) {
 					$col = trim($col);
@@ -47,7 +58,7 @@ trait TableTrait
 						continue;
 					}
 					$l = ($col[0] === ':');
-					$r = (substr($col, -1, 1) === ':');
+					$r = str_ends_with($col, ':');
 					if ($l && $r) {
 						$block['cols'][] = 'center';
 					} elseif ($l) {
@@ -58,27 +69,41 @@ trait TableTrait
 						$block['cols'][] = '';
 					}
 				}
-
 				continue;
 			}
-			if ($line === '' || substr($lines[$i], 0, 4) === '    ') {
+			if (
+				// blank line breaks the table
+				$line === ''
+				|| (
+				// once iteration is beyond the header and delimiter rows,
+				// detecting a non-paragraph block marker breaks the table.
+					$i > $current + 1
+					&& $this->detectLineType($lines, $i) !== 'paragraph'
+				)
+			) {
 				break;
 			}
 			if ($line[0] === '|') {
 				$line = substr($line, 1);
 			}
-			if (substr($line, -1, 1) === '|'
-				&& (substr($line, -2, 2) !== '\\|' || substr($line, -3, 3) === '\\\\|')) {
+			if (
+				str_ends_with($line, '|')
+				&& (
+					!str_ends_with($line, '\\|')
+					|| str_ends_with($line, '\\\\|')
+				)
+			) {
 				$line = substr($line, 0, -1);
 			}
 
 			array_unshift($this->context, 'table');
-			$row = $this->parseInline($line);
+			$row = $this->parseInline(trim($line, ' '));
 			array_shift($this->context);
 
 			$r = count($block['rows']);
 			$c = 0;
 			$block['rows'][] = [];
+
 			foreach ($row as $absy) {
 				if (!isset($block['rows'][$r][$c])) {
 					$block['rows'][$r][] = [];
@@ -95,40 +120,46 @@ trait TableTrait
 	}
 
 	/**
-	 * render a table block
+	 * Render a table block.
 	 */
 	protected function renderTable($block): string
 	{
 		$head = '';
 		$body = '';
 		$cols = $block['cols'];
+		$colCount = count($block['cols']);
 		$first = true;
+
 		foreach($block['rows'] as $row) {
 			$cellTag = $first ? 'th' : 'td';
 			$tds = '';
 			foreach ($row as $c => $cell) {
-				$align = empty($cols[$c]) ? '' : ' align="' . $cols[$c] . '"';
-				$tds .= "<$cellTag$align>" . trim($this->renderAbsy($cell)) . "</$cellTag>";
+				if ($c < $colCount) {
+					$align = empty($cols[$c]) ?
+						'' :
+						' align="' . $cols[$c] . '"' ;
+
+					$tds .= "<$cellTag$align>"
+						. trim($this->renderAbsy($cell))
+						. "</$cellTag>\n";
+				}
+			}
+			for ($i = count($row); $i < $colCount; $i++) { 
+				$tds .= "<$cellTag></$cellTag$align>\n";
 			}
 			if ($first) {
-				$head .= "<tr>$tds</tr>\n";
+				$head .= "<tr>\n$tds</tr>\n";
 			} else {
-				$body .= "<tr>$tds</tr>\n";
+				$body .= "<tr>\n$tds</tr>\n";
 			}
 			$first = false;
 		}
+
 		return $this->composeTable($head, $body);
 	}
 
 	/**
 	 * This method composes a table from parsed body and head HTML.
-	 *
-	 * You may override this method to customize the table rendering, for example by
-	 * adding a `class` to the table tag:
-	 *
-	 * ```php
-	 * return "<table class="table table-striped">\n<thead>\n$head</thead>\n<tbody>\n$body</tbody>\n</table>\n"
-	 * ```
 	 *
 	 * @param string $head table head HTML.
 	 * @param string $body table body HTML.
@@ -137,7 +168,15 @@ trait TableTrait
 	 */
 	protected function composeTable($head, $body): string
 	{
-		return "<table>\n<thead>\n$head</thead>\n<tbody>\n$body</tbody>\n</table>\n";
+		$table = "<table>\n";
+		if ($head !== '') {
+			$table .= "<thead>\n$head</thead>\n";
+		}
+		if ($body !== '') {
+			$table .= "<tbody>\n$body</tbody>\n";
+		}
+		$table .= "</table>\n";
+		return $table;
 	}
 
 	protected function parseTdMarkers(): array
@@ -146,12 +185,16 @@ trait TableTrait
 	}
 
 	/**
+	 * Parses table data cells.
 	 * @marker |
 	 */
 	protected function parseTd($markdown): array
 	{
 		if (isset($this->context[1]) && $this->context[1] === 'table') {
-			return [['tableBoundary'], isset($markdown[1]) && $markdown[1] === ' ' ? 2 : 1];
+			return [
+				['tableBoundary'],
+				isset($markdown[1]) && $markdown[1] === ' ' ? 2 : 1
+			];
 		}
 		return [['text', $markdown[0]], 1];
 	}

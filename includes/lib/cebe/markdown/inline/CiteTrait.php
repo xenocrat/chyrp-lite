@@ -8,7 +8,7 @@
 namespace cebe\markdown\inline;
 
 /**
- * Adds cite inline elements
+ * Adds cite inline elements.
  */
 trait CiteTrait
 {
@@ -23,7 +23,7 @@ trait CiteTrait
 	 */
 	protected function parseCite($markdown): array
 	{
-		if (preg_match('/^\*_(.+?)_\*/', $markdown, $matches)) {
+		if (preg_match('/^\*_(.*?[^\\\\])_\*/s', $markdown, $matches)) {
 			return [
 				[
 					'cite',
@@ -37,7 +37,9 @@ trait CiteTrait
 
 	protected function renderCite($block): string
 	{
-		return '<cite>' . $this->renderAbsy($block[1]) . '</cite>';
+		return '<cite>'
+			. $this->renderAbsy($block[1])
+			. '</cite>';
 	}
 
 	abstract protected function parseInline($text);

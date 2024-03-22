@@ -19,33 +19,33 @@ abstract class Parser
 	const VERSION_MINOR = 0;
 
 	/**
-	 * @var integer the maximum nesting level for language elements.
+	 * @var integer The maximum nesting level for language elements.
 	 */
 	public $maximumNestingLevel = 32;
 
 	/**
-	 * @var boolean whether to convert all tabs into 4 spaces.
+	 * @var boolean Whether to convert all tabs into 4 spaces.
 	 */
 	public $convertTabsToSpaces = false;
 
 	/**
-	 * @var boolean whether to format markup according to HTML5 spec.
+	 * @var boolean Whether to format markup according to HTML5 spec.
 	 * Defaults to `false` which means that markup is formatted as HTML4.
 	 */
 	public $html5 = false;
 
 	/**
-	 * @var string optional context identifier for this instance.
+	 * @var string Optional context identifier for this instance.
 	 */
 	public $contextId = '';
 
 	/**
-	 * @var array the current context the parser is in.
+	 * @var array The current context the parser is in.
 	 */
 	protected $context = [];
 
 	/**
-	 * @var array these are "escapeable" characters.
+	 * @var array These are "escapeable" characters.
 	 * When using one of these prefixed with a backslash, the character is
 	 * not interpreted as markdown and will be outputted without backslash.
 	 */
@@ -60,8 +60,8 @@ abstract class Parser
 	 *
 	 * This includes parsing block elements as well as inline elements.
 	 *
-	 * @param string $text the text to parse
-	 * @return string parsed markup
+	 * @param string $text The text to parse
+	 * @return string Parsed markup
 	 */
 	public function parse($text): string
 	{
@@ -133,12 +133,10 @@ abstract class Parser
 	 */
 	protected function postprocess($markup): string
 	{
-		$safe = function_exists('mb_chr') ?
-			mb_chr(0xFFFD, 'UTF-8') : '&#xFFFD;';
-
+		$safeChr = "\u{FFFD}";
 		$markup = rtrim($markup, "\n");
-		$markup = str_replace("\0", $safe, $markup);
-		$markup = preg_replace('/&#[Xx]?0+;/', $safe, $markup);
+		$markup = str_replace("\0", $safeChr, $markup);
+		$markup = preg_replace('/&#[Xx]?0+;/', $safeChr, $markup);
 		return $markup;
 	}
 
@@ -163,6 +161,7 @@ abstract class Parser
 	private $_blockTypes;
 
 	/**
+	 * Detect registered block types.
 	 * @return array a list of block element types available.
 	 *
 	 * You can bust the alphabetical sort/call strategy with a `Priority` method
@@ -174,12 +173,20 @@ abstract class Parser
 		if ($this->_blockTypes === null) {
 			// detect block types via "identify" functions
 			$reflection = new \ReflectionClass($this);
-			$this->_blockTypes = array_filter(array_map(function($method) {
-				$methodName = $method->getName();
-				return (strncmp($methodName, 'identify', 8) === 0
-					&& substr_compare($methodName, 'Priority', -8) !== 0) ?
-					substr($methodName, 8) : false;
-			}, $reflection->getMethods(ReflectionMethod::IS_PROTECTED)));
+
+			$this->_blockTypes = array_filter(
+				array_map(
+					function($method) {
+						$methodName = $method->getName();
+						return (
+							str_starts_with($methodName, 'identify')
+							&& !str_ends_with($methodName, 'Priority')
+						) ?
+						substr($methodName, 8) : false ;
+					},
+					$reflection->getMethods(ReflectionMethod::IS_PROTECTED)
+				)
+			);
 
 			usort($this->_blockTypes, function($a, $b) {
 				$a_method = 'identify' . $a . 'Priority';
@@ -193,12 +200,13 @@ abstract class Parser
 				return strcasecmp($a_priority, $b_priority);
 			});
 		}
+
 		return $this->_blockTypes;
 	}
 
 	/**
-	 * Given a set of lines and an index of a current line it uses the registed
-	 * block types to detect the type of this line.
+	 * Given a set of lines and an index of a current line it uses
+	 * the registered block types to detect the type of this line.
 	 * @param array $lines
 	 * @param integer $current
 	 * @return string name of the block type in lower case
@@ -226,8 +234,8 @@ abstract class Parser
 			// maximum depth is reached, do not parse input
 			return [['text', implode("\n", $lines)]];
 		}
-		$this->_depth++;
 
+		$this->_depth++;
 		$blocks = [];
 
 		// convert lines to blocks
@@ -244,12 +252,12 @@ abstract class Parser
 		}
 
 		$this->_depth--;
-
 		return $blocks;
 	}
 
 	/**
-	 * Parses the block at current line by identifying the block type and parsing the content
+	 * Parses the block at current line by identifying the block type
+	 * and parsing the content.
 	 * @param $lines
 	 * @param $current
 	 * @return array Array of two elements:
@@ -261,7 +269,8 @@ abstract class Parser
 		// identify block type for this line
 		$blockType = $this->detectLineType($lines, $current);
 
-		// call consume method for the detected block type to consume further lines
+		// call consume method for the detected block type
+		// to consume further lines
 		return $this->{'consume' . $blockType}($lines, $current);
 	}
 
@@ -277,7 +286,7 @@ abstract class Parser
 	}
 
 	/**
-	 * Consume lines for a paragraph
+	 * Consume lines for a paragraph.
 	 *
 	 * @param $lines
 	 * @param $current
@@ -289,7 +298,7 @@ abstract class Parser
 		// consume until blank line
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			if (ltrim($lines[$i]) !== '') {
-				$content[] = $lines[$i];
+				$content[] = trim($lines[$i]);
 			} else {
 				break;
 			}
@@ -302,7 +311,7 @@ abstract class Parser
 	}
 
 	/**
-	 * Render a paragraph block
+	 * Render a paragraph block.
 	 *
 	 * @param $block
 	 * @return string
@@ -314,9 +323,6 @@ abstract class Parser
 
 	// inline parsing
 
-	/**
-	 * @var array the set of inline markers to use in different contexts.
-	 */
 	private $_inlineMarkers = [];
 
 	/**
@@ -340,10 +346,13 @@ abstract class Parser
 		$markers = [];
 		// detect "parse" functions
 		$reflection = new \ReflectionClass($this);
+
 		foreach($reflection->getMethods(ReflectionMethod::IS_PROTECTED) as $method) {
 			$methodName = $method->getName();
-			if (strncmp($methodName, 'parse', 5) === 0
-				&& substr_compare($methodName, 'Markers', -7) !== 0) {
+			if (
+				str_starts_with($methodName, 'parse')
+				&& !str_ends_with($methodName, 'Markers')
+			) {
 				if (method_exists($this, $methodName.'Markers')) {
 					$array = call_user_func(array($this, $methodName.'Markers'));
 					foreach($array as $marker) {
@@ -352,11 +361,12 @@ abstract class Parser
 				}
 			}
 		}
+
 		return $markers;
 	}
 
 	/**
-	 * Prepare markers that are used in the text to parse
+	 * Prepare markers that are used in the text to parse.
 	 *
 	 * Add all markers that are present in markdown.
 	 * Check is done to avoid iterations in parseInline(), good for huge markdown files
@@ -365,6 +375,7 @@ abstract class Parser
 	protected function prepareMarkers($text): void
 	{
 		$this->_inlineMarkers = [];
+
 		foreach ($this->inlineMarkers() as $marker => $method) {
 			if (strpos($text, $marker) !== false) {
 				$m = $marker[0];
@@ -395,23 +406,21 @@ abstract class Parser
 			// maximum depth is reached, do not parse input
 			return [['text', $text]];
 		}
+
 		$this->_depth++;
-
 		$markers = implode('', array_keys($this->_inlineMarkers));
-
 		$paragraph = [];
 
 		while (!empty($markers) && ($found = strpbrk($text, $markers)) !== false) {
-
 			$pos = strpos($text, $found);
-
 			// add the text up to next marker to the paragraph
 			if ($pos !== 0) {
 				$paragraph[] = ['text', substr($text, 0, $pos)];
 			}
-			$text = $found;
 
+			$text = $found;
 			$parsed = false;
+
 			foreach ($this->_inlineMarkers[$text[0]] as $marker => $method) {
 				if (strncmp($text, $marker, strlen($marker)) === 0) {
 					// parse the marker
@@ -425,6 +434,7 @@ abstract class Parser
 					break;
 				}
 			}
+
 			if (!$parsed) {
 				$paragraph[] = ['text', substr($text, 0, 1)];
 				$text = substr($text, 1);
@@ -432,9 +442,7 @@ abstract class Parser
 		}
 
 		$paragraph[] = ['text', $text];
-
 		$this->_depth--;
-
 		return $paragraph;
 	}
 
@@ -455,7 +463,7 @@ abstract class Parser
 	protected function parseEscape($text): array
 	{
 		if (isset($text[1]) && in_array($text[1], $this->escapeCharacters)) {
-			$ent = $this->html5 ? ENT_HTML5 : ENT_HTML401;
+			$ent = $this->html5 ? ENT_HTML5 : ENT_HTML401 ;
 			$chr = htmlspecialchars($text[1], ENT_NOQUOTES | $ent, 'UTF-8');
 			return [['text', $chr], 2];
 		}

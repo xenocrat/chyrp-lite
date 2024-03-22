@@ -62,47 +62,54 @@ class ChyrpMarkdown extends GithubMarkdown
 	}
 
 	/**
-	 * Consume lines for a paragraph
+	 * Consume lines for a paragraph.
 	 *
 	 * Allow other block types to break paragraphs.
 	 */
 	protected function consumeParagraph($lines, $current): array
 	{
 		$content = [];
+
 		// consume until blank line or end condition
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
 			if ($line === ''
 				|| ltrim($line) === ''
-				|| !ctype_alpha($line[0]) && (
-					$this->identifyQuote($line, $lines, $i) ||
-					$this->identifyFencedCode($line, $lines, $i) ||
-					$this->identifyFigure($line, $lines, $i) ||
-					$this->identifyAside($line, $lines, $i) ||
-					$this->identifyUl($line, $lines, $i) ||
-					$this->identifyOl($line, $lines, $i) ||
-					$this->identifyHr($line, $lines, $i) ||
-					$this->identifyHtml($line, $lines, $i)
+				|| !ctype_alpha($line[0])
+				&& (
+					$this->identifyQuote($line, $lines, $i)
+					|| $this->identifyFencedCode($line, $lines, $i)
+					|| $this->identifyFigure($line, $lines, $i)
+					|| $this->identifyAside($line, $lines, $i)
+					|| $this->identifyUl($line, $lines, $i)
+					|| $this->identifyOl($line, $lines, $i)
+					|| $this->identifyHr($line, $lines, $i)
+					|| $this->identifyHtml($line, $lines, $i)
+					|| $this->identifyFootnoteList($line, $lines, $i)
 				)
-				|| $this->identifyHeadline($line, $lines, $i))
-			{
+				|| $this->identifyHeadline($line, $lines, $i)
+			) {
 				break;
 			} else {
-				$content[] = $line;
+				$content[] = ltrim($line);
 			}
 		}
 		$block = [
 			'paragraph',
-			'content' => $this->parseInline(implode("\n", $content)),
+			'content' => $this->parseInline(trim(implode("\n", $content))),
 		];
+
 		return [$block, --$i];
 	}
 
 	/**
-	 * @inheritDoc
+	 * Add parsed footnotes and then post-processes markup after parsing.
+	 *
+	 * @param string $markup parsed markup
+	 * @return string post-processed markup
 	 */
-	function parse($text): string
+	function postprocess($markup): string
 	{
-		return $this->addParsedFootnotes(parent::parse($text));
+		return parent::postprocess($this->addParsedFootnotes($markup));
 	}
 }

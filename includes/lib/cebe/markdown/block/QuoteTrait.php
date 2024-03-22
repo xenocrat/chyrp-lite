@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright (c) 2014 Carsten Brandt
+ * @copyright Copyright (c) 2014 Carsten Brandt, 2024 Daniel Pimley
  * @license https://github.com/xenocrat/chyrp-markdown/blob/master/LICENSE
  * @link https://github.com/xenocrat/chyrp-markdown#readme
  */
@@ -8,32 +8,50 @@
 namespace cebe\markdown\block;
 
 /**
- * Adds the block quote elements
+ * Adds blockquote blocks.
  */
 trait QuoteTrait
 {
 	/**
-	 * identify a line as the beginning of a block quote.
+	 * Identify a line as the beginning of a blockquote.
 	 */
 	protected function identifyQuote($line): bool
 	{
-		return $line[0] === '>' && (!isset($line[1]) || ($l1 = $line[1]) === ' ');
+		if (
+			$line[0] === ' '
+			&& strspn($line, ' ') < 4
+		) {
+		// trim up to three spaces
+			$line = ltrim($line, ' ');
+		}
+		return $line[0] === '>';
 	}
 
 	/**
-	 * Consume lines for a blockquote element
+	 * Consume lines for a blockquote element.
 	 */
 	protected function consumeQuote($lines, $current): array
 	{
 		$content = [];
+
 		// consume until end of markers
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
+			if (
+				isset($line[0])
+				&& $line[0] === ' '
+				&& strspn($line, ' ') < 4
+			) {
+			// trim up to three spaces
+				$line = ltrim($line, ' ');
+			}
 			if (ltrim($line) !== '') {
 				if ($line[0] == '>' && !isset($line[1])) {
 					$line = '';
-				} elseif (strncmp($line, '> ', 2) === 0) {
+				} elseif (str_starts_with($line, '> ')) {
 					$line = substr($line, 2);
+				} elseif (str_starts_with($line, '>')) {
+					$line = substr($line, 1);
 				} else {
 					--$i;
 					break;
@@ -43,20 +61,22 @@ trait QuoteTrait
 				break;
 			}
 		}
-
 		$block = [
 			'quote',
 			'content' => $this->parseBlocks($content),
 		];
+
 		return [$block, $i];
 	}
 
 	/**
-	 * Renders a blockquote
+	 * Renders a blockquote.
 	 */
 	protected function renderQuote($block): string
 	{
-		return "<blockquote>\n" . $this->renderAbsy($block['content']) . "</blockquote>\n";
+		return "<blockquote>\n"
+		. $this->renderAbsy($block['content'])
+		. "</blockquote>\n";
 	}
 
 	abstract protected function parseBlocks($lines);

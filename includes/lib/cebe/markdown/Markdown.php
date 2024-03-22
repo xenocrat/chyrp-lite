@@ -29,9 +29,9 @@ class Markdown extends Parser
 	use inline\LinkTrait;
 
 	/**
-	 * @var array these are "escapeable" characters. When using one of these prefixed with a
-	 * backslash, the character will be outputted without the backslash and is not interpreted
-	 * as markdown.
+	 * @var array These are "escapeable" characters.
+	 * When using one of these prefixed with a backslash, the character is
+	 * not interpreted as markdown and will be outputted without backslash.
 	 */
 	protected $escapeCharacters = [
 		'\\', // backslash
@@ -59,36 +59,41 @@ class Markdown extends Parser
 	}
 
 	/**
-	 * Consume lines for a paragraph
+	 * Consume lines for a paragraph.
 	 *
 	 * Allow other block types to break paragraphs.
 	 */
 	protected function consumeParagraph($lines, $current): array
 	{
 		$content = [];
+
 		// consume until blank line or end condition
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
-			if ($line === ''
+			if (
+				$line === ''
 				|| ltrim($line) === ''
-				|| !ctype_alpha($line[0]) && (
-					$this->identifyQuote($line, $lines, $i) ||
-					$this->identifyFencedCode($line, $lines, $i) ||
-					$this->identifyUl($line, $lines, $i) ||
-					$this->identifyOl($line, $lines, $i) ||
-					$this->identifyHr($line, $lines, $i) ||
-					$this->identifyHtml($line, $lines, $i)
+				|| !ctype_alpha($line[0])
+				&& (
+					$this->identifyQuote($line, $lines, $i)
+					|| $this->identifyFencedCode($line, $lines, $i)
+					|| $this->identifyUl($line, $lines, $i)
+					|| $this->identifyOl($line, $lines, $i)
+					|| $this->identifyHr($line, $lines, $i)
+					|| $this->identifyHtml($line, $lines, $i)
 				)
-				|| $this->identifyHeadline($line, $lines, $i)) {
+				|| $this->identifyHeadline($line, $lines, $i)
+			) {
 				break;
 			} else {
-				$content[] = $line;
+				$content[] = ltrim($line);
 			}
 		}
 		$block = [
 			'paragraph',
-			'content' => $this->parseInline(implode("\n", $content)),
+			'content' => $this->parseInline(trim(implode("\n", $content))),
 		];
+
 		return [$block, --$i];
 	}
 
@@ -105,23 +110,23 @@ class Markdown extends Parser
 		if (isset($text[1]) && $text[1] === "\n") {
 		// backslash followed by newline
 			return [['text', $br], 2];
-		} elseif (!isset($text[1])) {
-		// backslash at end of the text
-			return [['text', $br], 1];
 		}
-
-		// Otherwise parse the sequence normally
+		// otherwise parse the sequence normally
 		return parent::parseEscape($text);
 	}
 
 	/**
 	 * @inheritDoc
 	 *
-	 * Parses a newline indicated by two spaces on the end of a markdown line.
+	 * Parses a newline indicated by two or more spaces on the end of a markdown line.
 	 */
 	protected function renderText($text): string
 	{
 		$br = $this->html5 ? "<br>\n" : "<br />\n";
-		return str_replace("  \n", $br, $text[1]);
+		// two or more spaces
+		$text = preg_replace("/ {2,}\n/", $br, $text[1]);
+		// trim single spaces
+		$text = str_replace(" \n", "\n", $text);
+		return $text;
 	}
 }

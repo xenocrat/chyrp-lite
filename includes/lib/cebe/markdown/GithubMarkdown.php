@@ -22,8 +22,9 @@ class GithubMarkdown extends Markdown
 	use inline\AutoLinkTrait;
 
 	/**
-	 * @var boolean whether to interpret newlines as `<br />`-tags.
-	 * This feature is useful for comments where newlines are often meant to be real new lines.
+	 * @var boolean Whether to interpret newlines as `<br />` tags.
+	 * This feature is useful for comments where newlines are often
+	 * meant to be hard line breaks.
 	 */
 	public $enableNewlines = false;
 
@@ -51,50 +52,54 @@ class GithubMarkdown extends Markdown
 	];
 
 	/**
-	 * Consume lines for a paragraph
+	 * Consume lines for a paragraph.
 	 *
 	 * Allow other block types to break paragraphs.
 	 */
 	protected function consumeParagraph($lines, $current): array
 	{
 		$content = [];
+
 		// consume until blank line or end condition
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
-			if ($line === ''
+			if (
+				$line === ''
 				|| ltrim($line) === ''
-				|| !ctype_alpha($line[0]) && (
-					$this->identifyQuote($line, $lines, $i) ||
-					$this->identifyFencedCode($line, $lines, $i) ||
-					$this->identifyUl($line, $lines, $i) ||
-					$this->identifyOl($line, $lines, $i) ||
-					$this->identifyHr($line, $lines, $i) ||
-					$this->identifyHtml($line, $lines, $i)
+				|| !ctype_alpha($line[0])
+				&& (
+					$this->identifyQuote($line, $lines, $i)
+					|| $this->identifyFencedCode($line, $lines, $i)
+					|| $this->identifyUl($line, $lines, $i)
+					|| $this->identifyOl($line, $lines, $i)
+					|| $this->identifyHr($line, $lines, $i)
+					|| $this->identifyHtml($line, $lines, $i)
 				)
-				|| $this->identifyHeadline($line, $lines, $i))
-			{
+				|| $this->identifyHeadline($line, $lines, $i)
+			) {
 				break;
 			} else {
-				$content[] = $line;
+				$content[] = ltrim($line);
 			}
 		}
 		$block = [
 			'paragraph',
-			'content' => $this->parseInline(implode("\n", $content)),
+			'content' => $this->parseInline(trim(implode("\n", $content))),
 		];
+
 		return [$block, --$i];
 	}
 
 	/**
 	 * @inheritDoc
 	 *
-	 * Parses a newline indicated by two spaces on the end of a markdown line.
+	 * Parses a newline indicated by two or more spaces on the end of a markdown line.
 	 */
 	protected function renderText($text): string
 	{
 		if ($this->enableNewlines) {
 			$br = $this->html5 ? "<br>\n" : "<br />\n";
-			return strtr($text[1], ["  \n" => $br, "\n" => $br]);
+			return preg_replace("/ *\n/", $br, $text[1]);
 		} else {
 			return parent::renderText($text);
 		}

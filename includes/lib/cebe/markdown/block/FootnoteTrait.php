@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright (c) 2014 Carsten Brandt and other contributors
+ * @copyright Copyright (c) 2014 Carsten Brandt, 2024 Daniel Pimley and other contributors
  * @license https://github.com/xenocrat/chyrp-markdown/blob/master/LICENSE
  * @link https://github.com/xenocrat/chyrp-markdown#readme
  */
@@ -51,10 +51,8 @@ trait FootnoteTrait
 	 */
 	public function addParsedFootnotes($html): string
 	{
-		// If no footnotes found, do nothing more.
-		if (count($this->footnotes) === 0) {
-			return $html;
-		}
+		// Unicode "uncertainty sign" will be used for missing references.
+		$uncertaintyChr = "\u{2BD1}";
 
 		// Sort all found footnotes by the order in which they are linked in the text.
 		$footnotesSorted = [];
@@ -81,18 +79,30 @@ trait FootnoteTrait
 
 		// Replace the footnote substitution markers with their actual numbers.
 		$referencedHtml = preg_replace_callback(
-			'/\x1Afootnote-(refnum|num)(.*?)\x1A/',
-			function ($match) use ($footnotesSorted) {
+			"/\u{FFFC}footnote-(refnum|num)(.*?)\u{FFFC}/",
+			function ($match) use ($footnotesSorted, $uncertaintyChr) {
 				$footnoteName = $this->footnoteLinks[$match[2]];
-				// Replace only the footnote number.
+				if (!isset($footnotesSorted[$footnoteName])) {
+				// This is a link to a missing footnote.
+					// Return the uncertainty sign.
+					return $uncertaintyChr
+						. ($match[1] === 'refnum' ? '-' . $match[2] : '');
+				}
 				if ($match[1] === 'num') {
+				// Replace only the footnote number.
 					return $footnotesSorted[$footnoteName]['num'];
 				}
-				// For backlinks, some have a footnote number and an additional link number.
 				if (count($footnotesSorted[$footnoteName]['refs']) > 1) {
-					// If this footnote is referenced more than once, use the `-x` suffix.
-					$linkNum = array_search($match[2], $footnotesSorted[$footnoteName]['refs']);
-					return $footnotesSorted[$footnoteName]['num'] . '-' . $linkNum;
+				// For backlinks:
+				// some have a footnote number and an additional link number.
+				// If this footnote is referenced more than once,
+				// use the `-x` suffix.
+					$linkNum = array_search(
+						$match[2], $footnotesSorted[$footnoteName]['refs']
+					);
+					return $footnotesSorted[$footnoteName]['num']
+						. '-'
+						. $linkNum;
 				} else {
 					// Otherwise, just the number.
 					return $footnotesSorted[$footnoteName]['num'];
@@ -114,9 +124,12 @@ trait FootnoteTrait
 	 */
 	protected function getFootnotesHtml(array $footnotesSorted): string
 	{
-		$prefix = !empty($this->contextId) ? $this->contextId . '-' : '';
+		if (empty($footnotesSorted)) {
+			return '';
+		}
+		$prefix = !empty($this->contextId) ? $this->contextId . '-' : '' ;
 		$hr = $this->html5 ? "<hr>\n" : "<hr />\n";
-		$footnotesHtml = "\n<div class=\"footnotes\" role=\"doc-endnotes\">\n$hr<ol>\n";
+		$footnotesHtml = "<div class=\"footnotes\" role=\"doc-endnotes\">\n$hr<ol>\n";
 		foreach ($footnotesSorted as $footnoteInfo) {
 			$backLinks = [];
 			foreach ($footnoteInfo['refs'] as $refIndex => $refNum) {
@@ -128,9 +141,11 @@ trait FootnoteTrait
 					. 'fnref'
 					. '-'
 					. $fnref
-					. '" role="doc-backlink">&#8617;&#xFE0E;</a>';
+					. '" role="doc-backlink">'. "\u{21A9}\u{FE0E}" . '</a>';
 			}
-			$linksPara = '<p class="footnote-backrefs">'. join("\n", $backLinks) . '</p>';
+			$linksPara = '<p class="footnote-backrefs">'
+				. join("\n", $backLinks)
+				. '</p>';
 			$footnotesHtml .= "<li id=\"{$prefix}fn-{$footnoteInfo['num']}\">";
 			$footnotesHtml .= "\n{$footnoteInfo['html']}$linksPara\n</li>\n";
 		}
@@ -151,8 +166,10 @@ trait FootnoteTrait
 	 */
 	protected function parseFootnoteLink($text): array
 	{
-		if (preg_match('/^\[\^(.+?)]/', $text, $matches)) {
-			$footnoteName = $matches[1];
+		if (preg_match('/^\[\^(.+?)\]/', $text, $matches)) {
+			$footnoteName = function_exists("mb_strtolower") ?
+				mb_strtolower($matches[1], 'UTF-8') :
+				strtolower($matches[1]) ;
 
 			// We will later order the footnotes
 			// according to the order that the footnote links appear in.
@@ -162,7 +179,10 @@ trait FootnoteTrait
 			// To render a footnote link, we only need to know its link-number,
 			// which will later be turned into its footnote-number (after sorting).
 			return [
-				['footnoteLink', 'num' => $this->footnoteLinkNum],
+				[
+					'footnoteLink',
+					'num' => $this->footnoteLinkNum
+				],
 				strlen($matches[0])
 			];
 		}
@@ -175,9 +195,19 @@ trait FootnoteTrait
 	 */
 	protected function renderFootnoteLink($block): string
 	{
-		$prefix = !empty($this->contextId) ? $this->contextId . '-' : '';
-		$substituteRefnum = "\x1Afootnote-refnum".$block['num']."\x1A";
-		$substituteNum = "\x1Afootnote-num" . $block['num'] . "\x1A";
+		$prefix = !empty($this->contextId) ? $this->contextId . '-' : '' ;
+		$objChr = "\u{FFFC}";
+
+		$substituteRefnum = $objChr
+			. "footnote-refnum"
+			. $block['num']
+			. $objChr;
+
+		$substituteNum = $objChr
+			. "footnote-num"
+			. $block['num']
+			. $objChr;
+
 		return '<sup id="'
 			. $prefix
 			. 'fnref-'
@@ -194,59 +224,56 @@ trait FootnoteTrait
 	}
 
 	/**
-	 * identify a line as the beginning of a footnote block
+	 * Identify a line as the beginning of a footnote block.
 	 *
 	 * @param $line
 	 * @return false|int
 	 */
 	protected function identifyFootnoteList($line): bool
 	{
-		return preg_match('/^\[\^(.+?)]:/', $line);
+		return preg_match('/^ {0,3}\[\^(.+?)]:/', $line);
 	}
 
 	/**
-	 * Consume lines for a footnote
-	 * @return array Array of two elements, the first element contains the block,
-	 * the second contains the next line index to be parsed.
+	 * Consume lines for a footnote.
 	 */
 	protected function consumeFootnoteList($lines, $current): array
 	{
-		$name = '';
 		$footnotes = [];
-		$count = count($lines);
-		$nextLineIndent = null;
-		for ($i = $current; $i < $count; $i++) {
+		$parsedFootnotes = [];
+
+		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
-			$startsFootnote = preg_match('/^\[\^(.+?)]:[ \t]*/', $line, $matches);
+			$startsFootnote = preg_match('/^ {0,3}\[\^(.+?)]:[ \t]*/', $line, $matches);
 			if ($startsFootnote) {
-				// Current line starts a footnote.
-				$name = $matches[1];
+				// The start of a footnote.
+				$name = function_exists("mb_strtolower") ?
+					mb_strtolower($matches[1], 'UTF-8') :
+					strtolower($matches[1]) ;
+
 				$str = substr($line, strlen($matches[0]));
-				$footnotes[$name] = [ trim($str) ];
-			} else if (strlen(trim($line)) === 0) {
-				// Current line is empty and ends this list of footnotes
-				// unless the next line is indented.
-				if (isset($lines[$i+1])) {
-					$nextLineIndented = preg_match('/^(\t| {4})/', $lines[$i + 1], $matches);
-					if ($nextLineIndented) {
-						// If the next line is indented, keep this empty line.
-						$nextLineIndent = $matches[1];
-						$footnotes[$name][] = $line;
-					} else {
-						// Otherwise, end the current footnote.
-						break;
-					}
-				}
-			} elseif (!$startsFootnote && isset($footnotes[$name])) {
+				$footnotes[$name] = [$str];
+			} elseif (
+				!$startsFootnote
+				&& isset($name)
+				&& isset($footnotes[$name])
+			) {
+				if (
+					ltrim($line) === ''
+					&& end($footnotes[$name]) === ''
+				) {
+				// Two blank lines end this list of footnotes.
+					break;
+				} else {
 				// Current line continues the current footnote.
-				$footnotes[$name][] = $nextLineIndent
-					? substr($line, strlen($nextLineIndent))
-					: trim($line);
+					$footnotes[$name][] = $line;	
+				}
+			} else {
+				break;
 			}
 		}
 
 		// Parse all collected footnotes.
-		$parsedFootnotes = [];
 		foreach ($footnotes as $footnoteName => $footnoteLines) {
 			$parsedFootnotes[$footnoteName] = $this->parseBlocks($footnoteLines);
 		}
@@ -264,7 +291,7 @@ trait FootnoteTrait
 			$this->footnotes[$footnoteName] = $this->renderAbsy($footnote);
 		}
 		// Render nothing, because all footnote lists will be concatenated
-		// at the end of the text.
+		// at the end of the text using the flavor's `postprocess` method.
 		return '';
 	}
 }

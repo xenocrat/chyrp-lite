@@ -8,7 +8,7 @@
 namespace cebe\markdown\inline;
 
 /**
- * Adds superscript and subscript inline elements
+ * Adds superscript and subscript inline elements.
  */
 trait SupSubTrait
 {
@@ -18,12 +18,18 @@ trait SupSubTrait
 	}
 
 	/**
-	 * Parses the strikethrough feature.
+	 * Parses the superscript feature.
 	 * @marker ++
 	 */
 	protected function parseSup($markdown): array
 	{
-		if (preg_match('/^\+\+(.+?)\+\+/', $markdown, $matches)) {
+		if (
+			preg_match(
+				'/^\+\+(?!\+)(.*?[^\+\\\\])\+\+(?!\+)/s',
+				$markdown,
+				$matches
+			)
+		) {
 			return [
 				[
 					'sup',
@@ -37,7 +43,9 @@ trait SupSubTrait
 
 	protected function renderSup($block): string
 	{
-		return '<sup>' . $this->renderAbsy($block[1]) . '</sup>';
+		return '<sup>'
+			. $this->renderAbsy($block[1])
+			. '</sup>';
 	}
 
 	protected function parseSubMarkers(): array
@@ -46,12 +54,18 @@ trait SupSubTrait
 	}
 
 	/**
-	 * Parses the strikethrough feature.
+	 * Parses the subscript feature.
 	 * @marker ~~
 	 */
 	protected function parseSub($markdown): array
 	{
-		if (preg_match('/^--(.+?)--/', $markdown, $matches)) {
+		if (
+			preg_match(
+				'/^--(?!-)(.*?[^-\\\\])--(?!-)/s',
+				$markdown,
+				$matches
+			)
+		) {
 			return [
 				[
 					'sub',
@@ -65,7 +79,9 @@ trait SupSubTrait
 
 	protected function renderSub($block): string
 	{
-		return '<sub>' . $this->renderAbsy($block[1]) . '</sub>';
+		return '<sub>'
+			. $this->renderAbsy($block[1])
+			. '</sub>';
 	}
 
 	abstract protected function parseInline($text);

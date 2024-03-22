@@ -8,59 +8,82 @@
 namespace cebe\markdown\block;
 
 /**
- * Adds the figure and figcaption elements
+ * Adds figure/figcaption blocks.
  */
 trait FigureTrait
 {
 	/**
-	 * identify a line as the beginning of a figure.
+	 * Identify a line as the beginning of a figure.
 	 */
 	protected function identifyFigure($line): bool
 	{
-		return $line[0] === ':'
-			&& (!isset($line[1]) || ($l1 = $line[1]) === ' ' ||
-				($l1 === ":" && (!isset($line[2]) || $line[2] === ' ')));
+		if (
+			$line[0] === ' '
+			&& strspn($line, ' ') < 4
+		) {
+		// trim up to three spaces
+			$line = ltrim($line, ' ');
+		}
+		return $line[0] === ':';
 	}
 
 	/**
-	 * Consume lines for a figure element
+	 * Consume lines for a figure.
 	 */
 	protected function consumeFigure($lines, $current): array
 	{
 		$content = [];
 		$caption = [];
+
 		// consume until end of markers
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
+			if (
+				isset($line[0])
+				&& $line[0] === ' '
+				&& strspn($line, ' ') < 4
+			) {
+			// trim up to three spaces
+				$line = ltrim($line, ' ');
+			}
 			if (ltrim($line) !== '') {
-				if ($line[0] == ':' && !isset($line[1])) {
-					$line = '';
-				} elseif (strncmp($line, ': ', 2) === 0) {
-					$line = substr($line, 2);
-				} elseif (strncmp($line, ':: ', 3) === 0) {
-					$line = substr($line, 3);
-					// allow contiguous caption lines only
-					if (empty($caption) || isset($caption[$i - 1])) {
-						$caption[$i] = $line;
-						continue;
-					}
+				if (str_starts_with($line, ':: ')) {
+					$caption[$i] = substr($line, 3);
+					continue;
+				} elseif (str_starts_with($line, '::')) {
+					$caption[$i] = substr($line, 2);
+					continue;
+				} elseif (str_starts_with($line, ': ')) {
+					$content[] = substr($line, 2);
+				} elseif (str_starts_with($line, ':')) {
+					$content[] = substr($line, 1);
 				} else {
 					--$i;
 					break;
 				}
-				$content[] = $line;
 			} else {
 				break;
 			}
 		}
 
-		// determine caption placement
+		// decide caption placement and remove invalid lines.
 		if (isset($caption[$current])) {
 			$endcap = false;
+			for ($x = $current; $x < $i; $x++) { 
+				if ($x !== $current && !isset($caption[$x - 1])) {
+					unset($caption[$x]);
+				}
+			}
 		} elseif (isset($caption[$i - 1])) {
 			$endcap = true;
+			for ($x = $i - 1; $x >= $current; $x--) { 
+				if ($x !== $i - 1 && !isset($caption[$x + 1])) {
+					unset($caption[$x]);
+				}
+			}
 		} else {
 			$endcap = null;
+			$caption = [];
 		}
 
 		$block = [
@@ -69,24 +92,30 @@ trait FigureTrait
 			'content' => $this->parseBlocks($content),
 			'caption' => $this->parseBlocks(array_values($caption)),
 		];
+
 		return [$block, $i];
 	}
 
 	/**
-	 * Renders a figure
+	 * Renders a figure.
 	 */
 	protected function renderFigure($block): string
 	{
-		if ($block['endcap'] !== null) {
-			$caption = '<figcaption>' . $this->renderAbsy($block['caption']) . "</figcaption>\n";
-		} else {
-			$caption = '';
-		}
+		$caption = $block['endcap'] === null ?
+			'' :
+			"<figcaption>\n"
+				. $this->renderAbsy($block['caption'])
+				. "</figcaption>\n" ;
 
 		if ($block['endcap'] === false) {
-			$figure = '<figure>' . $caption . $this->renderAbsy($block['content']) . "</figure>\n";
+			$figure = "<figure>\n"
+				. $caption . $this->renderAbsy($block['content'])
+				. "</figure>\n";
 		} else {
-			$figure = '<figure>' . $this->renderAbsy($block['content']) . $caption . "</figure>\n";
+			$figure = "<figure>\n"
+				. $this->renderAbsy($block['content'])
+				. $caption
+				. "</figure>\n";
 		}
 
 		return $figure;
