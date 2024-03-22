@@ -27,9 +27,9 @@
                 new \Twig\TwigFunction("posted",            "twig_function_posted"),
                 new \Twig\TwigFunction("mailto",            "twig_function_mailto"),
                 new \Twig\TwigFunction("icon_img",          "twig_function_icon_img"),
+                new \Twig\TwigFunction("copyright_notice",  "twig_function_copyright_notice"),
                 new \Twig\TwigFunction("uploaded_search",   "twig_function_uploaded_search"),
                 new \Twig\TwigFunction("javascripts_nonce", "twig_function_javascripts_nonce"),
-                new \Twig\TwigFunction("copyright_notice", "twig_function_copyright_notice"),
                 new \Twig\TwigFunction("stylesheets_nonce", "twig_function_stylesheets_nonce")
             );
         }
@@ -120,11 +120,6 @@
         }
 
         return false;
-    }
-
-    function twig_function_copyright_notice($post_author_name, $post_created_at, $post_updated_at)
-    {
-        return  _f("created by %s", $post_author_name).  _f(" on: %s", _w('d/m/Y',$post_created_at)).  _f(" at: %s", _w('h:i:s',$post_created_at)) .' &bull; '. _f("update on %s",_w("d/m/Y", $post_updated_at)). _f(" at: %s",_w("h:i:s",$post_updated_at));
     }
 
     /**
@@ -297,6 +292,40 @@
     }
 
     /**
+     * Function: twig_function_copyright_notice
+     * Returns a copyright notice.
+     *
+     * Parameters:
+     *     $holder - The copyright holder's name.
+     *     $date1 - A date to use for the year.
+     *     $date2 - End date (for a span of years).
+     */
+    function twig_function_copyright_notice(
+        $holder = null,
+        $date1 = null,
+        $date2 = null,
+    ): string {
+        $notice = "&copy;";
+
+        if (isset($date1)) {
+            $year1 = _w("Y", $date1);
+            $notice.= "&nbsp;".$year1;
+
+            if (isset($date2)) {
+                $year2 = _w("Y", $date2);
+
+                if (strcmp($year2, $year1))
+                    $notice.= "&ndash;".$year2;
+            }
+        }
+
+        if (isset($holder))
+            $notice.= "&nbsp;".$holder;
+
+        return $notice;
+    }
+
+    /**
      * Function: twig_function_uploaded_search
      * Returns an array of matches, if the visitor has the "export_content" privilege.
      *
@@ -420,7 +449,7 @@
      *
      * Parameters:
      *     $timestamp - A time value to be strtotime() converted.
-     *
+     * 
      * Notes:
      *     Uses date() instead of strftime(). Retained for backwards compatibility.
      */
