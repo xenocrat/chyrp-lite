@@ -29,29 +29,6 @@ class GithubMarkdown extends Markdown
 	public $enableNewlines = false;
 
 	/**
-	 * @inheritDoc
-	 */
-	protected $escapeCharacters = [
-		// from Markdown
-		'\\', // backslash
-		'`', // backtick
-		'*', // asterisk
-		'_', // underscore
-		'{', '}', // curly braces
-		'[', ']', // square brackets
-		'(', ')', // parentheses
-		'#', // hash mark
-		'+', // plus sign
-		'-', // minus sign (hyphen)
-		'.', // dot
-		'!', // exclamation mark
-		'<', '>', // angle brackets
-		// added by GithubMarkdown
-		':', // colon
-		'|', // pipe
-	];
-
-	/**
 	 * Consume lines for a paragraph.
 	 *
 	 * Allow other block types to break paragraphs.
@@ -99,9 +76,8 @@ class GithubMarkdown extends Markdown
 	{
 		if ($this->enableNewlines) {
 			$br = $this->html5 ? "<br>\n" : "<br />\n";
-			return preg_replace("/ *\n/", $br, $text[1]);
-		} else {
-			return parent::renderText($text);
+			$text[1] = preg_replace("/ *\n/", $br, $text[1]);
 		}
+		return parent::renderText($text);
 	}
 }

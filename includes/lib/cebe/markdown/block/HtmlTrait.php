@@ -96,7 +96,12 @@ trait HtmlTrait
 			return true;
 		}
 		if (
-			preg_match('/^<\/?[a-z][a-z0-9\-]*( [^>]*)?>(\s)*$/i', $line)
+			preg_match(
+				'/^<\/?[a-z][a-z0-9\-]*( [^>]*)?>(\s)*$/i',
+				$line,
+				$matches
+			)
+			&& substr_count($matches[0], '"') % 2 === 0
 			&& (
 				!isset($lines[$current - 1])
 				|| $lines[$current - 1] === ''
@@ -269,30 +274,27 @@ trait HtmlTrait
 					return $block;
 				}
 			}
-			if (preg_match('/^<!--(-?>|.*?-->)/s', $text, $matches)) {
-			// comment
-				return [['lt', $matches[0]], strlen($matches[0])];
-			}
-			if (preg_match('/^<\?.*?\?>/s', $text, $matches)) {
-			// processor
-				return [['lt', $matches[0]], strlen($matches[0])];
-			}
-			if (preg_match('/^<![a-z].*?>/si', $text, $matches)) {
-			// declaration
-				return [['lt', $matches[0]], strlen($matches[0])];
-			}
-			if (preg_match('/^<!\[CDATA\[.*?\]\]>/s', $text, $matches)) {
-			// cdata
+			if (
+				// comment
+				preg_match('/^<!--(-?>|.*?-->)/s', $text, $matches)
+				// processor
+				|| preg_match('/^<\?.*?\?>/s', $text, $matches)
+				// declaration
+				|| preg_match('/^<![a-z].*?>/si', $text, $matches)
+				// cdata
+				|| preg_match('/^<!\[CDATA\[.*?\]\]>/s', $text, $matches)
+			) {
 				return [['lt', $matches[0]], strlen($matches[0])];
 			}
 			if (
+				// tag
 				preg_match(
 					'/^<\/?[a-z][a-z0-9\-]*(\/|[ \n].*?)?>/is',
 					$text,
 					$matches
 				)
+				&& substr_count($matches[0], '"') % 2 === 0
 			) {
-			// tag
 				return [['lt', $matches[0]], strlen($matches[0])];
 			}
 		}
@@ -311,5 +313,19 @@ trait HtmlTrait
 	protected function parseGt($text): array
 	{
 		return [['text', '&gt;'], 1];
+	}
+
+	protected function parseDoubleQuoteMarkers(): array
+	{
+		return array('"');
+	}
+
+	/**
+	 * Escapes `"` characters.
+	 * @marker "
+	 */
+	protected function parseDoubleQuote($text): array
+	{
+		return [['text', '&quot;'], 1];
 	}
 }

@@ -128,7 +128,7 @@ trait ListTrait
 				if ($next === '' || ltrim($next) === '') {
 				// next line is also blank
 					$block['items'][$item][] = $line;
-				} elseif (ctype_space(substr($next, 0, $mw))) {
+				} elseif (strspn($next, " \t") >= $mw) {
 				// next line is indented enough to continue this item
 					$block['items'][$item][] = $line;
 				} elseif (preg_match($pattern, $next)) {
@@ -141,7 +141,7 @@ trait ListTrait
 				}
 			} elseif (
 				strlen($line) > $mw
-				&& ctype_space(substr($line, 0, $mw))
+				&& strspn($line, " \t") >= $mw
 			) {
 				// line is indented enough to continue this item
 				$line = substr($line, $mw);

@@ -35,6 +35,7 @@ class Markdown extends Parser
 	 */
 	protected $escapeCharacters = [
 		'\\', // backslash
+		'/', // forward slash
 		'`', // backtick
 		'*', // asterisk
 		'_', // underscore
@@ -45,8 +46,22 @@ class Markdown extends Parser
 		'+', // plus sign
 		'-', // minus sign (hyphen)
 		'.', // dot
+		',', // comma
 		'!', // exclamation mark
 		'<', '>', // angle brackets
+		'"', // double quote
+		'\'', // single quote
+		'$', // dollar sign
+		'%', // percent sign
+		'&', // ampersand
+		':', // colon
+		';', // semicolon
+		'=', // equals sign
+		'?', // question mark
+		'@', // at symbol
+		'~', // tilde
+		'^', // caret
+		'|', // pipe
 	];
 
 	/**
@@ -123,8 +138,9 @@ class Markdown extends Parser
 	protected function renderText($text): string
 	{
 		$br = $this->html5 ? "<br>\n" : "<br />\n";
+		$text = $text[1];
 		// two or more spaces
-		$text = preg_replace("/ {2,}\n/", $br, $text[1]);
+		$text = preg_replace("/ {2,}\n/", $br, $text);
 		// trim single spaces
 		$text = str_replace(" \n", "\n", $text);
 		return $text;

@@ -25,31 +25,6 @@ class ChyrpMarkdown extends GithubMarkdown
 	/**
 	 * @inheritDoc
 	 */
-	protected $escapeCharacters = [
-		// from Markdown
-		'\\', // backslash
-		'`', // backtick
-		'*', // asterisk
-		'_', // underscore
-		'{', '}', // curly braces
-		'[', ']', // square brackets
-		'(', ')', // parentheses
-		'#', // hash mark
-		'+', // plus sign
-		'-', // minus sign (hyphen)
-		'.', // dot
-		'!', // exclamation mark
-		'<', '>', // angle brackets
-		// added by GithubMarkdown
-		':', // colon
-		'|', // pipe
-		// added by ChyrpMarkdown
-		'='
-	];
-
-	/**
-	 * @inheritDoc
-	 */
 	protected function prepare(): void
 	{
 		// reset references

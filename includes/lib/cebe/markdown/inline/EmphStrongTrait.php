@@ -45,12 +45,17 @@ trait EmphStrongTrait
 				)
 				|| $marker === '_'
 				&& preg_match(
-					'/^__((?>\\\\_|[^_]|_[^_]*_)+?)__/us',
+					'/^__((?>\\\\_|[^_]|_[^_]*_)+?)__\b/us',
 					$text,
 					$matches
 				)
 			) {
 				$content = $matches[1];
+				// if only a single whitespace or nothing is contained in a strong,
+				// do not consider it valid
+				if ($content === '') {
+					return [['text', $text[0]], 2];
+				}
 				// first and last chars must be graphical
 				if (
 					ctype_graph($content[0])
@@ -85,12 +90,12 @@ trait EmphStrongTrait
 					$matches
 				)
 			) {
+				$content = $matches[1];
 				// if only a single whitespace or nothing is contained in an emphasis,
 				// do not consider it valid
-				if ($matches[1] === '' || $matches[1] === ' ') {
-					return [['text', $text[0]], 1];
+				if ($content === '') {
+					return [['text', $text[0]], 2];
 				}
-				$content = $matches[1];
 				// first and last chars must be graphical
 				if (
 					ctype_graph($content[0])

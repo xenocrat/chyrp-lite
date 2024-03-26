@@ -93,7 +93,7 @@ trait CodeTrait
 		return "<pre><code$class>"
 			. $this->escapeHtmlEntities(
 				$block['content'],
-				ENT_NOQUOTES | ENT_SUBSTITUTE
+				ENT_COMPAT | ENT_SUBSTITUTE
 			)
 			. ($block['content'] === '' ? '' : "\n" )
 			. "</code></pre>\n";

@@ -31,6 +31,7 @@ trait AutoLinkTrait
 				^(www\.|https?:\/\/)(([^\s<>()]+)|(?R))+(?<![\.,:;\'"!\?\s])
 			)/x
 REGEXP;
+
 		if (
 			!in_array('parseLink', $this->context)
 			&& preg_match($regex, $text, $matches)
