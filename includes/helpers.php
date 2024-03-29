@@ -1538,7 +1538,7 @@
         static $parser;
 
         if (!isset($parser)) {
-            $parser = new \cebe\markdown\ChyrpMarkdown();
+            $parser = new \xenocrat\markdown\ChyrpMarkdown();
             $parser->convertTabsToSpaces = false;
             $parser->html5 = true;
             $parser->keepListStartNumber = true;
