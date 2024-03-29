@@ -5,7 +5,7 @@
  * @link https://github.com/xenocrat/chyrp-markdown#readme
  */
 
-namespace cebe\markdown\inline;
+namespace xenocrat\markdown\inline;
 
 /**
  * Adds cite inline elements.

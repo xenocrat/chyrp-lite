@@ -5,7 +5,7 @@
  * @link https://github.com/xenocrat/chyrp-markdown#readme
  */
 
-namespace cebe\markdown\block;
+namespace xenocrat\markdown\block;
 
 /**
  * Adds fenced code blocks.

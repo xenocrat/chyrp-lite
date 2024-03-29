@@ -5,7 +5,7 @@
  * @link https://github.com/xenocrat/chyrp-markdown#readme
  */
 
-namespace cebe\markdown;
+namespace xenocrat\markdown;
 use ReflectionMethod;
 
 /**

@@ -5,7 +5,7 @@
  * @link https://github.com/xenocrat/chyrp-markdown#readme
  */
 
-namespace cebe\markdown;
+namespace xenocrat\markdown;
 
 /**
  * Markdown parser for [GitHub-Flavored Markdown](https://github.github.com/gfm/).
@@ -42,15 +42,17 @@ class GithubMarkdown extends Markdown
 			$line = $lines[$i];
 			if (
 				$line === ''
-				|| ltrim($line) === ''
-				|| !ctype_alpha($line[0])
-				&& (
-					$this->identifyQuote($line, $lines, $i)
-					|| $this->identifyFencedCode($line, $lines, $i)
-					|| $this->identifyUl($line, $lines, $i)
-					|| $this->identifyOl($line, $lines, $i)
-					|| $this->identifyHr($line, $lines, $i)
-					|| $this->identifyHtml($line, $lines, $i)
+				|| ($trimmed = ltrim($line)) === ''
+				|| (
+					(ctype_punct($trimmed[0]) || ctype_digit($trimmed[0]))
+					&& (
+						$this->identifyQuote($line, $lines, $i)
+						|| $this->identifyFencedCode($line, $lines, $i)
+						|| $this->identifyUl($line, $lines, $i)
+						|| $this->identifyOl($line, $lines, $i)
+						|| $this->identifyHr($line, $lines, $i)
+						|| $this->identifyHtml($line, $lines, $i)
+					)
 				)
 				|| $this->identifyHeadline($line, $lines, $i)
 			) {
