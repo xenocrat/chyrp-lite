@@ -575,7 +575,7 @@ a:active {
     color: #c04b4b;
     text-decoration: underline;
     text-underline-offset: 0.125em;
-    text-decoration-thickness: 0.125em;
+    text-decoration-thickness: 0.0625em;
 }
 ul.navigation > li > a {
     display: inline-block;
@@ -592,7 +592,7 @@ p a:visited {
     color: #1f1f23;
     text-decoration: underline;
     text-underline-offset: 0.125em;
-    text-decoration-thickness: 0.125em;
+    text-decoration-thickness: 0.0625em;
 }
 section a:hover,
 p a:hover,

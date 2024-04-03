@@ -676,7 +676,7 @@ a:active {
     color: #d94c7b;
     text-decoration: underline;
     text-underline-offset: 0.125em;
-    text-decoration-thickness: 0.125em;
+    text-decoration-thickness: 0.0625em;
 }
 div.ribbon a {
     color: #ffffff;
@@ -704,7 +704,7 @@ p a:visited {
     color: #1f1f23;
     text-decoration: underline;
     text-underline-offset: 0.125em;
-    text-decoration-thickness: 0.125em;
+    text-decoration-thickness: 0.0625em;
 }
 section a:hover,
 p a:hover,
