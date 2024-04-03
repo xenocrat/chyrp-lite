@@ -56,7 +56,7 @@ msgstr "Zoekstring"
 msgid "Parameters"
 msgstr "Parameters"
 
-#: includes/class/Query.php:204 includes/class/SQL.php:152 install.php:745
+#: includes/class/Query.php:204 includes/class/SQL.php:152 install.php:748
 #, php-format
 msgid "Database error: %s"
 msgstr "Database fout: %s"
@@ -96,7 +96,7 @@ msgstr "Route gestart met een ongeldige controller."
 #: includes/helpers.php:2728 includes/helpers.php:2735
 #: includes/lib/ThumbnailFile.php:290 includes/lib/ThumbnailFile.php:321
 #: includes/lib/ThumbnailFile.php:381 includes/thumbnail.php:15
-#: install.php:1008 upgrade.php:211 upgrade.php:227 upgrade.php:243
+#: install.php:1011 upgrade.php:211 upgrade.php:227 upgrade.php:243
 #: upgrade.php:259 upgrade.php:275 upgrade.php:295 upgrade.php:339
 #: upgrade.php:355 upgrade.php:375 upgrade.php:391 upgrade.php:407
 #: upgrade.php:423 upgrade.php:443 upgrade.php:459 upgrade.php:588
@@ -378,13 +378,13 @@ msgid "That username is already in use."
 msgstr "Deze gebruikersnaam is al in gebruik."
 
 #: includes/controller/Admin.php:1010 includes/controller/Main.php:800
-#: includes/controller/Main.php:1181 install.php:690
+#: includes/controller/Main.php:1181 install.php:693
 msgid "Passwords cannot be blank."
 msgstr "Wachtwoord mag niet leeg zijn."
 
 #: includes/controller/Admin.php:1017 includes/controller/Admin.php:1187
 #: includes/controller/Main.php:804 includes/controller/Main.php:1019
-#: includes/controller/Main.php:1185 install.php:625 install.php:692
+#: includes/controller/Main.php:1185 install.php:628 install.php:695
 msgid "Passwords do not match."
 msgstr "Wachtwoorden komen niet overeen."
 
@@ -394,13 +394,13 @@ msgstr "Bedenk een sterker wachtwoord voor deze gebruiker."
 
 #: includes/controller/Admin.php:1029 includes/controller/Admin.php:1206
 #: includes/controller/Admin.php:2995 includes/controller/Main.php:813
-#: includes/controller/Main.php:1032 install.php:695
+#: includes/controller/Main.php:1032 install.php:698
 msgid "Email address cannot be blank."
 msgstr "Emailadres mag niet leeg zijn."
 
 #: includes/controller/Admin.php:1036 includes/controller/Admin.php:1213
 #: includes/controller/Admin.php:3002 includes/controller/Main.php:817
-#: includes/controller/Main.php:1036 install.php:697
+#: includes/controller/Main.php:1036 install.php:700
 msgid "Invalid email address."
 msgstr "Ongeldig emailadres."
 
@@ -682,11 +682,11 @@ msgstr "Vooruitblik gestopt."
 msgid "Preview started."
 msgstr "Vooruitblik gestart."
 
-#: includes/controller/Admin.php:3009 install.php:673
+#: includes/controller/Admin.php:3009 install.php:676
 msgid "Chyrp URL cannot be blank."
 msgstr "Chyrp URL kan niet leeg zijn."
 
-#: includes/controller/Admin.php:3016 install.php:675
+#: includes/controller/Admin.php:3016 install.php:678
 msgid "Invalid Chyrp URL."
 msgstr "Ongeldige Chyrp URL."
 
@@ -883,7 +883,7 @@ msgstr "Deze website staat registreren niet toe."
 msgid "You cannot register an account because you are already logged in."
 msgstr "Je kunt geen account registreren, want je bent al ingelogd."
 
-#: includes/controller/Main.php:786 install.php:687
+#: includes/controller/Main.php:786 install.php:690
 msgid "Please enter a username for your account."
 msgstr "Geef alsjeblieft een gebruikersnaam in voor je account."
 
@@ -934,7 +934,7 @@ msgstr "Je moet eerst je account activeren voordat je kunt inloggen."
 msgid "Logged in."
 msgstr "Ingelogd."
 
-#: includes/controller/Main.php:971 includes/error.php:461
+#: includes/controller/Main.php:971 includes/error.php:464
 msgid "Log in"
 msgstr "Log in"
 
@@ -987,16 +987,16 @@ msgstr "Wijzig wachtwoord"
 msgid "An unspecified error has occurred."
 msgstr "Er is een onbekende fout opgetreden."
 
-#: includes/error.php:449
+#: includes/error.php:452
 msgid "Backtrace"
 msgstr "Backtrace"
 
-#: includes/error.php:453
+#: includes/error.php:456
 #, php-format
 msgid "%s on line %d"
 msgstr "%s op regel %d"
 
-#: includes/error.php:466
+#: includes/error.php:469
 msgid "Go back"
 msgstr "Ga terug"
 
@@ -1388,35 +1388,35 @@ msgstr ""
 msgid "Chyrp Lite Installer"
 msgstr "Chyrp Lite installatieprogramma"
 
-#: install.php:670
+#: install.php:673
 msgid "Database cannot be blank."
 msgstr "Database kan niet leeg zijn."
 
-#: install.php:678
+#: install.php:681
 msgid "Please enter a name for your website."
 msgstr "Geef alsjeblieft een naam in voor je website."
 
-#: install.php:681
+#: install.php:684
 msgid "Time zone cannot be blank."
 msgstr "Tijdzone kan niet leeg zijn."
 
-#: install.php:684
+#: install.php:687
 msgid "Language cannot be blank."
 msgstr "Taal kan niet leeg zijn."
 
-#: install.php:703
+#: install.php:706
 msgid "Could not determine the absolute path to the database."
 msgstr "Kan het absolute pad naar de database niet bepalen."
 
-#: install.php:710
+#: install.php:713
 msgid "Please make the database writable by the server."
 msgstr "Maak de database alsjeblieft schrijfbaar voor de server."
 
-#: install.php:714
+#: install.php:717
 msgid "Please enter a username and password for the database."
 msgstr "Geef alsjeblieft een gebruikersnaam en wachtwoord in voor de database."
 
-#: install.php:1009 upgrade.php:212 upgrade.php:228 upgrade.php:244
+#: install.php:1012 upgrade.php:212 upgrade.php:228 upgrade.php:244
 #: upgrade.php:260 upgrade.php:276 upgrade.php:296 upgrade.php:340
 #: upgrade.php:356 upgrade.php:376 upgrade.php:392 upgrade.php:408
 #: upgrade.php:424 upgrade.php:444 upgrade.php:460 upgrade.php:589
@@ -1424,48 +1424,48 @@ msgstr "Geef alsjeblieft een gebruikersnaam en wachtwoord in voor de database."
 msgid "Could not write the configuration file."
 msgstr "Kan het configuratiebestand niet schrijven."
 
-#: install.php:1027
+#: install.php:1030
 msgid "Database Setup"
 msgstr "Database Setup"
 
-#: install.php:1029
+#: install.php:1032
 msgid "Adapter"
 msgstr "Adapter"
 
-#: install.php:1043
+#: install.php:1046
 msgid "Host"
 msgstr "Hostnaam"
 
-#: install.php:1047
+#: install.php:1050
 msgid "Port"
 msgstr "Poort"
 
-#: install.php:1047 install.php:1076
+#: install.php:1050 install.php:1079
 msgid "(optional)"
 msgstr "(optioneel)"
 
-#: install.php:1051 install.php:1114
+#: install.php:1054 install.php:1117
 msgid "Username"
 msgstr "Gebruikersnaam"
 
-#: install.php:1055 install.php:1118 install.php:1122
+#: install.php:1058 install.php:1121 install.php:1125
 msgid "Password"
 msgstr "Wachtwoord"
 
-#: install.php:1059
+#: install.php:1062
 msgid "Database"
 msgstr "Datbasenaam"
 
-#: install.php:1061
+#: install.php:1064
 msgid "(absolute or relative path)"
 msgstr "(absoluut of relatief pad)"
 
-#: install.php:1067
+#: install.php:1070
 msgid "Make sure your PostgreSQL database uses UTF-8 encoding."
 msgstr ""
 "Verzeker jezelf ervan dat de PostgreSQL database UTF-8 codering gebruikt."
 
-#: install.php:1070
+#: install.php:1073
 msgid ""
 "The collation <code>utf8mb4_general_ci</code> is recommended for your MySQL "
 "database."
@@ -1473,7 +1473,7 @@ msgstr ""
 "De collatie <code>utf8mb4_general_ci</code> wordt aangeraden voor je MySQL "
 "database."
 
-#: install.php:1073
+#: install.php:1076
 msgid ""
 "Be sure to put your SQLite database outside the document root directory, "
 "otherwise visitors will be able to download it."
@@ -1481,71 +1481,71 @@ msgstr ""
 "Verzeker je ervan dat je SQLite database zich buiten de root map bevindt, "
 "anders kan iedereen hem downloaden."
 
-#: install.php:1076
+#: install.php:1079
 msgid "Table Prefix"
 msgstr "Tabel-prefix"
 
-#: install.php:1079
+#: install.php:1082
 msgid "Website Setup"
 msgstr "Website Setup"
 
-#: install.php:1081
+#: install.php:1084
 msgid "Chyrp URL"
 msgstr "Chyrp URL"
 
-#: install.php:1085
+#: install.php:1088
 msgid "Site Name"
 msgstr "Website naam"
 
-#: install.php:1086
+#: install.php:1089
 msgid "My Awesome Site"
 msgstr "Mijn gave website"
 
-#: install.php:1089
+#: install.php:1092
 msgid "Description"
 msgstr "Beschrijving"
 
-#: install.php:1093
+#: install.php:1096
 msgid "Time Zone"
 msgstr "Tijdzone"
 
-#: install.php:1103
+#: install.php:1106
 msgid "Language"
 msgstr "Taal"
 
-#: install.php:1112
+#: install.php:1115
 msgid "Admin Account"
 msgstr "Beheerders- account"
 
-#: install.php:1122
+#: install.php:1125
 msgid "(again)"
 msgstr "(opnieuw)"
 
-#: install.php:1126
+#: install.php:1129
 msgid "Email Address"
 msgstr "Emailadres"
 
-#: install.php:1129
+#: install.php:1132
 msgid "Install me!"
 msgstr "Installeer me!"
 
-#: install.php:1132
+#: install.php:1135
 msgid "Installation Complete"
 msgstr "Installatie voltooid"
 
-#: install.php:1133 upgrade.php:947
+#: install.php:1136 upgrade.php:950
 msgid "What now?"
 msgstr "Wat nu?"
 
-#: install.php:1135
+#: install.php:1138
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr "Verwijder <em>install.php</em>, je zult het niet meer nodig hebben."
 
-#: install.php:1136
+#: install.php:1139
 msgid "Log in to your site and configure things to your liking."
 msgstr "Login bij je website en maak de door jou gewenste aanpassingen."
 
-#: install.php:1139 upgrade.php:954
+#: install.php:1142 upgrade.php:957
 msgid "Take me to my site!"
 msgstr "Breng me naar mijn website!"
 
@@ -1553,42 +1553,42 @@ msgstr "Breng me naar mijn website!"
 msgid "Chyrp Lite Upgrader"
 msgstr "Chyrp Lite Upgrade-programma"
 
-#: upgrade.php:935
+#: upgrade.php:938
 msgid "Halt!"
 msgstr "Stop!"
 
-#: upgrade.php:936
+#: upgrade.php:939
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr ""
 "Neem alsjeblieft deze voorzorgsmaatregelen, voordat je met de upgrade begint:"
 
-#: upgrade.php:938
+#: upgrade.php:941
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr ""
 "<strong>Maak een backup van je database, voordat je verder gaat!</strong>"
 
-#: upgrade.php:939
+#: upgrade.php:942
 msgid "Tell your users that your site is offline for maintenance."
 msgstr ""
 "Vertel je gebruikers dat je website offline zal zijn, in verband met "
 "onderhoud."
 
-#: upgrade.php:943
+#: upgrade.php:946
 msgid "Upgrade me!"
 msgstr "Upgrade me!"
 
-#: upgrade.php:946
+#: upgrade.php:949
 msgid "Upgrade Complete"
 msgstr "Upgrade voltooid"
 
-#: upgrade.php:949
+#: upgrade.php:952
 msgid "Take action to resolve any errors reported on this page."
 msgstr "Onderneem acties om de fouten op deze pagina op te lossen."
 
-#: upgrade.php:950
+#: upgrade.php:953
 msgid "Run this upgrader again if you need to."
 msgstr "Herhaal het upgradeprogramma indien noodzakelijk."
 
-#: upgrade.php:951
+#: upgrade.php:954
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr "Verwijder <em>upgrade.php</em> nadat de upgrade-procedure voltooid is."

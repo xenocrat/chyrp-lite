@@ -57,7 +57,7 @@ msgstr "查询语句"
 msgid "Parameters"
 msgstr "参数"
 
-#: includes/class/Query.php:204 includes/class/SQL.php:152 install.php:745
+#: includes/class/Query.php:204 includes/class/SQL.php:152 install.php:748
 #, php-format
 msgid "Database error: %s"
 msgstr "数据库错误： %s"
@@ -97,7 +97,7 @@ msgstr "路由启动了一个无效的控制器。"
 #: includes/helpers.php:2728 includes/helpers.php:2735
 #: includes/lib/ThumbnailFile.php:290 includes/lib/ThumbnailFile.php:321
 #: includes/lib/ThumbnailFile.php:381 includes/thumbnail.php:15
-#: install.php:1008 upgrade.php:211 upgrade.php:227 upgrade.php:243
+#: install.php:1011 upgrade.php:211 upgrade.php:227 upgrade.php:243
 #: upgrade.php:259 upgrade.php:275 upgrade.php:295 upgrade.php:339
 #: upgrade.php:355 upgrade.php:375 upgrade.php:391 upgrade.php:407
 #: upgrade.php:423 upgrade.php:443 upgrade.php:459 upgrade.php:588
@@ -378,13 +378,13 @@ msgid "That username is already in use."
 msgstr "用户名已被使用。"
 
 #: includes/controller/Admin.php:1010 includes/controller/Main.php:800
-#: includes/controller/Main.php:1181 install.php:690
+#: includes/controller/Main.php:1181 install.php:693
 msgid "Passwords cannot be blank."
 msgstr "密码不能为空。"
 
 #: includes/controller/Admin.php:1017 includes/controller/Admin.php:1187
 #: includes/controller/Main.php:804 includes/controller/Main.php:1019
-#: includes/controller/Main.php:1185 install.php:625 install.php:692
+#: includes/controller/Main.php:1185 install.php:628 install.php:695
 msgid "Passwords do not match."
 msgstr "密码不匹配。"
 
@@ -394,13 +394,13 @@ msgstr "请考虑为这个用户设置一个更强的密码。"
 
 #: includes/controller/Admin.php:1029 includes/controller/Admin.php:1206
 #: includes/controller/Admin.php:2995 includes/controller/Main.php:813
-#: includes/controller/Main.php:1032 install.php:695
+#: includes/controller/Main.php:1032 install.php:698
 msgid "Email address cannot be blank."
 msgstr "邮件地址不能为空。"
 
 #: includes/controller/Admin.php:1036 includes/controller/Admin.php:1213
 #: includes/controller/Admin.php:3002 includes/controller/Main.php:817
-#: includes/controller/Main.php:1036 install.php:697
+#: includes/controller/Main.php:1036 install.php:700
 msgid "Invalid email address."
 msgstr "无效的邮件地址。"
 
@@ -682,11 +682,11 @@ msgstr "预览已停止。"
 msgid "Preview started."
 msgstr "预览已开始。"
 
-#: includes/controller/Admin.php:3009 install.php:673
+#: includes/controller/Admin.php:3009 install.php:676
 msgid "Chyrp URL cannot be blank."
 msgstr "Chyrp URL 不能为空。"
 
-#: includes/controller/Admin.php:3016 install.php:675
+#: includes/controller/Admin.php:3016 install.php:678
 msgid "Invalid Chyrp URL."
 msgstr "无效的Chyrp URL。"
 
@@ -883,7 +883,7 @@ msgstr "站点不允许注册。"
 msgid "You cannot register an account because you are already logged in."
 msgstr "您不能注册账户，因为您已登陆。"
 
-#: includes/controller/Main.php:786 install.php:687
+#: includes/controller/Main.php:786 install.php:690
 msgid "Please enter a username for your account."
 msgstr "请输入账户的用户名。"
 
@@ -933,7 +933,7 @@ msgstr "在登陆前必须激活您的账户。"
 msgid "Logged in."
 msgstr "已登陆。"
 
-#: includes/controller/Main.php:971 includes/error.php:461
+#: includes/controller/Main.php:971 includes/error.php:464
 msgid "Log in"
 msgstr "登陆"
 
@@ -985,16 +985,16 @@ msgstr "重置密码"
 msgid "An unspecified error has occurred."
 msgstr "发生未指定错误。"
 
-#: includes/error.php:449
+#: includes/error.php:452
 msgid "Backtrace"
 msgstr "回溯"
 
-#: includes/error.php:453
+#: includes/error.php:456
 #, php-format
 msgid "%s on line %d"
 msgstr "%s 在行 %d"
 
-#: includes/error.php:466
+#: includes/error.php:469
 msgid "Go back"
 msgstr "返回"
 
@@ -1368,35 +1368,35 @@ msgstr "请对<em>thumbs</em>目录使用CHMOD 或者 CHOWN 确保其可写。"
 msgid "Chyrp Lite Installer"
 msgstr "Chyrp Lite安装程序"
 
-#: install.php:670
+#: install.php:673
 msgid "Database cannot be blank."
 msgstr "数据库不能为空。"
 
-#: install.php:678
+#: install.php:681
 msgid "Please enter a name for your website."
 msgstr "请输入您站点的名字。"
 
-#: install.php:681
+#: install.php:684
 msgid "Time zone cannot be blank."
 msgstr "时区不能为空。"
 
-#: install.php:684
+#: install.php:687
 msgid "Language cannot be blank."
 msgstr "语言不能为空。"
 
-#: install.php:703
+#: install.php:706
 msgid "Could not determine the absolute path to the database."
 msgstr "无法确定数据库的绝对路径。"
 
-#: install.php:710
+#: install.php:713
 msgid "Please make the database writable by the server."
 msgstr "请确保您的数据库在这个服务器上可写。"
 
-#: install.php:714
+#: install.php:717
 msgid "Please enter a username and password for the database."
 msgstr "请输入数据库的用户名和密码。"
 
-#: install.php:1009 upgrade.php:212 upgrade.php:228 upgrade.php:244
+#: install.php:1012 upgrade.php:212 upgrade.php:228 upgrade.php:244
 #: upgrade.php:260 upgrade.php:276 upgrade.php:296 upgrade.php:340
 #: upgrade.php:356 upgrade.php:376 upgrade.php:392 upgrade.php:408
 #: upgrade.php:424 upgrade.php:444 upgrade.php:460 upgrade.php:589
@@ -1404,123 +1404,123 @@ msgstr "请输入数据库的用户名和密码。"
 msgid "Could not write the configuration file."
 msgstr "不能写入配置文件。"
 
-#: install.php:1027
+#: install.php:1030
 msgid "Database Setup"
 msgstr "数据库设置"
 
-#: install.php:1029
+#: install.php:1032
 msgid "Adapter"
 msgstr "适配器"
 
-#: install.php:1043
+#: install.php:1046
 msgid "Host"
 msgstr "主机"
 
-#: install.php:1047
+#: install.php:1050
 msgid "Port"
 msgstr ""
 
-#: install.php:1047 install.php:1076
+#: install.php:1050 install.php:1079
 msgid "(optional)"
 msgstr "(可选)"
 
-#: install.php:1051 install.php:1114
+#: install.php:1054 install.php:1117
 msgid "Username"
 msgstr "用户名"
 
-#: install.php:1055 install.php:1118 install.php:1122
+#: install.php:1058 install.php:1121 install.php:1125
 msgid "Password"
 msgstr "密码"
 
-#: install.php:1059
+#: install.php:1062
 msgid "Database"
 msgstr "数据库"
 
-#: install.php:1061
+#: install.php:1064
 msgid "(absolute or relative path)"
 msgstr "（相对或者绝对路径）"
 
-#: install.php:1067
+#: install.php:1070
 msgid "Make sure your PostgreSQL database uses UTF-8 encoding."
 msgstr "确保您的PostgresQL数据库使用 UTF-8 编码。"
 
-#: install.php:1070
+#: install.php:1073
 msgid ""
 "The collation <code>utf8mb4_general_ci</code> is recommended for your MySQL "
 "database."
 msgstr "推荐为您的 MySQL 数据库使用排序规则 <code>utf8mb4_general_ci</code>。"
 
-#: install.php:1073
+#: install.php:1076
 msgid ""
 "Be sure to put your SQLite database outside the document root directory, "
 "otherwise visitors will be able to download it."
 msgstr "请务必将您的SQLite数据库放在网站根目录之外，否则访问者将能够下载它。"
 
-#: install.php:1076
+#: install.php:1079
 msgid "Table Prefix"
 msgstr "表前缀"
 
-#: install.php:1079
+#: install.php:1082
 msgid "Website Setup"
 msgstr "网站设置"
 
-#: install.php:1081
+#: install.php:1084
 msgid "Chyrp URL"
 msgstr ""
 
-#: install.php:1085
+#: install.php:1088
 msgid "Site Name"
 msgstr "站点名"
 
-#: install.php:1086
+#: install.php:1089
 msgid "My Awesome Site"
 msgstr "我最棒的站点"
 
-#: install.php:1089
+#: install.php:1092
 msgid "Description"
 msgstr "描述"
 
-#: install.php:1093
+#: install.php:1096
 msgid "Time Zone"
 msgstr "时区"
 
-#: install.php:1103
+#: install.php:1106
 msgid "Language"
 msgstr "语言"
 
-#: install.php:1112
+#: install.php:1115
 msgid "Admin Account"
 msgstr "管理员账号"
 
-#: install.php:1122
+#: install.php:1125
 msgid "(again)"
 msgstr "(确认)"
 
-#: install.php:1126
+#: install.php:1129
 msgid "Email Address"
 msgstr "联系的邮件地址"
 
-#: install.php:1129
+#: install.php:1132
 msgid "Install me!"
 msgstr "安装！"
 
-#: install.php:1132
+#: install.php:1135
 msgid "Installation Complete"
 msgstr "安装完成"
 
-#: install.php:1133 upgrade.php:947
+#: install.php:1136 upgrade.php:950
 msgid "What now?"
 msgstr "现在做什么？"
 
-#: install.php:1135
+#: install.php:1138
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr "删除 <em>install.php</em>，您不再需要它。"
 
-#: install.php:1136
+#: install.php:1139
 msgid "Log in to your site and configure things to your liking."
 msgstr "登陆您的站点并且配置您喜欢的东西。"
 
-#: install.php:1139 upgrade.php:954
+#: install.php:1142 upgrade.php:957
 msgid "Take me to my site!"
 msgstr "前往我的站点！"
 
@@ -1528,38 +1528,38 @@ msgstr "前往我的站点！"
 msgid "Chyrp Lite Upgrader"
 msgstr "Chyrp Lite升级程序"
 
-#: upgrade.php:935
+#: upgrade.php:938
 msgid "Halt!"
 msgstr "等一下！"
 
-#: upgrade.php:936
+#: upgrade.php:939
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr "升级前请采取以下预防措施："
 
-#: upgrade.php:938
+#: upgrade.php:941
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr "<strong>开始前备份您的数据库！</strong>"
 
-#: upgrade.php:939
+#: upgrade.php:942
 msgid "Tell your users that your site is offline for maintenance."
 msgstr "告知您的用户站点处于离线状态以进行维护。"
 
-#: upgrade.php:943
+#: upgrade.php:946
 msgid "Upgrade me!"
 msgstr "升级！"
 
-#: upgrade.php:946
+#: upgrade.php:949
 msgid "Upgrade Complete"
 msgstr "升级完成"
 
-#: upgrade.php:949
+#: upgrade.php:952
 msgid "Take action to resolve any errors reported on this page."
 msgstr "采取措施解决此页面上报告的任何错误。"
 
-#: upgrade.php:950
+#: upgrade.php:953
 msgid "Run this upgrader again if you need to."
 msgstr "如果需要，再次运行此升级程序。"
 
-#: upgrade.php:951
+#: upgrade.php:954
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr "删除 <em>upgrade.php</em> 一旦您升级完成后。"

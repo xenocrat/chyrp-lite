@@ -57,7 +57,7 @@ msgstr "쿼리문"
 msgid "Parameters"
 msgstr "파라미터"
 
-#: includes/class/Query.php:204 includes/class/SQL.php:152 install.php:745
+#: includes/class/Query.php:204 includes/class/SQL.php:152 install.php:748
 #, php-format
 msgid "Database error: %s"
 msgstr "데이터베이스 오류: %s"
@@ -97,7 +97,7 @@ msgstr "경로가 잘못된 컨트롤러로 시작되었습니다."
 #: includes/helpers.php:2728 includes/helpers.php:2735
 #: includes/lib/ThumbnailFile.php:290 includes/lib/ThumbnailFile.php:321
 #: includes/lib/ThumbnailFile.php:381 includes/thumbnail.php:15
-#: install.php:1008 upgrade.php:211 upgrade.php:227 upgrade.php:243
+#: install.php:1011 upgrade.php:211 upgrade.php:227 upgrade.php:243
 #: upgrade.php:259 upgrade.php:275 upgrade.php:295 upgrade.php:339
 #: upgrade.php:355 upgrade.php:375 upgrade.php:391 upgrade.php:407
 #: upgrade.php:423 upgrade.php:443 upgrade.php:459 upgrade.php:588
@@ -378,13 +378,13 @@ msgid "That username is already in use."
 msgstr "이미 사용 중인 이름입니다."
 
 #: includes/controller/Admin.php:1010 includes/controller/Main.php:800
-#: includes/controller/Main.php:1181 install.php:690
+#: includes/controller/Main.php:1181 install.php:693
 msgid "Passwords cannot be blank."
 msgstr "비밀번호는 비워둘 수 없습니다."
 
 #: includes/controller/Admin.php:1017 includes/controller/Admin.php:1187
 #: includes/controller/Main.php:804 includes/controller/Main.php:1019
-#: includes/controller/Main.php:1185 install.php:625 install.php:692
+#: includes/controller/Main.php:1185 install.php:628 install.php:695
 msgid "Passwords do not match."
 msgstr "비밀번호가 일치하지 않습니다."
 
@@ -394,13 +394,13 @@ msgstr "보안을 위하여 더욱 강력한 암호를 설정하는 것이 좋�
 
 #: includes/controller/Admin.php:1029 includes/controller/Admin.php:1206
 #: includes/controller/Admin.php:2995 includes/controller/Main.php:813
-#: includes/controller/Main.php:1032 install.php:695
+#: includes/controller/Main.php:1032 install.php:698
 msgid "Email address cannot be blank."
 msgstr "이메일 주소는 비워둘 수 없습니다."
 
 #: includes/controller/Admin.php:1036 includes/controller/Admin.php:1213
 #: includes/controller/Admin.php:3002 includes/controller/Main.php:817
-#: includes/controller/Main.php:1036 install.php:697
+#: includes/controller/Main.php:1036 install.php:700
 msgid "Invalid email address."
 msgstr "올바르지 않은 이메일 주소입니다."
 
@@ -682,11 +682,11 @@ msgstr "미리 보기가 중지되었습니다."
 msgid "Preview started."
 msgstr "미리 보기를 시작합니다."
 
-#: includes/controller/Admin.php:3009 install.php:673
+#: includes/controller/Admin.php:3009 install.php:676
 msgid "Chyrp URL cannot be blank."
 msgstr "Chyrp URL은 비워둘 수 없습니다."
 
-#: includes/controller/Admin.php:3016 install.php:675
+#: includes/controller/Admin.php:3016 install.php:678
 msgid "Invalid Chyrp URL."
 msgstr "올바르지 않은 Chyrp URL입니다."
 
@@ -883,7 +883,7 @@ msgstr "계정 등록이 불가능합니다."
 msgid "You cannot register an account because you are already logged in."
 msgstr "이미 로그인되어 있기 때문에 계정을 등록할 수 없습니다."
 
-#: includes/controller/Main.php:786 install.php:687
+#: includes/controller/Main.php:786 install.php:690
 msgid "Please enter a username for your account."
 msgstr "사용자명을 입력하세요."
 
@@ -933,7 +933,7 @@ msgstr "로그인하기 전에 계정을 활성화해야 합니다."
 msgid "Logged in."
 msgstr "로그인되었습니다."
 
-#: includes/controller/Main.php:971 includes/error.php:461
+#: includes/controller/Main.php:971 includes/error.php:464
 msgid "Log in"
 msgstr "로그인"
 
@@ -985,16 +985,16 @@ msgstr "비밀번호 변경"
 msgid "An unspecified error has occurred."
 msgstr "알 수 없는 오류가 발생했습니다."
 
-#: includes/error.php:449
+#: includes/error.php:452
 msgid "Backtrace"
 msgstr "역추적"
 
-#: includes/error.php:453
+#: includes/error.php:456
 #, php-format
 msgid "%s on line %d"
 msgstr "%s: %d번 줄"
 
-#: includes/error.php:466
+#: includes/error.php:469
 msgid "Go back"
 msgstr "뒤로 가기"
 
@@ -1375,35 +1375,35 @@ msgstr ""
 msgid "Chyrp Lite Installer"
 msgstr "Chyrp 라이트 설치 도구"
 
-#: install.php:670
+#: install.php:673
 msgid "Database cannot be blank."
 msgstr "데이터베이스는 비워 둘 수 없습니다."
 
-#: install.php:678
+#: install.php:681
 msgid "Please enter a name for your website."
 msgstr "웹사이트의 이름을 입력하세요."
 
-#: install.php:681
+#: install.php:684
 msgid "Time zone cannot be blank."
 msgstr "시간대는 비워둘 수 없습니다."
 
-#: install.php:684
+#: install.php:687
 msgid "Language cannot be blank."
 msgstr "언어 설정은 비워둘 수 없습니다."
 
-#: install.php:703
+#: install.php:706
 msgid "Could not determine the absolute path to the database."
 msgstr "데이터베이스의 절대 경로를 결정할 수 없습니다."
 
-#: install.php:710
+#: install.php:713
 msgid "Please make the database writable by the server."
 msgstr "서버에서 데이터베이스를 쓰기 가능하게 만드십시오."
 
-#: install.php:714
+#: install.php:717
 msgid "Please enter a username and password for the database."
 msgstr "데이터베이스의 사용자명과 암호를 입력하십시오."
 
-#: install.php:1009 upgrade.php:212 upgrade.php:228 upgrade.php:244
+#: install.php:1012 upgrade.php:212 upgrade.php:228 upgrade.php:244
 #: upgrade.php:260 upgrade.php:276 upgrade.php:296 upgrade.php:340
 #: upgrade.php:356 upgrade.php:376 upgrade.php:392 upgrade.php:408
 #: upgrade.php:424 upgrade.php:444 upgrade.php:460 upgrade.php:589
@@ -1411,123 +1411,123 @@ msgstr "데이터베이스의 사용자명과 암호를 입력하십시오."
 msgid "Could not write the configuration file."
 msgstr "구성 파일을 쓸 수 없습니다."
 
-#: install.php:1027
+#: install.php:1030
 msgid "Database Setup"
 msgstr "데이터베이스 설정"
 
-#: install.php:1029
+#: install.php:1032
 msgid "Adapter"
 msgstr "어댑터"
 
-#: install.php:1043
+#: install.php:1046
 msgid "Host"
 msgstr "호스트"
 
-#: install.php:1047
+#: install.php:1050
 msgid "Port"
 msgstr "포트"
 
-#: install.php:1047 install.php:1076
+#: install.php:1050 install.php:1079
 msgid "(optional)"
 msgstr "(선택 사항)"
 
-#: install.php:1051 install.php:1114
+#: install.php:1054 install.php:1117
 msgid "Username"
 msgstr "사용자명"
 
-#: install.php:1055 install.php:1118 install.php:1122
+#: install.php:1058 install.php:1121 install.php:1125
 msgid "Password"
 msgstr "비밀번호"
 
-#: install.php:1059
+#: install.php:1062
 msgid "Database"
 msgstr "데이터베이스"
 
-#: install.php:1061
+#: install.php:1064
 msgid "(absolute or relative path)"
 msgstr "(상대 경로 또는 절대 경로)"
 
-#: install.php:1067
+#: install.php:1070
 msgid "Make sure your PostgreSQL database uses UTF-8 encoding."
 msgstr "PostgreSQL 데이터베이스가 UTF-8 인코딩을 사용하는지 확인하십시오."
 
-#: install.php:1070
+#: install.php:1073
 msgid ""
 "The collation <code>utf8mb4_general_ci</code> is recommended for your MySQL "
 "database."
 msgstr ""
 
-#: install.php:1073
+#: install.php:1076
 msgid ""
 "Be sure to put your SQLite database outside the document root directory, "
 "otherwise visitors will be able to download it."
 msgstr ""
 
-#: install.php:1076
+#: install.php:1079
 msgid "Table Prefix"
 msgstr "테이블 접두사"
 
-#: install.php:1079
+#: install.php:1082
 msgid "Website Setup"
 msgstr "웹사이트 설정"
 
-#: install.php:1081
+#: install.php:1084
 msgid "Chyrp URL"
 msgstr ""
 
-#: install.php:1085
+#: install.php:1088
 msgid "Site Name"
 msgstr "사이트명"
 
-#: install.php:1086
+#: install.php:1089
 msgid "My Awesome Site"
 msgstr "나의 멋진 사이트"
 
-#: install.php:1089
+#: install.php:1092
 msgid "Description"
 msgstr "설명"
 
-#: install.php:1093
+#: install.php:1096
 msgid "Time Zone"
 msgstr "시간대"
 
-#: install.php:1103
+#: install.php:1106
 msgid "Language"
 msgstr "언어"
 
-#: install.php:1112
+#: install.php:1115
 msgid "Admin Account"
 msgstr "관리자 계정"
 
-#: install.php:1122
+#: install.php:1125
 msgid "(again)"
 msgstr "비밀번호 확인"
 
-#: install.php:1126
+#: install.php:1129
 msgid "Email Address"
 msgstr "이메일 주소"
 
-#: install.php:1129
+#: install.php:1132
 msgid "Install me!"
 msgstr "설치가 필요합니다."
 
-#: install.php:1132
+#: install.php:1135
 msgid "Installation Complete"
 msgstr "설치가 완료되었습니다"
 
-#: install.php:1133 upgrade.php:947
+#: install.php:1136 upgrade.php:950
 msgid "What now?"
 msgstr ""
 
-#: install.php:1135
+#: install.php:1138
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr "더 이상 필요하지 않은 경우 <em>install.php</em>를 삭제하세요."
 
-#: install.php:1136
+#: install.php:1139
 msgid "Log in to your site and configure things to your liking."
 msgstr "사이트에 로그인하고 원하는 대로 구성하세요."
 
-#: install.php:1139 upgrade.php:954
+#: install.php:1142 upgrade.php:957
 msgid "Take me to my site!"
 msgstr "사이트로 이동합니다."
 
@@ -1535,38 +1535,38 @@ msgstr "사이트로 이동합니다."
 msgid "Chyrp Lite Upgrader"
 msgstr "Chyrp Lite 업그레이드"
 
-#: upgrade.php:935
+#: upgrade.php:938
 msgid "Halt!"
 msgstr "정지!"
 
-#: upgrade.php:936
+#: upgrade.php:939
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr "업그레이드하기 전에 다음 예방 조치를 취하십시오:"
 
-#: upgrade.php:938
+#: upgrade.php:941
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr "<strong>진행하기 전에 데이터베이스를 백업하세요.</strong>"
 
-#: upgrade.php:939
+#: upgrade.php:942
 msgid "Tell your users that your site is offline for maintenance."
 msgstr "유지 관리를 위해 사이트가 오프라인 상태임을 사용자에게 알립니다."
 
-#: upgrade.php:943
+#: upgrade.php:946
 msgid "Upgrade me!"
 msgstr "새로운 버전이 있습니다."
 
-#: upgrade.php:946
+#: upgrade.php:949
 msgid "Upgrade Complete"
 msgstr "업그레이드가 완료되었습니다"
 
-#: upgrade.php:949
+#: upgrade.php:952
 msgid "Take action to resolve any errors reported on this page."
 msgstr "이 페이지에 보고된 오류를 해결하기 위한 조치를 취하십시오."
 
-#: upgrade.php:950
+#: upgrade.php:953
 msgid "Run this upgrader again if you need to."
 msgstr "필요한 경우 업그레이드를 다시 실행하십시오."
 
-#: upgrade.php:951
+#: upgrade.php:954
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr "업그레이드가 완료되면 <em>upgrade.php</em>를 삭제해야 합니다."
