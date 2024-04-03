@@ -1114,10 +1114,10 @@ input.toolbar.hidden {
     display: block;
     position: absolute;
     margin: 0rem;
-    top: calc(0% + 48px);
-    left: calc(25% - 48px);
-    width: calc(50% + 96px);
-    height: calc(50% + 96px);
+    top: 48px;
+    left: 20%;
+    width: 60%;
+    height: calc(100% - 96px);
     overflow-x: hidden;
     overflow-y: auto;
     overscroll-behavior: contain;
@@ -1134,7 +1134,7 @@ input.toolbar.hidden {
     width: 24px;
     height: 24px;
     top: 24px;
-    right: calc(25% - 72px);
+    right: calc(20% - 24px);
     cursor: pointer;
 }
 .iframe_close_gadget img {
@@ -1266,6 +1266,14 @@ input.toolbar.hidden {
     li.module div.controls,
     li.feather div.controls {
         padding-top: 0rem;
+    }
+    .iframe_foreground {
+        top: 48px;
+        left: 48px;
+        width: calc(100% - 96px);
+    }
+    .iframe_close_gadget {
+        right: 24px;
     }
 }
 
