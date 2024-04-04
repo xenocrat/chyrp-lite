@@ -50,7 +50,7 @@ ARIA标签可确保您的博客可供使用辅助技术的访问者访问。
 
 ## 安装要求
 
-* [PHP 8.0+](https://www.php.net/supported-versions.php) 具有默认扩展名 (Session, JSON, Ctype, libxml, SimpleXML)
+* [PHP 8.0+](https://www.php.net/supported-versions.php) 具有默认扩展名 (Session, JSON, Ctype, Filter, libxml, SimpleXML)
 * [Multibyte String](https://www.php.net/manual/en/book.mbstring.php)
 * [PDO](https://www.php.net/manual/en/book.pdo.php)
 * [cURL](https://www.php.net/manual/en/book.curl.php)

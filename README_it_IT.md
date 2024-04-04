@@ -57,7 +57,7 @@ giunti sul tuo sito.
 
 ## Requisiti
 
-* [PHP 8.0+](https://www.php.net/supported-versions.php) con estensioni predefinite (Session, JSON, Ctype, libxml, SimpleXML)
+* [PHP 8.0+](https://www.php.net/supported-versions.php) con estensioni predefinite (Session, JSON, Ctype, Filter, libxml, SimpleXML)
 * [Multibyte String](https://www.php.net/manual/en/book.mbstring.php)
 * [PDO](https://www.php.net/manual/en/book.pdo.php)
 * [cURL](https://www.php.net/manual/en/book.curl.php)
