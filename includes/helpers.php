@@ -1926,7 +1926,7 @@
         if ($host === false)
             return false;
 
-        if (is_ip_address($host) and !GET_REMOTE_UNSAFE)
+        if (is_unsafe_ip($host) and !GET_REMOTE_UNSAFE)
             return false;
 
         if (!function_exists("curl_version"))
@@ -2937,38 +2937,6 @@
     }
 
     /**
-     * Function: is_ip_address
-     * Does the string look like an IP address?
-     *
-     * Parameters:
-     *     $string - The string to analyse.
-     *
-     * Notes:
-     *     Recognises IPv4 and IPv6.
-     *
-     * Returns:
-     *     Whether or not the string matches the criteria.
-     */
-    function is_ip_address($string): bool {
-        if (
-            !is_string($string) and
-            !$string instanceof Stringable
-        )
-            return false;
-
-        return (
-            preg_match(
-                '/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/',
-                $string
-            ) or
-            preg_match(
-                '/^\[[a-fA-F0-9\:]{3,39}\]$/',
-                $string
-            )
-        );
-    }
-
-    /**
      * Function: is_email
      * Does the string look like an email address?
      *
@@ -3000,6 +2968,38 @@
             preg_match(
                 '/^[^\\\\ <>@]+@(\[[a-f0-9\:]{3,39}\])$/i',
                 $string
+            )
+        );
+    }
+
+    /**
+     * Function: is_unsafe_ip
+     * Is the string a private or reserved IP address?
+     *
+     * Parameters:
+     *     $string - The string to analyse.
+     *
+     * Returns:
+     *     Whether or not the string matches the criteria.
+     */
+    function is_unsafe_ip($string): bool {
+        if (
+            !is_string($string) and
+            !$string instanceof Stringable
+        )
+            return false;
+
+        if (preg_match('/^\[[a-fA-F0-9\:]{3,39}\]$/', $string))
+            $string = substr($string, 1, -1);
+
+        if (!filter_var($string, FILTER_VALIDATE_IP))
+            return false;
+
+        return (
+            !filter_var(
+                $string,
+                FILTER_VALIDATE_IP,
+                FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE
             )
         );
     }
