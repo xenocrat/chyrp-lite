@@ -2703,20 +2703,6 @@ See Also:
     <is_url>
 
 
-Function: is_ip_address
------------------------
-Does the string look like an IP address?
-
-Parameters:
-    $string - The string to analyse.
-
-Notes:
-    Recognises IPv4 and IPv6.
-
-Returns:
-    Whether or not the string matches the criteria.
-
-
 Function: is_email
 ------------------
 Does the string look like an email address?
@@ -2726,6 +2712,17 @@ Parameters:
 
 Notes:
     Recognises FQDN, IPv4 and IPv6.
+
+Returns:
+    Whether or not the string matches the criteria.
+
+
+Function: is_unsafe_ip
+----------------------
+Is the string a private or reserved IP address?
+
+Parameters:
+    $string - The string to analyse.
 
 Returns:
     Whether or not the string matches the criteria.
