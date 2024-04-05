@@ -121,7 +121,7 @@
     define('SESSION_DENY_BOT', true);
 
     # Constant: GET_REMOTE_UNSAFE
-    # Allow get_remote() to connect to naked IP addresses?
+    # Allow get_remote() to connect to private and reserved IP addresses?
     define('GET_REMOTE_UNSAFE', false);
 
     # Constant: USE_GETTEXT_SHIM
