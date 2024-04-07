@@ -49,7 +49,7 @@
             $language = lang_base(Config::current()->locale);
             $link = url("/", MainController::current());
 
-            $this->xml.= '<?xml version="1.0" encoding="UTF-8"?>'."\n";
+            $this->xml = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
             $this->xml.= '<rss version="2.0">'."\n";
             $this->xml.= '<channel>'."\n";
             $this->xml.= '<language>'.fix($language).'</language>'."\n";
