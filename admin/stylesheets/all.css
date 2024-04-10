@@ -1249,6 +1249,10 @@ input.toolbar.hidden {
         margin: 1rem 0rem 0rem 0rem !important;
         text-align: center !important;
     }
+    button:not(.toolbar):has(img),
+    a.button:has(img) {
+        padding-right: calc(16px + 0.5rem) !important;
+    }
     div.more_options p.more_options_option {
         flex: 100%;
     }
