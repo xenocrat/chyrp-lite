@@ -13,6 +13,11 @@
 </label>
 <input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true, true) }}" id="query">
 <button type="submit">{{ "Search" | translate }}</button>
+{% if visitor.group.can("add_page") %}
+<a href="{{ url('write_page') }}" class="button yay">
+{{ icon_img("add.svg") }}{{ "New Page" | translate }}
+</a>
+{% endif %}
 </fieldset>
 </form>
 <h2>{{ GET.query is not empty ? "Search Results" | translate : "Pages" | translate }}</h2>
