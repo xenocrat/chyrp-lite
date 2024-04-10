@@ -70,13 +70,13 @@ Arguments:
 manage_pages_column_header
 --------------------------
 Called from:
-	admin/pages/manage_pages.twig on line 28
+	admin/pages/manage_pages.twig on line 33
 
 
 manage_pages_column
 -------------------
 Called from:
-	admin/pages/manage_pages.twig on line 61
+	admin/pages/manage_pages.twig on line 66
 
 Arguments:
 	page
@@ -85,13 +85,13 @@ Arguments:
 manage_posts_column_header
 --------------------------
 Called from:
-	admin/pages/manage_posts.twig on line 26
+	admin/pages/manage_posts.twig on line 31
 
 
 manage_posts_column
 -------------------
 Called from:
-	admin/pages/manage_posts.twig on line 45
+	admin/pages/manage_posts.twig on line 50
 
 Arguments:
 	post

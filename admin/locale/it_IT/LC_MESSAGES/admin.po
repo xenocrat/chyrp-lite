@@ -539,7 +539,7 @@ msgstr "Elimina pagina?"
 
 #: admin/pages/delete_page.twig:10 admin/pages/delete_post.twig:10
 #: admin/pages/edit_page.twig:6 admin/pages/edit_post.twig:6
-#: admin/pages/manage_pages.twig:36 admin/pages/manage_posts.twig:34
+#: admin/pages/manage_pages.twig:41 admin/pages/manage_posts.twig:39
 msgid "[Untitled]"
 msgstr "[Senza titolo]"
 
@@ -681,11 +681,11 @@ msgstr "Cosa vorresti esportare?"
 msgid "filter (optional)"
 msgstr "filtro (opzionale)"
 
-#: admin/pages/export.twig:12 admin/pages/manage_posts.twig:18
+#: admin/pages/export.twig:12 admin/pages/manage_posts.twig:23
 msgid "Posts"
 msgstr "Post"
 
-#: admin/pages/export.twig:21 admin/pages/manage_pages.twig:18
+#: admin/pages/export.twig:21 admin/pages/manage_pages.twig:23
 msgid "Pages"
 msgstr "Pagine"
 
@@ -846,8 +846,8 @@ msgstr "Cerca"
 msgid "New Group"
 msgstr "Nuovo gruppo"
 
-#: admin/pages/manage_groups.twig:18 admin/pages/manage_pages.twig:18
-#: admin/pages/manage_posts.twig:18 admin/pages/manage_uploads.twig:18
+#: admin/pages/manage_groups.twig:18 admin/pages/manage_pages.twig:23
+#: admin/pages/manage_posts.twig:23 admin/pages/manage_uploads.twig:18
 #: admin/pages/manage_users.twig:23
 msgid "Search Results"
 msgstr "Risultati di ricerca"
@@ -864,37 +864,37 @@ msgstr "Predefinito?"
 msgid "Guests?"
 msgstr "Ospiti?"
 
-#: admin/pages/manage_groups.twig:27 admin/pages/manage_pages.twig:29
-#: admin/pages/manage_posts.twig:27 admin/pages/manage_uploads.twig:27
+#: admin/pages/manage_groups.twig:27 admin/pages/manage_pages.twig:34
+#: admin/pages/manage_posts.twig:32 admin/pages/manage_uploads.twig:27
 #: admin/pages/manage_users.twig:35
 msgid "Controls"
 msgstr "Controlli"
 
 #: admin/pages/manage_groups.twig:41 admin/pages/manage_groups.twig:46
-#: admin/pages/manage_pages.twig:50 admin/pages/manage_pages.twig:55
+#: admin/pages/manage_pages.twig:55 admin/pages/manage_pages.twig:60
 #: admin/pages/manage_users.twig:57
 msgid "yes"
 msgstr "sì"
 
-#: admin/pages/manage_groups.twig:51 admin/pages/manage_pages.twig:63
-#: admin/pages/manage_posts.twig:47 admin/pages/manage_users.twig:63
+#: admin/pages/manage_groups.twig:51 admin/pages/manage_pages.twig:68
+#: admin/pages/manage_posts.twig:52 admin/pages/manage_users.twig:63
 msgid "edit"
 msgstr "modifica"
 
-#: admin/pages/manage_groups.twig:54 admin/pages/manage_pages.twig:66
-#: admin/pages/manage_posts.twig:50 admin/pages/manage_uploads.twig:66
+#: admin/pages/manage_groups.twig:54 admin/pages/manage_pages.twig:71
+#: admin/pages/manage_posts.twig:55 admin/pages/manage_uploads.twig:66
 #: admin/pages/manage_users.twig:66
 msgid "delete"
 msgstr "elimina"
 
-#: admin/pages/manage_groups.twig:60 admin/pages/manage_pages.twig:72
-#: admin/pages/manage_posts.twig:57 admin/pages/manage_uploads.twig:73
+#: admin/pages/manage_groups.twig:60 admin/pages/manage_pages.twig:77
+#: admin/pages/manage_posts.twig:62 admin/pages/manage_uploads.twig:73
 #: admin/pages/manage_users.twig:72 admin/partials/uploads_modal.twig:31
 msgid "No results"
 msgstr "Nessun risultato"
 
-#: admin/pages/manage_groups.twig:68 admin/pages/manage_pages.twig:80
-#: admin/pages/manage_posts.twig:65 admin/pages/manage_uploads.twig:94
+#: admin/pages/manage_groups.twig:68 admin/pages/manage_pages.twig:85
+#: admin/pages/manage_posts.twig:70 admin/pages/manage_uploads.twig:94
 #: admin/pages/manage_users.twig:80
 #, php-format
 msgid "Page %d of %s"
@@ -909,32 +909,36 @@ msgstr "Gestisci pagine"
 msgid "Search&hellip;"
 msgstr "Cerca&hellip;"
 
-#: admin/pages/manage_pages.twig:22 admin/pages/manage_posts.twig:22
+#: admin/pages/manage_pages.twig:18
+msgid "New Page"
+msgstr "Nuova pagina"
+
+#: admin/pages/manage_pages.twig:27 admin/pages/manage_posts.twig:27
 #: admin/partials/page_fields.twig:4
 msgid "Title"
 msgstr "Titolo"
 
-#: admin/pages/manage_pages.twig:23
+#: admin/pages/manage_pages.twig:28
 msgid "Created"
 msgstr "Creato"
 
-#: admin/pages/manage_pages.twig:24
+#: admin/pages/manage_pages.twig:29
 msgid "Last Updated"
 msgstr "Ultimo Aggiornamento"
 
-#: admin/pages/manage_pages.twig:25
+#: admin/pages/manage_pages.twig:30
 msgid "Public?"
 msgstr "Pubblico?"
 
-#: admin/pages/manage_pages.twig:26
+#: admin/pages/manage_pages.twig:31
 msgid "Listed?"
 msgstr "Elencato?"
 
-#: admin/pages/manage_pages.twig:27 admin/pages/manage_posts.twig:25
+#: admin/pages/manage_pages.twig:32 admin/pages/manage_posts.twig:30
 msgid "Author"
 msgstr "Autore"
 
-#: admin/pages/manage_pages.twig:45
+#: admin/pages/manage_pages.twig:50
 msgid "never"
 msgstr "mai"
 
@@ -942,11 +946,15 @@ msgstr "mai"
 msgid "Manage Posts"
 msgstr "Gestisci post"
 
-#: admin/pages/manage_posts.twig:23
+#: admin/pages/manage_posts.twig:18
+msgid "New Post"
+msgstr "Nuovo post"
+
+#: admin/pages/manage_posts.twig:28
 msgid "Posted"
 msgstr "Pubblicato"
 
-#: admin/pages/manage_posts.twig:24 admin/partials/page_fields.twig:31
+#: admin/pages/manage_posts.twig:29 admin/partials/page_fields.twig:31
 #: admin/partials/post_fields.twig:78
 msgid "Status"
 msgstr "Stato"

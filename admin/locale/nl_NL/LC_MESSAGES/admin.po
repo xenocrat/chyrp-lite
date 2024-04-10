@@ -534,7 +534,7 @@ msgstr "Verwijder pagina?"
 
 #: admin/pages/delete_page.twig:10 admin/pages/delete_post.twig:10
 #: admin/pages/edit_page.twig:6 admin/pages/edit_post.twig:6
-#: admin/pages/manage_pages.twig:36 admin/pages/manage_posts.twig:34
+#: admin/pages/manage_pages.twig:41 admin/pages/manage_posts.twig:39
 msgid "[Untitled]"
 msgstr "[Zonder titel]"
 
@@ -677,11 +677,11 @@ msgstr "Wat wil je exporteren?"
 msgid "filter (optional)"
 msgstr "filter (niet verplicht)"
 
-#: admin/pages/export.twig:12 admin/pages/manage_posts.twig:18
+#: admin/pages/export.twig:12 admin/pages/manage_posts.twig:23
 msgid "Posts"
 msgstr "Blogposts"
 
-#: admin/pages/export.twig:21 admin/pages/manage_pages.twig:18
+#: admin/pages/export.twig:21 admin/pages/manage_pages.twig:23
 msgid "Pages"
 msgstr "Pagina's"
 
@@ -842,8 +842,8 @@ msgstr "Zoeken"
 msgid "New Group"
 msgstr "Nieuwe groep"
 
-#: admin/pages/manage_groups.twig:18 admin/pages/manage_pages.twig:18
-#: admin/pages/manage_posts.twig:18 admin/pages/manage_uploads.twig:18
+#: admin/pages/manage_groups.twig:18 admin/pages/manage_pages.twig:23
+#: admin/pages/manage_posts.twig:23 admin/pages/manage_uploads.twig:18
 #: admin/pages/manage_users.twig:23
 msgid "Search Results"
 msgstr "Zoekresultaten"
@@ -860,37 +860,37 @@ msgstr "Standaard?"
 msgid "Guests?"
 msgstr "Gasten?"
 
-#: admin/pages/manage_groups.twig:27 admin/pages/manage_pages.twig:29
-#: admin/pages/manage_posts.twig:27 admin/pages/manage_uploads.twig:27
+#: admin/pages/manage_groups.twig:27 admin/pages/manage_pages.twig:34
+#: admin/pages/manage_posts.twig:32 admin/pages/manage_uploads.twig:27
 #: admin/pages/manage_users.twig:35
 msgid "Controls"
 msgstr "Beheer"
 
 #: admin/pages/manage_groups.twig:41 admin/pages/manage_groups.twig:46
-#: admin/pages/manage_pages.twig:50 admin/pages/manage_pages.twig:55
+#: admin/pages/manage_pages.twig:55 admin/pages/manage_pages.twig:60
 #: admin/pages/manage_users.twig:57
 msgid "yes"
 msgstr "ja"
 
-#: admin/pages/manage_groups.twig:51 admin/pages/manage_pages.twig:63
-#: admin/pages/manage_posts.twig:47 admin/pages/manage_users.twig:63
+#: admin/pages/manage_groups.twig:51 admin/pages/manage_pages.twig:68
+#: admin/pages/manage_posts.twig:52 admin/pages/manage_users.twig:63
 msgid "edit"
 msgstr "wijzig"
 
-#: admin/pages/manage_groups.twig:54 admin/pages/manage_pages.twig:66
-#: admin/pages/manage_posts.twig:50 admin/pages/manage_uploads.twig:66
+#: admin/pages/manage_groups.twig:54 admin/pages/manage_pages.twig:71
+#: admin/pages/manage_posts.twig:55 admin/pages/manage_uploads.twig:66
 #: admin/pages/manage_users.twig:66
 msgid "delete"
 msgstr "verwijder"
 
-#: admin/pages/manage_groups.twig:60 admin/pages/manage_pages.twig:72
-#: admin/pages/manage_posts.twig:57 admin/pages/manage_uploads.twig:73
+#: admin/pages/manage_groups.twig:60 admin/pages/manage_pages.twig:77
+#: admin/pages/manage_posts.twig:62 admin/pages/manage_uploads.twig:73
 #: admin/pages/manage_users.twig:72 admin/partials/uploads_modal.twig:31
 msgid "No results"
 msgstr "Geen resultaten"
 
-#: admin/pages/manage_groups.twig:68 admin/pages/manage_pages.twig:80
-#: admin/pages/manage_posts.twig:65 admin/pages/manage_uploads.twig:94
+#: admin/pages/manage_groups.twig:68 admin/pages/manage_pages.twig:85
+#: admin/pages/manage_posts.twig:70 admin/pages/manage_uploads.twig:94
 #: admin/pages/manage_users.twig:80
 #, php-format
 msgid "Page %d of %s"
@@ -905,32 +905,36 @@ msgstr "Beheer pagina's"
 msgid "Search&hellip;"
 msgstr "Zoek&hellip;"
 
-#: admin/pages/manage_pages.twig:22 admin/pages/manage_posts.twig:22
+#: admin/pages/manage_pages.twig:18
+msgid "New Page"
+msgstr "Nieuwe pagina"
+
+#: admin/pages/manage_pages.twig:27 admin/pages/manage_posts.twig:27
 #: admin/partials/page_fields.twig:4
 msgid "Title"
 msgstr "Titel"
 
-#: admin/pages/manage_pages.twig:23
+#: admin/pages/manage_pages.twig:28
 msgid "Created"
 msgstr "Gemaakt"
 
-#: admin/pages/manage_pages.twig:24
+#: admin/pages/manage_pages.twig:29
 msgid "Last Updated"
 msgstr "Laatst geupdate"
 
-#: admin/pages/manage_pages.twig:25
+#: admin/pages/manage_pages.twig:30
 msgid "Public?"
 msgstr "Openbaar?"
 
-#: admin/pages/manage_pages.twig:26
+#: admin/pages/manage_pages.twig:31
 msgid "Listed?"
 msgstr "In de lijst?"
 
-#: admin/pages/manage_pages.twig:27 admin/pages/manage_posts.twig:25
+#: admin/pages/manage_pages.twig:32 admin/pages/manage_posts.twig:30
 msgid "Author"
 msgstr "Schrijver"
 
-#: admin/pages/manage_pages.twig:45
+#: admin/pages/manage_pages.twig:50
 msgid "never"
 msgstr "nooit"
 
@@ -938,11 +942,15 @@ msgstr "nooit"
 msgid "Manage Posts"
 msgstr "Beheer Blogposts"
 
-#: admin/pages/manage_posts.twig:23
+#: admin/pages/manage_posts.twig:18
+msgid "New Post"
+msgstr "Nieuwe Blogpost"
+
+#: admin/pages/manage_posts.twig:28
 msgid "Posted"
 msgstr "Geplaatst"
 
-#: admin/pages/manage_posts.twig:24 admin/partials/page_fields.twig:31
+#: admin/pages/manage_posts.twig:29 admin/partials/page_fields.twig:31
 #: admin/partials/post_fields.twig:78
 msgid "Status"
 msgstr "Status"
