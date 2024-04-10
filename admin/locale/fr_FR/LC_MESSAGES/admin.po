@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: admin/help/canonical_url.twig:3 admin/help/canonical_url.twig:6
@@ -326,18 +326,18 @@ msgstr "Tout basculer"
 msgid "Are you sure you want to proceed?"
 msgstr "Êtes-vous sûr de vouloir continuer ?"
 
-#: admin/javascripts/admin.js.php:215 admin/javascripts/admin.js.php:445
-#: admin/javascripts/admin.js.php:854
+#: admin/javascripts/admin.js.php:215 admin/javascripts/admin.js.php:450
+#: admin/javascripts/admin.js.php:859
 msgid "Modal window"
 msgstr "Fenêtre modale"
 
-#: admin/javascripts/admin.js.php:228 admin/javascripts/admin.js.php:457
-#: admin/javascripts/admin.js.php:868
+#: admin/javascripts/admin.js.php:228 admin/javascripts/admin.js.php:462
+#: admin/javascripts/admin.js.php:873
 msgid "Close"
 msgstr "Fermer"
 
-#: admin/javascripts/admin.js.php:235 admin/javascripts/admin.js.php:464
-#: admin/javascripts/admin.js.php:875
+#: admin/javascripts/admin.js.php:235 admin/javascripts/admin.js.php:469
+#: admin/javascripts/admin.js.php:880
 msgid "close"
 msgstr "fermer"
 
@@ -377,7 +377,7 @@ msgstr "image"
 msgid "Upload"
 msgstr "Téléchargement"
 
-#: admin/javascripts/admin.js.php:402 admin/javascripts/admin.js.php:630
+#: admin/javascripts/admin.js.php:402 admin/javascripts/admin.js.php:635
 msgid "Uploading..."
 msgstr "Téléchargement..."
 
@@ -385,20 +385,20 @@ msgstr "Téléchargement..."
 msgid "Insert"
 msgstr "Insérer"
 
-#: admin/javascripts/admin.js.php:481
+#: admin/javascripts/admin.js.php:486
 msgid "insert"
 msgstr "insérer"
 
-#: admin/javascripts/admin.js.php:495 admin/javascripts/admin.js.php:496
+#: admin/javascripts/admin.js.php:500 admin/javascripts/admin.js.php:501
 #: admin/pages/themes.twig:24
 msgid "Preview"
 msgstr "Prévisualisation"
 
-#: admin/javascripts/admin.js.php:512
+#: admin/javascripts/admin.js.php:517
 msgid "preview"
 msgstr "prévisualisation"
 
-#: admin/javascripts/admin.js.php:538
+#: admin/javascripts/admin.js.php:543
 msgid "Words:"
 msgstr "Mots :"
 
@@ -498,8 +498,8 @@ msgstr "Mise à jour"
 msgid "Delete Group?"
 msgstr "Supprimer le groupe ?"
 
-#: admin/pages/delete_group.twig:8 admin/pages/delete_post.twig:8
-#: admin/pages/delete_upload.twig:8 admin/pages/delete_user.twig:8
+#: admin/pages/delete_group.twig:10 admin/pages/delete_post.twig:10
+#: admin/pages/delete_upload.twig:10 admin/pages/delete_user.twig:10
 #, php-format
 msgid "&#8220;%s&#8221; will be permanently deleted."
 msgstr "&#8220;%s&#8221; sera supprimé de façon permanente."
@@ -533,13 +533,13 @@ msgstr "Cancel"
 msgid "Delete Page?"
 msgstr "Supprimer la page ?"
 
-#: admin/pages/delete_page.twig:8 admin/pages/delete_post.twig:8
+#: admin/pages/delete_page.twig:10 admin/pages/delete_post.twig:10
 #: admin/pages/edit_page.twig:6 admin/pages/edit_post.twig:6
 #: admin/pages/manage_pages.twig:36 admin/pages/manage_posts.twig:34
 msgid "[Untitled]"
 msgstr "[Sans titre]"
 
-#: admin/pages/delete_page.twig:8
+#: admin/pages/delete_page.twig:10
 #, php-format
 msgid "Are you sure you want to delete &#8220;%s&#8221;?"
 msgstr "Êtes-vous sûr de vouloir supprimer &#8220;%s&#8221; ?"
@@ -861,7 +861,7 @@ msgid "Guests?"
 msgstr "Invité ?"
 
 #: admin/pages/manage_groups.twig:27 admin/pages/manage_pages.twig:29
-#: admin/pages/manage_posts.twig:27 admin/pages/manage_uploads.twig:26
+#: admin/pages/manage_posts.twig:27 admin/pages/manage_uploads.twig:27
 #: admin/pages/manage_users.twig:35
 msgid "Controls"
 msgstr "Contrôles"
@@ -878,19 +878,19 @@ msgid "edit"
 msgstr "modifier"
 
 #: admin/pages/manage_groups.twig:54 admin/pages/manage_pages.twig:66
-#: admin/pages/manage_posts.twig:50 admin/pages/manage_uploads.twig:60
+#: admin/pages/manage_posts.twig:50 admin/pages/manage_uploads.twig:66
 #: admin/pages/manage_users.twig:66
 msgid "delete"
 msgstr "supprimer"
 
 #: admin/pages/manage_groups.twig:60 admin/pages/manage_pages.twig:72
-#: admin/pages/manage_posts.twig:57 admin/pages/manage_uploads.twig:67
-#: admin/pages/manage_users.twig:72 admin/partials/uploads_modal.twig:28
+#: admin/pages/manage_posts.twig:57 admin/pages/manage_uploads.twig:73
+#: admin/pages/manage_users.twig:72 admin/partials/uploads_modal.twig:31
 msgid "No results"
 msgstr "Aucun résultat"
 
 #: admin/pages/manage_groups.twig:68 admin/pages/manage_pages.twig:80
-#: admin/pages/manage_posts.twig:65 admin/pages/manage_uploads.twig:75
+#: admin/pages/manage_posts.twig:65 admin/pages/manage_uploads.twig:94
 #: admin/pages/manage_users.twig:80
 #, php-format
 msgid "Page %d of %s"
@@ -967,9 +967,25 @@ msgstr "Dernières modifications"
 msgid "Size"
 msgstr "Taille"
 
-#: admin/pages/manage_uploads.twig:55
+#: admin/pages/manage_uploads.twig:25
+msgid "Type"
+msgstr ""
+
+#: admin/pages/manage_uploads.twig:61
 msgid "download"
 msgstr "télécharger"
+
+#: admin/pages/manage_uploads.twig:81
+#, fuzzy
+#| msgid "No results"
+msgid "Sort results by:"
+msgstr "Aucun résultat"
+
+#: admin/pages/manage_uploads.twig:89
+#, fuzzy
+#| msgid "Search Results"
+msgid "Sort Results"
+msgstr "Résultats de la recherche"
 
 #: admin/pages/manage_users.twig:3
 msgid "Manage Users"

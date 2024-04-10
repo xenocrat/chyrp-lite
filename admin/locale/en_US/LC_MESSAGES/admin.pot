@@ -902,7 +902,7 @@ msgstr ""
 #: admin/pages/manage_posts.twig:57
 #: admin/pages/manage_uploads.twig:73
 #: admin/pages/manage_users.twig:72
-#: admin/partials/uploads_modal.twig:28
+#: admin/partials/uploads_modal.twig:31
 msgid "No results"
 msgstr ""
 
