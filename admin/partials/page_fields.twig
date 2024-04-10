@@ -71,17 +71,17 @@
 <div class="buttons confirmation">
 {% if route.action == "write_page" %}
 <button type="submit" class="yay">
-{{ icon_img("add.svg") }}{{ "Publish" | translate }}
+{{ "Publish" | translate }}
 </button>
 <button type="submit" name="private" value="true">
-{{ icon_img("draft.svg") }}{{ "Save" | translate }}
+{{ "Save" | translate }}
 </button>
 {% else %}
 <button type="submit">
-{{ icon_img("save.svg") }}{{ "Save" | translate }}
+{{ "Save" | translate }}
 </button>
 <button type="submit" class="boo" name="cancel" value="true" data-confirm="">
-{{ icon_img("discard.svg") }}{{ "Cancel" | translate }}
+{{ "Cancel" | translate }}
 </button>
 {% endif %}
 </div>

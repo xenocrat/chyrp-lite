@@ -37,10 +37,10 @@
 {{ icon_img("image.svg", "", "placeholder") }}
 {% elseif ["mp3", "m4a", "oga", "ogg", "mka", "flac", "wav", "aiff"] | contains(upload.type) %}
 {{ icon_img("audio.svg", "", "placeholder") }}
-{% elseif ["mpg", "mpeg", "mp2", "mp4", "m4v", "ogv", "webm", "3gp", "mkv", "mov", "avi", "ts"] | contains(upload.type) %}
+{% elseif ["mpg", "mpeg", "mp2", "mp4", "m4v", "ogv", "mkv",  "mov", "avi", "webm", "3gp", "ts"] | contains(upload.type) %}
 {{ icon_img("video.svg", "", "placeholder") }}
 {% elseif ["zip", "tar", "rar", "gz", "bz2", "7z", "dmg", "cab", "iso", "udf"] | contains(upload.type) %}
-{{ icon_img("container.svg", "", "placeholder") }}
+{{ icon_img("archive.svg", "", "placeholder") }}
 {% else %}
 {{ icon_img("file.svg", "", "placeholder") }}
 {% endif %}

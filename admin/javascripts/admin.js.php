@@ -482,7 +482,7 @@ var Write = {
                         });
                     }).append(
                         $("<img>", {
-                            "src": Site.chyrp_url + '/admin/images/icons/archive.svg',
+                            "src": Site.chyrp_url + '/admin/images/icons/storage.svg',
                             "alt": '<?php esce(__("insert", "admin")); ?>'
                         })
                     )

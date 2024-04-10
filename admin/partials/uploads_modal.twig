@@ -12,9 +12,12 @@
 {% elseif ["mp3", "m4a", "oga", "ogg", "mka", "flac", "wav"] | contains(upload.type) %}
 {{ icon_img("audio.svg", "", "placeholder") }}
 {% set file_url = upload.name | uploaded %}
-{% elseif ["mp4", "ogv", "webm", "3gp", "mkv", "mov"] | contains(upload.type) %}
+{% elseif ["mpg", "mpeg", "mp2", "mp4", "m4v", "ogv", "mkv",  "mov", "avi", "webm", "3gp", "ts"] | contains(upload.type) %}
 {{ icon_img("video.svg", "", "placeholder") }}
 {% set file_url = upload.name | uploaded %}
+{% elseif ["zip", "tar", "rar", "gz", "bz2", "7z", "dmg", "cab", "iso", "udf"] | contains(upload.type) %}
+{{ icon_img("archive.svg", "", "placeholder") }}
+{% set file_url = upload.name | download %}
 {% else %}
 {{ icon_img("file.svg", "", "placeholder") }}
 {% set file_url = upload.name | download %}

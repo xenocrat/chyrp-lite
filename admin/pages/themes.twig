@@ -21,10 +21,10 @@
 <input type="hidden" name="theme" value="{{ safename }}">
 <input type="hidden" name="hash" value="{{ authenticate() }}">
 <button name="change" value="undecidedly"{{ safename | disabled(site.theme) }}>
-{{ icon_img("view.svg") }}{{ "Preview" | translate }}
+{{ "Preview" | translate }}
 </button>
 <button name="change" value="indubitably" type="submit"{{ safename | disabled(site.theme) }}>
-{{ icon_img("success.svg") }}{{ "Select" | translate }}
+{{ "Select" | translate }}
 </button>
 </form>
 </div>

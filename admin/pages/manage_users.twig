@@ -29,7 +29,7 @@
 <th class="user_joined date">{{ "Joined" | translate }}</th>
 <th class="user_website name">{{ "Website" | translate }}</th>
 {% if site.email_activation %}
-<th class="user_activated emblem">{{ "Activated?" | translate }}</th>
+<th class="user_activated emblem" title="approved">{{ "Activated?" | translate }}</th>
 {% endif %}
 {{ trigger.call("manage_users_column_header") }}
 <th class="controls" colspan="2">{{ "Controls" | translate }}</th>

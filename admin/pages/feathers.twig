@@ -25,11 +25,11 @@
 <input type="hidden" name="hash" value="{{ authenticate() }}">
 {% if feather.confirm is not empty %}
 <button name="confirm" value="1" type="submit" class="boo" data-confirm="{{ feather.confirm | fix(true) }}">
-{{ icon_img("destroy.svg") }}{{ "Uninstall" | translate }}
+{{ "Uninstall" | translate }}
 </button>
 {% endif %}
 <button type="submit">
-{{ icon_img("deny.svg") }}{{ "Disable" | translate }}
+{{ "Disable" | translate }}
 </button>
 </form>
 </div>
@@ -57,7 +57,7 @@
 <input type="hidden" name="type" value="feather">
 <input type="hidden" name="hash" value="{{ authenticate() }}">
 <button type="submit">
-{{ icon_img("add.svg") }}{{ "Enable" | translate }}
+{{ "Enable" | translate }}
 </button>
 </form>
 </div>

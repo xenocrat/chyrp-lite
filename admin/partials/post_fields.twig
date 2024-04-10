@@ -181,27 +181,27 @@
 {% if route.action == "edit_post" %}
 {% if visitor.group.can("add_post") and post.status == "draft" %}
 <button type="submit" class="yay" name="publish" value="true">
-{{ icon_img("add.svg") }}{{ "Publish" | translate }}
+{{ "Publish" | translate }}
 </button>
 <button type="submit">
-{{ icon_img("save.svg") }}{{ "Save" | translate }}
+{{ "Save" | translate }}
 </button>
 {% else %}
 <button type="submit">
-{{ icon_img("save.svg") }}{{ "Save" | translate }}
+{{ "Save" | translate }}
 </button>
 <button type="submit" class="boo" name="cancel" value="true" data-confirm="">
-{{ icon_img("discard.svg") }}{{ "Cancel" | translate }}
+{{ "Cancel" | translate }}
 </button>
 {% endif %}
 {% else %}
 {% if visitor.group.can("add_post") %}
 <button type="submit" class="yay">
-{{ icon_img("add.svg") }}{{ "Publish" | translate }}
+{{ "Publish" | translate }}
 </button>
 {% endif %}
 <button type="submit" name="draft" value="true">
-{{ icon_img("draft.svg") }}{{ "Save" | translate }}
+{{ "Save" | translate }}
 </button>
 {% endif %}
 </div>
