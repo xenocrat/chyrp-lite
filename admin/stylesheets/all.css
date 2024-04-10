@@ -890,7 +890,6 @@ div.confirmation button,
 div.confirmation a.button {
     min-width: 10em;
     flex: 1 0 10em;
-    padding-right: calc(16px + 0.5rem);
 }
 div.pagination a.prev_page,
 div.pagination a.next_page {
