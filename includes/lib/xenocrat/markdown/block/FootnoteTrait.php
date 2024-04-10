@@ -77,52 +77,20 @@ trait FootnoteTrait
 			}
 		}
 
-		// Replace the footnote substitution markers with their actual numbers.
-		$referencedHtml = preg_replace_callback(
-			"/\u{FFFC}footnote-(refnum|num)(.*?)\u{FFFC}/",
-			function ($match) use ($footnotesSorted, $uncertaintyChr) {
-				$footnoteName = $this->footnoteLinks[$match[2]];
-				if (!isset($footnotesSorted[$footnoteName])) {
-				// This is a link to a missing footnote.
-					// Return the uncertainty sign.
-					return $uncertaintyChr
-						. ($match[1] === 'refnum' ? '-' . $match[2] : '');
-				}
-				if ($match[1] === 'num') {
-				// Replace only the footnote number.
-					return $footnotesSorted[$footnoteName]['num'];
-				}
-				if (count($footnotesSorted[$footnoteName]['refs']) > 1) {
-				// For backlinks:
-				// some have a footnote number and an additional link number.
-				// If this footnote is referenced more than once,
-				// use the `-x` suffix.
-					$linkNum = array_search(
-						$match[2], $footnotesSorted[$footnoteName]['refs']
-					);
-					return $footnotesSorted[$footnoteName]['num']
-						. '-'
-						. $linkNum;
-				} else {
-					// Otherwise, just the number.
-					return $footnotesSorted[$footnoteName]['num'];
-				}
-			},
-			$html
+		$html = $this->numberFootnotes(
+			$html,
+			$footnotesSorted
 		);
 
-		// Get the footnote HTML.
-		$footnotes = $referencedHtml . $this->getFootnotesHtml($footnotesSorted);
-
 		// Add the footnote HTML to the end of the document.
-		return $footnotes;
+		return $html . $this->getFootnotesHtml($footnotesSorted);
 	}
 
 	/**
 	 * @param mixed[] $footnotesSorted Array with 'html', 'num', and 'refs' keys.
 	 * @return string
 	 */
-	protected function getFootnotesHtml(array $footnotesSorted): string
+	protected function getFootnotesHtml($footnotesSorted): string
 	{
 		if (empty($footnotesSorted)) {
 			return '';
@@ -146,11 +114,62 @@ trait FootnoteTrait
 			$linksPara = '<p class="footnote-backrefs">'
 				. join("\n", $backLinks)
 				. '</p>';
-			$footnotesHtml .= "<li id=\"{$prefix}fn-{$footnoteInfo['num']}\">";
-			$footnotesHtml .= "\n{$footnoteInfo['html']}$linksPara\n</li>\n";
+			$footnotesHtml .= "<li id=\"{$prefix}fn-{$footnoteInfo['num']}\">\n"
+				// Footnotes might themselves contain footnote links.
+				. $this->numberFootnotes(
+					$footnoteInfo['html'],
+					$footnotesSorted
+				)
+				. $linksPara
+				. "\n</li>\n";
 		}
 		$footnotesHtml .= "</ol>\n</div>\n";
 		return $footnotesHtml;
+	}
+
+	/**
+	 * @param $html string The HTML to operate on.
+	 * @param mixed[] $footnotesSorted Array with 'num' and 'refs' keys.
+	 * @return string
+	 */
+	protected function numberFootnotes($html, $footnotesSorted): string
+	{
+		// Unicode "uncertainty sign" will be used for missing references.
+		$uncertaintyChr = "\u{2BD1}";
+
+		// Replace all footnote placeholder links with their sorted numbers.
+		return preg_replace_callback(
+			"/\u{FFFC}footnote-(refnum|num)(.*?)\u{FFFC}/",
+			function ($match) use ($footnotesSorted, $uncertaintyChr) {
+				$footnoteName = $this->footnoteLinks[$match[2]];
+				if (!isset($footnotesSorted[$footnoteName])) {
+				// This is a link to a missing footnote.
+					// Return the uncertainty sign.
+					return $uncertaintyChr
+						. ($match[1] === 'refnum' ? '-' . $match[2] : '');
+				}
+				if ($match[1] === 'num') {
+				// Replace only the footnote number.
+					return $footnotesSorted[$footnoteName]['num'];
+				}
+				if (count($footnotesSorted[$footnoteName]['refs']) > 1) {
+				// For backlinks:
+				// some have a footnote number and an additional link number.
+				// If footnote is referenced more than once, add `-n` suffix.
+					$linkNum = array_search(
+						$match[2],
+						$footnotesSorted[$footnoteName]['refs']
+					);
+					return $footnotesSorted[$footnoteName]['num']
+						. '-'
+						. $linkNum;
+				} else {
+				// Otherwise, just the number.
+					return $footnotesSorted[$footnoteName]['num'];
+				}
+			},
+			$html
+		);
 	}
 
 	protected function parseFootnoteLinkMarkers()
@@ -175,7 +194,7 @@ trait FootnoteTrait
 				mb_convert_case($matches[1], MB_CASE_FOLD, 'UTF-8') :
 				strtolower($matches[1]) ;
 
-			// We will later order the footnotes
+			// We will later sort the footnotes
 			// according to the order that the footnote links appear in.
 			$this->footnoteLinkNum++;
 			$this->footnoteLinks[$this->footnoteLinkNum] = $footnoteName;
