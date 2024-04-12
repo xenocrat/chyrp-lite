@@ -42,10 +42,10 @@
 <input class="checkbox" type="checkbox" name="users" value="" id="users" checked="checked">
 <input class="text filter_text" type="text" name="filter_users" value="" id="filter_users" aria-label="{{ field_aria }}" placeholder="{{ field_aria }}">
 <a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
-<small>
-{{ "Users export file will contain the hashed password for each user – keep it safe!" | translate }}
-</small>
 </p>
+<aside class="split_block small">
+{{ "Users export file will contain the hashed password for each user – keep it safe!" | translate }}
+</aside>
 <p>
 <label for="uploads">
 {{ "Uploads Manifest" | translate }}

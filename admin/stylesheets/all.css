@@ -656,14 +656,17 @@ form.split input[type="number"],
 form.split input[type="range"] {
     width: 20%;
 }
+form.split .split_block,
 form.split small,
 form.split .small {
     display: block;
-    margin: 0.25rem 0rem 0rem 40%;
+    width: fit-content;
+    margin: 0rem auto 1rem 40%;
 }
+html[dir="rtl"] form.split .split_block,
 html[dir="rtl"] form.split small,
 html[dir="rtl"] form.split .small {
-    margin: 0.25rem 40% 0rem 0rem;
+    margin: 0rem 40% 1rem auto;
 }
 form.split p.buttons {
     display: block;
@@ -1206,8 +1209,12 @@ input.toolbar.hidden {
     html[dir="rtl"] form.split small,
     html[dir="rtl"] form.split .small,
     html[dir="rtl"] form.split p.buttons {
+        width: auto;
         margin-left: 0rem;
         margin-right: 0rem;
+    }
+    form.split input + input {
+        margin-top: 1rem;
     }
     input.text,
     input[type="text"],
