@@ -13,8 +13,17 @@
 </label>
 {#- -#}
 <input class="checkbox" type="checkbox" name="posts" value="" id="posts" checked="checked">
-<input class="text filter_text" type="text" name="filter_posts" value="" id="filter_posts" aria-label="{{ field_aria }}" placeholder="{{ field_aria }}">
-<a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
+</p>
+<p>
+<label for="filter_posts">
+{{ "Filter Posts" | translate }}
+<span class="sub">{{ "(optional)" | translate }}</span>
+<a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem">
+{{- icon_img("help.svg", "help" | translate) -}}
+</a>
+</label>
+{#- -#}
+<input class="text filter_text" type="text" name="filter_posts" value="" id="filter_posts">
 </p>
 <p>
 <label for="pages">
@@ -22,8 +31,17 @@
 </label>
 {#- -#}
 <input class="checkbox" type="checkbox" name="pages" value="" id="pages" checked="checked">
-<input class="text filter_text" type="text" name="filter_pages" value="" id="filter_pages" aria-label="{{ field_aria }}" placeholder="{{ field_aria }}">
-<a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
+</p>
+<p>
+<label for="filter_pages">
+{{ "Filter Pages" | translate }}
+<span class="sub">{{ "(optional)" | translate }}</span>
+<a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem">
+{{- icon_img("help.svg", "help" | translate) -}}
+</a>
+</label>
+{#- -#}
+<input class="text filter_text" type="text" name="filter_pages" value="" id="filter_pages">
 </p>
 <p>
 <label for="groups">
@@ -31,8 +49,17 @@
 </label>
 {#- -#}
 <input class="checkbox" type="checkbox" name="groups" value="" id="groups" checked="checked">
-<input class="text filter_text" type="text" name="filter_groups" value="" id="filter_groups" aria-label="{{ field_aria }}" placeholder="{{ field_aria }}">
-<a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
+</p>
+<p>
+<label for="filter_groups">
+{{ "Filter Groups" | translate }}
+<span class="sub">{{ "(optional)" | translate }}</span>
+<a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem">
+{{- icon_img("help.svg", "help" | translate) -}}
+</a>
+</label>
+{#- -#}
+<input class="text filter_text" type="text" name="filter_groups" value="" id="filter_groups">
 </p>
 <p>
 <label for="users">
@@ -40,8 +67,17 @@
 </label>
 {#- -#}
 <input class="checkbox" type="checkbox" name="users" value="" id="users" checked="checked">
-<input class="text filter_text" type="text" name="filter_users" value="" id="filter_users" aria-label="{{ field_aria }}" placeholder="{{ field_aria }}">
-<a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
+</p>
+<p>
+<label for="filter_users">
+{{ "Filter Users" | translate }}
+<span class="sub">{{ "(optional)" | translate }}</span>
+<a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem">
+{{- icon_img("help.svg", "help" | translate) -}}
+</a>
+</label>
+{#- -#}
+<input class="text filter_text" type="text" name="filter_users" value="" id="filter_users">
 </p>
 <aside class="split_block small">
 {{ "Users export file will contain the hashed password for each user – keep it safe!" | translate }}
@@ -52,7 +88,14 @@
 </label>
 {#- -#}
 <input class="checkbox" type="checkbox" name="uploads" value="" id="uploads" checked="checked">
-<input class="text filter_text" type="text" name="filter_uploads" value="" id="filter_uploads" aria-label="{{ field_aria }}" placeholder="{{ field_aria }}">
+</p>
+<p>
+<label for="filter_uploads">
+{{ "Filter Uploads Manifest" | translate }}
+<span class="sub">{{ "(optional)" | translate }}</span>
+</label>
+{#- -#}
+<input class="text filter_text" type="text" name="filter_uploads" value="" id="filter_uploads">
 </p>
 {{ trigger.call("export_choose") }}
 <p class="buttons">
