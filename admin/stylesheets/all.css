@@ -349,6 +349,7 @@ hr {
     margin: 2rem 0rem;
 }
 aside {
+    box-sizing: border-box;
     margin-bottom: 1rem;
     padding: 0.5rem 1rem;
     border: 1px solid #e5d7a1;
@@ -631,14 +632,14 @@ form.split h3,
 form.split h4,
 form.split h5,
 form.split h6 {
-    margin-left: 40%;
+    margin-inline-start: 40%;
 }
 form.split label {
     box-sizing: border-box;
     display: inline-block;
     width: 40%;
     text-align: end;
-    padding: 0rem 1rem 0rem 0rem;
+    padding-inline-end: 1rem;
 }
 form.split input[type="text"],
 form.split input[type="email"],
@@ -660,20 +661,16 @@ form.split .split_block,
 form.split small,
 form.split .small {
     display: block;
-    width: fit-content;
-    margin: 0rem auto 1rem 40%;
+    margin-bottom: 1rem;
+    margin-inline-start: 40%;
 }
-html[dir="rtl"] form.split .split_block,
-html[dir="rtl"] form.split small,
-html[dir="rtl"] form.split .small {
-    margin: 0rem 40% 1rem auto;
+form.split .split_block {
+    width: 40%;
 }
 form.split p.buttons {
     display: block;
-    margin: 1rem 0rem 0rem 40%;
-}
-html[dir="rtl"] form.split p.buttons {
-    margin: 1rem 40% 0rem 0rem;
+    margin: 1rem 0rem 0rem 0rem;
+    margin-inline-start: 40%;
 }
 select[disabled],
 textarea[disabled],
@@ -1196,25 +1193,19 @@ input.toolbar.hidden {
     form.split h4,
     form.split h5,
     form.split h6 {
-        margin-left: 0rem;
+        margin-inline-start: 0rem;
     }
     form.split label {
         width: 100%;
         text-align: start;
         padding: 0rem;
     }
+    form.split .split_block,
     form.split small,
     form.split .small,
-    form.split p.buttons,
-    html[dir="rtl"] form.split small,
-    html[dir="rtl"] form.split .small,
-    html[dir="rtl"] form.split p.buttons {
+    form.split p.buttons {
         width: auto;
-        margin-left: 0rem;
-        margin-right: 0rem;
-    }
-    form.split input + input {
-        margin-top: 1rem;
+        margin-inline-start: 0rem;
     }
     input.text,
     input[type="text"],
@@ -1231,9 +1222,6 @@ input.toolbar.hidden {
     textarea {
         width: 100% !important;
     }
-    p:has(input.text + a.help.emblem) input.text {
-        padding-right: 2rem;
-    }
     input.text + a.help.emblem {
         float:  right;
         position: relative;
@@ -1246,7 +1234,8 @@ input.toolbar.hidden {
     #content table tbody tr td.main {
         min-width: 4rem;
     }
-    button:not(.toolbar), a.button,
+    button:not(.toolbar),
+    a.button:not(.toolbar),
     a.prev_page, a.next_page {
         display: block !important;
         width: 100% !important;
@@ -1257,7 +1246,7 @@ input.toolbar.hidden {
         text-align: center !important;
     }
     button:not(.toolbar):has(img),
-    a.button:has(img) {
+    a.button:not(.toolbar):has(img) {
         padding-right: calc(16px + 0.5rem) !important;
     }
     div.more_options p.more_options_option {
