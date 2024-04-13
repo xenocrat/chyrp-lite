@@ -556,7 +556,7 @@ div.metadata {
     display: block;
     position: relative;
     bottom: 0em;
-    left: -2rem;
+    inset-inline-start: -2rem;
     width: 100%;
     padding: 0.25rem 2rem;
     margin-top: 2rem;
@@ -564,9 +564,6 @@ div.metadata {
     border-top: 1px solid #c6ccc8;
     border-bottom-left-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
-}
-html[dir="rtl"] div.metadata {
-    left: 2rem;
 }
 article.post.pinned div.metadata {
     background-color: #fffddd;
