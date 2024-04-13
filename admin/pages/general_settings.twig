@@ -31,10 +31,12 @@
 <label for="url">
 {{ "Canonical URL" | translate }}
 <span class="sub">{{ "(optional)" | translate }}</span>
+<a href="{{ url('help/id/canonical_url') }}" rel="help" target="_blank" class="help emblem">
+{{- icon_img("help.svg", "help" | translate) -}}
+</a>
 </label>
 {#- -#}
 <input class="text" type="url" name="url" value="{{ site.url != site.chyrp_url ? site.url | fix(true, true) : '' }}" id="url">
-<a href="{{ url('help/id/canonical_url') }}" rel="help" target="_blank" class="help emblem"><img src="{{ site.chyrp_url }}/admin/images/icons/help.svg" alt="{{ 'help' | translate }}"></a>
 <small>
 {{ "Have your site URLs point someplace other than your install directory." | translate }}
 </small>

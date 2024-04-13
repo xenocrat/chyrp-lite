@@ -47,7 +47,9 @@
 </select>
 </p>
 <p>
-<label for="search_pages">{{ "Search Pages" | translate }}</label>
+<label for="search_pages">
+{{ "Search Pages" | translate }}
+</label>
 {#- -#}
 <input class="checkbox" type="checkbox" name="search_pages" id="search_pages"{{ site.search_pages | checked }}>
 <small>
@@ -55,7 +57,9 @@
 </small>
 </p>
 <p>
-<label for="send_pingbacks">{{ "Webmentions" | translate }}</label>
+<label for="send_pingbacks">
+{{ "Webmentions" | translate }}
+</label>
 {#- -#}
 <input class="checkbox" type="checkbox" name="send_pingbacks" id="send_pingbacks"{{ site.send_pingbacks | checked }}>
 <small>
@@ -63,23 +67,27 @@
 </small>
 </p>
 <p>
-<label for="enable_emoji">{{ "Unicode Emoticons" | translate }}</label>
-{#- -#}
-<input class="checkbox" type="checkbox" name="enable_emoji" id="enable_emoji"{{ site.enable_emoji | checked }}>
+<label for="enable_emoji">
+{{ "Unicode Emoticons" | translate }}
 <a href="{{ url('help/id/unicode_emoticons') }}" rel="help" target="_blank" class="help emblem">
 {{- icon_img("help.svg", "help" | translate) -}}
 </a>
+</label>
+{#- -#}
+<input class="checkbox" type="checkbox" name="enable_emoji" id="enable_emoji"{{ site.enable_emoji | checked }}>
 <small>
 {{ "Display emoticons as Unicode emoji." | translate }}
 </small>
 </p>
 <p>
-<label for="enable_markdown">{{ "Markdown" | translate }}</label>
-{#- -#}
-<input class="checkbox" type="checkbox" name="enable_markdown" id="enable_markdown"{{ site.enable_markdown | checked }}>
+<label for="enable_markdown">
+{{ "Markdown" | translate }}
 <a href="{{ url('help/id/markdown') }}" rel="help" target="_blank" class="help emblem">
 {{- icon_img("help.svg", "help" | translate) -}}
 </a>
+</label>
+{#- -#}
+<input class="checkbox" type="checkbox" name="enable_markdown" id="enable_markdown"{{ site.enable_markdown | checked }}>
 <small>
 {{ "Compose blog content using Markdown text formatting." | translate }}
 </small>

@@ -7,18 +7,22 @@
 <form id="route_settings" class="split" action="{{ url('route_settings') }}" method="post" accept-charset="UTF-8">
 <fieldset role="presentation">
 <p>
-<label for="clean_urls">{{ "Clean URLs" | translate }}</label>
-{#- -#}
-<input type="checkbox" name="clean_urls" id="clean_urls"{{ site.clean_urls | checked }}>
+<label for="clean_urls">
+{{ "Clean URLs" | translate }}
 <a href="https://chyrplite.net/wiki/Supporting-Clean-URLs.html" rel="help" target="_blank" class="help emblem">
 {{- icon_img("help.svg", "help" | translate) -}}
 </a>
+</label>
+{#- -#}
+<input type="checkbox" name="clean_urls" id="clean_urls"{{ site.clean_urls | checked }}>
 <small>
 {{ "Gives your site prettier URLs." | translate }} {{ "Requires URL rewrite support." | translate }}
 </small>
 </p>
 <p>
-<label for="enable_homepage">{{ "Homepage" | translate }}</label>
+<label for="enable_homepage">
+{{ "Homepage" | translate }}
+</label>
 {#- -#}
 <input class="checkbox" type="checkbox" name="enable_homepage" id="enable_homepage"{{ site.enable_homepage | checked }}>
 <small>
