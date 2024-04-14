@@ -80,7 +80,7 @@ msgstr ""
 "将按用户 ID 降序对帖子表进行排序，然后按帖子 ID 升序排序。"
 
 #: admin/help/markdown.twig:3 admin/help/markdown.twig:6
-#: admin/help/markdown.twig:13 admin/pages/content_settings.twig:77
+#: admin/help/markdown.twig:13 admin/pages/content_settings.twig:84
 #: admin/partials/page_fields.twig:13 admin/partials/post_fields.twig:52
 msgid "Markdown"
 msgstr "Markdown"
@@ -282,7 +282,7 @@ msgstr ""
 "时自动生成。 一个slug 只能包含字母a-z，数字0-9和连字符减号（“ - ”）。"
 
 #: admin/help/unicode_emoticons.twig:3 admin/help/unicode_emoticons.twig:6
-#: admin/pages/content_settings.twig:66
+#: admin/pages/content_settings.twig:71
 msgid "Unicode Emoticons"
 msgstr "Unicode表情符号"
 
@@ -435,44 +435,44 @@ msgstr "(M)"
 msgid "Feed Format"
 msgstr "Feed格式"
 
-#: admin/pages/content_settings.twig:50
+#: admin/pages/content_settings.twig:51
 msgid "Search Pages"
 msgstr "搜索页面"
 
-#: admin/pages/content_settings.twig:54
+#: admin/pages/content_settings.twig:56
 msgid "Include pages in search results."
 msgstr "在搜索结果中包括页面。"
 
-#: admin/pages/content_settings.twig:58
+#: admin/pages/content_settings.twig:61
 msgid "Webmentions"
 msgstr ""
 
-#: admin/pages/content_settings.twig:62
+#: admin/pages/content_settings.twig:66
 msgid "Send and receive notifications when URLs are mentioned."
 msgstr "在提及 URL 时发送和接收通知。"
 
-#: admin/pages/content_settings.twig:70 admin/pages/content_settings.twig:81
-#: admin/pages/export.twig:17 admin/pages/export.twig:26
-#: admin/pages/export.twig:35 admin/pages/export.twig:44
-#: admin/pages/general_settings.twig:37 admin/pages/manage_pages.twig:11
+#: admin/pages/content_settings.twig:73 admin/pages/content_settings.twig:86
+#: admin/pages/export.twig:21 admin/pages/export.twig:39
+#: admin/pages/export.twig:57 admin/pages/export.twig:75
+#: admin/pages/general_settings.twig:35 admin/pages/manage_pages.twig:11
 #: admin/pages/manage_posts.twig:11 admin/pages/manage_users.twig:11
-#: admin/pages/route_settings.twig:14 admin/partials/page_fields.twig:24
-#: admin/partials/post_fields.twig:28 admin/partials/post_fields.twig:123
-#: admin/partials/post_fields.twig:144
+#: admin/pages/route_settings.twig:13 admin/partials/page_fields.twig:25
+#: admin/partials/post_fields.twig:32 admin/partials/post_fields.twig:124
+#: admin/partials/post_fields.twig:148
 msgid "help"
 msgstr "帮助"
 
-#: admin/pages/content_settings.twig:73
+#: admin/pages/content_settings.twig:79
 msgid "Display emoticons as Unicode emoji."
 msgstr "将表情符号显示为Unicode表情符号。"
 
-#: admin/pages/content_settings.twig:84
+#: admin/pages/content_settings.twig:92
 msgid "Compose blog content using Markdown text formatting."
 msgstr "使用Markdown语法撰写博客内容。"
 
-#: admin/pages/content_settings.twig:89 admin/pages/edit_group.twig:27
-#: admin/pages/edit_user.twig:66 admin/pages/general_settings.twig:97
-#: admin/pages/route_settings.twig:91 admin/pages/user_settings.twig:57
+#: admin/pages/content_settings.twig:97 admin/pages/edit_group.twig:27
+#: admin/pages/edit_user.twig:66 admin/pages/general_settings.twig:99
+#: admin/pages/route_settings.twig:95 admin/pages/user_settings.twig:57
 msgid "Update"
 msgstr "更新"
 
@@ -632,8 +632,11 @@ msgid "Full Name"
 msgstr "全名"
 
 #: admin/pages/edit_user.twig:43 admin/pages/edit_user.twig:51
-#: admin/pages/general_settings.twig:33 admin/pages/import.twig:37
-#: admin/pages/new_user.twig:46 admin/pages/new_user.twig:54
+#: admin/pages/export.twig:19 admin/pages/export.twig:37
+#: admin/pages/export.twig:55 admin/pages/export.twig:73
+#: admin/pages/export.twig:94 admin/pages/general_settings.twig:33
+#: admin/pages/import.twig:37 admin/pages/new_user.twig:46
+#: admin/pages/new_user.twig:54
 msgid "(optional)"
 msgstr "(可选)"
 
@@ -647,7 +650,7 @@ msgstr "网站"
 msgid "Activated?"
 msgstr "激活？"
 
-#: admin/pages/export.twig:3 admin/pages/export.twig:60
+#: admin/pages/export.twig:3 admin/pages/export.twig:102
 msgid "Export"
 msgstr "导出"
 
@@ -655,35 +658,51 @@ msgstr "导出"
 msgid "What would you like to export?"
 msgstr "想要导出什么？"
 
-#: admin/pages/export.twig:9
-msgid "filter (optional)"
-msgstr "过滤（可选）"
-
-#: admin/pages/export.twig:12 admin/pages/manage_posts.twig:23
+#: admin/pages/export.twig:11 admin/pages/manage_posts.twig:23
 msgid "Posts"
 msgstr "所有帖子"
 
-#: admin/pages/export.twig:21 admin/pages/manage_pages.twig:23
+#: admin/pages/export.twig:18
+msgid "Filter Posts"
+msgstr "筛选帖子"
+
+#: admin/pages/export.twig:29 admin/pages/manage_pages.twig:23
 msgid "Pages"
 msgstr "所有页面"
 
-#: admin/pages/export.twig:30 admin/pages/manage_groups.twig:18
+#: admin/pages/export.twig:36
+msgid "Filter Pages"
+msgstr "筛选页面"
+
+#: admin/pages/export.twig:47 admin/pages/manage_groups.twig:18
 msgid "Groups"
 msgstr "所有组"
 
-#: admin/pages/export.twig:39 admin/pages/manage_users.twig:23
+#: admin/pages/export.twig:54
+msgid "Filter Groups"
+msgstr "筛选群组"
+
+#: admin/pages/export.twig:65 admin/pages/manage_users.twig:23
 msgid "Users"
 msgstr "用户设置"
 
-#: admin/pages/export.twig:46
+#: admin/pages/export.twig:72
+msgid "Filter Users"
+msgstr "筛选用户"
+
+#: admin/pages/export.twig:82
 msgid ""
 "Users export file will contain the hashed password for each user – keep it "
 "safe!"
 msgstr "用户导出文件将包含每个用户的哈希密码 - 请保证安全！"
 
-#: admin/pages/export.twig:51
+#: admin/pages/export.twig:86
 msgid "Uploads Manifest"
 msgstr "上传清单"
+
+#: admin/pages/export.twig:93
+msgid "Filter Uploads Manifest"
+msgstr "筛选器上传清单"
 
 #: admin/pages/feathers.twig:3 admin/pages/feathers.twig:6
 msgid "Feathers"
@@ -731,35 +750,35 @@ msgstr "描述"
 msgid "Chyrp URL"
 msgstr ""
 
-#: admin/pages/general_settings.twig:39
+#: admin/pages/general_settings.twig:41
 msgid "Have your site URLs point someplace other than your install directory."
 msgstr "让您的网站网址指向安装目录以外的其他位置。"
 
-#: admin/pages/general_settings.twig:44
+#: admin/pages/general_settings.twig:46
 msgid "Contact Email Address"
 msgstr "联系的邮件地址"
 
-#: admin/pages/general_settings.twig:51
+#: admin/pages/general_settings.twig:53
 msgid "Time Zone"
 msgstr "时区"
 
-#: admin/pages/general_settings.twig:64
+#: admin/pages/general_settings.twig:66
 msgid "Language"
 msgstr "语言"
 
-#: admin/pages/general_settings.twig:77
+#: admin/pages/general_settings.twig:79
 msgid "Monospace Font"
 msgstr "等宽字体"
 
-#: admin/pages/general_settings.twig:82
+#: admin/pages/general_settings.twig:84
 msgid "Write with a monospace font."
 msgstr "使用等宽字体书写。"
 
-#: admin/pages/general_settings.twig:87
+#: admin/pages/general_settings.twig:89
 msgid "Check for Updates"
 msgstr "检查更新"
 
-#: admin/pages/general_settings.twig:92
+#: admin/pages/general_settings.twig:94
 #, php-format
 msgid "Current version: %s."
 msgstr "当前版本： %s。"
@@ -1013,127 +1032,127 @@ msgstr "密码"
 msgid "Route Settings"
 msgstr "路由设置"
 
-#: admin/pages/route_settings.twig:10
+#: admin/pages/route_settings.twig:11
 msgid "Clean URLs"
 msgstr "优雅链接"
 
-#: admin/pages/route_settings.twig:17
+#: admin/pages/route_settings.twig:19
 msgid "Gives your site prettier URLs."
 msgstr "为您的网站提供更漂亮的URL。"
 
-#: admin/pages/route_settings.twig:17
+#: admin/pages/route_settings.twig:19
 msgid "Requires URL rewrite support."
 msgstr "需要 URL rewrite 支持。"
 
-#: admin/pages/route_settings.twig:21
+#: admin/pages/route_settings.twig:24
 msgid "Homepage"
 msgstr "主页"
 
-#: admin/pages/route_settings.twig:25
+#: admin/pages/route_settings.twig:29
 msgid "Make the default route a homepage instead of the blog index."
 msgstr "使默认路由成为主页而不是博客索引。"
 
-#: admin/pages/route_settings.twig:30
+#: admin/pages/route_settings.twig:34
 msgid "Post View URL"
 msgstr "帖子查看链接"
 
-#: admin/pages/route_settings.twig:31
+#: admin/pages/route_settings.twig:35
 msgid "(requires clean URLs)"
 msgstr "(需要优雅链接)"
 
-#: admin/pages/route_settings.twig:36
+#: admin/pages/route_settings.twig:40
 msgid "Syntax:"
 msgstr "符号："
 
-#: admin/pages/route_settings.twig:41
+#: admin/pages/route_settings.twig:45
 msgid "Year submitted"
 msgstr "提交的年份"
 
-#: admin/pages/route_settings.twig:41
+#: admin/pages/route_settings.twig:45
 msgid "(e.g. 2007)"
 msgstr "(例如：2007)"
 
-#: admin/pages/route_settings.twig:45
+#: admin/pages/route_settings.twig:49
 msgid "Month submitted"
 msgstr "提交的月份"
 
-#: admin/pages/route_settings.twig:45
+#: admin/pages/route_settings.twig:49
 msgid "(e.g. 12)"
 msgstr "(例如 12)"
 
-#: admin/pages/route_settings.twig:49
+#: admin/pages/route_settings.twig:53
 msgid "Day submitted"
 msgstr "提交的天"
 
-#: admin/pages/route_settings.twig:49
+#: admin/pages/route_settings.twig:53
 msgid "(e.g. 25)"
 msgstr "(例如 25)"
 
-#: admin/pages/route_settings.twig:53
+#: admin/pages/route_settings.twig:57
 msgid "Hour submitted"
 msgstr "提交的小时"
 
-#: admin/pages/route_settings.twig:53
+#: admin/pages/route_settings.twig:57
 msgid "(e.g. 03)"
 msgstr "(例如 03)"
 
-#: admin/pages/route_settings.twig:57
+#: admin/pages/route_settings.twig:61
 msgid "Minute submitted"
 msgstr "提交的分"
 
-#: admin/pages/route_settings.twig:57
+#: admin/pages/route_settings.twig:61
 msgid "(e.g. 59)"
 msgstr "(例如 59)"
 
-#: admin/pages/route_settings.twig:61
+#: admin/pages/route_settings.twig:65
 msgid "Second submitted"
 msgstr "提交的秒"
 
-#: admin/pages/route_settings.twig:61
+#: admin/pages/route_settings.twig:65
 msgid "(e.g. 30)"
 msgstr "(例如 30)"
 
-#: admin/pages/route_settings.twig:65
+#: admin/pages/route_settings.twig:69
 msgid "Post ID"
 msgstr "帖子ID"
 
-#: admin/pages/route_settings.twig:69
+#: admin/pages/route_settings.twig:73
 msgid "Post author (username)"
 msgstr "帖子作者（用户名）"
 
-#: admin/pages/route_settings.twig:69
+#: admin/pages/route_settings.twig:73
 msgid "(e.g. Alex)"
 msgstr "(例如 Alex)"
 
-#: admin/pages/route_settings.twig:73
+#: admin/pages/route_settings.twig:77
 msgid "The non-unique slug"
 msgstr "非独特 slug"
 
-#: admin/pages/route_settings.twig:73
+#: admin/pages/route_settings.twig:77
 msgid "(e.g. this_is_clean)"
 msgstr "(例如 this_is_clean)"
 
-#: admin/pages/route_settings.twig:77
+#: admin/pages/route_settings.twig:81
 msgid "The unique form of (clean)"
 msgstr "独特的(优雅)"
 
-#: admin/pages/route_settings.twig:77
+#: admin/pages/route_settings.twig:81
 msgid "(e.g. this_one_is_taken_2)"
 msgstr "(例如 this_one_is_taken_2)"
 
-#: admin/pages/route_settings.twig:81
+#: admin/pages/route_settings.twig:85
 msgid "The post's feather"
 msgstr "帖子的羽毛"
 
-#: admin/pages/route_settings.twig:81
+#: admin/pages/route_settings.twig:85
 msgid "(e.g. text)"
 msgstr "(例如 text)"
 
-#: admin/pages/route_settings.twig:85
+#: admin/pages/route_settings.twig:89
 msgid "The plural form of the post's feather"
 msgstr "帖子羽毛的复数形式"
 
-#: admin/pages/route_settings.twig:85
+#: admin/pages/route_settings.twig:89
 msgid "(e.g. links)"
 msgstr "(例如 links)"
 
@@ -1197,7 +1216,7 @@ msgstr "写作"
 msgid "Body"
 msgstr "正文"
 
-#: admin/partials/page_fields.twig:26 admin/partials/post_fields.twig:125
+#: admin/partials/page_fields.twig:23 admin/partials/post_fields.twig:122
 msgid "Slug"
 msgstr ""
 

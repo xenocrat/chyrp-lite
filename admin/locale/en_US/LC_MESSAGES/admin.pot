@@ -42,7 +42,7 @@ msgstr ""
 #: admin/help/markdown.twig:3
 #: admin/help/markdown.twig:6
 #: admin/help/markdown.twig:13
-#: admin/pages/content_settings.twig:77
+#: admin/pages/content_settings.twig:84
 #: admin/partials/page_fields.twig:13
 #: admin/partials/post_fields.twig:52
 msgid "Markdown"
@@ -249,7 +249,7 @@ msgstr ""
 
 #: admin/help/unicode_emoticons.twig:3
 #: admin/help/unicode_emoticons.twig:6
-#: admin/pages/content_settings.twig:66
+#: admin/pages/content_settings.twig:71
 msgid "Unicode Emoticons"
 msgstr ""
 
@@ -406,53 +406,53 @@ msgstr ""
 msgid "Feed Format"
 msgstr ""
 
-#: admin/pages/content_settings.twig:50
+#: admin/pages/content_settings.twig:51
 msgid "Search Pages"
 msgstr ""
 
-#: admin/pages/content_settings.twig:54
+#: admin/pages/content_settings.twig:56
 msgid "Include pages in search results."
 msgstr ""
 
-#: admin/pages/content_settings.twig:58
+#: admin/pages/content_settings.twig:61
 msgid "Webmentions"
 msgstr ""
 
-#: admin/pages/content_settings.twig:62
+#: admin/pages/content_settings.twig:66
 msgid "Send and receive notifications when URLs are mentioned."
 msgstr ""
 
-#: admin/pages/content_settings.twig:70
-#: admin/pages/content_settings.twig:81
-#: admin/pages/export.twig:17
-#: admin/pages/export.twig:26
-#: admin/pages/export.twig:35
-#: admin/pages/export.twig:44
-#: admin/pages/general_settings.twig:37
+#: admin/pages/content_settings.twig:73
+#: admin/pages/content_settings.twig:86
+#: admin/pages/export.twig:21
+#: admin/pages/export.twig:39
+#: admin/pages/export.twig:57
+#: admin/pages/export.twig:75
+#: admin/pages/general_settings.twig:35
 #: admin/pages/manage_pages.twig:11
 #: admin/pages/manage_posts.twig:11
 #: admin/pages/manage_users.twig:11
-#: admin/pages/route_settings.twig:14
-#: admin/partials/page_fields.twig:24
-#: admin/partials/post_fields.twig:28
-#: admin/partials/post_fields.twig:123
-#: admin/partials/post_fields.twig:144
+#: admin/pages/route_settings.twig:13
+#: admin/partials/page_fields.twig:25
+#: admin/partials/post_fields.twig:32
+#: admin/partials/post_fields.twig:124
+#: admin/partials/post_fields.twig:148
 msgid "help"
 msgstr ""
 
-#: admin/pages/content_settings.twig:73
+#: admin/pages/content_settings.twig:79
 msgid "Display emoticons as Unicode emoji."
 msgstr ""
 
-#: admin/pages/content_settings.twig:84
+#: admin/pages/content_settings.twig:92
 msgid "Compose blog content using Markdown text formatting."
 msgstr ""
 
-#: admin/pages/content_settings.twig:89
+#: admin/pages/content_settings.twig:97
 #: admin/pages/edit_group.twig:27
 #: admin/pages/edit_user.twig:66
-#: admin/pages/general_settings.twig:97
-#: admin/pages/route_settings.twig:91
+#: admin/pages/general_settings.twig:99
+#: admin/pages/route_settings.twig:95
 #: admin/pages/user_settings.twig:57
 msgid "Update"
 msgstr ""
@@ -638,6 +638,11 @@ msgstr ""
 
 #: admin/pages/edit_user.twig:43
 #: admin/pages/edit_user.twig:51
+#: admin/pages/export.twig:19
+#: admin/pages/export.twig:37
+#: admin/pages/export.twig:55
+#: admin/pages/export.twig:73
+#: admin/pages/export.twig:94
 #: admin/pages/general_settings.twig:33
 #: admin/pages/import.twig:37
 #: admin/pages/new_user.twig:46
@@ -658,7 +663,7 @@ msgid "Activated?"
 msgstr ""
 
 #: admin/pages/export.twig:3
-#: admin/pages/export.twig:60
+#: admin/pages/export.twig:102
 msgid "Export"
 msgstr ""
 
@@ -666,36 +671,52 @@ msgstr ""
 msgid "What would you like to export?"
 msgstr ""
 
-#: admin/pages/export.twig:9
-msgid "filter (optional)"
-msgstr ""
-
-#: admin/pages/export.twig:12
+#: admin/pages/export.twig:11
 #: admin/pages/manage_posts.twig:23
 msgid "Posts"
 msgstr ""
 
-#: admin/pages/export.twig:21
+#: admin/pages/export.twig:18
+msgid "Filter Posts"
+msgstr ""
+
+#: admin/pages/export.twig:29
 #: admin/pages/manage_pages.twig:23
 msgid "Pages"
 msgstr ""
 
-#: admin/pages/export.twig:30
+#: admin/pages/export.twig:36
+msgid "Filter Pages"
+msgstr ""
+
+#: admin/pages/export.twig:47
 #: admin/pages/manage_groups.twig:18
 msgid "Groups"
 msgstr ""
 
-#: admin/pages/export.twig:39
+#: admin/pages/export.twig:54
+msgid "Filter Groups"
+msgstr ""
+
+#: admin/pages/export.twig:65
 #: admin/pages/manage_users.twig:23
 msgid "Users"
 msgstr ""
 
-#: admin/pages/export.twig:46
+#: admin/pages/export.twig:72
+msgid "Filter Users"
+msgstr ""
+
+#: admin/pages/export.twig:82
 msgid "Users export file will contain the hashed password for each user – keep it safe!"
 msgstr ""
 
-#: admin/pages/export.twig:51
+#: admin/pages/export.twig:86
 msgid "Uploads Manifest"
+msgstr ""
+
+#: admin/pages/export.twig:93
+msgid "Filter Uploads Manifest"
 msgstr ""
 
 #: admin/pages/feathers.twig:3
@@ -753,35 +774,35 @@ msgstr ""
 msgid "Chyrp URL"
 msgstr ""
 
-#: admin/pages/general_settings.twig:39
+#: admin/pages/general_settings.twig:41
 msgid "Have your site URLs point someplace other than your install directory."
 msgstr ""
 
-#: admin/pages/general_settings.twig:44
+#: admin/pages/general_settings.twig:46
 msgid "Contact Email Address"
 msgstr ""
 
-#: admin/pages/general_settings.twig:51
+#: admin/pages/general_settings.twig:53
 msgid "Time Zone"
 msgstr ""
 
-#: admin/pages/general_settings.twig:64
+#: admin/pages/general_settings.twig:66
 msgid "Language"
 msgstr ""
 
-#: admin/pages/general_settings.twig:77
+#: admin/pages/general_settings.twig:79
 msgid "Monospace Font"
 msgstr ""
 
-#: admin/pages/general_settings.twig:82
+#: admin/pages/general_settings.twig:84
 msgid "Write with a monospace font."
 msgstr ""
 
-#: admin/pages/general_settings.twig:87
+#: admin/pages/general_settings.twig:89
 msgid "Check for Updates"
 msgstr ""
 
-#: admin/pages/general_settings.twig:92
+#: admin/pages/general_settings.twig:94
 #, php-format
 msgid "Current version: %s."
 msgstr ""
@@ -1065,127 +1086,127 @@ msgstr ""
 msgid "Route Settings"
 msgstr ""
 
-#: admin/pages/route_settings.twig:10
+#: admin/pages/route_settings.twig:11
 msgid "Clean URLs"
 msgstr ""
 
-#: admin/pages/route_settings.twig:17
+#: admin/pages/route_settings.twig:19
 msgid "Gives your site prettier URLs."
 msgstr ""
 
-#: admin/pages/route_settings.twig:17
+#: admin/pages/route_settings.twig:19
 msgid "Requires URL rewrite support."
 msgstr ""
 
-#: admin/pages/route_settings.twig:21
+#: admin/pages/route_settings.twig:24
 msgid "Homepage"
 msgstr ""
 
-#: admin/pages/route_settings.twig:25
+#: admin/pages/route_settings.twig:29
 msgid "Make the default route a homepage instead of the blog index."
 msgstr ""
 
-#: admin/pages/route_settings.twig:30
+#: admin/pages/route_settings.twig:34
 msgid "Post View URL"
 msgstr ""
 
-#: admin/pages/route_settings.twig:31
+#: admin/pages/route_settings.twig:35
 msgid "(requires clean URLs)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:36
+#: admin/pages/route_settings.twig:40
 msgid "Syntax:"
 msgstr ""
 
-#: admin/pages/route_settings.twig:41
+#: admin/pages/route_settings.twig:45
 msgid "Year submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:41
+#: admin/pages/route_settings.twig:45
 msgid "(e.g. 2007)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:45
+#: admin/pages/route_settings.twig:49
 msgid "Month submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:45
+#: admin/pages/route_settings.twig:49
 msgid "(e.g. 12)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:49
+#: admin/pages/route_settings.twig:53
 msgid "Day submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:49
+#: admin/pages/route_settings.twig:53
 msgid "(e.g. 25)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:53
+#: admin/pages/route_settings.twig:57
 msgid "Hour submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:53
+#: admin/pages/route_settings.twig:57
 msgid "(e.g. 03)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:57
+#: admin/pages/route_settings.twig:61
 msgid "Minute submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:57
+#: admin/pages/route_settings.twig:61
 msgid "(e.g. 59)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:61
+#: admin/pages/route_settings.twig:65
 msgid "Second submitted"
 msgstr ""
 
-#: admin/pages/route_settings.twig:61
+#: admin/pages/route_settings.twig:65
 msgid "(e.g. 30)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:65
+#: admin/pages/route_settings.twig:69
 msgid "Post ID"
 msgstr ""
 
-#: admin/pages/route_settings.twig:69
+#: admin/pages/route_settings.twig:73
 msgid "Post author (username)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:69
+#: admin/pages/route_settings.twig:73
 msgid "(e.g. Alex)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:73
+#: admin/pages/route_settings.twig:77
 msgid "The non-unique slug"
 msgstr ""
 
-#: admin/pages/route_settings.twig:73
+#: admin/pages/route_settings.twig:77
 msgid "(e.g. this_is_clean)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:77
+#: admin/pages/route_settings.twig:81
 msgid "The unique form of (clean)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:77
+#: admin/pages/route_settings.twig:81
 msgid "(e.g. this_one_is_taken_2)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:81
+#: admin/pages/route_settings.twig:85
 msgid "The post's feather"
 msgstr ""
 
-#: admin/pages/route_settings.twig:81
+#: admin/pages/route_settings.twig:85
 msgid "(e.g. text)"
 msgstr ""
 
-#: admin/pages/route_settings.twig:85
+#: admin/pages/route_settings.twig:89
 msgid "The plural form of the post's feather"
 msgstr ""
 
-#: admin/pages/route_settings.twig:85
+#: admin/pages/route_settings.twig:89
 msgid "(e.g. links)"
 msgstr ""
 
@@ -1250,8 +1271,8 @@ msgstr ""
 msgid "Body"
 msgstr ""
 
-#: admin/partials/page_fields.twig:26
-#: admin/partials/post_fields.twig:125
+#: admin/partials/page_fields.twig:23
+#: admin/partials/post_fields.twig:122
 msgid "Slug"
 msgstr ""
 
