@@ -407,6 +407,7 @@ form.search_box {
 }
 input#search_field {
     padding: 0.3rem 0rem;
+    padding-inline-end: 2rem;
     border: none;
     border-bottom: 2px solid #b1b4b6;
 }
@@ -414,7 +415,7 @@ button#search_submit {
     position: absolute;
     width: 2rem;
     height: 100%;
-    right: 0px;
+    inset-inline-end: 0px;
     bottom: 0px;
     padding: 0rem;
     color: transparent;

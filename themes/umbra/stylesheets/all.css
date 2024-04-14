@@ -642,7 +642,7 @@ div.metadata a.category {
     display: inline-block;
     position: absolute;
     top: -2rem;
-    right: 2rem;
+    inset-inline-end: 2rem;
     padding: 0.25em 0.75em;
     margin: 0em;
     border: 1px solid #666667;

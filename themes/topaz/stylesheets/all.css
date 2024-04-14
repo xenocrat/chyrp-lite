@@ -60,7 +60,8 @@ body {
     line-height: 1.5;
     tab-size: 4;
     background-color: #fcfbfa;
-    margin: 2rem 2rem 2rem 16rem;
+    margin: 2rem;
+    margin-inline-start: 16rem;
     min-width: 280px;
     max-width: 980px;
 }
@@ -458,7 +459,7 @@ input#sidebar_search_field {
     display: inline;
     width: 100%;
     margin: 0em;
-    padding-right: 38px;
+    padding-inline-end: 38px;
 }
 textarea {
     box-sizing: border-box;
@@ -494,7 +495,7 @@ button#sidebar_search_submit {
     width: 38px;
     height: 100%;
     top: 0px;
-    right: 0px;
+    inset-inline-end: 0px;
     border: none;
     border-radius: 0em;
     margin: 0em;
@@ -524,7 +525,7 @@ div#sidebar {
     display: block;
     position: absolute;
     top: 2rem;
-    left: 2rem;
+    inset-inline-start: 2rem;
     width: 12rem;
 }
 div.prev {
