@@ -1289,7 +1289,7 @@ input.toolbar.hidden {
         margin-bottom: 0.5rem;
     }
     textarea {
-        height: max(calc(100vh - 2lh), calc(10lh + 1rem));
+        height: max(calc(100vh - 7rem), calc(10lh + 1rem));
     }
 }
 
