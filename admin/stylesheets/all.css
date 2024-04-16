@@ -778,7 +778,7 @@ td.controls img {
 td img.image {
     width: 70px;
     height: 70px;
-    margin-right: 0.5rem;
+    margin-inline-end: 0.5rem;
     vertical-align: middle;
     outline: #ff7f00 solid 1px;
     outline-offset: 0px;
