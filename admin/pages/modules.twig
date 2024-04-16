@@ -10,7 +10,7 @@
 {% for safename, module in enabled_modules %}
 <li class="module{{ module.classes is defined ? ' ' ~ module.classes | join(' ') : '' }}" id="module_{{ safename }}">
 <h4>
-<a class="emblem module_url" href="{{ module.url }}" target="_blank">
+<a class="emblem module_url" rel="external" href="{{ module.url }}" target="_blank">
 {{- icon_img("info.svg", "info" | translate) }}
 {{ module.name }}{# translation is done in the controller #}
 </a>

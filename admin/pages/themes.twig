@@ -8,7 +8,7 @@
 {% for safename, theme in themes %}
 <li class="theme{{ safename == site.theme ? ' current' : '' }}" id="{{ safename }}">
 <h3>
-<a class="emblem module_author" href="{{ theme.url }}" target="_blank">
+<a class="emblem module_author" rel="external" href="{{ theme.url }}" target="_blank">
 {{- icon_img("info.svg", "info" | translate) }}
 {{ theme.name }}{# translation is done in the controller #}
 </a>
