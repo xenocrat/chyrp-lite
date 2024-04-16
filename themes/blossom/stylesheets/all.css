@@ -158,8 +158,11 @@ figcaption {
 aside {
     max-width: 40%;
     float: right;
+    float: inline-end;
     font-style: italic;
-    margin: 0rem 0rem 1rem 1rem;
+    margin: 0rem;
+    margin-inline-start: 1rem;
+    margin-bottom: 1rem;
     padding: 1rem;
     background-color: #e5e2dc;
     border-left: 2px solid #1f1f23;
@@ -943,7 +946,7 @@ div.standalone > *:last-child {
     aside {
         float: none;
         max-width: 100%;
-        margin-left: 0rem;
+        margin: 1rem 0rem;
     }
 }
 @media (prefers-reduced-motion) {
