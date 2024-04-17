@@ -4,37 +4,47 @@
 ?>
 var ChyrpLightbox = {
     background: "<?php esce($config->module_lightbox["background"]); ?>",
-    spacing: 48 + Math.abs("<?php esce($config->module_lightbox["spacing"]); ?>"),
     protect: <?php esce($config->module_lightbox["protect"]); ?>,
     active: false,
     styles: {
         fg: {
+            "box-sizing": "border-box",
             "display": "block",
-            "position": "absolute",
-            "top": "0px",
-            "left": "0px",
-            "width": "auto",
-            "height": "auto",
-            "cursor": "crosshair",
-            "visibility": "hidden"
+            "width": "100%",
+            "height": "100%",
+            "padding": "0px",
+            "aspect-ratio": "auto",
+            "object-fit": "contain",
+            "background-color": "transparent"
         },
         bg: {
+            "box-sizing": "border-box",
+            "display": "block",
             "position": "fixed",
             "top": "0px",
             "right": "0px",
             "bottom": "0px",
             "left": "0px",
             "z-index": 2147483646,
-            "opacity": 0,
-            "transition-property": "opacity",
-            "transition-duration": "500ms",
+            "padding": "3rem",
             "cursor": "wait",
             "background-repeat": "no-repeat",
-            "background-position": "right 12px top 12px",
-            "background-image": "url('" + Site.chyrp_url + "/modules/lightbox/images/close.svg')"
+            "background-size": "1.5rem",
+            "background-position": "right 0.75rem top 0.75rem",
+            "background-image": "url('" + Site.chyrp_url + "/modules/lightbox/images/close.svg')",
+            "opacity": 0,
+            "transition-property": "opacity",
+            "transition-duration": "500ms"
         },
-        image: {
-            "cursor": "pointer",
+        show: {
+            "opacity": 1,
+            "cursor": "pointer"
+        },
+        images: {
+            "cursor": "pointer"
+        },
+        spacing: {
+            "padding": Math.abs("<?php esce($config->module_lightbox["spacing"]); ?>") + "px"
         },
         black: {
             "background-color": "#2f2f2f"
@@ -51,26 +61,33 @@ var ChyrpLightbox = {
     },
     init: function() {
         $.extend(
+            ChyrpLightbox.styles.fg,
+            ChyrpLightbox.styles.spacing
+        );
+
+        $.extend(
             ChyrpLightbox.styles.bg,
             ChyrpLightbox.styles[ChyrpLightbox.background]
         );
 
         $("section img").not(".suppress_lightbox").each(function() {
-            $(this).on("click", ChyrpLightbox.load).css(
-                ChyrpLightbox.styles.image
+            $(this).on(
+                "click",
+                ChyrpLightbox.load
+            ).css(
+                ChyrpLightbox.styles.images
             );
 
-            if (ChyrpLightbox.protect && !$(this).hasClass("suppress_protect"))
-                $(this).on("contextmenu", ChyrpLightbox.prevent);
+            if (ChyrpLightbox.protect) {
+                if (!$(this).hasClass("suppress_protect"))
+                    $(this).on(
+                        "contextmenu",
+                        ChyrpLightbox.prevent
+                    );
+            }
         });
 
-        $(window).on({
-            resize: ChyrpLightbox.hide,
-            scroll: ChyrpLightbox.hide,
-            orientationchange: ChyrpLightbox.hide,
-            popstate: ChyrpLightbox.hide
-        });
-
+        $(window).on("popstate", ChyrpLightbox.hide);
         ChyrpLightbox.watch();
     },
     prevent: function(e) {
@@ -85,14 +102,24 @@ var ChyrpLightbox = {
                     for (var i = 0; i < mutation.addedNodes.length; ++i) {
                         var item = mutation.addedNodes[i];
 
-                        $(item).find("section img").not(".suppress_lightbox").each(function() {
-                            $(this).on("click", ChyrpLightbox.load).css(
-                                ChyrpLightbox.styles.image
-                            );
+                        $(item).find("section img").not(".suppress_lightbox").each(
+                            function() {
+                                $(this).on(
+                                    "click",
+                                    ChyrpLightbox.load
+                                ).css(
+                                    ChyrpLightbox.styles.images
+                                );
 
-                            if (ChyrpLightbox.protect && !$(this).hasClass("suppress_protect"))
-                                $(this).on("contextmenu", ChyrpLightbox.prevent);
-                        });
+                                if (ChyrpLightbox.protect) {
+                                    if (!$(this).hasClass("suppress_protect"))
+                                        $(this).on(
+                                            "contextmenu",
+                                            ChyrpLightbox.prevent
+                                        );
+                                }
+                            }
+                        );
                     }
                 });
             });
@@ -101,66 +128,53 @@ var ChyrpLightbox = {
         }
     },
     load: function(e) {
-        if (ChyrpLightbox.active == false) {
-            e.preventDefault();
+        if (ChyrpLightbox.active == true)
+            ChyrpLightbox.hide();
 
-            var src = $(this).attr("src");
-            var alt = $(this).attr("alt");
+        e.preventDefault();
 
-            $("<div>", {
-                "id": "ChyrpLightbox-bg",
-                "role": "button",
-                "tabindex": "0",
-                "accesskey": "x",
-                "aria-label": '<?php esce(__("Stop displaying this image", "lightbox")); ?>'
+        var src = e.target.currentSrc;
+        var alt = $(this).attr("alt");
+
+        $("<div>", {
+            "id": "ChyrpLightbox-bg",
+            "role": "button",
+            "tabindex": "0",
+            "accesskey": "x",
+            "aria-label": '<?php esce(__("Stop displaying this image", "lightbox")); ?>'
+        }).css(
+            ChyrpLightbox.styles.bg
+        ).on(
+            "click",
+            ChyrpLightbox.hide
+        ).append(
+            $("<img>", {
+                "id": "ChyrpLightbox-fg",
+                "src": src,
+                "alt": alt
             }).css(
-                ChyrpLightbox.styles.bg
-            ).on("click", function(e) {
-                if (e.target === e.currentTarget)
-                    ChyrpLightbox.hide();
-            }).append(
-                $("<img>", {
-                    "id": "ChyrpLightbox-fg",
-                    "src": src,
-                    "alt": alt
-                }).css(
-                    ChyrpLightbox.styles.fg
-                ).on("load", ChyrpLightbox.show)
-            ).appendTo("body");
+                ChyrpLightbox.styles.fg
+            ).on(
+                "load",
+                ChyrpLightbox.show
+            )
+        ).appendTo("body");
 
-            ChyrpLightbox.active = true;
-        }
+        ChyrpLightbox.active = true;
     },
     show: function() {
         var fg = $("#ChyrpLightbox-fg");
-        var fgWidth = fg.outerWidth();
-        var fgHeight = fg.outerHeight();
         var bg = $("#ChyrpLightbox-bg");
-        var bgWidth = bg.outerWidth();
-        var bgHeight = bg.outerHeight();
-        var sp = ChyrpLightbox.spacing * 2;
 
         if (ChyrpLightbox.protect)
-            $(fg).on({
-                contextmenu: function() { return false; }
-            });
+            $(fg).on(
+                "contextmenu",
+                ChyrpLightbox.prevent
+            );
 
-        while (((bgWidth - sp) < fgWidth) || ((bgHeight - sp) < fgHeight)) {
-            Math.round(fgWidth = fgWidth * 0.99);
-            Math.round(fgHeight = fgHeight * 0.99);
-        }
-
-        fg.css({
-            "top": Math.round((bgHeight - fgHeight) / 2) + "px",
-            "left": Math.round((bgWidth - fgWidth) / 2) + "px",
-            "width": fgWidth + "px",
-            "height": fgHeight + "px",
-            "visibility": "visible",
-        });
-        bg.css({
-            "opacity": 1,
-            "cursor": "pointer"
-        });
+        bg.css(
+            ChyrpLightbox.styles.show
+        );
     },
     hide: function() {
         $("#ChyrpLightbox-bg").remove();
