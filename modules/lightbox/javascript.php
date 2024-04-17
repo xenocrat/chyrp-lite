@@ -46,7 +46,7 @@ var ChyrpLightbox = {
             "padding": Math.abs("<?php esce($config->module_lightbox["spacing"]); ?>") + "px"
         },
         black: {
-            "background-color": "#2f2f2f"
+            "background-color": "#000000"
         },
         grey: {
             "background-color": "#7f7f7f"
