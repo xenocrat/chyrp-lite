@@ -58,34 +58,38 @@ var ChyrpAjaxScroll = {
             var this_next_url = this_next_obj.attr("href");
 
             if (this_next_url && this_post_obj.length) {
-                $.get(this_next_url, function(data) {
-                    var this_next_num = Number(this_next_url.match(/page[=\/]([0-9]+)/i)[1]);
-                    var ajax_next_obj = $(data).find("#pagination_next_page");
-                    var ajax_next_title = $(data).filter("title").text();
+                $.get(
+                    this_next_url,
+                    function(data) {
+                        var this_next_num = Number(this_next_url.match(/page[=\/]([0-9]+)/i)[1]);
+                        var ajax_next_obj = $(data).find("#pagination_next_page");
+                        var ajax_next_title = $(data).filter("title").text();
 
-                    // Insert new posts and update page title.
-                    this_post_obj.after($(data).find(".post"));
-                    document.title = ajax_next_title;
+                        // Insert new posts and update page title.
+                        this_post_obj.after($(data).find(".post"));
+                        document.title = ajax_next_title;
 
-                    // Update location history.
-                    if (!!history.replaceState)
-                        history.replaceState({
-                            "page": this_next_num,
-                            "action": Route.action
-                        }, ajax_next_title, this_next_url);
+                        // Update location history.
+                        if (!!history.replaceState)
+                            history.replaceState({
+                                "page": this_next_num,
+                                "action": Route.action
+                            }, ajax_next_title, this_next_url);
 
-                    // Replace #pagination_next_page if a replacement is found.
-                    if (ajax_next_obj) {
-                        this_next_obj.replaceWith(ajax_next_obj);
-                        ChyrpAjaxScroll.busy = false;
+                        // Replace #pagination_next_page if a replacement is found.
+                        if (ajax_next_obj) {
+                            this_next_obj.replaceWith(ajax_next_obj);
+                            ChyrpAjaxScroll.busy = false;
 
-                        if (!ChyrpAjaxScroll.auto)
-                            $("#pagination_next_page").click(ChyrpAjaxScroll.click);
-                    } else {
-                        // That's all folks!
-                        this_next_obj.remove();
-                    }
-                }, "html").fail(ChyrpAjaxScroll.panic);
+                            if (!ChyrpAjaxScroll.auto)
+                                $("#pagination_next_page").click(ChyrpAjaxScroll.click);
+                        } else {
+                            // That's all folks!
+                            this_next_obj.remove();
+                        }
+                    },
+                    "html"
+                ).fail(ChyrpAjaxScroll.panic);
             }
 
             if ("ariaBusy" in ChyrpAjaxScroll.container)

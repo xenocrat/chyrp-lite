@@ -36,17 +36,23 @@ var Oops = {
 var Post = {
     failed: false,
     init: function() {
-        $(".post").last().parent().on("click", ".post_delete_link:not(.no_ajax)", function(e) {
-            if (!Post.failed) {
-                e.preventDefault();
+        $(".post").last().parent().on(
+            "click",
+            ".post_delete_link:not(.no_ajax)",
+            function(e) {
+                var m = '<?php esce(__("Are you sure you want to delete this post?")); ?>';
 
-                if (confirm('<?php esce(__("Are you sure you want to delete this post?")); ?>')) {
-                    var id = $(this).attr("id");
-                    var post_id = (!!id) ? id.replace(/^post_delete_/, "") : "0" ;
-                    Post.destroy(post_id);
+                if (!Post.failed) {
+                    e.preventDefault();
+
+                    if (confirm(m)) {
+                        var id = $(this).attr("id");
+                        var post_id = (!!id) ? id.replace(/^post_delete_/, "") : "0" ;
+                        Post.destroy(post_id);
+                    }
                 }
             }
-        });
+        );
     },
     destroy: function(id) {
         var thisPost = $("#post_" + id).loader();
@@ -56,16 +62,19 @@ var Post = {
             id: id,
             hash: Visitor.token
         }, function(response) {
-            thisPost.loader(true).fadeOut("fast", function() {
-                var prev_post = $(this).prev("article.post");
-                $(this).remove();
+            thisPost.loader(true).fadeOut(
+                "fast",
+                function() {
+                    var prev_post = $(this).prev("article.post");
+                    $(this).remove();
 
-                if (!$("article.post").length)
-                    window.location.href = Site.url;
+                    if (!$("article.post").length)
+                        window.location.href = Site.url;
 
-                if (prev_post.length)
-                    prev_post.focus();
-            });
+                    if (prev_post.length)
+                        prev_post.focus();
+                }
+            );
         }, "json").fail(Post.panic);
     },
     panic: function(message) {
@@ -82,17 +91,22 @@ var Post = {
 var Page = {
     failed: false,
     init: function() {
-        $(".page_delete_link:not(.no_ajax)").on("click", function(e) {
-            if (!Page.failed) {
-                e.preventDefault();
+        $(".page_delete_link:not(.no_ajax)").on(
+            "click",
+            function(e) {
+                var m = '<?php esce(__("Are you sure you want to delete this page and its child pages?"));?>';
 
-                if (confirm('<?php esce(__("Are you sure you want to delete this page and its child pages?"));?>')) {
-                    var id = $(this).attr("id");
-                    var page_id = (!!id) ? id.replace(/^page_delete_/, "") : "0" ;
-                    Page.destroy(page_id);
+                if (!Page.failed) {
+                    e.preventDefault();
+
+                    if (confirm(m)) {
+                        var id = $(this).attr("id");
+                        var page_id = (!!id) ? id.replace(/^page_delete_/, "") : "0" ;
+                        Page.destroy(page_id);
+                    }
                 }
             }
-        });
+        );
     },
     destroy: function(id) {
         var thisPage = $("#page_" + id).loader();
@@ -102,10 +116,13 @@ var Page = {
             id: id,
             hash: Visitor.token
         }, function(response) {
-            thisPage.loader(true).fadeOut("fast", function() {
-                $(this).remove();
-                window.location.href = Site.url;
-            });
+            thisPage.loader(true).fadeOut(
+                "fast",
+                function() {
+                    $(this).remove();
+                    window.location.href = Site.url;
+                }
+            );
         }, "json").fail(Page.panic);
     },
     panic: function(message) {

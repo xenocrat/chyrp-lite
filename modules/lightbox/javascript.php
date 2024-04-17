@@ -13,6 +13,7 @@ var ChyrpLightbox = {
             "width": "100%",
             "height": "100%",
             "padding": "0px",
+            "margin": "0px",
             "aspect-ratio": "auto",
             "object-fit": "contain",
             "background-color": "transparent"
@@ -25,16 +26,14 @@ var ChyrpLightbox = {
             "right": "0px",
             "bottom": "0px",
             "left": "0px",
+            "opacity": 0,
             "z-index": 2147483646,
             "padding": "3rem",
             "cursor": "wait",
             "background-repeat": "no-repeat",
             "background-size": "1.5rem",
             "background-position": "right 0.75rem top 0.75rem",
-            "background-image": "url('" + Site.chyrp_url + "/modules/lightbox/images/close.svg')",
-            "opacity": 0,
-            "transition-property": "opacity",
-            "transition-duration": "500ms"
+            "background-image": "url('" + Site.chyrp_url + "/modules/lightbox/images/close.svg')"
         },
         show: {
             "opacity": 1,
@@ -70,22 +69,24 @@ var ChyrpLightbox = {
             ChyrpLightbox.styles[ChyrpLightbox.background]
         );
 
-        $("section img").not(".suppress_lightbox").each(function() {
-            $(this).on(
-                "click",
-                ChyrpLightbox.load
-            ).css(
-                ChyrpLightbox.styles.images
-            );
+        $("section img").not(".suppress_lightbox").each(
+            function() {
+                $(this).on(
+                    "click",
+                    ChyrpLightbox.load
+                ).css(
+                    ChyrpLightbox.styles.images
+                );
 
-            if (ChyrpLightbox.protect) {
-                if (!$(this).hasClass("suppress_protect"))
-                    $(this).on(
-                        "contextmenu",
-                        ChyrpLightbox.prevent
-                    );
+                if (ChyrpLightbox.protect) {
+                    if (!$(this).hasClass("suppress_protect"))
+                        $(this).on(
+                            "contextmenu",
+                            ChyrpLightbox.prevent
+                        );
+                }
             }
-        });
+        );
 
         $(window).on("popstate", ChyrpLightbox.hide);
         ChyrpLightbox.watch();
@@ -97,33 +98,40 @@ var ChyrpLightbox = {
         // Watch for DOM additions on blog pages.
         if (!!window.MutationObserver && $(".post").length) {
             var target = $(".post").last().parent()[0];
-            var observer = new MutationObserver(function(mutations) {
-                mutations.forEach(function(mutation) {
-                    for (var i = 0; i < mutation.addedNodes.length; ++i) {
-                        var item = mutation.addedNodes[i];
+            var observer = new MutationObserver(
+                function(mutations) {
+                    mutations.forEach(
+                        function(mutation) {
+                            for (var i = 0; i < mutation.addedNodes.length; ++i) {
+                                var item = mutation.addedNodes[i];
 
-                        $(item).find("section img").not(".suppress_lightbox").each(
-                            function() {
-                                $(this).on(
-                                    "click",
-                                    ChyrpLightbox.load
-                                ).css(
-                                    ChyrpLightbox.styles.images
-                                );
-
-                                if (ChyrpLightbox.protect) {
-                                    if (!$(this).hasClass("suppress_protect"))
+                                $(item).find("section img").not(".suppress_lightbox").each(
+                                    function() {
                                         $(this).on(
-                                            "contextmenu",
-                                            ChyrpLightbox.prevent
+                                            "click",
+                                            ChyrpLightbox.load
+                                        ).css(
+                                            ChyrpLightbox.styles.images
                                         );
-                                }
+
+                                        if (ChyrpLightbox.protect) {
+                                            if (!$(this).hasClass("suppress_protect"))
+                                                $(this).on(
+                                                    "contextmenu",
+                                                    ChyrpLightbox.prevent
+                                                );
+                                        }
+                                    }
+                                );
                             }
-                        );
-                    }
-                });
-            });
-            var config = { childList: true, subtree: true };
+                        }
+                    );
+                }
+            );
+            var config = {
+                childList: true,
+                subtree: true
+            };
             observer.observe(target, config);
         }
     },
@@ -136,23 +144,29 @@ var ChyrpLightbox = {
         var src = e.target.currentSrc;
         var alt = $(this).attr("alt");
 
-        $("<div>", {
-            "id": "ChyrpLightbox-bg",
-            "role": "button",
-            "tabindex": "0",
-            "accesskey": "x",
-            "aria-label": '<?php esce(__("Stop displaying this image", "lightbox")); ?>'
-        }).css(
+        $(
+            "<div>",
+            {
+                "id": "ChyrpLightbox-bg",
+                "role": "button",
+                "tabindex": "0",
+                "accesskey": "x",
+                "aria-label": '<?php esce(__("Stop displaying this image", "lightbox")); ?>'
+            }
+        ).css(
             ChyrpLightbox.styles.bg
         ).on(
             "click",
             ChyrpLightbox.hide
         ).append(
-            $("<img>", {
-                "id": "ChyrpLightbox-fg",
-                "src": src,
-                "alt": alt
-            }).css(
+            $(
+                "<img>",
+                {
+                    "id": "ChyrpLightbox-fg",
+                    "src": src,
+                    "alt": alt
+                }
+            ).css(
                 ChyrpLightbox.styles.fg
             ).on(
                 "load",
