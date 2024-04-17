@@ -1422,7 +1422,7 @@ msgstr ""
 msgid "Are you sure you want to delete this post?"
 msgstr ""
 
-#: includes/main.js.php:89
+#: includes/main.js.php:97
 msgid "Are you sure you want to delete this page and its child pages?"
 msgstr ""
 

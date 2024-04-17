@@ -427,7 +427,7 @@ msgstr "请记住更新每个组的权限设置。"
 msgid "Do you want to remove comments from the database?"
 msgstr "您想从数据库中删除评论吗？"
 
-#: modules/comments/javascript.php:53
+#: modules/comments/javascript.php:63
 msgid "Are you sure you want to permanently delete this comment?"
 msgstr "您确定要永久删除这个评论？"
 
