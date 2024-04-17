@@ -536,6 +536,7 @@ html[dir="ltr"] select {
     appearance: none;
     padding-right: 1em;
     background-image: url(../images/icons/select.svg);
+    background-size: 1rem;
     background-position: center right 0.1em;
     background-repeat: no-repeat;
 }
@@ -543,16 +544,19 @@ html[dir="rtl"] select {
     appearance: none;
     padding-left: 1em;
     background-image: url(../images/icons/select.svg);
+    background-size: 1rem;
     background-position: center left 0.1em;
     background-repeat: no-repeat;
 }
 input[type="checkbox"]:checked {
     background-image: url(../images/icons/checkbox.svg);
+    background-size: 1rem;
     background-position: center;
     background-repeat: no-repeat;
 }
 input[type="radio"]:checked {
     background-image: url(../images/icons/radio.svg);
+    background-size: 1rem;
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -880,9 +884,9 @@ button > img,
 a.button > img {
     display: block;
     position: relative;
-    top: 8px;
-    width: 16px;
-    height: 16px;
+    top: 0.5rem;
+    width: 1rem;
+    height: 1rem;
     float: left;
     margin-right: 0.25rem;
 }
@@ -1065,8 +1069,8 @@ button.emblem > img {
     float: none;
     display: inline;
     position: relative;
-    top: 2px;
-    height: 16px;
+    top: 0.125rem;
+    height: 1rem;
     margin: 0rem;
     padding: 0rem;
 }
@@ -1113,10 +1117,10 @@ input.toolbar.hidden {
     display: block;
     position: absolute;
     margin: 0rem;
-    top: 48px;
+    top: 3rem;
     left: 20%;
     width: 60%;
-    height: calc(100% - 96px);
+    height: calc(100% - 6rem);
     overflow-x: hidden;
     overflow-y: auto;
     overscroll-behavior: contain;
@@ -1130,15 +1134,15 @@ input.toolbar.hidden {
 .iframe_close_gadget {
     display: block;
     position: absolute;
-    width: 24px;
-    height: 24px;
-    top: 24px;
-    right: calc(20% - 24px);
+    width: 1.5rem;
+    height: 1.5rem;
+    top: 1.5rem;
+    right: calc(20% - 1.5rem);
     cursor: pointer;
 }
 .iframe_close_gadget img {
-    width: 24px;
-    height: 24px;
+    width: 1.5rem;
+    height: 1.5rem;
 }
 .ajax_loading {
     background-size: 30px 30px;
@@ -1267,12 +1271,11 @@ input.toolbar.hidden {
         padding-top: 0rem;
     }
     .iframe_foreground {
-        top: 48px;
-        left: 48px;
-        width: calc(100% - 96px);
+        left: 3rem;
+        width: calc(100% - 6rem);
     }
     .iframe_close_gadget {
-        right: 24px;
+        right: 1.5rem;
     }
 }
 
