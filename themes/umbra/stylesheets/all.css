@@ -344,6 +344,7 @@ html[dir="ltr"] select {
     appearance: none;
     padding-right: 1.5em;
     background-image: url(../images/select.svg);
+    background-size: 1rem;
     background-position: center right 0.25em;
     background-repeat: no-repeat;
 }
@@ -351,6 +352,7 @@ html[dir="rtl"] select {
     appearance: none;
     padding-left: 1.5em;
     background-image: url(../images/select.svg);
+    background-size: 1rem;
     background-position: center left 0.25em;
     background-repeat: no-repeat;
 }
@@ -369,6 +371,7 @@ input[type="radio"] {
 }
 input[type="checkbox"]:checked {
     background-image: url(../images/checkbox.svg);
+    background-size: 1rem;
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -377,11 +380,13 @@ input[type="checkbox"]:checked:focus {
 }
 input[type="radio"]:checked {
     background-image: url(../images/radio.svg);
+    background-size: 1rem;
     background-position: center;
     background-repeat: no-repeat;
 }
 input[type="radio"]:checked:focus {
     background-image: url(../images/radio_focus.svg);
+    background-size: 1rem;
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -681,6 +686,7 @@ a.likes > img {
     display: inline-block;
     position: relative;
     top: 0px;
+    height: 1rem;
 }
 a.likes:hover > img,
 a.likes:focus > img,
