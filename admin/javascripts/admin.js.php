@@ -234,13 +234,133 @@ var Site = {
     chyrp_url: '<?php esce($config->chyrp_url); ?>',
     ajax_url: '<?php esce(unfix(url('/', 'AjaxController'))); ?>'
 }
-var Uploads = {
-    limit: <?php esce(intval($config->uploads_limit * 1000000)); ?>,
-    message: '<?php esce(_f("Maximum file size: %d Megabytes!", $config->uploads_limit)); ?>'
-}
 var Oops = {
     message: '<?php esce(__("Oops! Something went wrong on this web page.")); ?>',
     count: 0
+}
+var Uploads = {
+    limit: <?php esce(intval($config->uploads_limit * 1000000)); ?>,
+    message: '<?php esce(_f("Maximum file size: %d Megabytes!", $config->uploads_limit)); ?>',
+    active: 0,
+    send: function(file, doneCallback, failCallback, alwaysCallback) {
+        Uploads.active++;
+        var form = new FormData();
+
+        form.set("action", "file_upload");
+        form.set("hash", Visitor.token);
+        form.set("file", file, file.name);
+
+        $.ajax({
+            type: "POST",
+            url: Site.ajax_url,
+            data: form,
+            processData: false,
+            contentType: false,
+            dataType: "json",
+        }).done(
+            function(response) {
+                doneCallback(response);
+            }
+        ).fail(
+            function(response) {
+                Oops.count++;
+                failCallback(response);
+            }
+        ).always(
+            function(response) {
+                Uploads.active--;
+                alwaysCallback(response);
+            }
+        );
+    },
+    show: function(search, filter, clickCallback, failCallback, alwaysCallback) {
+        if (Uploads.active)
+            return;
+
+        Uploads.active++;
+
+        $.post(
+            Site.ajax_url,
+            {
+                action: "uploads_modal",
+                hash: Visitor.token,
+                search: search,
+                filter: filter
+            },
+            function(data) {
+                $(
+                    "<div>",
+                    {
+                        "role": "region",
+                        "aria-label": '<?php esce(__("Modal window", "admin")); ?>'
+                    }
+                ).addClass(
+                    "iframe_background"
+                ).append(
+                    [
+                        $("<div>").addClass(
+                            "iframe_foreground"
+                        ).on(
+                            "click",
+                            "a",
+                            function(e) {
+                                e.preventDefault();
+                                var target = $(e.target);
+                                var file = {
+                                    href: target.attr("href"),
+                                    name: target.attr("data-name"),
+                                    type: target.attr("data-type"),
+                                    size: Number(target.attr("data-size"))
+                                };
+                                clickCallback(file);
+                                $(this).parents(".iframe_background").remove();
+                            }
+                        ).append(data),
+                        $(
+                            "<a>",
+                            {
+                                "href": "#",
+                                "role": "button",
+                                "accesskey": "x",
+                                "aria-label": '<?php esce(__("Close", "admin")); ?>'
+                            }
+                        ).addClass(
+                            "iframe_close_gadget"
+                        ).click(
+                            function(e) {
+                                e.preventDefault();
+                                $(this).parent().remove();
+                            }
+                        ).append(
+                            $(
+                                "<img>",
+                                {
+                                    "src": Site.chyrp_url + '/admin/images/icons/close.svg',
+                                    "alt": '<?php esce(__("close", "admin")); ?>'
+                                }
+                            )
+                        )
+                    ]
+                ).click(
+                    function(e) {
+                        if (e.target === e.currentTarget)
+                            $(this).remove();
+                    }
+                ).insertAfter("#content");
+            },
+            "html"
+        ).fail(
+            function(response) {
+                Oops.count++;
+                failCallback(response);
+            }
+        ).always(
+            function(response) {
+                Uploads.active--;
+                alwaysCallback(response);
+            }
+        );
+    }
 }
 var Help = {
     init: function() {
@@ -545,37 +665,30 @@ var Write = {
                             function(e) {
                                 if (!!e.target.files && e.target.files.length > 0) {
                                     var file = e.target.files[0];
-                                    var form = new FormData();
 
+                                    // Reject files too large to upload.
                                     if (file.size > Uploads.limit) {
                                         e.target.value = null;
                                         tray.html(Uploads.message);
                                         return;
                                     }
 
-                                    form.set("action", "file_upload");
-                                    form.set("hash", Visitor.token);
-                                    form.set("file", file, file.name);
-
                                     tray.loader().html('<?php esce(__("Uploading...", "admin")); ?>');
 
                                     // Upload the file and insert the tag if successful.
-                                    $.ajax({
-                                        type: "POST",
-                                        url: Site.ajax_url,
-                                        data: form,
-                                        processData: false,
-                                        contentType: false,
-                                        dataType: "json",
-                                    }).done(function(response) {
-                                        Write.formatting(target, "img", response.data.url);
-                                    }).fail(function(response) {
-                                        Oops.count++;
-                                        tray.html(Oops.message);
-                                    }).always(function(response) {
-                                        tray.loader(true);
-                                        e.target.value = null;
-                                    });
+                                    Uploads.send(
+                                        file,
+                                        function(response) {
+                                            Write.formatting(target, "img", response.data.url);
+                                        },
+                                        function(response) {
+                                            tray.html(Oops.message);
+                                        },
+                                        function(response) {
+                                            tray.loader(true);
+                                            e.target.value = null;
+                                        }
+                                    );
                                 }
                             }
                         ),
@@ -590,7 +703,7 @@ var Write = {
                 ).appendTo(toolbar);
 
                 // Insert button to open the uploads modal.
-                if (<?php esce($visitor->group->can("edit_post", "edit_page", true)); ?>)
+                if (<?php esce($visitor->group->can("edit_post", "edit_page", true)); ?>) {
                     toolbar.append(
                         $(
                             "<button>",
@@ -608,75 +721,15 @@ var Write = {
                                 var search = target.attr("data-uploads_search") || "" ;
                                 var filter = target.attr("data-uploads_filter") || "" ;
 
-                                $.post(
-                                    Site.ajax_url,
-                                    {
-                                        action: "uploads_modal",
-                                        hash: Visitor.token,
-                                        search: search,
-                                        filter: filter
+                                Uploads.show(
+                                    search,
+                                    filter,
+                                    function(file) {
+                                        Write.formatting(target, "insert", file.href);
                                     },
-                                    function(data) {
-                                        $(
-                                            "<div>",
-                                            {
-                                                "role": "region",
-                                                "aria-label": '<?php esce(__("Modal window", "admin")); ?>'
-                                            }
-                                        ).addClass(
-                                            "iframe_background"
-                                        ).append(
-                                            [
-                                                $("<div>").addClass(
-                                                    "iframe_foreground"
-                                                ).on(
-                                                    "click",
-                                                    "a",
-                                                    function(e) {
-                                                        e.preventDefault();
-                                                        Write.formatting(target, "insert", $(e.target).attr("href"));
-                                                        $(this).parents(".iframe_background").remove();
-                                                    }
-                                                ).append(data),
-                                                $(
-                                                    "<a>",
-                                                    {
-                                                        "href": "#",
-                                                        "role": "button",
-                                                        "accesskey": "x",
-                                                        "aria-label": '<?php esce(__("Close", "admin")); ?>'
-                                                    }
-                                                ).addClass(
-                                                    "iframe_close_gadget"
-                                                ).click(
-                                                    function(e) {
-                                                        e.preventDefault();
-                                                        $(this).parent().remove();
-                                                    }
-                                                ).append(
-                                                    $(
-                                                        "<img>",
-                                                        {
-                                                            "src": Site.chyrp_url + '/admin/images/icons/close.svg',
-                                                            "alt": '<?php esce(__("close", "admin")); ?>'
-                                                        }
-                                                    )
-                                                )
-                                            ]
-                                        ).click(
-                                            function(e) {
-                                                if (e.target === e.currentTarget)
-                                                    $(this).remove();
-                                            }
-                                        ).insertAfter("#content");
-                                    },
-                                    "html"
-                                ).fail(
                                     function(response) {
-                                        Oops.count++;
                                         tray.html(Oops.message);
-                                    }
-                                ).always(
+                                    },
                                     function(response) {
                                         tray.loader(true);
                                     }
@@ -689,11 +742,12 @@ var Write = {
                             })
                         )
                     );
+                }
             }
         );
 
         // Insert buttons for ajax previews.
-        if (<?php esce($theme->file_exists("content".DIR."preview")); ?>)
+        if (<?php esce($theme->file_exists("content".DIR."preview")); ?>) {
             $("#write_form *[data-preview], #edit_form *[data-preview]").each(
                 function() {
                     var target = $(this);
@@ -713,7 +767,9 @@ var Write = {
                                 var content  = target.val();
                                 var field    = target.attr("name");
                                 var safename = $("input#feather").val() || "page";
-                                var action   = (safename == "page") ? "preview_page" : "preview_post" ;
+                                var action   = (safename == "page") ?
+                                    "preview_page" :
+                                    "preview_post" ;
 
                                 e.preventDefault();
 
@@ -734,6 +790,7 @@ var Write = {
                     );
                 }
             );
+        }
 
         // Support drag-and-drop image uploads.
         $("#write_form textarea, #edit_form textarea").each(
@@ -855,36 +912,24 @@ var Write = {
             var form = new FormData();
             var tray = $("#" + $(e.target).attr("id") + "_tray");
 
-            if (file.size > Uploads.limit) {
-                tray.html(Uploads.message);
-                return;
-            }
-
             if (file.type.indexOf("image/") == 0) {
-                form.set("action", "file_upload");
-                form.set("hash", Visitor.token);
-                form.set("file", file, file.name);
+                // Reject files too large to upload.
+                if (file.size > Uploads.limit) {
+                    tray.html(Uploads.message);
+                    return;
+                }
 
                 tray.loader().html('<?php esce(__("Uploading...", "admin")); ?>');
 
                 // Upload the file and insert the tag if successful.
-                $.ajax({
-                    type: "POST",
-                    url: Site.ajax_url,
-                    data: form,
-                    processData: false,
-                    contentType: false,
-                    dataType: "json",
-                }).done(
+                Uploads.send(
+                    file,
                     function(response) {
                         Write.formatting($(e.target), "img", response.data.url);
-                    }
-                ).fail(
+                    },
                     function(response) {
-                        Oops.count++;
                         tray.html(Oops.message);
-                    }
-                ).always(
+                    },
                     function(response) {
                         tray.loader(true);
                         $(e.target).removeClass("drag_highlight");
