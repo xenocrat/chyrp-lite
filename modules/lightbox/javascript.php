@@ -147,7 +147,7 @@ var ChyrpLightbox = {
         e.preventDefault();
 
         var src = e.target.currentSrc;
-        var alt = $(this).attr("alt");
+        var alt = e.target.alt;
 
         $(
             "<div>",
