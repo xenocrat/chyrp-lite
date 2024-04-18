@@ -22,7 +22,9 @@
 {{ icon_img("file.svg", "", "placeholder") }}
 {% set file_url = upload.name | download %}
 {% endif %}
-<a href="{{ file_url }}">{{ upload.name | fix }}</a>
+<a data-name="{{ upload.name }}" data-type="{{ upload.type }}" data-size="{{ upload.size }}" href="{{ file_url }}">
+{{ upload.name | fix }}
+</a>
 </td>
 </tr>
 {% else %}
