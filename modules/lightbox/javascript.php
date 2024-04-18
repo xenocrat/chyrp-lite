@@ -5,7 +5,7 @@
 var ChyrpLightbox = {
     background: "<?php esce($config->module_lightbox["background"]); ?>",
     protect: <?php esce($config->module_lightbox["protect"]); ?>,
-    active: false,
+    busy: false,
     styles: {
         fg: {
             "box-sizing": "border-box",
@@ -46,16 +46,20 @@ var ChyrpLightbox = {
             "padding": Math.abs("<?php esce($config->module_lightbox["spacing"]); ?>") + "px"
         },
         black: {
-            "background-color": "#000000"
+            "background-color": "#000000",
+            "background-blend-mode": "difference"
         },
         grey: {
-            "background-color": "#7f7f7f"
+            "background-color": "#7f7f7f",
+            "background-blend-mode": "luminosity"
         },
         white: {
-            "background-color": "#ffffff"
+            "background-color": "#ffffff",
+            "background-blend-mode": "difference"
         },
         inherit: {
-            "background-color": "inherit"
+            "background-color": "inherit",
+            "background-blend-mode": "difference"
         },
     },
     init: function() {
@@ -136,9 +140,10 @@ var ChyrpLightbox = {
         }
     },
     load: function(e) {
-        if (ChyrpLightbox.active == true)
-            ChyrpLightbox.hide();
+        if (ChyrpLightbox.busy)
+            return;
 
+        ChyrpLightbox.busy = true;
         e.preventDefault();
 
         var src = e.target.currentSrc;
@@ -173,8 +178,6 @@ var ChyrpLightbox = {
                 ChyrpLightbox.show
             )
         ).appendTo("body");
-
-        ChyrpLightbox.active = true;
     },
     show: function() {
         var fg = $("#ChyrpLightbox-fg");
@@ -192,7 +195,7 @@ var ChyrpLightbox = {
     },
     hide: function() {
         $("#ChyrpLightbox-bg").remove();
-        ChyrpLightbox.active = false;
+        ChyrpLightbox.busy = false;
     }
 }
 $(document).ready(ChyrpLightbox.init);
