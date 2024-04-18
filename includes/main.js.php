@@ -25,13 +25,13 @@ var Site = {
     chyrp_url: '<?php esce($config->chyrp_url); ?>',
     ajax_url: '<?php esce(unfix(url('/', 'AjaxController'))); ?>'
 }
-var Uploads = {
-    limit: <?php esce(intval($config->uploads_limit * 1000000)); ?>,
-    message: '<?php esce(_f("Maximum file size: %d Megabytes!", $config->uploads_limit)); ?>'
-}
 var Oops = {
     message: '<?php esce(__("Oops! Something went wrong on this web page.")); ?>',
     count: 0
+}
+var Uploads = {
+    limit: <?php esce(intval($config->uploads_limit * 1000000)); ?>,
+    message: '<?php esce(_f("Maximum file size: %d Megabytes!", $config->uploads_limit)); ?>'
 }
 var Post = {
     failed: false,
@@ -57,25 +57,30 @@ var Post = {
     destroy: function(id) {
         var thisPost = $("#post_" + id).loader();
 
-        $.post(Site.ajax_url, {
-            action: "destroy_post",
-            id: id,
-            hash: Visitor.token
-        }, function(response) {
-            thisPost.loader(true).fadeOut(
-                "fast",
-                function() {
-                    var prev_post = $(this).prev("article.post");
-                    $(this).remove();
+        $.post(
+            Site.ajax_url,
+            {
+                action: "destroy_post",
+                id: id,
+                hash: Visitor.token
+            },
+            function(response) {
+                thisPost.loader(true).fadeOut(
+                    "fast",
+                    function() {
+                        var prev_post = $(this).prev("article.post");
+                        $(this).remove();
 
-                    if (!$("article.post").length)
-                        window.location.href = Site.url;
+                        if (!$("article.post").length)
+                            window.location.href = Site.url;
 
-                    if (prev_post.length)
-                        prev_post.focus();
-                }
-            );
-        }, "json").fail(Post.panic);
+                        if (prev_post.length)
+                            prev_post.focus();
+                    }
+                );
+            },
+            "json"
+        ).fail(Post.panic);
     },
     panic: function(message) {
         message = (typeof message === "string") ?
@@ -111,19 +116,24 @@ var Page = {
     destroy: function(id) {
         var thisPage = $("#page_" + id).loader();
 
-        $.post(Site.ajax_url, {
-            action: "destroy_page",
-            id: id,
-            hash: Visitor.token
-        }, function(response) {
-            thisPage.loader(true).fadeOut(
-                "fast",
-                function() {
-                    $(this).remove();
-                    window.location.href = Site.url;
-                }
-            );
-        }, "json").fail(Page.panic);
+        $.post(
+            Site.ajax_url,
+            {
+                action: "destroy_page",
+                id: id,
+                hash: Visitor.token
+            },
+            function(response) {
+                thisPage.loader(true).fadeOut(
+                    "fast",
+                    function() {
+                        $(this).remove();
+                        window.location.href = Site.url;
+                    }
+                );
+            },
+            "json"
+        ).fail(Page.panic);
     },
     panic: function(message) {
         message = (typeof message === "string") ?

@@ -26,10 +26,12 @@ var ChyrpLikes = {
                         function(mutation) {
                             for (var i = 0; i < mutation.addedNodes.length; ++i) {
                                 var item = mutation.addedNodes[i];
-                                $(item).find("div.likes a.likes").click(function(e) {
-                                    e.preventDefault();
-                                    ChyrpLikes.toggle($(this).attr("data-post_id"));
-                                });
+                                $(item).find("div.likes a.likes").click(
+                                    function(e) {
+                                        e.preventDefault();
+                                        ChyrpLikes.toggle($(this).attr("data-post_id"));
+                                    }
+                                );
                             }
                         }
                     );

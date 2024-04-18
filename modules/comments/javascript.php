@@ -110,14 +110,20 @@ var ChyrpComment = {
                 function(response) {
                     if (response.data.comment_ids.length > 0) {
                         $("ol.comments").attr("data-timestamp", response.data.last_comment);
-                        $.each(response.data.comment_ids, function(i, id) {
-                            $.post(Site.ajax_url, {
-                                action: "show_comment",
-                                comment_id: id
-                            }, function(data){
-                                $(data).insertBefore("#comment_shim").hide().fadeIn("slow");
-                            }, "html").fail(ChyrpComment.panic);
-                        });
+                        $.each(
+                            response.data.comment_ids,
+                            function(i, id) {
+                                $.post(
+                                    Site.ajax_url, {
+                                        action: "show_comment",
+                                        comment_id: id
+                                    }, function(data) {
+                                        $(data).insertBefore("#comment_shim").hide().fadeIn("slow");
+                                    },
+                                    "html"
+                                ).fail(ChyrpComment.panic);
+                            }
+                        );
                     }
                 }
             );
@@ -208,7 +214,7 @@ var ChyrpComment = {
                                                     action: "show_comment",
                                                     comment_id: id
                                                 },
-                                                function(data){
+                                                function(data) {
                                                     thisItem.fadeOut(
                                                         "fast",
                                                         function() {

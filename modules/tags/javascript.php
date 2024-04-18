@@ -15,7 +15,7 @@ var ChyrpTags = {
     },
     scan: function(e) {
         $(e.target).siblings("span.tags_select").children("a.tag").each(
-            function(){
+            function() {
                 var name = $(this).html();
                 var regexp = new RegExp("(, ?|^)" + escapeRegExp(name) + "(, ?|$)", "g");
 
