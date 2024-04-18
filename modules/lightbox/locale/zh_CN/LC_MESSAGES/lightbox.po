@@ -46,7 +46,7 @@ msgstr ""
 msgid "A lightbox for your images."
 msgstr "为您的图片提供灯箱。"
 
-#: modules/lightbox/javascript.php:154
+#: modules/lightbox/javascript.php:159
 msgid "Stop displaying this image"
 msgstr "停止显示此图像"
 

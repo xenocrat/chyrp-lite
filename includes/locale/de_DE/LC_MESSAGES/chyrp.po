@@ -1219,20 +1219,20 @@ msgstr "Bildquelle"
 msgid "Failed to create image thumbnail."
 msgstr "Vorschaubild konnte erstellt werden."
 
-#: includes/main.js.php:30
+#: includes/main.js.php:29
+msgid "Oops! Something went wrong on this web page."
+msgstr "Oops! Etwas lief falsch auf dieser Website."
+
+#: includes/main.js.php:34
 #, php-format
 msgid "Maximum file size: %d Megabytes!"
 msgstr "Maximale Dateigröße: %d Megabyte!"
-
-#: includes/main.js.php:33
-msgid "Oops! Something went wrong on this web page."
-msgstr "Oops! Etwas lief falsch auf dieser Website."
 
 #: includes/main.js.php:43
 msgid "Are you sure you want to delete this post?"
 msgstr "Bist du Dir sicher, dass Du diesen Post löschen willst?"
 
-#: includes/main.js.php:97
+#: includes/main.js.php:102
 msgid "Are you sure you want to delete this page and its child pages?"
 msgstr ""
 "Bist Du Dir sicher, dass Du diese Seite und alle Unterseiten löschen willst?"

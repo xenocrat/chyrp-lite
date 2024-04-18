@@ -45,7 +45,7 @@ msgstr "Lightbox"
 msgid "A lightbox for your images."
 msgstr "Ein Lightbox für eure Bilder."
 
-#: modules/lightbox/javascript.php:154
+#: modules/lightbox/javascript.php:159
 msgid "Stop displaying this image"
 msgstr "Dieses Bild nicht mehr anzeigen"
 

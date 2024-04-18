@@ -46,7 +46,7 @@ msgstr "Tavolo luminoso"
 msgid "A lightbox for your images."
 msgstr "Un tavolo luminoso per le tue immagini."
 
-#: modules/lightbox/javascript.php:154
+#: modules/lightbox/javascript.php:159
 msgid "Stop displaying this image"
 msgstr "Interrompi la visualizzazione di questa immagine"
 
