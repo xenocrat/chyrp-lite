@@ -982,7 +982,7 @@ span.options_toolbar {
     background-color: #fbfbfb;
     border: 1px solid #cfcfcf;
     border-bottom: none;
-    padding: 0.5rem 0.75rem calc(0.5rem + 2px) 0.75rem;
+    padding: 0.5rem 0.75rem calc(0.5rem + 0.1875rem) 0.75rem;
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
 }
@@ -1069,7 +1069,7 @@ button.emblem > img {
     float: none;
     display: inline;
     position: relative;
-    top: 0.125rem;
+    top: 0.1875rem;
     height: 1rem;
     margin: 0rem;
     padding: 0rem;
