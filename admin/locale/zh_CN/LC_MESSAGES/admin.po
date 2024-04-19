@@ -712,9 +712,9 @@ msgstr "羽毛"
 msgid "Enabled"
 msgstr "已启用"
 
-#: admin/pages/feathers.twig:14 admin/pages/feathers.twig:47
-#: admin/pages/modules.twig:14 admin/pages/modules.twig:67
-#: admin/pages/themes.twig:12
+#: admin/pages/feathers.twig:15 admin/pages/feathers.twig:48
+#: admin/pages/modules.twig:15 admin/pages/modules.twig:68
+#: admin/pages/themes.twig:13
 msgid "info"
 msgstr "信息"
 
