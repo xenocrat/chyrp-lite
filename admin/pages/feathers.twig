@@ -10,9 +10,9 @@
 {% for safename, feather in enabled_feathers %}
 <li class="feather{{ feather.classes is defined ? ' ' ~ feather.classes | join(' ') : '' }}" id="feather_{{ safename }}">
 <h4>
-<a class="emblem feather_url" rel="external" href="{{ feather.url }}" target="_blank">
-{{- icon_img("info.svg", "info" | translate) }}
 {{ feather.name }}{# translation is done in the controller #}
+<a class="emblem feather_url" rel="external" href="{{ feather.url }}" target="_blank">
+{{ icon_img("info.svg", "info" | translate) }}
 </a>
 </h4>
 <p class="feather_description">
@@ -43,9 +43,9 @@
 {% for safename, feather in disabled_feathers %}
 <li class="feather{{ feather.classes is defined ? ' ' ~ feather.classes | join(' ') : '' }}" id="feather_{{ safename }}">
 <h4>
+{{ feather.name }}{# translation is done in the controller #}
 <a class="emblem feather_url" href="{{ feather.url }}" target="_blank">
 {{- icon_img("info.svg", "info" | translate) }}
-{{ feather.name }}{# translation is done in the controller #}
 </a>
 </h4>
 <p class="feather_description">
