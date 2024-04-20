@@ -48,6 +48,9 @@
 
             $language = lang_base(Config::current()->locale);
 
+            $this->open = true;
+            $this->count = 0;
+
             $this->xml = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
 
             $this->xml.= '<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="'.
@@ -77,8 +80,6 @@
                          CHYRP_IDENTITY.
                          '</generator>'.
                          "\n";
-
-            $this->open = true;
         }
 
         /**

@@ -49,6 +49,9 @@
             $language = lang_base(Config::current()->locale);
             $link = url("/", MainController::current());
 
+            $this->open = true;
+            $this->count = 0;
+
             $this->xml = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
             $this->xml.= '<rss version="2.0">'."\n";
             $this->xml.= '<channel>'."\n";
@@ -68,7 +71,6 @@
 
             $this->xml.= '<link>'.$link.'</link>'."\n";
             $this->xml.= '<generator>'.CHYRP_IDENTITY.'</generator>'."\n";
-            $this->open = true;
         }
 
         /**

@@ -48,6 +48,9 @@
 
             $language = lang_base(Config::current()->locale);
 
+            $this->open = true;
+            $this->count = 0;
+
             $this->json = array(
                 "version"       => "https://jsonfeed.org/version/1.1",
                 "language"      => $language,
@@ -60,7 +63,6 @@
                 $this->json["description"] = strip_tags($subtitle);
 
             $this->json["items"] = array();
-            $this->open = true;
         }
 
         /**
