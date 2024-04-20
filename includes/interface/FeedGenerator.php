@@ -64,13 +64,13 @@
 
         /**
          * Function: feed
-         * Returns the rendered feed.
+         * Returns the generated feed.
          */
         public function feed(): string;
 
         /**
          * Function: display
-         * Displays the rendered feed.
+         * Displays the generated feed.
          */
         public function display(): bool;
     }
