@@ -1188,7 +1188,7 @@ msgstr "Vous recevez ce message car vous avez demandé un nouveau mot de passe."
 msgid "Visit this link to reset your password:"
 msgstr "Suivez ce lien pour réinitialiser votre mot de passe :"
 
-#: includes/lib/AtomFeed.php:145 includes/lib/JSONFeed.php:104
+#: includes/lib/AtomFeed.php:146 includes/lib/JSONFeed.php:106
 msgid "Guest"
 msgstr "Invité"
 

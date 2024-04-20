@@ -1191,7 +1191,7 @@ msgstr ""
 msgid "Visit this link to reset your password:"
 msgstr "Visita questo link per reimpostare la password:"
 
-#: includes/lib/AtomFeed.php:145 includes/lib/JSONFeed.php:104
+#: includes/lib/AtomFeed.php:146 includes/lib/JSONFeed.php:106
 msgid "Guest"
 msgstr "Ospite"
 

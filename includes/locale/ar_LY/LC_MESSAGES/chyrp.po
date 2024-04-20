@@ -1179,7 +1179,7 @@ msgstr "لقد تلقيت هذه الرسالة لأنك طلبت كلمة مر�
 msgid "Visit this link to reset your password:"
 msgstr "قم بزيارة هذا الرابط لإعادة تعيين كلمة مرورك:"
 
-#: includes/lib/AtomFeed.php:145 includes/lib/JSONFeed.php:104
+#: includes/lib/AtomFeed.php:146 includes/lib/JSONFeed.php:106
 msgid "Guest"
 msgstr "ضيف"
 
