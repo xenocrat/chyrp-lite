@@ -2979,12 +2979,12 @@ Closes the feed.
 
 Function: feed
 --------------
-Returns the rendered feed.
+Returns the generated feed.
 
 
 Function: display
 -----------------
-Displays the rendered feed.
+Displays the generated feed.
 
 
 ==============================================
@@ -2993,7 +2993,7 @@ includes/lib/AtomFeed.php
 
 Class: AtomFeed
 ---------------
-Generates an Atom feed and outputs it piece by piece.
+Generates an Atom feed piece by piece.
 
 See Also:
     https://tools.ietf.org/html/rfc4287
@@ -3006,7 +3006,7 @@ Returns the content type of the feed.
 
 Function: open
 --------------
-Outputs the opening feed element and top-level elements.
+Adds the opening feed element and top-level elements.
 
 Parameters:
     $title - Title for this feed.
@@ -3017,7 +3017,7 @@ Parameters:
 
 Function: entry
 ---------------
-Outputs an individual feed entry.
+Adds an individual feed entry.
 
 Parameters:
     $title - Title for this entry.
@@ -3036,7 +3036,7 @@ Notes:
 
 Function: category
 ------------------
-Outputs a category element for an entry or feed.
+Adds a category element for an entry or feed.
 
 Parameters:
     $term - String that identifies the category.
@@ -3046,7 +3046,7 @@ Parameters:
 
 Function: rights
 ----------------
-Outputs a rights element for an entry or feed.
+Adds a rights element for an entry or feed.
 
 Parameters:
     $text - Human-readable licensing information.
@@ -3054,7 +3054,7 @@ Parameters:
 
 Function: enclosure
 -------------------
-Outputs a link element for a resource that is potentially large in size.
+Adds a link element for a resource that is potentially large in size.
 
 Parameters:
     $link - The URL to the resource.
@@ -3065,7 +3065,7 @@ Parameters:
 
 Function: related
 -----------------
-Outputs a link element for a resource related to an entry or feed.
+Adds a link element for a resource related to an entry or feed.
 
 Parameters:
     $link - The URL to the resource.
@@ -3073,22 +3073,22 @@ Parameters:
 
 Function: split
 ---------------
-Outputs a closing entry element.
+Adds a closing entry element.
 
 
 Function: close
 ---------------
-Outputs the closing feed element.
+Adds the closing feed element.
 
 
 Function: feed
 --------------
-Returns the rendered feed.
+Returns the generated feed.
 
 
 Function: output
 ----------------
-Displays the rendered feed.
+Displays the generated feed.
 
 
 ==============================================
@@ -3097,7 +3097,7 @@ includes/lib/JSONFeed.php
 
 Class: JSONFeed
 ---------------
-Generates a JSON feed and outputs it on closing.
+Generates a JSON feed piece by piece.
 
 See Also:
     https://jsonfeed.org/version/1.1
@@ -3110,7 +3110,7 @@ Returns the content type of the feed.
 
 Function: open
 --------------
-Generates the top-level feed objects.
+Adds the top-level feed objects.
 
 Parameters:
     $title - Title for this feed.
@@ -3121,7 +3121,7 @@ Parameters:
 
 Function: entry
 ---------------
-Generates an individual feed item.
+Adds an individual feed item.
 
 Parameters:
     $title - Title for this item.
@@ -3137,7 +3137,7 @@ Parameters:
 
 Function: category
 ------------------
-Generates a tag object for an item.
+Adds a tag object for an item.
 
 Parameters:
     $term - String that identifies the category.
@@ -3152,7 +3152,7 @@ Not implemented in JSON Feed version 1.
 
 Function: enclosure
 -------------------
-Generates an attachment object for an item.
+Adds an attachment object for an item.
 
 Parameters:
     $link - The URL to the resource.
@@ -3163,7 +3163,7 @@ Parameters:
 
 Function: related
 -----------------
-Generates an external_url attribute for an item.
+Adds an external_url attribute for an item.
 
 Parameters:
     $link - The external URL.
@@ -3176,12 +3176,12 @@ Closes the feed.
 
 Function: feed
 --------------
-Returns the rendered feed.
+Returns the generated feed.
 
 
 Function: output
 ----------------
-Displays the rendered feed.
+Displays the generated feed.
 
 
 ==============================================
@@ -3433,7 +3433,7 @@ includes/lib/RSSFeed.php
 
 Class: RSSFeed
 --------------
-Generates an RSS feed and renders it piece by piece.
+Generates an RSS feed piece by piece.
 
 See Also:
     http://www.rssboard.org/rss-2-0-11
@@ -3446,7 +3446,7 @@ Returns the content type of the feed.
 
 Function: open
 --------------
-Renders the opening channel element and top-level elements.
+Adds the opening channel element and top-level elements.
 
 Parameters:
     $title - Title for this channel.
@@ -3457,7 +3457,7 @@ Parameters:
 
 Function: entry
 ---------------
-Renders an individual feed item.
+Adds an individual feed item.
 
 Parameters:
     $title - Title for this item.
@@ -3476,7 +3476,7 @@ Notes:
 
 Function: category
 ------------------
-Renders a category element for an item.
+Adds a category element for an item.
 
 Parameters:
     $term - String that identifies the category.
@@ -3491,7 +3491,7 @@ Not implemented in RSS 2.0.11.
 
 Function: enclosure
 -------------------
-Renders an enclosure element for a resource that is potentially large in size.
+Adds an enclosure element for a resource that is potentially large in size.
 
 Parameters:
     $link - The URL to the resource.
@@ -3507,22 +3507,22 @@ Not implemented in RSS 2.0.11.
 
 Function: split
 ---------------
-Renders a closing item element.
+Adds a closing item element.
 
 
 Function: close
 ---------------
-Renders the closing channel element.
+Adds the closing channel element.
 
 
 Function: feed
 --------------
-Returns the rendered feed.
+Returns the generated feed.
 
 
 Function: output
 ----------------
-Displays the rendered feed.
+Displays the generated feed.
 
 
 ==============================================
