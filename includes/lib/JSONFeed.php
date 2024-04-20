@@ -1,7 +1,7 @@
 <?php
     /**
      * Class: JSONFeed
-     * Generates a JSON feed and outputs it on closing.
+     * Generates a JSON feed piece by piece.
      *
      * See Also:
      *     https://jsonfeed.org/version/1.1
@@ -29,7 +29,7 @@
 
         /**
          * Function: open
-         * Generates the top-level feed objects.
+         * Adds the top-level feed objects.
          *
          * Parameters:
          *     $title - Title for this feed.
@@ -65,7 +65,7 @@
 
         /**
          * Function: entry
-         * Generates an individual feed item.
+         * Adds an individual feed item.
          *
          * Parameters:
          *     $title - Title for this item.
@@ -113,7 +113,7 @@
 
         /**
          * Function: category
-         * Generates a tag object for an item.
+         * Adds a tag object for an item.
          *
          * Parameters:
          *     $term - String that identifies the category.
@@ -151,7 +151,7 @@
 
         /**
          * Function: enclosure
-         * Generates an attachment object for an item.
+         * Adds an attachment object for an item.
          *
          * Parameters:
          *     $link - The URL to the resource.
@@ -194,7 +194,7 @@
 
         /**
          * Function: related
-         * Generates an external_url attribute for an item.
+         * Adds an external_url attribute for an item.
          *
          * Parameters:
          *     $link - The external URL.
@@ -222,7 +222,7 @@
 
         /**
          * Function: feed
-         * Returns the rendered feed.
+         * Returns the generated feed.
          */
         public function feed(): string {
             $encoded = json_set(
@@ -235,7 +235,7 @@
 
         /**
          * Function: output
-         * Displays the rendered feed.
+         * Displays the generated feed.
          */
         public function display(): bool {
             if (headers_sent())

@@ -1,7 +1,7 @@
 <?php
     /**
      * Class: AtomFeed
-     * Generates an Atom feed and outputs it piece by piece.
+     * Generates an Atom feed piece by piece.
      *
      * See Also:
      *     https://tools.ietf.org/html/rfc4287
@@ -12,11 +12,11 @@
         private $open = false;
 
         # Variable: $count
-        # The number of entries rendered.
+        # The number of entries generated.
         private $count = 0;
 
         # String: $xml
-        # The rendered XML.
+        # The generated XML.
         private $xml = "";
 
         /**
@@ -29,7 +29,7 @@
 
         /**
          * Function: open
-         * Outputs the opening feed element and top-level elements.
+         * Adds the opening feed element and top-level elements.
          *
          * Parameters:
          *     $title - Title for this feed.
@@ -83,7 +83,7 @@
 
         /**
          * Function: entry
-         * Outputs an individual feed entry.
+         * Adds an individual feed entry.
          *
          * Parameters:
          *     $title - Title for this entry.
@@ -164,7 +164,7 @@
 
         /**
          * Function: category
-         * Outputs a category element for an entry or feed.
+         * Adds a category element for an entry or feed.
          *
          * Parameters:
          *     $term - String that identifies the category.
@@ -194,7 +194,7 @@
 
         /**
          * Function: rights
-         * Outputs a rights element for an entry or feed.
+         * Adds a rights element for an entry or feed.
          *
          * Parameters:
          *     $text - Human-readable licensing information.
@@ -213,7 +213,7 @@
 
         /**
          * Function: enclosure
-         * Outputs a link element for a resource that is potentially large in size.
+         * Adds a link element for a resource that is potentially large in size.
          *
          * Parameters:
          *     $link - The URL to the resource.
@@ -248,7 +248,7 @@
 
         /**
          * Function: related
-         * Outputs a link element for a resource related to an entry or feed.
+         * Adds a link element for a resource related to an entry or feed.
          *
          * Parameters:
          *     $link - The URL to the resource.
@@ -269,7 +269,7 @@
 
         /**
          * Function: split
-         * Outputs a closing entry element.
+         * Adds a closing entry element.
          */
         private function split(): void {
             if (!$this->open)
@@ -281,7 +281,7 @@
 
         /**
          * Function: close
-         * Outputs the closing feed element.
+         * Adds the closing feed element.
          */
         public function close(): void {
             if (!$this->open)
@@ -294,7 +294,7 @@
 
         /**
          * Function: feed
-         * Returns the rendered feed.
+         * Returns the generated feed.
          */
         public function feed(): string {
             return $this->xml;
@@ -302,7 +302,7 @@
 
         /**
          * Function: output
-         * Displays the rendered feed.
+         * Displays the generated feed.
          */
         public function display(): bool {
             if (headers_sent())

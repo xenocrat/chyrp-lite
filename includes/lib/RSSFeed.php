@@ -1,7 +1,7 @@
 <?php
     /**
      * Class: RSSFeed
-     * Generates an RSS feed and renders it piece by piece.
+     * Generates an RSS feed piece by piece.
      *
      * See Also:
      *     http://www.rssboard.org/rss-2-0-11
@@ -12,11 +12,11 @@
         private $open = false;
 
         # Variable: $count
-        # The number of entries rendered.
+        # The number of entries generated.
         private $count = 0;
 
         # String: $xml
-        # The rendered XML.
+        # The generated XML.
         private $xml = "";
 
         /**
@@ -29,7 +29,7 @@
 
         /**
          * Function: open
-         * Renders the opening channel element and top-level elements.
+         * Adds the opening channel element and top-level elements.
          *
          * Parameters:
          *     $title - Title for this channel.
@@ -73,7 +73,7 @@
 
         /**
          * Function: entry
-         * Renders an individual feed item.
+         * Adds an individual feed item.
          *
          * Parameters:
          *     $title - Title for this item.
@@ -129,7 +129,7 @@
 
         /**
          * Function: category
-         * Renders a category element for an item.
+         * Adds a category element for an item.
          *
          * Parameters:
          *     $term - String that identifies the category.
@@ -161,7 +161,7 @@
 
         /**
          * Function: enclosure
-         * Renders an enclosure element for a resource that is potentially large in size.
+         * Adds an enclosure element for a resource that is potentially large in size.
          *
          * Parameters:
          *     $link - The URL to the resource.
@@ -196,7 +196,7 @@
 
         /**
          * Function: split
-         * Renders a closing item element.
+         * Adds a closing item element.
          */
         private function split(): void {
             if (!$this->open)
@@ -208,7 +208,7 @@
 
         /**
          * Function: close
-         * Renders the closing channel element.
+         * Adds the closing channel element.
          */
         public function close(): void {
             if (!$this->open)
@@ -222,7 +222,7 @@
 
         /**
          * Function: feed
-         * Returns the rendered feed.
+         * Returns the generated feed.
          */
         public function feed(): string {
             return $this->xml;
@@ -230,7 +230,7 @@
 
         /**
          * Function: output
-         * Displays the rendered feed.
+         * Displays the generated feed.
          */
         public function display(): bool {
             if (headers_sent())
