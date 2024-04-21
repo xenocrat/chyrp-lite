@@ -57,12 +57,6 @@
         public function related($link): void;
 
         /**
-         * Function: close
-         * Closes the feed.
-         */
-        public function close(): void;
-
-        /**
          * Function: feed
          * Returns the generated feed.
          */
