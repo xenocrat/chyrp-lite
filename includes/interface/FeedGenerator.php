@@ -14,7 +14,7 @@
          * Function: open
          * Opens the feed.
          */
-        public function open($title, $subtitle, $id, $updated): void;
+        public function open($title, $subtitle, $id, $updated): bool;
 
         /**
          * Function: entry
@@ -30,31 +30,31 @@
             $name,
             $uri,
             $email
-        ): void;
+        ): bool;
 
         /**
          * Function: category
          * Adds a category to an entry or feed.
          */
-        public function category($term, $scheme, $label): void;
+        public function category($term, $scheme, $label): bool;
 
         /**
          * Function: rights
          * Adds human-readable licensing information to an entry or feed.
          */
-        public function rights($text): void;
+        public function rights($text): bool;
 
         /**
          * Function: enclosure
          * Adds a link for a resource that is potentially large in size.
          */
-        public function enclosure($link, $length, $type, $title): void;
+        public function enclosure($link, $length, $type, $title): bool;
 
         /**
          * Function: related
          * Adds a link for a resource related to an entry or feed.
          */
-        public function related($link): void;
+        public function related($link): bool;
 
         /**
          * Function: feed
