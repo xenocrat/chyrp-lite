@@ -9,15 +9,15 @@
     class JSONFeed implements FeedGenerator {
         # Boolean: $open
         # Has the feed been opened?
-        private $open = false;
+        protected $open = false;
 
         # Variable: $count
         # The number of items generated.
-        private $count = 0;
+        protected $count = 0;
 
         # Array: $json
         # Holds the feed as a $key => $val array.
-        private $json = array();
+        protected $json = array();
 
         /**
          * Function: type
@@ -42,14 +42,11 @@
             $subtitle = "",
             $id = "",
             $updated = null
-        ): void {
+        ): bool {
             if ($this->open)
-                return;
+                return false;
 
             $language = lang_base(Config::current()->locale);
-
-            $this->open = true;
-            $this->count = 0;
 
             $this->json = array(
                 "version"       => "https://jsonfeed.org/version/1.1",
@@ -63,6 +60,7 @@
                 $this->json["description"] = strip_tags($subtitle);
 
             $this->json["items"] = array();
+            return $this->open = true;
         }
 
         /**
@@ -90,9 +88,9 @@
             $name = "",
             $uri = "",
             $email = ""
-        ): void {
+        ): bool {
             if (!$this->open)
-                return;
+                return false;
 
             $this->count++;
 
@@ -111,6 +109,7 @@
 
             $item = $this->count - 1;
             $this->json["items"][$item] = $entry;
+            return true;
         }
 
         /**
@@ -126,12 +125,12 @@
             $term,
             $scheme = "",
             $label = ""
-        ): void {
+        ): bool {
             if (!$this->open)
-                return;
+                return false;
 
-            if ($this->count == 0)
-                return;
+            if (!$this->count)
+                return false;
 
             $item = $this->count - 1;
 
@@ -141,14 +140,15 @@
             );
 
             $this->json["items"][$item]["tags"][] = $term;
+            return true;
         }
 
         /**
          * Function: rights
          * Not implemented in JSON Feed version 1.
          */
-        public function rights($text): void {
-            return;
+        public function rights($text): bool {
+            return false;
         }
 
         /**
@@ -166,12 +166,12 @@
             $length = null,
             $type = "",
             $title = ""
-        ): void {
+        ): bool {
             if (!$this->open)
-                return;
+                return false;
 
-            if ($this->count == 0)
-                return;
+            if (!$this->count)
+                return false;
 
             $item = $this->count - 1;
 
@@ -192,6 +192,7 @@
                 $attachment["title"] = $title;
 
             $this->json["items"][$item]["attachments"][] = $attachment;
+            return true;
         }
 
         /**
@@ -201,25 +202,19 @@
          * Parameters:
          *     $link - The external URL.
          */
-        public function related($link): void {
+        public function related($link): bool {
             if (!$this->open)
-                return;
+                return false;
 
-            if ($this->count == 0)
-                return;
+            if (!$this->count)
+                return false;
+
+            if (empty($link) or !is_url($link))
+                return false;
 
             $item = $this->count - 1;
-
-            if (!empty($link) and is_url($link))
-                $this->json["items"][$item]["external_url"] = $link;
-        }
-
-        /**
-         * Function: close
-         * Closes the feed.
-         */
-        public function close(): void {
-            $this->open = false;
+            $this->json["items"][$item]["external_url"] = $link;
+            return true;
         }
 
         /**
@@ -242,9 +237,6 @@
         public function display(): bool {
             if (headers_sent())
                 return false;
-
-            if ($this->open)
-                $this->close();
 
             header("Content-Type: ".self::type()."; charset=UTF-8");
             echo $this->feed();

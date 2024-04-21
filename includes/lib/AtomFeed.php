@@ -9,15 +9,15 @@
     class AtomFeed implements FeedGenerator {
         # Boolean: $open
         # Has the feed been opened?
-        private $open = false;
+        protected $open = false;
 
         # Variable: $count
         # The number of entries generated.
-        private $count = 0;
+        protected $count = 0;
 
-        # String: $xml
-        # The generated XML.
-        private $xml = "";
+        # Array: $xml
+        # Holds the feed as an array.
+        protected $xml = array();
 
         /**
          * Function: type
@@ -42,44 +42,50 @@
             $subtitle = "",
             $id = "",
             $updated = null
-        ): void {
+        ): bool {
             if ($this->open)
-                return;
+                return false;
+
+            $this->open = true;
 
             $language = lang_base(Config::current()->locale);
 
-            $this->open = true;
-            $this->count = 0;
+            $feed = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
 
-            $this->xml = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
+            $feed.= '<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="'.
+                    fix($language, true).'">'.
+                    "\n";
 
-            $this->xml.= '<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="'.
-                         fix($language, true).'">'.
-                         "\n";
-
-            $this->xml.= '<title>'.fix($title).'</title>'."\n";
+            $feed.= '<title>'.fix($title).'</title>'."\n";
 
             if (!empty($subtitle))
-                $this->xml.= '<subtitle>'.fix($subtitle).'</subtitle>'."\n";
+                $feed.= '<subtitle>'.fix($subtitle).'</subtitle>'."\n";
 
-            $this->xml.= '<id>'.fix(oneof($id, self_url())).'</id>'."\n";
+            $feed.= '<id>'.fix(oneof($id, self_url())).'</id>'."\n";
 
-            $this->xml.= '<updated>'.
-                         when(DATE_ATOM, oneof($updated, time())).
-                         '</updated>'.
-                         "\n";
+            $feed.= '<updated>'.
+                    when(DATE_ATOM, oneof($updated, time())).
+                    '</updated>'.
+                    "\n";
 
-            $this->xml.= '<link href="'.
-                         self_url().
-                         '" rel="self" type="application/atom+xml" />'.
-                         "\n";
+            $feed.= '<link href="'.
+                    self_url().
+                    '" rel="self" type="application/atom+xml" />'.
+                    "\n";
 
-            $this->xml.= '<generator uri="http://chyrplite.net/" version="'.
-                         CHYRP_VERSION.
-                         '">'.
-                         CHYRP_IDENTITY.
-                         '</generator>'.
-                         "\n";
+            $feed.= '<generator uri="http://chyrplite.net/" version="'.
+                    CHYRP_VERSION.
+                    '">'.
+                    CHYRP_IDENTITY.
+                    '</generator>'.
+                    "\n";
+
+            $this->xml = array(
+                "feed" => $feed,
+                "items" => array()
+            );
+
+            return $this->open = true;
         }
 
         /**
@@ -110,57 +116,57 @@
             $name = "",
             $uri = "",
             $email = ""
-        ): void {
+        ): bool {
             if (!$this->open)
-                return;
-
-            $this->split();
-
-            $this->xml.= '<entry>'."\n";
-
-            $this->xml.= '<title type="html">'.
-                         fix($title, false, true).
-                         '</title>'.
-                         "\n";
-
-            $this->xml.= '<id>'.fix($id).'</id>'."\n";
-
-            $this->xml.= '<updated>'.
-                         when(DATE_ATOM, oneof($updated, $published)).
-                         '</updated>'.
-                         "\n";
-
-            $this->xml.= '<published>'.
-                         when(DATE_ATOM, $published).
-                         '</published>'.
-                         "\n";
-
-            $this->xml.= '<link rel="alternate" type="text/html" href="'.
-                         fix($link, true).
-                         '" />'.
-                         "\n";
-
-            $this->xml.= '<author>'."\n";
-
-            $this->xml.= '<name>'.
-                         fix(oneof($name, __("Guest"))).
-                         '</name>'.
-                         "\n";
-
-            if (!empty($uri) and is_url($uri))
-                $this->xml.= '<uri>'.fix($uri).'</uri>'."\n";
-
-            if (!empty($email) and is_email($email))
-                $this->xml.= '<email>'.fix($email).'</email>'."\n";
-
-            $this->xml.= '</author>'."\n";
-
-            $this->xml.= '<content type="html">'.
-                         fix($content, false, true).
-                         '</content>'.
-                         "\n";
+                return false;
 
             $this->count++;
+
+            $entry = '<title type="html">'.
+                     fix($title, false, true).
+                     '</title>'.
+                     "\n";
+
+            $entry.= '<id>'.fix($id).'</id>'."\n";
+
+            $entry.= '<updated>'.
+                     when(DATE_ATOM, oneof($updated, $published)).
+                     '</updated>'.
+                     "\n";
+
+            $entry.= '<published>'.
+                     when(DATE_ATOM, $published).
+                     '</published>'.
+                     "\n";
+
+            $entry.= '<link rel="alternate" type="text/html" href="'.
+                     fix($link, true).
+                     '" />'.
+                     "\n";
+
+            $entry.= '<author>'."\n";
+
+            $entry.= '<name>'.
+                     fix(oneof($name, __("Guest"))).
+                     '</name>'.
+                     "\n";
+
+            if (!empty($uri) and is_url($uri))
+                $entry.= '<uri>'.fix($uri).'</uri>'."\n";
+
+            if (!empty($email) and is_email($email))
+                $entry.= '<email>'.fix($email).'</email>'."\n";
+
+            $entry.= '</author>'."\n";
+
+            $entry.= '<content type="html">'.
+                     fix($content, false, true).
+                     '</content>'.
+                     "\n";
+
+            $item = $this->count - 1;
+            $this->xml["items"][$item] = $entry;
+            return true;
         }
 
         /**
@@ -176,9 +182,9 @@
             $term,
             $scheme = "",
             $label = ""
-        ): void {
+        ): bool {
             if (!$this->open)
-                return;
+                return false;
 
             $category = '<category term="'.
                         fix($term, true).
@@ -190,7 +196,16 @@
             if (!empty($label))
                 $category.= ' label="'.fix($label, true).'"';
 
-            $this->xml.= $category.' />'."\n";
+            $category.= ' />'."\n";
+
+            if (!$this->count) {
+                $this->xml["feed"].= $category;
+            } else {
+                $item = $this->count - 1;
+                $this->xml["items"][$item].= $category;
+            }
+
+            return true;
         }
 
         /**
@@ -202,14 +217,23 @@
          */
         public function rights(
             $text
-        ): void {
+        ): bool {
             if (!$this->open)
-                return;
+                return false;
 
-            $this->xml.= '<rights>'.
-                         fix($text, false, true).
-                         '</rights>'.
-                         "\n";
+            $rights = '<rights>'.
+                      fix($text, false, true).
+                      '</rights>'.
+                      "\n";
+
+            if (!$this->count) {
+                $this->xml["feed"].= $rights;
+            } else {
+                $item = $this->count - 1;
+                $this->xml["items"][$item].= $rights;
+            }
+
+            return true;
         }
 
         /**
@@ -227,9 +251,9 @@
             $length = null,
             $type = "",
             $title = ""
-        ): void {
+        ): bool {
             if (!$this->open)
-                return;
+                return false;
 
             $enclosure = '<link rel="enclosure" href="'.
                          fix($link, true).
@@ -244,7 +268,16 @@
             if (!empty($title))
                 $enclosure.= ' title="'.fix($title, true).'"';
 
-            $this->xml.= $enclosure.' />'."\n";
+            $enclosure.= ' />'."\n";
+
+            if (!$this->count) {
+                $this->xml["feed"].= $enclosure;
+            } else {
+                $item = $this->count - 1;
+                $this->xml["items"][$item].= $enclosure;
+            }
+
+            return true;
         }
 
         /**
@@ -256,41 +289,26 @@
          */
         public function related(
             $link
-        ): void {
+        ): bool {
             if (!$this->open)
-                return;
+                return false;
 
-            if (!empty($link) and is_url($link)) {
-                $this->xml.= '<link rel="related" href="'.
-                             fix($link, true).
-                             '" />'.
-                             "\n";
+            if (empty($link) or !is_url($link))
+                return false;
+
+            $related = '<link rel="related" href="'.
+                       fix($link, true).
+                       '" />'.
+                       "\n";
+
+            if (!$this->count) {
+                $this->xml["feed"].= $related;
+            } else {
+                $item = $this->count - 1;
+                $this->xml["items"][$item].= $related;
             }
-        }
 
-        /**
-         * Function: split
-         * Adds a closing entry element.
-         */
-        private function split(): void {
-            if (!$this->open)
-                return;
-
-            if ($this->count > 0)
-                $this->xml.= '</entry>'."\n";
-        }
-
-        /**
-         * Function: close
-         * Adds the closing feed element.
-         */
-        public function close(): void {
-            if (!$this->open)
-                return;
-
-            $this->split();
-            $this->xml.= '</feed>'."\n";
-            $this->open = false;
+            return true;
         }
 
         /**
@@ -298,7 +316,17 @@
          * Returns the generated feed.
          */
         public function feed(): string {
-            return $this->xml;
+            $feed = $this->xml["feed"];
+            $items = $this->xml["items"];
+
+            foreach ($items as $item) {
+                $feed.= '<entry>'."\n".
+                        $item.
+                        '</entry>'."\n";
+            }
+
+            $feed.= '</feed>'."\n";
+            return $feed;
         }
 
         /**
@@ -308,9 +336,6 @@
         public function display(): bool {
             if (headers_sent())
                 return false;
-
-            if ($this->open)
-                $this->close();
 
             header("Content-Type: ".self::type()."; charset=UTF-8");
             echo $this->feed();
