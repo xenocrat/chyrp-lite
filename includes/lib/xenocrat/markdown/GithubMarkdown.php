@@ -29,7 +29,7 @@ class GithubMarkdown extends Markdown
 	public $enableNewlines = false;
 
 	/**
-	 * Consume lines for a paragraph.
+	 * @inheritDoc
 	 *
 	 * Allow other block types to break paragraphs.
 	 */

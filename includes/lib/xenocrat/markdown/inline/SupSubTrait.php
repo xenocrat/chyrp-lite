@@ -19,6 +19,7 @@ trait SupSubTrait
 
 	/**
 	 * Parses the superscript feature.
+	 *
 	 * @marker ++
 	 */
 	protected function parseSup($markdown): array
@@ -55,7 +56,8 @@ trait SupSubTrait
 
 	/**
 	 * Parses the subscript feature.
-	 * @marker ~~
+	 *
+	 * @marker --
 	 */
 	protected function parseSub($markdown): array
 	{

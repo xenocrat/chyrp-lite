@@ -19,6 +19,7 @@ trait EmphStrongTrait
 
 	/**
 	 * Parses emphasized and strong elements.
+	 *
 	 * @marker _
 	 * @marker *
 	 */

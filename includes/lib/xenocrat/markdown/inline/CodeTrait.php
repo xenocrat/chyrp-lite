@@ -19,6 +19,7 @@ trait CodeTrait
 
 	/**
 	 * Parses an inline code span `` ` ``.
+	 *
 	 * @marker `
 	 */
 	protected function parseInlineCode($text): array

@@ -19,6 +19,7 @@ trait AutoLinkTrait
 
 	/**
 	 * Parses urls and adds auto linking feature.
+	 *
 	 * @marker www.
 	 * @marker http
 	 */

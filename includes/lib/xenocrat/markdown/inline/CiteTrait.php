@@ -19,6 +19,7 @@ trait CiteTrait
 
 	/**
 	 * Parses the cite feature.
+	 *
 	 * @marker *_
 	 */
 	protected function parseCite($markdown): array

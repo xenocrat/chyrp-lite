@@ -74,7 +74,7 @@ class Markdown extends Parser
 	}
 
 	/**
-	 * Consume lines for a paragraph.
+	 * @inheritDoc
 	 *
 	 * Allow other block types to break paragraphs.
 	 */

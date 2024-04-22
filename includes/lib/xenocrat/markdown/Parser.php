@@ -35,14 +35,10 @@ abstract class Parser
 	public $html5 = false;
 
 	/**
-	 * @var string Optional context identifier for this instance.
+	 * @var string Optional identifier string for the rendering context.
+	 * Traits use this string to prefix `id` attributes in rendered HTML.
 	 */
 	public $contextId = '';
-
-	/**
-	 * @var array The current context the parser is in.
-	 */
-	protected $context = [];
 
 	/**
 	 * @var array These are "escapeable" characters.
@@ -53,6 +49,14 @@ abstract class Parser
 		'\\', // backslash
 	];
 
+	/**
+	 * @var array The parser's current context.
+	 */
+	protected $context = [];
+
+	/**
+	 * @var integer The parser's current nesting level.
+	 */
 	private $_depth = 0;
 
 	/**
@@ -162,11 +166,12 @@ abstract class Parser
 
 	/**
 	 * Detect registered block types.
-	 * @return array a list of block element types available.
 	 *
 	 * You can bust the alphabetical sort/call strategy with a `Priority` method
 	 * matching the identify method name, returning a different string to compare.
 	 * E.g. identifyUl() and identifyUlPriority().
+	 *
+	 * @return array a list of block element types available.
 	 */
 	protected function blockTypes(): array
 	{
@@ -207,6 +212,7 @@ abstract class Parser
 	/**
 	 * Given a set of lines and an index of a current line it uses
 	 * the registered block types to detect the type of this line.
+	 *
 	 * @param array $lines
 	 * @param integer $current
 	 * @return string name of the block type in lower case
@@ -227,6 +233,9 @@ abstract class Parser
 	/**
 	 * Parse block elements by calling `detectLineType()` to identify them
 	 * and call consume function afterwards.
+	 *
+	 * @param array $lines
+	 * @return array
 	 */
 	protected function parseBlocks($lines): array
 	{
@@ -258,11 +267,12 @@ abstract class Parser
 	/**
 	 * Parses the block at current line by identifying the block type
 	 * and parsing the content.
+	 *
 	 * @param $lines
 	 * @param $current
 	 * @return array Array of two elements:
-	 * 			(array) the parsed block;
-	 * 			(int) the the next line index to be parsed.
+	 * 	(array) the parsed block;
+	 * 	(int) the the next line index to be parsed.
 	 */
 	protected function parseBlock($lines, $current): array
 	{
@@ -274,6 +284,12 @@ abstract class Parser
 		return $this->{'consume' . $blockType}($lines, $current);
 	}
 
+	/**
+	 * Renders a Markdown abstract syntax tree as HTML.
+	 *
+	 * @param array $blocks
+	 * @return string
+	 */
 	protected function renderAbsy($blocks): string
 	{
 		$output = '';
@@ -288,8 +304,8 @@ abstract class Parser
 	/**
 	 * Consume lines for a paragraph.
 	 *
-	 * @param $lines
-	 * @param $current
+	 * @param array $lines
+	 * @param integer $current
 	 * @return array
 	 */
 	protected function consumeParagraph($lines, $current): array
@@ -313,7 +329,7 @@ abstract class Parser
 	/**
 	 * Render a paragraph block.
 	 *
-	 * @param $block
+	 * @param array $block
 	 * @return string
 	 */
 	protected function renderParagraph($block): string
@@ -368,8 +384,6 @@ abstract class Parser
 	/**
 	 * Prepare markers that are used in the text to parse.
 	 *
-	 * Add all markers that are present in markdown.
-	 * Check is done to avoid iterations in parseInline(), good for huge markdown files
 	 * @param string $text
 	 */
 	protected function prepareMarkers($text): void
@@ -458,13 +472,16 @@ abstract class Parser
 
 	/**
 	 * Parses escaped special characters.
+	 *
 	 * @marker \
 	 */
 	protected function parseEscape($text): array
 	{
-		if (isset($text[1]) && in_array($text[1], $this->escapeCharacters)) {
-			$ent = $this->html5 ? ENT_HTML5 : ENT_HTML401 ;
-			$chr = htmlspecialchars($text[1], ENT_COMPAT | $ent, 'UTF-8');
+		if (
+			isset($text[1])
+			&& in_array($text[1], $this->escapeCharacters)
+		) {
+			$chr = $this->escapeHtmlEntities($text[1], ENT_COMPAT);
 			return [['text', $chr], 2];
 		}
 		return [['text', $text[0]], 1];
@@ -481,8 +498,24 @@ abstract class Parser
 	}
 
 	/**
+	 * Add backslash to escapeable characters in text.
+	 *
+	 * @param string $text
+	 * @return string
+	 */
+	protected function escapeBackslash($text): string
+	{
+		$strtr = [];
+		foreach($this->escapeCharacters as $chr) {
+			$strtr[$chr] = "\\$chr";
+		}
+		return strtr($text, $strtr);
+	}
+
+	/**
 	 * Remove backslash from escaped characters in text.
-	 * @param $text
+	 *
+	 * @param string $text
 	 * @return string
 	 */
 	protected function unEscapeBackslash($text): string
@@ -496,14 +529,31 @@ abstract class Parser
 
 	/**
 	 * Encode HTML special characters as HTML entities.
-	 * @param $text
-	 * @param int $flags htmlspecialchars bitmask.
+	 *
+	 * @param string $text
+	 * @param integer $flags
 	 * @return string
+	 * @see https://www.php.net/manual/en/function.htmlspecialchars
 	 */
 	protected function escapeHtmlEntities($text, $flags = 0): string
 	{
 		$ent = $this->html5 ? ENT_HTML5 : ENT_HTML401;
 		$text = htmlspecialchars($text, $flags | $ent, 'UTF-8');
+		return $text;
+	}
+
+	/**
+	 * Decode HTML entities to corresponding characters.
+	 *
+	 * @param string $text
+	 * @param integer $flags
+	 * @return string
+	 * @see https://www.php.net/manual/en/function.html-entity-decode
+	 */
+	protected function unEscapeHtmlEntities($text, $flags = 0): string
+	{
+		$ent = $this->html5 ? ENT_HTML5 : ENT_HTML401;
+		$text = html_entity_decode($text, $flags | $ent, 'UTF-8');
 		return $text;
 	}
 }

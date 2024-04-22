@@ -34,6 +34,7 @@ trait LinkTrait
 
 	/**
 	 * Parses a link indicated by `[`.
+	 *
 	 * @marker [
 	 */
 	protected function parseLink($markdown): array
@@ -73,6 +74,7 @@ trait LinkTrait
 
 	/**
 	 * Parses an image indicated by `![`.
+	 *
 	 * @marker ![
 	 */
 	protected function parseImage($markdown): array
@@ -176,6 +178,7 @@ REGEXP;
 
 	/**
 	 * Parses bracketed URL or email.
+	 *
 	 * @marker <
 	 */
 	protected function parseBracketedLink($text): array

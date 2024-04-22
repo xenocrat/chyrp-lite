@@ -19,6 +19,7 @@ trait HighlightTrait
 
 	/**
 	 * Parses the highlight feature.
+	 *
 	 * @marker ==
 	 */
 	protected function parseHighlight($markdown): array

@@ -225,6 +225,7 @@ trait HtmlTrait
 
 	/**
 	 * Parses an & or a html entity definition.
+	 *
 	 * @marker &
 	 */
 	protected function parseEntity($text): array
@@ -258,6 +259,7 @@ trait HtmlTrait
 
 	/**
 	 * Parses inline HTML.
+	 *
 	 * @marker <
 	 */
 	protected function parseLt($text): array
@@ -303,6 +305,7 @@ trait HtmlTrait
 
 	/**
 	 * Escapes `>` characters.
+	 *
 	 * @marker >
 	 */
 	protected function parseGt($text): array
@@ -317,6 +320,7 @@ trait HtmlTrait
 
 	/**
 	 * Escapes `"` characters.
+	 *
 	 * @marker "
 	 */
 	protected function parseDoubleQuote($text): array

@@ -19,6 +19,7 @@ trait StrikeoutTrait
 
 	/**
 	 * Parses the strikethrough feature.
+	 *
 	 * @marker ~
 	 */
 	protected function parseStrike($markdown): array

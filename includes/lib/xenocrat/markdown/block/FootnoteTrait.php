@@ -46,6 +46,7 @@ trait FootnoteTrait
 
 	/**
 	 * Add footnotes' HTML to the end of parsed HTML.
+	 *
 	 * @param string $html The HTML output of Markdown::parse().
 	 * @return string
 	 */
@@ -95,7 +96,11 @@ trait FootnoteTrait
 		if (empty($footnotesSorted)) {
 			return '';
 		}
-		$prefix = !empty($this->contextId) ? $this->contextId . '-' : '' ;
+
+		$prefix = empty($this->contextId) ?
+			'' :
+			$this->contextId . '-';
+
 		$hr = $this->html5 ? "<hr>\n" : "<hr />\n";
 		$footnotesHtml = "<div class=\"footnotes\" role=\"doc-endnotes\">\n$hr<ol>\n";
 		foreach ($footnotesSorted as $footnoteInfo) {
@@ -179,6 +184,7 @@ trait FootnoteTrait
 
 	/**
 	 * Parses a footnote link indicated by `[^`.
+	 *
 	 * @marker [^
 	 * @param $text
 	 * @return array
@@ -218,7 +224,10 @@ trait FootnoteTrait
 	 */
 	protected function renderFootnoteLink($block): string
 	{
-		$prefix = !empty($this->contextId) ? $this->contextId . '-' : '' ;
+		$prefix = empty($this->contextId) ?
+			'' :
+			$this->contextId . '-';
+
 		$objChr = "\u{FFFC}";
 
 		$substituteRefnum = $objChr

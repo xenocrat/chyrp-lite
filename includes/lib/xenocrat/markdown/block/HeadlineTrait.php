@@ -13,6 +13,11 @@ namespace xenocrat\markdown\block;
 trait HeadlineTrait
 {
 	/**
+	 * @var bool Generate an `id` attribute for headline anchors.
+	 */
+	public $headlineAnchors = false;
+
+	/**
 	 * Bust the alphabetical calling strategy.
 	 */
 	protected function identifyHeadlinePriority(): string
@@ -73,9 +78,60 @@ trait HeadlineTrait
 	protected function renderHeadline($block): string
 	{
 		$tag = 'h' . $block['level'];
-		return "<$tag>"
-			. $this->renderAbsy($block['content'])
-			. "</$tag>\n";
+		$id = '';
+		$content = $this->renderAbsy($block['content']);
+
+		if (
+			$this->headlineAnchors
+			&& class_exists('\\IntlChar')
+			&& function_exists('mb_str_split')
+			&& function_exists('mb_convert_case')
+		) {
+			$str = $this->unEscapeHtmlEntities(
+				strip_tags($content),
+				ENT_QUOTES | ENT_SUBSTITUTE
+			);
+
+			$exploded = mb_str_split($str, 1, 'UTF-8');
+
+			foreach ($exploded as $chr) {
+				$type = \IntlChar::charType($chr);
+				if (
+					$chr === ' ' || $chr === '-' || $chr === '_'
+					|| $type === \IntlChar::CHAR_CATEGORY_UPPERCASE_LETTER
+					|| $type === \IntlChar::CHAR_CATEGORY_LOWERCASE_LETTER
+					|| $type === \IntlChar::CHAR_CATEGORY_TITLECASE_LETTER
+					|| $type === \IntlChar::CHAR_CATEGORY_MODIFIER_LETTER
+					|| $type === \IntlChar::CHAR_CATEGORY_OTHER_LETTER
+					|| $type === \IntlChar::CHAR_CATEGORY_DECIMAL_DIGIT_NUMBER
+					|| $type === \IntlChar::CHAR_CATEGORY_LETTER_NUMBER
+					|| $type === \IntlChar::CHAR_CATEGORY_CONNECTOR_PUNCTUATION
+					|| $type === \IntlChar::CHAR_CATEGORY_NON_SPACING_MARK
+					|| $type === \IntlChar::CHAR_CATEGORY_ENCLOSING_MARK
+					|| $type === \IntlChar::CHAR_CATEGORY_COMBINING_SPACING_MARK
+				) {
+					$id .= ($chr === ' ') ?
+						'-' :
+						mb_convert_case($chr, MB_CASE_LOWER, 'UTF-8');
+				}
+			}
+
+			if ($id !== '') {
+				$prefix = empty($this->contextId) ?
+					'' :
+					$this->contextId . '-';
+
+				$id = ' id="'
+					. $prefix
+					. $this->escapeHtmlEntities(
+						$id,
+						ENT_COMPAT | ENT_SUBSTITUTE
+					)
+					. '"';
+			}
+		}
+
+		return "<{$tag}{$id}>{$content}</{$tag}>\n";
 	}
 
 	abstract protected function parseInline($text);

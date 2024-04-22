@@ -37,7 +37,7 @@ class ChyrpMarkdown extends GithubMarkdown
 	}
 
 	/**
-	 * Consume lines for a paragraph.
+	 * @inheritDoc
 	 *
 	 * Allow other block types to break paragraphs.
 	 */
@@ -80,10 +80,9 @@ class ChyrpMarkdown extends GithubMarkdown
 	}
 
 	/**
-	 * Add parsed footnotes and then post-processes markup after parsing.
+	 * @inheritDoc
 	 *
-	 * @param string $markup parsed markup
-	 * @return string post-processed markup
+	 * Add parsed footnotes and then post-processes markup after parsing.
 	 */
 	function postprocess($markup): string
 	{
