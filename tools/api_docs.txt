@@ -2972,11 +2972,6 @@ Function: related
 Adds a link for a resource related to an entry or feed.
 
 
-Function: close
----------------
-Closes the feed.
-
-
 Function: feed
 --------------
 Returns the generated feed.
@@ -3071,16 +3066,6 @@ Parameters:
     $link - The URL to the resource.
 
 
-Function: split
----------------
-Adds a closing entry element.
-
-
-Function: close
----------------
-Adds the closing feed element.
-
-
 Function: feed
 --------------
 Returns the generated feed.
@@ -3167,11 +3152,6 @@ Adds an external_url attribute for an item.
 
 Parameters:
     $link - The external URL.
-
-
-Function: close
----------------
-Closes the feed.
 
 
 Function: feed
@@ -3503,16 +3483,6 @@ Parameters:
 Function: related
 -----------------
 Not implemented in RSS 2.0.11.
-
-
-Function: split
----------------
-Adds a closing item element.
-
-
-Function: close
----------------
-Adds the closing channel element.
 
 
 Function: feed
