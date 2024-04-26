@@ -224,7 +224,7 @@ trait HtmlTrait
 	}
 
 	/**
-	 * Parses an & or a html entity definition.
+	 * Parses an & or a HTML entity definition.
 	 *
 	 * @marker &
 	 */
@@ -238,18 +238,34 @@ trait HtmlTrait
 				$matches
 			)
 		) {
-			return [['lt', $matches[0]], strlen($matches[0])];
+			return [['entity', $matches[0]], strlen($matches[0])];
 		} else {
 			return [['text', '&amp;'], 1];
 		}
 	}
 
 	/**
-	 * Renders a html entity.
+	 * Renders a HTML entity definition.
 	 */
-	protected function renderLt($block): string
+	protected function renderEntity($block): string
 	{
-		return $block[1];
+		$chr = $this->unEscapeHtmlEntities(
+			$block[1],
+			ENT_QUOTES | ENT_SUBSTITUTE
+		);
+
+		switch ($chr) {
+			case '&':
+				return '&amp;';
+			case '<':
+				return '&lt;';
+			case '>':
+				return '&gt;';
+			case '"':
+				return '&quot;';
+			default:
+				return $chr;
+		}
 	}
 
 	protected function parseLtMarkers(): array
@@ -296,6 +312,14 @@ trait HtmlTrait
 			}
 		}
 		return [['text', '&lt;'], 1];
+	}
+
+	/**
+	 * Renders inline HTML.
+	 */
+	protected function renderLt($block): string
+	{
+		return $block[1];
 	}
 
 	protected function parseGtMarkers(): array
