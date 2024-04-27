@@ -27,7 +27,7 @@ trait HeadlineTrait
 	public $headlineAnchors = false;
 
 	/**
-	 * @var string[] Incrementing counter of rendered anchor links.
+	 * @var int[] Incrementing counter of rendered anchor links.
 	 */
 	protected $headlineAnchorLinks = [];
 
