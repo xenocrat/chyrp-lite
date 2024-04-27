@@ -71,6 +71,9 @@ class Markdown extends Parser
 	{
 		// reset references
 		$this->references = [];
+
+		// reset anchor links
+		$this->headlineAnchorLinks = [];
 	}
 
 	/**

@@ -9,6 +9,15 @@ namespace xenocrat\markdown\block;
 
 /**
  * Adds headline blocks.
+ * 
+ * Make sure to reset anchor link counter on prepare():
+ *
+ * ```php
+ * protected function prepare()
+ * {
+ *		$this->headlineAnchorLinks = [];
+ * }
+ * ```
  */
 trait HeadlineTrait
 {
@@ -16,6 +25,11 @@ trait HeadlineTrait
 	 * @var bool Generate an `id` attribute for headline anchors.
 	 */
 	public $headlineAnchors = false;
+
+	/**
+	 * @var string[] Incrementing counter of rendered anchor links.
+	 */
+	protected $headlineAnchorLinks = [];
 
 	/**
 	 * Bust the alphabetical calling strategy.
@@ -120,6 +134,12 @@ trait HeadlineTrait
 				$prefix = empty($this->contextId) ?
 					'' :
 					$this->contextId . '-';
+
+				while (isset($this->headlineAnchorLinks[$id])) {
+					$id .= '-' . $this->headlineAnchorLinks[$id]++;
+				}
+
+				$this->headlineAnchorLinks[$id] = 1;
 
 				$id = ' id="'
 					. $prefix

@@ -27,8 +27,7 @@ class ChyrpMarkdown extends GithubMarkdown
 	 */
 	protected function prepare(): void
 	{
-		// reset references
-		$this->references = [];
+		parent::prepare();
 
 		// reset footnote properties
 		$this->footnotes = [];

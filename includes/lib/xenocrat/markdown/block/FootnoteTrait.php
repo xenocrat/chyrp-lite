@@ -15,7 +15,6 @@ namespace xenocrat\markdown\block;
  * ```php
  * protected function prepare()
  * {
- *		// reset footnote properties
  *		$this->footnotes = [];
  *		$this->footnoteLinkNum = 0;
  *		$this->footnoteLinks = [];
@@ -24,14 +23,19 @@ namespace xenocrat\markdown\block;
  */
 trait FootnoteTrait
 {
-
-	/** @var string[][] Unordered array of footnotes. */
+	/**
+	 * @var string[][] Unordered array of footnotes.
+	 */
 	protected $footnotes = [];
 
-	/** @var int Incrementing counter of the footnote links. */
+	/**
+	 * @var int Incrementing counter of the footnote links.
+	 */
 	protected $footnoteLinkNum = 0;
 
-	/** @var string[] Ordered array of footnote links. */
+	/**
+	 * @var string[] Ordered array of footnote links.
+	 */
 	protected $footnoteLinks = [];
 
 	/**

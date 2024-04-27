@@ -15,7 +15,6 @@ namespace xenocrat\markdown\inline;
  * ```php
  * protected function prepare()
  * {
- *     // reset references
  *     $this->references = [];
  * }
  * ```
