@@ -15,7 +15,7 @@ namespace xenocrat\markdown\inline;
  * ```php
  * protected function prepare()
  * {
- *     $this->references = [];
+ * 	$this->references = [];
  * }
  * ```
  */

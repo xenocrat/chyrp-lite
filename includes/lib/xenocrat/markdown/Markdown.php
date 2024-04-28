@@ -8,8 +8,9 @@
 namespace xenocrat\markdown;
 
 /**
- * Markdown parser for [CommonMark](https://spec.commonmark.org/).
+ * Markdown parser for CommonMark.
  *
+ * @see https://spec.commonmark.org/
  * @author Carsten Brandt <mail@cebe.cc>
  */
 class Markdown extends Parser

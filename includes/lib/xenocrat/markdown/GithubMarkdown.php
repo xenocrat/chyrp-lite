@@ -8,8 +8,9 @@
 namespace xenocrat\markdown;
 
 /**
- * Markdown parser for [GitHub-Flavored Markdown](https://github.github.com/gfm/).
+ * Markdown parser for GitHub-Flavored Markdown.
  *
+ * @see https://github.github.com/gfm/
  * @author Carsten Brandt <mail@cebe.cc>
  */
 class GithubMarkdown extends Markdown

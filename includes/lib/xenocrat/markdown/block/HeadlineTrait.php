@@ -15,7 +15,7 @@ namespace xenocrat\markdown\block;
  * ```php
  * protected function prepare()
  * {
- *		$this->headlineAnchorLinks = [];
+ * 	$this->headlineAnchorLinks = [];
  * }
  * ```
  */
@@ -131,9 +131,9 @@ trait HeadlineTrait
 			}
 
 			if ($id !== '') {
-				$prefix = empty($this->contextId) ?
+				$prefix = ($this->getContextId() === '') ?
 					'' :
-					$this->contextId . '-';
+					$this->getContextId() . '-';
 
 				while (isset($this->headlineAnchorLinks[$id])) {
 					$id .= '-' . $this->headlineAnchorLinks[$id]++;

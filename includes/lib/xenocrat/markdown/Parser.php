@@ -35,12 +35,6 @@ abstract class Parser
 	public $html5 = false;
 
 	/**
-	 * @var string Optional identifier string for the rendering context.
-	 * Traits use this string to prefix `id` attributes in rendered HTML.
-	 */
-	public $contextId = '';
-
-	/**
 	 * @var array These are "escapeable" characters.
 	 * When using one of these prefixed with a backslash, the character is
 	 * not interpreted as markdown and will be outputted without backslash.
@@ -58,6 +52,11 @@ abstract class Parser
 	 * @var integer The parser's current nesting level.
 	 */
 	private $_depth = 0;
+
+	/**
+	 * @var string Identifier string for this rendering context.
+	 */
+	public $contextId = ''; // will be private in v3.0!
 
 	/**
 	 * Parses the given text considering the full language.
@@ -142,6 +141,33 @@ abstract class Parser
 		$markup = str_replace("\0", $safeChr, $markup);
 		$markup = preg_replace('/&#[Xx]?0+;/', $safeChr, $markup);
 		return $markup;
+	}
+
+	/**
+	 * Get the identifier string for this rendering context.
+	 *
+	 * @return string the identifier string
+	 */
+	public function getContextId(): string
+	{
+		return $this->contextId;
+	}
+
+	/**
+	 * Set the identifier string for this rendering context.
+	 *
+	 * @param string $string contextId to set
+	 * @return string the new identifier string
+	 */
+	public function setContextId($string): string
+	{
+		$id = str_replace(
+			['&', '<', '>', '"'],
+			'',
+			strval($string)
+		);
+
+		return $this->contextId = $id;
 	}
 
 	/**

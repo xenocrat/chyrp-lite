@@ -8,7 +8,9 @@
 namespace xenocrat\markdown;
 
 /**
- * Markdown parser for [Chyrp-Flavoured Markdown](https://chyrplite.net/wiki/Chyrp-Flavoured-Markdown.html).
+ * Markdown parser for Chyrp-Flavoured Markdown.
+ *
+ * @see https://chyrplite.net/wiki/Chyrp-Flavoured-Markdown.html
  */
 class ChyrpMarkdown extends GithubMarkdown
 {
@@ -85,6 +87,8 @@ class ChyrpMarkdown extends GithubMarkdown
 	 */
 	function postprocess($markup): string
 	{
-		return parent::postprocess($this->addParsedFootnotes($markup));
+		return parent::postprocess(
+			$this->addParsedFootnotes($markup)
+		);
 	}
 }

@@ -15,9 +15,20 @@ namespace xenocrat\markdown\block;
  * ```php
  * protected function prepare()
  * {
- *		$this->footnotes = [];
- *		$this->footnoteLinkNum = 0;
- *		$this->footnoteLinks = [];
+ * 	$this->footnotes = [];
+ * 	$this->footnoteLinkNum = 0;
+ * 	$this->footnoteLinks = [];
+ * }
+ * ```
+ *
+ * Make sure to add parsed footnotes on postprocess():
+ *
+ * ```php
+ * protected function prepare()
+ * {
+ * 	return parent::postprocess(
+ * 		$this->addParsedFootnotes($markup)
+ * 	);
  * }
  * ```
  */
@@ -101,9 +112,9 @@ trait FootnoteTrait
 			return '';
 		}
 
-		$prefix = empty($this->contextId) ?
+		$prefix = ($this->getContextId() === '') ?
 			'' :
-			$this->contextId . '-';
+			$this->getContextId() . '-';
 
 		$hr = $this->html5 ? "<hr>\n" : "<hr />\n";
 		$footnotesHtml = "<div class=\"footnotes\" role=\"doc-endnotes\">\n$hr<ol>\n";
@@ -228,9 +239,9 @@ trait FootnoteTrait
 	 */
 	protected function renderFootnoteLink($block): string
 	{
-		$prefix = empty($this->contextId) ?
+		$prefix = ($this->getContextId() === '') ?
 			'' :
-			$this->contextId . '-';
+			$this->getContextId() . '-';
 
 		$objChr = "\u{FFFC}";
 
