@@ -23,6 +23,22 @@ class GithubMarkdown extends Markdown
 	use inline\AutoLinkTrait;
 
 	/**
+	 * @inheritDoc
+	 */
+	protected $blockPriorities = [
+		'Hr',
+		'Ul',
+		'Code',
+		'FencedCode',
+		'Html',
+		'Ol',
+		'Quote',
+		'Reference',
+		'Table',
+		'Headline',
+	];
+
+	/**
 	 * @var boolean Whether to interpret newlines as `<br />` tags.
 	 *
 	 * This feature is useful for comments where newlines are often

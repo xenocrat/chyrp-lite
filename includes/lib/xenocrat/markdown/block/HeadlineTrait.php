@@ -32,14 +32,6 @@ trait HeadlineTrait
 	protected $headlineAnchorLinks = [];
 
 	/**
-	 * Bust the alphabetical calling strategy.
-	 */
-	protected function identifyHeadlinePriority(): string
-	{
-		return 'zHeadline';
-	}
-
-	/**
 	 * Identify a line as a headline.
 	 */
 	protected function identifyHeadline($line, $lines, $current): bool

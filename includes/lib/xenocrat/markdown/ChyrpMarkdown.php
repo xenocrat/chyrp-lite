@@ -27,6 +27,25 @@ class ChyrpMarkdown extends GithubMarkdown
 	/**
 	 * @inheritDoc
 	 */
+	protected $blockPriorities = [
+		'Hr',
+		'Aside',
+		'Ul',
+		'Code',
+		'FencedCode',
+		'Figure',
+		'FootnoteList',
+		'Html',
+		'Ol',
+		'Quote',
+		'Reference',
+		'Table',
+		'Headline',
+	];
+
+	/**
+	 * @inheritDoc
+	 */
 	protected function prepare(): void
 	{
 		parent::prepare();

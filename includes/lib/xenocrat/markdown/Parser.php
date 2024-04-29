@@ -15,8 +15,8 @@ use ReflectionMethod;
  */
 abstract class Parser
 {
-	const VERSION_MAJOR = 2;
-	const VERSION_MINOR = 2;
+	const VERSION_MAJOR = 3;
+	const VERSION_MINOR = 0;
 
 	/**
 	 * @var integer - The maximum nesting level for language elements.
@@ -46,6 +46,11 @@ abstract class Parser
 	];
 
 	/**
+	 * @var array - Predefined call order for block identifier methods.
+	 */
+	protected $blockPriorities = [];
+
+	/**
 	 * @var array - The parser's current context.
 	 */
 	protected $context = [];
@@ -58,7 +63,7 @@ abstract class Parser
 	/**
 	 * @var string - Identifier for this rendering context.
 	 */
-	public $contextId = ''; // Will be private in v3.0!
+	private $_contextId = '';
 
 	/**
 	 * Parses the given text considering the full language.
@@ -150,7 +155,7 @@ abstract class Parser
 	 */
 	public function getContextId(): string
 	{
-		return $this->contextId;
+		return $this->_contextId;
 	}
 
 	/**
@@ -167,7 +172,7 @@ abstract class Parser
 			strval($string)
 		);
 
-		return $this->contextId = $id;
+		return $this->_contextId = $id;
 	}
 
 	/**
@@ -195,43 +200,34 @@ abstract class Parser
 	/**
 	 * Detect registered block types.
 	 *
-	 * You can bust the alphabetical sort/call strategy with a `Priority` method
-	 * matching the identify method name, returning a different string to compare.
-	 * E.g. identifyUl() and identifyUlPriority().
-	 *
 	 * @return array - A list of block element types available.
 	 */
 	protected function blockTypes(): array
 	{
 		if ($this->_blockTypes === null) {
-			// Detect block types via "identify" functions.
+			// Detect block types via "identify" methods.
 			$reflection = new \ReflectionClass($this);
 
 			$this->_blockTypes = array_filter(
 				array_map(
 					function($method) {
 						$methodName = $method->getName();
-						return (
-							str_starts_with($methodName, 'identify')
-							&& !str_ends_with($methodName, 'Priority')
-						) ?
-						substr($methodName, 8) : false ;
+						return str_starts_with($methodName, 'identify') ?
+							substr($methodName, 8) :
+							false;
 					},
 					$reflection->getMethods(ReflectionMethod::IS_PROTECTED)
 				)
 			);
 
-			usort($this->_blockTypes, function($a, $b) {
-				$a_method = 'identify' . $a . 'Priority';
-				$a_priority = method_exists($this, $a_method) ?
-					$this->{$a_method}() : $a;
-
-				$b_method = 'identify' . $b . 'Priority';
-				$b_priority = method_exists($this, $b_method) ?
-					$this->{$b_method}() : $b;
-
-				return strcasecmp($a_priority, $b_priority);
-			});
+			// Merge the predefined call order with the array of detected methods.
+			$this->_blockTypes = array_unique(
+				array_merge(
+					$this->blockPriorities,
+					$this->_blockTypes
+				),
+				SORT_STRING
+			);
 		}
 
 		return $this->_blockTypes;

@@ -13,14 +13,6 @@ namespace xenocrat\markdown\block;
 trait RuleTrait
 {
 	/**
-	 * Bust the alphabetical calling strategy.
-	 */
-	protected function identifyHrPriority(): string
-	{
-		return 'aHr';
-	}
-
-	/**
 	 * Identify a line as a horizontal rule.
 	 */
 	protected function identifyHr($line): bool

@@ -69,6 +69,21 @@ class Markdown extends Parser
 	/**
 	 * @inheritDoc
 	 */
+	protected $blockPriorities = [
+		'Hr',
+		'Ul',
+		'Code',
+		'FencedCode',
+		'Html',
+		'Ol',
+		'Quote',
+		'Reference',
+		'Headline',
+	];
+
+	/**
+	 * @inheritDoc
+	 */
 	protected function prepare(): void
 	{
 		// Reset references.
