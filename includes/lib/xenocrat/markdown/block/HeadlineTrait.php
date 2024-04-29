@@ -22,12 +22,12 @@ namespace xenocrat\markdown\block;
 trait HeadlineTrait
 {
 	/**
-	 * @var bool Generate an `id` attribute for headline anchors.
+	 * @var bool - Generate an `id` attribute for headline anchors.
 	 */
 	public $headlineAnchors = false;
 
 	/**
-	 * @var int[] Incrementing counter of rendered anchor links.
+	 * @var int[] - Incrementing counter of rendered anchor links.
 	 */
 	protected $headlineAnchorLinks = [];
 
@@ -45,9 +45,9 @@ trait HeadlineTrait
 	protected function identifyHeadline($line, $lines, $current): bool
 	{
 		return (
-			// ATX headline
+			// ATX headline.
 			preg_match('/^ {0,3}(#{1,6})([ \t]|$)/', $line)
-			// setext headline
+			// setext headline.
 			|| !empty($lines[$current + 1])
 			&& preg_match('/^ {0,3}(\-+|=+)\s*$/', $lines[$current + 1])
 		);
@@ -65,7 +65,7 @@ trait HeadlineTrait
 				$matches
 			)
 		) {
-			// ATX headline
+			// ATX headline.
 			$line = ltrim($lines[$current], "# \t");
 			$line = preg_replace('/ +(#+ *)?$/', '', $line);
 			$block = [
@@ -75,7 +75,7 @@ trait HeadlineTrait
 			];
 			return [$block, $current];
 		} else {
-			// setext headline
+			// Setext headline.
 			$line = trim($lines[$current]);
 			$block = [
 				'headline',

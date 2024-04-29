@@ -34,7 +34,7 @@ trait QuoteTrait
 	{
 		$content = [];
 
-		// consume until end of markers
+		// consume until end of markers...
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
 			if (
@@ -42,7 +42,7 @@ trait QuoteTrait
 				&& $line[0] === ' '
 				&& strspn($line, ' ') < 4
 			) {
-			// trim up to three spaces
+			// Trim up to three spaces.
 				$line = ltrim($line, ' ');
 			}
 			if (ltrim($line) !== '') {

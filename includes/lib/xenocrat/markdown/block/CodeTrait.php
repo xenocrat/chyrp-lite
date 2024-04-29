@@ -13,11 +13,11 @@ namespace xenocrat\markdown\block;
 trait CodeTrait
 {
 	/**
-	 * identify a line as the beginning of a code block.
+	 * Identify a line as the beginning of a code block.
 	 */
 	protected function identifyCode($line): bool
 	{
-		// indentation >= 4 or one tab is code
+		// Indentation >= 4 or one tab is code.
 		return $line[0] === "\t" || strncmp($line, '    ', 4) === 0;
 	}
 
@@ -28,23 +28,23 @@ trait CodeTrait
 	{
 		$content = [];
 
-		// consume until end of markers
+		// Consume until end of markers...
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
 			if (isset($line[0]) && $line[0] === "\t") {
-			// a line belongs to this code block if indented by a tab
+			// A line belongs to this code block if indented by a tab.
 				$line = substr($line, 1);
 				$content[] = $line;
 			} elseif (str_starts_with($line, '    ')) {
-			// a line belongs to this code block if indented by 4 spaces
+			// A line belongs to this code block if indented by 4 spaces.
 				$line = substr($line, 4);
 				$content[] = $line;
 			} elseif (
 				($line === '' || ltrim($line) === '')
 				&& isset($lines[$i + 1])
 			) {
-			// ...or if blank and the next is also blank
-			// or the next is indented by 4 spaces or a tab
+			// ...Or if blank and the next is also blank
+			// or the next is indented by 4 spaces or a tab.
 				$next = $lines[$i + 1];
 				if (
 					$next === ''
@@ -61,14 +61,14 @@ trait CodeTrait
 				break;
 			}
 		}
-		// remove leading blank lines
+		// Remove leading blank lines.
 		while (
 			count($content) > 1
 			&& ltrim(reset($content)) === ''
 		) {
 			array_shift($content);
 		}
-		// remove trailing blank lines
+		// Remove trailing blank lines.
 		while (
 			count($content) > 1
 			&& ltrim(end($content)) === ''

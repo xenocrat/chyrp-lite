@@ -22,7 +22,7 @@ namespace xenocrat\markdown\inline;
 trait LinkTrait
 {
 	/**
-	 * @var array a list of defined references in this document.
+	 * @var array - A list of defined references in this document.
 	 */
 	protected $references = [];
 
@@ -55,7 +55,7 @@ trait LinkTrait
 				$offset
 			];
 		} else {
-			// remove all starting [ markers to avoid next one to be parsed as link
+			// Remove all starting [ markers to avoid next one being parsed as a link.
 			$result = '[';
 			$i = 1;
 			while (isset($markdown[$i]) && $markdown[$i] === '[') {
@@ -95,7 +95,7 @@ trait LinkTrait
 				$offset + 1
 			];
 		} else {
-			// remove all starting [ markers to avoid next one to be parsed as link
+			// Remove all starting [ markers to avoid next one being parsed as a link.
 			$result = '!';
 			$i = 1;
 			while (isset($markdown[$i]) && $markdown[$i] === '[') {
@@ -111,7 +111,7 @@ trait LinkTrait
 		if (
 			strpos($markdown, ']') !== false
 			&& preg_match('/^\[(.*?)(?<!\\\\)\]/', $markdown, $textMatches)
-			// unescaped brackets are not allowed
+			// Unescaped brackets are not allowed.
 			&& !preg_match('/(?<!\\\\)[\[\]]/', $textMatches[1])
 		) {
 			$text = $textMatches[1];
@@ -127,21 +127,23 @@ trait LinkTrait
 REGEXP;
 
 			if (preg_match($pattern, $markdown, $refMatches)) {
-			// inline link
+			// Inline link.
 				$url = isset($refMatches[2]) ?
-					$this->unEscapeBackslash($refMatches[2]) : '' ;
+					$this->unEscapeBackslash($refMatches[2]) :
+					'';
 
 				$lt = str_starts_with($url, '<');
 				$gt = str_ends_with($url, '>');
 				if (($lt && !$gt) || (!$lt && $gt)) {
-				// improperly matched brackets
+				// Improperly matched brackets.
 					return false;
 				}
 				if ($lt && $gt) {
 					$url = str_replace(' ', '%20', substr($url, 1, -1));
 				}
 				$title = empty($refMatches[5]) ?
-					null : $this->unEscapeBackslash($refMatches[5]) ;
+					null :
+					$this->unEscapeBackslash($refMatches[5]);
 
 				$key = null;
 
@@ -153,12 +155,12 @@ REGEXP;
 					$key,
 				];
 			} elseif (preg_match('/^(\[(.*?)\])?/s', $markdown, $refMatches)) {
-			// reference style link
+			// Reference style link.
 				$key = empty($refMatches[2]) ? $text : $refMatches[2];
 
 				$key = function_exists("mb_convert_case") ?
 					mb_convert_case($key, MB_CASE_FOLD, 'UTF-8') :
-					strtolower($key) ;
+					strtolower($key);
 
 				$url = null;
 				$title = null;
@@ -184,7 +186,7 @@ REGEXP;
 	{
 		if (strpos($text, '>') !== false) {
 			if (!in_array('parseLink', $this->context)) {
-			// do not allow links in links
+			// Do not allow links within links.
 				if (
 					preg_match(
 						'/^<([a-z][a-z0-9\+\.\-]{1,31}:[^\s<>]*)>/i',
@@ -192,7 +194,7 @@ REGEXP;
 						$matches
 					)
 				) {
-					// URL
+					// URL.
 					return [
 						[
 							'url',
@@ -205,7 +207,7 @@ REGEXP;
 						$text, $matches
 					)
 				) {
-					// email address
+					// Email address.
 					return [
 						[
 							'email',
@@ -234,7 +236,8 @@ REGEXP;
 		$decodedUrl = rawurldecode($block[1]);
 
 		$secureUrlText = preg_match('//u', $decodedUrl) ?
-			$decodedUrl : $block[1];
+			$decodedUrl :
+			$block[1];
 
 		$text = $this->escapeHtmlEntities(
 			$secureUrlText,
@@ -321,7 +324,9 @@ REGEXP;
 			. ($this->html5 ? '>' : ' />');
 	}
 
-	// references
+	#---------------------------------------------
+	# References
+	#---------------------------------------------
 
 	protected function identifyReference($line): bool
 	{
@@ -349,7 +354,7 @@ REGEXP;
 			)
 		) {
 			if (preg_match('/(?<!\\\\)[\[\]]/', $matches[1])) {
-			// unescaped brackets are not allowed
+			// Unescaped brackets are not allowed.
 				return $this->consumeParagraph($lines, $current);
 			}
 			$key = function_exists("mb_convert_case") ?
@@ -359,7 +364,7 @@ REGEXP;
 			if (isset($matches[2])) {
 				$url = $matches[2];
 			} else {
-			// url may be on the next line
+			// URL may be on the next line.
 				if (
 					isset($lines[$current + 1])
 					&& trim($lines[$current + 1]) !== ''
@@ -367,7 +372,7 @@ REGEXP;
 					$url = trim($lines[$current + 1]);
 					$current++;
 				} else {
-				// url not found - consume lines as paragraph
+				// URL not found - consume lines as paragraph.
 					return $this->consumeParagraph($lines, $current);
 				}
 			}
@@ -380,7 +385,7 @@ REGEXP;
 			if (isset($matches[3])) {
 				$ref['title'] = $this->unEscapeBackslash($matches[3]);
 			} else {
-			// title may be on the next line
+			// Title may be on the next line.
 				if (
 					isset($lines[$current + 1])
 					&& preg_match(

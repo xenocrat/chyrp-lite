@@ -35,17 +35,17 @@ namespace xenocrat\markdown\block;
 trait FootnoteTrait
 {
 	/**
-	 * @var string[][] Unordered array of footnotes.
+	 * @var string[][] - Unordered array of footnotes.
 	 */
 	protected $footnotes = [];
 
 	/**
-	 * @var int Incrementing counter of the footnote links.
+	 * @var int - Incrementing counter of the footnote links.
 	 */
 	protected $footnoteLinkNum = 0;
 
 	/**
-	 * @var string[] Ordered array of footnote links.
+	 * @var string[] - Ordered array of footnote links.
 	 */
 	protected $footnoteLinks = [];
 
@@ -62,7 +62,7 @@ trait FootnoteTrait
 	/**
 	 * Add footnotes' HTML to the end of parsed HTML.
 	 *
-	 * @param string $html The HTML output of Markdown::parse().
+	 * @param string $html - The HTML output of Markdown::parse().
 	 * @return string
 	 */
 	public function addParsedFootnotes($html): string
@@ -103,7 +103,7 @@ trait FootnoteTrait
 	}
 
 	/**
-	 * @param mixed[] $footnotesSorted Array with 'html', 'num', and 'refs' keys.
+	 * @param mixed[] $footnotesSorted - Array with 'html', 'num', and 'refs' keys.
 	 * @return string
 	 */
 	protected function getFootnotesHtml($footnotesSorted): string
@@ -148,8 +148,8 @@ trait FootnoteTrait
 	}
 
 	/**
-	 * @param $html string The HTML to operate on.
-	 * @param mixed[] $footnotesSorted Array with 'num' and 'refs' keys.
+	 * @param $html string - The HTML to operate on.
+	 * @param mixed[] $footnotesSorted - Array with 'num' and 'refs' keys.
 	 * @return string
 	 */
 	protected function numberFootnotes($html, $footnotesSorted): string
@@ -208,12 +208,12 @@ trait FootnoteTrait
 	{
 		if (
 			preg_match('/^\[\^(.+?)(?<!\\\\)\]/', $text, $matches)
-			// unescaped brackets are not allowed
+			// Unescaped brackets are not allowed.
 			&& !preg_match('/(?<!\\\\)[\[\]]/', $matches[1])
 		) {
 			$footnoteName = function_exists("mb_convert_case") ?
 				mb_convert_case($matches[1], MB_CASE_FOLD, 'UTF-8') :
-				strtolower($matches[1]) ;
+				strtolower($matches[1]);
 
 			// We will later sort the footnotes
 			// according to the order that the footnote links appear in.
@@ -234,7 +234,7 @@ trait FootnoteTrait
 	}
 
 	/**
-	 * @param string[] $block Array with 'num' key.
+	 * @param string[] $block - Array with 'num' key.
 	 * @return string
 	 */
 	protected function renderFootnoteLink($block): string
@@ -301,7 +301,7 @@ trait FootnoteTrait
 				// The start of a footnote.
 				$name = function_exists("mb_convert_case") ?
 					mb_convert_case($matches[1], MB_CASE_FOLD, 'UTF-8') :
-					strtolower($matches[1]) ;
+					strtolower($matches[1]);
 
 				$mw = strlen($matches[0]);
 				$str = substr($line, strlen($matches[0]));

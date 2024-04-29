@@ -21,7 +21,7 @@ trait FigureTrait
 			$line[0] === ' '
 			&& strspn($line, ' ') < 4
 		) {
-		// trim up to three spaces
+		// Trim up to three spaces.
 			$line = ltrim($line, ' ');
 		}
 		return $line[0] === ':';
@@ -35,7 +35,7 @@ trait FigureTrait
 		$content = [];
 		$caption = [];
 
-		// consume until end of markers
+		// Consume until end of markers...
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
 			if (
@@ -43,7 +43,7 @@ trait FigureTrait
 				&& $line[0] === ' '
 				&& strspn($line, ' ') < 4
 			) {
-			// trim up to three spaces
+			// Trim up to three spaces.
 				$line = ltrim($line, ' ');
 			}
 			if (ltrim($line) !== '') {
@@ -66,7 +66,7 @@ trait FigureTrait
 			}
 		}
 
-		// decide caption placement and remove invalid lines.
+		// Decide caption placement and remove invalid lines.
 		if (isset($caption[$current])) {
 			$endcap = false;
 			for ($x = $current; $x < $i; $x++) { 

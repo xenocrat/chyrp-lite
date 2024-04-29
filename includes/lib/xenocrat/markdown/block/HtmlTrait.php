@@ -43,43 +43,43 @@ trait HtmlTrait
 			$line[0] === ' '
 			&& strspn($line, ' ') < 4
 		) {
-		// trim up to three spaces
+		// Trim up to three spaces.
 			$line = ltrim($line, ' ');
 		}
 		if ($line[0] !== '<' || isset($line[1]) && $line[1] == ' ') {
-		// no tag
+		// No tag.
 			return false;
 		}
 		if (strncasecmp($line, '<script', 7) === 0) {
-		// type 1: script
+		// Type 1: script.
 			return true;
 		}
 		if (strncasecmp($line, '<pre', 4) === 0) {
-		// type 1: pre
+		// Type 1: pre.
 			return true;
 		}
 		if (strncasecmp($line, '<style', 6) === 0) {
-		// type 1: style
+		// Type 1: style.
 			return true;
 		}
 		if (strncasecmp($line, '<textarea', 9) === 0) {
-		// type 1: textarea
+		// Type 1: textarea.
 			return true;
 		}
 		if (strncmp($line, '<!--', 4) === 0) {
-		// type 2: comment
+		// Type 2: comment.
 			return true;
 		}
 		if (strncmp($line, '<?', 2) === 0) {
-		// type 3: processor
+		// Type 3: processor.
 			return true;
 		}
 		if (preg_match('/^<![a-z]/i', $line)) {
-		// type 4: declaration
+		// Type 4: declaration.
 			return true;
 		}
 		if (strncmp($line, '<![CDATA[', 9) === 0) {
-		// type 5: cdata
+		// Type 5: CDATA.
 			return true;
 		}
 
@@ -89,7 +89,7 @@ trait HtmlTrait
 		}
 
 		if (preg_match("/^<\/?($patterns)(\s|>|\/>|$)/i", $line)) {
-		// type 6
+		// Type 6.
 			return true;
 		}
 		if (
@@ -104,7 +104,7 @@ trait HtmlTrait
 				|| ltrim($lines[$current - 1]) === ''
 			)
 		) {
-		// type 7
+		// Type 7.
 			return true;
 		}
 		return false;
@@ -119,7 +119,7 @@ trait HtmlTrait
 		$line = ltrim($lines[$current], ' ');
 
 		if (strncasecmp($line, '<script', 7) === 0) {
-		// type 1: script
+		// Type 1: script.
 			for ($i = $current, $count = count($lines); $i < $count; $i++) {
 				$line = $lines[$i];
 				$content[] = $line;
@@ -128,7 +128,7 @@ trait HtmlTrait
 				}
 			}
 		} elseif (strncasecmp($line, '<pre', 4) === 0) {
-		// type 1: pre
+		// Type 1: pre.
 			for ($i = $current, $count = count($lines); $i < $count; $i++) {
 				$line = $lines[$i];
 				$content[] = $line;
@@ -137,7 +137,7 @@ trait HtmlTrait
 				}
 			}
 		} elseif (strncasecmp($line, '<style', 6) === 0) {
-		// type 1: style
+		// Type 1: style.
 			for ($i = $current, $count = count($lines); $i < $count; $i++) {
 				$line = $lines[$i];
 				$content[] = $line;
@@ -146,7 +146,7 @@ trait HtmlTrait
 				}
 			}
 		} elseif (strncasecmp($line, '<textarea', 9) === 0) {
-		// type 1: textarea
+		// Type 1: textarea.
 			for ($i = $current, $count = count($lines); $i < $count; $i++) {
 				$line = $lines[$i];
 				$content[] = $line;
@@ -155,7 +155,7 @@ trait HtmlTrait
 				}
 			}
 		} elseif (strncmp($line, '<!--', 4) === 0) {
-		// type 2: comment
+		// Type 2: comment.
 			for ($i = $current, $count = count($lines); $i < $count; $i++) {
 				$line = $lines[$i];
 				$content[] = $line;
@@ -164,7 +164,7 @@ trait HtmlTrait
 				}
 			}
 		} elseif (strncmp($line, '<?', 2) === 0) {
-		// type 3: processor
+		// Type 3: processor.
 			for ($i = $current, $count = count($lines); $i < $count; $i++) {
 				$line = $lines[$i];
 				$content[] = $line;
@@ -173,7 +173,7 @@ trait HtmlTrait
 				}
 			}
 		} elseif (strncmp($line, '<!', 2) === 0) {
-		// type 4: declaration
+		// Type 4: declaration.
 			for ($i = $current, $count = count($lines); $i < $count; $i++) {
 				$line = $lines[$i];
 				$content[] = $line;
@@ -182,7 +182,7 @@ trait HtmlTrait
 				}
 			}
 		} elseif (strncmp($line, '<![CDATA[', 9) === 0) {
-		// type 5: cdata
+		// Type 5: CDATA.
 			for ($i = $current, $count = count($lines); $i < $count; $i++) {
 				$line = $lines[$i];
 				$content[] = $line;
@@ -191,7 +191,7 @@ trait HtmlTrait
 				}
 			}
 		} else {
-		// type 6 or 7 tag - consume until blank line
+		// Type 6 or 7 tag - consume until blank line...
 			$content = [];
 			for ($i = $current, $count = count($lines); $i < $count; $i++) {
 				$line = $lines[$i];
@@ -230,7 +230,6 @@ trait HtmlTrait
 	 */
 	protected function parseEntity($text): array
 	{
-		// html entities e.g. &copy; &#169; &#x00A9;
 		if (
 			preg_match(
 				'/^&(#[\d]{1,7}|#[x][a-f0-9]{1,6}|[\w\d]{2,});/i',
@@ -238,8 +237,10 @@ trait HtmlTrait
 				$matches
 			)
 		) {
+		// HTML entity.
 			return [['entity', $matches[0]], strlen($matches[0])];
 		} else {
+		// Just an ampersand.
 			return [['text', '&amp;'], 1];
 		}
 	}
@@ -281,7 +282,7 @@ trait HtmlTrait
 	protected function parseLt($text): array
 	{
 		if (strpos($text, '>') !== false) {
-			// first try bracketed link if we have LinkTrait.
+			// First try bracketed link if we have LinkTrait.
 			if (method_exists($this, 'parseBracketedLink')) {
 				$block = $this->parseBracketedLink($text);
 				if ($block[0][0] !== 'text') {
@@ -289,19 +290,19 @@ trait HtmlTrait
 				}
 			}
 			if (
-				// comment
+				// Comment.
 				preg_match('/^<!--(-?>|.*?-->)/s', $text, $matches)
-				// processor
+				// Processor.
 				|| preg_match('/^<\?.*?\?>/s', $text, $matches)
-				// declaration
+				// Declaration.
 				|| preg_match('/^<![a-z].*?>/is', $text, $matches)
-				// cdata
+				// CDATA.
 				|| preg_match('/^<!\[CDATA\[.*?\]\]>/s', $text, $matches)
 			) {
 				return [['lt', $matches[0]], strlen($matches[0])];
 			}
 			if (
-				// tag
+				// Tag.
 				preg_match(
 					'/^<(\/)?[a-z][a-z0-9\-]*(?(1)[ \n]*|(\/|[ \n].*?))?>/is',
 					$text,

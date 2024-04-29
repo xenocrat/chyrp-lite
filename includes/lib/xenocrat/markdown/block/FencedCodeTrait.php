@@ -39,7 +39,7 @@ trait FencedCodeTrait
 		$language = trim(substr($line, $mw));
 		$content = [];
 
-		// consume until end fence
+		// Consume until end fence...
 		for ($i = $current + 1, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
 			$leadingSpaces = strspn($line, ' ');

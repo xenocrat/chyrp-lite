@@ -15,15 +15,16 @@ namespace xenocrat\markdown;
  */
 class GithubMarkdown extends Markdown
 {
-	// include block element parsing using traits
+	// Include block element parsing using traits.
 	use block\TableTrait;
 
-	// include inline element parsing using traits
+	// Include inline element parsing using traits.
 	use inline\StrikeoutTrait;
 	use inline\AutoLinkTrait;
 
 	/**
 	 * @var boolean Whether to interpret newlines as `<br />` tags.
+	 *
 	 * This feature is useful for comments where newlines are often
 	 * meant to be hard line breaks.
 	 */
@@ -38,7 +39,7 @@ class GithubMarkdown extends Markdown
 	{
 		$content = [];
 
-		// consume until blank line or end condition
+		// Consume until blank line or end condition...
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
 			if (

@@ -24,8 +24,8 @@ trait TableTrait
 				$lines[$current + 1]
 			)
 			&& strpos($lines[$current + 1], '|') !== false
-			// attempt to detect a mismatch in the
-			// number of header and delimiter columns
+			// Attempt to detect a mismatch in the
+			// number of header and delimiter columns.
 			&& (
 				preg_match_all('/(?<!^|\\\\)\|(?!$)/', $line)
 				===
@@ -45,10 +45,10 @@ trait TableTrait
 			'rows' => [],
 		];
 
-		// consume until blank line
+		// Consume until blank line...
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = trim($lines[$i]);
-			// extract alignment from second line
+			// Extract alignment from second line.
 			if ($i == $current + 1) {
 				$cols = explode('|', trim($line, ' |'));
 				foreach($cols as $col) {
@@ -72,10 +72,10 @@ trait TableTrait
 				continue;
 			}
 			if (
-				// blank line breaks the table
+				// Blank line breaks the table.
 				$line === ''
 				|| (
-				// once iteration is beyond the header and delimiter rows,
+				// Once iteration is beyond the header and delimiter rows,
 				// detecting a non-paragraph block marker breaks the table.
 					$i > $current + 1
 					&& $this->detectLineType($lines, $i) !== 'paragraph'
@@ -161,9 +161,9 @@ trait TableTrait
 	/**
 	 * This method composes a table from parsed body and head HTML.
 	 *
-	 * @param string $head table head HTML.
-	 * @param string $body table body HTML.
-	 * @return string the complete table HTML.
+	 * @param string $head - Table head HTML.
+	 * @param string $body - Table body HTML.
+	 * @return string - The complete table HTML.
 	 * @since 1.2.0
 	 */
 	protected function composeTable($head, $body): string
@@ -186,6 +186,7 @@ trait TableTrait
 
 	/**
 	 * Parses table data cells.
+	 *
 	 * @marker |
 	 */
 	protected function parseTd($markdown): array

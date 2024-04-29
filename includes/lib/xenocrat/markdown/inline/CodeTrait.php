@@ -18,7 +18,7 @@ trait CodeTrait
 	}
 
 	/**
-	 * Parses an inline code span `` ` ``.
+	 * Parses an inline code span.
 	 *
 	 * @marker `
 	 */
@@ -48,7 +48,7 @@ trait CodeTrait
 	protected function renderInlineCode($block): string
 	{
 		if (in_array('table', $this->context)) {
-			// unescape pipes if inside a table cell.
+			// Unescape pipes if inside a table cell.
 			$block[1] = str_replace('\|', '|', $block[1]);
 		}
 		return '<code>'

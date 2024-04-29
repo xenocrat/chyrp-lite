@@ -21,7 +21,7 @@ trait AsideTrait
 			$line[0] === ' '
 			&& strspn($line, ' ') < 4
 		) {
-		// trim up to three spaces
+		// Trim up to three spaces.
 			$line = ltrim($line, ' ');
 		}
 		return (
@@ -37,7 +37,7 @@ trait AsideTrait
 	{
 		$content = [];
 
-		// consume until end of markers
+		// Consume until end of markers...
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
 			if (
@@ -45,7 +45,7 @@ trait AsideTrait
 				&& $line[0] === ' '
 				&& strspn($line, ' ') < 4
 			) {
-			// trim up to three spaces
+			// Trim up to three spaces.
 				$line = ltrim($line, ' ');
 			}
 			if (ltrim($line) !== '') {

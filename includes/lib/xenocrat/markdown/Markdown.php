@@ -15,7 +15,7 @@ namespace xenocrat\markdown;
  */
 class Markdown extends Parser
 {
-	// include block element parsing using traits
+	// Include block element parsing using traits.
 	use block\CodeTrait;
 	use block\FencedCodeTrait;
 	use block\HeadlineTrait;
@@ -24,13 +24,14 @@ class Markdown extends Parser
 	use block\QuoteTrait;
 	use block\RuleTrait;
 
-	// include inline element parsing using traits
+	// Include inline element parsing using traits.
 	use inline\CodeTrait;
 	use inline\EmphStrongTrait;
 	use inline\LinkTrait;
 
 	/**
-	 * @var array These are "escapeable" characters.
+	 * @var array - These are "escapeable" characters.
+	 *
 	 * When using one of these prefixed with a backslash, the character is
 	 * not interpreted as markdown and will be outputted without backslash.
 	 */
@@ -70,10 +71,10 @@ class Markdown extends Parser
 	 */
 	protected function prepare(): void
 	{
-		// reset references
+		// Reset references.
 		$this->references = [];
 
-		// reset anchor links
+		// Reset anchor links.
 		$this->headlineAnchorLinks = [];
 	}
 
@@ -86,7 +87,7 @@ class Markdown extends Parser
 	{
 		$content = [];
 
-		// consume until blank line or end condition
+		// Consume until blank line or end condition...
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
 			if (
@@ -129,10 +130,10 @@ class Markdown extends Parser
 	{
 		$br = $this->html5 ? "<br>\n" : "<br />\n";
 		if (isset($text[1]) && $text[1] === "\n") {
-		// backslash followed by newline
+		// Backslash followed by newline.
 			return [['text', $br], 2];
 		}
-		// otherwise parse the sequence normally
+		// Otherwise parse the sequence normally.
 		return parent::parseEscape($text);
 	}
 
@@ -145,9 +146,9 @@ class Markdown extends Parser
 	{
 		$br = $this->html5 ? "<br>\n" : "<br />\n";
 		$text = $text[1];
-		// two or more spaces
+		// Two or more spaces.
 		$text = preg_replace("/ {2,}\n/", $br, $text);
-		// trim single spaces
+		// Trim single spaces.
 		$text = str_replace(" \n", "\n", $text);
 		return $text;
 	}

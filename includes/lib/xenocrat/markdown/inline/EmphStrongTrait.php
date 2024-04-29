@@ -32,8 +32,8 @@ trait EmphStrongTrait
 		}
 
 		if ($marker == $text[1]) {
-		// strong
-			// avoid excessive regex backtracking if there is no closing marker
+		// Strong.
+			// Avoid excessive regex backtracking if there is no closing marker.
 			if (strpos($text, $marker . $marker, 2) === false) {
 				return [['text', $text[0]], 1];
 			}
@@ -52,13 +52,13 @@ trait EmphStrongTrait
 				)
 			) {
 				$content = $matches[1];
-				// if nothing is contained in a strong,
-				// do not consider it valid
+				// If nothing is contained in a strong,
+				// do not consider it valid.
 				if ($content === '') {
 					return [['text', $text[0]], 2];
 				}
-				// first and last chars of the strong text
-				// cannot be whitespace
+				// First and last chars of the strong text
+				// cannot be whitespace.
 				if (
 					strspn($content, " \t\n", 0, 1) === 0
 					&& strspn($content, " \t\n", -1) === 0
@@ -73,8 +73,8 @@ trait EmphStrongTrait
 				}
 			}
 		} else {
-		// emph
-			// avoid excessive regex backtracking if there is no closing marker
+		// Emphasis
+			// Avoid excessive regex backtracking if there is no closing marker.
 			if (strpos($text, $marker, 1) === false) {
 				return [['text', $text[0]], 1];
 			}
@@ -93,13 +93,13 @@ trait EmphStrongTrait
 				)
 			) {
 				$content = $matches[1];
-				// if nothing is contained in an emphasis,
-				// do not consider it valid
+				// If nothing is contained in an emphasis,
+				// do not consider it valid.
 				if ($content === '') {
 					return [['text', $text[0]], 2];
 				}
-				// first and last chars of the emphasised text
-				// cannot be whitespace
+				// First and last chars of the emphasised text
+				// cannot be whitespace.
 				if (
 					strspn($content, " \t\n", 0, 1) === 0
 					&& strspn($content, " \t\n", -1) === 0

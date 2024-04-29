@@ -14,6 +14,7 @@ trait ListTrait
 {
 	/**
 	 * @var bool Enable support for a `start` attribute of ordered lists.
+	 *
 	 * This means that lists will start with the number defined in the markdown.
 	 */
 	public $keepListStartNumber = true;
@@ -77,26 +78,26 @@ trait ListTrait
 		$marker = '';
 		$mw = 0;
 
-		// consume until end condition
+		// Consume until end condition...
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
 			$pattern = ($type === 'ol') ?
 				'/^( {0,3})(\d{1,9})([\.\)])([ \t]+|$)/' :
 				'/^( {0,3})([\-\+\*])([ \t]+|$)/' ;
-			// if not the first item, marker indentation must be less than
+			// If not the first item, marker indentation must be less than
 			// width of preceeding marker - otherwise it is a continuation
-			// of the current item containing a marker for a sub-list item
+			// of the current item containing a marker for a sub-list item.
 			if (
 				preg_match($pattern, $line, $matches)
 				&& ($i === $current || strlen($matches[1]) < $mw)
 			) {
 				if ($i === $current) {
-				// first item
-					// store the marker for comparison
+				// First item.
+					// Store the marker for comparison.
 					$marker = $type === 'ol' ?
 						$matches[3] : $matches[2] ;
 
-					// set the ol start attribute
+					// Set the ol start attribute.
 					if ($type === 'ol' && $this->keepListStartNumber) {
 						$start = intval($matches[2]);
 						if ($start !== 1) {
@@ -109,7 +110,7 @@ trait ListTrait
 					$newMarker = $type === 'ol' ?
 						$matches[3] : $matches[2] ;
 
-					// marker has changed: end of list
+					// Marker has changed: end of list.
 					if (strcmp($marker, $newMarker) !== 0) {
 						--$i;
 						break;
@@ -119,40 +120,40 @@ trait ListTrait
 				$line = substr($line, $mw);
 				$block['items'][$item][] = $line;
 			} elseif ($line === '' || ltrim($line) === '') {
-				// no more lines: end of list
+				// No more lines: end of list.
 				if (!isset($lines[$i + 1])) {
 					break;
 				}
 				$next = $lines[$i + 1];
 				$line = substr($line, $mw);
 				if ($next === '' || ltrim($next) === '') {
-				// next line is also blank
+				// Next line is also blank.
 					$block['items'][$item][] = $line;
 				} elseif (strspn($next, " \t") >= $mw) {
-				// next line is indented enough to continue this item
+				// Next line is indented enough to continue this item.
 					$block['items'][$item][] = $line;
 				} elseif (preg_match($pattern, $next)) {
-				// next line is the next item in this list: loose list
+				// Next line is the next item in this list: loose list.
 					$block['items'][$item][] = $line;
 					$block['loose'] = true;
 				} else {
-				// next line is not list content
+				// next line is not list content.
 					break;
 				}
 			} elseif (
 				strlen($line) > $mw
 				&& strspn($line, " \t") >= $mw
 			) {
-				// line is indented enough to continue this item
+				// Line is indented enough to continue this item.
 				$line = substr($line, $mw);
 				$block['items'][$item][] = $line;
 			} else {
-				// everything else ends the list
+				// Everything else ends the list.
 				--$i;
 				break;
 			}
 
-			// if next line is <hr>, end the list
+			// If next line is <hr>, end the list.
 			if (
 				!empty($lines[$i + 1])
 				&& method_exists($this, 'identifyHr')
@@ -161,21 +162,21 @@ trait ListTrait
 				break;
 			}
 		}
-		// tight list? check it...
+		// Tight list? check it...
 		if (!$block['loose']) {
 			foreach ($block['items'] as $itemLines) {
-				// empty list item
+				// Empty list item.
 				if (ltrim($itemLines[0]) === '' && !isset($itemLines[1])) {
 					continue;
 				}
-				// everything else
+				// Everything else.
 				for ($x = 0; $x < count($itemLines); $x++) { 
 					if (
 						ltrim($itemLines[$x]) === ''
 						|| $this->detectLineType($itemLines, $x) !== 'paragraph'
 					) {
-						// blank line or non-paragraph block marker detected:
-						// make the list loose because block parsing is required
+						// Blank line or non-paragraph block marker detected:
+						// make the list loose because block parsing is required.
 						$block['loose'] = true;
 						break 2;
 					}
@@ -213,8 +214,9 @@ trait ListTrait
 	}
 
 	/**
-	 * Return html attributes string from [attrName => attrValue] list.
-	 * @param array $attributes the attribute name-value pairs.
+	 * Return HTML attributes string from [attrName => attrValue] list.
+	 *
+	 * @param array $attributes - The attribute name-value pairs.
 	 * @return string
 	 */
 	private function generateHtmlAttributes($attributes): string

@@ -37,7 +37,7 @@ REGEXP;
 			!in_array('parseLink', $this->context)
 			&& preg_match($regex, $text, $matches)
 		) {
-		// do not allow links in links
+		// Do not allow links within links.
 			return [
 				['autoUrl', $matches[0]],
 				strlen($matches[0])

@@ -14,12 +14,12 @@ namespace xenocrat\markdown;
  */
 class ChyrpMarkdown extends GithubMarkdown
 {
-	// include block element parsing using traits
+	// Include block element parsing using traits.
 	use block\AsideTrait;
 	use block\FigureTrait;
 	use block\FootnoteTrait;
 
-	// include inline element parsing using traits
+	// Include inline element parsing using traits.
 	use inline\CiteTrait;
 	use inline\HighlightTrait;
 	use inline\SupSubTrait;
@@ -31,7 +31,7 @@ class ChyrpMarkdown extends GithubMarkdown
 	{
 		parent::prepare();
 
-		// reset footnote properties
+		// Reset footnote properties.
 		$this->footnotes = [];
 		$this->footnoteLinkNum = 0;
 		$this->footnoteLinks = [];
@@ -46,7 +46,7 @@ class ChyrpMarkdown extends GithubMarkdown
 	{
 		$content = [];
 
-		// consume until blank line or end condition
+		// Consume until blank line or end condition...
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
 			if ($line === ''
