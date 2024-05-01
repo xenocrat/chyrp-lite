@@ -2804,7 +2804,8 @@
             "mpg",  "mpeg", "mp2",  "mp3",  "mp4",
             "m4a",  "m4v",  "ogg",  "oga",  "ogv",
             "mka",  "mkv",  "mov",  "avi",  "wav",
-            "webm", "flac", "aiff", "3gp",  "ts"
+            "webm", "flac", "aif",  "aiff", "3gp",
+            "spx",  "ts"
         );
     }
 
