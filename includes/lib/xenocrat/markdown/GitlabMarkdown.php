@@ -8,36 +8,35 @@
 namespace xenocrat\markdown;
 
 /**
- * Markdown parser for Chyrp-Flavoured Markdown.
+ * Markdown parser for GitLab-Flavored Markdown.
  *
- * @see https://chyrplite.net/wiki/Chyrp-Flavoured-Markdown.html
+ * @see https://docs.gitlab.com/ee/user/markdown.html
  * @author Carsten Brandt
  * @author Daniel Pimley
  */
-class ChyrpMarkdown extends GithubMarkdown
+class GitlabMarkdown extends Markdown
 {
 	// Include block element parsing using traits.
-	use block\FencedAsideTrait;
 	use block\FencedQuoteTrait;
-	use block\FigureTrait;
 	use block\FootnoteTrait;
+	use block\FrontMatterTrait;
+	use block\TableTrait;
+	use block\TocTrait;
 
 	// Include inline element parsing using traits.
-	use inline\CiteTrait;
-	use inline\HighlightTrait;
-	use inline\SupSubTrait;
+	use inline\AutoLinkTrait;
+	use inline\MediaLinkTrait;
+	use inline\StrikeoutTrait;
 
 	/**
 	 * @inheritDoc
 	 */
 	protected $blockPriorities = [
+		'FrontMatter',
 		'Hr',
-		'FencedAside',
-		'Aside',
 		'Ul',
 		'FencedCode',
 		'Code',
-		'Figure',
 		'FootnoteList',
 		'Html',
 		'Ol',
@@ -45,8 +44,17 @@ class ChyrpMarkdown extends GithubMarkdown
 		'Quote',
 		'Reference',
 		'Table',
+		'Toc',
 		'Headline',
 	];
+
+	/**
+	 * @var boolean Whether to interpret newlines as `<br />` tags.
+	 *
+	 * This feature is useful for comments where newlines are often
+	 * meant to be hard line breaks.
+	 */
+	public $enableNewlines = false;
 
 	/**
 	 * @inheritDoc
@@ -54,6 +62,9 @@ class ChyrpMarkdown extends GithubMarkdown
 	protected function prepare(): void
 	{
 		parent::prepare();
+
+		// Reset TOC.
+		$this->toc = [];
 
 		// Reset footnote properties.
 		$this->footnotes = [];
@@ -71,7 +82,8 @@ class ChyrpMarkdown extends GithubMarkdown
 		// Consume until blank line or end condition...
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
-			if ($line === ''
+			if (
+				$line === ''
 				|| ($trimmed = ltrim($line)) === ''
 				|| (
 					(ctype_punct($trimmed[0]) || ctype_digit($trimmed[0]))
@@ -79,14 +91,12 @@ class ChyrpMarkdown extends GithubMarkdown
 						$this->identifyFencedQuote($line, $lines, $i)
 						|| $this->identifyQuote($line, $lines, $i)
 						|| $this->identifyFencedCode($line, $lines, $i)
-						|| $this->identifyFigure($line, $lines, $i)
-						|| $this->identifyFencedAside($line, $lines, $i)
-						|| $this->identifyAside($line, $lines, $i)
+						|| $this->identifyFrontMatter($line, $lines, $i)
+						|| $this->identifyToc($line, $lines, $i)
 						|| $this->identifyUl($line, $lines, $i)
 						|| $this->identifyOl($line, $lines, $i)
 						|| $this->identifyHr($line, $lines, $i)
 						|| $this->identifyHtml($line, $lines, $i)
-						|| $this->identifyFootnoteList($line, $lines, $i)
 					)
 				)
 				|| $this->identifyHeadline($line, $lines, $i)
@@ -107,12 +117,28 @@ class ChyrpMarkdown extends GithubMarkdown
 	/**
 	 * @inheritDoc
 	 *
-	 * Add parsed footnotes and then post-process markup.
+	 * Parses all newlines as hard line breaks if `enableNewlines` is set.
+	 */
+	protected function renderText($text): string
+	{
+		if ($this->enableNewlines) {
+			$br = $this->html5 ? "<br>\n" : "<br />\n";
+			$text[1] = preg_replace("/ *\n/", $br, $text[1]);
+		}
+		return parent::renderText($text);
+	}
+
+	/**
+	 * @inheritDoc
+	 *
+	 * Add parsed footnotes and TOC, then post-process markup.
 	 */
 	function postprocess($markup): string
 	{
 		return parent::postprocess(
-			$this->addParsedFootnotes($markup)
+			$this->addParsedFootnotes(
+				$this->addToc($markup)
+			)
 		);
 	}
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright (c) 2014 Carsten Brandt, 2024 Daniel Pimley
+ * @copyright Copyright 2014 Carsten Brandt, 2024 Daniel Pimley
  * @license https://github.com/xenocrat/chyrp-markdown/blob/master/LICENSE
  * @link https://github.com/xenocrat/chyrp-markdown#readme
  */
@@ -11,7 +11,8 @@ namespace xenocrat\markdown;
  * Markdown parser for GitHub-Flavored Markdown.
  *
  * @see https://github.github.com/gfm/
- * @author Carsten Brandt <mail@cebe.cc>
+ * @author Carsten Brandt
+ * @author Daniel Pimley
  */
 class GithubMarkdown extends Markdown
 {
@@ -19,8 +20,8 @@ class GithubMarkdown extends Markdown
 	use block\TableTrait;
 
 	// Include inline element parsing using traits.
-	use inline\StrikeoutTrait;
 	use inline\AutoLinkTrait;
+	use inline\StrikeoutTrait;
 
 	/**
 	 * @inheritDoc
@@ -48,8 +49,6 @@ class GithubMarkdown extends Markdown
 
 	/**
 	 * @inheritDoc
-	 *
-	 * Allow other block types to break paragraphs.
 	 */
 	protected function consumeParagraph($lines, $current): array
 	{
@@ -90,7 +89,7 @@ class GithubMarkdown extends Markdown
 	/**
 	 * @inheritDoc
 	 *
-	 * Parses a newline indicated by two or more spaces on the end of a markdown line.
+	 * Parses all newlines as hard line breaks if `enableNewlines` is set.
 	 */
 	protected function renderText($text): string
 	{

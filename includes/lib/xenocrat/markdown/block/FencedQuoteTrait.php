@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright 2014 Carsten Brandt, 2024 Daniel Pimley
+ * @copyright Copyright 2024 Daniel Pimley
  * @license https://github.com/xenocrat/chyrp-markdown/blob/master/LICENSE
  * @link https://github.com/xenocrat/chyrp-markdown#readme
  */
@@ -8,29 +8,33 @@
 namespace xenocrat\markdown\block;
 
 /**
- * Adds fenced code blocks.
+ * Adds fenced blockquote blocks.
  *
- * Automatically includes indented code block support.
+ * Automatically includes blockquote block support.
  */
-trait FencedCodeTrait
+trait FencedQuoteTrait
 {
-	use CodeTrait;
+	use QuoteTrait;
 
 	/**
-	 * Identify a line as the beginning of a fenced code block.
+	 * Identify a line as the beginning of a fenced blockquote.
 	 */
-	protected function identifyFencedCode($line): bool
+	protected function identifyFencedQuote($line): bool
 	{
-		return (
-			preg_match('/^ {0,3}~{3,}/', $line)
-			|| preg_match('/^ {0,3}`{3,}[^`]*$/', $line)
-		);
+		if (
+			$line[0] === ' '
+			&& strspn($line, ' ') < 4
+		) {
+		// trim up to three spaces
+			$line = ltrim($line, ' ');
+		}
+		return str_starts_with($line, '>>>');
 	}
 
 	/**
-	 * Consume lines for a fenced code block.
+	 * Consume lines for a fenced blockquote.
 	 */
-	protected function consumeFencedCode($lines, $current): array
+	protected function consumeFencedQuote($lines, $current): array
 	{
 		$indent = strspn($lines[$current], ' ');
 		$line = substr($lines[$current], $indent);
@@ -61,17 +65,12 @@ trait FencedCodeTrait
 			}
 		}
 		$block = [
-			'code',
-			'content' => implode("\n", $content),
+			'quote',
+			'content' => $this->parseBlocks($content),
 		];
-		if ($language !== '') {
-			if (preg_match('/^[^ ]+/', $language, $match)) {
-				$block['language'] = $this->unEscapeBackslash($match[0]);
-			}
-		}
 
 		return [$block, $i];
 	}
 
-	abstract protected function unEscapeBackslash($text);
+	abstract protected function parseBlocks($lines);
 }

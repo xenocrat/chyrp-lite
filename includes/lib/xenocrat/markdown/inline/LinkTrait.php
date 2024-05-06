@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright (c) 2014 Carsten Brandt, 2024 Daniel Pimley
+ * @copyright Copyright 2014 Carsten Brandt, 2024 Daniel Pimley
  * @license https://github.com/xenocrat/chyrp-markdown/blob/master/LICENSE
  * @link https://github.com/xenocrat/chyrp-markdown#readme
  */
@@ -264,7 +264,7 @@ REGEXP;
 			if (($ref = $this->lookupReference($block['refkey'])) !== false) {
 				$block = array_merge($block, $ref);
 			} else {
-				if (strncmp($block['orig'], '[', 1) === 0) {
+				if (str_starts_with($block['orig'], '[')) {
 					return '['
 						. $this->renderAbsy(
 							$this->parseInline(substr($block['orig'], 1))
@@ -284,7 +284,7 @@ REGEXP;
 						ENT_COMPAT | ENT_SUBSTITUTE
 					)
 					. '"'
-				)
+			)
 			. '>' . $this->renderAbsy($block['text']) . '</a>';
 	}
 
@@ -294,7 +294,7 @@ REGEXP;
 			if (($ref = $this->lookupReference($block['refkey'])) !== false) {
 				$block = array_merge($block, $ref);
 			} else {
-				if (strncmp($block['orig'], '![', 2) === 0) {
+				if (str_starts_with($block['orig'], '![')) {
 					return '!['
 					. $this->renderAbsy(
 						$this->parseInline(substr($block['orig'], 2))
@@ -320,7 +320,7 @@ REGEXP;
 						ENT_COMPAT | ENT_SUBSTITUTE
 					)
 					. '"'
-				)
+			)
 			. ($this->html5 ? '>' : ' />');
 	}
 
@@ -409,4 +409,6 @@ REGEXP;
 
 	abstract protected function parseInline($text);
 	abstract protected function renderAbsy($blocks);
+	abstract protected function unEscapeBackslash($text);
+	abstract protected function escapeHtmlEntities($text, $flags = 0);
 }

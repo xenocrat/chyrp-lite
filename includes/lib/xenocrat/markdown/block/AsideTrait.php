@@ -75,7 +75,7 @@ trait AsideTrait
 	 */
 	protected function renderAside($block): string
 	{
-		return '<aside>'
+		return "<aside>\n"
 			. $this->renderAbsy($block['content'])
 			. "</aside>\n";
 	}

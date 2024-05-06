@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright (c) 2014 Carsten Brandt, 2024 Daniel Pimley and other contributors
+ * @copyright Copyright 2014 Carsten Brandt, 2024 Daniel Pimley and other contributors
  * @license https://github.com/xenocrat/chyrp-markdown/blob/master/LICENSE
  * @link https://github.com/xenocrat/chyrp-markdown#readme
  */
@@ -48,16 +48,6 @@ trait FootnoteTrait
 	 * @var string[] - Ordered array of footnote links.
 	 */
 	protected $footnoteLinks = [];
-
-	/**
-	 * @inheritDoc
-	 */
-	abstract protected function parseBlocks($lines);
-
-	/**
-	 * @inheritDoc
-	 */
-	abstract protected function renderAbsy($blocks);
 
 	/**
 	 * Add footnotes' HTML to the end of parsed HTML.
@@ -337,6 +327,8 @@ trait FootnoteTrait
 	}
 
 	/**
+	 * Renders a footnote.
+	 *
 	 * @param array $block
 	 * @return string
 	 */
@@ -349,4 +341,7 @@ trait FootnoteTrait
 		// at the end of the text using the flavor's `postprocess` method.
 		return '';
 	}
+
+	abstract protected function parseBlocks($lines);
+	abstract protected function renderAbsy($absy);
 }

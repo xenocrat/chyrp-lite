@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright (c) 2014 Carsten Brandt, 2024 Daniel Pimley
+ * @copyright Copyright 2014 Carsten Brandt, 2024 Daniel Pimley
  * @license https://github.com/xenocrat/chyrp-markdown/blob/master/LICENSE
  * @link https://github.com/xenocrat/chyrp-markdown#readme
  */
@@ -98,4 +98,6 @@ trait CodeTrait
 			. ($block['content'] === '' ? '' : "\n" )
 			. "</code></pre>\n";
 	}
+
+	abstract protected function escapeHtmlEntities($text, $flags = 0);
 }

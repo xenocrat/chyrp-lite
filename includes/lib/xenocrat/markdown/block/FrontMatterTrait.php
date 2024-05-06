@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright 2014 Carsten Brandt, 2024 Daniel Pimley
+ * @copyright Copyright 2024 Daniel Pimley
  * @license https://github.com/xenocrat/chyrp-markdown/blob/master/LICENSE
  * @link https://github.com/xenocrat/chyrp-markdown#readme
  */
@@ -8,29 +8,31 @@
 namespace xenocrat\markdown\block;
 
 /**
- * Adds fenced code blocks.
- *
- * Automatically includes indented code block support.
+ * Adds front matter blocks.
  */
-trait FencedCodeTrait
+trait FrontMatterTrait
 {
-	use CodeTrait;
+	/**
+	 * @var bool - Render front matter as a code block.
+	 */
+	public $renderFrontMatter = true;
 
 	/**
-	 * Identify a line as the beginning of a fenced code block.
+	 * Identify a line as the beginning of a front matter block.
 	 */
-	protected function identifyFencedCode($line): bool
+	protected function identifyFrontMatter($line): bool
 	{
 		return (
-			preg_match('/^ {0,3}~{3,}/', $line)
-			|| preg_match('/^ {0,3}`{3,}[^`]*$/', $line)
+			preg_match('/^ {0,3};{3,}[^;]*$/', $line)
+			|| preg_match('/^ {0,3}\-{3,}[^\-]*$/', $line)
+			|| preg_match('/^ {0,3}\+{3,}[^\+]*$/', $line)
 		);
 	}
 
 	/**
-	 * Consume lines for a fenced code block.
+	 * Consume lines for a front matter block.
 	 */
-	protected function consumeFencedCode($lines, $current): array
+	protected function consumeFrontMatter($lines, $current): array
 	{
 		$indent = strspn($lines[$current], ' ');
 		$line = substr($lines[$current], $indent);
@@ -70,8 +72,9 @@ trait FencedCodeTrait
 			}
 		}
 
-		return [$block, $i];
+		return [($this->renderFrontMatter) ? $block : false, $i];
 	}
 
+	abstract protected function renderCode($block);
 	abstract protected function unEscapeBackslash($text);
 }

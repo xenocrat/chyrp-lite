@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright (c) 2023 Daniel Pimley
+ * @copyright Copyright 2023 Daniel Pimley
  * @license https://github.com/xenocrat/chyrp-markdown/blob/master/LICENSE
  * @link https://github.com/xenocrat/chyrp-markdown#readme
  */

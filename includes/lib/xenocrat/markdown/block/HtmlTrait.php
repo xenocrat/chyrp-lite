@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright (c) 2014 Carsten Brandt
+ * @copyright Copyright 2014 Carsten Brandt, 2024 Daniel Pimley
  * @license https://github.com/xenocrat/chyrp-markdown/blob/master/LICENSE
  * @link https://github.com/xenocrat/chyrp-markdown#readme
  */
@@ -352,4 +352,6 @@ trait HtmlTrait
 	{
 		return [['text', '&quot;'], 1];
 	}
+
+	abstract protected function unEscapeHtmlEntities($text, $flags = 0);
 }

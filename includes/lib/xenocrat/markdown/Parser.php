@@ -1,17 +1,20 @@
 <?php
 /**
- * @copyright Copyright (c) 2014 Carsten Brandt, 2024 Daniel Pimley
+ * @copyright Copyright 2014 Carsten Brandt, 2024 Daniel Pimley
  * @license https://github.com/xenocrat/chyrp-markdown/blob/master/LICENSE
  * @link https://github.com/xenocrat/chyrp-markdown#readme
  */
 
 namespace xenocrat\markdown;
+use ReflectionClass;
 use ReflectionMethod;
+use RuntimeException;
 
 /**
  * A generic parser for Markdown-like languages.
  *
- * @author Carsten Brandt <mail@cebe.cc>
+ * @author Carsten Brandt
+ * @author Daniel Pimley
  */
 abstract class Parser
 {
@@ -22,6 +25,11 @@ abstract class Parser
 	 * @var integer - The maximum nesting level for language elements.
 	 */
 	public $maximumNestingLevel = 32;
+
+	/**
+	 * @var boolean - Throw if the maximum nesting level is exceeded.
+	 */
+	public $maximumNestingLevelThrow = false;
 
 	/**
 	 * @var boolean - Whether to convert all tabs into 4 spaces.
@@ -206,7 +214,7 @@ abstract class Parser
 	{
 		if ($this->_blockTypes === null) {
 			// Detect block types via "identify" methods.
-			$reflection = new \ReflectionClass($this);
+			$reflection = new ReflectionClass($this);
 
 			$this->_blockTypes = array_filter(
 				array_map(
@@ -264,7 +272,12 @@ abstract class Parser
 	protected function parseBlocks($lines): array
 	{
 		if ($this->_depth >= $this->maximumNestingLevel) {
-			// Maximum depth is reached; do not parse input.
+		// Maximum depth is reached; do not parse input.
+			if ($this->maximumNestingLevelThrow) {
+                throw new RuntimeException(
+                    'Parser exceeded maximum nesting level'
+                );
+			}
 			return [['text', implode("\n", $lines)]];
 		}
 
@@ -387,7 +400,7 @@ abstract class Parser
 	{
 		$markers = [];
 		// Detect "parse" functions.
-		$reflection = new \ReflectionClass($this);
+		$reflection = new ReflectionClass($this);
 
 		foreach($reflection->getMethods(ReflectionMethod::IS_PROTECTED) as $method) {
 			$methodName = $method->getName();
@@ -443,7 +456,12 @@ abstract class Parser
 	protected function parseInline($text): array
 	{
 		if ($this->_depth >= $this->maximumNestingLevel) {
-			// Maximum depth is reached; do not parse input.
+		// Maximum depth is reached; do not parse input.
+			if ($this->maximumNestingLevelThrow) {
+                throw new RuntimeException(
+                    'Parser exceeded maximum nesting level'
+                );
+			}
 			return [['text', $text]];
 		}
 
