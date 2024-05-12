@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: includes/class/Config.php:18
@@ -1127,48 +1127,48 @@ msgid ""
 "site."
 msgstr "上传的文件超过本站点允许的 %d M。"
 
-#: includes/helpers.php:3115
+#: includes/helpers.php:3116
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr "JSON编码错误：%s"
 
-#: includes/helpers.php:3140
+#: includes/helpers.php:3141
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr "JSON解码错误：%s"
 
-#: includes/helpers.php:3223
+#: includes/helpers.php:3224
 msgid "Failed to create Zip archive."
 msgstr "无法创建 Zip 存档。"
 
-#: includes/helpers.php:3325
+#: includes/helpers.php:3326
 #, php-format
 msgid "Activate your account at %s"
 msgstr "在 %s 上激活您的账户"
 
-#: includes/helpers.php:3326 includes/helpers.php:3361
+#: includes/helpers.php:3327 includes/helpers.php:3362
 #, php-format
 msgid "Hello, %s."
 msgstr "您好，%s."
 
-#: includes/helpers.php:3329
+#: includes/helpers.php:3330
 msgid "You are receiving this message because you registered a new account."
 msgstr "您收到此邮件因为您已经注册了新账户。"
 
-#: includes/helpers.php:3332
+#: includes/helpers.php:3333
 msgid "Visit this link to activate your account:"
 msgstr "访问这个链接激活您的账户："
 
-#: includes/helpers.php:3360
+#: includes/helpers.php:3361
 #, php-format
 msgid "Reset your password at %s"
 msgstr "在 %s上重置您的密码"
 
-#: includes/helpers.php:3364
+#: includes/helpers.php:3365
 msgid "You are receiving this message because you requested a new password."
 msgstr "您收到此消息是因为您请求了新密码。"
 
-#: includes/helpers.php:3367
+#: includes/helpers.php:3368
 msgid "Visit this link to reset your password:"
 msgstr "访问这个链接重置您的密码："
 

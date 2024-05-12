@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: includes/class/Config.php:18
@@ -1145,49 +1145,49 @@ msgstr ""
 "Il file caricato supera la dimensione massima di %d megabyte consentiti da "
 "questo sito."
 
-#: includes/helpers.php:3115
+#: includes/helpers.php:3116
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr "Errore di codifica JSON: %s"
 
-#: includes/helpers.php:3140
+#: includes/helpers.php:3141
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr "Errore di decodifica JSON: %s"
 
-#: includes/helpers.php:3223
+#: includes/helpers.php:3224
 msgid "Failed to create Zip archive."
 msgstr "Impossibile creare l'archivio Zip."
 
-#: includes/helpers.php:3325
+#: includes/helpers.php:3326
 #, php-format
 msgid "Activate your account at %s"
 msgstr "Attiva il tuo account %s"
 
-#: includes/helpers.php:3326 includes/helpers.php:3361
+#: includes/helpers.php:3327 includes/helpers.php:3362
 #, php-format
 msgid "Hello, %s."
 msgstr "Ciao, %s."
 
-#: includes/helpers.php:3329
+#: includes/helpers.php:3330
 msgid "You are receiving this message because you registered a new account."
 msgstr "Si riceve questo messaggio perché è stato registrato un nuovo account."
 
-#: includes/helpers.php:3332
+#: includes/helpers.php:3333
 msgid "Visit this link to activate your account:"
 msgstr "Visita questo link per attivare il tuo account:"
 
-#: includes/helpers.php:3360
+#: includes/helpers.php:3361
 #, php-format
 msgid "Reset your password at %s"
 msgstr "Reimpostare la password per %s"
 
-#: includes/helpers.php:3364
+#: includes/helpers.php:3365
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 "Si riceve questo messaggio perché è stata richiesta una nuova password."
 
-#: includes/helpers.php:3367
+#: includes/helpers.php:3368
 msgid "Visit this link to reset your password:"
 msgstr "Visita questo link per reimpostare la password:"
 
