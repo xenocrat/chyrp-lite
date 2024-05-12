@@ -192,6 +192,8 @@ var ChyrpLightbox = {
         bg.css(
             ChyrpLightbox.styles.show
         );
+
+        bg.focus();
     },
     hide: function() {
         $("#ChyrpLightbox-bg").remove();
