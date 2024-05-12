@@ -291,14 +291,19 @@ var Uploads = {
                 $(
                     "<div>",
                     {
-                        "role": "region",
+                        "role": "dialog",
                         "aria-label": '<?php esce(__("Modal window", "admin")); ?>'
                     }
                 ).addClass(
                     "iframe_background"
                 ).append(
                     [
-                        $("<div>").addClass(
+                        $(
+                            "<div>",
+                            {
+                                "title": '<?php esce(__("Uploads", "admin")); ?>',
+                            }
+                        ).addClass(
                             "iframe_foreground"
                         ).on(
                             "click",
@@ -346,7 +351,7 @@ var Uploads = {
                         if (e.target === e.currentTarget)
                             $(this).remove();
                     }
-                ).insertAfter("#content");
+                ).insertAfter("#content").children("a.iframe_close_gadget").focus();
             },
             "html"
         ).fail(
@@ -374,7 +379,7 @@ var Help = {
     },
     show: function(href) {
         $("<div>", {
-            "role": "region",
+            "role": "dialog",
             "aria-label": '<?php esce(__("Modal window", "admin")); ?>'
         }).addClass(
             "iframe_background"
@@ -384,6 +389,7 @@ var Help = {
                     "<iframe>",
                     {
                         "src": href,
+                        "title": '<?php esce(__("Help content", "admin")); ?>',
                         "sandbox": "allow-same-origin allow-popups allow-popups-to-escape-sandbox"
                     }
                 ).addClass(
@@ -424,7 +430,7 @@ var Help = {
                 if (e.target === e.currentTarget)
                     $(this).remove();
             }
-        ).insertAfter("#content");
+        ).insertAfter("#content").children("a.iframe_close_gadget").focus();
     }
 }
 var Write = {
@@ -1161,7 +1167,7 @@ var Write = {
         $(
             "<div>",
             {
-                "role": "region",
+                "role": "dialog",
                 "aria-label": '<?php esce(__("Modal window", "admin")); ?>'
             }
         ).addClass(
@@ -1172,6 +1178,7 @@ var Write = {
                     "<iframe>",
                     {
                         "name": uid,
+                        "title": '<?php esce(__("Preview content", "admin")); ?>',
                         "sandbox": "allow-same-origin allow-popups allow-popups-to-escape-sandbox"
                     }
                 ).addClass(
@@ -1213,7 +1220,7 @@ var Write = {
                 if (e.target === e.currentTarget)
                     $(this).remove();
             }
-        ).insertAfter("#content");
+        ).insertAfter("#content").children("a.iframe_close_gadget").focus();
 
         // Submit the form and destroy it immediately.
         $("#" + uid).submit().remove();
