@@ -527,10 +527,10 @@ input[type="file"] {
     color: #1f1f23;
     font: inherit;
     font-size: 1.25rem;
-    padding: 0.5rem;
+    padding: 1rem;
     border-radius: 0em;
     border: 1px solid #cfcfcf;
-    background-color: #fbfbfb;
+    background-color: #ffffff;
 }
 html[dir="ltr"] select {
     appearance: none;
@@ -820,6 +820,7 @@ div.flash a {
 /* Group: Buttons */
 
 button,
+input::file-selector-button,
 a.button,
 a.next_page,
 a.prev_page {
@@ -837,15 +838,21 @@ a.prev_page {
     cursor: pointer;
     text-decoration: none;
 }
+input::file-selector-button {
+    margin-inline-end: 1rem;
+}
 button:hover,
+input::file-selector-button:hover,
 a.button:hover,
 a.next_page:hover,
 a.prev_page:hover,
 button:focus,
+input::file-selector-button:focus,
 a.button:focus,
 a.next_page:focus,
 a.prev_page:focus,
 button:active,
+input::file-selector-button:active,
 a.button:active,
 a.next_page:active,
 a.prev_page:active {
@@ -1095,6 +1102,9 @@ input.toolbar.hidden {
     margin: 0rem !important;
     visibility: hidden !important;
 }
+input.toolbar.hidden::file-selector-button {
+    display: none !important;
+}
 .drag_highlight {
     background-color: #fffde6;
 }
@@ -1249,6 +1259,11 @@ input.toolbar.hidden {
         margin: 1rem 0rem 0rem 0rem !important;
         text-align: center !important;
     }
+    input:not(.toolbar)::file-selector-button {
+        display: block !important;
+        width: 100% !important;
+        margin: 0rem 0rem 1rem 0rem !important;
+    }
     button:not(.toolbar):has(img),
     a.button:not(.toolbar):has(img) {
         padding-right: calc(16px + 0.5rem) !important;
@@ -1375,12 +1390,9 @@ input.toolbar.hidden {
     input[type="time"],
     input[type="number"],
     input[type="range"],
-    input[type="password"] {
-        background-color: #dfdfdf;
-        border-color: #afafaf;
-    }
+    input[type="password"],
     input[type="file"] {
-        background-color: transparent;
+        background-color: #dfdfdf;
         border-color: #afafaf;
     }
     input:invalid {
