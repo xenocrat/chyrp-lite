@@ -1259,17 +1259,14 @@ input.toolbar.hidden::file-selector-button {
         margin: 1rem 0rem 0rem 0rem !important;
         text-align: center !important;
     }
-    input:not(.toolbar)::file-selector-button {
-        display: block !important;
-        width: 100% !important;
-        margin: 0rem 0rem 1rem 0rem !important;
+    /* iOS can't have this nice thing ;_; */
+    @supports not (-webkit-touch-callout: none) {
+        input:not(.toolbar)::file-selector-button {
+            display: block !important;
+            width: 100% !important;
+            margin: 0rem 0rem 1rem 0rem !important;
+        }
     }
-    /* BEGIN workaround for Apple's big design stick */
-    input:not(.toolbar)::-webkit-file-upload-button {
-        width: auto !important;
-        margin: 0rem !important;
-    }
-    /* END workaround */
     button:not(.toolbar):has(img),
     a.button:not(.toolbar):has(img) {
         padding-right: calc(16px + 0.5rem) !important;
