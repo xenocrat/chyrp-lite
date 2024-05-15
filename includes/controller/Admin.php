@@ -275,7 +275,7 @@
 
             Flash::notice(
                 __("Post created!").' <a href="'.$post->url().'">'.
-                __("View post &rarr;").'</a>',
+                __("View post!").'</a>',
                 $post_redirect
             );
         }
@@ -385,7 +385,7 @@
 
             Flash::notice(
                 __("Post updated.").' <a href="'.$post->url().'">'.
-                __("View post &rarr;").'</a>',
+                __("View post!").'</a>',
                 $_SESSION['post_redirect']
             );
         }
@@ -664,7 +664,7 @@
 
             Flash::notice(
                 __("Page created!").' <a href="'.$page->url().'">'.
-                __("View page &rarr;").'</a>',
+                __("View page!").'</a>',
                 $page_redirect
             );
         }
@@ -806,7 +806,7 @@
 
             Flash::notice(
                 __("Page updated.").' <a href="'.$page->url().'">'.
-                __("View page &rarr;").'</a>',
+                __("View page!").'</a>',
                 $_SESSION['page_redirect']
             );
         }
@@ -1858,14 +1858,14 @@
                 Flash::message(
                     __("A post is using this upload.").' <a href="'.
                     url("manage_posts/query/".urlencode($filename)).'">'.
-                    __("View post &rarr;").'</a>'
+                    __("View post!").'</a>'
                 );
 
             if ($page_count > 0)
                 Flash::message(
                     __("A page is using this upload.").' <a href="'.
                     url("manage_pages/query/".urlencode($filename)).'">'.
-                    __("View page &rarr;").'</a>'
+                    __("View page!").'</a>'
                 );
 
             $this->display(
@@ -2702,7 +2702,7 @@
             if (!empty($_SESSION['theme']))
                 Flash::message(
                     __("You are currently previewing a theme.").
-                    ' <a href="'.url("preview_theme").'">'.__("Stop &rarr;").'</a>'
+                    ' <a href="'.url("preview_theme").'">'.__("Stop!").'</a>'
                 );
 
             $this->context["themes"] = array();
@@ -3266,7 +3266,7 @@
 
                     Flash::notice(
                         __("Page created.").' <a href="'.$page->url().'">'.
-                        __("View page &rarr;").'</a>'
+                        __("View page!").'</a>'
                     );
                 }
             }
