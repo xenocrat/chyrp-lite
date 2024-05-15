@@ -296,8 +296,7 @@
                 border-bottom: 1px solid #cfcfcf;
             }
             p {
-                width: fit-content;
-                margin: 0rem auto 1rem auto;
+                margin-bottom: 1rem;
             }
             strong {
                 font: inherit;
