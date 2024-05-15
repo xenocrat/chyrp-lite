@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/categorize/admin/help/categorizing_posts.twig:3
@@ -112,8 +112,8 @@ msgid "Posts"
 msgstr "Blogposts"
 
 #: modules/categorize/admin/pages/new_category.twig:35
-msgid "Add"
-msgstr "Hinfügen"
+msgid "Add Category"
+msgstr "Kategorie Hinzufügen"
 
 #: modules/categorize/categorize.php:67 modules/categorize/categorize.php:101
 msgid "Category"

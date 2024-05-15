@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/categorize/admin/help/categorizing_posts.twig:3
@@ -108,8 +108,8 @@ msgid "Posts"
 msgstr "所有帖子"
 
 #: modules/categorize/admin/pages/new_category.twig:35
-msgid "Add"
-msgstr "增加"
+msgid "Add Category"
+msgstr "添加类别"
 
 #: modules/categorize/categorize.php:67 modules/categorize/categorize.php:101
 msgid "Category"
