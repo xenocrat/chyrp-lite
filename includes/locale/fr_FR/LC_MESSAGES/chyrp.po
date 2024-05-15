@@ -50,11 +50,11 @@ msgstr "Premier"
 msgid "PDO failed to execute the prepared statement."
 msgstr "PDO n'a pas pu exécuter la requête préparée."
 
-#: includes/class/Query.php:189
+#: includes/class/Query.php:187
 msgid "Query String"
 msgstr "Chaîne de requête"
 
-#: includes/class/Query.php:196
+#: includes/class/Query.php:194
 msgid "Parameters"
 msgstr "Paramètres"
 

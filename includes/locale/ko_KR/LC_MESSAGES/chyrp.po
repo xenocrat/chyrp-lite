@@ -49,11 +49,11 @@ msgstr "처음"
 msgid "PDO failed to execute the prepared statement."
 msgstr "PDO가 준비된 명령문을 실행하지 못했습니다."
 
-#: includes/class/Query.php:189
+#: includes/class/Query.php:187
 msgid "Query String"
 msgstr "쿼리문"
 
-#: includes/class/Query.php:196
+#: includes/class/Query.php:194
 msgid "Parameters"
 msgstr "파라미터"
 

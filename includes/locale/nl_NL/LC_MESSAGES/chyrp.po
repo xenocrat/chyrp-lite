@@ -48,11 +48,11 @@ msgstr "Eerste"
 msgid "PDO failed to execute the prepared statement."
 msgstr "PDO kan het prepared statement niet uitvoeren."
 
-#: includes/class/Query.php:189
+#: includes/class/Query.php:187
 msgid "Query String"
 msgstr "Zoekstring"
 
-#: includes/class/Query.php:196
+#: includes/class/Query.php:194
 msgid "Parameters"
 msgstr "Parameters"
 
