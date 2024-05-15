@@ -181,8 +181,6 @@
             # Trigger an error if throws were not requested.
             if (!$this->throw_exceptions) {
                 $message = (DEBUG) ?
-                    fix($this->sql->error, false, true)
-                    :
                     fix($this->sql->error, false, true).
                     "\n".
                     "\n".
@@ -198,6 +196,8 @@
                     "<pre>".
                     fix(print_r($this->params, true), false, true).
                     "</pre>"
+                    :
+                    fix($this->sql->error, false, true)
                     ;
 
                 trigger_error(
