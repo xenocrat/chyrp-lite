@@ -390,11 +390,6 @@ div.pagination {
     row-gap: 1rem;
     justify-content: center;
 }
-a.prev_page,
-a.next_page {
-    min-width: 10em;
-    max-width: 50%;
-}
 span.pages {
     display: block;
     flex: 100%;
@@ -898,7 +893,6 @@ a.button > img {
 }
 div.confirmation button,
 div.confirmation a.button {
-    min-width: 10em;
     flex: 1 0 10em;
 }
 div.pagination a.prev_page,
@@ -932,8 +926,8 @@ button[disabled] {
     margin: 0rem;
 }
 .more_options {
-    display: flex;
-    flex-flow: row wrap;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     column-gap: 2rem;
     row-gap: 1rem;
     justify-content: space-between;
@@ -942,7 +936,6 @@ button[disabled] {
     box-sizing: border-box;
     display: block;
     margin: 0rem;
-    flex: 1 0 35%;
 }
 div.more_options p input,
 div.more_options p select,
@@ -1270,8 +1263,8 @@ input.toolbar.hidden::file-selector-button {
     a.button:not(.toolbar):has(img) {
         padding-right: calc(16px + 0.5rem) !important;
     }
-    div.more_options p.more_options_option {
-        flex: 100%;
+    div.more_options {
+        grid-template-columns: 1fr;
     }
     div.confirmation {
         display: block;
