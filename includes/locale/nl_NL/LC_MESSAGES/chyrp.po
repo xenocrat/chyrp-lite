@@ -1185,22 +1185,22 @@ msgstr "Bezoek deze link om je wachtwoord te wijzigen:"
 msgid "Guest"
 msgstr "Gast"
 
-#: includes/lib/Leaf.php:479
+#: includes/lib/Leaf.php:485
 #, php-format
 msgid "%s GB"
 msgstr "%s GB"
 
-#: includes/lib/Leaf.php:484
+#: includes/lib/Leaf.php:490
 #, php-format
 msgid "%s MB"
 msgstr "%s MB"
 
-#: includes/lib/Leaf.php:488
+#: includes/lib/Leaf.php:494
 #, php-format
 msgid "%s KB"
 msgstr "%s KB"
 
-#: includes/lib/Leaf.php:714
+#: includes/lib/Leaf.php:720
 msgid "Image source"
 msgstr "Afbeeldingsbron"
 

@@ -1384,22 +1384,22 @@ msgstr ""
 msgid "Guest"
 msgstr ""
 
-#: includes/lib/Leaf.php:479
+#: includes/lib/Leaf.php:485
 #, php-format
 msgid "%s GB"
 msgstr ""
 
-#: includes/lib/Leaf.php:484
+#: includes/lib/Leaf.php:490
 #, php-format
 msgid "%s MB"
 msgstr ""
 
-#: includes/lib/Leaf.php:488
+#: includes/lib/Leaf.php:494
 #, php-format
 msgid "%s KB"
 msgstr ""
 
-#: includes/lib/Leaf.php:714
+#: includes/lib/Leaf.php:720
 msgid "Image source"
 msgstr ""
 
