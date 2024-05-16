@@ -320,7 +320,9 @@
 
                 if ($date1 < $date2) {
                     $year2 = _w("Y", $date2);
-                    $notice.= "&ndash;".$year2;
+
+                    if (strcmp($year1, $year2) !== 0)
+                        $notice.= "&ndash;".$year2;
                 }
             }
         }
