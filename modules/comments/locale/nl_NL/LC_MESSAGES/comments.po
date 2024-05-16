@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/comments/admin/pages/comment_settings.twig:3
@@ -96,52 +96,52 @@ msgstr "Wijzigen Opmerking op &#8220;%s&#8221;"
 msgid "Body"
 msgstr "Body"
 
-#: modules/comments/admin/pages/edit_comment.twig:22
+#: modules/comments/admin/pages/edit_comment.twig:24
 msgid "Author"
 msgstr "Schrijver"
 
-#: modules/comments/admin/pages/edit_comment.twig:27
+#: modules/comments/admin/pages/edit_comment.twig:29
 msgid "Author Email"
 msgstr "Schrijver email"
 
-#: modules/comments/admin/pages/edit_comment.twig:31
+#: modules/comments/admin/pages/edit_comment.twig:33
 msgid "Author Website"
 msgstr "Schrijver website"
 
-#: modules/comments/admin/pages/edit_comment.twig:38
+#: modules/comments/admin/pages/edit_comment.twig:40
 msgid "Timestamp"
 msgstr "Tijdstempel"
 
-#: modules/comments/admin/pages/edit_comment.twig:43
+#: modules/comments/admin/pages/edit_comment.twig:45
 #: modules/comments/admin/pages/manage_comments.twig:26
 msgid "Status"
 msgstr "Status"
 
-#: modules/comments/admin/pages/edit_comment.twig:46
+#: modules/comments/admin/pages/edit_comment.twig:48
 #: modules/comments/comments.php:690
 msgid "Approved"
 msgstr "Goedgekeurd"
 
-#: modules/comments/admin/pages/edit_comment.twig:48
+#: modules/comments/admin/pages/edit_comment.twig:50
 #: modules/comments/comments.php:691
 msgid "Denied"
 msgstr "Verworpen"
 
-#: modules/comments/admin/pages/edit_comment.twig:50
+#: modules/comments/admin/pages/edit_comment.twig:52
 #: modules/comments/admin/pages/manage_spam.twig:18
 #: modules/comments/comments.php:692
 msgid "Spam"
 msgstr "Spam"
 
-#: modules/comments/admin/pages/edit_comment.twig:57
+#: modules/comments/admin/pages/edit_comment.twig:59
 msgid "Email Notifications"
 msgstr "Notificaties per email"
 
-#: modules/comments/admin/pages/edit_comment.twig:67
+#: modules/comments/admin/pages/edit_comment.twig:69
 msgid "Save"
 msgstr "Sla op"
 
-#: modules/comments/admin/pages/edit_comment.twig:69
+#: modules/comments/admin/pages/edit_comment.twig:71
 #: modules/comments/admin/pages/manage_comments.twig:86
 #: modules/comments/admin/pages/manage_spam.twig:72
 msgid "Delete"

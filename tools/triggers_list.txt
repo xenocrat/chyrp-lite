@@ -557,7 +557,7 @@ Arguments:
 edit_comment_options
 --------------------
 Called from:
-	modules/comments/admin/pages/edit_comment.twig on line 61
+	modules/comments/admin/pages/edit_comment.twig on line 63
 
 Arguments:
 	comment

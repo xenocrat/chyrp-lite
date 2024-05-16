@@ -80,52 +80,52 @@ msgstr ""
 msgid "Body"
 msgstr ""
 
-#: modules/comments/admin/pages/edit_comment.twig:22
+#: modules/comments/admin/pages/edit_comment.twig:24
 msgid "Author"
 msgstr ""
 
-#: modules/comments/admin/pages/edit_comment.twig:27
+#: modules/comments/admin/pages/edit_comment.twig:29
 msgid "Author Email"
 msgstr ""
 
-#: modules/comments/admin/pages/edit_comment.twig:31
+#: modules/comments/admin/pages/edit_comment.twig:33
 msgid "Author Website"
 msgstr ""
 
-#: modules/comments/admin/pages/edit_comment.twig:38
+#: modules/comments/admin/pages/edit_comment.twig:40
 msgid "Timestamp"
 msgstr ""
 
-#: modules/comments/admin/pages/edit_comment.twig:43
+#: modules/comments/admin/pages/edit_comment.twig:45
 #: modules/comments/admin/pages/manage_comments.twig:26
 msgid "Status"
 msgstr ""
 
-#: modules/comments/admin/pages/edit_comment.twig:46
+#: modules/comments/admin/pages/edit_comment.twig:48
 #: modules/comments/comments.php:690
 msgid "Approved"
 msgstr ""
 
-#: modules/comments/admin/pages/edit_comment.twig:48
+#: modules/comments/admin/pages/edit_comment.twig:50
 #: modules/comments/comments.php:691
 msgid "Denied"
 msgstr ""
 
-#: modules/comments/admin/pages/edit_comment.twig:50
+#: modules/comments/admin/pages/edit_comment.twig:52
 #: modules/comments/admin/pages/manage_spam.twig:18
 #: modules/comments/comments.php:692
 msgid "Spam"
 msgstr ""
 
-#: modules/comments/admin/pages/edit_comment.twig:57
+#: modules/comments/admin/pages/edit_comment.twig:59
 msgid "Email Notifications"
 msgstr ""
 
-#: modules/comments/admin/pages/edit_comment.twig:67
+#: modules/comments/admin/pages/edit_comment.twig:69
 msgid "Save"
 msgstr ""
 
-#: modules/comments/admin/pages/edit_comment.twig:69
+#: modules/comments/admin/pages/edit_comment.twig:71
 #: modules/comments/admin/pages/manage_comments.twig:86
 #: modules/comments/admin/pages/manage_spam.twig:72
 msgid "Delete"
