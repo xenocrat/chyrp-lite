@@ -12,7 +12,9 @@
 {{ "Body" | translate("comments") }}
 </label>
 <span id="body_toolbar" class="options_toolbar">{% if site.enable_markdown %}
-<a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown"><img src="{{ site.chyrp_url }}/admin/images/icons/markdown.svg" alt="{{ 'Markdown' | translate }}"></a>
+<a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown">
+{{- icon_img("markdown.svg", "Markdown" | translate) -}}
+</a>
 {% endif %}</span>
 <textarea rows="12" name="body" id="body" data-no_uploads{{ comment_markdown }} required>{{ comment.body | fix(false, true) }}</textarea>
 <span id="body_tray" class="options_tray" role="status"></span>
@@ -64,9 +66,9 @@
 <input type="hidden" name="id" value="{{ comment.id }}" id="id">
 <div class="buttons confirmation">
 <button type="submit">
-<img src="{{ site.chyrp_url }}/admin/images/icons/save.svg" alt="">{{ "Save" | translate("comments") }}
+{{ "Save" | translate("comments") }}
 </button>
-{{ comment.delete_link('<img src="' ~ site.chyrp_url ~ '/admin/images/icons/delete.svg" alt="">' ~ ("Delete" | translate("comments")), null, null, "button boo") }}
+{{ comment.delete_link("Delete" | translate("comments"), null, null, "button boo") }}
 </div>
 </fieldset>
 </form>
