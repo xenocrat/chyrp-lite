@@ -308,14 +308,20 @@
         $notice = "&copy;";
 
         if (isset($date1)) {
+            if (!is_numeric($date1))
+                $date1 = strtotime($date1);
+
             $year1 = _w("Y", $date1);
             $notice.= "&nbsp;".$year1;
 
             if (isset($date2)) {
-                $year2 = _w("Y", $date2);
+                if (!is_numeric($date2))
+                    $date2 = strtotime($date2);
 
-                if (strcmp($year2, $year1))
+                if ($date1 < $date2) {
+                    $year2 = _w("Y", $date2);
                     $notice.= "&ndash;".$year2;
+                }
             }
         }
 
