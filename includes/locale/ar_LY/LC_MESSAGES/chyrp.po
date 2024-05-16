@@ -1183,22 +1183,22 @@ msgstr "قم بزيارة هذا الرابط لإعادة تعيين كلمة �
 msgid "Guest"
 msgstr "ضيف"
 
-#: includes/lib/Leaf.php:485
+#: includes/lib/Leaf.php:487
 #, php-format
 msgid "%s GB"
 msgstr "%s جيجابايت"
 
-#: includes/lib/Leaf.php:490
+#: includes/lib/Leaf.php:492
 #, php-format
 msgid "%s MB"
 msgstr "%s ميجابايت"
 
-#: includes/lib/Leaf.php:494
+#: includes/lib/Leaf.php:496
 #, php-format
 msgid "%s KB"
 msgstr "%s كيلوبايت"
 
-#: includes/lib/Leaf.php:720
+#: includes/lib/Leaf.php:722
 msgid "Image source"
 msgstr "مصدر الصورة"
 
