@@ -928,6 +928,7 @@ button[disabled] {
 .more_options {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    grid-auto-flow: row;
     column-gap: 2rem;
     row-gap: 1rem;
     justify-content: space-between;
