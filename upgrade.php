@@ -16,6 +16,7 @@
     define('UPGRADING',                     true);
     define('INSTALLING',                    false);
     define('COOKIE_LIFETIME',               2592000);
+    define('PASSWORD_RESET_TOKEN_LIFETIME', 3600);
     define('MAX_TIME_LIMIT',                600);
     define('MAX_MEMORY_LIMIT',              "100M");
     define('SQL_DATETIME_ZERO',             "1000-01-01 00:00:00");
