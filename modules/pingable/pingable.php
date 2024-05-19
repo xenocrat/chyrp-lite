@@ -53,7 +53,7 @@
             Pingback::add(
                 post_id:$post->id,
                 source:$from,
-                title:preg_replace("~(https?://|^)([^/:]+).*~", "$2", $from)
+                title:preg_replace("~(https?://|^)([^/:]+).*~i", "$2", $from)
             );
         }
 
