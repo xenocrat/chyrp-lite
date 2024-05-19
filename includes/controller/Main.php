@@ -1144,9 +1144,9 @@
             fallback($_REQUEST['login']);
             fallback($_REQUEST['token']);
 
-            $life = time() - intval($_REQUEST['issue']);
+            $age = time() - intval($_REQUEST['issue']);
 
-            if ($life > 3600)
+            if ($age > PASSWORD_RESET_TOKEN_LIFETIME)
                 Flash::notice(
                     __("The link has expired. Please try again."),
                     "lost_password"
