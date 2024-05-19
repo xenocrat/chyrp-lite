@@ -177,15 +177,15 @@ msgstr "GitHub으로 가기."
 msgid "Unable to check for new Chyrp Lite versions."
 msgstr "새로운 Chyrp Lite 버전을 확인할 수 없습니다."
 
-#: includes/common.php:312 includes/common.php:320
+#: includes/common.php:316 includes/common.php:324
 msgid "Service Unavailable"
 msgstr "서비스 불가"
 
-#: includes/common.php:313
+#: includes/common.php:317
 msgid "This resource is temporarily unable to serve your request."
 msgstr "자원이 일시적으로 요청을 처리할 수 없습니다."
 
-#: includes/common.php:321
+#: includes/common.php:325
 msgid "This resource cannot respond because it is not configured."
 msgstr "자원이 구성되지 않았기 때문에 응답할 수 없습니다."
 

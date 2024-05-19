@@ -255,16 +255,16 @@ msgstr ""
 msgid "Unable to check for new Chyrp Lite versions."
 msgstr ""
 
-#: includes/common.php:312
-#: includes/common.php:320
+#: includes/common.php:316
+#: includes/common.php:324
 msgid "Service Unavailable"
 msgstr ""
 
-#: includes/common.php:313
+#: includes/common.php:317
 msgid "This resource is temporarily unable to serve your request."
 msgstr ""
 
-#: includes/common.php:321
+#: includes/common.php:325
 msgid "This resource cannot respond because it is not configured."
 msgstr ""
 
