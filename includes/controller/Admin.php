@@ -3046,7 +3046,7 @@
             $config->set("email", $_POST['email']);
             $config->set("timezone", $_POST['timezone']);
             $config->set("locale", $_POST['locale']);
-            $config->set("monospace_font", !empty($_POST['check_updates']));
+            $config->set("monospace_font", !empty($_POST['monospace_font']));
             $config->set("check_updates", !empty($_POST['check_updates']));
             $config->set("check_updates_last", $check_updates_last);
 
