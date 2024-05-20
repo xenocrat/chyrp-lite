@@ -1131,6 +1131,7 @@
      * Returns:
      *     An array containing an array of "WHERE" conditions, an array
      *     of "WHERE" parameters, and "ORDER BY" clause for the results.
+     *     Non-keyword text will be parameterized as array[1][":query"].
      */
     function keywords($query, $plain, $table = null): array {
         $trimmed = trim($query);
@@ -1140,6 +1141,13 @@
 
         $sql = SQL::current();
         $trigger = Trigger::current();
+
+        # Add ESCAPE clause to LIKE operators without one.
+        $plain = preg_replace(
+            "/( LIKE :query(?! ESCAPE))($| )/",
+            "$1 ESCAPE '|'$2",
+            $plain
+        );
 
         # PostgreSQL: use ILIKE operator for case-insensitivity.
         if ($sql->adapter == "pgsql")
