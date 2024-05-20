@@ -51,6 +51,13 @@
             $this->throw_exceptions = $throw_exceptions;
             $this->queryString = $query;
 
+            foreach ($params as $name => $val)
+                $this->queryString = preg_replace(
+                    "/{$name}([^a-zA-Z0-9_]|$)/",
+                    $this->sql->escape($val, !is_int($val))."$1",
+                    $this->queryString
+                );
+
             if ($count and DEBUG) {
                 $trace = debug_backtrace();
                 $target = $trace[$index = 0];
@@ -68,24 +75,11 @@
                         break;
                 }
 
-                $logQuery = $query;
-
-                foreach ($params as $name => $val)
-                    $logQuery = preg_replace(
-                        "/{$name}([^a-zA-Z0-9_]|$)/",
-                        str_replace(
-                            "\\",
-                            "\\\\",
-                            $this->sql->escape($val, !is_int($val))
-                        )."$1",
-                        $logQuery
-                    );
-
                 $this->sql->debug[] = array(
                     "number" => $this->sql->queries,
-                    "file" => str_replace(MAIN_DIR."/", "", $target["file"]),
+                    "file" => str_replace(MAIN_DIR.DIR, "", $target["file"]),
                     "line" => $target["line"],
-                    "query" => $logQuery,
+                    "query" => $this->queryString,
                     "time" => timer_stop()
                 );
             }
@@ -93,18 +87,6 @@
             try {
                 $this->query = $this->sql->db->prepare($query);
                 $this->result = $this->query->execute($params);
-                $this->queryString = $query;
-
-                foreach ($params as $name => $val)
-                    $this->queryString = preg_replace(
-                        "/{$name}([^a-zA-Z0-9_]|$)/",
-                        str_replace(
-                            array("\\", "\$"),
-                            array("\\\\", "\\\$"),
-                            $this->sql->escape($val, !is_int($val))
-                        )."$1",
-                        $this->queryString
-                    );
 
                 if (!$this->result)
                     throw new PDOException(
