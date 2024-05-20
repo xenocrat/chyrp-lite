@@ -383,7 +383,7 @@ Arguments:
 correspond_reset_password
 -------------------------
 Called from:
-	includes/helpers.php on line 3358
+	includes/helpers.php on line 3363
 
 Arguments:
 	$user
@@ -393,7 +393,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 3399
+	includes/helpers.php on line 3409
 
 Arguments:
 	$ob
@@ -613,7 +613,7 @@ Arguments:
 correspond_user_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1429
+	modules/comments/comments.php on line 1434
 
 Arguments:
 	$comment
@@ -623,7 +623,7 @@ Arguments:
 correspond_peer_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1454
+	modules/comments/comments.php on line 1464
 
 Arguments:
 	$comment
@@ -1124,7 +1124,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 3400
+	includes/helpers.php on line 3410
 	includes/lib/Leaf.php on line 360
 
 Target:

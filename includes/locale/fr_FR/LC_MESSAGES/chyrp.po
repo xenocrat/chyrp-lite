@@ -1157,34 +1157,34 @@ msgstr "Erreur de décodage JSON : %s"
 msgid "Failed to create Zip archive."
 msgstr "La création de l'archive ZIP a échoué."
 
-#: includes/helpers.php:3326
+#: includes/helpers.php:3331
 #, php-format
 msgid "Activate your account at %s"
 msgstr "Activez votre compte à l'adresse %s"
 
-#: includes/helpers.php:3327 includes/helpers.php:3362
+#: includes/helpers.php:3332 includes/helpers.php:3372
 #, php-format
 msgid "Hello, %s."
 msgstr "Bonjour, %s."
 
-#: includes/helpers.php:3330
+#: includes/helpers.php:3335
 msgid "You are receiving this message because you registered a new account."
 msgstr "Vous recevez ce message car vous avez créé un nouveau compte."
 
-#: includes/helpers.php:3333
+#: includes/helpers.php:3338
 msgid "Visit this link to activate your account:"
 msgstr "Suivez ce lien pour activer votre compte :"
 
-#: includes/helpers.php:3361
+#: includes/helpers.php:3371
 #, php-format
 msgid "Reset your password at %s"
 msgstr "Réinitialisez votre mot de passe à l'adresse %s"
 
-#: includes/helpers.php:3365
+#: includes/helpers.php:3375
 msgid "You are receiving this message because you requested a new password."
 msgstr "Vous recevez ce message car vous avez demandé un nouveau mot de passe."
 
-#: includes/helpers.php:3368
+#: includes/helpers.php:3378
 msgid "Visit this link to reset your password:"
 msgstr "Suivez ce lien pour réinitialiser votre mot de passe :"
 

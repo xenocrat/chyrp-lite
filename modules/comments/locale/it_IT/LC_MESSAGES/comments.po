@@ -402,19 +402,19 @@ msgstr "Solo utenti registrati"
 msgid "Comment Status"
 msgstr "Stato del commento"
 
-#: modules/comments/comments.php:1412 modules/comments/comments.php:1432
-#: modules/comments/comments.php:1457
+#: modules/comments/comments.php:1417 modules/comments/comments.php:1442
+#: modules/comments/comments.php:1472
 #, php-format
 msgid "New Comment at %s"
 msgstr "Nuovo commento a %s"
 
-#: modules/comments/comments.php:1413 modules/comments/comments.php:1433
-#: modules/comments/comments.php:1458
+#: modules/comments/comments.php:1418 modules/comments/comments.php:1443
+#: modules/comments/comments.php:1473
 #, php-format
 msgid "%s commented on a blog post:"
 msgstr "%s ha aggiunto un commento sul blog post:"
 
-#: modules/comments/comments.php:1466
+#: modules/comments/comments.php:1481
 msgid "Unsubscribe from this conversation:"
 msgstr "Annulla l'iscrizione a questa conversazione:"
 

@@ -1141,34 +1141,34 @@ msgstr "JSON解码错误：%s"
 msgid "Failed to create Zip archive."
 msgstr "无法创建 Zip 存档。"
 
-#: includes/helpers.php:3326
+#: includes/helpers.php:3331
 #, php-format
 msgid "Activate your account at %s"
 msgstr "在 %s 上激活您的账户"
 
-#: includes/helpers.php:3327 includes/helpers.php:3362
+#: includes/helpers.php:3332 includes/helpers.php:3372
 #, php-format
 msgid "Hello, %s."
 msgstr "您好，%s."
 
-#: includes/helpers.php:3330
+#: includes/helpers.php:3335
 msgid "You are receiving this message because you registered a new account."
 msgstr "您收到此邮件因为您已经注册了新账户。"
 
-#: includes/helpers.php:3333
+#: includes/helpers.php:3338
 msgid "Visit this link to activate your account:"
 msgstr "访问这个链接激活您的账户："
 
-#: includes/helpers.php:3361
+#: includes/helpers.php:3371
 #, php-format
 msgid "Reset your password at %s"
 msgstr "在 %s上重置您的密码"
 
-#: includes/helpers.php:3365
+#: includes/helpers.php:3375
 msgid "You are receiving this message because you requested a new password."
 msgstr "您收到此消息是因为您请求了新密码。"
 
-#: includes/helpers.php:3368
+#: includes/helpers.php:3378
 msgid "Visit this link to reset your password:"
 msgstr "访问这个链接重置您的密码："
 

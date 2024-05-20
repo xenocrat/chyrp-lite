@@ -1148,34 +1148,34 @@ msgstr "خطأ في فك الترميز JSON: %s"
 msgid "Failed to create Zip archive."
 msgstr "فشل إنشاء أرشيف مضغوط."
 
-#: includes/helpers.php:3326
+#: includes/helpers.php:3331
 #, php-format
 msgid "Activate your account at %s"
 msgstr "تفعيل حسابك في %s"
 
-#: includes/helpers.php:3327 includes/helpers.php:3362
+#: includes/helpers.php:3332 includes/helpers.php:3372
 #, php-format
 msgid "Hello, %s."
 msgstr "مرحباً، %s."
 
-#: includes/helpers.php:3330
+#: includes/helpers.php:3335
 msgid "You are receiving this message because you registered a new account."
 msgstr "لقد تلقيت هذه الرسالة لأنك سجلت حِساب جديد."
 
-#: includes/helpers.php:3333
+#: includes/helpers.php:3338
 msgid "Visit this link to activate your account:"
 msgstr "قم بزيارة هذا الرابط لتفعيل حسابك:"
 
-#: includes/helpers.php:3361
+#: includes/helpers.php:3371
 #, php-format
 msgid "Reset your password at %s"
 msgstr "إعادة تعيين كلمة مرورك في %s"
 
-#: includes/helpers.php:3365
+#: includes/helpers.php:3375
 msgid "You are receiving this message because you requested a new password."
 msgstr "لقد تلقيت هذه الرسالة لأنك طلبت كلمة مرور جديدة."
 
-#: includes/helpers.php:3368
+#: includes/helpers.php:3378
 msgid "Visit this link to reset your password:"
 msgstr "قم بزيارة هذا الرابط لإعادة تعيين كلمة مرورك:"
 

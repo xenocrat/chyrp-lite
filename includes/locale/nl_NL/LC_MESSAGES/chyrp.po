@@ -1149,35 +1149,35 @@ msgstr "JSON decodeer-fout: %s"
 msgid "Failed to create Zip archive."
 msgstr "Zip-archief maken mislukt."
 
-#: includes/helpers.php:3326
+#: includes/helpers.php:3331
 #, php-format
 msgid "Activate your account at %s"
 msgstr "Activeer je account bij %s"
 
-#: includes/helpers.php:3327 includes/helpers.php:3362
+#: includes/helpers.php:3332 includes/helpers.php:3372
 #, php-format
 msgid "Hello, %s."
 msgstr "Hallo, %s."
 
-#: includes/helpers.php:3330
+#: includes/helpers.php:3335
 msgid "You are receiving this message because you registered a new account."
 msgstr "Je ontvangt dit bericht, omdat je een nieuwe account hebt aangemaakt."
 
-#: includes/helpers.php:3333
+#: includes/helpers.php:3338
 msgid "Visit this link to activate your account:"
 msgstr "Bezoek deze link om je account te activeren:"
 
-#: includes/helpers.php:3361
+#: includes/helpers.php:3371
 #, php-format
 msgid "Reset your password at %s"
 msgstr "Wijzig je wachtwoord van %s"
 
-#: includes/helpers.php:3365
+#: includes/helpers.php:3375
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 "Je ontangt dit bericht, omdat je een nieuw wachtwoord hebt aangevraagd."
 
-#: includes/helpers.php:3368
+#: includes/helpers.php:3378
 msgid "Visit this link to reset your password:"
 msgstr "Bezoek deze link om je wachtwoord te wijzigen:"
 
