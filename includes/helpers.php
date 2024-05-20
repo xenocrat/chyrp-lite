@@ -3322,7 +3322,12 @@
         if ($trigger->exists("correspond_activate_account"))
             return $trigger->call("correspond_activate_account", $user, $url);
 
-        $headers = array("From" => $config->email, "X-Mailer" => CHYRP_IDENTITY);
+        $headers = array(
+            "Content-Type" => "text/plain; charset=UTF-8",
+            "From" => $config->email,
+            "X-Mailer" => CHYRP_IDENTITY
+        );
+
         $subject = _f("Activate your account at %s", $config->name);
         $message = _f("Hello, %s.", $user->login).
                    "\r\n".
@@ -3357,7 +3362,12 @@
         if ($trigger->exists("correspond_reset_password"))
             return $trigger->call("correspond_reset_password", $user, $url);
 
-        $headers = array("From" => $config->email, "X-Mailer" => CHYRP_IDENTITY);
+        $headers = array(
+            "Content-Type" => "text/plain; charset=UTF-8",
+            "From" => $config->email,
+            "X-Mailer" => CHYRP_IDENTITY
+        );
+
         $subject = _f("Reset your password at %s", $config->name);
         $message = _f("Hello, %s.", $user->login).
                    "\r\n".
