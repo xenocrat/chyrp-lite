@@ -547,8 +547,8 @@
             # PostgreSQL: cast to text to enable LIKE operator.
             $text = ($sql->adapter == "pgsql") ? "::text" : "" ;
 
-            # Backslash ESCAPE clause for LIKE.
-            $escape = " ESCAPE ".$sql->escape("\\");
+            # ESCAPE clause for LIKE.
+            $escape = " ESCAPE '|'";
 
             foreach ($conds as $key => $val) {
                 if (is_int($key)) {
