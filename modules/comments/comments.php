@@ -1408,7 +1408,12 @@
             if ($trigger->exists("correspond_site_new_comment"))
                 return $trigger->call("correspond_site_new_comment", $comment);
 
-            $headers = array("From" => $config->email, "X-Mailer" => CHYRP_IDENTITY);
+            $headers = array(
+                "Content-Type" => "text/plain; charset=UTF-8",
+                "From" => $config->email,
+                "X-Mailer" => CHYRP_IDENTITY
+            );
+
             $subject = _f("New Comment at %s", $config->name, "comments");
             $message = _f("%s commented on a blog post:", $comment->author, "comments").
                        "\r\n".
@@ -1428,7 +1433,12 @@
             if ($trigger->exists("correspond_user_new_comment"))
                 return $trigger->call("correspond_user_new_comment", $comment, $user);
 
-            $headers = array("From" => $config->email, "X-Mailer" => CHYRP_IDENTITY);
+            $headers = array(
+                "Content-Type" => "text/plain; charset=UTF-8",
+                "From" => $config->email,
+                "X-Mailer" => CHYRP_IDENTITY
+            );
+
             $subject = _f("New Comment at %s", $config->name, "comments");
             $message = _f("%s commented on a blog post:", $comment->author, "comments").
                        "\r\n".
@@ -1453,7 +1463,12 @@
             if ($trigger->exists("correspond_peer_new_comment"))
                 return $trigger->call("correspond_peer_new_comment", $comment, $peer, $url);
 
-            $headers = array("From" => $config->email, "X-Mailer" => CHYRP_IDENTITY);
+            $headers = array(
+                "Content-Type" => "text/plain; charset=UTF-8",
+                "From" => $config->email,
+                "X-Mailer" => CHYRP_IDENTITY
+            );
+
             $subject = _f("New Comment at %s", $config->name, "comments");
             $message = _f("%s commented on a blog post:", $comment->author, "comments").
                        "\r\n".
