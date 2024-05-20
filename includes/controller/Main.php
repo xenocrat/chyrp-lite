@@ -479,7 +479,7 @@
             if (isset($_POST['query']))
                 redirect(
                     "search/".
-                    str_ireplace("%2F", "", urlencode($_POST['query'])).
+                    str_ireplace(array("%2F", "%5C"), "", urlencode($_POST['query'])).
                     "/"
                 );
 

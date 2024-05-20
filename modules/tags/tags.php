@@ -78,9 +78,8 @@
         private function tags_encoded($text): string {
             # Recreate JSON encoding for SQL queries.
             $json = trim(json_set((string) $text), "\"");
-            # Escape JSON-encoded Unicode codepoints.
-            # QueryBuilder will LIKE :query ESCAPE '\'.
-            return str_replace("\\", "\\\\", $json);
+            # See: QueryBuilder::build_conditions().
+            return str_replace("|", "||", $json);
         }
 
         private function prepare_tags($tags): array {
@@ -264,7 +263,7 @@
             if (isset($_POST['search']))
                 redirect(
                     "manage_tags/search/".
-                    str_ireplace("%2F", "", urlencode($_POST['search'])).
+                    str_ireplace(array("%2F", "%5C"), "", urlencode($_POST['search'])).
                     "/"
                 );
 
@@ -316,7 +315,7 @@
             if (isset($_POST['query']))
                 redirect(
                     "posts_tagged/query/".
-                    str_ireplace("%2F", "", urlencode($_POST['query'])).
+                    str_ireplace(array("%2F", "%5C"), "", urlencode($_POST['query'])).
                     "/"
                 );
 
@@ -324,7 +323,7 @@
             if (isset($_GET['clean']) and isset($_GET['query']))
                 redirect(
                     "posts_tagged/clean/".
-                    str_ireplace("%2F", "", urlencode($_GET['clean'])).
+                    str_ireplace(array("%2F", "%5C"), "", urlencode($_GET['clean'])).
                     "/"
                 );
 

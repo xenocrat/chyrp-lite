@@ -269,7 +269,7 @@
             if (isset($_POST['query']))
                 redirect(
                     "manage_category/query/".
-                    str_ireplace("%2F", "", urlencode($_POST['query'])).
+                    str_ireplace(array("%2F", "%5C"), "", urlencode($_POST['query'])).
                     "/"
                 );
 
