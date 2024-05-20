@@ -547,6 +547,9 @@
             # PostgreSQL: cast to text to enable LIKE operator.
             $text = ($sql->adapter == "pgsql") ? "::text" : "" ;
 
+            # Backslash ESCAPE clause for LIKE.
+            $escape = " ESCAPE ".$sql->escape("\\");
+
             foreach ($conds as $key => $val) {
                 if (is_int($key)) {
                     # Full expression.
@@ -596,7 +599,7 @@
                                     "_",
                                     $key
                                 )."_".$index;
-                                $likes[] = $key.$text." LIKE :".$param;
+                                $likes[] = $key.$text." LIKE :".$param.$escape;
                                 $params[":".$param] = $match;
                             }
 
@@ -612,7 +615,7 @@
                                     "_",
                                     $key
                                 )."_".$index;
-                                $likes[] = $key.$text." NOT LIKE :".$param;
+                                $likes[] = $key.$text." NOT LIKE :".$param.$escape;
                                 $params[":".$param] = $match;
                             }
 
@@ -628,7 +631,7 @@
                                     "_",
                                     $key
                                 )."_".$index;
-                                $likes[] = $key.$text." LIKE :".$param;
+                                $likes[] = $key.$text." LIKE :".$param.$escape;
                                 $params[":".$param] = $match;
                             }
 
@@ -641,7 +644,7 @@
                                 "_",
                                 $key
                             );
-                            $cond = $key.$text." NOT LIKE :".$param;
+                            $cond = $key.$text." NOT LIKE :".$param.$escape;
                             $params[":".$param] = $val;
                         } elseif (substr($uck, -5) == " LIKE") {
                             # LIKE.
@@ -651,7 +654,7 @@
                                 "_",
                                 $key
                             );
-                            $cond = $key.$text." LIKE :".$param;
+                            $cond = $key.$text." LIKE :".$param.$escape;
                             $params[":".$param] = $val;
                         } elseif (substr_count($key, " ")) {
                             # Custom operation, e.g. array("foo >" => $bar).
