@@ -457,7 +457,6 @@
                 $this->connect();
 
             $string = $this->db->quote($string);
-            $string = str_replace('$', '\$', $string);
 
             if (!$quotes)
                 $string = trim($string, "'");
