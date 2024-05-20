@@ -76,8 +76,10 @@
         }
 
         private function tags_encoded($text): string {
-            # Recreate JSON encoding for the search term.
-            return trim(json_set((string) $text), "\"");
+            # Recreate JSON encoding for SQL queries.
+            $json = trim(json_set((string) $text), "\"");
+            # Escape the JSON to preserve "\uXXXXXX".
+            return SQL::current()->escape($json, false);
         }
 
         private function prepare_tags($tags): array {
