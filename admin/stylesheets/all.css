@@ -825,7 +825,7 @@ a.prev_page {
     color: #1f1f23;
     text-align: center;
     margin: 0rem;
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
     background-color: #f2fbff;
     border: 2px solid #b8cdd9;
     border-radius: 0.25em;
@@ -1262,7 +1262,7 @@ input.toolbar.hidden::file-selector-button {
     }
     button:not(.toolbar):has(img),
     a.button:not(.toolbar):has(img) {
-        padding-right: calc(16px + 0.5rem) !important;
+        padding-right: calc(16px + 1rem) !important;
     }
     div.more_options {
         grid-template-columns: 1fr;

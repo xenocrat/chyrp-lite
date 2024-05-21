@@ -679,13 +679,14 @@
             button {
                 box-sizing: border-box;
                 display: block;
+                clear: both;
                 font: inherit;
                 font-size: 1.25em;
                 text-align: center;
                 color: #1f1f23;
                 text-decoration: none;
                 margin: 1rem 0rem;
-                padding: 0.4em 0.6em;
+                padding: 0.5rem 1rem;
                 background-color: #f2fbff;
                 border: 2px solid #b8cdd9;
                 border-radius: 0.25em;

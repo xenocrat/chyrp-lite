@@ -512,7 +512,7 @@
                 color: #1f1f23;
                 text-decoration: none;
                 margin: 1rem 0rem;
-                padding: 0.5rem;
+                padding: 0.5rem 1rem;
                 background-color: #f2fbff;
                 border: 2px solid #b8cdd9;
                 border-radius: 0.25em;
