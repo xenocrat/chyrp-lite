@@ -481,18 +481,31 @@
                 if (is_object($val) and !$val instanceof Stringable)
                     $val = null;
 
-                if (is_bool($val))
-                    $val = (int) $val;
-
-                if (is_float($val))
-                    $val = (string) $val;
-
-                $return[] = isset($params[$val]) ?
-                    $val :
-                    SQL::current()->escape($val, !is_int($val)) ;
+                switch (gettype($val)) {
+                    case "NULL":
+                        $return[] = "NULL";
+                        break;
+                    case "boolean":
+                        $return[] = (string) (int) $val;
+                        break;
+                    case "double":
+                        $return[] = SQL::current()->escape($val);
+                        break;
+                    case "integer":
+                        $return[] = (string) $val;
+                        break;
+                    case "object":
+                        $return[] = SQL::current()->escape($val);
+                        break;
+                    case "string":
+                        $return[] = isset($params[$val]) ?
+                            $val :
+                            SQL::current()->escape($val) ;
+                        break;
+                }
             }
 
-            return "(".join(", ", $return).")";
+            return "(".implode(", ", $return).")";
         }
 
         /**
