@@ -447,21 +447,26 @@
          *
          * Parameters:
          *     $string - String to escape.
-         *     $quotes - Wrap the string in single quotes?
          */
-        public function escape(
-            $string,
-            $quotes = true
-        ): string {
+        public function escape($string): string {
             if (!isset($this->db))
                 $this->connect();
 
-            $string = $this->db->quote($string);
+            switch (gettype($string)) {
+                case "NULL":
+                    $type = PDO::PARAM_NULL;
+                    break;
+                case "boolean":
+                    $type = PDO::PARAM_BOOL;
+                    break;
+                case "integer":
+                    $type = PDO::PARAM_INT;
+                    break;
+                default:
+                    $type = PDO::PARAM_STR;
+            }
 
-            if (!$quotes)
-                $string = trim($string, "'");
-
-            return $string;
+            return $this->db->quote($string, $type);
         }
 
         /**
