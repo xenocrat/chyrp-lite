@@ -489,18 +489,18 @@
                         $return[] = (string) (int) $val;
                         break;
                     case "double":
-                        $return[] = SQL::current()->escape($val);
+                        $return[] = $sql->escape($val);
                         break;
                     case "integer":
                         $return[] = (string) $val;
                         break;
                     case "object":
-                        $return[] = SQL::current()->escape($val);
+                        $return[] = $sql->escape($val);
                         break;
                     case "string":
                         $return[] = isset($params[$val]) ?
                             $val :
-                            SQL::current()->escape($val) ;
+                            $sql->escape($val) ;
                         break;
                 }
             }
