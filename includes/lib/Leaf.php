@@ -67,6 +67,7 @@
                 # Custom filters:
                 new \Twig\TwigFilter("translate",           "twig_filter_translate"),
                 new \Twig\TwigFilter("translate_plural",    "twig_filter_translate_plural"),
+                new \Twig\TwigFilter("translate_time",      "twig_filter_translate_time"),
                 new \Twig\TwigFilter("time",                "twig_filter_time"),
                 new \Twig\TwigFilter("dateformat",          "twig_filter_date_format"),
                 new \Twig\TwigFilter("strftimeformat",      "twig_filter_strftime_format"),
@@ -413,6 +414,25 @@
         return _p($single, $plural, $number, $domain);
     }
 
+
+    /**
+     * Function: twig_filter_translate_time
+     * Returns a formatted and internationalized time string.
+     *
+     * Parameters:
+     *     $timestamp - A time value to be strtotime() converted.
+     *     $format - The date()-compatible formatting.
+     */
+    function twig_filter_translate_time(
+        $timestamp,
+        $format = null
+    ): string {
+        if (!isset($format))
+            $format = (ADMIN) ? "Y-m-d" : "d F Y" ;
+
+        return _w($format, $timestamp);
+    }
+
     /**
      * Function: twig_filter_time
      * Returns a <time> HTML element containing an internationalized time representation.
@@ -420,15 +440,34 @@
      * Parameters:
      *     $timestamp - A time value to be strtotime() converted.
      *     $format - The formatting for the <time> representation.
+     *     $convert - Perform a case conversion: "fold", "lower", "title", "upper".
      */
     function twig_filter_time(
         $timestamp,
-        $format = null
+        $format = null,
+        $convert = null
     ): string {
         if (!isset($format))
             $format = (ADMIN) ? "Y-m-d" : "d F Y" ;
 
-        $string = _w($format, $timestamp);
+        if (!isset($string))
+            $string = _w($format, $timestamp);
+
+        switch ($convert) {
+            case "fold":
+                $string = mb_convert_case($string,  MB_CASE_FOLD, "UTF-8");
+                break;
+            case "lower":
+                $string = mb_convert_case($string,  MB_CASE_LOWER, "UTF-8");
+                break;
+            case "title":
+                $string = mb_convert_case($string, MB_CASE_TITLE, "UTF-8");
+                break;
+            case "upper":
+                $string = mb_convert_case($string,  MB_CASE_UPPER, "UTF-8");
+                break;
+        }
+
         $datetime = when("c", $timestamp);
         return "<time datetime=\"".$datetime."\">".$string."</time>";
     }
