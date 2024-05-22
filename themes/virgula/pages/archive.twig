@@ -10,7 +10,7 @@
 <li>
 <h3>
 <a href="{{ url('archive/%s/' | format(when | dateformat('Y/m'))) }}">
-{{ when | time("F" | translate) | title }}
+{{ when | time("F" | translate, "title") }}
 </a>
 </h3>
 <ul>
