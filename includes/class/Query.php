@@ -54,7 +54,7 @@
             foreach ($params as $name => $val)
                 $this->queryString = preg_replace(
                     "/{$name}([^a-zA-Z0-9_]|$)/",
-                    "[".gettype($val)."] ".$this->sql->escape($val)."$1",
+                    serialize($val)."$1",
                     $this->queryString
                 );
 
