@@ -70,7 +70,6 @@
                 new \Twig\TwigFilter("translate_time",      "twig_filter_translate_time"),
                 new \Twig\TwigFilter("time",                "twig_filter_time"),
                 new \Twig\TwigFilter("dateformat",          "twig_filter_date_format"),
-                new \Twig\TwigFilter("strftimeformat",      "twig_filter_strftime_format"),
                 new \Twig\TwigFilter("filesizeformat",      "twig_filter_filesize_format"),
                 new \Twig\TwigFilter("preg_match",          "twig_filter_preg_match"),
                 new \Twig\TwigFilter("preg_replace",        "twig_filter_preg_replace"),
@@ -420,7 +419,7 @@
      * Returns a formatted and internationalized time string.
      *
      * Parameters:
-     *     $timestamp - A time value to be strtotime() converted.
+     *     $timestamp - A time value or string to be strtotime() converted.
      *     $format - The date()-compatible formatting.
      */
     function twig_filter_translate_time(
@@ -438,8 +437,8 @@
      * Returns a <time> HTML element containing an internationalized time representation.
      *
      * Parameters:
-     *     $timestamp - A time value to be strtotime() converted.
-     *     $format - The formatting for the <time> representation.
+     *     $timestamp - A time() value or string to be strtotime() converted.
+     *     $format - The date()-compatible formatting for the <time> representation.
      *     $convert - Perform a case conversion: "fold", "lower", "title", "upper".
      */
     function twig_filter_time(
@@ -455,16 +454,16 @@
 
         switch ($convert) {
             case "fold":
-                $string = mb_convert_case($string,  MB_CASE_FOLD, "UTF-8");
+                $string = mb_convert_case($string, MB_CASE_FOLD, "UTF-8");
                 break;
             case "lower":
-                $string = mb_convert_case($string,  MB_CASE_LOWER, "UTF-8");
+                $string = mb_convert_case($string, MB_CASE_LOWER, "UTF-8");
                 break;
             case "title":
                 $string = mb_convert_case($string, MB_CASE_TITLE, "UTF-8");
                 break;
             case "upper":
-                $string = mb_convert_case($string,  MB_CASE_UPPER, "UTF-8");
+                $string = mb_convert_case($string, MB_CASE_UPPER, "UTF-8");
                 break;
         }
 
@@ -477,8 +476,8 @@
      * Returns date formatting for a string that isn't a regular time() value.
      *
      * Parameters:
-     *     $timestamp - A time value to be strtotime() converted.
-     *     $formatting - The formatting for date().
+     *     $timestamp - A time() value or string to be strtotime() converted.
+     *     $formatting - The date()-compatible formatting.
      */
     function twig_filter_date_format(
         $timestamp,
@@ -488,23 +487,6 @@
             $format = (ADMIN) ? "Y-m-d" : "d F Y" ;
 
         return when($format, $timestamp);
-    }
-
-    /**
-     * Function: twig_filter_strftime_format
-     * Returns date formatting for a string that isn't a regular time() value.
-     *
-     * Parameters:
-     *     $timestamp - A time value to be strtotime() converted.
-     * 
-     * Notes:
-     *     Uses date() instead of strftime(). Retained for backwards compatibility.
-     */
-    function twig_filter_strftime_format(
-        $timestamp,
-        $format = null
-    ): string {
-        return when("Y-m-d H:i:s", $timestamp);
     }
 
     /**
