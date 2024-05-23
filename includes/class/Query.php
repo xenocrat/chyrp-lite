@@ -13,7 +13,7 @@
         public $result;
 
         # Variable: $queryString
-        # Holds the query statement.
+        # Logs a representation of the query statement.
         public $queryString = "";
 
         # Variable: $sql
@@ -54,7 +54,7 @@
             foreach ($params as $name => $val)
                 $this->queryString = preg_replace(
                     "/{$name}([^a-zA-Z0-9_]|$)/",
-                    serialize($val)."$1",
+                    "[".serialize($val)."]"."$1",
                     $this->queryString
                 );
 
