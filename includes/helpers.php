@@ -592,7 +592,7 @@
      *
      * Parameters:
      *     $formatting - The date()-compatible formatting.
-     *     $when - A time value to be strtotime() converted.
+     *     $when - A time() value or string to be strtotime() converted.
      *
      * Returns:
      *     An internationalized time/date string with the supplied formatting.
@@ -632,7 +632,7 @@
      *
      * Parameters:
      *     $formatting - The formatting for date().
-     *     $when - A time value to be strtotime() converted.
+     *     $when - A time() value or string to be strtotime() converted.
      *
      * Returns:
      *     A time/date string with the supplied formatting.
