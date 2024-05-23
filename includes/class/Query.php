@@ -38,7 +38,12 @@
          *     $params - An associative array of parameters used in the query.
          *     $throw_exceptions - Throw exceptions instead of calling error()?
          */
-        public function __construct($sql, $query, $params = array(), $throw_exceptions = false) {
+        public function __construct(
+            $sql,
+            $query,
+            $params = array(),
+            $throw_exceptions = false
+        ) {
             $this->sql = $sql;
 
             # Don't count config setting queries.
