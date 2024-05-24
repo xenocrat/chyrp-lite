@@ -125,8 +125,11 @@
                 case 413:
                     header($_SERVER['SERVER_PROTOCOL']." 413 Payload Too Large");
                     break;
+                case 415:
+                    header($_SERVER['SERVER_PROTOCOL']." 415 Unsupported Media Type");
+                    break;
                 case 422:
-                    header($_SERVER['SERVER_PROTOCOL']." 422 Unprocessable Entity");
+                    header($_SERVER['SERVER_PROTOCOL']." 422 Unprocessable Content");
                     break;
                 case 429:
                     header($_SERVER['SERVER_PROTOCOL']." 429 Too Many Requests");
