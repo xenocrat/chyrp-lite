@@ -110,6 +110,9 @@
                 case 405:
                     header($_SERVER['SERVER_PROTOCOL']." 405 Method Not Allowed");
                     break;
+                case 406:
+                    header($_SERVER['SERVER_PROTOCOL']." 406 Not Acceptable");
+                    break;
                 case 409:
                     header($_SERVER['SERVER_PROTOCOL']." 409 Conflict");
                     break;
