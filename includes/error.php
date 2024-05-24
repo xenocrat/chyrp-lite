@@ -116,6 +116,9 @@
                 case 410:
                     header($_SERVER['SERVER_PROTOCOL']." 410 Gone");
                     break;
+                case 412:
+                    header($_SERVER['SERVER_PROTOCOL']." 412 Precondition Failed");
+                    break;
                 case 413:
                     header($_SERVER['SERVER_PROTOCOL']." 413 Payload Too Large");
                     break;
