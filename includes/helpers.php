@@ -2481,7 +2481,8 @@
         if ($filename === false)
             error(
                 __("Error"),
-                __("Uploaded file is of an unsupported type.")
+                __("Uploaded file is of an unsupported type."),
+                code:415
             );
 
         if (!is_uploaded_file($file['tmp_name']))
