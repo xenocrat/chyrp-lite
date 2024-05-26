@@ -137,18 +137,32 @@
     if (!defined('USE_OB'))
         define('USE_OB', true);
 
+
+    # Constant: HTTP_ACCEPT_ZSTD
+    # Does the user agent accept Zstandard encoding?
+    define('HTTP_ACCEPT_ZSTD',
+        isset($_SERVER['HTTP_ACCEPT_ENCODING']) and
+        str_contains($_SERVER['HTTP_ACCEPT_ENCODING'], "zstd")
+    );
+
     # Constant: HTTP_ACCEPT_DEFLATE
     # Does the user agent accept deflate encoding?
     define('HTTP_ACCEPT_DEFLATE',
         isset($_SERVER['HTTP_ACCEPT_ENCODING']) and
-        substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "deflate")
+        str_contains($_SERVER['HTTP_ACCEPT_ENCODING'], "deflate")
     );
 
     # Constant: HTTP_ACCEPT_GZIP
     # Does the user agent accept gzip encoding?
     define('HTTP_ACCEPT_GZIP',
         isset($_SERVER['HTTP_ACCEPT_ENCODING']) and
-        substr_count($_SERVER['HTTP_ACCEPT_ENCODING'], "gzip")
+        str_contains($_SERVER['HTTP_ACCEPT_ENCODING'], "gzip")
+    );
+
+    # Constant: CAN_USE_ZSTD
+    # Can we use zstd to compress output?
+    define('CAN_USE_ZSTD',
+        HTTP_ACCEPT_ZSTD and extension_loaded("zstd")
     );
 
     # Constant: CAN_USE_ZLIB
@@ -157,16 +171,27 @@
         (HTTP_ACCEPT_DEFLATE or HTTP_ACCEPT_GZIP) and extension_loaded("zlib")
     );
 
-    # Constant: USE_ZLIB
-    # Use zlib to provide content compression?
-    if (!defined('USE_ZLIB'))
-        define('USE_ZLIB', CAN_USE_ZLIB and !ini_get("zlib.output_compression"));
+    # Constant: USE_COMPRESSION
+    # Use content compression for responses?
+    if (!defined('USE_COMPRESSION'))
+        define('USE_COMPRESSION',
+            (CAN_USE_ZSTD or CAN_USE_ZLIB) and !ini_get("zlib.output_compression")
+        );
 
     # Start output buffering and set the header.
     if (USE_OB) {
-        if (USE_ZLIB) {
-            ob_start("ob_gzhandler");
-            header("Content-Encoding: ".(HTTP_ACCEPT_GZIP ? "gzip" : "deflate"));
+        if (USE_COMPRESSION) {
+            if (CAN_USE_ZSTD) {
+                ob_start(
+                    function ($data) {
+                        return zstd_compress($data, ZSTD_COMPRESS_LEVEL_DEFAULT);
+                    }
+                );
+                header("Content-Encoding: zstd");
+            } else {
+                ob_start("ob_gzhandler");
+                header("Content-Encoding: ".(HTTP_ACCEPT_GZIP ? "gzip" : "deflate"));
+            }
         } else {
             ob_start();
         }
