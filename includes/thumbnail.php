@@ -4,7 +4,7 @@
      * Serves compressed image thumbnails for uploaded files.
      */
 
-    define('USE_ZLIB', false);
+    define('USE_COMPRESSION', false);
 
     require_once "common.php";
     $trigger->call("serve_thumbnail");
