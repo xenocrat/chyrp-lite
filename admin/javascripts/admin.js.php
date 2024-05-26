@@ -213,7 +213,7 @@ function test_uploads() {
 
                     if (file.size > Uploads.limit) {
                         e.target.value = null;
-                        alert(Uploads.message);
+                        alert(Uploads.messages.size_err);
                         break;
                     }
                 }
@@ -240,7 +240,12 @@ var Oops = {
 }
 var Uploads = {
     limit: <?php esce(intval($config->uploads_limit * 1000000)); ?>,
-    message: '<?php esce(_f("Maximum file size: %d Megabytes!", $config->uploads_limit)); ?>',
+    messages: {
+        send_msg: '<?php esce(__("Uploading...")); ?>',
+        send_err: '<?php esce(__("File upload failed!")); ?>',
+        type_err: '<?php esce(__("File is of an unsupported type!")); ?>',
+        size_err: '<?php esce(_f("Maximum file size: %d Megabytes!", $config->uploads_limit)); ?>'
+    },
     active: 0,
     send: function(file, doneCallback, failCallback, alwaysCallback) {
         Uploads.active++;
@@ -672,14 +677,20 @@ var Write = {
                                 if (!!e.target.files && e.target.files.length > 0) {
                                     var file = e.target.files[0];
 
-                                    // Reject files too large to upload.
-                                    if (file.size > Uploads.limit) {
-                                        e.target.value = null;
-                                        tray.html(Uploads.message);
+                                    // Reject files that are not images.
+                                    if (file.type.indexOf("image/") != 0) {
+                                        tray.html(Uploads.messages.type_err);
                                         return;
                                     }
 
-                                    tray.loader().html('<?php esce(__("Uploading...", "admin")); ?>');
+                                    // Reject files too large to upload.
+                                    if (file.size > Uploads.limit) {
+                                        e.target.value = null;
+                                        tray.html(Uploads.messages.size_err);
+                                        return;
+                                    }
+
+                                    tray.loader().html(Uploads.messages.send_msg);
 
                                     // Upload the file and insert the tag if successful.
                                     Uploads.send(
@@ -688,7 +699,7 @@ var Write = {
                                             Write.formatting(target, "img", response.data.url);
                                         },
                                         function(response) {
-                                            tray.html(Oops.message);
+                                            tray.html(Uploads.messages.send_err);
                                         },
                                         function(response) {
                                             tray.loader(true);
@@ -918,30 +929,34 @@ var Write = {
             var form = new FormData();
             var tray = $("#" + $(e.target).attr("id") + "_tray");
 
-            if (file.type.indexOf("image/") == 0) {
-                // Reject files too large to upload.
-                if (file.size > Uploads.limit) {
-                    tray.html(Uploads.message);
-                    return;
-                }
-
-                tray.loader().html('<?php esce(__("Uploading...", "admin")); ?>');
-
-                // Upload the file and insert the tag if successful.
-                Uploads.send(
-                    file,
-                    function(response) {
-                        Write.formatting($(e.target), "img", response.data.url);
-                    },
-                    function(response) {
-                        tray.html(Oops.message);
-                    },
-                    function(response) {
-                        tray.loader(true);
-                        $(e.target).removeClass("drag_highlight");
-                    }
-                );
+            // Reject files that are not images.
+            if (file.type.indexOf("image/") != 0) {
+                tray.html(Uploads.messages.type_err);
+                return;
             }
+
+            // Reject files too large to upload.
+            if (file.size > Uploads.limit) {
+                tray.html(Uploads.messages.size_err);
+                return;
+            }
+
+            tray.loader().html(Uploads.messages.send_msg);
+
+            // Upload the file and insert the tag if successful.
+            Uploads.send(
+                file,
+                function(response) {
+                    Write.formatting($(e.target), "img", response.data.url);
+                },
+                function(response) {
+                    tray.html(Uploads.messages.send_err);
+                },
+                function(response) {
+                    tray.loader(true);
+                    $(e.target).removeClass("drag_highlight");
+                }
+            );
         }
     },
     formatting: function(target, effect, fragment = "") {
