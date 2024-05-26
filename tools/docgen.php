@@ -42,10 +42,12 @@
     define('GET_REMOTE_UNSAFE',             false);
     define('USE_GETTEXT_SHIM',              stripos(PHP_OS, "Win") === 0);
     define('USE_OB',                        true);
+    define('HTTP_ACCEPT_ZSTD',              false);
     define('HTTP_ACCEPT_DEFLATE',           false);
     define('HTTP_ACCEPT_GZIP',              false);
+    define('CAN_USE_ZSTD',                  false);
     define('CAN_USE_ZLIB',                  false);
-    define('USE_ZLIB',                      false);
+    define('USE_COMPRESSION',               false);
     define('PREVIEWING',                    false);
     define('THEME_DIR',                     null);
     define('THEME_URL',                     null);
