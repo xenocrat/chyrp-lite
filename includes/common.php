@@ -137,7 +137,6 @@
     if (!defined('USE_OB'))
         define('USE_OB', true);
 
-
     # Constant: HTTP_ACCEPT_ZSTD
     # Does the user agent accept Zstandard encoding?
     define('HTTP_ACCEPT_ZSTD',
@@ -190,7 +189,6 @@
                 header("Content-Encoding: zstd");
             } else {
                 ob_start("ob_gzhandler");
-                header("Content-Encoding: ".(HTTP_ACCEPT_GZIP ? "gzip" : "deflate"));
             }
         } else {
             ob_start();
