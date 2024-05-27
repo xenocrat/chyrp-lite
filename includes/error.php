@@ -91,8 +91,20 @@
             header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
 
             # Resend the content encoding header if transparent compression is on.
-            if (CAN_USE_ZLIB and ini_get("zlib.output_compression"))
-                header("Content-Encoding: ".(HTTP_ACCEPT_GZIP ? "gzip" : "deflate"));
+            if (CAN_USE_ZLIB and ini_get("zlib.output_compression")) {
+                if (HTTP_ACCEPT_DEFLATE and HTTP_ACCEPT_GZIP) {
+                    if (
+                        strpos($_SERVER['HTTP_ACCEPT_ENCODING'], "gzip") <
+                        strpos($_SERVER['HTTP_ACCEPT_ENCODING'], "deflate")
+                    ) {
+                        header("Content-Encoding: gzip");
+                    } else {
+                        header("Content-Encoding: deflate");
+                    }
+                } else {
+                    header("Content-Encoding: ".(HTTP_ACCEPT_GZIP ? "gzip" : "deflate"));
+                }
+            }
 
             switch ($code) {
                 case 400:
