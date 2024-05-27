@@ -189,6 +189,7 @@
                 header("Content-Encoding: zstd");
             } else {
                 ob_start("ob_gzhandler");
+                header("Content-Encoding: ".(HTTP_ACCEPT_GZIP ? "gzip" : "deflate"));
             }
         } else {
             ob_start();
