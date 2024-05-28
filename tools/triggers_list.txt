@@ -16,7 +16,7 @@ Called from:
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 1263
+	admin/javascripts/admin.js.php on line 1278
 
 
 admin_head
@@ -242,7 +242,7 @@ Arguments:
 runtime
 -------
 Called from:
-	includes/common.php on line 393
+	includes/common.php on line 417
 
 
 before_export
@@ -341,7 +341,7 @@ Called from:
 webmention
 ----------
 Called from:
-	includes/helpers.php on line 2095
+	includes/helpers.php on line 2103
 
 Arguments:
 	$post
@@ -352,7 +352,7 @@ Arguments:
 delete_upload
 -------------
 Called from:
-	includes/helpers.php on line 2831
+	includes/helpers.php on line 2840
 
 Arguments:
 	$filename
@@ -361,19 +361,19 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 3042
+	includes/helpers.php on line 3051
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 3060
+	includes/helpers.php on line 3069
 
 
 correspond_activate_account
 ---------------------------
 Called from:
-	includes/helpers.php on line 3323
+	includes/helpers.php on line 3332
 
 Arguments:
 	$user
@@ -383,7 +383,7 @@ Arguments:
 correspond_reset_password
 -------------------------
 Called from:
-	includes/helpers.php on line 3363
+	includes/helpers.php on line 3372
 
 Arguments:
 	$user
@@ -393,7 +393,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 3409
+	includes/helpers.php on line 3418
 
 Arguments:
 	$ob
@@ -1102,7 +1102,7 @@ Target:
 keyword_search
 --------------
 Called from:
-	includes/helpers.php on line 1295
+	includes/helpers.php on line 1303
 
 Target:
 	$search
@@ -1115,7 +1115,7 @@ Arguments:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 3303
+	includes/helpers.php on line 3312
 
 Target:
 	$function
@@ -1124,7 +1124,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 3410
+	includes/helpers.php on line 3419
 	includes/lib/Leaf.php on line 360
 
 Target:

@@ -45,19 +45,19 @@ msgstr "最后"
 msgid "First"
 msgstr "第一"
 
-#: includes/class/Query.php:111
+#: includes/class/Query.php:98
 msgid "PDO failed to execute the prepared statement."
 msgstr "PDO未能执行准备好的语句。"
 
-#: includes/class/Query.php:187
+#: includes/class/Query.php:174
 msgid "Query String"
 msgstr "查询语句"
 
-#: includes/class/Query.php:194
+#: includes/class/Query.php:181
 msgid "Parameters"
 msgstr "参数"
 
-#: includes/class/Query.php:204 includes/class/SQL.php:152 install.php:748
+#: includes/class/Query.php:191 includes/class/SQL.php:152 install.php:750
 #, php-format
 msgid "Database error: %s"
 msgstr "数据库错误： %s"
@@ -84,24 +84,24 @@ msgstr "路由启动了一个无效的控制器。"
 #: includes/controller/Admin.php:3015 includes/controller/Admin.php:3022
 #: includes/controller/Admin.php:3319 includes/controller/Ajax.php:36
 #: includes/controller/Ajax.php:253 includes/download.php:14
-#: includes/error.php:169 includes/helpers.php:2031 includes/helpers.php:2038
-#: includes/helpers.php:2045 includes/helpers.php:2060
-#: includes/helpers.php:2069 includes/helpers.php:2083
-#: includes/helpers.php:2090 includes/helpers.php:2475
-#: includes/helpers.php:2487 includes/helpers.php:2493
-#: includes/helpers.php:2499 includes/helpers.php:2536
-#: includes/helpers.php:2542 includes/helpers.php:2548
-#: includes/helpers.php:2696 includes/helpers.php:2702
-#: includes/helpers.php:2708 includes/helpers.php:2714
-#: includes/helpers.php:2719 includes/helpers.php:2724
-#: includes/helpers.php:2729 includes/helpers.php:2736
+#: includes/error.php:178 includes/helpers.php:2039 includes/helpers.php:2046
+#: includes/helpers.php:2053 includes/helpers.php:2068
+#: includes/helpers.php:2077 includes/helpers.php:2091
+#: includes/helpers.php:2098 includes/helpers.php:2483
+#: includes/helpers.php:2496 includes/helpers.php:2502
+#: includes/helpers.php:2508 includes/helpers.php:2545
+#: includes/helpers.php:2551 includes/helpers.php:2557
+#: includes/helpers.php:2705 includes/helpers.php:2711
+#: includes/helpers.php:2717 includes/helpers.php:2723
+#: includes/helpers.php:2728 includes/helpers.php:2733
+#: includes/helpers.php:2738 includes/helpers.php:2745
 #: includes/lib/ThumbnailFile.php:290 includes/lib/ThumbnailFile.php:321
 #: includes/lib/ThumbnailFile.php:381 includes/thumbnail.php:15
-#: install.php:1011 upgrade.php:212 upgrade.php:228 upgrade.php:244
-#: upgrade.php:260 upgrade.php:276 upgrade.php:296 upgrade.php:340
-#: upgrade.php:356 upgrade.php:376 upgrade.php:392 upgrade.php:408
-#: upgrade.php:424 upgrade.php:444 upgrade.php:460 upgrade.php:589
-#: upgrade.php:605
+#: install.php:1013 upgrade.php:214 upgrade.php:230 upgrade.php:246
+#: upgrade.php:262 upgrade.php:278 upgrade.php:298 upgrade.php:342
+#: upgrade.php:358 upgrade.php:378 upgrade.php:394 upgrade.php:410
+#: upgrade.php:426 upgrade.php:446 upgrade.php:462 upgrade.php:591
+#: upgrade.php:607
 msgid "Error"
 msgstr "错误"
 
@@ -151,7 +151,7 @@ msgstr "无效动作。"
 #: includes/controller/Ajax.php:247 includes/controller/Ajax.php:271
 #: includes/controller/Ajax.php:277 includes/controller/Main.php:565
 #: includes/controller/Main.php:646 includes/download.php:21
-#: includes/helpers.php:2481 includes/thumbnail.php:22
+#: includes/helpers.php:2490 includes/thumbnail.php:22
 msgid "Access Denied"
 msgstr "访问被拒绝"
 
@@ -177,15 +177,15 @@ msgstr "前往 GitHub！"
 msgid "Unable to check for new Chyrp Lite versions."
 msgstr "无法检查新的Chyrp Lite版本。"
 
-#: includes/common.php:316 includes/common.php:324
+#: includes/common.php:340 includes/common.php:348
 msgid "Service Unavailable"
 msgstr "暂停服务"
 
-#: includes/common.php:317
+#: includes/common.php:341
 msgid "This resource is temporarily unable to serve your request."
 msgstr ""
 
-#: includes/common.php:325
+#: includes/common.php:349
 msgid "This resource cannot respond because it is not configured."
 msgstr ""
 
@@ -378,13 +378,13 @@ msgid "That username is already in use."
 msgstr "用户名已被使用。"
 
 #: includes/controller/Admin.php:1010 includes/controller/Main.php:800
-#: includes/controller/Main.php:1181 install.php:693
+#: includes/controller/Main.php:1181 install.php:695
 msgid "Passwords cannot be blank."
 msgstr "密码不能为空。"
 
 #: includes/controller/Admin.php:1017 includes/controller/Admin.php:1187
 #: includes/controller/Main.php:804 includes/controller/Main.php:1019
-#: includes/controller/Main.php:1185 install.php:628 install.php:695
+#: includes/controller/Main.php:1185 install.php:630 install.php:697
 msgid "Passwords do not match."
 msgstr "密码不匹配。"
 
@@ -394,13 +394,13 @@ msgstr "请考虑为这个用户设置一个更强的密码。"
 
 #: includes/controller/Admin.php:1029 includes/controller/Admin.php:1206
 #: includes/controller/Admin.php:2995 includes/controller/Main.php:813
-#: includes/controller/Main.php:1032 install.php:698
+#: includes/controller/Main.php:1032 install.php:700
 msgid "Email address cannot be blank."
 msgstr "邮件地址不能为空。"
 
 #: includes/controller/Admin.php:1036 includes/controller/Admin.php:1213
 #: includes/controller/Admin.php:3002 includes/controller/Main.php:817
-#: includes/controller/Main.php:1036 install.php:700
+#: includes/controller/Main.php:1036 install.php:702
 msgid "Invalid email address."
 msgstr "无效的邮件地址。"
 
@@ -682,11 +682,11 @@ msgstr "预览已停止。"
 msgid "Preview started."
 msgstr "预览已开始。"
 
-#: includes/controller/Admin.php:3009 install.php:676
+#: includes/controller/Admin.php:3009 install.php:678
 msgid "Chyrp URL cannot be blank."
 msgstr "Chyrp URL 不能为空。"
 
-#: includes/controller/Admin.php:3016 install.php:678
+#: includes/controller/Admin.php:3016 install.php:680
 msgid "Invalid Chyrp URL."
 msgstr "无效的Chyrp URL。"
 
@@ -699,9 +699,9 @@ msgstr "无效的规范URL。"
 msgid "Settings updated."
 msgstr "设置已更新。"
 
-#: includes/controller/Admin.php:3237 includes/helpers.php:2500
-#: includes/helpers.php:2549 includes/helpers.php:2720 upgrade.php:163
-#: upgrade.php:180 upgrade.php:197
+#: includes/controller/Admin.php:3237 includes/helpers.php:2509
+#: includes/helpers.php:2558 includes/helpers.php:2729 upgrade.php:165
+#: upgrade.php:182 upgrade.php:199
 msgid "Failed to write file to disk."
 msgstr "写入文件到磁盘失败。"
 
@@ -883,7 +883,7 @@ msgstr "站点不允许注册。"
 msgid "You cannot register an account because you are already logged in."
 msgstr "您不能注册账户，因为您已登陆。"
 
-#: includes/controller/Main.php:786 install.php:690
+#: includes/controller/Main.php:786 install.php:692
 msgid "Please enter a username for your account."
 msgstr "请输入账户的用户名。"
 
@@ -933,7 +933,7 @@ msgstr "在登陆前必须激活您的账户。"
 msgid "Logged in."
 msgstr "已登陆。"
 
-#: includes/controller/Main.php:971 includes/error.php:464
+#: includes/controller/Main.php:971 includes/error.php:473
 msgid "Log in"
 msgstr "登陆"
 
@@ -981,20 +981,20 @@ msgstr "链接已过期。请重试。"
 msgid "Reset password"
 msgstr "重置密码"
 
-#: includes/error.php:170
+#: includes/error.php:179
 msgid "An unspecified error has occurred."
 msgstr "发生未指定错误。"
 
-#: includes/error.php:452
+#: includes/error.php:461
 msgid "Backtrace"
 msgstr "回溯"
 
-#: includes/error.php:456
+#: includes/error.php:465
 #, php-format
 msgid "%s on line %d"
 msgstr "%s 在行 %d"
 
-#: includes/error.php:469
+#: includes/error.php:478
 msgid "Go back"
 msgstr "返回"
 
@@ -1014,161 +1014,161 @@ msgstr "您没有权限访问这个资源。"
 msgid "The requested resource was not found."
 msgstr "请求的资源未找到。"
 
-#: includes/helpers.php:2032
+#: includes/helpers.php:2040
 msgid "Webmention support is disabled for this site."
 msgstr "此站点禁用Webmention支持。"
 
-#: includes/helpers.php:2039
+#: includes/helpers.php:2047
 msgid "The URL for your page is not valid."
 msgstr "您的页面链接无效。"
 
-#: includes/helpers.php:2046
+#: includes/helpers.php:2054
 msgid "The URL for our page is not valid."
 msgstr "我们的页面链接无效。"
 
-#: includes/helpers.php:2061
+#: includes/helpers.php:2069
 msgid "The source and target URLs cannot be the same."
 msgstr "源 URL 和目标 URL 不能相同。"
 
-#: includes/helpers.php:2070
+#: includes/helpers.php:2078
 msgid "We have not published at that URL."
 msgstr "我们没有公开这个链接。"
 
-#: includes/helpers.php:2084
+#: includes/helpers.php:2092
 msgid "You have not published at that URL."
 msgstr "您尚未在该链接上公开。"
 
-#: includes/helpers.php:2091
+#: includes/helpers.php:2099
 msgid "Your page does not link to our page."
 msgstr "您的页面没有链接到我们的页面。"
 
-#: includes/helpers.php:2284
+#: includes/helpers.php:2292
 msgid "Please create the uploads directory."
 msgstr "请创建上传目录。"
 
-#: includes/helpers.php:2286
+#: includes/helpers.php:2294
 msgid "Please make the uploads directory writable."
 msgstr "请确保上传目录科协。"
 
-#: includes/helpers.php:2307
+#: includes/helpers.php:2315
 #, php-format
 msgid "%s module is missing."
 msgstr "找不到模块 %s 。"
 
-#: includes/helpers.php:2320
+#: includes/helpers.php:2328
 #, php-format
 msgid "%s module is damaged."
 msgstr "模块 %s 破损。"
 
-#: includes/helpers.php:2338
+#: includes/helpers.php:2346
 #, php-format
 msgid "%s feather is missing."
 msgstr "找不到羽毛 %s 。"
 
-#: includes/helpers.php:2351
+#: includes/helpers.php:2359
 #, php-format
 msgid "%s feather is damaged."
 msgstr "羽毛 %s 破损。"
 
-#: includes/helpers.php:2421 includes/helpers.php:2444
+#: includes/helpers.php:2429 includes/helpers.php:2452
 #, php-format
 msgid "Execution of %s has been cancelled."
 msgstr "执行 %s 已被取消。"
 
-#: includes/helpers.php:2476
+#: includes/helpers.php:2484
 msgid "Uploaded file is of an unsupported type."
 msgstr "上传的文件是不支持的类型。"
 
-#: includes/helpers.php:2482
+#: includes/helpers.php:2491
 msgid "Only uploaded files are accepted."
 msgstr "只有上传的文件被接受。"
 
-#: includes/helpers.php:2488 includes/helpers.php:2537
+#: includes/helpers.php:2497 includes/helpers.php:2546
 msgid "Upload path does not exist."
 msgstr "上传路径不存在。"
 
-#: includes/helpers.php:2494 includes/helpers.php:2543
+#: includes/helpers.php:2503 includes/helpers.php:2552
 msgid "Upload path is not writable."
 msgstr "上传路径不可写。"
 
-#: includes/helpers.php:2697
+#: includes/helpers.php:2706
 msgid ""
 "The uploaded file exceeds the <code>upload_max_filesize</code> directive in "
 "php.ini."
 msgstr "上传的文件超过 php.ini 中<code>upload_max_filesize</code>的大小。"
 
-#: includes/helpers.php:2703
+#: includes/helpers.php:2712
 msgid ""
 "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the "
 "HTML form."
 msgstr "上传的文件超过 php.ini 中<code>MAX_FILE_SIZE</code>的大小。"
 
-#: includes/helpers.php:2709
+#: includes/helpers.php:2718
 msgid "The uploaded file was only partially uploaded."
 msgstr "上传文件仅部分上传。"
 
-#: includes/helpers.php:2715
+#: includes/helpers.php:2724
 msgid "Missing a temporary folder."
 msgstr "缺少临时文件夹。"
 
-#: includes/helpers.php:2725
+#: includes/helpers.php:2734
 msgid "File upload was stopped by a PHP extension."
 msgstr "文件上传已被PHP扩展停止。"
 
-#: includes/helpers.php:2730
+#: includes/helpers.php:2739
 #, php-format
 msgid "File upload failed with error %d."
 msgstr "上传文件失败，错误：%d."
 
-#: includes/helpers.php:2737
+#: includes/helpers.php:2746
 #, php-format
 msgid ""
 "The uploaded file exceeds the maximum size of %d Megabytes allowed by this "
 "site."
 msgstr "上传的文件超过本站点允许的 %d M。"
 
-#: includes/helpers.php:3116
+#: includes/helpers.php:3125
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr "JSON编码错误：%s"
 
-#: includes/helpers.php:3141
+#: includes/helpers.php:3150
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr "JSON解码错误：%s"
 
-#: includes/helpers.php:3224
+#: includes/helpers.php:3233
 msgid "Failed to create Zip archive."
 msgstr "无法创建 Zip 存档。"
 
-#: includes/helpers.php:3331
+#: includes/helpers.php:3340
 #, php-format
 msgid "Activate your account at %s"
 msgstr "在 %s 上激活您的账户"
 
-#: includes/helpers.php:3332 includes/helpers.php:3372
+#: includes/helpers.php:3341 includes/helpers.php:3381
 #, php-format
 msgid "Hello, %s."
 msgstr "您好，%s."
 
-#: includes/helpers.php:3335
+#: includes/helpers.php:3344
 msgid "You are receiving this message because you registered a new account."
 msgstr "您收到此邮件因为您已经注册了新账户。"
 
-#: includes/helpers.php:3338
+#: includes/helpers.php:3347
 msgid "Visit this link to activate your account:"
 msgstr "访问这个链接激活您的账户："
 
-#: includes/helpers.php:3371
+#: includes/helpers.php:3380
 #, php-format
 msgid "Reset your password at %s"
 msgstr "在 %s上重置您的密码"
 
-#: includes/helpers.php:3375
+#: includes/helpers.php:3384
 msgid "You are receiving this message because you requested a new password."
 msgstr "您收到此消息是因为您请求了新密码。"
 
-#: includes/helpers.php:3378
+#: includes/helpers.php:3387
 msgid "Visit this link to reset your password:"
 msgstr "访问这个链接重置您的密码："
 
@@ -1176,22 +1176,22 @@ msgstr "访问这个链接重置您的密码："
 msgid "Guest"
 msgstr "访问者"
 
-#: includes/lib/Leaf.php:487
+#: includes/lib/Leaf.php:508
 #, php-format
 msgid "%s GB"
 msgstr "%s GB"
 
-#: includes/lib/Leaf.php:492
+#: includes/lib/Leaf.php:513
 #, php-format
 msgid "%s MB"
 msgstr "%s MB"
 
-#: includes/lib/Leaf.php:496
+#: includes/lib/Leaf.php:517
 #, php-format
 msgid "%s KB"
 msgstr "%s KB"
 
-#: includes/lib/Leaf.php:722
+#: includes/lib/Leaf.php:743
 msgid "Image source"
 msgstr "图片来源"
 
@@ -1337,229 +1337,229 @@ msgstr "导出内容"
 msgid "[Guest]"
 msgstr "[客人]"
 
-#: install.php:146
+#: install.php:148
 msgid "PDO is required for database access."
 msgstr "PDO 是访问数据库所必须的。"
 
-#: install.php:151 upgrade.php:122
+#: install.php:153 upgrade.php:124
 msgid "Please CHMOD or CHOWN the installation directory to make it writable."
 msgstr "请对安装目录使用CHMOD 或者 CHOWN 确保其可写。"
 
-#: install.php:157 upgrade.php:128
+#: install.php:159 upgrade.php:130
 msgid ""
 "Please CHMOD or CHOWN the <em>includes</em> directory to make it writable."
 msgstr "请对<em>includes</em>目录使用CHMOD 或者 CHOWN 确保其可写。"
 
-#: install.php:163 upgrade.php:134
+#: install.php:165 upgrade.php:136
 msgid ""
 "Please CHMOD or CHOWN the <em>caches</em> directory to make it writable."
 msgstr "请对<em>caches</em>目录使用CHMOD 或者 CHOWN 确保其可写。"
 
-#: install.php:169 upgrade.php:140
+#: install.php:171 upgrade.php:142
 msgid "Please CHMOD or CHOWN the <em>twig</em> directory to make it writable."
 msgstr "请对<em>twig</em>目录使用CHMOD 或者 CHOWN 确保其可写。"
 
-#: install.php:175 upgrade.php:146
+#: install.php:177 upgrade.php:148
 msgid ""
 "Please CHMOD or CHOWN the <em>thumbs</em> directory to make it writable."
 msgstr "请对<em>thumbs</em>目录使用CHMOD 或者 CHOWN 确保其可写。"
 
-#: install.php:243
+#: install.php:245
 msgid "Chyrp Lite Installer"
 msgstr "Chyrp Lite安装程序"
 
-#: install.php:673
+#: install.php:675
 msgid "Database cannot be blank."
 msgstr "数据库不能为空。"
 
-#: install.php:681
+#: install.php:683
 msgid "Please enter a name for your website."
 msgstr "请输入您站点的名字。"
 
-#: install.php:684
+#: install.php:686
 msgid "Time zone cannot be blank."
 msgstr "时区不能为空。"
 
-#: install.php:687
+#: install.php:689
 msgid "Language cannot be blank."
 msgstr "语言不能为空。"
 
-#: install.php:706
+#: install.php:708
 msgid "Could not determine the absolute path to the database."
 msgstr "无法确定数据库的绝对路径。"
 
-#: install.php:713
+#: install.php:715
 msgid "Please make the database writable by the server."
 msgstr "请确保您的数据库在这个服务器上可写。"
 
-#: install.php:717
+#: install.php:719
 msgid "Please enter a username and password for the database."
 msgstr "请输入数据库的用户名和密码。"
 
-#: install.php:1012 upgrade.php:213 upgrade.php:229 upgrade.php:245
-#: upgrade.php:261 upgrade.php:277 upgrade.php:297 upgrade.php:341
-#: upgrade.php:357 upgrade.php:377 upgrade.php:393 upgrade.php:409
-#: upgrade.php:425 upgrade.php:445 upgrade.php:461 upgrade.php:590
-#: upgrade.php:606
+#: install.php:1014 upgrade.php:215 upgrade.php:231 upgrade.php:247
+#: upgrade.php:263 upgrade.php:279 upgrade.php:299 upgrade.php:343
+#: upgrade.php:359 upgrade.php:379 upgrade.php:395 upgrade.php:411
+#: upgrade.php:427 upgrade.php:447 upgrade.php:463 upgrade.php:592
+#: upgrade.php:608
 msgid "Could not write the configuration file."
 msgstr "不能写入配置文件。"
 
-#: install.php:1030
+#: install.php:1032
 msgid "Database Setup"
 msgstr "数据库设置"
 
-#: install.php:1032
+#: install.php:1034
 msgid "Adapter"
 msgstr "适配器"
 
-#: install.php:1046
+#: install.php:1048
 msgid "Host"
 msgstr "主机"
 
-#: install.php:1050
+#: install.php:1052
 msgid "Port"
 msgstr ""
 
-#: install.php:1050 install.php:1079
+#: install.php:1052 install.php:1081
 msgid "(optional)"
 msgstr "(可选)"
 
-#: install.php:1054 install.php:1117
+#: install.php:1056 install.php:1119
 msgid "Username"
 msgstr "用户名"
 
-#: install.php:1058 install.php:1121 install.php:1125
+#: install.php:1060 install.php:1123 install.php:1127
 msgid "Password"
 msgstr "密码"
 
-#: install.php:1062
+#: install.php:1064
 msgid "Database"
 msgstr "数据库"
 
-#: install.php:1064
+#: install.php:1066
 msgid "(absolute or relative path)"
 msgstr "（相对或者绝对路径）"
 
-#: install.php:1070
+#: install.php:1072
 msgid "Make sure your PostgreSQL database uses UTF-8 encoding."
 msgstr "确保您的PostgresQL数据库使用 UTF-8 编码。"
 
-#: install.php:1073
+#: install.php:1075
 msgid ""
 "The collation <code>utf8mb4_general_ci</code> is recommended for your MySQL "
 "database."
 msgstr "推荐为您的 MySQL 数据库使用排序规则 <code>utf8mb4_general_ci</code>。"
 
-#: install.php:1076
+#: install.php:1078
 msgid ""
 "Be sure to put your SQLite database outside the document root directory, "
 "otherwise visitors will be able to download it."
 msgstr "请务必将您的SQLite数据库放在网站根目录之外，否则访问者将能够下载它。"
 
-#: install.php:1079
+#: install.php:1081
 msgid "Table Prefix"
 msgstr "表前缀"
 
-#: install.php:1082
+#: install.php:1084
 msgid "Website Setup"
 msgstr "网站设置"
 
-#: install.php:1084
+#: install.php:1086
 msgid "Chyrp URL"
 msgstr ""
 
-#: install.php:1088
+#: install.php:1090
 msgid "Site Name"
 msgstr "站点名"
 
-#: install.php:1089
+#: install.php:1091
 msgid "My Awesome Site"
 msgstr "我最棒的站点"
 
-#: install.php:1092
+#: install.php:1094
 msgid "Description"
 msgstr "描述"
 
-#: install.php:1096
+#: install.php:1098
 msgid "Time Zone"
 msgstr "时区"
 
-#: install.php:1106
+#: install.php:1108
 msgid "Language"
 msgstr "语言"
 
-#: install.php:1115
+#: install.php:1117
 msgid "Admin Account"
 msgstr "管理员账号"
 
-#: install.php:1125
+#: install.php:1127
 msgid "(again)"
 msgstr "(确认)"
 
-#: install.php:1129
+#: install.php:1131
 msgid "Email Address"
 msgstr "联系的邮件地址"
 
-#: install.php:1132
+#: install.php:1134
 msgid "Install me!"
 msgstr "安装！"
 
-#: install.php:1135
+#: install.php:1137
 msgid "Installation Complete"
 msgstr "安装完成"
 
-#: install.php:1136 upgrade.php:950
+#: install.php:1138 upgrade.php:952
 msgid "What now?"
 msgstr "现在做什么？"
 
-#: install.php:1138
+#: install.php:1140
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr "删除 <em>install.php</em>，您不再需要它。"
 
-#: install.php:1139
+#: install.php:1141
 msgid "Log in to your site and configure things to your liking."
 msgstr "登陆您的站点并且配置您喜欢的东西。"
 
-#: install.php:1142 upgrade.php:957
+#: install.php:1144 upgrade.php:959
 msgid "Take me to my site!"
 msgstr "前往我的站点！"
 
-#: upgrade.php:619
+#: upgrade.php:621
 msgid "Chyrp Lite Upgrader"
 msgstr "Chyrp Lite升级程序"
 
-#: upgrade.php:938
+#: upgrade.php:940
 msgid "Halt!"
 msgstr "等一下！"
 
-#: upgrade.php:939
+#: upgrade.php:941
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr "升级前请采取以下预防措施："
 
-#: upgrade.php:941
+#: upgrade.php:943
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr "<strong>开始前备份您的数据库！</strong>"
 
-#: upgrade.php:942
+#: upgrade.php:944
 msgid "Tell your users that your site is offline for maintenance."
 msgstr "告知您的用户站点处于离线状态以进行维护。"
 
-#: upgrade.php:946
+#: upgrade.php:948
 msgid "Upgrade me!"
 msgstr "升级！"
 
-#: upgrade.php:949
+#: upgrade.php:951
 msgid "Upgrade Complete"
 msgstr "升级完成"
 
-#: upgrade.php:952
+#: upgrade.php:954
 msgid "Take action to resolve any errors reported on this page."
 msgstr "采取措施解决此页面上报告的任何错误。"
 
-#: upgrade.php:953
+#: upgrade.php:955
 msgid "Run this upgrader again if you need to."
 msgstr "如果需要，再次运行此升级程序。"
 
-#: upgrade.php:954
+#: upgrade.php:956
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr "删除 <em>upgrade.php</em> 一旦您升级完成后。"

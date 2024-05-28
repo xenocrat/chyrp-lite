@@ -1064,7 +1064,6 @@ Escapes a string for Query construction.
 
 Parameters:
     $string - String to escape.
-    $quotes - Wrap the string in single quotes?
 
 
 Function: current
@@ -2049,7 +2048,7 @@ Formats and internationalizes a string that isn't a regular time() value.
 
 Parameters:
     $formatting - The date()-compatible formatting.
-    $when - A time value to be strtotime() converted.
+    $when - A time() value or string to be strtotime() converted.
 
 Returns:
     An internationalized time/date string with the supplied formatting.
@@ -2061,7 +2060,7 @@ Formats a string that isn't a regular time() value.
 
 Parameters:
     $formatting - The formatting for date().
-    $when - A time value to be strtotime() converted.
+    $when - A time() value or string to be strtotime() converted.
 
 Returns:
     A time/date string with the supplied formatting.
@@ -2280,6 +2279,7 @@ Parameters:
 Returns:
     An array containing an array of "WHERE" conditions, an array
     of "WHERE" parameters, and "ORDER BY" clause for the results.
+    Non-keyword text will be parameterized as array[1][":query"].
 
 
 Function: pluralize
@@ -3285,13 +3285,23 @@ Parameters:
     $domain - The translation domain to read from.
 
 
+Function: twig_filter_translate_time
+------------------------------------
+Returns a formatted and internationalized time string.
+
+Parameters:
+    $timestamp - A time() value or string to be strtotime() converted.
+    $format - The date()-compatible formatting.
+
+
 Function: twig_filter_time
 --------------------------
 Returns a <time> HTML element containing an internationalized time representation.
 
 Parameters:
-    $timestamp - A time value to be strtotime() converted.
-    $format - The formatting for the <time> representation.
+    $timestamp - A time() value or string to be strtotime() converted.
+    $format - The date()-compatible formatting for the <time> representation.
+    $convert - Perform a case conversion: "fold", "lower", "title", "upper".
 
 
 Function: twig_filter_date_format
@@ -3299,19 +3309,8 @@ Function: twig_filter_date_format
 Returns date formatting for a string that isn't a regular time() value.
 
 Parameters:
-    $timestamp - A time value to be strtotime() converted.
-    $formatting - The formatting for date().
-
-
-Function: twig_filter_strftime_format
--------------------------------------
-Returns date formatting for a string that isn't a regular time() value.
-
-Parameters:
-    $timestamp - A time value to be strtotime() converted.
-
-Notes:
-    Uses date() instead of strftime(). Retained for backwards compatibility.
+    $timestamp - A time() value or string to be strtotime() converted.
+    $formatting - The date()-compatible formatting.
 
 
 Function: twig_filter_filesize_format

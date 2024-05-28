@@ -241,10 +241,10 @@ var Oops = {
 var Uploads = {
     limit: <?php esce(intval($config->uploads_limit * 1000000)); ?>,
     messages: {
-        send_msg: '<?php esce(__("Uploading...")); ?>',
-        send_err: '<?php esce(__("File upload failed!")); ?>',
-        type_err: '<?php esce(__("File type not supported!")); ?>',
-        size_err: '<?php esce(_f("Maximum file size: %d Megabytes!", $config->uploads_limit)); ?>'
+        send_msg: '<?php esce(__("Uploading...", "admin")); ?>',
+        send_err: '<?php esce(__("File upload failed!", "admin")); ?>',
+        type_err: '<?php esce(__("File type not supported!", "admin")); ?>',
+        size_err: '<?php esce(_f("Maximum file size: %d Megabytes!", $config->uploads_limit, "admin")); ?>'
     },
     active: 0,
     send: function(file, doneCallback, failCallback, alwaysCallback) {

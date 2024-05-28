@@ -45,19 +45,19 @@ msgstr "마지막"
 msgid "First"
 msgstr "처음"
 
-#: includes/class/Query.php:111
+#: includes/class/Query.php:98
 msgid "PDO failed to execute the prepared statement."
 msgstr "PDO가 준비된 명령문을 실행하지 못했습니다."
 
-#: includes/class/Query.php:187
+#: includes/class/Query.php:174
 msgid "Query String"
 msgstr "쿼리문"
 
-#: includes/class/Query.php:194
+#: includes/class/Query.php:181
 msgid "Parameters"
 msgstr "파라미터"
 
-#: includes/class/Query.php:204 includes/class/SQL.php:152 install.php:748
+#: includes/class/Query.php:191 includes/class/SQL.php:152 install.php:750
 #, php-format
 msgid "Database error: %s"
 msgstr "데이터베이스 오류: %s"
@@ -84,24 +84,24 @@ msgstr "경로가 잘못된 컨트롤러로 시작되었습니다."
 #: includes/controller/Admin.php:3015 includes/controller/Admin.php:3022
 #: includes/controller/Admin.php:3319 includes/controller/Ajax.php:36
 #: includes/controller/Ajax.php:253 includes/download.php:14
-#: includes/error.php:169 includes/helpers.php:2031 includes/helpers.php:2038
-#: includes/helpers.php:2045 includes/helpers.php:2060
-#: includes/helpers.php:2069 includes/helpers.php:2083
-#: includes/helpers.php:2090 includes/helpers.php:2475
-#: includes/helpers.php:2487 includes/helpers.php:2493
-#: includes/helpers.php:2499 includes/helpers.php:2536
-#: includes/helpers.php:2542 includes/helpers.php:2548
-#: includes/helpers.php:2696 includes/helpers.php:2702
-#: includes/helpers.php:2708 includes/helpers.php:2714
-#: includes/helpers.php:2719 includes/helpers.php:2724
-#: includes/helpers.php:2729 includes/helpers.php:2736
+#: includes/error.php:178 includes/helpers.php:2039 includes/helpers.php:2046
+#: includes/helpers.php:2053 includes/helpers.php:2068
+#: includes/helpers.php:2077 includes/helpers.php:2091
+#: includes/helpers.php:2098 includes/helpers.php:2483
+#: includes/helpers.php:2496 includes/helpers.php:2502
+#: includes/helpers.php:2508 includes/helpers.php:2545
+#: includes/helpers.php:2551 includes/helpers.php:2557
+#: includes/helpers.php:2705 includes/helpers.php:2711
+#: includes/helpers.php:2717 includes/helpers.php:2723
+#: includes/helpers.php:2728 includes/helpers.php:2733
+#: includes/helpers.php:2738 includes/helpers.php:2745
 #: includes/lib/ThumbnailFile.php:290 includes/lib/ThumbnailFile.php:321
 #: includes/lib/ThumbnailFile.php:381 includes/thumbnail.php:15
-#: install.php:1011 upgrade.php:212 upgrade.php:228 upgrade.php:244
-#: upgrade.php:260 upgrade.php:276 upgrade.php:296 upgrade.php:340
-#: upgrade.php:356 upgrade.php:376 upgrade.php:392 upgrade.php:408
-#: upgrade.php:424 upgrade.php:444 upgrade.php:460 upgrade.php:589
-#: upgrade.php:605
+#: install.php:1013 upgrade.php:214 upgrade.php:230 upgrade.php:246
+#: upgrade.php:262 upgrade.php:278 upgrade.php:298 upgrade.php:342
+#: upgrade.php:358 upgrade.php:378 upgrade.php:394 upgrade.php:410
+#: upgrade.php:426 upgrade.php:446 upgrade.php:462 upgrade.php:591
+#: upgrade.php:607
 msgid "Error"
 msgstr "오류"
 
@@ -151,7 +151,7 @@ msgstr "올바르지 않은 액션입니다."
 #: includes/controller/Ajax.php:247 includes/controller/Ajax.php:271
 #: includes/controller/Ajax.php:277 includes/controller/Main.php:565
 #: includes/controller/Main.php:646 includes/download.php:21
-#: includes/helpers.php:2481 includes/thumbnail.php:22
+#: includes/helpers.php:2490 includes/thumbnail.php:22
 msgid "Access Denied"
 msgstr "접근 불가"
 
@@ -177,15 +177,15 @@ msgstr "GitHub으로 가기."
 msgid "Unable to check for new Chyrp Lite versions."
 msgstr "새로운 Chyrp Lite 버전을 확인할 수 없습니다."
 
-#: includes/common.php:316 includes/common.php:324
+#: includes/common.php:340 includes/common.php:348
 msgid "Service Unavailable"
 msgstr "서비스 불가"
 
-#: includes/common.php:317
+#: includes/common.php:341
 msgid "This resource is temporarily unable to serve your request."
 msgstr "자원이 일시적으로 요청을 처리할 수 없습니다."
 
-#: includes/common.php:325
+#: includes/common.php:349
 msgid "This resource cannot respond because it is not configured."
 msgstr "자원이 구성되지 않았기 때문에 응답할 수 없습니다."
 
@@ -378,13 +378,13 @@ msgid "That username is already in use."
 msgstr "이미 사용 중인 이름입니다."
 
 #: includes/controller/Admin.php:1010 includes/controller/Main.php:800
-#: includes/controller/Main.php:1181 install.php:693
+#: includes/controller/Main.php:1181 install.php:695
 msgid "Passwords cannot be blank."
 msgstr "비밀번호는 비워둘 수 없습니다."
 
 #: includes/controller/Admin.php:1017 includes/controller/Admin.php:1187
 #: includes/controller/Main.php:804 includes/controller/Main.php:1019
-#: includes/controller/Main.php:1185 install.php:628 install.php:695
+#: includes/controller/Main.php:1185 install.php:630 install.php:697
 msgid "Passwords do not match."
 msgstr "비밀번호가 일치하지 않습니다."
 
@@ -394,13 +394,13 @@ msgstr "보안을 위하여 더욱 강력한 암호를 설정하는 것이 좋�
 
 #: includes/controller/Admin.php:1029 includes/controller/Admin.php:1206
 #: includes/controller/Admin.php:2995 includes/controller/Main.php:813
-#: includes/controller/Main.php:1032 install.php:698
+#: includes/controller/Main.php:1032 install.php:700
 msgid "Email address cannot be blank."
 msgstr "이메일 주소는 비워둘 수 없습니다."
 
 #: includes/controller/Admin.php:1036 includes/controller/Admin.php:1213
 #: includes/controller/Admin.php:3002 includes/controller/Main.php:817
-#: includes/controller/Main.php:1036 install.php:700
+#: includes/controller/Main.php:1036 install.php:702
 msgid "Invalid email address."
 msgstr "올바르지 않은 이메일 주소입니다."
 
@@ -682,11 +682,11 @@ msgstr "미리 보기가 중지되었습니다."
 msgid "Preview started."
 msgstr "미리 보기를 시작합니다."
 
-#: includes/controller/Admin.php:3009 install.php:676
+#: includes/controller/Admin.php:3009 install.php:678
 msgid "Chyrp URL cannot be blank."
 msgstr "Chyrp URL은 비워둘 수 없습니다."
 
-#: includes/controller/Admin.php:3016 install.php:678
+#: includes/controller/Admin.php:3016 install.php:680
 msgid "Invalid Chyrp URL."
 msgstr "올바르지 않은 Chyrp URL입니다."
 
@@ -699,9 +699,9 @@ msgstr "올바르지 않은 표준 URL입니다."
 msgid "Settings updated."
 msgstr "설정이 업데이트되었습니다."
 
-#: includes/controller/Admin.php:3237 includes/helpers.php:2500
-#: includes/helpers.php:2549 includes/helpers.php:2720 upgrade.php:163
-#: upgrade.php:180 upgrade.php:197
+#: includes/controller/Admin.php:3237 includes/helpers.php:2509
+#: includes/helpers.php:2558 includes/helpers.php:2729 upgrade.php:165
+#: upgrade.php:182 upgrade.php:199
 msgid "Failed to write file to disk."
 msgstr "파일을 디스크에 쓰지 못했습니다."
 
@@ -883,7 +883,7 @@ msgstr "계정 등록이 불가능합니다."
 msgid "You cannot register an account because you are already logged in."
 msgstr "이미 로그인되어 있기 때문에 계정을 등록할 수 없습니다."
 
-#: includes/controller/Main.php:786 install.php:690
+#: includes/controller/Main.php:786 install.php:692
 msgid "Please enter a username for your account."
 msgstr "사용자명을 입력하세요."
 
@@ -933,7 +933,7 @@ msgstr "로그인하기 전에 계정을 활성화해야 합니다."
 msgid "Logged in."
 msgstr "로그인되었습니다."
 
-#: includes/controller/Main.php:971 includes/error.php:464
+#: includes/controller/Main.php:971 includes/error.php:473
 msgid "Log in"
 msgstr "로그인"
 
@@ -981,20 +981,20 @@ msgstr "링크가 만료되었습니다. 다시 시도해 주세요."
 msgid "Reset password"
 msgstr "비밀번호 변경"
 
-#: includes/error.php:170
+#: includes/error.php:179
 msgid "An unspecified error has occurred."
 msgstr "알 수 없는 오류가 발생했습니다."
 
-#: includes/error.php:452
+#: includes/error.php:461
 msgid "Backtrace"
 msgstr "역추적"
 
-#: includes/error.php:456
+#: includes/error.php:465
 #, php-format
 msgid "%s on line %d"
 msgstr "%s: %d번 줄"
 
-#: includes/error.php:469
+#: includes/error.php:478
 msgid "Go back"
 msgstr "뒤로 가기"
 
@@ -1014,161 +1014,161 @@ msgstr "자원에 접근할 수 있는 권한이 없습니다."
 msgid "The requested resource was not found."
 msgstr "요청한 자원을 찾을 수 없습니다."
 
-#: includes/helpers.php:2032
+#: includes/helpers.php:2040
 msgid "Webmention support is disabled for this site."
 msgstr "사이트에 대한 Webmention 지원이 비활성화되었습니다."
 
-#: includes/helpers.php:2039
+#: includes/helpers.php:2047
 msgid "The URL for your page is not valid."
 msgstr "페이지 URL이 올바르지 않습니다."
 
-#: includes/helpers.php:2046
+#: includes/helpers.php:2054
 msgid "The URL for our page is not valid."
 msgstr "페이지 URL이 올바르지 않습니다."
 
-#: includes/helpers.php:2061
+#: includes/helpers.php:2069
 msgid "The source and target URLs cannot be the same."
 msgstr "출발지와 목적지 URL은 같을 수 없습니다."
 
-#: includes/helpers.php:2070
+#: includes/helpers.php:2078
 msgid "We have not published at that URL."
 msgstr "지정된 URL에 게시하지 않았습니다."
 
-#: includes/helpers.php:2084
+#: includes/helpers.php:2092
 msgid "You have not published at that URL."
 msgstr "지정된 URL에 게시하지 않았습니다."
 
-#: includes/helpers.php:2091
+#: includes/helpers.php:2099
 msgid "Your page does not link to our page."
 msgstr "페이지가 올바르게 링크되지 않았습니다."
 
-#: includes/helpers.php:2284
+#: includes/helpers.php:2292
 msgid "Please create the uploads directory."
 msgstr "업로드 디렉토리를 생성하십시오."
 
-#: includes/helpers.php:2286
+#: includes/helpers.php:2294
 msgid "Please make the uploads directory writable."
 msgstr "업로드 디렉토리에 쓰기 가능한 권한이 필요합니다."
 
-#: includes/helpers.php:2307
+#: includes/helpers.php:2315
 #, php-format
 msgid "%s module is missing."
 msgstr "%s 모듈이 없습니다."
 
-#: includes/helpers.php:2320
+#: includes/helpers.php:2328
 #, php-format
 msgid "%s module is damaged."
 msgstr "%s 모듈이 손상되었습니다."
 
-#: includes/helpers.php:2338
+#: includes/helpers.php:2346
 #, php-format
 msgid "%s feather is missing."
 msgstr "%s 깃털이 없습니다."
 
-#: includes/helpers.php:2351
+#: includes/helpers.php:2359
 #, php-format
 msgid "%s feather is damaged."
 msgstr "%s 깃털이 손상되었습니다."
 
-#: includes/helpers.php:2421 includes/helpers.php:2444
+#: includes/helpers.php:2429 includes/helpers.php:2452
 #, php-format
 msgid "Execution of %s has been cancelled."
 msgstr "%s 실행이 취소되었습니다."
 
-#: includes/helpers.php:2476
+#: includes/helpers.php:2484
 msgid "Uploaded file is of an unsupported type."
 msgstr "올바르지 않은 파일 유형입니다."
 
-#: includes/helpers.php:2482
+#: includes/helpers.php:2491
 msgid "Only uploaded files are accepted."
 msgstr "업로드한 파일만 허용됩니다."
 
-#: includes/helpers.php:2488 includes/helpers.php:2537
+#: includes/helpers.php:2497 includes/helpers.php:2546
 msgid "Upload path does not exist."
 msgstr "업로드 경로가 존재하지 않습니다."
 
-#: includes/helpers.php:2494 includes/helpers.php:2543
+#: includes/helpers.php:2503 includes/helpers.php:2552
 msgid "Upload path is not writable."
 msgstr "업로드 경로에 쓰기 가능한 권한이 없습니다."
 
-#: includes/helpers.php:2697
+#: includes/helpers.php:2706
 msgid ""
 "The uploaded file exceeds the <code>upload_max_filesize</code> directive in "
 "php.ini."
 msgstr ""
 
-#: includes/helpers.php:2703
+#: includes/helpers.php:2712
 msgid ""
 "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the "
 "HTML form."
 msgstr ""
 
-#: includes/helpers.php:2709
+#: includes/helpers.php:2718
 msgid "The uploaded file was only partially uploaded."
 msgstr "파일이 일부만 업로드되었습니다."
 
-#: includes/helpers.php:2715
+#: includes/helpers.php:2724
 msgid "Missing a temporary folder."
 msgstr "임시 폴더가 없습니다."
 
-#: includes/helpers.php:2725
+#: includes/helpers.php:2734
 msgid "File upload was stopped by a PHP extension."
 msgstr "파일 업로드가 PHP 확장자에 의해 중지되었습니다."
 
-#: includes/helpers.php:2730
+#: includes/helpers.php:2739
 #, php-format
 msgid "File upload failed with error %d."
 msgstr "%d 오류로 파일 업로드에 실패했습니다."
 
-#: includes/helpers.php:2737
+#: includes/helpers.php:2746
 #, php-format
 msgid ""
 "The uploaded file exceeds the maximum size of %d Megabytes allowed by this "
 "site."
 msgstr ""
 
-#: includes/helpers.php:3116
+#: includes/helpers.php:3125
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr "JSON 인코딩 오류: %s"
 
-#: includes/helpers.php:3141
+#: includes/helpers.php:3150
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr "JSON 디코딩 오류: %s"
 
-#: includes/helpers.php:3224
+#: includes/helpers.php:3233
 msgid "Failed to create Zip archive."
 msgstr "압축 파일을 만들지 못했습니다."
 
-#: includes/helpers.php:3331
+#: includes/helpers.php:3340
 #, php-format
 msgid "Activate your account at %s"
 msgstr "%s에서 계정을 활성화하세요"
 
-#: includes/helpers.php:3332 includes/helpers.php:3372
+#: includes/helpers.php:3341 includes/helpers.php:3381
 #, php-format
 msgid "Hello, %s."
 msgstr "%s님 안녕하세요."
 
-#: includes/helpers.php:3335
+#: includes/helpers.php:3344
 msgid "You are receiving this message because you registered a new account."
 msgstr "새 계정을 등록하셨기 때문에 이 메시지를 받으셨습니다."
 
-#: includes/helpers.php:3338
+#: includes/helpers.php:3347
 msgid "Visit this link to activate your account:"
 msgstr "계정을 활성화하려면 다음 링크를 방문하세요:"
 
-#: includes/helpers.php:3371
+#: includes/helpers.php:3380
 #, php-format
 msgid "Reset your password at %s"
 msgstr "%s에 비밀번호 재설정"
 
-#: includes/helpers.php:3375
+#: includes/helpers.php:3384
 msgid "You are receiving this message because you requested a new password."
 msgstr "새 비밀번호를 요청하셨기 때문에 이 메시지를 받으셨습니다."
 
-#: includes/helpers.php:3378
+#: includes/helpers.php:3387
 msgid "Visit this link to reset your password:"
 msgstr "비밀번호를 변경하려면 다음 링크를 방문하세요:"
 
@@ -1176,22 +1176,22 @@ msgstr "비밀번호를 변경하려면 다음 링크를 방문하세요:"
 msgid "Guest"
 msgstr "게스트"
 
-#: includes/lib/Leaf.php:487
+#: includes/lib/Leaf.php:508
 #, php-format
 msgid "%s GB"
 msgstr ""
 
-#: includes/lib/Leaf.php:492
+#: includes/lib/Leaf.php:513
 #, php-format
 msgid "%s MB"
 msgstr ""
 
-#: includes/lib/Leaf.php:496
+#: includes/lib/Leaf.php:517
 #, php-format
 msgid "%s KB"
 msgstr ""
 
-#: includes/lib/Leaf.php:722
+#: includes/lib/Leaf.php:743
 msgid "Image source"
 msgstr "이미지 출처"
 
@@ -1337,236 +1337,236 @@ msgstr "내용 내보내기"
 msgid "[Guest]"
 msgstr "[손님]"
 
-#: install.php:146
+#: install.php:148
 msgid "PDO is required for database access."
 msgstr "데이터베이스 액세스에 PDO가 필요합니다."
 
-#: install.php:151 upgrade.php:122
+#: install.php:153 upgrade.php:124
 msgid "Please CHMOD or CHOWN the installation directory to make it writable."
 msgstr "설치 디렉토리에 쓰기 가능한 권한을 위하여 CHMOD 또는 CHOWN하십시오."
 
-#: install.php:157 upgrade.php:128
+#: install.php:159 upgrade.php:130
 msgid ""
 "Please CHMOD or CHOWN the <em>includes</em> directory to make it writable."
 msgstr ""
 "<em>includes</em> 디렉토리에 쓰기 가능한 권한을 위하여 CHMOD 또는 CHOWN하십"
 "시오."
 
-#: install.php:163 upgrade.php:134
+#: install.php:165 upgrade.php:136
 msgid ""
 "Please CHMOD or CHOWN the <em>caches</em> directory to make it writable."
 msgstr ""
 "<em>caches</em> 디렉토리에 쓰기 가능한 권한을 위하여 CHMOD 또는 CHOWN하십시"
 "오."
 
-#: install.php:169 upgrade.php:140
+#: install.php:171 upgrade.php:142
 msgid "Please CHMOD or CHOWN the <em>twig</em> directory to make it writable."
 msgstr ""
 "<em>twig</em> 디렉토리에 쓰기 가능한 권한을 위하여 CHMOD 또는 CHOWN하십시오."
 
-#: install.php:175 upgrade.php:146
+#: install.php:177 upgrade.php:148
 msgid ""
 "Please CHMOD or CHOWN the <em>thumbs</em> directory to make it writable."
 msgstr ""
 "<em>thumbs</em> 디렉토리에 쓰기 가능한 권한을 위하여 CHMOD 또는 CHOWN하십시"
 "오."
 
-#: install.php:243
+#: install.php:245
 msgid "Chyrp Lite Installer"
 msgstr "Chyrp 라이트 설치 도구"
 
-#: install.php:673
+#: install.php:675
 msgid "Database cannot be blank."
 msgstr "데이터베이스는 비워 둘 수 없습니다."
 
-#: install.php:681
+#: install.php:683
 msgid "Please enter a name for your website."
 msgstr "웹사이트의 이름을 입력하세요."
 
-#: install.php:684
+#: install.php:686
 msgid "Time zone cannot be blank."
 msgstr "시간대는 비워둘 수 없습니다."
 
-#: install.php:687
+#: install.php:689
 msgid "Language cannot be blank."
 msgstr "언어 설정은 비워둘 수 없습니다."
 
-#: install.php:706
+#: install.php:708
 msgid "Could not determine the absolute path to the database."
 msgstr "데이터베이스의 절대 경로를 결정할 수 없습니다."
 
-#: install.php:713
+#: install.php:715
 msgid "Please make the database writable by the server."
 msgstr "서버에서 데이터베이스를 쓰기 가능하게 만드십시오."
 
-#: install.php:717
+#: install.php:719
 msgid "Please enter a username and password for the database."
 msgstr "데이터베이스의 사용자명과 암호를 입력하십시오."
 
-#: install.php:1012 upgrade.php:213 upgrade.php:229 upgrade.php:245
-#: upgrade.php:261 upgrade.php:277 upgrade.php:297 upgrade.php:341
-#: upgrade.php:357 upgrade.php:377 upgrade.php:393 upgrade.php:409
-#: upgrade.php:425 upgrade.php:445 upgrade.php:461 upgrade.php:590
-#: upgrade.php:606
+#: install.php:1014 upgrade.php:215 upgrade.php:231 upgrade.php:247
+#: upgrade.php:263 upgrade.php:279 upgrade.php:299 upgrade.php:343
+#: upgrade.php:359 upgrade.php:379 upgrade.php:395 upgrade.php:411
+#: upgrade.php:427 upgrade.php:447 upgrade.php:463 upgrade.php:592
+#: upgrade.php:608
 msgid "Could not write the configuration file."
 msgstr "구성 파일을 쓸 수 없습니다."
 
-#: install.php:1030
+#: install.php:1032
 msgid "Database Setup"
 msgstr "데이터베이스 설정"
 
-#: install.php:1032
+#: install.php:1034
 msgid "Adapter"
 msgstr "어댑터"
 
-#: install.php:1046
+#: install.php:1048
 msgid "Host"
 msgstr "호스트"
 
-#: install.php:1050
+#: install.php:1052
 msgid "Port"
 msgstr "포트"
 
-#: install.php:1050 install.php:1079
+#: install.php:1052 install.php:1081
 msgid "(optional)"
 msgstr "(선택 사항)"
 
-#: install.php:1054 install.php:1117
+#: install.php:1056 install.php:1119
 msgid "Username"
 msgstr "사용자명"
 
-#: install.php:1058 install.php:1121 install.php:1125
+#: install.php:1060 install.php:1123 install.php:1127
 msgid "Password"
 msgstr "비밀번호"
 
-#: install.php:1062
+#: install.php:1064
 msgid "Database"
 msgstr "데이터베이스"
 
-#: install.php:1064
+#: install.php:1066
 msgid "(absolute or relative path)"
 msgstr "(상대 경로 또는 절대 경로)"
 
-#: install.php:1070
+#: install.php:1072
 msgid "Make sure your PostgreSQL database uses UTF-8 encoding."
 msgstr "PostgreSQL 데이터베이스가 UTF-8 인코딩을 사용하는지 확인하십시오."
 
-#: install.php:1073
+#: install.php:1075
 msgid ""
 "The collation <code>utf8mb4_general_ci</code> is recommended for your MySQL "
 "database."
 msgstr ""
 
-#: install.php:1076
+#: install.php:1078
 msgid ""
 "Be sure to put your SQLite database outside the document root directory, "
 "otherwise visitors will be able to download it."
 msgstr ""
 
-#: install.php:1079
+#: install.php:1081
 msgid "Table Prefix"
 msgstr "테이블 접두사"
 
-#: install.php:1082
+#: install.php:1084
 msgid "Website Setup"
 msgstr "웹사이트 설정"
 
-#: install.php:1084
+#: install.php:1086
 msgid "Chyrp URL"
 msgstr ""
 
-#: install.php:1088
+#: install.php:1090
 msgid "Site Name"
 msgstr "사이트명"
 
-#: install.php:1089
+#: install.php:1091
 msgid "My Awesome Site"
 msgstr "나의 멋진 사이트"
 
-#: install.php:1092
+#: install.php:1094
 msgid "Description"
 msgstr "설명"
 
-#: install.php:1096
+#: install.php:1098
 msgid "Time Zone"
 msgstr "시간대"
 
-#: install.php:1106
+#: install.php:1108
 msgid "Language"
 msgstr "언어"
 
-#: install.php:1115
+#: install.php:1117
 msgid "Admin Account"
 msgstr "관리자 계정"
 
-#: install.php:1125
+#: install.php:1127
 msgid "(again)"
 msgstr "비밀번호 확인"
 
-#: install.php:1129
+#: install.php:1131
 msgid "Email Address"
 msgstr "이메일 주소"
 
-#: install.php:1132
+#: install.php:1134
 msgid "Install me!"
 msgstr "설치가 필요합니다."
 
-#: install.php:1135
+#: install.php:1137
 msgid "Installation Complete"
 msgstr "설치가 완료되었습니다"
 
-#: install.php:1136 upgrade.php:950
+#: install.php:1138 upgrade.php:952
 msgid "What now?"
 msgstr ""
 
-#: install.php:1138
+#: install.php:1140
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr "더 이상 필요하지 않은 경우 <em>install.php</em>를 삭제하세요."
 
-#: install.php:1139
+#: install.php:1141
 msgid "Log in to your site and configure things to your liking."
 msgstr "사이트에 로그인하고 원하는 대로 구성하세요."
 
-#: install.php:1142 upgrade.php:957
+#: install.php:1144 upgrade.php:959
 msgid "Take me to my site!"
 msgstr "사이트로 이동합니다."
 
-#: upgrade.php:619
+#: upgrade.php:621
 msgid "Chyrp Lite Upgrader"
 msgstr "Chyrp Lite 업그레이드"
 
-#: upgrade.php:938
+#: upgrade.php:940
 msgid "Halt!"
 msgstr "정지!"
 
-#: upgrade.php:939
+#: upgrade.php:941
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr "업그레이드하기 전에 다음 예방 조치를 취하십시오:"
 
-#: upgrade.php:941
+#: upgrade.php:943
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr "<strong>진행하기 전에 데이터베이스를 백업하세요.</strong>"
 
-#: upgrade.php:942
+#: upgrade.php:944
 msgid "Tell your users that your site is offline for maintenance."
 msgstr "유지 관리를 위해 사이트가 오프라인 상태임을 사용자에게 알립니다."
 
-#: upgrade.php:946
+#: upgrade.php:948
 msgid "Upgrade me!"
 msgstr "새로운 버전이 있습니다."
 
-#: upgrade.php:949
+#: upgrade.php:951
 msgid "Upgrade Complete"
 msgstr "업그레이드가 완료되었습니다"
 
-#: upgrade.php:952
+#: upgrade.php:954
 msgid "Take action to resolve any errors reported on this page."
 msgstr "이 페이지에 보고된 오류를 해결하기 위한 조치를 취하십시오."
 
-#: upgrade.php:953
+#: upgrade.php:955
 msgid "Run this upgrader again if you need to."
 msgstr "필요한 경우 업그레이드를 다시 실행하십시오."
 
-#: upgrade.php:954
+#: upgrade.php:956
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr "업그레이드가 완료되면 <em>upgrade.php</em>를 삭제해야 합니다."
