@@ -243,7 +243,7 @@ var Uploads = {
     messages: {
         send_msg: '<?php esce(__("Uploading...")); ?>',
         send_err: '<?php esce(__("File upload failed!")); ?>',
-        type_err: '<?php esce(__("File is of an unsupported type!")); ?>',
+        type_err: '<?php esce(__("File type not supported!")); ?>',
         size_err: '<?php esce(_f("Maximum file size: %d Megabytes!", $config->uploads_limit)); ?>'
     },
     active: 0,
