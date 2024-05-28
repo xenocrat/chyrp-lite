@@ -419,7 +419,7 @@
      * Returns a formatted and internationalized time string.
      *
      * Parameters:
-     *     $timestamp - A time value or string to be strtotime() converted.
+     *     $timestamp - A time() value or string to be strtotime() converted.
      *     $format - The date()-compatible formatting.
      */
     function twig_filter_translate_time(
