@@ -110,7 +110,11 @@ trait LinkTrait
 	{
 		if (
 			strpos($markdown, ']') !== false
-			&& preg_match('/\[((?>[^\]\[]+|(?R))*)\]/', $markdown, $textMatches)
+			&& preg_match(
+				'/\[((?>(\\\\\[|\\\\\]|\\\\|[^\]\[\\\\])+|(?R))*)\]/',
+				$markdown,
+				$textMatches
+			)
 		) {
 			$text = $textMatches[1];
 			$offset = strlen($textMatches[0]);
