@@ -110,9 +110,7 @@ trait LinkTrait
 	{
 		if (
 			strpos($markdown, ']') !== false
-			&& preg_match('/^\[(.*?)(?<!\\\\)\]/', $markdown, $textMatches)
-			// Unescaped brackets are not allowed.
-			&& !preg_match('/(?<!\\\\)[\[\]]/', $textMatches[1])
+			&& preg_match('/\[((?>[^\]\[]+|(?R))*)\]/', $markdown, $textMatches)
 		) {
 			$text = $textMatches[1];
 			$offset = strlen($textMatches[0]);
