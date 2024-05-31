@@ -220,7 +220,7 @@
                 $config->chyrp_url."/".$controller->base ;
 
             # Assume this is a dirty URL and return it without translation.
-            if (strpos($url, "/") === 0)
+            if (str_starts_with($url, "/"))
                 return fix($base.$url, true);
 
             # Assume this is a clean URL and ensure it ends with a slash.

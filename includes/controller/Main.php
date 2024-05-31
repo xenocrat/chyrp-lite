@@ -92,7 +92,7 @@
                 return $route->action = "index";
 
             # Serve the index if the first arg is a query and action is unset.
-            if (empty($route->action) and strpos($route->arg[0], "?") === 0)
+            if (empty($route->action) and str_starts_with($route->arg[0], "?"))
                 return $route->action = "index";
 
             # Discover feed requests.

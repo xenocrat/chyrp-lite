@@ -2245,7 +2245,7 @@
             $path = substr($path, 0, $end + 1);
 
         # Append the relative path, or replace the path if rel begins with "/".
-        if (strpos($rel, "/") === 0)
+        if (str_starts_with($rel, "/"))
             $path = $rel;
         else
             $path.= $rel;

@@ -569,7 +569,7 @@
                     $cond = $val;
                 } else {
                     # Key => Val expression.
-                    if (is_string($val) and strlen($val) and strpos($val, ":") === 0) {
+                    if (is_string($val) and str_starts_with($val, ":")) {
                         $cond = self::safecol($sql, $key)." = ".$val;
                     } else {
                         if (is_object($val) and !$val instanceof Stringable)

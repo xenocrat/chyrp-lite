@@ -688,10 +688,10 @@
         $args_filtered = array();
 
         foreach ($args as $arg) {
-            if (strpos($arg, "max_width=") === 0)
+            if (str_starts_with($arg, "max_width="))
                 continue;
 
-            if (strpos($arg, "max_height=") === 0)
+            if (str_starts_with($arg, "max_height="))
                 continue;
 
             $args_filtered[] = $arg;
