@@ -66,11 +66,11 @@ trait HtmlTrait
 		// Type 1: textarea.
 			return true;
 		}
-		if (strncmp($line, '<!--', 4) === 0) {
+		if (str_starts_with($line, '<!--')) {
 		// Type 2: comment.
 			return true;
 		}
-		if (strncmp($line, '<?', 2) === 0) {
+		if (str_starts_with($line, '<?')) {
 		// Type 3: processor.
 			return true;
 		}
@@ -78,7 +78,7 @@ trait HtmlTrait
 		// Type 4: declaration.
 			return true;
 		}
-		if (strncmp($line, '<![CDATA[', 9) === 0) {
+		if (str_starts_with($line, '<![CDATA[')) {
 		// Type 5: CDATA.
 			return true;
 		}
@@ -154,7 +154,7 @@ trait HtmlTrait
 					break;
 				}
 			}
-		} elseif (strncmp($line, '<!--', 4) === 0) {
+		} elseif (str_starts_with($line, '<!--')) {
 		// Type 2: comment.
 			for ($i = $current, $count = count($lines); $i < $count; $i++) {
 				$line = $lines[$i];
@@ -163,7 +163,7 @@ trait HtmlTrait
 					break;
 				}
 			}
-		} elseif (strncmp($line, '<?', 2) === 0) {
+		} elseif (str_starts_with($line, '<?')) {
 		// Type 3: processor.
 			for ($i = $current, $count = count($lines); $i < $count; $i++) {
 				$line = $lines[$i];
@@ -172,7 +172,7 @@ trait HtmlTrait
 					break;
 				}
 			}
-		} elseif (strncmp($line, '<!', 2) === 0) {
+		} elseif (str_starts_with($line, '<!')) {
 		// Type 4: declaration.
 			for ($i = $current, $count = count($lines); $i < $count; $i++) {
 				$line = $lines[$i];
@@ -181,7 +181,7 @@ trait HtmlTrait
 					break;
 				}
 			}
-		} elseif (strncmp($line, '<![CDATA[', 9) === 0) {
+		} elseif (str_starts_with($line, '<![CDATA[')) {
 		// Type 5: CDATA.
 			for ($i = $current, $count = count($lines); $i < $count; $i++) {
 				$line = $lines[$i];

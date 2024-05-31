@@ -21,6 +21,7 @@ class GithubMarkdown extends Markdown
 
 	// Include inline element parsing using traits.
 	use inline\AutoLinkTrait;
+	use inline\CheckboxTrait;
 	use inline\StrikeoutTrait;
 
 	/**

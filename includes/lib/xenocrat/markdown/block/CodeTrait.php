@@ -18,7 +18,7 @@ trait CodeTrait
 	protected function identifyCode($line): bool
 	{
 		// Indentation >= 4 or one tab is code.
-		return $line[0] === "\t" || strncmp($line, '    ', 4) === 0;
+		return $line[0] === "\t" || str_starts_with($line, '    ');
 	}
 
 	/**

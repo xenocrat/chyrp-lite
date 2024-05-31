@@ -25,6 +25,7 @@ class GitlabMarkdown extends Markdown
 
 	// Include inline element parsing using traits.
 	use inline\AutoLinkTrait;
+	use inline\CheckboxTrait;
 	use inline\MediaLinkTrait;
 	use inline\StrikeoutTrait;
 

@@ -19,7 +19,7 @@ use RuntimeException;
 abstract class Parser
 {
 	const VERSION_MAJOR = 3;
-	const VERSION_MINOR = 1;
+	const VERSION_MINOR = 2;
 
 	/**
 	 * @var integer - The maximum nesting level for language elements.
@@ -435,7 +435,7 @@ abstract class Parser
 				// Put the longest marker first.
 				if (isset($this->_inlineMarkers[$m])) {
 					reset($this->_inlineMarkers[$m]);
-					if (strlen($marker) > strlen(key($this->_inlineMarkers[$m]))) {
+					if (strlen($marker) >= strlen(key($this->_inlineMarkers[$m]))) {
 						$this->_inlineMarkers[$m] = array_merge(
 							[$marker => $method], $this->_inlineMarkers[$m]
 						);
@@ -469,7 +469,10 @@ abstract class Parser
 		$markers = implode('', array_keys($this->_inlineMarkers));
 		$paragraph = [];
 
-		while (!empty($markers) && ($found = strpbrk($text, $markers)) !== false) {
+		while (
+			!empty($markers)
+			&& ($found = strpbrk($text, $markers)) !== false
+		) {
 			$pos = strpos($text, $found);
 			// Add the text up to next marker to the paragraph.
 			if ($pos !== 0) {
@@ -480,7 +483,7 @@ abstract class Parser
 			$parsed = false;
 
 			foreach ($this->_inlineMarkers[$text[0]] as $marker => $method) {
-				if (strncmp($text, $marker, strlen($marker)) === 0) {
+				if (str_starts_with($text, $marker)) {
 					// Parse the marker.
 					array_unshift($this->context, $method);
 					list($output, $offset) = $this->$method($text);
