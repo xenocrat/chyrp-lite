@@ -530,8 +530,15 @@ section.photo > a:focus {
     background-color: #ffdd00;
 }
 .ajax_loading * {
-    filter: opacity(80%) blur(2px) !important;
-    transition: filter 500ms ease-out;
+    animation: ajax_loading 1s alternate infinite ease-in-out;
+}
+@keyframes ajax_loading {
+    from {
+        filter: opacity(90%) blur(1px);
+    }
+    to {
+        filter: opacity(80%) blur(2px);
+    }
 }
 .ajax_loading .doaction {
     visibility: hidden;
@@ -541,5 +548,11 @@ section.photo > a:focus {
         float: none;
         max-width: 100%;
         margin: 1rem 0rem;
+    }
+}
+@media (prefers-reduced-motion) {
+    .ajax_loading * {
+        animation: none;
+        filter: opacity(80%) blur(2px);
     }
 }
