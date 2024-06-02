@@ -529,4 +529,26 @@
             echo $before.'<a href="'.$url.'" class="'.trim($classes).
                  '" id="'.$name.'_delete_'.$this->id.'">'.$text.'</a>'.$after;
         }
+
+        /**
+         * Function: etag
+         * Generates a strong Etag for the object.
+         */
+        public function etag(): string|false {
+            if ($this->no_results)
+                return false;
+
+            $array = array(
+                get_class($this),
+                $this->id
+            );
+
+            if (isset($this->created_at))
+                $array[] = $this->created_at;
+
+            if (isset($this->updated_at))
+                $array[] = $this->updated_at;
+
+            return token($array);
+        }
     }
