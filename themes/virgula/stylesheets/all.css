@@ -386,6 +386,10 @@ article.fragment {
     padding-bottom: 1rem;
     border-bottom: 3px dotted #b1b4b6;
 }
+article.fragment:last-child {
+    border-bottom: none;
+    padding-bottom: 0rem;
+}
 header {
     font-size: 0.7rem;
     margin: 0rem;
