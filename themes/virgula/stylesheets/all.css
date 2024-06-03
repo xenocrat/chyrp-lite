@@ -238,10 +238,6 @@ main > details > summary {
     border: 1px solid #b1b4b6;
     border-radius: 0.1rem;
 }
-summary:hover,
-summary:focus {
-    color: #003078;
-}
 table {
     border-collapse: collapse;
     border-spacing: 0em;
@@ -286,7 +282,8 @@ a:link {
 a:visited {
     color: #4c2c92;
 }
-a:hover {
+a:hover,
+summary:hover {
     color: #003078;
 }
 a:focus,
@@ -294,7 +291,8 @@ a:focus code {
     outline: none;
     background-color: #ffdd00;
 }
-a:active {
+a:active,
+summary:active {
     color: #0b0c0c;
 }
 label {

@@ -577,7 +577,10 @@ a:visited {
 }
 a:hover,
 a:focus,
-a:active {
+a:active,
+summary:hover,
+summary:focus,
+summary:active {
     outline: none;
     color: #c04b4b;
     text-decoration: underline;

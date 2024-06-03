@@ -655,11 +655,17 @@ article.video video,
 article.audio audio {
     width: 100%;
 }
-a:link, a:visited {
+a:link,
+a:visited {
     color: #1f1f23;
     text-decoration: none;
 }
-a:hover, a:focus, a:active {
+a:hover,
+a:focus,
+a:active,
+summary:hover,
+summary:focus,
+summary:active {
     outline: none;
     color: #0070c4;
     text-decoration: underline;
