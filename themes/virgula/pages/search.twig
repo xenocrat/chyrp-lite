@@ -11,6 +11,18 @@
 <summary>{{ "Pages containing the search term" | translate }}</summary>
 {% for page in pages %}
 <article class="fragment">
+<header>
+<span class="permalink">
+<a href="{{ page.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(page.title | striptags | normalize | fix(true)) }}">&dagger;</a>
+</span>
+<span class="time">
+{% if page.updated %}
+{{ "Updated on %s." | translate | format(page.updated_at | time) }}
+{% else %}
+{{ "Created on %s." | translate | format(page.created_at | time) }}
+{% endif %}
+</span>
+</header>
 <h2 class="page_title">
 <a href="{{ page.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(page.title | striptags | normalize | fix(true)) }}">{{ page.title }}</a>
 </h2>
@@ -25,8 +37,8 @@
 {% if posts.prev_page() or posts.next_page() %}
 <!-- Navigation -->
 <nav class="traversal">
-{{ posts.prev_link("&xlarr; Newer posts" | translate) }}
-{{ posts.next_link("Older posts &xrarr;" | translate) }}
+{{ posts.prev_link("Newer posts" | translate) }}
+{{ posts.next_link("Older posts" | translate) }}
 </nav>
 {% endif %}
 {% endblock %}

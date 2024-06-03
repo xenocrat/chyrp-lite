@@ -68,10 +68,6 @@
 </li>
 {% endif %}
 </ul>
-<form class="search_box" action="{{ url('search') }}" method="post" accept-charset="UTF-8" role="search">
-<input type="text" id="search_field" name="query" value="" placeholder="{{ 'Search this blog' | translate }}" aria-label="{{ 'Search this blog' | translate }}">
-<button type="submit" id="search_submit">{{ "Find" | translate }}</button>
-</form>
 </nav>
 {% for notice in flash.notices %}
 <div role="alert" class="flash notice">{{ notice }}</div>
@@ -82,6 +78,10 @@
 {% for message in flash.messages %}
 <div role="alert" class="flash message">{{ message }}</div>
 {% endfor %}
+<form class="search_box" action="{{ url('search') }}" method="post" accept-charset="UTF-8" role="search">
+<input type="text" id="search_field" name="query" value="" placeholder="{{ 'Search this blog' | translate }}" aria-label="{{ 'Search this blog' | translate }}">
+<button type="submit" id="search_submit">{{ "Find" | translate }}</button>
+</form>
 <!-- Content -->
 <main>
 {% block content %}{% endblock %}

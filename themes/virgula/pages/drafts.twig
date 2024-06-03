@@ -3,10 +3,17 @@
 {% block content %}
 {% if posts.paginated is not empty %}
 <div class="filter">{{ "Drafts" | translate }}</div>
-{% endif %}
 {% for post in posts.paginated %}
 {% include(["feathers" ~ DIR ~ post.feather ~ ".twig", "feathers" ~ DIR ~ "missing.twig"]) %}
+{% endfor %}
+{% if posts.prev_page() or posts.next_page() %}
+<!-- Navigation -->
+<nav class="traversal">
+{{ posts.prev_link("Newer posts" | translate) }}
+{{ posts.next_link("Older posts" | translate) }}
+</nav>
+{% endif %}
 {% else %}
 <div role="status">{{ "You don't have any drafts." | translate }}</div>
-{% endfor %}
+{% endif %}
 {% endblock %}

@@ -2,19 +2,14 @@
 
 {% block content %}
 {% if tag_cloud is not empty %}
-<h2>{{ "Tag cloud" | translate }}</h2>
-<style type="text/css" nonce="{{ stylesheets_nonce() }}">
+<h2>{{ "Tags" | translate }}</h2>
+<ul>
 {% for tag in tag_cloud %}
-a.tag.tag-{{ tag.clean }} {
-font-size: {{ tag.size + 100 }}%;
-}
+<li>
+<a href="{{ tag.url }}" title="{{ tag.title }}">{{ tag.name }}</a>
+</li>
 {% endfor %}
-</style>
-<div id="tag_cloud">
-{% for tag in tag_cloud %}
-<a class="tag tag-{{ tag.clean }}" href="{{ tag.url }}" title="{{ tag.title }}">{{ tag.name }}</a>
-{% endfor %}
-</div>
+</ul>
 {% else %}
 <div role="status">{{ "Nothing here yet!" | translate }}</div>
 {% endif %}
