@@ -205,7 +205,7 @@ ul.navigation > li {
     margin: 0rem;
     display: inline;
 }
-ul.navigation > li:not(:last-child):after {
+ul.navigation > li + li:before {
     content: " / ";
 }
 li {
@@ -378,17 +378,11 @@ article {
 footer {
     clear: both;
 }
-main > article:first-child {
-    margin-top: 4.25rem;
-}
 article.fragment {
     margin: 1rem 0rem;
-    padding-bottom: 1rem;
-    border-bottom: 3px dotted #b1b4b6;
 }
-article.fragment:last-child {
-    border-bottom: none;
-    padding-bottom: 0rem;
+article.fragment + article.fragment {
+    border-top: 3px dotted #b1b4b6;
 }
 header {
     font-size: 0.7rem;
