@@ -13,8 +13,10 @@ msgstr ""
 #: themes/virgula/feathers/video.twig:6
 #: themes/virgula/pages/archive.twig:19
 #: themes/virgula/pages/index.twig:10
-#: themes/virgula/pages/page.twig:6
-#: themes/virgula/pages/search.twig:15
+#: themes/virgula/pages/page.twig:7
+#: themes/virgula/pages/page.twig:18
+#: themes/virgula/pages/search.twig:16
+#: themes/virgula/pages/search.twig:27
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr ""
@@ -266,12 +268,12 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
-#: themes/virgula/layouts/default.twig:72
-#: themes/virgula/layouts/default.twig:72
+#: themes/virgula/layouts/default.twig:82
+#: themes/virgula/layouts/default.twig:82
 msgid "Search this blog"
 msgstr ""
 
-#: themes/virgula/layouts/default.twig:73
+#: themes/virgula/layouts/default.twig:83
 msgid "Find"
 msgstr ""
 
@@ -302,20 +304,22 @@ msgstr ""
 #: themes/virgula/pages/archive.twig:55
 #: themes/virgula/pages/author.twig:12
 #: themes/virgula/pages/category.twig:12
-#: themes/virgula/pages/search.twig:28
+#: themes/virgula/pages/drafts.twig:12
+#: themes/virgula/pages/search.twig:40
 #: themes/virgula/pages/tag.twig:12
 #: themes/virgula/pages/updated.twig:12
-msgid "&xlarr; Newer posts"
+msgid "Newer posts"
 msgstr ""
 
 #: themes/virgula/pages/archive.twig:37
 #: themes/virgula/pages/archive.twig:56
 #: themes/virgula/pages/author.twig:13
 #: themes/virgula/pages/category.twig:13
-#: themes/virgula/pages/search.twig:29
+#: themes/virgula/pages/drafts.twig:13
+#: themes/virgula/pages/search.twig:41
 #: themes/virgula/pages/tag.twig:13
 #: themes/virgula/pages/updated.twig:13
-msgid "Older posts &xrarr;"
+msgid "Older posts"
 msgstr ""
 
 #: themes/virgula/pages/archive.twig:63
@@ -340,7 +344,7 @@ msgstr ""
 msgid "Drafts"
 msgstr ""
 
-#: themes/virgula/pages/drafts.twig:10
+#: themes/virgula/pages/drafts.twig:17
 msgid "You don't have any drafts."
 msgstr ""
 
@@ -357,8 +361,20 @@ msgid "Pages"
 msgstr ""
 
 #: themes/virgula/pages/index.twig:47
-#: themes/virgula/pages/tags.twig:19
+#: themes/virgula/pages/tags.twig:14
 msgid "Nothing here yet!"
+msgstr ""
+
+#: themes/virgula/pages/page.twig:11
+#: themes/virgula/pages/search.twig:20
+#, php-format
+msgid "Updated on %s."
+msgstr ""
+
+#: themes/virgula/pages/page.twig:13
+#: themes/virgula/pages/search.twig:22
+#, php-format
+msgid "Created on %s."
 msgstr ""
 
 #: themes/virgula/pages/search.twig:5
@@ -380,7 +396,7 @@ msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr ""
 
 #: themes/virgula/pages/tags.twig:5
-msgid "Tag cloud"
+msgid "Tags"
 msgstr ""
 
 #: themes/virgula/pages/updated.twig:5

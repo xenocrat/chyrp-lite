@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/virgula/content/comment.twig:5
@@ -21,8 +21,9 @@ msgstr "这个评论正在等待审核。"
 #: themes/virgula/feathers/photo.twig:6 themes/virgula/feathers/quote.twig:6
 #: themes/virgula/feathers/text.twig:6 themes/virgula/feathers/uploader.twig:6
 #: themes/virgula/feathers/video.twig:6 themes/virgula/pages/archive.twig:19
-#: themes/virgula/pages/index.twig:10 themes/virgula/pages/page.twig:6
-#: themes/virgula/pages/search.twig:15
+#: themes/virgula/pages/index.twig:10 themes/virgula/pages/page.twig:7
+#: themes/virgula/pages/page.twig:18 themes/virgula/pages/search.twig:16
+#: themes/virgula/pages/search.twig:27
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "永久链接至 &#8220;%s&#8221;"
@@ -269,11 +270,11 @@ msgstr "草稿"
 msgid "Log out"
 msgstr "退出登陆"
 
-#: themes/virgula/layouts/default.twig:72
+#: themes/virgula/layouts/default.twig:82
 msgid "Search this blog"
 msgstr "搜索此博客"
 
-#: themes/virgula/layouts/default.twig:73
+#: themes/virgula/layouts/default.twig:83
 msgid "Find"
 msgstr "查找"
 
@@ -301,17 +302,17 @@ msgstr "F"
 
 #: themes/virgula/pages/archive.twig:32 themes/virgula/pages/archive.twig:55
 #: themes/virgula/pages/author.twig:12 themes/virgula/pages/category.twig:12
-#: themes/virgula/pages/search.twig:28 themes/virgula/pages/tag.twig:12
-#: themes/virgula/pages/updated.twig:12
-msgid "&xlarr; Newer posts"
-msgstr "&xlarr; 较新的帖子"
+#: themes/virgula/pages/drafts.twig:12 themes/virgula/pages/search.twig:40
+#: themes/virgula/pages/tag.twig:12 themes/virgula/pages/updated.twig:12
+msgid "Newer posts"
+msgstr "较新的帖子"
 
 #: themes/virgula/pages/archive.twig:37 themes/virgula/pages/archive.twig:56
 #: themes/virgula/pages/author.twig:13 themes/virgula/pages/category.twig:13
-#: themes/virgula/pages/search.twig:29 themes/virgula/pages/tag.twig:13
-#: themes/virgula/pages/updated.twig:13
-msgid "Older posts &xrarr;"
-msgstr "较旧的帖子 &xrarr;"
+#: themes/virgula/pages/drafts.twig:13 themes/virgula/pages/search.twig:41
+#: themes/virgula/pages/tag.twig:13 themes/virgula/pages/updated.twig:13
+msgid "Older posts"
+msgstr "较旧的帖子"
 
 #: themes/virgula/pages/archive.twig:63
 msgid "There aren't any posts in the timeframe you specified."
@@ -335,7 +336,7 @@ msgstr "&#8220;%s&#8221; 分类中的帖子"
 msgid "Drafts"
 msgstr "草稿"
 
-#: themes/virgula/pages/drafts.twig:10
+#: themes/virgula/pages/drafts.twig:17
 msgid "You don't have any drafts."
 msgstr "您没有任何草稿。"
 
@@ -351,9 +352,19 @@ msgstr "更多帖子&hellip;"
 msgid "Pages"
 msgstr "页面"
 
-#: themes/virgula/pages/index.twig:47 themes/virgula/pages/tags.twig:19
+#: themes/virgula/pages/index.twig:47 themes/virgula/pages/tags.twig:14
 msgid "Nothing here yet!"
 msgstr "然而这里什么也没有！"
+
+#: themes/virgula/pages/page.twig:11 themes/virgula/pages/search.twig:20
+#, php-format
+msgid "Updated on %s."
+msgstr "更新于%s。"
+
+#: themes/virgula/pages/page.twig:13 themes/virgula/pages/search.twig:22
+#, php-format
+msgid "Created on %s."
+msgstr "创建于 %s。"
 
 #: themes/virgula/pages/search.twig:5
 #, php-format
@@ -374,8 +385,8 @@ msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr "&#8220;%s&#8221; 的帖子标签"
 
 #: themes/virgula/pages/tags.twig:5
-msgid "Tag cloud"
-msgstr "标签云"
+msgid "Tags"
+msgstr "标签"
 
 #: themes/virgula/pages/updated.twig:5
 msgid "Updated posts"

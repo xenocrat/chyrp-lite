@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/virgula/content/comment.twig:5
@@ -20,8 +20,9 @@ msgstr "Deze opmerking is in afwachting van moderatie."
 #: themes/virgula/feathers/photo.twig:6 themes/virgula/feathers/quote.twig:6
 #: themes/virgula/feathers/text.twig:6 themes/virgula/feathers/uploader.twig:6
 #: themes/virgula/feathers/video.twig:6 themes/virgula/pages/archive.twig:19
-#: themes/virgula/pages/index.twig:10 themes/virgula/pages/page.twig:6
-#: themes/virgula/pages/search.twig:15
+#: themes/virgula/pages/index.twig:10 themes/virgula/pages/page.twig:7
+#: themes/virgula/pages/page.twig:18 themes/virgula/pages/search.twig:16
+#: themes/virgula/pages/search.twig:27
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "Permalink naar &#8220;%s&#8221;"
@@ -268,11 +269,11 @@ msgstr "Concept"
 msgid "Log out"
 msgstr "Log uit"
 
-#: themes/virgula/layouts/default.twig:72
+#: themes/virgula/layouts/default.twig:82
 msgid "Search this blog"
 msgstr "Doorzoek deze Blog"
 
-#: themes/virgula/layouts/default.twig:73
+#: themes/virgula/layouts/default.twig:83
 msgid "Find"
 msgstr "Vind"
 
@@ -300,17 +301,17 @@ msgstr "F Y"
 
 #: themes/virgula/pages/archive.twig:32 themes/virgula/pages/archive.twig:55
 #: themes/virgula/pages/author.twig:12 themes/virgula/pages/category.twig:12
-#: themes/virgula/pages/search.twig:28 themes/virgula/pages/tag.twig:12
-#: themes/virgula/pages/updated.twig:12
-msgid "&xlarr; Newer posts"
-msgstr "&larr; Nieuwere Blogposts"
+#: themes/virgula/pages/drafts.twig:12 themes/virgula/pages/search.twig:40
+#: themes/virgula/pages/tag.twig:12 themes/virgula/pages/updated.twig:12
+msgid "Newer posts"
+msgstr "Nieuwere Blogposts"
 
 #: themes/virgula/pages/archive.twig:37 themes/virgula/pages/archive.twig:56
 #: themes/virgula/pages/author.twig:13 themes/virgula/pages/category.twig:13
-#: themes/virgula/pages/search.twig:29 themes/virgula/pages/tag.twig:13
-#: themes/virgula/pages/updated.twig:13
-msgid "Older posts &xrarr;"
-msgstr "Oudere Blogposts &rarr;"
+#: themes/virgula/pages/drafts.twig:13 themes/virgula/pages/search.twig:41
+#: themes/virgula/pages/tag.twig:13 themes/virgula/pages/updated.twig:13
+msgid "Older posts"
+msgstr "Oudere Blogposts"
 
 #: themes/virgula/pages/archive.twig:63
 msgid "There aren't any posts in the timeframe you specified."
@@ -334,7 +335,7 @@ msgstr "Blogposts in categorie &#8220;%s&#8221;"
 msgid "Drafts"
 msgstr "Concepten"
 
-#: themes/virgula/pages/drafts.twig:10
+#: themes/virgula/pages/drafts.twig:17
 msgid "You don't have any drafts."
 msgstr "Je hebt geen concepten."
 
@@ -350,9 +351,19 @@ msgstr "Meer blogposts&hellip;"
 msgid "Pages"
 msgstr "Pagina's"
 
-#: themes/virgula/pages/index.twig:47 themes/virgula/pages/tags.twig:19
+#: themes/virgula/pages/index.twig:47 themes/virgula/pages/tags.twig:14
 msgid "Nothing here yet!"
 msgstr "Nog niets te zien hier!"
+
+#: themes/virgula/pages/page.twig:11 themes/virgula/pages/search.twig:20
+#, php-format
+msgid "Updated on %s."
+msgstr "Bijgewerkt op %s."
+
+#: themes/virgula/pages/page.twig:13 themes/virgula/pages/search.twig:22
+#, php-format
+msgid "Created on %s."
+msgstr "Gemaakt op %s."
 
 #: themes/virgula/pages/search.twig:5
 #, php-format
@@ -373,8 +384,8 @@ msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr "Blogposts getagged met &#8220;%s&#8221;"
 
 #: themes/virgula/pages/tags.twig:5
-msgid "Tag cloud"
-msgstr "Tag Wolk"
+msgid "Tags"
+msgstr "Tags"
 
 #: themes/virgula/pages/updated.twig:5
 msgid "Updated posts"

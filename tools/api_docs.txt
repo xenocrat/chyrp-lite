@@ -350,6 +350,11 @@ Parameters:
     $classes - Extra CSS classes for the link, space-delimited.
 
 
+Function: etag
+--------------
+Generates a strong Etag for the object.
+
+
 ==============================================
 includes/class/Modules.php
 ==============================================
