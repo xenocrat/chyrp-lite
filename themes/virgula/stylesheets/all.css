@@ -213,7 +213,7 @@ ul.navigation > li {
     margin: 0rem;
     display: inline;
 }
-ul.navigation > li + li a:before {
+ul.navigation > li + li a::before {
     content: " / ";
 }
 li {
@@ -416,6 +416,9 @@ nav.traversal {
     border: 1px solid #b1b4b6;
     border-radius: 0.1rem;
 }
+nav.traversal:empty {
+    display: none;
+}
 p.footnote-backrefs {
     font-size: 0.7em;
 }
@@ -494,7 +497,7 @@ div.doaction a:active,
 button:active {
     background-color: #0b0c0c;
 }
-nav.traversal a + a:before {
+nav.traversal a + a::before {
     content: " / ";
 }
 img {
