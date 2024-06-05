@@ -3180,10 +3180,7 @@
         header("Content-Type: application/octet-stream");
         header("Content-Disposition: attachment; filename=\"".$safename."\"");
 
-        if (
-            !in_array("ob_gzhandler", ob_list_handlers()) and
-            !ini_get("zlib.output_compression")
-        )
+        if (!USE_COMPRESSION and !ini_get("zlib.output_compression"))
             header("Content-Length: ".strlen($contents));
 
         echo $contents;
