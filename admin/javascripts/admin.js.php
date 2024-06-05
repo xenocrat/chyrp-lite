@@ -74,7 +74,7 @@ function validate_slug() {
         function(e) {
             var slug = $(this).val();
 
-            if (/^([a-z0-9\-]*)$/.test(slug))
+            if (/^[a-z0-9\-]*$/.test(slug))
                 $(this).removeClass("error");
             else
                 $(this).addClass("error");
