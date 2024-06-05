@@ -102,7 +102,7 @@
                     "poster_image" => fallback($poster_image, ""),
                     "description" => $_POST['description']
                 ),
-                clean:sanitize($_POST['slug']),
+                clean:sanitize($_POST['slug'], true, true, 128),
                 feather:"video",
                 pinned:!empty($_POST['pinned']),
                 status:$_POST['status'],
@@ -151,7 +151,7 @@
                 ),
                 pinned:!empty($_POST['pinned']),
                 status:$_POST['status'],
-                clean:sanitize($_POST['slug']),
+                clean:sanitize($_POST['slug'], true, true, 128),
                 created_at:datetime($_POST['created_at']),
                 options:$_POST['option']
             );

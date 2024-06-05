@@ -55,15 +55,16 @@
                     code:422
                 );
 
-            if (isset($_POST['option']['source']) and is_url($_POST['option']['source']))
-                $_POST['option']['source'] = add_scheme($_POST['option']['source']);
-
             fallback($_POST['title'], "");
             fallback($_POST['caption'], "");
             fallback($_POST['slug'], $_POST['title']);
             fallback($_POST['status'], "public");
             fallback($_POST['created_at'], datetime());
             fallback($_POST['option'], array());
+            fallback($_POST['option']['source'], "");
+
+            if (is_url($_POST['option']['source']))
+                $_POST['option']['source'] = add_scheme($_POST['option']['source']);
 
             return Post::add(
                 values:array(
@@ -71,7 +72,7 @@
                     "filename" => $filename,
                     "caption" => $_POST['caption']
                 ),
-                clean:sanitize($_POST['slug']),
+                clean:sanitize($_POST['slug'], true, true, 128),
                 feather:"photo",
                 pinned:!empty($_POST['pinned']),
                 status:$_POST['status'],
@@ -88,9 +89,10 @@
             fallback($_POST['status'], $post->status);
             fallback($_POST['created_at'], $post->created_at);
             fallback($_POST['option'], array());
+            fallback($_POST['option']['source'], "");
             $filename = $post->filename;
 
-            if (isset($_POST['option']['source']) and is_url($_POST['option']['source']))
+            if (is_url($_POST['option']['source']))
                 $_POST['option']['source'] = add_scheme($_POST['option']['source']);
 
             if (isset($_FILES['filename']) and upload_tester($_FILES['filename']))
@@ -107,7 +109,7 @@
                 ),
                 pinned:!empty($_POST['pinned']),
                 status:$_POST['status'],
-                clean:sanitize($_POST['slug']),
+                clean:sanitize($_POST['slug'], true, true, 128),
                 created_at:datetime($_POST['created_at']),
                 options:$_POST['option']
             );

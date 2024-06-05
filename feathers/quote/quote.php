@@ -47,7 +47,7 @@
                     "quote" => $_POST['quote'],
                     "source" => $_POST['source']
                 ),
-                clean:sanitize($_POST['slug']),
+                clean:sanitize($_POST['slug'], true, true, 128),
                 feather:"quote",
                 pinned:!empty($_POST['pinned']),
                 status:$_POST['status'],
@@ -78,7 +78,7 @@
                 ),
                 pinned:!empty($_POST['pinned']),
                 status:$_POST['status'],
-                clean:sanitize($_POST['slug']),
+                clean:sanitize($_POST['slug'], true, true, 128),
                 created_at:datetime($_POST['created_at']),
                 options:$_POST['option']
             );
