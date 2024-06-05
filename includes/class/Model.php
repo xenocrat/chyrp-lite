@@ -56,7 +56,10 @@
             $this->has_many   = (array) $this->has_many;
             $this->has_one    = (array) $this->has_one;
 
-            if (in_array($name, $this->belongs_to) or isset($this->belongs_to[$name])) {
+            if (
+                in_array($name, $this->belongs_to) or
+                isset($this->belongs_to[$name])
+            ) {
                 if (isset($this->belongs_to[$name])) {
                     $opts =& $this->belongs_to[$name];
 
@@ -68,7 +71,11 @@
                         $opts["by"] :
                         strtolower($name) ;
 
-                    fallback($opts["where"], array("id" => $this->data[$match."_id"]));
+                    fallback(
+                        $opts["where"],
+                        array("id" => $this->data[$match."_id"])
+                    );
+
                     $opts["where"] = (array) $opts["where"];
                 } else {
                     $model = $name;
@@ -80,7 +87,10 @@
                 $this->data[$name] = new $model(null, $opts);
                 return $this->data[$name];
 
-            } elseif (in_array($name, $this->has_many) or isset($this->has_many[$name])) {
+            } elseif (
+                in_array($name, $this->has_many) or
+                isset($this->has_many[$name])
+            ) {
                 if (isset($this->has_many[$name])) {
                     $opts =& $this->has_many[$name];
 
@@ -92,7 +102,11 @@
                         $opts["by"] :
                         strtolower($name) ;
 
-                    fallback($opts["where"], array($match."_id" => $this->data["id"]));
+                    fallback(
+                        $opts["where"],
+                        array($match."_id" => $this->data["id"])
+                    );
+
                     $opts["where"] = (array) $opts["where"];
                 } else {
                     $model = depluralize($name);
@@ -105,7 +119,10 @@
                 $this->data[$name] = call_user_func(array($model, "find"), $opts);
                 return $this->data[$name];
 
-            } elseif (in_array($name, $this->has_one) or isset($this->has_one[$name])) {
+            } elseif (
+                in_array($name, $this->has_one) or
+                isset($this->has_one[$name])
+            ) {
                 if (isset($this->has_one[$name])) {
                     $opts =& $this->has_one[$name];
 
@@ -117,7 +134,11 @@
                         $opts["by"] :
                         strtolower($name) ;
 
-                    fallback($opts["where"], array($match."_id" => $this->data["id"]));
+                    fallback(
+                        $opts["where"],
+                        array($match."_id" => $this->data["id"])
+                    );
+
                     $opts["where"] = (array) $opts["where"];
                 } else {
                     $model = depluralize($name);
@@ -126,7 +147,9 @@
                         "user" :
                         $model_name ;
 
-                    $opts = array("where" => array($match."_id" => $this->data["id"]));
+                    $opts = array(
+                        "where" => array($match."_id" => $this->data["id"])
+                    );
                 }
 
                 $this->data[$name] = new $model(null, $opts);
@@ -150,9 +173,10 @@
          * Handles model relationships, deferred and dynamic attributes.
          */
         public function __isset($name): bool {
+            $trigger = Trigger::current();
             $model_name = strtolower(get_class($this));
 
-            if (Trigger::current()->exists($model_name."_".$name."_attr"))
+            if ($trigger->exists($model_name."_".$name."_attr"))
                 return true;
 
             if (isset($this->data[$name]))
@@ -162,13 +186,22 @@
             $this->has_many   = (array) $this->has_many;
             $this->has_one    = (array) $this->has_one;
 
-            if (in_array($name, $this->belongs_to) or isset($this->belongs_to[$name]))
+            if (
+                in_array($name, $this->belongs_to) or
+                isset($this->belongs_to[$name])
+            )
                 return true;
 
-            if (in_array($name, $this->has_many) or isset($this->has_many[$name]))
+            if (
+                in_array($name, $this->has_many) or
+                isset($this->has_many[$name])
+            )
                 return true;
 
-            if (in_array($name, $this->has_one) or isset($this->has_one[$name]))
+            if (
+                in_array($name, $this->has_one) or
+                isset($this->has_one[$name])
+            )
                 return true;
 
             return false;
@@ -210,8 +243,10 @@
 
             # Return cached results if available.
             if (empty($options["read_from"])) {
-                if (isset($cache_id) and isset(self::$caches[$model_name][$cache_id])) {
-
+                if (
+                    isset($cache_id) and
+                    isset(self::$caches[$model_name][$cache_id])
+                ) {
                     foreach (self::$caches[$model_name][$cache_id] as $attr => $val)
                         $model->$attr = $val;
 
@@ -237,10 +272,11 @@
             $options["from"] = (array) $options["from"];
             $options["select"] = (array) $options["select"];
 
-            if (is_numeric($id))
+            if (is_numeric($id)) {
                 $options["where"]["id"] = $id;
-            elseif (is_array($id))
+            } elseif (is_array($id)) {
                 $options["where"] = array_merge($options["where"], $id);
+            }
 
             $sql = SQL::current();
             $trigger = Trigger::current();
@@ -350,6 +386,7 @@
             $options = array(),
             $options_for_object = array()
         ): array {
+            $trigger = Trigger::current();
             $model_name = strtolower($model);
 
             fallback($options["select"], "*");
@@ -368,7 +405,7 @@
             $options["from"]   = (array) $options["from"];
             $options["select"] = (array) $options["select"];
 
-            Trigger::current()->filter($options, pluralize(strtolower($model_name))."_get");
+            $trigger->filter($options, pluralize(strtolower($model_name))."_get");
 
             $grab = SQL::current()->select(
                 tables:$options["from"],
@@ -493,7 +530,11 @@
 
             $name = strtolower(get_class($this));
 
-            $url = url("edit_".$name."/id/".$this->id, AdminController::current());
+            $url = url(
+                "edit_".$name."/id/".$this->id,
+                AdminController::current()
+            );
+
             $classes = $classes.' '.$name.'_edit_link edit_link';
 
             echo $before.'<a href="'.$url.'" class="'.trim($classes).
@@ -523,7 +564,11 @@
 
             $name = strtolower(get_class($this));
 
-            $url = url("delete_".$name."/id/".$this->id, AdminController::current());
+            $url = url(
+                "delete_".$name."/id/".$this->id,
+                AdminController::current()
+            );
+
             $classes = $classes.' '.$name.'_delete_link delete_link';
 
             echo $before.'<a href="'.$url.'" class="'.trim($classes).
@@ -532,16 +577,13 @@
 
         /**
          * Function: etag
-         * Generates a strong Etag for the object.
+         * Generates an Etag for the object.
          */
         public function etag(): string|false {
             if ($this->no_results)
                 return false;
 
-            $array = array(
-                get_class($this),
-                $this->id
-            );
+            $array = array(get_class($this), $this->id);
 
             if (isset($this->created_at))
                 $array[] = $this->created_at;
@@ -549,6 +591,6 @@
             if (isset($this->updated_at))
                 $array[] = $this->updated_at;
 
-            return token($array);
+            return (isset($this->updated_at) ? 'W/"' : '"').token($array).'"';
         }
     }
