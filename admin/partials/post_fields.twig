@@ -124,7 +124,7 @@
 {{- icon_img("help.svg", "help" | translate) -}}
 </a>
 </label>
-<input id="slug" class="text" type="text" name="slug" value="{{ post is defined ? post.clean | fix(true) : '' }}" maxlength="80">
+<input id="slug" class="text" type="text" name="slug" value="{{ post is defined ? post.clean | fix(true) : '' }}" maxlength="128" pattern="^([a-z0-9\-]*)$">
 </p>
 <p class="more_options_option">
 <label for="created_at">{{ "Timestamp" | translate }}</label>
