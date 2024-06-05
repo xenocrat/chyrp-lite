@@ -85,7 +85,7 @@
                     "captions" => fallback($captions, ""),
                     "description" => $_POST['description']
                 ),
-                clean:sanitize($_POST['slug']),
+                clean:sanitize($_POST['slug'], true, true, 128),
                 feather:"audio",
                 pinned:!empty($_POST['pinned']),
                 status:$_POST['status'],
@@ -111,6 +111,12 @@
                     $this->audio_extensions()
                 );
 
+            if (isset($_FILES['captions']) and upload_tester($_FILES['captions']))
+                $captions = upload(
+                    $_FILES['captions'],
+                    array("vtt")
+                );
+
             return $post->update(
                 values:array(
                     "title" => $_POST['title'],
@@ -120,7 +126,7 @@
                 ),
                 pinned:!empty($_POST['pinned']),
                 status:$_POST['status'],
-                clean:sanitize($_POST['slug']),
+                clean:sanitize($_POST['slug'], true, true, 128),
                 created_at:datetime($_POST['created_at']),
                 options:$_POST['option']
             );
