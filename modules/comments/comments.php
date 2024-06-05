@@ -1366,11 +1366,14 @@
 
                 $atom.= '<chyrp:comment>'."\n".
                     '<updated>'.
-                    when("c", $updated).
+                    when(DATE_ATOM, $updated).
                     '</updated>'."\n".
                     '<published>'.
-                    when("c", $comment->created_at).
+                    when(DATE_ATOM, $comment->created_at).
                     '</published>'."\n".
+                    '<chyrp:etag>'.
+                    fix($comment->etag(), false, true).
+                    '</chyrp:etag>'."\n".
                     '<author chyrp:user_id="'.$comment->user_id.'">'."\n".
                     '<name>'.
                     fix($comment->author, false, true).
