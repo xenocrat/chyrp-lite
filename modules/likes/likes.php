@@ -484,22 +484,21 @@
         }
 
         public function posts_export($atom, $post): string {
-            $likes = SQL::current()->select(
-                tables:"likes",
-                conds:array("post_id" => $post->id)
-            )->fetchAll();
+            $likes = Like::find(
+                array("where" => array("post_id" => $post->id))
+            );
 
             foreach ($likes as $like) {
-                $user = new User($like["user_id"]);
-                $login = (!$user->no_results) ? $user->login : "" ;
-
                 $atom.= '<chyrp:like>'."\n".
                     '<chyrp:login>'.
-                    fix($login, false, true).
+                    fix($like->user->login, false, true).
                     '</chyrp:login>'."\n".
                     '<published>'.
-                    when("c", $like["timestamp"]).
+                    when(DATE_ATOM, $like->timestamp).
                     '</published>'."\n".
+                    '<chyrp:etag>'.
+                    fix($like->etag(), false, true).
+                    '</chyrp:etag>'."\n".
                     '</chyrp:like>'."\n";
             }
 
