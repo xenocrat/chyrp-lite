@@ -28,6 +28,9 @@
             if (!$this->eligible())
                 return;
 
+            if (!$this->validate_etag())
+                return;
+
             if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
                 $lastmod = strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']);
 
@@ -37,7 +40,8 @@
                     header("Cache-Control: no-cache, private");
                     header("Pragma: no-cache");
                     header("Expires: ".date("r", now("+30 days")));
-                    header("Vary: Accept-Encoding, Cookie, Save-Data");
+                    header("ETag: ".$this->generate_etag());
+                    header("Vary: Accept-Encoding, Cookie, Save-Data, ETag");
                     exit;
                 }
             }
@@ -60,7 +64,8 @@
                 header("Cache-Control: no-cache, private");
                 header("Pragma: no-cache");
                 header("Expires: ".date("r", now("+30 days")));
-                header("X-Chyrp-Cacher-Hint: ".$this->generate_hint());
+                header("ETag: ".$this->generate_etag());
+                header("Vary: Accept-Encoding, Cookie, Save-Data, ETag");
             }
         }
 
@@ -80,13 +85,23 @@
             return true;
         }
 
-        private function generate_hint(): string {
+        private function generate_etag(): string {
             $items = array(
-                Visitor::current()->group->id,
-                get_class(Route::current()->controller)
+                Visitor::current()->id,
+                Route::current()->request
             );
 
-            return token($items);
+            return 'W/"'.token($items).'"';
+        }
+
+        private function validate_etag(): bool {
+            if (!isset($_SERVER['HTTP_IF_NONE_MATCH']))
+                return false;
+
+            return str_contains(
+                $_SERVER['HTTP_IF_NONE_MATCH'],
+                $this->generate_etag()
+            );
         }
 
         private function prepare_cache_triggers(): void {
@@ -105,8 +120,6 @@
                 "delete_upload",
                 "publish_post",
                 "import",
-                "user_logged_in",
-                "user_logged_out",
                 "change_setting",
 
                 # Categorize module:
@@ -135,7 +148,8 @@
                 $this->addAlias($action, "cache_regenerate");
 
             $exclude = array(
-                "user_login",
+                "user_logged_in",
+                "user_logged_out",
                 "before_generate_captcha"
             );
 
