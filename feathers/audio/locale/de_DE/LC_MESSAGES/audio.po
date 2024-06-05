@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: feathers/audio/audio.php:10
@@ -32,7 +32,7 @@ msgstr "Beschreibung"
 msgid "You did not select any audio to upload."
 msgstr "Sie haben kein Audio zum Hochladen ausgewählt."
 
-#: feathers/audio/audio.php:186
+#: feathers/audio/audio.php:192
 msgid "Your web browser does not support the <code>audio</code> element."
 msgstr "Ihr Webbrowser unterstützt das <code>Audioelement</code> nicht."
 

@@ -2,7 +2,7 @@
 
 #: feathers/photo/admin/help/photo_alt_text.twig:3
 #: feathers/photo/admin/help/photo_alt_text.twig:6
-#: feathers/photo/photo.php:154
+#: feathers/photo/photo.php:156
 msgid "Alternative Text"
 msgstr ""
 
@@ -40,7 +40,7 @@ msgstr ""
 msgid "You did not select a photo to upload."
 msgstr ""
 
-#: feathers/photo/photo.php:162
+#: feathers/photo/photo.php:164
 msgid "Source"
 msgstr ""
 

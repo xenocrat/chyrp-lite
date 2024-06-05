@@ -181,7 +181,7 @@ Arguments:
 audio_player
 ------------
 Called from:
-	feathers/audio/audio.php on line 182
+	feathers/audio/audio.php on line 188
 
 Arguments:
 	$post
