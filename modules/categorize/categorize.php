@@ -328,7 +328,7 @@
                 $_POST['name'] :
                 $_POST['clean'] ;
 
-            $clean = sanitize($clean, true, true);
+            $clean = sanitize($clean, true, true, 128);
 
             if (!preg_match("/[^\-0-9]+/", $clean))
                 $clean = md5($clean);
@@ -415,7 +415,7 @@
                 $_POST['clean'] ;
 
             if ($clean != $category->clean) {
-                $clean = sanitize($clean, true, true);
+                $clean = sanitize($clean, true, true, 128);
 
                 if (!preg_match("/[^\-0-9]+/", $clean))
                     $clean = md5($clean);
