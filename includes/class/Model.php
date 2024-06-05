@@ -591,6 +591,6 @@
             if (isset($this->updated_at))
                 $array[] = $this->updated_at;
 
-            return (isset($this->updated_at) ? 'W/"' : '"').token($array).'"';
+            return (isset($this->updated_at) ? '"' : 'W/"').token($array).'"';
         }
     }
