@@ -341,22 +341,24 @@
         }
 
         public function posts_export($atom, $post): string {
-            $pingbacks = SQL::current()->select(
-                tables:"pingbacks",
-                conds:array("post_id" => $post->id)
-            )->fetchAll();
+            $pingbacks = Pingback::find(
+                array("where" => array("post_id" => $post->id))
+            );
 
             foreach ($pingbacks as $pingback) {
                 $atom.= '<chyrp:pingback>'."\n".
                     '<title type="html">'.
-                    fix($pingback["title"], false, true).
+                    fix($pingback->title, false, true).
                     '</title>'."\n".
                     '<link rel="via" href="'.
-                    fix($pingback["source"], true).
+                    fix($pingback->source, true).
                     '" />'."\n".
                     '<published>'.
-                    when("c", $pingback["created_at"]).
+                    when(DATE_ATOM, $pingback->created_at).
                     '</published>'."\n".
+                    '<chyrp:etag>'.
+                    fix($pingback->etag(), false, true).
+                    '</chyrp:etag>'."\n".
                     '</chyrp:pingback>'."\n";
             }
 
