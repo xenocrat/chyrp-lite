@@ -105,7 +105,7 @@
 
             # Build an array containing a sanitized slug for each tag.
             $clean = array_map(function($value) {
-                return sanitize($value, true, true);
+                return sanitize($value, true, true, 0);
             }, $names);
 
             # Build an associative array with tags as the keys and slugs as the values.
