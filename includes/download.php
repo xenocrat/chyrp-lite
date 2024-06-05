@@ -41,10 +41,7 @@
     if (DEBUG)
         error_log("DOWNLOAD served ".$filename);
 
-    if (
-        !in_array("ob_gzhandler", ob_list_handlers()) and 
-        !ini_get("zlib.output_compression")
-    )
+    if (!USE_COMPRESSION and !ini_get("zlib.output_compression"))
         header("Content-Length: ".filesize($filepath));
 
     $safename = addslashes($filename);
