@@ -405,19 +405,19 @@ msgstr "Nur registriert"
 msgid "Comment Status"
 msgstr "Kommentarstatus"
 
-#: modules/comments/comments.php:1417 modules/comments/comments.php:1442
-#: modules/comments/comments.php:1472
+#: modules/comments/comments.php:1420 modules/comments/comments.php:1445
+#: modules/comments/comments.php:1475
 #, php-format
 msgid "New Comment at %s"
 msgstr "Neuer Kommentar auf %s"
 
-#: modules/comments/comments.php:1418 modules/comments/comments.php:1443
-#: modules/comments/comments.php:1473
+#: modules/comments/comments.php:1421 modules/comments/comments.php:1446
+#: modules/comments/comments.php:1476
 #, php-format
 msgid "%s commented on a blog post:"
 msgstr "%s hat einen Blogbeitrag kommentiert:"
 
-#: modules/comments/comments.php:1481
+#: modules/comments/comments.php:1484
 msgid "Unsubscribe from this conversation:"
 msgstr "Von dieser Konversation abmelden:"
 

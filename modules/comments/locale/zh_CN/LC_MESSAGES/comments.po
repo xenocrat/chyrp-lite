@@ -399,19 +399,19 @@ msgstr "仅注册"
 msgid "Comment Status"
 msgstr "评论状态"
 
-#: modules/comments/comments.php:1417 modules/comments/comments.php:1442
-#: modules/comments/comments.php:1472
+#: modules/comments/comments.php:1420 modules/comments/comments.php:1445
+#: modules/comments/comments.php:1475
 #, php-format
 msgid "New Comment at %s"
 msgstr "%s 上的新注释"
 
-#: modules/comments/comments.php:1418 modules/comments/comments.php:1443
-#: modules/comments/comments.php:1473
+#: modules/comments/comments.php:1421 modules/comments/comments.php:1446
+#: modules/comments/comments.php:1476
 #, php-format
 msgid "%s commented on a blog post:"
 msgstr "%s 在博客文章上评论："
 
-#: modules/comments/comments.php:1481
+#: modules/comments/comments.php:1484
 msgid "Unsubscribe from this conversation:"
 msgstr "取消订阅此对话："
 

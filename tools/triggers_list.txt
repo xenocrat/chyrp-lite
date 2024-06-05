@@ -8,7 +8,7 @@ end
 Called from:
 	admin/index.php on line 19
 	ajax/index.php on line 19
-	includes/download.php on line 56
+	includes/download.php on line 53
 	includes/thumbnail.php on line 91
 	index.php on line 15
 
@@ -254,7 +254,7 @@ Called from:
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2422
+	includes/controller/Admin.php on line 2429
 
 Arguments:
 	$group
@@ -263,7 +263,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2460
+	includes/controller/Admin.php on line 2467
 
 Arguments:
 	$user
@@ -272,7 +272,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2506
+	includes/controller/Admin.php on line 2513
 
 Arguments:
 	$entry
@@ -282,7 +282,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2542
+	includes/controller/Admin.php on line 2549
 
 Arguments:
 	$entry
@@ -292,7 +292,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 2546
+	includes/controller/Admin.php on line 2553
 
 Arguments:
 	$imports
@@ -301,13 +301,13 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 2940
+	includes/controller/Admin.php on line 2947
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 2955
+	includes/controller/Admin.php on line 2962
 
 
 can_not_view_page
@@ -373,7 +373,7 @@ Called from:
 correspond_activate_account
 ---------------------------
 Called from:
-	includes/helpers.php on line 3332
+	includes/helpers.php on line 3329
 
 Arguments:
 	$user
@@ -383,7 +383,7 @@ Arguments:
 correspond_reset_password
 -------------------------
 Called from:
-	includes/helpers.php on line 3372
+	includes/helpers.php on line 3369
 
 Arguments:
 	$user
@@ -393,7 +393,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 3418
+	includes/helpers.php on line 3415
 
 Arguments:
 	$ob
@@ -604,7 +604,7 @@ Arguments:
 correspond_site_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1409
+	modules/comments/comments.php on line 1412
 
 Arguments:
 	$comment
@@ -613,7 +613,7 @@ Arguments:
 correspond_user_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1434
+	modules/comments/comments.php on line 1437
 
 Arguments:
 	$comment
@@ -623,7 +623,7 @@ Arguments:
 correspond_peer_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1464
+	modules/comments/comments.php on line 1467
 
 Arguments:
 	$comment
@@ -965,7 +965,7 @@ Arguments:
 posts_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 2107
+	includes/controller/Admin.php on line 2111
 
 Target:
 	$posts_atom
@@ -977,7 +977,7 @@ Arguments:
 pages_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 2206
+	includes/controller/Admin.php on line 2213
 
 Target:
 	$pages_atom
@@ -989,7 +989,7 @@ Arguments:
 export
 ------
 Called from:
-	includes/controller/Admin.php on line 2292
+	includes/controller/Admin.php on line 2299
 
 Target:
 	$exports
@@ -998,7 +998,7 @@ Target:
 before_import
 -------------
 Called from:
-	includes/controller/Admin.php on line 2403
+	includes/controller/Admin.php on line 2410
 
 Target:
 	$imports
@@ -1007,7 +1007,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 3388
+	includes/controller/Admin.php on line 3395
 
 Target:
 	$write
@@ -1016,7 +1016,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3451
+	includes/controller/Admin.php on line 3458
 
 Target:
 	$manage
@@ -1025,7 +1025,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 3481
+	includes/controller/Admin.php on line 3488
 
 Target:
 	$settings
@@ -1034,7 +1034,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3504
+	includes/controller/Admin.php on line 3511
 
 Target:
 	$extend
@@ -1043,7 +1043,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 3592
+	includes/controller/Admin.php on line 3599
 
 Target:
 	$this->context
@@ -1115,7 +1115,7 @@ Arguments:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 3312
+	includes/helpers.php on line 3309
 
 Target:
 	$function
@@ -1124,7 +1124,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 3419
+	includes/helpers.php on line 3416
 	includes/lib/Leaf.php on line 360
 
 Target:

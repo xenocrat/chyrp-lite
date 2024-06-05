@@ -352,7 +352,7 @@ Parameters:
 
 Function: etag
 --------------
-Generates a strong Etag for the object.
+Generates an Etag for the object.
 
 
 ==============================================
