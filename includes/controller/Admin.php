@@ -2032,7 +2032,8 @@
                     '<feed xmlns="http://www.w3.org/2005/Atom"'.
                     ' xmlns:chyrp="http://chyrp.net/export/1.0/">'."\n".
                     '<title>'.
-                    fix($config->name).' | Posts</title>'."\n".
+                    fix($config->name).' | Posts'.
+                    '</title>'."\n".
                     '<subtitle>'.
                     fix($config->description).
                     '</subtitle>'."\n".
@@ -2069,6 +2070,9 @@
                         '<published>'.
                         when(DATE_ATOM, $post->created_at).
                         '</published>'."\n".
+                        '<chyrp:etag>'.
+                        fix($post->etag(), false, true).
+                        '</chyrp:etag>'."\n".
                         '<author chyrp:user_id="'.$post->user_id.'">'."\n".
                         '<name>'.
                         fix(oneof($post->user->full_name, $post->user->login)).
@@ -2133,7 +2137,7 @@
                     '<feed xmlns="http://www.w3.org/2005/Atom"'.
                     ' xmlns:chyrp="http://chyrp.net/export/1.0/">'."\n".
                     '<title>'.
-                    fix($title, false, true).
+                    fix($config->name).' | Pages'.
                     '</title>'."\n".
                     '<subtitle>'.
                     fix($config->description).
@@ -2170,6 +2174,9 @@
                         '<published>'.
                         when(DATE_ATOM, $page->created_at).
                         '</published>'."\n".
+                        '<chyrp:etag>'.
+                        fix($page->etag(), false, true).
+                        '</chyrp:etag>'."\n".
                         '<author chyrp:user_id="'.fix($page->user_id).'">'."\n".
                         '<name>'.
                         fix(oneof($page->user->full_name, $page->user->login)).
