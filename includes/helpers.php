@@ -1552,6 +1552,7 @@
             $parser->keepListStartNumber = true;
             $parser->headlineAnchors = true;
             $parser->enableNewlines = false;
+            $parser->renderCheckboxInputs = false;
         }
 
         if ($context instanceof Model) {
