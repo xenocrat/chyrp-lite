@@ -2032,7 +2032,7 @@
                     '<feed xmlns="http://www.w3.org/2005/Atom"'.
                     ' xmlns:chyrp="http://chyrp.net/export/1.0/">'."\n".
                     '<title>'.
-                    fix($config->name).' | Posts'.
+                    fix($config->name).
                     '</title>'."\n".
                     '<subtitle>'.
                     fix($config->description).
@@ -2137,7 +2137,7 @@
                     '<feed xmlns="http://www.w3.org/2005/Atom"'.
                     ' xmlns:chyrp="http://chyrp.net/export/1.0/">'."\n".
                     '<title>'.
-                    fix($config->name).' | Pages'.
+                    fix($config->name).
                     '</title>'."\n".
                     '<subtitle>'.
                     fix($config->description).
