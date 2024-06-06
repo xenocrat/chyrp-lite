@@ -468,11 +468,14 @@
                 $timestamp = $like->children(
                     "http://www.w3.org/2005/Atom"
                 )->published;
+
                 $login = $like->children(
                     "http://chyrp.net/export/1.0/"
                 )->login;
 
-                $user = new User(array("login" => unfix((string) $login)));
+                $user = new User(
+                    array("login" => unfix((string) $login))
+                );
 
                 Like::add(
                     post_id:$post->id,
