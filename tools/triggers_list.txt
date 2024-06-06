@@ -254,7 +254,7 @@ Called from:
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2429
+	includes/controller/Admin.php on line 2438
 
 Arguments:
 	$group
@@ -263,7 +263,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2467
+	includes/controller/Admin.php on line 2476
 
 Arguments:
 	$user
@@ -272,7 +272,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2513
+	includes/controller/Admin.php on line 2529
 
 Arguments:
 	$entry
@@ -282,7 +282,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2549
+	includes/controller/Admin.php on line 2578
 
 Arguments:
 	$entry
@@ -292,7 +292,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 2553
+	includes/controller/Admin.php on line 2582
 
 Arguments:
 	$imports
@@ -301,13 +301,13 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 2947
+	includes/controller/Admin.php on line 2976
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 2962
+	includes/controller/Admin.php on line 2991
 
 
 can_not_view_page
@@ -604,7 +604,7 @@ Arguments:
 correspond_site_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1412
+	modules/comments/comments.php on line 1419
 
 Arguments:
 	$comment
@@ -613,7 +613,7 @@ Arguments:
 correspond_user_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1437
+	modules/comments/comments.php on line 1444
 
 Arguments:
 	$comment
@@ -623,7 +623,7 @@ Arguments:
 correspond_peer_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1467
+	modules/comments/comments.php on line 1474
 
 Arguments:
 	$comment
@@ -1007,7 +1007,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 3395
+	includes/controller/Admin.php on line 3424
 
 Target:
 	$write
@@ -1016,7 +1016,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3458
+	includes/controller/Admin.php on line 3487
 
 Target:
 	$manage
@@ -1025,7 +1025,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 3488
+	includes/controller/Admin.php on line 3517
 
 Target:
 	$settings
@@ -1034,7 +1034,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3511
+	includes/controller/Admin.php on line 3540
 
 Target:
 	$extend
@@ -1043,7 +1043,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 3599
+	includes/controller/Admin.php on line 3628
 
 Target:
 	$this->context

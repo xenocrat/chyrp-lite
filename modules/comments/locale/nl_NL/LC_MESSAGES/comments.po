@@ -402,19 +402,19 @@ msgstr "Uitsluitend geregistreerden"
 msgid "Comment Status"
 msgstr "Status Opmerking"
 
-#: modules/comments/comments.php:1420 modules/comments/comments.php:1445
-#: modules/comments/comments.php:1475
+#: modules/comments/comments.php:1427 modules/comments/comments.php:1452
+#: modules/comments/comments.php:1482
 #, php-format
 msgid "New Comment at %s"
 msgstr "Nieuwe opmerking op %s"
 
-#: modules/comments/comments.php:1421 modules/comments/comments.php:1446
-#: modules/comments/comments.php:1476
+#: modules/comments/comments.php:1428 modules/comments/comments.php:1453
+#: modules/comments/comments.php:1483
 #, php-format
 msgid "%s commented on a blog post:"
 msgstr "%s heeft een opmerking geplaatst op een blogpost:"
 
-#: modules/comments/comments.php:1484
+#: modules/comments/comments.php:1491
 msgid "Unsubscribe from this conversation:"
 msgstr "Schrijf je uit van deze conversatie:"
 
