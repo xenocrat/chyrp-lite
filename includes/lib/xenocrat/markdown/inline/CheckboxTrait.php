@@ -12,6 +12,11 @@ namespace xenocrat\markdown\inline;
  */
 trait CheckboxTrait
 {
+	/**
+	 * @var bool - Render inputs instead of emoji.
+	 */
+	public $renderCheckboxInputs = false;
+
 	protected function parseCheckboxMarkers(): array
 	{
 		return array('[ ]', '[x]', '[X]', '[~]');
@@ -39,6 +44,14 @@ trait CheckboxTrait
 
 	protected function renderCheckbox($block): string
 	{
+		if ($this->renderCheckboxInputs) {
+			return '<input'
+				. ($block['incomplete'] ? '' : ' checked=""')
+				. ' disabled=""'
+				. ' type="checkbox"'
+				. ($this->html5 ? '>' : ' />');
+		}
+
 		if ($block['inapplicable']) {
 			return "\u{1F6AB}";
 		}
