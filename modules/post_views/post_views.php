@@ -119,8 +119,7 @@
                 );
 
             $data = View::find(
-                array(
-                    "where" => array("post_id" => $post->id))
+                array("where" => array("post_id" => $post->id))
             );
 
             $filename = sanitize(
@@ -198,5 +197,54 @@
             return ($visitor->id == 0) ?
                 0 :
                 $this->user_view_count_attr($attr, $visitor) ;
+        }
+
+        public function import_chyrp_post($entry, $post): void {
+            $chyrp = $entry->children("http://chyrp.net/export/1.0/");
+
+            if (!isset($chyrp->view))
+                return;
+
+            foreach ($chyrp->view as $view) {
+                $created_at = $view->children(
+                    "http://www.w3.org/2005/Atom"
+                )->published;
+
+                $login = $view->children(
+                    "http://chyrp.net/export/1.0/"
+                )->login;
+
+                $user = new User(
+                    array("login" => unfix((string) $login))
+                );
+
+                View::add(
+                    post_id:$post->id,
+                    user_id:(!$user->no_results) ? $user->id : 0,
+                    created_at:datetime((string) $created_at),
+                );
+            }
+        }
+
+        public function posts_export($atom, $post): string {
+            $views = View::find(
+                array("where" => array("post_id" => $post->id))
+            );
+
+            foreach ($views as $view) {
+                $atom.= '<chyrp:view>'."\n".
+                    '<chyrp:login>'.
+                    fix($view->user->login, false, true).
+                    '</chyrp:login>'."\n".
+                    '<published>'.
+                    when(DATE_ATOM, $view->created_at).
+                    '</published>'."\n".
+                    '<chyrp:etag>'.
+                    fix($view->etag(), false, true).
+                    '</chyrp:etag>'."\n".
+                    '</chyrp:view>'."\n";
+            }
+
+            return $atom;
         }
     }
