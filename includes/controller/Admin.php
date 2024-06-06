@@ -2419,9 +2419,11 @@
             set_max_memory();
 
             if (!empty($_POST['media_url'])) {
-                $uploads_path = str_replace(DIR, "/", $config->uploads_path);
                 $match_url = preg_quote($_POST['media_url'], "/");
-                $media_url = fix($config->chyrp_url.$uploads_path);
+                $media_url = fix(
+                    $config->chyrp_url.
+                    str_replace(DIR, "/", $config->uploads_path)
+                );
                 $media_exp = "/{$match_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/";
             }
 
