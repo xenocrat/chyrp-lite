@@ -2418,6 +2418,13 @@
             set_max_time();
             set_max_memory();
 
+            if (!empty($_POST['media_url'])) {
+                $uploads_path = str_replace(DIR, "/", $config->uploads_path);
+                $match_url = preg_quote($_POST['media_url'], "/");
+                $media_url = fix($config->chyrp_url.$uploads_path);
+                $media_exp = "/{$match_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/";
+            }
+
             if (isset($imports["groups"])) {
                 foreach ($imports["groups"] as $name => $permissions) {
                     $group = new Group(
@@ -2472,7 +2479,10 @@
             if (isset($imports["posts"])) {
                 foreach ($imports["posts"]->entry as $entry) {
                     $chyrp = $entry->children("http://chyrp.net/export/1.0/");
-                    $login = $entry->author->children("http://chyrp.net/export/1.0/")->login;
+
+                    $login = $entry->author->children(
+                        "http://chyrp.net/export/1.0/"
+                    )->login;
 
                     $user = new User(
                         array("login" => unfix((string) $login))
@@ -2484,18 +2494,22 @@
                         $values[$value->getName()] = unfix((string) $value);
 
                     if (!empty($_POST['media_url']))
-                        array_walk_recursive($values, function (&$value) {
-                            $config = Config::current();
-                            $uploads_path = str_replace(DIR, "/", $config->uploads_path);
-                            $old_url = preg_quote($_POST['media_url'], "/");
-                            $new_url = fix($config->chyrp_url.$uploads_path);
-                            $regex = "/{$old_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/";
-                            $value = preg_replace($regex, $new_url."$1.$2", $value);
-                        });
+                        array_walk_recursive(
+                            $values,
+                            function (&$value) use ($media_exp, $media_url) {
+                                $value = preg_replace(
+                                    $media_exp,
+                                    $media_url."$1.$2",
+                                    $value
+                                );
+                            }
+                        );
 
                     $values["imported_from"] = "chyrp";
 
-                    $updated = ((string) $entry->updated != (string) $entry->published);
+                    $updated = (
+                        (string) $entry->updated != (string) $entry->published
+                    );
 
                     $post = Post::add(
                         values:$values,
@@ -2519,9 +2533,11 @@
                     $chyrp = $entry->children(
                         "http://chyrp.net/export/1.0/"
                     );
+
                     $attr  = $entry->attributes(
                         "http://chyrp.net/export/1.0/"
                     );
+
                     $login = $entry->author->children(
                         "http://chyrp.net/export/1.0/"
                     )->login;
@@ -2530,11 +2546,22 @@
                         array("login" => unfix((string) $login))
                     );
 
-                    $updated = ((string) $entry->updated != (string) $entry->published);
+                    $body = unfix((string) $entry->content);
+
+                    if (!empty($_POST['media_url']))
+                        $body = preg_replace(
+                            $media_exp,
+                            $media_url."$1.$2",
+                            $body
+                        );
+
+                    $updated = (
+                        (string) $entry->updated != (string) $entry->published
+                    );
 
                     $page = Page::add(
                         title:unfix((string) $entry->title),
-                        body:unfix((string) $entry->content),
+                        body:$body,
                         user:(!$user->no_results) ? $user->id : $visitor->id,
                         parent_id:(int) unfix((string) $attr->parent_id),
                         public:(bool) unfix((string) $chyrp->public),
