@@ -2046,7 +2046,7 @@
                     '<link href="'.
                     fix($config->url, true).
                     '" rel="alternate" type="text/html" />'."\n".
-                    '<generator uri="http://chyrp.net/" version="'.
+                    '<generator uri="https://chyrplite.net/" version="'.
                     CHYRP_VERSION.
                     '">Chyrp</generator>'."\n";
 
@@ -2151,7 +2151,7 @@
                     '<link href="'.
                     fix($config->url, true).
                     '" rel="alternate" type="text/html" />'."\n".
-                    '<generator uri="http://chyrp.net/" version="'.
+                    '<generator uri="https://chyrplite.net/" version="'.
                     CHYRP_VERSION.
                     '">Chyrp</generator>'."\n";
 
