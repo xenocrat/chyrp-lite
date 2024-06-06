@@ -7,7 +7,7 @@
      *     <Model>
      */
     class View extends Model {
-        public $belongs_to = "post";
+        public $belongs_to = array("post", "user");
 
         /**
          * Function: __construct
