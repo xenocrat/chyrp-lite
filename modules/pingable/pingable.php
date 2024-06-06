@@ -324,9 +324,11 @@
                 $title = $pingback->children(
                     "http://www.w3.org/2005/Atom"
                 )->title;
+
                 $source = $pingback->children(
                     "http://www.w3.org/2005/Atom"
                 )->link["href"];
+
                 $created_at = $pingback->children(
                     "http://www.w3.org/2005/Atom"
                 )->published;
