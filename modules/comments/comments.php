@@ -1329,11 +1329,18 @@
             foreach ($chyrp->comment as $comment) {
                 $chyrp = $comment->children("http://chyrp.net/export/1.0/");
                 $comment = $comment->children("http://www.w3.org/2005/Atom");
-                $login = $comment->author->children("http://chyrp.net/export/1.0/")->login;
 
-                $user = new User(array("login" => unfix((string) $login)));
+                $login = $comment->author->children(
+                    "http://chyrp.net/export/1.0/"
+                )->login;
 
-                $updated = ((string) $comment->updated != (string) $comment->published);
+                $user = new User(
+                    array("login" => unfix((string) $login))
+                );
+
+                $updated = (
+                    (string) $comment->updated != (string) $comment->published
+                );
 
                 Comment::add(
                     body:unfix((string) $comment->content),
