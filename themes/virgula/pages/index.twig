@@ -12,11 +12,6 @@
 </a>
 </li>
 {% endfor %}
-{% if posts.prev_page() or posts.next_page() %}
-<li>
-<a href="{{ url('archive') }}" rel="archives">{{ "More posts&hellip;" | translate }}</a>
-</li>
-{% endif %}
 </ul>
 {% endif %}
 {% set pages_list = theme.pages_list() %}
@@ -45,6 +40,11 @@
 {% endif %}
 {% if posts.paginated is empty and pages_list is empty %}
 <div role="status">{{ "Nothing here yet!" | translate }}</div>
+{% endif %}
+{% if posts.prev_page() or posts.next_page() %}
+<nav class="traversal">
+<a href="{{ url('archive') }}" rel="archives">{{ "More posts&hellip;" | translate }}</a>
+</nav>
 {% endif %}
 {% else %}
 <div role="status">{{ reason }}</div>
