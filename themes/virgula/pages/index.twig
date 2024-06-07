@@ -23,19 +23,16 @@
 <ul>
 {% for page in pages %}
 {% set prev_page_depth = loop.first ? 1 : pages[loop.index0 - 1].depth %}
-{% set this_page_depth = pages[loop.index0].depth %}
+{% set this_page_depth = page.depth %}
 {% set next_page_depth = loop.last ? 1 : pages[loop.index0 + 1].depth %}
 {% if this_page_depth > prev_page_depth %}
 {{ "<ul><li>" | repeat(this_page_depth - prev_page_depth) }}
-{% endif %}
-{% if this_page_depth <= prev_page_depth %}
+{% else %}
 <li>
 {% endif %}
 <a href="{{ page.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(page.title | striptags | normalize | fix(true)) }}">{{ page.title }}</a>
-{% if this_page_depth > next_page_depth %}
-{{ "</li></ul>" | repeat(this_page_depth - next_page_depth) }}
-{% endif %}
-{% if this_page_depth >= next_page_depth  %}
+{% if this_page_depth >= next_page_depth %}
+{{ "</li></ul>" | repeat(this_page_depth - next_page_depth) -}}
 </li>
 {% endif %}
 {% endfor %}
