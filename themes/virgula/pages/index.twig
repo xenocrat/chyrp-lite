@@ -2,6 +2,10 @@
 
 {% block content %}
 {% if reason is not defined %}{# Some modules define reason in error states #}
+{% set pages = theme.pages_list() %}
+{% if posts.paginated is empty and pages is empty %}
+<div role="status">{{ "Nothing here yet!" | translate }}</div>
+{% else %}
 {% if posts.paginated is not empty %}
 <h2>{{ "Posts" | translate }}</h2>
 <ul>
@@ -14,21 +18,20 @@
 {% endfor %}
 </ul>
 {% endif %}
-{% set pages_list = theme.pages_list() %}
-{% if pages_list is not empty %}
+{% if pages is not empty %}
 <h2>{{ "Pages" | translate }}</h2>
 <ul>
-{% for item in pages_list %}
-{% set prev_page_depth = loop.first ? 1 : pages_list[loop.index0 - 1].depth %}
-{% set this_page_depth = pages_list[loop.index0].depth %}
-{% set next_page_depth = loop.last ? 1 : pages_list[loop.index0 + 1].depth %}
+{% for page in pages %}
+{% set prev_page_depth = loop.first ? 1 : pages[loop.index0 - 1].depth %}
+{% set this_page_depth = pages[loop.index0].depth %}
+{% set next_page_depth = loop.last ? 1 : pages[loop.index0 + 1].depth %}
 {% if this_page_depth > prev_page_depth %}
 {{ "<ul><li>" | repeat(this_page_depth - prev_page_depth) }}
 {% endif %}
 {% if this_page_depth <= prev_page_depth %}
 <li>
 {% endif %}
-<a href="{{ item.url() }}">{{ item.title }}</a>
+<a href="{{ page.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(page.title | striptags | normalize | fix(true)) }}">{{ page.title }}</a>
 {% if this_page_depth > next_page_depth %}
 {{ "</li></ul>" | repeat(this_page_depth - next_page_depth) }}
 {% endif %}
@@ -38,13 +41,11 @@
 {% endfor %}
 </ul>
 {% endif %}
-{% if posts.paginated is empty and pages_list is empty %}
-<div role="status">{{ "Nothing here yet!" | translate }}</div>
-{% endif %}
-{% if posts.prev_page() or posts.next_page() %}
+{% if posts.next_page() %}
 <nav class="traversal">
 <a href="{{ url('archive') }}" rel="archives">{{ "More posts&hellip;" | translate }}</a>
 </nav>
+{% endif %}
 {% endif %}
 {% else %}
 <div role="status">{{ reason }}</div>
