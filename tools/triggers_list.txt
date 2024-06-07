@@ -815,9 +815,9 @@ end_content
 -----------
 Called from:
 	themes/blossom/layouts/default.twig on line 59
-	themes/sparrow/layouts/default.twig on line 111
+	themes/sparrow/layouts/default.twig on line 116
 	themes/topaz/layouts/default.twig on line 58
-	themes/umbra/layouts/default.twig on line 105
+	themes/umbra/layouts/default.twig on line 110
 	themes/virgula/layouts/default.twig on line 89
 
 
@@ -876,7 +876,7 @@ Target:
 related_posts
 -------------
 Called from:
-	includes/class/Theme.php on line 201
+	includes/class/Theme.php on line 205
 
 Target:
 	$ids
@@ -889,7 +889,7 @@ Arguments:
 stylesheets
 -----------
 Called from:
-	includes/class/Theme.php on line 246
+	includes/class/Theme.php on line 250
 
 Target:
 	$stylesheets
@@ -898,7 +898,7 @@ Target:
 scripts
 -------
 Called from:
-	includes/class/Theme.php on line 295
+	includes/class/Theme.php on line 299
 
 Target:
 	$scripts
@@ -907,7 +907,7 @@ Target:
 links
 -----
 Called from:
-	includes/class/Theme.php on line 370
+	includes/class/Theme.php on line 374
 
 Target:
 	$links

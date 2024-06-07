@@ -13,7 +13,7 @@ msgstr ""
 #: themes/virgula/feathers/video.twig:6
 #: themes/virgula/pages/archive.twig:19
 #: themes/virgula/pages/index.twig:14
-#: themes/virgula/pages/index.twig:34
+#: themes/virgula/pages/index.twig:33
 #: themes/virgula/pages/page.twig:7
 #: themes/virgula/pages/page.twig:18
 #: themes/virgula/pages/search.twig:16
@@ -362,7 +362,7 @@ msgstr ""
 msgid "Pages"
 msgstr ""
 
-#: themes/virgula/pages/index.twig:46
+#: themes/virgula/pages/index.twig:43
 msgid "More posts&hellip;"
 msgstr ""
 

@@ -21,7 +21,7 @@ msgstr "Questo commento è in attesa di verifica da un moderatore."
 #: themes/virgula/feathers/photo.twig:6 themes/virgula/feathers/quote.twig:6
 #: themes/virgula/feathers/text.twig:6 themes/virgula/feathers/uploader.twig:6
 #: themes/virgula/feathers/video.twig:6 themes/virgula/pages/archive.twig:19
-#: themes/virgula/pages/index.twig:14 themes/virgula/pages/index.twig:34
+#: themes/virgula/pages/index.twig:14 themes/virgula/pages/index.twig:33
 #: themes/virgula/pages/page.twig:7 themes/virgula/pages/page.twig:18
 #: themes/virgula/pages/search.twig:16 themes/virgula/pages/search.twig:27
 #, php-format
@@ -352,7 +352,7 @@ msgstr "Post"
 msgid "Pages"
 msgstr "Pagine"
 
-#: themes/virgula/pages/index.twig:46
+#: themes/virgula/pages/index.twig:43
 msgid "More posts&hellip;"
 msgstr "Altri post&hellip;"
 
