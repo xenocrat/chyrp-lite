@@ -21,9 +21,9 @@ msgstr "Ce commentaire est en attente de modération."
 #: themes/virgula/feathers/photo.twig:6 themes/virgula/feathers/quote.twig:6
 #: themes/virgula/feathers/text.twig:6 themes/virgula/feathers/uploader.twig:6
 #: themes/virgula/feathers/video.twig:6 themes/virgula/pages/archive.twig:19
-#: themes/virgula/pages/index.twig:10 themes/virgula/pages/page.twig:7
-#: themes/virgula/pages/page.twig:18 themes/virgula/pages/search.twig:16
-#: themes/virgula/pages/search.twig:27
+#: themes/virgula/pages/index.twig:14 themes/virgula/pages/index.twig:34
+#: themes/virgula/pages/page.twig:7 themes/virgula/pages/page.twig:18
+#: themes/virgula/pages/search.twig:16 themes/virgula/pages/search.twig:27
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "Lien permanent vers &#8220;%s&#8221;"
@@ -302,14 +302,14 @@ msgstr ""
 
 #: themes/virgula/pages/archive.twig:32 themes/virgula/pages/archive.twig:55
 #: themes/virgula/pages/author.twig:12 themes/virgula/pages/category.twig:12
-#: themes/virgula/pages/drafts.twig:12 themes/virgula/pages/search.twig:40
+#: themes/virgula/pages/drafts.twig:12 themes/virgula/pages/search.twig:49
 #: themes/virgula/pages/tag.twig:12 themes/virgula/pages/updated.twig:12
 msgid "Newer posts"
 msgstr "Nouveaux articles"
 
 #: themes/virgula/pages/archive.twig:37 themes/virgula/pages/archive.twig:56
 #: themes/virgula/pages/author.twig:13 themes/virgula/pages/category.twig:13
-#: themes/virgula/pages/drafts.twig:13 themes/virgula/pages/search.twig:41
+#: themes/virgula/pages/drafts.twig:13 themes/virgula/pages/search.twig:50
 #: themes/virgula/pages/tag.twig:13 themes/virgula/pages/updated.twig:13
 msgid "Older posts"
 msgstr "Anciens articles"
@@ -340,21 +340,21 @@ msgstr "Brouillons"
 msgid "You don't have any drafts."
 msgstr "Vous n'avez pas de brouillon."
 
-#: themes/virgula/pages/index.twig:6
+#: themes/virgula/pages/index.twig:7 themes/virgula/pages/tags.twig:14
+msgid "Nothing here yet!"
+msgstr "Rien ici encore !"
+
+#: themes/virgula/pages/index.twig:10
 msgid "Posts"
 msgstr ""
 
-#: themes/virgula/pages/index.twig:17
-msgid "More posts&hellip;"
-msgstr ""
-
-#: themes/virgula/pages/index.twig:24
+#: themes/virgula/pages/index.twig:22
 msgid "Pages"
 msgstr "Pages"
 
-#: themes/virgula/pages/index.twig:47 themes/virgula/pages/tags.twig:14
-msgid "Nothing here yet!"
-msgstr "Rien ici encore !"
+#: themes/virgula/pages/index.twig:46
+msgid "More posts&hellip;"
+msgstr ""
 
 #: themes/virgula/pages/page.twig:11 themes/virgula/pages/search.twig:20
 #, php-format
