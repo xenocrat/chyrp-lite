@@ -46,6 +46,11 @@
 <div id="mast" role="banner">
 <h1 class="banner"><a href="{{ url('/') }}">{{ site.name }}</a></h1>
 <ul class="navigation" aria-label="{{ 'Links' | translate }}">
+{% for more in theme.pages_list() | slice(0, 3) %}
+<li>
+<a href="{{ more.url() }}">{{ more.title }}</a>
+</li>
+{% endfor %}
 <li>
 <a href="{{ mailto(site.email) }}">{{ "Email" | translate }}</a>
 </li>
