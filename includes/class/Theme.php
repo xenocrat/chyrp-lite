@@ -53,8 +53,12 @@
             if (MAIN)
                 $where["show_in_list"] = true;
 
-            $pages = Page::find(array("where" => $where,
-                                      "order" => "list_order ASC"));
+            $pages = Page::find(
+                array(
+                    "where" => $where,
+                    "order" => "list_order ASC, title ASC"
+                )
+            );
 
             if (empty($pages))
                 return $this->caches["pages_list"][$cache_id] = array();
