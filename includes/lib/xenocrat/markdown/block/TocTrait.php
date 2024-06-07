@@ -120,11 +120,13 @@ trait TocTrait
 
 				$this->headlineAnchorLinks[$id] = 1;
 
-				$this->toc[] = [
-					'id' => $id,
-					'level' => $block['level'],
-					'content' => $content,
-				];
+				if ($block['level'] > 1) {
+					$this->toc[] = [
+						'id' => $id,
+						'level' => $block['level'],
+						'content' => $content,
+					];
+				}
 
 				$id = ' id="'
 					. $prefix
@@ -149,8 +151,6 @@ trait TocTrait
 	{
 		$objChr = "\u{FFFC}";
 		$toc = '';
-		$depth = 2;
-		$items = 0;
 
 		$prefix = ($this->getContextId() === '') ?
 			'' :
@@ -159,20 +159,29 @@ trait TocTrait
 		if (!empty($this->toc)) {
 			$toc .= "<ul>\n";
 
-			foreach ($this->toc as $h) {
-				// Ignore h1; this is the document title.
-				if ($h['level'] < 2) {
-					continue;
-				}
-				// Go deeper in hierarchy if necessary.
-				while ($depth < 6 && $depth < $h['level']) {
-					$depth++;
-					$toc .= "<ul>\n";
-				}
-				// Go higher in hierarchy if necessary.
-				while ($depth > 2 && $depth > $h['level']) {
-					$depth--;
-					$toc .= "</ul>\n";
+			foreach ($this->toc as $index => $h) {
+				$loop_first = ($index === 0);
+				$loop_final = !isset($this->toc[$index + 1]);
+				$this_h = $h['level'];
+
+				$prev_h = ($loop_first) ?
+					2 :
+					$this->toc[$index - 1]['level'];
+
+				$next_h = ($loop_final) ?
+					2 :
+					$this->toc[$index + 1]['level'];
+
+				if ($this_h > $prev_h) {
+					if ($loop_first) {
+						$toc .= "<li>\n";
+					}
+					$toc .= str_repeat(
+						"<ul>\n<li>\n",
+						$this_h - $prev_h
+					);
+				} else {
+					$toc .= "<li>\n";
 				}
 
 				$id = $prefix
@@ -181,8 +190,16 @@ trait TocTrait
 						ENT_COMPAT | ENT_SUBSTITUTE
 					);
 
-				$toc .= "<li><a href=\"#{$id}\">{$h['content']}</a></li>\n";
-				$items++;
+				$toc .= "<a href=\"#{$id}\">{$h['content']}</a>\n";
+
+				if ($this_h >= $next_h) {
+					$toc .= str_repeat(
+						"</li>\n</ul>\n",
+						$this_h - $next_h
+					);
+					$toc .= "</li>\n";
+				}
+
 			}
 
 			$toc .= '</ul>';
@@ -191,7 +208,7 @@ trait TocTrait
 		// Replace TOC placeholder.
 		return str_replace(
 			"{$objChr}[[_TOC_]]{$objChr}",
-			($items) ? $toc : '',
+			empty($this->toc) ? '' : $toc,
 			$html
 		);
 	}
