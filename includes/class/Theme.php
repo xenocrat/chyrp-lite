@@ -42,8 +42,11 @@
         public function pages_list($page_id = 0, $exclude = null): array {
             $cache_id = serialize(array($page_id, $exclude));
 
-            if (isset($this->caches["pages_list"][$cache_id]))
+            if (
+                isset($this->caches["pages_list"][$cache_id])
+            ) {
                 return $this->caches["pages_list"][$cache_id];
+            }
 
             $this->caches["pages"]["flat"] = array();
             $this->caches["pages"]["children"] = array();
@@ -76,7 +79,8 @@
                     $this->recurse_pages($page);
             }
 
-            return $this->caches["pages_list"][$cache_id] = $this->caches["pages"]["flat"];
+            $list = $this->caches["pages"]["flat"];
+            return $this->caches["pages_list"][$cache_id] = $list;
         }
 
         /**
@@ -91,15 +95,22 @@
                 $page->depth :
                 1 ;
 
-            $page->children = isset($this->caches["pages"]["children"][$page->id]);
+            $page->children = isset(
+                $this->caches["pages"]["children"][$page->id]
+            );
 
             $this->caches["pages"]["flat"][] = $page;
 
-            if (isset($this->caches["pages"]["children"][$page->id]))
-                foreach ($this->caches["pages"]["children"][$page->id] as $child) {
+            if (
+                isset($this->caches["pages"]["children"][$page->id])
+            ) {
+                foreach (
+                    $this->caches["pages"]["children"][$page->id] as $child
+                ) {
                     $child->depth = $page->depth + 1;
                     $this->recurse_pages($child);
                 }
+            }
         }
 
         /**
@@ -110,8 +121,11 @@
          *     $limit - Maximum number of months to list.
          */
         public function archives_list($limit = 12): array {
-            if (isset($this->caches["archives_list"][$limit]))
+            if (
+                isset($this->caches["archives_list"][$limit])
+            ) {
                 return $this->caches["archives_list"][$limit];
+            }
 
             $main = MainController::current();
             $sql = SQL::current();
@@ -129,7 +143,10 @@
 
             foreach ($results as $result) {
                 $created_at = strtotime($result["created_at"]);
-                $this_month = strtotime("midnight first day of this month", $created_at);
+                $this_month = strtotime(
+                    "midnight first day of this month",
+                    $created_at
+                );
 
                 if (!isset($nums[$this_month])) {
                     if (count($nums) == $limit)
@@ -162,8 +179,11 @@
          *     $limit - Maximum number of recent posts to list.
          */
         public function recent_posts($limit = 5): array {
-            if (isset($this->caches["recent_posts"][$limit]))
+            if (
+                isset($this->caches["recent_posts"][$limit])
+            ) {
                 return $this->caches["recent_posts"][$limit];
+            }
 
             $results = Post::find(
                 array(
@@ -197,8 +217,11 @@
             if ($post->no_results)
                 return array();
 
-            if (isset($this->caches["related_posts"][$post->id][$limit]))
+            if (
+                isset($this->caches["related_posts"][$post->id][$limit])
+            ) {
                 return $this->caches["related_posts"][$post->id][$limit];
+            }
 
             $ids = array();
 
@@ -257,7 +280,10 @@
                           fix($stylesheet, true).
                           '" type="text/css" media="all">';
 
-            if (is_dir(THEME_DIR.DIR."stylesheets") or is_dir(THEME_DIR.DIR."css")) {
+            if (
+                is_dir(THEME_DIR.DIR."stylesheets") or
+                is_dir(THEME_DIR.DIR."css")
+            ) {
                 foreach (
                     array_merge(
                         (array) glob(THEME_DIR.DIR."stylesheets".DIR."*.css"),
@@ -266,7 +292,7 @@
                 ) {
                     $filename = basename($filepath);
 
-                    if (empty($filename) or substr_count($filename, ".inc.css"))
+                    if (empty($filename) or str_ends_with($filename, ".inc.css"))
                         continue;
 
                     $qdir = preg_quote(DIR, "/");
@@ -275,7 +301,10 @@
                         "$2",
                         $filepath
                     );
-                    $href = $config->chyrp_url."/themes/".str_replace(DIR, "/", $path);
+                    $href = $config->chyrp_url.
+                            "/themes/".
+                            str_replace(DIR, "/", $path);
+
                     $tags[] = '<link rel="stylesheet" href="'.
                               fix($href, true).
                               '" type="text/css" media="all">';
@@ -302,9 +331,14 @@
             $tags = array();
 
             foreach ($scripts as $script)
-                $tags[] = '<script src="'.fix($script, true).'"></script>';
+                $tags[] = '<script src="'.
+                          fix($script, true).
+                          '"></script>';
 
-            if (is_dir(THEME_DIR.DIR."javascripts") or is_dir(THEME_DIR.DIR."js")) {
+            if (
+                is_dir(THEME_DIR.DIR."javascripts") or
+                is_dir(THEME_DIR.DIR."js")
+            ) {
                 foreach (
                     array_merge(
                         (array) glob(THEME_DIR.DIR."javascripts".DIR."*.js"),
@@ -313,7 +347,7 @@
                 ) {
                     $filename = basename($filepath);
 
-                    if (empty($filename) or substr_count($filename, ".inc.js"))
+                    if (empty($filename) or str_ends_with($filename, ".inc.js"))
                         continue;
 
                     $qdir = preg_quote(DIR, "/");
@@ -322,8 +356,14 @@
                         "$2",
                         $filepath
                     );
-                    $href = $config->chyrp_url."/themes/".str_replace(DIR, "/", $path);
-                    $tags[] = '<script src="'.fix($href, true).'"></script>';
+
+                    $href = $config->chyrp_url.
+                            "/themes/".
+                            str_replace(DIR, "/", $path);
+
+                    $tags[] = '<script src="'.
+                              fix($href, true).
+                              '"></script>';
                 }
             }
 
@@ -360,14 +400,20 @@
                         self_url() ;
 
                     $feed_url = ($config->clean_urls) ?
-                        rtrim($page_url, "/")."/feed/" :
-                        $page_url.(substr_count($page_url, "?") ? "&feed" : "?feed") ;
+                        rtrim($page_url, "/")."/feed/"
+                        :
+                        $page_url.(
+                            substr_count($page_url, "?") ?
+                            "&feed" :
+                            "?feed"
+                        )
+                        ;
 
-                        $links[] = array(
-                            "href" => $feed_url,
-                            "type" => BlogFeed::type(),
-                            "title" => $this->title
-                        );
+                    $links[] = array(
+                        "href" => $feed_url,
+                        "type" => BlogFeed::type(),
+                        "title" => $this->title
+                    );
             }
 
             # Ask extensions to provide additional links.
