@@ -26,6 +26,7 @@
          */
         private function __construct() {
             $this->url = THEME_URL;
+
             $this->safename = PREVIEWING ?
                 $_SESSION['theme'] :
                 Config::current()->theme ;
@@ -33,11 +34,11 @@
 
         /**
          * Function: pages_list
-         * Returns a simple array of pages with @depth@ and @children@ attributes.
+         * Returns an array of pages with @depth@ and @children@ attributes.
          *
          * Parameters:
-         *     $page_id - Page ID to use as the basis.
-         *     $exclude - Page ID to exclude from the list.
+         *     $page_id - Page ID to start from, or zero to return all pages.
+         *     $exclude - Page ID/s to exclude, integer or array of integers.
          */
         public function pages_list($page_id = 0, $exclude = null): array {
             $cache_id = serialize(array($page_id, $exclude));
@@ -85,15 +86,15 @@
 
         /**
          * Function: recurse_pages
-         * Populates the page cache and gives each page @depth@ and @children@ attributes.
+         * Populates the page cache and gives each page the attributes
+         * of @depth@ (integer, 1 or greater) and @children@ (boolean).
          *
          * Parameters:
          *     $page - Page to start recursion at.
          */
         private function recurse_pages($page): void {
-            $page->depth = isset($page->depth) ?
-                $page->depth :
-                1 ;
+            if (!isset($page->depth))
+                $page->depth = 1;
 
             $page->children = isset(
                 $this->caches["pages"]["children"][$page->id]
@@ -101,9 +102,7 @@
 
             $this->caches["pages"]["flat"][] = $page;
 
-            if (
-                isset($this->caches["pages"]["children"][$page->id])
-            ) {
+            if ($page->children) {
                 foreach (
                     $this->caches["pages"]["children"][$page->id] as $child
                 ) {
@@ -195,12 +194,13 @@
 
             $posts = array();
 
-            for ($i = 0; $i < $limit; $i++)
+            for ($i = 0; $i < $limit; $i++) {
                 if (isset($results[0][$i]))
                     $posts[] = new Post(
                         null,
                         array("read_from" => $results[0][$i])
                     );
+            }
 
             return $this->caches["recent_posts"][$limit] = $posts;
         }
@@ -404,8 +404,8 @@
                         :
                         $page_url.(
                             substr_count($page_url, "?") ?
-                            "&feed" :
-                            "?feed"
+                                "&feed" :
+                                "?feed"
                         )
                         ;
 
