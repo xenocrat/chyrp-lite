@@ -40,7 +40,7 @@ msgstr "Tags"
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "Permanentlink zu &#8220;%s&#8221;"
 
-#: themes/umbra/content/post.twig:17 themes/umbra/layouts/default.twig:73
+#: themes/umbra/content/post.twig:17 themes/umbra/layouts/default.twig:75
 msgid "Draft"
 msgstr "Entwurf"
 
@@ -168,7 +168,7 @@ msgstr "Benachrichtige mich, wenn andere kommentieren"
 msgid "Speak"
 msgstr "Sprich"
 
-#: themes/umbra/forms/user/controls.twig:5 themes/umbra/layouts/default.twig:78
+#: themes/umbra/forms/user/controls.twig:5 themes/umbra/layouts/default.twig:80
 msgid "Controls"
 msgstr "Details"
 
@@ -178,7 +178,7 @@ msgstr "Voller Name"
 
 #: themes/umbra/forms/user/controls.twig:9
 #: themes/umbra/forms/user/register.twig:13
-#: themes/umbra/layouts/default.twig:55
+#: themes/umbra/layouts/default.twig:57
 msgid "Email"
 msgstr "E-Mail"
 
@@ -201,7 +201,7 @@ msgid "Update"
 msgstr "Aktualisieren"
 
 #: themes/umbra/forms/user/login.twig:5 themes/umbra/forms/user/login.twig:14
-#: themes/umbra/layouts/default.twig:90
+#: themes/umbra/layouts/default.twig:92
 msgid "Log in"
 msgstr "Einloggen"
 
@@ -231,7 +231,7 @@ msgstr "Absenden"
 
 #: themes/umbra/forms/user/register.twig:5
 #: themes/umbra/forms/user/register.twig:19
-#: themes/umbra/layouts/default.twig:86
+#: themes/umbra/layouts/default.twig:88
 msgid "Register"
 msgstr "Registrieren"
 
@@ -251,7 +251,7 @@ msgstr "Umbra"
 msgid "A dark tumbleblog theme for Chyrp Lite."
 msgstr "Ein dunkler Tumbleblog thema für Chyrp Lite."
 
-#: themes/umbra/layouts/default.twig:8 themes/umbra/layouts/default.twig:106
+#: themes/umbra/layouts/default.twig:8 themes/umbra/layouts/default.twig:108
 #, php-format
 msgid "Page %d"
 msgstr "Seite %d"
@@ -260,39 +260,39 @@ msgstr "Seite %d"
 msgid "Links"
 msgstr "Links"
 
-#: themes/umbra/layouts/default.twig:58
+#: themes/umbra/layouts/default.twig:60
 msgid "Feed"
 msgstr "Feed"
 
-#: themes/umbra/layouts/default.twig:61
+#: themes/umbra/layouts/default.twig:63
 msgid "Archive"
 msgstr "Archiv"
 
-#: themes/umbra/layouts/default.twig:65
+#: themes/umbra/layouts/default.twig:67
 msgid "Admin"
 msgstr "Administration"
 
-#: themes/umbra/layouts/default.twig:69
+#: themes/umbra/layouts/default.twig:71
 msgid "Write"
 msgstr "Schreiben"
 
-#: themes/umbra/layouts/default.twig:81
+#: themes/umbra/layouts/default.twig:83
 msgid "Log out"
 msgstr "Ausloggen"
 
-#: themes/umbra/layouts/default.twig:95
+#: themes/umbra/layouts/default.twig:97
 msgid "Search&hellip;"
 msgstr "Suchen&hellip;"
 
-#: themes/umbra/layouts/default.twig:95
+#: themes/umbra/layouts/default.twig:97
 msgid "Search this blog"
 msgstr "Durchsuchen Sie diesen Blog"
 
-#: themes/umbra/layouts/default.twig:96
+#: themes/umbra/layouts/default.twig:98
 msgid "Search"
 msgstr "Suchen"
 
-#: themes/umbra/layouts/default.twig:117
+#: themes/umbra/layouts/default.twig:119
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "Aufgerufen von %s in Zeile %d in %s Sekunden."
