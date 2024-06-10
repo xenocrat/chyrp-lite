@@ -33,6 +33,11 @@ namespace xenocrat\markdown\block;
 trait TocTrait
 {
 	/**
+	 * @var bool - Render TOC as an ordered list.
+	 */
+	public $renderOrderedToc = false;
+
+	/**
 	 * @var mixed[] - Headings detected and rendered in the text.
 	 */
 	protected $toc = [];
@@ -151,34 +156,30 @@ trait TocTrait
 	{
 		$objChr = "\u{FFFC}";
 		$toc = '';
+		$tag = ($this->renderOrderedToc) ? 'ol' : 'ul';
 
 		$prefix = ($this->getContextId() === '') ?
 			'' :
 			$this->getContextId() . '-';
 
 		if (!empty($this->toc)) {
-			$toc .= "<ul>\n";
-
 			foreach ($this->toc as $index => $h) {
-				$loop_first = ($index === 0);
-				$loop_final = !isset($this->toc[$index + 1]);
-				$this_h = $h['level'];
+				$loopFirst = ($index === 0);
+				$loopFinal = !isset($this->toc[$index + 1]);
+				$thisLevel = $h['level'];
 
-				$prev_h = ($loop_first) ?
-					2 :
+				$prevLevel = ($loopFirst) ?
+					1 :
 					$this->toc[$index - 1]['level'];
 
-				$next_h = ($loop_final) ?
+				$nextLevel = ($loopFinal) ?
 					2 :
 					$this->toc[$index + 1]['level'];
 
-				if ($this_h > $prev_h) {
-					if ($loop_first) {
-						$toc .= "<li>\n";
-					}
+				if ($thisLevel > $prevLevel) {
 					$toc .= str_repeat(
-						"<ul>\n<li>\n",
-						$this_h - $prev_h
+						"<{$tag}>\n<li>\n",
+						$thisLevel - $prevLevel
 					);
 				} else {
 					$toc .= "<li>\n";
@@ -192,17 +193,17 @@ trait TocTrait
 
 				$toc .= "<a href=\"#{$id}\">{$h['content']}</a>\n";
 
-				if ($this_h >= $next_h) {
+				if ($thisLevel >= $nextLevel) {
 					$toc .= str_repeat(
-						"</li>\n</ul>\n",
-						$this_h - $next_h
+						"</li>\n</{$tag}>\n",
+						$thisLevel - $nextLevel
 					);
 					$toc .= "</li>\n";
 				}
 
 			}
 
-			$toc .= '</ul>';
+			$toc .= "</{$tag}>";
 		}
 
 		// Replace TOC placeholder.
