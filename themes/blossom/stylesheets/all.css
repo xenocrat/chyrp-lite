@@ -771,7 +771,8 @@ div.doaction a.post_delete_link:active,
 div.doaction a.delete_link:active {
     background-color: #af2d2d;
 }
-section.photo > a:focus {
+section.photo > a:focus,
+section a:has(img):focus {
     outline: #d94c7b solid 4px;
 }
 a.likes > img {

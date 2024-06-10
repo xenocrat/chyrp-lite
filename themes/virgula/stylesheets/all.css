@@ -520,7 +520,8 @@ article.audio audio {
 }
 *:focus,
 div.doaction a:focus,
-section.photo > a:focus {
+section.photo > a:focus,
+section a:has(img):focus {
     outline: #ffdd00 solid 4px;
 }
 #comment_shim {

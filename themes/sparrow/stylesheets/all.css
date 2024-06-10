@@ -654,7 +654,8 @@ div.doaction a.post_delete_link,
 div.doaction a.delete_link {
     font-weight: bold;
 }
-section.photo > a:focus {
+section.photo > a:focus,
+section a:has(img):focus {
     outline: #c04b4b solid 4px;
 }
 div.doaction a.post_delete_link:hover,

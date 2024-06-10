@@ -758,7 +758,8 @@ div.doaction a.post_delete_link,
 div.doaction a.delete_link {
     font-weight: bold;
 }
-section.photo > a:focus {
+section.photo > a:focus,
+section a:has(img):focus {
     outline: #7ac2e5 solid 4px;
 }
 a.likes > img {
