@@ -655,7 +655,7 @@
                 public:$public,
                 show_in_list:$listed,
                 list_order:$list_order,
-                clean:sanitize($_POST['slug'])
+                clean:sanitize($_POST['slug'], true, true, 128)
             );
 
             $page_redirect = ($visitor->group->can("edit_page", "delete_page")) ?
@@ -772,7 +772,7 @@
             fallback($_POST['parent_id'], 0);
             fallback($_POST['status'], "public");
             fallback($_POST['list_priority'], 0);
-            fallback($_POST['slug'], $page->clean);
+            fallback($_POST['slug'], "");
 
             $public = in_array(
                 $_POST['status'],
@@ -801,7 +801,7 @@
                 public:$public,
                 show_in_list:$listed,
                 list_order:$list_order,
-                clean:sanitize($_POST['slug'])
+                clean:sanitize($_POST['slug'], true, true, 128)
             );
 
             Flash::notice(
