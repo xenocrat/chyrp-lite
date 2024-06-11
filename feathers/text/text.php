@@ -65,7 +65,7 @@
                 );
 
             fallback($_POST['title'], "");
-            fallback($_POST['slug'], $post->clean);
+            fallback($_POST['slug'], "");
             fallback($_POST['status'], $post->status);
             fallback($_POST['created_at'], $post->created_at);
             fallback($_POST['option'], array());
