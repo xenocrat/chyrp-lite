@@ -439,7 +439,8 @@
      * Parameters:
      *     $timestamp - A time() value or string to be strtotime() converted.
      *     $format - The date()-compatible formatting for the <time> representation.
-     *     $convert - Perform a case conversion: "fold", "lower", "title", "upper".
+     *     $convert - Perform a case conversion:
+     *                "fold", "lower", "title", "upper", or null to retain case as-is.
      */
     function twig_filter_time(
         $timestamp,
@@ -449,8 +450,8 @@
         if (!isset($format))
             $format = (ADMIN) ? "Y-m-d" : "d F Y" ;
 
-        if (!isset($string))
-            $string = _w($format, $timestamp);
+        $string = _w($format, $timestamp);
+        $datetime = when("c", $timestamp);
 
         switch ($convert) {
             case "fold":
@@ -467,7 +468,6 @@
                 break;
         }
 
-        $datetime = when("c", $timestamp);
         return "<time datetime=\"".$datetime."\">".$string."</time>";
     }
 
