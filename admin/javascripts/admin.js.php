@@ -70,7 +70,7 @@ function toggle_all() {
 }
 // Validates slug fields.
 function validate_slug() {
-    $("input[name='slug']").keyup(
+    $("input[pattern='^[a-z0-9\\\\-]*$']").keyup(
         function(e) {
             var slug = $(this).val();
 
