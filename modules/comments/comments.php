@@ -185,7 +185,7 @@
                 );
 
             fallback($_POST['author_url'], "");
-            $parent = (int) oneof($_POST['parent_id'], 0);
+            $parent = (int) fallback($_POST['parent_id'], 0);
             $notify = (!empty($_POST['notify']) and logged_in());
 
             $comment = Comment::create(
