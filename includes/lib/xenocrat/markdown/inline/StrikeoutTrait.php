@@ -25,7 +25,8 @@ trait StrikeoutTrait
 	protected function parseStrike($markdown): array
 	{
 		if (
-			preg_match('/^(~{1,2})(?!~)(.*?[^~\\\\])\1(?!~)/s',
+			preg_match(
+				'/^(~{1,2})(?!~)(.*?([^~\\\\]|(?<=\\\\)\\\\))\1(?!~)/s',
 				$markdown,
 				$matches
 			)

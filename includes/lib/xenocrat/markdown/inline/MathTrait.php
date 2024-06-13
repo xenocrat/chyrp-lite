@@ -24,7 +24,13 @@ trait MathTrait
 	 */
 	protected function parseMath($markdown): array
 	{
-		if (preg_match('/^\$`(.*?[^\\\\])`\$/s', $markdown, $matches)) {
+		if (
+			preg_match(
+				'/^\$`(.*?[^\\\\])`\$/s',
+				$markdown,
+				$matches
+			)
+		) {
 			return [
 				[
 					'inlineMath',

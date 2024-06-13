@@ -24,7 +24,13 @@ trait CiteTrait
 	 */
 	protected function parseCite($markdown): array
 	{
-		if (preg_match('/^\*_(.*?[^\\\\])_\*/s', $markdown, $matches)) {
+		if (
+			preg_match(
+				'/^\*_(.*?([^\\\\]|(?<=\\\\)\\\\))_\*/s',
+				$markdown,
+				$matches
+			)
+		) {
 			return [
 				[
 					'cite',
