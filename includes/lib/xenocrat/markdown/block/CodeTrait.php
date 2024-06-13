@@ -90,6 +90,7 @@ trait CodeTrait
 	{
 		$class = isset($block['language']) ?
 			' class="language-' . $block['language'] . '"' : '';
+
 		return "<pre><code$class>"
 			. $this->escapeHtmlEntities(
 				$block['content'],

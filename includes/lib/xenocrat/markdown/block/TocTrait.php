@@ -22,7 +22,7 @@ namespace xenocrat\markdown\block;
  * Make sure to add the TOC on postprocess():
  *
  * ```php
- * protected function prepare()
+ * protected function postprocess()
  * {
  * 	return parent::postprocess(
  * 		$this->addToc($markup)

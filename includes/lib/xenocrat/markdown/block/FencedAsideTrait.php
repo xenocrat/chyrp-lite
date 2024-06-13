@@ -40,7 +40,6 @@ trait FencedAsideTrait
 		$line = substr($lines[$current], $indent);
 		$mw = strspn($line, $line[0]);
 		$fence = substr($line, 0, $mw);
-		$language = trim(substr($line, $mw));
 		$content = [];
 
 		// Consume until end fence...

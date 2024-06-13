@@ -20,12 +20,14 @@ class GitlabMarkdown extends Markdown
 	use block\FencedQuoteTrait;
 	use block\FootnoteTrait;
 	use block\FrontMatterTrait;
+	use block\MathTrait;
 	use block\TableTrait;
 	use block\TocTrait;
 
 	// Include inline element parsing using traits.
 	use inline\AutoLinkTrait;
 	use inline\CheckboxTrait;
+	use inline\MathTrait;
 	use inline\MediaLinkTrait;
 	use inline\StrikeoutTrait;
 
@@ -43,6 +45,7 @@ class GitlabMarkdown extends Markdown
 		'Ol',
 		'FencedQuote',
 		'Quote',
+		'Math',
 		'Reference',
 		'Table',
 		'Toc',

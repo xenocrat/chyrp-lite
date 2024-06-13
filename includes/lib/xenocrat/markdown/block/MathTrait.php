@@ -8,18 +8,14 @@
 namespace xenocrat\markdown\block;
 
 /**
- * Adds fenced blockquote blocks.
- *
- * Automatically includes blockquote block support.
+ * Adds math expression (LaTeX) blocks.
  */
-trait FencedQuoteTrait
+trait MathTrait
 {
-	use QuoteTrait;
-
 	/**
-	 * Identify a line as the beginning of a fenced blockquote.
+	 * Identify a line as the beginning of a math expression.
 	 */
-	protected function identifyFencedQuote($line): bool
+	protected function identifyMath($line): bool
 	{
 		if (
 			$line[0] === ' '
@@ -28,13 +24,13 @@ trait FencedQuoteTrait
 		// trim up to three spaces
 			$line = ltrim($line, ' ');
 		}
-		return str_starts_with($line, '>>>');
+		return str_starts_with($line, '$$');
 	}
 
 	/**
-	 * Consume lines for a fenced blockquote.
+	 * Consume lines for a math expression.
 	 */
-	protected function consumeFencedQuote($lines, $current): array
+	protected function consumeMath($lines, $current): array
 	{
 		$indent = strspn($lines[$current], ' ');
 		$line = substr($lines[$current], $indent);
@@ -64,12 +60,26 @@ trait FencedQuoteTrait
 			}
 		}
 		$block = [
-			'quote',
-			'content' => $this->parseBlocks($content),
+			'math',
+			'content' => implode("\n", $content),
 		];
 
 		return [$block, $i];
 	}
 
-	abstract protected function parseBlocks($lines);
+	/**
+	 * Renders a math expression.
+	 */
+	protected function renderMath($block): string
+	{
+		return '<la-tex display="block">'
+			. $this->escapeHtmlEntities(
+				$block['content'],
+				ENT_COMPAT | ENT_SUBSTITUTE
+			)
+			. ($block['content'] === '' ? '' : "\n" )
+			. "</la-tex>\n";
+	}
+
+	abstract protected function escapeHtmlEntities($text, $flags = 0);
 }
