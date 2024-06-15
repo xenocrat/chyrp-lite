@@ -23,31 +23,31 @@ trait EmphStrongTrait
 	 * @marker _
 	 * @marker *
 	 */
-	protected function parseEmphStrong($text): array
+	protected function parseEmphStrong($markdown): array
 	{
-		$marker = $text[0];
+		$marker = $markdown[0];
 
-		if (!isset($text[1])) {
-			return [['text', $text[0]], 1];
+		if (!isset($markdown[1])) {
+			return [['text', $markdown[0]], 1];
 		}
 
-		if ($marker == $text[1]) {
+		if ($marker == $markdown[1]) {
 		// Strong.
 			// Avoid excessive regex backtracking if there is no closing marker.
-			if (strpos($text, $marker . $marker, 2) === false) {
-				return [['text', $text[0]], 1];
+			if (strpos($markdown, $marker . $marker, 2) === false) {
+				return [['text', $markdown[0]], 1];
 			}
 			if (
 				$marker === '*'
 				&& preg_match(
 					'/^[*]{2}((?>\\\\[*]|[^*]|[*][^*]*[*])+?)[*]{2}/s',
-					$text,
+					$markdown,
 					$matches
 				)
 				|| $marker === '_'
 				&& preg_match(
 					'/^__((?>\\\\_|[^_]|_[^_]*_)+?)__\b/us',
-					$text,
+					$markdown,
 					$matches
 				)
 			) {
@@ -55,7 +55,7 @@ trait EmphStrongTrait
 				// If nothing is contained in a strong,
 				// do not consider it valid.
 				if ($content === '') {
-					return [['text', $text[0]], 2];
+					return [['text', $markdown[0]], 2];
 				}
 				// First and last chars of the strong text
 				// cannot be whitespace.
@@ -75,20 +75,20 @@ trait EmphStrongTrait
 		} else {
 		// Emphasis
 			// Avoid excessive regex backtracking if there is no closing marker.
-			if (strpos($text, $marker, 1) === false) {
-				return [['text', $text[0]], 1];
+			if (strpos($markdown, $marker, 1) === false) {
+				return [['text', $markdown[0]], 1];
 			}
 			if (
 				$marker === '*'
 				&& preg_match(
 					'/^[*]((?>\\\\[*]|[^*]|[*][*][^*]+?[*][*])+?)[*](?![*][^*])/s',
-					$text,
+					$markdown,
 					$matches
 				)
 				|| $marker === '_'
 				&& preg_match(
 					'/^_((?>\\\\_|[^_]|__[^_]*__)+?)_(?!_[^_])\b/us',
-					$text,
+					$markdown,
 					$matches
 				)
 			) {
@@ -96,7 +96,7 @@ trait EmphStrongTrait
 				// If nothing is contained in an emphasis,
 				// do not consider it valid.
 				if ($content === '') {
-					return [['text', $text[0]], 2];
+					return [['text', $markdown[0]], 2];
 				}
 				// First and last chars of the emphasised text
 				// cannot be whitespace.
@@ -115,7 +115,7 @@ trait EmphStrongTrait
 			}
 		}
 
-		return [['text', $text[0]], 1];
+		return [['text', $markdown[0]], 1];
 	}
 
 	protected function renderStrong($block): string

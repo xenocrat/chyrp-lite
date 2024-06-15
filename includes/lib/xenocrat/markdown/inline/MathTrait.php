@@ -22,24 +22,33 @@ trait MathTrait
 	 *
 	 * @marker $`
 	 */
-	protected function parseMath($markdown): array
+	protected function parseMath($text): array
 	{
 		if (
 			preg_match(
 				'/^\$`(.*?[^\\\\])`\$/s',
-				$markdown,
+				$text,
 				$matches
 			)
 		) {
+			$math = str_replace("\n", ' ', $matches[1]);
+			if (
+				strlen($math) > 2
+				&& ltrim($math, ' ') !== ''
+				&& substr($math, 0, 1) === ' '
+				&& substr($math, -1) === ' '
+			) {
+				$math = substr($math, 1, -1);
+			}
 			return [
 				[
 					'inlineMath',
-					$matches[1]
+					$math
 				],
 				strlen($matches[0])
 			];
 		}
-		return [['text', $markdown[0] . $markdown[1]], 2];
+		return [['text', $text[0] . $text[1]], 2];
 	}
 
 	protected function renderInlineMath($block): string
