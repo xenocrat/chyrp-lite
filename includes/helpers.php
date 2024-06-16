@@ -1942,6 +1942,7 @@
         if (!function_exists("curl_version"))
             return false;
 
+        $cver = curl_version();
         $curl = @curl_init($url);
 
         if ($curl === false)
@@ -1962,6 +1963,13 @@
                 "Referer: ".$config->url
             )
         );
+
+        if (
+            defined('CURLSSLOPT_NATIVE_CA') and
+            version_compare($cver["version"], "7.71", ">=")
+        ) {
+            $opts[CURLOPT_SSL_OPTIONS] = CURLSSLOPT_NATIVE_CA;
+        }
 
         if ($post) {
             $opts[CURLOPT_POST] = true;
