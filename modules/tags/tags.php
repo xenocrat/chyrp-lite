@@ -263,7 +263,7 @@
             if (isset($_POST['search']))
                 redirect(
                     "manage_tags/search/".
-                    str_ireplace(array("%2F", "%5C"), "", urlencode($_POST['search'])).
+                    str_ireplace(array("%2F", "%5C"), "%5F", urlencode($_POST['search'])).
                     "/"
                 );
 
@@ -315,7 +315,7 @@
             if (isset($_POST['query']))
                 redirect(
                     "posts_tagged/query/".
-                    str_ireplace(array("%2F", "%5C"), "", urlencode($_POST['query'])).
+                    str_ireplace(array("%2F", "%5C"), "%5F", urlencode($_POST['query'])).
                     "/"
                 );
 
@@ -323,7 +323,7 @@
             if (isset($_GET['clean']) and isset($_GET['query']))
                 redirect(
                     "posts_tagged/clean/".
-                    str_ireplace(array("%2F", "%5C"), "", urlencode($_GET['clean'])).
+                    str_ireplace(array("%2F", "%5C"), "%5F", urlencode($_GET['clean'])).
                     "/"
                 );
 
