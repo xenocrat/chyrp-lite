@@ -325,7 +325,7 @@ Called from:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 1319
+	includes/controller/Main.php on line 1326
 
 Arguments:
 	$post
@@ -1093,7 +1093,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 1418
+	includes/controller/Main.php on line 1425
 
 Target:
 	$this->context

@@ -90,6 +90,7 @@ msgstr ""
 #: includes/controller/Admin.php:3355
 #: includes/controller/Ajax.php:36
 #: includes/controller/Ajax.php:253
+#: includes/controller/Main.php:1222
 #: includes/download.php:14
 #: includes/error.php:178
 #: includes/helpers.php:2048
@@ -1190,6 +1191,11 @@ msgstr ""
 msgid "Reset password"
 msgstr ""
 
+#: includes/controller/Main.php:1223
+#: includes/helpers.php:2049
+msgid "Webmention support is disabled for this site."
+msgstr ""
+
 #: includes/error.php:179
 msgid "An unspecified error has occurred."
 msgstr ""
@@ -1221,10 +1227,6 @@ msgstr ""
 
 #: includes/helpers.php:160
 msgid "The requested resource was not found."
-msgstr ""
-
-#: includes/helpers.php:2049
-msgid "Webmention support is disabled for this site."
 msgstr ""
 
 #: includes/helpers.php:2056

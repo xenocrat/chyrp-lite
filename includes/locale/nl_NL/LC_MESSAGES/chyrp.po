@@ -82,25 +82,25 @@ msgstr "Route gestart met een ongeldige controller."
 #: includes/controller/Admin.php:3037 includes/controller/Admin.php:3044
 #: includes/controller/Admin.php:3051 includes/controller/Admin.php:3058
 #: includes/controller/Admin.php:3355 includes/controller/Ajax.php:36
-#: includes/controller/Ajax.php:253 includes/download.php:14
-#: includes/error.php:178 includes/helpers.php:2048 includes/helpers.php:2055
-#: includes/helpers.php:2062 includes/helpers.php:2077
-#: includes/helpers.php:2086 includes/helpers.php:2100
-#: includes/helpers.php:2107 includes/helpers.php:2492
-#: includes/helpers.php:2505 includes/helpers.php:2511
-#: includes/helpers.php:2517 includes/helpers.php:2554
-#: includes/helpers.php:2560 includes/helpers.php:2566
-#: includes/helpers.php:2714 includes/helpers.php:2720
-#: includes/helpers.php:2726 includes/helpers.php:2732
-#: includes/helpers.php:2737 includes/helpers.php:2742
-#: includes/helpers.php:2747 includes/helpers.php:2754
-#: includes/lib/ThumbnailFile.php:290 includes/lib/ThumbnailFile.php:321
-#: includes/lib/ThumbnailFile.php:381 includes/thumbnail.php:15
-#: install.php:1013 upgrade.php:214 upgrade.php:230 upgrade.php:246
-#: upgrade.php:262 upgrade.php:278 upgrade.php:298 upgrade.php:342
-#: upgrade.php:358 upgrade.php:378 upgrade.php:394 upgrade.php:410
-#: upgrade.php:426 upgrade.php:446 upgrade.php:462 upgrade.php:591
-#: upgrade.php:607
+#: includes/controller/Ajax.php:253 includes/controller/Main.php:1222
+#: includes/download.php:14 includes/error.php:178 includes/helpers.php:2048
+#: includes/helpers.php:2055 includes/helpers.php:2062
+#: includes/helpers.php:2077 includes/helpers.php:2086
+#: includes/helpers.php:2100 includes/helpers.php:2107
+#: includes/helpers.php:2492 includes/helpers.php:2505
+#: includes/helpers.php:2511 includes/helpers.php:2517
+#: includes/helpers.php:2554 includes/helpers.php:2560
+#: includes/helpers.php:2566 includes/helpers.php:2714
+#: includes/helpers.php:2720 includes/helpers.php:2726
+#: includes/helpers.php:2732 includes/helpers.php:2737
+#: includes/helpers.php:2742 includes/helpers.php:2747
+#: includes/helpers.php:2754 includes/lib/ThumbnailFile.php:290
+#: includes/lib/ThumbnailFile.php:321 includes/lib/ThumbnailFile.php:381
+#: includes/thumbnail.php:15 install.php:1013 upgrade.php:214 upgrade.php:230
+#: upgrade.php:246 upgrade.php:262 upgrade.php:278 upgrade.php:298
+#: upgrade.php:342 upgrade.php:358 upgrade.php:378 upgrade.php:394
+#: upgrade.php:410 upgrade.php:426 upgrade.php:446 upgrade.php:462
+#: upgrade.php:591 upgrade.php:607
 msgid "Error"
 msgstr "Fout"
 
@@ -983,6 +983,10 @@ msgstr "De linkgeldigheid is verlopen. Probeer opnieuw."
 msgid "Reset password"
 msgstr "Wijzig wachtwoord"
 
+#: includes/controller/Main.php:1223 includes/helpers.php:2049
+msgid "Webmention support is disabled for this site."
+msgstr "Webmention ondersteuning is uitgeschakeld voor deze website."
+
 #: includes/error.php:179
 msgid "An unspecified error has occurred."
 msgstr "Er is een onbekende fout opgetreden."
@@ -1015,10 +1019,6 @@ msgstr "Je hebt geen toestemming om deze bron te benaderen."
 #: includes/helpers.php:160
 msgid "The requested resource was not found."
 msgstr "De opgevraagde bron is niet gevonden."
-
-#: includes/helpers.php:2049
-msgid "Webmention support is disabled for this site."
-msgstr "Webmention ondersteuning is uitgeschakeld voor deze website."
 
 #: includes/helpers.php:2056
 msgid "The URL for your page is not valid."
