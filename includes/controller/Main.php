@@ -1217,6 +1217,13 @@
          * Webmention receiver endpoint.
          */
         public function main_webmention(): void {
+            if (!Config::current()->send_pingbacks)
+                error(
+                    __("Error"),
+                    __("Webmention support is disabled for this site."),
+                    code:503
+                );
+
             webmention_receive(
                 fallback($_POST['source']),
                 fallback($_POST['target'])
