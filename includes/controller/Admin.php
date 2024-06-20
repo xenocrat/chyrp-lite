@@ -63,7 +63,9 @@
                     "strict_variables" => DEBUG,
                     "charset" => "UTF-8",
                     "cache" => CACHES_DIR.DIR."twig",
-                    "autoescape" => false)
+                    "autoescape" => false,
+                    "use_yield" => true
+                )
             );
 
             $this->twig->addExtension(
@@ -483,7 +485,11 @@
             if (isset($_POST['query']))
                 redirect(
                     "manage_posts/query/".
-                    str_ireplace(array("%2F", "%5C"), "%5F", urlencode($_POST['query'])).
+                    str_ireplace(
+                        array("%2F", "%5C"),
+                        "%5F",
+                        urlencode($_POST['query'])
+                    ).
                     "/"
                 );
 
@@ -917,7 +923,11 @@
             if (isset($_POST['query']))
                 redirect(
                     "manage_pages/query/".
-                    str_ireplace(array("%2F", "%5C"), "%5F", urlencode($_POST['query'])).
+                    str_ireplace(
+                        array("%2F", "%5C"),
+                        "%5F",
+                        urlencode($_POST['query'])
+                    ).
                     "/"
                 );
 
@@ -1405,7 +1415,11 @@
             if (isset($_POST['query']))
                 redirect(
                     "manage_users/query/".
-                    str_ireplace(array("%2F", "%5C"), "%5F", urlencode($_POST['query'])).
+                    str_ireplace(
+                        array("%2F", "%5C"),
+                        "%5F",
+                        urlencode($_POST['query'])
+                    ).
                     "/"
                 );
 
@@ -1789,7 +1803,11 @@
             if (isset($_POST['search']))
                 redirect(
                     "manage_groups/search/".
-                    str_ireplace(array("%2F", "%5C"), "%5F", urlencode($_POST['search'])).
+                    str_ireplace(
+                        array("%2F", "%5C"),
+                        "%5F",
+                        urlencode($_POST['search'])
+                    ).
                     "/"
                 );
 
@@ -1931,7 +1949,11 @@
             if (isset($_POST['search']))
                 redirect(
                     "manage_uploads/search/".
-                    str_ireplace(array("%2F", "%5C"), "%5F", urlencode($_POST['search'])).
+                    str_ireplace(
+                        array("%2F", "%5C"),
+                        "%5F",
+                        urlencode($_POST['search'])
+                    ).
                     "/"
                 );
 
