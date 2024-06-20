@@ -151,62 +151,62 @@ msgstr ""
 "Sie verfügen nicht über ausreichende Berechtigungen zum Verwalten von "
 "Kategorien."
 
-#: modules/categorize/categorize.php:301 modules/categorize/categorize.php:311
+#: modules/categorize/categorize.php:305 modules/categorize/categorize.php:315
 msgid "You do not have sufficient privileges to add categories."
 msgstr ""
 "Sie verfügen nicht über ausreichende Berechtigungen um Kategorien hinfügen "
 "zu können."
 
-#: modules/categorize/categorize.php:322 modules/categorize/categorize.php:394
+#: modules/categorize/categorize.php:326 modules/categorize/categorize.php:398
 msgid "No Name Specified"
 msgstr "Kein Name specifiziert"
 
-#: modules/categorize/categorize.php:323
+#: modules/categorize/categorize.php:327
 msgid "A name is required to add a category."
 msgstr "Zum Hinzufügen einer Kategorie ist ein Name erforderlich."
 
-#: modules/categorize/categorize.php:345
+#: modules/categorize/categorize.php:349
 msgid "Category added."
 msgstr "Kategorie hinzugefügt."
 
-#: modules/categorize/categorize.php:354
+#: modules/categorize/categorize.php:358
 msgid "An ID is required to edit a category."
 msgstr "Zum Bearbeiten einer Kategorie ist eine ID erforderlich."
 
-#: modules/categorize/categorize.php:362 modules/categorize/categorize.php:404
-#: modules/categorize/categorize.php:450 modules/categorize/categorize.php:488
+#: modules/categorize/categorize.php:366 modules/categorize/categorize.php:408
+#: modules/categorize/categorize.php:454 modules/categorize/categorize.php:492
 msgid "Category not found."
 msgstr "Kategorie nicht gefunden."
 
-#: modules/categorize/categorize.php:369 modules/categorize/categorize.php:410
+#: modules/categorize/categorize.php:373 modules/categorize/categorize.php:414
 msgid "You do not have sufficient privileges to edit this category."
 msgstr ""
 "Sie verfügen nicht über ausreichende Berechtigungen zum Verwalten von "
 "Kategorien."
 
-#: modules/categorize/categorize.php:388
+#: modules/categorize/categorize.php:392
 msgid "An ID is required to update a category."
 msgstr "Zum Bearbeiten einer Kategorie ist eine ID erforderlich."
 
-#: modules/categorize/categorize.php:395
+#: modules/categorize/categorize.php:399
 msgid "A name is required to update a category."
 msgstr "Zum Hinzufügen einer Kategorie ist ein Name erforderlich."
 
-#: modules/categorize/categorize.php:433
+#: modules/categorize/categorize.php:437
 msgid "Category updated."
 msgstr "Kategorie aktualisiert."
 
-#: modules/categorize/categorize.php:442 modules/categorize/categorize.php:476
+#: modules/categorize/categorize.php:446 modules/categorize/categorize.php:480
 msgid "An ID is required to delete a category."
 msgstr "Zum Bearbeiten einer Kategorie ist eine ID erforderlich."
 
-#: modules/categorize/categorize.php:457 modules/categorize/categorize.php:494
+#: modules/categorize/categorize.php:461 modules/categorize/categorize.php:498
 msgid "You do not have sufficient privileges to delete this category."
 msgstr ""
 "Sie verfügen nicht über ausreichende Berechtigungen zum Verwalten von "
 "Kategorien."
 
-#: modules/categorize/categorize.php:499
+#: modules/categorize/categorize.php:503
 msgid "Category deleted."
 msgstr "Kategorie gelöscht."
 

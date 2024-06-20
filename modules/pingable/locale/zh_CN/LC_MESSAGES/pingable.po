@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/pingable/admin/pages/delete_pingback.twig:3
@@ -46,7 +46,7 @@ msgid "Manage Webmentions"
 msgstr "管理Webmention"
 
 #: modules/pingable/admin/pages/manage_pingbacks.twig:18
-#: modules/pingable/pingable.php:241 modules/pingable/pingable.php:265
+#: modules/pingable/pingable.php:245 modules/pingable/pingable.php:269
 msgid "Webmentions"
 msgstr "引用"
 

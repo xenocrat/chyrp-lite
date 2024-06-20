@@ -248,13 +248,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 1995
+	includes/controller/Admin.php on line 2017
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2438
+	includes/controller/Admin.php on line 2460
 
 Arguments:
 	$group
@@ -263,7 +263,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2476
+	includes/controller/Admin.php on line 2498
 
 Arguments:
 	$user
@@ -272,7 +272,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2529
+	includes/controller/Admin.php on line 2551
 
 Arguments:
 	$entry
@@ -282,7 +282,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2578
+	includes/controller/Admin.php on line 2600
 
 Arguments:
 	$entry
@@ -292,7 +292,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 2582
+	includes/controller/Admin.php on line 2604
 
 Arguments:
 	$imports
@@ -301,31 +301,31 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 2976
+	includes/controller/Admin.php on line 2998
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 2991
+	includes/controller/Admin.php on line 3013
 
 
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 644
+	includes/controller/Main.php on line 650
 
 
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 941
+	includes/controller/Main.php on line 947
 
 
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 1326
+	includes/controller/Main.php on line 1332
 
 Arguments:
 	$post
@@ -576,7 +576,7 @@ Arguments:
 comments_false_positives
 ------------------------
 Called from:
-	modules/comments/comments.php on line 669
+	modules/comments/comments.php on line 677
 
 Arguments:
 	$false_positives
@@ -585,7 +585,7 @@ Arguments:
 comments_false_negatives
 ------------------------
 Called from:
-	modules/comments/comments.php on line 672
+	modules/comments/comments.php on line 680
 
 Arguments:
 	$false_negatives
@@ -594,7 +594,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 1122
+	modules/comments/comments.php on line 1130
 
 Arguments:
 	$comment
@@ -604,7 +604,7 @@ Arguments:
 correspond_site_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1419
+	modules/comments/comments.php on line 1427
 
 Arguments:
 	$comment
@@ -613,7 +613,7 @@ Arguments:
 correspond_user_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1444
+	modules/comments/comments.php on line 1452
 
 Arguments:
 	$comment
@@ -623,7 +623,7 @@ Arguments:
 correspond_peer_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1474
+	modules/comments/comments.php on line 1482
 
 Arguments:
 	$comment
@@ -916,7 +916,7 @@ Target:
 admin_determine_action
 ----------------------
 Called from:
-	includes/controller/Admin.php on line 164
+	includes/controller/Admin.php on line 166
 
 Target:
 	$route->action
@@ -925,7 +925,7 @@ Target:
 write_post_options
 ------------------
 Called from:
-	includes/controller/Admin.php on line 225
+	includes/controller/Admin.php on line 227
 
 Target:
 	$options
@@ -938,8 +938,8 @@ Arguments:
 post_options
 ------------
 Called from:
-	includes/controller/Admin.php on line 226
-	includes/controller/Admin.php on line 319
+	includes/controller/Admin.php on line 228
+	includes/controller/Admin.php on line 321
 
 Target:
 	$options
@@ -952,7 +952,7 @@ Arguments:
 edit_post_options
 -----------------
 Called from:
-	includes/controller/Admin.php on line 318
+	includes/controller/Admin.php on line 320
 
 Target:
 	$options
@@ -965,7 +965,7 @@ Arguments:
 posts_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 2111
+	includes/controller/Admin.php on line 2133
 
 Target:
 	$posts_atom
@@ -977,7 +977,7 @@ Arguments:
 pages_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 2213
+	includes/controller/Admin.php on line 2235
 
 Target:
 	$pages_atom
@@ -989,7 +989,7 @@ Arguments:
 export
 ------
 Called from:
-	includes/controller/Admin.php on line 2299
+	includes/controller/Admin.php on line 2321
 
 Target:
 	$exports
@@ -998,7 +998,7 @@ Target:
 before_import
 -------------
 Called from:
-	includes/controller/Admin.php on line 2410
+	includes/controller/Admin.php on line 2432
 
 Target:
 	$imports
@@ -1007,7 +1007,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 3424
+	includes/controller/Admin.php on line 3446
 
 Target:
 	$write
@@ -1016,7 +1016,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3487
+	includes/controller/Admin.php on line 3509
 
 Target:
 	$manage
@@ -1025,7 +1025,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 3517
+	includes/controller/Admin.php on line 3539
 
 Target:
 	$settings
@@ -1034,7 +1034,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3540
+	includes/controller/Admin.php on line 3562
 
 Target:
 	$extend
@@ -1043,7 +1043,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 3628
+	includes/controller/Admin.php on line 3650
 
 Target:
 	$this->context
@@ -1093,7 +1093,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 1425
+	includes/controller/Main.php on line 1431
 
 Target:
 	$this->context

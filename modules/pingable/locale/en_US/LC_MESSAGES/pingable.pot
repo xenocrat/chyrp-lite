@@ -33,8 +33,8 @@ msgid "Manage Webmentions"
 msgstr ""
 
 #: modules/pingable/admin/pages/manage_pingbacks.twig:18
-#: modules/pingable/pingable.php:241
-#: modules/pingable/pingable.php:265
+#: modules/pingable/pingable.php:245
+#: modules/pingable/pingable.php:269
 msgid "Webmentions"
 msgstr ""
 
