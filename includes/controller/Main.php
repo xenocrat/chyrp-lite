@@ -58,7 +58,9 @@
                     "strict_variables" => DEBUG,
                     "charset" => "UTF-8",
                     "cache" => CACHES_DIR.DIR."twig",
-                    "autoescape" => false)
+                    "autoescape" => false,
+                    "use_yield" => true
+                )
             );
 
             $this->twig->addExtension(
@@ -479,7 +481,11 @@
             if (isset($_POST['query']))
                 redirect(
                     "search/".
-                    str_ireplace(array("%2F", "%5C"), "%5F", urlencode($_POST['query'])).
+                    str_ireplace(
+                        array("%2F", "%5C"),
+                        "%5F",
+                        urlencode($_POST['query'])
+                    ).
                     "/"
                 );
 
