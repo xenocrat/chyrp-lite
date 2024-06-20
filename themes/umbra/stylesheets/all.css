@@ -632,6 +632,10 @@ section a:active,
 p a:active {
     color: lightgreen;
 }
+section a:focus-visible,
+p a:focus-visible {
+    text-decoration-style: double;
+}
 div.tag_cloud a.tag {
     display: inline-block;
     position: relative;

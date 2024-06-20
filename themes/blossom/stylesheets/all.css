@@ -722,6 +722,10 @@ section a:active,
 p a:active {
     color: #d94c7b;
 }
+section a:focus-visible,
+p a:focus-visible {
+    text-decoration-style: double;
+}
 div.tags a,
 div.tag_cloud a {
     display: inline-block;
