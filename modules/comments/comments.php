@@ -436,7 +436,11 @@
             if (isset($_POST['query']))
                 redirect(
                     "manage_comments/query/".
-                    str_ireplace(array("%2F", "%5C"), "%5F", urlencode($_POST['query'])).
+                    str_ireplace(
+                        array("%2F", "%5C"),
+                        "%5F",
+                        urlencode($_POST['query'])
+                    ).
                     "/"
                 );
 
@@ -484,7 +488,11 @@
             if (isset($_POST['query']))
                 redirect(
                     "manage_spam/query/".
-                    str_ireplace(array("%2F", "%5C"), "%5F", urlencode($_POST['query'])).
+                    str_ireplace(
+                        array("%2F", "%5C"),
+                        "%5F",
+                        urlencode($_POST['query'])
+                    ).
                     "/"
                 );
 
