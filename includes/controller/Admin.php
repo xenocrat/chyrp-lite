@@ -37,8 +37,11 @@
          * Loads the Twig parser and sets up the l10n domain.
          */
         private function __construct() {
-            $chain = array(new \Twig\Loader\FilesystemLoader(MAIN_DIR.DIR."admin"));
             $config = Config::current();
+
+            $chain = array(
+                new \Twig\Loader\FilesystemLoader(MAIN_DIR.DIR."admin")
+            );
 
             foreach ($config->enabled_modules as $module) {
                 if (is_dir(MODULES_DIR.DIR.$module.DIR."admin"))
