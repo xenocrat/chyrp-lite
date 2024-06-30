@@ -47,9 +47,9 @@
          * Loads the Twig parser and sets up the l10n domain.
          */
         private function __construct() {
-            $loader = new \Twig\Loader\FilesystemLoader(THEME_DIR);
             $config = Config::current();
             $theme = Theme::current();
+            $loader = new \Twig\Loader\FilesystemLoader(THEME_DIR);
 
             $this->twig = new \Twig\Environment(
                 $loader,
