@@ -167,8 +167,8 @@ msgstr "Categorie toegevoegd."
 msgid "An ID is required to edit a category."
 msgstr "Een ID is nodig om een categorie te wijzigen."
 
-#: modules/categorize/categorize.php:366 modules/categorize/categorize.php:408
-#: modules/categorize/categorize.php:454 modules/categorize/categorize.php:492
+#: modules/categorize/categorize.php:367 modules/categorize/categorize.php:408
+#: modules/categorize/categorize.php:455 modules/categorize/categorize.php:492
 msgid "Category not found."
 msgstr "Categorie niet gevonden."
 

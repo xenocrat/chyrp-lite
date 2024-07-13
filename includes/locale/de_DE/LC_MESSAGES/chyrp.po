@@ -177,15 +177,15 @@ msgstr "Zu GitHub gehen!"
 msgid "Unable to check for new Chyrp Lite versions."
 msgstr "Prüfen auf neue Chyrp Lite Versionen fehlgeschlagen."
 
-#: includes/common.php:340 includes/common.php:348
+#: includes/common.php:344 includes/common.php:352
 msgid "Service Unavailable"
 msgstr "Dienst nicht verfügbar"
 
-#: includes/common.php:341
+#: includes/common.php:345
 msgid "This resource is temporarily unable to serve your request."
 msgstr "Diese Ressource kann Deine Anfrage momentan nicht bearbeiten."
 
-#: includes/common.php:349
+#: includes/common.php:353
 msgid "This resource cannot respond because it is not configured."
 msgstr ""
 "Diese Ressource kann nicht antworten, weil sie nicht konfiguriert wurde."
@@ -205,16 +205,20 @@ msgstr ""
 "Du musst mindestens eine Feather aktivieren um einen Post zu schreiben."
 
 #: includes/controller/Admin.php:223 includes/controller/Admin.php:265
-#: includes/controller/Admin.php:373 includes/controller/Admin.php:458
-#: includes/controller/Admin.php:777 includes/controller/Admin.php:886
-#: includes/controller/Admin.php:1073 includes/controller/Admin.php:1189
-#: includes/controller/Admin.php:1248 includes/controller/Admin.php:1346
-#: includes/controller/Admin.php:1605 includes/controller/Admin.php:1642
-#: includes/controller/Admin.php:1697 includes/controller/Admin.php:2841
-#: includes/controller/Admin.php:2919 includes/controller/Ajax.php:76
-#: includes/controller/Ajax.php:118 includes/download.php:29
-#: includes/download.php:37 includes/helpers.php:159 includes/thumbnail.php:31
-#: includes/thumbnail.php:41
+#: includes/controller/Admin.php:309 includes/controller/Admin.php:373
+#: includes/controller/Admin.php:417 includes/controller/Admin.php:458
+#: includes/controller/Admin.php:706 includes/controller/Admin.php:777
+#: includes/controller/Admin.php:845 includes/controller/Admin.php:886
+#: includes/controller/Admin.php:1073 includes/controller/Admin.php:1122
+#: includes/controller/Admin.php:1189 includes/controller/Admin.php:1248
+#: includes/controller/Admin.php:1297 includes/controller/Admin.php:1346
+#: includes/controller/Admin.php:1541 includes/controller/Admin.php:1605
+#: includes/controller/Admin.php:1642 includes/controller/Admin.php:1697
+#: includes/controller/Admin.php:1862 includes/controller/Admin.php:1924
+#: includes/controller/Admin.php:2841 includes/controller/Admin.php:2919
+#: includes/controller/Ajax.php:76 includes/controller/Ajax.php:118
+#: includes/download.php:29 includes/download.php:37 includes/helpers.php:159
+#: includes/thumbnail.php:31 includes/thumbnail.php:41
 msgid "Not Found"
 msgstr "Nicht gefunden"
 
@@ -268,8 +272,8 @@ msgstr "Keine ID angegeben"
 msgid "An ID is required to edit a post."
 msgstr "Zum Bearbeiten eines Posts wird eine ID benötigt."
 
-#: includes/controller/Admin.php:309 includes/controller/Admin.php:374
-#: includes/controller/Admin.php:417 includes/controller/Admin.php:459
+#: includes/controller/Admin.php:310 includes/controller/Admin.php:374
+#: includes/controller/Admin.php:418 includes/controller/Admin.php:459
 #: includes/controller/Ajax.php:77
 msgid "Post not found."
 msgstr "Post nicht gefunden."
@@ -334,8 +338,8 @@ msgstr "Du verfügst nicht über die Berechtigung diese Seite zu bearbeiten."
 msgid "An ID is required to edit a page."
 msgstr "Zum Bearbeiten wird eine ID benötigt."
 
-#: includes/controller/Admin.php:706 includes/controller/Admin.php:778
-#: includes/controller/Admin.php:845 includes/controller/Admin.php:887
+#: includes/controller/Admin.php:707 includes/controller/Admin.php:778
+#: includes/controller/Admin.php:846 includes/controller/Admin.php:887
 #: includes/controller/Ajax.php:119
 msgid "Page not found."
 msgstr "Seite nicht gefunden."
@@ -412,7 +416,7 @@ msgid "Invalid website URL."
 msgstr "Ungültige Website URL."
 
 #: includes/controller/Admin.php:1074 includes/controller/Admin.php:1249
-#: includes/controller/Admin.php:1541 includes/controller/Admin.php:1606
+#: includes/controller/Admin.php:1542 includes/controller/Admin.php:1606
 #: includes/controller/Admin.php:1643 includes/controller/Admin.php:1698
 msgid "Group not found."
 msgstr "Gruppe nicht gefunden."
@@ -429,8 +433,8 @@ msgstr "Du verfügst nicht über die Berechtigung Benutzer zu editieren."
 msgid "An ID is required to edit a user."
 msgstr "Zum Bearbeiten eines Benutzers wird eine ID benötigt."
 
-#: includes/controller/Admin.php:1122 includes/controller/Admin.php:1190
-#: includes/controller/Admin.php:1297 includes/controller/Admin.php:1347
+#: includes/controller/Admin.php:1123 includes/controller/Admin.php:1190
+#: includes/controller/Admin.php:1298 includes/controller/Admin.php:1347
 #: includes/controller/Main.php:277
 msgid "User not found."
 msgstr "Benutzer nicht gefunden."
@@ -551,7 +555,7 @@ msgid "You do not have sufficient privileges to delete uploads."
 msgstr ""
 "Sie verfügen nicht über ausreichende Berechtigungen, um Uploads zu löschen."
 
-#: includes/controller/Admin.php:1862 includes/controller/Admin.php:1924
+#: includes/controller/Admin.php:1863 includes/controller/Admin.php:1925
 #: includes/download.php:30 includes/download.php:38 includes/thumbnail.php:32
 #: includes/thumbnail.php:42
 msgid "File not found."

@@ -276,8 +276,8 @@ msgstr "您的评论正在等待审核。"
 msgid "An ID is required to update a comment."
 msgstr "更新评论必须要一个ID。"
 
-#: modules/comments/comments.php:228 modules/comments/comments.php:344
-#: modules/comments/comments.php:372 modules/comments/comments.php:410
+#: modules/comments/comments.php:228 modules/comments/comments.php:345
+#: modules/comments/comments.php:373 modules/comments/comments.php:410
 #: modules/comments/comments.php:895 modules/comments/comments.php:927
 #: modules/comments/comments.php:962
 msgid "Comment not found."

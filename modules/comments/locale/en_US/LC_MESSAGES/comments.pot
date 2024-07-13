@@ -271,8 +271,8 @@ msgid "An ID is required to update a comment."
 msgstr ""
 
 #: modules/comments/comments.php:228
-#: modules/comments/comments.php:344
-#: modules/comments/comments.php:372
+#: modules/comments/comments.php:345
+#: modules/comments/comments.php:373
 #: modules/comments/comments.php:410
 #: modules/comments/comments.php:895
 #: modules/comments/comments.php:927

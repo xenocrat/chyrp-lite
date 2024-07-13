@@ -145,9 +145,9 @@ msgstr ""
 msgid "An ID is required to edit a category."
 msgstr ""
 
-#: modules/categorize/categorize.php:366
+#: modules/categorize/categorize.php:367
 #: modules/categorize/categorize.php:408
-#: modules/categorize/categorize.php:454
+#: modules/categorize/categorize.php:455
 #: modules/categorize/categorize.php:492
 msgid "Category not found."
 msgstr ""

@@ -96,8 +96,8 @@ msgstr "Il tuo URL è troppo lungo per essere memorizzato nel nostro database."
 msgid "An ID is required to edit a webmention."
 msgstr "È necessario un ID per modificare un Webmention."
 
-#: modules/pingable/pingable.php:72 modules/pingable/pingable.php:114
-#: modules/pingable/pingable.php:143 modules/pingable/pingable.php:181
+#: modules/pingable/pingable.php:73 modules/pingable/pingable.php:114
+#: modules/pingable/pingable.php:144 modules/pingable/pingable.php:181
 msgid "Webmention not found."
 msgstr "Webmention non trovato."
 

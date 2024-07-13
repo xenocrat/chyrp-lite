@@ -82,9 +82,9 @@ msgstr ""
 msgid "An ID is required to edit a webmention."
 msgstr ""
 
-#: modules/pingable/pingable.php:72
+#: modules/pingable/pingable.php:73
 #: modules/pingable/pingable.php:114
-#: modules/pingable/pingable.php:143
+#: modules/pingable/pingable.php:144
 #: modules/pingable/pingable.php:181
 msgid "Webmention not found."
 msgstr ""

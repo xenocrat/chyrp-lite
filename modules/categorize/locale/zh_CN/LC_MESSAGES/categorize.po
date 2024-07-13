@@ -165,8 +165,8 @@ msgstr "类别已添加。"
 msgid "An ID is required to edit a category."
 msgstr "编辑类别需要ID。"
 
-#: modules/categorize/categorize.php:366 modules/categorize/categorize.php:408
-#: modules/categorize/categorize.php:454 modules/categorize/categorize.php:492
+#: modules/categorize/categorize.php:367 modules/categorize/categorize.php:408
+#: modules/categorize/categorize.php:455 modules/categorize/categorize.php:492
 msgid "Category not found."
 msgstr "类别未找到。"
 

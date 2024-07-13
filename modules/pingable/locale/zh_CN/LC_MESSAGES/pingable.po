@@ -94,8 +94,8 @@ msgstr "您的网址太长，无法存储在我们的数据库中。"
 msgid "An ID is required to edit a webmention."
 msgstr "编辑webmention需要一个ID。"
 
-#: modules/pingable/pingable.php:72 modules/pingable/pingable.php:114
-#: modules/pingable/pingable.php:143 modules/pingable/pingable.php:181
+#: modules/pingable/pingable.php:73 modules/pingable/pingable.php:114
+#: modules/pingable/pingable.php:144 modules/pingable/pingable.php:181
 msgid "Webmention not found."
 msgstr "Webmention未找到。"
 

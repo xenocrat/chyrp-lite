@@ -256,16 +256,16 @@ msgstr ""
 msgid "Unable to check for new Chyrp Lite versions."
 msgstr ""
 
-#: includes/common.php:340
-#: includes/common.php:348
+#: includes/common.php:344
+#: includes/common.php:352
 msgid "Service Unavailable"
 msgstr ""
 
-#: includes/common.php:341
+#: includes/common.php:345
 msgid "This resource is temporarily unable to serve your request."
 msgstr ""
 
-#: includes/common.php:349
+#: includes/common.php:353
 msgid "This resource cannot respond because it is not configured."
 msgstr ""
 
@@ -285,17 +285,26 @@ msgstr ""
 
 #: includes/controller/Admin.php:223
 #: includes/controller/Admin.php:265
+#: includes/controller/Admin.php:309
 #: includes/controller/Admin.php:373
+#: includes/controller/Admin.php:417
 #: includes/controller/Admin.php:458
+#: includes/controller/Admin.php:706
 #: includes/controller/Admin.php:777
+#: includes/controller/Admin.php:845
 #: includes/controller/Admin.php:886
 #: includes/controller/Admin.php:1073
+#: includes/controller/Admin.php:1122
 #: includes/controller/Admin.php:1189
 #: includes/controller/Admin.php:1248
+#: includes/controller/Admin.php:1297
 #: includes/controller/Admin.php:1346
+#: includes/controller/Admin.php:1541
 #: includes/controller/Admin.php:1605
 #: includes/controller/Admin.php:1642
 #: includes/controller/Admin.php:1697
+#: includes/controller/Admin.php:1862
+#: includes/controller/Admin.php:1924
 #: includes/controller/Admin.php:2841
 #: includes/controller/Admin.php:2919
 #: includes/controller/Ajax.php:76
@@ -387,9 +396,9 @@ msgstr ""
 msgid "An ID is required to edit a post."
 msgstr ""
 
-#: includes/controller/Admin.php:309
+#: includes/controller/Admin.php:310
 #: includes/controller/Admin.php:374
-#: includes/controller/Admin.php:417
+#: includes/controller/Admin.php:418
 #: includes/controller/Admin.php:459
 #: includes/controller/Ajax.php:77
 msgid "Post not found."
@@ -465,9 +474,9 @@ msgstr ""
 msgid "An ID is required to edit a page."
 msgstr ""
 
-#: includes/controller/Admin.php:706
+#: includes/controller/Admin.php:707
 #: includes/controller/Admin.php:778
-#: includes/controller/Admin.php:845
+#: includes/controller/Admin.php:846
 #: includes/controller/Admin.php:887
 #: includes/controller/Ajax.php:119
 msgid "Page not found."
@@ -567,7 +576,7 @@ msgstr ""
 
 #: includes/controller/Admin.php:1074
 #: includes/controller/Admin.php:1249
-#: includes/controller/Admin.php:1541
+#: includes/controller/Admin.php:1542
 #: includes/controller/Admin.php:1606
 #: includes/controller/Admin.php:1643
 #: includes/controller/Admin.php:1698
@@ -588,9 +597,9 @@ msgstr ""
 msgid "An ID is required to edit a user."
 msgstr ""
 
-#: includes/controller/Admin.php:1122
+#: includes/controller/Admin.php:1123
 #: includes/controller/Admin.php:1190
-#: includes/controller/Admin.php:1297
+#: includes/controller/Admin.php:1298
 #: includes/controller/Admin.php:1347
 #: includes/controller/Main.php:277
 msgid "User not found."
@@ -726,8 +735,8 @@ msgstr ""
 msgid "You do not have sufficient privileges to delete uploads."
 msgstr ""
 
-#: includes/controller/Admin.php:1862
-#: includes/controller/Admin.php:1924
+#: includes/controller/Admin.php:1863
+#: includes/controller/Admin.php:1925
 #: includes/download.php:30
 #: includes/download.php:38
 #: includes/thumbnail.php:32
