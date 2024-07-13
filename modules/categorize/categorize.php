@@ -332,7 +332,7 @@
                 $_POST['name'] :
                 $_POST['clean'] ;
 
-            $clean = sanitize($clean, true, true, 128);
+            $clean = sanitize($clean, true, SLUG_STRICT, 128);
 
             if (!preg_match("/[^\-0-9]+/", $clean))
                 $clean = md5($clean);
@@ -362,9 +362,9 @@
             $category = new Category($_GET['id']);
 
             if ($category->no_results)
-                Flash::warning(
-                    __("Category not found.", "categorize"),
-                    "manage_category"
+                show_404(
+                    __("Not Found"),
+                    __("Category not found.", "categorize")
                 );
 
             if (!$category->editable())
@@ -419,7 +419,7 @@
                 $_POST['clean'] ;
 
             if ($clean != $category->clean) {
-                $clean = sanitize($clean, true, true, 128);
+                $clean = sanitize($clean, true, SLUG_STRICT, 128);
 
                 if (!preg_match("/[^\-0-9]+/", $clean))
                     $clean = md5($clean);
@@ -450,9 +450,9 @@
             $category = new Category($_GET['id']);
 
             if ($category->no_results)
-                Flash::warning(
-                    __("Category not found.", "categorize"),
-                    "manage_category"
+                show_404(
+                    __("Not Found"),
+                    __("Category not found.", "categorize")
                 );
 
             if (!$category->deletable())
