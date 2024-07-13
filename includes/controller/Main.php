@@ -273,9 +273,9 @@
             $user = new User($_GET['id']);
 
             if ($user->no_results)
-                Flash::warning(
-                    __("User not found."),
-                    "/"
+                show_404(
+                    __("Not Found"),
+                    __("User not found.")
                 );
 
             $author = (object) array(
