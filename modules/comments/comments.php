@@ -1039,17 +1039,17 @@
             fallback($_GET['token']);
 
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
-                Flash::warning(
-                    __("Post not found."),
-                    "/"
+                show_404(
+                    __("Not Found"),
+                    __("Post not found.")
                 );
 
             $post = new Post($_GET['id']);
 
             if ($post->no_results)
-                Flash::warning(
-                    __("Post not found."),
-                    "/"
+                show_404(
+                    __("Not Found"),
+                    __("Post not found.")
                 );
 
             if (!is_email($_GET['email']))
