@@ -156,33 +156,21 @@
         }
 
         public function main_category($main): bool {
-            if (!isset($_GET['name'])) {
-                $reason = __("You did not specify a category.", "categorize");
-
-                $main->display(
-                    array("pages".DIR."category","pages".DIR."index"),
-                    array("reason" => $reason),
-                    __("Invalid Category", "categorize")
+            if (!isset($_GET['name']))
+                Flash::warning(
+                    __("You did not specify a category.", "categorize"),
+                    "/"
                 );
-
-                return true;
-            }
 
             $category = new Category(
                 array("clean" => $_GET['name'])
             );
 
-            if ($category->no_results) {
-                $reason = __("The category you specified was not found.", "categorize");
-
-                $main->display(
-                    array("pages".DIR."category","pages".DIR."index"),
-                    array("reason" => $reason),
-                    __("Invalid Category", "categorize")
+            if ($category->no_results)
+                show_404(
+                    __("Not Found"),
+                    __("The category you specified was not found.", "categorize")
                 );
-
-                return true;
-            }
 
             $results = SQL::current()->select(
                 tables:"post_attributes",
@@ -198,17 +186,11 @@
             foreach ($results as $result)
                 $ids[] = $result["post_id"];
 
-            if (empty($ids)) {
-                $reason = __("There are no posts in the category you specified.", "categorize");
-
-                $main->display(
-                    array("pages".DIR."category", "pages".DIR."index"),
-                    array("reason" => $reason),
-                    __("Invalid Category", "categorize")
+            if (empty($ids))
+                show_404(
+                    __("Not Found"),
+                    __("There are no posts in the category you specified.", "categorize")
                 );
-
-                return true;
-            }
 
             $posts = new Paginator(
                 Post::find(
