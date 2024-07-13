@@ -1,13 +1,9 @@
 {% extends "layouts" ~ DIR ~ "default.twig" %}
 
 {% block content %}
-{% if reason is not defined %}{# Some modules define reason in error states #}
 {% for post in posts.paginated %}
 {% include(["feathers" ~ DIR ~ post.feather ~ ".twig", "feathers" ~ DIR ~ "missing.twig"]) %}
 {% else %}
 <div role="status" class="filter">{{ "Nothing here yet!" | translate }}</div>
 {% endfor %}
-{% else %}
-<div role="status" class="filter">{{ reason }}</div>
-{% endif %}
 {% endblock %}

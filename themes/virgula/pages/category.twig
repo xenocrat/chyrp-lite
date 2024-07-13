@@ -1,7 +1,6 @@
 {% extends "layouts" ~ DIR ~ "default.twig" %}
 
 {% block content %}
-{% if posts.paginated is defined and posts.paginated is not empty %}
 <div class="filter">{{ "Posts in category &#8220;%s&#8221;" | translate | format(category | fix) }}</div>
 {% for post in posts.paginated %}
 {% include(["feathers" ~ DIR ~ post.feather ~ ".twig", "feathers" ~ DIR ~ "missing.twig"]) %}
@@ -12,8 +11,5 @@
 {{- posts.prev_link("Newer posts" | translate) -}}
 {{- posts.next_link("Older posts" | translate) -}}
 </nav>
-{% endif %}
-{% elseif reason is defined %}
-<div role="status">{{ reason }}</div>
 {% endif %}
 {% endblock %}

@@ -1,7 +1,6 @@
 {% extends "layouts" ~ DIR ~ "default.twig" %}
 
 {% block content %}
-{% if reason is not defined %}{# Some modules define reason in error states #}
 {% set pages = theme.pages_list() %}
 {% if posts.paginated is empty and pages is empty %}
 <div role="status">{{ "Nothing here yet!" | translate }}</div>
@@ -43,8 +42,5 @@
 <a href="{{ url('archive') }}" rel="archives">{{ "More posts&hellip;" | translate }}</a>
 </nav>
 {% endif %}
-{% endif %}
-{% else %}
-<div role="status">{{ reason }}</div>
 {% endif %}
 {% endblock %}
