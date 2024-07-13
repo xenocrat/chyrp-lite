@@ -68,9 +68,9 @@
             $pingback = new Pingback($_GET['id']);
 
             if ($pingback->no_results)
-                Flash::warning(
-                    __("Webmention not found.", "pingable"),
-                    "manage_pingbacks"
+                show_404(
+                    __("Not Found"),
+                    __("Webmention not found.", "pingable")
                 );
 
             if (!$pingback->editable())
@@ -139,9 +139,9 @@
             $pingback = new Pingback($_GET['id']);
 
             if ($pingback->no_results)
-                Flash::warning(
-                    __("Webmention not found.", "pingable"),
-                    "manage_pingbacks"
+                show_404(
+                    __("Not Found"),
+                    __("Webmention not found.", "pingable")
                 );
 
             if (!$pingback->deletable())
