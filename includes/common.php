@@ -124,6 +124,10 @@
     # Deny session storage to robots?
     define('SESSION_DENY_BOT', true);
 
+    # Constant: SLUG_STRICT
+    # Use strict sanitization for slugs?
+    define('SLUG_STRICT', true);
+
     # Constant: GET_REMOTE_UNSAFE
     # Allow get_remote() to connect to private and reserved IP addresses?
     define('GET_REMOTE_UNSAFE', false);
