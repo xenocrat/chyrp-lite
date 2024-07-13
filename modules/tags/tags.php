@@ -334,8 +334,6 @@
                 "posts"
             );
 
-            $tag = false;
-
             if (isset($_GET['clean']) and $_GET['clean'] != "") {
                 $tag = $this->tag_find_by_clean($_GET['clean']);
 
@@ -347,6 +345,8 @@
 
                 $where["post_attributes.name"] = "tags";
                 $where["post_attributes.value LIKE"] = $this->tags_clean_match($tag["clean"]);
+            } else {
+                $tag = false;
             }
 
             $visitor = Visitor::current();
