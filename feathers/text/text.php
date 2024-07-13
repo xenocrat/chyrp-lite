@@ -46,7 +46,7 @@
                     "title" => $_POST['title'],
                     "body" => $_POST['body']
                 ),
-                clean:sanitize($_POST['slug'], true, true, 128),
+                clean:sanitize($_POST['slug'], true, SLUG_STRICT, 128),
                 feather:"text",
                 pinned:!empty($_POST['pinned']),
                 status:$_POST['status'],
@@ -77,7 +77,7 @@
                 ),
                 pinned:!empty($_POST['pinned']),
                 status:$_POST['status'],
-                clean:sanitize($_POST['slug'], true, true, 128),
+                clean:sanitize($_POST['slug'], true, SLUG_STRICT, 128),
                 created_at:datetime($_POST['created_at']),
                 options:$_POST['option']
             );
