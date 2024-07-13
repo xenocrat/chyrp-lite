@@ -340,9 +340,9 @@
             );
 
             if ($comment->no_results)
-                Flash::warning(
-                    __("Comment not found.", "comments"),
-                    "manage_comments"
+                show_404(
+                    __("Not Found"),
+                    __("Comment not found.", "comments")
                 );
 
             if (!$comment->editable())
@@ -368,9 +368,9 @@
             $comment = new Comment($_GET['id']);
 
             if ($comment->no_results)
-                Flash::warning(
-                    __("Comment not found.", "comments"),
-                    "manage_comments"
+                show_404(
+                    __("Not Found"),
+                    __("Comment not found.", "comments")
                 );
 
             if (!$comment->deletable())
