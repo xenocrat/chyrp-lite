@@ -657,31 +657,19 @@
         }
 
         public function main_tag($main): bool {
-            if (!isset($_GET['name'])) {
-                $reason = __("You did not specify a tag.", "tags");
-
-                $main->display(
-                    array("pages".DIR."tag", "pages".DIR."index"),
-                    array("reason" => $reason),
-                    __("Invalid Tag", "tags")
+            if (!isset($_GET['name']))
+                Flash::warning(
+                    __("You did not specify a tag.", "tags"),
+                    "/"
                 );
-
-                return true;
-            }
 
             $tag = $this->tag_find_by_clean($_GET['name']);
 
-            if (empty($tag)) {
-                $reason = __("The tag you specified was not found.", "tags");
-
-                $main->display(
-                    array("pages".DIR."tag", "pages".DIR."index"),
-                    array("reason" => $reason),
-                    __("Invalid Tag", "tags")
+            if (empty($tag))
+                show_404(
+                    __("Not Found"),
+                    __("The tag you specified was not found.", "tags")
                 );
-
-                return true;
-            }
 
             $results = SQL::current()->select(
                 tables:"post_attributes",
@@ -697,17 +685,11 @@
             foreach ($results as $result)
                 $ids[] = $result["post_id"];
 
-            if (empty($ids)) {
-                $reason = __("There are no posts with the tag you specified.", "tags");
-
-                $main->display(
-                    array("pages".DIR."tag", "pages".DIR."index"),
-                    array("reason" => $reason),
-                    __("Invalid Tag", "tags")
+            if (empty($ids))
+                show_404(
+                    __("Not Found"),
+                    __("There are no posts with the tag you specified.", "tags")
                 );
-
-                return true;
-            }
 
             $posts = new Paginator(
                 Post::find(
