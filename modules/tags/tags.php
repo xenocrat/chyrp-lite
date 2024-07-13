@@ -105,7 +105,7 @@
 
             # Build an array containing a sanitized slug for each tag.
             $clean = array_map(function($value) {
-                return sanitize($value, true, true, 0);
+                return sanitize($value, true, SLUG_STRICT, 0);
             }, $names);
 
             # Build an associative array with tags as the keys and slugs as the values.
@@ -174,9 +174,9 @@
         }
 
         public function post($post): void {
-            $post->tags = !empty($post->tags) ?
-                $this->tags_unserialize($post->tags) :
-                array() ;
+            $post->tags = empty($post->tags) ?
+                array() :
+                $this->tags_unserialize($post->tags) ;
 
             uksort($post->tags, function($a, $b) {
                 return $this->mb_strcasecmp($a, $b);
@@ -327,18 +327,6 @@
                     "/"
                 );
 
-            # Redirect without a search if both tag filter and search term are present.
-            if (isset($_GET['clean']) and isset($_GET['query']))
-                redirect(
-                    "posts_tagged/clean/".
-                    str_ireplace(
-                        array("%2F", "%5C"),
-                        "%5F",
-                        urlencode($_GET['clean']))
-                    .
-                    "/"
-                );
-
             fallback($_GET['query'], "");
             list($where, $params, $order) = keywords(
                 $_GET['query'],
@@ -349,9 +337,16 @@
             $tag = false;
 
             if (isset($_GET['clean']) and $_GET['clean'] != "") {
-                $where[] = "post_attributes.name = 'tags' AND post_attributes.value LIKE :tag";
-                $params[":tag"] = $this->tags_clean_match($_GET['clean']);
                 $tag = $this->tag_find_by_clean($_GET['clean']);
+
+                if (empty($tag))
+                    show_404(
+                        __("Not Found"),
+                        __("Tag not found.", "tags")
+                    );
+
+                $where["post_attributes.name"] = "tags";
+                $where["post_attributes.value LIKE"] = $this->tags_clean_match($tag["clean"]);
             }
 
             $visitor = Visitor::current();
@@ -390,7 +385,7 @@
 
             $admin->display(
                 "pages".DIR."posts_tagged",
-                array("posts" => $posts,"tag" => $tag)
+                array("posts" => $posts, "tag" => $tag)
             );
         }
 
@@ -405,9 +400,9 @@
             $post = new Post($_GET['id']);
 
             if ($post->no_results)
-                Flash::warning(
-                    __("Post not found."),
-                    "posts_tagged"
+                show_404(
+                    __("Not Found"),
+                    __("Post not found.")
                 );
 
             if (!$post->editable())
@@ -475,9 +470,9 @@
             $tag = $this->tag_find_by_clean($_GET['clean']);
 
             if (empty($tag))
-                Flash::warning(
-                    __("Tag not found.", "tags"),
-                    "manage_tags"
+                show_404(
+                    __("Not Found"),
+                    __("Tag not found.", "tags")
                 );
 
             $admin->display(
@@ -558,9 +553,9 @@
             $tag = $this->tag_find_by_clean($_GET['clean']);
 
             if (empty($tag))
-                Flash::warning(
-                    __("Tag not found.", "tags"),
-                    "manage_tags"
+                show_404(
+                    __("Not Found"),
+                    __("Tag not found.", "tags")
                 );
 
             $admin->display(
