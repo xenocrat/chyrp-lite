@@ -305,9 +305,9 @@
             );
 
             if ($post->no_results)
-                Flash::warning(
-                    __("Post not found."),
-                    "manage_posts"
+                show_404(
+                    __("Not Found"),
+                    __("Post not found.")
                 );
 
             if (!$post->editable())
@@ -413,9 +413,9 @@
             );
 
             if ($post->no_results)
-                Flash::warning(
-                    __("Post not found."),
-                    "manage_posts"
+                show_404(
+                    __("Not Found"),
+                    __("Post not found.")
                 );
 
             if (!$post->deletable())
@@ -702,9 +702,9 @@
             );
 
             if ($page->no_results)
-                Flash::warning(
-                    __("Page not found."),
-                    "manage_pages"
+                show_404(
+                    __("Not Found"),
+                    __("Page not found.")
                 );
 
             if (!empty($_SESSION['redirect_to']))
@@ -841,9 +841,9 @@
             $page = new Page($_GET['id']);
 
             if ($page->no_results)
-                Flash::warning(
-                    __("Page not found."),
-                    "manage_pages"
+                show_404(
+                    __("Not Found"),
+                    __("Page not found.")
                 );
 
             $this->display(
@@ -1118,9 +1118,9 @@
             $user = new User($_GET['id']);
 
             if ($user->no_results)
-                Flash::warning(
-                    __("User not found."),
-                    "manage_users"
+                show_404(
+                    __("Not Found"),
+                    __("User not found.")
                 );
 
             $options = array(
@@ -1293,9 +1293,9 @@
             $user = new User($_GET['id']);
 
             if ($user->no_results)
-                Flash::warning(
-                    __("User not found."),
-                    "manage_users"
+                show_404(
+                    __("Not Found"),
+                    __("User not found.")
                 );
 
             if ($user->id == Visitor::current()->id)
@@ -1537,9 +1537,9 @@
             $group = new Group($_GET['id']);
 
             if ($group->no_results)
-                Flash::warning(
-                    __("Group not found."),
-                    "manage_groups"
+                show_404(
+                    __("Not Found"),
+                    __("Group not found.")
                 );
 
             $this->display(
@@ -1858,9 +1858,9 @@
             $filepath = uploaded($filename, false);
 
             if (!is_readable($filepath) or !is_file($filepath))
-                Flash::warning(
-                    __("File not found."),
-                    "manage_uploads"
+                show_404(
+                    __("Not Found"),
+                    __("File not found.")
                 );
 
             $post_count = $sql->count(
@@ -1920,9 +1920,9 @@
             $filepath = uploaded($filename, false);
 
             if (!is_readable($filepath) or !is_file($filepath))
-                Flash::warning(
-                    __("File not found."),
-                    "manage_uploads"
+                show_404(
+                    __("Not Found"),
+                    __("File not found.")
                 );
 
             if (!delete_upload($filename))
