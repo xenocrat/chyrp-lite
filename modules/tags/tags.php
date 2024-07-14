@@ -357,6 +357,7 @@
             $results = Post::find(
                 array(
                     "placeholders" => true,
+                    "drafts" => true,
                     "where" => $where,
                     "params" => $params
                 )
@@ -397,7 +398,10 @@
                     code:400
                 );
 
-            $post = new Post($_GET['id']);
+            $post = new Post(
+                $_GET['id'],
+                array("drafts" => true)
+            );
 
             if ($post->no_results)
                 show_404(
@@ -431,7 +435,10 @@
                     code:400
                 );
 
-            $post = new Post($_POST['id']);
+            $post = new Post(
+                $_POST['id'],
+                array("drafts" => true)
+            );
 
             if ($post->no_results)
                 show_404(
@@ -518,7 +525,10 @@
             )->fetchAll();
 
             foreach ($results as $result) {
-                $post = new Post($result["post_id"]);
+                $post = new Post(
+                    $result["post_id"],
+                    array("drafts" => true)
+                );
 
                 if (!$post->editable())
                     continue;
@@ -597,7 +607,10 @@
             )->fetchAll();
 
             foreach ($results as $result)  {
-                $post = new Post($result["post_id"]);
+                $post = new Post(
+                    $result["post_id"],
+                    array("drafts" => true)
+                );
 
                 if (!$post->editable())
                     continue;
@@ -640,7 +653,10 @@
                 );
 
             foreach ($_POST['post'] as $post_id) {
-                $post = new Post($post_id);
+                $post = new Post(
+                    $post_id,
+                    array("drafts" => true)
+                );
 
                 if (!$post->editable())
                     continue;
@@ -695,13 +711,14 @@
                 Post::find(
                     array(
                         "placeholders" => true,
+                        "drafts" => true,
                         "where" => array("id" => $ids)
                     )
                 ),
                 $main->post_limit
             );
 
-            if (empty($posts))
+            if (!$posts->total)
                 return false;
 
             $main->display(
@@ -750,6 +767,8 @@
             $sort = "popularity_desc",
             $scale = 300
         ): array {
+            $visitor = Visitor::current();
+
             switch ($sort) {
                 case 'name_asc':
                     $method = array($this, "sort_tags_name_asc");
@@ -770,7 +789,11 @@
                     fields:"post_attributes.*",
                     conds:array(
                         "post_attributes.name" => "tags",
-                        Post::statuses(),
+                        (
+                            $visitor->group->can("view_draft") ?
+                                Post::statuses(array(Post::STATUS_DRAFT)) :
+                                Post::statuses()
+                        ),
                         Post::feathers()
                     ),
                     left_join:array(
