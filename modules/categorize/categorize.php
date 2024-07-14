@@ -196,7 +196,6 @@
                 Post::find(
                     array(
                         "placeholders" => true,
-                        "drafts" => true,
                         "where" => array("id" => $ids)
                     )
                 ),
