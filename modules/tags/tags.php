@@ -192,7 +192,7 @@
             foreach ($post->tags as $name => $clean) {
                 $tag = $this->tag_find_by_name($name);
 
-                if ($tag) {
+                if (!empty($tag)) {
                     $urls[] = '<a class="tag" href="'.
                               $tag["url"].
                               '" rel="tag">'.
@@ -518,6 +518,12 @@
 
             $tag = $this->tag_find_by_name($_POST['original']);
 
+            if (empty($tag))
+                show_404(
+                    __("Not Found"),
+                    __("Tag not found.", "tags")
+                );
+
             foreach ($tag["post_ids"] as $post_id) {
                 $post = new Post(
                     $post_id,
@@ -592,6 +598,12 @@
                 redirect("manage_tags");
 
             $tag = $this->tag_find_by_name($_POST['name']);
+
+            if (empty($tag))
+                show_404(
+                    __("Not Found"),
+                    __("Tag not found.", "tags")
+                );
 
             foreach ($tag["post_ids"] as $post_id)  {
                 $post = new Post(
