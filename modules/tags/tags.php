@@ -672,7 +672,7 @@
             );
         }
 
-        public function main_tag($main): bool {
+        public function main_tag($main): void {
             if (!isset($_GET['name']))
                 Flash::warning(
                     __("You did not specify a tag.", "tags"),
@@ -719,15 +719,16 @@
             );
 
             if (!$posts->total)
-                return false;
+                show_404(
+                    __("Not Found"),
+                    __("There are no posts with the tag you specified.", "tags")
+                );
 
             $main->display(
                 array("pages".DIR."tag", "pages".DIR."index"),
                 array("posts" => $posts, "tag" => $tag),
                 _f("Posts tagged with &#8220;%s&#8221;", array($tag["name"]), "tags")
             );
-
-            return true;
         }
 
         public function main_tags($main): void {
