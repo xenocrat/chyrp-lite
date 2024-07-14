@@ -233,7 +233,7 @@
             $results = Post::find(
                 array(
                     "placeholders" => true,
-                    "where" => array("id" => $ids),
+                    "where" => array("id" => array_unique($ids)),
                     "order" => "created_at DESC, id DESC")
             );
 
