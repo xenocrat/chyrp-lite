@@ -155,7 +155,7 @@
             return $context;
         }
 
-        public function main_category($main): bool {
+        public function main_category($main): void {
             if (!isset($_GET['name']))
                 Flash::warning(
                     __("You did not specify a category.", "categorize"),
@@ -204,7 +204,10 @@
             );
 
             if (!$posts->total)
-                return false;
+                show_404(
+                    __("Not Found"),
+                    __("There are no posts in the category you specified.", "categorize")
+                );
 
             $main->display(
                 array("pages".DIR."category", "pages".DIR."index"),
@@ -214,8 +217,6 @@
                 ),
                 _f("Posts in category &#8220;%s&#8221;", fix($category->name), "categorize")
             );
-
-            return true;
         }
 
         public function manage_nav($navs): array {
