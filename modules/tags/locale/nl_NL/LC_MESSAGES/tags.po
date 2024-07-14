@@ -56,7 +56,7 @@ msgstr "Wijzigen Tags voor &#8220;%s&#8221;"
 #: modules/tags/admin/pages/manage_tags.twig:18
 #: modules/tags/admin/pages/posts_tagged.twig:31 modules/tags/tags.php:165
 #: modules/tags/tags.php:222 modules/tags/tags.php:236
-#: modules/tags/tags.php:737
+#: modules/tags/tags.php:738
 msgid "Tags"
 msgstr "Tags"
 
@@ -83,7 +83,7 @@ msgstr "Blogposts getagged"
 msgid "Sort results by:"
 msgstr "Sorteer resultaten op:"
 
-#: modules/tags/admin/pages/posts_tagged.twig:20 modules/tags/tags.php:727
+#: modules/tags/admin/pages/posts_tagged.twig:20 modules/tags/tags.php:730
 #, php-format
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr "Blogposts getagged met &#8220;%s&#8221;"
@@ -199,11 +199,11 @@ msgstr "Je hebt geen Tag geselecteerd."
 msgid "The tag you specified was not found."
 msgstr "De Tag die je gekozen hebt is niet gevonden."
 
-#: modules/tags/tags.php:707
+#: modules/tags/tags.php:707 modules/tags/tags.php:724
 msgid "There are no posts with the tag you specified."
 msgstr "Er zijn geen Blogposts met de geselecteerde Tag."
 
-#: modules/tags/tags.php:857
+#: modules/tags/tags.php:858
 #, php-format
 msgid "%d post tagged with &#8220;%s&#8221;"
 msgid_plural "%d posts tagged with &#8220;%s&#8221;"

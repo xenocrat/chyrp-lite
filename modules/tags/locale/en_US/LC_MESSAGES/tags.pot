@@ -34,7 +34,7 @@ msgstr ""
 #: modules/tags/tags.php:165
 #: modules/tags/tags.php:222
 #: modules/tags/tags.php:236
-#: modules/tags/tags.php:737
+#: modules/tags/tags.php:738
 msgid "Tags"
 msgstr ""
 
@@ -64,7 +64,7 @@ msgid "Sort results by:"
 msgstr ""
 
 #: modules/tags/admin/pages/posts_tagged.twig:20
-#: modules/tags/tags.php:727
+#: modules/tags/tags.php:730
 #, php-format
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr ""
@@ -189,10 +189,11 @@ msgid "The tag you specified was not found."
 msgstr ""
 
 #: modules/tags/tags.php:707
+#: modules/tags/tags.php:724
 msgid "There are no posts with the tag you specified."
 msgstr ""
 
-#: modules/tags/tags.php:857
+#: modules/tags/tags.php:858
 #, php-format
 msgid "%d post tagged with &#8220;%s&#8221;"
 msgid_plural "%d posts tagged with &#8220;%s&#8221;"

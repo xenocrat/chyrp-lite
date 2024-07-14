@@ -54,7 +54,7 @@ msgstr "编辑标签 &#8220;%s&#8221;"
 #: modules/tags/admin/pages/manage_tags.twig:18
 #: modules/tags/admin/pages/posts_tagged.twig:31 modules/tags/tags.php:165
 #: modules/tags/tags.php:222 modules/tags/tags.php:236
-#: modules/tags/tags.php:737
+#: modules/tags/tags.php:738
 msgid "Tags"
 msgstr "标签"
 
@@ -81,7 +81,7 @@ msgstr "帖子已标记"
 msgid "Sort results by:"
 msgstr "结果排序依据："
 
-#: modules/tags/admin/pages/posts_tagged.twig:20 modules/tags/tags.php:727
+#: modules/tags/admin/pages/posts_tagged.twig:20 modules/tags/tags.php:730
 #, php-format
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr "&#8220;%s&#8221; 的帖子标签"
@@ -197,11 +197,11 @@ msgstr "你没有指定一个标签。"
 msgid "The tag you specified was not found."
 msgstr "没有找到您指定的标签。"
 
-#: modules/tags/tags.php:707
+#: modules/tags/tags.php:707 modules/tags/tags.php:724
 msgid "There are no posts with the tag you specified."
 msgstr "没有您指定标签的帖子。"
 
-#: modules/tags/tags.php:857
+#: modules/tags/tags.php:858
 #, php-format
 msgid "%d post tagged with &#8220;%s&#8221;"
 msgid_plural "%d posts tagged with &#8220;%s&#8221;"
