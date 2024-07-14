@@ -196,13 +196,14 @@
                 Post::find(
                     array(
                         "placeholders" => true,
+                        "drafts" => true,
                         "where" => array("id" => $ids)
                     )
                 ),
                 $main->post_limit
             );
 
-            if (empty($posts))
+            if (!$posts->total)
                 return false;
 
             $main->display(
