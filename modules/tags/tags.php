@@ -192,12 +192,13 @@
             foreach ($post->tags as $name => $clean) {
                 $tag = $this->tag_find_by_name($name);
 
-                if ($tag)
+                if ($tag) {
                     $urls[] = '<a class="tag" href="'.
                               $tag["url"].
                               '" rel="tag">'.
                               $tag["name"].
                               '</a>';
+                }
             }
 
             return $urls;
@@ -344,7 +345,7 @@
                     );
 
                 $where["post_attributes.name"] = "tags";
-                $where["post_attributes.value LIKE"] = $this->tags_clean_match($tag["clean"]);
+                $where["posts.id"] = $tag["post_ids"];
             } else {
                 $tag = false;
             }
@@ -515,18 +516,11 @@
                     code:422
                 );
 
-            $results = SQL::current()->select(
-                tables:"post_attributes",
-                fields:"post_id",
-                conds:array(
-                    "name" => "tags",
-                    "value LIKE" => $this->tags_name_match($_POST['original'])
-                )
-            )->fetchAll();
+            $tag = $this->tag_find_by_name($_POST['original']);
 
-            foreach ($results as $result) {
+            foreach ($tag["post_ids"] as $post_id) {
                 $post = new Post(
-                    $result["post_id"],
+                    $post_id,
                     array("drafts" => true)
                 );
 
@@ -597,18 +591,11 @@
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
                 redirect("manage_tags");
 
-            $results = SQL::current()->select(
-                tables:"post_attributes",
-                fields:"post_id",
-                conds:array(
-                    "name" => "tags",
-                    "value LIKE" => $this->tags_name_match($_POST['name'])
-                )
-            )->fetchAll();
+            $tag = $this->tag_find_by_name($_POST['name']);
 
-            foreach ($results as $result)  {
+            foreach ($tag["post_ids"] as $post_id)  {
                 $post = new Post(
-                    $result["post_id"],
+                    $post_id,
                     array("drafts" => true)
                 );
 
@@ -687,31 +674,12 @@
                     __("The tag you specified was not found.", "tags")
                 );
 
-            $results = SQL::current()->select(
-                tables:"post_attributes",
-                fields:array("value", "post_id"),
-                conds:array(
-                    "name" => "tags",
-                    "value LIKE" => $this->tags_clean_match($_GET['name'])
-                )
-            )->fetchAll();
-
-            $ids = array();
-
-            foreach ($results as $result)
-                $ids[] = $result["post_id"];
-
-            if (empty($ids))
-                show_404(
-                    __("Not Found"),
-                    __("There are no posts with the tag you specified.", "tags")
-                );
+            $ids = $tag["post_ids"];
 
             $posts = new Paginator(
                 Post::find(
                     array(
                         "placeholders" => true,
-                        "drafts" => true,
                         "where" => array("id" => $ids)
                     )
                 ),
@@ -807,6 +775,7 @@
 
                 $found = array();
                 $names = array();
+                $ids = array();
                 $cloud = array();
 
                 foreach ($results as $result) {
@@ -815,6 +784,7 @@
 
                     foreach ($these as $name => $clean) {
                         $names[] = $name;
+                        $ids[$name][] = $result["post_id"];
                     }
                 }
 
@@ -839,7 +809,8 @@
                             "name" => $name,
                             "title" => $title,
                             "clean" => $found[$name],
-                            "url" => $url
+                            "url" => $url,
+                            "post_ids" => $ids[$name]
                         );
                     }
                 }
