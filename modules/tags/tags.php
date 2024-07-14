@@ -686,13 +686,11 @@
                     __("The tag you specified was not found.", "tags")
                 );
 
-            $ids = $tag["post_ids"];
-
             $posts = new Paginator(
                 Post::find(
                     array(
                         "placeholders" => true,
-                        "where" => array("id" => $ids)
+                        "where" => array("id" => $tag["post_ids"])
                     )
                 ),
                 $main->post_limit
