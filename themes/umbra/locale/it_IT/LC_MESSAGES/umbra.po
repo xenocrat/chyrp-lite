@@ -325,7 +325,7 @@ msgstr "Post creati da &#8220;%s&#8221;"
 msgid "This user hasn't created any posts."
 msgstr "Questo utente non ha creato alcun post."
 
-#: themes/umbra/pages/category.twig:5
+#: themes/umbra/pages/category.twig:4
 #, php-format
 msgid "Posts in category &#8220;%s&#8221;"
 msgstr "Post nella categoria &#8220;%s&#8221;"
@@ -338,7 +338,7 @@ msgstr "Bozze"
 msgid "You don't have any drafts."
 msgstr "Non hai bozze."
 
-#: themes/umbra/pages/index.twig:8 themes/umbra/pages/tags.twig:19
+#: themes/umbra/pages/index.twig:7 themes/umbra/pages/tags.twig:19
 msgid "Nothing here yet!"
 msgstr "Non c'è ancora niente!"
 
@@ -351,7 +351,7 @@ msgstr "Risultati della ricerca per &#8220;%s&#8221;"
 msgid "Your search did not return any results."
 msgstr "La ricerca non ha restituito alcun risultato."
 
-#: themes/umbra/pages/tag.twig:5
+#: themes/umbra/pages/tag.twig:4
 #, php-format
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr "Post contrassegnati con &#8220;%s&#8221;"

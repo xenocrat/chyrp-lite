@@ -324,7 +324,7 @@ msgstr "Blogposts gemaakt door &#8220;%s&#8221;"
 msgid "This user hasn't created any posts."
 msgstr "Deze gebruiker heeft geen Blogposts gemaakt."
 
-#: themes/umbra/pages/category.twig:5
+#: themes/umbra/pages/category.twig:4
 #, php-format
 msgid "Posts in category &#8220;%s&#8221;"
 msgstr "Blogposts in categorie &#8220;%s&#8221;"
@@ -337,7 +337,7 @@ msgstr "Concepten"
 msgid "You don't have any drafts."
 msgstr "Je hebt geen concepten."
 
-#: themes/umbra/pages/index.twig:8 themes/umbra/pages/tags.twig:19
+#: themes/umbra/pages/index.twig:7 themes/umbra/pages/tags.twig:19
 msgid "Nothing here yet!"
 msgstr "Nog niets te zien hier!"
 
@@ -350,7 +350,7 @@ msgstr "Zoekresultaten voor &#8220;%s&#8221;"
 msgid "Your search did not return any results."
 msgstr "Er zijn geen resultaten voor jouw zoekopdracht."
 
-#: themes/umbra/pages/tag.twig:5
+#: themes/umbra/pages/tag.twig:4
 #, php-format
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr "Blogposts getagged met &#8220;%s&#8221;"

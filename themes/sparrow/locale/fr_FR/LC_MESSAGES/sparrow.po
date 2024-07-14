@@ -379,7 +379,7 @@ msgstr "Articles créés par &#8220;%s&#8221;"
 msgid "This user hasn't created any posts."
 msgstr "Cet utilisateur n'a pas créé d'article."
 
-#: themes/sparrow/pages/category.twig:5
+#: themes/sparrow/pages/category.twig:4
 #, php-format
 msgid "Posts in category &#8220;%s&#8221;"
 msgstr "Articles dans la catégorie &#8220;%s&#8221;"
@@ -392,7 +392,7 @@ msgstr "Brouillons"
 msgid "You don't have any drafts."
 msgstr "Vous n'avez pas de brouillon."
 
-#: themes/sparrow/pages/index.twig:8 themes/sparrow/pages/tags.twig:19
+#: themes/sparrow/pages/index.twig:7 themes/sparrow/pages/tags.twig:19
 msgid "Nothing here yet!"
 msgstr "Rien ici encore !"
 
@@ -405,7 +405,7 @@ msgstr "Résultats de la recherche pour &#8220;%s&#8221;"
 msgid "Your search did not return any results."
 msgstr "Votre recherche n'a pas retourné de résultat."
 
-#: themes/sparrow/pages/tag.twig:5
+#: themes/sparrow/pages/tag.twig:4
 #, php-format
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr "Articles étiquetés avec &#8220;%s&#8221;"

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/blossom/content/comment.twig:4
@@ -393,7 +393,7 @@ msgstr "Post creati da &#8220;%s&#8221;"
 msgid "This user hasn't created any posts."
 msgstr "Questo utente non ha creato alcun post."
 
-#: themes/blossom/pages/category.twig:6
+#: themes/blossom/pages/category.twig:5
 #, php-format
 msgid "Posts in category &#8220;%s&#8221;"
 msgstr "Post nella categoria &#8220;%s&#8221;"
@@ -406,7 +406,7 @@ msgstr "Bozze"
 msgid "You don't have any drafts."
 msgstr "Non hai bozze."
 
-#: themes/blossom/pages/index.twig:9 themes/blossom/pages/tags.twig:20
+#: themes/blossom/pages/index.twig:8 themes/blossom/pages/tags.twig:20
 msgid "Nothing here yet!"
 msgstr "Non c'è ancora niente!"
 
@@ -423,7 +423,7 @@ msgstr "La ricerca non ha restituito alcun risultato."
 msgid "Pages containing the search term"
 msgstr "Pagine contenenti il termine di ricerca"
 
-#: themes/blossom/pages/tag.twig:6
+#: themes/blossom/pages/tag.twig:5
 #, php-format
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr "Post contrassegnati con &#8220;%s&#8221;"

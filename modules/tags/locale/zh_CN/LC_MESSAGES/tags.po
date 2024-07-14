@@ -54,7 +54,7 @@ msgstr "编辑标签 &#8220;%s&#8221;"
 #: modules/tags/admin/pages/manage_tags.twig:18
 #: modules/tags/admin/pages/posts_tagged.twig:31 modules/tags/tags.php:165
 #: modules/tags/tags.php:222 modules/tags/tags.php:236
-#: modules/tags/tags.php:738
+#: modules/tags/tags.php:737
 msgid "Tags"
 msgstr "标签"
 
@@ -81,7 +81,7 @@ msgstr "帖子已标记"
 msgid "Sort results by:"
 msgstr "结果排序依据："
 
-#: modules/tags/admin/pages/posts_tagged.twig:20 modules/tags/tags.php:728
+#: modules/tags/admin/pages/posts_tagged.twig:20 modules/tags/tags.php:727
 #, php-format
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr "&#8220;%s&#8221; 的帖子标签"
@@ -123,91 +123,89 @@ msgstr "（逗号分割）"
 msgid "You do not have sufficient privileges to manage tags."
 msgstr "您没有足够的权限来管理标签。"
 
-#: modules/tags/tags.php:343 modules/tags/tags.php:475
-#: modules/tags/tags.php:558
+#: modules/tags/tags.php:343 modules/tags/tags.php:482
+#: modules/tags/tags.php:568
 msgid "Tag not found."
 msgstr "标签未找到。"
 
-#: modules/tags/tags.php:396
+#: modules/tags/tags.php:397
 msgid "An ID is required to edit tags."
 msgstr "编辑标签需要ID。"
 
-#: modules/tags/tags.php:430
+#: modules/tags/tags.php:434
 msgid "An ID is required to update tags."
 msgstr "更新标签需要ID。"
 
-#: modules/tags/tags.php:451
+#: modules/tags/tags.php:458
 msgid "Tags updated."
 msgstr "标签已更新。"
 
-#: modules/tags/tags.php:460 modules/tags/tags.php:488
+#: modules/tags/tags.php:467 modules/tags/tags.php:495
 msgid "You do not have sufficient privileges to rename tags."
 msgstr "您没有足够的权限来重命名标签。"
 
-#: modules/tags/tags.php:465 modules/tags/tags.php:499
-#: modules/tags/tags.php:548 modules/tags/tags.php:582
+#: modules/tags/tags.php:472 modules/tags/tags.php:506
+#: modules/tags/tags.php:558 modules/tags/tags.php:592
 msgid "No Tag Specified"
 msgstr "未指定标签"
 
-#: modules/tags/tags.php:466 modules/tags/tags.php:500
+#: modules/tags/tags.php:473 modules/tags/tags.php:507
 msgid "Please specify the tag you want to rename."
 msgstr "请指定您要重命名的标签。"
 
-#: modules/tags/tags.php:507
+#: modules/tags/tags.php:514
 msgid "Name cannot be blank."
 msgstr "名字不能为空。"
 
-#: modules/tags/tags.php:534
+#: modules/tags/tags.php:544
 msgid "Tag renamed."
 msgstr "标签已重命名。"
 
-#: modules/tags/tags.php:543 modules/tags/tags.php:571
+#: modules/tags/tags.php:553 modules/tags/tags.php:581
 msgid "You do not have sufficient privileges to delete tags."
 msgstr "您没有足够的权限来删除标签。"
 
-#: modules/tags/tags.php:549 modules/tags/tags.php:583
+#: modules/tags/tags.php:559 modules/tags/tags.php:593
 msgid "Please specify the tag you want to delete."
 msgstr "请指定您要删除的标签。"
 
-#: modules/tags/tags.php:612
+#: modules/tags/tags.php:625
 msgid "Tag deleted."
 msgstr "标签已删除。"
 
-#: modules/tags/tags.php:621
+#: modules/tags/tags.php:634
 msgid "You do not have sufficient privileges to add tags."
 msgstr "您没有足够的权限来增加标签。"
 
-#: modules/tags/tags.php:632
+#: modules/tags/tags.php:645
 msgid "No posts selected."
 msgstr "没有选择帖子。"
 
-#: modules/tags/tags.php:638
+#: modules/tags/tags.php:651
 msgid "No tags specified."
 msgstr "没有指定标签。"
 
-#: modules/tags/tags.php:654
+#: modules/tags/tags.php:670
 msgid "Posts tagged."
 msgstr "帖子已标记。"
 
-#: modules/tags/tags.php:661
+#: modules/tags/tags.php:678
 msgid "You did not specify a tag."
 msgstr "你没有指定一个标签。"
 
-#: modules/tags/tags.php:666 modules/tags/tags.php:680
-#: modules/tags/tags.php:706
-msgid "Invalid Tag"
-msgstr "无效的标签"
-
-#: modules/tags/tags.php:675
+#: modules/tags/tags.php:687
 msgid "The tag you specified was not found."
 msgstr "没有找到您指定的标签。"
 
-#: modules/tags/tags.php:701
+#: modules/tags/tags.php:707
 msgid "There are no posts with the tag you specified."
 msgstr "没有您指定标签的帖子。"
 
-#: modules/tags/tags.php:852
+#: modules/tags/tags.php:857
 #, php-format
 msgid "%d post tagged with &#8220;%s&#8221;"
 msgid_plural "%d posts tagged with &#8220;%s&#8221;"
 msgstr[0] "%d 篇帖子被标记为 &#8220;%s&#8221;"
+
+#~ msgid "Invalid Tag"
+#~ msgstr "无效的标签"

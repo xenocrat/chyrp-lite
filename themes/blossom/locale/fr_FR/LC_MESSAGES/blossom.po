@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/blossom/content/comment.twig:4
@@ -82,16 +82,6 @@ msgid "%s comment"
 msgid_plural "%s comments"
 msgstr[0] "%s commentaire"
 msgstr[1] "%s commentaires"
-
-#: themes/blossom/content/post.twig:51
-#, php-format
-msgid "&copy; %s, %s."
-msgstr "&copy; %s, %s.."
-
-#: themes/blossom/content/post.twig:53
-#, php-format
-msgid "&copy; %s."
-msgstr "&copy; %s."
 
 #: themes/blossom/content/sidebar.twig:4
 msgid "Search&hellip;"
@@ -363,15 +353,15 @@ msgstr "Thème par défaut fourni avec Chyrp Lite."
 msgid "Page %d"
 msgstr "Page %d"
 
-#: themes/blossom/layouts/default.twig:48
+#: themes/blossom/layouts/default.twig:49
 msgid "Newer posts"
 msgstr "Nouveaux articles"
 
-#: themes/blossom/layouts/default.twig:56
+#: themes/blossom/layouts/default.twig:57
 msgid "Older posts"
 msgstr "Anciens articles"
 
-#: themes/blossom/layouts/default.twig:65
+#: themes/blossom/layouts/default.twig:66
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "Appelé depuis %s à la ligne %d à %s secondes."
@@ -403,7 +393,7 @@ msgstr "Articles créés par &#8220;%s&#8221;"
 msgid "This user hasn't created any posts."
 msgstr "Cet utilisateur n'a pas créé d'article."
 
-#: themes/blossom/pages/category.twig:6
+#: themes/blossom/pages/category.twig:5
 #, php-format
 msgid "Posts in category &#8220;%s&#8221;"
 msgstr "Articles dans la catégorie &#8220;%s&#8221;"
@@ -416,7 +406,7 @@ msgstr "Brouillons"
 msgid "You don't have any drafts."
 msgstr "Vous n'avez pas de brouillon."
 
-#: themes/blossom/pages/index.twig:9 themes/blossom/pages/tags.twig:20
+#: themes/blossom/pages/index.twig:8 themes/blossom/pages/tags.twig:20
 msgid "Nothing here yet!"
 msgstr "Rien ici encore !"
 
@@ -433,7 +423,7 @@ msgstr "Votre recherche n'a pas retourné de résultat."
 msgid "Pages containing the search term"
 msgstr "Pages contenant le terme recherché"
 
-#: themes/blossom/pages/tag.twig:6
+#: themes/blossom/pages/tag.twig:5
 #, php-format
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr "Articles étiquetés avec &#8220;%s&#8221;"
@@ -473,3 +463,11 @@ msgstr "Nouveaux commentaires"
 #: themes/blossom/pages/view.twig:43
 msgid "Older comments"
 msgstr "Anciens commentaires"
+
+#, php-format
+#~ msgid "&copy; %s, %s."
+#~ msgstr "&copy; %s, %s.."
+
+#, php-format
+#~ msgid "&copy; %s."
+#~ msgstr "&copy; %s."

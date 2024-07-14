@@ -370,7 +370,7 @@ msgstr ""
 msgid "This user hasn't created any posts."
 msgstr ""
 
-#: themes/sparrow/pages/category.twig:5
+#: themes/sparrow/pages/category.twig:4
 #, php-format
 msgid "Posts in category &#8220;%s&#8221;"
 msgstr ""
@@ -383,7 +383,7 @@ msgstr ""
 msgid "You don't have any drafts."
 msgstr ""
 
-#: themes/sparrow/pages/index.twig:8
+#: themes/sparrow/pages/index.twig:7
 #: themes/sparrow/pages/tags.twig:19
 msgid "Nothing here yet!"
 msgstr ""
@@ -397,7 +397,7 @@ msgstr ""
 msgid "Your search did not return any results."
 msgstr ""
 
-#: themes/sparrow/pages/tag.twig:5
+#: themes/sparrow/pages/tag.twig:4
 #, php-format
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr ""

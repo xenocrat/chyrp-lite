@@ -309,6 +309,7 @@ msgstr ""
 #: includes/controller/Admin.php:2919
 #: includes/controller/Ajax.php:76
 #: includes/controller/Ajax.php:118
+#: includes/controller/Main.php:277
 #: includes/download.php:29
 #: includes/download.php:37
 #: includes/helpers.php:159
@@ -601,7 +602,7 @@ msgstr ""
 #: includes/controller/Admin.php:1190
 #: includes/controller/Admin.php:1298
 #: includes/controller/Admin.php:1347
-#: includes/controller/Main.php:277
+#: includes/controller/Main.php:278
 msgid "User not found."
 msgstr ""
 

@@ -99,7 +99,7 @@ msgid "New Category"
 msgstr "新类别"
 
 #: modules/categorize/admin/pages/manage_category.twig:21
-#: modules/categorize/categorize.php:241
+#: modules/categorize/categorize.php:224
 msgid "Categories"
 msgstr "类别"
 
@@ -119,82 +119,77 @@ msgstr "类别"
 msgid "[None]"
 msgstr "[空]"
 
-#: modules/categorize/categorize.php:160
+#: modules/categorize/categorize.php:161
 msgid "You did not specify a category."
 msgstr "您没有指定类别。"
 
-#: modules/categorize/categorize.php:165 modules/categorize/categorize.php:181
-#: modules/categorize/categorize.php:207
-msgid "Invalid Category"
-msgstr "无效的类别"
-
-#: modules/categorize/categorize.php:176
+#: modules/categorize/categorize.php:172
 msgid "The category you specified was not found."
 msgstr "没有找到您指定的类别。"
 
-#: modules/categorize/categorize.php:202
+#: modules/categorize/categorize.php:192
 msgid "There are no posts in the category you specified."
 msgstr "您指定的类别中没有帖子。"
 
-#: modules/categorize/categorize.php:232
+#: modules/categorize/categorize.php:215
 #, php-format
 msgid "Posts in category &#8220;%s&#8221;"
 msgstr "&#8220;%s&#8221; 类别中的帖子"
 
-#: modules/categorize/categorize.php:265
+#: modules/categorize/categorize.php:248
 msgid "You do not have sufficient privileges to manage categories."
 msgstr "您没有足够的权限来管理类别。"
 
-#: modules/categorize/categorize.php:305 modules/categorize/categorize.php:315
+#: modules/categorize/categorize.php:288 modules/categorize/categorize.php:298
 msgid "You do not have sufficient privileges to add categories."
 msgstr "您没有足够的权限来添加类别。"
 
-#: modules/categorize/categorize.php:326 modules/categorize/categorize.php:398
+#: modules/categorize/categorize.php:309 modules/categorize/categorize.php:381
 msgid "No Name Specified"
 msgstr "没有指定名称"
 
-#: modules/categorize/categorize.php:327
+#: modules/categorize/categorize.php:310
 msgid "A name is required to add a category."
 msgstr "添加类别需要名字。"
 
-#: modules/categorize/categorize.php:349
+#: modules/categorize/categorize.php:332
 msgid "Category added."
 msgstr "类别已添加。"
 
-#: modules/categorize/categorize.php:358
+#: modules/categorize/categorize.php:341
 msgid "An ID is required to edit a category."
 msgstr "编辑类别需要ID。"
 
-#: modules/categorize/categorize.php:367 modules/categorize/categorize.php:408
-#: modules/categorize/categorize.php:455 modules/categorize/categorize.php:492
+#: modules/categorize/categorize.php:350 modules/categorize/categorize.php:391
+#: modules/categorize/categorize.php:438 modules/categorize/categorize.php:475
 msgid "Category not found."
 msgstr "类别未找到。"
 
-#: modules/categorize/categorize.php:373 modules/categorize/categorize.php:414
+#: modules/categorize/categorize.php:356 modules/categorize/categorize.php:397
 msgid "You do not have sufficient privileges to edit this category."
 msgstr "您没有足够的权限来编辑这个类别。"
 
-#: modules/categorize/categorize.php:392
+#: modules/categorize/categorize.php:375
 msgid "An ID is required to update a category."
 msgstr "更新类别需要ID。"
 
-#: modules/categorize/categorize.php:399
+#: modules/categorize/categorize.php:382
 msgid "A name is required to update a category."
 msgstr "更新类别需要名字。"
 
-#: modules/categorize/categorize.php:437
+#: modules/categorize/categorize.php:420
 msgid "Category updated."
 msgstr "类别已更新。"
 
-#: modules/categorize/categorize.php:446 modules/categorize/categorize.php:480
+#: modules/categorize/categorize.php:429 modules/categorize/categorize.php:463
 msgid "An ID is required to delete a category."
 msgstr "删除类别需要ID。"
 
-#: modules/categorize/categorize.php:461 modules/categorize/categorize.php:498
+#: modules/categorize/categorize.php:444 modules/categorize/categorize.php:481
 msgid "You do not have sufficient privileges to delete this category."
 msgstr "您没有足够的权限来删除这个类别。"
 
-#: modules/categorize/categorize.php:503
+#: modules/categorize/categorize.php:486
 msgid "Category deleted."
 msgstr "类别已删除。"
 
@@ -213,3 +208,6 @@ msgstr "请记住更新每个组的权限设置。"
 #: modules/categorize/info.php:14
 msgid "Do you want to remove your categories from the database?"
 msgstr "你想从数据库中删除你的类别吗？"
+
+#~ msgid "Invalid Category"
+#~ msgstr "无效的类别"

@@ -394,7 +394,7 @@ msgstr ""
 msgid "This user hasn't created any posts."
 msgstr ""
 
-#: themes/blossom/pages/category.twig:6
+#: themes/blossom/pages/category.twig:5
 #, php-format
 msgid "Posts in category &#8220;%s&#8221;"
 msgstr ""
@@ -407,7 +407,7 @@ msgstr ""
 msgid "You don't have any drafts."
 msgstr ""
 
-#: themes/blossom/pages/index.twig:9
+#: themes/blossom/pages/index.twig:8
 #: themes/blossom/pages/tags.twig:20
 msgid "Nothing here yet!"
 msgstr ""
@@ -425,7 +425,7 @@ msgstr ""
 msgid "Pages containing the search term"
 msgstr ""
 
-#: themes/blossom/pages/tag.twig:6
+#: themes/blossom/pages/tag.twig:5
 #, php-format
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr ""

@@ -20,7 +20,7 @@ msgstr "Deze opmerking is in afwachting van moderatie."
 #: themes/virgula/feathers/photo.twig:6 themes/virgula/feathers/quote.twig:6
 #: themes/virgula/feathers/text.twig:6 themes/virgula/feathers/uploader.twig:6
 #: themes/virgula/feathers/video.twig:6 themes/virgula/pages/archive.twig:19
-#: themes/virgula/pages/index.twig:14 themes/virgula/pages/index.twig:33
+#: themes/virgula/pages/index.twig:13 themes/virgula/pages/index.twig:32
 #: themes/virgula/pages/page.twig:7 themes/virgula/pages/page.twig:18
 #: themes/virgula/pages/search.twig:16 themes/virgula/pages/search.twig:27
 #, php-format
@@ -300,16 +300,16 @@ msgid "F"
 msgstr "F Y"
 
 #: themes/virgula/pages/archive.twig:32 themes/virgula/pages/archive.twig:55
-#: themes/virgula/pages/author.twig:12 themes/virgula/pages/category.twig:12
+#: themes/virgula/pages/author.twig:12 themes/virgula/pages/category.twig:11
 #: themes/virgula/pages/drafts.twig:12 themes/virgula/pages/search.twig:49
-#: themes/virgula/pages/tag.twig:12 themes/virgula/pages/updated.twig:12
+#: themes/virgula/pages/tag.twig:11 themes/virgula/pages/updated.twig:12
 msgid "Newer posts"
 msgstr "Nieuwere Blogposts"
 
 #: themes/virgula/pages/archive.twig:37 themes/virgula/pages/archive.twig:56
-#: themes/virgula/pages/author.twig:13 themes/virgula/pages/category.twig:13
+#: themes/virgula/pages/author.twig:13 themes/virgula/pages/category.twig:12
 #: themes/virgula/pages/drafts.twig:13 themes/virgula/pages/search.twig:50
-#: themes/virgula/pages/tag.twig:13 themes/virgula/pages/updated.twig:13
+#: themes/virgula/pages/tag.twig:12 themes/virgula/pages/updated.twig:13
 msgid "Older posts"
 msgstr "Oudere Blogposts"
 
@@ -326,7 +326,7 @@ msgstr "Blogposts gemaakt door &#8220;%s&#8221;"
 msgid "This user hasn't created any posts."
 msgstr "Deze gebruiker heeft geen Blogposts gemaakt."
 
-#: themes/virgula/pages/category.twig:5
+#: themes/virgula/pages/category.twig:4
 #, php-format
 msgid "Posts in category &#8220;%s&#8221;"
 msgstr "Blogposts in categorie &#8220;%s&#8221;"
@@ -339,19 +339,19 @@ msgstr "Concepten"
 msgid "You don't have any drafts."
 msgstr "Je hebt geen concepten."
 
-#: themes/virgula/pages/index.twig:7 themes/virgula/pages/tags.twig:14
+#: themes/virgula/pages/index.twig:6 themes/virgula/pages/tags.twig:14
 msgid "Nothing here yet!"
 msgstr "Nog niets te zien hier!"
 
-#: themes/virgula/pages/index.twig:10
+#: themes/virgula/pages/index.twig:9
 msgid "Posts"
 msgstr "Blogposts"
 
-#: themes/virgula/pages/index.twig:22
+#: themes/virgula/pages/index.twig:21
 msgid "Pages"
 msgstr "Pagina's"
 
-#: themes/virgula/pages/index.twig:43
+#: themes/virgula/pages/index.twig:42
 msgid "More posts&hellip;"
 msgstr "Meer blogposts&hellip;"
 
@@ -378,7 +378,7 @@ msgstr "Er zijn geen resultaten voor jouw zoekopdracht."
 msgid "Pages containing the search term"
 msgstr "Pagina's die de zoekterm bevatten"
 
-#: themes/virgula/pages/tag.twig:5
+#: themes/virgula/pages/tag.twig:4
 #, php-format
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr "Blogposts getagged met &#8220;%s&#8221;"

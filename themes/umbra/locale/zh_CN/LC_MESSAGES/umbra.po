@@ -325,7 +325,7 @@ msgstr "由&#8220;%s&#8221;创建的帖子"
 msgid "This user hasn't created any posts."
 msgstr "此用户尚未创建任何帖子。"
 
-#: themes/umbra/pages/category.twig:5
+#: themes/umbra/pages/category.twig:4
 #, php-format
 msgid "Posts in category &#8220;%s&#8221;"
 msgstr "&#8220;%s&#8221; 分类中的帖子"
@@ -338,7 +338,7 @@ msgstr "草稿"
 msgid "You don't have any drafts."
 msgstr "您没有任何草稿。"
 
-#: themes/umbra/pages/index.twig:8 themes/umbra/pages/tags.twig:19
+#: themes/umbra/pages/index.twig:7 themes/umbra/pages/tags.twig:19
 msgid "Nothing here yet!"
 msgstr "然而这里什么也没有！"
 
@@ -351,7 +351,7 @@ msgstr "&#8220;%s&#8221; 的搜索结果"
 msgid "Your search did not return any results."
 msgstr "空空如也"
 
-#: themes/umbra/pages/tag.twig:5
+#: themes/umbra/pages/tag.twig:4
 #, php-format
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr "&#8220;%s&#8221; 的帖子标签"

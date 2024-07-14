@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/topaz/content/comment.twig:4
@@ -393,7 +393,7 @@ msgstr "由&#8220;%s&#8221;创建的帖子"
 msgid "This user hasn't created any posts."
 msgstr "此用户尚未创建任何帖子。"
 
-#: themes/topaz/pages/category.twig:6
+#: themes/topaz/pages/category.twig:5
 #, php-format
 msgid "Posts in category &#8220;%s&#8221;"
 msgstr "&#8220;%s&#8221; 分类中的帖子"
@@ -406,7 +406,7 @@ msgstr "草稿"
 msgid "You don't have any drafts."
 msgstr "您没有任何草稿。"
 
-#: themes/topaz/pages/index.twig:9 themes/topaz/pages/tags.twig:20
+#: themes/topaz/pages/index.twig:8 themes/topaz/pages/tags.twig:20
 msgid "Nothing here yet!"
 msgstr "然而这里什么也没有！"
 
@@ -423,7 +423,7 @@ msgstr "空空如也"
 msgid "Pages containing the search term"
 msgstr "包含搜索词的网页"
 
-#: themes/topaz/pages/tag.twig:6
+#: themes/topaz/pages/tag.twig:5
 #, php-format
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr "&#8220;%s&#8221; 的帖子标签"

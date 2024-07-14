@@ -405,7 +405,7 @@ msgstr ""
 msgid "This user hasn't created any posts."
 msgstr ""
 
-#: themes/topaz/pages/category.twig:6
+#: themes/topaz/pages/category.twig:5
 #, php-format
 msgid "Posts in category &#8220;%s&#8221;"
 msgstr ""
@@ -418,7 +418,7 @@ msgstr ""
 msgid "You don't have any drafts."
 msgstr ""
 
-#: themes/topaz/pages/index.twig:9
+#: themes/topaz/pages/index.twig:8
 #: themes/topaz/pages/tags.twig:20
 msgid "Nothing here yet!"
 msgstr ""
@@ -436,7 +436,7 @@ msgstr ""
 msgid "Pages containing the search term"
 msgstr ""
 
-#: themes/topaz/pages/tag.twig:6
+#: themes/topaz/pages/tag.twig:5
 #, php-format
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr ""

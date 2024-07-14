@@ -10,466 +10,472 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
-#: themes/blossom/content/comment.twig:4
+#: themes/topaz/content/comment.twig:4
 #, php-format
 msgid "%s:"
 msgstr "%s :"
 
-#: themes/blossom/content/comment.twig:6
+#: themes/topaz/content/comment.twig:6
 #, php-format
 msgid "%s said:"
 msgstr "%s a dit :"
 
-#: themes/blossom/content/comment.twig:9
+#: themes/topaz/content/comment.twig:9
 msgid "This comment is awaiting moderation."
 msgstr "Ce commentaire est en attente de modération."
 
-#: themes/blossom/content/post.twig:6
+#: themes/topaz/content/post.twig:6
 msgid "Tags"
 msgstr "Étiquettes"
 
-#: themes/blossom/content/post.twig:15 themes/blossom/feathers/audio.twig:6
-#: themes/blossom/feathers/photo.twig:6 themes/blossom/feathers/quote.twig:6
-#: themes/blossom/feathers/text.twig:6 themes/blossom/feathers/uploader.twig:6
-#: themes/blossom/feathers/video.twig:6 themes/blossom/pages/archive.twig:36
-#: themes/blossom/pages/page.twig:6 themes/blossom/pages/search.twig:19
+#: themes/topaz/content/post.twig:15 themes/topaz/feathers/audio.twig:7
+#: themes/topaz/feathers/photo.twig:7 themes/topaz/feathers/quote.twig:7
+#: themes/topaz/feathers/text.twig:7 themes/topaz/feathers/uploader.twig:7
+#: themes/topaz/feathers/video.twig:7 themes/topaz/pages/archive.twig:29
+#: themes/topaz/pages/page.twig:7 themes/topaz/pages/search.twig:19
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "Lien permanent vers &#8220;%s&#8221;"
 
-#: themes/blossom/content/post.twig:17 themes/blossom/content/sidebar.twig:29
+#: themes/topaz/content/post.twig:17 themes/topaz/content/sidebar.twig:29
 msgid "Draft"
 msgstr "Brouillon"
 
-#: themes/blossom/content/post.twig:19
+#: themes/topaz/content/post.twig:19
 msgid "Scheduled"
 msgstr "Programmé"
 
-#: themes/blossom/content/post.twig:21
+#: themes/topaz/content/post.twig:21
 msgid "Pinned"
 msgstr "Épinglé"
 
-#: themes/blossom/content/post.twig:27 themes/blossom/content/sidebar.twig:55
-#: themes/blossom/pages/view.twig:20
+#: themes/topaz/content/post.twig:27 themes/topaz/content/sidebar.twig:55
+#: themes/topaz/pages/view.twig:14
 msgid "[Untitled]"
 msgstr "[Sans titre]"
 
-#: themes/blossom/content/post.twig:34
+#: themes/topaz/content/post.twig:34
 msgid "View webmentions"
 msgstr "Voir les webmentions"
 
-#: themes/blossom/content/post.twig:35
+#: themes/topaz/content/post.twig:35
 #, php-format
 msgid "%s webmention"
 msgid_plural "%s webmentions"
 msgstr[0] "%s webmention"
 msgstr[1] "%s webmentions"
 
-#: themes/blossom/content/post.twig:40
+#: themes/topaz/content/post.twig:40
 msgid "Comments closed"
 msgstr "Commentaires fermés"
 
-#: themes/blossom/content/post.twig:43
+#: themes/topaz/content/post.twig:43
 msgid "View comments"
 msgstr "Voir les commentaires"
 
-#: themes/blossom/content/post.twig:44
+#: themes/topaz/content/post.twig:44
 #, php-format
 msgid "%s comment"
 msgid_plural "%s comments"
 msgstr[0] "%s commentaire"
 msgstr[1] "%s commentaires"
 
-#: themes/blossom/content/post.twig:51
-#, php-format
-msgid "&copy; %s, %s."
-msgstr "&copy; %s, %s.."
-
-#: themes/blossom/content/post.twig:53
-#, php-format
-msgid "&copy; %s."
-msgstr "&copy; %s."
-
-#: themes/blossom/content/sidebar.twig:4
+#: themes/topaz/content/sidebar.twig:4
 msgid "Search&hellip;"
 msgstr "Rechercher&hellip;"
 
-#: themes/blossom/content/sidebar.twig:4
+#: themes/topaz/content/sidebar.twig:4
 msgid "Search this blog"
 msgstr "Rechercher ce blog"
 
-#: themes/blossom/content/sidebar.twig:5
+#: themes/topaz/content/sidebar.twig:5
 msgid "Search"
 msgstr "Rechercher"
 
-#: themes/blossom/content/sidebar.twig:7 themes/blossom/content/sidebar.twig:8
+#: themes/topaz/content/sidebar.twig:7 themes/topaz/content/sidebar.twig:8
 msgid "Menu"
 msgstr "Menu"
 
-#: themes/blossom/content/sidebar.twig:8
+#: themes/topaz/content/sidebar.twig:8
 msgid "Close menu"
 msgstr "Fermer le menu"
 
-#: themes/blossom/content/sidebar.twig:9
+#: themes/topaz/content/sidebar.twig:9
 msgid "Links"
 msgstr "Liens"
 
-#: themes/blossom/content/sidebar.twig:11
+#: themes/topaz/content/sidebar.twig:11
 msgid "Blog"
 msgstr "Blog"
 
-#: themes/blossom/content/sidebar.twig:14
-#: themes/blossom/forms/user/controls.twig:9
-#: themes/blossom/forms/user/register.twig:13
+#: themes/topaz/content/sidebar.twig:14 themes/topaz/forms/user/controls.twig:9
+#: themes/topaz/forms/user/register.twig:13
 msgid "Email"
 msgstr "Courriel"
 
-#: themes/blossom/content/sidebar.twig:17
+#: themes/topaz/content/sidebar.twig:17
 msgid "Feed"
 msgstr "Flux"
 
-#: themes/blossom/content/sidebar.twig:21
+#: themes/topaz/content/sidebar.twig:21
 msgid "Admin"
 msgstr "Administration"
 
-#: themes/blossom/content/sidebar.twig:25
+#: themes/topaz/content/sidebar.twig:25
 msgid "Write"
 msgstr "Écrire"
 
-#: themes/blossom/content/sidebar.twig:34
-#: themes/blossom/forms/user/controls.twig:5
+#: themes/topaz/content/sidebar.twig:34 themes/topaz/forms/user/controls.twig:5
 msgid "Controls"
 msgstr "Contrôles"
 
-#: themes/blossom/content/sidebar.twig:37
+#: themes/topaz/content/sidebar.twig:37
 msgid "Log out"
 msgstr "Déconnexion"
 
-#: themes/blossom/content/sidebar.twig:42
-#: themes/blossom/forms/user/register.twig:5
-#: themes/blossom/forms/user/register.twig:19
+#: themes/topaz/content/sidebar.twig:42 themes/topaz/forms/user/register.twig:5
+#: themes/topaz/forms/user/register.twig:19
 msgid "Register"
 msgstr "Enregistrement"
 
-#: themes/blossom/content/sidebar.twig:46
-#: themes/blossom/forms/user/login.twig:5
-#: themes/blossom/forms/user/login.twig:14
+#: themes/topaz/content/sidebar.twig:46 themes/topaz/forms/user/login.twig:5
+#: themes/topaz/forms/user/login.twig:14
 msgid "Log in"
 msgstr "Connexion"
 
-#: themes/blossom/content/sidebar.twig:51
+#: themes/topaz/content/sidebar.twig:51
 msgid "Categories"
 msgstr "Catégories"
 
-#: themes/blossom/content/sidebar.twig:61
+#: themes/topaz/content/sidebar.twig:61
 msgid "Pages"
 msgstr "Pages"
 
-#: themes/blossom/content/sidebar.twig:71
+#: themes/topaz/content/sidebar.twig:71
 msgid "Related Posts"
 msgstr "Articles associés"
 
-#: themes/blossom/content/sidebar.twig:80
+#: themes/topaz/content/sidebar.twig:80
 msgid "Recent Posts"
 msgstr "Articles récents"
 
-#: themes/blossom/content/sidebar.twig:91
+#: themes/topaz/content/sidebar.twig:91
 msgid "Archive"
 msgstr "Archive"
 
-#: themes/blossom/content/sidebar.twig:96 themes/blossom/pages/archive.twig:18
+#: themes/topaz/content/sidebar.twig:96 themes/topaz/pages/archive.twig:11
 msgid "F Y"
 msgstr "F Y"
 
-#: themes/blossom/feathers/audio.twig:10 themes/blossom/feathers/link.twig:7
-#: themes/blossom/feathers/photo.twig:13 themes/blossom/feathers/quote.twig:9
-#: themes/blossom/feathers/text.twig:9 themes/blossom/feathers/uploader.twig:10
-#: themes/blossom/feathers/video.twig:10
+#: themes/topaz/feathers/audio.twig:10 themes/topaz/feathers/link.twig:9
+#: themes/topaz/feathers/photo.twig:10 themes/topaz/feathers/quote.twig:10
+#: themes/topaz/feathers/text.twig:10 themes/topaz/feathers/uploader.twig:10
+#: themes/topaz/feathers/video.twig:10
+#, php-format
+msgid "Written by %s"
+msgstr ""
+
+#: themes/topaz/feathers/audio.twig:15 themes/topaz/feathers/link.twig:12
+#: themes/topaz/feathers/photo.twig:18 themes/topaz/feathers/quote.twig:14
+#: themes/topaz/feathers/text.twig:14 themes/topaz/feathers/uploader.twig:15
+#: themes/topaz/feathers/video.twig:15
 msgid "Text Content"
 msgstr "Contenu du texte"
 
-#: themes/blossom/feathers/audio.twig:14 themes/blossom/feathers/photo.twig:9
-#: themes/blossom/feathers/uploader.twig:16
-#: themes/blossom/feathers/uploader.twig:20
-#: themes/blossom/feathers/video.twig:14
+#: themes/topaz/feathers/audio.twig:19 themes/topaz/feathers/photo.twig:14
+#: themes/topaz/feathers/uploader.twig:21
+#: themes/topaz/feathers/uploader.twig:25 themes/topaz/feathers/video.twig:19
 msgid "File Attachment"
 msgstr "Fichier associé"
 
-#: themes/blossom/feathers/missing.twig:4
+#: themes/topaz/feathers/missing.twig:4
 msgid "The post cannot be displayed because the theme does not support it."
 msgstr "Cet article ne peut pas être affiché car le thème ne le supporte pas."
 
-#: themes/blossom/feathers/uploader.twig:21
+#: themes/topaz/feathers/uploader.twig:26
 msgid "File attachment:"
 msgstr "Fichier associé :"
 
-#: themes/blossom/forms/comment/edit.twig:2
+#: themes/topaz/forms/comment/edit.twig:2
 msgid "Comment"
 msgstr "Commentaire"
 
-#: themes/blossom/forms/comment/edit.twig:5
+#: themes/topaz/forms/comment/edit.twig:5
 msgid "Author"
 msgstr "Auteur"
 
-#: themes/blossom/forms/comment/edit.twig:8
+#: themes/topaz/forms/comment/edit.twig:8
 msgid "Author's website"
 msgstr "Site de l'auteur"
 
-#: themes/blossom/forms/comment/edit.twig:10
+#: themes/topaz/forms/comment/edit.twig:10
 msgid "Author's email"
 msgstr "Courriel de l'auteur"
 
-#: themes/blossom/forms/comment/edit.twig:15
+#: themes/topaz/forms/comment/edit.twig:15
 msgid "Timestamp"
 msgstr "Timestamp"
 
-#: themes/blossom/forms/comment/edit.twig:18
+#: themes/topaz/forms/comment/edit.twig:18
 msgid "Status"
 msgstr "Sataut"
 
-#: themes/blossom/forms/comment/edit.twig:20
+#: themes/topaz/forms/comment/edit.twig:20
 msgid "Approved"
 msgstr "Approuvé"
 
-#: themes/blossom/forms/comment/edit.twig:21
+#: themes/topaz/forms/comment/edit.twig:21
 msgid "Denied"
 msgstr "Refusé"
 
-#: themes/blossom/forms/comment/edit.twig:22
+#: themes/topaz/forms/comment/edit.twig:22
 msgid "Spam"
 msgstr "Spam"
 
-#: themes/blossom/forms/comment/edit.twig:27
+#: themes/topaz/forms/comment/edit.twig:27
 msgid "Email Notifications"
 msgstr "Notifications des courriels"
 
-#: themes/blossom/forms/comment/edit.twig:35
+#: themes/topaz/forms/comment/edit.twig:35
 msgid "Save"
 msgstr "Enregistrer"
 
-#: themes/blossom/forms/comment/edit.twig:36
+#: themes/topaz/forms/comment/edit.twig:36
 msgid "Cancel"
 msgstr "Annuler"
 
-#: themes/blossom/forms/comment/new.twig:3
+#: themes/topaz/forms/comment/new.twig:3
 #, php-format
 msgid "%s's comment"
 msgstr "commentaire de %s"
 
-#: themes/blossom/forms/comment/new.twig:5
+#: themes/topaz/forms/comment/new.twig:5
 msgid "Your name"
 msgstr "Votre nom"
 
-#: themes/blossom/forms/comment/new.twig:7
+#: themes/topaz/forms/comment/new.twig:7
 msgid "Your email"
 msgstr "Votre courriel"
 
-#: themes/blossom/forms/comment/new.twig:9
+#: themes/topaz/forms/comment/new.twig:9
 msgid "Your website"
 msgstr "Votre site"
 
-#: themes/blossom/forms/comment/new.twig:12
+#: themes/topaz/forms/comment/new.twig:12
 msgid "Your comment"
 msgstr "Votre commentaire"
 
-#: themes/blossom/forms/comment/new.twig:16
+#: themes/topaz/forms/comment/new.twig:16
 msgid "Markdown is allowed."
 msgstr "Markdown est autorisé."
 
-#: themes/blossom/forms/comment/new.twig:18
+#: themes/topaz/forms/comment/new.twig:18
 msgid "HTML tags allowed:"
 msgstr "Balises HTML autorisées :"
 
-#: themes/blossom/forms/comment/new.twig:20
+#: themes/topaz/forms/comment/new.twig:20
 msgid "HTML is not allowed."
 msgstr "HTML n'est pas autorisé."
 
-#: themes/blossom/forms/comment/new.twig:24
+#: themes/topaz/forms/comment/new.twig:24
 msgid "Notify me when others comment"
 msgstr "Me prévenir des autres commentaires"
 
-#: themes/blossom/forms/comment/new.twig:37
+#: themes/topaz/forms/comment/new.twig:37
 msgid "Speak"
 msgstr "Parler"
 
-#: themes/blossom/forms/user/controls.twig:7
+#: themes/topaz/forms/user/controls.twig:7
 msgid "Full name"
 msgstr "Nom complet"
 
-#: themes/blossom/forms/user/controls.twig:11
+#: themes/topaz/forms/user/controls.twig:11
 msgid "Website"
 msgstr "Site"
 
-#: themes/blossom/forms/user/controls.twig:13
-#: themes/blossom/forms/user/reset_password.twig:7
+#: themes/topaz/forms/user/controls.twig:13
+#: themes/topaz/forms/user/reset_password.twig:7
 msgid "New password?"
 msgstr "Nouveau mot de passe ?"
 
-#: themes/blossom/forms/user/controls.twig:15
-#: themes/blossom/forms/user/reset_password.twig:9
+#: themes/topaz/forms/user/controls.twig:15
+#: themes/topaz/forms/user/reset_password.twig:9
 msgid "Confirm"
 msgstr "Confirmer"
 
-#: themes/blossom/forms/user/controls.twig:20
+#: themes/topaz/forms/user/controls.twig:20
 msgid "Update"
 msgstr "Mise à jour"
 
-#: themes/blossom/forms/user/login.twig:7
-#: themes/blossom/forms/user/lost_password.twig:7
-#: themes/blossom/forms/user/register.twig:7
+#: themes/topaz/forms/user/login.twig:7
+#: themes/topaz/forms/user/lost_password.twig:7
+#: themes/topaz/forms/user/register.twig:7
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
-#: themes/blossom/forms/user/login.twig:9
-#: themes/blossom/forms/user/register.twig:9
-#: themes/blossom/forms/user/register.twig:11
+#: themes/topaz/forms/user/login.twig:9 themes/topaz/forms/user/register.twig:9
+#: themes/topaz/forms/user/register.twig:11
 msgid "Password"
 msgstr "Mot de passe"
 
-#: themes/blossom/forms/user/login.twig:15
+#: themes/topaz/forms/user/login.twig:15
 msgid "Help!"
 msgstr "Aide !"
 
-#: themes/blossom/forms/user/lost_password.twig:5
+#: themes/topaz/forms/user/lost_password.twig:5
 msgid "Lost password"
 msgstr "Mot de passe perdu"
 
-#: themes/blossom/forms/user/lost_password.twig:11
-#: themes/blossom/forms/user/reset_password.twig:16
+#: themes/topaz/forms/user/lost_password.twig:11
+#: themes/topaz/forms/user/reset_password.twig:16
 msgid "Submit"
 msgstr "Envoyer"
 
-#: themes/blossom/forms/user/register.twig:11
+#: themes/topaz/forms/user/register.twig:11
 msgid "(again)"
 msgstr "(encore)"
 
-#: themes/blossom/forms/user/reset_password.twig:5
+#: themes/topaz/forms/user/reset_password.twig:5
 msgid "Reset password"
 msgstr "Réinitialiser le mot de passe"
 
-#: themes/blossom/info.php:3
-msgid "Blossom"
-msgstr "Fleur"
+#: themes/topaz/info.php:3
+msgid "Topaz"
+msgstr ""
 
-#: themes/blossom/info.php:6
-msgid "The default theme provided with Chyrp Lite."
-msgstr "Thème par défaut fourni avec Chyrp Lite."
+#: themes/topaz/info.php:6
+msgid "A minimalist responsive theme for Chyrp Lite."
+msgstr ""
 
-#: themes/blossom/layouts/default.twig:8
+#: themes/topaz/layouts/default.twig:8
 #, php-format
 msgid "Page %d"
 msgstr "Page %d"
 
-#: themes/blossom/layouts/default.twig:48
+#: themes/topaz/layouts/default.twig:54
 msgid "Newer posts"
 msgstr "Nouveaux articles"
 
-#: themes/blossom/layouts/default.twig:56
+#: themes/topaz/layouts/default.twig:55
 msgid "Older posts"
 msgstr "Anciens articles"
 
-#: themes/blossom/layouts/default.twig:65
+#: themes/topaz/layouts/default.twig:65
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "Appelé depuis %s à la ligne %d à %s secondes."
 
-#: themes/blossom/pages/403.twig:5
+#: themes/topaz/pages/403.twig:5
 msgid "Forbidden."
 msgstr "Interdit."
 
-#: themes/blossom/pages/404.twig:5
+#: themes/topaz/pages/404.twig:5
 msgid "Not found."
 msgstr "Non trouvé."
 
-#: themes/blossom/pages/archive.twig:10 themes/blossom/pages/archive.twig:47
-#: themes/blossom/pages/archive.twig:56
+#: themes/topaz/pages/archive.twig:40 themes/topaz/pages/archive.twig:45
+#: themes/topaz/pages/archive.twig:54
 #, php-format
 msgid "Archive of %s"
 msgstr "Archive de %s"
 
-#: themes/blossom/pages/archive.twig:66
+#: themes/topaz/pages/archive.twig:64
 msgid "There aren't any posts in the timeframe you specified."
 msgstr "Il n'y a pas d'articles dans la période que vous avez mentionnée."
 
-#: themes/blossom/pages/author.twig:6
+#: themes/topaz/pages/author.twig:6
 #, php-format
 msgid "Posts created by &#8220;%s&#8221;"
 msgstr "Articles créés par &#8220;%s&#8221;"
 
-#: themes/blossom/pages/author.twig:13
+#: themes/topaz/pages/author.twig:13
 msgid "This user hasn't created any posts."
 msgstr "Cet utilisateur n'a pas créé d'article."
 
-#: themes/blossom/pages/category.twig:6
+#: themes/topaz/pages/category.twig:5
 #, php-format
 msgid "Posts in category &#8220;%s&#8221;"
 msgstr "Articles dans la catégorie &#8220;%s&#8221;"
 
-#: themes/blossom/pages/drafts.twig:6
+#: themes/topaz/pages/drafts.twig:6
 msgid "Drafts"
 msgstr "Brouillons"
 
-#: themes/blossom/pages/drafts.twig:13
+#: themes/topaz/pages/drafts.twig:13
 msgid "You don't have any drafts."
 msgstr "Vous n'avez pas de brouillon."
 
-#: themes/blossom/pages/index.twig:9 themes/blossom/pages/tags.twig:20
+#: themes/topaz/pages/index.twig:8 themes/topaz/pages/tags.twig:20
 msgid "Nothing here yet!"
 msgstr "Rien ici encore !"
 
-#: themes/blossom/pages/search.twig:6
+#: themes/topaz/pages/search.twig:6
 #, php-format
 msgid "Search results for &#8220;%s&#8221;"
 msgstr "Résultats de la recherche pour &#8220;%s&#8221;"
 
-#: themes/blossom/pages/search.twig:10
+#: themes/topaz/pages/search.twig:10
 msgid "Your search did not return any results."
 msgstr "Votre recherche n'a pas retourné de résultat."
 
-#: themes/blossom/pages/search.twig:15
+#: themes/topaz/pages/search.twig:15
 msgid "Pages containing the search term"
 msgstr "Pages contenant le terme recherché"
 
-#: themes/blossom/pages/tag.twig:6
+#: themes/topaz/pages/tag.twig:5
 #, php-format
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr "Articles étiquetés avec &#8220;%s&#8221;"
 
-#: themes/blossom/pages/tags.twig:6
+#: themes/topaz/pages/tags.twig:6
 msgid "Tag cloud"
 msgstr "Nuage d'étiquettes"
 
-#: themes/blossom/pages/updated.twig:6
+#: themes/topaz/pages/updated.twig:6
 msgid "Updated posts"
 msgstr "Articles mis à jour"
 
-#: themes/blossom/pages/updated.twig:13
+#: themes/topaz/pages/updated.twig:13
 msgid "There aren't any updated posts."
 msgstr "Il n'y a pas d'article mis à jour."
 
-#: themes/blossom/pages/view.twig:6
+#: themes/topaz/pages/view.twig:6
 msgid "Next post"
 msgstr "Nouvel article"
 
-#: themes/blossom/pages/view.twig:12
+#: themes/topaz/pages/view.twig:7
 msgid "Previous post"
 msgstr "Article précédent"
 
-#: themes/blossom/pages/view.twig:16
+#: themes/topaz/pages/view.twig:10
 msgid "Webmentions"
 msgstr "Webmentions"
 
-#: themes/blossom/pages/view.twig:26
+#: themes/topaz/pages/view.twig:20
 msgid "Comments"
 msgstr "Commentaires"
 
-#: themes/blossom/pages/view.twig:42
+#: themes/topaz/pages/view.twig:36
 msgid "Newer comments"
 msgstr "Nouveaux commentaires"
 
-#: themes/blossom/pages/view.twig:43
+#: themes/topaz/pages/view.twig:37
 msgid "Older comments"
 msgstr "Anciens commentaires"
+
+#, php-format
+#~ msgid "&copy; %s, %s."
+#~ msgstr "&copy; %s, %s.."
+
+#, php-format
+#~ msgid "&copy; %s."
+#~ msgstr "&copy; %s."
+
+#~ msgid "Blossom"
+#~ msgstr "Fleur"
+
+#~ msgid "The default theme provided with Chyrp Lite."
+#~ msgstr "Thème par défaut fourni avec Chyrp Lite."
