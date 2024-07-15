@@ -204,7 +204,7 @@ msgstr "De Tag die je gekozen hebt is niet gevonden."
 msgid "There are no posts with the tag you specified."
 msgstr "Er zijn geen Blogposts met de geselecteerde Tag."
 
-#: modules/tags/tags.php:839
+#: modules/tags/tags.php:836
 #, php-format
 msgid "%d post tagged with &#8220;%s&#8221;"
 msgid_plural "%d posts tagged with &#8220;%s&#8221;"

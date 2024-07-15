@@ -204,7 +204,7 @@ msgstr "Il tag specificato non è stato trovato."
 msgid "There are no posts with the tag you specified."
 msgstr "Non sono presenti post con il tag specificato."
 
-#: modules/tags/tags.php:839
+#: modules/tags/tags.php:836
 #, php-format
 msgid "%d post tagged with &#8220;%s&#8221;"
 msgid_plural "%d posts tagged with &#8220;%s&#8221;"
