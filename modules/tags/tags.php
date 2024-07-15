@@ -722,20 +722,17 @@
                 return $ids;
 
             foreach ($post->tags as $name => $clean) {
-                $results = SQL::current()->select(
-                    tables:"post_attributes",
-                    fields:array("post_id"),
-                    conds:array(
-                        "name" => "tags",
-                        "value LIKE" => $this->tags_name_match($name),
-                        "post_id !=" => $post->id
-                    ),
-                    order:array("post_id DESC"),
-                    limit:$limit
-                )->fetchAll();
+                $tag = $this->tag_find_by_name($name);
 
-                foreach ($results as $result)
-                    $ids[] = $result["post_id"];
+                if (!empty($tag)) {
+                    $ids = array_merge(
+                        $ids,
+                        array_diff(
+                            $tag["post_ids"],
+                            array($post->id)
+                        )
+                    );
+                }
             }
 
             return $ids;
