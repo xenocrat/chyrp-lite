@@ -17,7 +17,7 @@
 <span class="sub">{{ "(optional)" | translate }}</span>
 </label>
 {#- -#}
-<input class="text" type="text" name="clean" value="{{ category.clean | fix(true) }}" id="clean" maxlength="128" pattern="^[a-z0-9\-]*$">
+<input class="text" type="text" name="clean" value="{{ category.clean | fix(true) }}" id="clean" maxlength="128" pattern="{{ slug_pattern }}">
 <small>
 {{ "The slug is the URL-friendly identifying name for this category." | translate("categorize") }}
 </small>

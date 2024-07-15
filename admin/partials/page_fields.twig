@@ -25,7 +25,7 @@
 {{- icon_img("help.svg", "help" | translate) -}}
 </a>
 </label>
-<input class="text" type="text" name="slug" value="{{ page is defined ? page.clean | fix(true) : '' }}" id="slug" maxlength="128" pattern="^[a-z0-9\-]*$">
+<input class="text" type="text" name="slug" value="{{ page is defined ? page.clean | fix(true) : '' }}" id="slug" maxlength="128" pattern="{{ slug_pattern }}">
 </p>
 <p class="more_options_option">
 <label for="status">{{ "Status" | translate }}</label>
