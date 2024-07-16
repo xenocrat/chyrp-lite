@@ -29,6 +29,7 @@
                 new \Twig\TwigFunction("icon_img",          "twig_function_icon_img"),
                 new \Twig\TwigFunction("copyright_notice",  "twig_function_copyright_notice"),
                 new \Twig\TwigFunction("uploaded_search",   "twig_function_uploaded_search"),
+                new \Twig\TwigFunction("slug_pattern",      "twig_function_slug_pattern"),
                 new \Twig\TwigFunction("javascripts_nonce", "twig_function_javascripts_nonce"),
                 new \Twig\TwigFunction("stylesheets_nonce", "twig_function_stylesheets_nonce")
             );
@@ -349,6 +350,14 @@
             return array();
 
         return uploaded_search($search, $filter);
+    }
+
+    /**
+     * Function: twig_function_slug_pattern
+     * Returns a HTML @pattern@ attribute if strict slugs are enabled.
+     */
+    function twig_function_slug_pattern(): string {
+        return SLUG_STRICT ? ' pattern="^[a-z0-9\\-]*$"' : "" ;
     }
 
     /**
