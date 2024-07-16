@@ -743,6 +743,7 @@
             $sort = "popularity_desc",
             $scale = 300
         ): array {
+            $sql = SQL::current();
             $visitor = Visitor::current();
 
             switch ($sort) {
@@ -760,7 +761,7 @@
             }
 
             if (!isset($this->caches["tag_cloud"])) {
-                $results = SQL::current()->select(
+                $results = $sql->select(
                     tables:"posts",
                     fields:"post_attributes.*",
                     conds:array(
