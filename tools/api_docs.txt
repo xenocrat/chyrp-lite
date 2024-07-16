@@ -3261,6 +3261,11 @@ Parameters:
     $filter - An array of valid extensions (case insensitive).
 
 
+Function: twig_function_slug_pattern
+------------------------------------
+Returns a HTML @pattern@ attribute if strict slugs are enabled.
+
+
 Function: twig_function_javascripts_nonce
 -----------------------------------------
 Returns a nonce value to enable inline JavaScript with a Content Security Policy.

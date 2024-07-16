@@ -1043,7 +1043,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 3654
+	includes/controller/Admin.php on line 3653
 
 Target:
 	$this->context
@@ -1093,7 +1093,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 1432
+	includes/controller/Main.php on line 1431
 
 Target:
 	$this->context
@@ -1125,7 +1125,7 @@ javascripts_nonce
 -----------------
 Called from:
 	includes/helpers.php on line 3425
-	includes/lib/Leaf.php on line 360
+	includes/lib/Leaf.php on line 369
 
 Target:
 	$nonce
@@ -1134,7 +1134,7 @@ Target:
 stylesheets_nonce
 -----------------
 Called from:
-	includes/lib/Leaf.php on line 369
+	includes/lib/Leaf.php on line 378
 
 Target:
 	$nonce
