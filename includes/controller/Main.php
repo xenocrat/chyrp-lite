@@ -1427,7 +1427,6 @@
             $this->context["GET"]                = $_GET;
             $this->context["sql_queries"]        =& SQL::current()->queries;
             $this->context["sql_debug"]          =& SQL::current()->debug;
-            $this->context["slug_pattern"]       = SLUG_STRICT ? "^[a-z0-9\\-]*$" : "^.*$" ;
 
             $trigger->filter($this->context, "twig_context_main");
             $this->twig->display($template.".twig", $this->context);
