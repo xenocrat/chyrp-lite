@@ -3647,7 +3647,6 @@
             $this->context["GET"]                = $_GET;
             $this->context["sql_queries"]        =& SQL::current()->queries;
             $this->context["sql_debug"]          =& SQL::current()->debug;
-            $this->context["slug_pattern"]       = SLUG_STRICT ? "^[a-z0-9\\-]*$" : "^.*$" ;
 
             Update::check();
 
