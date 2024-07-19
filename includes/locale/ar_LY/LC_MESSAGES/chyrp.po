@@ -1416,53 +1416,53 @@ msgstr "الرجاء إدخال اسم المستخدم وكلمة المرور 
 msgid "Could not write the configuration file."
 msgstr "تعذر إنشاء ملف الإعدادات."
 
-#: install.php:1032
+#: install.php:1034
 msgid "Database Setup"
 msgstr "إعداد قاعدة البيانات"
 
-#: install.php:1034
+#: install.php:1036
 msgid "Adapter"
 msgstr ""
 
-#: install.php:1048
+#: install.php:1050
 msgid "Host"
 msgstr "الخادم"
 
-#: install.php:1052
+#: install.php:1054
 msgid "Port"
 msgstr ""
 
-#: install.php:1052 install.php:1081
+#: install.php:1054 install.php:1083
 msgid "(optional)"
 msgstr "(اختياري)"
 
-#: install.php:1056 install.php:1119
+#: install.php:1058 install.php:1121
 msgid "Username"
 msgstr "اسم المستخدم"
 
-#: install.php:1060 install.php:1123 install.php:1127
+#: install.php:1062 install.php:1125 install.php:1129
 msgid "Password"
 msgstr "كلمة المرور"
 
-#: install.php:1064
+#: install.php:1066
 msgid "Database"
 msgstr "قاعدة البيانات"
 
-#: install.php:1066
+#: install.php:1068
 msgid "(absolute or relative path)"
 msgstr "(المسار المطلق أو النسبي)"
 
-#: install.php:1072
+#: install.php:1074
 msgid "Make sure your PostgreSQL database uses UTF-8 encoding."
 msgstr "تأكد من قاعدة بيانات PostgreSQL يستخدم الترميز UTF-8."
 
-#: install.php:1075
+#: install.php:1077
 msgid ""
 "The collation <code>utf8mb4_general_ci</code> is recommended for your MySQL "
 "database."
 msgstr "يوصى بالترتيب <code>utf8mb4_general_ci</code> لقاعدة بيانات MySQL."
 
-#: install.php:1078
+#: install.php:1080
 msgid ""
 "Be sure to put your SQLite database outside the document root directory, "
 "otherwise visitors will be able to download it."
@@ -1470,71 +1470,71 @@ msgstr ""
 "تأكد من وضع قاعدة بيانات SQLite خارج المجلد الأساسي، وإلا سيتمكن الزوار من "
 "تنزيلها."
 
-#: install.php:1081
+#: install.php:1083
 msgid "Table Prefix"
 msgstr "بادئة الجدول"
 
-#: install.php:1084
+#: install.php:1086
 msgid "Website Setup"
 msgstr "إعداد الموقع"
 
-#: install.php:1086
+#: install.php:1088
 msgid "Chyrp URL"
 msgstr "رابط Chyrp"
 
-#: install.php:1090
+#: install.php:1092
 msgid "Site Name"
 msgstr "اسم الموقع"
 
-#: install.php:1091
+#: install.php:1093
 msgid "My Awesome Site"
 msgstr "موقعي الرائع"
 
-#: install.php:1094
+#: install.php:1096
 msgid "Description"
 msgstr "الوصف"
 
-#: install.php:1098
+#: install.php:1100
 msgid "Time Zone"
 msgstr "المنطقة الزمنية"
 
-#: install.php:1108
+#: install.php:1110
 msgid "Language"
 msgstr "اللغة"
 
-#: install.php:1117
+#: install.php:1119
 msgid "Admin Account"
 msgstr "حساب المدير"
 
-#: install.php:1127
+#: install.php:1129
 msgid "(again)"
 msgstr "(مرة أخرى)"
 
-#: install.php:1131
+#: install.php:1133
 msgid "Email Address"
 msgstr "البريد الإلكتروني"
 
-#: install.php:1134
+#: install.php:1136
 msgid "Install me!"
 msgstr "قم بتثبيتي!"
 
-#: install.php:1137
+#: install.php:1139
 msgid "Installation Complete"
 msgstr "اكتمل التثبيت"
 
-#: install.php:1138 upgrade.php:952
+#: install.php:1140 upgrade.php:954
 msgid "What now?"
 msgstr "ماذا الآن؟"
 
-#: install.php:1140
+#: install.php:1142
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr "احذف <em>install.php</em>، لن تحتاج إليه بعد الآن."
 
-#: install.php:1141
+#: install.php:1143
 msgid "Log in to your site and configure things to your liking."
 msgstr "سجّل الدخول إلى موقعك وقم بتهيئة الأشياء كيفما أحببت."
 
-#: install.php:1144 upgrade.php:959
+#: install.php:1146 upgrade.php:961
 msgid "Take me to my site!"
 msgstr "خذني إلى موقعي!"
 
@@ -1542,38 +1542,38 @@ msgstr "خذني إلى موقعي!"
 msgid "Chyrp Lite Upgrader"
 msgstr "ترقية Chyrp Lite"
 
-#: upgrade.php:940
+#: upgrade.php:942
 msgid "Halt!"
 msgstr "إيقاف!"
 
-#: upgrade.php:941
+#: upgrade.php:943
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr "يرجى اتخاذ هذه التدابير الاحترازية قبل الترقية:"
 
-#: upgrade.php:943
+#: upgrade.php:945
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr "<strong>قم بنسخ قاعدة البيانات الخاصة بك قبل المتابعة!</strong>"
 
-#: upgrade.php:944
+#: upgrade.php:946
 msgid "Tell your users that your site is offline for maintenance."
 msgstr "أخبر المستخدمين أن موقعك متوقف للصيانة."
 
-#: upgrade.php:948
+#: upgrade.php:950
 msgid "Upgrade me!"
 msgstr "قم بالترقية!"
 
-#: upgrade.php:951
+#: upgrade.php:953
 msgid "Upgrade Complete"
 msgstr "تمت الترقية"
 
-#: upgrade.php:954
+#: upgrade.php:956
 msgid "Take action to resolve any errors reported on this page."
 msgstr "إتخذ إجراءات لحل أي أخطاء تظهر في هذه الصفحة."
 
-#: upgrade.php:955
+#: upgrade.php:957
 msgid "Run this upgrader again if you need to."
 msgstr "قم بتشغيل الترقية مرة أخرى إذا كنت بحاجة إلى ذلك."
 
-#: upgrade.php:956
+#: upgrade.php:958
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr "احذف <em>upgrade.php</em> بمجرد الانتهاء من الترقية."

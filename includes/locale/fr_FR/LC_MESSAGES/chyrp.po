@@ -1438,47 +1438,47 @@ msgstr ""
 msgid "Could not write the configuration file."
 msgstr "Impossible d'écrire dans le fichier de configuration."
 
-#: install.php:1032
+#: install.php:1034
 msgid "Database Setup"
 msgstr "Paramétrage de la base de données"
 
-#: install.php:1034
+#: install.php:1036
 msgid "Adapter"
 msgstr "Adaptateur"
 
-#: install.php:1048
+#: install.php:1050
 msgid "Host"
 msgstr "Hôte"
 
-#: install.php:1052
+#: install.php:1054
 msgid "Port"
 msgstr "Port"
 
-#: install.php:1052 install.php:1081
+#: install.php:1054 install.php:1083
 msgid "(optional)"
 msgstr "(optionnel)"
 
-#: install.php:1056 install.php:1119
+#: install.php:1058 install.php:1121
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
-#: install.php:1060 install.php:1123 install.php:1127
+#: install.php:1062 install.php:1125 install.php:1129
 msgid "Password"
 msgstr "Mot de passe"
 
-#: install.php:1064
+#: install.php:1066
 msgid "Database"
 msgstr "Base de données"
 
-#: install.php:1066
+#: install.php:1068
 msgid "(absolute or relative path)"
 msgstr "(chemin relatif ou absolu)"
 
-#: install.php:1072
+#: install.php:1074
 msgid "Make sure your PostgreSQL database uses UTF-8 encoding."
 msgstr "Assurez-vous que la base de données PostgreSQL soit encodée en UTF-8."
 
-#: install.php:1075
+#: install.php:1077
 msgid ""
 "The collation <code>utf8mb4_general_ci</code> is recommended for your MySQL "
 "database."
@@ -1486,7 +1486,7 @@ msgstr ""
 "La collecte <code>utf8mb4_general_ci</code> est recommandée pour votre base "
 "de données MySQL."
 
-#: install.php:1078
+#: install.php:1080
 msgid ""
 "Be sure to put your SQLite database outside the document root directory, "
 "otherwise visitors will be able to download it."
@@ -1494,71 +1494,71 @@ msgstr ""
 "Assurez-vous que votre base de données SQLite soit bien en dehors du dossier "
 "racine, auquel cas les visiteurs seraient capables de la télécharger."
 
-#: install.php:1081
+#: install.php:1083
 msgid "Table Prefix"
 msgstr "Préfixe de table"
 
-#: install.php:1084
+#: install.php:1086
 msgid "Website Setup"
 msgstr "Paramétrage du site"
 
-#: install.php:1086
+#: install.php:1088
 msgid "Chyrp URL"
 msgstr "URL de Chyrp"
 
-#: install.php:1090
+#: install.php:1092
 msgid "Site Name"
 msgstr "Nom du site"
 
-#: install.php:1091
+#: install.php:1093
 msgid "My Awesome Site"
 msgstr "Mon site génial"
 
-#: install.php:1094
+#: install.php:1096
 msgid "Description"
 msgstr "Description"
 
-#: install.php:1098
+#: install.php:1100
 msgid "Time Zone"
 msgstr "Time Zone"
 
-#: install.php:1108
+#: install.php:1110
 msgid "Language"
 msgstr "Langue"
 
-#: install.php:1117
+#: install.php:1119
 msgid "Admin Account"
 msgstr "Compte Administrateur"
 
-#: install.php:1127
+#: install.php:1129
 msgid "(again)"
 msgstr "(encore)"
 
-#: install.php:1131
+#: install.php:1133
 msgid "Email Address"
 msgstr "Adresse de courriel"
 
-#: install.php:1134
+#: install.php:1136
 msgid "Install me!"
 msgstr "Installez-moi !"
 
-#: install.php:1137
+#: install.php:1139
 msgid "Installation Complete"
 msgstr "Installation terminée"
 
-#: install.php:1138 upgrade.php:952
+#: install.php:1140 upgrade.php:954
 msgid "What now?"
 msgstr "Que faire maintenant ?"
 
-#: install.php:1140
+#: install.php:1142
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr "Supprimer <em>install.php</em>, vous n'en avez plus besoin."
 
-#: install.php:1141
+#: install.php:1143
 msgid "Log in to your site and configure things to your liking."
 msgstr "Connectez-vous à votre site et paramétrez le à votre convenance."
 
-#: install.php:1144 upgrade.php:959
+#: install.php:1146 upgrade.php:961
 msgid "Take me to my site!"
 msgstr "Amènes-moi vers le site !"
 
@@ -1566,43 +1566,43 @@ msgstr "Amènes-moi vers le site !"
 msgid "Chyrp Lite Upgrader"
 msgstr "Gestionnaire de mise à jour de Chyrp Lite"
 
-#: upgrade.php:940
+#: upgrade.php:942
 msgid "Halt!"
 msgstr "Halte !"
 
-#: upgrade.php:941
+#: upgrade.php:943
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr ""
 "Merci de prendre ces mesures de précaution avant d'effectuer la mise à jour :"
 
-#: upgrade.php:943
+#: upgrade.php:945
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr ""
 "<strong>Faîtes une sauvegarde de votre base de données avant d'aller plus "
 "loin !</strong>"
 
-#: upgrade.php:944
+#: upgrade.php:946
 msgid "Tell your users that your site is offline for maintenance."
 msgstr ""
 "Dites à vos utilisateurs que votre site est hors ligne pour maintenance."
 
-#: upgrade.php:948
+#: upgrade.php:950
 msgid "Upgrade me!"
 msgstr "Mets-moi à jour !"
 
-#: upgrade.php:951
+#: upgrade.php:953
 msgid "Upgrade Complete"
 msgstr "Mise à jour terminée"
 
-#: upgrade.php:954
+#: upgrade.php:956
 msgid "Take action to resolve any errors reported on this page."
 msgstr ""
 "Faites le nécessaire afin de résoudre les erreurs affichées sur cette page."
 
-#: upgrade.php:955
+#: upgrade.php:957
 msgid "Run this upgrader again if you need to."
 msgstr "Effectuer de nouveau la mise à jour si nécessaire."
 
-#: upgrade.php:956
+#: upgrade.php:958
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr "Supprimez <em>upgrade.php</em> une fois la mise à jour effectuée."

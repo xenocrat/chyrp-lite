@@ -1409,123 +1409,123 @@ msgstr "请输入数据库的用户名和密码。"
 msgid "Could not write the configuration file."
 msgstr "不能写入配置文件。"
 
-#: install.php:1032
+#: install.php:1034
 msgid "Database Setup"
 msgstr "数据库设置"
 
-#: install.php:1034
+#: install.php:1036
 msgid "Adapter"
 msgstr "适配器"
 
-#: install.php:1048
+#: install.php:1050
 msgid "Host"
 msgstr "主机"
 
-#: install.php:1052
+#: install.php:1054
 msgid "Port"
 msgstr ""
 
-#: install.php:1052 install.php:1081
+#: install.php:1054 install.php:1083
 msgid "(optional)"
 msgstr "(可选)"
 
-#: install.php:1056 install.php:1119
+#: install.php:1058 install.php:1121
 msgid "Username"
 msgstr "用户名"
 
-#: install.php:1060 install.php:1123 install.php:1127
+#: install.php:1062 install.php:1125 install.php:1129
 msgid "Password"
 msgstr "密码"
 
-#: install.php:1064
+#: install.php:1066
 msgid "Database"
 msgstr "数据库"
 
-#: install.php:1066
+#: install.php:1068
 msgid "(absolute or relative path)"
 msgstr "（相对或者绝对路径）"
 
-#: install.php:1072
+#: install.php:1074
 msgid "Make sure your PostgreSQL database uses UTF-8 encoding."
 msgstr "确保您的PostgresQL数据库使用 UTF-8 编码。"
 
-#: install.php:1075
+#: install.php:1077
 msgid ""
 "The collation <code>utf8mb4_general_ci</code> is recommended for your MySQL "
 "database."
 msgstr "推荐为您的 MySQL 数据库使用排序规则 <code>utf8mb4_general_ci</code>。"
 
-#: install.php:1078
+#: install.php:1080
 msgid ""
 "Be sure to put your SQLite database outside the document root directory, "
 "otherwise visitors will be able to download it."
 msgstr "请务必将您的SQLite数据库放在网站根目录之外，否则访问者将能够下载它。"
 
-#: install.php:1081
+#: install.php:1083
 msgid "Table Prefix"
 msgstr "表前缀"
 
-#: install.php:1084
+#: install.php:1086
 msgid "Website Setup"
 msgstr "网站设置"
 
-#: install.php:1086
+#: install.php:1088
 msgid "Chyrp URL"
 msgstr ""
 
-#: install.php:1090
+#: install.php:1092
 msgid "Site Name"
 msgstr "站点名"
 
-#: install.php:1091
+#: install.php:1093
 msgid "My Awesome Site"
 msgstr "我最棒的站点"
 
-#: install.php:1094
+#: install.php:1096
 msgid "Description"
 msgstr "描述"
 
-#: install.php:1098
+#: install.php:1100
 msgid "Time Zone"
 msgstr "时区"
 
-#: install.php:1108
+#: install.php:1110
 msgid "Language"
 msgstr "语言"
 
-#: install.php:1117
+#: install.php:1119
 msgid "Admin Account"
 msgstr "管理员账号"
 
-#: install.php:1127
+#: install.php:1129
 msgid "(again)"
 msgstr "(确认)"
 
-#: install.php:1131
+#: install.php:1133
 msgid "Email Address"
 msgstr "联系的邮件地址"
 
-#: install.php:1134
+#: install.php:1136
 msgid "Install me!"
 msgstr "安装！"
 
-#: install.php:1137
+#: install.php:1139
 msgid "Installation Complete"
 msgstr "安装完成"
 
-#: install.php:1138 upgrade.php:952
+#: install.php:1140 upgrade.php:954
 msgid "What now?"
 msgstr "现在做什么？"
 
-#: install.php:1140
+#: install.php:1142
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr "删除 <em>install.php</em>，您不再需要它。"
 
-#: install.php:1141
+#: install.php:1143
 msgid "Log in to your site and configure things to your liking."
 msgstr "登陆您的站点并且配置您喜欢的东西。"
 
-#: install.php:1144 upgrade.php:959
+#: install.php:1146 upgrade.php:961
 msgid "Take me to my site!"
 msgstr "前往我的站点！"
 
@@ -1533,38 +1533,38 @@ msgstr "前往我的站点！"
 msgid "Chyrp Lite Upgrader"
 msgstr "Chyrp Lite升级程序"
 
-#: upgrade.php:940
+#: upgrade.php:942
 msgid "Halt!"
 msgstr "等一下！"
 
-#: upgrade.php:941
+#: upgrade.php:943
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr "升级前请采取以下预防措施："
 
-#: upgrade.php:943
+#: upgrade.php:945
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr "<strong>开始前备份您的数据库！</strong>"
 
-#: upgrade.php:944
+#: upgrade.php:946
 msgid "Tell your users that your site is offline for maintenance."
 msgstr "告知您的用户站点处于离线状态以进行维护。"
 
-#: upgrade.php:948
+#: upgrade.php:950
 msgid "Upgrade me!"
 msgstr "升级！"
 
-#: upgrade.php:951
+#: upgrade.php:953
 msgid "Upgrade Complete"
 msgstr "升级完成"
 
-#: upgrade.php:954
+#: upgrade.php:956
 msgid "Take action to resolve any errors reported on this page."
 msgstr "采取措施解决此页面上报告的任何错误。"
 
-#: upgrade.php:955
+#: upgrade.php:957
 msgid "Run this upgrader again if you need to."
 msgstr "如果需要，再次运行此升级程序。"
 
-#: upgrade.php:956
+#: upgrade.php:958
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr "删除 <em>upgrade.php</em> 一旦您升级完成后。"

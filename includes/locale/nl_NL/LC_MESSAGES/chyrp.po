@@ -1429,48 +1429,48 @@ msgstr "Geef alsjeblieft een gebruikersnaam en wachtwoord in voor de database."
 msgid "Could not write the configuration file."
 msgstr "Kan het configuratiebestand niet schrijven."
 
-#: install.php:1032
+#: install.php:1034
 msgid "Database Setup"
 msgstr "Database Setup"
 
-#: install.php:1034
+#: install.php:1036
 msgid "Adapter"
 msgstr "Adapter"
 
-#: install.php:1048
+#: install.php:1050
 msgid "Host"
 msgstr "Hostnaam"
 
-#: install.php:1052
+#: install.php:1054
 msgid "Port"
 msgstr "Poort"
 
-#: install.php:1052 install.php:1081
+#: install.php:1054 install.php:1083
 msgid "(optional)"
 msgstr "(optioneel)"
 
-#: install.php:1056 install.php:1119
+#: install.php:1058 install.php:1121
 msgid "Username"
 msgstr "Gebruikersnaam"
 
-#: install.php:1060 install.php:1123 install.php:1127
+#: install.php:1062 install.php:1125 install.php:1129
 msgid "Password"
 msgstr "Wachtwoord"
 
-#: install.php:1064
+#: install.php:1066
 msgid "Database"
 msgstr "Datbasenaam"
 
-#: install.php:1066
+#: install.php:1068
 msgid "(absolute or relative path)"
 msgstr "(absoluut of relatief pad)"
 
-#: install.php:1072
+#: install.php:1074
 msgid "Make sure your PostgreSQL database uses UTF-8 encoding."
 msgstr ""
 "Verzeker jezelf ervan dat de PostgreSQL database UTF-8 codering gebruikt."
 
-#: install.php:1075
+#: install.php:1077
 msgid ""
 "The collation <code>utf8mb4_general_ci</code> is recommended for your MySQL "
 "database."
@@ -1478,7 +1478,7 @@ msgstr ""
 "De collatie <code>utf8mb4_general_ci</code> wordt aangeraden voor je MySQL "
 "database."
 
-#: install.php:1078
+#: install.php:1080
 msgid ""
 "Be sure to put your SQLite database outside the document root directory, "
 "otherwise visitors will be able to download it."
@@ -1486,71 +1486,71 @@ msgstr ""
 "Verzeker je ervan dat je SQLite database zich buiten de root map bevindt, "
 "anders kan iedereen hem downloaden."
 
-#: install.php:1081
+#: install.php:1083
 msgid "Table Prefix"
 msgstr "Tabel-prefix"
 
-#: install.php:1084
+#: install.php:1086
 msgid "Website Setup"
 msgstr "Website Setup"
 
-#: install.php:1086
+#: install.php:1088
 msgid "Chyrp URL"
 msgstr "Chyrp URL"
 
-#: install.php:1090
+#: install.php:1092
 msgid "Site Name"
 msgstr "Website naam"
 
-#: install.php:1091
+#: install.php:1093
 msgid "My Awesome Site"
 msgstr "Mijn gave website"
 
-#: install.php:1094
+#: install.php:1096
 msgid "Description"
 msgstr "Beschrijving"
 
-#: install.php:1098
+#: install.php:1100
 msgid "Time Zone"
 msgstr "Tijdzone"
 
-#: install.php:1108
+#: install.php:1110
 msgid "Language"
 msgstr "Taal"
 
-#: install.php:1117
+#: install.php:1119
 msgid "Admin Account"
 msgstr "Beheerders- account"
 
-#: install.php:1127
+#: install.php:1129
 msgid "(again)"
 msgstr "(opnieuw)"
 
-#: install.php:1131
+#: install.php:1133
 msgid "Email Address"
 msgstr "Emailadres"
 
-#: install.php:1134
+#: install.php:1136
 msgid "Install me!"
 msgstr "Installeer me!"
 
-#: install.php:1137
+#: install.php:1139
 msgid "Installation Complete"
 msgstr "Installatie voltooid"
 
-#: install.php:1138 upgrade.php:952
+#: install.php:1140 upgrade.php:954
 msgid "What now?"
 msgstr "Wat nu?"
 
-#: install.php:1140
+#: install.php:1142
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr "Verwijder <em>install.php</em>, je zult het niet meer nodig hebben."
 
-#: install.php:1141
+#: install.php:1143
 msgid "Log in to your site and configure things to your liking."
 msgstr "Login bij je website en maak de door jou gewenste aanpassingen."
 
-#: install.php:1144 upgrade.php:959
+#: install.php:1146 upgrade.php:961
 msgid "Take me to my site!"
 msgstr "Breng me naar mijn website!"
 
@@ -1558,42 +1558,42 @@ msgstr "Breng me naar mijn website!"
 msgid "Chyrp Lite Upgrader"
 msgstr "Chyrp Lite Upgrade-programma"
 
-#: upgrade.php:940
+#: upgrade.php:942
 msgid "Halt!"
 msgstr "Stop!"
 
-#: upgrade.php:941
+#: upgrade.php:943
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr ""
 "Neem alsjeblieft deze voorzorgsmaatregelen, voordat je met de upgrade begint:"
 
-#: upgrade.php:943
+#: upgrade.php:945
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr ""
 "<strong>Maak een backup van je database, voordat je verder gaat!</strong>"
 
-#: upgrade.php:944
+#: upgrade.php:946
 msgid "Tell your users that your site is offline for maintenance."
 msgstr ""
 "Vertel je gebruikers dat je website offline zal zijn, in verband met "
 "onderhoud."
 
-#: upgrade.php:948
+#: upgrade.php:950
 msgid "Upgrade me!"
 msgstr "Upgrade me!"
 
-#: upgrade.php:951
+#: upgrade.php:953
 msgid "Upgrade Complete"
 msgstr "Upgrade voltooid"
 
-#: upgrade.php:954
+#: upgrade.php:956
 msgid "Take action to resolve any errors reported on this page."
 msgstr "Onderneem acties om de fouten op deze pagina op te lossen."
 
-#: upgrade.php:955
+#: upgrade.php:957
 msgid "Run this upgrader again if you need to."
 msgstr "Herhaal het upgradeprogramma indien noodzakelijk."
 
-#: upgrade.php:956
+#: upgrade.php:958
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr "Verwijder <em>upgrade.php</em> nadat de upgrade-procedure voltooid is."
