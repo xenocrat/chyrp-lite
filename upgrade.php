@@ -924,7 +924,9 @@
                 require MAIN_DIR.DIR."feathers".DIR.$feather.DIR."upgrades.php";
         }
 
+        # Clean up.
         @unlink(INCLUDES_DIR.DIR."upgrading.lock");
+        @unlink(MAIN_DIR.DIR."Dockerfile");
         $upgraded = true;
     }
 

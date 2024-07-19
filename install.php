@@ -1014,7 +1014,9 @@
                     __("Could not write the configuration file.")
                 );
 
+            # Clean up.
             @unlink(INCLUDES_DIR.DIR."upgrading.lock");
+            @unlink(MAIN_DIR.DIR."Dockerfile");
             $installed = true;
         }
     }
