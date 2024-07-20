@@ -927,6 +927,8 @@
         # Clean up.
         @unlink(INCLUDES_DIR.DIR."upgrading.lock");
         @unlink(MAIN_DIR.DIR."Dockerfile");
+        @unlink(MAIN_DIR.DIR.".gitignore");
+        @unlink(MAIN_DIR.DIR.".dockerignore");
         $upgraded = true;
     }
 
