@@ -1640,125 +1640,125 @@ msgstr ""
 msgid "Could not write the configuration file."
 msgstr ""
 
-#: install.php:1034
+#: install.php:1036
 msgid "Database Setup"
 msgstr ""
 
-#: install.php:1036
+#: install.php:1038
 msgid "Adapter"
 msgstr ""
 
-#: install.php:1050
+#: install.php:1052
 msgid "Host"
 msgstr ""
 
-#: install.php:1054
+#: install.php:1056
 msgid "Port"
 msgstr ""
 
-#: install.php:1054
-#: install.php:1083
+#: install.php:1056
+#: install.php:1085
 msgid "(optional)"
 msgstr ""
 
-#: install.php:1058
-#: install.php:1121
+#: install.php:1060
+#: install.php:1123
 msgid "Username"
 msgstr ""
 
-#: install.php:1062
-#: install.php:1125
-#: install.php:1129
+#: install.php:1064
+#: install.php:1127
+#: install.php:1131
 msgid "Password"
 msgstr ""
 
-#: install.php:1066
+#: install.php:1068
 msgid "Database"
 msgstr ""
 
-#: install.php:1068
+#: install.php:1070
 msgid "(absolute or relative path)"
 msgstr ""
 
-#: install.php:1074
+#: install.php:1076
 msgid "Make sure your PostgreSQL database uses UTF-8 encoding."
 msgstr ""
 
-#: install.php:1077
+#: install.php:1079
 msgid "The collation <code>utf8mb4_general_ci</code> is recommended for your MySQL database."
 msgstr ""
 
-#: install.php:1080
+#: install.php:1082
 msgid "Be sure to put your SQLite database outside the document root directory, otherwise visitors will be able to download it."
 msgstr ""
 
-#: install.php:1083
+#: install.php:1085
 msgid "Table Prefix"
 msgstr ""
 
-#: install.php:1086
+#: install.php:1088
 msgid "Website Setup"
 msgstr ""
 
-#: install.php:1088
+#: install.php:1090
 msgid "Chyrp URL"
 msgstr ""
 
-#: install.php:1092
+#: install.php:1094
 msgid "Site Name"
 msgstr ""
 
-#: install.php:1093
+#: install.php:1095
 msgid "My Awesome Site"
 msgstr ""
 
-#: install.php:1096
+#: install.php:1098
 msgid "Description"
 msgstr ""
 
-#: install.php:1100
+#: install.php:1102
 msgid "Time Zone"
 msgstr ""
 
-#: install.php:1110
+#: install.php:1112
 msgid "Language"
 msgstr ""
 
-#: install.php:1119
+#: install.php:1121
 msgid "Admin Account"
 msgstr ""
 
-#: install.php:1129
+#: install.php:1131
 msgid "(again)"
 msgstr ""
 
-#: install.php:1133
+#: install.php:1135
 msgid "Email Address"
 msgstr ""
 
-#: install.php:1136
+#: install.php:1138
 msgid "Install me!"
 msgstr ""
 
-#: install.php:1139
+#: install.php:1141
 msgid "Installation Complete"
 msgstr ""
 
-#: install.php:1140
-#: upgrade.php:954
+#: install.php:1142
+#: upgrade.php:956
 msgid "What now?"
 msgstr ""
 
-#: install.php:1142
+#: install.php:1144
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr ""
 
-#: install.php:1143
+#: install.php:1145
 msgid "Log in to your site and configure things to your liking."
 msgstr ""
 
-#: install.php:1146
-#: upgrade.php:961
+#: install.php:1148
+#: upgrade.php:963
 msgid "Take me to my site!"
 msgstr ""
 
@@ -1766,39 +1766,39 @@ msgstr ""
 msgid "Chyrp Lite Upgrader"
 msgstr ""
 
-#: upgrade.php:942
+#: upgrade.php:944
 msgid "Halt!"
 msgstr ""
 
-#: upgrade.php:943
+#: upgrade.php:945
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr ""
 
-#: upgrade.php:945
+#: upgrade.php:947
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr ""
 
-#: upgrade.php:946
+#: upgrade.php:948
 msgid "Tell your users that your site is offline for maintenance."
 msgstr ""
 
-#: upgrade.php:950
+#: upgrade.php:952
 msgid "Upgrade me!"
 msgstr ""
 
-#: upgrade.php:953
+#: upgrade.php:955
 msgid "Upgrade Complete"
 msgstr ""
 
-#: upgrade.php:956
+#: upgrade.php:958
 msgid "Take action to resolve any errors reported on this page."
 msgstr ""
 
-#: upgrade.php:957
+#: upgrade.php:959
 msgid "Run this upgrader again if you need to."
 msgstr ""
 
-#: upgrade.php:958
+#: upgrade.php:960
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr ""
 

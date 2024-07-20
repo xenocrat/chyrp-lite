@@ -1416,123 +1416,123 @@ msgstr "데이터베이스의 사용자명과 암호를 입력하십시오."
 msgid "Could not write the configuration file."
 msgstr "구성 파일을 쓸 수 없습니다."
 
-#: install.php:1034
+#: install.php:1036
 msgid "Database Setup"
 msgstr "데이터베이스 설정"
 
-#: install.php:1036
+#: install.php:1038
 msgid "Adapter"
 msgstr "어댑터"
 
-#: install.php:1050
+#: install.php:1052
 msgid "Host"
 msgstr "호스트"
 
-#: install.php:1054
+#: install.php:1056
 msgid "Port"
 msgstr "포트"
 
-#: install.php:1054 install.php:1083
+#: install.php:1056 install.php:1085
 msgid "(optional)"
 msgstr "(선택 사항)"
 
-#: install.php:1058 install.php:1121
+#: install.php:1060 install.php:1123
 msgid "Username"
 msgstr "사용자명"
 
-#: install.php:1062 install.php:1125 install.php:1129
+#: install.php:1064 install.php:1127 install.php:1131
 msgid "Password"
 msgstr "비밀번호"
 
-#: install.php:1066
+#: install.php:1068
 msgid "Database"
 msgstr "데이터베이스"
 
-#: install.php:1068
+#: install.php:1070
 msgid "(absolute or relative path)"
 msgstr "(상대 경로 또는 절대 경로)"
 
-#: install.php:1074
+#: install.php:1076
 msgid "Make sure your PostgreSQL database uses UTF-8 encoding."
 msgstr "PostgreSQL 데이터베이스가 UTF-8 인코딩을 사용하는지 확인하십시오."
 
-#: install.php:1077
+#: install.php:1079
 msgid ""
 "The collation <code>utf8mb4_general_ci</code> is recommended for your MySQL "
 "database."
 msgstr ""
 
-#: install.php:1080
+#: install.php:1082
 msgid ""
 "Be sure to put your SQLite database outside the document root directory, "
 "otherwise visitors will be able to download it."
 msgstr ""
 
-#: install.php:1083
+#: install.php:1085
 msgid "Table Prefix"
 msgstr "테이블 접두사"
 
-#: install.php:1086
+#: install.php:1088
 msgid "Website Setup"
 msgstr "웹사이트 설정"
 
-#: install.php:1088
+#: install.php:1090
 msgid "Chyrp URL"
 msgstr ""
 
-#: install.php:1092
+#: install.php:1094
 msgid "Site Name"
 msgstr "사이트명"
 
-#: install.php:1093
+#: install.php:1095
 msgid "My Awesome Site"
 msgstr "나의 멋진 사이트"
 
-#: install.php:1096
+#: install.php:1098
 msgid "Description"
 msgstr "설명"
 
-#: install.php:1100
+#: install.php:1102
 msgid "Time Zone"
 msgstr "시간대"
 
-#: install.php:1110
+#: install.php:1112
 msgid "Language"
 msgstr "언어"
 
-#: install.php:1119
+#: install.php:1121
 msgid "Admin Account"
 msgstr "관리자 계정"
 
-#: install.php:1129
+#: install.php:1131
 msgid "(again)"
 msgstr "비밀번호 확인"
 
-#: install.php:1133
+#: install.php:1135
 msgid "Email Address"
 msgstr "이메일 주소"
 
-#: install.php:1136
+#: install.php:1138
 msgid "Install me!"
 msgstr "설치가 필요합니다."
 
-#: install.php:1139
+#: install.php:1141
 msgid "Installation Complete"
 msgstr "설치가 완료되었습니다"
 
-#: install.php:1140 upgrade.php:954
+#: install.php:1142 upgrade.php:956
 msgid "What now?"
 msgstr ""
 
-#: install.php:1142
+#: install.php:1144
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr "더 이상 필요하지 않은 경우 <em>install.php</em>를 삭제하세요."
 
-#: install.php:1143
+#: install.php:1145
 msgid "Log in to your site and configure things to your liking."
 msgstr "사이트에 로그인하고 원하는 대로 구성하세요."
 
-#: install.php:1146 upgrade.php:961
+#: install.php:1148 upgrade.php:963
 msgid "Take me to my site!"
 msgstr "사이트로 이동합니다."
 
@@ -1540,38 +1540,38 @@ msgstr "사이트로 이동합니다."
 msgid "Chyrp Lite Upgrader"
 msgstr "Chyrp Lite 업그레이드"
 
-#: upgrade.php:942
+#: upgrade.php:944
 msgid "Halt!"
 msgstr "정지!"
 
-#: upgrade.php:943
+#: upgrade.php:945
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr "업그레이드하기 전에 다음 예방 조치를 취하십시오:"
 
-#: upgrade.php:945
+#: upgrade.php:947
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr "<strong>진행하기 전에 데이터베이스를 백업하세요.</strong>"
 
-#: upgrade.php:946
+#: upgrade.php:948
 msgid "Tell your users that your site is offline for maintenance."
 msgstr "유지 관리를 위해 사이트가 오프라인 상태임을 사용자에게 알립니다."
 
-#: upgrade.php:950
+#: upgrade.php:952
 msgid "Upgrade me!"
 msgstr "새로운 버전이 있습니다."
 
-#: upgrade.php:953
+#: upgrade.php:955
 msgid "Upgrade Complete"
 msgstr "업그레이드가 완료되었습니다"
 
-#: upgrade.php:956
+#: upgrade.php:958
 msgid "Take action to resolve any errors reported on this page."
 msgstr "이 페이지에 보고된 오류를 해결하기 위한 조치를 취하십시오."
 
-#: upgrade.php:957
+#: upgrade.php:959
 msgid "Run this upgrader again if you need to."
 msgstr "필요한 경우 업그레이드를 다시 실행하십시오."
 
-#: upgrade.php:958
+#: upgrade.php:960
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr "업그레이드가 완료되면 <em>upgrade.php</em>를 삭제해야 합니다."
