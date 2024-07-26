@@ -1550,6 +1550,7 @@
             $parser->convertTabsToSpaces = false;
             $parser->html5 = true;
             $parser->keepListStartNumber = true;
+            $parser->keepReversedList = true;
             $parser->headlineAnchors = true;
             $parser->enableNewlines = false;
             $parser->renderCheckboxInputs = false;
