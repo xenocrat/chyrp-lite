@@ -123,9 +123,10 @@ trait HeadlineTrait
 			}
 
 			if ($id !== '') {
-				$prefix = ($this->getContextId() === '') ?
-					'' :
-					$this->getContextId() . '-';
+				$prefix = $this->getContextId();
+				if ($prefix !== '') {
+					$prefix .= '-';
+				}
 
 				while (isset($this->headlineAnchorLinks[$id])) {
 					$id .= '-' . $this->headlineAnchorLinks[$id]++;

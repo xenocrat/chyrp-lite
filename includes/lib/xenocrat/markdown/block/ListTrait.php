@@ -20,6 +20,14 @@ trait ListTrait
 	public $keepListStartNumber = true;
 
 	/**
+	 * @var bool Enable support for a `reversed` attribute of ordered lists.
+	 *
+	 * This means that lists defined in the markdown with a start number
+	 * greater than the end number will be rendered with descending numbers.
+	 */
+	public $keepReversedList = false;
+
+	/**
 	 * Identify a line as the beginning of an ordered list.
 	 */
 	protected function identifyOl($line): bool
@@ -69,6 +77,7 @@ trait ListTrait
 		$item = 0;
 		$marker = '';
 		$mw = 0;
+		$nums = [];
 
 		// Consume until end condition...
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
@@ -83,24 +92,22 @@ trait ListTrait
 				preg_match($pattern, $line, $matches)
 				&& ($i === $current || strlen($matches[1]) < $mw)
 			) {
+				// Capture the ol item number.
+				if ($type === 'ol') {
+					$nums[] = intval($matches[2]);
+				}
 				if ($i === $current) {
 				// First item.
 					// Store the marker for comparison.
 					$marker = $type === 'ol' ?
-						$matches[3] : $matches[2] ;
-
-					// Set the ol start attribute.
-					if ($type === 'ol' && $this->keepListStartNumber) {
-						$start = intval($matches[2]);
-						if ($start !== 1) {
-							$block['attr']['start'] = $start;
-						}
-					}
+						$matches[3] :
+						$matches[2] ;
 				} else {
 					$item++;
 
 					$newMarker = $type === 'ol' ?
-						$matches[3] : $matches[2] ;
+						$matches[3] :
+						$matches[2] ;
 
 					// Marker has changed: end of list.
 					if (strcmp($marker, $newMarker) !== 0) {
@@ -152,6 +159,17 @@ trait ListTrait
 				&& $this->identifyHr($lines[$i + 1])
 			) {
 				break;
+			}
+		}
+		// Set the ol attributes.
+		if ($type === 'ol') {
+			$start = $nums[0];
+			$end = end($nums);
+			if ($start !== 1 && $this->keepListStartNumber) {
+				$block['attr']['start'] = $start;
+			}
+			if ($start > $end && $this->keepReversedList) {
+				$block['attr']['reversed'] = '';
 			}
 		}
 		// Tight list? check it...
