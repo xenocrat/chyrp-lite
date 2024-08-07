@@ -1438,7 +1438,7 @@
                        unfix($comment->url()).
                        "\r\n".
                        "\r\n".
-                       truncate(strip_tags($comment->body), 60);
+                       truncate(strip_tags($comment->body), 997);
 
             return email($mailto, $subject, $message, $headers);
         }
@@ -1463,7 +1463,7 @@
                        unfix($comment->url()).
                        "\r\n".
                        "\r\n".
-                       truncate(strip_tags($comment->body), 60);
+                       truncate(strip_tags($comment->body), 997);
 
             return email($mailto, $subject, $message, $headers);
         }
