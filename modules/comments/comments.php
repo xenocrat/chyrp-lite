@@ -1493,7 +1493,7 @@
                        unfix($comment->url()).
                        "\r\n".
                        "\r\n".
-                       truncate(strip_tags($comment->body), 60).
+                       truncate(strip_tags($comment->body), 997).
                        "\r\n".
                        "\r\n".
                        __("Unsubscribe from this conversation:", "comments").
