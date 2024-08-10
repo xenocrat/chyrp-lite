@@ -1438,7 +1438,7 @@
                        unfix($comment->url()).
                        "\r\n".
                        "\r\n".
-                       truncate(strip_tags($comment->body), 997);
+                       truncate(strip_tags($comment->body), 998);
 
             return email($mailto, $subject, $message, $headers);
         }
@@ -1463,7 +1463,7 @@
                        unfix($comment->url()).
                        "\r\n".
                        "\r\n".
-                       truncate(strip_tags($comment->body), 997);
+                       truncate(strip_tags($comment->body), 998);
 
             return email($mailto, $subject, $message, $headers);
         }
@@ -1493,7 +1493,7 @@
                        unfix($comment->url()).
                        "\r\n".
                        "\r\n".
-                       truncate(strip_tags($comment->body), 997).
+                       truncate(strip_tags($comment->body), 998).
                        "\r\n".
                        "\r\n".
                        __("Unsubscribe from this conversation:", "comments").
