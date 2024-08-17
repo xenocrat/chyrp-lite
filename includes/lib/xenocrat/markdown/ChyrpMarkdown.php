@@ -109,7 +109,7 @@ class ChyrpMarkdown extends GithubMarkdown
 	 *
 	 * Add parsed footnotes and then post-process markup.
 	 */
-	function postprocess($markup): string
+	protected function postprocess($markup): string
 	{
 		return parent::postprocess(
 			$this->addParsedFootnotes($markup)

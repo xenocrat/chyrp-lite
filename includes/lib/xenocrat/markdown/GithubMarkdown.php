@@ -49,6 +49,29 @@ class GithubMarkdown extends Markdown
 	public $enableNewlines = false;
 
 	/**
+	 * @var boolean Whether to sanitize disallowed raw HTML tags.
+	 *
+	 * This toggles section 6.11 of the GFM specification on or off.
+	 */
+	public $disallowedRawHTML = true;
+
+	/**
+	 * @var array Disallowed HTML elements defined in GFM spec
+	 * @see https://github.github.com/gfm/#disallowed-raw-html-extension-
+	 */
+	protected $disallowedRawHTMLElements = [
+		'iframe',
+		'noembed',
+		'noframes',
+		'plaintext',
+		'script',
+		'style',
+		'title',
+		'textarea',
+		'xmp',
+	];
+
+	/**
 	 * @inheritDoc
 	 */
 	protected function consumeParagraph($lines, $current): array
@@ -99,5 +122,23 @@ class GithubMarkdown extends Markdown
 			$text[1] = preg_replace("/ *\n/", $br, $text[1]);
 		}
 		return parent::renderText($text);
+	}
+
+	/**
+	 * @inheritDoc
+	 *
+	 * Sanitize disallowed raw HTML tags, then post-process markup.
+	 */
+	protected function postprocess($markup): string
+	{
+		if ($this->disallowedRawHTML) {
+			$patterns = implode('|', $this->disallowedRawHTMLElements);
+			$markup = preg_replace(
+				"/<($patterns)(\s|>|\/>)/i",
+				"&lt;$1$2",
+				$markup
+			);
+		}
+		return parent::postprocess($markup);
 	}
 }
