@@ -1554,6 +1554,7 @@
             $parser->headlineAnchors = true;
             $parser->enableNewlines = false;
             $parser->renderCheckboxInputs = false;
+            $parser->disallowedRawHTML = false;
         }
 
         if ($context instanceof Model) {
