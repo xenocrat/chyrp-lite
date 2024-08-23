@@ -800,16 +800,19 @@
                     $popularity = array_count_values($names);
                     $min = min($popularity);
                     $max = max($popularity);
+
                     $step = (int) $scale / (
                         ($min === $max) ? 1 : ($max - $min)
                     );
 
-                    $main = MainController::current();
-
                     foreach ($popularity as $name => $count) {
                         $size = floor($step * ($count - $min));
                         $title = $this->tag_cloud_title($name, $count);
-                        $url = url("tag/".$found[$name], $main);
+
+                        $url = url(
+                            "tag/".urlencode($found[$name]),
+                            MainController::current()
+                        );
 
                         $cloud[] = array(
                             "size" => $size,
