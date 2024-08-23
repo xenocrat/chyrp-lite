@@ -529,7 +529,7 @@ Called from:
 add_category
 ------------
 Called from:
-	modules/categorize/model/Category.php on line 74
+	modules/categorize/model/Category.php on line 75
 
 Arguments:
 	$new
@@ -538,7 +538,7 @@ Arguments:
 update_category
 ---------------
 Called from:
-	modules/categorize/model/Category.php on line 116
+	modules/categorize/model/Category.php on line 117
 
 Arguments:
 	$category
@@ -548,7 +548,7 @@ Arguments:
 delete_category
 ---------------
 Called from:
-	modules/categorize/model/Category.php on line 130
+	modules/categorize/model/Category.php on line 131
 
 Arguments:
 	$category
