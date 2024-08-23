@@ -21,7 +21,8 @@
                 return;
 
             $this->url = url(
-                "category/".$this->clean, MainController::current()
+                "category/".urlencode($this->clean),
+                MainController::current()
             );
         }
 
