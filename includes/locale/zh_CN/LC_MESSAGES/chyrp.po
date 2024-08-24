@@ -1181,22 +1181,22 @@ msgstr "访问这个链接重置您的密码："
 msgid "Guest"
 msgstr "访问者"
 
-#: includes/lib/Leaf.php:517
+#: includes/lib/Leaf.php:519
 #, php-format
 msgid "%s GB"
 msgstr "%s GB"
 
-#: includes/lib/Leaf.php:522
+#: includes/lib/Leaf.php:524
 #, php-format
 msgid "%s MB"
 msgstr "%s MB"
 
-#: includes/lib/Leaf.php:526
+#: includes/lib/Leaf.php:528
 #, php-format
 msgid "%s KB"
 msgstr "%s KB"
 
-#: includes/lib/Leaf.php:752
+#: includes/lib/Leaf.php:754
 msgid "Image source"
 msgstr "图片来源"
 

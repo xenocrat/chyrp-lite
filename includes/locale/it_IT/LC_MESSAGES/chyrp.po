@@ -1200,22 +1200,22 @@ msgstr "Visita questo link per reimpostare la password:"
 msgid "Guest"
 msgstr "Ospite"
 
-#: includes/lib/Leaf.php:517
+#: includes/lib/Leaf.php:519
 #, php-format
 msgid "%s GB"
 msgstr "%s GB"
 
-#: includes/lib/Leaf.php:522
+#: includes/lib/Leaf.php:524
 #, php-format
 msgid "%s MB"
 msgstr "%s MB"
 
-#: includes/lib/Leaf.php:526
+#: includes/lib/Leaf.php:528
 #, php-format
 msgid "%s KB"
 msgstr "%s KB"
 
-#: includes/lib/Leaf.php:752
+#: includes/lib/Leaf.php:754
 msgid "Image source"
 msgstr "Fonte immagine"
 
