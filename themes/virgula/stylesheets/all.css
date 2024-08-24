@@ -286,18 +286,19 @@ a:hover,
 summary:hover {
     color: #003078;
 }
-a:focus,
-a:focus code {
+a:focus {
     outline: none;
-    background-color: #ffdd00;
+    text-decoration: underline;
+    text-underline-offset: 0.125em;
+    text-decoration-thickness: 0.0625em;
 }
 a:active,
 summary:active {
     color: #0b0c0c;
 }
 label {
-    display: inline;
-    margin: 0rem;
+    display: block;
+    margin: 0.3rem 0rem;
 }
 select[disabled],
 textarea[disabled],
@@ -491,6 +492,8 @@ div.doaction a:hover,
 button:hover,
 div.doaction a:focus,
 button:focus {
+    outline: none;
+    text-decoration: none;
     background-color: #003078;
 }
 div.doaction a:active,
@@ -519,10 +522,10 @@ article.audio audio {
     width: 100%;
 }
 *:focus,
-div.doaction a:focus,
 section.photo > a:focus,
 section a:has(img):focus {
-    outline: #ffdd00 solid 4px;
+    outline: #ffdd00 solid 2px;
+    outline-offset: 2px;
 }
 #comment_shim {
     display: none;
