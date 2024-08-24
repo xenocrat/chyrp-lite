@@ -16,14 +16,6 @@
         public function __construct($category_id, $options = array()) {
             $options["from"] = "categorize";
             parent::grab($this, $category_id, $options);
-
-            if ($this->no_results)
-                return;
-
-            $this->url = url(
-                "category/".urlencode($this->clean),
-                MainController::current()
-            );
         }
 
         /**
@@ -200,6 +192,20 @@
             }
 
             return $unique;
+        }
+
+        /**
+         * Function: url
+         * Returns a category's URL.
+         */
+        public function url(): string|false {
+            if ($this->no_results)
+                return false;
+
+            return url(
+                "category/".urlencode($this->clean),
+                MainController::current()
+            );
         }
 
         /**
