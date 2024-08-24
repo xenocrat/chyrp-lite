@@ -25,7 +25,7 @@
 </a>
 {% if module_enabled("categorize") and post.category is defined %}
 &bull;
-<a class="category category_{{ post.category.id }}" href="{{ post.category.url }}" rel="tag">
+<a class="category category_{{ post.category.id }}" href="{{ post.category.url() }}" rel="tag">
 {{ post.category.name | oneof("[Untitled]" | translate) }}
 </a>
 {% endif %}

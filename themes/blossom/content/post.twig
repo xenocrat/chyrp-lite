@@ -24,7 +24,7 @@
 {% endif %}
 </a>
 {% if module_enabled("categorize") and post.category is defined %}
-&bull; <a href="{{ post.category.url }}" rel="tag">{{ post.category.name | oneof("[Untitled]" | translate) }}</a>
+&bull; <a href="{{ post.category.url() }}" rel="tag">{{ post.category.name | oneof("[Untitled]" | translate) }}</a>
 {% endif %}
 {% if module_enabled("likes") %}
 {{ post.like_link ? "&bull; " ~ post.like_link : "" }}

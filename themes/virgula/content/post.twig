@@ -17,7 +17,7 @@
 {% if module_enabled("categorize") and post.category is defined %}
 <span class="category">
 {% set category_name = post.category.name | oneof("[Untitled]" | translate) %}
-{% set category_link = '<a href="' ~ post.category.url ~ '" rel="tag">' ~ category_name ~ '</a>' %}
+{% set category_link = '<a href="' ~ post.category.url() ~ '" rel="tag">' ~ category_name ~ '</a>' %}
 {{ "Filed in %s." | translate | format(category_link) }}
 </span>
 {% endif %}

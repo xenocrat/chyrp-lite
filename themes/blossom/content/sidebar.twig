@@ -52,7 +52,7 @@
 <ul class="navigation sidebar categories" aria-labelledby="label_categories">
 {% for category in categorize %}
 <li>
-<a href="{{ category.url }}">{{ category.name | oneof("[Untitled]" | translate) }}</a>
+<a href="{{ category.url() }}">{{ category.name | oneof("[Untitled]" | translate) }}</a>
 </li>
 {% endfor %}
 </ul>
