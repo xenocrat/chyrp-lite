@@ -1083,6 +1083,7 @@ a.emblem:focus > img,
 button.emblem:focus > img,
 label.emblem.toolbar > input:focus + img {
     outline: #ff7f00 dashed 2px;
+    outline-offset: 1px;
 }
 input.toolbar.hidden {
     display: inline !important;
@@ -1133,6 +1134,7 @@ input.toolbar.hidden::file-selector-button {
 }
 .iframe_foreground:focus {
     outline: #ff7f00 dashed 2px;
+    outline-offset: 1px;
 }
 .iframe_close_gadget {
     display: block;
