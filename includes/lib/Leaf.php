@@ -357,7 +357,9 @@
      * Returns a HTML @pattern@ attribute if strict slugs are enabled.
      */
     function twig_function_slug_pattern(): string {
-        return SLUG_STRICT ? ' pattern="^[a-z0-9\\-]*$"' : "" ;
+        return SLUG_STRICT ?
+            ' pattern="^[a-z0-9\\-]*$"' :
+            ' pattern="^[^\\u0021-\\u002f\\u003a-\\u0040\\u005b-\\u0060\\u007b-\\u007e]*$"' ;
     }
 
     /**
