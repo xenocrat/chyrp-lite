@@ -1087,6 +1087,7 @@ label.emblem.toolbar > input:focus + img {
 }
 input.toolbar.hidden {
     display: inline !important;
+    opacity: 0 !important;
     font: inherit !important;
     width: 1px !important;
     height: 16px !important;
@@ -1094,7 +1095,6 @@ input.toolbar.hidden {
     border: none !important;
     padding: 0rem !important;
     margin: 0rem !important;
-    visibility: hidden !important;
 }
 input.toolbar.hidden::file-selector-button {
     display: none !important;
