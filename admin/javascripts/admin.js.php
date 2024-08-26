@@ -1257,6 +1257,21 @@ var Settings = {
             }
         );
 
+        $("form#general_settings").on(
+            "submit",
+            function(e) {
+                if ($("#chyrp_url").val() === Site.chyrp_url)
+                    return;
+
+                var text = '<?php esce(__("Changing the Chyrp URL could break your site.", "admin")); ?>' +
+                           ' ' +
+                           '<?php esce(__("Are you sure you want to proceed?", "admin")); ?>';
+
+                if (!confirm(text.replace(/<[^>]+>/g, "")))
+                    e.preventDefault();
+            }
+        );
+
         $("form#route_settings input[name='post_url']").on(
             "keyup",
             function(e) {
