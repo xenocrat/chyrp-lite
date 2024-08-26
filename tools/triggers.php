@@ -623,7 +623,7 @@
             }
             aside {
                 margin-bottom: 1rem;
-                padding: 0.5rem 1rem;
+                padding: 0.5rem;
                 border: 1px solid #e5d7a1;
                 border-radius: 0.25em;
                 background-color: #fffecd;

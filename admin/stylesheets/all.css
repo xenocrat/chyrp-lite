@@ -351,7 +351,7 @@ hr {
 aside {
     box-sizing: border-box;
     margin-bottom: 1rem;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem;
     border: 1px solid #e5d7a1;
     border-radius: 0.25em;
     background-color: #fffde6;
@@ -963,7 +963,7 @@ span.options_extra {
     display: block;
     width: 100%;
     max-height: 10rem;
-    padding: 1rem;
+    padding: 0.5rem;
     background-color: #fffde6;
     border: 1px solid #cfcfcf;
     border-top: none;
@@ -1025,7 +1025,7 @@ span.options_tray:empty {
 }
 table.interactive + div.controls {
     background-color: #fffde6;
-    padding: 1rem;
+    padding: 1rem 0.5rem;
     border: 1px solid #cfcfcf;
     border-top: none;
 }
