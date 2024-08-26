@@ -7,20 +7,24 @@
 <form id="mathjax_settings" class="split" action="{{ url('mathjax_settings') }}" method="post" accept-charset="UTF-8">
 <fieldset role="presentation">
 <p>
-<label for="enable_latex">{{ "TeX and LaTeX Support" | translate("mathjax") }}</label>
-{#- -#}
-<input type="checkbox" class="checkbox" name="enable_latex" id="enable_latex"{{ site.module_mathjax.enable_latex | checked }}>
+<label for="enable_latex">
+{{ "TeX and LaTeX Support" | translate("mathjax") }}
 <a href="https://docs.mathjax.org/en/v3.0-latest/input/tex/delimiters.html" rel="help" target="_blank" class="help emblem">
 {{- icon_img("help.svg", "help" | translate) -}}
 </a>
+</label>
+{#- -#}
+<input type="checkbox" class="checkbox" name="enable_latex" id="enable_latex"{{ site.module_mathjax.enable_latex | checked }}>
 </p>
 <p>
-<label for="enable_mathml">{{ "MathML Support" | translate("mathjax") }}</label>
-{#- -#}
-<input type="checkbox" class="checkbox" name="enable_mathml" id="enable_mathml"{{ site.module_mathjax.enable_mathml | checked }}>
+<label for="enable_mathml">
+{{ "MathML Support" | translate("mathjax") }}
 <a href="https://docs.mathjax.org/en/v3.0-latest/input/mathml.html" rel="help" target="_blank" class="help emblem">
 {{- icon_img("help.svg", "help" | translate) -}}
 </a>
+</label>
+{#- -#}
+<input type="checkbox" class="checkbox" name="enable_mathml" id="enable_mathml"{{ site.module_mathjax.enable_mathml | checked }}>
 </p>
 <p class="buttons">
 <button type="submit" class="yay">
