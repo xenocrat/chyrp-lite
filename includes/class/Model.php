@@ -537,7 +537,7 @@
 
             $classes = $classes.' '.$name.'_edit_link edit_link';
 
-            echo $before.'<a href="'.$url.'" class="'.trim($classes).
+            echo $before.'<a href="'.$url.'" class="'.fix(trim($classes), true).
                  '" id="'.$name.'_edit_'.$this->id.'">'.$text.'</a>'.$after;
         }
 
@@ -571,7 +571,7 @@
 
             $classes = $classes.' '.$name.'_delete_link delete_link';
 
-            echo $before.'<a href="'.$url.'" class="'.trim($classes).
+            echo $before.'<a href="'.$url.'" class="'.fix(trim($classes), true).
                  '" id="'.$name.'_delete_'.$this->id.'">'.$text.'</a>'.$after;
         }
 
