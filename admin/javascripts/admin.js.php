@@ -342,13 +342,7 @@ var Uploads = {
                                 $(this).parent().remove();
                             }
                         ).append(
-                            $(
-                                "<img>",
-                                {
-                                    "src": Site.chyrp_url + '/admin/images/icons/close.svg',
-                                    "alt": '<?php esce(__("close", "admin")); ?>'
-                                }
-                            )
+                            '<?php esce(icon_svg("close.svg")); ?>'
                         )
                     ]
                 ).click(
@@ -421,13 +415,7 @@ var Help = {
                         $(this).parent().remove();
                     }
                 ).append(
-                    $(
-                        "<img>",
-                        {
-                            "src": Site.chyrp_url + '/admin/images/icons/close.svg',
-                            "alt": '<?php esce(__("close", "admin")); ?>'
-                        }
-                    )
+                    '<?php esce(icon_svg("close.svg")); ?>'
                 )
             ]
         ).click(
@@ -462,13 +450,7 @@ var Write = {
                             Write.formatting(target, "h3");
                         }
                     ).append(
-                        $(
-                            "<img>",
-                            {
-                                "src": Site.chyrp_url + '/admin/images/icons/heading.svg',
-                                "alt": '<?php esce(__("heading", "admin")); ?>'
-                            }
-                        )
+                        '<?php esce(icon_svg("heading.svg")); ?>'
                     )
                 );
 
@@ -487,13 +469,7 @@ var Write = {
                             Write.formatting(target, "strong");
                         }
                     ).append(
-                        $(
-                            "<img>",
-                            {
-                                "src": Site.chyrp_url + '/admin/images/icons/bold.svg',
-                                "alt": '<?php esce(__("strong", "admin")); ?>'
-                            }
-                        )
+                        '<?php esce(icon_svg("bold.svg")); ?>'
                     )
                 );
 
@@ -512,13 +488,7 @@ var Write = {
                             Write.formatting(target, "em");
                         }
                     ).append(
-                        $(
-                            "<img>",
-                            {
-                                "src": Site.chyrp_url + '/admin/images/icons/italic.svg',
-                                "alt": '<?php esce(__("emphasis", "admin")); ?>'
-                            }
-                        )
+                        '<?php esce(icon_svg("italic.svg")); ?>'
                     )
                 );
 
@@ -537,13 +507,7 @@ var Write = {
                             Write.formatting(target, "del");
                         }
                     ).append(
-                        $(
-                            "<img>",
-                            {
-                                "src": Site.chyrp_url + '/admin/images/icons/strikethrough.svg',
-                                "alt": '<?php esce(__("strikethrough", "admin")); ?>'
-                            }
-                        )
+                        '<?php esce(icon_svg("Strikethrough.svg")); ?>'
                     )
                 );
 
@@ -562,13 +526,7 @@ var Write = {
                             Write.formatting(target, "mark");
                         }
                     ).append(
-                        $(
-                            "<img>",
-                            {
-                                "src": Site.chyrp_url + '/admin/images/icons/highlight.svg',
-                                "alt": '<?php esce(__("highlight", "admin")); ?>'
-                            }
-                        )
+                        '<?php esce(icon_svg("highlight.svg")); ?>'
                     )
                 );
 
@@ -587,13 +545,7 @@ var Write = {
                             Write.formatting(target, "code");
                         }
                     ).append(
-                        $(
-                            "<img>",
-                            {
-                                "src": Site.chyrp_url + '/admin/images/icons/code.svg',
-                                "alt": '<?php esce(__("code", "admin")); ?>'
-                            }
-                        )
+                        '<?php esce(icon_svg("code.svg")); ?>'
                     )
                 );
 
@@ -612,13 +564,7 @@ var Write = {
                             Write.formatting(target, "hyperlink");
                         }
                     ).append(
-                        $(
-                            "<img>",
-                            {
-                                "src": Site.chyrp_url + '/admin/images/icons/link.svg',
-                                "alt": '<?php esce(__("hyperlink", "admin")); ?>'
-                            }
-                        )
+                        '<?php esce(icon_svg("link.svg")); ?>'
                     )
                 );
 
@@ -637,13 +583,7 @@ var Write = {
                             Write.formatting(target, "img");
                         }
                     ).append(
-                        $(
-                            "<img>",
-                            {
-                                "src": Site.chyrp_url + '/admin/images/icons/image.svg',
-                                "alt": '<?php esce(__("image", "admin")); ?>'
-                            }
-                        )
+                        '<?php esce(icon_svg("image.svg")); ?>'
                     )
                 );
 
@@ -709,13 +649,7 @@ var Write = {
                                 }
                             }
                         ),
-                        $(
-                            "<img>",
-                            {
-                                "src": Site.chyrp_url + '/admin/images/icons/upload.svg',
-                                "alt": '<?php esce(__("image", "admin")); ?>'
-                            }
-                        )
+                        $('<?php esce(icon_svg("upload.svg")); ?>')
                     ]
                 ).appendTo(toolbar);
 
@@ -753,11 +687,8 @@ var Write = {
                                 );
                             }
                         ).append(
-                            $("<img>", {
-                                "src": Site.chyrp_url + '/admin/images/icons/storage.svg',
-                                "alt": '<?php esce(__("insert", "admin")); ?>'
-                            })
-                        )
+                        '<?php esce(icon_svg("storage.svg")); ?>'
+                    )
                     );
                 }
             }
@@ -796,13 +727,7 @@ var Write = {
                                     target.focus();
                             }
                         ).append(
-                            $(
-                                "<img>",
-                                {
-                                    "src": Site.chyrp_url + '/admin/images/icons/view.svg',
-                                    "alt": '<?php esce(__("preview", "admin")); ?>'
-                                }
-                            )
+                            '<?php esce(icon_svg("view.svg")); ?>'
                         )
                     );
                 }
@@ -1221,13 +1146,7 @@ var Write = {
                         $(this).parent().remove();
                     }
                 ).append(
-                    $(
-                        "<img>",
-                        {
-                            "src": Site.chyrp_url + '/admin/images/icons/close.svg',
-                            "alt": '<?php esce(__("close", "admin")); ?>'
-                        }
-                    )
+                    '<?php esce(icon_svg("close.svg")); ?>'
                 )
             ]
         ).click(
