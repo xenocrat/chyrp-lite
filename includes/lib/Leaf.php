@@ -20,13 +20,14 @@
                 new \Twig\TwigFunction("is_url",            "is_url"),
                 new \Twig\TwigFunction("is_email",          "is_email"),
                 new \Twig\TwigFunction("generate_captcha",  "generate_captcha"),
+                new \Twig\TwigFunction("icon_img",          "icon_img"),
+                new \Twig\TwigFunction("icon_svg",          "icon_svg"),
                 new \Twig\TwigFunction("javascripts",       "javascripts"),
 
                 # Custom functions:
                 new \Twig\TwigFunction("paginate",          "twig_function_paginate"),
                 new \Twig\TwigFunction("posted",            "twig_function_posted"),
                 new \Twig\TwigFunction("mailto",            "twig_function_mailto"),
-                new \Twig\TwigFunction("icon_img",          "twig_function_icon_img"),
                 new \Twig\TwigFunction("copyright_notice",  "twig_function_copyright_notice"),
                 new \Twig\TwigFunction("uploaded_search",   "twig_function_uploaded_search"),
                 new \Twig\TwigFunction("slug_pattern",      "twig_function_slug_pattern"),
@@ -262,34 +263,6 @@
             );
 
         return $mailto.implode("", $chars);
-    }
-
-    /**
-     * Function: twig_function_icon_img
-     * Returns a URL to the requested icon resource.
-     *
-     * Parameters:
-     *     $filename - The icon filename.
-     *     $alt_text - The alternative text for the image.
-     *     $class - The CSS class for the link.
-     */
-    function twig_function_icon_img(
-        $filename,
-        $alt_text = "",
-        $class = null
-    ): string {
-        $url = Config::current()->chyrp_url.
-               "/admin/images/icons/".$filename;
-
-        $img = '<img src="'.fix($url, true).
-               '" alt="'.fix($alt_text, true);
-
-        if (isset($class) and $class !== false)
-            $img.= '" class="'.fix($class, true);
-
-        $img.= '">';
-
-        return $img;
     }
 
     /**
