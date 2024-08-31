@@ -1022,9 +1022,12 @@ span.options_tray:empty {
 *.tag:visited {
     text-decoration: none;
 }
+*.tag:focus,
+*.tag:active,
 *.tag_added {
     background-color: #f2fbff;
     border-color: #1e57ba;
+    outline: none;
 }
 table.interactive + div.controls {
     background-color: #fffde6;
@@ -1087,11 +1090,6 @@ label.emblem:focus,
 button.emblem:focus {
     outline: none;
 }
-a.emblem:focus,
-label.emblem:focus,
-button.emblem:focus {
-    outline: none;
-}
 a.emblem:hover,
 a.emblem:focus,
 a.emblem:active,
@@ -1103,14 +1101,12 @@ button.emblem:focus,
 button.emblem:active {
     color: #1e57ba;
 }
-
-
-a.emblem:focus > svg,
-a.emblem:focus > img,
-button.emblem:focus > svg,
-button.emblem:focus > img,
-label.emblem.toolbar > input:focus + svg
-label.emblem.toolbar > input:focus + img {
+a.emblem:focus-visible > svg,
+a.emblem:focus-visible > img,
+button.emblem:focus-visible > svg,
+button.emblem:focus-visible > img,
+label.emblem.toolbar > input:focus-visible + svg
+label.emblem.toolbar > input:focus-visible + img {
     outline: #ff7f00 dashed 2px;
     outline-offset: 1px;
 }
@@ -1161,10 +1157,6 @@ input.toolbar.hidden::file-selector-button {
     background-color: #ffffff;
     box-shadow: 0px 4px 16px 2px rgba(79, 79, 79, 0.5);
 }
-.iframe_foreground:focus {
-    outline: #ff7f00 dashed 2px;
-    outline-offset: 1px;
-}
 .iframe_close_gadget {
     display: block;
     position: absolute;
@@ -1173,6 +1165,15 @@ input.toolbar.hidden::file-selector-button {
     top: 1.5rem;
     right: calc(20% - 1.5rem);
     cursor: pointer;
+}
+.iframe_foreground:focus,
+.iframe_close_gadget:focus {
+    outline: none;
+}
+.iframe_foreground:focus-visible,
+.iframe_close_gadget:focus-visible {
+    outline: #ff7f00 dashed 2px;
+    outline-offset: 1px;
 }
 .iframe_close_gadget svg,
 .iframe_close_gadget img {
