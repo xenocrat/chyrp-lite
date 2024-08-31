@@ -582,7 +582,7 @@
             }
             html, body, div, dl, dt, dd, ul, ol, li, p,
             h1, h2, h3, h4, h5, h6, img, pre, code,
-            form, fieldset, input, select, textarea,
+            form, fieldset, input, select, svg, textarea,
             table, tbody, tr, th, td, legend, caption,
             blockquote, aside, figure, figcaption {
                 margin: 0em;
