@@ -65,7 +65,7 @@
 
 html, body, div, dl, dt, dd, ul, ol, li, p,
 h1, h2, h3, h4, h5, h6, img, pre, code,
-form, fieldset, input, select, textarea,
+form, fieldset, input, select, svg, textarea,
 table, tbody, tr, th, td, legend, caption,
 blockquote, aside, figure, figcaption {
     margin: 0em;
@@ -459,10 +459,6 @@ ul#modules_enabled > li.error div.controls,
 ul#modules_disabled > li.error div.controls {
     border-top: 1px solid #d6bdb5;
 }
-#content ul.extend li a.emblem img,
-#content ul.extend > li > h3 a {
-    text-decoration: none;
-}
 
 /* Group: Forms */
 
@@ -768,7 +764,9 @@ table tbody tr.comment_excerpt td p {
 th.toggler > label {
     display: none;
 }
+td.controls svg,
 td.controls img {
+    fill: currentColor;
     position: relative;
     top: 2px;
     width: 16px;
@@ -782,7 +780,9 @@ td img.image {
     outline: #ff7f00 solid 1px;
     outline-offset: 0px;
 }
+td svg.placeholder,
 td img.placeholder {
+    fill: #656565;
     width: 16px;
     height: 16px;
     padding: 27px;
@@ -881,8 +881,11 @@ button.yay:active,
 a.button.yay:active {
     border-color: #108600;
 }
+button > svg,
 button > img,
+a.button > svg,
 a.button > img {
+    fill: currentColor;
     display: block;
     position: relative;
     top: 0.5rem;
@@ -1062,10 +1065,15 @@ button.emblem {
     border-radius: 0rem;
     cursor: pointer;
 }
+svg.emblem,
 img.emblem,
+a.emblem > svg,
 a.emblem > img,
+label.emblem > svg,
 label.emblem > img,
+button.emblem > svg,
 button.emblem > img {
+    fill: currentColor;
     float: none;
     display: inline;
     position: relative;
@@ -1079,8 +1087,29 @@ label.emblem:focus,
 button.emblem:focus {
     outline: none;
 }
+a.emblem:focus,
+label.emblem:focus,
+button.emblem:focus {
+    outline: none;
+}
+a.emblem:hover,
+a.emblem:focus,
+a.emblem:active,
+label.emblem:hover,
+label.emblem:focus,
+label.emblem:active,
+button.emblem:hover,
+button.emblem:focus,
+button.emblem:active {
+    color: #1e57ba;
+}
+
+
+a.emblem:focus > svg,
 a.emblem:focus > img,
+button.emblem:focus > svg,
 button.emblem:focus > img,
+label.emblem.toolbar > input:focus + svg
 label.emblem.toolbar > input:focus + img {
     outline: #ff7f00 dashed 2px;
     outline-offset: 1px;
@@ -1145,7 +1174,9 @@ input.toolbar.hidden::file-selector-button {
     right: calc(20% - 1.5rem);
     cursor: pointer;
 }
+.iframe_close_gadget svg,
 .iframe_close_gadget img {
+    fill: currentColor;
     width: 1.5rem;
     height: 1.5rem;
 }
@@ -1231,12 +1262,6 @@ input.toolbar.hidden::file-selector-button {
     textarea {
         width: 100% !important;
     }
-    input.text + a.help.emblem {
-        float:  right;
-        position: relative;
-        top: -2.25rem;
-        left: -0.5rem;
-    }
     #content table tbody tr td {
         padding: 1rem 0.5rem;
     }
@@ -1262,8 +1287,8 @@ input.toolbar.hidden::file-selector-button {
             margin: 0rem 0rem 1rem 0rem !important;
         }
     }
-    button:not(.toolbar):has(img),
-    a.button:not(.toolbar):has(img) {
+    button:not(.toolbar):has(img, svg),
+    a.button:not(.toolbar):has(img, svg) {
         padding-right: calc(16px + 1rem) !important;
     }
     div.more_options {
