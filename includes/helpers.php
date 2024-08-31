@@ -3112,8 +3112,89 @@
         if (is_bool($variable)) {
             echo ($variable) ? "true" : "false" ;
         } else {
-            echo addslashes((string) $variable);
+            echo addslashes(
+                str_replace(
+                    array("\n", "\r"),
+                    "",
+                    (string) $variable
+                )
+            );
         }
+    }
+
+    /**
+     * Function: icon_img
+     * Returns an img tag for the requested icon resource.
+     *
+     * Parameters:
+     *     $filename - The icon filename.
+     *     $alt_text - The alternative text for the image.
+     *     $class - The CSS class for the image.
+     */
+    function icon_img(
+        $filename,
+        $alt_text = "",
+        $class = null
+    ): string {
+        $url = Config::current()->chyrp_url.
+               "/admin/images/icons/".$filename;
+
+        $img = '<img src="'.fix($url, true).
+               '" alt="'.fix($alt_text, true);
+
+        if (isset($class) and $class !== false)
+            $img.= '" class="'.fix($class, true);
+
+        $img.= '">';
+
+        return $img;
+    }
+
+    /**
+     * Function: icon_svg
+     * Returns an SVG tag for the requested icon resource.
+     *
+     * Parameters:
+     *     $filename - The icon filename.
+     *     $label - The ARIA label for the SVG.
+     *     $class - The CSS class for the SVG.
+     */
+    function icon_svg(
+        $filename,
+        $label = null,
+        $class = null
+    ): string {
+        $filename = str_replace(array(DIR, "/"), "", $filename);
+        $id = serialize(array($filename, $label, $class));
+        $path = MAIN_DIR.DIR."admin".DIR."images".DIR."icons";
+        $attrs = "";
+
+        static $cache = array();
+
+        if (isset($cache[$id]))
+            return $cache[$id];
+
+        $svg = @file_get_contents($path.DIR.$filename);
+
+        if ($svg === false)
+            return "";
+
+        if (isset($label) and $label !== false) {
+            $attrs.= 'aria-label="'.fix($label, true).'" ';
+        } else {
+            $attrs.= 'aria-hidden="true" ';
+        }
+
+        if (isset($class) and $class !== false)
+            $attrs.= 'class="'.fix($class, true).'" ';
+
+        $svg = str_replace(
+            '<svg xmlns="http://www.w3.org/2000/svg" ',
+            '<svg xmlns="http://www.w3.org/2000/svg" '.$attrs,
+            $svg
+        );
+
+        return $cache[$id] = $svg;
     }
 
     /**
