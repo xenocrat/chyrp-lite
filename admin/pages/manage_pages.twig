@@ -8,14 +8,14 @@
 <label for="query">
 {{ "Search&hellip;" | translate }}
 <a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem">
-{{- icon_img("help.svg", "help" | translate) -}}
+{{- icon_svg("help.svg", "Help" | translate) -}}
 </a>
 </label>
 <input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true, true) }}" id="query">
 <button type="submit">{{ "Search" | translate }}</button>
 {% if visitor.group.can("add_page") %}
 <a href="{{ url('write_page') }}" class="button yay">
-{{ icon_img("add.svg") }}{{ "New Page" | translate }}
+{{ icon_svg("add.svg") }}{{ "New Page" | translate }}
 </a>
 {% endif %}
 </fieldset>
@@ -52,12 +52,12 @@
 </td>
 <td class="page_public emblem">
 {% if page.public %}
-{{ icon_img("success.svg", "yes" | translate, "emblem") }}
+{{ icon_svg("success.svg", "Yes" | translate, "emblem") }}
 {% endif %}
 </td>
 <td class="page_show emblem">
 {% if page.show_in_list %}
-{{ icon_img("success.svg", "yes" | translate, "emblem") }}
+{{ icon_svg("success.svg", "Yes" | translate, "emblem") }}
 {% endif %}
 </td>
 <td class="page_author value">
@@ -65,16 +65,17 @@
 </td>
 {{ trigger.call("manage_pages_column", page) }}
 <td class="controls">
-{{ page.edit_link(icon_img("edit.svg", "edit" | translate), null, null, "emblem") }}
+{{ page.edit_link(icon_svg("edit.svg", "Edit" | translate), null, null, "emblem") }}
 </td>
 <td class="controls">
-{{ page.delete_link(icon_img("delete.svg", "delete" | translate), null, null, "emblem") }}
+{{ page.delete_link(icon_svg("delete.svg", "Delete" | translate), null, null, "emblem") }}
 </td>
 </tr>
 {% else %}
 <tr>
 <td class="placeholder">
-{{ icon_img("failure.svg", "", "emblem") }} {{ "No results" | translate }}
+{{ icon_svg("failure.svg", false, "emblem") }}
+{{ "No results" | translate }}
 </td>
 </tr>
 {% endfor %}

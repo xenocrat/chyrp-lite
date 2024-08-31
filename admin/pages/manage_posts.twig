@@ -8,14 +8,14 @@
 <label for="query">
 {{ "Search&hellip;" | translate }}
 <a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem">
-{{- icon_img("help.svg", "help" | translate) -}}
+{{- icon_svg("help.svg", "Help" | translate) -}}
 </a>
 </label>
 <input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true, true) }}" id="query">
 <button type="submit">{{ "Search" | translate }}</button>
 {% if visitor.group.can("add_post", "add_draft") %}
 <a href="{{ url('write_post') }}" class="button yay">
-{{ icon_img("add.svg") }}{{ "New Post" | translate }}
+{{ icon_svg("add.svg") }}{{ "New Post" | translate }}
 </a>
 {% endif %}
 </fieldset>
@@ -49,16 +49,16 @@
 </td>
 {{ trigger.call("manage_posts_column", post) }}
 <td class="controls">
-{{ post.edit_link(icon_img("edit.svg", "edit" | translate), null, null, "emblem") }}
+{{ post.edit_link(icon_svg("edit.svg", "Edit" | translate), null, null, "emblem") }}
 </td>
 <td class="controls">
-{{ post.delete_link(icon_img("delete.svg", "delete" | translate), null, null, "emblem") }}
+{{ post.delete_link(icon_svg("delete.svg", "Delete" | translate), null, null, "emblem") }}
 </td>
 </tr>
 {% else %}
 <tr>
 <td class="placeholder">
-<img class="emblem" src="{{ site.chyrp_url }}/admin/images/icons/failure.svg" alt="">
+{{ icon_svg("failure.svg", false, "emblem") }}
 {{ "No results" | translate }}
 </td>
 </tr>

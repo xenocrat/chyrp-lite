@@ -11,11 +11,13 @@
 <label for="body">
 {{ "Body" | translate("comments") }}
 </label>
-<span id="body_toolbar" class="options_toolbar">{% if site.enable_markdown %}
+<span id="body_toolbar" class="options_toolbar">
+{% if site.enable_markdown %}
 <a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown">
-{{- icon_img("markdown.svg", "Markdown" | translate) -}}
+{{- icon_svg("markdown.svg", "Markdown" | translate) -}}
 </a>
-{% endif %}</span>
+{% endif %}
+</span>
 <textarea rows="12" name="body" id="body" data-no_uploads{{ comment_markdown }} required>{{ comment.body | fix(false, true) }}</textarea>
 <span id="body_tray" class="options_tray" role="status"></span>
 </p>

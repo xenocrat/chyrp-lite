@@ -10,13 +10,15 @@
 {% for safename, feather in enabled_feathers %}
 <li class="feather{{ feather.classes is defined ? ' ' ~ feather.classes | join(' ') : '' }}" id="feather_{{ safename }}">
 <h4>
-{{ feather.name }}{# translation is done in the controller #}
+{{ feather.name }}
+{# translation is done in the controller #}
 <a class="emblem feather_url" rel="external" href="{{ feather.url }}" target="_blank">
-{{ icon_img("info.svg", "info" | translate) }}
+{{- icon_svg("info.svg", "Info" | translate) -}}
 </a>
 </h4>
 <p class="feather_description">
-{{ feather.description }}{# translation is done in the controller #}
+{{ feather.description }}
+{# translation is done in the controller #}
 </p>
 <div class="controls">
 <form class="feather_disabler" action="{{ url('disable') }}" method="post" accept-charset="UTF-8">
@@ -43,13 +45,15 @@
 {% for safename, feather in disabled_feathers %}
 <li class="feather{{ feather.classes is defined ? ' ' ~ feather.classes | join(' ') : '' }}" id="feather_{{ safename }}">
 <h4>
-{{ feather.name }}{# translation is done in the controller #}
+{{ feather.name }}
+{# translation is done in the controller #}
 <a class="emblem feather_url" href="{{ feather.url }}" target="_blank">
-{{- icon_img("info.svg", "info" | translate) }}
+{{- icon_svg("info.svg", "Info" | translate) -}}
 </a>
 </h4>
 <p class="feather_description">
-{{ feather.description }}{# translation is done in the controller #}
+{{ feather.description }}
+{# translation is done in the controller #}
 </p>
 <div class="controls">
 <form class="feather_enabler" action="{{ url('enable') }}" method="post" accept-charset="UTF-8">

@@ -8,13 +8,13 @@
 <label for="query">
 {{ "Search&hellip;" | translate }}
 <a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem">
-{{- icon_img("help.svg", "help" | translate) -}}
+{{- icon_svg("help.svg", "Help" | translate) -}}
 </a>
 </label>
 <input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true, true) }}" id="query">
 <button type="submit">{{ "Search" | translate }}</button>
 <a href="{{ url('new_category') }}" class="button yay"> 
-{{ icon_img("add.svg") }}{{ "New Category" | translate("categorize") }}
+{{ icon_svg("add.svg") }}{{ "New Category" | translate("categorize") }}
 </a>
 </fieldset>
 </form>
@@ -34,7 +34,7 @@
 <tr id="category_{{ category.id }}">
 <td class="category_show emblem">
 {% if category.show_on_home %}
-{{ icon_img("success.svg", "yes" | translate, "emblem") }}
+{{ icon_svg("success.svg", "Yes" | translate, "emblem") }}
 {% endif %}
 </td>
 <td class="category_name name main">
@@ -44,16 +44,17 @@
 {{ category.post_count }}
 </td>
 <td class="controls">
-{{ category.edit_link(icon_img("edit.svg", "edit" | translate), null, null, "emblem") }}
+{{ category.edit_link(icon_svg("edit.svg", "Edit" | translate), null, null, "emblem") }}
 </td>
 <td class="controls">
-{{ category.delete_link(icon_img("delete.svg", "delete" | translate), null, null, "emblem") }}
+{{ category.delete_link(icon_svg("delete.svg", "Delete" | translate), null, null, "emblem") }}
 </td>
 </tr>
 {% else %}
 <tr>
 <td class="placeholder">
-{{ icon_img("failure.svg", "", "emblem") }} {{ "No results" | translate }}
+{{ icon_svg("failure.svg", false, "emblem") }}
+{{ "No results" | translate }}
 </td>
 </tr>
 {% endfor %}

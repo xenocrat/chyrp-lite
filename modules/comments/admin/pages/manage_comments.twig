@@ -8,7 +8,7 @@
 <label for="query">
 {{ "Search&hellip;" | translate }}
 <a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem">
-{{- icon_img("help.svg", "help" | translate) -}}
+{{- icon_svg("help.svg", "Help" | translate) -}}
 </a>
 </label>
 <input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true, true) }}" id="query">
@@ -51,10 +51,10 @@
 </td>
 {{ trigger.call("manage_comments_column", comment) }}
 <td class="controls">
-{{ comment.edit_link(icon_img("edit.svg", "edit" | translate), null, null, "emblem") }}
+{{ comment.edit_link(icon_svg("edit.svg", "Edit" | translate), null, null, "emblem") }}
 </td>
 <td class="controls">
-{{ comment.delete_link(icon_img("delete.svg", "delete" | translate), null, null, "emblem") }}
+{{ comment.delete_link(icon_svg("delete.svg", "Delete" | translate), null, null, "emblem") }}
 </td>
 </tr>
 <tr class="comment_excerpt">
@@ -63,7 +63,8 @@
 {% else %}
 <tr>
 <td class="placeholder">
-{{ icon_img("failure.svg", "", "emblem") }} {{ "No results" | translate }}
+{{ icon_svg("failure.svg", false, "emblem") }}
+{{ "No results" | translate }}
 </td>
 </tr>
 {% endfor %}

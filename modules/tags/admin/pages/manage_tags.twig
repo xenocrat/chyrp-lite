@@ -10,7 +10,7 @@
 <button type="submit">{{ "Search" | translate }}</button>
 {% if visitor.group.can("edit_draft", "edit_post", "delete_draft", "delete_post") %}
 <a href="{{ url('posts_tagged') }}" class="button yay">
-{{ icon_img("add.svg") }}{{ "Add Tags" | translate("tags") }}
+{{ icon_svg("add.svg") }}{{ "Add Tags" | translate("tags") }}
 </a>
 {% endif %}
 </fieldset>
@@ -36,14 +36,14 @@
 <td class="controls">
 {% if visitor.group.can("edit_post") %}
 <a class="tag_edit_link edit_link emblem" href="{{ url('rename_tag/clean/' ~ (tag.clean | url_encode)) }}">
-{{- icon_img("edit.svg", "edit" | translate) -}}
+{{- icon_svg("edit.svg", "Edit" | translate) -}}
 </a>
 {% endif %}
 </td>
 <td class="controls">
 {% if visitor.group.can("edit_post") %}
 <a class="tag_delete_link delete_link emblem" href="{{ url('delete_tag/clean/' ~ (tag.clean | url_encode)) }}">
-{{- icon_img("delete.svg", "delete" | translate) -}}
+{{- icon_svg("delete.svg", "Delete" | translate) -}}
 </a>
 {% endif %}
 </td>
@@ -51,7 +51,8 @@
 {% else %}
 <tr>
 <td class="placeholder">
-{{ icon_img("failure.svg", "", "emblem") }} {{ "No results" | translate }}
+{{ icon_svg("failure.svg", false, "emblem") }}
+{{ "No results" | translate }}
 </td>
 </tr>
 {% endfor %}

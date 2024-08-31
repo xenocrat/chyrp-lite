@@ -10,7 +10,7 @@
 <button type="submit">{{ "Search" | translate }}</button>
 {% if visitor.group.can("add_group") %}
 <a href="{{ url('new_group') }}" class="button yay">
-{{ icon_img("add.svg") }}{{ "New Group" | translate }}
+{{ icon_svg("add.svg") }}{{ "New Group" | translate }}
 </a>
 {% endif %}
 </fieldset>
@@ -38,26 +38,27 @@
 </td>
 <td class="group_default emblem">
 {% if group.id == site.default_group %}
-{{ icon_img("success.svg", "yes" | translate, "emblem") }}
+{{ icon_svg("success.svg", "Yes" | translate, "emblem") }}
 {% endif %}
 </td>
 <td class="group_guest emblem">
 {% if group.id == site.guest_group %}
-{{ icon_img("success.svg", "yes" | translate, "emblem") }}
+{{ icon_svg("success.svg", "Yes" | translate, "emblem") }}
 {% endif %}
 </td>
 {{ trigger.call("manage_groups_column", groups) }}
 <td class="controls">
-{{ group.edit_link(icon_img("edit.svg", "edit" | translate), null, null, "emblem") }}
+{{ group.edit_link(icon_svg("edit.svg", "Edit" | translate), null, null, "emblem") }}
 </td>
 <td class="controls">
-{{ group.delete_link(icon_img("delete.svg", "delete" | translate), null, null, "emblem") }}
+{{ group.delete_link(icon_svg("delete.svg", "Delete" | translate), null, null, "emblem") }}
 </td>
 </tr>
 {% else %}
 <tr>
 <td class="placeholder">
-{{ icon_img("failure.svg", "", "emblem") }} {{ "No results" | translate }}
+{{ icon_svg("failure.svg", false, "emblem") }}
+{{ "No results" | translate }}
 </td>
 </tr>
 {% endfor %}

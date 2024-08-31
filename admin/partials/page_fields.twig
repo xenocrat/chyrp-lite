@@ -8,11 +8,13 @@
 <label for="body">
 {{ "Body" | translate }}
 </label>
-<span id="body_toolbar" class="options_toolbar" role="toolbar">{% if field_markdown %}
+<span id="body_toolbar" class="options_toolbar" role="toolbar">
+{% if field_markdown %}
 <a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown">
-{{- icon_img("markdown.svg", "Markdown" | translate) -}}
+{{- icon_svg("markdown.svg", "Markdown" | translate) -}}
 </a>
-{% endif %}</span>
+{% endif %}
+</span>
 <textarea rows="12" name="body" id="body" data-preview{{ field_markdown }} required>{{ page is defined ? page.body | fix(false, true) : "" }}</textarea>
 <span id="body_tray" class="options_tray" role="status"></span>
 </p>
@@ -22,7 +24,7 @@
 <label for="slug">
 {{ "Slug" | translate }}
 <a href="{{ url('help/id/slugs') }}" rel="help" target="_blank" class="help emblem">
-{{- icon_img("help.svg", "help" | translate) -}}
+{{- icon_svg("help.svg", "Help" | translate) -}}
 </a>
 </label>
 <input class="text" type="text" name="slug" value="{{ page is defined ? page.clean | fix(true) : '' }}" id="slug" maxlength="128"{{ slug_pattern() }}>

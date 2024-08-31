@@ -10,7 +10,7 @@
 <button type="submit">{{ "Search" | translate }}</button>
 {% if visitor.group.can("import_content") %}
 <a href="{{ url('import') }}" class="button yay">
-{{ icon_img("add.svg") }}{{ "Add Files" | translate }}
+{{ icon_svg("add.svg") }}{{ "Add Files" | translate }}
 </a>
 {% endif %}
 </fieldset>
@@ -34,15 +34,15 @@
 {% if ["jpg", "jpeg", "png", "webp", "gif"] | contains(upload.type) %}
 {{ upload.name | thumbnail("", false, ["max_width=70", "quality=60", "square=1"], "70px") }}
 {% elseif ["avif", "tif", "tiff", "heif", "bmp"] | contains(upload.type) %}
-{{ icon_img("image.svg", "", "placeholder") }}
+{{ icon_svg("image.svg", false, "placeholder") }}
 {% elseif ["mp3", "m4a", "oga", "ogg", "mka", "flac", "wav", "aiff"] | contains(upload.type) %}
-{{ icon_img("audio.svg", "", "placeholder") }}
+{{ icon_svg("audio.svg", false, "placeholder") }}
 {% elseif ["mpg", "mpeg", "mp2", "mp4", "m4v", "ogv", "mkv",  "mov", "avi", "webm", "3gp", "ts"] | contains(upload.type) %}
-{{ icon_img("video.svg", "", "placeholder") }}
+{{ icon_svg("video.svg", false, "placeholder") }}
 {% elseif ["zip", "tar", "rar", "gz", "bz2", "7z", "dmg", "cab", "iso", "udf"] | contains(upload.type) %}
-{{ icon_img("archive.svg", "", "placeholder") }}
+{{ icon_svg("archive.svg", false, "placeholder") }}
 {% else %}
-{{ icon_img("file.svg", "", "placeholder") }}
+{{ icon_svg("file.svg", false, "placeholder") }}
 {% endif %}
 <a target="_blank" href="{{ upload.name | uploaded }}">{{ upload.name | fix }}</a>
 </td>
@@ -58,19 +58,20 @@
 {{ trigger.call("manage_uploads_column", upload) }}
 <td class="controls">
 <a class="emblem" href="{{ upload.name | download }}">
-{{- icon_img("download.svg", "download" | translate) -}}
+{{- icon_svg("download.svg", "Download" | translate) -}}
 </a>
 </td>
 <td class="controls">
 <a class="upload_delete_link delete_link emblem" href="{{ url('delete_upload/file/' ~ (upload.name | url_encode)) }}">
-{{- icon_img("delete.svg", "delete" | translate) -}}
+{{- icon_svg("delete.svg", "Delete" | translate) -}}
 </a>
 </td>
 </tr>
 {% else %}
 <tr>
 <td class="placeholder">
-{{ icon_img("failure.svg", "", "emblem") }} {{ "No results" | translate }}
+{{ icon_svg("failure.svg", false, "emblem") }}
+{{ "No results" | translate }}
 </td>
 </tr>
 {% endfor %}

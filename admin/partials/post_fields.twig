@@ -29,7 +29,7 @@
 {% endif %}
 {% if field.help is defined %}
 <a href="{{ url('help/id/' ~ (field.help | url_encode)) }}" rel="help" target="_blank" class="help emblem">
-{{- icon_img("help.svg", "help" | translate) -}}
+{{- icon_svg("help.svg", "Help" | translate) -}}
 </a>
 {% endif %}
 </label>
@@ -48,10 +48,12 @@
 {% endif %}
 {% elseif field.type == "text_block" %}
 <span id="{{ field_name }}_field_toolbar" class="options_toolbar" role="toolbar">
-{% if field_markdown is not empty %}<a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown">
-{{- icon_img("markdown.svg", "Markdown" | translate) -}}
+{% if field_markdown is not empty %}
+<a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown">
+{{- icon_svg("markdown.svg", "Markdown" | translate) -}}
 </a>
-{% endif %}</span>
+{% endif %}
+</span>
 <textarea id="{{ field_id }}" name="{{ field_name }}" rows="12"{{ field_preview ~ field_markdown ~ field_required }}>{{ field_value | fix(false, true) }}</textarea>
 <span id="{{ field_name }}_field_tray" class="options_tray" role="status"></span>
 {% elseif field.type == "checkbox" %}
@@ -121,7 +123,7 @@
 <label for="slug">
 {{ "Slug" | translate }}
 <a href="{{ url('help/id/slugs') }}" rel="help" target="_blank" class="help emblem">
-{{- icon_img("help.svg", "help" | translate) -}}
+{{- icon_svg("help.svg", "Help" | translate) -}}
 </a>
 </label>
 <input id="slug" class="text" type="text" name="slug" value="{{ post is defined ? post.clean | fix(true) : '' }}" maxlength="128"{{ slug_pattern() }}>
@@ -145,7 +147,7 @@
 {% endif %}
 {% if field.help is defined %}
 <a href="{{ url('help/id/' ~ (field.help | url_encode)) }}" rel="help" target="_blank" class="help emblem">
-{{- icon_img("help.svg", "help" | translate) -}}
+{{- icon_svg("help.svg", "Help" | translate) -}}
 </a>
 {% endif %}
 </label>
