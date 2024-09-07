@@ -32,7 +32,9 @@
          * Returns:
          *     @mixed@
          */
-        public function __get($name): mixed {
+        public function __get(
+            $name
+        ): mixed {
             if (isset($this->data[$name]))
                 return $this->data[$name];
 
@@ -48,7 +50,9 @@
          * Function: __isset
          * Handles access to the configuration data.
          */
-        public function __isset($name): bool {
+        public function __isset(
+            $name
+        ): bool {
             return isset($this->data[$name]);
         }
 
@@ -94,7 +98,11 @@
          *     $value - The value to set.
          *     $fallback - Add the setting only if it doesn't exist.
          */
-        public function set($setting, $value, $fallback = false): int|bool {
+        public function set(
+            $setting,
+            $value,
+            $fallback = false
+        ): int|bool {
             if (isset($this->data[$setting]) and $fallback)
                 return true;
 
@@ -113,7 +121,9 @@
          * Parameters:
          *     $setting - The setting name.
          */
-        public function remove($setting): int|false {
+        public function remove(
+            $setting
+        ): int|false {
             unset($this->data[$setting]);
             return $this->write();
         }

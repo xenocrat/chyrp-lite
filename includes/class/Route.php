@@ -39,7 +39,9 @@
          * Parameters:
          *     $controller - The controller to use.
          */
-        private function __construct($controller) {
+        private function __construct(
+            $controller
+        ) {
             if (!in_array("Controller", class_implements($controller)))
                 trigger_error(
                     __("Route was initiated with an invalid Controller."),
@@ -206,7 +208,10 @@
          *     An absolute clean or dirty URL, depending on value of @Config->clean_urls@
          *     and @controller->clean_urls@.
          */
-        public static function url($url, $controller = null): string {
+        public static function url(
+            $url,
+            $controller = null
+        ): string {
             $config = Config::current();
 
             if (!isset($controller))
@@ -277,7 +282,10 @@
          * See Also:
          *     <remove>
          */
-        public function add($path, $action): void {
+        public function add(
+            $path,
+            $action
+        ): void {
             $config = Config::current();
             $new_routes = $config->routes;
             $new_routes[$path] = $action;
@@ -294,7 +302,9 @@
          * See Also:
          *     <add>
          */
-        public function remove($path): void {
+        public function remove(
+            $path
+        ): void {
             $config = Config::current();
             $new_routes = $config->routes;
             unset($new_routes[$path]);
@@ -357,7 +367,9 @@
          * Function: current
          * Returns a singleton reference to the current class.
          */
-        public static function & current($controller = null): ?self {
+        public static function & current(
+            $controller = null
+        ): ?self {
             static $instance = null;
 
             if (!isset($controller) and empty($instance))

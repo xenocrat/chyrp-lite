@@ -10,12 +10,16 @@
             View::install();
         }
 
-        public static function __uninstall($confirm): void {
+        public static function __uninstall(
+            $confirm
+        ): void {
             if ($confirm)
                 View::uninstall();
         }
 
-        public function twig_context_main($context): void {
+        public function twig_context_main(
+            $context
+        ): void {
             $visitor = Visitor::current();
 
             if (
@@ -44,7 +48,9 @@
                    '</th>';
         }
 
-        public function manage_posts_column($post): string {
+        public function manage_posts_column(
+            $post
+        ): string {
             $text = _f("Download view count for &#8220;%s&#8221;", $post->title(), "post_views");
 
             if ($post->view_count > 0)
@@ -61,15 +67,22 @@
                 return '<td class="post_views value">'.$post->view_count.'</td>';
         }
 
-        public function user($user): void {
+        public function user(
+            $user
+        ): void {
             $user->has_many[] = "views";
         }
 
-        public function post($post): void {
+        public function post(
+            $post
+        ): void {
             $post->has_many[] = "views";
         }
 
-        public function post_options($fields, $post = null): array {
+        public function post_options(
+            $fields,
+            $post = null
+        ): array {
             if (isset($post))
                 $fields[] = array(
                     "attr" => "reset_views",
@@ -81,7 +94,9 @@
             return $fields;
         }
 
-        public function update_post($post): void {
+        public function update_post(
+            $post
+        ): void {
             if (isset($_POST['reset_views']))
                 SQL::current()->delete(
                     table:"views",
@@ -89,7 +104,9 @@
                 );
         }
 
-        public function delete_post($post): void {
+        public function delete_post(
+            $post
+        ): void {
             SQL::current()->delete(
                 table:"views",
                 conds:array("post_id" => $post->id)
@@ -139,7 +156,9 @@
             file_attachment($filedata, $filename.".csv");
         }
 
-        private function get_post_view_count($post_id): int {
+        private function get_post_view_count(
+            $post_id
+        ): int {
             if (!isset($this->caches["post_view_counts"])) {
                 $counts = SQL::current()->select(
                     tables:"views",
@@ -159,14 +178,19 @@
             return fallback($this->caches["post_view_counts"][$post_id], 0);
         }
 
-        public function post_view_count_attr($attr, $post): int {
+        public function post_view_count_attr(
+            $attr,
+            $post
+        ): int {
             if ($post->no_results)
                 return 0;
 
             return $this->get_post_view_count($post->id);
         }
 
-        private function get_user_view_count($user_id): int {
+        private function get_user_view_count(
+            $user_id
+        ): int {
             if (!isset($this->caches["user_view_counts"])) {
                 $counts = SQL::current()->select(
                     tables:"views",
@@ -186,20 +210,29 @@
             return fallback($this->caches["user_view_counts"][$user_id], 0);
         }
 
-        public function user_view_count_attr($attr, $user): int {
+        public function user_view_count_attr(
+            $attr,
+            $user
+        ): int {
             if ($user->no_results)
                 return 0;
 
             return $this->get_user_view_count($user->id);
         }
 
-        public function visitor_view_count_attr($attr, $visitor): int {
+        public function visitor_view_count_attr(
+            $attr,
+            $visitor
+        ): int {
             return ($visitor->id == 0) ?
                 0 :
                 $this->user_view_count_attr($attr, $visitor) ;
         }
 
-        public function import_chyrp_post($entry, $post): void {
+        public function import_chyrp_post(
+            $entry,
+            $post
+        ): void {
             $chyrp = $entry->children("http://chyrp.net/export/1.0/");
 
             if (!isset($chyrp->view))
@@ -226,7 +259,10 @@
             }
         }
 
-        public function posts_export($atom, $post): string {
+        public function posts_export(
+            $atom,
+            $post
+        ): string {
             $views = View::find(
                 array("where" => array("post_id" => $post->id))
             );

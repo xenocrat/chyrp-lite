@@ -13,7 +13,9 @@
             Config::current()->remove("module_highlighter");
         }
 
-        public function scripts($scripts): array {
+        public function scripts(
+            $scripts
+        ): array {
             $scripts[] = Config::current()->chyrp_url.
                          "/modules/highlighter/highlight.min.js";
 
@@ -24,7 +26,9 @@
             include MODULES_DIR.DIR."highlighter".DIR."javascript.php";
         }
 
-        public function stylesheets($stylesheets): array {
+        public function stylesheets(
+            $stylesheets
+        ): array {
             $config = Config::current();
             $stylesheet = $config->module_highlighter["stylesheet"];
 
@@ -35,7 +39,9 @@
             return $stylesheets;
         }
 
-        public function admin_highlighter_settings($admin): void {
+        public function admin_highlighter_settings(
+            $admin
+        ): void {
             $config = Config::current();
 
             if (!Visitor::current()->group->can("change_settings"))
@@ -74,7 +80,9 @@
             );
         }
 
-        public function settings_nav($navs): array {
+        public function settings_nav(
+            $navs
+        ): array {
             if (Visitor::current()->group->can("change_settings"))
                 $navs["highlighter_settings"] = array(
                     "title" => __("Syntax Highlighting", "highlighter")
@@ -83,7 +91,10 @@
             return $navs;
         }
 
-        private function highlighter_stylesheets($base = null, $prefix = ""): array {
+        private function highlighter_stylesheets(
+            $base = null,
+            $prefix = ""
+        ): array {
             fallback($base, MODULES_DIR.DIR."highlighter".DIR."styles");
             $styles = array();
             $dir = new DirectoryIterator($base);

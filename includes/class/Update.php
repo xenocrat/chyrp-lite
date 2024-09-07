@@ -49,7 +49,9 @@
          * Function: validate
          * Validates the XML dataset.
          */
-        private static function validate($xml): bool {
+        private static function validate(
+            $xml
+        ): bool {
             if (!$xml instanceof SimpleXMLElement)
                 return false;
 
@@ -74,7 +76,9 @@
          * Function: message
          * Flash the user about the newer version.
          */
-        private static function message($item): void {
+        private static function message(
+            $item
+        ): void {
             Flash::message(
                 _f("Chyrp Lite &#8220;%s&#8221; is available.", fix($item->title)).
                 ' <a href="'.fix($item->link, true).'" target="_blank">'.

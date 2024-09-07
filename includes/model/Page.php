@@ -27,7 +27,10 @@
          * See Also:
          *     <Model::grab>
          */
-        public function __construct($page_id, $options = array()) {
+        public function __construct(
+            $page_id,
+            $options = array()
+        ) {
             if (!isset($page_id) and empty($options))
                 return;
 
@@ -264,7 +267,10 @@
          * See Also:
          *     <Model::destroy>
          */
-        public static function delete($page_id, $recursive = false): void {
+        public static function delete(
+            $page_id,
+            $recursive = false
+        ): void {
             if ($recursive) {
                 $page = new self($page_id);
 
@@ -282,7 +288,9 @@
          * Parameters:
          *     $page_id - The page ID to check
          */
-        public static function exists($page_id): bool {
+        public static function exists(
+            $page_id
+        ): bool {
             return SQL::current()->count(
                 tables:"pages",
                 conds:array("id" => $page_id)
@@ -300,7 +308,9 @@
          *     The unique version of $url.
          *     If unused, it's the same as $url. If used, a number is appended to it.
          */
-        public static function check_url($url): string {
+        public static function check_url(
+            $url
+        ): string {
             if (empty($url))
                 return $url;
 
@@ -343,7 +353,10 @@
          *     $request - The request URI to parse.
          *     $route - The route to respond to, or null to return a Page.
          */
-        public static function from_url($request, $route = null): self|array|false {
+        public static function from_url(
+            $request,
+            $route = null
+        ): self|array|false {
             # Dirty URL?
             if (preg_match("/(\?|&)url=([^&#]+)/", $request, $slug)) {
                 $page = new self(array("url" => $slug[2]));

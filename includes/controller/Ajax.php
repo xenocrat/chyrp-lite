@@ -20,7 +20,9 @@
          * Function: parse
          * Route constructor calls this to determine the action in the case of a POST request.
          */
-        public function parse($route): ?string {
+        public function parse(
+            $route
+        ): ?string {
             if (
                 isset($_SERVER['HTTP_SEC_FETCH_SITE']) and
                 $_SERVER['HTTP_SEC_FETCH_SITE'] != "same-origin"
@@ -45,7 +47,9 @@
          * Function: exempt
          * Route constructor calls this to determine "view_site" exemptions.
          */
-        public function exempt($action): bool {
+        public function exempt(
+            $action
+        ): bool {
             return false;
         }
 

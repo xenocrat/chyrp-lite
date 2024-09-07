@@ -72,7 +72,9 @@
          * Parameters:
          *     $settings - An array of settings (optional).
          */
-        private function __construct($settings = array()) {
+        private function __construct(
+            $settings = array()
+        ) {
             if (class_exists("Config"))
                 fallback($settings, Config::current()->sql);
 
@@ -98,7 +100,9 @@
          * Parameters:
          *     $checking - Return a boolean for failure, instead of triggering an error?
          */
-        public function connect($checking = false): bool {
+        public function connect(
+            $checking = false
+        ): bool {
             if ($this->connected)
                 return true;
 
@@ -448,7 +452,9 @@
          * Parameters:
          *     $string - String to escape.
          */
-        public function escape($string): string {
+        public function escape(
+            $string
+        ): string {
             if (!isset($this->db))
                 $this->connect();
 
@@ -473,7 +479,9 @@
          * Function: current
          * Returns a singleton reference to the current connection.
          */
-        public static function & current($settings = false): self {
+        public static function & current(
+            $settings = false
+        ): self {
             if ($settings) {
                 $loaded = new self($settings);
                 return $loaded;

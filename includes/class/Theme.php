@@ -40,7 +40,10 @@
          *     $page_id - Page ID to start from, or zero to return all pages.
          *     $exclude - Page ID/s to exclude, integer or array of integers.
          */
-        public function pages_list($page_id = 0, $exclude = null): array {
+        public function pages_list(
+            $page_id = 0,
+            $exclude = null
+        ): array {
             $cache_id = serialize(array($page_id, $exclude));
 
             if (
@@ -92,7 +95,9 @@
          * Parameters:
          *     $page - Page to start recursion at.
          */
-        private function recurse_pages($page): void {
+        private function recurse_pages(
+            $page
+        ): void {
             if (!isset($page->depth))
                 $page->depth = 1;
 
@@ -119,7 +124,9 @@
          * Parameters:
          *     $limit - Maximum number of months to list.
          */
-        public function archives_list($limit = 12): array {
+        public function archives_list(
+            $limit = 12
+        ): array {
             if (
                 isset($this->caches["archives_list"][$limit])
             ) {
@@ -177,7 +184,9 @@
          * Parameters:
          *     $limit - Maximum number of recent posts to list.
          */
-        public function recent_posts($limit = 5): array {
+        public function recent_posts(
+            $limit = 5
+        ): array {
             if (
                 isset($this->caches["recent_posts"][$limit])
             ) {
@@ -213,7 +222,10 @@
          *     $post - The post to use as the basis.
          *     $limit - Maximum number of related posts to list.
          */
-        public function related_posts($post, $limit = 5): array {
+        public function related_posts(
+            $post,
+            $limit = 5
+        ): array {
             if ($post->no_results)
                 return array();
 
@@ -256,7 +268,9 @@
          * Parameters:
          *     $name - The filename.
          */
-        public function file_exists($name): bool {
+        public function file_exists(
+            $name
+        ): bool {
             return file_exists(THEME_DIR.DIR.$name.".twig");
         }
 

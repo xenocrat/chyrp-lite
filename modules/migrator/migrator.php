@@ -1,6 +1,8 @@
 <?php
     class Migrator extends Modules {
-        public function admin_manage_migration($admin): void {
+        public function admin_manage_migration(
+            $admin
+        ): void {
             if (!Visitor::current()->group->can("import_content"))
                 show_403(
                     __("Access Denied"),
@@ -10,7 +12,9 @@
             $admin->display("pages".DIR."manage_migration");
         }
 
-        public function manage_nav($navs): array {
+        public function manage_nav(
+            $navs
+        ): array {
             if (Visitor::current()->group->can("import_content"))
                 $navs["manage_migration"] = array(
                     "title" => __("Migration", "migrator")
@@ -23,7 +27,7 @@
          * Function: admin_import_wordpress
          * WordPress importing.
          */
-        public function admin_import_wordpress()/*: never */{
+        public function admin_import_wordpress(): never {
             $config = Config::current();
             $trigger = Trigger::current();
 
@@ -240,7 +244,7 @@
          * Function: admin_import_tumblr
          * Tumblr importing.
          */
-        public function admin_import_tumblr()/*: never */{
+        public function admin_import_tumblr(): never {
             $config = Config::current();
             $trigger = Trigger::current();
 
@@ -419,7 +423,7 @@
          * Function: admin_import_textpattern
          * TextPattern importing.
          */
-        public function admin_import_textpattern()/*: never */{
+        public function admin_import_textpattern(): never {
             $config  = Config::current();
             $trigger = Trigger::current();
 
@@ -582,7 +586,7 @@
          * Function: admin_import_movabletype
          * MovableType importing.
          */
-        public function admin_import_movabletype()/*: never */{
+        public function admin_import_movabletype(): never {
             $config  = Config::current();
             $trigger = Trigger::current();
 

@@ -95,7 +95,9 @@
             );
         }
 
-        public function update($post): Post|false {
+        public function update(
+            $post
+        ): Post|false {
             fallback($_POST['title'], "");
             fallback($_POST['description'], "");
             fallback($_POST['slug'], "");
@@ -132,22 +134,31 @@
             );
         }
 
-        public function title($post): string {
+        public function title(
+            $post
+        ): string {
             return oneof(
                 $post->title,
                 $post->title_from_excerpt()
             );
         }
 
-        public function excerpt($post): string {
+        public function excerpt(
+            $post
+        ): string {
             return $post->description;
         }
 
-        public function feed_content($post): string {
+        public function feed_content(
+            $post
+        ): string {
             return $post->description;
         }
 
-        public function enclose_audio($post, $feed) {
+        public function enclose_audio(
+            $post,
+            $feed
+        ) {
             if ($post->feather != "audio")
                 return;
 
@@ -173,14 +184,18 @@
                 );
         }
 
-        public function filter_post($post): void {
+        public function filter_post(
+            $post
+        ): void {
             if ($post->feather != "audio")
                 return;
 
             $post->audio_player = $this->audio_player($post);
         }
 
-        private function audio_player($post): string {
+        private function audio_player(
+            $post
+        ): string {
             $config = Config::current();
             $trigger = Trigger::current();
 
@@ -212,7 +227,9 @@
             return $player;
         }
 
-        private function audio_type($filename): string {
+        private function audio_type(
+            $filename
+        ): string {
             $extension = strtolower(
                 pathinfo($filename, PATHINFO_EXTENSION)
             );

@@ -110,7 +110,9 @@
          * Parameters:
          *     $column - The offset of the column to grab. Default 0.
          */
-        public function fetchColumn($column = 0): mixed {
+        public function fetchColumn(
+            $column = 0
+        ): mixed {
             return $this->query->fetchColumn($column);
         }
 
@@ -118,7 +120,9 @@
          * Function: fetch
          * Returns the current row as an array.
          */
-        public function fetch($mode = PDO::FETCH_ASSOC): mixed { # Can be PDO::FETCH_DEFAULT in PHP 8.0.7+
+        public function fetch(
+            $mode = PDO::FETCH_DEFAULT
+        ): mixed {
             return $this->query->fetch($mode);
         }
 
@@ -134,7 +138,9 @@
          * Function: fetchAll
          * Returns an array of every result.
          */
-        public function fetchAll($mode = PDO::FETCH_ASSOC): array { # Can be PDO::FETCH_DEFAULT in PHP 8.0.7+
+        public function fetchAll(
+            $mode = PDO::FETCH_DEFAULT
+        ): array {
             return $this->query->fetchAll($mode);
         }
 
@@ -148,7 +154,9 @@
          * Returns:
          *     An array of all of the values of that column in the result.
          */
-         public function grab($column): array {
+         public function grab(
+            $column
+        ): array {
             $all = $this->fetchAll();
             $result = array();
 
@@ -162,7 +170,9 @@
          * Function: exception_handler
          * Handles exceptions thrown by failed queries.
          */
-        public function exception_handler($e): void {
+        public function exception_handler(
+            $e
+        ): void {
             $this->sql->error = $e->getMessage();
 
             # Trigger an error if throws were not requested.

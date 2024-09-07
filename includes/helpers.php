@@ -15,7 +15,9 @@
      * Parameters:
      *     $secure - Send the cookie only over HTTPS?
      */
-    function session($secure = null): void {
+    function session(
+        $secure = null
+    ): void {
         if (session_status() == PHP_SESSION_ACTIVE) {
             trigger_error(
                 __("Session cannot be started more than once."),
@@ -98,7 +100,10 @@
      *     $url - The absolute or relative URL to redirect to.
      *     $code - Numeric HTTP status code to set (optional).
      */
-    function redirect($url, $code = null)/*: never*/{
+    function redirect(
+        $url,
+        $code = null
+    ): never {
         if (!substr_count($url, "://"))
             $url = url($url);
 
@@ -131,7 +136,10 @@
      *     $title - The title for the error dialog (optional).
      *     $body - The message for the error dialog (optional).
      */
-    function show_403($title = "", $body = "")/*: never*/{
+    function show_403(
+        $title = "",
+        $body = ""
+    ): never {
         $title = oneof($title, __("Forbidden"));
         $body = oneof($body, __("You do not have permission to access this resource."));
 
@@ -155,7 +163,10 @@
      *     $title - The title for the error dialog (optional).
      *     $body - The message for the error dialog (optional).
      */
-     function show_404($title = "", $body = "")/*: never*/{
+     function show_404(
+        $title = "",
+        $body = ""
+    ): never {
         $title = oneof($title, __("Not Found"));
         $body = oneof($body, __("The requested resource was not found."));
 
@@ -175,7 +186,10 @@
      * Function: url
      * Mask for Route::url().
      */
-    function url($url, $controller = null): string {
+    function url(
+        $url,
+        $controller = null
+    ): string {
         if (!class_exists("Route"))
             return $url;
 
@@ -207,7 +221,9 @@
      * Returns:
      *     True if no action was needed, bytes written on success, false on failure.
      */
-    function htaccess_conf($url_path = null): int|bool {
+    function htaccess_conf(
+        $url_path = null
+    ): int|bool {
         $url_path = oneof(
             $url_path,
             parse_url(Config::current()->chyrp_url, PHP_URL_PATH),
@@ -253,7 +269,9 @@
      * Returns:
      *     True if no action was needed, bytes written on success, false on failure.
      */
-    function caddyfile_conf($url_path = null): int|bool {
+    function caddyfile_conf(
+        $url_path = null
+    ): int|bool {
         $url_path = oneof(
             $url_path,
             parse_url(Config::current()->chyrp_url, PHP_URL_PATH),
@@ -299,7 +317,9 @@
      * Returns:
      *     True if no action was needed, bytes written on success, false on failure.
      */
-    function nginx_conf($url_path = null): int|bool {
+    function nginx_conf(
+        $url_path = null
+    ): int|bool {
         $url_path = oneof(
             $url_path,
             parse_url(Config::current()->chyrp_url, PHP_URL_PATH),
@@ -379,7 +399,9 @@
      * Parameters:
      *     $locale - The locale name, e.g. @en_US@, @uk_UA@, @fr_FR@
      */
-    function set_locale($locale = "en_US"): void {
+    function set_locale(
+        $locale = "en_US"
+    ): void {
         $list = array(
             $locale.".UTF-8",
             $locale.".utf-8",
@@ -434,7 +456,10 @@
      *     $domain - The name of this translation domain.
      *     $locale - The path to the locale directory.
      */
-    function load_translator($domain, $locale): void {
+    function load_translator(
+        $domain,
+        $locale
+    ): void {
         if (USE_GETTEXT_SHIM and class_exists("Translation")) {
             Translation::current()->load($domain, $locale);
             return;
@@ -457,7 +482,9 @@
      * Returns:
      *     A localised display name, e.g. "English (United States)".
      */
-    function lang_code($code): string {
+    function lang_code(
+        $code
+    ): string {
         return class_exists("Locale") ?
             Locale::getDisplayName($code, $code) :
             $code ;
@@ -473,7 +500,9 @@
      * Returns:
      *     The primary subtag for this code, e.g. "en" from "en_US".
      */
-    function lang_base($code): string {
+    function lang_base(
+        $code
+    ): string {
         $code = str_replace("_", "-", $code);
         $tags = explode("-", $code);
         return ($tags === false) ? "en" : $tags[0] ;
@@ -489,7 +518,9 @@
      * Returns:
      *     Either the string "ltr" or "rtl".
      */
-    function text_direction($code): string {
+    function text_direction(
+        $code
+    ): string {
         $base = lang_base($code);
 
         switch ($base) {
@@ -515,7 +546,10 @@
      * Returns:
      *     The translated string or the original.
      */
-    function __($text, $domain = "chyrp"): string {
+    function __(
+        $text,
+        $domain = "chyrp"
+    ): string {
         if (USE_GETTEXT_SHIM)
             return Translation::current()->text(
                 $domain,
@@ -544,7 +578,12 @@
      * Returns:
      *     The translated string or the original.
      */
-    function _p($single, $plural, $number, $domain = "chyrp"): string {
+    function _p(
+        $single,
+        $plural,
+        $number,
+        $domain = "chyrp"
+    ): string {
         $int = (int) $number;
 
         if (USE_GETTEXT_SHIM)
@@ -580,7 +619,11 @@
      * Returns:
      *     The translated string or the original.
      */
-    function _f($string, $args = array(), $domain = "chyrp"): string {
+    function _f(
+        $string,
+        $args = array(),
+        $domain = "chyrp"
+    ): string {
         $args = (array) $args;
         array_unshift($args, __($string, $domain));
         return call_user_func_array("sprintf", $args);
@@ -597,7 +640,10 @@
      * Returns:
      *     An internationalized time/date string with the supplied formatting.
      */
-    function _w($formatting, $when): string|false {
+    function _w(
+        $formatting,
+        $when
+    ): string|false {
         static $locale;
 
         $time = is_numeric($when) ?
@@ -637,7 +683,10 @@
      * Returns:
      *     A time/date string with the supplied formatting.
      */
-    function when($formatting, $when): string|false {
+    function when(
+        $formatting,
+        $when
+    ): string|false {
         $time = is_numeric($when) ?
             $when :
             strtotime($when) ;
@@ -655,7 +704,9 @@
      * Returns:
      *     A standard datetime string.
      */
-    function datetime($when = null): string|false {
+    function datetime(
+        $when = null
+    ): string|false {
         fallback($when, time());
 
         $time = is_numeric($when) ?
@@ -669,7 +720,9 @@
      * Function: now
      * Alias to strtotime, for prettiness like now("+1 day").
      */
-    function now($when): string|false {
+    function now(
+        $when
+    ): string|false {
         return strtotime($when);
     }
 
@@ -684,7 +737,9 @@
      *     https://unicode-org.github.io/icu/userguide/format_parse/datetime/
      *     https://www.php.net/manual/en/datetime.format.php
      */
-    function convert_datetime($formatting): string {
+    function convert_datetime(
+        $formatting
+    ): string {
         return strtr($formatting, array(
             "A" => "'A'",  "a" => "a",
             "B" => "'B'",  "b" => "'b'",
@@ -746,7 +801,9 @@
      * Parameters:
      *     $timezone - The timezone to set.
      */
-    function set_timezone($timezone = "Atlantic/Reykjavik"): bool {
+    function set_timezone(
+        $timezone = "Atlantic/Reykjavik"
+    ): bool {
         $result = date_default_timezone_set($timezone);
 
         if (DEBUG)
@@ -782,7 +839,9 @@
      *     candidate values. The variable will be set to the value of the first
      *     non-empty argument, or the last, or null if no arguments are supplied.
      */
-    function fallback(&$variable): mixed {
+    function fallback(
+        &$variable
+    ): mixed {
         if (is_bool($variable))
             return $variable;
 
@@ -889,7 +948,9 @@
      * See Also:
      *     <Group::add> <User::add>
      */
-    function derezz(&$string): bool {
+    function derezz(
+        &$string
+    ): bool {
         $string = str_replace("\x00..\x1f", "", strip_tags($string));
         return ($string == "");
     }
@@ -904,7 +965,9 @@
      * Returns:
      *     A unique token salted with the site's secure hashkey.
      */
-    function token($items): string {
+    function token(
+        $items
+    ): string {
         return sha1(
             implode((array) $items).
             Config::current()->secure_hashkey
@@ -924,7 +987,12 @@
      * Returns:
      *     The integer value of the check result.
      */
-    function crc24($str, $polynomial = 0x864cfb, $ini = 0xb704ce, $xor = 0): int {
+    function crc24(
+        $str,
+        $polynomial = 0x864cfb,
+        $ini = 0xb704ce,
+        $xor = 0
+    ): int {
         $crc = $ini;
 
         for ($i = 0; $i < strlen($str); $i++) {
@@ -952,7 +1020,9 @@
      * Returns:
      *     A string of the requested length.
      */
-    function slug($length): string {
+    function slug(
+        $length
+    ): string {
         return strtolower(random($length));
     }
 
@@ -969,7 +1039,9 @@
      * Notes:
      *     Uses a cryptographically secure pseudo-random method.
      */
-    function random($length): string {
+    function random(
+        $length
+    ): string {
         $input = "1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         $range = strlen($input) - 1;
         $chars = "";
@@ -990,7 +1062,9 @@
      * Returns:
      *     A byte value or the input if decoding failed.
      */
-    function shorthand_bytes($value): mixed {
+    function shorthand_bytes(
+        $value
+    ): mixed {
         switch (substr($value, -1)) {
             case "K": case "k":
                 return (int) $value * 1024;
@@ -1053,7 +1127,9 @@
      * Returns:
      *     A formatted number with the requested $precision.
      */
-    function timer_stop($precision = 3): string {
+    function timer_stop(
+        $precision = 3
+    ): string {
         $elapsed = microtime(true) - timer_start();
         return number_format($elapsed, $precision, ".", "");
     }
@@ -1069,7 +1145,10 @@
      * Returns:
      *     Whether or not the match succeeded.
      */
-    function match_any($try, $haystack): bool {
+    function match_any(
+        $try,
+        $haystack
+    ): bool {
         foreach ((array) $try as $needle) {
             if (preg_match($needle, $haystack))
                 return true;
@@ -1085,7 +1164,9 @@
      * Parameters:
      *     $class - The name of the class to load.
      */
-    function autoload($class): void {
+    function autoload(
+        $class
+    ): void {
         $filepath = str_replace(
             array("_", "\\", "\0"),
             array(DIR, DIR, ""),
@@ -1133,7 +1214,11 @@
      *     of "WHERE" parameters, and "ORDER BY" clause for the results.
      *     Non-keyword text will be parameterized as array[1][":query"].
      */
-    function keywords($query, $plain, $table = null): array {
+    function keywords(
+        $query,
+        $plain,
+        $table = null
+    ): array {
         $trimmed = trim($query);
 
         if (empty($trimmed))
@@ -1320,7 +1405,10 @@
      *     The supplied word with a trailing "s" added,
      *     or the correct non-normative pluralization.
      */
-    function pluralize($string, $number = null): string {
+    function pluralize(
+        $string,
+        $number = null
+    ): string {
         $uncountable = array(
             "audio", "equipment", "fish", "information", "money",
             "moose", "news", "rice", "series", "sheep", "species"
@@ -1382,7 +1470,10 @@
      *     The supplied word with trailing "s" removed,
      *     or the correct non-normative singularization.
      */
-    function depluralize($string, $number = null): string {
+    function depluralize(
+        $string,
+        $number = null
+    ): string {
         $uncountable = array("news", "series", "species");
 
         if (isset($number) and $number != 1)
@@ -1436,7 +1527,9 @@
      * Returns:
      *     The normalized string.
      */
-    function normalize($string): string {
+    function normalize(
+        $string
+    ): string {
         return trim(preg_replace("/[\s\n\r\t]+/", " ", $string));
     }
 
@@ -1454,7 +1547,10 @@
      * See Also:
      *     <decamelize>
      */
-    function camelize($string, $keep_spaces = false): string {
+    function camelize(
+        $string,
+        $keep_spaces = false
+    ): string {
         $lowercase = strtolower($string);
         $deunderscore = str_replace("_", " ", $lowercase);
         $dehyphen = str_replace("-", " ", $deunderscore);
@@ -1479,7 +1575,9 @@
      * See Also:
      *     <camelize>
      */
-    function decamelize($string): string {
+    function decamelize(
+        $string
+    ): string {
         return strtolower(
             preg_replace("/([a-z])([A-Z])/", "\\1_\\2", $string)
         );
@@ -1542,7 +1640,10 @@
      *     https://github.github.com/gfm/
      *     https://chyrplite.net/wiki/Chyrp-Flavoured-Markdown.html
      */
-    function markdown($text, $context = null): string {
+    function markdown(
+        $text,
+        $context = null
+    ): string {
         static $parser;
 
         if (!isset($parser)) {
@@ -1580,7 +1681,9 @@
      * See Also:
      *     http://www.unicode.org/charts/PDF/U1F600.pdf
      */
-    function emote($text): string {
+    function emote(
+        $text
+    ): string {
         $emoji = array(
             "o:-)"    => "&#x1f607;",
             "&gt;:-)" => "&#x1f608;",
@@ -1633,7 +1736,11 @@
      * Returns:
      *     A sanitized version of the string.
      */
-    function fix($string, $quotes = false, $double = false): string {
+    function fix(
+        $string,
+        $quotes = false,
+        $double = false
+    ): string {
         $quotes = ($quotes) ?
             ENT_QUOTES :
             ENT_NOQUOTES ;
@@ -1657,7 +1764,10 @@
      * Returns:
      *     An unsanitary version of the string.
      */
-    function unfix($string, $all = false): string {
+    function unfix(
+        $string,
+        $all = false
+    ): string {
         return ($all) ?
             html_entity_decode(
                 (string) $string,
@@ -1811,7 +1921,9 @@
      *     A version of the string containing only valid tags
      *     and whitelisted attributes essential to tag function.
      */
-    function sanitize_html($text): string {
+    function sanitize_html(
+        $text
+    ): string {
         # Strip invalid tags.
         $text = preg_replace(
             "/<([^a-z\/!]|\/(?![a-z])|!(?!--))[^>]*>/i",
@@ -2003,7 +2115,11 @@
      *     $post - The post this string belongs to.
      *     $limit - Execution time limit in seconds (optional).
      */
-    function webmention_send($string, $post, $limit = 30): void {
+    function webmention_send(
+        $string,
+        $post,
+        $limit = 30
+    ): void {
         foreach (grab_urls($string) as $url) {
             # Have we exceeded the time limit?
             if (timer_stop() > $limit)
@@ -2041,7 +2157,10 @@
      *     $source - The sender's URL.
      *     $target - The URL of our post.
      */
-    function webmention_receive($source, $target): void {
+    function webmention_receive(
+        $source,
+        $target
+    ): void {
         $trigger = Trigger::current();
 
         # No need to continue without a responder for the Webmention trigger.
@@ -2125,7 +2244,10 @@
      * Returns:
      *     The Webmention endpoint URL, or false on failure.
      */
-    function webmention_discover($url, $redirects = 3): string|false {
+    function webmention_discover(
+        $url,
+        $redirects = 3
+    ): string|false {
         $response = get_remote(
             url:$url,
             redirects:$redirects,
@@ -2210,7 +2332,9 @@
      * Returns:
      *     An array of all URLs found in the string.
      */
-    function grab_urls($string): array {
+    function grab_urls(
+        $string
+    ): array {
         $urls = array();
         $regx = "/<a(?= )[^>]* href=(\"[^\"]+\"|\'[^\']+\')[^>]*>.+?<\/a>/i";
 
@@ -2237,7 +2361,10 @@
      * Notes:
      *     Does not attempt to resolve dot segments in the path.
      */
-    function merge_urls($base, $rel) {
+    function merge_urls(
+        $base,
+        $rel
+    ) {
         extract(parse_url(add_scheme($base)), EXTR_SKIP);
         fallback($path, "/");
         fallback($scheme, "http");
@@ -2274,7 +2401,9 @@
      * Function: load_info
      * Loads an extension's info.php file and returns an array of attributes.
      */
-    function load_info($filepath): array {
+    function load_info(
+        $filepath
+    ): array {
         if (is_file($filepath) and is_readable($filepath))
             $info = include $filepath;
 
@@ -2400,7 +2529,9 @@
      * Returns:
      *     Whether or not the supplied module is enabled.
      */
-    function module_enabled($name): bool {
+    function module_enabled(
+        $name
+    ): bool {
         return (
             !empty(Modules::$instances[$name]) and
             empty(Modules::$instances[$name]->cancelled)
@@ -2417,7 +2548,9 @@
      * Returns:
      *     Whether or not the supplied feather is enabled.
      */
-    function feather_enabled($name): bool {
+    function feather_enabled(
+        $name
+    ): bool {
         return (
             !empty(Feathers::$instances[$name]) and
             empty(Feathers::$instances[$name]->cancelled)
@@ -2435,7 +2568,10 @@
      * Notes:
      *     A module can cancel itself in its __init() method.
      */
-     function cancel_module($target, $reason = ""): void {
+     function cancel_module(
+        $target,
+        $reason = ""
+    ): void {
         $message = empty($reason) ?
             _f("Execution of %s has been cancelled.", camelize($target)) :
             $reason ;
@@ -2458,7 +2594,10 @@
      * Notes:
      *     A feather can cancel itself in its __init() method.
      */
-     function cancel_feather($target, $reason = ""): void {
+     function cancel_feather(
+        $target,
+        $reason = ""
+    ): void {
         $message = empty($reason) ?
             _f("Execution of %s has been cancelled.", camelize($target)) :
             $reason ;
@@ -2485,7 +2624,10 @@
      * Returns:
      *     The filename of the upload relative to the uploads directory.
      */
-    function upload($file, $filter = null): string {
+    function upload(
+        $file,
+        $filter = null
+    ): string {
         $uploads_path = MAIN_DIR.Config::current()->uploads_path;
         $filename = upload_filename($file['name'], $filter);
 
@@ -2535,7 +2677,11 @@
      * Returns:
      *     The filename of the copied file, or false on failure.
      */
-    function upload_from_url($url, $redirects = 3, $timeout = 10): string|false {
+    function upload_from_url(
+        $url,
+        $redirects = 3,
+        $timeout = 10
+    ): string|false {
         if (!preg_match("~[^ /\?]+(?=($|\?))~", $url, $match))
             return false;
 
@@ -2583,7 +2729,10 @@
      * Returns:
      *     The supplied filename prepended with URL or filesystem path.
      */
-    function uploaded($filename, $url = true): string {
+    function uploaded(
+        $filename,
+        $url = true
+    ): string {
         $config = Config::current();
 
         return ($url) ?
@@ -2683,7 +2832,9 @@
      * Notes:
      *     $_POST and $_FILES are empty if post_max_size directive is exceeded.
      */
-    function upload_tester($file): bool {
+    function upload_tester(
+        $file
+    ): bool {
         $success = false;
         $results = array();
         $maximum = Config::current()->uploads_limit;
@@ -2772,7 +2923,10 @@
      * Returns:
      *     A sanitized unique filename, or false on failure.
      */
-    function upload_filename($filename, $filter = array()): string|false {
+    function upload_filename(
+        $filename,
+        $filter = array()
+    ): string|false {
         if (empty($filter))
             $filter = upload_filter_whitelist();
 
@@ -2839,7 +2993,9 @@
      * Returns:
      *     Whether or not the file was deleted successfully.
      */
-    function delete_upload($filename): bool {
+    function delete_upload(
+        $filename
+    ): bool {
         $filename = str_replace(array(DIR, "/"), "", $filename);
 
         if ($filename == "")
@@ -2869,7 +3025,9 @@
      * Returns:
      *     A numeric score for the strength of the password.
      */
-    function password_strength($password = ""): int {
+    function password_strength(
+        $password = ""
+    ): int {
         $score = 0;
 
         if (empty($password))
@@ -2911,7 +3069,9 @@
      * See Also:
      *     <add_scheme>
      */
-    function is_url($string): bool {
+    function is_url(
+        $string
+    ): bool {
         if (
             !is_string($string) and
             !$string instanceof Stringable
@@ -2948,7 +3108,10 @@
      * See Also:
      *     <is_url>
      */
-    function add_scheme($url, $scheme = null): string {
+    function add_scheme(
+        $url,
+        $scheme = null
+    ): string {
         preg_match('~^([a-z]+://)?(.+)~i', $url, $match);
 
         $match[1] = isset($scheme) ?
@@ -2971,7 +3134,9 @@
      * Returns:
      *     Whether or not the string matches the criteria.
      */
-    function is_email($string): bool {
+    function is_email(
+        $string
+    ): bool {
         if (
             !is_string($string) and
             !$string instanceof Stringable
@@ -3004,7 +3169,9 @@
      * Returns:
      *     Whether or not the string matches the criteria.
      */
-    function is_unsafe_ip($string): bool {
+    function is_unsafe_ip(
+        $string
+    ): bool {
         if (
             !is_string($string) and
             !$string instanceof Stringable
@@ -3036,7 +3203,9 @@
      * Returns:
      *     Whether or not the string matches the criteria.
      */
-    function is_datetime_zero($string): bool {
+    function is_datetime_zero(
+        $string
+    ): bool {
         if (
             !is_string($string) and
             !$string instanceof Stringable
@@ -3102,7 +3271,9 @@
      *     Strings are escaped with backslashes,
      *     booleans expanded to "true" or "false".
      */
-    function esce($variable): void {
+    function esce(
+        $variable
+    ): void {
         if (
             !is_scalar($variable) and
             !$variable instanceof Stringable
@@ -3209,7 +3380,11 @@
      * Returns:
      *     A JSON encoded string or false on failure.
      */
-    function json_set($value, $options = 0, $depth = 512): string|false {
+    function json_set(
+        $value,
+        $options = 0,
+        $depth = 512
+    ): string|false {
         $encoded = json_encode($value, $options, $depth);
 
         if (json_last_error())
@@ -3234,7 +3409,12 @@
      * Returns:
      *     A JSON decoded value of the appropriate PHP type.
      */
-    function json_get($value, $assoc = false, $depth = 512, $options = 0): mixed {
+    function json_get(
+        $value,
+        $assoc = false,
+        $depth = 512,
+        $options = 0
+    ): mixed {
         $decoded = json_decode($value, $assoc, $depth, $options);
 
         if (json_last_error())
@@ -3254,7 +3434,10 @@
      *     $text - A string containing a response message.
      *     $data - Arbitrary data to be sent with the response.
      */
-    function json_response($text = null, $data = null): void {
+    function json_response(
+        $text = null,
+        $data = null
+    ): void {
         header("Content-Type: application/json; charset=UTF-8");
         echo json_set(array("text" => $text, "data" => $data));
     }
@@ -3267,7 +3450,10 @@
      *     $contents - The bitstream to be delivered to the visitor.
      *     $filename - The name to be applied to the content upon download.
      */
-    function file_attachment($contents = "", $filename = "caconym"): void {
+    function file_attachment(
+        $contents = "",
+        $filename = "caconym"
+    ): void {
         $safename = addslashes($filename);
         header("Content-Type: application/octet-stream");
         header("Content-Disposition: attachment; filename=\"".$safename."\"");
@@ -3291,7 +3477,9 @@
      * See Also:
      *     https://pkware.cachefly.net/webdocs/casestudies/APPNOTE.TXT
      */
-    function zip_archive($array): string {
+    function zip_archive(
+        $array
+    ): string {
         $file = "";
         $cdir = "";
         $eocd = "";
@@ -3409,7 +3597,9 @@
      * Parameters:
      *     $user - The user to receive the email.
      */
-    function email_activate_account($user): bool {
+    function email_activate_account(
+        $user
+    ): bool {
         $config = Config::current();
         $trigger = Trigger::current();
 
@@ -3447,7 +3637,9 @@
      * Parameters:
      *     $user - The user to receive the email.
      */
-    function email_reset_password($user): bool {
+    function email_reset_password(
+        $user
+    ): bool {
         $config = Config::current();
         $trigger = Trigger::current();
         $issue = strval(time());

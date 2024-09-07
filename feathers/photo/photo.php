@@ -115,14 +115,18 @@
             );
         }
 
-        public function title($post): string {
+        public function title(
+            $post
+        ): string {
             return oneof(
                 $post->title,
                 $post->title_from_excerpt()
             );
         }
 
-        public function excerpt($post): string {
+        public function excerpt(
+            $post
+        ): string {
             return $post->caption;
         }
 
@@ -140,14 +144,20 @@
             return '<figure>'.$content.'</figure>';
         }
 
-        public function filter_post($post): void {
+        public function filter_post(
+            $post
+        ): void {
             if ($post->feather != "photo")
                 return;
 
             $post->image = $post->filename;
         }
 
-        public function add_option($options, $post = null, $feather = null): array {
+        public function add_option(
+            $options,
+            $post = null,
+            $feather = null
+        ): array {
             if ($feather != "photo")
                 return $options;
 

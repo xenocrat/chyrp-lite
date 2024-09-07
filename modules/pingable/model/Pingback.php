@@ -15,7 +15,10 @@
          * See Also:
          *     <Model::grab>
          */
-        public function __construct($pingback_id, $options = array()) {
+        public function __construct(
+            $pingback_id,
+            $options = array()
+        ) {
             parent::grab($this, $pingback_id, $options);
 
             if ($this->no_results)
@@ -52,7 +55,12 @@
          * Returns:
          *     The newly created <Pingback>.
          */
-        public static function add($post_id, $source, $title, $created_at = null): self {
+        public static function add(
+            $post_id,
+            $source,
+            $title,
+            $created_at = null
+        ): self {
             $sql = SQL::current();
 
             $sql->insert(
@@ -80,7 +88,9 @@
          * Returns:
          *     The updated <Pingback>.
          */
-        public function update($title): self|false {
+        public function update(
+            $title
+        ): self|false {
             if ($this->no_results)
                 return false;
 
@@ -116,7 +126,9 @@
          * See Also:
          *     <Model::destroy>
          */
-        public static function delete($pingback_id): void {
+        public static function delete(
+            $pingback_id
+        ): void {
             parent::destroy(self::class, $pingback_id);
         }
 

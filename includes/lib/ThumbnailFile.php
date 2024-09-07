@@ -67,7 +67,13 @@
          *     $quality - Quality factor for the thumbnail file.
          *     $square - Create a square crop of the original image?
          */
-        public function __construct($filename, $thumb_w, $thumb_h, $quality, $square) {
+        public function __construct(
+            $filename,
+            $thumb_w,
+            $thumb_h,
+            $quality,
+            $square
+        ) {
             $this->thumb_w = (int) $thumb_w;
             $this->thumb_h = (int) $thumb_h;
             $this->quality = (int) $quality;
@@ -267,7 +273,9 @@
          * Parameters:
          *     $overwrite - Overwrite an existing thumbnail file?
          */
-        public function create($overwrite = false): bool {
+        public function create(
+            $overwrite = false
+        ): bool {
             if (!$this->creatable())
                 return false;
 

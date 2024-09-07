@@ -39,7 +39,9 @@
             return $navs;
         }
 
-        public function admin_sitemap_settings($admin): void {
+        public function admin_sitemap_settings(
+            $admin
+        ): void {
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(
                     __("Access Denied"),

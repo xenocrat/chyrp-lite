@@ -105,7 +105,9 @@
      * Function: alert
      * Logs an alert message and returns the log to date.
      */
-    function alert($message = null): ?array {
+    function alert(
+        $message = null
+    ): ?array {
         static $log = array();
 
         if (isset($message))

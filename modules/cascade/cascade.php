@@ -11,7 +11,9 @@
             Config::current()->remove("module_cascade");
         }
 
-        public function admin_cascade_settings($admin): void {
+        public function admin_cascade_settings(
+            $admin
+        ): void {
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(
                     __("Access Denied"),
@@ -40,7 +42,9 @@
             );
         }
 
-        public function settings_nav($navs): array {
+        public function settings_nav(
+            $navs
+        ): array {
             if (Visitor::current()->group->can("change_settings"))
                 $navs["cascade_settings"] = array(
                     "title" => __("Cascade", "cascade")

@@ -57,7 +57,9 @@
             );
         }
 
-        public function update($post): Post|false {
+        public function update(
+            $post
+        ): Post|false {
             if (empty($_POST['quote']))
                 error(
                     __("Error"),
@@ -84,15 +86,21 @@
             );
         }
 
-        public function title($post): string {
+        public function title(
+            $post
+        ): string {
             return $post->title_from_excerpt();
         }
 
-        public function excerpt($post): string {
+        public function excerpt(
+            $post
+        ): string {
             return $post->quote;
         }
 
-        public function feed_content($post): string {
+        public function feed_content(
+            $post
+        ): string {
             $content = '<blockquote>'.
                        $post->quote.
                        '</blockquote>';

@@ -147,7 +147,9 @@
          * Function: rights
          * Not implemented in JSON Feed version 1.
          */
-        public function rights($text): bool {
+        public function rights(
+            $text
+        ): bool {
             return false;
         }
 
@@ -202,7 +204,9 @@
          * Parameters:
          *     $link - The external URL.
          */
-        public function related($link): bool {
+        public function related(
+            $link
+        ): bool {
             if (!$this->open)
                 return false;
 

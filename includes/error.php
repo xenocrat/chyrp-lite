@@ -21,7 +21,12 @@
      * Function: error_composer
      * Composes a message for the error() function to display.
      */
-    function error_composer($errno, $message, $file, $line) {
+    function error_composer(
+        $errno,
+        $message,
+        $file,
+        $line
+    ) {
         # Test for suppressed errors and excluded error levels.
         if (!(error_reporting() & $errno))
             return true;
@@ -45,7 +50,9 @@
      * Function: exception_composer
      * Composes a message for the error() function to display.
      */
-    function exception_composer($e) {
+    function exception_composer(
+        $e
+    ) {
         $errno = $e->getCode();
         $message = $e->getMessage();
         $file = $e->getFile();
@@ -75,7 +82,12 @@
      *     $backtrace - The trace of the error.
      *     $code - Numeric HTTP status code to set.
      */
-    function error($title = "", $body = "", $backtrace = array(), $code = 500)/*: never*/{
+    function error(
+        $title = "",
+        $body = "",
+        $backtrace = array(),
+        $code = 500
+    ): never {
         # Discard any additional output buffers.
         while (OB_BASE_LEVEL < ob_get_level())
             ob_end_clean();

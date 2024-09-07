@@ -94,7 +94,9 @@
      * Function: scan_dir
      * Scans a directory in search of files or subdirectories.
      */
-    function scan_dir($pathname) {
+    function scan_dir(
+        $pathname
+    ) {
         global $exclude;
 
         $dir = new DirectoryIterator($pathname);
@@ -122,7 +124,10 @@
      * Function: scan_file
      * Scans a file in search of triggers.
      */
-    function scan_file($pathname, $extension) {
+    function scan_file(
+        $pathname,
+        $extension
+    ) {
         if ($extension != "php" and $extension != "twig")
             return;
 
@@ -157,7 +162,10 @@
      * Function: make_place
      * Makes a string detailing the place a trigger was found.
      */
-    function make_place($pathname, $line) {
+    function make_place(
+        $pathname,
+        $line
+    ) {
         return str_replace(
             array(MAIN_DIR.DIR, DIR),
             array("", "/"),
@@ -169,7 +177,9 @@
      * Function: make_arguments
      * Makes an array from a string of arguments.
      */
-    function make_arguments($text) {
+    function make_arguments(
+        $text
+    ) {
         $array = explode(",", $text);
 
         foreach ($array as &$arg) {
@@ -183,7 +193,11 @@
      * Function: scan_call
      * Scans text for trigger calls.
      */
-    function scan_call($pathname, $line, $text) {
+    function scan_call(
+        $pathname,
+        $line,
+        $text
+    ) {
         global $trigger;
         global $str_reg;
 
@@ -216,7 +230,11 @@
      * Function: scan_call_array
      * Scans text for trigger call arrays.
      */
-    function scan_call_array($pathname, $line, $text) {
+    function scan_call_array(
+        $pathname,
+        $line,
+        $text
+    ) {
         global $trigger;
         global $arr_reg;
 
@@ -256,7 +274,11 @@
      * Function: scan_filter
      * Scans text for trigger filters.
      */
-    function scan_filter($pathname, $line, $text) {
+    function scan_filter(
+        $pathname,
+        $line,
+        $text
+    ) {
         global $trigger;
         global $str_reg;
 
@@ -290,7 +312,11 @@
      * Function: scan_filter_array
      * Scans text for trigger filter arrays.
      */
-    function scan_filter_array($pathname, $line, $text) {
+    function scan_filter_array(
+        $pathname,
+        $line,
+        $text
+    ) {
         global $trigger;
         global $arr_reg;
 
@@ -331,7 +357,11 @@
      * Function: scan_twig
      * Scans text for trigger calls in Twig statements.
      */
-    function scan_twig($pathname, $line, $text) {
+    function scan_twig(
+        $pathname,
+        $line,
+        $text
+    ) {
         global $trigger;
         global $str_reg;
 

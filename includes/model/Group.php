@@ -19,7 +19,10 @@
          * See Also:
          *     <Model::grab>
          */
-        public function __construct($group_id = null, $options = array()) {
+        public function __construct(
+            $group_id = null,
+            $options = array()
+        ) {
             $options["left_join"][] = array(
                 "table" => "permissions",
                 "where" => "group_id = groups.id"
@@ -115,7 +118,10 @@
          * See Also:
          *     <update>
          */
-        public static function add($name, $permissions): self {
+        public static function add(
+            $name,
+            $permissions
+        ): self {
             $sql = SQL::current();
             $trigger = Trigger::current();
             $name = strip_tags($name);
@@ -171,7 +177,10 @@
          * Returns:
          *     The updated <Group>.
          */
-        public function update($name, $permissions): self|false {
+        public function update(
+            $name,
+            $permissions
+        ): self|false {
             if ($this->no_results)
                 return false;
 
@@ -244,7 +253,9 @@
          * See Also:
          *     <Model::destroy>
          */
-        public static function delete($group_id): void {
+        public static function delete(
+            $group_id
+        ): void {
             if (!empty($group_id))
                 SQL::current()->delete(
                     table:"permissions",
@@ -262,7 +273,10 @@
          *     $id - The ID for the permission, e.g "can_do_something".
          *     $name - The name for the permission, e.g. "Can Do Something".
          */
-        public static function add_permission($id, $name = null): void {
+        public static function add_permission(
+            $id,
+            $name = null
+        ): void {
             $sql = SQL::current();
 
             if (
@@ -294,7 +308,9 @@
          * Parameters:
          *     $id - The ID of the permission to remove.
          */
-        public static function remove_permission($id): void {
+        public static function remove_permission(
+            $id
+        ): void {
             SQL::current()->delete(
                 table:"permissions",
                 conds:array("id" => $id)
@@ -308,7 +324,9 @@
          * Parameters:
          *     $group_id - List enabled permissions for this group ID.
          */
-        public static function list_permissions($group_id = 0): array {
+        public static function list_permissions(
+            $group_id = 0
+        ): array {
             $permissions = SQL::current()->select(
                 tables:"permissions",
                 conds:array("group_id" => $group_id)

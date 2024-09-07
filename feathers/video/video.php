@@ -112,7 +112,9 @@
             );
         }
 
-        public function update($post): Post|false {
+        public function update(
+            $post
+        ): Post|false {
             fallback($_POST['title'], "");
             fallback($_POST['description'], "");
             fallback($_POST['slug'], "");
@@ -157,19 +159,28 @@
             );
         }
 
-        public function title($post): string {
+        public function title(
+            $post
+        ): string {
             return oneof($post->title, $post->title_from_excerpt());
         }
 
-        public function excerpt($post): string {
+        public function excerpt(
+            $post
+        ): string {
             return $post->description;
         }
 
-        public function feed_content($post): string {
+        public function feed_content(
+            $post
+        ): string {
             return $post->description;
         }
 
-        public function enclose_video($post, $feed): void {
+        public function enclose_video(
+            $post,
+            $feed
+        ): void {
             if ($post->feather != "video")
                 return;
 
@@ -195,7 +206,9 @@
                 );
         }
 
-        public function filter_post($post): void {
+        public function filter_post(
+            $post
+        ): void {
             if ($post->feather != "video")
                 return;
 
@@ -207,7 +220,9 @@
             $post->image = $post->poster_image;
         }
 
-        private function video_player($post): string {
+        private function video_player(
+            $post
+        ): string {
             $config = Config::current();
             $trigger = Trigger::current();
 
@@ -247,7 +262,9 @@
             return $player;
         }
 
-        private function video_type($filename): string {
+        private function video_type(
+            $filename
+        ): string {
             $extension = strtolower(
                 pathinfo($filename, PATHINFO_EXTENSION)
             );

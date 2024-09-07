@@ -35,7 +35,9 @@
             Route::current()->add("comment/(id)/", "comment");
         }
 
-        public static function __uninstall($confirm): void {
+        public static function __uninstall(
+            $confirm
+        ): void {
             if ($confirm)
                 Comment::uninstall();
 
@@ -52,19 +54,27 @@
             Route::current()->remove("comment/(id)/");
         }
 
-        public function user_logged_in($user): void {
+        public function user_logged_in(
+            $user
+        ): void {
             $_SESSION['comments'] = array();
         }
 
-        public function user($user): void {
+        public function user(
+            $user
+        ): void {
             $user->has_many[] = "comments";
         }
 
-        public function post($post): void {
+        public function post(
+            $post
+        ): void {
             $post->has_many[] = "comments";
         }
 
-        public function list_permissions($names = array()): array {
+        public function list_permissions(
+            $names = array()
+        ): array {
             $names["add_comment"]         = __("Add Comments", "comments");
             $names["add_comment_private"] = __("Add Comments to Private Posts", "comments");
             $names["edit_comment"]        = __("Edit Comments", "comments");
@@ -75,7 +85,9 @@
             return $names;
         }
 
-        public function main_comment($main): bool {
+        public function main_comment(
+            $main
+        ): bool {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 Flash::warning(
                     __("Please enter an ID to find a comment.", "comments"),
@@ -93,7 +105,9 @@
             redirect($comment->post->url()."#comment_".$comment->id);
         }
 
-        public function main_most_comments($main): void {
+        public function main_most_comments(
+            $main
+        ): void {
             $posts = Post::find(array("placeholders" => true));
 
             usort($posts[0], function ($a, $b) {
@@ -113,7 +127,9 @@
             );
         }
 
-        public function parse_urls($urls): array {
+        public function parse_urls(
+            $urls
+        ): array {
             $urls['|/comment/([0-9]+)/|'] = '/?action=comment&amp;id=$1';
             return $urls;
         }
@@ -300,7 +316,7 @@
             );
         }
 
-        public function admin_update_comment()/*: never */{
+        public function admin_update_comment(): never {
             list($success, $message) = $this->update_comment();
 
             if (!$success)
@@ -326,7 +342,9 @@
             json_response($message, $success);
         }
 
-        public function admin_edit_comment($admin): void {
+        public function admin_edit_comment(
+            $admin
+        ): void {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(
                     __("No ID Specified"),
@@ -357,7 +375,9 @@
             );
         }
 
-        public function admin_delete_comment($admin): void {
+        public function admin_delete_comment(
+            $admin
+        ): void {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(
                     __("No ID Specified"),
@@ -385,7 +405,7 @@
             );
         }
 
-        public function admin_destroy_comment()/*: never */{
+        public function admin_destroy_comment(): never {
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
@@ -425,7 +445,9 @@
             Flash::notice(__("Comment deleted.", "comments"), $redirect);
         }
 
-        public function admin_manage_comments($admin): void {
+        public function admin_manage_comments(
+            $admin
+        ): void {
             if (!Comment::any_editable() and !Comment::any_deletable())
                 show_403(
                     __("Access Denied"),
@@ -477,7 +499,9 @@
             );
         }
 
-        public function admin_manage_spam($admin): void {
+        public function admin_manage_spam(
+            $admin
+        ): void {
             if (!Visitor::current()->group->can("edit_comment", "delete_comment", true))
                 show_403(
                     __("Access Denied"),
@@ -524,7 +548,7 @@
             );
         }
 
-        public function admin_bulk_comments()/*: never */{
+        public function admin_bulk_comments(): never {
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
@@ -682,7 +706,9 @@
             redirect("manage_comments");
         }
 
-        public function admin_comment_settings($admin): void {
+        public function admin_comment_settings(
+            $admin
+        ): void {
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(
                     __("Access Denied"),
@@ -755,7 +781,9 @@
             );
         }
 
-        public function admin_determine_action($action): ?string {
+        public function admin_determine_action(
+            $action
+        ): ?string {
             if (
                 $action == "manage" and
                 (Comment::any_editable() or Comment::any_deletable())
@@ -765,7 +793,9 @@
             return null;
         }
 
-        public function settings_nav($navs): array {
+        public function settings_nav(
+            $navs
+        ): array {
             if (Visitor::current()->group->can("change_settings"))
                 $navs["comment_settings"] = array(
                     "title" => __("Comments", "comments")
@@ -774,7 +804,9 @@
             return $navs;
         }
 
-        public function manage_nav($navs): array {
+        public function manage_nav(
+            $navs
+        ): array {
             if (!Comment::any_editable() and !Comment::any_deletable())
                 return $navs;
 
@@ -807,7 +839,9 @@
                    '</th>';
         }
 
-        public function manage_posts_column($post): string {
+        public function manage_posts_column(
+            $post
+        ): string {
             return '<td class="post_comments value"><a href="'.
                    url("manage_comments/query/".urlencode("post_id:".$post->id)).
                    '">'.
@@ -821,7 +855,9 @@
                    '</th>';
         }
 
-        public function manage_users_column($user): string {
+        public function manage_users_column(
+            $user
+        ): string {
             return '<td class="user_comments value"><a href="'.
                    url("manage_comments/query/".urlencode("user_id:".$user->id)).
                    '">'.
@@ -975,7 +1011,9 @@
             );
         }
 
-        public function links($links): array {
+        public function links(
+            $links
+        ): array {
             $config = Config::current();
             $route = Route::current();
             $main = MainController::current();
@@ -1034,7 +1072,9 @@
             return false;
         }
 
-        public function main_unsubscribe($main)/*: never */{
+        public function main_unsubscribe(
+            $main
+        ): never {
             fallback($_GET['email']);
             fallback($_GET['token']);
 
@@ -1081,7 +1121,9 @@
             );
         }
 
-        public function view_feed($context): void {
+        public function view_feed(
+            $context
+        ): void {
             $trigger = Trigger::current();
 
             if (!isset($context["post"]))
@@ -1133,7 +1175,11 @@
             $feed->display();
         }
 
-        public function webmention($post, $from, $to): void {
+        public function webmention(
+            $post,
+            $from,
+            $to
+        ): void {
             $count = SQL::current()->count(
                 tables:"comments",
                 conds:array(
@@ -1174,7 +1220,10 @@
             include MODULES_DIR.DIR."comments".DIR."javascript.php";
         }
 
-        public function post_options($fields, $post = null): array {
+        public function post_options(
+            $fields,
+            $post = null
+        ): array {
             $statuses = array(
                 array(
                     "name" => __("Open", "comments"),
@@ -1216,14 +1265,18 @@
             return $fields;
         }
 
-        public function delete_post($post): void {
+        public function delete_post(
+            $post
+        ): void {
             SQL::current()->delete(
                 table:"comments",
                 conds:array("post_id" => $post->id)
             );
         }
 
-        public function delete_user($user): void {
+        public function delete_user(
+            $user
+        ): void {
             SQL::current()->update(
                 table:"comments",
                 conds:array("user_id" => $user->id),
@@ -1231,7 +1284,9 @@
             );
         }
 
-        private function get_post_comment_count($post_id): int {
+        private function get_post_comment_count(
+            $post_id
+        ): int {
             if (!isset($this->caches["post_comment_counts"])) {
                 $counts = SQL::current()->select(
                     tables:"comments",
@@ -1252,14 +1307,19 @@
             return fallback($this->caches["post_comment_counts"][$post_id], 0);
         }
 
-        public function post_comment_count_attr($attr, $post): int {
+        public function post_comment_count_attr(
+            $attr,
+            $post
+        ): int {
             if ($post->no_results)
                 return 0;
 
             return $this->get_post_comment_count($post->id);
         }
 
-        private function get_latest_comments($post_id): ?string {
+        private function get_latest_comments(
+            $post_id
+        ): ?string {
             if (!isset($this->caches["latest_comments"])) {
                 $times = SQL::current()->select(
                     tables:"comments",
@@ -1280,14 +1340,19 @@
             return fallback($this->caches["latest_comments"][$post_id], null);
         }
 
-        public function post_latest_comment_attr($attr, $post): ?string {
+        public function post_latest_comment_attr(
+            $attr,
+            $post
+        ): ?string {
             if ($post->no_results)
                 return null;
 
             return $this->get_latest_comments($post->id);
         }
 
-        private function get_user_comment_count($user_id): int {
+        private function get_user_comment_count(
+            $user_id
+        ): int {
             if (!isset($this->caches["user_comment_counts"])) {
                 $this->caches["user_comment_counts"] = array();
 
@@ -1308,27 +1373,39 @@
             return fallback($this->caches["user_comment_counts"][$user_id], 0);
         }
 
-        public function user_comment_count_attr($attr, $user): int {
+        public function user_comment_count_attr(
+            $attr,
+            $user
+        ): int {
             if ($user->no_results)
                 return 0;
 
             return $this->get_user_comment_count($user->id);
         }
 
-        public function visitor_comment_count_attr($attr, $visitor): int {
+        public function visitor_comment_count_attr(
+            $attr,
+            $visitor
+        ): int {
             return ($visitor->id == 0) ?
                 count(fallback($_SESSION['comments'], array())) :
                 $this->user_comment_count_attr($attr, $visitor) ;
         }
 
-        public function post_commentable_attr($attr, $post): bool {
+        public function post_commentable_attr(
+            $attr,
+            $post
+        ): bool {
             if ($post->no_results)
                 return false;
 
             return Comment::creatable($post);
         }
 
-        public function import_chyrp_post($entry, $post): void {
+        public function import_chyrp_post(
+            $entry,
+            $post
+        ): void {
             $chyrp = $entry->children("http://chyrp.net/export/1.0/");
 
             if (!isset($chyrp->comment))
@@ -1368,7 +1445,10 @@
             }
         }
 
-        public function posts_export($atom, $post): string {
+        public function posts_export(
+            $atom,
+            $post
+        ): string {
             $comments = Comment::find(
                 array("where" => array("post_id" => $post->id)),
                 array("filter" => false)
@@ -1418,7 +1498,9 @@
             return $atom;
         }
 
-        public static function email_site_new_comment($comment): bool {
+        public static function email_site_new_comment(
+            $comment
+        ): bool {
             $config = Config::current();
             $trigger = Trigger::current();
             $mailto = $config->email;
@@ -1443,7 +1525,10 @@
             return email($mailto, $subject, $message, $headers);
         }
 
-        public static function email_user_new_comment($comment, $user): bool {
+        public static function email_user_new_comment(
+            $comment,
+            $user
+        ): bool {
             $config = Config::current();
             $trigger = Trigger::current();
             $mailto = $user->email;
@@ -1468,7 +1553,10 @@
             return email($mailto, $subject, $message, $headers);
         }
 
-        public static function email_peer_new_comment($comment, $peer): bool {
+        public static function email_peer_new_comment(
+            $comment,
+            $peer
+        ): bool {
             $config = Config::current();
             $trigger = Trigger::current();
             $mailto = $peer->author_email;

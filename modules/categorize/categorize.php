@@ -13,7 +13,9 @@
             Route::current()->add("category/(name)/", "category");
         }
 
-        public static function __uninstall($confirm): void {
+        public static function __uninstall(
+            $confirm
+        ): void {
             if ($confirm)
                 Category::uninstall();
 
@@ -21,12 +23,17 @@
             Route::current()->remove("category/(name)/");
         }
 
-        public function list_permissions($names = array()): array {
+        public function list_permissions(
+            $names = array()
+        ): array {
             $names["manage_categorize"] = __("Manage Categories", "categorize");
             return $names;
         }
 
-        public function feed_item($post, $feed): void {
+        public function feed_item(
+            $post,
+            $feed
+        ): void {
             if (!empty($post->category))
                 $feed->category(
                     $post->category->clean,
@@ -35,7 +42,11 @@
                 );
         }
 
-        public function related_posts($ids, $post, $limit): array {
+        public function related_posts(
+            $ids,
+            $post,
+            $limit
+        ): array {
             if (empty($post->category_id))
                 return $ids;
 
@@ -57,7 +68,9 @@
             return $ids;
         }
 
-        public function parse_urls($urls): array {
+        public function parse_urls(
+            $urls
+        ): array {
             $urls['|/category/([^/]+)/|'] = '/?action=category&amp;name=$1';
             return $urls;
         }
@@ -67,7 +80,9 @@
                    __("Category", "categorize").'</th>';
         }
 
-        public function manage_posts_column($post): string {
+        public function manage_posts_column(
+            $post
+        ): string {
             $td = '<td class="post_category value">';
 
             if (isset($post->category->name))
@@ -82,7 +97,10 @@
             return $td;
         }
 
-        public function post_options($fields, $post = null): array {
+        public function post_options(
+            $fields,
+            $post = null
+        ): array {
             $options[0]["value"] = "0";
             $options[0]["name"] = __("[None]", "categorize");
             $options[0]["selected"] = empty($post->category_id);
@@ -107,7 +125,9 @@
             return $fields;
         }
 
-        public function post($post): void {
+        public function post(
+            $post
+        ): void {
             if (!empty($post->category_id)) {
                 $category = new Category($post->category_id);
 
@@ -116,7 +136,9 @@
             }
         }
 
-        private function get_category_post_count($category_id): int {
+        private function get_category_post_count(
+            $category_id
+        ): int {
             if (!isset($this->caches["category_post_counts"])) {
                 $counts = SQL::current()->select(
                     tables:"post_attributes",
@@ -137,14 +159,19 @@
             return fallback($this->caches["category_post_counts"][$category_id], 0);
         }
 
-        public function category_post_count_attr($attr, $category): int {
+        public function category_post_count_attr(
+            $attr,
+            $category
+        ): int {
             if ($category->no_results)
                 return 0;
 
             return $this->get_category_post_count($category->id);
         }
 
-        public function twig_context_main($context): array {
+        public function twig_context_main(
+            $context
+        ): array {
             $context["categorize"] = array();
 
             foreach (Category::find() as $category) {
@@ -155,7 +182,9 @@
             return $context;
         }
 
-        public function main_category($main): void {
+        public function main_category(
+            $main
+        ): void {
             if (!isset($_GET['name']))
                 Flash::warning(
                     __("You did not specify a category.", "categorize"),
@@ -218,7 +247,9 @@
             );
         }
 
-        public function manage_nav($navs): array {
+        public function manage_nav(
+            $navs
+        ): array {
             if (Visitor::current()->group->can("manage_categorize"))
                 $navs["manage_category"] = array(
                     "title" => __("Categories", "categorize"),
@@ -232,7 +263,9 @@
             return $navs;
         }
 
-        public function admin_determine_action($action): ?string {
+        public function admin_determine_action(
+            $action
+        ): ?string {
             $visitor = Visitor::current();
 
             if ($action == "manage" and $visitor->group->can("manage_categorize"))
@@ -241,7 +274,9 @@
             return null;
         }
 
-        public function admin_manage_category($admin): void {
+        public function admin_manage_category(
+            $admin
+        ): void {
             if (!Visitor::current()->group->can("manage_categorize"))
                 show_403(
                     __("Access Denied"),
@@ -281,7 +316,9 @@
             );
         }
 
-        public function admin_new_category($admin): void {
+        public function admin_new_category(
+            $admin
+        ): void {
             if (!Visitor::current()->group->can("manage_categorize"))
                 show_403(
                     __("Access Denied"),
@@ -291,7 +328,9 @@
             $admin->display("pages".DIR."new_category");
         }
 
-        public function admin_add_category($admin)/*: never */ {
+        public function admin_add_category(
+            $admin
+        ): never {
             if (!Visitor::current()->group->can("manage_categorize"))
                 show_403(
                     __("Access Denied"),
@@ -334,7 +373,9 @@
             );
         }
 
-        public function admin_edit_category($admin): void {
+        public function admin_edit_category(
+            $admin
+        ): void {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(
                     __("No ID Specified"),
@@ -362,7 +403,9 @@
             );
         }
 
-        public function admin_update_category($admin)/*: never */ {
+        public function admin_update_category(
+            $admin
+        ): never {
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
@@ -422,7 +465,9 @@
             );
         }
 
-        public function admin_delete_category($admin): void {
+        public function admin_delete_category(
+            $admin
+        ): void {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(
                     __("No ID Specified"),
@@ -450,7 +495,7 @@
             );
         }
 
-        public function admin_destroy_category()/*: never */ {
+        public function admin_destroy_category(): never {
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),

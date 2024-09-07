@@ -24,7 +24,9 @@
             Config::current()->remove("module_cacher");
         }
 
-        public function route_init($route): void {
+        public function route_init(
+            $route
+        ): void {
             if (!$this->eligible())
                 return;
 
@@ -47,7 +49,9 @@
             }
         }
 
-        public function route_done($route): void {
+        public function route_done(
+            $route
+        ): void {
             # Prevent erroneous redirections.
             unset($_SESSION['redirect_to']);
             unset($_SESSION['post_redirect']);

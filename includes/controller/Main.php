@@ -86,7 +86,9 @@
          * Function: parse
          * Route constructor calls this to interpret clean URLs and determine the action.
          */
-        public function parse($route): ?string {
+        public function parse(
+            $route
+        ): ?string {
             $config = Config::current();
 
             # Serve the index if the first arg is empty and / is not a route.
@@ -208,7 +210,9 @@
          * Function: exempt
          * Route constructor calls this to determine "view_site" exemptions.
          */
-        public function exempt($action): bool {
+        public function exempt(
+            $action
+        ): bool {
             $exemptions = array(
                 "login",
                 "logout",
@@ -596,7 +600,9 @@
          * Handles post viewing via dirty URL or clean URL.
          * E.g. /year/month/day/url/.
          */
-        public function main_view($post = null): bool {
+        public function main_view(
+            $post = null
+        ): bool {
             if (!isset($post))
                 $post = new Post(
                     array("url" => fallback($_GET['url'])),
@@ -630,7 +636,9 @@
          * Handles page viewing via dirty URL or clean URL.
          * E.g. /parent/child/child-of-child/.
          */
-        public function main_page($page = null): bool {
+        public function main_page(
+            $page = null
+        ): bool {
             $trigger = Trigger::current();
             $visitor = Visitor::current();
 
@@ -878,7 +886,7 @@
          * Function: main_activate
          * Activates (approves) a given login.
          */
-        public function main_activate()/*: never */{
+        public function main_activate(): never {
             if (logged_in())
                 Flash::notice(
                     __("You cannot activate an account because you are already logged in."),
@@ -982,7 +990,7 @@
          * Function: main_logout
          * Logs out the current user.
          */
-        public function main_logout()/*: never */{
+        public function main_logout(): never {
             if (!logged_in())
                 Flash::notice(
                     __("You aren't logged in."),
@@ -1240,7 +1248,9 @@
          * Function: main_feed
          * Grabs posts and serves a feed.
          */
-        public function main_feed($posts = null): void {
+        public function main_feed(
+            $posts = null
+        ): void {
             $config = Config::current();
             $trigger = Trigger::current();
             $theme = Theme::current();

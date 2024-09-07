@@ -15,7 +15,10 @@
          * See Also:
          *     <Model::grab>
          */
-        public function __construct($view_id, $options = array()) {
+        public function __construct(
+            $view_id,
+            $options = array()
+        ) {
             parent::grab($this, $view_id, $options);
 
             if ($this->no_results)
@@ -51,7 +54,11 @@
          * Returns:
          *     The newly created <View>.
          */
-        public static function add($post_id, $user_id, $created_at = null): self {
+        public static function add(
+            $post_id,
+            $user_id,
+            $created_at = null
+        ): self {
             $sql = SQL::current();
 
             $sql->insert(
@@ -73,7 +80,9 @@
          * See Also:
          *     <Model::destroy>
          */
-        public static function delete($view_id): void {
+        public static function delete(
+            $view_id
+        ): void {
             parent::destroy(self::class, $view_id);
         }
 

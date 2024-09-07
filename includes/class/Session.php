@@ -24,7 +24,10 @@
          *     $path - Filesystem path.
          *     $name - The session name.
          */
-        public function open($path, $name): bool {
+        public function open(
+            $path,
+            $name
+        ): bool {
             $this->created_at = datetime();
             $this->deny = (SESSION_DENY_BOT and BOT_UA);
 
@@ -46,7 +49,9 @@
          * Parameters:
          *     $id - Session ID.
          */
-        public function read($id): string|false {
+        public function read(
+            $id
+        ): string|false {
             $result = SQL::current()->select(
                 tables:"sessions",
                 fields:array("data", "created_at"),
@@ -69,7 +74,10 @@
          *     $id - Session ID.
          *     $data - Data to write.
          */
-        public function write($id, $data): bool {
+        public function write(
+            $id,
+            $data
+        ): bool {
             $sql = SQL::current();
             $visitor = Visitor::current();
 
@@ -100,7 +108,9 @@
          * Parameters:
          *     $id - Session ID.
          */
-        public function destroy($id): bool {
+        public function destroy(
+            $id
+        ): bool {
             SQL::current()->delete("sessions", array("id" => $id));
             return true;
         }
@@ -112,7 +122,9 @@
          * Parameters:
          *     $lifetime - The configured maximum session lifetime in seconds.
          */
-        public function gc($lifetime): int|false {
+        public function gc(
+            $lifetime
+        ): int|false {
             SQL::current()->delete(
                 "sessions",
                 "updated_at < :expired_cookie OR data = '' OR data IS NULL",
@@ -142,7 +154,9 @@
          * Parameters:
          *     $hash - The token to validate.
          */
-        public static function check_token($hash): bool {
+        public static function check_token(
+            $hash
+        ): bool {
             $token = self::hash_token();
 
             if ($token === false)

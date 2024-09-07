@@ -75,7 +75,9 @@
             );
         }
 
-        public function update($post): Post|false {
+        public function update(
+            $post
+        ): Post|false {
             if (empty($_POST['source']))
                 error(
                     __("Error"),
@@ -112,7 +114,9 @@
             );
         }
 
-        public function title($post): string {
+        public function title(
+            $post
+        ): string {
             return oneof(
                 $post->name,
                 $post->title_from_excerpt(),
@@ -120,11 +124,15 @@
             );
         }
 
-        public function excerpt($post): string {
+        public function excerpt(
+            $post
+        ): string {
             return $post->description;
         }
 
-        public function feed_content($post): string {
+        public function feed_content(
+            $post
+        ): string {
             $content = '<a rel="external" href="'.
                        fix($post->source, true).'">'.
                        oneof($post->name, $post->source).'</a>';
@@ -137,7 +145,10 @@
             return '<figure>'.$content.'</figure>';
         }
 
-        public function link_related($post, $feed): void {
+        public function link_related(
+            $post,
+            $feed
+        ): void {
             if ($post->feather != "link")
                 return;
 

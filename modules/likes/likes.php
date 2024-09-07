@@ -24,7 +24,9 @@
             );
         }
 
-        public static function __uninstall($confirm): void {
+        public static function __uninstall(
+            $confirm
+        ): void {
             if ($confirm)
                 Like::uninstall();
 
@@ -33,25 +35,35 @@
             Config::current()->remove("module_likes");
         }
 
-        public function user_logged_in($user): void {
+        public function user_logged_in(
+            $user
+        ): void {
             $_SESSION['likes'] = array();
         }
 
-        public function user($user): void {
+        public function user(
+            $user
+        ): void {
             $user->has_many[] = "likes";
         }
 
-        public function post($post): void {
+        public function post(
+            $post
+        ): void {
             $post->has_many[] = "likes";
         }
 
-        public function list_permissions($names = array()): array {
+        public function list_permissions(
+            $names = array()
+        ): array {
             $names["like_post"]   = __("Like Posts", "likes");
             $names["unlike_post"] = __("Unlike Posts", "likes");
             return $names;
         }
 
-        public function admin_like_settings($admin): void {
+        public function admin_like_settings(
+            $admin
+        ): void {
             $config = Config::current();
 
             if (!Visitor::current()->group->can("change_settings"))
@@ -92,7 +104,9 @@
             );
         }
 
-        public function settings_nav($navs): array {
+        public function settings_nav(
+            $navs
+        ): array {
             if (Visitor::current()->group->can("change_settings"))
                 $navs["like_settings"] = array(
                     "title" => __("Likes", "likes")
@@ -101,7 +115,9 @@
             return $navs;
         }
 
-        public function main_most_likes($main): void {
+        public function main_most_likes(
+            $main
+        ): void {
             $posts = Post::find(array("placeholders" => true));
 
             usort($posts[0], function ($a, $b) {
@@ -121,7 +137,7 @@
             );
         }
 
-        public function main_like()/*: never */{
+        public function main_like(): never {
             if (empty($_GET['post_id']) or !is_numeric($_GET['post_id']))
                 error(
                     __("Error"),
@@ -150,7 +166,7 @@
             );
         }
 
-        public function main_unlike()/*: never */{
+        public function main_unlike(): never {
             if (empty($_GET['post_id']) or !is_numeric($_GET['post_id']))
                 error(
                     __("Error"),
@@ -252,14 +268,18 @@
             json_response($text, true);
         }
 
-        public function delete_post($post): void {
+        public function delete_post(
+            $post
+        ): void {
             SQL::current()->delete(
                 table:"likes",
                 conds:array("post_id" => $post->id)
             );
         }
 
-        public function delete_user($user): void {
+        public function delete_user(
+            $user
+        ): void {
             SQL::current()->update(
                 table:"likes",
                 conds:array("user_id" => $user->id),
@@ -267,7 +287,9 @@
             );
         }
 
-        private function get_post_like_count($post_id): int {
+        private function get_post_like_count(
+            $post_id
+        ): int {
             if (!isset($this->caches["post_like_counts"])) {
                 $counts = SQL::current()->select(
                     tables:"likes",
@@ -287,14 +309,19 @@
             return fallback($this->caches["post_like_counts"][$post_id], 0);
         }
 
-        public function post_like_count_attr($attr, $post): int {
+        public function post_like_count_attr(
+            $attr,
+            $post
+        ): int {
             if ($post->no_results)
                 return 0;
 
             return $this->get_post_like_count($post->id);
         }
 
-        public function get_user_like_count($user_id): int {
+        public function get_user_like_count(
+            $user_id
+        ): int {
             if (!isset($this->caches["user_like_counts"])) {
                 $counts = SQL::current()->select(
                     tables:"likes",
@@ -314,20 +341,29 @@
             return fallback($this->caches["user_like_counts"][$user_id], 0);
         }
 
-        public function user_like_count_attr($attr, $user): int {
+        public function user_like_count_attr(
+            $attr,
+            $user
+        ): int {
             if ($user->no_results)
                 return 0;
 
             return $this->get_user_like_count($user->id);
         }
 
-        public function visitor_like_count_attr($attr, $visitor): int {
+        public function visitor_like_count_attr(
+            $attr,
+            $visitor
+        ): int {
             return ($visitor->id == 0) ?
                 count(fallback($_SESSION['likes'], array())) :
                 $this->user_like_count_attr($attr, $visitor) ;
         }
 
-        public function post_like_link_attr($attr, $post): ?string {
+        public function post_like_link_attr(
+            $attr,
+            $post
+        ): ?string {
             $config = Config::current();
             $route = Route::current();
             $main = MainController::current();
@@ -454,11 +490,16 @@
             return '<th class="post_likes value">'.__("Likes", "tags").'</th>';
         }
 
-        public function manage_posts_column($post): string {
+        public function manage_posts_column(
+            $post
+        ): string {
             return '<td class="post_likes value">'.$post->like_count.'</td>';
         }
 
-        public function import_chyrp_post($entry, $post): void {
+        public function import_chyrp_post(
+            $entry,
+            $post
+        ): void {
             $chyrp = $entry->children("http://chyrp.net/export/1.0/");
 
             if (!isset($chyrp->like))
@@ -486,7 +527,10 @@
             }
         }
 
-        public function posts_export($atom, $post): string {
+        public function posts_export(
+            $atom,
+            $post
+        ): string {
             $likes = Like::find(
                 array("where" => array("post_id" => $post->id))
             );
@@ -508,7 +552,9 @@
             return $atom;
         }
 
-        public function stylesheets($styles): array {
+        public function stylesheets(
+            $styles
+        ): array {
             $styles[] = Config::current()->chyrp_url.
                         "/modules/likes/likes.css";
 

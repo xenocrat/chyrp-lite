@@ -8,7 +8,9 @@
             Route::current()->add("tag/(name)/", "tag");
         }
 
-        public static function __uninstall($confirm): void {
+        public static function __uninstall(
+            $confirm
+        ): void {
             Route::current()->remove("tag/(name)/");
 
             if ($confirm)
@@ -18,43 +20,63 @@
                 );
         }
 
-        private function tags_serialize($tags) {
+        private function tags_serialize(
+            $tags
+        ) {
             return json_set($tags);
         }
 
-        private function tags_unserialize($tags) {
+        private function tags_unserialize(
+            $tags
+        ) {
             return json_get($tags, true);
         }
 
-        private function sort_tags_name_asc($a, $b): int {
+        private function sort_tags_name_asc(
+            $a,
+            $b
+        ): int {
             return $this->mb_strcasecmp(
                 $a["name"],
                 $b["name"]
             );
         }
 
-        private function sort_tags_name_desc($a, $b): int {
+        private function sort_tags_name_desc(
+            $a,
+            $b
+        ): int {
             return $this->mb_strcasecmp(
                 $b["name"],
                 $a["name"]
             );
         }
 
-        private function sort_tags_popularity_asc($a, $b): int {
+        private function sort_tags_popularity_asc(
+            $a,
+            $b
+        ): int {
             if ($a["popularity"] == $b["popularity"])
                 return 0;
 
             return ($a["popularity"] < $b["popularity"]) ? -1 : 1 ;
         }
 
-        private function sort_tags_popularity_desc($a, $b): int {
+        private function sort_tags_popularity_desc(
+            $a,
+            $b
+        ): int {
             if ($a["popularity"] == $b["popularity"])
                 return 0;
 
             return ($a["popularity"] > $b["popularity"]) ? -1 : 1 ;
         }
 
-        private function mb_strcasecmp($str1, $str2, $encoding = "UTF-8"): int {
+        private function mb_strcasecmp(
+            $str1,
+            $str2,
+            $encoding = "UTF-8"
+        ): int {
             $str1 = preg_replace("/[[:punct:]]+/", "", $str1);
             $str2 = preg_replace("/[[:punct:]]+/", "", $str2);
 
@@ -65,24 +87,32 @@
             );
         }
 
-        private function tags_name_match($name): string {
+        private function tags_name_match(
+            $name
+        ): string {
             # Serialized notation of key for SQL queries.
             return "%\"".$this->tags_encoded($name)."\":%";
         }
 
-        private function tags_clean_match($clean): string {
+        private function tags_clean_match(
+            $clean
+        ): string {
             # Serialized notation of value for SQL queries.
             return "%:\"".$this->tags_encoded($clean)."\"%";
         }
 
-        private function tags_encoded($text): string {
+        private function tags_encoded(
+            $text
+        ): string {
             # Recreate JSON encoding for SQL queries.
             $json = trim(json_set((string) $text), "\"");
             # See: QueryBuilder::build_conditions().
             return str_replace("|", "||", $json);
         }
 
-        private function prepare_tags($tags): array {
+        private function prepare_tags(
+            $tags
+        ): array {
             # Split at the comma.
             $names = explode(",", $tags);
 
@@ -120,7 +150,9 @@
             return $assoc;
         }
 
-        public function before_add_post_attributes($attributes): array {
+        public function before_add_post_attributes(
+            $attributes
+        ): array {
             if (!isset($_POST['tags']))
                 return $attributes;
 
@@ -129,7 +161,9 @@
             return $attributes;
         }
 
-        public function before_update_post_attributes($attributes): array {
+        public function before_update_post_attributes(
+            $attributes
+        ): array {
             if (!isset($_POST['tags']))
                 return $attributes;
 
@@ -138,7 +172,10 @@
             return $attributes;
         }
 
-        public function post_options($fields, $post = null): array {
+        public function post_options(
+            $fields,
+            $post = null
+        ): array {
             $cloud = $this->tag_cloud(false, "name_asc");
             $names = isset($post->tags) ?
                 array_keys($post->tags) :
@@ -173,7 +210,9 @@
             return $fields;
         }
 
-        public function post($post): void {
+        public function post(
+            $post
+        ): void {
             $post->tags = empty($post->tags) ?
                 array() :
                 $this->tags_unserialize($post->tags) ;
@@ -183,7 +222,10 @@
             });
         }
 
-        public function post_tags_link_attr($attr, $post): array {
+        public function post_tags_link_attr(
+            $attr,
+            $post
+        ): array {
             $urls = array();
 
             if ($post->no_results)
@@ -212,12 +254,16 @@
             return $this->tag_cloud($limit, $sort, $scale);
         }
 
-        public function parse_urls($urls): array {
+        public function parse_urls(
+            $urls
+        ): array {
             $urls['|/tag/([^/]+)/|'] = '/?action=tag&amp;name=$1';
             return $urls;
         }
 
-        public function manage_nav($navs): array {
+        public function manage_nav(
+            $navs
+        ): array {
             if (Post::any_editable())
                 $navs["manage_tags"] = array(
                     "title" => __("Tags", "tags"),
@@ -238,7 +284,9 @@
                    '</th>';
         }
 
-        public function manage_posts_column($post): string {
+        public function manage_posts_column(
+            $post
+        ): string {
             $tags = array();
 
             foreach ($post->tags as $name => $clean)
@@ -253,7 +301,9 @@
                    '</td>';
         }
 
-        public function admin_manage_tags($admin): void {
+        public function admin_manage_tags(
+            $admin
+        ): void {
             if (!Post::any_editable())
                 show_403(
                     __("Access Denied"),
@@ -309,7 +359,9 @@
             );
         }
 
-        public function admin_posts_tagged($admin): void {
+        public function admin_posts_tagged(
+            $admin
+        ): void {
             if (!Post::any_editable())
                 show_403(
                     __("Access Denied"),
@@ -437,7 +489,9 @@
             );
         }
 
-        public function admin_edit_tags($admin): void {
+        public function admin_edit_tags(
+            $admin
+        ): void {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(
                     __("No ID Specified"),
@@ -468,7 +522,9 @@
             );
         }
 
-        public function admin_update_tags($admin)/*: never */{
+        public function admin_update_tags(
+            $admin
+        ): never {
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
@@ -507,7 +563,9 @@
             );
         }
 
-        public function admin_rename_tag($admin): void {
+        public function admin_rename_tag(
+            $admin
+        ): void {
             if (!Post::any_editable())
                 show_403(
                     __("Access Denied"),
@@ -535,7 +593,9 @@
             );
         }
 
-        public function admin_update_tag($admin)/*: never */{
+        public function admin_update_tag(
+            $admin
+        ): never {
             if (!Post::any_editable())
                 show_403(
                     __("Access Denied"),
@@ -592,7 +652,9 @@
             );
         }
 
-        public function admin_delete_tag($admin): void {
+        public function admin_delete_tag(
+            $admin
+        ): void {
             if (!Post::any_editable())
                 show_403(
                     __("Access Denied"),
@@ -620,7 +682,7 @@
             );
         }
 
-        public function admin_destroy_tag()/*: never */{
+        public function admin_destroy_tag(): never {
             if (!Post::any_editable())
                 show_403(
                     __("Access Denied"),
@@ -672,7 +734,9 @@
             );
         }
 
-        public function admin_bulk_tag($admin)/*: never */{
+        public function admin_bulk_tag(
+            $admin
+        ): never {
             if (!Post::any_editable())
                 show_403(
                     __("Access Denied"),
@@ -717,7 +781,9 @@
             );
         }
 
-        public function main_tag($main): void {
+        public function main_tag(
+            $main
+        ): void {
             if (!isset($_GET['name']))
                 Flash::warning(
                     __("You did not specify a tag.", "tags"),
@@ -755,7 +821,9 @@
             );
         }
 
-        public function main_tags($main): void {
+        public function main_tags(
+            $main
+        ): void {
             $main->display(
                 "pages".DIR."tags",
                 array("tag_cloud" => $this->tag_cloud(false, "name_asc")),
@@ -763,7 +831,11 @@
             );
         }
 
-        public function related_posts($ids, $post, $limit): array {
+        public function related_posts(
+            $ids,
+            $post,
+            $limit
+        ): array {
             if (empty($post->tags))
                 return $ids;
 
@@ -882,13 +954,18 @@
                 $array ;
         }
 
-        private function tag_cloud_title($name, $count) {
+        private function tag_cloud_title(
+            $name,
+            $count
+        ) {
             $p = _p("%d post tagged with &#8220;%s&#8221;", "%d posts tagged with &#8220;%s&#8221;", $count, "tags");
             $title = sprintf($p, $count, fix($name, true));
             return $title;
         }
 
-        public function tag_find_by_clean($clean): array|false {
+        public function tag_find_by_clean(
+            $clean
+        ): array|false {
             $cloud = $this->tag_cloud();
 
             foreach ($cloud as $tag) {
@@ -899,7 +976,9 @@
             return false;
         }
 
-        public function tag_find_by_name($name): array|false {
+        public function tag_find_by_name(
+            $name
+        ): array|false {
             $cloud = $this->tag_cloud();
 
             foreach ($cloud as $tag) {
@@ -910,7 +989,10 @@
             return false;
         }
 
-        public function feed_item($post, $feed): void {
+        public function feed_item(
+            $post,
+            $feed
+        ): void {
             $scheme = url("tags", MainController::current());
 
             foreach ($post->tags as $tag => $clean)

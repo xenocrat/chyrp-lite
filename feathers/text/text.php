@@ -56,7 +56,9 @@
             );
         }
 
-        public function update($post): Post|false {
+        public function update(
+            $post
+        ): Post|false {
             if (empty($_POST['body']))
                 error(
                     __("Error"),
@@ -83,18 +85,24 @@
             );
         }
 
-        public function title($post): string {
+        public function title(
+            $post
+        ): string {
             return oneof(
                 $post->title,
                 $post->title_from_excerpt()
             );
         }
 
-        public function excerpt($post): string {
+        public function excerpt(
+            $post
+        ): string {
             return $post->body;
         }
 
-        public function feed_content($post): string {
+        public function feed_content(
+            $post
+        ): string {
             return $post->body;
         }
     }

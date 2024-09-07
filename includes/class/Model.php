@@ -38,7 +38,9 @@
          * Returns:
          *     @mixed@
          */
-        public function &__get($name): mixed {
+        public function &__get(
+            $name
+        ): mixed {
             $trigger = Trigger::current();
             $model_name = strtolower(get_class($this));
 
@@ -164,7 +166,10 @@
          * Function __set
          * Handles dynamic attributes.
          */
-        public function __set($name, $value): void {
+        public function __set(
+            $name,
+            $value
+        ): void {
             $this->data[$name] = $value;
         }
 
@@ -172,7 +177,9 @@
          * Function: __isset
          * Handles model relationships, deferred and dynamic attributes.
          */
-        public function __isset($name): bool {
+        public function __isset(
+            $name
+        ): bool {
             $trigger = Trigger::current();
             $model_name = strtolower(get_class($this));
 
@@ -228,7 +235,11 @@
          *     read_from - An array to read from instead of performing another query.
          *     ignore_dupes - An array of columns in which duplicate values will be retained.
          */
-        protected static function grab($model, $id, $options = array()): void {
+        protected static function grab(
+            $model,
+            $id,
+            $options = array()
+        ): void {
             $model_name = strtolower(get_class($model));
 
             if ($model_name == "visitor")
@@ -483,7 +494,9 @@
          * Function: deletable
          * Checks if the <User> can delete the object.
          */
-        public function deletable($user = null): bool {
+        public function deletable(
+            $user = null
+        ): bool {
             if ($this->no_results)
                 return false;
 
@@ -497,7 +510,9 @@
          * Function: editable
          * Checks if the <User> can edit the object.
          */
-        public function editable($user = null): bool {
+        public function editable(
+            $user = null
+        ): bool {
             if ($this->no_results)
                 return false;
 

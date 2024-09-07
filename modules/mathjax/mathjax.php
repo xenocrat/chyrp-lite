@@ -16,7 +16,9 @@
             Config::current()->remove("module_mathjax");
         }
 
-        public function scripts($scripts): array {
+        public function scripts(
+            $scripts
+        ): array {
             $config = Config::current();
             $script = "";
 
@@ -72,7 +74,9 @@
             );
         }
 
-        public function settings_nav($navs): array {
+        public function settings_nav(
+            $navs
+        ): array {
             if (Visitor::current()->group->can("change_settings"))
                 $navs["mathjax_settings"] = array(
                     "title" => __("MathJax", "mathjax")

@@ -13,7 +13,9 @@
             Group::add_permission("delete_pingback", "Delete Webmentions");
         }
 
-        public static function __uninstall($confirm): void {
+        public static function __uninstall(
+            $confirm
+        ): void {
             if ($confirm)
                 Pingback::uninstall();
 
@@ -21,13 +23,19 @@
             Group::remove_permission("delete_pingback");
         }
 
-        public function list_permissions($names = array()): array {
+        public function list_permissions(
+            $names = array()
+        ): array {
             $names["edit_pingback"] = __("Edit Webmentions", "pingable");
             $names["delete_pingback"] = __("Delete Webmentions", "pingable");
             return $names;
         }
 
-        public function webmention($post, $from, $to): void {
+        public function webmention(
+            $post,
+            $from,
+            $to
+        ): void {
             $count = SQL::current()->count(
                 tables:"pingbacks",
                 conds:array(
@@ -57,7 +65,9 @@
             );
         }
 
-        public function admin_edit_pingback($admin): void {
+        public function admin_edit_pingback(
+            $admin
+        ): void {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(
                     __("No ID Specified"),
@@ -85,7 +95,9 @@
             );
         }
 
-        public function admin_update_pingback($admin)/*: never */{
+        public function admin_update_pingback(
+            $admin
+        ): never {
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
@@ -128,7 +140,9 @@
             );
         }
 
-        public function admin_delete_pingback($admin): void {
+        public function admin_delete_pingback(
+            $admin
+        ): void {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(
                     __("No ID Specified"),
@@ -156,7 +170,7 @@
             );
         }
 
-        public function admin_destroy_pingback()/*: never */{
+        public function admin_destroy_pingback(): never {
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
@@ -195,7 +209,9 @@
             );
         }
 
-        public function admin_manage_pingbacks($admin): void {
+        public function admin_manage_pingbacks(
+            $admin
+        ): void {
             if (!Visitor::current()->group->can("edit_pingback", "delete_pingback"))
                 show_403(
                     __("Access Denied"),
@@ -239,7 +255,9 @@
             );
         }
 
-        public function manage_nav($navs): array {
+        public function manage_nav(
+            $navs
+        ): array {
             if (Visitor::current()->group->can("edit_pingback", "delete_pingback"))
                 $navs["manage_pingbacks"] = array(
                     "title" => __("Webmentions", "pingable"),
@@ -252,7 +270,9 @@
             return $navs;
         }
 
-        public function admin_determine_action($action): ?string {
+        public function admin_determine_action(
+            $action
+        ): ?string {
             $visitor = Visitor::current();
 
             if (
@@ -270,7 +290,9 @@
                    '</th>';
         }
 
-        public function manage_posts_column($post): string {
+        public function manage_posts_column(
+            $post
+        ): string {
             return '<td class="post_pingbacks value"><a href="'.
                    url("manage_pingbacks/query/".urlencode("post_id:".$post->id)).
                    '">'.
@@ -278,18 +300,24 @@
                    '</a></td>';
         }
 
-        public function post($post): void {
+        public function post(
+            $post
+        ): void {
             $post->has_many[] = "pingbacks";
         }
 
-        public function delete_post($post): void {
+        public function delete_post(
+            $post
+        ): void {
             SQL::current()->delete(
                 table:"pingbacks",
                 conds:array("post_id" => $post->id)
             );
         }
 
-        private function get_post_pingback_count($post_id): int {
+        private function get_post_pingback_count(
+            $post_id
+        ): int {
             if (!isset($this->caches["post_pingback_counts"])) {
                 $counts = SQL::current()->select(
                     tables:"pingbacks",
@@ -309,14 +337,20 @@
             return fallback($this->caches["post_pingback_counts"][$post_id], 0);
         }
 
-        public function post_pingback_count_attr($attr, $post): int {
+        public function post_pingback_count_attr(
+            $attr,
+            $post
+        ): int {
             if ($post->no_results)
                 return 0;
 
             return $this->get_post_pingback_count($post->id);
         }
 
-        public function import_chyrp_post($entry, $post): void {
+        public function import_chyrp_post(
+            $entry,
+            $post
+        ): void {
             $chyrp = $entry->children(
                 "http://chyrp.net/export/1.0/"
             );
@@ -346,7 +380,10 @@
             }
         }
 
-        public function posts_export($atom, $post): string {
+        public function posts_export(
+            $atom,
+            $post
+        ): string {
             $pingbacks = Pingback::find(
                 array("where" => array("post_id" => $post->id))
             );

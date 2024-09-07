@@ -15,7 +15,10 @@
          * See Also:
          *     <Model::grab>
          */
-        public function __construct($like_id, $options = array()) {
+        public function __construct(
+            $like_id,
+            $options = array()
+        ) {
             parent::grab($this, $like_id, $options);
 
             if ($this->no_results)
@@ -82,7 +85,9 @@
          * See Also:
          *     <Model::destroy>
          */
-        public static function delete($like_id): void {
+        public static function delete(
+            $like_id
+        ): void {
             parent::destroy(self::class, $like_id);
         }
 
@@ -90,7 +95,9 @@
          * Function: deletable
          * Checks if the <User> can delete the like.
          */
-        public function deletable($user = null): bool {
+        public function deletable(
+            $user = null
+        ): bool {
             if ($this->no_results)
                 return false;
 
@@ -102,7 +109,9 @@
          * Function: editable
          * Checks if the <User> can edit the like.
          */
-        public function editable($user = null): bool {
+        public function editable(
+            $user = null
+        ): bool {
             if ($this->no_results)
                 return false;
 
@@ -117,7 +126,9 @@
          * Parameters:
          *     $post_id - The ID of the blog post that was liked.
          */
-        public static function create($post_id): void {
+        public static function create(
+            $post_id
+        ): void {
             if (self::exists($post_id))
                 return;
 
@@ -142,7 +153,9 @@
          * Notes:
          *     Guests' likes are removable until the session is destroyed.
          */
-        public static function remove($post_id): void {
+        public static function remove(
+            $post_id
+        ): void {
             if (!self::exists($post_id))
                 return;
 
@@ -156,7 +169,9 @@
          * Function: exists
          * Determines if the visitor has liked a post.
          */
-        public static function exists($post_id): bool {
+        public static function exists(
+            $post_id
+        ): bool {
             static $results;
             fallback($_SESSION['likes'], array());
 

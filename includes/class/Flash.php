@@ -34,7 +34,9 @@
          * Function: prepare
          * Prepare the structure of a session value.
          */
-        private static function prepare($type): void {
+        private static function prepare(
+            $type
+        ): void {
             if (
                 !isset($_SESSION[$type]) or
                 !is_array($_SESSION[$type])
@@ -52,7 +54,11 @@
          *     $redirect_to - URL to redirect to after the message is stored.
          *     $code - Numeric HTTP status code to set.
          */
-        public static function message($message, $redirect_to = null, $code = null): void {
+        public static function message(
+            $message,
+            $redirect_to = null,
+            $code = null
+        ): void {
             $trigger = Trigger::current();
             $type = self::FLASH_MESSAGE;
             self::prepare($type);
@@ -75,7 +81,11 @@
          *     $redirect_to - URL to redirect to after the notice is stored.
          *     $code - Numeric HTTP status code to set.
          */
-        public static function notice($message, $redirect_to = null, $code = null): void {
+        public static function notice(
+            $message,
+            $redirect_to = null,
+            $code = null
+        ): void {
             $trigger = Trigger::current();
             $type = self::FLASH_NOTICE;
             self::prepare($type);
@@ -98,7 +108,11 @@
          *     $redirect_to - URL to redirect to after the warning is stored.
          *     $code - Numeric HTTP status code to set.
          */
-        public static function warning($message, $redirect_to = null, $code = null): void {
+        public static function warning(
+            $message,
+            $redirect_to = null,
+            $code = null
+        ): void {
             $trigger = Trigger::current();
             $type = self::FLASH_WARNING;
             self::prepare($type);
@@ -162,7 +176,9 @@
          * Returns:
          *     An array of flashes of the requested type.
          */
-        private function serve($type): array {
+        private function serve(
+            $type
+        ): array {
             self::prepare($type);
 
             if (!empty($_SESSION[$type])) {
@@ -185,7 +201,9 @@
          * Parameters:
          *     $type - Type to check for (optional).
          */
-        public static function exists($type = null): bool {
+        public static function exists(
+            $type = null
+        ): bool {
             switch ($type) {
                 case self::FLASH_MESSAGE:
                 case self::FLASH_NOTICE:
@@ -223,7 +241,9 @@
          * Parameters:
          *     $type - Type to check for (optional).
          */
-        public static function count($type = null): int {
+        public static function count(
+            $type = null
+        ): int {
             $total = 0;
 
             switch ($type) {

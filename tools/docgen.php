@@ -81,7 +81,9 @@
      * Function: scan_dir
      * Scans a directory in search of files or subdirectories.
      */
-    function scan_dir($pathname) {
+    function scan_dir(
+        $pathname
+    ) {
         global $exclude;
 
         $dir = new DirectoryIterator($pathname);
@@ -109,7 +111,10 @@
      * Function: scan_file
      * Scans a file in search of documentation.
      */
-    function scan_file($pathname, $extension) {
+    function scan_file(
+        $pathname,
+        $extension
+    ) {
         if ($extension != "php")
             return;
 
@@ -125,7 +130,9 @@
      * Function: make_place
      * Makes a string detailing the file where the documentation was found.
      */
-    function make_place($pathname) {
+    function make_place(
+        $pathname
+    ) {
         return str_replace(
             array(MAIN_DIR.DIR, DIR),
             array("", "/"),
@@ -137,7 +144,10 @@
      * Function: scan_docs
      * Scans text for documentation.
      */
-    function scan_docs($pathname, $file) {
+    function scan_docs(
+        $pathname,
+        $file
+    ) {
         global $docs;
 
         if (

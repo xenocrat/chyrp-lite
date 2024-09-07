@@ -93,7 +93,9 @@
      * Parameters:
      *     $name - The name of the missing Twig function.
      */
-    function twig_callback_missing_function($name): \Twig\TwigFunction|false {
+    function twig_callback_missing_function(
+        $name
+    ): \Twig\TwigFunction|false {
         foreach (Modules::$instances as $module) {
             if (is_callable(array($module, "twig_function_".$name)))
                 return new \Twig\TwigFunction(
@@ -112,7 +114,9 @@
      * Parameters:
      *     $name - The name of the missing Twig filter.
      */
-    function twig_callback_missing_filter($name): \Twig\TwigFilter|false {
+    function twig_callback_missing_filter(
+        $name
+    ): \Twig\TwigFilter|false {
         foreach (Modules::$instances as $module) {
             if (is_callable(array($module, "twig_filter_".$name)))
                 return new \Twig\TwigFilter(
@@ -176,7 +180,9 @@
      * Parameters:
      *     $email - The email address to obfuscate.
      */
-    function twig_function_mailto($email): ?string {
+    function twig_function_mailto(
+        $email
+    ): ?string {
         if (!is_email($email))
             return null;
 
@@ -480,7 +486,9 @@
      * Parameters:
      *     $bytes - The filesize in bytes.
      */
-    function twig_filter_filesize_format($bytes): string {
+    function twig_filter_filesize_format(
+        $bytes
+    ): string {
         if (is_array($bytes))
             $bytes = max($bytes);
 
@@ -566,7 +574,9 @@
      * Parameters:
      *     $variable - The variable to inspect.
      */
-    function twig_filter_inspect($variable): string {
+    function twig_filter_inspect(
+        $variable
+    ): string {
         return '<pre class="chyrp_inspect"><code>'.
                fix(var_export($variable, true)).
                '</code></pre>';
@@ -579,7 +589,9 @@
      * Parameters:
      *     $test - The variable to test.
      */
-    function twig_filter_checked($test): string {
+    function twig_filter_checked(
+        $test
+    ): string {
         return ($test) ? " checked" : "" ;
     }
 
@@ -591,7 +603,9 @@
      * Parameters:
      *     $test - The variable to test.
      */
-    function twig_filter_selected($test): string {
+    function twig_filter_selected(
+        $test
+    ): string {
         $try = func_get_args();
         array_shift($try);
 
@@ -614,7 +628,9 @@
      * Parameters:
      *     $test - The variable to test.
      */
-    function twig_filter_disabled($test): string {
+    function twig_filter_disabled(
+        $test
+    ): string {
         $try = func_get_args();
         array_shift($try);
 
@@ -636,7 +652,9 @@
      * Parameters:
      *     $filename - The uploaded filename.
      */
-    function twig_filter_download($filename): string {
+    function twig_filter_download(
+        $filename
+    ): string {
         $filepath = Config::current()->chyrp_url.
                     "/includes/download.php?file=".
                     urlencode($filename);

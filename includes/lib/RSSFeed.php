@@ -143,7 +143,11 @@
          *     $scheme - URI for the categorization scheme (optional).
          *     $label - Human-readable label for the category (optional).
          */
-        public function category($term, $scheme = "", $label = ""): bool {
+        public function category(
+            $term,
+            $scheme = "",
+            $label = ""
+        ): bool {
             if (!$this->open)
                 return false;
 
@@ -166,7 +170,9 @@
          * Function: rights
          * Not implemented in RSS 2.0.11.
          */
-        public function rights($text): bool {
+        public function rights(
+            $text
+        ): bool {
             return false;
         }
 
@@ -210,7 +216,9 @@
          * Function: related
          * Not implemented in RSS 2.0.11.
          */
-        public function related($link): bool {
+        public function related(
+            $link
+        ): bool {
             return false;
         }
 

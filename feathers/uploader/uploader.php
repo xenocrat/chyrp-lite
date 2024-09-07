@@ -43,11 +43,15 @@
             $this->respondTo("post_options", "add_option");
         }
 
-        private function filenames_serialize($files) {
+        private function filenames_serialize(
+            $files
+        ) {
             return json_set($files, JSON_UNESCAPED_SLASHES);
         }
 
-        private function filenames_unserialize($filenames) {
+        private function filenames_unserialize(
+            $filenames
+        ) {
             return json_get($filenames, true);
         }
 
@@ -105,7 +109,9 @@
             );
         }
 
-        public function update($post): Post|false {
+        public function update(
+            $post
+        ): Post|false {
             fallback($_POST['title'], "");
             fallback($_POST['caption'], "");
             fallback($_POST['slug'], "");
@@ -151,19 +157,28 @@
             );
         }
 
-        public function title($post): string {
+        public function title(
+            $post
+        ): string {
             return oneof($post->title, $post->title_from_excerpt());
         }
 
-        public function excerpt($post): string {
+        public function excerpt(
+            $post
+        ): string {
             return $post->caption;
         }
 
-        public function feed_content($post): string {
+        public function feed_content(
+            $post
+        ): string {
             return $post->caption;
         }
 
-        public function enclose_uploaded($post, $feed): void {
+        public function enclose_uploaded(
+            $post,
+            $feed
+        ): void {
             $config = Config::current();
 
             if ($post->feather != "uploader")
@@ -182,14 +197,18 @@
             }
         }
 
-        public function post($post): void {
+        public function post(
+            $post
+        ): void {
             if ($post->feather != "uploader")
                 return;
 
             $post->filenames = $this->filenames_unserialize($post->filenames);
         }
 
-        public function filter_post($post): void {
+        public function filter_post(
+            $post
+        ): void {
             if ($post->feather != "uploader")
                 return;
 
@@ -207,7 +226,11 @@
                 }
         }
 
-        public function add_option($options, $post = null, $feather = null): array {
+        public function add_option(
+            $options,
+            $post = null,
+            $feather = null
+        ): array {
             if ($feather != "uploader")
                 return $options;
 
@@ -222,7 +245,9 @@
             return $options;
         }
 
-        private function list_files($filenames): array {
+        private function list_files(
+            $filenames
+        ): array {
             $list = array();
 
             foreach ($filenames as $filename) {

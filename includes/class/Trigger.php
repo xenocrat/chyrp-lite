@@ -40,7 +40,10 @@
          * Function: cmp
          * Sorts actions by priority when used with usort.
          */
-        private function cmp($a, $b): int {
+        private function cmp(
+            $a,
+            $b
+        ): int {
             if (empty($a) or empty($b))
                 return 0;
 
@@ -54,7 +57,10 @@
          * Function: decide
          * Decides what to do with a call return value.
          */
-        private function decide($return, $val): mixed {
+        private function decide(
+            $return,
+            $val
+        ): mixed {
             if ($return === false)
                 return $val;
 
@@ -79,7 +85,9 @@
          * Notes:
          *     Any additional arguments are passed on to the trigger responders.
          */
-        public function call($name): mixed {
+        public function call(
+            $name
+        ): mixed {
             $return = false;
 
             if (is_array($name)) {
@@ -159,7 +167,10 @@
          * Notes:
          *     Any additional arguments are passed on to the trigger responders.
          */
-        public function filter(&$target, $name): mixed {
+        public function filter(
+            &$target,
+            $name
+        ): mixed {
             if (is_array($name)) {
                 foreach ($name as $filter) {
                     $args = func_get_args();
@@ -235,7 +246,9 @@
          * Returns:
          *     @true@ or @false@
          */
-        public function exists($name): bool {
+        public function exists(
+            $name
+        ): bool {
             if (isset($this->exists[$name]))
                 return $this->exists[$name];
 

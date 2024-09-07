@@ -5,7 +5,9 @@
             $this->setPriority("markup_text", 4);
         }
 
-        public function markup_text($text): string {
+        public function markup_text(
+            $text
+        ): string {
             $urls = array(
                 '|<!--[^>]*youtube.com/watch\?v=([a-z0-9_\-]{11})[^>]*-->|i'
                     => 'https://www.youtube.com/embed/$1',
@@ -29,6 +31,10 @@
                          '" allowfullscreen></iframe>';
             }
 
-            return preg_replace(array_keys($urls), array_values($urls), $text);
+            return preg_replace(
+                array_keys($urls),
+                array_values($urls),
+                $text
+            );
         }
     }

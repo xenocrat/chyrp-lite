@@ -26,7 +26,10 @@
          * See Also:
          *     <Model::grab>
          */
-        public function __construct($comment_id, $options = array()) {
+        public function __construct(
+            $comment_id,
+            $options = array()
+        ) {
             $skip_where = (
                 ADMIN or
                 (isset($options["skip_where"]) and $options["skip_where"])
@@ -395,7 +398,9 @@
          * See Also:
          *     <Model::destroy>
          */
-        public static function delete($comment_id): void {
+        public static function delete(
+            $comment_id
+        ): void {
             parent::destroy(
                 self::class,
                 $comment_id,
@@ -407,7 +412,9 @@
          * Function: editable
          * Checks if the <User> can edit the comment.
          */
-        public function editable($user = null): bool {
+        public function editable(
+            $user = null
+        ): bool {
             if ($this->no_results)
                 return false;
 
@@ -426,7 +433,9 @@
          * Function: deletable
          * Checks if the <User> can delete the comment.
          */
-        public function deletable($user = null): bool {
+        public function deletable(
+            $user = null
+        ): bool {
             if ($this->no_results)
                 return false;
 
@@ -493,7 +502,9 @@
          * Function: creatable
          * Checks if the <Visitor> can comment on a post.
          */
-        public static function creatable($post): bool {
+        public static function creatable(
+            $post
+        ): bool {
             $visitor = Visitor::current();
             
             if (!$visitor->group->can("add_comment"))

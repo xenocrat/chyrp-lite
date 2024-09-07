@@ -16,7 +16,10 @@
          * See Also:
          *     <Model::grab>
          */
-        public function __construct($user_id, $options = array()) {
+        public function __construct(
+            $user_id,
+            $options = array()
+        ) {
             parent::grab($this, $user_id, $options);
 
             if ($this->no_results)
@@ -54,7 +57,10 @@
          * Returns:
          *     @true@ or @false@
          */
-        static function authenticate($login, $password): bool {
+        static function authenticate(
+            $login,
+            $password
+        ): bool {
             $check = new self(array("login" => $login));
 
             if ($check->no_results)
@@ -220,7 +226,9 @@
          * See Also:
          *     <Model::destroy>
          */
-        public static function delete($user_id): void {
+        public static function delete(
+            $user_id
+        ): void {
             parent::destroy(self::class, $user_id);
         }
 
@@ -237,7 +245,9 @@
          * Notes:
          *     <random> tries to be cryptographically secure.
          */
-        public static function hash_password($password): string {
+        public static function hash_password(
+            $password
+        ): string {
             $salt = random(16);
             $prefix = '$6$rounds=50000$';
             return crypt($password, $prefix.$salt);
@@ -257,7 +267,10 @@
          * Notes:
          *     Uses <hash_equals> to mitigate timing attacks.
          */
-        public static function check_password($password, $stored): bool {
+        public static function check_password(
+            $password,
+            $stored
+        ): bool {
             return password_verify($password, $stored);
         }
     }

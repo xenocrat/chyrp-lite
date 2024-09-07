@@ -131,7 +131,10 @@
      * Function: scan_dir
      * Scans a directory in search of files or subdirectories.
      */
-    function scan_dir($domain, $pathname) {
+    function scan_dir(
+        $domain,
+        $pathname
+    ) {
         global $exclude;
 
         $dir = new DirectoryIterator($pathname);
@@ -159,7 +162,11 @@
      * Function: scan_file
      * Scans a file in search of translation strings.
      */
-    function scan_file($domain, $pathname, $extension) {
+    function scan_file(
+        $domain,
+        $pathname,
+        $extension
+    ) {
         if ($extension != "php" and $extension != "twig")
             return;
 
@@ -195,7 +202,10 @@
      * Function: make_place
      * Makes a string detailing the place a translation was found.
      */
-    function make_place($pathname, $line) {
+    function make_place(
+        $pathname,
+        $line
+    ) {
         return str_replace(
             array(MAIN_DIR.DIR, DIR),
             array("", "/"),
@@ -207,7 +217,9 @@
      * Function: is_theme
      * Checks if a pathname is part of a theme.
      */
-    function is_theme($pathname) {
+    function is_theme(
+        $pathname
+    ) {
         return (
             strpos($pathname, THEMES_DIR) === 0 or
             strpos($pathname, MAIN_DIR.DIR."admin") === 0
@@ -218,7 +230,12 @@
      * Function: scan__
      * Scans text for occurrences of the __() function.
      */
-    function scan__($domain, $pathname, $line, $text) {
+    function scan__(
+        $domain,
+        $pathname,
+        $line,
+        $text
+    ) {
         global $domains;
         global $strings;
         global $str_reg;
@@ -257,7 +274,12 @@
      * Function: scan_f
      * Scans text for occurrences of the _f() function.
      */
-    function scan_f($domain, $pathname, $line, $text) {
+    function scan_f(
+        $domain,
+        $pathname,
+        $line,
+        $text
+    ) {
         global $domains;
         global $strings;
         global $str_reg;
@@ -297,7 +319,12 @@
      * Function: scan_p
      * Scans text for occurrences of the _p() function.
      */
-    function scan_p($domain, $pathname, $line, $text) {
+    function scan_p(
+        $domain,
+        $pathname,
+        $line,
+        $text
+    ) {
         global $domains;
         global $strings;
         global $str_reg;
@@ -338,7 +365,12 @@
      * Function: scan_translate
      * Scans text for occurrences of the translate() filter.
      */
-    function scan_translate($domain, $pathname, $line, $text) {
+    function scan_translate(
+        $domain,
+        $pathname,
+        $line,
+        $text
+    ) {
         global $domains;
         global $strings;
         global $str_reg;
@@ -379,7 +411,12 @@
      * Function: scan_translate_format
      * Scans text for occurrences of the translate() | format() filter combination.
      */
-    function scan_translate_format($domain, $pathname, $line, $text) {
+    function scan_translate_format(
+        $domain,
+        $pathname,
+        $line,
+        $text
+    ) {
         global $domains;
         global $strings;
         global $str_reg;
@@ -420,7 +457,12 @@
      * Function: scan_translate_plural
      * Scans text for occurrences of the translate_plural() filter.
      */
-    function scan_translate_plural($domain, $pathname, $line, $text) {
+    function scan_translate_plural(
+        $domain,
+        $pathname,
+        $line,
+        $text
+    ) {
         global $domains;
         global $strings;
         global $str_reg;

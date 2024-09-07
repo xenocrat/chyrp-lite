@@ -1,6 +1,8 @@
 <?php
     class Rights extends Modules {
-        public static function __uninstall($confirm): void {
+        public static function __uninstall(
+            $confirm
+        ): void {
             if ($confirm) {
                 $sql = SQL::current();
 
@@ -19,7 +21,10 @@
             }
         }
 
-        public function post_options($fields, $post = null): array {
+        public function post_options(
+            $fields,
+            $post = null
+        ): array {
             $licences = array(
                 array(
                     "name" => __("All rights reserved", "rights"),
@@ -129,12 +134,18 @@
             return $fields;
         }
 
-        public function feed_item($post, $feed): void {
+        public function feed_item(
+            $post,
+            $feed
+        ): void {
             if (!empty($post->rights_licence))
                $feed->rights($post->rights_licence);
         }
 
-        public function post_licence_link_attr($attr, $post): string {
+        public function post_licence_link_attr(
+            $attr,
+            $post
+        ): string {
             switch ($post->rights_licence) {
                 case "Creative Commons BY":
                     $mark = '<a rel="license"'.

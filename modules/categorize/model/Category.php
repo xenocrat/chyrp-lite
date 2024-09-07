@@ -13,7 +13,10 @@
          * See Also:
          *     <Model::grab>
          */
-        public function __construct($category_id, $options = array()) {
+        public function __construct(
+            $category_id,
+            $options = array()
+        ) {
             $options["from"] = "categorize";
             parent::grab($this, $category_id, $options);
         }
@@ -51,7 +54,11 @@
          * See Also:
          *     <update>
          */
-        public static function add($name, $clean, $show_on_home): self {
+        public static function add(
+            $name,
+            $clean,
+            $show_on_home
+        ): self {
             $sql = SQL::current();
 
             $sql->insert(
@@ -80,7 +87,11 @@
          * Returns:
          *     The updated <Category>.
          */
-        public function update($name, $clean, $show_on_home): self|false {
+        public function update(
+            $name,
+            $clean,
+            $show_on_home
+        ): self|false {
             if ($this->no_results)
                 return false;
 
@@ -114,7 +125,9 @@
          * Function: delete
          * Deletes a category from the database.
          */
-        public static function delete($category_id): void {
+        public static function delete(
+            $category_id
+        ): void {
             $trigger = Trigger::current();
             $sql = SQL::current();
 
@@ -141,7 +154,9 @@
          * Function: deletable
          * Checks if the <User> can delete the category.
          */
-        public function deletable($user = null): bool {
+        public function deletable(
+            $user = null
+        ): bool {
             if ($this->no_results)
                 return false;
 
@@ -153,7 +168,9 @@
          * Function: editable
          * Checks if the <User> can edit the category.
          */
-        public function editable($user = null): bool {
+        public function editable(
+            $user = null
+        ): bool {
             if ($this->no_results)
                 return false;
 
@@ -172,7 +189,9 @@
          *     The unique version of the slug.
          *     If it's not used, it's the same as $clean. If it is, a number is appended.
          */
-        public static function check_clean($clean): string {
+        public static function check_clean(
+            $clean
+        ): string {
             if (empty($clean))
                 return $clean;
 

@@ -45,7 +45,10 @@
          * See Also:
          *     <Model::grab>
          */
-        public function __construct($post_id = null, $options = array()) {
+        public function __construct(
+            $post_id = null,
+            $options = array()
+        ) {
             if (!isset($post_id) and empty($options))
                 return;
 
@@ -457,7 +460,9 @@
          * See Also:
          *     <Model::destroy>
          */
-        public static function delete($id): void {
+        public static function delete(
+            $id
+        ): void {
             parent::destroy(
                 self::class,
                 $id,
@@ -474,7 +479,9 @@
          * Function: deletable
          * Checks if the <User> can delete the post.
          */
-        public function deletable($user = null): bool {
+        public function deletable(
+            $user = null
+        ): bool {
             if ($this->no_results)
                 return false;
 
@@ -504,7 +511,9 @@
          * Function: editable
          * Checks if the <User> can edit the post.
          */
-        public function editable($user = null): bool {
+        public function editable(
+            $user = null
+        ): bool {
             if ($this->no_results)
                 return false;
 
@@ -630,7 +639,9 @@
          * Returns:
          *     true - if a post with that ID is in the database.
          */
-        public static function exists($post_id): bool {
+        public static function exists(
+            $post_id
+        ): bool {
             return SQL::current()->count(
                 tables:"posts",
                 conds:array("id" => $post_id)
@@ -648,7 +659,9 @@
          *     The unique version of the URL value.
          *     If unused, it's the same as $url. If used, a number is appended to it.
          */
-        public static function check_url($url): string {
+        public static function check_url(
+            $url
+        ): string {
             if (empty($url))
                 return $url;
 
@@ -1035,7 +1048,9 @@
          *     $start - An array of additional statuses to allow;
          *              "registered_only", "private" and "scheduled" are added deterministically.
          */
-        public static function statuses($start = array()): string {
+        public static function statuses(
+            $start = array()
+        ): string {
             $visitor = Visitor::current();
 
             $statuses = array_merge(array(self::STATUS_PUBLIC), $start);
@@ -1121,7 +1136,9 @@
          *
          * Calls the @publish_post@ trigger with the updated <Post>.
          */
-        public static function publish_scheduled($pingbacks = false): void {
+        public static function publish_scheduled(
+            $pingbacks = false
+        ): void {
             $sql = SQL::current();
             $ids = $sql->select(
                 tables:"posts",

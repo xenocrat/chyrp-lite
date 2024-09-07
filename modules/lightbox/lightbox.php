@@ -15,7 +15,9 @@
             Config::current()->remove("module_lightbox");
         }
 
-        public function admin_lightbox_settings($admin): void {
+        public function admin_lightbox_settings(
+            $admin
+        ): void {
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(
                     __("Access Denied"),
@@ -62,7 +64,9 @@
             );
         }
 
-        public function settings_nav($navs): array {
+        public function settings_nav(
+            $navs
+        ): array {
             if (Visitor::current()->group->can("change_settings"))
                 $navs["lightbox_settings"] = array(
                     "title" => __("Lightbox", "lightbox")

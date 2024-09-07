@@ -331,7 +331,9 @@
          * Parameters:
          *     $page - Page number to link to.
          */
-        public function next_page_url($page = null): string {
+        public function next_page_url(
+            $page = null
+        ): string {
             $config = Config::current();
             $route = Route::current();
             $request = unfix(self_url());
@@ -380,7 +382,9 @@
          * Parameters:
          *     $page - Page number to link to.
          */
-        public function prev_page_url($page = null): string {
+        public function prev_page_url(
+            $page = null
+        ): string {
             $config = Config::current();
             $route = Route::current();
             $request = unfix(self_url());

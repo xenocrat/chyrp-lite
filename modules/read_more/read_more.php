@@ -22,7 +22,9 @@
             $this->setPriority("markup_post_text", 1);
         }
 
-        public function admin_read_more_settings($admin): void {
+        public function admin_read_more_settings(
+            $admin
+        ): void {
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(
                     __("Access Denied"),
@@ -56,7 +58,9 @@
             );
         }
 
-        public function settings_nav($navs): array {
+        public function settings_nav(
+            $navs
+        ): array {
             if (Visitor::current()->group->can("change_settings"))
                 $navs["read_more_settings"] = array(
                     "title" => __("Read More", "read_more")
@@ -65,7 +69,10 @@
             return $navs;
         }
 
-        public function markup_post_text($text, $post = null): string {
+        public function markup_post_text(
+            $text,
+            $post = null
+        ): string {
             if (!preg_match("/<!-- *more([^>]*)?-->/i", $text, $matches))
                 return $text;
 
@@ -89,7 +96,9 @@
                    '</a>';
         }
 
-        public function title_from_excerpt($text): string {
+        public function title_from_excerpt(
+            $text
+        ): string {
             $split = preg_split('/<a class="read_more"/', $text, 2);
             return $split[0];
         }

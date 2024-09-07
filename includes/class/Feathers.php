@@ -39,8 +39,14 @@
          * See Also:
          *     <Trigger.filter>
          */
-        protected function setFilter($field, $name): void {
-            self::$filters[get_class($this)][] = array("field" => $field, "name" => $name);
+        protected function setFilter(
+            $field,
+            $name
+        ): void {
+            self::$filters[get_class($this)][] = array(
+                "field" => $field,
+                "name" => $name
+            );
 
             if (isset($this->fields[$field])) {
                 foreach ((array) $name as $filter)
@@ -59,8 +65,14 @@
          * See Also:
          *     <Trigger.filter>
          */
-        protected function customFilter($field, $name): void {
-            self::$custom_filters[get_class($this)][] = array("field" => $field, "name" => $name);
+        protected function customFilter(
+            $field,
+            $name
+        ): void {
+            self::$custom_filters[get_class($this)][] = array(
+                "field" => $field,
+                "name" => $name
+            );
 
             if (isset($this->fields[$field])) {
                 foreach ((array) $name as $filter)
@@ -80,7 +92,11 @@
          * See Also:
          *     <Trigger>
          */
-        protected function respondTo($name, $function = null, $priority = 10): void {
+        protected function respondTo(
+            $name,
+            $function = null,
+            $priority = 10
+        ): void {
             fallback($function, $name);
             Trigger::current()->priorities[$name][] = array(
                 "priority" => $priority,
@@ -103,7 +119,9 @@
          *     extra - Stuff to output after the input field. Can be anything.
          *     note - A minor note to display next to the label text.
          */
-        protected function setField($options): void {
+        protected function setField(
+            $options
+        ): void {
             $this->fields[$options["attr"]] = $options;
         }
     }

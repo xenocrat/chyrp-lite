@@ -182,7 +182,9 @@
      * Function: alert
      * Logs an alert message and returns the log to date.
      */
-    function alert($message = null): ?array {
+    function alert(
+        $message = null
+    ): ?array {
         static $log = array();
 
         if (isset($message))
@@ -215,7 +217,10 @@
      *     $key - The key to test in the $_POST array.
      *     $fallback - The value to echo if the $_POST value is not set.
      */
-    function posted($key, $fallback = ""): void {
+    function posted(
+        $key,
+        $fallback = ""
+    ): void {
         echo fix(
             isset($_POST[$key]) ? $_POST[$key] : $fallback, true
         );
@@ -229,7 +234,10 @@
      *     $val1 - Compare this value...
      *     $val2 - ... with this value.
      */
-    function selected($val1, $val2): void {
+    function selected(
+        $val1,
+        $val2
+    ): void {
         if ($val1 == $val2)
             echo " selected";
     }
