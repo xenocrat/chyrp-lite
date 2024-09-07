@@ -1182,9 +1182,7 @@ var Settings = {
                 if ($("#chyrp_url").val() === Site.chyrp_url)
                     return;
 
-                var text = '<?php esce(__("Changing the Chyrp URL could break your site.", "admin")); ?>' +
-                           ' ' +
-                           '<?php esce(__("Are you sure you want to proceed?", "admin")); ?>';
+                var text = '<?php esce(__("Changing the Chyrp URL could break your site.", "admin")); ?>';
 
                 if (!confirm(text.replace(/<[^>]+>/g, "")))
                     e.preventDefault();
