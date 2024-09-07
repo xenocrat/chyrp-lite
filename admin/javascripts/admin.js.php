@@ -1126,8 +1126,12 @@ var Write = {
                 ).loader().on(
                     "load",
                     function() {
-                        if (!!this.contentWindow.location && this.contentWindow.location != "about:blank")
+                        if (
+                            !!this.contentWindow.location
+                            && this.contentWindow.location != "about:blank"
+                        ) {
                             $(this).loader(true);
+                        }
                     }
                 ),
                 $(
@@ -1162,14 +1166,14 @@ var Write = {
 }
 var Settings = {
     init: function() {
-        $("#email_correspondence").click(
+        $("input#email_correspondence").click(
             function() {
                 if ($(this).prop("checked") == false)
                     $("#email_activation").prop("checked", false);
             }
         );
 
-        $("#email_activation").click(
+        $("input#email_activation").click(
             function() {
                 if ($(this).prop("checked") == true)
                     $("#email_correspondence").prop("checked", true);
@@ -1195,7 +1199,10 @@ var Settings = {
                 $("form#route_settings code.syntax").each(
                     function() {
                         var syntax = $(this).html();
-                        var regexp = new RegExp("(/?|^)" + escapeRegExp(syntax) + "(/?|$)", "g");
+
+                        var regexp = new RegExp(
+                            "(/?|^)" + escapeRegExp(syntax) + "(/?|$)", "g"
+                            );
 
                         if ($(e.target).val().match(regexp))
                             $(this).addClass("tag_added");
