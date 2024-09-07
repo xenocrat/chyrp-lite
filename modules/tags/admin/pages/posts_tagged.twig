@@ -28,18 +28,22 @@
 <tr class="head">
 <th class="toggler" id="tag_toggler"></th>
 <th class="post_title title main">{{ "Post" | translate }}</th>
+<th class="post_status status">{{ "Status" | translate }}</th>
 <th class="post_tags list">{{ "Tags" | translate("tags") }}</th>
 <th class="controls">{{ "Controls" | translate }}</th>
 </tr>
 </thead>
 <tbody>
 {% for post in posts.paginated %}
-<tr class="post">
+<tr id="post_{{ post.id }}" class="post {{ post.status_class }}">
 <td class="checkbox">
 <input type="checkbox" name="post[{{ loop.index0 }}]" value="{{ post.id }}" id="post_checkbox_{{ post.id }}" aria-label="{{ 'Select' | translate | fix(true) }}">
 </td>
 <td class="post_title title main">
 <a class="edit_tag" href="{{ post.url() }}">{{ post.title() | striptags | oneof("[Untitled]" | translate) | truncate(40) }}</a>
+</td>
+<td class="post_status status">
+{{ post.status_name }}
 </td>
 <td class="post_tags list">
 {% for name, clean in post.tags %}

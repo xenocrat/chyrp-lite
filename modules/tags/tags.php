@@ -385,6 +385,52 @@
                 $posts = new Paginator(array());
             }
 
+            foreach ($posts->paginated as &$post) {
+                if ($ids = $post->groups()) {
+                    $group_names = array();
+                    $group_classes = array();
+
+                    foreach ($ids as $id) {
+                        $group = new Group($id);
+
+                        if (!$group->no_results) {
+                            $group_names[] = $group->name;
+                            $group_classes[] = "group-".$group->id;
+                        }
+                    }
+
+                    $post->status_name = join(", ", $group_names);
+                    $post->status_class = join(" ", $group_classes);
+                } else {
+                    switch ($post->status) {
+                        case Post::STATUS_DRAFT:
+                            $post->status_name = __("Draft", "admin");
+                            break;
+
+                        case Post::STATUS_PUBLIC:
+                            $post->status_name = __("Public", "admin");
+                            break;
+
+                        case Post::STATUS_PRIVATE:
+                            $post->status_name = __("Private", "admin");
+                            break;
+
+                        case Post::STATUS_REG_ONLY:
+                            $post->status_name = __("All registered users", "admin");
+                            break;
+
+                        case Post::STATUS_SCHEDULED:
+                            $post->status_name = __("Scheduled", "admin");
+                            break;
+
+                        default:
+                            $post->status_name = camelize($post->status, true);
+                    }
+
+                    $post->status_class = $post->status;
+                }
+            }
+
             $admin->display(
                 "pages".DIR."posts_tagged",
                 array("posts" => $posts, "tag" => $tag)
