@@ -56,8 +56,8 @@
     ob_start();
     define('OB_BASE_LEVEL', ob_get_level());
 
-    if (version_compare(PHP_VERSION, "8.0", "<"))
-        exit("Chyrp Lite requires PHP 8.0 or greater. Installation cannot continue.");
+    if (version_compare(PHP_VERSION, "8.1", "<"))
+        exit("Chyrp Lite requires PHP 8.1 or greater. Installation cannot continue.");
 
     # File: error
     # Functions for handling and reporting errors.
