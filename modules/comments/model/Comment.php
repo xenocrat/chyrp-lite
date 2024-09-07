@@ -598,10 +598,9 @@
                 $this->status != "pingback" and
                 !$group->can("code_in_comments")
             ) {
-                $allowed = $config->module_comments["allowed_comment_html"];
                 $this->body = strip_tags(
                     $this->body,
-                    "<".implode("><", $allowed).">"
+                    $config->module_comments["allowed_comment_html"]
                 );
             }
 
