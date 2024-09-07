@@ -206,7 +206,7 @@ a:visited {
 }
 a:focus {
     outline: #ff7f00 dashed 2px;
-    outline-offset: 1px;
+    outline-offset: 0px;
 }
 a:hover,
 a:focus,
@@ -777,7 +777,7 @@ td img.image {
     height: 70px;
     margin-inline-end: 0.5rem;
     vertical-align: middle;
-    outline: #ff7f00 solid 1px;
+    outline: #b8cdd9 solid 1px;
     outline-offset: 0px;
 }
 td svg.placeholder,
@@ -1022,12 +1022,14 @@ span.options_tray:empty {
 *.tag:visited {
     text-decoration: none;
 }
-*.tag:focus,
+*.tag:focus {
+    outline: #1e57ba solid 2px;
+    outline-offset: -1px;
+}
 *.tag:active,
 *.tag_added {
     background-color: #f2fbff;
     border-color: #1e57ba;
-    outline: none;
 }
 table.interactive + div.controls {
     background-color: #fffde6;
