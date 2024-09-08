@@ -1107,7 +1107,7 @@ a.emblem:focus-visible > svg,
 a.emblem:focus-visible > img,
 button.emblem:focus-visible > svg,
 button.emblem:focus-visible > img,
-label.emblem.toolbar > input:focus-visible + svg
+label.emblem.toolbar > input:focus-visible + svg,
 label.emblem.toolbar > input:focus-visible + img {
     outline: #ff7f00 dashed 2px;
     outline-offset: 1px;
