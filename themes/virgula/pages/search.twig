@@ -46,8 +46,19 @@
 {% if posts.prev_page() or posts.next_page() %}
 <!-- Navigation -->
 <nav class="traversal">
-{{- posts.prev_link("Newer posts" | translate) -}}
-{{- posts.next_link("Older posts" | translate) -}}
+<ul class="navigation">
+{% if posts.prev_page() %}
+<li>
+{{ posts.prev_link("Newer posts" | translate) }}
+</li>
+{% endif %}
+{% if posts.next_page() %}
+<li>
+{{ posts.next_link("Older posts" | translate) }}
+</li>
+{% endif %}
+</ul>
 </nav>
+{% endif %}
 {% endif %}
 {% endblock %}

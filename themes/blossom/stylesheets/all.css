@@ -72,9 +72,6 @@ body.preview {
 p {
     margin: 1rem 0rem;
 }
-p.footnote-backrefs {
-    font-size: 0.75em;
-}
 h1 {
     font-size: 2em;
     font-weight: bold;
@@ -725,6 +722,9 @@ p a:active {
 section a:focus-visible,
 p a:focus-visible {
     text-decoration-style: double;
+}
+div.footnotes {
+    font-size: 0.75em;
 }
 div.tags a,
 div.tag_cloud a {

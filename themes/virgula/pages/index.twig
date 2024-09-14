@@ -39,7 +39,11 @@
 {% endif %}
 {% if posts.next_page() %}
 <nav class="traversal">
+<ul class="navigation">
+<li>
 <a href="{{ url('archive') }}" rel="archives">{{ "More posts&hellip;" | translate }}</a>
+</li>
+</ul>
 </nav>
 {% endif %}
 {% endif %}
