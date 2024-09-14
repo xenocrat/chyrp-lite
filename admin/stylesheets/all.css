@@ -1109,6 +1109,7 @@ button.emblem:focus-visible > svg,
 button.emblem:focus-visible > img,
 label.emblem.toolbar > input:focus-visible + svg,
 label.emblem.toolbar > input:focus-visible + img {
+    fill: #1e57ba;
     outline: #ff7f00 dashed 2px;
     outline-offset: 1px;
 }
