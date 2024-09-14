@@ -47,7 +47,7 @@ Feathern ermöglichen verschiedene Sorten von Blog-Inhalten – Sie können sich
 
 ## Anforderungen
 
-* [PHP 8.0+](https://www.php.net/supported-versions.php) mit standard extensionen (Session, JSON, Ctype, Filter, libxml, SimpleXML)
+* [PHP 8.1+](https://www.php.net/supported-versions.php) mit standard extensionen (Session, JSON, Ctype, Filter, libxml, SimpleXML)
 * [Multibyte String](https://www.php.net/manual/en/book.mbstring.php)
 * [PDO](https://www.php.net/manual/en/book.pdo.php)
 * [cURL](https://www.php.net/manual/en/book.curl.php)

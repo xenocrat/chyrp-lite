@@ -46,7 +46,7 @@ Met een flexibel system van feathers en paginas, kun je je website precies zó m
 
 ## Benodigdheden
 
-* [PHP 8.0+](https://www.php.net/supported-versions.php) met standaard extensies (Session, JSON, Ctype, Filter, libxml, SimpleXML)
+* [PHP 8.1+](https://www.php.net/supported-versions.php) met standaard extensies (Session, JSON, Ctype, Filter, libxml, SimpleXML)
 * [Multibyte String](https://www.php.net/manual/en/book.mbstring.php)
 * [PDO](https://www.php.net/manual/en/book.pdo.php)
 * [cURL](https://www.php.net/manual/en/book.curl.php)
