@@ -1202,7 +1202,7 @@ var Settings = {
 
                         var regexp = new RegExp(
                             "(/?|^)" + escapeRegExp(syntax) + "(/?|$)", "g"
-                            );
+                        );
 
                         if ($(e.target).val().match(regexp))
                             $(this).addClass("tag_added");
