@@ -508,7 +508,7 @@ button#sidebar_search_submit {
     overflow: hidden;
     color: transparent;
 }
-button#sidebar_search_submit:focus {
+button#sidebar_search_submit:focus-visible {
     background-color: #c6ccc8;
 }
 button#sidebar_search_submit:hover {
