@@ -2,8 +2,9 @@ div.likes {
     position: relative;
     display: inline;
 }
-div.likes a.likes img {
-    vertical-align: middle;
+div.likes a.likes img,
+div.likes a.likes svg {
+    vertical-align: text-bottom;
 }
 div.likes a.likes {
     border: none;

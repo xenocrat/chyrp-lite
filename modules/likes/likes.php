@@ -75,7 +75,7 @@
             if (empty($_POST)) {
                 $admin->display(
                     "pages".DIR."like_settings",
-                    array("like_images" => $this->like_images())
+                    array("like_images" => $this->list_images())
                 );
 
                 return;
@@ -87,7 +87,7 @@
                     __("Invalid authentication token.")
                 );
 
-            fallback($_POST['like_image'], $config->chyrp_url."/modules/likes/images/pink.svg");
+            fallback($_POST['like_image'], "pink.svg");
 
             $config->set(
                 "module_likes",
@@ -381,21 +381,11 @@
             if (!Like::exists($post->id)) {
                 if ($visitor->group->can("like_post")) {
                     $html.= '<a class="likes like" href="'.
-                            url("/?action=like&post_id=".
-                            $post->id, $main).
+                            url("/?action=like&post_id=".$post->id, $main).
                             '" data-post_id="'.
                             $post->id.
-                            '">';
-
-                    if (!empty($settings["like_image"])) {
-                        $path = $config->chyrp_url.
-                                "/modules/likes/images/".
-                                urlencode($settings["like_image"]);
-
-                        $html.= '<img src="'.
-                                $path.
-                                '" alt="&#x2764;">';
-                    }
+                            '" aria-label="&#x2764;">'.
+                            $this->get_image($settings["like_image"]);
 
                     if ($settings["like_with_text"]) {
                         $html.= ' <span class="like">'.
@@ -413,32 +403,22 @@
                 $html.= ' <span class="like_text">';
                 $count = $post->like_count;
 
-                if ($count <= 0) {
-                    $html.= __("No likes yet.", "likes");
-                } else {
+                if ($count > 0) {
                     $p = _p("%d person likes this.", "%d people like this.", $count, "likes");
                     $html.= sprintf($p, $count);
+                } else {
+                    $html.= __("No likes yet.", "likes");
                 }
 
                 $html.= '</span>';
             } else {
                 if ($visitor->group->can("unlike_post")) {
                     $html.= '<a class="likes liked" href="'.
-                                url("/?action=unlike&post_id=".
-                                $post->id, $main).
-                                '" data-post_id="'.
-                                $post->id.
-                                '">';
-
-                    if (!empty($settings["like_image"])) {
-                        $path = $config->chyrp_url.
-                                "/modules/likes/images/".
-                                urlencode($settings["like_image"]);
-
-                        $html.= '<img src="'.
-                                $path.
-                                '" alt="&#x2764;">';
-                    }
+                            url("/?action=unlike&post_id=".$post->id, $main).
+                            '" data-post_id="'.
+                            $post->id.
+                            '" aria-label="&#x2764;">'.
+                            $this->get_image($settings["like_image"]);
 
                     if ($settings["like_with_text"]) {
                         $html.= ' <span class="like">'.
@@ -456,11 +436,11 @@
                 $html.= ' <span class="like_text">';
                 $count = $post->like_count - 1;
 
-                if ($count <= 0) {
-                    $html.= __("You like this.", "likes");
-                } else {
+                if ($count > 0) {
                     $p = _p("You and %d person like this.", "You and %d people like this.", $count, "likes");
                     $html.= sprintf($p, $count);
+                } else {
+                    $html.= __("You like this.", "likes");
                 }
 
                 $html.= '</span>';
@@ -470,7 +450,32 @@
             return $html;
         }
 
-        private function like_images(): array {
+        private function get_image($filename): string {
+            if (str_ends_with($filename, ".svg")) {
+                $filename = str_replace(array(DIR, "/"), "", $filename);
+                $id = serialize($filename);
+                $path = MODULES_DIR.DIR."likes".DIR."images";
+
+                static $cache = array();
+
+                if (isset($cache[$id]))
+                    return $cache[$id];
+
+                $svg = @file_get_contents($path.DIR.$filename);
+
+                if ($svg === false)
+                    return "&#x2764;";
+
+                return $cache[$id] = $svg;
+            } else {
+                $url = Config::current()->chyrp_url.
+                       "/modules/likes/images/".urlencode($filename);
+
+                return '<img src="'.fix($url, true).'" alt="&#x2764;">';
+            }
+        }
+
+        private function list_images(): array {
             $images = array();
             $dir = new DirectoryIterator(MODULES_DIR.DIR."likes".DIR."images");
 
