@@ -670,16 +670,28 @@ div.doaction a.post_delete_link:active,
 div.doaction a.delete_link:active {
     background-color: #c04b4b;
 }
-a.likes > img {
+a.likes > img,
+a.likes > svg {
     display: inline-block;
     position: relative;
     top: 0px;
     height: 1rem;
 }
 a.likes:hover > img,
+a.likes:hover > svg,
 a.likes:focus > img,
-a.likes:active > img {
-    top: 1px;
+a.likes:focus > svg,
+a.likes:active > img,
+a.likes:active > svg {
+    animation: like_image 1s steps(2, jump-none) infinite;
+}
+@keyframes like_image {
+    from {
+        top: -1px;
+    }
+    to {
+        top: 1px;
+    }
 }
 a.archive_post_link {
     box-sizing: border-box;
