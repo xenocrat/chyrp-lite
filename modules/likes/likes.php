@@ -382,9 +382,7 @@
                 if ($visitor->group->can("like_post")) {
                     $html.= '<a class="likes like" href="'.
                             url("/?action=like&post_id=".$post->id, $main).
-                            '" data-post_id="'.
-                            $post->id.
-                            '" aria-label="&#x2764;">'.
+                            '" data-post_id="'.$post->id.'">'.
                             $this->get_image($settings["like_image"]);
 
                     if ($settings["like_with_text"]) {
@@ -415,9 +413,7 @@
                 if ($visitor->group->can("unlike_post")) {
                     $html.= '<a class="likes liked" href="'.
                             url("/?action=unlike&post_id=".$post->id, $main).
-                            '" data-post_id="'.
-                            $post->id.
-                            '" aria-label="&#x2764;">'.
+                            '" data-post_id="'.$post->id.'">'.
                             $this->get_image($settings["like_image"]);
 
                     if ($settings["like_with_text"]) {
@@ -450,7 +446,9 @@
             return $html;
         }
 
-        private function get_image($filename): string {
+        private function get_image(
+            $filename
+        ): string {
             if (str_ends_with($filename, ".svg")) {
                 $filename = str_replace(array(DIR, "/"), "", $filename);
                 $id = serialize($filename);
