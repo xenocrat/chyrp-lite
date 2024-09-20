@@ -693,8 +693,6 @@ section a:has(img):focus {
 a.likes > img,
 a.likes > svg {
     display: inline-block;
-    position: relative;
-    top: 0px;
     height: 1rem;
 }
 a.likes:hover > img,
@@ -703,14 +701,14 @@ a.likes:focus > img,
 a.likes:focus > svg,
 a.likes:active > img,
 a.likes:active > svg {
-    animation: like_image 1s steps(2, jump-none) infinite;
+    animation: like_image 1s alternate ease infinite;
 }
 @keyframes like_image {
     from {
-        top: -1px;
+        transform: scale(1.0);
     }
     to {
-        top: 1px;
+        transform: scale(0.8);
     }
 }
 a.archive_post_link {
