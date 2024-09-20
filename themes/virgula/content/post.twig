@@ -26,6 +26,9 @@
 {{ "Tagged with %s." | translate | format(post.tags_link | join(", ")) }}
 </span>
 {% endif %}
+{% if module_enabled("likes") %}
+{{ post.like_link }}
+{% endif %}
 </header>
 {% block content %}{% endblock %}
 <footer>

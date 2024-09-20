@@ -521,6 +521,27 @@ section a:has(img):focus {
     outline: #ffdd00 solid 2px;
     outline-offset: 2px;
 }
+a.likes > img,
+a.likes > svg {
+    display: inline-block;
+    height: 1rem;
+}
+a.likes:hover > img,
+a.likes:hover > svg,
+a.likes:focus > img,
+a.likes:focus > svg,
+a.likes:active > img,
+a.likes:active > svg {
+    animation: like_image 1s alternate ease infinite;
+}
+@keyframes like_image {
+    from {
+        transform: scale(1.0);
+    }
+    to {
+        transform: scale(0.8);
+    }
+}
 #comment_shim {
     display: none;
 }
