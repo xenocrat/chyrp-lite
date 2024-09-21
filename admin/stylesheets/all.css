@@ -1027,13 +1027,13 @@ span.options_tray:empty {
     text-decoration: none;
 }
 *.tag:focus {
-    outline: var(--chyrp-strong-blue) solid 2px;
+    outline: var(--chyrp-strong-purple) solid 2px;
     outline-offset: -1px;
 }
 *.tag:active,
 *.tag_added {
-    background-color: var(--chyrp-light-blue);
-    border-color: var(--chyrp-strong-blue);
+    background-color: var(--chyrp-light-purple);
+    border-color: var(--chyrp-strong-purple);
 }
 table.interactive + div.controls {
     background-color: var(--chyrp-light-yellow);
