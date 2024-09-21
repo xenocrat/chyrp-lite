@@ -747,7 +747,7 @@ table tbody tr.private td.status {
     background-color: #faebe4;
 }
 table tbody tr.registered_only td.status {
-    background-color: #fffde6;
+    background-color: #f2fbff;
 }
 table tbody tr.public td.status {
     background-color: #ebfae4;
