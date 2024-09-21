@@ -8,10 +8,17 @@
     ini_set("error_log", MAIN_DIR.DIR."error_log.txt");
 
     # Set the appropriate error reporting level.
-    if (DEBUG)
-        error_reporting(E_ALL | E_STRICT);
-    else
-        error_reporting(E_ALL & ~E_NOTICE & ~E_STRICT & ~E_USER_NOTICE);
+    if (DEBUG) {
+        error_reporting(E_ALL);
+    } else {
+        error_reporting(
+            E_ALL
+            & ~E_DEPRECATED
+            & ~E_USER_DEPRECATED
+            & ~E_NOTICE
+            & ~E_USER_NOTICE
+        );
+    }
 
     # Set the error and exception handlers.
     set_error_handler("error_composer");
@@ -39,11 +46,15 @@
 
         if (DEBUG)
             error_log(
-                "ERROR: ".$errno." ".strip_tags($normalized).
+                "ERROR: ".$errno.
+                " ".strip_tags($normalized).
                 " (".$file." on line ".$line.")"
             );
 
-        error(body:$message, backtrace:debug_backtrace());
+        error(
+            body:$message,
+            backtrace:debug_backtrace()
+        );
     }
 
     /**
@@ -65,11 +76,15 @@
 
         if (DEBUG)
             error_log(
-                "ERROR: ".$errno." ".strip_tags($normalized).
+                "ERROR: ".$errno.
+                " ".strip_tags($normalized).
                 " (".$file." on line ".$line.")"
             );
 
-        error(body:$message, backtrace:$e->getTrace());
+        error(
+            body:$message,
+            backtrace:$e->getTrace()
+        );
     }
 
     /**
