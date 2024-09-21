@@ -779,10 +779,8 @@ a.likes > svg {
 a.likes:hover > img,
 a.likes:hover > svg,
 a.likes:focus > img,
-a.likes:focus > svg,
-a.likes:active > img,
-a.likes:active > svg {
-    animation: like_image 1s alternate ease infinite;
+a.likes:focus > svg {
+    animation: like_image 500ms alternate ease infinite;
 }
 @keyframes like_image {
     from {
