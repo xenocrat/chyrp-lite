@@ -520,9 +520,42 @@
                 font-weight: bold;
                 font-style: italic;
             }
+            :root {
+                color-scheme: light dark;
+                --chyrp-pure-white: #ffffff;
+                --chyrp-pure-black: #000000;
+                --chyrp-inky-black: #1f1f23;
+                --chyrp-summer-grey: #fbfbfb;
+                --chyrp-english-grey: #efefef;
+                --chyrp-welsh-grey: #dfdfdf;
+                --chyrp-irish-grey: #cfcfcf;
+                --chyrp-scottish-grey: #afafaf;
+                --chyrp-winter-grey: #656565;
+                --chyrp-strong-yellow: #ffdd00;
+                --chyrp-strong-orange: #ff7f00;
+                --chyrp-strong-red: #c11600;
+                --chyrp-strong-green: #108600;
+                --chyrp-strong-blue: #1e57ba;
+                --chyrp-strong-purple: #ba1eba;
+                --chyrp-light-yellow: #fffde6;
+                --chyrp-light-red: #faebe4;
+                --chyrp-light-green: #ebfae4;
+                --chyrp-light-blue: #f2fbff;
+                --chyrp-light-purple: #fae4fa;
+                --chyrp-medium-yellow: #fffbcc;
+                --chyrp-medium-red: #fcddcf;
+                --chyrp-medium-green: #daf1d0;
+                --chyrp-medium-blue: #e1f2fa;
+                --chyrp-medium-purple: #fae1fa;
+                --chyrp-border-yellow: #e5d7a1;
+                --chyrp-border-red: #d6bdb5;
+                --chyrp-border-green: #bdd6b5;
+                --chyrp-border-blue: #b8cdd9;
+                --chyrp-border-purple: #d6b5d6;
+            }
             *::selection {
-                color: #ffffff;
-                background-color: #ff7f00;
+                color: var(--chyrp-inky-black);
+                background-color: var(--chyrp-strong-yellow);
             }
             html, body, div, dl, dt, dd, ul, ol, li, p,
             h1, h2, h3, h4, h5, h6, img, pre, code,
@@ -540,9 +573,9 @@
                 font-size: 1rem;
                 font-family: "Open Sans webfont", sans-serif;
                 line-height: 1.5;
-                color: #1f1f23;
+                color: var(--chyrp-inky-black);
                 tab-size: 4;
-                background: #efefef;
+                background: var(--chyrp-english-grey);
                 margin: 2rem;
             }
             h1 {
@@ -561,7 +594,7 @@
                 font-size: 1em;
                 font-weight: 600;
                 margin: 1rem 0rem;
-                border-bottom: 1px solid #cfcfcf;
+                border-bottom: 1px solid var(--chyrp-irish-grey);
             }
             p {
                 margin-bottom: 1rem;
@@ -569,7 +602,7 @@
             strong {
                 font: inherit;
                 font-weight: bold;
-                color: #c11600;
+                color: var(--chyrp-strong-red);
             }
             em, dfn, cite, var {
                 font: inherit;
@@ -583,7 +616,7 @@
             pre {
                 font-family: "Cousine webfont", monospace;
                 font-size: 0.85em;
-                background-color: #efefef;
+                background-color: var(--chyrp-english-grey);
                 margin: 1rem 0rem;
                 padding: 1rem;
                 overflow-x: auto;
@@ -592,9 +625,9 @@
             code {
                 font-family: "Cousine webfont", monospace;
                 font-size: 0.85em;
-                background-color: #efefef;
+                background-color: var(--chyrp-english-grey);
                 padding: 0px 2px;
-                border: 1px solid #cfcfcf;
+                border: 1px solid var(--chyrp-irish-grey);
                 vertical-align: bottom;
                 white-space: break-spaces;
             }
@@ -607,18 +640,18 @@
             }
             a:link,
             a:visited {
-                color: #1f1f23;
+                color: var(--chyrp-inky-black);
                 text-decoration: underline;
                 text-underline-offset: 0.125em;
             }
             a:focus {
-                outline: #ff7f00 dashed 2px;
+                outline: var(--chyrp-strong-orange) dashed 2px;
                 outline-offset: 0px;
             }
             a:hover,
             a:focus,
             a:active {
-                color: #1e57ba;
+                color: var(--chyrp-strong-blue);
                 text-decoration: underline;
                 text-underline-offset: 0.125em;
             }
@@ -626,16 +659,15 @@
             button {
                 box-sizing: border-box;
                 display: block;
-                clear: both;
                 font: inherit;
                 font-size: 1.25em;
                 text-align: center;
-                color: #1f1f23;
+                color: var(--chyrp-inky-black);
                 text-decoration: none;
                 margin: 1rem 0rem;
                 padding: 0.5rem 1rem;
-                background-color: #f2fbff;
-                border: 2px solid #b8cdd9;
+                background-color: var(--chyrp-light-blue);
+                border: 2px solid var(--chyrp-border-blue);
                 border-radius: 0.25em;
                 cursor: pointer;
             }
@@ -648,19 +680,25 @@
             button:focus,
             a.big:active,
             button:active {
-                border-color: #1e57ba;
+                border-color: var(--chyrp-strong-blue);
                 outline: none;
+            }
+            hr {
+                border: none;
+                clear: both;
+                border-top: 1px solid var(--chyrp-irish-grey);
+                margin: 2rem 0rem;
             }
             aside {
                 margin-bottom: 1rem;
                 padding: 0.5rem;
-                border: 1px solid #e5d7a1;
+                border: 1px solid var(--chyrp-border-yellow);
                 border-radius: 0.25em;
-                background-color: #fffecd;
+                background-color: var(--chyrp-light-yellow);
             }
             .window {
                 width: 30rem;
-                background: #ffffff;
+                background: var(--chyrp-pure-white);
                 padding: 2rem;
                 margin: 0rem auto 0rem auto;
                 border-radius: 2rem;
@@ -670,6 +708,29 @@
             }
             .window > *:last-child {
                 margin-bottom: 0rem;
+            }
+            @media (prefers-color-scheme: dark) {
+                body {
+                    color: ar(--chyrp-pure-white);
+                    background-color: var(--chyrp-inky-black);
+                }
+                .window {
+                    color: var(--chyrp-inky-black);
+                    background-color: var(--chyrp-english-grey);
+                }
+                hr {
+                    border-color: var(--chyrp-scottish-grey);
+                }
+                aside {
+                    border-color: var(--chyrp-scottish-grey);
+                }
+                pre {
+                    background-color: var(--chyrp-welsh-grey);
+                }
+                code {
+                    background-color: var(--chyrp-welsh-grey);
+                    border-color: var(--chyrp-scottish-grey);
+                }
             }
         </style>
     </head>
