@@ -158,42 +158,42 @@
             $trigger = Trigger::current();
 
             $new_values = array(
-                "login"     => (
+                "login" => (
                     isset($login) ?
-                               strip_tags($login) :
-                               $this->login
+                        strip_tags($login) :
+                        $this->login
                 ),
-                "password"  => (
+                "password" => (
                     isset($password) ?
-                               $password :
-                               $this->password
+                        $password :
+                        $this->password
                 ),
-                "email"     => (
+                "email" => (
                     isset($email) ?
-                               strip_tags($email) :
-                               $this->email
+                        strip_tags($email) :
+                        $this->email
                 ),
                 "full_name" => (
                     isset($full_name) ?
-                               strip_tags($full_name) :
-                               $this->full_name
+                        strip_tags($full_name) :
+                        $this->full_name
                 ),
-                "website"   => (
+                "website" => (
                     isset($website) ?
-                               strip_tags($website) :
-                               $this->website
+                        strip_tags($website) :
+                        $this->website
                 ),
-                "group_id"  => oneof(
-                               $group_id,
-                               $this->group_id
+                "group_id" => oneof(
+                        $group_id,
+                        $this->group_id
                 ),
-                "approved"  => oneof(
-                               $approved,
-                               $this->approved
+                "approved" => oneof(
+                        $approved,
+                        $this->approved
                 ),
                 "joined_at" => oneof(
-                               $joined_at,
-                               $this->joined_at
+                        $joined_at,
+                        $this->joined_at
                 )
             );
 
@@ -243,14 +243,22 @@
          *     The password hashed using the SHA-512 algorithm.
          *
          * Notes:
-         *     <random> tries to be cryptographically secure.
+         *     <random> uses a cryptographically secure function.
          */
         public static function hash_password(
             $password
         ): string {
             $salt = random(16);
             $prefix = '$6$rounds=50000$';
-            return crypt($password, $prefix.$salt);
+            $hash = crypt($password, $prefix.$salt);
+
+            if (strlen($hash) < 13)
+                trigger_error(
+                    __("Failed to encrypt password."),
+                    E_USER_WARNING
+                );
+
+            return $hash;
         }
 
         /**
@@ -265,7 +273,7 @@
          *     @true@ or @false@
          *
          * Notes:
-         *     Uses <hash_equals> to mitigate timing attacks.
+         *     Uses <password_verify> to mitigate timing attacks.
          */
         public static function check_password(
             $password,
