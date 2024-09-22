@@ -430,7 +430,10 @@
             $author = (!$this->user->no_results) ?
                 array(
                     "id"        => $this->user->id,
-                    "name"      => oneof($this->user->full_name, $this->user->login),
+                    "name"      => oneof(
+                                    $this->user->full_name,
+                                    $this->user->login
+                    ),
                     "website"   => $this->user->website,
                     "email"     => $this->user->email,
                     "joined"    => $this->user->joined_at
