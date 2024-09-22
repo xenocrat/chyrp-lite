@@ -315,7 +315,7 @@
                 --chyrp-medium-red: #fcddcf;
                 --chyrp-medium-green: #daf1d0;
                 --chyrp-medium-blue: #e1f2fa;
-                --chyrp-medium-purple: #fae1fa;
+                --chyrp-medium-purple: #f6d5f6;
                 --chyrp-border-yellow: #e5d7a1;
                 --chyrp-border-red: #d6bdb5;
                 --chyrp-border-green: #bdd6b5;
@@ -493,6 +493,9 @@
                 .window {
                     color: var(--chyrp-inky-black);
                     background-color: var(--chyrp-english-grey);
+                }
+                h3 {
+                    border-color: var(--chyrp-scottish-grey);
                 }
                 hr {
                     border-color: var(--chyrp-scottish-grey);
