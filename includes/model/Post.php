@@ -368,7 +368,8 @@
             fallback($pinned,       $this->pinned);
             fallback($status,       $this->status);
             fallback($clean,        $this->clean);
-            fallback($url,
+            fallback(
+                $url,
                 ($clean != $this->clean) ?
                                     self::check_url($clean) :
                                     $this->url
@@ -1094,7 +1095,10 @@
             $author = (!$this->user->no_results) ?
                 array(
                     "id"        => $this->user->id,
-                    "name"      => oneof($this->user->full_name, $this->user->login),
+                    "name"      => oneof(
+                                    $this->user->full_name,
+                                    $this->user->login
+                    ),
                     "website"   => $this->user->website,
                     "email"     => $this->user->email,
                     "joined"    => $this->user->joined_at
