@@ -6,6 +6,8 @@
 <input type="email" name="author_email" value="{{ posted('author_email') | fix(true) }}" id="comment_author_email_field" class="text" maxlength="128">
 <label for="comment_author_url_field">{{ "Your website" | translate }}</label>
 <input type="url" name="author_url" value="{{ posted('author_url') | fix(true) }}" id="comment_author_url_field" class="text" maxlength="2048">
+<label for="comment_remember_me">{{ "Remember me" | translate }}</label>
+<input type="checkbox" name="remember_me" id="comment_remember_me"{% if POST.remember_me is defined %} checked{% endif %}>
 {{ generate_captcha() }}
 {% endif %}
 <label for="comment_body_field">{{ "Your comment" | translate }}</label>
