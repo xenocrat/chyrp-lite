@@ -16,7 +16,12 @@
                     "notify_post_author" => false,
                     "default_comment_status" => Comment::STATUS_DENIED,
                     "allowed_comment_html" => array(
-                        "strong", "em", "blockquote", "code", "pre", "a"
+                        "a",
+                        "blockquote",
+                        "code",
+                        "em",
+                        "pre",
+                        "strong"
                     ),
                     "comments_per_page" => 25,
                     "enable_reload_comments" => false,
@@ -57,6 +62,7 @@
         public function user_logged_in(
             $user
         ): void {
+            unset($_SESSION['commenter']);
             $_SESSION['comments'] = array();
         }
 
@@ -213,6 +219,18 @@
                 parent:$parent,
                 notify:$notify
             );
+
+            if (!logged_in()) {
+                if (!empty($_POST['remember_me'])) {
+                    $_SESSION['commenter'] = array(
+                        "author" => $_POST['author'],
+                        "author_email" => $_POST['author_email'],
+                        "author_url" => $_POST['author_url']
+                    );
+                } else {
+                    unset($_SESSION['commenter']);
+                }
+            }
 
             return array(
                 true,
@@ -1066,6 +1084,14 @@
                         unset($_POST['author_email']);
                         unset($_POST['author_url']);
                     }
+                }
+            } else {
+                if (!logged_in() and isset($_SESSION['commenter'])) {
+                    $commenter = $_SESSION['commenter'];
+                    $_POST['author']       = $commenter['author'];
+                    $_POST['author_email'] = $commenter['author_email'];
+                    $_POST['author_url']   = $commenter['author_url'];
+                    $_POST['remember_me']  = "on";
                 }
             }
 
