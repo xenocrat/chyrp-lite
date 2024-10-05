@@ -79,24 +79,24 @@
 <p class="more_options_option">
 <label for="status">{{ "Status" | translate }}</label>
 <select id="status" name="status">
-{% set option_selected = post is defined ? post.status | selected("draft") : "" %}
+{% set option_selected = (post is defined ? post.status : site.default_post_status) | selected("draft") %}
 <option value="draft"{{ option_selected }}>
 {{ "Draft" | translate }}
 </option>
-{% set option_selected = post is defined ? post.status | selected("public") : " selected" %}
+{% set option_selected = (post is defined ? post.status : site.default_post_status) | selected("public") %}
 <option value="public"{{ option_selected }}>
 {{ "Public" | translate }}
 </option>
-{% set option_selected = post is defined ? post.status | selected("private") : "" %}
+{% set option_selected = (post is defined ? post.status : site.default_post_status) | selected("private") %}
 <option value="private"{{ option_selected }}>
 {{ "Private" | translate }}
 </option>
-{% set option_selected = post is defined ? post.status | selected("scheduled") : "" %}
+{% set option_selected = (post is defined ? post.status : site.default_post_status) | selected("scheduled") %}
 <option value="scheduled"{{ option_selected }}>
 {{ "Scheduled" | translate }}
 </option>
 <optgroup label="{{ 'Visible only to a group of users:' | translate }}">
-{% set option_selected = post is defined ? post.status | selected("registered_only") : "" %}
+{% set option_selected = (post is defined ? post.status : site.default_post_status) | selected("registered_only") %}
 <option value="registered_only"{{ option_selected }}>
 {{ "All registered users" | translate }}
 </option>

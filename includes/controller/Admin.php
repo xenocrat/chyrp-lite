@@ -3132,6 +3132,48 @@
                     __("You do not have sufficient privileges to change settings.")
                 );
 
+            $post_statuses = array(
+                array(
+                    "id" => Post::STATUS_DRAFT,
+                    "name" => __("Draft", "admin")
+                ),
+                array(
+                    "id" => Post::STATUS_PUBLIC,
+                    "name" => __("Public", "admin")
+                ),
+                array(
+                    "id" => Post::STATUS_PRIVATE,
+                    "name" => __("Private", "admin")
+                ),
+                array(
+                    "id" => Post::STATUS_REG_ONLY,
+                    "name" => __("All registered users", "admin")
+                ),
+                array(
+                    "id" => Post::STATUS_SCHEDULED,
+                    "name" => __("Scheduled", "admin")
+                )
+            );
+
+            $page_statuses = array(
+                array(
+                    "id" => Page::STATUS_LISTED,
+                    "name" => __("Public and visible in pages list", "admin")
+                ),
+                array(
+                    "id" => Page::STATUS_PUBLIC,
+                    "name" => __("Public", "admin")
+                ),
+                array(
+                    "id" => Page::STATUS_TEASED,
+                    "name" => __("Private and visible in pages list", "admin")
+                ),
+                array(
+                    "id" => Page::STATUS_PRIVATE,
+                    "name" => __("Private", "admin")
+                )
+            );
+
             $feed_formats = array(
                 array(
                     "name" => "Atom",
@@ -3150,7 +3192,11 @@
             if (empty($_POST)) {
                 $this->display(
                     "pages".DIR."content_settings",
-                    array("feed_formats" => $feed_formats)
+                    array(
+                        "post_statuses" => $post_statuses,
+                        "page_statuses" => $page_statuses,
+                        "feed_formats" => $feed_formats
+                    )
                 );
 
                 return;
@@ -3164,6 +3210,8 @@
 
             fallback($_POST['posts_per_page'], 5);
             fallback($_POST['admin_per_page'], 25);
+            fallback($_POST['default_post_status'], "public");
+            fallback($_POST['default_page_status'], "listed");
             fallback($_POST['feed_items'], 20);
             fallback($_POST['feed_format'], "AtomFeed");
             fallback($_POST['uploads_path'], "");
@@ -3184,6 +3232,8 @@
             $config = Config::current();
             $config->set("posts_per_page", abs((int) $_POST['posts_per_page']));
             $config->set("admin_per_page", abs((int) $_POST['admin_per_page']));
+            $config->set("default_post_status", $_POST['default_post_status']);
+            $config->set("default_page_status", $_POST['default_page_status']);
             $config->set("feed_items", abs((int) $_POST['feed_items']));
             $config->set("feed_format", $_POST['feed_format']);
             $config->set("uploads_path", $matches[1].$matches[2].$matches[3]);

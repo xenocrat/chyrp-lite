@@ -22,6 +22,28 @@
 <input class="text digits" type="number" min="1" name="admin_per_page" value="{{ site.admin_per_page | fix(true) }}" size="2" id="admin_per_page">
 </p>
 <p>
+<label for="default_post_status">{{ "Default Post Status" | translate }}</label>
+{#- -#}
+<select name="default_post_status" id="default_post_status">
+{% for post_status in post_statuses %}
+<option value="{{ post_status.id }}"{{ post_status.id | selected(site.default_post_status) }}>
+{{ post_status.name }}
+</option>
+{% endfor %}
+</select>
+</p>
+<p>
+<label for="default_page_status">{{ "Default Page Status" | translate }}</label>
+{#- -#}
+<select name="default_page_status" id="default_page_status">
+{% for page_status in page_statuses %}
+<option value="{{ page_status.id }}"{{ page_status.id | selected(site.default_page_status) }}>
+{{ page_status.name }}
+</option>
+{% endfor %}
+</select>
+</p>
+<p>
 <label for="uploads_path">{{ "Uploads Path" | translate }}</label>
 {#- -#}
 <input class="text" type="text" name="uploads_path" value="{{ site.uploads_path | fix(true, true) }}" id="uploads_path">

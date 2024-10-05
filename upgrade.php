@@ -612,6 +612,27 @@
             );
     }
 
+    /**
+     * Function: add_default_statuses
+     * Adds the default_post_status and default_page_status config settings.
+     *
+     * Versions: 2024.03 => 2025.01
+     */
+    function add_default_statuses(): void {
+        $config = Config::current();
+
+        $set = array(
+            $config->set("default_post_status", "public", true),
+            $config->set("default_page_status", "listed", true)
+        );
+
+        if (in_array(false, $set, true))
+            error(
+                __("Error"),
+                __("Could not write the configuration file.")
+            );
+    }
+
     #---------------------------------------------
     # Output Starts
     #---------------------------------------------
@@ -947,6 +968,7 @@
         add_import_content();
         remove_xmlrpc();
         add_monospace_font();
+        add_default_statuses();
 
         # Perform module upgrades.
         foreach ($config->enabled_modules as $module) {

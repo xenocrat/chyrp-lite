@@ -32,13 +32,13 @@
 <p class="more_options_option">
 <label for="status">{{ "Status" | translate }}</label>
 <select name="status" id="status">
-{% set option_selected = page is defined ? page.status | selected("listed") : " selected" %}
+{% set option_selected = (page is defined ? page.status : site.default_page_status) | selected("listed") %}
 <option value="listed"{{ option_selected }}>{{ "Public and visible in pages list" | translate }}</option>
-{% set option_selected = page is defined ? page.status | selected("public") : "" %}
+{% set option_selected = (page is defined ? page.status : site.default_page_status) | selected("public") %}
 <option value="public"{{ option_selected }}>{{ "Public" | translate }}</option>
-{% set option_selected = page is defined ? page.status | selected("teased") : "" %}
+{% set option_selected = (page is defined ? page.status : site.default_page_status) | selected("teased") %}
 <option value="teased"{{ option_selected }}>{{ "Private and visible in pages list" | translate }}</option>
-{% set option_selected = page is defined ? page.status | selected("private") : "" %}
+{% set option_selected = (page is defined ? page.status : site.default_page_status) | selected("private") %}
 <option value="private"{{ option_selected }}>{{ "Private" | translate }}</option>
 </select>
 </p>
