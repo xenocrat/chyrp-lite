@@ -223,9 +223,9 @@
             if (!logged_in()) {
                 if (!empty($_POST['remember_me'])) {
                     $_SESSION['commenter'] = array(
-                        "author" => $_POST['author'],
+                        "author"       => $_POST['author'],
                         "author_email" => $_POST['author_email'],
-                        "author_url" => $_POST['author_url']
+                        "author_url"   => $_POST['author_url']
                     );
                 } else {
                     unset($_SESSION['commenter']);
