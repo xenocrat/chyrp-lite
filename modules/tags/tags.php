@@ -438,21 +438,24 @@
             }
 
             foreach ($posts->paginated as &$post) {
-                if ($ids = $post->groups()) {
-                    $group_names = array();
-                    $group_classes = array();
+                if ($group_ids = $post->groups()) {
+                    $group = new Group($group_ids[0]);
 
-                    foreach ($ids as $id) {
-                        $group = new Group($id);
-
-                        if (!$group->no_results) {
-                            $group_names[] = $group->name;
-                            $group_classes[] = "group-".$group->id;
-                        }
+                    if (!$group->no_results) {
+                        $url = url(
+                            "manage_users/query/".
+                            urlencode("group:".$group->name)
+                        );
+                        $post->status_name = '<a href="'.
+                                              $url.
+                                              '">'.
+                                              $group->name.
+                                              '</a>';
+                        $post->status_class = "group-".$group->id;
+                    } else {
+                        $post->status_name = "\u{FFFD}";
+                        $post->status_class = "group-missing";
                     }
-
-                    $post->status_name = join(", ", $group_names);
-                    $post->status_class = join(" ", $group_classes);
                 } else {
                     switch ($post->status) {
                         case Post::STATUS_DRAFT:
