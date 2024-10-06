@@ -1,0 +1,40 @@
+services:
+  chyrp-lite:
+    build: .
+    container_name: chyrp-lite
+    restart: unless-stopped
+    volumes:
+      - data:/data
+      - uploads:/var/www/html/uploads
+    ports:
+      - 127.0.0.1:8080:80
+
+# Use SQLite if don't know which database to choose. Set the database path to
+# "/data/db.sqlite" during install. If you need PostgreSQL or MySQL,
+# uncomment the one you want and set "Host" to "postgres" or "mysql"
+# accordingly during install.
+
+#  postgres:
+#    image: postgres
+#    restart: unless-stopped
+#    volumes:
+#      - db:/var/lib/postgresql/data
+#    environment:
+#      POSTGRES_DB: chyrp-lite
+#      POSTGRES_USER: chyrp-lite
+#      POSTGRES_PASSWORD: <password>
+
+#  mysql:
+#    image: mysql
+#    restart: unless-stopped
+#    volumes:
+#      - db:/var/lib/mysql
+#    environment:
+#      MYSQL_DATABASE: chyrp-lite
+#      MYSQL_USER: chyrp-lite
+#      MYSQL_PASSWORD: <password>
+
+volumes:
+  data:
+  uploads:
+  #db:
