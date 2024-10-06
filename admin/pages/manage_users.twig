@@ -43,7 +43,7 @@
 {% if user.full_name is not empty %}<span class="sub">({{ user.full_name }})</span>{% endif %}
 </td>
 <td class="user_group value">
-{{ user.group.name }}
+<a href="{{ url('manage_groups/search/' ~ (user.login | url_encode)) }}">{{ user.group.name }}</a>
 </td>
 <td class="user_joined date">
 {{ user.joined_at | time }}
