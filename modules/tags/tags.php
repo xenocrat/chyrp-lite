@@ -437,58 +437,65 @@
                 $posts = new Paginator(array());
             }
 
-            foreach ($posts->paginated as &$post) {
-                if ($group_ids = $post->groups()) {
-                    $group = new Group($group_ids[0]);
+            $post_statuses = array();
 
-                    if (!$group->no_results) {
-                        $url = url(
-                            "manage_users/query/".
-                            urlencode("group:".$group->name)
-                        );
-                        $post->status_name = '<a href="'.
-                                              $url.
-                                              '">'.
-                                              $group->name.
-                                              '</a>';
-                        $post->status_class = "group-".$group->id;
-                    } else {
-                        $post->status_name = "\u{FFFD}";
-                        $post->status_class = "group-missing";
+            foreach ($posts->paginated as $post) {
+                $name = "\u{FFFD}";
+                $groups = array();
+                $classes = array();
+
+                if ($group_ids = $post->groups()) {
+                    foreach ($group_ids as $group_id) {
+                        $group = new Group($group_id);
+
+                        if (!$group->no_results) {
+                            $groups[] = $group;
+                            $classes[] = "group-".$group->id;
+                        }
                     }
                 } else {
                     switch ($post->status) {
                         case Post::STATUS_DRAFT:
-                            $post->status_name = __("Draft", "admin");
+                            $name = __("Draft", "admin");
                             break;
 
                         case Post::STATUS_PUBLIC:
-                            $post->status_name = __("Public", "admin");
+                            $name = __("Public", "admin");
                             break;
 
                         case Post::STATUS_PRIVATE:
-                            $post->status_name = __("Private", "admin");
+                            $name = __("Private", "admin");
                             break;
 
                         case Post::STATUS_REG_ONLY:
-                            $post->status_name = __("All registered users", "admin");
+                            $name = __("All registered users", "admin");
                             break;
 
                         case Post::STATUS_SCHEDULED:
-                            $post->status_name = __("Scheduled", "admin");
+                            $name = __("Scheduled", "admin");
                             break;
 
                         default:
-                            $post->status_name = camelize($post->status, true);
+                            $name = camelize($post->status, true);
                     }
 
-                    $post->status_class = $post->status;
+                    $classes[] = $post->status;
                 }
+
+                $post_statuses[$post->id] = array(
+                    "name" => $name,
+                    "groups" => $groups,
+                    "classes" => $classes
+                );
             }
 
             $admin->display(
                 "pages".DIR."posts_tagged",
-                array("posts" => $posts, "tag" => $tag)
+                array(
+                    "posts" => $posts,
+                    "tag" => $tag,
+                    "post_statuses" => $post_statuses
+                )
             );
         }
 

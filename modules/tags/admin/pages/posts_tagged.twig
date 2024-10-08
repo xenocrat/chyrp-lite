@@ -35,7 +35,7 @@
 </thead>
 <tbody>
 {% for post in posts.paginated %}
-<tr id="post_{{ post.id }}" class="post {{ post.status_class }}">
+<tr id="post_{{ post.id }}" class="post {{ post_statuses.(post.id).classes | join(' ') }}">
 <td class="checkbox">
 <input type="checkbox" name="post[{{ loop.index0 }}]" value="{{ post.id }}" id="post_checkbox_{{ post.id }}" aria-label="{{ 'Select' | translate | fix(true) }}">
 </td>
@@ -43,7 +43,11 @@
 <a class="edit_tag" href="{{ post.url() }}">{{ post.title() | striptags | oneof("[Untitled]" | translate) | truncate(40) }}</a>
 </td>
 <td class="post_status status">
-{{ post.status_name }}
+{% for group in post_statuses.(post.id).groups %}
+<a href="{{ url('manage_users/query/' ~ (('group:' ~ group.name) | url_encode)) }}">{{ group.name }}</a>
+{% else %}
+{{ post_statuses.(post.id).name }}
+{% endfor %}
 </td>
 <td class="post_tags list">
 {% for name, clean in post.tags %}
