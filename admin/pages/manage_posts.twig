@@ -34,7 +34,7 @@
 </thead>
 <tbody>
 {% for post in posts.paginated %}
-<tr id="post_{{ post.id }}" class="post {{ post.status_class }}">
+<tr id="post_{{ post.id }}" class="post {{ post_statuses.(post.id).classes | join(' ') }}">
 <td class="post_title title main">
 <a href="{{ post.url() }}">{{ post.title() | striptags | oneof("[Untitled]" | translate) | truncate(40) }}</a>
 </td>
@@ -42,7 +42,11 @@
 {{ post.created_at | time }}
 </td>
 <td class="post_status status">
-{{ post.status_name }}
+{% for group in post_statuses.(post.id).groups %}
+<a href="{{ url('manage_users/query/' ~ (('group:' ~ group.name) | url_encode)) }}">{{ group.name }}</a>
+{% else %}
+{{ post_statuses.(post.id).name }}
+{% endfor %}
 </td>
 <td class="post_author value">
 {{ post.author.name }}
