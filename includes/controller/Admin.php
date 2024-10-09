@@ -545,7 +545,7 @@
             $post_statuses = array();
 
             foreach ($posts->paginated as $post) {
-                $name = "\u{FFFD}";
+                $name = "";
                 $groups = array();
                 $classes = array();
 
