@@ -45,7 +45,7 @@
 {% for group in post_statuses.(post.id).groups %}
 <a href="{{ url('manage_users/query/' ~ (('group:' ~ group.name) | url_encode)) }}">{{ group.name }}</a>
 {% else %}
-{{ post_statuses.(post.id).name }}
+{{ post_statuses.(post.id).name | oneof("[None]" | translate) }}
 {% endfor %}
 </td>
 <td class="post_author value">
