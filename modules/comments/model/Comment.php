@@ -597,7 +597,7 @@
             $trigger->filter($this, "filter_comment");
 
             $this->body_unfiltered = $this->body;
-            $trigger->filter($this->body, array("markup_comment_text", "markup_text"));
+            $trigger->filter($this->body, array("markup_comment_text", "markup_text"), $this);
 
             $config = Config::current();
 
