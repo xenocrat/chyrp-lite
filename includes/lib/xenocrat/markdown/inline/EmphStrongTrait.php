@@ -60,8 +60,10 @@ trait EmphStrongTrait
 				// First and last chars of the strong text
 				// cannot be whitespace.
 				if (
-					strspn($content, " \t\n", 0, 1) === 0
-					&& strspn($content, " \t\n", -1) === 0
+					preg_match(
+						'/^(?![\s\p{Zs}]).+(?<![\s\p{Zs}])$/us',
+						$content
+					)
 				) {
 					return [
 						[
@@ -101,8 +103,10 @@ trait EmphStrongTrait
 				// First and last chars of the emphasised text
 				// cannot be whitespace.
 				if (
-					strspn($content, " \t\n", 0, 1) === 0
-					&& strspn($content, " \t\n", -1) === 0
+					preg_match(
+						'/^(?![\s\p{Zs}]).+(?<![\s\p{Zs}])$/us',
+						$content
+					)
 				) {
 					return [
 						[

@@ -41,21 +41,6 @@ class GithubMarkdown extends Markdown
 	];
 
 	/**
-	 * @var boolean Whether to interpret newlines as `<br />` tags.
-	 *
-	 * This feature is useful for comments where newlines are often
-	 * meant to be hard line breaks.
-	 */
-	public $enableNewlines = false;
-
-	/**
-	 * @var boolean Whether to sanitize disallowed raw HTML tags.
-	 *
-	 * This toggles section 6.11 of the GFM specification on or off.
-	 */
-	public $disallowedRawHTML = true;
-
-	/**
 	 * @var array Disallowed HTML elements defined in GFM spec
 	 * @see https://github.github.com/gfm/#disallowed-raw-html-extension-
 	 */
@@ -70,6 +55,21 @@ class GithubMarkdown extends Markdown
 		'textarea',
 		'xmp',
 	];
+
+	/**
+	 * @var boolean Whether to sanitize disallowed raw HTML tags.
+	 *
+	 * This toggles section 6.11 of the GFM specification on or off.
+	 */
+	public $disallowedRawHTML = true;
+
+	/**
+	 * @var boolean Whether to interpret newlines as `<br />` tags.
+	 *
+	 * This feature is useful for comments where newlines are often
+	 * meant to be hard line breaks.
+	 */
+	public $enableNewlines = false;
 
 	/**
 	 * @inheritDoc
