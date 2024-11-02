@@ -3382,6 +3382,7 @@
             $config->set("post_url", trim($_POST['post_url'], "/ ")."/");
             $config->set("enable_homepage", !empty($_POST['enable_homepage']));
 
+            // Test URL rewrite support and disable clean URLs if not detected.
             if ($config->clean_urls) {
                 $dirty_test = get_remote($config->url."/?feed");
                 $clean_test = get_remote($config->url."/feed/");
@@ -3390,7 +3391,7 @@
                     $config->set("clean_urls", false);
 
                     Flash::warning(
-                        __("Clean URLs are disabled because URL rewrite support was not detected.")
+                        __("Clean URLs have been disabled because URL rewriting is not active.")
                     );
                 }
             }
