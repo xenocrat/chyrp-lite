@@ -134,7 +134,7 @@
 
     # Constant: USE_GETTEXT_SHIM
     # Use a shim for translation support?
-    define('USE_GETTEXT_SHIM', stripos(PHP_OS, "Win") === 0);
+    define('USE_GETTEXT_SHIM', true);
 
     # Constant: USE_OB
     # Use output buffering?
