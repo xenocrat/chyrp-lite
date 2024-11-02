@@ -1,3 +1,4 @@
+<?php header("Status: 403"); exit("Access denied."); ?>
 # Template to enable clean URLs for the Apache web server.
 <IfModule mod_rewrite.c>
 RewriteEngine On

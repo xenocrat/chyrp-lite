@@ -1,3 +1,4 @@
+<?php header("Status: 403"); exit("Access denied."); ?>
 # Template to enable clean URLs for the nginx web server.
 #
 # Usage:
