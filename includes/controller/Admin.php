@@ -2346,7 +2346,7 @@
                 camelize($config->name),
                 false,
                 true
-            )."_Export_".date("Y-m-d");
+            )."_export_".date("Y-m-d");
 
             $archived = zip_archive($exports);
             file_attachment($archived, $filename.".zip");
@@ -3353,28 +3353,6 @@
             $route = Route::current();
             $config = Config::current();
 
-            if (!empty($_POST['clean_urls']) and !$config->clean_urls) {
-                $conf = array(htaccess_conf(), caddyfile_conf(), nginx_conf());
-
-                if (in_array(false, $conf, true)) {
-                    Flash::warning(
-                        __("Failed to write file to disk.")
-                    );
-                    unset($_POST['clean_urls']);
-                } else {
-                    foreach ($conf as $return) {
-                        if (is_int($return)) {
-                           Flash::message(
-                                __("Files created.").' '.
-                                __("Please read the documentation before enabling clean URLs.")
-                            );
-                            unset($_POST['clean_urls']);
-                            break;
-                        }
-                    }
-                }
-            }
-
             if (!empty($_POST['enable_homepage']) and !$config->enable_homepage) {
                 $route->add("/", "page;url=home");
 
@@ -3404,10 +3382,44 @@
             $config->set("post_url", trim($_POST['post_url'], "/ ")."/");
             $config->set("enable_homepage", !empty($_POST['enable_homepage']));
 
+            if ($config->clean_urls) {
+                $dirty_test = get_remote($config->url."/?feed");
+                $clean_test = get_remote($config->url."/feed/");
+
+                if ($dirty_test !== false and $clean_test === false) {
+                    $config->set("clean_urls", false);
+
+                    Flash::warning(
+                        __("Clean URLs are disabled because URL rewrite support was not detected.")
+                    );
+                }
+            }
+
             Flash::notice(
                 __("Settings updated."),
                 "route_settings"
             );
+        }
+
+        /**
+         * Function: admin_download_rewrites
+         * Downloads the files required for URL rewrite support.
+         */
+        public function admin_download_rewrites(): void {
+            if (!Visitor::current()->group->can("change_settings"))
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to change settings.")
+                );
+
+            $conf = array(
+                ".htaccess" => htaccess_conf(),
+                "caddyfile" => caddyfile_conf(),
+                "include.conf" => nginx_conf()
+            );
+
+            $archived = zip_archive(array_filter($conf));
+            file_attachment($archived, "URL_rewrite_files.zip");
         }
 
         /**
