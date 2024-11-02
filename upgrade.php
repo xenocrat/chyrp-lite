@@ -153,57 +153,6 @@
     }
 
     /**
-     * Function: update_htaccess
-     * Updates the .htaccess file to ensure all features are supported.
-     *
-     * Versions: 2018.02 => 2018.03
-     */
-    function update_htaccess(): void {
-        $config = Config::current();
-
-        if (file_exists(MAIN_DIR.DIR.".htaccess")) {
-            $set = htaccess_conf();
-
-            if ($set === false)
-                alert(__("Failed to write file to disk."));
-        }
-    }
-
-    /**
-     * Function: update_caddyfile
-     * Updates the caddyfile to ensure all features are supported.
-     *
-     * Versions: 2019.03 => 2019.04
-     */
-    function update_caddyfile(): void {
-        $config = Config::current();
-
-        if (file_exists(MAIN_DIR.DIR."caddyfile")) {
-            $set = caddyfile_conf();
-
-            if ($set === false)
-                alert(__("Failed to write file to disk."));
-        }
-    }
-
-    /**
-     * Function: update_nginx
-     * Updates the nginx configuration to ensure all features are supported.
-     *
-     * Versions: 2019.03 => 2019.04
-     */
-    function update_nginx(): void {
-        $config = Config::current();
-
-        if (file_exists(MAIN_DIR.DIR."include.conf")) {
-            $set = nginx_conf();
-
-            if ($set === false)
-                alert(__("Failed to write file to disk."));
-        }
-    }
-
-    /**
      * Function: add_markdown
      * Adds the enable_markdown config setting.
      *
@@ -944,9 +893,6 @@
     if (isset($_POST['upgrade']) and $_POST['upgrade'] == "yes") {
         # Perform core upgrade tasks.
         test_directories();
-        update_htaccess();
-        update_caddyfile();
-        update_nginx();
         add_markdown();
         add_homepage();
         add_uploads_limit();
