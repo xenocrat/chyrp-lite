@@ -5,7 +5,7 @@
 #
 #     server {
 #         #...
-#         include filesystem/path/to/chyrp/include.conf;
+#         include filesystem/path/to/include.conf;
 #         #...
 #     }
 

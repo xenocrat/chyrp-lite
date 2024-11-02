@@ -5,7 +5,7 @@
 #
 #     example.com {
 #         #...
-#         import filesystem/path/to/chyrp/caddyfile
+#         import filesystem/path/to/caddyfile
 #         #...
 #     }
 
