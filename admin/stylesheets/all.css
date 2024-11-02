@@ -620,8 +620,8 @@ input[type="password"].strong:focus {
 }
 input[readonly]:focus,
 select[readonly]:focus {
-    border-color: var(--chyrp-strong-purple);
-    outline-color: var(--chyrp-strong-purple);
+    border-color: var(--chyrp-irish-grey);
+    outline-color: var(--chyrp-irish-grey);
 }
 input.code,
 textarea.code {
