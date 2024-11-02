@@ -16,7 +16,8 @@
 {#- -#}
 <input type="checkbox" name="clean_urls" id="clean_urls"{{ site.clean_urls | checked }}>
 <small>
-{{ "Gives your site prettier URLs." | translate }} {{ "Requires URL rewrite support." | translate }}
+{{ "Gives your site prettier URLs." | translate }}
+<a href="{{ url('download_rewrites') }}">{{ "Download the URL rewrite files." | translate }}</a>
 </small>
 </p>
 <p>
