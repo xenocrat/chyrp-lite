@@ -230,16 +230,23 @@
             "/"
         );
 
+        $security = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
         $filepath = MAIN_DIR.DIR.".htaccess";
-        $template = INCLUDES_DIR.DIR."htaccess.conf";
+        $template = INCLUDES_DIR.DIR."htaccess.conf.php";
 
         if (!is_file($template) or !is_readable($template))
             return false;
 
+        $contents = str_replace(
+            $security,
+            "",
+            file_get_contents($template)
+        );
+
         $htaccess = preg_replace(
             '~%\\{CHYRP_PATH\\}/?~',
             ltrim($url_path."/", "/"),
-            file_get_contents($template)
+            $contents
         );
 
         if (!file_exists($filepath))
@@ -278,16 +285,23 @@
             "/"
         );
 
+        $security = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
         $filepath = MAIN_DIR.DIR."caddyfile";
-        $template = INCLUDES_DIR.DIR."caddyfile.conf";
+        $template = INCLUDES_DIR.DIR."caddyfile.conf.php";
 
         if (!is_file($template) or !is_readable($template))
             return false;
 
+        $contents = str_replace(
+            $security,
+            "",
+            file_get_contents($template)
+        );
+
         $caddyfile = preg_replace(
             '~\\{chyrp_path\\}/?~',
             ltrim($url_path."/", "/"),
-            file_get_contents($template)
+            $contents
         );
 
         if (!file_exists($filepath))
@@ -326,16 +340,23 @@
             "/"
         );
 
+        $security = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
         $filepath = MAIN_DIR.DIR."include.conf";
-        $template = INCLUDES_DIR.DIR."nginx.conf";
+        $template = INCLUDES_DIR.DIR."nginx.conf.php";
 
         if (!is_file($template) or !is_readable($template))
             return false;
 
+        $contents = str_replace(
+            $security,
+            "",
+            file_get_contents($template)
+        );
+
         $caddyfile = preg_replace(
             '~\\$chyrp_path/?~',
             ltrim($url_path."/", "/"),
-            file_get_contents($template)
+            $contents
         );
 
         if (!file_exists($filepath))
