@@ -62,12 +62,18 @@
          */
         private function read(): array|false {
             $security = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
-            $contents = @file_get_contents(INCLUDES_DIR.DIR."config.json.php");
+
+            $contents = @file_get_contents(
+                INCLUDES_DIR.DIR."config.json.php"
+            );
 
             if ($contents === false)
                 return false;
 
-            $json = json_get(str_replace($security, "", $contents), true);
+            $json = json_get(
+                str_replace($security, "", $contents),
+                true
+            );
 
             if (!is_array($json))
                 return false;
@@ -81,12 +87,16 @@
          */
         private function write(): int|false {
             $contents = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
+
             $contents.= json_set(
                 $this->data,
                 JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
             );
 
-            return @file_put_contents(INCLUDES_DIR.DIR."config.json.php", $contents);
+            return @file_put_contents(
+                INCLUDES_DIR.DIR."config.json.php",
+                $contents
+            );
         }
 
         /**
