@@ -73,6 +73,28 @@ Je kunt Chyrp Lite in 6 stappen upgraden:
 5. Herstel je _uploads_ map en _includes/config.json.php_.
 6. Doorloop het upgrade-proces door [upgrade.php](upgrade.php) in je webbrowser te bezoeken.
 
+## Security
+
+Na installatie zijn deze bestanden toegankelijk voor bezoekers:
+
+* _LICENSE.md_
+* _README.md_
+* _README_de_DE.md_
+* _README_it_IT.md_
+* _README_ko_KR.md_
+* _README_nl_NL.md_
+* _README_zh_CN.md_
+* _SECURITY.md_
+* _install.php_
+* _includes/caddyfile.conf_
+* _includes/htaccess.conf_
+* _includes/nginx.conf_
+* _includes/cacert.pem_
+* _tools/*_
+* _upgade.php_
+
+Er staan geen geheimen in, maar u wilt ze misschien verwijderen.
+
 ## Documentatie
 
 De Chyrp Lite [wiki](https://chyrplite.net/wiki/) heeft uitgebreide documentatie voor gebruikers en ontwikkelaars.

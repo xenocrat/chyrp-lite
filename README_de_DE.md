@@ -74,6 +74,28 @@ Sie können Chyrp Lite in sechs Schritten aktualisieren:
 5. Stelle Ihre _uploads_ Mappe wieder únd _includes/config.json.php_.
 6. Führe den Upgrade-Vorgang aus mit [upgrade.php](upgrade.php) in ihrem Webbrowser.
 
+## Security
+
+Nach der Installation sind diese Dateien für Besucher zugänglich:
+
+* _LICENSE.md_
+* _README.md_
+* _README_de_DE.md_
+* _README_it_IT.md_
+* _README_ko_KR.md_
+* _README_nl_NL.md_
+* _README_zh_CN.md_
+* _SECURITY.md_
+* _install.php_
+* _includes/caddyfile.conf_
+* _includes/htaccess.conf_
+* _includes/nginx.conf_
+* _includes/cacert.pem_
+* _tools/*_
+* _upgade.php_
+
+Sie enthalten keine Geheimnisse, möchten sie aber möglicherweise löschen.
+
 ## Documentation
 
 Die Chyrp Lite [wiki](https://chyrplite.net/wiki/) hat umfassende Dokumentation

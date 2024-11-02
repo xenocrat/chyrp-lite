@@ -77,6 +77,28 @@ ARIA标签可确保您的博客可供使用辅助技术的访问者访问。
 5. 恢复您的 _uploads_ 文件夹和 _includes/config.json.php_。
 6. 在您的浏览其中访问 [upgrade.php](upgrade.php) 来运行升级程序。
 
+## Security
+
+安装后，访问者可以访问这些文件：
+
+* _LICENSE.md_
+* _README.md_
+* _README_de_DE.md_
+* _README_it_IT.md_
+* _README_ko_KR.md_
+* _README_nl_NL.md_
+* _README_zh_CN.md_
+* _SECURITY.md_
+* _install.php_
+* _includes/caddyfile.conf_
+* _includes/htaccess.conf_
+* _includes/nginx.conf_
+* _includes/cacert.pem_
+* _tools/*_
+* _upgade.php_
+
+其中没有什么秘密，但你可能想要删除它们。
+
 ## 文档
 
 Chyrp Lite [wiki](https://chyrplite.net/wiki/) 为用户和开发者提供了非常全面的文档。

@@ -97,6 +97,28 @@ If you're using Docker, you can upgrade in four steps:
 
 There's no need to run [upgrade.php](upgrade.php) if you're using Docker.
 
+## Security
+
+After installation, these files are accessible to visitors:
+
+* _LICENSE.md_
+* _README.md_
+* _README_de_DE.md_
+* _README_it_IT.md_
+* _README_ko_KR.md_
+* _README_nl_NL.md_
+* _README_zh_CN.md_
+* _SECURITY.md_
+* _install.php_
+* _includes/caddyfile.conf_
+* _includes/htaccess.conf_
+* _includes/nginx.conf_
+* _includes/cacert.pem_
+* _tools/*_
+* _upgade.php_
+
+There are no secrets in them, but you might want to delete them.
+
 ## Documentation
 
 The Chyrp Lite [wiki](https://chyrplite.net/wiki/) has comprehensive documentation

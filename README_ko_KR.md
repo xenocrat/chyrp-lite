@@ -84,6 +84,28 @@ Chyrp Lite를 사용하면 번거로움을 최소화하면서 자신의 웹 서�
 5. _uploads_ 폴더와 includes/config.json.php 를 복원합니다.
 6. 웹 브라우저에서 upgrade.php를 방문하여 업그레이드 프로세스를 실행하세요.
 
+## Security
+
+설치 후 방문자가 다음 파일에 접근할 수 있습니다.
+
+* _LICENSE.md_
+* _README.md_
+* _README_de_DE.md_
+* _README_it_IT.md_
+* _README_ko_KR.md_
+* _README_nl_NL.md_
+* _README_zh_CN.md_
+* _SECURITY.md_
+* _install.php_
+* _includes/caddyfile.conf_
+* _includes/htaccess.conf_
+* _includes/nginx.conf_
+* _includes/cacert.pem_
+* _tools/*_
+* _upgade.php_
+
+여기에는 비밀이 없지만 삭제하고 싶을 수도 있습니다.
+
 ## 문서
 
 Chyrp Lite [wiki](https://chyrplite.net/wiki/)에는 사용자와 개발자를 위한
