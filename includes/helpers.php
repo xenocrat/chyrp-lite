@@ -213,13 +213,13 @@
 
     /**
      * Function: htaccess_conf
-     * Creates the .htaccess file for Chyrp Lite.
+     * Creates the Apache rewrites for Chyrp Lite.
      *
      * Parameters:
      *     $url_path - The URL path to MAIN_DIR.
      *
      * Returns:
-     *     The customized template, false on failure.
+     *     The rewrite rules, or false on failure.
      */
     function htaccess_conf(
         $url_path = null
@@ -253,13 +253,13 @@
 
     /**
      * Function: caddyfile_conf
-     * Creates the caddyfile for Chyrp Lite.
+     * Creates the Caddy rewrites for Chyrp Lite.
      *
      * Parameters:
      *     $url_path - The URL path to MAIN_DIR.
      *
      * Returns:
-     *     The customized template, false on failure.
+     *     The rewrite rules, or false on failure.
      */
     function caddyfile_conf(
         $url_path = null
@@ -294,13 +294,13 @@
 
     /**
      * Function: nginx_conf
-     * Creates the nginx include for Chyrp Lite.
+     * Creates the nginx rewrites for Chyrp Lite.
      *
      * Parameters:
      *     $url_path - The URL path to MAIN_DIR.
      *
      * Returns:
-     *     The customized template, false on failure.
+     *     The rewrite rules, or false on failure.
      */
     function nginx_conf(
         $url_path = null
