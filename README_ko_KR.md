@@ -97,9 +97,6 @@ Chyrp Lite를 사용하면 번거로움을 최소화하면서 자신의 웹 서�
 * _README_zh_CN.md_
 * _SECURITY.md_
 * _install.php_
-* _includes/caddyfile.conf_
-* _includes/htaccess.conf_
-* _includes/nginx.conf_
 * _includes/cacert.pem_
 * _tools/*_
 * _upgade.php_

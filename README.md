@@ -110,9 +110,6 @@ After installation, these files are accessible to visitors:
 * _README_zh_CN.md_
 * _SECURITY.md_
 * _install.php_
-* _includes/caddyfile.conf_
-* _includes/htaccess.conf_
-* _includes/nginx.conf_
 * _includes/cacert.pem_
 * _tools/*_
 * _upgade.php_
