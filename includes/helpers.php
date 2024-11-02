@@ -271,7 +271,6 @@
         );
 
         $security = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
-        $filepath = MAIN_DIR.DIR."caddyfile";
         $template = INCLUDES_DIR.DIR."caddyfile.conf.php";
 
         if (!is_file($template) or !is_readable($template))
@@ -312,7 +311,6 @@
         );
 
         $security = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
-        $filepath = MAIN_DIR.DIR."include.conf";
         $template = INCLUDES_DIR.DIR."nginx.conf.php";
 
         if (!is_file($template) or !is_readable($template))
