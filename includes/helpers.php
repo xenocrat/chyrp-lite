@@ -213,17 +213,17 @@
 
     /**
      * Function: htaccess_conf
-     * Creates the .htaccess file for Chyrp Lite or overwrites an existing file.
+     * Creates the .htaccess file for Chyrp Lite.
      *
      * Parameters:
-     *     $url_path - The URL path to MAIN_DIR for the RewriteBase directive.
+     *     $url_path - The URL path to MAIN_DIR.
      *
      * Returns:
-     *     True if no action was needed, bytes written on success, false on failure.
+     *     The customized template, false on failure.
      */
     function htaccess_conf(
         $url_path = null
-    ): int|bool {
+    ): string|false {
         $url_path = oneof(
             $url_path,
             parse_url(Config::current()->chyrp_url, PHP_URL_PATH),
@@ -231,7 +231,6 @@
         );
 
         $security = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
-        $filepath = MAIN_DIR.DIR.".htaccess";
         $template = INCLUDES_DIR.DIR."htaccess.conf.php";
 
         if (!is_file($template) or !is_readable($template))
@@ -249,36 +248,22 @@
             $contents
         );
 
-        if (!file_exists($filepath))
-            return @file_put_contents($filepath, $htaccess);
-
-        if (!is_file($filepath) or !is_readable($filepath))
-            return false;
-
-        if (
-            !preg_match(
-                "~".preg_quote($htaccess, "~")."~",
-                file_get_contents($filepath)
-            )
-        )
-            return @file_put_contents($filepath, $htaccess);
-
-        return true;
+        return $htaccess;
     }
 
     /**
      * Function: caddyfile_conf
-     * Creates the caddyfile for Chyrp Lite or overwrites an existing file.
+     * Creates the caddyfile for Chyrp Lite.
      *
      * Parameters:
-     *     $url_path - The URL path to MAIN_DIR for the rewrite directive.
+     *     $url_path - The URL path to MAIN_DIR.
      *
      * Returns:
-     *     True if no action was needed, bytes written on success, false on failure.
+     *     The customized template, false on failure.
      */
     function caddyfile_conf(
         $url_path = null
-    ): int|bool {
+    ): string|false {
         $url_path = oneof(
             $url_path,
             parse_url(Config::current()->chyrp_url, PHP_URL_PATH),
@@ -304,36 +289,22 @@
             $contents
         );
 
-        if (!file_exists($filepath))
-            return @file_put_contents($filepath, $caddyfile);
-
-        if (!is_file($filepath) or !is_readable($filepath))
-            return false;
-
-        if (
-            !preg_match(
-                "~".preg_quote($caddyfile, "~")."~",
-                file_get_contents($filepath)
-            )
-        )
-            return @file_put_contents($filepath, $caddyfile);
-
-        return true;
+        return $caddyfile;
     }
 
     /**
      * Function: nginx_conf
-     * Creates the nginx configuration for Chyrp Lite or overwrites an existing file.
+     * Creates the nginx include for Chyrp Lite.
      *
      * Parameters:
-     *     $url_path - The URL path to MAIN_DIR for the location directive.
+     *     $url_path - The URL path to MAIN_DIR.
      *
      * Returns:
-     *     True if no action was needed, bytes written on success, false on failure.
+     *     The customized template, false on failure.
      */
     function nginx_conf(
         $url_path = null
-    ): int|bool {
+    ): string|false {
         $url_path = oneof(
             $url_path,
             parse_url(Config::current()->chyrp_url, PHP_URL_PATH),
@@ -353,27 +324,13 @@
             file_get_contents($template)
         );
 
-        $caddyfile = preg_replace(
+        $include = preg_replace(
             '~\\$chyrp_path/?~',
             ltrim($url_path."/", "/"),
             $contents
         );
 
-        if (!file_exists($filepath))
-            return @file_put_contents($filepath, $caddyfile);
-
-        if (!is_file($filepath) or !is_readable($filepath))
-            return false;
-
-        if (
-            !preg_match(
-                "~".preg_quote($caddyfile, "~")."~",
-                file_get_contents($filepath)
-            )
-        )
-            return @file_put_contents($filepath, $caddyfile);
-
-        return true;
+        return $include;
     }
 
     #---------------------------------------------
@@ -2087,7 +2044,7 @@
             CURLOPT_CAINFO => INCLUDES_DIR.DIR."cacert.pem",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_VERBOSE => false,
-            CURLOPT_FAILONERROR => false,
+            CURLOPT_FAILONERROR => true,
             CURLOPT_HEADER => (bool) $headers,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_MAXREDIRS => (int) $redirects,
