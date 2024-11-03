@@ -933,7 +933,7 @@
             );
 
             # Insert the new default permissions.
-            foreach ($names as $id => $name)
+            foreach ($names as $id => $name) {
                 $sql->insert(
                     table:"permissions",
                     data:array(
@@ -942,6 +942,7 @@
                         "group_id" => 0
                     )
                 );
+            }
 
             # Define and insert the default groups.
             $groups = array(
@@ -965,11 +966,12 @@
                         tables:"groups",
                         conds:array("name" => $name)
                     )
-                )
+                ) {
                     $sql->insert(
                         table:"groups",
                         data:array("name" => $name)
                     );
+                }
 
                 # Fetch the group's ID for permission creation.
                 $group_id[$name] = $sql->select(
@@ -979,7 +981,7 @@
                 )->fetchColumn();
 
                 # Insert the new permissions for this group.
-                foreach ($permissions as $permission)
+                foreach ($permissions as $permission) {
                     $sql->insert(
                         table:"permissions",
                         data:array(
@@ -988,6 +990,7 @@
                             "group_id" => $group_id[$name]
                         )
                     );
+                }
             }
 
             # Add the admin user account if it does not exist.
@@ -996,7 +999,7 @@
                     tables:"users",
                     conds:array("login" => $_POST['login'])
                 )
-            )
+            ) {
                 $sql->insert(
                     table:"users",
                     data:array(
@@ -1008,6 +1011,19 @@
                         "joined_at" => datetime()
                     )
                 );
+            }
+
+            # Rename cacert.pem file to thwart discovery.
+            do {
+                $cacert_pem = random(32).".pem";
+            } while (
+                file_exists(INCLUDES_DIR.DIR.$cacert_pem)
+            );
+
+            @rename(
+                INCLUDES_DIR.DIR."cacert.pem",
+                INCLUDES_DIR.DIR.$cacert_pem
+            );
 
             # Normalize the Chyrp URL.
             $chyrp_url = rtrim(add_scheme($_POST['url']), "/");
@@ -1049,7 +1065,8 @@
                 $config->set("enabled_modules", array()),
                 $config->set("enabled_feathers", array("text")),
                 $config->set("routes", array()),
-                $config->set("secure_hashkey", random(32))
+                $config->set("secure_hashkey", random(32)),
+                $config->set("cacert_pem", $cacert_pem)
             );
 
             if (in_array(false, $set, true))
