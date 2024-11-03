@@ -582,6 +582,35 @@
             );
     }
 
+    /**
+     * Function: rename_cacert_pem
+     * Renames the cacert.pem file and adds/updates the config setting.
+     *
+     * Versions: 2024.03 => 2025.01
+     */
+    function rename_cacert_pem(): void {
+        $config = Config::current();
+
+        do {
+            $cacert_pem = random(32).".pem";
+        } while (
+            file_exists(INCLUDES_DIR.DIR.$cacert_pem)
+        );
+
+        @rename(
+            INCLUDES_DIR.DIR."cacert.pem",
+            INCLUDES_DIR.DIR.$cacert_pem
+        );
+
+        $set = $config->set("cacert_pem", $cacert_pem);
+
+        if ($set === false)
+            error(
+                __("Error"),
+                __("Could not write the configuration file.")
+            );
+    }
+
     #---------------------------------------------
     # Output Starts
     #---------------------------------------------
@@ -915,6 +944,7 @@
         remove_xmlrpc();
         add_monospace_font();
         add_default_statuses();
+        rename_cacert_pem();
 
         # Perform module upgrades.
         foreach ($config->enabled_modules as $module) {
