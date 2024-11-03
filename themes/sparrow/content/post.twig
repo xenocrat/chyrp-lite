@@ -14,19 +14,19 @@
 <div role="note" class="metadata">
 <a href="{{ post.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(post.title() | oneof(post.slug) | striptags | normalize | fix(true)) }}">
 {% if post.status == "draft" %}
-{{ "Draft" | translate }}
+{{- "Draft" | translate -}}
 {% elseif post.status == "scheduled" %}
-{{ "Scheduled" | translate }}
+{{- "Scheduled" | translate -}}
 {% elseif post.pinned %}
-{{ "Pinned" | translate }}
+{{- "Pinned" | translate -}}
 {% else %}
-{{ post.created_at | time }}
+{{- post.created_at | time -}}
 {% endif %}
 </a>
 {% if module_enabled("categorize") and post.category is defined %}
 &bull;
 <a class="category category_{{ post.category.id }}" href="{{ post.category.url() }}" rel="tag">
-{{ post.category.name | oneof("[Untitled]" | translate) }}
+{{- post.category.name | oneof("[Untitled]" | translate) -}}
 </a>
 {% endif %}
 {% if module_enabled("likes") %}
@@ -35,7 +35,7 @@
 {% if module_enabled("pingable") and post.pingback_count is defined %}
 &bull;
 <a href="{{ post.url() }}#pingbacks" rel="bookmark" title="{{ 'View webmentions' | translate }}">
-{{ "%s webmention" | translate_plural("%s webmentions", post.pingback_count) | format(post.pingback_count) }}
+{{- "%s webmention" | translate_plural("%s webmentions", post.pingback_count) | format(post.pingback_count) -}}
 </a>
 {% endif %}
 {% if module_enabled("comments") and post.comment_status is defined %}
@@ -44,7 +44,7 @@
 {% else %}
 &bull;
 <a href="{{ post.url() }}#comments" rel="bookmark" title="{{ 'View comments' | translate }}">
-{{ "%s comment" | translate_plural("%s comments", post.comment_count) | format(post.comment_count) }}
+{{- "%s comment" | translate_plural("%s comments", post.comment_count) | format(post.comment_count) -}}
 </a>
 {% endif %}
 {% endif %}

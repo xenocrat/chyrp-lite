@@ -14,17 +14,19 @@
 <div role="note" class="metadata">
 <a href="{{ post.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(post.title() | oneof(post.slug) | striptags | normalize | fix(true)) }}">
 {% if post.status == "draft" %}
-{{ "Draft" | translate }}
+{{- "Draft" | translate -}}
 {% elseif post.status == "scheduled" %}
-{{ "Scheduled" | translate }}
+{{- "Scheduled" | translate -}}
 {% elseif post.pinned %}
-{{ "Pinned" | translate }}
+{{- "Pinned" | translate -}}
 {% else %}
-{{ post.created_at | time }}
+{{- post.created_at | time -}}
 {% endif %}
 </a>
 {% if module_enabled("categorize") and post.category is defined %}
-<a class="category category_{{ post.category.id }}" href="{{ post.category.url() }}" rel="tag">{{ post.category.name | oneof("[Untitled]" | translate) }}</a>
+<a class="category category_{{ post.category.id }}" href="{{ post.category.url() }}" rel="tag">
+{{- post.category.name | oneof("[Untitled]" | translate) -}}
+</a>
 {% endif %}
 {% if module_enabled("likes") %}
 {{ post.like_link ? "&bull; " ~ post.like_link : "" }}

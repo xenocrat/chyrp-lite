@@ -5,25 +5,25 @@
 </span>
 <span class="time">
 {% if post.status == "draft" %}
-{{ "Drafted on %s." | translate | format(post.created_at | time) }}
+{{- "Drafted on %s." | translate | format(post.created_at | time) -}}
 {% elseif post.status == "scheduled" %}
-{{ "Scheduled for %s." | translate | format(post.created_at | time) }}
+{{- "Scheduled for %s." | translate | format(post.created_at | time) -}}
 {% elseif post.pinned %}
-{{ "Pinned on %s." | translate | format(post.created_at | time) }}
+{{- "Pinned on %s." | translate | format(post.created_at | time) -}}
 {% else %}
-{{ "Posted on %s." | translate | format(post.created_at | time) }}
+{{- "Posted on %s." | translate | format(post.created_at | time) -}}
 {% endif %}
 </span>
 {% if module_enabled("categorize") and post.category is defined %}
 <span class="category">
 {% set category_name = post.category.name | oneof("[Untitled]" | translate) %}
 {% set category_link = '<a href="' ~ post.category.url() ~ '" rel="tag">' ~ category_name ~ '</a>' %}
-{{ "Filed in %s." | translate | format(category_link) }}
+{{- "Filed in %s." | translate | format(category_link) -}}
 </span>
 {% endif %}
 {% if (module_enabled("tags") and post.tags_link is not empty) %}
 <span class="tags">
-{{ "Tagged with %s." | translate | format(post.tags_link | join(", ")) }}
+{{- "Tagged with %s." | translate | format(post.tags_link | join(", ")) -}}
 </span>
 {% endif %}
 {% if module_enabled("likes") %}
