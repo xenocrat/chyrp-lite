@@ -3342,6 +3342,9 @@
             $route = Route::current();
             $config = Config::current();
 
+            # If clean URLs are already active then rewrite support must be ok.
+            $rewrites_tested = $config->clean_urls;
+
             if (!empty($_POST['enable_homepage']) and !$config->enable_homepage) {
                 $route->add("/", "page;url=home");
 
@@ -3372,7 +3375,7 @@
             $config->set("enable_homepage", !empty($_POST['enable_homepage']));
 
             # Test URL rewrite support and disable clean URLs if not detected.
-            if ($config->clean_urls) {
+            if ($config->clean_urls and !$rewrites_tested) {
                 $dirty_test = get_remote($config->url."/?feed");
                 $clean_test = get_remote($config->url."/feed/");
 
