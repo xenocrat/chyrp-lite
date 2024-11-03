@@ -3382,7 +3382,7 @@
             $config->set("post_url", trim($_POST['post_url'], "/ ")."/");
             $config->set("enable_homepage", !empty($_POST['enable_homepage']));
 
-            // Test URL rewrite support and disable clean URLs if not detected.
+            # Test URL rewrite support and disable clean URLs if not detected.
             if ($config->clean_urls) {
                 $dirty_test = get_remote($config->url."/?feed");
                 $clean_test = get_remote($config->url."/feed/");
