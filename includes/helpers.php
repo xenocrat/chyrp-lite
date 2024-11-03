@@ -2039,7 +2039,7 @@
             return false;
 
         $opts = array(
-            CURLOPT_CAINFO => INCLUDES_DIR.DIR."cacert.pem",
+            CURLOPT_CAINFO => INCLUDES_DIR.DIR.$config->cacert_pem,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_VERBOSE => false,
             CURLOPT_FAILONERROR => true,
