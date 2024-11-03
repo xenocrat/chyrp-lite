@@ -90,7 +90,6 @@ ARIA标签可确保您的博客可供使用辅助技术的访问者访问。
 * _README_zh_CN.md_
 * _SECURITY.md_
 * _install.php_
-* _includes/cacert.pem_
 * _tools/*_
 * _upgade.php_
 
