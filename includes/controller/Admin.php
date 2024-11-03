@@ -3077,20 +3077,6 @@
                     code:422
                 );
 
-            if (empty($_POST['chyrp_url']))
-                error(
-                    __("Error"),
-                    __("Chyrp URL cannot be blank."),
-                    code:422
-                );
-
-            if (!is_url($_POST['chyrp_url']))
-                error(
-                    __("Error"),
-                    __("Invalid Chyrp URL."),
-                    code:422
-                );
-
             if (!empty($_POST['url']) and !is_url($_POST['url']))
                 error(
                     __("Error"),
@@ -3110,12 +3096,15 @@
                 0 :
                 $config->check_updates_last ;
 
-            $chyrp_url = rtrim(add_scheme($_POST['chyrp_url']), "/");
-            $url = rtrim(add_scheme(oneof($_POST['url'], $_POST['chyrp_url'])), "/");
+            $url = rtrim(
+                add_scheme(
+                    oneof($_POST['url'], $config->chyrp_url)
+                ),
+                "/"
+            );
 
             $config->set("name", strip_tags($_POST['name']));
             $config->set("description", strip_tags($_POST['description']));
-            $config->set("chyrp_url", $chyrp_url);
             $config->set("url", $url);
             $config->set("email", $_POST['email']);
             $config->set("timezone", $_POST['timezone']);
