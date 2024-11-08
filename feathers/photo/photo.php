@@ -205,6 +205,6 @@
             }
 
             // replace uploaded file
-            imagejpeg($img, $filepath, 100);
+            imagejpeg($img, $filepath, 90);
         }
     }
