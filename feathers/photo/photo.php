@@ -55,6 +55,8 @@
                     code:422
                 );
 
+            $this->fix_jpg_orientation($filename);
+
             fallback($_POST['title'], "");
             fallback($_POST['caption'], "");
             fallback($_POST['slug'], $_POST['title']);
@@ -172,5 +174,37 @@
 
         private function image_extensions(): array {
             return array("jpg", "jpeg", "png", "gif", "webp", "avif");
+        }
+
+        private function fix_jpg_orientation($filename): void {
+            $filepath = uploaded($filename, false);
+            $image_info = getimagesize($filepath, $source_info);
+            $source_type = $image_info[2];
+
+            // only do it for JPG (because only JPG got EXIF)
+            if ($source_type != IMAGETYPE_JPEG) {
+                return;
+            }
+
+            // from https://www.php.net/manual/en/function.imagecreatefromjpeg.php#112902
+            $img = imagecreatefromjpeg($filepath);
+            $exif = exif_read_data($filepath);
+
+            if ($img && $exif && isset($exif['Orientation'])) {
+                $ort = $exif['Orientation'];
+
+                if ($ort == 6 || $ort == 5)
+                    $img = imagerotate($img, 270, 0);
+                if ($ort == 3 || $ort == 4)
+                    $img = imagerotate($img, 180, 0);
+                if ($ort == 8 || $ort == 7)
+                    $img = imagerotate($img, 90, 0);
+
+                if ($ort == 5 || $ort == 4 || $ort == 7)
+                    imageflip($img, IMG_FLIP_HORIZONTAL);
+            }
+
+            // replace uploaded file
+            imagejpeg($img, $filepath, 100);
         }
     }
