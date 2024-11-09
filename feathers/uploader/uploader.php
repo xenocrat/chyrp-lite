@@ -56,8 +56,8 @@
                 $filenames = array();
 
                 if (is_array($_FILES['filenames']['name'])) {
-                    for ($i = 0; $i < count($_FILES['filenames']['name']); $i++)
-                        $filenames[] = upload(
+                    for ($i = 0; $i < count($_FILES['filenames']['name']); $i++) {
+                        $filename = upload(
                             array(
                                 'name' => $_FILES['filenames']['name'][$i],
                                 'type' => $_FILES['filenames']['type'][$i],
@@ -66,6 +66,11 @@
                                 'size' => $_FILES['filenames']['size'][$i]
                             )
                         );
+
+                        fix_jpg_orientation($filename);
+
+                        $filenames[] = $filename; 
+                    }
                 } else {
                     $filenames[] = upload($_FILES['filenames']);
                 }
@@ -122,8 +127,8 @@
                 $filenames = array();
 
                 if (is_array($_FILES['filenames']['name'])) {
-                    for($i=0; $i < count($_FILES['filenames']['name']); $i++)
-                        $filenames[] = upload(
+                    for($i=0; $i < count($_FILES['filenames']['name']); $i++) {
+                        $filename = upload(
                             array(
                                 'name' => $_FILES['filenames']['name'][$i],
                                 'type' => $_FILES['filenames']['type'][$i],
@@ -132,6 +137,11 @@
                                 'size' => $_FILES['filenames']['size'][$i]
                             )
                         );
+                        
+                        fix_jpg_orientation($filename);
+
+                        $filenames[] = $filename; 
+                    }
                 } else {
                     $filenames[] = upload($_FILES['filenames']);
                 }

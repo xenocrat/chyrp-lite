@@ -55,6 +55,8 @@
                     code:422
                 );
 
+            fix_jpg_orientation($filename);
+
             fallback($_POST['title'], "");
             fallback($_POST['caption'], "");
             fallback($_POST['slug'], $_POST['title']);
@@ -95,11 +97,14 @@
             if (is_url($_POST['option']['source']))
                 $_POST['option']['source'] = add_scheme($_POST['option']['source']);
 
-            if (isset($_FILES['filename']) and upload_tester($_FILES['filename']))
+            if (isset($_FILES['filename']) and upload_tester($_FILES['filename'])) {
                 $filename = upload(
                     $_FILES['filename'],
                     $this->image_extensions()
                 );
+                
+                fix_jpg_orientation($filename);
+            }
 
             return $post->update(
                 values:array(
