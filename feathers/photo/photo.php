@@ -97,11 +97,14 @@
             if (is_url($_POST['option']['source']))
                 $_POST['option']['source'] = add_scheme($_POST['option']['source']);
 
-            if (isset($_FILES['filename']) and upload_tester($_FILES['filename']))
+            if (isset($_FILES['filename']) and upload_tester($_FILES['filename'])) {
                 $filename = upload(
                     $_FILES['filename'],
                     $this->image_extensions()
                 );
+                
+                $this->fix_jpg_orientation($filename);
+            }
 
             return $post->update(
                 values:array(
