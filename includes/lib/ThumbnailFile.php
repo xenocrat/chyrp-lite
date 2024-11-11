@@ -32,6 +32,10 @@
         # Quality factor for the thumbnail file.
         private $quality = 80;
 
+        # Integer: $orientation
+        # EXIF orientation tag value.
+        private $orientation = 1;
+
         # Variable: $type
         # The original image type detected by GD library.
         private $type = 0;
@@ -101,6 +105,22 @@
 
             if ($this->quality > 100 or $this->quality < 0)
                 $this->quality = 80;
+
+            if (function_exists("exif_read_data")) {
+                $exif = @exif_read_data($filepath);
+
+                if ($exif !== false) {
+                    if (isset($exif["Orientation"]))
+                        $this->orientation = (int) $exif["Orientation"];
+
+                    if ($this->orientation >= 5) {
+                        $orig_w = $this->orig_w;
+                        $orig_h = $this->orig_h;
+                        $this->orig_w = $orig_h;
+                        $this->orig_h = $orig_w;
+                    }
+                }
+            }
 
             $this->resize();
             $this->destination = CACHES_DIR.DIR."thumbs".DIR.$this->name();
@@ -329,6 +349,61 @@
                     __("Error"),
                     __("Failed to create image thumbnail.")
                 );
+
+            if ($this->orientation > 1) {
+                # Transform the original image to correct orientation:
+                #####################################################
+                # 1          #  2         # 3          # 4          #
+                #            #            #            #            #
+                # XXXXXXX    #    XXXXXXX #         XX # XX         #
+                # XX         #         XX #         XX # XX         #
+                # XXXXX      #      XXXXX #      XXXXX # XXXXX      #
+                # XX         #         XX #         XX # XX         #
+                # XX         #         XX #    XXXXXXX # XXXXXXX    #
+                #            #            #            #            #
+                #####################################################
+                # 5          # 6          # 7          # 8          #
+                #            #            #            #            #
+                # XXXXXXXXXX #            #            # XXXXXXXXXX #
+                # XX  XX     # XX         #         XX #     XX  XX #
+                # XX  XX     # XX  XX     #     XX  XX #     XX  XX #
+                # XX         # XX  XX     #     XX  XX #         XX #
+                #            # XXXXXXXXXX # XXXXXXXXXX #            #
+                #            #            #            #            #
+                #####################################################
+
+                switch ($this->orientation) {
+                    case 2:
+                        imageflip($original, IMG_FLIP_HORIZONTAL);
+                        break;
+                    case 3:
+                        $original = imagerotate($original, 180, 0);
+                        break;
+                    case 4:
+                        imageflip($original, IMG_FLIP_VERTICAL);
+                        break;
+                    case 5:
+                        imageflip($original, IMG_FLIP_VERTICAL);
+                        $original = imagerotate($original, 270, 0);
+                        break;
+                    case 6:
+                        $original = imagerotate($original, 270, 0);
+                        break;
+                    case 7:
+                        imageflip($original, IMG_FLIP_VERTICAL);
+                        $original = imagerotate($original, 90, 0);
+                        break;
+                    case 8:
+                        $original = imagerotate($original, 90, 0);
+                        break;
+                }
+
+                if ($original === false)
+                    error(
+                        __("Error"),
+                        __("Failed to create image thumbnail.")
+                    );
+            }
 
             # Do the crop and resize.
             imagecopyresampled(
