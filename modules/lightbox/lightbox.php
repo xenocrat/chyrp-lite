@@ -1,6 +1,7 @@
 <?php
     class Lightbox extends Modules {
-        public static function __install(): void {
+        public static function __install(
+        ): void {
             Config::current()->set(
                 "module_lightbox",
                 array(
@@ -11,7 +12,8 @@
             );
         }
 
-        public static function __uninstall(): void {
+        public static function __uninstall(
+        ): void {
             Config::current()->remove("module_lightbox");
         }
 
@@ -75,7 +77,8 @@
             return $navs;
         }
 
-        public function javascript(): void {
+        public function javascript(
+        ): void {
             $config = Config::current();
             include MODULES_DIR.DIR."lightbox".DIR."javascript.php";
         }

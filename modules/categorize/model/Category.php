@@ -217,7 +217,8 @@
          * Function: url
          * Returns a category's URL.
          */
-        public function url(): string|false {
+        public function url(
+        ): string|false {
             if ($this->no_results)
                 return false;
 
@@ -231,7 +232,8 @@
          * Function: install
          * Creates the database table.
          */
-        public static function install(): void {
+        public static function install(
+        ): void {
             SQL::current()->create(
                 table:"categorize",
                 cols:array(
@@ -247,7 +249,8 @@
          * Function: uninstall
          * Drops the database table.
          */
-        public static function uninstall(): void {
+        public static function uninstall(
+        ): void {
             $sql = SQL::current();
 
             $sql->drop("categorize");

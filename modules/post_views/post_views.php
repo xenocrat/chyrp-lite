@@ -6,7 +6,8 @@
         # Query caches for methods.
         private $caches = array();
 
-        public static function __install(): void {
+        public static function __install(
+        ): void {
             View::install();
         }
 
@@ -42,7 +43,8 @@
             );
         }
 
-        public function manage_posts_column_header(): string {
+        public function manage_posts_column_header(
+        ): string {
             return '<th class="post_views value">'.
                    __("View Count", "post_views").
                    '</th>';
@@ -113,7 +115,8 @@
             );
         }
 
-        public function admin_download_views(): void {
+        public function admin_download_views(
+        ): void {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(
                     __("No ID Specified"),

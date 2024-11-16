@@ -8,7 +8,8 @@
      *
      * Versions: 2019.03 => 2019.04
      */
-    function highlighter_add_config(): void {
+    function highlighter_add_config(
+    ): void {
         $config = Config::current();
 
         if (!isset($config->module_highlighter)) {

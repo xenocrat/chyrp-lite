@@ -36,7 +36,8 @@
             $this->respondTo("feed_item", "link_related");
         }
 
-        public function submit(): Post {
+        public function submit(
+        ): Post {
             if (empty($_POST['source']))
                 error(
                     __("Error"),

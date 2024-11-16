@@ -2,7 +2,8 @@
     class ReadMore extends Modules {
         private $routing = false;
 
-        public static function __install(): void {
+        public static function __install(
+        ): void {
             Config::current()->set(
                 "module_read_more",
                 array(
@@ -12,11 +13,13 @@
             );
         }
 
-        public static function __uninstall(): void {
+        public static function __uninstall(
+        ): void {
             Config::current()->remove("module_read_more");
         }
 
-        public function __init(): void {
+        public function __init(
+        ): void {
             # Truncate in "markup_post_text"
             # before Markdown filtering in "markup_text".
             $this->setPriority("markup_post_text", 1);
@@ -111,7 +114,8 @@
             $this->routing = false;
         }
 
-        private function eligible(): bool {
+        private function eligible(
+        ): bool {
             $route = Route::current();
             $settings = Config::current()->module_read_more;
 

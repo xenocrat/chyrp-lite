@@ -544,7 +544,8 @@
          * Function: any_editable
          * Checks if the <Visitor> can edit any posts.
          */
-        public static function any_editable(): bool {
+        public static function any_editable(
+        ): bool {
             $visitor = Visitor::current();
             $sql = SQL::current();
 
@@ -589,7 +590,8 @@
          * Function: any_deletable
          * Checks if the <Visitor> can delete any posts.
          */
-        public static function any_deletable(): bool {
+        public static function any_deletable(
+        ): bool {
             $visitor = Visitor::current();
             $sql = SQL::current();
 
@@ -686,7 +688,8 @@
          * Function: url
          * Returns a post's URL.
          */
-        public function url(): string|false {
+        public function url(
+        ): string|false {
             if ($this->no_results)
                 return false;
 
@@ -735,7 +738,8 @@
          *     filtered -> first line -> ftags stripped ->
          *     truncated to 75 characters -> normalized.
          */
-        public function title_from_excerpt(): string|false {
+        public function title_from_excerpt(
+        ): string|false {
             if ($this->no_results)
                 return false;
 
@@ -759,7 +763,8 @@
          * Function: title
          * Returns the given post's title, provided by its Feather.
          */
-        public function title(): string|false {
+        public function title(
+        ): string|false {
             if ($this->no_results)
                 return false;
 
@@ -777,7 +782,8 @@
          * Function: excerpt
          * Returns the given post's excerpt, provided by its Feather.
          */
-        public function excerpt(): string|false {
+        public function excerpt(
+        ): string|false {
             if ($this->no_results)
                 return false;
 
@@ -795,7 +801,8 @@
          * Function: feed_content
          * Returns the given post's feed content, provided by its Feather.
          */
-        public function feed_content(): string|false {
+        public function feed_content(
+        ): string|false {
             if ($this->no_results)
                 return false;
 
@@ -815,7 +822,8 @@
          * Returns:
          *     The next post (the post made before this one).
          */
-        public function next(): self|false {
+        public function next(
+        ): self|false {
             if ($this->no_results)
                 return false;
 
@@ -845,7 +853,8 @@
          * Returns:
          *     The previous post (the post made after this one).
          */
-        public function prev(): self|false {
+        public function prev(
+        ): self|false {
             if ($this->no_results)
                 return false;
 
@@ -873,7 +882,8 @@
          * Function: theme_exists
          * Checks if the current post's feather theme file exists.
          */
-        public function theme_exists(): bool {
+        public function theme_exists(
+        ): bool {
             return (
                 !$this->no_results and
                 Theme::current()->file_exists("feathers".DIR.$this->feather)
@@ -884,7 +894,8 @@
          * Function: filter
          * Filters the post attributes through filter_post and any Feather filters.
          */
-        private function filter(): void {
+        private function filter(
+        ): void {
             $class = camelize($this->feather);
             $touched = array();
 
@@ -1074,7 +1085,8 @@
          * Function: feathers
          * Returns a SQL query "chunk" for the "feather" column so that it matches enabled feathers.
          */
-        public static function feathers(): string {
+        public static function feathers(
+        ): string {
             $feathers = array();
 
             foreach (Config::current()->enabled_feathers as $feather)
@@ -1088,7 +1100,8 @@
          * Function: author
          * Returns a post's author. Example: $post->author->name
          */
-        public function author(): object|false {
+        public function author(
+        ): object|false {
             if ($this->no_results)
                 return false;
 
@@ -1120,7 +1133,8 @@
          * Function: groups
          * Returns the IDs of any groups given viewing permission in the post's status.
          */
-        public function groups(): array|false {
+        public function groups(
+        ): array|false {
             if ($this->no_results)
                 return false;
 

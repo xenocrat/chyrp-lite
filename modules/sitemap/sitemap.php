@@ -1,6 +1,7 @@
 <?php 
     class Sitemap extends Modules {
-        public function __init(): void {
+        public function __init(
+        ): void {
             $actions = array(
                 "add_post",
                 "add_page",
@@ -14,7 +15,8 @@
                 $this->addAlias($action, "make_sitemap", 8);
         }
 
-        public static function __install(): void {
+        public static function __install(
+        ): void {
             Config::current()->set(
                 "module_sitemap",
                 array(
@@ -26,7 +28,8 @@
             );
         }
 
-        public static function __uninstall(): void {
+        public static function __uninstall(
+        ): void {
             Config::current()->remove("module_sitemap");
         }
 
@@ -114,7 +117,8 @@
          * Function: make_sitemap
          * Generates a sitemap of the blog and writes it to the document root.
          */
-        public function make_sitemap(): void {
+        public function make_sitemap(
+        ): void {
             $results = SQL::current()->select(
                 "posts",
                 "id",

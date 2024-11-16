@@ -8,7 +8,8 @@
      *
      * Versions: 2017.01 => 2017.02
      */
-    function likes_migrate_config(): void {
+    function likes_migrate_config(
+    ): void {
         $config = Config::current();
 
         if (isset($config->module_like)) {
@@ -38,7 +39,8 @@
      *
      * Versions: 2019.03 => 2019.04
      */
-    function likes_update_config(): void {
+    function likes_update_config(
+    ): void {
         $config = Config::current();
         $array = $config->module_likes;
 
@@ -63,7 +65,8 @@
      *
      * Versions: 2020.01 => 2020.02 / 2022.03
      */
-    function likes_clean_indexes(): void {
+    function likes_clean_indexes(
+    ): void {
         $sql = SQL::current();
 
         if ($sql->adapter == "sqlite") {

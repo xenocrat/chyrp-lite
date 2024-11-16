@@ -130,7 +130,8 @@
          * Function: fetchObject
          * Returns the current row as an object.
          */
-        public function fetchObject(): object|false {
+        public function fetchObject(
+        ): object|false {
             return $this->query->fetchObject();
         }
 

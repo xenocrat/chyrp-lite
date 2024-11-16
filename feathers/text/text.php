@@ -27,7 +27,8 @@
             );
         }
 
-        public function submit(): Post {
+        public function submit(
+        ): Post {
             if (empty($_POST['body']))
                 error(
                     __("Error"),

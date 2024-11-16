@@ -8,7 +8,8 @@
          * Function: check
          * Checks the update channel.
          */
-        public static function check(): void {
+        public static function check(
+        ): void {
             $config = Config::current();
             $visitor = Visitor::current();
 
@@ -90,7 +91,8 @@
          * Function: warning
          * Flash the user about the failed check.
          */
-        private static function warning(): void {
+        private static function warning(
+        ): void {
             Flash::warning(
                 __("Unable to check for new Chyrp Lite versions.").
                 ' <a href="'.fix(UPDATE_PAGE, true).'" target="_blank">'.

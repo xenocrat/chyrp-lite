@@ -8,7 +8,8 @@
      *
      * Versions: 2022.02 => 2022.03
      */
-    function read_more_add_config(): void {
+    function read_more_add_config(
+    ): void {
         $set = Config::current()->set(
             "module_read_more",
             array(

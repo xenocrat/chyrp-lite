@@ -6,7 +6,8 @@
         # Query caches for methods.
         private $caches = array();
 
-        public static function __install(): void {
+        public static function __install(
+        ): void {
             Category::install();
 
             Group::add_permission("manage_categorize", "Manage Categories");
@@ -75,7 +76,8 @@
             return $urls;
         }
 
-        public function manage_posts_column_header(): string {
+        public function manage_posts_column_header(
+        ): string {
             return '<th class="post_category value">'.
                    __("Category", "categorize").'</th>';
         }
@@ -495,7 +497,8 @@
             );
         }
 
-        public function admin_destroy_category(): never {
+        public function admin_destroy_category(
+        ): never {
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),

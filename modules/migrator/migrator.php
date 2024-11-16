@@ -27,7 +27,8 @@
          * Function: admin_import_wordpress
          * WordPress importing.
          */
-        public function admin_import_wordpress(): never {
+        public function admin_import_wordpress(
+        ): never {
             $config = Config::current();
             $trigger = Trigger::current();
 
@@ -244,7 +245,8 @@
          * Function: admin_import_tumblr
          * Tumblr importing.
          */
-        public function admin_import_tumblr(): never {
+        public function admin_import_tumblr(
+        ): never {
             $config = Config::current();
             $trigger = Trigger::current();
 
@@ -423,7 +425,8 @@
          * Function: admin_import_textpattern
          * TextPattern importing.
          */
-        public function admin_import_textpattern(): never {
+        public function admin_import_textpattern(
+        ): never {
             $config  = Config::current();
             $trigger = Trigger::current();
 
@@ -586,7 +589,8 @@
          * Function: admin_import_movabletype
          * MovableType importing.
          */
-        public function admin_import_movabletype(): never {
+        public function admin_import_movabletype(
+        ): never {
             $config  = Config::current();
             $trigger = Trigger::current();
 

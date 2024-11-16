@@ -6,7 +6,8 @@
         # Query caches for methods.
         private $caches = array();
 
-        public static function __install(): void {
+        public static function __install(
+        ): void {
             Pingback::install();
 
             Group::add_permission("edit_pingback", "Edit Webmentions");
@@ -170,7 +171,8 @@
             );
         }
 
-        public function admin_destroy_pingback(): never {
+        public function admin_destroy_pingback(
+        ): never {
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
@@ -284,7 +286,8 @@
             return null;
         }
 
-        public function manage_posts_column_header(): string {
+        public function manage_posts_column_header(
+        ): string {
             return '<th class="post_pingbacks value">'.
                    __("Webmentions", "pingable").
                    '</th>';

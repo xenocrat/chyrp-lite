@@ -8,11 +8,13 @@
          * Function: generateCaptcha
          * Returns the HTML form elements for the captcha challenge.
          */
-        public static function generateCaptcha(): string;
+        public static function generateCaptcha(
+        ): string;
 
         /**
          * Function: checkCaptcha
          * Checks the response and returns true (success) or false (failure).
          */
-        public static function checkCaptcha(): bool;
+        public static function checkCaptcha(
+        ): bool;
     }

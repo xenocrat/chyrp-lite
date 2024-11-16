@@ -38,7 +38,8 @@
          * Function: close
          * Executed when the session is closed.
          */
-        public function close(): bool {
+        public function close(
+        ): bool {
             return true;
         }
 
@@ -138,7 +139,8 @@
          * Function: hash_token
          * Generates an authentication token for this session.
          */
-        public static function hash_token(): bool|string {
+        public static function hash_token(
+        ): bool|string {
             $id = session_id();
 
             if ($id === "")

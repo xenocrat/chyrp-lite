@@ -64,7 +64,8 @@
          * Function: logged_in
          * Returns whether or not the visitor is logged in.
          */
-        public static function logged_in(): bool {
+        public static function logged_in(
+        ): bool {
             return (
                 isset(Visitor::current()->id) and
                 Visitor::current()->id != 0
@@ -99,7 +100,8 @@
          * Notes:
          *     A redirect() is required after calling this method.
          */
-        public static function log_out(): void {
+        public static function log_out(
+        ): void {
             $user = new User($_SESSION['user_id']);
             session_destroy();
             session();
@@ -113,7 +115,8 @@
          * Function: current
          * Returns a singleton reference to the current visitor.
          */
-        public static function & current(): self {
+        public static function & current(
+        ): self {
             static $instance = null;
             $instance = (empty($instance)) ? new self() : $instance ;
             return $instance;

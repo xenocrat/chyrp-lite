@@ -77,7 +77,8 @@
          * Notes:
          *     If the last arg is <true>, logic is "and", otherwise "or".
          */
-        public function can(): bool {
+        public function can(
+        ): bool {
             if ($this->no_results)
                 return false;
 
@@ -382,7 +383,8 @@
          * Function: size
          * Returns the number of users in the group.
          */
-        public function size(): int|false {
+        public function size(
+        ): int|false {
             if ($this->no_results)
                 return false;
 

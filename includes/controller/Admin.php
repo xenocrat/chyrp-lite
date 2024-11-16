@@ -195,7 +195,8 @@
          * Function: admin_write_post
          * Post writing.
          */
-        public function admin_write_post(): void {
+        public function admin_write_post(
+        ): void {
             $visitor = Visitor::current();
             $config = Config::current();
             $trigger = Trigger::current();
@@ -249,7 +250,8 @@
          * Function: admin_add_post
          * Adds a post when the form is submitted.
          */
-        public function admin_add_post(): never {
+        public function admin_add_post(
+        ): never {
             $visitor = Visitor::current();
 
             if (!$visitor->group->can("add_post", "add_draft"))
@@ -293,7 +295,8 @@
          * Function: admin_edit_post
          * Post editing.
          */
-        public function admin_edit_post(): void {
+        public function admin_edit_post(
+        ): void {
             $trigger = Trigger::current();
 
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
@@ -342,7 +345,8 @@
          * Function: admin_update_post
          * Updates a post when the form is submitted.
          */
-        public function admin_update_post(): never {
+        public function admin_update_post(
+        ): never {
             $visitor = Visitor::current();
 
             $post_redirect = (Post::any_editable() or Post::any_deletable()) ?
@@ -403,7 +407,8 @@
          * Function: admin_delete_post
          * Post deletion (confirm page).
          */
-        public function admin_delete_post(): void {
+        public function admin_delete_post(
+        ): void {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 error(
                     __("No ID Specified"),
@@ -438,7 +443,8 @@
          * Function: admin_destroy_post
          * Destroys a post.
          */
-        public function admin_destroy_post(): never {
+        public function admin_destroy_post(
+        ): never {
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
@@ -481,7 +487,8 @@
          * Function: admin_manage_posts
          * Post management.
          */
-        public function admin_manage_posts(): void {
+        public function admin_manage_posts(
+        ): void {
             if (!Post::any_editable() and !Post::any_deletable())
                 show_403(
                     __("Access Denied"),
@@ -607,7 +614,8 @@
          * Function: admin_write_page
          * Page creation.
          */
-        public function admin_write_page(): void {
+        public function admin_write_page(
+        ): void {
             if (!Visitor::current()->group->can("add_page"))
                 show_403(
                     __("Access Denied"),
@@ -624,7 +632,8 @@
          * Function: admin_add_page
          * Adds a page when the form is submitted.
          */
-        public function admin_add_page(): never {
+        public function admin_add_page(
+        ): never {
             $visitor = Visitor::current();
 
             if (!$visitor->group->can("add_page"))
@@ -695,7 +704,8 @@
          * Function: admin_edit_page
          * Page editing.
          */
-        public function admin_edit_page(): void {
+        public function admin_edit_page(
+        ): void {
             if (!Visitor::current()->group->can("edit_page"))
                 show_403(
                     __("Access Denied"),
@@ -738,7 +748,8 @@
          * Function: admin_update_page
          * Updates a page when the form is submitted.
          */
-        public function admin_update_page(): never {
+        public function admin_update_page(
+        ): never {
             $visitor = Visitor::current();
 
             $page_redirect = ($visitor->group->can("edit_page", "delete_page")) ?
@@ -837,7 +848,8 @@
          * Function: admin_delete_page
          * Page deletion (confirm page).
          */
-        public function admin_delete_page(): void {
+        public function admin_delete_page(
+        ): void {
             if (!Visitor::current()->group->can("delete_page"))
                 show_403(
                     __("Access Denied"),
@@ -869,7 +881,8 @@
          * Function: admin_destroy_page
          * Destroys a page.
          */
-        public function admin_destroy_page(): never {
+        public function admin_destroy_page(
+        ): never {
             if (!Visitor::current()->group->can("delete_page"))
                 show_403(
                     __("Access Denied"),
@@ -926,7 +939,8 @@
          * Function: admin_manage_pages
          * Page management.
          */
-        public function admin_manage_pages(): void {
+        public function admin_manage_pages(
+        ): void {
             $visitor = Visitor::current();
 
             if (!$visitor->group->can("edit_page", "delete_page"))
@@ -973,7 +987,8 @@
          * Function: admin_new_user
          * User creation.
          */
-        public function admin_new_user(): void {
+        public function admin_new_user(
+        ): void {
             if (!Visitor::current()->group->can("add_user"))
                 show_403(
                     __("Access Denied"),
@@ -1001,7 +1016,8 @@
          * Function: admin_add_user
          * Add a user when the form is submitted.
          */
-        public function admin_add_user(): never {
+        public function admin_add_user(
+        ): never {
             if (!Visitor::current()->group->can("add_user"))
                 show_403(
                     __("Access Denied"),
@@ -1114,7 +1130,8 @@
          * Function: admin_edit_user
          * User editing.
          */
-        public function admin_edit_user(): void {
+        public function admin_edit_user(
+        ): void {
             if (!Visitor::current()->group->can("edit_user"))
                 show_403(
                     __("Access Denied"),
@@ -1151,7 +1168,8 @@
          * Function: admin_update_user
          * Updates a user when the form is submitted.
          */
-        public function admin_update_user(): never {
+        public function admin_update_user(
+        ): never {
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
@@ -1289,7 +1307,8 @@
          * Function: admin_delete_user
          * User deletion (confirm page).
          */
-        public function admin_delete_user(): void {
+        public function admin_delete_user(
+        ): void {
             if (!Visitor::current()->group->can("delete_user"))
                 show_403(
                     __("Access Denied"),
@@ -1329,7 +1348,8 @@
          * Function: admin_destroy_user
          * Destroys a user.
          */
-        public function admin_destroy_user(): never {
+        public function admin_destroy_user(
+        ): never {
             if (!Visitor::current()->group->can("delete_user"))
                 show_403(
                     __("Access Denied"),
@@ -1418,7 +1438,8 @@
          * Function: admin_manage_users
          * User management.
          */
-        public function admin_manage_users(): void {
+        public function admin_manage_users(
+        ): void {
             $visitor = Visitor::current();
 
             if (!$visitor->group->can("add_user", "edit_user", "delete_user"))
@@ -1468,7 +1489,8 @@
          * Function: admin_new_group
          * Group creation.
          */
-        public function admin_new_group(): void {
+        public function admin_new_group(
+        ): void {
             if (!Visitor::current()->group->can("add_group"))
                 show_403(
                     __("Access Denied"),
@@ -1485,7 +1507,8 @@
          * Function: admin_add_group
          * Adds a group when the form is submitted.
          */
-        public function admin_add_group(): never {
+        public function admin_add_group(
+        ): never {
             if (!Visitor::current()->group->can("add_group"))
                 show_403(
                     __("Access Denied"),
@@ -1533,7 +1556,8 @@
          * Function: admin_edit_group
          * Group editing.
          */
-        public function admin_edit_group(): void {
+        public function admin_edit_group(
+        ): void {
             if (!Visitor::current()->group->can("edit_group"))
                 show_403(
                     __("Access Denied"),
@@ -1568,7 +1592,8 @@
          * Function: admin_update_group
          * Updates a group when the form is submitted.
          */
-        public function admin_update_group(): never {
+        public function admin_update_group(
+        ): never {
             if (!Visitor::current()->group->can("edit_group"))
                 show_403(
                     __("Access Denied"),
@@ -1634,7 +1659,8 @@
          * Function: admin_delete_group
          * Group deletion (confirm page).
          */
-        public function admin_delete_group(): void {
+        public function admin_delete_group(
+        ): void {
             if (!Visitor::current()->group->can("delete_group"))
                 show_403(
                     __("Access Denied"),
@@ -1680,7 +1706,8 @@
          * Function: admin_destroy_group
          * Destroys a group.
          */
-        public function admin_destroy_group(): never {
+        public function admin_destroy_group(
+        ): never {
             if (!Visitor::current()->group->can("delete_group"))
                 show_403(
                     __("Access Denied"),
@@ -1806,7 +1833,8 @@
          * Function: admin_manage_groups
          * Group management.
          */
-        public function admin_manage_groups(): void {
+        public function admin_manage_groups(
+        ): void {
             $visitor = Visitor::current();
 
             if (!$visitor->group->can("add_group", "edit_group", "delete_group"))
@@ -1857,7 +1885,8 @@
          * Function: admin_delete_upload
          * Upload deletion (confirm page).
          */
-        public function admin_delete_upload(): void {
+        public function admin_delete_upload(
+        ): void {
             $sql = SQL::current();
 
             if (!Visitor::current()->group->can("edit_post", "edit_page", true))
@@ -1912,7 +1941,8 @@
          * Function: admin_destroy_upload
          * Destroys a post.
          */
-        public function admin_destroy_upload(): never {
+        public function admin_destroy_upload(
+        ): never {
             if (!Visitor::current()->group->can("edit_post", "edit_page", true))
                 show_403(
                     __("Access Denied"),
@@ -1954,7 +1984,8 @@
          * Function: admin_manage_uploads
          * Upload management.
          */
-        public function admin_manage_uploads(): void {
+        public function admin_manage_uploads(
+        ): void {
             if (!Visitor::current()->group->can("edit_post", "edit_page", true))
                 show_403(
                     __("Access Denied"),
@@ -2007,7 +2038,8 @@
          * Function: admin_export
          * Export content from this installation.
          */
-        public function admin_export(): void {
+        public function admin_export(
+        ): void {
             $config  = Config::current();
             $trigger = Trigger::current();
             $visitor = Visitor::current();
@@ -2356,7 +2388,8 @@
          * Function: admin_import
          * Import content to this installation.
          */
-        public function admin_import(): void {
+        public function admin_import(
+        ): void {
             $config  = Config::current();
             $trigger = Trigger::current();
             $visitor = Visitor::current();
@@ -2629,7 +2662,8 @@
          * Function: admin_modules
          * Module enabling/disabling.
          */
-        public function admin_modules(): void {
+        public function admin_modules(
+        ): void {
             if (!Visitor::current()->group->can("toggle_extensions"))
                 show_403(
                     __("Access Denied"),
@@ -2722,7 +2756,8 @@
          * Function: admin_feathers
          * Feather enabling/disabling.
          */
-        public function admin_feathers(): void {
+        public function admin_feathers(
+        ): void {
             if (!Visitor::current()->group->can("toggle_extensions"))
                 show_403(
                     __("Access Denied"),
@@ -2766,7 +2801,8 @@
          * Function: admin_themes
          * Theme switching/previewing.
          */
-        public function admin_themes(): void {
+        public function admin_themes(
+        ): void {
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(
                     __("Access Denied"),
@@ -2804,7 +2840,8 @@
          * Function: admin_enable
          * Enables a module or feather.
          */
-        public function admin_enable(): never {
+        public function admin_enable(
+        ): never {
             $config  = Config::current();
             $visitor = Visitor::current();
 
@@ -2882,7 +2919,8 @@
          * Function: admin_disable
          * Disables a module or feather.
          */
-        public function admin_disable(): never {
+        public function admin_disable(
+        ): never {
             $config  = Config::current();
             $visitor = Visitor::current();
 
@@ -2957,7 +2995,8 @@
          * Function: admin_change_theme
          * Changes the theme.
          */
-        public function admin_change_theme(): never {
+        public function admin_change_theme(
+        ): never {
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(
                     __("Access Denied"),
@@ -3000,7 +3039,8 @@
          * Function: admin_preview_theme
          * Previews the theme.
          */
-        public function admin_preview_theme(): never {
+        public function admin_preview_theme(
+        ): never {
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(
                     __("Access Denied"),
@@ -3038,7 +3078,8 @@
          * Function: admin_general_settings
          * General Settings page.
          */
-        public function admin_general_settings(): void {
+        public function admin_general_settings(
+        ): void {
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(
                     __("Access Denied"),
@@ -3123,7 +3164,8 @@
          * Function: admin_content_settings
          * Content Settings page.
          */
-        public function admin_content_settings(): void {
+        public function admin_content_settings(
+        ): void {
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(
                     __("Access Denied"),
@@ -3251,7 +3293,8 @@
          * Function: admin_user_settings
          * User Settings page.
          */
-        public function admin_user_settings(): void {
+        public function admin_user_settings(
+        ): void {
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(
                     __("Access Denied"),
@@ -3318,7 +3361,8 @@
          * Function: admin_route_settings
          * Route Settings page.
          */
-        public function admin_route_settings(): void {
+        public function admin_route_settings(
+        ): void {
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(
                     __("Access Denied"),
@@ -3398,7 +3442,8 @@
          * Function: admin_download_rewrites
          * Downloads the files required for URL rewrite support.
          */
-        public function admin_download_rewrites(): void {
+        public function admin_download_rewrites(
+        ): void {
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(
                     __("Access Denied"),
@@ -3419,7 +3464,8 @@
          * Function: admin_login
          * Mask for MainController->login().
          */
-        public function admin_login(): never {
+        public function admin_login(
+        ): never {
             if (logged_in())
                 Flash::notice(
                     __("You are already logged in."),
@@ -3434,7 +3480,8 @@
          * Function: admin_logout
          * Mask for MainController->logout().
          */
-        public function admin_logout(): never {
+        public function admin_logout(
+        ): never {
             redirect(url("logout", MainController::current()));
         }
 
@@ -3442,7 +3489,8 @@
          * Function: admin_help
          * Serves help pages for core and extensions.
          */
-        public function admin_help(): void {
+        public function admin_help(
+        ): void {
             if (empty($_GET['id']))
                 error(
                     __("Error"),
@@ -3728,7 +3776,8 @@
          * Function: current
          * Returns a singleton reference to the current class.
          */
-        public static function & current(): self {
+        public static function & current(
+        ): self {
             static $instance = null;
             $instance = (empty($instance)) ? new self() : $instance ;
             return $instance;

@@ -8,7 +8,8 @@
      *
      * Versions: 2017.01 => 2017.02
      */
-    function cacher_migrate_config(): void {
+    function cacher_migrate_config(
+    ): void {
         $config = Config::current();
 
         if (isset($config->cache_expire) and isset($config->cache_exclude)) {
@@ -42,7 +43,8 @@
      *
      * Versions: 2020.04 => 2021.01
      */
-    function cacher_update_config(): void {
+    function cacher_update_config(
+    ): void {
         $config = Config::current();
         $array = $config->module_cacher;
 

@@ -4,7 +4,8 @@
         private $excluded = false;
         private $modified = false;
 
-        public function __init(): void {
+        public function __init(
+        ): void {
             $config = Config::current();
 
             $this->lastmod = $config->module_cacher["cache_lastmod"];
@@ -13,14 +14,16 @@
             $this->setPriority("route_done", 5);
         }
 
-        public static function __install(): void {
+        public static function __install(
+        ): void {
             Config::current()->set(
                 "module_cacher",
                 array("cache_lastmod" => time())
             );
         }
 
-        public static function __uninstall(): void {
+        public static function __uninstall(
+        ): void {
             Config::current()->remove("module_cacher");
         }
 
@@ -73,7 +76,8 @@
             }
         }
 
-        private function eligible(): bool {
+        private function eligible(
+        ): bool {
             if (PREVIEWING)
                 return false;
 
@@ -89,7 +93,8 @@
             return true;
         }
 
-        private function generate_etag(): string {
+        private function generate_etag(
+        ): string {
             $items = array(
                 Visitor::current()->id,
                 Route::current()->request
@@ -98,7 +103,8 @@
             return 'W/"'.token($items).'"';
         }
 
-        private function validate_etag(): bool {
+        private function validate_etag(
+        ): bool {
             if (!isset($_SERVER['HTTP_IF_NONE_MATCH']))
                 return false;
 
@@ -108,7 +114,8 @@
             );
         }
 
-        private function prepare_cache_triggers(): void {
+        private function prepare_cache_triggers(
+        ): void {
             $trigger = Trigger::current();
 
             $regenerate = array(
@@ -163,7 +170,8 @@
                 $this->addAlias($action, "cache_exclude");
         }
 
-        public function cache_regenerate(): void {
+        public function cache_regenerate(
+        ): void {
             if ($this->modified)
                 return;
 
@@ -175,7 +183,8 @@
             $config->set("module_cacher", $settings);
         }
 
-        public function cache_exclude(): void {
+        public function cache_exclude(
+        ): void {
             $this->excluded = true;
         }
     }

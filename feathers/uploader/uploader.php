@@ -55,7 +55,8 @@
             return json_get($filenames, true);
         }
 
-        public function submit(): Post {
+        public function submit(
+        ): Post {
             if (isset($_FILES['filenames']) and upload_tester($_FILES['filenames'])) {
                 $filenames = array();
 

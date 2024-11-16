@@ -278,7 +278,8 @@
          * Function: stylesheets
          * Outputs the stylesheet tags.
          */
-        public function stylesheets(): string {
+        public function stylesheets(
+        ): string {
             $config = Config::current();
 
             $stylesheets = array();
@@ -332,7 +333,8 @@
          * Function: javascripts
          * Outputs the JavaScript tags.
          */
-        public function javascripts(): string {
+        public function javascripts(
+        ): string {
             $config = Config::current();
             $route = Route::current();
 
@@ -388,7 +390,8 @@
          * Function: feeds
          * Outputs the feeds and other general purpose <link> tags.
          */
-        public function feeds(): string {
+        public function feeds(
+        ): string {
             $config = Config::current();
             $route = Route::current();
             $main = MainController::current();
@@ -465,7 +468,8 @@
          * Function: load_time
          * Returns the total elapsed time for this page load.
          */
-        public function load_time(): string {
+        public function load_time(
+        ): string {
             return timer_stop();
         }
 
@@ -473,7 +477,8 @@
          * Function: current
          * Returns a singleton reference to the current class.
          */
-        public static function & current(): self {
+        public static function & current(
+        ): self {
             static $instance = null;
             $instance = (empty($instance)) ? new self() : $instance ;
             return $instance;

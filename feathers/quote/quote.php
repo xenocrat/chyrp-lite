@@ -28,7 +28,8 @@
             );
         }
 
-        public function submit(): Post {
+        public function submit(
+        ): Post {
             if (empty($_POST['quote']))
                 error(
                     __("Error"),

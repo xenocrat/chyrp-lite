@@ -61,7 +61,8 @@
             $this->respondTo("filter_post", "filter_post");
         }
 
-        public function submit(): Post {
+        public function submit(
+        ): Post {
             if (isset($_FILES['filename']) and upload_tester($_FILES['filename']))
                 $filename = upload(
                     $_FILES['filename'],
@@ -287,11 +288,13 @@
             }
         }
 
-        private function video_extensions(): array {
+        private function video_extensions(
+        ): array {
             return array("mp4", "ogv", "webm", "3gp", "mkv", "mov");
         }
 
-        private function image_extensions(): array {
+        private function image_extensions(
+        ): array {
             return array("jpg", "jpeg", "png", "gif", "webp", "avif");
         }
     }

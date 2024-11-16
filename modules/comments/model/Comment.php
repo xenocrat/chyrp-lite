@@ -454,7 +454,8 @@
          * Function: any_editable
          * Checks if the <Visitor> can edit any comments.
          */
-        public static function any_editable(): bool {
+        public static function any_editable(
+        ): bool {
             $visitor = Visitor::current();
 
             # Can they edit comments?
@@ -478,7 +479,8 @@
          * Function: any_deletable
          * Checks if the <Visitor> can delete any comments.
          */
-        public static function any_deletable(): bool {
+        public static function any_deletable(
+        ): bool {
             $visitor = Visitor::current();
 
             # Can they delete comments?
@@ -531,7 +533,8 @@
          * Function: redactions
          * Returns a SQL query "chunk" that hides some comments from the <Visitor>.
          */
-        public static function redactions(): string {
+        public static function redactions(
+        ): string {
             $user_id = (int) Visitor::current()->id;
             $id_list = "(0)";
 
@@ -558,7 +561,8 @@
          * Function: url
          * Returns a comment's URL.
          */
-        public function url(): string|false {
+        public function url(
+        ): string|false {
             if ($this->no_results)
                 return false;
 
@@ -571,7 +575,8 @@
          * Function: author_link
          * Returns the commenter's name enclosed in a hyperlink to their website.
          */
-        public function author_link(): string|false {
+        public function author_link(
+        ): string|false {
             if ($this->no_results)
                 return false;
 
@@ -592,7 +597,8 @@
          * Function: filter
          * Filters the comment through filter_comment and markup filters.
          */
-        private function filter(): void {
+        private function filter(
+        ): void {
             $trigger = Trigger::current();
             $trigger->filter($this, "filter_comment");
 
@@ -622,7 +628,8 @@
          * Function: install
          * Creates the database table.
          */
-        public static function install(): void {
+        public static function install(
+        ): void {
             SQL::current()->create(
                 table:"comments",
                 cols:array(
@@ -648,7 +655,8 @@
          * Function: uninstall
          * Drops the database table.
          */
-        public static function uninstall(): void {
+        public static function uninstall(
+        ): void {
             $sql = SQL::current();
 
             $sql->drop("comments");

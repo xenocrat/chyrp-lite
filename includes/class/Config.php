@@ -60,7 +60,8 @@
          * Function: read
          * Reads the configuration file and decodes the settings.
          */
-        private function read(): array|false {
+        private function read(
+        ): array|false {
             $security = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
 
             $contents = @file_get_contents(
@@ -85,7 +86,8 @@
          * Function: write
          * Encodes the settings and writes the configuration file.
          */
-        private function write(): int|false {
+        private function write(
+        ): int|false {
             $contents = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
 
             $contents.= json_set(
@@ -142,7 +144,8 @@
          * Function: current
          * Returns a singleton reference to the current configuration.
          */
-        public static function & current(): self {
+        public static function & current(
+        ): self {
             static $instance = null;
             $instance = (empty($instance)) ? new self() : $instance ;
             return $instance;

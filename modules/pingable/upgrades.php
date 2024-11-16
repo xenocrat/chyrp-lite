@@ -8,7 +8,8 @@
      *
      * Versions: 2016.04 => 2017.01
      */
-    function add_edit_pingback(): void {
+    function add_edit_pingback(
+    ): void {
         $sql = SQL::current();
 
         if (

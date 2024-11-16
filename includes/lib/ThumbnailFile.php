@@ -130,7 +130,8 @@
          * Function: upscaling
          * Will the thumbnail be larger than the original?
          */
-        public function upscaling(): bool {
+        public function upscaling(
+        ): bool {
             return (
                 ($this->thumb_w == 0 or $this->orig_w <= $this->thumb_w) and
                 ($this->thumb_h == 0 or $this->orig_h <= $this->thumb_h) and
@@ -142,7 +143,8 @@
          * Function: creatable
          * Can the thumbnail file be created?
          */
-        public function creatable(): bool {
+        public function creatable(
+        ): bool {
             if (isset($this->creatable))
                 return $this->creatable;
 
@@ -253,7 +255,8 @@
          * Function: extension
          * Returns the correct extension for the image.
          */
-        public function extension(): string|false {
+        public function extension(
+        ): string|false {
             return image_type_to_extension($this->type);
         }
 
@@ -261,7 +264,8 @@
          * Function: mime_type
          * Returns the correct MIME type for the image.
          */
-        public function mime_type(): string|false {
+        public function mime_type(
+        ): string|false {
             return image_type_to_mime_type($this->type);
         }
 
@@ -269,7 +273,8 @@
          * Function: name
          * Generates and returns a unique name for the thumbnail file.
          */
-        public function name(): string|false {
+        public function name(
+        ): string|false {
             if (isset($this->name))
                 return $this->name;
 
@@ -475,7 +480,8 @@
          * Function: serve
          * Serves a thumbnail file with correct Content-Type header.
          */
-        public function serve(): bool {
+        public function serve(
+        ): bool {
             if (!file_exists($this->destination))
                 return false;
 
@@ -492,7 +498,8 @@
          * Function: resize
          * Computes the final dimensions based on supplied parameters.
          */
-        private function resize(): void {
+        private function resize(
+        ): void {
             $scale_x = ($this->thumb_w > 0) ?
                 $this->thumb_w / $this->orig_w :
                 0 ;

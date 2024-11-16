@@ -51,7 +51,8 @@
             $this->respondTo("filter_post", "filter_post");
         }
 
-        public function submit(): Post {
+        public function submit(
+        ): Post {
             if (isset($_FILES['filename']) and upload_tester($_FILES['filename']))
                 $filename = upload(
                     $_FILES['filename'],
@@ -254,7 +255,8 @@
             }
         }
 
-        private function audio_extensions(): array {
+        private function audio_extensions(
+        ): array {
             return array("mp3", "m4a", "mp4", "oga", "ogg", "webm", "mka");
         }
     }

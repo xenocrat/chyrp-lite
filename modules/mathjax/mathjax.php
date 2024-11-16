@@ -1,6 +1,7 @@
 <?php
     class Mathjax extends Modules {
-        public static function __install(): void {
+        public static function __install(
+        ): void {
             $config = Config::current();
 
             $config->set(
@@ -12,7 +13,8 @@
             );
         }
 
-        public static function __uninstall(): void {
+        public static function __uninstall(
+        ): void {
             Config::current()->remove("module_mathjax");
         }
 
@@ -36,7 +38,8 @@
             return $scripts;
         }
 
-        public function javascript(): void {
+        public function javascript(
+        ): void {
             include MODULES_DIR.DIR."mathjax".DIR."javascript.php";
         }
 

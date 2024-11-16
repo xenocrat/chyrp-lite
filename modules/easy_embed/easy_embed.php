@@ -1,6 +1,7 @@
 <?php
     class EasyEmbed extends Modules {
-        public function __init(): void {
+        public function __init(
+        ): void {
             # Replace comment codes before Markdown filtering (priority 5).
             $this->setPriority("markup_text", 4);
         }

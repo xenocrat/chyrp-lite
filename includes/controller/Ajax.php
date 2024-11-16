@@ -57,7 +57,8 @@
          * Function: ajax_destroy_post
          * Destroys a post.
          */
-        public function ajax_destroy_post(): void {
+        public function ajax_destroy_post(
+        ): void {
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
@@ -95,7 +96,8 @@
          * Function: ajax_destroy_page
          * Destroys a page.
          */
-        public function ajax_destroy_page(): void {
+        public function ajax_destroy_page(
+        ): void {
             if (!Visitor::current()->group->can("delete_page"))
                 show_403(
                     __("Access Denied"),
@@ -131,7 +133,8 @@
          * Function: ajax_preview_post
          * Previews a post.
          */
-        public function ajax_preview_post(): void {
+        public function ajax_preview_post(
+        ): void {
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
@@ -187,7 +190,8 @@
          * Function: ajax_preview_page
          * Previews a page.
          */
-        public function ajax_preview_page(): void {
+        public function ajax_preview_page(
+        ): void {
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
@@ -228,7 +232,8 @@
          * Function: ajax_file_upload
          * Moves a file to the uploads directory.
          */
-        public function ajax_file_upload(): void {
+        public function ajax_file_upload(
+        ): void {
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
@@ -269,7 +274,8 @@
             }
         }
 
-        public function ajax_uploads_modal(): void {
+        public function ajax_uploads_modal(
+        ): void {
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
@@ -313,7 +319,8 @@
          * Function: current
          * Returns a singleton reference to the current class.
          */
-        public static function & current(): self {
+        public static function & current(
+        ): self {
             static $instance = null;
             $instance = (empty($instance)) ? new self() : $instance ;
             return $instance;

@@ -594,7 +594,8 @@
          * Function: etag
          * Generates an Etag for the object.
          */
-        public function etag(): string|false {
+        public function etag(
+        ): string|false {
             if ($this->no_results)
                 return false;
 

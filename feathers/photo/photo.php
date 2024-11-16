@@ -41,7 +41,8 @@
             $this->respondTo("post_options", "add_option");
         }
 
-        public function submit(): Post {
+        public function submit(
+        ): Post {
             if (isset($_FILES['filename']) and upload_tester($_FILES['filename']))
                 $filename = upload(
                     $_FILES['filename'],
@@ -180,7 +181,8 @@
             return $options;
         }
 
-        private function image_extensions(): array {
+        private function image_extensions(
+        ): array {
             return array("jpg", "jpeg", "png", "gif", "webp", "avif");
         }
     }

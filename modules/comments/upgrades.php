@@ -8,7 +8,8 @@
      *
      * Versions: 2017.01 => 2017.02
      */
-    function comments_migrate_config(): void {
+    function comments_migrate_config(
+    ): void {
         $config = Config::current();
 
         if (
@@ -56,7 +57,8 @@
      *
      * Versions: 2022.01 => 2022.02, 2024.01
      */
-    function fix_comment_updated(): void {
+    function fix_comment_updated(
+    ): void {
         $sql = SQL::current();
 
         $values = ($sql->adapter == "pgsql") ?
@@ -90,7 +92,8 @@
      *
      * Versions: 2023.02 => 2023.03
      */
-    function comments_update_config(): void {
+    function comments_update_config(
+    ): void {
         $config = Config::current();
         $array = $config->module_comments;
 

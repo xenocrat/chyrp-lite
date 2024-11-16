@@ -1632,6 +1632,9 @@
             $parser->enableNewlines = false;
             $parser->renderCheckboxInputs = false;
             $parser->disallowedRawHTML = false;
+            $parser->renderLazyImages = true;
+            $parser->renderLazyMedia = false;
+            $parser->enableImageDimensions = true;
         }
 
         if ($context instanceof Model) {

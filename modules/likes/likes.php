@@ -6,7 +6,8 @@
         # Query caches for methods.
         private $caches = array();
 
-        public static function __install(): void {
+        public static function __install(
+        ): void {
             $config = Config::current();
 
             Like::install();
@@ -137,7 +138,8 @@
             );
         }
 
-        public function main_like(): never {
+        public function main_like(
+        ): never {
             if (empty($_GET['post_id']) or !is_numeric($_GET['post_id']))
                 error(
                     __("Error"),
@@ -166,7 +168,8 @@
             );
         }
 
-        public function main_unlike(): never {
+        public function main_unlike(
+        ): never {
             if (empty($_GET['post_id']) or !is_numeric($_GET['post_id']))
                 error(
                     __("Error"),
@@ -195,7 +198,8 @@
             );
         }
 
-        public function ajax_like(): void {
+        public function ajax_like(
+        ): void {
             if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
                 error(
                     __("Error"),
@@ -233,7 +237,8 @@
             json_response($text, true);
         }
 
-        public function ajax_unlike(): void {
+        public function ajax_unlike(
+        ): void {
             if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
                 error(
                     __("Error"),
@@ -473,7 +478,8 @@
             }
         }
 
-        private function list_images(): array {
+        private function list_images(
+        ): array {
             $images = array();
             $dir = new DirectoryIterator(MODULES_DIR.DIR."likes".DIR."images");
 
@@ -489,7 +495,8 @@
             return $images;
         }
 
-        public function manage_posts_column_header(): string {
+        public function manage_posts_column_header(
+        ): string {
             return '<th class="post_likes value">'.__("Likes", "tags").'</th>';
         }
 
@@ -564,7 +571,8 @@
             return $styles;
         }
 
-        public function javascript(): void {
+        public function javascript(
+        ): void {
             include MODULES_DIR.DIR."likes".DIR."javascript.php";
         }
     }

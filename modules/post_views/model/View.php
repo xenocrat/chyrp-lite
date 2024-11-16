@@ -90,7 +90,8 @@
          * Function: install
          * Creates the database table.
          */
-        public static function install(): void {
+        public static function install(
+        ): void {
             SQL::current()->create(
                 table:"views",
                 cols:array(
@@ -106,7 +107,8 @@
          * Function: uninstall
          * Drops the database table.
          */
-        public static function uninstall(): void {
+        public static function uninstall(
+        ): void {
             SQL::current()->drop("views");
         }
     }

@@ -11,7 +11,8 @@
          * Returns:
          *     The <Post> object created.
          */
-        public function submit(): Post;
+        public function submit(
+        ): Post;
 
         /**
          * Function: update

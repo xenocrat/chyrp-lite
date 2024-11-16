@@ -335,7 +335,8 @@
      * Function: twig_function_slug_pattern
      * Returns a HTML @pattern@ attribute if strict slugs are enabled.
      */
-    function twig_function_slug_pattern(): string {
+    function twig_function_slug_pattern(
+    ): string {
         return SLUG_STRICT ?
             ' pattern="^[a-z0-9\\-]*$"' :
             ' pattern="^[^\\u0021-\\u002f\\u003a-\\u0040\\u005b-\\u0060\\u007b-\\u007e]*$"' ;
@@ -345,7 +346,8 @@
      * Function: twig_function_javascripts_nonce
      * Returns a nonce value to enable inline JavaScript with a Content Security Policy.
      */
-    function twig_function_javascripts_nonce(): string {
+    function twig_function_javascripts_nonce(
+    ): string {
         $nonce = "";
         return Trigger::current()->filter($nonce, "javascripts_nonce");
     }
@@ -354,7 +356,8 @@
      * Function: twig_function_stylesheets_nonce
      * Returns a nonce value to enable inline stylesheets with a Content Security Policy.
      */
-    function twig_function_stylesheets_nonce(): string {
+    function twig_function_stylesheets_nonce(
+    ): string {
         $nonce = "";
         return Trigger::current()->filter($nonce, "stylesheets_nonce");
     }

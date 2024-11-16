@@ -228,7 +228,8 @@
          * Function: main_index
          * Grabs the posts for the main index.
          */
-        public function main_index(): void {
+        public function main_index(
+        ): void {
             $this->display(
                 "pages".DIR."index",
                 array(
@@ -244,7 +245,8 @@
          * Function: main_updated
          * Grabs the posts that have been updated.
          */
-        public function main_updated(): void {
+        public function main_updated(
+        ): void {
             $this->display(
                 array("pages".DIR."updated", "pages".DIR."index"),
                 array(
@@ -267,7 +269,8 @@
          * Function: main_author
          * Grabs the posts created by a user.
          */
-        public function main_author(): void {
+        public function main_author(
+        ): void {
             if (empty($_GET['id']) or !is_numeric($_GET['id']))
                 Flash::warning(
                     __("You did not specify a user ID."),
@@ -312,7 +315,8 @@
          * Function: main_archive
          * Grabs the posts for the archive page.
          */
-        public function main_archive(): void {
+        public function main_archive(
+        ): void {
             $sql = SQL::current();
             $statuses = Post::statuses();
             $feathers = Post::feathers();
@@ -477,7 +481,8 @@
          * Function: main_search
          * Grabs the posts and pages for a search query.
          */
-        public function main_search(): void {
+        public function main_search(
+        ): void {
             $config = Config::current();
             $visitor = Visitor::current();
 
@@ -567,7 +572,8 @@
          * Function: main_drafts
          * Grabs the posts with draft status created by this user.
          */
-        public function main_drafts(): void {
+        public function main_drafts(
+        ): void {
             $visitor = Visitor::current();
 
             if (!$visitor->group->can("view_own_draft", "view_draft"))
@@ -675,7 +681,8 @@
          * Function: main_id
          * Views a post or page by its static ID.
          */
-        public function main_id(): bool {
+        public function main_id(
+        ): bool {
             if (!empty($_GET['post']) and is_numeric($_GET['post'])) {
                 $post = new Post($_GET['post']);
 
@@ -701,7 +708,8 @@
          * Function: main_random
          * Grabs a random post and redirects to it.
          */
-        public function main_random(): bool {
+        public function main_random(
+        ): bool {
             $conds = array(Post::statuses());
 
             if (isset($_GET['feather']))
@@ -745,7 +753,8 @@
          * Function: main_matter
          * Displays a standalone Twig template from the "pages" directory.
          */
-        public function main_matter(): bool {
+        public function main_matter(
+        ): bool {
             $theme = Theme::current();
 
             if (!isset($_GET['url']))
@@ -774,7 +783,8 @@
          * Function: main_register
          * Register a visitor as a new user.
          */
-        public function main_register(): void {
+        public function main_register(
+        ): void {
             $config = Config::current();
 
             if (!$config->can_register)
@@ -886,7 +896,8 @@
          * Function: main_activate
          * Activates (approves) a given login.
          */
-        public function main_activate(): never {
+        public function main_activate(
+        ): never {
             if (logged_in())
                 Flash::notice(
                     __("You cannot activate an account because you are already logged in."),
@@ -932,7 +943,8 @@
          * Function: main_login
          * Logs in a user if they provide the username and password.
          */
-        public function main_login(): void {
+        public function main_login(
+        ): void {
             $config = Config::current();
             $trigger = Trigger::current();
 
@@ -990,7 +1002,8 @@
          * Function: main_logout
          * Logs out the current user.
          */
-        public function main_logout(): never {
+        public function main_logout(
+        ): never {
             if (!logged_in())
                 Flash::notice(
                     __("You aren't logged in."),
@@ -1009,7 +1022,8 @@
          * Function: main_controls
          * Updates the current user when the form is submitted.
          */
-        public function main_controls(): void {
+        public function main_controls(
+        ): void {
             $visitor = Visitor::current();
 
             if (!logged_in())
@@ -1093,7 +1107,8 @@
          * Function: main_lost_password
          * Emails a password reset link to the registered address of a user.
          */
-        public function main_lost_password(): void {
+        public function main_lost_password(
+        ): void {
             $config = Config::current();
 
             if (logged_in())
@@ -1145,7 +1160,8 @@
          * Function: main_reset_password
          * Resets the password for a given login.
          */
-        public function main_reset_password(): void {
+        public function main_reset_password(
+        ): void {
             $config = Config::current();
 
             if (logged_in())
@@ -1230,7 +1246,8 @@
          * Function: main_webmention
          * Webmention receiver endpoint.
          */
-        public function main_webmention(): void {
+        public function main_webmention(
+        ): void {
             if (!Config::current()->send_pingbacks)
                 error(
                     __("Error"),
@@ -1446,7 +1463,8 @@
          * Function: current
          * Returns a singleton reference to the current class.
          */
-        public static function & current(): self {
+        public static function & current(
+        ): self {
             static $instance = null;
             $instance = (empty($instance)) ? new self() : $instance ;
             return $instance;

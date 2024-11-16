@@ -197,7 +197,8 @@
      * Function: guess_url
      * Returns a best guess of the current URL.
      */
-    function guess_url(): string {
+    function guess_url(
+    ): string {
         $scheme = (!empty($_SERVER['HTTPS']) and $_SERVER['HTTPS'] !== "off") ?
             "https" :
             "http" ;

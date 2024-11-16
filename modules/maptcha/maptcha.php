@@ -1,17 +1,20 @@
 <?php
     class Maptcha extends Modules implements CaptchaProvider {
-        static function __install(): void {
+        static function __install(
+        ): void {
             Config::current()->set(
                 "module_maptcha",
                 array("maptcha_hashkey" => random(32))
             );
         }
 
-        static function __uninstall(): void {
+        static function __uninstall(
+        ): void {
             Config::current()->remove("module_maptcha");
         }
 
-        static function generateCaptcha(): string {
+        static function generateCaptcha(
+        ): string {
             $hashkey = Config::current()->module_maptcha["maptcha_hashkey"];
 
             $t = time();
@@ -69,7 +72,8 @@
                    $value.'">'."\n";
         }
 
-        static function checkCaptcha(): bool {
+        static function checkCaptcha(
+        ): bool {
             $config = Config::current();
 
             # Constant: MAPTCHA_MIN_ELAPSED

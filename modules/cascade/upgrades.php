@@ -8,7 +8,8 @@
      *
      * Versions: 2017.01 => 2017.02
      */
-    function cascade_migrate_config(): void {
+    function cascade_migrate_config(
+    ): void {
         $config = Config::current();
 
         if (isset($config->ajax_scroll_auto)) {

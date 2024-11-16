@@ -78,11 +78,13 @@
          * Function: feed
          * Returns the generated feed.
          */
-        public function feed(): string;
+        public function feed(
+        ): string;
 
         /**
          * Function: display
          * Displays the generated feed.
          */
-        public function display(): bool;
+        public function display(
+        ): bool;
     }

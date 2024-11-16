@@ -1,13 +1,15 @@
 <?php
     class Cascade extends Modules {
-        public static function __install(): void {
+        public static function __install(
+        ): void {
             Config::current()->set(
                 "module_cascade",
                 array("ajax_scroll_auto" => true)
             );
         }
 
-        public static function __uninstall(): void {
+        public static function __uninstall(
+        ): void {
             Config::current()->remove("module_cascade");
         }
 
@@ -53,7 +55,8 @@
             return $navs;
         }
 
-        public function javascript(): void {
+        public function javascript(
+        ): void {
             $config = Config::current();
             include MODULES_DIR.DIR."cascade".DIR."javascript.php";
         }

@@ -23,7 +23,8 @@
          * Function: type
          * Returns the content type of the feed.
          */
-        public static function type(): string {
+        public static function type(
+        ): string {
             return "application/atom+xml";
         }
 
@@ -315,7 +316,8 @@
          * Function: feed
          * Returns the generated feed.
          */
-        public function feed(): string {
+        public function feed(
+        ): string {
             $feed = $this->xml["feed"];
             $items = $this->xml["items"];
 
@@ -333,7 +335,8 @@
          * Function: output
          * Displays the generated feed.
          */
-        public function display(): bool {
+        public function display(
+        ): bool {
             if (headers_sent())
                 return false;
 

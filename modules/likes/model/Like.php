@@ -197,7 +197,8 @@
          * Function: session_hash
          * Returns a hash generated from the visitor's ID and IP address.
          */
-        private static function session_hash(): string {
+        private static function session_hash(
+        ): string {
             return md5(session_id());
         }
 
@@ -205,7 +206,8 @@
          * Function: install
          * Creates the database table.
          */
-        public static function install(): void {
+        public static function install(
+        ): void {
             SQL::current()->create(
                 table:"likes",
                 cols:array(
@@ -222,7 +224,8 @@
          * Function: uninstall
          * Drops the database table.
          */
-        public static function uninstall(): void {
+        public static function uninstall(
+        ): void {
             SQL::current()->drop("likes");
         }
     }

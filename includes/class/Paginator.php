@@ -146,7 +146,8 @@
          * Function: next
          * Returns the next pagination sequence.
          */
-        public function next(): self {
+        public function next(
+        ): self {
             return new self(
                 $this->array,
                 $this->per_page,
@@ -160,7 +161,8 @@
          * Function: prev
          * Returns the previous pagination sequence.
          */
-        public function prev(): self {
+        public function prev(
+        ): self {
             return new self(
                 $this->array,
                 $this->per_page,
@@ -174,7 +176,8 @@
          * Function: next_page
          * Checks whether or not it makes sense to show the Next Page link.
          */
-        public function next_page(): bool {
+        public function next_page(
+        ): bool {
             return (
                 $this->pages > 1 and
                 $this->page < $this->pages
@@ -185,7 +188,8 @@
          * Function: prev_page
          * Checks whether or not it makes sense to show the Previous Page link.
          */
-        public function prev_page(): bool {
+        public function prev_page(
+        ): bool {
             return (
                 $this->page > 1 and
                 $this->page <= $this->pages

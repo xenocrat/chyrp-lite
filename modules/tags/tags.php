@@ -4,7 +4,8 @@
         # Query caches for methods.
         private $caches = array();
 
-        public static function __install(): void {
+        public static function __install(
+        ): void {
             Route::current()->add("tag/(name)/", "tag");
         }
 
@@ -278,7 +279,8 @@
             return $navs;
         }
 
-        public function manage_posts_column_header(): string {
+        public function manage_posts_column_header(
+        ): string {
             return '<th class="post_tags list">'.
                    __("Tags", "tags").
                    '</th>';
@@ -692,7 +694,8 @@
             );
         }
 
-        public function admin_destroy_tag(): never {
+        public function admin_destroy_tag(
+        ): never {
             if (!Post::any_editable())
                 show_403(
                     __("Access Denied"),
@@ -1009,7 +1012,8 @@
                 $feed->category($clean, $scheme, $tag);
         }
 
-        public function admin_javascript(): void {
+        public function admin_javascript(
+        ): void {
             include MODULES_DIR.DIR."tags".DIR."javascript.php";
         }
     }

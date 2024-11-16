@@ -23,7 +23,8 @@
          * Function: type
          * Returns the content type of the feed.
          */
-        public static function type(): string {
+        public static function type(
+        ): string {
             return "application/feed+json";
         }
 
@@ -225,7 +226,8 @@
          * Function: feed
          * Returns the generated feed.
          */
-        public function feed(): string {
+        public function feed(
+        ): string {
             $encoded = json_set(
                 $this->json,
                 JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES
@@ -238,7 +240,8 @@
          * Function: output
          * Displays the generated feed.
          */
-        public function display(): bool {
+        public function display(
+        ): bool {
             if (headers_sent())
                 return false;
 

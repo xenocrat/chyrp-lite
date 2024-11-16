@@ -130,7 +130,8 @@
          * Function: messages
          * Calls <Flash.serve> "messages".
          */
-        public function messages(): array {
+        public function messages(
+        ): array {
             return $this->serve(self::FLASH_MESSAGE);
         }
 
@@ -138,7 +139,8 @@
          * Function: notices
          * Calls <Flash.serve> "notices".
          */
-        public function notices(): array {
+        public function notices(
+        ): array {
             return $this->serve(self::FLASH_NOTICE);
         }
 
@@ -146,7 +148,8 @@
          * Function: warnings
          * Calls <Flash.serve> "warnings".
          */
-        public function warnings(): array {
+        public function warnings(
+        ): array {
             return $this->serve(self::FLASH_WARNING);
         }
 
@@ -158,7 +161,8 @@
          *     An array of every flash available,
          *     in the form of [type => [flashes]].
          */
-        public function all(): array {
+        public function all(
+        ): array {
             return array(
                 "messages" => $this->messages(),
                 "notices" => $this->notices(),
@@ -280,7 +284,8 @@
          * Function: current
          * Returns a singleton reference to the current class.
          */
-        public static function & current(): self {
+        public static function & current(
+        ): self {
             static $instance = null;
             $instance = (empty($instance)) ? new self() : $instance ;
             return $instance;

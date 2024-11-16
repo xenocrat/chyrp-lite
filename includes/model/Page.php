@@ -334,7 +334,8 @@
          * Function: filter
          * Filters the page attributes through filter_page and markup filters.
          */
-        private function filter(): void {
+        private function filter(
+        ): void {
             $trigger = Trigger::current();
             $trigger->filter($this, "filter_page");
 
@@ -392,7 +393,8 @@
          * Function: url
          * Returns a page's URL.
          */
-        public function url(): string|false {
+        public function url(
+        ): string|false {
             if ($this->no_results)
                 return false;
 
@@ -423,7 +425,8 @@
          * Function: author
          * Returns a page's author. Example: $page->author->name
          */
-        public function author(): object|false {
+        public function author(
+        ): object|false {
             if ($this->no_results)
                 return false;
 

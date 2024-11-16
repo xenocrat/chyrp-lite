@@ -97,7 +97,8 @@
          * Function: init
          * Attempt to call a responder until one of them doesn't return false.
          */
-        public function init(): bool {
+        public function init(
+        ): bool {
             $trigger = Trigger::current();
             $visitor = Visitor::current();
 
@@ -318,7 +319,8 @@
          * Notes:
          *     The / path strictly requires no request args.
          */
-        public function custom(): void {
+        public function custom(
+        ): void {
             if (!$this->controller instanceof MainController)
                 return;
 

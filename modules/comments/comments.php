@@ -140,7 +140,8 @@
             return $urls;
         }
 
-        private function add_comment(): array {
+        private function add_comment(
+        ): array {
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
@@ -240,7 +241,8 @@
             );
         }
 
-        private function update_comment(): array {
+        private function update_comment(
+        ): array {
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
@@ -334,7 +336,8 @@
             );
         }
 
-        public function admin_update_comment(): never {
+        public function admin_update_comment(
+        ): never {
             list($success, $message) = $this->update_comment();
 
             if (!$success)
@@ -350,12 +353,14 @@
             );
         }
 
-        public function ajax_add_comment(): void {
+        public function ajax_add_comment(
+        ): void {
             list($success, $message) = $this->add_comment();
             json_response($message, $success);
         }
 
-        public function ajax_update_comment(): void {
+        public function ajax_update_comment(
+        ): void {
             list($success, $message) = $this->update_comment();
             json_response($message, $success);
         }
@@ -423,7 +428,8 @@
             );
         }
 
-        public function admin_destroy_comment(): never {
+        public function admin_destroy_comment(
+        ): never {
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
@@ -566,7 +572,8 @@
             );
         }
 
-        public function admin_bulk_comments(): never {
+        public function admin_bulk_comments(
+        ): never {
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
@@ -851,7 +858,8 @@
             return $navs;
         }
 
-        public function manage_posts_column_header(): string {
+        public function manage_posts_column_header(
+        ): string {
             return '<th class="post_comments value">'.
                    __("Comments", "comments").
                    '</th>';
@@ -867,7 +875,8 @@
                    '</a></td>';
         }
 
-        public function manage_users_column_header(): string {
+        public function manage_users_column_header(
+        ): string {
             return '<th class="user_comments value">'.
                    __("Comments", "comments").
                    '</th>';
@@ -883,7 +892,8 @@
                    '</a></td>';
         }
 
-        public function ajax_reload_comments(): void {
+        public function ajax_reload_comments(
+        ): void {
             if (empty($_POST['post_id']) or !is_numeric($_POST['post_id']))
                 error(
                     __("No ID Specified"),
@@ -933,7 +943,8 @@
             );
         }
 
-        public function ajax_show_comment(): void {
+        public function ajax_show_comment(
+        ): void {
             if (empty($_POST['comment_id']) or !is_numeric($_POST['comment_id']))
                 error(
                     __("Error"),
@@ -956,7 +967,8 @@
             );
         }
 
-        public function ajax_edit_comment(): void {
+        public function ajax_edit_comment(
+        ): void {
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
@@ -994,7 +1006,8 @@
             );
         }
 
-        public function ajax_destroy_comment(): void {
+        public function ajax_destroy_comment(
+        ): void {
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
@@ -1058,7 +1071,8 @@
             return $links;
         }
 
-        public function main_view(): bool {
+        public function main_view(
+        ): bool {
             if (isset($_POST['action'])) {
                 if ($_POST['action'] == "add_comment") {
                     list($success, $message) = $this->add_comment();
@@ -1241,7 +1255,8 @@
             );
         }
 
-        public function javascript(): void {
+        public function javascript(
+        ): void {
             $config  = Config::current();
             include MODULES_DIR.DIR."comments".DIR."javascript.php";
         }
