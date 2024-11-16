@@ -22,6 +22,19 @@ namespace xenocrat\markdown\inline;
 trait LinkTrait
 {
 	/**
+	 * @var bool Render images with a deferred loading attribute.
+	 */
+	public $renderLazyImages = false;
+
+	/**
+	 * @var bool Enable support for defining intrinsic image dimensions.
+	 *
+	 * This enables `![title](url){width}` and `![title](url){width:height}`
+	 * extended syntax to define intrinsic width and height of 1-999999999.
+	 */
+	public $enableImageDimensions = true;
+
+	/**
 	 * @var array - A list of defined references in this document.
 	 */
 	protected $references = [];
@@ -40,7 +53,9 @@ trait LinkTrait
 	{
 		if (
 			!in_array('parseLink', array_slice($this->context, 1))
-			&& ($parts = $this->parseLinkOrImage($markdown)) !== false
+			&& (
+				$parts = $this->parseLinkOrImage($markdown)
+			) !== false
 		) {
 			list($text, $url, $title, $offset, $key) = $parts;
 			return [
@@ -79,10 +94,28 @@ trait LinkTrait
 	protected function parseImage($markdown): array
 	{
 		if (
-			($parts = $this->parseLinkOrImage(substr($markdown, 1)))
-			!== false
+			(
+				$parts = $this->parseLinkOrImage(substr($markdown, 1))
+			) !== false
 		) {
 			list($text, $url, $title, $offset, $key) = $parts;
+			if (
+				$this->enableImageDimensions
+				&& str_starts_with(
+					($dimensions = substr($markdown, $offset + 1, 21)),
+					'{'
+				)
+				&& preg_match(
+					'/^\{([0-9]{1,9})(:([0-9]{1,9}))?\}/',
+					$dimensions,
+					$dimensionMatches
+				)
+			) {
+			// Intrinsic dimensions.
+				$width = $dimensionMatches[1];
+				$height = $dimensionMatches[3] ?? false;
+				$offset += strlen($dimensionMatches[0]);
+			}
 			return [
 				[
 					'image',
@@ -90,6 +123,8 @@ trait LinkTrait
 					'url' => $url,
 					'title' => $title,
 					'refkey' => $key,
+					'width' => $width ?? false,
+					'height' => $height ?? false,
 					'orig' => substr($markdown, 0, $offset + 1),
 				],
 				$offset + 1
@@ -313,6 +348,21 @@ REGEXP;
 				ENT_COMPAT | ENT_SUBSTITUTE
 			)
 			. '"'
+			. (
+				empty($block['width']) ?
+					'' :
+					' width="' . $block['width'] . '"'
+			)
+			. (
+				empty($block['height']) ?
+					'' :
+					' height="' . $block['height'] . '"'
+			)
+			. (
+				$this->renderLazyImages ?
+					' loading="lazy"' :
+					''
+			)
 			. (
 				empty($block['title']) ?
 					'' :

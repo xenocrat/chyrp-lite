@@ -25,6 +25,7 @@ class ChyrpMarkdown extends GithubMarkdown
 	// Include inline element parsing using traits.
 	use inline\CiteTrait;
 	use inline\HighlightTrait;
+	use inline\MediaLinkTrait;
 	use inline\SupSubTrait;
 
 	/**
