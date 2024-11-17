@@ -361,11 +361,19 @@
                 if ($dirname == "en_US")
                     continue;
 
-                if (preg_match("/^[a-z]{2}(_|-)[a-z]{2}$/i", $dirname))
-                    $locales[] = array(
-                        "code" => $dirname,
-                        "name" => lang_code($dirname)
-                    );
+                if (class_exists("Locale")) {
+                    if (Locale::getDisplayName($dirname) !== false)
+                        $locales[] = array(
+                            "code" => $dirname,
+                            "name" => lang_code($dirname)
+                        );
+                } else {
+                    if (preg_match("/^[a-z]{2,3}((_|-)[a-z]{2,3})*$/i", $dirname))
+                        $locales[] = array(
+                            "code" => $dirname,
+                            "name" => lang_code($dirname)
+                        );
+                }
             }
         }
 
