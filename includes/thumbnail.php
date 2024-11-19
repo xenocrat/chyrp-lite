@@ -24,7 +24,12 @@
         );
 
     $quality = abs((int) fallback($_GET["quality"], 80));
-    $filename = str_replace(array(DIR, "/"), "", $_GET['file']);
+
+    $filename = str_replace(
+        array(DIR, "/", "<", ">"),
+        "",
+        $_GET['file']
+    );
 
     if ($filename == "")
         show_404(
