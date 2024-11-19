@@ -3498,7 +3498,11 @@
                     code:400
                 );
 
-            $template = str_replace(array(DIR, "/"), "", $_GET['id']);
+            $template = str_replace(
+                array(DIR, "/", "<", ">"),
+                "",
+                $_GET['id']
+            );
 
             $this->display(
                 "help".DIR.$template,
