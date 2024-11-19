@@ -48,6 +48,7 @@ class Lexer
     public const REGEX_STRING = '/"([^#"\\\\]*(?:\\\\.[^#"\\\\]*)*)"|\'([^\'\\\\]*(?:\\\\.[^\'\\\\]*)*)\'/As';
     public const REGEX_DQ_STRING_DELIM = '/"/A';
     public const REGEX_DQ_STRING_PART = '/[^#"\\\\]*(?:(?:\\\\.|#(?!\{))[^#"\\\\]*)*/As';
+    public const REGEX_INLINE_COMMENT = '/#[^\n]*/A';
     public const PUNCTUATION = '()[]{}?:.,|';
 
     private const SPECIAL_CHARS = [
@@ -217,7 +218,7 @@ class Lexer
 
         $this->pushToken(Token::EOF_TYPE);
 
-        if (!empty($this->brackets)) {
+        if ($this->brackets) {
             [$expect, $lineno] = array_pop($this->brackets);
             throw new SyntaxError(\sprintf('Unclosed "%s".', $expect), $lineno, $this->source);
         }
@@ -292,7 +293,7 @@ class Lexer
 
     private function lexBlock(): void
     {
-        if (empty($this->brackets) && preg_match($this->regexes['lex_block'], $this->code, $match, 0, $this->cursor)) {
+        if (!$this->brackets && preg_match($this->regexes['lex_block'], $this->code, $match, 0, $this->cursor)) {
             $this->pushToken(Token::BLOCK_END_TYPE);
             $this->moveCursor($match[0]);
             $this->popState();
@@ -303,7 +304,7 @@ class Lexer
 
     private function lexVar(): void
     {
-        if (empty($this->brackets) && preg_match($this->regexes['lex_var'], $this->code, $match, 0, $this->cursor)) {
+        if (!$this->brackets && preg_match($this->regexes['lex_var'], $this->code, $match, 0, $this->cursor)) {
             $this->pushToken(Token::VAR_END_TYPE);
             $this->moveCursor($match[0]);
             $this->popState();
@@ -360,7 +361,7 @@ class Lexer
             }
             // closing bracket
             elseif (str_contains(')]}', $this->code[$this->cursor])) {
-                if (empty($this->brackets)) {
+                if (!$this->brackets) {
                     throw new SyntaxError(\sprintf('Unexpected "%s".', $this->code[$this->cursor]), $this->lineno, $this->source);
                 }
 
@@ -382,6 +383,10 @@ class Lexer
         elseif (preg_match(self::REGEX_DQ_STRING_DELIM, $this->code, $match, 0, $this->cursor)) {
             $this->brackets[] = ['"', $this->lineno];
             $this->pushState(self::STATE_STRING);
+            $this->moveCursor($match[0]);
+        }
+        // inline comment
+        elseif (preg_match(self::REGEX_INLINE_COMMENT, $this->code, $match, 0, $this->cursor)) {
             $this->moveCursor($match[0]);
         }
         // unlexable
@@ -418,7 +423,7 @@ class Lexer
                 $result .= $nextChar;
             } elseif ("'" === $nextChar || '"' === $nextChar) {
                 if ($nextChar !== $quoteType) {
-                    trigger_deprecation('twig/twig', '3.12', 'Character "%s" at position %d should not be escaped; the "\" character is ignored in Twig v3 but will not be in v4. Please remove the extra "\" character.', $nextChar, $i + 1);
+                    trigger_deprecation('twig/twig', '3.12', 'Character "%s" should not be escaped; the "\" character is ignored in Twig 3 but will not be in Twig 4. Please remove the extra "\" character at position %d in "%s" at line %d.', $nextChar, $i + 1, $this->source->getName(), $this->lineno);
                 }
                 $result .= $nextChar;
             } elseif ('#' === $nextChar && $i + 1 < $length && '{' === $str[$i + 1]) {
@@ -437,7 +442,7 @@ class Lexer
                 }
                 $result .= \chr(octdec($octal));
             } else {
-                trigger_deprecation('twig/twig', '3.12', 'Character "%s" at position %d should not be escaped; the "\" character is ignored in Twig v3 but will not be in v4. Please remove the extra "\" character.', $nextChar, $i + 1);
+                trigger_deprecation('twig/twig', '3.12', 'Character "%s" should not be escaped; the "\" character is ignored in Twig 3 but will not be in Twig 4. Please remove the extra "\" character at position %d in "%s" at line %d.', $nextChar, $i + 1, $this->source->getName(), $this->lineno);
                 $result .= $nextChar;
             }
 
