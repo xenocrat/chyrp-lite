@@ -3,7 +3,8 @@
         exit;
 ?>
 var ChyrpHighlighter = {
-    init: function() {
+    init: function(
+    ) {
         $("pre > code").each(
             function(index, block) {
                 hljs.highlightElement(block);
@@ -11,7 +12,8 @@ var ChyrpHighlighter = {
         );
         ChyrpHighlighter.watch();
     },
-    watch: function() {
+    watch: function(
+    ) {
         // Watch for DOM additions on blog pages.
         if (!!window.MutationObserver && $(".post").length) {
             var target = $(".post").last().parent()[0];

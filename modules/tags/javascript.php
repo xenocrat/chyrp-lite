@@ -3,7 +3,8 @@
         exit;
 ?>
 var ChyrpTags = {
-    init: function() {
+    init: function(
+    ) {
         $("form input[name='tags']").on(
             "keyup",
             ChyrpTags.scan
@@ -13,7 +14,9 @@ var ChyrpTags = {
             ChyrpTags.add
         );
     },
-    scan: function(e) {
+    scan: function(
+        e
+    ) {
         $(e.target).siblings("span.tags_select").children("a.tag").each(
             function() {
                 var name = $(this).html();
@@ -26,7 +29,9 @@ var ChyrpTags = {
             }
         );
     },
-    add: function(e) {
+    add: function(
+        e
+    ) {
         e.preventDefault();
         var name = $(e.target).html();
         var tags = $(e.target).parent().siblings("input[name='tags']");

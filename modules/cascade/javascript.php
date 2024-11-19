@@ -7,7 +7,8 @@ var ChyrpAjaxScroll = {
     failed: false,
     container: null,
     auto: <?php esce($config->module_cascade["ajax_scroll_auto"]); ?>,
-    init: function() {
+    init: function(
+    ) {
         ChyrpAjaxScroll.container = $(".post").last().parent()[0];
 
         if (typeof ChyrpAjaxScroll.container === "undefined")
@@ -30,13 +31,16 @@ var ChyrpAjaxScroll = {
         if ("ariaBusy" in ChyrpAjaxScroll.container)
             ChyrpAjaxScroll.container.ariaBusy = "false";
     },
-    click: function(e) {
+    click: function(
+        e
+    ) {
         if (!ChyrpAjaxScroll.failed) {
             e.preventDefault();
             ChyrpAjaxScroll.fetch();
         }
     },
-    watch: function() {
+    watch: function(
+    ) {
         var docViewTop = $(window).scrollTop();
         var winHeight = window.innerHeight ? window.innerHeight : $(window).height();
         var docHeight = $(document).height();
@@ -46,7 +50,8 @@ var ChyrpAjaxScroll = {
         if (docViewBottom >= (docHeight * 0.8))
             ChyrpAjaxScroll.fetch();
     },
-    fetch: function() {
+    fetch: function(
+    ) {
         if (!ChyrpAjaxScroll.busy && !ChyrpAjaxScroll.failed) {
             ChyrpAjaxScroll.busy = true;
 
@@ -96,7 +101,8 @@ var ChyrpAjaxScroll = {
                 ChyrpAjaxScroll.container.ariaBusy = "false";
         }
     },
-    panic: function() {
+    panic: function(
+    ) {
         ChyrpAjaxScroll.failed = true;
         Oops.count++;
         alert(Oops.message);

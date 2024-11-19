@@ -62,7 +62,8 @@ var ChyrpLightbox = {
             "background-blend-mode": "difference"
         },
     },
-    init: function() {
+    init: function(
+    ) {
         $.extend(
             ChyrpLightbox.styles.fg,
             ChyrpLightbox.styles.spacing
@@ -95,10 +96,13 @@ var ChyrpLightbox = {
         $(window).on("popstate", ChyrpLightbox.hide);
         ChyrpLightbox.watch();
     },
-    prevent: function(e) {
+    prevent: function(
+        e
+    ) {
         e.preventDefault();
     },
-    watch: function() {
+    watch: function(
+    ) {
         // Watch for DOM additions on blog pages.
         if (!!window.MutationObserver && $(".post").length) {
             var target = $(".post").last().parent()[0];
@@ -139,7 +143,9 @@ var ChyrpLightbox = {
             observer.observe(target, config);
         }
     },
-    load: function(e) {
+    load: function(
+        e
+    ) {
         if (ChyrpLightbox.busy)
             return;
 
@@ -179,7 +185,8 @@ var ChyrpLightbox = {
             )
         ).appendTo("body");
     },
-    show: function() {
+    show: function(
+    ) {
         var fg = $("#ChyrpLightbox-fg");
         var bg = $("#ChyrpLightbox-bg");
 
@@ -195,7 +202,8 @@ var ChyrpLightbox = {
 
         bg.focus();
     },
-    hide: function() {
+    hide: function(
+    ) {
         $("#ChyrpLightbox-bg").remove();
         ChyrpLightbox.busy = false;
     }

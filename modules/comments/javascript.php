@@ -10,7 +10,8 @@ var ChyrpComment = {
     reload: <?php esce($config->module_comments["enable_reload_comments"]); ?>,
     delay: Math.abs(<?php esce($config->module_comments["auto_reload_comments"] * 1000); ?>),
     per_page: <?php esce($config->module_comments["comments_per_page"]); ?>,
-    init: function() {
+    init: function(
+    ) {
         if (ChyrpComment.reload && ChyrpComment.delay > 0)
             ChyrpComment.interval = setInterval(ChyrpComment.fetch, ChyrpComment.delay);
 
@@ -76,7 +77,8 @@ var ChyrpComment = {
             }
         );
     },
-    fetch: function() {
+    fetch: function(
+    ) {
         if (
             ChyrpComment.failed
             || $("ol.comments").attr("data-post_id") == undefined
@@ -129,7 +131,9 @@ var ChyrpComment = {
             );
         }
     },
-    edit: function(id) {
+    edit: function(
+        id
+    ) {
         ChyrpComment.editing++;
 
         var thisItem = $("#comment_" + id).loader();
@@ -235,7 +239,9 @@ var ChyrpComment = {
             "html"
         ).fail(ChyrpComment.panic);
     },
-    destroy: function(id) {
+    destroy: function(
+        id
+    ) {
         var thisItem = $("#comment_" + id).loader();
 
         $.post(
@@ -257,7 +263,9 @@ var ChyrpComment = {
             "json"
         ).fail(ChyrpComment.panic);
     },
-    panic: function(message) {
+    panic: function(
+        message
+    ) {
         message = (typeof message === "string") ?
             message :
             Oops.message ;

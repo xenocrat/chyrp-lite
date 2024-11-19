@@ -35,7 +35,8 @@ var Uploads = {
 }
 var Post = {
     failed: false,
-    init: function() {
+    init: function(
+    ) {
         $(".post").last().parent().on(
             "click",
             ".post_delete_link:not(.no_ajax)",
@@ -54,7 +55,9 @@ var Post = {
             }
         );
     },
-    destroy: function(id) {
+    destroy: function(
+        id
+    ) {
         var thisPost = $("#post_" + id).loader();
 
         $.post(
@@ -82,7 +85,9 @@ var Post = {
             "json"
         ).fail(Post.panic);
     },
-    panic: function(message) {
+    panic: function(
+        message
+    ) {
         message = (typeof message === "string") ?
             message :
             Oops.message ;
@@ -95,7 +100,8 @@ var Post = {
 }
 var Page = {
     failed: false,
-    init: function() {
+    init: function(
+    ) {
         $(".page_delete_link:not(.no_ajax)").on(
             "click",
             function(e) {
@@ -113,7 +119,9 @@ var Page = {
             }
         );
     },
-    destroy: function(id) {
+    destroy: function(
+        id
+    ) {
         var thisPage = $("#page_" + id).loader();
 
         $.post(
@@ -135,7 +143,9 @@ var Page = {
             "json"
         ).fail(Page.panic);
     },
-    panic: function(message) {
+    panic: function(
+        message
+    ) {
         message = (typeof message === "string") ?
             message :
             Oops.message ;

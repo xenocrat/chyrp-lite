@@ -14,7 +14,9 @@ $.fn.loader = function(remove) {
 }
 
 // Award a numeric score for the strength of a password.
-function passwordStrength(password) {
+function passwordStrength(
+	password
+) {
     var score = 0;
     var frequency = new Object();
 
@@ -48,7 +50,9 @@ function passwordStrength(password) {
 }
 
 // Does the string look like a web URL?
-function isURL(text) {
+function isURL(
+	text
+) {
     return (
         /^(https?:\/\/)?([a-z0-9]([a-z0-9\-\.]*[a-z0-9])?\.[a-z]{2,63}\.?)(:[0-9]{1,5})?($|\/)/i.test(text)
         ||
@@ -59,7 +63,9 @@ function isURL(text) {
 }
 
 // Does the string look like an email address?
-function isEmail(text) {
+function isEmail(
+	text
+) {
     return (
         /^[^\\ <>@]+@([a-z0-9]([a-z0-9\-\.]*[a-z0-9])?\.[a-z]{2,63}\.?)$/i.test(text)
         ||
@@ -70,7 +76,10 @@ function isEmail(text) {
 }
 
 // Prefixes a URL with a scheme if none was detected.
-function addScheme(url, scheme) {
+function addScheme(
+	url,
+	scheme
+) {
     var regexp = /^([a-z]+:\/\/)?(.+)/i;
 
     if (!scheme)
@@ -83,6 +92,8 @@ function addScheme(url, scheme) {
 }
 
 // Escape strings for regular expressions.
-function escapeRegExp(text) {
+function escapeRegExp(
+	text
+) {
     return text.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
 }

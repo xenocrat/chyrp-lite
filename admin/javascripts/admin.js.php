@@ -22,7 +22,8 @@ $(function() {
     Settings.init();
 });
 // Adds a master toggle to forms that have multiple checkboxes.
-function toggle_all() {
+function toggle_all(
+) {
     $("form[data-toggler]").each(
         function() {
             var all_on = true;
@@ -69,7 +70,8 @@ function toggle_all() {
     );
 }
 // Validates slug fields.
-function validate_slug() {
+function validate_slug(
+) {
     $("input[pattern='^[a-z0-9\\\\-]*$']").keyup(
         function(e) {
             var slug = $(this).val();
@@ -82,7 +84,8 @@ function validate_slug() {
     );
 }
 // Validates email fields.
-function validate_email() {
+function validate_email(
+) {
     $("input[type='email']").keyup(
         function(e) {
             var text = $(this).val();
@@ -95,7 +98,8 @@ function validate_email() {
     );
 }
 // Validates URL fields.
-function validate_url() {
+function validate_url(
+) {
     $("input[type='url']").keyup(
         function(e) {
             var text = $(this).val();
@@ -118,7 +122,8 @@ function validate_url() {
     );
 }
 // Tests the strength of #password1 and compares #password1 to #password2.
-function validate_passwords() {
+function validate_passwords(
+) {
     var passwords = $("input[type='password']").filter(
         function(index) {
             var id = $(this).attr("id");
@@ -163,7 +168,8 @@ function validate_passwords() {
     );
 }
 // Asks the user to confirm form submission.
-function confirm_submit() {
+function confirm_submit(
+) {
     $("form[data-confirm]").on(
         "submit.confirm",
         function(e) {
@@ -187,7 +193,8 @@ function confirm_submit() {
     );
 }
 // Prevents forms being submitted multiple times in a short interval.
-function solo_submit() {
+function solo_submit(
+) {
     $("form").on(
         "submit.solo",
         function(e) {
@@ -203,7 +210,8 @@ function solo_submit() {
         }
     );
 }
-function test_uploads() {
+function test_uploads(
+) {
     $("input[type='file']:not(.toolbar)").on(
         "change.uploads",
         function(e) {
@@ -247,7 +255,12 @@ var Uploads = {
         size_err: '<?php esce(_f("Maximum file size: %d Megabytes!", $config->uploads_limit, "admin")); ?>'
     },
     active: 0,
-    send: function(file, doneCallback, failCallback, alwaysCallback) {
+    send: function(
+        file,
+        doneCallback,
+        failCallback,
+        alwaysCallback
+    ) {
         Uploads.active++;
         var form = new FormData();
 
@@ -278,7 +291,13 @@ var Uploads = {
             }
         );
     },
-    show: function(search, filter, clickCallback, failCallback, alwaysCallback) {
+    show: function(
+        search,
+        filter,
+        clickCallback,
+        failCallback,
+        alwaysCallback
+    ) {
         if (Uploads.active)
             return;
 
@@ -367,7 +386,8 @@ var Uploads = {
     }
 }
 var Help = {
-    init: function() {
+    init: function(
+    ) {
         $(".help").on(
             "click",
             function(e) {
@@ -376,7 +396,9 @@ var Help = {
             }
         );
     },
-    show: function(href) {
+    show: function(
+        href
+    ) {
         $("<div>", {
             "role": "dialog",
             "aria-label": '<?php esce(__("Modal window", "admin")); ?>'
@@ -427,7 +449,8 @@ var Help = {
     }
 }
 var Write = {
-    init: function() {
+    init: function(
+    ) {
         // Insert toolbar buttons for text formatting.
         $("#write_form .options_toolbar, #edit_form .options_toolbar").each(
             function() {
@@ -834,16 +857,24 @@ var Write = {
             );
         }
     },
-    dragenter: function(e) {
+    dragenter: function(
+        e
+    ) {
         $(e.target).addClass("drag_highlight");
     },
-    dragleave: function(e) {
+    dragleave: function(
+        e
+    ) {
         $(e.target).removeClass("drag_highlight");
     },
-    dragover: function(e) {
+    dragover: function(
+        e
+    ) {
         e.preventDefault();
     },
-    drop: function(e) {
+    drop: function(
+        e
+    ) {
         // Process drag-and-drop image file uploads.
         e.stopPropagation();
         e.preventDefault();
@@ -884,7 +915,11 @@ var Write = {
             );
         }
     },
-    formatting: function(target, effect, fragment = "") {
+    formatting: function(
+        target,
+        effect,
+        fragment = ""
+    ) {
         var markdown = <?php esce($config->enable_markdown); ?>;
         var opening = "";
         var closing = "";
@@ -1044,7 +1079,12 @@ var Write = {
         target[0].setRangeText(text);
         $(target).focus().trigger("input").trigger("change");
     },
-    show: function(action, safename, field, content) {
+    show: function(
+        action,
+        safename,
+        field,
+        content
+    ) {
         var uid = Date.now().toString(16);
 
         // Build a form targeting a named iframe.
@@ -1165,7 +1205,8 @@ var Write = {
     }
 }
 var Settings = {
-    init: function() {
+    init: function(
+    ) {
         $("input#email_correspondence").click(
             function() {
                 if ($(this).prop("checked") == false)

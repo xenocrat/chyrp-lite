@@ -5,7 +5,8 @@
 var ChyrpLikes = {
     failed: false,
     busy: false,
-    init: function() {
+    init: function(
+    ) {
         $("div.likes a.likes").click(
             function(e) {
                 if (!ChyrpLikes.failed) {
@@ -16,7 +17,8 @@ var ChyrpLikes = {
         );
         ChyrpLikes.watch();
     },
-    watch: function() {
+    watch: function(
+    ) {
         // Watch for DOM additions on blog pages.
         if (!!window.MutationObserver && $(".post").length) {
             var target = $(".post").last().parent()[0];
@@ -44,7 +46,11 @@ var ChyrpLikes = {
             observer.observe(target, config);
         }
     },
-    send: function(post_id, callback, isUnlike) {
+    send: function(
+        post_id,
+        callback,
+        isUnlike
+    ) {
         if (!ChyrpLikes.busy && !ChyrpLikes.failed) {
             $.ajax(
                 {
@@ -71,7 +77,9 @@ var ChyrpLikes = {
             );
         }
     },
-    toggle: function(post_id) {
+    toggle: function(
+        post_id
+    ) {
         if ($("#likes_" + post_id + " a.liked").length) {
             ChyrpLikes.send(
                 post_id,
@@ -94,7 +102,8 @@ var ChyrpLikes = {
             );
         }
     },
-    panic: function() {
+    panic: function(
+    ) {
         ChyrpLikes.failed = true;
         Oops.count++;
         alert(Oops.message);
