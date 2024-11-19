@@ -1891,36 +1891,36 @@
 
     /**
      * Function: sanitize_html
-     * Sanitizes HTML to disable scripts and obnoxious attributes.
+     * Sanitizes HTML to disable styles, scripts, and most attributes.
      *
      * Parameters:
      *     $string - String containing HTML to sanitize.
      *
      * Returns:
-     *     A version of the string containing only valid tags
-     *     and whitelisted attributes essential to tag function.
+     *     A version of the string containing only valid HTML tags
+     *     and whitelisted attributes essential to tag functionality.
      */
     function sanitize_html(
         $text
     ): string {
         # Strip invalid tags.
         $text = preg_replace(
-            "/<([^a-z\/!]|\/(?![a-z])|!(?!--))[^>]*>/i",
-            " ",
+            "/<(([^a-z\/!]|\/(?![a-z])|!(?!--))[^>]*)>/i",
+            "&lt;$1&gt;",
             $text
         );
 
         # Strip style tags.
         $text = preg_replace(
-            "/<\/?style[^>]*>/i",
-            " ",
+            "/<(\/?style[^>]*)>/i",
+            "&lt;$1&gt;",
             $text
         );
 
         # Strip script tags.
         $text = preg_replace(
-            "/<\/?script[^>]*>/i",
-            " ",
+            "/<(\/?script[^>]*)>/i",
+            "&lt;$1&gt;",
             $text
         );
 
