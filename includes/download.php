@@ -22,7 +22,11 @@
             __("You are not allowed to view this site.")
         );
 
-    $filename = str_replace(array(DIR, "/"), "", $_GET['file']);
+    $filename = str_replace(
+        array(DIR, "/", "<", ">"),
+        "",
+        $_GET['file']
+    );
 
     if ($filename == "")
         show_404(
