@@ -357,7 +357,7 @@
                 if ($dirname == "en_US")
                     continue;
 
-                if (preg_match("/^[a-z]{2}(_|-)[a-z]{2}$/i", $dirname))
+                if (preg_match("/^[a-z]{2,3}(_|-|$)/i", $dirname))
                     $locales[] = array(
                         "code" => $dirname,
                         "name" => lang_code($dirname)
