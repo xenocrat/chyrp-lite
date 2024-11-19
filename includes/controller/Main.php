@@ -760,7 +760,11 @@
             if (!isset($_GET['url']))
                 return false;
 
-            $matter = str_replace(array(DIR, "/"), "", $_GET['url']);
+            $matter = str_replace(
+                array(DIR, "/", "<", ">"),
+                "",
+                $_GET['url']
+            );
 
             if ($matter == "")
                 return false;
