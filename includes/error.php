@@ -206,6 +206,28 @@
         fallback($body, __("An unspecified error has occurred."));
         fallback($backtrace, array());
 
+        $allowed_tags = array(
+            "abbr", "address",
+            "b", "blockquote", "br",
+            "cite", "code",
+            "data", "del", "dfn",
+            "em",
+            "h1", "h2", "h3", "h4", "h5", "h6", "hr",
+            "i", "ins",
+            "kbd",
+            "li",
+            "mark",
+            "ol",
+            "p", "pre",
+            "small", "strong", "sub", "sup",
+            "time",
+            "ul"
+        );
+
+        # Make title and body safe.
+        $title = strip_tags($title, $allowed_tags);
+        $body = strip_tags($body, $allowed_tags);
+
         # Redact and escape the backtrace for display.
         foreach ($backtrace as $index => &$trace) {
             if (!isset($trace["file"]) or !isset($trace["line"]))
