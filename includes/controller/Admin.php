@@ -1030,14 +1030,23 @@
                     __("Invalid authentication token.")
                 );
 
-            if (empty($_POST['login']) or derezz($_POST['login']))
+            if (empty($_POST['login']))
                 error(
                     __("Error"),
                     __("Please enter a username for the account."),
                     code:422
                 );
 
-            $check = new User(array("login" => $_POST['login']));
+            $login = sanitize_db_string($_POST['login'], 64);
+
+            if (empty($login))
+                error(
+                    __("Error"),
+                    __("Invalid username."),
+                    code:422
+                );
+
+            $check = new User(array("login" => $login));
 
             if (!$check->no_results)
                 error(
@@ -1108,7 +1117,7 @@
                 true ;
 
             $user = User::add(
-                login:$_POST['login'],
+                login:$login,
                 password:User::hash_password($_POST['password1']),
                 email:$_POST['email'],
                 full_name:$_POST['full_name'],
@@ -1192,16 +1201,25 @@
                     __("You do not have sufficient privileges to edit users.")
                 );
 
-            if (empty($_POST['login']) or derezz($_POST['login']))
+            if (empty($_POST['login']))
                 error(
                     __("Error"),
                     __("Please enter a username for the account."),
                     code:422
                 );
 
+            $login = sanitize_db_string($_POST['login'], 64);
+
+            if (empty($login))
+                error(
+                    __("Error"),
+                    __("Invalid username."),
+                    code:422
+                );
+
             $check = new User(
                 array(
-                    "login" => $_POST['login'],
+                    "login" => $login,
                     "id not" => $_POST['id']
                 )
             );
@@ -1285,7 +1303,7 @@
                 true ;
 
             $user = $user->update(
-                login:$_POST['login'],
+                login:$login,
                 password:$password,
                 email:$_POST['email'],
                 full_name:$_POST['full_name'],
@@ -1521,17 +1539,26 @@
                     __("Invalid authentication token.")
                 );
 
-            if (empty($_POST['name']) or derezz($_POST['name']))
+            if (empty($_POST['name']))
                 error(
                     __("Error"),
                     __("Please enter a name for the group."),
                     code:422
                 );
 
+            $name = sanitize_db_string($_POST['name'], 100);
+
+            if (empty($name))
+                error(
+                    __("Error"),
+                    __("Invalid group name."),
+                    code:422
+                );
+
             fallback($_POST['permissions'], array());
 
             $check = new Group(
-                array("name" => $_POST['name'])
+                array("name" => $name)
             );
 
             if (!$check->no_results)
@@ -1542,7 +1569,7 @@
                 );
 
             Group::add(
-                $_POST['name'],
+                $name,
                 array_keys($_POST['permissions'])
             );
 
@@ -1613,10 +1640,19 @@
                     code:400
                 );
 
-            if (empty($_POST['name']) or derezz($_POST['name']))
+            if (empty($_POST['name']))
                 error(
                     __("Error"),
                     __("Please enter a name for the group."),
+                    code:422
+                );
+
+            $name = sanitize_db_string($_POST['name'], 100);
+
+            if (empty($name))
+                error(
+                    __("Error"),
+                    __("Invalid group name."),
                     code:422
                 );
 
@@ -1624,7 +1660,7 @@
 
             $check = new Group(
                 array(
-                    "name" => $_POST['name'],
+                    "name" => $name,
                     "id not" => $_POST['id']
                 )
             );
@@ -1645,7 +1681,7 @@
                 );
 
             $group = $group->update(
-                $_POST['name'],
+                $name,
                 array_keys($_POST['permissions'])
             );
 
