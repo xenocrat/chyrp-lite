@@ -125,7 +125,7 @@
         ): self {
             $sql = SQL::current();
             $trigger = Trigger::current();
-            $name = strip_tags($name);
+            $name = sanitize_db_string($name, 100);
 
             $trigger->filter($name, "before_group_add_name");
             $trigger->filter($permissions, "before_group_add_permissions");
@@ -187,7 +187,7 @@
 
             $sql = SQL::current();
             $trigger = Trigger::current();
-            $name = strip_tags($name);
+            $name = sanitize_db_string($name, 100);
 
             $trigger->filter($name, "before_group_update_name");
             $trigger->filter($permissions, "before_group_update_permissions");
