@@ -1833,11 +1833,13 @@
         );
 
         # Strip tags, remove punctuation and HTML entities.
-        $clean = str_replace(
-            $strip,
-            "",
-            strip_tags($string)
-        );
+        $clean = str_replace($strip, "", $string);
+
+        # Remove unprintable control characters.
+        $clean = preg_replace("/[\x00-\x1f]/", "", $clean);
+
+        # Strip tags.
+        $clean = strip_tags($clean);
 
         # Trim.
         $clean = trim($clean);
@@ -1847,8 +1849,7 @@
 
         if ($strict) {
             # Substitute UTF-8 multi-byte encodings.
-            if (preg_match("/[\x80-\xff]/", $clean))
-                $clean = strtr($clean, $utf8mb);
+            $clean = strtr($clean, $utf8mb);
 
             # Remove non-ASCII characters that remain.
             $clean = preg_replace("/[^a-zA-Z0-9\\-]/", "", $clean);
@@ -1881,7 +1882,7 @@
         $string,
         $length = null
     ): string {
-        $string = str_replace("\x00..\x1f", "", $string);
+        $string = preg_replace("/[\x00-\x1f]/", "", $string);
         $string = strip_tags($string);
         $string = mb_strcut($string, 0, $length, "UTF-8");
         return $string;
