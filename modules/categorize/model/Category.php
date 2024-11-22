@@ -56,16 +56,19 @@
          */
         public static function add(
             $name,
-            $clean,
-            $show_on_home
+            $clean = null,
+            $show_on_home = true
         ): self {
             $sql = SQL::current();
+
+            fallback($clean, self::check_clean(slug(8)));
+            fallback($show_on_home, true);
 
             $sql->insert(
                 table:"categorize",
                 data:array(
-                    "name"         => strip_tags($name),
-                    "clean"        => $clean,
+                    "name"         => sanitize_db_string($name, 128),
+                    "clean"        => sanitize_db_string($clean, 128),
                     "show_on_home" => $show_on_home
                 )
             );
@@ -89,15 +92,18 @@
          */
         public function update(
             $name,
-            $clean,
-            $show_on_home
+            $clean = null,
+            $show_on_home = true
         ): self|false {
             if ($this->no_results)
                 return false;
 
+            fallback($clean, $this->clean);
+            fallback($show_on_home, $this->show_on_home);
+
             $new_values = array(
-                "name"         => strip_tags($name),
-                "clean"        => $clean,
+                "name"         => sanitize_db_string($name, 128),
+                "clean"        => sanitize_db_string($clean, 128),
                 "show_on_home" => $show_on_home
             );
 
@@ -204,10 +210,14 @@
                     conds:array("clean" => $unique)
                 )
             ) {
-                $count++;
-                $unique = substr($clean, 0, (127 - strlen($count))).
-                          "-".
-                          $count;
+                $unique = mb_strcut(
+                    $clean,
+                    0,
+                    (127 - strlen($count)),
+                    "UTF-8"
+                ).
+                "-".
+                $count;
             }
 
             return $unique;
