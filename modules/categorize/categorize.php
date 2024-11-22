@@ -352,16 +352,14 @@
                     code:400
                 );
 
-            $clean = empty($_POST['clean']) ?
-                $_POST['name'] :
-                $_POST['clean'] ;
+            fallback($_POST['clean'], $_POST['name']);
 
-            $clean = sanitize($clean, true, SLUG_STRICT, 128);
-
-            if (!preg_match("/[^\-0-9]+/", $clean))
-                $clean = md5($clean);
-
-            $clean = Category::check_clean($clean);
+            $clean = Category::check_clean(
+                oneof(
+                    sanitize($_POST['clean'], true, SLUG_STRICT, 128),
+                    md5($name)
+                )
+            );
 
             Category::add(
                 name:$_POST['name'],
@@ -442,18 +440,18 @@
                     __("You do not have sufficient privileges to edit this category.", "categorize")
                 );
 
-            $clean = empty($_POST['clean']) ?
-                $_POST['name'] :
-                $_POST['clean'] ;
+            fallback($_POST['clean'], $_POST['name']);
 
-            if ($clean != $category->clean) {
-                $clean = sanitize($clean, true, SLUG_STRICT, 128);
-
-                if (!preg_match("/[^\-0-9]+/", $clean))
-                    $clean = md5($clean);
-
-                $clean = Category::check_clean($clean);
-            }
+            $clean = ($_POST['clean'] != $category->clean) ?
+                Category::check_clean(
+                    oneof(
+                        sanitize($clean, true, SLUG_STRICT, 128),
+                        md5($name)
+                    )
+                )
+                :
+                $category->clean
+                ;
 
             $category = $category->update(
                 name:$_POST['name'],
