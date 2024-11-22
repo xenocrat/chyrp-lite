@@ -809,13 +809,20 @@
                         __("Invalid authentication token.")
                     );
 
-                if (empty($_POST['login']) or derezz($_POST['login']))
+                if (empty($_POST['login']))
                     Flash::warning(
                         __("Please enter a username for your account.")
                     );
 
+                $login = sanitize_db_string($_POST['login'], 64);
+
+                if (empty($login))
+                    Flash::warning(
+                        __("Invalid username.")
+                    );
+
                 $check = new User(
-                    array("login" => $_POST['login'])
+                    array("login" => $login)
                 );
 
                 if (!$check->no_results)
@@ -863,7 +870,7 @@
 
                 if (!Flash::exists("warning")) {
                     $user = User::add(
-                        login:$_POST['login'],
+                        login:$login,
                         password:User::hash_password($_POST['password1']),
                         email:$_POST['email'],
                         full_name:$_POST['full_name'],
