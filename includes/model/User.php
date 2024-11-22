@@ -106,11 +106,11 @@
             $trigger = Trigger::current();
             
             $new_values = array(
-                "login"     => strip_tags($login),
+                "login"     => sanitize_db_string($login, 64),
                 "password"  => $password,
-                "email"     => strip_tags($email),
-                "full_name" => strip_tags($full_name),
-                "website"   => strip_tags($website),
+                "email"     => sanitize_db_string($email, 128),
+                "full_name" => sanitize_db_string($full_name, 250),
+                "website"   => sanitize_db_string($website, 128),
                 "group_id"  => oneof($group_id, $config->default_group),
                 "approved"  => oneof($approved, true),
                 "joined_at" => oneof($joined_at, datetime())
@@ -160,7 +160,7 @@
             $new_values = array(
                 "login" => (
                     isset($login) ?
-                        strip_tags($login) :
+                        sanitize_db_string($login, 64) :
                         $this->login
                 ),
                 "password" => (
@@ -170,17 +170,17 @@
                 ),
                 "email" => (
                     isset($email) ?
-                        strip_tags($email) :
+                        sanitize_db_string($email, 128) :
                         $this->email
                 ),
                 "full_name" => (
                     isset($full_name) ?
-                        strip_tags($full_name) :
+                        sanitize_db_string($full_name, 250) :
                         $this->full_name
                 ),
                 "website" => (
                     isset($website) ?
-                        strip_tags($website) :
+                        sanitize_db_string($website, 128) :
                         $this->website
                 ),
                 "group_id" => oneof(
