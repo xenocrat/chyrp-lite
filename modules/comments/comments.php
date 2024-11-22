@@ -174,7 +174,7 @@
                     __("Message can't be blank.", "comments")
                 );
 
-            if (empty($_POST['author']) or derezz($_POST['author']))
+            if (empty($_POST['author']))
                 return array(
                     false,
                     __("Author can't be blank.", "comments")
@@ -281,7 +281,7 @@
                     __("Message can't be blank.", "comments")
                 );
 
-            if (empty($_POST['author']) or derezz($_POST['author']))
+            if (empty($_POST['author']))
                 return array(
                     false,
                     __("Author can't be blank.", "comments")
