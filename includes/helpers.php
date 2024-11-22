@@ -908,30 +908,6 @@
     }
 
     /**
-     * Function: derezz
-     * Strips tags and junk from the supplied string and tests it for emptiness.
-     *
-     * Parameters:
-     *     &$string - The string, supplied by reference.
-     *
-     * Returns:
-     *     Whether or not the stripped string is empty.
-     *
-     * Notes:
-     *     Useful for data that will be stripped later on by its model
-     *     but which needs to be tested for uniqueness/emptiness first.
-     * 
-     * See Also:
-     *     <Group::add> <User::add>
-     */
-    function derezz(
-        &$string
-    ): bool {
-        $string = str_replace("\x00..\x1f", "", strip_tags($string));
-        return ($string == "");
-    }
-
-    /**
      * Function: token
      * Salt and hash a unique token using the supplied data.
      *
@@ -1887,6 +1863,30 @@
             $clean = mb_substr($clean, 0, $truncate, "UTF-8");
 
         return $clean;
+    }
+
+    /**
+     * Function: sanitize_db_string
+     * Purifies and trims a string for a database column.
+     *
+     * Parameters:
+     *     $string - The string.
+     *     $length - The length limit in bytes (optional).
+     *
+     * Returns:
+     *     A purified and trimmed version of the string.
+     * 
+     * See Also:
+     *     <Post::add> <Page::add> <Group::add> <User::add>
+     */
+    function sanitize_db_string(
+        $string,
+        $length = null
+    ): string {
+        $string = str_replace("\x00..\x1f", "", $string);
+        $string = strip_tags($string);
+        $string = mb_strcut($string, 0, $length, "UTF-8");
+        return $string;
     }
 
     /**
