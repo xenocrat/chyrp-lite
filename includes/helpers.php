@@ -1554,7 +1554,7 @@
         $ellipsis = null,
         $exact = false
     ): string {
-        if (mb_strlen($text, $encoding) <= $length)
+        if (mb_strlen($text, "UTF-8") <= $length)
             return $text;
 
         if (!isset($ellipsis))
