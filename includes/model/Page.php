@@ -129,6 +129,9 @@
             $sql = SQL::current();
             $trigger = Trigger::current();
 
+            $clean = sanitize_db_string($clean, 128);
+            $url = sanitize_db_string($url, 128);
+
             $new_values = array(
                 "title"        => $title,
                 "body"         => $body,
@@ -219,6 +222,9 @@
 
             $sql = SQL::current();
             $trigger = Trigger::current();
+
+            $clean = sanitize_db_string($clean, 128);
+            $url = sanitize_db_string($url, 128);
 
             $new_values = array(
                 "title"        => $title,
@@ -324,7 +330,14 @@
                 )
             ) {
                 $count++;
-                $unique = substr($url, 0, (127 - strlen($count)))."-".$count;
+                $unique = mb_strcut(
+                    $url,
+                    0,
+                    (127 - strlen($count)),
+                    "UTF-8"
+                ).
+                "-".
+                $count;
             }
 
             return $unique;
