@@ -275,6 +275,9 @@
             $config = Config::current();
             $trigger = Trigger::current();
 
+            $clean = sanitize_db_string($clean, 128);
+            $url = sanitize_db_string($url, 128);
+
             $new_values = array(
                 "feather"    => $feather,
                 "user_id"    => $user_id,
@@ -381,6 +384,9 @@
             $sql = SQL::current();
             $config = Config::current();
             $trigger = Trigger::current();
+
+            $clean = sanitize_db_string($clean, 128);
+            $url = sanitize_db_string($url, 128);
 
             $new_values = array(
                 "user_id"    => $user_id,
@@ -678,7 +684,14 @@
                 )
             ) {
                 $count++;
-                $unique = substr($url, 0, (127 - strlen($count)))."-".$count;
+                $unique = mb_strcut(
+                    $url,
+                    0,
+                    (127 - strlen($count)),
+                    "UTF-8"
+                ).
+                "-".
+                $count;
             }
 
             return $unique;
