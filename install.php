@@ -734,6 +734,11 @@
         if (empty($_POST['login']))
             alert(__("Please enter a username for your account."));
 
+        $login = sanitize_db_string($_POST['login'], 64);
+
+        if (empty($login))
+            alert(__("Invalid username."));
+
         if (empty($_POST['password1']) or empty($_POST['password2']))
             alert(__("Passwords cannot be blank."));
         elseif ($_POST['password1'] != $_POST['password2'])
@@ -998,15 +1003,15 @@
             if (
                 !$sql->count(
                     tables:"users",
-                    conds:array("login" => $_POST['login'])
+                    conds:array("login" => $login)
                 )
             ) {
                 $sql->insert(
                     table:"users",
                     data:array(
-                        "login" => $_POST['login'],
+                        "login" => $login,
                         "password" => User::hash_password($_POST['password1']),
-                        "email" => $_POST['email'],
+                        "email" => sanitize_db_string($_POST['email'], 128),
                         "group_id" => $group_id["Admin"],
                         "approved" => true,
                         "joined_at" => datetime()
