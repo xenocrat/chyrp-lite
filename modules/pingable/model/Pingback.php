@@ -68,7 +68,7 @@
                 data:array(
                     "post_id"    => $post_id,
                     "source"     => $source,
-                    "title"      => strip_tags($title),
+                    "title"      => sanitize_db_string($title),
                     "created_at" => oneof($created_at, datetime())
                 )
             );
@@ -94,7 +94,7 @@
             if ($this->no_results)
                 return false;
 
-            $title = strip_tags($title);
+            $title = sanitize_db_string($title);
 
             SQL::current()->update(
                 table:"pingbacks",
