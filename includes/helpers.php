@@ -1544,7 +1544,6 @@
      *     $length - Truncate the string to this number of characters.
      *     $ellipsis - A string to place at the truncation point.
      *     $exact - Split words to return the exact length requested?
-     *     $encoding - The character encoding of the string and ellipsis.
      *
      * Returns:
      *     A truncated string with ellipsis appended.
@@ -1553,25 +1552,24 @@
         $text,
         $length = 100,
         $ellipsis = null,
-        $exact = false,
-        $encoding = "UTF-8"
+        $exact = false
     ): string {
         if (mb_strlen($text, $encoding) <= $length)
             return $text;
 
         if (!isset($ellipsis))
-            $ellipsis = mb_chr(0x2026, $encoding);
+            $ellipsis = mb_chr(0x2026, "UTF-8");
 
-        $breakpoint = $length - mb_strlen($ellipsis, $encoding);
-        $truncation = mb_substr($text, 0, $breakpoint, $encoding);
-        $remainder  = mb_substr($text, $breakpoint, null, $encoding);
+        $breakpoint = $length - mb_strlen($ellipsis, "UTF-8");
+        $truncation = mb_substr($text, 0, $breakpoint, "UTF-8");
 
-        if (!$exact and !preg_match("/^\s/", $remainder))
+        if (!$exact) {
             $truncation = preg_replace(
-                "/(.+)\s.*/s",
+                "/(.+)\b/su",
                 "$1",
                 $truncation
             );
+        }
 
         return $truncation.$ellipsis;
     }
@@ -1745,7 +1743,7 @@
      *     $string - The string to sanitize - must be ASCII or UTF-8!
      *     $lowercase - Force the string to lowercase?
      *     $strict - Remove all characters except "-" and alphanumerics?
-     *     $truncate - Number of characters to truncate to (0 to disable).
+     *     $truncate - Number of bytes to truncate to (0 to disable).
      *
      * Returns:
      *     A sanitized version of the string.
@@ -1860,7 +1858,7 @@
             $clean = mb_strtolower($clean, "UTF-8");
 
         if ($truncate)
-            $clean = mb_substr($clean, 0, $truncate, "UTF-8");
+            $clean = mb_strcut($clean, 0, $truncate, "UTF-8");
 
         return $clean;
     }
