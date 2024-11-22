@@ -1565,7 +1565,7 @@
 
         if (!$exact) {
             $truncation = preg_replace(
-                "/(.+)\b/su",
+                "/^(.+)\b/su",
                 "$1",
                 $truncation
             );
