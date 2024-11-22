@@ -201,9 +201,9 @@
                 table:"comments",
                 data:array(
                     "body"         => $body,
-                    "author"       => strip_tags($author),
-                    "author_url"   => strip_tags($author_url),
-                    "author_email" => strip_tags($author_email),
+                    "author"       => sanitize_db_string($author, 250),
+                    "author_url"   => sanitize_db_string($author_url, 2048),
+                    "author_email" => sanitize_db_string($author_email, 128),
                     "author_ip"    => $ip,
                     "author_agent" => $agent,
                     "status"       => $status,
@@ -324,9 +324,9 @@
 
             $new_values = array(
                 "body"         => $body,
-                "author"       => strip_tags($author),
-                "author_url"   => strip_tags($author_url),
-                "author_email" => strip_tags($author_email),
+                "author"       => sanitize_db_string($author, 250),
+                "author_url"   => sanitize_db_string($author_url, 2048),
+                "author_email" => sanitize_db_string($author_email, 128),
                 "status"       => fallback($status, $this->status),
                 "notify"       => fallback($notify, $this->notify),
                 "created_at"   => fallback($created_at, $this->created_at),
