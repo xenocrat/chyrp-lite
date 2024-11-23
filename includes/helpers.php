@@ -1832,14 +1832,14 @@
             # E.g. echo implode(",", unpack("C*", "€"));
         );
 
-        # Strip tags, remove punctuation and HTML entities.
-        $clean = str_replace($strip, "", $string);
+        # Strip tags.
+        $clean = strip_tags($string);
+
+        # Remove punctuation and HTML entities.
+        $clean = str_replace($strip, "", $clean);
 
         # Remove unprintable control characters.
         $clean = preg_replace("/[\x00-\x1f]/", "", $clean);
-
-        # Strip tags.
-        $clean = strip_tags($clean);
 
         # Trim.
         $clean = trim($clean);
