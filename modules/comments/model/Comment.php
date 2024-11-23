@@ -583,14 +583,15 @@
             if (empty($this->author))
                 return __("Anon", "comments");
 
-            if (is_url($this->author_url))
-                return '<a href="'.
-                       fix($this->author_url, true).
-                       '">'.
-                       $this->author.
-                       '</a>';
-            else
-                return $this->author;
+            return is_url($this->author_url) ?
+                '<a href="'.
+                fix($this->author_url, true).
+                '">'.
+                $this->author.
+                '</a>'
+                :
+                $this->author
+                ;
         }
 
         /**
