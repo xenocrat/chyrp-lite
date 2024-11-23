@@ -93,7 +93,7 @@
         public function update(
             $name,
             $clean = null,
-            $show_on_home = true
+            $show_on_home = null
         ): self|false {
             if ($this->no_results)
                 return false;
