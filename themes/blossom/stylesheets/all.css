@@ -53,6 +53,10 @@ html {
     color: #1f1f23;
     background-color: #ffdd00;
 }
+*::target-text {
+    color: #ffffff;
+    background-color: #1f1f23;
+}
 body {
     font-family: "Open Sans webfont", sans-serif;
     font-size: 1rem;

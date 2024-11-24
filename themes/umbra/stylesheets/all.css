@@ -53,6 +53,10 @@ html {
     color: #202021;
     background-color: lightgreen;
 }
+*::target-text {
+    color: #202021;
+    background-color: #ffffff;
+}
 body {
     font-family: "Open Sans webfont", sans-serif;
     font-size: 1rem;
