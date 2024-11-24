@@ -70,7 +70,7 @@ You can install Chyrp Lite in three steps:
 2. Download the [latest release](https://github.com/xenocrat/chyrp-lite/releases), unzip, and upload to your web server.
 3. Run the installation process by visiting [install.php](install.php) in your web browser.
 
-If you prefer [Docker](https://www.docker.com/), you can set it up in four steps:
+If you prefer [Docker](https://www.docker.com/), you can install in four steps:
 
 1. Download the [latest release](https://github.com/xenocrat/chyrp-lite/releases) and unzip it.
 2. Read through `docker-compose.yaml` and modify if needed.
