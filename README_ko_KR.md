@@ -118,6 +118,6 @@ Chyrp Lite는 다음 사람들이 만들었습니다.
 
 ## 라이선스
 
-Chyrp Lite는 저작권 2008-2024 Alex Suraci, Arian Xhezairi, Daniel Pimley 및 기타 기여자에게
+Chyrp Lite는 저작권 2008-2025 Alex Suraci, Arian Xhezairi, Daniel Pimley 및 기타 기여자에게
 으며 BSD 라이선스 에 따라 배포됩니다 . Chyrp Lite와 함께 배포되는 모든 소프트웨어 패키지의
 전체 라이센스 텍스트는 라이센스 디렉토리를 참조하십시오.

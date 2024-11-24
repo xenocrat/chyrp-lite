@@ -1,6 +1,6 @@
 ## BSD 3-Clause License
 
-Copyright 2008-2024 Alex Suraci, Arian Xhezairi, Daniel Pimley, and others.
+Copyright 2008-2025 Alex Suraci, Arian Xhezairi, Daniel Pimley, and others.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
