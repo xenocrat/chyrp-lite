@@ -333,7 +333,7 @@
 
     /**
      * Function: twig_function_slug_pattern
-     * Returns a HTML @pattern@ attribute if strict slugs are enabled.
+     * Returns a HTML @pattern@ attribute according to SLUG_STRICT constant.
      */
     function twig_function_slug_pattern(
     ): string {
