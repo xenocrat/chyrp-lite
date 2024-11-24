@@ -481,7 +481,7 @@
     ): string {
         $code = str_replace("_", "-", $code);
         $tags = explode("-", $code);
-        return ($tags === false) ? "en" : $tags[0] ;
+        return $tags[0];
     }
 
     /**
