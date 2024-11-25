@@ -1839,7 +1839,7 @@
         $clean = str_replace($strip, "", $clean);
 
         # Remove unprintable control characters.
-        $clean = preg_replace("/[\x00-\x1f]/", "", $clean);
+        $clean = preg_replace("/[\\x00-\\x1f]/u", "", $clean);
 
         # Trim.
         $clean = trim($clean);
@@ -1882,7 +1882,7 @@
         $string,
         $length = null
     ): string {
-        $string = preg_replace("/[\x00-\x1f]/", "", $string);
+        $string = preg_replace("/[\\x00-\\x1f]/u", "", $string);
         $string = strip_tags($string);
         $string = mb_strcut($string, 0, $length, "UTF-8");
         return $string;
