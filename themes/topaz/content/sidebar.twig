@@ -62,7 +62,7 @@
 <ul class="navigation sidebar my_pages" aria-labelledby="label_my_pages">
 {% for item in theme.pages_list() %}
 <li class="page">
-{{ "&nbsp;" | repeat((item.depth - 1) * 4) }}<a href="{{ item.url() }}">{{ item.title }}</a>
+<a href="{{ item.url() }}">{{ item.title }}</a>
 </li>
 {% endfor %}
 </ul>
