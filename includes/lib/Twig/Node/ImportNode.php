@@ -25,12 +25,9 @@ use Twig\Node\Expression\Variable\AssignTemplateVariable;
 #[YieldReady]
 class ImportNode extends Node
 {
-    /**
-     * @param bool $global
-     */
     public function __construct(AbstractExpression $expr, AbstractExpression|AssignTemplateVariable $var, int $lineno)
     {
-        if (!\is_bool(\func_num_args() > 3)) {
+        if (\func_num_args() > 3) {
             trigger_deprecation('twig/twig', '3.15', \sprintf('Passing more than 3 arguments to "%s()" is deprecated.', __METHOD__));
         }
 

@@ -14,6 +14,7 @@ namespace Twig\Extension;
 use Twig\ExpressionParser;
 use Twig\Node\Expression\AbstractExpression;
 use Twig\NodeVisitor\NodeVisitorInterface;
+use Twig\OperatorPrecedenceChange;
 use Twig\TokenParser\TokenParserInterface;
 use Twig\TwigFilter;
 use Twig\TwigFunction;

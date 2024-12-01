@@ -23,17 +23,20 @@ final class AssignTemplateVariable extends AbstractExpression
 
     public function compile(Compiler $compiler): void
     {
+        /** @var TemplateVariable $var */
+        $var = $this->nodes['var'];
+
         $compiler
             ->addDebugInfo($this)
             ->write('$macros[')
-            ->string($this->nodes['var']->getName($compiler))
+            ->string($var->getName($compiler))
             ->raw('] = ')
         ;
 
         if ($this->getAttribute('global')) {
             $compiler
                 ->raw('$this->macros[')
-                ->string($this->nodes['var']->getName($compiler))
+                ->string($var->getName($compiler))
                 ->raw('] = ')
             ;
         }

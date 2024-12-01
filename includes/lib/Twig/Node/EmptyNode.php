@@ -25,4 +25,9 @@ final class EmptyNode extends Node
     {
         parent::__construct([], [], $lineno);
     }
+
+    public function setNode(string $name, Node $node): void
+    {
+        throw new \LogicException('EmptyNode cannot have children.');
+    }
 }

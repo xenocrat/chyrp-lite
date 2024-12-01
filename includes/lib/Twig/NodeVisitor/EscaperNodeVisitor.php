@@ -16,12 +16,10 @@ use Twig\Extension\EscaperExtension;
 use Twig\Node\AutoEscapeNode;
 use Twig\Node\BlockNode;
 use Twig\Node\BlockReferenceNode;
-use Twig\Node\DoNode;
 use Twig\Node\Expression\AbstractExpression;
 use Twig\Node\Expression\ConditionalExpression;
 use Twig\Node\Expression\ConstantExpression;
 use Twig\Node\Expression\FilterExpression;
-use Twig\Node\Expression\InlinePrint;
 use Twig\Node\ImportNode;
 use Twig\Node\ModuleNode;
 use Twig\Node\Node;
@@ -77,11 +75,13 @@ final class EscaperNodeVisitor implements NodeVisitorInterface
             return $this->preEscapeFilterNode($node, $env);
         } elseif ($node instanceof PrintNode && false !== $type = $this->needEscaping()) {
             $expression = $node->getNode('expr');
-            if ($expression instanceof ConditionalExpression && $this->shouldUnwrapConditional($expression, $env, $type)) {
-                return new DoNode($this->unwrapConditional($expression, $env, $type), $expression->getTemplateLine());
+            if ($expression instanceof ConditionalExpression) {
+                $this->escapeConditional($expression, $env, $type);
+            } else {
+                $node->setNode('expr', $this->escapeExpression($expression, $env, $type));
             }
 
-            return $this->escapePrintNode($node, $env, $type);
+            return $node;
         }
 
         if ($node instanceof AutoEscapeNode || $node instanceof BlockNode) {
@@ -93,67 +93,28 @@ final class EscaperNodeVisitor implements NodeVisitorInterface
         return $node;
     }
 
-    private function shouldUnwrapConditional(ConditionalExpression $expression, Environment $env, string $type): bool
+    private function escapeConditional(ConditionalExpression $expression, Environment $env, string $type): void
     {
         /** @var AbstractExpression $expr2 */
         $expr2 = $expression->getNode('expr2');
+        if ($expr2 instanceof ConditionalExpression) {
+            $this->escapeConditional($expr2, $env, $type);
+        } else {
+            $expression->setNode('expr2', $this->escapeExpression($expr2, $env, $type));
+        }
+
         /** @var AbstractExpression $expr3 */
         $expr3 = $expression->getNode('expr3');
-
-        $expr2Safe = $this->isSafeFor($type, $expr2, $env);
-        $expr3Safe = $this->isSafeFor($type, $expr3, $env);
-
-        return $expr2Safe !== $expr3Safe;
-    }
-
-    private function unwrapConditional(ConditionalExpression $expression, Environment $env, string $type): ConditionalExpression
-    {
-        // convert "echo a ? b : c" to "a ? echo b : echo c" recursively
-        /** @var AbstractExpression $expr2 */
-        $expr2 = $expression->getNode('expr2');
-        if ($expr2 instanceof ConditionalExpression && $this->shouldUnwrapConditional($expr2, $env, $type)) {
-            $expr2 = $this->unwrapConditional($expr2, $env, $type);
+        if ($expr3 instanceof ConditionalExpression) {
+            $this->escapeConditional($expr3, $env, $type);
         } else {
-            $expr2 = $this->escapeInlinePrintNode(new InlinePrint($expr2, $expr2->getTemplateLine()), $env, $type);
+            $expression->setNode('expr3', $this->escapeExpression($expr3, $env, $type));
         }
-        /** @var AbstractExpression $expr3 */
-        $expr3 = $expression->getNode('expr3');
-        if ($expr3 instanceof ConditionalExpression && $this->shouldUnwrapConditional($expr3, $env, $type)) {
-            $expr3 = $this->unwrapConditional($expr3, $env, $type);
-        } else {
-            $expr3 = $this->escapeInlinePrintNode(new InlinePrint($expr3, $expr3->getTemplateLine()), $env, $type);
-        }
-
-        /** @var AbstractExpression $expr1 */
-        $expr1 = $expression->getNode('expr1');
-
-        return new ConditionalExpression($expr1, $expr2, $expr3, $expression->getTemplateLine());
     }
 
-    private function escapeInlinePrintNode(InlinePrint $node, Environment $env, string $type): AbstractExpression
+    private function escapeExpression(AbstractExpression $expression, Environment $env, string $type): AbstractExpression
     {
-        /** @var AbstractExpression $expression */
-        $expression = $node->getNode('node');
-
-        if ($this->isSafeFor($type, $expression, $env)) {
-            return $node;
-        }
-
-        return new InlinePrint($this->getEscaperFilter($env, $type, $expression), $node->getTemplateLine());
-    }
-
-    private function escapePrintNode(PrintNode $node, Environment $env, string $type): Node
-    {
-        /** @var AbstractExpression $expression */
-        $expression = $node->getNode('expr');
-
-        if ($this->isSafeFor($type, $expression, $env)) {
-            return $node;
-        }
-
-        $class = \get_class($node);
-
-        return new $class($this->getEscaperFilter($env, $type, $expression), $node->getTemplateLine());
+        return $this->isSafeFor($type, $expression, $env) ? $expression : $this->getEscaperFilter($env, $type, $expression);
     }
 
     private function preEscapeFilterNode(FilterExpression $filter, Environment $env): FilterExpression
@@ -185,7 +146,7 @@ final class EscaperNodeVisitor implements NodeVisitorInterface
     {
         $safe = $this->safeAnalysis->getSafe($expression);
 
-        if (null === $safe) {
+        if (!$safe) {
             if (null === $this->traverser) {
                 $this->traverser = new NodeTraverser($env, [$this->safeAnalysis]);
             }

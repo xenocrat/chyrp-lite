@@ -602,11 +602,11 @@ final class CoreExtension extends AbstractExtension
     /**
      * Rounds a number.
      *
-     * @param int|float|string|null $value     The value to round
-     * @param int|float             $precision The rounding precision
-     * @param string                $method    The method to use for rounding
+     * @param int|float|string|null   $value     The value to round
+     * @param int|float               $precision The rounding precision
+     * @param 'common'|'ceil'|'floor' $method    The method to use for rounding
      *
-     * @return int|float The rounded number
+     * @return float The rounded number
      *
      * @internal
      */

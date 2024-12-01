@@ -32,7 +32,7 @@ class TempNameExpression extends AbstractExpression
         if (null !== $name && (is_int($name) || ctype_digit($name))) {
             $name = (int) $name;
         } elseif (in_array($name, self::RESERVED_NAMES)) {
-            $name = '_'.$name.'_';
+            $name = "\u{035C}".$name;
         }
 
         parent::__construct([], ['name' => $name], $lineno);

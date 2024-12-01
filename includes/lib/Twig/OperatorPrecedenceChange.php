@@ -35,7 +35,7 @@ class OperatorPrecedenceChange
         return $this->version;
     }
 
-    public function getNewPrecedence(): string
+    public function getNewPrecedence(): int
     {
         return $this->newPrecedence;
     }

@@ -48,7 +48,7 @@ final class ExtensionSet
     private $unaryOperators;
     /** @var array<string, array{precedence: int, class?: class-string<AbstractExpression>, associativity: ExpressionParser::OPERATOR_*}> */
     private $binaryOperators;
-    /** @var array<string, mixed> */
+    /** @var array<string, mixed>|null */
     private $globals;
     private $functionCallbacks = [];
     private $filterCallbacks = [];
