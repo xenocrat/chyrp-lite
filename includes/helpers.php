@@ -1546,7 +1546,7 @@
      *     $exact - Split words to return the exact length requested?
      *
      * Returns:
-     *     A truncated string with ellipsis appended.
+     *     A truncated string, with ellipsis appended, of <length> or less.
      */
     function truncate(
         $text,
@@ -1554,24 +1554,29 @@
         $ellipsis = null,
         $exact = false
     ): string {
+        if ($length < 1)
+            return "";
+
         if (mb_strlen($text, "UTF-8") <= $length)
             return $text;
 
         if (!isset($ellipsis))
             $ellipsis = mb_chr(0x2026, "UTF-8");
 
-        $breakpoint = $length - mb_strlen($ellipsis, "UTF-8");
-        $truncation = mb_substr($text, 0, $breakpoint, "UTF-8");
+        $end = $length - mb_strlen($ellipsis, "UTF-8");
 
         if (!$exact) {
-            $truncation = preg_replace(
-                "/^(.+)\b/su",
+            $text = preg_replace(
+                "/^(.{1,$end})\b(?<=[\p{L}\p{N}]).+$/su",
                 "$1",
-                $truncation
+                $text
             );
         }
 
-        return $truncation.$ellipsis;
+        # Hard trim if exact length was requested
+        # or the approximate regex couldn't match.
+        $text = mb_substr($text, 0, $end, "UTF-8");
+        return $text.$ellipsis;
     }
 
     /**
