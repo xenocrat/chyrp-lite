@@ -1565,6 +1565,9 @@
 
         $end = $length - mb_strlen($ellipsis, "UTF-8");
 
+        if ($end < 1)
+            return "";
+
         if (!$exact) {
             $text = preg_replace(
                 "/^(.{1,$end})\b(?<=[\p{L}\p{N}]).+$/su",
