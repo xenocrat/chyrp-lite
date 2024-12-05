@@ -478,6 +478,11 @@ textarea {
 select, input {
     display: inline-block;
 }
+textarea[readonly],
+input[readonly],
+select[readonly] {
+    cursor: not-allowed;
+}
 input[type="checkbox"],
 input[type="radio"] {
     appearance: none;
@@ -618,6 +623,7 @@ input[type="password"].strong:focus {
     border: 1px solid var(--chyrp-strong-green);
     outline-color: var(--chyrp-strong-green);
 }
+textarea[readonly]:focus,
 input[readonly]:focus,
 select[readonly]:focus {
     border-color: var(--chyrp-irish-grey);
