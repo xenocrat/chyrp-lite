@@ -372,7 +372,7 @@
                 font-family: "Cousine webfont", monospace;
                 font-size: 0.85em;
                 background-color: var(--chyrp-english-grey);
-                padding: 0px 2px;
+                padding: 2px 4px 0px 4px;
                 border: 1px solid var(--chyrp-irish-grey);
                 vertical-align: bottom;
                 white-space: break-spaces;
