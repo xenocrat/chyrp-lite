@@ -72,7 +72,7 @@
 <ul class="navigation sidebar related_posts" aria-labelledby="label_related_posts">
 {% for post in theme.related_posts(post) %}
 <li>
-<a href="{{ post.url() }}">{{ post.title() | striptags | normalize | oneof(post.slug) | truncate(30) }}</a>
+<a href="{{ post.url() }}">{{ post.title() | striptags | normalize | oneof(post.slug) | truncate(25) }}</a>
 </li>
 {% endfor %}
 </ul>
@@ -81,7 +81,7 @@
 <ul class="navigation sidebar recent_posts" aria-labelledby="label_recent_posts">
 {% for post in theme.recent_posts() %}
 <li>
-<a href="{{ post.url() }}">{{ post.title() | striptags | normalize | oneof(post.slug) | truncate(30) }}</a>
+<a href="{{ post.url() }}">{{ post.title() | striptags | normalize | oneof(post.slug) | truncate(25) }}</a>
 </li>
 {% endfor %}
 </ul>
