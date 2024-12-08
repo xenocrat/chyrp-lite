@@ -1157,7 +1157,7 @@ input.toolbar.hidden::file-selector-button {
     left: 0px;
     /* Prevent other elements overlapping */
     z-index: 1;
-    background-color: rgba(239, 239, 239, 0.75);
+    backdrop-filter: blur(4px) contrast(0.8);
 }
 .iframe_foreground {
     box-sizing: border-box;    
@@ -1469,9 +1469,6 @@ input.toolbar.hidden::file-selector-button {
     div.confirmation {
         background-color: transparent;
         border-color: var(--chyrp-scottish-grey);
-    }
-    .iframe_background {
-        background-color: rgba(159, 159, 159, 0.75);
     }
     .iframe_foreground {
         background-color: var(--chyrp-english-grey);
