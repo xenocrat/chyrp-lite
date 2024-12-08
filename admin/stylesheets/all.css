@@ -1157,7 +1157,7 @@ input.toolbar.hidden::file-selector-button {
     left: 0px;
     /* Prevent other elements overlapping */
     z-index: 1;
-    backdrop-filter: blur(4px) contrast(0.8);
+    backdrop-filter: blur(4px) contrast(33%) brightness(150%);
 }
 .iframe_foreground {
     box-sizing: border-box;    
