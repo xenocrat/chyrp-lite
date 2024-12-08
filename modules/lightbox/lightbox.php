@@ -31,10 +31,11 @@
                     "pages".DIR."lightbox_settings",
                     array(
                         "lightbox_background" => array(
-                            "black"   => __("Black", "lightbox"),
-                            "grey"    => __("Gray", "lightbox"),
-                            "white"   => __("White", "lightbox"),
-                            "inherit" => __("Inherit", "lightbox")
+                            "black"       => __("Black", "lightbox"),
+                            "grey"        => __("Gray", "lightbox"),
+                            "white"       => __("White", "lightbox"),
+                            "inherit"     => __("Inherit", "lightbox"),
+                            "transparent" => __("Transparent", "lightbox")
                         )
                     )
                 );

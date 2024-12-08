@@ -22,21 +22,19 @@ var ChyrpLightbox = {
             "box-sizing": "border-box",
             "display": "block",
             "position": "fixed",
-            "top": "0px",
-            "right": "0px",
-            "bottom": "0px",
-            "left": "0px",
-            "opacity": 0,
-            "z-index": 2147483646,
+            "inset": "0px",
+            "margin": "0rem",
             "padding": "3rem",
+            "opacity": "0",
             "cursor": "wait",
+            "z-index": "2147483646",
             "background-repeat": "no-repeat",
             "background-size": "1.5rem",
             "background-position": "right 0.75rem top 0.75rem",
             "background-image": "url('" + Site.chyrp_url + "/modules/lightbox/images/close.svg')"
         },
         show: {
-            "opacity": 1,
+            "opacity": "1",
             "cursor": "pointer"
         },
         images: {
@@ -46,21 +44,26 @@ var ChyrpLightbox = {
             "padding": Math.abs("<?php esce($config->module_lightbox["spacing"]); ?>") + "px"
         },
         black: {
-            "background-color": "#000000",
+            "background-color": "black",
             "background-blend-mode": "difference"
         },
         grey: {
-            "background-color": "#7f7f7f",
-            "background-blend-mode": "luminosity"
+            "background-color": "grey",
+            "background-blend-mode": "lighten"
         },
         white: {
-            "background-color": "#ffffff",
+            "background-color": "white",
             "background-blend-mode": "difference"
         },
         inherit: {
             "background-color": "inherit",
             "background-blend-mode": "difference"
         },
+        transparent: {
+            "background-color": "transparent",
+            "background-blend-mode": "normal",
+            "backdrop-filter": "blur(8px) contrast(0.8)"
+        }
     },
     init: function(
     ) {
