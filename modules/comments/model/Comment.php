@@ -612,15 +612,12 @@
                 $this->user->group :
                 new Group($config->guest_group) ;
 
-            if (
-                $this->status != "pingback" and
-                !$group->can("code_in_comments")
-            ) {
-                $this->body = strip_tags(
-                    $this->body,
-                    $config->module_comments["allowed_comment_html"]
-                );
-            }
+            $this->body = strip_tags(
+                $this->body,
+                $group->can("code_in_comments") ?
+                    $config->module_comments["allowed_comment_html"] :
+                    null
+            );
 
             $this->body = sanitize_html($this->body);
         }
