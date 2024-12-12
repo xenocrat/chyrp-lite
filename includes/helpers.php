@@ -1912,22 +1912,22 @@
     ): string {
         # Strip invalid tags.
         $text = preg_replace(
-            "/<(([^a-z\/!]|\/(?![a-z])|!(?!--))[^>]*)>/i",
-            "&lt;$1&gt;",
+            "/<([^a-z\/!]|\/(?![a-z])|!(?!--))/i",
+            "&lt;$1",
             $text
         );
 
         # Strip style tags.
         $text = preg_replace(
-            "/<(\/?style[^>]*)>/i",
-            "&lt;$1&gt;",
+            "/<(style)(\s|>|\/>)/i",
+            "&lt;$1$2",
             $text
         );
 
         # Strip script tags.
         $text = preg_replace(
-            "/<(\/?script[^>]*)>/i",
-            "&lt;$1&gt;",
+            "/<(script)(\s|>|\/>)/i",
+            "&lt;$1$2",
             $text
         );
 
