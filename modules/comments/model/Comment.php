@@ -612,11 +612,18 @@
                 $this->user->group :
                 new Group($config->guest_group) ;
 
+            $allowed_basic_html = array("br", "p");
+
+            $allowed_extra_html = array_merge(
+                $allowed_basic_html,
+                $config->module_comments["allowed_comment_html"]
+            );
+
             $this->body = strip_tags(
                 $this->body,
                 $group->can("code_in_comments") ?
-                    $config->module_comments["allowed_comment_html"] :
-                    null
+                    $allowed_extra_html :
+                    $allowed_basic_html
             );
 
             $this->body = sanitize_html($this->body);
