@@ -20,7 +20,7 @@
 {{ "Markdown is allowed." | translate }}
 {% endif %}
 {{ "HTML tags allowed:" | translate }}
-{{ "&lt;%s&gt;" | format(site.module_comments.allowed_comment_html | join("&gt;, &lt;") | fix ) }}
+{{ "&lt;%s&gt;" | format(site.module_comments.allowed_comment_html | join("&gt; &lt;") | fix ) }}
 {% else %}
 {{ "HTML is not allowed." | translate }}
 {% endif %}
