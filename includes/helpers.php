@@ -1986,8 +1986,10 @@
                             if ($label == "reversed")
                                 $whitelist.= $attribute[0];
 
-                            if ($label == "start")
-                                $whitelist.= $attribute[0];
+                            if ($label == "start") {
+                                if (is_numeric($content))
+                                    $whitelist.= $attribute[0];
+                            }
 
                             if ($label == "type")
                                 $whitelist.= $attribute[0];
@@ -2015,6 +2017,20 @@
 
                             if ($label == "src") {
                                 if (is_url($content))
+                                    $whitelist.= $attribute[0];
+                            }
+
+                            break;
+
+                        case "td":
+                        case "th":
+                            if ($label == "colspan") {
+                                if (is_numeric($content))
+                                    $whitelist.= $attribute[0];
+                            }
+
+                            if ($label == "rowspan") {
+                                if (is_numeric($content))
                                     $whitelist.= $attribute[0];
                             }
 
