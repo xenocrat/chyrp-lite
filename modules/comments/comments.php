@@ -20,8 +20,11 @@
                         "blockquote",
                         "code",
                         "em",
+                        "li",
+                        "ol",
                         "pre",
-                        "strong"
+                        "strong",
+                        "ul"
                     ),
                     "comments_per_page" => 25,
                     "enable_reload_comments" => false,
