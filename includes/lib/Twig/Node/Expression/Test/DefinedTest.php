@@ -46,7 +46,7 @@ class DefinedTest extends TestExpression
     public function __construct(Node $node, TwigTest|string $name, ?Node $arguments, int $lineno)
     {
         if (!$node instanceof AbstractExpression) {
-            trigger_deprecation('twig/twig', '3.15', 'Not passing a "%s" instance to the "node" argument of "%s" is deprecated ("%s" given).', AbstractExpression::class, static::class, get_class($node));
+            trigger_deprecation('twig/twig', '3.15', 'Not passing a "%s" instance to the "node" argument of "%s" is deprecated ("%s" given).', AbstractExpression::class, static::class, \get_class($node));
         }
 
         if ($node instanceof NameExpression) {

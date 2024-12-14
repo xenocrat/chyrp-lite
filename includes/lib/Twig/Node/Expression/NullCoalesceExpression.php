@@ -14,6 +14,7 @@ namespace Twig\Node\Expression;
 use Twig\Compiler;
 use Twig\Node\EmptyNode;
 use Twig\Node\Expression\Binary\AndBinary;
+use Twig\Node\Expression\Binary\NullCoalesceBinary;
 use Twig\Node\Expression\Test\DefinedTest;
 use Twig\Node\Expression\Test\NullTest;
 use Twig\Node\Expression\Unary\NotUnary;
@@ -28,11 +29,13 @@ class NullCoalesceExpression extends ConditionalExpression
      */
     public function __construct(Node $left, Node $right, int $lineno)
     {
+        trigger_deprecation('twig/twig', '3.17', \sprintf('"%s" is deprecated; use "%s" instead.', __CLASS__, NullCoalesceBinary::class));
+
         if (!$left instanceof AbstractExpression) {
-            trigger_deprecation('twig/twig', '3.15', 'Not passing a "%s" instance to the "left" argument of "%s" is deprecated ("%s" given).', AbstractExpression::class, static::class, get_class($left));
+            trigger_deprecation('twig/twig', '3.15', 'Not passing a "%s" instance to the "left" argument of "%s" is deprecated ("%s" given).', AbstractExpression::class, static::class, \get_class($left));
         }
         if (!$right instanceof AbstractExpression) {
-            trigger_deprecation('twig/twig', '3.15', 'Not passing a "%s" instance to the "right" argument of "%s" is deprecated ("%s" given).', AbstractExpression::class, static::class, get_class($right));
+            trigger_deprecation('twig/twig', '3.15', 'Not passing a "%s" instance to the "right" argument of "%s" is deprecated ("%s" given).', AbstractExpression::class, static::class, \get_class($right));
         }
 
         $test = new DefinedTest(clone $left, new TwigTest('defined'), new EmptyNode(), $left->getTemplateLine());

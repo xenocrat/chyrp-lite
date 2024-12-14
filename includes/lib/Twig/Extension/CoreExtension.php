@@ -26,6 +26,7 @@ use Twig\Node\Expression\Binary\BitwiseOrBinary;
 use Twig\Node\Expression\Binary\BitwiseXorBinary;
 use Twig\Node\Expression\Binary\ConcatBinary;
 use Twig\Node\Expression\Binary\DivBinary;
+use Twig\Node\Expression\Binary\ElvisBinary;
 use Twig\Node\Expression\Binary\EndsWithBinary;
 use Twig\Node\Expression\Binary\EqualBinary;
 use Twig\Node\Expression\Binary\FloorDivBinary;
@@ -41,6 +42,7 @@ use Twig\Node\Expression\Binary\ModBinary;
 use Twig\Node\Expression\Binary\MulBinary;
 use Twig\Node\Expression\Binary\NotEqualBinary;
 use Twig\Node\Expression\Binary\NotInBinary;
+use Twig\Node\Expression\Binary\NullCoalesceBinary;
 use Twig\Node\Expression\Binary\OrBinary;
 use Twig\Node\Expression\Binary\PowerBinary;
 use Twig\Node\Expression\Binary\RangeBinary;
@@ -53,7 +55,6 @@ use Twig\Node\Expression\Filter\DefaultFilter;
 use Twig\Node\Expression\FunctionNode\EnumCasesFunction;
 use Twig\Node\Expression\FunctionNode\EnumFunction;
 use Twig\Node\Expression\GetAttrExpression;
-use Twig\Node\Expression\NullCoalesceExpression;
 use Twig\Node\Expression\ParentExpression;
 use Twig\Node\Expression\Test\ConstantTest;
 use Twig\Node\Expression\Test\DefinedTest;
@@ -320,6 +321,9 @@ final class CoreExtension extends AbstractExtension
                 '+' => ['precedence' => 500, 'class' => PosUnary::class],
             ],
             [
+                '? :' => ['precedence' => 5, 'class' => ElvisBinary::class, 'associativity' => ExpressionParser::OPERATOR_RIGHT],
+                '?:' => ['precedence' => 5, 'class' => ElvisBinary::class, 'associativity' => ExpressionParser::OPERATOR_RIGHT],
+                '??' => ['precedence' => 300, 'precedence_change' => new OperatorPrecedenceChange('twig/twig', '3.15', 5), 'class' => NullCoalesceBinary::class, 'associativity' => ExpressionParser::OPERATOR_RIGHT],
                 'or' => ['precedence' => 10, 'class' => OrBinary::class, 'associativity' => ExpressionParser::OPERATOR_LEFT],
                 'xor' => ['precedence' => 12, 'class' => XorBinary::class, 'associativity' => ExpressionParser::OPERATOR_LEFT],
                 'and' => ['precedence' => 15, 'class' => AndBinary::class, 'associativity' => ExpressionParser::OPERATOR_LEFT],
@@ -351,7 +355,6 @@ final class CoreExtension extends AbstractExtension
                 'is' => ['precedence' => 100, 'associativity' => ExpressionParser::OPERATOR_LEFT],
                 'is not' => ['precedence' => 100, 'associativity' => ExpressionParser::OPERATOR_LEFT],
                 '**' => ['precedence' => 200, 'class' => PowerBinary::class, 'associativity' => ExpressionParser::OPERATOR_RIGHT],
-                '??' => ['precedence' => 300, 'precedence_change' => new OperatorPrecedenceChange('twig/twig', '3.15', 5), 'class' => NullCoalesceExpression::class, 'associativity' => ExpressionParser::OPERATOR_RIGHT],
             ],
         ];
     }
@@ -530,8 +533,8 @@ final class CoreExtension extends AbstractExtension
      *      {# do something #}
      *    {% endif %}
      *
-     * @param \DateTimeInterface|string|int|null  $date     A date, a timestamp or null to use the current time
-     * @param \DateTimeZone|string|false|null     $timezone The target timezone, null to use the default, false to leave unchanged
+     * @param \DateTimeInterface|string|int|null $date     A date, a timestamp or null to use the current time
+     * @param \DateTimeZone|string|false|null    $timezone The target timezone, null to use the default, false to leave unchanged
      *
      * @return \DateTime|\DateTimeImmutable
      */
@@ -782,9 +785,9 @@ final class CoreExtension extends AbstractExtension
      *  {{ [1, 2, 3]|join }}
      *  {# returns 123 #}
      *
-     * @param iterable|array|string|float|int|bool|null  $value An array
-     * @param string                                     $glue  The separator
-     * @param string|null                                $and   The separator for the last pair
+     * @param iterable|array|string|float|int|bool|null $value An array
+     * @param string                                    $glue  The separator
+     * @param string|null                               $and   The separator for the last pair
      *
      * @internal
      */
@@ -1540,11 +1543,11 @@ final class CoreExtension extends AbstractExtension
     public static function enum(string $enum): \UnitEnum
     {
         if (!enum_exists($enum)) {
-            throw new RuntimeError(sprintf('"%s" is not an enum.', $enum));
+            throw new RuntimeError(\sprintf('"%s" is not an enum.', $enum));
         }
 
         if (!$cases = $enum::cases()) {
-            throw new RuntimeError(sprintf('"%s" is an empty enum.', $enum));
+            throw new RuntimeError(\sprintf('"%s" is an empty enum.', $enum));
         }
 
         return $cases[0];
@@ -1642,7 +1645,7 @@ final class CoreExtension extends AbstractExtension
 
         // array
         if (Template::METHOD_CALL !== $type) {
-            $arrayItem = \is_bool($item) || \is_float($item) ? (int) $item : $item = (string) $item;
+            $arrayItem = \is_bool($item) || \is_float($item) ? (int) $item : $item;
 
             if ($sandboxed && $object instanceof \ArrayAccess && !\in_array($object::class, self::ARRAY_LIKE_CLASSES, true)) {
                 try {

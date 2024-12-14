@@ -44,8 +44,16 @@ class Lexer
     public const STATE_INTERPOLATION = 4;
 
     public const REGEX_NAME = '/[a-zA-Z_\x7f-\xff][a-zA-Z0-9_\x7f-\xff]*/A';
-    public const REGEX_NUMBER = '/[0-9]+(?:\.[0-9]+)?([Ee][\+\-][0-9]+)?/A';
     public const REGEX_STRING = '/"([^#"\\\\]*(?:\\\\.[^#"\\\\]*)*)"|\'([^\'\\\\]*(?:\\\\.[^\'\\\\]*)*)\'/As';
+
+    public const REGEX_NUMBER = '/(?(DEFINE)
+        (?<LNUM>[0-9]+(_[0-9]+)*)               # Integers (with underscores)   123_456
+        (?<FRAC>\.(?&LNUM))                     # Fractional part               .456
+        (?<EXPONENT>[eE][+-]?(?&LNUM))          # Exponent part                 E+10
+        (?<DNUM>(?&LNUM)(?:(?&FRAC))?)          # Decimal number                123_456.456
+    )(?:(?&DNUM)(?:(?&EXPONENT))?)              #                               123_456.456E+10
+    /Ax';
+    
     public const REGEX_DQ_STRING_DELIM = '/"/A';
     public const REGEX_DQ_STRING_PART = '/[^#"\\\\]*(?:(?:\\\\.|#(?!\{))[^#"\\\\]*)*/As';
     public const REGEX_INLINE_COMMENT = '/#[^\n]*/A';
@@ -346,11 +354,7 @@ class Lexer
         }
         // numbers
         elseif (preg_match(self::REGEX_NUMBER, $this->code, $match, 0, $this->cursor)) {
-            $number = (float) $match[0];  // floats
-            if (ctype_digit($match[0]) && $number <= \PHP_INT_MAX) {
-                $number = (int) $match[0]; // integers lower than the maximum
-            }
-            $this->pushToken(Token::NUMBER_TYPE, $number);
+            $this->pushToken(Token::NUMBER_TYPE, 0 + str_replace('_', '', $match[0]));
             $this->moveCursor($match[0]);
         }
         // punctuation

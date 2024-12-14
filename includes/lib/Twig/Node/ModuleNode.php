@@ -244,9 +244,9 @@ final class ModuleNode extends Node
                         ->string($key)
                         ->raw(\sprintf(']; unset($_trait_%s_blocks[', $i))
                         ->string($key)
-                        ->raw("]); \$this->traitAliases[")
+                        ->raw(']); $this->traitAliases[')
                         ->subcompile($value)
-                        ->raw("] = ")
+                        ->raw('] = ')
                         ->string($key)
                         ->raw(";\n\n")
                     ;
