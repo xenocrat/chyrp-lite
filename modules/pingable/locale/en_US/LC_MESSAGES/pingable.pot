@@ -33,8 +33,8 @@ msgid "Manage Webmentions"
 msgstr ""
 
 #: modules/pingable/admin/pages/manage_pingbacks.twig:18
-#: modules/pingable/pingable.php:245
-#: modules/pingable/pingable.php:269
+#: modules/pingable/pingable.php:265
+#: modules/pingable/pingable.php:292
 msgid "Webmentions"
 msgstr ""
 
@@ -62,69 +62,69 @@ msgstr ""
 msgid "Do you want to remove webmentions from the database?"
 msgstr ""
 
-#: modules/pingable/pingable.php:25
+#: modules/pingable/pingable.php:30
 msgid "Edit Webmentions"
 msgstr ""
 
-#: modules/pingable/pingable.php:26
+#: modules/pingable/pingable.php:31
 msgid "Delete Webmentions"
 msgstr ""
 
-#: modules/pingable/pingable.php:42
+#: modules/pingable/pingable.php:51
 msgid "A webmention from your URL is already registered."
 msgstr ""
 
-#: modules/pingable/pingable.php:49
+#: modules/pingable/pingable.php:58
 msgid "Your URL is too long to be stored in our database."
 msgstr ""
 
-#: modules/pingable/pingable.php:64
+#: modules/pingable/pingable.php:75
 msgid "An ID is required to edit a webmention."
 msgstr ""
 
-#: modules/pingable/pingable.php:73
-#: modules/pingable/pingable.php:114
-#: modules/pingable/pingable.php:144
-#: modules/pingable/pingable.php:181
+#: modules/pingable/pingable.php:84
+#: modules/pingable/pingable.php:127
+#: modules/pingable/pingable.php:159
+#: modules/pingable/pingable.php:197
 msgid "Webmention not found."
 msgstr ""
 
-#: modules/pingable/pingable.php:79
-#: modules/pingable/pingable.php:120
+#: modules/pingable/pingable.php:90
+#: modules/pingable/pingable.php:133
 msgid "You do not have sufficient privileges to edit this webmention."
 msgstr ""
 
-#: modules/pingable/pingable.php:98
+#: modules/pingable/pingable.php:111
 msgid "An ID is required to update a webmention."
 msgstr ""
 
-#: modules/pingable/pingable.php:104
+#: modules/pingable/pingable.php:117
 msgid "No Title Specified"
 msgstr ""
 
-#: modules/pingable/pingable.php:105
+#: modules/pingable/pingable.php:118
 msgid "A title is required to update a webmention."
 msgstr ""
 
-#: modules/pingable/pingable.php:126
+#: modules/pingable/pingable.php:139
 msgid "Webmention updated."
 msgstr ""
 
-#: modules/pingable/pingable.php:135
-#: modules/pingable/pingable.php:169
+#: modules/pingable/pingable.php:150
+#: modules/pingable/pingable.php:185
 msgid "An ID is required to delete a webmention."
 msgstr ""
 
-#: modules/pingable/pingable.php:150
-#: modules/pingable/pingable.php:187
+#: modules/pingable/pingable.php:165
+#: modules/pingable/pingable.php:203
 msgid "You do not have sufficient privileges to delete this webmention."
 msgstr ""
 
-#: modules/pingable/pingable.php:193
+#: modules/pingable/pingable.php:209
 msgid "Webmention deleted."
 msgstr ""
 
-#: modules/pingable/pingable.php:202
+#: modules/pingable/pingable.php:220
 msgid "You do not have sufficient privileges to manage webmentions."
 msgstr ""
 

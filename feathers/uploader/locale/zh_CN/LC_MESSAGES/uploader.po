@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: feathers/uploader/admin/help/uploader_source.twig:3
@@ -42,10 +42,10 @@ msgstr "文件"
 msgid "Caption"
 msgstr "说明"
 
-#: feathers/uploader/uploader.php:77
+#: feathers/uploader/uploader.php:82
 msgid "You did not select any files to upload."
 msgstr "您没有选择任何文件上传。"
 
-#: feathers/uploader/uploader.php:216
+#: feathers/uploader/uploader.php:240
 msgid "Source"
 msgstr "来源"

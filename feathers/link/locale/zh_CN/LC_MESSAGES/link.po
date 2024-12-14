@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: feathers/link/info.php:3
@@ -33,10 +33,10 @@ msgstr "URL"
 msgid "Description"
 msgstr "描述"
 
-#: feathers/link/link.php:43 feathers/link/link.php:82
+#: feathers/link/link.php:44 feathers/link/link.php:85
 msgid "URL can't be empty."
 msgstr "URL不能为空。"
 
-#: feathers/link/link.php:50 feathers/link/link.php:89
+#: feathers/link/link.php:51 feathers/link/link.php:92
 msgid "Invalid URL."
 msgstr "无效的URL。"

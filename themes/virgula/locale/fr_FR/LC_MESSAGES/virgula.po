@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/virgula/content/comment.twig:5
@@ -31,22 +31,22 @@ msgstr "Lien permanent vers &#8220;%s&#8221;"
 #: themes/virgula/content/post.twig:8
 #, php-format
 msgid "Drafted on %s."
-msgstr ""
+msgstr "Rédigé le %s."
 
 #: themes/virgula/content/post.twig:10
 #, php-format
 msgid "Scheduled for %s."
-msgstr ""
+msgstr "Prévu pour %s."
 
 #: themes/virgula/content/post.twig:12
 #, php-format
 msgid "Pinned on %s."
-msgstr ""
+msgstr "Épinglé sur %s."
 
 #: themes/virgula/content/post.twig:14
 #, php-format
 msgid "Posted on %s."
-msgstr ""
+msgstr "Publié le %s."
 
 #: themes/virgula/content/post.twig:19 themes/virgula/pages/view.twig:12
 msgid "[Untitled]"
@@ -55,12 +55,12 @@ msgstr "[Sans titre]"
 #: themes/virgula/content/post.twig:21
 #, php-format
 msgid "Filed in %s."
-msgstr ""
+msgstr "Déposé en %s."
 
 #: themes/virgula/content/post.twig:26
 #, php-format
 msgid "Tagged with %s."
-msgstr ""
+msgstr "Marqué avec %s."
 
 #: themes/virgula/feathers/audio.twig:10 themes/virgula/feathers/link.twig:7
 #: themes/virgula/feathers/photo.twig:13 themes/virgula/feathers/quote.twig:9
@@ -144,15 +144,19 @@ msgstr "Votre courriel"
 msgid "Your website"
 msgstr "Votre site"
 
-#: themes/virgula/forms/comment/new.twig:11
+#: themes/virgula/forms/comment/new.twig:9
+msgid "Remember me"
+msgstr "Se souvenir de moi"
+
+#: themes/virgula/forms/comment/new.twig:13
 msgid "Your comment"
 msgstr "Votre commentaire"
 
-#: themes/virgula/forms/comment/new.twig:14
+#: themes/virgula/forms/comment/new.twig:16
 msgid "Notify me when others comment"
 msgstr "Me prévenir des autres commentaires"
 
-#: themes/virgula/forms/comment/new.twig:27
+#: themes/virgula/forms/comment/new.twig:29
 msgid "Speak"
 msgstr "Parler"
 
@@ -235,11 +239,11 @@ msgstr "Réinitialiser le mot de passe"
 
 #: themes/virgula/info.php:3
 msgid "Virgula"
-msgstr ""
+msgstr "Virgula"
 
 #: themes/virgula/info.php:6
 msgid "A high-contrast theme for Chyrp Lite."
-msgstr ""
+msgstr "Un thème très contrasté pour Chyrp Lite."
 
 #: themes/virgula/layouts/default.twig:8
 #, php-format
@@ -276,7 +280,7 @@ msgstr "Rechercher ce blog"
 
 #: themes/virgula/layouts/default.twig:83
 msgid "Find"
-msgstr ""
+msgstr "Trouver"
 
 #: themes/virgula/layouts/default.twig:96
 #, php-format
@@ -291,30 +295,30 @@ msgstr "Interdit."
 msgid "Not found."
 msgstr "Non trouvé."
 
-#: themes/virgula/pages/archive.twig:7 themes/virgula/pages/archive.twig:47
+#: themes/virgula/pages/archive.twig:7 themes/virgula/pages/archive.twig:53
 #, php-format
 msgid "Archive of %s"
 msgstr "Archive de %s"
 
 #: themes/virgula/pages/archive.twig:13
 msgid "F"
-msgstr ""
+msgstr "F"
 
-#: themes/virgula/pages/archive.twig:32 themes/virgula/pages/archive.twig:55
-#: themes/virgula/pages/author.twig:12 themes/virgula/pages/category.twig:11
-#: themes/virgula/pages/drafts.twig:12 themes/virgula/pages/search.twig:49
-#: themes/virgula/pages/tag.twig:11 themes/virgula/pages/updated.twig:12
+#: themes/virgula/pages/archive.twig:34 themes/virgula/pages/archive.twig:64
+#: themes/virgula/pages/author.twig:15 themes/virgula/pages/category.twig:14
+#: themes/virgula/pages/drafts.twig:15 themes/virgula/pages/search.twig:52
+#: themes/virgula/pages/tag.twig:14 themes/virgula/pages/updated.twig:15
 msgid "Newer posts"
 msgstr "Nouveaux articles"
 
-#: themes/virgula/pages/archive.twig:37 themes/virgula/pages/archive.twig:56
-#: themes/virgula/pages/author.twig:13 themes/virgula/pages/category.twig:12
-#: themes/virgula/pages/drafts.twig:13 themes/virgula/pages/search.twig:50
-#: themes/virgula/pages/tag.twig:12 themes/virgula/pages/updated.twig:13
+#: themes/virgula/pages/archive.twig:41 themes/virgula/pages/archive.twig:69
+#: themes/virgula/pages/author.twig:20 themes/virgula/pages/category.twig:19
+#: themes/virgula/pages/drafts.twig:20 themes/virgula/pages/search.twig:57
+#: themes/virgula/pages/tag.twig:19 themes/virgula/pages/updated.twig:20
 msgid "Older posts"
 msgstr "Anciens articles"
 
-#: themes/virgula/pages/archive.twig:63
+#: themes/virgula/pages/archive.twig:79
 msgid "There aren't any posts in the timeframe you specified."
 msgstr "Il n'y a pas d'articles dans la période que vous avez mentionnée."
 
@@ -323,7 +327,7 @@ msgstr "Il n'y a pas d'articles dans la période que vous avez mentionnée."
 msgid "Posts created by &#8220;%s&#8221;"
 msgstr "Articles créés par &#8220;%s&#8221;"
 
-#: themes/virgula/pages/author.twig:17
+#: themes/virgula/pages/author.twig:28
 msgid "This user hasn't created any posts."
 msgstr "Cet utilisateur n'a pas créé d'article."
 
@@ -336,7 +340,7 @@ msgstr "Articles dans la catégorie &#8220;%s&#8221;"
 msgid "Drafts"
 msgstr "Brouillons"
 
-#: themes/virgula/pages/drafts.twig:17
+#: themes/virgula/pages/drafts.twig:28
 msgid "You don't have any drafts."
 msgstr "Vous n'avez pas de brouillon."
 
@@ -346,15 +350,15 @@ msgstr "Rien ici encore !"
 
 #: themes/virgula/pages/index.twig:9
 msgid "Posts"
-msgstr ""
+msgstr "Articles"
 
 #: themes/virgula/pages/index.twig:21
 msgid "Pages"
 msgstr "Pages"
 
-#: themes/virgula/pages/index.twig:42
+#: themes/virgula/pages/index.twig:44
 msgid "More posts&hellip;"
-msgstr ""
+msgstr "Plus d’articles&hellip;"
 
 #: themes/virgula/pages/page.twig:11 themes/virgula/pages/search.twig:20
 #, php-format
@@ -392,7 +396,7 @@ msgstr "Étiquettes"
 msgid "Updated posts"
 msgstr "Articles mis à jour"
 
-#: themes/virgula/pages/updated.twig:17
+#: themes/virgula/pages/updated.twig:28
 msgid "There aren't any updated posts."
 msgstr "Il n'y a pas d'article mis à jour."
 

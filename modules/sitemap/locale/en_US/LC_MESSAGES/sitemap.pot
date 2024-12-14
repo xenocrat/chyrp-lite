@@ -37,35 +37,35 @@ msgstr ""
 msgid "Creates a <em>sitemap.xml</em> file on your server to help search engines index your blog."
 msgstr ""
 
-#: modules/sitemap/sitemap.php:36
+#: modules/sitemap/sitemap.php:39
 msgid "Sitemap"
 msgstr ""
 
-#: modules/sitemap/sitemap.php:54
+#: modules/sitemap/sitemap.php:59
 msgid "Hourly"
 msgstr ""
 
-#: modules/sitemap/sitemap.php:55
+#: modules/sitemap/sitemap.php:60
 msgid "Daily"
 msgstr ""
 
-#: modules/sitemap/sitemap.php:56
+#: modules/sitemap/sitemap.php:61
 msgid "Weekly"
 msgstr ""
 
-#: modules/sitemap/sitemap.php:57
+#: modules/sitemap/sitemap.php:62
 msgid "Monthly"
 msgstr ""
 
-#: modules/sitemap/sitemap.php:58
+#: modules/sitemap/sitemap.php:63
 msgid "Yearly"
 msgstr ""
 
-#: modules/sitemap/sitemap.php:59
+#: modules/sitemap/sitemap.php:64
 msgid "Never"
 msgstr ""
 
-#: modules/sitemap/sitemap.php:83
+#: modules/sitemap/sitemap.php:88
 msgid "Could not determine the absolute path to the Sitemap."
 msgstr ""
 

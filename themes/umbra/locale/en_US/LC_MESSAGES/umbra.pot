@@ -44,7 +44,7 @@ msgstr ""
 msgid "Pinned"
 msgstr ""
 
-#: themes/umbra/content/post.twig:27
+#: themes/umbra/content/post.twig:28
 #: themes/umbra/pages/view.twig:10
 msgid "[Untitled]"
 msgstr ""
@@ -140,27 +140,31 @@ msgstr ""
 msgid "Your website"
 msgstr ""
 
-#: themes/umbra/forms/comment/new.twig:12
+#: themes/umbra/forms/comment/new.twig:11
+msgid "Remember me"
+msgstr ""
+
+#: themes/umbra/forms/comment/new.twig:14
 msgid "Your comment"
 msgstr ""
 
-#: themes/umbra/forms/comment/new.twig:16
+#: themes/umbra/forms/comment/new.twig:20
 msgid "Markdown is allowed."
 msgstr ""
 
-#: themes/umbra/forms/comment/new.twig:18
+#: themes/umbra/forms/comment/new.twig:22
 msgid "HTML tags allowed:"
 msgstr ""
 
-#: themes/umbra/forms/comment/new.twig:20
+#: themes/umbra/forms/comment/new.twig:25
 msgid "HTML is not allowed."
 msgstr ""
 
-#: themes/umbra/forms/comment/new.twig:24
+#: themes/umbra/forms/comment/new.twig:29
 msgid "Notify me when others comment"
 msgstr ""
 
-#: themes/umbra/forms/comment/new.twig:37
+#: themes/umbra/forms/comment/new.twig:42
 msgid "Speak"
 msgstr ""
 

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/likes/admin/pages/like_settings.twig:3
@@ -38,7 +38,7 @@ msgstr "显示索引页"
 msgid "Enables like functionality on blog index pages."
 msgstr "在博客索引页面上启用喜欢功能。"
 
-#: modules/likes/info.php:3 modules/likes/likes.php:98
+#: modules/likes/info.php:3 modules/likes/likes.php:113
 msgid "Likes"
 msgstr ""
 
@@ -50,66 +50,66 @@ msgstr "允许用户&#8220;喜欢&#8221; 一篇帖子。"
 msgid "Please remember to update the permission settings for each group."
 msgstr "请记住更新每个组的权限设置。"
 
-#: modules/likes/likes.php:49
+#: modules/likes/likes.php:60
 msgid "Like Posts"
 msgstr "喜欢帖子"
 
-#: modules/likes/likes.php:50
+#: modules/likes/likes.php:61
 msgid "Unlike Posts"
 msgstr "不喜欢帖子"
 
-#: modules/likes/likes.php:120
+#: modules/likes/likes.php:137
 msgid "Most liked posts"
 msgstr "最喜欢的帖子"
 
-#: modules/likes/likes.php:128 modules/likes/likes.php:186
+#: modules/likes/likes.php:146 modules/likes/likes.php:206
 msgid "An ID is required to like a post."
 msgstr "喜欢一个帖子需要ID。"
 
-#: modules/likes/likes.php:135 modules/likes/likes.php:193
+#: modules/likes/likes.php:153 modules/likes/likes.php:213
 msgid "You do not have sufficient privileges to like posts."
 msgstr "你没有权限喜欢这篇帖子。"
 
-#: modules/likes/likes.php:148
+#: modules/likes/likes.php:166
 msgid "Post liked."
 msgstr "帖子已喜欢。"
 
-#: modules/likes/likes.php:157 modules/likes/likes.php:224
+#: modules/likes/likes.php:176 modules/likes/likes.php:245
 msgid "An ID is required to unlike a post."
 msgstr "不喜欢一个帖子需要ID。"
 
-#: modules/likes/likes.php:164 modules/likes/likes.php:231
+#: modules/likes/likes.php:183 modules/likes/likes.php:252
 msgid "You do not have sufficient privileges to unlike posts."
 msgstr "你没有权限不喜欢这篇帖子。"
 
-#: modules/likes/likes.php:177
+#: modules/likes/likes.php:196
 msgid "Post unliked."
 msgstr "帖子已不喜欢。"
 
-#: modules/likes/likes.php:211 modules/likes/likes.php:424
+#: modules/likes/likes.php:231 modules/likes/likes.php:444
 msgid "You like this."
 msgstr "你不喜欢这个。"
 
-#: modules/likes/likes.php:213 modules/likes/likes.php:426
+#: modules/likes/likes.php:233 modules/likes/likes.php:441
 #, php-format
 msgid "You and %d person like this."
 msgid_plural "You and %d people like this."
 msgstr[0] "你和 %d 个人一样喜欢这篇。"
 
-#: modules/likes/likes.php:246 modules/likes/likes.php:381
+#: modules/likes/likes.php:267 modules/likes/likes.php:413
 msgid "No likes yet."
 msgstr "过去没有人喜欢。"
 
-#: modules/likes/likes.php:248 modules/likes/likes.php:383
+#: modules/likes/likes.php:269 modules/likes/likes.php:410
 #, php-format
 msgid "%d person likes this."
 msgid_plural "%d people like this."
 msgstr[0] "%d 个人喜欢这篇。"
 
-#: modules/likes/likes.php:366 modules/likes/likes.php:409
+#: modules/likes/likes.php:395 modules/likes/likes.php:426
 msgid "Like!"
 msgstr "喜欢！"
 
-#: modules/likes/likes.php:370 modules/likes/likes.php:413
+#: modules/likes/likes.php:399 modules/likes/likes.php:430
 msgid "Unlike!"
 msgstr "不喜欢！"

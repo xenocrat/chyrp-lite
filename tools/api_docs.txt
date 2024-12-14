@@ -1569,6 +1569,11 @@ Function: admin_route_settings
 Route Settings page.
 
 
+Function: admin_download_rewrites
+---------------------------------
+Downloads the files required for URL rewrite support.
+
+
 Function: admin_login
 ---------------------
 Mask for MainController->login().
@@ -1915,35 +1920,35 @@ Returns an absolute URL for the current request.
 
 Function: htaccess_conf
 -----------------------
-Creates the .htaccess file for Chyrp Lite or overwrites an existing file.
+Creates the Apache rewrites for Chyrp Lite.
 
 Parameters:
-    $url_path - The URL path to MAIN_DIR for the RewriteBase directive.
+    $url_path - The URL path to MAIN_DIR.
 
 Returns:
-    True if no action was needed, bytes written on success, false on failure.
+    The rewrite rules, or false on failure.
 
 
 Function: caddyfile_conf
 ------------------------
-Creates the caddyfile for Chyrp Lite or overwrites an existing file.
+Creates the Caddy rewrites for Chyrp Lite.
 
 Parameters:
-    $url_path - The URL path to MAIN_DIR for the rewrite directive.
+    $url_path - The URL path to MAIN_DIR.
 
 Returns:
-    True if no action was needed, bytes written on success, false on failure.
+    The rewrite rules, or false on failure.
 
 
 Function: nginx_conf
 --------------------
-Creates the nginx configuration for Chyrp Lite or overwrites an existing file.
+Creates the nginx rewrites for Chyrp Lite.
 
 Parameters:
-    $url_path - The URL path to MAIN_DIR for the location directive.
+    $url_path - The URL path to MAIN_DIR.
 
 Returns:
-    True if no action was needed, bytes written on success, false on failure.
+    The rewrite rules, or false on failure.
 
 
 Function: locales
@@ -2148,24 +2153,6 @@ Notes:
     - Arrays, objects, and resources are incomparable with other types.
 
 
-Function: derezz
-----------------
-Strips tags and junk from the supplied string and tests it for emptiness.
-
-Parameters:
-    &$string - The string, supplied by reference.
-
-Returns:
-    Whether or not the stripped string is empty.
-
-Notes:
-    Useful for data that will be stripped later on by its model
-    but which needs to be tested for uniqueness/emptiness first.
-
-See Also:
-    <Group::add> <User::add>
-
-
 Function: token
 ---------------
 Salt and hash a unique token using the supplied data.
@@ -2360,10 +2347,9 @@ Parameters:
     $length - Truncate the string to this number of characters.
     $ellipsis - A string to place at the truncation point.
     $exact - Split words to return the exact length requested?
-    $encoding - The character encoding of the string and ellipsis.
 
 Returns:
-    A truncated string with ellipsis appended.
+    A truncated string, with ellipsis appended, of <length> or less.
 
 
 Function: markdown
@@ -2430,22 +2416,37 @@ Parameters:
     $string - The string to sanitize - must be ASCII or UTF-8!
     $lowercase - Force the string to lowercase?
     $strict - Remove all characters except "-" and alphanumerics?
-    $truncate - Number of characters to truncate to (0 to disable).
+    $truncate - Number of bytes to truncate to (0 to disable).
 
 Returns:
     A sanitized version of the string.
 
 
+Function: sanitize_db_string
+----------------------------
+Purifies and trims a string for a database column.
+
+Parameters:
+    $string - The string.
+    $length - The length limit in bytes (optional).
+
+Returns:
+    A purified and trimmed version of the string.
+
+See Also:
+    <Post::add> <Page::add> <Group::add> <User::add>
+
+
 Function: sanitize_html
 -----------------------
-Sanitizes HTML to disable scripts and obnoxious attributes.
+Sanitizes HTML to disable styles, scripts, and most attributes.
 
 Parameters:
     $string - String containing HTML to sanitize.
 
 Returns:
-    A version of the string containing only valid tags
-    and whitelisted attributes essential to tag function.
+    A version of the string containing only valid HTML tags
+    and whitelisted attributes essential to tag functionality.
 
 
 Function: get_remote
@@ -2773,6 +2774,26 @@ Notes:
     booleans expanded to "true" or "false".
 
 
+Function: icon_img
+------------------
+Returns an img tag for the requested icon resource.
+
+Parameters:
+    $filename - The icon filename.
+    $alt_text - The alternative text for the image.
+    $class - The CSS class for the image.
+
+
+Function: icon_svg
+------------------
+Returns an SVG tag for the requested icon resource.
+
+Parameters:
+    $filename - The icon filename.
+    $label - The ARIA label for the SVG.
+    $class - The CSS class for the SVG.
+
+
 Function: json_set
 ------------------
 JSON encodes a value and checks for errors.
@@ -2921,7 +2942,7 @@ Handles updating a post.
 Function: title
 ---------------
 Returns the appropriate source to be treated as a "title" of a post.
-If there is no immediate solution, you may use <Post.title_from_excerpt>.
+If there is no immediate solution, you may use <Post::title_from_excerpt>.
 
 
 Function: excerpt
@@ -3232,16 +3253,6 @@ Parameters:
     $email - The email address to obfuscate.
 
 
-Function: twig_function_icon_img
---------------------------------
-Returns a URL to the requested icon resource.
-
-Parameters:
-    $filename - The icon filename.
-    $alt_text - The alternative text for the image.
-    $class - The CSS class for the link.
-
-
 Function: twig_function_copyright_notice
 ----------------------------------------
 Returns a copyright notice.
@@ -3263,7 +3274,7 @@ Parameters:
 
 Function: twig_function_slug_pattern
 ------------------------------------
-Returns a HTML @pattern@ attribute if strict slugs are enabled.
+Returns a HTML @pattern@ attribute according to SLUG_STRICT constant.
 
 
 Function: twig_function_javascripts_nonce
@@ -4134,7 +4145,7 @@ Returns:
     The password hashed using the SHA-512 algorithm.
 
 Notes:
-    <random> tries to be cryptographically secure.
+    <random> uses a cryptographically secure function.
 
 
 Function: check_password
@@ -4149,7 +4160,7 @@ Returns:
     @true@ or @false@
 
 Notes:
-    Uses <hash_equals> to mitigate timing attacks.
+    Uses <password_verify> to mitigate timing attacks.
 
 
 ==============================================

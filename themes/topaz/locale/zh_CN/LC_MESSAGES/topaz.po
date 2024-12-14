@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/topaz/content/comment.twig:4
@@ -52,30 +52,30 @@ msgstr "计划"
 msgid "Pinned"
 msgstr "固定"
 
-#: themes/topaz/content/post.twig:27 themes/topaz/content/sidebar.twig:55
+#: themes/topaz/content/post.twig:29 themes/topaz/content/sidebar.twig:55
 #: themes/topaz/pages/view.twig:14
 msgid "[Untitled]"
 msgstr "[无标题]"
 
-#: themes/topaz/content/post.twig:34
+#: themes/topaz/content/post.twig:37
 msgid "View webmentions"
 msgstr "查看引用"
 
-#: themes/topaz/content/post.twig:35
+#: themes/topaz/content/post.twig:38
 #, php-format
 msgid "%s webmention"
 msgid_plural "%s webmentions"
 msgstr[0] "%s 包括引用"
 
-#: themes/topaz/content/post.twig:40
+#: themes/topaz/content/post.twig:43
 msgid "Comments closed"
 msgstr "评论已关闭"
 
-#: themes/topaz/content/post.twig:43
+#: themes/topaz/content/post.twig:46
 msgid "View comments"
 msgstr "查看评论"
 
-#: themes/topaz/content/post.twig:44
+#: themes/topaz/content/post.twig:47
 #, php-format
 msgid "%s comment"
 msgid_plural "%s comments"
@@ -262,27 +262,31 @@ msgstr "您的邮箱"
 msgid "Your website"
 msgstr "您的站点"
 
-#: themes/topaz/forms/comment/new.twig:12
+#: themes/topaz/forms/comment/new.twig:11
+msgid "Remember me"
+msgstr "记住我"
+
+#: themes/topaz/forms/comment/new.twig:14
 msgid "Your comment"
 msgstr "您的评论"
 
-#: themes/topaz/forms/comment/new.twig:16
+#: themes/topaz/forms/comment/new.twig:20
 msgid "Markdown is allowed."
 msgstr "可以使用Markdown语法。"
 
-#: themes/topaz/forms/comment/new.twig:18
+#: themes/topaz/forms/comment/new.twig:22
 msgid "HTML tags allowed:"
 msgstr "可以使用HTML标签："
 
-#: themes/topaz/forms/comment/new.twig:20
+#: themes/topaz/forms/comment/new.twig:25
 msgid "HTML is not allowed."
 msgstr "无法使用HTML。"
 
-#: themes/topaz/forms/comment/new.twig:24
+#: themes/topaz/forms/comment/new.twig:29
 msgid "Notify me when others comment"
 msgstr "当有其他人评论的时候通知我"
 
-#: themes/topaz/forms/comment/new.twig:37
+#: themes/topaz/forms/comment/new.twig:42
 msgid "Speak"
 msgstr "说话"
 

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/lightbox/admin/pages/lightbox_settings.twig:3
@@ -38,7 +38,7 @@ msgstr "保护图像"
 msgid "Prevent visitors from saving images?"
 msgstr "防止访问者保存图像？"
 
-#: modules/lightbox/info.php:3 modules/lightbox/lightbox.php:68
+#: modules/lightbox/info.php:3 modules/lightbox/lightbox.php:75
 msgid "Lightbox"
 msgstr ""
 
@@ -46,22 +46,26 @@ msgstr ""
 msgid "A lightbox for your images."
 msgstr "为您的图片提供灯箱。"
 
-#: modules/lightbox/javascript.php:159
+#: modules/lightbox/javascript.php:168
 msgid "Stop displaying this image"
 msgstr "停止显示此图像"
 
-#: modules/lightbox/lightbox.php:30
+#: modules/lightbox/lightbox.php:34
 msgid "Black"
 msgstr "黑色"
 
-#: modules/lightbox/lightbox.php:31
+#: modules/lightbox/lightbox.php:35
 msgid "Gray"
 msgstr "灰色"
 
-#: modules/lightbox/lightbox.php:32
+#: modules/lightbox/lightbox.php:36
 msgid "White"
 msgstr "白色"
 
-#: modules/lightbox/lightbox.php:33
+#: modules/lightbox/lightbox.php:37
 msgid "Inherit"
 msgstr "继承"
+
+#: modules/lightbox/lightbox.php:38
+msgid "Transparent"
+msgstr "透明"

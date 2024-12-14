@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/read_more/admin/pages/read_more_settings.twig:3
@@ -25,7 +25,7 @@ msgstr "Pas ook toe bij Feeds"
 msgid "Default Text"
 msgstr "Standaard tekst"
 
-#: modules/read_more/info.php:3 modules/read_more/read_more.php:62
+#: modules/read_more/info.php:3 modules/read_more/read_more.php:69
 msgid "Read More"
 msgstr "Lees Meer"
 
@@ -39,6 +39,6 @@ msgstr ""
 "<code>&lt;!--more--&gt;</code> of <code>&lt;!--more eigen tekst--&gt;</code> "
 "in je Blogposts."
 
-#: modules/read_more/read_more.php:80
+#: modules/read_more/read_more.php:90
 msgid "&hellip;more"
 msgstr "&hellip;meer"

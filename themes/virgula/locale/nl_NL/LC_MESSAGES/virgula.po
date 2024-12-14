@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/virgula/content/comment.twig:5
@@ -143,15 +143,19 @@ msgstr "Je email"
 msgid "Your website"
 msgstr "Je website"
 
-#: themes/virgula/forms/comment/new.twig:11
+#: themes/virgula/forms/comment/new.twig:9
+msgid "Remember me"
+msgstr "Onthoud mij"
+
+#: themes/virgula/forms/comment/new.twig:13
 msgid "Your comment"
 msgstr "Je opmerking"
 
-#: themes/virgula/forms/comment/new.twig:14
+#: themes/virgula/forms/comment/new.twig:16
 msgid "Notify me when others comment"
 msgstr "Bericht me wanneer anderen een opmerking plaatsen"
 
-#: themes/virgula/forms/comment/new.twig:27
+#: themes/virgula/forms/comment/new.twig:29
 msgid "Speak"
 msgstr "Praat"
 
@@ -290,7 +294,7 @@ msgstr "Verboden."
 msgid "Not found."
 msgstr "Niet gevonden."
 
-#: themes/virgula/pages/archive.twig:7 themes/virgula/pages/archive.twig:47
+#: themes/virgula/pages/archive.twig:7 themes/virgula/pages/archive.twig:53
 #, php-format
 msgid "Archive of %s"
 msgstr "Archief van %s"
@@ -299,21 +303,21 @@ msgstr "Archief van %s"
 msgid "F"
 msgstr "F Y"
 
-#: themes/virgula/pages/archive.twig:32 themes/virgula/pages/archive.twig:55
-#: themes/virgula/pages/author.twig:12 themes/virgula/pages/category.twig:11
-#: themes/virgula/pages/drafts.twig:12 themes/virgula/pages/search.twig:49
-#: themes/virgula/pages/tag.twig:11 themes/virgula/pages/updated.twig:12
+#: themes/virgula/pages/archive.twig:34 themes/virgula/pages/archive.twig:64
+#: themes/virgula/pages/author.twig:15 themes/virgula/pages/category.twig:14
+#: themes/virgula/pages/drafts.twig:15 themes/virgula/pages/search.twig:52
+#: themes/virgula/pages/tag.twig:14 themes/virgula/pages/updated.twig:15
 msgid "Newer posts"
 msgstr "Nieuwere Blogposts"
 
-#: themes/virgula/pages/archive.twig:37 themes/virgula/pages/archive.twig:56
-#: themes/virgula/pages/author.twig:13 themes/virgula/pages/category.twig:12
-#: themes/virgula/pages/drafts.twig:13 themes/virgula/pages/search.twig:50
-#: themes/virgula/pages/tag.twig:12 themes/virgula/pages/updated.twig:13
+#: themes/virgula/pages/archive.twig:41 themes/virgula/pages/archive.twig:69
+#: themes/virgula/pages/author.twig:20 themes/virgula/pages/category.twig:19
+#: themes/virgula/pages/drafts.twig:20 themes/virgula/pages/search.twig:57
+#: themes/virgula/pages/tag.twig:19 themes/virgula/pages/updated.twig:20
 msgid "Older posts"
 msgstr "Oudere Blogposts"
 
-#: themes/virgula/pages/archive.twig:63
+#: themes/virgula/pages/archive.twig:79
 msgid "There aren't any posts in the timeframe you specified."
 msgstr "Er zijn geen Blogposts in het door jou gespecificeerde tijdvak."
 
@@ -322,7 +326,7 @@ msgstr "Er zijn geen Blogposts in het door jou gespecificeerde tijdvak."
 msgid "Posts created by &#8220;%s&#8221;"
 msgstr "Blogposts gemaakt door &#8220;%s&#8221;"
 
-#: themes/virgula/pages/author.twig:17
+#: themes/virgula/pages/author.twig:28
 msgid "This user hasn't created any posts."
 msgstr "Deze gebruiker heeft geen Blogposts gemaakt."
 
@@ -335,7 +339,7 @@ msgstr "Blogposts in categorie &#8220;%s&#8221;"
 msgid "Drafts"
 msgstr "Concepten"
 
-#: themes/virgula/pages/drafts.twig:17
+#: themes/virgula/pages/drafts.twig:28
 msgid "You don't have any drafts."
 msgstr "Je hebt geen concepten."
 
@@ -351,7 +355,7 @@ msgstr "Blogposts"
 msgid "Pages"
 msgstr "Pagina's"
 
-#: themes/virgula/pages/index.twig:42
+#: themes/virgula/pages/index.twig:44
 msgid "More posts&hellip;"
 msgstr "Meer blogposts&hellip;"
 
@@ -391,7 +395,7 @@ msgstr "Tags"
 msgid "Updated posts"
 msgstr "Bijgewerkte Blogposts"
 
-#: themes/virgula/pages/updated.twig:17
+#: themes/virgula/pages/updated.twig:28
 msgid "There aren't any updated posts."
 msgstr "Er zijn geen bijgewerkte Blogposts."
 

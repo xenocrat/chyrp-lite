@@ -143,15 +143,19 @@ msgstr ""
 msgid "Your website"
 msgstr ""
 
-#: themes/virgula/forms/comment/new.twig:11
+#: themes/virgula/forms/comment/new.twig:9
+msgid "Remember me"
+msgstr ""
+
+#: themes/virgula/forms/comment/new.twig:13
 msgid "Your comment"
 msgstr ""
 
-#: themes/virgula/forms/comment/new.twig:14
+#: themes/virgula/forms/comment/new.twig:16
 msgid "Notify me when others comment"
 msgstr ""
 
-#: themes/virgula/forms/comment/new.twig:27
+#: themes/virgula/forms/comment/new.twig:29
 msgid "Speak"
 msgstr ""
 
@@ -292,7 +296,7 @@ msgid "Not found."
 msgstr ""
 
 #: themes/virgula/pages/archive.twig:7
-#: themes/virgula/pages/archive.twig:47
+#: themes/virgula/pages/archive.twig:53
 #, php-format
 msgid "Archive of %s"
 msgstr ""
@@ -301,29 +305,29 @@ msgstr ""
 msgid "F"
 msgstr ""
 
-#: themes/virgula/pages/archive.twig:32
-#: themes/virgula/pages/archive.twig:55
-#: themes/virgula/pages/author.twig:12
-#: themes/virgula/pages/category.twig:11
-#: themes/virgula/pages/drafts.twig:12
-#: themes/virgula/pages/search.twig:49
-#: themes/virgula/pages/tag.twig:11
-#: themes/virgula/pages/updated.twig:12
+#: themes/virgula/pages/archive.twig:34
+#: themes/virgula/pages/archive.twig:64
+#: themes/virgula/pages/author.twig:15
+#: themes/virgula/pages/category.twig:14
+#: themes/virgula/pages/drafts.twig:15
+#: themes/virgula/pages/search.twig:52
+#: themes/virgula/pages/tag.twig:14
+#: themes/virgula/pages/updated.twig:15
 msgid "Newer posts"
 msgstr ""
 
-#: themes/virgula/pages/archive.twig:37
-#: themes/virgula/pages/archive.twig:56
-#: themes/virgula/pages/author.twig:13
-#: themes/virgula/pages/category.twig:12
-#: themes/virgula/pages/drafts.twig:13
-#: themes/virgula/pages/search.twig:50
-#: themes/virgula/pages/tag.twig:12
-#: themes/virgula/pages/updated.twig:13
+#: themes/virgula/pages/archive.twig:41
+#: themes/virgula/pages/archive.twig:69
+#: themes/virgula/pages/author.twig:20
+#: themes/virgula/pages/category.twig:19
+#: themes/virgula/pages/drafts.twig:20
+#: themes/virgula/pages/search.twig:57
+#: themes/virgula/pages/tag.twig:19
+#: themes/virgula/pages/updated.twig:20
 msgid "Older posts"
 msgstr ""
 
-#: themes/virgula/pages/archive.twig:63
+#: themes/virgula/pages/archive.twig:79
 msgid "There aren't any posts in the timeframe you specified."
 msgstr ""
 
@@ -332,7 +336,7 @@ msgstr ""
 msgid "Posts created by &#8220;%s&#8221;"
 msgstr ""
 
-#: themes/virgula/pages/author.twig:17
+#: themes/virgula/pages/author.twig:28
 msgid "This user hasn't created any posts."
 msgstr ""
 
@@ -345,7 +349,7 @@ msgstr ""
 msgid "Drafts"
 msgstr ""
 
-#: themes/virgula/pages/drafts.twig:17
+#: themes/virgula/pages/drafts.twig:28
 msgid "You don't have any drafts."
 msgstr ""
 
@@ -362,7 +366,7 @@ msgstr ""
 msgid "Pages"
 msgstr ""
 
-#: themes/virgula/pages/index.twig:42
+#: themes/virgula/pages/index.twig:44
 msgid "More posts&hellip;"
 msgstr ""
 
@@ -404,7 +408,7 @@ msgstr ""
 msgid "Updated posts"
 msgstr ""
 
-#: themes/virgula/pages/updated.twig:17
+#: themes/virgula/pages/updated.twig:28
 msgid "There aren't any updated posts."
 msgstr ""
 

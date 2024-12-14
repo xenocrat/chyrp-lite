@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/categorize/admin/help/categorizing_posts.twig:3
@@ -92,7 +92,7 @@ msgid "Update"
 msgstr "Aggiorna"
 
 #: modules/categorize/admin/pages/manage_category.twig:3
-#: modules/categorize/categorize.php:25
+#: modules/categorize/categorize.php:30
 msgid "Manage Categories"
 msgstr "Gestisci categorie"
 
@@ -103,7 +103,7 @@ msgid "New Category"
 msgstr "Nuova Categoria"
 
 #: modules/categorize/admin/pages/manage_category.twig:21
-#: modules/categorize/categorize.php:224
+#: modules/categorize/categorize.php:257
 msgid "Categories"
 msgstr "Categorie"
 
@@ -115,87 +115,87 @@ msgstr "Post"
 msgid "Add Category"
 msgstr "Aggiungi categoria"
 
-#: modules/categorize/categorize.php:67 modules/categorize/categorize.php:101
+#: modules/categorize/categorize.php:82 modules/categorize/categorize.php:121
 msgid "Category"
 msgstr "Categoria"
 
-#: modules/categorize/categorize.php:87
+#: modules/categorize/categorize.php:107
 msgid "[None]"
 msgstr "[Nessuno]"
 
-#: modules/categorize/categorize.php:161
+#: modules/categorize/categorize.php:192
 msgid "You did not specify a category."
 msgstr "Non è stata specificata una categoria."
 
-#: modules/categorize/categorize.php:172
+#: modules/categorize/categorize.php:203
 msgid "The category you specified was not found."
 msgstr "La categoria specificata non è stata trovata."
 
-#: modules/categorize/categorize.php:192 modules/categorize/categorize.php:208
+#: modules/categorize/categorize.php:223 modules/categorize/categorize.php:239
 msgid "There are no posts in the category you specified."
 msgstr "Non sono presenti post nella categoria specificata."
 
-#: modules/categorize/categorize.php:217
+#: modules/categorize/categorize.php:248
 #, php-format
 msgid "Posts in category &#8220;%s&#8221;"
 msgstr "Post nella categoria &#8220;%s&#8221;"
 
-#: modules/categorize/categorize.php:248
+#: modules/categorize/categorize.php:285
 msgid "You do not have sufficient privileges to manage categories."
 msgstr "Non si dispone di privilegi sufficienti per gestire le categorie."
 
-#: modules/categorize/categorize.php:288 modules/categorize/categorize.php:298
+#: modules/categorize/categorize.php:327 modules/categorize/categorize.php:339
 msgid "You do not have sufficient privileges to add categories."
 msgstr "Non si dispone di privilegi sufficienti per aggiungere categorie."
 
-#: modules/categorize/categorize.php:309 modules/categorize/categorize.php:381
+#: modules/categorize/categorize.php:350 modules/categorize/categorize.php:424
 msgid "No Name Specified"
 msgstr "Nessun titolo specificato"
 
-#: modules/categorize/categorize.php:310
+#: modules/categorize/categorize.php:351
 msgid "A name is required to add a category."
 msgstr "Per aggiungere una categoria è necessario un titolo."
 
-#: modules/categorize/categorize.php:332
+#: modules/categorize/categorize.php:371
 msgid "Category added."
 msgstr "Categoria aggiunta."
 
-#: modules/categorize/categorize.php:341
+#: modules/categorize/categorize.php:382
 msgid "An ID is required to edit a category."
 msgstr "Per modificare una categoria è necessario un ID."
 
-#: modules/categorize/categorize.php:350 modules/categorize/categorize.php:391
-#: modules/categorize/categorize.php:438 modules/categorize/categorize.php:475
+#: modules/categorize/categorize.php:391 modules/categorize/categorize.php:434
+#: modules/categorize/categorize.php:483 modules/categorize/categorize.php:521
 msgid "Category not found."
 msgstr "Categoria non trovata."
 
-#: modules/categorize/categorize.php:356 modules/categorize/categorize.php:397
+#: modules/categorize/categorize.php:397 modules/categorize/categorize.php:440
 msgid "You do not have sufficient privileges to edit this category."
 msgstr ""
 "Non si dispone di privilegi sufficienti per modificare questa categoria."
 
-#: modules/categorize/categorize.php:375
+#: modules/categorize/categorize.php:418
 msgid "An ID is required to update a category."
 msgstr "Per aggiornare una categoria è necessario un ID."
 
-#: modules/categorize/categorize.php:382
+#: modules/categorize/categorize.php:425
 msgid "A name is required to update a category."
 msgstr "Per aggiornare una categoria è necessario un titolo."
 
-#: modules/categorize/categorize.php:420
+#: modules/categorize/categorize.php:463
 msgid "Category updated."
 msgstr "Categoria aggiornata."
 
-#: modules/categorize/categorize.php:429 modules/categorize/categorize.php:463
+#: modules/categorize/categorize.php:474 modules/categorize/categorize.php:509
 msgid "An ID is required to delete a category."
 msgstr "Per eliminare una categoria è necessario un ID."
 
-#: modules/categorize/categorize.php:444 modules/categorize/categorize.php:481
+#: modules/categorize/categorize.php:489 modules/categorize/categorize.php:527
 msgid "You do not have sufficient privileges to delete this category."
 msgstr ""
 "Non si dispone di privilegi sufficienti per eliminare questa categoria."
 
-#: modules/categorize/categorize.php:486
+#: modules/categorize/categorize.php:532
 msgid "Category deleted."
 msgstr "Categoria eliminata."
 

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/comments/admin/pages/comment_settings.twig:3
@@ -94,54 +94,54 @@ msgstr "Modifica del commento &#8220;%s&#8221;"
 msgid "Body"
 msgstr "Testo"
 
-#: modules/comments/admin/pages/edit_comment.twig:24
+#: modules/comments/admin/pages/edit_comment.twig:26
 msgid "Author"
 msgstr "Autore"
 
-#: modules/comments/admin/pages/edit_comment.twig:29
+#: modules/comments/admin/pages/edit_comment.twig:31
 msgid "Author Email"
 msgstr "Email dell'autore"
 
-#: modules/comments/admin/pages/edit_comment.twig:33
+#: modules/comments/admin/pages/edit_comment.twig:35
 msgid "Author Website"
 msgstr "Sito dell'autore"
 
-#: modules/comments/admin/pages/edit_comment.twig:40
+#: modules/comments/admin/pages/edit_comment.twig:42
 msgid "Timestamp"
 msgstr "Date e ora"
 
-#: modules/comments/admin/pages/edit_comment.twig:45
+#: modules/comments/admin/pages/edit_comment.twig:47
 #: modules/comments/admin/pages/manage_comments.twig:26
 msgid "Status"
 msgstr "Stato"
 
-#: modules/comments/admin/pages/edit_comment.twig:48
-#: modules/comments/comments.php:698
+#: modules/comments/admin/pages/edit_comment.twig:50
+#: modules/comments/comments.php:752
 msgid "Approved"
 msgstr "Approvato"
 
-#: modules/comments/admin/pages/edit_comment.twig:50
-#: modules/comments/comments.php:699
+#: modules/comments/admin/pages/edit_comment.twig:52
+#: modules/comments/comments.php:753
 msgid "Denied"
 msgstr "Negato"
 
-#: modules/comments/admin/pages/edit_comment.twig:52
+#: modules/comments/admin/pages/edit_comment.twig:54
 #: modules/comments/admin/pages/manage_spam.twig:18
-#: modules/comments/comments.php:700
+#: modules/comments/comments.php:754
 msgid "Spam"
 msgstr "Spam"
 
-#: modules/comments/admin/pages/edit_comment.twig:59
+#: modules/comments/admin/pages/edit_comment.twig:61
 msgid "Email Notifications"
 msgstr "Notifiche email"
 
-#: modules/comments/admin/pages/edit_comment.twig:69
+#: modules/comments/admin/pages/edit_comment.twig:71
 msgid "Save"
 msgstr "Salva"
 
-#: modules/comments/admin/pages/edit_comment.twig:71
-#: modules/comments/admin/pages/manage_comments.twig:86
-#: modules/comments/admin/pages/manage_spam.twig:72
+#: modules/comments/admin/pages/edit_comment.twig:73
+#: modules/comments/admin/pages/manage_comments.twig:87
+#: modules/comments/admin/pages/manage_spam.twig:73
 msgid "Delete"
 msgstr "Elimina"
 
@@ -150,8 +150,8 @@ msgid "Manage Comments"
 msgstr "Gestisci commenti"
 
 #: modules/comments/admin/pages/manage_comments.twig:18
-#: modules/comments/comments.php:771 modules/comments/comments.php:806
-#: modules/comments/comments.php:820 modules/comments/info.php:3
+#: modules/comments/comments.php:829 modules/comments/comments.php:867
+#: modules/comments/comments.php:884 modules/comments/info.php:3
 msgid "Comments"
 msgstr "Commenti"
 
@@ -169,252 +169,252 @@ msgstr "Aggiunto"
 msgid "Webmention"
 msgstr "Webmention"
 
-#: modules/comments/admin/pages/manage_comments.twig:74
-#: modules/comments/admin/pages/manage_spam.twig:63
+#: modules/comments/admin/pages/manage_comments.twig:75
+#: modules/comments/admin/pages/manage_spam.twig:64
 msgid "With selected:"
 msgstr "Selezionati:"
 
-#: modules/comments/admin/pages/manage_comments.twig:77
-#: modules/comments/admin/pages/manage_spam.twig:66
+#: modules/comments/admin/pages/manage_comments.twig:78
+#: modules/comments/admin/pages/manage_spam.twig:67
 msgid "Deny"
 msgstr "Rifiutare"
 
-#: modules/comments/admin/pages/manage_comments.twig:80
-#: modules/comments/admin/pages/manage_spam.twig:69
+#: modules/comments/admin/pages/manage_comments.twig:81
+#: modules/comments/admin/pages/manage_spam.twig:70
 msgid "Approve"
 msgstr "Approva"
 
-#: modules/comments/admin/pages/manage_comments.twig:83
+#: modules/comments/admin/pages/manage_comments.twig:84
 msgid "Mark as Spam"
 msgstr "Contrassegna come spam"
 
-#: modules/comments/admin/pages/manage_comments.twig:89
-#: modules/comments/admin/pages/manage_spam.twig:75
-msgid "Execute"
-msgstr "Esegui"
+#: modules/comments/admin/pages/manage_comments.twig:90
+#: modules/comments/admin/pages/manage_spam.twig:76
+msgid "Batch Process"
+msgstr "Processo batch"
 
 #: modules/comments/admin/pages/manage_spam.twig:3
 msgid "Manage Spam"
 msgstr "Gestire spam"
 
-#: modules/comments/comments.php:68
+#: modules/comments/comments.php:87
 msgid "Add Comments"
 msgstr "Aggiungi commenti"
 
-#: modules/comments/comments.php:69
+#: modules/comments/comments.php:88
 msgid "Add Comments to Private Posts"
 msgstr "Aggiungere commenti ai post privati"
 
-#: modules/comments/comments.php:70
+#: modules/comments/comments.php:89
 msgid "Edit Comments"
 msgstr "Modifica commenti"
 
-#: modules/comments/comments.php:71
+#: modules/comments/comments.php:90
 msgid "Edit Own Comments"
 msgstr "Modificare i propri commenti"
 
-#: modules/comments/comments.php:72
+#: modules/comments/comments.php:91
 msgid "Delete Comments"
 msgstr "Elimina commenti"
 
-#: modules/comments/comments.php:73
+#: modules/comments/comments.php:92
 msgid "Delete Own Comments"
 msgstr "Eliminare i propri commenti"
 
-#: modules/comments/comments.php:74
+#: modules/comments/comments.php:93
 msgid "Can Use HTML in Comments"
 msgstr "Si può usare HTML nei commenti"
 
-#: modules/comments/comments.php:81
+#: modules/comments/comments.php:102
 msgid "Please enter an ID to find a comment."
 msgstr "Si prega di inserire un ID per trovare un commento."
 
-#: modules/comments/comments.php:112
+#: modules/comments/comments.php:135
 msgid "Most commented on posts"
 msgstr "I post più commentati"
 
-#: modules/comments/comments.php:131
+#: modules/comments/comments.php:157
 msgid "An ID is required to add a comment."
 msgstr "Per aggiungere un commento è necessario un ID."
 
-#: modules/comments/comments.php:145
+#: modules/comments/comments.php:171
 msgid "You cannot comment on this post."
 msgstr "Non puoi commentare questo post."
 
-#: modules/comments/comments.php:151 modules/comments/comments.php:245
+#: modules/comments/comments.php:177 modules/comments/comments.php:284
 msgid "Message can't be blank."
 msgstr "Il messaggio non può essere vuoto."
 
-#: modules/comments/comments.php:157 modules/comments/comments.php:251
+#: modules/comments/comments.php:183 modules/comments/comments.php:290
 msgid "Author can't be blank."
 msgstr "La casella dell'autore non può essere vuota."
 
-#: modules/comments/comments.php:163 modules/comments/comments.php:257
+#: modules/comments/comments.php:189 modules/comments/comments.php:296
 msgid "Email address can't be blank."
 msgstr "La casella dell'indirizzo email non può essere vuota."
 
-#: modules/comments/comments.php:169 modules/comments/comments.php:263
+#: modules/comments/comments.php:195 modules/comments/comments.php:302
 msgid "Invalid email address."
 msgstr "Indirizzo email non valido."
 
-#: modules/comments/comments.php:175 modules/comments/comments.php:269
+#: modules/comments/comments.php:201 modules/comments/comments.php:308
 msgid "Invalid website URL."
 msgstr "URL del sito web non valido."
 
-#: modules/comments/comments.php:184
+#: modules/comments/comments.php:210
 msgid "Incorrect captcha response."
 msgstr "Risposta Captcha errata."
 
-#: modules/comments/comments.php:204
+#: modules/comments/comments.php:242
 msgid "Comment added."
 msgstr "Commento aggiunto."
 
-#: modules/comments/comments.php:205
+#: modules/comments/comments.php:243
 msgid "Your comment is awaiting moderation."
 msgstr "Questo commento è in attesa di verifica da un moderatore."
 
-#: modules/comments/comments.php:219
+#: modules/comments/comments.php:258
 msgid "An ID is required to update a comment."
 msgstr "Per aggiornare un commento è necessario un ID."
 
-#: modules/comments/comments.php:228 modules/comments/comments.php:345
-#: modules/comments/comments.php:373 modules/comments/comments.php:410
-#: modules/comments/comments.php:895 modules/comments/comments.php:927
-#: modules/comments/comments.php:962
+#: modules/comments/comments.php:267 modules/comments/comments.php:389
+#: modules/comments/comments.php:419 modules/comments/comments.php:457
+#: modules/comments/comments.php:963 modules/comments/comments.php:996
+#: modules/comments/comments.php:1032
 msgid "Comment not found."
 msgstr "Il commento non è stato trovato."
 
-#: modules/comments/comments.php:234 modules/comments/comments.php:351
-#: modules/comments/comments.php:933
+#: modules/comments/comments.php:273 modules/comments/comments.php:395
+#: modules/comments/comments.php:1002
 msgid "You do not have sufficient privileges to edit this comment."
 msgstr ""
 "Non si dispone di privilegi sufficienti per modificare questo commento."
 
-#: modules/comments/comments.php:299
+#: modules/comments/comments.php:338
 msgid "Comment updated."
 msgstr "Commento aggiornato."
 
-#: modules/comments/comments.php:333 modules/comments/comments.php:915
+#: modules/comments/comments.php:377 modules/comments/comments.php:984
 msgid "An ID is required to edit a comment."
 msgstr "Per modificare un commento è necessario un ID."
 
-#: modules/comments/comments.php:364 modules/comments/comments.php:398
-#: modules/comments/comments.php:953
+#: modules/comments/comments.php:410 modules/comments/comments.php:445
+#: modules/comments/comments.php:1023
 msgid "An ID is required to delete a comment."
 msgstr "Per eliminare un commento è necessario un ID."
 
-#: modules/comments/comments.php:379 modules/comments/comments.php:416
-#: modules/comments/comments.php:968
+#: modules/comments/comments.php:425 modules/comments/comments.php:463
+#: modules/comments/comments.php:1038
 msgid "You do not have sufficient privileges to delete this comment."
 msgstr "Non si dispone di privilegi sufficienti per eliminare questo commento."
 
-#: modules/comments/comments.php:425 modules/comments/comments.php:973
+#: modules/comments/comments.php:472 modules/comments/comments.php:1043
 msgid "Comment deleted."
 msgstr "Commento cancellato."
 
-#: modules/comments/comments.php:432 modules/comments/comments.php:484
+#: modules/comments/comments.php:481 modules/comments/comments.php:535
 msgid "You do not have sufficient privileges to manage any comments."
 msgstr ""
 "Non si dispone di privilegi sufficienti per gestire eventuali commenti."
 
-#: modules/comments/comments.php:564
+#: modules/comments/comments.php:616
 msgid "Selected comments deleted."
 msgstr "I commenti selezionati sono stati cancellati."
 
-#: modules/comments/comments.php:600
+#: modules/comments/comments.php:652
 msgid "Selected comments denied."
 msgstr "Commenti selezionati negati."
 
-#: modules/comments/comments.php:636
+#: modules/comments/comments.php:688
 msgid "Selected comments approved."
 msgstr "Commenti selezionati approvati."
 
-#: modules/comments/comments.php:670
+#: modules/comments/comments.php:722
 msgid "Selected comments marked as spam."
 msgstr "Commenti selezionati contrassegnati come spam."
 
-#: modules/comments/comments.php:792
+#: modules/comments/comments.php:852
 #, php-format
 msgid "Comments (%d)"
 msgstr "Commenti (%d)"
 
-#: modules/comments/comments.php:798
+#: modules/comments/comments.php:858
 #, php-format
 msgid "Spam (%d)"
 msgstr "Spam (%d)"
 
-#: modules/comments/comments.php:836
+#: modules/comments/comments.php:903
 msgid "An ID is required to reload comments."
 msgstr "Per ricaricare i commenti è necessario un ID."
 
-#: modules/comments/comments.php:854
+#: modules/comments/comments.php:921
 #, php-format
 msgid "Comments added since %s"
 msgstr "Commenti aggiunti dal %s"
 
-#: modules/comments/comments.php:886
+#: modules/comments/comments.php:954
 msgid "An ID is required to show a comment."
 msgstr "È necessario un ID per visualizzare un commento."
 
-#: modules/comments/comments.php:992 modules/comments/comments.php:1097
+#: modules/comments/comments.php:1064 modules/comments/comments.php:1182
 #, php-format
 msgid "Comments on &#8220;%s&#8221;"
 msgstr "Commenti &#8220;%s&#8221;"
 
-#: modules/comments/comments.php:1079
+#: modules/comments/comments.php:1162
 msgid "You have unsubscribed from the conversation."
 msgstr "Hai annullato l'iscrizione a questa conversazione."
 
-#: modules/comments/comments.php:1120
+#: modules/comments/comments.php:1205
 #, php-format
 msgid "Comment #%d"
 msgstr "Commento #%d"
 
-#: modules/comments/comments.php:1149
+#: modules/comments/comments.php:1238
 msgid "A ping from your URL is already registered."
 msgstr "Un ping dall'URL è già registrato."
 
-#: modules/comments/comments.php:1156
+#: modules/comments/comments.php:1245
 msgid "Your URL is too long to be stored in our database."
 msgstr "Il tuo URL è troppo lungo per essere memorizzato nel nostro database."
 
-#: modules/comments/comments.php:1161
+#: modules/comments/comments.php:1250
 msgid "Mentioned this post."
 msgstr "Menzionato questo post."
 
-#: modules/comments/comments.php:1180
+#: modules/comments/comments.php:1273
 msgid "Open"
 msgstr "Aperto"
 
-#: modules/comments/comments.php:1187
+#: modules/comments/comments.php:1280
 msgid "Closed"
 msgstr "Chiuso"
 
-#: modules/comments/comments.php:1194
+#: modules/comments/comments.php:1287
 msgid "Private"
 msgstr "Privato"
 
-#: modules/comments/comments.php:1201
+#: modules/comments/comments.php:1294
 msgid "Registered Only"
 msgstr "Solo utenti registrati"
 
-#: modules/comments/comments.php:1211
+#: modules/comments/comments.php:1304
 msgid "Comment Status"
 msgstr "Stato del commento"
 
-#: modules/comments/comments.php:1435 modules/comments/comments.php:1460
-#: modules/comments/comments.php:1490
+#: modules/comments/comments.php:1561 modules/comments/comments.php:1589
+#: modules/comments/comments.php:1622
 #, php-format
 msgid "New Comment at %s"
 msgstr "Nuovo commento a %s"
 
-#: modules/comments/comments.php:1436 modules/comments/comments.php:1461
-#: modules/comments/comments.php:1491
+#: modules/comments/comments.php:1562 modules/comments/comments.php:1590
+#: modules/comments/comments.php:1623
 #, php-format
 msgid "%s commented on a blog post:"
 msgstr "%s ha aggiunto un commento sul blog post:"
 
-#: modules/comments/comments.php:1499
+#: modules/comments/comments.php:1631
 msgid "Unsubscribe from this conversation:"
 msgstr "Annulla l'iscrizione a questa conversazione:"
 
@@ -433,10 +433,10 @@ msgstr ""
 msgid "Do you want to remove comments from the database?"
 msgstr "Si desidera rimuovere i commenti dal database?"
 
-#: modules/comments/javascript.php:63
+#: modules/comments/javascript.php:64
 msgid "Are you sure you want to permanently delete this comment?"
 msgstr "Sei sicuro di voler eliminare definitivamente questo commento?"
 
-#: modules/comments/model/Comment.php:568
+#: modules/comments/model/Comment.php:584
 msgid "Anon"
 msgstr "Anonimo"

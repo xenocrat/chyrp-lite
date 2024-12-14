@@ -17,7 +17,7 @@ msgid "Creative Commons is a family of licenses that you can use to donate your 
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:17
-#: modules/rights/rights.php:123
+#: modules/rights/rights.php:128
 msgid "License"
 msgstr ""
 
@@ -54,44 +54,44 @@ msgid "NoDerivatives"
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:37
-#: modules/rights/rights.php:32
-#: modules/rights/rights.php:143
+#: modules/rights/rights.php:37
+#: modules/rights/rights.php:154
 msgid "Creative Commons BY"
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:48
-#: modules/rights/rights.php:39
-#: modules/rights/rights.php:150
+#: modules/rights/rights.php:44
+#: modules/rights/rights.php:161
 msgid "Creative Commons BY-ND"
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:63
-#: modules/rights/rights.php:46
-#: modules/rights/rights.php:157
+#: modules/rights/rights.php:51
+#: modules/rights/rights.php:168
 msgid "Creative Commons BY-SA"
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:78
-#: modules/rights/rights.php:53
-#: modules/rights/rights.php:164
+#: modules/rights/rights.php:58
+#: modules/rights/rights.php:175
 msgid "Creative Commons BY-NC"
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:93
-#: modules/rights/rights.php:60
-#: modules/rights/rights.php:171
+#: modules/rights/rights.php:65
+#: modules/rights/rights.php:182
 msgid "Creative Commons BY-NC-ND"
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:110
-#: modules/rights/rights.php:67
-#: modules/rights/rights.php:178
+#: modules/rights/rights.php:72
+#: modules/rights/rights.php:189
 msgid "Creative Commons BY-NC-SA"
 msgstr ""
 
 #: modules/rights/admin/help/choosing_a_licence.twig:127
-#: modules/rights/rights.php:74
-#: modules/rights/rights.php:185
+#: modules/rights/rights.php:79
+#: modules/rights/rights.php:196
 msgid "Creative Commons CC0"
 msgstr ""
 
@@ -107,29 +107,29 @@ msgstr ""
 msgid "Do you want to remove rights data from the database?"
 msgstr ""
 
-#: modules/rights/rights.php:25
-#: modules/rights/rights.php:196
+#: modules/rights/rights.php:30
+#: modules/rights/rights.php:207
 msgid "All rights reserved"
 msgstr ""
 
-#: modules/rights/rights.php:81
+#: modules/rights/rights.php:86
 msgid "Orphan Work"
 msgstr ""
 
-#: modules/rights/rights.php:88
-#: modules/rights/rights.php:192
+#: modules/rights/rights.php:93
+#: modules/rights/rights.php:203
 msgid "Public Domain"
 msgstr ""
 
-#: modules/rights/rights.php:95
+#: modules/rights/rights.php:100
 msgid "Crown Copyright"
 msgstr ""
 
-#: modules/rights/rights.php:105
+#: modules/rights/rights.php:110
 msgid "Original Work"
 msgstr ""
 
-#: modules/rights/rights.php:114
+#: modules/rights/rights.php:119
 msgid "Rights Holder"
 msgstr ""
 

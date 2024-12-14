@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.5\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: feathers/text/info.php:3
@@ -29,6 +29,6 @@ msgstr "Titre"
 msgid "Body"
 msgstr "Corps"
 
-#: feathers/text/text.php:34 feathers/text/text.php:63
+#: feathers/text/text.php:35 feathers/text/text.php:66
 msgid "Body can't be blank."
 msgstr "Le corps ne peut pas être vide."

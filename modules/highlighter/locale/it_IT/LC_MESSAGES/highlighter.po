@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/highlighter/admin/pages/highlighter_settings.twig:3
@@ -22,7 +22,7 @@ msgstr "Impostazioni di evidenziazione della sintassi"
 msgid "Stylesheet"
 msgstr "Foglio di stile"
 
-#: modules/highlighter/highlighter.php:80 modules/highlighter/info.php:3
+#: modules/highlighter/highlighter.php:91 modules/highlighter/info.php:3
 msgid "Syntax Highlighting"
 msgstr "Evidenziazione della sintassi"
 

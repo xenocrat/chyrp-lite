@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/maptcha/info.php:3
@@ -23,51 +23,51 @@ msgstr ""
 "Chiedere agli utenti di risolvere semplici problemi di matematica per "
 "prevenire lo spam."
 
-#: modules/maptcha/maptcha.php:25
+#: modules/maptcha/maptcha.php:28
 #, php-format
 msgid "How much is %d&nbsp;&#43;&nbsp;%d&nbsp;?"
 msgstr "Quanto fa %d&nbsp;&#43;&nbsp;%d&nbsp;?"
 
-#: modules/maptcha/maptcha.php:29
+#: modules/maptcha/maptcha.php:32
 #, php-format
 msgid "How much is %d&nbsp;&#8722;&nbsp;%d&nbsp;?"
 msgstr "Quanto fa %d&nbsp;&#8722;&nbsp;%d&nbsp;?"
 
-#: modules/maptcha/maptcha.php:33
+#: modules/maptcha/maptcha.php:36
 #, php-format
 msgid "How much is %d&nbsp;&#215;&nbsp;%d&nbsp;?"
 msgstr "Quanto fa %d&nbsp;&#215;&nbsp;%d&nbsp;?"
 
-#: modules/maptcha/maptcha.php:37
+#: modules/maptcha/maptcha.php:40
 #, php-format
 msgid "How much is %d&nbsp;&plus;&nbsp;%d&nbsp;?"
 msgstr "Quanto fa %d&nbsp;&plus;&nbsp;%d&nbsp;?"
 
-#: modules/maptcha/maptcha.php:41
+#: modules/maptcha/maptcha.php:44
 #, php-format
 msgid "How much is %d&nbsp;&minus;&nbsp;%d&nbsp;?"
 msgstr "Quanto fa %d&nbsp;&minus;&nbsp;%d&nbsp;?"
 
-#: modules/maptcha/maptcha.php:45
+#: modules/maptcha/maptcha.php:48
 #, php-format
 msgid "How much is %d&nbsp;&times;&nbsp;%d&nbsp;?"
 msgstr "Quanto fa %d&nbsp;&times;&nbsp;%d&nbsp;?"
 
-#: modules/maptcha/maptcha.php:49
+#: modules/maptcha/maptcha.php:52
 #, php-format
 msgid "How much is %d&nbsp;&#x0002B;&nbsp;%d&nbsp;?"
 msgstr "Quanto fa %d&nbsp;&#x0002B;&nbsp;%d&nbsp;?"
 
-#: modules/maptcha/maptcha.php:53
+#: modules/maptcha/maptcha.php:56
 #, php-format
 msgid "How much is %d&nbsp;&#x02212;&nbsp;%d&nbsp;?"
 msgstr "Quanto fa %d&nbsp;&#x02212;&nbsp;%d&nbsp;?"
 
-#: modules/maptcha/maptcha.php:57
+#: modules/maptcha/maptcha.php:60
 #, php-format
 msgid "How much is %d&nbsp;&#x000D7;&nbsp;%d&nbsp;?"
 msgstr "Quanto fa %d&nbsp;&#x000D7;&nbsp;%d&nbsp;?"
 
-#: modules/maptcha/maptcha.php:65
+#: modules/maptcha/maptcha.php:68
 msgid "Yay mathemetics!"
 msgstr "Evviva la Matematica!"

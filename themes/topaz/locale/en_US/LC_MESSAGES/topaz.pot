@@ -45,32 +45,32 @@ msgstr ""
 msgid "Pinned"
 msgstr ""
 
-#: themes/topaz/content/post.twig:27
+#: themes/topaz/content/post.twig:29
 #: themes/topaz/content/sidebar.twig:55
 #: themes/topaz/pages/view.twig:14
 msgid "[Untitled]"
 msgstr ""
 
-#: themes/topaz/content/post.twig:34
+#: themes/topaz/content/post.twig:37
 msgid "View webmentions"
 msgstr ""
 
-#: themes/topaz/content/post.twig:35
+#: themes/topaz/content/post.twig:38
 #, php-format
 msgid "%s webmention"
 msgid_plural "%s webmentions"
 msgstr[0] ""
 msgstr[1] ""
 
-#: themes/topaz/content/post.twig:40
+#: themes/topaz/content/post.twig:43
 msgid "Comments closed"
 msgstr ""
 
-#: themes/topaz/content/post.twig:43
+#: themes/topaz/content/post.twig:46
 msgid "View comments"
 msgstr ""
 
-#: themes/topaz/content/post.twig:44
+#: themes/topaz/content/post.twig:47
 #, php-format
 msgid "%s comment"
 msgid_plural "%s comments"
@@ -272,27 +272,31 @@ msgstr ""
 msgid "Your website"
 msgstr ""
 
-#: themes/topaz/forms/comment/new.twig:12
+#: themes/topaz/forms/comment/new.twig:11
+msgid "Remember me"
+msgstr ""
+
+#: themes/topaz/forms/comment/new.twig:14
 msgid "Your comment"
 msgstr ""
 
-#: themes/topaz/forms/comment/new.twig:16
+#: themes/topaz/forms/comment/new.twig:20
 msgid "Markdown is allowed."
 msgstr ""
 
-#: themes/topaz/forms/comment/new.twig:18
+#: themes/topaz/forms/comment/new.twig:22
 msgid "HTML tags allowed:"
 msgstr ""
 
-#: themes/topaz/forms/comment/new.twig:20
+#: themes/topaz/forms/comment/new.twig:25
 msgid "HTML is not allowed."
 msgstr ""
 
-#: themes/topaz/forms/comment/new.twig:24
+#: themes/topaz/forms/comment/new.twig:29
 msgid "Notify me when others comment"
 msgstr ""
 
-#: themes/topaz/forms/comment/new.twig:37
+#: themes/topaz/forms/comment/new.twig:42
 msgid "Speak"
 msgstr ""
 

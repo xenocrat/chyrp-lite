@@ -13,7 +13,7 @@ msgstr ""
 msgid "Load more posts when the visitor scrolls to the bottom of the page?"
 msgstr ""
 
-#: modules/cascade/cascade.php:46
+#: modules/cascade/cascade.php:52
 #: modules/cascade/info.php:3
 msgid "Cascade"
 msgstr ""

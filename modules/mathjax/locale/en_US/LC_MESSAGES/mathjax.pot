@@ -5,16 +5,16 @@
 msgid "MathJax Settings"
 msgstr ""
 
-#: modules/mathjax/admin/pages/mathjax_settings.twig:10
+#: modules/mathjax/admin/pages/mathjax_settings.twig:11
 msgid "TeX and LaTeX Support"
 msgstr ""
 
-#: modules/mathjax/admin/pages/mathjax_settings.twig:18
+#: modules/mathjax/admin/pages/mathjax_settings.twig:21
 msgid "MathML Support"
 msgstr ""
 
 #: modules/mathjax/info.php:3
-#: modules/mathjax/mathjax.php:78
+#: modules/mathjax/mathjax.php:85
 msgid "MathJax"
 msgstr ""
 

@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/cascade/admin/pages/cascade_settings.twig:3
@@ -27,7 +27,7 @@ msgstr ""
 "Laadt meer berichten, wanneer de bezoeker naar de onderkant van de pagina "
 "gaat?"
 
-#: modules/cascade/cascade.php:46 modules/cascade/info.php:3
+#: modules/cascade/cascade.php:52 modules/cascade/info.php:3
 msgid "Cascade"
 msgstr "Cascade"
 

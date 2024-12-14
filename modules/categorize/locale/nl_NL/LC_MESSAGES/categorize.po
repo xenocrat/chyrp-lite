@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/categorize/admin/help/categorizing_posts.twig:3
@@ -90,7 +90,7 @@ msgid "Update"
 msgstr "Update"
 
 #: modules/categorize/admin/pages/manage_category.twig:3
-#: modules/categorize/categorize.php:25
+#: modules/categorize/categorize.php:30
 msgid "Manage Categories"
 msgstr "Beheer categorieën"
 
@@ -101,7 +101,7 @@ msgid "New Category"
 msgstr "Nieuwe categorie"
 
 #: modules/categorize/admin/pages/manage_category.twig:21
-#: modules/categorize/categorize.php:224
+#: modules/categorize/categorize.php:257
 msgid "Categories"
 msgstr "Categorieën"
 
@@ -113,85 +113,85 @@ msgstr "Blogposts"
 msgid "Add Category"
 msgstr "Categorie toevoegen"
 
-#: modules/categorize/categorize.php:67 modules/categorize/categorize.php:101
+#: modules/categorize/categorize.php:82 modules/categorize/categorize.php:121
 msgid "Category"
 msgstr "Categorie"
 
-#: modules/categorize/categorize.php:87
+#: modules/categorize/categorize.php:107
 msgid "[None]"
 msgstr "[Geen]"
 
-#: modules/categorize/categorize.php:161
+#: modules/categorize/categorize.php:192
 msgid "You did not specify a category."
 msgstr "Je hebt geen categorie gespecificeerd."
 
-#: modules/categorize/categorize.php:172
+#: modules/categorize/categorize.php:203
 msgid "The category you specified was not found."
 msgstr "De gekozen categorie kan niet worden gevonden."
 
-#: modules/categorize/categorize.php:192 modules/categorize/categorize.php:208
+#: modules/categorize/categorize.php:223 modules/categorize/categorize.php:239
 msgid "There are no posts in the category you specified."
 msgstr "Er zijn geen blogposts in de gekozen categorie."
 
-#: modules/categorize/categorize.php:217
+#: modules/categorize/categorize.php:248
 #, php-format
 msgid "Posts in category &#8220;%s&#8221;"
 msgstr "Blogposts in categorie &#8220;%s&#8221;"
 
-#: modules/categorize/categorize.php:248
+#: modules/categorize/categorize.php:285
 msgid "You do not have sufficient privileges to manage categories."
 msgstr "Je hebt onvoldoende rechten om categorieën te beheren."
 
-#: modules/categorize/categorize.php:288 modules/categorize/categorize.php:298
+#: modules/categorize/categorize.php:327 modules/categorize/categorize.php:339
 msgid "You do not have sufficient privileges to add categories."
 msgstr "Je hebt onvoldoende rechten om categorieën toe te voegen."
 
-#: modules/categorize/categorize.php:309 modules/categorize/categorize.php:381
+#: modules/categorize/categorize.php:350 modules/categorize/categorize.php:424
 msgid "No Name Specified"
 msgstr "Geen naam gespecificeerd"
 
-#: modules/categorize/categorize.php:310
+#: modules/categorize/categorize.php:351
 msgid "A name is required to add a category."
 msgstr "Een naam is verplicht om een categorie toe te voegen."
 
-#: modules/categorize/categorize.php:332
+#: modules/categorize/categorize.php:371
 msgid "Category added."
 msgstr "Categorie toegevoegd."
 
-#: modules/categorize/categorize.php:341
+#: modules/categorize/categorize.php:382
 msgid "An ID is required to edit a category."
 msgstr "Een ID is nodig om een categorie te wijzigen."
 
-#: modules/categorize/categorize.php:350 modules/categorize/categorize.php:391
-#: modules/categorize/categorize.php:438 modules/categorize/categorize.php:475
+#: modules/categorize/categorize.php:391 modules/categorize/categorize.php:434
+#: modules/categorize/categorize.php:483 modules/categorize/categorize.php:521
 msgid "Category not found."
 msgstr "Categorie niet gevonden."
 
-#: modules/categorize/categorize.php:356 modules/categorize/categorize.php:397
+#: modules/categorize/categorize.php:397 modules/categorize/categorize.php:440
 msgid "You do not have sufficient privileges to edit this category."
 msgstr "Je hebt onvoldoende rechten om deze categorie te wijzigen."
 
-#: modules/categorize/categorize.php:375
+#: modules/categorize/categorize.php:418
 msgid "An ID is required to update a category."
 msgstr "Een ID is verplicht om een categorie te updaten."
 
-#: modules/categorize/categorize.php:382
+#: modules/categorize/categorize.php:425
 msgid "A name is required to update a category."
 msgstr "Een naam is verplicht om een categorie te updaten."
 
-#: modules/categorize/categorize.php:420
+#: modules/categorize/categorize.php:463
 msgid "Category updated."
 msgstr "Categorie bijgewerkt."
 
-#: modules/categorize/categorize.php:429 modules/categorize/categorize.php:463
+#: modules/categorize/categorize.php:474 modules/categorize/categorize.php:509
 msgid "An ID is required to delete a category."
 msgstr "Een ID is verplicht om een categorie te verwijderen."
 
-#: modules/categorize/categorize.php:444 modules/categorize/categorize.php:481
+#: modules/categorize/categorize.php:489 modules/categorize/categorize.php:527
 msgid "You do not have sufficient privileges to delete this category."
 msgstr "Je hebt onvoldoende rechten om deze categorie te verwijderen."
 
-#: modules/categorize/categorize.php:486
+#: modules/categorize/categorize.php:532
 msgid "Category deleted."
 msgstr "Categorie verwijderd."
 

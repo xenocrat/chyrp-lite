@@ -13,8 +13,8 @@ msgstr ""
 msgid "Source"
 msgstr ""
 
-#: feathers/quote/quote.php:35
-#: feathers/quote/quote.php:64
+#: feathers/quote/quote.php:36
+#: feathers/quote/quote.php:67
 msgid "Quote can't be empty."
 msgstr ""
 

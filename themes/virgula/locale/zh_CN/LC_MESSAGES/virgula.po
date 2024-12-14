@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/virgula/content/comment.twig:5
@@ -144,15 +144,19 @@ msgstr "您的邮箱"
 msgid "Your website"
 msgstr "您的站点"
 
-#: themes/virgula/forms/comment/new.twig:11
+#: themes/virgula/forms/comment/new.twig:9
+msgid "Remember me"
+msgstr "记住我"
+
+#: themes/virgula/forms/comment/new.twig:13
 msgid "Your comment"
 msgstr "您的评论"
 
-#: themes/virgula/forms/comment/new.twig:14
+#: themes/virgula/forms/comment/new.twig:16
 msgid "Notify me when others comment"
 msgstr "当有其他人评论的时候通知我"
 
-#: themes/virgula/forms/comment/new.twig:27
+#: themes/virgula/forms/comment/new.twig:29
 msgid "Speak"
 msgstr "说话"
 
@@ -291,7 +295,7 @@ msgstr "被禁止."
 msgid "Not found."
 msgstr "未找到."
 
-#: themes/virgula/pages/archive.twig:7 themes/virgula/pages/archive.twig:47
+#: themes/virgula/pages/archive.twig:7 themes/virgula/pages/archive.twig:53
 #, php-format
 msgid "Archive of %s"
 msgstr "%s的档案"
@@ -300,21 +304,21 @@ msgstr "%s的档案"
 msgid "F"
 msgstr "F"
 
-#: themes/virgula/pages/archive.twig:32 themes/virgula/pages/archive.twig:55
-#: themes/virgula/pages/author.twig:12 themes/virgula/pages/category.twig:11
-#: themes/virgula/pages/drafts.twig:12 themes/virgula/pages/search.twig:49
-#: themes/virgula/pages/tag.twig:11 themes/virgula/pages/updated.twig:12
+#: themes/virgula/pages/archive.twig:34 themes/virgula/pages/archive.twig:64
+#: themes/virgula/pages/author.twig:15 themes/virgula/pages/category.twig:14
+#: themes/virgula/pages/drafts.twig:15 themes/virgula/pages/search.twig:52
+#: themes/virgula/pages/tag.twig:14 themes/virgula/pages/updated.twig:15
 msgid "Newer posts"
 msgstr "较新的帖子"
 
-#: themes/virgula/pages/archive.twig:37 themes/virgula/pages/archive.twig:56
-#: themes/virgula/pages/author.twig:13 themes/virgula/pages/category.twig:12
-#: themes/virgula/pages/drafts.twig:13 themes/virgula/pages/search.twig:50
-#: themes/virgula/pages/tag.twig:12 themes/virgula/pages/updated.twig:13
+#: themes/virgula/pages/archive.twig:41 themes/virgula/pages/archive.twig:69
+#: themes/virgula/pages/author.twig:20 themes/virgula/pages/category.twig:19
+#: themes/virgula/pages/drafts.twig:20 themes/virgula/pages/search.twig:57
+#: themes/virgula/pages/tag.twig:19 themes/virgula/pages/updated.twig:20
 msgid "Older posts"
 msgstr "较旧的帖子"
 
-#: themes/virgula/pages/archive.twig:63
+#: themes/virgula/pages/archive.twig:79
 msgid "There aren't any posts in the timeframe you specified."
 msgstr "在指定的时间范围内没有任何帖子。"
 
@@ -323,7 +327,7 @@ msgstr "在指定的时间范围内没有任何帖子。"
 msgid "Posts created by &#8220;%s&#8221;"
 msgstr "由&#8220;%s&#8221;创建的帖子"
 
-#: themes/virgula/pages/author.twig:17
+#: themes/virgula/pages/author.twig:28
 msgid "This user hasn't created any posts."
 msgstr "此用户尚未创建任何帖子。"
 
@@ -336,7 +340,7 @@ msgstr "&#8220;%s&#8221; 分类中的帖子"
 msgid "Drafts"
 msgstr "草稿"
 
-#: themes/virgula/pages/drafts.twig:17
+#: themes/virgula/pages/drafts.twig:28
 msgid "You don't have any drafts."
 msgstr "您没有任何草稿。"
 
@@ -352,7 +356,7 @@ msgstr "所有帖子"
 msgid "Pages"
 msgstr "页面"
 
-#: themes/virgula/pages/index.twig:42
+#: themes/virgula/pages/index.twig:44
 msgid "More posts&hellip;"
 msgstr "更多帖子&hellip;"
 
@@ -392,7 +396,7 @@ msgstr "标签"
 msgid "Updated posts"
 msgstr "更新后的帖子"
 
-#: themes/virgula/pages/updated.twig:17
+#: themes/virgula/pages/updated.twig:28
 msgid "There aren't any updated posts."
 msgstr "没有任何更新的帖子。"
 

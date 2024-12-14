@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/sitemap/admin/pages/sitemap_settings.twig:3
@@ -56,34 +56,34 @@ msgstr ""
 "在您的服务器上创建一个 <em>sitemap.xml</em> 文件，帮助搜索引擎索引您的博"
 "客。"
 
-#: modules/sitemap/sitemap.php:36
+#: modules/sitemap/sitemap.php:39
 msgid "Sitemap"
 msgstr ""
 
-#: modules/sitemap/sitemap.php:54
+#: modules/sitemap/sitemap.php:59
 msgid "Hourly"
 msgstr "每小时"
 
-#: modules/sitemap/sitemap.php:55
+#: modules/sitemap/sitemap.php:60
 msgid "Daily"
 msgstr "每日"
 
-#: modules/sitemap/sitemap.php:56
+#: modules/sitemap/sitemap.php:61
 msgid "Weekly"
 msgstr "每周"
 
-#: modules/sitemap/sitemap.php:57
+#: modules/sitemap/sitemap.php:62
 msgid "Monthly"
 msgstr "每月"
 
-#: modules/sitemap/sitemap.php:58
+#: modules/sitemap/sitemap.php:63
 msgid "Yearly"
 msgstr "每年"
 
-#: modules/sitemap/sitemap.php:59
+#: modules/sitemap/sitemap.php:64
 msgid "Never"
 msgstr "从不"
 
-#: modules/sitemap/sitemap.php:83
+#: modules/sitemap/sitemap.php:88
 msgid "Could not determine the absolute path to the Sitemap."
 msgstr "无法确定Sitemap的绝对路径。"

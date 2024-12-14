@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/blossom/content/comment.twig:4
@@ -52,31 +52,31 @@ msgstr "Geplant"
 msgid "Pinned"
 msgstr "Angepinnt"
 
-#: themes/blossom/content/post.twig:27 themes/blossom/content/sidebar.twig:55
+#: themes/blossom/content/post.twig:29 themes/blossom/content/sidebar.twig:55
 #: themes/blossom/pages/view.twig:20
 msgid "[Untitled]"
 msgstr "[Unbenannt]"
 
-#: themes/blossom/content/post.twig:34
+#: themes/blossom/content/post.twig:37
 msgid "View webmentions"
 msgstr "Webmentions anzeigen"
 
-#: themes/blossom/content/post.twig:35
+#: themes/blossom/content/post.twig:38
 #, php-format
 msgid "%s webmention"
 msgid_plural "%s webmentions"
 msgstr[0] "%s Webmention"
 msgstr[1] "%s Webmentions"
 
-#: themes/blossom/content/post.twig:40
+#: themes/blossom/content/post.twig:43
 msgid "Comments closed"
 msgstr "Kommentare geschlossen"
 
-#: themes/blossom/content/post.twig:43
+#: themes/blossom/content/post.twig:46
 msgid "View comments"
 msgstr "Kommentare ansehen"
 
-#: themes/blossom/content/post.twig:44
+#: themes/blossom/content/post.twig:47
 #, php-format
 msgid "%s comment"
 msgid_plural "%s comments"
@@ -263,27 +263,31 @@ msgstr "Deine E-Mail Adresse"
 msgid "Your website"
 msgstr "Deine Website"
 
-#: themes/blossom/forms/comment/new.twig:12
+#: themes/blossom/forms/comment/new.twig:11
+msgid "Remember me"
+msgstr "Erinnere dich an mich"
+
+#: themes/blossom/forms/comment/new.twig:14
 msgid "Your comment"
 msgstr "Dein Kommentar"
 
-#: themes/blossom/forms/comment/new.twig:16
+#: themes/blossom/forms/comment/new.twig:20
 msgid "Markdown is allowed."
 msgstr "Markdown ist erlaubt."
 
-#: themes/blossom/forms/comment/new.twig:18
+#: themes/blossom/forms/comment/new.twig:22
 msgid "HTML tags allowed:"
 msgstr "Erlaubte HTML Tags:"
 
-#: themes/blossom/forms/comment/new.twig:20
+#: themes/blossom/forms/comment/new.twig:25
 msgid "HTML is not allowed."
 msgstr "HTML ist nicht erlaubt."
 
-#: themes/blossom/forms/comment/new.twig:24
+#: themes/blossom/forms/comment/new.twig:29
 msgid "Notify me when others comment"
 msgstr "Benachrichtige mich, wenn andere kommentieren"
 
-#: themes/blossom/forms/comment/new.twig:37
+#: themes/blossom/forms/comment/new.twig:42
 msgid "Speak"
 msgstr "Sprich"
 

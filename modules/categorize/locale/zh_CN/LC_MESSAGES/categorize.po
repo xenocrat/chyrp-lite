@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/categorize/admin/help/categorizing_posts.twig:3
@@ -88,7 +88,7 @@ msgid "Update"
 msgstr "更新"
 
 #: modules/categorize/admin/pages/manage_category.twig:3
-#: modules/categorize/categorize.php:25
+#: modules/categorize/categorize.php:30
 msgid "Manage Categories"
 msgstr "管理类别"
 
@@ -99,7 +99,7 @@ msgid "New Category"
 msgstr "新类别"
 
 #: modules/categorize/admin/pages/manage_category.twig:21
-#: modules/categorize/categorize.php:224
+#: modules/categorize/categorize.php:257
 msgid "Categories"
 msgstr "类别"
 
@@ -111,85 +111,85 @@ msgstr "所有帖子"
 msgid "Add Category"
 msgstr "添加类别"
 
-#: modules/categorize/categorize.php:67 modules/categorize/categorize.php:101
+#: modules/categorize/categorize.php:82 modules/categorize/categorize.php:121
 msgid "Category"
 msgstr "类别"
 
-#: modules/categorize/categorize.php:87
+#: modules/categorize/categorize.php:107
 msgid "[None]"
 msgstr "[空]"
 
-#: modules/categorize/categorize.php:161
+#: modules/categorize/categorize.php:192
 msgid "You did not specify a category."
 msgstr "您没有指定类别。"
 
-#: modules/categorize/categorize.php:172
+#: modules/categorize/categorize.php:203
 msgid "The category you specified was not found."
 msgstr "没有找到您指定的类别。"
 
-#: modules/categorize/categorize.php:192 modules/categorize/categorize.php:208
+#: modules/categorize/categorize.php:223 modules/categorize/categorize.php:239
 msgid "There are no posts in the category you specified."
 msgstr "您指定的类别中没有帖子。"
 
-#: modules/categorize/categorize.php:217
+#: modules/categorize/categorize.php:248
 #, php-format
 msgid "Posts in category &#8220;%s&#8221;"
 msgstr "&#8220;%s&#8221; 类别中的帖子"
 
-#: modules/categorize/categorize.php:248
+#: modules/categorize/categorize.php:285
 msgid "You do not have sufficient privileges to manage categories."
 msgstr "您没有足够的权限来管理类别。"
 
-#: modules/categorize/categorize.php:288 modules/categorize/categorize.php:298
+#: modules/categorize/categorize.php:327 modules/categorize/categorize.php:339
 msgid "You do not have sufficient privileges to add categories."
 msgstr "您没有足够的权限来添加类别。"
 
-#: modules/categorize/categorize.php:309 modules/categorize/categorize.php:381
+#: modules/categorize/categorize.php:350 modules/categorize/categorize.php:424
 msgid "No Name Specified"
 msgstr "没有指定名称"
 
-#: modules/categorize/categorize.php:310
+#: modules/categorize/categorize.php:351
 msgid "A name is required to add a category."
 msgstr "添加类别需要名字。"
 
-#: modules/categorize/categorize.php:332
+#: modules/categorize/categorize.php:371
 msgid "Category added."
 msgstr "类别已添加。"
 
-#: modules/categorize/categorize.php:341
+#: modules/categorize/categorize.php:382
 msgid "An ID is required to edit a category."
 msgstr "编辑类别需要ID。"
 
-#: modules/categorize/categorize.php:350 modules/categorize/categorize.php:391
-#: modules/categorize/categorize.php:438 modules/categorize/categorize.php:475
+#: modules/categorize/categorize.php:391 modules/categorize/categorize.php:434
+#: modules/categorize/categorize.php:483 modules/categorize/categorize.php:521
 msgid "Category not found."
 msgstr "类别未找到。"
 
-#: modules/categorize/categorize.php:356 modules/categorize/categorize.php:397
+#: modules/categorize/categorize.php:397 modules/categorize/categorize.php:440
 msgid "You do not have sufficient privileges to edit this category."
 msgstr "您没有足够的权限来编辑这个类别。"
 
-#: modules/categorize/categorize.php:375
+#: modules/categorize/categorize.php:418
 msgid "An ID is required to update a category."
 msgstr "更新类别需要ID。"
 
-#: modules/categorize/categorize.php:382
+#: modules/categorize/categorize.php:425
 msgid "A name is required to update a category."
 msgstr "更新类别需要名字。"
 
-#: modules/categorize/categorize.php:420
+#: modules/categorize/categorize.php:463
 msgid "Category updated."
 msgstr "类别已更新。"
 
-#: modules/categorize/categorize.php:429 modules/categorize/categorize.php:463
+#: modules/categorize/categorize.php:474 modules/categorize/categorize.php:509
 msgid "An ID is required to delete a category."
 msgstr "删除类别需要ID。"
 
-#: modules/categorize/categorize.php:444 modules/categorize/categorize.php:481
+#: modules/categorize/categorize.php:489 modules/categorize/categorize.php:527
 msgid "You do not have sufficient privileges to delete this category."
 msgstr "您没有足够的权限来删除这个类别。"
 
-#: modules/categorize/categorize.php:486
+#: modules/categorize/categorize.php:532
 msgid "Category deleted."
 msgstr "类别已删除。"
 

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: feathers/audio/audio.php:10
@@ -29,11 +29,11 @@ msgstr "Légendes"
 msgid "Description"
 msgstr "Description"
 
-#: feathers/audio/audio.php:64
+#: feathers/audio/audio.php:65
 msgid "You did not select any audio to upload."
 msgstr "Vous n'avez sélectionné aucun fichier audio à télécharger."
 
-#: feathers/audio/audio.php:192
+#: feathers/audio/audio.php:208
 msgid "Your web browser does not support the <code>audio</code> element."
 msgstr "Votre navigateur ne supporte pas cet élément <code>audio</audio>."
 
