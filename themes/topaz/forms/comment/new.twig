@@ -15,9 +15,12 @@
 {% endif %}
 <textarea name="body" id="comment_body_field">{{ posted("body") | fix(false, true) }}</textarea>
 <small>
-{% if site.enable_markdown %}{{ "Markdown is allowed." | translate }} {% endif %}
 {% if visitor.group.can("code_in_comments") and site.module_comments.allowed_comment_html is not empty %}
-{{ "HTML tags allowed:" | translate }} {{ "&lt;%s&gt;" | format(site.module_comments.allowed_comment_html | join("&gt;, &lt;") | fix ) }}
+{% if site.enable_markdown %}
+{{ "Markdown is allowed." | translate }}
+{% endif %}
+{{ "HTML tags allowed:" | translate }}
+{{ "&lt;%s&gt;" | format(site.module_comments.allowed_comment_html | join("&gt;, &lt;") | fix ) }}
 {% else %}
 {{ "HTML is not allowed." | translate }}
 {% endif %}
