@@ -1917,23 +1917,16 @@
             $text
         );
 
-        # Strip style tags.
+        # Strip script and style tags.
         $text = preg_replace(
-            "/<(style)(\s|>|\/>)/i",
-            "&lt;$1$2",
-            $text
-        );
-
-        # Strip script tags.
-        $text = preg_replace(
-            "/<(script)(\s|>|\/>)/i",
+            "/<(script|style)(\s|>|\/>)/i",
             "&lt;$1$2",
             $text
         );
 
         # Strip attributes from each tag, unless essential to its function.
         return preg_replace_callback(
-            "/<([a-z][a-z0-9]*)[^>]*?( ?\/)?>/i",
+            "/<([a-z][^\s>]*)[^>]*?(\s?\/)?>/i",
             function ($element) {
                 fallback($element[2], "");
 
@@ -1941,7 +1934,7 @@
                 $whitelist = "";
 
                 preg_match_all(
-                    "/ ([a-z]+)=(\"[^\"]+\"|\'[^\']+\')/i",
+                    "/\s([^\s=\/\"']+)\s*=\s*(\"[^\"]*\"|\'[^\']*\')/i",
                     $element[0],
                     $attributes,
                     PREG_SET_ORDER
@@ -1949,50 +1942,90 @@
 
                 foreach ($attributes as $attribute) {
                     $label = strtolower($attribute[1]);
-                    $content = trim($attribute[2], "\"'");
+                    $content = substr($attribute[2], 1, -1);
 
-                    switch ($label) {
-                        case "src":
-                            $array = array(
-                                "audio",
-                                "iframe",
-                                "img",
-                                "source",
-                                "track",
-                                "video"
-                            );
+                    switch ($name) {
+                        case "a":
+                            if ($label == "href") {
+                                if (is_url($content))
+                                    $whitelist.= $attribute[0];
+                            }
 
-                            if (in_array($name, $array) and is_url($content))
+                            break;
+
+                        case "audio":
+                        case "video":
+                            if ($label == "controls")
+                                $whitelist.= $attribute[0];
+
+                            if ($label == "src") {
+                                if (is_url($content))
+                                    $whitelist.= $attribute[0];
+                            }
+
+                            break;
+
+                        case "iframe":
+                            if ($label == "src") {
+                                if (is_url($content))
+                                    $whitelist.= $attribute[0];
+                            }
+
+                        case "img":
+                            if ($label == "alt")
+                                $whitelist.= $attribute[0];
+
+                            if ($label == "src") {
+                                if (is_url($content))
+                                    $whitelist.= $attribute[0];
+                            }
+
+                            break;
+
+                        case "ol":
+                            if ($label == "reversed")
+                                $whitelist.= $attribute[0];
+
+                            if ($label == "start")
+                                $whitelist.= $attribute[0];
+
+                            if ($label == "type")
                                 $whitelist.= $attribute[0];
 
                             break;
 
-                        case "href":
-                            $array = array(
-                                "a",
-                                "area"
-                            );
-
-                            if (in_array($name, $array) and is_url($content))
+                        case "source":
+                            if ($label == "type")
                                 $whitelist.= $attribute[0];
 
-                            break;
+                            if ($label == "src") {
+                                if (is_url($content))
+                                    $whitelist.= $attribute[0];
+                            }
 
-                        case "alt":
-                            $array = array(
-                                "area",
-                                "img"
-                            );
-
-                            if (in_array($name, $array))
+                        case "track":
+                            if ($label == "kind")
                                 $whitelist.= $attribute[0];
 
+                            if ($label == "label")
+                                $whitelist.= $attribute[0];
+
+                            if ($label == "srclang")
+                                $whitelist.= $attribute[0];
+
+                            if ($label == "src") {
+                                if (is_url($content))
+                                    $whitelist.= $attribute[0];
+                            }
+
                             break;
 
-                        case "dir":
-                        case "lang":
-                            $whitelist.= $attribute[0];
-                            break;
+                        default:
+                            if ($label == "dir")
+                                $whitelist.= $attribute[0];
+
+                            if ($label == "lang")
+                                $whitelist.= $attribute[0];
                     }
                 }
 
