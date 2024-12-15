@@ -743,7 +743,7 @@ iframe {
     border: none;
     margin: 1rem 0rem;
 }
-iframe.video_embed {
+iframe.content_embed {
     width: 100%;
     aspect-ratio: 16 / 9;
 }
