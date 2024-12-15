@@ -12,14 +12,30 @@ msgstr ""
 "X-Generator: Poedit 3.5\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/easy_embed/easy_embed.php:17 modules/easy_embed/easy_embed.php:24
+msgid "Embedded content from YouTube"
+msgstr "Ingesloten content van YouTube"
+
+#: modules/easy_embed/easy_embed.php:31
+msgid "Embedded content from Vimeo"
+msgstr "Ingesloten inhoud van Vimeo"
+
+#: modules/easy_embed/easy_embed.php:38
+msgid "Embedded content from Twitch"
+msgstr "Ingesloten inhoud van Twitch"
+
+#: modules/easy_embed/easy_embed.php:45
+msgid "Embedded content from Internet Archive"
+msgstr "Ingesloten inhoud van Internet Archive"
+
 #: modules/easy_embed/info.php:3
 msgid "Easy Embed"
 msgstr "Eenvoudig insluiten"
 
 #: modules/easy_embed/info.php:6
 msgid ""
-"Embed a video in your blog content by pasting its URL surrounded by "
-"<code>&lt;!--</code> and <code>--&gt;</code>."
+"Embed content in your blog by pasting its URL surrounded by <code>&lt;!--</"
+"code> and <code>--&gt;</code>."
 msgstr ""
-"Sluit een video in, in je blogcontent door de URL te plakken, omgeven door "
+"Sluit inhoud in uw blog in door de URL te plakken, omgeven door "
 "<code>&lt;!--</code> en <code>--&gt;</code>."

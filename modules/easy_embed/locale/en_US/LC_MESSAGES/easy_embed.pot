@@ -1,10 +1,27 @@
 #. This file is distributed under the same license as the Chyrp Lite package.
 
+#: modules/easy_embed/easy_embed.php:17
+#: modules/easy_embed/easy_embed.php:24
+msgid "Embedded content from YouTube"
+msgstr ""
+
+#: modules/easy_embed/easy_embed.php:31
+msgid "Embedded content from Vimeo"
+msgstr ""
+
+#: modules/easy_embed/easy_embed.php:38
+msgid "Embedded content from Twitch"
+msgstr ""
+
+#: modules/easy_embed/easy_embed.php:45
+msgid "Embedded content from Internet Archive"
+msgstr ""
+
 #: modules/easy_embed/info.php:3
 msgid "Easy Embed"
 msgstr ""
 
 #: modules/easy_embed/info.php:6
-msgid "Embed a video in your blog content by pasting its URL surrounded by <code>&lt;!--</code> and <code>--&gt;</code>."
+msgid "Embed content in your blog by pasting its URL surrounded by <code>&lt;!--</code> and <code>--&gt;</code>."
 msgstr ""
 
