@@ -48,7 +48,7 @@ visitors will see when they first arrive at your website.
 * Sitemap: index your blog for search engines.
 * MAPTCHA: use simple mathematics problems to prevent spam.
 * Highlighter: syntax highlighting for your code snippets.
-* Easy Embed: the easiest way to embed videos in your blog.
+* Easy Embed: the easiest way to embed content in your blog.
 * Post Views: maintain a view count for your blog entries.
 * MathJax: a JavaScript display engine for mathematics.
 

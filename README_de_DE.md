@@ -41,7 +41,7 @@ Feathern ermöglichen verschiedene Sorten von Blog-Inhalten – Sie können sich
 * Sitemap: Indizieren Sie Ihr Blog für Suchmaschinen.
 * MAPTCHA: Verwenden Sie einfache mathematische Aufgaben, um Spam zu verhindern.
 * Highlighter: Syntaxhervorhebung für Ihre Codefragmente.
-* Einfaches Einbetten: Der einfachste Weg, Videos in Ihr Blog einzubetten.
+* Einfaches Einbetten: Der einfachste Weg, Inhalte in Ihr Blog einzubetten.
 * Beitragsaufrufe: Behalten Sie die Anzahl der Aufrufe für Ihre Blogeinträge bei.
 * MathJax: eine JavaScript-Anzeige-Engine für Mathematik.
 

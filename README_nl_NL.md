@@ -40,7 +40,7 @@ Met een flexibel system van feathers en paginas, kun je je website precies zó m
 * Sitemap: indexeer je blog voor zoekmachines.
 * MAPTCHA: gebruik eenvoudige rekensommen om spam te voorkomen.
 * Markeerder: syntax markering voor je code-knipsels.
-* Eenvoudig insluiten: de eenvoudigste manier om videos in je blog in te sluiten.
+* Eenvoudig insluiten: de eenvoudigste manier om inhoud in uw blog in te sluiten.
 * Post Views: een teller die de aantallen keren dat je blogposts gelezen zijn weergeeft.
 * MathJax: een JavaScript weergave-machine voor Wiskundige inhoud.
 

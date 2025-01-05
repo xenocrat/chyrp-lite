@@ -51,7 +51,7 @@ Chyrp Lite를 사용하면 번거로움을 최소화하면서 자신의 웹 서�
 * Sitemap: 검색 엔진용 블로그 색인을 생성합니다.
 * MAPTCHA: 간단한 수학 문제를 사용하여 스팸을 방지합니다.
 * Highlighter: 코드 조각에 대한 구문 강조 표시.
-* Easy Embed: 블로그에 동영상을 삽입하는 가장 쉬운 방법입니다.
+* Easy Embed: 블로그에 콘텐츠를 삽입하는 가장 쉬운 방법입니다.
 * Post Views: 블로그 항목의 조회수를 유지합니다.
 * MathJax: 수학용 JavaScript 디스플레이 엔진.
 

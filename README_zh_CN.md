@@ -44,7 +44,7 @@ ARIA标签可确保您的博客可供使用辅助技术的访问者访问。
 * Sitemap: 在搜索引擎上索引您的博客。
 * MAPTCHA: 使用简单的算法来防止垃圾邮件。
 * Highlighter: 语法突出显示您的代码片段。
-* Easy Embed: 在您的博客中嵌入视频最简单的方法。
+* Easy Embed: 在您的博客中嵌入内容的最简单方法。
 * Post Views: 维护您的博客条目的查看次数。
 * MathJax: JavaScript的数学显示引擎。
 

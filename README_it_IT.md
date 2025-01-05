@@ -51,7 +51,7 @@ giunti sul tuo sito.
 * Sitemap: Indicizza il tuo blog per motori di ricerca.
 * MAPTCHA: Usa semplici operazioni di matematica per prevenire lo spam.
 * Highlighter: Aggiunge la colorazione della sintassi concatenata.
-* Facile Embed: Il modo più semplice per incorporare video nel tuo blog.
+* Facile Embed: Il modo più semplice per incorporare contenuti nel tuo blog.
 * Visualizzazioni dei post: Contatore per la visualizzazione dei tuoi post.
 * MathJax: Un motore di visualizzazione JavaScript per la matematica.
 
