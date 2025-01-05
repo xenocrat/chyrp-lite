@@ -7,35 +7,35 @@
         # Array: $urls
         # An array of clean URL => dirty URL translations.
         public $urls = array(
-            '|/id/post/([0-9]+)/|'
-                => '/?action=id&amp;post=$1',
+                '|/id/post/([0-9]+)/|'
+            =>  '/?action=id&amp;post=$1',
 
-            '|/id/page/([0-9]+)/|'
-                => '/?action=id&amp;page=$1',
+                '|/id/page/([0-9]+)/|'
+            =>  '/?action=id&amp;page=$1',
 
-            '|/author/([0-9]+)/|'
-                => '/?action=author&amp;id=$1',
+                '|/author/([0-9]+)/|'
+            =>  '/?action=author&amp;id=$1',
 
-            '|/random/([^/]+)/|'
-                => '/?action=random&amp;feather=$1',
+                '|/random/([^/]+)/|'
+            =>  '/?action=random&amp;feather=$1',
 
-            '|/matter/([^/]+)/|'
-                => '/?action=matter&amp;url=$1',
+                '|/matter/([^/]+)/|'
+            =>  '/?action=matter&amp;url=$1',
 
-            '|/search/([^/]+)/|'
-                => '/?action=search&amp;query=$1',
+                '|/search/([^/]+)/|'
+            =>  '/?action=search&amp;query=$1',
 
-            '|/archive/([0-9]{4})/([0-9]{2})/([0-9]{2})/|'
-                => '/?action=archive&amp;year=$1&amp;month=$2&amp;day=$3',
+                '|/archive/([0-9]{4})/([0-9]{2})/([0-9]{2})/|'
+            =>  '/?action=archive&amp;year=$1&amp;month=$2&amp;day=$3',
 
-            '|/archive/([0-9]{4})/([0-9]{2})/|'
-                => '/?action=archive&amp;year=$1&amp;month=$2',
+                '|/archive/([0-9]{4})/([0-9]{2})/|'
+            =>  '/?action=archive&amp;year=$1&amp;month=$2',
 
-            '|/archive/([0-9]{4})/|'
-                => '/?action=archive&amp;year=$1',
+                '|/archive/([0-9]{4})/|'
+            =>  '/?action=archive&amp;year=$1',
 
-            '|/([^/]+)/feed/|'
-                => '/?action=$1&amp;feed'
+                '|/([^/]+)/feed/|'
+            =>  '/?action=$1&amp;feed'
         );
 
         # Variable: $twig
