@@ -12,21 +12,30 @@ msgstr ""
 "X-Generator: Poedit 3.5\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
-#: modules/easy_embed/easy_embed.php:17 modules/easy_embed/easy_embed.php:24
+#: modules/easy_embed/easy_embed.php:20 modules/easy_embed/easy_embed.php:27
 msgid "Embedded content from YouTube"
 msgstr "Eingebettete Inhalte von YouTube"
 
-#: modules/easy_embed/easy_embed.php:31
+#: modules/easy_embed/easy_embed.php:36
 msgid "Embedded content from Vimeo"
 msgstr "Eingebettete Inhalte von Vimeo"
 
-#: modules/easy_embed/easy_embed.php:38
+#: modules/easy_embed/easy_embed.php:45
 msgid "Embedded content from Twitch"
 msgstr "Eingebettete Inhalte von Twitch"
 
-#: modules/easy_embed/easy_embed.php:45
+#: modules/easy_embed/easy_embed.php:54
 msgid "Embedded content from Internet Archive"
 msgstr "Eingebettete Inhalte aus dem Internetarchiv"
+
+#: modules/easy_embed/easy_embed.php:63
+msgid "Embedded content from Spotify"
+msgstr "Eingebettete Inhalte von Spotify"
+
+#: modules/easy_embed/easy_embed.php:72 modules/easy_embed/easy_embed.php:79
+#: modules/easy_embed/easy_embed.php:86
+msgid "Embedded content from Bandcamp"
+msgstr "Eingebettete Inhalte von Bandcamp"
 
 #: modules/easy_embed/info.php:3
 msgid "Easy Embed"

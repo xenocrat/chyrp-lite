@@ -1,20 +1,30 @@
 #. This file is distributed under the same license as the Chyrp Lite package.
 
-#: modules/easy_embed/easy_embed.php:17
-#: modules/easy_embed/easy_embed.php:24
+#: modules/easy_embed/easy_embed.php:20
+#: modules/easy_embed/easy_embed.php:27
 msgid "Embedded content from YouTube"
 msgstr ""
 
-#: modules/easy_embed/easy_embed.php:31
+#: modules/easy_embed/easy_embed.php:36
 msgid "Embedded content from Vimeo"
 msgstr ""
 
-#: modules/easy_embed/easy_embed.php:38
+#: modules/easy_embed/easy_embed.php:45
 msgid "Embedded content from Twitch"
 msgstr ""
 
-#: modules/easy_embed/easy_embed.php:45
+#: modules/easy_embed/easy_embed.php:54
 msgid "Embedded content from Internet Archive"
+msgstr ""
+
+#: modules/easy_embed/easy_embed.php:63
+msgid "Embedded content from Spotify"
+msgstr ""
+
+#: modules/easy_embed/easy_embed.php:72
+#: modules/easy_embed/easy_embed.php:79
+#: modules/easy_embed/easy_embed.php:86
+msgid "Embedded content from Bandcamp"
 msgstr ""
 
 #: modules/easy_embed/info.php:3
