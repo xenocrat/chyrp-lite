@@ -230,14 +230,15 @@
 
         # Redact and escape the backtrace for display.
         foreach ($backtrace as $index => &$trace) {
-            if (!isset($trace["file"]) or !isset($trace["line"]))
+            if (!isset($trace["file"]) or !isset($trace["line"])) {
                 unset($backtrace[$index]);
-            else
+            } else {
                 $trace["file"] = fix(
                     str_replace(MAIN_DIR.DIR, "", $trace["file"]),
                     false,
                     true
                 );
+            }
         }
 
         #---------------------------------------------
