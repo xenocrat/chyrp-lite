@@ -1946,102 +1946,132 @@
 
                     switch ($name) {
                         case "a":
-                            if ($label == "href") {
-                                if (is_url($content))
-                                    $whitelist.= $attribute[0];
+                            switch ($label) {
+                                case "href":
+                                    if (is_url($content))
+                                        $whitelist.= $attribute[0];
+
+                                    break;
                             }
 
                             break;
 
                         case "audio":
                         case "video":
-                            if ($label == "controls")
-                                $whitelist.= $attribute[0];
-
-                            if ($label == "src") {
-                                if (is_url($content))
+                            switch ($label) {
+                                case "controls":
                                     $whitelist.= $attribute[0];
+
+                                    break;
+
+                                case "src":
+                                    if (is_url($content))
+                                        $whitelist.= $attribute[0];
+
+                                    break;
                             }
 
                             break;
 
                         case "iframe":
-                            if ($label == "src") {
-                                if (is_url($content))
-                                    $whitelist.= $attribute[0];
+                            switch ($label) {
+                                case "src":
+                                    if (is_url($content))
+                                        $whitelist.= $attribute[0];
+
+                                    break;
                             }
 
-                        case "img":
-                            if ($label == "alt")
-                                $whitelist.= $attribute[0];
+                            break;
 
-                            if ($label == "src") {
-                                if (is_url($content))
+                        case "img":
+                            switch ($label) {
+                                case "alt":
                                     $whitelist.= $attribute[0];
+
+                                    break;
+
+                                case "src":
+                                    if (is_url($content))
+                                        $whitelist.= $attribute[0];
+
+                                    break;
                             }
 
                             break;
 
                         case "ol":
-                            if ($label == "reversed")
-                                $whitelist.= $attribute[0];
-
-                            if ($label == "start") {
-                                if (is_numeric($content))
+                            switch ($label) {
+                                case "reversed":
+                                case "type":
                                     $whitelist.= $attribute[0];
-                            }
 
-                            if ($label == "type")
-                                $whitelist.= $attribute[0];
+                                    break;
+
+                                case "start":
+                                    if (is_numeric($content))
+                                        $whitelist.= $attribute[0];
+
+                                    break;
+                            }
 
                             break;
 
                         case "source":
-                            if ($label == "type")
-                                $whitelist.= $attribute[0];
-
-                            if ($label == "src") {
-                                if (is_url($content))
+                            switch ($label) {
+                                case "type":
                                     $whitelist.= $attribute[0];
+
+                                    break;
+
+                                case "src":
+                                    if (is_url($content))
+                                        $whitelist.= $attribute[0];
+
+                                    break;
                             }
 
+                            break;
+
                         case "track":
-                            if ($label == "kind")
-                                $whitelist.= $attribute[0];
-
-                            if ($label == "label")
-                                $whitelist.= $attribute[0];
-
-                            if ($label == "srclang")
-                                $whitelist.= $attribute[0];
-
-                            if ($label == "src") {
-                                if (is_url($content))
+                            switch ($label) {
+                                case "kind":
+                                case "label":
+                                case "srclang":
                                     $whitelist.= $attribute[0];
+
+                                    break;
+
+                                case "src":
+                                    if (is_url($content))
+                                        $whitelist.= $attribute[0];
+
+                                    break;
                             }
 
                             break;
 
                         case "td":
                         case "th":
-                            if ($label == "colspan") {
-                                if (is_numeric($content))
-                                    $whitelist.= $attribute[0];
-                            }
+                            switch ($label) {
+                                case "colspan":
+                                case "rowspan":
+                                    if (is_numeric($content))
+                                        $whitelist.= $attribute[0];
 
-                            if ($label == "rowspan") {
-                                if (is_numeric($content))
-                                    $whitelist.= $attribute[0];
+                                    break;
                             }
 
                             break;
 
                         default:
-                            if ($label == "dir")
-                                $whitelist.= $attribute[0];
+                            switch ($label) {
+                                case "dir":
+                                case "lang":
+                                    $whitelist.= $attribute[0];
 
-                            if ($label == "lang")
-                                $whitelist.= $attribute[0];
+                                    break;
+                            }
                     }
                 }
 
