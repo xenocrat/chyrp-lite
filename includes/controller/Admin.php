@@ -3487,7 +3487,7 @@
                 );
 
             $conf = array(
-                ".htaccess" => htaccess_conf(),
+                "_htaccess" => htaccess_conf(),
                 "caddyfile" => caddyfile_conf(),
                 "include.conf" => nginx_conf()
             );
