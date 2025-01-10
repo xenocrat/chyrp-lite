@@ -2087,7 +2087,7 @@
 
     /**
      * Function: get_remote
-     * Retrieve the contents of a URL.
+     * Retrieves the contents of a URL.
      *
      * Parameters:
      *     $url - The URL of the resource to be retrieved.

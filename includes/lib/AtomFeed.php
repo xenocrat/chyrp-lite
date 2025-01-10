@@ -332,7 +332,7 @@
         }
 
         /**
-         * Function: output
+         * Function: display
          * Displays the generated feed.
          */
         public function display(
