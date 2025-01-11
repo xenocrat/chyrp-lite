@@ -357,7 +357,7 @@
             $clean = Category::check_clean(
                 oneof(
                     sanitize($_POST['clean'], true, SLUG_STRICT, 128),
-                    md5($name)
+                    md5($_POST['name'])
                 )
             );
 
@@ -445,8 +445,8 @@
             $clean = ($_POST['clean'] != $category->clean) ?
                 Category::check_clean(
                     oneof(
-                        sanitize($clean, true, SLUG_STRICT, 128),
-                        md5($name)
+                        sanitize($_POST['clean'], true, SLUG_STRICT, 128),
+                        md5($_POST['name'])
                     )
                 )
                 :
