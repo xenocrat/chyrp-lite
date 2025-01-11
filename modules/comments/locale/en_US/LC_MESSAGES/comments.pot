@@ -210,7 +210,7 @@ msgid "Delete Own Comments"
 msgstr ""
 
 #: modules/comments/comments.php:93
-msgid "Can Use HTML in Comments"
+msgid "Use HTML in Comments"
 msgstr ""
 
 #: modules/comments/comments.php:102

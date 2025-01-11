@@ -222,8 +222,8 @@ msgid "Delete Own Comments"
 msgstr "Eliminare i propri commenti"
 
 #: modules/comments/comments.php:93
-msgid "Can Use HTML in Comments"
-msgstr "Si può usare HTML nei commenti"
+msgid "Use HTML in Comments"
+msgstr "Usa HTML nei commenti"
 
 #: modules/comments/comments.php:102
 msgid "Please enter an ID to find a comment."

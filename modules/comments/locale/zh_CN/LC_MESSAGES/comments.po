@@ -221,8 +221,8 @@ msgid "Delete Own Comments"
 msgstr "删除自己的评论"
 
 #: modules/comments/comments.php:93
-msgid "Can Use HTML in Comments"
-msgstr "可以在评论中使用HTML"
+msgid "Use HTML in Comments"
+msgstr "在评论中使用 HTML"
 
 #: modules/comments/comments.php:102
 msgid "Please enter an ID to find a comment."
