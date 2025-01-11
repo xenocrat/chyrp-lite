@@ -38,7 +38,7 @@
             Group::add_permission("edit_own_comment", "Edit Own Comments");
             Group::add_permission("delete_comment", "Delete Comments");
             Group::add_permission("delete_own_comment", "Delete Own Comments");
-            Group::add_permission("code_in_comments", "Can Use HTML in Comments");
+            Group::add_permission("code_in_comments", "Use HTML in Comments");
 
             Route::current()->add("comment/(id)/", "comment");
         }
@@ -90,7 +90,7 @@
             $names["edit_own_comment"]    = __("Edit Own Comments", "comments");
             $names["delete_comment"]      = __("Delete Comments", "comments");
             $names["delete_own_comment"]  = __("Delete Own Comments", "comments");
-            $names["code_in_comments"]    = __("Can Use HTML in Comments", "comments");
+            $names["code_in_comments"]    = __("Use HTML in Comments", "comments");
             return $names;
         }
 
