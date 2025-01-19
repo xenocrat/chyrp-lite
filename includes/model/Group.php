@@ -362,7 +362,11 @@
                 "edit_group"        => __("Edit Groups"),
                 "delete_group"      => __("Delete Groups"),
                 "import_content"    => __("Import Content"),
-                "export_content"    => __("Export Content")
+                "export_content"    => __("Export Content"),
+                "view_upload"       => __("View Uploads"),
+                "add_upload"        => __("Add Uploads"),
+                "edit_upload"       => __("Edit Uploads"),
+                "delete_upload"     => __("Delete Uploads")
             );
 
             Trigger::current()->filter($names, "list_permissions");
