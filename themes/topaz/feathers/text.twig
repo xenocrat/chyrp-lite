@@ -7,7 +7,7 @@
 <a href="{{ post.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(post.title | striptags | normalize | fix(true)) }}">{{ post.title }}</a>
 </h2>
 <h3>
-<a href="{{ url('author/' ~ post.author.id) }}">{{ "Written by %s" | translate | format(post.author.name) }}</a>
+<a href="{{ url('author/' ~ post.author.id) }}">{{ "Written by %s" | translate | format(post.author.name | fix(false, true)) }}</a>
 </h3>
 </header>
 {% endif %}
