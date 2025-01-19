@@ -3,7 +3,7 @@
 {% block title %}{{ "Edit Upload" | translate }}{% endblock %}
 
 {% block content %}
-<h2>{{ "Editing Upload &#8220;%s&#8221;" | translate | format(filename | fix) }}</h2>
+<h2>{{ "Editing Upload &#8220;%s&#8221;" | translate | format(filename | fix(false, true)) }}</h2>
 <form id="upload_edit" class="split" action="{{ url('update_upload') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
 <fieldset role="presentation">
 <p>

@@ -61,7 +61,7 @@
 {% endif %}
 </td>
 <td class="page_author value">
-{{ page.author.name | fix }}
+{{ page.author.name | fix(false, true) }}
 </td>
 {{ trigger.call("manage_pages_column", page) }}
 <td class="controls">

@@ -31,7 +31,7 @@
 <tr id="pingback_{{ pingback.id }}" class="pingback">
 <td class="pingback_title title main">
 <a href="{{ pingback.source | fix(true) }}">
-{{ pingback.title | oneof("[Untitled]" | translate) | truncate(40) }}</a>
+{{ pingback.title | fix(false, true) | oneof("[Untitled]" | translate) | truncate(40) }}</a>
 </td>
 <td class="pingback_post title">
 {% if not pingback.post.no_results %}

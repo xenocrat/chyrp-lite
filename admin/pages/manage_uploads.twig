@@ -44,7 +44,7 @@
 {% else %}
 {{ icon_svg("file.svg", false, "placeholder") }}
 {% endif %}
-<a target="_blank" href="{{ upload.name | uploaded }}">{{ upload.name | fix }}</a>
+<a target="_blank" href="{{ upload.name | uploaded }}">{{ upload.name | fix(false, true) }}</a>
 </td>
 <td class="uploads_modified value">
 {{ upload.modified | time("Y-m-d H:i:s") }}

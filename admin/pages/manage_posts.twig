@@ -43,13 +43,13 @@
 </td>
 <td class="post_status status">
 {% for group in post_statuses.(post.id).groups %}
-<a href="{{ url('manage_users/query/' ~ (('group:' ~ group.name) | url_encode)) }}">{{ group.name | fix }}</a>
+<a href="{{ url('manage_users/query/' ~ (('group:' ~ group.name) | url_encode)) }}">{{ group.name | fix(false, true) }}</a>
 {% else %}
 {{ post_statuses.(post.id).name | oneof("[None]" | translate) }}
 {% endfor %}
 </td>
 <td class="post_author value">
-{{ post.author.name | fix }}
+{{ post.author.name | fix(false, true) }}
 </td>
 {{ trigger.call("manage_posts_column", post) }}
 <td class="controls">

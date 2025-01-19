@@ -39,17 +39,17 @@
 {% for user in users.paginated %}
 <tr id="user_{{ user.id }}" class="user">
 <td class="user_name name main">
-<a href="mailto:{{ user.email | fix(true) }}">{{ user.login | fix }}</a>
-{% if user.full_name is not empty %}<span class="sub">({{ user.full_name | fix }})</span>{% endif %}
+<a href="mailto:{{ user.email | fix(true) }}">{{ user.login | fix(false, true) }}</a>
+{% if user.full_name is not empty %}<span class="sub">({{ user.full_name | fix(false, true) }})</span>{% endif %}
 </td>
 <td class="user_group value">
-<a href="{{ url('manage_groups/search/' ~ (user.login | url_encode)) }}">{{ user.group.name | fix }}</a>
+<a href="{{ url('manage_groups/search/' ~ (user.login | url_encode)) }}">{{ user.group.name | fix(false, true) }}</a>
 </td>
 <td class="user_joined date">
 {{ user.joined_at | time }}
 </td>
 <td class="user_website name">
-{% if user.website is not empty %}<a href="{{ user.website | fix(true) }}">{{ user.website | fix }}</a>{% endif %}
+{% if user.website is not empty %}<a href="{{ user.website | fix(true) }}">{{ user.website | fix(false, true) }}</a>{% endif %}
 </td>
 {% if site.email_activation %}
 <td class="user_activated emblem">
