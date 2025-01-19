@@ -240,21 +240,10 @@
                     __("Invalid authentication token.")
                 );
 
-            if (
-                !Visitor::current()->group->can(
-                    "add_post",
-                    "edit_post",
-                    "add_draft",
-                    "edit_draft",
-                    "edit_own_post",
-                    "edit_own_draft",
-                    "add_page",
-                    "edit_page"
-                )
-            )
+            if (!Visitor::current()->group->can("add_upload"))
                 show_403(
                     __("Access Denied"),
-                    __("You do not have sufficient privileges to upload files.")
+                    __("You do not have sufficient privileges to add uploads.")
                 );
 
             if (!isset($_FILES['file']))
@@ -269,8 +258,10 @@
                 $url = Config::current()->chyrp_url.
                        "/includes/thumbnail.php?file=".urlencode($filename);
 
-                $data = array("file" => $filename, "url" => $url);
-                json_response(__("File uploaded."), $data);
+                json_response(
+                    __("File uploaded."),
+                    array("file" => $filename, "url" => $url)
+                );
             }
         }
 
@@ -282,10 +273,10 @@
                     __("Invalid authentication token.")
                 );
 
-            if (!Visitor::current()->group->can("edit_post", "edit_page", true))
+            if (!Visitor::current()->group->can("view_uploads"))
                 show_403(
                     __("Access Denied"),
-                    __("You do not have sufficient privileges to manage uploads.")
+                    __("You do not have sufficient privileges to view uploads.")
                 );
 
             $search = fallback($_POST['search'], "");
