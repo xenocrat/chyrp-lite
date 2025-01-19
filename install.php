@@ -929,7 +929,11 @@
                 "edit_group" => "Edit Groups",
                 "delete_group" => "Delete Groups",
                 "import_content" => "Import Content",
-                "export_content" => "Export Content"
+                "export_content" => "Export Content",
+                "view_upload" => "View Uploads",
+                "add_upload" => "Add Uploads",
+                "edit_upload" => "Edit Uploads",
+                "delete_upload" => "Delete Uploads"
             );
 
             # Delete all existing permissions.

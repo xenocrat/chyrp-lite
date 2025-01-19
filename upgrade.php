@@ -635,6 +635,122 @@
             );
     }
 
+    /**
+     * Function: add_view_upload
+     * Adds the view_upload permission.
+     *
+     * Versions: 2025.01 => 2025.02
+     */
+    function add_view_upload(
+    ): void {
+        $sql = SQL::current();
+
+        if (
+            !$sql->count(
+                "permissions",
+                array(
+                    "id" => "view_upload",
+                    "group_id" => 0
+                )
+            )
+        )
+            $sql->insert(
+                "permissions",
+                array(
+                    "id" => "view_upload",
+                    "name" => "View Uploads",
+                    "group_id" => 0
+                )
+            );
+    }
+
+    /**
+     * Function: add_add_upload
+     * Adds the add_upload permission.
+     *
+     * Versions: 2025.01 => 2025.02
+     */
+    function add_add_upload(
+    ): void {
+        $sql = SQL::current();
+
+        if (
+            !$sql->count(
+                "permissions",
+                array(
+                    "id" => "add_upload",
+                    "group_id" => 0
+                )
+            )
+        )
+            $sql->insert(
+                "permissions",
+                array(
+                    "id" => "add_upload",
+                    "name" => "Add Uploads",
+                    "group_id" => 0
+                )
+            );
+    }
+
+    /**
+     * Function: add_edit_upload
+     * Adds the edit_upload permission.
+     *
+     * Versions: 2025.01 => 2025.02
+     */
+    function add_edit_upload(
+    ): void {
+        $sql = SQL::current();
+
+        if (
+            !$sql->count(
+                "permissions",
+                array(
+                    "id" => "edit_upload",
+                    "group_id" => 0
+                )
+            )
+        )
+            $sql->insert(
+                "permissions",
+                array(
+                    "id" => "edit_upload",
+                    "name" => "Edit Uploads",
+                    "group_id" => 0
+                )
+            );
+    }
+
+    /**
+     * Function: add_delete_upload
+     * Adds the delete_upload permission.
+     *
+     * Versions: 2025.01 => 2025.02
+     */
+    function add_delete_upload(
+    ): void {
+        $sql = SQL::current();
+
+        if (
+            !$sql->count(
+                "permissions",
+                array(
+                    "id" => "delete_upload",
+                    "group_id" => 0
+                )
+            )
+        )
+            $sql->insert(
+                "permissions",
+                array(
+                    "id" => "delete_upload",
+                    "name" => "Delete Uploads",
+                    "group_id" => 0
+                )
+            );
+    }
+
     #---------------------------------------------
     # Output Starts
     #---------------------------------------------
@@ -969,6 +1085,10 @@
         add_monospace_font();
         add_default_statuses();
         rename_cacert_pem();
+        add_view_upload();
+        add_add_upload();
+        add_edit_upload();
+        add_delete_upload();
 
         # Perform module upgrades.
         foreach ($config->enabled_modules as $module) {
