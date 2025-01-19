@@ -147,6 +147,10 @@
                 if ($visitor->group->can("add_group", "edit_group", "delete_group"))
                     return $route->action = "manage_groups";
 
+                # Can they manage uploads?
+                if ($visitor->group->can("edit_upload", "delete_upload"))
+                    return $route->action = "manage_uploads";
+
                 # Can they import content?
                 if ($visitor->group->can("import_content"))
                     return $route->action = "import";
@@ -1918,6 +1922,99 @@
         }
 
         /**
+         * Function: admin_edit_upload
+         * Upload editing.
+         */
+        public function admin_edit_upload(
+        ): void {
+            if (!Visitor::current()->group->can("edit_upload"))
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to edit uploads.")
+                );
+
+            fallback($_GET['file'], "");
+            $filename = str_replace(array(DIR, "/"), "", $_GET['file']);
+            $filepath = uploaded($filename, false);
+            $extension = pathinfo($filepath, PATHINFO_EXTENSION);
+
+            if (!is_readable($filepath) or !is_file($filepath))
+                show_404(
+                    __("Not Found"),
+                    __("File not found.")
+                );
+
+            $this->display(
+                "pages".DIR."edit_upload",
+                array(
+                    "filename" => $filename,
+                    "extension" => $extension
+                )
+            );
+        }
+
+        /**
+         * Function: admin_update_upload
+         * Updates an upload when the form is submitted.
+         */
+        public function admin_update_upload(
+        ): never {
+            if (!Visitor::current()->group->can("edit_upload"))
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to edit uploads.")
+                );
+
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
+                show_403(
+                    __("Access Denied"),
+                    __("Invalid authentication token.")
+                );
+
+            if (!isset($_POST['file']))
+                error(
+                    __("Error"),
+                    __("Missing argument."),
+                    code:400
+                );
+
+            if (!isset($_FILES['upload']) or !upload_tester($_FILES['upload']))
+                error(
+                    __("Error"),
+                    __("You did not select anything to upload."),
+                    code:422
+                );
+
+            $filename = str_replace(array(DIR, "/"), "", $_POST['file']);
+            $filepath = uploaded($filename, false);
+
+            if (!is_readable($filepath) or !is_file($filepath))
+                show_404(
+                    __("Not Found"),
+                    __("File not found.")
+                );
+
+            $tmp_name = $_FILES['upload']['tmp_name'];
+
+            if (!is_uploaded_file($tmp_name))
+                show_403(
+                    __("Access Denied"),
+                    __("Only uploaded files are accepted.")
+                );
+
+            if (!move_uploaded_file($tmp_name, $filepath))
+                error(
+                    __("Error"),
+                    __("Failed to write file to disk.")
+                );
+
+            Flash::notice(
+                __("Upload updated."),
+                "manage_uploads"
+            );
+        }
+
+        /**
          * Function: admin_delete_upload
          * Upload deletion (confirm page).
          */
@@ -1925,7 +2022,7 @@
         ): void {
             $sql = SQL::current();
 
-            if (!Visitor::current()->group->can("edit_post", "edit_page", true))
+            if (!Visitor::current()->group->can("delete_upload"))
                 show_403(
                     __("Access Denied"),
                     __("You do not have sufficient privileges to delete uploads.")
@@ -1979,7 +2076,7 @@
          */
         public function admin_destroy_upload(
         ): never {
-            if (!Visitor::current()->group->can("edit_post", "edit_page", true))
+            if (!Visitor::current()->group->can("delete_upload"))
                 show_403(
                     __("Access Denied"),
                     __("You do not have sufficient privileges to delete uploads.")
@@ -2022,7 +2119,7 @@
          */
         public function admin_manage_uploads(
         ): void {
-            if (!Visitor::current()->group->can("edit_post", "edit_page", true))
+            if (!Visitor::current()->group->can("edit_upload", "delete_upload"))
                 show_403(
                     __("Access Denied"),
                     __("You do not have sufficient privileges to manage uploads.")
@@ -3664,8 +3761,14 @@
                     )
                 );
 
-            if ($visitor->group->can("edit_post", "edit_page", true))
-                $manage["manage_uploads"] = array("title" => __("Uploads"));
+            if ($visitor->group->can("edit_upload", "delete_upload"))
+                $manage["manage_uploads"] = array(
+                    "title" => __("Uploads"),
+                    "selected" => array(
+                        "edit_upload",
+                        "delete_upload"
+                    )
+                );
 
             $trigger->filter($manage, "manage_nav");
 
