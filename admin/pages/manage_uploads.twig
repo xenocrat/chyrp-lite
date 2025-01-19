@@ -24,7 +24,7 @@
 <th class="uploads_size value">{{ "Size" | translate }}</th>
 <th class="uploads_type value">{{ "Type" | translate }}</th>
 {{ trigger.call("manage_uploads_column_header") }}
-<th class="controls" colspan="2">{{ "Controls" | translate }}</th>
+<th class="controls" colspan="3">{{ "Controls" | translate }}</th>
 </tr>
 </thead>
 <tbody>
@@ -57,14 +57,25 @@
 </td>
 {{ trigger.call("manage_uploads_column", upload) }}
 <td class="controls">
+{% if visitor.group.can("view_upload") %}
 <a class="emblem" href="{{ upload.name | download }}">
 {{- icon_svg("download.svg", "Download" | translate) -}}
 </a>
+{% endif %}
 </td>
 <td class="controls">
+{% if visitor.group.can("edit_upload") %}
+<a class="upload_edit_link edit_link emblem" href="{{ url('edit_upload/file/' ~ (upload.name | url_encode)) }}">
+{{- icon_svg("edit.svg", "Edit" | translate) -}}
+</a>
+{% endif %}
+</td>
+<td class="controls">
+{% if visitor.group.can("delete_upload") %}
 <a class="upload_delete_link delete_link emblem" href="{{ url('delete_upload/file/' ~ (upload.name | url_encode)) }}">
 {{- icon_svg("delete.svg", "Delete" | translate) -}}
 </a>
+{% endif %}
 </td>
 </tr>
 {% else %}

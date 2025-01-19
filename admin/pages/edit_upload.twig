@@ -1,0 +1,24 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block title %}{{ "Edit Upload" | translate }}{% endblock %}
+
+{% block content %}
+<h2>{{ "Editing Upload &#8220;%s&#8221;" | translate | format(filename | fix) }}</h2>
+<form id="upload_edit" class="split" action="{{ url('update_upload') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+<fieldset role="presentation">
+<p>
+<label for="upload">{{ "New File" | translate }}</label>
+{#- -#}
+<input type="file" name="upload" value="" id="upload" accept="{{ extension | fix(true) }}" required></p>
+</p>
+{{ trigger.call("edit_upload_fields", filename) }}
+<p class="buttons">
+<button type="submit" class="yay">
+{{ "Update" | translate }}
+</button>
+</p>
+<input type="hidden" name="file" value="{{ filename }}" id="file">
+<input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
+</fieldset>
+</form>
+{% endblock %}

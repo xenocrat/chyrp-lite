@@ -615,69 +615,71 @@ var Write = {
                     return;
 
                 // Insert toolbar buttons for image uploads.
-                $(
-                    "<label>",
-                    {
-                        "role": "button",
-                        "title": '<?php esce(__("Upload", "admin")); ?>',
-                        "aria-label": '<?php esce(__("Upload", "admin")); ?>'
-                    }
-                ).addClass(
-                    "emblem toolbar"
-                ).append(
-                    [
-                        $(
-                            "<input>",
-                            {
-                                "name": toolbar.attr("id") + "_upload",
-                                "type": "file",
-                                "accept": "image/*"
-                            }
-                        ).addClass(
-                            "toolbar hidden"
-                        ).change(
-                            function(e) {
-                                if (!!e.target.files && e.target.files.length > 0) {
-                                    var file = e.target.files[0];
-
-                                    // Reject files that are not images.
-                                    if (file.type.indexOf("image/") != 0) {
-                                        tray.html(Uploads.messages.type_err);
-                                        return;
-                                    }
-
-                                    // Reject files too large to upload.
-                                    if (file.size > Uploads.limit) {
-                                        e.target.value = null;
-                                        tray.html(Uploads.messages.size_err);
-                                        return;
-                                    }
-
-                                    tray.loader().html(Uploads.messages.send_msg);
-
-                                    // Upload the file and insert the tag if successful.
-                                    Uploads.send(
-                                        file,
-                                        function(response) {
-                                            Write.formatting(target, "img", response.data.url);
-                                        },
-                                        function(response) {
-                                            tray.html(Uploads.messages.send_err);
-                                        },
-                                        function(response) {
-                                            tray.loader(true);
-                                            e.target.value = null;
-                                        }
-                                    );
+                if (<?php esce($visitor->group->can("add_upload")); ?>) {
+                    $(
+                        "<label>",
+                        {
+                            "role": "button",
+                            "title": '<?php esce(__("Upload", "admin")); ?>',
+                            "aria-label": '<?php esce(__("Upload", "admin")); ?>'
+                        }
+                    ).addClass(
+                        "emblem toolbar"
+                    ).append(
+                        [
+                            $(
+                                "<input>",
+                                {
+                                    "name": toolbar.attr("id") + "_upload",
+                                    "type": "file",
+                                    "accept": "image/*"
                                 }
-                            }
-                        ),
-                        $('<?php esce(icon_svg("upload.svg")); ?>')
-                    ]
-                ).appendTo(toolbar);
+                            ).addClass(
+                                "toolbar hidden"
+                            ).change(
+                                function(e) {
+                                    if (!!e.target.files && e.target.files.length > 0) {
+                                        var file = e.target.files[0];
+
+                                        // Reject files that are not images.
+                                        if (file.type.indexOf("image/") != 0) {
+                                            tray.html(Uploads.messages.type_err);
+                                            return;
+                                        }
+
+                                        // Reject files too large to upload.
+                                        if (file.size > Uploads.limit) {
+                                            e.target.value = null;
+                                            tray.html(Uploads.messages.size_err);
+                                            return;
+                                        }
+
+                                        tray.loader().html(Uploads.messages.send_msg);
+
+                                        // Upload the file and insert the tag if successful.
+                                        Uploads.send(
+                                            file,
+                                            function(response) {
+                                                Write.formatting(target, "img", response.data.url);
+                                            },
+                                            function(response) {
+                                                tray.html(Uploads.messages.send_err);
+                                            },
+                                            function(response) {
+                                                tray.loader(true);
+                                                e.target.value = null;
+                                            }
+                                        );
+                                    }
+                                }
+                            ),
+                            $('<?php esce(icon_svg("upload.svg")); ?>')
+                        ]
+                    ).appendTo(toolbar);
+                }
 
                 // Insert button to open the uploads modal.
-                if (<?php esce($visitor->group->can("edit_post", "edit_page", true)); ?>) {
+                if (<?php esce($visitor->group->can("view_upload")); ?>) {
                     toolbar.append(
                         $(
                             "<button>",
