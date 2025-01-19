@@ -7,7 +7,7 @@
 <form class="delete split" action="{{ url('destroy_group') }}" method="post" accept-charset="UTF-8">
 <fieldset role="presentation">
 <p>
-{{ "&#8220;%s&#8221; will be permanently deleted." | translate | format(group.name) }}
+{{ "&#8220;%s&#8221; will be permanently deleted." | translate | format(group.name | fix) }}
 </p>
 {% if group.users is not empty and groups is not empty %}
 <p>

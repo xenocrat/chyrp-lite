@@ -47,7 +47,7 @@
 {% if page.updated %}
 {{ page.updated_at | time }}
 {% else %}
-<span class="sub">{{ "never" | translate }}</span>
+{{ "Never" | translate }}
 {% endif %}
 </td>
 <td class="page_public emblem">
@@ -61,7 +61,7 @@
 {% endif %}
 </td>
 <td class="page_author value">
-{{ page.author.name }}
+{{ page.author.name | fix }}
 </td>
 {{ trigger.call("manage_pages_column", page) }}
 <td class="controls">

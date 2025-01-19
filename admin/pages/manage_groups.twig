@@ -31,7 +31,7 @@
 {% for group in groups.paginated %}
 <tr id="group_{{ group.id }}" class="group">
 <td class="group_name name main">
-{{ group.name }}
+{{ group.name | fix }}
 </td>
 <td class="group_size value">
 <a href="{{ url('manage_users/query/' ~ (('group:' ~ group.name) | url_encode)) }}">{{ group.size }}</a>
