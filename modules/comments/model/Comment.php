@@ -587,10 +587,10 @@
                 '<a href="'.
                 fix($this->author_url, true).
                 '">'.
-                $this->author.
+                fix($this->author).
                 '</a>'
                 :
-                $this->author
+                fix($this->author)
                 ;
         }
 
