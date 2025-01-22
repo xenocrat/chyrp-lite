@@ -585,12 +585,12 @@
 
             return is_url($this->author_url) ?
                 '<a href="'.
-                fix($this->author_url, true).
+                fix($this->author_url, true, true).
                 '">'.
-                fix($this->author).
+                fix($this->author, false, true).
                 '</a>'
                 :
-                fix($this->author)
+                fix($this->author, false, true)
                 ;
         }
 
