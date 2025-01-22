@@ -7,7 +7,7 @@
 <h3 id="pingbacks">{{ "Webmentions" | translate }}</h3>
 <ol class="pingbacks">
 {% for pingback in post.pingbacks %}
-<li><a id="pingback_{{ pingback.id }}" href="{{ pingback.source | fix(true) }}">{{ pingback.title | oneof("[Untitled]" | translate) }}</a></li>
+<li><a id="pingback_{{ pingback.id }}" href="{{ pingback.source | fix(true, true) }}">{{ pingback.title | oneof("[Untitled]" | translate) }}</a></li>
 {% endfor %}
 </ol>
 </article>
