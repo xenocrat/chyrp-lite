@@ -760,20 +760,22 @@ var Write = {
         }
 
         // Support drag-and-drop image uploads.
-        $("#write_form textarea, #edit_form textarea").each(
-            function() {
-                var target = $(this);
+        if (<?php esce($visitor->group->can("add_upload")); ?>) {
+            $("#write_form textarea, #edit_form textarea").each(
+                function() {
+                    var target = $(this);
 
-                // Do not continue if the textarea has <data-no_uploads>.
-                if (typeof target.attr("data-no_uploads") !== "undefined")
-                    return;
+                    // Do not continue if the textarea has <data-no_uploads>.
+                    if (typeof target.attr("data-no_uploads") !== "undefined")
+                        return;
 
-                target.on("dragover", Write.dragover).
-                       on("dragenter", Write.dragenter).
-                       on("dragleave", Write.dragleave).
-                       on("drop", Write.drop);
-            }
-        );
+                    target.on("dragover", Write.dragover).
+                           on("dragenter", Write.dragenter).
+                           on("dragleave", Write.dragleave).
+                           on("drop", Write.drop);
+                }
+            );
+        }
 
         // Add a word counter to textarea elements.
         $("#write_form textarea, #edit_form textarea").each(
