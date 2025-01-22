@@ -1933,16 +1933,23 @@
                     __("You do not have sufficient privileges to edit uploads.")
                 );
 
-            fallback($_GET['file'], "");
+            if (!isset($_GET['file']))
+                error(
+                    __("Error"),
+                    __("Missing argument."),
+                    code:400
+                );
+
             $filename = str_replace(array(DIR, "/"), "", $_GET['file']);
             $filepath = uploaded($filename, false);
-            $extension = pathinfo($filepath, PATHINFO_EXTENSION);
 
             if (!is_readable($filepath) or !is_file($filepath))
                 show_404(
                     __("Not Found"),
                     __("File not found.")
                 );
+
+            $extension = pathinfo($filepath, PATHINFO_EXTENSION);
 
             $this->display(
                 "pages".DIR."edit_upload",
@@ -2278,11 +2285,13 @@
                         '</chyrp:etag>'."\n".
                         '<author chyrp:user_id="'.$post->user_id.'">'."\n".
                         '<name>'.
-                        fix(oneof($post->user->full_name, $post->user->login)).
+                        fix(oneof($post->user->full_name, $post->user->login), false, true).
                         '</name>'."\n";
 
                     if (!empty($post->user->website))
-                        $posts_atom.= '<uri>'.fix($post->user->website).'</uri>'."\n";
+                        $posts_atom.= '<uri>'.
+                                      fix($post->user->website, false, true).
+                                      '</uri>'."\n";
 
                     $posts_atom.= '<chyrp:login>'.
                         fix($post->user->login, false, true).
@@ -2382,12 +2391,12 @@
                         '</chyrp:etag>'."\n".
                         '<author chyrp:user_id="'.fix($page->user_id).'">'."\n".
                         '<name>'.
-                        fix(oneof($page->user->full_name, $page->user->login)).
+                        fix(oneof($page->user->full_name, $page->user->login), false, true).
                         '</name>'."\n";
 
                     if (!empty($page->user->website))
                         $pages_atom.= '<uri>'.
-                                      fix($page->user->website).
+                                      fix($page->user->website, false, true).
                                       '</uri>'."\n";
 
                     $pages_atom.= '<chyrp:login>'.
