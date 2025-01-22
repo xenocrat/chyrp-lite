@@ -397,7 +397,7 @@
                     fix($pingback->title, false, true).
                     '</title>'."\n".
                     '<link rel="via" href="'.
-                    fix($pingback->source, true).
+                    fix($pingback->source, true, true).
                     '" />'."\n".
                     '<published>'.
                     when(DATE_ATOM, $pingback->created_at).
