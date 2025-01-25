@@ -10,7 +10,7 @@
 
     # Constant: CHYRP_VERSION
     # Version number for this release.
-    define('CHYRP_VERSION', "2025.01");
+    define('CHYRP_VERSION', "2025.01.01");
 
     # Constant: CHYRP_CODENAME
     # The codename for this version.
