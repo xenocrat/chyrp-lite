@@ -1903,51 +1903,51 @@
             #                     ž                           ſ
             chr(197).chr(190) => "z",   chr(197).chr(191) => "s",
 
-            # Cyrillic Alphabet:
+            # Cyrillic:
             #                     А                           Б                           В
-            chr(208).chr(144) => 'A',   chr(208).chr(145) => 'B',   chr(208).chr(146) => 'V',
+            chr(208).chr(144) => "A",   chr(208).chr(145) => "B",   chr(208).chr(146) => "V",
             #                     Г                           Д                           Е
-            chr(208).chr(147) => 'G',   chr(208).chr(148) => 'D',   chr(208).chr(149) => 'E',
+            chr(208).chr(147) => "G",   chr(208).chr(148) => "D",   chr(208).chr(149) => "E",
             #                     Ж                           З                           И
-            chr(208).chr(150) => 'Zh',  chr(208).chr(151) => 'Z',   chr(208).chr(152) => 'I',
+            chr(208).chr(150) => "Zh",  chr(208).chr(151) => "Z",   chr(208).chr(152) => "I",
             #                     Й                           К                           Л
-            chr(208).chr(153) => 'Y',   chr(208).chr(154) => 'K',   chr(208).chr(155) => 'L',
+            chr(208).chr(153) => "Y",   chr(208).chr(154) => "K",   chr(208).chr(155) => "L",
             #                     М                           Н                           О
-            chr(208).chr(156) => 'M',   chr(208).chr(157) => 'N',   chr(208).chr(158) => 'O',
+            chr(208).chr(156) => "M",   chr(208).chr(157) => "N",   chr(208).chr(158) => "O",
             #                     П                           Р                           С
-            chr(208).chr(159) => 'P',   chr(208).chr(160) => 'R',   chr(208).chr(161) => 'S',
+            chr(208).chr(159) => "P",   chr(208).chr(160) => "R",   chr(208).chr(161) => "S",
             #                     Т                           У                           Ф
-            chr(208).chr(162) => 'T',   chr(208).chr(163) => 'U',   chr(208).chr(164) => 'F',
+            chr(208).chr(162) => "T",   chr(208).chr(163) => "U",   chr(208).chr(164) => "F",
             #                     Х                           Ц                           Ч
-            chr(208).chr(165) => 'Kh',  chr(208).chr(166) => 'Ts',  chr(208).chr(167) => 'Ch',
+            chr(208).chr(165) => "Kh",  chr(208).chr(166) => "Ts",  chr(208).chr(167) => "Ch",
             #                     Ш                           Щ                           Ъ
-            chr(208).chr(168) => 'Sh',  chr(208).chr(169) => 'Sch', chr(208).chr(170) => '',
+            chr(208).chr(168) => "Sh",  chr(208).chr(169) => "Sch", chr(208).chr(170) => "",
             #                     Ы                           Ь                           Э
-            chr(208).chr(171) => 'Y',   chr(208).chr(172) => '',    chr(208).chr(173) => 'E',
+            chr(208).chr(171) => "Y",   chr(208).chr(172) => "",    chr(208).chr(173) => "E",
             #                     Ю                           Я                           а
-            chr(208).chr(174) => 'Yu',  chr(208).chr(175) => 'Ya',  chr(208).chr(176) => 'a',
+            chr(208).chr(174) => "Yu",  chr(208).chr(175) => "Ya",  chr(208).chr(176) => "a",
             #                     б                           в                           г
-            chr(208).chr(177) => 'b',   chr(208).chr(178) => 'v',   chr(208).chr(179) => 'g',
+            chr(208).chr(177) => "b",   chr(208).chr(178) => "v",   chr(208).chr(179) => "g",
             #                     д                           е                           ж
-            chr(208).chr(180) => 'd',   chr(208).chr(181) => 'e',   chr(208).chr(182) => 'zh',
+            chr(208).chr(180) => "d",   chr(208).chr(181) => "e",   chr(208).chr(182) => "zh",
             #                     з                           и                           й
-            chr(208).chr(183) => 'z',   chr(208).chr(184) => 'i',   chr(208).chr(185) => 'y',
+            chr(208).chr(183) => "z",   chr(208).chr(184) => "i",   chr(208).chr(185) => "y",
             #                     к                           л                           м
-            chr(208).chr(186) => 'k',   chr(208).chr(187) => 'l',   chr(208).chr(188) => 'm',
+            chr(208).chr(186) => "k",   chr(208).chr(187) => "l",   chr(208).chr(188) => "m",
             #                     н                           о                           п
-            chr(208).chr(189) => 'n',   chr(208).chr(190) => 'o',   chr(208).chr(191) => 'p',
+            chr(208).chr(189) => "n",   chr(208).chr(190) => "o",   chr(208).chr(191) => "p",
             #                     р                           с                           т
-            chr(209).chr(128) => 'r',   chr(209).chr(129) => 's',   chr(209).chr(130) => 't',
+            chr(209).chr(128) => "r",   chr(209).chr(129) => "s",   chr(209).chr(130) => "t",
             #                     у                           ф                           х
-            chr(209).chr(131) => 'u',   chr(209).chr(132) => 'f',   chr(209).chr(133) => 'kh',
+            chr(209).chr(131) => "u",   chr(209).chr(132) => "f",   chr(209).chr(133) => "kh",
             #                     ц                           ч                           ш
-            chr(209).chr(134) => 'ts',  chr(209).chr(135) => 'ch',  chr(209).chr(136) => 'sh',
+            chr(209).chr(134) => "ts",  chr(209).chr(135) => "ch",  chr(209).chr(136) => "sh",
             #                     щ                           ъ                           ы
-            chr(209).chr(137) => 'sch', chr(209).chr(138) => '',    chr(209).chr(139) => 'y',
+            chr(209).chr(137) => "sch", chr(209).chr(138) => "",    chr(209).chr(139) => "y",
             #                     ь                           э                           ю
-            chr(209).chr(140) => '',    chr(209).chr(141) => 'e',   chr(209).chr(142) => 'yu',
+            chr(209).chr(140) => "",    chr(209).chr(141) => "e",   chr(209).chr(142) => "yu",
             #                     я
-            chr(209).chr(143) => 'ya'
+            chr(209).chr(143) => "ya"
 
             # Generate additional substitution keys:
             # E.g. echo implode(",", unpack("C*", "€"));
