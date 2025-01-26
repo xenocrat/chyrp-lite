@@ -2035,7 +2035,13 @@
                     __("You do not have sufficient privileges to delete uploads.")
                 );
 
-            fallback($_GET['file'], "");
+            if (!isset($_GET['file']))
+                error(
+                    __("Error"),
+                    __("Missing argument."),
+                    code:400
+                );
+
             $filename = str_replace(array(DIR, "/"), "", $_GET['file']);
             $filepath = uploaded($filename, false);
 
@@ -2098,7 +2104,13 @@
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
                 redirect("manage_uploads");
 
-            fallback($_POST['file'], "");
+            if (!isset($_POST['file']))
+                error(
+                    __("Error"),
+                    __("Missing argument."),
+                    code:400
+                );
+
             $filename = str_replace(array(DIR, "/"), "", $_POST['file']);
             $filepath = uploaded($filename, false);
 
