@@ -86,6 +86,7 @@ Na installatie zijn deze bestanden toegankelijk voor bezoekers:
 * _README_zh_CN.md_
 * _SECURITY.md_
 * _install.php_
+* _themes/&hellip;/*.twig_
 * _tools/*_
 * _upgade.php_
 
