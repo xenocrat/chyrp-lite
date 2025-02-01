@@ -1157,7 +1157,7 @@ input.toolbar.hidden::file-selector-button {
     left: 0px;
     /* Prevent other elements overlapping */
     z-index: 1;
-    backdrop-filter: blur(4px) contrast(33%) brightness(150%);
+    backdrop-filter: blur(4px) contrast(33%);
 }
 .iframe_foreground {
     box-sizing: border-box;    
@@ -1173,7 +1173,6 @@ input.toolbar.hidden::file-selector-button {
     overscroll-behavior: contain;
     border: none;
     background-color: var(--chyrp-pure-white);
-    box-shadow: 0px 4px 16px 2px rgba(79, 79, 79, 0.5);
 }
 .iframe_close_gadget {
     display: block;
@@ -1183,6 +1182,11 @@ input.toolbar.hidden::file-selector-button {
     top: 1.5rem;
     right: calc(20% - 1.5rem);
     cursor: pointer;
+    background-image: radial-gradient(
+        circle,
+        currentColor 50%,
+        transparent 50%
+    );
 }
 .iframe_foreground:focus,
 .iframe_close_gadget:focus {
@@ -1195,7 +1199,7 @@ input.toolbar.hidden::file-selector-button {
 }
 .iframe_close_gadget svg,
 .iframe_close_gadget img {
-    fill: currentColor;
+    fill: var(--chyrp-pure-white);
     width: 1.5rem;
     height: 1.5rem;
 }
@@ -1472,6 +1476,9 @@ input.toolbar.hidden::file-selector-button {
     }
     .iframe_foreground {
         background-color: var(--chyrp-english-grey);
+    }
+    .iframe_close_gadget svg {
+        fill: var(--chyrp-english-grey);
     }
     .ajax_loading {
         background-image: linear-gradient(
