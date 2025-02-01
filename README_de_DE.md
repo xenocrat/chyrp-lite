@@ -91,7 +91,7 @@ Nach der Installation sind diese Dateien für Besucher zugänglich:
 * _tools/*_
 * _upgade.php_
 
-Sie enthalten keine Geheimnisse, möchten sie aber möglicherweise löschen.
+Sie enthalten keine Geheimnisse, aber Sie möchten möglicherweise den Zugriff beschränken.
 
 ## Documentation
 

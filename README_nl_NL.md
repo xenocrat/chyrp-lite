@@ -90,7 +90,7 @@ Na installatie zijn deze bestanden toegankelijk voor bezoekers:
 * _tools/*_
 * _upgade.php_
 
-Er staan geen geheimen in, maar u wilt ze misschien verwijderen.
+Er staan geen geheimen in, maar u wilt de toegang misschien beperken.
 
 ## Documentatie
 

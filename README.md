@@ -114,7 +114,7 @@ After installation, these files are accessible to visitors:
 * _tools/*_
 * _upgade.php_
 
-There are no secrets in them, but you might want to delete them.
+There are no secrets in them, but you might want to restrict access.
 
 ## Documentation
 
