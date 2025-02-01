@@ -331,6 +331,46 @@
         return $include;
     }
 
+    /**
+     * Function: lighttpd_conf
+     * Creates the Lighttpd rewrites for Chyrp Lite.
+     *
+     * Parameters:
+     *     $url_path - The URL path to MAIN_DIR.
+     *
+     * Returns:
+     *     The rewrite rules, or false on failure.
+     */
+    function lighttpd_conf(
+        $url_path = null
+    ): string|false {
+        $url_path = oneof(
+            $url_path,
+            parse_url(Config::current()->chyrp_url, PHP_URL_PATH),
+            "/"
+        );
+
+        $security = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
+        $template = INCLUDES_DIR.DIR."lighttpd.conf.php";
+
+        if (!is_file($template) or !is_readable($template))
+            return false;
+
+        $contents = str_replace(
+            $security,
+            "",
+            file_get_contents($template)
+        );
+
+        $include = preg_replace(
+            '~\\{chyrp_path\\}/?~',
+            ltrim($url_path."/", "/"),
+            $contents
+        );
+
+        return $include;
+    }
+
     #---------------------------------------------
     # Localization
     #---------------------------------------------
