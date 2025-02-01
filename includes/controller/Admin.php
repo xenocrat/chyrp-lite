@@ -3607,7 +3607,8 @@
             $conf = array(
                 "_htaccess" => htaccess_conf(),
                 "caddyfile" => caddyfile_conf(),
-                "include.conf" => nginx_conf()
+                "nginx.conf" => nginx_conf(),
+                "lighttpd.conf" => lighttpd_conf()
             );
 
             $archived = zip_archive(array_filter($conf));
