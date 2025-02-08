@@ -742,7 +742,9 @@
                 array(
                     "page" => $page,
                     "pages" => Page::find(
-                        array("where" => array("id not" => $page->id))
+                        array(
+                            "where" => array("id not" => $page->id)
+                        )
                     )
                 )
             );
@@ -1173,7 +1175,10 @@
 
             $this->display(
                 "pages".DIR."edit_user",
-                array("user" => $user, "groups" => Group::find($options))
+                array(
+                    "user" => $user,
+                    "groups" => Group::find($options)
+                )
             );
         }
 
@@ -1362,7 +1367,10 @@
 
             $this->display(
                 "pages".DIR."delete_user",
-                array("user" => $user, "users" => User::find($options))
+                array(
+                    "user" => $user,
+                    "users" => User::find($options)
+                )
             );
         }
 
@@ -1404,7 +1412,7 @@
 
             $sql = SQL::current();
 
-            if (!empty($user->posts))
+            if (!empty($user->posts)) {
                 if (!empty($_POST['move_posts'])) {
                     $posts_user = new User($_POST['move_posts']);
 
@@ -1425,8 +1433,9 @@
                     foreach ($user->posts as $post)
                         Post::delete($post->id);
                 }
+            }
 
-            if (!empty($user->pages))
+            if (!empty($user->pages)) {
                 if (!empty($_POST['move_pages'])) {
                     $pages_user = new User($_POST['move_pages']);
 
@@ -1447,6 +1456,7 @@
                     foreach ($user->pages as $page)
                         Page::delete($page->id);
                 }
+            }
 
             User::delete($user->id);
 
@@ -1779,7 +1789,7 @@
                 );
 
             # Assign users to new member group.
-            if (!empty($group->users))
+            if (!empty($group->users)) {
                 if (!empty($_POST['move_group'])) {
                     $member_group = new Group($_POST['move_group']);
 
@@ -1800,11 +1810,12 @@
                         code:422
                     );
                 }
+            }
 
             $config = Config::current();
 
             # Set new default group.
-            if ($config->default_group == $group->id)
+            if ($config->default_group == $group->id) {
                 if (!empty($_POST['default_group'])) {
                     $default_group = new Group($_POST['default_group']);
 
@@ -1823,9 +1834,10 @@
                         code:422
                     );
                 }
+            }
 
             # Set new guest group.
-            if ($config->guest_group == $group->id)
+            if ($config->guest_group == $group->id) {
                 if (!empty($_POST['guest_group'])) {
                     $guest_group = new Group($_POST['guest_group']);
 
@@ -1844,6 +1856,7 @@
                         code:422
                     );
                 }
+            }
 
             $sql = SQL::current();
 
