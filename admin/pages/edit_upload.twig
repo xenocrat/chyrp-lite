@@ -10,6 +10,9 @@
 <label for="upload">{{ "New File" | translate }}</label>
 {#- -#}
 <input type="file" name="upload" value="" id="upload" accept=".{{ extension | fix(true) }}" required></p>
+<aside class="split_block small">
+{{ "Some updates will not be noticeable immediately because of caching." | translate }}
+</aside>
 </p>
 {{ trigger.call("edit_upload_fields", filename) }}
 <p class="buttons">
