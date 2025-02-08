@@ -62,7 +62,7 @@ var ChyrpLightbox = {
         transparent: {
             "background-color": "transparent",
             "background-blend-mode": "normal",
-            "backdrop-filter": "blur(8px) contrast(0.8)"
+            "backdrop-filter": "blur(16px) contrast(0.8)"
         }
     },
     init: function(
