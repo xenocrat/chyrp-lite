@@ -104,7 +104,7 @@
 {% for group in groups %}
 {% set option_selected = post is defined ? post.status | selected("{" ~ group.id ~ "}") : "" %}
 <option value="{{ '{' ~ group.id ~ '}' }}"{{ option_selected }}>
-{{ group.name | fix }}
+{{ group.name | fix(false, true) }}
 </option>
 {% endfor %}
 {% endif %}

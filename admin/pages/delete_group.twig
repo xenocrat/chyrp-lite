@@ -16,7 +16,7 @@
 <select name="move_group" id="move_group">
 {% for group in groups %}
 <option value="{{ group.id }}"{{ group.id | selected(site.default_group) }}>
-{{ group.name }}
+{{ group.name | fix(false, true) }}
 </option>
 {% endfor %}
 </select>
@@ -29,7 +29,7 @@
 <select name="default_group" id="default_group">
 {% for group in groups %}
 <option value="{{ group.id }}"{{ group.id | selected(site.guest_group) }}>
-{{ group.name }}
+{{ group.name | fix(false, true) }}
 </option>
 {% endfor %}
 </select>
@@ -42,7 +42,7 @@
 <select name="guest_group" id="guest_group">
 {% for group in groups %}
 <option value="{{ group.id }}"{{ group.id | selected(site.default_group) }}>
-{{ group.name }}
+{{ group.name | fix(false, true) }}
 </option>
 {% endfor %}
 </select>

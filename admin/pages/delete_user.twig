@@ -18,7 +18,7 @@
 {% if users is not empty %}
 {% for user in users %}
 <option value="{{ user.id }}">
-{{ user.full_name is not empty ? user.full_name ~ " (" ~ user.login ~ ")" : user.login }}
+{{ (user.full_name is not empty ? user.full_name ~ " (" ~ user.login ~ ")" : user.login) | fix(false, true) }}
 </option>
 {% endfor %}
 {% endif %}
@@ -34,7 +34,7 @@
 {% if users is not empty %}
 {% for user in users %}
 <option value="{{ user.id }}">
-{{ user.full_name is not empty ? user.full_name ~ " (" ~ user.login ~ ")" : user.login }}
+{{ (user.full_name is not empty ? user.full_name ~ " (" ~ user.login ~ ")" : user.login) | fix(false, true) }}
 </option>
 {% endfor %}
 {% endif %}
