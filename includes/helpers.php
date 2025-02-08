@@ -3222,7 +3222,7 @@
         $filepath = uploaded($filename, false);
 
         if (file_exists($filepath)) {
-            Trigger::current()->call("delete_upload", $filename);
+            Trigger::current()->call("before_delete_upload", $filename);
             return @unlink($filepath);
         }
 
