@@ -1011,7 +1011,7 @@ span.options_tray {
     box-sizing: border-box;
     display: block;
     width: 100%;
-    font-size: 0.67rem;
+    font-size: 0.75rem;
     background-color: var(--chyrp-summer-grey);
     border: 1px solid var(--chyrp-irish-grey);
     border-top: none;
