@@ -255,12 +255,14 @@
 
             if (upload_tester($_FILES['file'])) {
                 $filename = upload($_FILES['file']);
-                $url = Config::current()->chyrp_url.
-                       "/includes/thumbnail.php?file=".urlencode($filename);
+                $url = uploaded($filename);
 
                 json_response(
                     __("File uploaded."),
-                    array("file" => $filename, "url" => $url)
+                    array(
+                        "file" => $filename,
+                        "url" => $url
+                    )
                 );
             }
         }
