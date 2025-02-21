@@ -249,6 +249,7 @@ var Oops = {
 var Uploads = {
     limit: <?php esce(intval($config->uploads_limit * 1000000)); ?>,
     messages: {
+        done_msg: '<?php esce(__("File upload successful!", "admin")); ?>',
         send_msg: '<?php esce(__("Uploading...", "admin")); ?>',
         send_err: '<?php esce(__("File upload failed!", "admin")); ?>',
         type_err: '<?php esce(__("File type not supported!", "admin")); ?>',
@@ -614,7 +615,7 @@ var Write = {
                 if (typeof target.attr("data-no_uploads") !== "undefined")
                     return;
 
-                // Insert toolbar buttons for image uploads.
+                // Insert toolbar buttons for uploads.
                 if (<?php esce($visitor->group->can("add_upload")); ?>) {
                     $(
                         "<label>",
@@ -631,8 +632,7 @@ var Write = {
                                 "<input>",
                                 {
                                     "name": toolbar.attr("id") + "_upload",
-                                    "type": "file",
-                                    "accept": "image/*"
+                                    "type": "file"
                                 }
                             ).addClass(
                                 "toolbar hidden"
@@ -640,12 +640,6 @@ var Write = {
                                 function(e) {
                                     if (!!e.target.files && e.target.files.length > 0) {
                                         var file = e.target.files[0];
-
-                                        // Reject files that are not images.
-                                        if (file.type.indexOf("image/") != 0) {
-                                            tray.html(Uploads.messages.type_err);
-                                            return;
-                                        }
 
                                         // Reject files too large to upload.
                                         if (file.size > Uploads.limit) {
@@ -656,11 +650,11 @@ var Write = {
 
                                         tray.loader().html(Uploads.messages.send_msg);
 
-                                        // Upload the file and insert the tag if successful.
+                                        // Upload the file.
                                         Uploads.send(
                                             file,
                                             function(response) {
-                                                Write.formatting(target, "img", response.data.url);
+                                                tray.html(Uploads.messages.done_msg);
                                             },
                                             function(response) {
                                                 tray.html(Uploads.messages.send_err);
@@ -879,7 +873,7 @@ var Write = {
     drop: function(
         e
     ) {
-        // Process drag-and-drop image file uploads.
+        // Process drag-and-drop file uploads.
         e.stopPropagation();
         e.preventDefault();
         var dt = e.originalEvent.dataTransfer;
@@ -889,12 +883,6 @@ var Write = {
             var form = new FormData();
             var tray = $("#" + $(e.target).attr("id") + "_tray");
 
-            // Reject files that are not images.
-            if (file.type.indexOf("image/") != 0) {
-                tray.html(Uploads.messages.type_err);
-                return;
-            }
-
             // Reject files too large to upload.
             if (file.size > Uploads.limit) {
                 tray.html(Uploads.messages.size_err);
@@ -903,11 +891,11 @@ var Write = {
 
             tray.loader().html(Uploads.messages.send_msg);
 
-            // Upload the file and insert the tag if successful.
+            // Upload the file.
             Uploads.send(
                 file,
                 function(response) {
-                    Write.formatting($(e.target), "img", response.data.url);
+                    tray.html(Uploads.messages.done_msg);
                 },
                 function(response) {
                     tray.html(Uploads.messages.send_err);
