@@ -9,11 +9,11 @@
 {{ "Body" | translate }}
 </label>
 <span id="body_toolbar" class="options_toolbar" role="toolbar">
-{% if field_markdown %}
+{%- if field_markdown -%}
 <a href="{{ url('help/id/markdown') }}" target="_blank" class="help emblem markdown">
 {{- icon_svg("markdown.svg", "Markdown" | translate) -}}
 </a>
-{% endif %}
+{%- endif -%}
 </span>
 <textarea rows="12" name="body" id="body" data-preview{{ field_markdown }} required>{{ page is defined ? page.body | fix(false, true) : "" }}</textarea>
 <span id="body_tray" class="options_tray" role="status"></span>
