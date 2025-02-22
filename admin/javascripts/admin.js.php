@@ -616,6 +616,25 @@ var Write = {
                         "<button>",
                         {
                             "type": "button",
+                            "title": '<?php esce(__("Blockquote", "admin")); ?>',
+                            "aria-label": '<?php esce(__("Blockquote", "admin")); ?>'
+                        }
+                    ).addClass(
+                        "emblem toolbar"
+                    ).click(
+                        function(e) {
+                            Write.formatting(target, "blockquote");
+                        }
+                    ).append(
+                        '<?php esce(icon_svg("quote.svg")); ?>'
+                    )
+                );
+
+                toolbar.append(
+                    $(
+                        "<button>",
+                        {
+                            "type": "button",
                             "title": '<?php esce(__("Image", "admin")); ?>',
                             "aria-label": '<?php esce(__("Image", "admin")); ?>'
                         }
@@ -1059,6 +1078,20 @@ var Write = {
                 closing = (markdown) ?
                     "\n***\n" :
                     '\n<hr>\n' ;
+
+                break;
+
+            case 'blockquote':
+                opening = (markdown) ?
+                    "\n> " :
+                    '\n<blockquote>\n' ;
+
+                if (markdown)
+                    selection = selection.replaceAll("\n", "\n> ")
+
+                closing = (markdown) ?
+                    "\n" :
+                    '\n</blockquote>\n' ;
 
                 break;
 
