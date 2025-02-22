@@ -15,7 +15,7 @@
 </a>
 {%- endif -%}
 </span>
-<textarea rows="12" name="body" id="body" data-preview{{ field_markdown }} required>{{ page is defined ? page.body | fix(false, true) : "" }}</textarea>
+<textarea rows="10" name="body" id="body" data-preview{{ field_markdown }} required>{{ page is defined ? page.body | fix(false, true) : "" }}</textarea>
 <span id="body_tray" class="options_tray" role="status"></span>
 </p>
 {{ trigger.call("after_page_fields") }}

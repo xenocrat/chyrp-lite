@@ -54,7 +54,7 @@
 </a>
 {%- endif -%}
 </span>
-<textarea id="{{ field_id }}" name="{{ field_name }}" rows="12"{{ field_preview ~ field_markdown ~ field_required }}>{{ field_value | fix(false, true) }}</textarea>
+<textarea id="{{ field_id }}" name="{{ field_name }}" rows="10"{{ field_preview ~ field_markdown ~ field_required }}>{{ field_value | fix(false, true) }}</textarea>
 <span id="{{ field_name }}_field_tray" class="options_tray" role="status"></span>
 {% elseif field.type == "checkbox" %}
 <input id="{{ field_id }}" type="checkbox" name="{{ field_name }}"{{ field.checked | checked }}>
@@ -160,7 +160,7 @@
 {% elseif field.type == "file" %}
 <input id="{{ field_id }}" type="file" name="{{ field_name }}"{{ field_accept ~ field_multiple }} value="">
 {% elseif field.type == "text_block" %}
-<textarea id="{{ field_id }}" name="{{ field_name }}" rows="12">{{ field_value | fix(false, true) }}</textarea>
+<textarea id="{{ field_id }}" name="{{ field_name }}" rows="10">{{ field_value | fix(false, true) }}</textarea>
 {% elseif field.type == "checkbox" %}
 <input id="{{ field_id }}" type="checkbox" name="{{ field_name }}"{{ field.checked | checked }}>
 {% elseif field.type == "select" %}
