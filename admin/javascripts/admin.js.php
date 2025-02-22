@@ -611,7 +611,7 @@ var Write = {
                     )
                 );
 
-                // Do not continue if the textarea has <data-no_uploads>.
+                // Do not continue if the target has <data-no_uploads>.
                 if (typeof target.attr("data-no_uploads") !== "undefined")
                     return;
 
@@ -912,7 +912,7 @@ var Write = {
         effect,
         fragment = ""
     ) {
-        var markdown = <?php esce($config->enable_markdown); ?>;
+        var markdown = (typeof target.attr("data-markdown") !== "undefined");
         var opening = "";
         var closing = "";
         var after = "";
