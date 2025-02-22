@@ -597,6 +597,25 @@ var Write = {
                         "<button>",
                         {
                             "type": "button",
+                            "title": '<?php esce(__("Horizontal rule", "admin")); ?>',
+                            "aria-label": '<?php esce(__("Horizontal rule", "admin")); ?>'
+                        }
+                    ).addClass(
+                        "emblem toolbar"
+                    ).click(
+                        function(e) {
+                            Write.formatting(target, "hr");
+                        }
+                    ).append(
+                        '<?php esce(icon_svg("hr.svg")); ?>'
+                    )
+                );
+
+                toolbar.append(
+                    $(
+                        "<button>",
+                        {
+                            "type": "button",
                             "title": '<?php esce(__("Image", "admin")); ?>',
                             "aria-label": '<?php esce(__("Image", "admin")); ?>'
                         }
@@ -1033,6 +1052,13 @@ var Write = {
                         "](" + fragment + ")" :
                         '</a>' ;
                 }
+
+                break;
+
+            case 'hr':
+                closing = (markdown) ?
+                    "\n***\n" :
+                    '\n<hr>\n' ;
 
                 break;
 
