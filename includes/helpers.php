@@ -2961,7 +2961,12 @@
                 true
             )
             :
-            MAIN_DIR.$config->uploads_path.$filename
+            MAIN_DIR.$config->uploads_path.
+            str_replace(
+                array(DIR, "/", "<", ">"),
+                "",
+                $filename
+            )
             ;
     }
 
