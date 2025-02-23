@@ -53,11 +53,20 @@
 
         public function submit(
         ): Post {
-            if (isset($_FILES['filename']) and upload_tester($_FILES['filename']))
+            if (
+                isset($_FILES['filename']) and
+                upload_tester($_FILES['filename'])
+            ) {
                 $filename = upload(
                     $_FILES['filename'],
                     $this->audio_extensions()
                 );
+            } elseif (
+                !empty($_POST['filename']) and
+                !is_fakepath($_POST['filename'])
+            ) {
+                $filename = $_POST['filename'];
+            }
 
             if (!isset($filename))
                 error(
@@ -66,11 +75,20 @@
                     code:422
                 );
 
-            if (isset($_FILES['captions']) and upload_tester($_FILES['captions']))
+            if (
+                isset($_FILES['captions']) and
+                upload_tester($_FILES['captions'])
+            ) {
                 $captions = upload(
                     $_FILES['captions'],
                     array("vtt")
                 );
+            } elseif (
+                !empty($_POST['captions']) and
+                !is_fakepath($_POST['captions'])
+            ) {
+                $captions = $_POST['captions'];
+            }
 
             fallback($_POST['title'], "");
             fallback($_POST['description'], "");
@@ -108,17 +126,35 @@
             $filename = $post->filename;
             $captions = $post->captions;
 
-            if (isset($_FILES['filename']) and upload_tester($_FILES['filename']))
+            if (
+                isset($_FILES['filename']) and
+                upload_tester($_FILES['filename'])
+            ) {
                 $filename = upload(
                     $_FILES['filename'],
                     $this->audio_extensions()
                 );
+            } elseif (
+                !empty($_POST['filename']) and
+                !is_fakepath($_POST['filename'])
+            ) {
+                $filename = $_POST['filename'];
+            }
 
-            if (isset($_FILES['captions']) and upload_tester($_FILES['captions']))
+            if (
+                isset($_FILES['captions']) and
+                upload_tester($_FILES['captions'])
+            ) {
                 $captions = upload(
                     $_FILES['captions'],
                     array("vtt")
                 );
+            } elseif (
+                !empty($_POST['captions']) and
+                !is_fakepath($_POST['captions'])
+            ) {
+                $captions = $_POST['captions'];
+            }
 
             return $post->update(
                 values:array(

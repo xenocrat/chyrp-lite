@@ -57,23 +57,31 @@
 
         public function submit(
         ): Post {
-            if (isset($_FILES['filenames']) and upload_tester($_FILES['filenames'])) {
+            if (
+                isset($_FILES['filenames']) and
+                upload_tester($_FILES['filenames'])
+            ) {
                 $filenames = array();
 
                 if (is_array($_FILES['filenames']['name'])) {
                     for ($i = 0; $i < count($_FILES['filenames']['name']); $i++)
                         $filenames[] = upload(
                             array(
+                                'tmp_name' => $_FILES['filenames']['tmp_name'][$i],
                                 'name' => $_FILES['filenames']['name'][$i],
                                 'type' => $_FILES['filenames']['type'][$i],
-                                'tmp_name' => $_FILES['filenames']['tmp_name'][$i],
-                                'error' => $_FILES['filenames']['error'][$i],
-                                'size' => $_FILES['filenames']['size'][$i]
+                                'size' => $_FILES['filenames']['size'][$i],
+                                'error' => $_FILES['filenames']['error'][$i]
                             )
                         );
                 } else {
                     $filenames[] = upload($_FILES['filenames']);
                 }
+            } elseif (
+                !empty($_POST['filenames']) and
+                !is_fakepath($_POST['filenames'])
+            ) {
+                $filenames = explode_clean($_POST['filenames']);
             }
 
             if (empty($filenames))
@@ -125,23 +133,31 @@
             if (is_url($_POST['option']['source']))
                 $_POST['option']['source'] = add_scheme($_POST['option']['source']);
 
-            if (isset($_FILES['filenames']) and upload_tester($_FILES['filenames'])) {
+            if (
+                isset($_FILES['filenames']) and
+                upload_tester($_FILES['filenames'])
+            ) {
                 $filenames = array();
 
                 if (is_array($_FILES['filenames']['name'])) {
                     for($i=0; $i < count($_FILES['filenames']['name']); $i++)
                         $filenames[] = upload(
                             array(
+                                'tmp_name' => $_FILES['filenames']['tmp_name'][$i],
                                 'name' => $_FILES['filenames']['name'][$i],
                                 'type' => $_FILES['filenames']['type'][$i],
-                                'tmp_name' => $_FILES['filenames']['tmp_name'][$i],
-                                'error' => $_FILES['filenames']['error'][$i],
-                                'size' => $_FILES['filenames']['size'][$i]
+                                'size' => $_FILES['filenames']['size'][$i],
+                                'error' => $_FILES['filenames']['error'][$i]
                             )
                         );
                 } else {
                     $filenames[] = upload($_FILES['filenames']);
                 }
+            } elseif (
+                !empty($_POST['filenames']) and
+                !is_fakepath($_POST['filenames'])
+            ) {
+                $filenames = explode_clean((string) $_POST['filenames']);
             }
 
             return $post->update(

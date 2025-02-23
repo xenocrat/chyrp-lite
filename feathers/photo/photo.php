@@ -43,11 +43,20 @@
 
         public function submit(
         ): Post {
-            if (isset($_FILES['filename']) and upload_tester($_FILES['filename']))
+            if (
+                isset($_FILES['filename']) and 
+                upload_tester($_FILES['filename'])
+            ) {
                 $filename = upload(
                     $_FILES['filename'],
                     $this->image_extensions()
                 );
+            } elseif (
+                !empty($_POST['filename']) and
+                !is_fakepath($_POST['filename'])
+            ) {
+                $filename = $_POST['filename'];
+            }
 
             if (!isset($filename))
                 error(
@@ -96,11 +105,20 @@
             if (is_url($_POST['option']['source']))
                 $_POST['option']['source'] = add_scheme($_POST['option']['source']);
 
-            if (isset($_FILES['filename']) and upload_tester($_FILES['filename']))
+            if (
+                isset($_FILES['filename']) and
+                upload_tester($_FILES['filename'])
+            ) {
                 $filename = upload(
                     $_FILES['filename'],
                     $this->image_extensions()
                 );
+            } elseif (
+                !empty($_POST['filename']) and
+                !is_fakepath($_POST['filename'])
+            ) {
+                $filename = $_POST['filename'];
+            }
 
             return $post->update(
                 values:array(

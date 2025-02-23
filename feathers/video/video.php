@@ -63,11 +63,20 @@
 
         public function submit(
         ): Post {
-            if (isset($_FILES['filename']) and upload_tester($_FILES['filename']))
+            if (
+                isset($_FILES['filename']) and
+                upload_tester($_FILES['filename'])
+            ) {
                 $filename = upload(
                     $_FILES['filename'],
                     $this->video_extensions()
                 );
+            } elseif (
+                !empty($_POST['filename']) and
+                !is_fakepath($_POST['filename'])
+            ) {
+                $filename = $_POST['filename'];
+            }
 
             if (!isset($filename))
                 error(
@@ -76,17 +85,35 @@
                     code:422
                 );
 
-            if (isset($_FILES['captions']) and upload_tester($_FILES['captions']))
+            if (
+                isset($_FILES['captions']) and
+                upload_tester($_FILES['captions'])
+            ) {
                 $captions = upload(
                     $_FILES['captions'],
                     array("vtt")
                 );
+            } elseif (
+                !empty($_POST['captions']) and
+                !is_fakepath($_POST['captions'])
+            ) {
+                $captions = $_POST['captions'];
+            }
 
-            if (isset($_FILES['poster_image']) and upload_tester($_FILES['poster_image']))
+            if (
+                isset($_FILES['poster_image']) and
+                upload_tester($_FILES['poster_image'])
+            ) {
                 $poster_image = upload(
                     $_FILES['poster_image'],
                     $this->image_extensions()
                 );
+            } elseif (
+                !empty($_POST['poster_image']) and
+                !is_fakepath($_POST['poster_image'])
+            ) {
+                $poster_image = $_POST['poster_image'];
+            }
 
             fallback($_POST['title'], "");
             fallback($_POST['description'], "");
@@ -126,23 +153,50 @@
             $captions = $post->captions;
             $poster_image = $post->poster_image;
 
-            if (isset($_FILES['filename']) and upload_tester($_FILES['filename']))
+            if (
+                isset($_FILES['filename']) and
+                upload_tester($_FILES['filename'])
+            ) {
                 $filename = upload(
                     $_FILES['filename'],
                     $this->video_extensions()
                 );
+            } elseif (
+                !empty($_POST['filename']) and
+                !is_fakepath($_POST['filename'])
+            ) {
+                $filename = $_POST['filename'];
+            }
 
-            if (isset($_FILES['captions']) and upload_tester($_FILES['captions']))
+            if (
+                isset($_FILES['captions']) and
+                upload_tester($_FILES['captions'])
+            ) {
                 $captions = upload(
                     $_FILES['captions'],
                     array(".vtt")
                 );
+            } elseif (
+                !empty($_POST['captions']) and
+                !is_fakepath($_POST['captions'])
+            ) {
+                $captions = $_POST['captions'];
+            }
 
-            if (isset($_FILES['poster_image']) and upload_tester($_FILES['poster_image']))
+            if (
+                isset($_FILES['poster_image']) and
+                upload_tester($_FILES['poster_image'])
+            ) {
                 $poster_image = upload(
                     $_FILES['poster_image'],
                     $this->image_extensions()
                 );
+            } elseif (
+                !empty($_POST['poster_image']) and
+                !is_fakepath($_POST['poster_image'])
+            ) {
+                $poster_image = $_POST['poster_image'];
+            }
 
             return $post->update(
                 values:array(
