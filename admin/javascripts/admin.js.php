@@ -250,7 +250,6 @@ var Oops = {
 var Uploads = {
     limit: <?php esce(intval($config->uploads_limit * 1000000)); ?>,
     messages: {
-        done_msg: '<?php esce(__("File upload successful.", "admin")); ?>',
         send_err: '<?php esce(__("File upload failed.", "admin")); ?>',
         type_err: '<?php esce(__("File type not supported.", "admin")); ?>',
         size_err: '<?php esce(_f("Maximum file size: %d Megabytes.", $config->uploads_limit, "admin")); ?>'
@@ -384,7 +383,9 @@ var Uploads = {
                 alwaysCallback(response);
             }
         );
-    },
+    }
+}
+var FileInput = {
     mutate: function(
         target
     ) {
@@ -408,21 +409,25 @@ var Uploads = {
                 }
             );
         }
+
+        return target;
     },
     insert: function(
         target,
         filename
     ) {
         if (typeof target.attr("multiple") === "undefined") {
-            target.val(filename)
+            target.val(filename);
         } else {
             var regexp = new RegExp("(, *|^)" + escapeRegExp(filename) + "(, *|$)", "g");
 
             if (!regexp.test(target.val()))
                 target.val(
                     target.val().replace(/([^,])(, *)?$/, "$1, ") + filename
-                );   
+                );
         }
+
+        return target;
     }
 }
 var Help = {
@@ -510,8 +515,7 @@ var Write = {
                         "emblem toolbar"
                     ).click(
                         function(e) {
-                            Uploads.mutate(target);
-                            target.focus();
+                            FileInput.mutate(target).focus();
                         }
                     ).append(
                         '<?php esce(icon_svg("edit.svg")); ?>'
@@ -534,15 +538,18 @@ var Write = {
                             function(e) {
                                 toolbar.loader();
 
-                                var search = target.attr("data-uploads_search") || "" ;
+                                var search = "" ;
                                 var filter = target.attr("accept") || "" ;
 
                                 Uploads.show(
                                     search,
                                     filter,
                                     function(file) {
-                                        Uploads.mutate(target);
-                                        Uploads.insert(target, file.name);
+                                        FileInput.mutate(target);
+                                        FileInput.insert(
+                                            target,
+                                            file.name
+                                        );
                                     },
                                     function(response) {
                                         alert(Oops.message);
@@ -601,9 +608,11 @@ var Write = {
                                         Uploads.send(
                                             file,
                                             function(response) {
-                                                Uploads.mutate(target);
-                                                Uploads.insert(target, response.data.file);
-                                                tray.fadeOut("fast");
+                                                FileInput.mutate(target);
+                                                FileInput.insert(
+                                                    target,
+                                                    response.data.name
+                                                );
                                             },
                                             function(response) {
                                                 alert(Uploads.messages.send_err);
@@ -843,7 +852,11 @@ var Write = {
                                     search,
                                     filter,
                                     function(file) {
-                                        Write.formatting(target, "insert", file.href);
+                                        Write.formatting(
+                                            target,
+                                            "insert",
+                                            file.href
+                                        );
                                     },
                                     function(response) {
                                         alert(Oops.message);
@@ -902,7 +915,11 @@ var Write = {
                                         Uploads.send(
                                             file,
                                             function(response) {
-                                                alert(Uploads.messages.done_msg);
+                                                Write.formatting(
+                                                    target,
+                                                    "insert",
+                                                    response.data.href
+                                                );
                                             },
                                             function(response) {
                                                 alert(Uploads.messages.send_err);
@@ -1105,7 +1122,11 @@ var Write = {
             Uploads.send(
                 file,
                 function(response) {
-                    alert(Uploads.messages.done_msg);
+                    Write.formatting(
+                        target,
+                        "insert",
+                        response.data.href
+                    );
                 },
                 function(response) {
                     alert(Uploads.messages.send_err);
