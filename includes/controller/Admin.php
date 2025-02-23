@@ -1998,7 +1998,10 @@
                     code:400
                 );
 
-            if (!isset($_FILES['upload']) or !upload_tester($_FILES['upload']))
+            if (
+                !isset($_FILES['upload']) or
+                !upload_tester($_FILES['upload'])
+            )
                 error(
                     __("Error"),
                     __("You did not select anything to upload."),
@@ -2580,8 +2583,13 @@
                     __("Invalid authentication token.")
                 );
 
-            if (isset($_FILES['posts_file']) and upload_tester($_FILES['posts_file'])) {
-                $imports["posts"] = simplexml_load_file($_FILES['posts_file']['tmp_name']);
+            if (
+                isset($_FILES['posts_file']) and
+                upload_tester($_FILES['posts_file'])
+            ) {
+                $imports["posts"] = simplexml_load_file(
+                    $_FILES['posts_file']['tmp_name']
+                );
 
                 if ($imports["posts"]->generator != "Chyrp")
                     Flash::warning(
@@ -2590,8 +2598,13 @@
                     );
             }
 
-            if (isset($_FILES['pages_file']) and upload_tester($_FILES['pages_file'])) {
-                $imports["pages"] = simplexml_load_file($_FILES['pages_file']['tmp_name']);
+            if (
+                isset($_FILES['pages_file']) and
+                upload_tester($_FILES['pages_file'])
+            ) {
+                $imports["pages"] = simplexml_load_file(
+                    $_FILES['pages_file']['tmp_name']
+                );
 
                 if ($imports["pages"]->generator != "Chyrp")
                     Flash::warning(
@@ -2600,7 +2613,10 @@
                     );
             }
 
-            if (isset($_FILES['groups_file']) and upload_tester($_FILES['groups_file'])) {
+            if (
+                isset($_FILES['groups_file']) and
+                upload_tester($_FILES['groups_file'])
+            ) {
                 $imports["groups"] = json_get(
                     file_get_contents($_FILES['groups_file']['tmp_name']),
                     true
@@ -2613,7 +2629,10 @@
                     );
             }
 
-            if (isset($_FILES['users_file']) and upload_tester($_FILES['users_file'])) {
+            if (
+                isset($_FILES['users_file']) and
+                upload_tester($_FILES['users_file'])
+            ) {
                 $imports["users"] = json_get(
                     file_get_contents($_FILES['users_file']['tmp_name']),
                     true
@@ -2626,18 +2645,21 @@
                     );
             }
 
-            if (isset($_FILES['uploads']) and upload_tester($_FILES['uploads'])) {
+            if (
+                isset($_FILES['uploads']) and
+                upload_tester($_FILES['uploads'])
+            ) {
                 $imports["uploads"] = array();
 
                 if (is_array($_FILES['uploads']['name'])) {
                     for ($i = 0; $i < count($_FILES['uploads']['name']); $i++)
                         $imports["uploads"][] = upload(
                             array(
+                                'tmp_name' => $_FILES['uploads']['tmp_name'][$i],
                                 'name' => $_FILES['uploads']['name'][$i],
                                 'type' => $_FILES['uploads']['type'][$i],
-                                'tmp_name' => $_FILES['uploads']['tmp_name'][$i],
-                                'error' => $_FILES['uploads']['error'][$i],
-                                'size' => $_FILES['uploads']['size'][$i]
+                                'size' => $_FILES['uploads']['size'][$i],
+                                'error' => $_FILES['uploads']['error'][$i]
                             )
                         );
                 } else {
