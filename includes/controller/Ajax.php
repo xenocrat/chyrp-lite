@@ -253,15 +253,66 @@
                     code:400
                 );
 
+            $config = Config::current();
+
+
             if (upload_tester($_FILES['file'])) {
                 $filename = upload($_FILES['file']);
-                $url = uploaded($filename);
+                $filepath = uploaded($filename, false);
+                $filetype = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+
+                switch ($filetype) {
+                    case "jpg":
+                    case "jpeg":
+                    case "png":
+                    case "gif":
+                    case "webp":
+                    case "avif":
+                    case "tif":
+                    case "tiff":
+                        $href = $config->chyrp_url.
+                                "/includes/thumbnail.php?file=".
+                                urlencode($filename);
+
+                        break;
+
+                    case "mp3":
+                    case "m4a":
+                    case "oga":
+                    case "ogg":
+                    case "mka":
+                    case "flac":
+                    case "tif":
+                    case "wav":
+                    case "mpg":
+                    case "mpeg":
+                    case "mp2":
+                    case "mp4":
+                    case "m4v":
+                    case "ogv":
+                    case "mkv":
+                    case "mov":
+                    case "avi":
+                    case "webm":
+                    case "3gp":
+                    case "ts":
+                    case "mov":
+                        $href = uploaded($filename);
+                        break;
+
+                    default:
+                        $href = $config->chyrp_url.
+                                "/includes/download.php?file=".
+                                urlencode($filename);
+                }
 
                 json_response(
                     __("File uploaded."),
                     array(
-                        "file" => $filename,
-                        "url" => $url
+                        "href" => $href,
+                        "name" => $filename,
+                        "type" => $filetype,
+                        "size" => filesize($filepath)
                     )
                 );
             }
