@@ -391,6 +391,7 @@ var FileInput = {
     ) {
         if (target.attr("type") === "file") {
             target.attr("type", "text");
+            target.attr("name", target.attr("name").replace(/\[\]$/, ""));
             target.val(target.attr("data-file_list") || "");
             target.attr(
                 "pattern",
