@@ -1576,6 +1576,43 @@
     }
 
     /**
+     * Function: explode_clean
+     * Explodes a string and cleans the resulting array.
+     *
+     * Parameters:
+     *     $string - The string to be truncated.
+     *     $delimiter - The delimter to use for splitting.
+     *     $trim - Trim whitespace from the array items?
+     *     $no_empties - Remove empty items from the array?
+     *     $deduplicate - Remove duplicates from the array?
+     *     $sort - SORT_REGULAR, SORT_NUMERIC, SORT_STRING
+     *
+     * Returns:
+     *     An array with the requested cleaning applied.
+     */
+    function explode_clean(
+        $string,
+        $delimiter = ",",
+        $trim = true,
+        $no_empties = true,
+        $deduplicate = true,
+        $sort = SORT_STRING
+    ): array {
+            $exploded = explode($delimiter, $string);
+
+            if ($trim)
+                $exploded = array_map("trim", $exploded);
+
+            if ($no_empties)
+                $exploded = array_diff($exploded, array(""));
+
+            if ($deduplicate)
+                $exploded = array_unique($exploded, $sort);
+
+            return $exploded;
+    }
+
+    /**
      * Function: truncate
      * Truncates a string to the requested number of characters or less.
      *
@@ -3441,6 +3478,31 @@
         }
 
         return false;
+    }
+
+    /**
+     * Function: is_fakepath
+     * Is this a fake file path provided by the file input of a HTML form?
+     *
+     * Parameters:
+     *     $string - The string to analyse.
+     *
+     * Returns:
+     *     Whether or not the string matches the criteria.
+     *
+     * See Also:
+     *     https://html.spec.whatwg.org/multipage/input.html#fakepath-srsly
+     */
+    function is_fakepath(
+        $string
+    ):bool {
+        if (
+            !is_string($string) and
+            !$string instanceof Stringable
+        )
+            return false;
+
+        return str_starts_with($string, "C:\\fakepath\\");
     }
 
     /**
