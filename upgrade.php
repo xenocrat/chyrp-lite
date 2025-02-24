@@ -615,6 +615,9 @@
     ): void {
         $config = Config::current();
 
+        if (!file_exists(INCLUDES_DIR.DIR."cacert.pem"))
+            return;
+
         do {
             $cacert_pem = random(32).".pem";
         } while (
