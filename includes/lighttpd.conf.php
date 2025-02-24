@@ -2,7 +2,7 @@
 # Template to enable clean URLs for the Lighttpd web server.
 
 url.rewrite-once = (
-    "\.twig$" => "/{chyrp_path}/index.php"
+    "\.twig(?:[/?]|$)" => "/{chyrp_path}/index.php"
 )
 
 url.rewrite-if-not-file = (
