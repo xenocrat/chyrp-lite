@@ -150,8 +150,15 @@
             $trigger = Trigger::current();
             $main = MainController::current();
 
-            $class = camelize(fallback($_POST['safename'], "text"));
-            $field = fallback($_POST['field'], "body");
+            if (!isset($_POST['safename']) or !isset($_POST['field']))
+                error(
+                    __("Error"),
+                    __("Missing argument."),
+                    code:400
+                );
+
+            $class = camelize($_POST['safename']);
+            $field = $_POST['field'];
             $content = fallback($_POST['content'], "");
 
             # Custom filters.
@@ -207,7 +214,14 @@
             $trigger = Trigger::current();
             $main = MainController::current();
 
-            $field = fallback($_POST['field'], "body");
+            if (!isset($_POST['field']))
+                error(
+                    __("Error"),
+                    __("Missing argument."),
+                    code:400
+                );
+
+            $field = $_POST['field'];
             $content = fallback($_POST['content'], "");
 
             # Page title filters.
