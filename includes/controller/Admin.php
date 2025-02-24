@@ -270,6 +270,8 @@
                     __("Invalid authentication token.")
                 );
 
+            fallback($_POST['feather'], "");
+
             if (!feather_enabled($_POST['feather']))
                 show_404(
                     __("Not Found"),
