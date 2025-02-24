@@ -90,7 +90,7 @@
      * Function: comments_update_config
      * Updates config settings for 2023.03 and upwards.
      *
-     * Versions: 2023.02 => 2023.03
+     * Versions: 2023.02 => 2023.03, 2025.02
      */
     function comments_update_config(
     ): void {
@@ -99,6 +99,7 @@
 
         fallback($array["notify_site_contact"], false);
         fallback($array["notify_post_author"], false);
+        fallback($array["code_in_comments"], true);
 
         $set = $config->set("module_comments", $array);
 

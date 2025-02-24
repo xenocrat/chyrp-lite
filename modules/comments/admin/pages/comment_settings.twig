@@ -33,6 +33,12 @@
 </select>
 </p>
 <p>
+<label for="code_in_comments">{{ "HTML in Comments" | translate("comments") }}</label>
+{#- -#}
+<input type="checkbox" class="checkbox" name="code_in_comments"  id="code_in_comments"{{ site.module_comments.code_in_comments | checked }}>
+<small>{{ "Allow some groups of commenters to write HTML in comments." | translate("comments") }}</small>
+</p>
+<p>
 <label for="allowed_comment_html">{{ "Allowed HTML Tags" | translate("comments") }}</label>
 {#- -#}
 <input class="text code" type="text" name="allowed_comment_html" value="{{ comments_html | fix(true, true) }}" id="allowed_comment_html">

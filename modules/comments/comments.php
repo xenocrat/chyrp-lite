@@ -14,6 +14,7 @@
                 array(
                     "notify_site_contact" => false,
                     "notify_post_author" => false,
+                    "code_in_comments" => true,
                     "default_comment_status" => Comment::STATUS_DENIED,
                     "allowed_comment_html" => array(
                         "a",
@@ -795,6 +796,7 @@
                 array(
                     "notify_site_contact" => isset($_POST['notify_site_contact']),
                     "notify_post_author" => isset($_POST['notify_post_author']),
+                    "code_in_comments" => isset($_POST['code_in_comments']),
                     "default_comment_status" => $_POST['default_comment_status'],
                     "allowed_comment_html" => $allowed_comment_html,
                     "comments_per_page" => abs((int) $_POST['comments_per_page']),

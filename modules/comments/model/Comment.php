@@ -600,13 +600,16 @@
          */
         private function filter(
         ): void {
+            $config = Config::current();
             $trigger = Trigger::current();
             $trigger->filter($this, "filter_comment");
 
             $this->body_unfiltered = $this->body;
-            $trigger->filter($this->body, array("markup_comment_text", "markup_text"), $this);
 
-            $config = Config::current();
+            if (!$config->module_comments["code_in_comments"])
+                $this->body = fix($this->body);
+
+            $trigger->filter($this->body, array("markup_comment_text", "markup_text"), $this);
 
             $group = (!empty($this->user_id) and !$this->user->no_results) ?
                 $this->user->group :
