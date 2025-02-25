@@ -762,9 +762,10 @@
             if (!is_writable(dirname($_POST['database'])))
                 alert(__("Please make the database writable by the server."));
 
-        if (!alert() and $_POST['adapter'] != "sqlite")
-            if (empty($_POST['username']) or empty($_POST['password']))
-                alert(__("Please enter a username and password for the database."));
+        // Disable checks so Unix Sockets can be used
+        //if (!alert() and $_POST['adapter'] != "sqlite")
+        //    if (empty($_POST['username']) or empty($_POST['password']))
+        //        alert(__("Please enter a username and password for the database."));
 
         if (!alert()) {
             # Build the SQL settings based on user input.
