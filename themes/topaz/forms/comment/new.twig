@@ -14,17 +14,18 @@
 <label for="comment_body_field">{{ "Your comment" | translate }}</label>
 {% endif %}
 <textarea name="body" id="comment_body_field">{{ posted("body") | fix(false, true) }}</textarea>
-<small>
 {% if visitor.group.can("code_in_comments") and site.module_comments.allowed_comment_html is not empty %}
+<small>
 {% if site.enable_markdown %}
 {{ "Markdown is allowed." | translate }}
 {% endif %}
-{{ "HTML tags allowed:" | translate }}
-{{ "&lt;%s&gt;" | format(site.module_comments.allowed_comment_html | join("&gt; &lt;") | fix ) }}
+{% if site.module_comments.code_in_comments %}
+{{ "HTML is allowed." | translate }}
 {% else %}
 {{ "HTML is not allowed." | translate }}
 {% endif %}
 </small>
+{% endif %}
 {% if visitor.logged_in and site.email_correspondence %}
 <label for="comment_notify_field">{{ "Notify me when others comment" | translate }}</label>
 <input type="checkbox" name="notify" id="comment_notify_field">
