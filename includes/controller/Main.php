@@ -629,7 +629,7 @@
                 );
 
             $this->display(
-                array("pages".DIR."view", "pages".DIR."index"),
+                array("pages".DIR."view"),
                 array("post" => $post),
                 $post->title()
             );
