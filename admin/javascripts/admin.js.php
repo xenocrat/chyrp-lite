@@ -965,12 +965,11 @@ var Write = {
                                     "preview_page" :
                                     "preview_post" ;
 
-                                e.preventDefault();
-
-                                if (content != "")
+                                if (content != "") {
                                     Write.show(action, safename, field, content);
-                                else
+                                } else {
                                     target.focus();
+                                }
                             }
                         ).append(
                             '<?php esce(icon_svg("view.svg")); ?>'
@@ -980,7 +979,7 @@ var Write = {
             );
         }
 
-        // Support drag-and-drop image uploads.
+        // Support drag-and-drop uploads.
         if (<?php esce($visitor->group->can("add_upload")); ?>) {
             $("#write_form textarea, #edit_form textarea").each(
                 function() {
