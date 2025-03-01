@@ -286,6 +286,33 @@ ol.comments > li {
 ol.comments > li#comment_shim {
     display: none;
 }
+details {
+    margin: 1rem 0rem;
+}
+details > summary {
+    box-sizing: border-box;
+    margin: 0em;
+    padding: 0em;
+    cursor: pointer;
+    list-style: none;
+}
+details > summary::before {
+    content: "";
+    display: inline-block;
+    position: relative;
+    top: 0.125em;
+    width: 1em;
+    height: 1em;
+    margin-inline-end: 0.5em;
+    background: url(../images/expand.svg) center/1em no-repeat
+}
+details[open] > summary {
+    margin-bottom: 1em;
+}
+details[open] > summary::before {
+    top: 0.25em;
+    background: url(../images/collapse.svg) center/1em no-repeat
+}
 table {
     border-collapse: collapse;
     border-spacing: 0em;
