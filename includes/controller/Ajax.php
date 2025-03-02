@@ -150,14 +150,14 @@
             $trigger = Trigger::current();
             $main = MainController::current();
 
-            if (!isset($_POST['safename']) or !isset($_POST['field']))
+            if (!isset($_POST['feather']) or !isset($_POST['field']))
                 error(
                     __("Error"),
                     __("Missing argument."),
                     code:400
                 );
 
-            $class = camelize($_POST['safename']);
+            $class = camelize($_POST['feather']);
             $field = $_POST['field'];
             $content = fallback($_POST['content'], "");
 
@@ -167,7 +167,7 @@
                     if ($custom_filter["field"] == $field)
                         $content = call_user_func_array(
                             array(
-                                Feathers::$instances[$_POST['safename']],
+                                Feathers::$instances[$_POST['feather']],
                                 $custom_filter["name"]
                             ),
                             array($content)
