@@ -270,7 +270,12 @@
                     __("Invalid authentication token.")
                 );
 
-            fallback($_POST['feather'], "");
+            if (!isset($_POST['feather']))
+                error(
+                    __("Error"),
+                    __("Missing argument."),
+                    code:400
+                );
 
             if (!feather_enabled($_POST['feather']))
                 show_404(
