@@ -921,11 +921,16 @@ var Write = {
             }
         );
 
-        // Insert buttons for ajax previews.
+        // Insert buttons for ajax post/page previews.
         if (<?php esce($theme->file_exists("content".DIR."preview")); ?>) {
-            $("#write_form *[data-preview], #edit_form *[data-preview]").each(
+            $("#write_form, #edit_form").filter(
+                function(index) {
+                    return $(this).attr("action").match(/(add|update)_(post|page)\/?$/);
+                }
+            ).find("*[data-preview]").each(
                 function() {
                     var target = $(this);
+                    var feather = $("input#feather");
 
                     $("#" + target.attr("id") + "_toolbar").append(
                         $(
@@ -939,18 +944,23 @@ var Write = {
                             "emblem toolbar"
                         ).click(
                             function(e) {
-                                var content  = target.val();
-                                var field    = target.attr("name");
-                                var safename = $("input#feather").val() || "page";
-                                var action   = (safename == "page") ?
-                                    "preview_page" :
-                                    "preview_post" ;
+                                var content = target.val();
+                                var field = target.attr("name");
 
-                                if (content != "") {
-                                    Write.show(action, safename, field, content);
-                                } else {
+                                if (content == "") {
                                     target.focus();
+                                    return;
                                 }
+
+                                if (feather.length) {
+                                    var safename = feather.val();
+                                    var action = "preview_post";
+                                } else {
+                                    var safename = null;
+                                    var action = "preview_page";
+                                }
+
+                                Write.show(action, safename, field, content);
                             }
                         ).append(
                             '<?php esce(icon_svg("view.svg")); ?>'
@@ -1303,14 +1313,14 @@ var Write = {
     },
     show: function(
         action,
-        safename,
+        feather,
         field,
         content
     ) {
         var uid = Date.now().toString(16);
 
         // Build a form targeting a named iframe.
-        $(
+        var form = $(
             "<form>",
             {
                 "id": uid,
@@ -1328,14 +1338,6 @@ var Write = {
                         "type": "hidden",
                         "name": "action",
                         "value": action
-                    }
-                ),
-                $(
-                    "<input>",
-                    {
-                        "type": "hidden",
-                        "name": "safename",
-                        "value": safename
                     }
                 ),
                 $(
@@ -1363,7 +1365,22 @@ var Write = {
                     }
                 )
             ]
-        ).insertAfter("#content");
+        );
+
+        if (feather) {
+            form.append(
+                $(
+                    "<input>",
+                    {
+                        "type": "hidden",
+                        "name": "feather",
+                        "value": feather
+                    }
+                )
+            );
+        }
+
+        form.insertAfter("#content");
 
         // Build and display the named iframe.
         $(
