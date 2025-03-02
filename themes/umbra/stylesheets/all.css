@@ -68,7 +68,7 @@ body {
     min-width: 280px;
 }
 body.preview {
-    margin: 0rem;
+    margin: 1rem;
 }
 p {
     margin: 1rem 0rem;

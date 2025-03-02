@@ -72,6 +72,7 @@ body {
 body.preview {
     margin: 1rem;
     max-width: none;
+    background-color: #ffffff;
 }
 p {
     margin: 1rem 0rem;

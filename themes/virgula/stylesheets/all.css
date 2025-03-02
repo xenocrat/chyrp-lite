@@ -68,6 +68,10 @@ body {
     padding: 0rem 1.7rem;
     background-color: #ffffff;
 }
+body.preview {
+    margin: 1rem;
+    padding: 0rem;
+}
 h1 {
     font-size: 2em;
     font-weight: bold;
