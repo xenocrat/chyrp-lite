@@ -923,49 +923,48 @@ var Write = {
 
         // Insert buttons for ajax post/page previews.
         if (<?php esce($theme->file_exists("content".DIR."preview")); ?>) {
-            $("#write_form, #edit_form").filter(
-                function(index) {
-                    return $(this).attr("action").match(/(add|update)_(post|page)\/?$/);
-                }
-            ).find("*[data-preview]").each(
+            $("*[data-preview]").each(
                 function() {
                     var target = $(this);
-                    var feather = $("input#feather");
+                    var form = target.closest("form");
+                    var feather = $("input#feather").val() || null ;
 
-                    $("#" + target.attr("id") + "_toolbar").append(
-                        $(
-                            "<button>",
-                            {
-                                "type": "button",
-                                "title": '<?php esce(__("Preview", "admin")); ?>',
-                                "aria-label": '<?php esce(__("Preview", "admin")); ?>'
-                            }
-                        ).addClass(
-                            "emblem toolbar"
-                        ).click(
-                            function(e) {
-                                var content = target.val();
-                                var field = target.attr("name");
-
-                                if (content == "") {
-                                    target.focus();
-                                    return;
-                                }
-
-                                if (feather.length) {
-                                    var safename = feather.val();
-                                    var action = "preview_post";
-                                } else {
-                                    var safename = null;
-                                    var action = "preview_page";
-                                }
-
-                                Write.show(action, safename, field, content);
-                            }
-                        ).append(
-                            '<?php esce(icon_svg("view.svg")); ?>'
-                        )
+                    var action = form.attr("action").match(
+                        /(add|update)_([a-zA-Z0-9]+)\/?$/
                     );
+
+                    if (action) {
+                        $("#" + target.attr("id") + "_toolbar").append(
+                            $(
+                                "<button>",
+                                {
+                                    "type": "button",
+                                    "title": '<?php esce(__("Preview", "admin")); ?>',
+                                    "aria-label": '<?php esce(__("Preview", "admin")); ?>'
+                                }
+                            ).addClass(
+                                "emblem toolbar"
+                            ).click(
+                                function(e) {
+                                    var content = target.val();
+                                    var field = target.attr("name");
+
+                                    if (content == "") {
+                                        target.focus();
+                                    } else {
+                                        Write.show(
+                                            "preview_" + action[2],
+                                            feather,
+                                            field,
+                                            content
+                                        );
+                                    }
+                                }
+                            ).append(
+                                '<?php esce(icon_svg("view.svg")); ?>'
+                            )
+                        );
+                    }
                 }
             );
         }
@@ -992,7 +991,6 @@ var Write = {
         $("#write_form textarea, #edit_form textarea").each(
             function() {
                 var target = $(this);
-
                 var tray = $("#" + target.attr("id") + "_tray");
                 var regex = /\p{White_Space}+/gu;
                 var label = '<?php esce(__("Words:", "admin")); ?>';
