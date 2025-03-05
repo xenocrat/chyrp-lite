@@ -150,14 +150,23 @@
             $trigger = Trigger::current();
             $main = MainController::current();
 
-            if (!isset($_POST['field']) or !isset($_POST['context']))
+            if (
+                !isset($_POST['field']) or
+                !isset($_POST['context']) or
+                !preg_match(
+                    "/(^|;)feather:([a-z0-9_]+)(;|$)/i",
+                    $_POST['context'],
+                    $match
+                )
+            ) {
                 error(
                     __("Error"),
                     __("Missing argument."),
                     code:400
                 );
+            }
 
-            $class = camelize($_POST['context']);
+            $class = camelize($match[2]);
             $field = $_POST['field'];
             $content = fallback($_POST['content'], "");
 
