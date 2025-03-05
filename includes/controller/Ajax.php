@@ -150,14 +150,14 @@
             $trigger = Trigger::current();
             $main = MainController::current();
 
-            if (!isset($_POST['feather']) or !isset($_POST['field']))
+            if (!isset($_POST['field']) or !isset($_POST['context']))
                 error(
                     __("Error"),
                     __("Missing argument."),
                     code:400
                 );
 
-            $class = camelize($_POST['feather']);
+            $class = camelize($_POST['context']);
             $field = $_POST['field'];
             $content = fallback($_POST['content'], "");
 
