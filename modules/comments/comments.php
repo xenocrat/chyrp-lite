@@ -1047,6 +1047,85 @@
             );
         }
 
+        public function ajax_preview_comment(
+        ): void {
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
+                show_403(
+                    __("Access Denied"),
+                    __("Invalid authentication token.")
+                );
+
+            if (!Visitor::current()->group->can("edit_comment", "edit_own_comment"))
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to edit this comment.", "comments")
+                );
+
+            $config = Config::current();
+            $trigger = Trigger::current();
+            $main = MainController::current();
+
+            if (
+                !isset($_POST['field']) or
+                !isset($_POST['context']) or
+                !preg_match(
+                    "/(^|;)user_id:([0-9]+)(;|$)/i",
+                    $_POST['context'],
+                    $match
+                )
+            ) {
+                error(
+                    __("Error"),
+                    __("Missing argument."),
+                    code:400
+                );
+            }
+
+            $user_id = intval($match[2]);
+            $field = $_POST['field'];
+            $content = fallback($_POST['content'], "");
+
+            $user = empty($user_id) ?
+                null :
+                new User($user_id);
+
+            $group = (isset($user) and !$user->no_results) ?
+                $user->group :
+                new Group($config->guest_group) ;
+
+            if ($field == "body") {
+                if (!$config->module_comments["code_in_comments"])
+                    $content = fix($content);
+
+                $trigger->filter($content, array("markup_comment_text", "markup_text"));
+
+                $allowed_basic_html = array("br", "p");
+
+                $allowed_extra_html = array_merge(
+                    $allowed_basic_html,
+                    $config->module_comments["allowed_comment_html"]
+                );
+
+                $content = strip_tags(
+                    $content,
+                    $group->can("code_in_comments") ?
+                        $allowed_extra_html :
+                        $allowed_basic_html
+                );
+
+                $content = sanitize_html($content);
+            }
+
+            header("Cache-Control: no-cache, must-revalidate");
+            header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
+
+            $main->display(
+                "content".DIR."preview",
+                array("content" => $content),
+                __("Preview")
+            );
+        }
+
         public function links(
             $links
         ): array {

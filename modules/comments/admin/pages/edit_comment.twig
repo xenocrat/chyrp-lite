@@ -6,6 +6,7 @@
 <h2>{{ "Editing Comment on &#8220;%s&#8221;" | translate("comments") | format(comment.post.title() | striptags | oneof("[Untitled]" | translate)) }}</h2>
 <form id="edit_form" action="{{ url('update_comment') }}" method="post" accept-charset="UTF-8">
 <fieldset role="presentation">
+{% set field_preview = ' data-preview="user_id:' ~ (comment.user_id | fix(true)) ~ '"' %}
 {% set comment_markdown = site.enable_markdown ? " data-markdown" : "" %}
 <p class="main_options">
 <label for="body">
@@ -18,7 +19,7 @@
 </a>
 {% endif %}
 </span>
-<textarea rows="10" name="body" id="body"{{ comment_markdown }} required>{{ comment.body | fix(false, true) }}</textarea>
+<textarea rows="10" name="body" id="body"{{ field_preview ~ comment_markdown }} required>{{ comment.body | fix(false, true) }}</textarea>
 <span id="body_tray" class="options_tray" role="status"></span>
 </p>
 <div id="more_options" class="more_options">
