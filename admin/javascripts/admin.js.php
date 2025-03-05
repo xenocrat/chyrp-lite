@@ -927,7 +927,6 @@ var Write = {
                 function() {
                     var target = $(this);
                     var form = target.closest("form");
-                    var feather = $("input#feather").val() || null ;
 
                     var action = form.attr("action").match(
                         /(add|update)_([a-zA-Z0-9]+)\/?$/
@@ -948,13 +947,14 @@ var Write = {
                                 function(e) {
                                     var content = target.val();
                                     var field = target.attr("name");
+                                    var context = target.attr("data-preview");
 
                                     if (content == "") {
                                         target.focus();
                                     } else {
                                         Write.show(
                                             "preview_" + action[2],
-                                            feather,
+                                            context,
                                             field,
                                             content
                                         );
@@ -1311,7 +1311,7 @@ var Write = {
     },
     show: function(
         action,
-        feather,
+        context,
         field,
         content
     ) {
@@ -1365,14 +1365,14 @@ var Write = {
             ]
         );
 
-        if (feather) {
+        if (!!context) {
             form.append(
                 $(
                     "<input>",
                     {
                         "type": "hidden",
-                        "name": "feather",
-                        "value": feather
+                        "name": "context",
+                        "value": context
                     }
                 )
             );
