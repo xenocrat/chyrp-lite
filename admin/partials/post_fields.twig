@@ -6,7 +6,7 @@
 {% set field_value = field.value is defined ? field.value : "" %}
 {% endif %}
 {% set field_count = field_value is iterable ? field_value | length : 1 %}
-{% set field_preview = field.preview is defined and field.preview ? ' data-preview="' ~ (feather.safename | fix(true)) ~ '"' : "" %}
+{% set field_preview = field.preview is defined and field.preview ? ' data-preview="feather:' ~ (feather.safename | fix(true)) ~ '"' : "" %}
 {% set field_multiple = field.multiple is defined and field.multiple ? " multiple" : "" %}
 {% set field_accept = field.accept is defined ? ' accept="' ~ (field.accept | fix(true)) ~ '"' : "" %}
 {% if site.enable_markdown %}
