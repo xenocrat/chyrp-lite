@@ -1411,6 +1411,7 @@ input.toolbar.hidden::file-selector-button {
         border-color: var(--chyrp-scottish-grey);
     }
     aside {
+        background-color: var(--chyrp-medium-yellow);
         border-color: var(--chyrp-scottish-grey);
     }
     pre {
@@ -1464,6 +1465,7 @@ input.toolbar.hidden::file-selector-button {
         border-color: var(--chyrp-scottish-grey);
     }
     span.options_extra {
+        background-color: var(--chyrp-medium-yellow);
         border-color: var(--chyrp-scottish-grey);
     }
     *.tag {
