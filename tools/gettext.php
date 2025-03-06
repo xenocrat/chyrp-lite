@@ -823,6 +823,7 @@
                     border-color: var(--chyrp-scottish-grey);
                 }
                 aside {
+                    background-color: var(--chyrp-medium-yellow);
                     border-color: var(--chyrp-scottish-grey);
                 }
                 pre {
