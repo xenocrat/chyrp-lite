@@ -212,7 +212,7 @@
             "cite", "code",
             "data", "del", "dfn",
             "em",
-            "h1", "h2", "h3", "h4", "h5", "h6", "hr",
+            "h2", "h3", "h4", "h5", "h6", "hr",
             "i", "ins",
             "kbd",
             "li",
@@ -524,6 +524,7 @@
                     border-color: var(--chyrp-scottish-grey);
                 }
                 aside {
+                    background-color: var(--chyrp-medium-yellow);
                     border-color: var(--chyrp-scottish-grey);
                 }
                 pre {
