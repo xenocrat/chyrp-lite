@@ -29,10 +29,6 @@ var Oops = {
     message: '<?php esce(__("Oops! Something went wrong on this web page.")); ?>',
     count: 0
 }
-var Uploads = {
-    limit: <?php esce(intval($config->uploads_limit * 1000000)); ?>,
-    message: '<?php esce(_f("Maximum file size: %d Megabytes!", $config->uploads_limit)); ?>'
-}
 var Post = {
     failed: false,
     init: function(
