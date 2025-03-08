@@ -40,10 +40,10 @@ msgstr "Poster afbeelding"
 msgid "Description"
 msgstr "Beschrijving"
 
-#: feathers/video/video.php:75
+#: feathers/video/video.php:84
 msgid "You did not select a video to upload."
 msgstr "Je hebt geen video geselecteerd om te uploaden."
 
-#: feathers/video/video.php:243
+#: feathers/video/video.php:297
 msgid "Your web browser does not support the <code>video</code> element."
 msgstr "Je webbrowser ondersteunt het <code>video</code> element niet."

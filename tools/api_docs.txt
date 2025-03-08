@@ -1489,6 +1489,16 @@ Function: admin_manage_groups
 Group management.
 
 
+Function: admin_edit_upload
+---------------------------
+Upload editing.
+
+
+Function: admin_update_upload
+-----------------------------
+Updates an upload when the form is submitted.
+
+
 Function: admin_delete_upload
 -----------------------------
 Upload deletion (confirm page).
@@ -1951,6 +1961,17 @@ Returns:
     The rewrite rules, or false on failure.
 
 
+Function: lighttpd_conf
+-----------------------
+Creates the Lighttpd rewrites for Chyrp Lite.
+
+Parameters:
+    $url_path - The URL path to MAIN_DIR.
+
+Returns:
+    The rewrite rules, or false on failure.
+
+
 Function: locales
 -----------------
 Returns an array of locale choices for the "chyrp" domain.
@@ -2336,6 +2357,22 @@ Returns:
 
 See Also:
     <camelize>
+
+
+Function: explode_clean
+-----------------------
+Explodes a string and cleans the resulting array.
+
+Parameters:
+    $string - The string to be exploded.
+    $delimiter - The delimter to use for splitting.
+    $trim - Trim whitespace from the array items?
+    $no_empties - Remove empty items from the array?
+    $deduplicate - Remove duplicates from the array?
+    $sort - SORT_REGULAR, SORT_NUMERIC, SORT_STRING
+
+Returns:
+    An array with the requested cleaning applied.
 
 
 Function: truncate
@@ -2744,6 +2781,20 @@ Parameters:
 
 Returns:
     Whether or not the string matches the criteria.
+
+
+Function: is_fakepath
+---------------------
+Is this a fake file path provided by the file input of a HTML form?
+
+Parameters:
+    $string - The string to analyse.
+
+Returns:
+    Whether or not the string matches the criteria.
+
+See Also:
+    https://html.spec.whatwg.org/multipage/input.html#fakepath-srsly
 
 
 Function: generate_captcha

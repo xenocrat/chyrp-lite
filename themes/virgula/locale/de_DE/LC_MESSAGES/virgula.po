@@ -163,7 +163,7 @@ msgid "Speak"
 msgstr "Sprich"
 
 #: themes/virgula/forms/user/controls.twig:4
-#: themes/virgula/layouts/default.twig:55
+#: themes/virgula/layouts/default.twig:58
 msgid "Controls"
 msgstr "Details"
 
@@ -196,7 +196,7 @@ msgstr "Aktualisieren"
 
 #: themes/virgula/forms/user/login.twig:4
 #: themes/virgula/forms/user/login.twig:13
-#: themes/virgula/layouts/default.twig:67
+#: themes/virgula/layouts/default.twig:70
 msgid "Log in"
 msgstr "Einloggen"
 
@@ -227,7 +227,7 @@ msgstr "Absenden"
 
 #: themes/virgula/forms/user/register.twig:4
 #: themes/virgula/forms/user/register.twig:18
-#: themes/virgula/layouts/default.twig:63
+#: themes/virgula/layouts/default.twig:66
 msgid "Register"
 msgstr "Registrieren"
 
@@ -253,38 +253,42 @@ msgid "Page %d"
 msgstr "Seite %d"
 
 #: themes/virgula/layouts/default.twig:35
+msgid "Blog"
+msgstr "Blog"
+
+#: themes/virgula/layouts/default.twig:38
 msgid "Feed"
 msgstr "Feed"
 
-#: themes/virgula/layouts/default.twig:38
+#: themes/virgula/layouts/default.twig:41
 msgid "Archive"
 msgstr "Archiv"
 
-#: themes/virgula/layouts/default.twig:42
+#: themes/virgula/layouts/default.twig:45
 msgid "Admin"
 msgstr "Administration"
 
-#: themes/virgula/layouts/default.twig:46
+#: themes/virgula/layouts/default.twig:49
 msgid "Write"
 msgstr "Schreiben"
 
-#: themes/virgula/layouts/default.twig:50
+#: themes/virgula/layouts/default.twig:53
 msgid "Draft"
 msgstr "Entwurf"
 
-#: themes/virgula/layouts/default.twig:58
+#: themes/virgula/layouts/default.twig:61
 msgid "Log out"
 msgstr "Ausloggen"
 
-#: themes/virgula/layouts/default.twig:82
+#: themes/virgula/layouts/default.twig:85
 msgid "Search this blog"
 msgstr "Durchsuchen Sie diesen Blog"
 
-#: themes/virgula/layouts/default.twig:83
+#: themes/virgula/layouts/default.twig:86
 msgid "Find"
 msgstr "Finden"
 
-#: themes/virgula/layouts/default.twig:96
+#: themes/virgula/layouts/default.twig:99
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "Aufgerufen von %s in Zeile %d in %s Sekunden."
@@ -329,7 +333,7 @@ msgstr "In dem angegebenen Zeitfenster gibt es keine Posts."
 msgid "Posts created by &#8220;%s&#8221;"
 msgstr "Posts erstellt von &#8220;%s&#8221;"
 
-#: themes/virgula/pages/author.twig:28
+#: themes/virgula/pages/author.twig:27
 msgid "This user hasn't created any posts."
 msgstr "Dieser Benutzer hat noch keine Posts erstellt."
 
@@ -342,7 +346,7 @@ msgstr "Posts in der Kategorie &#8220;%s&#8221;"
 msgid "Drafts"
 msgstr "Entwürfe"
 
-#: themes/virgula/pages/drafts.twig:28
+#: themes/virgula/pages/drafts.twig:27
 msgid "You don't have any drafts."
 msgstr "Du hast keine Entwürfe."
 
@@ -398,7 +402,7 @@ msgstr "Tags"
 msgid "Updated posts"
 msgstr "Aktualisierte Posts"
 
-#: themes/virgula/pages/updated.twig:28
+#: themes/virgula/pages/updated.twig:27
 msgid "There aren't any updated posts."
 msgstr "Es gibt keine aktualisierten Posts."
 

@@ -42,34 +42,43 @@ msgid "Default Comment Status"
 msgstr "Standaard opmerkingen status"
 
 #: modules/comments/admin/pages/comment_settings.twig:36
+msgid "HTML in Comments"
+msgstr "HTML in opmerkingen"
+
+#: modules/comments/admin/pages/comment_settings.twig:39
+msgid "Allow some groups of commenters to write HTML in comments."
+msgstr ""
+"Sta sommige groepen reageerders toe om HTML te schrijven in opmerkingen."
+
+#: modules/comments/admin/pages/comment_settings.twig:42
 msgid "Allowed HTML Tags"
 msgstr "Toegestane HTML tags"
 
-#: modules/comments/admin/pages/comment_settings.twig:40
+#: modules/comments/admin/pages/comment_settings.twig:46
 msgid "Format: <code>strong, blockquote, em</code>"
 msgstr "Formaat: <code>strong, blockquote, em</code>"
 
-#: modules/comments/admin/pages/comment_settings.twig:44
+#: modules/comments/admin/pages/comment_settings.twig:50
 msgid "Comments Per Page"
 msgstr "Opmerkingen per pagina"
 
-#: modules/comments/admin/pages/comment_settings.twig:48
+#: modules/comments/admin/pages/comment_settings.twig:54
 msgid "Themes decide whether or not to paginate comments."
 msgstr "Thema's bepalen of opmerkingen wel of niet gepagineerd moeten worden."
 
-#: modules/comments/admin/pages/comment_settings.twig:52
+#: modules/comments/admin/pages/comment_settings.twig:58
 msgid "Reload Comments"
 msgstr "Herlaadt Opmerkingen"
 
-#: modules/comments/admin/pages/comment_settings.twig:56
+#: modules/comments/admin/pages/comment_settings.twig:62
 msgid "Show newly added comments (up to the maximum number per page)."
 msgstr "Toon laatste opmerkingen (tot het maximum per pagina)."
 
-#: modules/comments/admin/pages/comment_settings.twig:60
+#: modules/comments/admin/pages/comment_settings.twig:66
 msgid "Reload Interval"
 msgstr "Herlaadt interval"
 
-#: modules/comments/admin/pages/comment_settings.twig:63
+#: modules/comments/admin/pages/comment_settings.twig:69
 msgid "(seconds)"
 msgstr "(secondes)"
 
@@ -92,56 +101,56 @@ msgstr "Wijzig Opmerking"
 msgid "Editing Comment on &#8220;%s&#8221;"
 msgstr "Wijzigen Opmerking op &#8220;%s&#8221;"
 
-#: modules/comments/admin/pages/edit_comment.twig:12
+#: modules/comments/admin/pages/edit_comment.twig:13
 msgid "Body"
 msgstr "Body"
 
-#: modules/comments/admin/pages/edit_comment.twig:26
+#: modules/comments/admin/pages/edit_comment.twig:27
 msgid "Author"
 msgstr "Schrijver"
 
-#: modules/comments/admin/pages/edit_comment.twig:31
+#: modules/comments/admin/pages/edit_comment.twig:32
 msgid "Author Email"
 msgstr "Schrijver email"
 
-#: modules/comments/admin/pages/edit_comment.twig:35
+#: modules/comments/admin/pages/edit_comment.twig:36
 msgid "Author Website"
 msgstr "Schrijver website"
 
-#: modules/comments/admin/pages/edit_comment.twig:42
+#: modules/comments/admin/pages/edit_comment.twig:43
 msgid "Timestamp"
 msgstr "Tijdstempel"
 
-#: modules/comments/admin/pages/edit_comment.twig:47
+#: modules/comments/admin/pages/edit_comment.twig:48
 #: modules/comments/admin/pages/manage_comments.twig:26
 msgid "Status"
 msgstr "Status"
 
-#: modules/comments/admin/pages/edit_comment.twig:50
-#: modules/comments/comments.php:752
+#: modules/comments/admin/pages/edit_comment.twig:51
+#: modules/comments/comments.php:753
 msgid "Approved"
 msgstr "Goedgekeurd"
 
-#: modules/comments/admin/pages/edit_comment.twig:52
-#: modules/comments/comments.php:753
+#: modules/comments/admin/pages/edit_comment.twig:53
+#: modules/comments/comments.php:754
 msgid "Denied"
 msgstr "Verworpen"
 
-#: modules/comments/admin/pages/edit_comment.twig:54
+#: modules/comments/admin/pages/edit_comment.twig:55
 #: modules/comments/admin/pages/manage_spam.twig:18
-#: modules/comments/comments.php:754
+#: modules/comments/comments.php:755
 msgid "Spam"
 msgstr "Spam"
 
-#: modules/comments/admin/pages/edit_comment.twig:61
+#: modules/comments/admin/pages/edit_comment.twig:62
 msgid "Email Notifications"
 msgstr "Notificaties per email"
 
-#: modules/comments/admin/pages/edit_comment.twig:71
+#: modules/comments/admin/pages/edit_comment.twig:72
 msgid "Save"
 msgstr "Sla op"
 
-#: modules/comments/admin/pages/edit_comment.twig:73
+#: modules/comments/admin/pages/edit_comment.twig:74
 #: modules/comments/admin/pages/manage_comments.twig:87
 #: modules/comments/admin/pages/manage_spam.twig:73
 msgid "Delete"
@@ -152,8 +161,8 @@ msgid "Manage Comments"
 msgstr "Beheer Opmerkingen"
 
 #: modules/comments/admin/pages/manage_comments.twig:18
-#: modules/comments/comments.php:829 modules/comments/comments.php:867
-#: modules/comments/comments.php:884 modules/comments/info.php:3
+#: modules/comments/comments.php:831 modules/comments/comments.php:869
+#: modules/comments/comments.php:886 modules/comments/info.php:3
 msgid "Comments"
 msgstr "Opmerkingen"
 
@@ -199,222 +208,222 @@ msgstr "Batch-proces"
 msgid "Manage Spam"
 msgstr "Beheer spam"
 
-#: modules/comments/comments.php:87
+#: modules/comments/comments.php:88
 msgid "Add Comments"
 msgstr "Voeg opmerkingen toe"
 
-#: modules/comments/comments.php:88
+#: modules/comments/comments.php:89
 msgid "Add Comments to Private Posts"
 msgstr "Opmerkingen toevoegen aan privé-berichten"
 
-#: modules/comments/comments.php:89
+#: modules/comments/comments.php:90
 msgid "Edit Comments"
 msgstr "Wijzig Opmerkingen"
 
-#: modules/comments/comments.php:90
+#: modules/comments/comments.php:91
 msgid "Edit Own Comments"
 msgstr "Wijzig Eigen Opmerkingen"
 
-#: modules/comments/comments.php:91
+#: modules/comments/comments.php:92
 msgid "Delete Comments"
 msgstr "Verwijder Opmerkingen"
 
-#: modules/comments/comments.php:92
+#: modules/comments/comments.php:93
 msgid "Delete Own Comments"
 msgstr "Verwijder Eigen Opmerkingen"
 
-#: modules/comments/comments.php:93
+#: modules/comments/comments.php:94
 msgid "Use HTML in Comments"
 msgstr "Gebruik HTML in opmerkingen"
 
-#: modules/comments/comments.php:102
+#: modules/comments/comments.php:103
 msgid "Please enter an ID to find a comment."
 msgstr "Geef alsjeblieft een ID in om een opmerking te vinden."
 
-#: modules/comments/comments.php:135
+#: modules/comments/comments.php:136
 msgid "Most commented on posts"
 msgstr "Meeste opmerkingen op blogposts"
 
-#: modules/comments/comments.php:157
+#: modules/comments/comments.php:158
 msgid "An ID is required to add a comment."
 msgstr "Een ID is verplicht om een opmerking toe te voegen."
 
-#: modules/comments/comments.php:171
+#: modules/comments/comments.php:172
 msgid "You cannot comment on this post."
 msgstr "Je kunt niet reageren op deze blogpost."
 
-#: modules/comments/comments.php:177 modules/comments/comments.php:284
+#: modules/comments/comments.php:178 modules/comments/comments.php:285
 msgid "Message can't be blank."
 msgstr "Bericht kan niet leeg zijn."
 
-#: modules/comments/comments.php:183 modules/comments/comments.php:290
+#: modules/comments/comments.php:184 modules/comments/comments.php:291
 msgid "Author can't be blank."
 msgstr "Schrijver kan niet leeg zijn."
 
-#: modules/comments/comments.php:189 modules/comments/comments.php:296
+#: modules/comments/comments.php:190 modules/comments/comments.php:297
 msgid "Email address can't be blank."
 msgstr "Emailadres kan niet leeg zijn."
 
-#: modules/comments/comments.php:195 modules/comments/comments.php:302
+#: modules/comments/comments.php:196 modules/comments/comments.php:303
 msgid "Invalid email address."
 msgstr "Ongeldig emailadres."
 
-#: modules/comments/comments.php:201 modules/comments/comments.php:308
+#: modules/comments/comments.php:202 modules/comments/comments.php:309
 msgid "Invalid website URL."
 msgstr "Ongeldige website URL."
 
-#: modules/comments/comments.php:210
+#: modules/comments/comments.php:211
 msgid "Incorrect captcha response."
 msgstr "Onjuiste Captcha reactie."
 
-#: modules/comments/comments.php:242
+#: modules/comments/comments.php:243
 msgid "Comment added."
 msgstr "Opmerking toegevoegd."
 
-#: modules/comments/comments.php:243
+#: modules/comments/comments.php:244
 msgid "Your comment is awaiting moderation."
 msgstr "Je opmerking is in afwachting van goedkeuring."
 
-#: modules/comments/comments.php:258
+#: modules/comments/comments.php:259
 msgid "An ID is required to update a comment."
 msgstr "Een ID is noodzakelijk om een opmerking te updaten."
 
-#: modules/comments/comments.php:267 modules/comments/comments.php:389
-#: modules/comments/comments.php:419 modules/comments/comments.php:457
-#: modules/comments/comments.php:963 modules/comments/comments.php:996
-#: modules/comments/comments.php:1032
+#: modules/comments/comments.php:268 modules/comments/comments.php:390
+#: modules/comments/comments.php:420 modules/comments/comments.php:458
+#: modules/comments/comments.php:965 modules/comments/comments.php:998
+#: modules/comments/comments.php:1034
 msgid "Comment not found."
 msgstr "Opmerking niet gevonden."
 
-#: modules/comments/comments.php:273 modules/comments/comments.php:395
-#: modules/comments/comments.php:1002
+#: modules/comments/comments.php:274 modules/comments/comments.php:396
+#: modules/comments/comments.php:1004
 msgid "You do not have sufficient privileges to edit this comment."
 msgstr "Je hebt onvoldoende rechten om deze opmerking te wijzigen."
 
-#: modules/comments/comments.php:338
+#: modules/comments/comments.php:339
 msgid "Comment updated."
 msgstr "Opmerking bijgewerkt."
 
-#: modules/comments/comments.php:377 modules/comments/comments.php:984
+#: modules/comments/comments.php:378 modules/comments/comments.php:986
 msgid "An ID is required to edit a comment."
 msgstr "Een ID is noodzakelijk om een opmerking te wijzigen."
 
-#: modules/comments/comments.php:410 modules/comments/comments.php:445
-#: modules/comments/comments.php:1023
+#: modules/comments/comments.php:411 modules/comments/comments.php:446
+#: modules/comments/comments.php:1025
 msgid "An ID is required to delete a comment."
 msgstr "Een ID is noodzakelijk om een opmerking te verwijderen."
 
-#: modules/comments/comments.php:425 modules/comments/comments.php:463
-#: modules/comments/comments.php:1038
+#: modules/comments/comments.php:426 modules/comments/comments.php:464
+#: modules/comments/comments.php:1040
 msgid "You do not have sufficient privileges to delete this comment."
 msgstr "Je hebt onvoldoende rechten om deze opmerking te verwijderen."
 
-#: modules/comments/comments.php:472 modules/comments/comments.php:1043
+#: modules/comments/comments.php:473 modules/comments/comments.php:1045
 msgid "Comment deleted."
 msgstr "Opmerking verwijderd."
 
-#: modules/comments/comments.php:481 modules/comments/comments.php:535
+#: modules/comments/comments.php:482 modules/comments/comments.php:536
 msgid "You do not have sufficient privileges to manage any comments."
 msgstr "Je hebt onvoldoende rechten om opmerkingen te beheren."
 
-#: modules/comments/comments.php:616
+#: modules/comments/comments.php:617
 msgid "Selected comments deleted."
 msgstr "Geselecteerde opmerkingen verwijderd."
 
-#: modules/comments/comments.php:652
+#: modules/comments/comments.php:653
 msgid "Selected comments denied."
 msgstr "Geselecteerde opmerkingen verworpen."
 
-#: modules/comments/comments.php:688
+#: modules/comments/comments.php:689
 msgid "Selected comments approved."
 msgstr "Geselecteerde opmerkingen goedgekeurd."
 
-#: modules/comments/comments.php:722
+#: modules/comments/comments.php:723
 msgid "Selected comments marked as spam."
 msgstr "Geselecteerde opmerkingen als spam gemarkeerd."
 
-#: modules/comments/comments.php:852
+#: modules/comments/comments.php:854
 #, php-format
 msgid "Comments (%d)"
 msgstr "Opmerkingen (%d)"
 
-#: modules/comments/comments.php:858
+#: modules/comments/comments.php:860
 #, php-format
 msgid "Spam (%d)"
 msgstr "Spam (%d)"
 
-#: modules/comments/comments.php:903
+#: modules/comments/comments.php:905
 msgid "An ID is required to reload comments."
 msgstr "Een ID is noodzakelijk om opmerkingen te herladen."
 
-#: modules/comments/comments.php:921
+#: modules/comments/comments.php:923
 #, php-format
 msgid "Comments added since %s"
 msgstr "Opmerkingen toegevoegd vanaf %s"
 
-#: modules/comments/comments.php:954
+#: modules/comments/comments.php:956
 msgid "An ID is required to show a comment."
 msgstr "Een ID is noodzakelijk om een opmerking te tonen."
 
-#: modules/comments/comments.php:1064 modules/comments/comments.php:1182
+#: modules/comments/comments.php:1145 modules/comments/comments.php:1263
 #, php-format
 msgid "Comments on &#8220;%s&#8221;"
 msgstr "Opmerkingen op &#8220;%s&#8221;"
 
-#: modules/comments/comments.php:1162
+#: modules/comments/comments.php:1243
 msgid "You have unsubscribed from the conversation."
 msgstr "Je bent uitgeschreven van deze conversatie."
 
-#: modules/comments/comments.php:1205
+#: modules/comments/comments.php:1286
 #, php-format
 msgid "Comment #%d"
 msgstr "Opmerking #%d"
 
-#: modules/comments/comments.php:1238
+#: modules/comments/comments.php:1319
 msgid "A ping from your URL is already registered."
 msgstr "Een ping van je URL is reeds geregistreerd."
 
-#: modules/comments/comments.php:1245
+#: modules/comments/comments.php:1326
 msgid "Your URL is too long to be stored in our database."
 msgstr "Je URL is te lang om in de database te worden opgeslagen."
 
-#: modules/comments/comments.php:1250
+#: modules/comments/comments.php:1331
 msgid "Mentioned this post."
 msgstr "Heeft deze blogpost genoemd."
 
-#: modules/comments/comments.php:1273
+#: modules/comments/comments.php:1354
 msgid "Open"
 msgstr "Open"
 
-#: modules/comments/comments.php:1280
+#: modules/comments/comments.php:1361
 msgid "Closed"
 msgstr "Gesloten"
 
-#: modules/comments/comments.php:1287
+#: modules/comments/comments.php:1368
 msgid "Private"
 msgstr "Privé"
 
-#: modules/comments/comments.php:1294
+#: modules/comments/comments.php:1375
 msgid "Registered Only"
 msgstr "Uitsluitend geregistreerden"
 
-#: modules/comments/comments.php:1304
+#: modules/comments/comments.php:1385
 msgid "Comment Status"
 msgstr "Status Opmerking"
 
-#: modules/comments/comments.php:1561 modules/comments/comments.php:1589
-#: modules/comments/comments.php:1622
+#: modules/comments/comments.php:1642 modules/comments/comments.php:1670
+#: modules/comments/comments.php:1703
 #, php-format
 msgid "New Comment at %s"
 msgstr "Nieuwe opmerking op %s"
 
-#: modules/comments/comments.php:1562 modules/comments/comments.php:1590
-#: modules/comments/comments.php:1623
+#: modules/comments/comments.php:1643 modules/comments/comments.php:1671
+#: modules/comments/comments.php:1704
 #, php-format
 msgid "%s commented on a blog post:"
 msgstr "%s heeft een opmerking geplaatst op een blogpost:"
 
-#: modules/comments/comments.php:1631
+#: modules/comments/comments.php:1712
 msgid "Unsubscribe from this conversation:"
 msgstr "Schrijf je uit van deze conversatie:"
 

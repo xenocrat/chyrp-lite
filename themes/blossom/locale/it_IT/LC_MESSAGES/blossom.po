@@ -273,19 +273,19 @@ msgstr "Il tuo commento"
 msgid "Markdown is allowed."
 msgstr "Markdown è consentito."
 
-#: themes/blossom/forms/comment/new.twig:22
-msgid "HTML tags allowed:"
-msgstr "Tag HTML consentiti:"
+#: themes/blossom/forms/comment/new.twig:23
+msgid "HTML is allowed."
+msgstr "HTML consentito."
 
 #: themes/blossom/forms/comment/new.twig:25
 msgid "HTML is not allowed."
 msgstr "HTML non è consentito."
 
-#: themes/blossom/forms/comment/new.twig:29
+#: themes/blossom/forms/comment/new.twig:30
 msgid "Notify me when others comment"
 msgstr "Avvisami quando altri commentano"
 
-#: themes/blossom/forms/comment/new.twig:42
+#: themes/blossom/forms/comment/new.twig:43
 msgid "Speak"
 msgstr "Invia"
 

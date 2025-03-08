@@ -178,19 +178,19 @@ msgstr ""
 msgid "Markdown is allowed."
 msgstr ""
 
-#: themes/sparrow/forms/comment/new.twig:22
-msgid "HTML tags allowed:"
+#: themes/sparrow/forms/comment/new.twig:23
+msgid "HTML is allowed."
 msgstr ""
 
 #: themes/sparrow/forms/comment/new.twig:25
 msgid "HTML is not allowed."
 msgstr ""
 
-#: themes/sparrow/forms/comment/new.twig:29
+#: themes/sparrow/forms/comment/new.twig:30
 msgid "Notify me when others comment"
 msgstr ""
 
-#: themes/sparrow/forms/comment/new.twig:42
+#: themes/sparrow/forms/comment/new.twig:43
 msgid "Speak"
 msgstr ""
 

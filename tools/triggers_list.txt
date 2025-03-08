@@ -16,7 +16,7 @@ Called from:
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 1245
+	admin/javascripts/admin.js.php on line 1482
 
 
 admin_head
@@ -29,6 +29,15 @@ delete_user_form
 ----------------
 Called from:
 	admin/pages/delete_user.twig on line 44
+
+
+edit_upload_fields
+------------------
+Called from:
+	admin/pages/edit_upload.twig on line 17
+
+Arguments:
+	filename
 
 
 edit_user_fields
@@ -172,7 +181,7 @@ Arguments:
 after_post_fields
 -----------------
 Called from:
-	admin/partials/post_fields.twig on line 76
+	admin/partials/post_fields.twig on line 72
 
 Arguments:
 	feather
@@ -181,7 +190,7 @@ Arguments:
 audio_player
 ------------
 Called from:
-	feathers/audio/audio.php on line 204
+	feathers/audio/audio.php on line 240
 
 Arguments:
 	$post
@@ -190,7 +199,7 @@ Arguments:
 video_player
 ------------
 Called from:
-	feathers/video/video.php on line 231
+	feathers/video/video.php on line 285
 
 Arguments:
 	$post
@@ -248,13 +257,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 2101
+	includes/controller/Admin.php on line 2240
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2545
+	includes/controller/Admin.php on line 2705
 
 Arguments:
 	$group
@@ -263,7 +272,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2583
+	includes/controller/Admin.php on line 2743
 
 Arguments:
 	$user
@@ -272,7 +281,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2636
+	includes/controller/Admin.php on line 2796
 
 Arguments:
 	$entry
@@ -282,7 +291,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2685
+	includes/controller/Admin.php on line 2845
 
 Arguments:
 	$entry
@@ -292,7 +301,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 2689
+	includes/controller/Admin.php on line 2849
 
 Arguments:
 	$imports
@@ -301,13 +310,13 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 3090
+	includes/controller/Admin.php on line 3250
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 3105
+	includes/controller/Admin.php on line 3265
 
 
 can_not_view_page
@@ -341,7 +350,7 @@ Called from:
 webmention
 ----------
 Called from:
-	includes/helpers.php on line 2298
+	includes/helpers.php on line 2488
 
 Arguments:
 	$post
@@ -349,10 +358,10 @@ Arguments:
 	$target
 
 
-delete_upload
--------------
+before_delete_upload
+--------------------
 Called from:
-	includes/helpers.php on line 3072
+	includes/helpers.php on line 3267
 
 Arguments:
 	$filename
@@ -361,19 +370,19 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 3296
+	includes/helpers.php on line 3516
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 3314
+	includes/helpers.php on line 3534
 
 
 correspond_activate_account
 ---------------------------
 Called from:
-	includes/helpers.php on line 3676
+	includes/helpers.php on line 3896
 
 Arguments:
 	$user
@@ -383,7 +392,7 @@ Arguments:
 correspond_reset_password
 -------------------------
 Called from:
-	includes/helpers.php on line 3718
+	includes/helpers.php on line 3938
 
 Arguments:
 	$user
@@ -393,7 +402,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 3764
+	includes/helpers.php on line 3984
 
 Arguments:
 	$ob
@@ -402,7 +411,7 @@ Arguments:
 javascript
 ----------
 Called from:
-	includes/main.js.php on line 159
+	includes/main.js.php on line 155
 
 
 add_group
@@ -557,7 +566,7 @@ Arguments:
 edit_comment_options
 --------------------
 Called from:
-	modules/comments/admin/pages/edit_comment.twig on line 65
+	modules/comments/admin/pages/edit_comment.twig on line 66
 
 Arguments:
 	comment
@@ -576,7 +585,7 @@ Arguments:
 comments_false_positives
 ------------------------
 Called from:
-	modules/comments/comments.php on line 729
+	modules/comments/comments.php on line 730
 
 Arguments:
 	$false_positives
@@ -585,7 +594,7 @@ Arguments:
 comments_false_negatives
 ------------------------
 Called from:
-	modules/comments/comments.php on line 732
+	modules/comments/comments.php on line 733
 
 Arguments:
 	$false_negatives
@@ -594,7 +603,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 1215
+	modules/comments/comments.php on line 1296
 
 Arguments:
 	$comment
@@ -604,7 +613,7 @@ Arguments:
 correspond_site_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1553
+	modules/comments/comments.php on line 1634
 
 Arguments:
 	$comment
@@ -613,7 +622,7 @@ Arguments:
 correspond_user_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1581
+	modules/comments/comments.php on line 1662
 
 Arguments:
 	$comment
@@ -623,7 +632,7 @@ Arguments:
 correspond_peer_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1614
+	modules/comments/comments.php on line 1695
 
 Arguments:
 	$comment
@@ -818,7 +827,7 @@ Called from:
 	themes/sparrow/layouts/default.twig on line 118
 	themes/topaz/layouts/default.twig on line 58
 	themes/umbra/layouts/default.twig on line 112
-	themes/virgula/layouts/default.twig on line 89
+	themes/virgula/layouts/default.twig on line 92
 
 
 
@@ -916,7 +925,7 @@ Target:
 admin_determine_action
 ----------------------
 Called from:
-	includes/controller/Admin.php on line 171
+	includes/controller/Admin.php on line 175
 
 Target:
 	$route->action
@@ -925,7 +934,7 @@ Target:
 write_post_options
 ------------------
 Called from:
-	includes/controller/Admin.php on line 235
+	includes/controller/Admin.php on line 239
 
 Target:
 	$options
@@ -938,8 +947,8 @@ Arguments:
 post_options
 ------------
 Called from:
-	includes/controller/Admin.php on line 236
-	includes/controller/Admin.php on line 331
+	includes/controller/Admin.php on line 240
+	includes/controller/Admin.php on line 342
 
 Target:
 	$options
@@ -952,7 +961,7 @@ Arguments:
 edit_post_options
 -----------------
 Called from:
-	includes/controller/Admin.php on line 330
+	includes/controller/Admin.php on line 341
 
 Target:
 	$options
@@ -965,7 +974,7 @@ Arguments:
 posts_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 2217
+	includes/controller/Admin.php on line 2358
 
 Target:
 	$posts_atom
@@ -977,7 +986,7 @@ Arguments:
 pages_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 2319
+	includes/controller/Admin.php on line 2460
 
 Target:
 	$pages_atom
@@ -989,7 +998,7 @@ Arguments:
 export
 ------
 Called from:
-	includes/controller/Admin.php on line 2405
+	includes/controller/Admin.php on line 2546
 
 Target:
 	$exports
@@ -998,7 +1007,7 @@ Target:
 before_import
 -------------
 Called from:
-	includes/controller/Admin.php on line 2517
+	includes/controller/Admin.php on line 2677
 
 Target:
 	$imports
@@ -1007,7 +1016,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 3607
+	includes/controller/Admin.php on line 3768
 
 Target:
 	$write
@@ -1016,7 +1025,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3670
+	includes/controller/Admin.php on line 3837
 
 Target:
 	$manage
@@ -1025,7 +1034,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 3700
+	includes/controller/Admin.php on line 3867
 
 Target:
 	$settings
@@ -1034,7 +1043,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3723
+	includes/controller/Admin.php on line 3890
 
 Target:
 	$extend
@@ -1043,7 +1052,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 3811
+	includes/controller/Admin.php on line 3978
 
 Target:
 	$this->context
@@ -1052,7 +1061,7 @@ Target:
 markup_page_title
 -----------------
 Called from:
-	includes/controller/Ajax.php on line 215
+	includes/controller/Ajax.php on line 248
 	includes/model/Page.php on line 358
 
 Target:
@@ -1062,7 +1071,7 @@ Target:
 markup_title
 ------------
 Called from:
-	includes/controller/Ajax.php on line 215
+	includes/controller/Ajax.php on line 248
 	includes/model/Page.php on line 358
 
 Target:
@@ -1072,7 +1081,7 @@ Target:
 markup_page_text
 ----------------
 Called from:
-	includes/controller/Ajax.php on line 219
+	includes/controller/Ajax.php on line 252
 	includes/model/Page.php on line 359
 
 Target:
@@ -1082,9 +1091,10 @@ Target:
 markup_text
 -----------
 Called from:
-	includes/controller/Ajax.php on line 219
+	includes/controller/Ajax.php on line 252
 	includes/model/Page.php on line 359
-	modules/comments/model/Comment.php on line 607
+	modules/comments/comments.php on line 1100
+	modules/comments/model/Comment.php on line 612
 
 Target:
 	$content
@@ -1102,7 +1112,7 @@ Target:
 keyword_search
 --------------
 Called from:
-	includes/helpers.php on line 1340
+	includes/helpers.php on line 1380
 
 Target:
 	$search
@@ -1115,7 +1125,7 @@ Arguments:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 3654
+	includes/helpers.php on line 3874
 
 Target:
 	$function
@@ -1124,7 +1134,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 3765
+	includes/helpers.php on line 3985
 	includes/lib/Leaf.php on line 352
 
 Target:
@@ -1188,7 +1198,7 @@ Target:
 list_permissions
 ----------------
 Called from:
-	includes/model/Group.php on line 368
+	includes/model/Group.php on line 372
 
 Target:
 	$names
@@ -1383,6 +1393,16 @@ Target:
 	$exclude
 
 
+markup_comment_text
+-------------------
+Called from:
+	modules/comments/comments.php on line 1100
+	modules/comments/model/Comment.php on line 612
+
+Target:
+	$content
+
+
 comment
 -------
 Called from:
@@ -1407,19 +1427,7 @@ Arguments:
 filter_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 604
+	modules/comments/model/Comment.php on line 605
 
 Target:
-	$this
-
-
-markup_comment_text
--------------------
-Called from:
-	modules/comments/model/Comment.php on line 607
-
-Target:
-	$this->body
-
-Arguments:
 	$this

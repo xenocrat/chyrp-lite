@@ -274,19 +274,19 @@ msgstr "您的评论"
 msgid "Markdown is allowed."
 msgstr "可以使用Markdown语法。"
 
-#: themes/topaz/forms/comment/new.twig:22
-msgid "HTML tags allowed:"
-msgstr "可以使用HTML标签："
+#: themes/topaz/forms/comment/new.twig:23
+msgid "HTML is allowed."
+msgstr "允许使用 HTML。"
 
 #: themes/topaz/forms/comment/new.twig:25
 msgid "HTML is not allowed."
 msgstr "无法使用HTML。"
 
-#: themes/topaz/forms/comment/new.twig:29
+#: themes/topaz/forms/comment/new.twig:30
 msgid "Notify me when others comment"
 msgstr "当有其他人评论的时候通知我"
 
-#: themes/topaz/forms/comment/new.twig:42
+#: themes/topaz/forms/comment/new.twig:43
 msgid "Speak"
 msgstr "说话"
 

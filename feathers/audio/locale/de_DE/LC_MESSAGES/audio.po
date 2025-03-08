@@ -28,11 +28,11 @@ msgstr "Bildunterschriften"
 msgid "Description"
 msgstr "Beschreibung"
 
-#: feathers/audio/audio.php:65
+#: feathers/audio/audio.php:74
 msgid "You did not select any audio to upload."
 msgstr "Sie haben kein Audio zum Hochladen ausgewählt."
 
-#: feathers/audio/audio.php:208
+#: feathers/audio/audio.php:244
 msgid "Your web browser does not support the <code>audio</code> element."
 msgstr "Ihr Webbrowser unterstützt das <code>Audioelement</code> nicht."
 

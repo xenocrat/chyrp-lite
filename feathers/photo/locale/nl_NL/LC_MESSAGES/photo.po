@@ -13,7 +13,7 @@ msgstr ""
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: feathers/photo/admin/help/photo_alt_text.twig:3
-#: feathers/photo/admin/help/photo_alt_text.twig:6 feathers/photo/photo.php:167
+#: feathers/photo/admin/help/photo_alt_text.twig:6 feathers/photo/photo.php:185
 msgid "Alternative Text"
 msgstr "Alternatieve tekst"
 
@@ -54,10 +54,10 @@ msgstr "Titel"
 msgid "Caption"
 msgstr "Toelichting"
 
-#: feathers/photo/photo.php:55
+#: feathers/photo/photo.php:64
 msgid "You did not select a photo to upload."
 msgstr "Je hebt geen afbeelding geslecteerd om te uploaden."
 
-#: feathers/photo/photo.php:175
+#: feathers/photo/photo.php:193
 msgid "Source"
 msgstr "Bron"

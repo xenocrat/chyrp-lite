@@ -29,11 +29,11 @@ msgstr "Didascalie"
 msgid "Description"
 msgstr "Descrizione"
 
-#: feathers/audio/audio.php:65
+#: feathers/audio/audio.php:74
 msgid "You did not select any audio to upload."
 msgstr "Non è stato selezionato alcun audio da caricare."
 
-#: feathers/audio/audio.php:208
+#: feathers/audio/audio.php:244
 msgid "Your web browser does not support the <code>audio</code> element."
 msgstr "Il browser web non supporta l'elemento <code>audio</code>."
 

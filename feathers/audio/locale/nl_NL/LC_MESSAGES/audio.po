@@ -28,11 +28,11 @@ msgstr "Onderschriften"
 msgid "Description"
 msgstr "Beschrijving"
 
-#: feathers/audio/audio.php:65
+#: feathers/audio/audio.php:74
 msgid "You did not select any audio to upload."
 msgstr "Je hebt geen audio geselecteerd om te uploaden."
 
-#: feathers/audio/audio.php:208
+#: feathers/audio/audio.php:244
 msgid "Your web browser does not support the <code>audio</code> element."
 msgstr "Je webbrowser ondersteunt het <code>audio</code> element niet."
 

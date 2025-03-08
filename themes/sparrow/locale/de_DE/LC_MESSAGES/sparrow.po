@@ -183,19 +183,19 @@ msgstr "Dein Kommentar"
 msgid "Markdown is allowed."
 msgstr "Markdown ist erlaubt."
 
-#: themes/sparrow/forms/comment/new.twig:22
-msgid "HTML tags allowed:"
-msgstr "Erlaubte HTML Tags:"
+#: themes/sparrow/forms/comment/new.twig:23
+msgid "HTML is allowed."
+msgstr "HTML ist erlaubt."
 
 #: themes/sparrow/forms/comment/new.twig:25
 msgid "HTML is not allowed."
 msgstr "HTML ist nicht erlaubt."
 
-#: themes/sparrow/forms/comment/new.twig:29
+#: themes/sparrow/forms/comment/new.twig:30
 msgid "Notify me when others comment"
 msgstr "Benachrichtige mich, wenn andere kommentieren"
 
-#: themes/sparrow/forms/comment/new.twig:42
+#: themes/sparrow/forms/comment/new.twig:43
 msgid "Speak"
 msgstr "Sprich"
 

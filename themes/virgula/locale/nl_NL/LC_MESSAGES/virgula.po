@@ -160,7 +160,7 @@ msgid "Speak"
 msgstr "Praat"
 
 #: themes/virgula/forms/user/controls.twig:4
-#: themes/virgula/layouts/default.twig:55
+#: themes/virgula/layouts/default.twig:58
 msgid "Controls"
 msgstr "Instellingen"
 
@@ -193,7 +193,7 @@ msgstr "Bijwerken"
 
 #: themes/virgula/forms/user/login.twig:4
 #: themes/virgula/forms/user/login.twig:13
-#: themes/virgula/layouts/default.twig:67
+#: themes/virgula/layouts/default.twig:70
 msgid "Log in"
 msgstr "Log in"
 
@@ -224,7 +224,7 @@ msgstr "Bevestig"
 
 #: themes/virgula/forms/user/register.twig:4
 #: themes/virgula/forms/user/register.twig:18
-#: themes/virgula/layouts/default.twig:63
+#: themes/virgula/layouts/default.twig:66
 msgid "Register"
 msgstr "Registreer"
 
@@ -250,38 +250,42 @@ msgid "Page %d"
 msgstr "Pagina %d"
 
 #: themes/virgula/layouts/default.twig:35
+msgid "Blog"
+msgstr "Blog"
+
+#: themes/virgula/layouts/default.twig:38
 msgid "Feed"
 msgstr "Feed"
 
-#: themes/virgula/layouts/default.twig:38
+#: themes/virgula/layouts/default.twig:41
 msgid "Archive"
 msgstr "Archief"
 
-#: themes/virgula/layouts/default.twig:42
+#: themes/virgula/layouts/default.twig:45
 msgid "Admin"
 msgstr "Beheer"
 
-#: themes/virgula/layouts/default.twig:46
+#: themes/virgula/layouts/default.twig:49
 msgid "Write"
 msgstr "Schrijf"
 
-#: themes/virgula/layouts/default.twig:50
+#: themes/virgula/layouts/default.twig:53
 msgid "Draft"
 msgstr "Concept"
 
-#: themes/virgula/layouts/default.twig:58
+#: themes/virgula/layouts/default.twig:61
 msgid "Log out"
 msgstr "Log uit"
 
-#: themes/virgula/layouts/default.twig:82
+#: themes/virgula/layouts/default.twig:85
 msgid "Search this blog"
 msgstr "Doorzoek deze Blog"
 
-#: themes/virgula/layouts/default.twig:83
+#: themes/virgula/layouts/default.twig:86
 msgid "Find"
 msgstr "Vind"
 
-#: themes/virgula/layouts/default.twig:96
+#: themes/virgula/layouts/default.twig:99
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "Aangeroepen vanuit %s op regel %d bij %s seconden."
@@ -326,7 +330,7 @@ msgstr "Er zijn geen Blogposts in het door jou gespecificeerde tijdvak."
 msgid "Posts created by &#8220;%s&#8221;"
 msgstr "Blogposts gemaakt door &#8220;%s&#8221;"
 
-#: themes/virgula/pages/author.twig:28
+#: themes/virgula/pages/author.twig:27
 msgid "This user hasn't created any posts."
 msgstr "Deze gebruiker heeft geen Blogposts gemaakt."
 
@@ -339,7 +343,7 @@ msgstr "Blogposts in categorie &#8220;%s&#8221;"
 msgid "Drafts"
 msgstr "Concepten"
 
-#: themes/virgula/pages/drafts.twig:28
+#: themes/virgula/pages/drafts.twig:27
 msgid "You don't have any drafts."
 msgstr "Je hebt geen concepten."
 
@@ -395,7 +399,7 @@ msgstr "Tags"
 msgid "Updated posts"
 msgstr "Bijgewerkte Blogposts"
 
-#: themes/virgula/pages/updated.twig:28
+#: themes/virgula/pages/updated.twig:27
 msgid "There aren't any updated posts."
 msgstr "Er zijn geen bijgewerkte Blogposts."
 

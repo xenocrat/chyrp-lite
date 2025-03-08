@@ -29,11 +29,11 @@ msgstr "字幕"
 msgid "Description"
 msgstr "描述"
 
-#: feathers/audio/audio.php:65
+#: feathers/audio/audio.php:74
 msgid "You did not select any audio to upload."
 msgstr "你灭有选择任何上传的音频文件。"
 
-#: feathers/audio/audio.php:208
+#: feathers/audio/audio.php:244
 msgid "Your web browser does not support the <code>audio</code> element."
 msgstr "你的浏览器不支持 <code>audio</code> 元素。"
 

@@ -160,7 +160,7 @@ msgid "Speak"
 msgstr ""
 
 #: themes/virgula/forms/user/controls.twig:4
-#: themes/virgula/layouts/default.twig:55
+#: themes/virgula/layouts/default.twig:58
 msgid "Controls"
 msgstr ""
 
@@ -193,7 +193,7 @@ msgstr ""
 
 #: themes/virgula/forms/user/login.twig:4
 #: themes/virgula/forms/user/login.twig:13
-#: themes/virgula/layouts/default.twig:67
+#: themes/virgula/layouts/default.twig:70
 msgid "Log in"
 msgstr ""
 
@@ -224,7 +224,7 @@ msgstr ""
 
 #: themes/virgula/forms/user/register.twig:4
 #: themes/virgula/forms/user/register.twig:18
-#: themes/virgula/layouts/default.twig:63
+#: themes/virgula/layouts/default.twig:66
 msgid "Register"
 msgstr ""
 
@@ -250,39 +250,43 @@ msgid "Page %d"
 msgstr ""
 
 #: themes/virgula/layouts/default.twig:35
-msgid "Feed"
+msgid "Blog"
 msgstr ""
 
 #: themes/virgula/layouts/default.twig:38
+msgid "Feed"
+msgstr ""
+
+#: themes/virgula/layouts/default.twig:41
 msgid "Archive"
 msgstr ""
 
-#: themes/virgula/layouts/default.twig:42
+#: themes/virgula/layouts/default.twig:45
 msgid "Admin"
 msgstr ""
 
-#: themes/virgula/layouts/default.twig:46
+#: themes/virgula/layouts/default.twig:49
 msgid "Write"
 msgstr ""
 
-#: themes/virgula/layouts/default.twig:50
+#: themes/virgula/layouts/default.twig:53
 msgid "Draft"
 msgstr ""
 
-#: themes/virgula/layouts/default.twig:58
+#: themes/virgula/layouts/default.twig:61
 msgid "Log out"
 msgstr ""
 
-#: themes/virgula/layouts/default.twig:82
-#: themes/virgula/layouts/default.twig:82
+#: themes/virgula/layouts/default.twig:85
+#: themes/virgula/layouts/default.twig:85
 msgid "Search this blog"
 msgstr ""
 
-#: themes/virgula/layouts/default.twig:83
+#: themes/virgula/layouts/default.twig:86
 msgid "Find"
 msgstr ""
 
-#: themes/virgula/layouts/default.twig:96
+#: themes/virgula/layouts/default.twig:99
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr ""
@@ -336,7 +340,7 @@ msgstr ""
 msgid "Posts created by &#8220;%s&#8221;"
 msgstr ""
 
-#: themes/virgula/pages/author.twig:28
+#: themes/virgula/pages/author.twig:27
 msgid "This user hasn't created any posts."
 msgstr ""
 
@@ -349,7 +353,7 @@ msgstr ""
 msgid "Drafts"
 msgstr ""
 
-#: themes/virgula/pages/drafts.twig:28
+#: themes/virgula/pages/drafts.twig:27
 msgid "You don't have any drafts."
 msgstr ""
 
@@ -408,7 +412,7 @@ msgstr ""
 msgid "Updated posts"
 msgstr ""
 
-#: themes/virgula/pages/updated.twig:28
+#: themes/virgula/pages/updated.twig:27
 msgid "There aren't any updated posts."
 msgstr ""
 

@@ -16,11 +16,11 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: feathers/audio/audio.php:65
+#: feathers/audio/audio.php:74
 msgid "You did not select any audio to upload."
 msgstr ""
 
-#: feathers/audio/audio.php:208
+#: feathers/audio/audio.php:244
 msgid "Your web browser does not support the <code>audio</code> element."
 msgstr ""
 
