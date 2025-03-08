@@ -1058,7 +1058,7 @@
             if (!Visitor::current()->group->can("edit_comment", "edit_own_comment"))
                 show_403(
                     __("Access Denied"),
-                    __("You do not have sufficient privileges to edit this comment.", "comments")
+                    __("You do not have sufficient privileges to preview content.")
                 );
 
             $config = Config::current();
