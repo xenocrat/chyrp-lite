@@ -1580,7 +1580,7 @@
      * Explodes a string and cleans the resulting array.
      *
      * Parameters:
-     *     $string - The string to be truncated.
+     *     $string - The string to be exploded.
      *     $delimiter - The delimter to use for splitting.
      *     $trim - Trim whitespace from the array items?
      *     $no_empties - Remove empty items from the array?
