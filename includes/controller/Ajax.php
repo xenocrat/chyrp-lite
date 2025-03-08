@@ -141,11 +141,21 @@
                     __("Invalid authentication token.")
                 );
 
-            if (!Visitor::current()->group->can("add_post", "add_draft"))
+            if (
+                !Visitor::current()->group->can(
+                    "add_post",
+                    "add_draft",
+                    "edit_post",
+                    "edit_draft",
+                    "edit_own_post",
+                    "edit_own_draft"
+                )
+            ) {
                 show_403(
                     __("Access Denied"),
-                    __("You do not have sufficient privileges to add posts.")
+                    __("You do not have sufficient privileges to preview content.")
                 );
+            }
 
             $trigger = Trigger::current();
             $main = MainController::current();
@@ -214,10 +224,10 @@
                     __("Invalid authentication token.")
                 );
 
-            if (!Visitor::current()->group->can("add_page"))
+            if (!Visitor::current()->group->can("add_page", "edit_page"))
                 show_403(
                     __("Access Denied"),
-                    __("You do not have sufficient privileges to add pages.")
+                    __("You do not have sufficient privileges to preview content.")
                 );
 
             $trigger = Trigger::current();
