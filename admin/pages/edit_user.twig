@@ -22,7 +22,7 @@
 <select name="group" id="group">
 {% for group in groups %}
 <option value="{{ group.id }}"{{ group.id | selected(user.group_id) }}>
-{{ group.name }}
+{{ group.name | fix(false, true) }}
 </option>
 {% endfor %}
 </select>

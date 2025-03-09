@@ -25,7 +25,7 @@
 </option>
 {% for group in groups %}
 <option value="{{ group.id }}">
-{{ group.name }}
+{{ group.name | fix(false, true) }}
 </option>
 {% endfor %}
 </select>
