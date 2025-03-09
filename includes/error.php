@@ -195,8 +195,9 @@
             !method_exists("Config", "current") or
             !isset(Config::current()->locale) or
             !isset(Config::current()->chyrp_url)
-        )
+        ) {
             exit("ERROR: ".strip_tags($body));
+        }
 
         # We need this for the pretty error page.
         $chyrp_url = fix(Config::current()->chyrp_url, true);
