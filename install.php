@@ -41,7 +41,7 @@
     define('SESSION_DENY_BOT',              true);
     define('SLUG_STRICT',                   true);
     define('GET_REMOTE_UNSAFE',             false);
-    define('USE_GETTEXT_SHIM',              stripos(PHP_OS, "Win") === 0);
+    define('USE_GETTEXT_SHIM',              true);
     define('USE_OB',                        true);
     define('HTTP_ACCEPT_ZSTD',              false);
     define('HTTP_ACCEPT_DEFLATE',           false);
