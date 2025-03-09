@@ -1315,7 +1315,7 @@ var Write = {
         field,
         content
     ) {
-        var uid = Date.now().toString(16);
+        var uid = window.generateUUIDv4?.() ?? Date.now().toString(16) ;
 
         // Build a form targeting a named iframe.
         var form = $(
