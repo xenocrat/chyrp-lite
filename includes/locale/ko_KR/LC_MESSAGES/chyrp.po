@@ -90,7 +90,7 @@ msgstr "경로가 잘못된 컨트롤러로 시작되었습니다."
 #: includes/controller/Ajax.php:38 includes/controller/Ajax.php:173
 #: includes/controller/Ajax.php:238 includes/controller/Ajax.php:284
 #: includes/controller/Main.php:1264 includes/download.php:14
-#: includes/error.php:205 includes/helpers.php:2424 includes/helpers.php:2431
+#: includes/error.php:206 includes/helpers.php:2424 includes/helpers.php:2431
 #: includes/helpers.php:2438 includes/helpers.php:2453
 #: includes/helpers.php:2462 includes/helpers.php:2476
 #: includes/helpers.php:2483 includes/helpers.php:2891
@@ -970,7 +970,7 @@ msgstr "로그인하기 전에 계정을 활성화해야 합니다."
 msgid "Logged in."
 msgstr "로그인되었습니다."
 
-#: includes/controller/Main.php:1008 includes/error.php:557
+#: includes/controller/Main.php:1008 includes/error.php:558
 msgid "Log in"
 msgstr "로그인"
 
@@ -1022,20 +1022,20 @@ msgstr "비밀번호 변경"
 msgid "Webmention support is disabled for this site."
 msgstr "사이트에 대한 Webmention 지원이 비활성화되었습니다."
 
-#: includes/error.php:206
+#: includes/error.php:207
 msgid "An unspecified error has occurred."
 msgstr "알 수 없는 오류가 발생했습니다."
 
-#: includes/error.php:545
+#: includes/error.php:546
 msgid "Backtrace"
 msgstr "역추적"
 
-#: includes/error.php:549
+#: includes/error.php:550
 #, php-format
 msgid "%s on line %d"
 msgstr "%s: %d번 줄"
 
-#: includes/error.php:562
+#: includes/error.php:563
 msgid "Go back"
 msgstr "뒤로 가기"
 

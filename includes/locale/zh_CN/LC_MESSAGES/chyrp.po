@@ -90,7 +90,7 @@ msgstr "路由启动了一个无效的控制器。"
 #: includes/controller/Ajax.php:38 includes/controller/Ajax.php:173
 #: includes/controller/Ajax.php:238 includes/controller/Ajax.php:284
 #: includes/controller/Main.php:1264 includes/download.php:14
-#: includes/error.php:205 includes/helpers.php:2424 includes/helpers.php:2431
+#: includes/error.php:206 includes/helpers.php:2424 includes/helpers.php:2431
 #: includes/helpers.php:2438 includes/helpers.php:2453
 #: includes/helpers.php:2462 includes/helpers.php:2476
 #: includes/helpers.php:2483 includes/helpers.php:2891
@@ -970,7 +970,7 @@ msgstr "在登陆前必须激活您的账户。"
 msgid "Logged in."
 msgstr "已登陆。"
 
-#: includes/controller/Main.php:1008 includes/error.php:557
+#: includes/controller/Main.php:1008 includes/error.php:558
 msgid "Log in"
 msgstr "登陆"
 
@@ -1022,20 +1022,20 @@ msgstr "重置密码"
 msgid "Webmention support is disabled for this site."
 msgstr "此站点禁用Webmention支持。"
 
-#: includes/error.php:206
+#: includes/error.php:207
 msgid "An unspecified error has occurred."
 msgstr "发生未指定错误。"
 
-#: includes/error.php:545
+#: includes/error.php:546
 msgid "Backtrace"
 msgstr "回溯"
 
-#: includes/error.php:549
+#: includes/error.php:550
 #, php-format
 msgid "%s on line %d"
 msgstr "%s 在行 %d"
 
-#: includes/error.php:562
+#: includes/error.php:563
 msgid "Go back"
 msgstr "返回"
 

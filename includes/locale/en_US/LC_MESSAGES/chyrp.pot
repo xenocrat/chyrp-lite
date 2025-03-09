@@ -103,7 +103,7 @@ msgstr ""
 #: includes/controller/Ajax.php:284
 #: includes/controller/Main.php:1264
 #: includes/download.php:14
-#: includes/error.php:205
+#: includes/error.php:206
 #: includes/helpers.php:2424
 #: includes/helpers.php:2431
 #: includes/helpers.php:2438
@@ -1202,7 +1202,7 @@ msgid "Logged in."
 msgstr ""
 
 #: includes/controller/Main.php:1008
-#: includes/error.php:557
+#: includes/error.php:558
 msgid "Log in"
 msgstr ""
 
@@ -1257,20 +1257,20 @@ msgstr ""
 msgid "Webmention support is disabled for this site."
 msgstr ""
 
-#: includes/error.php:206
+#: includes/error.php:207
 msgid "An unspecified error has occurred."
 msgstr ""
 
-#: includes/error.php:545
+#: includes/error.php:546
 msgid "Backtrace"
 msgstr ""
 
-#: includes/error.php:549
+#: includes/error.php:550
 #, php-format
 msgid "%s on line %d"
 msgstr ""
 
-#: includes/error.php:562
+#: includes/error.php:563
 msgid "Go back"
 msgstr ""
 

@@ -96,7 +96,7 @@ msgstr "المُتحكم بالمسار المُدخل غير صالح."
 #: includes/controller/Ajax.php:38 includes/controller/Ajax.php:173
 #: includes/controller/Ajax.php:238 includes/controller/Ajax.php:284
 #: includes/controller/Main.php:1264 includes/download.php:14
-#: includes/error.php:205 includes/helpers.php:2424 includes/helpers.php:2431
+#: includes/error.php:206 includes/helpers.php:2424 includes/helpers.php:2431
 #: includes/helpers.php:2438 includes/helpers.php:2453
 #: includes/helpers.php:2462 includes/helpers.php:2476
 #: includes/helpers.php:2483 includes/helpers.php:2891
@@ -976,7 +976,7 @@ msgstr "يجب عليك تفعيل حسابك قبل تسجيل الدخول."
 msgid "Logged in."
 msgstr "تم تسجيل الدخول."
 
-#: includes/controller/Main.php:1008 includes/error.php:557
+#: includes/controller/Main.php:1008 includes/error.php:558
 msgid "Log in"
 msgstr "تسجيل الدخول"
 
@@ -1028,20 +1028,20 @@ msgstr "إعادة تعيين كلمة المرور"
 msgid "Webmention support is disabled for this site."
 msgstr "تم تعطيل دعم Webmention لهذا الموقع."
 
-#: includes/error.php:206
+#: includes/error.php:207
 msgid "An unspecified error has occurred."
 msgstr "حدث خطأ غير محدد."
 
-#: includes/error.php:545
+#: includes/error.php:546
 msgid "Backtrace"
 msgstr "تتبع للخلف"
 
-#: includes/error.php:549
+#: includes/error.php:550
 #, php-format
 msgid "%s on line %d"
 msgstr "%s في السطر %d"
 
-#: includes/error.php:562
+#: includes/error.php:563
 msgid "Go back"
 msgstr "الرجوع للخلف"
 

@@ -89,7 +89,7 @@ msgstr "Route gestart met een ongeldige controller."
 #: includes/controller/Ajax.php:38 includes/controller/Ajax.php:173
 #: includes/controller/Ajax.php:238 includes/controller/Ajax.php:284
 #: includes/controller/Main.php:1264 includes/download.php:14
-#: includes/error.php:205 includes/helpers.php:2424 includes/helpers.php:2431
+#: includes/error.php:206 includes/helpers.php:2424 includes/helpers.php:2431
 #: includes/helpers.php:2438 includes/helpers.php:2453
 #: includes/helpers.php:2462 includes/helpers.php:2476
 #: includes/helpers.php:2483 includes/helpers.php:2891
@@ -974,7 +974,7 @@ msgstr "Je moet eerst je account activeren voordat je kunt inloggen."
 msgid "Logged in."
 msgstr "Ingelogd."
 
-#: includes/controller/Main.php:1008 includes/error.php:557
+#: includes/controller/Main.php:1008 includes/error.php:558
 msgid "Log in"
 msgstr "Log in"
 
@@ -1027,20 +1027,20 @@ msgstr "Wijzig wachtwoord"
 msgid "Webmention support is disabled for this site."
 msgstr "Webmention ondersteuning is uitgeschakeld voor deze website."
 
-#: includes/error.php:206
+#: includes/error.php:207
 msgid "An unspecified error has occurred."
 msgstr "Er is een onbekende fout opgetreden."
 
-#: includes/error.php:545
+#: includes/error.php:546
 msgid "Backtrace"
 msgstr "Backtrace"
 
-#: includes/error.php:549
+#: includes/error.php:550
 #, php-format
 msgid "%s on line %d"
 msgstr "%s op regel %d"
 
-#: includes/error.php:562
+#: includes/error.php:563
 msgid "Go back"
 msgstr "Ga terug"
 
