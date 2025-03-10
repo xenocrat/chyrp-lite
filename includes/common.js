@@ -15,7 +15,7 @@ $.fn.loader = function(remove) {
 
 // Award a numeric score for the strength of a password.
 function passwordStrength(
-	password
+    password
 ) {
     var score = 0;
     var frequency = new Object();
@@ -51,7 +51,7 @@ function passwordStrength(
 
 // Does the string look like a web URL?
 function isURL(
-	text
+    text
 ) {
     return (
         /^(https?:\/\/)?([a-z0-9]([a-z0-9\-\.]*[a-z0-9])?\.[a-z]{2,63}\.?)(:[0-9]{1,5})?($|\/)/i.test(text)
@@ -64,7 +64,7 @@ function isURL(
 
 // Does the string look like an email address?
 function isEmail(
-	text
+    text
 ) {
     return (
         /^[^\\ <>@]+@([a-z0-9]([a-z0-9\-\.]*[a-z0-9])?\.[a-z]{2,63}\.?)$/i.test(text)
@@ -77,8 +77,8 @@ function isEmail(
 
 // Prefixes a URL with a scheme if none was detected.
 function addScheme(
-	url,
-	scheme
+    url,
+    scheme
 ) {
     var regexp = /^([a-z]+:\/\/)?(.+)/i;
 
@@ -91,16 +91,27 @@ function addScheme(
     return url = scheme + url.replace(regexp, "$2");
 }
 
-// Generates a Universally Unique Identifier (v4)
+// Returns a Universally Unique Identifier (UUID) v4 string.
 function generateUUIDv4() {
-  return "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
-    (+c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> +c / 4).toString(16)
-  );
+    var uuid = "";
+    var octets = crypto.getRandomValues(new Uint8Array(16));
+
+    octets[6] = (octets[6] >> 4) | 0x40;
+    octets[8] = (octets[8] >> 2) | 0x80;
+
+    for (var i = 0; i < octets.length; i++) {
+        uuid += octets[i].toString(16).padStart(2, "0");
+
+        if (i == 3 || i == 5 || i == 7 || i == 9)
+            uuid += "-";
+    }
+
+    return uuid;
 }
 
 // Escape strings for regular expressions.
 function escapeRegExp(
-	text
+    text
 ) {
     return text.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
 }
