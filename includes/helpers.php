@@ -64,7 +64,8 @@
      * Function: logged_in
      * Mask for Visitor::logged_in().
      */
-    function logged_in(): bool {
+    function logged_in(
+    ): bool {
         if (!class_exists("Visitor"))
             return false;
 
@@ -78,7 +79,8 @@
      * Function: authenticate
      * Mask for Session::hash_token().
      */
-    function authenticate(): bool|string {
+    function authenticate(
+    ): bool|string {
         if (!class_exists("Session"))
             return false;
 
@@ -200,7 +202,8 @@
      * Function: self_url
      * Returns an absolute URL for the current request.
      */
-    function self_url(): string {
+    function self_url(
+    ): string {
         $parsed = parse_url(Config::current()->url);
         $origin = fallback($parsed["scheme"], "http")."://".
                   fallback($parsed["host"], $_SERVER['SERVER_NAME']);
@@ -371,6 +374,32 @@
         return $include;
     }
 
+    /**
+     * Function: generate_UUIDv4
+     * Returns a Universally Unique Identifier (UUID) v4 string.
+     */
+    function generate_UUIDv4(
+    ): string {
+        $uuid = "";
+
+        for ($i = 0; $i < 16; $i++) { 
+            $octet = random_int(0, 255);
+
+            if ($i == 6)
+               $octet = ($octet >> 4) | 0x40;
+
+            if ($i == 8)
+               $octet = ($octet >> 2) | 0x80;
+
+            $uuid.= str_pad(dechex($octet), 2, "0", STR_PAD_LEFT);
+
+            if ($i == 3 or $i == 5 or $i == 7 or $i == 9)
+                $uuid.= "-";
+        }
+
+        return $uuid;
+    }
+
     #---------------------------------------------
     # Localization
     #---------------------------------------------
@@ -379,7 +408,8 @@
      * Function: locales
      * Returns an array of locale choices for the "chyrp" domain.
      */
-    function locales(): array {
+    function locales(
+    ): array {
         # Ensure the default locale is always present in the list.
         $locales = array(
             array(
@@ -451,7 +481,8 @@
      * Notes:
      *     Does not use setlocale() because the return value is non-normative.
      */
-    function get_locale(): string {
+    function get_locale(
+    ): string {
         if (
             INSTALLING or
             !file_exists(INCLUDES_DIR.DIR."config.json.php")
@@ -790,7 +821,8 @@
      * Function: timezones
      * Returns an array of timezone identifiers.
      */
-    function timezones(): array {
+    function timezones(
+    ): array {
         $timezones = array();
         $zone_list = timezone_identifiers_list(DateTimeZone::ALL);
 
@@ -832,7 +864,8 @@
      * Function: get_timezone
      * Gets the timezone for all date/time functions.
      */
-    function get_timezone(): string {
+    function get_timezone(
+    ): string {
         return date_default_timezone_get();
     }
 
@@ -905,7 +938,8 @@
      *     - All scalar types are comparable.
      *     - Arrays, objects, and resources are incomparable with other types.
      */
-    function oneof(): mixed {
+    function oneof(
+    ): mixed {
         $last = null;
         $args = func_get_args();
 
@@ -1073,7 +1107,8 @@
      * Function: set_max_time
      * Sets the PHP time limit to MAX_TIME_LIMIT.
      */
-    function set_max_time(): void {
+    function set_max_time(
+    ): void {
         $const = MAX_TIME_LIMIT;
         $limit = ini_get("max_execution_time");
 
@@ -1088,7 +1123,8 @@
      * Function: set_max_memory
      * Sets the PHP memory limit to MAX_MEMORY_LIMIT.
      */
-    function set_max_memory(): void {
+    function set_max_memory(
+    ): void {
         $const = shorthand_bytes(MAX_MEMORY_LIMIT);
         $limit = shorthand_bytes(ini_get("memory_limit"));
 
@@ -1100,7 +1136,8 @@
      * Function: timer_start
      * Starts the internal timer and returns the microtime.
      */
-    function timer_start(): float {
+    function timer_start(
+    ): float {
         static $timer;
 
         if (!isset($timer))
@@ -2696,7 +2733,8 @@
      * Function: init_extensions
      * Initialize all Modules and Feathers.
      */
-    function init_extensions(): void {
+    function init_extensions(
+    ): void {
         $config = Config::current();
 
         # Instantiate all Modules.
@@ -3220,7 +3258,8 @@
      * Function: upload_filter_whitelist
      * Returns an array containing a default list of allowed file extensions.
      */
-    function upload_filter_whitelist(): array {
+    function upload_filter_whitelist(
+    ): array {
         return array(
             # Binary and text formats:
             "bin",  "exe",  "txt",  "rtf",  "vtt",
@@ -3512,7 +3551,8 @@
      * Returns:
      *     A string containing HTML elements to add to a form.
      */
-    function generate_captcha(): string {
+    function generate_captcha(
+    ): string {
         Trigger::current()->call("before_generate_captcha");
 
         foreach (get_declared_classes() as $class) {
@@ -3530,7 +3570,8 @@
      * Returns:
      *     Whether or not the captcha was defeated.
      */
-    function check_captcha(): bool {
+    function check_captcha(
+    ): bool {
         Trigger::current()->call("before_check_captcha");
 
         foreach (get_declared_classes() as $class) {
@@ -3866,7 +3907,8 @@
      * Function: email
      * Sends an email using PHP's mail() function or an alternative.
      */
-    function email(): bool {
+    function email(
+    ): bool {
         if (!Config::current()->email_correspondence)
             return false;
 
@@ -3961,7 +4003,8 @@
      * Function: javascripts
      * Returns inline JavaScript for core functionality and extensions.
      */
-    function javascripts(): string {
+    function javascripts(
+    ): string {
         $config = Config::current();
         $route = Route::current();
         $theme = Theme::current();
