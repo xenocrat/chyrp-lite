@@ -391,13 +391,20 @@
             if ($i == 8)
                $octet = ($octet >> 2) | 0x80;
 
-            $uuid.= str_pad(dechex($octet), 2, "0", STR_PAD_LEFT);
-
-            if ($i == 3 or $i == 5 or $i == 7 or $i == 9)
-                $uuid.= "-";
+            $uuid.= str_pad(
+                dechex($octet),
+                2,
+                "0",
+                STR_PAD_LEFT
+            );
         }
 
-        return $uuid;
+        return preg_replace(
+            "/^(.{8})(.{4})(.{4})(.{4})(.+)$/",
+            "$1-$2-$3-$4-$5",
+            $uuid,
+            1
+        );
     }
 
     #---------------------------------------------
