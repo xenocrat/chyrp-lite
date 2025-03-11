@@ -94,19 +94,21 @@ function addScheme(
 // Returns a Universally Unique Identifier (UUID) v4 string.
 function generateUUIDv4() {
     var uuid = "";
-    var octets = crypto.getRandomValues(new Uint8Array(16));
+
+    var octets = crypto.getRandomValues(
+        new Uint8Array(16)
+    );
 
     octets[6] = (octets[6] >> 4) | 0x40;
     octets[8] = (octets[8] >> 2) | 0x80;
 
-    for (var i = 0; i < octets.length; i++) {
-        uuid += octets[i].toString(16).padStart(2, "0");
+    for (var octet of octets)
+        uuid += octet.toString(16).padStart(2, "0");
 
-        if (i == 3 || i == 5 || i == 7 || i == 9)
-            uuid += "-";
-    }
-
-    return uuid;
+    return uuid.replace(
+        /^(.{8})(.{4})(.{4})(.{4})(.+)$/,
+        "$1-$2-$3-$4-$5"
+    );
 }
 
 // Escape strings for regular expressions.
