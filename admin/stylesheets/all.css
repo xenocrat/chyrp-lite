@@ -1239,36 +1239,39 @@ input.toolbar.hidden::file-selector-button {
 }
 @keyframes shake_sideways {
     0% {
-        transform: translateX(+0.40rem);
+        transform: translateX(+0.00rem);
     }
     1% {
-        transform: translateX(-0.45rem);
-    }
-    2% {
-        transform: translateX(+0.50rem);
-    }
-    3% {
-        transform: translateX(-0.50rem);
-    }
-    4% {
         transform: translateX(+0.40rem);
     }
+    2% {
+        transform: translateX(-0.45rem);
+    }
+    3% {
+        transform: translateX(+0.50rem);
+    }
+    4% {
+        transform: translateX(-0.50rem);
+    }
     5% {
-        transform: translateX(-0.30rem);
+        transform: translateX(+0.40rem);
     }
     6% {
-        transform: translateX(+0.20rem);
+        transform: translateX(-0.30rem);
     }
     7% {
-        transform: translateX(-0.15rem);
+        transform: translateX(+0.20rem);
     }
     8% {
-        transform: translateX(+0.10rem);
+        transform: translateX(-0.15rem);
     }
     9% {
-        transform: translateX(-0.05rem);
+        transform: translateX(+0.10rem);
     }
     10% {
+        transform: translateX(-0.05rem);
+    }
+    11% {
         transform: translateX(+0.00rem);
     }
 }
@@ -1544,8 +1547,10 @@ input.toolbar.hidden::file-selector-button {
 /* Group: Reduced motion */
 
 @media (prefers-reduced-motion) {
-    div.flash,
+    div.flash {
+        animation: shake_sideways 30s 1s normal ease;
+    }
     .ajax_loading {
-        animation: none;
+        animation: ajax_loading 10s linear infinite;
     }
 }
