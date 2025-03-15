@@ -1628,32 +1628,39 @@
      *     $delimiter - The delimter to use for splitting.
      *     $trim - Trim whitespace from the array items?
      *     $no_empties - Remove empty items from the array?
-     *     $deduplicate - Remove duplicates from the array?
-     *     $sort - SORT_REGULAR, SORT_NUMERIC, SORT_STRING
+     *     $unique - Deduplicate? false/null, or SORT_ flag.
+     *     $sort - Sort the array? false/null, or SORT_ flag.
      *
      * Returns:
      *     An array with the requested cleaning applied.
+     *
+     * See Also:
+     *     https://www.php.net/manual/en/function.array-unique.php
+     *     https://www.php.net/manual/en/function.sort.php
      */
     function explode_clean(
         $string,
         $delimiter = ",",
         $trim = true,
         $no_empties = true,
-        $deduplicate = true,
-        $sort = SORT_STRING
+        $unique = SORT_REGULAR,
+        $sort = SORT_REGULAR
     ): array {
-            $exploded = explode($delimiter, $string);
+        $exploded = explode($delimiter, $string);
 
-            if ($trim)
-                $exploded = array_map("trim", $exploded);
+        if ($trim)
+            $exploded = array_map("trim", $exploded);
 
-            if ($no_empties)
-                $exploded = array_diff($exploded, array(""));
+        if ($no_empties)
+            $exploded = array_diff($exploded, array(""));
 
-            if ($deduplicate)
-                $exploded = array_unique($exploded, $sort);
+        if (is_int($unique))
+            $exploded = array_unique($exploded, $unique);
 
-            return $exploded;
+        if (is_int($sort))
+            sort($exploded, $sort);
+
+        return $exploded;
     }
 
     /**
