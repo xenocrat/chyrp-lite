@@ -2,7 +2,7 @@
 return array(
     "name"          => __("Tagginator", "tags"),
     "url"           => "http://chyrplite.net/",
-    "version"       => "2025.01",
+    "version"       => "2025.02",
     "description"   => __("Adds tagging functionality to posts.", "tags"),
     "author"        => array(
         "name"      => "Chyrp Team",

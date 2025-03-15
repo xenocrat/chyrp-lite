@@ -114,39 +114,29 @@
         private function prepare_tags(
             $tags
         ): array {
-            # Split at the comma.
-            $names = explode(",", $tags);
+            $tags = strip_tags($tags);
+            $names = explode_clean($tags);
 
-            # Remove HTML.
-            $names = array_map("strip_tags", $names);
-
-            # Remove whitespace.
-            $names = array_map("trim", $names);
-
-            # Prevent numbers from being type-juggled to numeric keys.
+            # Prevent numbers type-juggling to numeric keys.
             foreach ($names as &$name) {
-                $name = is_numeric($name) ? "'".$name."'" : $name ;
+                if (is_numeric($name))
+                    $name = "\u{FE0E}".$name;
             }
 
-            # Remove duplicates.
-            $names = array_unique($names);
+            # Build an array of sanitized slugs.
+            $clean = array_map(
+                function($value) {
+                    $slug = sanitize($value, true, SLUG_STRICT, 0);
 
-            # Remove empties.
-            $names = array_diff($names, array(""));
+                    return preg_match("/[^\-0-9]+/", $slug) ?
+                        $slug :
+                        md5($value) ;
+                },
+                $names
+            );
 
-            # Build an array containing a sanitized slug for each tag.
-            $clean = array_map(function($value) {
-                return sanitize($value, true, SLUG_STRICT, 0);
-            }, $names);
-
-            # Build an associative array with tags as the keys and slugs as the values.
+            # Combine into an associative array.
             $assoc = array_combine($names, $clean);
-
-            # Replace any slugs that have been sanitized into nothingness with a hash.
-            foreach ($assoc as $name => &$slug) {
-                if (!preg_match("/[^\-0-9]+/", $slug))
-                    $slug = md5($name);
-            }
 
             return $assoc;
         }
