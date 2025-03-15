@@ -157,7 +157,10 @@
                 !empty($_POST['filenames']) and
                 !is_fakepath($_POST['filenames'])
             ) {
-                $filenames = explode_clean((string) $_POST['filenames']);
+                $filenames = explode_clean(
+                    (string) $_POST['filenames'],
+                    sort:false
+                );
             }
 
             return $post->update(
