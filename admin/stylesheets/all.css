@@ -1102,7 +1102,7 @@ button.emblem > img {
     float: none;
     display: inline;
     position: relative;
-    top: 0.1875rem;
+    top: calc(1cap - 1ex);
     height: 1rem;
     margin: 0rem;
     padding: 0rem;
