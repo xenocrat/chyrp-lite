@@ -814,6 +814,7 @@ div.flash {
     color: var(--chyrp-pure-white);
     border: none;
     border-radius: 0.25em;
+    animation: shake_sideways 10s 1s normal ease 3;
 }
 div.flash.notice {
     background-color: var(--chyrp-strong-green);
@@ -1236,6 +1237,41 @@ input.toolbar.hidden::file-selector-button {
         background-position: 60px 30px;
     }
 }
+@keyframes shake_sideways {
+    0% {
+        transform: translateX(+0.40rem);
+    }
+    1% {
+        transform: translateX(-0.45rem);
+    }
+    2% {
+        transform: translateX(+0.50rem);
+    }
+    3% {
+        transform: translateX(-0.50rem);
+    }
+    4% {
+        transform: translateX(+0.40rem);
+    }
+    5% {
+        transform: translateX(-0.30rem);
+    }
+    6% {
+        transform: translateX(+0.20rem);
+    }
+    7% {
+        transform: translateX(-0.15rem);
+    }
+    8% {
+        transform: translateX(+0.10rem);
+    }
+    9% {
+        transform: translateX(-0.05rem);
+    }
+    10% {
+        transform: translateX(+0.00rem);
+    }
+}
 
 /* Group: Breakpoints */
 
@@ -1508,6 +1544,7 @@ input.toolbar.hidden::file-selector-button {
 /* Group: Reduced motion */
 
 @media (prefers-reduced-motion) {
+    div.flash,
     .ajax_loading {
         animation: none;
     }
