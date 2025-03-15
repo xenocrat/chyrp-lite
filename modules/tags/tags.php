@@ -115,7 +115,7 @@
             $tags
         ): array {
             $tags = strip_tags($tags);
-            $names = explode_clean($tags);
+            $names = explode_clean($tags, sort:false);
 
             # Prevent numbers type-juggling to numeric keys.
             foreach ($names as &$name) {
