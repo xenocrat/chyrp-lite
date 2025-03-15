@@ -1972,6 +1972,11 @@ Returns:
     The rewrite rules, or false on failure.
 
 
+Function: generate_UUIDv4
+-------------------------
+Returns a Universally Unique Identifier (UUID) v4 string.
+
+
 Function: locales
 -----------------
 Returns an array of locale choices for the "chyrp" domain.

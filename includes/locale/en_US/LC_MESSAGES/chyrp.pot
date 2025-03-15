@@ -104,28 +104,28 @@ msgstr ""
 #: includes/controller/Main.php:1264
 #: includes/download.php:14
 #: includes/error.php:206
-#: includes/helpers.php:2424
-#: includes/helpers.php:2431
-#: includes/helpers.php:2438
-#: includes/helpers.php:2453
-#: includes/helpers.php:2462
-#: includes/helpers.php:2476
-#: includes/helpers.php:2483
-#: includes/helpers.php:2891
-#: includes/helpers.php:2904
-#: includes/helpers.php:2910
-#: includes/helpers.php:2916
-#: includes/helpers.php:2957
-#: includes/helpers.php:2963
-#: includes/helpers.php:2969
-#: includes/helpers.php:3127
-#: includes/helpers.php:3133
-#: includes/helpers.php:3139
-#: includes/helpers.php:3145
-#: includes/helpers.php:3150
-#: includes/helpers.php:3155
-#: includes/helpers.php:3160
-#: includes/helpers.php:3167
+#: includes/helpers.php:2468
+#: includes/helpers.php:2475
+#: includes/helpers.php:2482
+#: includes/helpers.php:2497
+#: includes/helpers.php:2506
+#: includes/helpers.php:2520
+#: includes/helpers.php:2527
+#: includes/helpers.php:2936
+#: includes/helpers.php:2949
+#: includes/helpers.php:2955
+#: includes/helpers.php:2961
+#: includes/helpers.php:3002
+#: includes/helpers.php:3008
+#: includes/helpers.php:3014
+#: includes/helpers.php:3172
+#: includes/helpers.php:3178
+#: includes/helpers.php:3184
+#: includes/helpers.php:3190
+#: includes/helpers.php:3195
+#: includes/helpers.php:3200
+#: includes/helpers.php:3205
+#: includes/helpers.php:3212
 #: includes/lib/ThumbnailFile.php:323
 #: includes/lib/ThumbnailFile.php:354
 #: includes/lib/ThumbnailFile.php:408
@@ -246,7 +246,7 @@ msgstr ""
 #: includes/controller/Main.php:581
 #: includes/controller/Main.php:666
 #: includes/download.php:21
-#: includes/helpers.php:2898
+#: includes/helpers.php:2943
 #: includes/thumbnail.php:22
 msgid "Access Denied"
 msgstr ""
@@ -332,7 +332,7 @@ msgstr ""
 #: includes/controller/Main.php:284
 #: includes/download.php:33
 #: includes/download.php:41
-#: includes/helpers.php:170
+#: includes/helpers.php:172
 #: includes/thumbnail.php:36
 #: includes/thumbnail.php:46
 msgid "Not Found"
@@ -799,14 +799,14 @@ msgid "You did not select anything to upload."
 msgstr ""
 
 #: includes/controller/Admin.php:2032
-#: includes/helpers.php:2899
+#: includes/helpers.php:2944
 msgid "Only uploaded files are accepted."
 msgstr ""
 
 #: includes/controller/Admin.php:2038
-#: includes/helpers.php:2917
-#: includes/helpers.php:2970
-#: includes/helpers.php:3151
+#: includes/helpers.php:2962
+#: includes/helpers.php:3015
+#: includes/helpers.php:3196
 msgid "Failed to write file to disk."
 msgstr ""
 
@@ -1253,7 +1253,7 @@ msgid "Reset password"
 msgstr ""
 
 #: includes/controller/Main.php:1265
-#: includes/helpers.php:2425
+#: includes/helpers.php:2469
 msgid "Webmention support is disabled for this site."
 msgstr ""
 
@@ -1278,163 +1278,163 @@ msgstr ""
 msgid "Session cannot be started more than once."
 msgstr ""
 
-#: includes/helpers.php:143
+#: includes/helpers.php:145
 msgid "Forbidden"
 msgstr ""
 
-#: includes/helpers.php:144
+#: includes/helpers.php:146
 msgid "You do not have permission to access this resource."
 msgstr ""
 
-#: includes/helpers.php:171
+#: includes/helpers.php:173
 msgid "The requested resource was not found."
 msgstr ""
 
-#: includes/helpers.php:2432
+#: includes/helpers.php:2476
 msgid "The URL for your page is not valid."
 msgstr ""
 
-#: includes/helpers.php:2439
+#: includes/helpers.php:2483
 msgid "The URL for our page is not valid."
 msgstr ""
 
-#: includes/helpers.php:2454
+#: includes/helpers.php:2498
 msgid "The source and target URLs cannot be the same."
 msgstr ""
 
-#: includes/helpers.php:2463
+#: includes/helpers.php:2507
 msgid "We have not published at that URL."
 msgstr ""
 
-#: includes/helpers.php:2477
+#: includes/helpers.php:2521
 msgid "You have not published at that URL."
 msgstr ""
 
-#: includes/helpers.php:2484
+#: includes/helpers.php:2528
 msgid "Your page does not link to our page."
 msgstr ""
 
-#: includes/helpers.php:2687
+#: includes/helpers.php:2731
 msgid "Please create the uploads directory."
 msgstr ""
 
-#: includes/helpers.php:2689
+#: includes/helpers.php:2733
 msgid "Please make the uploads directory writable."
 msgstr ""
 
-#: includes/helpers.php:2710
+#: includes/helpers.php:2755
 #, php-format
 msgid "%s module is missing."
 msgstr ""
 
-#: includes/helpers.php:2723
+#: includes/helpers.php:2768
 #, php-format
 msgid "%s module is damaged."
 msgstr ""
 
-#: includes/helpers.php:2741
+#: includes/helpers.php:2786
 #, php-format
 msgid "%s feather is missing."
 msgstr ""
 
-#: includes/helpers.php:2754
+#: includes/helpers.php:2799
 #, php-format
 msgid "%s feather is damaged."
 msgstr ""
 
-#: includes/helpers.php:2831
-#: includes/helpers.php:2857
+#: includes/helpers.php:2876
+#: includes/helpers.php:2902
 #, php-format
 msgid "Execution of %s has been cancelled."
 msgstr ""
 
-#: includes/helpers.php:2892
+#: includes/helpers.php:2937
 msgid "Uploaded file is of an unsupported type."
 msgstr ""
 
-#: includes/helpers.php:2905
-#: includes/helpers.php:2958
+#: includes/helpers.php:2950
+#: includes/helpers.php:3003
 msgid "Upload path does not exist."
 msgstr ""
 
-#: includes/helpers.php:2911
-#: includes/helpers.php:2964
+#: includes/helpers.php:2956
+#: includes/helpers.php:3009
 msgid "Upload path is not writable."
 msgstr ""
 
-#: includes/helpers.php:3128
+#: includes/helpers.php:3173
 msgid "The uploaded file exceeds the <code>upload_max_filesize</code> directive in php.ini."
 msgstr ""
 
-#: includes/helpers.php:3134
+#: includes/helpers.php:3179
 msgid "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the HTML form."
 msgstr ""
 
-#: includes/helpers.php:3140
+#: includes/helpers.php:3185
 msgid "The uploaded file was only partially uploaded."
 msgstr ""
 
-#: includes/helpers.php:3146
+#: includes/helpers.php:3191
 msgid "Missing a temporary folder."
 msgstr ""
 
-#: includes/helpers.php:3156
+#: includes/helpers.php:3201
 msgid "File upload was stopped by a PHP extension."
 msgstr ""
 
-#: includes/helpers.php:3161
+#: includes/helpers.php:3206
 #, php-format
 msgid "File upload failed with error %d."
 msgstr ""
 
-#: includes/helpers.php:3168
+#: includes/helpers.php:3213
 #, php-format
 msgid "The uploaded file exceeds the maximum size of %d Megabytes allowed by this site."
 msgstr ""
 
-#: includes/helpers.php:3677
+#: includes/helpers.php:3725
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr ""
 
-#: includes/helpers.php:3707
+#: includes/helpers.php:3755
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr ""
 
-#: includes/helpers.php:3795
+#: includes/helpers.php:3843
 msgid "Failed to create Zip archive."
 msgstr ""
 
-#: includes/helpers.php:3904
+#: includes/helpers.php:3953
 #, php-format
 msgid "Activate your account at %s"
 msgstr ""
 
-#: includes/helpers.php:3905
-#: includes/helpers.php:3947
+#: includes/helpers.php:3954
+#: includes/helpers.php:3996
 #, php-format
 msgid "Hello, %s."
 msgstr ""
 
-#: includes/helpers.php:3908
+#: includes/helpers.php:3957
 msgid "You are receiving this message because you registered a new account."
 msgstr ""
 
-#: includes/helpers.php:3911
+#: includes/helpers.php:3960
 msgid "Visit this link to activate your account:"
 msgstr ""
 
-#: includes/helpers.php:3946
+#: includes/helpers.php:3995
 #, php-format
 msgid "Reset your password at %s"
 msgstr ""
 
-#: includes/helpers.php:3950
+#: includes/helpers.php:3999
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 
-#: includes/helpers.php:3953
+#: includes/helpers.php:4002
 msgid "Visit this link to reset your password:"
 msgstr ""
 
