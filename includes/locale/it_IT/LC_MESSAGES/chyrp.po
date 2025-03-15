@@ -225,7 +225,7 @@ msgstr "Per poter scrivere un post, devi abilitare almeno una Feather."
 #: includes/controller/Admin.php:3087 includes/controller/Admin.php:3166
 #: includes/controller/Ajax.php:81 includes/controller/Ajax.php:124
 #: includes/controller/Main.php:284 includes/download.php:33
-#: includes/download.php:41 includes/helpers.php:172 includes/thumbnail.php:36
+#: includes/download.php:41 includes/helpers.php:205 includes/thumbnail.php:36
 #: includes/thumbnail.php:46
 msgid "Not Found"
 msgstr "Non trovato"
@@ -1059,15 +1059,15 @@ msgstr "Torna indietro"
 msgid "Session cannot be started more than once."
 msgstr "Impossibile iniziare la sessione più di una volta."
 
-#: includes/helpers.php:145
+#: includes/helpers.php:178
 msgid "Forbidden"
 msgstr "Negato"
 
-#: includes/helpers.php:146
+#: includes/helpers.php:179
 msgid "You do not have permission to access this resource."
 msgstr "Non si dispone dell'autorizzazione per accedere a questa risorsa."
 
-#: includes/helpers.php:173
+#: includes/helpers.php:206
 msgid "The requested resource was not found."
 msgstr "La risorsa richiesta non è stata trovata."
 

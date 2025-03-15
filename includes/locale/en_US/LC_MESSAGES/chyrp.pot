@@ -332,7 +332,7 @@ msgstr ""
 #: includes/controller/Main.php:284
 #: includes/download.php:33
 #: includes/download.php:41
-#: includes/helpers.php:172
+#: includes/helpers.php:205
 #: includes/thumbnail.php:36
 #: includes/thumbnail.php:46
 msgid "Not Found"
@@ -1278,15 +1278,15 @@ msgstr ""
 msgid "Session cannot be started more than once."
 msgstr ""
 
-#: includes/helpers.php:145
+#: includes/helpers.php:178
 msgid "Forbidden"
 msgstr ""
 
-#: includes/helpers.php:146
+#: includes/helpers.php:179
 msgid "You do not have permission to access this resource."
 msgstr ""
 
-#: includes/helpers.php:173
+#: includes/helpers.php:206
 msgid "The requested resource was not found."
 msgstr ""
 

@@ -1891,6 +1891,11 @@ Function: authenticate
 Mask for Session::hash_token().
 
 
+Function: generate_UUIDv4
+-------------------------
+Returns a Universally Unique Identifier (UUID) v4 string.
+
+
 Function: redirect
 ------------------
 Redirects to the supplied URL and exits immediately.
@@ -1970,11 +1975,6 @@ Parameters:
 
 Returns:
     The rewrite rules, or false on failure.
-
-
-Function: generate_UUIDv4
--------------------------
-Returns a Universally Unique Identifier (UUID) v4 string.
 
 
 Function: locales

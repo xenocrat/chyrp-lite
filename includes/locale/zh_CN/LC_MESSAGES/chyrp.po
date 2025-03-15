@@ -224,7 +224,7 @@ msgstr "您必须启用至少一个羽毛才能撰写帖子。"
 #: includes/controller/Admin.php:3087 includes/controller/Admin.php:3166
 #: includes/controller/Ajax.php:81 includes/controller/Ajax.php:124
 #: includes/controller/Main.php:284 includes/download.php:33
-#: includes/download.php:41 includes/helpers.php:172 includes/thumbnail.php:36
+#: includes/download.php:41 includes/helpers.php:205 includes/thumbnail.php:36
 #: includes/thumbnail.php:46
 msgid "Not Found"
 msgstr "未找到"
@@ -1043,15 +1043,15 @@ msgstr "返回"
 msgid "Session cannot be started more than once."
 msgstr "会话不能多次启动。"
 
-#: includes/helpers.php:145
+#: includes/helpers.php:178
 msgid "Forbidden"
 msgstr "被禁止"
 
-#: includes/helpers.php:146
+#: includes/helpers.php:179
 msgid "You do not have permission to access this resource."
 msgstr "您没有权限访问这个资源。"
 
-#: includes/helpers.php:173
+#: includes/helpers.php:206
 msgid "The requested resource was not found."
 msgstr "请求的资源未找到。"
 

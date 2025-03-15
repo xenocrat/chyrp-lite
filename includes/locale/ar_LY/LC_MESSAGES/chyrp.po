@@ -230,7 +230,7 @@ msgstr "يجب عليك تمكين ريشة واحدة على الأقل من أ
 #: includes/controller/Admin.php:3087 includes/controller/Admin.php:3166
 #: includes/controller/Ajax.php:81 includes/controller/Ajax.php:124
 #: includes/controller/Main.php:284 includes/download.php:33
-#: includes/download.php:41 includes/helpers.php:172 includes/thumbnail.php:36
+#: includes/download.php:41 includes/helpers.php:205 includes/thumbnail.php:36
 #: includes/thumbnail.php:46
 msgid "Not Found"
 msgstr "غير موجود"
@@ -1049,15 +1049,15 @@ msgstr "الرجوع للخلف"
 msgid "Session cannot be started more than once."
 msgstr "لا يمكن بدء الجلسة أكثر من مرة."
 
-#: includes/helpers.php:145
+#: includes/helpers.php:178
 msgid "Forbidden"
 msgstr "ممنوع"
 
-#: includes/helpers.php:146
+#: includes/helpers.php:179
 msgid "You do not have permission to access this resource."
 msgstr "ليس لديك الصلاحيّات الكافية للوصول إلى هذا العنصر."
 
-#: includes/helpers.php:173
+#: includes/helpers.php:206
 msgid "The requested resource was not found."
 msgstr "لم يتم العثور على المورد المطلوب."
 

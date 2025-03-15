@@ -224,7 +224,7 @@ msgstr ""
 #: includes/controller/Admin.php:3087 includes/controller/Admin.php:3166
 #: includes/controller/Ajax.php:81 includes/controller/Ajax.php:124
 #: includes/controller/Main.php:284 includes/download.php:33
-#: includes/download.php:41 includes/helpers.php:172 includes/thumbnail.php:36
+#: includes/download.php:41 includes/helpers.php:205 includes/thumbnail.php:36
 #: includes/thumbnail.php:46
 msgid "Not Found"
 msgstr "Niet gevonden"
@@ -1048,15 +1048,15 @@ msgstr "Ga terug"
 msgid "Session cannot be started more than once."
 msgstr "Sessie kan niet méér dan één keer gestart worden."
 
-#: includes/helpers.php:145
+#: includes/helpers.php:178
 msgid "Forbidden"
 msgstr "Verboden"
 
-#: includes/helpers.php:146
+#: includes/helpers.php:179
 msgid "You do not have permission to access this resource."
 msgstr "Je hebt geen toestemming om deze bron te benaderen."
 
-#: includes/helpers.php:173
+#: includes/helpers.php:206
 msgid "The requested resource was not found."
 msgstr "De opgevraagde bron is niet gevonden."
 

@@ -224,7 +224,7 @@ msgstr "게시물을 작성하려면 하나 이상의 깃털을 활성화해야 
 #: includes/controller/Admin.php:3087 includes/controller/Admin.php:3166
 #: includes/controller/Ajax.php:81 includes/controller/Ajax.php:124
 #: includes/controller/Main.php:284 includes/download.php:33
-#: includes/download.php:41 includes/helpers.php:172 includes/thumbnail.php:36
+#: includes/download.php:41 includes/helpers.php:205 includes/thumbnail.php:36
 #: includes/thumbnail.php:46
 msgid "Not Found"
 msgstr "찾을 수 없음"
@@ -1043,15 +1043,15 @@ msgstr "뒤로 가기"
 msgid "Session cannot be started more than once."
 msgstr "세션은 두 번 이상 시작할 수 없습니다."
 
-#: includes/helpers.php:145
+#: includes/helpers.php:178
 msgid "Forbidden"
 msgstr "금지"
 
-#: includes/helpers.php:146
+#: includes/helpers.php:179
 msgid "You do not have permission to access this resource."
 msgstr "자원에 접근할 수 있는 권한이 없습니다."
 
-#: includes/helpers.php:173
+#: includes/helpers.php:206
 msgid "The requested resource was not found."
 msgstr "요청한 자원을 찾을 수 없습니다."
 

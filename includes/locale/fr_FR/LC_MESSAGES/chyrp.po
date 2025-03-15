@@ -225,7 +225,7 @@ msgstr "Vous devez au moins activer une plume pour écrire un article."
 #: includes/controller/Admin.php:3087 includes/controller/Admin.php:3166
 #: includes/controller/Ajax.php:81 includes/controller/Ajax.php:124
 #: includes/controller/Main.php:284 includes/download.php:33
-#: includes/download.php:41 includes/helpers.php:172 includes/thumbnail.php:36
+#: includes/download.php:41 includes/helpers.php:205 includes/thumbnail.php:36
 #: includes/thumbnail.php:46
 msgid "Not Found"
 msgstr "Non trouvé"
@@ -1061,15 +1061,15 @@ msgstr "Retour"
 msgid "Session cannot be started more than once."
 msgstr "La session ne peut pas être commencée plus d'une fois."
 
-#: includes/helpers.php:145
+#: includes/helpers.php:178
 msgid "Forbidden"
 msgstr "Interdit"
 
-#: includes/helpers.php:146
+#: includes/helpers.php:179
 msgid "You do not have permission to access this resource."
 msgstr "Vous n'avez pas les droits pour accéder à cette ressource."
 
-#: includes/helpers.php:173
+#: includes/helpers.php:206
 msgid "The requested resource was not found."
 msgstr "La ressource demandée n'a pas été trouvée."
 
