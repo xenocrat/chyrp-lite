@@ -90,6 +90,39 @@
         return Session::hash_token();
     }
 
+    /**
+     * Function: generate_UUIDv4
+     * Returns a Universally Unique Identifier (UUID) v4 string.
+     */
+    function generate_UUIDv4(
+    ): string {
+        $uuid = "";
+
+        for ($i = 0; $i < 16; $i++) { 
+            $octet = random_int(0, 255);
+
+            if ($i == 6)
+               $octet = ($octet >> 4) | 0x40;
+
+            if ($i == 8)
+               $octet = ($octet >> 2) | 0x80;
+
+            $uuid.= str_pad(
+                dechex($octet),
+                2,
+                "0",
+                STR_PAD_LEFT
+            );
+        }
+
+        return preg_replace(
+            "/^(.{8})(.{4})(.{4})(.{4})(.+)$/",
+            "$1-$2-$3-$4-$5",
+            $uuid,
+            1
+        );
+    }
+
     #---------------------------------------------
     # Routing
     #---------------------------------------------
@@ -372,39 +405,6 @@
         );
 
         return $include;
-    }
-
-    /**
-     * Function: generate_UUIDv4
-     * Returns a Universally Unique Identifier (UUID) v4 string.
-     */
-    function generate_UUIDv4(
-    ): string {
-        $uuid = "";
-
-        for ($i = 0; $i < 16; $i++) { 
-            $octet = random_int(0, 255);
-
-            if ($i == 6)
-               $octet = ($octet >> 4) | 0x40;
-
-            if ($i == 8)
-               $octet = ($octet >> 2) | 0x80;
-
-            $uuid.= str_pad(
-                dechex($octet),
-                2,
-                "0",
-                STR_PAD_LEFT
-            );
-        }
-
-        return preg_replace(
-            "/^(.{8})(.{4})(.{4})(.{4})(.+)$/",
-            "$1-$2-$3-$4-$5",
-            $uuid,
-            1
-        );
     }
 
     #---------------------------------------------
