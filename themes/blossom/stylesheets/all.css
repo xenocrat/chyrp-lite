@@ -1018,7 +1018,7 @@ div.standalone > *:last-child {
 }
 @media (prefers-reduced-motion) {
     .ajax_loading {
-        animation: none;
+        animation: ajax_loading 10s linear infinite;
     }
 }
 @media (prefers-contrast: more) {

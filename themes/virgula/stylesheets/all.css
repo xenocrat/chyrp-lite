@@ -618,7 +618,6 @@ a.likes:focus > svg {
 }
 @media (prefers-reduced-motion) {
     .ajax_loading * {
-        animation: none;
-        filter: opacity(80%) blur(2px);
+        animation: ajax_loading 5s alternate infinite ease-in-out;
     }
 }
