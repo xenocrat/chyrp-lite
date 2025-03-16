@@ -75,7 +75,8 @@ var ChyrpHighlighter = {
                     ChyrpHighlighter.styles.button
                 ).click(
                     async function(e) {
-                        var code = $(e.currentTarget).siblings("code").first();
+                        var target = $(e.currentTarget);
+                        var code = target.siblings("code").first();
                         var text = code.text();
 
                         try {
@@ -89,6 +90,7 @@ var ChyrpHighlighter = {
                             selection.removeAllRanges();
                             range.selectNodeContents(code[0]);
                             selection.addRange(range);
+                            target.trigger( "blur" );
                         }
                     }
                 ).append(
