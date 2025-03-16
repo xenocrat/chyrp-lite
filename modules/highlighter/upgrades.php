@@ -26,4 +26,27 @@
         }
     }
 
+    /**
+     * Function: highlighter_add_copy_to_clipboard
+     * Adds the copy_to_clipboard config setting.
+     *
+     * Versions: 2025.01 => 2025.02
+     */
+    function highlighter_add_copy_to_clipboard(
+    ): void {
+        $config = Config::current();
+        $array = $config->module_highlighter;
+
+        fallback($array["copy_to_clipboard"], false);
+
+        $set = $config->set("module_highlighter", $array);
+
+        if ($set === false)
+            error(
+                __("Error"),
+                __("Could not write the configuration file.")
+            );
+    }
+
     highlighter_add_config();
+    highlighter_add_copy_to_clipboard();

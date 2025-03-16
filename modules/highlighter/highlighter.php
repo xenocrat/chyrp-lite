@@ -6,7 +6,10 @@
 
             $config->set(
                 "module_highlighter",
-                array("stylesheet" => "default.min.css")
+                array(
+                    "stylesheet" => "default.min.css",
+                    "copy_to_clipboard" => true
+                )
             );
         }
 
@@ -26,6 +29,8 @@
 
         public function javascript(
         ): void {
+            $config  = Config::current();
+            $icon = $this->get_svg("copy.svg");
             include MODULES_DIR.DIR."highlighter".DIR."javascript.php";
         }
 
@@ -70,11 +75,14 @@
                     __("Invalid authentication token.")
                 );
 
-            fallback($_POST['stylesheet'], "monokai-sublime.css");
+            fallback($_POST['stylesheet'], "default.min.css");
 
             $config->set(
                 "module_highlighter",
-                array("stylesheet" => $_POST['stylesheet'])
+                array(
+                    "stylesheet" => $_POST['stylesheet'],
+                    "copy_to_clipboard" => !empty($_POST['copy_to_clipboard'])
+                )
             );
 
             Flash::notice(
@@ -92,6 +100,26 @@
                 );
 
             return $navs;
+        }
+
+        private function get_svg(
+            $filename
+        ): string {
+            $filename = str_replace(array(DIR, "/"), "", $filename);
+            $id = serialize($filename);
+            $path = MODULES_DIR.DIR."highlighter".DIR."images";
+
+            static $cache = array();
+
+            if (isset($cache[$id]))
+                return $cache[$id];
+
+            $svg = @file_get_contents($path.DIR.$filename);
+
+            if ($svg === false)
+                return "";
+
+            return $cache[$id] = $svg;
         }
 
         private function highlighter_stylesheets(
