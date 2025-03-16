@@ -1021,7 +1021,7 @@ var Write = {
                 function() {
                     try {
                         return sessionStorage.getItem(prefix + "_write_title");
-                    } catch(e) {
+                    } catch(err) {
                         console.log("Caught Exception: Window.sessionStorage.getItem()");
                         return null;
                     }
@@ -1031,7 +1031,7 @@ var Write = {
                 function(e) {
                     try {
                         sessionStorage.setItem(prefix + "_write_title", $(this).val());
-                    } catch(e) {
+                    } catch(err) {
                         console.log("Caught Exception: Window.sessionStorage.setItem()");
                     }
                 }
@@ -1041,7 +1041,7 @@ var Write = {
                 function(index, value) {
                     try {
                         return sessionStorage.getItem(prefix + "_write_body");
-                    } catch(e) {
+                    } catch(err) {
                         console.log("Caught Exception: Window.sessionStorage.getItem()");
                         return null;
                     }
@@ -1051,7 +1051,7 @@ var Write = {
                 function(e) {
                     try {
                         sessionStorage.setItem(prefix + "_write_body", $(this).val());
-                    } catch(e) {
+                    } catch(err) {
                         console.log("Caught Exception: Window.sessionStorage.setItem()");
                     }
                 }
@@ -1063,7 +1063,7 @@ var Write = {
                     try {
                         sessionStorage.removeItem(prefix + "_write_title");
                         sessionStorage.removeItem(prefix + "_write_body");
-                    } catch(e) {
+                    } catch(err) {
                         console.log("Caught Exception: Window.sessionStorage.removeItem()");
                     }
                 }
