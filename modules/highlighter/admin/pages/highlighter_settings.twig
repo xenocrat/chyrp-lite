@@ -18,6 +18,12 @@
 {% endfor %}
 </select>
 </p>
+<p>
+<label for="copy_to_clipboard">{{ "Copy Button" | translate("highlighter") }}</label>
+{#- -#}
+<input type="checkbox" class="checkbox" name="copy_to_clipboard"  id="copy_to_clipboard"{{ site.module_highlighter.copy_to_clipboard | checked }}>
+<small>{{ "Add a button for copying to the clipboard." | translate("highlighter") }}</small>
+</p>
 <p class="buttons">
 <button type="submit" class="yay">
 {{ "Update" | translate }}
