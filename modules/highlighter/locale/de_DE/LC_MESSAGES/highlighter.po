@@ -21,7 +21,15 @@ msgstr "Einstellungen für die Syntaxhervorhebung"
 msgid "Stylesheet"
 msgstr "Stylesheet"
 
-#: modules/highlighter/highlighter.php:91 modules/highlighter/info.php:3
+#: modules/highlighter/admin/pages/highlighter_settings.twig:22
+msgid "Copy Button"
+msgstr "Schaltfläche Kopieren"
+
+#: modules/highlighter/admin/pages/highlighter_settings.twig:25
+msgid "Add a button for copying to the clipboard."
+msgstr "Fügen Sie eine Schaltfläche zum Kopieren in die Zwischenablage hinzu."
+
+#: modules/highlighter/highlighter.php:99 modules/highlighter/info.php:3
 msgid "Syntax Highlighting"
 msgstr "Syntaxhervorhebung"
 
@@ -32,3 +40,7 @@ msgid ""
 msgstr ""
 "Fügt verschachtelten <code>&lt;pre&gt;&lt;code&gt;</code>-Blöcken "
 "Syntaxhervorhebung hinzu."
+
+#: modules/highlighter/javascript.php:73 modules/highlighter/javascript.php:74
+msgid "Copy to clipboard"
+msgstr "In die Zwischenablage kopieren"

@@ -9,12 +9,25 @@ msgstr ""
 msgid "Stylesheet"
 msgstr ""
 
-#: modules/highlighter/highlighter.php:91
+#: modules/highlighter/admin/pages/highlighter_settings.twig:22
+msgid "Copy Button"
+msgstr ""
+
+#: modules/highlighter/admin/pages/highlighter_settings.twig:25
+msgid "Add a button for copying to the clipboard."
+msgstr ""
+
+#: modules/highlighter/highlighter.php:99
 #: modules/highlighter/info.php:3
 msgid "Syntax Highlighting"
 msgstr ""
 
 #: modules/highlighter/info.php:6
 msgid "Adds syntax highlighting to nested <code>&lt;pre&gt;&lt;code&gt;</code> blocks."
+msgstr ""
+
+#: modules/highlighter/javascript.php:73
+#: modules/highlighter/javascript.php:74
+msgid "Copy to clipboard"
 msgstr ""
 

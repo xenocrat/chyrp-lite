@@ -22,7 +22,15 @@ msgstr "Impostazioni di evidenziazione della sintassi"
 msgid "Stylesheet"
 msgstr "Foglio di stile"
 
-#: modules/highlighter/highlighter.php:91 modules/highlighter/info.php:3
+#: modules/highlighter/admin/pages/highlighter_settings.twig:22
+msgid "Copy Button"
+msgstr "Pulsante Copia"
+
+#: modules/highlighter/admin/pages/highlighter_settings.twig:25
+msgid "Add a button for copying to the clipboard."
+msgstr "Aggiungi un pulsante per la copia negli appunti."
+
+#: modules/highlighter/highlighter.php:99 modules/highlighter/info.php:3
 msgid "Syntax Highlighting"
 msgstr "Evidenziazione della sintassi"
 
@@ -33,3 +41,7 @@ msgid ""
 msgstr ""
 "Aggiunge la colorazione della sintassi concatenata <code>&lt;pre&gt;&lt;"
 "code&gt;</code> in blocchi."
+
+#: modules/highlighter/javascript.php:73 modules/highlighter/javascript.php:74
+msgid "Copy to clipboard"
+msgstr "Copia negli appunti"

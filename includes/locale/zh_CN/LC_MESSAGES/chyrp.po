@@ -57,7 +57,7 @@ msgstr "查询语句"
 msgid "Parameters"
 msgstr "参数"
 
-#: includes/class/Query.php:202 includes/class/SQL.php:156 install.php:798
+#: includes/class/Query.php:202 includes/class/SQL.php:156 install.php:812
 #, php-format
 msgid "Database error: %s"
 msgstr "数据库错误： %s"
@@ -103,7 +103,7 @@ msgstr "路由启动了一个无效的控制器。"
 #: includes/helpers.php:3212 includes/helpers.php:3219
 #: includes/lib/ThumbnailFile.php:323 includes/lib/ThumbnailFile.php:354
 #: includes/lib/ThumbnailFile.php:408 includes/lib/ThumbnailFile.php:469
-#: includes/thumbnail.php:15 install.php:1084 upgrade.php:168 upgrade.php:185
+#: includes/thumbnail.php:15 install.php:1098 upgrade.php:168 upgrade.php:185
 #: upgrade.php:202 upgrade.php:219 upgrade.php:236 upgrade.php:257
 #: upgrade.php:303 upgrade.php:320 upgrade.php:341 upgrade.php:358
 #: upgrade.php:375 upgrade.php:392 upgrade.php:413 upgrade.php:430
@@ -395,7 +395,7 @@ msgid "Please enter a username for the account."
 msgstr "请输入账户的用户名。"
 
 #: includes/controller/Admin.php:1058 includes/controller/Admin.php:1232
-#: includes/controller/Main.php:821 install.php:741
+#: includes/controller/Main.php:821 install.php:755
 msgid "Invalid username."
 msgstr "无效的用户名。"
 
@@ -405,13 +405,13 @@ msgid "That username is already in use."
 msgstr "用户名已被使用。"
 
 #: includes/controller/Admin.php:1074 includes/controller/Main.php:835
-#: includes/controller/Main.php:1222 install.php:744
+#: includes/controller/Main.php:1222 install.php:758
 msgid "Passwords cannot be blank."
 msgstr "密码不能为空。"
 
 #: includes/controller/Admin.php:1081 includes/controller/Admin.php:1265
 #: includes/controller/Main.php:839 includes/controller/Main.php:1058
-#: includes/controller/Main.php:1226 install.php:674 install.php:746
+#: includes/controller/Main.php:1226 install.php:688 install.php:760
 msgid "Passwords do not match."
 msgstr "密码不匹配。"
 
@@ -421,13 +421,13 @@ msgstr "请考虑为这个用户设置一个更强的密码。"
 
 #: includes/controller/Admin.php:1093 includes/controller/Admin.php:1284
 #: includes/controller/Admin.php:3306 includes/controller/Main.php:848
-#: includes/controller/Main.php:1071 install.php:749
+#: includes/controller/Main.php:1071 install.php:763
 msgid "Email address cannot be blank."
 msgstr "邮件地址不能为空。"
 
 #: includes/controller/Admin.php:1100 includes/controller/Admin.php:1291
 #: includes/controller/Admin.php:3313 includes/controller/Main.php:852
-#: includes/controller/Main.php:1075 install.php:751
+#: includes/controller/Main.php:1075 install.php:765
 msgid "Invalid email address."
 msgstr "无效的邮件地址。"
 
@@ -920,7 +920,7 @@ msgstr "站点不允许注册。"
 msgid "You cannot register an account because you are already logged in."
 msgstr "您不能注册账户，因为您已登陆。"
 
-#: includes/controller/Main.php:814 install.php:736
+#: includes/controller/Main.php:814 install.php:750
 msgid "Please enter a username for your account."
 msgstr "请输入账户的用户名。"
 
@@ -1416,39 +1416,39 @@ msgstr "请对<em>thumbs</em>目录使用CHMOD 或者 CHOWN 确保其可写。"
 msgid "Chyrp Lite Installer"
 msgstr "Chyrp Lite安装程序"
 
-#: install.php:719
+#: install.php:733
 msgid "Database cannot be blank."
 msgstr "数据库不能为空。"
 
-#: install.php:722
+#: install.php:736
 msgid "Chyrp URL cannot be blank."
 msgstr "Chyrp URL 不能为空。"
 
-#: install.php:724
+#: install.php:738
 msgid "Invalid Chyrp URL."
 msgstr "无效的Chyrp URL。"
 
-#: install.php:727
+#: install.php:741
 msgid "Please enter a name for your website."
 msgstr "请输入您站点的名字。"
 
-#: install.php:730
+#: install.php:744
 msgid "Time zone cannot be blank."
 msgstr "时区不能为空。"
 
-#: install.php:733
+#: install.php:747
 msgid "Language cannot be blank."
 msgstr "语言不能为空。"
 
-#: install.php:757
+#: install.php:771
 msgid "Could not determine the absolute path to the database."
 msgstr "无法确定数据库的绝对路径。"
 
-#: install.php:764
+#: install.php:778
 msgid "Please make the database writable by the server."
 msgstr "请确保您的数据库在这个服务器上可写。"
 
-#: install.php:1085 upgrade.php:169 upgrade.php:186 upgrade.php:203
+#: install.php:1099 upgrade.php:169 upgrade.php:186 upgrade.php:203
 #: upgrade.php:220 upgrade.php:237 upgrade.php:258 upgrade.php:304
 #: upgrade.php:321 upgrade.php:342 upgrade.php:359 upgrade.php:376
 #: upgrade.php:393 upgrade.php:414 upgrade.php:431 upgrade.php:565
@@ -1456,123 +1456,123 @@ msgstr "请确保您的数据库在这个服务器上可写。"
 msgid "Could not write the configuration file."
 msgstr "不能写入配置文件。"
 
-#: install.php:1109
+#: install.php:1123
 msgid "Database Setup"
 msgstr "数据库设置"
 
-#: install.php:1111
+#: install.php:1125
 msgid "Adapter"
 msgstr "适配器"
 
-#: install.php:1125
+#: install.php:1139
 msgid "Host"
 msgstr "主机"
 
-#: install.php:1129
+#: install.php:1143
 msgid "Port"
 msgstr ""
 
-#: install.php:1129 install.php:1158
+#: install.php:1143 install.php:1172
 msgid "(optional)"
 msgstr "(可选)"
 
-#: install.php:1133 install.php:1196
+#: install.php:1147 install.php:1210
 msgid "Username"
 msgstr "用户名"
 
-#: install.php:1137 install.php:1200 install.php:1204
+#: install.php:1151 install.php:1214 install.php:1218
 msgid "Password"
 msgstr "密码"
 
-#: install.php:1141
+#: install.php:1155
 msgid "Database"
 msgstr "数据库"
 
-#: install.php:1143
+#: install.php:1157
 msgid "(absolute or relative path)"
 msgstr "（相对或者绝对路径）"
 
-#: install.php:1149
+#: install.php:1163
 msgid "Make sure your PostgreSQL database uses UTF-8 encoding."
 msgstr "确保您的PostgresQL数据库使用 UTF-8 编码。"
 
-#: install.php:1152
+#: install.php:1166
 msgid ""
 "The collation <code>utf8mb4_general_ci</code> is recommended for your MySQL "
 "database."
 msgstr "推荐为您的 MySQL 数据库使用排序规则 <code>utf8mb4_general_ci</code>。"
 
-#: install.php:1155
+#: install.php:1169
 msgid ""
 "Be sure to put your SQLite database outside the document root directory, "
 "otherwise visitors will be able to download it."
 msgstr "请务必将您的SQLite数据库放在网站根目录之外，否则访问者将能够下载它。"
 
-#: install.php:1158
+#: install.php:1172
 msgid "Table Prefix"
 msgstr "表前缀"
 
-#: install.php:1161
+#: install.php:1175
 msgid "Website Setup"
 msgstr "网站设置"
 
-#: install.php:1163
+#: install.php:1177
 msgid "Chyrp URL"
 msgstr ""
 
-#: install.php:1167
+#: install.php:1181
 msgid "Site Name"
 msgstr "站点名"
 
-#: install.php:1168
+#: install.php:1182
 msgid "My Awesome Site"
 msgstr "我最棒的站点"
 
-#: install.php:1171
+#: install.php:1185
 msgid "Description"
 msgstr "描述"
 
-#: install.php:1175
+#: install.php:1189
 msgid "Time Zone"
 msgstr "时区"
 
-#: install.php:1185
+#: install.php:1199
 msgid "Language"
 msgstr "语言"
 
-#: install.php:1194
+#: install.php:1208
 msgid "Admin Account"
 msgstr "管理员账号"
 
-#: install.php:1204
+#: install.php:1218
 msgid "(again)"
 msgstr "(确认)"
 
-#: install.php:1208
+#: install.php:1222
 msgid "Email Address"
 msgstr "联系的邮件地址"
 
-#: install.php:1211
+#: install.php:1225
 msgid "Install me!"
 msgstr "安装！"
 
-#: install.php:1214
+#: install.php:1228
 msgid "Installation Complete"
 msgstr "安装完成"
 
-#: install.php:1215 upgrade.php:1140
+#: install.php:1229 upgrade.php:1140
 msgid "What now?"
 msgstr "现在做什么？"
 
-#: install.php:1217
+#: install.php:1231
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr "删除 <em>install.php</em>，您不再需要它。"
 
-#: install.php:1218
+#: install.php:1232
 msgid "Log in to your site and configure things to your liking."
 msgstr "登陆您的站点并且配置您喜欢的东西。"
 
-#: install.php:1221 upgrade.php:1147
+#: install.php:1235 upgrade.php:1147
 msgid "Take me to my site!"
 msgstr "前往我的站点！"
 
