@@ -712,7 +712,7 @@ var Write = {
                             Write.formatting(target, "del");
                         }
                     ).append(
-                        '<?php esce(icon_svg("Strikethrough.svg")); ?>'
+                        '<?php esce(icon_svg("strikethrough.svg")); ?>'
                     )
                 );
 
