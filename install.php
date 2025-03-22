@@ -443,6 +443,20 @@
                 background-position: center right 0.1em;
                 background-repeat: no-repeat;
             }
+            input::placeholder {
+                color: var(--chyrp-winter-grey);
+                opacity: 1;
+            }
+            input::grammar-error,
+            textarea::grammar-error {
+                text-decoration: var(--chyrp-strong-blue) wavy underline;
+                text-underline-offset: 0.125em;
+            }
+            input::spelling-error,
+            textarea::spelling-error {
+                text-decoration: var(--chyrp-strong-red) wavy underline;
+                text-underline-offset: 0.125em;
+            }
             input:invalid,
             textarea:invalid {
                 border-color: var(--chyrp-strong-orange);
