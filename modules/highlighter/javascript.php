@@ -3,7 +3,7 @@
         exit;
 ?>
 var ChyrpHighlighter = {
-    button: <?php esce($config->module_highlighter["copy_to_clipboard"]); ?>,
+    copyable: <?php esce($config->module_highlighter["copy_to_clipboard"]); ?>,
     styles: {
         pre: {
             "position": "relative"
@@ -24,7 +24,7 @@ var ChyrpHighlighter = {
         $("pre > code").each(
             function(index, block) {
                 hljs.highlightElement(block);
-                ChyrpHighlighter.utility($(block));
+                ChyrpHighlighter.mutate($(block));
             }
         );
 
@@ -44,7 +44,7 @@ var ChyrpHighlighter = {
                                 $(item).find("pre > code").each(
                                     function(y, block) {
                                         hljs.highlightElement(block);
-                                        ChyrpHighlighter.utility($(block));
+                                        ChyrpHighlighter.mutate($(block));
                                     }
                                 );
                             }
@@ -59,11 +59,13 @@ var ChyrpHighlighter = {
             observer.observe(target, config);
         }
     },
-    utility: function(
+    mutate: function(
         block
     ) {
-        if (ChyrpHighlighter.button) {
-            block.parent().css(ChyrpHighlighter.styles.pre).append(
+        if (ChyrpHighlighter.copyable) {
+            block.parent().css(
+                ChyrpHighlighter.styles.pre
+            ).append(
                 $(
                     "<button>",
                     {
@@ -90,7 +92,7 @@ var ChyrpHighlighter = {
                             selection.removeAllRanges();
                             range.selectNodeContents(code[0]);
                             selection.addRange(range);
-                            target.trigger( "blur" );
+                            target.trigger("blur");
                         }
                     }
                 ).append(
