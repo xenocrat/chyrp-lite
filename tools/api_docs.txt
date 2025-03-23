@@ -2658,7 +2658,8 @@ Parameters:
     $url - Whether to return a URL or a filesystem path.
 
 Returns:
-    The supplied filename prepended with URL or filesystem path.
+    The supplied filename prepended with URL or filesystem path,
+    or false on failure.
 
 
 Function: uploaded_search

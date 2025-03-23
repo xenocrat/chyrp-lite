@@ -96,7 +96,7 @@ msgstr ""
 #: includes/controller/Admin.php:3305
 #: includes/controller/Admin.php:3312
 #: includes/controller/Admin.php:3319
-#: includes/controller/Admin.php:3693
+#: includes/controller/Admin.php:3697
 #: includes/controller/Ajax.php:38
 #: includes/controller/Ajax.php:173
 #: includes/controller/Ajax.php:238
@@ -118,14 +118,14 @@ msgstr ""
 #: includes/helpers.php:3009
 #: includes/helpers.php:3015
 #: includes/helpers.php:3021
-#: includes/helpers.php:3179
-#: includes/helpers.php:3185
-#: includes/helpers.php:3191
-#: includes/helpers.php:3197
+#: includes/helpers.php:3184
+#: includes/helpers.php:3190
+#: includes/helpers.php:3196
 #: includes/helpers.php:3202
 #: includes/helpers.php:3207
 #: includes/helpers.php:3212
-#: includes/helpers.php:3219
+#: includes/helpers.php:3217
+#: includes/helpers.php:3224
 #: includes/lib/ThumbnailFile.php:323
 #: includes/lib/ThumbnailFile.php:354
 #: includes/lib/ThumbnailFile.php:408
@@ -226,11 +226,11 @@ msgstr ""
 #: includes/controller/Admin.php:3299
 #: includes/controller/Admin.php:3367
 #: includes/controller/Admin.php:3443
-#: includes/controller/Admin.php:3496
-#: includes/controller/Admin.php:3511
-#: includes/controller/Admin.php:3564
-#: includes/controller/Admin.php:3578
-#: includes/controller/Admin.php:3645
+#: includes/controller/Admin.php:3500
+#: includes/controller/Admin.php:3515
+#: includes/controller/Admin.php:3568
+#: includes/controller/Admin.php:3582
+#: includes/controller/Admin.php:3649
 #: includes/controller/Ajax.php:64
 #: includes/controller/Ajax.php:87
 #: includes/controller/Ajax.php:103
@@ -365,8 +365,8 @@ msgstr ""
 #: includes/controller/Admin.php:3261
 #: includes/controller/Admin.php:3300
 #: includes/controller/Admin.php:3444
-#: includes/controller/Admin.php:3512
-#: includes/controller/Admin.php:3579
+#: includes/controller/Admin.php:3516
+#: includes/controller/Admin.php:3583
 #: includes/controller/Ajax.php:65
 #: includes/controller/Ajax.php:110
 #: includes/controller/Ajax.php:141
@@ -388,7 +388,7 @@ msgstr ""
 #: includes/controller/Admin.php:2004
 #: includes/controller/Admin.php:2064
 #: includes/controller/Admin.php:2133
-#: includes/controller/Admin.php:3694
+#: includes/controller/Admin.php:3698
 #: includes/controller/Ajax.php:39
 #: includes/controller/Ajax.php:174
 #: includes/controller/Ajax.php:239
@@ -497,7 +497,7 @@ msgstr ""
 #: includes/controller/Admin.php:709
 #: includes/controller/Admin.php:855
 #: includes/controller/Admin.php:2100
-#: includes/controller/Admin.php:3603
+#: includes/controller/Admin.php:3607
 msgid "View page!"
 msgstr ""
 
@@ -671,8 +671,8 @@ msgstr ""
 #: includes/controller/Admin.php:1805
 #: includes/controller/Admin.php:1831
 #: includes/controller/Admin.php:1853
-#: includes/controller/Admin.php:3522
-#: includes/controller/Admin.php:3531
+#: includes/controller/Admin.php:3526
+#: includes/controller/Admin.php:3535
 msgid "Gone"
 msgstr ""
 
@@ -753,7 +753,7 @@ msgid "New member group must be specified."
 msgstr ""
 
 #: includes/controller/Admin.php:1832
-#: includes/controller/Admin.php:3523
+#: includes/controller/Admin.php:3527
 msgid "New default group does not exist."
 msgstr ""
 
@@ -762,7 +762,7 @@ msgid "New default group must be specified."
 msgstr ""
 
 #: includes/controller/Admin.php:1854
-#: includes/controller/Admin.php:3532
+#: includes/controller/Admin.php:3536
 msgid "New guest group does not exist."
 msgstr ""
 
@@ -806,7 +806,7 @@ msgstr ""
 #: includes/controller/Admin.php:2038
 #: includes/helpers.php:2969
 #: includes/helpers.php:3022
-#: includes/helpers.php:3203
+#: includes/helpers.php:3208
 msgid "Failed to write file to disk."
 msgstr ""
 
@@ -887,9 +887,9 @@ msgstr ""
 #: includes/controller/Admin.php:3243
 #: includes/controller/Admin.php:3282
 #: includes/controller/Admin.php:3368
-#: includes/controller/Admin.php:3497
-#: includes/controller/Admin.php:3565
-#: includes/controller/Admin.php:3646
+#: includes/controller/Admin.php:3501
+#: includes/controller/Admin.php:3569
+#: includes/controller/Admin.php:3650
 msgid "You do not have sufficient privileges to change settings."
 msgstr ""
 
@@ -960,107 +960,107 @@ msgid "Invalid canonical URL."
 msgstr ""
 
 #: includes/controller/Admin.php:3354
-#: includes/controller/Admin.php:3483
-#: includes/controller/Admin.php:3551
-#: includes/controller/Admin.php:3632
+#: includes/controller/Admin.php:3487
+#: includes/controller/Admin.php:3555
+#: includes/controller/Admin.php:3636
 msgid "Settings updated."
 msgstr ""
 
-#: includes/controller/Admin.php:3593
+#: includes/controller/Admin.php:3597
 msgid "My Awesome Homepage"
 msgstr ""
 
-#: includes/controller/Admin.php:3594
+#: includes/controller/Admin.php:3598
 msgid "Nothing here yet!"
 msgstr ""
 
-#: includes/controller/Admin.php:3602
+#: includes/controller/Admin.php:3606
 msgid "Page created."
 msgstr ""
 
-#: includes/controller/Admin.php:3626
+#: includes/controller/Admin.php:3630
 msgid "Clean URLs have been disabled because URL rewriting is not active."
 msgstr ""
 
-#: includes/controller/Admin.php:3668
+#: includes/controller/Admin.php:3672
 #: includes/controller/Main.php:964
 msgid "You are already logged in."
 msgstr ""
 
-#: includes/controller/Admin.php:3707
+#: includes/controller/Admin.php:3711
 msgid "Help"
 msgstr ""
 
-#: includes/controller/Admin.php:3726
+#: includes/controller/Admin.php:3730
 msgid "Write"
 msgstr ""
 
-#: includes/controller/Admin.php:3731
+#: includes/controller/Admin.php:3735
 msgid "Manage"
 msgstr ""
 
-#: includes/controller/Admin.php:3736
+#: includes/controller/Admin.php:3740
 msgid "Settings"
 msgstr ""
 
-#: includes/controller/Admin.php:3741
+#: includes/controller/Admin.php:3745
 msgid "Extend"
 msgstr ""
 
-#: includes/controller/Admin.php:3752
+#: includes/controller/Admin.php:3756
 msgid "Page"
 msgstr ""
 
-#: includes/controller/Admin.php:3792
+#: includes/controller/Admin.php:3796
 msgid "Posts"
 msgstr ""
 
-#: includes/controller/Admin.php:3801
+#: includes/controller/Admin.php:3805
 msgid "Pages"
 msgstr ""
 
-#: includes/controller/Admin.php:3810
-#: includes/controller/Admin.php:3863
+#: includes/controller/Admin.php:3814
+#: includes/controller/Admin.php:3867
 msgid "Users"
 msgstr ""
 
-#: includes/controller/Admin.php:3820
+#: includes/controller/Admin.php:3824
 msgid "Groups"
 msgstr ""
 
-#: includes/controller/Admin.php:3830
+#: includes/controller/Admin.php:3834
 msgid "Uploads"
 msgstr ""
 
-#: includes/controller/Admin.php:3840
+#: includes/controller/Admin.php:3844
 msgid "Import"
 msgstr ""
 
-#: includes/controller/Admin.php:3843
+#: includes/controller/Admin.php:3847
 msgid "Export"
 msgstr ""
 
-#: includes/controller/Admin.php:3861
+#: includes/controller/Admin.php:3865
 msgid "General"
 msgstr ""
 
-#: includes/controller/Admin.php:3862
+#: includes/controller/Admin.php:3866
 msgid "Content"
 msgstr ""
 
-#: includes/controller/Admin.php:3864
+#: includes/controller/Admin.php:3868
 msgid "Routes"
 msgstr ""
 
-#: includes/controller/Admin.php:3885
+#: includes/controller/Admin.php:3889
 msgid "Modules"
 msgstr ""
 
-#: includes/controller/Admin.php:3886
+#: includes/controller/Admin.php:3890
 msgid "Feathers"
 msgstr ""
 
-#: includes/controller/Admin.php:3887
+#: includes/controller/Admin.php:3891
 msgid "Themes"
 msgstr ""
 
@@ -1362,79 +1362,79 @@ msgstr ""
 msgid "Upload path is not writable."
 msgstr ""
 
-#: includes/helpers.php:3180
+#: includes/helpers.php:3185
 msgid "The uploaded file exceeds the <code>upload_max_filesize</code> directive in php.ini."
 msgstr ""
 
-#: includes/helpers.php:3186
+#: includes/helpers.php:3191
 msgid "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the HTML form."
 msgstr ""
 
-#: includes/helpers.php:3192
+#: includes/helpers.php:3197
 msgid "The uploaded file was only partially uploaded."
 msgstr ""
 
-#: includes/helpers.php:3198
+#: includes/helpers.php:3203
 msgid "Missing a temporary folder."
 msgstr ""
 
-#: includes/helpers.php:3208
+#: includes/helpers.php:3213
 msgid "File upload was stopped by a PHP extension."
 msgstr ""
 
-#: includes/helpers.php:3213
+#: includes/helpers.php:3218
 #, php-format
 msgid "File upload failed with error %d."
 msgstr ""
 
-#: includes/helpers.php:3220
+#: includes/helpers.php:3225
 #, php-format
 msgid "The uploaded file exceeds the maximum size of %d Megabytes allowed by this site."
 msgstr ""
 
-#: includes/helpers.php:3732
+#: includes/helpers.php:3737
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr ""
 
-#: includes/helpers.php:3762
+#: includes/helpers.php:3767
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr ""
 
-#: includes/helpers.php:3850
+#: includes/helpers.php:3855
 msgid "Failed to create Zip archive."
 msgstr ""
 
-#: includes/helpers.php:3960
+#: includes/helpers.php:3965
 #, php-format
 msgid "Activate your account at %s"
 msgstr ""
 
-#: includes/helpers.php:3961
-#: includes/helpers.php:4003
+#: includes/helpers.php:3966
+#: includes/helpers.php:4008
 #, php-format
 msgid "Hello, %s."
 msgstr ""
 
-#: includes/helpers.php:3964
+#: includes/helpers.php:3969
 msgid "You are receiving this message because you registered a new account."
 msgstr ""
 
-#: includes/helpers.php:3967
+#: includes/helpers.php:3972
 msgid "Visit this link to activate your account:"
 msgstr ""
 
-#: includes/helpers.php:4002
+#: includes/helpers.php:4007
 #, php-format
 msgid "Reset your password at %s"
 msgstr ""
 
-#: includes/helpers.php:4006
+#: includes/helpers.php:4011
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 
-#: includes/helpers.php:4009
+#: includes/helpers.php:4014
 msgid "Visit this link to reset your password:"
 msgstr ""
 

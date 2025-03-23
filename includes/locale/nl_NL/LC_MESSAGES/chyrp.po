@@ -85,7 +85,7 @@ msgstr "Route gestart met een ongeldige controller."
 #: includes/controller/Admin.php:2063 includes/controller/Admin.php:2132
 #: includes/controller/Admin.php:3080 includes/controller/Admin.php:3159
 #: includes/controller/Admin.php:3305 includes/controller/Admin.php:3312
-#: includes/controller/Admin.php:3319 includes/controller/Admin.php:3693
+#: includes/controller/Admin.php:3319 includes/controller/Admin.php:3697
 #: includes/controller/Ajax.php:38 includes/controller/Ajax.php:173
 #: includes/controller/Ajax.php:238 includes/controller/Ajax.php:284
 #: includes/controller/Main.php:1264 includes/download.php:14
@@ -96,10 +96,10 @@ msgstr "Route gestart met een ongeldige controller."
 #: includes/helpers.php:2956 includes/helpers.php:2962
 #: includes/helpers.php:2968 includes/helpers.php:3009
 #: includes/helpers.php:3015 includes/helpers.php:3021
-#: includes/helpers.php:3179 includes/helpers.php:3185
-#: includes/helpers.php:3191 includes/helpers.php:3197
-#: includes/helpers.php:3202 includes/helpers.php:3207
-#: includes/helpers.php:3212 includes/helpers.php:3219
+#: includes/helpers.php:3184 includes/helpers.php:3190
+#: includes/helpers.php:3196 includes/helpers.php:3202
+#: includes/helpers.php:3207 includes/helpers.php:3212
+#: includes/helpers.php:3217 includes/helpers.php:3224
 #: includes/lib/ThumbnailFile.php:323 includes/lib/ThumbnailFile.php:354
 #: includes/lib/ThumbnailFile.php:408 includes/lib/ThumbnailFile.php:469
 #: includes/thumbnail.php:15 install.php:1098 upgrade.php:168 upgrade.php:185
@@ -148,9 +148,9 @@ msgstr "Ongeldige actie."
 #: includes/controller/Admin.php:3204 includes/controller/Admin.php:3242
 #: includes/controller/Admin.php:3260 includes/controller/Admin.php:3281
 #: includes/controller/Admin.php:3299 includes/controller/Admin.php:3367
-#: includes/controller/Admin.php:3443 includes/controller/Admin.php:3496
-#: includes/controller/Admin.php:3511 includes/controller/Admin.php:3564
-#: includes/controller/Admin.php:3578 includes/controller/Admin.php:3645
+#: includes/controller/Admin.php:3443 includes/controller/Admin.php:3500
+#: includes/controller/Admin.php:3515 includes/controller/Admin.php:3568
+#: includes/controller/Admin.php:3582 includes/controller/Admin.php:3649
 #: includes/controller/Ajax.php:64 includes/controller/Ajax.php:87
 #: includes/controller/Ajax.php:103 includes/controller/Ajax.php:109
 #: includes/controller/Ajax.php:140 includes/controller/Ajax.php:155
@@ -244,7 +244,7 @@ msgstr "Feather niet gevonden."
 #: includes/controller/Admin.php:3053 includes/controller/Admin.php:3132
 #: includes/controller/Admin.php:3205 includes/controller/Admin.php:3261
 #: includes/controller/Admin.php:3300 includes/controller/Admin.php:3444
-#: includes/controller/Admin.php:3512 includes/controller/Admin.php:3579
+#: includes/controller/Admin.php:3516 includes/controller/Admin.php:3583
 #: includes/controller/Ajax.php:65 includes/controller/Ajax.php:110
 #: includes/controller/Ajax.php:141 includes/controller/Ajax.php:224
 #: includes/controller/Ajax.php:273 includes/controller/Ajax.php:359
@@ -257,7 +257,7 @@ msgstr "Ongeldige authenticatie-sleutel."
 
 #: includes/controller/Admin.php:276 includes/controller/Admin.php:1959
 #: includes/controller/Admin.php:2004 includes/controller/Admin.php:2064
-#: includes/controller/Admin.php:2133 includes/controller/Admin.php:3694
+#: includes/controller/Admin.php:2133 includes/controller/Admin.php:3698
 #: includes/controller/Ajax.php:39 includes/controller/Ajax.php:174
 #: includes/controller/Ajax.php:239 includes/controller/Ajax.php:285
 #: includes/download.php:15 includes/thumbnail.php:16
@@ -342,7 +342,7 @@ msgid "Page created!"
 msgstr "Pagina gemaakt!"
 
 #: includes/controller/Admin.php:709 includes/controller/Admin.php:855
-#: includes/controller/Admin.php:2100 includes/controller/Admin.php:3603
+#: includes/controller/Admin.php:2100 includes/controller/Admin.php:3607
 msgid "View page!"
 msgstr "Bekijk pagina!"
 
@@ -478,8 +478,8 @@ msgstr "Je kunt je eigen account niet verwijderen."
 
 #: includes/controller/Admin.php:1428 includes/controller/Admin.php:1451
 #: includes/controller/Admin.php:1805 includes/controller/Admin.php:1831
-#: includes/controller/Admin.php:1853 includes/controller/Admin.php:3522
-#: includes/controller/Admin.php:3531
+#: includes/controller/Admin.php:1853 includes/controller/Admin.php:3526
+#: includes/controller/Admin.php:3535
 msgid "Gone"
 msgstr "Niet meer aanwezig"
 
@@ -551,7 +551,7 @@ msgstr "Nieuw lid van de groep bestaat niet."
 msgid "New member group must be specified."
 msgstr "Nieuw lid van de groep moet gespecificeerd worden."
 
-#: includes/controller/Admin.php:1832 includes/controller/Admin.php:3523
+#: includes/controller/Admin.php:1832 includes/controller/Admin.php:3527
 msgid "New default group does not exist."
 msgstr "Nieuwe standaard groep bestaat niet."
 
@@ -559,7 +559,7 @@ msgstr "Nieuwe standaard groep bestaat niet."
 msgid "New default group must be specified."
 msgstr "Nieuwe standaard groep moet gespecificeerd worden."
 
-#: includes/controller/Admin.php:1854 includes/controller/Admin.php:3532
+#: includes/controller/Admin.php:1854 includes/controller/Admin.php:3536
 msgid "New guest group does not exist."
 msgstr "Nieuwe gast van de groep bestaat niet."
 
@@ -595,7 +595,7 @@ msgid "Only uploaded files are accepted."
 msgstr "Alleen geuploade bestanden worden geaccepteerd."
 
 #: includes/controller/Admin.php:2038 includes/helpers.php:2969
-#: includes/helpers.php:3022 includes/helpers.php:3203
+#: includes/helpers.php:3022 includes/helpers.php:3208
 msgid "Failed to write file to disk."
 msgstr "Bestand naar schijf wegschrijven niet gelukt."
 
@@ -670,8 +670,8 @@ msgstr "Je hebt onvoldoende rechten om extensies te beheren."
 
 #: includes/controller/Admin.php:3005 includes/controller/Admin.php:3199
 #: includes/controller/Admin.php:3243 includes/controller/Admin.php:3282
-#: includes/controller/Admin.php:3368 includes/controller/Admin.php:3497
-#: includes/controller/Admin.php:3565 includes/controller/Admin.php:3646
+#: includes/controller/Admin.php:3368 includes/controller/Admin.php:3501
+#: includes/controller/Admin.php:3569 includes/controller/Admin.php:3650
 msgid "You do not have sufficient privileges to change settings."
 msgstr "Je hebt onvoldoende rechten om instellingen te wijzigen."
 
@@ -739,106 +739,106 @@ msgstr "Vooruitblik gestart."
 msgid "Invalid canonical URL."
 msgstr "Ongeldige kanonieke URL."
 
-#: includes/controller/Admin.php:3354 includes/controller/Admin.php:3483
-#: includes/controller/Admin.php:3551 includes/controller/Admin.php:3632
+#: includes/controller/Admin.php:3354 includes/controller/Admin.php:3487
+#: includes/controller/Admin.php:3555 includes/controller/Admin.php:3636
 msgid "Settings updated."
 msgstr "Instellingen bijgewerkt."
 
-#: includes/controller/Admin.php:3593
+#: includes/controller/Admin.php:3597
 msgid "My Awesome Homepage"
 msgstr "Mijn gave Homepagina"
 
-#: includes/controller/Admin.php:3594
+#: includes/controller/Admin.php:3598
 msgid "Nothing here yet!"
 msgstr "Nog niets te zien!"
 
-#: includes/controller/Admin.php:3602
+#: includes/controller/Admin.php:3606
 msgid "Page created."
 msgstr "Pagina gemaakt."
 
-#: includes/controller/Admin.php:3626
+#: includes/controller/Admin.php:3630
 msgid "Clean URLs have been disabled because URL rewriting is not active."
 msgstr ""
 "Schone URL's zijn uitgeschakeld omdat het herschrijven van URL's niet actief "
 "is."
 
-#: includes/controller/Admin.php:3668 includes/controller/Main.php:964
+#: includes/controller/Admin.php:3672 includes/controller/Main.php:964
 msgid "You are already logged in."
 msgstr "Je bent reeds ingelogd."
 
-#: includes/controller/Admin.php:3707
+#: includes/controller/Admin.php:3711
 msgid "Help"
 msgstr "Hulp"
 
-#: includes/controller/Admin.php:3726
+#: includes/controller/Admin.php:3730
 msgid "Write"
 msgstr "Schrijf"
 
-#: includes/controller/Admin.php:3731
+#: includes/controller/Admin.php:3735
 msgid "Manage"
 msgstr "Beheer"
 
-#: includes/controller/Admin.php:3736
+#: includes/controller/Admin.php:3740
 msgid "Settings"
 msgstr "Instellingen"
 
-#: includes/controller/Admin.php:3741
+#: includes/controller/Admin.php:3745
 msgid "Extend"
 msgstr "Extensies"
 
-#: includes/controller/Admin.php:3752
+#: includes/controller/Admin.php:3756
 msgid "Page"
 msgstr "Pagina"
 
-#: includes/controller/Admin.php:3792
+#: includes/controller/Admin.php:3796
 msgid "Posts"
 msgstr "Blogposts"
 
-#: includes/controller/Admin.php:3801
+#: includes/controller/Admin.php:3805
 msgid "Pages"
 msgstr "Pagina's"
 
-#: includes/controller/Admin.php:3810 includes/controller/Admin.php:3863
+#: includes/controller/Admin.php:3814 includes/controller/Admin.php:3867
 msgid "Users"
 msgstr "Gebruikers"
 
-#: includes/controller/Admin.php:3820
+#: includes/controller/Admin.php:3824
 msgid "Groups"
 msgstr "Groepen"
 
-#: includes/controller/Admin.php:3830
+#: includes/controller/Admin.php:3834
 msgid "Uploads"
 msgstr "Uploads"
 
-#: includes/controller/Admin.php:3840
+#: includes/controller/Admin.php:3844
 msgid "Import"
 msgstr "Importeer"
 
-#: includes/controller/Admin.php:3843
+#: includes/controller/Admin.php:3847
 msgid "Export"
 msgstr "Exporteer"
 
-#: includes/controller/Admin.php:3861
+#: includes/controller/Admin.php:3865
 msgid "General"
 msgstr "Algemeen"
 
-#: includes/controller/Admin.php:3862
+#: includes/controller/Admin.php:3866
 msgid "Content"
 msgstr "Content"
 
-#: includes/controller/Admin.php:3864
+#: includes/controller/Admin.php:3868
 msgid "Routes"
 msgstr "Routes"
 
-#: includes/controller/Admin.php:3885
+#: includes/controller/Admin.php:3889
 msgid "Modules"
 msgstr "Modules"
 
-#: includes/controller/Admin.php:3886
+#: includes/controller/Admin.php:3890
 msgid "Feathers"
 msgstr "Feathers"
 
-#: includes/controller/Admin.php:3887
+#: includes/controller/Admin.php:3891
 msgid "Themes"
 msgstr "Themas"
 
@@ -1129,7 +1129,7 @@ msgstr "Upload bestandspad bestaat niet."
 msgid "Upload path is not writable."
 msgstr "Upload bestandspad is niet schrijfbaar."
 
-#: includes/helpers.php:3180
+#: includes/helpers.php:3185
 msgid ""
 "The uploaded file exceeds the <code>upload_max_filesize</code> directive in "
 "php.ini."
@@ -1137,7 +1137,7 @@ msgstr ""
 "Het geuploade bestand overschrijdt <code>upload_max_filesize</code> grootte "
 "in php.ini."
 
-#: includes/helpers.php:3186
+#: includes/helpers.php:3191
 msgid ""
 "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the "
 "HTML form."
@@ -1145,24 +1145,24 @@ msgstr ""
 "Het geuploade bestand overschrijdt de <code>MAX_FILE_SIZE</code> grootte in "
 "het HTML-formulier."
 
-#: includes/helpers.php:3192
+#: includes/helpers.php:3197
 msgid "The uploaded file was only partially uploaded."
 msgstr "Het bestand is slechts gedeeltelijk geupload."
 
-#: includes/helpers.php:3198
+#: includes/helpers.php:3203
 msgid "Missing a temporary folder."
 msgstr "Er ontbreekt een tijdelijke map."
 
-#: includes/helpers.php:3208
+#: includes/helpers.php:3213
 msgid "File upload was stopped by a PHP extension."
 msgstr "Bestandsupload is afgebroken door een PHP-extensie."
 
-#: includes/helpers.php:3213
+#: includes/helpers.php:3218
 #, php-format
 msgid "File upload failed with error %d."
 msgstr "Bestandsupload mislukt met fout %d."
 
-#: includes/helpers.php:3220
+#: includes/helpers.php:3225
 #, php-format
 msgid ""
 "The uploaded file exceeds the maximum size of %d Megabytes allowed by this "
@@ -1171,49 +1171,49 @@ msgstr ""
 "Het geuploade bestand overschrijdt de maximale grootte van %d Megabytes dat "
 "door deze website is toegestaan."
 
-#: includes/helpers.php:3732
+#: includes/helpers.php:3737
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr "JSON codeer-fout: %s"
 
-#: includes/helpers.php:3762
+#: includes/helpers.php:3767
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr "JSON decodeer-fout: %s"
 
-#: includes/helpers.php:3850
+#: includes/helpers.php:3855
 msgid "Failed to create Zip archive."
 msgstr "Zip-archief maken mislukt."
 
-#: includes/helpers.php:3960
+#: includes/helpers.php:3965
 #, php-format
 msgid "Activate your account at %s"
 msgstr "Activeer je account bij %s"
 
-#: includes/helpers.php:3961 includes/helpers.php:4003
+#: includes/helpers.php:3966 includes/helpers.php:4008
 #, php-format
 msgid "Hello, %s."
 msgstr "Hallo, %s."
 
-#: includes/helpers.php:3964
+#: includes/helpers.php:3969
 msgid "You are receiving this message because you registered a new account."
 msgstr "Je ontvangt dit bericht, omdat je een nieuwe account hebt aangemaakt."
 
-#: includes/helpers.php:3967
+#: includes/helpers.php:3972
 msgid "Visit this link to activate your account:"
 msgstr "Bezoek deze link om je account te activeren:"
 
-#: includes/helpers.php:4002
+#: includes/helpers.php:4007
 #, php-format
 msgid "Reset your password at %s"
 msgstr "Wijzig je wachtwoord van %s"
 
-#: includes/helpers.php:4006
+#: includes/helpers.php:4011
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 "Je ontangt dit bericht, omdat je een nieuw wachtwoord hebt aangevraagd."
 
-#: includes/helpers.php:4009
+#: includes/helpers.php:4014
 msgid "Visit this link to reset your password:"
 msgstr "Bezoek deze link om je wachtwoord te wijzigen:"
 
