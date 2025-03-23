@@ -745,17 +745,19 @@
                 );
 
             $config = Config::current();
-            $comments_html = implode(
-                ", ",
-                $config->module_comments["allowed_comment_html"]
-            );
-            $comments_status = array(
-                Comment::STATUS_APPROVED => __("Approved", "comments"),
-                Comment::STATUS_DENIED   => __("Denied", "comments"),
-                Comment::STATUS_SPAM     => __("Spam", "comments")
-            );
 
             if (empty($_POST)) {
+                $comments_html = implode(
+                    ", ",
+                    $config->module_comments["allowed_comment_html"]
+                );
+
+                $comments_status = array(
+                    Comment::STATUS_APPROVED => __("Approved", "comments"),
+                    Comment::STATUS_DENIED   => __("Denied", "comments"),
+                    Comment::STATUS_SPAM     => __("Spam", "comments")
+                );
+
                 $admin->display(
                     "pages".DIR."comment_settings",
                     array(
@@ -778,17 +780,11 @@
             fallback($_POST['comments_per_page'], 25);
             fallback($_POST['auto_reload_comments'], 30);
 
-            # Split at the comma.
-            $allowed_comment_html = explode(",", $_POST['allowed_comment_html']);
-
-            # Remove whitespace.
-            $allowed_comment_html = array_map("trim", $allowed_comment_html);
-
-            # Remove duplicates.
-            $allowed_comment_html = array_unique($allowed_comment_html);
-
-            # Remove empties.
-            $allowed_comment_html = array_diff($allowed_comment_html, array(""));
+            $comments_html = str_replace(
+                array("/", "<", ">"),
+                "",
+                $_POST['allowed_comment_html']
+            );
 
             $config = Config::current();
             $config->set(
@@ -798,7 +794,7 @@
                     "notify_post_author" => isset($_POST['notify_post_author']),
                     "code_in_comments" => isset($_POST['code_in_comments']),
                     "default_comment_status" => $_POST['default_comment_status'],
-                    "allowed_comment_html" => $allowed_comment_html,
+                    "allowed_comment_html" => explode_clean($comments_html),
                     "comments_per_page" => abs((int) $_POST['comments_per_page']),
                     "enable_reload_comments" => isset($_POST['enable_reload_comments']),
                     "auto_reload_comments" => (int) $_POST['auto_reload_comments']
