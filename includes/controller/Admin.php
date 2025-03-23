@@ -3453,17 +3453,21 @@
             fallback($_POST['uploads_path'], "");
             fallback($_POST['uploads_limit'], 10);
 
-            $separator = preg_quote(DIR, "~");
+            $dir = preg_quote(DIR, "~");
 
             preg_match(
-                "~^(".$separator.")?(.*?)(".$separator.")?$~",
-                $_POST['uploads_path'],
-                $matches
+                "~^(".$dir.")?(.*?)(".$dir.")?$~",
+                str_replace(
+                    array("../", "./"),
+                    DIR,
+                    $_POST['uploads_path']
+                ),
+                $path
             );
 
-            fallback($matches[1], DIR);
-            fallback($matches[2], "uploads");
-            fallback($matches[3], DIR);
+            fallback($path[1], DIR);
+            fallback($path[2], "uploads");
+            fallback($path[3], DIR);
 
             $config = Config::current();
             $config->set("posts_per_page", abs((int) $_POST['posts_per_page']));
@@ -3472,8 +3476,8 @@
             $config->set("default_page_status", $_POST['default_page_status']);
             $config->set("feed_items", abs((int) $_POST['feed_items']));
             $config->set("feed_format", $_POST['feed_format']);
-            $config->set("uploads_path", $matches[1].$matches[2].$matches[3]);
-            $config->set("uploads_limit", (int) $_POST['uploads_limit']);
+            $config->set("uploads_path", $path[1].$path[2].$path[3]);
+            $config->set("uploads_limit", abs((int) $_POST['uploads_limit']));
             $config->set("search_pages", !empty($_POST['search_pages']));
             $config->set("send_pingbacks", !empty($_POST['send_pingbacks']));
             $config->set("enable_emoji", !empty($_POST['enable_emoji']));
