@@ -3034,13 +3034,23 @@
      *     $url - Whether to return a URL or a filesystem path.
      *
      * Returns:
-     *     The supplied filename prepended with URL or filesystem path.
+     *     The supplied filename prepended with URL or filesystem path,
+     *     or false on failure.
      */
     function uploaded(
         $filename,
         $url = true
-    ): string {
+    ): string|false {
         $config = Config::current();
+
+        $filename = str_replace(
+            array(DIR, "/", "<", ">"),
+            "",
+            $filename
+        );
+
+        if ($filename == "")
+            return false;
 
         return ($url) ?
             fix(
@@ -3050,12 +3060,7 @@
                 true
             )
             :
-            MAIN_DIR.$config->uploads_path.
-            str_replace(
-                array(DIR, "/", "<", ">"),
-                "",
-                $filename
-            )
+            MAIN_DIR.$config->uploads_path.$filename
             ;
     }
 
