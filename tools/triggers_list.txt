@@ -361,7 +361,7 @@ Arguments:
 before_delete_upload
 --------------------
 Called from:
-	includes/helpers.php on line 3320
+	includes/helpers.php on line 3325
 
 Arguments:
 	$filename
@@ -370,19 +370,19 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 3570
+	includes/helpers.php on line 3575
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 3589
+	includes/helpers.php on line 3594
 
 
 correspond_activate_account
 ---------------------------
 Called from:
-	includes/helpers.php on line 3952
+	includes/helpers.php on line 3957
 
 Arguments:
 	$user
@@ -392,7 +392,7 @@ Arguments:
 correspond_reset_password
 -------------------------
 Called from:
-	includes/helpers.php on line 3994
+	includes/helpers.php on line 3999
 
 Arguments:
 	$user
@@ -402,7 +402,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 4041
+	includes/helpers.php on line 4046
 
 Arguments:
 	$ob
@@ -603,7 +603,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 1296
+	modules/comments/comments.php on line 1292
 
 Arguments:
 	$comment
@@ -613,7 +613,7 @@ Arguments:
 correspond_site_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1634
+	modules/comments/comments.php on line 1630
 
 Arguments:
 	$comment
@@ -622,7 +622,7 @@ Arguments:
 correspond_user_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1662
+	modules/comments/comments.php on line 1658
 
 Arguments:
 	$comment
@@ -632,7 +632,7 @@ Arguments:
 correspond_peer_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1695
+	modules/comments/comments.php on line 1691
 
 Arguments:
 	$comment
@@ -1016,7 +1016,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 3768
+	includes/controller/Admin.php on line 3772
 
 Target:
 	$write
@@ -1025,7 +1025,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3837
+	includes/controller/Admin.php on line 3841
 
 Target:
 	$manage
@@ -1034,7 +1034,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 3867
+	includes/controller/Admin.php on line 3871
 
 Target:
 	$settings
@@ -1043,7 +1043,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3890
+	includes/controller/Admin.php on line 3894
 
 Target:
 	$extend
@@ -1052,7 +1052,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 3978
+	includes/controller/Admin.php on line 3982
 
 Target:
 	$this->context
@@ -1093,7 +1093,7 @@ markup_text
 Called from:
 	includes/controller/Ajax.php on line 252
 	includes/model/Page.php on line 359
-	modules/comments/comments.php on line 1100
+	modules/comments/comments.php on line 1096
 	modules/comments/model/Comment.php on line 612
 
 Target:
@@ -1125,7 +1125,7 @@ Arguments:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 3930
+	includes/helpers.php on line 3935
 
 Target:
 	$function
@@ -1134,7 +1134,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 4042
+	includes/helpers.php on line 4047
 	includes/lib/Leaf.php on line 352
 
 Target:
@@ -1396,7 +1396,7 @@ Target:
 markup_comment_text
 -------------------
 Called from:
-	modules/comments/comments.php on line 1100
+	modules/comments/comments.php on line 1096
 	modules/comments/model/Comment.php on line 612
 
 Target:
