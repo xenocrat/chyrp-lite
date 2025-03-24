@@ -63,19 +63,16 @@
             ) {
                 $filenames = array();
 
-                if (is_array($_FILES['filenames']['name'])) {
-                    for ($i = 0; $i < count($_FILES['filenames']['name']); $i++)
-                        $filenames[] = upload(
-                            array(
-                                'tmp_name' => $_FILES['filenames']['tmp_name'][$i],
-                                'name' => $_FILES['filenames']['name'][$i],
-                                'type' => $_FILES['filenames']['type'][$i],
-                                'size' => $_FILES['filenames']['size'][$i],
-                                'error' => $_FILES['filenames']['error'][$i]
-                            )
-                        );
-                } else {
-                    $filenames[] = upload($_FILES['filenames']);
+                for ($i = 0; $i < count($_FILES['filenames']['name']); $i++) {
+                    $filenames[] = upload(
+                        array(
+                            'tmp_name' => $_FILES['filenames']['tmp_name'][$i],
+                            'name' => $_FILES['filenames']['name'][$i],
+                            'type' => $_FILES['filenames']['type'][$i],
+                            'size' => $_FILES['filenames']['size'][$i],
+                            'error' => $_FILES['filenames']['error'][$i]
+                        )
+                    );
                 }
             } elseif (
                 !empty($_POST['filenames']) and
@@ -142,19 +139,16 @@
             ) {
                 $filenames = array();
 
-                if (is_array($_FILES['filenames']['name'])) {
-                    for($i=0; $i < count($_FILES['filenames']['name']); $i++)
-                        $filenames[] = upload(
-                            array(
-                                'tmp_name' => $_FILES['filenames']['tmp_name'][$i],
-                                'name' => $_FILES['filenames']['name'][$i],
-                                'type' => $_FILES['filenames']['type'][$i],
-                                'size' => $_FILES['filenames']['size'][$i],
-                                'error' => $_FILES['filenames']['error'][$i]
-                            )
-                        );
-                } else {
-                    $filenames[] = upload($_FILES['filenames']);
+                for ($i = 0; $i < count($_FILES['filenames']['name']); $i++) {
+                    $filenames[] = upload(
+                        array(
+                            'tmp_name' => $_FILES['filenames']['tmp_name'][$i],
+                            'name' => $_FILES['filenames']['name'][$i],
+                            'type' => $_FILES['filenames']['type'][$i],
+                            'size' => $_FILES['filenames']['size'][$i],
+                            'error' => $_FILES['filenames']['error'][$i]
+                        )
+                    );
                 }
             } elseif (
                 !empty($_POST['filenames']) and
