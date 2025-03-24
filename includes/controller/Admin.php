@@ -2658,19 +2658,16 @@
             ) {
                 $imports["uploads"] = array();
 
-                if (is_array($_FILES['uploads']['name'])) {
-                    for ($i = 0; $i < count($_FILES['uploads']['name']); $i++)
-                        $imports["uploads"][] = upload(
-                            array(
-                                'tmp_name' => $_FILES['uploads']['tmp_name'][$i],
-                                'name' => $_FILES['uploads']['name'][$i],
-                                'type' => $_FILES['uploads']['type'][$i],
-                                'size' => $_FILES['uploads']['size'][$i],
-                                'error' => $_FILES['uploads']['error'][$i]
-                            )
-                        );
-                } else {
-                    $imports["uploads"][] = upload($_FILES['uploads']);
+                for ($i = 0; $i < count($_FILES['uploads']['name']); $i++) {
+                    $imports["uploads"][] = upload(
+                        array(
+                            'tmp_name' => $_FILES['uploads']['tmp_name'][$i],
+                            'name' => $_FILES['uploads']['name'][$i],
+                            'type' => $_FILES['uploads']['type'][$i],
+                            'size' => $_FILES['uploads']['size'][$i],
+                            'error' => $_FILES['uploads']['error'][$i]
+                        )
+                    );
                 }
             }
 
