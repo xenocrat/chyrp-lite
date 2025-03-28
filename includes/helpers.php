@@ -2934,8 +2934,27 @@
     function upload(
         $file,
         $filter = null
-    ): string {
-        $uploads_path = MAIN_DIR.Config::current()->uploads_path;
+    ): string|array {
+        # Recurse for multiple uploads.
+        if (is_array($file['name'])) {
+            $results = array();
+
+            for ($i = 0; $i < count($file['name']); $i++)
+                $results[] = upload(
+                    array(
+                        'name' => $file['name'][$i],
+                        'type' => $file['type'][$i],
+                        'tmp_name' => $file['tmp_name'][$i],
+                        'error' => $file['error'][$i],
+                        'size' => $file['size'][$i]
+                    ),
+                    $filter
+                );
+
+            return $results;
+        }
+
+        $path = MAIN_DIR.Config::current()->uploads_path;
         $filename = upload_filename($file['name'], $filter);
 
         if ($filename === false)
@@ -2951,19 +2970,19 @@
                 __("Only uploaded files are accepted.")
             );
 
-        if (!is_dir($uploads_path))
+        if (!is_dir($path))
             error(
                 __("Error"),
                 __("Upload path does not exist.")
             );
 
-        if (!is_writable($uploads_path))
+        if (!is_writable($path))
             error(
                 __("Error"),
                 __("Upload path is not writable.")
             );
 
-        if (!move_uploaded_file($file['tmp_name'], $uploads_path.$filename))
+        if (!move_uploaded_file($file['tmp_name'], $path.$filename))
             error(
                 __("Error"),
                 __("Failed to write file to disk.")
@@ -3152,12 +3171,10 @@
     function upload_tester(
         $file
     ): bool {
-        $success = false;
-        $results = array();
-        $maximum = Config::current()->uploads_limit;
-
-        # Recurse to test multiple uploads file by file using a one-dimensional array.
+        # Recurse for multiple uploads.
         if (is_array($file['name'])) {
+            $results = array();
+
             for ($i = 0; $i < count($file['name']); $i++)
                 $results[] = upload_tester(
                     array(
@@ -3171,6 +3188,9 @@
 
             return (!in_array(false, $results));
         }
+
+        $success = false;
+        $maximum = Config::current()->uploads_limit;
 
         switch ($file['error']) {
             case UPLOAD_ERR_OK:
