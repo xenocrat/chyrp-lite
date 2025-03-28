@@ -2656,19 +2656,7 @@
                 isset($_FILES['uploads']) and
                 upload_tester($_FILES['uploads'])
             ) {
-                $imports["uploads"] = array();
-
-                for ($i = 0; $i < count($_FILES['uploads']['name']); $i++) {
-                    $imports["uploads"][] = upload(
-                        array(
-                            'tmp_name' => $_FILES['uploads']['tmp_name'][$i],
-                            'name' => $_FILES['uploads']['name'][$i],
-                            'type' => $_FILES['uploads']['type'][$i],
-                            'size' => $_FILES['uploads']['size'][$i],
-                            'error' => $_FILES['uploads']['error'][$i]
-                        )
-                    );
-                }
+                $imports["uploads"] = upload($_FILES['uploads']);
             }
 
             $trigger->filter($imports, "before_import");
