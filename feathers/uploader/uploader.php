@@ -61,27 +61,12 @@
                 isset($_FILES['filenames']) and
                 upload_tester($_FILES['filenames'])
             ) {
-                $filenames = array();
-
-                for ($i = 0; $i < count($_FILES['filenames']['name']); $i++) {
-                    $filenames[] = upload(
-                        array(
-                            'tmp_name' => $_FILES['filenames']['tmp_name'][$i],
-                            'name' => $_FILES['filenames']['name'][$i],
-                            'type' => $_FILES['filenames']['type'][$i],
-                            'size' => $_FILES['filenames']['size'][$i],
-                            'error' => $_FILES['filenames']['error'][$i]
-                        )
-                    );
-                }
+                $filenames = upload($_FILES['filenames']);
             } elseif (
                 !empty($_POST['filenames']) and
                 !is_fakepath($_POST['filenames'])
             ) {
-                $filenames = explode_clean(
-                    (string) $_POST['filenames'],
-                    sort:false
-                );
+                $filenames = explode_clean($_POST['filenames'], sort:false);
             }
 
             if (empty($filenames))
