@@ -42,10 +42,10 @@ msgstr "文件"
 msgid "Caption"
 msgstr "说明"
 
-#: feathers/uploader/uploader.php:93
+#: feathers/uploader/uploader.php:75
 msgid "You did not select any files to upload."
 msgstr "您没有选择任何文件上传。"
 
-#: feathers/uploader/uploader.php:262
+#: feathers/uploader/uploader.php:226
 msgid "Source"
 msgstr "来源"

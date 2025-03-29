@@ -42,10 +42,10 @@ msgstr "Fichiers"
 msgid "Caption"
 msgstr "Légende"
 
-#: feathers/uploader/uploader.php:93
+#: feathers/uploader/uploader.php:75
 msgid "You did not select any files to upload."
 msgstr "Vous n'avez pas sélectionné de fichier à télécharger."
 
-#: feathers/uploader/uploader.php:262
+#: feathers/uploader/uploader.php:226
 msgid "Source"
 msgstr "Source"

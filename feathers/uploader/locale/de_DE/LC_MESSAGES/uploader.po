@@ -41,10 +41,10 @@ msgstr "Dateien"
 msgid "Caption"
 msgstr "Unterschrift"
 
-#: feathers/uploader/uploader.php:93
+#: feathers/uploader/uploader.php:75
 msgid "You did not select any files to upload."
 msgstr "Sie haben keine Dateien zum hochladen selektiert."
 
-#: feathers/uploader/uploader.php:262
+#: feathers/uploader/uploader.php:226
 msgid "Source"
 msgstr "Quelle"

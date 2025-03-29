@@ -84,23 +84,23 @@ msgstr "路由启动了一个无效的控制器。"
 #: includes/controller/Admin.php:1958 includes/controller/Admin.php:2003
 #: includes/controller/Admin.php:2013 includes/controller/Admin.php:2037
 #: includes/controller/Admin.php:2063 includes/controller/Admin.php:2132
-#: includes/controller/Admin.php:3080 includes/controller/Admin.php:3159
-#: includes/controller/Admin.php:3305 includes/controller/Admin.php:3312
-#: includes/controller/Admin.php:3319 includes/controller/Admin.php:3697
+#: includes/controller/Admin.php:3065 includes/controller/Admin.php:3144
+#: includes/controller/Admin.php:3290 includes/controller/Admin.php:3297
+#: includes/controller/Admin.php:3304 includes/controller/Admin.php:3682
 #: includes/controller/Ajax.php:38 includes/controller/Ajax.php:173
 #: includes/controller/Ajax.php:238 includes/controller/Ajax.php:284
 #: includes/controller/Main.php:1264 includes/download.php:14
 #: includes/error.php:206 includes/helpers.php:2475 includes/helpers.php:2482
 #: includes/helpers.php:2489 includes/helpers.php:2504
 #: includes/helpers.php:2513 includes/helpers.php:2527
-#: includes/helpers.php:2534 includes/helpers.php:2943
-#: includes/helpers.php:2956 includes/helpers.php:2962
-#: includes/helpers.php:2968 includes/helpers.php:3009
-#: includes/helpers.php:3015 includes/helpers.php:3021
-#: includes/helpers.php:3184 includes/helpers.php:3190
-#: includes/helpers.php:3196 includes/helpers.php:3202
-#: includes/helpers.php:3207 includes/helpers.php:3212
-#: includes/helpers.php:3217 includes/helpers.php:3224
+#: includes/helpers.php:2534 includes/helpers.php:2962
+#: includes/helpers.php:2975 includes/helpers.php:2981
+#: includes/helpers.php:2987 includes/helpers.php:3028
+#: includes/helpers.php:3034 includes/helpers.php:3040
+#: includes/helpers.php:3204 includes/helpers.php:3210
+#: includes/helpers.php:3216 includes/helpers.php:3222
+#: includes/helpers.php:3227 includes/helpers.php:3232
+#: includes/helpers.php:3237 includes/helpers.php:3244
 #: includes/lib/ThumbnailFile.php:323 includes/lib/ThumbnailFile.php:354
 #: includes/lib/ThumbnailFile.php:408 includes/lib/ThumbnailFile.php:469
 #: includes/thumbnail.php:15 install.php:1098 upgrade.php:168 upgrade.php:185
@@ -142,16 +142,16 @@ msgstr "无效动作。"
 #: includes/controller/Admin.php:2123 includes/controller/Admin.php:2166
 #: includes/controller/Admin.php:2225 includes/controller/Admin.php:2236
 #: includes/controller/Admin.php:2578 includes/controller/Admin.php:2589
-#: includes/controller/Admin.php:2865 includes/controller/Admin.php:2959
-#: includes/controller/Admin.php:3004 includes/controller/Admin.php:3046
-#: includes/controller/Admin.php:3052 includes/controller/Admin.php:3125
-#: includes/controller/Admin.php:3131 includes/controller/Admin.php:3198
-#: includes/controller/Admin.php:3204 includes/controller/Admin.php:3242
-#: includes/controller/Admin.php:3260 includes/controller/Admin.php:3281
-#: includes/controller/Admin.php:3299 includes/controller/Admin.php:3367
-#: includes/controller/Admin.php:3443 includes/controller/Admin.php:3500
-#: includes/controller/Admin.php:3515 includes/controller/Admin.php:3568
-#: includes/controller/Admin.php:3582 includes/controller/Admin.php:3649
+#: includes/controller/Admin.php:2850 includes/controller/Admin.php:2944
+#: includes/controller/Admin.php:2989 includes/controller/Admin.php:3031
+#: includes/controller/Admin.php:3037 includes/controller/Admin.php:3110
+#: includes/controller/Admin.php:3116 includes/controller/Admin.php:3183
+#: includes/controller/Admin.php:3189 includes/controller/Admin.php:3227
+#: includes/controller/Admin.php:3245 includes/controller/Admin.php:3266
+#: includes/controller/Admin.php:3284 includes/controller/Admin.php:3352
+#: includes/controller/Admin.php:3428 includes/controller/Admin.php:3485
+#: includes/controller/Admin.php:3500 includes/controller/Admin.php:3553
+#: includes/controller/Admin.php:3567 includes/controller/Admin.php:3634
 #: includes/controller/Ajax.php:64 includes/controller/Ajax.php:87
 #: includes/controller/Ajax.php:103 includes/controller/Ajax.php:109
 #: includes/controller/Ajax.php:140 includes/controller/Ajax.php:155
@@ -159,7 +159,7 @@ msgstr "无效动作。"
 #: includes/controller/Ajax.php:272 includes/controller/Ajax.php:278
 #: includes/controller/Ajax.php:358 includes/controller/Ajax.php:364
 #: includes/controller/Main.php:581 includes/controller/Main.php:666
-#: includes/download.php:21 includes/helpers.php:2950 includes/thumbnail.php:22
+#: includes/download.php:21 includes/helpers.php:2969 includes/thumbnail.php:22
 msgid "Access Denied"
 msgstr "访问被拒绝"
 
@@ -221,7 +221,7 @@ msgstr "您必须启用至少一个羽毛才能撰写帖子。"
 #: includes/controller/Admin.php:1738 includes/controller/Admin.php:1794
 #: includes/controller/Admin.php:1968 includes/controller/Admin.php:2023
 #: includes/controller/Admin.php:2073 includes/controller/Admin.php:2142
-#: includes/controller/Admin.php:3087 includes/controller/Admin.php:3166
+#: includes/controller/Admin.php:3072 includes/controller/Admin.php:3151
 #: includes/controller/Ajax.php:81 includes/controller/Ajax.php:124
 #: includes/controller/Main.php:284 includes/download.php:33
 #: includes/download.php:41 includes/helpers.php:205 includes/thumbnail.php:36
@@ -241,10 +241,10 @@ msgstr "羽毛未找到。"
 #: includes/controller/Admin.php:1654 includes/controller/Admin.php:1777
 #: includes/controller/Admin.php:1998 includes/controller/Admin.php:2124
 #: includes/controller/Admin.php:2237 includes/controller/Admin.php:2590
-#: includes/controller/Admin.php:3053 includes/controller/Admin.php:3132
-#: includes/controller/Admin.php:3205 includes/controller/Admin.php:3261
-#: includes/controller/Admin.php:3300 includes/controller/Admin.php:3444
-#: includes/controller/Admin.php:3516 includes/controller/Admin.php:3583
+#: includes/controller/Admin.php:3038 includes/controller/Admin.php:3117
+#: includes/controller/Admin.php:3190 includes/controller/Admin.php:3246
+#: includes/controller/Admin.php:3285 includes/controller/Admin.php:3429
+#: includes/controller/Admin.php:3501 includes/controller/Admin.php:3568
 #: includes/controller/Ajax.php:65 includes/controller/Ajax.php:110
 #: includes/controller/Ajax.php:141 includes/controller/Ajax.php:224
 #: includes/controller/Ajax.php:273 includes/controller/Ajax.php:359
@@ -257,7 +257,7 @@ msgstr "无效的认证令牌。"
 
 #: includes/controller/Admin.php:276 includes/controller/Admin.php:1959
 #: includes/controller/Admin.php:2004 includes/controller/Admin.php:2064
-#: includes/controller/Admin.php:2133 includes/controller/Admin.php:3698
+#: includes/controller/Admin.php:2133 includes/controller/Admin.php:3683
 #: includes/controller/Ajax.php:39 includes/controller/Ajax.php:174
 #: includes/controller/Ajax.php:239 includes/controller/Ajax.php:285
 #: includes/download.php:15 includes/thumbnail.php:16
@@ -342,7 +342,7 @@ msgid "Page created!"
 msgstr "页面已创建！"
 
 #: includes/controller/Admin.php:709 includes/controller/Admin.php:855
-#: includes/controller/Admin.php:2100 includes/controller/Admin.php:3607
+#: includes/controller/Admin.php:2100 includes/controller/Admin.php:3592
 msgid "View page!"
 msgstr "查看页面！"
 
@@ -420,13 +420,13 @@ msgid "Please consider setting a stronger password for this user."
 msgstr "请考虑为这个用户设置一个更强的密码。"
 
 #: includes/controller/Admin.php:1093 includes/controller/Admin.php:1284
-#: includes/controller/Admin.php:3306 includes/controller/Main.php:848
+#: includes/controller/Admin.php:3291 includes/controller/Main.php:848
 #: includes/controller/Main.php:1071 install.php:763
 msgid "Email address cannot be blank."
 msgstr "邮件地址不能为空。"
 
 #: includes/controller/Admin.php:1100 includes/controller/Admin.php:1291
-#: includes/controller/Admin.php:3313 includes/controller/Main.php:852
+#: includes/controller/Admin.php:3298 includes/controller/Main.php:852
 #: includes/controller/Main.php:1075 install.php:765
 msgid "Invalid email address."
 msgstr "无效的邮件地址。"
@@ -478,8 +478,8 @@ msgstr "您不能删除您自己的账户。"
 
 #: includes/controller/Admin.php:1428 includes/controller/Admin.php:1451
 #: includes/controller/Admin.php:1805 includes/controller/Admin.php:1831
-#: includes/controller/Admin.php:1853 includes/controller/Admin.php:3526
-#: includes/controller/Admin.php:3535
+#: includes/controller/Admin.php:1853 includes/controller/Admin.php:3511
+#: includes/controller/Admin.php:3520
 msgid "Gone"
 msgstr "前往"
 
@@ -551,7 +551,7 @@ msgstr "新成员组不存在。"
 msgid "New member group must be specified."
 msgstr "新成员组必须被自定。"
 
-#: includes/controller/Admin.php:1832 includes/controller/Admin.php:3527
+#: includes/controller/Admin.php:1832 includes/controller/Admin.php:3512
 msgid "New default group does not exist."
 msgstr "新的默认组不存在。"
 
@@ -559,7 +559,7 @@ msgstr "新的默认组不存在。"
 msgid "New default group must be specified."
 msgstr "新的默认组必须被指定。"
 
-#: includes/controller/Admin.php:1854 includes/controller/Admin.php:3536
+#: includes/controller/Admin.php:1854 includes/controller/Admin.php:3521
 msgid "New guest group does not exist."
 msgstr "新的访问组不存在。"
 
@@ -590,12 +590,12 @@ msgstr "未找到。"
 msgid "You did not select anything to upload."
 msgstr "您没有选择要上传的任何内容。"
 
-#: includes/controller/Admin.php:2032 includes/helpers.php:2951
+#: includes/controller/Admin.php:2032 includes/helpers.php:2970
 msgid "Only uploaded files are accepted."
 msgstr "只有上传的文件被接受。"
 
-#: includes/controller/Admin.php:2038 includes/helpers.php:2969
-#: includes/helpers.php:3022 includes/helpers.php:3208
+#: includes/controller/Admin.php:2038 includes/helpers.php:2988
+#: includes/helpers.php:3041 includes/helpers.php:3228
 msgid "Failed to write file to disk."
 msgstr "写入文件到磁盘失败。"
 
@@ -655,188 +655,188 @@ msgstr "组导出的文件无效。"
 msgid "Users export file is invalid."
 msgstr "用户导出的文件无效。"
 
-#: includes/controller/Admin.php:2681
+#: includes/controller/Admin.php:2666
 msgid "You did not select anything to import."
 msgstr "您没有选择任何要导入的东西。"
 
-#: includes/controller/Admin.php:2852
+#: includes/controller/Admin.php:2837
 msgid "Chyrp Lite content successfully imported!"
 msgstr "Chyrp Lite 内容成功导入！"
 
-#: includes/controller/Admin.php:2866 includes/controller/Admin.php:2960
-#: includes/controller/Admin.php:3047 includes/controller/Admin.php:3126
+#: includes/controller/Admin.php:2851 includes/controller/Admin.php:2945
+#: includes/controller/Admin.php:3032 includes/controller/Admin.php:3111
 msgid "You do not have sufficient privileges to toggle extensions."
 msgstr "您没有足够的权限切换扩展。"
 
-#: includes/controller/Admin.php:3005 includes/controller/Admin.php:3199
-#: includes/controller/Admin.php:3243 includes/controller/Admin.php:3282
-#: includes/controller/Admin.php:3368 includes/controller/Admin.php:3501
-#: includes/controller/Admin.php:3569 includes/controller/Admin.php:3650
+#: includes/controller/Admin.php:2990 includes/controller/Admin.php:3184
+#: includes/controller/Admin.php:3228 includes/controller/Admin.php:3267
+#: includes/controller/Admin.php:3353 includes/controller/Admin.php:3486
+#: includes/controller/Admin.php:3554 includes/controller/Admin.php:3635
 msgid "You do not have sufficient privileges to change settings."
 msgstr "您没有足够的权限改变设置。"
 
-#: includes/controller/Admin.php:3010
+#: includes/controller/Admin.php:2995
 msgid "You are currently previewing a theme."
 msgstr "您目前正在预览主题。"
 
-#: includes/controller/Admin.php:3011
+#: includes/controller/Admin.php:2996
 msgid "Stop!"
 msgstr "停止！"
 
-#: includes/controller/Admin.php:3058 includes/controller/Admin.php:3137
+#: includes/controller/Admin.php:3043 includes/controller/Admin.php:3122
 msgid "No Extension Specified"
 msgstr "没有指定扩展"
 
-#: includes/controller/Admin.php:3059
+#: includes/controller/Admin.php:3044
 msgid "You did not specify an extension to enable."
 msgstr "您没有指定要启用的扩展。"
 
-#: includes/controller/Admin.php:3081
+#: includes/controller/Admin.php:3066
 msgid "Extension already enabled."
 msgstr "扩展已启用。"
 
-#: includes/controller/Admin.php:3088 includes/controller/Admin.php:3167
+#: includes/controller/Admin.php:3073 includes/controller/Admin.php:3152
 msgid "Extension not found."
 msgstr "扩展未找到。"
 
-#: includes/controller/Admin.php:3109
+#: includes/controller/Admin.php:3094
 msgid "Extension enabled."
 msgstr "扩展已启用。"
 
-#: includes/controller/Admin.php:3138
+#: includes/controller/Admin.php:3123
 msgid "You did not specify an extension to disable."
 msgstr "您没有指定要停用的扩展。"
 
-#: includes/controller/Admin.php:3160
+#: includes/controller/Admin.php:3145
 msgid "Extension already disabled."
 msgstr "扩展已禁用。"
 
-#: includes/controller/Admin.php:3185
+#: includes/controller/Admin.php:3170
 msgid "Extension disabled."
 msgstr "扩展已禁用。"
 
-#: includes/controller/Admin.php:3210
+#: includes/controller/Admin.php:3195
 msgid "No Theme Specified"
 msgstr "没有指定主题"
 
-#: includes/controller/Admin.php:3211
+#: includes/controller/Admin.php:3196
 msgid "You did not specify which theme to select."
 msgstr "您没有指定要选择哪个主题。"
 
-#: includes/controller/Admin.php:3229
+#: includes/controller/Admin.php:3214
 msgid "Theme changed."
 msgstr "主题已更改。"
 
-#: includes/controller/Admin.php:3253
+#: includes/controller/Admin.php:3238
 msgid "Preview stopped."
 msgstr "预览已停止。"
 
-#: includes/controller/Admin.php:3268
+#: includes/controller/Admin.php:3253
 msgid "Preview started."
 msgstr "预览已开始。"
 
-#: includes/controller/Admin.php:3320
+#: includes/controller/Admin.php:3305
 msgid "Invalid canonical URL."
 msgstr "无效的规范URL。"
 
-#: includes/controller/Admin.php:3354 includes/controller/Admin.php:3487
-#: includes/controller/Admin.php:3555 includes/controller/Admin.php:3636
+#: includes/controller/Admin.php:3339 includes/controller/Admin.php:3472
+#: includes/controller/Admin.php:3540 includes/controller/Admin.php:3621
 msgid "Settings updated."
 msgstr "设置已更新。"
 
-#: includes/controller/Admin.php:3597
+#: includes/controller/Admin.php:3582
 msgid "My Awesome Homepage"
 msgstr "我最棒的主页"
 
-#: includes/controller/Admin.php:3598
+#: includes/controller/Admin.php:3583
 msgid "Nothing here yet!"
 msgstr "然而这里什么也没有！"
 
-#: includes/controller/Admin.php:3606
+#: includes/controller/Admin.php:3591
 msgid "Page created."
 msgstr "页面已创建。"
 
-#: includes/controller/Admin.php:3630
+#: includes/controller/Admin.php:3615
 msgid "Clean URLs have been disabled because URL rewriting is not active."
 msgstr "由于 URL 重写未激活，因此已禁用干净 URL。"
 
-#: includes/controller/Admin.php:3672 includes/controller/Main.php:964
+#: includes/controller/Admin.php:3657 includes/controller/Main.php:964
 msgid "You are already logged in."
 msgstr "您已登陆。"
 
-#: includes/controller/Admin.php:3711
+#: includes/controller/Admin.php:3696
 msgid "Help"
 msgstr "帮助"
 
-#: includes/controller/Admin.php:3730
+#: includes/controller/Admin.php:3715
 msgid "Write"
 msgstr "写作"
 
-#: includes/controller/Admin.php:3735
+#: includes/controller/Admin.php:3720
 msgid "Manage"
 msgstr "管理所有"
 
-#: includes/controller/Admin.php:3740
+#: includes/controller/Admin.php:3725
 msgid "Settings"
 msgstr "设置"
 
-#: includes/controller/Admin.php:3745
+#: includes/controller/Admin.php:3730
 msgid "Extend"
 msgstr "扩展"
 
-#: includes/controller/Admin.php:3756
+#: includes/controller/Admin.php:3741
 msgid "Page"
 msgstr "页面"
 
-#: includes/controller/Admin.php:3796
+#: includes/controller/Admin.php:3781
 msgid "Posts"
 msgstr "所有帖子"
 
-#: includes/controller/Admin.php:3805
+#: includes/controller/Admin.php:3790
 msgid "Pages"
 msgstr "所有页面"
 
-#: includes/controller/Admin.php:3814 includes/controller/Admin.php:3867
+#: includes/controller/Admin.php:3799 includes/controller/Admin.php:3852
 msgid "Users"
 msgstr "用户"
 
-#: includes/controller/Admin.php:3824
+#: includes/controller/Admin.php:3809
 msgid "Groups"
 msgstr "所有组"
 
-#: includes/controller/Admin.php:3834
+#: includes/controller/Admin.php:3819
 msgid "Uploads"
 msgstr "上传"
 
-#: includes/controller/Admin.php:3844
+#: includes/controller/Admin.php:3829
 msgid "Import"
 msgstr "导入"
 
-#: includes/controller/Admin.php:3847
+#: includes/controller/Admin.php:3832
 msgid "Export"
 msgstr "导出"
 
-#: includes/controller/Admin.php:3865
+#: includes/controller/Admin.php:3850
 msgid "General"
 msgstr "通用"
 
-#: includes/controller/Admin.php:3866
+#: includes/controller/Admin.php:3851
 msgid "Content"
 msgstr "内容"
 
-#: includes/controller/Admin.php:3868
+#: includes/controller/Admin.php:3853
 msgid "Routes"
 msgstr "路由"
 
-#: includes/controller/Admin.php:3889
+#: includes/controller/Admin.php:3874
 msgid "Modules"
 msgstr "模块"
 
-#: includes/controller/Admin.php:3890
+#: includes/controller/Admin.php:3875
 msgid "Feathers"
 msgstr "羽毛"
 
-#: includes/controller/Admin.php:3891
+#: includes/controller/Admin.php:3876
 msgid "Themes"
 msgstr "主题"
 
@@ -1112,96 +1112,96 @@ msgstr "羽毛 %s 破损。"
 msgid "Execution of %s has been cancelled."
 msgstr "执行 %s 已被取消。"
 
-#: includes/helpers.php:2944
+#: includes/helpers.php:2963
 msgid "Uploaded file is of an unsupported type."
 msgstr "上传的文件是不支持的类型。"
 
-#: includes/helpers.php:2957 includes/helpers.php:3010
+#: includes/helpers.php:2976 includes/helpers.php:3029
 msgid "Upload path does not exist."
 msgstr "上传路径不存在。"
 
-#: includes/helpers.php:2963 includes/helpers.php:3016
+#: includes/helpers.php:2982 includes/helpers.php:3035
 msgid "Upload path is not writable."
 msgstr "上传路径不可写。"
 
-#: includes/helpers.php:3185
+#: includes/helpers.php:3205
 msgid ""
 "The uploaded file exceeds the <code>upload_max_filesize</code> directive in "
 "php.ini."
 msgstr "上传的文件超过 php.ini 中<code>upload_max_filesize</code>的大小。"
 
-#: includes/helpers.php:3191
+#: includes/helpers.php:3211
 msgid ""
 "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the "
 "HTML form."
 msgstr "上传的文件超过 php.ini 中<code>MAX_FILE_SIZE</code>的大小。"
 
-#: includes/helpers.php:3197
+#: includes/helpers.php:3217
 msgid "The uploaded file was only partially uploaded."
 msgstr "上传文件仅部分上传。"
 
-#: includes/helpers.php:3203
+#: includes/helpers.php:3223
 msgid "Missing a temporary folder."
 msgstr "缺少临时文件夹。"
 
-#: includes/helpers.php:3213
+#: includes/helpers.php:3233
 msgid "File upload was stopped by a PHP extension."
 msgstr "文件上传已被PHP扩展停止。"
 
-#: includes/helpers.php:3218
+#: includes/helpers.php:3238
 #, php-format
 msgid "File upload failed with error %d."
 msgstr "上传文件失败，错误：%d."
 
-#: includes/helpers.php:3225
+#: includes/helpers.php:3245
 #, php-format
 msgid ""
 "The uploaded file exceeds the maximum size of %d Megabytes allowed by this "
 "site."
 msgstr "上传的文件超过本站点允许的 %d M。"
 
-#: includes/helpers.php:3737
+#: includes/helpers.php:3757
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr "JSON编码错误：%s"
 
-#: includes/helpers.php:3767
+#: includes/helpers.php:3787
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr "JSON解码错误：%s"
 
-#: includes/helpers.php:3855
+#: includes/helpers.php:3875
 msgid "Failed to create Zip archive."
 msgstr "无法创建 Zip 存档。"
 
-#: includes/helpers.php:3965
+#: includes/helpers.php:3985
 #, php-format
 msgid "Activate your account at %s"
 msgstr "在 %s 上激活您的账户"
 
-#: includes/helpers.php:3966 includes/helpers.php:4008
+#: includes/helpers.php:3986 includes/helpers.php:4028
 #, php-format
 msgid "Hello, %s."
 msgstr "您好，%s."
 
-#: includes/helpers.php:3969
+#: includes/helpers.php:3989
 msgid "You are receiving this message because you registered a new account."
 msgstr "您收到此邮件因为您已经注册了新账户。"
 
-#: includes/helpers.php:3972
+#: includes/helpers.php:3992
 msgid "Visit this link to activate your account:"
 msgstr "访问这个链接激活您的账户："
 
-#: includes/helpers.php:4007
+#: includes/helpers.php:4027
 #, php-format
 msgid "Reset your password at %s"
 msgstr "在 %s上重置您的密码"
 
-#: includes/helpers.php:4011
+#: includes/helpers.php:4031
 msgid "You are receiving this message because you requested a new password."
 msgstr "您收到此消息是因为您请求了新密码。"
 
-#: includes/helpers.php:4014
+#: includes/helpers.php:4034
 msgid "Visit this link to reset your password:"
 msgstr "访问这个链接重置您的密码："
 
