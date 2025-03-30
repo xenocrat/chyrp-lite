@@ -359,7 +359,7 @@
                     __("Invalid authentication token.")
                 );
 
-            if (!Visitor::current()->group->can("view_uploads"))
+            if (!Visitor::current()->group->can("view_upload"))
                 show_403(
                     __("Access Denied"),
                     __("You do not have sufficient privileges to view uploads.")
