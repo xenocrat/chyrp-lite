@@ -55,11 +55,11 @@
 {% endfor %}
 </td>
 <td class="controls">
-{% if post.editable() %}
+{%- if post.editable() -%}
 <a class="tags_edit_link edit_link emblem" href="{{ url('edit_tags/id/' ~ post.id) }}">
 {{- icon_svg("edit.svg", "Edit" | translate) -}}
 </a>
-{% endif %}
+{%- endif -%}
 </td>
 </tr>
 {% else %}

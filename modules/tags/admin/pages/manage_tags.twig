@@ -34,18 +34,14 @@
 <a href="{{ tag.url }}">{{ tag.popularity }}</a>
 </td>
 <td class="controls">
-{% if visitor.group.can("edit_post") %}
 <a class="tag_edit_link edit_link emblem" href="{{ url('rename_tag/clean/' ~ (tag.clean | url_encode)) }}">
 {{- icon_svg("edit.svg", "Edit" | translate) -}}
 </a>
-{% endif %}
 </td>
 <td class="controls">
-{% if visitor.group.can("edit_post") %}
 <a class="tag_delete_link delete_link emblem" href="{{ url('delete_tag/clean/' ~ (tag.clean | url_encode)) }}">
 {{- icon_svg("delete.svg", "Delete" | translate) -}}
 </a>
-{% endif %}
 </td>
 </tr>
 {% else %}
