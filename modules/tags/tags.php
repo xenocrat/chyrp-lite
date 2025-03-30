@@ -642,8 +642,9 @@
                     continue;
 
                 unset($post->tags[$_POST['original']]);
-                $post_tags = implode(", ", array_keys($post->tags));
-                $_POST['tags'] = $post_tags.", ".$_POST['name'];
+                $post_tags = array_keys($post->tags);
+                $post_tags[] = $_POST['name'];
+                $_POST['tags'] = implode(", ", $post_tags);
 
                 $post->update();
             }
@@ -726,8 +727,9 @@
                     continue;
 
                 unset($post->tags[$_POST['name']]);
+                $post_tags = array_keys($post->tags);
+                $_POST['tags'] = implode(", ", $post_tags);
 
-                $_POST['tags'] = implode(", ", array_keys($post->tags));
                 $post->update();
             }
 
@@ -773,8 +775,10 @@
                 if (!$post->editable())
                     continue;
 
-                $post_tags = implode(", ", array_keys($post->tags));
-                $_POST['tags'] = $post_tags.", ".$_POST['name'];
+                $post_tags = array_keys($post->tags);
+                $post_tags[] = $_POST['name'];
+                $_POST['tags'] = implode(", ", $post_tags);
+
                 $post->update();
             }
 
