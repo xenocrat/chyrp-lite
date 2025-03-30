@@ -911,8 +911,7 @@ div.standalone > *:last-child {
         transparent 50%,
         #f2f0e6 50%,
         #f2f0e6 75%,
-        transparent 75%,
-        transparent
+        transparent 75%
     ) !important;
     animation: ajax_loading 2s linear infinite;
 }
