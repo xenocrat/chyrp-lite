@@ -48,10 +48,10 @@
 </td>
 {{ trigger.call("manage_groups_column", groups) }}
 <td class="controls">
-{{ group.edit_link(icon_svg("edit.svg", "Edit" | translate), null, null, "emblem") }}
+{{- group.edit_link(icon_svg("edit.svg", "Edit" | translate), null, null, "emblem") -}}
 </td>
 <td class="controls">
-{{ group.delete_link(icon_svg("delete.svg", "Delete" | translate), null, null, "emblem") }}
+{{- group.delete_link(icon_svg("delete.svg", "Delete" | translate), null, null, "emblem") -}}
 </td>
 </tr>
 {% else %}

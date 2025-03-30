@@ -65,10 +65,10 @@
 </td>
 {{ trigger.call("manage_pages_column", page) }}
 <td class="controls">
-{{ page.edit_link(icon_svg("edit.svg", "Edit" | translate), null, null, "emblem") }}
+{{- page.edit_link(icon_svg("edit.svg", "Edit" | translate), null, null, "emblem") -}}
 </td>
 <td class="controls">
-{{ page.delete_link(icon_svg("delete.svg", "Delete" | translate), null, null, "emblem") }}
+{{- page.delete_link(icon_svg("delete.svg", "Delete" | translate), null, null, "emblem") -}}
 </td>
 </tr>
 {% else %}

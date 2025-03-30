@@ -759,6 +759,9 @@ table tbody tr td.checkbox,
 table tbody tr td.emblem {
     width: 2rem;
 }
+table tbody tr td.controls:empty {
+    display: none;
+}
 table tbody tr td.filename {
     word-wrap: anywhere;
 }

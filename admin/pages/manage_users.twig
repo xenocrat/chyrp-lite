@@ -60,10 +60,10 @@
 {% endif %}
 {{ trigger.call("manage_users_column", user) }}
 <td class="controls">
-{{ user.edit_link(icon_svg("edit.svg", "Edit" | translate), null, null, "emblem") }}
+{{- user.edit_link(icon_svg("edit.svg", "Edit" | translate), null, null, "emblem") -}}
 </td>
 <td class="controls">
-{{ user.delete_link(icon_svg("delete.svg", "Delete" | translate), null, null, "emblem") }}
+{{- user.delete_link(icon_svg("delete.svg", "Delete" | translate), null, null, "emblem") -}}
 </td>
 </tr>
 {% else %}

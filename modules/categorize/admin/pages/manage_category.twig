@@ -44,10 +44,10 @@
 {{ category.post_count }}
 </td>
 <td class="controls">
-{{ category.edit_link(icon_svg("edit.svg", "Edit" | translate), null, null, "emblem") }}
+{{- category.edit_link(icon_svg("edit.svg", "Edit" | translate), null, null, "emblem") -}}
 </td>
 <td class="controls">
-{{ category.delete_link(icon_svg("delete.svg", "Delete" | translate), null, null, "emblem") }}
+{{- category.delete_link(icon_svg("delete.svg", "Delete" | translate), null, null, "emblem") -}}
 </td>
 </tr>
 {% else %}
