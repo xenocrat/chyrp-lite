@@ -220,7 +220,7 @@
             "mark",
             "ol",
             "p", "pre",
-            "small", "strong", "sub", "sup",
+            "samp", "small", "strong", "sub", "sup",
             "time",
             "ul",
             "var"
