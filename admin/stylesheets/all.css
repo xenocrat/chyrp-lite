@@ -185,6 +185,9 @@ ins {
     color: var(--chyrp-inky-black);
     background-color: var(--chyrp-medium-green);
 }
+samp {
+    font-family: "Cousine webfont", monospace;
+}
 figure, blockquote {
     margin-bottom: 1rem;
     font: inherit;
