@@ -222,7 +222,8 @@
             "p", "pre",
             "small", "strong", "sub", "sup",
             "time",
-            "ul"
+            "ul",
+            "var"
         );
 
         # Make title and body safe.
