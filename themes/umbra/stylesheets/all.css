@@ -133,9 +133,10 @@ mark {
     color: #202021;
     background-color: lightgreen;
 }
-del {
+del, s {
     font: inherit;
     text-decoration: line-through;
+    text-decoration-thickness: 0.125em;
 }
 figure, blockquote {
     margin: 1rem;

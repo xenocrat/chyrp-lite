@@ -148,9 +148,10 @@ mark {
     color: #1f1f23;
     background-color: #ffdd00;
 }
-del {
+del, s {
     font: inherit;
     text-decoration: line-through;
+    text-decoration-thickness: 0.125em;
 }
 figure, blockquote {
     margin: 1rem;
