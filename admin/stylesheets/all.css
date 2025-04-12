@@ -1548,6 +1548,7 @@ input.toolbar.hidden::file-selector-button {
         border-color: var(--chyrp-strong-blue);
     }
     table.interactive + div.controls {
+        background-color: var(--chyrp-medium-yellow);
         border-color: var(--chyrp-scottish-grey);
     }
     div.more_options {
