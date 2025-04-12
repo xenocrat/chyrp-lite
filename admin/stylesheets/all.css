@@ -187,6 +187,7 @@ ins {
 }
 samp {
     font-family: "Cousine webfont", monospace;
+    font-size: 0.85em;
 }
 figure, blockquote {
     margin-bottom: 1rem;
