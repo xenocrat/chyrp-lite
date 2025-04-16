@@ -764,18 +764,6 @@ table tbody tr td.checkbox,
 table tbody tr td.emblem {
     width: 2rem;
 }
-table tbody tr td.controls:empty {
-    background-size: 15px 15px;
-    background-image: linear-gradient(
-        45deg,
-        transparent 45%,
-        var(--chyrp-english-grey) 45%,
-        var(--chyrp-english-grey) 50%,
-        transparent 50%,
-        transparent 95%,
-        var(--chyrp-english-grey) 95%
-    );
-}
 table tbody tr td.filename {
     word-wrap: anywhere;
 }
@@ -1118,6 +1106,10 @@ button.emblem {
     border: none;
     border-radius: 0rem;
     cursor: pointer;
+}
+svg.emblem.forbidden,
+img.emblem.forbidden {
+    color: var(--chyrp-strong-red);
 }
 svg.emblem,
 img.emblem,
@@ -1521,17 +1513,6 @@ input.toolbar.hidden::file-selector-button {
     }
     table tbody tr:nth-child(even) td {
         background-color: var(--chyrp-welsh-grey);
-    }
-    table tbody tr td.controls:empty {
-        background-image: linear-gradient(
-            45deg,
-            transparent 45%,
-            var(--chyrp-irish-grey) 45%,
-            var(--chyrp-irish-grey) 50%,
-            transparent 50%,
-            transparent 95%,
-            var(--chyrp-irish-grey) 95%
-        );
     }
     span.options_toolbar {
         background-color: transparent;
