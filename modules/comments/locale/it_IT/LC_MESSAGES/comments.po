@@ -155,8 +155,8 @@ msgid "Save"
 msgstr "Salva"
 
 #: modules/comments/admin/pages/edit_comment.twig:74
-#: modules/comments/admin/pages/manage_comments.twig:87
-#: modules/comments/admin/pages/manage_spam.twig:73
+#: modules/comments/admin/pages/manage_comments.twig:95
+#: modules/comments/admin/pages/manage_spam.twig:81
 msgid "Delete"
 msgstr "Elimina"
 
@@ -184,27 +184,27 @@ msgstr "Aggiunto"
 msgid "Webmention"
 msgstr "Webmention"
 
-#: modules/comments/admin/pages/manage_comments.twig:75
-#: modules/comments/admin/pages/manage_spam.twig:64
+#: modules/comments/admin/pages/manage_comments.twig:83
+#: modules/comments/admin/pages/manage_spam.twig:72
 msgid "With selected:"
 msgstr "Selezionati:"
 
-#: modules/comments/admin/pages/manage_comments.twig:78
-#: modules/comments/admin/pages/manage_spam.twig:67
+#: modules/comments/admin/pages/manage_comments.twig:86
+#: modules/comments/admin/pages/manage_spam.twig:75
 msgid "Deny"
 msgstr "Rifiutare"
 
-#: modules/comments/admin/pages/manage_comments.twig:81
-#: modules/comments/admin/pages/manage_spam.twig:70
+#: modules/comments/admin/pages/manage_comments.twig:89
+#: modules/comments/admin/pages/manage_spam.twig:78
 msgid "Approve"
 msgstr "Approva"
 
-#: modules/comments/admin/pages/manage_comments.twig:84
+#: modules/comments/admin/pages/manage_comments.twig:92
 msgid "Mark as Spam"
 msgstr "Contrassegna come spam"
 
-#: modules/comments/admin/pages/manage_comments.twig:90
-#: modules/comments/admin/pages/manage_spam.twig:76
+#: modules/comments/admin/pages/manage_comments.twig:98
+#: modules/comments/admin/pages/manage_spam.twig:84
 msgid "Batch Process"
 msgstr "Processo batch"
 

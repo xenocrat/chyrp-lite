@@ -43,7 +43,7 @@ msgid "Manage Tags"
 msgstr ""
 
 #: modules/tags/admin/pages/manage_tags.twig:13
-#: modules/tags/admin/pages/posts_tagged.twig:79
+#: modules/tags/admin/pages/posts_tagged.twig:81
 msgid "Add Tags"
 msgstr ""
 
@@ -69,7 +69,7 @@ msgstr ""
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr ""
 
-#: modules/tags/admin/pages/posts_tagged.twig:76
+#: modules/tags/admin/pages/posts_tagged.twig:78
 msgid "Tag Selected Post(s) with:"
 msgstr ""
 

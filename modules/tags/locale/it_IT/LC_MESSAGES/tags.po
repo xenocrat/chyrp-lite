@@ -65,7 +65,7 @@ msgid "Manage Tags"
 msgstr "Gestisci Tag"
 
 #: modules/tags/admin/pages/manage_tags.twig:13
-#: modules/tags/admin/pages/posts_tagged.twig:79
+#: modules/tags/admin/pages/posts_tagged.twig:81
 msgid "Add Tags"
 msgstr "Aggiungi Tag"
 
@@ -88,7 +88,7 @@ msgstr "Ordina i risultati per:"
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr "Post taggati con &#8220;%s&#8221;"
 
-#: modules/tags/admin/pages/posts_tagged.twig:76
+#: modules/tags/admin/pages/posts_tagged.twig:78
 msgid "Tag Selected Post(s) with:"
 msgstr "Contrassegna i post selezionati con:"
 

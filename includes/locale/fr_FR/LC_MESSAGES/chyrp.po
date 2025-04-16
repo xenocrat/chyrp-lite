@@ -984,7 +984,7 @@ msgstr "Vous devez activer votre compte avant de vous connecter."
 msgid "Logged in."
 msgstr "Connecté."
 
-#: includes/controller/Main.php:1008 includes/error.php:558
+#: includes/controller/Main.php:1008 includes/error.php:559
 msgid "Log in"
 msgstr "Connexion"
 
@@ -1044,16 +1044,16 @@ msgstr "Le support des mentions web est désactivée pour ce site."
 msgid "An unspecified error has occurred."
 msgstr "Une erreur non précisée est survenue."
 
-#: includes/error.php:546
+#: includes/error.php:547
 msgid "Backtrace"
 msgstr "Historique"
 
-#: includes/error.php:550
+#: includes/error.php:551
 #, php-format
 msgid "%s on line %d"
 msgstr "%s à la ligne %d"
 
-#: includes/error.php:563
+#: includes/error.php:564
 msgid "Go back"
 msgstr "Retour"
 

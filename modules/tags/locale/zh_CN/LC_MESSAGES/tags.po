@@ -63,7 +63,7 @@ msgid "Manage Tags"
 msgstr "管理标签"
 
 #: modules/tags/admin/pages/manage_tags.twig:13
-#: modules/tags/admin/pages/posts_tagged.twig:79
+#: modules/tags/admin/pages/posts_tagged.twig:81
 msgid "Add Tags"
 msgstr "添加标签"
 
@@ -86,7 +86,7 @@ msgstr "结果排序依据："
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr "&#8220;%s&#8221; 的帖子标签"
 
-#: modules/tags/admin/pages/posts_tagged.twig:76
+#: modules/tags/admin/pages/posts_tagged.twig:78
 msgid "Tag Selected Post(s) with:"
 msgstr "将选中的帖子标记为："
 

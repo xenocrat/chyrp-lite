@@ -983,7 +983,7 @@ msgstr "Si deve attivare un tuo account prima di poter accedere."
 msgid "Logged in."
 msgstr "L'accesso é stato effettuato."
 
-#: includes/controller/Main.php:1008 includes/error.php:558
+#: includes/controller/Main.php:1008 includes/error.php:559
 msgid "Log in"
 msgstr "Accedi"
 
@@ -1042,16 +1042,16 @@ msgstr "Il supporto di Webmention è disabilitato per questo sito."
 msgid "An unspecified error has occurred."
 msgstr "Si è verificato un errore non specificato."
 
-#: includes/error.php:546
+#: includes/error.php:547
 msgid "Backtrace"
 msgstr "Backtrace"
 
-#: includes/error.php:550
+#: includes/error.php:551
 #, php-format
 msgid "%s on line %d"
 msgstr "%s riga %d"
 
-#: includes/error.php:563
+#: includes/error.php:564
 msgid "Go back"
 msgstr "Torna indietro"
 

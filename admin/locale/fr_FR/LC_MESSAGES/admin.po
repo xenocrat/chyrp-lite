@@ -365,9 +365,9 @@ msgid "Help content"
 msgstr "Contenu de l’aide"
 
 #: admin/javascripts/admin.js.php:512 admin/javascripts/admin.js.php:513
-#: admin/pages/manage_groups.twig:51 admin/pages/manage_pages.twig:68
-#: admin/pages/manage_posts.twig:56 admin/pages/manage_uploads.twig:69
-#: admin/pages/manage_users.twig:63
+#: admin/pages/manage_groups.twig:52 admin/pages/manage_pages.twig:69
+#: admin/pages/manage_posts.twig:57 admin/pages/manage_uploads.twig:71
+#: admin/pages/manage_users.twig:64
 msgid "Edit"
 msgstr "Modifier"
 
@@ -919,21 +919,21 @@ msgstr "Contrôles"
 msgid "Yes"
 msgstr "Oui"
 
-#: admin/pages/manage_groups.twig:54 admin/pages/manage_pages.twig:71
-#: admin/pages/manage_posts.twig:59 admin/pages/manage_uploads.twig:76
-#: admin/pages/manage_users.twig:66
+#: admin/pages/manage_groups.twig:59 admin/pages/manage_pages.twig:76
+#: admin/pages/manage_posts.twig:64 admin/pages/manage_uploads.twig:80
+#: admin/pages/manage_users.twig:71
 msgid "Delete"
 msgstr "Supprimer"
 
-#: admin/pages/manage_groups.twig:61 admin/pages/manage_pages.twig:78
-#: admin/pages/manage_posts.twig:66 admin/pages/manage_uploads.twig:85
-#: admin/pages/manage_users.twig:73 admin/partials/uploads_modal.twig:34
+#: admin/pages/manage_groups.twig:69 admin/pages/manage_pages.twig:86
+#: admin/pages/manage_posts.twig:74 admin/pages/manage_uploads.twig:91
+#: admin/pages/manage_users.twig:81 admin/partials/uploads_modal.twig:34
 msgid "No results"
 msgstr "Aucun résultat"
 
-#: admin/pages/manage_groups.twig:69 admin/pages/manage_pages.twig:86
-#: admin/pages/manage_posts.twig:74 admin/pages/manage_uploads.twig:106
-#: admin/pages/manage_users.twig:81
+#: admin/pages/manage_groups.twig:77 admin/pages/manage_pages.twig:94
+#: admin/pages/manage_posts.twig:82 admin/pages/manage_uploads.twig:112
+#: admin/pages/manage_users.twig:89
 #, php-format
 msgid "Page %d of %s"
 msgstr "Page %d sur %s"
@@ -1025,11 +1025,11 @@ msgstr "Type"
 msgid "Download"
 msgstr "Télécharger"
 
-#: admin/pages/manage_uploads.twig:93
+#: admin/pages/manage_uploads.twig:99
 msgid "Sort results by:"
 msgstr "Trier les résultats par:"
 
-#: admin/pages/manage_uploads.twig:101
+#: admin/pages/manage_uploads.twig:107
 msgid "Sort Results"
 msgstr "Trier les résultats"
 

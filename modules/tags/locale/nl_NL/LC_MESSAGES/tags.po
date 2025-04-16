@@ -65,7 +65,7 @@ msgid "Manage Tags"
 msgstr "Beheer Tags"
 
 #: modules/tags/admin/pages/manage_tags.twig:13
-#: modules/tags/admin/pages/posts_tagged.twig:79
+#: modules/tags/admin/pages/posts_tagged.twig:81
 msgid "Add Tags"
 msgstr "Tags toevoegen"
 
@@ -88,7 +88,7 @@ msgstr "Sorteer resultaten op:"
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr "Blogposts getagged met &#8220;%s&#8221;"
 
-#: modules/tags/admin/pages/posts_tagged.twig:76
+#: modules/tags/admin/pages/posts_tagged.twig:78
 msgid "Tag Selected Post(s) with:"
 msgstr "Tag de geselecteerde Blogpost(s) met:"
 
