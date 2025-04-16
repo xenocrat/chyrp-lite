@@ -44,10 +44,18 @@
 </td>
 {{ trigger.call("manage_pingbacks_column", pingback) }}
 <td class="controls">
-{{- pingback.edit_link(icon_svg("edit.svg", "Edit" | translate), null, null, "emblem") -}}
+{%- if pingback.editable() -%}
+{{ pingback.edit_link(icon_svg("edit.svg", "Edit" | translate), null, null, "emblem") }}
+{%- else -%}
+{{ icon_svg("forbidden.svg", false, "emblem forbidden") }}
+{%- endif -%}
 </td>
 <td class="controls">
-{{- pingback.delete_link(icon_svg("delete.svg", "Delete" | translate), null, null, "emblem") -}}
+{%- if pingback.deletable() -%}
+{{ pingback.delete_link(icon_svg("delete.svg", "Delete" | translate), null, null, "emblem") }}
+{%- else -%}
+{{ icon_svg("forbidden.svg", false, "emblem forbidden") }}
+{%- endif -%}
 </td>
 </tr>
 {% else %}

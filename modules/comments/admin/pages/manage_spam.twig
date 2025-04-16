@@ -41,10 +41,18 @@
 </td>
 {{ trigger.call("manage_comments_column", comment) }}
 <td class="controls">
-{{- comment.edit_link(icon_svg("edit.svg", "Edit" | translate), null, null, "emblem") -}}
+{%- if comment.editable() -%}
+{{ comment.edit_link(icon_svg("edit.svg", "Edit" | translate), null, null, "emblem") }}
+{%- else -%}
+{{ icon_svg("forbidden.svg", false, "emblem forbidden") }}
+{%- endif -%}
 </td>
 <td class="controls">
-{{- comment.delete_link(icon_svg("delete.svg", "Delete" | translate), null, null, "emblem") -}}
+{%- if comment.deletable() -%}
+{{ comment.delete_link(icon_svg("delete.svg", "Delete" | translate), null, null, "emblem") }}
+{%- else -%}
+{{ icon_svg("forbidden.svg", false, "emblem forbidden") }}
+{%- endif -%}
 </td>
 </tr>
 <tr class="comment_excerpt">

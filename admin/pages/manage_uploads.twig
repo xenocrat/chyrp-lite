@@ -59,22 +59,28 @@
 <td class="controls">
 {%- if visitor.group.can("view_upload") -%}
 <a class="emblem" href="{{ upload.name | download }}">
-{{- icon_svg("download.svg", "Download" | translate) -}}
+{{ icon_svg("download.svg", "Download" | translate) }}
 </a>
+{%- else -%}
+{{ icon_svg("forbidden.svg", false, "emblem forbidden") }}
 {%- endif -%}
 </td>
 <td class="controls">
 {%- if visitor.group.can("edit_upload") -%}
 <a class="upload_edit_link edit_link emblem" href="{{ url('edit_upload/file/' ~ (upload.name | url_encode)) }}">
-{{- icon_svg("edit.svg", "Edit" | translate) -}}
+{{ icon_svg("edit.svg", "Edit" | translate) }}
 </a>
+{%- else -%}
+{{ icon_svg("forbidden.svg", false, "emblem forbidden") }}
 {%- endif -%}
 </td>
 <td class="controls">
 {%- if visitor.group.can("delete_upload") -%}
 <a class="upload_delete_link delete_link emblem" href="{{ url('delete_upload/file/' ~ (upload.name | url_encode)) }}">
-{{- icon_svg("delete.svg", "Delete" | translate) -}}
+{{ icon_svg("delete.svg", "Delete" | translate) }}
 </a>
+{%- else -%}
+{{ icon_svg("forbidden.svg", false, "emblem forbidden") }}
 {%- endif -%}
 </td>
 </tr>

@@ -53,10 +53,18 @@
 </td>
 {{ trigger.call("manage_posts_column", post) }}
 <td class="controls">
-{{- post.edit_link(icon_svg("edit.svg", "Edit" | translate), null, null, "emblem") -}}
+{%- if post.editable() -%}
+{{ post.edit_link(icon_svg("edit.svg", "Edit" | translate), null, null, "emblem") }}
+{%- else -%}
+{{ icon_svg("forbidden.svg", false, "emblem forbidden") }}
+{%- endif -%}
 </td>
 <td class="controls">
-{{- post.delete_link(icon_svg("delete.svg", "Delete" | translate), null, null, "emblem") -}}
+{%- if post.deletable() -%}
+{{ post.delete_link(icon_svg("delete.svg", "Delete" | translate), null, null, "emblem") }}
+{%- else -%}
+{{ icon_svg("forbidden.svg", false, "emblem forbidden") }}
+{%- endif -%}
 </td>
 </tr>
 {% else %}

@@ -60,10 +60,18 @@
 {% endif %}
 {{ trigger.call("manage_users_column", user) }}
 <td class="controls">
-{{- user.edit_link(icon_svg("edit.svg", "Edit" | translate), null, null, "emblem") -}}
+{%- if visitor.group.can("edit_user") -%}
+{{ user.edit_link(icon_svg("edit.svg", "Edit" | translate), null, null, "emblem") }}
+{%- else -%}
+{{ icon_svg("forbidden.svg", false, "emblem forbidden") }}
+{%- endif -%}
 </td>
 <td class="controls">
-{{- user.delete_link(icon_svg("delete.svg", "Delete" | translate), null, null, "emblem") -}}
+{%- if visitor.group.can("delete_user") -%}
+{{ user.delete_link(icon_svg("delete.svg", "Delete" | translate), null, null, "emblem") }}
+{%- else -%}
+{{ icon_svg("forbidden.svg", false, "emblem forbidden") }}
+{%- endif -%}
 </td>
 </tr>
 {% else %}
