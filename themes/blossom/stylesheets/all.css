@@ -46,9 +46,6 @@
     font-weight: bold;
     font-style: italic;
 }
-html {
-    font-size: 16px;
-}
 :root {
     color-scheme: light;
     --blossom-pure-white: #ffffff;
@@ -77,6 +74,9 @@ html {
 *::target-text {
     color: var(--blossom-pure-white);
     background-color: var(--blossom-inky-black);
+}
+html {
+    font-size: 16px;
 }
 body {
     font-family: "Open Sans webfont", sans-serif;
