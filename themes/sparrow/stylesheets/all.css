@@ -437,8 +437,8 @@ input:invalid {
 select:focus, input:focus {
     background-color: var(--sparrow-pure-white);
     border-color: var(--sparrow-pure-black);
-    outline: var(--sparrow-pure-black) solid 1px;
-    outline-offset: 0px;
+    outline: var(--sparrow-pure-black) solid 2px;
+    outline-offset: -2px;
 }
 input::placeholder {
     color: var(--sparrow-inky-black);
@@ -466,8 +466,8 @@ textarea {
 }
 textarea:focus {
     border-color: var(--sparrow-pure-black);
-    outline: var(--sparrow-pure-black) solid 1px;
-    outline-offset: 0px;
+    outline: var(--sparrow-pure-black) solid 2px;
+    outline-offset: -2px;
 }
 button {
     font: inherit;

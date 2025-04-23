@@ -489,9 +489,9 @@ input[type="radio"]:checked {
 }
 select:focus, input:focus {
     background-color: var(--topaz-pure-white);
-    border: 1px solid var(--topaz-pure-black);
-    outline: var(--topaz-pure-black) solid 1px;
-    outline-offset: 0px;
+    border: 1px solid var(--topaz-strong-blue);
+    outline: var(--topaz-strong-blue) solid 2px;
+    outline-offset: -2px;
 }
 input::placeholder {
     color: var(--topaz-inky-black);
@@ -524,9 +524,9 @@ textarea {
     resize: vertical;
 }
 textarea:focus {
-    border-color: var(--topaz-pure-black);
-    outline: var(--topaz-pure-black) solid 1px;
-    outline-offset: 0px;
+    border-color: var(--topaz-strong-blue);
+    outline: var(--topaz-strong-blue) solid 2px;
+    outline-offset: -2px;
 }
 button {
     font: inherit;
@@ -553,7 +553,9 @@ button#sidebar_search_submit {
     color: transparent;
 }
 button#sidebar_search_submit:focus-visible {
-    background-color: var(--topaz-border-grey);
+    outline: none;
+    background-color: var(--topaz-pure-white);
+    filter: invert(1);
 }
 button#sidebar_search_submit:hover {
     background-size: 60%;

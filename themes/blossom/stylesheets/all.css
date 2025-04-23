@@ -498,8 +498,8 @@ input[type="radio"]:checked {
 select:focus, input:focus {
     background-color: var(--blossom-pure-white);
     border: 1px solid var(--blossom-strong-pink);
-    outline: var(--blossom-strong-pink) solid 1px;
-    outline-offset: 0px;
+    outline: var(--blossom-strong-pink) solid 2px;
+    outline-offset: -2px;
 }
 input::placeholder {
     color: var(--blossom-inky-black);
@@ -533,8 +533,8 @@ textarea {
 textarea:focus {
     background-color: var(--blossom-pure-white);
     border: 1px solid var(--blossom-strong-pink);
-    outline: var(--blossom-strong-pink) solid 1px;
-    outline-offset: 0px;
+    outline: var(--blossom-strong-pink) solid 2px;
+    outline-offset: -2px;
 }
 button {
     font: inherit;
@@ -562,7 +562,8 @@ button#sidebar_search_submit {
 }
 button#sidebar_search_submit:focus-visible {
     outline: none;
-    background-color: var(--blossom-border-grey);
+    background-color: var(--blossom-pure-white);
+    filter: invert(1);
 }
 button#sidebar_search_submit:hover {
     background-size: 60%;
