@@ -46,24 +46,34 @@
     font-weight: bold;
     font-style: italic;
 }
-html {
-    font-size: 16px;
+:root {
+    color-scheme: dark;
+    --umbra-pure-white: #ffffff;
+    --umbra-pure-black: #000000;
+    --umbra-deep-black: #202021;
+    --umbra-deep-grey: #383839;
+    --umbra-medium-grey: #666667;
+    --umbra-medium-red: #c04b4b;
+    --umbra-strong-green: lightgreen;
 }
 *::selection {
-    color: #202021;
+    color: var(--umbra-deep-black);
     background-color: lightgreen;
 }
 *::target-text {
-    color: #202021;
-    background-color: #ffffff;
+    color: var(--umbra-deep-black);
+    background-color: var(--umbra-pure-white);
+}
+html {
+    font-size: 16px;
 }
 body {
     font-family: "Open Sans webfont", sans-serif;
     font-size: 1rem;
-    color: #ffffff;
+    color: var(--umbra-pure-white);
     line-height: 1.5;
     tab-size: 4;
-    background-color: #202021;
+    background-color: var(--umbra-deep-black);
     margin: 0em 0em 2rem 0em;
     min-width: 280px;
 }
@@ -130,7 +140,7 @@ small {
     font-size: 0.75em;
 }
 mark {
-    color: #202021;
+    color: var(--umbra-deep-black);
     background-color: lightgreen;
 }
 del, s {
@@ -160,7 +170,7 @@ aside {
     margin-inline-start: 1rem;
     margin-bottom: 1rem;
     padding: 1rem;
-    background-color: #383839;
+    background-color: var(--umbra-deep-grey);
 }
 blockquote em,
 aside em {
@@ -169,7 +179,7 @@ aside em {
 pre {
     font-family: "Cousine webfont", monospace;
     font-size: 0.85em;
-    background-color: #383839;
+    background-color: var(--umbra-deep-grey);
     margin: 1rem 0rem;
     overflow-x: auto;
     white-space: pre;
@@ -177,7 +187,7 @@ pre {
 code {
     font-family: "Cousine webfont", monospace;
     font-size: 0.85em;
-    background-color: #383839;
+    background-color: var(--umbra-deep-grey);
     padding: 0.125em 0.25em 0em 0.25em;
     vertical-align: bottom;
     white-space: break-spaces;
@@ -192,7 +202,7 @@ hr {
     width: 100%;
     clear: both;
     border: none;
-    border-top: 1px solid #666667;
+    border-top: 1px solid var(--umbra-medium-grey);
     margin: 2em 0em;
 }
 hr.post {
@@ -271,7 +281,7 @@ ol.comments {
     list-style: none;
     padding: 0em;
     margin: 0em;
-    border-bottom: 1px solid #666667;
+    border-bottom: 1px solid var(--umbra-medium-grey);
 }
 ol.comments > li {
     box-sizing: border-box;
@@ -279,7 +289,7 @@ ol.comments > li {
     width: 100%;
     margin: 0em;
     padding: 2rem;
-    border: 1px solid #666667;
+    border: 1px solid var(--umbra-medium-grey);
     border-bottom: none;
 }
 ol.comments > li#comment_shim {
@@ -324,15 +334,15 @@ table th {
     padding: 0.5em;
     font: inherit;
     font-weight: bold;
-    background-color: #666667;
-    border: 1px solid #666667;
+    background-color: var(--umbra-medium-grey);
+    border: 1px solid var(--umbra-medium-grey);
     vertical-align: middle;
 }
 table td {
     text-align: start;
     padding: 0.5em;
     font: inherit;
-    border: 1px solid #666667;
+    border: 1px solid var(--umbra-medium-grey);
     vertical-align: middle;
 }
 form, fieldset {
@@ -364,8 +374,8 @@ select, input {
     text-align: start;
     font: inherit;
     font-size: inherit;
-    color: #ffffff;
-    background-color: #666667;
+    color: var(--umbra-pure-white);
+    background-color: var(--umbra-medium-grey);
     border: none;
     border-radius: 0.25em;
 }
@@ -421,22 +431,22 @@ input[type="radio"]:checked:focus {
 }
 input.error,
 input:invalid {
-    color: #ffffff;
-    background-color: #c04b4b;
+    color: var(--umbra-pure-white);
+    background-color: var(--umbra-medium-red);
     box-shadow: none;
 }
 select:focus, input:focus {
     outline: none;
-    color: #202021;
+    color: var(--umbra-pure-black);
     border: none;
-    background-color: #ffffff;
+    background-color: var(--umbra-pure-white);
 }
 input::placeholder {
-    color: #ffffff;
+    color: var(--umbra-pure-white);
     opacity: 1;
 }
 input:focus::placeholder {
-    color: #202021;
+    color: var(--umbra-pure-black);
 }
 input#search_field {
     display: inline;
@@ -450,19 +460,19 @@ textarea {
     height: 20ex;
     font: inherit;
     font-size: inherit;
-    color: #ffffff;
+    color: var(--umbra-pure-white);
     margin: 0.5em 0em;
     padding: 0.5em;
     border: none;
     border-radius: 0.25em;
-    background-color: #666667;
+    background-color: var(--umbra-medium-grey);
     resize: vertical;
 }
 textarea:focus {
     outline: none;
-    color: #202021;
+    color: var(--umbra-pure-black);
     border: none;
-    background-color: #ffffff;
+    background-color: var(--umbra-pure-white);
 }
 button {
     font: inherit;
@@ -482,7 +492,7 @@ div#mast {
     text-align: center;
     margin: 0em;
     padding: 2rem;
-    border-bottom: 1px solid #666667;
+    border-bottom: 1px solid var(--umbra-medium-grey);
 }
 div#main {
     box-sizing: border-box;
@@ -502,7 +512,7 @@ div.flash {
     box-sizing: border-box;
     width: 100%;
     text-align: center;
-    background-color: #c04b4b;
+    background-color: var(--umbra-medium-red);
     padding: 0.5em;
     border-bottom: 1px solid transparent;
 }
@@ -513,8 +523,8 @@ div.filter {
     font-weight: bold;
     margin: 0rem;
     padding: 0.5em;
-    background-color: #383839;
-    border-bottom: 1px solid #666667;
+    background-color: var(--umbra-deep-grey);
+    border-bottom: 1px solid var(--umbra-medium-grey);
 }
 div.metadata {
     box-sizing: border-box;
@@ -526,7 +536,7 @@ div.metadata {
     margin-top: 2rem;
     padding: 0.25rem;
     border-radius: 0.25rem;
-    background-color: #383839;
+    background-color: var(--umbra-deep-grey);
 }
 div.tags {
     margin: 1rem 0rem 0rem 0rem;
@@ -554,7 +564,7 @@ ul.archive article.post.archive {
     height: 196px;
     font-size: 0.75em;
     padding: 8px;
-    border: 1px solid #ffffff;
+    border: 1px solid var(--umbra-pure-white);
 }
 article > header {
     display: block;
@@ -585,7 +595,7 @@ article > ol.pingbacks {
     width: 100%;
     margin: 0rem;
     padding: 2rem;
-    border: 1px solid #666667;
+    border: 1px solid var(--umbra-medium-grey);
 }
 section.post_archive_container {
     height: 100%;
@@ -597,7 +607,7 @@ article.audio audio {
 }
 a:link,
 a:visited {
-    color: #ffffff;
+    color: var(--umbra-pure-white);
     text-decoration: none;
 }
 a:hover,
@@ -618,7 +628,7 @@ ul.navigation > li > a {
 }
 div.flash a {
     font-weight: bold;
-    color: #ffffff;
+    color: var(--umbra-pure-white);
 }
 div.traversal a {
     display: inline-block;
@@ -627,16 +637,16 @@ div.traversal a {
     width: 6em;
     height: 1em;
     top: 0px;
-    color: #ffffff;
+    color: var(--umbra-pure-white);
     text-decoration: none;
-    background-color: #383839;
+    background-color: var(--umbra-deep-grey);
     line-height: 1;
     border-radius: 50%;
 }
 div.traversal a:hover,
 div.traversal a:focus,
 div.traversal a:active {
-    color: #202021;
+    color: var(--umbra-deep-black);
     background-color: lightgreen;
     transition: top 250ms cubic-bezier(0.5, -8, 0.2, 4);
 }
@@ -648,7 +658,7 @@ section a:link,
 p a:link,
 section a:visited,
 p a:visited {
-    color: #ffffff;
+    color: var(--umbra-pure-white);
     text-decoration: underline;
     text-underline-offset: 0.125em;
     text-decoration-thickness: 0.0625em;
@@ -674,14 +684,14 @@ div.tag_cloud a.tag {
     top: 0px;
     padding: 0.25em 0.5em;
     margin: 2px 0em;
-    color: #ffffff;
+    color: var(--umbra-pure-white);
     text-decoration: none;
-    border: 1px solid #ffffff;
+    border: 1px solid var(--umbra-pure-white);
 }
 div.tag_cloud a.tag:hover,
 div.tag_cloud a.tag:focus,
 div.tag_cloud a.tag:active {
-    color: #202021;
+    color: var(--umbra-deep-black);
     background-color: lightgreen;
     border-color: lightgreen;
 }
@@ -692,7 +702,7 @@ div.metadata a.category {
     inset-inline-end: 2rem;
     padding: 0.25em 0.75em;
     margin: 0em;
-    border: 1px solid #666667;
+    border: 1px solid var(--umbra-medium-grey);
     border-top: none;
 }
 div.doaction a, button {
@@ -701,9 +711,9 @@ div.doaction a, button {
     padding: 0.5em 1.25em;
     border: none;
     border-radius: 0.25em;
-    color: #ffffff;
+    color: var(--umbra-pure-white);
     text-decoration: none;
-    background-color: #383839;
+    background-color: var(--umbra-deep-grey);
 }
 div.doaction a:hover,
 button:hover,
@@ -711,7 +721,7 @@ div.doaction a:focus,
 button:focus,
 div.doaction a:active,
 button:active {
-    color: #202021;
+    color: var(--umbra-pure-black);
     background-color: lightgreen;
 }
 div.doaction a.post_delete_link,
@@ -813,11 +823,11 @@ div.standalone > *:last-child {
     background-size: 30px 30px;
     background-image: linear-gradient(
         -45deg,
-        #383839 25%,
+        var(--umbra-pure-black) 25%,
         transparent 25%,
         transparent 50%,
-        #383839 50%,
-        #383839 75%,
+        var(--umbra-pure-black) 50%,
+        var(--umbra-pure-black) 75%,
         transparent 75%
     ) !important;
     animation: ajax_loading 2s linear infinite;
@@ -865,6 +875,6 @@ div.standalone > *:last-child {
 }
 @media (prefers-contrast: more) {
     body {
-        background-color: #000000;
+        background-color: var(--umbra-pure-black);
     }
 }
