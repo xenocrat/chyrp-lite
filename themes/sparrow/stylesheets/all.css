@@ -434,7 +434,8 @@ input:invalid {
     border-color: var(--sparrow-medium-red);
     box-shadow: none;
 }
-select:focus, input:focus {
+select:focus,
+input:focus {
     background-color: var(--sparrow-pure-white);
     border-color: var(--sparrow-pure-black);
     outline: var(--sparrow-pure-black) solid 2px;

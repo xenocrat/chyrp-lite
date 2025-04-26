@@ -189,7 +189,7 @@ aside {
     margin-bottom: 1rem;
     padding: 1rem;
     background-color: var(--blossom-medium-grey);
-    border-left: 2px solid var(--blossom-inky-black);
+    border-left: 2px solid var(--blossom-coal-black);
 }
 blockquote em,
 aside em {
@@ -495,7 +495,8 @@ input[type="radio"]:checked {
     background-position: center;
     background-repeat: no-repeat;
 }
-select:focus, input:focus {
+select:focus,
+input:focus {
     background-color: var(--blossom-pure-white);
     border: 1px solid var(--blossom-strong-pink);
     outline: var(--blossom-strong-pink) solid 2px;

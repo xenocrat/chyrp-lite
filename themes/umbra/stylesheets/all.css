@@ -54,11 +54,11 @@
     --umbra-deep-grey: #383839;
     --umbra-medium-grey: #666667;
     --umbra-medium-red: #c04b4b;
-    --umbra-strong-green: lightgreen;
+    --umbra-strong-mint: #90ee90;
 }
 *::selection {
     color: var(--umbra-deep-black);
-    background-color: lightgreen;
+    background-color: var(--umbra-strong-mint);
 }
 *::target-text {
     color: var(--umbra-deep-black);
@@ -141,7 +141,7 @@ small {
 }
 mark {
     color: var(--umbra-deep-black);
-    background-color: lightgreen;
+    background-color: var(--umbra-strong-mint);
 }
 del, s {
     font: inherit;
@@ -435,7 +435,8 @@ input:invalid {
     background-color: var(--umbra-medium-red);
     box-shadow: none;
 }
-select:focus, input:focus {
+select:focus,
+input:focus {
     outline: none;
     color: var(--umbra-pure-black);
     border: none;
@@ -617,7 +618,7 @@ summary:hover,
 summary:focus,
 summary:active {
     outline: none;
-    color: lightgreen;
+    color: var(--umbra-strong-mint);
     text-decoration: underline;
     text-underline-offset: 0.125em;
     text-decoration-thickness: 0.0625em;
@@ -647,7 +648,7 @@ div.traversal a:hover,
 div.traversal a:focus,
 div.traversal a:active {
     color: var(--umbra-deep-black);
-    background-color: lightgreen;
+    background-color: var(--umbra-strong-mint);
     transition: top 250ms cubic-bezier(0.5, -8, 0.2, 4);
 }
 div.next a:hover,
@@ -669,7 +670,7 @@ section a:focus,
 p a:focus,
 section a:active,
 p a:active {
-    color: lightgreen;
+    color: var(--umbra-strong-mint);
 }
 section a:focus-visible,
 p a:focus-visible {
@@ -692,8 +693,8 @@ div.tag_cloud a.tag:hover,
 div.tag_cloud a.tag:focus,
 div.tag_cloud a.tag:active {
     color: var(--umbra-deep-black);
-    background-color: lightgreen;
-    border-color: lightgreen;
+    background-color: var(--umbra-strong-mint);
+    border-color: var(--umbra-strong-mint);
 }
 div.metadata a.category {
     display: inline-block;
@@ -722,7 +723,7 @@ button:focus,
 div.doaction a:active,
 button:active {
     color: var(--umbra-pure-black);
-    background-color: lightgreen;
+    background-color: var(--umbra-strong-mint);
 }
 div.doaction a.post_delete_link,
 div.doaction a.delete_link {
@@ -730,7 +731,7 @@ div.doaction a.delete_link {
 }
 section.photo > a:focus,
 section a:has(img):focus {
-    outline: lightgreen solid 4px;
+    outline: var(--umbra-strong-mint) solid 4px;
 }
 a.likes > img,
 a.likes > svg {
@@ -765,7 +766,7 @@ a.archive_post_link {
 a.archive_post_link:hover,
 a.archive_post_link:focus,
 a.archive_post_link:active {
-    outline: lightgreen solid 4px;
+    outline: var(--umbra-strong-mint) solid 4px;
 }
 img {
     border-style: none;

@@ -473,7 +473,7 @@ header {
     font-size: 0.7rem;
     margin: 0rem;
     padding: 0.3rem 0rem;
-    border-top: 4px solid var(--virgula-inky-black);
+    border-top: 4px solid var(--virgula-pure-black);
     border-bottom: 2px solid var(--virgula-border-grey);
 }
 header > * {
@@ -516,7 +516,7 @@ button#search_submit {
 input#search_field:focus,
 button#search_submit:focus {
     outline: none;
-    border-bottom: 2px solid var(--virgula-inky-black);
+    border-bottom: 2px solid var(--virgula-pure-black);
 }
 div.filter {
     font-size: 1.5em;
@@ -565,7 +565,7 @@ button:focus {
 }
 div.doaction a:active,
 button:active {
-    background-color: var(--virgula-inky-black);
+    background-color: var(--virgula-pure-black);
 }
 img {
     border-style: none;
