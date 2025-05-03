@@ -1,4 +1,5 @@
 {{ trigger.call("before_post_fields", feather) }}
+{% set upload_disabled = visitor.group.can("add_upload") ? "" : " disabled" %}
 {% for field in feather.fields %}
 {% if attribute(post, field.attr) is defined %}
 {% set field_value = attribute(post, field.attr) %}
@@ -41,7 +42,7 @@
 <input id="{{ field_id }}" class="text" type="email" name="{{ field_name }}"{{ field_required }} value="{{ field_value | fix(true, true) }}">
 {% elseif field.type == "file" %}
 <span id="{{ field_id }}_toolbar" class="options_toolbar file_toolbar" role="toolbar"></span>
-<input id="{{ field_id }}" type="file" name="{{ field_name }}"{{ field_accept ~ field_multiple ~ field_required }} value="" data-file_list="{{ (field_value is iterable ? field_value | join(', ') : field_value) | fix(true) }}">
+<input id="{{ field_id }}" type="file" name="{{ field_name }}"{{ field_accept ~ field_multiple ~ field_required ~ upload_disabled }} value="" data-file_list="{{ (field_value is iterable ? field_value | join(', ') : field_value) | fix(true) }}">
 {% elseif field.type == "text_block" %}
 <span id="{{ field_id }}_toolbar" class="options_toolbar text_block_toolbar" role="toolbar">
 {%- if field_markdown is not empty -%}
@@ -154,7 +155,7 @@
 {% elseif field.type == "email" %}
 <input id="{{ field_id }}" class="text" type="email" name="{{ field_name }}" value="{{ field_value | fix(true, true) }}">
 {% elseif field.type == "file" %}
-<input id="{{ field_id }}" type="file" name="{{ field_name }}"{{ field_accept ~ field_multiple }} value="">
+<input id="{{ field_id }}" type="file" name="{{ field_name }}"{{ field_accept ~ field_multiple ~ upload_disabled }} value="">
 {% elseif field.type == "text_block" %}
 <textarea id="{{ field_id }}" name="{{ field_name }}" rows="10">{{ field_value | fix(false, true) }}</textarea>
 {% elseif field.type == "checkbox" %}
