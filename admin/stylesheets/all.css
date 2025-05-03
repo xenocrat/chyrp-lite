@@ -868,17 +868,17 @@ input::file-selector-button {
     margin-inline-end: 1rem;
 }
 button:hover,
-input::file-selector-button:hover,
+input:not([disabled])::file-selector-button:hover,
 a.button:hover,
 a.next_page:hover,
 a.prev_page:hover,
 button:focus,
-input::file-selector-button:focus,
+input:not([disabled])::file-selector-button:focus,
 a.button:focus,
 a.next_page:focus,
 a.prev_page:focus,
 button:active,
-input::file-selector-button:active,
+input:not([disabled])::file-selector-button:active,
 a.button:active,
 a.next_page:active,
 a.prev_page:active {
