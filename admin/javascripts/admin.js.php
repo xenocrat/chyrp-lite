@@ -415,9 +415,6 @@ var FileInput = {
                     else
                         $(this).addClass("error");
                 }
-            ).prop(
-                "disabled",
-                false
             );
         }
 
