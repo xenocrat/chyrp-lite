@@ -16,7 +16,7 @@ Called from:
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 1492
+	admin/javascripts/admin.js.php on line 1489
 
 
 admin_head
@@ -181,7 +181,7 @@ Arguments:
 after_post_fields
 -----------------
 Called from:
-	admin/partials/post_fields.twig on line 73
+	admin/partials/post_fields.twig on line 76
 
 Arguments:
 	feather

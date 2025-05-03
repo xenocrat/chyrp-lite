@@ -91,7 +91,7 @@ msgstr ""
 
 #: admin/help/markdown.twig:3 admin/help/markdown.twig:6
 #: admin/help/markdown.twig:13 admin/pages/content_settings.twig:106
-#: admin/partials/page_fields.twig:14 admin/partials/post_fields.twig:50
+#: admin/partials/page_fields.twig:14 admin/partials/post_fields.twig:53
 msgid "Markdown"
 msgstr "Markdown"
 
@@ -109,8 +109,8 @@ msgstr "结果"
 msgid "### Heading"
 msgstr ""
 
-#: admin/help/markdown.twig:20 admin/javascripts/admin.js.php:658
-#: admin/javascripts/admin.js.php:659
+#: admin/help/markdown.twig:20 admin/javascripts/admin.js.php:655
+#: admin/javascripts/admin.js.php:656
 msgid "Heading"
 msgstr ""
 
@@ -118,8 +118,8 @@ msgstr ""
 msgid "**Strong**"
 msgstr ""
 
-#: admin/help/markdown.twig:24 admin/javascripts/admin.js.php:677
-#: admin/javascripts/admin.js.php:678
+#: admin/help/markdown.twig:24 admin/javascripts/admin.js.php:674
+#: admin/javascripts/admin.js.php:675
 msgid "Strong"
 msgstr ""
 
@@ -127,8 +127,8 @@ msgstr ""
 msgid "*Emphasis*"
 msgstr ""
 
-#: admin/help/markdown.twig:28 admin/javascripts/admin.js.php:696
-#: admin/javascripts/admin.js.php:697
+#: admin/help/markdown.twig:28 admin/javascripts/admin.js.php:693
+#: admin/javascripts/admin.js.php:694
 msgid "Emphasis"
 msgstr ""
 
@@ -144,8 +144,8 @@ msgstr ""
 msgid "~~Strikethrough~~"
 msgstr ""
 
-#: admin/help/markdown.twig:36 admin/javascripts/admin.js.php:715
-#: admin/javascripts/admin.js.php:716
+#: admin/help/markdown.twig:36 admin/javascripts/admin.js.php:712
+#: admin/javascripts/admin.js.php:713
 msgid "Strikethrough"
 msgstr ""
 
@@ -153,8 +153,8 @@ msgstr ""
 msgid "`Code`"
 msgstr ""
 
-#: admin/help/markdown.twig:40 admin/javascripts/admin.js.php:734
-#: admin/javascripts/admin.js.php:735
+#: admin/help/markdown.twig:40 admin/javascripts/admin.js.php:731
+#: admin/javascripts/admin.js.php:732
 msgid "Code"
 msgstr ""
 
@@ -194,8 +194,8 @@ msgstr "新行"
 msgid "[title](URL)"
 msgstr ""
 
-#: admin/help/markdown.twig:61 admin/javascripts/admin.js.php:753
-#: admin/javascripts/admin.js.php:754
+#: admin/help/markdown.twig:61 admin/javascripts/admin.js.php:750
+#: admin/javascripts/admin.js.php:751
 msgid "Hyperlink"
 msgstr ""
 
@@ -203,8 +203,8 @@ msgstr ""
 msgid "![description](URL)"
 msgstr ""
 
-#: admin/help/markdown.twig:65 admin/javascripts/admin.js.php:810
-#: admin/javascripts/admin.js.php:811
+#: admin/help/markdown.twig:65 admin/javascripts/admin.js.php:807
+#: admin/javascripts/admin.js.php:808
 msgid "Image"
 msgstr "图像"
 
@@ -224,8 +224,8 @@ msgstr ""
 msgid "> Blockquote"
 msgstr ""
 
-#: admin/help/markdown.twig:77 admin/javascripts/admin.js.php:791
-#: admin/javascripts/admin.js.php:792
+#: admin/help/markdown.twig:77 admin/javascripts/admin.js.php:788
+#: admin/javascripts/admin.js.php:789
 msgid "Blockquote"
 msgstr ""
 
@@ -330,8 +330,8 @@ msgstr "不支持文件类型。"
 msgid "Maximum file size: %d Megabytes."
 msgstr "最大文件大小：%d兆字节。"
 
-#: admin/javascripts/admin.js.php:319 admin/javascripts/admin.js.php:460
-#: admin/javascripts/admin.js.php:1398
+#: admin/javascripts/admin.js.php:319 admin/javascripts/admin.js.php:457
+#: admin/javascripts/admin.js.php:1395
 msgid "Modal window"
 msgstr "模态窗口"
 
@@ -339,46 +339,46 @@ msgstr "模态窗口"
 msgid "Uploads"
 msgstr "上传"
 
-#: admin/javascripts/admin.js.php:354 admin/javascripts/admin.js.php:486
-#: admin/javascripts/admin.js.php:1430
+#: admin/javascripts/admin.js.php:354 admin/javascripts/admin.js.php:483
+#: admin/javascripts/admin.js.php:1427
 msgid "Close"
 msgstr "关闭"
 
-#: admin/javascripts/admin.js.php:469
+#: admin/javascripts/admin.js.php:466
 msgid "Help content"
 msgstr "帮助内容"
 
-#: admin/javascripts/admin.js.php:522 admin/javascripts/admin.js.php:523
+#: admin/javascripts/admin.js.php:519 admin/javascripts/admin.js.php:520
 #: admin/pages/manage_groups.twig:52 admin/pages/manage_pages.twig:69
 #: admin/pages/manage_posts.twig:57 admin/pages/manage_uploads.twig:71
 #: admin/pages/manage_users.twig:64
 msgid "Edit"
 msgstr "编辑"
 
-#: admin/javascripts/admin.js.php:543 admin/javascripts/admin.js.php:544
-#: admin/javascripts/admin.js.php:831 admin/javascripts/admin.js.php:832
+#: admin/javascripts/admin.js.php:540 admin/javascripts/admin.js.php:541
+#: admin/javascripts/admin.js.php:828 admin/javascripts/admin.js.php:829
 msgid "Insert"
 msgstr "插入"
 
-#: admin/javascripts/admin.js.php:589 admin/javascripts/admin.js.php:590
-#: admin/javascripts/admin.js.php:877 admin/javascripts/admin.js.php:878
+#: admin/javascripts/admin.js.php:586 admin/javascripts/admin.js.php:587
+#: admin/javascripts/admin.js.php:874 admin/javascripts/admin.js.php:875
 msgid "Upload"
 msgstr "上传"
 
-#: admin/javascripts/admin.js.php:772 admin/javascripts/admin.js.php:773
+#: admin/javascripts/admin.js.php:769 admin/javascripts/admin.js.php:770
 msgid "Horizontal rule"
 msgstr "水平规则"
 
-#: admin/javascripts/admin.js.php:951 admin/javascripts/admin.js.php:952
+#: admin/javascripts/admin.js.php:948 admin/javascripts/admin.js.php:949
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr "预览"
 
-#: admin/javascripts/admin.js.php:1006
+#: admin/javascripts/admin.js.php:1003
 msgid "Words:"
 msgstr "字数："
 
-#: admin/javascripts/admin.js.php:1408
+#: admin/javascripts/admin.js.php:1405
 msgid "Preview content"
 msgstr "预览内容"
 
@@ -460,8 +460,8 @@ msgstr "在提及 URL 时发送和接收通知。"
 #: admin/pages/general_settings.twig:38 admin/pages/manage_pages.twig:11
 #: admin/pages/manage_posts.twig:11 admin/pages/manage_users.twig:11
 #: admin/pages/route_settings.twig:13 admin/partials/page_fields.twig:27
-#: admin/partials/post_fields.twig:33 admin/partials/post_fields.twig:123
-#: admin/partials/post_fields.twig:147
+#: admin/partials/post_fields.twig:32 admin/partials/post_fields.twig:126
+#: admin/partials/post_fields.twig:150
 msgid "Help"
 msgstr "帮助"
 
@@ -511,7 +511,7 @@ msgstr "删除！"
 #: admin/pages/delete_group.twig:56 admin/pages/delete_page.twig:24
 #: admin/pages/delete_post.twig:17 admin/pages/delete_upload.twig:17
 #: admin/pages/delete_user.twig:50 admin/partials/page_fields.twig:86
-#: admin/partials/post_fields.twig:193
+#: admin/partials/post_fields.twig:196
 msgid "Cancel"
 msgstr "取消"
 
@@ -968,7 +968,7 @@ msgid "Posted"
 msgstr "已发布的"
 
 #: admin/pages/manage_posts.twig:29 admin/partials/page_fields.twig:33
-#: admin/partials/post_fields.twig:77
+#: admin/partials/post_fields.twig:80
 msgid "Status"
 msgstr "状态"
 
@@ -1236,7 +1236,7 @@ msgstr "写作"
 msgid "Body"
 msgstr "正文"
 
-#: admin/partials/page_fields.twig:25 admin/partials/post_fields.twig:121
+#: admin/partials/page_fields.twig:25 admin/partials/post_fields.twig:124
 msgid "Slug"
 msgstr ""
 
@@ -1244,7 +1244,7 @@ msgstr ""
 msgid "Public and visible in pages list"
 msgstr "公共并在页面列表中显示"
 
-#: admin/partials/page_fields.twig:38 admin/partials/post_fields.twig:85
+#: admin/partials/page_fields.twig:38 admin/partials/post_fields.twig:88
 msgid "Public"
 msgstr "公共"
 
@@ -1252,7 +1252,7 @@ msgstr "公共"
 msgid "Private and visible in pages list"
 msgstr "隐藏并在页面列表中显示"
 
-#: admin/partials/page_fields.twig:42 admin/partials/post_fields.twig:89
+#: admin/partials/page_fields.twig:42 admin/partials/post_fields.twig:92
 msgid "Private"
 msgstr "隐藏"
 
@@ -1276,41 +1276,41 @@ msgstr "低"
 msgid "Parent"
 msgstr "父级"
 
-#: admin/partials/page_fields.twig:76 admin/partials/post_fields.twig:183
-#: admin/partials/post_fields.twig:199
+#: admin/partials/page_fields.twig:76 admin/partials/post_fields.twig:186
+#: admin/partials/post_fields.twig:202
 msgid "Publish"
 msgstr "发布"
 
 #: admin/partials/page_fields.twig:79 admin/partials/page_fields.twig:83
-#: admin/partials/post_fields.twig:186 admin/partials/post_fields.twig:190
-#: admin/partials/post_fields.twig:203
+#: admin/partials/post_fields.twig:189 admin/partials/post_fields.twig:193
+#: admin/partials/post_fields.twig:206
 msgid "Save"
 msgstr "保存"
 
-#: admin/partials/post_fields.twig:81
+#: admin/partials/post_fields.twig:84
 msgid "Draft"
 msgstr "草稿"
 
-#: admin/partials/post_fields.twig:93
+#: admin/partials/post_fields.twig:96
 msgid "Scheduled"
 msgstr "定时发布"
 
-#: admin/partials/post_fields.twig:95
+#: admin/partials/post_fields.twig:98
 msgid "Visible only to a group of users:"
 msgstr "仅可见于一组用户："
 
-#: admin/partials/post_fields.twig:98
+#: admin/partials/post_fields.twig:101
 msgid "All registered users"
 msgstr "所有注册的用户"
 
-#: admin/partials/post_fields.twig:114
+#: admin/partials/post_fields.twig:117
 msgid "Pinned?"
 msgstr "置顶？"
 
-#: admin/partials/post_fields.twig:115
+#: admin/partials/post_fields.twig:118
 msgid "(shows this post above all others)"
 msgstr "（置顶显示）"
 
-#: admin/partials/post_fields.twig:129
+#: admin/partials/post_fields.twig:132
 msgid "Timestamp"
 msgstr "时间戳"
