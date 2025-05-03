@@ -47,6 +47,12 @@
                 isset($_FILES['filename']) and 
                 upload_tester($_FILES['filename'])
             ) {
+                if (!Visitor::current()->group->can("add_upload"))
+                    show_403(
+                        __("Access Denied"),
+                        __("You do not have sufficient privileges to add uploads.")
+                    );
+
                 $filename = upload(
                     $_FILES['filename'],
                     $this->image_extensions()
@@ -109,6 +115,12 @@
                 isset($_FILES['filename']) and
                 upload_tester($_FILES['filename'])
             ) {
+                if (!Visitor::current()->group->can("add_upload"))
+                    show_403(
+                        __("Access Denied"),
+                        __("You do not have sufficient privileges to add uploads.")
+                    );
+
                 $filename = upload(
                     $_FILES['filename'],
                     $this->image_extensions()
