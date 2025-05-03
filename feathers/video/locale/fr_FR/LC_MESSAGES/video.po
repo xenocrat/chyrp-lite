@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: feathers/video/info.php:3
@@ -41,10 +41,10 @@ msgstr "Image de remplacement"
 msgid "Description"
 msgstr "Description"
 
-#: feathers/video/video.php:84
+#: feathers/video/video.php:90
 msgid "You did not select a video to upload."
 msgstr "Vous n'avez pas sélectionné de vidéo à télécharger."
 
-#: feathers/video/video.php:297
+#: feathers/video/video.php:309
 msgid "Your web browser does not support the <code>video</code> element."
 msgstr "Votre navigateur ne supporte pas cet élément <code>vidéo</code>."

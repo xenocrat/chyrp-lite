@@ -29,11 +29,11 @@ msgstr ""
 msgid "Caption"
 msgstr ""
 
-#: feathers/uploader/uploader.php:75
+#: feathers/uploader/uploader.php:81
 msgid "You did not select any files to upload."
 msgstr ""
 
-#: feathers/uploader/uploader.php:226
+#: feathers/uploader/uploader.php:238
 msgid "Source"
 msgstr ""
 

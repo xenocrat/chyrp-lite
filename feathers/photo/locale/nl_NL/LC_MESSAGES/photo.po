@@ -9,11 +9,11 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: feathers/photo/admin/help/photo_alt_text.twig:3
-#: feathers/photo/admin/help/photo_alt_text.twig:6 feathers/photo/photo.php:185
+#: feathers/photo/admin/help/photo_alt_text.twig:6 feathers/photo/photo.php:197
 msgid "Alternative Text"
 msgstr "Alternatieve tekst"
 
@@ -54,10 +54,10 @@ msgstr "Titel"
 msgid "Caption"
 msgstr "Toelichting"
 
-#: feathers/photo/photo.php:64
+#: feathers/photo/photo.php:70
 msgid "You did not select a photo to upload."
 msgstr "Je hebt geen afbeelding geslecteerd om te uploaden."
 
-#: feathers/photo/photo.php:193
+#: feathers/photo/photo.php:205
 msgid "Source"
 msgstr "Bron"

@@ -28,11 +28,11 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: feathers/video/video.php:84
+#: feathers/video/video.php:90
 msgid "You did not select a video to upload."
 msgstr ""
 
-#: feathers/video/video.php:297
+#: feathers/video/video.php:309
 msgid "Your web browser does not support the <code>video</code> element."
 msgstr ""
 

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: admin/help/canonical_url.twig:3 admin/help/canonical_url.twig:6
@@ -74,16 +74,16 @@ msgstr ""
 "Utilisez la syntaxe <code>keyword:value;</code> pour une correspondance "
 "rapide des résultats où <code>keyword</code> est égal à <code>value</code>. "
 "Le mot clé peut être le nom d'une colonne de la base de données, le nom d'un "
-"auteur ou d'un groupe ou une date/une heure. Par exemple : <code>author:Foo;"
-"year:2016;</code> devrait filtrer le tableau des articles pour afficher "
-"uniquement ceux postés par Foo en 2016."
+"auteur ou d'un groupe ou une date/une heure. Par exemple : "
+"<code>author:Foo;year:2016;</code> devrait filtrer le tableau des articles "
+"pour afficher uniquement ceux postés par Foo en 2016."
 
 #: admin/help/filtering_results.twig:15
 msgid ""
 "Use the syntax <code>ASC:column;</code> or <code>DESC:column;</code> to sort "
-"the results in ascending or descending order. For example: <code>DESC:"
-"user_id;ASC:id;</code> would sort a table of posts in descending order of "
-"user ID and then ascending order of post ID."
+"the results in ascending or descending order. For example: "
+"<code>DESC:user_id;ASC:id;</code> would sort a table of posts in descending "
+"order of user ID and then ascending order of post ID."
 msgstr ""
 "Utilisez la syntaxe <code>ASC:column;</code> ou <code>DESC:column;</code> "
 "pour trier les résultats dans l'ordre croissant ou décroissant. Par "
@@ -104,7 +104,7 @@ msgstr ""
 
 #: admin/help/markdown.twig:3 admin/help/markdown.twig:6
 #: admin/help/markdown.twig:13 admin/pages/content_settings.twig:106
-#: admin/partials/page_fields.twig:14 admin/partials/post_fields.twig:49
+#: admin/partials/page_fields.twig:14 admin/partials/post_fields.twig:50
 msgid "Markdown"
 msgstr "Mardown"
 
@@ -124,8 +124,8 @@ msgstr "Résultat"
 msgid "### Heading"
 msgstr "### Titre"
 
-#: admin/help/markdown.twig:20 admin/javascripts/admin.js.php:648
-#: admin/javascripts/admin.js.php:649
+#: admin/help/markdown.twig:20 admin/javascripts/admin.js.php:658
+#: admin/javascripts/admin.js.php:659
 msgid "Heading"
 msgstr "Titre"
 
@@ -133,8 +133,8 @@ msgstr "Titre"
 msgid "**Strong**"
 msgstr "**Gras**"
 
-#: admin/help/markdown.twig:24 admin/javascripts/admin.js.php:667
-#: admin/javascripts/admin.js.php:668
+#: admin/help/markdown.twig:24 admin/javascripts/admin.js.php:677
+#: admin/javascripts/admin.js.php:678
 msgid "Strong"
 msgstr "Gras"
 
@@ -142,8 +142,8 @@ msgstr "Gras"
 msgid "*Emphasis*"
 msgstr "*Emphase*"
 
-#: admin/help/markdown.twig:28 admin/javascripts/admin.js.php:686
-#: admin/javascripts/admin.js.php:687
+#: admin/help/markdown.twig:28 admin/javascripts/admin.js.php:696
+#: admin/javascripts/admin.js.php:697
 msgid "Emphasis"
 msgstr "Emphase"
 
@@ -159,8 +159,8 @@ msgstr "Citation"
 msgid "~~Strikethrough~~"
 msgstr "~~Barré~~"
 
-#: admin/help/markdown.twig:36 admin/javascripts/admin.js.php:705
-#: admin/javascripts/admin.js.php:706
+#: admin/help/markdown.twig:36 admin/javascripts/admin.js.php:715
+#: admin/javascripts/admin.js.php:716
 msgid "Strikethrough"
 msgstr "Barré"
 
@@ -168,8 +168,8 @@ msgstr "Barré"
 msgid "`Code`"
 msgstr "`Code`"
 
-#: admin/help/markdown.twig:40 admin/javascripts/admin.js.php:724
-#: admin/javascripts/admin.js.php:725
+#: admin/help/markdown.twig:40 admin/javascripts/admin.js.php:734
+#: admin/javascripts/admin.js.php:735
 msgid "Code"
 msgstr "Code"
 
@@ -209,8 +209,8 @@ msgstr "Nouveau paragraphe"
 msgid "[title](URL)"
 msgstr "[titre](URL)"
 
-#: admin/help/markdown.twig:61 admin/javascripts/admin.js.php:743
-#: admin/javascripts/admin.js.php:744
+#: admin/help/markdown.twig:61 admin/javascripts/admin.js.php:753
+#: admin/javascripts/admin.js.php:754
 msgid "Hyperlink"
 msgstr "Lien hypertexte"
 
@@ -218,8 +218,8 @@ msgstr "Lien hypertexte"
 msgid "![description](URL)"
 msgstr "![description](URL)"
 
-#: admin/help/markdown.twig:65 admin/javascripts/admin.js.php:800
-#: admin/javascripts/admin.js.php:801
+#: admin/help/markdown.twig:65 admin/javascripts/admin.js.php:810
+#: admin/javascripts/admin.js.php:811
 msgid "Image"
 msgstr "Image"
 
@@ -239,8 +239,8 @@ msgstr "1. Liste d'items"
 msgid "> Blockquote"
 msgstr "> Bloc de citation"
 
-#: admin/help/markdown.twig:77 admin/javascripts/admin.js.php:781
-#: admin/javascripts/admin.js.php:782
+#: admin/help/markdown.twig:77 admin/javascripts/admin.js.php:791
+#: admin/javascripts/admin.js.php:792
 msgid "Blockquote"
 msgstr "Citation"
 
@@ -346,8 +346,8 @@ msgstr "Le type de fichier n’est pas pris en charge."
 msgid "Maximum file size: %d Megabytes."
 msgstr "Taille maximale du fichier : %d mégaoctets."
 
-#: admin/javascripts/admin.js.php:319 admin/javascripts/admin.js.php:450
-#: admin/javascripts/admin.js.php:1388
+#: admin/javascripts/admin.js.php:319 admin/javascripts/admin.js.php:460
+#: admin/javascripts/admin.js.php:1398
 msgid "Modal window"
 msgstr "Fenêtre modale"
 
@@ -355,46 +355,46 @@ msgstr "Fenêtre modale"
 msgid "Uploads"
 msgstr "Téléchargements"
 
-#: admin/javascripts/admin.js.php:354 admin/javascripts/admin.js.php:476
-#: admin/javascripts/admin.js.php:1420
+#: admin/javascripts/admin.js.php:354 admin/javascripts/admin.js.php:486
+#: admin/javascripts/admin.js.php:1430
 msgid "Close"
 msgstr "Fermer"
 
-#: admin/javascripts/admin.js.php:459
+#: admin/javascripts/admin.js.php:469
 msgid "Help content"
 msgstr "Contenu de l’aide"
 
-#: admin/javascripts/admin.js.php:512 admin/javascripts/admin.js.php:513
+#: admin/javascripts/admin.js.php:522 admin/javascripts/admin.js.php:523
 #: admin/pages/manage_groups.twig:52 admin/pages/manage_pages.twig:69
 #: admin/pages/manage_posts.twig:57 admin/pages/manage_uploads.twig:71
 #: admin/pages/manage_users.twig:64
 msgid "Edit"
 msgstr "Modifier"
 
-#: admin/javascripts/admin.js.php:533 admin/javascripts/admin.js.php:534
-#: admin/javascripts/admin.js.php:821 admin/javascripts/admin.js.php:822
+#: admin/javascripts/admin.js.php:543 admin/javascripts/admin.js.php:544
+#: admin/javascripts/admin.js.php:831 admin/javascripts/admin.js.php:832
 msgid "Insert"
 msgstr "Insérer"
 
-#: admin/javascripts/admin.js.php:579 admin/javascripts/admin.js.php:580
-#: admin/javascripts/admin.js.php:867 admin/javascripts/admin.js.php:868
+#: admin/javascripts/admin.js.php:589 admin/javascripts/admin.js.php:590
+#: admin/javascripts/admin.js.php:877 admin/javascripts/admin.js.php:878
 msgid "Upload"
 msgstr "Téléchargement"
 
-#: admin/javascripts/admin.js.php:762 admin/javascripts/admin.js.php:763
+#: admin/javascripts/admin.js.php:772 admin/javascripts/admin.js.php:773
 msgid "Horizontal rule"
 msgstr "Ligne horizontale"
 
-#: admin/javascripts/admin.js.php:941 admin/javascripts/admin.js.php:942
+#: admin/javascripts/admin.js.php:951 admin/javascripts/admin.js.php:952
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr "Prévisualisation"
 
-#: admin/javascripts/admin.js.php:996
+#: admin/javascripts/admin.js.php:1006
 msgid "Words:"
 msgstr "Mots :"
 
-#: admin/javascripts/admin.js.php:1398
+#: admin/javascripts/admin.js.php:1408
 msgid "Preview content"
 msgstr "Contenu du prévisualisation"
 
@@ -478,8 +478,8 @@ msgstr "Envoyer et recevoir des notifications quand les URL sont mentionnées."
 #: admin/pages/general_settings.twig:38 admin/pages/manage_pages.twig:11
 #: admin/pages/manage_posts.twig:11 admin/pages/manage_users.twig:11
 #: admin/pages/route_settings.twig:13 admin/partials/page_fields.twig:27
-#: admin/partials/post_fields.twig:32 admin/partials/post_fields.twig:122
-#: admin/partials/post_fields.twig:146
+#: admin/partials/post_fields.twig:33 admin/partials/post_fields.twig:123
+#: admin/partials/post_fields.twig:147
 msgid "Help"
 msgstr "Aider"
 
@@ -530,7 +530,7 @@ msgstr "Supprimé !"
 #: admin/pages/delete_group.twig:56 admin/pages/delete_page.twig:24
 #: admin/pages/delete_post.twig:17 admin/pages/delete_upload.twig:17
 #: admin/pages/delete_user.twig:50 admin/partials/page_fields.twig:86
-#: admin/partials/post_fields.twig:192
+#: admin/partials/post_fields.twig:193
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -993,7 +993,7 @@ msgid "Posted"
 msgstr "Posté"
 
 #: admin/pages/manage_posts.twig:29 admin/partials/page_fields.twig:33
-#: admin/partials/post_fields.twig:76
+#: admin/partials/post_fields.twig:77
 msgid "Status"
 msgstr "Statut"
 
@@ -1263,7 +1263,7 @@ msgstr "Écrire"
 msgid "Body"
 msgstr "Écrire"
 
-#: admin/partials/page_fields.twig:25 admin/partials/post_fields.twig:120
+#: admin/partials/page_fields.twig:25 admin/partials/post_fields.twig:121
 msgid "Slug"
 msgstr "Slug"
 
@@ -1271,7 +1271,7 @@ msgstr "Slug"
 msgid "Public and visible in pages list"
 msgstr "Liste des pages publiques et visibles"
 
-#: admin/partials/page_fields.twig:38 admin/partials/post_fields.twig:84
+#: admin/partials/page_fields.twig:38 admin/partials/post_fields.twig:85
 msgid "Public"
 msgstr "Public"
 
@@ -1279,7 +1279,7 @@ msgstr "Public"
 msgid "Private and visible in pages list"
 msgstr "Liste des pages visibles et privées"
 
-#: admin/partials/page_fields.twig:42 admin/partials/post_fields.twig:88
+#: admin/partials/page_fields.twig:42 admin/partials/post_fields.twig:89
 msgid "Private"
 msgstr "Privée"
 
@@ -1303,41 +1303,41 @@ msgstr "Bas"
 msgid "Parent"
 msgstr "Parent"
 
-#: admin/partials/page_fields.twig:76 admin/partials/post_fields.twig:182
-#: admin/partials/post_fields.twig:198
+#: admin/partials/page_fields.twig:76 admin/partials/post_fields.twig:183
+#: admin/partials/post_fields.twig:199
 msgid "Publish"
 msgstr "Publier"
 
 #: admin/partials/page_fields.twig:79 admin/partials/page_fields.twig:83
-#: admin/partials/post_fields.twig:185 admin/partials/post_fields.twig:189
-#: admin/partials/post_fields.twig:202
+#: admin/partials/post_fields.twig:186 admin/partials/post_fields.twig:190
+#: admin/partials/post_fields.twig:203
 msgid "Save"
 msgstr "Sauvegarder"
 
-#: admin/partials/post_fields.twig:80
+#: admin/partials/post_fields.twig:81
 msgid "Draft"
 msgstr "Brouillon"
 
-#: admin/partials/post_fields.twig:92
+#: admin/partials/post_fields.twig:93
 msgid "Scheduled"
 msgstr "Programmé"
 
-#: admin/partials/post_fields.twig:94
+#: admin/partials/post_fields.twig:95
 msgid "Visible only to a group of users:"
 msgstr "Visible seulement par un groupe d'utilisateurs :"
 
-#: admin/partials/post_fields.twig:97
+#: admin/partials/post_fields.twig:98
 msgid "All registered users"
 msgstr "Tous les utilisateurs enregistrés"
 
-#: admin/partials/post_fields.twig:113
+#: admin/partials/post_fields.twig:114
 msgid "Pinned?"
 msgstr "Épingler ?"
 
-#: admin/partials/post_fields.twig:114
+#: admin/partials/post_fields.twig:115
 msgid "(shows this post above all others)"
 msgstr "(montrer cet article au-dessus de tous les autres)"
 
-#: admin/partials/post_fields.twig:128
+#: admin/partials/post_fields.twig:129
 msgid "Timestamp"
 msgstr "Timestamp"
