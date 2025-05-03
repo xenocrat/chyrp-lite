@@ -390,14 +390,21 @@ var FileInput = {
         target
     ) {
         if (target.attr("type") === "file") {
-            target.attr("type", "text");
-            target.attr("name", target.attr("name").replace(/\[\]$/, ""));
-            target.val(target.attr("data-file_list") || "");
             target.attr(
+                "type",
+                "text"
+            ).attr(
+                "name",
+                target.attr("name").replace(/\[\]$/, "")
+            ).val(
+                target.attr("data-file_list") || ""
+            ).attr(
                 "pattern",
                 (typeof target.attr("multiple") === "undefined") ?
                     "^[a-z0-9\\-\\.]*$" :
                     "^([a-z0-9\\-\\.](, *)?)*$"
+            ).addClass(
+                "text"
             ).keyup(
                 function(e) {
                     var value = $(this).val();
@@ -408,6 +415,9 @@ var FileInput = {
                     else
                         $(this).addClass("error");
                 }
+            ).prop(
+                "disabled",
+                false
             );
         }
 
