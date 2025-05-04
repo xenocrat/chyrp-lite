@@ -57,7 +57,7 @@
 <textarea id="{{ field_id }}" name="{{ field_name }}" rows="10"{{ field_preview ~ field_markdown ~ field_required }}>{{ field_value | fix(false, true) }}</textarea>
 <span id="{{ field_id }}_tray" class="options_tray" role="status"></span>
 {% elseif field.type == "checkbox" %}
-<input id="{{ field_id }}" type="checkbox" name="{{ field_name }}"{{ field.checked | checked }}>
+<input id="{{ field_id }}" type="checkbox" name="{{ field_name }}"{{ field_value | checked }}>
 {% elseif field.type == "select" %}
 <select id="{{ field_id }}" name="{{ field_name }}">
 {% for value, name in field.options %}
@@ -117,7 +117,7 @@
 {{ "Pinned?" | translate }}
 {{ "(shows this post above all others)" | translate }}
 </label>
-<input id="pinned" type="checkbox" name="pinned"{{ post is defined ? post.pinned | checked : "" }}>
+<input id="pinned" type="checkbox" name="pinned"{{ (post is defined ? post.pinned : false) | checked }}>
 </p>
 <p class="more_options_option">
 <label for="slug">
@@ -162,7 +162,7 @@
 {% elseif field.type == "text_block" %}
 <textarea id="{{ field_id }}" name="{{ field_name }}" rows="10">{{ field_value | fix(false, true) }}</textarea>
 {% elseif field.type == "checkbox" %}
-<input id="{{ field_id }}" type="checkbox" name="{{ field_name }}"{{ field.checked | checked }}>
+<input id="{{ field_id }}" type="checkbox" name="{{ field_name }}"{{ field_value | checked }}>
 {% elseif field.type == "select" %}
 <select id="{{ field_id }}" name="{{ field_name }}">
 {% for option in field.options %}
