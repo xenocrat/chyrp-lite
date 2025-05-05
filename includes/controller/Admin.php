@@ -674,12 +674,25 @@
                 );
 
             fallback($_POST['parent_id'], 0);
-            fallback($_POST['status'], "public");
+            fallback($_POST['status'], Page::STATUS_PUBLIC);
             fallback($_POST['list_priority'], 0);
             fallback($_POST['slug'], $_POST['title']);
 
-            $public = in_array($_POST['status'], array("listed", "public"));
-            $listed = in_array($_POST['status'], array("listed", "teased"));
+            $public = in_array(
+                $_POST['status'],
+                array(
+                    Page::STATUS_LISTED,
+                    Page::STATUS_PUBLIC
+                )
+            );
+
+            $listed = in_array(
+                $_POST['status'],
+                array(
+                    Page::STATUS_LISTED,
+                    Page::STATUS_TEASED
+                )
+            );
 
             if (isset($_POST['private'])) {
                 $public = false;
@@ -816,7 +829,7 @@
                 );
 
             fallback($_POST['parent_id'], 0);
-            fallback($_POST['status'], "public");
+            fallback($_POST['status'], Page::STATUS_PUBLIC);
             fallback($_POST['list_priority'], 0);
             fallback($_POST['slug'], "");
 
@@ -3431,8 +3444,8 @@
 
             fallback($_POST['posts_per_page'], 5);
             fallback($_POST['admin_per_page'], 25);
-            fallback($_POST['default_post_status'], "public");
-            fallback($_POST['default_page_status'], "listed");
+            fallback($_POST['default_post_status'], Post::STATUS_PUBLIC);
+            fallback($_POST['default_page_status'], Page::STATUS_LISTED);
             fallback($_POST['feed_items'], 20);
             fallback($_POST['feed_format'], "AtomFeed");
             fallback($_POST['uploads_path'], "");
