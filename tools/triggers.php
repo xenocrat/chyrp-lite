@@ -622,6 +622,9 @@
                 overflow-x: auto;
                 white-space: pre;
             }
+            pre:focus-visible {
+                outline: var(--chyrp-strong-orange) dashed 2px;
+            }
             code {
                 font-family: "Cousine webfont", monospace;
                 font-size: 0.85em;

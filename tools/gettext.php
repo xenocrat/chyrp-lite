@@ -729,6 +729,9 @@
                 vertical-align: bottom;
                 white-space: break-spaces;
             }
+            pre:focus-visible {
+                outline: var(--chyrp-strong-orange) dashed 2px;
+            }
             pre > code {
                 font-size: 0.85rem;
                 display: block;
