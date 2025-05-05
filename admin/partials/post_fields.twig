@@ -102,8 +102,8 @@
 </option>
 {% if groups is not empty %}
 {% for group in groups %}
-{% set group_selected = post_status | selected("{" ~ group.id ~ "}") %}
-<option value="{{ '{' ~ group.id ~ '}' }}"{{ group_selected }}>
+{% set group_id = "{" ~ group.id ~ "}" %}
+<option value="{{ group_id }}"{{ group_id | selected(post_status) }}>
 {{ group.name | fix(false, true) }}
 </option>
 {% endfor %}
