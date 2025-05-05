@@ -32,35 +32,49 @@
 <p class="more_options_option">
 <label for="status">{{ "Status" | translate }}</label>
 <select name="status" id="status">
-{% set option_selected = (page is defined ? page.status : site.default_page_status) | selected("listed") %}
-<option value="listed"{{ option_selected }}>{{ "Public and visible in pages list" | translate }}</option>
-{% set option_selected = (page is defined ? page.status : site.default_page_status) | selected("public") %}
-<option value="public"{{ option_selected }}>{{ "Public" | translate }}</option>
-{% set option_selected = (page is defined ? page.status : site.default_page_status) | selected("teased") %}
-<option value="teased"{{ option_selected }}>{{ "Private and visible in pages list" | translate }}</option>
-{% set option_selected = (page is defined ? page.status : site.default_page_status) | selected("private") %}
-<option value="private"{{ option_selected }}>{{ "Private" | translate }}</option>
+{% set page_status = page is defined ? page.status : site.default_page_status %}
+{% set status_constant = constant("Page::STATUS_LISTED") %}
+<option value="{{ status_constant }}"{{ status_constant | selected(page_status) }}>
+{{ "Public and visible in pages list" | translate }}
+</option>
+{% set status_constant = constant("Page::STATUS_PUBLIC") %}
+<option value="{{ status_constant }}"{{ status_constant | selected(page_status) }}>
+{{ "Public" | translate }}
+</option>
+{% set status_constant = constant("Page::STATUS_TEASED") %}
+<option value="{{ status_constant }}"{{ status_constant | selected(page_status) }}>
+{{ "Private and visible in pages list" | translate }}
+</option>
+{% set status_constant = constant("Page::STATUS_PRIVATE") %}
+<option value="{{ status_constant }}"{{ status_constant | selected(page_status) }}>
+{{ "Private" | translate }}
+</option>
 </select>
 </p>
 <p class="more_options_option">
 <label for="list_priority">{{ "Priority in pages list" | translate }}</label>
 <select name="list_priority" id="list_priority">
-{% set option_selected = page is defined ? page.list_order | selected(0,1,2) : "" %}
-<option value="0"{{ option_selected }}>{{ "High" | translate }}</option>
-{% set option_selected = page is defined ? page.list_order | selected(3,4,5) : " selected" %}
-<option value="4"{{ option_selected }}>{{ "Medium" | translate }}</option>
-{% set option_selected = page is defined ? page.list_order | selected(6,7,8) : "" %}
-<option value="8"{{ option_selected }}>{{ "Low" | translate }}</option>
+{% set page_list_order = page is defined ? page.list_order : 4 %}
+<option value="0"{{ page_list_order | selected(0,1,2) }}>
+{{ "High" | translate }}
+</option>
+<option value="4"{{ page_list_order | selected(3,4,5) }}>
+{{ "Medium" | translate }}
+</option>
+<option value="8"{{ page_list_order | selected(6,7,8) }}>
+{{ "Low" | translate }}
+</option>
 </select>
 </p>
 <p class="more_options_option">
 <label for="parent_id">{{ "Parent" | translate }}</label>
 <select name="parent_id" id="parent_id">
 <option value="0">{{ "[None]" | translate }}</option>
+{% set page_parent_id = page is defined ? page.parent_id : 0 %}
 {% for item in theme.pages_list(0, page is defined ? page.id : null) %}
-{% set option_selected = page is defined ? page.parent_id | selected(item.id) : "" %}
-{% set option_contents = ("&nbsp;" | repeat((item.depth - 1) * 4)) ~ (item.title | striptags | fix) %}
-<option value="{{ item.id }}"{{ option_selected }}>{{ option_contents }}</option>
+<option value="{{ item.id }}"{{ item.id | selected(page_parent_id) }}>
+{{ item.title | striptags | fix }}
+</option>
 {% endfor %}
 </select>
 </p>
