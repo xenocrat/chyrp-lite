@@ -184,6 +184,9 @@ pre {
     overflow-x: auto;
     white-space: pre;
 }
+pre:focus-visible {
+    outline: var(--umbra-strong-mint) solid 4px;
+}
 code {
     font-family: "Cousine webfont", monospace;
     font-size: 0.85em;
