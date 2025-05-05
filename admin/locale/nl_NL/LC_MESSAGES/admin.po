@@ -527,8 +527,8 @@ msgstr "Verwijder!"
 
 #: admin/pages/delete_group.twig:56 admin/pages/delete_page.twig:24
 #: admin/pages/delete_post.twig:17 admin/pages/delete_upload.twig:17
-#: admin/pages/delete_user.twig:50 admin/partials/page_fields.twig:86
-#: admin/partials/post_fields.twig:196
+#: admin/pages/delete_user.twig:50 admin/partials/page_fields.twig:100
+#: admin/partials/post_fields.twig:195
 msgid "Cancel"
 msgstr "Annuleer"
 
@@ -991,11 +991,11 @@ msgid "Posted"
 msgstr "Geplaatst"
 
 #: admin/pages/manage_posts.twig:29 admin/partials/page_fields.twig:33
-#: admin/partials/post_fields.twig:80
+#: admin/partials/post_fields.twig:79
 msgid "Status"
 msgstr "Status"
 
-#: admin/pages/manage_posts.twig:48 admin/partials/page_fields.twig:59
+#: admin/pages/manage_posts.twig:48 admin/partials/page_fields.twig:72
 msgid "[None]"
 msgstr "[Geen]"
 
@@ -1265,50 +1265,50 @@ msgstr "Body"
 msgid "Slug"
 msgstr "Slug"
 
-#: admin/partials/page_fields.twig:36
+#: admin/partials/page_fields.twig:38
 msgid "Public and visible in pages list"
 msgstr "Openbaar en zichtbaar in pagina-lijst"
 
-#: admin/partials/page_fields.twig:38 admin/partials/post_fields.twig:88
+#: admin/partials/page_fields.twig:42 admin/partials/post_fields.twig:88
 msgid "Public"
 msgstr "Openbaar"
 
-#: admin/partials/page_fields.twig:40
+#: admin/partials/page_fields.twig:46
 msgid "Private and visible in pages list"
 msgstr "Privé en zichtbaar in pagina-lijst"
 
-#: admin/partials/page_fields.twig:42 admin/partials/post_fields.twig:92
+#: admin/partials/page_fields.twig:50 admin/partials/post_fields.twig:92
 msgid "Private"
 msgstr "Privé"
 
-#: admin/partials/page_fields.twig:46
+#: admin/partials/page_fields.twig:55
 msgid "Priority in pages list"
 msgstr "Rangorde in pagina-lijst"
 
-#: admin/partials/page_fields.twig:49
+#: admin/partials/page_fields.twig:59
 msgid "High"
 msgstr "Hoog"
 
-#: admin/partials/page_fields.twig:51
+#: admin/partials/page_fields.twig:62
 msgid "Medium"
 msgstr "Gemiddeld"
 
-#: admin/partials/page_fields.twig:53
+#: admin/partials/page_fields.twig:65
 msgid "Low"
 msgstr "Laag"
 
-#: admin/partials/page_fields.twig:57
+#: admin/partials/page_fields.twig:70
 msgid "Parent"
 msgstr "Bovenliggend"
 
-#: admin/partials/page_fields.twig:76 admin/partials/post_fields.twig:186
-#: admin/partials/post_fields.twig:202
+#: admin/partials/page_fields.twig:90 admin/partials/post_fields.twig:185
+#: admin/partials/post_fields.twig:201
 msgid "Publish"
 msgstr "Publiceer"
 
-#: admin/partials/page_fields.twig:79 admin/partials/page_fields.twig:83
-#: admin/partials/post_fields.twig:189 admin/partials/post_fields.twig:193
-#: admin/partials/post_fields.twig:206
+#: admin/partials/page_fields.twig:93 admin/partials/page_fields.twig:97
+#: admin/partials/post_fields.twig:188 admin/partials/post_fields.twig:192
+#: admin/partials/post_fields.twig:205
 msgid "Save"
 msgstr "Opslaan"
 

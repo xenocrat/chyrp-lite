@@ -529,8 +529,8 @@ msgstr "Supprimé !"
 
 #: admin/pages/delete_group.twig:56 admin/pages/delete_page.twig:24
 #: admin/pages/delete_post.twig:17 admin/pages/delete_upload.twig:17
-#: admin/pages/delete_user.twig:50 admin/partials/page_fields.twig:86
-#: admin/partials/post_fields.twig:196
+#: admin/pages/delete_user.twig:50 admin/partials/page_fields.twig:100
+#: admin/partials/post_fields.twig:195
 msgid "Cancel"
 msgstr "Cancel"
 
@@ -993,11 +993,11 @@ msgid "Posted"
 msgstr "Posté"
 
 #: admin/pages/manage_posts.twig:29 admin/partials/page_fields.twig:33
-#: admin/partials/post_fields.twig:80
+#: admin/partials/post_fields.twig:79
 msgid "Status"
 msgstr "Statut"
 
-#: admin/pages/manage_posts.twig:48 admin/partials/page_fields.twig:59
+#: admin/pages/manage_posts.twig:48 admin/partials/page_fields.twig:72
 msgid "[None]"
 msgstr "[Aucun]"
 
@@ -1267,50 +1267,50 @@ msgstr "Écrire"
 msgid "Slug"
 msgstr "Slug"
 
-#: admin/partials/page_fields.twig:36
+#: admin/partials/page_fields.twig:38
 msgid "Public and visible in pages list"
 msgstr "Liste des pages publiques et visibles"
 
-#: admin/partials/page_fields.twig:38 admin/partials/post_fields.twig:88
+#: admin/partials/page_fields.twig:42 admin/partials/post_fields.twig:88
 msgid "Public"
 msgstr "Public"
 
-#: admin/partials/page_fields.twig:40
+#: admin/partials/page_fields.twig:46
 msgid "Private and visible in pages list"
 msgstr "Liste des pages visibles et privées"
 
-#: admin/partials/page_fields.twig:42 admin/partials/post_fields.twig:92
+#: admin/partials/page_fields.twig:50 admin/partials/post_fields.twig:92
 msgid "Private"
 msgstr "Privée"
 
-#: admin/partials/page_fields.twig:46
+#: admin/partials/page_fields.twig:55
 msgid "Priority in pages list"
 msgstr "Priorité dans la liste des pages"
 
-#: admin/partials/page_fields.twig:49
+#: admin/partials/page_fields.twig:59
 msgid "High"
 msgstr "Haut"
 
-#: admin/partials/page_fields.twig:51
+#: admin/partials/page_fields.twig:62
 msgid "Medium"
 msgstr "Moyen"
 
-#: admin/partials/page_fields.twig:53
+#: admin/partials/page_fields.twig:65
 msgid "Low"
 msgstr "Bas"
 
-#: admin/partials/page_fields.twig:57
+#: admin/partials/page_fields.twig:70
 msgid "Parent"
 msgstr "Parent"
 
-#: admin/partials/page_fields.twig:76 admin/partials/post_fields.twig:186
-#: admin/partials/post_fields.twig:202
+#: admin/partials/page_fields.twig:90 admin/partials/post_fields.twig:185
+#: admin/partials/post_fields.twig:201
 msgid "Publish"
 msgstr "Publier"
 
-#: admin/partials/page_fields.twig:79 admin/partials/page_fields.twig:83
-#: admin/partials/post_fields.twig:189 admin/partials/post_fields.twig:193
-#: admin/partials/post_fields.twig:206
+#: admin/partials/page_fields.twig:93 admin/partials/page_fields.twig:97
+#: admin/partials/post_fields.twig:188 admin/partials/post_fields.twig:192
+#: admin/partials/post_fields.twig:205
 msgid "Save"
 msgstr "Sauvegarder"
 
