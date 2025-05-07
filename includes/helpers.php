@@ -58,6 +58,13 @@
 
         if (isset($_COOKIE['ChyrpSession']))
             setcookie(session_name(), session_id(), $options_cookie);
+
+        if (!ini_get("session.gc_probability")) {
+            if (random_int(1, 100) === 42) {
+                error_log("SESSION gc");
+                $handler->gc(COOKIE_LIFETIME);
+            }
+        }
     }
 
     /**
