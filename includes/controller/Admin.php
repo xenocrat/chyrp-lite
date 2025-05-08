@@ -214,7 +214,7 @@
             $enabled_feathers = $config->enabled_feathers;
 
             if (empty($enabled_feathers))
-                Flash::notice(
+                Flash::warning(
                     __("You must enable at least one feather in order to write a post."),
                     "feathers"
                 );
@@ -238,6 +238,11 @@
             $options = array();
             $trigger->filter($options, "write_post_options", null, $feather);
             $trigger->filter($options, "post_options", null, $feather);
+
+            if (!Visitor::current()->group->can("add_upload"))
+                Flash::message(
+                    __("You do not have sufficient privileges to add uploads.")
+                );
 
             $this->display(
                 "pages".DIR."write_post",
@@ -340,6 +345,11 @@
             $options = array();
             $trigger->filter($options, "edit_post_options", $post, $post->feather);
             $trigger->filter($options, "post_options", $post, $post->feather);
+
+            if (!Visitor::current()->group->can("add_upload"))
+                Flash::message(
+                    __("You do not have sufficient privileges to add uploads.")
+                );
 
             $this->display(
                 "pages".DIR."edit_post",
@@ -2156,16 +2166,17 @@
                     __("File not found.")
                 );
 
-            if (!delete_upload($filename))
+            if (delete_upload($filename)) {
+                Flash::notice(
+                    __("Upload deleted."),
+                    "manage_uploads"
+                );
+            } else {
                 Flash::warning(
                     __("Failed to delete upload."),
                     "manage_uploads"
                 );
-
-            Flash::notice(
-                __("Upload deleted."),
-                "manage_uploads"
-            );
+            }
         }
 
         /**
