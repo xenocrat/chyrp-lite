@@ -1983,7 +1983,12 @@
                     code:400
                 );
 
-            $filename = str_replace(array(DIR, "/"), "", $_GET['file']);
+            $filename = str_replace(
+                array(DIR, "/", "<", ">"),
+                "",
+                $_GET['file']
+            );
+
             $filepath = uploaded($filename, false);
 
             if (!is_readable($filepath) or !is_file($filepath))
@@ -2038,7 +2043,12 @@
                     code:422
                 );
 
-            $filename = str_replace(array(DIR, "/"), "", $_POST['file']);
+            $filename = str_replace(
+                array(DIR, "/", "<", ">"),
+                "",
+                $_POST['file']
+            );
+
             $filepath = uploaded($filename, false);
 
             if (!is_readable($filepath) or !is_file($filepath))
@@ -2088,7 +2098,12 @@
                     code:400
                 );
 
-            $filename = str_replace(array(DIR, "/"), "", $_GET['file']);
+            $filename = str_replace(
+                array(DIR, "/", "<", ">"),
+                "",
+                $_GET['file']
+            );
+
             $filepath = uploaded($filename, false);
 
             if (!is_readable($filepath) or !is_file($filepath))
@@ -2157,7 +2172,12 @@
                     code:400
                 );
 
-            $filename = str_replace(array(DIR, "/"), "", $_POST['file']);
+            $filename = str_replace(
+                array(DIR, "/", "<", ">"),
+                "",
+                $_POST['file']
+            );
+
             $filepath = uploaded($filename, false);
 
             if (!is_readable($filepath) or !is_file($filepath))
