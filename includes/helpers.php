@@ -3343,19 +3343,28 @@
     function delete_upload(
         $filename
     ): bool {
-        $filename = str_replace(array(DIR, "/"), "", $filename);
+        $filename = str_replace(
+            array(DIR, "/", "<", ">"),
+            "",
+            $filename
+        );
 
         if ($filename == "")
             return false;
 
+        $trigger = Trigger::current();
+        $result = false;
         $filepath = uploaded($filename, false);
 
         if (file_exists($filepath)) {
-            Trigger::current()->call("before_delete_upload", $filename);
-            return @unlink($filepath);
+            $trigger->call("before_delete_upload", $filename);
+
+            $result = $trigger->exists("delete_upload") ?
+                $trigger->call("delete_upload", $filename) :
+                @unlink($filepath) ;
         }
 
-        return false;
+        return (bool) $result;
     }
 
     #---------------------------------------------
