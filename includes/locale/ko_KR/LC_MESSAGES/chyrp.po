@@ -81,12 +81,12 @@ msgstr "경로가 잘못된 컨트롤러로 시작되었습니다."
 #: includes/controller/Admin.php:1689 includes/controller/Admin.php:1698
 #: includes/controller/Admin.php:1714 includes/controller/Admin.php:1838
 #: includes/controller/Admin.php:1862 includes/controller/Admin.php:1884
-#: includes/controller/Admin.php:1981 includes/controller/Admin.php:2026
-#: includes/controller/Admin.php:2036 includes/controller/Admin.php:2060
-#: includes/controller/Admin.php:2086 includes/controller/Admin.php:2155
-#: includes/controller/Admin.php:3089 includes/controller/Admin.php:3168
-#: includes/controller/Admin.php:3314 includes/controller/Admin.php:3321
-#: includes/controller/Admin.php:3328 includes/controller/Admin.php:3706
+#: includes/controller/Admin.php:1981 includes/controller/Admin.php:2031
+#: includes/controller/Admin.php:2041 includes/controller/Admin.php:2070
+#: includes/controller/Admin.php:2096 includes/controller/Admin.php:2170
+#: includes/controller/Admin.php:3109 includes/controller/Admin.php:3188
+#: includes/controller/Admin.php:3334 includes/controller/Admin.php:3341
+#: includes/controller/Admin.php:3348 includes/controller/Admin.php:3726
 #: includes/controller/Ajax.php:38 includes/controller/Ajax.php:173
 #: includes/controller/Ajax.php:238 includes/controller/Ajax.php:284
 #: includes/controller/Main.php:1264 includes/download.php:14
@@ -136,22 +136,22 @@ msgstr "올바르지 않은 액션입니다."
 #: includes/controller/Admin.php:1670 includes/controller/Admin.php:1676
 #: includes/controller/Admin.php:1746 includes/controller/Admin.php:1793
 #: includes/controller/Admin.php:1799 includes/controller/Admin.php:1925
-#: includes/controller/Admin.php:1975 includes/controller/Admin.php:2014
-#: includes/controller/Admin.php:2020 includes/controller/Admin.php:2054
-#: includes/controller/Admin.php:2080 includes/controller/Admin.php:2140
-#: includes/controller/Admin.php:2146 includes/controller/Admin.php:2190
-#: includes/controller/Admin.php:2249 includes/controller/Admin.php:2260
-#: includes/controller/Admin.php:2602 includes/controller/Admin.php:2613
-#: includes/controller/Admin.php:2874 includes/controller/Admin.php:2968
-#: includes/controller/Admin.php:3013 includes/controller/Admin.php:3055
-#: includes/controller/Admin.php:3061 includes/controller/Admin.php:3134
-#: includes/controller/Admin.php:3140 includes/controller/Admin.php:3207
-#: includes/controller/Admin.php:3213 includes/controller/Admin.php:3251
-#: includes/controller/Admin.php:3269 includes/controller/Admin.php:3290
-#: includes/controller/Admin.php:3308 includes/controller/Admin.php:3376
-#: includes/controller/Admin.php:3452 includes/controller/Admin.php:3509
-#: includes/controller/Admin.php:3524 includes/controller/Admin.php:3577
-#: includes/controller/Admin.php:3591 includes/controller/Admin.php:3658
+#: includes/controller/Admin.php:1975 includes/controller/Admin.php:2019
+#: includes/controller/Admin.php:2025 includes/controller/Admin.php:2064
+#: includes/controller/Admin.php:2090 includes/controller/Admin.php:2155
+#: includes/controller/Admin.php:2161 includes/controller/Admin.php:2210
+#: includes/controller/Admin.php:2269 includes/controller/Admin.php:2280
+#: includes/controller/Admin.php:2622 includes/controller/Admin.php:2633
+#: includes/controller/Admin.php:2894 includes/controller/Admin.php:2988
+#: includes/controller/Admin.php:3033 includes/controller/Admin.php:3075
+#: includes/controller/Admin.php:3081 includes/controller/Admin.php:3154
+#: includes/controller/Admin.php:3160 includes/controller/Admin.php:3227
+#: includes/controller/Admin.php:3233 includes/controller/Admin.php:3271
+#: includes/controller/Admin.php:3289 includes/controller/Admin.php:3310
+#: includes/controller/Admin.php:3328 includes/controller/Admin.php:3396
+#: includes/controller/Admin.php:3472 includes/controller/Admin.php:3529
+#: includes/controller/Admin.php:3544 includes/controller/Admin.php:3597
+#: includes/controller/Admin.php:3611 includes/controller/Admin.php:3678
 #: includes/controller/Ajax.php:64 includes/controller/Ajax.php:87
 #: includes/controller/Ajax.php:103 includes/controller/Ajax.php:109
 #: includes/controller/Ajax.php:140 includes/controller/Ajax.php:155
@@ -219,9 +219,9 @@ msgstr "게시물을 작성하려면 하나 이상의 깃털을 활성화해야 
 #: includes/controller/Admin.php:1386 includes/controller/Admin.php:1439
 #: includes/controller/Admin.php:1649 includes/controller/Admin.php:1723
 #: includes/controller/Admin.php:1761 includes/controller/Admin.php:1817
-#: includes/controller/Admin.php:1991 includes/controller/Admin.php:2046
-#: includes/controller/Admin.php:2096 includes/controller/Admin.php:2165
-#: includes/controller/Admin.php:3096 includes/controller/Admin.php:3175
+#: includes/controller/Admin.php:1996 includes/controller/Admin.php:2056
+#: includes/controller/Admin.php:2111 includes/controller/Admin.php:2185
+#: includes/controller/Admin.php:3116 includes/controller/Admin.php:3195
 #: includes/controller/Ajax.php:81 includes/controller/Ajax.php:124
 #: includes/controller/Main.php:284 includes/download.php:33
 #: includes/download.php:41 includes/helpers.php:214 includes/thumbnail.php:36
@@ -244,12 +244,12 @@ msgstr "업로드를 추가할 수 있는 충분한 권한이 없습니다."
 #: includes/controller/Admin.php:1066 includes/controller/Admin.php:1224
 #: includes/controller/Admin.php:1422 includes/controller/Admin.php:1583
 #: includes/controller/Admin.php:1677 includes/controller/Admin.php:1800
-#: includes/controller/Admin.php:2021 includes/controller/Admin.php:2147
-#: includes/controller/Admin.php:2261 includes/controller/Admin.php:2614
-#: includes/controller/Admin.php:3062 includes/controller/Admin.php:3141
-#: includes/controller/Admin.php:3214 includes/controller/Admin.php:3270
-#: includes/controller/Admin.php:3309 includes/controller/Admin.php:3453
-#: includes/controller/Admin.php:3525 includes/controller/Admin.php:3592
+#: includes/controller/Admin.php:2026 includes/controller/Admin.php:2162
+#: includes/controller/Admin.php:2281 includes/controller/Admin.php:2634
+#: includes/controller/Admin.php:3082 includes/controller/Admin.php:3161
+#: includes/controller/Admin.php:3234 includes/controller/Admin.php:3290
+#: includes/controller/Admin.php:3329 includes/controller/Admin.php:3473
+#: includes/controller/Admin.php:3545 includes/controller/Admin.php:3612
 #: includes/controller/Ajax.php:65 includes/controller/Ajax.php:110
 #: includes/controller/Ajax.php:141 includes/controller/Ajax.php:224
 #: includes/controller/Ajax.php:273 includes/controller/Ajax.php:359
@@ -261,8 +261,8 @@ msgid "Invalid authentication token."
 msgstr "잘못된 인증 토큰입니다."
 
 #: includes/controller/Admin.php:281 includes/controller/Admin.php:1982
-#: includes/controller/Admin.php:2027 includes/controller/Admin.php:2087
-#: includes/controller/Admin.php:2156 includes/controller/Admin.php:3707
+#: includes/controller/Admin.php:2032 includes/controller/Admin.php:2097
+#: includes/controller/Admin.php:2171 includes/controller/Admin.php:3727
 #: includes/controller/Ajax.php:39 includes/controller/Ajax.php:174
 #: includes/controller/Ajax.php:239 includes/controller/Ajax.php:285
 #: includes/download.php:15 includes/thumbnail.php:16
@@ -274,7 +274,7 @@ msgid "Post created!"
 msgstr "게시물이 생성되었습니다."
 
 #: includes/controller/Admin.php:305 includes/controller/Admin.php:422
-#: includes/controller/Admin.php:2116
+#: includes/controller/Admin.php:2131
 msgid "View post!"
 msgstr "게시물 보기."
 
@@ -347,7 +347,7 @@ msgid "Page created!"
 msgstr "페이지가 생성되었습니다."
 
 #: includes/controller/Admin.php:732 includes/controller/Admin.php:878
-#: includes/controller/Admin.php:2123 includes/controller/Admin.php:3616
+#: includes/controller/Admin.php:2138 includes/controller/Admin.php:3636
 msgid "View page!"
 msgstr "페이지 보기."
 
@@ -425,13 +425,13 @@ msgid "Please consider setting a stronger password for this user."
 msgstr "보안을 위하여 더욱 강력한 암호를 설정하는 것이 좋습니다."
 
 #: includes/controller/Admin.php:1116 includes/controller/Admin.php:1307
-#: includes/controller/Admin.php:3315 includes/controller/Main.php:848
+#: includes/controller/Admin.php:3335 includes/controller/Main.php:848
 #: includes/controller/Main.php:1071 install.php:766
 msgid "Email address cannot be blank."
 msgstr "이메일 주소는 비워둘 수 없습니다."
 
 #: includes/controller/Admin.php:1123 includes/controller/Admin.php:1314
-#: includes/controller/Admin.php:3322 includes/controller/Main.php:852
+#: includes/controller/Admin.php:3342 includes/controller/Main.php:852
 #: includes/controller/Main.php:1075 install.php:768
 msgid "Invalid email address."
 msgstr "올바르지 않은 이메일 주소입니다."
@@ -483,8 +483,8 @@ msgstr "자신의 계정을 삭제할 수 없습니다."
 
 #: includes/controller/Admin.php:1451 includes/controller/Admin.php:1474
 #: includes/controller/Admin.php:1828 includes/controller/Admin.php:1854
-#: includes/controller/Admin.php:1876 includes/controller/Admin.php:3535
-#: includes/controller/Admin.php:3544
+#: includes/controller/Admin.php:1876 includes/controller/Admin.php:3555
+#: includes/controller/Admin.php:3564
 msgid "Gone"
 msgstr "끝남"
 
@@ -556,7 +556,7 @@ msgstr "새 구성원의 그룹이 존재하지 않습니다."
 msgid "New member group must be specified."
 msgstr "새 구성원의 그룹을 지정해야 합니다."
 
-#: includes/controller/Admin.php:1855 includes/controller/Admin.php:3536
+#: includes/controller/Admin.php:1855 includes/controller/Admin.php:3556
 msgid "New default group does not exist."
 msgstr "기본 그룹이 존재하지 않습니다."
 
@@ -564,7 +564,7 @@ msgstr "기본 그룹이 존재하지 않습니다."
 msgid "New default group must be specified."
 msgstr "기본 그룹을 지정해야 합니다."
 
-#: includes/controller/Admin.php:1877 includes/controller/Admin.php:3545
+#: includes/controller/Admin.php:1877 includes/controller/Admin.php:3565
 msgid "New guest group does not exist."
 msgstr "게스트 그룹이 존재하지 않습니다."
 
@@ -580,268 +580,268 @@ msgstr "그룹이 삭제되었습니다."
 msgid "You do not have sufficient privileges to manage groups."
 msgstr "그룹을 관리할 수 있는 권한이 없습니다."
 
-#: includes/controller/Admin.php:1976 includes/controller/Admin.php:2015
+#: includes/controller/Admin.php:1976 includes/controller/Admin.php:2020
 msgid "You do not have sufficient privileges to edit uploads."
 msgstr "업로드를 편집할 수 있는 충분한 권한이 없습니다."
 
-#: includes/controller/Admin.php:1992 includes/controller/Admin.php:2047
-#: includes/controller/Admin.php:2097 includes/controller/Admin.php:2166
+#: includes/controller/Admin.php:1997 includes/controller/Admin.php:2057
+#: includes/controller/Admin.php:2112 includes/controller/Admin.php:2186
 #: includes/download.php:34 includes/download.php:42 includes/thumbnail.php:37
 #: includes/thumbnail.php:47
 msgid "File not found."
 msgstr "파일을 찾을 수 없습니다."
 
-#: includes/controller/Admin.php:2037
+#: includes/controller/Admin.php:2042
 msgid "You did not select anything to upload."
 msgstr "업로드할 항목을 선택하지 않았습니다."
 
-#: includes/controller/Admin.php:2055 includes/helpers.php:2979
+#: includes/controller/Admin.php:2065 includes/helpers.php:2979
 msgid "Only uploaded files are accepted."
 msgstr "업로드한 파일만 허용됩니다."
 
-#: includes/controller/Admin.php:2061 includes/helpers.php:2997
+#: includes/controller/Admin.php:2071 includes/helpers.php:2997
 #: includes/helpers.php:3050 includes/helpers.php:3237
 msgid "Failed to write file to disk."
 msgstr "파일을 디스크에 쓰지 못했습니다."
 
-#: includes/controller/Admin.php:2065
+#: includes/controller/Admin.php:2075
 msgid "Upload updated."
 msgstr "업로드가 업데이트되었습니다."
 
-#: includes/controller/Admin.php:2081 includes/controller/Admin.php:2141
+#: includes/controller/Admin.php:2091 includes/controller/Admin.php:2156
 msgid "You do not have sufficient privileges to delete uploads."
 msgstr "그룹을 삭제할 수 있는 권한이 없습니다."
 
-#: includes/controller/Admin.php:2114
+#: includes/controller/Admin.php:2129
 msgid "A post is using this upload."
 msgstr "게시물이 이 파일을 사용 중입니다."
 
-#: includes/controller/Admin.php:2121
+#: includes/controller/Admin.php:2136
 msgid "A page is using this upload."
 msgstr "페이지가 이 파일을 사용 중입니다."
 
-#: includes/controller/Admin.php:2171
+#: includes/controller/Admin.php:2191
 msgid "Upload deleted."
 msgstr "파일이 삭제되었습니다."
 
-#: includes/controller/Admin.php:2176
+#: includes/controller/Admin.php:2196
 msgid "Failed to delete upload."
 msgstr "파일을 삭제하지 못했습니다."
 
-#: includes/controller/Admin.php:2191
+#: includes/controller/Admin.php:2211
 msgid "You do not have sufficient privileges to manage uploads."
 msgstr "파일을 관리할 권한이 없습니다."
 
-#: includes/controller/Admin.php:2250
+#: includes/controller/Admin.php:2270
 msgid "You do not have sufficient privileges to export content."
 msgstr "콘텐츠를 내보낼 권한이 없습니다."
 
-#: includes/controller/Admin.php:2574
+#: includes/controller/Admin.php:2594
 msgid "You did not select anything to export."
 msgstr "내보낼 항목을 선택하지 않았습니다."
 
-#: includes/controller/Admin.php:2603
+#: includes/controller/Admin.php:2623
 msgid "You do not have sufficient privileges to import content."
 msgstr "콘텐츠를 가져올 수 있는 권한이 없습니다."
 
-#: includes/controller/Admin.php:2627
+#: includes/controller/Admin.php:2647
 msgid "Posts export file is invalid."
 msgstr "게시물을 내보내기 위한 파일이 유효하지 않습니다."
 
-#: includes/controller/Admin.php:2642
+#: includes/controller/Admin.php:2662
 msgid "Pages export file is invalid."
 msgstr "페이지를 내보내기 위한 파일이 유효하지 않습니다."
 
-#: includes/controller/Admin.php:2658
+#: includes/controller/Admin.php:2678
 msgid "Groups export file is invalid."
 msgstr "그룹을 내보내기 위한 파일이 유효하지 않습니다."
 
-#: includes/controller/Admin.php:2674
+#: includes/controller/Admin.php:2694
 msgid "Users export file is invalid."
 msgstr "사용자를 내보내기 위한 파일이 유효하지 않습니다."
 
-#: includes/controller/Admin.php:2690
+#: includes/controller/Admin.php:2710
 msgid "You did not select anything to import."
 msgstr "가져올 항목을 선택하지 않았습니다."
 
-#: includes/controller/Admin.php:2861
+#: includes/controller/Admin.php:2881
 msgid "Chyrp Lite content successfully imported!"
 msgstr "Chyrp Lite 콘텐츠를 성공적으로 가져왔습니다."
 
-#: includes/controller/Admin.php:2875 includes/controller/Admin.php:2969
-#: includes/controller/Admin.php:3056 includes/controller/Admin.php:3135
+#: includes/controller/Admin.php:2895 includes/controller/Admin.php:2989
+#: includes/controller/Admin.php:3076 includes/controller/Admin.php:3155
 msgid "You do not have sufficient privileges to toggle extensions."
 msgstr "확장 프로그램을 전환할 권한이 없습니다."
 
-#: includes/controller/Admin.php:3014 includes/controller/Admin.php:3208
-#: includes/controller/Admin.php:3252 includes/controller/Admin.php:3291
-#: includes/controller/Admin.php:3377 includes/controller/Admin.php:3510
-#: includes/controller/Admin.php:3578 includes/controller/Admin.php:3659
+#: includes/controller/Admin.php:3034 includes/controller/Admin.php:3228
+#: includes/controller/Admin.php:3272 includes/controller/Admin.php:3311
+#: includes/controller/Admin.php:3397 includes/controller/Admin.php:3530
+#: includes/controller/Admin.php:3598 includes/controller/Admin.php:3679
 msgid "You do not have sufficient privileges to change settings."
 msgstr "설정을 변경할 권한이 없습니다."
 
-#: includes/controller/Admin.php:3019
+#: includes/controller/Admin.php:3039
 msgid "You are currently previewing a theme."
 msgstr "현재 미리 보기 중입니다."
 
-#: includes/controller/Admin.php:3020
+#: includes/controller/Admin.php:3040
 msgid "Stop!"
 msgstr "멈춤."
 
-#: includes/controller/Admin.php:3067 includes/controller/Admin.php:3146
+#: includes/controller/Admin.php:3087 includes/controller/Admin.php:3166
 msgid "No Extension Specified"
 msgstr "확장 기능이 지정되지 않았습니다"
 
-#: includes/controller/Admin.php:3068
+#: includes/controller/Admin.php:3088
 msgid "You did not specify an extension to enable."
 msgstr "활성화할 확장 기능을 지정하지 않았습니다."
 
-#: includes/controller/Admin.php:3090
+#: includes/controller/Admin.php:3110
 msgid "Extension already enabled."
 msgstr "확장 기능이 이미 활성화되었습니다."
 
-#: includes/controller/Admin.php:3097 includes/controller/Admin.php:3176
+#: includes/controller/Admin.php:3117 includes/controller/Admin.php:3196
 msgid "Extension not found."
 msgstr "확장 기능을 찾을 수 없습니다."
 
-#: includes/controller/Admin.php:3118
+#: includes/controller/Admin.php:3138
 msgid "Extension enabled."
 msgstr "확장 기능이 활성화되었습니다."
 
-#: includes/controller/Admin.php:3147
+#: includes/controller/Admin.php:3167
 msgid "You did not specify an extension to disable."
 msgstr "사용 중지할 확장 기능을 지정하지 않았습니다."
 
-#: includes/controller/Admin.php:3169
+#: includes/controller/Admin.php:3189
 msgid "Extension already disabled."
 msgstr "확장 기능이 이미 사용 중지되었습니다."
 
-#: includes/controller/Admin.php:3194
+#: includes/controller/Admin.php:3214
 msgid "Extension disabled."
 msgstr "확장 기능이 사용 중지되었습니다."
 
-#: includes/controller/Admin.php:3219
+#: includes/controller/Admin.php:3239
 msgid "No Theme Specified"
 msgstr "지정된 테마 없음"
 
-#: includes/controller/Admin.php:3220
+#: includes/controller/Admin.php:3240
 msgid "You did not specify which theme to select."
 msgstr "선택할 테마를 지정하지 않았습니다."
 
-#: includes/controller/Admin.php:3238
+#: includes/controller/Admin.php:3258
 msgid "Theme changed."
 msgstr "테마가 변경되었습니다."
 
-#: includes/controller/Admin.php:3262
+#: includes/controller/Admin.php:3282
 msgid "Preview stopped."
 msgstr "미리 보기가 중지되었습니다."
 
-#: includes/controller/Admin.php:3277
+#: includes/controller/Admin.php:3297
 msgid "Preview started."
 msgstr "미리 보기를 시작합니다."
 
-#: includes/controller/Admin.php:3329
+#: includes/controller/Admin.php:3349
 msgid "Invalid canonical URL."
 msgstr "올바르지 않은 표준 URL입니다."
 
-#: includes/controller/Admin.php:3363 includes/controller/Admin.php:3496
-#: includes/controller/Admin.php:3564 includes/controller/Admin.php:3645
+#: includes/controller/Admin.php:3383 includes/controller/Admin.php:3516
+#: includes/controller/Admin.php:3584 includes/controller/Admin.php:3665
 msgid "Settings updated."
 msgstr "설정이 업데이트되었습니다."
 
-#: includes/controller/Admin.php:3606
+#: includes/controller/Admin.php:3626
 msgid "My Awesome Homepage"
 msgstr "나의 멋진 홈페이지"
 
-#: includes/controller/Admin.php:3607
+#: includes/controller/Admin.php:3627
 msgid "Nothing here yet!"
 msgstr "아직 아무것도 없습니다."
 
-#: includes/controller/Admin.php:3615
+#: includes/controller/Admin.php:3635
 msgid "Page created."
 msgstr "페이지가 생성되었습니다."
 
-#: includes/controller/Admin.php:3639
+#: includes/controller/Admin.php:3659
 msgid "Clean URLs have been disabled because URL rewriting is not active."
 msgstr "URL 다시 쓰기가 활성화되지 않았으므로 클린 URL을 사용할 수 없습니다."
 
-#: includes/controller/Admin.php:3681 includes/controller/Main.php:964
+#: includes/controller/Admin.php:3701 includes/controller/Main.php:964
 msgid "You are already logged in."
 msgstr "이미 로그인했습니다."
 
-#: includes/controller/Admin.php:3720
+#: includes/controller/Admin.php:3740
 msgid "Help"
 msgstr "도움말"
 
-#: includes/controller/Admin.php:3739
+#: includes/controller/Admin.php:3759
 msgid "Write"
 msgstr "글"
 
-#: includes/controller/Admin.php:3744
+#: includes/controller/Admin.php:3764
 msgid "Manage"
 msgstr "관리"
 
-#: includes/controller/Admin.php:3749
+#: includes/controller/Admin.php:3769
 msgid "Settings"
 msgstr "설정"
 
-#: includes/controller/Admin.php:3754
+#: includes/controller/Admin.php:3774
 msgid "Extend"
 msgstr "확장 기능"
 
-#: includes/controller/Admin.php:3765
+#: includes/controller/Admin.php:3785
 msgid "Page"
 msgstr "페이지"
 
-#: includes/controller/Admin.php:3805
+#: includes/controller/Admin.php:3825
 msgid "Posts"
 msgstr "게시물"
 
-#: includes/controller/Admin.php:3814
+#: includes/controller/Admin.php:3834
 msgid "Pages"
 msgstr "페이지"
 
-#: includes/controller/Admin.php:3823 includes/controller/Admin.php:3876
+#: includes/controller/Admin.php:3843 includes/controller/Admin.php:3896
 msgid "Users"
 msgstr "사용자"
 
-#: includes/controller/Admin.php:3833
+#: includes/controller/Admin.php:3853
 msgid "Groups"
 msgstr "그룹"
 
-#: includes/controller/Admin.php:3843
+#: includes/controller/Admin.php:3863
 msgid "Uploads"
 msgstr "파일"
 
-#: includes/controller/Admin.php:3853
+#: includes/controller/Admin.php:3873
 msgid "Import"
 msgstr "가져오기"
 
-#: includes/controller/Admin.php:3856
+#: includes/controller/Admin.php:3876
 msgid "Export"
 msgstr "내보내기"
 
-#: includes/controller/Admin.php:3874
+#: includes/controller/Admin.php:3894
 msgid "General"
 msgstr "일반"
 
-#: includes/controller/Admin.php:3875
+#: includes/controller/Admin.php:3895
 msgid "Content"
 msgstr "내용"
 
-#: includes/controller/Admin.php:3877
+#: includes/controller/Admin.php:3897
 msgid "Routes"
 msgstr "고유주소"
 
-#: includes/controller/Admin.php:3898
+#: includes/controller/Admin.php:3918
 msgid "Modules"
 msgstr "모듈"
 
-#: includes/controller/Admin.php:3899
+#: includes/controller/Admin.php:3919
 msgid "Feathers"
 msgstr "깃털"
 
-#: includes/controller/Admin.php:3900
+#: includes/controller/Admin.php:3920
 msgid "Themes"
 msgstr "테마"
 
@@ -1161,48 +1161,48 @@ msgid ""
 "site."
 msgstr ""
 
-#: includes/helpers.php:3766
+#: includes/helpers.php:3775
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr "JSON 인코딩 오류: %s"
 
-#: includes/helpers.php:3796
+#: includes/helpers.php:3805
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr "JSON 디코딩 오류: %s"
 
-#: includes/helpers.php:3884
+#: includes/helpers.php:3893
 msgid "Failed to create Zip archive."
 msgstr "압축 파일을 만들지 못했습니다."
 
-#: includes/helpers.php:3994
+#: includes/helpers.php:4003
 #, php-format
 msgid "Activate your account at %s"
 msgstr "%s에서 계정을 활성화하세요"
 
-#: includes/helpers.php:3995 includes/helpers.php:4037
+#: includes/helpers.php:4004 includes/helpers.php:4046
 #, php-format
 msgid "Hello, %s."
 msgstr "%s님 안녕하세요."
 
-#: includes/helpers.php:3998
+#: includes/helpers.php:4007
 msgid "You are receiving this message because you registered a new account."
 msgstr "새 계정을 등록하셨기 때문에 이 메시지를 받으셨습니다."
 
-#: includes/helpers.php:4001
+#: includes/helpers.php:4010
 msgid "Visit this link to activate your account:"
 msgstr "계정을 활성화하려면 다음 링크를 방문하세요:"
 
-#: includes/helpers.php:4036
+#: includes/helpers.php:4045
 #, php-format
 msgid "Reset your password at %s"
 msgstr "%s에 비밀번호 재설정"
 
-#: includes/helpers.php:4040
+#: includes/helpers.php:4049
 msgid "You are receiving this message because you requested a new password."
 msgstr "새 비밀번호를 요청하셨기 때문에 이 메시지를 받으셨습니다."
 
-#: includes/helpers.php:4043
+#: includes/helpers.php:4052
 msgid "Visit this link to reset your password:"
 msgstr "비밀번호를 변경하려면 다음 링크를 방문하세요:"
 
