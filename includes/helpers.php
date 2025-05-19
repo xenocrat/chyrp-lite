@@ -1295,7 +1295,7 @@
             array() ;
 
         foreach (
-            preg_split("/\s(?=\w+:)|;/",
+            preg_split("/\s(?=\w+:)|(?<!\|);|(?<=\|\|);/",
                 $query,
                 -1,
                 PREG_SPLIT_NO_EMPTY
