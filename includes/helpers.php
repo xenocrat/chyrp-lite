@@ -1301,10 +1301,10 @@
                 PREG_SPLIT_NO_EMPTY
             )
         as $fragment) {
-            if (!substr_count($fragment, ":"))
-                $strings[] = trim($fragment);
-            else
+            if (preg_match("/\w+:/", $fragment))
                 $keywords[] = trim($fragment);
+            else
+                $strings[] = trim($fragment);
         }
 
         $dates = array(
