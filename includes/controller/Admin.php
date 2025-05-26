@@ -1989,6 +1989,12 @@
                 $_GET['file']
             );
 
+            if ($filename == "")
+                show_404(
+                    __("Not Found"),
+                    __("File not found.")
+                );
+
             $filepath = uploaded($filename, false);
 
             if (!is_readable($filepath) or !is_file($filepath))
@@ -2049,6 +2055,12 @@
                 $_POST['file']
             );
 
+            if ($filename == "")
+                show_404(
+                    __("Not Found"),
+                    __("File not found.")
+                );
+
             $filepath = uploaded($filename, false);
 
             if (!is_readable($filepath) or !is_file($filepath))
@@ -2103,6 +2115,12 @@
                 "",
                 $_GET['file']
             );
+
+            if ($filename == "")
+                show_404(
+                    __("Not Found"),
+                    __("File not found.")
+                );
 
             $filepath = uploaded($filename, false);
 
@@ -2177,6 +2195,12 @@
                 "",
                 $_POST['file']
             );
+
+            if ($filename == "")
+                show_404(
+                    __("Not Found"),
+                    __("File not found.")
+                );
 
             $filepath = uploaded($filename, false);
 
