@@ -15,11 +15,11 @@
 
         public $belongs_to = "user";
 
-        # Variable: $prev
+        # Object: $prev
         # The previous post (the post made after this one).
         private $prev;
 
-        # Variable: $next
+        # Object: $next
         # The next post (the post made before this one).
         private $next;
 

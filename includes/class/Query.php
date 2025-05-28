@@ -4,7 +4,7 @@
      * Handles a SQL query.
      */
     class Query {
-        # Variable: $query
+        # Object: $query
         # Holds the prepared query.
         public $query;
 
@@ -12,11 +12,11 @@
         # The result of execution.
         public $result;
 
-        # Variable: $queryString
+        # String: $queryString
         # Logs a representation of the query statement.
         public $queryString = "";
 
-        # Variable: $sql
+        # Object: $sql
         # Holds the current <SQL> instance.
         private $sql;
 

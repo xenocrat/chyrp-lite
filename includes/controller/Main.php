@@ -38,7 +38,7 @@
             =>  '/?action=$1&amp;feed'
         );
 
-        # Variable: $twig
+        # Object: $twig
         # Environment for the Twig template engine.
         private $twig;
 

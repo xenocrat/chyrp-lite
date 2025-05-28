@@ -28,7 +28,7 @@
         # Serve a syndication feed?
         public $feed = false;
 
-        # Variable: $twig
+        # Object: $twig
         # Environment for the Twig template engine.
         private $twig;
 

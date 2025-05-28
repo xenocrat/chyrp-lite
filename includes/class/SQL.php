@@ -25,11 +25,11 @@
         # Number of queries it takes to load the page.
         public $queries = 0;
 
-        # Variable: $db
+        # Object: $db
         # Holds the currently running database instance.
         public $db;
 
-        # Variable: $error
+        # String: $error
         # Holds an error message from the last attempted query.
         public $error = null;
 

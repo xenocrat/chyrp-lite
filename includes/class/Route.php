@@ -28,7 +28,7 @@
         # Did <Route.init> call a successful route?
         public $success = false;
 
-        # Variable: $controller
+        # Object: $controller
         # The Route's Controller.
         public $controller;
 
