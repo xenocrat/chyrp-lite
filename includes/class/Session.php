@@ -14,7 +14,11 @@
 
         # Boolean: $deny
         # Deny session storage?
-        private $deny = false;
+        public $deny = false;
+
+        # Object: $instance
+        # Holds the session instantiation.
+        public static $instance = null;
 
         /**
          * Function: open
