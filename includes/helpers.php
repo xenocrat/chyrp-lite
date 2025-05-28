@@ -27,6 +27,7 @@
         }
 
         $handler = new Session();
+        Session::$instance = $handler;
         session_set_save_handler($handler, true);
 
         $parsed = parse_url(Config::current()->url);
