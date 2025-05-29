@@ -3670,7 +3670,7 @@
             echo addslashes(
                 str_replace(
                     array("\n", "\r"),
-                    "",
+                    array("\\n", "\\r"),
                     (string) $variable
                 )
             );
