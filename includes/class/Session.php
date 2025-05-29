@@ -12,9 +12,9 @@
         # Session creation date.
         private $created_at = null;
 
-        # Boolean: $deny
-        # Deny session storage?
-        public $deny = false;
+        # Boolean: $write_data
+        # Write session data to the database?
+        public $write_data = true;
 
         # Object: $instance
         # Holds the session instantiation.
@@ -33,7 +33,7 @@
             $name
         ): bool {
             $this->created_at = datetime();
-            $this->deny = (SESSION_DENY_BOT and BOT_UA);
+            $this->write_data = !(SESSION_DENY_BOT and BOT_UA);
 
             return true;
         }
@@ -86,7 +86,7 @@
             $sql = SQL::current();
             $visitor = Visitor::current();
 
-            if ($this->deny)
+            if (!$this->write_data)
                 return true;
 
             if (isset($data) and $data != $this->data) {
