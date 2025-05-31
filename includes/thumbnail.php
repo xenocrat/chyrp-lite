@@ -63,8 +63,8 @@
 
     # Redirect to original if thumbnail cannot or should not be created.
     if (!$thumb->creatable() or $thumb->upscaling()) {
-        header("Cache-Control: public");
-        header("Pragma: no-cache");
+        header_remove("Pragma");
+        header("Cache-Control: public, must-revalidate");
         header("Expires: ".date("r", now("+7 days")));
         redirect(uploaded($filename), code:301);
     }
@@ -76,8 +76,7 @@
         if ($lastmod >= filemtime($filepath)) {
             header_remove();
             header($_SERVER['SERVER_PROTOCOL']." 304 Not Modified");
-            header("Cache-Control: public");
-            header("Pragma: no-cache");
+            header("Cache-Control: public, must-revalidate");
             header("Expires: ".date("r", now("+30 days")));
             header("Vary: Accept-Encoding, Cookie, Save-Data");
             exit;
@@ -85,9 +84,9 @@
     }
 
     $safename = addslashes($thumb->name());
+    header_remove("Pragma");
     header("Last-Modified: ".date("r", filemtime($filepath)));
-    header("Cache-Control: public");
-    header("Pragma: no-cache");
+    header("Cache-Control: public, must-revalidate");
     header("Expires: ".date("r", now("+30 days")));
     header("Content-Disposition: inline; filename=\"".$safename."\"");
     $thumb->create();
