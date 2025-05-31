@@ -202,8 +202,7 @@
                 }
             }
 
-            header("Cache-Control: no-cache, must-revalidate");
-            header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
+            header("Cache-Control: no-store");
 
             $main->display(
                 "content".DIR."preview",
@@ -251,8 +250,7 @@
             if ($field == "body")
                 $trigger->filter($content, array("markup_page_text", "markup_text"));
 
-            header("Cache-Control: no-cache, must-revalidate");
-            header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
+            header("Cache-Control: no-store");
 
             $main->display(
                 "content".DIR."preview",
