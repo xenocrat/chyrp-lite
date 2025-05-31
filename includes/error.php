@@ -114,8 +114,7 @@
         # Attempt to set headers to sane values and send a status code.
         if (!headers_sent()) {
             header("Content-Type: text/html; charset=UTF-8");
-            header("Cache-Control: no-cache, must-revalidate");
-            header("Expires: Mon, 03 Jun 1991 05:30:00 GMT");
+            header("Cache-Control: no-store");
 
             # Resend the content encoding header if transparent compression is on.
             if (CAN_USE_ZLIB and ini_get("zlib.output_compression"))
