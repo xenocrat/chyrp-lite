@@ -1,8 +1,8 @@
 <?php
     class Cacher extends Modules {
         private $lastmod = 0;
-        private $excluded = false;
-        private $modified = false;
+        private $trigger_exclude = false;
+        private $config_modified = false;
 
         public function __init(
         ): void {
@@ -30,7 +30,7 @@
         public function route_init(
             $route
         ): void {
-            if (!$this->eligible())
+            if (!$this->is_cacheable())
                 return;
 
             if (!$this->validate_etag())
@@ -43,7 +43,6 @@
                     header_remove();
                     header($_SERVER['SERVER_PROTOCOL']." 304 Not Modified");
                     header("Cache-Control: no-cache, private");
-                    header("Pragma: no-cache");
                     header("Expires: ".date("r", now("+30 days")));
                     header("ETag: ".$this->generate_etag());
                     header("Vary: Accept-Encoding, Cookie, Save-Data, ETag");
@@ -60,23 +59,23 @@
             unset($_SESSION['post_redirect']);
             unset($_SESSION['page_redirect']);
 
-            if (!$this->eligible())
+            if (!$this->is_cacheable())
                 return;
 
             if (!$route->success)
                 return;
 
             if (!headers_sent()) {
+                header_remove("Pragma");
                 header("Last-Modified: ".date("r", $this->lastmod));
                 header("Cache-Control: no-cache, private");
-                header("Pragma: no-cache");
                 header("Expires: ".date("r", now("+30 days")));
                 header("ETag: ".$this->generate_etag());
                 header("Vary: Accept-Encoding, Cookie, Save-Data, ETag");
             }
         }
 
-        private function eligible(
+        private function is_cacheable(
         ): bool {
             if (PREVIEWING)
                 return false;
@@ -87,7 +86,7 @@
             if (Flash::exists())
                 return false;
 
-            if ($this->excluded)
+            if ($this->trigger_exclude)
                 return false;
 
             return true;
@@ -175,7 +174,7 @@
             if ($this->modified)
                 return;
 
-            $this->modified = true;
+            $this->config_modified = true;
 
             $config = Config::current();
             $settings = $config->module_cacher;
@@ -185,6 +184,6 @@
 
         public function cache_exclude(
         ): void {
-            $this->excluded = true;
+            $this->trigger_exclude = true;
         }
     }
