@@ -42,17 +42,34 @@
             __("File not found.")
         );
 
-    if (DEBUG)
-        error_log("DOWNLOAD served ".$filename);
+    # Respond to If-Modified-Since so the user agent will use cache.
+    if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])) {
+        $lastmod = strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']);
+
+        if ($lastmod >= filemtime($filepath)) {
+            header_remove();
+            header($_SERVER['SERVER_PROTOCOL']." 304 Not Modified");
+            header("Cache-Control: no-cache, private");
+            header("Expires: ".date("r", now("+30 days")));
+            header("Vary: Accept-Encoding, Cookie, Save-Data");
+            exit;
+        }
+    }
 
     if (!USE_COMPRESSION and !ini_get("zlib.output_compression"))
         header("Content-Length: ".filesize($filepath));
 
     $safename = addslashes($filename);
+    header_remove("Pragma");
     header("Last-Modified: ".date("r", filemtime($filepath)));
+    header("Cache-Control: no-cache, private");
+    header("Expires: ".date("r", now("+30 days")));
     header("Content-Type: application/octet-stream");
     header("Content-Disposition: attachment; filename=\"".$safename."\"");
     readfile($filepath);
+
+    if (DEBUG)
+        error_log("DOWNLOAD served ".$filename);
 
     $trigger->call("end");
     flush();
