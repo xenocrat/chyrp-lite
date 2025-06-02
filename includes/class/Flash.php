@@ -59,11 +59,11 @@
             $redirect_to = null,
             $code = null
         ): void {
-            $trigger = Trigger::current();
             $type = self::FLASH_MESSAGE;
             self::prepare($type);
 
-            $_SESSION[$type][] = $trigger->filter($message, "flash_message", $redirect_to);
+            Trigger::current()->call("flash_message");
+            $_SESSION[$type][] = $message;
 
             if (DEBUG and !headers_sent())
                 header("X-Chyrp-Flash-Messages: ".self::count($type));
@@ -86,11 +86,11 @@
             $redirect_to = null,
             $code = null
         ): void {
-            $trigger = Trigger::current();
             $type = self::FLASH_NOTICE;
             self::prepare($type);
 
-            $_SESSION[$type][] = $trigger->filter($message, "flash_notice", $redirect_to);
+            Trigger::current()->call("flash_notice");
+            $_SESSION[$type][] = $message;
 
             if (DEBUG and !headers_sent())
                 header("X-Chyrp-Flash-Notices: ".self::count($type));
@@ -113,11 +113,11 @@
             $redirect_to = null,
             $code = null
         ): void {
-            $trigger = Trigger::current();
             $type = self::FLASH_WARNING;
             self::prepare($type);
 
-            $_SESSION[$type][] = $trigger->filter($message, "flash_warning", $redirect_to);
+            Trigger::current()->call("flash_warning");
+            $_SESSION[$type][] = $message;
 
             if (DEBUG and !headers_sent())
                 header("X-Chyrp-Flash-Warnings: ".self::count($type));
