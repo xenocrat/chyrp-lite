@@ -18,7 +18,7 @@
     function session(
         $secure = null
     ): void {
-        if (session_status() == PHP_SESSION_ACTIVE) {
+        if (session_status() != PHP_SESSION_NONE) {
             trigger_error(
                 __("Session cannot be started more than once."),
                 E_USER_NOTICE
@@ -28,6 +28,7 @@
 
         $handler = new Session();
         Session::$instance = $handler;
+        Session::discard(SESSION_DENY_BOT and BOT_UA);
         session_set_save_handler($handler, true);
 
         $parsed = parse_url(Config::current()->url);
