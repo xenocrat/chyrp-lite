@@ -14,7 +14,7 @@
 
         # Boolean: $write_data
         # Write session data to the database?
-        public $write_data = true;
+        private static $write_data = true;
 
         # Object: $instance
         # Holds the session instantiation.
@@ -33,8 +33,6 @@
             $name
         ): bool {
             $this->created_at = datetime();
-            $this->write_data = !(SESSION_DENY_BOT and BOT_UA);
-
             return true;
         }
 
@@ -86,7 +84,7 @@
             $sql = SQL::current();
             $visitor = Visitor::current();
 
-            if (!$this->write_data)
+            if (!self::$write_data)
                 return true;
 
             if (isset($data) and $data != $this->data) {
@@ -125,7 +123,7 @@
          * Deletes sessions not updated for 30+ days, or with no stored data.
          *
          * Parameters:
-         *     $lifetime - The configured maximum session lifetime in seconds.
+         *     $lifetime - The maximum session lifetime in seconds (ignored).
          */
         public function gc(
             $lifetime
@@ -140,11 +138,24 @@
         }
 
         /**
+         * Function: discard
+         * Discard the session data for this session?
+         */
+        public static function discard(
+            $discard
+        ): bool {
+            return self::$write_data = !$discard;
+        }
+
+        /**
          * Function: hash_token
          * Generates an authentication token for this session.
          */
         public static function hash_token(
         ): bool|string {
+            if (!self::$write_data)
+                return false;
+
             $id = session_id();
 
             if ($id === "")
