@@ -1296,17 +1296,30 @@
             $sql->select($table)->fetch() :
             array() ;
 
+        $query = str_replace(
+            "||",
+            "||".chr(31),
+            $query
+        );
+
         foreach (
-            preg_split("/\s(?=\w+:)|(?<!\|);|(?<=\|\|);/",
+            preg_split("/\s(?=\w+:)|(?<!\|);/",
                 $query,
                 -1,
                 PREG_SPLIT_NO_EMPTY
             )
         as $fragment) {
-            if (preg_match("/\w+:/", $fragment))
-                $keywords[] = trim($fragment);
-            else
-                $strings[] = trim($fragment);
+            $fragment = str_replace(
+                "||".chr(31),
+                "||",
+                $fragment
+            );
+
+            if (preg_match("/\w+:/", $fragment)) {
+                $keywords[] = $fragment;
+            } else {
+                $strings[] = $fragment;
+            }
         }
 
         $dates = array(
