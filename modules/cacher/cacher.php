@@ -76,7 +76,7 @@
                     header("Vary: Accept-Encoding, Cookie, Save-Data, ETag");
 
                     if ($this->enhanced_caching) {
-                        header("Cache-Control: public, stale-if-error");
+                        header("Cache-Control: public, must-revalidate, stale-if-error");
                         header("Expires: ".date("r", now("+15 minutes")));
                     } else {
                         header("Cache-Control: no-cache, private");
@@ -109,7 +109,7 @@
                 header("Vary: Accept-Encoding, Cookie, Save-Data, ETag");
 
                 if ($this->enhanced_caching) {
-                    header("Cache-Control: public, stale-if-error");
+                    header("Cache-Control: public, must-revalidate, stale-if-error");
                     header("Expires: ".date("r", now("+15 minutes")));
                 } else {
                     header("Cache-Control: no-cache, private");
