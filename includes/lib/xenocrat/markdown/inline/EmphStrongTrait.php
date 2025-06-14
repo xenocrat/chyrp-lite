@@ -37,20 +37,35 @@ trait EmphStrongTrait
 			if (strpos($markdown, $marker . $marker, 2) === false) {
 				return [['text', $markdown[0]], 1];
 			}
+			$regexable = str_replace(
+				"\\\\",
+				"\\\\".chr(31),
+				$markdown
+			);
 			if (
 				$marker === '*'
 				&& preg_match(
 					'/^[*]{2}((?>\\\\[*]|[^*]|[*][^*]*[*])+?)[*]{2}/s',
-					$markdown,
+					$regexable,
 					$matches
 				)
 				|| $marker === '_'
 				&& preg_match(
 					'/^__((?>\\\\_|[^_]|_[^_]*_)+?)__\b/us',
-					$markdown,
+					$regexable,
 					$matches
 				)
 			) {
+				$matches[0] = str_replace(
+					"\\\\".chr(31),
+					"\\\\",
+					$matches[0]
+				);
+				$matches[1] = str_replace(
+					"\\\\".chr(31),
+					"\\\\",
+					$matches[1]
+				);
 				$content = $matches[1];
 				// If nothing is contained in a strong,
 				// do not consider it valid.
@@ -80,20 +95,35 @@ trait EmphStrongTrait
 			if (strpos($markdown, $marker, 1) === false) {
 				return [['text', $markdown[0]], 1];
 			}
+			$regexable = str_replace(
+				"\\\\",
+				"\\\\".chr(31),
+				$markdown
+			);
 			if (
 				$marker === '*'
 				&& preg_match(
 					'/^[*]((?>\\\\[*]|[^*]|[*][*][^*]+?[*][*])+?)[*](?![*][^*])/s',
-					$markdown,
+					$regexable,
 					$matches
 				)
 				|| $marker === '_'
 				&& preg_match(
 					'/^_((?>\\\\_|[^_]|__[^_]*__)+?)_(?!_[^_])\b/us',
-					$markdown,
+					$regexable,
 					$matches
 				)
 			) {
+				$matches[0] = str_replace(
+					"\\\\".chr(31),
+					"\\\\",
+					$matches[0]
+				);
+				$matches[1] = str_replace(
+					"\\\\".chr(31),
+					"\\\\",
+					$matches[1]
+				);
 				$content = $matches[1];
 				// If nothing is contained in an emphasis,
 				// do not consider it valid.

@@ -68,7 +68,7 @@ trait FrontMatterTrait
 		];
 		if ($language !== '') {
 			if (preg_match('/^[^ ]+/', $language, $match)) {
-				$block['language'] = $this->unEscapeBackslash($match[0]);
+				$block['language'] = $match[0];
 			}
 		}
 
@@ -76,5 +76,4 @@ trait FrontMatterTrait
 	}
 
 	abstract protected function renderCode($block);
-	abstract protected function unEscapeBackslash($text);
 }

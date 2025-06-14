@@ -89,7 +89,17 @@ trait CodeTrait
 	protected function renderCode($block): string
 	{
 		$class = isset($block['language']) ?
-			' class="language-' . $block['language'] . '"' : '';
+			' class="language-'
+			. $this->escapeHtmlEntities(
+				$this->unEscapeHtmlEntities(
+					$this->unEscapeBackslash(
+						$block['language']
+					),
+					ENT_QUOTES | ENT_SUBSTITUTE
+				),
+				ENT_COMPAT | ENT_SUBSTITUTE
+			)
+			. '"' : '';
 
 		return "<pre><code$class>"
 			. $this->escapeHtmlEntities(

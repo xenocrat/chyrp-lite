@@ -198,10 +198,28 @@ trait FootnoteTrait
 	protected function parseFootnoteLink($text): array
 	{
 		if (
-			preg_match('/^\[\^(.+?)(?<!\\\\)\]/', $text, $matches)
+			preg_match(
+				'/^\[\^(.+?)(?<!\\\\)\]/',
+				str_replace(
+					"\\\\",
+					"\\\\".chr(31),
+					$text
+				),
+				$matches
+			)
 			// Unescaped brackets are not allowed.
 			&& !preg_match('/(?<!\\\\)[\[\]]/', $matches[1])
 		) {
+			$matches[0] = str_replace(
+				"\\\\".chr(31),
+				"\\\\",
+				$matches[0]
+			);
+			$matches[1] = str_replace(
+				"\\\\".chr(31),
+				"\\\\",
+				$matches[1]
+			);
 			$footnoteName = function_exists("mb_convert_case") ?
 				mb_convert_case($matches[1], MB_CASE_FOLD, 'UTF-8') :
 				strtolower($matches[1]);
@@ -270,7 +288,14 @@ trait FootnoteTrait
 	 */
 	protected function identifyFootnoteList($line): bool
 	{
-		return preg_match('/^ {0,3}\[\^(.+?)]:/', $line);
+		return preg_match(
+			'/^ {0,3}\[\^(.+?)(?<!\\\\)\]:/',
+			str_replace(
+				"\\\\",
+				"\\\\".chr(31),
+				$line
+			)
+		);
 	}
 
 	/**
@@ -286,11 +311,25 @@ trait FootnoteTrait
 			$line = $lines[$i];
 			$startsFootnote = preg_match(
 				'/^ {0,3}\[\^(.+?)(?<!\\\\)\]:[ \t]*/',
-				$line,
+				str_replace(
+					"\\\\",
+					"\\\\".chr(31),
+					$line
+				),
 				$matches
 			);
 			if ($startsFootnote) {
-				// The start of a footnote.
+			// The start of a footnote.
+				$matches[0] = str_replace(
+					"\\\\".chr(31),
+					"\\\\",
+					$matches[0]
+				);
+				$matches[1] = str_replace(
+					"\\\\".chr(31),
+					"\\\\",
+					$matches[1]
+				);
 				$name = function_exists("mb_convert_case") ?
 					mb_convert_case($matches[1], MB_CASE_FOLD, 'UTF-8') :
 					strtolower($matches[1]);

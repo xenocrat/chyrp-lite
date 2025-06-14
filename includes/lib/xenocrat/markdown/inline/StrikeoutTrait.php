@@ -26,11 +26,25 @@ trait StrikeoutTrait
 	{
 		if (
 			preg_match(
-				'/^(~{1,2})(?!~)(.*?([^~\\\\]|(?<=\\\\)~|(?<=\\\\)\\\\))\1(?!~)/s',
-				$markdown,
+				'/^(~{1,2})(?!~)(.*?([^~\\\\]|(?<=\\\\)~))\1(?!~)/s',
+				str_replace(
+					"\\\\",
+					"\\\\".chr(31),
+					$markdown
+				),
 				$matches
 			)
 		) {
+			$matches[0] = str_replace(
+				"\\\\".chr(31),
+				"\\\\",
+				$matches[0]
+			);
+			$matches[2] = str_replace(
+				"\\\\".chr(31),
+				"\\\\",
+				$matches[2]
+			);
 			return [
 				[
 					'strike',

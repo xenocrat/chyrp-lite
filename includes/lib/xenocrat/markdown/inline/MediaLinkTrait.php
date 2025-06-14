@@ -58,7 +58,12 @@ trait MediaLinkTrait
 						'' :
 						' title="'
 						. $this->escapeHtmlEntities(
-							$block['title'],
+							$this->unEscapeHtmlEntities(
+								$this->unEscapeBackslash(
+									$block['title']
+								),
+								ENT_QUOTES | ENT_SUBSTITUTE
+							),
 							ENT_COMPAT | ENT_SUBSTITUTE
 						)
 						. '"'
@@ -91,7 +96,12 @@ trait MediaLinkTrait
 						'' :
 						' title="'
 						. $this->escapeHtmlEntities(
-							$block['title'],
+							$this->unEscapeHtmlEntities(
+								$this->unEscapeBackslash(
+									$block['title']
+								),
+								ENT_QUOTES | ENT_SUBSTITUTE
+							),
 							ENT_COMPAT | ENT_SUBSTITUTE
 						)
 						. '"'
@@ -101,10 +111,23 @@ trait MediaLinkTrait
 				. '</audio>';
 		} else {
 			return '<img src="'
-				. $this->escapeHtmlEntities($block['url'], ENT_COMPAT) . '"'
+				. $this->escapeHtmlEntities(
+					$this->unEscapeHtmlEntities(
+						$this->unEscapeBackslash(
+							$block['url']
+						),
+						ENT_QUOTES | ENT_SUBSTITUTE
+					),
+					ENT_COMPAT | ENT_SUBSTITUTE
+				)
+				. '"'
 				. ' alt="'
 				. $this->escapeHtmlEntities(
-					$block['text'],
+					strip_tags(
+						$this->renderAbsy(
+							$this->parseInline($block['text'])
+						)
+					),
 					ENT_COMPAT | ENT_SUBSTITUTE
 				)
 				. '"'
@@ -128,11 +151,16 @@ trait MediaLinkTrait
 						'' :
 						' title="'
 						. $this->escapeHtmlEntities(
-							$block['title'],
+							$this->unEscapeHtmlEntities(
+								$this->unEscapeBackslash(
+									$block['title']
+								),
+								ENT_QUOTES | ENT_SUBSTITUTE
+							),
 							ENT_COMPAT | ENT_SUBSTITUTE
 						)
 						. '"'
-					)
+				)
 				. ($this->html5 ? '>' : ' />');
 		}
 	}

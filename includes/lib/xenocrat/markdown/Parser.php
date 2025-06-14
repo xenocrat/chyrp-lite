@@ -19,7 +19,7 @@ use RuntimeException;
 abstract class Parser
 {
 	const VERSION_MAJOR = 4;
-	const VERSION_MINOR = 0;
+	const VERSION_MINOR = 1;
 	const VERSION_PATCH = 0;
 
 	/**
@@ -33,7 +33,7 @@ abstract class Parser
 	public $maximumNestingLevelThrow = false;
 
 	/**
-	 * @var boolean - Whether to convert all tabs into 4 spaces.
+	 * @var boolean - Whether to convert all tabs into spaces.
 	 */
 	public $convertTabsToSpaces = false;
 
@@ -134,11 +134,10 @@ abstract class Parser
 	 */
 	protected function preprocess($text): string
 	{
-		if ($this->convertTabsToSpaces) {
-			$text = str_replace("\t", "    ", $text);
-		}
-
 		$text = str_replace(["\r\n", "\n\r", "\r"], "\n", $text);
+		if ($this->convertTabsToSpaces) {
+			$text = $this->expandTabs($text);
+		}
 		return $text;
 	}
 
@@ -603,5 +602,49 @@ abstract class Parser
 		$ent = $this->html5 ? ENT_HTML5 : ENT_HTML401;
 		$text = html_entity_decode($text, $flags | $ent, 'UTF-8');
 		return $text;
+	}
+
+	/**
+	 * Expand tabs into 1-4 spaces.
+	 *
+	 * @param string $text
+	 * @return string
+	 */
+	protected function expandTabs($text): string
+	{
+		if ($text === '') {
+			return '';
+		}
+		if (!function_exists('mb_strlen')) {
+			return str_replace("\t", "    ", $text);
+		}
+		$expanded = '';
+		$lines = preg_split(
+				"/(\n)/",
+				$text,
+				-1,
+				PREG_SPLIT_DELIM_CAPTURE
+			);
+		foreach ($lines as $line) {
+			$output = '';
+			$chunks = preg_split(
+				"/(\t)/",
+				$line,
+				-1,
+				PREG_SPLIT_DELIM_CAPTURE
+			);
+			foreach ($chunks as $chunk) {
+				if ($chunk === "\t") {
+					$output .= str_repeat(
+						' ',
+						(4 - (mb_strlen($output) % 4))
+					);
+				} else {
+					$output .= $chunk;
+				}
+			}
+			$expanded .= $output;
+		}
+		return $expanded;
 	}
 }

@@ -146,11 +146,25 @@ trait LinkTrait
 		if (
 			strpos($markdown, ']') !== false
 			&& preg_match(
-				'/\[((?>(\\\\\[|\\\\\]|\\\\|[^\]\[\\\\])+|(?R))*)\]/',
-				$markdown,
+				'/\[((?>([^\[\]\\\\]|\\\\\[|\\\\\]|\\\\)+|(?R))*)\]/',
+				str_replace(
+					"\\\\",
+					"\\\\".chr(31),
+					$markdown
+				),
 				$textMatches
 			)
 		) {
+			$textMatches[0] = str_replace(
+				"\\\\".chr(31),
+				"\\\\",
+				$textMatches[0]
+			);
+			$textMatches[1] = str_replace(
+				"\\\\".chr(31),
+				"\\\\",
+				$textMatches[1]
+			);
 			$text = $textMatches[1];
 			$offset = strlen($textMatches[0]);
 			$markdown = substr($markdown, $offset);
@@ -166,7 +180,7 @@ REGEXP;
 			if (preg_match($pattern, $markdown, $refMatches)) {
 			// Inline link.
 				$url = isset($refMatches[2]) ?
-					$this->unEscapeBackslash($refMatches[2]) :
+					$refMatches[2] :
 					'';
 
 				$lt = str_starts_with($url, '<');
@@ -180,7 +194,7 @@ REGEXP;
 				}
 				$title = empty($refMatches[5]) ?
 					null :
-					$this->unEscapeBackslash($refMatches[5]);
+					$refMatches[5];
 
 				$key = null;
 
@@ -191,7 +205,9 @@ REGEXP;
 					$offset + strlen($refMatches[0]),
 					$key,
 				];
-			} elseif (preg_match('/^(\[(.*?)\])?/s', $markdown, $refMatches)) {
+			} elseif (
+				preg_match('/^(\[(.*?)\])?/s', $markdown, $refMatches)
+			) {
 			// Reference style link.
 				$key = empty($refMatches[2]) ? $text : $refMatches[2];
 
@@ -235,7 +251,7 @@ REGEXP;
 					return [
 						[
 							'url',
-							$this->unEscapeBackslash($matches[1])
+							$matches[1]
 						],
 						strlen($matches[0])
 					];
@@ -248,7 +264,7 @@ REGEXP;
 					return [
 						[
 							'email',
-							$this->unEscapeBackslash($matches[1])
+							$matches[1]
 						],
 						strlen($matches[0])
 					];
@@ -311,13 +327,27 @@ REGEXP;
 			}
 		}
 		return '<a href="'
-			. $this->escapeHtmlEntities($block['url'], ENT_COMPAT) . '"'
+			. $this->escapeHtmlEntities(
+				$this->unEscapeHtmlEntities(
+					$this->unEscapeBackslash(
+						$block['url']
+					),
+					ENT_QUOTES | ENT_SUBSTITUTE
+				),
+				ENT_COMPAT | ENT_SUBSTITUTE
+			)
+			. '"'
 			. (
 				empty($block['title']) ?
 					'' :
 					' title="' 
 					. $this->escapeHtmlEntities(
-						$block['title'],
+						$this->unEscapeHtmlEntities(
+							$this->unEscapeBackslash(
+								$block['title']
+							),
+							ENT_QUOTES | ENT_SUBSTITUTE
+						),
 						ENT_COMPAT | ENT_SUBSTITUTE
 					)
 					. '"'
@@ -341,10 +371,23 @@ REGEXP;
 			}
 		}
 		return '<img src="'
-			. $this->escapeHtmlEntities($block['url'], ENT_COMPAT) . '"'
+			. $this->escapeHtmlEntities(
+				$this->unEscapeHtmlEntities(
+					$this->unEscapeBackslash(
+						$block['url']
+					),
+					ENT_QUOTES | ENT_SUBSTITUTE
+				),
+				ENT_COMPAT | ENT_SUBSTITUTE
+			)
+			. '"'
 			. ' alt="'
 			. $this->escapeHtmlEntities(
-				$block['text'],
+				strip_tags(
+					$this->renderAbsy(
+						$this->parseInline($block['text'])
+					)
+				),
 				ENT_COMPAT | ENT_SUBSTITUTE
 			)
 			. '"'
@@ -368,7 +411,12 @@ REGEXP;
 					'' :
 					' title="'
 					. $this->escapeHtmlEntities(
-						$block['title'],
+						$this->unEscapeHtmlEntities(
+							$this->unEscapeBackslash(
+								$block['title']
+							),
+							ENT_QUOTES | ENT_SUBSTITUTE
+						),
 						ENT_COMPAT | ENT_SUBSTITUTE
 					)
 					. '"'
@@ -387,7 +435,11 @@ REGEXP;
 			&& ($line[0] === ' ' || $line[0] === '[')
 			&& preg_match(
 				'/^ {0,3}\[(.+?)(?<!\\\\)\]:\s*(([^\s]+?)(?:\s+[\'"](.+?)[\'"])?\s*)?$/',
-				$line
+				str_replace(
+					"\\\\",
+					"\\\\".chr(31),
+					$line
+				)
 			)
 		);
 	}
@@ -401,7 +453,11 @@ REGEXP;
 			isset($lines[$current])
 			&& preg_match(
 				'/^ {0,3}\[(.+?)(?<!\\\\)\]:\s*(?:(.+?)(?:\s+[\(\'"](.+?)[\)\'"])?\s*)?$/',
-				$lines[$current],
+				str_replace(
+					"\\\\",
+					"\\\\".chr(31),
+					$lines[$current]
+				),
 				$matches
 			)
 		) {
@@ -409,11 +465,21 @@ REGEXP;
 			// Unescaped brackets are not allowed.
 				return $this->consumeParagraph($lines, $current);
 			}
+			$matches[1] = str_replace(
+				"\\\\".chr(31),
+				"\\\\",
+				$matches[1]
+			);
 			$key = function_exists("mb_convert_case") ?
 				mb_convert_case($matches[1], MB_CASE_FOLD, 'UTF-8') :
 				strtolower($matches[1]) ;
 
 			if (isset($matches[2])) {
+				$matches[2] = str_replace(
+					"\\\\".chr(31),
+					"\\\\",
+					$matches[2]
+				);
 				$url = $matches[2];
 			} else {
 			// URL may be on the next line.
@@ -432,10 +498,15 @@ REGEXP;
 				$url = str_replace(' ', '%20', substr($url, 1, -1));
 			}
 			$ref = [
-				'url' => $this->unEscapeBackslash($url),
+				'url' => $url,
 			];
 			if (isset($matches[3])) {
-				$ref['title'] = $this->unEscapeBackslash($matches[3]);
+				$matches[3] = str_replace(
+					"\\\\".chr(31),
+					"\\\\",
+					$matches[3]
+				);
+				$ref['title'] = $matches[3];
 			} else {
 			// Title may be on the next line.
 				if (
@@ -446,7 +517,7 @@ REGEXP;
 						$matches
 					)
 				) {
-					$ref['title'] = $this->unEscapeBackslash($matches[1]);
+					$ref['title'] = $matches[1];
 					$current++;
 				}
 			}
