@@ -1309,14 +1309,12 @@
                 PREG_SPLIT_NO_EMPTY
             )
         as $fragment) {
-            $fragment = str_replace(
-                "||".chr(31),
-                "||",
-                $fragment
-            );
-
             if (preg_match("/\w+:/", $fragment)) {
-                $keywords[] = $fragment;
+                $keywords[] = str_replace(
+                    "||".chr(31),
+                    "||",
+                    $fragment
+                );
             } else {
                 $strings[] = $fragment;
             }
@@ -1355,8 +1353,10 @@
 
             if ($attr == "password") {
                 # Prevent searches for hashed passwords.
-                $strings[] = $attr;
-            } elseif (
+                continue;
+            }
+
+            if (
                 $attr == "author" and
                 isset($columns["user_id"])
             ) {
@@ -1429,15 +1429,23 @@
             if (isset($columns[$attr])) {
                 # Column exists: add Key => Val expression.
                 $where[$attr] = $val;
-            } else {
-                # No such column: add to non-keyword values.
-                $strings[] = $attr.":".$val;
             }
         }
 
         if (!empty($strings)) {
             $where[] = $plain;
-            $params[":query"] = "%".implode(" ", $strings)."%";
+            $queryString = implode(" ", $strings);
+
+            if (str_ends_with($queryString, "|"))
+                $queryString.= "|";
+
+            $queryString = str_replace(
+                "||".chr(31),
+                "||",
+                $queryString
+            );
+
+            $params[":query"] = "%".$queryString."%";
         }
 
         $order = empty($ordering) ?
