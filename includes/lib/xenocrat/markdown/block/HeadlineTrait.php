@@ -37,10 +37,26 @@ trait HeadlineTrait
 	protected function identifyHeadline($line, $lines, $current): bool
 	{
 		return (
-			// ATX headline.
-			preg_match('/^ {0,3}(#{1,6})([ \t]|$)/', $line)
-			// setext headline.
-			|| !empty($lines[$current + 1])
+			$this->identifySetextHeadline($line, $lines, $current)
+			|| $this->identifyAtxHeadline($line, $lines, $current)
+		);
+	}
+
+	/**
+	 * Identify a line as ATX headline.
+	 */
+	protected function identifyAtxHeadline($line, $lines, $current): bool
+	{
+		return (preg_match('/^ {0,3}(\#{1,6})([ \t]|$)/', $line));
+	}
+
+	/**
+	 * Identify a line as Setext headline.
+	 */
+	protected function identifySetextHeadline($line, $lines, $current): bool
+	{
+		return (
+			!empty($lines[$current + 1])
 			&& preg_match('/^ {0,3}(\-+|=+)\s*$/', $lines[$current + 1])
 		);
 	}
@@ -50,32 +66,48 @@ trait HeadlineTrait
 	 */
 	protected function consumeHeadline($lines, $current): array
 	{
-		if (
-			preg_match(
-				'/^ {0,3}(#{1,6})([ \t]|$)/',
+		return preg_match(
+				'/^ {0,3}(\#{1,6})([ \t]|$)/',
 				$lines[$current],
 				$matches
-			)
-		) {
-			// ATX headline.
-			$line = ltrim($lines[$current], "# \t");
-			$line = preg_replace('/ +(#+ *)?$/', '', $line);
-			$block = [
-				'headline',
-				'content' => $this->parseInline($line),
-				'level' => strlen($matches[1]),
-			];
-			return [$block, $current];
-		} else {
-			// Setext headline.
-			$line = trim($lines[$current]);
-			$block = [
-				'headline',
-				'content' => $this->parseInline($line),
-				'level' => substr_count($lines[$current + 1], '=') ? 1 : 2,
-			];
-			return [$block, $current + 1];
+			) ?
+			$this->consumeAtxHeadline($lines, $current) :
+			$this->consumeSetextHeadline($lines, $current);
+	}
+
+	/**
+	 * Consume lines for ATX headline.
+	 */
+	protected function consumeAtxHeadline($lines, $current): array
+	{
+		$line = ltrim($lines[$current], "# \t");
+		$line = preg_replace('/[ \t]+(\#+[ \t]*)?$/', '', $line);
+		$block = [
+			'headline',
+			'content' => $this->parseInline($line),
+			'level' => strspn(ltrim($lines[$current]), "#"),
+		];
+		return [$block, $current];
+	}
+
+	/**
+	 * Consume lines for Setext headline.
+	 */
+	protected function consumeSetextHeadline($lines, $current): array
+	{
+		$content = [];
+		for ($i = $current, $count = count($lines); $i < $count; $i++) {
+			if (preg_match('/^ {0,3}(\-+|=+)\s*$/', $lines[$i])) {
+				break;
+			}
+			$content[] = trim($lines[$i]);
 		}
+		$block = [
+			'headline',
+			'content' => $this->parseInline(trim(implode("\n", $content))),
+			'level' => substr_count($lines[$i], '=') ? 1 : 2,
+		];
+		return [$block, $i];
 	}
 
 	/**

@@ -250,23 +250,13 @@ trait HtmlTrait
 	 */
 	protected function renderEntity($block): string
 	{
-		$chr = $this->unEscapeHtmlEntities(
-			$block[1],
-			ENT_QUOTES | ENT_SUBSTITUTE
+		return $this->escapeHtmlEntities(
+			$this->unEscapeHtmlEntities(
+				$block[1],
+				ENT_QUOTES | ENT_SUBSTITUTE
+			),
+			ENT_COMPAT | ENT_SUBSTITUTE
 		);
-
-		switch ($chr) {
-			case '&':
-				return '&amp;';
-			case '<':
-				return '&lt;';
-			case '>':
-				return '&gt;';
-			case '"':
-				return '&quot;';
-			default:
-				return $chr;
-		}
 	}
 
 	protected function parseLtMarkers(): array

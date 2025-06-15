@@ -95,11 +95,15 @@ class GithubMarkdown extends Markdown
 						|| $this->identifyHtml($line, $lines, $i)
 					)
 				)
-				|| $this->identifyHeadline($line, $lines, $i)
+				|| $this->identifyAtxHeadline($line, $lines, $i)
 			) {
 				break;
 			} else {
-				$content[] = ltrim($line);
+				if ($this->identifySetextHeadline($line, $lines, $i)) {
+					return $this->consumeSetextHeadline($lines, $current);
+				} else {
+					$content[] = ltrim($line);
+				}
 			}
 		}
 		$block = [

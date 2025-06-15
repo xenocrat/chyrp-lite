@@ -19,7 +19,7 @@ use RuntimeException;
 abstract class Parser
 {
 	const VERSION_MAJOR = 4;
-	const VERSION_MINOR = 1;
+	const VERSION_MINOR = 2;
 	const VERSION_PATCH = 0;
 
 	/**
@@ -637,7 +637,7 @@ abstract class Parser
 				if ($chunk === "\t") {
 					$output .= str_repeat(
 						' ',
-						(4 - (mb_strlen($output) % 4))
+						4 - (mb_strlen($output, 'UTF-8') % 4)
 					);
 				} else {
 					$output .= $chunk;
