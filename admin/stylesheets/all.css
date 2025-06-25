@@ -118,11 +118,11 @@ ol {
     --chyrp-medium-green: #daf1d0;
     --chyrp-medium-blue: #e1f2fa;
     --chyrp-medium-purple: #f6d5f6;
-    --chyrp-border-yellow: #e5d7a1;
-    --chyrp-border-red: #d6bdb5;
-    --chyrp-border-green: #bdd6b5;
-    --chyrp-border-blue: #b8cdd9;
-    --chyrp-border-purple: #d6b5d6;
+    --chyrp-border-yellow: #e0ce8d;
+    --chyrp-border-red: #cdaea5;
+    --chyrp-border-green: #aecda5;
+    --chyrp-border-blue: #a7c1d0;
+    --chyrp-border-purple: #cda5cd;
 }
 *::selection {
     color: var(--chyrp-inky-black);
