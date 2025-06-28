@@ -1069,7 +1069,7 @@ span.options_tray:empty {
 *.tag:active,
 *.tag_added {
     background-color: var(--chyrp-light-purple);
-    border-color: var(--chyrp-strong-purple);
+    border-color: var(--chyrp-border-purple);
 }
 table.interactive + div.controls {
     background-color: var(--chyrp-light-yellow);
