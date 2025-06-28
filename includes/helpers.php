@@ -2207,7 +2207,7 @@
                 $whitelist = "";
 
                 preg_match_all(
-                    "/\s([^\s=\/\"']+)\s*=\s*(\"[^\"]*\"|\'[^\']*\')/i",
+                    "/\s([^\s=\/\"']+)\s*=\s*(([\"\'])(?:(?!\3).)*\3)/i",
                     $element[0],
                     $attributes,
                     PREG_SET_ORDER
@@ -2215,7 +2215,7 @@
 
                 foreach ($attributes as $attribute) {
                     $label = strtolower($attribute[1]);
-                    $content = substr($attribute[2], 1, -1);
+                    $content = trim($attribute[2], $attribute[3]);
 
                     switch ($name) {
                         case "a":
@@ -2622,11 +2622,11 @@
         # Check for <link> element containing the endpoint.
         if (preg_match_all("/<link [^>]+>/i", $content, $links, PREG_PATTERN_ORDER)) {
             foreach ($links[0] as $link) {
-                if (!preg_match("/ rel=(\"webmention\"|\'webmention\')/i", $link))
+                if (!preg_match("/ rel=(([\"\'])webmention\2)/i", $link))
                     continue;
 
-                if (preg_match("/ href=(\"[^\"]+\"|\'[^\']+\')/i", $link, $href)) {
-                    $endpoint = unfix(trim($href[1], "\"'"));
+                if (preg_match("/ href=(([\"\'])(?:(?!\2).)+\2)/i", $link, $href)) {
+                    $endpoint = unfix(trim($href[1], $href[2]));
 
                     # Absolute URL?
                     if (is_url($endpoint))
@@ -2641,11 +2641,11 @@
         # Check for <a> element containing the endpoint.
         if (preg_match_all("/<a [^>]+>/i", $content, $anchors, PREG_PATTERN_ORDER)) {
             foreach ($anchors[0] as $anchor) {
-                if (!preg_match("/ rel=(\"webmention\"|\'webmention\')/i", $anchor))
+                if (!preg_match("/ rel=(([\"\'])webmention\2)/i", $anchor))
                     continue;
 
-                if (preg_match("/ href=(\"[^\"]+\"|\'[^\']+\')/i", $anchor, $href)) {
-                    $endpoint = unfix(trim($href[1], "\"'"));
+                if (preg_match("/ href=(([\"\'])(?:(?!\2).)+\2)/i", $anchor, $href)) {
+                    $endpoint = unfix(trim($href[1], $href[2]));
 
                     # Absolute URL?
                     if (is_url($endpoint))
@@ -2674,13 +2674,13 @@
         $string
     ): array {
         $urls = array();
-        $regx = "/<a(?= )[^>]* href=(\"[^\"]+\"|\'[^\']+\')[^>]*>.+?<\/a>/i";
+        $regex = "/<a(?= )[^>]* href=(([\"\'])(?:(?!\2).)+\2)[^>]*>.+?<\/a>/i";
 
-        if (preg_match_all($regx, $string, $matches, PREG_PATTERN_ORDER))
-            $urls = $matches[1];
-
-        foreach ($urls as &$url)
-            $url = trim($url, " \"'");
+        if (preg_match_all($regex, $string, $matches, PREG_SET_ORDER)) {
+            foreach ($matches as $match) {
+                $urls[] = trim($match[1], $match[2]);
+            }
+        }
 
         return array_filter(array_unique($urls), "is_url");
     }
