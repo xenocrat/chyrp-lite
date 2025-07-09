@@ -393,16 +393,17 @@
                 text-decoration: underline;
                 text-underline-offset: 0.125em;
             }
-            a:focus {
-                outline: var(--chyrp-strong-orange) dashed 2px;
-                outline-offset: 0px;
-            }
             a:hover,
             a:focus,
             a:active {
+                outline: none;
                 color: var(--chyrp-strong-blue);
                 text-decoration: underline;
                 text-underline-offset: 0.125em;
+            }
+            a:focus-visible {
+                outline: var(--chyrp-strong-orange) dashed 2px;
+                outline-offset: 2px;
             }
             a.big,
             button {
