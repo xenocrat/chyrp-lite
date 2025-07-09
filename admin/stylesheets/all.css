@@ -213,16 +213,17 @@ a:visited {
     text-decoration: underline;
     text-underline-offset: 0.125em;
 }
-a:focus {
-    outline: var(--chyrp-strong-orange) dashed 2px;
-    outline-offset: 0px;
-}
 a:hover,
 a:focus,
 a:active {
+    outline: none;
     color: var(--chyrp-strong-blue);
     text-decoration: underline;
     text-underline-offset: 0.125em;
+}
+a:focus-visible {
+    outline: var(--chyrp-strong-orange) dashed 2px;
+    outline-offset: 2px;
 }
 *:where(form, table) + h1,
 *:where(form, table) + h2,
@@ -291,6 +292,11 @@ a:active {
     outline: none;
     background-color: var(--chyrp-english-grey);
 }
+#header #navigation li a:focus-visible {
+    color: var(--chyrp-strong-blue);
+    text-decoration: underline;
+    text-underline-offset: 0.375em;
+}
 
 /* Group: Sub-Navigation */
 
@@ -337,6 +343,11 @@ a:active {
 #sub_nav li a:focus {
     outline: none;
     background-color: var(--chyrp-pure-white);
+}
+#sub_nav li a:focus-visible {
+    color: var(--chyrp-strong-blue);
+    text-decoration: underline;
+    text-underline-offset: 0.375em;
 }
 
 /* Group: Content */
@@ -1062,14 +1073,14 @@ span.options_tray:empty {
 *.tag:visited {
     text-decoration: none;
 }
-*.tag:focus {
-    outline: var(--chyrp-strong-purple) solid 2px;
-    outline-offset: -1px;
-}
 *.tag:active,
 *.tag_added {
     background-color: var(--chyrp-light-purple);
     border-color: var(--chyrp-border-purple);
+}
+*.tag:focus-visible {
+    outline: var(--chyrp-strong-purple) solid 2px;
+    outline-offset: -2px;
 }
 table.interactive + div.controls {
     background-color: var(--chyrp-light-yellow);
@@ -1155,7 +1166,7 @@ label.emblem.toolbar > input:focus-visible + svg,
 label.emblem.toolbar > input:focus-visible + img {
     fill: var(--chyrp-strong-blue);
     outline: var(--chyrp-strong-orange) dashed 2px;
-    outline-offset: 1px;
+    outline-offset: 2px;
 }
 input.toolbar.hidden {
     display: inline !important;
@@ -1224,7 +1235,7 @@ input.toolbar.hidden::file-selector-button {
 .iframe_foreground:focus-visible,
 .iframe_close_gadget:focus-visible {
     outline: var(--chyrp-strong-orange) dashed 2px;
-    outline-offset: 1px;
+    outline-offset: 2px;
 }
 .iframe_close_gadget svg,
 .iframe_close_gadget img {
@@ -1483,7 +1494,7 @@ input.toolbar.hidden::file-selector-button {
         border-color: var(--chyrp-scottish-grey);
     }
     #content ul.extend > li {
-        background-color: var(--chyrp-welsh-grey);
+        background-color: transparent;
         border-color: var(--chyrp-scottish-grey);
     }
     li.module div.controls,
