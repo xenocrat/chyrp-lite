@@ -27,9 +27,9 @@
 <th class="category_count value">{{ "Posts" | translate("categorize") }}</th>
 {{ trigger.call("manage_comments_column_header") }}
 <th class="controls" colspan="2">{{ "Controls" | translate }}</th>
-</tr>   
+</tr>
 </thead>
-<tbody> 
+<tbody>
 {% for category in categorize %}
 <tr id="category_{{ category.id }}">
 <td class="category_show emblem">
