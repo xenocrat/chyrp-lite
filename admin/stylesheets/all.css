@@ -212,7 +212,7 @@ a:visited {
     color: var(--chyrp-inky-black);
     text-decoration: underline;
     text-underline-offset: 0.125em;
-    text-decoration-thickness: 1px;
+    text-decoration-thickness: 0.0625em;
 }
 a:hover,
 a:focus,
@@ -221,7 +221,7 @@ a:active {
     color: var(--chyrp-strong-blue);
     text-decoration: underline;
     text-underline-offset: 0.125em;
-    text-decoration-thickness: 1px;
+    text-decoration-thickness: 0.0625em;
 }
 a:focus-visible {
     outline: var(--chyrp-strong-orange) dashed 2px;
@@ -297,7 +297,7 @@ a:focus-visible {
 #header #navigation li a:focus-visible {
     text-decoration: underline;
     text-underline-offset: 0.125em;
-    text-decoration-thickness: 1px;
+    text-decoration-thickness: 0.0625em;
 }
 
 /* Group: Sub-Navigation */
@@ -349,7 +349,7 @@ a:focus-visible {
 #sub_nav li a:focus-visible {
     text-decoration: underline;
     text-underline-offset: 0.125em;
-    text-decoration-thickness: 1px;
+    text-decoration-thickness: 0.0625em;
 }
 
 /* Group: Content */
@@ -907,7 +907,7 @@ a.next_page:focus-visible,
 a.prev_page:focus-visible {
     text-decoration: underline;
     text-underline-offset: 0.125em;
-    text-decoration-thickness: 1px;
+    text-decoration-thickness: 0.0625em;
 }
 button.boo,
 a.button.boo {
