@@ -306,17 +306,20 @@ a:visited {
     color: var(--chyrp-inky-black);
     text-decoration: underline;
     text-underline-offset: 0.125em;
-}
-a:focus {
-    outline: var(--chyrp-strong-orange) dashed 2px;
-    outline-offset: 0px;
+    text-decoration-thickness: 1px;
 }
 a:hover,
 a:focus,
 a:active {
+    outline: none;
     color: var(--chyrp-strong-blue);
     text-decoration: underline;
     text-underline-offset: 0.125em;
+    text-decoration-thickness: 1px;
+}
+a:focus-visible {
+    outline: var(--chyrp-strong-orange) dashed 2px;
+    outline-offset: 2px;
 }
 img.emblem,
 a.emblem > img {

@@ -961,6 +961,7 @@
                 color: var(--chyrp-inky-black);
                 text-decoration: underline;
                 text-underline-offset: 0.125em;
+                text-decoration-thickness: 1px;
             }
             a:hover,
             a:focus,
@@ -969,6 +970,7 @@
                 color: var(--chyrp-strong-blue);
                 text-decoration: underline;
                 text-underline-offset: 0.125em;
+                text-decoration-thickness: 1px;
             }
             a:focus-visible {
                 outline: var(--chyrp-strong-orange) dashed 2px;
@@ -1001,6 +1003,12 @@
             button:active {
                 border-color: var(--chyrp-strong-blue);
                 outline: none;
+            }
+            a.big:focus-visible,
+            button:focus-visible {
+                text-decoration: underline;
+                text-underline-offset: 0.125em;
+                text-decoration-thickness: 1px;
             }
             hr {
                 border: none;
