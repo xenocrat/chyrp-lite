@@ -2,7 +2,7 @@
 return array(
     "name"          => __("Blossom", "blossom"),
     "url"           => "http://chyrplite.net/",
-    "version"       => "2025.02",
+    "version"       => "2025.03",
     "description"   => __("The default theme provided with Chyrp Lite.", "blossom"),
     "author"        => array(
         "name"      => "Daniel Pimley",
