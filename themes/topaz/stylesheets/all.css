@@ -715,8 +715,12 @@ summary:active {
     outline: none;
     color: var(--topaz-strong-blue);
     text-decoration: underline;
-    text-underline-offset: 0.125em;
+    text-underline-offset: 0.375em;
     text-decoration-thickness: 0.0625em;
+}
+a:focus-visible,
+summary:focus-visible {
+    text-decoration-thickness: 0.25em;
 }
 div.ribbon a {
     color: var(--topaz-pure-white);
@@ -754,7 +758,7 @@ section a:visited,
 p a:visited {
     color: var(--topaz-inky-black);
     text-decoration: underline;
-    text-underline-offset: 0.125em;
+    text-underline-offset: 0.375em;
     text-decoration-thickness: 0.0625em;
 }
 section a:hover,
@@ -767,7 +771,7 @@ p a:active {
 }
 section a:focus-visible,
 p a:focus-visible {
-    text-decoration-style: double;
+    text-decoration-thickness: 0.25em;
 }
 div.footnotes {
     font-size: 0.75em;

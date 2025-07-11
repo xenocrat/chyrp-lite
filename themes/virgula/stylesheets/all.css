@@ -361,12 +361,11 @@ a:visited {
     color: var(--virgula-dark-purple);
 }
 a:hover,
-summary:hover {
-    color: var(--virgula-dark-blue);
-}
-a:focus {
+summary:hover,
+a:focus,
+summary:focus {
     outline: none;
-    text-decoration-style: double;
+    color: var(--virgula-dark-blue);
 }
 a:active,
 summary:active {
@@ -483,6 +482,10 @@ header > * {
 }
 div.doaction {
     margin: 2rem 0rem;
+    display: flex;
+    flex-flow: row wrap;
+    column-gap: 0.5em;
+    justify-content: flex-start;
 }
 nav.traversal:not(:has(a)) {
     display: none;
@@ -587,7 +590,11 @@ article.audio audio {
 }
 *:focus,
 section.photo > a:focus,
-section a:has(img):focus {
+section a:has(img):focus,
+a:focus-visible,
+summary:focus-visible,
+div.doaction a:focus-visible,
+button:focus-visible {
     outline: var(--virgula-strong-yellow) solid 2px;
     outline-offset: 2px;
 }
