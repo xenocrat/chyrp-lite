@@ -101,6 +101,7 @@
 <!-- Content -->
 <div id="main" role="main">
 {% block content %}{% endblock %}
+{{ trigger.call("end_main") }}
 </div>
 {% if posts.paginated is defined and posts.next_page() %}
 <!-- Navigation -->
@@ -108,7 +109,6 @@
 {{ posts.next_link("Page %d" | translate | format(posts.page + 1)) }}
 </div>
 {% endif %}
-<!-- Footer -->
 {{ trigger.call("end_content") }}
 </body>
 <!-- Queries: {{ sql_queries }} | Load Time: {{ theme.load_time() }} -->

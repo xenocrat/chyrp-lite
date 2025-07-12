@@ -51,6 +51,7 @@
 <!-- Content -->
 <div id="main" role="main">
 {% block content %}{% endblock %}
+{{ trigger.call("end_main") }}
 </div>
 {% if posts.paginated is defined and posts.next_page() %}
 <!-- Navigation -->
