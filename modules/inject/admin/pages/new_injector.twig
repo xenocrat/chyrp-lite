@@ -1,0 +1,56 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block title %}{{ "Add Injector" | translate("inject") }}{% endblock %}
+
+{% block content %}
+<h2>{{ "Add Injector" | translate("inject") }}</h2>
+<form id="edit_form" action="{{ url('add_injector') }}" method="post" accept-charset="UTF-8">
+<fieldset role="presentation">
+<p class="main_options">
+<label for="label">
+{{ "Label" | translate("inject") }}
+<a href="{{ url('help/id/injector_labels') }}" rel="help" target="_blank" class="help emblem">
+{{- icon_svg("help.svg", "Help" | translate) -}}
+</a>
+</label>
+<input class="text code" type="text" name="label" id="label" pattern="^[^<>]*$" value="" required>
+</p>
+<p class="main_options">
+<label for="payload">
+{{ "Content To Inject" | translate("inject") }}
+</label>
+<textarea rows="10" name="payload" id="payload"></textarea>
+</p>
+<div id="more_options" class="more_options">
+<p class="more_options_option">
+<label for="type">{{ "Type" | translate("inject") }}</label>
+<select name="type" id="type">
+{% set type_constant = constant("Inject::TYPE_MARKUP_POST") %}
+{% for key, val in injection_types %}
+<option value="{{ key }}"{{ key | selected(type_constant) }}>
+{{ val }}
+</option>
+{% endfor %}
+</select>
+</p>
+<p class="more_options_option">
+<label for="frequency">{{ "Frequency" | translate("inject") }}</label>
+<select name="frequency" id="frequency">
+{% set frequency_constant = constant("Inject::FREQUENCY_NEVER") %}
+{% for key, val in injection_frequencies %}
+<option value="{{ key }}"{{ key | selected(frequency_constant) }}>
+{{ val }}
+</option>
+{% endfor %}
+</select>
+</p>
+</div>
+<input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
+<div class="buttons confirmation">
+<button type="submit">
+{{ "Add Injector" | translate("inject") }}
+</button>
+</div>
+</fieldset>
+</form>
+{% endblock %}

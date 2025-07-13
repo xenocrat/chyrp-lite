@@ -1,0 +1,24 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block title %}{{ "Delete Injector?" | translate("inject") }}{% endblock %}
+
+{% block content %}
+<h2>{{ "Delete Injector?" | translate("inject") }}</h2>
+<form class="delete" action="{{ url('destroy_injector') }}" method="post" accept-charset="UTF-8">
+<fieldset role="presentation">
+<p>
+{{ "&#8220;%s&#8221; will be permanently deleted." | translate("inject") | format(injector.label | fix(false, true)) }}
+</p>
+<div class="confirmation">
+<button name="destroy" value="indubitably" class="boo">
+{{ "Delete!" | translate }}
+</button>
+<button name="destroy" value="undecidedly" type="submit" class="yay">
+{{ "Cancel" | translate }}
+</button>
+</div>
+<input type="hidden" name="id" value="{{ injector_id }}" id="id">
+<input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
+</fieldset>
+</form>
+{% endblock %}

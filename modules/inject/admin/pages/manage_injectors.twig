@@ -1,0 +1,59 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block title %}{{ "Manage Injectors" | translate("inject") }}{% endblock %}
+
+{% block content %}
+<form class="filters" action="{{ url('manage_injectors') }}" method="post" accept-charset="UTF-8" role="search">
+<fieldset role="presentation">
+<label for="search">{{ "Search&hellip;" | translate }}</label>
+<input class="text filter_text" type="text" name="search" value="{{ GET.search is defined ? GET.search | fix(true, true) : '' }}" id="search">
+<button type="submit">{{ "Search" | translate }}</button>
+<a href="{{ url('new_injector') }}" class="button yay">
+{{ icon_svg("add.svg") }}{{ "New Injector" | translate("inject") }}
+</a>
+</fieldset>
+</form>
+<h2>{{ GET.search is defined ? "Search Results" | translate : "Injectors" | translate("inject") }}</h2>
+<table>
+<thead> 
+<tr class="head">
+<th class="injector_label name main">{{ "Name" | translate("inject") }}</th>
+<th class="injector_type value">{{ "Type" | translate("inject") }}</th>
+<th class="injector_frequency value">{{ "Frequency" | translate("inject") }}</th>
+<th class="controls" colspan="2">{{ "Controls" | translate }}</th>
+</tr>
+</thead>
+<tbody> 
+{% for id, injector in injectors %}
+<tr id="injector_{{ id }}">
+<td class="injector_label name main">
+{{ injector.label | fix(true, true) | truncate(40) }}
+</td>
+<td class="injector_type value">
+{{ injection_types[injector.type] }}
+</td>
+<td class="injector_frequency value">
+{{ injection_frequencies[injector.frequency] }}
+</td>
+<td class="controls">
+<a class="injector_edit_link edit_link emblem" href="{{ url('edit_injector/id/' ~ (id | url_encode)) }}">
+{{ icon_svg("edit.svg", "Edit" | translate) }}
+</a>
+</td>
+<td class="controls">
+<a class="injector_delete_link delete_link emblem" href="{{ url('delete_injector/id/' ~ (id | url_encode)) }}">
+{{ icon_svg("delete.svg", "Delete" | translate) }}
+</a>
+</td>
+</tr>
+{% else %}
+<tr>
+<td class="placeholder">
+{{ icon_svg("failure.svg", false, "emblem") }}
+{{ "No results" | translate }}
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}
