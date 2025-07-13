@@ -909,7 +909,12 @@ Function: gc
 Deletes sessions not updated for 30+ days, or with no stored data.
 
 Parameters:
-    $lifetime - The configured maximum session lifetime in seconds.
+    $lifetime - The maximum session lifetime in seconds (ignored).
+
+
+Function: discard
+-----------------
+Discard the session data for this session?
 
 
 Function: hash_token

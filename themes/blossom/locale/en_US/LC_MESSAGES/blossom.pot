@@ -361,11 +361,11 @@ msgstr ""
 msgid "Newer posts"
 msgstr ""
 
-#: themes/blossom/layouts/default.twig:57
+#: themes/blossom/layouts/default.twig:58
 msgid "Older posts"
 msgstr ""
 
-#: themes/blossom/layouts/default.twig:66
+#: themes/blossom/layouts/default.twig:67
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr ""

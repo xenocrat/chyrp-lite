@@ -368,15 +368,15 @@ msgstr ""
 msgid "Page %d"
 msgstr ""
 
-#: themes/topaz/layouts/default.twig:54
+#: themes/topaz/layouts/default.twig:55
 msgid "Newer posts"
 msgstr ""
 
-#: themes/topaz/layouts/default.twig:55
+#: themes/topaz/layouts/default.twig:56
 msgid "Older posts"
 msgstr ""
 
-#: themes/topaz/layouts/default.twig:65
+#: themes/topaz/layouts/default.twig:66
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr ""

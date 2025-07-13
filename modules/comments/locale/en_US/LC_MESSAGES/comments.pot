@@ -368,68 +368,68 @@ msgstr ""
 msgid "An ID is required to show a comment."
 msgstr ""
 
-#: modules/comments/comments.php:1141
-#: modules/comments/comments.php:1259
+#: modules/comments/comments.php:1140
+#: modules/comments/comments.php:1258
 #, php-format
 msgid "Comments on &#8220;%s&#8221;"
 msgstr ""
 
-#: modules/comments/comments.php:1239
+#: modules/comments/comments.php:1238
 msgid "You have unsubscribed from the conversation."
 msgstr ""
 
-#: modules/comments/comments.php:1282
+#: modules/comments/comments.php:1281
 #, php-format
 msgid "Comment #%d"
 msgstr ""
 
-#: modules/comments/comments.php:1315
+#: modules/comments/comments.php:1314
 msgid "A ping from your URL is already registered."
 msgstr ""
 
-#: modules/comments/comments.php:1322
+#: modules/comments/comments.php:1321
 msgid "Your URL is too long to be stored in our database."
 msgstr ""
 
-#: modules/comments/comments.php:1327
+#: modules/comments/comments.php:1326
 msgid "Mentioned this post."
 msgstr ""
 
-#: modules/comments/comments.php:1350
+#: modules/comments/comments.php:1349
 msgid "Open"
 msgstr ""
 
-#: modules/comments/comments.php:1357
+#: modules/comments/comments.php:1356
 msgid "Closed"
 msgstr ""
 
-#: modules/comments/comments.php:1364
+#: modules/comments/comments.php:1363
 msgid "Private"
 msgstr ""
 
-#: modules/comments/comments.php:1371
+#: modules/comments/comments.php:1370
 msgid "Registered Only"
 msgstr ""
 
-#: modules/comments/comments.php:1381
+#: modules/comments/comments.php:1380
 msgid "Comment Status"
+msgstr ""
+
+#: modules/comments/comments.php:1637
+#: modules/comments/comments.php:1665
+#: modules/comments/comments.php:1698
+#, php-format
+msgid "New Comment at %s"
 msgstr ""
 
 #: modules/comments/comments.php:1638
 #: modules/comments/comments.php:1666
 #: modules/comments/comments.php:1699
 #, php-format
-msgid "New Comment at %s"
-msgstr ""
-
-#: modules/comments/comments.php:1639
-#: modules/comments/comments.php:1667
-#: modules/comments/comments.php:1700
-#, php-format
 msgid "%s commented on a blog post:"
 msgstr ""
 
-#: modules/comments/comments.php:1708
+#: modules/comments/comments.php:1707
 msgid "Unsubscribe from this conversation:"
 msgstr ""
 

@@ -325,7 +325,7 @@ msgstr ""
 msgid "&larr; Newer posts"
 msgstr ""
 
-#: themes/sparrow/layouts/default.twig:114
+#: themes/sparrow/layouts/default.twig:115
 msgid "Older posts &rarr;"
 msgstr ""
 

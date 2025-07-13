@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/sparrow/content/comment.twig:4
@@ -330,7 +330,7 @@ msgstr "Suchen"
 msgid "&larr; Newer posts"
 msgstr "&larr; Neuere Posts"
 
-#: themes/sparrow/layouts/default.twig:114
+#: themes/sparrow/layouts/default.twig:115
 msgid "Older posts &rarr;"
 msgstr "Ältere Posts &rarr;"
 

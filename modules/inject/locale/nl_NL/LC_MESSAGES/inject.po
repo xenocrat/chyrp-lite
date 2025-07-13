@@ -1,0 +1,173 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/inject/admin/help/injector_labels.twig:3
+#: modules/inject/admin/help/injector_labels.twig:6
+msgid "Injector Labels"
+msgstr "Injector Etiketten"
+
+#: modules/inject/admin/help/injector_labels.twig:8
+msgid ""
+"Each injector must have a label. The label has two purposes: firstly, it "
+"helps you to manage your injectors by giving each one a label that is "
+"memorable and descriptive. Secondly, for filter injectors only, the label "
+"identifies the content to be injected into the post or page."
+msgstr ""
+"Elke injector moet voorzien zijn van een label. Het label heeft twee "
+"doelen: ten eerste helpt het u bij het beheren van uw injectoren door ze "
+"elk een label te geven dat gedenkwaardig en beschrijvend is. Ten tweede, "
+"alleen voor filterinjectoren, identificeert het etiket de inhoud die in "
+"het bericht of de pagina moet worden geïnjecteerd."
+
+#: modules/inject/admin/pages/delete_injector.twig:3
+#: modules/inject/admin/pages/delete_injector.twig:6
+msgid "Delete Injector?"
+msgstr "Injector verwijderen?"
+
+#: modules/inject/admin/pages/delete_injector.twig:10
+#, php-format
+msgid "&#8220;%s&#8221; will be permanently deleted."
+msgstr "&#8220;%s&#8221; wordt permanent verwijderd."
+
+#: modules/inject/admin/pages/edit_injector.twig:3
+msgid "Edit Injector"
+msgstr "Injector bewerken"
+
+#: modules/inject/admin/pages/edit_injector.twig:6
+#, php-format
+msgid "Editing Injector &#8220;%s&#8221;"
+msgstr "Injector &#8220;%s&#8221; bewerken"
+
+#: modules/inject/admin/pages/edit_injector.twig:11
+#: modules/inject/admin/pages/manage_injectors.twig:20
+#: modules/inject/admin/pages/new_injector.twig:11
+msgid "Label"
+msgstr "Label"
+
+#: modules/inject/admin/pages/edit_injector.twig:20
+#: modules/inject/admin/pages/new_injector.twig:20
+msgid "Content To Inject"
+msgstr "Inhoud om te injecteren"
+
+#: modules/inject/admin/pages/edit_injector.twig:26
+#: modules/inject/admin/pages/manage_injectors.twig:21
+#: modules/inject/admin/pages/new_injector.twig:26
+msgid "Type"
+msgstr "Type"
+
+#: modules/inject/admin/pages/edit_injector.twig:36
+#: modules/inject/admin/pages/manage_injectors.twig:22
+#: modules/inject/admin/pages/new_injector.twig:37
+msgid "Frequency"
+msgstr "Frequentie"
+
+#: modules/inject/admin/pages/manage_injectors.twig:3
+msgid "Manage Injectors"
+msgstr "Injectoren beheren"
+
+#: modules/inject/admin/pages/manage_injectors.twig:12
+msgid "New Injector"
+msgstr "Nieuwe injector"
+
+#: modules/inject/admin/pages/manage_injectors.twig:16
+#: modules/inject/inject.php:483
+msgid "Injectors"
+msgstr "Injectoren"
+
+#: modules/inject/admin/pages/new_injector.twig:3
+#: modules/inject/admin/pages/new_injector.twig:6
+#: modules/inject/admin/pages/new_injector.twig:51
+msgid "Add Injector"
+msgstr "Injector toevoegen"
+
+#: modules/inject/info.php:3
+msgid "Inject"
+msgstr "Injecteren"
+
+#: modules/inject/info.php:6
+msgid "Inject content into your blog using triggers and filters."
+msgstr "Injecteer inhoud in uw blog met behulp van triggers en filters."
+
+#: modules/inject/inject.php:183
+msgid "HTML head"
+msgstr "HTML-kop"
+
+#: modules/inject/inject.php:184
+msgid "End of main section"
+msgstr "Einde van het hoofdgedeelte"
+
+#: modules/inject/inject.php:185
+msgid "After other content"
+msgstr "Na andere inhoud"
+
+#: modules/inject/inject.php:186
+msgid "Post filter"
+msgstr "Bericht filter"
+
+#: modules/inject/inject.php:187
+msgid "Page filter"
+msgstr "Pagina filter"
+
+#: modules/inject/inject.php:194
+msgid "Never"
+msgstr "Nooit"
+
+#: modules/inject/inject.php:195
+msgid "Once"
+msgstr "Eénmalig"
+
+#: modules/inject/inject.php:196
+msgid "Odd"
+msgstr "Oneven"
+
+#: modules/inject/inject.php:197
+msgid "Even"
+msgstr "Even"
+
+#: modules/inject/inject.php:198
+msgid "Always"
+msgstr "Altijd"
+
+#: modules/inject/inject.php:296 modules/inject/inject.php:377
+msgid "Label cannot be blank."
+msgstr "Het label mag niet leeg zijn."
+
+#: modules/inject/inject.php:324
+msgid "Injector added."
+msgstr "Injector toegevoegd."
+
+#: modules/inject/inject.php:335
+msgid "An ID is required to edit an injector."
+msgstr "Een ID is vereist om een injector te bewerken."
+
+#: modules/inject/inject.php:344 modules/inject/inject.php:386
+#: modules/inject/inject.php:427 modules/inject/inject.php:462
+msgid "Injector not found."
+msgstr "Injector niet gevonden."
+
+#: modules/inject/inject.php:370
+msgid "An ID is required to update an injector."
+msgstr "Een ID is vereist om een injector bij te werken."
+
+#: modules/inject/inject.php:407
+msgid "Injector updated."
+msgstr "Injector bijgewerkt."
+
+#: modules/inject/inject.php:418 modules/inject/inject.php:450
+msgid "An ID is required to delete an injector."
+msgstr "Een ID is vereist om een injector te verwijderen."
+
+#: modules/inject/inject.php:473
+msgid "Injector deleted."
+msgstr "Injector verwijderd."

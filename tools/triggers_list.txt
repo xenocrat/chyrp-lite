@@ -8,7 +8,7 @@ end
 Called from:
 	admin/index.php on line 19
 	ajax/index.php on line 19
-	includes/download.php on line 57
+	includes/download.php on line 74
 	includes/thumbnail.php on line 96
 	index.php on line 15
 
@@ -215,6 +215,24 @@ Arguments:
 	$value
 
 
+flash_message
+-------------
+Called from:
+	includes/class/Flash.php on line 65
+
+
+flash_notice
+------------
+Called from:
+	includes/class/Flash.php on line 92
+
+
+flash_warning
+-------------
+Called from:
+	includes/class/Flash.php on line 119
+
+
 parse_route
 -----------
 Called from:
@@ -257,13 +275,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 2284
+	includes/controller/Admin.php on line 2308
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2734
+	includes/controller/Admin.php on line 2758
 
 Arguments:
 	$group
@@ -272,7 +290,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2772
+	includes/controller/Admin.php on line 2796
 
 Arguments:
 	$user
@@ -281,7 +299,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2825
+	includes/controller/Admin.php on line 2849
 
 Arguments:
 	$entry
@@ -291,7 +309,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2874
+	includes/controller/Admin.php on line 2898
 
 Arguments:
 	$entry
@@ -301,7 +319,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 2878
+	includes/controller/Admin.php on line 2902
 
 Arguments:
 	$imports
@@ -310,13 +328,13 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 3279
+	includes/controller/Admin.php on line 3303
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 3294
+	includes/controller/Admin.php on line 3318
 
 
 can_not_view_page
@@ -350,7 +368,7 @@ Called from:
 webmention
 ----------
 Called from:
-	includes/helpers.php on line 2548
+	includes/helpers.php on line 2571
 
 Arguments:
 	$post
@@ -361,7 +379,7 @@ Arguments:
 before_delete_upload
 --------------------
 Called from:
-	includes/helpers.php on line 3360
+	includes/helpers.php on line 3383
 
 Arguments:
 	$filename
@@ -370,7 +388,7 @@ Arguments:
 delete_upload
 -------------
 Called from:
-	includes/helpers.php on line 3363
+	includes/helpers.php on line 3386
 
 Arguments:
 	$filename
@@ -379,19 +397,19 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 3613
+	includes/helpers.php on line 3636
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 3632
+	includes/helpers.php on line 3655
 
 
 correspond_activate_account
 ---------------------------
 Called from:
-	includes/helpers.php on line 3995
+	includes/helpers.php on line 4018
 
 Arguments:
 	$user
@@ -401,7 +419,7 @@ Arguments:
 correspond_reset_password
 -------------------------
 Called from:
-	includes/helpers.php on line 4037
+	includes/helpers.php on line 4060
 
 Arguments:
 	$user
@@ -411,7 +429,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 4084
+	includes/helpers.php on line 4107
 
 Arguments:
 	$ob
@@ -612,7 +630,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 1292
+	modules/comments/comments.php on line 1291
 
 Arguments:
 	$comment
@@ -622,7 +640,7 @@ Arguments:
 correspond_site_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1630
+	modules/comments/comments.php on line 1629
 
 Arguments:
 	$comment
@@ -631,7 +649,7 @@ Arguments:
 correspond_user_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1658
+	modules/comments/comments.php on line 1657
 
 Arguments:
 	$comment
@@ -641,7 +659,7 @@ Arguments:
 correspond_peer_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1691
+	modules/comments/comments.php on line 1690
 
 Arguments:
 	$comment
@@ -829,14 +847,24 @@ Called from:
 	themes/virgula/layouts/default.twig on line 27
 
 
+end_main
+--------
+Called from:
+	themes/blossom/layouts/default.twig on line 54
+	themes/sparrow/layouts/default.twig on line 110
+	themes/topaz/layouts/default.twig on line 50
+	themes/umbra/layouts/default.twig on line 104
+	themes/virgula/layouts/default.twig on line 91
+
+
 end_content
 -----------
 Called from:
-	themes/blossom/layouts/default.twig on line 59
+	themes/blossom/layouts/default.twig on line 60
 	themes/sparrow/layouts/default.twig on line 118
-	themes/topaz/layouts/default.twig on line 58
+	themes/topaz/layouts/default.twig on line 59
 	themes/umbra/layouts/default.twig on line 112
-	themes/virgula/layouts/default.twig on line 92
+	themes/virgula/layouts/default.twig on line 93
 
 
 
@@ -844,42 +872,6 @@ Called from:
 ==============================================
  Trigger Filters
 ==============================================
-
-
-flash_message
--------------
-Called from:
-	includes/class/Flash.php on line 66
-
-Target:
-	$message
-
-Arguments:
-	$redirect_to
-
-
-flash_notice
-------------
-Called from:
-	includes/class/Flash.php on line 93
-
-Target:
-	$message
-
-Arguments:
-	$redirect_to
-
-
-flash_warning
--------------
-Called from:
-	includes/class/Flash.php on line 120
-
-Target:
-	$message
-
-Arguments:
-	$redirect_to
 
 
 parse_urls
@@ -983,7 +975,7 @@ Arguments:
 posts_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 2402
+	includes/controller/Admin.php on line 2426
 
 Target:
 	$posts_atom
@@ -995,7 +987,7 @@ Arguments:
 pages_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 2504
+	includes/controller/Admin.php on line 2528
 
 Target:
 	$pages_atom
@@ -1007,7 +999,7 @@ Arguments:
 export
 ------
 Called from:
-	includes/controller/Admin.php on line 2590
+	includes/controller/Admin.php on line 2614
 
 Target:
 	$exports
@@ -1016,7 +1008,7 @@ Target:
 before_import
 -------------
 Called from:
-	includes/controller/Admin.php on line 2706
+	includes/controller/Admin.php on line 2730
 
 Target:
 	$imports
@@ -1025,7 +1017,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 3801
+	includes/controller/Admin.php on line 3825
 
 Target:
 	$write
@@ -1034,7 +1026,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3870
+	includes/controller/Admin.php on line 3894
 
 Target:
 	$manage
@@ -1043,7 +1035,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 3900
+	includes/controller/Admin.php on line 3924
 
 Target:
 	$settings
@@ -1052,7 +1044,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3923
+	includes/controller/Admin.php on line 3947
 
 Target:
 	$extend
@@ -1061,7 +1053,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 4011
+	includes/controller/Admin.php on line 4035
 
 Target:
 	$this->context
@@ -1070,7 +1062,7 @@ Target:
 markup_page_title
 -----------------
 Called from:
-	includes/controller/Ajax.php on line 248
+	includes/controller/Ajax.php on line 247
 	includes/model/Page.php on line 358
 
 Target:
@@ -1080,7 +1072,7 @@ Target:
 markup_title
 ------------
 Called from:
-	includes/controller/Ajax.php on line 248
+	includes/controller/Ajax.php on line 247
 	includes/model/Page.php on line 358
 
 Target:
@@ -1090,7 +1082,7 @@ Target:
 markup_page_text
 ----------------
 Called from:
-	includes/controller/Ajax.php on line 252
+	includes/controller/Ajax.php on line 251
 	includes/model/Page.php on line 359
 
 Target:
@@ -1100,7 +1092,7 @@ Target:
 markup_text
 -----------
 Called from:
-	includes/controller/Ajax.php on line 252
+	includes/controller/Ajax.php on line 251
 	includes/model/Page.php on line 359
 	modules/comments/comments.php on line 1096
 	modules/comments/model/Comment.php on line 612
@@ -1121,7 +1113,7 @@ Target:
 keyword_search
 --------------
 Called from:
-	includes/helpers.php on line 1433
+	includes/helpers.php on line 1456
 
 Target:
 	$search
@@ -1134,7 +1126,7 @@ Arguments:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 3973
+	includes/helpers.php on line 3996
 
 Target:
 	$function
@@ -1143,7 +1135,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 4085
+	includes/helpers.php on line 4108
 	includes/lib/Leaf.php on line 352
 
 Target:
@@ -1387,16 +1379,25 @@ Target:
 cache_regenerate_triggers
 -------------------------
 Called from:
-	modules/cacher/cacher.php on line 156
+	modules/cacher/cacher.php on line 206
 
 Target:
 	$regenerate
 
 
+cache_dehance_triggers
+----------------------
+Called from:
+	modules/cacher/cacher.php on line 224
+
+Target:
+	$dehance
+
+
 cache_exclude_triggers
 ----------------------
 Called from:
-	modules/cacher/cacher.php on line 167
+	modules/cacher/cacher.php on line 235
 
 Target:
 	$exclude

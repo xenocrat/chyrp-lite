@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/comments/admin/pages/comment_settings.twig:3
@@ -371,65 +371,65 @@ msgstr "Commenti aggiunti dal %s"
 msgid "An ID is required to show a comment."
 msgstr "È necessario un ID per visualizzare un commento."
 
-#: modules/comments/comments.php:1141 modules/comments/comments.php:1259
+#: modules/comments/comments.php:1140 modules/comments/comments.php:1258
 #, php-format
 msgid "Comments on &#8220;%s&#8221;"
 msgstr "Commenti &#8220;%s&#8221;"
 
-#: modules/comments/comments.php:1239
+#: modules/comments/comments.php:1238
 msgid "You have unsubscribed from the conversation."
 msgstr "Hai annullato l'iscrizione a questa conversazione."
 
-#: modules/comments/comments.php:1282
+#: modules/comments/comments.php:1281
 #, php-format
 msgid "Comment #%d"
 msgstr "Commento #%d"
 
-#: modules/comments/comments.php:1315
+#: modules/comments/comments.php:1314
 msgid "A ping from your URL is already registered."
 msgstr "Un ping dall'URL è già registrato."
 
-#: modules/comments/comments.php:1322
+#: modules/comments/comments.php:1321
 msgid "Your URL is too long to be stored in our database."
 msgstr "Il tuo URL è troppo lungo per essere memorizzato nel nostro database."
 
-#: modules/comments/comments.php:1327
+#: modules/comments/comments.php:1326
 msgid "Mentioned this post."
 msgstr "Menzionato questo post."
 
-#: modules/comments/comments.php:1350
+#: modules/comments/comments.php:1349
 msgid "Open"
 msgstr "Aperto"
 
-#: modules/comments/comments.php:1357
+#: modules/comments/comments.php:1356
 msgid "Closed"
 msgstr "Chiuso"
 
-#: modules/comments/comments.php:1364
+#: modules/comments/comments.php:1363
 msgid "Private"
 msgstr "Privato"
 
-#: modules/comments/comments.php:1371
+#: modules/comments/comments.php:1370
 msgid "Registered Only"
 msgstr "Solo utenti registrati"
 
-#: modules/comments/comments.php:1381
+#: modules/comments/comments.php:1380
 msgid "Comment Status"
 msgstr "Stato del commento"
 
-#: modules/comments/comments.php:1638 modules/comments/comments.php:1666
-#: modules/comments/comments.php:1699
+#: modules/comments/comments.php:1637 modules/comments/comments.php:1665
+#: modules/comments/comments.php:1698
 #, php-format
 msgid "New Comment at %s"
 msgstr "Nuovo commento a %s"
 
-#: modules/comments/comments.php:1639 modules/comments/comments.php:1667
-#: modules/comments/comments.php:1700
+#: modules/comments/comments.php:1638 modules/comments/comments.php:1666
+#: modules/comments/comments.php:1699
 #, php-format
 msgid "%s commented on a blog post:"
 msgstr "%s ha aggiunto un commento sul blog post:"
 
-#: modules/comments/comments.php:1708
+#: modules/comments/comments.php:1707
 msgid "Unsubscribe from this conversation:"
 msgstr "Annulla l'iscrizione a questa conversazione:"
 

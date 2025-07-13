@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: themes/blossom/content/comment.twig:4
@@ -363,11 +363,11 @@ msgstr "Seite %d"
 msgid "Newer posts"
 msgstr "Neuere Posts"
 
-#: themes/blossom/layouts/default.twig:57
+#: themes/blossom/layouts/default.twig:58
 msgid "Older posts"
 msgstr "Ältere Posts"
 
-#: themes/blossom/layouts/default.twig:66
+#: themes/blossom/layouts/default.twig:67
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "Aufgerufen von %s in Zeile %d in %s Sekunden."

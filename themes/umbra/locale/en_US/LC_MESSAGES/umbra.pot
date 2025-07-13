@@ -255,7 +255,7 @@ msgid "A dark tumbleblog theme for Chyrp Lite."
 msgstr ""
 
 #: themes/umbra/layouts/default.twig:8
-#: themes/umbra/layouts/default.twig:108
+#: themes/umbra/layouts/default.twig:109
 #, php-format
 msgid "Page %d"
 msgstr ""

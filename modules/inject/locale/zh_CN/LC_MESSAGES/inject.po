@@ -1,0 +1,171 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/inject/admin/help/injector_labels.twig:3
+#: modules/inject/admin/help/injector_labels.twig:6
+msgid "Injector Labels"
+msgstr "喷油器标签"
+
+#: modules/inject/admin/help/injector_labels.twig:8
+msgid ""
+"Each injector must have a label. The label has two purposes: firstly, it "
+"helps you to manage your injectors by giving each one a label that is "
+"memorable and descriptive. Secondly, for filter injectors only, the label "
+"identifies the content to be injected into the post or page."
+msgstr ""
+"每个喷油器都必须有一个标签。该标签有两个目的：首先，它通过为每个喷油器提供"
+"一个令人难忘且具有描述性的标签来帮助您管理您的喷油器。其次，仅对于过滤器注"
+"入器，标签标识要注入到文章或页面的内容。"
+
+#: modules/inject/admin/pages/delete_injector.twig:3
+#: modules/inject/admin/pages/delete_injector.twig:6
+msgid "Delete Injector?"
+msgstr "删除注射器？"
+
+#: modules/inject/admin/pages/delete_injector.twig:10
+#, php-format
+msgid "&#8220;%s&#8221; will be permanently deleted."
+msgstr "&#8220;%s&#8221; 将被永久删除。"
+
+#: modules/inject/admin/pages/edit_injector.twig:3
+msgid "Edit Injector"
+msgstr "编辑注射器"
+
+#: modules/inject/admin/pages/edit_injector.twig:6
+#, php-format
+msgid "Editing Injector &#8220;%s&#8221;"
+msgstr "编辑注射器 &#8220;%s&#8221;"
+
+#: modules/inject/admin/pages/edit_injector.twig:11
+#: modules/inject/admin/pages/manage_injectors.twig:20
+#: modules/inject/admin/pages/new_injector.twig:11
+msgid "Label"
+msgstr "标签"
+
+#: modules/inject/admin/pages/edit_injector.twig:20
+#: modules/inject/admin/pages/new_injector.twig:20
+msgid "Content To Inject"
+msgstr "要注入的内容"
+
+#: modules/inject/admin/pages/edit_injector.twig:26
+#: modules/inject/admin/pages/manage_injectors.twig:21
+#: modules/inject/admin/pages/new_injector.twig:26
+msgid "Type"
+msgstr "类型"
+
+#: modules/inject/admin/pages/edit_injector.twig:36
+#: modules/inject/admin/pages/manage_injectors.twig:22
+#: modules/inject/admin/pages/new_injector.twig:37
+msgid "Frequency"
+msgstr "频率"
+
+#: modules/inject/admin/pages/manage_injectors.twig:3
+msgid "Manage Injectors"
+msgstr "管理注射器"
+
+#: modules/inject/admin/pages/manage_injectors.twig:12
+msgid "New Injector"
+msgstr "新注射器"
+
+#: modules/inject/admin/pages/manage_injectors.twig:16
+#: modules/inject/inject.php:483
+msgid "Injectors"
+msgstr "注射器"
+
+#: modules/inject/admin/pages/new_injector.twig:3
+#: modules/inject/admin/pages/new_injector.twig:6
+#: modules/inject/admin/pages/new_injector.twig:51
+msgid "Add Injector"
+msgstr "添加注射器"
+
+#: modules/inject/info.php:3
+msgid "Inject"
+msgstr "注入"
+
+#: modules/inject/info.php:6
+msgid "Inject content into your blog using triggers and filters."
+msgstr "使用触发器和过滤器将内容注入您的博客。"
+
+#: modules/inject/inject.php:183
+msgid "HTML head"
+msgstr "HTML 头"
+
+#: modules/inject/inject.php:184
+msgid "End of main section"
+msgstr "主要部分结束"
+
+#: modules/inject/inject.php:185
+msgid "After other content"
+msgstr "其他内容之后"
+
+#: modules/inject/inject.php:186
+msgid "Post filter"
+msgstr "文章过滤器"
+
+#: modules/inject/inject.php:187
+msgid "Page filter"
+msgstr "页面过滤器"
+
+#: modules/inject/inject.php:194
+msgid "Never"
+msgstr "从不"
+
+#: modules/inject/inject.php:195
+msgid "Once"
+msgstr "一次"
+
+#: modules/inject/inject.php:196
+msgid "Odd"
+msgstr "奇数"
+
+#: modules/inject/inject.php:197
+msgid "Even"
+msgstr "甚至"
+
+#: modules/inject/inject.php:198
+msgid "Always"
+msgstr "总是"
+
+#: modules/inject/inject.php:296 modules/inject/inject.php:377
+msgid "Label cannot be blank."
+msgstr "标签不能为空。"
+
+#: modules/inject/inject.php:324
+msgid "Injector added."
+msgstr "添加了注射器。"
+
+#: modules/inject/inject.php:335
+msgid "An ID is required to edit an injector."
+msgstr "编辑注射器需要 ID。"
+
+#: modules/inject/inject.php:344 modules/inject/inject.php:386
+#: modules/inject/inject.php:427 modules/inject/inject.php:462
+msgid "Injector not found."
+msgstr "未找到注射器。"
+
+#: modules/inject/inject.php:370
+msgid "An ID is required to update an injector."
+msgstr "更新注射器需要 ID。"
+
+#: modules/inject/inject.php:407
+msgid "Injector updated."
+msgstr "注射器已更新。"
+
+#: modules/inject/inject.php:418 modules/inject/inject.php:450
+msgid "An ID is required to delete an injector."
+msgstr "删除注射器需要 ID。"
+
+#: modules/inject/inject.php:473
+msgid "Injector deleted."
+msgstr "注射器已删除。"
