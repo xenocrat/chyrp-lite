@@ -42,7 +42,11 @@
             $title,
             $subtitle = "",
             $id = "",
-            $updated = null
+            $updated = null,
+            $prev_page = null,
+            $next_page = null,
+            $first_page = null,
+            $last_page = null
         ): bool {
             if ($this->open)
                 return false;
@@ -59,6 +63,9 @@
 
             if (!empty($subtitle))
                 $this->json["description"] = strip_tags($subtitle);
+
+            if (isset($next_page) and is_url($next_page))
+                $this->json["next_url"] = $next_page;
 
             $this->json["items"] = array();
             return $this->open = true;

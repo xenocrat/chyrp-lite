@@ -4,7 +4,8 @@
      * Generates an Atom feed piece by piece.
      *
      * See Also:
-     *     https://tools.ietf.org/html/rfc4287
+     *     https://datatracker.ietf.org/doc/html/rfc4287
+     *     https://datatracker.ietf.org/doc/html/rfc5005
      */
     class AtomFeed implements FeedGenerator {
         # Boolean: $open
@@ -42,7 +43,11 @@
             $title,
             $subtitle = "",
             $id = "",
-            $updated = null
+            $updated = null,
+            $prev_page = null,
+            $next_page = null,
+            $first_page = null,
+            $last_page = null
         ): bool {
             if ($this->open)
                 return false;
@@ -73,6 +78,30 @@
                     self_url().
                     '" rel="self" type="application/atom+xml" />'.
                     "\n";
+
+            if (isset($prev_page) and is_url($prev_page))
+                $feed.= '<link href="'.
+                        fix($prev_page, true).
+                        '" rel="previous" type="application/atom+xml" />'.
+                        "\n";
+
+            if (isset($next_page) and is_url($next_page))
+                $feed.= '<link href="'.
+                        fix($next_page, true).
+                        '" rel="next" type="application/atom+xml" />'.
+                        "\n";
+
+            if (isset($first_page) and is_url($first_page))
+                $feed.= '<link href="'.
+                        fix($first_page, true).
+                        '" rel="first" type="application/atom+xml" />'.
+                        "\n";
+
+            if (isset($last_page) and is_url($last_page))
+                $feed.= '<link href="'.
+                        fix($last_page, true).
+                        '" rel="last" type="application/atom+xml" />'.
+                        "\n";
 
             $feed.= '<generator uri="http://chyrplite.net/" version="'.
                     CHYRP_VERSION.
