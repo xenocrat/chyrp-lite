@@ -405,32 +405,33 @@
                 )
             );
 
-            # Generate a feed for this route action if it seems appropriate.
+            $posts =
+                $route->controller->context["posts"] ??
+                false ;
+
+            # Automatically provide feeds based on context.
             if (
+                !$route->controller->feed and
                 $route->action != "index" and
-                !$main->feed and
-                !empty($main->context["posts"])
+                $posts instanceof Paginator
             ) {
-                    # Rewind to page 1 (most recent) if the posts are paginated.
-                    $page_url = ($main->context["posts"] instanceof Paginator) ?
-                        $main->context["posts"]->prev_page_url(1) :
-                        self_url() ;
+                $page_url = $posts->prev_page_url(1);
 
-                    $feed_url = ($config->clean_urls) ?
-                        rtrim($page_url, "/")."/feed/"
-                        :
-                        $page_url.(
-                            substr_count($page_url, "?") ?
-                                "&feed" :
-                                "?feed"
-                        )
-                        ;
+                $feed_url = ($config->clean_urls) ?
+                    rtrim($page_url, "/")."/feed/"
+                    :
+                    $page_url.(
+                        substr_count($page_url, "?") ?
+                            "&feed" :
+                            "?feed"
+                    )
+                    ;
 
-                    $links[] = array(
-                        "href" => $feed_url,
-                        "type" => BlogFeed::type(),
-                        "title" => $this->title
-                    );
+                $links[] = array(
+                    "href" => $feed_url,
+                    "type" => BlogFeed::type(),
+                    "title" => $this->title
+                );
             }
 
             # Ask extensions to provide additional links.
