@@ -2,8 +2,8 @@
 
 {% block content %}
 
-{# Months? (For yearly archives) #}
 {% if months is not empty %}
+{# Months? (For yearly archives) #}
 <h2>{{ "Archive of %s" | translate | format(archive.when | time("Y")) }}</h2>
 <ul>
 {% for when, month in months %}
@@ -45,10 +45,8 @@
 </ul>
 </nav>
 {% endif %}
-{% endif %}
-
+{% elseif posts.paginated is not empty %}
 {# Posts? (For daily/monthly archives) #}
-{% if posts.paginated is not empty %}
 <div class="filter">
 {{ "Archive of %s" | translate | format(archive.when | time(archive.depth == "day" ? "d F Y" : "F Y")) }}
 </div>
@@ -72,10 +70,8 @@
 </ul>
 </nav>
 {% endif %}
-{% endif %}
-
+{% else %}
 {# No results #}
-{% if months is empty and posts.paginated is empty %}
 <div role="status">{{ "There aren't any posts in the timeframe you specified." | translate }}</div>
 {% endif %}
 

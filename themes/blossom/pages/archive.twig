@@ -2,8 +2,8 @@
 
 {% block content %}
 
-{# Months? (For yearly archives) #}
 {% if months is not empty %}
+{# Months? (For yearly archives) #}
 {% if archive.prev is not empty %}
 <div role="navigation" class="prev traversal">
 <a href="{{ url('archive/%s/' | format(archive.prev | dateformat('Y'))) }}">
@@ -48,20 +48,16 @@
 </a>
 </div>
 {% endif %}
-{% endif %}
-
+{% elseif posts.paginated is not empty %}
 {# Posts? (For daily/monthly archives) #}
-{% if posts.paginated is not empty %}
 <div class="ribbon">
 {{ "Archive of %s" | translate | format(archive.when | time(archive.depth == "day" ? "d F Y" : "F Y")) }}
 </div>
 {% for post in posts.paginated %}
 {% include(["feathers" ~ DIR ~ post.feather ~ ".twig", "feathers" ~ DIR ~ "missing.twig"]) %}
 {% endfor %}
-{% endif %}
-
+{% else %}
 {# No results #}
-{% if months is empty and posts.paginated is empty %}
 <div role="status" class="ribbon">
 {{ "There aren't any posts in the timeframe you specified." | translate }}
 </div>
