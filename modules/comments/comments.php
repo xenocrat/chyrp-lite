@@ -1126,25 +1126,31 @@
         ): array {
             $config = Config::current();
             $route = Route::current();
-            $main = MainController::current();
 
-            if ($route->action == "view" and !empty($main->context["post"])) {
-                $post = $main->context["post"];
+            $post =
+                $route->controller->context["post"] ??
+                false ;
 
-                if (!$post->no_results) {
-                    $feed_url = ($config->clean_urls) ?
-                        rtrim($post->url(), "/")."/feed/" :
-                        $post->url()."&amp;feed" ;
+            if (
+                !$route->controller->feed and
+                $route->action == "view" and
+                $post instanceof Post and
+                !$post->no_results
+            ) {
+                $post_url = $post->url();
 
-                    $text = oneof($post->title(), ucfirst($post->feather));
-                    $title = _f("Comments on &#8220;%s&#8221;", $text, "comments");
+                $feed_url = ($config->clean_urls) ?
+                    rtrim($post_url, "/")."/feed/" :
+                    $post_url."&amp;feed" ;
 
-                    $links[] = array(
-                        "href" => $feed_url,
-                        "type" => BlogFeed::type(),
-                        "title" => $title
-                    );
-                }
+                $text = oneof($post->title(), ucfirst($post->feather));
+                $title = _f("Comments on &#8220;%s&#8221;", $text, "comments");
+
+                $links[] = array(
+                    "href" => $feed_url,
+                    "type" => BlogFeed::type(),
+                    "title" => $title
+                );
             }
 
             return $links;
