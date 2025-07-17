@@ -632,7 +632,7 @@ summary:active {
     outline: none;
     color: var(--sparrow-medium-red);
     text-decoration: underline;
-    text-underline-offset: 0.375em;
+    text-underline-offset: 0.3125em;
     text-decoration-thickness: 0.0625em;
 }
 a:focus-visible,
@@ -653,7 +653,7 @@ section a:visited,
 p a:visited {
     color: var(--sparrow-inky-black);
     text-decoration: underline;
-    text-underline-offset: 0.375em;
+    text-underline-offset: 0.3125em;
     text-decoration-thickness: 0.0625em;
 }
 section a:hover,
