@@ -18,7 +18,11 @@
             $title,
             $subtitle,
             $id,
-            $updated
+            $updated,
+            $prev_page,
+            $next_page,
+            $first_page,
+            $last_page
         ): bool;
 
         /**
