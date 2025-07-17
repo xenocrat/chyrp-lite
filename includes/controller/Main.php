@@ -318,11 +318,10 @@
         public function main_archive(
         ): void {
             $sql = SQL::current();
+            $config = Config::current();
             $statuses = Post::statuses();
             $feathers = Post::feathers();
-
             $months = array();
-            $posts = new Paginator(array());
 
             fallback($_GET['year']);
             fallback($_GET['month']);
@@ -414,6 +413,11 @@
                         ),
                         "order" => "created_at DESC, id DESC"
                     )
+                );
+
+                $posts = new Paginator(
+                    $results,
+                    $config->feed_items
                 );
 
                 foreach ($results as $result) {
@@ -1283,37 +1287,38 @@
             $trigger = Trigger::current();
             $theme = Theme::current();
 
-            # Fetch posts if we are being called as a responder.
+            $prev_page = null;
+            $next_page = null;
+            $first_page = null;
+            $last_page = null;
+
             if (!isset($posts)) {
-                $results = SQL::current()->select(
-                    tables:"posts",
-                    fields:"id",
-                    conds:array("status" => Post::STATUS_PUBLIC),
-                    order:array("id DESC"),
-                    limit:$config->feed_items
-                )->fetchAll();
-
-                $ids = array();
-
-                foreach ($results as $result)
-                    $ids[] = $result["id"];
-
-                if (!empty($ids)) {
-                    $posts = Post::find(
+                $posts = new Paginator(
+                    Post::find(
                         array(
-                            "where" => array("id" => $ids),
+                            "placeholders" => true,
                             "order" => "created_at DESC, id DESC"
                         )
-                    );
-                } else {
-                    $posts = array();
-                }
+                    ),
+                    $config->feed_items
+                );
             }
 
-            if ($posts instanceof Paginator) {
+            if ($posts->per_page != $config->feed_items)
                 $posts = $posts->reslice($config->feed_items);
-                $posts = $posts->paginated;
+
+            if ($posts->prev_page())
+                $prev_page = $posts->prev_page_url();
+
+            if ($posts->next_page())
+                $next_page = $posts->next_page_url();
+
+            if ($posts->pages > 1) {
+                $first_page = $posts->prev_page_url(1);
+                $last_page = $posts->next_page_url($posts->pages);
             }
+
+            $posts = $posts->paginated;
 
             $latest_timestamp = 0;
 
@@ -1337,7 +1342,11 @@
             $feed->open(
                 title:$title,
                 subtitle:$subtitle,
-                updated:$latest_timestamp
+                updated:$latest_timestamp,
+                prev_page:$prev_page,
+                next_page:$next_page,
+                first_page:$first_page,
+                last_page:$last_page
             );
 
             foreach ($posts as $post) {
@@ -1437,7 +1446,10 @@
                     return;
                 }
 
-                if (isset($context["posts"])) {
+                if (
+                    isset($context["posts"]) and
+                    $context["posts"] instanceof Paginator
+                ) {
                     $this->main_feed($context["posts"]);
                     return;
                 }
