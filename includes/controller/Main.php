@@ -102,6 +102,7 @@
             # Discover feed requests.
             if (
                 $route->action == "feed" or
+                $route->arg[0] == "feed" or
                 preg_match("/\/feed\/?$/", $route->request)
             )
                 $this->feed = true;
