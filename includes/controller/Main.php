@@ -123,6 +123,10 @@
                     return $route->action = "index";
             }
 
+            # Feed.
+            if ($route->arg[0] == "feed")
+                return $route->action = "feed";
+
             # Archive.
             if ($route->arg[0] == "archive") {
                 # Make sure they're numeric; could be a "/page/" in there.
