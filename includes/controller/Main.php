@@ -127,23 +127,6 @@
             if ($route->arg[0] == "feed")
                 return $route->action = "feed";
 
-            # Archive.
-            if ($route->arg[0] == "archive") {
-                # Make sure they're numeric; could be a "/page/" in there.
-                if (isset($route->arg[1]) and is_numeric($route->arg[1])) {
-                    $_GET['year'] = $route->arg[1];
-
-                    if (isset($route->arg[2]) and is_numeric($route->arg[2])) {
-                        $_GET['month'] = $route->arg[2];
-
-                        if (isset($route->arg[3]) and is_numeric($route->arg[3]))
-                            $_GET['day'] = $route->arg[3];
-                    }
-                }
-
-                return $route->action = "archive";
-            }
-
             # Search.
             if ($route->arg[0] == "search") {
                 if (isset($route->arg[1]))
@@ -190,6 +173,23 @@
                 }
 
                 return $route->action = "id";
+            }
+
+            # Archive.
+            if ($route->arg[0] == "archive") {
+                # Make sure they're numeric; could be a "/page/" in there.
+                if (isset($route->arg[1]) and is_numeric($route->arg[1])) {
+                    $_GET['year'] = $route->arg[1];
+
+                    if (isset($route->arg[2]) and is_numeric($route->arg[2])) {
+                        $_GET['month'] = $route->arg[2];
+
+                        if (isset($route->arg[3]) and is_numeric($route->arg[3]))
+                            $_GET['day'] = $route->arg[3];
+                    }
+                }
+
+                return $route->action = "archive";
             }
 
             # Custom route?
