@@ -104,10 +104,10 @@
             if (!empty($route->arg[0]) and strpos($route->arg[0], "?") !== 0) {
                 $route->action = $route->arg[0];
 
-                if (!empty($route->arg[1]) and !empty($route->arg[2]))
+                if (!empty($route->arg[1]) and isset($route->arg[2]))
                     $_GET[$route->arg[1]] = $route->arg[2];
 
-                if (!empty($route->arg[3]) and !empty($route->arg[4]))
+                if (!empty($route->arg[3]) and isset($route->arg[4]))
                     $_GET[$route->arg[3]] = $route->arg[4];
             }
 
