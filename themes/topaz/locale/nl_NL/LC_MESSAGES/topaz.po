@@ -381,12 +381,12 @@ msgid "Not found."
 msgstr "Niet gevonden."
 
 #: themes/topaz/pages/archive.twig:40 themes/topaz/pages/archive.twig:45
-#: themes/topaz/pages/archive.twig:54
+#: themes/topaz/pages/archive.twig:52
 #, php-format
 msgid "Archive of %s"
 msgstr "Archief van %s"
 
-#: themes/topaz/pages/archive.twig:64
+#: themes/topaz/pages/archive.twig:60
 msgid "There aren't any posts in the timeframe you specified."
 msgstr "Er zijn geen Blogposts in het door jou geselecteerde tijdvak."
 

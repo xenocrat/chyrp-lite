@@ -379,65 +379,65 @@ msgstr "Kommentare hinzugefügt seit %s"
 msgid "An ID is required to show a comment."
 msgstr "Zum schauen einer Kommentar ist eine ID erforderlich."
 
-#: modules/comments/comments.php:1140 modules/comments/comments.php:1258
+#: modules/comments/comments.php:1147 modules/comments/comments.php:1264
 #, php-format
 msgid "Comments on &#8220;%s&#8221;"
 msgstr "Kommentare auf &#8220;%s&#8221;"
 
-#: modules/comments/comments.php:1238
+#: modules/comments/comments.php:1244
 msgid "You have unsubscribed from the conversation."
 msgstr "Sie haben sich von der Unterhaltung abgemeldet."
 
-#: modules/comments/comments.php:1281
+#: modules/comments/comments.php:1287
 #, php-format
 msgid "Comment #%d"
 msgstr "Kommentar #%d"
 
-#: modules/comments/comments.php:1314
+#: modules/comments/comments.php:1320
 msgid "A ping from your URL is already registered."
 msgstr "Ein Ping von Ihrer URL ist bereits registriert."
 
-#: modules/comments/comments.php:1321
+#: modules/comments/comments.php:1327
 msgid "Your URL is too long to be stored in our database."
 msgstr "Ihre URL ist zu lang, um in unserer Datenbank gespeichert zu werden."
 
-#: modules/comments/comments.php:1326
+#: modules/comments/comments.php:1332
 msgid "Mentioned this post."
 msgstr "Hatte diesen Beitrag erwähnt."
 
-#: modules/comments/comments.php:1349
+#: modules/comments/comments.php:1355
 msgid "Open"
 msgstr "Geöffnet"
 
-#: modules/comments/comments.php:1356
+#: modules/comments/comments.php:1362
 msgid "Closed"
 msgstr "Geschlossen"
 
-#: modules/comments/comments.php:1363
+#: modules/comments/comments.php:1369
 msgid "Private"
 msgstr "Privat"
 
-#: modules/comments/comments.php:1370
+#: modules/comments/comments.php:1376
 msgid "Registered Only"
 msgstr "Nur registriert"
 
-#: modules/comments/comments.php:1380
+#: modules/comments/comments.php:1386
 msgid "Comment Status"
 msgstr "Kommentarstatus"
 
-#: modules/comments/comments.php:1637 modules/comments/comments.php:1665
-#: modules/comments/comments.php:1698
+#: modules/comments/comments.php:1643 modules/comments/comments.php:1671
+#: modules/comments/comments.php:1704
 #, php-format
 msgid "New Comment at %s"
 msgstr "Neuer Kommentar auf %s"
 
-#: modules/comments/comments.php:1638 modules/comments/comments.php:1666
-#: modules/comments/comments.php:1699
+#: modules/comments/comments.php:1644 modules/comments/comments.php:1672
+#: modules/comments/comments.php:1705
 #, php-format
 msgid "%s commented on a blog post:"
 msgstr "%s hat einen Blogbeitrag kommentiert:"
 
-#: modules/comments/comments.php:1707
+#: modules/comments/comments.php:1713
 msgid "Unsubscribe from this conversation:"
 msgstr "Von dieser Konversation abmelden:"
 

@@ -3084,7 +3084,8 @@ Class: AtomFeed
 Generates an Atom feed piece by piece.
 
 See Also:
-    https://tools.ietf.org/html/rfc4287
+    https://datatracker.ietf.org/doc/html/rfc4287
+    https://datatracker.ietf.org/doc/html/rfc5005
 
 
 Function: type

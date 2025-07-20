@@ -311,12 +311,12 @@ msgstr "Non trovato."
 msgid "F Y"
 msgstr "F Y"
 
-#: themes/umbra/pages/archive.twig:49
+#: themes/umbra/pages/archive.twig:47
 #, php-format
 msgid "Archive of %s"
 msgstr "Archivio %s"
 
-#: themes/umbra/pages/archive.twig:58
+#: themes/umbra/pages/archive.twig:54
 msgid "There aren't any posts in the timeframe you specified."
 msgstr "Non ci sono post nell'intervallo di tempo specificato."
 

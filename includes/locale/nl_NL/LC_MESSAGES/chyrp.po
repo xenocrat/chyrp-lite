@@ -88,7 +88,7 @@ msgstr "Route gestart met een ongeldige controller."
 #: includes/controller/Admin.php:3372 includes/controller/Admin.php:3750
 #: includes/controller/Ajax.php:38 includes/controller/Ajax.php:173
 #: includes/controller/Ajax.php:237 includes/controller/Ajax.php:282
-#: includes/controller/Main.php:1264 includes/download.php:14
+#: includes/controller/Main.php:1273 includes/download.php:14
 #: includes/error.php:205 includes/helpers.php:2507 includes/helpers.php:2514
 #: includes/helpers.php:2521 includes/helpers.php:2536
 #: includes/helpers.php:2545 includes/helpers.php:2559
@@ -157,7 +157,7 @@ msgstr "Ongeldige actie."
 #: includes/controller/Ajax.php:222 includes/controller/Ajax.php:228
 #: includes/controller/Ajax.php:270 includes/controller/Ajax.php:276
 #: includes/controller/Ajax.php:356 includes/controller/Ajax.php:362
-#: includes/controller/Main.php:581 includes/controller/Main.php:666
+#: includes/controller/Main.php:590 includes/controller/Main.php:675
 #: includes/download.php:21 includes/helpers.php:3001 includes/thumbnail.php:22
 msgid "Access Denied"
 msgstr "Toegang geweigerd"
@@ -225,7 +225,7 @@ msgstr ""
 #: includes/controller/Admin.php:2201 includes/controller/Admin.php:2209
 #: includes/controller/Admin.php:3140 includes/controller/Admin.php:3219
 #: includes/controller/Ajax.php:81 includes/controller/Ajax.php:124
-#: includes/controller/Main.php:284 includes/download.php:33
+#: includes/controller/Main.php:289 includes/download.php:33
 #: includes/download.php:41 includes/helpers.php:216 includes/thumbnail.php:36
 #: includes/thumbnail.php:46
 msgid "Not Found"
@@ -255,10 +255,10 @@ msgstr "Je hebt niet voldoende rechten om uploads toe te voegen."
 #: includes/controller/Ajax.php:65 includes/controller/Ajax.php:110
 #: includes/controller/Ajax.php:141 includes/controller/Ajax.php:223
 #: includes/controller/Ajax.php:271 includes/controller/Ajax.php:357
-#: includes/controller/Main.php:809 includes/controller/Main.php:935
-#: includes/controller/Main.php:971 includes/controller/Main.php:1049
-#: includes/controller/Main.php:1140 includes/controller/Main.php:1210
-#: includes/controller/Main.php:1217
+#: includes/controller/Main.php:818 includes/controller/Main.php:944
+#: includes/controller/Main.php:980 includes/controller/Main.php:1058
+#: includes/controller/Main.php:1149 includes/controller/Main.php:1219
+#: includes/controller/Main.php:1226
 msgid "Invalid authentication token."
 msgstr "Ongeldige authenticatie-sleutel."
 
@@ -402,23 +402,23 @@ msgid "Please enter a username for the account."
 msgstr "Vul alsjeblieft een gebruikersnaam in voor dit account."
 
 #: includes/controller/Admin.php:1081 includes/controller/Admin.php:1255
-#: includes/controller/Main.php:821 install.php:767
+#: includes/controller/Main.php:830 install.php:767
 msgid "Invalid username."
 msgstr "Ongeldige gebruikersnaam."
 
 #: includes/controller/Admin.php:1090 includes/controller/Admin.php:1269
-#: includes/controller/Main.php:830
+#: includes/controller/Main.php:839
 msgid "That username is already in use."
 msgstr "Deze gebruikersnaam is al in gebruik."
 
-#: includes/controller/Admin.php:1097 includes/controller/Main.php:835
-#: includes/controller/Main.php:1222 install.php:770
+#: includes/controller/Admin.php:1097 includes/controller/Main.php:844
+#: includes/controller/Main.php:1231 install.php:770
 msgid "Passwords cannot be blank."
 msgstr "Wachtwoord mag niet leeg zijn."
 
 #: includes/controller/Admin.php:1104 includes/controller/Admin.php:1288
-#: includes/controller/Main.php:839 includes/controller/Main.php:1058
-#: includes/controller/Main.php:1226 install.php:700 install.php:772
+#: includes/controller/Main.php:848 includes/controller/Main.php:1067
+#: includes/controller/Main.php:1235 install.php:700 install.php:772
 msgid "Passwords do not match."
 msgstr "Wachtwoorden komen niet overeen."
 
@@ -427,19 +427,19 @@ msgid "Please consider setting a stronger password for this user."
 msgstr "Bedenk een sterker wachtwoord voor deze gebruiker."
 
 #: includes/controller/Admin.php:1116 includes/controller/Admin.php:1307
-#: includes/controller/Admin.php:3359 includes/controller/Main.php:848
-#: includes/controller/Main.php:1071 install.php:775
+#: includes/controller/Admin.php:3359 includes/controller/Main.php:857
+#: includes/controller/Main.php:1080 install.php:775
 msgid "Email address cannot be blank."
 msgstr "Emailadres mag niet leeg zijn."
 
 #: includes/controller/Admin.php:1123 includes/controller/Admin.php:1314
-#: includes/controller/Admin.php:3366 includes/controller/Main.php:852
-#: includes/controller/Main.php:1075 install.php:777
+#: includes/controller/Admin.php:3366 includes/controller/Main.php:861
+#: includes/controller/Main.php:1084 install.php:777
 msgid "Invalid email address."
 msgstr "Ongeldig emailadres."
 
 #: includes/controller/Admin.php:1130 includes/controller/Admin.php:1321
-#: includes/controller/Main.php:862 includes/controller/Main.php:1080
+#: includes/controller/Main.php:871 includes/controller/Main.php:1089
 msgid "Invalid website URL."
 msgstr "Ongeldige website URL."
 
@@ -463,7 +463,7 @@ msgstr "Een ID is noodzakelijk om een gebruiker te wijzigen."
 
 #: includes/controller/Admin.php:1198 includes/controller/Admin.php:1278
 #: includes/controller/Admin.php:1387 includes/controller/Admin.php:1440
-#: includes/controller/Main.php:285
+#: includes/controller/Main.php:290
 msgid "User not found."
 msgstr "Gebruiker niet gevonden."
 
@@ -771,7 +771,7 @@ msgstr ""
 "Schone URL's zijn uitgeschakeld omdat het herschrijven van URL's niet actief "
 "is."
 
-#: includes/controller/Admin.php:3725 includes/controller/Main.php:964
+#: includes/controller/Admin.php:3725 includes/controller/Main.php:973
 msgid "You are already logged in."
 msgstr "Je bent reeds ingelogd."
 
@@ -868,167 +868,167 @@ msgstr "Bestand geupload."
 msgid "You do not have sufficient privileges to view uploads."
 msgstr "U beschikt niet over voldoende rechten om uploads te bekijken."
 
-#: includes/controller/Main.php:264
+#: includes/controller/Main.php:269
 msgid "Updated posts"
 msgstr "Geupdate blogposts"
 
-#: includes/controller/Main.php:276
+#: includes/controller/Main.php:281
 msgid "You did not specify a user ID."
 msgstr "Je hebt geen gebruikers-ID gespecificeerd."
 
-#: includes/controller/Main.php:310
+#: includes/controller/Main.php:315
 #, php-format
 msgid "Posts created by &#8220;%s&#8221;"
 msgstr "Blogposts gemaakt door &#8220;%s&#8221;"
 
-#: includes/controller/Main.php:370 includes/controller/Main.php:389
-#: includes/controller/Main.php:408
+#: includes/controller/Main.php:374 includes/controller/Main.php:393
+#: includes/controller/Main.php:412
 #, php-format
 msgid "Archive of %s"
 msgstr "Archief van %s"
 
-#: includes/controller/Main.php:503
+#: includes/controller/Main.php:512
 msgid "Please enter a search term."
 msgstr "Geef alsjeblieft een zoekterm in."
 
-#: includes/controller/Main.php:567
+#: includes/controller/Main.php:576
 #, php-format
 msgid "Search results for &#8220;%s&#8221;"
 msgstr "Resultaten voor zoekterm &#8220;%s&#8221;"
 
-#: includes/controller/Main.php:582
+#: includes/controller/Main.php:591
 msgid "You do not have sufficient privileges to view drafts."
 msgstr "Je hebt onvoldoende rechten om concepten te bekijken."
 
-#: includes/controller/Main.php:600
+#: includes/controller/Main.php:609
 msgid "Drafts"
 msgstr "Concepten"
 
-#: includes/controller/Main.php:623
+#: includes/controller/Main.php:632
 msgid "This post is not published."
 msgstr "Deze blogpost is niet gepubliceerd."
 
-#: includes/controller/Main.php:628
+#: includes/controller/Main.php:637
 msgid "This post is scheduled to be published."
 msgstr "Dit is een geagendeerde blogpost."
 
-#: includes/controller/Main.php:667
+#: includes/controller/Main.php:676
 msgid "You are not allowed to view this page."
 msgstr "Je hebt geen rechten om deze pagina te bekijken."
 
-#: includes/controller/Main.php:747
+#: includes/controller/Main.php:756
 msgid "There aren't enough posts for random selection."
 msgstr "Er zijn onvoldoende blogposts voor een willekeurige selectie."
 
-#: includes/controller/Main.php:796
+#: includes/controller/Main.php:805
 msgid "This site does not allow registration."
 msgstr "Deze website staat registreren niet toe."
 
-#: includes/controller/Main.php:802
+#: includes/controller/Main.php:811
 msgid "You cannot register an account because you are already logged in."
 msgstr "Je kunt geen account registreren, want je bent al ingelogd."
 
-#: includes/controller/Main.php:814 install.php:762
+#: includes/controller/Main.php:823 install.php:762
 msgid "Please enter a username for your account."
 msgstr "Geef alsjeblieft een gebruikersnaam in voor je account."
 
-#: includes/controller/Main.php:843 includes/controller/Main.php:1064
-#: includes/controller/Main.php:1230
+#: includes/controller/Main.php:852 includes/controller/Main.php:1073
+#: includes/controller/Main.php:1239
 msgid "Please consider setting a stronger password for your account."
 msgstr "Bedenk alsjeblieft een sterker wachtwoord."
 
-#: includes/controller/Main.php:857
+#: includes/controller/Main.php:866
 msgid "Incorrect captcha response."
 msgstr "Ongeldige Captcha reactie."
 
-#: includes/controller/Main.php:885
+#: includes/controller/Main.php:894
 msgid "We have emailed you an activation link."
 msgstr "We hebben je een activatie-link per email toegezonden."
 
-#: includes/controller/Main.php:893 includes/controller/Main.php:948
+#: includes/controller/Main.php:902 includes/controller/Main.php:957
 msgid "Your account is now active."
 msgstr "Je account is nu actief."
 
-#: includes/controller/Main.php:902
+#: includes/controller/Main.php:911
 msgid "Register"
 msgstr "Registreer"
 
-#: includes/controller/Main.php:914
+#: includes/controller/Main.php:923
 msgid "You cannot activate an account because you are already logged in."
 msgstr "Je kunt geen account activeren, want je bent al ingelogd."
 
-#: includes/controller/Main.php:927 includes/controller/Main.php:1133
-#: includes/controller/Main.php:1202
+#: includes/controller/Main.php:936 includes/controller/Main.php:1142
+#: includes/controller/Main.php:1211
 msgid "Please contact the blog administrator for help with your account."
 msgstr ""
 "Neem alsjeblieft contact op met de sitebeheerder, voor hulp met je account."
 
-#: includes/controller/Main.php:941
+#: includes/controller/Main.php:950
 msgid "Your account has already been activated."
 msgstr "Je account is al geactiveerd."
 
-#: includes/controller/Main.php:982
+#: includes/controller/Main.php:991
 msgid "Incorrect username and/or password."
 msgstr "Ongeldige gebruikersnaam en/of wachtwoord."
 
-#: includes/controller/Main.php:992
+#: includes/controller/Main.php:1001
 msgid "You must activate your account before you log in."
 msgstr "Je moet eerst je account activeren voordat je kunt inloggen."
 
-#: includes/controller/Main.php:999
+#: includes/controller/Main.php:1008
 msgid "Logged in."
 msgstr "Ingelogd."
 
-#: includes/controller/Main.php:1008 includes/error.php:570
+#: includes/controller/Main.php:1017 includes/error.php:570
 msgid "Log in"
 msgstr "Log in"
 
-#: includes/controller/Main.php:1020
+#: includes/controller/Main.php:1029
 msgid "You aren't logged in."
 msgstr "Je bent niet ingelogd."
 
-#: includes/controller/Main.php:1027
+#: includes/controller/Main.php:1036
 msgid "Logged out."
 msgstr "Uitgelogd."
 
-#: includes/controller/Main.php:1042
+#: includes/controller/Main.php:1051
 msgid "You must be logged in to access user controls."
 msgstr "Je moet ingelogd zijn om gebruikersinstellingen te kunnen beheren."
 
-#: includes/controller/Main.php:1104 includes/controller/Main.php:1239
+#: includes/controller/Main.php:1113 includes/controller/Main.php:1248
 msgid "Your profile has been updated."
 msgstr "Je profiel is bijgewerkt."
 
-#: includes/controller/Main.php:1113
+#: includes/controller/Main.php:1122
 msgid "Controls"
 msgstr "Instellingen"
 
-#: includes/controller/Main.php:1127 includes/controller/Main.php:1180
+#: includes/controller/Main.php:1136 includes/controller/Main.php:1189
 msgid "You cannot reset your password because you are already logged in."
 msgstr "Je kunt je wachtwoord niet wijzigen wanneer je ingelogd bent."
 
-#: includes/controller/Main.php:1145
+#: includes/controller/Main.php:1154
 msgid "Please enter your username."
 msgstr "Geef alsjeblieft je gebruikersnaam in."
 
-#: includes/controller/Main.php:1157
+#: includes/controller/Main.php:1166
 msgid "We have emailed you a password reset link."
 msgstr ""
 "We hebben je een link toegestuurd waarmee je je wachtwoord kunt aanpassen."
 
-#: includes/controller/Main.php:1166
+#: includes/controller/Main.php:1175
 msgid "Lost password"
 msgstr "Wachtwoord vergeten"
 
-#: includes/controller/Main.php:1192
+#: includes/controller/Main.php:1201
 msgid "The link has expired. Please try again."
 msgstr "De linkgeldigheid is verlopen. Probeer opnieuw."
 
-#: includes/controller/Main.php:1252
+#: includes/controller/Main.php:1261
 msgid "Reset password"
 msgstr "Wijzig wachtwoord"
 
-#: includes/controller/Main.php:1265 includes/helpers.php:2508
+#: includes/controller/Main.php:1274 includes/helpers.php:2508
 msgid "Webmention support is disabled for this site."
 msgstr "Webmention ondersteuning is uitgeschakeld voor deze website."
 
@@ -1222,7 +1222,7 @@ msgstr ""
 msgid "Visit this link to reset your password:"
 msgstr "Bezoek deze link om je wachtwoord te wijzigen:"
 
-#: includes/lib/AtomFeed.php:151 includes/lib/JSONFeed.php:105
+#: includes/lib/AtomFeed.php:180 includes/lib/JSONFeed.php:112
 msgid "Guest"
 msgstr "Gast"
 

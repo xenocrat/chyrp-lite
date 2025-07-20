@@ -340,19 +340,19 @@ Called from:
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 664
+	includes/controller/Main.php on line 673
 
 
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 978
+	includes/controller/Main.php on line 987
 
 
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 1370
+	includes/controller/Main.php on line 1384
 
 Arguments:
 	$post
@@ -630,7 +630,7 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 1291
+	modules/comments/comments.php on line 1297
 
 Arguments:
 	$comment
@@ -640,7 +640,7 @@ Arguments:
 correspond_site_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1629
+	modules/comments/comments.php on line 1635
 
 Arguments:
 	$comment
@@ -649,7 +649,7 @@ Arguments:
 correspond_user_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1657
+	modules/comments/comments.php on line 1663
 
 Arguments:
 	$comment
@@ -659,7 +659,7 @@ Arguments:
 correspond_peer_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1690
+	modules/comments/comments.php on line 1696
 
 Arguments:
 	$comment
@@ -917,7 +917,7 @@ Target:
 links
 -----
 Called from:
-	includes/class/Theme.php on line 437
+	includes/class/Theme.php on line 438
 
 Target:
 	$links
@@ -1104,7 +1104,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 1469
+	includes/controller/Main.php on line 1486
 
 Target:
 	$this->context

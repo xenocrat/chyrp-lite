@@ -379,12 +379,12 @@ msgid "Not found."
 msgstr "Non trouvé."
 
 #: themes/blossom/pages/archive.twig:10 themes/blossom/pages/archive.twig:47
-#: themes/blossom/pages/archive.twig:56
+#: themes/blossom/pages/archive.twig:54
 #, php-format
 msgid "Archive of %s"
 msgstr "Archive de %s"
 
-#: themes/blossom/pages/archive.twig:66
+#: themes/blossom/pages/archive.twig:62
 msgid "There aren't any posts in the timeframe you specified."
 msgstr "Il n'y a pas d'articles dans la période que vous avez mentionnée."
 

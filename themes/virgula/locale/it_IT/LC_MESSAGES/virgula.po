@@ -299,7 +299,7 @@ msgstr "Negato."
 msgid "Not found."
 msgstr "Non trovato."
 
-#: themes/virgula/pages/archive.twig:7 themes/virgula/pages/archive.twig:53
+#: themes/virgula/pages/archive.twig:7 themes/virgula/pages/archive.twig:51
 #, php-format
 msgid "Archive of %s"
 msgstr "Archivio %s"
@@ -308,21 +308,21 @@ msgstr "Archivio %s"
 msgid "F"
 msgstr "F"
 
-#: themes/virgula/pages/archive.twig:34 themes/virgula/pages/archive.twig:64
+#: themes/virgula/pages/archive.twig:34 themes/virgula/pages/archive.twig:62
 #: themes/virgula/pages/author.twig:15 themes/virgula/pages/category.twig:14
 #: themes/virgula/pages/drafts.twig:15 themes/virgula/pages/search.twig:52
 #: themes/virgula/pages/tag.twig:14 themes/virgula/pages/updated.twig:15
 msgid "Newer posts"
 msgstr "Post più recenti"
 
-#: themes/virgula/pages/archive.twig:41 themes/virgula/pages/archive.twig:69
+#: themes/virgula/pages/archive.twig:41 themes/virgula/pages/archive.twig:67
 #: themes/virgula/pages/author.twig:20 themes/virgula/pages/category.twig:19
 #: themes/virgula/pages/drafts.twig:20 themes/virgula/pages/search.twig:57
 #: themes/virgula/pages/tag.twig:19 themes/virgula/pages/updated.twig:20
 msgid "Older posts"
 msgstr "Post più vecchi"
 
-#: themes/virgula/pages/archive.twig:79
+#: themes/virgula/pages/archive.twig:75
 msgid "There aren't any posts in the timeframe you specified."
 msgstr "Non ci sono post nell'intervallo di tempo specificato."
 
