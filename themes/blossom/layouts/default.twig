@@ -3,17 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <title>
-{%- block title -%}
 {%- if pagination is not empty and pagination.page > 1 -%}
 {{- "Page %d" | translate | format(pagination.page) -}}
 {{- " | " -}}
 {%- endif -%}
-{%- if title is not empty -%}
+{%- block title -%}
 {{- title | fix -}}
-{{- " | " -}}
-{%- endif -%}
-{{- site.name | fix -}}
 {%- endblock -%}
+{{- " | " -}}
+{{- site.name | fix -}}
 </title>
 <meta name="description" content="{{ site.description }}">
 <meta name="generator" content="Chyrp Lite">
