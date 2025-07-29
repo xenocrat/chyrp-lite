@@ -242,7 +242,8 @@
                         Post::find(array("placeholders" => true)),
                         $this->post_limit
                     )
-                )
+                ),
+                __("Index")
             );
         }
 
