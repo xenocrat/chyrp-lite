@@ -111,6 +111,14 @@
                     $_GET[$route->arg[3]] = $route->arg[4];
             }
 
+            # Discover feed requests.
+            if (
+                $route->action == "feed" or
+                $route->arg[0] == "feed" or
+                preg_match("/\/feed\/?$/", $route->request)
+            )
+                $this->feed = true;
+
             # Discover pagination.
             if (preg_match_all("/\/((([^_\/]+)_)?page)\/([0-9]+)/", $route->request, $pages)) {
                 foreach ($pages[1] as $index => $variable)
@@ -3989,6 +3997,7 @@
         ): void {
             $config = Config::current();
             $route = Route::current();
+            $theme = Theme::current();
             $trigger = Trigger::current();
 
             if ($this->displayed == true)
@@ -4006,6 +4015,17 @@
                 }
             }
 
+            # Populate the theme title attribute.
+            $theme->title = fallback($title, self_url());
+
+            # Serve a feed request if detected for this action.
+            if ($this->feed) {
+                if ($trigger->exists($route->action."_feed")) {
+                    $trigger->call($route->action."_feed", $context);
+                    return;
+                }
+            }
+
             $this->context                       = array_merge($context, $this->context);
             $this->context["ip"]                 = $_SERVER['REMOTE_ADDR'];
             $this->context["DIR"]                = DIR;
@@ -4015,12 +4035,12 @@
             $this->context["now"]                = time();
             $this->context["site"]               = $config;
             $this->context["flash"]              = Flash::current();
-            $this->context["theme"]              = Theme::current();
+            $this->context["theme"]              = $theme;
             $this->context["trigger"]            = $trigger;
             $this->context["route"]              = $route;
             $this->context["visitor"]            = Visitor::current();
             $this->context["visitor"]->logged_in = logged_in();
-            $this->context["title"]              = fallback($title, camelize($template, true));
+            $this->context["title"]              = $title;
             $this->context["pagination"]         = $pagination;
             $this->context["navigation"]         = $this->navigation_context($route->action);
             $this->context["feathers"]           = Feathers::$instances;
