@@ -530,7 +530,7 @@
         public function admin_manage_spam(
             $admin
         ): void {
-            if (!Visitor::current()->group->can("edit_comment", "delete_comment", true))
+            if (!Visitor::current()->group->can("edit_comment", "delete_comment"))
                 show_403(
                     __("Access Denied"),
                     __("You do not have sufficient privileges to manage any comments.", "comments")
@@ -1124,25 +1124,17 @@
         public function links(
             $links
         ): array {
-            $config = Config::current();
             $route = Route::current();
+            $theme = Theme::current();
 
             $post =
                 $route->controller->context["post"] ??
                 false ;
 
-            if (
-                !$route->controller->feed and
-                $route->action == "view" and
-                $post instanceof Post and
-                !$post->no_results
-            ) {
+            if (!$route->controller->feed and $route->action == "view") {
+                $post = $route->controller->context["post"];
                 $post_url = $post->url();
-
-                $feed_url = ($config->clean_urls) ?
-                    rtrim($post_url, "/")."/feed/" :
-                    $post_url."&amp;feed" ;
-
+                $feed_url = $theme->feed_url($post_url);
                 $text = oneof($post->title(), ucfirst($post->feather));
                 $title = _f("Comments on &#8220;%s&#8221;", $text, "comments");
 
@@ -1151,6 +1143,42 @@
                     "type" => BlogFeed::type(),
                     "title" => $title
                 );
+            }
+
+            return $links;
+        }
+
+        public function admin_links(
+            $links
+        ): array {
+            $route = Route::current();
+            $theme = Theme::current();
+            $visitor = Visitor::current();
+            $admin = AdminController::current();
+
+            if ($visitor->group->can("edit_comment", "delete_comment")) {
+                $feeds = array (
+                    array(
+                        "url" => $theme->feed_url(
+                            url("manage_comments", $admin)
+                        ),
+                        "title" => __("All comments", "comments")
+                    ),
+                    array(
+                        "url" => $theme->feed_url(
+                            url("manage_spam", $admin)
+                        ),
+                        "title" => __("All spam comments", "comments")
+                    )
+                );
+
+                foreach ($feeds as $feed) {
+                    $links[] = array(
+                        "href" => $feed["url"],
+                        "type" => BlogFeed::type(),
+                        "title" => $feed["title"]
+                    );
+                }
             }
 
             return $links;
