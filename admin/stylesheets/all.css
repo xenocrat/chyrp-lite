@@ -662,7 +662,8 @@ select[readonly]:focus {
     outline-color: var(--chyrp-irish-grey);
 }
 input.code,
-textarea.code {
+textarea.code,
+body.monospace textarea {
     font-family: "Cousine webfont", monospace;
     font-style: normal;
 }
