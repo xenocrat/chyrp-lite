@@ -1411,8 +1411,8 @@
         ): void {
             $config = Config::current();
             $route = Route::current();
-            $trigger = Trigger::current();
             $theme = Theme::current();
+            $trigger = Trigger::current();
 
             if ($this->displayed == true)
                 return;
@@ -1443,7 +1443,7 @@
             }
 
             # Populate the theme title attribute.
-            $theme->title = $title;
+            $theme->title = fallback($title, self_url());
 
             # Serve a feed request if detected for this action.
             if ($this->feed) {
