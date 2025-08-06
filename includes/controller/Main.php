@@ -1325,7 +1325,6 @@
             }
 
             $posts = $posts->paginated;
-
             $latest_timestamp = 0;
 
             foreach ($posts as $post) {
