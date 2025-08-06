@@ -281,24 +281,12 @@
         public function stylesheets(
         ): string {
             $config = Config::current();
+            $trigger = Trigger::current();
 
             $stylesheets = array();
 
-            # Ask extensions to provide additional stylesheets.
-            Trigger::current()->filter($stylesheets, "stylesheets");
-
-            # Generate <link> tags:
-            $tags = array();
-
-            foreach ($stylesheets as $stylesheet)
-                $tags[] = '<link rel="stylesheet" href="'.
-                          fix($stylesheet, true).
-                          '" type="text/css" media="all">';
-
-            if (
-                is_dir(THEME_DIR.DIR."stylesheets") or
-                is_dir(THEME_DIR.DIR."css")
-            ) {
+            if (MAIN) {
+                # Discover stylesheets provided by the theme.
                 foreach (
                     array_merge(
                         (array) glob(THEME_DIR.DIR."stylesheets".DIR."*.css"),
@@ -307,23 +295,42 @@
                 ) {
                     $filename = basename($filepath);
 
-                    if (empty($filename) or str_ends_with($filename, ".inc.css"))
+                    if (empty($filename))
+                        continue;
+
+                    if (str_ends_with($filename, ".inc.css"))
                         continue;
 
                     $qdir = preg_quote(DIR, "/");
+
                     $path = preg_replace(
                         "/(.+)".$qdir."themes".$qdir."(.+)/",
                         "$2",
                         $filepath
                     );
-                    $href = $config->chyrp_url.
-                            "/themes/".
-                            str_replace(DIR, "/", $path);
 
-                    $tags[] = '<link rel="stylesheet" href="'.
-                              fix($href, true).
-                              '" type="text/css" media="all">';
+                    $stylesheets[] = $config->chyrp_url.
+                                     "/themes/".
+                                     str_replace(DIR, "/", $path);
                 }
+
+                # Ask extensions to provide additional blog stylesheets.
+                $trigger->filter($stylesheets, "stylesheets");
+            } else {
+                $stylesheets[] = $config->chyrp_url.
+                                 "/admin/stylesheets/all.css";
+
+                # Ask extensions to provide additional admin stylesheets.
+                $trigger->filter($stylesheets, "admin_stylesheets");
+            }
+
+            # Generate <link> tags:
+            $tags = array();
+
+            foreach ($stylesheets as $stylesheet) {
+                $tags[] = '<link rel="stylesheet" href="'.
+                          fix($stylesheet, true).
+                          '" type="text/css" media="all">';
             }
 
             return implode("\n", $tags);
@@ -336,25 +343,12 @@
         public function javascripts(
         ): string {
             $config = Config::current();
-            $route = Route::current();
+            $trigger = Trigger::current();
 
             $scripts = array();
 
-            # Ask extensions to provide additional scripts.
-            Trigger::current()->filter($scripts, "scripts");
-
-            # Generate <script> tags:
-            $tags = array();
-
-            foreach ($scripts as $script)
-                $tags[] = '<script src="'.
-                          fix($script, true).
-                          '"></script>';
-
-            if (
-                is_dir(THEME_DIR.DIR."javascripts") or
-                is_dir(THEME_DIR.DIR."js")
-            ) {
+            if (MAIN) {
+                # Discover scripts provided by the theme.
                 foreach (
                     array_merge(
                         (array) glob(THEME_DIR.DIR."javascripts".DIR."*.js"),
@@ -363,24 +357,39 @@
                 ) {
                     $filename = basename($filepath);
 
-                    if (empty($filename) or str_ends_with($filename, ".inc.js"))
+                    if (empty($filename))
+                        continue;
+
+                    if (str_ends_with($filename, ".inc.js"))
                         continue;
 
                     $qdir = preg_quote(DIR, "/");
+
                     $path = preg_replace(
                         "/(.+)".$qdir."themes".$qdir."(.+)/",
                         "$2",
                         $filepath
                     );
 
-                    $href = $config->chyrp_url.
-                            "/themes/".
-                            str_replace(DIR, "/", $path);
-
-                    $tags[] = '<script src="'.
-                              fix($href, true).
-                              '"></script>';
+                    $scripts[] = $config->chyrp_url.
+                                 "/themes/".
+                                 str_replace(DIR, "/", $path);
                 }
+
+                # Ask extensions to provide additional blog scripts.
+                $trigger->filter($scripts, "scripts");
+            } else {
+                # Ask extensions to provide additional admin scripts.
+                $trigger->filter($scripts, "admin_scripts");
+            }
+
+            # Generate <script> tags:
+            $tags = array();
+
+            foreach ($scripts as $script) {
+                $tags[] = '<script src="'.
+                          fix($script, true).
+                          '"></script>';
             }
 
             return javascripts().implode("\n", $tags);
@@ -394,6 +403,7 @@
         ): string {
             $config = Config::current();
             $route = Route::current();
+            $trigger = Trigger::current();
             $main = MainController::current();
 
             # Generate the main feed that appears everywhere.
@@ -405,37 +415,33 @@
                 )
             );
 
-            $posts =
-                $route->controller->context["posts"] ??
-                false ;
+            if (MAIN) {
+                $posts =
+                    $route->controller->context["posts"] ??
+                    false ;
 
-            # Automatically provide feeds based on context.
-            if (
-                !$route->controller->feed and
-                $route->action != "index" and
-                $posts instanceof Paginator
-            ) {
-                $page_url = $posts->prev_page_url(1);
+                # Automatically provide feeds based on context.
+                if (
+                    !$route->controller->feed and
+                    $route->action != "index" and
+                    $posts instanceof Paginator
+                ) {
+                    $page_url = $posts->prev_page_url(1);
+                    $feed_url = $this->feed_url($page_url);
 
-                $feed_url = ($config->clean_urls) ?
-                    rtrim($page_url, "/")."/feed/"
-                    :
-                    $page_url.(
-                        substr_count($page_url, "?") ?
-                            "&feed" :
-                            "?feed"
-                    )
-                    ;
+                    $links[] = array(
+                        "href" => $feed_url,
+                        "type" => BlogFeed::type(),
+                        "title" => $this->title
+                    );
+                }
 
-                $links[] = array(
-                    "href" => $feed_url,
-                    "type" => BlogFeed::type(),
-                    "title" => $this->title
-                );
+                # Ask extensions to provide additional blog links.
+                $trigger->filter($links, "links");
+            } else {
+                # Ask extensions to provide additional admin links.
+                $trigger->filter($links, "admin_links");
             }
-
-            # Ask extensions to provide additional links.
-            Trigger::current()->filter($links, "links");
 
             # Generate <link> tags:
             $tags = array();
@@ -463,6 +469,24 @@
             }
 
             return implode("\n", $tags);
+        }
+
+        /**
+         * Function: feed_url
+         * Constructs a clean or dirty feed URL.
+         */
+        public function feed_url(
+            $url
+        ): string {
+            return (Config::current()->clean_urls) ?
+                rtrim($url, "/")."/feed/"
+                :
+                $url.(
+                    substr_count($url, "?") ?
+                        "&amp;feed" :
+                        "?feed"
+                )
+                ;
         }
 
         /**
