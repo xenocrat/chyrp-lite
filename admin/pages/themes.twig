@@ -5,17 +5,17 @@
 {% block content %}
 <h2>{{ "Blog Themes" | translate }}</h2>
 <ul id="blog_themes" class="extend themes">
-{% for safename, theme in themes %}
+{% for safename, info in themes %}
 <li class="theme{{ safename == site.theme ? ' current' : '' }}" id="{{ safename }}">
 <h3>
-{{ theme.name }}
+{{ info.name }}
 {# translation is done in the controller #}
-<a class="emblem module_author" rel="external" href="{{ theme.url }}" target="_blank">
+<a class="emblem module_author" rel="external" href="{{ info.url }}" target="_blank">
 {{- icon_svg("info.svg", "Info" | translate) -}}
 </a>
 </h3>
 <p class="theme_description">
-{{ theme.description }}{# translation is done in the controller #}
+{{ info.description }}{# translation is done in the controller #}
 </p>
 <div class="controls">
 <form action="{{ url('change_theme') }}" method="post" accept-charset="UTF-8">
