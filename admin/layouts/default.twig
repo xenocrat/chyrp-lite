@@ -17,14 +17,12 @@
 <link rel="icon" sizes="32x32" type="image/x-icon" href="{{ site.chyrp_url }}/favicon.ico">
 <link rel="icon" sizes="any" type="image/svg+xml" href="{{ site.chyrp_url }}/favicon.svg">
 <link rel="mask-icon" href="{{ site.chyrp_url }}/favicon.svg" color="#4f4f4f">
-<link rel="stylesheet" href="{{ site.chyrp_url }}/admin/stylesheets/all.css" type="text/css" media="all">
-{% if site.monospace_font %}
-<link rel="stylesheet" href="{{ site.chyrp_url }}/admin/stylesheets/monospace.css" type="text/css" media="all">
-{% endif %}
-{{ javascripts() }}
+{{ theme.feeds() }}
+{{ theme.stylesheets() }}
+{{ theme.javascripts() }}
 {{ trigger.call("admin_head") }}
 </head>
-<body>
+<body class="route_{{ route.action }}{% if site.monospace_font %} monospace{% endif %}">
 <div id="header" role="banner">
 <h1><a href="{{ url('/', 'MainController') }}">{{ site.name }}</a></h1>
 <ul id="navigation" role="menubar">
