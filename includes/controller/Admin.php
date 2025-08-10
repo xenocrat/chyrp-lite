@@ -24,10 +24,6 @@
         # The base path for this controller.
         public $base = "admin";
 
-        # Boolean: $feed
-        # Serve a syndication feed?
-        public $feed = false;
-
         # Object: $twig
         # Environment for the Twig template engine.
         private $twig;
@@ -3777,7 +3773,7 @@
          * Function: navigation_context
          * Returns the navigation context for Twig.
          */
-        private function navigation_context(
+        private function nav_context(
             $action
         ): array {
             $trigger = Trigger::current();
@@ -4026,7 +4022,8 @@
                 }
             }
 
-            $this->context                       = array_merge($context, $this->context);
+            $this->context = array_merge($context, $this->context);
+
             $this->context["ip"]                 = $_SERVER['REMOTE_ADDR'];
             $this->context["DIR"]                = DIR;
             $this->context["version"]            = CHYRP_VERSION;
@@ -4042,7 +4039,7 @@
             $this->context["visitor"]->logged_in = logged_in();
             $this->context["title"]              = $title;
             $this->context["pagination"]         = $pagination;
-            $this->context["navigation"]         = $this->navigation_context($route->action);
+            $this->context["navigation"]         = $this->nav_context($route->action);
             $this->context["feathers"]           = Feathers::$instances;
             $this->context["modules"]            = Modules::$instances;
             $this->context["POST"]               = $_POST;
