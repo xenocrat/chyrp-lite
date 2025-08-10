@@ -161,7 +161,7 @@ msgid "Speak"
 msgstr "Parler"
 
 #: themes/virgula/forms/user/controls.twig:4
-#: themes/virgula/layouts/default.twig:58
+#: themes/virgula/layouts/default.twig:56
 msgid "Controls"
 msgstr "Contrôles"
 
@@ -194,7 +194,7 @@ msgstr "Mise à jour"
 
 #: themes/virgula/forms/user/login.twig:4
 #: themes/virgula/forms/user/login.twig:13
-#: themes/virgula/layouts/default.twig:70
+#: themes/virgula/layouts/default.twig:68
 msgid "Log in"
 msgstr "Connexion"
 
@@ -225,7 +225,7 @@ msgstr "Envoyer"
 
 #: themes/virgula/forms/user/register.twig:4
 #: themes/virgula/forms/user/register.twig:18
-#: themes/virgula/layouts/default.twig:66
+#: themes/virgula/layouts/default.twig:64
 msgid "Register"
 msgstr "Enregistrement"
 
@@ -245,48 +245,48 @@ msgstr "Virgula"
 msgid "A high-contrast theme for Chyrp Lite."
 msgstr "Un thème très contrasté pour Chyrp Lite."
 
-#: themes/virgula/layouts/default.twig:8
+#: themes/virgula/layouts/default.twig:7
 #, php-format
 msgid "Page %d"
 msgstr "Page %d"
 
-#: themes/virgula/layouts/default.twig:35
+#: themes/virgula/layouts/default.twig:33
 msgid "Blog"
 msgstr "Blog"
 
-#: themes/virgula/layouts/default.twig:38
+#: themes/virgula/layouts/default.twig:36
 msgid "Feed"
 msgstr "Flux"
 
-#: themes/virgula/layouts/default.twig:41
+#: themes/virgula/layouts/default.twig:39
 msgid "Archive"
 msgstr "Archive"
 
-#: themes/virgula/layouts/default.twig:45
+#: themes/virgula/layouts/default.twig:43
 msgid "Admin"
 msgstr "Administration"
 
-#: themes/virgula/layouts/default.twig:49
+#: themes/virgula/layouts/default.twig:47
 msgid "Write"
 msgstr "Écrire"
 
-#: themes/virgula/layouts/default.twig:53
+#: themes/virgula/layouts/default.twig:51
 msgid "Draft"
 msgstr "Brouillon"
 
-#: themes/virgula/layouts/default.twig:61
+#: themes/virgula/layouts/default.twig:59
 msgid "Log out"
 msgstr "Déconnexion"
 
-#: themes/virgula/layouts/default.twig:85
+#: themes/virgula/layouts/default.twig:83
 msgid "Search this blog"
 msgstr "Rechercher ce blog"
 
-#: themes/virgula/layouts/default.twig:86
+#: themes/virgula/layouts/default.twig:84
 msgid "Find"
 msgstr "Trouver"
 
-#: themes/virgula/layouts/default.twig:100
+#: themes/virgula/layouts/default.twig:98
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "Appelé depuis %s à la ligne %d à %s secondes."

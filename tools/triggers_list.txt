@@ -22,7 +22,7 @@ Called from:
 admin_head
 ----------
 Called from:
-	admin/layouts/default.twig on line 25
+	admin/layouts/default.twig on line 23
 
 
 delete_user_form
@@ -275,13 +275,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 2308
+	includes/controller/Admin.php on line 2312
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2758
+	includes/controller/Admin.php on line 2762
 
 Arguments:
 	$group
@@ -290,7 +290,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2796
+	includes/controller/Admin.php on line 2800
 
 Arguments:
 	$user
@@ -299,7 +299,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2849
+	includes/controller/Admin.php on line 2853
 
 Arguments:
 	$entry
@@ -309,7 +309,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2898
+	includes/controller/Admin.php on line 2902
 
 Arguments:
 	$entry
@@ -319,7 +319,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 2902
+	includes/controller/Admin.php on line 2906
 
 Arguments:
 	$imports
@@ -328,25 +328,25 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 3303
+	includes/controller/Admin.php on line 3307
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 3318
+	includes/controller/Admin.php on line 3322
 
 
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 673
+	includes/controller/Main.php on line 674
 
 
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 987
+	includes/controller/Main.php on line 988
 
 
 feed_item
@@ -630,7 +630,9 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 1297
+	modules/comments/comments.php on line 1341
+	modules/comments/comments.php on line 1412
+	modules/comments/comments.php on line 1483
 
 Arguments:
 	$comment
@@ -640,7 +642,7 @@ Arguments:
 correspond_site_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1635
+	modules/comments/comments.php on line 1821
 
 Arguments:
 	$comment
@@ -649,7 +651,7 @@ Arguments:
 correspond_user_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1663
+	modules/comments/comments.php on line 1849
 
 Arguments:
 	$comment
@@ -659,7 +661,7 @@ Arguments:
 correspond_peer_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1696
+	modules/comments/comments.php on line 1882
 
 Arguments:
 	$comment
@@ -840,31 +842,31 @@ Called from:
 end_head
 --------
 Called from:
-	themes/blossom/layouts/default.twig on line 27
-	themes/sparrow/layouts/default.twig on line 27
-	themes/topaz/layouts/default.twig on line 27
-	themes/umbra/layouts/default.twig on line 27
-	themes/virgula/layouts/default.twig on line 27
+	themes/blossom/layouts/default.twig on line 25
+	themes/sparrow/layouts/default.twig on line 25
+	themes/topaz/layouts/default.twig on line 25
+	themes/umbra/layouts/default.twig on line 25
+	themes/virgula/layouts/default.twig on line 25
 
 
 end_main
 --------
 Called from:
-	themes/blossom/layouts/default.twig on line 54
-	themes/sparrow/layouts/default.twig on line 110
-	themes/topaz/layouts/default.twig on line 50
-	themes/umbra/layouts/default.twig on line 104
-	themes/virgula/layouts/default.twig on line 91
+	themes/blossom/layouts/default.twig on line 52
+	themes/sparrow/layouts/default.twig on line 108
+	themes/topaz/layouts/default.twig on line 48
+	themes/umbra/layouts/default.twig on line 102
+	themes/virgula/layouts/default.twig on line 89
 
 
 end_content
 -----------
 Called from:
-	themes/blossom/layouts/default.twig on line 60
-	themes/sparrow/layouts/default.twig on line 118
-	themes/topaz/layouts/default.twig on line 59
-	themes/umbra/layouts/default.twig on line 112
-	themes/virgula/layouts/default.twig on line 93
+	themes/blossom/layouts/default.twig on line 58
+	themes/sparrow/layouts/default.twig on line 116
+	themes/topaz/layouts/default.twig on line 57
+	themes/umbra/layouts/default.twig on line 110
+	themes/virgula/layouts/default.twig on line 91
 
 
 
@@ -899,7 +901,16 @@ Arguments:
 stylesheets
 -----------
 Called from:
-	includes/class/Theme.php on line 288
+	includes/class/Theme.php on line 318
+
+Target:
+	$stylesheets
+
+
+admin_stylesheets
+-----------------
+Called from:
+	includes/class/Theme.php on line 324
 
 Target:
 	$stylesheets
@@ -908,7 +919,16 @@ Target:
 scripts
 -------
 Called from:
-	includes/class/Theme.php on line 344
+	includes/class/Theme.php on line 380
+
+Target:
+	$scripts
+
+
+admin_scripts
+-------------
+Called from:
+	includes/class/Theme.php on line 383
 
 Target:
 	$scripts
@@ -917,7 +937,16 @@ Target:
 links
 -----
 Called from:
-	includes/class/Theme.php on line 438
+	includes/class/Theme.php on line 440
+
+Target:
+	$links
+
+
+admin_links
+-----------
+Called from:
+	includes/class/Theme.php on line 443
 
 Target:
 	$links
@@ -926,7 +955,7 @@ Target:
 admin_determine_action
 ----------------------
 Called from:
-	includes/controller/Admin.php on line 175
+	includes/controller/Admin.php on line 179
 
 Target:
 	$route->action
@@ -935,7 +964,7 @@ Target:
 write_post_options
 ------------------
 Called from:
-	includes/controller/Admin.php on line 239
+	includes/controller/Admin.php on line 243
 
 Target:
 	$options
@@ -948,8 +977,8 @@ Arguments:
 post_options
 ------------
 Called from:
-	includes/controller/Admin.php on line 240
-	includes/controller/Admin.php on line 347
+	includes/controller/Admin.php on line 244
+	includes/controller/Admin.php on line 351
 
 Target:
 	$options
@@ -962,7 +991,7 @@ Arguments:
 edit_post_options
 -----------------
 Called from:
-	includes/controller/Admin.php on line 346
+	includes/controller/Admin.php on line 350
 
 Target:
 	$options
@@ -975,7 +1004,7 @@ Arguments:
 posts_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 2426
+	includes/controller/Admin.php on line 2430
 
 Target:
 	$posts_atom
@@ -987,7 +1016,7 @@ Arguments:
 pages_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 2528
+	includes/controller/Admin.php on line 2532
 
 Target:
 	$pages_atom
@@ -999,7 +1028,7 @@ Arguments:
 export
 ------
 Called from:
-	includes/controller/Admin.php on line 2614
+	includes/controller/Admin.php on line 2618
 
 Target:
 	$exports
@@ -1008,7 +1037,7 @@ Target:
 before_import
 -------------
 Called from:
-	includes/controller/Admin.php on line 2730
+	includes/controller/Admin.php on line 2734
 
 Target:
 	$imports
@@ -1017,7 +1046,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 3825
+	includes/controller/Admin.php on line 3829
 
 Target:
 	$write
@@ -1026,7 +1055,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3894
+	includes/controller/Admin.php on line 3898
 
 Target:
 	$manage
@@ -1035,7 +1064,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 3924
+	includes/controller/Admin.php on line 3928
 
 Target:
 	$settings
@@ -1044,7 +1073,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3947
+	includes/controller/Admin.php on line 3951
 
 Target:
 	$extend
@@ -1053,7 +1082,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 4035
+	includes/controller/Admin.php on line 4052
 
 Target:
 	$this->context
@@ -1104,7 +1133,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 1486
+	includes/controller/Main.php on line 1487
 
 Target:
 	$this->context

@@ -352,20 +352,20 @@ msgstr ""
 msgid "A minimalist responsive theme for Chyrp Lite."
 msgstr ""
 
-#: themes/topaz/layouts/default.twig:8
+#: themes/topaz/layouts/default.twig:7
 #, php-format
 msgid "Page %d"
 msgstr "第%d页"
 
-#: themes/topaz/layouts/default.twig:55
+#: themes/topaz/layouts/default.twig:53
 msgid "Newer posts"
 msgstr "较新的帖子"
 
-#: themes/topaz/layouts/default.twig:56
+#: themes/topaz/layouts/default.twig:54
 msgid "Older posts"
 msgstr "较旧的帖子"
 
-#: themes/topaz/layouts/default.twig:66
+#: themes/topaz/layouts/default.twig:64
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "调用 %s 在行 %d 在 %s 秒."

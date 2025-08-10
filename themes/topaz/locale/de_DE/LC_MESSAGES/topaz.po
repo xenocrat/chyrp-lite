@@ -356,20 +356,20 @@ msgstr "Topaz"
 msgid "A minimalist responsive theme for Chyrp Lite."
 msgstr "Eine minimalistische ansprechbar thema für Chyrp Lite."
 
-#: themes/topaz/layouts/default.twig:8
+#: themes/topaz/layouts/default.twig:7
 #, php-format
 msgid "Page %d"
 msgstr "Seite %d"
 
-#: themes/topaz/layouts/default.twig:55
+#: themes/topaz/layouts/default.twig:53
 msgid "Newer posts"
 msgstr "Neuere Posts"
 
-#: themes/topaz/layouts/default.twig:56
+#: themes/topaz/layouts/default.twig:54
 msgid "Older posts"
 msgstr "Ältere Posts"
 
-#: themes/topaz/layouts/default.twig:66
+#: themes/topaz/layouts/default.twig:64
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "Aufgerufen von %s in Zeile %d in %s Sekunden."

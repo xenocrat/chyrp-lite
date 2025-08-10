@@ -1161,6 +1161,11 @@ Function: feeds
 Outputs the feeds and other general purpose <link> tags.
 
 
+Function: feed_url
+------------------
+Constructs a clean or dirty feed URL.
+
+
 Function: load_time
 -------------------
 Returns the total elapsed time for this page load.

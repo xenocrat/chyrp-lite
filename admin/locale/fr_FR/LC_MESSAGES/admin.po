@@ -403,7 +403,7 @@ msgstr "Contenu du prévisualisation"
 msgid "Page %d"
 msgstr "Page %d"
 
-#: admin/layouts/default.twig:73
+#: admin/layouts/default.twig:71
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "Appelé depuis %s à la ligne %d à %s secondes."

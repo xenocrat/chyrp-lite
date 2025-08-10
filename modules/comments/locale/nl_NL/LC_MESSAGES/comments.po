@@ -372,65 +372,72 @@ msgstr "Opmerkingen toegevoegd vanaf %s"
 msgid "An ID is required to show a comment."
 msgstr "Een ID is noodzakelijk om een opmerking te tonen."
 
-#: modules/comments/comments.php:1147 modules/comments/comments.php:1264
+#: modules/comments/comments.php:1135 modules/comments/comments.php:1162
+#: modules/comments/comments.php:1312 modules/comments/comments.php:1383
 #, php-format
 msgid "Comments on &#8220;%s&#8221;"
 msgstr "Opmerkingen op &#8220;%s&#8221;"
 
-#: modules/comments/comments.php:1244
+#: modules/comments/comments.php:1168 modules/comments/comments.php:1454
+#, php-format
+msgid "Spam comments on &#8220;%s&#8221;"
+msgstr "Spam-Opmerkingen op &#8220;%s&#8221;"
+
+#: modules/comments/comments.php:1269
 msgid "You have unsubscribed from the conversation."
 msgstr "Je bent uitgeschreven van deze conversatie."
 
-#: modules/comments/comments.php:1287
+#: modules/comments/comments.php:1331 modules/comments/comments.php:1402
+#: modules/comments/comments.php:1473
 #, php-format
 msgid "Comment #%d"
 msgstr "Opmerking #%d"
 
-#: modules/comments/comments.php:1320
+#: modules/comments/comments.php:1506
 msgid "A ping from your URL is already registered."
 msgstr "Een ping van je URL is reeds geregistreerd."
 
-#: modules/comments/comments.php:1327
+#: modules/comments/comments.php:1513
 msgid "Your URL is too long to be stored in our database."
 msgstr "Je URL is te lang om in de database te worden opgeslagen."
 
-#: modules/comments/comments.php:1332
+#: modules/comments/comments.php:1518
 msgid "Mentioned this post."
 msgstr "Heeft deze blogpost genoemd."
 
-#: modules/comments/comments.php:1355
+#: modules/comments/comments.php:1541
 msgid "Open"
 msgstr "Open"
 
-#: modules/comments/comments.php:1362
+#: modules/comments/comments.php:1548
 msgid "Closed"
 msgstr "Gesloten"
 
-#: modules/comments/comments.php:1369
+#: modules/comments/comments.php:1555
 msgid "Private"
 msgstr "Privé"
 
-#: modules/comments/comments.php:1376
+#: modules/comments/comments.php:1562
 msgid "Registered Only"
 msgstr "Uitsluitend geregistreerden"
 
-#: modules/comments/comments.php:1386
+#: modules/comments/comments.php:1572
 msgid "Comment Status"
 msgstr "Status Opmerking"
 
-#: modules/comments/comments.php:1643 modules/comments/comments.php:1671
-#: modules/comments/comments.php:1704
+#: modules/comments/comments.php:1829 modules/comments/comments.php:1857
+#: modules/comments/comments.php:1890
 #, php-format
 msgid "New Comment at %s"
 msgstr "Nieuwe opmerking op %s"
 
-#: modules/comments/comments.php:1644 modules/comments/comments.php:1672
-#: modules/comments/comments.php:1705
+#: modules/comments/comments.php:1830 modules/comments/comments.php:1858
+#: modules/comments/comments.php:1891
 #, php-format
 msgid "%s commented on a blog post:"
 msgstr "%s heeft een opmerking geplaatst op een blogpost:"
 
-#: modules/comments/comments.php:1713
+#: modules/comments/comments.php:1899
 msgid "Unsubscribe from this conversation:"
 msgstr "Schrijf je uit van deze conversatie:"
 

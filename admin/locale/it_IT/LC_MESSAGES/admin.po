@@ -402,7 +402,7 @@ msgstr "Contenuto di anteprima"
 msgid "Page %d"
 msgstr "Pagina %d"
 
-#: admin/layouts/default.twig:73
+#: admin/layouts/default.twig:71
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "Chiamato da %s sulla riga %d a %s secondi."

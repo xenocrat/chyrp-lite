@@ -40,7 +40,7 @@ msgstr "Tags"
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "Permalink naar &#8220;%s&#8221;"
 
-#: themes/sparrow/content/post.twig:17 themes/sparrow/layouts/default.twig:75
+#: themes/sparrow/content/post.twig:17 themes/sparrow/layouts/default.twig:73
 msgid "Draft"
 msgstr "Concept"
 
@@ -198,7 +198,7 @@ msgid "Speak"
 msgstr "Praat"
 
 #: themes/sparrow/forms/user/controls.twig:5
-#: themes/sparrow/layouts/default.twig:80
+#: themes/sparrow/layouts/default.twig:78
 msgid "Controls"
 msgstr "Instellingen"
 
@@ -208,7 +208,7 @@ msgstr "Volledige naam"
 
 #: themes/sparrow/forms/user/controls.twig:9
 #: themes/sparrow/forms/user/register.twig:13
-#: themes/sparrow/layouts/default.twig:57
+#: themes/sparrow/layouts/default.twig:55
 msgid "Email"
 msgstr "Email"
 
@@ -232,7 +232,7 @@ msgstr "Bijwerken"
 
 #: themes/sparrow/forms/user/login.twig:5
 #: themes/sparrow/forms/user/login.twig:14
-#: themes/sparrow/layouts/default.twig:92
+#: themes/sparrow/layouts/default.twig:90
 msgid "Log in"
 msgstr "Log in"
 
@@ -263,7 +263,7 @@ msgstr "Bevestig"
 
 #: themes/sparrow/forms/user/register.twig:5
 #: themes/sparrow/forms/user/register.twig:19
-#: themes/sparrow/layouts/default.twig:88
+#: themes/sparrow/layouts/default.twig:86
 msgid "Register"
 msgstr "Registreer"
 
@@ -283,56 +283,56 @@ msgstr "Sparrow"
 msgid "An unobtrusive tumbleblog theme for Chyrp Lite."
 msgstr "Een onopvallend Tumbleblog thema voor Chyrp Lite."
 
-#: themes/sparrow/layouts/default.twig:8
+#: themes/sparrow/layouts/default.twig:7
 #, php-format
 msgid "Page %d"
 msgstr "Pagina %d"
 
-#: themes/sparrow/layouts/default.twig:48
+#: themes/sparrow/layouts/default.twig:46
 msgid "Links"
 msgstr "Links"
 
-#: themes/sparrow/layouts/default.twig:60
+#: themes/sparrow/layouts/default.twig:58
 msgid "Feed"
 msgstr "Feed"
 
-#: themes/sparrow/layouts/default.twig:63
+#: themes/sparrow/layouts/default.twig:61
 msgid "Archive"
 msgstr "Archief"
 
-#: themes/sparrow/layouts/default.twig:67
+#: themes/sparrow/layouts/default.twig:65
 msgid "Admin"
 msgstr "Beheer"
 
-#: themes/sparrow/layouts/default.twig:71
+#: themes/sparrow/layouts/default.twig:69
 msgid "Write"
 msgstr "Schrijf"
 
-#: themes/sparrow/layouts/default.twig:83
+#: themes/sparrow/layouts/default.twig:81
 msgid "Log out"
 msgstr "Log uit"
 
-#: themes/sparrow/layouts/default.twig:97
+#: themes/sparrow/layouts/default.twig:95
 msgid "Search&hellip;"
 msgstr "Zoek&hellip;"
 
-#: themes/sparrow/layouts/default.twig:97
+#: themes/sparrow/layouts/default.twig:95
 msgid "Search this blog"
 msgstr "Doorzoek deze Blog"
 
-#: themes/sparrow/layouts/default.twig:98
+#: themes/sparrow/layouts/default.twig:96
 msgid "Search"
 msgstr "Zoek"
 
-#: themes/sparrow/layouts/default.twig:104
+#: themes/sparrow/layouts/default.twig:102
 msgid "&larr; Newer posts"
 msgstr "&larr; Nieuwere Blogposts"
 
-#: themes/sparrow/layouts/default.twig:115
+#: themes/sparrow/layouts/default.twig:113
 msgid "Older posts &rarr;"
 msgstr "Oudere Blogposts &rarr;"
 
-#: themes/sparrow/layouts/default.twig:125
+#: themes/sparrow/layouts/default.twig:123
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "Aangeroepen vanuit %s op regel %d bij %s seconden."

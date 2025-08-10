@@ -409,7 +409,7 @@ msgstr "Vorschau inhalt"
 msgid "Page %d"
 msgstr "Seite %d"
 
-#: admin/layouts/default.twig:73
+#: admin/layouts/default.twig:71
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "Von %s auf Leitung %d um %s Sekunden aufgerufen."

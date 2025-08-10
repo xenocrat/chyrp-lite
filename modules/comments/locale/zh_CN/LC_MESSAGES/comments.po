@@ -365,65 +365,72 @@ msgstr "自 %s 添加了评论"
 msgid "An ID is required to show a comment."
 msgstr "显示评论必须要一个ID。"
 
-#: modules/comments/comments.php:1147 modules/comments/comments.php:1264
+#: modules/comments/comments.php:1135 modules/comments/comments.php:1162
+#: modules/comments/comments.php:1312 modules/comments/comments.php:1383
 #, php-format
 msgid "Comments on &#8220;%s&#8221;"
 msgstr "对 &#8220;%s&#8221; 的评论"
 
-#: modules/comments/comments.php:1244
+#: modules/comments/comments.php:1168 modules/comments/comments.php:1454
+#, php-format
+msgid "Spam comments on &#8220;%s&#8221;"
+msgstr "对 &#8220;%s&#8221; 的垃圾评论"
+
+#: modules/comments/comments.php:1269
 msgid "You have unsubscribed from the conversation."
 msgstr "您已取消订阅对话。"
 
-#: modules/comments/comments.php:1287
+#: modules/comments/comments.php:1331 modules/comments/comments.php:1402
+#: modules/comments/comments.php:1473
 #, php-format
 msgid "Comment #%d"
 msgstr "评论 #%d"
 
-#: modules/comments/comments.php:1320
+#: modules/comments/comments.php:1506
 msgid "A ping from your URL is already registered."
 msgstr "您的URL中的ping已被注册。"
 
-#: modules/comments/comments.php:1327
+#: modules/comments/comments.php:1513
 msgid "Your URL is too long to be stored in our database."
 msgstr "您的网址太长，无法存储在我们的数据库中。"
 
-#: modules/comments/comments.php:1332
+#: modules/comments/comments.php:1518
 msgid "Mentioned this post."
 msgstr "提到了这个帖子。"
 
-#: modules/comments/comments.php:1355
+#: modules/comments/comments.php:1541
 msgid "Open"
 msgstr "打开"
 
-#: modules/comments/comments.php:1362
+#: modules/comments/comments.php:1548
 msgid "Closed"
 msgstr "已关闭"
 
-#: modules/comments/comments.php:1369
+#: modules/comments/comments.php:1555
 msgid "Private"
 msgstr "私人"
 
-#: modules/comments/comments.php:1376
+#: modules/comments/comments.php:1562
 msgid "Registered Only"
 msgstr "仅注册"
 
-#: modules/comments/comments.php:1386
+#: modules/comments/comments.php:1572
 msgid "Comment Status"
 msgstr "评论状态"
 
-#: modules/comments/comments.php:1643 modules/comments/comments.php:1671
-#: modules/comments/comments.php:1704
+#: modules/comments/comments.php:1829 modules/comments/comments.php:1857
+#: modules/comments/comments.php:1890
 #, php-format
 msgid "New Comment at %s"
 msgstr "%s 上的新注释"
 
-#: modules/comments/comments.php:1644 modules/comments/comments.php:1672
-#: modules/comments/comments.php:1705
+#: modules/comments/comments.php:1830 modules/comments/comments.php:1858
+#: modules/comments/comments.php:1891
 #, php-format
 msgid "%s commented on a blog post:"
 msgstr "%s 在博客文章上评论："
 
-#: modules/comments/comments.php:1713
+#: modules/comments/comments.php:1899
 msgid "Unsubscribe from this conversation:"
 msgstr "取消订阅此对话："
 
