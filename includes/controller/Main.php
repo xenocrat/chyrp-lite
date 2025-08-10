@@ -1460,7 +1460,8 @@
                 }
             }
 
-            $this->context                       = array_merge($context, $this->context);
+            $this->context = array_merge($context, $this->context);
+
             $this->context["ip"]                 = $_SERVER['REMOTE_ADDR'];
             $this->context["DIR"]                = DIR;
             $this->context["version"]            = CHYRP_VERSION;
