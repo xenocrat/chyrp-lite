@@ -502,7 +502,7 @@
             );
 
             $where[] = "status != '".Comment::STATUS_SPAM."'";
-            fallback($order, "post_id DESC, created_at ASC");
+            fallback($order, "created_at DESC, id DESC");
 
             $visitor = Visitor::current();
 
@@ -556,7 +556,7 @@
             );
 
             $where[] = "status = '".Comment::STATUS_SPAM."'";
-            fallback($order, "post_id DESC, created_at ASC");
+            fallback($order, "created_at DESC, id DESC");
 
             $admin->display(
                 "pages".DIR."manage_spam",
@@ -1127,10 +1127,6 @@
             $route = Route::current();
             $theme = Theme::current();
 
-            $post =
-                $route->controller->context["post"] ??
-                false ;
-
             if (!$route->controller->feed and $route->action == "view") {
                 $post = $route->controller->context["post"];
                 $post_url = $post->url();
@@ -1277,19 +1273,104 @@
         public function view_feed(
             $context
         ): void {
+            $config = Config::current();
             $trigger = Trigger::current();
-
-            if (!isset($context["post"]))
-                show_404(
-                    __("Not Found"),
-                    __("Post not found.")
-                );
 
             $post = $context["post"];
             $comments = $post->comments;
+            $prev_page = null;
+            $next_page = null;
+            $first_page = null;
+            $last_page = null;
+
+            if ($comments->per_page != $config->feed_items)
+                $comments = $comments->reslice($config->feed_items);
+
+            if ($comments->prev_page())
+                $prev_page = $comments->prev_page_url();
+
+            if ($comments->next_page())
+                $next_page = $comments->next_page_url();
+
+            if ($comments->pages > 1) {
+                $first_page = $comments->prev_page_url(1);
+                $last_page = $comments->next_page_url($comments->pages);
+            }
+
+            $comments = $comments->paginated;
             $latest_timestamp = 0;
+
+            foreach ($comments as $comment) {
+                $created_at = strtotime($comment->created_at);
+
+                if ($latest_timestamp < $created_at)
+                    $latest_timestamp = $created_at;
+            }
+
             $text = oneof($post->title(), ucfirst($post->feather));
             $title = _f("Comments on &#8220;%s&#8221;", $text, "comments");
+
+            $feed = new BlogFeed();
+
+            $feed->open(
+                title:$title,
+                updated:$latest_timestamp,
+                prev_page:$prev_page,
+                next_page:$next_page,
+                first_page:$first_page,
+                last_page:$last_page
+            );
+
+            foreach ($comments as $comment) {
+                $updated = ($comment->updated) ?
+                    $comment->updated_at :
+                    $comment->created_at ;
+
+                $feed->entry(
+                    title:_f("Comment #%d", $comment->id, "comments"),
+                    id:url("comment/".$comment->id),
+                    content:$comment->body,
+                    link:$comment->post->url()."#comment_".$comment->id,
+                    published:$comment->created_at,
+                    updated:$updated,
+                    name:$comment->author,
+                    uri:$comment->author_url
+                );
+
+                $trigger->call("comments_feed_item", $comment, $feed);
+            }
+
+            $feed->display();
+        }
+
+        public function manage_comments_feed(
+            $context
+        ): void {
+            $config = Config::current();
+            $trigger = Trigger::current();
+
+            $comments = $context["comments"];
+            $prev_page = null;
+            $next_page = null;
+            $first_page = null;
+            $last_page = null;
+
+            if ($comments->per_page != $config->feed_items)
+                $comments = $comments->reslice($config->feed_items);
+
+            if ($comments->prev_page())
+                $prev_page = $comments->prev_page_url();
+
+            if ($comments->next_page())
+                $next_page = $comments->next_page_url();
+
+            if ($comments->pages > 1) {
+                $first_page = $comments->prev_page_url(1);
+                $last_page = $comments->next_page_url($comments->pages);
+            }
+
+            $comments = $comments->paginated;
+            $latest_timestamp = 0;
 
             foreach ($comments as $comment) {
                 $created_at = strtotime($comment->created_at);
@@ -1301,9 +1382,81 @@
             $feed = new BlogFeed();
 
             $feed->open(
-                title:$title,
-                subtitle:Config::current()->description,
-                updated:$latest_timestamp
+                title:__("All comments", "comments"),
+                updated:$latest_timestamp,
+                prev_page:$prev_page,
+                next_page:$next_page,
+                first_page:$first_page,
+                last_page:$last_page
+            );
+
+            foreach ($comments as $comment) {
+                $updated = ($comment->updated) ?
+                    $comment->updated_at :
+                    $comment->created_at ;
+
+                $feed->entry(
+                    title:_f("Comment #%d", $comment->id, "comments"),
+                    id:url("comment/".$comment->id),
+                    content:$comment->body,
+                    link:$comment->post->url()."#comment_".$comment->id,
+                    published:$comment->created_at,
+                    updated:$updated,
+                    name:$comment->author,
+                    uri:$comment->author_url
+                );
+
+                $trigger->call("comments_feed_item", $comment, $feed);
+            }
+
+            $feed->display();
+        }
+
+        public function manage_spam_feed(
+            $context
+        ): void {
+            $config = Config::current();
+            $trigger = Trigger::current();
+
+            $comments = $context["comments"];
+            $prev_page = null;
+            $next_page = null;
+            $first_page = null;
+            $last_page = null;
+
+            if ($comments->per_page != $config->feed_items)
+                $comments = $comments->reslice($config->feed_items);
+
+            if ($comments->prev_page())
+                $prev_page = $comments->prev_page_url();
+
+            if ($comments->next_page())
+                $next_page = $comments->next_page_url();
+
+            if ($comments->pages > 1) {
+                $first_page = $comments->prev_page_url(1);
+                $last_page = $comments->next_page_url($comments->pages);
+            }
+
+            $comments = $comments->paginated;
+            $latest_timestamp = 0;
+
+            foreach ($comments as $comment) {
+                $created_at = strtotime($comment->created_at);
+
+                if ($latest_timestamp < $created_at)
+                    $latest_timestamp = $created_at;
+            }
+
+            $feed = new BlogFeed();
+
+            $feed->open(
+                title:__("All spam comments", "comments"),
+                updated:$latest_timestamp,
+                prev_page:$prev_page,
+                next_page:$next_page,
+                first_page:$first_page,
+                last_page:$last_page
             );
 
             foreach ($comments as $comment) {
