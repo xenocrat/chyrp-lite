@@ -1147,6 +1147,7 @@
         public function admin_links(
             $links
         ): array {
+            $config = Config::current();
             $route = Route::current();
             $theme = Theme::current();
             $visitor = Visitor::current();
@@ -1158,13 +1159,13 @@
                         "url" => $theme->feed_url(
                             url("manage_comments", $admin)
                         ),
-                        "title" => __("All comments", "comments")
+                        "title" => _f("Comments on &#8220;%s&#8221;", $config->name, "comments")
                     ),
                     array(
                         "url" => $theme->feed_url(
                             url("manage_spam", $admin)
                         ),
-                        "title" => __("All spam comments", "comments")
+                        "title" => _f("Spam comments on &#8220;%s&#8221;", $config->name, "comments")
                     )
                 );
 
@@ -1379,10 +1380,12 @@
                     $latest_timestamp = $created_at;
             }
 
+            $title = _f("Comments on &#8220;%s&#8221;", $config->name, "comments");
+
             $feed = new BlogFeed();
 
             $feed->open(
-                title:__("All comments", "comments"),
+                title:$title,
                 updated:$latest_timestamp,
                 prev_page:$prev_page,
                 next_page:$next_page,
@@ -1448,10 +1451,12 @@
                     $latest_timestamp = $created_at;
             }
 
+            $title = _f("Spam comments on &#8220;%s&#8221;", $config->name, "comments");
+
             $feed = new BlogFeed();
 
             $feed->open(
-                title:__("All spam comments", "comments"),
+                title:$title,
                 updated:$latest_timestamp,
                 prev_page:$prev_page,
                 next_page:$next_page,
