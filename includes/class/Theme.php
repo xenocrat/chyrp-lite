@@ -285,7 +285,13 @@
 
             $stylesheets = array();
 
-            if (MAIN) {
+            if (ADMIN) {
+                $stylesheets[] = $config->chyrp_url.
+                                 "/admin/stylesheets/all.css";
+
+                # Ask extensions to provide additional admin stylesheets.
+                $trigger->filter($stylesheets, "admin_stylesheets");
+            } else {
                 # Discover stylesheets provided by the theme.
                 foreach (
                     array_merge(
@@ -316,12 +322,6 @@
 
                 # Ask extensions to provide additional blog stylesheets.
                 $trigger->filter($stylesheets, "stylesheets");
-            } else {
-                $stylesheets[] = $config->chyrp_url.
-                                 "/admin/stylesheets/all.css";
-
-                # Ask extensions to provide additional admin stylesheets.
-                $trigger->filter($stylesheets, "admin_stylesheets");
             }
 
             # Generate <link> tags:
@@ -347,7 +347,10 @@
 
             $scripts = array();
 
-            if (MAIN) {
+            if (ADMIN) {
+                # Ask extensions to provide additional admin scripts.
+                $trigger->filter($scripts, "admin_scripts");
+            } else {
                 # Discover scripts provided by the theme.
                 foreach (
                     array_merge(
@@ -378,9 +381,6 @@
 
                 # Ask extensions to provide additional blog scripts.
                 $trigger->filter($scripts, "scripts");
-            } else {
-                # Ask extensions to provide additional admin scripts.
-                $trigger->filter($scripts, "admin_scripts");
             }
 
             # Generate <script> tags:
@@ -415,7 +415,10 @@
                 )
             );
 
-            if (MAIN) {
+            if (ADMIN) {
+                # Ask extensions to provide additional admin links.
+                $trigger->filter($links, "admin_links");
+            } else {
                 $posts =
                     $route->controller->context["posts"] ??
                     false ;
@@ -438,9 +441,6 @@
 
                 # Ask extensions to provide additional blog links.
                 $trigger->filter($links, "links");
-            } else {
-                # Ask extensions to provide additional admin links.
-                $trigger->filter($links, "admin_links");
             }
 
             # Generate <link> tags:
