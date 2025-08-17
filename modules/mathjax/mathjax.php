@@ -32,7 +32,7 @@
 
             if (!empty($script))
                 $scripts[] = $config->chyrp_url.
-                             "/modules/mathjax/es5/".
+                             "/modules/mathjax/bundle/".
                              $script."chtml.js";
 
             return $scripts;
