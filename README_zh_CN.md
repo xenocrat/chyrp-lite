@@ -92,7 +92,7 @@ ARIA标签可确保您的博客可供使用辅助技术的访问者访问。
 * _install.php_
 * _themes/&hellip;/*.twig_
 * _tools/*_
-* _upgade.php_
+* _upgrade.php_
 
 它们不包含任何秘密，但您可能想要限制访问。
 

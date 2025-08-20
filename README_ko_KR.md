@@ -99,7 +99,7 @@ Chyrp Lite를 사용하면 번거로움을 최소화하면서 자신의 웹 서�
 * _install.php_
 * _themes/&hellip;/*.twig_
 * _tools/*_
-* _upgade.php_
+* _upgrade.php_
 
 여기에는 비밀이 없지만, 접근을 제한하는 것이 좋습니다.
 

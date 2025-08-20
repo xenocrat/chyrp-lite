@@ -88,7 +88,7 @@ Na installatie zijn deze bestanden toegankelijk voor bezoekers:
 * _install.php_
 * _themes/&hellip;/*.twig_
 * _tools/*_
-* _upgade.php_
+* _upgrade.php_
 
 Er staan geen geheimen in, maar u wilt de toegang misschien beperken.
 

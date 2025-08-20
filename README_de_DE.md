@@ -89,7 +89,7 @@ Nach der Installation sind diese Dateien für Besucher zugänglich:
 * _install.php_
 * _themes/&hellip;/*.twig_
 * _tools/*_
-* _upgade.php_
+* _upgrade.php_
 
 Sie enthalten keine Geheimnisse, aber Sie möchten möglicherweise den Zugriff beschränken.
 
