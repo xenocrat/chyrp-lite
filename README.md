@@ -112,7 +112,7 @@ After installation, these files are accessible to visitors:
 * _install.php_
 * _themes/&hellip;/*.twig_
 * _tools/*_
-* _upgade.php_
+* _upgrade.php_
 
 There are no secrets in them, but you might want to restrict access.
 
