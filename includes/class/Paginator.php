@@ -342,8 +342,10 @@
             $route = Route::current();
             $request = unfix(self_url());
 
-            # Determine how we should append the page to dirty URLs.
-            $mark = (substr_count($request, "?")) ? "&" : "?" ;
+            $clean = (
+                $config->clean_urls and
+                $route->controller->clean_urls
+            );
 
             fallback(
                 $page,
@@ -353,26 +355,30 @@
             # Generate a URL with the page number appended or replaced.
             $url = !isset($_GET[$this->name]) ?
                 (
-                    ($config->clean_urls and $route->controller->clean_urls) ?
-                        rtrim($request, "/")."/".$this->name."/".$page."/" :
-                        $request.$mark.$this->name."=".$page
+                    ($clean) ?
+                        rtrim($request, "/").
+                        "/".$this->name."/".$page."/"
+                        :
+                        $request.
+                        (str_contains($request, "?") ? "&" : "?").
+                        $this->name."=".$page
                 )
                 :
                 (
-                    ($config->clean_urls and $route->controller->clean_urls) ?
-                    preg_replace(
-                        "/(\/{$this->name}\/([0-9]+)\/?|$)/",
-                        "/".$this->name."/".$page."/",
-                        $request,
-                        1
-                    )
-                    :
-                    preg_replace(
-                        "/((\?|&){$this->name}=([0-9]+)|$)/",
-                        "\\2".$this->name."=".$page,
-                        $request,
-                        1
-                    )
+                    ($clean) ?
+                        preg_replace(
+                            "/\/{$this->name}\/[0-9]+\/?/",
+                            "/".$this->name."/".$page."/",
+                            $request,
+                            1
+                        )
+                        :
+                        preg_replace(
+                            "/(\?|&){$this->name}=[0-9]+/",
+                            "\\1".$this->name."=".$page,
+                            $request,
+                            1
+                        )
                 )
                 ;
 
@@ -393,8 +399,10 @@
             $route = Route::current();
             $request = unfix(self_url());
 
-            # Determine how we should append the page to dirty URLs.
-            $mark = (substr_count($request, "?")) ? "&" : "?" ;
+            $clean = (
+                $config->clean_urls and
+                $route->controller->clean_urls
+            );
 
             fallback(
                 $page,
@@ -404,23 +412,27 @@
             # Generate a URL with the page number appended or replaced.
             $url = !isset($_GET[$this->name]) ?
                 (
-                    ($config->clean_urls and $route->controller->clean_urls) ?
-                        rtrim($request, "/")."/".$this->name."/".$page."/" :
-                        $request.$mark.$this->name."=".$page
+                    ($clean) ?
+                        rtrim($request, "/").
+                        "/".$this->name."/".$page."/"
+                        :
+                        $request.
+                        (str_contains($request, "?") ? "&" : "?").
+                        $this->name."=".$page
                 )
                 :
                 (
-                    ($config->clean_urls and $route->controller->clean_urls) ?
+                    ($clean) ?
                         preg_replace(
-                            "/(\/{$this->name}\/([0-9]+)\/?|$)/",
+                            "/\/{$this->name}\/[0-9]+\/?/",
                             "/".$this->name."/".$page."/",
                             $request,
                             1
                         )
                         :
                         preg_replace(
-                            "/((\?|&){$this->name}=([0-9]+)|$)/",
-                            "\\2".$this->name."=".$page,
+                            "/(\?|&){$this->name}=[0-9]+/",
+                            "\\1".$this->name."=".$page,
                             $request,
                             1
                         )
@@ -440,22 +452,27 @@
             $route = Route::current();
             $request = unfix(self_url());
 
+            $clean = (
+                $config->clean_urls and
+                $route->controller->clean_urls
+            );
+
             $url = !isset($_GET[$this->name]) ?
                 $request
                 :
                 (
-                    ($config->clean_urls and $route->controller->clean_urls) ?
+                    ($clean) ?
                         preg_replace(
-                            "/(\/{$this->name}\/([0-9]+)\/?)/",
+                            "/\/{$this->name}\/[0-9]+\/?/",
                             "/",
                             $request,
                             1
                         )
                         :
                         preg_replace_callback(
-                            "/((\?|&){$this->name}=([0-9]+)(&)?)/",
+                            "/(\?|&){$this->name}=[0-9]+(&)?/",
                             function ($matches) {
-                                return isset($matches[4]) ? $matches[2] : "" ;
+                                return isset($matches[2]) ? $matches[1] : "" ;
                             },
                             $request,
                             1
