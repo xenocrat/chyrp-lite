@@ -361,8 +361,8 @@
                 (
                     ($config->clean_urls and $route->controller->clean_urls) ?
                     preg_replace(
-                        "/(\/{$this->name}\/([0-9]+)|$)/",
-                        "/".$this->name."/".$page,
+                        "/(\/{$this->name}\/([0-9]+)\/?|$)/",
+                        "/".$this->name."/".$page."/",
                         $request,
                         1
                     )
@@ -412,8 +412,8 @@
                 (
                     ($config->clean_urls and $route->controller->clean_urls) ?
                         preg_replace(
-                            "/(\/{$this->name}\/([0-9]+)|$)/",
-                            "/".$this->name."/".$page,
+                            "/(\/{$this->name}\/([0-9]+)\/?|$)/",
+                            "/".$this->name."/".$page."/",
                             $request,
                             1
                         )
@@ -421,6 +421,42 @@
                         preg_replace(
                             "/((\?|&){$this->name}=([0-9]+)|$)/",
                             "\\2".$this->name."=".$page,
+                            $request,
+                            1
+                        )
+                )
+                ;
+
+            return fix($url, true);
+        }
+
+        /**
+         * Function: canonical_url
+         * Returns the canonical URL for the resource.
+         */
+        public function canonical_url(
+        ): string {
+            $config = Config::current();
+            $route = Route::current();
+            $request = unfix(self_url());
+
+            $url = !isset($_GET[$this->name]) ?
+                $request
+                :
+                (
+                    ($config->clean_urls and $route->controller->clean_urls) ?
+                        preg_replace(
+                            "/(\/{$this->name}\/([0-9]+)\/?)/",
+                            "/",
+                            $request,
+                            1
+                        )
+                        :
+                        preg_replace_callback(
+                            "/((\?|&){$this->name}=([0-9]+)(&)?)/",
+                            function ($matches) {
+                                return isset($matches[4]) ? $matches[2] : "" ;
+                            },
                             $request,
                             1
                         )
