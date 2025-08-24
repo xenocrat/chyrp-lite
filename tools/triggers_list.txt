@@ -898,17 +898,17 @@ Arguments:
 	$limit
 
 
-stylesheets
------------
+admin_stylesheets
+-----------------
 Called from:
-	includes/class/Theme.php on line 318
+	includes/class/Theme.php on line 293
 
 Target:
 	$stylesheets
 
 
-admin_stylesheets
------------------
+stylesheets
+-----------
 Called from:
 	includes/class/Theme.php on line 324
 
@@ -916,17 +916,17 @@ Target:
 	$stylesheets
 
 
-scripts
--------
+admin_scripts
+-------------
 Called from:
-	includes/class/Theme.php on line 380
+	includes/class/Theme.php on line 352
 
 Target:
 	$scripts
 
 
-admin_scripts
--------------
+scripts
+-------
 Called from:
 	includes/class/Theme.php on line 383
 
@@ -934,17 +934,17 @@ Target:
 	$scripts
 
 
-links
------
+admin_links
+-----------
 Called from:
-	includes/class/Theme.php on line 440
+	includes/class/Theme.php on line 420
 
 Target:
 	$links
 
 
-admin_links
------------
+links
+-----
 Called from:
 	includes/class/Theme.php on line 443
 
