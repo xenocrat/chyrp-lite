@@ -429,7 +429,7 @@
                     $route->action != "index" and
                     $posts instanceof Paginator
                 ) {
-                    $page_url = $posts->prev_page_url(1);
+                    $page_url = $posts->canonical_url();
                     $feed_url = $this->feed_url($page_url);
 
                     $links[] = array(
