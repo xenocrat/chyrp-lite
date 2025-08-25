@@ -478,15 +478,27 @@
         public function feed_url(
             $url
         ): string {
-            return (Config::current()->clean_urls) ?
-                rtrim($url, "/")."/feed/"
+            $config = Config::current();
+            $route = Route::current();
+            $request = unfix($url);
+
+            $clean = (
+                $config->clean_urls and
+                $route->controller->clean_urls
+            );
+
+            $feed_url = ($clean) ?
+                rtrim($request, "/")."/feed/"
                 :
-                $url.(
-                    substr_count($url, "?") ?
-                        "&amp;feed" :
+                $request.
+                (
+                    str_contains($request, "?") ?
+                        "&feed" :
                         "?feed"
                 )
                 ;
+
+            return fix($feed_url, true);
         }
 
         /**
