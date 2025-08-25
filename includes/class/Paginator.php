@@ -356,19 +356,27 @@
             $url = !isset($_GET[$this->name]) ?
                 (
                     ($clean) ?
-                        rtrim($request, "/").
-                        "/".$this->name."/".$page."/"
+                        preg_replace(
+                            "/(\/feed\/?$|\/$|$)/",
+                            "/".$this->name."/".$page."\\1",
+                            $request,
+                            1
+                        )
                         :
                         $request.
-                        (str_contains($request, "?") ? "&" : "?").
+                        (
+                            str_contains($request, "?") ?
+                                "&" :
+                                "?"
+                        ).
                         $this->name."=".$page
                 )
                 :
                 (
                     ($clean) ?
                         preg_replace(
-                            "/\/{$this->name}\/[0-9]+\/?/",
-                            "/".$this->name."/".$page."/",
+                            "/\/{$this->name}\/[0-9]+/",
+                            "/".$this->name."/".$page,
                             $request,
                             1
                         )
@@ -413,19 +421,27 @@
             $url = !isset($_GET[$this->name]) ?
                 (
                     ($clean) ?
-                        rtrim($request, "/").
-                        "/".$this->name."/".$page."/"
+                        preg_replace(
+                            "/(\/feed\/?$|\/$|$)/",
+                            "/".$this->name."/".$page."\\1",
+                            $request,
+                            1
+                        )
                         :
                         $request.
-                        (str_contains($request, "?") ? "&" : "?").
+                        (
+                            str_contains($request, "?") ?
+                                "&" :
+                                "?"
+                        ).
                         $this->name."=".$page
                 )
                 :
                 (
                     ($clean) ?
                         preg_replace(
-                            "/\/{$this->name}\/[0-9]+\/?/",
-                            "/".$this->name."/".$page."/",
+                            "/\/{$this->name}\/[0-9]+/",
+                            "/".$this->name."/".$page,
                             $request,
                             1
                         )
@@ -462,9 +478,13 @@
                 :
                 (
                     ($clean) ?
-                        preg_replace(
-                            "/\/{$this->name}\/[0-9]+\/?/",
-                            "/",
+                        preg_replace_callback(
+                            "/\/{$this->name}\/[0-9]+(\/)?/",
+                            function ($matches) {
+                                return isset($matches[1]) ?
+                                    $matches[1] :
+                                    "" ;
+                            },
                             $request,
                             1
                         )
@@ -472,7 +492,9 @@
                         preg_replace_callback(
                             "/(\?|&){$this->name}=[0-9]+(&)?/",
                             function ($matches) {
-                                return isset($matches[2]) ? $matches[1] : "" ;
+                                return isset($matches[2]) ?
+                                    $matches[1] :
+                                    "" ;
                             },
                             $request,
                             1
