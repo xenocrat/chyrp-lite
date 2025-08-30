@@ -182,7 +182,7 @@
             return array(
                 self::TYPE_END_HEAD => __("HTML head", "inject"),
                 self::TYPE_END_MAIN => __("End of main section", "inject"),
-                self::TYPE_END_HEAD => __("After other content", "inject"),
+                self::TYPE_END_CONTENT => __("After other content", "inject"),
                 self::TYPE_MARKUP_POST => __("Post filter", "inject"),
                 self::TYPE_MARKUP_PAGE => __("Page filter", "inject")
             );
