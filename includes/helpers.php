@@ -1405,6 +1405,26 @@
                     $joined_at["second"]."%"
                 );
             } elseif (
+                $attr == "before" and
+                isset($columns["created_at"])
+            ) {
+                $where["created_at <"] = datetime($val);
+            } elseif (
+                $attr == "after" and
+                isset($columns["created_at"])
+            ) {
+                $where["created_at >"] = datetime($val);
+            } elseif (
+                $attr == "before" and
+                isset($columns["joined_at"])
+            ) {
+                $where["joined_at <"] = datetime($val);
+            } elseif (
+                $attr == "after" and
+                isset($columns["joined_at"])
+            ) {
+                $where["joined_at >"] = datetime($val);
+            } elseif (
                 $attr == "ASC" and
                 !is_numeric($val) and
                 isset($columns[$val])
