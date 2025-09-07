@@ -755,15 +755,6 @@ Parameters:
     &$params - An associative array of parameters used in the query.
 
 
-Function: safecol
------------------
-Encloses a column name in quotes if it is a subset of SQL keywords.
-
-Parameters:
-    $sql - The SQL instance calling this method.
-    $name - Name of the column.
-
-
 Function: build_conditions
 --------------------------
 Builds an associative array of SQL values into parameterized query strings.
@@ -776,6 +767,15 @@ Parameters:
     $insert - Is this an insert/update query?
 
 
+Function: paramify
+------------------
+Returns a unique parameter name for a parameterized query.
+
+Parameters:
+    $name - The parameter name to be made unique.
+    &$params - Parameters to compare for clashes.
+
+
 Function: tablefy
 -----------------
 Prepends table names and prefixes to a field if it doesn't already have them.
@@ -784,6 +784,15 @@ Parameters:
     $sql - The SQL instance calling this method.
     &$field - The field to "tablefy".
     $tables - An array of tables. The first one will be used for prepending.
+
+
+Function: safecol
+-----------------
+Encloses a column name in quotes if it is a subset of SQL keywords.
+
+Parameters:
+    $sql - The SQL instance calling this method.
+    $name - Name of the column.
 
 
 ==============================================

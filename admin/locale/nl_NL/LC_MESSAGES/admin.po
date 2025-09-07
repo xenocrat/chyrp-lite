@@ -65,18 +65,90 @@ msgstr "Sleutelwoorden"
 msgid ""
 "Use the syntax <code>keyword:value;</code> to quickly match specific results "
 "where <code>keyword</code> is equal to <code>value</code>. The keyword can "
-"be the name of a database column, the name of an author or a group, or a "
-"date/time. For example: <code>author:Foo;year:2016;</code> would filter the "
-"posts table to display only posts created by Foo in 2016."
+"be the name of a database column in the current table, or one of the special "
+"keywords listed below. For example: <code>author:Foo;year:2016;</code> would "
+"filter the posts table to display only posts created by Foo in 2016."
 msgstr ""
 "Gebruik de syntax <code>sleutelwoord:waarde;</code> om specifieke resultaten "
 "te vinden waar <code>sleutelwoord</code> gerelateerd is aan<code>waarde</"
-"code>. Het sleutelwoord kan de naam van een databasekolom zijn,, de naam van "
-"een schrijver of een groep, of een datum/tijd. Bijvoorbeeld: "
-"<code>schrijver:Foo;jaar:2023;</code> zal de blogposttabel filteren om "
-"alleen blogposts te tonen die geschreven zijn door Foo in 2023."
+"code>. Het trefwoord kan de naam zijn van een databasekolom in de huidige "
+"tabel, of een van de speciale trefwoorden die hieronder worden vermeld. "
+"Bijvoorbeeld: <code>schrijver:Foo;jaar:2023;</code> zal de blogposttabel "
+"filteren om alleen blogposts te tonen die geschreven zijn door Foo in 2023."
 
-#: admin/help/filtering_results.twig:15
+#: admin/help/filtering_results.twig:17 admin/pages/route_settings.twig:46
+msgid "Year created"
+msgstr "Jaar aangemaakt"
+
+#: admin/help/filtering_results.twig:17 admin/pages/route_settings.twig:46
+msgid "(e.g. 2007)"
+msgstr "(bijv. 2021)"
+
+#: admin/help/filtering_results.twig:21 admin/pages/route_settings.twig:50
+msgid "Month created"
+msgstr "Maand aangemaakt"
+
+#: admin/help/filtering_results.twig:21 admin/pages/route_settings.twig:50
+msgid "(e.g. 12)"
+msgstr "(bijv. 12)"
+
+#: admin/help/filtering_results.twig:25 admin/pages/route_settings.twig:54
+msgid "Day created"
+msgstr "Dag aangemaakt"
+
+#: admin/help/filtering_results.twig:25 admin/pages/route_settings.twig:54
+msgid "(e.g. 25)"
+msgstr "(bijv. 25)"
+
+#: admin/help/filtering_results.twig:29 admin/pages/route_settings.twig:58
+msgid "Hour created"
+msgstr "Uur aangemaakt"
+
+#: admin/help/filtering_results.twig:29 admin/pages/route_settings.twig:58
+msgid "(e.g. 03)"
+msgstr "(bijv. 03)"
+
+#: admin/help/filtering_results.twig:33 admin/pages/route_settings.twig:62
+msgid "Minute created"
+msgstr "Minuut aangemaakt"
+
+#: admin/help/filtering_results.twig:33 admin/pages/route_settings.twig:62
+msgid "(e.g. 59)"
+msgstr "(bijv. 59)"
+
+#: admin/help/filtering_results.twig:37 admin/pages/route_settings.twig:66
+msgid "Second created"
+msgstr "Tweede aangemaakt"
+
+#: admin/help/filtering_results.twig:37 admin/pages/route_settings.twig:66
+msgid "(e.g. 30)"
+msgstr "(bijv. 30)"
+
+#: admin/help/filtering_results.twig:41
+msgid "Created before (datetime)"
+msgstr "Gemaakt vóór (datum/tijd)"
+
+#: admin/help/filtering_results.twig:45
+msgid "Created after (datetime)"
+msgstr "Gemaakt na (datum/tijd)"
+
+#: admin/help/filtering_results.twig:49 admin/pages/route_settings.twig:74
+msgid "Author (login)"
+msgstr "Auteur (login)"
+
+#: admin/help/filtering_results.twig:49 admin/pages/route_settings.twig:74
+msgid "(e.g. Alex)"
+msgstr "(bijv. Alex)"
+
+#: admin/help/filtering_results.twig:53
+msgid "Group name"
+msgstr "Groepsnaam"
+
+#: admin/help/filtering_results.twig:53
+msgid "(e.g. Members)"
+msgstr "(bijv. Members)"
+
+#: admin/help/filtering_results.twig:57
 msgid ""
 "Use the syntax <code>ASC:column;</code> or <code>DESC:column;</code> to sort "
 "the results in ascending or descending order. For example: "
@@ -89,7 +161,7 @@ msgstr ""
 "code> sorteert een tabel met berichten in aflopende volgorde van gebruikers-"
 "ID en vervolgens in oplopende volgorde van bericht-ID."
 
-#: admin/help/filtering_results.twig:18
+#: admin/help/filtering_results.twig:60
 msgid ""
 "Use the SQL wildcards <code>_</code> and <code>%</code> to substitute one or "
 "multiple characters in a search term. To include these characters literally, "
@@ -1108,65 +1180,9 @@ msgstr "(vereist schone URLs)"
 msgid "Syntax:"
 msgstr "Syntax:"
 
-#: admin/pages/route_settings.twig:46
-msgid "Year submitted"
-msgstr "Jaar geplaatst"
-
-#: admin/pages/route_settings.twig:46
-msgid "(e.g. 2007)"
-msgstr "(bijv. 2021)"
-
-#: admin/pages/route_settings.twig:50
-msgid "Month submitted"
-msgstr "Maand geplaatst"
-
-#: admin/pages/route_settings.twig:50
-msgid "(e.g. 12)"
-msgstr "(bijv. 12)"
-
-#: admin/pages/route_settings.twig:54
-msgid "Day submitted"
-msgstr "Dag geplaatst"
-
-#: admin/pages/route_settings.twig:54
-msgid "(e.g. 25)"
-msgstr "(bijv. 25)"
-
-#: admin/pages/route_settings.twig:58
-msgid "Hour submitted"
-msgstr "Uur geplaatst"
-
-#: admin/pages/route_settings.twig:58
-msgid "(e.g. 03)"
-msgstr "(bijv. 03)"
-
-#: admin/pages/route_settings.twig:62
-msgid "Minute submitted"
-msgstr "Minuut geplaatst"
-
-#: admin/pages/route_settings.twig:62
-msgid "(e.g. 59)"
-msgstr "(bijv. 59)"
-
-#: admin/pages/route_settings.twig:66
-msgid "Second submitted"
-msgstr "Seconde geplaatst"
-
-#: admin/pages/route_settings.twig:66
-msgid "(e.g. 30)"
-msgstr "(bijv. 30)"
-
 #: admin/pages/route_settings.twig:70
 msgid "Post ID"
 msgstr "Blogpost ID"
-
-#: admin/pages/route_settings.twig:74
-msgid "Post author (username)"
-msgstr "Blogpost schrijver (gebruikersnaam)"
-
-#: admin/pages/route_settings.twig:74
-msgid "(e.g. Alex)"
-msgstr "(bijv. Alex)"
 
 #: admin/pages/route_settings.twig:78
 msgid "The non-unique slug"

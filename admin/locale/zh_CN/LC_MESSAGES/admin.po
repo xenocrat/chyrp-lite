@@ -59,16 +59,88 @@ msgstr "关键字"
 msgid ""
 "Use the syntax <code>keyword:value;</code> to quickly match specific results "
 "where <code>keyword</code> is equal to <code>value</code>. The keyword can "
-"be the name of a database column, the name of an author or a group, or a "
-"date/time. For example: <code>author:Foo;year:2016;</code> would filter the "
-"posts table to display only posts created by Foo in 2016."
+"be the name of a database column in the current table, or one of the special "
+"keywords listed below. For example: <code>author:Foo;year:2016;</code> would "
+"filter the posts table to display only posts created by Foo in 2016."
 msgstr ""
 "使用符号 <code>keyword:value;</code> 来快速匹配指定结果，当 <code>keyword</"
-"code> 等于 <code>value</code>. 关键字可以是数据库列的名称, 像是作者或组的名"
-"称，日期时间等。 例如： <code>author:Foo;year:2016;</code> 将过滤posts表，仅"
-"显示2016年由Foo创建的帖子。"
+"code> 等于 <code>value</code>. 关键字可以是当前表中数据库列的名称，也可以是下"
+"面列出的特殊关键字之一。 例如： <code>author:Foo;year:2016;</code> 将过滤"
+"posts表，仅显示2016年由Foo创建的帖子。"
 
-#: admin/help/filtering_results.twig:15
+#: admin/help/filtering_results.twig:17 admin/pages/route_settings.twig:46
+msgid "Year created"
+msgstr "创建时间"
+
+#: admin/help/filtering_results.twig:17 admin/pages/route_settings.twig:46
+msgid "(e.g. 2007)"
+msgstr "(例如：2007)"
+
+#: admin/help/filtering_results.twig:21 admin/pages/route_settings.twig:50
+msgid "Month created"
+msgstr "提交的月份"
+
+#: admin/help/filtering_results.twig:21 admin/pages/route_settings.twig:50
+msgid "(e.g. 12)"
+msgstr "(例如 12)"
+
+#: admin/help/filtering_results.twig:25 admin/pages/route_settings.twig:54
+msgid "Day created"
+msgstr "创建时间"
+
+#: admin/help/filtering_results.twig:25 admin/pages/route_settings.twig:54
+msgid "(e.g. 25)"
+msgstr "(例如 25)"
+
+#: admin/help/filtering_results.twig:29 admin/pages/route_settings.twig:58
+msgid "Hour created"
+msgstr "创建时间"
+
+#: admin/help/filtering_results.twig:29 admin/pages/route_settings.twig:58
+msgid "(e.g. 03)"
+msgstr "(例如 03)"
+
+#: admin/help/filtering_results.twig:33 admin/pages/route_settings.twig:62
+msgid "Minute created"
+msgstr "提交的分"
+
+#: admin/help/filtering_results.twig:33 admin/pages/route_settings.twig:62
+msgid "(e.g. 59)"
+msgstr "(例如 59)"
+
+#: admin/help/filtering_results.twig:37 admin/pages/route_settings.twig:66
+msgid "Second created"
+msgstr "提交的秒"
+
+#: admin/help/filtering_results.twig:37 admin/pages/route_settings.twig:66
+msgid "(e.g. 30)"
+msgstr "(例如 30)"
+
+#: admin/help/filtering_results.twig:41
+msgid "Created before (datetime)"
+msgstr "创建于（日期时间）之前"
+
+#: admin/help/filtering_results.twig:45
+msgid "Created after (datetime)"
+msgstr "创建于（日期时间）之后"
+
+#: admin/help/filtering_results.twig:49 admin/pages/route_settings.twig:74
+msgid "Author (login)"
+msgstr "作者（登录）"
+
+#: admin/help/filtering_results.twig:49 admin/pages/route_settings.twig:74
+msgid "(e.g. Alex)"
+msgstr "(例如 Alex)"
+
+#: admin/help/filtering_results.twig:53
+msgid "Group name"
+msgstr "组名称"
+
+#: admin/help/filtering_results.twig:53
+msgid "(e.g. Members)"
+msgstr "（例如：Members）"
+
+#: admin/help/filtering_results.twig:57
 msgid ""
 "Use the syntax <code>ASC:column;</code> or <code>DESC:column;</code> to sort "
 "the results in ascending or descending order. For example: "
@@ -80,7 +152,7 @@ msgstr ""
 "<code>DESC:user_id;ASC:id;</code> 将按用户 ID 降序对帖子表进行排序，然后按帖"
 "子 ID 升序排序。"
 
-#: admin/help/filtering_results.twig:18
+#: admin/help/filtering_results.twig:60
 msgid ""
 "Use the SQL wildcards <code>_</code> and <code>%</code> to substitute one or "
 "multiple characters in a search term. To include these characters literally, "
@@ -1084,65 +1156,9 @@ msgstr "(需要优雅链接)"
 msgid "Syntax:"
 msgstr "符号："
 
-#: admin/pages/route_settings.twig:46
-msgid "Year submitted"
-msgstr "提交的年份"
-
-#: admin/pages/route_settings.twig:46
-msgid "(e.g. 2007)"
-msgstr "(例如：2007)"
-
-#: admin/pages/route_settings.twig:50
-msgid "Month submitted"
-msgstr "提交的月份"
-
-#: admin/pages/route_settings.twig:50
-msgid "(e.g. 12)"
-msgstr "(例如 12)"
-
-#: admin/pages/route_settings.twig:54
-msgid "Day submitted"
-msgstr "提交的天"
-
-#: admin/pages/route_settings.twig:54
-msgid "(e.g. 25)"
-msgstr "(例如 25)"
-
-#: admin/pages/route_settings.twig:58
-msgid "Hour submitted"
-msgstr "提交的小时"
-
-#: admin/pages/route_settings.twig:58
-msgid "(e.g. 03)"
-msgstr "(例如 03)"
-
-#: admin/pages/route_settings.twig:62
-msgid "Minute submitted"
-msgstr "提交的分"
-
-#: admin/pages/route_settings.twig:62
-msgid "(e.g. 59)"
-msgstr "(例如 59)"
-
-#: admin/pages/route_settings.twig:66
-msgid "Second submitted"
-msgstr "提交的秒"
-
-#: admin/pages/route_settings.twig:66
-msgid "(e.g. 30)"
-msgstr "(例如 30)"
-
 #: admin/pages/route_settings.twig:70
 msgid "Post ID"
 msgstr "帖子ID"
-
-#: admin/pages/route_settings.twig:74
-msgid "Post author (username)"
-msgstr "帖子作者（用户名）"
-
-#: admin/pages/route_settings.twig:74
-msgid "(e.g. Alex)"
-msgstr "(例如 Alex)"
 
 #: admin/pages/route_settings.twig:78
 msgid "The non-unique slug"

@@ -32,14 +32,100 @@ msgid "Keywords"
 msgstr ""
 
 #: admin/help/filtering_results.twig:12
-msgid "Use the syntax <code>keyword:value;</code> to quickly match specific results where <code>keyword</code> is equal to <code>value</code>. The keyword can be the name of a database column, the name of an author or a group, or a date/time. For example: <code>author:Foo;year:2016;</code> would filter the posts table to display only posts created by Foo in 2016."
+msgid "Use the syntax <code>keyword:value;</code> to quickly match specific results where <code>keyword</code> is equal to <code>value</code>. The keyword can be the name of a database column in the current table, or one of the special keywords listed below. For example: <code>author:Foo;year:2016;</code> would filter the posts table to display only posts created by Foo in 2016."
 msgstr ""
 
-#: admin/help/filtering_results.twig:15
+#: admin/help/filtering_results.twig:17
+#: admin/pages/route_settings.twig:46
+msgid "Year created"
+msgstr ""
+
+#: admin/help/filtering_results.twig:17
+#: admin/pages/route_settings.twig:46
+msgid "(e.g. 2007)"
+msgstr ""
+
+#: admin/help/filtering_results.twig:21
+#: admin/pages/route_settings.twig:50
+msgid "Month created"
+msgstr ""
+
+#: admin/help/filtering_results.twig:21
+#: admin/pages/route_settings.twig:50
+msgid "(e.g. 12)"
+msgstr ""
+
+#: admin/help/filtering_results.twig:25
+#: admin/pages/route_settings.twig:54
+msgid "Day created"
+msgstr ""
+
+#: admin/help/filtering_results.twig:25
+#: admin/pages/route_settings.twig:54
+msgid "(e.g. 25)"
+msgstr ""
+
+#: admin/help/filtering_results.twig:29
+#: admin/pages/route_settings.twig:58
+msgid "Hour created"
+msgstr ""
+
+#: admin/help/filtering_results.twig:29
+#: admin/pages/route_settings.twig:58
+msgid "(e.g. 03)"
+msgstr ""
+
+#: admin/help/filtering_results.twig:33
+#: admin/pages/route_settings.twig:62
+msgid "Minute created"
+msgstr ""
+
+#: admin/help/filtering_results.twig:33
+#: admin/pages/route_settings.twig:62
+msgid "(e.g. 59)"
+msgstr ""
+
+#: admin/help/filtering_results.twig:37
+#: admin/pages/route_settings.twig:66
+msgid "Second created"
+msgstr ""
+
+#: admin/help/filtering_results.twig:37
+#: admin/pages/route_settings.twig:66
+msgid "(e.g. 30)"
+msgstr ""
+
+#: admin/help/filtering_results.twig:41
+msgid "Created before (datetime)"
+msgstr ""
+
+#: admin/help/filtering_results.twig:45
+msgid "Created after (datetime)"
+msgstr ""
+
+#: admin/help/filtering_results.twig:49
+#: admin/pages/route_settings.twig:74
+msgid "Author (login)"
+msgstr ""
+
+#: admin/help/filtering_results.twig:49
+#: admin/pages/route_settings.twig:74
+msgid "(e.g. Alex)"
+msgstr ""
+
+#: admin/help/filtering_results.twig:53
+msgid "Group name"
+msgstr ""
+
+#: admin/help/filtering_results.twig:53
+msgid "(e.g. Members)"
+msgstr ""
+
+#: admin/help/filtering_results.twig:57
 msgid "Use the syntax <code>ASC:column;</code> or <code>DESC:column;</code> to sort the results in ascending or descending order. For example: <code>DESC:user_id;ASC:id;</code> would sort a table of posts in descending order of user ID and then ascending order of post ID."
 msgstr ""
 
-#: admin/help/filtering_results.twig:18
+#: admin/help/filtering_results.twig:60
 msgid "Use the SQL wildcards <code>_</code> and <code>%</code> to substitute one or multiple characters in a search term. To include these characters literally, prefix <code>|</code> as an escape character."
 msgstr ""
 
@@ -1134,64 +1220,8 @@ msgstr ""
 msgid "Syntax:"
 msgstr ""
 
-#: admin/pages/route_settings.twig:46
-msgid "Year submitted"
-msgstr ""
-
-#: admin/pages/route_settings.twig:46
-msgid "(e.g. 2007)"
-msgstr ""
-
-#: admin/pages/route_settings.twig:50
-msgid "Month submitted"
-msgstr ""
-
-#: admin/pages/route_settings.twig:50
-msgid "(e.g. 12)"
-msgstr ""
-
-#: admin/pages/route_settings.twig:54
-msgid "Day submitted"
-msgstr ""
-
-#: admin/pages/route_settings.twig:54
-msgid "(e.g. 25)"
-msgstr ""
-
-#: admin/pages/route_settings.twig:58
-msgid "Hour submitted"
-msgstr ""
-
-#: admin/pages/route_settings.twig:58
-msgid "(e.g. 03)"
-msgstr ""
-
-#: admin/pages/route_settings.twig:62
-msgid "Minute submitted"
-msgstr ""
-
-#: admin/pages/route_settings.twig:62
-msgid "(e.g. 59)"
-msgstr ""
-
-#: admin/pages/route_settings.twig:66
-msgid "Second submitted"
-msgstr ""
-
-#: admin/pages/route_settings.twig:66
-msgid "(e.g. 30)"
-msgstr ""
-
 #: admin/pages/route_settings.twig:70
 msgid "Post ID"
-msgstr ""
-
-#: admin/pages/route_settings.twig:74
-msgid "Post author (username)"
-msgstr ""
-
-#: admin/pages/route_settings.twig:74
-msgid "(e.g. Alex)"
 msgstr ""
 
 #: admin/pages/route_settings.twig:78
