@@ -94,7 +94,7 @@
                     )
                         $val = SQL_DATETIME_ZERO;
 
-                    $param = ":".str_replace(array("(", ")", "."), "_", $key);
+                    $param = self::paramify($key, $params);
                     $params[$param] = $val;
                 }
 
@@ -557,7 +557,7 @@
                         if (substr($uck, -4) == " NOT") {
                             # Negation.
                             $key = self::safecol($sql, substr($key, 0, -4));
-                            $param = self::param($key, $params);
+                            $param = self::paramify($key, $params);
 
                             if (is_array($val)) {
                                 $cond = $key." NOT IN ".
@@ -574,7 +574,7 @@
                             $likes = array();
 
                             foreach ($val as $index => $match) {
-                                $param = self::param($key."_".$index, $params);
+                                $param = self::paramify($key."_".$index, $params);
                                 $likes[] = $key.$text." LIKE ".$param.$escape;
                                 $params[$param] = $match;
                             }
@@ -586,7 +586,7 @@
                             $likes = array();
 
                             foreach ($val as $index => $match) {
-                                $param = self::param($key."_".$index, $params);
+                                $param = self::paramify($key."_".$index, $params);
                                 $likes[] = $key.$text." NOT LIKE ".$param.$escape;
                                 $params[$param] = $match;
                             }
@@ -598,7 +598,7 @@
                             $likes = array();
 
                             foreach ($val as $index => $match) {
-                                $param = self::param($key."_".$index, $params);
+                                $param = self::paramify($key."_".$index, $params);
                                 $likes[] = $key.$text." LIKE ".$param.$escape;
                                 $params[$param] = $match;
                             }
@@ -607,19 +607,19 @@
                         } elseif (substr($uck, -9) == " NOT LIKE") {
                             # NOT LIKE.
                             $key = self::safecol($sql, substr($key, 0, -9));
-                            $param = self::param($key, $params);
+                            $param = self::paramify($key, $params);
                             $cond = $key.$text." NOT LIKE ".$param.$escape;
                             $params[$param] = $val;
                         } elseif (substr($uck, -5) == " LIKE") {
                             # LIKE.
                             $key = self::safecol($sql, substr($key, 0, -5));
-                            $param = self::param($key, $params);
+                            $param = self::paramify($key, $params);
                             $cond = $key.$text." LIKE ".$param.$escape;
                             $params[$param] = $val;
                         } elseif (substr_count($key, " ")) {
                             # Custom operation, e.g. array("foo >" => $bar).
                             list($param,) = explode(" ", $key);
-                            $param = self::param($param, $params);
+                            $param = self::paramify($param, $params);
                             $cond = self::safecol($sql, $key)." ".$param;
                             $params[$param] = $val;
                         } else {
@@ -632,7 +632,7 @@
                             } elseif ($val === null) {
                                 $cond = self::safecol($sql, $key)." IS NULL";
                             } else {
-                                $param = self::param($key, $params);
+                                $param = self::paramify($key, $params);
                                 $cond = self::safecol($sql, $key)." = ".$param;
 
                                 if ($insert) {
@@ -659,14 +659,14 @@
         }
 
         /**
-         * Function: param
+         * Function: paramify
          * Returns a unique parameter name for a parameterized query.
          *
          * Parameters:
          *     $name - The parameter name to be made unique.
          *     &$params - Parameters to compare for clashes.
          */
-        public static function param(
+        public static function paramify(
             $name,
             &$params
         ): string {
@@ -685,35 +685,6 @@
             }
 
             return $unique;
-        }
-
-        /**
-         * Function: safecol
-         * Encloses a column name in quotes if it is a subset of SQL keywords.
-         *
-         * Parameters:
-         *     $sql - The SQL instance calling this method.
-         *     $name - Name of the column.
-         */
-        public static function safecol(
-            $sql,
-            $name
-        ): string|array|null {
-            $keywords = array(
-                "between", "case", "check", "collate", "constraint", "create",
-                "default", "delete", "distinct", "drop", "except", "from",
-                "groups?", "having", "insert", "intersect", "into", "join",
-                "left", "like", "limit", "null", "offset", "order", "primary",
-                "references", "select", "set", "table", "transaction", "union",
-                "unique", "update", "using", "values", "when", "where", "with"
-            );
-
-            $pattern = implode("|", $keywords);
-            return preg_replace(
-                "/(([^a-zA-Z0-9_]|^)($pattern)([^a-zA-Z0-9_]|$))/i",
-                '\\2"\\3"\\4',
-                $name
-            );
         }
 
         /**
@@ -767,5 +738,34 @@
             }
 
             $field = preg_replace("/AS ([^ ]+)\./i", "AS ", $field);
+        }
+
+        /**
+         * Function: safecol
+         * Encloses a column name in quotes if it is a subset of SQL keywords.
+         *
+         * Parameters:
+         *     $sql - The SQL instance calling this method.
+         *     $name - Name of the column.
+         */
+        public static function safecol(
+            $sql,
+            $name
+        ): string|array|null {
+            $keywords = array(
+                "between", "case", "check", "collate", "constraint", "create",
+                "default", "delete", "distinct", "drop", "except", "from",
+                "groups?", "having", "insert", "intersect", "into", "join",
+                "left", "like", "limit", "null", "offset", "order", "primary",
+                "references", "select", "set", "table", "transaction", "union",
+                "unique", "update", "using", "values", "when", "where", "with"
+            );
+
+            $pattern = implode("|", $keywords);
+            return preg_replace(
+                "/(([^a-zA-Z0-9_]|^)($pattern)([^a-zA-Z0-9_]|$))/i",
+                '\\2"\\3"\\4',
+                $name
+            );
         }
     }
