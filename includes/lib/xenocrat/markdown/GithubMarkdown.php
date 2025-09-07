@@ -37,7 +37,8 @@ class GithubMarkdown extends Markdown
 		'Quote',
 		'Reference',
 		'Table',
-		'Headline',
+		'SetextHeadline',
+		'AtxHeadline',
 	];
 
 	/**

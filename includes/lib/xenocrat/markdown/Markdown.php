@@ -78,7 +78,8 @@ class Markdown extends Parser
 		'Ol',
 		'Quote',
 		'Reference',
-		'Headline',
+		'SetextHeadline',
+		'AtxHeadline',
 	];
 
 	/**

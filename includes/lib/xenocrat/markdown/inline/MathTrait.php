@@ -70,7 +70,7 @@ trait MathTrait
 		return '<la-tex display="inline">'
 			. $this->escapeHtmlEntities(
 				$block[1],
-				ENT_COMPAT | ENT_SUBSTITUTE
+				ENT_COMPAT | ENT_SUBSTITUTE | ENT_DISALLOWED
 			)
 			. '</la-tex>';
 	}

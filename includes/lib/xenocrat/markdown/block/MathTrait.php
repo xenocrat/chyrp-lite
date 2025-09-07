@@ -75,7 +75,7 @@ trait MathTrait
 		return '<la-tex display="block">'
 			. $this->escapeHtmlEntities(
 				$block['content'],
-				ENT_COMPAT | ENT_SUBSTITUTE
+				ENT_COMPAT | ENT_SUBSTITUTE | ENT_DISALLOWED
 			)
 			. ($block['content'] === '' ? '' : "\n" )
 			. "</la-tex>\n";

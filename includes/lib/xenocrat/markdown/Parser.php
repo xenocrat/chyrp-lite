@@ -19,7 +19,7 @@ use RuntimeException;
 abstract class Parser
 {
 	const VERSION_MAJOR = 4;
-	const VERSION_MINOR = 2;
+	const VERSION_MINOR = 4;
 	const VERSION_PATCH = 0;
 
 	/**
@@ -152,7 +152,7 @@ abstract class Parser
 		$safeChr = "\u{FFFD}";
 		$markup = rtrim($markup, "\n");
 		$markup = str_replace("\0", $safeChr, $markup);
-		$markup = preg_replace('/&#[Xx]?0+;/', $safeChr, $markup);
+		$markup = preg_replace('/&\#[Xx]?0+;/', $safeChr, $markup);
 		return $markup;
 	}
 
@@ -610,14 +610,13 @@ abstract class Parser
 	 * @param string $text
 	 * @return string
 	 */
-	protected function expandTabs($text): string
+	protected function expandTabs($text, $chr = ' '): string
 	{
 		if ($text === '') {
 			return '';
 		}
-		if (!function_exists('mb_strlen')) {
-			return str_replace("\t", "    ", $text);
-		}
+
+		$mb_str = function_exists('mb_strlen');
 		$expanded = '';
 		$lines = preg_split(
 				"/(\n)/",
@@ -635,10 +634,11 @@ abstract class Parser
 			);
 			foreach ($chunks as $chunk) {
 				if ($chunk === "\t") {
-					$output .= str_repeat(
-						' ',
-						4 - (mb_strlen($output, 'UTF-8') % 4)
-					);
+					$length = $mb_str ?
+						mb_strlen($output, 'UTF-8') :
+						strlen($output);
+
+					$output .= str_repeat($chr, 4 - ($length % 4));
 				} else {
 					$output .= $chunk;
 				}

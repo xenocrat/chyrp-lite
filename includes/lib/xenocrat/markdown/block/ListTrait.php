@@ -78,13 +78,14 @@ trait ListTrait
 		$marker = '';
 		$mw = 0;
 		$nums = [];
+		$pad = chr(128);
 
 		// Consume until end condition...
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
-			$line = $this->expandTabs($lines[$i]);
+			$line = $this->expandTabs($lines[$i], $pad);
 			$pattern = ($type === 'ol') ?
-				'/^( {0,3})(\d{1,9})([\.\)])([ \t]+|$)/' :
-				'/^( {0,3})([\-\+\*])([ \t]+|$)/' ;
+				'/^( {0,3})(\d{1,9})([\.\)])([ \x80]+|$)/' :
+				'/^( {0,3})([\-\+\*])([ \x80]+|$)/' ;
 			// If not the first item, marker indentation must be less than
 			// width of preceeding marker - otherwise it is a continuation
 			// of the current item containing a marker for a sub-list item.
@@ -116,19 +117,27 @@ trait ListTrait
 					}
 				}
 				$mw = strlen($matches[0]);
-				$line = substr($line, $mw);
+				$line = preg_replace(
+					'/\x80{1,4}/',
+					"\t",
+					substr($line, $mw)
+				);
 				$block['items'][$item][] = $line;
 			} elseif ($line === '' || ltrim($line) === '') {
 				// No more lines: end of list.
 				if (!isset($lines[$i + 1])) {
 					break;
 				}
-				$next = $this->expandTabs($lines[$i + 1]);
-				$line = substr($line, $mw);
+				$next = $this->expandTabs($lines[$i + 1], $pad);
+				$line = preg_replace(
+					'/\x80{1,4}/',
+					"\t",
+					substr($line, $mw)
+				);
 				if ($next === '' || ltrim($next) === '') {
 				// Next line is also blank.
 					$block['items'][$item][] = $line;
-				} elseif (strspn($next, " \t") >= $mw) {
+				} elseif (strspn($next, ' ' . $pad) >= $mw) {
 				// Next line is indented enough to continue this item.
 					$block['items'][$item][] = $line;
 				} elseif (preg_match($pattern, $next)) {
@@ -141,10 +150,14 @@ trait ListTrait
 				}
 			} elseif (
 				strlen($line) > $mw
-				&& strspn($line, " \t") >= $mw
+				&& strspn($line, ' ' . $pad) >= $mw
 			) {
 				// Line is indented enough to continue this item.
-				$line = substr($line, $mw);
+				$line = preg_replace(
+					'/\x80{1,4}/',
+					"\t",
+					substr($line, $mw)
+				);
 				$block['items'][$item][] = $line;
 			} else {
 				// Everything else ends the list.

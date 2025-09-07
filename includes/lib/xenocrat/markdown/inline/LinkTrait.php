@@ -278,7 +278,7 @@ REGEXP;
 	{
 		$email = $this->escapeHtmlEntities(
 			$block[1],
-			ENT_NOQUOTES | ENT_SUBSTITUTE
+			ENT_NOQUOTES | ENT_SUBSTITUTE | ENT_DISALLOWED
 		);
 		return "<a href=\"mailto:$email\">$email</a>";
 	}
@@ -294,7 +294,7 @@ REGEXP;
 
 		$text = $this->escapeHtmlEntities(
 			$secureUrlText,
-			ENT_NOQUOTES | ENT_SUBSTITUTE
+			ENT_NOQUOTES | ENT_SUBSTITUTE | ENT_DISALLOWED
 		);
 		return "<a href=\"$url\">$text</a>";
 	}
@@ -334,7 +334,7 @@ REGEXP;
 					),
 					ENT_QUOTES | ENT_SUBSTITUTE
 				),
-				ENT_COMPAT | ENT_SUBSTITUTE
+				ENT_COMPAT | ENT_SUBSTITUTE | ENT_DISALLOWED
 			)
 			. '"'
 			. (
@@ -348,7 +348,7 @@ REGEXP;
 							),
 							ENT_QUOTES | ENT_SUBSTITUTE
 						),
-						ENT_COMPAT | ENT_SUBSTITUTE
+						ENT_COMPAT | ENT_SUBSTITUTE | ENT_DISALLOWED
 					)
 					. '"'
 			)
@@ -378,7 +378,7 @@ REGEXP;
 					),
 					ENT_QUOTES | ENT_SUBSTITUTE
 				),
-				ENT_COMPAT | ENT_SUBSTITUTE
+				ENT_COMPAT | ENT_SUBSTITUTE | ENT_DISALLOWED
 			)
 			. '"'
 			. ' alt="'
@@ -388,7 +388,7 @@ REGEXP;
 						$this->parseInline($block['text'])
 					)
 				),
-				ENT_COMPAT | ENT_SUBSTITUTE
+				ENT_COMPAT | ENT_SUBSTITUTE | ENT_DISALLOWED
 			)
 			. '"'
 			. (
@@ -417,7 +417,7 @@ REGEXP;
 							),
 							ENT_QUOTES | ENT_SUBSTITUTE
 						),
-						ENT_COMPAT | ENT_SUBSTITUTE
+						ENT_COMPAT | ENT_SUBSTITUTE | ENT_DISALLOWED
 					)
 					. '"'
 			)

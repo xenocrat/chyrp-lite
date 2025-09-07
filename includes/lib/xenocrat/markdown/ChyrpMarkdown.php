@@ -46,7 +46,8 @@ class ChyrpMarkdown extends GithubMarkdown
 		'Quote',
 		'Reference',
 		'Table',
-		'Headline',
+		'SetextHeadline',
+		'AtxHeadline',
 	];
 
 	/**

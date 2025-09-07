@@ -17,8 +17,12 @@ trait CodeTrait
 	 */
 	protected function identifyCode($line): bool
 	{
-		// Indentation >= 4 or one tab is code.
-		return $line[0] === "\t" || str_starts_with($line, '    ');
+		// Indentation by 4+ spaces and/or a tab is code.
+		return (
+			$line[0] === "\t"
+			|| str_starts_with($line, '    ')
+			|| str_starts_with(ltrim($line, ' '), "\t")
+		);
 	}
 
 	/**
@@ -27,30 +31,33 @@ trait CodeTrait
 	protected function consumeCode($lines, $current): array
 	{
 		$content = [];
+		$pad = chr(128);
 
 		// Consume until end of markers...
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
-			$line = $lines[$i];
-			if (isset($line[0]) && $line[0] === "\t") {
-			// A line belongs to this code block if indented by a tab.
-				$line = substr($line, 1);
-				$content[] = $line;
-			} elseif (str_starts_with($line, '    ')) {
-			// A line belongs to this code block if indented by 4 spaces.
-				$line = substr($line, 4);
+			$line = $this->expandTabs($lines[$i], $pad);
+			#$line = $lines[$i];
+			if (strspn($line, ' ' . $pad) >= 4) {
+			// A line is code if indented by 4+ spaces and/or a tab.
+				$line = preg_replace(
+					'/\x80{1,4}/',
+					"\t",
+					substr($line, 4)
+				);
 				$content[] = $line;
 			} elseif (
 				($line === '' || ltrim($line) === '')
 				&& isset($lines[$i + 1])
 			) {
-			// ...Or if blank and the next is also blank
-			// or the next is indented by 4 spaces or a tab.
+			// ...Or if the line is blank and the next is also blank
+			// or if the next is indented by 4+ spaces and/or a tab.
 				$next = $lines[$i + 1];
 				if (
 					$next === ''
 					|| ltrim($next) === ''
 					|| $next[0] === "\t"
 					|| str_starts_with($next, '    ')
+					|| str_starts_with(ltrim($next, ' '), "\t")
 				) {
 					$line = '';
 					$content[] = $line;
@@ -97,14 +104,14 @@ trait CodeTrait
 					),
 					ENT_QUOTES | ENT_SUBSTITUTE
 				),
-				ENT_COMPAT | ENT_SUBSTITUTE
+				ENT_COMPAT | ENT_SUBSTITUTE | ENT_DISALLOWED
 			)
 			. '"' : '';
 
 		return "<pre><code$class>"
 			. $this->escapeHtmlEntities(
 				$block['content'],
-				ENT_COMPAT | ENT_SUBSTITUTE
+				ENT_COMPAT | ENT_SUBSTITUTE | ENT_DISALLOWED
 			)
 			. ($block['content'] === '' ? '' : "\n" )
 			. "</code></pre>\n";

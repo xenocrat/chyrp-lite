@@ -64,7 +64,7 @@ trait MediaLinkTrait
 								),
 								ENT_QUOTES | ENT_SUBSTITUTE
 							),
-							ENT_COMPAT | ENT_SUBSTITUTE
+							ENT_COMPAT | ENT_SUBSTITUTE | ENT_DISALLOWED
 						)
 						. '"'
 				)
@@ -102,7 +102,7 @@ trait MediaLinkTrait
 								),
 								ENT_QUOTES | ENT_SUBSTITUTE
 							),
-							ENT_COMPAT | ENT_SUBSTITUTE
+							ENT_COMPAT | ENT_SUBSTITUTE | ENT_DISALLOWED
 						)
 						. '"'
 				)
@@ -118,7 +118,7 @@ trait MediaLinkTrait
 						),
 						ENT_QUOTES | ENT_SUBSTITUTE
 					),
-					ENT_COMPAT | ENT_SUBSTITUTE
+					ENT_COMPAT | ENT_SUBSTITUTE | ENT_DISALLOWED
 				)
 				. '"'
 				. ' alt="'
@@ -128,7 +128,7 @@ trait MediaLinkTrait
 							$this->parseInline($block['text'])
 						)
 					),
-					ENT_COMPAT | ENT_SUBSTITUTE
+					ENT_COMPAT | ENT_SUBSTITUTE | ENT_DISALLOWED
 				)
 				. '"'
 				. (
@@ -157,7 +157,7 @@ trait MediaLinkTrait
 								),
 								ENT_QUOTES | ENT_SUBSTITUTE
 							),
-							ENT_COMPAT | ENT_SUBSTITUTE
+							ENT_COMPAT | ENT_SUBSTITUTE | ENT_DISALLOWED
 						)
 						. '"'
 				)

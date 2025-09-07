@@ -58,7 +58,7 @@ REGEXP;
 		$secured = preg_match('//u', $decoded) ? $decoded : $text;
 		$text = $this->escapeHtmlEntities(
 			$secured,
-			ENT_NOQUOTES | ENT_SUBSTITUTE
+			ENT_NOQUOTES | ENT_SUBSTITUTE | ENT_DISALLOWED
 		);
 		return "<a href=\"$href\">$text</a>";
 	}

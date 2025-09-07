@@ -49,7 +49,8 @@ class GitlabMarkdown extends Markdown
 		'Reference',
 		'Table',
 		'Toc',
-		'Headline',
+		'SetextHeadline',
+		'AtxHeadline',
 	];
 
 	/**

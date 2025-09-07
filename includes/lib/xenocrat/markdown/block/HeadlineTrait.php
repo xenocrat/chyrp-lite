@@ -32,22 +32,11 @@ trait HeadlineTrait
 	protected $headlineAnchorLinks = [];
 
 	/**
-	 * Identify a line as a headline.
-	 */
-	protected function identifyHeadline($line, $lines, $current): bool
-	{
-		return (
-			$this->identifySetextHeadline($line, $lines, $current)
-			|| $this->identifyAtxHeadline($line, $lines, $current)
-		);
-	}
-
-	/**
 	 * Identify a line as ATX headline.
 	 */
 	protected function identifyAtxHeadline($line, $lines, $current): bool
 	{
-		return (preg_match('/^ {0,3}(\#{1,6})([ \t]|$)/', $line));
+		return (preg_match('/^( {0,3}(\#{1,6}))([ \t]|$)/', $line));
 	}
 
 	/**
@@ -62,30 +51,21 @@ trait HeadlineTrait
 	}
 
 	/**
-	 * Consume lines for a headline.
-	 */
-	protected function consumeHeadline($lines, $current): array
-	{
-		return preg_match(
-				'/^ {0,3}(\#{1,6})([ \t]|$)/',
-				$lines[$current],
-				$matches
-			) ?
-			$this->consumeAtxHeadline($lines, $current) :
-			$this->consumeSetextHeadline($lines, $current);
-	}
-
-	/**
 	 * Consume lines for ATX headline.
 	 */
 	protected function consumeAtxHeadline($lines, $current): array
 	{
-		$line = ltrim($lines[$current], "# \t");
+		preg_match(
+			'/^( {0,3}(\#{1,6}))([ \t]|$)/',
+			$lines[$current],
+			$matches
+		);
+		$line = substr($lines[$current], strlen($matches[1]));
 		$line = preg_replace('/[ \t]+(\#+[ \t]*)?$/', '', $line);
 		$block = [
 			'headline',
-			'content' => $this->parseInline($line),
-			'level' => strspn(ltrim($lines[$current]), "#"),
+			'content' => $this->parseInline(trim($line)),
+			'level' => strlen($matches[2]),
 		];
 		return [$block, $current];
 	}
@@ -170,7 +150,7 @@ trait HeadlineTrait
 					. $prefix
 					. $this->escapeHtmlEntities(
 						$id,
-						ENT_COMPAT | ENT_SUBSTITUTE
+						ENT_COMPAT | ENT_SUBSTITUTE | ENT_DISALLOWED
 					)
 					. '"';
 			}

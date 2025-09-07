@@ -138,7 +138,7 @@ trait TocTrait
 					. $prefix
 					. $this->escapeHtmlEntities(
 						$id,
-						ENT_COMPAT | ENT_SUBSTITUTE
+						ENT_COMPAT | ENT_SUBSTITUTE | ENT_DISALLOWED
 					)
 					. '"';
 			}
@@ -189,7 +189,7 @@ trait TocTrait
 				$id = $prefix
 					. $this->escapeHtmlEntities(
 						$h['id'],
-						ENT_COMPAT | ENT_SUBSTITUTE
+						ENT_COMPAT | ENT_SUBSTITUTE | ENT_DISALLOWED
 					);
 
 				$toc .= "<a href=\"#{$id}\">{$h['content']}</a>\n";
