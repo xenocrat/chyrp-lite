@@ -9,8 +9,50 @@
 </p>
 <h2>{{ "Keywords" | translate }}</h2>
 <p>
-{{ "Use the syntax <code>keyword:value;</code> to quickly match specific results where <code>keyword</code> is equal to <code>value</code>. The keyword can be the name of a database column, the name of an author or a group, or a date/time. For example: <code>author:Foo;year:2016;</code> would filter the posts table to display only posts created by Foo in 2016." | translate }}
+{{ "Use the syntax <code>keyword:value;</code> to quickly match specific results where <code>keyword</code> is equal to <code>value</code>. The keyword can be the name of a database column in the current table, or one of the special keywords listed below. For example: <code>author:Foo;year:2016;</code> would filter the posts table to display only posts created by Foo in 2016." | translate }}
 </p>
+<ul>
+<li>
+<code class="syntax">year</code>
+{{ "Year created" | translate }} <span class="sub">{{ "(e.g. 2007)" | translate }}</span>
+</li>
+<li>
+<code class="syntax">month</code>
+{{ "Month created" | translate }} <span class="sub">{{ "(e.g. 12)" | translate }}</span>
+</li>
+<li>
+<code class="syntax">day</code>
+{{ "Day created" | translate }} <span class="sub">{{ "(e.g. 25)" | translate }}</span>
+</li>
+<li>
+<code class="syntax">hour</code>
+{{ "Hour created" | translate }} <span class="sub">{{ "(e.g. 03)" | translate }}</span>
+</li>
+<li>
+<code class="syntax">minute</code>
+{{ "Minute created" | translate }} <span class="sub">{{ "(e.g. 59)" | translate }}</span>
+</li>
+<li>
+<code class="syntax">second</code>
+{{ "Second created" | translate }} <span class="sub">{{ "(e.g. 30)" | translate }}</span>
+</li>
+<li>
+<code class="syntax">before</code>
+{{ "Created before (datetime)" | translate }}
+</li>
+<li>
+<code class="syntax">after</code>
+{{ "Created after (datetime)" | translate }}
+</li>
+<li>
+<code class="syntax">author</code>
+{{ "Author (login)" | translate }} <span class="sub">{{ "(e.g. Alex)" | translate }}</span>
+</li>
+<li>
+<code class="syntax">group</code>
+{{ "Group name" | translate }} <span class="sub">{{ "(e.g. Alex)" | translate }}</span>
+</li>
+</ul>
 <p>
 {{ "Use the syntax <code>ASC:column;</code> or <code>DESC:column;</code> to sort the results in ascending or descending order. For example: <code>DESC:user_id;ASC:id;</code> would sort a table of posts in descending order of user ID and then ascending order of post ID." | translate }}
 </p>
