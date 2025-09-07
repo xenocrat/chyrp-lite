@@ -54,6 +54,7 @@ giunti sul tuo sito.
 * Facile Embed: Il modo più semplice per incorporare contenuti nel tuo blog.
 * Visualizzazioni dei post: Contatore per la visualizzazione dei tuoi post.
 * MathJax: Un motore di visualizzazione JavaScript per la matematica.
+* Inject: Utilizzare trigger e filtri per l'inserimento dei contenuti.
 
 ## Requisiti
 

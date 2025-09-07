@@ -51,6 +51,7 @@ visitors will see when they first arrive at your website.
 * Easy Embed: the easiest way to embed content in your blog.
 * Post Views: maintain a view count for your blog entries.
 * MathJax: a JavaScript display engine for mathematics.
+* Inject: use triggers and filters for content injection.
 
 ## Requirements
 

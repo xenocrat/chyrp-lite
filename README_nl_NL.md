@@ -43,6 +43,7 @@ Met een flexibel system van feathers en paginas, kun je je website precies zó m
 * Eenvoudig insluiten: de eenvoudigste manier om inhoud in uw blog in te sluiten.
 * Post Views: een teller die de aantallen keren dat je blogposts gelezen zijn weergeeft.
 * MathJax: een JavaScript weergave-machine voor Wiskundige inhoud.
+* Inject: Voeg inhoud in met behulp van triggers en filters.
 
 ## Benodigdheden
 

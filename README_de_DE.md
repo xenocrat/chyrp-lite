@@ -44,6 +44,7 @@ Feathern ermöglichen verschiedene Sorten von Blog-Inhalten – Sie können sich
 * Einfaches Einbetten: Der einfachste Weg, Inhalte in Ihr Blog einzubetten.
 * Beitragsaufrufe: Behalten Sie die Anzahl der Aufrufe für Ihre Blogeinträge bei.
 * MathJax: eine JavaScript-Anzeige-Engine für Mathematik.
+* Inject: Verwenden Sie Trigger und Filter für die Inhaltseinfügung.
 
 ## Anforderungen
 
