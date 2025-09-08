@@ -116,9 +116,16 @@
                 $this->feed = true;
 
             # Discover pagination.
-            if (preg_match_all("/\/((([^_\/]+)_)?page)\/([0-9]+)/", $route->request, $pages)) {
-                foreach ($pages[1] as $index => $variable)
-                    $_GET[$variable] = (int) $pages[4][$index];
+            if (
+                preg_match_all("/\/((([^_\/]+)_)?page)\/([0-9]+)/",
+                    $route->request,
+                    $pages
+                )
+            ) {
+                foreach ($pages[1] as $index => $variable) {
+                    if (!isset($_GET[$variable]))
+                        $_GET[$variable] = (int) $pages[4][$index];
+                }
             }
 
             if (empty($route->action) or $route->action == "write") {

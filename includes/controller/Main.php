@@ -115,8 +115,10 @@
                     $pages
                 )
             ) {
-                foreach ($pages[1] as $index => $variable)
-                    $_GET[$variable] = (int) $pages[4][$index];
+                foreach ($pages[1] as $index => $variable) {
+                    if (!isset($_GET[$variable]))
+                        $_GET[$variable] = (int) $pages[4][$index];
+                }
 
                 # Looks like pagination of the index.
                 if ($route->arg[0] == $pages[1][0])
