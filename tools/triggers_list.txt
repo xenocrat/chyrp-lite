@@ -275,13 +275,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 2312
+	includes/controller/Admin.php on line 2319
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2762
+	includes/controller/Admin.php on line 2769
 
 Arguments:
 	$group
@@ -290,7 +290,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2800
+	includes/controller/Admin.php on line 2807
 
 Arguments:
 	$user
@@ -299,7 +299,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2853
+	includes/controller/Admin.php on line 2860
 
 Arguments:
 	$entry
@@ -309,7 +309,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2902
+	includes/controller/Admin.php on line 2909
 
 Arguments:
 	$entry
@@ -319,7 +319,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 2906
+	includes/controller/Admin.php on line 2913
 
 Arguments:
 	$imports
@@ -328,31 +328,31 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 3307
+	includes/controller/Admin.php on line 3314
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 3322
+	includes/controller/Admin.php on line 3329
 
 
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 674
+	includes/controller/Main.php on line 676
 
 
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 988
+	includes/controller/Main.php on line 990
 
 
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 1384
+	includes/controller/Main.php on line 1386
 
 Arguments:
 	$post
@@ -955,7 +955,7 @@ Target:
 admin_determine_action
 ----------------------
 Called from:
-	includes/controller/Admin.php on line 179
+	includes/controller/Admin.php on line 186
 
 Target:
 	$route->action
@@ -964,7 +964,7 @@ Target:
 write_post_options
 ------------------
 Called from:
-	includes/controller/Admin.php on line 243
+	includes/controller/Admin.php on line 250
 
 Target:
 	$options
@@ -977,8 +977,8 @@ Arguments:
 post_options
 ------------
 Called from:
-	includes/controller/Admin.php on line 244
-	includes/controller/Admin.php on line 351
+	includes/controller/Admin.php on line 251
+	includes/controller/Admin.php on line 358
 
 Target:
 	$options
@@ -991,7 +991,7 @@ Arguments:
 edit_post_options
 -----------------
 Called from:
-	includes/controller/Admin.php on line 350
+	includes/controller/Admin.php on line 357
 
 Target:
 	$options
@@ -1004,7 +1004,7 @@ Arguments:
 posts_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 2430
+	includes/controller/Admin.php on line 2437
 
 Target:
 	$posts_atom
@@ -1016,7 +1016,7 @@ Arguments:
 pages_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 2532
+	includes/controller/Admin.php on line 2539
 
 Target:
 	$pages_atom
@@ -1028,7 +1028,7 @@ Arguments:
 export
 ------
 Called from:
-	includes/controller/Admin.php on line 2618
+	includes/controller/Admin.php on line 2625
 
 Target:
 	$exports
@@ -1037,7 +1037,7 @@ Target:
 before_import
 -------------
 Called from:
-	includes/controller/Admin.php on line 2734
+	includes/controller/Admin.php on line 2741
 
 Target:
 	$imports
@@ -1046,7 +1046,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 3829
+	includes/controller/Admin.php on line 3836
 
 Target:
 	$write
@@ -1055,7 +1055,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3898
+	includes/controller/Admin.php on line 3905
 
 Target:
 	$manage
@@ -1064,7 +1064,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 3928
+	includes/controller/Admin.php on line 3935
 
 Target:
 	$settings
@@ -1073,7 +1073,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3951
+	includes/controller/Admin.php on line 3958
 
 Target:
 	$extend
@@ -1082,7 +1082,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 4052
+	includes/controller/Admin.php on line 4059
 
 Target:
 	$this->context
@@ -1133,7 +1133,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 1487
+	includes/controller/Main.php on line 1489
 
 Target:
 	$this->context
