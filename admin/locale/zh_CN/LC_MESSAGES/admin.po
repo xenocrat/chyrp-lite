@@ -163,7 +163,7 @@ msgstr ""
 
 #: admin/help/markdown.twig:3 admin/help/markdown.twig:6
 #: admin/help/markdown.twig:13 admin/pages/content_settings.twig:106
-#: admin/partials/page_fields.twig:14 admin/partials/post_fields.twig:53
+#: admin/partials/page_fields.twig:14 admin/partials/post_fields.twig:56
 msgid "Markdown"
 msgstr "Markdown"
 
@@ -532,8 +532,8 @@ msgstr "在提及 URL 时发送和接收通知。"
 #: admin/pages/general_settings.twig:38 admin/pages/manage_pages.twig:11
 #: admin/pages/manage_posts.twig:11 admin/pages/manage_users.twig:11
 #: admin/pages/route_settings.twig:13 admin/partials/page_fields.twig:27
-#: admin/partials/post_fields.twig:32 admin/partials/post_fields.twig:126
-#: admin/partials/post_fields.twig:150
+#: admin/partials/post_fields.twig:32 admin/partials/post_fields.twig:129
+#: admin/partials/post_fields.twig:153
 msgid "Help"
 msgstr "帮助"
 
@@ -583,7 +583,7 @@ msgstr "删除！"
 #: admin/pages/delete_group.twig:56 admin/pages/delete_page.twig:24
 #: admin/pages/delete_post.twig:17 admin/pages/delete_upload.twig:17
 #: admin/pages/delete_user.twig:50 admin/partials/page_fields.twig:100
-#: admin/partials/post_fields.twig:195
+#: admin/partials/post_fields.twig:198
 msgid "Cancel"
 msgstr "取消"
 
@@ -1040,7 +1040,7 @@ msgid "Posted"
 msgstr "已发布的"
 
 #: admin/pages/manage_posts.twig:29 admin/partials/page_fields.twig:33
-#: admin/partials/post_fields.twig:79
+#: admin/partials/post_fields.twig:82
 msgid "Status"
 msgstr "状态"
 
@@ -1252,7 +1252,7 @@ msgstr "写作"
 msgid "Body"
 msgstr "正文"
 
-#: admin/partials/page_fields.twig:25 admin/partials/post_fields.twig:124
+#: admin/partials/page_fields.twig:25 admin/partials/post_fields.twig:127
 msgid "Slug"
 msgstr ""
 
@@ -1260,7 +1260,7 @@ msgstr ""
 msgid "Public and visible in pages list"
 msgstr "公共并在页面列表中显示"
 
-#: admin/partials/page_fields.twig:42 admin/partials/post_fields.twig:88
+#: admin/partials/page_fields.twig:42 admin/partials/post_fields.twig:91
 msgid "Public"
 msgstr "公共"
 
@@ -1268,7 +1268,7 @@ msgstr "公共"
 msgid "Private and visible in pages list"
 msgstr "隐藏并在页面列表中显示"
 
-#: admin/partials/page_fields.twig:50 admin/partials/post_fields.twig:92
+#: admin/partials/page_fields.twig:50 admin/partials/post_fields.twig:95
 msgid "Private"
 msgstr "隐藏"
 
@@ -1292,41 +1292,41 @@ msgstr "低"
 msgid "Parent"
 msgstr "父级"
 
-#: admin/partials/page_fields.twig:90 admin/partials/post_fields.twig:185
-#: admin/partials/post_fields.twig:201
+#: admin/partials/page_fields.twig:90 admin/partials/post_fields.twig:188
+#: admin/partials/post_fields.twig:204
 msgid "Publish"
 msgstr "发布"
 
 #: admin/partials/page_fields.twig:93 admin/partials/page_fields.twig:97
-#: admin/partials/post_fields.twig:188 admin/partials/post_fields.twig:192
-#: admin/partials/post_fields.twig:205
+#: admin/partials/post_fields.twig:191 admin/partials/post_fields.twig:195
+#: admin/partials/post_fields.twig:208
 msgid "Save"
 msgstr "保存"
 
-#: admin/partials/post_fields.twig:84
+#: admin/partials/post_fields.twig:87
 msgid "Draft"
 msgstr "草稿"
 
-#: admin/partials/post_fields.twig:96
+#: admin/partials/post_fields.twig:99
 msgid "Scheduled"
 msgstr "定时发布"
 
-#: admin/partials/post_fields.twig:98
+#: admin/partials/post_fields.twig:101
 msgid "Visible only to a group of users:"
 msgstr "仅可见于一组用户："
 
-#: admin/partials/post_fields.twig:101
+#: admin/partials/post_fields.twig:104
 msgid "All registered users"
 msgstr "所有注册的用户"
 
-#: admin/partials/post_fields.twig:117
+#: admin/partials/post_fields.twig:120
 msgid "Pinned?"
 msgstr "置顶？"
 
-#: admin/partials/post_fields.twig:118
+#: admin/partials/post_fields.twig:121
 msgid "(shows this post above all others)"
 msgstr "（置顶显示）"
 
-#: admin/partials/post_fields.twig:132
+#: admin/partials/post_fields.twig:135
 msgid "Timestamp"
 msgstr "时间戳"
