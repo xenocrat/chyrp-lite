@@ -250,11 +250,6 @@
             $trigger->filter($options, "write_post_options", null, $feather);
             $trigger->filter($options, "post_options", null, $feather);
 
-            if (!Visitor::current()->group->can("add_upload"))
-                Flash::message(
-                    __("You do not have sufficient privileges to add uploads.")
-                );
-
             $this->display(
                 "pages".DIR."write_post",
                 array(
@@ -356,11 +351,6 @@
             $options = array();
             $trigger->filter($options, "edit_post_options", $post, $post->feather);
             $trigger->filter($options, "post_options", $post, $post->feather);
-
-            if (!Visitor::current()->group->can("add_upload"))
-                Flash::message(
-                    __("You do not have sufficient privileges to add uploads.")
-                );
 
             $this->display(
                 "pages".DIR."edit_post",
