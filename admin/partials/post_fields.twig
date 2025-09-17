@@ -45,6 +45,9 @@
 <input id="{{ field_id }}" type="file" name="{{ field_name }}"{{ field_accept ~ field_multiple ~ field_required }} value="" data-file_list="{{ (field_value is iterable ? field_value | join(', ') : field_value) | fix(true) }}">
 {%- else -%}
 <input id="{{ field_id }}" class="text" type="text" name="{{ field.attr }}"{{ field_accept ~ field_multiple ~ field_required }} pattern="{{ field_multiple ? '^([a-z0-9\\-\\.](, *)?)*$' : '^[a-z0-9\\-\\.]*$' }}" value="" data-file_list="{{ (field_value is iterable ? field_value | join(', ') : field_value) | fix(true) }}">
+<span id="{{ field_id }}_tray" class="options_tray" role="status">
+{{ "You do not have sufficient privileges to add uploads." | translate("chyrp") }}
+</span>
 {%- endif -%}
 {% elseif field.type == "text_block" %}
 <span id="{{ field_id }}_toolbar" class="options_toolbar text_block_toolbar" role="toolbar">
