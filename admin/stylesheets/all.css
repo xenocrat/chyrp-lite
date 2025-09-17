@@ -700,6 +700,10 @@ form.split input[type="number"],
 form.split input[type="range"] {
     width: 20%;
 }
+form.split textarea {
+    display: inline-block;
+    vertical-align: top;
+}
 form.split .split_block,
 form.split small,
 form.split .small {
