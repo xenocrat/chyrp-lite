@@ -379,7 +379,7 @@
         $dom_reg = '(\(\s*(\"'.$escaped.'\"|\''.$escaped.'\')\s*\))';
 
         if (is_theme($pathname))
-            $dom_reg.= '?';
+            $dom_reg.= '?(?!\()';
 
         if (
             preg_match_all(
@@ -425,7 +425,7 @@
         $dom_reg = '(\(\s*(\"'.$escaped.'\"|\''.$escaped.'\')\s*\))';
 
         if (is_theme($pathname))
-            $dom_reg.= '?';
+            $dom_reg.= '?(?!\()';
 
         if (
             preg_match_all(
@@ -471,7 +471,7 @@
         $dom_reg = '(,\s*(\"'.$escaped.'\"|\''.$escaped.'\'))';
 
         if (is_theme($pathname))
-            $dom_reg.= '?';
+            $dom_reg.= '?(?!\()';
 
         if (
             preg_match_all(
