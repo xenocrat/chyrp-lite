@@ -97,7 +97,7 @@
             $config = Config::current();
 
             # Interpret clean URLs.
-            if (!empty($route->arg[0]) and strpos($route->arg[0], "?") !== 0) {
+            if (!empty($route->arg[0]) and !str_starts_with($route->arg[0], "?")) {
                 $route->action = $route->arg[0];
 
                 if (!empty($route->arg[1]) and isset($route->arg[2]))
@@ -3721,12 +3721,6 @@
          */
         public function admin_login(
         ): never {
-            if (logged_in())
-                Flash::notice(
-                    __("You are already logged in."),
-                    "/"
-                );
-
             $_SESSION['redirect_to'] = url("/");
             redirect(url("login", MainController::current()));
         }
@@ -3738,6 +3732,15 @@
         public function admin_logout(
         ): never {
             redirect(url("logout", MainController::current()));
+        }
+
+        /**
+         * Function: admin_feed
+         * Mask for MainController->feed().
+         */
+        public function admin_feed(
+        ): never {
+            redirect(url("feed", MainController::current()));
         }
 
         /**
@@ -3974,12 +3977,7 @@
          *     $pagination - <Paginator> instance (optional).
          *
          * Notes:
-         *     $template is supplied sans ".twig" and relative to /admin/
-         *     for core and extensions.
-         *
-         *     $title defaults to a camelization of the template filename,
-         *     e.g. foo_bar -> Foo Bar.
-         *
+         *     $template is supplied sans ".twig" and relative to admin dir.
          *     $pagination will be inferred from the context if not supplied.
          */
         public function display(
