@@ -544,12 +544,7 @@
             fallback($text, __("Edit"));
 
             $name = strtolower(get_class($this));
-
-            $url = url(
-                "edit_".$name."/id/".$this->id,
-                AdminController::current()
-            );
-
+            $url = $this->edit_url();
             $classes = $classes.' '.$name.'_edit_link edit_link';
 
             echo $before.'<a href="'.$url.'" class="'.fix(trim($classes), true).
@@ -578,16 +573,47 @@
             fallback($text, __("Delete"));
 
             $name = strtolower(get_class($this));
-
-            $url = url(
-                "delete_".$name."/id/".$this->id,
-                AdminController::current()
-            );
-
+            $url = $this->delete_url();
             $classes = $classes.' '.$name.'_delete_link delete_link';
 
             echo $before.'<a href="'.$url.'" class="'.fix(trim($classes), true).
                  '" id="'.$name.'_delete_'.$this->id.'">'.$text.'</a>'.$after;
+        }
+
+        /**
+         * Function: edit_url
+         * Returns an edit URL for the model.
+         */
+        public function edit_url(
+        ): string|false {
+            if ($this->no_results)
+                return false;
+
+            $id = $this->id;
+            $name = strtolower(get_class($this));
+
+            return url(
+                "edit_".$name."/id/".$id,
+                AdminController::current()
+            );
+        }
+
+        /**
+         * Function: delete_url
+         * Returns a delete URL for the model.
+         */
+        public function delete_url(
+        ): string|false {
+            if ($this->no_results)
+                return false;
+
+            $id = $this->id;
+            $name = strtolower(get_class($this));
+
+            return url(
+                "delete_".$name."/id/".$id,
+                AdminController::current()
+            );
         }
 
         /**
