@@ -974,7 +974,7 @@
             if (logged_in())
                 Flash::notice(
                     __("You are already logged in."),
-                    "/"
+                    fallback($_SESSION['redirect_to'], "/")
                 );
 
             if (!empty($_POST)) {
