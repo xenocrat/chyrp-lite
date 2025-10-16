@@ -1127,10 +1127,12 @@
             $route = Route::current();
             $theme = Theme::current();
 
-            if (!$route->controller->feed and $route->action == "view") {
-                $post = $route->controller->context["post"];
-                $post_url = $post->url();
-                $feed_url = $theme->feed_url($post_url);
+            $post =
+                $route->controller->context["post"] ??
+                false ;
+
+            if ($post instanceof Post) {
+                $feed_url = $theme->feed_url($post->url());
                 $text = oneof($post->title(), ucfirst($post->feather));
                 $title = _f("Comments on &#8220;%s&#8221;", $text, "comments");
 
@@ -1153,29 +1155,30 @@
             $visitor = Visitor::current();
             $admin = AdminController::current();
 
-            if ($visitor->group->can("edit_comment", "delete_comment")) {
-                $feeds = array (
-                    array(
-                        "url" => $theme->feed_url(
-                            url("manage_comments", $admin)
-                        ),
-                        "title" => _f("Comments on &#8220;%s&#8221;", $config->name, "comments")
-                    ),
-                    array(
-                        "url" => $theme->feed_url(
-                            url("manage_spam", $admin)
-                        ),
-                        "title" => _f("Spam comments on &#8220;%s&#8221;", $config->name, "comments")
-                    )
+            $comments =
+                $route->controller->context["comments"] ??
+                false ;
+
+            if ($comments instanceof Paginator) {
+                $page_url = url("manage_comments", $admin);
+                $feed_url = $theme->feed_url($page_url);
+                $title = _f("Comments on &#8220;%s&#8221;", $config->name, "comments");
+
+                $links[] = array(
+                    "href" => $feed_url,
+                    "type" => BlogFeed::type(),
+                    "title" => $title
                 );
 
-                foreach ($feeds as $feed) {
-                    $links[] = array(
-                        "href" => $feed["url"],
-                        "type" => BlogFeed::type(),
-                        "title" => $feed["title"]
-                    );
-                }
+                $page_url = url("manage_spam", $admin);
+                $feed_url = $theme->feed_url($page_url);
+                $title = _f("Spam comments on &#8220;%s&#8221;", $config->name, "comments")
+
+                $links[] = array(
+                    "href" => $feed_url,
+                    "type" => BlogFeed::type(),
+                    "title" => $title
+                );
             }
 
             return $links;
