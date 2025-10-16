@@ -537,9 +537,9 @@
             $before = null,
             $after = null,
             $classes = ""
-        ): void {
+        ): ?string {
             if (!$this->editable())
-                return;
+                return null;
 
             fallback($text, __("Edit"));
 
@@ -547,8 +547,10 @@
             $url = $this->edit_url();
             $classes = $classes.' '.$name.'_edit_link edit_link';
 
-            echo $before.'<a href="'.$url.'" class="'.fix(trim($classes), true).
-                 '" id="'.$name.'_edit_'.$this->id.'">'.$text.'</a>'.$after;
+            return (
+                $before.'<a href="'.$url.'" class="'.fix(trim($classes), true).
+                '" id="'.$name.'_edit_'.$this->id.'">'.$text.'</a>'.$after
+            );
         }
 
         /**
@@ -566,9 +568,9 @@
             $before = null,
             $after = null,
             $classes = ""
-        ): void {
+        ): ?string {
             if (!$this->deletable())
-                return;
+                return null;
 
             fallback($text, __("Delete"));
 
@@ -576,8 +578,10 @@
             $url = $this->delete_url();
             $classes = $classes.' '.$name.'_delete_link delete_link';
 
-            echo $before.'<a href="'.$url.'" class="'.fix(trim($classes), true).
-                 '" id="'.$name.'_delete_'.$this->id.'">'.$text.'</a>'.$after;
+            return (
+                $before.'<a href="'.$url.'" class="'.fix(trim($classes), true).
+                '" id="'.$name.'_delete_'.$this->id.'">'.$text.'</a>'.$after
+            );
         }
 
         /**
