@@ -406,6 +406,10 @@
             $trigger = Trigger::current();
             $main = MainController::current();
 
+            # This action is a feed; return an empty string.
+            if ($route->controller->feed)
+                return "";
+
             # Generate the main feed that appears everywhere.
             $links = array(
                 array(
@@ -424,19 +428,17 @@
                     false ;
 
                 # Automatically provide feeds based on context.
-                if (
-                    !$route->controller->feed and
-                    $route->action != "index" and
-                    $posts instanceof Paginator
-                ) {
-                    $page_url = $posts->canonical_url();
-                    $feed_url = $this->feed_url($page_url);
+                if ($route->action != "index") {
+                    if ($posts instanceof Paginator) {
+                        $page_url = $posts->canonical_url();
+                        $feed_url = $this->feed_url($page_url);
 
-                    $links[] = array(
-                        "href" => $feed_url,
-                        "type" => BlogFeed::type(),
-                        "title" => $this->title
-                    );
+                        $links[] = array(
+                            "href" => $feed_url,
+                            "type" => BlogFeed::type(),
+                            "title" => $this->title
+                        );
+                    }
                 }
 
                 # Ask extensions to provide additional blog links.
