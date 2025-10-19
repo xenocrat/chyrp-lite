@@ -1737,6 +1737,9 @@
         if ($length < 1)
             return "";
 
+        if (!mb_check_encoding($text, "UTF-8"))
+            $text = mb_scrub($text, "UTF-8");
+
         if (mb_strlen($text, "UTF-8") <= $length)
             return $text;
 
@@ -2133,6 +2136,10 @@
             # E.g. echo implode(",", unpack("C*", "€"));
         );
 
+        # Repair malformed UTF-8.
+        if (!mb_check_encoding($string, "UTF-8"))
+            $string = mb_scrub($string, "UTF-8");
+
         # Strip tags.
         $clean = strip_tags($string);
 
@@ -2183,6 +2190,9 @@
         $string,
         $length = null
     ): string {
+        if (!mb_check_encoding($string, "UTF-8"))
+            $string = mb_scrub($string, "UTF-8");
+
         $string = preg_replace("/[\\x00-\\x1f]/u", "", $string);
         $string = strip_tags($string);
         $string = mb_strcut($string, 0, $length, "UTF-8");
