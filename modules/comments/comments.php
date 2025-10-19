@@ -1172,7 +1172,7 @@
 
                 $page_url = url("manage_spam", $admin);
                 $feed_url = $theme->feed_url($page_url);
-                $title = _f("Spam comments on &#8220;%s&#8221;", $config->name, "comments")
+                $title = _f("Spam comments on &#8220;%s&#8221;", $config->name, "comments");
 
                 $links[] = array(
                     "href" => $feed_url,
