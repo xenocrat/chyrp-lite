@@ -31,7 +31,7 @@ trait CodeTrait
 	protected function consumeCode($lines, $current): array
 	{
 		$content = [];
-		$pad = chr(128);
+		$pad = chr(29);
 
 		// Consume until end of markers...
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
@@ -40,7 +40,7 @@ trait CodeTrait
 			if (strspn($line, ' ' . $pad) >= 4) {
 			// A line is code if indented by 4+ spaces and/or a tab.
 				$line = preg_replace(
-					'/\x80{1,4}/',
+					'/\x1D{1,4}/',
 					"\t",
 					substr($line, 4)
 				);

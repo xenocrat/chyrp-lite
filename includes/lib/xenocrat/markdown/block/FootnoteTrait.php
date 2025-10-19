@@ -306,12 +306,12 @@ trait FootnoteTrait
 		$footnotes = [];
 		$parsedFootnotes = [];
 		$mw = 0;
-		$pad = chr(128);
+		$pad = chr(29);
 
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $this->expandTabs($lines[$i], $pad);
 			$startsFootnote = preg_match(
-				'/^ {0,3}\[\^(.+?)(?<!\\\\)\]:[ \x80]*/',
+				'/^ {0,3}\[\^(.+?)(?<!\\\\)\]:[ \x1D]*/',
 				str_replace(
 					"\\\\",
 					"\\\\".chr(31),
@@ -337,7 +337,7 @@ trait FootnoteTrait
 
 				$mw = strlen($matches[0]);
 				$str = preg_replace(
-					'/\x80{1,4}/',
+					'/\x1D{1,4}/',
 					"\t",
 					substr($line, strlen($matches[0]))
 				);
@@ -357,7 +357,7 @@ trait FootnoteTrait
 				// Current line continues the current footnote.
 					$indent = strspn($line, ' ' . $pad);
 					$line = preg_replace(
-						'/\x80{1,4}/',
+						'/\x1D{1,4}/',
 						"\t",
 						substr($line, ($indent < $mw ? $indent : $mw))
 					);

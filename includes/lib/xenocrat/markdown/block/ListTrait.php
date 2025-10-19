@@ -78,14 +78,14 @@ trait ListTrait
 		$marker = '';
 		$mw = 0;
 		$nums = [];
-		$pad = chr(128);
+		$pad = chr(29);
 
 		// Consume until end condition...
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $this->expandTabs($lines[$i], $pad);
 			$pattern = ($type === 'ol') ?
-				'/^( {0,3})(\d{1,9})([\.\)])([ \x80]+|$)/' :
-				'/^( {0,3})([\-\+\*])([ \x80]+|$)/' ;
+				'/^( {0,3})(\d{1,9})([\.\)])([ \x1D]+|$)/' :
+				'/^( {0,3})([\-\+\*])([ \x1D]+|$)/' ;
 			// If not the first item, marker indentation must be less than
 			// width of preceeding marker - otherwise it is a continuation
 			// of the current item containing a marker for a sub-list item.
@@ -118,7 +118,7 @@ trait ListTrait
 				}
 				$mw = strlen($matches[0]);
 				$line = preg_replace(
-					'/\x80{1,4}/',
+					'/\x1D{1,4}/',
 					"\t",
 					substr($line, $mw)
 				);
@@ -130,7 +130,7 @@ trait ListTrait
 				}
 				$next = $this->expandTabs($lines[$i + 1], $pad);
 				$line = preg_replace(
-					'/\x80{1,4}/',
+					'/\x1D{1,4}/',
 					"\t",
 					substr($line, $mw)
 				);
@@ -154,7 +154,7 @@ trait ListTrait
 			) {
 				// Line is indented enough to continue this item.
 				$line = preg_replace(
-					'/\x80{1,4}/',
+					'/\x1D{1,4}/',
 					"\t",
 					substr($line, $mw)
 				);
