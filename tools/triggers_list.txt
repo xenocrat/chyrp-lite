@@ -368,7 +368,7 @@ Called from:
 webmention
 ----------
 Called from:
-	includes/helpers.php on line 2591
+	includes/helpers.php on line 2601
 
 Arguments:
 	$post
@@ -379,7 +379,7 @@ Arguments:
 before_delete_upload
 --------------------
 Called from:
-	includes/helpers.php on line 3403
+	includes/helpers.php on line 3413
 
 Arguments:
 	$filename
@@ -388,7 +388,7 @@ Arguments:
 delete_upload
 -------------
 Called from:
-	includes/helpers.php on line 3406
+	includes/helpers.php on line 3416
 
 Arguments:
 	$filename
@@ -397,19 +397,19 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 3656
+	includes/helpers.php on line 3666
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 3675
+	includes/helpers.php on line 3685
 
 
 correspond_activate_account
 ---------------------------
 Called from:
-	includes/helpers.php on line 4038
+	includes/helpers.php on line 4048
 
 Arguments:
 	$user
@@ -419,7 +419,7 @@ Arguments:
 correspond_reset_password
 -------------------------
 Called from:
-	includes/helpers.php on line 4080
+	includes/helpers.php on line 4090
 
 Arguments:
 	$user
@@ -429,7 +429,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 4127
+	includes/helpers.php on line 4137
 
 Arguments:
 	$ob
@@ -630,9 +630,9 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 1341
-	modules/comments/comments.php on line 1412
-	modules/comments/comments.php on line 1483
+	modules/comments/comments.php on line 1344
+	modules/comments/comments.php on line 1415
+	modules/comments/comments.php on line 1486
 
 Arguments:
 	$comment
@@ -642,7 +642,7 @@ Arguments:
 correspond_site_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1821
+	modules/comments/comments.php on line 1824
 
 Arguments:
 	$comment
@@ -651,7 +651,7 @@ Arguments:
 correspond_user_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1849
+	modules/comments/comments.php on line 1852
 
 Arguments:
 	$comment
@@ -661,7 +661,7 @@ Arguments:
 correspond_peer_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1882
+	modules/comments/comments.php on line 1885
 
 Arguments:
 	$comment
@@ -937,7 +937,7 @@ Target:
 admin_links
 -----------
 Called from:
-	includes/class/Theme.php on line 420
+	includes/class/Theme.php on line 424
 
 Target:
 	$links
@@ -946,7 +946,7 @@ Target:
 links
 -----
 Called from:
-	includes/class/Theme.php on line 443
+	includes/class/Theme.php on line 445
 
 Target:
 	$links
@@ -1046,7 +1046,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 3826
+	includes/controller/Admin.php on line 3829
 
 Target:
 	$write
@@ -1055,7 +1055,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3895
+	includes/controller/Admin.php on line 3898
 
 Target:
 	$manage
@@ -1064,7 +1064,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 3925
+	includes/controller/Admin.php on line 3928
 
 Target:
 	$settings
@@ -1073,7 +1073,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3948
+	includes/controller/Admin.php on line 3951
 
 Target:
 	$extend
@@ -1082,7 +1082,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 4049
+	includes/controller/Admin.php on line 4047
 
 Target:
 	$this->context
@@ -1155,7 +1155,7 @@ Arguments:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 4016
+	includes/helpers.php on line 4026
 
 Target:
 	$function
@@ -1164,7 +1164,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 4128
+	includes/helpers.php on line 4138
 	includes/lib/Leaf.php on line 352
 
 Target:

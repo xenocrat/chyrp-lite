@@ -350,6 +350,16 @@ Parameters:
     $classes - Extra CSS classes for the link, space-delimited.
 
 
+Function: edit_url
+------------------
+Returns an edit URL for the model.
+
+
+Function: delete_url
+--------------------
+Returns a delete URL for the model.
+
+
 Function: etag
 --------------
 Generates an Etag for the object.
@@ -1618,6 +1628,11 @@ Function: admin_logout
 Mask for MainController->logout().
 
 
+Function: admin_feed
+--------------------
+Mask for MainController->feed().
+
+
 Function: admin_help
 --------------------
 Serves help pages for core and extensions.
@@ -1639,12 +1654,7 @@ Parameters:
     $pagination - <Paginator> instance (optional).
 
 Notes:
-    $template is supplied sans ".twig" and relative to /admin/
-    for core and extensions.
-
-    $title defaults to a camelization of the template filename,
-    e.g. foo_bar -> Foo Bar.
-
+    $template is supplied sans ".twig" and relative to admin dir.
     $pagination will be inferred from the context if not supplied.
 
 

@@ -368,78 +368,78 @@ msgstr ""
 msgid "An ID is required to show a comment."
 msgstr ""
 
-#: modules/comments/comments.php:1135
-#: modules/comments/comments.php:1162
-#: modules/comments/comments.php:1312
-#: modules/comments/comments.php:1383
+#: modules/comments/comments.php:1137
+#: modules/comments/comments.php:1165
+#: modules/comments/comments.php:1315
+#: modules/comments/comments.php:1386
 #, php-format
 msgid "Comments on &#8220;%s&#8221;"
 msgstr ""
 
-#: modules/comments/comments.php:1168
-#: modules/comments/comments.php:1454
+#: modules/comments/comments.php:1175
+#: modules/comments/comments.php:1457
 #, php-format
 msgid "Spam comments on &#8220;%s&#8221;"
 msgstr ""
 
-#: modules/comments/comments.php:1269
+#: modules/comments/comments.php:1272
 msgid "You have unsubscribed from the conversation."
 msgstr ""
 
-#: modules/comments/comments.php:1331
-#: modules/comments/comments.php:1402
-#: modules/comments/comments.php:1473
+#: modules/comments/comments.php:1334
+#: modules/comments/comments.php:1405
+#: modules/comments/comments.php:1476
 #, php-format
 msgid "Comment #%d"
 msgstr ""
 
-#: modules/comments/comments.php:1506
+#: modules/comments/comments.php:1509
 msgid "A ping from your URL is already registered."
 msgstr ""
 
-#: modules/comments/comments.php:1513
+#: modules/comments/comments.php:1516
 msgid "Your URL is too long to be stored in our database."
 msgstr ""
 
-#: modules/comments/comments.php:1518
+#: modules/comments/comments.php:1521
 msgid "Mentioned this post."
 msgstr ""
 
-#: modules/comments/comments.php:1541
+#: modules/comments/comments.php:1544
 msgid "Open"
 msgstr ""
 
-#: modules/comments/comments.php:1548
+#: modules/comments/comments.php:1551
 msgid "Closed"
 msgstr ""
 
-#: modules/comments/comments.php:1555
+#: modules/comments/comments.php:1558
 msgid "Private"
 msgstr ""
 
-#: modules/comments/comments.php:1562
+#: modules/comments/comments.php:1565
 msgid "Registered Only"
 msgstr ""
 
-#: modules/comments/comments.php:1572
+#: modules/comments/comments.php:1575
 msgid "Comment Status"
 msgstr ""
 
-#: modules/comments/comments.php:1829
-#: modules/comments/comments.php:1857
-#: modules/comments/comments.php:1890
+#: modules/comments/comments.php:1832
+#: modules/comments/comments.php:1860
+#: modules/comments/comments.php:1893
 #, php-format
 msgid "New Comment at %s"
 msgstr ""
 
-#: modules/comments/comments.php:1830
-#: modules/comments/comments.php:1858
-#: modules/comments/comments.php:1891
+#: modules/comments/comments.php:1833
+#: modules/comments/comments.php:1861
+#: modules/comments/comments.php:1894
 #, php-format
 msgid "%s commented on a blog post:"
 msgstr ""
 
-#: modules/comments/comments.php:1899
+#: modules/comments/comments.php:1902
 msgid "Unsubscribe from this conversation:"
 msgstr ""
 
