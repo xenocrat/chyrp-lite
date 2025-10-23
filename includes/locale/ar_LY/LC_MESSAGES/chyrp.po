@@ -754,6 +754,18 @@ msgstr "عنوان URL الأساسي غير صالح."
 msgid "Settings updated."
 msgstr "تم تحديث الإعدادات."
 
+#: includes/controller/Admin.php:3469
+msgid "Atom"
+msgstr ""
+
+#: includes/controller/Admin.php:3473
+msgid "RSS"
+msgstr ""
+
+#: includes/controller/Admin.php:3477
+msgid "JSON"
+msgstr ""
+
 #: includes/controller/Admin.php:3651
 msgid "My Awesome Homepage"
 msgstr "موقعي الرائع"

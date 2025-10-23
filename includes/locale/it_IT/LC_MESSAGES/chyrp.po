@@ -754,6 +754,18 @@ msgstr "URL canonico non valido."
 msgid "Settings updated."
 msgstr "Impostazioni aggiornate."
 
+#: includes/controller/Admin.php:3469
+msgid "Atom"
+msgstr ""
+
+#: includes/controller/Admin.php:3473
+msgid "RSS"
+msgstr ""
+
+#: includes/controller/Admin.php:3477
+msgid "JSON"
+msgstr ""
+
 #: includes/controller/Admin.php:3651
 msgid "My Awesome Homepage"
 msgstr "La mia favolosa homepage"

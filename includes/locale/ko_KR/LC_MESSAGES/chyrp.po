@@ -748,6 +748,18 @@ msgstr "올바르지 않은 표준 URL입니다."
 msgid "Settings updated."
 msgstr "설정이 업데이트되었습니다."
 
+#: includes/controller/Admin.php:3469
+msgid "Atom"
+msgstr ""
+
+#: includes/controller/Admin.php:3473
+msgid "RSS"
+msgstr ""
+
+#: includes/controller/Admin.php:3477
+msgid "JSON"
+msgstr ""
+
 #: includes/controller/Admin.php:3651
 msgid "My Awesome Homepage"
 msgstr "나의 멋진 홈페이지"
