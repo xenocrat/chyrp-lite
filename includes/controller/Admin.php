@@ -3466,15 +3466,15 @@
 
             $feed_formats = array(
                 array(
-                    "name" => "Atom",
+                    "name" => __("Atom"),
                     "class" => "AtomFeed"
                 ),
                 array(
-                    "name" => "RSS",
+                    "name" => __("RSS"),
                     "class" => "RSSFeed"
                 ),
                 array(
-                    "name" => "JSON",
+                    "name" => __("JSON"),
                     "class" => "JSONFeed"
                 )
             );
