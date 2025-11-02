@@ -756,7 +756,7 @@
      * Function: twig_filter_content_type
      * Changes the Content-Type header to the supplied type.
      */
-    public function twig_filter_content_type(
+    function twig_filter_content_type(
         $string
     ): bool {
         if (headers_sent())
