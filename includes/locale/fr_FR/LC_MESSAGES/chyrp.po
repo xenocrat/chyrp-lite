@@ -886,7 +886,7 @@ msgstr ""
 
 #: includes/controller/Main.php:248
 msgid "Index"
-msgstr "Indice"
+msgstr "Index"
 
 #: includes/controller/Main.php:272
 msgid "Updated posts"
