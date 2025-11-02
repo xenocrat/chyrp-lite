@@ -24,11 +24,11 @@ msgid ""
 "memorable and descriptive. Secondly, for filter injectors only, the label "
 "identifies the content to be injected into the post or page."
 msgstr ""
-"Elke injector moet voorzien zijn van een label. Het label heeft twee "
-"doelen: ten eerste helpt het u bij het beheren van uw injectoren door ze "
-"elk een label te geven dat gedenkwaardig en beschrijvend is. Ten tweede, "
-"alleen voor filterinjectoren, identificeert het etiket de inhoud die in "
-"het bericht of de pagina moet worden geïnjecteerd."
+"Elke injector moet voorzien zijn van een label. Het label heeft twee doelen: "
+"ten eerste helpt het u bij het beheren van uw injectoren door ze elk een "
+"label te geven dat gedenkwaardig en beschrijvend is. Ten tweede, alleen voor "
+"filterinjectoren, identificeert het etiket de inhoud die in het bericht of "
+"de pagina moet worden geïnjecteerd."
 
 #: modules/inject/admin/pages/delete_injector.twig:3
 #: modules/inject/admin/pages/delete_injector.twig:6
@@ -81,7 +81,7 @@ msgid "New Injector"
 msgstr "Nieuwe injector"
 
 #: modules/inject/admin/pages/manage_injectors.twig:16
-#: modules/inject/inject.php:483
+#: modules/inject/inject.php:455
 msgid "Injectors"
 msgstr "Injectoren"
 
@@ -99,75 +99,79 @@ msgstr "Injecteren"
 msgid "Inject content into your blog using triggers and filters."
 msgstr "Injecteer inhoud in uw blog met behulp van triggers en filters."
 
-#: modules/inject/inject.php:183
+#: modules/inject/inject.php:154
 msgid "HTML head"
 msgstr "HTML-kop"
 
-#: modules/inject/inject.php:184
+#: modules/inject/inject.php:155
 msgid "End of main section"
 msgstr "Einde van het hoofdgedeelte"
 
-#: modules/inject/inject.php:185
+#: modules/inject/inject.php:156
 msgid "After other content"
 msgstr "Na andere inhoud"
 
-#: modules/inject/inject.php:186
+#: modules/inject/inject.php:157
 msgid "Post filter"
 msgstr "Bericht filter"
 
-#: modules/inject/inject.php:187
+#: modules/inject/inject.php:158
 msgid "Page filter"
 msgstr "Pagina filter"
 
-#: modules/inject/inject.php:194
+#: modules/inject/inject.php:159
+msgid "Twig filter"
+msgstr "Twig filter"
+
+#: modules/inject/inject.php:166
 msgid "Never"
 msgstr "Nooit"
 
-#: modules/inject/inject.php:195
+#: modules/inject/inject.php:167
 msgid "Once"
 msgstr "Eénmalig"
 
-#: modules/inject/inject.php:196
+#: modules/inject/inject.php:168
 msgid "Odd"
 msgstr "Oneven"
 
-#: modules/inject/inject.php:197
+#: modules/inject/inject.php:169
 msgid "Even"
 msgstr "Even"
 
-#: modules/inject/inject.php:198
+#: modules/inject/inject.php:170
 msgid "Always"
 msgstr "Altijd"
 
-#: modules/inject/inject.php:296 modules/inject/inject.php:377
+#: modules/inject/inject.php:268 modules/inject/inject.php:349
 msgid "Label cannot be blank."
 msgstr "Het label mag niet leeg zijn."
 
-#: modules/inject/inject.php:324
+#: modules/inject/inject.php:296
 msgid "Injector added."
 msgstr "Injector toegevoegd."
 
-#: modules/inject/inject.php:335
+#: modules/inject/inject.php:307
 msgid "An ID is required to edit an injector."
 msgstr "Een ID is vereist om een injector te bewerken."
 
-#: modules/inject/inject.php:344 modules/inject/inject.php:386
-#: modules/inject/inject.php:427 modules/inject/inject.php:462
+#: modules/inject/inject.php:316 modules/inject/inject.php:358
+#: modules/inject/inject.php:399 modules/inject/inject.php:434
 msgid "Injector not found."
 msgstr "Injector niet gevonden."
 
-#: modules/inject/inject.php:370
+#: modules/inject/inject.php:342
 msgid "An ID is required to update an injector."
 msgstr "Een ID is vereist om een injector bij te werken."
 
-#: modules/inject/inject.php:407
+#: modules/inject/inject.php:379
 msgid "Injector updated."
 msgstr "Injector bijgewerkt."
 
-#: modules/inject/inject.php:418 modules/inject/inject.php:450
+#: modules/inject/inject.php:390 modules/inject/inject.php:422
 msgid "An ID is required to delete an injector."
 msgstr "Een ID is vereist om een injector te verwijderen."
 
-#: modules/inject/inject.php:473
+#: modules/inject/inject.php:445
 msgid "Injector deleted."
 msgstr "Injector verwijderd."

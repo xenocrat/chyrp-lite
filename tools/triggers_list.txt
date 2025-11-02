@@ -1165,7 +1165,7 @@ javascripts_nonce
 -----------------
 Called from:
 	includes/helpers.php on line 4138
-	includes/lib/Leaf.php on line 352
+	includes/lib/Leaf.php on line 353
 
 Target:
 	$nonce
@@ -1174,7 +1174,7 @@ Target:
 stylesheets_nonce
 -----------------
 Called from:
-	includes/lib/Leaf.php on line 362
+	includes/lib/Leaf.php on line 363
 
 Target:
 	$nonce

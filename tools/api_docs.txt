@@ -3525,6 +3525,11 @@ Parameters:
     $lazy - Specify lazy-loading for this image?
 
 
+Function: twig_filter_content_type
+----------------------------------
+Changes the Content-Type header to the supplied type.
+
+
 ==============================================
 includes/lib/RSSFeed.php
 ==============================================

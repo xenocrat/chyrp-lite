@@ -79,7 +79,7 @@ msgid "New Injector"
 msgstr "新注射器"
 
 #: modules/inject/admin/pages/manage_injectors.twig:16
-#: modules/inject/inject.php:483
+#: modules/inject/inject.php:455
 msgid "Injectors"
 msgstr "注射器"
 
@@ -97,75 +97,79 @@ msgstr "注入"
 msgid "Inject content into your blog using triggers and filters."
 msgstr "使用触发器和过滤器将内容注入您的博客。"
 
-#: modules/inject/inject.php:183
+#: modules/inject/inject.php:154
 msgid "HTML head"
 msgstr "HTML 头"
 
-#: modules/inject/inject.php:184
+#: modules/inject/inject.php:155
 msgid "End of main section"
 msgstr "主要部分结束"
 
-#: modules/inject/inject.php:185
+#: modules/inject/inject.php:156
 msgid "After other content"
 msgstr "其他内容之后"
 
-#: modules/inject/inject.php:186
+#: modules/inject/inject.php:157
 msgid "Post filter"
 msgstr "文章过滤器"
 
-#: modules/inject/inject.php:187
+#: modules/inject/inject.php:158
 msgid "Page filter"
 msgstr "页面过滤器"
 
-#: modules/inject/inject.php:194
+#: modules/inject/inject.php:159
+msgid "Twig filter"
+msgstr "Twig 过滤器"
+
+#: modules/inject/inject.php:166
 msgid "Never"
 msgstr "从不"
 
-#: modules/inject/inject.php:195
+#: modules/inject/inject.php:167
 msgid "Once"
 msgstr "一次"
 
-#: modules/inject/inject.php:196
+#: modules/inject/inject.php:168
 msgid "Odd"
 msgstr "奇数"
 
-#: modules/inject/inject.php:197
+#: modules/inject/inject.php:169
 msgid "Even"
 msgstr "甚至"
 
-#: modules/inject/inject.php:198
+#: modules/inject/inject.php:170
 msgid "Always"
 msgstr "总是"
 
-#: modules/inject/inject.php:296 modules/inject/inject.php:377
+#: modules/inject/inject.php:268 modules/inject/inject.php:349
 msgid "Label cannot be blank."
 msgstr "标签不能为空。"
 
-#: modules/inject/inject.php:324
+#: modules/inject/inject.php:296
 msgid "Injector added."
 msgstr "添加了注射器。"
 
-#: modules/inject/inject.php:335
+#: modules/inject/inject.php:307
 msgid "An ID is required to edit an injector."
 msgstr "编辑注射器需要 ID。"
 
-#: modules/inject/inject.php:344 modules/inject/inject.php:386
-#: modules/inject/inject.php:427 modules/inject/inject.php:462
+#: modules/inject/inject.php:316 modules/inject/inject.php:358
+#: modules/inject/inject.php:399 modules/inject/inject.php:434
 msgid "Injector not found."
 msgstr "未找到注射器。"
 
-#: modules/inject/inject.php:370
+#: modules/inject/inject.php:342
 msgid "An ID is required to update an injector."
 msgstr "更新注射器需要 ID。"
 
-#: modules/inject/inject.php:407
+#: modules/inject/inject.php:379
 msgid "Injector updated."
 msgstr "注射器已更新。"
 
-#: modules/inject/inject.php:418 modules/inject/inject.php:450
+#: modules/inject/inject.php:390 modules/inject/inject.php:422
 msgid "An ID is required to delete an injector."
 msgstr "删除注射器需要 ID。"
 
-#: modules/inject/inject.php:473
+#: modules/inject/inject.php:445
 msgid "Injector deleted."
 msgstr "注射器已删除。"
