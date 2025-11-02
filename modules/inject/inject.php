@@ -11,6 +11,7 @@
         const TYPE_END_CONTENT = "foot";
         const TYPE_MARKUP_POST = "post";
         const TYPE_MARKUP_PAGE = "page";
+        const TYPE_TWIG_FILTER = "twig";
 
         private $counts = array();
         private $injectors = array();
@@ -42,26 +43,43 @@
 
         public function end_head(
         ): string {
-            return $this->inject_trigger(self::TYPE_END_HEAD);
+            return $this->get_content(self::TYPE_END_HEAD);
         }
 
         public function end_main(
         ): string {
-            return $this->inject_trigger(self::TYPE_END_MAIN);
+            return $this->get_content(self::TYPE_END_MAIN);
         }
 
         public function end_content(
         ): string {
-            return $this->inject_trigger(self::TYPE_END_CONTENT);
+            return $this->get_content(self::TYPE_END_CONTENT);
+        }
+
+        public function twig_filter_inject(
+            $label
+        ): string {
+            return $this->get_content(
+                self::TYPE_TWIG_FILTER,
+                $label
+            );
         }
 
         public function markup_post_text(
             $text,
             $post = null
         ): string {
-            return preg_replace_callback(
+            if (!preg_match("/<!-- *inject +([^<>]+) *-->/i", $text, $matches))
+                return $text;
+
+            $content = $this->get_content(
+                self::TYPE_MARKUP_POST,
+                $matches[1]
+            );
+
+            return preg_replace(
                 "/<!-- *inject +([^<>]+) *-->/i",
-                array($this, "inject_post"),
+                $content,
                 $text
             );
         }
@@ -70,33 +88,24 @@
             $text,
             $page = null
         ): string {
-            return preg_replace_callback(
+            if (!preg_match("/<!-- *inject +([^<>]+) *-->/i", $text, $matches))
+                return $text;
+
+            $content = $this->get_content(
+                self::TYPE_MARKUP_PAGE,
+                $matches[1]
+            );
+
+            return preg_replace(
                 "/<!-- *inject +([^<>]+) *-->/i",
-                array($this, "inject_page"),
+                $content,
                 $text
             );
         }
 
-        public function inject_post(
-            $matches
-        ): string {
-            return $this->inject_markup(
-                $matches[1],
-                self::TYPE_MARKUP_POST
-            );
-        }
-
-        public function inject_page(
-            $matches
-        ): string {
-            return $this->inject_markup(
-                $matches[1],
-                self::TYPE_MARKUP_PAGE
-            );
-        }
-
-        private function inject_trigger(
-            $type
+        private function get_content(
+            $type,
+            $label = null
         ): string {
             $content = "";
 
@@ -104,48 +113,10 @@
                 if ($injector["type"] != $type)
                     continue;
 
-                $this->counts[$id]++;
-
-                switch ($injector["frequency"]) {
-                    case self::FREQUENCY_ONCE:
-                        if ($injector["count"] == 1)
-                            $content.= $injector["payload"];
-
-                        break;
-
-                    case self::FREQUENCY_ODD:
-                        if ($injector["count"] % 2 == 1)
-                            $content.= $injector["payload"];
-
-                        break;
-
-                    case self::FREQUENCY_EVEN:
-                        if ($injector["count"] % 2 == 0)
-                            $content.= $injector["payload"];
-
-                        break;
-
-                    case self::FREQUENCY_ALWAYS:
-                        $content.= $injector["payload"];
-                        break;
+                if (isset($label) and $label !== false) {
+                    if ($injector["label"] != $label)
+                        continue;
                 }
-            }
-
-            return $content;
-        }
-
-        private function inject_markup(
-            $label,
-            $type
-        ): string {
-            $content = "";
-
-            foreach ($this->injectors as $id => $injector) {
-                if ($injector["type"] != $type)
-                    continue;
-
-                if ($injector["label"] != $label)
-                    continue;
 
                 $this->counts[$id]++;
 
@@ -184,7 +155,8 @@
                 self::TYPE_END_MAIN => __("End of main section", "inject"),
                 self::TYPE_END_CONTENT => __("After other content", "inject"),
                 self::TYPE_MARKUP_POST => __("Post filter", "inject"),
-                self::TYPE_MARKUP_PAGE => __("Page filter", "inject")
+                self::TYPE_MARKUP_PAGE => __("Page filter", "inject"),
+                self::TYPE_TWIG_FILTER => __("Twig filter", "inject")
             );
         }
 
