@@ -81,7 +81,8 @@
                 new \Twig\TwigFilter("checked",             "twig_filter_checked"),
                 new \Twig\TwigFilter("disabled",            "twig_filter_disabled"),
                 new \Twig\TwigFilter("download",            "twig_filter_download"),
-                new \Twig\TwigFilter("thumbnail",           "twig_filter_thumbnail")
+                new \Twig\TwigFilter("thumbnail",           "twig_filter_thumbnail"),
+                new \Twig\TwigFilter("content_type",        "twig_filter_content_type")
             );
         }
     }
@@ -749,4 +750,18 @@
         }
 
         return $img;
+    }
+
+    /**
+     * Function: twig_filter_content_type
+     * Changes the Content-Type header to the supplied type.
+     */
+    public function twig_filter_content_type(
+        $string
+    ): bool {
+        if (headers_sent())
+            return false;
+
+        header("Content-Type: ".$string."; charset=UTF-8");
+        return true;
     }
