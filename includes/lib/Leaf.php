@@ -82,7 +82,7 @@
                 new \Twig\TwigFilter("disabled",            "twig_filter_disabled"),
                 new \Twig\TwigFilter("download",            "twig_filter_download"),
                 new \Twig\TwigFilter("thumbnail",           "twig_filter_thumbnail"),
-                new \Twig\TwigFilter("content_type",        "twig_filter_content_type")
+                new \Twig\TwigFilter("set_header",          "twig_filter_set_header")
             );
         }
     }
@@ -754,14 +754,14 @@
 
     /**
      * Function: twig_filter_content_type
-     * Changes the Content-Type header to the supplied type.
+     * Sends the supplied raw HTTP header.
      */
-    function twig_filter_content_type(
+    function twig_filter_set_header(
         $string
     ): bool {
         if (headers_sent())
             return false;
 
-        header("Content-Type: ".$string."; charset=UTF-8");
+        header($string);
         return true;
     }
