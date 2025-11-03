@@ -753,15 +753,22 @@
     }
 
     /**
-     * Function: twig_filter_content_type
+     * Function: twig_filter_set_header
      * Sends the supplied raw HTTP header.
+     *
+     * Parameters:
+     *     $string - The header string.
+     *     $replace - Replace existing headers of the same name?
+     *     $status - Set a numeric status code for the response.
      */
     function twig_filter_set_header(
-        $string
+        $string,
+        $replace = true,
+        $status = 0
     ): bool {
         if (headers_sent())
             return false;
 
-        header($string);
+        header($string, $replace, $status);
         return true;
     }
