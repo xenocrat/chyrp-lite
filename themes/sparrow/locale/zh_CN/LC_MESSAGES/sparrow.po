@@ -40,7 +40,7 @@ msgstr "标签"
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "永久链接至 &#8220;%s&#8221;"
 
-#: themes/sparrow/content/post.twig:17 themes/sparrow/layouts/default.twig:73
+#: themes/sparrow/content/post.twig:17 themes/sparrow/layouts/default.twig:75
 msgid "Draft"
 msgstr "草稿"
 
@@ -196,7 +196,7 @@ msgid "Speak"
 msgstr "说话"
 
 #: themes/sparrow/forms/user/controls.twig:5
-#: themes/sparrow/layouts/default.twig:78
+#: themes/sparrow/layouts/default.twig:80
 msgid "Controls"
 msgstr "操作"
 
@@ -206,7 +206,7 @@ msgstr "全名"
 
 #: themes/sparrow/forms/user/controls.twig:9
 #: themes/sparrow/forms/user/register.twig:13
-#: themes/sparrow/layouts/default.twig:55
+#: themes/sparrow/layouts/default.twig:56
 msgid "Email"
 msgstr "邮件"
 
@@ -230,7 +230,7 @@ msgstr "更新"
 
 #: themes/sparrow/forms/user/login.twig:5
 #: themes/sparrow/forms/user/login.twig:14
-#: themes/sparrow/layouts/default.twig:90
+#: themes/sparrow/layouts/default.twig:92
 msgid "Log in"
 msgstr "登陆"
 
@@ -261,7 +261,7 @@ msgstr "提交"
 
 #: themes/sparrow/forms/user/register.twig:5
 #: themes/sparrow/forms/user/register.twig:19
-#: themes/sparrow/layouts/default.twig:86
+#: themes/sparrow/layouts/default.twig:88
 msgid "Register"
 msgstr "注册"
 
@@ -290,47 +290,47 @@ msgstr "第%d页"
 msgid "Links"
 msgstr "链接"
 
-#: themes/sparrow/layouts/default.twig:58
+#: themes/sparrow/layouts/default.twig:60
 msgid "Feed"
 msgstr "订阅"
 
-#: themes/sparrow/layouts/default.twig:61
+#: themes/sparrow/layouts/default.twig:63
 msgid "Archive"
 msgstr "档案"
 
-#: themes/sparrow/layouts/default.twig:65
+#: themes/sparrow/layouts/default.twig:67
 msgid "Admin"
 msgstr "管理"
 
-#: themes/sparrow/layouts/default.twig:69
+#: themes/sparrow/layouts/default.twig:71
 msgid "Write"
 msgstr "写作"
 
-#: themes/sparrow/layouts/default.twig:81
+#: themes/sparrow/layouts/default.twig:83
 msgid "Log out"
 msgstr "退出登陆"
 
-#: themes/sparrow/layouts/default.twig:95
+#: themes/sparrow/layouts/default.twig:97
 msgid "Search&hellip;"
 msgstr "搜索&hellip;"
 
-#: themes/sparrow/layouts/default.twig:95
+#: themes/sparrow/layouts/default.twig:97
 msgid "Search this blog"
 msgstr "搜索此博客"
 
-#: themes/sparrow/layouts/default.twig:96
+#: themes/sparrow/layouts/default.twig:98
 msgid "Search"
 msgstr "搜索"
 
-#: themes/sparrow/layouts/default.twig:102
+#: themes/sparrow/layouts/default.twig:104
 msgid "&larr; Newer posts"
 msgstr "&larr; 较新的帖子"
 
-#: themes/sparrow/layouts/default.twig:113
+#: themes/sparrow/layouts/default.twig:115
 msgid "Older posts &rarr;"
 msgstr "较旧的帖子 &rarr;"
 
-#: themes/sparrow/layouts/default.twig:123
+#: themes/sparrow/layouts/default.twig:125
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr "调用 %s 在行 %d 在 %s 秒."

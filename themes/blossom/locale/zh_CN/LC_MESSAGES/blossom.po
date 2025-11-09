@@ -40,7 +40,7 @@ msgstr "标签"
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "永久链接至 &#8220;%s&#8221;"
 
-#: themes/blossom/content/post.twig:17 themes/blossom/content/sidebar.twig:29
+#: themes/blossom/content/post.twig:17 themes/blossom/content/sidebar.twig:31
 msgid "Draft"
 msgstr "草稿"
 
@@ -52,7 +52,7 @@ msgstr "计划"
 msgid "Pinned"
 msgstr "固定"
 
-#: themes/blossom/content/post.twig:29 themes/blossom/content/sidebar.twig:55
+#: themes/blossom/content/post.twig:29 themes/blossom/content/sidebar.twig:57
 #: themes/blossom/pages/view.twig:20
 msgid "[Untitled]"
 msgstr "[无标题]"
@@ -109,66 +109,66 @@ msgstr "链接"
 msgid "Blog"
 msgstr "博客"
 
-#: themes/blossom/content/sidebar.twig:14
+#: themes/blossom/content/sidebar.twig:15
 #: themes/blossom/forms/user/controls.twig:9
 #: themes/blossom/forms/user/register.twig:13
 msgid "Email"
 msgstr "邮件"
 
-#: themes/blossom/content/sidebar.twig:17
+#: themes/blossom/content/sidebar.twig:19
 msgid "Feed"
 msgstr "订阅"
 
-#: themes/blossom/content/sidebar.twig:21
+#: themes/blossom/content/sidebar.twig:23
 msgid "Admin"
 msgstr "管理"
 
-#: themes/blossom/content/sidebar.twig:25
+#: themes/blossom/content/sidebar.twig:27
 msgid "Write"
 msgstr "写作"
 
-#: themes/blossom/content/sidebar.twig:34
+#: themes/blossom/content/sidebar.twig:36
 #: themes/blossom/forms/user/controls.twig:5
 msgid "Controls"
 msgstr "操作"
 
-#: themes/blossom/content/sidebar.twig:37
+#: themes/blossom/content/sidebar.twig:39
 msgid "Log out"
 msgstr "退出登陆"
 
-#: themes/blossom/content/sidebar.twig:42
+#: themes/blossom/content/sidebar.twig:44
 #: themes/blossom/forms/user/register.twig:5
 #: themes/blossom/forms/user/register.twig:19
 msgid "Register"
 msgstr "注册"
 
-#: themes/blossom/content/sidebar.twig:46
+#: themes/blossom/content/sidebar.twig:48
 #: themes/blossom/forms/user/login.twig:5
 #: themes/blossom/forms/user/login.twig:14
 msgid "Log in"
 msgstr "登陆"
 
-#: themes/blossom/content/sidebar.twig:51
+#: themes/blossom/content/sidebar.twig:53
 msgid "Categories"
 msgstr "分类"
 
-#: themes/blossom/content/sidebar.twig:61
+#: themes/blossom/content/sidebar.twig:63
 msgid "Pages"
 msgstr "页面"
 
-#: themes/blossom/content/sidebar.twig:71
+#: themes/blossom/content/sidebar.twig:73
 msgid "Related Posts"
 msgstr "相关帖子"
 
-#: themes/blossom/content/sidebar.twig:80
+#: themes/blossom/content/sidebar.twig:82
 msgid "Recent Posts"
 msgstr "最近的帖子"
 
-#: themes/blossom/content/sidebar.twig:91
+#: themes/blossom/content/sidebar.twig:93
 msgid "Archive"
 msgstr "档案"
 
-#: themes/blossom/content/sidebar.twig:96 themes/blossom/pages/archive.twig:18
+#: themes/blossom/content/sidebar.twig:98 themes/blossom/pages/archive.twig:18
 msgid "F Y"
 msgstr "F Y"
 

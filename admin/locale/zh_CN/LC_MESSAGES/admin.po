@@ -547,7 +547,7 @@ msgstr "使用Markdown语法撰写博客内容。"
 
 #: admin/pages/content_settings.twig:119 admin/pages/edit_group.twig:27
 #: admin/pages/edit_upload.twig:20 admin/pages/edit_user.twig:66
-#: admin/pages/general_settings.twig:102 admin/pages/route_settings.twig:96
+#: admin/pages/general_settings.twig:109 admin/pages/route_settings.twig:96
 #: admin/pages/user_settings.twig:57
 msgid "Update"
 msgstr "更新"
@@ -856,26 +856,30 @@ msgid "Contact Email Address"
 msgstr "联系的邮件地址"
 
 #: admin/pages/general_settings.twig:56
+msgid "Publish Contact Email Address"
+msgstr "发布联系的邮件地址"
+
+#: admin/pages/general_settings.twig:63
 msgid "Time Zone"
 msgstr "时区"
 
-#: admin/pages/general_settings.twig:69
+#: admin/pages/general_settings.twig:76
 msgid "Language"
 msgstr "语言"
 
-#: admin/pages/general_settings.twig:82
+#: admin/pages/general_settings.twig:89
 msgid "Monospace Font"
 msgstr "等宽字体"
 
-#: admin/pages/general_settings.twig:87
+#: admin/pages/general_settings.twig:94
 msgid "Write with a monospace font."
 msgstr "使用等宽字体书写。"
 
-#: admin/pages/general_settings.twig:92
+#: admin/pages/general_settings.twig:99
 msgid "Check for Updates"
 msgstr "检查更新"
 
-#: admin/pages/general_settings.twig:97
+#: admin/pages/general_settings.twig:104
 #, php-format
 msgid "Current version: %s."
 msgstr "当前版本： %s。"

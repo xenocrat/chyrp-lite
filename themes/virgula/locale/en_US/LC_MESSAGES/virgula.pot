@@ -160,7 +160,7 @@ msgid "Speak"
 msgstr ""
 
 #: themes/virgula/forms/user/controls.twig:4
-#: themes/virgula/layouts/default.twig:56
+#: themes/virgula/layouts/default.twig:61
 msgid "Controls"
 msgstr ""
 
@@ -170,6 +170,7 @@ msgstr ""
 
 #: themes/virgula/forms/user/controls.twig:8
 #: themes/virgula/forms/user/register.twig:12
+#: themes/virgula/layouts/default.twig:37
 msgid "Email"
 msgstr ""
 
@@ -193,7 +194,7 @@ msgstr ""
 
 #: themes/virgula/forms/user/login.twig:4
 #: themes/virgula/forms/user/login.twig:13
-#: themes/virgula/layouts/default.twig:68
+#: themes/virgula/layouts/default.twig:73
 msgid "Log in"
 msgstr ""
 
@@ -224,7 +225,7 @@ msgstr ""
 
 #: themes/virgula/forms/user/register.twig:4
 #: themes/virgula/forms/user/register.twig:18
-#: themes/virgula/layouts/default.twig:64
+#: themes/virgula/layouts/default.twig:69
 msgid "Register"
 msgstr ""
 
@@ -253,40 +254,40 @@ msgstr ""
 msgid "Blog"
 msgstr ""
 
-#: themes/virgula/layouts/default.twig:36
+#: themes/virgula/layouts/default.twig:41
 msgid "Feed"
 msgstr ""
 
-#: themes/virgula/layouts/default.twig:39
+#: themes/virgula/layouts/default.twig:44
 msgid "Archive"
 msgstr ""
 
-#: themes/virgula/layouts/default.twig:43
+#: themes/virgula/layouts/default.twig:48
 msgid "Admin"
 msgstr ""
 
-#: themes/virgula/layouts/default.twig:47
+#: themes/virgula/layouts/default.twig:52
 msgid "Write"
 msgstr ""
 
-#: themes/virgula/layouts/default.twig:51
+#: themes/virgula/layouts/default.twig:56
 msgid "Draft"
 msgstr ""
 
-#: themes/virgula/layouts/default.twig:59
+#: themes/virgula/layouts/default.twig:64
 msgid "Log out"
 msgstr ""
 
-#: themes/virgula/layouts/default.twig:83
-#: themes/virgula/layouts/default.twig:83
+#: themes/virgula/layouts/default.twig:88
+#: themes/virgula/layouts/default.twig:88
 msgid "Search this blog"
 msgstr ""
 
-#: themes/virgula/layouts/default.twig:84
+#: themes/virgula/layouts/default.twig:89
 msgid "Find"
 msgstr ""
 
-#: themes/virgula/layouts/default.twig:98
+#: themes/virgula/layouts/default.twig:103
 #, php-format
 msgid "Called from %s on line %d at %s seconds."
 msgstr ""

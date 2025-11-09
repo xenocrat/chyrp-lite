@@ -40,7 +40,7 @@ msgstr "Tags"
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "Permanentlink zu &#8220;%s&#8221;"
 
-#: themes/blossom/content/post.twig:17 themes/blossom/content/sidebar.twig:29
+#: themes/blossom/content/post.twig:17 themes/blossom/content/sidebar.twig:31
 msgid "Draft"
 msgstr "Entwurf"
 
@@ -52,7 +52,7 @@ msgstr "Geplant"
 msgid "Pinned"
 msgstr "Angepinnt"
 
-#: themes/blossom/content/post.twig:29 themes/blossom/content/sidebar.twig:55
+#: themes/blossom/content/post.twig:29 themes/blossom/content/sidebar.twig:57
 #: themes/blossom/pages/view.twig:20
 msgid "[Untitled]"
 msgstr "[Unbenannt]"
@@ -111,66 +111,66 @@ msgstr "Links"
 msgid "Blog"
 msgstr "Blog"
 
-#: themes/blossom/content/sidebar.twig:14
+#: themes/blossom/content/sidebar.twig:15
 #: themes/blossom/forms/user/controls.twig:9
 #: themes/blossom/forms/user/register.twig:13
 msgid "Email"
 msgstr "E-Mail"
 
-#: themes/blossom/content/sidebar.twig:17
+#: themes/blossom/content/sidebar.twig:19
 msgid "Feed"
 msgstr "Feed"
 
-#: themes/blossom/content/sidebar.twig:21
+#: themes/blossom/content/sidebar.twig:23
 msgid "Admin"
 msgstr "Administration"
 
-#: themes/blossom/content/sidebar.twig:25
+#: themes/blossom/content/sidebar.twig:27
 msgid "Write"
 msgstr "Schreiben"
 
-#: themes/blossom/content/sidebar.twig:34
+#: themes/blossom/content/sidebar.twig:36
 #: themes/blossom/forms/user/controls.twig:5
 msgid "Controls"
 msgstr "Details"
 
-#: themes/blossom/content/sidebar.twig:37
+#: themes/blossom/content/sidebar.twig:39
 msgid "Log out"
 msgstr "Ausloggen"
 
-#: themes/blossom/content/sidebar.twig:42
+#: themes/blossom/content/sidebar.twig:44
 #: themes/blossom/forms/user/register.twig:5
 #: themes/blossom/forms/user/register.twig:19
 msgid "Register"
 msgstr "Registrieren"
 
-#: themes/blossom/content/sidebar.twig:46
+#: themes/blossom/content/sidebar.twig:48
 #: themes/blossom/forms/user/login.twig:5
 #: themes/blossom/forms/user/login.twig:14
 msgid "Log in"
 msgstr "Einloggen"
 
-#: themes/blossom/content/sidebar.twig:51
+#: themes/blossom/content/sidebar.twig:53
 msgid "Categories"
 msgstr "Kategorien"
 
-#: themes/blossom/content/sidebar.twig:61
+#: themes/blossom/content/sidebar.twig:63
 msgid "Pages"
 msgstr "Seiten"
 
-#: themes/blossom/content/sidebar.twig:71
+#: themes/blossom/content/sidebar.twig:73
 msgid "Related Posts"
 msgstr "Verwandte Posts"
 
-#: themes/blossom/content/sidebar.twig:80
+#: themes/blossom/content/sidebar.twig:82
 msgid "Recent Posts"
 msgstr "Kürzliche Posts"
 
-#: themes/blossom/content/sidebar.twig:91
+#: themes/blossom/content/sidebar.twig:93
 msgid "Archive"
 msgstr "Archiv"
 
-#: themes/blossom/content/sidebar.twig:96 themes/blossom/pages/archive.twig:18
+#: themes/blossom/content/sidebar.twig:98 themes/blossom/pages/archive.twig:18
 msgid "F Y"
 msgstr "F Y"
 

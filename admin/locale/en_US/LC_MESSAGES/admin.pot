@@ -538,7 +538,7 @@ msgstr ""
 #: admin/pages/edit_group.twig:27
 #: admin/pages/edit_upload.twig:20
 #: admin/pages/edit_user.twig:66
-#: admin/pages/general_settings.twig:102
+#: admin/pages/general_settings.twig:109
 #: admin/pages/route_settings.twig:96
 #: admin/pages/user_settings.twig:57
 msgid "Update"
@@ -891,26 +891,30 @@ msgid "Contact Email Address"
 msgstr ""
 
 #: admin/pages/general_settings.twig:56
+msgid "Publish Contact Email Address"
+msgstr ""
+
+#: admin/pages/general_settings.twig:63
 msgid "Time Zone"
 msgstr ""
 
-#: admin/pages/general_settings.twig:69
+#: admin/pages/general_settings.twig:76
 msgid "Language"
 msgstr ""
 
-#: admin/pages/general_settings.twig:82
+#: admin/pages/general_settings.twig:89
 msgid "Monospace Font"
 msgstr ""
 
-#: admin/pages/general_settings.twig:87
+#: admin/pages/general_settings.twig:94
 msgid "Write with a monospace font."
 msgstr ""
 
-#: admin/pages/general_settings.twig:92
+#: admin/pages/general_settings.twig:99
 msgid "Check for Updates"
 msgstr ""
 
-#: admin/pages/general_settings.twig:97
+#: admin/pages/general_settings.twig:104
 #, php-format
 msgid "Current version: %s."
 msgstr ""

@@ -631,8 +631,8 @@ comments_feed_item
 ------------------
 Called from:
 	modules/comments/comments.php on line 1344
-	modules/comments/comments.php on line 1415
-	modules/comments/comments.php on line 1486
+	modules/comments/comments.php on line 1416
+	modules/comments/comments.php on line 1488
 
 Arguments:
 	$comment
@@ -642,7 +642,7 @@ Arguments:
 correspond_site_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1824
+	modules/comments/comments.php on line 1826
 
 Arguments:
 	$comment
@@ -651,7 +651,7 @@ Arguments:
 correspond_user_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1852
+	modules/comments/comments.php on line 1854
 
 Arguments:
 	$comment
@@ -661,7 +661,7 @@ Arguments:
 correspond_peer_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1885
+	modules/comments/comments.php on line 1887
 
 Arguments:
 	$comment
@@ -853,20 +853,20 @@ end_main
 --------
 Called from:
 	themes/blossom/layouts/default.twig on line 52
-	themes/sparrow/layouts/default.twig on line 108
+	themes/sparrow/layouts/default.twig on line 110
 	themes/topaz/layouts/default.twig on line 48
-	themes/umbra/layouts/default.twig on line 102
-	themes/virgula/layouts/default.twig on line 89
+	themes/umbra/layouts/default.twig on line 104
+	themes/virgula/layouts/default.twig on line 94
 
 
 end_content
 -----------
 Called from:
 	themes/blossom/layouts/default.twig on line 58
-	themes/sparrow/layouts/default.twig on line 116
+	themes/sparrow/layouts/default.twig on line 118
 	themes/topaz/layouts/default.twig on line 57
-	themes/umbra/layouts/default.twig on line 110
-	themes/virgula/layouts/default.twig on line 91
+	themes/umbra/layouts/default.twig on line 112
+	themes/virgula/layouts/default.twig on line 96
 
 
 
@@ -1046,7 +1046,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 3829
+	includes/controller/Admin.php on line 3830
 
 Target:
 	$write
@@ -1055,7 +1055,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3898
+	includes/controller/Admin.php on line 3899
 
 Target:
 	$manage
@@ -1064,7 +1064,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 3928
+	includes/controller/Admin.php on line 3929
 
 Target:
 	$settings
@@ -1073,7 +1073,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3951
+	includes/controller/Admin.php on line 3952
 
 Target:
 	$extend
@@ -1082,7 +1082,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 4047
+	includes/controller/Admin.php on line 4048
 
 Target:
 	$this->context

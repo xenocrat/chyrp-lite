@@ -564,7 +564,7 @@ msgstr "Stel een blogpost samen, gebruik makende van markup syntax."
 
 #: admin/pages/content_settings.twig:119 admin/pages/edit_group.twig:27
 #: admin/pages/edit_upload.twig:20 admin/pages/edit_user.twig:66
-#: admin/pages/general_settings.twig:102 admin/pages/route_settings.twig:96
+#: admin/pages/general_settings.twig:109 admin/pages/route_settings.twig:96
 #: admin/pages/user_settings.twig:57
 msgid "Update"
 msgstr "Update"
@@ -879,26 +879,30 @@ msgid "Contact Email Address"
 msgstr "Contact Emailadres"
 
 #: admin/pages/general_settings.twig:56
+msgid "Publish Contact Email Address"
+msgstr "Publiceren Contact Emailadres"
+
+#: admin/pages/general_settings.twig:63
 msgid "Time Zone"
 msgstr "Tijdzone"
 
-#: admin/pages/general_settings.twig:69
+#: admin/pages/general_settings.twig:76
 msgid "Language"
 msgstr "Taal"
 
-#: admin/pages/general_settings.twig:82
+#: admin/pages/general_settings.twig:89
 msgid "Monospace Font"
 msgstr "Monospace-lettertype"
 
-#: admin/pages/general_settings.twig:87
+#: admin/pages/general_settings.twig:94
 msgid "Write with a monospace font."
 msgstr "Schrijf met een monospace-lettertype."
 
-#: admin/pages/general_settings.twig:92
+#: admin/pages/general_settings.twig:99
 msgid "Check for Updates"
 msgstr "Controleer op updates"
 
-#: admin/pages/general_settings.twig:97
+#: admin/pages/general_settings.twig:104
 #, php-format
 msgid "Current version: %s."
 msgstr "Huidige versie: %s."

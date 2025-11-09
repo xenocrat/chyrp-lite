@@ -24,9 +24,29 @@ msgid ""
 "memorable and descriptive. Secondly, for filter injectors only, the label "
 "identifies the content to be injected into the post or page."
 msgstr ""
-"每个喷油器都必须有一个标签。该标签有两个目的：首先，它通过为每个喷油器提供"
-"一个令人难忘且具有描述性的标签来帮助您管理您的喷油器。其次，仅对于过滤器注"
-"入器，标签标识要注入到文章或页面的内容。"
+"每个喷油器都必须有一个标签。该标签有两个目的：首先，它通过为每个喷油器提供一"
+"个令人难忘且具有描述性的标签来帮助您管理您的喷油器。其次，仅对于过滤器注入"
+"器，标签标识要注入到文章或页面的内容。"
+
+#: modules/inject/admin/help/injector_labels.twig:11
+msgid ""
+"For example, if you create an injector of the type <strong>post filter</"
+"strong> or <strong>page filter</strong> and label it <code>foobar</code>, "
+"you must insert the following comment into the text of a post or page in the "
+"position where you want to inject the content:"
+msgstr ""
+"例如，如果您创建了 <strong>post filter</strong> 或 <strong>page filter</"
+"strong> 类型的注入器并标记它 <code>foobar</code>，则必须在要注入内容的位置将"
+"以下注释插入到帖子或页面的文本中："
+
+#: modules/inject/admin/help/injector_labels.twig:15
+msgid ""
+"If you create an injector of the type <strong>Twig filter</strong> and label "
+"it <code>foobar</code>, you must insert the following expression in a Twig "
+"template in the position where you want to inject the content:"
+msgstr ""
+"如果创建 <strong>Twig filter</strong> 类型的注入器并标记它 <code>foobar</"
+"code>，则必须在 Twig 模板中插入要注入内容的位置的以下表达式："
 
 #: modules/inject/admin/pages/delete_injector.twig:3
 #: modules/inject/admin/pages/delete_injector.twig:6

@@ -9,6 +9,14 @@ msgstr ""
 msgid "Each injector must have a label. The label has two purposes: firstly, it helps you to manage your injectors by giving each one a label that is memorable and descriptive. Secondly, for filter injectors only, the label identifies the content to be injected into the post or page."
 msgstr ""
 
+#: modules/inject/admin/help/injector_labels.twig:11
+msgid "For example, if you create an injector of the type <strong>post filter</strong> or <strong>page filter</strong> and label it <code>foobar</code>, you must insert the following comment into the text of a post or page in the position where you want to inject the content:"
+msgstr ""
+
+#: modules/inject/admin/help/injector_labels.twig:15
+msgid "If you create an injector of the type <strong>Twig filter</strong> and label it <code>foobar</code>, you must insert the following expression in a Twig template in the position where you want to inject the content:"
+msgstr ""
+
 #: modules/inject/admin/pages/delete_injector.twig:3
 #: modules/inject/admin/pages/delete_injector.twig:6
 msgid "Delete Injector?"

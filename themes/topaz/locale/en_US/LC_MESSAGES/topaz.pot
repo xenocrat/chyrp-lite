@@ -33,7 +33,7 @@ msgid "Permanent link to &#8220;%s&#8221;"
 msgstr ""
 
 #: themes/topaz/content/post.twig:17
-#: themes/topaz/content/sidebar.twig:29
+#: themes/topaz/content/sidebar.twig:31
 msgid "Draft"
 msgstr ""
 
@@ -46,7 +46,7 @@ msgid "Pinned"
 msgstr ""
 
 #: themes/topaz/content/post.twig:29
-#: themes/topaz/content/sidebar.twig:55
+#: themes/topaz/content/sidebar.twig:57
 #: themes/topaz/pages/view.twig:14
 msgid "[Untitled]"
 msgstr ""
@@ -106,66 +106,66 @@ msgstr ""
 msgid "Blog"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:14
+#: themes/topaz/content/sidebar.twig:15
 #: themes/topaz/forms/user/controls.twig:9
 #: themes/topaz/forms/user/register.twig:13
 msgid "Email"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:17
+#: themes/topaz/content/sidebar.twig:19
 msgid "Feed"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:21
+#: themes/topaz/content/sidebar.twig:23
 msgid "Admin"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:25
+#: themes/topaz/content/sidebar.twig:27
 msgid "Write"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:34
+#: themes/topaz/content/sidebar.twig:36
 #: themes/topaz/forms/user/controls.twig:5
 msgid "Controls"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:37
+#: themes/topaz/content/sidebar.twig:39
 msgid "Log out"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:42
+#: themes/topaz/content/sidebar.twig:44
 #: themes/topaz/forms/user/register.twig:5
 #: themes/topaz/forms/user/register.twig:19
 msgid "Register"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:46
+#: themes/topaz/content/sidebar.twig:48
 #: themes/topaz/forms/user/login.twig:5
 #: themes/topaz/forms/user/login.twig:14
 msgid "Log in"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:51
+#: themes/topaz/content/sidebar.twig:53
 msgid "Categories"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:61
+#: themes/topaz/content/sidebar.twig:63
 msgid "Pages"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:71
+#: themes/topaz/content/sidebar.twig:73
 msgid "Related Posts"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:80
+#: themes/topaz/content/sidebar.twig:82
 msgid "Recent Posts"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:91
+#: themes/topaz/content/sidebar.twig:93
 msgid "Archive"
 msgstr ""
 
-#: themes/topaz/content/sidebar.twig:96
+#: themes/topaz/content/sidebar.twig:98
 #: themes/topaz/pages/archive.twig:11
 msgid "F Y"
 msgstr ""

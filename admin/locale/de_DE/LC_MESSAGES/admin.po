@@ -571,7 +571,7 @@ msgstr "Verfassen Sie Blog-Inhalte mithilfe der Markdown-Textformatierung."
 
 #: admin/pages/content_settings.twig:119 admin/pages/edit_group.twig:27
 #: admin/pages/edit_upload.twig:20 admin/pages/edit_user.twig:66
-#: admin/pages/general_settings.twig:102 admin/pages/route_settings.twig:96
+#: admin/pages/general_settings.twig:109 admin/pages/route_settings.twig:96
 #: admin/pages/user_settings.twig:57
 msgid "Update"
 msgstr "Aktualisieren"
@@ -886,26 +886,30 @@ msgid "Contact Email Address"
 msgstr "Kontakt Email Adresse"
 
 #: admin/pages/general_settings.twig:56
+msgid "Publish Contact Email Address"
+msgstr "Kontakt Email Adresse veröffentlichen"
+
+#: admin/pages/general_settings.twig:63
 msgid "Time Zone"
 msgstr "Zeitzone"
 
-#: admin/pages/general_settings.twig:69
+#: admin/pages/general_settings.twig:76
 msgid "Language"
 msgstr "Sprache"
 
-#: admin/pages/general_settings.twig:82
+#: admin/pages/general_settings.twig:89
 msgid "Monospace Font"
 msgstr "Monospace-Schriftart"
 
-#: admin/pages/general_settings.twig:87
+#: admin/pages/general_settings.twig:94
 msgid "Write with a monospace font."
 msgstr "Schreiben Sie mit einer Monospace-Schriftart."
 
-#: admin/pages/general_settings.twig:92
+#: admin/pages/general_settings.twig:99
 msgid "Check for Updates"
 msgstr "Auf Updates prüfen"
 
-#: admin/pages/general_settings.twig:97
+#: admin/pages/general_settings.twig:104
 #, php-format
 msgid "Current version: %s."
 msgstr "Aktuelle Version: %s."

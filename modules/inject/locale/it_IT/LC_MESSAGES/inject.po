@@ -30,6 +30,28 @@ msgstr ""
 "gli iniettori di filtri, l'etichetta identifica il contenuto da iniettare "
 "nel post o nella pagina."
 
+#: modules/inject/admin/help/injector_labels.twig:11
+msgid ""
+"For example, if you create an injector of the type <strong>post filter</"
+"strong> or <strong>page filter</strong> and label it <code>foobar</code>, "
+"you must insert the following comment into the text of a post or page in the "
+"position where you want to inject the content:"
+msgstr ""
+"Ad esempio, se crei un iniettore del tipo <strong>filtro post</strong> o "
+"<strong>filtro pagina</strong> e lo <code>foobar</code>etichetti , devi "
+"inserire il seguente commento nel testo di un post o di una pagina nella "
+"posizione in cui desideri iniettare il contenuto:"
+
+#: modules/inject/admin/help/injector_labels.twig:15
+msgid ""
+"If you create an injector of the type <strong>Twig filter</strong> and label "
+"it <code>foobar</code>, you must insert the following expression in a Twig "
+"template in the position where you want to inject the content:"
+msgstr ""
+"Se si crea un iniettore del tipo <strong>filtro Twig</strong> e lo si "
+"etichetta, <code>foobar</code>è necessario inserire la seguente espressione "
+"in un modello Twig nella posizione in cui si desidera iniettare il contenuto:"
+
 #: modules/inject/admin/pages/delete_injector.twig:3
 #: modules/inject/admin/pages/delete_injector.twig:6
 msgid "Delete Injector?"

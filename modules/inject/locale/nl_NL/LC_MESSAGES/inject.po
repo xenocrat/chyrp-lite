@@ -30,6 +30,28 @@ msgstr ""
 "filterinjectoren, identificeert het etiket de inhoud die in het bericht of "
 "de pagina moet worden geïnjecteerd."
 
+#: modules/inject/admin/help/injector_labels.twig:11
+msgid ""
+"For example, if you create an injector of the type <strong>post filter</"
+"strong> or <strong>page filter</strong> and label it <code>foobar</code>, "
+"you must insert the following comment into the text of a post or page in the "
+"position where you want to inject the content:"
+msgstr ""
+"Als u bijvoorbeeld een injector van het type <strong>berichtfilter</strong> "
+"of <strong>paginafilter</strong> maakt en deze <code>foobar</code>labelt, "
+"moet u de volgende opmerking invoegen in de tekst van een bericht of pagina "
+"op de positie waar u de inhoud wilt injecteren:"
+
+#: modules/inject/admin/help/injector_labels.twig:15
+msgid ""
+"If you create an injector of the type <strong>Twig filter</strong> and label "
+"it <code>foobar</code>, you must insert the following expression in a Twig "
+"template in the position where you want to inject the content:"
+msgstr ""
+"Als u een injector van het type <strong>Twig-filter</strong> maakt en deze "
+"<code>foobar</code>labelt, moet u de volgende expressie invoegen in een Twig-"
+"sjabloon op de positie waar u de inhoud wilt injecteren:"
+
 #: modules/inject/admin/pages/delete_injector.twig:3
 #: modules/inject/admin/pages/delete_injector.twig:6
 msgid "Delete Injector?"
