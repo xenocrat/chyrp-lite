@@ -96,9 +96,6 @@
          *     $name - Name of the author (optional).
          *     $uri - URI of the author (optional).
          *     $email - Email address of the author (optional).
-         *
-         * Notes:
-         *     The item remains open to allow triggered insertions.
          */
         public function entry(
             $title,
