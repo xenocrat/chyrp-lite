@@ -51,9 +51,11 @@
 </li>
 {% endif %}
 {% endfor %}
+{% if site.email_public %}
 <li>
 <a href="{{ mailto(site.email) }}">{{ "Email" | translate }}</a>
 </li>
+{% endif %}
 <li>
 <a href="{{ url('feed') }}">{{ "Feed" | translate }}</a>
 </li>

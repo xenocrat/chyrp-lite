@@ -10,9 +10,11 @@
 <li>
 <a href="{{ url('index') }}">{{ "Blog" | translate }}</a>
 </li>
+{% if site.email_public %}
 <li>
 <a href="{{ mailto(site.email) }}">{{ "Email" | translate }}</a>
 </li>
+{% endif %}
 <li>
 <a href="{{ url('feed') }}" rel="alternate">{{ "Feed" | translate }}</a>
 </li>
