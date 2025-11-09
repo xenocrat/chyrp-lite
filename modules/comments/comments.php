@@ -1409,7 +1409,8 @@
                     published:$comment->created_at,
                     updated:$updated,
                     name:$comment->author,
-                    uri:$comment->author_url
+                    uri:$comment->author_url,
+                    email:$comment->author_email
                 );
 
                 $trigger->call("comments_feed_item", $comment, $feed);
@@ -1480,7 +1481,8 @@
                     published:$comment->created_at,
                     updated:$updated,
                     name:$comment->author,
-                    uri:$comment->author_url
+                    uri:$comment->author_url,
+                    email:$comment->author_email
                 );
 
                 $trigger->call("comments_feed_item", $comment, $feed);
