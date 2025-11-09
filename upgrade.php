@@ -754,6 +754,23 @@
             );
     }
 
+    /**
+     * Function: add_email_public
+     * Adds the email_public config setting.
+     *
+     * Versions: 2025.02 => 2025.03
+     */
+    function add_email_public(
+    ): void {
+        $set = Config::current()->set("email_public", true, true);
+
+        if ($set === false)
+            error(
+                __("Error"),
+                __("Could not write the configuration file.")
+            );
+    }
+
     #---------------------------------------------
     # Output Starts
     #---------------------------------------------
@@ -1105,6 +1122,7 @@
         add_add_upload();
         add_edit_upload();
         add_delete_upload();
+        add_email_public();
 
         # Perform module upgrades.
         foreach ($config->enabled_modules as $module) {

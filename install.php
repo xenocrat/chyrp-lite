@@ -1072,6 +1072,7 @@
                 $config->set("url", $chyrp_url),
                 $config->set("chyrp_url", $chyrp_url),
                 $config->set("email", $_POST['email']),
+                $config->set("email_public", true),
                 $config->set("timezone", $_POST['timezone']),
                 $config->set("locale", $_POST['locale']),
                 $config->set("monospace_font", false),

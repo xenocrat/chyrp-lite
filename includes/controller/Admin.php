@@ -3398,6 +3398,7 @@
             $config->set("description", strip_tags($_POST['description']));
             $config->set("url", $url);
             $config->set("email", $_POST['email']);
+            $config->set("email_public", !empty($_POST['email_public']));
             $config->set("timezone", $_POST['timezone']);
             $config->set("locale", $_POST['locale']);
             $config->set("monospace_font", !empty($_POST['monospace_font']));

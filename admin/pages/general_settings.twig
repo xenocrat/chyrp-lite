@@ -52,6 +52,13 @@
 <input class="text" type="email" name="email" value="{{ site.email | fix(true, true) }}" id="email" required>
 </p>
 <p>
+<label for="email_public">
+{{ "Publish Contact Email Address" | translate }}
+</label>
+{#- -#}
+<input class="checkbox" type="checkbox" name="email_public" id="email_public"{{ site.email_public | checked }}>
+</p>
+<p>
 <label for="timezone">
 {{ "Time Zone" | translate }}
 </label>
