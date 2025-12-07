@@ -1,6 +1,7 @@
 <?php
     class Cacher extends Modules {
         private $lastmod = 0;
+        private $caching = false;
         private $lastmod_updated = false;
         private $excluded_from_cache = false;
         private $callback_registered = false;
@@ -52,6 +53,7 @@
                 $lastmod = strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']);
 
                 if ($lastmod >= $this->lastmod) {
+                    $this->caching = true;
                     header_remove();
                     header($_SERVER['SERVER_PROTOCOL']." 304 Not Modified");
                     header("ETag: ".$this->generate_etag());
@@ -62,7 +64,7 @@
                         header("Expires: ".date("r", now("+15 minutes")));
                     } else {
                         header("Cache-Control: no-cache, private");
-                        header("Expires: ".date("r", now("+30 days")));
+                        header("Expires: ".date("r", now("+60 minutes")));
                     }
 
                     exit;
@@ -85,6 +87,7 @@
                 return;
 
             if (!headers_sent()) {
+                $this->caching = true;
                 header_remove("Pragma");
                 header("Last-Modified: ".date("r", $this->lastmod));
                 header("ETag: ".$this->generate_etag());
@@ -95,7 +98,7 @@
                     header("Expires: ".date("r", now("+15 minutes")));
                 } else {
                     header("Cache-Control: no-cache, private");
-                    header("Expires: ".date("r", now("+30 days")));
+                    header("Expires: ".date("r", now("+60 minutes")));
                 }
             }
         }
@@ -112,6 +115,9 @@
 
         private function is_cacheable(
         ): bool {
+            if ($this->caching)
+                return true;
+
             if (!$this->callback_registered)
                 return false;
 
@@ -138,18 +144,18 @@
             if (logged_in())
                 return false;
 
-            if (
-                count(
+            static $count;
+
+            if (!isset($count)) {
+                $count = count(
                     array_diff(
                         Visitor::current()->group->permissions,
                         array("view_site")
                     )
-                )
-            ) {
-                return false;
+                );
             }
 
-            return true;
+            return (bool) $count;
         }
 
         private function generate_etag(
