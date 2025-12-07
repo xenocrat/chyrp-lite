@@ -1,9 +1,9 @@
 <?php
     class Cacher extends Modules {
         private $lastmod = 0;
-        private $trigger_excluded = false;
         private $lastmod_updated = false;
-        private $enhanced_caching = false;
+        private $excluded_from_cache = false;
+        private $callback_registered = false;
 
         public function __init(
         ): void {
@@ -11,8 +11,8 @@
 
             $this->lastmod = $config->module_cacher["cache_lastmod"];
             $this->prepare_cache_triggers();
-            $this->setPriority("route_init", 5);
-            $this->setPriority("route_done", 5);
+            $this->setPriority("route_init", 8);
+            $this->setPriority("route_done", 8);
         }
 
         public static function __install(
@@ -30,30 +30,12 @@
 
         public function runtime(
         ) {
-            if (isset($_SERVER['HTTP_COOKIE']))
-                return;
-
-            if (logged_in())
-                return;
-
-            if (
-                count(
-                    array_diff(
-                        Visitor::current()->group->permissions,
-                        array("view_site")
-                    )
-                )
-            ) {
-                return;
-            }
-
             if (
                 header_register_callback(
                     array($this, "remove_cookie")
                 )
             ) {
-                Session::discard(true);
-                $this->enhanced_caching = true;
+                $this->callback_registered = true;
             }
         }
 
@@ -75,7 +57,7 @@
                     header("ETag: ".$this->generate_etag());
                     header("Vary: Accept-Encoding, Cookie, Save-Data, ETag");
 
-                    if ($this->enhanced_caching) {
+                    if ($this->is_public_cacheable()) {
                         header("Cache-Control: public, must-revalidate, stale-if-error");
                         header("Expires: ".date("r", now("+15 minutes")));
                     } else {
@@ -108,7 +90,7 @@
                 header("ETag: ".$this->generate_etag());
                 header("Vary: Accept-Encoding, Cookie, Save-Data, ETag");
 
-                if ($this->enhanced_caching) {
+                if ($this->is_public_cacheable()) {
                     header("Cache-Control: public, must-revalidate, stale-if-error");
                     header("Expires: ".date("r", now("+15 minutes")));
                 } else {
@@ -120,13 +102,22 @@
 
         public function remove_cookie(
         ): void {
-            if ($this->enhanced_caching) {
+            if ($this->is_cacheable()) {
                 header_remove("Set-Cookie");
+
+                if ($this->is_public_cacheable())
+                    Session::discard(true);
             }
         }
 
         private function is_cacheable(
         ): bool {
+            if (!$this->callback_registered)
+                return false;
+
+            if ($this->excluded_from_cache)
+                return false;
+
             if (PREVIEWING)
                 return false;
 
@@ -136,8 +127,27 @@
             if (Flash::exists())
                 return false;
 
-            if ($this->trigger_excluded)
+            return true;
+        }
+
+        private function is_public_cacheable(
+        ): bool {
+            if (isset($_SERVER['HTTP_COOKIE']))
                 return false;
+
+            if (logged_in())
+                return false;
+
+            if (
+                count(
+                    array_diff(
+                        Visitor::current()->group->permissions,
+                        array("view_site")
+                    )
+                )
+            ) {
+                return false;
+            }
 
             return true;
         }
@@ -147,7 +157,7 @@
             $items = array(
                 Visitor::current()->id,
                 Route::current()->request,
-                $this->enhanced_caching
+                $this->is_public_cacheable()
             );
 
             return 'W/"'.token($items).'"';
@@ -168,7 +178,7 @@
         ): void {
             $trigger = Trigger::current();
 
-            $regenerate = array(
+            $invalidate = array(
                 "add_post",
                 "add_page",
                 "update_post",
@@ -182,33 +192,25 @@
                 "publish_post",
                 "import",
                 "change_setting",
-
-                # Categorize module:
                 "add_category",
                 "update_category",
                 "delete_category",
-
-                # Comments module:
                 "add_comment",
                 "update_comment",
                 "delete_comment",
-
-                # Likes module:
                 "add_like",
                 "delete_like",
-
-                # Pingable module:
                 "add_pingback",
                 "update_pingback",
                 "delete_pingback"
             );
 
-            $trigger->filter($regenerate, "cache_regenerate_triggers");
+            $trigger->filter($invalidate, "cache_invalidate_triggers");
 
-            foreach ($regenerate as $action)
-                $this->addAlias($action, "cache_regenerate");
+            foreach ($invalidate as $action)
+                $this->addAlias($action, "cache_invalidate");
 
-            $dehance = array(
+            $exclude = array(
                 "flash_message",
                 "flash_notice",
                 "flash_warning",
@@ -218,15 +220,7 @@
                 "main_register",
                 "main_activate",
                 "main_lost_password",
-                "main_reset_password"
-            );
-
-            $trigger->filter($dehance, "cache_dehance_triggers");
-
-            foreach ($dehance as $action)
-                $this->addAlias($action, "cache_dehance");
-
-            $exclude = array(
+                "main_reset_password",
                 "user_logged_in",
                 "user_logged_out",
                 "before_generate_captcha"
@@ -238,7 +232,7 @@
                 $this->addAlias($action, "cache_exclude");
         }
 
-        public function cache_regenerate(
+        public function cache_invalidate(
         ): void {
             if ($this->lastmod_updated)
                 return;
@@ -251,16 +245,9 @@
             $config->set("module_cacher", $settings);
         }
 
-        public function cache_dehance(
-        ): bool {
-            Session::discard(SESSION_DENY_BOT and BOT_UA);
-            $this->enhanced_caching = false;
-            return false;
-        }
-
         public function cache_exclude(
         ): bool {
-            $this->trigger_excluded = true;
+            $this->excluded_from_cache = true;
             return false;
         }
     }
