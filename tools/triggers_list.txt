@@ -1405,28 +1405,19 @@ Target:
 	$this
 
 
-cache_regenerate_triggers
+cache_invalidate_triggers
 -------------------------
 Called from:
-	modules/cacher/cacher.php on line 206
+	modules/cacher/cacher.php on line 208
 
 Target:
-	$regenerate
-
-
-cache_dehance_triggers
-----------------------
-Called from:
-	modules/cacher/cacher.php on line 224
-
-Target:
-	$dehance
+	$invalidate
 
 
 cache_exclude_triggers
 ----------------------
 Called from:
-	modules/cacher/cacher.php on line 235
+	modules/cacher/cacher.php on line 229
 
 Target:
 	$exclude
