@@ -60,11 +60,9 @@
                     header("Vary: Accept-Encoding, Cookie, Save-Data, ETag");
 
                     if ($this->is_public_cacheable()) {
-                        header("Cache-Control: public, must-revalidate, stale-if-error");
-                        header("Expires: ".date("r", now("+15 minutes")));
+                        header("Cache-Control: public, must-revalidate, stale-if-error, max-age=900");
                     } else {
-                        header("Cache-Control: no-cache, private");
-                        header("Expires: ".date("r", now("+60 minutes")));
+                        header("Cache-Control: no-cache, private, max-age=3600");
                     }
 
                     exit;
@@ -89,16 +87,15 @@
             if (!headers_sent()) {
                 $this->caching = true;
                 header_remove("Pragma");
+                header_remove("Expires");
                 header("Last-Modified: ".date("r", $this->lastmod));
                 header("ETag: ".$this->generate_etag());
                 header("Vary: Accept-Encoding, Cookie, Save-Data, ETag");
 
                 if ($this->is_public_cacheable()) {
-                    header("Cache-Control: public, must-revalidate, stale-if-error");
-                    header("Expires: ".date("r", now("+15 minutes")));
+                    header("Cache-Control: public, must-revalidate, stale-if-error, max-age=900");
                 } else {
-                    header("Cache-Control: no-cache, private");
-                    header("Expires: ".date("r", now("+60 minutes")));
+                    header("Cache-Control: no-cache, private, max-age=3600");
                 }
             }
         }
