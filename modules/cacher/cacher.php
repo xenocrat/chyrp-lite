@@ -155,7 +155,7 @@
                 );
             }
 
-            return (bool) $count;
+            return ($count) ? false : true ;
         }
 
         private function generate_etag(
