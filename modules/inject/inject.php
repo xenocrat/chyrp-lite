@@ -301,6 +301,12 @@
         public function admin_edit_injector(
             $admin
         ): void {
+            if (!Visitor::current()->group->can("change_settings"))
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to change settings.")
+                );
+
             if (empty($_GET['id']) or !str_starts_with($_GET['id'], "ij"))
                 error(
                     __("No ID Specified"),
@@ -330,6 +336,12 @@
         public function admin_update_injector(
             $admin
         ): never {
+            if (!Visitor::current()->group->can("change_settings"))
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to change settings.")
+                );
+
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
@@ -384,6 +396,12 @@
         public function admin_delete_injector(
             $admin
         ): void {
+            if (!Visitor::current()->group->can("change_settings"))
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to change settings.")
+                );
+
             if (empty($_GET['id']) or !str_starts_with($_GET['id'], "ij"))
                 error(
                     __("No ID Specified"),
@@ -410,6 +428,12 @@
 
         public function admin_destroy_injector(
         ): never {
+            if (!Visitor::current()->group->can("change_settings"))
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to change settings.")
+                );
+
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
