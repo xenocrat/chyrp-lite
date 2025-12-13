@@ -65,6 +65,7 @@
     if (!$thumb->creatable() or $thumb->upscaling()) {
         header_remove("Pragma");
         header_remove("Expires");
+        header_remove("Set-Cookie");
         header("Cache-Control: public, must-revalidate, stale-if-error, max-age=604800");
         redirect(uploaded($filename), code:301);
     }
@@ -76,7 +77,7 @@
         if ($lastmod >= filemtime($filepath)) {
             header_remove();
             header($_SERVER['SERVER_PROTOCOL']." 304 Not Modified");
-            header("Vary: Accept-Encoding, Save-Data");
+            header("Vary: Accept-Encoding, Cookie, Save-Data");
             header("Cache-Control: public, must-revalidate, stale-if-error, max-age=2592000");
             exit;
         }
@@ -85,8 +86,9 @@
     $safename = addslashes($thumb->name());
     header_remove("Pragma");
     header_remove("Expires");
+    header_remove("Set-Cookie");
     header("Last-Modified: ".date("r", filemtime($filepath)));
-    header("Vary: Accept-Encoding, Save-Data");
+    header("Vary: Accept-Encoding, Cookie, Save-Data");
     header("Cache-Control: public, must-revalidate, stale-if-error, max-age=2592000");
     header("Content-Disposition: inline; filename=\"".$safename."\"");
     $thumb->create();
