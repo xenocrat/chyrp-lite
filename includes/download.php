@@ -49,8 +49,8 @@
         if ($lastmod >= filemtime($filepath)) {
             header_remove();
             header($_SERVER['SERVER_PROTOCOL']." 304 Not Modified");
+            header("Vary: Accept-Encoding, Cookie");
             header("Cache-Control: no-cache, private, max-age=2592000");
-            header("Vary: Accept-Encoding, Cookie, Save-Data");
             exit;
         }
     }
@@ -61,7 +61,9 @@
     $safename = addslashes($filename);
     header_remove("Pragma");
     header_remove("Expires");
+    header_remove("Set-Cookie");
     header("Last-Modified: ".date("r", filemtime($filepath)));
+    header("Vary: Accept-Encoding, Cookie");
     header("Cache-Control: no-cache, private, max-age=2592000");
     header("Content-Type: application/octet-stream");
     header("Content-Disposition: attachment; filename=\"".$safename."\"");
