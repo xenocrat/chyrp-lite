@@ -8,8 +8,8 @@ end
 Called from:
 	admin/index.php on line 19
 	ajax/index.php on line 19
-	includes/download.php on line 73
-	includes/thumbnail.php on line 95
+	includes/download.php on line 75
+	includes/thumbnail.php on line 97
 	index.php on line 15
 
 
