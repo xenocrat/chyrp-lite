@@ -103,7 +103,7 @@ msgid "New Injector"
 msgstr "Nuovo iniettore"
 
 #: modules/inject/admin/pages/manage_injectors.twig:16
-#: modules/inject/inject.php:455
+#: modules/inject/inject.php:479
 msgid "Injectors"
 msgstr "Iniettori"
 
@@ -165,7 +165,7 @@ msgstr "Pari"
 msgid "Always"
 msgstr "Sempre"
 
-#: modules/inject/inject.php:268 modules/inject/inject.php:349
+#: modules/inject/inject.php:268 modules/inject/inject.php:361
 msgid "Label cannot be blank."
 msgstr "L'etichetta non può essere vuota."
 
@@ -173,27 +173,27 @@ msgstr "L'etichetta non può essere vuota."
 msgid "Injector added."
 msgstr "Iniettore aggiunto."
 
-#: modules/inject/inject.php:307
+#: modules/inject/inject.php:313
 msgid "An ID is required to edit an injector."
 msgstr "Per modificare un iniettore è necessario un ID."
 
-#: modules/inject/inject.php:316 modules/inject/inject.php:358
-#: modules/inject/inject.php:399 modules/inject/inject.php:434
+#: modules/inject/inject.php:322 modules/inject/inject.php:370
+#: modules/inject/inject.php:417 modules/inject/inject.php:458
 msgid "Injector not found."
 msgstr "Iniettore non trovato."
 
-#: modules/inject/inject.php:342
+#: modules/inject/inject.php:354
 msgid "An ID is required to update an injector."
 msgstr "Per aggiornare un iniettore è necessario un ID."
 
-#: modules/inject/inject.php:379
+#: modules/inject/inject.php:391
 msgid "Injector updated."
 msgstr "Iniettore aggiornato."
 
-#: modules/inject/inject.php:390 modules/inject/inject.php:422
+#: modules/inject/inject.php:408 modules/inject/inject.php:446
 msgid "An ID is required to delete an injector."
 msgstr "Per eliminare un iniettore è necessario un ID."
 
-#: modules/inject/inject.php:445
+#: modules/inject/inject.php:469
 msgid "Injector deleted."
 msgstr "Iniettore eliminato."

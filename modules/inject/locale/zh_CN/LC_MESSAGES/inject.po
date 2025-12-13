@@ -99,7 +99,7 @@ msgid "New Injector"
 msgstr "新注射器"
 
 #: modules/inject/admin/pages/manage_injectors.twig:16
-#: modules/inject/inject.php:455
+#: modules/inject/inject.php:479
 msgid "Injectors"
 msgstr "注射器"
 
@@ -161,7 +161,7 @@ msgstr "甚至"
 msgid "Always"
 msgstr "总是"
 
-#: modules/inject/inject.php:268 modules/inject/inject.php:349
+#: modules/inject/inject.php:268 modules/inject/inject.php:361
 msgid "Label cannot be blank."
 msgstr "标签不能为空。"
 
@@ -169,27 +169,27 @@ msgstr "标签不能为空。"
 msgid "Injector added."
 msgstr "添加了注射器。"
 
-#: modules/inject/inject.php:307
+#: modules/inject/inject.php:313
 msgid "An ID is required to edit an injector."
 msgstr "编辑注射器需要 ID。"
 
-#: modules/inject/inject.php:316 modules/inject/inject.php:358
-#: modules/inject/inject.php:399 modules/inject/inject.php:434
+#: modules/inject/inject.php:322 modules/inject/inject.php:370
+#: modules/inject/inject.php:417 modules/inject/inject.php:458
 msgid "Injector not found."
 msgstr "未找到注射器。"
 
-#: modules/inject/inject.php:342
+#: modules/inject/inject.php:354
 msgid "An ID is required to update an injector."
 msgstr "更新注射器需要 ID。"
 
-#: modules/inject/inject.php:379
+#: modules/inject/inject.php:391
 msgid "Injector updated."
 msgstr "注射器已更新。"
 
-#: modules/inject/inject.php:390 modules/inject/inject.php:422
+#: modules/inject/inject.php:408 modules/inject/inject.php:446
 msgid "An ID is required to delete an injector."
 msgstr "删除注射器需要 ID。"
 
-#: modules/inject/inject.php:445
+#: modules/inject/inject.php:469
 msgid "Injector deleted."
 msgstr "注射器已删除。"
