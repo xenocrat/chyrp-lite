@@ -12,13 +12,17 @@
 {% endif %}
 {% if pages is not empty %}
 <details{% if posts.paginated is empty %} open{% endif %}>
-<summary>{{ "Pages containing the search term" | translate }}</summary>
+<summary>{{ "Pages containing the search term&hellip;" | translate }}</summary>
 {% for page in pages %}
 <article class="fragment">
-<h2 class="page_title">
+<header>
+<h2>
 <a href="{{ page.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(page.title | striptags | normalize | fix(true)) }}">{{ page.title }}</a>
 </h2>
+</header>
+<section>
 {{ page.body | striptags | truncate(200) }}
+</section>
 </article>
 {% endfor %}
 </details>
