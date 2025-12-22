@@ -257,13 +257,6 @@ li::marker {
 details {
     margin: 1rem 0rem;
 }
-summary {
-    margin: 0rem;
-    padding: 0.3rem 0.7rem;
-    background-color: var(--virgula-light-grey);
-    cursor: pointer;
-    list-style: none;
-}
 details > summary {
     margin: 0rem;
     padding: 0.3rem 0.7rem;
