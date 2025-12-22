@@ -2466,7 +2466,6 @@
         $errormsg = curl_error($curl);
         $type = $post ? "POST" : "GET" ;
         $result = oneof($errormsg, "OK");
-        curl_close($curl);
 
         if (DEBUG)
             error_log($type." ".$url." (".$result.")");
