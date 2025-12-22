@@ -1,0 +1,17 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block content %}
+<h2>{{ "Log in" | translate }}</h2>
+<form action="{{ url('login') }}" method="post" accept-charset="UTF-8">
+<label for="login">{{ "Username" | translate }}</label>
+<input type="text" name="login" value="{{ posted('login') | fix(true, true) }}" id="login" autofocus>
+<label for="password">{{ "Password" | translate }}</label>
+<input type="password" name="password" value="" id="password">
+<input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
+{{ trigger.call("user_login") }}
+<div class="doaction">
+<button name="submit" type="submit" id="submit">{{ "Log in" | translate }}</button>
+<a href="{{ url('lost_password') }}">{{ "Help!" | translate }}</a>
+</div>
+</form>
+{% endblock %}

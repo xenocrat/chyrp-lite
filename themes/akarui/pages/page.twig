@@ -1,0 +1,31 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block content %}
+<article id="page_{{ page.id }}" class="page">
+<header>
+<span class="permalink">
+<a href="{{ page.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(page.title | striptags | normalize | fix(true)) }}">&dagger;</a>
+</span>
+<span class="time">
+{% if page.updated %}
+{{ "Updated on %s." | translate | format(page.updated_at | time) }}
+{% else %}
+{{ "Created on %s." | translate | format(page.created_at | time) }}
+{% endif %}
+</span>
+</header>
+<h2>
+<a href="{{ page.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(page.title | striptags | normalize | fix(true)) }}">{{ page.title }}</a>
+</h2>
+<section>
+{{ page.body }}
+</section>
+<footer>
+{% if page.editable() or page.deletable() %}
+<div class="doaction admin">
+{{ page.edit_link() }} {{ page.delete_link() }}
+</div>
+{% endif %}
+</footer>
+</article>
+{% endblock %}

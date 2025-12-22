@@ -1,0 +1,10 @@
+{% extends "content" ~ DIR ~ "post.twig" %}
+
+{% block content %}
+<h2 class="post_title">
+<a href="{{ post.source | fix(true) }}" rel="external">{{ post.name }}</a>
+</h2>
+<section class="description" aria-label="{{ 'Text Content' | translate }}">
+{{ post.description }}
+</section>
+{% endblock %}

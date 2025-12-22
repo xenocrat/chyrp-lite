@@ -1,0 +1,50 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block content %}
+{% set pages = theme.pages_list() %}
+{% if posts.paginated is empty and pages is empty %}
+<div role="status">{{ "Nothing here yet!" | translate }}</div>
+{% else %}
+{% if posts.paginated is not empty %}
+<h2>{{ "Posts" | translate }}</h2>
+<ul>
+{% for post in posts.paginated %}
+<li>
+<a href="{{ post.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(post.title() | striptags | fix(true)) }}">
+{{ post.title() }}
+</a>
+</li>
+{% endfor %}
+</ul>
+{% endif %}
+{% if pages is not empty %}
+<h2>{{ "Pages" | translate }}</h2>
+<ul>
+{% for page in pages %}
+{% set prev_page_depth = loop.first ? 1 : pages[loop.index0 - 1].depth %}
+{% set this_page_depth = page.depth %}
+{% set next_page_depth = loop.last ? 1 : pages[loop.index0 + 1].depth %}
+{% if this_page_depth > prev_page_depth %}
+{{ "<ul><li>" | repeat(this_page_depth - prev_page_depth) }}
+{% else %}
+<li>
+{% endif %}
+<a href="{{ page.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(page.title | striptags | normalize | fix(true)) }}">{{ page.title }}</a>
+{% if this_page_depth >= next_page_depth %}
+{{ "</li></ul>" | repeat(this_page_depth - next_page_depth) -}}
+</li>
+{% endif %}
+{% endfor %}
+</ul>
+{% endif %}
+{% if posts.next_page() %}
+<nav class="traversal">
+<ul class="navigation">
+<li>
+<a href="{{ url('archive') }}" rel="archives">{{ "More posts&hellip;" | translate }}</a>
+</li>
+</ul>
+</nav>
+{% endif %}
+{% endif %}
+{% endblock %}

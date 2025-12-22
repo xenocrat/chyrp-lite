@@ -1,0 +1,27 @@
+{% extends "content" ~ DIR ~ "post.twig" %}
+
+{% block content %}
+{% if post.title is not empty %}
+<h2 class="post_title">
+<a href="{{ post.url() }}" rel="bookmark" title="{{ 'Permanent link to &#8220;%s&#8221;' | translate | format(post.title | striptags | normalize | fix(true)) }}">{{ post.title }}</a>
+</h2>
+{% endif %}
+{% if post.caption is not empty %}
+<section class="caption" aria-label="{{ 'Text Content' | translate }}">
+{{ post.caption }}
+</section>
+{% endif %}
+{% for file in post.files %}
+{% if ["jpg", "jpeg", "png", "gif", "webp", "avif"] | contains(file.type) %}
+<section class="photo" aria-label="{{ 'File Attachment' | translate }}">
+{{ file.name | thumbnail(file.name, post.source, [], "(min-width: 764px) 728px, 95vw") }}
+</section>
+{% else %}
+<section class="attachment" aria-label="{{ 'File Attachment' | translate }}">
+<h3>{{ "File attachment:" | translate }}</h3>
+<a href="{{ file.name | download }}">{{ file.name | fix | truncate(40) }}</a>
+({{ file.size | filesizeformat }})
+</section>
+{% endif %}
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block content %}
+{% include(["feathers" ~ DIR ~ post.feather ~ ".twig", "feathers" ~ DIR ~ "missing.twig"]) %}
+{% if module_enabled("pingable") and post.pingback_count > 0 %}
+<article class="discourse">
+<header>
+<h3 id="pingbacks">{{ "Webmentions" | translate }}</h3>
+</header>
+<ol>
+{% for pingback in post.pingbacks %}
+<li><a id="pingback_{{ pingback.id }}" href="{{ pingback.source | fix(true, true) }}">{{ pingback.title | oneof("[Untitled]" | translate) }}</a></li>
+{% endfor %}
+</ol>
+</article>
+{% endif %}
+{% if module_enabled("comments") and (post.comment_count > 0 or post.commentable) %}
+<article class="commentary">
+<header>
+<h3 id="comments">{{ "Comments" | translate }}</h3>
+</header>
+<ol class="comments" data-post_id="{{ post.id }}" data-timestamp="{{ post.latest_comment }}">
+{% for comment in post.comments %}
+{% include "content" ~ DIR ~ "comment.twig" %}
+{% endfor %}
+<li id="comment_shim"></li>{# Needed for AJAX commenting. #}
+</ol>
+{% if post.commentable %}
+{% include "forms" ~ DIR ~ "comment" ~ DIR ~ "new.twig" %}
+{% endif %}
+</article>
+{% endif %}
+{% endblock %}

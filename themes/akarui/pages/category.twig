@@ -1,0 +1,25 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block content %}
+<div class="filter">{{ "Posts in category &#8220;%s&#8221;" | translate | format(category | fix) }}</div>
+{% for post in posts.paginated %}
+{% include(["feathers" ~ DIR ~ post.feather ~ ".twig", "feathers" ~ DIR ~ "missing.twig"]) %}
+{% endfor %}
+{% if posts.prev_page() or posts.next_page() %}
+<!-- Navigation -->
+<nav class="traversal">
+<ul class="navigation">
+{% if posts.prev_page() %}
+<li>
+{{ posts.prev_link("Newer posts" | translate) }}
+</li>
+{% endif %}
+{% if posts.next_page() %}
+<li>
+{{ posts.next_link("Older posts" | translate) }}
+</li>
+{% endif %}
+</ul>
+</nav>
+{% endif %}
+{% endblock %}

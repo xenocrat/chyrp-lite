@@ -1,0 +1,15 @@
+<li id="comment_{{ comment.id }}">
+<section class="comment" dir="auto">
+<h4>{{ comment.author_link }}</h4>
+{% if comment.status == "denied" %}
+<em>{{ "This comment is awaiting moderation." | translate }}</em>
+{% else %}
+{{ comment.body }}
+{% endif %}
+</section>
+{% if comment.editable() or comment.deletable() %}
+<div class="doaction">
+{{ comment.edit_link() }} {{ comment.delete_link() }}
+</div>
+{% endif %}
+</li>

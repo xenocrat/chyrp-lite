@@ -1,0 +1,38 @@
+<form id="comment_edit_{{ comment.id }}" class="comment_edit" action="{{ comment.post.url() }}" method="post" accept-charset="UTF-8">
+<label for="comment_body_{{ comment.id }}">{{ "Comment" | translate }}</label>
+<textarea name="body" id="comment_body_{{ comment.id }}">{{ comment.body | fix(false, true) }}</textarea>
+<div id="more_options_{{ comment.id }}" class="more_options">
+<label for="comment_author_{{ comment.id }}">{{ "Author" | translate }}</label>
+<input class="text" type="text" name="author" value="{{ comment.author | fix(true, true) }}" id="comment_author_{{ comment.id }}" maxlength="250">
+{% if comment.status != "pingback" %}
+<label for="comment_author_url_{{ comment.id }}">{{ "Author's website" | translate }}</label>
+<input class="text" type="url" name="author_url" value="{{ comment.author_url | fix(true, true) }}" id="comment_author_url_{{ comment.id }}" maxlength="2048">
+<label for="comment_author_email_{{ comment.id }}">{{ "Author's email" | translate }}</label>
+<input class="text" type="email" name="author_email" value="{{ comment.author_email | fix(true, true) }}" id="comment_author_email_{{ comment.id }}" maxlength="128">
+{% endif %}
+{% if visitor.group.can("edit_comment") %}
+{# User can edit all comments, not just their own. #}
+<label for="comment_created_at_{{ comment.id }}">{{ "Timestamp" | translate }}</label>
+<input class="text" type="text" name="created_at" value="{{ comment.created_at | dateformat('Y-m-d H:i:s') | fix(true, true) }}" id="comment_created_at_{{ comment.id }}">
+{% if comment.status != "pingback" %}
+<label for="comment_status_{{ comment.id }}">{{ "Status" | translate }}</label>
+<select name="status" id="comment_status_{{ comment.id }}">
+<option value="approved"{{ comment.status | selected("approved") }}>{{ "Approved" | translate }}</option>
+<option value="denied"{{ comment.status | selected("denied") }}>{{ "Denied" | translate }}</option>
+<option value="spam"{{ comment.status | selected("spam") }}>{{ "Spam" | translate }}</option>
+</select>
+{% endif %}
+{% endif %}
+{% if comment.status != "pingback" and site.email_correspondence %}
+<label for="comment_notify_{{ comment.id }}">{{ "Email Notifications" | translate }}</label>
+<input type="checkbox" name="notify" id="comment_notify_{{ comment.id }}"{{ comment.notify | checked }}>
+{% endif %}
+</div>
+<input type="hidden" name="id" value="{{ comment.id }}">
+<input type="hidden" name="hash" value="{{ authenticate() }}">
+<input type="hidden" name="action" value="update_comment">
+<div class="doaction speak">
+<button type="submit">{{ "Save" | translate }}</button>
+<a href="#" id="comment_cancel_edit_{{ comment.id }}" class="cancel">{{ "Cancel" | translate }}</a>
+</div>
+</form>

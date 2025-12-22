@@ -1,0 +1,5 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block content %}
+<div role="status">{{ reason is defined ? reason | fix : "Not found." | translate }}</div>
+{% endblock %}
