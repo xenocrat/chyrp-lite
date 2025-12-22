@@ -442,7 +442,7 @@ input::placeholder {
 }
 input:invalid {
     border-color: var(--akarui-strong);
-    box-shadow: none;
+    box-shadow: inset 0px -4px 0px var(--akarui-strong);
 }
 textarea {
     box-sizing: border-box;
@@ -524,19 +524,7 @@ div[role="status"] {
     font-weight: bold;
     padding: 0.3rem 1rem;
     margin: 1rem 0rem;
-    background-color: var(--virgula-light-grey);
-    border: 1px solid var(--virgula-border-grey);
-    border-radius: 0.1rem;
-}
-div.notice {
-    color: var(--virgula-strong-green);
-    border-color: var(--virgula-strong-green);
-    background-color: var(--virgula-light-green);
-}
-div.warning {
-    color: var(--virgula-strong-red);
-    border-color: var(--virgula-strong-red);
-    background-color: var(--virgula-light-red);
+    background-color: var(--akarui-medium);
 }
 div.doaction a,
 button,
