@@ -87,7 +87,7 @@ body {
     line-height: 1.5;
     tab-size: 4;
     max-width: 80ch;
-    margin: 1rem auto 2rem auto;
+    margin: 1rem auto;
     padding: 0rem 1rem;
     background-color: var(--akarui-light);
 }
@@ -462,9 +462,13 @@ button {
     font: inherit;
     cursor: pointer;
 }
-nav, main, section, footer,
+nav, section, footer,
 form, details, p {
     margin: 1rem 0rem;
+}
+main,
+nav.traversal {
+    margin: 2rem 0rem;
 }
 article {
     margin: 2rem 0rem;
@@ -518,13 +522,12 @@ div.filter {
 }
 div[role="alert"],
 div[role="status"] {
-    width: 100%;
-    position: relative;
-    left: -1rem;
+    box-sizing: border-box;
     font-weight: bold;
     padding: 0.3rem 1rem;
     margin: 1rem 0rem;
     background-color: var(--akarui-medium);
+    border-bottom: 6px solid var(--akarui-strong);
 }
 div.doaction a,
 button,
@@ -532,7 +535,7 @@ ul.navigation > li a {
     display: inline-block;
     white-space: nowrap;
     text-decoration: none;
-    padding: 0.3rem 1rem;
+    padding: 0.3rem calc(1rem + 2px);
     border: 2px solid var(--akarui-strong);
     color: var(--akarui-black);
     background-color: var(--akarui-medium);
