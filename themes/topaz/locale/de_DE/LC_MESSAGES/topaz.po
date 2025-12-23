@@ -35,7 +35,7 @@ msgstr "Tags"
 #: themes/topaz/feathers/photo.twig:7 themes/topaz/feathers/quote.twig:7
 #: themes/topaz/feathers/text.twig:7 themes/topaz/feathers/uploader.twig:7
 #: themes/topaz/feathers/video.twig:7 themes/topaz/pages/archive.twig:29
-#: themes/topaz/pages/page.twig:7 themes/topaz/pages/search.twig:19
+#: themes/topaz/pages/page.twig:7 themes/topaz/pages/search.twig:20
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "Permanentlink zu &#8220;%s&#8221;"
@@ -428,8 +428,8 @@ msgid "Your search did not return any results."
 msgstr "Deine Suche erzielte keine Ergebnisse."
 
 #: themes/topaz/pages/search.twig:15
-msgid "Pages containing the search term"
-msgstr "Seiten, die den Suchbegriff enthalten"
+msgid "Pages containing the search term&hellip;"
+msgstr "Seiten, die den Suchbegriff enthalten &hellip;"
 
 #: themes/topaz/pages/tag.twig:5
 #, php-format

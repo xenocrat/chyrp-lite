@@ -422,8 +422,8 @@ msgid "Your search did not return any results."
 msgstr "空空如也"
 
 #: themes/blossom/pages/search.twig:15
-msgid "Pages containing the search term"
-msgstr "包含搜索词的网页"
+msgid "Pages containing the search term&hellip;"
+msgstr "包含搜索词的网页&ctdot;&ctdot;"
 
 #: themes/blossom/pages/tag.twig:5
 #, php-format

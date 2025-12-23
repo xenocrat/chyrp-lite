@@ -27,7 +27,7 @@ msgstr ""
 #: themes/topaz/feathers/video.twig:7
 #: themes/topaz/pages/archive.twig:29
 #: themes/topaz/pages/page.twig:7
-#: themes/topaz/pages/search.twig:19
+#: themes/topaz/pages/search.twig:20
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr ""
@@ -437,7 +437,7 @@ msgid "Your search did not return any results."
 msgstr ""
 
 #: themes/topaz/pages/search.twig:15
-msgid "Pages containing the search term"
+msgid "Pages containing the search term&hellip;"
 msgstr ""
 
 #: themes/topaz/pages/tag.twig:5

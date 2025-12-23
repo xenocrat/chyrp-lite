@@ -426,8 +426,8 @@ msgid "Your search did not return any results."
 msgstr "Deine Suche erzielte keine Ergebnisse."
 
 #: themes/blossom/pages/search.twig:15
-msgid "Pages containing the search term"
-msgstr "Seiten, die den Suchbegriff enthalten"
+msgid "Pages containing the search term&hellip;"
+msgstr "Seiten, die den Suchbegriff enthalten &hellip;"
 
 #: themes/blossom/pages/tag.twig:5
 #, php-format

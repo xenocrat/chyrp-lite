@@ -368,7 +368,7 @@ Called from:
 webmention
 ----------
 Called from:
-	includes/helpers.php on line 2601
+	includes/helpers.php on line 2600
 
 Arguments:
 	$post
@@ -379,7 +379,7 @@ Arguments:
 before_delete_upload
 --------------------
 Called from:
-	includes/helpers.php on line 3413
+	includes/helpers.php on line 3412
 
 Arguments:
 	$filename
@@ -388,7 +388,7 @@ Arguments:
 delete_upload
 -------------
 Called from:
-	includes/helpers.php on line 3416
+	includes/helpers.php on line 3415
 
 Arguments:
 	$filename
@@ -397,19 +397,19 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 3666
+	includes/helpers.php on line 3665
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 3685
+	includes/helpers.php on line 3684
 
 
 correspond_activate_account
 ---------------------------
 Called from:
-	includes/helpers.php on line 4048
+	includes/helpers.php on line 4047
 
 Arguments:
 	$user
@@ -419,7 +419,7 @@ Arguments:
 correspond_reset_password
 -------------------------
 Called from:
-	includes/helpers.php on line 4090
+	includes/helpers.php on line 4089
 
 Arguments:
 	$user
@@ -429,7 +429,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 4137
+	includes/helpers.php on line 4136
 
 Arguments:
 	$ob
@@ -812,6 +812,7 @@ Arguments:
 user_controls
 -------------
 Called from:
+	themes/akarui/forms/user/controls.twig on line 17
 	themes/blossom/forms/user/controls.twig on line 18
 	themes/sparrow/forms/user/controls.twig on line 18
 	themes/topaz/forms/user/controls.twig on line 18
@@ -822,6 +823,7 @@ Called from:
 user_login
 ----------
 Called from:
+	themes/akarui/forms/user/login.twig on line 11
 	themes/blossom/forms/user/login.twig on line 12
 	themes/sparrow/forms/user/login.twig on line 12
 	themes/topaz/forms/user/login.twig on line 12
@@ -832,6 +834,7 @@ Called from:
 user_register
 -------------
 Called from:
+	themes/akarui/forms/user/register.twig on line 16
 	themes/blossom/forms/user/register.twig on line 17
 	themes/sparrow/forms/user/register.twig on line 17
 	themes/topaz/forms/user/register.twig on line 17
@@ -842,6 +845,7 @@ Called from:
 end_head
 --------
 Called from:
+	themes/akarui/layouts/default.twig on line 25
 	themes/blossom/layouts/default.twig on line 25
 	themes/sparrow/layouts/default.twig on line 25
 	themes/topaz/layouts/default.twig on line 25
@@ -852,6 +856,7 @@ Called from:
 end_main
 --------
 Called from:
+	themes/akarui/layouts/default.twig on line 94
 	themes/blossom/layouts/default.twig on line 52
 	themes/sparrow/layouts/default.twig on line 110
 	themes/topaz/layouts/default.twig on line 48
@@ -862,6 +867,7 @@ Called from:
 end_content
 -----------
 Called from:
+	themes/akarui/layouts/default.twig on line 96
 	themes/blossom/layouts/default.twig on line 58
 	themes/sparrow/layouts/default.twig on line 118
 	themes/topaz/layouts/default.twig on line 57
@@ -1155,7 +1161,7 @@ Arguments:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 4026
+	includes/helpers.php on line 4025
 
 Target:
 	$function
@@ -1164,7 +1170,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 4138
+	includes/helpers.php on line 4137
 	includes/lib/Leaf.php on line 353
 
 Target:

@@ -89,17 +89,17 @@ msgstr "Route gestart met een ongeldige controller."
 #: includes/controller/Ajax.php:38 includes/controller/Ajax.php:173
 #: includes/controller/Ajax.php:237 includes/controller/Ajax.php:282
 #: includes/controller/Main.php:1276 includes/download.php:14
-#: includes/error.php:205 includes/helpers.php:2537 includes/helpers.php:2544
-#: includes/helpers.php:2551 includes/helpers.php:2566
-#: includes/helpers.php:2575 includes/helpers.php:2589
-#: includes/helpers.php:2596 includes/helpers.php:3024
-#: includes/helpers.php:3037 includes/helpers.php:3043
-#: includes/helpers.php:3049 includes/helpers.php:3090
-#: includes/helpers.php:3096 includes/helpers.php:3102
-#: includes/helpers.php:3266 includes/helpers.php:3272
-#: includes/helpers.php:3278 includes/helpers.php:3284
-#: includes/helpers.php:3289 includes/helpers.php:3294
-#: includes/helpers.php:3299 includes/helpers.php:3306
+#: includes/error.php:205 includes/helpers.php:2536 includes/helpers.php:2543
+#: includes/helpers.php:2550 includes/helpers.php:2565
+#: includes/helpers.php:2574 includes/helpers.php:2588
+#: includes/helpers.php:2595 includes/helpers.php:3023
+#: includes/helpers.php:3036 includes/helpers.php:3042
+#: includes/helpers.php:3048 includes/helpers.php:3089
+#: includes/helpers.php:3095 includes/helpers.php:3101
+#: includes/helpers.php:3265 includes/helpers.php:3271
+#: includes/helpers.php:3277 includes/helpers.php:3283
+#: includes/helpers.php:3288 includes/helpers.php:3293
+#: includes/helpers.php:3298 includes/helpers.php:3305
 #: includes/lib/ThumbnailFile.php:323 includes/lib/ThumbnailFile.php:354
 #: includes/lib/ThumbnailFile.php:408 includes/lib/ThumbnailFile.php:469
 #: includes/thumbnail.php:15 install.php:1111 upgrade.php:168 upgrade.php:185
@@ -159,7 +159,7 @@ msgstr "Ongeldige actie."
 #: includes/controller/Ajax.php:270 includes/controller/Ajax.php:276
 #: includes/controller/Ajax.php:356 includes/controller/Ajax.php:362
 #: includes/controller/Main.php:593 includes/controller/Main.php:678
-#: includes/download.php:21 includes/helpers.php:3031 includes/thumbnail.php:22
+#: includes/download.php:21 includes/helpers.php:3030 includes/thumbnail.php:22
 msgid "Access Denied"
 msgstr "Toegang geweigerd"
 
@@ -595,12 +595,12 @@ msgstr "Bestand niet gevonden."
 msgid "You did not select anything to upload."
 msgstr "Je hebt niets geselecteerd om te uploaden."
 
-#: includes/controller/Admin.php:2078 includes/helpers.php:3032
+#: includes/controller/Admin.php:2078 includes/helpers.php:3031
 msgid "Only uploaded files are accepted."
 msgstr "Alleen geuploade bestanden worden geaccepteerd."
 
-#: includes/controller/Admin.php:2084 includes/helpers.php:3050
-#: includes/helpers.php:3103 includes/helpers.php:3290
+#: includes/controller/Admin.php:2084 includes/helpers.php:3049
+#: includes/helpers.php:3102 includes/helpers.php:3289
 msgid "Failed to write file to disk."
 msgstr "Bestand naar schijf wegschrijven niet gelukt."
 
@@ -1044,7 +1044,7 @@ msgstr "De linkgeldigheid is verlopen. Probeer opnieuw."
 msgid "Reset password"
 msgstr "Wijzig wachtwoord"
 
-#: includes/controller/Main.php:1277 includes/helpers.php:2538
+#: includes/controller/Main.php:1277 includes/helpers.php:2537
 msgid "Webmention support is disabled for this site."
 msgstr "Webmention ondersteuning is uitgeschakeld voor deze website."
 
@@ -1081,76 +1081,76 @@ msgstr "Je hebt geen toestemming om deze bron te benaderen."
 msgid "The requested resource was not found."
 msgstr "De opgevraagde bron is niet gevonden."
 
-#: includes/helpers.php:2545
+#: includes/helpers.php:2544
 msgid "The URL for your page is not valid."
 msgstr "De URL voor je webpagina is ongeldig."
 
-#: includes/helpers.php:2552
+#: includes/helpers.php:2551
 msgid "The URL for our page is not valid."
 msgstr "De URL voor onze webpagina is ongeldig."
 
-#: includes/helpers.php:2567
+#: includes/helpers.php:2566
 msgid "The source and target URLs cannot be the same."
 msgstr "De bron- en doel- URLs kunnen niet gelijk zijn."
 
-#: includes/helpers.php:2576
+#: includes/helpers.php:2575
 msgid "We have not published at that URL."
 msgstr "We hebben niets onder deze URL gepubliceerd."
 
-#: includes/helpers.php:2590
+#: includes/helpers.php:2589
 msgid "You have not published at that URL."
 msgstr "Je hebt niets onder deze URL gepubliceerd."
 
-#: includes/helpers.php:2597
+#: includes/helpers.php:2596
 msgid "Your page does not link to our page."
 msgstr "Jouw pagina linkt niet naar onze pagina."
 
-#: includes/helpers.php:2800
+#: includes/helpers.php:2799
 msgid "Please create the uploads directory."
 msgstr "Maak alsjeblieft de uploadmap aan."
 
-#: includes/helpers.php:2802
+#: includes/helpers.php:2801
 msgid "Please make the uploads directory writable."
 msgstr "Maak alsjeblieft de uploadmap schrijfbaar."
 
-#: includes/helpers.php:2824
+#: includes/helpers.php:2823
 #, php-format
 msgid "%s module is missing."
 msgstr "%s module ontbreekt."
 
-#: includes/helpers.php:2837
+#: includes/helpers.php:2836
 #, php-format
 msgid "%s module is damaged."
 msgstr "%s module is beschadigd."
 
-#: includes/helpers.php:2855
+#: includes/helpers.php:2854
 #, php-format
 msgid "%s feather is missing."
 msgstr "%s feather ontbreekt."
 
-#: includes/helpers.php:2868
+#: includes/helpers.php:2867
 #, php-format
 msgid "%s feather is damaged."
 msgstr "%s feather is beschadigd."
 
-#: includes/helpers.php:2945 includes/helpers.php:2971
+#: includes/helpers.php:2944 includes/helpers.php:2970
 #, php-format
 msgid "Execution of %s has been cancelled."
 msgstr "Start van %s is geannuleerd."
 
-#: includes/helpers.php:3025
+#: includes/helpers.php:3024
 msgid "Uploaded file is of an unsupported type."
 msgstr "Geupload bestand is een ongeldig type."
 
-#: includes/helpers.php:3038 includes/helpers.php:3091
+#: includes/helpers.php:3037 includes/helpers.php:3090
 msgid "Upload path does not exist."
 msgstr "Upload bestandspad bestaat niet."
 
-#: includes/helpers.php:3044 includes/helpers.php:3097
+#: includes/helpers.php:3043 includes/helpers.php:3096
 msgid "Upload path is not writable."
 msgstr "Upload bestandspad is niet schrijfbaar."
 
-#: includes/helpers.php:3267
+#: includes/helpers.php:3266
 msgid ""
 "The uploaded file exceeds the <code>upload_max_filesize</code> directive in "
 "php.ini."
@@ -1158,7 +1158,7 @@ msgstr ""
 "Het geuploade bestand overschrijdt <code>upload_max_filesize</code> grootte "
 "in php.ini."
 
-#: includes/helpers.php:3273
+#: includes/helpers.php:3272
 msgid ""
 "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the "
 "HTML form."
@@ -1166,24 +1166,24 @@ msgstr ""
 "Het geuploade bestand overschrijdt de <code>MAX_FILE_SIZE</code> grootte in "
 "het HTML-formulier."
 
-#: includes/helpers.php:3279
+#: includes/helpers.php:3278
 msgid "The uploaded file was only partially uploaded."
 msgstr "Het bestand is slechts gedeeltelijk geupload."
 
-#: includes/helpers.php:3285
+#: includes/helpers.php:3284
 msgid "Missing a temporary folder."
 msgstr "Er ontbreekt een tijdelijke map."
 
-#: includes/helpers.php:3295
+#: includes/helpers.php:3294
 msgid "File upload was stopped by a PHP extension."
 msgstr "Bestandsupload is afgebroken door een PHP-extensie."
 
-#: includes/helpers.php:3300
+#: includes/helpers.php:3299
 #, php-format
 msgid "File upload failed with error %d."
 msgstr "Bestandsupload mislukt met fout %d."
 
-#: includes/helpers.php:3307
+#: includes/helpers.php:3306
 #, php-format
 msgid ""
 "The uploaded file exceeds the maximum size of %d Megabytes allowed by this "
@@ -1192,49 +1192,49 @@ msgstr ""
 "Het geuploade bestand overschrijdt de maximale grootte van %d Megabytes dat "
 "door deze website is toegestaan."
 
-#: includes/helpers.php:3828
+#: includes/helpers.php:3827
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr "JSON codeer-fout: %s"
 
-#: includes/helpers.php:3858
+#: includes/helpers.php:3857
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr "JSON decodeer-fout: %s"
 
-#: includes/helpers.php:3946
+#: includes/helpers.php:3945
 msgid "Failed to create Zip archive."
 msgstr "Zip-archief maken mislukt."
 
-#: includes/helpers.php:4056
+#: includes/helpers.php:4055
 #, php-format
 msgid "Activate your account at %s"
 msgstr "Activeer je account bij %s"
 
-#: includes/helpers.php:4057 includes/helpers.php:4099
+#: includes/helpers.php:4056 includes/helpers.php:4098
 #, php-format
 msgid "Hello, %s."
 msgstr "Hallo, %s."
 
-#: includes/helpers.php:4060
+#: includes/helpers.php:4059
 msgid "You are receiving this message because you registered a new account."
 msgstr "Je ontvangt dit bericht, omdat je een nieuwe account hebt aangemaakt."
 
-#: includes/helpers.php:4063
+#: includes/helpers.php:4062
 msgid "Visit this link to activate your account:"
 msgstr "Bezoek deze link om je account te activeren:"
 
-#: includes/helpers.php:4098
+#: includes/helpers.php:4097
 #, php-format
 msgid "Reset your password at %s"
 msgstr "Wijzig je wachtwoord van %s"
 
-#: includes/helpers.php:4102
+#: includes/helpers.php:4101
 msgid "You are receiving this message because you requested a new password."
 msgstr ""
 "Je ontangt dit bericht, omdat je een nieuw wachtwoord hebt aangevraagd."
 
-#: includes/helpers.php:4105
+#: includes/helpers.php:4104
 msgid "Visit this link to reset your password:"
 msgstr "Bezoek deze link om je wachtwoord te wijzigen:"
 

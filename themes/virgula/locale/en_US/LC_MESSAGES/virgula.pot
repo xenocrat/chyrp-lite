@@ -397,7 +397,7 @@ msgid "Your search did not return any results."
 msgstr ""
 
 #: themes/virgula/pages/search.twig:11
-msgid "Pages containing the search term"
+msgid "Pages containing the search term&hellip;"
 msgstr ""
 
 #: themes/virgula/pages/tag.twig:4

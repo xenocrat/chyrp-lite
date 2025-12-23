@@ -384,8 +384,8 @@ msgid "Your search did not return any results."
 msgstr "Er zijn geen resultaten voor jouw zoekopdracht."
 
 #: themes/virgula/pages/search.twig:11
-msgid "Pages containing the search term"
-msgstr "Pagina's die de zoekterm bevatten"
+msgid "Pages containing the search term&hellip;"
+msgstr "Pagina's die de zoekterm bevatten&hellip;"
 
 #: themes/virgula/pages/tag.twig:4
 #, php-format

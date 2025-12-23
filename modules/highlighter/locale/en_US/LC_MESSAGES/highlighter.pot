@@ -26,8 +26,8 @@ msgstr ""
 msgid "Adds syntax highlighting to nested <code>&lt;pre&gt;&lt;code&gt;</code> blocks."
 msgstr ""
 
-#: modules/highlighter/javascript.php:73
-#: modules/highlighter/javascript.php:74
+#: modules/highlighter/javascript.php:78
+#: modules/highlighter/javascript.php:79
 msgid "Copy to clipboard"
 msgstr ""
 

@@ -385,8 +385,8 @@ msgid "Your search did not return any results."
 msgstr "空空如也"
 
 #: themes/virgula/pages/search.twig:11
-msgid "Pages containing the search term"
-msgstr "包含搜索词的网页"
+msgid "Pages containing the search term&hellip;"
+msgstr "包含搜索词的网页&ctdot;&ctdot;"
 
 #: themes/virgula/pages/tag.twig:4
 #, php-format

@@ -426,7 +426,7 @@ msgid "Your search did not return any results."
 msgstr ""
 
 #: themes/blossom/pages/search.twig:15
-msgid "Pages containing the search term"
+msgid "Pages containing the search term&hellip;"
 msgstr ""
 
 #: themes/blossom/pages/tag.twig:5

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/highlighter/admin/pages/highlighter_settings.twig:3
@@ -39,9 +39,9 @@ msgid ""
 "Adds syntax highlighting to nested <code>&lt;pre&gt;&lt;code&gt;</code> "
 "blocks."
 msgstr ""
-"Aggiunge la colorazione della sintassi concatenata <code>&lt;pre&gt;&lt;"
-"code&gt;</code> in blocchi."
+"Aggiunge la colorazione della sintassi concatenata "
+"<code>&lt;pre&gt;&lt;code&gt;</code> in blocchi."
 
-#: modules/highlighter/javascript.php:73 modules/highlighter/javascript.php:74
+#: modules/highlighter/javascript.php:78 modules/highlighter/javascript.php:79
 msgid "Copy to clipboard"
 msgstr "Copia negli appunti"
