@@ -20,13 +20,16 @@
         ): void {
             Config::current()->set(
                 "module_inject",
-                array("injectors" => array())
+                array("injectors" => array()),
+                true
             );
         }
 
         public static function __uninstall(
+            $confirm
         ): void {
-            Config::current()->remove("module_inject");
+            if ($confirm)
+                Config::current()->remove("module_inject");
         }
 
         public function __init(
