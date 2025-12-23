@@ -8,6 +8,9 @@ var ChyrpHighlighter = {
         pre: {
             "position": "relative"
         },
+        code: {
+            "min-height": "2lh"
+        },
         button: {
             "display": "block",
             "position": "absolute",
@@ -63,7 +66,9 @@ var ChyrpHighlighter = {
         block
     ) {
         if (ChyrpHighlighter.copyable) {
-            block.parent().css(
+            block.css(
+                ChyrpHighlighter.styles.code
+            ).parent().css(
                 ChyrpHighlighter.styles.pre
             ).append(
                 $(
