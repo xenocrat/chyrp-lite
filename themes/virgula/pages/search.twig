@@ -8,7 +8,7 @@
 {% endif %}
 {% if pages is not empty %}
 <details{% if posts.paginated is empty %} open{% endif %}>
-<summary>{{ "Pages containing the search term" | translate }}</summary>
+<summary>{{ "Pages containing the search term&hellip;" | translate }}</summary>
 {% for page in pages %}
 <article class="fragment">
 <header>
