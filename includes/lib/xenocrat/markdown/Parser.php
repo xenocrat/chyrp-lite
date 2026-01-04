@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright 2014 Carsten Brandt, 2024 Daniel Pimley
+ * @copyright Copyright 2014 Carsten Brandt, 2024-2026 Daniel Pimley
  * @license https://github.com/xenocrat/chyrp-markdown/blob/master/LICENSE
  * @link https://github.com/xenocrat/chyrp-markdown#readme
  */
@@ -19,7 +19,7 @@ use RuntimeException;
 abstract class Parser
 {
 	const VERSION_MAJOR = 4;
-	const VERSION_MINOR = 4;
+	const VERSION_MINOR = 5;
 	const VERSION_PATCH = 1;
 
 	/**

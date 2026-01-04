@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright 2023 Daniel Pimley
+ * @copyright Copyright 2023-2026 Daniel Pimley
  * @license https://github.com/xenocrat/chyrp-markdown/blob/master/LICENSE
  * @link https://github.com/xenocrat/chyrp-markdown#readme
  */
@@ -63,6 +63,7 @@ trait CiteTrait
 			. '</cite>';
 	}
 
+	abstract protected function renderText($block);
 	abstract protected function parseInline($text);
 	abstract protected function renderAbsy($blocks);
 }

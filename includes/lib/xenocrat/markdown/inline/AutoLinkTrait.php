@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright 2014 Carsten Brandt, 2024 Daniel Pimley
+ * @copyright Copyright 2014 Carsten Brandt, 2024-2026 Daniel Pimley
  * @license https://github.com/xenocrat/chyrp-markdown/blob/master/LICENSE
  * @link https://github.com/xenocrat/chyrp-markdown#readme
  */
@@ -63,5 +63,6 @@ REGEXP;
 		return "<a href=\"$href\">$text</a>";
 	}
 
+	abstract protected function renderText($block);
 	abstract protected function escapeHtmlEntities($text, $flags = 0);
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright 2024 Daniel Pimley
+ * @copyright Copyright 2024-2026 Daniel Pimley
  * @license https://github.com/xenocrat/chyrp-markdown/blob/master/LICENSE
  * @link https://github.com/xenocrat/chyrp-markdown#readme
  */
@@ -215,6 +215,7 @@ trait TocTrait
 		);
 	}
 
+	abstract public function getContextId();
 	abstract protected function renderAbsy($absy);
 	abstract protected function escapeHtmlEntities($text, $flags = 0);
 	abstract protected function unEscapeHtmlEntities($text, $flags = 0);

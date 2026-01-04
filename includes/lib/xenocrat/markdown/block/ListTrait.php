@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright 2014 Carsten Brandt, 2024 Daniel Pimley
+ * @copyright Copyright 2014 Carsten Brandt, 2024-2026 Daniel Pimley
  * @license https://github.com/xenocrat/chyrp-markdown/blob/master/LICENSE
  * @link https://github.com/xenocrat/chyrp-markdown#readme
  */
@@ -124,8 +124,9 @@ trait ListTrait
 				);
 				$block['items'][$item][] = $line;
 			} elseif ($line === '' || ltrim($line) === '') {
-				// No more lines: end of list.
+			// Line is blank.
 				if (!isset($lines[$i + 1])) {
+				// No more lines: end of list.
 					break;
 				}
 				$next = $this->expandTabs($lines[$i + 1], $pad);
@@ -138,21 +139,19 @@ trait ListTrait
 				// Next line is also blank.
 					$block['items'][$item][] = $line;
 				} elseif (strspn($next, ' ' . $pad) >= $mw) {
-				// Next line is indented enough to continue this item.
+				// Next line is indented: loose list.
 					$block['items'][$item][] = $line;
+					$block['loose'] = true;
 				} elseif (preg_match($pattern, $next)) {
-				// Next line is the next item in this list: loose list.
+				// Next line is a marker: loose list.
 					$block['items'][$item][] = $line;
 					$block['loose'] = true;
 				} else {
 				// next line is not list content.
 					break;
 				}
-			} elseif (
-				strlen($line) > $mw
-				&& strspn($line, ' ' . $pad) >= $mw
-			) {
-				// Line is indented enough to continue this item.
+			} elseif (strspn($line, ' ' . $pad) >= $mw) {
+			// Line continues the current item.
 				$line = preg_replace(
 					'/\x1D{1,4}/',
 					"\t",
@@ -160,11 +159,10 @@ trait ListTrait
 				);
 				$block['items'][$item][] = $line;
 			} else {
-				// Everything else ends the list.
+			// Everything else ends the list.
 				--$i;
 				break;
 			}
-
 			// If next line is <hr>, end the list.
 			if (
 				!empty($lines[$i + 1])
@@ -185,31 +183,16 @@ trait ListTrait
 				$block['attr']['reversed'] = '';
 			}
 		}
-		// Tight list? Check it...
-		if (!$block['loose']) {
-			foreach ($block['items'] as $itemLines) {
-				// Empty list item.
-				if (ltrim($itemLines[0]) === '' && !isset($itemLines[1])) {
-					continue;
-				}
-				// Everything else.
-				for ($x = 0; $x < count($itemLines); $x++) {
-					if (
-						ltrim($itemLines[$x]) === ''
-						|| $this->detectLineType($itemLines, $x) !== 'paragraph'
-					) {
-						// Blank line or non-paragraph block marker detected:
-						// make the list loose because block parsing is required.
-						$block['loose'] = true;
-						break 2;
-					}
+		// Parse the items.
+		foreach ($block['items'] as $itemId => $itemLines) {
+			$itemBlocks = $this->parseBlocks($itemLines);
+			if (!empty($itemBlocks)) {
+				if (count($itemBlocks) > 1) {
+				// Multiple blocks: loose list.
+					$block['loose'] = true;
 				}
 			}
-		}
-		foreach ($block['items'] as $itemId => $itemLines) {
-			$block['items'][$itemId] = $block['loose'] ?
-				$this->parseBlocks($itemLines) :
-				$this->parseInline(implode("\n", $itemLines)) ;
+			$block['items'][$itemId] = $itemBlocks;
 		}
 		return [$block, $i];
 	}
@@ -220,29 +203,34 @@ trait ListTrait
 	protected function renderList($block): string
 	{
 		$type = $block['list'];
-		$li = $block['loose'] ? "<li>\n" : '<li>';
-
 		if (!empty($block['attr'])) {
 			$output = "<$type "
-				. $this->generateHtmlAttributes($block['attr'])
+				. $this->generateListAttributes($block['attr'])
 				. ">\n";
 		} else {
 			$output = "<$type>\n";
 		}
-
-		foreach ($block['items'] as $item => $itemLines) {
-			$output .= $li . $this->renderAbsy($itemLines). "</li>\n";
+		foreach ($block['items'] as $item => $itemBlocks) {
+			$li = empty($itemBlocks) ? '<li>' : "<li>\n";
+			if (!$block['loose'] && !empty($itemBlocks)) {
+				if ($itemBlocks[0][0] === 'paragraph') {
+				// Tight list with inline paragraphs.
+					$itemBlocks = $itemBlocks[0]['content'];
+					$li = '<li>';
+				}
+			}
+			$output .= $li . $this->renderAbsy($itemBlocks) . "</li>\n";
 		}
 		return $output . "</$type>\n";
 	}
 
 	/**
-	 * Return HTML attributes string from [attrName => attrValue] list.
+	 * Return attributes from [attrName => attrValue] list.
 	 *
 	 * @param array $attributes - The attribute name-value pairs.
 	 * @return string
 	 */
-	private function generateHtmlAttributes($attributes): string
+	private function generateListAttributes($attributes): string
 	{
 		foreach ($attributes as $name => $value) {
 			$attributes[$name] = "$name=\"$value\"";
@@ -250,8 +238,7 @@ trait ListTrait
 		return implode(' ', $attributes);
 	}
 
+	abstract protected function expandTabs($text, $chr = ' ');
 	abstract protected function parseBlocks($lines);
-	abstract protected function parseInline($text);
 	abstract protected function renderAbsy($absy);
-	abstract protected function detectLineType($lines, $current);
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * @copyright Copyright 2014 Carsten Brandt, 2024 Daniel Pimley
+ * @copyright Copyright 2014 Carsten Brandt, 2024-2026 Daniel Pimley
  * @license https://github.com/xenocrat/chyrp-markdown/blob/master/LICENSE
  * @link https://github.com/xenocrat/chyrp-markdown#readme
  */
@@ -530,8 +530,11 @@ REGEXP;
 		return [false, --$current];
 	}
 
+	abstract protected function renderText($block);
+	abstract protected function consumeParagraph($lines, $current);
 	abstract protected function parseInline($text);
 	abstract protected function renderAbsy($blocks);
 	abstract protected function unEscapeBackslash($text);
 	abstract protected function escapeHtmlEntities($text, $flags = 0);
+	abstract protected function unescapeHtmlEntities($text, $flags = 0);
 }
