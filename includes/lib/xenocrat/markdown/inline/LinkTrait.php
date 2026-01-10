@@ -148,36 +148,39 @@ trait LinkTrait
 			&& preg_match(
 				'/\[((?>([^\[\]\\\\]|\\\\\[|\\\\\]|\\\\)+|(?R))*)\]/',
 				str_replace(
-					"\\\\",
-					"\\\\".chr(31),
+					'\\\\',
+					'\\\\'.chr(31),
 					$markdown
 				),
 				$textMatches
 			)
 		) {
 			$textMatches[0] = str_replace(
-				"\\\\".chr(31),
-				"\\\\",
+				'\\\\'.chr(31),
+				'\\\\',
 				$textMatches[0]
 			);
 			$textMatches[1] = str_replace(
-				"\\\\".chr(31),
-				"\\\\",
+				'\\\\'.chr(31),
+				'\\\\',
 				$textMatches[1]
 			);
 			$text = $textMatches[1];
 			$offset = strlen($textMatches[0]);
 			$markdown = substr($markdown, $offset);
 
-			$pattern = <<<REGEXP
-				/(?(R) # in case of recursion match parentheses
-					 \(((?>[^\s()]+)|(?R))*\)
-				|      # else match a link with title
-					^\(\s*(((?><[^<>\n]+>)|(?>[^\s()]+)|(?R))*)(\s+"(.*?)")?\s*\)
-				)/xs
-REGEXP;
-
-			if (preg_match($pattern, $markdown, $refMatches)) {
+			if (
+				preg_match(
+					'/(?(R)
+						# in case of recursion match parentheses
+						\(((?>[^\s()]+)|(?R))*\)
+						# else match a link with title
+						|^\(\s*(((?><[^<>\n]+>)|(?>[^\s()]+)|(?R))*)(\s+"(.*?)")?\s*\)
+						)/xs',
+					$markdown,
+					$refMatches
+				)
+			) {
 			// Inline link.
 				$url = isset($refMatches[2]) ?
 					$refMatches[2] :
@@ -436,8 +439,8 @@ REGEXP;
 			&& preg_match(
 				'/^ {0,3}\[(.+?)(?<!\\\\)\]:\s*(([^\s]+?)(?:\s+[\'"](.+?)[\'"])?\s*)?$/',
 				str_replace(
-					"\\\\",
-					"\\\\".chr(31),
+					'\\\\',
+					'\\\\'.chr(31),
 					$line
 				)
 			)
@@ -454,8 +457,8 @@ REGEXP;
 			&& preg_match(
 				'/^ {0,3}\[(.+?)(?<!\\\\)\]:\s*(?:(.+?)(?:\s+[\(\'"](.+?)[\)\'"])?\s*)?$/',
 				str_replace(
-					"\\\\",
-					"\\\\".chr(31),
+					'\\\\',
+					'\\\\'.chr(31),
 					$lines[$current]
 				),
 				$matches
@@ -466,8 +469,8 @@ REGEXP;
 				return $this->consumeParagraph($lines, $current);
 			}
 			$matches[1] = str_replace(
-				"\\\\".chr(31),
-				"\\\\",
+				'\\\\'.chr(31),
+				'\\\\',
 				$matches[1]
 			);
 			$key = function_exists("mb_convert_case") ?
@@ -476,8 +479,8 @@ REGEXP;
 
 			if (isset($matches[2])) {
 				$matches[2] = str_replace(
-					"\\\\".chr(31),
-					"\\\\",
+					'\\\\'.chr(31),
+					'\\\\',
 					$matches[2]
 				);
 				$url = $matches[2];
@@ -502,8 +505,8 @@ REGEXP;
 			];
 			if (isset($matches[3])) {
 				$matches[3] = str_replace(
-					"\\\\".chr(31),
-					"\\\\",
+					'\\\\'.chr(31),
+					'\\\\',
 					$matches[3]
 				);
 				$ref['title'] = $matches[3];

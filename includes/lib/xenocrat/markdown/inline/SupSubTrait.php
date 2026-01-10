@@ -28,21 +28,21 @@ trait SupSubTrait
 			preg_match(
 				'/^\+\+(?!\+)(.*?([^\+\\\\]|(?<=\\\\)\+))\+\+(?!\+)/s',
 				str_replace(
-					"\\\\",
-					"\\\\".chr(31),
+					'\\\\',
+					'\\\\'.chr(31),
 					$markdown
 				),
 				$matches
 			)
 		) {
 			$matches[0] = str_replace(
-				"\\\\".chr(31),
-				"\\\\",
+				'\\\\'.chr(31),
+				'\\\\',
 				$matches[0]
 			);
 			$matches[1] = str_replace(
-				"\\\\".chr(31),
-				"\\\\",
+				'\\\\'.chr(31),
+				'\\\\',
 				$matches[1]
 			);	
 			return [
@@ -79,21 +79,21 @@ trait SupSubTrait
 			preg_match(
 				'/^--(?!-)(.*?([^-\\\\]|(?<=\\\\)-))--(?!-)/s',
 				str_replace(
-					"\\\\",
-					"\\\\".chr(31),
+					'\\\\',
+					'\\\\'.chr(31),
 					$markdown
 				),
 				$matches
 			)
 		) {
 			$matches[0] = str_replace(
-				"\\\\".chr(31),
-				"\\\\",
+				'\\\\'.chr(31),
+				'\\\\',
 				$matches[0]
 			);
 			$matches[1] = str_replace(
-				"\\\\".chr(31),
-				"\\\\",
+				'\\\\'.chr(31),
+				'\\\\',
 				$matches[1]
 			);
 			return [

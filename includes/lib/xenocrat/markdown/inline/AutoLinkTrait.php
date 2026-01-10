@@ -25,17 +25,18 @@ trait AutoLinkTrait
 	 */
 	protected function parseAutoUrl($text): array
 	{
-		$regex = <<<REGEXP
-			/(?(R) # in case of recursion match parentheses
-				 \(((?>[^\s()]+)|(?R))*\)
-			|      # else match a link with title
-				^(www\.|https?:\/\/)(([^\s<>()]+)|(?R))+(?<![\.,:;\'"!\?\s])
-			)/x
-REGEXP;
-
 		if (
 			!in_array('parseLink', $this->context)
-			&& preg_match($regex, $text, $matches)
+			&& preg_match(
+				'/(?(R)
+					# in case of recursion match parentheses
+					\(((?>[^\s()]+)|(?R))*\)
+					# else match a link with title
+					|^(www\.|https?:\/\/)(([^\s<>()]+)|(?R))+(?<![\.,:;\'"!\?\s])
+					)/x',
+				$text,
+				$matches
+			)
 		) {
 		// Do not allow links within links.
 			return [

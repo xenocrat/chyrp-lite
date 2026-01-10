@@ -201,8 +201,8 @@ trait FootnoteTrait
 			preg_match(
 				'/^\[\^(.+?)(?<!\\\\)\]/',
 				str_replace(
-					"\\\\",
-					"\\\\".chr(31),
+					'\\\\',
+					'\\\\'.chr(31),
 					$text
 				),
 				$matches
@@ -211,13 +211,13 @@ trait FootnoteTrait
 			&& !preg_match('/(?<!\\\\)[\[\]]/', $matches[1])
 		) {
 			$matches[0] = str_replace(
-				"\\\\".chr(31),
-				"\\\\",
+				'\\\\'.chr(31),
+				'\\\\',
 				$matches[0]
 			);
 			$matches[1] = str_replace(
-				"\\\\".chr(31),
-				"\\\\",
+				'\\\\'.chr(31),
+				'\\\\',
 				$matches[1]
 			);
 			$footnoteName = function_exists("mb_convert_case") ?
@@ -291,8 +291,8 @@ trait FootnoteTrait
 		return preg_match(
 			'/^ {0,3}\[\^(.+?)(?<!\\\\)\]:/',
 			str_replace(
-				"\\\\",
-				"\\\\".chr(31),
+				'\\\\',
+				'\\\\'.chr(31),
 				$line
 			)
 		);
@@ -313,8 +313,8 @@ trait FootnoteTrait
 			$startsFootnote = preg_match(
 				'/^ {0,3}\[\^(.+?)(?<!\\\\)\]:[ \x1D]*/',
 				str_replace(
-					"\\\\",
-					"\\\\".chr(31),
+					'\\\\',
+					'\\\\'.chr(31),
 					$line
 				),
 				$matches
@@ -322,13 +322,13 @@ trait FootnoteTrait
 			if ($startsFootnote) {
 			// The start of a footnote.
 				$matches[0] = str_replace(
-					"\\\\".chr(31),
-					"\\\\",
+					'\\\\'.chr(31),
+					'\\\\',
 					$matches[0]
 				);
 				$matches[1] = str_replace(
-					"\\\\".chr(31),
-					"\\\\",
+					'\\\\'.chr(31),
+					'\\\\',
 					$matches[1]
 				);
 				$name = function_exists("mb_convert_case") ?

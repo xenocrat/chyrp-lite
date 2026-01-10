@@ -20,7 +20,7 @@ abstract class Parser
 {
 	const VERSION_MAJOR = 4;
 	const VERSION_MINOR = 5;
-	const VERSION_PATCH = 1;
+	const VERSION_PATCH = 2;
 
 	/**
 	 * @var integer - The maximum nesting level for language elements.
