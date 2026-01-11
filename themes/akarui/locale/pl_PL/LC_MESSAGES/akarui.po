@@ -1,0 +1,411 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pl_PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: themes/akarui/content/comment.twig:5
+msgid "This comment is awaiting moderation."
+msgstr "Ten komentarz oczekuje na moderację."
+
+#: themes/akarui/content/post.twig:4 themes/akarui/feathers/audio.twig:6
+#: themes/akarui/feathers/photo.twig:6 themes/akarui/feathers/quote.twig:6
+#: themes/akarui/feathers/text.twig:6 themes/akarui/feathers/uploader.twig:6
+#: themes/akarui/feathers/video.twig:6 themes/akarui/pages/archive.twig:19
+#: themes/akarui/pages/index.twig:13 themes/akarui/pages/index.twig:32
+#: themes/akarui/pages/page.twig:7 themes/akarui/pages/page.twig:18
+#: themes/akarui/pages/search.twig:16 themes/akarui/pages/search.twig:27
+#, php-format
+msgid "Permanent link to &#8220;%s&#8221;"
+msgstr "Stały link do &#8222;%s&#8221;"
+
+#: themes/akarui/content/post.twig:8
+#, php-format
+msgid "Drafted on %s."
+msgstr "Szkic utworzony %s."
+
+#: themes/akarui/content/post.twig:10
+#, php-format
+msgid "Scheduled for %s."
+msgstr "Zaplanowano na %s."
+
+#: themes/akarui/content/post.twig:12
+#, php-format
+msgid "Pinned on %s."
+msgstr "Przypięto %s."
+
+#: themes/akarui/content/post.twig:14
+#, php-format
+msgid "Posted on %s."
+msgstr "Opublikowano %s."
+
+#: themes/akarui/content/post.twig:19 themes/akarui/pages/view.twig:12
+msgid "[Untitled]"
+msgstr "[Bez tytułu]"
+
+#: themes/akarui/content/post.twig:21
+#, php-format
+msgid "Filed in %s."
+msgstr "Umieszczono w %s."
+
+#: themes/akarui/content/post.twig:26
+#, php-format
+msgid "Tagged with %s."
+msgstr "Oznaczono tagiem %s."
+
+#: themes/akarui/feathers/audio.twig:10 themes/akarui/feathers/link.twig:7
+#: themes/akarui/feathers/photo.twig:13 themes/akarui/feathers/quote.twig:9
+#: themes/akarui/feathers/text.twig:9 themes/akarui/feathers/uploader.twig:10
+#: themes/akarui/feathers/video.twig:10
+msgid "Text Content"
+msgstr "Treść tekstowa"
+
+#: themes/akarui/feathers/audio.twig:14 themes/akarui/feathers/photo.twig:9
+#: themes/akarui/feathers/uploader.twig:16
+#: themes/akarui/feathers/uploader.twig:20 themes/akarui/feathers/video.twig:14
+msgid "File Attachment"
+msgstr "Załącznik pliku"
+
+#: themes/akarui/feathers/missing.twig:4
+msgid "The post cannot be displayed because the theme does not support it."
+msgstr "Nie można wyświetlić wpisu, ponieważ motyw go nie obsługuje."
+
+#: themes/akarui/feathers/uploader.twig:21
+msgid "File attachment:"
+msgstr "Załącznik pliku:"
+
+#: themes/akarui/forms/comment/edit.twig:2
+msgid "Comment"
+msgstr "Komentarz"
+
+#: themes/akarui/forms/comment/edit.twig:5
+msgid "Author"
+msgstr "Autor"
+
+#: themes/akarui/forms/comment/edit.twig:8
+msgid "Author's website"
+msgstr "Strona autora"
+
+#: themes/akarui/forms/comment/edit.twig:10
+msgid "Author's email"
+msgstr "E‑mail autora"
+
+#: themes/akarui/forms/comment/edit.twig:15
+msgid "Timestamp"
+msgstr "Znacznik czasu"
+
+#: themes/akarui/forms/comment/edit.twig:18
+msgid "Status"
+msgstr "Status"
+
+#: themes/akarui/forms/comment/edit.twig:20
+msgid "Approved"
+msgstr "Zatwierdzony"
+
+#: themes/akarui/forms/comment/edit.twig:21
+msgid "Denied"
+msgstr "Odrzucony"
+
+#: themes/akarui/forms/comment/edit.twig:22
+msgid "Spam"
+msgstr "Spam"
+
+#: themes/akarui/forms/comment/edit.twig:27
+msgid "Email Notifications"
+msgstr "Powiadomienia e‑mail"
+
+#: themes/akarui/forms/comment/edit.twig:35
+msgid "Save"
+msgstr "Zapisz"
+
+#: themes/akarui/forms/comment/edit.twig:36
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: themes/akarui/forms/comment/new.twig:3
+msgid "Your name"
+msgstr "Twoje imię"
+
+#: themes/akarui/forms/comment/new.twig:5
+msgid "Your email"
+msgstr "Twój e‑mail"
+
+#: themes/akarui/forms/comment/new.twig:7
+msgid "Your website"
+msgstr "Twoja strona"
+
+#: themes/akarui/forms/comment/new.twig:9
+msgid "Remember me"
+msgstr "Zapamiętaj mnie"
+
+#: themes/akarui/forms/comment/new.twig:13
+msgid "Your comment"
+msgstr "Twój komentarz"
+
+#: themes/akarui/forms/comment/new.twig:16
+msgid "Notify me when others comment"
+msgstr "Powiadamiaj mnie, gdy inni skomentują"
+
+#: themes/akarui/forms/comment/new.twig:29
+msgid "Speak"
+msgstr "Mów"
+
+#: themes/akarui/forms/user/controls.twig:4
+#: themes/akarui/layouts/default.twig:61
+msgid "Controls"
+msgstr "Kontrolki"
+
+#: themes/akarui/forms/user/controls.twig:6
+msgid "Full name"
+msgstr "Pełne imię i nazwisko"
+
+#: themes/akarui/forms/user/controls.twig:8
+#: themes/akarui/forms/user/register.twig:12
+#: themes/akarui/layouts/default.twig:37
+msgid "Email"
+msgstr "E‑mail"
+
+#: themes/akarui/forms/user/controls.twig:10
+msgid "Website"
+msgstr "Strona internetowa"
+
+#: themes/akarui/forms/user/controls.twig:12
+#: themes/akarui/forms/user/reset_password.twig:6
+msgid "New password?"
+msgstr "Nowe hasło?"
+
+#: themes/akarui/forms/user/controls.twig:14
+#: themes/akarui/forms/user/reset_password.twig:8
+msgid "Confirm"
+msgstr "Potwierdź"
+
+#: themes/akarui/forms/user/controls.twig:19
+msgid "Update"
+msgstr "Aktualizuj"
+
+#: themes/akarui/forms/user/login.twig:4 themes/akarui/forms/user/login.twig:13
+#: themes/akarui/layouts/default.twig:73
+msgid "Log in"
+msgstr "Zaloguj się"
+
+#: themes/akarui/forms/user/login.twig:6
+#: themes/akarui/forms/user/lost_password.twig:6
+#: themes/akarui/forms/user/register.twig:6
+msgid "Username"
+msgstr "Nazwa użytkownika"
+
+#: themes/akarui/forms/user/login.twig:8
+#: themes/akarui/forms/user/register.twig:8
+#: themes/akarui/forms/user/register.twig:10
+msgid "Password"
+msgstr "Hasło"
+
+#: themes/akarui/forms/user/login.twig:14
+msgid "Help!"
+msgstr "Pomocy!"
+
+#: themes/akarui/forms/user/lost_password.twig:4
+msgid "Lost password"
+msgstr "Zapomniane hasło"
+
+#: themes/akarui/forms/user/lost_password.twig:10
+#: themes/akarui/forms/user/reset_password.twig:15
+msgid "Submit"
+msgstr "Wyślij"
+
+#: themes/akarui/forms/user/register.twig:4
+#: themes/akarui/forms/user/register.twig:18
+#: themes/akarui/layouts/default.twig:69
+msgid "Register"
+msgstr "Zarejestruj się"
+
+#: themes/akarui/forms/user/register.twig:10
+msgid "(again)"
+msgstr "(ponownie)"
+
+#: themes/akarui/forms/user/reset_password.twig:4
+msgid "Reset password"
+msgstr "Zresetuj hasło"
+
+#: themes/akarui/info.php:3
+msgid "Akarui"
+msgstr "Akarui"
+
+#: themes/akarui/info.php:6
+msgid "A cheerful theme for Chyrp Lite."
+msgstr "Wesoły motyw dla Chyrp Lite."
+
+#: themes/akarui/layouts/default.twig:7
+#, php-format
+msgid "Page %d"
+msgstr "Strona %d"
+
+#: themes/akarui/layouts/default.twig:33
+msgid "Blog"
+msgstr "Blog"
+
+#: themes/akarui/layouts/default.twig:41
+msgid "Feed"
+msgstr "Kanał"
+
+#: themes/akarui/layouts/default.twig:44
+msgid "Archive"
+msgstr "Archiwum"
+
+#: themes/akarui/layouts/default.twig:48
+msgid "Admin"
+msgstr "Administracja"
+
+#: themes/akarui/layouts/default.twig:52
+msgid "Write"
+msgstr "Napisz"
+
+#: themes/akarui/layouts/default.twig:56
+msgid "Draft"
+msgstr "Szkic"
+
+#: themes/akarui/layouts/default.twig:64
+msgid "Log out"
+msgstr "Wyloguj się"
+
+#: themes/akarui/layouts/default.twig:79
+msgid "Search this blog"
+msgstr "Szukaj w tym blogu"
+
+#: themes/akarui/layouts/default.twig:80
+msgid "Find"
+msgstr "Znajdź"
+
+#: themes/akarui/layouts/default.twig:103
+#, php-format
+msgid "Called from %s on line %d at %s seconds."
+msgstr "Wywołano z %s w linii %d po %s sekundach."
+
+#: themes/akarui/pages/403.twig:4
+msgid "Forbidden."
+msgstr "Zabronione."
+
+#: themes/akarui/pages/404.twig:4
+msgid "Not found."
+msgstr "Nie znaleziono."
+
+#: themes/akarui/pages/archive.twig:7 themes/akarui/pages/archive.twig:51
+#, php-format
+msgid "Archive of %s"
+msgstr "Archiwum %s"
+
+#: themes/akarui/pages/archive.twig:13
+msgid "F"
+msgstr "F"
+
+#: themes/akarui/pages/archive.twig:34 themes/akarui/pages/archive.twig:62
+#: themes/akarui/pages/author.twig:15 themes/akarui/pages/category.twig:14
+#: themes/akarui/pages/drafts.twig:15 themes/akarui/pages/search.twig:52
+#: themes/akarui/pages/tag.twig:14 themes/akarui/pages/updated.twig:15
+msgid "Newer posts"
+msgstr "Nowsze wpisy"
+
+#: themes/akarui/pages/archive.twig:41 themes/akarui/pages/archive.twig:67
+#: themes/akarui/pages/author.twig:20 themes/akarui/pages/category.twig:19
+#: themes/akarui/pages/drafts.twig:20 themes/akarui/pages/search.twig:57
+#: themes/akarui/pages/tag.twig:19 themes/akarui/pages/updated.twig:20
+msgid "Older posts"
+msgstr "Starsze wpisy"
+
+#: themes/akarui/pages/archive.twig:75
+msgid "There aren't any posts in the timeframe you specified."
+msgstr "W podanym okresie nie ma żadnych wpisów."
+
+#: themes/akarui/pages/author.twig:5
+#, php-format
+msgid "Posts created by &#8220;%s&#8221;"
+msgstr "Wpisy utworzone przez &#8222;%s&#8221;"
+
+#: themes/akarui/pages/author.twig:27
+msgid "This user hasn't created any posts."
+msgstr "Ten użytkownik nie utworzył żadnych wpisów."
+
+#: themes/akarui/pages/category.twig:4
+#, php-format
+msgid "Posts in category &#8220;%s&#8221;"
+msgstr "Wpisy w kategorii &#8222;%s&#8221;"
+
+#: themes/akarui/pages/drafts.twig:5
+msgid "Drafts"
+msgstr "Szkice"
+
+#: themes/akarui/pages/drafts.twig:27
+msgid "You don't have any drafts."
+msgstr "Nie masz żadnych szkiców."
+
+#: themes/akarui/pages/index.twig:6 themes/akarui/pages/tags.twig:14
+msgid "Nothing here yet!"
+msgstr "Tutaj jeszcze nic nie ma!"
+
+#: themes/akarui/pages/index.twig:9
+msgid "Posts"
+msgstr "Wpisy"
+
+#: themes/akarui/pages/index.twig:21
+msgid "Pages"
+msgstr "Strony"
+
+#: themes/akarui/pages/index.twig:44
+msgid "More posts&hellip;"
+msgstr "Więcej wpisów&hellip;"
+
+#: themes/akarui/pages/page.twig:11 themes/akarui/pages/search.twig:20
+#, php-format
+msgid "Updated on %s."
+msgstr "Zaktualizowano %s."
+
+#: themes/akarui/pages/page.twig:13 themes/akarui/pages/search.twig:22
+#, php-format
+msgid "Created on %s."
+msgstr "Utworzono %s."
+
+#: themes/akarui/pages/search.twig:5
+#, php-format
+msgid "Search results for &#8220;%s&#8221;"
+msgstr "Wyniki wyszukiwania dla &#8222;%s&#8221;"
+
+#: themes/akarui/pages/search.twig:7
+msgid "Your search did not return any results."
+msgstr "Twoje wyszukiwanie nie zwróciło żadnych wyników."
+
+#: themes/akarui/pages/search.twig:11
+msgid "Pages containing the search term&hellip;"
+msgstr "Strony zawierające wyszukiwane hasło&hellip;"
+
+#: themes/akarui/pages/tag.twig:4
+#, php-format
+msgid "Posts tagged with &#8220;%s&#8221;"
+msgstr "Wpisy oznaczone tagiem &#8222;%s&#8221;"
+
+#: themes/akarui/pages/tags.twig:5
+msgid "Tags"
+msgstr "Tagi"
+
+#: themes/akarui/pages/updated.twig:5
+msgid "Updated posts"
+msgstr "Zaktualizowane wpisy"
+
+#: themes/akarui/pages/updated.twig:27
+msgid "There aren't any updated posts."
+msgstr "Nie ma zaktualizowanych wpisów."
+
+#: themes/akarui/pages/view.twig:8
+msgid "Webmentions"
+msgstr "Webmentiony"
+
+#: themes/akarui/pages/view.twig:20
+msgid "Comments"
+msgstr "Komentarze"

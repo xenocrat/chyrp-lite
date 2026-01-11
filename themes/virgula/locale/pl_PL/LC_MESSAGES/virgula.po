@@ -1,0 +1,413 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pl_PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: themes/virgula/content/comment.twig:5
+msgid "This comment is awaiting moderation."
+msgstr "Ten komentarz oczekuje na moderację."
+
+#: themes/virgula/content/post.twig:4 themes/virgula/feathers/audio.twig:6
+#: themes/virgula/feathers/photo.twig:6 themes/virgula/feathers/quote.twig:6
+#: themes/virgula/feathers/text.twig:6 themes/virgula/feathers/uploader.twig:6
+#: themes/virgula/feathers/video.twig:6 themes/virgula/pages/archive.twig:19
+#: themes/virgula/pages/index.twig:13 themes/virgula/pages/index.twig:32
+#: themes/virgula/pages/page.twig:7 themes/virgula/pages/page.twig:18
+#: themes/virgula/pages/search.twig:16 themes/virgula/pages/search.twig:27
+#, php-format
+msgid "Permanent link to &#8220;%s&#8221;"
+msgstr "Stały link do &#8222;%s&#8221;"
+
+#: themes/virgula/content/post.twig:8
+#, php-format
+msgid "Drafted on %s."
+msgstr "Szkic utworzony %s."
+
+#: themes/virgula/content/post.twig:10
+#, php-format
+msgid "Scheduled for %s."
+msgstr "Zaplanowano na %s."
+
+#: themes/virgula/content/post.twig:12
+#, php-format
+msgid "Pinned on %s."
+msgstr "Przypięto %s."
+
+#: themes/virgula/content/post.twig:14
+#, php-format
+msgid "Posted on %s."
+msgstr "Opublikowano %s."
+
+#: themes/virgula/content/post.twig:19 themes/virgula/pages/view.twig:12
+msgid "[Untitled]"
+msgstr "[Bez tytułu]"
+
+#: themes/virgula/content/post.twig:21
+#, php-format
+msgid "Filed in %s."
+msgstr "Umieszczono w %s."
+
+#: themes/virgula/content/post.twig:26
+#, php-format
+msgid "Tagged with %s."
+msgstr "Oznaczono tagiem %s."
+
+#: themes/virgula/feathers/audio.twig:10 themes/virgula/feathers/link.twig:7
+#: themes/virgula/feathers/photo.twig:13 themes/virgula/feathers/quote.twig:9
+#: themes/virgula/feathers/text.twig:9 themes/virgula/feathers/uploader.twig:10
+#: themes/virgula/feathers/video.twig:10
+msgid "Text Content"
+msgstr "Treść tekstowa"
+
+#: themes/virgula/feathers/audio.twig:14 themes/virgula/feathers/photo.twig:9
+#: themes/virgula/feathers/uploader.twig:16
+#: themes/virgula/feathers/uploader.twig:20
+#: themes/virgula/feathers/video.twig:14
+msgid "File Attachment"
+msgstr "Załącznik pliku"
+
+#: themes/virgula/feathers/missing.twig:4
+msgid "The post cannot be displayed because the theme does not support it."
+msgstr "Nie można wyświetlić wpisu, ponieważ motyw go nie obsługuje."
+
+#: themes/virgula/feathers/uploader.twig:21
+msgid "File attachment:"
+msgstr "Załącznik pliku:"
+
+#: themes/virgula/forms/comment/edit.twig:2
+msgid "Comment"
+msgstr "Komentarz"
+
+#: themes/virgula/forms/comment/edit.twig:5
+msgid "Author"
+msgstr "Autor"
+
+#: themes/virgula/forms/comment/edit.twig:8
+msgid "Author's website"
+msgstr "Strona autora"
+
+#: themes/virgula/forms/comment/edit.twig:10
+msgid "Author's email"
+msgstr "E‑mail autora"
+
+#: themes/virgula/forms/comment/edit.twig:15
+msgid "Timestamp"
+msgstr "Znacznik czasu"
+
+#: themes/virgula/forms/comment/edit.twig:18
+msgid "Status"
+msgstr "Status"
+
+#: themes/virgula/forms/comment/edit.twig:20
+msgid "Approved"
+msgstr "Zatwierdzony"
+
+#: themes/virgula/forms/comment/edit.twig:21
+msgid "Denied"
+msgstr "Odrzucony"
+
+#: themes/virgula/forms/comment/edit.twig:22
+msgid "Spam"
+msgstr "Spam"
+
+#: themes/virgula/forms/comment/edit.twig:27
+msgid "Email Notifications"
+msgstr "Powiadomienia e‑mail"
+
+#: themes/virgula/forms/comment/edit.twig:35
+msgid "Save"
+msgstr "Zapisz"
+
+#: themes/virgula/forms/comment/edit.twig:36
+msgid "Cancel"
+msgstr "Anuluj"
+
+#: themes/virgula/forms/comment/new.twig:3
+msgid "Your name"
+msgstr "Twoje imię"
+
+#: themes/virgula/forms/comment/new.twig:5
+msgid "Your email"
+msgstr "Twój e‑mail"
+
+#: themes/virgula/forms/comment/new.twig:7
+msgid "Your website"
+msgstr "Twoja strona"
+
+#: themes/virgula/forms/comment/new.twig:9
+msgid "Remember me"
+msgstr "Zapamiętaj mnie"
+
+#: themes/virgula/forms/comment/new.twig:13
+msgid "Your comment"
+msgstr "Twój komentarz"
+
+#: themes/virgula/forms/comment/new.twig:16
+msgid "Notify me when others comment"
+msgstr "Powiadamiaj mnie, gdy inni skomentują"
+
+#: themes/virgula/forms/comment/new.twig:29
+msgid "Speak"
+msgstr "Mów"
+
+#: themes/virgula/forms/user/controls.twig:4
+#: themes/virgula/layouts/default.twig:61
+msgid "Controls"
+msgstr "Kontrolki"
+
+#: themes/virgula/forms/user/controls.twig:6
+msgid "Full name"
+msgstr "Pełne imię i nazwisko"
+
+#: themes/virgula/forms/user/controls.twig:8
+#: themes/virgula/forms/user/register.twig:12
+#: themes/virgula/layouts/default.twig:37
+msgid "Email"
+msgstr "E‑mail"
+
+#: themes/virgula/forms/user/controls.twig:10
+msgid "Website"
+msgstr "Strona internetowa"
+
+#: themes/virgula/forms/user/controls.twig:12
+#: themes/virgula/forms/user/reset_password.twig:6
+msgid "New password?"
+msgstr "Nowe hasło?"
+
+#: themes/virgula/forms/user/controls.twig:14
+#: themes/virgula/forms/user/reset_password.twig:8
+msgid "Confirm"
+msgstr "Potwierdź"
+
+#: themes/virgula/forms/user/controls.twig:19
+msgid "Update"
+msgstr "Aktualizuj"
+
+#: themes/virgula/forms/user/login.twig:4
+#: themes/virgula/forms/user/login.twig:13
+#: themes/virgula/layouts/default.twig:73
+msgid "Log in"
+msgstr "Zaloguj się"
+
+#: themes/virgula/forms/user/login.twig:6
+#: themes/virgula/forms/user/lost_password.twig:6
+#: themes/virgula/forms/user/register.twig:6
+msgid "Username"
+msgstr "Nazwa użytkownika"
+
+#: themes/virgula/forms/user/login.twig:8
+#: themes/virgula/forms/user/register.twig:8
+#: themes/virgula/forms/user/register.twig:10
+msgid "Password"
+msgstr "Hasło"
+
+#: themes/virgula/forms/user/login.twig:14
+msgid "Help!"
+msgstr "Pomocy!"
+
+#: themes/virgula/forms/user/lost_password.twig:4
+msgid "Lost password"
+msgstr "Zapomniane hasło"
+
+#: themes/virgula/forms/user/lost_password.twig:10
+#: themes/virgula/forms/user/reset_password.twig:15
+msgid "Submit"
+msgstr "Wyślij"
+
+#: themes/virgula/forms/user/register.twig:4
+#: themes/virgula/forms/user/register.twig:18
+#: themes/virgula/layouts/default.twig:69
+msgid "Register"
+msgstr "Zarejestruj się"
+
+#: themes/virgula/forms/user/register.twig:10
+msgid "(again)"
+msgstr "(ponownie)"
+
+#: themes/virgula/forms/user/reset_password.twig:4
+msgid "Reset password"
+msgstr "Zresetuj hasło"
+
+#: themes/virgula/info.php:3
+msgid "Virgula"
+msgstr "Virgula"
+
+#: themes/virgula/info.php:6
+msgid "A high-contrast theme for Chyrp Lite."
+msgstr "Motyw o wysokim kontraście dla Chyrp Lite."
+
+#: themes/virgula/layouts/default.twig:7
+#, php-format
+msgid "Page %d"
+msgstr "Strona %d"
+
+#: themes/virgula/layouts/default.twig:33
+msgid "Blog"
+msgstr "Blog"
+
+#: themes/virgula/layouts/default.twig:41
+msgid "Feed"
+msgstr "Kanał"
+
+#: themes/virgula/layouts/default.twig:44
+msgid "Archive"
+msgstr "Archiwum"
+
+#: themes/virgula/layouts/default.twig:48
+msgid "Admin"
+msgstr "Administracja"
+
+#: themes/virgula/layouts/default.twig:52
+msgid "Write"
+msgstr "Napisz"
+
+#: themes/virgula/layouts/default.twig:56
+msgid "Draft"
+msgstr "Szkic"
+
+#: themes/virgula/layouts/default.twig:64
+msgid "Log out"
+msgstr "Wyloguj się"
+
+#: themes/virgula/layouts/default.twig:88
+msgid "Search this blog"
+msgstr "Szukaj w tym blogu"
+
+#: themes/virgula/layouts/default.twig:89
+msgid "Find"
+msgstr "Znajdź"
+
+#: themes/virgula/layouts/default.twig:103
+#, php-format
+msgid "Called from %s on line %d at %s seconds."
+msgstr "Wywołano z %s w linii %d po %s sekundach."
+
+#: themes/virgula/pages/403.twig:4
+msgid "Forbidden."
+msgstr "Zabronione."
+
+#: themes/virgula/pages/404.twig:4
+msgid "Not found."
+msgstr "Nie znaleziono."
+
+#: themes/virgula/pages/archive.twig:7 themes/virgula/pages/archive.twig:51
+#, php-format
+msgid "Archive of %s"
+msgstr "Archiwum %s"
+
+#: themes/virgula/pages/archive.twig:13
+msgid "F"
+msgstr "F"
+
+#: themes/virgula/pages/archive.twig:34 themes/virgula/pages/archive.twig:62
+#: themes/virgula/pages/author.twig:15 themes/virgula/pages/category.twig:14
+#: themes/virgula/pages/drafts.twig:15 themes/virgula/pages/search.twig:52
+#: themes/virgula/pages/tag.twig:14 themes/virgula/pages/updated.twig:15
+msgid "Newer posts"
+msgstr "Nowsze wpisy"
+
+#: themes/virgula/pages/archive.twig:41 themes/virgula/pages/archive.twig:67
+#: themes/virgula/pages/author.twig:20 themes/virgula/pages/category.twig:19
+#: themes/virgula/pages/drafts.twig:20 themes/virgula/pages/search.twig:57
+#: themes/virgula/pages/tag.twig:19 themes/virgula/pages/updated.twig:20
+msgid "Older posts"
+msgstr "Starsze wpisy"
+
+#: themes/virgula/pages/archive.twig:75
+msgid "There aren't any posts in the timeframe you specified."
+msgstr "W podanym okresie nie ma żadnych wpisów."
+
+#: themes/virgula/pages/author.twig:5
+#, php-format
+msgid "Posts created by &#8220;%s&#8221;"
+msgstr "Wpisy utworzone przez &#8222;%s&#8221;"
+
+#: themes/virgula/pages/author.twig:27
+msgid "This user hasn't created any posts."
+msgstr "Ten użytkownik nie utworzył żadnych wpisów."
+
+#: themes/virgula/pages/category.twig:4
+#, php-format
+msgid "Posts in category &#8220;%s&#8221;"
+msgstr "Wpisy w kategorii &#8222;%s&#8221;"
+
+#: themes/virgula/pages/drafts.twig:5
+msgid "Drafts"
+msgstr "Szkice"
+
+#: themes/virgula/pages/drafts.twig:27
+msgid "You don't have any drafts."
+msgstr "Nie masz żadnych szkiców."
+
+#: themes/virgula/pages/index.twig:6 themes/virgula/pages/tags.twig:14
+msgid "Nothing here yet!"
+msgstr "Tutaj jeszcze nic nie ma!"
+
+#: themes/virgula/pages/index.twig:9
+msgid "Posts"
+msgstr "Wpisy"
+
+#: themes/virgula/pages/index.twig:21
+msgid "Pages"
+msgstr "Strony"
+
+#: themes/virgula/pages/index.twig:44
+msgid "More posts&hellip;"
+msgstr "Więcej wpisów&hellip;"
+
+#: themes/virgula/pages/page.twig:11 themes/virgula/pages/search.twig:20
+#, php-format
+msgid "Updated on %s."
+msgstr "Zaktualizowano %s."
+
+#: themes/virgula/pages/page.twig:13 themes/virgula/pages/search.twig:22
+#, php-format
+msgid "Created on %s."
+msgstr "Utworzono %s."
+
+#: themes/virgula/pages/search.twig:5
+#, php-format
+msgid "Search results for &#8220;%s&#8221;"
+msgstr "Wyniki wyszukiwania dla &#8222;%s&#8221;"
+
+#: themes/virgula/pages/search.twig:7
+msgid "Your search did not return any results."
+msgstr "Twoje wyszukiwanie nie zwróciło żadnych wyników."
+
+#: themes/virgula/pages/search.twig:11
+msgid "Pages containing the search term"
+msgstr "Strony zawierające wyszukiwane hasło"
+
+#: themes/virgula/pages/tag.twig:4
+#, php-format
+msgid "Posts tagged with &#8220;%s&#8221;"
+msgstr "Wpisy oznaczone tagiem &#8222;%s&#8221;"
+
+#: themes/virgula/pages/tags.twig:5
+msgid "Tags"
+msgstr "Tagi"
+
+#: themes/virgula/pages/updated.twig:5
+msgid "Updated posts"
+msgstr "Zaktualizowane wpisy"
+
+#: themes/virgula/pages/updated.twig:27
+msgid "There aren't any updated posts."
+msgstr "Nie ma zaktualizowanych wpisów."
+
+#: themes/virgula/pages/view.twig:8
+msgid "Webmentions"
+msgstr "Webmentiony"
+
+#: themes/virgula/pages/view.twig:20
+msgid "Comments"
+msgstr "Komentarze"

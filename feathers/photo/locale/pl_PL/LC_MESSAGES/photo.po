@@ -1,0 +1,55 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pl_PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: feathers/photo/admin/help/photo_alt_text.twig:3 feathers/photo/admin/help/photo_alt_text.twig:6 feathers/photo/photo.php:197
+msgid "Alternative Text"
+msgstr "Tekst alternatywny"
+
+#: feathers/photo/admin/help/photo_alt_text.twig:8
+msgid ""
+"This text provides a brief description of the photo; it is useful for visually impaired visitors, and it will be displayed if the image format is not supported by the visitor's web browser "
+"or if the image has not yet downloaded."
+msgstr "Ten tekst zawiera krótki opis zdjęcia; jest przydatny dla osób niedowidzących i będzie wyświetlany, gdy przeglądarka nie obsługuje formatu obrazu lub obraz nie został jeszcze pobrany."
+
+#: feathers/photo/admin/help/photo_source.twig:3 feathers/photo/admin/help/photo_source.twig:6
+msgid "Photo Source"
+msgstr "Źródło zdjęcia"
+
+#: feathers/photo/admin/help/photo_source.twig:8
+msgid "This is a URL that will take visitors to the original resource."
+msgstr "Jest to adres URL prowadzący użytkowników do oryginalnego zasobu."
+
+#: feathers/photo/info.php:3 feathers/photo/photo.php:18
+msgid "Photo"
+msgstr "Zdjęcie"
+
+#: feathers/photo/info.php:6
+msgid "Upload and display an image with a caption."
+msgstr "Prześlij i wyświetl obraz ze śródtytułem."
+
+#: feathers/photo/photo.php:10
+msgid "Title"
+msgstr "Tytuł"
+
+#: feathers/photo/photo.php:27
+msgid "Caption"
+msgstr "Podgląd"
+
+#: feathers/photo/photo.php:70
+msgid "You did not select a photo to upload."
+msgstr "Nie wybrałeś żadnego zdjęcia do przesłania."
+
+#: feathers/photo/photo.php:205
+msgid "Source"
+msgstr "Źródło"

@@ -1,0 +1,47 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pl_PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/easy_embed/easy_embed.php:18 modules/easy_embed/easy_embed.php:25
+#: modules/easy_embed/easy_embed.php:32
+msgid "Embedded content from YouTube"
+msgstr "Osadzona zawartość z serwisu YouTube"
+
+#: modules/easy_embed/easy_embed.php:40 modules/easy_embed/easy_embed.php:47
+msgid "Embedded content from Vimeo"
+msgstr "Osadzona zawartość z serwisu Vimeo"
+
+#: modules/easy_embed/easy_embed.php:55 modules/easy_embed/easy_embed.php:62
+msgid "Embedded content from Twitch"
+msgstr "Osadzona zawartość z serwisu Twitch"
+
+#: modules/easy_embed/easy_embed.php:70 modules/easy_embed/easy_embed.php:77
+msgid "Embedded content from Internet Archive"
+msgstr "Osadzona zawartość z serwisu Internet Archive"
+
+#: modules/easy_embed/easy_embed.php:85
+msgid "Embedded content from Spotify"
+msgstr "Osadzona zawartość ze Spotify"
+
+#: modules/easy_embed/easy_embed.php:93 modules/easy_embed/easy_embed.php:100
+#: modules/easy_embed/easy_embed.php:107
+msgid "Embedded content from Bandcamp"
+msgstr "Osadzona zawartość z Bandcamp"
+
+#: modules/easy_embed/info.php:3
+msgid "Easy Embed"
+msgstr "Łatwe osadzanie"
+
+#: modules/easy_embed/info.php:6
+msgid "Embed content in your blog by pasting its URL surrounded by <code>&lt;!--</code> and <code>--&gt;</code>."
+msgstr "Osadź zawartość na swoim blogu, wklejając jej adres URL otoczony <code>&lt;!--</code> i <code>--&gt;</code>."

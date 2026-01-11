@@ -1,0 +1,119 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pl_PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Generator: Poedit 3.6\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/likes/admin/pages/like_settings.twig:3
+#: modules/likes/admin/pages/like_settings.twig:6
+msgid "Like Settings"
+msgstr "Ustawienia polubień"
+
+#: modules/likes/admin/pages/like_settings.twig:10
+msgid "Like Image"
+msgstr "Ikona polubienia"
+
+#: modules/likes/admin/pages/like_settings.twig:22
+msgid "Like with Text"
+msgstr "Polubienie z tekstem"
+
+#: modules/likes/admin/pages/like_settings.twig:26
+msgid "Enables text descriptions in like/unlike links."
+msgstr "Włącza opisy tekstowe w linkach polubienia/odwołania polubienia."
+
+#: modules/likes/admin/pages/like_settings.twig:30
+msgid "Show on Index Pages"
+msgstr "Pokaż na stronach indeksu"
+
+#: modules/likes/admin/pages/like_settings.twig:34
+msgid "Enables like functionality on blog index pages."
+msgstr "Włącza funkcję polubiania na stronach indeksu bloga."
+
+#: modules/likes/info.php:3 modules/likes/likes.php:113
+msgid "Likes"
+msgstr "Polubienia"
+
+#: modules/likes/info.php:6
+msgid "Allow users to &#8220;like&#8221; a post."
+msgstr "Pozwala użytkownikom „polubić” wpis."
+
+#: modules/likes/info.php:12
+msgid "Please remember to update the permission settings for each group."
+msgstr "Pamiętaj, aby zaktualizować ustawienia uprawnień dla każdej grupy."
+
+#: modules/likes/likes.php:60
+msgid "Like Posts"
+msgstr "Polub wpisy"
+
+#: modules/likes/likes.php:61
+msgid "Unlike Posts"
+msgstr "Cofnij polubienie wpisów"
+
+#: modules/likes/likes.php:137
+msgid "Most liked posts"
+msgstr "Najbardziej polubione wpisy"
+
+#: modules/likes/likes.php:146 modules/likes/likes.php:206
+msgid "An ID is required to like a post."
+msgstr "Do polubienia wpisu wymagane jest ID."
+
+#: modules/likes/likes.php:153 modules/likes/likes.php:213
+msgid "You do not have sufficient privileges to like posts."
+msgstr "Nie masz wystarczających uprawnień, aby polubić wpisy."
+
+#: modules/likes/likes.php:166
+msgid "Post liked."
+msgstr "Wpis polubiony."
+
+#: modules/likes/likes.php:176 modules/likes/likes.php:245
+msgid "An ID is required to unlike a post."
+msgstr "Do cofnięcia polubienia wpisu wymagane jest ID."
+
+#: modules/likes/likes.php:183 modules/likes/likes.php:252
+msgid "You do not have sufficient privileges to unlike posts."
+msgstr "Nie masz wystarczających uprawnień, aby cofnąć polubienie wpisów."
+
+#: modules/likes/likes.php:196
+msgid "Post unliked."
+msgstr "Polubienie wpisu cofnięte."
+
+#: modules/likes/likes.php:231 modules/likes/likes.php:444
+msgid "You like this."
+msgstr "Podoba Ci się to."
+
+#: modules/likes/likes.php:233 modules/likes/likes.php:441
+#, php-format
+msgid "You and %d person like this."
+msgid_plural "You and %d people like this."
+msgstr[0] "Ty i %d osoba lubicie to."
+msgstr[1] "Ty i %d osób lubicie to."
+msgstr[2] "Ty i %d osób lubicie to."
+
+#: modules/likes/likes.php:267 modules/likes/likes.php:413
+msgid "No likes yet."
+msgstr "Brak polubień."
+
+#: modules/likes/likes.php:269 modules/likes/likes.php:410
+#, php-format
+msgid "%d person likes this."
+msgid_plural "%d people like this."
+msgstr[0] "%d osoba lubi to."
+msgstr[1] "%d osób lubi to."
+msgstr[2] "%d osób lubi to."
+
+#: modules/likes/likes.php:395 modules/likes/likes.php:426
+msgid "Like!"
+msgstr "Polub!"
+
+#: modules/likes/likes.php:399 modules/likes/likes.php:430
+msgid "Unlike!"
+msgstr "Cofnij polubienie!"

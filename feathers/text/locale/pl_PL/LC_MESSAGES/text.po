@@ -1,0 +1,33 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pl_PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: feathers/text/info.php:3
+msgid "Text"
+msgstr "Tekst"
+
+#: feathers/text/info.php:6
+msgid "A basic text feather."
+msgstr "Feather służący do tekstu."
+
+#: feathers/text/text.php:8
+msgid "Title"
+msgstr "Tytuł"
+
+#: feathers/text/text.php:16
+msgid "Body"
+msgstr "Treść"
+
+#: feathers/text/text.php:35 feathers/text/text.php:66
+msgid "Body can't be blank."
+msgstr "Treść nie może być pusta."

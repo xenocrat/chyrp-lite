@@ -1,0 +1,50 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pl_PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: feathers/uploader/admin/help/uploader_source.twig:3
+#: feathers/uploader/admin/help/uploader_source.twig:6
+msgid "Upload Source"
+msgstr "Prześlij plik"
+
+#: feathers/uploader/admin/help/uploader_source.twig:8
+msgid "This is a URL that will take visitors to the original resource."
+msgstr "To adres URL, który przeniesie odwiedzających do oryginalnego zasobu."
+
+#: feathers/uploader/info.php:3
+msgid "Uploader"
+msgstr "Uploader"
+
+#: feathers/uploader/info.php:6
+msgid "Upload files and make them available for visitors to download."
+msgstr "Prześlij pliki i udostępnij je odwiedzającym do pobrania."
+
+#: feathers/uploader/uploader.php:10
+msgid "Title"
+msgstr "Tytuł"
+
+#: feathers/uploader/uploader.php:18
+msgid "Files"
+msgstr "Pliki"
+
+#: feathers/uploader/uploader.php:27
+msgid "Caption"
+msgstr "Podgląd"
+
+#: feathers/uploader/uploader.php:81
+msgid "You did not select any files to upload."
+msgstr "Nie wybrałeś żadnych plików do przesłania."
+
+#: feathers/uploader/uploader.php:238
+msgid "Source"
+msgstr "Źródło"

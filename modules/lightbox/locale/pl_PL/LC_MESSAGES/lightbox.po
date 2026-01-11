@@ -1,0 +1,70 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pl_PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/lightbox/admin/pages/lightbox_settings.twig:3
+#: modules/lightbox/admin/pages/lightbox_settings.twig:6
+msgid "Lightbox Settings"
+msgstr "Ustawienia lightboxa"
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:10
+msgid "Background"
+msgstr "Tło"
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:21
+msgid "Edge Spacing"
+msgstr "Odstęp od krawędzi"
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:24
+msgid "(pixels)"
+msgstr "(piksele)"
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:27
+msgid "Protect Images"
+msgstr "Chroń obrazy"
+
+#: modules/lightbox/admin/pages/lightbox_settings.twig:31
+msgid "Prevent visitors from saving images?"
+msgstr "Zapobiec zapisywaniu obrazów przez odwiedzających?"
+
+#: modules/lightbox/info.php:3 modules/lightbox/lightbox.php:75
+msgid "Lightbox"
+msgstr "Lightbox"
+
+#: modules/lightbox/info.php:6
+msgid "A lightbox for your images."
+msgstr "Lightbox dla obrazów."
+
+#: modules/lightbox/javascript.php:168
+msgid "Stop displaying this image"
+msgstr "Przestań wyświetlać ten obraz"
+
+#: modules/lightbox/lightbox.php:34
+msgid "Black"
+msgstr "Czarny"
+
+#: modules/lightbox/lightbox.php:35
+msgid "Gray"
+msgstr "Szary"
+
+#: modules/lightbox/lightbox.php:36
+msgid "White"
+msgstr "Biały"
+
+#: modules/lightbox/lightbox.php:37
+msgid "Inherit"
+msgstr "Dziedziczone"
+
+#: modules/lightbox/lightbox.php:38
+msgid "Transparent"
+msgstr "Przezroczysty"

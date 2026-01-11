@@ -1,0 +1,42 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: pl_PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/highlighter/admin/pages/highlighter_settings.twig:3
+#: modules/highlighter/admin/pages/highlighter_settings.twig:6
+msgid "Syntax Highlighting Settings"
+msgstr "Ustawienia podświetlania składni"
+
+#: modules/highlighter/admin/pages/highlighter_settings.twig:10
+msgid "Stylesheet"
+msgstr "Arkusz stylów"
+
+#: modules/highlighter/admin/pages/highlighter_settings.twig:22
+msgid "Copy Button"
+msgstr "Przycisk kopiowania"
+
+#: modules/highlighter/admin/pages/highlighter_settings.twig:25
+msgid "Add a button for copying to the clipboard."
+msgstr "Dodaj przycisk kopiowania do schowka."
+
+#: modules/highlighter/highlighter.php:99 modules/highlighter/info.php:3
+msgid "Syntax Highlighting"
+msgstr "Podświetlanie składni"
+
+#: modules/highlighter/info.php:6
+msgid "Adds syntax highlighting to nested <code>&lt;pre&gt;&lt;code&gt;</code> blocks."
+msgstr "Dodaje podświetlanie składni do zagnieżdżonych bloków <code>&lt;pre&gt;&lt;code&gt;</code>."
+
+#: modules/highlighter/javascript.php:73 modules/highlighter/javascript.php:74
+msgid "Copy to clipboard"
+msgstr "Kopiuj do schowka"
