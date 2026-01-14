@@ -293,41 +293,44 @@
                 $filetype = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
 
                 switch ($filetype) {
-                    case "jpg":
-                    case "jpeg":
-                    case "png":
-                    case "gif":
-                    case "webp":
                     case "avif":
+                    case "bmp":
+                    case "gif":
+                    case "heif":
+                    case "jpeg":
+                    case "jpg":
+                    case "png":
                     case "tif":
                     case "tiff":
+                    case "webp":
                         $href = $config->chyrp_url.
                                 "/includes/thumbnail.php?file=".
                                 urlencode($filename);
 
                         break;
 
-                    case "mp3":
-                    case "m4a":
-                    case "oga":
-                    case "ogg":
-                    case "mka":
+                    case "3gp":
+                    case "aif":
+                    case "aiff":
+                    case "avi":
                     case "flac":
-                    case "tif":
-                    case "wav":
-                    case "mpg":
-                    case "mpeg":
-                    case "mp2":
-                    case "mp4":
+                    case "m4a":
                     case "m4v":
-                    case "ogv":
+                    case "mka":
                     case "mkv":
                     case "mov":
-                    case "avi":
-                    case "webm":
-                    case "3gp":
+                    case "mp2":
+                    case "mp3":
+                    case "mp4":
+                    case "mpeg":
+                    case "mpg":
+                    case "oga":
+                    case "ogg":
+                    case "ogv":
+                    case "spx":
                     case "ts":
-                    case "mov":
+                    case "wav":
+                    case "webm":
                         $href = uploaded($filename);
                         break;
 
