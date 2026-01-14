@@ -427,7 +427,7 @@
     # Set headers.
     header("Content-Type: text/html; charset=UTF-8");
     header("Referrer-Policy: strict-origin-when-cross-origin");
-    header("Vary: Accept-Encoding, Cookie, Save-Data");
+    header("Vary: *");
 
     if ($config->send_pingbacks)
         header("Link: <".$config->url."/?action=webmention>; rel=\"webmention\"");
