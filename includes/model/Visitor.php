@@ -103,12 +103,8 @@
         public static function log_out(
         ): void {
             $user = new User($_SESSION['user_id']);
-            session_destroy();
-            session();
+            session(logout:true);
             Trigger::current()->call("user_logged_out", $user);
-
-            if (!headers_sent())
-                header('Clear-Site-Data: "storage"');
         }
 
         /**
