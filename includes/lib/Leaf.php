@@ -316,7 +316,7 @@
 
     /**
      * Function: twig_function_uploaded_search
-     * Returns an array of matches, if the visitor has the "export_content" privilege.
+     * Returns an array of matches, if the visitor has the "view_upload" privilege.
      *
      * Parameters:
      *     $search - A search term.
@@ -326,7 +326,7 @@
         $search = "",
         $filter = array()
     ): array {
-        if (!Visitor::current()->group->can("edit_post", "edit_page", true))
+        if (!Visitor::current()->group->can("view_upload"))
             return array();
 
         return uploaded_search($search, $filter);
