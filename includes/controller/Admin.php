@@ -2230,7 +2230,7 @@
          */
         public function admin_manage_uploads(
         ): void {
-            if (!Visitor::current()->group->can("view_upload", "edit_upload", "delete_upload"))
+            if (!Visitor::current()->group->can("view_upload"))
                 show_403(
                     __("Access Denied"),
                     __("You do not have sufficient privileges to manage uploads.")
