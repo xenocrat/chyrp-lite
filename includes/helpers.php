@@ -16,8 +16,12 @@
      *     $secure - Send the cookie only over HTTPS?
      */
     function session(
-        $secure = null
+        $secure = null,
+        $logout = false
     ): void {
+        if ($logout)
+            session_destroy();
+
         if (session_status() != PHP_SESSION_NONE) {
             trigger_error(
                 __("Session cannot be started more than once."),
@@ -58,15 +62,25 @@
         session_name("ChyrpSession");
         session_start();
 
-        if (isset($_COOKIE['ChyrpSession']))
-            setcookie(session_name(), session_id(), $options_cookie);
+        if ($logout) {
+            header_remove("Set-Cookie");
+            session_regenerate_id();
+            header('Clear-Site-Data: "cache", "storage"');
+        } else {
+            if (isset($_COOKIE['ChyrpSession']))
+                setcookie(
+                    session_name(),
+                    session_id(),
+                    $options_cookie
+                );
 
-        if (!ini_get("session.gc_probability")) {
-            if (random_int(1, 100) === 42) {
-                if (DEBUG)
-                    error_log("SESSION gc");
+            if (!ini_get("session.gc_probability")) {
+                if (random_int(1, 100) === 42) {
+                    if (DEBUG)
+                        error_log("SESSION gc");
 
-                $handler->gc(COOKIE_LIFETIME);
+                    $handler->gc(COOKIE_LIFETIME);
+                }
             }
         }
     }
@@ -3122,6 +3136,7 @@
         $url = true
     ): string|false {
         $config = Config::current();
+        $trigger = Trigger::current();
 
         $filename = str_replace(
             array(DIR, "/", "<", ">"),
@@ -3132,16 +3147,18 @@
         if ($filename == "")
             return false;
 
-        return ($url) ?
-            fix(
-                $config->chyrp_url.
-                str_replace(DIR, "/", $config->uploads_path).
-                urlencode($filename),
-                true
-            )
-            :
-            MAIN_DIR.$config->uploads_path.$filename
-            ;
+        if (!$url)
+            return MAIN_DIR.$config->uploads_path.$filename;
+
+        $upload_url = fix(
+            $config->chyrp_url.
+            str_replace(DIR, "/", $config->uploads_path).
+            urlencode($filename),
+            true
+        );
+
+        $trigger->filter($upload_url, "uploaded", $filename);
+        return $upload_url;
     }
 
     /**
