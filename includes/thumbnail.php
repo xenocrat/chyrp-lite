@@ -17,14 +17,6 @@
             code:400
         );
 
-    if (!$visitor->group->can("view_site"))
-        show_403(
-            __("Access Denied"),
-            __("You are not allowed to view this site.")
-        );
-
-    $quality = abs((int) fallback($_GET["quality"], 80));
-
     $filename = str_replace(
         array(DIR, "/", "<", ">"),
         "",
@@ -38,6 +30,7 @@
         );
 
     $filepath = uploaded($filename, false);
+    $quality = abs((int) fallback($_GET["quality"], 80));
     $thumb_w = abs((int) fallback($_GET["max_width"], 960));
     $thumb_h = abs((int) fallback($_GET["max_height"], 0));
 
@@ -66,6 +59,7 @@
         header_remove("Pragma");
         header_remove("Expires");
         header_remove("Set-Cookie");
+        header("Vary: Accept-Encoding, Save-Data");
         header("Cache-Control: public, must-revalidate, stale-if-error, max-age=604800");
         redirect(uploaded($filename), code:301);
     }
@@ -77,7 +71,7 @@
         if ($lastmod >= filemtime($filepath)) {
             header_remove();
             header($_SERVER['SERVER_PROTOCOL']." 304 Not Modified");
-            header("Vary: Accept-Encoding, Cookie, Save-Data");
+            header("Vary: Accept-Encoding, Save-Data");
             header("Cache-Control: public, must-revalidate, stale-if-error, max-age=2592000");
             exit;
         }
@@ -88,7 +82,7 @@
     header_remove("Expires");
     header_remove("Set-Cookie");
     header("Last-Modified: ".date("r", filemtime($filepath)));
-    header("Vary: Accept-Encoding, Cookie, Save-Data");
+    header("Vary: Accept-Encoding, Save-Data");
     header("Cache-Control: public, must-revalidate, stale-if-error, max-age=2592000");
     header("Content-Disposition: inline; filename=\"".$safename."\"");
     $thumb->create();
