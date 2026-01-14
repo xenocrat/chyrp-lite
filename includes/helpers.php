@@ -3379,23 +3379,23 @@
     ): array {
         return array(
             # Binary and text formats:
-            "bin",  "exe",  "txt",  "rtf",  "vtt",
-            "md",   "pdf",  "epub", "mobi", "kfx",
+            "bin",  "epub", "exe",  "kfx",  "md",
+            "mobi", "pdf",  "rtf",  "txt",  "vtt",
 
             # Archive and compression formats:
-            "zip",  "tar",  "rar",  "gz",   "bz2",
-            "7z",   "dmg",  "cab",  "iso",  "udf",
+            "7z",   "bz2",  "cab",  "dmg",  "gz",
+            "iso",  "rar",  "tar",  "udf",  "zip",
 
             # Image formats:
-            "jpg",  "jpeg", "png",  "webp", "gif",
-            "avif", "tif",  "tiff", "heif", "bmp",
+            "avif", "bmp",  "gif",  "heif", "jpeg",
+            "jpg",  "png",  "tif",  "tiff", "webp", 
 
             # Video and audio formats:
-            "mpg",  "mpeg", "mp2",  "mp3",  "mp4",
-            "m4a",  "m4v",  "ogg",  "oga",  "ogv",
-            "mka",  "mkv",  "mov",  "avi",  "wav",
-            "webm", "flac", "aif",  "aiff", "3gp",
-            "spx",  "ts"
+            "3gp",  "aif",  "aiff", "avi",  "flac",
+            "m4a",  "m4v",  "mka",  "mkv",  "mov",
+            "mp2",  "mp3",  "mp4",  "mpeg", "mpg",
+            "oga",  "ogg",  "ogv",  "spx",  "ts",
+            "wav",  "webm"
         );
     }
 
