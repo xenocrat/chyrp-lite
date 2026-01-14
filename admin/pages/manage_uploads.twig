@@ -31,20 +31,26 @@
 {% for upload in uploads.paginated %}
 <tr id="uploads_{{ loop.index }}" class="uploads">
 <td class="uploads_name filename main">
-{% if ["jpg", "jpeg", "png", "webp", "gif"] | contains(upload.type) %}
+{% if ["gif", "jpeg", "jpg", "png", "webp"] | contains(upload.type) %}
 {{ upload.name | thumbnail("", false, ["max_width=70", "quality=60", "square=1"], "70px") }}
-{% elseif ["avif", "tif", "tiff", "heif", "bmp"] | contains(upload.type) %}
+{% set file_url = site.chyrp_url ~ "/includes/thumbnail.php?file=" ~ (upload.name | url_encode) %}
+{% elseif ["avif", "bmp", "heif", "tif", "tiff"] | contains(upload.type) %}
 {{ icon_svg("image.svg", false, "placeholder") }}
-{% elseif ["mp3", "m4a", "oga", "ogg", "mka", "flac", "wav", "aiff"] | contains(upload.type) %}
+{% set file_url = site.chyrp_url ~ "/includes/thumbnail.php?file=" ~ (upload.name | url_encode) %}
+{% elseif ["aif", "aiff", "flac", "m4a", "mka", "mp3", "oga", "ogg", "wav"] | contains(upload.type) %}
 {{ icon_svg("audio.svg", false, "placeholder") }}
-{% elseif ["mpg", "mpeg", "mp2", "mp4", "m4v", "ogv", "mkv",  "mov", "avi", "webm", "3gp", "ts"] | contains(upload.type) %}
+{% set file_url = upload.name | uploaded %}
+{% elseif ["3gp", "avi", "m4v", "mkv", "mov", "mp2", "mp4", "mpeg", "mpg", "ogv", "spx", "ts", "webm"] | contains(upload.type) %}
 {{ icon_svg("video.svg", false, "placeholder") }}
-{% elseif ["zip", "tar", "rar", "gz", "bz2", "7z", "dmg", "cab", "iso", "udf"] | contains(upload.type) %}
+{% set file_url = upload.name | uploaded %}
+{% elseif ["7z", "bz2", "cab", "dmg", "gz", "iso", "rar", "tar", "udf", "zip"] | contains(upload.type) %}
 {{ icon_svg("archive.svg", false, "placeholder") }}
+{% set file_url = upload.name | download %}
 {% else %}
 {{ icon_svg("file.svg", false, "placeholder") }}
+{% set file_url = upload.name | download %}
 {% endif %}
-<a target="_blank" href="{{ upload.name | uploaded }}">{{ upload.name | fix(false, true) }}</a>
+<a target="_blank" href="{{ file_url }}">{{ upload.name | fix(false, true) }}</a>
 </td>
 <td class="uploads_modified value">
 {{ upload.modified | time("Y-m-d H:i:s") }}
@@ -57,13 +63,9 @@
 </td>
 {{ trigger.call("manage_uploads_column", upload) }}
 <td class="controls">
-{%- if visitor.group.can("view_upload") -%}
 <a class="emblem" href="{{ upload.name | download }}">
 {{ icon_svg("download.svg", "Download" | translate) }}
 </a>
-{%- else -%}
-{{ icon_svg("forbidden.svg", false, "emblem forbidden") }}
-{%- endif -%}
 </td>
 <td class="controls">
 {%- if visitor.group.can("edit_upload") -%}
