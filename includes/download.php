@@ -16,12 +16,6 @@
             code:400
         );
 
-    if (!$visitor->group->can("view_site"))
-        show_403(
-            __("Access Denied"),
-            __("You are not allowed to view this site.")
-        );
-
     $filename = str_replace(
         array(DIR, "/", "<", ">"),
         "",
@@ -49,7 +43,7 @@
         if ($lastmod >= filemtime($filepath)) {
             header_remove();
             header($_SERVER['SERVER_PROTOCOL']." 304 Not Modified");
-            header("Vary: Accept-Encoding, Cookie");
+            header("Vary: Accept-Encoding");
             header("Cache-Control: no-cache, private, max-age=2592000");
             exit;
         }
@@ -63,7 +57,7 @@
     header_remove("Expires");
     header_remove("Set-Cookie");
     header("Last-Modified: ".date("r", filemtime($filepath)));
-    header("Vary: Accept-Encoding, Cookie");
+    header("Vary: Accept-Encoding");
     header("Cache-Control: no-cache, private, max-age=2592000");
     header("Content-Type: application/octet-stream");
     header("Content-Disposition: attachment; filename=\"".$safename."\"");
