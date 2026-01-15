@@ -161,7 +161,7 @@ msgstr "Mów"
 #: themes/akarui/forms/user/controls.twig:4
 #: themes/akarui/layouts/default.twig:61
 msgid "Controls"
-msgstr "Kontrolki"
+msgstr "Profil"
 
 #: themes/akarui/forms/user/controls.twig:6
 msgid "Full name"
@@ -250,11 +250,11 @@ msgstr "Strona %d"
 
 #: themes/akarui/layouts/default.twig:33
 msgid "Blog"
-msgstr "Blog"
+msgstr "Wpisy"
 
 #: themes/akarui/layouts/default.twig:41
 msgid "Feed"
-msgstr "Kanał"
+msgstr "RSS"
 
 #: themes/akarui/layouts/default.twig:44
 msgid "Archive"
