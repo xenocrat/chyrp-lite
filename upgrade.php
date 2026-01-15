@@ -771,6 +771,23 @@
             );
     }
 
+    /**
+     * Function: add_admin_activation
+     * Adds the admin_activation config setting.
+     *
+     * Versions: 2025.03 => 2026.01
+     */
+    function add_admin_activation(
+    ): void {
+        $set = Config::current()->set("admin_activation", false, true);
+
+        if ($set === false)
+            error(
+                __("Error"),
+                __("Could not write the configuration file.")
+            );
+    }
+
     #---------------------------------------------
     # Output Starts
     #---------------------------------------------
@@ -1123,6 +1140,7 @@
         add_edit_upload();
         add_delete_upload();
         add_email_public();
+        add_admin_activation();
 
         # Perform module upgrades.
         foreach ($config->enabled_modules as $module) {

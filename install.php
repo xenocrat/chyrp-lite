@@ -1092,6 +1092,7 @@
                 $config->set("enable_emoji", true),
                 $config->set("enable_markdown", true),
                 $config->set("can_register", false),
+                $config->set("admin_activation", false),
                 $config->set("email_activation", false),
                 $config->set("email_correspondence", true),
                 $config->set("default_group", $group_id["Member"]),

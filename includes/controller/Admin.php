@@ -1099,7 +1099,7 @@
                     code:422
                 );
 
-            if ($_POST['password1'] != $_POST['password2'])
+            if ($_POST['password1'] !== $_POST['password2'])
                 error(
                     __("Error"),
                     __("Passwords do not match."),
@@ -1149,10 +1149,6 @@
                     __("Group not found.")
                 );
 
-            $approved = ($config->email_activation and empty($_POST['activated'])) ?
-                false :
-                true ;
-
             $user = User::add(
                 login:$login,
                 password:User::hash_password($_POST['password1']),
@@ -1160,10 +1156,10 @@
                 full_name:$_POST['full_name'],
                 website:$_POST['website'],
                 group_id:$group->id,
-                approved:$approved
+                approved:empty($_POST['activated'])
             );
 
-            if (!$user->approved)
+            if (!$user->approved and $config->email_activation)
                 email_activate_account($user);
 
             Flash::notice(
@@ -1282,7 +1278,7 @@
             if (!empty($_POST['new_password1'])) {
                 if (
                     empty($_POST['new_password2']) or
-                    $_POST['new_password1'] != $_POST['new_password2']
+                    $_POST['new_password1'] !== $_POST['new_password2']
                 ) {
                     error(
                         __("Error"),
@@ -1338,10 +1334,6 @@
                     __("Group not found.")
                 );
 
-            $approved = ($config->email_activation and empty($_POST['activated'])) ?
-                false :
-                true ;
-
             $user = $user->update(
                 login:$login,
                 password:$password,
@@ -1349,10 +1341,10 @@
                 full_name:$_POST['full_name'],
                 website:$_POST['website'],
                 group_id:$group->id,
-                approved:$approved
+                approved:empty($_POST['activated'])
             );
 
-            if (!$user->approved)
+            if (!$user->approved and $config->email_activation)
                 email_activate_account($user);
 
             Flash::notice(
@@ -3573,6 +3565,7 @@
 
             fallback($_POST['default_group'], 0);
             fallback($_POST['guest_group'], 0);
+            fallback($_POST['activation'], "admin_activation");
 
             $default_group = new Group($_POST['default_group']);
 
@@ -3592,17 +3585,28 @@
                     code:410
                 );
 
-            $correspond = (
-                !empty($_POST['email_activation']) or
-                !empty($_POST['email_correspondence'])
-            ) ?
-                true :
-                false ;
+            $correspondence = !empty($_POST['email_correspondence']);
+
+            switch ($_POST['activation']) {
+                case "email_activation":
+                    $email_activation = true;
+                    $admin_activation = false;
+                    $correspondence = true;
+                    break;
+                case "admin_activation":
+                    $email_activation = false;
+                    $admin_activation = true;
+                    break;
+                default:
+                    $email_activation = false;
+                    $admin_activation = false;
+            }
 
             $config = Config::current();
             $config->set("can_register", !empty($_POST['can_register']));
-            $config->set("email_activation", !empty($_POST['email_activation']));
-            $config->set("email_correspondence", $correspond);
+            $config->set("email_activation", $email_activation);
+            $config->set("admin_activation", $admin_activation);
+            $config->set("email_correspondence", $correspondence);
             $config->set("default_group", (int) $default_group->id);
             $config->set("guest_group", (int) $guest_group->id);
 

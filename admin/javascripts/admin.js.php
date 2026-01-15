@@ -1454,7 +1454,7 @@ var Settings = {
         $("input#email_correspondence").click(
             function() {
                 if ($(this).prop("checked") == false)
-                    $("#email_activation").prop("checked", false);
+                    $("#admin_activation").prop("checked", true);
             }
         );
 

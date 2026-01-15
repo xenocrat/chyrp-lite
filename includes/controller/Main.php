@@ -888,15 +888,24 @@
                         full_name:$_POST['full_name'],
                         website:$_POST['website'],
                         group_id:$config->default_group,
-                        approved:($config->email_activation) ? false : true
+                        approved:!($config->email_activation or $config->admin_activation)
                     );
 
                     if (!$user->approved) {
-                        email_activate_account($user);
-                        Flash::notice(
-                            __("We have emailed you an activation link."),
-                            "/"
-                        );
+                        if ($config->email_activation) {
+                            email_activate_account($user);
+                            Flash::notice(
+                                __("We have emailed you an activation link."),
+                                "/"
+                            );
+                        }
+
+                        if ($config->admin_activation) {
+                            Flash::notice(
+                                __("The blog administrator must activate your account."),
+                                "/"
+                            );
+                        }
                     }
 
                     Visitor::log_in($user);
@@ -944,7 +953,7 @@
 
             if (!hash_equals($hash, $_GET['token']))
                 Flash::warning(
-                    __("Invalid authentication token."),
+                    __("Please contact the blog administrator for help with your account."),
                     "/"
                 );
 
@@ -971,10 +980,12 @@
             $config = Config::current();
             $trigger = Trigger::current();
 
+            fallback($_SESSION['redirect_to'], "/");
+
             if (logged_in())
                 Flash::notice(
                     __("You are already logged in."),
-                    fallback($_SESSION['redirect_to'], "/")
+                    $_SESSION['redirect_to']
                 );
 
             if (!empty($_POST)) {
@@ -999,17 +1010,27 @@
                         array("login" => $_POST['login'])
                     );
 
-                    if (!$user->approved and $config->email_activation)
-                        Flash::notice(
-                            __("You must activate your account before you log in."),
-                            "/"
-                        );
+                    if (!$user->approved) {
+                        if ($config->email_activation) {
+                            Flash::notice(
+                                __("You must activate your account before you log in."),
+                                "/"
+                            );
+                        }
+
+                        if ($config->admin_activation) {
+                            Flash::notice(
+                                __("The blog administrator must activate your account."),
+                                "/"
+                            );
+                        }
+                    }
 
                     Visitor::log_in($user);
 
                     Flash::notice(
                         __("Logged in."),
-                        fallback($_SESSION['redirect_to'], "/")
+                        $_SESSION['redirect_to']
                     );
                 }
             }
@@ -1064,7 +1085,7 @@
                 if (!empty($_POST['new_password1'])) {
                     if (
                         empty($_POST['new_password2']) or
-                        $_POST['new_password1'] != $_POST['new_password2']
+                        $_POST['new_password1'] !== $_POST['new_password2']
                     ) {
                         Flash::warning(
                             __("Passwords do not match.")
@@ -1219,7 +1240,7 @@
 
             if (!hash_equals($hash, $_REQUEST['token']))
                 Flash::warning(
-                    __("Invalid authentication token."),
+                    __("Please contact the blog administrator for help with your account."),
                     "/"
                 );
 
@@ -1233,7 +1254,7 @@
                     Flash::warning(
                         __("Passwords cannot be blank.")
                     );
-                elseif ($_POST['new_password1'] != $_POST['new_password2'])
+                elseif ($_POST['new_password1'] !== $_POST['new_password2'])
                     Flash::warning(
                         __("Passwords do not match.")
                     );
@@ -1244,7 +1265,8 @@
 
                 if (!Flash::exists("warning")) {
                     $user->update(
-                        password:User::hash_password($_POST['new_password1'])
+                        password:User::hash_password($_POST['new_password1']),
+                        approved:($user->approved or $config->email_activation)
                     );
 
                     Flash::notice(

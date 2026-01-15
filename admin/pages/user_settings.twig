@@ -23,11 +23,27 @@
 </small>
 </p>
 <p>
-<label for="email_activation">{{ "Activate by Email" | translate }}</label>
+<label for="email_activation">{{ "Auto Activation" | translate }}</label>
 {#- -#}
-<input class="checkbox" type="checkbox" name="email_activation" id="email_activation"{{ site.email_activation | checked }}>
+<input class="radio" type="radio" name="activation" id="auto_activation" value="auto_activation"{{ (not site.email_activation and not site.admin_activation) | checked }}>
 <small>
-{{ "Should users activate by email?" | translate }}
+{{ "User accounts activate automatically." | translate }}
+</small>
+</p>
+<p>
+<label for="email_activation">{{ "Email Activation" | translate }}</label>
+{#- -#}
+<input class="radio" type="radio" name="activation" id="email_activation" value="email_activation"{{ site.email_activation | checked }}>
+<small>
+{{ "User accounts must be activated by email." | translate }}
+</small>
+</p>
+<p>
+<label for="admin_activation">{{ "Manual Activation" | translate }}</label>
+{#- -#}
+<input class="radio" type="radio" name="activation" id="admin_activation" value="admin_activation"{{ site.admin_activation | checked }}>
+<small>
+{{ "User accounts must be activated by an administrator." | translate }}
 </small>
 </p>
 <p>
