@@ -171,7 +171,7 @@ msgstr "Mów"
 
 #: themes/umbra/forms/user/controls.twig:5 themes/umbra/layouts/default.twig:80
 msgid "Controls"
-msgstr "Kontrolki"
+msgstr "Profil"
 
 #: themes/umbra/forms/user/controls.twig:7
 msgid "Full name"
@@ -263,7 +263,7 @@ msgstr "Linki"
 
 #: themes/umbra/layouts/default.twig:60
 msgid "Feed"
-msgstr "Kanał"
+msgstr "RSS"
 
 #: themes/umbra/layouts/default.twig:63
 msgid "Archive"

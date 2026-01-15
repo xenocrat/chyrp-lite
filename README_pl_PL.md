@@ -2,7 +2,7 @@
 
 ## Co może dla mnie zrobić Chyrp Lite?
 
-Chyrp Lite umożliwia uruchomienie bloga na własnym serwerze WWW przy minimalnym wysiłku. Możesz prowadzić tradycyjnego bloga, tumbleblog lub dodać mnóstwo opcji personalizacji i zbudować ogólną platformę publikacyjną z funkcjami blogowymi jako dodatki. Otrzymujesz pięć estetycznych motywów i przyjazny panel administracyjny, w pełni obsługiwalny na szerokiej gamie urządzeń dzięki responsywnemu HTML5. Semantyczne znaczniki i obszerne etykiety ARIA zapewniają, że Twój blog będzie dostępny dla odwiedzających korzystających z technologii wspomagających.
+Chyrp Lite umożliwia uruchomienie bloga na własnym serwerze WWW przy minimalnym wysiłku. Możesz prowadzić tradycyjnego bloga, tumbleblog lub dodać mnóstwo opcji personalizacji i zbudować ogólną platformę publikacyjną z funkcjami blogowymi jako dodatki. Otrzymujesz sześć estetycznych motywów i przyjazny panel administracyjny, w pełni obsługiwalny na szerokiej gamie urządzeń dzięki responsywnemu HTML5. Semantyczne znaczniki i obszerne etykiety ARIA zapewniają, że Twój blog będzie dostępny dla odwiedzających korzystających z technologii wspomagających.
 
 Dzięki elastycznemu systemowi Feathers i Pages możesz uczynić swoją stronę dokładnie taką, jaką chcesz. Feathers umożliwiają różne typy treści blogowych – możesz ograniczyć się do czystego tekstu lub stworzyć multimedialne, kolorowe wpisy. Pages pozwalają publikować artykuły oddzielone od wpisów blogowych – może to być prosty kolofon lub hierarchia wielu stron, opcjonalnie z stroną główną, którą zobaczą odwiedzający po wejściu na Twoją witrynę.
 
@@ -124,4 +124,4 @@ Chyrp Lite został stworzony przez następujące osoby:
 
 ## Licencje
 
-Chyrp Lite jest własnością Alex Suraci, Arian Xhezairi, Daniel Pimley oraz innych współautorów (2008–2025) i jest rozpowszechniany na warunkach [licencji BSD](https://raw.githubusercontent.com/xenocrat/chyrp-lite/master/LICENSE.md). Zobacz katalog `licenses` po pełny tekst licencji wszystkich pakietów dołączonych do Chyrp Lite.
+Chyrp Lite jest własnością Alex Suraci, Arian Xhezairi, Daniel Pimley oraz innych współautorów (2008–2026) i jest rozpowszechniany na warunkach [licencji BSD](https://raw.githubusercontent.com/xenocrat/chyrp-lite/master/LICENSE.md). Zobacz katalog `licenses` po pełny tekst licencji wszystkich pakietów dołączonych do Chyrp Lite.

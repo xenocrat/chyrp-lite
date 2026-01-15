@@ -421,7 +421,7 @@
         $format = null
     ): string {
         if (!isset($format))
-            $format = (ADMIN) ? "Y-m-d" : "d F Y" ;
+            $format = (ADMIN) ? "Y-m-d" : "j F Y" ;
 
         return _w($format, $timestamp);
     }
@@ -442,7 +442,7 @@
         $convert = null
     ): string {
         if (!isset($format))
-            $format = (ADMIN) ? "Y-m-d" : "d F Y" ;
+            $format = (ADMIN) ? "Y-m-d" : "j F Y" ;
 
         $string = _w($format, $timestamp);
         $datetime = when("c", $timestamp);
@@ -478,7 +478,7 @@
         $format = null
     ): string {
         if (!isset($format))
-            $format = (ADMIN) ? "Y-m-d" : "d F Y" ;
+            $format = (ADMIN) ? "Y-m-d" : "j F Y" ;
 
         return when($format, $timestamp);
     }

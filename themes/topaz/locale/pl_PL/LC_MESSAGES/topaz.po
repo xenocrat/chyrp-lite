@@ -111,7 +111,7 @@ msgstr "Linki"
 
 #: themes/topaz/content/sidebar.twig:11
 msgid "Blog"
-msgstr "Blog"
+msgstr "Wpisy"
 
 #: themes/topaz/content/sidebar.twig:15 themes/topaz/forms/user/controls.twig:9
 #: themes/topaz/forms/user/register.twig:13
@@ -120,7 +120,7 @@ msgstr "E‑mail"
 
 #: themes/topaz/content/sidebar.twig:19
 msgid "Feed"
-msgstr "Kanał"
+msgstr "RSS"
 
 #: themes/topaz/content/sidebar.twig:23
 msgid "Admin"
@@ -132,7 +132,7 @@ msgstr "Napisz"
 
 #: themes/topaz/content/sidebar.twig:36 themes/topaz/forms/user/controls.twig:5
 msgid "Controls"
-msgstr "Kontrolki"
+msgstr "Profil"
 
 #: themes/topaz/content/sidebar.twig:39
 msgid "Log out"

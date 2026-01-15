@@ -202,7 +202,7 @@ msgstr "Mów"
 #: themes/sparrow/forms/user/controls.twig:5
 #: themes/sparrow/layouts/default.twig:80
 msgid "Controls"
-msgstr "Kontrolki"
+msgstr "Profil"
 
 #: themes/sparrow/forms/user/controls.twig:7
 msgid "Full name"
@@ -296,7 +296,7 @@ msgstr "Linki"
 
 #: themes/sparrow/layouts/default.twig:60
 msgid "Feed"
-msgstr "Kanał"
+msgstr "RSS"
 
 #: themes/sparrow/layouts/default.twig:63
 msgid "Archive"
