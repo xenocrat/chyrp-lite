@@ -1454,11 +1454,11 @@ var Settings = {
         $("input#email_correspondence").click(
             function() {
                 if ($(this).prop("checked") == false)
-                    $("#admin_activation").prop("checked", true);
+                    $("#user_activation_admin").prop("checked", true);
             }
         );
 
-        $("input#email_activation").click(
+        $("input#user_activation_email").click(
             function() {
                 if ($(this).prop("checked") == true)
                     $("#email_correspondence").prop("checked", true);

@@ -888,32 +888,41 @@
                         full_name:$_POST['full_name'],
                         website:$_POST['website'],
                         group_id:$config->default_group,
-                        approved:!($config->email_activation or $config->admin_activation)
+                        approved:($config->user_activation == "none")
                     );
 
-                    if (!$user->approved) {
-                        if ($config->email_activation) {
+                    switch ($config->user_activation) {
+                        case "email":
                             email_activate_account($user);
+
                             Flash::notice(
                                 __("We have emailed you an activation link."),
                                 "/"
                             );
-                        }
 
-                        if ($config->admin_activation) {
+                            break;
+
+                        case "admin":
+                            email_admin_activation($user);
+
                             Flash::notice(
-                                __("The blog administrator must activate your account."),
+                                ___("The blog administrator must activate your account."),
                                 "/"
                             );
-                        }
+
+                            break;
+
+                        case "none":
+                            Visitor::log_in($user);
+                            email_acknowledge_user($user);
+
+                            Flash::notice(
+                                __("Your account is now active."),
+                                "/"
+                            );
+
+                            break;
                     }
-
-                    Visitor::log_in($user);
-
-                    Flash::notice(
-                        __("Your account is now active."),
-                        "/"
-                    );
                 }
             }
 
@@ -1011,18 +1020,22 @@
                     );
 
                     if (!$user->approved) {
-                        if ($config->email_activation) {
-                            Flash::notice(
-                                __("You must activate your account before you log in."),
-                                "/"
-                            );
-                        }
+                        switch ($config->user_activation) {
+                            case "email":
+                                Flash::notice(
+                                    __("You must activate your account before you log in."),
+                                    "/"
+                                );
 
-                        if ($config->admin_activation) {
-                            Flash::notice(
-                                __("The blog administrator must activate your account."),
-                                "/"
-                            );
+                                exit;
+
+                            case "admin":
+                                Flash::notice(
+                                    __("The blog administrator must activate your account."),
+                                    "/"
+                                );
+
+                                exit;
                         }
                     }
 
@@ -1266,7 +1279,7 @@
                 if (!Flash::exists("warning")) {
                     $user->update(
                         password:User::hash_password($_POST['new_password1']),
-                        approved:($user->approved or $config->email_activation)
+                        approved:($user->approved or $config->user_activation == "email")
                     );
 
                     Flash::notice(

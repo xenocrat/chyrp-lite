@@ -1159,8 +1159,18 @@
                 approved:empty($_POST['activated'])
             );
 
-            if (!$user->approved and $config->email_activation)
-                email_activate_account($user);
+            if ($user->approved) {
+                email_acknowledge_user($user);
+            } else {
+                switch ($config->user_activation) {
+                    case "email":
+                        email_activate_account($user);
+                        break;
+                    case "admin":
+                        email_admin_activation($user);
+                        break;
+                }
+            }
 
             Flash::notice(
                 __("User added."),
@@ -1334,6 +1344,8 @@
                     __("Group not found.")
                 );
 
+            $was_approved = $user->approved;
+
             $user = $user->update(
                 login:$login,
                 password:$password,
@@ -1344,8 +1356,8 @@
                 approved:empty($_POST['activated'])
             );
 
-            if (!$user->approved and $config->email_activation)
-                email_activate_account($user);
+            if ($user->approved and !$was_approved)
+                email_acknowledge_user($user);
 
             Flash::notice(
                 __("User updated."),
@@ -3565,7 +3577,7 @@
 
             fallback($_POST['default_group'], 0);
             fallback($_POST['guest_group'], 0);
-            fallback($_POST['activation'], "admin_activation");
+            fallback($_POST['user_activation'], "admin");
 
             $default_group = new Group($_POST['default_group']);
 
@@ -3585,30 +3597,17 @@
                     code:410
                 );
 
-            $correspondence = !empty($_POST['email_correspondence']);
-
-            switch ($_POST['activation']) {
-                case "email_activation":
-                    $email_activation = true;
-                    $admin_activation = false;
-                    $correspondence = true;
-                    break;
-                case "admin_activation":
-                    $email_activation = false;
-                    $admin_activation = true;
-                    break;
-                default:
-                    $email_activation = false;
-                    $admin_activation = false;
-            }
+            $email_correspondence = (
+                $_POST['user_activation'] == "email" or
+                !empty($_POST['email_correspondence'])
+            );
 
             $config = Config::current();
             $config->set("can_register", !empty($_POST['can_register']));
-            $config->set("email_activation", $email_activation);
-            $config->set("admin_activation", $admin_activation);
-            $config->set("email_correspondence", $correspondence);
+            $config->set("email_correspondence", $email_correspondence);
             $config->set("default_group", (int) $default_group->id);
             $config->set("guest_group", (int) $guest_group->id);
+            $config->set("user_activation", $_POST['user_activation']);
 
             Flash::notice(
                 __("Settings updated."),

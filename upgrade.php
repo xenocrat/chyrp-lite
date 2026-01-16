@@ -772,14 +772,20 @@
     }
 
     /**
-     * Function: add_admin_activation
-     * Adds the admin_activation config setting.
+     * Function: add_user_activation
+     * Adds the user_activation config setting.
      *
      * Versions: 2025.03 => 2026.01
      */
-    function add_admin_activation(
+    function add_user_activation(
     ): void {
-        $set = Config::current()->set("admin_activation", false, true);
+        $config = Config::current();
+        $str = isset($config->email_activation) ? "email" : "none" ;
+
+        $set = array(
+            $config->set("user_activation", $str, true),
+            $config->remove("email_activation")
+        );
 
         if ($set === false)
             error(
@@ -1140,7 +1146,7 @@
         add_edit_upload();
         add_delete_upload();
         add_email_public();
-        add_admin_activation();
+        add_user_activation();
 
         # Perform module upgrades.
         foreach ($config->enabled_modules as $module) {

@@ -23,27 +23,27 @@
 </small>
 </p>
 <p>
-<label for="email_activation">{{ "Auto Activation" | translate }}</label>
+<label for="user_activation_none">{{ "Automatic User Activation" | translate }}</label>
 {#- -#}
-<input class="radio" type="radio" name="activation" id="auto_activation" value="auto_activation"{{ (not site.email_activation and not site.admin_activation) | checked }}>
+<input class="radio" type="radio" name="user_activation" id="user_activation_none" value="none"{{ (site.user_activation == "none") | checked }}>
 <small>
-{{ "User accounts activate automatically." | translate }}
+{{ "New users can log in immediately." | translate }}
 </small>
 </p>
 <p>
-<label for="email_activation">{{ "Email Activation" | translate }}</label>
+<label for="user_activation_email">{{ "User Activation by Email" | translate }}</label>
 {#- -#}
-<input class="radio" type="radio" name="activation" id="email_activation" value="email_activation"{{ site.email_activation | checked }}>
+<input class="radio" type="radio" name="user_activation" id="user_activation_email" value="email"{{ (site.user_activation == "email") | checked }}>
 <small>
-{{ "User accounts must be activated by email." | translate }}
+{{ "New users must respond to an activation email." | translate }}
 </small>
 </p>
 <p>
-<label for="admin_activation">{{ "Manual Activation" | translate }}</label>
+<label for="user_activation_admin">{{ "User Activation by Administrator" | translate }}</label>
 {#- -#}
-<input class="radio" type="radio" name="activation" id="admin_activation" value="admin_activation"{{ site.admin_activation | checked }}>
+<input class="radio" type="radio" name="user_activation" id="user_activation_admin" value="admin"{{ (site.user_activation == "admin") | checked }}>
 <small>
-{{ "User accounts must be activated by an administrator." | translate }}
+{{ "New users must be activated by an administrator." | translate }}
 </small>
 </p>
 <p>

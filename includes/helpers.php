@@ -4045,7 +4045,7 @@
 
     /**
      * Function: email_activate_account
-     * Sends an activation email to a newly registered user.
+     * Sends an activation email to a new user.
      *
      * Parameters:
      *     $user - The user to receive the email.
@@ -4123,6 +4123,79 @@
                    unfix($url);
 
         return email($user->email, $subject, $message, $headers);
+    }
+
+    /**
+     * Function: email_acknowledge_user
+     * Sends an acknowledgement to a new user.
+     *
+     * Parameters:
+     *     $user - The user to receive the email.
+     */
+    function email_acknowledge_user(
+        $user
+    ): bool {
+        $config = Config::current();
+        $trigger = Trigger::current();
+
+        $url = url("login", MainController::current());
+
+        if ($trigger->exists("correspond_acknowledge_user"))
+            return $trigger->call("correspond_acknowledge_user", $user, $url);
+
+        $headers = array(
+            "Content-Type" => "text/plain; charset=UTF-8",
+            "From" => $config->email,
+            "X-Mailer" => CHYRP_IDENTITY
+        );
+
+        $subject = _f("Welcome to %s", $config->name);
+        $message = _f("Hello, %s.", $user->login).
+                   "\r\n".
+                   "\r\n".
+                   __("You are receiving this message because you registered a new account.").
+                   "\r\n".
+                   "\r\n".
+                   __("Visit this link to log in:").
+                   "\r\n".
+                   unfix($url);
+
+        return email($user->email, $subject, $message, $headers);
+    }
+
+    /**
+     * Function: email_admin_activation
+     * Sends an activation email to the site contact.
+     *
+     * Parameters:
+     *     $user - The user requiring activation.
+     */
+    function email_admin_activation(
+        $user
+    ): bool {
+        $config = Config::current();
+        $trigger = Trigger::current();
+
+        $url = $user->edit_url();
+
+        if ($trigger->exists("correspond_admin_activation"))
+            return $trigger->call("correspond_admin_activation", $user, $url);
+
+        $headers = array(
+            "Content-Type" => "text/plain; charset=UTF-8",
+            "From" => $config->email,
+            "X-Mailer" => CHYRP_IDENTITY
+        );
+
+        $subject = _f("New user at %s", $config->name);
+        $message = __("You are receiving this message because a user account was registered.").
+                   "\r\n".
+                   "\r\n".
+                   __("Visit this link to activate the user account:").
+                   "\r\n".
+                   unfix($url);
+
+        return email($config->email, $subject, $message, $headers);
     }
 
     /**
