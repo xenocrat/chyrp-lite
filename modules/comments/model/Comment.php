@@ -222,10 +222,7 @@
             );
 
             # Notify site contact, post author, and commenters of a new comment.
-            if (
-                $config->email_correspondence and
-                $comment->status != self::STATUS_PINGBACK
-            ) {
+            if ($comment->status != self::STATUS_PINGBACK) {
                 $done = array($comment->author_email);
 
                 if ($config->module_comments["notify_site_contact"]) {
@@ -356,12 +353,11 @@
                 )
             );
 
+            $was_approved = ($this->status == self::STATUS_APPROVED);
+            $now_approved = ($comment->status == self::STATUS_APPROVED);
+
             # Notify commenters of a newly approved comment.
-            if (
-                $config->email_correspondence and
-                $this->status != self::STATUS_APPROVED and
-                $comment->status == self::STATUS_APPROVED
-            ) {
+            if ($now_approved and !$was_approved) {
                 $done = array($comment->author_email);
 
                 $peers = self::find(
