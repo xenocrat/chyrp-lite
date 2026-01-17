@@ -1020,14 +1020,15 @@ var Write = {
             }
         );
 
-        // Remember unsaved text entered in the primary text input and textarea.
+        // Remember unsaved text entered in the primary text input.
         if (!!sessionStorage) {
             var prefix = "user_" + Visitor.id;
 
             $("#write_form .main_options input[type='text']").first().val(
                 function() {
                     try {
-                        return sessionStorage.getItem(prefix + "_write_title");
+                        var name = prefix + "_write_title";
+                        return sessionStorage.getItem(name) ?? $(this).val() ;
                     } catch(err) {
                         console.log("Caught Exception: Window.sessionStorage.getItem()");
                         return null;
@@ -1037,17 +1038,20 @@ var Write = {
                 "change",
                 function(e) {
                     try {
-                        sessionStorage.setItem(prefix + "_write_title", $(this).val());
+                        var name = prefix + "_write_title";
+                        sessionStorage.setItem(name, $(this).val());
                     } catch(err) {
                         console.log("Caught Exception: Window.sessionStorage.setItem()");
                     }
                 }
             );
 
+            // Remember unsaved text entered in the primary textarea.
             $("#write_form .main_options textarea").first().val(
                 function(index, value) {
                     try {
-                        return sessionStorage.getItem(prefix + "_write_body");
+                        var name = prefix + "_write_body";
+                        return sessionStorage.getItem(name) ?? $(this).val() ;
                     } catch(err) {
                         console.log("Caught Exception: Window.sessionStorage.getItem()");
                         return null;
@@ -1057,7 +1061,54 @@ var Write = {
                 "change",
                 function(e) {
                     try {
-                        sessionStorage.setItem(prefix + "_write_body", $(this).val());
+                        var name = prefix + "_write_body";
+                        sessionStorage.setItem(name, $(this).val());
+                    } catch(err) {
+                        console.log("Caught Exception: Window.sessionStorage.setItem()");
+                    }
+                }
+            );
+
+            // Remember unsaved text entered in the options inputs.
+            $("#write_form .more_options input:not(#pinned, #created_at)").val(
+                function(index, value) {
+                    try {
+                        var name = prefix + "_write_input_" + $(this).attr("id");
+                        return sessionStorage.getItem(name) ?? $(this).val() ;
+                    } catch(err) {
+                        console.log("Caught Exception: Window.sessionStorage.getItem()");
+                        return null;
+                    }
+                }
+            ).trigger("input").on(
+                "change",
+                function(e) {
+                    try {
+                        var name = prefix + "_write_input_" + $(this).attr("id");
+                        sessionStorage.setItem(name, $(this).val());
+                    } catch(err) {
+                        console.log("Caught Exception: Window.sessionStorage.setItem()");
+                    }
+                }
+            );
+
+            // Remember unsaved selections in the options selectors.
+            $("#write_form .more_options select:not(#status)").val(
+                function(index, value) {
+                    try {
+                        var name = prefix + "_write_select_" + $(this).attr("id");
+                        return sessionStorage.getItem(name) ?? $(this).val() ;
+                    } catch(err) {
+                        console.log("Caught Exception: Window.sessionStorage.getItem()");
+                        return null;
+                    }
+                }
+            ).trigger("input").on(
+                "change",
+                function(e) {
+                    try {
+                        var name = prefix + "_write_select_" + $(this).attr("id");
+                        sessionStorage.setItem(name, $(this).val());
                     } catch(err) {
                         console.log("Caught Exception: Window.sessionStorage.setItem()");
                     }
@@ -1068,8 +1119,14 @@ var Write = {
                 "submit.sessionStorage",
                 function(e) {
                     try {
-                        sessionStorage.removeItem(prefix + "_write_title");
-                        sessionStorage.removeItem(prefix + "_write_body");
+                        var key;
+
+                        for (var i = sessionStorage.length; i > 0; i--) {
+                            key = sessionStorage.key(i - 1);
+
+                            if (key.startsWith(prefix + "_write_"))
+                                sessionStorage.removeItem(key);
+                        }
                     } catch(err) {
                         console.log("Caught Exception: Window.sessionStorage.removeItem()");
                     }
