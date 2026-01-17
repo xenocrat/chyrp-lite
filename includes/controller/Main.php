@@ -802,6 +802,7 @@
         public function main_register(
         ): void {
             $config = Config::current();
+            $trigger = Trigger::current();
 
             if (!$config->can_register)
                 Flash::notice(
@@ -879,6 +880,9 @@
 
                 fallback($_POST['full_name'], "");
                 fallback($_POST['website'], "");
+
+                # You can block the registration process with a Flash::warning().
+                $trigger->call("user_registering");
 
                 if (!Flash::exists("warning")) {
                     $user = User::add(
@@ -1006,7 +1010,7 @@
                 fallback($_POST['login']);
                 fallback($_POST['password']);
 
-                # You can block the login process by creating a Flash::warning().
+                # You can block the login process with a Flash::warning().
                 $trigger->call("user_authenticate");
 
                 if (!User::authenticate($_POST['login'], $_POST['password']))
@@ -1227,13 +1231,15 @@
                     "/"
                 );
 
-            fallback($_REQUEST['issue']);
             fallback($_REQUEST['login']);
             fallback($_REQUEST['token']);
 
-            $age = time() - intval($_REQUEST['issue']);
+            $pieces = explode("-", $_REQUEST['token'], 2);
+            $created_at = hexdec($pieces[0]);
+            $auth_token = fallback($pieces[1], "");
+            $elapsed = time() - intval($created_at);
 
-            if ($age > PASSWORD_RESET_TOKEN_LIFETIME)
+            if ($elapsed > PASSWORD_RESET_TOKEN_LIFETIME)
                 Flash::notice(
                     __("The link has expired. Please try again."),
                     "lost_password"
@@ -1249,9 +1255,9 @@
                     "/"
                 );
 
-            $hash = token(array($_REQUEST['issue'], $user->login));
+            $auth_check = token(array($created_at, $user->login));
 
-            if (!hash_equals($hash, $_REQUEST['token']))
+            if (!hash_equals($auth_check, $auth_token))
                 Flash::warning(
                     __("Please contact the blog administrator for help with your account."),
                     "/"
@@ -1292,7 +1298,6 @@
             $this->display(
                 "forms".DIR."user".DIR."reset_password",
                 array(
-                    "issue" => $_REQUEST['issue'],
                     "login" => $_REQUEST['login'],
                     "token" => $_REQUEST['token']
                 ),
