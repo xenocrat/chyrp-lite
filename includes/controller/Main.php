@@ -895,38 +895,37 @@
                         approved:($config->user_activation == "none")
                     );
 
-                    switch ($config->user_activation) {
-                        case "email":
-                            email_activate_account($user);
+                    if (!$user->approved) {
+                        switch ($config->user_activation) {
+                            case "email":
+                                email_activate_account($user);
 
-                            Flash::notice(
-                                __("We have emailed you an activation link."),
-                                "/"
-                            );
+                                Flash::notice(
+                                    __("We have emailed you an activation link."),
+                                    "/"
+                                );
 
-                            break;
+                                exit;
 
-                        case "admin":
-                            email_admin_activation($user);
+                            case "admin":
+                                email_admin_activation($user);
 
-                            Flash::notice(
-                                ___("The blog administrator must activate your account."),
-                                "/"
-                            );
+                                Flash::notice(
+                                    ___("The blog administrator must activate your account."),
+                                    "/"
+                                );
 
-                            break;
-
-                        case "none":
-                            Visitor::log_in($user);
-                            email_acknowledge_user($user);
-
-                            Flash::notice(
-                                __("Your account is now active."),
-                                "/"
-                            );
-
-                            break;
+                                exit;
+                        }
                     }
+
+                    Visitor::log_in($user);
+                    email_acknowledge_user($user);
+
+                    Flash::notice(
+                        __("Your account is now active."),
+                        "/"
+                    );
                 }
             }
 
