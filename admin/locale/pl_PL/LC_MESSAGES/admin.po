@@ -305,7 +305,7 @@ msgstr "Slug (przyjazny URL)"
 
 #: admin/help/slugs.twig:8
 msgid "The slug is the URL-friendly identifying name for this post or page. You can enter the slug yourself or have it auto-generated when the post or page is created. A slug may contain only the letters a-z, the numbers 0-9, and hyphen-minus (&#8220;-&#8221;)."
-msgstr "Slug to przyjazna adresom URL nazwa identyfikująca wpis lub stronę. Możesz ją wpisać ręcznie lub wygenerować automatycznie podczas tworzenia. Slug może zawierać tylko litery a-z, cyfry 0-9 i znak minus (&#8220;-&#8221;)."
+msgstr "Slug to przyjazna adresom URL nazwa identyfikująca wpis lub stronę. Możesz ją wpisać ręcznie lub wygenerować automatycznie podczas tworzenia. Slug może zawierać tylko litery a-z, cyfry 0-9 i znak minus (&#8222;-&#8221;)."
 
 #: admin/help/unicode_emoticons.twig:3 admin/help/unicode_emoticons.twig:6 admin/pages/content_settings.twig:93
 msgid "Unicode Emoticons"
@@ -482,7 +482,7 @@ msgstr "Usunąć grupę?"
 #: admin/pages/delete_group.twig:10 admin/pages/delete_post.twig:10 admin/pages/delete_upload.twig:10 admin/pages/delete_user.twig:10
 #, php-format
 msgid "&#8220;%s&#8221; will be permanently deleted."
-msgstr "&#8220;%s&#8221; zostanie trwale usunięty."
+msgstr "&#8222;%s&#8221; zostanie trwale usunięty."
 
 #: admin/pages/delete_group.twig:14
 msgid "Move members to:"
@@ -494,7 +494,7 @@ msgstr "Nowa domyślna grupa:"
 
 #: admin/pages/delete_group.twig:40
 msgid "New &#8220;guest&#8221; group:"
-msgstr "Nowa grupa &#8220;gość&#8221;:"
+msgstr "Nowa grupa &#8222;gość&#8221;:"
 
 #: admin/pages/delete_group.twig:53 admin/pages/delete_page.twig:21 admin/pages/delete_post.twig:14 admin/pages/delete_upload.twig:14 admin/pages/delete_user.twig:47
 msgid "Delete!"
@@ -515,7 +515,7 @@ msgstr "[Bez tytułu]"
 #: admin/pages/delete_page.twig:10
 #, php-format
 msgid "Are you sure you want to delete &#8220;%s&#8221;?"
-msgstr "Czy na pewno chcesz usunąć &#8220;%s&#8221;?"
+msgstr "Czy na pewno chcesz usunąć &#8222;%s&#8221;?"
 
 #: admin/pages/delete_page.twig:14
 msgid "Delete children?"
@@ -556,7 +556,7 @@ msgstr "Edytuj grupę"
 #: admin/pages/edit_group.twig:6
 #, php-format
 msgid "Editing Group &#8220;%s&#8221;"
-msgstr "Edycja grupy &#8220;%s&#8221;"
+msgstr "Edycja grupy &#8222;%s&#8221;"
 
 #: admin/pages/edit_group.twig:7
 msgid "Are you sure you want to make these changes to your group?"
@@ -577,7 +577,7 @@ msgstr "Edytuj stronę"
 #: admin/pages/edit_page.twig:6 admin/pages/edit_post.twig:6
 #, php-format
 msgid "Editing &#8220;%s&#8221;"
-msgstr "Edycja &#8220;%s&#8221;"
+msgstr "Edycja &#8222;%s&#8221;"
 
 #: admin/pages/edit_post.twig:3
 msgid "Edit Post"
@@ -590,7 +590,7 @@ msgstr "Edytuj przesłany plik"
 #: admin/pages/edit_upload.twig:6
 #, php-format
 msgid "Editing Upload &#8220;%s&#8221;"
-msgstr "Edycja przesłanego pliku &#8220;%s&#8221;"
+msgstr "Edycja przesłanego pliku &#8222;%s&#8221;"
 
 #: admin/pages/edit_upload.twig:10
 msgid "New File"
@@ -607,7 +607,7 @@ msgstr "Edytuj użytkownika"
 #: admin/pages/edit_user.twig:6
 #, php-format
 msgid "Editing User &#8220;%s&#8221;"
-msgstr "Edycja użytkownika &#8220;%s&#8221;"
+msgstr "Edycja użytkownika &#8222;%s&#8221;"
 
 #: admin/pages/edit_user.twig:7
 msgid "Are you sure you want to make these changes to your account?"
@@ -1126,7 +1126,7 @@ msgstr "Domyślna grupa użytkownika"
 
 #: admin/pages/user_settings.twig:45
 msgid "&#8220;Guest&#8221; Group"
-msgstr "Grupa „Gość”"
+msgstr "Grupa &#8222;Gość&#8221;"
 
 #: admin/pages/write_page.twig:3
 msgid "Add Page"

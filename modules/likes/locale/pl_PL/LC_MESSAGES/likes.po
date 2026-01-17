@@ -44,7 +44,7 @@ msgstr "Polubienia"
 
 #: modules/likes/info.php:6
 msgid "Allow users to &#8220;like&#8221; a post."
-msgstr "Pozwala użytkownikom „polubić” wpis."
+msgstr "Pozwala użytkownikom &#8222;polubić&#8221; wpis."
 
 #: modules/likes/info.php:12
 msgid "Please remember to update the permission settings for each group."

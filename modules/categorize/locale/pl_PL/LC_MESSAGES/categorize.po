@@ -33,7 +33,7 @@ msgstr "Usunąć kategorię?"
 #: modules/categorize/admin/pages/delete_category.twig:10
 #, php-format
 msgid "&#8220;%s&#8221; will be permanently deleted."
-msgstr "&#8220;%s&#8221;zostanie trwale usunięta."
+msgstr "&#8222;%s&#8221;zostanie trwale usunięta."
 
 #: modules/categorize/admin/pages/edit_category.twig:3
 msgid "Edit Category"
@@ -42,7 +42,7 @@ msgstr "Edytuj kategorię"
 #: modules/categorize/admin/pages/edit_category.twig:6
 #, php-format
 msgid "Editing Category &#8220;%s&#8221;"
-msgstr "Edycja kategorii &#8220;%s&#8221;"
+msgstr "Edycja kategorii &#8222;%s&#8221;"
 
 #: modules/categorize/admin/pages/edit_category.twig:10
 #: modules/categorize/admin/pages/manage_category.twig:26
@@ -122,7 +122,7 @@ msgstr "Nie ma wpisów w wskazanej kategorii."
 #: modules/categorize/categorize.php:248
 #, php-format
 msgid "Posts in category &#8220;%s&#8221;"
-msgstr "Wpisy w kategorii &#8220;%s&#8221;"
+msgstr "Wpisy w kategorii &#8222;%s&#8221;"
 
 #: modules/categorize/categorize.php:285
 msgid "You do not have sufficient privileges to manage categories."

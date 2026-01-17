@@ -37,7 +37,7 @@ msgstr "Usunąć Injektor?"
 #: modules/inject/admin/pages/delete_injector.twig:10
 #, php-format
 msgid "&#8220;%s&#8221; will be permanently deleted."
-msgstr "„%s” zostanie trwale usunięty."
+msgstr "&#8222;%s&#8221; zostanie trwale usunięty."
 
 #: modules/inject/admin/pages/edit_injector.twig:3
 msgid "Edit Injector"

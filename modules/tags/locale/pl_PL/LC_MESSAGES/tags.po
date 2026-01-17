@@ -30,7 +30,7 @@ msgstr "Usunąć tag?"
 #: modules/tags/admin/pages/delete_tag.twig:10
 #, php-format
 msgid "&#8220;%s&#8221; will be permanently deleted."
-msgstr "„%s” zostanie trwale usunięty."
+msgstr "&#8222;%s&#8221; zostanie trwale usunięty."
 
 #: modules/tags/admin/pages/edit_tags.twig:3
 msgid "Edit Tags"

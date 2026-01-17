@@ -22,11 +22,11 @@ msgstr "Wybór licencji"
 
 #: modules/rights/admin/help/choosing_a_licence.twig:8
 msgid "When you create a piece of content for your blog, you get to decide whether or not you want your name associated with it, and whether or not it can be reproduced and reused by other people. As the &#8220;rights holder&#8221;, the license you choose to apply to your work determines which of those rights you retain and which of them you waive."
-msgstr "Tworząc treść na blogu, możesz zdecydować, czy chcesz, aby Twoje imię było z nią powiązane, oraz czy może być reprodukowana i wykorzystywana przez inne osoby. Jako „posiadacz praw”, licencja, którą wybierzesz, określa, które prawa zachowujesz, a z których rezygnujesz."
+msgstr "Tworząc treść na blogu, możesz zdecydować, czy chcesz, aby Twoje imię było z nią powiązane, oraz czy może być reprodukowana i wykorzystywana przez inne osoby. Jako &#8222;posiadacz praw&#8221;, licencja, którą wybierzesz, określa, które prawa zachowujesz, a z których rezygnujesz."
 
 #: modules/rights/admin/help/choosing_a_licence.twig:11
 msgid "Creative Commons is a family of licenses that you can use to donate your work to &#8220;the commons&#8221; — the body of work freely available for legal use, sharing, repurposing, and remixing. With a Creative Commons license, you can give other people permission to reproduce or reuse your work with certain restrictions. Here is a chart comparing the licenses:"
-msgstr "Creative Commons to zestaw licencji, które możesz wykorzystać, aby przekazać swoje dzieło do „commons” — zbioru prac dostępnych do legalnego użycia, udostępniania, ponownego użycia i remiksowania. Dzięki licencji Creative Commons możesz udzielić innym zgody na reprodukcję lub wykorzystanie Twojego dzieła z określonymi ograniczeniami. Poniżej znajduje się tabela porównująca licencje:"
+msgstr "Creative Commons to zestaw licencji, które możesz wykorzystać, aby przekazać swoje dzieło do &#8222;commons&#8221; — zbioru prac dostępnych do legalnego użycia, udostępniania, ponownego użycia i remiksowania. Dzięki licencji Creative Commons możesz udzielić innym zgody na reprodukcję lub wykorzystanie Twojego dzieła z określonymi ograniczeniami. Poniżej znajduje się tabela porównująca licencje:"
 
 #: modules/rights/admin/help/choosing_a_licence.twig:17
 #: modules/rights/rights.php:128

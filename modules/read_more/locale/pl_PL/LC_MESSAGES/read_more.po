@@ -31,7 +31,7 @@ msgstr "Czytaj więcej"
 
 #: modules/read_more/info.php:6
 msgid "Add &#8220;&hellip;more&#8221; links to your blog index by typing <code>&lt;!--more--&gt;</code> or <code>&lt;!--more custom text--&gt;</code> in your posts."
-msgstr "Dodaj linki &#8220;&hellip;więcej&#8221; do indeksu bloga, wpisując <code>&lt;!--więcej--&gt;</code> lub <code>&lt;!--jeszcze więcej--&gt;</code> w treści wpisów."
+msgstr "Dodaj linki &#8222;&hellip;więcej&#8221; do indeksu bloga, wpisując <code>&lt;!--więcej--&gt;</code> lub <code>&lt;!--jeszcze więcej--&gt;</code> w treści wpisów."
 
 #: modules/read_more/read_more.php:90
 msgid "&hellip;more"
