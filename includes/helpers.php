@@ -4095,12 +4095,12 @@
     ): bool {
         $config = Config::current();
         $trigger = Trigger::current();
-        $issue = strval(time());
+        $created_at = time();
 
         $url = $config->url."/?action=reset_password".
-               "&amp;issue=".$issue.
                "&amp;login=".urlencode($user->login).
-               "&amp;token=".token(array($issue, $user->login));
+               "&amp;token=".dechex($created_at).
+               "-".token(array($created_at, $user->login));
 
         if ($trigger->exists("correspond_reset_password"))
             return $trigger->call("correspond_reset_password", $user, $url);
@@ -4188,7 +4188,10 @@
         );
 
         $subject = _f("New user at %s", $config->name);
-        $message = __("You are receiving this message because a user account was registered.").
+        $message = __("Hello, administrator.").
+                   "\r\n".
+                   "\r\n".
+                   __("You are receiving this message because a new user account was registered.").
                    "\r\n".
                    "\r\n".
                    __("Visit this link to activate the user account:").
