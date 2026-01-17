@@ -1235,7 +1235,7 @@
             fallback($_REQUEST['token']);
 
             $pieces = explode("-", $_REQUEST['token'], 2);
-            $created_at = hexdec($pieces[0]);
+            $created_at = @hexdec($pieces[0]);
             $auth_token = fallback($pieces[1], "");
             $elapsed = time() - $created_at;
 
