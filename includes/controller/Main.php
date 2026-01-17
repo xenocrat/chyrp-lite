@@ -1237,7 +1237,7 @@
             $pieces = explode("-", $_REQUEST['token'], 2);
             $created_at = hexdec($pieces[0]);
             $auth_token = fallback($pieces[1], "");
-            $elapsed = time() - intval($created_at);
+            $elapsed = time() - $created_at;
 
             if ($elapsed > PASSWORD_RESET_TOKEN_LIFETIME)
                 Flash::notice(
