@@ -53,6 +53,8 @@ var ChyrpTags = {
             );
             $(e.target).addClass("tag_added");
         }
+
+        tags.trigger("change");
     }
 };
 $(document).ready(ChyrpTags.init);
