@@ -459,7 +459,7 @@ msgstr ""
 msgid "Are you sure you want to permanently delete this comment?"
 msgstr ""
 
-#: modules/comments/model/Comment.php:584
+#: modules/comments/model/Comment.php:580
 msgid "Anon"
 msgstr ""
 

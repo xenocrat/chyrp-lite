@@ -218,7 +218,7 @@ msgid "Lost password"
 msgstr "Mot de passe perdu"
 
 #: themes/akarui/forms/user/lost_password.twig:10
-#: themes/akarui/forms/user/reset_password.twig:15
+#: themes/akarui/forms/user/reset_password.twig:14
 msgid "Submit"
 msgstr "Envoyer"
 

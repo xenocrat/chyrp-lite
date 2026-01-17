@@ -2955,7 +2955,7 @@ Sends an email using PHP's mail() function or an alternative.
 
 Function: email_activate_account
 --------------------------------
-Sends an activation email to a newly registered user.
+Sends an activation email to a new user.
 
 Parameters:
     $user - The user to receive the email.
@@ -2967,6 +2967,22 @@ Sends a password reset email to a user.
 
 Parameters:
     $user - The user to receive the email.
+
+
+Function: email_acknowledge_user
+--------------------------------
+Sends an acknowledgement to a new user.
+
+Parameters:
+    $user - The user to receive the email.
+
+
+Function: email_admin_activation
+--------------------------------
+Sends an activation email to the site contact.
+
+Parameters:
+    $user - The user requiring activation.
 
 
 Function: javascripts
@@ -3358,7 +3374,7 @@ Parameters:
 
 Function: twig_function_uploaded_search
 ---------------------------------------
-Returns an array of matches, if the visitor has the "export_content" privilege.
+Returns an array of matches, if the visitor has the "view_upload" privilege.
 
 Parameters:
     $search - A search term.

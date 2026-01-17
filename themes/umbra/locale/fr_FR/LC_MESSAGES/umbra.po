@@ -227,7 +227,7 @@ msgid "Lost password"
 msgstr "Mot de passe perdu"
 
 #: themes/umbra/forms/user/lost_password.twig:11
-#: themes/umbra/forms/user/reset_password.twig:16
+#: themes/umbra/forms/user/reset_password.twig:15
 msgid "Submit"
 msgstr "Envoyer"
 

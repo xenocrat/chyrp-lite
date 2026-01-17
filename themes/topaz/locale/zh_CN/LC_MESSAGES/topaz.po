@@ -332,7 +332,7 @@ msgid "Lost password"
 msgstr "忘记密码"
 
 #: themes/topaz/forms/user/lost_password.twig:11
-#: themes/topaz/forms/user/reset_password.twig:16
+#: themes/topaz/forms/user/reset_password.twig:15
 msgid "Submit"
 msgstr "提交"
 

@@ -332,7 +332,7 @@ msgid "Lost password"
 msgstr "Password dimenticata"
 
 #: themes/blossom/forms/user/lost_password.twig:11
-#: themes/blossom/forms/user/reset_password.twig:16
+#: themes/blossom/forms/user/reset_password.twig:15
 msgid "Submit"
 msgstr "Invia"
 

@@ -438,7 +438,7 @@ msgstr "Help inhoud"
 
 #: admin/javascripts/admin.js.php:519 admin/javascripts/admin.js.php:520
 #: admin/pages/manage_groups.twig:52 admin/pages/manage_pages.twig:69
-#: admin/pages/manage_posts.twig:57 admin/pages/manage_uploads.twig:71
+#: admin/pages/manage_posts.twig:57 admin/pages/manage_uploads.twig:73
 #: admin/pages/manage_users.twig:64
 msgid "Edit"
 msgstr "Bewerken"
@@ -565,7 +565,7 @@ msgstr "Stel een blogpost samen, gebruik makende van markup syntax."
 #: admin/pages/content_settings.twig:119 admin/pages/edit_group.twig:27
 #: admin/pages/edit_upload.twig:20 admin/pages/edit_user.twig:66
 #: admin/pages/general_settings.twig:109 admin/pages/route_settings.twig:96
-#: admin/pages/user_settings.twig:57
+#: admin/pages/user_settings.twig:73
 msgid "Update"
 msgstr "Update"
 
@@ -994,19 +994,19 @@ msgid "Yes"
 msgstr "Ja"
 
 #: admin/pages/manage_groups.twig:59 admin/pages/manage_pages.twig:76
-#: admin/pages/manage_posts.twig:64 admin/pages/manage_uploads.twig:80
+#: admin/pages/manage_posts.twig:64 admin/pages/manage_uploads.twig:82
 #: admin/pages/manage_users.twig:71
 msgid "Delete"
 msgstr "Verwijderen"
 
 #: admin/pages/manage_groups.twig:69 admin/pages/manage_pages.twig:86
-#: admin/pages/manage_posts.twig:74 admin/pages/manage_uploads.twig:91
+#: admin/pages/manage_posts.twig:74 admin/pages/manage_uploads.twig:93
 #: admin/pages/manage_users.twig:81 admin/partials/uploads_modal.twig:34
 msgid "No results"
 msgstr "Geen resultaten"
 
 #: admin/pages/manage_groups.twig:77 admin/pages/manage_pages.twig:94
-#: admin/pages/manage_posts.twig:82 admin/pages/manage_uploads.twig:112
+#: admin/pages/manage_posts.twig:82 admin/pages/manage_uploads.twig:114
 #: admin/pages/manage_users.twig:89
 #, php-format
 msgid "Page %d of %s"
@@ -1095,15 +1095,15 @@ msgstr "Afmeting"
 msgid "Type"
 msgstr "Type"
 
-#: admin/pages/manage_uploads.twig:62
+#: admin/pages/manage_uploads.twig:67
 msgid "Download"
 msgstr "Download"
 
-#: admin/pages/manage_uploads.twig:99
+#: admin/pages/manage_uploads.twig:101
 msgid "Sort results by:"
 msgstr "Sorteer resultaten op:"
 
-#: admin/pages/manage_uploads.twig:107
+#: admin/pages/manage_uploads.twig:109
 msgid "Sort Results"
 msgstr "Sorteer resultaten"
 
@@ -1254,18 +1254,34 @@ msgstr ""
 "Sta de website toe om email correspondentie naar de gebruikers te sturen?"
 
 #: admin/pages/user_settings.twig:26
-msgid "Activate by Email"
-msgstr "Activeer via email"
+msgid "Automatic User Activation"
+msgstr "Automatische gebruikersactivatie"
 
 #: admin/pages/user_settings.twig:30
-msgid "Should users activate by email?"
-msgstr "Kunnen gebruikers hun account activeren via email?"
+msgid "New users can log in immediately."
+msgstr "Nieuwe gebruikers kunnen direct inloggen."
 
 #: admin/pages/user_settings.twig:34
+msgid "User Activation by Email"
+msgstr "Gebruikersactivatie via e-mail"
+
+#: admin/pages/user_settings.twig:38
+msgid "New users must respond to an activation email."
+msgstr "Nieuwe gebruikers moeten reageren op een activatie-e-mail."
+
+#: admin/pages/user_settings.twig:42
+msgid "User Activation by Administrator"
+msgstr "Gebruikersactivatie door beheerder"
+
+#: admin/pages/user_settings.twig:46
+msgid "New users must be activated by an administrator."
+msgstr "Nieuwe gebruikers moeten door een beheerder worden geactiveerd."
+
+#: admin/pages/user_settings.twig:50
 msgid "Default User Group"
 msgstr "Standaard Gebruikersgroep"
 
-#: admin/pages/user_settings.twig:45
+#: admin/pages/user_settings.twig:61
 msgid "&#8220;Guest&#8221; Group"
 msgstr "&#8220;Gast&#8221; Groep"
 

@@ -12,30 +12,49 @@ msgstr ""
 "X-Generator: Poedit 3.6\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
-#: admin/help/canonical_url.twig:3 admin/help/canonical_url.twig:6 admin/pages/general_settings.twig:35
+#: admin/help/canonical_url.twig:3 admin/help/canonical_url.twig:6
+#: admin/pages/general_settings.twig:35
 msgid "Canonical URL"
 msgstr "Adres kanoniczny"
 
 #: admin/help/canonical_url.twig:8
 msgid ""
-"If you enter a canonical URL, your site URLs will point someplace other than your install directory. You can use this feature to have Chyrp Lite installed in its own dedicated directory on your web server and still have your site accessible at your choice of destination directory. There are two requirements for this to work:"
-msgstr "Jeśli podasz adres kanoniczny, adresy URL twojej strony będą wskazywać inne miejsce niż katalog instalacyjny. Możesz dzięki temu zainstalować Chyrp Lite w osobnym katalogu na serwerze, a jednocześnie udostępniać stronę pod wybraną lokalizacją. Aby to działało, muszą być spełnione dwa warunki:"
+"If you enter a canonical URL, your site URLs will point someplace other than "
+"your install directory. You can use this feature to have Chyrp Lite "
+"installed in its own dedicated directory on your web server and still have "
+"your site accessible at your choice of destination directory. There are two "
+"requirements for this to work:"
+msgstr ""
+"Jeśli podasz adres kanoniczny, adresy URL twojej strony będą wskazywać inne "
+"miejsce niż katalog instalacyjny. Możesz dzięki temu zainstalować Chyrp Lite "
+"w osobnym katalogu na serwerze, a jednocześnie udostępniać stronę pod "
+"wybraną lokalizacją. Aby to działało, muszą być spełnione dwa warunki:"
 
 #: admin/help/canonical_url.twig:12
-msgid "Create an <em>index.php</em> file in your destination directory with the following in it:"
-msgstr "Utwórz plik <em>index.php</em> w katalogu docelowym o następującej treści:"
+msgid ""
+"Create an <em>index.php</em> file in your destination directory with the "
+"following in it:"
+msgstr ""
+"Utwórz plik <em>index.php</em> w katalogu docelowym o następującej treści:"
 
 #: admin/help/canonical_url.twig:18
-msgid "Modify your URL rewrite directives to reflect the new destination directory."
-msgstr "Dostosuj reguły przekierowań (rewrite), aby odzwierciedlały nowy katalog docelowy."
+msgid ""
+"Modify your URL rewrite directives to reflect the new destination directory."
+msgstr ""
+"Dostosuj reguły przekierowań (rewrite), aby odzwierciedlały nowy katalog "
+"docelowy."
 
 #: admin/help/filtering_results.twig:3 admin/help/filtering_results.twig:6
 msgid "Filtering Results"
 msgstr "Filtrowanie wyników"
 
 #: admin/help/filtering_results.twig:8
-msgid "Use this search field to filter for specific items by entering plain text or keywords."
-msgstr "Użyj tego pola wyszukiwania, aby filtrować wyniki wpisując zwykły tekst lub słowa kluczowe."
+msgid ""
+"Use this search field to filter for specific items by entering plain text or "
+"keywords."
+msgstr ""
+"Użyj tego pola wyszukiwania, aby filtrować wyniki wpisując zwykły tekst lub "
+"słowa kluczowe."
 
 #: admin/help/filtering_results.twig:10
 msgid "Keywords"
@@ -43,9 +62,17 @@ msgstr "Słowa kluczowe"
 
 #: admin/help/filtering_results.twig:12
 msgid ""
-"Use the syntax <code>keyword:value;</code> to quickly match specific results where <code>keyword</code> is equal to <code>value</code>. The keyword can be the name of a database column in the current table, or one of the special keywords listed below. For example: <code>author:Foo;year:2016;</code> would filter the posts "
-"table to display only posts created by Foo in 2016."
-msgstr "Użyj składni <code>keyword:value;</code>, aby szybko dopasować wyniki, gdzie <code>keyword</code> odpowiada <code>value</code>. Słowo kluczowe może być nazwą kolumny w tabeli lub jednym z poniższych specjalnych słów kluczowych. Na przykład: <code>author:Foo;year:2016;</code> pokaże wpisy utworzone przez Foo w 2016 roku."
+"Use the syntax <code>keyword:value;</code> to quickly match specific results "
+"where <code>keyword</code> is equal to <code>value</code>. The keyword can "
+"be the name of a database column in the current table, or one of the special "
+"keywords listed below. For example: <code>author:Foo;year:2016;</code> would "
+"filter the posts table to display only posts created by Foo in 2016."
+msgstr ""
+"Użyj składni <code>keyword:value;</code>, aby szybko dopasować wyniki, gdzie "
+"<code>keyword</code> odpowiada <code>value</code>. Słowo kluczowe może być "
+"nazwą kolumny w tabeli lub jednym z poniższych specjalnych słów kluczowych. "
+"Na przykład: <code>author:Foo;year:2016;</code> pokaże wpisy utworzone przez "
+"Foo w 2016 roku."
 
 #: admin/help/filtering_results.twig:17 admin/pages/route_settings.twig:46
 msgid "Year created"
@@ -120,20 +147,40 @@ msgid "(e.g. Members)"
 msgstr "(np. Members)"
 
 #: admin/help/filtering_results.twig:57
-msgid "Use the syntax <code>ASC:column;</code> or <code>DESC:column;</code> to sort the results in ascending or descending order. For example: <code>DESC:user_id;ASC:id;</code> would sort a table of posts in descending order of user ID and then ascending order of post ID."
-msgstr "Użyj składni <code>ASC:column;</code> lub <code>DESC:column;</code> do sortowania wyników rosnąco lub malejąco. Na przykład: <code>DESC:user_id;ASC:id;</code> posortuje tabelę wpisów malejąco dla user_ID i rosnąco dla post_ID."
+msgid ""
+"Use the syntax <code>ASC:column;</code> or <code>DESC:column;</code> to sort "
+"the results in ascending or descending order. For example: "
+"<code>DESC:user_id;ASC:id;</code> would sort a table of posts in descending "
+"order of user ID and then ascending order of post ID."
+msgstr ""
+"Użyj składni <code>ASC:column;</code> lub <code>DESC:column;</code> do "
+"sortowania wyników rosnąco lub malejąco. Na przykład: "
+"<code>DESC:user_id;ASC:id;</code> posortuje tabelę wpisów malejąco dla "
+"user_ID i rosnąco dla post_ID."
 
 #: admin/help/filtering_results.twig:60
-msgid "Use the SQL wildcards <code>_</code> and <code>%</code> to substitute one or multiple characters in a search term. To include these characters literally, prefix <code>|</code> as an escape character."
-msgstr "Użyj symboli wieloznacznych SQL <code>_</code> i <code>%</code>, aby zastąpić pojedyncze lub wiele znaków w wyszukiwanej frazie. Aby traktować te znaki dosłownie, poprzedź je znakiem ucieczki <code>|</code>."
+msgid ""
+"Use the SQL wildcards <code>_</code> and <code>%</code> to substitute one or "
+"multiple characters in a search term. To include these characters literally, "
+"prefix <code>|</code> as an escape character."
+msgstr ""
+"Użyj symboli wieloznacznych SQL <code>_</code> i <code>%</code>, aby "
+"zastąpić pojedyncze lub wiele znaków w wyszukiwanej frazie. Aby traktować te "
+"znaki dosłownie, poprzedź je znakiem ucieczki <code>|</code>."
 
-#: admin/help/markdown.twig:3 admin/help/markdown.twig:6 admin/help/markdown.twig:13 admin/pages/content_settings.twig:106 admin/partials/page_fields.twig:14 admin/partials/post_fields.twig:56
+#: admin/help/markdown.twig:3 admin/help/markdown.twig:6
+#: admin/help/markdown.twig:13 admin/pages/content_settings.twig:106
+#: admin/partials/page_fields.twig:14 admin/partials/post_fields.twig:56
 msgid "Markdown"
 msgstr "Markdown"
 
 #: admin/help/markdown.twig:8
-msgid "Markdown is a syntax for writing structured documents in plain text. Here are the basics to get you started:"
-msgstr "Markdown to składnia do pisania ustrukturyzowanych dokumentów w formacie tekstowym. Oto podstawy, które pomogą Ci zacząć:"
+msgid ""
+"Markdown is a syntax for writing structured documents in plain text. Here "
+"are the basics to get you started:"
+msgstr ""
+"Markdown to składnia do pisania ustrukturyzowanych dokumentów w formacie "
+"tekstowym. Oto podstawy, które pomogą Ci zacząć:"
 
 #: admin/help/markdown.twig:14
 msgid "Result"
@@ -143,7 +190,8 @@ msgstr "Wynik"
 msgid "### Heading"
 msgstr "### Nagłówek"
 
-#: admin/help/markdown.twig:20 admin/javascripts/admin.js.php:655 admin/javascripts/admin.js.php:656
+#: admin/help/markdown.twig:20 admin/javascripts/admin.js.php:655
+#: admin/javascripts/admin.js.php:656
 msgid "Heading"
 msgstr "Nagłówek"
 
@@ -151,7 +199,8 @@ msgstr "Nagłówek"
 msgid "**Strong**"
 msgstr "**Pogrubienie**"
 
-#: admin/help/markdown.twig:24 admin/javascripts/admin.js.php:674 admin/javascripts/admin.js.php:675
+#: admin/help/markdown.twig:24 admin/javascripts/admin.js.php:674
+#: admin/javascripts/admin.js.php:675
 msgid "Strong"
 msgstr "Pogrubienie"
 
@@ -159,7 +208,8 @@ msgstr "Pogrubienie"
 msgid "*Emphasis*"
 msgstr "*Pochylenie*"
 
-#: admin/help/markdown.twig:28 admin/javascripts/admin.js.php:693 admin/javascripts/admin.js.php:694
+#: admin/help/markdown.twig:28 admin/javascripts/admin.js.php:693
+#: admin/javascripts/admin.js.php:694
 msgid "Emphasis"
 msgstr "Pochylenie"
 
@@ -175,7 +225,8 @@ msgstr "Cytat"
 msgid "~~Strikethrough~~"
 msgstr "~~Przekreślenie~~"
 
-#: admin/help/markdown.twig:36 admin/javascripts/admin.js.php:712 admin/javascripts/admin.js.php:713
+#: admin/help/markdown.twig:36 admin/javascripts/admin.js.php:712
+#: admin/javascripts/admin.js.php:713
 msgid "Strikethrough"
 msgstr "Przekreślenie"
 
@@ -183,7 +234,8 @@ msgstr "Przekreślenie"
 msgid "`Code`"
 msgstr "`Kod`"
 
-#: admin/help/markdown.twig:40 admin/javascripts/admin.js.php:731 admin/javascripts/admin.js.php:732
+#: admin/help/markdown.twig:40 admin/javascripts/admin.js.php:731
+#: admin/javascripts/admin.js.php:732
 msgid "Code"
 msgstr "Kod"
 
@@ -223,7 +275,8 @@ msgstr "Nowy akapit"
 msgid "[title](URL)"
 msgstr "[tytuł](URL)"
 
-#: admin/help/markdown.twig:61 admin/javascripts/admin.js.php:750 admin/javascripts/admin.js.php:751
+#: admin/help/markdown.twig:61 admin/javascripts/admin.js.php:750
+#: admin/javascripts/admin.js.php:751
 msgid "Hyperlink"
 msgstr "Hiperłącze"
 
@@ -231,7 +284,8 @@ msgstr "Hiperłącze"
 msgid "![description](URL)"
 msgstr "![opis](URL)"
 
-#: admin/help/markdown.twig:65 admin/javascripts/admin.js.php:807 admin/javascripts/admin.js.php:808
+#: admin/help/markdown.twig:65 admin/javascripts/admin.js.php:807
+#: admin/javascripts/admin.js.php:808
 msgid "Image"
 msgstr "Zdjęcie"
 
@@ -251,7 +305,8 @@ msgstr "1. Lista elementów"
 msgid "> Blockquote"
 msgstr "> Cytat"
 
-#: admin/help/markdown.twig:77 admin/javascripts/admin.js.php:788 admin/javascripts/admin.js.php:789
+#: admin/help/markdown.twig:77 admin/javascripts/admin.js.php:788
+#: admin/javascripts/admin.js.php:789
 msgid "Blockquote"
 msgstr "Blok"
 
@@ -304,16 +359,31 @@ msgid "Slugs"
 msgstr "Slug (przyjazny URL)"
 
 #: admin/help/slugs.twig:8
-msgid "The slug is the URL-friendly identifying name for this post or page. You can enter the slug yourself or have it auto-generated when the post or page is created. A slug may contain only the letters a-z, the numbers 0-9, and hyphen-minus (&#8220;-&#8221;)."
-msgstr "Slug to przyjazna adresom URL nazwa identyfikująca wpis lub stronę. Możesz ją wpisać ręcznie lub wygenerować automatycznie podczas tworzenia. Slug może zawierać tylko litery a-z, cyfry 0-9 i znak minus (&#8222;-&#8221;)."
+msgid ""
+"The slug is the URL-friendly identifying name for this post or page. You can "
+"enter the slug yourself or have it auto-generated when the post or page is "
+"created. A slug may contain only the letters a-z, the numbers 0-9, and "
+"hyphen-minus (&#8220;-&#8221;)."
+msgstr ""
+"Slug to przyjazna adresom URL nazwa identyfikująca wpis lub stronę. Możesz "
+"ją wpisać ręcznie lub wygenerować automatycznie podczas tworzenia. Slug może "
+"zawierać tylko litery a-z, cyfry 0-9 i znak minus (&#8222;-&#8221;)."
 
-#: admin/help/unicode_emoticons.twig:3 admin/help/unicode_emoticons.twig:6 admin/pages/content_settings.twig:93
+#: admin/help/unicode_emoticons.twig:3 admin/help/unicode_emoticons.twig:6
+#: admin/pages/content_settings.twig:93
 msgid "Unicode Emoticons"
 msgstr "Unicode emotikony"
 
 #: admin/help/unicode_emoticons.twig:8
-msgid "You can have some emoticons converted to equivalent Unicode emoji when your content is displayed. Your original content is not modified, so you can turn this feature on and off at any time. The following conversions will occur:"
-msgstr "Możesz skonwertować niektóre emotikony na odpowiadające im emoji Unicode podczas wyświetlania treści. Treść źródłowa nie jest modyfikowana, więc możesz włączać lub wyłączać tę funkcję. Dokonane zostaną następujące konwersje:"
+msgid ""
+"You can have some emoticons converted to equivalent Unicode emoji when your "
+"content is displayed. Your original content is not modified, so you can turn "
+"this feature on and off at any time. The following conversions will occur:"
+msgstr ""
+"Możesz skonwertować niektóre emotikony na odpowiadające im emoji Unicode "
+"podczas wyświetlania treści. Treść źródłowa nie jest modyfikowana, więc "
+"możesz włączać lub wyłączać tę funkcję. Dokonane zostaną następujące "
+"konwersje:"
 
 #: admin/help/unicode_emoticons.twig:13
 msgid "Emoticon"
@@ -344,7 +414,8 @@ msgstr "Typ pliku nie jest obsługiwany."
 msgid "Maximum file size: %d Megabytes."
 msgstr "Maksymalny rozmiar pliku: %d MB."
 
-#: admin/javascripts/admin.js.php:319 admin/javascripts/admin.js.php:457 admin/javascripts/admin.js.php:1395
+#: admin/javascripts/admin.js.php:319 admin/javascripts/admin.js.php:457
+#: admin/javascripts/admin.js.php:1395
 msgid "Modal window"
 msgstr "Okno modalne"
 
@@ -352,7 +423,8 @@ msgstr "Okno modalne"
 msgid "Uploads"
 msgstr "Przesłane pliki"
 
-#: admin/javascripts/admin.js.php:354 admin/javascripts/admin.js.php:483 admin/javascripts/admin.js.php:1427
+#: admin/javascripts/admin.js.php:354 admin/javascripts/admin.js.php:483
+#: admin/javascripts/admin.js.php:1427
 msgid "Close"
 msgstr "Zamknij"
 
@@ -360,15 +432,20 @@ msgstr "Zamknij"
 msgid "Help content"
 msgstr "Zawartość pomocy"
 
-#: admin/javascripts/admin.js.php:519 admin/javascripts/admin.js.php:520 admin/pages/manage_groups.twig:52 admin/pages/manage_pages.twig:69 admin/pages/manage_posts.twig:57 admin/pages/manage_uploads.twig:71 admin/pages/manage_users.twig:64
+#: admin/javascripts/admin.js.php:519 admin/javascripts/admin.js.php:520
+#: admin/pages/manage_groups.twig:52 admin/pages/manage_pages.twig:69
+#: admin/pages/manage_posts.twig:57 admin/pages/manage_uploads.twig:73
+#: admin/pages/manage_users.twig:64
 msgid "Edit"
 msgstr "Edytuj"
 
-#: admin/javascripts/admin.js.php:540 admin/javascripts/admin.js.php:541 admin/javascripts/admin.js.php:828 admin/javascripts/admin.js.php:829
+#: admin/javascripts/admin.js.php:540 admin/javascripts/admin.js.php:541
+#: admin/javascripts/admin.js.php:828 admin/javascripts/admin.js.php:829
 msgid "Insert"
 msgstr "Wstaw"
 
-#: admin/javascripts/admin.js.php:586 admin/javascripts/admin.js.php:587 admin/javascripts/admin.js.php:874 admin/javascripts/admin.js.php:875
+#: admin/javascripts/admin.js.php:586 admin/javascripts/admin.js.php:587
+#: admin/javascripts/admin.js.php:874 admin/javascripts/admin.js.php:875
 msgid "Upload"
 msgstr "Prześlij"
 
@@ -376,7 +453,8 @@ msgstr "Prześlij"
 msgid "Horizontal rule"
 msgstr "Linia pozioma"
 
-#: admin/javascripts/admin.js.php:948 admin/javascripts/admin.js.php:949 admin/pages/themes.twig:25
+#: admin/javascripts/admin.js.php:948 admin/javascripts/admin.js.php:949
+#: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr "Podgląd"
 
@@ -427,7 +505,9 @@ msgid "Uploads Path"
 msgstr "Ścieżka przesyłanych plików"
 
 #: admin/pages/content_settings.twig:51
-msgid "The directory to which files are uploaded, relative to your installation directory."
+msgid ""
+"The directory to which files are uploaded, relative to your installation "
+"directory."
 msgstr "Katalog, do którego przesyłane są pliki, względem katalogu instalacji."
 
 #: admin/pages/content_settings.twig:55
@@ -458,8 +538,14 @@ msgstr "Webmentions"
 msgid "Send and receive notifications when URLs are mentioned."
 msgstr "Wysyłaj i odbieraj powiadomienia, gdy adresy URL są wspominane."
 
-#: admin/pages/content_settings.twig:95 admin/pages/content_settings.twig:108 admin/pages/export.twig:21 admin/pages/export.twig:39 admin/pages/export.twig:57 admin/pages/export.twig:75 admin/pages/general_settings.twig:38 admin/pages/manage_pages.twig:11 admin/pages/manage_posts.twig:11 admin/pages/manage_users.twig:11
-#: admin/pages/route_settings.twig:13 admin/partials/page_fields.twig:27 admin/partials/post_fields.twig:32 admin/partials/post_fields.twig:129 admin/partials/post_fields.twig:153
+#: admin/pages/content_settings.twig:95 admin/pages/content_settings.twig:108
+#: admin/pages/export.twig:21 admin/pages/export.twig:39
+#: admin/pages/export.twig:57 admin/pages/export.twig:75
+#: admin/pages/general_settings.twig:38 admin/pages/manage_pages.twig:11
+#: admin/pages/manage_posts.twig:11 admin/pages/manage_users.twig:11
+#: admin/pages/route_settings.twig:13 admin/partials/page_fields.twig:27
+#: admin/partials/post_fields.twig:32 admin/partials/post_fields.twig:129
+#: admin/partials/post_fields.twig:153
 msgid "Help"
 msgstr "Pomoc"
 
@@ -471,7 +557,10 @@ msgstr "Wyświetl emotikony jako emoji Unicode."
 msgid "Compose blog content using Markdown text formatting."
 msgstr "Twórz treści bloga za pomocą formatowania Markdown."
 
-#: admin/pages/content_settings.twig:119 admin/pages/edit_group.twig:27 admin/pages/edit_upload.twig:20 admin/pages/edit_user.twig:66 admin/pages/general_settings.twig:109 admin/pages/route_settings.twig:96 admin/pages/user_settings.twig:57
+#: admin/pages/content_settings.twig:119 admin/pages/edit_group.twig:27
+#: admin/pages/edit_upload.twig:20 admin/pages/edit_user.twig:66
+#: admin/pages/general_settings.twig:109 admin/pages/route_settings.twig:96
+#: admin/pages/user_settings.twig:73
 msgid "Update"
 msgstr "Aktualizuj"
 
@@ -479,7 +568,8 @@ msgstr "Aktualizuj"
 msgid "Delete Group?"
 msgstr "Usunąć grupę?"
 
-#: admin/pages/delete_group.twig:10 admin/pages/delete_post.twig:10 admin/pages/delete_upload.twig:10 admin/pages/delete_user.twig:10
+#: admin/pages/delete_group.twig:10 admin/pages/delete_post.twig:10
+#: admin/pages/delete_upload.twig:10 admin/pages/delete_user.twig:10
 #, php-format
 msgid "&#8220;%s&#8221; will be permanently deleted."
 msgstr "&#8222;%s&#8221; zostanie trwale usunięty."
@@ -496,11 +586,16 @@ msgstr "Nowa domyślna grupa:"
 msgid "New &#8220;guest&#8221; group:"
 msgstr "Nowa grupa &#8222;gość&#8221;:"
 
-#: admin/pages/delete_group.twig:53 admin/pages/delete_page.twig:21 admin/pages/delete_post.twig:14 admin/pages/delete_upload.twig:14 admin/pages/delete_user.twig:47
+#: admin/pages/delete_group.twig:53 admin/pages/delete_page.twig:21
+#: admin/pages/delete_post.twig:14 admin/pages/delete_upload.twig:14
+#: admin/pages/delete_user.twig:47
 msgid "Delete!"
 msgstr "Usuń!"
 
-#: admin/pages/delete_group.twig:56 admin/pages/delete_page.twig:24 admin/pages/delete_post.twig:17 admin/pages/delete_upload.twig:17 admin/pages/delete_user.twig:50 admin/partials/page_fields.twig:100 admin/partials/post_fields.twig:198
+#: admin/pages/delete_group.twig:56 admin/pages/delete_page.twig:24
+#: admin/pages/delete_post.twig:17 admin/pages/delete_upload.twig:17
+#: admin/pages/delete_user.twig:50 admin/partials/page_fields.twig:100
+#: admin/partials/post_fields.twig:198
 msgid "Cancel"
 msgstr "Anuluj"
 
@@ -508,7 +603,9 @@ msgstr "Anuluj"
 msgid "Delete Page?"
 msgstr "Usunąć stronę?"
 
-#: admin/pages/delete_page.twig:10 admin/pages/delete_post.twig:10 admin/pages/edit_page.twig:6 admin/pages/edit_post.twig:6 admin/pages/manage_pages.twig:41 admin/pages/manage_posts.twig:39
+#: admin/pages/delete_page.twig:10 admin/pages/delete_post.twig:10
+#: admin/pages/edit_page.twig:6 admin/pages/edit_post.twig:6
+#: admin/pages/manage_pages.twig:41 admin/pages/manage_posts.twig:39
 msgid "[Untitled]"
 msgstr "[Bez tytułu]"
 
@@ -562,7 +659,8 @@ msgstr "Edycja grupy &#8222;%s&#8221;"
 msgid "Are you sure you want to make these changes to your group?"
 msgstr "Czy na pewno chcesz wprowadzić te zmiany w grupie?"
 
-#: admin/pages/edit_group.twig:10 admin/pages/manage_uploads.twig:22 admin/pages/new_group.twig:10
+#: admin/pages/edit_group.twig:10 admin/pages/manage_uploads.twig:22
+#: admin/pages/new_group.twig:10
 msgid "Name"
 msgstr "Nazwa"
 
@@ -617,11 +715,12 @@ msgstr "Czy na pewno chcesz wprowadzić te zmiany w swoim koncie?"
 msgid "Login"
 msgstr "Login"
 
-#: admin/pages/edit_user.twig:15 admin/pages:new_user.twig:15
+#: admin/pages/edit_user.twig:15 admin/pages/new_user.twig:15
 msgid "Email"
 msgstr "Adres e-mail"
 
-#: admin/pages/edit_user.twig:20 admin/pages/manage_groups.twig:22 admin/pages/manage_users.twig:28 admin/pages:new_user.twig:20
+#: admin/pages/edit_user.twig:20 admin/pages/manage_groups.twig:22
+#: admin/pages/manage_users.twig:28 admin/pages/new_user.twig:20
 msgid "Group"
 msgstr "Grupa"
 
@@ -637,15 +736,22 @@ msgstr "Potwierdź"
 msgid "Full Name"
 msgstr "Pełne imię i nazwisko"
 
-#: admin/pages/edit_user.twig:43 admin/pages/edit_user.twig:51 admin/pages/export.twig:19 admin/pages/export.twig:37 admin/pages/export.twig:55 admin/pages/export.twig:73 admin/pages/export.twig:94 admin/pages/general_settings.twig:36 admin/pages/import.twig:37 admin/pages/new_user.twig:46 admin/pages/new_user.twig:54
+#: admin/pages/edit_user.twig:43 admin/pages/edit_user.twig:51
+#: admin/pages/export.twig:19 admin/pages/export.twig:37
+#: admin/pages/export.twig:55 admin/pages/export.twig:73
+#: admin/pages/export.twig:94 admin/pages/general_settings.twig:36
+#: admin/pages/import.twig:37 admin/pages/new_user.twig:46
+#: admin/pages/new_user.twig:54
 msgid "(optional)"
 msgstr "(opcjonalne)"
 
-#: admin/pages/edit_user.twig:50 admin/pages/manage_users.twig:30 admin/pages/new_user.twig:53
+#: admin/pages/edit_user.twig:50 admin/pages/manage_users.twig:30
+#: admin/pages/new_user.twig:53
 msgid "Website"
 msgstr "Strona internetowa"
 
-#: admin/pages/edit_user.twig:58 admin/pages/manage_users.twig:32 admin/pages/new_user.twig:61
+#: admin/pages/edit_user.twig:58 admin/pages/manage_users.twig:32
+#: admin/pages/new_user.twig:61
 msgid "Activated?"
 msgstr "Aktywowany?"
 
@@ -690,8 +796,12 @@ msgid "Filter Users"
 msgstr "Filtruj użytkowników"
 
 #: admin/pages/export.twig:82
-msgid "Users export file will contain the hashed password for each user – keep it safe!"
-msgstr "Plik eksportu użytkowników będzie zawierał zahashowane hasła każdego użytkownika – przechowuj go w bezpiecznym miejscu!"
+msgid ""
+"Users export file will contain the hashed password for each user – keep it "
+"safe!"
+msgstr ""
+"Plik eksportu użytkowników będzie zawierał zahashowane hasła każdego "
+"użytkownika – przechowuj go w bezpiecznym miejscu!"
 
 #: admin/pages/export.twig:86
 msgid "Uploads Manifest"
@@ -709,7 +819,9 @@ msgstr "Feathers"
 msgid "Enabled"
 msgstr "Włączone"
 
-#: admin/pages/feathers.twig:16 admin/pages/feathers.twig:51 admin/pages/modules.twig:16 admin/pages/modules.twig:70 admin/pages/themes.twig:14
+#: admin/pages/feathers.twig:16 admin/pages/feathers.twig:51
+#: admin/pages/modules.twig:16 admin/pages/modules.twig:70
+#: admin/pages/themes.twig:14
 msgid "Info"
 msgstr "Informacje"
 
@@ -751,7 +863,8 @@ msgstr "Podstawowy adres URL twojej strony."
 
 #: admin/pages/general_settings.twig:44
 msgid "Have your site URLs point someplace other than your install directory."
-msgstr "Wskaż, aby adresy URL strony wskazywały inne miejsce niż katalog instalacji."
+msgstr ""
+"Wskaż, aby adresy URL strony wskazywały inne miejsce niż katalog instalacji."
 
 #: admin/pages/general_settings.twig:49
 msgid "Contact Email Address"
@@ -831,15 +944,20 @@ msgstr "Zarządzaj grupami"
 msgid "Search all groups for user&hellip;"
 msgstr "Szukaj we wszystkich grupach użytkownika&hellip;"
 
-#: admin/pages/manage_groups.twig:10 admin/pages/manage_pages.twig:15 admin/pages/manage_posts.twig:15 admin/pages/manage_uploads.twig:10 admin/pages/manage_users.twig:15
+#: admin/pages/manage_groups.twig:10 admin/pages/manage_pages.twig:15
+#: admin/pages/manage_posts.twig:15 admin/pages/manage_uploads.twig:10
+#: admin/pages/manage_users.twig:15
 msgid "Search"
 msgstr "Szukaj"
 
-#: admin/pages/manage_groups.twig:13 admin/pages/new_group.twig:3 admin/pages/new_group.twig:6
+#: admin/pages/manage_groups.twig:13 admin/pages/new_group.twig:3
+#: admin/pages/new_group.twig:6
 msgid "New Group"
 msgstr "Nowa grupa"
 
-#: admin/pages/manage_groups.twig:18 admin/pages/manage_pages.twig:23 admin/pages/manage_posts.twig:23 admin/pages/manage_uploads.twig:18 admin/pages/manage_users.twig:23
+#: admin/pages/manage_groups.twig:18 admin/pages/manage_pages.twig:23
+#: admin/pages/manage_posts.twig:23 admin/pages/manage_uploads.twig:18
+#: admin/pages/manage_users.twig:23
 msgid "Search Results"
 msgstr "Wyniki wyszukiwania"
 
@@ -855,23 +973,33 @@ msgstr "Domyślna?"
 msgid "Guests?"
 msgstr "Goście?"
 
-#: admin/pages/manage_groups.twig:27 admin/pages/manage_pages.twig:34 admin/pages/manage_posts.twig:32 admin/pages/manage_uploads.twig:27 admin/pages/manage_users.twig:35
+#: admin/pages/manage_groups.twig:27 admin/pages/manage_pages.twig:34
+#: admin/pages/manage_posts.twig:32 admin/pages/manage_uploads.twig:27
+#: admin/pages/manage_users.twig:35
 msgid "Controls"
 msgstr "Opcje"
 
-#: admin/pages/manage_groups.twig:41 admin/pages/manage_groups.twig:46 admin/pages/manage_pages.twig:55 admin/pages/manage_pages.twig:60 admin/pages/manage_users.twig:57
+#: admin/pages/manage_groups.twig:41 admin/pages/manage_groups.twig:46
+#: admin/pages/manage_pages.twig:55 admin/pages/manage_pages.twig:60
+#: admin/pages/manage_users.twig:57
 msgid "Yes"
 msgstr "Tak"
 
-#: admin/pages/manage_groups.twig:59 admin/pages/manage_pages.twig:76 admin/pages/manage_posts.twig:64 admin/pages/manage_uploads.twig:80 admin/pages/manage_users.twig:71
+#: admin/pages/manage_groups.twig:59 admin/pages/manage_pages.twig:76
+#: admin/pages/manage_posts.twig:64 admin/pages/manage_uploads.twig:82
+#: admin/pages/manage_users.twig:71
 msgid "Delete"
 msgstr "Usuń"
 
-#: admin/pages/manage_groups.twig:69 admin/pages/manage_pages.twig:86 admin/pages/manage_posts.twig:74 admin/pages/manage_uploads.twig:91 admin/pages/manage_users.twig:81 admin/partials/uploads_modal.twig:34
+#: admin/pages/manage_groups.twig:69 admin/pages/manage_pages.twig:86
+#: admin/pages/manage_posts.twig:74 admin/pages/manage_uploads.twig:93
+#: admin/pages/manage_users.twig:81 admin/partials/uploads_modal.twig:34
 msgid "No results"
 msgstr "Brak wyników"
 
-#: admin/pages/manage_groups.twig:77 admin/pages/manage_pages.twig:94 admin/pages/manage_posts.twig:82 admin/pages/manage_uploads.twig:112 admin/pages/manage_users.twig:89
+#: admin/pages/manage_groups.twig:77 admin/pages/manage_pages.twig:94
+#: admin/pages/manage_posts.twig:82 admin/pages/manage_uploads.twig:114
+#: admin/pages/manage_users.twig:89
 #, php-format
 msgid "Page %d of %s"
 msgstr "Strona %d z %s"
@@ -880,7 +1008,8 @@ msgstr "Strona %d z %s"
 msgid "Manage Pages"
 msgstr "Zarządzaj stronami"
 
-#: admin/pages/manage_pages.twig:9 admin/pages/manage_posts.twig:9 admin/pages/manage_uploads.twig:8 admin/pages/manage_users.twig:9
+#: admin/pages/manage_pages.twig:9 admin/pages/manage_posts.twig:9
+#: admin/pages/manage_uploads.twig:8 admin/pages/manage_users.twig:9
 msgid "Search&hellip;"
 msgstr "Szukaj&hellip;"
 
@@ -888,7 +1017,8 @@ msgstr "Szukaj&hellip;"
 msgid "New Page"
 msgstr "Nowa strona"
 
-#: admin/pages/manage_pages.twig:27 admin/pages/manage_posts.twig:27 admin/partials/page_fields.twig:4
+#: admin/pages/manage_pages.twig:27 admin/pages/manage_posts.twig:27
+#: admin/partials/page_fields.twig:4
 msgid "Title"
 msgstr "Tytuł"
 
@@ -928,7 +1058,8 @@ msgstr "Nowy wpis"
 msgid "Posted"
 msgstr "Opublikowano"
 
-#: admin/pages/manage_posts.twig:29 admin/partials/page_fields.twig:33 admin/partials/post_fields.twig:82
+#: admin/pages/manage_posts.twig:29 admin/partials/page_fields.twig:33
+#: admin/partials/post_fields.twig:82
 msgid "Status"
 msgstr "Status"
 
@@ -956,15 +1087,15 @@ msgstr "Rozmiar"
 msgid "Type"
 msgstr "Typ"
 
-#: admin/pages/manage_uploads.twig:62
+#: admin/pages/manage_uploads.twig:67
 msgid "Download"
 msgstr "Pobierz"
 
-#: admin/pages/manage_uploads.twig:99
+#: admin/pages/manage_uploads.twig:101
 msgid "Sort results by:"
 msgstr "Sortuj wyniki według:"
 
-#: admin/pages/manage_uploads.twig:107
+#: admin/pages/manage_uploads.twig:109
 msgid "Sort Results"
 msgstr "Sortuj wyniki"
 
@@ -1113,18 +1244,34 @@ msgid "Allow the site to send email correspondence to users?"
 msgstr "Zezwalaj stronie na wysyłanie e-maili do użytkowników?"
 
 #: admin/pages/user_settings.twig:26
-msgid "Activate by Email"
-msgstr "Aktywacja przez e-mail"
+msgid "Automatic User Activation"
+msgstr "Automatyczna aktywacja użytkownika"
 
 #: admin/pages/user_settings.twig:30
-msgid "Should users activate by email?"
-msgstr "Czy użytkownicy powinni aktywować konto poprzez e-mail?"
+msgid "New users can log in immediately."
+msgstr "Nowi użytkownicy mogą się zalogować od razu."
 
 #: admin/pages/user_settings.twig:34
+msgid "User Activation by Email"
+msgstr "Aktywacja użytkownika przez e-mail"
+
+#: admin/pages/user_settings.twig:38
+msgid "New users must respond to an activation email."
+msgstr "Nowi użytkownicy muszą odpowiedzieć na e-mail aktywacyjny."
+
+#: admin/pages/user_settings.twig:42
+msgid "User Activation by Administrator"
+msgstr "Aktywacja użytkownika przez administratora"
+
+#: admin/pages/user_settings.twig:46
+msgid "New users must be activated by an administrator."
+msgstr "Nowi użytkownicy muszą być aktywowani przez administratora."
+
+#: admin/pages/user_settings.twig:50
 msgid "Default User Group"
 msgstr "Domyślna grupa użytkownika"
 
-#: admin/pages/user_settings.twig:45
+#: admin/pages/user_settings.twig:61
 msgid "&#8220;Guest&#8221; Group"
 msgstr "Grupa &#8222;Gość&#8221;"
 
@@ -1180,11 +1327,14 @@ msgstr "Niski"
 msgid "Parent"
 msgstr "Nadrzędna"
 
-#: admin/partials/page_fields.twig:90 admin/partials/post_fields.twig:188 admin/partials/post_fields.twig:204
+#: admin/partials/page_fields.twig:90 admin/partials/post_fields.twig:188
+#: admin/partials/post_fields.twig:204
 msgid "Publish"
 msgstr "Opublikuj"
 
-#: admin/partials/page_fields.twig:93 admin/partials/page_fields.twig:97 admin/partials/post_fields.twig:191 admin/partials/post_fields.twig:195 admin/partials/post_fields.twig:208
+#: admin/partials/page_fields.twig:93 admin/partials/page_fields.twig:97
+#: admin/partials/post_fields.twig:191 admin/partials/post_fields.twig:195
+#: admin/partials/post_fields.twig:208
 msgid "Save"
 msgstr "Zapisz"
 

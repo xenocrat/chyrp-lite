@@ -43,7 +43,9 @@ msgstr "HTML w komentarzach"
 
 #: modules/comments/admin/pages/comment_settings.twig:39
 msgid "Allow some groups of users to enter HTML directly in comment text."
-msgstr "Pozwól wybranym grupom użytkowników wstawiać HTML bezpośrednio w treści komentarza."
+msgstr ""
+"Pozwól wybranym grupom użytkowników wstawiać HTML bezpośrednio w treści "
+"komentarza."
 
 #: modules/comments/admin/pages/comment_settings.twig:43
 msgid "Allowed HTML"
@@ -449,6 +451,6 @@ msgstr "Czy chcesz usunąć komentarze z bazy danych?"
 msgid "Are you sure you want to permanently delete this comment?"
 msgstr "Czy na pewno chcesz trwale usunąć ten komentarz?"
 
-#: modules/comments/model/Comment.php:584
+#: modules/comments/model/Comment.php:580
 msgid "Anon"
 msgstr "Anonim"

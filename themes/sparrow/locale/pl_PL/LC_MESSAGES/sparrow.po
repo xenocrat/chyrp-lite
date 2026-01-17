@@ -9,7 +9,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 "
+"|| n%100>14) ? 1 : 2);\n"
 "X-Generator: Poedit 3.6\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
@@ -259,7 +260,7 @@ msgid "Lost password"
 msgstr "Zapomniane hasło"
 
 #: themes/sparrow/forms/user/lost_password.twig:11
-#: themes/sparrow/forms/user/reset_password.twig:16
+#: themes/sparrow/forms/user/reset_password.twig:15
 msgid "Submit"
 msgstr "Wyślij"
 

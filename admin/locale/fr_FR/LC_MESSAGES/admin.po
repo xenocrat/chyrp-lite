@@ -438,7 +438,7 @@ msgstr "Contenu de l’aide"
 
 #: admin/javascripts/admin.js.php:519 admin/javascripts/admin.js.php:520
 #: admin/pages/manage_groups.twig:52 admin/pages/manage_pages.twig:69
-#: admin/pages/manage_posts.twig:57 admin/pages/manage_uploads.twig:71
+#: admin/pages/manage_posts.twig:57 admin/pages/manage_uploads.twig:73
 #: admin/pages/manage_users.twig:64
 msgid "Edit"
 msgstr "Modifier"
@@ -567,7 +567,7 @@ msgstr ""
 #: admin/pages/content_settings.twig:119 admin/pages/edit_group.twig:27
 #: admin/pages/edit_upload.twig:20 admin/pages/edit_user.twig:66
 #: admin/pages/general_settings.twig:109 admin/pages/route_settings.twig:96
-#: admin/pages/user_settings.twig:57
+#: admin/pages/user_settings.twig:73
 msgid "Update"
 msgstr "Mise à jour"
 
@@ -996,19 +996,19 @@ msgid "Yes"
 msgstr "Oui"
 
 #: admin/pages/manage_groups.twig:59 admin/pages/manage_pages.twig:76
-#: admin/pages/manage_posts.twig:64 admin/pages/manage_uploads.twig:80
+#: admin/pages/manage_posts.twig:64 admin/pages/manage_uploads.twig:82
 #: admin/pages/manage_users.twig:71
 msgid "Delete"
 msgstr "Supprimer"
 
 #: admin/pages/manage_groups.twig:69 admin/pages/manage_pages.twig:86
-#: admin/pages/manage_posts.twig:74 admin/pages/manage_uploads.twig:91
+#: admin/pages/manage_posts.twig:74 admin/pages/manage_uploads.twig:93
 #: admin/pages/manage_users.twig:81 admin/partials/uploads_modal.twig:34
 msgid "No results"
 msgstr "Aucun résultat"
 
 #: admin/pages/manage_groups.twig:77 admin/pages/manage_pages.twig:94
-#: admin/pages/manage_posts.twig:82 admin/pages/manage_uploads.twig:112
+#: admin/pages/manage_posts.twig:82 admin/pages/manage_uploads.twig:114
 #: admin/pages/manage_users.twig:89
 #, php-format
 msgid "Page %d of %s"
@@ -1097,15 +1097,15 @@ msgstr "Taille"
 msgid "Type"
 msgstr "Type"
 
-#: admin/pages/manage_uploads.twig:62
+#: admin/pages/manage_uploads.twig:67
 msgid "Download"
 msgstr "Télécharger"
 
-#: admin/pages/manage_uploads.twig:99
+#: admin/pages/manage_uploads.twig:101
 msgid "Sort results by:"
 msgstr "Trier les résultats par:"
 
-#: admin/pages/manage_uploads.twig:107
+#: admin/pages/manage_uploads.twig:109
 msgid "Sort Results"
 msgstr "Trier les résultats"
 
@@ -1256,18 +1256,34 @@ msgstr ""
 "utilisateurs ?"
 
 #: admin/pages/user_settings.twig:26
-msgid "Activate by Email"
-msgstr "Activé par courriel"
+msgid "Automatic User Activation"
+msgstr "Activation automatique par l’utilisateur"
 
 #: admin/pages/user_settings.twig:30
-msgid "Should users activate by email?"
-msgstr "Les utilisateurs doivent-ils activer leur compte par courriel ?"
+msgid "New users can log in immediately."
+msgstr "Les nouveaux utilisateurs peuvent se connecter immédiatement."
 
 #: admin/pages/user_settings.twig:34
+msgid "User Activation by Email"
+msgstr "Activation utilisateur par email"
+
+#: admin/pages/user_settings.twig:38
+msgid "New users must respond to an activation email."
+msgstr "Les nouveaux utilisateurs doivent répondre à un email d’activation."
+
+#: admin/pages/user_settings.twig:42
+msgid "User Activation by Administrator"
+msgstr "Activation utilisateur par l’administrateur"
+
+#: admin/pages/user_settings.twig:46
+msgid "New users must be activated by an administrator."
+msgstr "Les nouveaux utilisateurs doivent être activés par un administrateur."
+
+#: admin/pages/user_settings.twig:50
 msgid "Default User Group"
 msgstr "Groupe utilisateur par défaut"
 
-#: admin/pages/user_settings.twig:45
+#: admin/pages/user_settings.twig:61
 msgid "&#8220;Guest&#8221; Group"
 msgstr "Groupe &#171;%s&#187;"
 

@@ -219,7 +219,7 @@ msgid "Lost password"
 msgstr "Zapomniane hasło"
 
 #: themes/virgula/forms/user/lost_password.twig:10
-#: themes/virgula/forms/user/reset_password.twig:15
+#: themes/virgula/forms/user/reset_password.twig:14
 msgid "Submit"
 msgstr "Wyślij"
 
@@ -384,8 +384,8 @@ msgid "Your search did not return any results."
 msgstr "Twoje wyszukiwanie nie zwróciło żadnych wyników."
 
 #: themes/virgula/pages/search.twig:11
-msgid "Pages containing the search term"
-msgstr "Strony zawierające wyszukiwane hasło"
+msgid "Pages containing the search term&hellip;"
+msgstr "Strony zawierające wyszukiwane hasło&hellip;"
 
 #: themes/virgula/pages/tag.twig:4
 #, php-format

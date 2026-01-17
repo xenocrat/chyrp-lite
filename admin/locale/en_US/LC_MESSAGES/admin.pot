@@ -399,7 +399,7 @@ msgstr ""
 #: admin/pages/manage_groups.twig:52
 #: admin/pages/manage_pages.twig:69
 #: admin/pages/manage_posts.twig:57
-#: admin/pages/manage_uploads.twig:71
+#: admin/pages/manage_uploads.twig:73
 #: admin/pages/manage_users.twig:64
 msgid "Edit"
 msgstr ""
@@ -540,7 +540,7 @@ msgstr ""
 #: admin/pages/edit_user.twig:66
 #: admin/pages/general_settings.twig:109
 #: admin/pages/route_settings.twig:96
-#: admin/pages/user_settings.twig:57
+#: admin/pages/user_settings.twig:73
 msgid "Update"
 msgstr ""
 
@@ -1018,7 +1018,7 @@ msgstr ""
 #: admin/pages/manage_groups.twig:59
 #: admin/pages/manage_pages.twig:76
 #: admin/pages/manage_posts.twig:64
-#: admin/pages/manage_uploads.twig:80
+#: admin/pages/manage_uploads.twig:82
 #: admin/pages/manage_users.twig:71
 msgid "Delete"
 msgstr ""
@@ -1026,7 +1026,7 @@ msgstr ""
 #: admin/pages/manage_groups.twig:69
 #: admin/pages/manage_pages.twig:86
 #: admin/pages/manage_posts.twig:74
-#: admin/pages/manage_uploads.twig:91
+#: admin/pages/manage_uploads.twig:93
 #: admin/pages/manage_users.twig:81
 #: admin/partials/uploads_modal.twig:34
 msgid "No results"
@@ -1035,7 +1035,7 @@ msgstr ""
 #: admin/pages/manage_groups.twig:77
 #: admin/pages/manage_pages.twig:94
 #: admin/pages/manage_posts.twig:82
-#: admin/pages/manage_uploads.twig:112
+#: admin/pages/manage_uploads.twig:114
 #: admin/pages/manage_users.twig:89
 #, php-format
 msgid "Page %d of %s"
@@ -1130,15 +1130,15 @@ msgstr ""
 msgid "Type"
 msgstr ""
 
-#: admin/pages/manage_uploads.twig:62
+#: admin/pages/manage_uploads.twig:67
 msgid "Download"
 msgstr ""
 
-#: admin/pages/manage_uploads.twig:99
+#: admin/pages/manage_uploads.twig:101
 msgid "Sort results by:"
 msgstr ""
 
-#: admin/pages/manage_uploads.twig:107
+#: admin/pages/manage_uploads.twig:109
 msgid "Sort Results"
 msgstr ""
 
@@ -1294,18 +1294,34 @@ msgid "Allow the site to send email correspondence to users?"
 msgstr ""
 
 #: admin/pages/user_settings.twig:26
-msgid "Activate by Email"
+msgid "Automatic User Activation"
 msgstr ""
 
 #: admin/pages/user_settings.twig:30
-msgid "Should users activate by email?"
+msgid "New users can log in immediately."
 msgstr ""
 
 #: admin/pages/user_settings.twig:34
+msgid "User Activation by Email"
+msgstr ""
+
+#: admin/pages/user_settings.twig:38
+msgid "New users must respond to an activation email."
+msgstr ""
+
+#: admin/pages/user_settings.twig:42
+msgid "User Activation by Administrator"
+msgstr ""
+
+#: admin/pages/user_settings.twig:46
+msgid "New users must be activated by an administrator."
+msgstr ""
+
+#: admin/pages/user_settings.twig:50
 msgid "Default User Group"
 msgstr ""
 
-#: admin/pages/user_settings.twig:45
+#: admin/pages/user_settings.twig:61
 msgid "&#8220;Guest&#8221; Group"
 msgstr ""
 

@@ -422,7 +422,7 @@ msgstr "帮助内容"
 
 #: admin/javascripts/admin.js.php:519 admin/javascripts/admin.js.php:520
 #: admin/pages/manage_groups.twig:52 admin/pages/manage_pages.twig:69
-#: admin/pages/manage_posts.twig:57 admin/pages/manage_uploads.twig:71
+#: admin/pages/manage_posts.twig:57 admin/pages/manage_uploads.twig:73
 #: admin/pages/manage_users.twig:64
 msgid "Edit"
 msgstr "编辑"
@@ -548,7 +548,7 @@ msgstr "使用Markdown语法撰写博客内容。"
 #: admin/pages/content_settings.twig:119 admin/pages/edit_group.twig:27
 #: admin/pages/edit_upload.twig:20 admin/pages/edit_user.twig:66
 #: admin/pages/general_settings.twig:109 admin/pages/route_settings.twig:96
-#: admin/pages/user_settings.twig:57
+#: admin/pages/user_settings.twig:73
 msgid "Update"
 msgstr "更新"
 
@@ -971,19 +971,19 @@ msgid "Yes"
 msgstr "是"
 
 #: admin/pages/manage_groups.twig:59 admin/pages/manage_pages.twig:76
-#: admin/pages/manage_posts.twig:64 admin/pages/manage_uploads.twig:80
+#: admin/pages/manage_posts.twig:64 admin/pages/manage_uploads.twig:82
 #: admin/pages/manage_users.twig:71
 msgid "Delete"
 msgstr "删除"
 
 #: admin/pages/manage_groups.twig:69 admin/pages/manage_pages.twig:86
-#: admin/pages/manage_posts.twig:74 admin/pages/manage_uploads.twig:91
+#: admin/pages/manage_posts.twig:74 admin/pages/manage_uploads.twig:93
 #: admin/pages/manage_users.twig:81 admin/partials/uploads_modal.twig:34
 msgid "No results"
 msgstr "没有结果"
 
 #: admin/pages/manage_groups.twig:77 admin/pages/manage_pages.twig:94
-#: admin/pages/manage_posts.twig:82 admin/pages/manage_uploads.twig:112
+#: admin/pages/manage_posts.twig:82 admin/pages/manage_uploads.twig:114
 #: admin/pages/manage_users.twig:89
 #, php-format
 msgid "Page %d of %s"
@@ -1072,15 +1072,15 @@ msgstr "大小"
 msgid "Type"
 msgstr "类型"
 
-#: admin/pages/manage_uploads.twig:62
+#: admin/pages/manage_uploads.twig:67
 msgid "Download"
 msgstr "下载"
 
-#: admin/pages/manage_uploads.twig:99
+#: admin/pages/manage_uploads.twig:101
 msgid "Sort results by:"
 msgstr "结果排序依据："
 
-#: admin/pages/manage_uploads.twig:107
+#: admin/pages/manage_uploads.twig:109
 msgid "Sort Results"
 msgstr "对结果进行排序"
 
@@ -1229,18 +1229,34 @@ msgid "Allow the site to send email correspondence to users?"
 msgstr "允许发送电子邮件通讯给用户？"
 
 #: admin/pages/user_settings.twig:26
-msgid "Activate by Email"
-msgstr "通过电子邮件激活"
+msgid "Automatic User Activation"
+msgstr "自动用户激活"
 
 #: admin/pages/user_settings.twig:30
-msgid "Should users activate by email?"
-msgstr "用户是否应该通过电子邮件激活？"
+msgid "New users can log in immediately."
+msgstr "新用户可以立即登录。"
 
 #: admin/pages/user_settings.twig:34
+msgid "User Activation by Email"
+msgstr "用户通过电子邮件激活"
+
+#: admin/pages/user_settings.twig:38
+msgid "New users must respond to an activation email."
+msgstr "新用户必须回复激活邮件。"
+
+#: admin/pages/user_settings.twig:42
+msgid "User Activation by Administrator"
+msgstr "管理员激活用户"
+
+#: admin/pages/user_settings.twig:46
+msgid "New users must be activated by an administrator."
+msgstr "新用户必须由管理员激活。"
+
+#: admin/pages/user_settings.twig:50
 msgid "Default User Group"
 msgstr "默认用户组"
 
-#: admin/pages/user_settings.twig:45
+#: admin/pages/user_settings.twig:61
 msgid "&#8220;Guest&#8221; Group"
 msgstr "&#8220;Guest&#8221; 组"
 

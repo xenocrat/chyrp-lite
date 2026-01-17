@@ -18,16 +18,38 @@ msgid "Injector Labels"
 msgstr "Etykiety Injektory"
 
 #: modules/inject/admin/help/injector_labels.twig:8
-msgid "Each injector must have a label. The label has two purposes: firstly, it helps you to manage your injectors by giving each one a label that is memorable and descriptive. Secondly, for filter injectors only, the label identifies the content to be injected into the post or page."
-msgstr "Każdy Injektor musi mieć etykietę. Etykieta służy dwóm celom: po pierwsze, ułatwia zarządzanie Injektorami, nadając każdemu zapamiętywalną i opisową nazwę. Po drugie, w przypadku Injektory typu filtr, etykieta identyfikuje zawartość, która ma zostać wstrzyknięta do wpisu lub strony."
+msgid ""
+"Each injector must have a label. The label has two purposes: firstly, it "
+"helps you to manage your injectors by giving each one a label that is "
+"memorable and descriptive. Secondly, for filter injectors only, the label "
+"identifies the content to be injected into the post or page."
+msgstr ""
+"Każdy Injektor musi mieć etykietę. Etykieta służy dwóm celom: po pierwsze, "
+"ułatwia zarządzanie Injektorami, nadając każdemu zapamiętywalną i opisową "
+"nazwę. Po drugie, w przypadku Injektory typu filtr, etykieta identyfikuje "
+"zawartość, która ma zostać wstrzyknięta do wpisu lub strony."
 
 #: modules/inject/admin/help/injector_labels.twig:11
-msgid "For example, if you create an injector of the type <strong>post filter</strong> or <strong>page filter</strong> and label it <code>foobar</code>, you must insert the following comment into the text of a post or page in the position where you want to inject the content:"
-msgstr "Na przykład, jeśli utworzysz Injektor typu <strong>filtr wpisu</strong> lub <strong>filtr strony</strong> i nazwiesz go <code>foobar</code>, musisz wstawić następujący komentarz w treści wpisu lub strony w miejscu, w którym chcesz wstrzyknąć zawartość:"
+msgid ""
+"For example, if you create an injector of the type <strong>post filter</"
+"strong> or <strong>page filter</strong> and label it <code>foobar</code>, "
+"you must insert the following comment into the text of a post or page in the "
+"position where you want to inject the content:"
+msgstr ""
+"Na przykład, jeśli utworzysz Injektor typu <strong>filtr wpisu</strong> lub "
+"<strong>filtr strony</strong> i nazwiesz go <code>foobar</code>, musisz "
+"wstawić następujący komentarz w treści wpisu lub strony w miejscu, w którym "
+"chcesz wstrzyknąć zawartość:"
 
 #: modules/inject/admin/help/injector_labels.twig:15
-msgid "If you create an injector of the type <strong>Twig filter</strong> and label it <code>foobar</code>, you must insert the following expression in a Twig template in the position where you want to inject the content:"
-msgstr "Jeśli utworzysz Injektor typu <strong>filtr Twig</strong> i nazwiesz go <code>foobar</code>, musisz wstawić następujące wyrażenie w szablonie Twig w miejscu, w którym chcesz wstrzyknąć zawartość:"
+msgid ""
+"If you create an injector of the type <strong>Twig filter</strong> and label "
+"it <code>foobar</code>, you must insert the following expression in a Twig "
+"template in the position where you want to inject the content:"
+msgstr ""
+"Jeśli utworzysz Injektor typu <strong>filtr Twig</strong> i nazwiesz go "
+"<code>foobar</code>, musisz wstawić następujące wyrażenie w szablonie Twig w "
+"miejscu, w którym chcesz wstrzyknąć zawartość:"
 
 #: modules/inject/admin/pages/delete_injector.twig:3
 #: modules/inject/admin/pages/delete_injector.twig:6
@@ -80,7 +102,7 @@ msgid "New Injector"
 msgstr "Nowy Injektor"
 
 #: modules/inject/admin/pages/manage_injectors.twig:16
-#: modules/inject/inject.php:455
+#: modules/inject/inject.php:482
 msgid "Injectors"
 msgstr "Injektory"
 
@@ -98,79 +120,83 @@ msgstr "Injektor"
 msgid "Inject content into your blog using triggers and filters."
 msgstr "Wstrzykuj zawartość na swoim blogu za pomocą wyzwalaczy i filtrów."
 
-#: modules/inject/inject.php:154
+#: modules/inject/info.php:11
+msgid "Do you want to remove injector settings?"
+msgstr "Chcesz usunąć ustawienia wtryskiwacza?"
+
+#: modules/inject/inject.php:157
 msgid "HTML head"
 msgstr "Sekcja head HTML"
 
-#: modules/inject/inject.php:155
+#: modules/inject/inject.php:158
 msgid "End of main section"
 msgstr "Koniec sekcji głównej"
 
-#: modules/inject/inject.php:156
+#: modules/inject/inject.php:159
 msgid "After other content"
 msgstr "Po innej zawartości"
 
-#: modules/inject/inject.php:157
+#: modules/inject/inject.php:160
 msgid "Post filter"
 msgstr "Filtr wpisu"
 
-#: modules/inject/inject.php:158
+#: modules/inject/inject.php:161
 msgid "Page filter"
 msgstr "Filtr strony"
 
-#: modules/inject/inject.php:159
+#: modules/inject/inject.php:162
 msgid "Twig filter"
 msgstr "Filtr Twig"
 
-#: modules/inject/inject.php:166
+#: modules/inject/inject.php:169
 msgid "Never"
 msgstr "Nigdy"
 
-#: modules/inject/inject.php:167
+#: modules/inject/inject.php:170
 msgid "Once"
 msgstr "Raz"
 
-#: modules/inject/inject.php:168
+#: modules/inject/inject.php:171
 msgid "Odd"
 msgstr "Nieparzyste"
 
-#: modules/inject/inject.php:169
+#: modules/inject/inject.php:172
 msgid "Even"
 msgstr "Parzyste"
 
-#: modules/inject/inject.php:170
+#: modules/inject/inject.php:173
 msgid "Always"
 msgstr "Zawsze"
 
-#: modules/inject/inject.php:268 modules/inject/inject.php:349
+#: modules/inject/inject.php:271 modules/inject/inject.php:364
 msgid "Label cannot be blank."
 msgstr "Etykieta nie może być pusta."
 
-#: modules/inject/inject.php:296
+#: modules/inject/inject.php:299
 msgid "Injector added."
 msgstr "Injektor dodany."
 
-#: modules/inject/inject.php:307
+#: modules/inject/inject.php:316
 msgid "An ID is required to edit an injector."
 msgstr "Do edycji Injektora wymagane jest ID."
 
-#: modules/inject/inject.php:316 modules/inject/inject.php:358
-#: modules/inject/inject.php:399 modules/inject/inject.php:434
+#: modules/inject/inject.php:325 modules/inject/inject.php:373
+#: modules/inject/inject.php:420 modules/inject/inject.php:461
 msgid "Injector not found."
 msgstr "Injektor nie został znaleziony."
 
-#: modules/inject/inject.php:342
+#: modules/inject/inject.php:357
 msgid "An ID is required to update an injector."
 msgstr "Do aktualizacji Injektora wymagane jest ID."
 
-#: modules/inject/inject.php:379
+#: modules/inject/inject.php:394
 msgid "Injector updated."
 msgstr "Injektor zaktualizowany."
 
-#: modules/inject/inject.php:390 modules/inject/inject.php:422
+#: modules/inject/inject.php:411 modules/inject/inject.php:449
 msgid "An ID is required to delete an injector."
 msgstr "Do usunięcia Injektora wymagane jest ID."
 
-#: modules/inject/inject.php:445
+#: modules/inject/inject.php:472
 msgid "Injector deleted."
 msgstr "Injektor usunięty."

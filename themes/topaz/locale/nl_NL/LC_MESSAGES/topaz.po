@@ -334,7 +334,7 @@ msgid "Lost password"
 msgstr "Wachtwoord verloren"
 
 #: themes/topaz/forms/user/lost_password.twig:11
-#: themes/topaz/forms/user/reset_password.twig:16
+#: themes/topaz/forms/user/reset_password.twig:15
 msgid "Submit"
 msgstr "Bevestig"
 

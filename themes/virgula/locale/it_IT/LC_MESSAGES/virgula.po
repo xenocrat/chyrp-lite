@@ -220,7 +220,7 @@ msgid "Lost password"
 msgstr "Password dimenticata"
 
 #: themes/virgula/forms/user/lost_password.twig:10
-#: themes/virgula/forms/user/reset_password.twig:15
+#: themes/virgula/forms/user/reset_password.twig:14
 msgid "Submit"
 msgstr "Invia"
 

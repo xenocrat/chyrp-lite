@@ -330,7 +330,7 @@ msgid "Lost password"
 msgstr "忘记密码"
 
 #: themes/blossom/forms/user/lost_password.twig:11
-#: themes/blossom/forms/user/reset_password.twig:16
+#: themes/blossom/forms/user/reset_password.twig:15
 msgid "Submit"
 msgstr "提交"
 

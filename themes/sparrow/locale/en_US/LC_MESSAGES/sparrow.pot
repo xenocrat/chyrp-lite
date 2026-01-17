@@ -254,7 +254,7 @@ msgid "Lost password"
 msgstr ""
 
 #: themes/sparrow/forms/user/lost_password.twig:11
-#: themes/sparrow/forms/user/reset_password.twig:16
+#: themes/sparrow/forms/user/reset_password.twig:15
 msgid "Submit"
 msgstr ""
 

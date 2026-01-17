@@ -9,7 +9,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 "
+"|| n%100>14) ? 1 : 2);\n"
 "X-Generator: Poedit 3.6\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
@@ -35,7 +36,7 @@ msgstr "Tagi"
 #: themes/topaz/feathers/photo.twig:7 themes/topaz/feathers/quote.twig:7
 #: themes/topaz/feathers/text.twig:7 themes/topaz/feathers/uploader.twig:7
 #: themes/topaz/feathers/video.twig:7 themes/topaz/pages/archive.twig:29
-#: themes/topaz/pages/page.twig:7 themes/topaz/pages/search.twig:19
+#: themes/topaz/pages/page.twig:7 themes/topaz/pages/search.twig:20
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr "Stały link do &#8222;%s&#8221;"
@@ -336,7 +337,7 @@ msgid "Lost password"
 msgstr "Zapomniane hasło"
 
 #: themes/topaz/forms/user/lost_password.twig:11
-#: themes/topaz/forms/user/reset_password.twig:16
+#: themes/topaz/forms/user/reset_password.twig:15
 msgid "Submit"
 msgstr "Wyślij"
 
@@ -428,8 +429,8 @@ msgid "Your search did not return any results."
 msgstr "Twoje wyszukiwanie nie zwróciło żadnych wyników."
 
 #: themes/topaz/pages/search.twig:15
-msgid "Pages containing the search term"
-msgstr "Strony zawierające wyszukiwane hasło"
+msgid "Pages containing the search term&hellip;"
+msgstr "Strony zawierające wyszukiwane hasło&hellip;"
 
 #: themes/topaz/pages/tag.twig:5
 #, php-format
