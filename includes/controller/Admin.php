@@ -1169,6 +1169,9 @@
                     case "admin":
                         email_admin_activation($user);
                         break;
+                    case "none":
+                        email_acknowledge_user($user);
+                        break;
                 }
             }
 
@@ -1356,8 +1359,19 @@
                 approved:empty($_POST['activated'])
             );
 
-            if ($user->approved and !$was_approved)
-                email_acknowledge_user($user);
+            switch ($config->user_activation) {
+                case "email":
+                    if (!$user->approved and $was_approved)
+                        email_activate_account($user);
+
+                    break;
+
+                case "admin":
+                    if ($user->approved and !$was_approved)
+                        email_acknowledge_user($user);
+
+                    break;
+            }
 
             Flash::notice(
                 __("User updated."),
