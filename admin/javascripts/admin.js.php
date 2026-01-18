@@ -211,6 +211,7 @@ function solo_submit(
         }
     );
 }
+// Tests the size of files selected for upload.
 function test_uploads(
 ) {
     $("input[type='file']:not(.toolbar)").on(
@@ -1031,7 +1032,7 @@ var Write = {
                         return sessionStorage.getItem(name) ?? $(this).val() ;
                     } catch(err) {
                         console.log("Caught Exception: Window.sessionStorage.getItem()");
-                        return null;
+                        return $(this).val();
                     }
                 }
             ).trigger("input").on(
@@ -1054,7 +1055,7 @@ var Write = {
                         return sessionStorage.getItem(name) ?? $(this).val() ;
                     } catch(err) {
                         console.log("Caught Exception: Window.sessionStorage.getItem()");
-                        return null;
+                        return $(this).val();
                     }
                 }
             ).trigger("input").on(
@@ -1069,7 +1070,7 @@ var Write = {
                 }
             );
 
-            // Remember unsaved text entered in the options inputs.
+            // Remember unsaved inputs in the options.
             $("#write_form .more_options input:not(#pinned, #created_at)").val(
                 function(index, value) {
                     try {
@@ -1077,7 +1078,7 @@ var Write = {
                         return sessionStorage.getItem(name) ?? $(this).val() ;
                     } catch(err) {
                         console.log("Caught Exception: Window.sessionStorage.getItem()");
-                        return null;
+                        return $(this).val();
                     }
                 }
             ).trigger("input").on(
@@ -1092,7 +1093,7 @@ var Write = {
                 }
             );
 
-            // Remember unsaved selections in the options selectors.
+            // Remember unsaved selections in the options.
             $("#write_form .more_options select:not(#status)").val(
                 function(index, value) {
                     try {
@@ -1100,7 +1101,7 @@ var Write = {
                         return sessionStorage.getItem(name) ?? $(this).val() ;
                     } catch(err) {
                         console.log("Caught Exception: Window.sessionStorage.getItem()");
-                        return null;
+                        return $(this).val();
                     }
                 }
             ).trigger("input").on(
