@@ -1156,7 +1156,7 @@
                 full_name:$_POST['full_name'],
                 website:$_POST['website'],
                 group_id:$group->id,
-                approved:empty($_POST['activated'])
+                approved:!empty($_POST['activated'])
             );
 
             if ($user->approved) {
@@ -1356,7 +1356,7 @@
                 full_name:$_POST['full_name'],
                 website:$_POST['website'],
                 group_id:$group->id,
-                approved:empty($_POST['activated'])
+                approved:!empty($_POST['activated'])
             );
 
             switch ($config->user_activation) {
