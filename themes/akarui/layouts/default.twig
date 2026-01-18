@@ -24,7 +24,7 @@
 {{ theme.javascripts() }}
 {{ trigger.call("end_head") }}
 </head>
-<body class="route_{{ route.action }} {{ random(['red', 'blue', 'green', 'orange', 'purple']) }}">
+<body class="route_{{ route.action }} {{ ['red', 'blue', 'green', 'orange', 'purple'][(route.action | length) % 5] }}">
 <!-- Mast -->
 <nav>
 <h1><a href="{{ url('/') }}">{{ site.name }}</a></h1>
