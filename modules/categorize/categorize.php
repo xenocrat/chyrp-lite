@@ -9,7 +9,8 @@
         public static function __install(
         ): void {
             Category::install();
-
+            Group::add_permission("manage_categorize", "Manage Categories");
+            // Add permission to current user's group.
             $sql = SQL::current();
             $visitor = Visitor::current();
             $group_id = isset($visitor->group->id) ? $visitor->group->id : Config::current()->default_group;
