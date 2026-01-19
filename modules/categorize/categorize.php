@@ -10,7 +10,27 @@
         ): void {
             Category::install();
 
-            Group::add_permission("manage_categorize", "Manage Categories");
+            $sql = SQL::current();
+            $visitor = Visitor::current();
+            $group_id = isset($visitor->group->id) ? $visitor->group->id : Config::current()->default_group;
+
+            if (! $sql->count(
+                tables:"permissions",
+                conds:array(
+                    "id" => "manage_categorize",
+                    "group_id" => $group_id
+                )
+            )) {
+                $sql->insert(
+                    table:"permissions",
+                    data:array(
+                        "id" => "manage_categorize",
+                        "name" => "Manage Categories",
+                        "group_id" => $group_id
+                    )
+                );
+            }
+
             Route::current()->add("category/(name)/", "category");
         }
 
