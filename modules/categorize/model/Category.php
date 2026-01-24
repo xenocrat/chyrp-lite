@@ -28,7 +28,7 @@
          *     <Model::search>
          */
         public static function find(
-            $options = array(),
+            $options = array("order" => "name ASC"),
             $options_for_object = array()
         ): array {
             $options["from"] = "categorize";
