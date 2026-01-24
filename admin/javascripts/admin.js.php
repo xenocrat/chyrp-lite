@@ -1023,7 +1023,7 @@ var Write = {
 
         // Remember unsaved text entered in the primary text input.
         if (!!sessionStorage) {
-            var prefix = "user_" + Visitor.id;
+            var prefix = "user_id_" + Visitor.id;
 
             $("#write_form .main_options input[type='text']").first().val(
                 function() {
