@@ -650,9 +650,19 @@
                 --chyrp-border-green: #aecda5;
                 --chyrp-border-blue: #a7c1d0;
                 --chyrp-border-purple: #cda5cd;
+                --chyrp-fill-yellow: var(--chyrp-light-yellow);
+                --chyrp-fill-red: var(--chyrp-light-red);
+                --chyrp-fill-green: var(--chyrp-light-green);
+                --chyrp-fill-blue: var(--chyrp-light-blue);
+                --chyrp-fill-purple: var(--chyrp-light-purple);
+                --chyrp-fill-grey: var(--chyrp-english-grey);
+                --chyrp-inset-grey: var(--chyrp-summer-grey);
+                --chyrp-border-grey: var(--chyrp-irish-grey);
+                --chyrp-text-black: var(--chyrp-inky-black);
+                --chyrp-text-white: var(--chyrp-pure-white);
             }
             *::selection {
-                color: var(--chyrp-inky-black);
+                color: var(--chyrp-text-black);
                 background-color: var(--chyrp-strong-yellow);
             }
             html, body, div, dl, dt, dd, ul, ol, li, p,
@@ -671,28 +681,28 @@
                 font-size: 1rem;
                 font-family: "Open Sans webfont", sans-serif;
                 line-height: 1.5;
-                color: var(--chyrp-inky-black);
+                color: var(--chyrp-text-black);
                 tab-size: 4;
                 background: var(--chyrp-english-grey);
                 margin: 2rem;
             }
             h1 {
                 font-size: 2em;
-                text-align: center;
                 font-weight: bold;
                 margin: 1rem 0rem;
+                text-align: center;
             }
             h2 {
                 font-size: 1.5em;
-                text-align: center;
                 font-weight: bold;
+                text-align: center;
                 margin: 1rem 0rem;
             }
             h3 {
                 font-size: 1em;
                 font-weight: 600;
                 margin: 1rem 0rem;
-                border-bottom: 1px solid var(--chyrp-irish-grey);
+                border-bottom: 1px solid var(--chyrp-border-grey);
             }
             p {
                 margin-bottom: 1rem;
@@ -714,23 +724,23 @@
             pre {
                 font-family: "Cousine webfont", monospace;
                 font-size: 0.85em;
-                background-color: var(--chyrp-english-grey);
+                background-color: var(--chyrp-fill-grey);
                 margin: 1rem 0rem;
                 padding: 1rem;
                 overflow-x: auto;
                 white-space: pre;
             }
+            pre:focus-visible {
+                outline: var(--chyrp-strong-orange) dashed 2px;
+            }
             code {
                 font-family: "Cousine webfont", monospace;
                 font-size: 0.85em;
-                background-color: var(--chyrp-english-grey);
+                background-color: var(--chyrp-fill-grey);
                 padding: 2px 4px 0px 4px;
-                border: 1px solid var(--chyrp-irish-grey);
+                border: 1px solid var(--chyrp-border-grey);
                 vertical-align: bottom;
                 white-space: break-spaces;
-            }
-            pre:focus-visible {
-                outline: var(--chyrp-strong-orange) dashed 2px;
             }
             pre > code {
                 font-size: 0.85rem;
@@ -739,9 +749,19 @@
                 padding: 0px;
                 white-space: inherit;
             }
+            pre.pane {
+                height: 15rem;
+                overflow: auto;
+            }
+            pre.pane:empty {
+                display: none;
+            }
+            pre.pane:empty + h1 {
+                margin-top: 0rem;
+            }
             a:link,
             a:visited {
-                color: var(--chyrp-inky-black);
+                color: var(--chyrp-text-black);
                 text-decoration: underline;
                 text-underline-offset: 0.125em;
                 text-decoration-thickness: 0.0625em;
@@ -763,15 +783,14 @@
             button {
                 box-sizing: border-box;
                 display: block;
-                clear: both;
                 font: inherit;
                 font-size: 1.25em;
                 text-align: center;
-                color: var(--chyrp-inky-black);
+                color: var(--chyrp-text-black);
                 text-decoration: none;
                 margin: 1rem 0rem;
                 padding: 0.5rem 1rem;
-                background-color: var(--chyrp-light-blue);
+                background-color: var(--chyrp-fill-blue);
                 border: 2px solid var(--chyrp-border-blue);
                 border-radius: 0.25em;
                 cursor: pointer;
@@ -797,7 +816,7 @@
             hr {
                 border: none;
                 clear: both;
-                border-top: 1px solid var(--chyrp-irish-grey);
+                border-top: 1px solid var(--chyrp-border-grey);
                 margin: 2rem 0rem;
             }
             aside {
@@ -805,7 +824,7 @@
                 padding: 0.5rem;
                 border: 1px solid var(--chyrp-border-yellow);
                 border-radius: 0.25em;
-                background-color: var(--chyrp-light-yellow);
+                background-color: var(--chyrp-fill-yellow);
             }
             .window {
                 width: 30rem;
@@ -814,37 +833,44 @@
                 margin: 0rem auto 0rem auto;
                 border-radius: 2rem;
             }
-            .window > *:first-child {
+            .window > *:first-child,
+            form > *:first-child {
                 margin-top: 0rem;
             }
-            .window > *:last-child {
+            .window > *:last-child,
+            form > *:last-child {
                 margin-bottom: 0rem;
             }
             @media (prefers-color-scheme: dark) {
+                :root {
+                    --chyrp-fill-yellow: var(--chyrp-medium-yellow);
+                    --chyrp-fill-red: var(--chyrp-medium-red);
+                    --chyrp-fill-green: var(--chyrp-medium-green);
+                    --chyrp-fill-blue: var(--chyrp-medium-blue);
+                    --chyrp-fill-purple: var(--chyrp-medium-purple);
+                    --chyrp-fill-grey: var(--chyrp-welsh-grey);
+                    --chyrp-inset-grey: transparent;
+                    --chyrp-border-grey: var(--chyrp-scottish-grey);
+                }
                 body {
-                    color: var(--chyrp-pure-white);
+                    color: var(--chyrp-text-white);
                     background-color: var(--chyrp-inky-black);
                 }
                 .window {
-                    color: var(--chyrp-inky-black);
+                    color: var(--chyrp-text-black);
                     background-color: var(--chyrp-english-grey);
                 }
-                h3 {
-                    border-color: var(--chyrp-scottish-grey);
+            }
+            @media (prefers-contrast: less) {
+                :root {
+                    --chyrp-text-black: var(--chyrp-winter-grey);
+                    --chyrp-text-white: var(--chyrp-summer-grey);
                 }
-                hr {
-                    border-color: var(--chyrp-scottish-grey);
-                }
-                aside {
-                    background-color: var(--chyrp-medium-yellow);
-                    border-color: var(--chyrp-scottish-grey);
-                }
-                pre {
-                    background-color: var(--chyrp-welsh-grey);
-                }
-                code {
-                    background-color: var(--chyrp-welsh-grey);
-                    border-color: var(--chyrp-scottish-grey);
+            }
+            @media (prefers-contrast: more) {
+                :root {
+                    --chyrp-border-grey: var(--chyrp-winter-grey);
+                    --chyrp-text-black: var(--chyrp-pure-black);
                 }
             }
         </style>

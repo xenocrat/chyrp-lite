@@ -72,22 +72,6 @@ blockquote, aside, figure, figcaption {
     padding: 0em;
     border: 0em;
 }
-html {
-    font-size: 16px;
-}
-table {
-    border-collapse: collapse;
-    border-spacing: 0em;
-}
-ul {
-    margin-bottom: 1rem;
-    list-style: none;
-}
-ol {
-    margin-bottom: 1rem;
-    margin-inline-start: 2rem;
-    list-style: decimal outside;
-}
 
 /* Group: Core */
 
@@ -123,16 +107,29 @@ ol {
     --chyrp-border-green: #aecda5;
     --chyrp-border-blue: #a7c1d0;
     --chyrp-border-purple: #cda5cd;
+    --chyrp-fill-yellow: var(--chyrp-light-yellow);
+    --chyrp-fill-red: var(--chyrp-light-red);
+    --chyrp-fill-green: var(--chyrp-light-green);
+    --chyrp-fill-blue: var(--chyrp-light-blue);
+    --chyrp-fill-purple: var(--chyrp-light-purple);
+    --chyrp-fill-grey: var(--chyrp-english-grey);
+    --chyrp-inset-grey: var(--chyrp-summer-grey);
+    --chyrp-border-grey: var(--chyrp-irish-grey);
+    --chyrp-text-black: var(--chyrp-inky-black);
+    --chyrp-text-white: var(--chyrp-pure-white);
 }
 *::selection {
-    color: var(--chyrp-inky-black);
+    color: var(--chyrp-text-black);
     background-color: var(--chyrp-strong-yellow);
+}
+html {
+    font-size: 16px;
 }
 body {
     font-family: "Open Sans webfont", sans-serif;
     font-size: 1rem;
     line-height: 1.5;
-    color: var(--chyrp-inky-black);
+    color: var(--chyrp-text-black);
     tab-size: 4;
     background-color: var(--chyrp-english-grey);
     min-width: 320px;
@@ -172,7 +169,7 @@ small, .small {
     font-size: 0.75em;
 }
 mark {
-    color: var(--chyrp-inky-black);
+    color: var(--chyrp-text-black);
     background-color: var(--chyrp-strong-yellow);
 }
 del, s {
@@ -182,8 +179,8 @@ del, s {
 }
 ins {
     font: inherit;
-    color: var(--chyrp-inky-black);
-    background-color: var(--chyrp-medium-green);
+    color: var(--chyrp-text-black);
+    background-color: var(--chyrp-fill-green);
 }
 samp {
     font-family: "Cousine webfont", monospace;
@@ -207,9 +204,22 @@ blockquote em {
 p {
     margin-bottom: 1rem;
 }
+table {
+    border-collapse: collapse;
+    border-spacing: 0em;
+}
+ul {
+    margin-bottom: 1rem;
+    list-style: none;
+}
+ol {
+    margin-bottom: 1rem;
+    margin-inline-start: 2rem;
+    list-style: decimal outside;
+}
 a:link,
 a:visited {
-    color: var(--chyrp-inky-black);
+    color: var(--chyrp-text-black);
     text-decoration: underline;
     text-underline-offset: 0.125em;
     text-decoration-thickness: 0.0625em;
@@ -249,7 +259,7 @@ a:focus-visible {
     margin: 0rem 2rem 2rem 2rem;
 }
 #header h1 a {
-    color: var(--chyrp-pure-white);
+    color: var(--chyrp-text-white);
     text-decoration: none;
 }
 #header #navigation {
@@ -367,7 +377,7 @@ a:focus-visible {
 hr {
     border: none;
     clear: both;
-    border-top: 1px solid var(--chyrp-irish-grey);
+    border-top: 1px solid var(--chyrp-border-grey);
     margin: 2rem 0rem;
 }
 aside {
@@ -376,12 +386,12 @@ aside {
     padding: 0.5rem;
     border: 1px solid var(--chyrp-border-yellow);
     border-radius: 0.25em;
-    background-color: var(--chyrp-light-yellow);
+    background-color: var(--chyrp-fill-yellow);
 }
 pre {
     font-family: "Cousine webfont", monospace;
     font-size: 0.85em;
-    background-color: var(--chyrp-english-grey);
+    background-color: var(--chyrp-fill-grey);
     margin: 1rem 0rem;
     padding: 1rem;
     overflow-x: auto;
@@ -393,9 +403,9 @@ pre:focus-visible {
 code {
     font-family: "Cousine webfont", monospace;
     font-size: 0.85em;
-    background-color: var(--chyrp-english-grey);
+    background-color: var(--chyrp-fill-grey);
     padding: 2px 4px 0px 4px;
-    border: 1px solid var(--chyrp-irish-grey);
+    border: 1px solid var(--chyrp-border-grey);
     vertical-align: bottom;
     white-space: break-spaces;
 }
@@ -443,18 +453,18 @@ span.pages {
     border-radius: 0.5em;
 }
 #content ul.extend > li {
-    background-color: var(--chyrp-english-grey);
-    border: 1px solid var(--chyrp-irish-grey);
+    background-color: var(--chyrp-inset-grey);
+    border: 1px solid var(--chyrp-border-grey);
 }
 #content ul#modules_enabled > li,
 #content ul#feathers_enabled > li,
 #content ul.themes > li.current {
-    background-color: var(--chyrp-medium-green);
+    background-color: var(--chyrp-fill-green);
     border: 1px solid var(--chyrp-border-green);
 }
 #content ul#modules_enabled > li.error,
 #content ul#modules_disabled > li.error  {
-    background-color: var(--chyrp-medium-red);
+    background-color: var(--chyrp-fill-red);
     border: 1px solid var(--chyrp-border-red);
 }
 li.module ol.module_conflicts_list,
@@ -473,7 +483,7 @@ li.theme div.controls {
     text-align: end;
     margin-top: 1rem;
     padding-top: 1rem;
-    border-top: 1px solid var(--chyrp-irish-grey);
+    border-top: 1px solid var(--chyrp-border-grey);
 }
 ul#modules_enabled div.controls,
 ul#feathers_enabled div.controls,
@@ -509,7 +519,7 @@ input[type="checkbox"],
 input[type="radio"] {
     appearance: none;
     box-sizing: border-box;
-    color: var(--chyrp-inky-black);
+    color: var(--chyrp-text-black);
     font: inherit;
     font-size: 1.25rem;
     position: relative;
@@ -517,7 +527,7 @@ input[type="radio"] {
     width: 1em;
     height: 1em;
     border-radius: 0em;
-    border: 1px solid var(--chyrp-irish-grey);
+    border: 1px solid var(--chyrp-border-grey);
     background-color: var(--chyrp-pure-white);
 }
 input[type="radio"] {
@@ -536,22 +546,22 @@ input[type="range"],
 input[type="password"] {
     box-sizing: border-box;
     width: 20ch;
-    color: var(--chyrp-inky-black);
+    color: var(--chyrp-text-black);
     font: inherit;
     font-size: 1.25rem;
     padding: 0.5rem;
     border-radius: 0em;
-    border: 1px solid var(--chyrp-irish-grey);
+    border: 1px solid var(--chyrp-border-grey);
     background-color: var(--chyrp-pure-white);
 }
 input[type="file"] {
     box-sizing: border-box;
-    color: var(--chyrp-inky-black);
+    color: var(--chyrp-text-black);
     font: inherit;
     font-size: 1.25rem;
     padding: 1rem;
     border-radius: 0em;
-    border: 1px solid var(--chyrp-irish-grey);
+    border: 1px solid var(--chyrp-border-grey);
     background-color: var(--chyrp-pure-white);
 }
 html[dir="ltr"] select:not([multiple]) {
@@ -630,7 +640,7 @@ input[type="number"].error,
 input[type="range"].error,
 input[type="password"].error,
 input[type="file"].error {
-    background-color: var(--chyrp-light-red);
+    background-color: var(--chyrp-fill-red);
 }
 textarea.error:focus,
 input[type="checkbox"].error:focus,
@@ -649,7 +659,7 @@ input[type="file"].error:focus {
     outline-color: var(--chyrp-strong-red);
 }
 input[type="password"].strong {
-    background-color: var(--chyrp-light-green);
+    background-color: var(--chyrp-fill-green);
 }
 input[type="password"].strong:focus {
     border: 1px solid var(--chyrp-strong-green);
@@ -658,8 +668,8 @@ input[type="password"].strong:focus {
 textarea[readonly]:focus,
 input[readonly]:focus,
 select[readonly]:focus {
-    border-color: var(--chyrp-irish-grey);
-    outline-color: var(--chyrp-irish-grey);
+    border-color: var(--chyrp-border-grey);
+    outline-color: var(--chyrp-border-grey);
 }
 input.code,
 textarea.code,
@@ -737,13 +747,13 @@ table th {
     font: inherit;
     font-weight: 600;
     vertical-align: middle;
-    border: 1px solid var(--chyrp-scottish-grey);
+    border: 1px solid var(--chyrp-border-grey);
 }
 table td {
     padding: 0.5rem;
     font: inherit;
     vertical-align: middle;
-    border: 1px solid var(--chyrp-irish-grey);
+    border: 1px solid var(--chyrp-border-grey);
 }
 table tbody tr:nth-child(even) td {
     background-color: var(--chyrp-summer-grey);
@@ -793,22 +803,22 @@ table tbody tr td.placeholder {
     border: none;
 }
 table tbody tr td.status {
-    background-color: var(--chyrp-light-blue);
+    background-color: var(--chyrp-fill-blue);
 }
 table tbody tr.private td.status {
-    background-color: var(--chyrp-light-red);
+    background-color: var(--chyrp-fill-red);
 }
 table tbody tr.registered_only td.status {
-    background-color: var(--chyrp-light-purple);
+    background-color: var(--chyrp-fill-purple);
 }
 table tbody tr.public td.status {
-    background-color: var(--chyrp-light-green);
+    background-color: var(--chyrp-fill-green);
 }
 table tbody tr.denied td.status {
-    background-color: var(--chyrp-light-red);
+    background-color: var(--chyrp-fill-red);
 }
 table tbody tr.approved td.status {
-    background-color: var(--chyrp-light-green);
+    background-color: var(--chyrp-fill-green);
 }
 table tbody tr.comment_excerpt td p {
     margin: 0rem;
@@ -848,7 +858,7 @@ div.flash {
     padding: 0.5rem;
     margin-bottom: 1rem;
     background-color: var(--chyrp-strong-blue);
-    color: var(--chyrp-pure-white);
+    color: var(--chyrp-text-white);
     border: none;
     border-radius: 0.25em;
     animation: shake_sideways 10s 1s normal ease 3;
@@ -860,7 +870,7 @@ div.flash.warning {
     background-color: var(--chyrp-strong-red);
 }
 div.flash a {
-    color: var(--chyrp-pure-white);
+    color: var(--chyrp-text-white);
     font-weight: 600;
 }
 
@@ -875,11 +885,11 @@ a.prev_page {
     display: inline-block;
     font: inherit;
     font-size: 1.25rem;
-    color: var(--chyrp-inky-black);
+    color: var(--chyrp-text-black);
     text-align: center;
     margin: 0rem;
     padding: 0.5rem 1rem;
-    background-color: var(--chyrp-light-blue);
+    background-color: var(--chyrp-fill-blue);
     border: 2px solid var(--chyrp-border-blue);
     border-radius: 0.25em;
     cursor: pointer;
@@ -916,8 +926,8 @@ a.prev_page:focus-visible {
 }
 button.boo,
 a.button.boo {
-    color: var(--chyrp-inky-black);
-    background-color: var(--chyrp-light-red);
+    color: var(--chyrp-text-black);
+    background-color: var(--chyrp-fill-red);
     border: 2px solid var(--chyrp-border-red);
 }
 button.boo:hover,
@@ -930,8 +940,8 @@ a.button.boo:active {
 }
 button.yay,
 a.button.yay {
-    color: var(--chyrp-inky-black);
-    background-color: var(--chyrp-light-green);
+    color: var(--chyrp-text-black);
+    background-color: var(--chyrp-fill-green);
     border: 2px solid var(--chyrp-border-green);
 }
 button.yay:hover,
@@ -998,8 +1008,8 @@ div.more_options {
     row-gap: 1rem;
     justify-content: space-between;
     padding: 1rem;
-    background-color: var(--chyrp-summer-grey);
-    border: 1px solid var(--chyrp-irish-grey);
+    background-color: var(--chyrp-inset-grey);
+    border: 1px solid var(--chyrp-border-grey);
     border-radius: 0.25rem;
 }
 .more_options_option {
@@ -1033,8 +1043,8 @@ span.options_extra {
     width: 100%;
     max-height: 10rem;
     padding: 0.5rem;
-    background-color: var(--chyrp-light-yellow);
-    border: 1px solid var(--chyrp-irish-grey);
+    background-color: var(--chyrp-fill-yellow);
+    border: 1px solid var(--chyrp-border-grey);
     border-top: none;
     overflow-y: auto;
 }
@@ -1048,8 +1058,8 @@ span.options_toolbar {
     gap: 24px;
     justify-content: flex-start;
     width: 100%;
-    background-color: var(--chyrp-summer-grey);
-    border: 1px solid var(--chyrp-irish-grey);
+    background-color: var(--chyrp-inset-grey);
+    border: 1px solid var(--chyrp-border-grey);
     border-bottom: none;
     padding: 0.5rem 0.75rem calc(0.5rem + 0.1875rem) 0.75rem;
     border-top-left-radius: 0.25rem;
@@ -1063,8 +1073,8 @@ span.options_tray {
     display: block;
     width: 100%;
     font-size: 0.75rem;
-    background-color: var(--chyrp-summer-grey);
-    border: 1px solid var(--chyrp-irish-grey);
+    background-color: var(--chyrp-inset-grey);
+    border: 1px solid var(--chyrp-border-grey);
     border-top: none;
     padding: 0.25rem 0.5rem;
     border-bottom-left-radius: 0.25rem;
@@ -1081,8 +1091,8 @@ span.options_tray:empty {
     margin-top: 0.25rem;
     padding: 0em 0.25em;
     border-radius: 0.25em;
-    border: 1px solid var(--chyrp-irish-grey);
-    background-color: var(--chyrp-english-grey);
+    border: 1px solid var(--chyrp-border-grey);
+    background-color: var(--chyrp-fill-grey);
 }
 *.tag:link,
 *.tag:visited {
@@ -1090,7 +1100,7 @@ span.options_tray:empty {
 }
 *.tag:active,
 *.tag_added {
-    background-color: var(--chyrp-light-purple);
+    background-color: var(--chyrp-fill-purple);
     border-color: var(--chyrp-border-purple);
 }
 *.tag:focus-visible {
@@ -1098,9 +1108,9 @@ span.options_tray:empty {
     outline-offset: -2px;
 }
 table.interactive + div.controls {
-    background-color: var(--chyrp-light-yellow);
+    background-color: var(--chyrp-fill-yellow);
     padding: 1rem 0.5rem;
-    border: 1px solid var(--chyrp-irish-grey);
+    border: 1px solid var(--chyrp-border-grey);
     border-top: none;
 }
 table.interactive.empty + div.controls {
@@ -1113,8 +1123,8 @@ div.confirmation {
     column-gap: 2rem;
     justify-content: space-between;
     padding: 1rem;
-    background-color: var(--chyrp-summer-grey);
-    border: 1px solid var(--chyrp-irish-grey);
+    background-color: var(--chyrp-inset-grey);
+    border: 1px solid var(--chyrp-border-grey);
     border-radius: 0.25rem;
 }
 a.emblem {
@@ -1128,7 +1138,7 @@ button.emblem {
     display: inline;
     font: inherit;
     font-size: 1em;
-    color: var(--chyrp-inky-black);
+    color: var(--chyrp-text-black);
     margin: 0rem;
     padding: 0rem;
     background-color: transparent;
@@ -1198,7 +1208,7 @@ input.toolbar.hidden::file-selector-button {
     display: none !important;
 }
 .drag_highlight {
-    background-color: var(--chyrp-light-yellow);
+    background-color: var(--chyrp-fill-yellow);
 }
 
 /* Group: iFrames */
@@ -1262,11 +1272,11 @@ input.toolbar.hidden::file-selector-button {
     background-size: 30px 30px;
     background-image: linear-gradient(
         -45deg,
-        var(--chyrp-english-grey) 25%,
+        var(--chyrp-fill-grey) 25%,
         transparent 25%,
         transparent 50%,
-        var(--chyrp-english-grey) 50%,
-        var(--chyrp-english-grey) 75%,
+        var(--chyrp-fill-grey) 50%,
+        var(--chyrp-fill-grey) 75%,
         transparent 75%
     ) !important;
     animation: ajax_loading 2s linear infinite;
@@ -1459,8 +1469,18 @@ input.toolbar.hidden::file-selector-button {
 /* Group: Dark */
 
 @media (prefers-color-scheme: dark) {
+    :root {
+        --chyrp-fill-yellow: var(--chyrp-medium-yellow);
+        --chyrp-fill-red: var(--chyrp-medium-red);
+        --chyrp-fill-green: var(--chyrp-medium-green);
+        --chyrp-fill-blue: var(--chyrp-medium-blue);
+        --chyrp-fill-purple: var(--chyrp-medium-purple);
+        --chyrp-fill-grey: var(--chyrp-welsh-grey);
+        --chyrp-inset-grey: transparent;
+        --chyrp-border-grey: var(--chyrp-scottish-grey);
+    }
     body {
-        color: var(--chyrp-pure-white);
+        color: var(--chyrp-text-white);
         background-color: var(--chyrp-inky-black);
     }
     #header {
@@ -1468,7 +1488,7 @@ input.toolbar.hidden::file-selector-button {
     }
     #header #navigation li a:link,
     #header #navigation li a:visited {
-        color: var(--chyrp-pure-white);
+        color: var(--chyrp-text-white);
         background-color: #2f2f2f;
     }
     #header #navigation li.selected a:link,
@@ -1490,32 +1510,9 @@ input.toolbar.hidden::file-selector-button {
         background-color: var(--chyrp-english-grey);
     }
     #content {
-        color: var(--chyrp-inky-black);
+        color: var(--chyrp-text-black);
         background-color: var(--chyrp-english-grey);
         border-color: var(--chyrp-pure-white);
-    }
-    hr {
-        border-color: var(--chyrp-scottish-grey);
-    }
-    aside {
-        background-color: var(--chyrp-medium-yellow);
-        border-color: var(--chyrp-scottish-grey);
-    }
-    pre {
-        background-color: var(--chyrp-welsh-grey);
-    }
-    code {
-        background-color: var(--chyrp-welsh-grey);
-        border-color: var(--chyrp-scottish-grey);
-    }
-    #content ul.extend > li {
-        background-color: transparent;
-        border-color: var(--chyrp-scottish-grey);
-    }
-    li.module div.controls,
-    li.feather div.controls,
-    li.theme div.controls {
-        border-color: var(--chyrp-scottish-grey);
     }
     select,
     textarea,
@@ -1532,63 +1529,21 @@ input.toolbar.hidden::file-selector-button {
     input[type="password"],
     input[type="file"] {
         background-color: var(--chyrp-welsh-grey);
-        border-color: var(--chyrp-scottish-grey);
     }
     input:invalid {
         border-color: var(--chyrp-strong-orange);
     }
-    table tbody tr td {
-        border-color: var(--chyrp-scottish-grey);
+    table th {
+        background-color: var(--chyrp-irish-grey);
     }
     table tbody tr:nth-child(even) td {
         background-color: var(--chyrp-welsh-grey);
-    }
-    span.options_toolbar {
-        background-color: transparent;
-        border-color: var(--chyrp-scottish-grey);
-    }
-    span.options_tray {
-        background-color: transparent;
-        border-color: var(--chyrp-scottish-grey);
-    }
-    span.options_extra {
-        background-color: var(--chyrp-medium-yellow);
-        border-color: var(--chyrp-scottish-grey);
-    }
-    *.tag {
-        border-color: var(--chyrp-scottish-grey);
-    }
-    *.tag_added {
-        border-color: var(--chyrp-strong-blue);
-    }
-    table.interactive + div.controls {
-        background-color: var(--chyrp-medium-yellow);
-        border-color: var(--chyrp-scottish-grey);
-    }
-    div.more_options {
-        background-color: transparent;
-        border-color: var(--chyrp-scottish-grey);
-    }
-    div.confirmation {
-        background-color: transparent;
-        border-color: var(--chyrp-scottish-grey);
     }
     .iframe_foreground {
         background-color: var(--chyrp-english-grey);
     }
     .iframe_close_gadget svg {
         fill: var(--chyrp-english-grey);
-    }
-    .ajax_loading {
-        background-image: linear-gradient(
-            -45deg,
-            var(--chyrp-irish-grey) 25%,
-            transparent 25%,
-            transparent 50%,
-            var(--chyrp-irish-grey) 50%,
-            var(--chyrp-irish-grey) 75%,
-            transparent 75%
-        ) !important;
     }
 }
 
@@ -1600,5 +1555,21 @@ input.toolbar.hidden::file-selector-button {
     }
     .ajax_loading {
         animation: ajax_loading 10s linear infinite;
+    }
+}
+
+/* Group: Contrast preferences */
+
+@media (prefers-contrast: less) {
+    :root {
+        --chyrp-text-black: var(--chyrp-winter-grey);
+        --chyrp-text-white: var(--chyrp-summer-grey);
+    }
+}
+
+@media (prefers-contrast: more) {
+    :root {
+        --chyrp-border-grey: var(--chyrp-winter-grey);
+        --chyrp-text-black: var(--chyrp-pure-black);
     }
 }
