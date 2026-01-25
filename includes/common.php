@@ -417,9 +417,9 @@
     # Instantiate the visitor.
     $visitor = Visitor::current();
 
-    # Constant: CHYRP_URL
-    # Proves successful instantiation of the environment.
-    define('CHYRP_URL', $config->chyrp_url);
+    # Constant: CHYRP_ENVIRONMENT
+    # Indicates full availability of the environment.
+    define('CHYRP_ENVIRONMENT', true);
 
     # First general-purpose trigger.
     $trigger->call("runtime");

@@ -10,6 +10,7 @@
     define('CHYRP_VERSION',                 "2026.01");
     define('CHYRP_CODENAME',                "Iriomote");
     define('CHYRP_IDENTITY',                "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
+    define('CHYRP_ENVIRONMENT',             false);
     define('MAIN',                          false);
     define('ADMIN',                         false);
     define('AJAX',                          false);
