@@ -32,6 +32,8 @@
             $options_for_object = array()
         ): array {
             $options["from"] = "categorize";
+            fallback($options["order"], "name ASC");
+
             return parent::search(
                 self::class,
                 $options,
