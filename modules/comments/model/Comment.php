@@ -70,6 +70,7 @@
                 $options["where"][] = self::redactions();
 
             fallback($options["order"], "created_at ASC");
+
             return parent::search(
                 self::class,
                 $options,
