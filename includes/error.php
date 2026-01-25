@@ -182,24 +182,17 @@
 
         # Report in plain text if desirable or necessary because of a deep error.
         if (
-            AJAX or
+            INSTALLING or UPGRADING or AJAX or
             !function_exists("__") or
             !function_exists("_f") or
             !function_exists("fallback") or
             !function_exists("fix") or
             !function_exists("sanitize_html") or
             !function_exists("logged_in") or
-            !file_exists(INCLUDES_DIR.DIR."config.json.php") or
-            !class_exists("Config") or
-            !method_exists("Config", "current") or
-            !isset(Config::current()->locale) or
-            !isset(Config::current()->chyrp_url)
+            !defined('CHYRP_URL')
         ) {
             exit("ERROR: ".strip_tags($body));
         }
-
-        # We need this for the pretty error page.
-        $chyrp_url = fix(Config::current()->chyrp_url, true);
 
         # Set fallbacks.
         fallback($title, __("Error"));
@@ -252,318 +245,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=640">
         <title><?php echo strip_tags($title); ?></title>
-        <style type="text/css">
-            @font-face {
-                font-family: 'Open Sans webfont';
-                src: url('<?php echo $chyrp_url; ?>/fonts/OpenSans-Regular.woff') format('woff');
-                font-weight: normal;
-                font-style: normal;
-            }
-            @font-face {
-                font-family: 'Open Sans webfont';
-                src: url('<?php echo $chyrp_url; ?>/fonts/OpenSans-SemiBold.woff') format('woff');
-                font-weight: 600;
-                font-style: normal;
-            }
-            @font-face {
-                font-family: 'Open Sans webfont';
-                src: url('<?php echo $chyrp_url; ?>/fonts/OpenSans-Bold.woff') format('woff');
-                font-weight: bold;
-                font-style: normal;
-            }
-            @font-face {
-                font-family: 'Open Sans webfont';
-                src: url('<?php echo $chyrp_url; ?>/fonts/OpenSans-Italic.woff') format('woff');
-                font-weight: normal;
-                font-style: italic;
-            }
-            @font-face {
-                font-family: 'Open Sans webfont';
-                src: url('<?php echo $chyrp_url; ?>/fonts/OpenSans-SemiBoldItalic.woff') format('woff');
-                font-weight: 600;
-                font-style: italic;
-            }
-            @font-face {
-                font-family: 'Open Sans webfont';
-                src: url('<?php echo $chyrp_url; ?>/fonts/OpenSans-BoldItalic.woff') format('woff');
-                font-weight: bold;
-                font-style: italic;
-            }
-            @font-face {
-                font-family: 'Cousine webfont';
-                src: url('<?php echo $chyrp_url; ?>/fonts/Cousine-Regular.woff') format('woff');
-                font-weight: normal;
-                font-style: normal;
-            }
-            @font-face {
-                font-family: 'Cousine webfont';
-                src: url('<?php echo $chyrp_url; ?>/fonts/Cousine-Bold.woff') format('woff');
-                font-weight: bold;
-                font-style: normal;
-            }
-            @font-face {
-                font-family: 'Cousine webfont';
-                src: url('<?php echo $chyrp_url; ?>/fonts/Cousine-Italic.woff') format('woff');
-                font-weight: normal;
-                font-style: italic;
-            }
-            @font-face {
-                font-family: 'Cousine webfont';
-                src: url('<?php echo $chyrp_url; ?>/fonts/Cousine-BoldItalic.woff') format('woff');
-                font-weight: bold;
-                font-style: italic;
-            }
-            :root {
-                color-scheme: light dark;
-                --chyrp-pure-white: #ffffff;
-                --chyrp-pure-black: #000000;
-                --chyrp-inky-black: #1f1f23;
-                --chyrp-summer-grey: #fbfbfb;
-                --chyrp-english-grey: #efefef;
-                --chyrp-welsh-grey: #dfdfdf;
-                --chyrp-irish-grey: #cfcfcf;
-                --chyrp-scottish-grey: #afafaf;
-                --chyrp-winter-grey: #656565;
-                --chyrp-strong-yellow: #ffdd00;
-                --chyrp-strong-orange: #ff7f00;
-                --chyrp-strong-red: #c11600;
-                --chyrp-strong-green: #108600;
-                --chyrp-strong-blue: #1e57ba;
-                --chyrp-strong-purple: #ba1eba;
-                --chyrp-light-yellow: #fffde6;
-                --chyrp-light-red: #faebe4;
-                --chyrp-light-green: #ebfae4;
-                --chyrp-light-blue: #f2fbff;
-                --chyrp-light-purple: #fae4fa;
-                --chyrp-medium-yellow: #fffbcc;
-                --chyrp-medium-red: #fcddcf;
-                --chyrp-medium-green: #daf1d0;
-                --chyrp-medium-blue: #e1f2fa;
-                --chyrp-medium-purple: #f6d5f6;
-                --chyrp-border-yellow: #e0ce8d;
-                --chyrp-border-red: #cdaea5;
-                --chyrp-border-green: #aecda5;
-                --chyrp-border-blue: #a7c1d0;
-                --chyrp-border-purple: #cda5cd;
-                --chyrp-fill-yellow: var(--chyrp-light-yellow);
-                --chyrp-fill-red: var(--chyrp-light-red);
-                --chyrp-fill-green: var(--chyrp-light-green);
-                --chyrp-fill-blue: var(--chyrp-light-blue);
-                --chyrp-fill-purple: var(--chyrp-light-purple);
-                --chyrp-fill-grey: var(--chyrp-english-grey);
-                --chyrp-inset-grey: var(--chyrp-summer-grey);
-                --chyrp-border-grey: var(--chyrp-irish-grey);
-                --chyrp-text-black: var(--chyrp-inky-black);
-                --chyrp-text-white: var(--chyrp-pure-white);
-            }
-            *::selection {
-                color: var(--chyrp-text-black);
-                background-color: var(--chyrp-strong-yellow);
-            }
-            html, body, div, dl, dt, dd, ul, ol, li, p,
-            h1, h2, h3, h4, h5, h6, img, pre, code,
-            form, fieldset, input, select, svg, textarea,
-            table, tbody, tr, th, td, legend, caption,
-            blockquote, aside, figure, figcaption {
-                margin: 0em;
-                padding: 0em;
-                border: 0em;
-            }
-            html {
-                font-size: 16px;
-            }
-            body {
-                font-size: 1rem;
-                font-family: "Open Sans webfont", sans-serif;
-                line-height: 1.5;
-                color: var(--chyrp-text-black);
-                tab-size: 4;
-                background: var(--chyrp-english-grey);
-                margin: 2rem;
-            }
-            h1 {
-                font-size: 2em;
-                font-weight: bold;
-                margin: 1rem 0rem;
-                text-align: center;
-            }
-            h2 {
-                font-size: 1.5em;
-                font-weight: bold;
-                text-align: center;
-                margin: 1rem 0rem;
-            }
-            h3 {
-                font-size: 1em;
-                font-weight: 600;
-                margin: 1rem 0rem;
-                border-bottom: 1px solid var(--chyrp-border-grey);
-            }
-            p {
-                width: fit-content;
-                margin: 0rem auto 1rem auto;
-            }
-            pre {
-                font-family: "Cousine webfont", monospace;
-                font-size: 0.85em;
-                background-color: var(--chyrp-fill-grey);
-                margin: 1rem 0rem;
-                padding: 1rem;
-                overflow-x: auto;
-                white-space: pre;
-            }
-            pre:focus-visible {
-                outline: var(--chyrp-strong-orange) dashed 2px;
-            }
-            code {
-                font-family: "Cousine webfont", monospace;
-                font-size: 0.85em;
-                background-color: var(--chyrp-fill-grey);
-                padding: 2px 4px 0px 4px;
-                border: 1px solid var(--chyrp-border-grey);
-                vertical-align: bottom;
-                white-space: break-spaces;
-            }
-            pre > code {
-                font-size: 0.85rem;
-                display: block;
-                border: none;
-                padding: 0px;
-                white-space: inherit;
-            }
-            strong {
-                font: inherit;
-                font-weight: bold;
-                color: var(--chyrp-strong-red);
-            }
-            em, dfn, cite, var {
-                font: inherit;
-                font-style: italic;
-            }
-            ul, ol {
-                margin-bottom: 1rem;
-                margin-inline-start: 2rem;
-                list-style-position: outside;
-            }
-            ol.backtrace {
-                font-family: "Cousine webfont", monospace;
-                font-size: 0.85rem;
-                word-break: break-all;
-            }
-            a:link,
-            a:visited {
-                color: var(--chyrp-text-black);
-                text-decoration: underline;
-                text-underline-offset: 0.125em;
-                text-decoration-thickness: 0.0625em;
-            }
-            a:hover,
-            a:focus,
-            a:active {
-                outline: none;
-                color: var(--chyrp-strong-blue);
-                text-decoration: underline;
-                text-underline-offset: 0.125em;
-                text-decoration-thickness: 0.0625em;
-            }
-            a:focus-visible {
-                outline: var(--chyrp-strong-orange) dashed 2px;
-                outline-offset: 2px;
-            }
-            a.big,
-            button {
-                box-sizing: border-box;
-                display: block;
-                clear: both;
-                font: inherit;
-                font-size: 1.25em;
-                text-align: center;
-                color: var(--chyrp-text-black);
-                text-decoration: none;
-                margin: 1rem 0rem;
-                padding: 0.5rem 1rem;
-                background-color: var(--chyrp-fill-blue);
-                border: 2px solid var(--chyrp-border-blue);
-                border-radius: 0.25em;
-                cursor: pointer;
-            }
-            button {
-                width: 100%;
-            }
-            a.big:hover,
-            button:hover,
-            a.big:focus,
-            button:focus,
-            a.big:active,
-            button:active {
-                border-color: var(--chyrp-strong-blue);
-                outline: none;
-            }
-            a.big:focus-visible,
-            button:focus-visible {
-                text-decoration: underline;
-                text-underline-offset: 0.125em;
-                text-decoration-thickness: 0.0625em;
-            }
-            hr {
-                border: none;
-                clear: both;
-                border-top: 1px solid var(--chyrp-border-grey);
-                margin: 2rem 0rem;
-            }
-            aside {
-                margin-bottom: 1rem;
-                padding: 0.5rem;
-                border: 1px solid var(--chyrp-border-yellow);
-                border-radius: 0.25em;
-                background-color: var(--chyrp-fill-yellow);
-            }
-            .window {
-                width: 30rem;
-                background: var(--chyrp-pure-white);
-                padding: 2rem;
-                margin: 0rem auto 0rem auto;
-                border-radius: 2rem;
-            }
-            .window > *:first-child {
-                margin-top: 0rem;
-            }
-            .window > *:last-child {
-                margin-bottom: 0rem;
-            }
-            @media (prefers-color-scheme: dark) {
-                :root {
-                    --chyrp-fill-yellow: var(--chyrp-medium-yellow);
-                    --chyrp-fill-red: var(--chyrp-medium-red);
-                    --chyrp-fill-green: var(--chyrp-medium-green);
-                    --chyrp-fill-blue: var(--chyrp-medium-blue);
-                    --chyrp-fill-purple: var(--chyrp-medium-purple);
-                    --chyrp-fill-grey: var(--chyrp-welsh-grey);
-                    --chyrp-inset-grey: transparent;
-                    --chyrp-border-grey: var(--chyrp-scottish-grey);
-                }
-                body {
-                    color: var(--chyrp-text-white);
-                    background-color: var(--chyrp-inky-black);
-                }
-                .window {
-                    color: var(--chyrp-text-black);
-                    background-color: var(--chyrp-english-grey);
-                }
-            }
-            @media (prefers-contrast: less) {
-                :root {
-                    --chyrp-text-black: var(--chyrp-winter-grey);
-                    --chyrp-text-white: var(--chyrp-summer-grey);
-                }
-            }
-            @media (prefers-contrast: more) {
-                :root {
-                    --chyrp-border-grey: var(--chyrp-winter-grey);
-                    --chyrp-text-black: var(--chyrp-pure-black);
-                }
-            }
-        </style>
+        <style type="text/css"><?php echo error_style(); ?></style>
     </head>
     <body>
         <div role="alert" class="window">
@@ -581,7 +263,7 @@
     <?php endif; ?>
     <?php if (!logged_in() and ADMIN and $code == 403): ?>
             <hr>
-            <a class="big" href="<?php echo $chyrp_url.'/admin/?action=login'; ?>">
+            <a class="big" href="<?php echo fix(CHYRP_URL, true).'/admin/?action=login'; ?>">
                 <?php echo __("Log in"); ?>
             </a>
     <?php elseif (isset($_SESSION['redirect_to'])): ?>
@@ -600,4 +282,328 @@
 
         # Terminate execution.
         exit;
+    }
+
+    /**
+     * Function: error
+     * Returns the style rules for the pretty error page.
+     */
+    function error_style(
+    ): string {
+        $chyrp_url = fix(CHYRP_URL, true);
+
+        return <<<STYLE
+
+        @font-face {
+            font-family: 'Open Sans webfont';
+            src: url('{$chyrp_url}/fonts/OpenSans-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Open Sans webfont';
+            src: url('{$chyrp_url}/fonts/OpenSans-SemiBold.woff') format('woff');
+            font-weight: 600;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Open Sans webfont';
+            src: url('{$chyrp_url}/fonts/OpenSans-Bold.woff') format('woff');
+            font-weight: bold;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Open Sans webfont';
+            src: url('{$chyrp_url}/fonts/OpenSans-Italic.woff') format('woff');
+            font-weight: normal;
+            font-style: italic;
+        }
+        @font-face {
+            font-family: 'Open Sans webfont';
+            src: url('{$chyrp_url}/fonts/OpenSans-SemiBoldItalic.woff') format('woff');
+            font-weight: 600;
+            font-style: italic;
+        }
+        @font-face {
+            font-family: 'Open Sans webfont';
+            src: url('{$chyrp_url}/fonts/OpenSans-BoldItalic.woff') format('woff');
+            font-weight: bold;
+            font-style: italic;
+        }
+        @font-face {
+            font-family: 'Cousine webfont';
+            src: url('{$chyrp_url}/fonts/Cousine-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Cousine webfont';
+            src: url('{$chyrp_url}/fonts/Cousine-Bold.woff') format('woff');
+            font-weight: bold;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Cousine webfont';
+            src: url('{$chyrp_url}/fonts/Cousine-Italic.woff') format('woff');
+            font-weight: normal;
+            font-style: italic;
+        }
+        @font-face {
+            font-family: 'Cousine webfont';
+            src: url('{$chyrp_url}/fonts/Cousine-BoldItalic.woff') format('woff');
+            font-weight: bold;
+            font-style: italic;
+        }
+        :root {
+            color-scheme: light dark;
+            --chyrp-pure-white: #ffffff;
+            --chyrp-pure-black: #000000;
+            --chyrp-inky-black: #1f1f23;
+            --chyrp-summer-grey: #fbfbfb;
+            --chyrp-english-grey: #efefef;
+            --chyrp-welsh-grey: #dfdfdf;
+            --chyrp-irish-grey: #cfcfcf;
+            --chyrp-scottish-grey: #afafaf;
+            --chyrp-winter-grey: #656565;
+            --chyrp-strong-yellow: #ffdd00;
+            --chyrp-strong-orange: #ff7f00;
+            --chyrp-strong-red: #c11600;
+            --chyrp-strong-green: #108600;
+            --chyrp-strong-blue: #1e57ba;
+            --chyrp-strong-purple: #ba1eba;
+            --chyrp-light-yellow: #fffde6;
+            --chyrp-light-red: #faebe4;
+            --chyrp-light-green: #ebfae4;
+            --chyrp-light-blue: #f2fbff;
+            --chyrp-light-purple: #fae4fa;
+            --chyrp-medium-yellow: #fffbcc;
+            --chyrp-medium-red: #fcddcf;
+            --chyrp-medium-green: #daf1d0;
+            --chyrp-medium-blue: #e1f2fa;
+            --chyrp-medium-purple: #f6d5f6;
+            --chyrp-border-yellow: #e0ce8d;
+            --chyrp-border-red: #cdaea5;
+            --chyrp-border-green: #aecda5;
+            --chyrp-border-blue: #a7c1d0;
+            --chyrp-border-purple: #cda5cd;
+            --chyrp-fill-yellow: var(--chyrp-light-yellow);
+            --chyrp-fill-red: var(--chyrp-light-red);
+            --chyrp-fill-green: var(--chyrp-light-green);
+            --chyrp-fill-blue: var(--chyrp-light-blue);
+            --chyrp-fill-purple: var(--chyrp-light-purple);
+            --chyrp-fill-grey: var(--chyrp-english-grey);
+            --chyrp-inset-grey: var(--chyrp-summer-grey);
+            --chyrp-border-grey: var(--chyrp-irish-grey);
+            --chyrp-text-black: var(--chyrp-inky-black);
+            --chyrp-text-white: var(--chyrp-pure-white);
+        }
+        *::selection {
+            color: var(--chyrp-text-black);
+            background-color: var(--chyrp-strong-yellow);
+        }
+        html, body, div, dl, dt, dd, ul, ol, li, p,
+        h1, h2, h3, h4, h5, h6, img, pre, code,
+        form, fieldset, input, select, svg, textarea,
+        table, tbody, tr, th, td, legend, caption,
+        blockquote, aside, figure, figcaption {
+            margin: 0em;
+            padding: 0em;
+            border: 0em;
+        }
+        html {
+            font-size: 16px;
+        }
+        body {
+            font-size: 1rem;
+            font-family: "Open Sans webfont", sans-serif;
+            line-height: 1.5;
+            color: var(--chyrp-text-black);
+            tab-size: 4;
+            background: var(--chyrp-english-grey);
+            margin: 2rem;
+        }
+        h1 {
+            font-size: 2em;
+            font-weight: bold;
+            margin: 1rem 0rem;
+            text-align: center;
+        }
+        h2 {
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: center;
+            margin: 1rem 0rem;
+        }
+        h3 {
+            font-size: 1em;
+            font-weight: 600;
+            margin: 1rem 0rem;
+            border-bottom: 1px solid var(--chyrp-border-grey);
+        }
+        p {
+            width: fit-content;
+            margin: 0rem auto 1rem auto;
+        }
+        pre {
+            font-family: "Cousine webfont", monospace;
+            font-size: 0.85em;
+            background-color: var(--chyrp-fill-grey);
+            margin: 1rem 0rem;
+            padding: 1rem;
+            overflow-x: auto;
+            white-space: pre;
+        }
+        pre:focus-visible {
+            outline: var(--chyrp-strong-orange) dashed 2px;
+        }
+        code {
+            font-family: "Cousine webfont", monospace;
+            font-size: 0.85em;
+            background-color: var(--chyrp-fill-grey);
+            padding: 2px 4px 0px 4px;
+            border: 1px solid var(--chyrp-border-grey);
+            vertical-align: bottom;
+            white-space: break-spaces;
+        }
+        pre > code {
+            font-size: 0.85rem;
+            display: block;
+            border: none;
+            padding: 0px;
+            white-space: inherit;
+        }
+        strong {
+            font: inherit;
+            font-weight: bold;
+            color: var(--chyrp-strong-red);
+        }
+        em, dfn, cite, var {
+            font: inherit;
+            font-style: italic;
+        }
+        ul, ol {
+            margin-bottom: 1rem;
+            margin-inline-start: 2rem;
+            list-style-position: outside;
+        }
+        ol.backtrace {
+            font-family: "Cousine webfont", monospace;
+            font-size: 0.85rem;
+            word-break: break-all;
+        }
+        a:link,
+        a:visited {
+            color: var(--chyrp-text-black);
+            text-decoration: underline;
+            text-underline-offset: 0.125em;
+            text-decoration-thickness: 0.0625em;
+        }
+        a:hover,
+        a:focus,
+        a:active {
+            outline: none;
+            color: var(--chyrp-strong-blue);
+            text-decoration: underline;
+            text-underline-offset: 0.125em;
+            text-decoration-thickness: 0.0625em;
+        }
+        a:focus-visible {
+            outline: var(--chyrp-strong-orange) dashed 2px;
+            outline-offset: 2px;
+        }
+        a.big,
+        button {
+            box-sizing: border-box;
+            display: block;
+            clear: both;
+            font: inherit;
+            font-size: 1.25em;
+            text-align: center;
+            color: var(--chyrp-text-black);
+            text-decoration: none;
+            margin: 1rem 0rem;
+            padding: 0.5rem 1rem;
+            background-color: var(--chyrp-fill-blue);
+            border: 2px solid var(--chyrp-border-blue);
+            border-radius: 0.25em;
+            cursor: pointer;
+        }
+        button {
+            width: 100%;
+        }
+        a.big:hover,
+        button:hover,
+        a.big:focus,
+        button:focus,
+        a.big:active,
+        button:active {
+            border-color: var(--chyrp-strong-blue);
+            outline: none;
+        }
+        a.big:focus-visible,
+        button:focus-visible {
+            text-decoration: underline;
+            text-underline-offset: 0.125em;
+            text-decoration-thickness: 0.0625em;
+        }
+        hr {
+            border: none;
+            clear: both;
+            border-top: 1px solid var(--chyrp-border-grey);
+            margin: 2rem 0rem;
+        }
+        aside {
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border: 1px solid var(--chyrp-border-yellow);
+            border-radius: 0.25em;
+            background-color: var(--chyrp-fill-yellow);
+        }
+        .window {
+            width: 30rem;
+            background: var(--chyrp-pure-white);
+            padding: 2rem;
+            margin: 0rem auto 0rem auto;
+            border-radius: 2rem;
+        }
+        .window > *:first-child {
+            margin-top: 0rem;
+        }
+        .window > *:last-child {
+            margin-bottom: 0rem;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --chyrp-fill-yellow: var(--chyrp-medium-yellow);
+                --chyrp-fill-red: var(--chyrp-medium-red);
+                --chyrp-fill-green: var(--chyrp-medium-green);
+                --chyrp-fill-blue: var(--chyrp-medium-blue);
+                --chyrp-fill-purple: var(--chyrp-medium-purple);
+                --chyrp-fill-grey: var(--chyrp-welsh-grey);
+                --chyrp-inset-grey: transparent;
+                --chyrp-border-grey: var(--chyrp-scottish-grey);
+            }
+            body {
+                color: var(--chyrp-text-white);
+                background-color: var(--chyrp-inky-black);
+            }
+            .window {
+                color: var(--chyrp-text-black);
+                background-color: var(--chyrp-english-grey);
+            }
+        }
+        @media (prefers-contrast: less) {
+            :root {
+                --chyrp-text-black: var(--chyrp-winter-grey);
+                --chyrp-text-white: var(--chyrp-summer-grey);
+            }
+        }
+        @media (prefers-contrast: more) {
+            :root {
+                --chyrp-border-grey: var(--chyrp-winter-grey);
+                --chyrp-text-black: var(--chyrp-pure-black);
+            }
+        }
+
+        STYLE;
     }
