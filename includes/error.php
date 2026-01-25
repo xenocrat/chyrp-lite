@@ -180,17 +180,8 @@
             }
         }
 
-        # Report in plain text if desirable or necessary because of a deep error.
-        if (
-            INSTALLING or UPGRADING or AJAX or
-            !function_exists("__") or
-            !function_exists("_f") or
-            !function_exists("fallback") or
-            !function_exists("fix") or
-            !function_exists("sanitize_html") or
-            !function_exists("logged_in") or
-            !defined('CHYRP_URL')
-        ) {
+        # Report in plain text in case of AJAX or a deep error.
+        if (!defined('CHYRP_ENVIRONMENT') or !CHYRP_ENVIRONMENT or AJAX) {
             exit("ERROR: ".strip_tags($body));
         }
 
@@ -222,7 +213,10 @@
         $title = strip_tags($title, $allowed_tags);
         $body = strip_tags($body, $allowed_tags);
 
-        # Redact and escape the backtrace for display.
+        # Get the Chyrp URL for a login button.
+        $chyrp_url = fix(Config::current()->chyrp_url, true);
+
+        # Redact and escape the backtrace for display, generate text.
         foreach ($backtrace as $index => &$trace) {
             if (!isset($trace["file"]) or !isset($trace["line"])) {
                 unset($backtrace[$index]);
@@ -232,6 +226,10 @@
                     false,
                     true
                 );
+
+                $file = $trace["file"];
+                $line = $trace["line"];
+                $trace["location"] = _f("%s on line %d", array($file, $line));
             }
         }
 
@@ -256,14 +254,14 @@
             <ol class="backtrace">
             <?php foreach ($backtrace as $trace): ?>
                 <li>
-                    <?php echo _f("%s on line %d", array($trace["file"], (int) $trace["line"])); ?>
+                    <?php echo $trace["location"]; ?>
                 </li>
             <?php endforeach; ?>
             </ol>
     <?php endif; ?>
     <?php if (!logged_in() and ADMIN and $code == 403): ?>
             <hr>
-            <a class="big" href="<?php echo fix(CHYRP_URL, true).'/admin/?action=login'; ?>">
+            <a class="big" href="<?php echo $chyrp_url.'/admin/?action=login'; ?>">
                 <?php echo __("Log in"); ?>
             </a>
     <?php elseif (isset($_SESSION['redirect_to'])): ?>
@@ -290,7 +288,7 @@
      */
     function error_style(
     ): string {
-        $chyrp_url = fix(CHYRP_URL, true);
+        $chyrp_url = fix(Config::current()->chyrp_url, true);
 
         return <<<STYLE
 
