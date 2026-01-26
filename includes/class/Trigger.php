@@ -23,17 +23,19 @@
         private function __construct() {
             $config = Config::current();
 
-            if ($config->enable_emoji)
+            if ($config->enable_emoji) {
                 $this->priorities["markup_text"][] = array(
                     "priority" => 10,
                     "function" => "emote"
-                );   
+                );
+            }
 
-            if ($config->enable_markdown)
+            if ($config->enable_markdown) {
                 $this->priorities["markup_text"][] = array(
                     "priority" => 5,
                     "function" => "markdown"
-                ); 
+                );
+            }
         }
 
         /**
@@ -117,7 +119,7 @@
             if (
                 isset($this->priorities[$name]) and
                 usort($this->priorities[$name], array($this, "cmp"))
-            )
+            ) {
                 foreach ($this->priorities[$name] as $action) {
                     $function = $action["function"];
 
@@ -133,8 +135,9 @@
 
                     $this->called[$name][] = $function;
                 }
+            }
 
-            foreach (Modules::$instances as $module)
+            foreach (Modules::$instances as $module) {
                 if (
                     is_callable(array($module, $name)) and
                     !in_array(array($module, $name), $this->called[$name])
@@ -149,6 +152,7 @@
 
                     $return = $this->decide($return, $val);
                 }
+            }
 
             return $return;
         }
@@ -195,9 +199,10 @@
 
             $this->called[$name] = array();
 
-            if (isset($this->priorities[$name]) and
+            if (
+                isset($this->priorities[$name]) and
                 usort($this->priorities[$name], array($this, "cmp"))
-            )
+            ) {
                 foreach ($this->priorities[$name] as $action) {
                     $function = $action["function"];
 
@@ -216,8 +221,9 @@
                     $this->called[$name][] = $function;
                     $target = fallback($val, $target);
                 }
+            }
 
-            foreach (Modules::$instances as $module)
+            foreach (Modules::$instances as $module) {
                 if (
                     is_callable(array($module, $name)) and
                     !in_array(array($module, $name), $this->called[$name])
@@ -232,6 +238,7 @@
 
                     $target = fallback($val, $target);
                 }
+            }
 
             return $target;
         }
