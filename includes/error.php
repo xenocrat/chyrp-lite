@@ -180,8 +180,11 @@
             }
         }
 
-        # Report in plain text in case of AJAX or a deep error.
+        # Report in plain text if AJAX or full environment is unavailable.
         if (!defined('CHYRP_ENVIRONMENT') or !CHYRP_ENVIRONMENT or AJAX) {
+            if (!headers_sent()) {
+                header("Content-Type: text/plain; charset=UTF-8");
+
             exit("ERROR: ".strip_tags($body));
         }
 
@@ -216,7 +219,7 @@
         # Get the Chyrp URL for a login button.
         $chyrp_url = fix(Config::current()->chyrp_url, true);
 
-        # Redact and escape the backtrace for display, generate text.
+        # Prepare the backtrace for display on the pretty error page.
         foreach ($backtrace as $index => &$trace) {
             if (!isset($trace["file"]) or !isset($trace["line"])) {
                 unset($backtrace[$index]);
