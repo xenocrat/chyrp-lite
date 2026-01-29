@@ -182,7 +182,7 @@
 
         # Report in plain text if AJAX or full environment is unavailable.
         if (!defined('CHYRP_ENVIRONMENT') or !CHYRP_ENVIRONMENT or AJAX) {
-            if (!headers_sent()) {
+            if (!headers_sent())
                 header("Content-Type: text/plain; charset=UTF-8");
 
             exit("ERROR: ".strip_tags($body));
