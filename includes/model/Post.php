@@ -131,9 +131,36 @@
                 ) :
                 array() ;
 
+            $attr_blacklist = array(
+                "id",
+                "feather",
+                "clean",
+                "url",
+                "pinned",
+                "status",
+                "user_id",
+                "created_at",
+                "updated_at",
+                "slug",
+                "filtered",
+                "attribute_values",
+                "attribute_names",
+                "attributes",
+                "data",
+                "no_results",
+                "belongs_to",
+                "has_many",
+                "has_one"
+            );
+
             foreach($this->attributes as $key => $val) {
-                if (!empty($key))
-                    $this->$key = $val;
+                if (empty($key))
+                    continue;
+
+                if (in_array($key, $attr_blacklist))
+                    continue;
+
+                $this->$key = $val;
             }
 
             Trigger::current()->filter($this, "post");
