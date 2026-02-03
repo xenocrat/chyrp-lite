@@ -14,11 +14,16 @@
 
         public $belongs_to = array(
             "user",
-            "parent" => array("model" => "page")
+            "parent" => array(
+                "model" => "page"
+            )
         );
 
         public $has_many = array(
-            "children" => array("model" => "page", "by" => "parent")
+            "children" => array(
+                "model" => "page",
+                "by" => "parent"
+            )
         );
 
         /**

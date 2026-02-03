@@ -7,7 +7,8 @@
      *     <Model>
      */
     class User extends Model {
-        public $belongs_to = "group";
+        public $belongs_to = array("group");
+
         public $has_many = array("posts", "pages");
 
         /**

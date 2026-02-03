@@ -13,7 +13,7 @@
         const STATUS_PRIVATE   = "private";
         const STATUS_SCHEDULED = "scheduled";
 
-        public $belongs_to = "user";
+        public $belongs_to = array("user");
 
         # Object: $prev
         # The previous post (the post made after this one).

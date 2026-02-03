@@ -16,9 +16,19 @@
         const OPTION_PRIVATE  = "private";
         const OPTION_REG_ONLY = "registered_only";
 
-        public $belongs_to = array("post", "user", "parent" => array("model" => "comment"));
+        public $belongs_to = array(
+            "post",
+            "user",
+            "parent" => array(
+                "model" => "comment"
+            )
+        );
 
-        public $has_many = array("children" => array("model" => "comment", "by" => "parent"));
+        public $has_many = array(
+            "children" => array(
+                "model" => "comment",
+                "by" => "parent")
+        );
 
         /**
          * Function: __construct

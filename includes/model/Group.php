@@ -7,7 +7,7 @@
      *     <Model>
      */
     class Group extends Model {
-        public $has_many = "users";
+        public $has_many = array("users");
 
         # Integer: $size
         # The number of users in the group.

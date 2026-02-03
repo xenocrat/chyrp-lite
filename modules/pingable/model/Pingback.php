@@ -7,7 +7,7 @@
      *     <Model>
      */
     class Pingback extends Model {
-        public $belongs_to = "post";
+        public $belongs_to = array("post");
 
         /**
          * Function: __construct
