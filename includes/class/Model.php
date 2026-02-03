@@ -170,6 +170,9 @@
             $name,
             $value
         ): void {
+            if (is_numeric($name))
+                return;
+
             $this->data[$name] = $value;
         }
 
@@ -347,7 +350,7 @@
             }
 
             foreach ($read as $key => $val) {
-                if (!is_int($key))
+                if (!is_numeric($key))
                     $model->$key = $val;
             }
 
