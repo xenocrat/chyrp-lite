@@ -3523,24 +3523,16 @@
             fallback($_POST['default_page_status'], Page::STATUS_LISTED);
             fallback($_POST['feed_items'], 20);
             fallback($_POST['feed_format'], "AtomFeed");
-            fallback($_POST['uploads_path'], "");
+            fallback($_POST['uploads_path'], "/uploads/");
             fallback($_POST['uploads_limit'], 10);
 
-            $dir = preg_quote(DIR, "~");
+            $separator = preg_quote(DIR, "/");
 
-            preg_match(
-                "~^(".$dir.")?(.*?)(".$dir.")?$~",
-                str_replace(
-                    array("../", "./"),
-                    DIR,
-                    $_POST['uploads_path']
-                ),
-                $path
+            $uploads_path = preg_replace(
+                "/(\.\.*$separator|$separator)+/",
+                DIR,
+                DIR.str_replace("/", DIR, $_POST['uploads_path']).DIR
             );
-
-            fallback($path[1], DIR);
-            fallback($path[2], "uploads");
-            fallback($path[3], DIR);
 
             $config = Config::current();
             $config->set("posts_per_page", abs((int) $_POST['posts_per_page']));
@@ -3549,7 +3541,7 @@
             $config->set("default_page_status", $_POST['default_page_status']);
             $config->set("feed_items", abs((int) $_POST['feed_items']));
             $config->set("feed_format", $_POST['feed_format']);
-            $config->set("uploads_path", $path[1].$path[2].$path[3]);
+            $config->set("uploads_path", $uploads_path);
             $config->set("uploads_limit", abs((int) $_POST['uploads_limit']));
             $config->set("search_pages", !empty($_POST['search_pages']));
             $config->set("send_pingbacks", !empty($_POST['send_pingbacks']));
