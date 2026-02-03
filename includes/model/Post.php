@@ -131,33 +131,11 @@
                 ) :
                 array() ;
 
-            $attr_blacklist = array(
-                "id",
-                "feather",
-                "clean",
-                "url",
-                "pinned",
-                "status",
-                "user_id",
-                "created_at",
-                "updated_at",
-                "slug",
-                "filtered",
-                "attribute_values",
-                "attribute_names",
-                "attributes",
-                "data",
-                "no_results",
-                "belongs_to",
-                "has_many",
-                "has_one"
-            );
-
             foreach($this->attributes as $key => $val) {
                 if (empty($key))
                     continue;
 
-                if (in_array($key, $attr_blacklist))
+                if (isset($this->$key))
                     continue;
 
                 $this->$key = $val;
