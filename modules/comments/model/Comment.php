@@ -27,7 +27,8 @@
         public $has_many = array(
             "children" => array(
                 "model" => "comment",
-                "by" => "parent")
+                "by" => "parent"
+            )
         );
 
         /**
