@@ -1,6 +1,7 @@
 <?php
     class ContentSecurityPolicy extends Modules {
         private $nonce;
+        private $hash;
 
         public function runtime(
         ): void {
