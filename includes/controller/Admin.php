@@ -3523,15 +3523,23 @@
             fallback($_POST['default_page_status'], Page::STATUS_LISTED);
             fallback($_POST['feed_items'], 20);
             fallback($_POST['feed_format'], "AtomFeed");
-            fallback($_POST['uploads_path'], "/uploads/");
+            fallback($_POST['uploads_path'], DIR."uploads".DIR);
             fallback($_POST['uploads_limit'], 10);
 
-            $separator = preg_quote(DIR, "/");
+            $dir = preg_quote(DIR, "/");
 
+            # Normalize path and prevent backtracking.
             $uploads_path = preg_replace(
-                "/(\.\.*$separator|$separator)+/",
+                "/(\.+$dir|$dir)+/",
                 DIR,
                 DIR.str_replace("/", DIR, $_POST['uploads_path']).DIR
+            );
+
+            # Prevent attempts to use unsafe paths.
+            $uploads_path = preg_replace(
+                "/^$dir((admin|ajax|feathers|fonts|includes|modules|themes)$dir|$)/",
+                DIR."uploads".DIR,
+                $uploads_path
             );
 
             $config = Config::current();
