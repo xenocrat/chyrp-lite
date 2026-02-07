@@ -286,7 +286,7 @@
     }
 
     /**
-     * Function: error
+     * Function: error_style
      * Returns the style rules for the pretty error page.
      */
     function error_style(
