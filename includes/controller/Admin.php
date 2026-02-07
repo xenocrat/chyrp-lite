@@ -3526,18 +3526,18 @@
             fallback($_POST['uploads_path'], DIR."uploads".DIR);
             fallback($_POST['uploads_limit'], 10);
 
-            $dir = preg_quote(DIR, "/");
+            $qdir = preg_quote(DIR, "/");
 
             # Normalize path and prevent backtracking.
             $uploads_path = preg_replace(
-                "/(\.+$dir|$dir)+/",
+                "/(\.+$qdir|$qdir)+/",
                 DIR,
                 DIR.str_replace("/", DIR, $_POST['uploads_path']).DIR
             );
 
             # Prevent attempts to use unsafe paths.
             $uploads_path = preg_replace(
-                "/^$dir((admin|ajax|feathers|fonts|includes|modules|themes)$dir|$)/",
+                "/^$qdir((admin|ajax|feathers|fonts|includes|modules|themes)$qdir|$)/",
                 DIR."uploads".DIR,
                 $uploads_path
             );
