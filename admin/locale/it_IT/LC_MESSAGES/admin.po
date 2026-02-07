@@ -193,8 +193,8 @@ msgstr "Risultato"
 msgid "### Heading"
 msgstr "### Intestazione"
 
-#: admin/help/markdown.twig:20 admin/javascripts/admin.js.php:655
-#: admin/javascripts/admin.js.php:656
+#: admin/help/markdown.twig:20 admin/javascripts/admin.js.php:656
+#: admin/javascripts/admin.js.php:657
 msgid "Heading"
 msgstr "Intestazione"
 
@@ -202,8 +202,8 @@ msgstr "Intestazione"
 msgid "**Strong**"
 msgstr "**Forte**"
 
-#: admin/help/markdown.twig:24 admin/javascripts/admin.js.php:674
-#: admin/javascripts/admin.js.php:675
+#: admin/help/markdown.twig:24 admin/javascripts/admin.js.php:675
+#: admin/javascripts/admin.js.php:676
 msgid "Strong"
 msgstr "Forte"
 
@@ -211,8 +211,8 @@ msgstr "Forte"
 msgid "*Emphasis*"
 msgstr "*Enfasi*"
 
-#: admin/help/markdown.twig:28 admin/javascripts/admin.js.php:693
-#: admin/javascripts/admin.js.php:694
+#: admin/help/markdown.twig:28 admin/javascripts/admin.js.php:694
+#: admin/javascripts/admin.js.php:695
 msgid "Emphasis"
 msgstr "Enfasi"
 
@@ -228,8 +228,8 @@ msgstr "Citazione"
 msgid "~~Strikethrough~~"
 msgstr "~~Barrato~~"
 
-#: admin/help/markdown.twig:36 admin/javascripts/admin.js.php:712
-#: admin/javascripts/admin.js.php:713
+#: admin/help/markdown.twig:36 admin/javascripts/admin.js.php:713
+#: admin/javascripts/admin.js.php:714
 msgid "Strikethrough"
 msgstr "Barrato"
 
@@ -237,8 +237,8 @@ msgstr "Barrato"
 msgid "`Code`"
 msgstr "`Codice`"
 
-#: admin/help/markdown.twig:40 admin/javascripts/admin.js.php:731
-#: admin/javascripts/admin.js.php:732
+#: admin/help/markdown.twig:40 admin/javascripts/admin.js.php:732
+#: admin/javascripts/admin.js.php:733
 msgid "Code"
 msgstr "Codice"
 
@@ -278,8 +278,8 @@ msgstr "Nuovo paragrafo"
 msgid "[title](URL)"
 msgstr "[titolo](URL)"
 
-#: admin/help/markdown.twig:61 admin/javascripts/admin.js.php:750
-#: admin/javascripts/admin.js.php:751
+#: admin/help/markdown.twig:61 admin/javascripts/admin.js.php:751
+#: admin/javascripts/admin.js.php:752
 msgid "Hyperlink"
 msgstr "Collegamento ipertestuale"
 
@@ -287,8 +287,8 @@ msgstr "Collegamento ipertestuale"
 msgid "![description](URL)"
 msgstr "![descrizione](URL)"
 
-#: admin/help/markdown.twig:65 admin/javascripts/admin.js.php:807
-#: admin/javascripts/admin.js.php:808
+#: admin/help/markdown.twig:65 admin/javascripts/admin.js.php:808
+#: admin/javascripts/admin.js.php:809
 msgid "Image"
 msgstr "Immagine"
 
@@ -308,8 +308,8 @@ msgstr "1. Elenco degli articoli"
 msgid "> Blockquote"
 msgstr "> Blockquote"
 
-#: admin/help/markdown.twig:77 admin/javascripts/admin.js.php:788
-#: admin/javascripts/admin.js.php:789
+#: admin/help/markdown.twig:77 admin/javascripts/admin.js.php:789
+#: admin/javascripts/admin.js.php:790
 msgid "Blockquote"
 msgstr "Blockquote"
 
@@ -405,68 +405,68 @@ msgstr "Spunta tutto"
 msgid "Are you sure you want to proceed?"
 msgstr "Sei sicuro di volere procedere?"
 
-#: admin/javascripts/admin.js.php:253
+#: admin/javascripts/admin.js.php:254
 msgid "File upload failed."
 msgstr "Caricamento file fallito."
 
-#: admin/javascripts/admin.js.php:254
+#: admin/javascripts/admin.js.php:255
 msgid "File type not supported."
 msgstr "Tipo di file non supportato."
 
-#: admin/javascripts/admin.js.php:255
+#: admin/javascripts/admin.js.php:256
 #, php-format
 msgid "Maximum file size: %d Megabytes."
 msgstr "Dimensione massima del file: %d Megabyte."
 
-#: admin/javascripts/admin.js.php:319 admin/javascripts/admin.js.php:457
-#: admin/javascripts/admin.js.php:1395
+#: admin/javascripts/admin.js.php:320 admin/javascripts/admin.js.php:458
+#: admin/javascripts/admin.js.php:1453
 msgid "Modal window"
 msgstr "Finestra modale"
 
-#: admin/javascripts/admin.js.php:328 admin/pages/manage_uploads.twig:18
+#: admin/javascripts/admin.js.php:329 admin/pages/manage_uploads.twig:18
 msgid "Uploads"
 msgstr "Caricamenti"
 
-#: admin/javascripts/admin.js.php:354 admin/javascripts/admin.js.php:483
-#: admin/javascripts/admin.js.php:1427
+#: admin/javascripts/admin.js.php:355 admin/javascripts/admin.js.php:484
+#: admin/javascripts/admin.js.php:1485
 msgid "Close"
 msgstr "Chiudi"
 
-#: admin/javascripts/admin.js.php:466
+#: admin/javascripts/admin.js.php:467
 msgid "Help content"
 msgstr "Contenuto di aiuto"
 
-#: admin/javascripts/admin.js.php:519 admin/javascripts/admin.js.php:520
+#: admin/javascripts/admin.js.php:520 admin/javascripts/admin.js.php:521
 #: admin/pages/manage_groups.twig:52 admin/pages/manage_pages.twig:69
 #: admin/pages/manage_posts.twig:57 admin/pages/manage_uploads.twig:73
-#: admin/pages/manage_users.twig:64
+#: admin/pages/manage_users.twig:60
 msgid "Edit"
 msgstr "Modifica"
 
-#: admin/javascripts/admin.js.php:540 admin/javascripts/admin.js.php:541
-#: admin/javascripts/admin.js.php:828 admin/javascripts/admin.js.php:829
+#: admin/javascripts/admin.js.php:541 admin/javascripts/admin.js.php:542
+#: admin/javascripts/admin.js.php:829 admin/javascripts/admin.js.php:830
 msgid "Insert"
 msgstr "Inserisci"
 
-#: admin/javascripts/admin.js.php:586 admin/javascripts/admin.js.php:587
-#: admin/javascripts/admin.js.php:874 admin/javascripts/admin.js.php:875
+#: admin/javascripts/admin.js.php:587 admin/javascripts/admin.js.php:588
+#: admin/javascripts/admin.js.php:875 admin/javascripts/admin.js.php:876
 msgid "Upload"
 msgstr "Carica"
 
-#: admin/javascripts/admin.js.php:769 admin/javascripts/admin.js.php:770
+#: admin/javascripts/admin.js.php:770 admin/javascripts/admin.js.php:771
 msgid "Horizontal rule"
 msgstr "Regola orizzontale"
 
-#: admin/javascripts/admin.js.php:948 admin/javascripts/admin.js.php:949
+#: admin/javascripts/admin.js.php:949 admin/javascripts/admin.js.php:950
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr "Anteprima"
 
-#: admin/javascripts/admin.js.php:1003
+#: admin/javascripts/admin.js.php:1004
 msgid "Words:"
 msgstr "Parole:"
 
-#: admin/javascripts/admin.js.php:1405
+#: admin/javascripts/admin.js.php:1463
 msgid "Preview content"
 msgstr "Contenuto di anteprima"
 
@@ -566,7 +566,7 @@ msgstr ""
 "tramite Markdown."
 
 #: admin/pages/content_settings.twig:119 admin/pages/edit_group.twig:27
-#: admin/pages/edit_upload.twig:20 admin/pages/edit_user.twig:66
+#: admin/pages/edit_upload.twig:20 admin/pages/edit_user.twig:64
 #: admin/pages/general_settings.twig:109 admin/pages/route_settings.twig:96
 #: admin/pages/user_settings.twig:73
 msgid "Update"
@@ -760,8 +760,8 @@ msgstr "(opzionale)"
 msgid "Website"
 msgstr "Sito web"
 
-#: admin/pages/edit_user.twig:58 admin/pages/manage_users.twig:32
-#: admin/pages/new_user.twig:61
+#: admin/pages/edit_user.twig:57 admin/pages/manage_users.twig:31
+#: admin/pages/new_user.twig:60
 msgid "Activated?"
 msgstr "Attivato?"
 
@@ -986,31 +986,31 @@ msgstr "Ospiti?"
 
 #: admin/pages/manage_groups.twig:27 admin/pages/manage_pages.twig:34
 #: admin/pages/manage_posts.twig:32 admin/pages/manage_uploads.twig:27
-#: admin/pages/manage_users.twig:35
+#: admin/pages/manage_users.twig:33
 msgid "Controls"
 msgstr "Controlli"
 
 #: admin/pages/manage_groups.twig:41 admin/pages/manage_groups.twig:46
 #: admin/pages/manage_pages.twig:55 admin/pages/manage_pages.twig:60
-#: admin/pages/manage_users.twig:57
+#: admin/pages/manage_users.twig:54
 msgid "Yes"
 msgstr "Sì"
 
 #: admin/pages/manage_groups.twig:59 admin/pages/manage_pages.twig:76
 #: admin/pages/manage_posts.twig:64 admin/pages/manage_uploads.twig:82
-#: admin/pages/manage_users.twig:71
+#: admin/pages/manage_users.twig:67
 msgid "Delete"
 msgstr "Elimina"
 
 #: admin/pages/manage_groups.twig:69 admin/pages/manage_pages.twig:86
 #: admin/pages/manage_posts.twig:74 admin/pages/manage_uploads.twig:93
-#: admin/pages/manage_users.twig:81 admin/partials/uploads_modal.twig:34
+#: admin/pages/manage_users.twig:77 admin/partials/uploads_modal.twig:34
 msgid "No results"
 msgstr "Nessun risultato"
 
 #: admin/pages/manage_groups.twig:77 admin/pages/manage_pages.twig:94
 #: admin/pages/manage_posts.twig:82 admin/pages/manage_uploads.twig:114
-#: admin/pages/manage_users.twig:89
+#: admin/pages/manage_users.twig:85
 #, php-format
 msgid "Page %d of %s"
 msgstr "Pagina %d di %s"
@@ -1142,7 +1142,7 @@ msgstr "Questo modulo richiede che i seguenti moduli siano abilitati:"
 msgid "Add Group"
 msgstr "Aggiungi Gruppo"
 
-#: admin/pages/new_user.twig:3 admin/pages/new_user.twig:69
+#: admin/pages/new_user.twig:3 admin/pages/new_user.twig:67
 msgid "Add User"
 msgstr "Aggiungi utente"
 

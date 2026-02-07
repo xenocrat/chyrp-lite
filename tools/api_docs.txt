@@ -1898,6 +1898,11 @@ Parameters:
     $code - Numeric HTTP status code to set.
 
 
+Function: error_style
+---------------------
+Returns the style rules for the pretty error page.
+
+
 ==============================================
 includes/helpers.php
 ==============================================

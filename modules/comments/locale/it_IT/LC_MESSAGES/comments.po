@@ -459,6 +459,6 @@ msgstr "Si desidera rimuovere i commenti dal database?"
 msgid "Are you sure you want to permanently delete this comment?"
 msgstr "Sei sicuro di voler eliminare definitivamente questo commento?"
 
-#: modules/comments/model/Comment.php:580
+#: modules/comments/model/Comment.php:592
 msgid "Anon"
 msgstr "Anonimo"
