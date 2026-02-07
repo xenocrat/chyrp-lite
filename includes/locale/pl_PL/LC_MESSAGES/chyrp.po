@@ -92,14 +92,14 @@ msgstr "Trasa została zainicjowana z nieprawidłowym kontrolerem."
 #: includes/error.php:192 includes/helpers.php:2547 includes/helpers.php:2554
 #: includes/helpers.php:2561 includes/helpers.php:2576
 #: includes/helpers.php:2585 includes/helpers.php:2599
-#: includes/helpers.php:2606 includes/helpers.php:3034
-#: includes/helpers.php:3047 includes/helpers.php:3053
-#: includes/helpers.php:3059 includes/helpers.php:3100
-#: includes/helpers.php:3106 includes/helpers.php:3112
-#: includes/helpers.php:3279 includes/helpers.php:3285
-#: includes/helpers.php:3291 includes/helpers.php:3297
-#: includes/helpers.php:3302 includes/helpers.php:3307
-#: includes/helpers.php:3312 includes/helpers.php:3319
+#: includes/helpers.php:2606 includes/helpers.php:3035
+#: includes/helpers.php:3048 includes/helpers.php:3054
+#: includes/helpers.php:3060 includes/helpers.php:3101
+#: includes/helpers.php:3107 includes/helpers.php:3113
+#: includes/helpers.php:3280 includes/helpers.php:3286
+#: includes/helpers.php:3292 includes/helpers.php:3298
+#: includes/helpers.php:3303 includes/helpers.php:3308
+#: includes/helpers.php:3313 includes/helpers.php:3320
 #: includes/lib/ThumbnailFile.php:323 includes/lib/ThumbnailFile.php:354
 #: includes/lib/ThumbnailFile.php:408 includes/lib/ThumbnailFile.php:469
 #: includes/thumbnail.php:15 install.php:1126 upgrade.php:169 upgrade.php:186
@@ -159,7 +159,7 @@ msgstr "Nieprawidłowa akcja."
 #: includes/controller/Ajax.php:270 includes/controller/Ajax.php:276
 #: includes/controller/Ajax.php:359 includes/controller/Ajax.php:365
 #: includes/controller/Main.php:593 includes/controller/Main.php:678
-#: includes/helpers.php:3041
+#: includes/helpers.php:3042
 msgid "Access Denied"
 msgstr "Odmowa dostępu"
 
@@ -592,12 +592,12 @@ msgstr "Plik nie został znaleziony."
 msgid "You did not select anything to upload."
 msgstr "Nie wybrano plików do przesłania."
 
-#: includes/controller/Admin.php:2096 includes/helpers.php:3042
+#: includes/controller/Admin.php:2096 includes/helpers.php:3043
 msgid "Only uploaded files are accepted."
 msgstr "Akceptowane są tylko przesłane pliki."
 
-#: includes/controller/Admin.php:2102 includes/helpers.php:3060
-#: includes/helpers.php:3113 includes/helpers.php:3303
+#: includes/controller/Admin.php:2102 includes/helpers.php:3061
+#: includes/helpers.php:3114 includes/helpers.php:3304
 msgid "Failed to write file to disk."
 msgstr "Nie udało się zapisać pliku na dysku."
 
@@ -1139,19 +1139,19 @@ msgstr "Feather %s jest uszkodzony."
 msgid "Execution of %s has been cancelled."
 msgstr "Wykonanie %s zostało anulowane."
 
-#: includes/helpers.php:3035
+#: includes/helpers.php:3036
 msgid "Uploaded file is of an unsupported type."
 msgstr "Przesłany plik ma nieobsługiwany typ."
 
-#: includes/helpers.php:3048 includes/helpers.php:3101
+#: includes/helpers.php:3049 includes/helpers.php:3102
 msgid "Upload path does not exist."
 msgstr "Ścieżka przesyłania nie istnieje."
 
-#: includes/helpers.php:3054 includes/helpers.php:3107
+#: includes/helpers.php:3055 includes/helpers.php:3108
 msgid "Upload path is not writable."
 msgstr "Ścieżka przesyłania nie jest zapisywalna."
 
-#: includes/helpers.php:3280
+#: includes/helpers.php:3281
 msgid ""
 "The uploaded file exceeds the <code>upload_max_filesize</code> directive in "
 "php.ini."
@@ -1159,7 +1159,7 @@ msgstr ""
 "Przesłany plik przekracza wartość dyrektywy <code>upload_max_filesize</code> "
 "w pliku php.ini."
 
-#: includes/helpers.php:3286
+#: includes/helpers.php:3287
 msgid ""
 "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the "
 "HTML form."
@@ -1167,24 +1167,24 @@ msgstr ""
 "Przesłany plik przekracza wartość dyrektywy <code>MAX_FILE_SIZE</code> w "
 "formularzu HTML."
 
-#: includes/helpers.php:3292
+#: includes/helpers.php:3293
 msgid "The uploaded file was only partially uploaded."
 msgstr "Przesłany plik został wgrany tylko częściowo."
 
-#: includes/helpers.php:3298
+#: includes/helpers.php:3299
 msgid "Missing a temporary folder."
 msgstr "Brak folderu tymczasowego."
 
-#: includes/helpers.php:3308
+#: includes/helpers.php:3309
 msgid "File upload was stopped by a PHP extension."
 msgstr "Wysyłanie pliku zostało zatrzymane przez rozszerzenie PHP."
 
-#: includes/helpers.php:3313
+#: includes/helpers.php:3314
 #, php-format
 msgid "File upload failed with error %d."
 msgstr "Wysyłanie pliku nie powiodło się z błędem %d."
 
-#: includes/helpers.php:3320
+#: includes/helpers.php:3321
 #, php-format
 msgid ""
 "The uploaded file exceeds the maximum size of %d Megabytes allowed by this "
@@ -1193,77 +1193,77 @@ msgstr ""
 "Przesłany plik przekracza maksymalny rozmiar %d Megabajtów dozwolony na tej "
 "stronie."
 
-#: includes/helpers.php:3841
+#: includes/helpers.php:3842
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr "Błąd kodowania JSON: %s"
 
-#: includes/helpers.php:3871
+#: includes/helpers.php:3872
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr "Błąd dekodowania JSON: %s"
 
-#: includes/helpers.php:3959
+#: includes/helpers.php:3960
 msgid "Failed to create Zip archive."
 msgstr "Nie udało się utworzyć archiwum Zip."
 
-#: includes/helpers.php:4069
+#: includes/helpers.php:4070
 #, php-format
 msgid "Activate your account at %s"
 msgstr "Aktywuj swoje konto na %s"
 
-#: includes/helpers.php:4070 includes/helpers.php:4112
-#: includes/helpers.php:4150
+#: includes/helpers.php:4071 includes/helpers.php:4113
+#: includes/helpers.php:4151
 #, php-format
 msgid "Hello, %s."
 msgstr "Cześć, %s."
 
-#: includes/helpers.php:4073 includes/helpers.php:4153
+#: includes/helpers.php:4074 includes/helpers.php:4154
 msgid "You are receiving this message because you registered a new account."
 msgstr "Otrzymujesz tę wiadomość, ponieważ zarejestrowałeś nowe konto."
 
-#: includes/helpers.php:4076
+#: includes/helpers.php:4077
 msgid "Visit this link to activate your account:"
 msgstr "Odwiedź ten link, aby aktywować swoje konto:"
 
-#: includes/helpers.php:4111
+#: includes/helpers.php:4112
 #, php-format
 msgid "Reset your password at %s"
 msgstr "Zresetuj swoje hasło na %s"
 
-#: includes/helpers.php:4115
+#: includes/helpers.php:4116
 msgid "You are receiving this message because you requested a new password."
 msgstr "Otrzymujesz tę wiadomość, ponieważ zażądałeś nowego hasła."
 
-#: includes/helpers.php:4118
+#: includes/helpers.php:4119
 msgid "Visit this link to reset your password:"
 msgstr "Odwiedź ten link, aby zresetować swoje hasło:"
 
-#: includes/helpers.php:4149
+#: includes/helpers.php:4150
 #, php-format
 msgid "Welcome to %s"
 msgstr "Witamy w %s"
 
-#: includes/helpers.php:4156
+#: includes/helpers.php:4157
 msgid "Visit this link to log in:"
 msgstr "Odwiedź ten link, aby się zalogować:"
 
-#: includes/helpers.php:4187
+#: includes/helpers.php:4188
 #, php-format
 msgid "New user at %s"
 msgstr "Nowy użytkownik na %s"
 
-#: includes/helpers.php:4188
+#: includes/helpers.php:4189
 msgid "Hello, administrator."
 msgstr "Witaj, administratorze."
 
-#: includes/helpers.php:4191
+#: includes/helpers.php:4192
 msgid ""
 "You are receiving this message because a new user account was registered."
 msgstr ""
 "Otrzymujesz tę wiadomość, ponieważ zarejestrowano nowe konto użytkownika."
 
-#: includes/helpers.php:4194
+#: includes/helpers.php:4195
 msgid "Visit this link to activate the user account:"
 msgstr "Odwiedź ten link, aby aktywować konto użytkownika:"
 
