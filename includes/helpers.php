@@ -3028,6 +3028,7 @@
 
         $path = MAIN_DIR.Config::current()->uploads_path;
         $filename = upload_filename($file['name'], $filter);
+        $filepath = $path.$filename;
 
         if ($filename === false)
             error(
@@ -3054,7 +3055,7 @@
                 __("Upload path is not writable.")
             );
 
-        if (!move_uploaded_file($file['tmp_name'], $path.$filename))
+        if (!move_uploaded_file($file['tmp_name'], $filepath))
             error(
                 __("Error"),
                 __("Failed to write file to disk.")
