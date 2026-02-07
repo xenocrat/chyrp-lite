@@ -1360,7 +1360,7 @@
 
         # Contextual conversions of some keywords.
         foreach ($keywords as $keyword) {
-            list($attr, $val) = explode(":", $keyword);
+            list($attr, $val) = explode(":", $keyword, 2);
 
             if ($attr == "password") {
                 # Prevent searches for hashed passwords.
