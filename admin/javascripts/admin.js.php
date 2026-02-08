@@ -594,7 +594,7 @@ var Write = {
                             $(
                                 "<input>",
                                 {
-                                    "name": toolbar.attr("id") + "_upload",
+                                    "id": toolbar.attr("id") + "_upload",
                                     "type": "file"
                                 }
                             ).addClass(
@@ -882,7 +882,7 @@ var Write = {
                             $(
                                 "<input>",
                                 {
-                                    "name": toolbar.attr("id") + "_upload",
+                                    "id": toolbar.attr("id") + "_upload",
                                     "type": "file"
                                 }
                             ).addClass(
