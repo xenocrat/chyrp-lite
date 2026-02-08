@@ -1,5 +1,5 @@
 <?php
-    if (!defined('CHYRP_VERSION'))
+    if (!defined('CHYRP_ENVIRONMENT'))
         exit;
 ?>
 var ChyrpMathJax = {
