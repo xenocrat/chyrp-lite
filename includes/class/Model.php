@@ -248,9 +248,6 @@
             if ($model_name == "visitor")
                 $model_name = "user";
 
-            if (!isset($id) and isset($options["where"]["id"]))
-                $id = $options["where"]["id"];
-
             fallback($options["select"], "*");
             fallback($options["from"], pluralize($model_name));
             fallback($options["left_join"], array());
@@ -266,9 +263,7 @@
             $options["from"] = (array) $options["from"];
             $options["select"] = (array) $options["select"];
 
-            if (!isset($id) and isset($options["where"]["id"]))
-                $id = $options["where"]["id"];
-            elseif (is_numeric($id))
+            if (is_numeric($id))
                 $options["where"]["id"] = $id;
             elseif (is_array($id))
                 $options["where"] = array_merge($options["where"], $id);
