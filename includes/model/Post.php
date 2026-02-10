@@ -52,15 +52,14 @@
             if (!isset($post_id) and empty($options))
                 return;
 
-            if (isset($options["where"]) and !is_array($options["where"]))
-                $options["where"] = array($options["where"]);
-            elseif (!isset($options["where"]))
+            if (!isset($options["where"]))
                 $options["where"] = array();
 
+            if (!is_array($options["where"]))
+                $options["where"] = array($options["where"]);
+
             $has_status = false;
-            $skip_where = (
-                isset($options["skip_where"]) and $options["skip_where"]
-            );
+            $skip_where = (isset($options["skip_where"]) and $options["skip_where"]);
 
             foreach ($options["where"] as $key => $val) {
                 if (
@@ -156,10 +155,11 @@
             $options = array(),
             $options_for_object = array()
         ): array {
-            if (isset($options["where"]) and !is_array($options["where"]))
-                $options["where"] = array($options["where"]);
-            elseif (!isset($options["where"]))
+            if (!isset($options["where"]))
                 $options["where"] = array();
+
+            if (!is_array($options["where"]))
+                $options["where"] = array($options["where"]);
 
             $has_status = false;
             $skip_where = (isset($options["skip_where"]) and $options["skip_where"]);
