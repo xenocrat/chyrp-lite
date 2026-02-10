@@ -251,28 +251,8 @@
             if (!isset($id) and isset($options["where"]["id"]))
                 $id = $options["where"]["id"];
 
-            $cache_id = (isset($id) and !is_numeric($id)) ?
-                serialize($id) :
-                $id ;
-
-            # Return cached results if available.
-            if (empty($options["read_from"])) {
-                if (
-                    isset($cache_id) and
-                    isset(self::$caches[$model_name][$cache_id])
-                ) {
-                    foreach (self::$caches[$model_name][$cache_id] as $attr => $val)
-                        $model->$attr = $val;
-
-                    return;
-                }
-            }
-
             fallback($options["select"], "*");
-            fallback(
-                $options["from"],
-                ($model_name == "visitor" ? "users" : pluralize($model_name))
-            );
+            fallback($options["from"], pluralize($model_name));
             fallback($options["left_join"], array());
             fallback($options["where"], array());
             fallback($options["params"], array());
@@ -286,10 +266,24 @@
             $options["from"] = (array) $options["from"];
             $options["select"] = (array) $options["select"];
 
-            if (is_numeric($id)) {
+            if (!isset($id) and isset($options["where"]["id"]))
+                $id = $options["where"]["id"];
+            elseif (is_numeric($id))
                 $options["where"]["id"] = $id;
-            } elseif (is_array($id)) {
+            elseif (is_array($id))
                 $options["where"] = array_merge($options["where"], $id);
+
+            $cache_id = serialize($options);
+            $cache_obj = self::$caches[$model_name][$cache_id] ?? null ;
+
+            # Use a cloned object from the cache.
+            if (empty($options["read_from"])) {
+                if (isset($cache_obj)) {
+                    foreach ($cache_obj as $attr => $val)
+                        $model->$attr = $val;
+
+                    return;
+                }
             }
 
             $sql = SQL::current();
@@ -364,11 +358,10 @@
                 );
 
             # Clone the object and cache it.
-            $clone = clone $model;
-            self::$caches[$model_name][$read["id"]] = $clone;
-
-            if (isset($id) and !is_numeric($id))
+            if (empty($options["read_from"])) {
+                $clone = clone $model;
                 self::$caches[$model_name][$cache_id] = $clone;
+            }
         }
 
         /**
