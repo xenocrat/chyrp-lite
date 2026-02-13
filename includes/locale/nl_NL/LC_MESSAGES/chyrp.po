@@ -20,11 +20,11 @@ msgstr "Kon het configuratiebestand niet lezen."
 msgid "Requested configuration setting not found."
 msgstr "Opgevraagde configuratie-instelling niet gevonden."
 
-#: includes/class/Model.php:547
+#: includes/class/Model.php:535
 msgid "Edit"
 msgstr "Wijzig"
 
-#: includes/class/Model.php:578
+#: includes/class/Model.php:566
 msgid "Delete"
 msgstr "Verwijder"
 

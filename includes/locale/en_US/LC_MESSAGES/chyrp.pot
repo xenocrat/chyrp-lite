@@ -8,11 +8,11 @@ msgstr ""
 msgid "Requested configuration setting not found."
 msgstr ""
 
-#: includes/class/Model.php:547
+#: includes/class/Model.php:535
 msgid "Edit"
 msgstr ""
 
-#: includes/class/Model.php:578
+#: includes/class/Model.php:566
 msgid "Delete"
 msgstr ""
 

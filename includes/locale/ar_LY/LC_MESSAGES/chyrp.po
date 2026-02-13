@@ -27,11 +27,11 @@ msgstr "تعذر قراءة ملف الإعدادات."
 msgid "Requested configuration setting not found."
 msgstr "لم يتم العثور على إعداد التكوين المطلوب."
 
-#: includes/class/Model.php:547
+#: includes/class/Model.php:535
 msgid "Edit"
 msgstr "تحرير"
 
-#: includes/class/Model.php:578
+#: includes/class/Model.php:566
 msgid "Delete"
 msgstr "حذف"
 

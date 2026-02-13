@@ -20,11 +20,11 @@ msgstr "Nie można odczytać pliku konfiguracyjnego."
 msgid "Requested configuration setting not found."
 msgstr "Nie znaleziono żądanego ustawienia konfiguracyjnego."
 
-#: includes/class/Model.php:547
+#: includes/class/Model.php:535
 msgid "Edit"
 msgstr "Edytuj"
 
-#: includes/class/Model.php:578
+#: includes/class/Model.php:566
 msgid "Delete"
 msgstr "Usuń"
 

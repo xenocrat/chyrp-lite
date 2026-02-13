@@ -2302,7 +2302,7 @@ Parameters:
     $precision - Round to n decimal places.
 
 Returns:
-    A formatted number with the requested $precision.
+    A float rounded to the requested $precision.
 
 
 Function: match_any
