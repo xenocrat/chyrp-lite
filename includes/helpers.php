@@ -1183,13 +1183,13 @@
      *     $precision - Round to n decimal places.
      *
      * Returns:
-     *     A formatted number with the requested $precision.
+     *     A float rounded to the requested $precision.
      */
     function timer_stop(
         $precision = 3
-    ): string {
+    ): float {
         $elapsed = microtime(true) - timer_start();
-        return number_format($elapsed, $precision, ".", "");
+        return round($elapsed, $precision);
     }
 
     /**
