@@ -12,9 +12,9 @@
         # Session creation date.
         private $created_at = null;
 
-        # Boolean: $write_data
-        # Write session data to the database?
-        private static $write_data = true;
+        # Boolean: $discard
+        # Discard the session data for this session?
+        private static $discard = false;
 
         # Object: $instance
         # Holds the session instantiation.
@@ -84,7 +84,7 @@
             $sql = SQL::current();
             $visitor = Visitor::current();
 
-            if (!self::$write_data)
+            if (self::$discard)
                 return true;
 
             if (isset($data) and $data != $this->data) {
@@ -139,12 +139,18 @@
 
         /**
          * Function: discard
-         * Discard the session data for this session?
+         * Will the session data be written to the database or discarded?
+         *
+         * Parameters:
+         *     $discard - Whether to discard the session data (optional).
          */
         public static function discard(
-            $discard
+            $discard = null
         ): bool {
-            return self::$write_data = !$discard;
+            if (isset($discard))
+                self::$discard = (bool) $discard;
+
+            return self::$discard;
         }
 
         /**
@@ -153,7 +159,7 @@
          */
         public static function hash_token(
         ): bool|string {
-            if (!self::$write_data)
+            if (self::$discard)
                 return false;
 
             $id = session_id();
