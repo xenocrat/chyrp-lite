@@ -370,7 +370,16 @@ var Uploads = {
                         if (e.target === e.currentTarget)
                             $(this).remove();
                     }
-                ).insertAfter("#content").children("a.iframe_close_gadget").focus();
+                ).keydown(
+                    function(e) {
+                        if (!!e.key && e.key == "Escape")
+                            $(this).remove();
+                    }
+                ).insertAfter(
+                    "#content"
+                ).children(
+                    "a.iframe_close_gadget"
+                ).focus();
             },
             "html"
         ).fail(
@@ -499,7 +508,16 @@ var Help = {
                 if (e.target === e.currentTarget)
                     $(this).remove();
             }
-        ).insertAfter("#content").children("a.iframe_close_gadget").focus();
+        ).keydown(
+            function(e) {
+                if (!!e.key && e.key == "Escape")
+                    $(this).remove();
+            }
+        ).insertAfter(
+            "#content"
+        ).children(
+            "a.iframe_close_gadget"
+        ).focus();
     }
 }
 var Write = {
@@ -1500,7 +1518,16 @@ var Write = {
                 if (e.target === e.currentTarget)
                     $(this).remove();
             }
-        ).insertAfter("#content").children("a.iframe_close_gadget").focus();
+        ).keydown(
+            function(e) {
+                if (!!e.key && e.key == "Escape")
+                    $(this).remove();
+            }
+        ).insertAfter(
+            "#content"
+        ).children(
+            "a.iframe_close_gadget"
+        ).focus();
 
         // Submit the form and destroy it immediately.
         $("#" + uid).submit().remove();
