@@ -14,6 +14,7 @@
      *
      * Parameters:
      *     $secure - Send the cookie only over HTTPS?
+     *     $logout - Destroy the session and generate a new ID?
      */
     function session(
         $secure = null,
