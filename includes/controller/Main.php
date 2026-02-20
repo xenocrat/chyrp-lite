@@ -892,12 +892,12 @@
                         full_name:$_POST['full_name'],
                         website:$_POST['website'],
                         group_id:$config->default_group,
-                        approved:($config->user_activation == "none")
+                        approved:($config->user_activation == User::ACTIVATION_NONE)
                     );
 
                     if (!$user->approved) {
                         switch ($config->user_activation) {
-                            case "email":
+                            case User::ACTIVATION_EMAIL:
                                 email_activate_account($user);
 
                                 Flash::notice(
@@ -907,7 +907,7 @@
 
                                 exit;
 
-                            case "admin":
+                            case User::ACTIVATION_ADMIN:
                                 email_admin_activation($user);
 
                                 Flash::notice(
@@ -1024,7 +1024,7 @@
 
                     if (!$user->approved) {
                         switch ($config->user_activation) {
-                            case "email":
+                            case User::ACTIVATION_EMAIL:
                                 Flash::notice(
                                     __("You must activate your account before you log in."),
                                     "/"
@@ -1032,7 +1032,7 @@
 
                                 exit;
 
-                            case "admin":
+                            case User::ACTIVATION_ADMIN:
                                 Flash::notice(
                                     __("The blog administrator must activate your account."),
                                     "/"
@@ -1284,7 +1284,10 @@
                 if (!Flash::exists("warning")) {
                     $user->update(
                         password:User::hash_password($_POST['new_password1']),
-                        approved:($user->approved or $config->user_activation == "email")
+                        approved:(
+                            $user->approved or
+                            $config->user_activation == User::ACTIVATION_EMAIL
+                        )
                     );
 
                     Flash::notice(
