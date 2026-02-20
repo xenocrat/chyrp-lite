@@ -7,6 +7,10 @@
      *     <Model>
      */
     class User extends Model {
+        const ACTIVATION_NONE  = "none";
+        const ACTIVATION_EMAIL = "email";
+        const ACTIVATION_ADMIN = "admin";
+
         public $belongs_to = array("group");
 
         public $has_many = array("posts", "pages");
