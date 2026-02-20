@@ -911,7 +911,7 @@
                                 email_admin_activation($user);
 
                                 Flash::notice(
-                                    ___("The blog administrator must activate your account."),
+                                    __("The blog administrator must activate your account."),
                                     "/"
                                 );
 
