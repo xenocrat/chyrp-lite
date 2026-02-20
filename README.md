@@ -37,6 +37,7 @@ visitors will see when they first arrive at your website.
 #### Modules:
 * Cacher: cache your blog pages for reduced server load.
 * Categorize: give each of your blog entries a category.
+* Content Security Policy: Adds a strict CSP header to the blog.
 * Tags: apply multiple searchable tags to your blog entries.
 * Mentionable: register webmentions from blogs that link to yours.
 * Comments: a comprehensive comments system for your blog.

@@ -29,6 +29,7 @@ Met een flexibel system van feathers en paginas, kun je je website precies zó m
 #### Modules:
 * Cacher: cache je blogs voor een lagere serverbelasting.
 * Categoriseer: wijs je blogposts toe aan een categorie.
+* Inhoudsbeveiligingsbeleid: Voegt een strikte CSP kop toe aan de blog.
 * Tags: gebruik meerdere zoektags voor je blogposts.
 * Benoembaar: registreer webmentions van blogs die linken naar de jouwe.
 * Reacties: een uitgebreid reactiesysteem voor je blog.

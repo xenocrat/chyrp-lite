@@ -28,6 +28,7 @@ Dzięki elastycznemu systemowi Feathers i Pages możesz uczynić swoją stronę 
 #### Moduły:
 * Cacher: buforuje strony bloga, zmniejszając obciążenie serwera.
 * Categorize: przypisuj kategorie do wpisów.
+* Polityka bezpieczeństwa treści: Dodaje CSP ścisły nagłówek do bloga.
 * Tags: dodawaj wielokrotne, wyszukiwalne tagi do wpisów.
 * Mentionable: rejestruje webmentiony z blogów linkujących do Twojego.
 * Comments: rozbudowany system komentarzy.

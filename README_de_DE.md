@@ -30,6 +30,7 @@ Feathern ermöglichen verschiedene Sorten von Blog-Inhalten – Sie können sich
 #### Modulen:
 * Cacher: Lasse Sie Ihre Blog-Seiten cachen, um die Serverlast zu reduzieren.
 * Kategorisieren: Geben Sie jedem Ihrer Blogposts eine Kategorie.
+* Inhaltsicherheitsrichtlinie: Fügt dem Blog einen strikten CSP Header hinzu.
 * Tags: Wenden Sie mehrere durchsuchbare Tags (Etiketten) auf Ihre Blogposts an.
 * Erwähnbar: Registrieren Sie Web-Erwähnungen von Blogs, die auf Ihr Blog verlinken.
 * Kommentare: ein umfassendes Kommentarsystem für Ihr Blog.

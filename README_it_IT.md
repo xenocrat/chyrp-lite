@@ -40,6 +40,7 @@ giunti sul tuo sito.
 #### Moduli:
 * Cacher: Cache delle pagine web, riduce il carico del server.
 * Categorizzazione: Categorizza i tuoi post.
+* Politica di Sicurezza dei Contenuti: Aggiunge un'intestazione rigorosa CSP al blog.
 * Tag: Aggiunge la funzionalità per taggare i post.
 * Mentionable: Registra gli avvisi dei blog che si collegano al tuo.
 * Commenti: Aggiunge funzionalità di commento ai tuoi post.

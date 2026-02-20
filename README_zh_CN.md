@@ -33,6 +33,7 @@ ARIA标签可确保您的博客可供使用辅助技术的访问者访问。
 #### 模块:
 * Cacher: 缓存您的博客页面以减少服务器负载。
 * Categorize: 为每个博客条目分配一个类别。
+* Content Security Policy: 为博客添加严格的 CSP 标头。
 * Tags: 将多个可搜索标签应用于您的博客条目。
 * Mentionable: 从链接到你的博客注册Webmentions。
 * Comments: 一个全面的博客评论系统。
