@@ -16,7 +16,7 @@ Called from:
 admin_javascript
 ----------------
 Called from:
-	admin/javascripts/admin.js.php on line 1547
+	admin/javascripts/admin.js.php on line 1574
 
 
 admin_head
@@ -358,7 +358,7 @@ Called from:
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 1425
+	includes/controller/Main.php on line 1428
 
 Arguments:
 	$post
@@ -374,7 +374,7 @@ Called from:
 webmention
 ----------
 Called from:
-	includes/helpers.php on line 2611
+	includes/helpers.php on line 2612
 
 Arguments:
 	$post
@@ -385,7 +385,7 @@ Arguments:
 before_delete_upload
 --------------------
 Called from:
-	includes/helpers.php on line 3427
+	includes/helpers.php on line 3428
 
 Arguments:
 	$filename
@@ -394,7 +394,7 @@ Arguments:
 delete_upload
 -------------
 Called from:
-	includes/helpers.php on line 3430
+	includes/helpers.php on line 3431
 
 Arguments:
 	$filename
@@ -403,19 +403,19 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 3680
+	includes/helpers.php on line 3681
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 3699
+	includes/helpers.php on line 3700
 
 
 correspond_activate_account
 ---------------------------
 Called from:
-	includes/helpers.php on line 4062
+	includes/helpers.php on line 4063
 
 Arguments:
 	$user
@@ -425,7 +425,7 @@ Arguments:
 correspond_reset_password
 -------------------------
 Called from:
-	includes/helpers.php on line 4104
+	includes/helpers.php on line 4105
 
 Arguments:
 	$user
@@ -435,7 +435,7 @@ Arguments:
 correspond_acknowledge_user
 ---------------------------
 Called from:
-	includes/helpers.php on line 4142
+	includes/helpers.php on line 4143
 
 Arguments:
 	$user
@@ -445,7 +445,7 @@ Arguments:
 correspond_admin_activation
 ---------------------------
 Called from:
-	includes/helpers.php on line 4180
+	includes/helpers.php on line 4181
 
 Arguments:
 	$user
@@ -455,7 +455,7 @@ Arguments:
 javascripts_hash
 ----------------
 Called from:
-	includes/helpers.php on line 4227
+	includes/helpers.php on line 4228
 
 Arguments:
 	$ob
@@ -540,7 +540,7 @@ Arguments:
 add_user
 --------
 Called from:
-	includes/model/User.php on line 123
+	includes/model/User.php on line 127
 
 Arguments:
 	$user
@@ -549,7 +549,7 @@ Arguments:
 update_user
 -----------
 Called from:
-	includes/model/User.php on line 219
+	includes/model/User.php on line 223
 
 Arguments:
 	$user
@@ -1165,7 +1165,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 1528
+	includes/controller/Main.php on line 1531
 
 Target:
 	$this->context
@@ -1174,7 +1174,7 @@ Target:
 keyword_search
 --------------
 Called from:
-	includes/helpers.php on line 1487
+	includes/helpers.php on line 1488
 
 Target:
 	$search
@@ -1187,7 +1187,7 @@ Arguments:
 uploaded
 --------
 Called from:
-	includes/helpers.php on line 3158
+	includes/helpers.php on line 3159
 
 Target:
 	$upload_url
@@ -1199,7 +1199,7 @@ Arguments:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 4040
+	includes/helpers.php on line 4041
 
 Target:
 	$function
@@ -1208,7 +1208,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 4228
+	includes/helpers.php on line 4229
 	includes/lib/Leaf.php on line 353
 
 Target:
@@ -1416,7 +1416,7 @@ Target:
 user
 ----
 Called from:
-	includes/model/User.php on line 29
+	includes/model/User.php on line 33
 
 Target:
 	$this
@@ -1425,7 +1425,7 @@ Target:
 before_add_user
 ---------------
 Called from:
-	includes/model/User.php on line 120
+	includes/model/User.php on line 124
 
 Target:
 	$new_values
@@ -1434,7 +1434,7 @@ Target:
 before_update_user
 ------------------
 Called from:
-	includes/model/User.php on line 201
+	includes/model/User.php on line 205
 
 Target:
 	$new_values

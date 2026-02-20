@@ -193,8 +193,8 @@ msgstr "Risultato"
 msgid "### Heading"
 msgstr "### Intestazione"
 
-#: admin/help/markdown.twig:20 admin/javascripts/admin.js.php:656
-#: admin/javascripts/admin.js.php:657
+#: admin/help/markdown.twig:20 admin/javascripts/admin.js.php:674
+#: admin/javascripts/admin.js.php:675
 msgid "Heading"
 msgstr "Intestazione"
 
@@ -202,8 +202,8 @@ msgstr "Intestazione"
 msgid "**Strong**"
 msgstr "**Forte**"
 
-#: admin/help/markdown.twig:24 admin/javascripts/admin.js.php:675
-#: admin/javascripts/admin.js.php:676
+#: admin/help/markdown.twig:24 admin/javascripts/admin.js.php:693
+#: admin/javascripts/admin.js.php:694
 msgid "Strong"
 msgstr "Forte"
 
@@ -211,8 +211,8 @@ msgstr "Forte"
 msgid "*Emphasis*"
 msgstr "*Enfasi*"
 
-#: admin/help/markdown.twig:28 admin/javascripts/admin.js.php:694
-#: admin/javascripts/admin.js.php:695
+#: admin/help/markdown.twig:28 admin/javascripts/admin.js.php:712
+#: admin/javascripts/admin.js.php:713
 msgid "Emphasis"
 msgstr "Enfasi"
 
@@ -228,8 +228,8 @@ msgstr "Citazione"
 msgid "~~Strikethrough~~"
 msgstr "~~Barrato~~"
 
-#: admin/help/markdown.twig:36 admin/javascripts/admin.js.php:713
-#: admin/javascripts/admin.js.php:714
+#: admin/help/markdown.twig:36 admin/javascripts/admin.js.php:731
+#: admin/javascripts/admin.js.php:732
 msgid "Strikethrough"
 msgstr "Barrato"
 
@@ -237,8 +237,8 @@ msgstr "Barrato"
 msgid "`Code`"
 msgstr "`Codice`"
 
-#: admin/help/markdown.twig:40 admin/javascripts/admin.js.php:732
-#: admin/javascripts/admin.js.php:733
+#: admin/help/markdown.twig:40 admin/javascripts/admin.js.php:750
+#: admin/javascripts/admin.js.php:751
 msgid "Code"
 msgstr "Codice"
 
@@ -278,8 +278,8 @@ msgstr "Nuovo paragrafo"
 msgid "[title](URL)"
 msgstr "[titolo](URL)"
 
-#: admin/help/markdown.twig:61 admin/javascripts/admin.js.php:751
-#: admin/javascripts/admin.js.php:752
+#: admin/help/markdown.twig:61 admin/javascripts/admin.js.php:769
+#: admin/javascripts/admin.js.php:770
 msgid "Hyperlink"
 msgstr "Collegamento ipertestuale"
 
@@ -287,8 +287,8 @@ msgstr "Collegamento ipertestuale"
 msgid "![description](URL)"
 msgstr "![descrizione](URL)"
 
-#: admin/help/markdown.twig:65 admin/javascripts/admin.js.php:808
-#: admin/javascripts/admin.js.php:809
+#: admin/help/markdown.twig:65 admin/javascripts/admin.js.php:826
+#: admin/javascripts/admin.js.php:827
 msgid "Image"
 msgstr "Immagine"
 
@@ -308,8 +308,8 @@ msgstr "1. Elenco degli articoli"
 msgid "> Blockquote"
 msgstr "> Blockquote"
 
-#: admin/help/markdown.twig:77 admin/javascripts/admin.js.php:789
-#: admin/javascripts/admin.js.php:790
+#: admin/help/markdown.twig:77 admin/javascripts/admin.js.php:807
+#: admin/javascripts/admin.js.php:808
 msgid "Blockquote"
 msgstr "Blockquote"
 
@@ -418,8 +418,8 @@ msgstr "Tipo di file non supportato."
 msgid "Maximum file size: %d Megabytes."
 msgstr "Dimensione massima del file: %d Megabyte."
 
-#: admin/javascripts/admin.js.php:320 admin/javascripts/admin.js.php:458
-#: admin/javascripts/admin.js.php:1453
+#: admin/javascripts/admin.js.php:320 admin/javascripts/admin.js.php:467
+#: admin/javascripts/admin.js.php:1471
 msgid "Modal window"
 msgstr "Finestra modale"
 
@@ -427,46 +427,46 @@ msgstr "Finestra modale"
 msgid "Uploads"
 msgstr "Caricamenti"
 
-#: admin/javascripts/admin.js.php:355 admin/javascripts/admin.js.php:484
-#: admin/javascripts/admin.js.php:1485
+#: admin/javascripts/admin.js.php:355 admin/javascripts/admin.js.php:493
+#: admin/javascripts/admin.js.php:1503
 msgid "Close"
 msgstr "Chiudi"
 
-#: admin/javascripts/admin.js.php:467
+#: admin/javascripts/admin.js.php:476
 msgid "Help content"
 msgstr "Contenuto di aiuto"
 
-#: admin/javascripts/admin.js.php:520 admin/javascripts/admin.js.php:521
+#: admin/javascripts/admin.js.php:538 admin/javascripts/admin.js.php:539
 #: admin/pages/manage_groups.twig:52 admin/pages/manage_pages.twig:69
 #: admin/pages/manage_posts.twig:57 admin/pages/manage_uploads.twig:73
 #: admin/pages/manage_users.twig:60
 msgid "Edit"
 msgstr "Modifica"
 
-#: admin/javascripts/admin.js.php:541 admin/javascripts/admin.js.php:542
-#: admin/javascripts/admin.js.php:829 admin/javascripts/admin.js.php:830
+#: admin/javascripts/admin.js.php:559 admin/javascripts/admin.js.php:560
+#: admin/javascripts/admin.js.php:847 admin/javascripts/admin.js.php:848
 msgid "Insert"
 msgstr "Inserisci"
 
-#: admin/javascripts/admin.js.php:587 admin/javascripts/admin.js.php:588
-#: admin/javascripts/admin.js.php:875 admin/javascripts/admin.js.php:876
+#: admin/javascripts/admin.js.php:605 admin/javascripts/admin.js.php:606
+#: admin/javascripts/admin.js.php:893 admin/javascripts/admin.js.php:894
 msgid "Upload"
 msgstr "Carica"
 
-#: admin/javascripts/admin.js.php:770 admin/javascripts/admin.js.php:771
+#: admin/javascripts/admin.js.php:788 admin/javascripts/admin.js.php:789
 msgid "Horizontal rule"
 msgstr "Regola orizzontale"
 
-#: admin/javascripts/admin.js.php:949 admin/javascripts/admin.js.php:950
+#: admin/javascripts/admin.js.php:967 admin/javascripts/admin.js.php:968
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr "Anteprima"
 
-#: admin/javascripts/admin.js.php:1004
+#: admin/javascripts/admin.js.php:1022
 msgid "Words:"
 msgstr "Parole:"
 
-#: admin/javascripts/admin.js.php:1463
+#: admin/javascripts/admin.js.php:1481
 msgid "Preview content"
 msgstr "Contenuto di anteprima"
 
@@ -568,7 +568,7 @@ msgstr ""
 #: admin/pages/content_settings.twig:119 admin/pages/edit_group.twig:27
 #: admin/pages/edit_upload.twig:20 admin/pages/edit_user.twig:64
 #: admin/pages/general_settings.twig:109 admin/pages/route_settings.twig:96
-#: admin/pages/user_settings.twig:73
+#: admin/pages/user_settings.twig:76
 msgid "Update"
 msgstr "Aggiorna"
 
@@ -1258,31 +1258,31 @@ msgstr "Consentire al sito di inviare corrispondenza email agli utenti?"
 msgid "Automatic User Activation"
 msgstr "Attivazione automatica da parte dell'utente"
 
-#: admin/pages/user_settings.twig:30
+#: admin/pages/user_settings.twig:31
 msgid "New users can log in immediately."
 msgstr "I nuovi utenti possono accedere immediatamente."
 
-#: admin/pages/user_settings.twig:34
+#: admin/pages/user_settings.twig:35
 msgid "User Activation by Email"
 msgstr "Attivazione utente tramite email"
 
-#: admin/pages/user_settings.twig:38
+#: admin/pages/user_settings.twig:40
 msgid "New users must respond to an activation email."
 msgstr "I nuovi utenti devono rispondere a un'email di attivazione."
 
-#: admin/pages/user_settings.twig:42
+#: admin/pages/user_settings.twig:44
 msgid "User Activation by Administrator"
 msgstr "Attivazione utente da parte dell'amministratore"
 
-#: admin/pages/user_settings.twig:46
+#: admin/pages/user_settings.twig:49
 msgid "New users must be activated by an administrator."
 msgstr "I nuovi utenti devono essere attivati da un amministratore."
 
-#: admin/pages/user_settings.twig:50
+#: admin/pages/user_settings.twig:53
 msgid "Default User Group"
 msgstr "Gruppo di utenti predefinito"
 
-#: admin/pages/user_settings.twig:61
+#: admin/pages/user_settings.twig:64
 msgid "&#8220;Guest&#8221; Group"
 msgstr "Gruppo &#8220;Ospite&#8221;"
 

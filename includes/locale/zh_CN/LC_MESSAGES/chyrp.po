@@ -89,18 +89,18 @@ msgstr "路由启动了一个无效的控制器。"
 #: includes/controller/Admin.php:3391 includes/controller/Admin.php:3772
 #: includes/controller/Ajax.php:38 includes/controller/Ajax.php:173
 #: includes/controller/Ajax.php:237 includes/controller/Ajax.php:282
-#: includes/controller/Main.php:1315 includes/download.php:14
-#: includes/error.php:192 includes/helpers.php:2547 includes/helpers.php:2554
-#: includes/helpers.php:2561 includes/helpers.php:2576
-#: includes/helpers.php:2585 includes/helpers.php:2599
-#: includes/helpers.php:2606 includes/helpers.php:3035
-#: includes/helpers.php:3048 includes/helpers.php:3054
-#: includes/helpers.php:3060 includes/helpers.php:3101
-#: includes/helpers.php:3107 includes/helpers.php:3113
-#: includes/helpers.php:3280 includes/helpers.php:3286
-#: includes/helpers.php:3292 includes/helpers.php:3298
-#: includes/helpers.php:3303 includes/helpers.php:3308
-#: includes/helpers.php:3313 includes/helpers.php:3320
+#: includes/controller/Main.php:1318 includes/download.php:14
+#: includes/error.php:192 includes/helpers.php:2548 includes/helpers.php:2555
+#: includes/helpers.php:2562 includes/helpers.php:2577
+#: includes/helpers.php:2586 includes/helpers.php:2600
+#: includes/helpers.php:2607 includes/helpers.php:3036
+#: includes/helpers.php:3049 includes/helpers.php:3055
+#: includes/helpers.php:3061 includes/helpers.php:3102
+#: includes/helpers.php:3108 includes/helpers.php:3114
+#: includes/helpers.php:3281 includes/helpers.php:3287
+#: includes/helpers.php:3293 includes/helpers.php:3299
+#: includes/helpers.php:3304 includes/helpers.php:3309
+#: includes/helpers.php:3314 includes/helpers.php:3321
 #: includes/lib/ThumbnailFile.php:323 includes/lib/ThumbnailFile.php:354
 #: includes/lib/ThumbnailFile.php:408 includes/lib/ThumbnailFile.php:469
 #: includes/thumbnail.php:15 install.php:1126 upgrade.php:169 upgrade.php:186
@@ -160,7 +160,7 @@ msgstr "无效动作。"
 #: includes/controller/Ajax.php:270 includes/controller/Ajax.php:276
 #: includes/controller/Ajax.php:359 includes/controller/Ajax.php:365
 #: includes/controller/Main.php:593 includes/controller/Main.php:678
-#: includes/helpers.php:3042
+#: includes/helpers.php:3043
 msgid "Access Denied"
 msgstr "访问被拒绝"
 
@@ -226,7 +226,7 @@ msgstr "您必须启用至少一个羽毛才能撰写帖子。"
 #: includes/controller/Admin.php:3159 includes/controller/Admin.php:3238
 #: includes/controller/Ajax.php:81 includes/controller/Ajax.php:124
 #: includes/controller/Main.php:292 includes/download.php:27
-#: includes/download.php:35 includes/helpers.php:230 includes/thumbnail.php:28
+#: includes/download.php:35 includes/helpers.php:231 includes/thumbnail.php:28
 #: includes/thumbnail.php:39
 msgid "Not Found"
 msgstr "未找到"
@@ -593,12 +593,12 @@ msgstr "未找到。"
 msgid "You did not select anything to upload."
 msgstr "您没有选择要上传的任何内容。"
 
-#: includes/controller/Admin.php:2096 includes/helpers.php:3043
+#: includes/controller/Admin.php:2096 includes/helpers.php:3044
 msgid "Only uploaded files are accepted."
 msgstr "只有上传的文件被接受。"
 
-#: includes/controller/Admin.php:2102 includes/helpers.php:3061
-#: includes/helpers.php:3114 includes/helpers.php:3304
+#: includes/controller/Admin.php:2102 includes/helpers.php:3062
+#: includes/helpers.php:3115 includes/helpers.php:3305
 msgid "Failed to write file to disk."
 msgstr "写入文件到磁盘失败。"
 
@@ -1010,7 +1010,7 @@ msgstr "退出登陆。"
 msgid "You must be logged in to access user controls."
 msgstr "您必须登陆才能访问用户操作。"
 
-#: includes/controller/Main.php:1153 includes/controller/Main.php:1291
+#: includes/controller/Main.php:1153 includes/controller/Main.php:1294
 msgid "Your profile has been updated."
 msgstr "您的配置文件已经更新。"
 
@@ -1038,11 +1038,11 @@ msgstr "忘记密码"
 msgid "The link has expired. Please try again."
 msgstr "链接已过期。请重试。"
 
-#: includes/controller/Main.php:1303
+#: includes/controller/Main.php:1306
 msgid "Reset password"
 msgstr "重置密码"
 
-#: includes/controller/Main.php:1316 includes/helpers.php:2548
+#: includes/controller/Main.php:1319 includes/helpers.php:2549
 msgid "Webmention support is disabled for this site."
 msgstr "此站点禁用Webmention支持。"
 
@@ -1063,197 +1063,197 @@ msgstr "回溯"
 msgid "Go back"
 msgstr "返回"
 
-#: includes/helpers.php:27
+#: includes/helpers.php:28
 msgid "Session cannot be started more than once."
 msgstr "会话不能多次启动。"
 
-#: includes/helpers.php:203
+#: includes/helpers.php:204
 msgid "Forbidden"
 msgstr "被禁止"
 
-#: includes/helpers.php:204
+#: includes/helpers.php:205
 msgid "You do not have permission to access this resource."
 msgstr "您没有权限访问这个资源。"
 
-#: includes/helpers.php:231
+#: includes/helpers.php:232
 msgid "The requested resource was not found."
 msgstr "请求的资源未找到。"
 
-#: includes/helpers.php:2555
+#: includes/helpers.php:2556
 msgid "The URL for your page is not valid."
 msgstr "您的页面链接无效。"
 
-#: includes/helpers.php:2562
+#: includes/helpers.php:2563
 msgid "The URL for our page is not valid."
 msgstr "我们的页面链接无效。"
 
-#: includes/helpers.php:2577
+#: includes/helpers.php:2578
 msgid "The source and target URLs cannot be the same."
 msgstr "源 URL 和目标 URL 不能相同。"
 
-#: includes/helpers.php:2586
+#: includes/helpers.php:2587
 msgid "We have not published at that URL."
 msgstr "我们尚未在该网址上发布内容。"
 
-#: includes/helpers.php:2600
+#: includes/helpers.php:2601
 msgid "You have not published at that URL."
 msgstr "您尚未在该 URL 上发布内容。"
 
-#: includes/helpers.php:2607
+#: includes/helpers.php:2608
 msgid "Your page does not link to our page."
 msgstr "您的页面没有链接到我们的页面。"
 
-#: includes/helpers.php:2810
+#: includes/helpers.php:2811
 msgid "Please create the uploads directory."
 msgstr "请创建上传目录。"
 
-#: includes/helpers.php:2812
+#: includes/helpers.php:2813
 msgid "Please make the uploads directory writable."
 msgstr "请确保上传目录科协。"
 
-#: includes/helpers.php:2834
+#: includes/helpers.php:2835
 #, php-format
 msgid "%s module is missing."
 msgstr "找不到模块 %s 。"
 
-#: includes/helpers.php:2847
+#: includes/helpers.php:2848
 #, php-format
 msgid "%s module is damaged."
 msgstr "模块 %s 破损。"
 
-#: includes/helpers.php:2865
+#: includes/helpers.php:2866
 #, php-format
 msgid "%s feather is missing."
 msgstr "找不到羽毛 %s 。"
 
-#: includes/helpers.php:2878
+#: includes/helpers.php:2879
 #, php-format
 msgid "%s feather is damaged."
 msgstr "羽毛 %s 破损。"
 
-#: includes/helpers.php:2955 includes/helpers.php:2981
+#: includes/helpers.php:2956 includes/helpers.php:2982
 #, php-format
 msgid "Execution of %s has been cancelled."
 msgstr "执行 %s 已被取消。"
 
-#: includes/helpers.php:3036
+#: includes/helpers.php:3037
 msgid "Uploaded file is of an unsupported type."
 msgstr "上传的文件是不支持的类型。"
 
-#: includes/helpers.php:3049 includes/helpers.php:3102
+#: includes/helpers.php:3050 includes/helpers.php:3103
 msgid "Upload path does not exist."
 msgstr "上传路径不存在。"
 
-#: includes/helpers.php:3055 includes/helpers.php:3108
+#: includes/helpers.php:3056 includes/helpers.php:3109
 msgid "Upload path is not writable."
 msgstr "上传路径不可写。"
 
-#: includes/helpers.php:3281
+#: includes/helpers.php:3282
 msgid ""
 "The uploaded file exceeds the <code>upload_max_filesize</code> directive in "
 "php.ini."
 msgstr "上传的文件超过 php.ini 中<code>upload_max_filesize</code>的大小。"
 
-#: includes/helpers.php:3287
+#: includes/helpers.php:3288
 msgid ""
 "The uploaded file exceeds the <code>MAX_FILE_SIZE</code> directive in the "
 "HTML form."
 msgstr "上传的文件超过 php.ini 中<code>MAX_FILE_SIZE</code>的大小。"
 
-#: includes/helpers.php:3293
+#: includes/helpers.php:3294
 msgid "The uploaded file was only partially uploaded."
 msgstr "上传文件仅部分上传。"
 
-#: includes/helpers.php:3299
+#: includes/helpers.php:3300
 msgid "Missing a temporary folder."
 msgstr "缺少临时文件夹。"
 
-#: includes/helpers.php:3309
+#: includes/helpers.php:3310
 msgid "File upload was stopped by a PHP extension."
 msgstr "文件上传已被PHP扩展停止。"
 
-#: includes/helpers.php:3314
+#: includes/helpers.php:3315
 #, php-format
 msgid "File upload failed with error %d."
 msgstr "上传文件失败，错误：%d."
 
-#: includes/helpers.php:3321
+#: includes/helpers.php:3322
 #, php-format
 msgid ""
 "The uploaded file exceeds the maximum size of %d Megabytes allowed by this "
 "site."
 msgstr "上传的文件超过本站点允许的 %d M。"
 
-#: includes/helpers.php:3842
+#: includes/helpers.php:3843
 #, php-format
 msgid "JSON encoding error: %s"
 msgstr "JSON编码错误：%s"
 
-#: includes/helpers.php:3872
+#: includes/helpers.php:3873
 #, php-format
 msgid "JSON decoding error: %s"
 msgstr "JSON解码错误：%s"
 
-#: includes/helpers.php:3960
+#: includes/helpers.php:3961
 msgid "Failed to create Zip archive."
 msgstr "无法创建 Zip 存档。"
 
-#: includes/helpers.php:4070
+#: includes/helpers.php:4071
 #, php-format
 msgid "Activate your account at %s"
 msgstr "在 %s 上激活您的账户"
 
-#: includes/helpers.php:4071 includes/helpers.php:4113
-#: includes/helpers.php:4151
+#: includes/helpers.php:4072 includes/helpers.php:4114
+#: includes/helpers.php:4152
 #, php-format
 msgid "Hello, %s."
 msgstr "您好，%s."
 
-#: includes/helpers.php:4074 includes/helpers.php:4154
+#: includes/helpers.php:4075 includes/helpers.php:4155
 msgid "You are receiving this message because you registered a new account."
 msgstr "您收到此邮件因为您已经注册了新账户。"
 
-#: includes/helpers.php:4077
+#: includes/helpers.php:4078
 msgid "Visit this link to activate your account:"
 msgstr "访问这个链接激活您的账户："
 
-#: includes/helpers.php:4112
+#: includes/helpers.php:4113
 #, php-format
 msgid "Reset your password at %s"
 msgstr "在 %s上重置您的密码"
 
-#: includes/helpers.php:4116
+#: includes/helpers.php:4117
 msgid "You are receiving this message because you requested a new password."
 msgstr "您收到此消息是因为您请求了新密码。"
 
-#: includes/helpers.php:4119
+#: includes/helpers.php:4120
 msgid "Visit this link to reset your password:"
 msgstr "访问这个链接重置您的密码："
 
-#: includes/helpers.php:4150
+#: includes/helpers.php:4151
 #, php-format
 msgid "Welcome to %s"
 msgstr "欢迎来到 %s"
 
-#: includes/helpers.php:4157
+#: includes/helpers.php:4158
 msgid "Visit this link to log in:"
 msgstr "点击此链接登录："
 
-#: includes/helpers.php:4188
+#: includes/helpers.php:4189
 #, php-format
 msgid "New user at %s"
 msgstr "新用户%s"
 
-#: includes/helpers.php:4189
+#: includes/helpers.php:4190
 msgid "Hello, administrator."
 msgstr "你好，管理员。"
 
-#: includes/helpers.php:4192
+#: includes/helpers.php:4193
 msgid ""
 "You are receiving this message because a new user account was registered."
 msgstr "您收到此消息是因为新用户账户注册。"
 
-#: includes/helpers.php:4195
+#: includes/helpers.php:4196
 msgid "Visit this link to activate the user account:"
 msgstr "点击此链接激活用户账户："
 
@@ -1433,7 +1433,7 @@ msgstr "删除上传"
 msgid "[Guest]"
 msgstr "[客人]"
 
-#: includes/model/User.php:258
+#: includes/model/User.php:262
 msgid "Failed to encrypt password."
 msgstr "无法加密密码。"
 

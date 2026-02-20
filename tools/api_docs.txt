@@ -938,7 +938,10 @@ Parameters:
 
 Function: discard
 -----------------
-Discard the session data for this session?
+Will the session data be written to the database or discarded?
+
+Parameters:
+    $discard - Whether to discard the session data (optional).
 
 
 Function: hash_token
@@ -1918,6 +1921,7 @@ Begins Chyrp's custom session storage whatnots.
 
 Parameters:
     $secure - Send the cookie only over HTTPS?
+    $logout - Destroy the session and generate a new ID?
 
 
 Function: logged_in
