@@ -25,7 +25,8 @@
 <p>
 <label for="user_activation_none">{{ "Automatic User Activation" | translate }}</label>
 {#- -#}
-<input class="radio" type="radio" name="user_activation" id="user_activation_none" value="none"{{ (site.user_activation == "none") | checked }}>
+{%- set activation_constant = constant("User::ACTIVATION_NONE") -%}
+<input class="radio" type="radio" name="user_activation" id="user_activation_none" value="{{ activation_constant }}"{{ (site.user_activation == activation_constant) | checked }}>
 <small>
 {{ "New users can log in immediately." | translate }}
 </small>
@@ -33,7 +34,8 @@
 <p>
 <label for="user_activation_email">{{ "User Activation by Email" | translate }}</label>
 {#- -#}
-<input class="radio" type="radio" name="user_activation" id="user_activation_email" value="email"{{ (site.user_activation == "email") | checked }}>
+{%- set activation_constant = constant("User::ACTIVATION_EMAIL") -%}
+<input class="radio" type="radio" name="user_activation" id="user_activation_email" value="{{ activation_constant }}"{{ (site.user_activation == activation_constant) | checked }}>
 <small>
 {{ "New users must respond to an activation email." | translate }}
 </small>
@@ -41,7 +43,8 @@
 <p>
 <label for="user_activation_admin">{{ "User Activation by Administrator" | translate }}</label>
 {#- -#}
-<input class="radio" type="radio" name="user_activation" id="user_activation_admin" value="admin"{{ (site.user_activation == "admin") | checked }}>
+{%- set activation_constant = constant("User::ACTIVATION_ADMIN") -%}
+<input class="radio" type="radio" name="user_activation" id="user_activation_admin" value="{{ activation_constant }}"{{ (site.user_activation == activation_constant) | checked }}>
 <small>
 {{ "New users must be activated by an administrator." | translate }}
 </small>
