@@ -187,9 +187,6 @@
                 $base = strtolower(lang_base($this->locale));
 
             switch ($base) {
-                case "zh":
-                    return 0;
-
                 case "ar":
                     if ($n == 0)
                         return 0;
@@ -197,12 +194,93 @@
                         return 1;
                     elseif ($n == 2)
                         return 2;
-                    elseif ($n % 100 >= 3 and $n % 100 <= 10)
+                    elseif ($n % 100 >= 3 && $n % 100 <= 10)
                         return 3;
-                    elseif ($n % 100 >= 11 and $n % 100 <= 99)
+                    elseif ($n % 100 >= 11 && $n % 100 <= 99)
                         return 4;
                     else
                         return 5;
+
+                case "be":
+                case "hr":
+                case "sr":
+                case "ru":
+                case "uk":
+                    if ($n %10 == 1 && $n % 100 != 11)
+                        return 0;
+                    elseif ($n % 10 >= 2 && $n % 10 <= 4 && ($n % 100 < 10 || $n % 100 >= 20))
+                        return 1;
+                    else
+                        return 2;
+
+                case "cs":
+                case "sk":
+                    if ($n == 1)
+                        return 0;
+                    elseif ($n >= 2 && $n <= 4)
+                        return 1;
+                    else
+                        return 2;
+
+                case "fr":
+                    return ($n > 1) ? 1 : 0 ;
+
+                case "gd":
+                    if ($n == 1)
+                        return 0;
+                    elseif ($n == 2)
+                        return 1;
+                    else
+                        return 2;
+
+                case "ja":
+                case "ko":
+                case "th":
+                case "vi":
+                case "zh":
+                    return 0;
+
+                case "lt":
+                    if ($n % 10 == 1 && $n % 100 != 11)
+                        return 0;
+                    elseif ($n % 10 >= 2 && ($n % 100 < 10 || $n % 100 >= 20))
+                        return 1;
+                    else
+                        return 2;
+
+                case "lv":
+                    if ($n % 10 == 1 && $n % 100 != 11)
+                        return 0;
+                    elseif ($n != 0)
+                        return 1;
+                    else
+                        return 2;
+
+                case "pl":
+                    if ($n == 1)
+                        return 0;
+                    elseif ($n % 10 >= 2 && $n % 10 <= 4 && ($n % 100 < 12 || $n % 100 > 14))
+                        return 1;
+                    else
+                        return 2;
+
+                case "ro":
+                    if ($n == 1)
+                        return 0;
+                    elseif ($n == 0 || ($n % 100 > 0 && $n % 100 < 20))
+                        return 1;
+                    else
+                        return 2;
+
+                case "sl":
+                    if ($n % 100 == 1)
+                        return 0;
+                    elseif ($n % 100 == 2)
+                        return 1;
+                    elseif ($n % 100 == 3 || $n % 100 == 4)
+                        return 2;
+                    else
+                        return 3;
 
                 default:
                     return ($n != 1) ? 1 : 0 ;
