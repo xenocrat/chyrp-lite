@@ -1163,13 +1163,13 @@
                 email_acknowledge_user($user);
             } else {
                 switch ($config->user_activation) {
-                    case "email":
+                    case User::ACTIVATION_EMAIL:
                         email_activate_account($user);
                         break;
-                    case "admin":
+                    case User::ACTIVATION_ADMIN:
                         email_admin_activation($user);
                         break;
-                    case "none":
+                    case User::ACTIVATION_NONE:
                         email_acknowledge_user($user);
                         break;
                 }
@@ -1360,13 +1360,13 @@
             );
 
             switch ($config->user_activation) {
-                case "email":
+                case User::ACTIVATION_EMAIL:
                     if (!$user->approved and $was_approved)
                         email_activate_account($user);
 
                     break;
 
-                case "admin":
+                case User::ACTIVATION_ADMIN:
                     if ($user->approved and !$was_approved)
                         email_acknowledge_user($user);
 
@@ -3591,7 +3591,7 @@
 
             fallback($_POST['default_group'], 0);
             fallback($_POST['guest_group'], 0);
-            fallback($_POST['user_activation'], "admin");
+            fallback($_POST['user_activation'], User::ACTIVATION_ADMIN);
 
             $default_group = new Group($_POST['default_group']);
 
@@ -3612,8 +3612,8 @@
                 );
 
             $email_correspondence = (
-                $_POST['user_activation'] == "email" or
-                !empty($_POST['email_correspondence'])
+                !empty($_POST['email_correspondence']) or
+                $_POST['user_activation'] == User::ACTIVATION_EMAIL
             );
 
             $config = Config::current();
