@@ -516,7 +516,7 @@
      */
     function get_locale(
     ): string {
-        if (INSTALLING) {
+        if (!defined('CHYRP_ENVIRONMENT') or !CHYRP_ENVIRONMENT) {
             return isset($_REQUEST['locale']) ?
                 $_REQUEST['locale'] :
                 "en_US" ;
