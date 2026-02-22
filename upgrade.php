@@ -781,18 +781,21 @@
     function add_user_activation(
     ): void {
         $config = Config::current();
-        $str = isset($config->email_activation) ? "email" : "none" ;
 
-        $set = array(
-            $config->set("user_activation", $str, true),
-            $config->remove("email_activation")
-        );
+        if (isset($config->email_activation)) {
+            $str = $config->email_activation ? "email" : "none" ;
 
-        if ($set === false)
-            error(
-                __("Error"),
-                __("Could not write the configuration file.")
+            $set = array(
+                $config->set("user_activation", $str, true),
+                $config->remove("email_activation")
             );
+
+            if ($set === false)
+                error(
+                    __("Error"),
+                    __("Could not write the configuration file.")
+                );
+        }
     }
 
     #---------------------------------------------
