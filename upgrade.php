@@ -790,7 +790,7 @@
                 $config->remove("email_activation")
             );
 
-            if ($set === false)
+            if (in_array(false, $set, true))
                 error(
                     __("Error"),
                     __("Could not write the configuration file.")
