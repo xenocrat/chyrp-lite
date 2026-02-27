@@ -114,7 +114,7 @@ msgstr "المُتحكم بالمسار المُدخل غير صالح."
 #: upgrade.php:304 upgrade.php:321 upgrade.php:342 upgrade.php:359
 #: upgrade.php:376 upgrade.php:393 upgrade.php:414 upgrade.php:431
 #: upgrade.php:565 upgrade.php:582 upgrade.php:604 upgrade.php:637
-#: upgrade.php:770 upgrade.php:795
+#: upgrade.php:770 upgrade.php:791 upgrade.php:799
 msgid "Error"
 msgstr "خطأ"
 
@@ -1512,7 +1512,7 @@ msgstr "الرجاء جعل قاعدة بيانات قابلة للكتابة ب
 #: upgrade.php:322 upgrade.php:343 upgrade.php:360 upgrade.php:377
 #: upgrade.php:394 upgrade.php:415 upgrade.php:432 upgrade.php:566
 #: upgrade.php:583 upgrade.php:605 upgrade.php:638 upgrade.php:771
-#: upgrade.php:796
+#: upgrade.php:792 upgrade.php:800
 msgid "Could not write the configuration file."
 msgstr "تعذر إنشاء ملف الإعدادات."
 
@@ -1622,7 +1622,7 @@ msgstr "قم بتثبيتي!"
 msgid "Installation Complete"
 msgstr "اكتمل التثبيت"
 
-#: install.php:1257 upgrade.php:1213
+#: install.php:1257 upgrade.php:1217
 msgid "What now?"
 msgstr "ماذا الآن؟"
 
@@ -1634,46 +1634,46 @@ msgstr "احذف <em>install.php</em>، لن تحتاج إليه بعد الآن
 msgid "Log in to your site and configure things to your liking."
 msgstr "سجّل الدخول إلى موقعك وقم بتهيئة الأشياء كيفما أحببت."
 
-#: install.php:1263 upgrade.php:1220
+#: install.php:1263 upgrade.php:1224
 msgid "Take me to my site!"
 msgstr "خذني إلى موقعي!"
 
-#: upgrade.php:810
+#: upgrade.php:814
 msgid "Chyrp Lite Upgrader"
 msgstr "ترقية Chyrp Lite"
 
-#: upgrade.php:1201
+#: upgrade.php:1205
 msgid "Halt!"
 msgstr "إيقاف!"
 
-#: upgrade.php:1202
+#: upgrade.php:1206
 msgid "Please take these precautionary measures before you upgrade:"
 msgstr "يرجى اتخاذ هذه التدابير الاحترازية قبل الترقية:"
 
-#: upgrade.php:1204
+#: upgrade.php:1208
 msgid "<strong>Backup your database before proceeding!</strong>"
 msgstr "<strong>قم بنسخ قاعدة البيانات الخاصة بك قبل المتابعة!</strong>"
 
-#: upgrade.php:1205
+#: upgrade.php:1209
 msgid "Tell your users that your site is offline for maintenance."
 msgstr "أخبر المستخدمين أن موقعك متوقف للصيانة."
 
-#: upgrade.php:1209
+#: upgrade.php:1213
 msgid "Upgrade me!"
 msgstr "قم بالترقية!"
 
-#: upgrade.php:1212
+#: upgrade.php:1216
 msgid "Upgrade Complete"
 msgstr "تمت الترقية"
 
-#: upgrade.php:1215
+#: upgrade.php:1219
 msgid "Take action to resolve any errors reported on this page."
 msgstr "إتخذ إجراءات لحل أي أخطاء تظهر في هذه الصفحة."
 
-#: upgrade.php:1216
+#: upgrade.php:1220
 msgid "Run this upgrader again if you need to."
 msgstr "قم بتشغيل الترقية مرة أخرى إذا كنت بحاجة إلى ذلك."
 
-#: upgrade.php:1217
+#: upgrade.php:1221
 msgid "Delete <em>upgrade.php</em> once you are finished upgrading."
 msgstr "احذف <em>upgrade.php</em> بمجرد الانتهاء من الترقية."
