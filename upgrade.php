@@ -784,13 +784,17 @@
 
         if (isset($config->email_activation)) {
             $str = $config->email_activation ? "email" : "none" ;
+            $set = $config->set("user_activation", $str, true);
 
-            $set = array(
-                $config->set("user_activation", $str, true),
-                $config->remove("email_activation")
-            );
+            if ($set === false)
+                error(
+                    __("Error"),
+                    __("Could not write the configuration file.")
+                );
 
-            if (in_array(false, $set, true))
+            $set = $config->remove("email_activation");
+
+            if ($set === false)
                 error(
                     __("Error"),
                     __("Could not write the configuration file.")
