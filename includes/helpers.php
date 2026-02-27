@@ -516,7 +516,7 @@
      */
     function get_locale(
     ): string {
-        if (!defined('CHYRP_ENVIRONMENT') or !CHYRP_ENVIRONMENT) {
+        if (!file_exists(INCLUDES_DIR.DIR."config.json.php")) {
             return isset($_REQUEST['locale']) ?
                 $_REQUEST['locale'] :
                 "en_US" ;
