@@ -516,7 +516,10 @@
      */
     function get_locale(
     ): string {
-        if (!file_exists(INCLUDES_DIR.DIR."config.json.php")) {
+        if (
+            INSTALLING or
+            !file_exists(INCLUDES_DIR.DIR."config.json.php")
+        ) {
             return isset($_REQUEST['locale']) ?
                 $_REQUEST['locale'] :
                 "en_US" ;
