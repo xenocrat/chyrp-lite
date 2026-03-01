@@ -1452,7 +1452,7 @@ Target:
 cache_invalidate_triggers
 -------------------------
 Called from:
-	modules/cacher/cacher.php on line 211
+	modules/cacher/cacher.php on line 214
 
 Target:
 	$invalidate
@@ -1461,7 +1461,7 @@ Target:
 cache_exclude_triggers
 ----------------------
 Called from:
-	modules/cacher/cacher.php on line 232
+	modules/cacher/cacher.php on line 235
 
 Target:
 	$exclude
