@@ -141,6 +141,9 @@
             if (logged_in())
                 return false;
 
+            if (Trigger::current()->exists("not_public_cacheable"))
+                return false;
+
             static $count;
 
             if (!isset($count)) {
