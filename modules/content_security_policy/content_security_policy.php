@@ -34,4 +34,9 @@
         ): string {
             return $this->nonce;
         }
+
+        public function not_public_cacheable(
+        ): bool {
+            return true;
+        }
     }
