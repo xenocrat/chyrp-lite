@@ -240,9 +240,8 @@
         public function twig_function_tag_cloud(
             $limit = false,
             $sort = "name_asc",
-            $scale = 300
         ): array {
-            return $this->tag_cloud($limit, $sort, $scale);
+            return $this->tag_cloud($limit, $sort);
         }
 
         public function parse_urls(
@@ -865,8 +864,7 @@
 
         public function tag_cloud(
             $limit = false,
-            $sort = "popularity_desc",
-            $scale = 300
+            $sort = "popularity_desc"
         ): array {
             $sql = SQL::current();
             $visitor = Visitor::current();
@@ -926,12 +924,11 @@
                     $min = min($popularity);
                     $max = max($popularity);
 
-                    $step = (int) $scale / (
-                        ($min === $max) ? 1 : ($max - $min)
-                    );
-
                     foreach ($popularity as $name => $count) {
-                        $size = floor($step * ($count - $min));
+                        $size = ($min == $max) ?
+                            0 :
+                            ($count - $min) / ($max - $min) ;
+
                         $title = $this->tag_cloud_title($name, $count);
 
                         $url = url(
