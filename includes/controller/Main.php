@@ -125,6 +125,10 @@
                     return $route->action = "index";
             }
 
+            # JavaScript.
+            if ($route->arg[0] == "js")
+                return $route->action = "js";
+
             # Feed.
             if ($route->arg[0] == "feed")
                 return $route->action = "feed";
@@ -226,7 +230,8 @@
                 "register",
                 "activate",
                 "lost_password",
-                "reset_password"
+                "reset_password",
+                "js"
             );
             return in_array($action, $exemptions);
         }
@@ -1429,6 +1434,28 @@
             }
 
             $feed->display();
+        }
+
+        /**
+         * Function: main_js
+         * Returns JavaScript for core functionality and extensions.
+         */
+        public function main_js(
+        ): void {
+            $config = Config::current();
+            $route = Route::current();
+            $theme = Theme::current();
+            $trigger = Trigger::current();
+            $visitor = Visitor::current();
+
+            ob_start();
+            include INCLUDES_DIR.DIR."main.js.php";
+            $ob = ob_get_clean();
+
+            $trigger->call("javascripts_hash", $ob);
+
+            header("Content-Type: text/javascript; charset=UTF-8");
+            echo $ob;
         }
 
         /**

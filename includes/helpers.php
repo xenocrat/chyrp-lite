@@ -4205,31 +4205,27 @@
 
     /**
      * Function: javascripts
-     * Returns inline JavaScript for core functionality and extensions.
+     * Returns linked JavaScript for core functionality and extensions.
      */
     function javascripts(
     ): string {
         $config = Config::current();
         $route = Route::current();
-        $theme = Theme::current();
-        $trigger = Trigger::current();
         $visitor = Visitor::current();
-        $nonce = "";
 
-        $script = (ADMIN) ?
-            MAIN_DIR.DIR."admin".DIR."javascripts".DIR."admin.js.php" :
-            INCLUDES_DIR.DIR."main.js.php" ;
+        $data = array(
+            ' data-route.action="'.fix($route->action, true).'"',
+            ' data-route.request="'.fix($route->request, true).'"',
+            ' data-visitor.id="'.fix($visitor->id, true).'"',
+            ' data-visitor.token="'.fix(authenticate(), true).'"',
+            ' data-site.url="'.fix($config->url, true).'"',
+            ' data-site.chyrp_url="'.fix($config->chyrp_url, true).'"',
+            ' data-site.ajax_url="'.url('/', 'AjaxController').'"',
+        );
 
-        $common = '<script src="'.
-                  fix($config->chyrp_url."/includes/common.js", true).
-                  '"></script>';
-
-        ob_start();
-        include $script;
-        $ob = ob_get_clean();
-
-        $trigger->call("javascripts_hash", $ob);
-        $trigger->filter($nonce, "javascripts_nonce");
-
-        return $common."\n<script nonce=\"".$nonce."\">".$ob."</script>\n";
+        return '<script src="'.
+               fix($config->chyrp_url."/includes/common.js", true).'">'.
+               "</script>\n".
+               '<script src="'.url("/?action=js").'"'.implode($data).'>'.
+               "</script>\n";
     }

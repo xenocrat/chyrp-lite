@@ -3788,6 +3788,28 @@
         }
 
         /**
+         * Function: admin_js
+         * Returns JavaScript for core functionality and extensions.
+         */
+        public function admin_js(
+        ): void {
+            $config = Config::current();
+            $route = Route::current();
+            $theme = Theme::current();
+            $trigger = Trigger::current();
+            $visitor = Visitor::current();
+
+            ob_start();
+            include MAIN_DIR.DIR."admin".DIR."javascripts".DIR."admin.js.php";
+            $ob = ob_get_clean();
+
+            $trigger->call("javascripts_hash", $ob);
+
+            header("Content-Type: text/javascript; charset=UTF-8");
+            echo $ob;
+        }
+
+        /**
          * Function: navigation_context
          * Returns the navigation context for Twig.
          */

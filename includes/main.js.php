@@ -13,17 +13,17 @@ $(function() {
     Page.init();
 });
 var Route = {
-    action: '<?php esce($route->action); ?>',
-    request: '<?php esce($route->request); ?>'
+    action: document.currentScript.getAttribute('data-route.action'),
+    request: document.currentScript.getAttribute('data-route.request')
 }
 var Visitor = {
-    id: <?php esce($visitor->id); ?>,
-    token: '<?php esce(authenticate()); ?>'
+    id: parseInt(document.currentScript.getAttribute('data-visitor.id')),
+    token: document.currentScript.getAttribute('data-visitor.token')
 }
 var Site = {
-    url: '<?php esce($config->url); ?>',
-    chyrp_url: '<?php esce($config->chyrp_url); ?>',
-    ajax_url: '<?php esce(unfix(url('/', 'AjaxController'))); ?>'
+    url: document.currentScript.getAttribute('data-site.url'),
+    chyrp_url: document.currentScript.getAttribute('data-site.chyrp_url'),
+    ajax_url: document.currentScript.getAttribute('data-site.ajax_url')
 }
 var Oops = {
     message: '<?php esce(__("Oops! Something went wrong on this web page.")); ?>',
