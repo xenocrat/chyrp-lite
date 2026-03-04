@@ -777,6 +777,24 @@ div.tag_cloud a:active {
     background-color: var(--topaz-light-blue);
     border-color: var(--topaz-light-blue);
 }
+a.tag-size-0 {
+    font-size: 100%;
+}
+a.tag-size-1 {
+    font-size: 150%;
+}
+a.tag-size-2 {
+    font-size: 200%;
+}
+a.tag-size-3 {
+    font-size: 250%;
+}
+a.tag-size-4 {
+    font-size: 300%;
+}
+a.tag-size-5 {
+    font-size: 350%;
+}
 div.doaction a, button {
     display: inline-block;
     white-space: nowrap;
