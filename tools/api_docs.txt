@@ -1641,6 +1641,11 @@ Function: admin_help
 Serves help pages for core and extensions.
 
 
+Function: admin_js
+------------------
+Returns JavaScript for core functionality and extensions.
+
+
 Function: navigation_context
 ----------------------------
 Returns the navigation context for Twig.
@@ -1839,6 +1844,11 @@ Webmention receiver endpoint.
 Function: main_feed
 -------------------
 Grabs posts and serves a feed.
+
+
+Function: main_js
+-----------------
+Returns JavaScript for core functionality and extensions.
 
 
 Function: display
@@ -2992,11 +3002,6 @@ Sends an activation email to the site contact.
 
 Parameters:
     $user - The user requiring activation.
-
-
-Function: javascripts
----------------------
-Returns inline JavaScript for core functionality and extensions.
 
 
 ==============================================

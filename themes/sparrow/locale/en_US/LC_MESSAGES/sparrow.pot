@@ -388,7 +388,7 @@ msgid "You don't have any drafts."
 msgstr ""
 
 #: themes/sparrow/pages/index.twig:7
-#: themes/sparrow/pages/tags.twig:19
+#: themes/sparrow/pages/tags.twig:12
 msgid "Nothing here yet!"
 msgstr ""
 

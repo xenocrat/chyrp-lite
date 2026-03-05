@@ -341,7 +341,7 @@ msgstr "Concepten"
 msgid "You don't have any drafts."
 msgstr "Je hebt geen concepten."
 
-#: themes/umbra/pages/index.twig:7 themes/umbra/pages/tags.twig:19
+#: themes/umbra/pages/index.twig:7 themes/umbra/pages/tags.twig:12
 msgid "Nothing here yet!"
 msgstr "Nog niets te zien hier!"
 

@@ -412,7 +412,7 @@ msgstr "Entwürfe"
 msgid "You don't have any drafts."
 msgstr "Du hast keine Entwürfe."
 
-#: themes/blossom/pages/index.twig:8 themes/blossom/pages/tags.twig:20
+#: themes/blossom/pages/index.twig:8 themes/blossom/pages/tags.twig:13
 msgid "Nothing here yet!"
 msgstr "Hier ist noch nichts!"
 

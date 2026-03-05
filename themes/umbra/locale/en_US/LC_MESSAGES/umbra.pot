@@ -345,7 +345,7 @@ msgid "You don't have any drafts."
 msgstr ""
 
 #: themes/umbra/pages/index.twig:7
-#: themes/umbra/pages/tags.twig:19
+#: themes/umbra/pages/tags.twig:12
 msgid "Nothing here yet!"
 msgstr ""
 

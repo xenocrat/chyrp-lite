@@ -423,7 +423,7 @@ msgid "You don't have any drafts."
 msgstr ""
 
 #: themes/topaz/pages/index.twig:8
-#: themes/topaz/pages/tags.twig:20
+#: themes/topaz/pages/tags.twig:13
 msgid "Nothing here yet!"
 msgstr ""
 

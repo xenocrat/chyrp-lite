@@ -412,7 +412,7 @@ msgid "You don't have any drafts."
 msgstr ""
 
 #: themes/blossom/pages/index.twig:8
-#: themes/blossom/pages/tags.twig:20
+#: themes/blossom/pages/tags.twig:13
 msgid "Nothing here yet!"
 msgstr ""
 

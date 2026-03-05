@@ -415,7 +415,7 @@ msgstr "Szkice"
 msgid "You don't have any drafts."
 msgstr "Nie masz żadnych szkiców."
 
-#: themes/topaz/pages/index.twig:8 themes/topaz/pages/tags.twig:20
+#: themes/topaz/pages/index.twig:8 themes/topaz/pages/tags.twig:13
 msgid "Nothing here yet!"
 msgstr "Tutaj jeszcze nic nie ma!"
 

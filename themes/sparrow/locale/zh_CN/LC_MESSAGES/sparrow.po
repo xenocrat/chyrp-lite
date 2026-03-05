@@ -388,7 +388,7 @@ msgstr "草稿"
 msgid "You don't have any drafts."
 msgstr "您没有任何草稿。"
 
-#: themes/sparrow/pages/index.twig:7 themes/sparrow/pages/tags.twig:19
+#: themes/sparrow/pages/index.twig:7 themes/sparrow/pages/tags.twig:12
 msgid "Nothing here yet!"
 msgstr "然而这里什么也没有！"
 

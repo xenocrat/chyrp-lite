@@ -340,25 +340,25 @@ Called from:
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 676
+	includes/controller/Main.php on line 681
 
 
 user_registering
 ----------------
 Called from:
-	includes/controller/Main.php on line 885
+	includes/controller/Main.php on line 890
 
 
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 1013
+	includes/controller/Main.php on line 1018
 
 
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 1428
+	includes/controller/Main.php on line 1433
 
 Arguments:
 	$post
@@ -450,15 +450,6 @@ Called from:
 Arguments:
 	$user
 	$url
-
-
-javascripts_hash
-----------------
-Called from:
-	includes/helpers.php on line 4231
-
-Arguments:
-	$ob
 
 
 javascript
@@ -951,7 +942,7 @@ Target:
 admin_scripts
 -------------
 Called from:
-	includes/class/Theme.php on line 352
+	includes/class/Theme.php on line 354
 
 Target:
 	$scripts
@@ -960,7 +951,7 @@ Target:
 scripts
 -------
 Called from:
-	includes/class/Theme.php on line 383
+	includes/class/Theme.php on line 385
 
 Target:
 	$scripts
@@ -969,7 +960,7 @@ Target:
 admin_links
 -----------
 Called from:
-	includes/class/Theme.php on line 424
+	includes/class/Theme.php on line 440
 
 Target:
 	$links
@@ -978,7 +969,7 @@ Target:
 links
 -----
 Called from:
-	includes/class/Theme.php on line 445
+	includes/class/Theme.php on line 461
 
 Target:
 	$links
@@ -1078,7 +1069,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 3847
+	includes/controller/Admin.php on line 3867
 
 Target:
 	$write
@@ -1087,7 +1078,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3916
+	includes/controller/Admin.php on line 3936
 
 Target:
 	$manage
@@ -1096,7 +1087,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 3946
+	includes/controller/Admin.php on line 3966
 
 Target:
 	$settings
@@ -1105,7 +1096,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3969
+	includes/controller/Admin.php on line 3989
 
 Target:
 	$extend
@@ -1114,7 +1105,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 4065
+	includes/controller/Admin.php on line 4085
 
 Target:
 	$this->context
@@ -1165,7 +1156,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 1531
+	includes/controller/Main.php on line 1556
 
 Target:
 	$this->context
@@ -1208,7 +1199,6 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/helpers.php on line 4232
 	includes/lib/Leaf.php on line 353
 
 Target:
@@ -1452,7 +1442,7 @@ Target:
 cache_invalidate_triggers
 -------------------------
 Called from:
-	modules/cacher/cacher.php on line 214
+	modules/cacher/cacher.php on line 211
 
 Target:
 	$invalidate
@@ -1461,7 +1451,7 @@ Target:
 cache_exclude_triggers
 ----------------------
 Called from:
-	modules/cacher/cacher.php on line 235
+	modules/cacher/cacher.php on line 232
 
 Target:
 	$exclude

@@ -412,7 +412,7 @@ msgstr "Brouillons"
 msgid "You don't have any drafts."
 msgstr "Vous n'avez pas de brouillon."
 
-#: themes/topaz/pages/index.twig:8 themes/topaz/pages/tags.twig:20
+#: themes/topaz/pages/index.twig:8 themes/topaz/pages/tags.twig:13
 msgid "Nothing here yet!"
 msgstr "Rien ici encore !"
 

@@ -412,7 +412,7 @@ msgstr "Bozze"
 msgid "You don't have any drafts."
 msgstr "Non hai bozze."
 
-#: themes/topaz/pages/index.twig:8 themes/topaz/pages/tags.twig:20
+#: themes/topaz/pages/index.twig:8 themes/topaz/pages/tags.twig:13
 msgid "Nothing here yet!"
 msgstr "Non c'è ancora niente!"
 

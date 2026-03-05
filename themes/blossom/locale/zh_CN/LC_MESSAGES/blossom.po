@@ -408,7 +408,7 @@ msgstr "草稿"
 msgid "You don't have any drafts."
 msgstr "您没有任何草稿。"
 
-#: themes/blossom/pages/index.twig:8 themes/blossom/pages/tags.twig:20
+#: themes/blossom/pages/index.twig:8 themes/blossom/pages/tags.twig:13
 msgid "Nothing here yet!"
 msgstr "然而这里什么也没有！"
 

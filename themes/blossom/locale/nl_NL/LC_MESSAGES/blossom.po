@@ -410,7 +410,7 @@ msgstr "Concepten"
 msgid "You don't have any drafts."
 msgstr "Je hebt geen concepten."
 
-#: themes/blossom/pages/index.twig:8 themes/blossom/pages/tags.twig:20
+#: themes/blossom/pages/index.twig:8 themes/blossom/pages/tags.twig:13
 msgid "Nothing here yet!"
 msgstr "Niets te zien hier!"
 
