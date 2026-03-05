@@ -1452,8 +1452,6 @@
             include INCLUDES_DIR.DIR."main.js.php";
             $ob = ob_get_clean();
 
-            $trigger->call("javascripts_hash", $ob);
-
             header("Content-Type: text/javascript; charset=UTF-8");
             echo $ob;
         }
