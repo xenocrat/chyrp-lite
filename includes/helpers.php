@@ -4202,30 +4202,3 @@
 
         return email($config->email, $subject, $message, $headers);
     }
-
-    /**
-     * Function: javascripts
-     * Returns linked JavaScript for core functionality and extensions.
-     */
-    function javascripts(
-    ): string {
-        $config = Config::current();
-        $route = Route::current();
-        $visitor = Visitor::current();
-
-        $data = array(
-            ' data-route.action="'.fix($route->action, true).'"',
-            ' data-route.request="'.fix($route->request, true).'"',
-            ' data-visitor.id="'.fix($visitor->id, true).'"',
-            ' data-visitor.token="'.fix(authenticate(), true).'"',
-            ' data-site.url="'.fix($config->url, true).'"',
-            ' data-site.chyrp_url="'.fix($config->chyrp_url, true).'"',
-            ' data-site.ajax_url="'.url('/', 'AjaxController').'"',
-        );
-
-        return '<script src="'.
-               fix($config->chyrp_url."/includes/common.js", true).'">'.
-               "</script>\n".
-               '<script src="'.url("/?action=js").'"'.implode($data).'>'.
-               "</script>\n";
-    }
