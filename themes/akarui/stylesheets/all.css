@@ -53,21 +53,27 @@
     --akarui-light-red: #fffafa;
     --akarui-medium-red: #ffe1e5;
     --akarui-strong-red: #d60015;
+    --akarui-shadow-red: #ffe1e53f;
     --akarui-light-blue: #fafbff;
     --akarui-medium-blue: #e0e9ff;
     --akarui-strong-blue: #003edb;
+    --akarui-shadow-blue: #e0e9ff3f;
     --akarui-light-green: #fbfefc;
     --akarui-medium-green: #dcefe2;
     --akarui-strong-green: #248a3d;
+    --akarui-shadow-green: #dcefe23f;
     --akarui-light-orange: #fffcfa;
     --akarui-medium-orange: #fce6cf;
     --akarui-strong-orange: #b35000;
+    --akarui-shadow-orange: #fce6cf3f;
     --akarui-light-purple: #fdfbfe;
     --akarui-medium-purple: #f0e4fb;
     --akarui-strong-purple: #8944ab;
+    --akarui-shadow-purple: #f0e4fb3f;
     --akarui-light: #fbfbfb;
     --akarui-medium: #e9e9e9;
     --akarui-strong: #8a8a8a;
+    --akarui-shadow: #e9e9e93f;
 }
 *::selection {
     color: var(--akarui-white);
@@ -95,26 +101,31 @@ body.red {
     --akarui-light: var(--akarui-light-red);
     --akarui-medium: var(--akarui-medium-red);
     --akarui-strong: var(--akarui-strong-red);
+    --akarui-shadow: var(--akarui-shadow-red);
 }
 body.blue {
     --akarui-light: var(--akarui-light-blue);
     --akarui-medium: var(--akarui-medium-blue);
     --akarui-strong: var(--akarui-strong-blue);
+    --akarui-shadow: var(--akarui-shadow-blue);
 }
 body.green {
     --akarui-light: var(--akarui-light-green);
     --akarui-medium: var(--akarui-medium-green);
     --akarui-strong: var(--akarui-strong-green);
+    --akarui-shadow: var(--akarui-shadow-green);
 }
 body.orange {
     --akarui-light: var(--akarui-light-orange);
     --akarui-medium: var(--akarui-medium-orange);
     --akarui-strong: var(--akarui-strong-orange);
+    --akarui-shadow: var(--akarui-shadow-orange);
 }
 body.purple {
     --akarui-light: var(--akarui-light-purple);
     --akarui-medium: var(--akarui-medium-purple);
     --akarui-strong: var(--akarui-strong-purple);
+    --akarui-shadow: var(--akarui-shadow-purple);
 }
 body.preview {
     margin: 1rem;
@@ -474,6 +485,7 @@ article {
     margin: 2rem 0rem;
     padding: 0rem 1rem;
     border: 2px solid var(--akarui-medium);
+    box-shadow: var(--akarui-shadow) 0.5rem 0.5rem;
 }
 footer {
     clear: both;
