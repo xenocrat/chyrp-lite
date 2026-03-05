@@ -53,27 +53,27 @@
     --akarui-light-red: #fffafa;
     --akarui-medium-red: #ffe1e5;
     --akarui-strong-red: #d60015;
-    --akarui-shadow-red: #ffe1e53f;
+    --akarui-shadow-red: #ffe1e555;
     --akarui-light-blue: #fafbff;
     --akarui-medium-blue: #e0e9ff;
     --akarui-strong-blue: #003edb;
-    --akarui-shadow-blue: #e0e9ff3f;
+    --akarui-shadow-blue: #e0e9ff55;
     --akarui-light-green: #fbfefc;
     --akarui-medium-green: #dcefe2;
     --akarui-strong-green: #248a3d;
-    --akarui-shadow-green: #dcefe23f;
+    --akarui-shadow-green: #dcefe255;
     --akarui-light-orange: #fffcfa;
     --akarui-medium-orange: #fce6cf;
     --akarui-strong-orange: #b35000;
-    --akarui-shadow-orange: #fce6cf3f;
+    --akarui-shadow-orange: #fce6cf55;
     --akarui-light-purple: #fdfbfe;
     --akarui-medium-purple: #f0e4fb;
     --akarui-strong-purple: #8944ab;
-    --akarui-shadow-purple: #f0e4fb3f;
+    --akarui-shadow-purple: #f0e4fb55;
     --akarui-light: #fbfbfb;
     --akarui-medium: #e9e9e9;
     --akarui-strong: #8a8a8a;
-    --akarui-shadow: #e9e9e93f;
+    --akarui-shadow: #e9e9e955;
 }
 *::selection {
     color: var(--akarui-white);
