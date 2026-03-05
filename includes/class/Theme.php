@@ -343,6 +343,8 @@
         public function javascripts(
         ): string {
             $config = Config::current();
+            $route = Route::current();
+            $visitor = Visitor::current();
             $trigger = Trigger::current();
 
             $scripts = array();
@@ -387,12 +389,26 @@
             $tags = array();
 
             foreach ($scripts as $script) {
-                $tags[] = '<script src="'.
-                          fix($script, true).
-                          '"></script>';
+                $tags[] = '<script defer src="'.fix($script, true).'">'.
+                          '</script>';
             }
 
-            return javascripts().implode("\n", $tags);
+            $data = array(
+                ' data-route.action="'.fix($route->action, true).'"',
+                ' data-route.request="'.fix($route->request, true).'"',
+                ' data-visitor.id="'.fix($visitor->id, true).'"',
+                ' data-visitor.token="'.fix(authenticate(), true).'"',
+                ' data-site.url="'.fix($config->url, true).'"',
+                ' data-site.chyrp_url="'.fix($config->chyrp_url, true).'"',
+                ' data-site.ajax_url="'.url('/', 'AjaxController').'"',
+            );
+
+            return '<script defer src="'.
+                   fix($config->chyrp_url."/includes/common.js", true).'">'.
+                   "</script>\n".
+                   '<script defer src="'.url("/?action=js").'"'.implode($data).'>'.
+                   "</script>\n".
+                   implode("\n", $tags);
         }
 
         /**
