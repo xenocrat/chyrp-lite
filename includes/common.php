@@ -142,10 +142,17 @@
         define('USE_OB', true);
 
     # Constant: HTTP_ACCEPT_ZSTD
-    # Does the user agent accept Zstandard encoding?
+    # Does the user agent accept Zstd encoding?
     define('HTTP_ACCEPT_ZSTD',
         isset($_SERVER['HTTP_ACCEPT_ENCODING']) and
         str_contains($_SERVER['HTTP_ACCEPT_ENCODING'], "zstd")
+    );
+
+    # Constant: HTTP_ACCEPT_BROTLI
+    # Does the user agent accept Brotli encoding?
+    define('HTTP_ACCEPT_BROTLI',
+        isset($_SERVER['HTTP_ACCEPT_ENCODING']) and
+        str_contains($_SERVER['HTTP_ACCEPT_ENCODING'], "br")
     );
 
     # Constant: HTTP_ACCEPT_DEFLATE
@@ -163,9 +170,15 @@
     );
 
     # Constant: CAN_USE_ZSTD
-    # Can we use zstd to compress output?
+    # Can we use Zstd to compress output?
     define('CAN_USE_ZSTD',
         HTTP_ACCEPT_ZSTD and extension_loaded("zstd")
+    );
+
+    # Constant: CAN_USE_BROTLI
+    # Can we use Brotli to compress output?
+    define('CAN_USE_BROTLI',
+        HTTP_ACCEPT_BROTLI and extension_loaded("brotli")
     );
 
     # Constant: CAN_USE_ZLIB
@@ -178,7 +191,10 @@
     # Use content compression for responses?
     if (!defined('USE_COMPRESSION'))
         define('USE_COMPRESSION',
-            (CAN_USE_ZSTD or CAN_USE_ZLIB) and !ini_get("zlib.output_compression")
+            (CAN_USE_ZSTD or CAN_USE_BROTLI or CAN_USE_ZLIB) and
+            !ini_get("zlib.output_compression") and
+            !ini_get("zstd.output_compression") and
+            !ini_get("brotli.output_compression")
         );
 
     # Start output buffering and set the header.
@@ -191,6 +207,13 @@
                     }
                 );
                 header("Content-Encoding: zstd");
+            } elseif (CAN_USE_BROTLI) {
+                ob_start(
+                    function ($data) {
+                        return brotli_compress($data, BROTLI_COMPRESS_LEVEL_DEFAULT);
+                    }
+                );
+                header("Content-Encoding: br");
             } else {
                 ob_start("ob_gzhandler");
                 header("Content-Encoding: ".(HTTP_ACCEPT_GZIP ? "gzip" : "deflate"));

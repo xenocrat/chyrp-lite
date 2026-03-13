@@ -117,8 +117,22 @@
             header("Cache-Control: no-store");
 
             # Resend the content encoding header if transparent compression is on.
-            if (CAN_USE_ZLIB and ini_get("zlib.output_compression"))
+            if (
+                CAN_USE_ZLIB and
+                ini_get("zlib.output_compression")
+            ) {
                 header("Content-Encoding: ".(HTTP_ACCEPT_GZIP ? "gzip" : "deflate"));
+            } elseif (
+                CAN_USE_ZSTD and
+                ini_get("zstd.output_compression")
+            ) {
+                header("Content-Encoding: zstd");
+            } elseif (
+                CAN_USE_BROTLI and
+                ini_get("brotli.output_compression")
+            ) {
+                header("Content-Encoding: br");
+            }
 
             switch ($code) {
                 case 400:
