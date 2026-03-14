@@ -154,7 +154,7 @@
 
                 trigger_error(
                     _f("Database error: %s", fix($this->error, false, true)),
-                    E_USER_ERROR
+                    E_USER_WARNING
                 );
             }
 

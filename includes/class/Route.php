@@ -45,7 +45,7 @@
             if (!in_array("Controller", class_implements($controller)))
                 trigger_error(
                     __("Route was initiated with an invalid Controller."),
-                    E_USER_ERROR
+                    E_USER_WARNING
                 );
 
             $config = Config::current();

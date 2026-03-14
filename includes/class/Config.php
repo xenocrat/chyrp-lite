@@ -16,7 +16,7 @@
             if (!$this->read() and !INSTALLING)
                 trigger_error(
                     __("Could not read the configuration file."),
-                    E_USER_ERROR
+                    E_USER_WARNING
                 );
 
             fallback($this->data["sql"],              array());
