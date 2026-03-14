@@ -45,13 +45,44 @@ trait CiteTrait
 				'\\\\',
 				$matches[1]
 			);
-			return [
-				[
-					'cite',
-					$this->parseInline($matches[1])
-				],
-				strlen($matches[0])
-			];
+			$content = $matches[1];
+			if (
+				// Inline HTML takes precedence.
+				(
+					!method_exists($this, 'parseLt')
+					|| ($pos = strpos($content, $this->parseLtMarkers()[0]))
+						=== false
+					|| ($arr = $this->parseLt(substr($markdown, (2 + $pos))))[0][0]
+						=== 'text'
+					|| $arr[1] <= (strlen($content) - $pos)
+				)
+				// Inline link takes precedence.
+				&& (
+					!method_exists($this, 'parseLink')
+					|| ($pos = strpos($content, $this->parseLinkMarkers()[0]))
+						=== false
+					|| ($arr = $this->parseLink(substr($markdown, (2 + $pos))))[0][0]
+						=== 'text'
+					|| $arr[1] <= (strlen($content) - $pos)
+				)
+				// Inline image takes precedence.
+				&& (
+					!method_exists($this, 'parseImage')
+					|| ($pos = strpos($content, $this->parseImageMarkers()[0]))
+						=== false
+					|| ($arr = $this->parseImage(substr($markdown, (2 + $pos))))[0][0]
+						=== 'text'
+					|| $arr[1] <= (strlen($content) - $pos)
+				)
+			) {
+				return [
+					[
+						'cite',
+						$this->parseInline($content)
+					],
+					strlen($matches[0])
+				];
+			}
 		}
 		return [['text', $markdown[0] . $markdown[1]], 2];
 	}

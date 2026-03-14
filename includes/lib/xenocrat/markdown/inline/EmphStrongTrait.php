@@ -67,14 +67,41 @@ trait EmphStrongTrait
 					$matches[1]
 				);
 				$content = $matches[1];
-				// Strong cannot be empty.
-				// First char cannot be a space separator, close or final punctuation.
-				// Last char cannot be a space separator, open or initial punctuation.
 				if (
+					// Strong cannot be empty.
 					$content !== ''
+					// First char cannot be a space separator, close or final punctuation.
+					// Last char cannot be a space separator, open or initial punctuation.
 					&& preg_match(
 						'/^(?![\s\p{Zs}\p{Pe}\p{Pf}]).+(?<![\s\p{Zs}\p{Ps}\p{Pi}])$/us',
 						$content
+					)
+					// Inline HTML takes precedence.
+					&& (
+						!method_exists($this, 'parseLt')
+						|| ($pos = strpos($content, $this->parseLtMarkers()[0]))
+							=== false
+						|| ($arr = $this->parseLt(substr($markdown, (2 + $pos))))[0][0]
+							=== 'text'
+						|| $arr[1] <= (strlen($content) - $pos)
+					)
+					// Inline link takes precedence.
+					&& (
+						!method_exists($this, 'parseLink')
+						|| ($pos = strpos($content, $this->parseLinkMarkers()[0]))
+							=== false
+						|| ($arr = $this->parseLink(substr($markdown, (2 + $pos))))[0][0]
+							=== 'text'
+						|| $arr[1] <= (strlen($content) - $pos)
+					)
+					// Inline image takes precedence.
+					&& (
+						!method_exists($this, 'parseImage')
+						|| ($pos = strpos($content, $this->parseImageMarkers()[0]))
+							=== false
+						|| ($arr = $this->parseImage(substr($markdown, (2 + $pos))))[0][0]
+							=== 'text'
+						|| $arr[1] <= (strlen($content) - $pos)
 					)
 				) {
 					return [
@@ -122,14 +149,41 @@ trait EmphStrongTrait
 					$matches[1]
 				);
 				$content = $matches[1];
-				// Emphasis cannot be empty.
-				// First char cannot be a space separator, close or final punctuation.
-				// Last char cannot be a space separator, open or initial punctuation.
 				if (
+					// Emphasis cannot be empty.
 					$content !== ''
+					// First char cannot be a space separator, close or final punctuation.
+					// Last char cannot be a space separator, open or initial punctuation.
 					&& preg_match(
 						'/^(?![\s\p{Zs}\p{Pe}\p{Pf}]).+(?<![\s\p{Zs}\p{Ps}\p{Pi}])$/us',
 						$content
+					)
+					// Inline HTML takes precedence.
+					&& (
+						!method_exists($this, 'parseLt')
+						|| ($pos = strpos($content, $this->parseLtMarkers()[0]))
+							=== false
+						|| ($arr = $this->parseLt(substr($markdown, (1 + $pos))))[0][0]
+							=== 'text'
+						|| $arr[1] <= (strlen($content) - $pos)
+					)
+					// Inline link takes precedence.
+					&& (
+						!method_exists($this, 'parseLink')
+						|| ($pos = strpos($content, $this->parseLinkMarkers()[0]))
+							=== false
+						|| ($arr = $this->parseLink(substr($markdown, (1 + $pos))))[0][0]
+							=== 'text'
+						|| $arr[1] <= (strlen($content) - $pos)
+					)
+					// Inline image takes precedence.
+					&& (
+						!method_exists($this, 'parseImage')
+						|| ($pos = strpos($content, $this->parseImageMarkers()[0]))
+							=== false
+						|| ($arr = $this->parseImage(substr($markdown, (1 + $pos))))[0][0]
+							=== 'text'
+						|| $arr[1] <= (strlen($content) - $pos)
 					)
 				) {
 					return [

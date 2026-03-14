@@ -158,6 +158,9 @@ trait ListTrait
 					substr($line, $mw)
 				);
 				$block['items'][$item][] = $line;
+			} elseif ($this->detectLineType($lines, $i) === 'paragraph') {
+			// Lazy continuation line.
+				$block['items'][$item][] = $lines[$i];
 			} else {
 			// Everything else ends the list.
 				--$i;
