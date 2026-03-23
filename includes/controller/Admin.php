@@ -2410,10 +2410,11 @@
                         fix(oneof($post->user->full_name, $post->user->login), false, true).
                         '</name>'."\n";
 
-                    if (!empty($post->user->website))
+                    if (!empty($post->user->website)) {
                         $posts_atom.= '<uri>'.
                                       fix($post->user->website, false, true).
                                       '</uri>'."\n";
+                    }
 
                     $posts_atom.= '<chyrp:login>'.
                         fix($post->user->login, false, true).
@@ -2421,10 +2422,11 @@
                         '</author>'."\n".
                         '<content type="application/xml">'."\n";
 
-                    foreach ($post->attributes as $key => $val)
-                        $posts_atom.= '<'.$key.'>'.
+                    foreach ($post->attributes as $key => $val) {
+                        $posts_atom.= '<'.fix($key).'>'.
                                       fix($val, false, true).
-                                      '</'.$key.'>'."\n";
+                                      '</'.fix($key).'>'."\n";
+                    }
 
                     $posts_atom.= '</content>'."\n";
 
@@ -2516,10 +2518,11 @@
                         fix(oneof($page->user->full_name, $page->user->login), false, true).
                         '</name>'."\n";
 
-                    if (!empty($page->user->website))
+                    if (!empty($page->user->website)) {
                         $pages_atom.= '<uri>'.
                                       fix($page->user->website, false, true).
                                       '</uri>'."\n";
+                    }
 
                     $pages_atom.= '<chyrp:login>'.
                                   fix($page->user->login, false, true).
