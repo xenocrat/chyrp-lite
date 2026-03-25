@@ -11,6 +11,7 @@
                 " default-src 'self';".
                 " style-src 'self' 'sha256-".$error_style_hash."';".
                 " script-src 'self';".
+                " frame-src 'self' https:;".
                 " frame-ancestors 'self';".
                 " form-action 'self';"
             );
