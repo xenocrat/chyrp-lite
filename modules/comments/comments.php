@@ -1281,14 +1281,15 @@
             $trigger = Trigger::current();
 
             $post = $context["post"];
-            $comments = $post->comments;
             $prev_page = null;
             $next_page = null;
             $first_page = null;
             $last_page = null;
 
-            if ($comments->per_page != $config->feed_items)
-                $comments = $comments->reslice($config->feed_items);
+            $comments = new Paginator(
+                $post->comments,
+                $config->feed_items
+            );
 
             if ($comments->prev_page())
                 $prev_page = $comments->prev_page_url();
