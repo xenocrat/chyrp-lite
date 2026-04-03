@@ -51,6 +51,10 @@
     # The lifetime of password reset tokens in seconds.
     define('PASSWORD_RESET_TOKEN_LIFETIME', 3600);
 
+    # Constant: MAX_URL_PARAMETERS
+    # The maximum number of allowed URL parameters.
+    define('MAX_URL_PARAMETERS', 12);
+
     # Constant: MAX_TIME_LIMIT
     # The maximum allowed execution time in seconds.
     define('MAX_TIME_LIMIT', 600);
