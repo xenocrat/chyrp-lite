@@ -76,6 +76,17 @@
                 explode("/", trim($this->request, "/"))
             );
 
+            if (
+                count($_GET) > MAX_URL_PARAMETERS or
+                count($this->arg) > MAX_URL_PARAMETERS
+            ) {
+                error(
+                    __("Error"),
+                    __("You ask way too much."),
+                    code:400
+                );
+            }
+
             # Give the controller an opportunity to parse this route
             # and determine the action.
             $controller->parse($this);
