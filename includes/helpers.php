@@ -1423,21 +1423,33 @@
                 $attr == "before" and
                 isset($columns["created_at"])
             ) {
+                if (preg_match("/^[0-9]{1,4}$/", $val))
+                    $val.= "-01-01";
+
                 $where["created_at <"] = datetime($val);
             } elseif (
                 $attr == "after" and
                 isset($columns["created_at"])
             ) {
+                if (preg_match("/^[0-9]{1,4}$/", $val))
+                    $val.= "-12-31";
+
                 $where["created_at >"] = datetime($val);
             } elseif (
                 $attr == "before" and
                 isset($columns["joined_at"])
             ) {
+                if (preg_match("/^[0-9]{1,4}$/", $val))
+                    $val.= "-01-01";
+
                 $where["joined_at <"] = datetime($val);
             } elseif (
                 $attr == "after" and
                 isset($columns["joined_at"])
             ) {
+                if (preg_match("/^[0-9]{1,4}$/", $val))
+                    $val.= "-12-31";
+
                 $where["joined_at >"] = datetime($val);
             } elseif (
                 $attr == "ASC" and
