@@ -53,7 +53,7 @@
 
     # Constant: MAX_URL_PARAMETERS
     # The maximum number of allowed URL parameters.
-    define('MAX_URL_PARAMETERS', 12);
+    define('MAX_URL_PARAMETERS', 10);
 
     # Constant: MAX_TIME_LIMIT
     # The maximum allowed execution time in seconds.
