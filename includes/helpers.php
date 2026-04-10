@@ -1424,7 +1424,7 @@
                 isset($columns["created_at"])
             ) {
                 if (preg_match("/^[0-9]{1,4}$/", $val))
-                    $val.= "-01-01";
+                    $val.= "-01-01 00:00:00";
 
                 $where["created_at <"] = datetime($val);
             } elseif (
@@ -1432,7 +1432,7 @@
                 isset($columns["created_at"])
             ) {
                 if (preg_match("/^[0-9]{1,4}$/", $val))
-                    $val.= "-12-31";
+                    $val.= "-12-31 23:59:59";
 
                 $where["created_at >"] = datetime($val);
             } elseif (
@@ -1440,7 +1440,7 @@
                 isset($columns["joined_at"])
             ) {
                 if (preg_match("/^[0-9]{1,4}$/", $val))
-                    $val.= "-01-01";
+                    $val.= "-01-01 00:00:00";
 
                 $where["joined_at <"] = datetime($val);
             } elseif (
@@ -1448,7 +1448,7 @@
                 isset($columns["joined_at"])
             ) {
                 if (preg_match("/^[0-9]{1,4}$/", $val))
-                    $val.= "-12-31";
+                    $val.= "-12-31 23:59:59";
 
                 $where["joined_at >"] = datetime($val);
             } elseif (
