@@ -4,8 +4,8 @@
     * A shim for translation support in the absence of GNU gettext.
     */
     class Translation {
-        const MO_MAGIC_WORD_BE = "950412de";
-        const MO_MAGIC_WORD_LE = "de120495";
+        const MO_MAGIC_WORD_BE = 0x950412de;
+        const MO_MAGIC_WORD_LE = 0xde120495;
         const MO_SIZEOF_HEADER = 28;
 
         # Array: $mo
@@ -38,7 +38,8 @@
             $path,
             $reload = false
         ): bool {
-            $filepath = $path.DIR.$this->locale.DIR."LC_MESSAGES".DIR.$domain.".mo";
+            $filepath = $path.DIR.$this->locale.DIR.
+                        "LC_MESSAGES".DIR.$domain.".mo";
 
             if (isset($this->mo[$domain]) and !$reload)
                 return true;
@@ -49,22 +50,24 @@
             $mo_file = file_get_contents($filepath);
             $mo_data = array();
             $mo_length = strlen($mo_file);
-            $big_endian = null;
 
             if (self::MO_SIZEOF_HEADER > $mo_length)
                 return false;
 
-            $id = unpack("H8magic", $mo_file);
+            $magic_word = unpack("Nmagic", $mo)["magic"];
 
-            if ($id["magic"] == self::MO_MAGIC_WORD_BE)
-                $big_endian = true;
+            switch ($magic_word) {
+                case self::MO_MAGIC_WORD_BE:
+                    $big_endian = true;
+                    break;
 
-            if ($id["magic"] == self::MO_MAGIC_WORD_LE)
-                $big_endian = false;
+                case self::MO_MAGIC_WORD_LE:
+                    $big_endian = false;
+                    break;
 
-            # Neither magic word matches; not a valid .mo file.
-            if (!isset($big_endian))
-                return false;
+                default:
+                    return false;
+            }
 
             $unpack = ($big_endian) ?
                 "Nformat/Nnum/Nor/Ntr" :
