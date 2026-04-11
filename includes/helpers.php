@@ -3971,7 +3971,10 @@
             $comp = $orig;
             $method = "\x00\x00";
 
-            if (strlen($name) > 0xffff or strlen($orig) > 0xffffffff)
+            if (
+                strlen($name) < 1 or !preg_match('//u', $name) or
+                strlen($name) > 0xffff or strlen($orig) > 0xffffffff
+            )
                 trigger_error(
                     __("Failed to create Zip archive."),
                     E_USER_WARNING
@@ -3993,7 +3996,7 @@
 
             $head = "\x50\x4b\x03\x04";         # Local file header signature.
             $head.= "\x14\x00";                 # Version needed to extract.
-            $head.= "\x00\x00";                 # General purpose bit flag.
+            $head.= "\x00\x08";                 # General purpose bit flag.
             $head.= $method;                    # Compression method.
             $head.= pack("v", $time);           # Last mod file time.
             $head.= pack("v", $date);           # Last mod file date.
@@ -4012,7 +4015,7 @@
             $cdir.= "\x50\x4b\x01\x02";         # Central file header signature.
             $cdir.= "\x00\x00";                 # Version made by.
             $cdir.= "\x14\x00";                 # Version needed to extract.
-            $cdir.= "\x00\x00";                 # General purpose bit flag.
+            $cdir.= "\x00\x08";                 # General purpose bit flag.
             $cdir.= $method;                    # Compression method.
             $cdir.= pack("v", $time);           # Last mod file time.
             $cdir.= pack("v", $date);           # Last mod file date.
