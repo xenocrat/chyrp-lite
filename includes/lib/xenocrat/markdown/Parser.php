@@ -19,7 +19,7 @@ use RuntimeException;
 abstract class Parser
 {
 	const VERSION_MAJOR = 4;
-	const VERSION_MINOR = 6;
+	const VERSION_MINOR = 7;
 	const VERSION_PATCH = 0;
 
 	/**
@@ -605,7 +605,44 @@ abstract class Parser
 	}
 
 	/**
-	 * Expand tabs into 1-4 spaces.
+	 * Count the length of a UTF-8 encoded string.
+	 *
+	 * @param string $text
+	 * @return int
+	 * @see https://datatracker.ietf.org/doc/html/rfc3629
+	 */
+	protected function utf8_strlen($text): int
+	{
+		if (function_exists('mb_strlen')) {
+			return mb_strlen($text, 'UTF-8');
+		}
+		$len = strlen($text);
+		$pos = 0;
+		$count = 0;
+		while ($pos < $len) {
+			$ord = ord($text[$pos]);
+			if ($ord < 128) {
+				$pos++;
+				$count++;
+			} elseif ($ord >> 3 === 30) {
+				$pos+= 4;
+				$count++;
+			} elseif ($ord >> 4 === 14) {
+				$pos+= 3;
+				$count++;
+			} elseif ($ord >> 5 === 6) {
+				$pos+= 2;
+				$count++;
+			} else {
+				// Unexpected continuation byte: move on.
+				$pos++;
+			}
+		}
+		return $count;
+	}
+
+	/**
+	 * Expand tabs into 1-4 occurrences of a replacement character.
 	 *
 	 * @param string $text
 	 * @return string
@@ -615,8 +652,6 @@ abstract class Parser
 		if ($text === '') {
 			return '';
 		}
-
-		$mb_str = function_exists('mb_strlen');
 		$expanded = '';
 		$lines = preg_split(
 				"/(\n)/",
@@ -634,10 +669,7 @@ abstract class Parser
 			);
 			foreach ($chunks as $chunk) {
 				if ($chunk === "\t") {
-					$length = $mb_str ?
-						mb_strlen($output, 'UTF-8') :
-						strlen($output);
-
+					$length = $this->utf8_strlen($output);
 					$output .= str_repeat($chr, 4 - ($length % 4));
 				} else {
 					$output .= $chunk;
