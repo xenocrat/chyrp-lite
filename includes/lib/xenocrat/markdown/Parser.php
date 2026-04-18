@@ -19,7 +19,7 @@ use RuntimeException;
 abstract class Parser
 {
 	const VERSION_MAJOR = 4;
-	const VERSION_MINOR = 7;
+	const VERSION_MINOR = 8;
 	const VERSION_PATCH = 0;
 
 	/**
@@ -654,11 +654,11 @@ abstract class Parser
 		}
 		$expanded = '';
 		$lines = preg_split(
-				"/(\n)/",
-				$text,
-				-1,
-				PREG_SPLIT_DELIM_CAPTURE
-			);
+			"/(\n)/",
+			$text,
+			-1,
+			PREG_SPLIT_DELIM_CAPTURE
+		);
 		foreach ($lines as $line) {
 			$output = '';
 			$chunks = preg_split(

@@ -52,7 +52,10 @@ trait QuoteTrait
 					$line = substr($line, 2);
 				} elseif (str_starts_with($line, '>')) {
 					$line = substr($line, 1);
-				} elseif ($this->detectLineType($lines, $i) === 'paragraph') {
+				} elseif (
+					end($content) !== ''
+					&& $this->detectLineType($lines, $i) === 'paragraph'
+				) {
 				// Lazy continuation line.
 					$line = $lines[$i];
 				} else {
