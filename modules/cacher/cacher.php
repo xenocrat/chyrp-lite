@@ -60,7 +60,11 @@
                     header("Vary: Accept-Encoding, Cookie, Save-Data, ETag");
 
                     if ($this->is_public_cacheable()) {
-                        header("Cache-Control: public, must-revalidate, stale-if-error, max-age=900");
+                        header(
+                            "Cache-Control:".
+                            " public, must-revalidate,".
+                            " max-age=900, stale-if-error=3600"
+                        );
                     } else {
                         header("Cache-Control: no-cache, private, max-age=3600");
                     }
@@ -93,7 +97,11 @@
                 header("Vary: Accept-Encoding, Cookie, Save-Data, ETag");
 
                 if ($this->is_public_cacheable()) {
-                    header("Cache-Control: public, must-revalidate, stale-if-error, max-age=900");
+                    header(
+                        "Cache-Control:".
+                        " public, must-revalidate,".
+                        " max-age=900, stale-if-error=3600"
+                    );
                 } else {
                     header("Cache-Control: no-cache, private, max-age=3600");
                 }
