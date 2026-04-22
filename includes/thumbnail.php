@@ -60,7 +60,11 @@
         header_remove("Expires");
         header_remove("Set-Cookie");
         header("Vary: Accept-Encoding, Save-Data");
-        header("Cache-Control: public, must-revalidate, stale-if-error, max-age=604800");
+        header(
+            "Cache-Control:".
+            " public, must-revalidate,".
+            " max-age=604800, stale-if-error=86400"
+        );
         redirect(uploaded($filename), code:301);
     }
 
@@ -72,7 +76,11 @@
             header_remove();
             header($_SERVER['SERVER_PROTOCOL']." 304 Not Modified");
             header("Vary: Accept-Encoding, Save-Data");
-            header("Cache-Control: public, must-revalidate, stale-if-error, max-age=2592000");
+            header(
+                "Cache-Control:".
+                " public, must-revalidate,".
+                " max-age=2592000, stale-if-error=86400"
+            );
             exit;
         }
     }
@@ -83,7 +91,11 @@
     header_remove("Set-Cookie");
     header("Last-Modified: ".date("r", filemtime($filepath)));
     header("Vary: Accept-Encoding, Save-Data");
-    header("Cache-Control: public, must-revalidate, stale-if-error, max-age=2592000");
+    header(
+        "Cache-Control:".
+        " public, must-revalidate,".
+        " max-age=2592000, stale-if-error=86400"
+    );
     header("Content-Disposition: inline; filename=\"".$safename."\"");
     $thumb->create();
     $thumb->serve();
