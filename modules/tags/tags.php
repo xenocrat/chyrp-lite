@@ -517,6 +517,9 @@
                     __("You do not have sufficient privileges to edit this post.")
                 );
 
+            if (!empty($_SESSION['redirect_to']))
+                $_SESSION['tags_redirect'] = $_SESSION['redirect_to'];
+
             $admin->display(
                 "pages".DIR."edit_tags",
                 array("post" => $post)
@@ -526,6 +529,10 @@
         public function admin_update_tags(
             $admin
         ): never {
+            $tags_redirect = "posts_tagged";
+
+            fallback($_SESSION['tags_redirect'], $tags_redirect);
+
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
@@ -560,7 +567,7 @@
 
             Flash::notice(
                 __("Tags updated.", "tags"),
-                "posts_tagged"
+                $_SESSION['tags_redirect']
             );
         }
 

@@ -56,12 +56,30 @@
 </td>
 <td class="controls">
 {%- if post.editable() -%}
-<a class="tags_edit_link edit_link emblem" href="{{ url('edit_tags/id/' ~ post.id) }}">
+<button type="button" class="tags_edit_link edit_link emblem inline_edit_button" data-post-id="{{ post.id }}" aria-label="{{ 'Edit' | translate }}">
 {{ icon_svg("edit.svg", "Edit" | translate) }}
-</a>
+</button>
 {%- else -%}
 {{ icon_svg("forbidden.svg", false, "emblem forbidden") }}
 {%- endif -%}
+</td>
+</tr>
+<tr id="edit_form_{{ post.id }}" class="inline_edit_form" style="display: none;">
+<td colspan="5">
+<form action="{{ url('update_tags') }}" method="post" accept-charset="UTF-8" class="inline_edit">
+<fieldset>
+<p>
+<label for="inline_tags_{{ post.id }}">{{ "Tags" | translate("tags") }}</label>
+<input type="text" name="tags" value="{{ post.tags | keys | join(', ') | fix(true, true) }}" id="inline_tags_{{ post.id }}" class="text">
+</p>
+<p class="buttons">
+<button type="submit" class="yay">{{ "Update" | translate }}</button>
+<button type="button" class="inline_edit_cancel" data-post-id="{{ post.id }}">{{ "Cancel" | translate }}</button>
+</p>
+<input type="hidden" name="hash" value="{{ authenticate() }}">
+<input type="hidden" name="id" value="{{ post.id }}">
+</fieldset>
+</form>
 </td>
 </tr>
 {% else %}
@@ -90,4 +108,22 @@
 {{ posts.next_link }}
 </div>
 {% endif %}
+<script>
+$(document).ready(function() {
+    $(".inline_edit_button").on("click", function(e) {
+        e.preventDefault();
+        var postId = $(this).data("post-id");
+        $("#post_" + postId).hide();
+        $("#edit_form_" + postId).show();
+        $("#inline_tags_" + postId).focus();
+    });
+
+    $(".inline_edit_cancel").on("click", function(e) {
+        e.preventDefault();
+        var postId = $(this).data("post-id");
+        $("#edit_form_" + postId).hide();
+        $("#post_" + postId).show();
+    });
+});
+</script>
 {% endblock %}
