@@ -19,7 +19,7 @@ use RuntimeException;
 abstract class Parser
 {
 	const VERSION_MAJOR = 4;
-	const VERSION_MINOR = 8;
+	const VERSION_MINOR = 9;
 	const VERSION_PATCH = 0;
 
 	/**
@@ -402,14 +402,20 @@ abstract class Parser
 		// Detect "parse" functions.
 		$reflection = new ReflectionClass($this);
 
-		foreach($reflection->getMethods(ReflectionMethod::IS_PROTECTED) as $method) {
+		foreach(
+			$reflection->getMethods(
+				ReflectionMethod::IS_PROTECTED
+			) as $method
+		) {
 			$methodName = $method->getName();
 			if (
 				str_starts_with($methodName, 'parse')
 				&& !str_ends_with($methodName, 'Markers')
 			) {
 				if (method_exists($this, $methodName.'Markers')) {
-					$array = call_user_func(array($this, $methodName.'Markers'));
+					$array = call_user_func(
+						array($this, $methodName.'Markers')
+					);
 					foreach($array as $marker) {
 						$markers[$marker] = $methodName;
 					}
@@ -435,7 +441,10 @@ abstract class Parser
 				// Put the longest marker first.
 				if (isset($this->_inlineMarkers[$m])) {
 					reset($this->_inlineMarkers[$m]);
-					if (strlen($marker) >= strlen(key($this->_inlineMarkers[$m]))) {
+					if (
+						strlen($marker) >=
+						strlen(key($this->_inlineMarkers[$m]))
+					) {
 						$this->_inlineMarkers[$m] = array_merge(
 							[$marker => $method], $this->_inlineMarkers[$m]
 						);
@@ -505,6 +514,46 @@ abstract class Parser
 		$paragraph[] = ['text', $text];
 		$this->_depth--;
 		return $paragraph;
+	}
+
+	/**
+	 * Detects if any inline elements overrun a substring.
+	 *
+	 * @param string $text - The inline text to search.
+	 * @param integer $length - Length of the substring.
+	 * @param array $elements - Inline element names to test.
+	 * @return boolean
+	 */
+	protected function detectInlineOverrun($text, $length, $elements): bool
+	{
+		foreach ($elements as $element) {
+			if (method_exists($this, 'parse'.$element.'Markers')) {
+				$markers = call_user_func(
+					array($this, 'parse'.$element.'Markers')
+				);
+				foreach ($markers as $marker) {
+					$pos = 0;
+					do {
+						$pos = strpos($text, $marker, $pos);
+						if ($pos !== false && $pos < $length) {
+							$arr = call_user_func(
+								array($this, 'parse'.$element),
+								substr($text, $pos)
+							);
+							if (
+								$arr[0][0] !== 'text'
+								&& $arr[1] > ($length - $pos)
+							) {
+								return true;
+							} else {
+								$pos += $arr[1];
+							}
+						}
+					} while ($pos !== false && $pos < $length);
+				}
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -611,7 +660,7 @@ abstract class Parser
 	 * @return int
 	 * @see https://datatracker.ietf.org/doc/html/rfc3629
 	 */
-	protected function utf8_strlen($text): int
+	protected function utf8Strlen($text): int
 	{
 		if (function_exists('mb_strlen')) {
 			return mb_strlen($text, 'UTF-8');
@@ -669,7 +718,7 @@ abstract class Parser
 			);
 			foreach ($chunks as $chunk) {
 				if ($chunk === "\t") {
-					$length = $this->utf8_strlen($output);
+					$length = $this->utf8Strlen($output);
 					$output .= str_repeat($chr, 4 - ($length % 4));
 				} else {
 					$output .= $chunk;

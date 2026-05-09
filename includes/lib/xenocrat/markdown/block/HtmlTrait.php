@@ -224,12 +224,12 @@ trait HtmlTrait
 	 *
 	 * @marker &
 	 */
-	protected function parseEntity($text): array
+	protected function parseEntity($markdown): array
 	{
 		if (
 			preg_match(
 				'/^&(\#[\d]{1,7}|\#[x][a-f0-9]{1,6}|[\w\d]{2,});/i',
-				$text,
+				$markdown,
 				$matches
 			)
 		) {
@@ -246,6 +246,9 @@ trait HtmlTrait
 	 */
 	protected function renderEntity($block): string
 	{
+		if (preg_match('/^&\#x?0+;$/', $block[1])) {
+			return "\u{FFFD}";
+		}
 		return $this->escapeHtmlEntities(
 			$this->unEscapeHtmlEntities(
 				$block[1],
@@ -265,25 +268,25 @@ trait HtmlTrait
 	 *
 	 * @marker <
 	 */
-	protected function parseLt($text): array
+	protected function parseLt($markdown): array
 	{
-		if (strpos($text, '>') !== false) {
+		if (strpos($markdown, '>') !== false) {
 			// First try bracketed link if we have LinkTrait.
 			if (method_exists($this, 'parseBracketedLink')) {
-				$block = $this->parseBracketedLink($text);
+				$block = $this->parseBracketedLink($markdown);
 				if ($block[0][0] !== 'text') {
 					return $block;
 				}
 			}
 			if (
 				// Comment.
-				preg_match('/^<!--(-?>|.*?-->)/s', $text, $matches)
+				preg_match('/^<!--(-?>|.*?-->)/s', $markdown, $matches)
 				// Processor.
-				|| preg_match('/^<\?.*?\?>/s', $text, $matches)
+				|| preg_match('/^<\?.*?\?>/s', $markdown, $matches)
 				// Declaration.
-				|| preg_match('/^<![a-z].*?>/is', $text, $matches)
+				|| preg_match('/^<![a-z].*?>/is', $markdown, $matches)
 				// CDATA.
-				|| preg_match('/^<!\[CDATA\[.*?\]\]>/s', $text, $matches)
+				|| preg_match('/^<!\[CDATA\[.*?\]\]>/s', $markdown, $matches)
 			) {
 				return [['lt', $matches[0]], strlen($matches[0])];
 			}
@@ -294,7 +297,7 @@ trait HtmlTrait
 						(?(1)\s*|(?:\s+[a-z_:][a-z0-9_:\.\-]*(?:\s*=\s*
 								(?(?=[\"\'])([\"\'])(?:(?!\2).)*\2|[^\s"\'=<>`]+)
 						)?)*\s*\/?)>/isx',
-					$text,
+					$markdown,
 					$matches
 				)
 			) {
@@ -322,7 +325,7 @@ trait HtmlTrait
 	 *
 	 * @marker >
 	 */
-	protected function parseGt($text): array
+	protected function parseGt($markdown): array
 	{
 		return [['text', '&gt;'], 1];
 	}
@@ -337,7 +340,7 @@ trait HtmlTrait
 	 *
 	 * @marker "
 	 */
-	protected function parseDoubleQuote($text): array
+	protected function parseDoubleQuote($markdown): array
 	{
 		return [['text', '&quot;'], 1];
 	}

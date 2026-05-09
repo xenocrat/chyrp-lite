@@ -238,15 +238,15 @@ trait LinkTrait
 	 *
 	 * @marker <
 	 */
-	protected function parseBracketedLink($text): array
+	protected function parseBracketedLink($markdown): array
 	{
-		if (strpos($text, '>') !== false) {
+		if (strpos($markdown, '>') !== false) {
 			if (!in_array('parseLink', $this->context)) {
 			// Do not allow links within links.
 				if (
 					preg_match(
 						'/^<([a-z][a-z0-9\+\.\-]{1,31}:[^\s<>]*)>/i',
-						$text,
+						$markdown,
 						$matches
 					)
 				) {
@@ -260,7 +260,7 @@ trait LinkTrait
 					];
 				} elseif (
 					preg_match('/^<([^\\\\\s>]*?@[^\s]*?\.\w+?)>/',
-						$text, $matches
+						$markdown, $matches
 					)
 				) {
 					// Email address.

@@ -26,7 +26,18 @@ trait StrikeoutTrait
 	{
 		if (
 			preg_match(
-				'/^(~{1,2})(?!~)(.*?([^~\\\\]|(?<=\\\\)~))\1(?!~)/s',
+				'/^
+					# Opening marker:
+					(~{1,2})
+					# First char cannot be a delimiter.
+					(?!~)
+					# Final capture char cannot be backslash or
+					# delimiter but can be an escaped delimiter:
+					(.*?([^~\\\\]|(?<=\\\\)~))
+					# Closing marker:
+					\1
+					# Next char must not be a delimiter.
+					(?!~)/sx',
 				str_replace(
 					'\\\\',
 					'\\\\'.chr(31),
@@ -45,47 +56,31 @@ trait StrikeoutTrait
 				'\\\\',
 				$matches[2]
 			);
-			$content = $matches[2];
-			$mw = strlen($matches[1]);
 			if (
-				// Inline HTML takes precedence.
-				(
-					!method_exists($this, 'parseLt')
-					|| ($pos = strpos($content, $this->parseLtMarkers()[0]))
-						=== false
-					|| ($arr = $this->parseLt(substr($markdown, ($mw + $pos))))[0][0]
-						=== 'text'
-					|| $arr[1] <= (strlen($content) - $pos)
-				)
-				// Inline link takes precedence.
-				&& (
-					!method_exists($this, 'parseLink')
-					|| ($pos = strpos($content, $this->parseLinkMarkers()[0]))
-						=== false
-					|| ($arr = $this->parseLink(substr($markdown, ($mw + $pos))))[0][0]
-						=== 'text'
-					|| $arr[1] <= (strlen($content) - $pos)
-				)
-				// Inline image takes precedence.
-				&& (
-					!method_exists($this, 'parseImage')
-					|| ($pos = strpos($content, $this->parseImageMarkers()[0]))
-						=== false
-					|| ($arr = $this->parseImage(substr($markdown, ($mw + $pos))))[0][0]
-						=== 'text'
-					|| $arr[1] <= (strlen($content) - $pos)
+				// Inline HTML, link, image, or code takes precedence.
+				!$this->detectInlineOverrun(
+					$markdown,
+					strlen($matches[0]),
+					['Lt', 'Link', 'Image', 'InlineCode']
 				)
 			) {
 				return [
 					[
 						'strike',
-						$this->parseInline($content)
+						$this->parseInline($matches[2])
 					],
 					strlen($matches[0])
 				];
 			}
 		}
-		return [['text', $markdown[0]], 1];
+		$spn = strspn($markdown, '~') ?: 1;
+		return [
+			[
+				'text',
+				str_repeat($markdown[0], $spn)
+			],
+			$spn
+		];
 	}
 
 	protected function renderStrike($block): string
@@ -95,6 +90,7 @@ trait StrikeoutTrait
 			. '</del>';
 	}
 
+	abstract protected function detectInlineOverrun($text, $length, $elements);
 	abstract protected function renderText($block);
 	abstract protected function parseInline($text);
 	abstract protected function renderAbsy($blocks);

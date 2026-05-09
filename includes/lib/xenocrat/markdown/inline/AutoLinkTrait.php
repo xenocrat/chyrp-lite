@@ -23,7 +23,7 @@ trait AutoLinkTrait
 	 * @marker www.
 	 * @marker http
 	 */
-	protected function parseAutoUrl($text): array
+	protected function parseAutoUrl($markdown): array
 	{
 		if (
 			!in_array('parseLink', $this->context)
@@ -34,7 +34,7 @@ trait AutoLinkTrait
 					# else match a link with title
 					|^(www\.|https?:\/\/)(([^\s<>()]+)|(?R))+(?<![\.,:;\'"!\?\s])
 					)/x',
-				$text,
+				$markdown,
 				$matches
 			)
 		) {
@@ -44,7 +44,7 @@ trait AutoLinkTrait
 				strlen($matches[0])
 			];
 		}
-		return [['text', substr($text, 0, 4)], 4];
+		return [['text', substr($markdown, 0, 4)], 4];
 	}
 
 	protected function renderAutoUrl($block): string

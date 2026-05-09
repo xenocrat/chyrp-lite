@@ -22,16 +22,14 @@ trait EmphStrongTrait
 	 *
 	 * @marker _
 	 * @marker *
+	 * @see https://www.unicode.org/reports/tr44/#General_Category_Values
 	 */
 	protected function parseEmphStrong($markdown): array
 	{
-		$marker = $markdown[0];
-
 		if (!isset($markdown[1])) {
 			return [['text', $markdown[0]], 1];
 		}
-
-		if ($marker == $markdown[1]) {
+		if (($marker = $markdown[0]) == $markdown[1]) {
 		// Strong.
 			// Avoid excessive regex backtracking if there is no closing marker.
 			if (strpos($markdown, $marker . $marker, 2) === false) {
@@ -45,13 +43,41 @@ trait EmphStrongTrait
 			if (
 				$marker === '*'
 				&& preg_match(
-					'/^[*]{2}((?>\\\\[*]|[^*]|[*][^*]*[*])+?)[*]{2}/s',
+					'/^
+						# Opening marker:
+						[*]{2}
+						# First char cannot be whitespace.
+						# First char cannot be Unicode category Zs, Pe, Pf.
+						(?![\s\p{Zs}\p{Pe}\p{Pf}])
+						# Capture two or more matched backticks (possible code)
+						# matched nested markers, escaped marker, or other char:
+						((?>(`{2,})(?!`).*?[^`]\2(?!`)|([*]+)[^*]*\3|\\\\[*]|[^*])+?)
+						# Last char cannot be whitespace.
+						# Last char cannot be Unicode category Zs, Ps, Pi.
+						(?<![\s\p{Zs}\p{Ps}\p{Pi}])
+						# Closing marker:
+						[*]{2}/usx',
 					$regexable,
 					$matches
 				)
 				|| $marker === '_'
 				&& preg_match(
-					'/^__((?>\\\\_|[^_]|_[^_]*_)+?)__\b/us',
+					'/^
+						# Opening marker:
+						__
+						# First char cannot be whitespace.
+						# First char cannot be Unicode category Zs, Pe, Pf.
+						(?![\s\p{Zs}\p{Pe}\p{Pf}])
+						# Capture two or more matched backticks (possible code)
+						# matched nested markers, escaped marker, or other char:
+						((?>(`{2,})(?!`).*?[^`]\2(?!`)|(_+)[^_]*\3|\\\\_|[^_])+?)
+						# Last char cannot be whitespace.
+						# Last char cannot be Unicode category Zs, Ps, Pi.
+						(?<![\s\p{Zs}\p{Ps}\p{Pi}])
+						# Closing marker:
+						__
+						# Next char after the closing marker must be non-word.
+						\b/usx',
 					$regexable,
 					$matches
 				)
@@ -66,48 +92,18 @@ trait EmphStrongTrait
 					'\\\\',
 					$matches[1]
 				);
-				$content = $matches[1];
 				if (
-					// Strong cannot be empty.
-					$content !== ''
-					// First char cannot be a space separator, close or final punctuation.
-					// Last char cannot be a space separator, open or initial punctuation.
-					&& preg_match(
-						'/^(?![\s\p{Zs}\p{Pe}\p{Pf}]).+(?<![\s\p{Zs}\p{Ps}\p{Pi}])$/us',
-						$content
-					)
-					// Inline HTML takes precedence.
-					&& (
-						!method_exists($this, 'parseLt')
-						|| ($pos = strpos($content, $this->parseLtMarkers()[0]))
-							=== false
-						|| ($arr = $this->parseLt(substr($markdown, (2 + $pos))))[0][0]
-							=== 'text'
-						|| $arr[1] <= (strlen($content) - $pos)
-					)
-					// Inline link takes precedence.
-					&& (
-						!method_exists($this, 'parseLink')
-						|| ($pos = strpos($content, $this->parseLinkMarkers()[0]))
-							=== false
-						|| ($arr = $this->parseLink(substr($markdown, (2 + $pos))))[0][0]
-							=== 'text'
-						|| $arr[1] <= (strlen($content) - $pos)
-					)
-					// Inline image takes precedence.
-					&& (
-						!method_exists($this, 'parseImage')
-						|| ($pos = strpos($content, $this->parseImageMarkers()[0]))
-							=== false
-						|| ($arr = $this->parseImage(substr($markdown, (2 + $pos))))[0][0]
-							=== 'text'
-						|| $arr[1] <= (strlen($content) - $pos)
+					// Inline HTML, link, image, or code takes precedence.
+					!$this->detectInlineOverrun(
+						$markdown,
+						strlen($matches[0]),
+						['Lt', 'Link', 'Image', 'InlineCode']
 					)
 				) {
 					return [
 						[
 							'strong',
-							$this->parseInline($content),
+							$this->parseInline($matches[1]),
 						],
 						strlen($matches[0])
 					];
@@ -127,13 +123,45 @@ trait EmphStrongTrait
 			if (
 				$marker === '*'
 				&& preg_match(
-					'/^[*]((?>\\\\[*]|[^*]|[*][*][^*]+?[*][*])+?)[*](?![*][^*])/s',
+					'/^
+						# Opening marker:
+						[*]
+						# First char cannot be whitespace.
+						# First char cannot be Unicode category Zs, Pe, Pf.
+						(?![\s\p{Zs}\p{Pe}\p{Pf}])
+						# Capture two or more matched backticks (possible code)
+						# matched nested markers, escaped marker, or other char.
+						((?>(`{2,})(?!`).*?[^`]\2(?!`)|([*]+)[^*]*\3|\\\\[*]|[^*])+?)
+						# Last char cannot be whitespace.
+						# Last char cannot be Unicode category Zs, Ps, Pi.
+						(?<![\s\p{Zs}\p{Ps}\p{Pi}])
+						# Closing marker:
+						[*]
+						# Emphasis closing marker cannot form a strong marker.
+						(?![*][^*])/usx',
 					$regexable,
 					$matches
 				)
 				|| $marker === '_'
 				&& preg_match(
-					'/^_((?>\\\\_|[^_]|__[^_]*__)+?)_(?!_[^_])\b/us',
+					'/^
+						# Opening marker:
+						_
+						# First char cannot be whitespace.
+						# First char cannot be Unicode category Zs, Pe, Pf.
+						(?![\s\p{Zs}\p{Pe}\p{Pf}])
+						# Capture two or more matched backticks (possible code)
+						# matched nested markers, escaped marker, or other char.
+						((?>(`{2,})(?!`).*?[^`]\2(?!`)|(_+)[^_]*\3|\\\\_|[^_])+?)
+						# Last char cannot be whitespace.
+						# Last char cannot be Unicode category Zs, Ps, Pi.
+						(?<![\s\p{Zs}\p{Ps}\p{Pi}])
+						# Closing marker:
+						_
+						# Emphasis closing marker cannot form a strong marker.
+						(?!_[^_])
+						# Next char after the closing marker must be non-word.
+						\b/usx',
 					$regexable,
 					$matches
 				)
@@ -148,55 +176,24 @@ trait EmphStrongTrait
 					'\\\\',
 					$matches[1]
 				);
-				$content = $matches[1];
 				if (
-					// Emphasis cannot be empty.
-					$content !== ''
-					// First char cannot be a space separator, close or final punctuation.
-					// Last char cannot be a space separator, open or initial punctuation.
-					&& preg_match(
-						'/^(?![\s\p{Zs}\p{Pe}\p{Pf}]).+(?<![\s\p{Zs}\p{Ps}\p{Pi}])$/us',
-						$content
-					)
-					// Inline HTML takes precedence.
-					&& (
-						!method_exists($this, 'parseLt')
-						|| ($pos = strpos($content, $this->parseLtMarkers()[0]))
-							=== false
-						|| ($arr = $this->parseLt(substr($markdown, (1 + $pos))))[0][0]
-							=== 'text'
-						|| $arr[1] <= (strlen($content) - $pos)
-					)
-					// Inline link takes precedence.
-					&& (
-						!method_exists($this, 'parseLink')
-						|| ($pos = strpos($content, $this->parseLinkMarkers()[0]))
-							=== false
-						|| ($arr = $this->parseLink(substr($markdown, (1 + $pos))))[0][0]
-							=== 'text'
-						|| $arr[1] <= (strlen($content) - $pos)
-					)
-					// Inline image takes precedence.
-					&& (
-						!method_exists($this, 'parseImage')
-						|| ($pos = strpos($content, $this->parseImageMarkers()[0]))
-							=== false
-						|| ($arr = $this->parseImage(substr($markdown, (1 + $pos))))[0][0]
-							=== 'text'
-						|| $arr[1] <= (strlen($content) - $pos)
+					// Inline HTML, link, image, or code takes precedence.
+					!$this->detectInlineOverrun(
+						$markdown,
+						strlen($matches[0]),
+						['Lt', 'Link', 'Image', 'InlineCode']
 					)
 				) {
 					return [
 						[
 							'emph',
-							$this->parseInline($content),
+							$this->parseInline($matches[1]),
 						],
 						strlen($matches[0])
 					];
 				}
 			}
 		}
-
 		return [['text', $markdown[0]], 1];
 	}
 
@@ -214,6 +211,7 @@ trait EmphStrongTrait
 			. '</em>';
 	}
 
+	abstract protected function detectInlineOverrun($text, $length, $elements);
 	abstract protected function renderText($block);
 	abstract protected function parseInline($text);
 	abstract protected function renderAbsy($blocks);

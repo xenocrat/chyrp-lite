@@ -26,7 +26,18 @@ trait SupSubTrait
 	{
 		if (
 			preg_match(
-				'/^\+\+(?!\+)(.*?([^\+\\\\]|(?<=\\\\)\+))\+\+(?!\+)/s',
+				'/^
+					# Opening marker:
+					(\+{2,})
+					# First char cannot be a delimiter.
+					(?!\+)
+					# Final capture char cannot be backslash or
+					# delimiter but can be an escaped delimiter:
+					(.*?([^\+\\\\]|(?<=\\\\)\+))
+					# Closing marker:
+					\1
+					# Next char must not be a delimiter.
+					(?!\+)/sx',
 				str_replace(
 					'\\\\',
 					'\\\\'.chr(31),
@@ -40,51 +51,36 @@ trait SupSubTrait
 				'\\\\',
 				$matches[0]
 			);
-			$matches[1] = str_replace(
+			$matches[2] = str_replace(
 				'\\\\'.chr(31),
 				'\\\\',
-				$matches[1]
+				$matches[2]
 			);
-			$content = $matches[1];
 			if (
-				// Inline HTML takes precedence.
-				(
-					!method_exists($this, 'parseLt')
-					|| ($pos = strpos($content, $this->parseLtMarkers()[0]))
-						=== false
-					|| ($arr = $this->parseLt(substr($markdown, (2 + $pos))))[0][0]
-						=== 'text'
-					|| $arr[1] <= (strlen($content) - $pos)
-				)
-				// Inline link takes precedence.
-				&& (
-					!method_exists($this, 'parseLink')
-					|| ($pos = strpos($content, $this->parseLinkMarkers()[0]))
-						=== false
-					|| ($arr = $this->parseLink(substr($markdown, (2 + $pos))))[0][0]
-						=== 'text'
-					|| $arr[1] <= (strlen($content) - $pos)
-				)
-				// Inline image takes precedence.
-				&& (
-					!method_exists($this, 'parseImage')
-					|| ($pos = strpos($content, $this->parseImageMarkers()[0]))
-						=== false
-					|| ($arr = $this->parseImage(substr($markdown, (2 + $pos))))[0][0]
-						=== 'text'
-					|| $arr[1] <= (strlen($content) - $pos)
+				// Inline HTML, link, image, or code takes precedence.
+				!$this->detectInlineOverrun(
+					$markdown,
+					strlen($matches[0]),
+					['Lt', 'Link', 'Image', 'InlineCode']
 				)
 			) {
 				return [
 					[
 						'sup',
-						$this->parseInline($content)
+						$this->parseInline($matches[2])
 					],
 					strlen($matches[0])
 				];
 			}
 		}
-		return [['text', $markdown[0] . $markdown[1]], 2];
+		$spn = strspn($markdown, '+') ?: 1;
+		return [
+			[
+				'text',
+				str_repeat($markdown[0], $spn)
+			],
+			$spn
+		];
 	}
 
 	protected function renderSup($block): string
@@ -108,7 +104,18 @@ trait SupSubTrait
 	{
 		if (
 			preg_match(
-				'/^--(?!-)(.*?([^-\\\\]|(?<=\\\\)-))--(?!-)/s',
+				'/^
+					# Opening marker:
+					(-{2,})
+					# First char cannot be a delimiter.
+					(?!-)
+					# Final capture char cannot be backslash or
+					# delimiter but can be an escaped delimiter:
+					(.*?([^-\\\\]|(?<=\\\\)-))
+					# Closing marker:
+					\1
+					# Next char must not be a delimiter.
+					(?!-)/sx',
 				str_replace(
 					'\\\\',
 					'\\\\'.chr(31),
@@ -122,51 +129,36 @@ trait SupSubTrait
 				'\\\\',
 				$matches[0]
 			);
-			$matches[1] = str_replace(
+			$matches[2] = str_replace(
 				'\\\\'.chr(31),
 				'\\\\',
-				$matches[1]
+				$matches[2]
 			);
-			$content = $matches[1];
 			if (
-				// Inline HTML takes precedence.
-				(
-					!method_exists($this, 'parseLt')
-					|| ($pos = strpos($content, $this->parseLtMarkers()[0]))
-						=== false
-					|| ($arr = $this->parseLt(substr($markdown, (2 + $pos))))[0][0]
-						=== 'text'
-					|| $arr[1] <= (strlen($content) - $pos)
-				)
-				// Inline link takes precedence.
-				&& (
-					!method_exists($this, 'parseLink')
-					|| ($pos = strpos($content, $this->parseLinkMarkers()[0]))
-						=== false
-					|| ($arr = $this->parseLink(substr($markdown, (2 + $pos))))[0][0]
-						=== 'text'
-					|| $arr[1] <= (strlen($content) - $pos)
-				)
-				// Inline image takes precedence.
-				&& (
-					!method_exists($this, 'parseImage')
-					|| ($pos = strpos($content, $this->parseImageMarkers()[0]))
-						=== false
-					|| ($arr = $this->parseImage(substr($markdown, (2 + $pos))))[0][0]
-						=== 'text'
-					|| $arr[1] <= (strlen($content) - $pos)
+				// Inline HTML, link, or image takes precedence.
+				!$this->detectInlineOverrun(
+					$markdown,
+					strlen($matches[0]),
+					['Lt', 'Link', 'Image']
 				)
 			) {
 				return [
 					[
 						'sub',
-						$this->parseInline($content)
+						$this->parseInline($matches[2])
 					],
 					strlen($matches[0])
 				];
 			}
 		}
-		return [['text', $markdown[0] . $markdown[1]], 2];
+		$spn = strspn($markdown, '-') ?: 1;
+		return [
+			[
+				'text',
+				str_repeat($markdown[0], $spn)
+			],
+			$spn
+		];
 	}
 
 	protected function renderSub($block): string
@@ -176,6 +168,7 @@ trait SupSubTrait
 			. '</sub>';
 	}
 
+	abstract protected function detectInlineOverrun($text, $length, $elements);
 	abstract protected function renderText($block);
 	abstract protected function parseInline($text);
 	abstract protected function renderAbsy($blocks);

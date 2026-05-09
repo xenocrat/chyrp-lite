@@ -21,12 +21,27 @@ trait CiteTrait
 	 * Parses the cite feature.
 	 *
 	 * @marker *_
+	 * @see https://www.unicode.org/reports/tr44/#General_Category_Values
 	 */
 	protected function parseCite($markdown): array
 	{
 		if (
 			preg_match(
-				'/^\*_(.*?[^\\\\])_\*/s',
+				'/^
+					# Opening marker:
+					\*(_{1,})
+					# First char cannot be a delimiter.
+					# First char cannot be whitespace.
+					# First char cannot be Unicode category Zs, Pe, Pf.
+					(?![_\s\p{Zs}\p{Pe}\p{Pf}])
+					# Final capture char cannot be backslash or
+					# delimiter but can be an escaped delimiter:
+					(.*?([^_\\\\]|(?<=\\\\)_))
+					# Last char cannot be whitespace.
+					# Last char cannot be Unicode category Zs, Ps, Pi.
+					(?<![\s\p{Zs}\p{Ps}\p{Pi}])
+					# Closing marker:
+					\1\*/usx',
 				str_replace(
 					'\\\\',
 					'\\\\'.chr(31),
@@ -40,51 +55,29 @@ trait CiteTrait
 				'\\\\',
 				$matches[0]
 			);
-			$matches[1] = str_replace(
+			$matches[2] = str_replace(
 				'\\\\'.chr(31),
 				'\\\\',
-				$matches[1]
+				$matches[2]
 			);
-			$content = $matches[1];
 			if (
-				// Inline HTML takes precedence.
-				(
-					!method_exists($this, 'parseLt')
-					|| ($pos = strpos($content, $this->parseLtMarkers()[0]))
-						=== false
-					|| ($arr = $this->parseLt(substr($markdown, (2 + $pos))))[0][0]
-						=== 'text'
-					|| $arr[1] <= (strlen($content) - $pos)
-				)
-				// Inline link takes precedence.
-				&& (
-					!method_exists($this, 'parseLink')
-					|| ($pos = strpos($content, $this->parseLinkMarkers()[0]))
-						=== false
-					|| ($arr = $this->parseLink(substr($markdown, (2 + $pos))))[0][0]
-						=== 'text'
-					|| $arr[1] <= (strlen($content) - $pos)
-				)
-				// Inline image takes precedence.
-				&& (
-					!method_exists($this, 'parseImage')
-					|| ($pos = strpos($content, $this->parseImageMarkers()[0]))
-						=== false
-					|| ($arr = $this->parseImage(substr($markdown, (2 + $pos))))[0][0]
-						=== 'text'
-					|| $arr[1] <= (strlen($content) - $pos)
+				// Inline HTML, link, image, or code takes precedence.
+				!$this->detectInlineOverrun(
+					$markdown,
+					strlen($matches[0]),
+					['Lt', 'Link', 'Image', 'InlineCode']
 				)
 			) {
 				return [
 					[
 						'cite',
-						$this->parseInline($content)
+						$this->parseInline($matches[2])
 					],
 					strlen($matches[0])
 				];
 			}
 		}
-		return [['text', $markdown[0] . $markdown[1]], 2];
+		return [['text', $markdown[0]], 1];
 	}
 
 	protected function renderCite($block): string
@@ -94,6 +87,7 @@ trait CiteTrait
 			. '</cite>';
 	}
 
+	abstract protected function detectInlineOverrun($text, $length, $elements);
 	abstract protected function renderText($block);
 	abstract protected function parseInline($text);
 	abstract protected function renderAbsy($blocks);

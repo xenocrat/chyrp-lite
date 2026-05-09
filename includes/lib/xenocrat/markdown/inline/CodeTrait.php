@@ -22,12 +22,22 @@ trait CodeTrait
 	 *
 	 * @marker `
 	 */
-	protected function parseInlineCode($text): array
+	protected function parseInlineCode($markdown): array
 	{
 		if (
 			preg_match(
-				'/^(`+)(?!`)(.*?[^`])\1(?!`)/s',
-				$text,
+				'/^
+					# Opening marker:
+					(`+)
+					# First char cannot be a delimiter.
+					(?!`)
+					# Final capture char cannot be a delimiter:
+					(.*?[^`])
+					# Closing marker:
+					\1
+					# Next char must not be a delimiter.
+					(?!`)/sx',
+				$markdown,
 				$matches
 			)
 		) {
@@ -35,8 +45,8 @@ trait CodeTrait
 			if (
 				strlen($code) > 2
 				&& ltrim($code, ' ') !== ''
-				&& substr($code, 0, 1) === ' '
-				&& substr($code, -1) === ' '
+				&& str_starts_with($code, ' ')
+				&& str_ends_with($code, ' ')
 			) {
 				$code = substr($code, 1, -1);
 			}
@@ -48,7 +58,14 @@ trait CodeTrait
 				strlen($matches[0])
 			];
 		}
-		return [['text', $text[0]], 1];
+		$spn = strspn($markdown, '`') ?: 1;
+		return [
+			[
+				'text',
+				str_repeat($markdown[0], $spn)
+			],
+			$spn
+		];
 	}
 
 	protected function renderInlineCode($block): string

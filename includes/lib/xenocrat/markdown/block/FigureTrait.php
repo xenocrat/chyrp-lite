@@ -49,14 +49,12 @@ trait FigureTrait
 			if (ltrim($line) !== '') {
 				if (str_starts_with($line, ':: ')) {
 					$caption[$i] = substr($line, 3);
-					continue;
 				} elseif (str_starts_with($line, '::')) {
 					$caption[$i] = substr($line, 2);
-					continue;
 				} elseif (str_starts_with($line, ': ')) {
-					$content[] = substr($line, 2);
+					$content[$i] = substr($line, 2);
 				} elseif (str_starts_with($line, ':')) {
-					$content[] = substr($line, 1);
+					$content[$i] = substr($line, 1);
 				} else {
 					--$i;
 					break;
@@ -66,19 +64,22 @@ trait FigureTrait
 			}
 		}
 
+		$kf = array_key_first($content);
+		$kl = array_key_last($content);
+
 		// Decide caption placement and remove invalid lines.
 		if (isset($caption[$current])) {
 			$endcap = false;
-			for ($x = $current; $x < $i; $x++) { 
-				if ($x !== $current && !isset($caption[$x - 1])) {
-					unset($caption[$x]);
+			foreach ($caption as $key => $value) {
+				if ($key > $kf) {
+					unset($caption[$key]);
 				}
 			}
-		} elseif (isset($caption[$i - 1])) {
+		} elseif (isset($caption[$kl + 1])) {
 			$endcap = true;
-			for ($x = $i - 1; $x >= $current; $x--) { 
-				if ($x !== $i - 1 && !isset($caption[$x + 1])) {
-					unset($caption[$x]);
+			foreach ($caption as $key => $value) {
+				if ($key < $kl) {
+					unset($caption[$key]);
 				}
 			}
 		} else {
@@ -89,7 +90,7 @@ trait FigureTrait
 		$block = [
 			'figure',
 			'endcap' => $endcap,
-			'content' => $this->parseBlocks($content),
+			'content' => $this->parseBlocks(array_values($content)),
 			'caption' => $this->parseBlocks(array_values($caption)),
 		];
 
@@ -109,7 +110,8 @@ trait FigureTrait
 
 		if ($block['endcap'] === false) {
 			$figure = "<figure>\n"
-				. $caption . $this->renderAbsy($block['content'])
+				. $caption
+				. $this->renderAbsy($block['content'])
 				. "</figure>\n";
 		} else {
 			$figure = "<figure>\n"

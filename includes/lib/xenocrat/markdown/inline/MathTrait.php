@@ -22,15 +22,21 @@ trait MathTrait
 	 *
 	 * @marker $`
 	 */
-	protected function parseMath($text): array
+	protected function parseMath($markdown): array
 	{
 		if (
 			preg_match(
-				'/^\$`(.*?[^\\\\])`\$/s',
+				'/^
+					# Opening marker:
+					\$`
+					# Final capture char cannot be a delimiter:
+					(.*?[^\\\\])
+					# Closing marker:
+					`\$/sx',
 				str_replace(
 					'\\\\',
 					'\\\\'.chr(31),
-					$text
+					$markdown
 				),
 				$matches
 			)
@@ -62,7 +68,7 @@ trait MathTrait
 				strlen($matches[0])
 			];
 		}
-		return [['text', $text[0] . $text[1]], 2];
+		return [['text', $markdown[0] . $markdown[1]], 2];
 	}
 
 	protected function renderInlineMath($block): string
