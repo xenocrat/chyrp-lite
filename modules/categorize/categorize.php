@@ -369,7 +369,7 @@
 
             Flash::notice(
                 __("Category added.", "categorize"),
-                "manage_category"
+                fallback($_SESSION['admin_redirect_to'], "manage_category")
             );
         }
 
@@ -461,7 +461,7 @@
 
             Flash::notice(
                 __("Category updated.", "categorize"),
-                "manage_category"
+                fallback($_SESSION['admin_redirect_to'], "manage_category")
             );
         }
 
@@ -497,6 +497,8 @@
 
         public function admin_destroy_category(
         ): never {
+            fallback($_SESSION['admin_redirect_to'], "manage_category");
+
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
@@ -511,7 +513,7 @@
                 );
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
-                redirect("manage_category");
+                redirect($_SESSION['admin_redirect_to']);
 
             $category = new Category($_POST['id']);
 
@@ -530,7 +532,7 @@
             Category::delete($category->id);
             Flash::notice(
                 __("Category deleted.", "categorize"),
-                "manage_category"
+                $_SESSION['admin_redirect_to']
             );
         }
     }
