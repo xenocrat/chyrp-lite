@@ -302,14 +302,14 @@
 
             $post = Feathers::$instances[$_POST['feather']]->submit();
 
-            $post_redirect = (Post::any_editable() or Post::any_deletable()) ?
+            $redirect_to = (Post::any_editable() or Post::any_deletable()) ?
                 "manage_posts" :
                 "/" ;
 
             Flash::notice(
                 __("Post created!").' <a href="'.$post->url().'">'.
                 __("View post!").'</a>',
-                $post_redirect
+                $redirect_to
             );
         }
 
@@ -345,9 +345,6 @@
                     __("You do not have sufficient privileges to edit this post.")
                 );
 
-            if (!empty($_SESSION['redirect_to']))
-                $_SESSION['post_redirect'] = $_SESSION['redirect_to'];
-
             $options = array();
             $trigger->filter($options, "edit_post_options", $post, $post->feather);
             $trigger->filter($options, "post_options", $post, $post->feather);
@@ -370,12 +367,7 @@
         public function admin_update_post(
         ): never {
             $visitor = Visitor::current();
-
-            $post_redirect = (Post::any_editable() or Post::any_deletable()) ?
-                "manage_posts" :
-                "/" ;
-
-            fallback($_SESSION['post_redirect'], $post_redirect);
+            fallback($_SESSION['admin_redirect_to'], "manage_posts");
 
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
@@ -384,7 +376,7 @@
                 );
 
             if (isset($_POST['cancel']))
-                redirect($_SESSION['post_redirect']);
+                redirect($_SESSION['admin_redirect_to']);
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(
@@ -421,7 +413,7 @@
             Flash::notice(
                 __("Post updated.").' <a href="'.$post->url().'">'.
                 __("View post!").'</a>',
-                $_SESSION['post_redirect']
+                $_SESSION['admin_redirect_to']
             );
         }
 
@@ -467,6 +459,8 @@
          */
         public function admin_destroy_post(
         ): never {
+            fallback($_SESSION['admin_redirect_to'], "manage_posts");
+
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
@@ -481,7 +475,7 @@
                 );
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
-                redirect("manage_posts");
+                redirect($_SESSION['admin_redirect_to']);
 
             $post = new Post($_POST['id'], array("drafts" => true));
 
@@ -501,7 +495,7 @@
 
             Flash::notice(
                 __("Post deleted."),
-                "manage_posts"
+                $_SESSION['admin_redirect_to']
             );
         }
 
@@ -724,14 +718,14 @@
                 clean:sanitize($_POST['slug'], true, true, 128)
             );
 
-            $page_redirect = ($visitor->group->can("edit_page", "delete_page")) ?
+            $redirect_to = ($visitor->group->can("edit_page", "delete_page")) ?
                 "manage_pages" :
                 "/" ;
 
             Flash::notice(
                 __("Page created!").' <a href="'.$page->url().'">'.
                 __("View page!").'</a>',
-                $page_redirect
+                $redirect_to
             );
         }
 
@@ -765,9 +759,6 @@
                     __("Page not found.")
                 );
 
-            if (!empty($_SESSION['redirect_to']))
-                $_SESSION['page_redirect'] = $_SESSION['redirect_to'];
-
             $this->display(
                 "pages".DIR."edit_page",
                 array(
@@ -788,12 +779,7 @@
         public function admin_update_page(
         ): never {
             $visitor = Visitor::current();
-
-            $page_redirect = ($visitor->group->can("edit_page", "delete_page")) ?
-                "manage_pages" :
-                "/" ;
-
-            fallback($_SESSION['page_redirect'], $page_redirect);
+            fallback($_SESSION['admin_redirect_to'], "manage_pages");
 
             if (!$visitor->group->can("edit_page"))
                 show_403(
@@ -808,7 +794,7 @@
                 );
 
             if (isset($_POST['cancel']))
-                redirect($_SESSION['page_redirect']);
+                redirect($_SESSION['admin_redirect_to']);
 
             if (empty($_POST['id']) or !is_numeric($_POST['id']))
                 error(
@@ -877,7 +863,7 @@
             Flash::notice(
                 __("Page updated.").' <a href="'.$page->url().'">'.
                 __("View page!").'</a>',
-                $_SESSION['page_redirect']
+                $_SESSION['admin_redirect_to']
             );
         }
 
@@ -920,6 +906,8 @@
          */
         public function admin_destroy_page(
         ): never {
+            fallback($_SESSION['admin_redirect_to'], "manage_pages");
+
             if (!Visitor::current()->group->can("delete_page"))
                 show_403(
                     __("Access Denied"),
@@ -940,7 +928,7 @@
                 );
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
-                redirect("manage_pages");
+                redirect($_SESSION['admin_redirect_to']);
 
             $page = new Page($_POST['id']);
 
@@ -968,7 +956,7 @@
 
             Flash::notice(
                 __("Page deleted."),
-                "manage_pages"
+                $_SESSION['admin_redirect_to']
             );
         }
 
@@ -1177,7 +1165,7 @@
 
             Flash::notice(
                 __("User added."),
-                "manage_users"
+                fallback($_SESSION['admin_redirect_to'], "manage_users")
             );
         }
 
@@ -1375,7 +1363,7 @@
 
             Flash::notice(
                 __("User updated."),
-                "manage_users"
+                fallback($_SESSION['admin_redirect_to'], "manage_users")
             );
         }
 
@@ -1429,6 +1417,8 @@
          */
         public function admin_destroy_user(
         ): never {
+            fallback($_SESSION['admin_redirect_to'], "manage_users");
+
             if (!Visitor::current()->group->can("delete_user"))
                 show_403(
                     __("Access Denied"),
@@ -1449,7 +1439,7 @@
                 );
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
-                redirect("manage_users");
+                redirect($_SESSION['admin_redirect_to']);
 
             $user = new User($_POST['id']);
 
@@ -1511,7 +1501,7 @@
 
             Flash::notice(
                 __("User deleted."),
-                "manage_users"
+                $_SESSION['admin_redirect_to']
             );
         }
 
@@ -1638,7 +1628,7 @@
 
             Flash::notice(
                 __("Group added."),
-                "manage_groups"
+                fallback($_SESSION['admin_redirect_to'], "manage_groups")
             );
         }
 
@@ -1750,7 +1740,7 @@
 
             Flash::notice(
                 __("Group updated."),
-                "manage_groups"
+                fallback($_SESSION['admin_redirect_to'], "manage_groups")
             );
         }
 
@@ -1807,6 +1797,8 @@
          */
         public function admin_destroy_group(
         ): never {
+            fallback($_SESSION['admin_redirect_to'], "manage_groups");
+
             if (!Visitor::current()->group->can("delete_group"))
                 show_403(
                     __("Access Denied"),
@@ -1827,7 +1819,7 @@
                 );
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
-                redirect("manage_groups");
+                redirect($_SESSION['admin_redirect_to']);
 
             $group = new Group($_POST['id']);
 
@@ -1927,7 +1919,7 @@
 
             Flash::notice(
                 __("Group deleted."),
-                "manage_groups"
+                $_SESSION['admin_redirect_to']
             );
         }
 
@@ -2104,7 +2096,7 @@
 
             Flash::notice(
                 __("Upload updated."),
-                "manage_uploads"
+                fallback($_SESSION['admin_redirect_to'], "manage_uploads")
             );
         }
 
@@ -2187,6 +2179,8 @@
          */
         public function admin_destroy_upload(
         ): never {
+            fallback($_SESSION['admin_redirect_to'], "manage_uploads");
+
             if (!Visitor::current()->group->can("delete_upload"))
                 show_403(
                     __("Access Denied"),
@@ -2200,7 +2194,7 @@
                 );
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
-                redirect("manage_uploads");
+                redirect($_SESSION['admin_redirect_to']);
 
             if (!isset($_POST['file']))
                 error(
@@ -2232,12 +2226,12 @@
             if (delete_upload($filename)) {
                 Flash::notice(
                     __("Upload deleted."),
-                    "manage_uploads"
+                    $_SESSION['admin_redirect_to']
                 );
             } else {
                 Flash::warning(
                     __("Failed to delete upload."),
-                    "manage_uploads"
+                    $_SESSION['admin_redirect_to']
                 );
             }
         }
