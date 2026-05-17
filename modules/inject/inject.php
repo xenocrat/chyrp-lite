@@ -297,7 +297,7 @@
 
             Flash::notice(
                 __("Injector added.", "inject"),
-                "manage_injectors"
+                fallback($_SESSION['admin_redirect_to'], "manage_injectors")
             );
         }
 
@@ -392,7 +392,7 @@
 
             Flash::notice(
                 __("Injector updated.", "inject"),
-                "manage_injectors"
+                fallback($_SESSION['admin_redirect_to'], "manage_injectors")
             );
         }
 
@@ -431,6 +431,8 @@
 
         public function admin_destroy_injector(
         ): never {
+            fallback($_SESSION['admin_redirect_to'], "manage_injectors");
+
             if (!Visitor::current()->group->can("change_settings"))
                 show_403(
                     __("Access Denied"),
@@ -451,7 +453,7 @@
                 );
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
-                redirect("manage_injectors");
+                redirect($_SESSION['admin_redirect_to']);
 
             $id = $_POST['id'];
 
@@ -470,7 +472,7 @@
 
             Flash::notice(
                 __("Injector deleted.", "inject"),
-                "manage_injectors"
+                $_SESSION['admin_redirect_to']
             );
         }
 

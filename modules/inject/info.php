@@ -2,7 +2,7 @@
 return array(
     "name"          => __("Inject", "inject"),
     "url"           => "http://chyrplite.net/",
-    "version"       => "2026.01",
+    "version"       => "2026.02",
     "description"   => __("Inject content into your blog using triggers and filters.", "inject"),
     "author"        => array(
         "name"      => "Daniel Pimley",
