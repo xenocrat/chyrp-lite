@@ -201,6 +201,16 @@
                 empty($_POST)
             ) {
                 $_SESSION['redirect_to'] = self_url();
+
+                # Set admin_redirect_to if not a create/edit/delete action.
+                if (
+                    !(
+                        $this->controller instanceof AdminController and
+                        preg_match("/^(new|edit|write|delete)_/", $this->action)
+                    )
+                ) {
+                    $_SESSION['admin_redirect_to'] = $_SESSION['redirect_to'];
+                }
             }
 
             $trigger->call("route_done", $this);
