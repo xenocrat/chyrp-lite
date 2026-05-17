@@ -28,8 +28,8 @@
 <tr class="head">
 <th class="toggler" id="tag_toggler"></th>
 <th class="post_title title main">{{ "Post" | translate }}</th>
-<th class="post_status status">{{ "Status" | translate }}</th>
 <th class="post_tags list">{{ "Tags" | translate("tags") }}</th>
+<th class="post_status status">{{ "Status" | translate }}</th>
 <th class="controls">{{ "Controls" | translate }}</th>
 </tr>
 </thead>
@@ -42,16 +42,16 @@
 <td class="post_title title main">
 <a class="edit_tag" href="{{ post.url() }}">{{ post.title() | striptags | oneof("[Untitled]" | translate) | truncate(40) }}</a>
 </td>
+<td class="post_tags list">
+{% for name, clean in post.tags %}
+<a class="tag" href="{{ url('posts_tagged/clean/' ~ (clean | url_encode)) }}">{{ name }}</a>
+{% endfor %}
+</td>
 <td class="post_status status">
 {% for group in post_statuses.(post.id).groups %}
 <a href="{{ url('manage_users/query/' ~ (('group:' ~ group.name) | url_encode)) }}">{{ group.name }}</a>
 {% else %}
 {{ post_statuses.(post.id).name | oneof("[None]" | translate) }}
-{% endfor %}
-</td>
-<td class="post_tags list">
-{% for name, clean in post.tags %}
-<a class="tag" href="{{ url('posts_tagged/clean/' ~ (clean | url_encode)) }}">{{ name }}</a>
 {% endfor %}
 </td>
 <td class="controls">
