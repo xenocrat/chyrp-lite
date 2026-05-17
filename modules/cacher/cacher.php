@@ -79,8 +79,7 @@
         ): void {
             # Prevent erroneous redirections.
             unset($_SESSION['redirect_to']);
-            unset($_SESSION['post_redirect']);
-            unset($_SESSION['page_redirect']);
+            unset($_SESSION['admin_redirect_to']);
 
             if (!$this->is_cacheable())
                 return;
