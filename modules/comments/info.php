@@ -2,7 +2,7 @@
 return array(
     "name"          => __("Comments", "comments"),
     "url"           => "http://chyrplite.net/",
-    "version"       => "2025.03",
+    "version"       => "2026.02",
     "description"   => __("Adds commenting functionality to your posts, with webmention support.", "comments"),
     "author"        => array(
         "name"      => "Chyrp Team",

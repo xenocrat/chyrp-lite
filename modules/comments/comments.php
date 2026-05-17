@@ -353,7 +353,7 @@
 
             Flash::notice(
                 $message,
-                "manage_comments"
+                fallback($_SESSION['admin_redirect_to'], "manage_comments")
             );
         }
 
@@ -434,6 +434,8 @@
 
         public function admin_destroy_comment(
         ): never {
+            fallback($_SESSION['admin_redirect_to'], "manage_comments");
+
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
@@ -448,7 +450,7 @@
                 );
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
-                redirect("manage_comments");
+                redirect($_SESSION['admin_redirect_to']);
 
             $comment = new Comment($_POST['id']);
 
@@ -466,11 +468,10 @@
 
             Comment::delete($comment->id);
 
-            $redirect = ($comment->status == Comment::STATUS_SPAM) ?
-                "manage_spam" :
-                "manage_comments" ;
-
-            Flash::notice(__("Comment deleted.", "comments"), $redirect);
+            Flash::notice(
+                __("Comment deleted.", "comments"),
+                $_SESSION['admin_redirect_to']
+            );
         }
 
         public function admin_manage_comments(
