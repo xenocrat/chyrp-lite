@@ -2,7 +2,7 @@
 return array(
     "name"          => __("Mentionable", "pingable"),
     "url"           => "http://chyrplite.net/",
-    "version"       => "2024.03",
+    "version"       => "2026.02",
     "description"   => __("Register webmentions from blogs that link to yours.", "pingable"),
     "author"        => array(
         "name"      => "Daniel Pimley",

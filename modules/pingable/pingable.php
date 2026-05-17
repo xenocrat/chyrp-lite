@@ -137,7 +137,7 @@
 
             Flash::notice(
                 __("Webmention updated.", "pingable"),
-                "manage_pingbacks"
+                fallback($_SESSION['admin_redirect_to'], "manage_pingbacks")
             );
         }
 
@@ -173,6 +173,8 @@
 
         public function admin_destroy_pingback(
         ): never {
+            fallback($_SESSION['admin_redirect_to'], "manage_pingbacks");
+
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
@@ -187,7 +189,7 @@
                 );
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
-                redirect("manage_pingbacks");
+                redirect($_SESSION['admin_redirect_to']);
 
             $pingback = new Pingback($_POST['id']);
 
@@ -207,7 +209,7 @@
 
             Flash::notice(
                 __("Webmention deleted.", "pingable"),
-                "manage_pingbacks"
+                $_SESSION['admin_redirect_to']
             );
         }
 
