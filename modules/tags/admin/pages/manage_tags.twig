@@ -34,7 +34,7 @@
 <a href="{{ tag.url }}">{{ tag.popularity }}</a>
 </td>
 <td class="controls">
-<a class="tag_edit_link edit_link emblem" href="{{ url('rename_tag/clean/' ~ (tag.clean | url_encode)) }}">
+<a class="tag_edit_link edit_link emblem" href="{{ url('edit_tag/clean/' ~ (tag.clean | url_encode)) }}">
 {{ icon_svg("edit.svg", "Edit" | translate) }}
 </a>
 </td>

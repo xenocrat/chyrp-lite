@@ -258,7 +258,7 @@
                 $navs["manage_tags"] = array(
                     "title" => __("Tags", "tags"),
                     "selected" => array(
-                        "rename_tag",
+                        "edit_tag",
                         "delete_tag",
                         "edit_tags",
                         "posts_tagged"
@@ -560,11 +560,11 @@
 
             Flash::notice(
                 __("Tags updated.", "tags"),
-                "posts_tagged"
+                fallback($_SESSION['admin_redirect_to'], "posts_tagged")
             );
         }
 
-        public function admin_rename_tag(
+        public function admin_edit_tag(
             $admin
         ): void {
             if (!Post::any_editable())
@@ -589,7 +589,7 @@
                 );
 
             $admin->display(
-                "pages".DIR."rename_tag",
+                "pages".DIR."edit_tag",
                 array("tag" => $tag)
             );
         }
@@ -650,7 +650,7 @@
 
             Flash::notice(
                 __("Tag renamed.", "tags"),
-                "manage_tags"
+                fallback($_SESSION['admin_redirect_to'], "manage_tags")
             );
         }
 
@@ -734,7 +734,7 @@
 
             Flash::notice(
                 __("Tag deleted.", "tags"),
-                "manage_tags"
+                fallback($_SESSION['admin_redirect_to'], "manage_tags")
             );
         }
 
@@ -783,7 +783,7 @@
 
             Flash::notice(
                 __("Posts tagged.", "tags"),
-                "posts_tagged"
+                fallback($_SESSION['admin_redirect_to'], "posts_tagged")
             );
         }
 
