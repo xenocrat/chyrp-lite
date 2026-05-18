@@ -72,38 +72,46 @@
             $text,
             $post = null
         ): string {
-            if (!preg_match("/<!-- *inject +([^<>]+) *-->/i", $text, $matches))
-                return $text;
-
-            $content = $this->get_content(
-                self::TYPE_MARKUP_POST,
-                $matches[1]
+            preg_match_all(
+                '/<!-- *inject +([^<>]+?) *-->/i',
+                $text,
+                $matches,
+                PREG_SET_ORDER
             );
 
-            return preg_replace(
-                "/<!-- *inject +([^<>]+) *-->/i",
-                $content,
-                $text
-            );
+            foreach ($matches as $match) {
+                $content = $this->get_content(
+                    self::TYPE_MARKUP_POST,
+                    $match[1]
+                );
+
+                $text = str_replace($match[0], $content, $text);
+            }
+
+            return $text;
         }
 
         public function markup_page_text(
             $text,
             $page = null
         ): string {
-            if (!preg_match("/<!-- *inject +([^<>]+) *-->/i", $text, $matches))
-                return $text;
-
-            $content = $this->get_content(
-                self::TYPE_MARKUP_PAGE,
-                $matches[1]
+            preg_match_all(
+                '/<!-- *inject +([^<>]+?) *-->/i',
+                $text,
+                $matches,
+                PREG_SET_ORDER
             );
 
-            return preg_replace(
-                "/<!-- *inject +([^<>]+) *-->/i",
-                $content,
-                $text
-            );
+            foreach ($matches as $match) {
+                $content = $this->get_content(
+                    self::TYPE_MARKUP_PAGE,
+                    $match[1]
+                );
+
+                $text = str_replace($match[0], $content, $text);
+            }
+
+            return $text;
         }
 
         private function get_content(
@@ -125,19 +133,19 @@
 
                 switch ($injector["frequency"]) {
                     case self::FREQUENCY_ONCE:
-                        if ($injector["count"] == 1)
+                        if ($this->counts[$id] == 1)
                             $content.= $injector["payload"];
 
                         break;
 
                     case self::FREQUENCY_ODD:
-                        if ($injector["count"] % 2 == 1)
+                        if ($this->counts[$id] % 2 == 1)
                             $content.= $injector["payload"];
 
                         break;
 
                     case self::FREQUENCY_EVEN:
-                        if ($injector["count"] % 2 == 0)
+                        if ($this->counts[$id] % 2 == 0)
                             $content.= $injector["payload"];
 
                         break;
