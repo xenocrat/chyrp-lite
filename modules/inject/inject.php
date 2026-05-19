@@ -138,6 +138,11 @@
                 PREG_SET_ORDER | PREG_OFFSET_CAPTURE
             );
 
+            $labels = array_map(fn ($m) => $m[1][0], $matches);
+            foreach ($labels as $label) {
+                $this->reset_count($type, $label);
+            }
+
             $replacements = [];
             foreach ($matches as $match) {
                 $replacements[] = [
@@ -152,6 +157,17 @@
             }
 
             return $text;
+        }
+
+        private function reset_count(
+            string $type,
+            string $label
+        ): void {
+            foreach ($this->injectors as $id => $injector) {
+                if ($injector['type'] === $type && $injector['label'] === $label) {
+                    $this->counts[$id] = 0;
+                }
+            }
         }
 
         private function list_types(
