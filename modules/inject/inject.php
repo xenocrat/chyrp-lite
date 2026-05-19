@@ -72,46 +72,14 @@
             $text,
             $post = null
         ): string {
-            preg_match_all(
-                '/<!-- *inject +([^<>]+?) *-->/i',
-                $text,
-                $matches,
-                PREG_SET_ORDER
-            );
-
-            foreach ($matches as $match) {
-                $content = $this->get_content(
-                    self::TYPE_MARKUP_POST,
-                    $match[1]
-                );
-
-                $text = str_replace($match[0], $content, $text);
-            }
-
-            return $text;
+            return $this->replace_injections($text, self::TYPE_MARKUP_POST);
         }
 
         public function markup_page_text(
             $text,
             $page = null
         ): string {
-            preg_match_all(
-                '/<!-- *inject +([^<>]+?) *-->/i',
-                $text,
-                $matches,
-                PREG_SET_ORDER
-            );
-
-            foreach ($matches as $match) {
-                $content = $this->get_content(
-                    self::TYPE_MARKUP_PAGE,
-                    $match[1]
-                );
-
-                $text = str_replace($match[0], $content, $text);
-            }
-
-            return $text;
+            return $this->replace_injections($text, self::TYPE_MARKUP_PAGE);
         }
 
         private function get_content(
@@ -157,6 +125,33 @@
             }
 
             return $content;
+        }
+
+        private function replace_injections(
+            string $text,
+            string $type,
+        ): string {
+            preg_match_all(
+                '/<!--\s*inject\s+([^<>]+?)\s*-->/i',
+                $text,
+                $matches,
+                PREG_SET_ORDER | PREG_OFFSET_CAPTURE
+            );
+
+            $replacements = [];
+            foreach ($matches as $match) {
+                $replacements[] = [
+                    'start' => (int) $match[0][1],
+                    'length' => strlen($match[0][0]),
+                    'content' => $this->get_content($type, $match[1][0]),
+                ];
+            }
+
+            foreach (array_reverse($replacements) as $r) {
+                $text = substr_replace($text, $r['content'], $r['start'], $r['length']);
+            }
+
+            return $text;
         }
 
         private function list_types(
