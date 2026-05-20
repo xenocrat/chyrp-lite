@@ -182,7 +182,7 @@ aside {
     margin-inline-start: 1rem;
     margin-bottom: 1rem;
     padding: 1rem;
-    background-color: transparent;
+    background-color: var(--akarui-shadow);
     border: 2px solid var(--akarui-medium);
 }
 blockquote em,
