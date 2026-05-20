@@ -51,11 +51,13 @@ trait StrikeoutTrait
 				'\\\\',
 				$matches[0]
 			);
+
 			$matches[2] = str_replace(
 				'\\\\'.chr(31),
 				'\\\\',
 				$matches[2]
 			);
+
 			if (
 				// Inline HTML, link, image, or code takes precedence.
 				!$this->detectInlineOverrun(
@@ -73,13 +75,17 @@ trait StrikeoutTrait
 				];
 			}
 		}
-		$spn = strspn($markdown, '~') ?: 1;
+
 		return [
 			[
 				'text',
-				str_repeat($markdown[0], $spn)
+				$markdown[0] . substr(
+					$markdown,
+					1,
+					($spn = strspn($markdown, '~', 1))
+				)
 			],
-			$spn
+			++$spn
 		];
 	}
 

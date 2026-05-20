@@ -60,13 +60,16 @@ trait HeadlineTrait
 			$lines[$current],
 			$matches
 		);
+
 		$line = substr($lines[$current], strlen($matches[1]));
 		$line = preg_replace('/[ \t]+(\#+[ \t]*)?$/', '', $line);
+
 		$block = [
 			'headline',
 			'content' => $this->parseInline(trim($line)),
 			'level' => strlen($matches[2]),
 		];
+
 		return [$block, $current];
 	}
 
@@ -76,17 +79,20 @@ trait HeadlineTrait
 	protected function consumeSetextHeadline($lines, $current): array
 	{
 		$content = [];
+
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			if (preg_match('/^ {0,3}(\-+|=+)\s*$/', $lines[$i])) {
 				break;
 			}
 			$content[] = trim($lines[$i]);
 		}
+
 		$block = [
 			'headline',
 			'content' => $this->parseInline(trim(implode("\n", $content))),
 			'level' => substr_count($lines[$i], '=') ? 1 : 2,
 		];
+
 		return [$block, $i];
 	}
 
@@ -114,6 +120,7 @@ trait HeadlineTrait
 
 			foreach ($exploded as $chr) {
 				$type = \IntlChar::charType($chr);
+
 				if (
 					$chr === ' ' || $chr === '-' || $chr === '_'
 					|| $type === \IntlChar::CHAR_CATEGORY_UPPERCASE_LETTER
@@ -136,6 +143,7 @@ trait HeadlineTrait
 
 			if ($id !== '') {
 				$prefix = $this->getContextId();
+
 				if ($prefix !== '') {
 					$prefix .= '-';
 				}

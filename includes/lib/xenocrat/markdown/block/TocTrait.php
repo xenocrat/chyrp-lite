@@ -94,6 +94,7 @@ trait TocTrait
 
 			foreach ($exploded as $chr) {
 				$type = \IntlChar::charType($chr);
+
 				if (
 					$chr === ' ' || $chr === "\t" || $chr === '-' || $chr === '_'
 					|| $type === \IntlChar::CHAR_CATEGORY_UPPERCASE_LETTER
@@ -116,6 +117,7 @@ trait TocTrait
 
 			if ($id !== '') {
 				$prefix = $this->getContextId();
+
 				if ($prefix !== '') {
 					$prefix .= '-';
 				}
@@ -201,7 +203,6 @@ trait TocTrait
 					);
 					$toc .= "</li>\n";
 				}
-
 			}
 
 			$toc .= "</{$tag}>";

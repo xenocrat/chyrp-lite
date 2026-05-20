@@ -106,6 +106,7 @@ class Markdown extends Parser
 		// Consume until blank line or end condition...
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
+
 			if (
 				$line === ''
 				|| ($trimmed = ltrim($line)) === ''
@@ -131,6 +132,7 @@ class Markdown extends Parser
 				}
 			}
 		}
+
 		$block = [
 			'paragraph',
 			'content' => $this->parseInline(trim(implode("\n", $content))),
@@ -149,10 +151,12 @@ class Markdown extends Parser
 	protected function parseEscape($text): array
 	{
 		$br = $this->html5 ? "<br>\n" : "<br />\n";
+
 		if (isset($text[1]) && $text[1] === "\n") {
 		// Backslash followed by newline.
 			return [['text', $br], 2];
 		}
+
 		// Otherwise parse the sequence normally.
 		return parent::parseEscape($text);
 	}

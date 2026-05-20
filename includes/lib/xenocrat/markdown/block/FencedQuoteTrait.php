@@ -28,6 +28,7 @@ trait FencedQuoteTrait
 		// trim up to three spaces
 			$line = ltrim($line, ' ');
 		}
+
 		return str_starts_with($line, '>>>');
 	}
 
@@ -46,6 +47,7 @@ trait FencedQuoteTrait
 		for ($i = $current + 1, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
 			$leadingSpaces = strspn($line, ' ');
+
 			if (
 				$leadingSpaces > 3
 				|| strspn(ltrim($line), $fence[0]) < $mw
@@ -63,6 +65,7 @@ trait FencedQuoteTrait
 				break;
 			}
 		}
+
 		$block = [
 			'quote',
 			'content' => $this->parseBlocks($content),

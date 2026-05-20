@@ -31,17 +31,19 @@ trait CodeTrait
 					(`+)
 					# First char cannot be a delimiter.
 					(?!`)
-					# Final capture char cannot be a delimiter:
+					# Capture code:
+					# Final char cannot be a delimiter.
 					(.*?[^`])
 					# Closing marker:
 					\1
-					# Next char must not be a delimiter.
+					# Next char cannot be a delimiter.
 					(?!`)/sx',
 				$markdown,
 				$matches
 			)
 		) {
 			$code = str_replace("\n", ' ', $matches[2]);
+
 			if (
 				strlen($code) > 2
 				&& ltrim($code, ' ') !== ''
@@ -50,6 +52,7 @@ trait CodeTrait
 			) {
 				$code = substr($code, 1, -1);
 			}
+
 			return [
 				[
 					'inlineCode',
@@ -58,13 +61,17 @@ trait CodeTrait
 				strlen($matches[0])
 			];
 		}
-		$spn = strspn($markdown, '`') ?: 1;
+
 		return [
 			[
 				'text',
-				str_repeat($markdown[0], $spn)
+				$markdown[0] . substr(
+					$markdown,
+					1,
+					($spn = strspn($markdown, '`', 1))
+				)
 			],
-			$spn
+			++$spn
 		];
 	}
 

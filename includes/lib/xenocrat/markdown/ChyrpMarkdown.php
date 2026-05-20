@@ -73,6 +73,7 @@ class ChyrpMarkdown extends GithubMarkdown
 		// Consume until blank line or end condition...
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
+
 			if ($line === ''
 				|| ($trimmed = ltrim($line)) === ''
 				|| (
@@ -102,6 +103,7 @@ class ChyrpMarkdown extends GithubMarkdown
 				}
 			}
 		}
+
 		$block = [
 			'paragraph',
 			'content' => $this->parseInline(trim(implode("\n", $content))),

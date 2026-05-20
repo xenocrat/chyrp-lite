@@ -19,7 +19,7 @@ use RuntimeException;
 abstract class Parser
 {
 	const VERSION_MAJOR = 4;
-	const VERSION_MINOR = 9;
+	const VERSION_MINOR = 11;
 	const VERSION_PATCH = 0;
 
 	/**
@@ -135,9 +135,11 @@ abstract class Parser
 	protected function preprocess($text): string
 	{
 		$text = str_replace(["\r\n", "\n\r", "\r"], "\n", $text);
+
 		if ($this->convertTabsToSpaces) {
 			$text = $this->expandTabs($text);
 		}
+
 		return $text;
 	}
 
@@ -253,11 +255,13 @@ abstract class Parser
 	{
 		$line = $lines[$current];
 		$blockTypes = $this->blockTypes();
+
 		foreach($blockTypes as $blockType) {
 			if ($this->{'identify' . $blockType}($line, $lines, $current)) {
 				return $blockType;
 			}
 		}
+
 		// Consider the line a normal paragraph if no other block type matches.
 		return 'paragraph';
 	}
@@ -287,10 +291,12 @@ abstract class Parser
 		// Convert lines to blocks.
 		for ($i = 0, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
+
 			if ($line !== '' && rtrim($line) !== '') {
 			// Skip empty lines.
 				// Identify beginning of a block and parse the content.
 				list($block, $i) = $this->parseBlock($lines, $i);
+
 				if ($block !== false) {
 					$blocks[] = $block;
 				}
@@ -356,10 +362,12 @@ abstract class Parser
 				break;
 			}
 		}
+
 		$block = [
 			'paragraph',
 			'content' => $this->parseInline(implode("\n", $content)),
 		];
+
 		return [$block, --$i];
 	}
 
@@ -408,6 +416,7 @@ abstract class Parser
 			) as $method
 		) {
 			$methodName = $method->getName();
+
 			if (
 				str_starts_with($methodName, 'parse')
 				&& !str_ends_with($methodName, 'Markers')
@@ -438,6 +447,7 @@ abstract class Parser
 		foreach ($this->inlineMarkers() as $marker => $method) {
 			if (strpos($text, $marker) !== false) {
 				$m = $marker[0];
+
 				// Put the longest marker first.
 				if (isset($this->_inlineMarkers[$m])) {
 					reset($this->_inlineMarkers[$m]);
@@ -451,6 +461,7 @@ abstract class Parser
 						continue;
 					}
 				}
+
 				$this->_inlineMarkers[$m][$marker] = $method;
 			}
 		}
@@ -531,6 +542,7 @@ abstract class Parser
 				$markers = call_user_func(
 					array($this, 'parse'.$element.'Markers')
 				);
+
 				foreach ($markers as $marker) {
 					$pos = 0;
 					do {
@@ -540,6 +552,7 @@ abstract class Parser
 								array($this, 'parse'.$element),
 								substr($text, $pos)
 							);
+
 							if (
 								$arr[0][0] !== 'text'
 								&& $arr[1] > ($length - $pos)
@@ -553,6 +566,7 @@ abstract class Parser
 				}
 			}
 		}
+
 		return false;
 	}
 
@@ -580,6 +594,7 @@ abstract class Parser
 			$chr = $this->escapeHtmlEntities($text[1], ENT_COMPAT);
 			return [['text', $chr], 2];
 		}
+
 		return [['text', $text[0]], 1];
 	}
 
@@ -602,9 +617,11 @@ abstract class Parser
 	protected function escapeBackslash($text): string
 	{
 		$strtr = [];
+
 		foreach($this->escapeCharacters as $chr) {
 			$strtr[$chr] = "\\$chr";
 		}
+
 		return strtr($text, $strtr);
 	}
 
@@ -617,9 +634,11 @@ abstract class Parser
 	protected function unEscapeBackslash($text): string
 	{
 		$strtr = [];
+
 		foreach($this->escapeCharacters as $chr) {
 			$strtr["\\$chr"] = $chr;
 		}
+
 		return strtr($text, $strtr);
 	}
 
@@ -665,11 +684,14 @@ abstract class Parser
 		if (function_exists('mb_strlen')) {
 			return mb_strlen($text, 'UTF-8');
 		}
+
 		$len = strlen($text);
 		$pos = 0;
 		$count = 0;
+
 		while ($pos < $len) {
 			$ord = ord($text[$pos]);
+
 			if ($ord < 128) {
 				$pos++;
 				$count++;
@@ -687,6 +709,7 @@ abstract class Parser
 				$pos++;
 			}
 		}
+
 		return $count;
 	}
 
@@ -701,6 +724,7 @@ abstract class Parser
 		if ($text === '') {
 			return '';
 		}
+
 		$expanded = '';
 		$lines = preg_split(
 			"/(\n)/",
@@ -708,6 +732,7 @@ abstract class Parser
 			-1,
 			PREG_SPLIT_DELIM_CAPTURE
 		);
+
 		foreach ($lines as $line) {
 			$output = '';
 			$chunks = preg_split(
@@ -716,6 +741,7 @@ abstract class Parser
 				-1,
 				PREG_SPLIT_DELIM_CAPTURE
 			);
+
 			foreach ($chunks as $chunk) {
 				if ($chunk === "\t") {
 					$length = $this->utf8Strlen($output);
@@ -724,8 +750,10 @@ abstract class Parser
 					$output .= $chunk;
 				}
 			}
+
 			$expanded .= $output;
 		}
+
 		return $expanded;
 	}
 }

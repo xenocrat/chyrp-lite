@@ -46,12 +46,15 @@ trait MathTrait
 				'\\\\',
 				$matches[0]
 			);
+
 			$matches[1] = str_replace(
 				'\\\\'.chr(31),
 				'\\\\',
 				$matches[1]
 			);
+
 			$math = str_replace("\n", ' ', $matches[1]);
+
 			if (
 				strlen($math) > 2
 				&& ltrim($math, ' ') !== ''
@@ -60,6 +63,7 @@ trait MathTrait
 			) {
 				$math = substr($math, 1, -1);
 			}
+
 			return [
 				[
 					'inlineMath',
@@ -68,6 +72,7 @@ trait MathTrait
 				strlen($matches[0])
 			];
 		}
+
 		return [['text', $markdown[0] . $markdown[1]], 2];
 	}
 

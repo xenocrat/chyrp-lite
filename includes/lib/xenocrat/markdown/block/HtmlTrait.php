@@ -24,42 +24,52 @@ trait HtmlTrait
 		// Trim up to three spaces.
 			$line = ltrim($line, ' ');
 		}
+
 		if ($line[0] !== '<' || isset($line[1]) && $line[1] == ' ') {
 		// No tag.
 			return false;
 		}
+
 		if (strncasecmp($line, '<script', 7) === 0) {
 		// Type 1: script.
 			return true;
 		}
+
 		if (strncasecmp($line, '<pre', 4) === 0) {
 		// Type 1: pre.
 			return true;
 		}
+
 		if (strncasecmp($line, '<style', 6) === 0) {
 		// Type 1: style.
 			return true;
 		}
+
 		if (strncasecmp($line, '<textarea', 9) === 0) {
 		// Type 1: textarea.
 			return true;
 		}
+
 		if (str_starts_with($line, '<!--')) {
 		// Type 2: comment.
 			return true;
 		}
+
 		if (str_starts_with($line, '<?')) {
 		// Type 3: processor.
 			return true;
 		}
+
 		if (preg_match('/^<![a-z]/i', $line)) {
 		// Type 4: declaration.
 			return true;
 		}
+
 		if (str_starts_with($line, '<![CDATA[')) {
 		// Type 5: CDATA.
 			return true;
 		}
+
 		if (
 			preg_match(
 				'/^<\/?(
@@ -85,11 +95,12 @@ trait HtmlTrait
 		// Type 6.
 			return true;
 		}
+
 		if (
 			preg_match(
 				'/^<(\/)?[a-z][a-z0-9\-]*
 					(?(1)\s*|(?:\s+[a-z_:][a-z0-9_:\.\-]*(?:\s*=\s*
-							(?(?=[\"\'])([\"\'])(?:(?!\2).)*\2|[^\s\n"\'=<>`]+)
+					(?(?=[\"\'])([\"\'])(?:(?!\2).)*\2|[^\s\n"\'=<>`]+)
 					)?)*\s*\/?)>\s*$/ix',
 				$line,
 				$matches
@@ -103,6 +114,7 @@ trait HtmlTrait
 		// Type 7.
 			return true;
 		}
+
 		return false;
 	}
 
@@ -198,6 +210,7 @@ trait HtmlTrait
 				}
 			}
 		}
+
 		$block = [
 			'html',
 			'content' => implode("\n", $content),
@@ -249,6 +262,7 @@ trait HtmlTrait
 		if (preg_match('/^&\#x?0+;$/', $block[1])) {
 			return "\u{FFFD}";
 		}
+
 		return $this->escapeHtmlEntities(
 			$this->unEscapeHtmlEntities(
 				$block[1],
@@ -274,10 +288,12 @@ trait HtmlTrait
 			// First try bracketed link if we have LinkTrait.
 			if (method_exists($this, 'parseBracketedLink')) {
 				$block = $this->parseBracketedLink($markdown);
+
 				if ($block[0][0] !== 'text') {
 					return $block;
 				}
 			}
+
 			if (
 				// Comment.
 				preg_match('/^<!--(-?>|.*?-->)/s', $markdown, $matches)
@@ -290,12 +306,13 @@ trait HtmlTrait
 			) {
 				return [['lt', $matches[0]], strlen($matches[0])];
 			}
+
 			if (
 				// Tag.
 				preg_match(
 					'/^<(\/)?[a-z][a-z0-9\-]*
 						(?(1)\s*|(?:\s+[a-z_:][a-z0-9_:\.\-]*(?:\s*=\s*
-								(?(?=[\"\'])([\"\'])(?:(?!\2).)*\2|[^\s"\'=<>`]+)
+						(?(?=[\"\'])([\"\'])(?:(?!\2).)*\2|[^\s"\'=<>`]+)
 						)?)*\s*\/?)>/isx',
 					$markdown,
 					$matches
@@ -304,6 +321,7 @@ trait HtmlTrait
 				return [['lt', $matches[0]], strlen($matches[0])];
 			}
 		}
+
 		return [['text', '&lt;'], 1];
 	}
 

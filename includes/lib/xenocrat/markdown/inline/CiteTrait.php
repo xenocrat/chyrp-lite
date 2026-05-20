@@ -55,11 +55,13 @@ trait CiteTrait
 				'\\\\',
 				$matches[0]
 			);
+
 			$matches[2] = str_replace(
 				'\\\\'.chr(31),
 				'\\\\',
 				$matches[2]
 			);
+
 			if (
 				// Inline HTML, link, image, or code takes precedence.
 				!$this->detectInlineOverrun(
@@ -77,7 +79,18 @@ trait CiteTrait
 				];
 			}
 		}
-		return [['text', $markdown[0]], 1];
+
+		return [
+			[
+				'text',
+				$markdown[0] . substr(
+					$markdown,
+					1,
+					($spn = strspn($markdown, '_', 1))
+				)
+			],
+			++$spn
+		];
 	}
 
 	protected function renderCite($block): string

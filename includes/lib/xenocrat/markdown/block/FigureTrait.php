@@ -24,6 +24,7 @@ trait FigureTrait
 		// Trim up to three spaces.
 			$line = ltrim($line, ' ');
 		}
+
 		return $line[0] === ':';
 	}
 
@@ -38,6 +39,7 @@ trait FigureTrait
 		// Consume until end of markers...
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
+
 			if (
 				isset($line[0])
 				&& $line[0] === ' '
@@ -46,6 +48,7 @@ trait FigureTrait
 			// Trim up to three spaces.
 				$line = ltrim($line, ' ');
 			}
+
 			if (ltrim($line) !== '') {
 				if (str_starts_with($line, ':: ')) {
 					$caption[$i] = substr($line, 3);

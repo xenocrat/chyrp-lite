@@ -26,24 +26,39 @@ trait AutoLinkTrait
 	protected function parseAutoUrl($markdown): array
 	{
 		if (
+			// Do not allow links within links.
 			!in_array('parseLink', $this->context)
+			// Link?
 			&& preg_match(
-				'/(?(R)
-					# in case of recursion match parentheses
-					\(((?>[^\s()]+)|(?R))*\)
-					# else match a link with title
-					|^(www\.|https?:\/\/)(([^\s<>()]+)|(?R))+(?<![\.,:;\'"!\?\s])
-					)/x',
+				'/^(www\.|https?:\/\/)
+					(([a-zA-Z0-9\-_]\.)*[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-]+[^\s<]*)
+					(?<![~_\*\.,:\!\?])/x',
 				$markdown,
 				$matches
 			)
 		) {
-		// Do not allow links within links.
+			if (str_ends_with($matches[0], ';')) {
+				$matches[0] = preg_replace(
+					'/(&[a-z0-9]+;)+$/i',
+					'',
+					$matches[0]
+				);
+			} else {
+				while (
+					str_ends_with($matches[0], ')')
+					&& substr_count($matches[0], ')')
+						> substr_count($matches[0], '(')
+				) {
+					$matches[0] = substr($matches[0], 0, -1);
+				}
+			}
+
 			return [
 				['autoUrl', $matches[0]],
 				strlen($matches[0])
 			];
 		}
+
 		return [['text', substr($markdown, 0, 4)], 4];
 	}
 
@@ -51,16 +66,20 @@ trait AutoLinkTrait
 	{
 		$href = $block[1];
 		$text = $href;
+
 		if (!str_starts_with($href, 'http')) {
 			$href = 'http://' . $href;
 		}
+
 		$href = $this->escapeHtmlEntities($href, ENT_COMPAT);
 		$decoded = rawurldecode($text);
 		$secured = preg_match('//u', $decoded) ? $decoded : $text;
+
 		$text = $this->escapeHtmlEntities(
 			$secured,
 			ENT_NOQUOTES | ENT_SUBSTITUTE | ENT_DISALLOWED
 		);
+
 		return "<a href=\"$href\">$text</a>";
 	}
 

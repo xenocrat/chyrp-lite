@@ -29,55 +29,48 @@ trait EmphStrongTrait
 		if (!isset($markdown[1])) {
 			return [['text', $markdown[0]], 1];
 		}
-		if (($marker = $markdown[0]) == $markdown[1]) {
+
+		if (
+			($marker = $markdown[0]) == $markdown[1]
+			// Closing marker?
+			&& strpos($markdown, $marker . $marker, 2) !== false
+		) {
 		// Strong.
-			// Avoid excessive regex backtracking if there is no closing marker.
-			if (strpos($markdown, $marker . $marker, 2) === false) {
-				return [['text', $markdown[0]], 1];
-			}
 			$regexable = str_replace(
 				'\\\\',
 				'\\\\'.chr(31),
 				$markdown
 			);
+
 			if (
 				$marker === '*'
 				&& preg_match(
-					'/^
-						# Opening marker:
-						[*]{2}
-						# First char cannot be whitespace.
-						# First char cannot be Unicode category Zs, Pe, Pf.
-						(?![\s\p{Zs}\p{Pe}\p{Pf}])
-						# Capture two or more matched backticks (possible code)
-						# matched nested markers, escaped marker, or other char:
-						((?>(`{2,})(?!`).*?[^`]\2(?!`)|([*]+)[^*]*\3|\\\\[*]|[^*])+?)
-						# Last char cannot be whitespace.
-						# Last char cannot be Unicode category Zs, Ps, Pi.
-						(?<![\s\p{Zs}\p{Ps}\p{Pi}])
-						# Closing marker:
-						[*]{2}/usx',
+					'/
+						# Opening marker: cannot be followed by whitespace.
+						# Cannot be followed by Unicode category Zs, Pe, Pf.
+						(?(R)([*]{1,2})|^[*]{2}(?![\s\p{Zs}\p{Pe}\p{Pf}]))
+						# Capture two or more matched backticks (code span?),
+						# escaped marker, other char, or recurse the pattern:
+						(((?>(`{2,})(?!`).*?[^`]\4(?!`)|\\\\[*]|[^*])+|(?R))+?)
+						# Closing marker: cannot be preceded by whitespace.
+						# Cannot be preceded by Unicode category Zs, Ps, Pi.
+						(?(R)\1|(?<![\s\p{Zs}\p{Ps}\p{Pi}])[*]{2})/usx',
 					$regexable,
 					$matches
 				)
 				|| $marker === '_'
 				&& preg_match(
-					'/^
-						# Opening marker:
-						__
-						# First char cannot be whitespace.
-						# First char cannot be Unicode category Zs, Pe, Pf.
-						(?![\s\p{Zs}\p{Pe}\p{Pf}])
-						# Capture two or more matched backticks (possible code)
-						# matched nested markers, escaped marker, or other char:
-						((?>(`{2,})(?!`).*?[^`]\2(?!`)|(_+)[^_]*\3|\\\\_|[^_])+?)
-						# Last char cannot be whitespace.
-						# Last char cannot be Unicode category Zs, Ps, Pi.
-						(?<![\s\p{Zs}\p{Ps}\p{Pi}])
-						# Closing marker:
-						__
-						# Next char after the closing marker must be non-word.
-						\b/usx',
+					'/
+						# Opening marker: cannot be followed by whitespace.
+						# Cannot be followed by Unicode category Zs, Pe, Pf.
+						(?(R)(_{1,2})|^__(?![\s\p{Zs}\p{Pe}\p{Pf}]))
+						# Capture two or more matched backticks (code span?),
+						# escaped marker, other char, or recurse the pattern:
+						(((?>(`{2,})(?!`).*?[^`]\4(?!`)|\\\\_|[^_])+|(?R))+?)
+						# Closing marker: cannot be preceded by whitespace.
+						# Cannot be preceded by Unicode category Zs, Ps, Pi.
+						# Must be followed by 0+ delimeters then a non-word.
+						(?(R)\1|(?<![\s\p{Zs}\p{Ps}\p{Pi}])__(?=_*\b))/usx',
 					$regexable,
 					$matches
 				)
@@ -87,11 +80,13 @@ trait EmphStrongTrait
 					'\\\\',
 					$matches[0]
 				);
-				$matches[1] = str_replace(
+
+				$matches[2] = str_replace(
 					'\\\\'.chr(31),
 					'\\\\',
-					$matches[1]
+					$matches[2]
 				);
+
 				if (
 					// Inline HTML, link, image, or code takes precedence.
 					!$this->detectInlineOverrun(
@@ -103,65 +98,53 @@ trait EmphStrongTrait
 					return [
 						[
 							'strong',
-							$this->parseInline($matches[1]),
+							$this->parseInline($matches[2]),
 						],
 						strlen($matches[0])
 					];
 				}
 			}
-		} else {
+		} elseif (
+			// Closing marker?
+			strpos($markdown, $marker, 1) !== false
+		) {
 		// Emphasis
-			// Avoid excessive regex backtracking if there is no closing marker.
-			if (strpos($markdown, $marker, 1) === false) {
-				return [['text', $markdown[0]], 1];
-			}
 			$regexable = str_replace(
 				'\\\\',
 				'\\\\'.chr(31),
 				$markdown
 			);
+
 			if (
 				$marker === '*'
 				&& preg_match(
-					'/^
-						# Opening marker:
-						[*]
-						# First char cannot be whitespace.
-						# First char cannot be Unicode category Zs, Pe, Pf.
-						(?![\s\p{Zs}\p{Pe}\p{Pf}])
-						# Capture two or more matched backticks (possible code)
-						# matched nested markers, escaped marker, or other char.
-						((?>(`{2,})(?!`).*?[^`]\2(?!`)|([*]+)[^*]*\3|\\\\[*]|[^*])+?)
-						# Last char cannot be whitespace.
-						# Last char cannot be Unicode category Zs, Ps, Pi.
-						(?<![\s\p{Zs}\p{Ps}\p{Pi}])
-						# Closing marker:
-						[*]
+					'/
+						# Opening marker: cannot be followed by whitespace.
+						# Cannot be followed by Unicode category Zs, Pe, Pf.
+						(?(R)([*]{1,2})|^[*](?![\s\p{Zs}\p{Pe}\p{Pf}]))
+						# Capture two or more matched backticks (code span?),
+						# escaped marker, other char, or recurse the pattern:
+						(((?>(`{2,})(?!`).*?[^`]\4(?!`)|\\\\[*]|[^*])+|(?R))+?)
+						# Closing marker: cannot be preceded by whitespace.
+						# Cannot be preceded by Unicode category Zs, Ps, Pi.
 						# Emphasis closing marker cannot form a strong marker.
-						(?![*][^*])/usx',
+						(?(R)\1|(?<![\s\p{Zs}\p{Ps}\p{Pi}])[*](?![*][^*]))/usx',
 					$regexable,
 					$matches
 				)
 				|| $marker === '_'
 				&& preg_match(
-					'/^
-						# Opening marker:
-						_
-						# First char cannot be whitespace.
-						# First char cannot be Unicode category Zs, Pe, Pf.
-						(?![\s\p{Zs}\p{Pe}\p{Pf}])
-						# Capture two or more matched backticks (possible code)
-						# matched nested markers, escaped marker, or other char.
-						((?>(`{2,})(?!`).*?[^`]\2(?!`)|(_+)[^_]*\3|\\\\_|[^_])+?)
-						# Last char cannot be whitespace.
-						# Last char cannot be Unicode category Zs, Ps, Pi.
-						(?<![\s\p{Zs}\p{Ps}\p{Pi}])
-						# Closing marker:
-						_
-						# Emphasis closing marker cannot form a strong marker.
-						(?!_[^_])
-						# Next char after the closing marker must be non-word.
-						\b/usx',
+					'/
+						# Opening marker: cannot be followed by whitespace.
+						# Cannot be followed by Unicode category Zs, Pe, Pf.
+						(?(R)(_{1,2})|^_(?![\s\p{Zs}\p{Pe}\p{Pf}]))
+						# Capture two or more matched backticks (code span?),
+						# escaped marker, other char, or recurse the pattern:
+						(((?>(`{2,})(?!`).*?[^`]\4(?!`)|\\\\_|[^_])+|(?R))+?)
+						# Closing marker: cannot be preceded by whitespace.
+						# Cannot be preceded by Unicode category Zs, Ps, Pi.
+						# Must be followed by 0+ delimeters then a non-word.
+						(?(R)\1|(?<![\s\p{Zs}\p{Ps}\p{Pi}])_(?=_*\b))/usx',
 					$regexable,
 					$matches
 				)
@@ -171,11 +154,13 @@ trait EmphStrongTrait
 					'\\\\',
 					$matches[0]
 				);
-				$matches[1] = str_replace(
+
+				$matches[2] = str_replace(
 					'\\\\'.chr(31),
 					'\\\\',
-					$matches[1]
+					$matches[2]
 				);
+
 				if (
 					// Inline HTML, link, image, or code takes precedence.
 					!$this->detectInlineOverrun(
@@ -187,13 +172,14 @@ trait EmphStrongTrait
 					return [
 						[
 							'emph',
-							$this->parseInline($matches[1]),
+							$this->parseInline($matches[2]),
 						],
 						strlen($matches[0])
 					];
 				}
 			}
 		}
+
 		return [['text', $markdown[0]], 1];
 	}
 

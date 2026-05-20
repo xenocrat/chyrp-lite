@@ -45,6 +45,7 @@ trait FrontMatterTrait
 		for ($i = $current + 1, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
 			$leadingSpaces = strspn($line, ' ');
+
 			if (
 				$leadingSpaces > 3
 				|| strspn(ltrim($line), $fence[0]) < $mw
@@ -62,10 +63,12 @@ trait FrontMatterTrait
 				break;
 			}
 		}
+
 		$block = [
 			'code',
 			'content' => implode("\n", $content),
 		];
+
 		if ($language !== '') {
 			if (preg_match('/^[^ ]+/', $language, $match)) {
 				$block['language'] = $match[0];

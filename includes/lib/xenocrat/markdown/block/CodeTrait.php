@@ -36,6 +36,7 @@ trait CodeTrait
 		// Consume until end of markers...
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $this->expandTabs($lines[$i], $pad);
+
 			if (strspn($line, ' ' . $pad) >= 4) {
 			// A line is code if indented by 4+ spaces and/or a tab.
 				$line = preg_replace(
@@ -81,6 +82,7 @@ trait CodeTrait
 		) {
 			array_pop($content);
 		}
+
 		$block = [
 			'code',
 			'content' => implode("\n", $content),

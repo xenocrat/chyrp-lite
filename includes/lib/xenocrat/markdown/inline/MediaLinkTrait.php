@@ -33,6 +33,7 @@ trait MediaLinkTrait
 				return $block['orig'];
 			}
 		}
+
 		if (
 			preg_match('/\.(mpe?g|mp4|m4v|mov|webm|ogv)$/i', $block['url'])
 		) {

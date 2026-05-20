@@ -83,9 +83,11 @@ trait ListTrait
 		// Consume until end condition...
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $this->expandTabs($lines[$i], $pad);
+
 			$pattern = ($type === 'ol') ?
 				'/^( {0,3})(\d{1,9})([\.\)])([ \x1D]+|$)/' :
 				'/^( {0,3})([\-\+\*])([ \x1D]+|$)/' ;
+
 			// If not the first item, marker indentation must be less than
 			// width of preceeding marker - otherwise it is a continuation
 			// of the current item containing a marker for a sub-list item.
@@ -97,6 +99,7 @@ trait ListTrait
 				if ($type === 'ol') {
 					$nums[] = intval($matches[2]);
 				}
+
 				if ($i === $current) {
 				// First item.
 					// Store the marker for comparison.
@@ -116,6 +119,7 @@ trait ListTrait
 						break;
 					}
 				}
+
 				$mw = strlen($matches[0]);
 				$line = preg_replace(
 					'/\x1D{1,4}/',
@@ -129,12 +133,14 @@ trait ListTrait
 				// No more lines: end of list.
 					break;
 				}
+
 				$next = $this->expandTabs($lines[$i + 1], $pad);
 				$line = preg_replace(
 					'/\x1D{1,4}/',
 					"\t",
 					substr($line, $mw)
 				);
+
 				if ($next === '' || ltrim($next) === '') {
 				// Next line is also blank.
 					$block['items'][$item][] = $line;
@@ -181,9 +187,11 @@ trait ListTrait
 		if ($type === 'ol') {
 			$start = $nums[0];
 			$end = end($nums);
+
 			if ($start !== 1 && $this->keepListStartNumber) {
 				$block['attr']['start'] = $start;
 			}
+
 			if ($start > $end && $this->keepReversedList) {
 				$block['attr']['reversed'] = '';
 			}
@@ -191,14 +199,17 @@ trait ListTrait
 		// Parse the items.
 		foreach ($block['items'] as $itemId => $itemLines) {
 			$itemBlocks = $this->parseBlocks($itemLines);
+
 			if (!empty($itemBlocks)) {
 				if (count($itemBlocks) > 1) {
 				// Multiple blocks: loose list.
 					$block['loose'] = true;
 				}
 			}
+
 			$block['items'][$itemId] = $itemBlocks;
 		}
+
 		return [$block, $i];
 	}
 
@@ -208,6 +219,7 @@ trait ListTrait
 	protected function renderList($block): string
 	{
 		$type = $block['list'];
+
 		if (!empty($block['attr'])) {
 			$output = "<$type "
 				. $this->generateListAttributes($block['attr'])
@@ -215,8 +227,10 @@ trait ListTrait
 		} else {
 			$output = "<$type>\n";
 		}
+
 		foreach ($block['items'] as $item => $itemBlocks) {
 			$li = empty($itemBlocks) ? '<li>' : "<li>\n";
+
 			if (!$block['loose'] && !empty($itemBlocks)) {
 				if ($itemBlocks[0][0] === 'paragraph') {
 				// Tight list with inline paragraphs.
@@ -224,8 +238,10 @@ trait ListTrait
 					$li = '<li>';
 				}
 			}
+
 			$output .= $li . $this->renderAbsy($itemBlocks) . "</li>\n";
 		}
+
 		return $output . "</$type>\n";
 	}
 
@@ -240,6 +256,7 @@ trait ListTrait
 		foreach ($attributes as $name => $value) {
 			$attributes[$name] = "$name=\"$value\"";
 		}
+
 		return implode(' ', $attributes);
 	}
 

@@ -63,6 +63,7 @@ trait FootnoteTrait
 		// Sort all found footnotes by the order in which they are linked in the text.
 		$footnotesSorted = [];
 		$footnoteNum = 0;
+
 		foreach ($this->footnoteLinks as $footnotePos => $footnoteLinkName) {
 			foreach ($this->footnotes as $footnoteName => $footnoteHtml) {
 				if ($footnoteLinkName === (string)$footnoteName) {
@@ -103,18 +104,22 @@ trait FootnoteTrait
 		}
 
 		$prefix = $this->getContextId();
+
 		if ($prefix !== '') {
 			$prefix .= '-';
 		}
 
 		$hr = $this->html5 ? "<hr>\n" : "<hr />\n";
 		$footnotesHtml = "<div class=\"footnotes\" role=\"doc-endnotes\">\n$hr<ol>\n";
+
 		foreach ($footnotesSorted as $footnoteInfo) {
 			$backLinks = [];
+
 			foreach ($footnoteInfo['refs'] as $refIndex => $refNum) {
-				$fnref = count($footnoteInfo['refs']) > 1
-					? $footnoteInfo['num'] . '-' . $refIndex
-					: $footnoteInfo['num'];
+				$fnref = count($footnoteInfo['refs']) > 1 ?
+					$footnoteInfo['num'] . '-' . $refIndex :
+					$footnoteInfo['num'];
+
 				$backLinks[] = '<a href="#'
 					. $prefix
 					. 'fnref'
@@ -122,9 +127,11 @@ trait FootnoteTrait
 					. $fnref
 					. '" role="doc-backlink">'. "\u{21A9}\u{FE0E}" . '</a>';
 			}
+
 			$linksPara = '<p class="footnote-backrefs">'
 				. join("\n", $backLinks)
 				. '</p>';
+
 			$footnotesHtml .= "<li id=\"{$prefix}fn-{$footnoteInfo['num']}\">\n"
 				// Footnotes might themselves contain footnote links.
 				. $this->numberFootnotes(
@@ -134,6 +141,7 @@ trait FootnoteTrait
 				. $linksPara
 				. "\n</li>\n";
 		}
+
 		$footnotesHtml .= "</ol>\n</div>\n";
 		return $footnotesHtml;
 	}
@@ -153,16 +161,19 @@ trait FootnoteTrait
 			"/\u{FFFC}footnote-(refnum|num)(.*?)\u{FFFC}/",
 			function ($match) use ($footnotesSorted, $uncertaintyChr) {
 				$footnoteName = $this->footnoteLinks[$match[2]];
+
 				if (!isset($footnotesSorted[$footnoteName])) {
 				// This is a link to a missing footnote.
 					// Return the uncertainty sign.
 					return $uncertaintyChr
 						. ($match[1] === 'refnum' ? '-' . $match[2] : '');
 				}
+
 				if ($match[1] === 'num') {
 				// Replace only the footnote number.
 					return $footnotesSorted[$footnoteName]['num'];
 				}
+
 				if (count($footnotesSorted[$footnoteName]['refs']) > 1) {
 				// For backlinks:
 				// some have a footnote number and an additional link number.
@@ -171,6 +182,7 @@ trait FootnoteTrait
 						$match[2],
 						$footnotesSorted[$footnoteName]['refs']
 					);
+
 					return $footnotesSorted[$footnoteName]['num']
 						. '-'
 						. $linkNum;
@@ -215,11 +227,13 @@ trait FootnoteTrait
 				'\\\\',
 				$matches[0]
 			);
+
 			$matches[1] = str_replace(
 				'\\\\'.chr(31),
 				'\\\\',
 				$matches[1]
 			);
+
 			$footnoteName = function_exists("mb_convert_case") ?
 				mb_convert_case($matches[1], MB_CASE_FOLD, 'UTF-8') :
 				strtolower($matches[1]);
@@ -239,6 +253,7 @@ trait FootnoteTrait
 				strlen($matches[0])
 			];
 		}
+
 		return [['text', $text[0]], 1];
 	}
 
@@ -249,6 +264,7 @@ trait FootnoteTrait
 	protected function renderFootnoteLink($block): string
 	{
 		$prefix = $this->getContextId();
+
 		if ($prefix !== '') {
 			$prefix .= '-';
 		}
@@ -319,6 +335,7 @@ trait FootnoteTrait
 				),
 				$matches
 			);
+
 			if ($startsFootnote) {
 			// The start of a footnote.
 				$matches[0] = str_replace(
@@ -326,11 +343,13 @@ trait FootnoteTrait
 					'\\\\',
 					$matches[0]
 				);
+
 				$matches[1] = str_replace(
 					'\\\\'.chr(31),
 					'\\\\',
 					$matches[1]
 				);
+
 				$name = function_exists("mb_convert_case") ?
 					mb_convert_case($matches[1], MB_CASE_FOLD, 'UTF-8') :
 					strtolower($matches[1]);

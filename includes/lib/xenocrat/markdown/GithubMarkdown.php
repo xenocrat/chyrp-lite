@@ -82,6 +82,7 @@ class GithubMarkdown extends Markdown
 		// Consume until blank line or end condition...
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $lines[$i];
+
 			if (
 				$line === ''
 				|| ($trimmed = ltrim($line)) === ''
@@ -107,6 +108,7 @@ class GithubMarkdown extends Markdown
 				}
 			}
 		}
+
 		$block = [
 			'paragraph',
 			'content' => $this->parseInline(trim(implode("\n", $content))),
@@ -126,6 +128,7 @@ class GithubMarkdown extends Markdown
 			$br = $this->html5 ? "<br>\n" : "<br />\n";
 			$text[1] = preg_replace("/ *\n/", $br, $text[1]);
 		}
+
 		return parent::renderText($text);
 	}
 
@@ -144,6 +147,7 @@ class GithubMarkdown extends Markdown
 				$markup
 			);
 		}
+
 		return parent::postprocess($markup);
 	}
 }
