@@ -131,43 +131,11 @@
             string $text,
             string $type,
         ): string {
-            preg_match_all(
+            return preg_replace_callback(
                 '/<!--\s*inject\s+([^<>]+?)\s*-->/i',
-                $text,
-                $matches,
-                PREG_SET_ORDER | PREG_OFFSET_CAPTURE
+                fn (array $matches) => $this->get_content($type, $matches[1]),
+                $text
             );
-
-            $labels = array_map(fn ($m) => $m[1][0], $matches);
-            foreach ($labels as $label) {
-                $this->reset_count($type, $label);
-            }
-
-            $replacements = [];
-            foreach ($matches as $match) {
-                $replacements[] = [
-                    'start' => (int) $match[0][1],
-                    'length' => strlen($match[0][0]),
-                    'content' => $this->get_content($type, $match[1][0]),
-                ];
-            }
-
-            foreach (array_reverse($replacements) as $r) {
-                $text = substr_replace($text, $r['content'], $r['start'], $r['length']);
-            }
-
-            return $text;
-        }
-
-        private function reset_count(
-            string $type,
-            string $label
-        ): void {
-            foreach ($this->injectors as $id => $injector) {
-                if ($injector['type'] === $type && $injector['label'] === $label) {
-                    $this->counts[$id] = 0;
-                }
-            }
         }
 
         private function list_types(
