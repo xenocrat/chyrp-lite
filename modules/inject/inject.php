@@ -72,46 +72,14 @@
             $text,
             $post = null
         ): string {
-            preg_match_all(
-                '/<!-- *inject +([^<>]+?) *-->/i',
-                $text,
-                $matches,
-                PREG_SET_ORDER
-            );
-
-            foreach ($matches as $match) {
-                $content = $this->get_content(
-                    self::TYPE_MARKUP_POST,
-                    $match[1]
-                );
-
-                $text = str_replace($match[0], $content, $text);
-            }
-
-            return $text;
+            return $this->replace_injections($text, self::TYPE_MARKUP_POST);
         }
 
         public function markup_page_text(
             $text,
             $page = null
         ): string {
-            preg_match_all(
-                '/<!-- *inject +([^<>]+?) *-->/i',
-                $text,
-                $matches,
-                PREG_SET_ORDER
-            );
-
-            foreach ($matches as $match) {
-                $content = $this->get_content(
-                    self::TYPE_MARKUP_PAGE,
-                    $match[1]
-                );
-
-                $text = str_replace($match[0], $content, $text);
-            }
-
-            return $text;
+            return $this->replace_injections($text, self::TYPE_MARKUP_PAGE);
         }
 
         private function get_content(
@@ -157,6 +125,17 @@
             }
 
             return $content;
+        }
+
+        private function replace_injections(
+            string $text,
+            string $type,
+        ): string {
+            return preg_replace_callback(
+                '/<!--\s*inject\s+([^<>]+?)\s*-->/i',
+                fn (array $matches) => $this->get_content($type, $matches[1]),
+                $text
+            );
         }
 
         private function list_types(
