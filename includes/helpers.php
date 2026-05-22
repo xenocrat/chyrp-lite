@@ -3392,24 +3392,70 @@
     function upload_filter_whitelist(
     ): array {
         return array(
-            # Binary and text formats:
-            "bin",  "epub", "exe",  "kfx",  "md",
-            "mobi", "pdf",  "rtf",  "txt",  "vtt",
-
-            # Archive and compression formats:
-            "7z",   "bz2",  "cab",  "dmg",  "gz",
-            "iso",  "rar",  "tar",  "udf",  "zip",
-
-            # Image formats:
-            "avif", "bmp",  "gif",  "heif", "jpeg",
-            "jpg",  "png",  "tif",  "tiff", "webp", 
-
-            # Video and audio formats:
-            "3gp",  "aif",  "aiff", "avi",  "flac",
-            "m4a",  "m4v",  "mka",  "mkv",  "mov",
-            "mp2",  "mp3",  "mp4",  "mpeg", "mpg",
-            "oga",  "ogg",  "ogv",  "spx",  "ts",
-            "wav",  "webm"
+            "3g2",   # Mobile phone video.
+            "3gp",   # Mobile phone video.
+            "7z",    # Compressed archive.
+            "aac",   # Advanced Audio Coding file.
+            "aif",   # Audio Interchange File Format.
+            "aifc",  # Audio Interchange File Format (compressed).
+            "aiff",  # Audio Interchange File Format.
+            "avi",   # Audio Video Interleave file.
+            "avif",  # AV1 Image File Format.
+            "bin",   # Binary file.
+            "bmp",   # OS/2 or Windows graphics format.
+            "bz2",   # Compressed archive.
+            "cab",   # Cabinet archive.
+            "csv",   # Comma Separated Values text file format.
+            "dmg",   # Apple disk image.
+            "dng",   # Digital Negative archival format.
+            "eml",   # Email conforming to RFC 5322.
+            "epub",  # Electronic Publication e-Reader format.
+            "exe",   # Executable program.
+            "flac",  # Audio file format.
+            "gif",   # Graphics Interchange Format.
+            "gz",    # gzip compressed data.
+            "heic",  # HEIF raster image and compression format.
+            "heif",  # HEIF raster image and compression format.
+            "ico",   # Icon file.
+            "ics",   # ICS calendar format.
+            "iso",   # ISO-9660 table.
+            "jpe",   # Joint Photographic Experts Group graphics file format.
+            "jpeg",  # Joint Photographic Experts Group graphics file format.
+            "jpg",   #Joint Photographic Experts Group graphics file format.
+            "kfx",   # Amazon Kindle e-reader format.
+            "latex", # LaTeX typesetting system and programming language.
+            "m2ts",  # MPEG-2 transport stream.
+            "m4a",   # MPEG-4 audio.
+            "m4v",   # MPEG-4 video.
+            "md",    # Markdown-formatted text file.
+            "mka",   # Matroska audio file.
+            "mkv",   # Matroska video file.
+            "mobi",  # E-Reader format.
+            "mov",   # QuickTime multimedia container format.
+            "mp2",   # MPEG audio file.
+            "mp3",   # MPEG audio file.
+            "mp4",   # MPEG-4 multimedia container format.
+            "mpeg",  # MPEG multimedia container format.
+            "mpg",   # MPEG multimedia container format.
+            "oga",   # Audio file in the Ogg container format.
+            "ogg",   # Ogg container format.
+            "ogv",   # Video file in the Ogg container format.
+            "pdf",   # Portable Document Format.
+            "png",   # Portable Network Graphics file.
+            "rar",   # Archive.
+            "rtf",   # Rich Text Format text file.
+            "srt",   # SubRip subtitle format.
+            "tar",   # tar archive.
+            "tgz",   # tar archive compressed with gzip.
+            "tif",   # Tag Image File Format.
+            "tiff",  # Tag Image File Format.
+            "ts",    # MPEG transport stream.
+            "txt",   # Text file.
+            "vtt",   # WebVTT timed text file.
+            "wav",   # Sound format (Microsoft Windows RIFF WAVE).
+            "webm",  # Video/audio container.
+            "webp",  # Compressed graphics format.
+            "zip"    # Zip archive.
         );
     }
 
