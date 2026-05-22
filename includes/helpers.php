@@ -2417,7 +2417,7 @@
 
     /**
      * Function: get_remote
-     * Retrieves the contents of a URL.
+     * Retrieves the contents of a URL or sends a POST request.
      *
      * Parameters:
      *     $url - The URL of the resource to be retrieved.
@@ -3421,7 +3421,7 @@
             "iso",   # ISO-9660 table.
             "jpe",   # Joint Photographic Experts Group graphics file format.
             "jpeg",  # Joint Photographic Experts Group graphics file format.
-            "jpg",   #Joint Photographic Experts Group graphics file format.
+            "jpg",   # Joint Photographic Experts Group graphics file format.
             "kfx",   # Amazon Kindle e-reader format.
             "latex", # LaTeX typesetting system and programming language.
             "m2ts",  # MPEG-2 transport stream.
