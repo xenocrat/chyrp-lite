@@ -2072,6 +2072,21 @@
                     __("File not found.")
                 );
 
+            $filter = upload_filter_whitelist();
+
+            for ($i = 0; $i < count($filter); $i++) { 
+                if (str_ends_with($filename, ".".$filter[$i]))
+                    break;
+
+                if (!isset($filter[$i + 1])) {
+                    error(
+                        __("Error"),
+                        __("Uploaded file is of an unsupported type."),
+                        code:415
+                    );
+                }
+            }
+
             $filepath = uploaded($filename, false);
 
             if (!is_readable($filepath) or !is_file($filepath))
@@ -3534,7 +3549,9 @@
 
             # Prevent attempts to use unsafe paths.
             $uploads_path = preg_replace(
-                "/^$qdir((admin|ajax|feathers|fonts|includes|modules|themes)$qdir|$)/",
+                "/^$qdir(
+                    (admin|ajax|feathers|fonts|includes|modules|themes|tools)$qdir|$
+                    )/x",
                 DIR."uploads".DIR,
                 $uploads_path
             );
