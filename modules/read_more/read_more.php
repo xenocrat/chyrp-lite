@@ -76,11 +76,11 @@
             $text,
             $post = null
         ): string {
-            if (!preg_match("/<!-- *more( +[^>]*)?-->/i", $text, $matches))
+            if (!preg_match("/<!--\s*more(\s+[^>]*)?-->/i", $text, $matches))
                 return $text;
 
             if (!isset($post) or !$this->eligible())
-                return preg_replace("/<!-- *more( +[^>]*)?-->/i", "", $text, 1);
+                return preg_replace("/<!--\s*more(\s+[^>]*)?-->/i", "", $text, 1);
 
             $settings = Config::current()->module_read_more;
 
@@ -91,7 +91,7 @@
             );
 
             $url = (!$post->no_results) ? $post->url() : "#" ;
-            $split = preg_split("/<!-- *more( +[^>]*)?-->/i", $text, 2);
+            $split = preg_split("/<!--\s*more(\s+[^>]*)?-->/i", $text, 2);
 
             return $split[0].
                    '<a class="read_more" href="'.$url.'">'.
