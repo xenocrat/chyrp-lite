@@ -19,13 +19,24 @@ upgrade() {
     echo "Upgrade complete."
 }
 
-if [ -f /data/config.json.php ]; then
-    cp /data/config.json.php /var/www/html/includes/config.json.php
-    rm /var/www/html/install.php
-    upgrade=true
+inc_dir="/var/www/html/includes"
+have_config="no"
+
+if [[ -f /data/config.json.php ]]; then
+  cp /data/config.json.php "$inc_dir"
 fi
 
-sync_config &
-[ "$upgrade" = true ] && upgrade &
+if [[ -f "$inc_dir/config.json.php" ]]; then
+  have_config="yes"
+  sync_config &
+fi
+
+if [[ $have_config == "yes" && -f "$inc_dir/install.php" ]]; then
+  rm $inc_dir/install.php
+fi
+
+if [[ $have_config == "yes" && -f "$inc_dir/upgrade.php" ]]; then
+  upgrade &
+fi
 
 exec apache2-foreground
