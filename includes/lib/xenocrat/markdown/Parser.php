@@ -20,7 +20,7 @@ abstract class Parser
 {
 	const VERSION_MAJOR = 4;
 	const VERSION_MINOR = 12;
-	const VERSION_PATCH = 0;
+	const VERSION_PATCH = 1;
 
 	/**
 	 * @var integer - The maximum nesting level for language elements.
@@ -60,7 +60,9 @@ abstract class Parser
 	protected $blockPriorities = [];
 
 	/**
-	 * @var array - The parser's current context.
+	 * @var array - The parser's context stack:
+	 * 
+	 * An array of strings in the form identifyFoo, parseBar, consumeBaz, renderBoo.
 	 */
 	protected $context = [];
 
@@ -71,6 +73,8 @@ abstract class Parser
 
 	/**
 	 * @var string - Identifier for this rendering context.
+	 * 
+	 * Set this to output unique element IDs when traits render HTML anchors etc.
 	 */
 	private $_contextId = '';
 
@@ -764,7 +768,10 @@ abstract class Parser
 			foreach ($chunks as $chunk) {
 				if ($chunk === "\t") {
 					$length = $this->utf8Strlen($output);
-					$output .= str_repeat($chr, 4 - ($length % 4));
+					$output .= str_repeat(
+						$chr,
+						4 - ($length % 4)
+					);
 				} else {
 					$output .= $chunk;
 				}

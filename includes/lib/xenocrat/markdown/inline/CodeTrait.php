@@ -85,6 +85,6 @@ trait CodeTrait
 			. '</code>';
 	}
 
-	abstract protected function renderText($block);
 	abstract protected function escapeHtmlEntities($text, $flags = 0);
+	abstract protected function renderText($block);
 }

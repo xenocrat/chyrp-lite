@@ -117,8 +117,9 @@ trait CodeTrait
 			. "</code></pre>\n";
 	}
 
+	abstract protected function collapseTabs($text, $chr = ' ');
+	abstract protected function escapeHtmlEntities($text, $flags = 0);
 	abstract protected function expandTabs($text, $chr = ' ');
 	abstract protected function unEscapeBackslash($text);
-	abstract protected function escapeHtmlEntities($text, $flags = 0);
 	abstract protected function unEscapeHtmlEntities($text, $flags = 0);
 }

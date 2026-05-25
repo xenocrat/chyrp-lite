@@ -270,6 +270,7 @@ trait ListTrait
 		return implode(' ', $attributes);
 	}
 
+	abstract protected function collapseTabs($text, $chr = ' ');
 	abstract protected function expandTabs($text, $chr = ' ');
 	abstract protected function parseBlocks($lines);
 	abstract protected function renderAbsy($absy);

@@ -709,11 +709,11 @@ trait LinkTrait
 		return [false, --$current];
 	}
 
-	abstract protected function renderText($block);
 	abstract protected function consumeParagraph($lines, $current);
+	abstract protected function escapeHtmlEntities($text, $flags = 0);
 	abstract protected function parseInline($text);
 	abstract protected function renderAbsy($blocks);
+	abstract protected function renderText($block);
 	abstract protected function unEscapeBackslash($text);
-	abstract protected function escapeHtmlEntities($text, $flags = 0);
 	abstract protected function unescapeHtmlEntities($text, $flags = 0);
 }

@@ -36,5 +36,4 @@ trait RuleTrait
 	{
 		return $this->html5 ? "<hr>\n" : "<hr />\n";
 	}
-
 } 

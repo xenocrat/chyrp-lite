@@ -363,7 +363,7 @@ trait HtmlTrait
 		return [['text', '&quot;'], 1];
 	}
 
-	abstract protected function renderText($block);
 	abstract protected function EscapeHtmlEntities($text, $flags = 0);
+	abstract protected function renderText($block);
 	abstract protected function unEscapeHtmlEntities($text, $flags = 0);
 }

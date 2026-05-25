@@ -216,8 +216,8 @@ trait TocTrait
 		);
 	}
 
-	abstract public function getContextId();
-	abstract protected function renderAbsy($absy);
 	abstract protected function escapeHtmlEntities($text, $flags = 0);
+	abstract protected function renderAbsy($absy);
 	abstract protected function unEscapeHtmlEntities($text, $flags = 0);
+	abstract public function getContextId();
 }

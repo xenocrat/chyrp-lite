@@ -97,7 +97,7 @@ trait HighlightTrait
 	}
 
 	abstract protected function detectInlineOverrun($text, $length, $elements);
-	abstract protected function renderText($block);
 	abstract protected function parseInline($text);
 	abstract protected function renderAbsy($blocks);
+	abstract protected function renderText($block);
 }

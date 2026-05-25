@@ -179,8 +179,8 @@ trait TableTrait
 			. "</table>\n";
 	}
 
-	abstract protected function renderText($block);
+	abstract protected function detectLineType($lines, $current);
 	abstract protected function parseInline($text);
 	abstract protected function renderAbsy($absy);
-	abstract protected function detectLineType($lines, $current);
+	abstract protected function renderText($block);
 }
