@@ -32,7 +32,13 @@ trait ListTrait
 	 */
 	protected function identifyOl($line): bool
 	{
-		return preg_match('/^ {0,3}\d{1,9}[\.\)]([ \t]|$)/', $line);
+		return (
+			preg_match('/^ {0,3}(\d{1,9})[\.\)]([ \t]|$)/', $line, $matches)
+			&& (
+				$matches[1] === '1'
+				|| reset($this->context) !== 'consumeParagraph'
+			)
+		);
 	}
 
 	/**
@@ -83,10 +89,9 @@ trait ListTrait
 		// Consume until end condition...
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $this->expandTabs($lines[$i], $pad);
-
 			$pattern = ($type === 'ol') ?
-				'/^( {0,3})(\d{1,9})([\.\)])([ \x1D]+|$)/' :
-				'/^( {0,3})([\-\+\*])([ \x1D]+|$)/' ;
+				'/^( {0,3})(\d{1,9})([\.\)])([ \x1D]{1,4}|$)/' :
+				'/^( {0,3})([\-\+\*])([ \x1D]{1,4}|$)/' ;
 
 			// If not the first item, marker indentation must be less than
 			// width of preceeding marker - otherwise it is a continuation
@@ -121,10 +126,9 @@ trait ListTrait
 				}
 
 				$mw = strlen($matches[0]);
-				$line = preg_replace(
-					'/\x1D{1,4}/',
-					"\t",
-					substr($line, $mw)
+				$line = $this->collapseTabs(
+					substr($line, $mw),
+					$pad
 				);
 				$block['items'][$item][] = $line;
 			} elseif ($line === '' || ltrim($line) === '') {
@@ -135,33 +139,28 @@ trait ListTrait
 				}
 
 				$next = $this->expandTabs($lines[$i + 1], $pad);
-				$line = preg_replace(
-					'/\x1D{1,4}/',
-					"\t",
-					substr($line, $mw)
-				);
+				$line = substr($line, $mw);
 
 				if ($next === '' || ltrim($next) === '') {
 				// Next line is also blank.
 					$block['items'][$item][] = $line;
 				} elseif (strspn($next, ' ' . $pad) >= $mw) {
-				// Next line is indented: loose list.
+				// Next line is indented.
 					$block['items'][$item][] = $line;
-					$block['loose'] = true;
 				} elseif (preg_match($pattern, $next)) {
 				// Next line is a marker: loose list.
 					$block['items'][$item][] = $line;
 					$block['loose'] = true;
 				} else {
 				// next line is not list content.
+					--$i;
 					break;
 				}
 			} elseif (strspn($line, ' ' . $pad) >= $mw) {
 			// Line continues the current item.
-				$line = preg_replace(
-					'/\x1D{1,4}/',
-					"\t",
-					substr($line, $mw)
+				$line = $this->collapseTabs(
+					substr($line, $mw),
+					$pad
 				);
 				$block['items'][$item][] = $line;
 			} elseif (
@@ -198,11 +197,15 @@ trait ListTrait
 		}
 		// Parse the items.
 		foreach ($block['items'] as $itemId => $itemLines) {
-			$itemBlocks = $this->parseBlocks($itemLines);
+			$blanks = 0;
+			$itemBlocks = $this->parseBlocks($itemLines, $blanks);
 
 			if (!empty($itemBlocks)) {
-				if (count($itemBlocks) > 1) {
-				// Multiple blocks: loose list.
+				if (
+					$blanks > 0
+					&& count($itemBlocks) > 1
+				) {
+				// 2+ blocks separated by blank lines: loose list.
 					$block['loose'] = true;
 				}
 			}
@@ -232,10 +235,17 @@ trait ListTrait
 			$li = empty($itemBlocks) ? '<li>' : "<li>\n";
 
 			if (!$block['loose'] && !empty($itemBlocks)) {
-				if ($itemBlocks[0][0] === 'paragraph') {
-				// Tight list with inline paragraphs.
-					$itemBlocks = $itemBlocks[0]['content'];
-					$li = '<li>';
+				for ($i = count($itemBlocks) - 1; $i > -1; $i--) { 
+					if ($itemBlocks[$i][0] === 'paragraph') {
+						$blocks = $itemBlocks[$i]['content'];
+						if ($i === 0) {
+							$li = '<li>';
+						}
+						if (isset($itemBlocks[$i + 1])) {
+							$blocks[] = ['text', "\n"];
+						}
+						array_splice($itemBlocks, $i, 1, $blocks);
+					}
 				}
 			}
 

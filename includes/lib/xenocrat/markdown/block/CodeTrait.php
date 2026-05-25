@@ -39,10 +39,9 @@ trait CodeTrait
 
 			if (strspn($line, ' ' . $pad) >= 4) {
 			// A line is code if indented by 4+ spaces and/or a tab.
-				$line = preg_replace(
-					'/\x1D{1,4}/',
-					"\t",
-					substr($line, 4)
+				$line = $this->collapseTabs(
+					substr($line, 4),
+					$pad
 				);
 				$content[] = $line;
 			} elseif (

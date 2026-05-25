@@ -49,7 +49,7 @@ trait QuoteTrait
 			}
 
 			if (ltrim($line) !== '') {
-				if ($line[0] == '>' && !isset($line[1])) {
+				if ($line[0] === '>' && !isset($line[1])) {
 					$line = '';
 				} elseif (str_starts_with($line, '> ')) {
 					$line = substr($line, 2);

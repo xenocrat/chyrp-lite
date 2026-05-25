@@ -19,7 +19,7 @@ use RuntimeException;
 abstract class Parser
 {
 	const VERSION_MAJOR = 4;
-	const VERSION_MINOR = 11;
+	const VERSION_MINOR = 12;
 	const VERSION_PATCH = 0;
 
 	/**
@@ -254,11 +254,18 @@ abstract class Parser
 	protected function detectLineType($lines, $current): string
 	{
 		$line = $lines[$current];
+		$found = false;
 		$blockTypes = $this->blockTypes();
 
 		foreach($blockTypes as $blockType) {
+			$blockType = ucfirst($blockType);
+			array_unshift($this->context, 'identify' . $blockType);
 			if ($this->{'identify' . $blockType}($line, $lines, $current)) {
-				return $blockType;
+				$found = true;
+			}
+			array_shift($this->context);
+			if ($found === true) {
+				return lcfirst($blockType);
 			}
 		}
 
@@ -271,9 +278,10 @@ abstract class Parser
 	 * and call consume function afterwards.
 	 *
 	 * @param array $lines
+	 * @param int $blanks
 	 * @return array
 	 */
-	protected function parseBlocks($lines): array
+	protected function parseBlocks($lines, &$blanks = 0): array
 	{
 		if ($this->_depth >= $this->maximumNestingLevel) {
 		// Maximum depth is reached; do not parse input.
@@ -300,6 +308,8 @@ abstract class Parser
 				if ($block !== false) {
 					$blocks[] = $block;
 				}
+			} else {
+				$blanks++;
 			}
 		}
 
@@ -320,11 +330,16 @@ abstract class Parser
 	protected function parseBlock($lines, $current): array
 	{
 		// Identify block type for this line.
-		$blockType = $this->detectLineType($lines, $current);
+		$blockType = ucfirst(
+			$this->detectLineType($lines, $current)
+		);
 
 		// Call consume method for the detected block type
 		// to consume further lines.
-		return $this->{'consume' . $blockType}($lines, $current);
+		array_unshift($this->context, 'consume' . $blockType);
+		$consumed = $this->{'consume' . $blockType}($lines, $current);
+		array_shift($this->context);
+		return $consumed;
 	}
 
 	/**
@@ -337,8 +352,9 @@ abstract class Parser
 	{
 		$output = '';
 		foreach ($blocks as $block) {
-			array_unshift($this->context, $block[0]);
-			$output .= $this->{'render' . $block[0]}($block);
+			$blockType = ucfirst($block[0]);
+			array_unshift($this->context, 'render' . $blockType);
+			$output .= $this->{'render' . $blockType}($block);
 			array_shift($this->context);
 		}
 		return $output;
@@ -426,7 +442,9 @@ abstract class Parser
 						array($this, $methodName.'Markers')
 					);
 					foreach($array as $marker) {
-						$markers[$marker] = $methodName;
+						$markers[$marker] = 'parse' . ucfirst(
+							substr($methodName, 5)
+						);
 					}
 				}
 			}
@@ -717,6 +735,7 @@ abstract class Parser
 	 * Expand tabs into 1-4 occurrences of a replacement character.
 	 *
 	 * @param string $text
+	 * @param string $chr
 	 * @return string
 	 */
 	protected function expandTabs($text, $chr = ' '): string
@@ -755,5 +774,54 @@ abstract class Parser
 		}
 
 		return $expanded;
+	}
+
+	/**
+	 * Collapse replacement characters into tabs.
+	 *
+	 * @param string $text
+	 * @param string $chr
+	 * @return string
+	 */
+	protected function collapseTabs($text, $chr = ' '): string
+	{
+		if ($text === '') {
+			return '';
+		}
+
+		$collapsed = '';
+		$lines = preg_split(
+			"/(\n)/",
+			$text,
+			-1,
+			PREG_SPLIT_DELIM_CAPTURE
+		);
+
+		foreach ($lines as $line) {
+			$c = preg_quote($chr, '/');
+			$length = strlen(
+				preg_replace(
+					"/^([$c ]*).*$/u", '$1',
+					$line
+				)
+			);
+			$indent = substr($line, 0, $length);
+			$output = substr($line, $length);
+			$indent = strtr(
+				$indent,
+				[
+					str_repeat($chr, 4) => "\t",
+					$chr => ' '
+				]
+			);
+			$output = preg_replace(
+				"/$c{1,4}/u",
+				"\t",
+				$output
+			);
+			$collapsed .= $indent . $output;
+		}
+
+		return $collapsed;
 	}
 }

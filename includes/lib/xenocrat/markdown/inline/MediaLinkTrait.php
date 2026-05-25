@@ -20,8 +20,8 @@ trait MediaLinkTrait
 
 	protected function renderImage($block): string
 	{
-		if (isset($block['refkey'])) {
-			if (($ref = $this->lookupReference($block['refkey'])) !== false) {
+		if (isset($block['label'])) {
+			if (($ref = $this->lookupReference($block['label'])) !== false) {
 				$block = array_merge($block, $ref);
 			} else {
 				if (str_starts_with($block['orig'], '![')) {
