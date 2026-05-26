@@ -33,6 +33,7 @@
     define('DIR',                           DIRECTORY_SEPARATOR);
     define('MAIN_DIR',                      dirname(__FILE__));
     define('INCLUDES_DIR',                  MAIN_DIR.DIR."includes");
+    define('STORAGE_DIR',                   $_SERVER['CHYRP_STORAGE_DIR'] ?? INCLUDES_DIR);
     define('CACHES_DIR',                    INCLUDES_DIR.DIR."caches");
     define('MODULES_DIR',                   MAIN_DIR.DIR."modules");
     define('FEATHERS_DIR',                  MAIN_DIR.DIR."feathers");
@@ -129,7 +130,7 @@
     load_translator("chyrp", INCLUDES_DIR.DIR."locale");
 
     # Already installed?
-    if (file_exists(INCLUDES_DIR.DIR."config.json.php"))
+    if (file_exists(STORAGE_DIR.DIR."config.json.php"))
         redirect($config->url);
 
     if (class_exists("PDO")) {
@@ -160,6 +161,11 @@
     if (!is_writable(INCLUDES_DIR))
         alert(
             __("Please CHMOD or CHOWN the <em>includes</em> directory to make it writable.")
+        );
+
+    if (STORAGE_DIR !== INCLUDES_DIR && !is_writable(STORAGE_DIR))
+        alert(
+            __("Please CHMOD or CHOWN the <em>storage</em> directory to make it writable.")
         );
 
     # Test if we can write to CACHES_DIR (needed by some extensions).
