@@ -46,6 +46,7 @@ trait HeadlineTrait
 	{
 		return (
 			!empty($lines[$current + 1])
+			&& preg_match('/^ {0,3}[^\s]/', $lines[$current])
 			&& preg_match('/^ {0,3}(\-+|=+)\s*$/', $lines[$current + 1])
 		);
 	}

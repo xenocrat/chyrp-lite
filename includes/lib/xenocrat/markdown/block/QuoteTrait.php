@@ -54,7 +54,11 @@ trait QuoteTrait
 				} elseif (str_starts_with($line, '> ')) {
 					$line = substr($line, 2);
 				} elseif (str_starts_with($line, '>')) {
-					$line = substr($line, 1);
+					$line = preg_replace(
+						'/^\t([\t ]*)/',
+						'$1  ',
+						substr($line, 1)
+					);
 				} elseif (
 					end($content) !== ''
 					&& $this->detectLineType($lines, $i) === 'paragraph'

@@ -90,33 +90,39 @@ trait ListTrait
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $this->expandTabs($lines[$i], $pad);
 			$pattern = ($type === 'ol') ?
-				'/^( {0,3})(\d{1,9})([\.\)])([ \x1D]{1,4}|$)/' :
-				'/^( {0,3})([\-\+\*])([ \x1D]{1,4}|$)/' ;
+				'/^(([ ]{0,3})(\d{1,9})([\.\)]))
+					# Match 1 spacing char if there are 5+ (code block?),
+					# otherwise match 1-4 spacing chars or end of line.
+					([ \x1D](?=[ \x1D]{4})|[ \x1D]{1,4}|$)/x' :
+				'/^(([ ]{0,3})([\-\+\*]))
+					# Match 1 spacing char if there are 5+ (code block?),
+					# otherwise match 1-4 spacing chars or end of line.
+					([ \x1D](?=[ \x1D]{4})|[ \x1D]{1,4}|$)/x';
 
 			// If not the first item, marker indentation must be less than
 			// width of preceeding marker - otherwise it is a continuation
 			// of the current item containing a marker for a sub-list item.
 			if (
 				preg_match($pattern, $line, $matches)
-				&& ($i === $current || strlen($matches[1]) < $mw)
+				&& ($i === $current || strlen($matches[2]) < $mw)
 			) {
 				// Capture the ol item number.
 				if ($type === 'ol') {
-					$nums[] = intval($matches[2]);
+					$nums[] = intval($matches[3]);
 				}
 
 				if ($i === $current) {
 				// First item.
 					// Store the marker for comparison.
 					$marker = $type === 'ol' ?
-						$matches[3] :
-						$matches[2] ;
+						$matches[4] :
+						$matches[3];
 				} else {
 					$item++;
 
 					$newMarker = $type === 'ol' ?
-						$matches[3] :
-						$matches[2] ;
+						$matches[4] :
+						$matches[3];
 
 					// Marker has changed: end of list.
 					if (strcmp($marker, $newMarker) !== 0) {
@@ -125,7 +131,10 @@ trait ListTrait
 					}
 				}
 
-				$mw = strlen($matches[0]);
+				$mw = strlen($line) === strlen($matches[0]) ?
+					strlen($matches[1]) + 1 :
+					strlen($matches[0]);
+
 				$line = $this->collapseTabs(
 					substr($line, $mw),
 					$pad
@@ -140,19 +149,25 @@ trait ListTrait
 
 				$next = $this->expandTabs($lines[$i + 1], $pad);
 				$line = substr($line, $mw);
+				$text = ltrim(implode('', $block['items'][$item]));
 
-				if ($next === '' || ltrim($next) === '') {
+				if (preg_match($pattern, $next)) {
+				// Next line is a marker: loose list.
+					$block['items'][$item][] = $line;
+					$block['loose'] = true;
+				} elseif ($text === '') {
+				// 2 blank lines not followed by a marker.
+					$block['items'][$item][] = $line;
+					--$i;
+					break;
+				} elseif ($next === '' || ltrim($next) === '') {
 				// Next line is also blank.
 					$block['items'][$item][] = $line;
 				} elseif (strspn($next, ' ' . $pad) >= $mw) {
 				// Next line is indented.
 					$block['items'][$item][] = $line;
-				} elseif (preg_match($pattern, $next)) {
-				// Next line is a marker: loose list.
-					$block['items'][$item][] = $line;
-					$block['loose'] = true;
 				} else {
-				// next line is not list content.
+				// Next line is not list content.
 					--$i;
 					break;
 				}
@@ -176,8 +191,7 @@ trait ListTrait
 			// If next line is <hr>, end the list.
 			if (
 				!empty($lines[$i + 1])
-				&& method_exists($this, 'identifyHr')
-				&& $this->identifyHr($lines[$i + 1])
+				&& $this->detectLineType($lines, $i + 1) === 'hr'
 			) {
 				break;
 			}

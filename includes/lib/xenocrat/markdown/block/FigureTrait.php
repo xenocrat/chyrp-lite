@@ -109,7 +109,7 @@ trait FigureTrait
 			'' :
 			"<figcaption>\n"
 				. $this->renderAbsy($block['caption'])
-				. "</figcaption>\n" ;
+				. "</figcaption>\n";
 
 		if ($block['endcap'] === false) {
 			$figure = "<figure>\n"
