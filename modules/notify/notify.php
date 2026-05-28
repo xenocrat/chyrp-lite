@@ -59,6 +59,25 @@ class Notify extends Modules {
         );
     }
 
+    public function add_comment(
+        Comment $comment
+    ): void
+    {
+        $config = Config::current();
+
+        $site = $config->name;
+        $notify = $config->module_notify;
+
+        if (empty($notify['ntfy_topic']) || empty($notify['ntfy_host'])) {
+            return;
+        }
+
+        $url = $notify['ntfy_host'] . '/' . $notify['ntfy_topic'];
+
+        $message = "[{$site}]: New Comment";
+        get_remote($url, post: true, data: $message);
+    }
+
     public function settings_nav(
         array $navs
     ): array {
