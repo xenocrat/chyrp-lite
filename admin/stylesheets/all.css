@@ -1130,6 +1130,9 @@ div.confirmation {
 a.emblem {
     text-decoration: none;
 }
+a.help {
+    cursor: help;
+}
 label.emblem {
     display: inline;
     cursor: pointer;
