@@ -149,42 +149,48 @@
     # Test for basic database access requirements.
     if (empty($drivers))
         alert(
-            __("PDO is required for database access."));
+            __("PDO is required for database access.")
+        );
 
     # Test if we can write to MAIN_DIR (needed for the .htaccess file).
-    if (!is_writable(MAIN_DIR))
+    if (!is_writable(MAIN_DIR)) {
+        $errdir = fix(MAIN_DIR, false, true);
         alert(
-            __("Please CHMOD or CHOWN the installation directory to make it writable.")
+            _f("Please CHMOD or CHOWN <em>%s</em> to make it writable.", $errdir)
         );
+    }
 
     # Test if we can write to INCLUDES_DIR (needed for config.json.php).
-    if (!is_writable(INCLUDES_DIR))
+    if (!is_writable(STORAGE_DIR)) {
+        $errdir = fix(STORAGE_DIR, false, true);
         alert(
-            __("Please CHMOD or CHOWN the <em>includes</em> directory to make it writable.")
+            _f("Please CHMOD or CHOWN <em>%s</em> to make it writable.", $errdir)
         );
-
-    if (STORAGE_DIR !== INCLUDES_DIR && !is_writable(STORAGE_DIR))
-        alert(
-            __("Please CHMOD or CHOWN the <em>storage</em> directory to make it writable.")
-        );
+    }
 
     # Test if we can write to CACHES_DIR (needed by some extensions).
-    if (!is_writable(CACHES_DIR))
+    if (!is_writable(CACHES_DIR)) {
+        $errdir = fix(CACHES_DIR, false, true);
         alert(
-            __("Please CHMOD or CHOWN the <em>caches</em> directory to make it writable.")
+            _f("Please CHMOD or CHOWN <em>%s</em> to make it writable.", $errdir)
         );
+    }
 
     # Test if we can write to twig cache.
-    if (!is_writable(CACHES_DIR.DIR."twig"))
+    if (!is_writable(CACHES_DIR.DIR."twig")) {
+        $errdir = fix(CACHES_DIR.DIR."twig", false, true);
         alert(
-            __("Please CHMOD or CHOWN the <em>twig</em> directory to make it writable.")
+            _f("Please CHMOD or CHOWN <em>%s</em> to make it writable.", $errdir)
         );
+    }
 
     # Test if we can write to thumbs cache.
-    if (!is_writable(CACHES_DIR.DIR."thumbs"))
+    if (!is_writable(CACHES_DIR.DIR."thumbs")) {
+        $errdir = fix(CACHES_DIR.DIR."thumbs", false, true);
         alert(
-            __("Please CHMOD or CHOWN the <em>thumbs</em> directory to make it writable.")
+            _f("Please CHMOD or CHOWN <em>%s</em> to make it writable.", $errdir)
         );
+    }
 
     /**
      * Function: alert
