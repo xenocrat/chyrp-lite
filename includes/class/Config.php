@@ -65,7 +65,7 @@
             $security = "<?php header(\"Status: 403\"); exit(\"Access denied.\"); ?>\n";
 
             $contents = @file_get_contents(
-                INCLUDES_DIR.DIR."config.json.php"
+                STORAGE_DIR.DIR."config.json.php"
             );
 
             if ($contents === false)
@@ -96,7 +96,7 @@
             );
 
             return @file_put_contents(
-                INCLUDES_DIR.DIR."config.json.php",
+                STORAGE_DIR.DIR."config.json.php",
                 $contents
             );
         }

@@ -96,6 +96,12 @@
     # Absolute path to /includes.
     define('INCLUDES_DIR', MAIN_DIR.DIR."includes");
 
+    # Constant: STORAGE_DIR
+    # Absolute path to the directory that holds configuration data
+    if (!defined('STORAGE_DIR')) {
+        define('STORAGE_DIR', $_SERVER['CHYRP_STORAGE_DIR'] ?? INCLUDES_DIR);
+    }
+
     # Constant: CACHES_DIR
     # Absolute path to /includes/caches.
     define('CACHES_DIR', INCLUDES_DIR.DIR."caches");
@@ -374,7 +380,7 @@
         );
 
     # Exit if the config file is missing.
-    if (!file_exists(INCLUDES_DIR.DIR."config.json.php"))
+    if (!file_exists(STORAGE_DIR.DIR."config.json.php"))
         error(
             __("Service Unavailable"),
             __("This resource cannot respond because it is not configured."),
