@@ -518,7 +518,7 @@
     ): string {
         if (
             INSTALLING or
-            !file_exists(INCLUDES_DIR.DIR."config.json.php")
+            !file_exists(STORAGE_DIR.DIR."config.json.php")
         ) {
             return isset($_REQUEST['locale']) ?
                 $_REQUEST['locale'] :
