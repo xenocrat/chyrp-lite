@@ -33,6 +33,7 @@
     define('DIR',                           DIRECTORY_SEPARATOR);
     define('MAIN_DIR',                      dirname(__FILE__));
     define('INCLUDES_DIR',                  MAIN_DIR.DIR."includes");
+    define('STORAGE_DIR',                   $_SERVER['CHYRP_STORAGE_DIR'] ?? INCLUDES_DIR);
     define('CACHES_DIR',                    INCLUDES_DIR.DIR."caches");
     define('MODULES_DIR',                   MAIN_DIR.DIR."modules");
     define('FEATHERS_DIR',                  MAIN_DIR.DIR."feathers");
