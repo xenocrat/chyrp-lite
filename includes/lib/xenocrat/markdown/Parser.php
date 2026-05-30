@@ -19,7 +19,7 @@ use RuntimeException;
 abstract class Parser
 {
 	const VERSION_MAJOR = 4;
-	const VERSION_MINOR = 13;
+	const VERSION_MINOR = 14;
 	const VERSION_PATCH = 0;
 
 	/**
@@ -784,7 +784,7 @@ abstract class Parser
 	}
 
 	/**
-	 * Collapse replacement characters into tabs.
+	 * Collapse replacement characters into tabs, maintain initial indent.
 	 *
 	 * @param string $text
 	 * @param string $chr
@@ -796,6 +796,7 @@ abstract class Parser
 			return '';
 		}
 
+		$c = preg_quote($chr, '/');
 		$collapsed = '';
 		$lines = preg_split(
 			"/(\n)/",
@@ -805,7 +806,6 @@ abstract class Parser
 		);
 
 		foreach ($lines as $line) {
-			$c = preg_quote($chr, '/');
 			$length = strlen(
 				preg_replace(
 					"/^([$c ]*).*$/u", '$1',

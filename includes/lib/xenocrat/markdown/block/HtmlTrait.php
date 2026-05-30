@@ -105,11 +105,7 @@ trait HtmlTrait
 				$line,
 				$matches
 			)
-			&& (
-				!isset($lines[$current - 1])
-				|| $lines[$current - 1] === ''
-				|| ltrim($lines[$current - 1]) === ''
-			)
+			&& reset($this->context) !== 'consumeParagraph'
 		) {
 		// Type 7.
 			return true;

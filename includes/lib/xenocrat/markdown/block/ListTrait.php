@@ -131,6 +131,7 @@ trait ListTrait
 					}
 				}
 
+				// +1 spacing char if the marker ended the line.
 				$mw = strlen($line) === strlen($matches[0]) ?
 					strlen($matches[1]) + 1 :
 					strlen($matches[0]);
@@ -188,9 +189,11 @@ trait ListTrait
 				--$i;
 				break;
 			}
-			// If next line is <hr>, end the list.
+			// If the next line is <hr> and not indented enough
+			// to be contained in the current item, end the list.
 			if (
 				!empty($lines[$i + 1])
+				&& strspn($lines[$i + 1], ' ') < $mw
 				&& $this->detectLineType($lines, $i + 1) === 'hr'
 			) {
 				break;
