@@ -3442,6 +3442,7 @@
             "ogv",   # Video file in the Ogg container format.
             "pdf",   # Portable Document Format.
             "png",   # Portable Network Graphics file.
+            "pnj",   # JPEG image data in a PNG container.
             "rar",   # Archive.
             "rtf",   # Rich Text Format text file.
             "srt",   # SubRip subtitle format.
