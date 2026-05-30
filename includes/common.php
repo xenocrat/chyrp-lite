@@ -97,10 +97,8 @@
     define('INCLUDES_DIR', MAIN_DIR.DIR."includes");
 
     # Constant: STORAGE_DIR
-    # Absolute path to the directory that holds configuration data
-    if (!defined('STORAGE_DIR')) {
-        define('STORAGE_DIR', $_SERVER['CHYRP_STORAGE_DIR'] ?? INCLUDES_DIR);
-    }
+    # Absolute path to the directory that holds configuration data.
+    define('STORAGE_DIR', $_SERVER['CHYRP_STORAGE_DIR'] ?? INCLUDES_DIR);
 
     # Constant: CACHES_DIR
     # Absolute path to /includes/caches.
