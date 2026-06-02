@@ -1346,6 +1346,34 @@ var Write = {
 
                 break;
 
+            case 'sup':
+                opening = (markdown) ?
+                    "++" :
+                    '<sup>' ;
+
+                closing = (markdown) ?
+                    "++" :
+                    '</sup>' ;
+
+                if (selection == "")
+                    selection = " ";
+
+                break;
+
+            case 'sub':
+                opening = (markdown) ?
+                    "--" :
+                    '<sub>' ;
+
+                closing = (markdown) ?
+                    "--" :
+                    '</sub>' ;
+
+                if (selection == "")
+                    selection = " ";
+
+                break;
+
             case 'hyperlink':
                 if (isURL(selection)) {
                     if (fragment) {
@@ -1398,6 +1426,20 @@ var Write = {
                 closing = (markdown) ?
                     "\n<<<\n" :
                     '\n</aside>\n' ;
+
+                break;
+
+            case 'figure':
+                opening = (markdown) ?
+                    "\n: " :
+                    '\n<figure>\n' ;
+
+                closing = (markdown) ?
+                    "\n" :
+                    '\n</figure>\n' ;
+
+                if (markdown)
+                    selection = selection.replace(/\n/g, "\n: ");
 
                 break;
 
