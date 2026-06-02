@@ -1434,6 +1434,10 @@ var Write = {
 
         var text = opening + selection + closing + after;
         target[0].setRangeText(text);
+        target[0].setSelectionRange(
+            start + opening.length,
+            start + opening.length + selection.length
+        );
         $(target).focus().trigger("input").trigger("change");
     },
     show: function(
