@@ -9,6 +9,7 @@ class Notify extends Modules {
         $config->set('module_notify', array(
             'ntfy_host'  => 'https://ntfy.sh',
             'ntfy_topic' => '',
+            'hooks' => [],
         ));
     }
 
@@ -63,19 +64,44 @@ class Notify extends Modules {
         Comment $comment
     ): void
     {
-        $config = Config::current();
+        if ($this->want_message("add_comment")) {
+            $this->enqueue_message(__("New Comment", "notify"));
+        }
+    }
 
-        $site = $config->name;
-        $notify = $config->module_notify;
+    public function add_pingback(
+        Pingback $pingback
+    ): void
+    {
+        if ($this->want_message("add_pingback")) {
+            $this->enqueue_message(__("New Pingback", "notify"));
+        }
+    }
 
-        if (empty($notify['ntfy_topic']) || empty($notify['ntfy_host'])) {
+    public function add_user(
+        User $user
+    ): void
+    {
+        if ($this->want_message("add_user")) {
+            $this->enqueue_message(__("New User registered", "notify"));
+        }
+    }
+
+    public function end(): void
+    {
+        if (empty($this->messages)) {
             return;
         }
 
-        $url = $notify['ntfy_host'] . '/' . $notify['ntfy_topic'];
+        $site = Config::current();
+        $config = Config::current()->module_notify;
 
-        $message = "[{$site}]: New Comment";
-        get_remote($url, post: true, data: $message);
+        if (empty($config['ntfy_topic']) || empty($config['ntfy_host'])) {
+            return;
+        }
+
+        $message = implode("\n", $this->messages);
+
     }
 
     public function settings_nav(
@@ -88,4 +114,26 @@ class Notify extends Modules {
 
         return $navs;
     }
+
+    private function want_message(string $hook): bool
+    {
+        $config = Config::current()->module_notify;
+
+        if (empty($config['ntfy_host']) || empty($config['ntfy_topic'])) {
+            return false;
+        }
+
+        if (isset($config['hooks'][$hook])) {
+            return (bool) $config['hooks'][$hook];
+        }
+
+        return false;
+    }
+
+    private function enqueue_message(string $message): void
+    {
+        $this->messages[] = $message;
+    }
+
+    private array $messages = [];
 }
