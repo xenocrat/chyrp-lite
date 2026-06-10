@@ -59,6 +59,22 @@ class Notify extends Modules {
                 __("Invalid authentication token.")
             );
 
+        $ntfy_host_selected = trim($_POST['ntfy_host']);
+        if (!empty($ntfy_host_selected) && !filter_var($ntfy_host_selected, FILTER_VALIDATE_URL)) {
+            Flash::warning(
+                __("Invalid ntfy host URL!", "notify"),
+                "notify_settings"
+            );
+        }
+
+        $ntfy_topic_selected = trim($_POST['ntfy_topic']);
+        if (!empty($ntfy_topic_selected) && !preg_match('/^[-_a-zA-Z0-9]{4,64}$/', $ntfy_topic_selected)) {
+            Flash::warning(
+                __("Invalid ntfy topic!", "notify"),
+                "notify_settings"
+            );
+        }
+
         $hooks_selected = $_POST['hooks'] ?? array();
         $hooks_config = array();
         foreach (array_keys(self::HOOKS) as $hook) {
@@ -68,8 +84,8 @@ class Notify extends Modules {
         }
 
         $config->set('module_notify', array(
-            'ntfy_host'  => $_POST['ntfy_host'],
-            'ntfy_topic' => $_POST['ntfy_topic'],
+            'ntfy_host'  => $ntfy_host_selected,
+            'ntfy_topic' => $ntfy_topic_selected,
             'hooks' => $hooks_config,
         ));
 

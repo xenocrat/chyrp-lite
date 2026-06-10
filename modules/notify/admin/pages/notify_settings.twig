@@ -16,6 +16,11 @@
             <label for="ntfy_topic">{{ "Topic" | translate("notify") }}</label>
             <input type="text" class="text" name="ntfy_topic" id="ntfy_topic" value="{{ config.ntfy_topic | fix(true, true) }}">
         </p>
+        {% if config.ntfy_host is empty or config.ntfy_topic is empty %}
+            <small>
+                {{ "When ntfy host or topic are empty, messages will not be sent." | translate("notify") }}
+            </small>
+        {% endif %}
     </fieldset>
 
     <fieldset>
