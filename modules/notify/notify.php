@@ -1,6 +1,14 @@
 <?php
 
 class Notify extends Modules {
+    private const HOOKS = array(
+        'add_comment'  => array('class' => Comment::class,  'text' => 'New Comment'),
+        'add_like'     => array('class' => Like::class,     'text' => 'Like added'),
+        'add_post'     => array('class' => Post::class,     'text' => 'Post created'),
+        'add_pingback' => array('class' => Pingback::class, 'text' => 'Pingback recieved'),
+        'add_user'     => array('class' => User::class,     'text' => 'User created'),
+    );
+
     public static function __install(
     ): void
     {
@@ -36,7 +44,10 @@ class Notify extends Modules {
         if (empty($_POST)) {
             $admin->display(
                 "pages".DIR."notify_settings",
-                $config->module_notify
+                array(
+                    'config' => $config->module_notify,
+                    'hook_list' => self::HOOKS,
+                ),
             );
 
             return;
@@ -48,10 +59,18 @@ class Notify extends Modules {
                 __("Invalid authentication token.")
             );
 
+        $hooks_selected = $_POST['hooks'] ?? array();
+        $hooks_config = array();
+        foreach (array_keys(self::HOOKS) as $hook) {
+            if (isset($hooks_selected[$hook]) && $hooks_selected[$hook] === 'on') {
+                $hooks_config[$hook] = true;
+            }
+        }
 
         $config->set('module_notify', array(
             'ntfy_host'  => $_POST['ntfy_host'],
             'ntfy_topic' => $_POST['ntfy_topic'],
+            'hooks' => $hooks_config,
         ));
 
         Flash::notice(
@@ -60,39 +79,37 @@ class Notify extends Modules {
         );
     }
 
-    public function add_comment(
-        Comment $comment
+    public function route_init(
+        Route $route
     ): void
     {
-        if ($this->want_message("add_comment")) {
-            $this->enqueue_message(__("New Comment", "notify"));
+        $trigger = Trigger::current();
+
+        foreach (array_keys(self::HOOKS) as $hook) {
+            if ($this->want_message($hook)) {
+                $trigger->priorities[$hook][] = array(
+                    "function" => $this->add_model(...),
+                    "priority" => 99,
+                );
+            }
         }
     }
 
-    public function add_pingback(
-        Pingback $pingback
+    public function add_model(
+        Model $model
     ): void
     {
-        if ($this->want_message("add_pingback")) {
-            $this->enqueue_message(__("New Pingback", "notify"));
+        foreach (self::HOOKS as $hook => $data) {
+            if (get_class($model) === $data['class']) {
+                $this->send_message($data['text']);
+            }
         }
     }
 
-    public function add_user(
-        User $user
+    private function send_message(
+        string $message
     ): void
     {
-        if ($this->want_message("add_user")) {
-            $this->enqueue_message(__("New User registered", "notify"));
-        }
-    }
-
-    public function end(): void
-    {
-        if (empty($this->messages)) {
-            return;
-        }
-
         $site = Config::current();
         $config = Config::current()->module_notify;
 
@@ -100,8 +117,9 @@ class Notify extends Modules {
             return;
         }
 
-        $message = implode("\n", $this->messages);
-
+        $ntfy_url = sprintf("%s/%s", $config['ntfy_host'], $config['ntfy_topic']);
+        $text = sprintf("[%s]: %s", $site->name, $message);
+        get_remote($ntfy_url, post: true, data: $text);
     }
 
     public function settings_nav(
@@ -129,11 +147,4 @@ class Notify extends Modules {
 
         return false;
     }
-
-    private function enqueue_message(string $message): void
-    {
-        $this->messages[] = $message;
-    }
-
-    private array $messages = [];
 }
