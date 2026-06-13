@@ -133,7 +133,7 @@
             );
         }
 
-        # Test if we can write to INCLUDES_DIR (needed for config.json.php).
+        # Test if we can write to STORAGE_DIR (needed for config.json.php).
         if (!is_writable(STORAGE_DIR)) {
             $errdir = fix(STORAGE_DIR, false, true);
             alert(
