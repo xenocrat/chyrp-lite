@@ -150,12 +150,19 @@
                 )
                         continue;
 
-                if (!empty($_POST['media_url'])) {
-                    $regexp_url = preg_quote($_POST['media_url'], "/");
+                if (!empty($_POST['media_url']) and is_url($_POST['media_url'])) {
+                    $regex_url = preg_quote(
+                        str_replace(
+                            " ",
+                            "%20",
+                            add_scheme($_POST['media_url'])
+                        ),
+                        "/"
+                    );
 
                     if (
                         preg_match_all(
-                            "/{$regexp_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/",
+                            "/{$regex_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/",
                             $encoded,
                             $media
                         )
@@ -164,11 +171,13 @@
 
                         foreach ($media_uris as $matched_url) {
                             $filename = upload_from_url($matched_url);
-                            $encoded = str_replace(
-                                $matched_url,
-                                uploaded($filename),
-                                $encoded
-                            );
+
+                            if ($filename !== false)
+                                $encoded = str_replace(
+                                    $matched_url,
+                                    uploaded($filename),
+                                    $encoded
+                                );
                         }
                     }
                 }
@@ -526,22 +535,32 @@
             $mysqli->close();
 
             foreach ($posts as $post) {
-                if (!empty($_POST['media_url'])) {
-                    $regexp_url = preg_quote($_POST['media_url'], "/");
+                if (!empty($_POST['media_url']) and is_url($_POST['media_url'])) {
+                    $regex_url = preg_quote(
+                        str_replace(
+                            " ",
+                            "%20",
+                            add_scheme($_POST['media_url'])
+                        ),
+                        "/"
+                    );
 
                     if (preg_match_all(
-                        "/{$regexp_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/",
+                        "/{$regex_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/",
                         $post["Body"],
                         $media)
-                    )
+                    ) {
                         foreach ($media[0] as $matched_url) {
                             $filename = upload_from_url($matched_url);
-                            $post["Body"] = str_replace(
-                                $matched_url,
-                                uploaded($filename),
-                                $post["Body"]
-                            );
+
+                            if ($filename !== false)
+                                $post["Body"] = str_replace(
+                                    $matched_url,
+                                    uploaded($filename),
+                                    $post["Body"]
+                                );
                         }
+                    }
                 }
 
                 $status_translate = array(
@@ -697,22 +716,32 @@
                 if (!empty($post["entry_text_more"]))
                     $body.= "\n\n<!--more-->\n\n".$post["entry_text_more"];
 
-                if (!empty($_POST['media_url'])) {
-                    $regexp_url = preg_quote($_POST['media_url'], "/");
+                if (!empty($_POST['media_url']) and is_url($_POST['media_url'])) {
+                    $regex_url = preg_quote(
+                        str_replace(
+                            " ",
+                            "%20",
+                            add_scheme($_POST['media_url'])
+                        ),
+                        "/"
+                    );
 
                     if (preg_match_all(
-                        "/{$regexp_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/",
+                        "/{$regex_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/",
                         $body,
                         $media)
-                    )
+                    ) {
                         foreach ($media[0] as $matched_url) {
                             $filename = upload_from_url($matched_url);
-                            $body = str_replace(
-                                $matched_url,
-                                uploaded($filename),
-                                $body
-                            );
+
+                            if ($filename !== false)
+                                $body = str_replace(
+                                    $matched_url,
+                                    uploaded($filename),
+                                    $body
+                                );
                         }
+                    }
                 }
 
                 $status_translate = array(
