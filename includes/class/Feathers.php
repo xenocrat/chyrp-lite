@@ -4,13 +4,17 @@
      * Contains various functions, acts as the backbone for all feathers.
      */
     class Feathers {
+        const STATUS_DISABLED  = "disabled";
+        const STATUS_ENABLED   = "enabled";
+        const STATUS_CANCELED  = "canceled";
+
         # Array: $instances
         # Holds all feather instantiations.
         public static $instances = array();
 
-        # Boolean: $cancelled
-        # Is the feather's execution cancelled?
-        public $cancelled = false;
+        # String: $status
+        # What is the feather's status?
+        public $status = self::STATUS_DISABLED;
 
         # String: $safename
         # The feather's non-camelized name.
