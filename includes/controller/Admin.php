@@ -2769,13 +2769,21 @@
             set_max_time();
             set_max_memory();
 
-            if (!empty($_POST['media_url'])) {
-                $match_url = preg_quote($_POST['media_url'], "/");
-                $media_url = fix(
+            if (!empty($_POST['media_url']) and is_url($_POST['media_url'])) {
+                $regex_url = preg_quote(
+                    str_replace(
+                        " ",
+                        "%20",
+                        add_scheme(rtrim($_POST['media_url'], "/")."/")),
+                    "/"
+                );
+
+                $media_new = fix(
                     $config->chyrp_url.
                     str_replace(DIR, "/", $config->uploads_path)
                 );
-                $media_exp = "/{$match_url}
+
+                $media_exp = "/{$regex_url}
                     ([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/x";
             }
 
@@ -2847,13 +2855,13 @@
                     foreach ($entry->content->children() as $value)
                         $values[$value->getName()] = unfix((string) $value);
 
-                    if (!empty($_POST['media_url']))
+                    if (isset($media_exp))
                         array_walk_recursive(
                             $values,
-                            function (&$value) use ($media_exp, $media_url) {
+                            function (&$value) use ($media_exp, $media_new) {
                                 $value = preg_replace(
                                     $media_exp,
-                                    $media_url."$1.$2",
+                                    $media_new."$1.$2",
                                     $value
                                 );
                             }
