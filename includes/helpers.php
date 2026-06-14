@@ -2873,6 +2873,7 @@
 
             Modules::$instances[$module] = new $class_name;
             Modules::$instances[$module]->safename = $module;
+            Modules::$instances[$module]->status = Modules::STATUS_ENABLED;
         }
 
         # Instantiate all Feathers.
@@ -2904,6 +2905,7 @@
 
             Feathers::$instances[$feather] = new $class_name;
             Feathers::$instances[$feather]->safename = $feather;
+            Feathers::$instances[$feather]->status = Feathers::STATUS_ENABLED;
         }
 
         # Initialize all Modules.
@@ -2933,8 +2935,8 @@
         $name
     ): bool {
         return (
-            !empty(Modules::$instances[$name]) and
-            empty(Modules::$instances[$name]->cancelled)
+            isset(Modules::$instances[$name]) and
+            Modules::$instances[$name]->status == Modules::STATUS_ENABLED
         );
     }
 
@@ -2952,18 +2954,18 @@
         $name
     ): bool {
         return (
-            !empty(Feathers::$instances[$name]) and
-            empty(Feathers::$instances[$name]->cancelled)
+            isset(Feathers::$instances[$name]) and
+            Feathers::$instances[$name]->status == Feathers::STATUS_ENABLED
         );
     }
 
     /**
      * Function: cancel_module
-     * Temporarily declares a module cancelled (disabled).
+     * Temporarily declares a module canceled (disabled).
      *
      * Parameters:
      *     $target - The non-camelized name of the module.
-     *     $reason - Why was execution cancelled?
+     *     $reason - Why was execution canceled?
      *
      * Notes:
      *     A module can cancel itself in its __init() method.
@@ -2973,11 +2975,11 @@
         $reason = ""
     ): void {
         $message = empty($reason) ?
-            _f("Execution of %s has been cancelled.", camelize($target)) :
+            _f("Execution of %s has been canceled.", camelize($target)) :
             $reason ;
 
         if (isset(Modules::$instances[$target]))
-            Modules::$instances[$target]->cancelled = true;
+            Modules::$instances[$target]->status = Modules::STATUS_CANCELED;
 
         if (DEBUG)
             error_log($message);
@@ -2985,11 +2987,11 @@
 
     /**
      * Function: cancel_feather
-     * Temporarily declares a feather cancelled (disabled).
+     * Temporarily declares a feather canceled (disabled).
      *
      * Parameters:
      *     $target - The non-camelized name of the feather.
-     *     $reason - Why was execution cancelled?
+     *     $reason - Why was execution canceled?
      *
      * Notes:
      *     A feather can cancel itself in its __init() method.
@@ -2999,11 +3001,11 @@
         $reason = ""
     ): void {
         $message = empty($reason) ?
-            _f("Execution of %s has been cancelled.", camelize($target)) :
+            _f("Execution of %s has been canceled.", camelize($target)) :
             $reason ;
 
         if (isset(Feathers::$instances[$target]))
-            Feathers::$instances[$target]->cancelled = true;
+            Feathers::$instances[$target]->status = Feathers::STATUS_CANCELED;
 
         if (DEBUG)
             error_log($message);
