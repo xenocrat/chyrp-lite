@@ -2774,7 +2774,8 @@
                     str_replace(
                         " ",
                         "%20",
-                        add_scheme(rtrim($_POST['media_url'], "/")."/")),
+                        add_scheme(rtrim($_POST['media_url'], "/")."/")
+                    ),
                     "/"
                 );
 
