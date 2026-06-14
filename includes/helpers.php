@@ -2426,6 +2426,7 @@
      *     $headers - Include response headers with the content?
      *     $post - Set the request type to POST instead of GET?
      *     $data - An array or urlencoded string of POST data.
+     *     $req_headers - An array of request headers to send.
      *
      * Returns:
      *     The response content, or false on failure.
@@ -2436,7 +2437,8 @@
         $timeout = 10,
         $headers = false,
         $post = false,
-        $data = null
+        $data = null,
+        $req_headers = array()
     ): string|false {
         $config = Config::current();
         $url = add_scheme($url);
@@ -2467,9 +2469,12 @@
             CURLOPT_MAXREDIRS => (int) $redirects,
             CURLOPT_TIMEOUT => (int) $timeout,
             CURLOPT_USERAGENT => CHYRP_IDENTITY,
-            CURLOPT_HTTPHEADER => array(
-                "From: ".$config->email,
-                "Referer: ".$config->url
+            CURLOPT_HTTPHEADER => array_merge(
+                array(
+                    "From: ".$config->email,
+                    "Referer: ".$config->url
+                ),
+                $req_headers
             )
         );
 
