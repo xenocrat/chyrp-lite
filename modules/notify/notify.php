@@ -59,15 +59,16 @@ class Notify extends Modules {
                 __("Invalid authentication token.")
             );
 
-        $ntfy_host_selected = trim($_POST['ntfy_host']);
-        if (!empty($ntfy_host_selected) && !filter_var($ntfy_host_selected, FILTER_VALIDATE_URL)) {
+        $ntfy_host_selected = trim($_POST['ntfy_host'] ?? '');
+        if (!empty($ntfy_host_selected) && !is_url($ntfy_host_selected)) {
             Flash::warning(
                 __("Invalid ntfy host URL!", "notify"),
                 "notify_settings"
             );
         }
+        $ntfy_host_selected = add_scheme($ntfy_host_selected);
 
-        $ntfy_topic_selected = trim($_POST['ntfy_topic']);
+        $ntfy_topic_selected = trim($_POST['ntfy_topic'] ?? '');
         if (!empty($ntfy_topic_selected) && !preg_match('/^[-_a-zA-Z0-9]{4,64}$/', $ntfy_topic_selected)) {
             Flash::warning(
                 __("Invalid ntfy topic!", "notify"),
@@ -99,14 +100,9 @@ class Notify extends Modules {
         Route $route
     ): void
     {
-        $trigger = Trigger::current();
-
         foreach (array_keys(self::HOOKS) as $hook) {
             if ($this->want_message($hook)) {
-                $trigger->priorities[$hook][] = array(
-                    "function" => $this->add_model(...),
-                    "priority" => 99,
-                );
+                $this->addAlias($hook, "add_model", 99);
             }
         }
     }
