@@ -4,13 +4,17 @@
      * Contains various functions, acts as the backbone for all modules.
      */
     class Modules {
+        const STATUS_DISABLED  = "disabled";
+        const STATUS_ENABLED   = "enabled";
+        const STATUS_CANCELED  = "canceled";
+
         # Array: $instances
-        # Holds all Module instantiations.
+        # Holds all module instantiations.
         public static $instances = array();
 
-        # Boolean: $cancelled
-        # Is the module's execution cancelled?
-        public $cancelled = false;
+        # String: $status
+        # What is the module's status?
+        public $status = self::STATUS_DISABLED;
 
         # String: $safename
         # The module's non-camelized name.
