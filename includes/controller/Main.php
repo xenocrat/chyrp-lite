@@ -430,7 +430,7 @@
 
                 $posts = new Paginator(
                     $results,
-                    $config->feed_items
+                    count($results)
                 );
 
                 foreach ($results as $result) {
