@@ -2775,7 +2775,8 @@
                     $config->chyrp_url.
                     str_replace(DIR, "/", $config->uploads_path)
                 );
-                $media_exp = "/{$match_url}([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/";
+                $media_exp = "/{$match_url}
+                    ([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/x";
             }
 
             if (isset($imports["groups"])) {
@@ -3016,7 +3017,7 @@
                 }
 
                 # We don't use the module_enabled() helper function - 
-                # this allows for disabling a module that has been cancelled.
+                # this allows for disabling a module that has been canceled.
                 $category = (in_array($name, $config->enabled_modules)) ?
                     "enabled_modules" :
                     "disabled_modules" ;
@@ -3062,7 +3063,7 @@
                 load_translator($name, FEATHERS_DIR.DIR.$name.DIR."locale");
 
                 # We don't use the feather_enabled() helper function - 
-                # this allows for disabling a feather that has been cancelled.
+                # this allows for disabling a feather that has been canceled.
                 $category = (in_array($name, $config->enabled_feathers)) ?
                     "enabled_feathers" :
                     "disabled_feathers" ;
@@ -3144,20 +3145,33 @@
                     code:400
                 );
 
-            $type = ($_POST['type'] == "module") ?
-                "module" :
-                "feather" ;
+            switch ($_POST['type']) {
+                case "module":
+                    $array = "enabled_modules";
+                    $folder = MODULES_DIR;
+                    $redirect_to = "modules";
+                    break;
 
-            $array = ($type == "module") ?
-                "enabled_modules" :
-                "enabled_feathers" ;
+                case "feather":
+                    $array = "enabled_feathers";
+                    $folder = FEATHERS_DIR;
+                    $redirect_to = "feathers";
+                    break;
 
-            $folder = ($type == "module") ?
-                MODULES_DIR :
-                FEATHERS_DIR ;
+                default:
+                    show_404(
+                        __("Not Found"),
+                        __("Extension not found.")
+                    );
+            }
 
-            $name = str_replace(array(".", DIR), "", $_POST['extension']);
-            $class = camelize($name);
+            $name = str_replace(
+                array(DIR, "/", "<", ">"),
+                "",
+                $_POST['extension']
+            );
+
+            $class_name = camelize($name);
 
             if (in_array($name, $config->$array))
                 error(
@@ -3173,11 +3187,10 @@
                 );
 
             load_translator($name, $folder.DIR.$name.DIR."locale");
-
             require $folder.DIR.$name.DIR.$name.".php";
 
-            if (method_exists($class, "__install"))
-                call_user_func(array($class, "__install"));
+            if (method_exists($class_name, "__install"))
+                call_user_func(array($class_name, "__install"));
 
             $config->set(
                 $array,
@@ -3191,7 +3204,7 @@
 
             Flash::notice(
                 __("Extension enabled."),
-                pluralize($type)
+                $redirect_to
             );
         }
 
@@ -3223,20 +3236,36 @@
                     code:400
                 );
 
-            $type = ($_POST['type'] == "module") ?
-                "module" :
-                "feather" ;
+            switch ($_POST['type']) {
+                case "module":
+                    $cancel_func = "cancel_module";
+                    $array = "enabled_modules";
+                    $folder = MODULES_DIR;
+                    $redirect_to = "modules";
+                    break;
 
-            $array = ($type == "module") ?
-                "enabled_modules" :
-                "enabled_feathers" ;
+                case "feather":
+                    $cancel_func = "cancel_feather";
+                    $array = "enabled_feathers";
+                    $folder = FEATHERS_DIR;
+                    $redirect_to = "feathers";
+                    break;
 
-            $folder = ($type == "module") ?
-                MODULES_DIR :
-                FEATHERS_DIR ;
+                default:
+                    show_404(
+                        __("Not Found"),
+                        __("Extension not found.")
+                    );
+            }
 
-            $name = str_replace(array(".", DIR), "", $_POST['extension']);
-            $class = camelize($name);
+            $name = str_replace(
+                array(DIR, "/", "<", ">"),
+                "",
+                $_POST['extension']
+            );
+
+            $class_name = camelize($name);
+            $confirm = !empty($_POST['confirm']);
 
             if (!in_array($name, $config->$array))
                 error(
@@ -3251,14 +3280,12 @@
                     __("Extension not found.")
                 );
 
-            if (method_exists($class, "__uninstall"))
-                call_user_func(array($class, "__uninstall"), !empty($_POST['confirm']));
+            if (method_exists($class_name, "__uninstall"))
+                call_user_func(array($class_name, "__uninstall"), $confirm);
 
-            # Cancel the extension to prevent trigger responses after __uninstall().
-            if ($type == "module")
-                cancel_module($name);
-            else
-                cancel_feather($name);
+            # Cancel the extension to prevent
+            # trigger responses after __uninstall().
+            $cancel_func($name);
 
             $config->set(
                 $array,
@@ -3267,7 +3294,7 @@
 
             Flash::notice(
                 __("Extension disabled."),
-                pluralize($type)
+                $redirect_to
             );
         }
 
@@ -3345,7 +3372,11 @@
                     __("Invalid authentication token.")
                 );
 
-            $_SESSION['theme'] = str_replace(array(".", DIR), "", $_POST['theme']);
+            $_SESSION['theme'] = str_replace(
+                array(DIR, "/", "<", ">"),
+                "",
+                $_POST['theme']
+            );
             $trigger->call("preview_theme_started");
 
             Flash::notice(
