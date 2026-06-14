@@ -1,13 +1,16 @@
 <?php
 
 class Notify extends Modules {
-    private const HOOKS = array(
-        'add_comment'  => array('class' => Comment::class,  'text' => 'New Comment'),
-        'add_like'     => array('class' => Like::class,     'text' => 'Like added'),
-        'add_post'     => array('class' => Post::class,     'text' => 'Post created'),
-        'add_pingback' => array('class' => Pingback::class, 'text' => 'Pingback recieved'),
-        'add_user'     => array('class' => User::class,     'text' => 'User created'),
-    );
+    private function hooks(
+    ): array {
+        return array(
+            'add_comment'  => array('class' => Comment::class,  'text' => __('New Comment')),
+            'add_like'     => array('class' => Like::class,     'text' => __('Like added')),
+            'add_post'     => array('class' => Post::class,     'text' => __('Post created')),
+            'add_pingback' => array('class' => Pingback::class, 'text' => __('Pingback recieved')),
+            'add_user'     => array('class' => User::class,     'text' => __('User created')),
+        );
+    }
 
     public static function __install(
     ): void
@@ -29,6 +32,16 @@ class Notify extends Modules {
         $config->remove('module_notify');
     }
 
+    public function __init(
+    ): void
+    {
+        foreach (array_keys($this->hooks()) as $hook) {
+            if ($this->want_message($hook)) {
+                $this->addAlias($hook, "add_model", 99);
+            }
+        }
+    }
+
     public function admin_notify_settings(
         AdminController $admin
     ): void
@@ -44,10 +57,7 @@ class Notify extends Modules {
         if (empty($_POST)) {
             $admin->display(
                 "pages".DIR."notify_settings",
-                array(
-                    'config' => $config->module_notify,
-                    'hook_list' => self::HOOKS,
-                ),
+                array('hook_list' => $this->hooks()),
             );
 
             return;
@@ -78,7 +88,7 @@ class Notify extends Modules {
 
         $hooks_selected = $_POST['hooks'] ?? array();
         $hooks_config = array();
-        foreach (array_keys(self::HOOKS) as $hook) {
+        foreach (array_keys($this->hooks()) as $hook) {
             if (isset($hooks_selected[$hook]) && $hooks_selected[$hook] === 'on') {
                 $hooks_config[$hook] = true;
             }
@@ -96,22 +106,11 @@ class Notify extends Modules {
         );
     }
 
-    public function route_init(
-        Route $route
-    ): void
-    {
-        foreach (array_keys(self::HOOKS) as $hook) {
-            if ($this->want_message($hook)) {
-                $this->addAlias($hook, "add_model", 99);
-            }
-        }
-    }
-
     public function add_model(
         Model $model
     ): void
     {
-        foreach (self::HOOKS as $hook => $data) {
+        foreach ($this->hooks() as $hook => $data) {
             if (get_class($model) === $data['class']) {
                 $this->send_message($data['text']);
             }
