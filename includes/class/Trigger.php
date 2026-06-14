@@ -12,10 +12,6 @@
         # Keeps track of called Triggers.
         private $called = array();
 
-        # Array: $exists
-        # Caches trigger existence states.
-        private $exists = array();
-
         /**
          * Function: __construct
          * Add predefined filters to implement Unicode emoji and Markdown support.
@@ -124,10 +120,19 @@
                     $function = $action["function"];
 
                     if (is_array($function)) {
-                        $object = $function[0];
-
-                        if (is_object($object) and !empty($object->cancelled))
+                        if (
+                            $function[0] instanceof Modules and
+                            $function[0]->status != Modules::STATUS_ENABLED
+                        ) {
                             continue;
+                        }
+
+                        if (
+                            $function[0] instanceof Feathers and
+                            $function[0]->status != Feathers::STATUS_ENABLED
+                        ) {
+                            continue;
+                        }
                     }
 
                     $val = call_user_func_array($function, $arguments);
@@ -142,7 +147,7 @@
                     is_callable(array($module, $name)) and
                     !in_array(array($module, $name), $this->called[$name])
                 ) {
-                    if (!empty($module->cancelled))
+                    if ($module->status != Modules::STATUS_ENABLED)
                         continue;
 
                     $val = call_user_func_array(
@@ -207,10 +212,19 @@
                     $function = $action["function"];
 
                     if (is_array($function)) {
-                        $object = $function[0];
-
-                        if (is_object($object) and !empty($object->cancelled))
+                        if (
+                            $function[0] instanceof Modules and
+                            $function[0]->status != Modules::STATUS_ENABLED
+                        ) {
                             continue;
+                        }
+
+                        if (
+                            $function[0] instanceof Feathers and
+                            $function[0]->status != Feathers::STATUS_ENABLED
+                        ) {
+                            continue;
+                        }
                     }
 
                     $val = call_user_func_array(
@@ -228,7 +242,7 @@
                     is_callable(array($module, $name)) and
                     !in_array(array($module, $name), $this->called[$name])
                 ) {
-                    if (!empty($module->cancelled))
+                    if ($module->status != Modules::STATUS_ENABLED)
                         continue;
 
                     $val = call_user_func_array(
@@ -256,18 +270,40 @@
         public function exists(
             $name
         ): bool {
-            if (isset($this->exists[$name]))
-                return $this->exists[$name];
-
             foreach (Modules::$instances as $module) {
-                if (is_callable(array($module, $name)))
-                    return $this->exists[$name] = true;
+                if (is_callable(array($module, $name))) {
+                    if ($module->status != Modules::STATUS_ENABLED)
+                        continue;
+
+                    return true;
+                }
             }
 
-            if (isset($this->priorities[$name]))
-                return $this->exists[$name] = true;
+            if (isset($this->priorities[$name])) {
+                foreach ($this->priorities[$name] as $action) {
+                    $function = $action["function"];
 
-            return $this->exists[$name] = false;
+                    if (is_array($function)) {
+                        if (
+                            $function[0] instanceof Modules and
+                            $function[0]->status != Modules::STATUS_ENABLED
+                        ) {
+                            continue;
+                        }
+
+                        if (
+                            $function[0] instanceof Feathers and
+                            $function[0]->status != Feathers::STATUS_ENABLED
+                        ) {
+                            continue;
+                        }
+                    }
+
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         /**
