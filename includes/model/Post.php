@@ -911,55 +911,14 @@
         /**
          * Function: filter
          * Filters the post attributes through filter_post and any Feather filters.
+         *
+         * See Also:
+         *     <Feathers.filter>
          */
         private function filter(
         ): void {
-            $class = camelize($this->feather);
-            $touched = array();
-
-            $trigger = Trigger::current();
-            $trigger->filter($this, "filter_post");
-
-            # Custom filters.
-            if (isset(Feathers::$custom_filters[$class]))
-                foreach (Feathers::$custom_filters[$class] as $custom_filter) {
-                    $field = $custom_filter["field"];
-                    $field_unfiltered = $field."_unfiltered";
-
-                    if (!in_array($field_unfiltered, $touched)) {
-                        $this->$field_unfiltered = isset($this->$field) ?
-                            $this->$field :
-                            null ;
-
-                        $touched[] = $field_unfiltered;
-                    }
-
-                    $this->$field = call_user_func_array(
-                        array(
-                            Feathers::$instances[$this->feather],
-                            $custom_filter["name"]
-                        ),
-                        array($this->$field, $this)
-                    );
-                }
-
-            # Trigger filters.
-            if (isset(Feathers::$filters[$class]))
-                foreach (Feathers::$filters[$class] as $filter) {
-                    $field = $filter["field"];
-                    $field_unfiltered = $field."_unfiltered";
-
-                    if (!in_array($field_unfiltered, $touched)) {
-                        $this->$field_unfiltered = isset($this->$field) ?
-                            $this->$field :
-                            null ;
-
-                        $touched[] = $field_unfiltered;
-                    }
-
-                    if (isset($this->$field) and !empty($this->$field))
-                        $trigger->filter($this->$field, $filter["name"], $this);
-                }
+            Trigger::current()->filter($this, "filter_post");
+            Feathers::filter($this);
         }
 
         /**
@@ -979,7 +938,7 @@
             $config = Config::current();
 
             # Dirty URL?
-            if (preg_match("/(\?|&)url=([^&#]+)/", $request, $slug)) {
+            if (preg_match("/(\?|&)url=([^&\#]+)/", $request, $slug)) {
                 $post = new self(array("url" => $slug[2]), $options);
 
                 return isset($route) ?
