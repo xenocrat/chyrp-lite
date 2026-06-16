@@ -27,12 +27,15 @@
          * Parameters:
          *     $name - Name of the trigger to respond to.
          *     $priority - Priority of the response.
+         *
+         * Returns:
+         *     @true@ or @false@
          */
         protected function setPriority(
             $name,
             $priority
-        ): void {
-            Trigger::current()->add(
+        ): bool {
+            return Trigger::current()->add(
                 $name,
                 $priority,
                 array($this, $name)
@@ -47,13 +50,16 @@
          *     $name - Name of the trigger to respond to.
          *     $function - Name of the class function to respond with.
          *     $priority - Priority of the response.
+         *
+         * Returns:
+         *     @true@ or @false@
          */
         protected function addAlias(
             $name,
             $function,
             $priority = 10
-        ): void {
-            Trigger::current()->add(
+        ): bool {
+            return Trigger::current()->add(
                 $name,
                 $priority,
                 array($this, $function)
