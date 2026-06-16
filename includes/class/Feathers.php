@@ -86,7 +86,7 @@
 
         /**
          * Function: respondTo
-         * Allows a Feather to respond to a Trigger as a Module would.
+         * Allows a Feather to respond to a trigger as a module would.
          *
          * Parameters:
          *     $name - Name of the trigger to respond to.
@@ -102,9 +102,11 @@
             $priority = 10
         ): void {
             fallback($function, $name);
-            Trigger::current()->priorities[$name][] = array(
-                "priority" => $priority,
-                "function" => array($this, $function)
+
+            Trigger::current()->add(
+                $name,
+                $priority,
+                array($this, $function)
             );
         }
 
