@@ -150,7 +150,7 @@
 
         /**
          * Function: customFilter
-         * Allows a Feather to apply its own filter to a specified field.
+         * Allows a feather to apply its own filter to a specified field.
          *
          * Parameters:
          *     $field - Attribute of the post to filter.
@@ -182,7 +182,7 @@
 
         /**
          * Function: respondTo
-         * Allows a Feather to respond to a trigger as a module would.
+         * Allows a feather to respond to a trigger as a module would.
          *
          * Parameters:
          *     $name - Name of the trigger to respond to.
