@@ -160,15 +160,7 @@
             $trigger = Trigger::current();
             $main = MainController::current();
 
-            if (
-                !isset($_POST['field']) or
-                !isset($_POST['context']) or
-                !preg_match(
-                    "/(^|;)feather:([a-z0-9_]+)(;|$)/i",
-                    $_POST['context'],
-                    $match
-                )
-            ) {
+            if (!isset($_POST['field']) or !isset($_POST['context'])) {
                 error(
                     __("Error"),
                     __("Missing argument."),
@@ -176,30 +168,52 @@
                 );
             }
 
-            $class = camelize($match[2]);
-            $field = $_POST['field'];
+            preg_match_all(
+                "/(?<=^|;)([a-z0-9_]+):([a-z0-9_]+)(?:;|$)/i",
+                $_POST['context'],
+                $matches,
+                PREG_SET_ORDER
+            );
+
             $content = fallback($_POST['content'], "");
+            $context = array();
+
+            foreach ($matches as $match)
+                $context[$match[1]] = $match[2];
+
+            if (!isset($context["feather"]))
+                error(
+                    __("Error"),
+                    __("Missing argument."),
+                    code:400
+                );
+
+            if (!isset(Feathers::$instances[$context["feather"]]))
+                show_404(
+                    __("Not Found"),
+                    __("Feather not found.")
+                );
+
+            $field = Feathers::$instances
+                     [$context["feather"]]->fields[$_POST['field']] ?? array() ;
 
             # Custom filters.
-            if (isset(Feathers::$custom_filters[$class])) {
-                foreach (Feathers::$custom_filters[$class] as $custom_filter) {
-                    if ($custom_filter["field"] == $field)
-                        $content = call_user_func_array(
-                            array(
-                                Feathers::$instances[$_POST['feather']],
-                                $custom_filter["name"]
-                            ),
-                            array($content)
-                        );
+            if (isset($field["custom_filters"])) {
+                foreach ($field["custom_filters"] as $custom_filter) {
+                    $content = call_user_func_array(
+                        array(
+                            Feathers::$instances[$context["feather"]],
+                            $custom_filter
+                        ),
+                        array($content)
+                    );
                 }
             }
 
             # Trigger filters.
-            if (isset(Feathers::$filters[$class])) {
-                foreach (Feathers::$filters[$class] as $filter) {
-                    if ($filter["field"] == $field and !empty($content))
-                        $trigger->filter($content, $filter["name"]);
-                }
+            if (isset($field["filters"])) {
+                foreach ($field["filters"] as $filter)
+                    $trigger->filter($content, $filter);
             }
 
             header("Cache-Control: no-store");
@@ -242,13 +256,15 @@
             $field = $_POST['field'];
             $content = fallback($_POST['content'], "");
 
-            # Page title filters.
-            if ($field == "title")
-                $trigger->filter($content, array("markup_page_title", "markup_title"));
+            switch ($field) {
+                case "title":
+                    $trigger->filter($content, array("markup_page_title", "markup_title"));
+                    break;
 
-            # Page body filters.
-            if ($field == "body")
-                $trigger->filter($content, array("markup_page_text", "markup_text"));
+                case "body":
+                    $trigger->filter($content, array("markup_page_text", "markup_text"));
+                    break;
+            }
 
             header("Cache-Control: no-store");
 
