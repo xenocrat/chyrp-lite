@@ -32,15 +32,16 @@
             $name,
             $priority
         ): void {
-            Trigger::current()->priorities[$name][] = array(
-                "priority" => $priority,
-                "function" => array($this, $name)
+            Trigger::current()->add(
+                $name,
+                $priority,
+                array($this, $name)
             );
         }
 
         /**
          * Function: addAlias
-         * Allows a module to respond to a trigger with multiple functions and custom priorities.
+         * Allows a module to respond to a trigger with custom functions and priorities.
          *
          * Parameters:
          *     $name - Name of the trigger to respond to.
@@ -52,9 +53,10 @@
             $function,
             $priority = 10
         ): void {
-            Trigger::current()->priorities[$name][] = array(
-                "priority" => $priority,
-                "function" => array($this, $function)
+            Trigger::current()->add(
+                $name,
+                $priority,
+                array($this, $function)
             );
         }
     }
