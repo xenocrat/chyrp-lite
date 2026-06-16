@@ -6,7 +6,7 @@
     class Trigger {
         # Array: $priorities
         # Custom prioritized callbacks.
-        public $priorities = array();
+        private $priorities = array();
 
         # Array: $called
         # Keeps track of called Triggers.
@@ -34,6 +34,9 @@
          *     $name - Name of the trigger to respond to.
          *     $priority - Priority of the response.
          *     $callable - The callable to respond with.
+         *
+         * Returns:
+         *     @true@ or @false@
          */
         public function add(
             $name,
