@@ -39,6 +39,9 @@
          * Parameters:
          *     $post - The post object to filter.
          *
+         * Returns:
+         *     The filtered <Post>.
+         *
          * See Also:
          *     <Post.filter>
          *     <Feathers.filterField>
