@@ -313,9 +313,11 @@
                     case "bmp":
                     case "gif":
                     case "heif":
+                    case "jpe":
                     case "jpeg":
                     case "jpg":
                     case "png":
+                    case "pnj":
                     case "tif":
                     case "tiff":
                     case "webp":
@@ -325,11 +327,15 @@
 
                         break;
 
+                    case "3g2":
                     case "3gp":
+                    case "aac":
                     case "aif":
+                    case "aifc":
                     case "aiff":
                     case "avi":
                     case "flac":
+                    case "m2ts":
                     case "m4a":
                     case "m4v":
                     case "mka":
@@ -343,7 +349,6 @@
                     case "oga":
                     case "ogg":
                     case "ogv":
-                    case "spx":
                     case "ts":
                     case "wav":
                     case "webm":
