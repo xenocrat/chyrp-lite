@@ -19,53 +19,39 @@
         private function __construct() {
             $config = Config::current();
 
-            if ($config->enable_emoji) {
-                $this->priorities["markup_text"][] = array(
-                    "priority" => 10,
-                    "function" => "emote"
-                );
-            }
+            if ($config->enable_emoji)
+                $this->add("markup_text", 10, "emote");
 
-            if ($config->enable_markdown) {
-                $this->priorities["markup_text"][] = array(
-                    "priority" => 5,
-                    "function" => "markdown"
-                );
-            }
+            if ($config->enable_markdown)
+                $this->add("markup_text", 5, "markdown");
         }
 
         /**
-         * Function: cmp
-         * Sorts actions by priority when used with usort.
+         * Function: add
+         * Adds a trigger responder.
+         *
+         * Parameters:
+         *     $name - Name of the trigger to respond to.
+         *     $priority - Priority of the response.
+         *     $callable - The callable to respond with.
          */
-        private function cmp(
-            $a,
-            $b
-        ): int {
-            if (empty($a) or empty($b))
-                return 0;
+        public function add(
+            $name,
+            $priority,
+            $callable
+        ): bool {
+            if (!is_callable($callable))
+                return false;
 
-            if ($a["priority"] == $b["priority"])
-                return 0;
+            if (!is_array($callable) and !is_string($callable))
+                return false;
 
-            return ($a["priority"] < $b["priority"]) ? -1 : 1 ;
-        }
+            $this->priorities[$name][] = array(
+                "priority" => $priority,
+                "function" => $callable
+            );
 
-        /**
-         * Function: decide
-         * Decides what to do with a call return value.
-         */
-        private function decide(
-            $return,
-            $val
-        ): mixed {
-            if ($return === false)
-                return $val;
-
-            if (is_string($return) and is_string($val))
-                return $return.$val;
-
-            return oneof($val, $return);
+            return true;
         }
 
         /**
@@ -99,7 +85,7 @@
                     );
 
                     if ($val !== false)
-                        $return = $this->decide($return, $val);
+                        $return = $this->postprocess($return, $val);
                 }
 
                 return $return;
@@ -114,7 +100,7 @@
 
             if (
                 isset($this->priorities[$name]) and
-                usort($this->priorities[$name], array($this, "cmp"))
+                usort($this->priorities[$name], array($this, "prioritize"))
             ) {
                 foreach ($this->priorities[$name] as $action) {
                     $function = $action["function"];
@@ -136,7 +122,7 @@
                     }
 
                     $val = call_user_func_array($function, $arguments);
-                    $return = $this->decide($return, $val);
+                    $return = $this->postprocess($return, $val);
 
                     $this->called[$name][] = $function;
                 }
@@ -155,7 +141,7 @@
                         $arguments
                     );
 
-                    $return = $this->decide($return, $val);
+                    $return = $this->postprocess($return, $val);
                 }
             }
 
@@ -206,7 +192,7 @@
 
             if (
                 isset($this->priorities[$name]) and
-                usort($this->priorities[$name], array($this, "cmp"))
+                usort($this->priorities[$name], array($this, "prioritize"))
             ) {
                 foreach ($this->priorities[$name] as $action) {
                     $function = $action["function"];
@@ -304,6 +290,40 @@
             }
 
             return false;
+        }
+
+        /**
+         * Function: prioritize
+         * Sorts actions by priority when used with usort.
+         */
+        private function prioritize(
+            $a,
+            $b
+        ): int {
+            if (empty($a) or empty($b))
+                return 0;
+
+            if ($a["priority"] == $b["priority"])
+                return 0;
+
+            return ($a["priority"] < $b["priority"]) ? -1 : 1 ;
+        }
+
+        /**
+         * Function: postprocess
+         * Post-processes call return values.
+         */
+        private function postprocess(
+            $return,
+            $val
+        ): mixed {
+            if ($return === false)
+                return $val;
+
+            if (is_string($return) and is_string($val))
+                return $return.$val;
+
+            return oneof($val, $return);
         }
 
         /**
