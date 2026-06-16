@@ -2774,7 +2774,7 @@
                     str_replace(
                         " ",
                         "%20",
-                        add_scheme(rtrim($_POST['media_url'], "/")."/")
+                        add_scheme($_POST['media_url'])
                     ),
                     "/"
                 );
@@ -2785,7 +2785,7 @@
                 );
 
                 $media_exp = "/{$regex_url}
-                    ([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t ]+)\.([a-zA-Z0-9]+)/x";
+                    ([^\.\!,\?;\"\'<>\(\)\[\]\{\}\s\t]+)\.([a-zA-Z0-9]+)/x";
             }
 
             if (isset($imports["groups"])) {
