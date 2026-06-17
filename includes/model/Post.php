@@ -927,7 +927,7 @@
          *
          * Parameters:
          *     $request - The request URI to parse.
-         *     $route - The route to respond to, or null to return a Post.
+         *     $route - The route to respond to, or @null@ to return a <Post>.
          *     $options - Additional options for the Post object (optional).
          */
         public static function from_url(

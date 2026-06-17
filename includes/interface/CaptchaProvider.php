@@ -13,7 +13,7 @@
 
         /**
          * Function: checkCaptcha
-         * Checks the response and returns true (success) or false (failure).
+         * Checks the response and returns @true@ (success) or @false@ (failure).
          */
         public static function checkCaptcha(
         ): bool;

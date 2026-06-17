@@ -281,7 +281,7 @@
      *     $url_path - The URL path to MAIN_DIR.
      *
      * Returns:
-     *     The rewrite rules, or false on failure.
+     *     The rewrite rules, or @false@ on failure.
      */
     function htaccess_conf(
         $url_path = null
@@ -321,7 +321,7 @@
      *     $url_path - The URL path to MAIN_DIR.
      *
      * Returns:
-     *     The rewrite rules, or false on failure.
+     *     The rewrite rules, or @false@ on failure.
      */
     function caddyfile_conf(
         $url_path = null
@@ -361,7 +361,7 @@
      *     $url_path - The URL path to MAIN_DIR.
      *
      * Returns:
-     *     The rewrite rules, or false on failure.
+     *     The rewrite rules, or @false@ on failure.
      */
     function nginx_conf(
         $url_path = null
@@ -401,7 +401,7 @@
      *     $url_path - The URL path to MAIN_DIR.
      *
      * Returns:
-     *     The rewrite rules, or false on failure.
+     *     The rewrite rules, or @false@ on failure.
      */
     function lighttpd_conf(
         $url_path = null
@@ -963,11 +963,11 @@
      * Inspects the supplied arguments and returns the first substantial value.
      *
      * Returns:
-     *     The first substantial value in the set, or the last, or null.
+     *     The first substantial value in the set, or the last, or @null@.
      *
      * Notes:
      *     Some type combinations will halt inspection of the full set:
-     *     - All types are comparable with null.
+     *     - All types are comparable with @null@.
      *     - All scalar types are comparable.
      *     - Arrays, objects, and resources are incomparable with other types.
      */
@@ -1707,8 +1707,8 @@
      *     $delimiter - The delimter to use for splitting.
      *     $trim - Trim whitespace from the array items?
      *     $no_empties - Remove empty items from the array?
-     *     $unique - Deduplicate? false/null, or SORT_ flag.
-     *     $sort - Sort the array? false/null, or SORT_ flag.
+     *     $unique - Deduplicate? SORT_* flag, @false@ or @null@.
+     *     $sort - Sort the array? SORT_* flag, @false@ or @null@.
      *
      * Returns:
      *     An array with the requested cleaning applied.
@@ -2429,7 +2429,7 @@
      *     $req_headers - An array of request headers to send.
      *
      * Returns:
-     *     The response content, or false on failure.
+     *     The response content, or @false@ on failure.
      */
     function get_remote(
         $url,
@@ -2641,7 +2641,7 @@
      *     $redirects - The maximum number of redirects to follow.
      *
      * Returns:
-     *     The Webmention endpoint URL, or false on failure.
+     *     The Webmention endpoint URL, or @false@ on failure.
      */
     function webmention_discover(
         $url,
@@ -2755,7 +2755,7 @@
      *     $rel - The relative path.
      *
      * Returns:
-     *     A merged target URL, or false on failure.
+     *     A merged target URL, or @false@ on failure.
      * 
      * Notes:
      *     Does not attempt to resolve dot segments in the path.
@@ -3097,7 +3097,7 @@
      *     $timeout - The maximum number of seconds to wait.
      *
      * Returns:
-     *     The filename of the copied file, or false on failure.
+     *     The filename of the copied file, or @false@ on failure.
      */
     function upload_from_url(
         $url,
@@ -3150,7 +3150,7 @@
      *
      * Returns:
      *     The supplied filename prepended with URL or filesystem path,
-     *     or false on failure.
+     *     or @false@ on failure.
      */
     function uploaded(
         $filename,
@@ -3262,7 +3262,7 @@
      *     $file - The POST method upload array, e.g. $_FILES['userfile'].
      *
      * Returns:
-     *     True for a successful upload or false if no file was uploaded.
+     *     @true@ for a successful upload or @false@ if no file was uploaded.
      *
      * Notes:
      *     $_POST and $_FILES are empty if post_max_size directive is exceeded.
@@ -3357,7 +3357,7 @@
      *     $filter - An array of valid extensions (case insensitive).
      *
      * Returns:
-     *     A sanitized unique filename, or false on failure.
+     *     A sanitized unique filename, or @false@ on failure.
      */
     function upload_filename(
         $filename,
@@ -3573,15 +3573,21 @@
 
         return (
             preg_match(
-                '~^(https?://)?([a-z0-9]([a-z0-9\-\.]*[a-z0-9])?\.[a-z]{2,63}\.?)(:[0-9]{1,5})?($|/)~i',
+                '~^(https?://)?
+                    ([a-z0-9]([a-z0-9\-\.]*[a-z0-9])?\.[a-z]{2,63}\.?)
+                    (:[0-9]{1,5})?($|/)~ix',
                 $string
             ) or
             preg_match(
-                '~^(https?://)?([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(:[0-9]{1,5})?($|/)~',
+                '~^(https?://)?
+                    ([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})
+                    (:[0-9]{1,5})?($|/)~x',
                 $string
             ) or
             preg_match(
-                '~^(https?://)?(\[[a-f0-9\:]{3,39}\])(:[0-9]{1,5})?($|/)~i',
+                '~^(https?://)?
+                    (\[[a-f0-9\:]{3,39}\])
+                    (:[0-9]{1,5})?($|/)~ix',
                 $string
             )
         );
@@ -3638,15 +3644,18 @@
 
         return (
             preg_match(
-                '/^[^\\\\ <>@]+@([a-z0-9]([a-z0-9\-\.]*[a-z0-9])?\.[a-z]{2,63}\.?)$/i',
+                '/^[^\\\\ <>@]+@
+                    ([a-z0-9]([a-z0-9\-\.]*[a-z0-9])?\.[a-z]{2,63}\.?)$/ix',
                 $string
             ) or
             preg_match(
-                '/^[^\\\\ <>@]+@([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$/',
+                '/^[^\\\\ <>@]+@
+                    ([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})$/x',
                 $string
             ) or
             preg_match(
-                '/^[^\\\\ <>@]+@(\[[a-f0-9\:]{3,39}\])$/i',
+                '/^[^\\\\ <>@]+@
+                    (\[[a-f0-9\:]{3,39}\])$/ix',
                 $string
             )
         );
@@ -3898,7 +3907,7 @@
      *     $depth - Recursion depth for encoding.
      *
      * Returns:
-     *     A JSON encoded string or false on failure.
+     *     A JSON encoded string or @false@ on failure.
      */
     function json_set(
         $value,

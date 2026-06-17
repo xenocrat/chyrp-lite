@@ -434,7 +434,7 @@
      *     $timestamp - A time() value or string to be strtotime() converted.
      *     $format - The date()-compatible formatting for the <time> representation.
      *     $convert - Perform a case conversion:
-     *                "fold", "lower", "title", "upper", or null to retain case as-is.
+     *                "fold", "lower", "title", "upper", or @null@ to retain case as-is.
      */
     function twig_filter_time(
         $timestamp,
