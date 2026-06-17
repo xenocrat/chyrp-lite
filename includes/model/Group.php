@@ -111,7 +111,7 @@
          *
          * Parameters:
          *     $name - The group's name
-         *     $permissions - An array of the permissions (IDs).
+         *     $permissions - An array of permission IDs to set.
          *
          * Returns:
          *     The newly created <Group>.
@@ -173,7 +173,7 @@
          *
          * Parameters:
          *     $name - The new Name to set.
-         *     $permissions - An array of the new permissions to set (IDs).
+         *     $permissions - An array of permission IDs to set.
          *
          * Returns:
          *     The updated <Group>.
@@ -268,7 +268,7 @@
 
         /**
          * Function: add_permission
-         * Adds a permission to the Groups table.
+         * Adds a permission to the table.
          *
          * Parameters:
          *     $id - The ID for the permission, e.g "can_do_something".
@@ -304,7 +304,7 @@
 
         /**
          * Function: remove_permission
-         * Removes a permission from the Groups table.
+         * Removes a permission from the table.
          *
          * Parameters:
          *     $id - The ID of the permission to remove.
@@ -320,7 +320,7 @@
 
         /**
          * Function: list_permissions
-         * Returns an array of all permissions in the Groups table.
+         * Returns an array of all permissions in the table.
          *
          * Parameters:
          *     $group_id - List enabled permissions for this group ID.

@@ -370,7 +370,7 @@
          *
          * Parameters:
          *     $request - The request URI to parse.
-         *     $route - The route to respond to, or null to return a Page.
+         *     $route - The route to respond to, or @null@ to return a <Page>.
          */
         public static function from_url(
             $request,

@@ -779,7 +779,7 @@
 
         /**
          * Function: title
-         * Returns the given post's title, provided by its Feather.
+         * Returns the post title, provided by its feather.
          */
         public function title(
         ): string|false {
@@ -798,7 +798,7 @@
 
         /**
          * Function: excerpt
-         * Returns the given post's excerpt, provided by its Feather.
+         * Returns the post excerpt, provided by its feather.
          */
         public function excerpt(
         ): string|false {
@@ -817,7 +817,7 @@
 
         /**
          * Function: feed_content
-         * Returns the given post's feed content, provided by its Feather.
+         * Returns the post's feed content, provided by its feather.
          */
         public function feed_content(
         ): string|false {
@@ -910,7 +910,7 @@
 
         /**
          * Function: filter
-         * Filters the post attributes through filter_post and any Feather filters.
+         * Filters the post attributes through filter_post and feather filters.
          *
          * See Also:
          *     <Feathers.filter>

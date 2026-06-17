@@ -53,7 +53,7 @@
 
         /**
          * Function: authenticate
-         * Checks to see if a given login and password match a user in the database.
+         * Checks to see if a given login and password match an existing user.
          *
          * Parameters:
          *     $login - The Login to check.
