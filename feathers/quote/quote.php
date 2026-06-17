@@ -12,10 +12,9 @@
             $this->setField(
                 array(
                     "attr" => "source",
-                    "type" => "text_block",
+                    "type" => "text",
                     "label" => __("Source", "quote"),
-                    "optional" => true,
-                    "preview" => true
+                    "optional" => true
                 )
             );
             $this->setFilter(
