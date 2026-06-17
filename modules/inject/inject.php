@@ -72,14 +72,14 @@
             $text,
             $post = null
         ): string {
-            return $this->replace_injections($text, self::TYPE_MARKUP_POST);
+            return $this->markup_inject($text, self::TYPE_MARKUP_POST);
         }
 
         public function markup_page_text(
             $text,
             $page = null
         ): string {
-            return $this->replace_injections($text, self::TYPE_MARKUP_PAGE);
+            return $this->markup_inject($text, self::TYPE_MARKUP_PAGE);
         }
 
         private function get_content(
@@ -127,12 +127,12 @@
             return $content;
         }
 
-        private function replace_injections(
+        private function markup_inject(
             string $text,
-            string $type,
+            string $type
         ): string {
             return preg_replace_callback(
-                '/<!--\s*inject\s+([^<>]+?)\s*-->/i',
+                "/<!--\s*inject\s+([^<>]+?)\s*-->/i",
                 fn (array $matches) => $this->get_content($type, $matches[1]),
                 $text
             );
