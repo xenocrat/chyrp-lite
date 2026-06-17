@@ -44,7 +44,8 @@
          *
          * See Also:
          *     <Post.filter>
-         *     <Feathers.filterField>
+         *     <Feathers.setFilter>
+         *     <Feathers.customFilter>
          */
         public static function filter(
             $post
@@ -118,11 +119,11 @@
 
         /**
          * Function: setFilter
-         * Applies a filter to a specified field of the feather.
+         * Applies trigger filters to a field of the feather.
          *
          * Parameters:
          *     $field - Attribute of the post to filter.
-         *     $name - Name of the filter to use.
+         *     $name - String or array of trigger filter names.
          *
          * Returns:
          *     @true@ or @false@
@@ -150,11 +151,11 @@
 
         /**
          * Function: customFilter
-         * Allows a feather to apply its own filter to a specified field.
+         * Allows a feather to apply its own filter to a field.
          *
          * Parameters:
          *     $field - Attribute of the post to filter.
-         *     $name - Name of the class function to use as the filter.
+         *     $name - Name of the method to use as the filter.
          *
          * Returns:
          *     @true@ or @false@
@@ -186,8 +187,8 @@
          *
          * Parameters:
          *     $name - Name of the trigger to respond to.
-         *     $function - Name of the class function to respond with.
-         *     $priority - Priority of the response.
+         *     $function - Name of the method to respond with.
+         *     $priority - Priority of the trigger response.
          *
          * Returns:
          *     @true@ or @false@

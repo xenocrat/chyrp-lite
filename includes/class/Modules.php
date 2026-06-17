@@ -22,11 +22,11 @@
 
         /**
          * Function: setPriority
-         * Sets the priority of an action for the module this function is called from.
+         * Sets the priority of a trigger responder method.
          *
          * Parameters:
          *     $name - Name of the trigger to respond to.
-         *     $priority - Priority of the response.
+         *     $priority - Priority of the trigger response.
          *
          * Returns:
          *     @true@ or @false@
@@ -44,12 +44,12 @@
 
         /**
          * Function: addAlias
-         * Allows a module to respond to a trigger with custom functions and priorities.
+         * Aliases a trigger responder to another method name.
          *
          * Parameters:
          *     $name - Name of the trigger to respond to.
-         *     $function - Name of the class function to respond with.
-         *     $priority - Priority of the response.
+         *     $function - Name of the method to respond with.
+         *     $priority - Priority of the trigger response.
          *
          * Returns:
          *     @true@ or @false@
