@@ -55,11 +55,10 @@
 
             $trigger = Trigger::current();
             $touched = array();
-            $class_name = camelize($post->feather);
 
             # Custom filters.
-            if (isset(self::$custom_filters[$class_name])) {
-                foreach (self::$custom_filters[$class_name] as $custom_filter) {
+            if (isset(self::$custom_filters[$post->feather])) {
+                foreach (self::$custom_filters[$post->feather] as $custom_filter) {
                     $field = $custom_filter["field"];
                     $field_unfiltered = $field."_unfiltered";
 
@@ -79,8 +78,8 @@
             }
 
             # Trigger filters.
-            if (isset(self::$filters[$class_name])) {
-                foreach (self::$filters[$class_name] as $filter) {
+            if (isset(self::$filters[$post->feather])) {
+                foreach (self::$filters[$post->feather] as $filter) {
                     $field = $filter["field"];
                     $field_unfiltered = $field."_unfiltered";
 
@@ -123,7 +122,7 @@
          *
          * Parameters:
          *     $field - Attribute of the post to filter.
-         *     $name - String or array of trigger filter names.
+         *     $name - The name of the trigger, or an array of triggers to call.
          *
          * Returns:
          *     @true@ or @false@
@@ -138,7 +137,9 @@
             if (!isset($this->fields[$field]))
                 return false;
 
-            self::$filters[get_class($this)][] = array(
+            $feather = decamelize(get_class($this));
+
+            self::$filters[$feather][] = array(
                 "field" => $field,
                 "name" => $name
             );
@@ -170,7 +171,9 @@
             if (!isset($this->fields[$field]))
                 return false;
 
-            self::$custom_filters[get_class($this)][] = array(
+            $feather = decamelize(get_class($this));
+
+            self::$custom_filters[$feather][] = array(
                 "field" => $field,
                 "name" => $name
             );
