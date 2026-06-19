@@ -18,12 +18,25 @@ msgid "Categorizing Posts"
 msgstr "Kategoryzacja wpisów"
 
 #: modules/categorize/admin/help/categorizing_posts.twig:8
-msgid "Categorization is a way of organising your blog posts. A good use for categorization is to gather together multiple posts that have a common theme or subject matter. Each post can have only one category applied to it, and your visitors will be able to filter your blog to easily view all the posts within a particular category."
-msgstr "Kategoryzacja to sposób organizowania wpisów na blogu. Dobrym zastosowaniem kategorii jest grupowanie wpisów o wspólnym temacie lub treści. Każdemu wpisowi można przypisać tylko jedną kategorię, a odwiedzający będą mogli filtrować blog, aby wyświetlić wszystkie wpisy należące do danej kategorii."
+msgid ""
+"Categorization is a way of organising your blog posts. A good use for "
+"categorization is to gather together multiple posts that have a common theme "
+"or subject matter. Each post can have only one category applied to it, and "
+"your visitors will be able to filter your blog to easily view all the posts "
+"within a particular category."
+msgstr ""
+"Kategoryzacja to sposób organizowania wpisów na blogu. Dobrym zastosowaniem "
+"kategorii jest grupowanie wpisów o wspólnym temacie lub treści. Każdemu "
+"wpisowi można przypisać tylko jedną kategorię, a odwiedzający będą mogli "
+"filtrować blog, aby wyświetlić wszystkie wpisy należące do danej kategorii."
 
 #: modules/categorize/admin/help/categorizing_posts.twig:11
-msgid "Categories can be added, renamed, and deleted in the <strong>Manage</strong> tab of the administration console."
-msgstr "Kategorie można dodawać, zmieniać nazwę i usuwać na karcie <strong>Zarządzaj</strong> w panelu administracyjnym."
+msgid ""
+"Categories can be added, renamed, and deleted in the <strong>Manage</strong> "
+"tab of the administration console."
+msgstr ""
+"Kategorie można dodawać, zmieniać nazwę i usuwać na karcie "
+"<strong>Zarządzaj</strong> w panelu administracyjnym."
 
 #: modules/categorize/admin/pages/delete_category.twig:3
 #: modules/categorize/admin/pages/delete_category.twig:6
@@ -149,7 +162,7 @@ msgid "An ID is required to edit a category."
 msgstr "Do edycji kategorii wymagane jest ID."
 
 #: modules/categorize/categorize.php:391 modules/categorize/categorize.php:434
-#: modules/categorize/categorize.php:483 modules/categorize/categorize.php:521
+#: modules/categorize/categorize.php:483 modules/categorize/categorize.php:523
 msgid "Category not found."
 msgstr "Kategoria nie została znaleziona."
 
@@ -169,15 +182,15 @@ msgstr "Do aktualizacji kategorii wymagana jest nazwa."
 msgid "Category updated."
 msgstr "Kategoria zaktualizowana."
 
-#: modules/categorize/categorize.php:474 modules/categorize/categorize.php:509
+#: modules/categorize/categorize.php:474 modules/categorize/categorize.php:511
 msgid "An ID is required to delete a category."
 msgstr "Do usunięcia kategorii wymagane jest ID."
 
-#: modules/categorize/categorize.php:489 modules/categorize/categorize.php:527
+#: modules/categorize/categorize.php:489 modules/categorize/categorize.php:529
 msgid "You do not have sufficient privileges to delete this category."
 msgstr "Nie masz wystarczających uprawnień, aby usunąć tę kategorię."
 
-#: modules/categorize/categorize.php:532
+#: modules/categorize/categorize.php:534
 msgid "Category deleted."
 msgstr "Kategoria usunięta."
 

@@ -41,6 +41,24 @@ msgstr "删除标签？"
 msgid "&#8220;%s&#8221; will be permanently deleted."
 msgstr "&#8220;%s&#8221; 将被永久删除。"
 
+#: modules/tags/admin/pages/edit_tag.twig:3
+msgid "Rename Tag"
+msgstr "重命名标签"
+
+#: modules/tags/admin/pages/edit_tag.twig:6
+#, php-format
+msgid "Renaming Tag &#8220;%s&#8221;"
+msgstr "重命名标签 &#8220;%s&#8221;"
+
+#: modules/tags/admin/pages/edit_tag.twig:10
+#: modules/tags/admin/pages/manage_tags.twig:22 modules/tags/tags.php:323
+msgid "Name"
+msgstr "姓名"
+
+#: modules/tags/admin/pages/edit_tag.twig:16
+msgid "Rename"
+msgstr "重命名"
+
 #: modules/tags/admin/pages/edit_tags.twig:3
 msgid "Edit Tags"
 msgstr "编辑标签"
@@ -52,7 +70,7 @@ msgstr "编辑标签 &#8220;%s&#8221;"
 
 #: modules/tags/admin/pages/edit_tags.twig:10
 #: modules/tags/admin/pages/manage_tags.twig:18
-#: modules/tags/admin/pages/posts_tagged.twig:32 modules/tags/tags.php:193
+#: modules/tags/admin/pages/posts_tagged.twig:31 modules/tags/tags.php:193
 #: modules/tags/tags.php:259 modules/tags/tags.php:274
 #: modules/tags/tags.php:836
 msgid "Tags"
@@ -66,11 +84,6 @@ msgstr "管理标签"
 #: modules/tags/admin/pages/posts_tagged.twig:81
 msgid "Add Tags"
 msgstr "添加标签"
-
-#: modules/tags/admin/pages/manage_tags.twig:22
-#: modules/tags/admin/pages/rename_tag.twig:10 modules/tags/tags.php:323
-msgid "Name"
-msgstr "姓名"
 
 #: modules/tags/admin/pages/manage_tags.twig:23
 #: modules/tags/admin/pages/posts_tagged.twig:3 modules/tags/tags.php:324
@@ -89,19 +102,6 @@ msgstr "&#8220;%s&#8221; 的帖子标签"
 #: modules/tags/admin/pages/posts_tagged.twig:78
 msgid "Tag Selected Post(s) with:"
 msgstr "将选中的帖子标记为："
-
-#: modules/tags/admin/pages/rename_tag.twig:3
-msgid "Rename Tag"
-msgstr "重命名标签"
-
-#: modules/tags/admin/pages/rename_tag.twig:6
-#, php-format
-msgid "Renaming Tag &#8220;%s&#8221;"
-msgstr "重命名标签 &#8220;%s&#8221;"
-
-#: modules/tags/admin/pages/rename_tag.twig:16
-msgid "Rename"
-msgstr "重命名"
 
 #: modules/tags/info.php:3
 msgid "Tagginator"

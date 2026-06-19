@@ -45,7 +45,7 @@ msgid "Manage Webmentions"
 msgstr "Zarządzaj webmentionami"
 
 #: modules/pingable/admin/pages/manage_pingbacks.twig:18
-#: modules/pingable/pingable.php:265 modules/pingable/pingable.php:292
+#: modules/pingable/pingable.php:267 modules/pingable/pingable.php:294
 msgid "Webmentions"
 msgstr "Webmentiony"
 
@@ -94,7 +94,7 @@ msgid "An ID is required to edit a webmention."
 msgstr "Do edycji webmention wymagane jest ID."
 
 #: modules/pingable/pingable.php:84 modules/pingable/pingable.php:127
-#: modules/pingable/pingable.php:159 modules/pingable/pingable.php:197
+#: modules/pingable/pingable.php:159 modules/pingable/pingable.php:199
 msgid "Webmention not found."
 msgstr "Webmention nie został znaleziony."
 
@@ -118,18 +118,18 @@ msgstr "Do aktualizacji webmention wymagany jest tytuł."
 msgid "Webmention updated."
 msgstr "Webmention zaktualizowany."
 
-#: modules/pingable/pingable.php:150 modules/pingable/pingable.php:185
+#: modules/pingable/pingable.php:150 modules/pingable/pingable.php:187
 msgid "An ID is required to delete a webmention."
 msgstr "Do usunięcia webmention wymagane jest ID."
 
-#: modules/pingable/pingable.php:165 modules/pingable/pingable.php:203
+#: modules/pingable/pingable.php:165 modules/pingable/pingable.php:205
 msgid "You do not have sufficient privileges to delete this webmention."
 msgstr "Nie masz wystarczających uprawnień, aby usunąć tę webmention."
 
-#: modules/pingable/pingable.php:209
+#: modules/pingable/pingable.php:211
 msgid "Webmention deleted."
 msgstr "Webmention usunięty."
 
-#: modules/pingable/pingable.php:220
+#: modules/pingable/pingable.php:222
 msgid "You do not have sufficient privileges to manage webmentions."
 msgstr "Nie masz wystarczających uprawnień, aby zarządzać webmentionami."

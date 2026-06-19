@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/pingable/admin/pages/delete_pingback.twig:3
@@ -46,7 +46,7 @@ msgid "Manage Webmentions"
 msgstr "Gestisci Webmentions"
 
 #: modules/pingable/admin/pages/manage_pingbacks.twig:18
-#: modules/pingable/pingable.php:265 modules/pingable/pingable.php:292
+#: modules/pingable/pingable.php:267 modules/pingable/pingable.php:294
 msgid "Webmentions"
 msgstr "Webmention"
 
@@ -97,7 +97,7 @@ msgid "An ID is required to edit a webmention."
 msgstr "È necessario un ID per modificare un Webmention."
 
 #: modules/pingable/pingable.php:84 modules/pingable/pingable.php:127
-#: modules/pingable/pingable.php:159 modules/pingable/pingable.php:197
+#: modules/pingable/pingable.php:159 modules/pingable/pingable.php:199
 msgid "Webmention not found."
 msgstr "Webmention non trovato."
 
@@ -122,19 +122,19 @@ msgstr "È necessario un titolo per aggiornare un Webmention."
 msgid "Webmention updated."
 msgstr "Webmention aggiornato."
 
-#: modules/pingable/pingable.php:150 modules/pingable/pingable.php:185
+#: modules/pingable/pingable.php:150 modules/pingable/pingable.php:187
 msgid "An ID is required to delete a webmention."
 msgstr "È necessario un ID per eliminare un Webmention."
 
-#: modules/pingable/pingable.php:165 modules/pingable/pingable.php:203
+#: modules/pingable/pingable.php:165 modules/pingable/pingable.php:205
 msgid "You do not have sufficient privileges to delete this webmention."
 msgstr ""
 "Non si dispone di privilegi sufficienti per eliminare questo Webmention."
 
-#: modules/pingable/pingable.php:209
+#: modules/pingable/pingable.php:211
 msgid "Webmention deleted."
 msgstr "Webmention eliminato."
 
-#: modules/pingable/pingable.php:220
+#: modules/pingable/pingable.php:222
 msgid "You do not have sufficient privileges to manage webmentions."
 msgstr "Non si dispone di privilegi sufficienti per gestire i Webmentions."

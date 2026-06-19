@@ -143,7 +143,7 @@ msgstr ""
 #: modules/categorize/categorize.php:391
 #: modules/categorize/categorize.php:434
 #: modules/categorize/categorize.php:483
-#: modules/categorize/categorize.php:521
+#: modules/categorize/categorize.php:523
 msgid "Category not found."
 msgstr ""
 
@@ -165,16 +165,16 @@ msgid "Category updated."
 msgstr ""
 
 #: modules/categorize/categorize.php:474
-#: modules/categorize/categorize.php:509
+#: modules/categorize/categorize.php:511
 msgid "An ID is required to delete a category."
 msgstr ""
 
 #: modules/categorize/categorize.php:489
-#: modules/categorize/categorize.php:527
+#: modules/categorize/categorize.php:529
 msgid "You do not have sufficient privileges to delete this category."
 msgstr ""
 
-#: modules/categorize/categorize.php:532
+#: modules/categorize/categorize.php:534
 msgid "Category deleted."
 msgstr ""
 

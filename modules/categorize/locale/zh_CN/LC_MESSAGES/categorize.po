@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/categorize/admin/help/categorizing_posts.twig:3
@@ -161,7 +161,7 @@ msgid "An ID is required to edit a category."
 msgstr "编辑类别需要ID。"
 
 #: modules/categorize/categorize.php:391 modules/categorize/categorize.php:434
-#: modules/categorize/categorize.php:483 modules/categorize/categorize.php:521
+#: modules/categorize/categorize.php:483 modules/categorize/categorize.php:523
 msgid "Category not found."
 msgstr "类别未找到。"
 
@@ -181,15 +181,15 @@ msgstr "更新类别需要名字。"
 msgid "Category updated."
 msgstr "类别已更新。"
 
-#: modules/categorize/categorize.php:474 modules/categorize/categorize.php:509
+#: modules/categorize/categorize.php:474 modules/categorize/categorize.php:511
 msgid "An ID is required to delete a category."
 msgstr "删除类别需要ID。"
 
-#: modules/categorize/categorize.php:489 modules/categorize/categorize.php:527
+#: modules/categorize/categorize.php:489 modules/categorize/categorize.php:529
 msgid "You do not have sufficient privileges to delete this category."
 msgstr "您没有足够的权限来删除这个类别。"
 
-#: modules/categorize/categorize.php:532
+#: modules/categorize/categorize.php:534
 msgid "Category deleted."
 msgstr "类别已删除。"
 

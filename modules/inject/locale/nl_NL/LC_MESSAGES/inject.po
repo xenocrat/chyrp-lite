@@ -103,7 +103,7 @@ msgid "New Injector"
 msgstr "Nieuwe injector"
 
 #: modules/inject/admin/pages/manage_injectors.twig:16
-#: modules/inject/inject.php:482
+#: modules/inject/inject.php:471
 msgid "Injectors"
 msgstr "Injectoren"
 
@@ -125,79 +125,79 @@ msgstr "Injecteer inhoud in uw blog met behulp van triggers en filters."
 msgid "Do you want to remove injector settings?"
 msgstr "Wil je de injectorinstellingen verwijderen?"
 
-#: modules/inject/inject.php:157
+#: modules/inject/inject.php:144
 msgid "HTML head"
 msgstr "HTML-kop"
 
-#: modules/inject/inject.php:158
+#: modules/inject/inject.php:145
 msgid "End of main section"
 msgstr "Einde van het hoofdgedeelte"
 
-#: modules/inject/inject.php:159
+#: modules/inject/inject.php:146
 msgid "After other content"
 msgstr "Na andere inhoud"
 
-#: modules/inject/inject.php:160
+#: modules/inject/inject.php:147
 msgid "Post filter"
 msgstr "Bericht filter"
 
-#: modules/inject/inject.php:161
+#: modules/inject/inject.php:148
 msgid "Page filter"
 msgstr "Pagina filter"
 
-#: modules/inject/inject.php:162
+#: modules/inject/inject.php:149
 msgid "Twig filter"
 msgstr "Twig filter"
 
-#: modules/inject/inject.php:169
+#: modules/inject/inject.php:156
 msgid "Never"
 msgstr "Nooit"
 
-#: modules/inject/inject.php:170
+#: modules/inject/inject.php:157
 msgid "Once"
 msgstr "Eénmalig"
 
-#: modules/inject/inject.php:171
+#: modules/inject/inject.php:158
 msgid "Odd"
 msgstr "Oneven"
 
-#: modules/inject/inject.php:172
+#: modules/inject/inject.php:159
 msgid "Even"
 msgstr "Even"
 
-#: modules/inject/inject.php:173
+#: modules/inject/inject.php:160
 msgid "Always"
 msgstr "Altijd"
 
-#: modules/inject/inject.php:271 modules/inject/inject.php:364
+#: modules/inject/inject.php:258 modules/inject/inject.php:351
 msgid "Label cannot be blank."
 msgstr "Het label mag niet leeg zijn."
 
-#: modules/inject/inject.php:299
+#: modules/inject/inject.php:286
 msgid "Injector added."
 msgstr "Injector toegevoegd."
 
-#: modules/inject/inject.php:316
+#: modules/inject/inject.php:303
 msgid "An ID is required to edit an injector."
 msgstr "Een ID is vereist om een injector te bewerken."
 
-#: modules/inject/inject.php:325 modules/inject/inject.php:373
-#: modules/inject/inject.php:420 modules/inject/inject.php:461
+#: modules/inject/inject.php:312 modules/inject/inject.php:360
+#: modules/inject/inject.php:407 modules/inject/inject.php:450
 msgid "Injector not found."
 msgstr "Injector niet gevonden."
 
-#: modules/inject/inject.php:357
+#: modules/inject/inject.php:344
 msgid "An ID is required to update an injector."
 msgstr "Een ID is vereist om een injector bij te werken."
 
-#: modules/inject/inject.php:394
+#: modules/inject/inject.php:381
 msgid "Injector updated."
 msgstr "Injector bijgewerkt."
 
-#: modules/inject/inject.php:411 modules/inject/inject.php:449
+#: modules/inject/inject.php:398 modules/inject/inject.php:438
 msgid "An ID is required to delete an injector."
 msgstr "Een ID is vereist om een injector te verwijderen."
 
-#: modules/inject/inject.php:472
+#: modules/inject/inject.php:461
 msgid "Injector deleted."
 msgstr "Injector verwijderd."

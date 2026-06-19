@@ -292,8 +292,8 @@ msgstr "Hyperlink"
 msgid "![description](URL)"
 msgstr "![description](URL)"
 
-#: admin/help/markdown.twig:65 admin/javascripts/admin.js.php:826
-#: admin/javascripts/admin.js.php:827
+#: admin/help/markdown.twig:65 admin/javascripts/admin.js.php:845
+#: admin/javascripts/admin.js.php:846
 msgid "Image"
 msgstr "Bild"
 
@@ -322,7 +322,8 @@ msgstr "Blockquote"
 msgid "< Aside"
 msgstr "< Aside"
 
-#: admin/help/markdown.twig:81
+#: admin/help/markdown.twig:81 admin/javascripts/admin.js.php:826
+#: admin/javascripts/admin.js.php:827
 msgid "Aside"
 msgstr "Aside"
 
@@ -425,7 +426,7 @@ msgid "Maximum file size: %d Megabytes."
 msgstr "Maximale Dateigröße: %d Megabyte."
 
 #: admin/javascripts/admin.js.php:320 admin/javascripts/admin.js.php:467
-#: admin/javascripts/admin.js.php:1471
+#: admin/javascripts/admin.js.php:1561
 msgid "Modal window"
 msgstr "Modales Fenster"
 
@@ -434,7 +435,7 @@ msgid "Uploads"
 msgstr "Hochladungen"
 
 #: admin/javascripts/admin.js.php:355 admin/javascripts/admin.js.php:493
-#: admin/javascripts/admin.js.php:1503
+#: admin/javascripts/admin.js.php:1593
 msgid "Close"
 msgstr "Schliessen"
 
@@ -450,12 +451,12 @@ msgid "Edit"
 msgstr "Bearbeiten"
 
 #: admin/javascripts/admin.js.php:559 admin/javascripts/admin.js.php:560
-#: admin/javascripts/admin.js.php:847 admin/javascripts/admin.js.php:848
+#: admin/javascripts/admin.js.php:866 admin/javascripts/admin.js.php:867
 msgid "Insert"
 msgstr "Einfügen"
 
 #: admin/javascripts/admin.js.php:605 admin/javascripts/admin.js.php:606
-#: admin/javascripts/admin.js.php:893 admin/javascripts/admin.js.php:894
+#: admin/javascripts/admin.js.php:912 admin/javascripts/admin.js.php:913
 msgid "Upload"
 msgstr "Hochladen"
 
@@ -463,16 +464,16 @@ msgstr "Hochladen"
 msgid "Horizontal rule"
 msgstr "Horizontal Regel"
 
-#: admin/javascripts/admin.js.php:967 admin/javascripts/admin.js.php:968
+#: admin/javascripts/admin.js.php:986 admin/javascripts/admin.js.php:987
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr "Vorschau"
 
-#: admin/javascripts/admin.js.php:1022
+#: admin/javascripts/admin.js.php:1041
 msgid "Words:"
 msgstr "Wörter:"
 
-#: admin/javascripts/admin.js.php:1481
+#: admin/javascripts/admin.js.php:1571
 msgid "Preview content"
 msgstr "Vorschau inhalt"
 

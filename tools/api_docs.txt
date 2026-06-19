@@ -76,46 +76,25 @@ Class: Feathers
 Contains various functions, acts as the backbone for all feathers.
 
 
-Function: setFilter
--------------------
-Applies a filter to a specified field of the Feather.
+Function: filter
+----------------
+Applies feather filters to a post.
 
 Parameters:
-    $field - Attribute of the post to filter.
-    $name - Name of the filter to use.
+    $post - The post object to filter.
+
+Returns:
+    The filtered <Post>.
 
 See Also:
-    <Trigger.filter>
-
-
-Function: customFilter
-----------------------
-Allows a Feather to apply its own filter to a specified field.
-
-Parameters:
-    $field - Attribute of the post to filter.
-    $name - Name of the class function to use as the filter.
-
-See Also:
-    <Trigger.filter>
-
-
-Function: respondTo
--------------------
-Allows a Feather to respond to a Trigger as a Module would.
-
-Parameters:
-    $name - Name of the trigger to respond to.
-    $function - Name of the class function to respond with.
-    $priority - Priority of the response.
-
-See Also:
-    <Trigger>
+    <Post.filter>
+    <Feathers.setFilter>
+    <Feathers.customFilter>
 
 
 Function: setField
 ------------------
-Sets the feather's fields for creating/editing posts with that feather.
+Defines a feather field to be used for post writing and editing.
 
 Parameters:
     $options - An array of key => val options for the field.
@@ -127,6 +106,52 @@ Options:
     optional - Is this field optional?
     extra - Stuff to output after the input field. Can be anything.
     note - A minor note to display next to the label text.
+
+
+Function: setFilter
+-------------------
+Applies trigger filters to a field of the feather.
+
+Parameters:
+    $field - Attribute of the post to filter.
+    $name - String or array of trigger filter names.
+
+Returns:
+    @true@ or @false@
+
+See Also:
+    <Trigger.filter>
+
+
+Function: customFilter
+----------------------
+Allows a feather to apply its own filter to a field.
+
+Parameters:
+    $field - Attribute of the post to filter.
+    $name - Name of the method to use as the filter.
+
+Returns:
+    @true@ or @false@
+
+See Also:
+    <Trigger.filter>
+
+
+Function: respondTo
+-------------------
+Allows a feather to respond to a trigger as a module would.
+
+Parameters:
+    $name - Name of the trigger to respond to.
+    $function - Name of the method to respond with.
+    $priority - Priority of the trigger response.
+
+Returns:
+    @true@ or @false@
+
+See Also:
+    <Trigger>
 
 
 ==============================================
@@ -376,21 +401,27 @@ Contains various functions, acts as the backbone for all modules.
 
 Function: setPriority
 ---------------------
-Sets the priority of an action for the module this function is called from.
+Sets the priority of a trigger responder method.
 
 Parameters:
     $name - Name of the trigger to respond to.
-    $priority - Priority of the response.
+    $priority - Priority of the trigger response.
+
+Returns:
+    @true@ or @false@
 
 
 Function: addAlias
 ------------------
-Allows a module to respond to a trigger with multiple functions and custom priorities.
+Aliases a trigger responder to another method name.
 
 Parameters:
     $name - Name of the trigger to respond to.
-    $function - Name of the class function to respond with.
-    $priority - Priority of the response.
+    $function - Name of the method to respond with.
+    $priority - Priority of the trigger response.
+
+Returns:
+    @true@ or @false@
 
 
 ==============================================
@@ -1267,14 +1298,17 @@ Function: __construct
 Add predefined filters to implement Unicode emoji and Markdown support.
 
 
-Function: cmp
+Function: add
 -------------
-Sorts actions by priority when used with usort.
+Adds a trigger responder.
 
+Parameters:
+    $name - Name of the trigger to respond to.
+    $priority - Priority of the response.
+    $callable - The callable to respond with.
 
-Function: decide
-----------------
-Decides what to do with a call return value.
+Returns:
+    @true@ or @false@
 
 
 Function: call
@@ -1317,6 +1351,16 @@ Parameters:
 
 Returns:
     @true@ or @false@
+
+
+Function: prioritize
+--------------------
+Sorts actions by priority when used with usort.
+
+
+Function: postprocess
+---------------------
+Post-processes call return values.
 
 
 Function: current
@@ -1994,7 +2038,7 @@ Parameters:
     $url_path - The URL path to MAIN_DIR.
 
 Returns:
-    The rewrite rules, or false on failure.
+    The rewrite rules, or @false@ on failure.
 
 
 Function: caddyfile_conf
@@ -2005,7 +2049,7 @@ Parameters:
     $url_path - The URL path to MAIN_DIR.
 
 Returns:
-    The rewrite rules, or false on failure.
+    The rewrite rules, or @false@ on failure.
 
 
 Function: nginx_conf
@@ -2016,7 +2060,7 @@ Parameters:
     $url_path - The URL path to MAIN_DIR.
 
 Returns:
-    The rewrite rules, or false on failure.
+    The rewrite rules, or @false@ on failure.
 
 
 Function: lighttpd_conf
@@ -2027,7 +2071,7 @@ Parameters:
     $url_path - The URL path to MAIN_DIR.
 
 Returns:
-    The rewrite rules, or false on failure.
+    The rewrite rules, or @false@ on failure.
 
 
 Function: locales
@@ -2223,11 +2267,11 @@ Function: oneof
 Inspects the supplied arguments and returns the first substantial value.
 
 Returns:
-    The first substantial value in the set, or the last, or null.
+    The first substantial value in the set, or the last, or @null@.
 
 Notes:
     Some type combinations will halt inspection of the full set:
-    - All types are comparable with null.
+    - All types are comparable with @null@.
     - All scalar types are comparable.
     - Arrays, objects, and resources are incomparable with other types.
 
@@ -2426,8 +2470,8 @@ Parameters:
     $delimiter - The delimter to use for splitting.
     $trim - Trim whitespace from the array items?
     $no_empties - Remove empty items from the array?
-    $unique - Deduplicate? false/null, or SORT_ flag.
-    $sort - Sort the array? false/null, or SORT_ flag.
+    $unique - Deduplicate? SORT_* flag, @false@ or @null@.
+    $sort - Sort the array? SORT_* flag, @false@ or @null@.
 
 Returns:
     An array with the requested cleaning applied.
@@ -2550,7 +2594,7 @@ Returns:
 
 Function: get_remote
 --------------------
-Retrieves the contents of a URL.
+Retrieves the contents of a URL or sends a POST request.
 
 Parameters:
     $url - The URL of the resource to be retrieved.
@@ -2559,9 +2603,10 @@ Parameters:
     $headers - Include response headers with the content?
     $post - Set the request type to POST instead of GET?
     $data - An array or urlencoded string of POST data.
+    $req_headers - An array of request headers to send.
 
 Returns:
-    The response content, or false on failure.
+    The response content, or @false@ on failure.
 
 
 Function: webmention_send
@@ -2592,7 +2637,7 @@ Parameters:
     $redirects - The maximum number of redirects to follow.
 
 Returns:
-    The Webmention endpoint URL, or false on failure.
+    The Webmention endpoint URL, or @false@ on failure.
 
 
 Function: grab_urls
@@ -2615,7 +2660,7 @@ Parameters:
     $rel - The relative path.
 
 Returns:
-    A merged target URL, or false on failure.
+    A merged target URL, or @false@ on failure.
 
 Notes:
     Does not attempt to resolve dot segments in the path.
@@ -2655,11 +2700,11 @@ Returns:
 
 Function: cancel_module
 -----------------------
-Temporarily declares a module cancelled (disabled).
+Temporarily declares a module canceled (disabled).
 
 Parameters:
     $target - The non-camelized name of the module.
-    $reason - Why was execution cancelled?
+    $reason - Why was execution canceled?
 
 Notes:
     A module can cancel itself in its __init() method.
@@ -2667,11 +2712,11 @@ Notes:
 
 Function: cancel_feather
 ------------------------
-Temporarily declares a feather cancelled (disabled).
+Temporarily declares a feather canceled (disabled).
 
 Parameters:
     $target - The non-camelized name of the feather.
-    $reason - Why was execution cancelled?
+    $reason - Why was execution canceled?
 
 Notes:
     A feather can cancel itself in its __init() method.
@@ -2699,7 +2744,7 @@ Parameters:
     $timeout - The maximum number of seconds to wait.
 
 Returns:
-    The filename of the copied file, or false on failure.
+    The filename of the copied file, or @false@ on failure.
 
 
 Function: uploaded
@@ -2712,7 +2757,7 @@ Parameters:
 
 Returns:
     The supplied filename prepended with URL or filesystem path,
-    or false on failure.
+    or @false@ on failure.
 
 
 Function: uploaded_search
@@ -2733,7 +2778,7 @@ Parameters:
     $file - The POST method upload array, e.g. $_FILES['userfile'].
 
 Returns:
-    True for a successful upload or false if no file was uploaded.
+    @true@ for a successful upload or @false@ if no file was uploaded.
 
 Notes:
     $_POST and $_FILES are empty if post_max_size directive is exceeded.
@@ -2748,7 +2793,7 @@ Parameters:
     $filter - An array of valid extensions (case insensitive).
 
 Returns:
-    A sanitized unique filename, or false on failure.
+    A sanitized unique filename, or @false@ on failure.
 
 
 Function: upload_filter_whitelist
@@ -2918,7 +2963,7 @@ Parameters:
     $depth - Recursion depth for encoding.
 
 Returns:
-    A JSON encoded string or false on failure.
+    A JSON encoded string or @false@ on failure.
 
 
 Function: json_get
@@ -3020,7 +3065,7 @@ Returns the HTML form elements for the captcha challenge.
 
 Function: checkCaptcha
 ----------------------
-Checks the response and returns true (success) or false (failure).
+Checks the response and returns @true@ (success) or @false@ (failure).
 
 
 ==============================================
@@ -3447,7 +3492,7 @@ Parameters:
     $timestamp - A time() value or string to be strtotime() converted.
     $format - The date()-compatible formatting for the <time> representation.
     $convert - Perform a case conversion:
-               "fold", "lower", "title", "upper", or null to retain case as-is.
+               "fold", "lower", "title", "upper", or @null@ to retain case as-is.
 
 
 Function: twig_filter_date_format
@@ -3766,7 +3811,7 @@ Adds a group to the database.
 
 Parameters:
     $name - The group's name
-    $permissions - An array of the permissions (IDs).
+    $permissions - An array of permission IDs to set.
 
 Returns:
     The newly created <Group>.
@@ -3781,7 +3826,7 @@ Updates a group with the given name and permissions.
 
 Parameters:
     $name - The new Name to set.
-    $permissions - An array of the new permissions to set (IDs).
+    $permissions - An array of permission IDs to set.
 
 Returns:
     The updated <Group>.
@@ -3797,7 +3842,7 @@ See Also:
 
 Function: add_permission
 ------------------------
-Adds a permission to the Groups table.
+Adds a permission to the table.
 
 Parameters:
     $id - The ID for the permission, e.g "can_do_something".
@@ -3806,7 +3851,7 @@ Parameters:
 
 Function: remove_permission
 ---------------------------
-Removes a permission from the Groups table.
+Removes a permission from the table.
 
 Parameters:
     $id - The ID of the permission to remove.
@@ -3814,7 +3859,7 @@ Parameters:
 
 Function: list_permissions
 --------------------------
-Returns an array of all permissions in the Groups table.
+Returns an array of all permissions in the table.
 
 Parameters:
     $group_id - List enabled permissions for this group ID.
@@ -3944,7 +3989,7 @@ Attempts to grab a page from its clean or dirty  URL.
 
 Parameters:
     $request - The request URI to parse.
-    $route - The route to respond to, or null to return a Page.
+    $route - The route to respond to, or @null@ to return a <Page>.
 
 
 Function: url
@@ -4101,17 +4146,17 @@ Returns:
 
 Function: title
 ---------------
-Returns the given post's title, provided by its Feather.
+Returns the post title, provided by its feather.
 
 
 Function: excerpt
 -----------------
-Returns the given post's excerpt, provided by its Feather.
+Returns the post excerpt, provided by its feather.
 
 
 Function: feed_content
 ----------------------
-Returns the given post's feed content, provided by its Feather.
+Returns the post's feed content, provided by its feather.
 
 
 Function: next
@@ -4135,7 +4180,10 @@ Checks if the current post's feather theme file exists.
 
 Function: filter
 ----------------
-Filters the post attributes through filter_post and any Feather filters.
+Filters the post attributes through filter_post and feather filters.
+
+See Also:
+    <Feathers.filter>
 
 
 Function: from_url
@@ -4144,7 +4192,7 @@ Attempts to grab a post from its clean or dirty URL.
 
 Parameters:
     $request - The request URI to parse.
-    $route - The route to respond to, or null to return a Post.
+    $route - The route to respond to, or @null@ to return a <Post>.
     $options - Additional options for the Post object (optional).
 
 
@@ -4207,7 +4255,7 @@ See Also:
 
 Function: authenticate
 ----------------------
-Checks to see if a given login and password match a user in the database.
+Checks to see if a given login and password match an existing user.
 
 Parameters:
     $login - The Login to check.
@@ -4227,8 +4275,8 @@ Parameters:
     $email - The email for the new user.
     $full_name - The full name of the user (optional).
     $website - The user's website (optional).
-    $group_id - The user's <Group> ID (defaults to the default group).
-    $joined_at - Join date (defaults to now).
+    $group_id - The user's <Group> ID (default: default group).
+    $joined_at - Join date (default: now).
 
 Returns:
     The newly created <User>.

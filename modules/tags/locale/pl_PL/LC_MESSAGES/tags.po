@@ -43,6 +43,24 @@ msgstr "Usunąć tag?"
 msgid "&#8220;%s&#8221; will be permanently deleted."
 msgstr "&#8222;%s&#8221; zostanie trwale usunięty."
 
+#: modules/tags/admin/pages/edit_tag.twig:3
+msgid "Rename Tag"
+msgstr "Zmień nazwę tagu"
+
+#: modules/tags/admin/pages/edit_tag.twig:6
+#, php-format
+msgid "Renaming Tag &#8220;%s&#8221;"
+msgstr "Zmiana nazwy tagu &#8222;%s&#8221;"
+
+#: modules/tags/admin/pages/edit_tag.twig:10
+#: modules/tags/admin/pages/manage_tags.twig:22 modules/tags/tags.php:323
+msgid "Name"
+msgstr "Nazwa"
+
+#: modules/tags/admin/pages/edit_tag.twig:16
+msgid "Rename"
+msgstr "Zmień nazwę"
+
 #: modules/tags/admin/pages/edit_tags.twig:3
 msgid "Edit Tags"
 msgstr "Edytuj tagi"
@@ -54,7 +72,7 @@ msgstr "Edycja tagów dla &#8222;%s&#8221;"
 
 #: modules/tags/admin/pages/edit_tags.twig:10
 #: modules/tags/admin/pages/manage_tags.twig:18
-#: modules/tags/admin/pages/posts_tagged.twig:32 modules/tags/tags.php:193
+#: modules/tags/admin/pages/posts_tagged.twig:31 modules/tags/tags.php:193
 #: modules/tags/tags.php:259 modules/tags/tags.php:274
 #: modules/tags/tags.php:836
 msgid "Tags"
@@ -68,11 +86,6 @@ msgstr "Zarządzaj tagami"
 #: modules/tags/admin/pages/posts_tagged.twig:81
 msgid "Add Tags"
 msgstr "Dodaj tagi"
-
-#: modules/tags/admin/pages/manage_tags.twig:22
-#: modules/tags/admin/pages/rename_tag.twig:10 modules/tags/tags.php:323
-msgid "Name"
-msgstr "Nazwa"
 
 #: modules/tags/admin/pages/manage_tags.twig:23
 #: modules/tags/admin/pages/posts_tagged.twig:3 modules/tags/tags.php:324
@@ -91,19 +104,6 @@ msgstr "Wpisy oznaczone tagiem &#8222;%s&#8221;"
 #: modules/tags/admin/pages/posts_tagged.twig:78
 msgid "Tag Selected Post(s) with:"
 msgstr "Oznacz wybrane wpisy tagiem:"
-
-#: modules/tags/admin/pages/rename_tag.twig:3
-msgid "Rename Tag"
-msgstr "Zmień nazwę tagu"
-
-#: modules/tags/admin/pages/rename_tag.twig:6
-#, php-format
-msgid "Renaming Tag &#8220;%s&#8221;"
-msgstr "Zmiana nazwy tagu &#8222;%s&#8221;"
-
-#: modules/tags/admin/pages/rename_tag.twig:16
-msgid "Rename"
-msgstr "Zmień nazwę"
 
 #: modules/tags/info.php:3
 msgid "Tagginator"

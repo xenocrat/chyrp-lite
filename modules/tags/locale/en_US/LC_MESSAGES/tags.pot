@@ -19,6 +19,25 @@ msgstr ""
 msgid "&#8220;%s&#8221; will be permanently deleted."
 msgstr ""
 
+#: modules/tags/admin/pages/edit_tag.twig:3
+msgid "Rename Tag"
+msgstr ""
+
+#: modules/tags/admin/pages/edit_tag.twig:6
+#, php-format
+msgid "Renaming Tag &#8220;%s&#8221;"
+msgstr ""
+
+#: modules/tags/admin/pages/edit_tag.twig:10
+#: modules/tags/admin/pages/manage_tags.twig:22
+#: modules/tags/tags.php:323
+msgid "Name"
+msgstr ""
+
+#: modules/tags/admin/pages/edit_tag.twig:16
+msgid "Rename"
+msgstr ""
+
 #: modules/tags/admin/pages/edit_tags.twig:3
 msgid "Edit Tags"
 msgstr ""
@@ -30,7 +49,7 @@ msgstr ""
 
 #: modules/tags/admin/pages/edit_tags.twig:10
 #: modules/tags/admin/pages/manage_tags.twig:18
-#: modules/tags/admin/pages/posts_tagged.twig:32
+#: modules/tags/admin/pages/posts_tagged.twig:31
 #: modules/tags/tags.php:193
 #: modules/tags/tags.php:259
 #: modules/tags/tags.php:274
@@ -45,12 +64,6 @@ msgstr ""
 #: modules/tags/admin/pages/manage_tags.twig:13
 #: modules/tags/admin/pages/posts_tagged.twig:81
 msgid "Add Tags"
-msgstr ""
-
-#: modules/tags/admin/pages/manage_tags.twig:22
-#: modules/tags/admin/pages/rename_tag.twig:10
-#: modules/tags/tags.php:323
-msgid "Name"
 msgstr ""
 
 #: modules/tags/admin/pages/manage_tags.twig:23
@@ -71,19 +84,6 @@ msgstr ""
 
 #: modules/tags/admin/pages/posts_tagged.twig:78
 msgid "Tag Selected Post(s) with:"
-msgstr ""
-
-#: modules/tags/admin/pages/rename_tag.twig:3
-msgid "Rename Tag"
-msgstr ""
-
-#: modules/tags/admin/pages/rename_tag.twig:6
-#, php-format
-msgid "Renaming Tag &#8220;%s&#8221;"
-msgstr ""
-
-#: modules/tags/admin/pages/rename_tag.twig:16
-msgid "Rename"
 msgstr ""
 
 #: modules/tags/info.php:3

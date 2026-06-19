@@ -43,6 +43,24 @@ msgstr "Eliminare il tag?"
 msgid "&#8220;%s&#8221; will be permanently deleted."
 msgstr "&#8220;%s&#8221; verrà eliminato definitivamente."
 
+#: modules/tags/admin/pages/edit_tag.twig:3
+msgid "Rename Tag"
+msgstr "Rinomina Tag"
+
+#: modules/tags/admin/pages/edit_tag.twig:6
+#, php-format
+msgid "Renaming Tag &#8220;%s&#8221;"
+msgstr "Rinomina tag &#8220;%s&#8221;"
+
+#: modules/tags/admin/pages/edit_tag.twig:10
+#: modules/tags/admin/pages/manage_tags.twig:22 modules/tags/tags.php:323
+msgid "Name"
+msgstr "Titolo"
+
+#: modules/tags/admin/pages/edit_tag.twig:16
+msgid "Rename"
+msgstr "Rinomina"
+
 #: modules/tags/admin/pages/edit_tags.twig:3
 msgid "Edit Tags"
 msgstr "Modifica il tag"
@@ -54,7 +72,7 @@ msgstr "Modifica dei tag per &#8220;%s&#8221;"
 
 #: modules/tags/admin/pages/edit_tags.twig:10
 #: modules/tags/admin/pages/manage_tags.twig:18
-#: modules/tags/admin/pages/posts_tagged.twig:32 modules/tags/tags.php:193
+#: modules/tags/admin/pages/posts_tagged.twig:31 modules/tags/tags.php:193
 #: modules/tags/tags.php:259 modules/tags/tags.php:274
 #: modules/tags/tags.php:836
 msgid "Tags"
@@ -68,11 +86,6 @@ msgstr "Gestisci Tag"
 #: modules/tags/admin/pages/posts_tagged.twig:81
 msgid "Add Tags"
 msgstr "Aggiungi Tag"
-
-#: modules/tags/admin/pages/manage_tags.twig:22
-#: modules/tags/admin/pages/rename_tag.twig:10 modules/tags/tags.php:323
-msgid "Name"
-msgstr "Titolo"
 
 #: modules/tags/admin/pages/manage_tags.twig:23
 #: modules/tags/admin/pages/posts_tagged.twig:3 modules/tags/tags.php:324
@@ -91,19 +104,6 @@ msgstr "Post taggati con &#8220;%s&#8221;"
 #: modules/tags/admin/pages/posts_tagged.twig:78
 msgid "Tag Selected Post(s) with:"
 msgstr "Contrassegna i post selezionati con:"
-
-#: modules/tags/admin/pages/rename_tag.twig:3
-msgid "Rename Tag"
-msgstr "Rinomina Tag"
-
-#: modules/tags/admin/pages/rename_tag.twig:6
-#, php-format
-msgid "Renaming Tag &#8220;%s&#8221;"
-msgstr "Rinomina tag &#8220;%s&#8221;"
-
-#: modules/tags/admin/pages/rename_tag.twig:16
-msgid "Rename"
-msgstr "Rinomina"
 
 #: modules/tags/info.php:3
 msgid "Tagginator"

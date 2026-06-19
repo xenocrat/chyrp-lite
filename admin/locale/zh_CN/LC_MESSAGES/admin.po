@@ -275,8 +275,8 @@ msgstr ""
 msgid "![description](URL)"
 msgstr ""
 
-#: admin/help/markdown.twig:65 admin/javascripts/admin.js.php:826
-#: admin/javascripts/admin.js.php:827
+#: admin/help/markdown.twig:65 admin/javascripts/admin.js.php:845
+#: admin/javascripts/admin.js.php:846
 msgid "Image"
 msgstr "图像"
 
@@ -305,7 +305,8 @@ msgstr ""
 msgid "< Aside"
 msgstr ""
 
-#: admin/help/markdown.twig:81
+#: admin/help/markdown.twig:81 admin/javascripts/admin.js.php:826
+#: admin/javascripts/admin.js.php:827
 msgid "Aside"
 msgstr ""
 
@@ -403,7 +404,7 @@ msgid "Maximum file size: %d Megabytes."
 msgstr "最大文件大小：%d兆字节。"
 
 #: admin/javascripts/admin.js.php:320 admin/javascripts/admin.js.php:467
-#: admin/javascripts/admin.js.php:1471
+#: admin/javascripts/admin.js.php:1561
 msgid "Modal window"
 msgstr "模态窗口"
 
@@ -412,7 +413,7 @@ msgid "Uploads"
 msgstr "上传"
 
 #: admin/javascripts/admin.js.php:355 admin/javascripts/admin.js.php:493
-#: admin/javascripts/admin.js.php:1503
+#: admin/javascripts/admin.js.php:1593
 msgid "Close"
 msgstr "关闭"
 
@@ -428,12 +429,12 @@ msgid "Edit"
 msgstr "编辑"
 
 #: admin/javascripts/admin.js.php:559 admin/javascripts/admin.js.php:560
-#: admin/javascripts/admin.js.php:847 admin/javascripts/admin.js.php:848
+#: admin/javascripts/admin.js.php:866 admin/javascripts/admin.js.php:867
 msgid "Insert"
 msgstr "插入"
 
 #: admin/javascripts/admin.js.php:605 admin/javascripts/admin.js.php:606
-#: admin/javascripts/admin.js.php:893 admin/javascripts/admin.js.php:894
+#: admin/javascripts/admin.js.php:912 admin/javascripts/admin.js.php:913
 msgid "Upload"
 msgstr "上传"
 
@@ -441,16 +442,16 @@ msgstr "上传"
 msgid "Horizontal rule"
 msgstr "水平规则"
 
-#: admin/javascripts/admin.js.php:967 admin/javascripts/admin.js.php:968
+#: admin/javascripts/admin.js.php:986 admin/javascripts/admin.js.php:987
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr "预览"
 
-#: admin/javascripts/admin.js.php:1022
+#: admin/javascripts/admin.js.php:1041
 msgid "Words:"
 msgstr "字数："
 
-#: admin/javascripts/admin.js.php:1481
+#: admin/javascripts/admin.js.php:1571
 msgid "Preview content"
 msgstr "预览内容"
 

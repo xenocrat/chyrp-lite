@@ -24,6 +24,6 @@ msgstr "Publikuj cytaty i podawaj źródła."
 msgid "Source"
 msgstr "Źródło"
 
-#: feathers/quote/quote.php:36 feathers/quote/quote.php:67
+#: feathers/quote/quote.php:35 feathers/quote/quote.php:66
 msgid "Quote can't be empty."
 msgstr "Cytat nie może być pusty."

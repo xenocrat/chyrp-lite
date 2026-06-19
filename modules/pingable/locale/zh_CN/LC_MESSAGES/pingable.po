@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/pingable/admin/pages/delete_pingback.twig:3
@@ -46,7 +46,7 @@ msgid "Manage Webmentions"
 msgstr "管理Webmention"
 
 #: modules/pingable/admin/pages/manage_pingbacks.twig:18
-#: modules/pingable/pingable.php:265 modules/pingable/pingable.php:292
+#: modules/pingable/pingable.php:267 modules/pingable/pingable.php:294
 msgid "Webmentions"
 msgstr "引用"
 
@@ -95,7 +95,7 @@ msgid "An ID is required to edit a webmention."
 msgstr "编辑webmention需要一个ID。"
 
 #: modules/pingable/pingable.php:84 modules/pingable/pingable.php:127
-#: modules/pingable/pingable.php:159 modules/pingable/pingable.php:197
+#: modules/pingable/pingable.php:159 modules/pingable/pingable.php:199
 msgid "Webmention not found."
 msgstr "Webmention未找到。"
 
@@ -119,18 +119,18 @@ msgstr "更新webmention需要一个标题。"
 msgid "Webmention updated."
 msgstr "Webmention已更新。"
 
-#: modules/pingable/pingable.php:150 modules/pingable/pingable.php:185
+#: modules/pingable/pingable.php:150 modules/pingable/pingable.php:187
 msgid "An ID is required to delete a webmention."
 msgstr "删除webmention需要一个ID。"
 
-#: modules/pingable/pingable.php:165 modules/pingable/pingable.php:203
+#: modules/pingable/pingable.php:165 modules/pingable/pingable.php:205
 msgid "You do not have sufficient privileges to delete this webmention."
 msgstr "您没有足够的权限删除这个webmention。"
 
-#: modules/pingable/pingable.php:209
+#: modules/pingable/pingable.php:211
 msgid "Webmention deleted."
 msgstr "Webmention已删除。"
 
-#: modules/pingable/pingable.php:220
+#: modules/pingable/pingable.php:222
 msgid "You do not have sufficient privileges to manage webmentions."
 msgstr "您没有足够的权限来管理webmention。"

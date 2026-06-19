@@ -43,6 +43,24 @@ msgstr "Verwijder Tag?"
 msgid "&#8220;%s&#8221; will be permanently deleted."
 msgstr "&#8220;%s&#8221; zal permanent worden verwijderd."
 
+#: modules/tags/admin/pages/edit_tag.twig:3
+msgid "Rename Tag"
+msgstr "Hernoem Tag"
+
+#: modules/tags/admin/pages/edit_tag.twig:6
+#, php-format
+msgid "Renaming Tag &#8220;%s&#8221;"
+msgstr "Hernoemen Tag &#8220;%s&#8221;"
+
+#: modules/tags/admin/pages/edit_tag.twig:10
+#: modules/tags/admin/pages/manage_tags.twig:22 modules/tags/tags.php:323
+msgid "Name"
+msgstr "Naam"
+
+#: modules/tags/admin/pages/edit_tag.twig:16
+msgid "Rename"
+msgstr "Hernoemen"
+
 #: modules/tags/admin/pages/edit_tags.twig:3
 msgid "Edit Tags"
 msgstr "Wijzig Tags"
@@ -54,7 +72,7 @@ msgstr "Wijzigen Tags voor &#8220;%s&#8221;"
 
 #: modules/tags/admin/pages/edit_tags.twig:10
 #: modules/tags/admin/pages/manage_tags.twig:18
-#: modules/tags/admin/pages/posts_tagged.twig:32 modules/tags/tags.php:193
+#: modules/tags/admin/pages/posts_tagged.twig:31 modules/tags/tags.php:193
 #: modules/tags/tags.php:259 modules/tags/tags.php:274
 #: modules/tags/tags.php:836
 msgid "Tags"
@@ -68,11 +86,6 @@ msgstr "Beheer Tags"
 #: modules/tags/admin/pages/posts_tagged.twig:81
 msgid "Add Tags"
 msgstr "Tags toevoegen"
-
-#: modules/tags/admin/pages/manage_tags.twig:22
-#: modules/tags/admin/pages/rename_tag.twig:10 modules/tags/tags.php:323
-msgid "Name"
-msgstr "Naam"
 
 #: modules/tags/admin/pages/manage_tags.twig:23
 #: modules/tags/admin/pages/posts_tagged.twig:3 modules/tags/tags.php:324
@@ -91,19 +104,6 @@ msgstr "Blogposts getagged met &#8220;%s&#8221;"
 #: modules/tags/admin/pages/posts_tagged.twig:78
 msgid "Tag Selected Post(s) with:"
 msgstr "Tag de geselecteerde Blogpost(s) met:"
-
-#: modules/tags/admin/pages/rename_tag.twig:3
-msgid "Rename Tag"
-msgstr "Hernoem Tag"
-
-#: modules/tags/admin/pages/rename_tag.twig:6
-#, php-format
-msgid "Renaming Tag &#8220;%s&#8221;"
-msgstr "Hernoemen Tag &#8220;%s&#8221;"
-
-#: modules/tags/admin/pages/rename_tag.twig:16
-msgid "Rename"
-msgstr "Hernoemen"
 
 #: modules/tags/info.php:3
 msgid "Tagginator"
