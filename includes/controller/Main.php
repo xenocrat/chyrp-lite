@@ -1564,7 +1564,10 @@
         public static function & current(
         ): self {
             static $instance = null;
-            $instance = (empty($instance)) ? new self() : $instance ;
+
+            if (empty($instance))
+                $instance = new self();
+
             return $instance;
         }
     }

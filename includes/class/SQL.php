@@ -487,7 +487,10 @@
                 return $loaded;
             } else {
                 static $instance = null;
-                $instance = (empty($instance)) ? new self() : $instance ;
+
+                if (empty($instance))
+                    $instance = new self();
+
                 return $instance;
             }
         }
