@@ -87,7 +87,7 @@
          *     $email - The email for the new user.
          *     $full_name - The full name of the user (optional).
          *     $website - The user's website (optional).
-         *     $group_id - The user's <Group> ID (default: default group).
+         *     $group_id - The user's <Group> ID (default: <Config.default_group>).
          *     $joined_at - Join date (default: now).
          *
          * Returns:
