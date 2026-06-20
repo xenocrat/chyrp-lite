@@ -62,11 +62,11 @@ msgstr "파라미터"
 msgid "Database error: %s"
 msgstr "데이터베이스 오류: %s"
 
-#: includes/class/Route.php:47
+#: includes/class/Route.php:43
 msgid "Route was initiated with an invalid Controller."
 msgstr "경로가 잘못된 컨트롤러로 시작되었습니다."
 
-#: includes/class/Route.php:84 includes/class/Route.php:131
+#: includes/class/Route.php:80 includes/class/Route.php:127
 #: includes/controller/Admin.php:286 includes/controller/Admin.php:669
 #: includes/controller/Admin.php:676 includes/controller/Admin.php:808
 #: includes/controller/Admin.php:815 includes/controller/Admin.php:1060
@@ -114,15 +114,15 @@ msgstr "경로가 잘못된 컨트롤러로 시작되었습니다."
 msgid "Error"
 msgstr "오류"
 
-#: includes/class/Route.php:85
+#: includes/class/Route.php:81
 msgid "You ask way too much."
 msgstr "너무 많은 걸 요구하네요."
 
-#: includes/class/Route.php:132
+#: includes/class/Route.php:128
 msgid "Invalid action."
 msgstr "올바르지 않은 액션입니다."
 
-#: includes/class/Route.php:144 includes/controller/Admin.php:191
+#: includes/class/Route.php:140 includes/controller/Admin.php:191
 #: includes/controller/Admin.php:221 includes/controller/Admin.php:274
 #: includes/controller/Admin.php:280 includes/controller/Admin.php:344
 #: includes/controller/Admin.php:374 includes/controller/Admin.php:401
@@ -170,7 +170,7 @@ msgstr "올바르지 않은 액션입니다."
 msgid "Access Denied"
 msgstr "접근 불가"
 
-#: includes/class/Route.php:145
+#: includes/class/Route.php:141
 msgid "You are not allowed to view this site."
 msgstr "사이트를 볼 수 없습니다."
 
@@ -1307,139 +1307,139 @@ msgstr "게시물을 삭제하시겠습니까?"
 msgid "Are you sure you want to delete this page and its child pages?"
 msgstr "페이지와 하위 페이지를 모두 삭제하시겠습니까?"
 
-#: includes/model/Group.php:337
+#: includes/model/Group.php:340
 msgid "Change Settings"
 msgstr "설정 변경"
 
-#: includes/model/Group.php:338
+#: includes/model/Group.php:341
 msgid "Toggle Extensions"
 msgstr "확장 기능 전환"
 
-#: includes/model/Group.php:339
+#: includes/model/Group.php:342
 msgid "View Site"
 msgstr "사이트 보기"
 
-#: includes/model/Group.php:340
+#: includes/model/Group.php:343
 msgid "View Private Posts"
 msgstr "비공개 게시물 보기"
 
-#: includes/model/Group.php:341
+#: includes/model/Group.php:344
 msgid "View Scheduled Posts"
 msgstr "예약된 게시물 보기"
 
-#: includes/model/Group.php:342
+#: includes/model/Group.php:345
 msgid "View Drafts"
 msgstr "초안 보기"
 
-#: includes/model/Group.php:343
+#: includes/model/Group.php:346
 msgid "View Own Drafts"
 msgstr "자신의 초안 보기"
 
-#: includes/model/Group.php:344
+#: includes/model/Group.php:347
 msgid "Add Posts"
 msgstr "게시물 추가"
 
-#: includes/model/Group.php:345
+#: includes/model/Group.php:348
 msgid "Add Drafts"
 msgstr "초안 추가"
 
-#: includes/model/Group.php:346
+#: includes/model/Group.php:349
 msgid "Edit Posts"
 msgstr "게시물 편집"
 
-#: includes/model/Group.php:347
+#: includes/model/Group.php:350
 msgid "Edit Drafts"
 msgstr "초안 편집"
 
-#: includes/model/Group.php:348
+#: includes/model/Group.php:351
 msgid "Edit Own Posts"
 msgstr "자신의 게시물 편집"
 
-#: includes/model/Group.php:349
+#: includes/model/Group.php:352
 msgid "Edit Own Drafts"
 msgstr "자신의 초안 편집"
 
-#: includes/model/Group.php:350
+#: includes/model/Group.php:353
 msgid "Delete Posts"
 msgstr "게시물 삭제"
 
-#: includes/model/Group.php:351
+#: includes/model/Group.php:354
 msgid "Delete Drafts"
 msgstr "초안 삭제"
 
-#: includes/model/Group.php:352
+#: includes/model/Group.php:355
 msgid "Delete Own Posts"
 msgstr "자신의 게시물 삭제"
 
-#: includes/model/Group.php:353
+#: includes/model/Group.php:356
 msgid "Delete Own Drafts"
 msgstr "자신의 초안 삭제"
 
-#: includes/model/Group.php:354
+#: includes/model/Group.php:357
 msgid "View Pages"
 msgstr "페이지 보기"
 
-#: includes/model/Group.php:355
+#: includes/model/Group.php:358
 msgid "Add Pages"
 msgstr "페이지 추가"
 
-#: includes/model/Group.php:356
+#: includes/model/Group.php:359
 msgid "Edit Pages"
 msgstr "페이지 편집"
 
-#: includes/model/Group.php:357
+#: includes/model/Group.php:360
 msgid "Delete Pages"
 msgstr "페이지 삭제"
 
-#: includes/model/Group.php:358
+#: includes/model/Group.php:361
 msgid "Add Users"
 msgstr "사용자 추가"
 
-#: includes/model/Group.php:359
+#: includes/model/Group.php:362
 msgid "Edit Users"
 msgstr "사용자 편집"
 
-#: includes/model/Group.php:360
+#: includes/model/Group.php:363
 msgid "Delete Users"
 msgstr "사용자 삭제"
 
-#: includes/model/Group.php:361
+#: includes/model/Group.php:364
 msgid "Add Groups"
 msgstr "그룹 추가"
 
-#: includes/model/Group.php:362
+#: includes/model/Group.php:365
 msgid "Edit Groups"
 msgstr "그룹 편집"
 
-#: includes/model/Group.php:363
+#: includes/model/Group.php:366
 msgid "Delete Groups"
 msgstr "그룹 삭제"
 
-#: includes/model/Group.php:364
+#: includes/model/Group.php:367
 msgid "Import Content"
 msgstr "내용 가져오기"
 
-#: includes/model/Group.php:365
+#: includes/model/Group.php:368
 msgid "Export Content"
 msgstr "내용 내보내기"
 
-#: includes/model/Group.php:366
+#: includes/model/Group.php:369
 msgid "View Uploads"
 msgstr "업로드 보기"
 
-#: includes/model/Group.php:367
+#: includes/model/Group.php:370
 msgid "Add Uploads"
 msgstr "업로드 추가"
 
-#: includes/model/Group.php:368
+#: includes/model/Group.php:371
 msgid "Edit Uploads"
 msgstr "업로드 편집"
 
-#: includes/model/Group.php:369
+#: includes/model/Group.php:372
 msgid "Delete Uploads"
 msgstr "업로드 삭제"
 
-#: includes/model/Page.php:465 includes/model/Post.php:1099
+#: includes/model/Page.php:468 includes/model/Post.php:1099
 msgid "[Guest]"
 msgstr "[손님]"
 
@@ -1556,8 +1556,8 @@ msgid ""
 "Be sure to put your SQLite database outside the document root directory, "
 "otherwise visitors will be able to download it."
 msgstr ""
-"SQLite 데이터베이스를 문서 루트 디렉토리 밖에 두어야 하며, 그렇지 않으면 방문"
-"자가 다운로드할 수 있습니다."
+"SQLite 데이터베이스를 문서 루트 디렉토리 밖에 두어야 하며, 그렇지 않으면 방"
+"문자가 다운로드할 수 있습니다."
 
 #: install.php:1213
 msgid "Table Prefix"

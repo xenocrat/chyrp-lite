@@ -114,7 +114,7 @@ Applies trigger filters to a field of the feather.
 
 Parameters:
     $field - Attribute of the post to filter.
-    $name - String or array of trigger filter names.
+    $name - The name of the trigger, or an array of triggers to call.
 
 Returns:
     @true@ or @false@
@@ -860,15 +860,15 @@ Attempt to call a responder until one of them doesn't return false.
 
 Function: url
 -------------
-Constructs an absolute URL from a relative one. Converts clean URLs to dirty.
+Uses a controller to construct an absolute URL from a relative one.
 
 Parameters:
-    $url - The relative URL. Assumed to be dirty if it begins with "/".
-    $controller - The controller to use. Current controller used if omitted.
+    $url - The relative URL. Handled as dirty if it begins with "/".
+    $controller - The controller to use (default: <Route.controller>).
 
 Returns:
-    An absolute clean or dirty URL, depending on value of @Config->clean_urls@
-    and @controller->clean_urls@.
+    An absolute clean or dirty URL, depending on value of
+    <Config.clean_urls> and <Route.controller.clean_urls>.
 
 
 Function: add
@@ -3802,7 +3802,7 @@ Returns:
     @true@ or @false@
 
 Notes:
-    If the last arg is <true>, logic is "and", otherwise "or".
+    If the last arg is @true@, logic is "AND", otherwise "OR".
 
 
 Function: add
@@ -3830,6 +3830,9 @@ Parameters:
 
 Returns:
     The updated <Group>.
+
+See Also:
+    <add>
 
 
 Function: delete
@@ -3944,6 +3947,9 @@ Returns:
 
 Notes:
     The caller is responsible for validating all supplied values.
+
+See Also:
+    <add>
 
 
 Function: delete
@@ -4275,7 +4281,7 @@ Parameters:
     $email - The email for the new user.
     $full_name - The full name of the user (optional).
     $website - The user's website (optional).
-    $group_id - The user's <Group> ID (default: default group).
+    $group_id - The user's <Group> ID (default: <Config.default_group>).
     $joined_at - Join date (default: now).
 
 Returns:

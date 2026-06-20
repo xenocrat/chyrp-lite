@@ -236,7 +236,7 @@ Called from:
 parse_route
 -----------
 Called from:
-	includes/class/Route.php on line 94
+	includes/class/Route.php on line 90
 
 Arguments:
 	$this
@@ -245,7 +245,7 @@ Arguments:
 route_init
 ----------
 Called from:
-	includes/class/Route.php on line 116
+	includes/class/Route.php on line 112
 
 Arguments:
 	$this
@@ -254,13 +254,13 @@ Arguments:
 can_not_view_site
 -----------------
 Called from:
-	includes/class/Route.php on line 142
+	includes/class/Route.php on line 138
 
 
 route_done
 ----------
 Called from:
-	includes/class/Route.php on line 216
+	includes/class/Route.php on line 212
 
 Arguments:
 	$this
@@ -470,7 +470,7 @@ Arguments:
 update_group
 ------------
 Called from:
-	includes/model/Group.php on line 246
+	includes/model/Group.php on line 249
 
 Arguments:
 	$group
@@ -489,7 +489,7 @@ Arguments:
 update_page
 -----------
 Called from:
-	includes/model/Page.php on line 266
+	includes/model/Page.php on line 269
 
 Arguments:
 	$page
@@ -550,7 +550,7 @@ Arguments:
 user_logged_in
 --------------
 Called from:
-	includes/model/Visitor.php on line 92
+	includes/model/Visitor.php on line 89
 
 Arguments:
 	$user
@@ -559,7 +559,7 @@ Arguments:
 user_logged_out
 ---------------
 Called from:
-	includes/model/Visitor.php on line 107
+	includes/model/Visitor.php on line 104
 
 Arguments:
 	$user
@@ -902,7 +902,7 @@ Called from:
 parse_urls
 ----------
 Called from:
-	includes/class/Route.php on line 263
+	includes/class/Route.php on line 259
 
 Target:
 	$urls
@@ -1115,7 +1115,7 @@ markup_page_title
 -----------------
 Called from:
 	includes/controller/Ajax.php on line 261
-	includes/model/Page.php on line 363
+	includes/model/Page.php on line 366
 
 Target:
 	$content
@@ -1125,7 +1125,7 @@ markup_title
 ------------
 Called from:
 	includes/controller/Ajax.php on line 261
-	includes/model/Page.php on line 363
+	includes/model/Page.php on line 366
 
 Target:
 	$content
@@ -1135,7 +1135,7 @@ markup_page_text
 ----------------
 Called from:
 	includes/controller/Ajax.php on line 265
-	includes/model/Page.php on line 364
+	includes/model/Page.php on line 367
 
 Target:
 	$content
@@ -1145,7 +1145,7 @@ markup_text
 -----------
 Called from:
 	includes/controller/Ajax.php on line 265
-	includes/model/Page.php on line 364
+	includes/model/Page.php on line 367
 	modules/comments/comments.php on line 1097
 	modules/comments/model/Comment.php on line 620
 
@@ -1244,7 +1244,7 @@ Target:
 before_group_update_name
 ------------------------
 Called from:
-	includes/model/Group.php on line 192
+	includes/model/Group.php on line 195
 
 Target:
 	$name
@@ -1253,7 +1253,7 @@ Target:
 before_group_update_permissions
 -------------------------------
 Called from:
-	includes/model/Group.php on line 193
+	includes/model/Group.php on line 196
 
 Target:
 	$permissions
@@ -1262,7 +1262,7 @@ Target:
 list_permissions
 ----------------
 Called from:
-	includes/model/Group.php on line 372
+	includes/model/Group.php on line 375
 
 Target:
 	$names
@@ -1289,7 +1289,7 @@ Target:
 before_update_page
 ------------------
 Called from:
-	includes/model/Page.php on line 248
+	includes/model/Page.php on line 251
 
 Target:
 	$new_values
@@ -1298,7 +1298,7 @@ Target:
 filter_page
 -----------
 Called from:
-	includes/model/Page.php on line 358
+	includes/model/Page.php on line 361
 
 Target:
 	$this

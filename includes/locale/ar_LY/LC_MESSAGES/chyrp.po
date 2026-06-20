@@ -68,11 +68,11 @@ msgstr "البارامترات"
 msgid "Database error: %s"
 msgstr "خطأ في قاعدة البيانات: %s"
 
-#: includes/class/Route.php:47
+#: includes/class/Route.php:43
 msgid "Route was initiated with an invalid Controller."
 msgstr "المُتحكم بالمسار المُدخل غير صالح."
 
-#: includes/class/Route.php:84 includes/class/Route.php:131
+#: includes/class/Route.php:80 includes/class/Route.php:127
 #: includes/controller/Admin.php:286 includes/controller/Admin.php:669
 #: includes/controller/Admin.php:676 includes/controller/Admin.php:808
 #: includes/controller/Admin.php:815 includes/controller/Admin.php:1060
@@ -120,15 +120,15 @@ msgstr "المُتحكم بالمسار المُدخل غير صالح."
 msgid "Error"
 msgstr "خطأ"
 
-#: includes/class/Route.php:85
+#: includes/class/Route.php:81
 msgid "You ask way too much."
 msgstr "أنت تطلب الكثير جدا."
 
-#: includes/class/Route.php:132
+#: includes/class/Route.php:128
 msgid "Invalid action."
 msgstr "إجراء غير صحيح."
 
-#: includes/class/Route.php:144 includes/controller/Admin.php:191
+#: includes/class/Route.php:140 includes/controller/Admin.php:191
 #: includes/controller/Admin.php:221 includes/controller/Admin.php:274
 #: includes/controller/Admin.php:280 includes/controller/Admin.php:344
 #: includes/controller/Admin.php:374 includes/controller/Admin.php:401
@@ -176,7 +176,7 @@ msgstr "إجراء غير صحيح."
 msgid "Access Denied"
 msgstr "تم رفض الوصول"
 
-#: includes/class/Route.php:145
+#: includes/class/Route.php:141
 msgid "You are not allowed to view this site."
 msgstr "غير مسموح لك بتصفح هذا الموقع."
 
@@ -1314,139 +1314,139 @@ msgstr "هل أنت متأكد من أنك تريد حذف هذا المنشور
 msgid "Are you sure you want to delete this page and its child pages?"
 msgstr "هل أنت متأكد من أنك تريد حذف هذه الصفحة وصفحاتها الفرعية؟"
 
-#: includes/model/Group.php:337
+#: includes/model/Group.php:340
 msgid "Change Settings"
 msgstr "تغيير الإعدادات"
 
-#: includes/model/Group.php:338
+#: includes/model/Group.php:341
 msgid "Toggle Extensions"
 msgstr "تفعيل الملحقات"
 
-#: includes/model/Group.php:339
+#: includes/model/Group.php:342
 msgid "View Site"
 msgstr "عرض الموقع"
 
-#: includes/model/Group.php:340
+#: includes/model/Group.php:343
 msgid "View Private Posts"
 msgstr "عرض المنشورات الخاصة"
 
-#: includes/model/Group.php:341
+#: includes/model/Group.php:344
 msgid "View Scheduled Posts"
 msgstr "رؤية المنشورات المجدولة"
 
-#: includes/model/Group.php:342
+#: includes/model/Group.php:345
 msgid "View Drafts"
 msgstr "عرض المسودات"
 
-#: includes/model/Group.php:343
+#: includes/model/Group.php:346
 msgid "View Own Drafts"
 msgstr "عرض المسودات الخاصة به"
 
-#: includes/model/Group.php:344
+#: includes/model/Group.php:347
 msgid "Add Posts"
 msgstr "إضافة منشورات"
 
-#: includes/model/Group.php:345
+#: includes/model/Group.php:348
 msgid "Add Drafts"
 msgstr "إضافة مسودات"
 
-#: includes/model/Group.php:346
+#: includes/model/Group.php:349
 msgid "Edit Posts"
 msgstr "تحرير المنشورات"
 
-#: includes/model/Group.php:347
+#: includes/model/Group.php:350
 msgid "Edit Drafts"
 msgstr "تحرير المسودات"
 
-#: includes/model/Group.php:348
+#: includes/model/Group.php:351
 msgid "Edit Own Posts"
 msgstr "تحرير المنشورات الخاصة به"
 
-#: includes/model/Group.php:349
+#: includes/model/Group.php:352
 msgid "Edit Own Drafts"
 msgstr "تحرير المسودات الخاصة به"
 
-#: includes/model/Group.php:350
+#: includes/model/Group.php:353
 msgid "Delete Posts"
 msgstr "حذف المنشورات"
 
-#: includes/model/Group.php:351
+#: includes/model/Group.php:354
 msgid "Delete Drafts"
 msgstr "حذف المسودات"
 
-#: includes/model/Group.php:352
+#: includes/model/Group.php:355
 msgid "Delete Own Posts"
 msgstr "حذف المشاركات الخاصة به"
 
-#: includes/model/Group.php:353
+#: includes/model/Group.php:356
 msgid "Delete Own Drafts"
 msgstr "حذف المسودات الخاصة به"
 
-#: includes/model/Group.php:354
+#: includes/model/Group.php:357
 msgid "View Pages"
 msgstr "عرض الصفحات"
 
-#: includes/model/Group.php:355
+#: includes/model/Group.php:358
 msgid "Add Pages"
 msgstr "إضافة صفحات"
 
-#: includes/model/Group.php:356
+#: includes/model/Group.php:359
 msgid "Edit Pages"
 msgstr "تحرير الصفحات"
 
-#: includes/model/Group.php:357
+#: includes/model/Group.php:360
 msgid "Delete Pages"
 msgstr "حذف الصفحات"
 
-#: includes/model/Group.php:358
+#: includes/model/Group.php:361
 msgid "Add Users"
 msgstr "إضافة مستخدمين"
 
-#: includes/model/Group.php:359
+#: includes/model/Group.php:362
 msgid "Edit Users"
 msgstr "تحرير المستخدمين"
 
-#: includes/model/Group.php:360
+#: includes/model/Group.php:363
 msgid "Delete Users"
 msgstr "حذف المستخدمين"
 
-#: includes/model/Group.php:361
+#: includes/model/Group.php:364
 msgid "Add Groups"
 msgstr "إضافة مجموعات"
 
-#: includes/model/Group.php:362
+#: includes/model/Group.php:365
 msgid "Edit Groups"
 msgstr "تحرير المجموعات"
 
-#: includes/model/Group.php:363
+#: includes/model/Group.php:366
 msgid "Delete Groups"
 msgstr "حذف المجموعات"
 
-#: includes/model/Group.php:364
+#: includes/model/Group.php:367
 msgid "Import Content"
 msgstr "استيراد المحتوى"
 
-#: includes/model/Group.php:365
+#: includes/model/Group.php:368
 msgid "Export Content"
 msgstr "تصدير المحتوى"
 
-#: includes/model/Group.php:366
+#: includes/model/Group.php:369
 msgid "View Uploads"
 msgstr "عرض التحميلات"
 
-#: includes/model/Group.php:367
+#: includes/model/Group.php:370
 msgid "Add Uploads"
 msgstr "إضافة تحميلات"
 
-#: includes/model/Group.php:368
+#: includes/model/Group.php:371
 msgid "Edit Uploads"
 msgstr "تحرير التحميلات"
 
-#: includes/model/Group.php:369
+#: includes/model/Group.php:372
 msgid "Delete Uploads"
 msgstr "حذف التحميلات"
 
-#: includes/model/Page.php:465 includes/model/Post.php:1099
+#: includes/model/Page.php:468 includes/model/Post.php:1099
 msgid "[Guest]"
 msgstr "[ضيف]"
 
