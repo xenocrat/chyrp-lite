@@ -20,10 +20,6 @@
         # An array of actions to try until one doesn't return false.
         public $try = array();
 
-        # Boolean: $ajax
-        # Shortcut to the AJAX constant (useful for Twig).
-        public $ajax = AJAX;
-
         # Boolean: $success
         # Did <Route.init> call a successful route?
         public $success = false;
@@ -62,10 +58,10 @@
                 $config->url :
                 $config->chyrp_url."/".$controller->base ;
 
-            $regex = "~^".preg_quote(
-                oneof(parse_url($base, PHP_URL_PATH), ""),
-                "~"
-            )."((/)index.php)?~";
+            # Prepare a regex that removes the base path.
+            $base_path = oneof(parse_url($base, PHP_URL_PATH), "");
+            $base_path_quoted = preg_quote($base_path, "~");
+            $regex = "~^{$base_path_quoted}((/)index.php)?~";
 
             # Extract the request.
             $this->request = preg_replace($regex, '$2', $_SERVER['REQUEST_URI']);
@@ -220,15 +216,15 @@
 
         /**
          * Function: url
-         * Constructs an absolute URL from a relative one. Converts clean URLs to dirty.
+         * Uses a controller to construct an absolute URL from a relative one.
          *
          * Parameters:
-         *     $url - The relative URL. Assumed to be dirty if it begins with "/".
-         *     $controller - The controller to use. Current controller used if omitted.
+         *     $url - The relative URL. Handled as dirty if it begins with "/".
+         *     $controller - The controller to use (default: <Route.controller>).
          *
          * Returns:
-         *     An absolute clean or dirty URL, depending on value of @Config->clean_urls@
-         *     and @controller->clean_urls@.
+         *     An absolute clean or dirty URL, depending on value of
+         *     <Config.clean_urls> and <Route.controller.clean_urls>.
          */
         public static function url(
             $url,
@@ -268,9 +264,12 @@
                 array_diff_assoc($urls, $controller->urls) as $key => $value
             ) {
                 $delimiter = substr($key, 0, 1);
-                $index = substr($key, 0, -1).
-                         preg_quote("feed/", $delimiter).
-                         $delimiter;
+
+                $index = (
+                    substr($key, 0, -1).
+                    preg_quote("feed/", $delimiter).
+                    $delimiter
+                );
 
                 $urls[$index] = $value."&amp;feed";
             }
@@ -395,10 +394,9 @@
         ): ?self {
             static $instance = null;
 
-            if (!isset($controller) and empty($instance))
-                return $instance;
+            if (empty($instance) and isset($controller))
+                $instance = new self($controller);
 
-            $instance = (empty($instance)) ? new self($controller) : $instance ;
             return $instance;
         }
     }
