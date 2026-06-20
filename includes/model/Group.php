@@ -392,11 +392,12 @@
             if ($this->no_results)
                 return false;
 
-            if (!isset($this->size))
+            if (!isset($this->size)) {
                 $this->size = SQL::current()->count(
                     tables:"users",
                     conds:array("group_id" => $this->id)
                 );
+            }
 
             return (int) $this->size;
         }
