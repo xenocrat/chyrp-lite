@@ -66,10 +66,7 @@
          */
         public static function logged_in(
         ): bool {
-            return (
-                isset(Visitor::current()->id) and
-                Visitor::current()->id != 0
-            );
+            return !empty(Visitor::current()->id);
         }
 
         /**
