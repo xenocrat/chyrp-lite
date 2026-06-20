@@ -179,6 +179,9 @@
          *
          * Notes:
          *     The caller is responsible for validating all supplied values.
+         *
+         * See Also:
+         *     <add>
          */
         public function update(
             $title        = null,
