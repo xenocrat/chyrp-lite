@@ -75,7 +75,7 @@
          *     @true@ or @false@
          *
          * Notes:
-         *     If the last arg is <true>, logic is "and", otherwise "or".
+         *     If the last arg is @true@, logic is "AND", otherwise "OR".
          */
         public function can(
         ): bool {
@@ -177,6 +177,9 @@
          *
          * Returns:
          *     The updated <Group>.
+         *
+         * See Also:
+         *     <add>
          */
         public function update(
             $name,
@@ -372,13 +375,18 @@
             Trigger::current()->filter($names, "list_permissions");
 
             foreach ($permissions as &$permission) {
-                if (array_key_exists($permission["id"], $names))
-                    $permission["name"] = $names[$permission["id"]];
+                $id = $permission["id"];
+
+                if (array_key_exists($id, $names))
+                    $permission["name"] = $names[$id];
             }
 
-            usort($permissions, function ($a, $b) {
-                return substr_compare($a["id"], $b["id"], 0);   
-            });
+            usort(
+                $permissions,
+                function ($a, $b) {
+                    return substr_compare($a["id"], $b["id"], 0);   
+                }
+            );
 
             return $permissions;
         }
