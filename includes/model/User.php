@@ -109,7 +109,7 @@
             $config = Config::current();
             $sql = SQL::current();
             $trigger = Trigger::current();
-            
+
             $new_values = array(
                 "login"     => sanitize_db_string($login, 64),
                 "password"  => $password,
