@@ -103,7 +103,7 @@ There's no need to run [upgrade.php](upgrade.php) if you're using Docker.
 
 ### HTML in posts and pages
 
-By design Chyrp Lite allows authors to create posts and pages containing valid HTML, meaning that authored content may also contain Javascript and CSS styles. This allows maximum freedom to authors, but it comes with a security risk if the blog administrator allows untrusted users to create posts and pages. If you want to allow untrusted users to create posts and pages, you should enable the __Content Security Policy__ module to apply a strong [Content Security Policy](https://w3c.github.io/webappsec-csp/) that disallows unsafe inline JavaScript and CSS.
+By design Chyrp Lite allows authors to create posts and pages containing valid HTML, meaning that authored content may also contain JavaScript and CSS styles. This allows maximum freedom to authors, but it comes with a security risk if the blog administrator allows untrusted users to create posts and pages. If you want to allow untrusted users to create posts and pages, you should enable the __Content Security Policy__ module to apply a strong [Content Security Policy](https://w3c.github.io/webappsec-csp/) that disallows unsafe inline JavaScript and CSS.
 
 ### Files accessible to visitors
 
