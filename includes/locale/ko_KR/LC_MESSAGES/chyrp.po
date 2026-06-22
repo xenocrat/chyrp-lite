@@ -1271,22 +1271,22 @@ msgstr "사용자 계정을 활성화하려면 이 링크를 방문하세요:"
 msgid "Guest"
 msgstr "게스트"
 
-#: includes/lib/Leaf.php:504
+#: includes/lib/Leaf.php:498
 #, php-format
 msgid "%s GB"
 msgstr ""
 
-#: includes/lib/Leaf.php:509
+#: includes/lib/Leaf.php:503
 #, php-format
 msgid "%s MB"
 msgstr ""
 
-#: includes/lib/Leaf.php:513
+#: includes/lib/Leaf.php:507
 #, php-format
 msgid "%s KB"
 msgstr ""
 
-#: includes/lib/Leaf.php:749
+#: includes/lib/Leaf.php:743
 msgid "Image source"
 msgstr "이미지 출처"
 

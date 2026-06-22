@@ -1278,22 +1278,22 @@ msgstr "قم بزيارة هذا الرابط لتفعيل حساب المستخ
 msgid "Guest"
 msgstr "ضيف"
 
-#: includes/lib/Leaf.php:504
+#: includes/lib/Leaf.php:498
 #, php-format
 msgid "%s GB"
 msgstr "%s جيجابايت"
 
-#: includes/lib/Leaf.php:509
+#: includes/lib/Leaf.php:503
 #, php-format
 msgid "%s MB"
 msgstr "%s ميجابايت"
 
-#: includes/lib/Leaf.php:513
+#: includes/lib/Leaf.php:507
 #, php-format
 msgid "%s KB"
 msgstr "%s كيلوبايت"
 
-#: includes/lib/Leaf.php:749
+#: includes/lib/Leaf.php:743
 msgid "Image source"
 msgstr "مصدر الصورة"
 

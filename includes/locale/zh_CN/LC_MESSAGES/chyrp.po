@@ -1271,22 +1271,22 @@ msgstr "点击此链接激活用户账户："
 msgid "Guest"
 msgstr "访问者"
 
-#: includes/lib/Leaf.php:504
+#: includes/lib/Leaf.php:498
 #, php-format
 msgid "%s GB"
 msgstr "%s GB"
 
-#: includes/lib/Leaf.php:509
+#: includes/lib/Leaf.php:503
 #, php-format
 msgid "%s MB"
 msgstr "%s MB"
 
-#: includes/lib/Leaf.php:513
+#: includes/lib/Leaf.php:507
 #, php-format
 msgid "%s KB"
 msgstr "%s KB"
 
-#: includes/lib/Leaf.php:749
+#: includes/lib/Leaf.php:743
 msgid "Image source"
 msgstr "图片来源"
 

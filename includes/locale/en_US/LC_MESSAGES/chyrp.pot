@@ -1513,22 +1513,22 @@ msgstr ""
 msgid "Guest"
 msgstr ""
 
-#: includes/lib/Leaf.php:504
+#: includes/lib/Leaf.php:498
 #, php-format
 msgid "%s GB"
 msgstr ""
 
-#: includes/lib/Leaf.php:509
+#: includes/lib/Leaf.php:503
 #, php-format
 msgid "%s MB"
 msgstr ""
 
-#: includes/lib/Leaf.php:513
+#: includes/lib/Leaf.php:507
 #, php-format
 msgid "%s KB"
 msgstr ""
 
-#: includes/lib/Leaf.php:749
+#: includes/lib/Leaf.php:743
 msgid "Image source"
 msgstr ""
 
