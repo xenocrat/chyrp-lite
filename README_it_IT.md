@@ -19,7 +19,7 @@ giunti sul tuo sito.
 
 ## Quali sono le caratteristiche fondamentali?
 
-#### Fondamenta:
+### Fondamenta:
 * Facile da installare, semplice da gestire ed estendibile per design.
 * Costruito con un Responsive ed accessibile HTML5 convalidato da W3C.
 * Supporto universale per il testo, Markdown, o HTML.
@@ -27,7 +27,7 @@ giunti sul tuo sito.
 * Semplice sviluppo dei temi tramite i template provvisti da Twig.
 * Gestisce gli utenti e visitatori con un comprensivo modello di provileggi.
 
-#### Feathers:
+### Feathers:
 
 * Testo: permette di scrivere post in testo.
 * Foto: carica una immagine.
@@ -37,7 +37,7 @@ giunti sul tuo sito.
 * Audio: Carica un file audio.
 * Caricamento dati: Carica file multipli.
 
-#### Moduli:
+### Moduli:
 * Cacher: Cache delle pagine web, riduce il carico del server.
 * Categorizzazione: Categorizza i tuoi post.
 * Politica di Sicurezza dei Contenuti: Aggiunge un'intestazione rigorosa CSP al blog.
@@ -87,6 +87,12 @@ Puoi aggiornare Chyrp Lyte in sei passaggi:
 6. Esegui il processo di aggiornamento visitando [upgrade.php](upgrade.php) sul tuo web browser.
 
 ## Security
+
+### Codice HTML nei post e nelle pagine
+
+Per impostazione predefinita, Chyrp Lite consente agli autori di creare post e pagine contenenti codice HTML valido, il che significa che i contenuti creati possono includere anche JavaScript e CSS. Questo offre la massima libertà agli autori, ma comporta un rischio per la sicurezza se l'amministratore del blog consente a utenti non attendibili di creare post e pagine. Se si desidera consentire a utenti non attendibili di creare post e pagine, è necessario abilitare il modulo __Politica di Sicurezza dei Contenuti__ per applicare una solida [Content Security Policy](https://w3c.github.io/webappsec-csp/) che impedisca l'utilizzo di JavaScript e CSS inline non sicuri.
+
+### File accessibili ai visitatori
 
 Dopo l'installazione, questi file sono accessibili ai visitatori:
 

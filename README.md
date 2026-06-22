@@ -17,7 +17,7 @@ visitors will see when they first arrive at your website.
 
 ## What are the key features?
 
-#### Core:
+### Core:
 * Easy to install, simple to maintain, extensible by design.
 * Built with responsive and accessible W3C-validated HTML5.
 * Universal support for plain text, Markdown, or raw markup.
@@ -25,7 +25,7 @@ visitors will see when they first arrive at your website.
 * Theme development is easy with the Twig template engine.
 * Manage users and visitors with a comprehensive rights model.
 
-#### Feathers:
+### Feathers:
 * Text: write textual blog entries.
 * Photo: upload an image.
 * Quote: make a quotation.
@@ -34,7 +34,7 @@ visitors will see when they first arrive at your website.
 * Audio: upload an audio file.
 * Uploader: upload multiple files.
 
-#### Modules:
+### Modules:
 * Cacher: cache your blog pages for reduced server load.
 * Categorize: give each of your blog entries a category.
 * Content Security Policy: Adds a strict CSP header to the blog.
@@ -100,6 +100,12 @@ If you're using Docker, you can upgrade in four steps:
 There's no need to run [upgrade.php](upgrade.php) if you're using Docker.
 
 ## Security
+
+### HTML in posts and pages
+
+By design Chyrp Lite allows authors to create posts and pages containing valid HTML, meaning that authored content may also contain Javascript and CSS styles. This allows maximum freedom to authors, but it comes with a security risk if the blog administrator allows untrusted users to create posts and pages. If you want to allow untrusted users to create posts and pages, you should enable the __Content Security Policy__ module to apply a strong [Content Security Policy](https://w3c.github.io/webappsec-csp/) that disallows unsafe inline JavaScript and CSS.
+
+### Files accessible to visitors
 
 After installation, these files are accessible to visitors:
 

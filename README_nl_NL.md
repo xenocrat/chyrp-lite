@@ -9,7 +9,7 @@ Met een flexibel system van feathers en paginas, kun je je website precies zó m
 
 ## Wat zijn de belanrijkste kenmerken?
 
-#### Centrale programma:
+### Centrale programma:
 * Eenvoudig te installeren, makkelijk te onderhouden, uitbreidbaar vanuit het ontwerp.
 * Gebouwd met responsieve en toegankelijke W3C HTML5 broncode.
 * Universele ondersteuning voor platte tekst, Markdown, of HTML-markup.
@@ -17,7 +17,7 @@ Met een flexibel system van feathers en paginas, kun je je website precies zó m
 * Thema ontwikkeling is eenvoudig met de Twig template-motor.
 * Beheer gebruikers en bezoekers met een uitgebreid rechten-model.
 
-#### Feathers:
+### Feathers:
 * Tekst: schrijf tekstuele blogposts.
 * Foto: upload een afbeelding.
 * Quote: maak een quotatie.
@@ -26,7 +26,7 @@ Met een flexibel system van feathers en paginas, kun je je website precies zó m
 * Audio: upload een audio bestand.
 * Uploader: upload meerdere bestanden tegelijk.
 
-#### Modules:
+### Modules:
 * Cacher: cache je blogs voor een lagere serverbelasting.
 * Categoriseer: wijs je blogposts toe aan een categorie.
 * Inhoudsbeveiligingsbeleid: Voegt een strikte CSP kop toe aan de blog.
@@ -76,6 +76,12 @@ Je kunt Chyrp Lite in 6 stappen upgraden:
 6. Doorloop het upgrade-proces door [upgrade.php](upgrade.php) in je webbrowser te bezoeken.
 
 ## Security
+
+### HTML in berichten en pagina's
+
+Chyrp Lite is zo ontworpen dat auteurs berichten en pagina's kunnen maken met geldige HTML. Dit betekent dat de door auteurs gemaakte content ook JavaScript en CSS-stijlen kan bevatten. Dit geeft auteurs maximale vrijheid, maar brengt wel een beveiligingsrisico met zich mee als de blogbeheerder onbetrouwbare gebruikers toestaat berichten en pagina's te maken. Als u onbetrouwbare gebruikers wilt toestaan berichten en pagina's te maken, moet u de module __Inhoudsbeveiligingsbeleid__ inschakelen om een strikt [Content Security Policy](https://w3c.github.io/webappsec-csp/) toe te passen dat onveilige inline JavaScript en CSS blokkeert.
+
+### Bestanden die toegankelijk zijn voor bezoekers
 
 Na installatie zijn deze bestanden toegankelijk voor bezoekers:
 

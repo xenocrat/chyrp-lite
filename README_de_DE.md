@@ -10,7 +10,7 @@ Feathern ermöglichen verschiedene Sorten von Blog-Inhalten – Sie können sich
 
 ## Was sind die wichtigste Funktionen?
 
-#### Core:
+### Core:
 * Einfach zu installieren, einfach zu unterhalten, erweiterbar.
 * Gebaut mit reaktionsfähigem und zugänglichem W3C-validiertem HTML5.
 * Universelle Unterstützung für Nur-Text, Markdown oder HTML-Markup.
@@ -18,7 +18,7 @@ Feathern ermöglichen verschiedene Sorten von Blog-Inhalten – Sie können sich
 * Die Themen-Entwicklung ist mit der Twig-Template-Engine einfach.
 * Verwalten Sie Benutzer und Besucher mit einem umfassenden Rechtemodell.
 
-#### Feathern:
+### Feathern:
 * Text: Schreibe textliche Blog-Einträge.
 * Foto: Lade ein Bild hoch.
 * Zitat: Mache ein Zitat.
@@ -27,7 +27,7 @@ Feathern ermöglichen verschiedene Sorten von Blog-Inhalten – Sie können sich
 * Audio: Lade eine Audiodatei hoch.
 * Uploader: Lade mehrere Dateien zugleich hoch.
 
-#### Modulen:
+### Modulen:
 * Cacher: Lasse Sie Ihre Blog-Seiten cachen, um die Serverlast zu reduzieren.
 * Kategorisieren: Geben Sie jedem Ihrer Blogposts eine Kategorie.
 * Inhaltsicherheitsrichtlinie: Fügt dem Blog einen strikten CSP Header hinzu.
@@ -77,6 +77,12 @@ Sie können Chyrp Lite in sechs Schritten aktualisieren:
 6. Führe den Upgrade-Vorgang aus mit [upgrade.php](upgrade.php) in ihrem Webbrowser.
 
 ## Security
+
+### HTML in Beiträgen und Seiten
+
+Chyrp Lite ermöglicht es Autoren standardmäßig, Beiträge und Seiten mit gültigem HTML zu erstellen. Das bedeutet, dass die erstellten Inhalte auch JavaScript und CSS-Stile enthalten können. Dies bietet Autoren maximale Freiheit, birgt aber ein Sicherheitsrisiko, wenn der Blog-Administrator nicht vertrauenswürdigen Benutzern das Erstellen von Beiträgen und Seiten erlaubt. Wenn Sie dies zulassen möchten, sollten Sie das Modul __Inhaltssicherheitsrichtlinie__ aktivieren, um eine strenge [Content Security Policy](https://w3c.github.io/webappsec-csp/) anzuwenden, die unsicheres Inline-JavaScript und CSS unterbindet.
+
+### Für Besucher zugängliche Dateien
 
 Nach der Installation sind diese Dateien für Besucher zugänglich:
 

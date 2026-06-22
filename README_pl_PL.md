@@ -8,7 +8,7 @@ Dzięki elastycznemu systemowi Feathers i Pages możesz uczynić swoją stronę 
 
 ## Jakie są kluczowe funkcje?
 
-#### Podstawowe:
+### Podstawowe:
 * Łatwy w instalacji, prosty w utrzymaniu, zaprojektowany z myślą o rozszerzalności.
 * Zbudowany przy użyciu responsywnego i dostępnego HTML5 zgodnego ze standardami W3C.
 * Pełne wsparcie dla zwykłego tekstu, Markdown lub surowego markupu.
@@ -16,7 +16,7 @@ Dzięki elastycznemu systemowi Feathers i Pages możesz uczynić swoją stronę 
 * Tworzenie motywów jest proste dzięki silnikowi szablonów Twig.
 * Zarządzaj użytkownikami i odwiedzającymi dzięki rozbudowanemu modelowi uprawnień.
 
-#### Feathers:
+### Feathers:
 * Tekst: pisz tekstowe wpisy na blogu.
 * Zdjęcie: prześlij obraz.
 * Cytat: dodaj cytat.
@@ -25,7 +25,7 @@ Dzięki elastycznemu systemowi Feathers i Pages możesz uczynić swoją stronę 
 * Audio: prześlij plik audio.
 * Uploader: prześlij wiele plików naraz.
 
-#### Moduły:
+### Moduły:
 * Cacher: buforuje strony bloga, zmniejszając obciążenie serwera.
 * Categorize: przypisuj kategorie do wpisów.
 * Polityka bezpieczeństwa treści: Dodaje CSP ścisły nagłówek do bloga.
@@ -91,6 +91,12 @@ Jeśli używasz Dockera, możesz zaktualizować w czterech krokach:
 W przypadku korzystania z Dockera nie ma potrzeby uruchamiania [upgrade.php](upgrade.php).
 
 ## Bezpieczeństwo
+
+### HTML w postach i stronach
+
+Z założenia Chyrp Lite pozwala autorom tworzyć posty i strony zawierające poprawny kod HTML, co oznacza, że ich treści mogą również zawierać style JavaScript i CSS. Zapewnia to autorom maksymalną swobodę, ale wiąże się z ryzykiem bezpieczeństwa, jeśli administrator bloga zezwala niezaufanym użytkownikom na tworzenie postów i stron. Aby zezwolić niezaufanym użytkownikom na tworzenie postów i stron, należy włączyć moduł __Polityka bezpieczeństwa treści__, aby zastosować silną [Content Security Policy](https://w3c.github.io/webappsec-csp/), która blokuje niebezpieczny kod JavaScript i CSS inline.
+
+### Pliki dostępne dla odwiedzających
 
 Po instalacji następujące pliki są dostępne dla odwiedzających:
 
