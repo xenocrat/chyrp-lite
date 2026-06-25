@@ -15,8 +15,9 @@ trait FigureTrait
 	/**
 	 * Identify a line as the beginning of a figure.
 	 */
-	protected function identifyFigure($line): bool
-	{
+	protected function identifyFigure(
+		$line
+	): bool {
 		if (
 			$line[0] === ' '
 			&& strspn($line, ' ') < 4
@@ -31,8 +32,10 @@ trait FigureTrait
 	/**
 	 * Consume lines for a figure.
 	 */
-	protected function consumeFigure($lines, $current): array
-	{
+	protected function consumeFigure(
+		$lines,
+		$current
+	): array {
 		$content = [];
 		$caption = [];
 
@@ -103,8 +106,9 @@ trait FigureTrait
 	/**
 	 * Renders a figure.
 	 */
-	protected function renderFigure($block): string
-	{
+	protected function renderFigure(
+		$block
+	): string {
 		$caption = $block['endcap'] === null ?
 			'' :
 			"<figcaption>\n"
@@ -126,6 +130,11 @@ trait FigureTrait
 		return $figure;
 	}
 
-	abstract protected function parseBlocks($lines);
-	abstract protected function renderAbsy($absy);
+	abstract protected function parseBlocks(
+		$lines
+	);
+
+	abstract protected function renderAbsy(
+		$absy
+	);
 }

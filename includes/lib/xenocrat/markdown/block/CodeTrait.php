@@ -15,8 +15,9 @@ trait CodeTrait
 	/**
 	 * Identify a line as the beginning of a code block.
 	 */
-	protected function identifyCode($line): bool
-	{
+	protected function identifyCode(
+		$line
+	): bool {
 		// Indentation by 4+ spaces and/or a tab is code.
 		return (
 			$line[0] === "\t"
@@ -28,8 +29,10 @@ trait CodeTrait
 	/**
 	 * Consume lines for a code block element.
 	 */
-	protected function consumeCode($lines, $current): array
-	{
+	protected function consumeCode(
+		$lines,
+		$current
+	): array {
 		$content = [];
 		$pad = chr(29);
 
@@ -93,8 +96,9 @@ trait CodeTrait
 	/**
 	 * Renders a code block.
 	 */
-	protected function renderCode($block): string
-	{
+	protected function renderCode(
+		$block
+	): string {
 		$class = isset($block['language']) ?
 			' class="language-'
 			. $this->escapeHtmlEntities(
@@ -117,9 +121,27 @@ trait CodeTrait
 			. "</code></pre>\n";
 	}
 
-	abstract protected function collapseTabs($text, $chr = ' ');
-	abstract protected function escapeHtmlEntities($text, $flags = 0);
-	abstract protected function expandTabs($text, $chr = ' ');
-	abstract protected function unEscapeBackslash($text);
-	abstract protected function unEscapeHtmlEntities($text, $flags = 0);
+	abstract protected function collapseTabs(
+		$text,
+		$chr = ' '
+	);
+
+	abstract protected function escapeHtmlEntities(
+		$text,
+		$flags = 0
+	);
+
+	abstract protected function expandTabs(
+		$text,
+		$chr = ' '
+	);
+
+	abstract protected function unEscapeBackslash(
+		$text
+	);
+
+	abstract protected function unEscapeHtmlEntities(
+		$text,
+		$flags = 0
+	);
 }

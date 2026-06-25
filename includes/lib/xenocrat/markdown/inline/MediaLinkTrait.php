@@ -18,15 +18,15 @@ trait MediaLinkTrait
 	 */
 	public $renderLazyMedia = false;
 
-	protected function renderImage($block): string
-	{
+	protected function renderImage(
+		$block
+	): string {
 		if (isset($block['label'])) {
 			if (($ref = $this->lookupReference($block['label'])) !== false) {
 				$block = array_merge($block, $ref);
 			} else {
 				if (str_starts_with($block['orig'], '![')) {
-					return '!['
-					. $this->renderAbsy(
+					return '![' . $this->renderAbsy(
 						$this->parseInline(substr($block['orig'], 2))
 					);
 				}
@@ -35,7 +35,10 @@ trait MediaLinkTrait
 		}
 
 		if (
-			preg_match('/\.(mpe?g|mp4|m4v|mov|webm|ogv)$/i', $block['url'])
+			preg_match(
+				'/\.(avi|m2ts|m4v|mkv|mov|mp4|mpe?g|ogv|webm)$/i',
+				$block['url']
+			)
 		) {
 			return '<video controls="" src="'
 				. $this->escapeHtmlEntities($block['url'], ENT_COMPAT) . '"'
@@ -73,7 +76,10 @@ trait MediaLinkTrait
 				. $this->renderAbsy($this->parseInline($block['text']))
 				. '</video>';
 		} elseif (
-			preg_match('/\.(mp3|m4a|oga|ogg|spx|wav|aiff?)$/i', $block['url'])
+			preg_match(
+				'/\.(aif[cf]?|flac|m4a|mka|mp[2-3]|oga|ogg|wav)$/i',
+				$block['url']
+			)
 		) {
 			return '<audio controls="" src="'
 				. $this->escapeHtmlEntities($block['url'], ENT_COMPAT) . '"'
@@ -166,10 +172,29 @@ trait MediaLinkTrait
 		}
 	}
 
-	abstract protected function escapeHtmlEntities($text, $flags = 0);
-	abstract protected function lookupReference($key);
-	abstract protected function parseInline($text);
-	abstract protected function renderAbsy($blocks);
-	abstract protected function unEscapeBackslash($text);
-	abstract protected function unescapeHtmlEntities($text, $flags = 0);
+	abstract protected function escapeHtmlEntities(
+		$text,
+		$flags = 0
+	);
+
+	abstract protected function lookupReference(
+		$key
+	);
+
+	abstract protected function parseInline(
+		$text
+	);
+
+	abstract protected function renderAbsy(
+		$blocks
+	);
+
+	abstract protected function unEscapeBackslash(
+		$text
+	);
+
+	abstract protected function unescapeHtmlEntities(
+		$text,
+		$flags = 0
+	);
 }

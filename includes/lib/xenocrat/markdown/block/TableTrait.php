@@ -15,8 +15,11 @@ trait TableTrait
 	/**
 	 * Identify a line as the beginning of a table block.
 	 */
-	protected function identifyTable($line, $lines, $current): bool
-	{
+	protected function identifyTable(
+		$line,
+		$lines,
+		$current
+	): bool {
 		return (
 			str_contains($line, '|')
 			&& isset($lines[$current + 1])
@@ -46,8 +49,10 @@ trait TableTrait
 	/**
 	 * Consume lines for a table.
 	 */
-	protected function consumeTable($lines, $current): array
-	{
+	protected function consumeTable(
+		$lines,
+		$current
+	): array {
 		$block = [
 			'table',
 			'cols' => [],
@@ -144,8 +149,9 @@ trait TableTrait
 	/**
 	 * Render a table block.
 	 */
-	protected function renderTable($block): string
-	{
+	protected function renderTable(
+		$block
+	): string {
 		$head = '';
 		$body = '';
 		$cols = $block['cols'];
@@ -179,8 +185,20 @@ trait TableTrait
 			. "</table>\n";
 	}
 
-	abstract protected function detectLineType($lines, $current);
-	abstract protected function parseInline($text);
-	abstract protected function renderAbsy($absy);
-	abstract protected function renderText($block);
+	abstract protected function detectLineType(
+		$lines,
+		$current
+	);
+
+	abstract protected function parseInline(
+		$text
+	);
+
+	abstract protected function renderAbsy(
+		$absy
+	);
+
+	abstract protected function renderText(
+		$block
+	);
 }

@@ -12,8 +12,8 @@ namespace xenocrat\markdown\inline;
  */
 trait StrikeoutTrait
 {
-	protected function parseStrikeMarkers(): array
-	{
+	protected function parseStrikeMarkers(
+	): array {
 		return array('~');
 	}
 
@@ -22,8 +22,9 @@ trait StrikeoutTrait
 	 *
 	 * @marker ~
 	 */
-	protected function parseStrike($markdown): array
-	{
+	protected function parseStrike(
+		$markdown
+	): array {
 		if (
 			preg_match(
 				'/^
@@ -89,15 +90,29 @@ trait StrikeoutTrait
 		];
 	}
 
-	protected function renderStrike($block): string
-	{
+	protected function renderStrike(
+		$block
+	): string {
 		return '<del>'
 			. $this->renderAbsy($block[1])
 			. '</del>';
 	}
 
-	abstract protected function detectInlineOverrun($text, $length, $elements);
-	abstract protected function parseInline($text);
-	abstract protected function renderAbsy($blocks);
-	abstract protected function renderText($block);
+	abstract protected function detectInlineOverrun(
+		$text,
+		$length,
+		$elements
+	);
+
+	abstract protected function parseInline(
+		$text
+	);
+
+	abstract protected function renderAbsy(
+		$blocks
+	);
+
+	abstract protected function renderText(
+		$block
+	);
 }

@@ -20,8 +20,9 @@ trait FrontMatterTrait
 	/**
 	 * Identify a line as the beginning of a front matter block.
 	 */
-	protected function identifyFrontMatter($line): bool
-	{
+	protected function identifyFrontMatter(
+		$line
+	): bool {
 		return (
 			preg_match('/^ {0,3};{3,}[^;]*$/', $line)
 			|| preg_match('/^ {0,3}\-{3,}[^\-]*$/', $line)
@@ -32,8 +33,10 @@ trait FrontMatterTrait
 	/**
 	 * Consume lines for a front matter block.
 	 */
-	protected function consumeFrontMatter($lines, $current): array
-	{
+	protected function consumeFrontMatter(
+		$lines,
+		$current
+	): array {
 		$indent = strspn($lines[$current], ' ');
 		$line = substr($lines[$current], $indent);
 		$mw = strspn($line, $line[0]);
@@ -78,5 +81,7 @@ trait FrontMatterTrait
 		return [($this->renderFrontMatter) ? $block : false, $i];
 	}
 
-	abstract protected function renderCode($block);
+	abstract protected function renderCode(
+		$block
+	);
 }

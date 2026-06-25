@@ -15,8 +15,9 @@ trait RuleTrait
 	/**
 	 * Identify a line as a horizontal rule.
 	 */
-	protected function identifyHr($line): bool
-	{
+	protected function identifyHr(
+		$line
+	): bool {
 		// At least 3 of -, * or _ on one line make a hr.
 		return preg_match('/^ {0,3}([\-\*_])\s*\1\s*\1(\1|\s)*$/', $line);
 	}
@@ -24,16 +25,19 @@ trait RuleTrait
 	/**
 	 * Consume a horizontal rule.
 	 */
-	protected function consumeHr($lines, $current): array
-	{
+	protected function consumeHr(
+		$lines,
+		$current
+	): array {
 		return [['hr'], $current];
 	}
 
 	/**
 	 * Renders a horizontal rule.
 	 */
-	protected function renderHr($block): string
-	{
+	protected function renderHr(
+		$block
+	): string {
 		return $this->html5 ? "<hr>\n" : "<hr />\n";
 	}
 } 

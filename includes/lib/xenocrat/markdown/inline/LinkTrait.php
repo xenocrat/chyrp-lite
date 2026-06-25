@@ -39,8 +39,8 @@ trait LinkTrait
 	 */
 	protected $references = [];
 
-	protected function parseLinkMarkers(): array
-	{
+	protected function parseLinkMarkers(
+	): array {
 		return array('[');
 	}
 
@@ -49,8 +49,9 @@ trait LinkTrait
 	 *
 	 * @marker [
 	 */
-	protected function parseLink($markdown): array
-	{
+	protected function parseLink(
+		$markdown
+	): array {
 		if (
 			// Do not allow links within links.
 			!in_array('parseLink', array_slice($this->context, 1))
@@ -86,8 +87,8 @@ trait LinkTrait
 		}
 	}
 
-	protected function parseImageMarkers(): array
-	{
+	protected function parseImageMarkers(
+	): array {
 		return array('![');
 	}
 
@@ -96,8 +97,9 @@ trait LinkTrait
 	 *
 	 * @marker ![
 	 */
-	protected function parseImage($markdown): array
-	{
+	protected function parseImage(
+		$markdown
+	): array {
 		if (
 			($parts = $this->parseLinkOrImage(substr($markdown, 1))) !== false
 		) {
@@ -150,8 +152,9 @@ trait LinkTrait
 		}
 	}
 
-	protected function parseLinkOrImage($markdown): array|false
-	{
+	protected function parseLinkOrImage(
+		$markdown
+	): array|false {
 		if (strpos($markdown, ']', 1) === false) {
 			return false;
 		}
@@ -315,8 +318,9 @@ trait LinkTrait
 	 *
 	 * @marker <
 	 */
-	protected function parseBracketedLink($markdown): array
-	{
+	protected function parseBracketedLink(
+		$markdown
+	): array {
 		if (strpos($markdown, '>') !== false) {
 			if (
 				// Do not allow links within links.
@@ -338,8 +342,11 @@ trait LinkTrait
 						strlen($matches[0])
 					];
 				} elseif (
-					preg_match('/^<([^\\\\\s>]*?@[^\s]*?\.\w+?)>/',
-						$markdown, $matches
+					preg_match(
+						'/^<([\w\d\.!\#$%&\'*+\/=?^_`{|}~\-]+@
+							(?:[a-z0-9\-_]+\.)+[a-z0-9\-_]*[a-z0-9]+)>/iux',
+						$markdown,
+						$matches
 					)
 				) {
 					// Email address.
@@ -357,8 +364,9 @@ trait LinkTrait
 		return [['text', '&lt;'], 1];
 	}
 
-	protected function renderEmail($block): string
-	{
+	protected function renderEmail(
+		$block
+	): string {
 		$email = $this->escapeHtmlEntities(
 			$block[1],
 			ENT_NOQUOTES | ENT_SUBSTITUTE | ENT_DISALLOWED
@@ -367,8 +375,9 @@ trait LinkTrait
 		return "<a href=\"mailto:$email\">$email</a>";
 	}
 
-	protected function renderUrl($block): string
-	{
+	protected function renderUrl(
+		$block
+	): string {
 		$url = $this->escapeHtmlEntities($block[1], ENT_COMPAT);
 		$decodedUrl = rawurldecode($block[1]);
 
@@ -384,8 +393,9 @@ trait LinkTrait
 		return "<a href=\"$url\">$text</a>";
 	}
 
-	protected function lookupReference($label): array|false
-	{
+	protected function lookupReference(
+		$label
+	): array|false {
 		$normalizedKey = preg_replace('/\s+/', ' ', $label);
 
 		if (
@@ -398,8 +408,9 @@ trait LinkTrait
 		return false;
 	}
 
-	protected function renderLink($block): string
-	{
+	protected function renderLink(
+		$block
+	): string {
 		if (isset($block['label'])) {
 			if (
 				($ref = $this->lookupReference($block['label'])) !== false
@@ -445,15 +456,15 @@ trait LinkTrait
 			. '>' . $this->renderAbsy($block['text']) . '</a>';
 	}
 
-	protected function renderImage($block): string
-	{
+	protected function renderImage(
+		$block
+	): string {
 		if (isset($block['label'])) {
 			if (($ref = $this->lookupReference($block['label'])) !== false) {
 				$block = array_merge($block, $ref);
 			} else {
 				if (str_starts_with($block['orig'], '![')) {
-					return '!['
-					. $this->renderAbsy(
+					return '![' . $this->renderAbsy(
 						$this->parseInline(substr($block['orig'], 2))
 					);
 				}
@@ -519,8 +530,9 @@ trait LinkTrait
 	# References
 	#---------------------------------------------
 
-	protected function identifyReference($line): bool
-	{
+	protected function identifyReference(
+		$line
+	): bool {
 		return (
 			isset($line[0])
 			&& ($line[0] === ' ' || $line[0] === '[')
@@ -560,8 +572,10 @@ trait LinkTrait
 	/**
 	 * Consume link references.
 	 */
-	protected function consumeReference($lines, $current): array
-	{
+	protected function consumeReference(
+		$lines,
+		$current
+	): array {
 		while (
 			isset($lines[$current])
 			&& preg_match(
@@ -709,11 +723,34 @@ trait LinkTrait
 		return [false, --$current];
 	}
 
-	abstract protected function consumeParagraph($lines, $current);
-	abstract protected function escapeHtmlEntities($text, $flags = 0);
-	abstract protected function parseInline($text);
-	abstract protected function renderAbsy($blocks);
-	abstract protected function renderText($block);
-	abstract protected function unEscapeBackslash($text);
-	abstract protected function unescapeHtmlEntities($text, $flags = 0);
+	abstract protected function consumeParagraph(
+		$lines,
+		$current
+	);
+
+	abstract protected function escapeHtmlEntities(
+		$text,
+		$flags = 0
+	);
+
+	abstract protected function parseInline(
+		$text
+	);
+
+	abstract protected function renderAbsy(
+		$blocks
+	);
+
+	abstract protected function renderText(
+		$block
+	);
+
+	abstract protected function unEscapeBackslash(
+		$text
+	);
+
+	abstract protected function unescapeHtmlEntities(
+		$text,
+		$flags = 0
+	);
 }

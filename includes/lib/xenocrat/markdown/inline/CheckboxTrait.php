@@ -17,8 +17,8 @@ trait CheckboxTrait
 	 */
 	public $renderCheckboxInputs = false;
 
-	protected function parseCheckboxMarkers(): array
-	{
+	protected function parseCheckboxMarkers(
+	): array {
 		return array('[ ]', '[x]', '[X]', '[~]');
 	}
 
@@ -30,8 +30,9 @@ trait CheckboxTrait
 	 * @marker [X]
 	 * @marker [~]
 	 */
-	protected function parseCheckbox($markdown): array
-	{
+	protected function parseCheckbox(
+		$markdown
+	): array {
 		return [
 			[
 				'checkbox',
@@ -42,8 +43,9 @@ trait CheckboxTrait
 		];
 	}
 
-	protected function renderCheckbox($block): string
-	{
+	protected function renderCheckbox(
+		$block
+	): string {
 		if ($this->renderCheckboxInputs) {
 			return '<input'
 				. ($block['incomplete'] ? '' : ' checked=""')

@@ -53,8 +53,8 @@ class ChyrpMarkdown extends GithubMarkdown
 	/**
 	 * @inheritDoc
 	 */
-	protected function prepare(): void
-	{
+	protected function prepare(
+	): void {
 		parent::prepare();
 
 		// Reset footnote properties.
@@ -66,8 +66,10 @@ class ChyrpMarkdown extends GithubMarkdown
 	/**
 	 * @inheritDoc
 	 */
-	protected function consumeParagraph($lines, $current): array
-	{
+	protected function consumeParagraph(
+		$lines,
+		$current
+	): array {
 		$content = [];
 
 		// Consume until blank line or end condition...
@@ -117,8 +119,9 @@ class ChyrpMarkdown extends GithubMarkdown
 	 *
 	 * Add parsed footnotes and then post-process markup.
 	 */
-	protected function postprocess($markup): string
-	{
+	protected function postprocess(
+		$markup
+	): string {
 		return parent::postprocess(
 			$this->addParsedFootnotes($markup)
 		);

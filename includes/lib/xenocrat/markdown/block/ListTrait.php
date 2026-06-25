@@ -30,8 +30,9 @@ trait ListTrait
 	/**
 	 * Identify a line as the beginning of an ordered list.
 	 */
-	protected function identifyOl($line): bool
-	{
+	protected function identifyOl(
+		$line
+	): bool {
 		return (
 			preg_match('/^ {0,3}(\d{1,9})[\.\)]([ \t]|$)/', $line, $matches)
 			&& (
@@ -44,16 +45,19 @@ trait ListTrait
 	/**
 	 * Identify a line as the beginning of an unordered list.
 	 */
-	protected function identifyUl($line): bool
-	{
+	protected function identifyUl(
+		$line
+	): bool {
 		return preg_match('/^ {0,3}[\-\+\*]([ \t]|$)/', $line);
 	}
 
 	/**
 	 * Consume lines for an ordered list.
 	 */
-	protected function consumeOl($lines, $current): array
-	{
+	protected function consumeOl(
+		$lines,
+		$current
+	): array {
 		$block = [
 			'list',
 			'list' => 'ol',
@@ -67,8 +71,10 @@ trait ListTrait
 	/**
 	 * Consume lines for an unordered list.
 	 */
-	protected function consumeUl($lines, $current): array
-	{
+	protected function consumeUl(
+		$lines,
+		$current
+	): array {
 		$block = [
 			'list',
 			'list' => 'ul',
@@ -78,8 +84,12 @@ trait ListTrait
 		return $this->consumeList($lines, $current, $block, 'ul');
 	}
 
-	private function consumeList($lines, $current, $block, $type): array
-	{
+	private function consumeList(
+		$lines,
+		$current,
+		$block,
+		$type
+	): array {
 		$item = 0;
 		$marker = '';
 		$mw = 0;
@@ -236,8 +246,9 @@ trait ListTrait
 	/**
 	 * Renders a list.
 	 */
-	protected function renderList($block): string
-	{
+	protected function renderList(
+		$block
+	): string {
 		$type = $block['list'];
 
 		if (!empty($block['attr'])) {
@@ -278,8 +289,9 @@ trait ListTrait
 	 * @param array $attributes - The attribute name-value pairs.
 	 * @return string
 	 */
-	private function generateListAttributes($attributes): string
-	{
+	private function generateListAttributes(
+		$attributes
+	): string {
 		foreach ($attributes as $name => $value) {
 			$attributes[$name] = "$name=\"$value\"";
 		}
@@ -287,8 +299,21 @@ trait ListTrait
 		return implode(' ', $attributes);
 	}
 
-	abstract protected function collapseTabs($text, $chr = ' ');
-	abstract protected function expandTabs($text, $chr = ' ');
-	abstract protected function parseBlocks($lines);
-	abstract protected function renderAbsy($absy);
+	abstract protected function collapseTabs(
+		$text,
+		$chr = ' '
+	);
+
+	abstract protected function expandTabs(
+		$text,
+		$chr = ' '
+	);
+
+	abstract protected function parseBlocks(
+		$lines
+	);
+
+	abstract protected function renderAbsy(
+		$absy
+	);
 }

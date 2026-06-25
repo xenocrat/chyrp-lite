@@ -15,8 +15,9 @@ trait HtmlTrait
 	/**
 	 * Identify a line as the beginning of a HTML block.
 	 */
-	protected function identifyHtml($line, $lines, $current): bool
-	{
+	protected function identifyHtml(
+		$line
+	): bool {
 		if (
 			$line[0] === ' '
 			&& strspn($line, ' ') < 4
@@ -117,8 +118,10 @@ trait HtmlTrait
 	/**
 	 * Consume lines for an HTML block.
 	 */
-	protected function consumeHtml($lines, $current): array
-	{
+	protected function consumeHtml(
+		$lines,
+		$current
+	): array {
 		$content = [];
 		$line = ltrim($lines[$current], ' ');
 
@@ -218,13 +221,14 @@ trait HtmlTrait
 	/**
 	 * Renders an HTML block.
 	 */
-	protected function renderHtml($block): string
-	{
+	protected function renderHtml(
+		$block
+	): string {
 		return $block['content'] . "\n";
 	}
 
-	protected function parseEntityMarkers(): array
-	{
+	protected function parseEntityMarkers(
+	): array {
 		return array('&');
 	}
 
@@ -233,8 +237,9 @@ trait HtmlTrait
 	 *
 	 * @marker &
 	 */
-	protected function parseEntity($markdown): array
-	{
+	protected function parseEntity(
+		$markdown
+	): array {
 		if (
 			preg_match(
 				'/^&(\#[\d]{1,7}|\#[x][a-f0-9]{1,6}|[\w\d]{2,});/i',
@@ -253,8 +258,9 @@ trait HtmlTrait
 	/**
 	 * Renders a HTML entity definition.
 	 */
-	protected function renderEntity($block): string
-	{
+	protected function renderEntity(
+		$block
+	): string {
 		if (preg_match('/^&\#x?0+;$/', $block[1])) {
 			return "\u{FFFD}";
 		}
@@ -268,8 +274,8 @@ trait HtmlTrait
 		);
 	}
 
-	protected function parseLtMarkers(): array
-	{
+	protected function parseLtMarkers(
+	): array {
 		return array('<');
 	}
 
@@ -278,8 +284,9 @@ trait HtmlTrait
 	 *
 	 * @marker <
 	 */
-	protected function parseLt($markdown): array
-	{
+	protected function parseLt(
+		$markdown
+	): array {
 		if (strpos($markdown, '>') !== false) {
 			// First try bracketed link if we have LinkTrait.
 			if (method_exists($this, 'parseBracketedLink')) {
@@ -324,13 +331,14 @@ trait HtmlTrait
 	/**
 	 * Renders inline HTML.
 	 */
-	protected function renderLt($block): string
-	{
+	protected function renderLt(
+		$block
+	): string {
 		return $block[1];
 	}
 
-	protected function parseGtMarkers(): array
-	{
+	protected function parseGtMarkers(
+	): array {
 		return array('>');
 	}
 
@@ -339,13 +347,14 @@ trait HtmlTrait
 	 *
 	 * @marker >
 	 */
-	protected function parseGt($markdown): array
-	{
+	protected function parseGt(
+		$markdown
+	): array {
 		return [['text', '&gt;'], 1];
 	}
 
-	protected function parseDoubleQuoteMarkers(): array
-	{
+	protected function parseDoubleQuoteMarkers(
+	): array {
 		return array('"');
 	}
 
@@ -354,12 +363,23 @@ trait HtmlTrait
 	 *
 	 * @marker "
 	 */
-	protected function parseDoubleQuote($markdown): array
-	{
+	protected function parseDoubleQuote(
+		$markdown
+	): array {
 		return [['text', '&quot;'], 1];
 	}
 
-	abstract protected function EscapeHtmlEntities($text, $flags = 0);
-	abstract protected function renderText($block);
-	abstract protected function unEscapeHtmlEntities($text, $flags = 0);
+	abstract protected function EscapeHtmlEntities(
+		$text,
+		$flags = 0
+	);
+
+	abstract protected function renderText(
+		$block
+	);
+
+	abstract protected function unEscapeHtmlEntities(
+		$text,
+		$flags = 0
+	);
 }

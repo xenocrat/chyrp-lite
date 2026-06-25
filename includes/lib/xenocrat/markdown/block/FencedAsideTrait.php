@@ -19,8 +19,9 @@ trait FencedAsideTrait
 	/**
 	 * Identify a line as the beginning of a fenced aside.
 	 */
-	protected function identifyFencedAside($line): bool
-	{
+	protected function identifyFencedAside(
+		$line
+	): bool {
 		if (
 			$line[0] === ' '
 			&& strspn($line, ' ') < 4
@@ -35,8 +36,10 @@ trait FencedAsideTrait
 	/**
 	 * Consume lines for a fenced aside.
 	 */
-	protected function consumeFencedAside($lines, $current): array
-	{
+	protected function consumeFencedAside(
+		$lines,
+		$current
+	): array {
 		$indent = strspn($lines[$current], ' ');
 		$line = substr($lines[$current], $indent);
 		$mw = strspn($line, $line[0]);
@@ -74,5 +77,7 @@ trait FencedAsideTrait
 		return [$block, $i];
 	}
 
-	abstract protected function parseBlocks($lines);
+	abstract protected function parseBlocks(
+		$lines
+	);
 }

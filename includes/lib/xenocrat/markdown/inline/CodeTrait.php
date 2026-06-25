@@ -12,8 +12,8 @@ namespace xenocrat\markdown\inline;
  */
 trait CodeTrait
 {
-	protected function parseInlineCodeMarkers(): array
-	{
+	protected function parseInlineCodeMarkers(
+	): array {
 		return array('`');
 	}
 
@@ -22,8 +22,9 @@ trait CodeTrait
 	 *
 	 * @marker `
 	 */
-	protected function parseInlineCode($markdown): array
-	{
+	protected function parseInlineCode(
+		$markdown
+	): array {
 		if (
 			preg_match(
 				'/^
@@ -75,8 +76,9 @@ trait CodeTrait
 		];
 	}
 
-	protected function renderInlineCode($block): string
-	{
+	protected function renderInlineCode(
+		$block
+	): string {
 		return '<code>'
 			. $this->escapeHtmlEntities(
 				$block[1],
@@ -85,6 +87,12 @@ trait CodeTrait
 			. '</code>';
 	}
 
-	abstract protected function escapeHtmlEntities($text, $flags = 0);
-	abstract protected function renderText($block);
+	abstract protected function escapeHtmlEntities(
+		$text,
+		$flags = 0
+	);
+
+	abstract protected function renderText(
+		$block
+	);
 }

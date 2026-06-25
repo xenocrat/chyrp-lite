@@ -19,8 +19,9 @@ trait FencedCodeTrait
 	/**
 	 * Identify a line as the beginning of a fenced code block.
 	 */
-	protected function identifyFencedCode($line): bool
-	{
+	protected function identifyFencedCode(
+		$line
+	): bool {
 		return (
 			preg_match('/^ {0,3}~{3,}/', $line)
 			|| preg_match('/^ {0,3}`{3,}[^`]*$/', $line)
@@ -30,8 +31,10 @@ trait FencedCodeTrait
 	/**
 	 * Consume lines for a fenced code block.
 	 */
-	protected function consumeFencedCode($lines, $current): array
-	{
+	protected function consumeFencedCode(
+		$lines,
+		$current
+	): array {
 		$indent = strspn($lines[$current], ' ');
 		$line = substr($lines[$current], $indent);
 		$mw = strspn($line, $line[0]);

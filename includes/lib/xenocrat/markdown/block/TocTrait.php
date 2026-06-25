@@ -45,24 +45,30 @@ trait TocTrait
 	/**
 	 * Identify a line as a TOC.
 	 */
-	protected function identifyToc($line, $lines, $current): bool
-	{
+	protected function identifyToc(
+		$line,
+		$lines,
+		$current
+	): bool {
 		return preg_match('/^ {0,3}(\[(\[_)?TOC(_\])?\])([ \t]|$)/', $line);
 	}
 
 	/**
 	 * Consume lines for a TOC.
 	 */
-	protected function consumeToc($lines, $current): array
-	{
+	protected function consumeToc(
+		$lines,
+		$current
+	): array {
 		return [['toc'], $current];
 	}
 
 	/**
 	 * Renders a TOC.
 	 */
-	protected function renderToc($block): string
-	{
+	protected function renderToc(
+		$block
+	): string {
 		$objChr = "\u{FFFC}";
 
 		// Render a placeholder to be populated
@@ -74,8 +80,9 @@ trait TocTrait
 	 * Renders a headline and adds it to the TOC.
 	 * This method overloads HeadlineTrait::renderHeadline().
 	 */
-	protected function renderHeadline($block): string
-	{
+	protected function renderHeadline(
+		$block
+	): string {
 		$tag = 'h' . $block['level'];
 		$id = '';
 		$content = $this->renderAbsy($block['content']);
@@ -155,8 +162,9 @@ trait TocTrait
 	 * @param string $html - The HTML output of Markdown::parse().
 	 * @return string
 	 */
-	public function addToc($html): string
-	{
+	public function addToc(
+		$html
+	): string {
 		$objChr = "\u{FFFC}";
 		$toc = '';
 		$tag = ($this->renderOrderedToc) ? 'ol' : 'ul';
@@ -216,8 +224,20 @@ trait TocTrait
 		);
 	}
 
-	abstract protected function escapeHtmlEntities($text, $flags = 0);
-	abstract protected function renderAbsy($absy);
-	abstract protected function unEscapeHtmlEntities($text, $flags = 0);
-	abstract public function getContextId();
+	abstract protected function escapeHtmlEntities(
+		$text,
+		$flags = 0
+	);
+
+	abstract protected function renderAbsy(
+		$absy
+	);
+
+	abstract protected function unEscapeHtmlEntities(
+		$text,
+		$flags = 0
+	);
+
+	abstract public function getContextId(
+	);
 }

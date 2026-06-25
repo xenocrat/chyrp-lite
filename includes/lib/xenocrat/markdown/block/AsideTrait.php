@@ -15,8 +15,9 @@ trait AsideTrait
 	/**
 	 * Identify a line as the beginning of an aside.
 	 */
-	protected function identifyAside($line): bool
-	{
+	protected function identifyAside(
+		$line
+	): bool {
 		if (
 			$line[0] === ' '
 			&& strspn($line, ' ') < 4
@@ -34,8 +35,10 @@ trait AsideTrait
 	/**
 	 * Consume lines for an aside.
 	 */
-	protected function consumeAside($lines, $current): array
-	{
+	protected function consumeAside(
+		$lines,
+		$current
+	): array {
 		$content = [];
 
 		// Consume until end of markers...
@@ -77,13 +80,19 @@ trait AsideTrait
 	/**
 	 * Renders an aside.
 	 */
-	protected function renderAside($block): string
-	{
+	protected function renderAside(
+		$block
+	): string {
 		return "<aside>\n"
 			. $this->renderAbsy($block['content'])
 			. "</aside>\n";
 	}
 
-	abstract protected function parseBlocks($lines);
-	abstract protected function renderAbsy($absy);
+	abstract protected function parseBlocks(
+		$lines
+	);
+
+	abstract protected function renderAbsy(
+		$absy
+	);
 }

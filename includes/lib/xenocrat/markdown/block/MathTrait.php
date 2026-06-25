@@ -15,8 +15,9 @@ trait MathTrait
 	/**
 	 * Identify a line as the beginning of a math expression.
 	 */
-	protected function identifyMath($line): bool
-	{
+	protected function identifyMath(
+		$line
+	): bool {
 		if (
 			$line[0] === ' '
 			&& strspn($line, ' ') < 4
@@ -31,8 +32,10 @@ trait MathTrait
 	/**
 	 * Consume lines for a math expression.
 	 */
-	protected function consumeMath($lines, $current): array
-	{
+	protected function consumeMath(
+		$lines,
+		$current
+	): array {
 		$indent = strspn($lines[$current], ' ');
 		$line = substr($lines[$current], $indent);
 		$mw = strspn($line, $line[0]);
@@ -73,8 +76,9 @@ trait MathTrait
 	/**
 	 * Renders a math expression.
 	 */
-	protected function renderMath($block): string
-	{
+	protected function renderMath(
+		$block
+	): string {
 		return '<la-tex display="block">'
 			. $this->escapeHtmlEntities(
 				$block['content'],
@@ -84,5 +88,8 @@ trait MathTrait
 			. "</la-tex>\n";
 	}
 
-	abstract protected function escapeHtmlEntities($text, $flags = 0);
+	abstract protected function escapeHtmlEntities(
+		$text,
+		$flags = 0
+	);
 }

@@ -12,8 +12,8 @@ namespace xenocrat\markdown\inline;
  */
 trait AutoLinkTrait
 {
-	protected function parseAutoUrlMarkers(): array
-	{
+	protected function parseAutoUrlMarkers(
+	): array {
 		return array('www.', 'http');
 	}
 
@@ -23,15 +23,16 @@ trait AutoLinkTrait
 	 * @marker www.
 	 * @marker http
 	 */
-	protected function parseAutoUrl($markdown): array
-	{
+	protected function parseAutoUrl(
+		$markdown
+	): array {
 		if (
 			// Do not allow links within links.
 			!in_array('parseLink', $this->context)
 			// Link?
 			&& preg_match(
 				'/^(www\.|https?:\/\/)
-					(([a-zA-Z0-9\-_]\.)*[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-]+[^\s<]*)
+					((?:[a-zA-Z0-9\-_]\.)*[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-]+[^\s<]*)
 					(?<![~_\*\.,:\!\?])/x',
 				$markdown,
 				$matches
@@ -62,8 +63,9 @@ trait AutoLinkTrait
 		return [['text', substr($markdown, 0, 4)], 4];
 	}
 
-	protected function renderAutoUrl($block): string
-	{
+	protected function renderAutoUrl(
+		$block
+	): string {
 		$href = $block[1];
 		$text = $href;
 
@@ -83,6 +85,105 @@ trait AutoLinkTrait
 		return "<a href=\"$href\">$text</a>";
 	}
 
-	abstract protected function escapeHtmlEntities($text, $flags = 0);
-	abstract protected function renderText($block);
+	protected function parseAutoEmailMarkers(
+	): array {
+		return array('mailto:');
+	}
+
+	/**
+	 * Parses email addresses and adds auto linking feature.
+	 *
+	 * @marker mailto:
+	 */
+	protected function parseAutoEmail(
+		$markdown
+	): array {
+		if (
+			// Do not allow links within links.
+			!in_array('parseLink', $this->context)
+			// Email?
+			&& preg_match(
+				'/^mailto:
+					([\.\w\d\-_+]+@
+					(?:[a-zA-Z0-9\-_]+\.)+[a-zA-Z0-9\-_]*[a-zA-Z0-9]+)
+					(?![\w\d\-_])/ux',
+				$markdown,
+				$matches
+			)
+		) {
+			return [
+				['autoEmail', $matches[0]],
+				strlen($matches[0])
+			];
+		}
+
+		return [['text', substr($markdown, 0, 7)], 7];
+	}
+
+	protected function renderAutoEmail(
+		$block
+	): string {
+		$email = $this->escapeHtmlEntities(
+			$block[1],
+			ENT_NOQUOTES | ENT_SUBSTITUTE | ENT_DISALLOWED
+		);
+
+		return "<a href=\"$email\">$email</a>";
+	}
+
+	protected function parseAutoXMPPMarkers(
+	): array {
+		return array('xmpp:');
+	}
+
+	/**
+	 * Parses XMPP entity addresses and adds auto linking feature.
+	 *
+	 * @marker xmpp:
+	 */
+	protected function parseAutoXMPP(
+		$markdown
+	): array {
+		if (
+			// Do not allow links within links.
+			!in_array('parseLink', $this->context)
+			// XMPP entity?
+			&& preg_match(
+				'/^xmpp:
+					([\.\w\d\-_+]+@
+					(?:[a-zA-Z0-9\-_]+\.)+[a-zA-Z0-9\-_]*[a-zA-Z0-9]+)
+					(?:\/[@\.\w\d]+)?
+					(?![\w\d\-_])/ux',
+				$markdown,
+				$matches
+			)
+		) {
+			return [
+				['autoXMPP', $matches[0]],
+				strlen($matches[0])
+			];
+		}
+
+		return [['text', substr($markdown, 0, 5)], 5];
+	}
+
+	protected function renderAutoXMPP(
+		$block
+	): string {
+		$xmpp = $this->escapeHtmlEntities(
+			$block[1],
+			ENT_NOQUOTES | ENT_SUBSTITUTE | ENT_DISALLOWED
+		);
+
+		return "<a href=\"$xmpp\">$xmpp</a>";
+	}
+
+	abstract protected function escapeHtmlEntities(
+		$text,
+		$flags = 0
+	);
+
+	abstract protected function renderText(
+		$block
+	);
 }

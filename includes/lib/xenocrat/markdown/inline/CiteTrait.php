@@ -12,8 +12,8 @@ namespace xenocrat\markdown\inline;
  */
 trait CiteTrait
 {
-	protected function parseCiteMarkers(): array
-	{
+	protected function parseCiteMarkers(
+	): array {
 		return array('*_');
 	}
 
@@ -23,8 +23,9 @@ trait CiteTrait
 	 * @marker *_
 	 * @see https://www.unicode.org/reports/tr44/#General_Category_Values
 	 */
-	protected function parseCite($markdown): array
-	{
+	protected function parseCite(
+		$markdown
+	): array {
 		if (
 			preg_match(
 				'/^
@@ -93,15 +94,29 @@ trait CiteTrait
 		];
 	}
 
-	protected function renderCite($block): string
-	{
+	protected function renderCite(
+		$block
+	): string {
 		return '<cite>'
 			. $this->renderAbsy($block[1])
 			. '</cite>';
 	}
 
-	abstract protected function detectInlineOverrun($text, $length, $elements);
-	abstract protected function parseInline($text);
-	abstract protected function renderAbsy($blocks);
-	abstract protected function renderText($block);
+	abstract protected function detectInlineOverrun(
+		$text,
+		$length,
+		$elements
+	);
+
+	abstract protected function parseInline(
+		$text
+	);
+
+	abstract protected function renderAbsy(
+		$blocks
+	);
+
+	abstract protected function renderText(
+		$block
+	);
 }

@@ -12,8 +12,8 @@ namespace xenocrat\markdown\inline;
  */
 trait SupSubTrait
 {
-	protected function parseSupMarkers(): array
-	{
+	protected function parseSupMarkers(
+	): array {
 		return array('++');
 	}
 
@@ -22,8 +22,9 @@ trait SupSubTrait
 	 *
 	 * @marker ++
 	 */
-	protected function parseSup($markdown): array
-	{
+	protected function parseSup(
+		$markdown
+	): array {
 		if (
 			preg_match(
 				'/^
@@ -89,15 +90,16 @@ trait SupSubTrait
 		];
 	}
 
-	protected function renderSup($block): string
-	{
+	protected function renderSup(
+		$block
+	): string {
 		return '<sup>'
 			. $this->renderAbsy($block[1])
 			. '</sup>';
 	}
 
-	protected function parseSubMarkers(): array
-	{
+	protected function parseSubMarkers(
+	): array {
 		return array('--');
 	}
 
@@ -106,8 +108,9 @@ trait SupSubTrait
 	 *
 	 * @marker --
 	 */
-	protected function parseSub($markdown): array
-	{
+	protected function parseSub(
+		$markdown
+	): array {
 		if (
 			preg_match(
 				'/^
@@ -173,15 +176,29 @@ trait SupSubTrait
 		];
 	}
 
-	protected function renderSub($block): string
-	{
+	protected function renderSub(
+		$block
+	): string {
 		return '<sub>'
 			. $this->renderAbsy($block[1])
 			. '</sub>';
 	}
 
-	abstract protected function detectInlineOverrun($text, $length, $elements);
-	abstract protected function parseInline($text);
-	abstract protected function renderAbsy($blocks);
-	abstract protected function renderText($block);
+	abstract protected function detectInlineOverrun(
+		$text,
+		$length,
+		$elements
+	);
+
+	abstract protected function parseInline(
+		$text
+	);
+
+	abstract protected function renderAbsy(
+		$blocks
+	);
+
+	abstract protected function renderText(
+		$block
+	);
 }

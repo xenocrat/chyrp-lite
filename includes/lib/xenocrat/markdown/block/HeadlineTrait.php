@@ -34,16 +34,20 @@ trait HeadlineTrait
 	/**
 	 * Identify a line as ATX headline.
 	 */
-	protected function identifyAtxHeadline($line, $lines, $current): bool
-	{
+	protected function identifyAtxHeadline(
+		$line
+	): bool {
 		return (preg_match('/^( {0,3}(\#{1,6}))([ \t]|$)/', $line));
 	}
 
 	/**
 	 * Identify a line as Setext headline.
 	 */
-	protected function identifySetextHeadline($line, $lines, $current): bool
-	{
+	protected function identifySetextHeadline(
+		$line,
+		$lines,
+		$current
+	): bool {
 		return (
 			!empty($lines[$current + 1])
 			&& preg_match('/^ {0,3}[^\s]/', $lines[$current])
@@ -54,8 +58,10 @@ trait HeadlineTrait
 	/**
 	 * Consume lines for ATX headline.
 	 */
-	protected function consumeAtxHeadline($lines, $current): array
-	{
+	protected function consumeAtxHeadline(
+		$lines,
+		$current
+	): array {
 		preg_match(
 			'/^( {0,3}(\#{1,6}))([ \t]|$)/',
 			$lines[$current],
@@ -77,8 +83,10 @@ trait HeadlineTrait
 	/**
 	 * Consume lines for Setext headline.
 	 */
-	protected function consumeSetextHeadline($lines, $current): array
-	{
+	protected function consumeSetextHeadline(
+		$lines,
+		$current
+	): array {
 		$content = [];
 
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
@@ -100,8 +108,9 @@ trait HeadlineTrait
 	/**
 	 * Renders a headline.
 	 */
-	protected function renderHeadline($block): string
-	{
+	protected function renderHeadline(
+		$block
+	): string {
 		$tag = 'h' . $block['level'];
 		$id = '';
 		$content = $this->renderAbsy($block['content']);
@@ -168,9 +177,24 @@ trait HeadlineTrait
 		return "<{$tag}{$id}>{$content}</{$tag}>\n";
 	}
 
-	abstract protected function escapeHtmlEntities($text, $flags = 0);
-	abstract protected function parseInline($text);
-	abstract protected function renderAbsy($absy);
-	abstract protected function unEscapeHtmlEntities($text, $flags = 0);
-	abstract public function getContextId();
+	abstract protected function escapeHtmlEntities(
+		$text,
+		$flags = 0
+	);
+
+	abstract protected function parseInline(
+		$text
+	);
+
+	abstract protected function renderAbsy(
+		$absy
+	);
+
+	abstract protected function unEscapeHtmlEntities(
+		$text,
+		$flags = 0
+	);
+
+	abstract public function getContextId(
+	);
 }

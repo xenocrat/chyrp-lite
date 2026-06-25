@@ -12,8 +12,8 @@ namespace xenocrat\markdown\inline;
  */
 trait EmphStrongTrait
 {
-	protected function parseEmphStrongMarkers(): array
-	{
+	protected function parseEmphStrongMarkers(
+	): array {
 		return array('_', '*');
 	}
 
@@ -24,8 +24,10 @@ trait EmphStrongTrait
 	 * @marker *
 	 * @see https://www.unicode.org/reports/tr44/#General_Category_Values
 	 */
-	protected function parseEmphStrong($markdown): array
-	{
+	protected function parseEmphStrong(
+		$markdown,
+		$preceding
+	): array {
 		if (!isset($markdown[1])) {
 			return [['text', $markdown[0]], 1];
 		}
@@ -59,6 +61,10 @@ trait EmphStrongTrait
 					$matches
 				)
 				|| $marker === '_'
+				&& preg_match(
+					# Marker must be preceded by a non-word then 0+ delimeters.
+					'/(^|\W|\b_+)$/u', $preceding
+				)
 				&& preg_match(
 					'/
 						# Opening marker: cannot be followed by whitespace.
@@ -134,6 +140,10 @@ trait EmphStrongTrait
 				)
 				|| $marker === '_'
 				&& preg_match(
+					# Marker must be preceded by a non-word then 0+ delimeters.
+					'/(^|\W|\b_+)$/u', $preceding
+				)
+				&& preg_match(
 					'/
 						# Opening marker: cannot be followed by whitespace.
 						# Cannot be followed by Unicode category Zs, Pe, Pf.
@@ -183,22 +193,37 @@ trait EmphStrongTrait
 		return [['text', $markdown[0]], 1];
 	}
 
-	protected function renderStrong($block): string
-	{
+	protected function renderStrong(
+		$block
+	): string {
 		return '<strong>'
 			. $this->renderAbsy($block[1])
 			. '</strong>';
 	}
 
-	protected function renderEmph($block): string
-	{
+	protected function renderEmph(
+		$block
+	): string {
 		return '<em>'
 			. $this->renderAbsy($block[1])
 			. '</em>';
 	}
 
-	abstract protected function detectInlineOverrun($text, $length, $elements);
-	abstract protected function parseInline($text);
-	abstract protected function renderAbsy($blocks);
-	abstract protected function renderText($block);
+	abstract protected function detectInlineOverrun(
+		$text,
+		$length,
+		$elements
+	);
+
+	abstract protected function parseInline(
+		$text
+	);
+
+	abstract protected function renderAbsy(
+		$blocks
+	);
+
+	abstract protected function renderText(
+		$block
+	);
 }

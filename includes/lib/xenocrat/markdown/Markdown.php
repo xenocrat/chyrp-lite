@@ -99,8 +99,10 @@ class Markdown extends Parser
 	 *
 	 * Allow other block types to break paragraphs.
 	 */
-	protected function consumeParagraph($lines, $current): array
-	{
+	protected function consumeParagraph(
+		$lines,
+		$current
+	): array {
 		$content = [];
 
 		// Consume until blank line or end condition...
@@ -148,8 +150,9 @@ class Markdown extends Parser
 	 *
 	 * @marker \
 	 */
-	protected function parseEscape($text): array
-	{
+	protected function parseEscape(
+		$text
+	): array {
 		$br = $this->html5 ? "<br>\n" : "<br />\n";
 
 		if (isset($text[1]) && $text[1] === "\n") {
@@ -166,8 +169,9 @@ class Markdown extends Parser
 	 *
 	 * Parses a newline indicated by two or more spaces on the end of a markdown line.
 	 */
-	protected function renderText($text): string
-	{
+	protected function renderText(
+		$text
+	): string {
 		$br = $this->html5 ? "<br>\n" : "<br />\n";
 		$text = $text[1];
 		// Two or more spaces.

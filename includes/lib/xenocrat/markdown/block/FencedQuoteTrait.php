@@ -19,8 +19,9 @@ trait FencedQuoteTrait
 	/**
 	 * Identify a line as the beginning of a fenced blockquote.
 	 */
-	protected function identifyFencedQuote($line): bool
-	{
+	protected function identifyFencedQuote(
+		$line
+	): bool {
 		if (
 			$line[0] === ' '
 			&& strspn($line, ' ') < 4
@@ -35,8 +36,10 @@ trait FencedQuoteTrait
 	/**
 	 * Consume lines for a fenced blockquote.
 	 */
-	protected function consumeFencedQuote($lines, $current): array
-	{
+	protected function consumeFencedQuote(
+		$lines,
+		$current
+	): array {
 		$indent = strspn($lines[$current], ' ');
 		$line = substr($lines[$current], $indent);
 		$mw = strspn($line, $line[0]);
@@ -74,5 +77,7 @@ trait FencedQuoteTrait
 		return [$block, $i];
 	}
 
-	abstract protected function parseBlocks($lines);
+	abstract protected function parseBlocks(
+		$lines
+	);
 }

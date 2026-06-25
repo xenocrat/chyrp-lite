@@ -12,8 +12,8 @@ namespace xenocrat\markdown\inline;
  */
 trait MathTrait
 {
-	protected function parseMathMarkers(): array
-	{
+	protected function parseMathMarkers(
+	): array {
 		return array('$`');
 	}
 
@@ -22,8 +22,9 @@ trait MathTrait
 	 *
 	 * @marker $`
 	 */
-	protected function parseMath($markdown): array
-	{
+	protected function parseMath(
+		$markdown
+	): array {
 		if (
 			preg_match(
 				'/^
@@ -76,8 +77,9 @@ trait MathTrait
 		return [['text', $markdown[0] . $markdown[1]], 2];
 	}
 
-	protected function renderInlineMath($block): string
-	{
+	protected function renderInlineMath(
+		$block
+	): string {
 		return '<la-tex display="inline">'
 			. $this->escapeHtmlEntities(
 				$block[1],
@@ -86,6 +88,12 @@ trait MathTrait
 			. '</la-tex>';
 	}
 
-	abstract protected function escapeHtmlEntities($text, $flags = 0);
-	abstract protected function renderText($block);
+	abstract protected function escapeHtmlEntities(
+		$text,
+		$flags = 0
+	);
+
+	abstract protected function renderText(
+		$block
+	);
 }

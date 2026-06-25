@@ -12,8 +12,8 @@ namespace xenocrat\markdown\inline;
  */
 trait HighlightTrait
 {
-	protected function parseHighlightMarkers(): array
-	{
+	protected function parseHighlightMarkers(
+	): array {
 		return array('==');
 	}
 
@@ -22,8 +22,9 @@ trait HighlightTrait
 	 *
 	 * @marker ==
 	 */
-	protected function parseHighlight($markdown): array
-	{
+	protected function parseHighlight(
+		$markdown
+	): array {
 		if (
 			preg_match(
 				'/^
@@ -89,15 +90,29 @@ trait HighlightTrait
 		];
 	}
 
-	protected function renderHighlight($block): string
-	{
+	protected function renderHighlight(
+		$block
+	): string {
 		return '<mark>'
 			. $this->renderAbsy($block[1])
 			. '</mark>';
 	}
 
-	abstract protected function detectInlineOverrun($text, $length, $elements);
-	abstract protected function parseInline($text);
-	abstract protected function renderAbsy($blocks);
-	abstract protected function renderText($block);
+	abstract protected function detectInlineOverrun(
+		$text,
+		$length,
+		$elements
+	);
+
+	abstract protected function parseInline(
+		$text
+	);
+
+	abstract protected function renderAbsy(
+		$blocks
+	);
+
+	abstract protected function renderText(
+		$block
+	);
 }
