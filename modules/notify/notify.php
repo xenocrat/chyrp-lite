@@ -18,8 +18,9 @@ class Notify extends Modules {
         $config = Config::current();
 
         $config->set('module_notify', array(
-            'ntfy_host'  => 'https://ntfy.sh',
-            'ntfy_topic' => '',
+            'ntfy_enabled' => false,
+            'ntfy_host'    => 'https://ntfy.sh',
+            'ntfy_topic'   => '',
             'hooks' => [],
         ));
     }
@@ -69,8 +70,10 @@ class Notify extends Modules {
                 __("Invalid authentication token.")
             );
 
+        $ntfy_enabled = isset($_POST['ntfy_enabled']) && $_POST['ntfy_enabled'] === 'on';
+
         $ntfy_host_selected = trim($_POST['ntfy_host'] ?? '');
-        if (!empty($ntfy_host_selected) && !is_url($ntfy_host_selected)) {
+        if ($ntfy_enabled && !is_url($ntfy_host_selected)) {
             Flash::warning(
                 __("Invalid ntfy host URL!", "notify"),
                 "notify_settings"
@@ -79,7 +82,7 @@ class Notify extends Modules {
         $ntfy_host_selected = add_scheme($ntfy_host_selected);
 
         $ntfy_topic_selected = trim($_POST['ntfy_topic'] ?? '');
-        if (!empty($ntfy_topic_selected) && !preg_match('/^[-_a-zA-Z0-9]{4,64}$/', $ntfy_topic_selected)) {
+        if ($ntfy_enabled && !preg_match('/^[-_a-zA-Z0-9]{4,64}$/', $ntfy_topic_selected)) {
             Flash::warning(
                 __("Invalid ntfy topic!", "notify"),
                 "notify_settings"
@@ -95,8 +98,9 @@ class Notify extends Modules {
         }
 
         $config->set('module_notify', array(
-            'ntfy_host'  => $ntfy_host_selected,
-            'ntfy_topic' => $ntfy_topic_selected,
+            'ntfy_enabled' => $ntfy_enabled,
+            'ntfy_host'    => $ntfy_host_selected,
+            'ntfy_topic'   => $ntfy_topic_selected,
             'hooks' => $hooks_config,
         ));
 

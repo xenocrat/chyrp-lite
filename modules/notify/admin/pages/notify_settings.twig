@@ -9,6 +9,10 @@
     <fieldset>
         <h3>Ntfy.sh</h3>
         <p>
+            <label for="ntfy_enabled">{{ "Enable Ntfy" | translate("notify") }}</label>
+            <input type="checkbox" id="ntfy_enabled" name="ntfy_enabled" {% if site.module_notify.ntfy_enabled %}checked{% endif %}>
+        </p>
+        <p>
             <label for="ntfy_host">{{ "Host" | translate("notify") }}</label>
             <input type="text" class="url" name="ntfy_host" id="ntfy_host" value="{{ site.module_notify.ntfy_host | fix(true, true) }}">
         </p>
@@ -16,11 +20,6 @@
             <label for="ntfy_topic">{{ "Topic" | translate("notify") }}</label>
             <input type="text" class="text" name="ntfy_topic" id="ntfy_topic" value="{{ site.module_notify.ntfy_topic | fix(true, true) }}">
         </p>
-        {% if site.module_notify.ntfy_host is empty or site.module_notify.ntfy_topic is empty %}
-            <small>
-                {{ "When ntfy host or topic are empty, messages will not be sent." | translate("notify") }}
-            </small>
-        {% endif %}
     </fieldset>
 
     <fieldset>
