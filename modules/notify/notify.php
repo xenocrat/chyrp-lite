@@ -116,13 +116,18 @@ class Notify extends Modules {
     {
         foreach ($this->hooks() as $hook => $data) {
             if (get_class($model) === $data['class']) {
-                $this->send_message($data['text']);
+                $url = false;
+                if (method_exists($model, 'url')) {
+                    $url = htmlspecialchars_decode($model->url());
+                }
+                $this->send_message($data['text'], $url);
             }
         }
     }
 
     private function send_message(
-        string $message
+        string $message,
+        string|false $url = false
     ): void
     {
         $site = Config::current();
@@ -132,9 +137,14 @@ class Notify extends Modules {
             return;
         }
 
+        $req_headers = [];
+        if ($url !== false) {
+            $req_headers[] = "X-Click: $url";
+        }
+
         $ntfy_url = sprintf("%s/%s", $config['ntfy_host'], $config['ntfy_topic']);
         $text = sprintf("[%s]: %s", $site->name, $message);
-        get_remote($ntfy_url, post: true, data: $text);
+        get_remote($ntfy_url, post: true, data: $text, req_headers: $req_headers);
     }
 
     public function settings_nav(
