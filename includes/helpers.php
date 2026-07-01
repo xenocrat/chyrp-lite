@@ -3749,7 +3749,7 @@
 
     /**
      * Function: generate_captcha
-     * Generates a captcha form element.
+     * Generates captcha challenge form elements.
      *
      * Returns:
      *     A string containing HTML elements to add to a form.
@@ -3757,29 +3757,33 @@
     function generate_captcha(
     ): string {
         Trigger::current()->call("before_generate_captcha");
+        $captcha = "";
 
-        foreach (get_declared_classes() as $class) {
-            if (in_array("CaptchaProvider", class_implements($class)))
-                return call_user_func($class."::generateCaptcha");
+        foreach (Modules::$instances as $module) {
+            if ($module instanceof CaptchaProvider) {
+                $captcha.= $module::generateCaptcha();
+            }
         }
 
-        return "";
+        return $captcha;
     }
 
     /**
      * Function: check_captcha
-     * Checks the response to a captcha.
+     * Checks the responses to captcha challenges.
      *
      * Returns:
-     *     Whether or not the captcha was defeated.
+     *     Whether or not the captchas were defeated.
      */
     function check_captcha(
     ): bool {
         Trigger::current()->call("before_check_captcha");
 
-        foreach (get_declared_classes() as $class) {
-            if (in_array("CaptchaProvider", class_implements($class)))
-                return call_user_func($class."::checkCaptcha");
+        foreach (Modules::$instances as $module) {
+            if ($module instanceof CaptchaProvider) {
+                if (!$module::checkCaptcha())
+                    return false;
+            }
         }
 
         return true;
