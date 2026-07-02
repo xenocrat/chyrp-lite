@@ -556,7 +556,7 @@
             }
 
             if ($config->search_pages) {
-                list($where, $params) = keywords(
+                list($where, $params, $order) = keywords(
                     $_GET['query'],
                     "title LIKE :query OR body LIKE :query",
                     "pages"
@@ -568,7 +568,8 @@
                 $pages = Page::find(
                     array(
                         "where" => $where,
-                        "params" => $params
+                        "params" => $params,
+                        "order" => $order
                     )
                 );
             } else {
