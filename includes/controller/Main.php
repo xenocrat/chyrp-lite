@@ -521,7 +521,7 @@
                     "/"
                 );
 
-            list($where, $params) = keywords(
+            list($where, $params, $order) = keywords(
                 $_GET['query'],
                 "post_attributes.value LIKE :query OR url LIKE :query",
                 "posts"
@@ -545,7 +545,8 @@
                     Post::find(
                         array(
                             "placeholders" => true,
-                            "where" => array("id" => $ids)
+                            "where" => array("id" => $ids),
+                            "order" => $order
                         )
                     ),
                     $this->post_limit
