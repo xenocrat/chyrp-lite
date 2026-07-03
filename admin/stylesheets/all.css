@@ -485,6 +485,11 @@ li.theme div.controls {
     padding-top: 1rem;
     border-top: 1px solid var(--chyrp-border-grey);
 }
+li.module div.controls > form,
+li.feather div.controls > form,
+li.theme div.controls > form {
+    justify-content: flex-end;
+}
 ul#modules_enabled div.controls,
 ul#feathers_enabled div.controls,
 li.theme.current div.controls {
@@ -677,9 +682,17 @@ body.monospace textarea {
     font-family: "Cousine webfont", monospace;
     font-style: normal;
 }
+form.filters > fieldset {
+    display: flex;
+    flex-flow: row wrap;
+    column-gap: 4px;
+    justify-content: flex-start;
+    align-items: baseline;
+}
 form.filters label,
 form.filters small {
     display: block;
+    flex: 100%;
 }
 form.split h3,
 form.split h4,
@@ -1106,6 +1119,16 @@ span.options_tray:empty {
 *.tag:focus-visible {
     outline: var(--chyrp-strong-purple) solid 2px;
     outline-offset: -2px;
+}
+div.controls,
+div.controls > form {
+    box-sizing: border-box;
+    display: flex;
+    width: 100%;
+    flex-flow: row wrap;
+    column-gap: 4px;
+    justify-content: flex-start;
+    align-items: baseline;
 }
 table.interactive + div.controls {
     background-color: var(--chyrp-fill-yellow);
