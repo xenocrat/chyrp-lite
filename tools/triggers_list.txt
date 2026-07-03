@@ -340,25 +340,25 @@ Called from:
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 681
+	includes/controller/Main.php on line 683
 
 
 user_registering
 ----------------
 Called from:
-	includes/controller/Main.php on line 890
+	includes/controller/Main.php on line 892
 
 
 user_authenticate
 -----------------
 Called from:
-	includes/controller/Main.php on line 1018
+	includes/controller/Main.php on line 1020
 
 
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 1433
+	includes/controller/Main.php on line 1435
 
 Arguments:
 	$post
@@ -409,13 +409,13 @@ Called from:
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 3778
+	includes/helpers.php on line 3780
 
 
 correspond_activate_account
 ---------------------------
 Called from:
-	includes/helpers.php on line 4144
+	includes/helpers.php on line 4148
 
 Arguments:
 	$user
@@ -425,7 +425,7 @@ Arguments:
 correspond_reset_password
 -------------------------
 Called from:
-	includes/helpers.php on line 4186
+	includes/helpers.php on line 4190
 
 Arguments:
 	$user
@@ -435,7 +435,7 @@ Arguments:
 correspond_acknowledge_user
 ---------------------------
 Called from:
-	includes/helpers.php on line 4224
+	includes/helpers.php on line 4228
 
 Arguments:
 	$user
@@ -445,7 +445,7 @@ Arguments:
 correspond_admin_activation
 ---------------------------
 Called from:
-	includes/helpers.php on line 4262
+	includes/helpers.php on line 4266
 
 Arguments:
 	$user
@@ -1156,7 +1156,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 1556
+	includes/controller/Main.php on line 1558
 
 Target:
 	$this->context
@@ -1173,6 +1173,8 @@ Target:
 Arguments:
 	$query
 	$plain
+	$table
+	$filters
 
 
 uploaded
@@ -1190,7 +1192,7 @@ Arguments:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 4122
+	includes/helpers.php on line 4126
 
 Target:
 	$function

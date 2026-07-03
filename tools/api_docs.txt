@@ -2907,7 +2907,7 @@ See Also:
 
 Function: generate_captcha
 --------------------------
-Generates a captcha form element.
+Generates captcha challenge form elements.
 
 Returns:
     A string containing HTML elements to add to a form.
@@ -2915,10 +2915,10 @@ Returns:
 
 Function: check_captcha
 -----------------------
-Checks the response to a captcha.
+Checks the responses to captcha challenges.
 
 Returns:
-    Whether or not the captcha was defeated.
+    Whether or not the captchas were defeated.
 
 
 Function: esce

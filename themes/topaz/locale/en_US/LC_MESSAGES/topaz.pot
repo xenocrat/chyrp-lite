@@ -27,7 +27,7 @@ msgstr ""
 #: themes/topaz/feathers/video.twig:7
 #: themes/topaz/pages/archive.twig:29
 #: themes/topaz/pages/page.twig:7
-#: themes/topaz/pages/search.twig:20
+#: themes/topaz/pages/search.twig:19
 #, php-format
 msgid "Permanent link to &#8220;%s&#8221;"
 msgstr ""
