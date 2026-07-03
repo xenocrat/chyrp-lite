@@ -2,7 +2,7 @@
 return array(
     "name"          => __("Umbra", "umbra"),
     "url"           => "http://chyrplite.net/",
-    "version"       => "2025.03",
+    "version"       => "2026.02",
     "description"   => __("A dark tumbleblog theme for Chyrp Lite.", "umbra"),
     "author"        => array(
         "name"      => "Daniel Pimley",

@@ -307,30 +307,36 @@ ol.comments > li#comment_shim {
 }
 details {
     margin: 1rem 0rem;
+    padding: 0rem 0.5em;
+    border: 1px solid var(--sparrow-medium-brown);
 }
-details > summary {
-    box-sizing: border-box;
-    margin: 0em;
-    padding: 0em;
+details:has(summary:hover),
+details:has(summary:focus),
+details:has(summary:active) {
+    border-color: var(--sparrow-pure-black);
+}
+summary {
+    width: 100%;
+    position: relative;
+    left: -0.5em;
+    margin: 0rem;
+    padding: 0.5em;
+    font-weight: bold;
+    color: var(--sparrow-pure-white);
+    border: 0px solid var(--sparrow-medium-brown);
+    background-color: var(--sparrow-medium-brown);
     cursor: pointer;
     list-style: none;
+    user-select: none;
 }
-details > summary::before {
-    content: "";
-    display: inline-block;
-    position: relative;
-    top: 0.125em;
-    width: 1em;
-    height: 1em;
-    margin-inline-end: 0.5em;
-    background: url(../images/expand.svg) center/1em no-repeat
+summary:hover,
+summary:focus,
+summary:active {
+    border-color: var(--sparrow-pure-black);
+    background-color: var(--sparrow-pure-black);
 }
 details[open] > summary {
-    margin-bottom: 1em;
-}
-details[open] > summary::before {
-    top: 0.25em;
-    background: url(../images/collapse.svg) center/1em no-repeat
+    border-bottom-width: 1px;
 }
 table {
     border-collapse: collapse;
@@ -625,18 +631,14 @@ a:visited {
 }
 a:hover,
 a:focus,
-a:active,
-summary:hover,
-summary:focus,
-summary:active {
+a:active {
     outline: none;
     color: var(--sparrow-medium-red);
     text-decoration: underline;
     text-underline-offset: 0.3125em;
     text-decoration-thickness: 0.0625em;
 }
-a:focus-visible,
-summary:focus-visible {
+a:focus-visible {
     text-decoration-thickness: 0.25em;
 }
 ul.navigation > li > a {

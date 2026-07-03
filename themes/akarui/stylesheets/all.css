@@ -297,6 +297,7 @@ details > summary {
     background-color: var(--akarui-medium);
     cursor: pointer;
     list-style: none;
+    user-select: none;
 }
 details > summary::before {
     content: "";

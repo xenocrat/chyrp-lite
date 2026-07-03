@@ -300,30 +300,37 @@ ol.comments > li#comment_shim {
 }
 details {
     margin: 1rem 0rem;
+    padding: 0rem 0.5em;
+    border: 1px solid var(--umbra-medium-grey);
 }
-details > summary {
-    box-sizing: border-box;
-    margin: 0em;
-    padding: 0em;
+details:has(summary:hover),
+details:has(summary:focus),
+details:has(summary:active) {
+    border-color: var(--umbra-strong-mint);
+}
+summary {
+    width: 100%;
+    position: relative;
+    left: -0.5em;
+    margin: 0rem;
+    padding: 0.5em;
+    font-weight: bold;
+    color: var(--umbra-pure-white);
+    border: 0px solid var(--umbra-medium-grey);
+    background-color: var(--umbra-medium-grey);
     cursor: pointer;
     list-style: none;
+    user-select: none;
 }
-details > summary::before {
-    content: "";
-    display: inline-block;
-    position: relative;
-    top: 0.125em;
-    width: 1em;
-    height: 1em;
-    margin-inline-end: 0.5em;
-    background: url(../images/expand.svg) center/1em no-repeat
+summary:hover,
+summary:focus,
+summary:active {
+    color: var(--umbra-pure-black);
+    border-color: var(--umbra-strong-mint);
+    background-color: var(--umbra-strong-mint);
 }
 details[open] > summary {
-    margin-bottom: 1em;
-}
-details[open] > summary::before {
-    top: 0.25em;
-    background: url(../images/collapse.svg) center/1em no-repeat
+    border-bottom-width: 1px;
 }
 table {
     border-collapse: collapse;
@@ -616,18 +623,14 @@ a:visited {
 }
 a:hover,
 a:focus,
-a:active,
-summary:hover,
-summary:focus,
-summary:active {
+a:active {
     outline: none;
     color: var(--umbra-strong-mint);
     text-decoration: underline;
     text-underline-offset: 0.3125em;
     text-decoration-thickness: 0.0625em;
 }
-a:focus-visible,
-summary:focus-visible {
+a:focus-visible {
     text-decoration-thickness: 0.25em;
 }
 ul.navigation > li > a {
@@ -656,7 +659,7 @@ div.traversal a:focus,
 div.traversal a:active {
     color: var(--umbra-deep-black);
     background-color: var(--umbra-strong-mint);
-    transition: top 250ms cubic-bezier(0.5, -8, 0.2, 4);
+    animation: z_axis_boing 1s normal ease;
 }
 div.next a:hover,
 div.next a:active {
@@ -868,6 +871,26 @@ div.standalone > *:last-child {
     to {
         background-position: 60px 30px;
     }
+}
+@keyframes z_axis_boing {
+  0% {
+      transform: scale(1.00);
+  }
+  10% {
+      transform: scale(1.04);
+  }
+  20% {
+      transform: scale(0.98);
+  }
+  30% {
+      transform: scale(1.02);
+  }
+  40% {
+      transform: scale(0.99);
+  }
+  50% {
+      transform: scale(1.00);
+  }
 }
 @media print {
     html {

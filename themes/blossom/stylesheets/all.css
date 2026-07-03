@@ -101,14 +101,14 @@ p {
 h1 {
     font-size: 2em;
     font-weight: bold;
-    margin: 1em 0em;
-    padding: 0em;
+    margin: 1rem 0rem;
+    padding: 0rem;
 }
 h2 {
     font-size: 1.5em;
     font-weight: bold;
-    margin: 1em 0em;
-    padding: 0em;
+    margin: 1rem 0rem;
+    padding: 0rem;
 }
 #sidebar > h1,
 #sidebar > h2 {
@@ -123,8 +123,8 @@ h2.menu_toggle {
 h3 {
     font-size: 1em;
     font-weight: bold;
-    margin: 1em 0em;
-    padding: 0em;
+    margin: 1rem 0rem;
+    padding: 0rem;
 }
 h3.archive {
     font-size: 1.33em;
@@ -135,8 +135,8 @@ h3.archive {
 h4, h5, h6 {
     font-size: 1em;
     font-weight: bold;
-    margin: 1em 0em;
-    padding: 0em;
+    margin: 1rem 0rem;
+    padding: 0rem;
 }
 sup, sub {
     line-height: 1;
@@ -348,42 +348,42 @@ ol.comments > li#comment_shim {
 ol.comments > li.comment_form {
     padding: 2rem;
 }
-div#main > details {
+details {
     display: block;
     box-sizing: border-box;
     background-color: var(--blossom-petal-white);
-    margin: 0rem 0rem 2rem 0rem;
-    padding: 0em;
-    border: 1px solid var(--blossom-border-grey);
-    border-radius: 0.5rem;
-    background-image: linear-gradient(
-        to bottom,
-        var(--blossom-pure-white) 0rem,
-        var(--blossom-petal-white) 10rem
-    );
+    margin: 1rem 0rem;
+    padding: 0em calc(2rem - 2px);
+    border: 2px solid var(--blossom-button-green);
+    border-radius: 0.25rem;
     box-shadow: 0px 2px 4px 2px var(--blossom-coal-shadow);
 }
-div#main > details > summary {
-    margin: 0.5rem 2rem;
+details:has(summary:hover),
+details:has(summary:focus),
+details:has(summary:active) {
+    border-color: var(--blossom-active-green);
 }
-div#main > details > article {
-    display: block;
-    padding: 2rem;
+summary {
+    position: relative;
+    width: 100%;
+    left: calc(-2rem + 2px);
     margin: 0em;
-    border-top: 1px solid var(--blossom-border-grey);
-}
-details {
-    margin: 1rem 0rem;
-}
-details > summary {
-    box-sizing: border-box;
-    margin: 0em;
-    padding: 0em;
+    padding: calc(0.5em - 2px) calc(2rem - 2px);
     cursor: pointer;
     list-style: none;
+    user-select: none;
+    overflow: hidden;
+    color: var(--blossom-pure-white);
+    text-decoration: none;
+    background-color: var(--blossom-button-green);
+}
+summary:hover,
+summary:focus,
+summary:active {
+    background-color: var(--blossom-active-green);
 }
 details[open] > summary {
-    margin-bottom: 1em;
+    padding-bottom: 0.5rem;
 }
 table {
     border-collapse: collapse;
@@ -657,6 +657,13 @@ div#main > article.commentary {
 div#main > article.page {
     padding-bottom: 2rem;
 }
+div#main > details {
+    margin: 0rem 0rem 2rem 0rem;
+}
+div#main > details > article {
+    display: block;
+    margin: 2rem 0em;
+}
 div.standalone {
     margin-bottom: 0rem;
     padding-bottom: 2rem;
@@ -717,18 +724,14 @@ a:visited {
 }
 a:hover,
 a:focus,
-a:active,
-summary:hover,
-summary:focus,
-summary:active {
+a:active {
     outline: none;
     color: var(--blossom-strong-pink);
     text-decoration: underline;
     text-underline-offset: 0.3125em;
     text-decoration-thickness: 0.0625em;
 }
-a:focus-visible,
-summary:focus-visible {
+a:focus-visible {
     text-decoration-thickness: 0.25em;
 }
 div.ribbon a {
@@ -1008,6 +1011,13 @@ div.standalone > *:last-child {
     ul.navigation > li {
         text-align: center;
     }
+    details {
+        padding: 0em calc(1rem - 4px);
+    }
+    summary {
+        left: calc(-1rem + 4px);
+        padding: calc(0.5em - 4px) calc(1rem - 4px);
+    }
     div#sidebar {
         position: static;
         width: 100%;
@@ -1028,12 +1038,6 @@ div.standalone > *:last-child {
     }
     div#main > article {
         padding: 1rem 1rem 0rem 1rem;
-    }
-    div#main > details > article {
-        padding: 1rem;
-    }
-    div#main > details > summary {
-        margin: 0.5rem 1rem;
     }
     div.standalone {
         padding: 1rem;
