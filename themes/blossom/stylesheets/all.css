@@ -380,6 +380,7 @@ summary {
 summary:hover,
 summary:focus,
 summary:active {
+    outline: none;
     background-color: var(--blossom-active-green);
 }
 details[open] > summary {
@@ -922,6 +923,14 @@ section img {
 section.photo img,
 article.archive img {
     width: 100%;
+}
+div.traversal a:focus-visible,
+div.doaction a:focus-visible,
+div.tags a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+    outline: var(--blossom-pure-white) solid 0.125em;
+    outline-offset: -0.25em;
 }
 article > *:first-child,
 header > *:first-child,

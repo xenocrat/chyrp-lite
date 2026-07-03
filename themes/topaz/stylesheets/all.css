@@ -369,56 +369,12 @@ summary {
 summary:hover,
 summary:focus,
 summary:active {
+    outline: none;
     background-color: var(--topaz-strong-blue);
 }
 details[open] > summary {
     padding-bottom: 0.5rem;
 }
-
-
-
-/*
-
-div#main > details {
-    display: block;
-    box-sizing: border-box;
-    background-color: var(--topaz-pure-white);
-    margin: 0rem 0rem 2rem 0rem;
-    padding: 0em;
-    border: 1px solid var(--topaz-border-grey);
-    border-radius: 0.5em;
-}
-div#main > details > summary {
-    margin: 0.5rem 2rem;
-}
-div#main > details > article {
-    display: block;
-    padding: 2rem;
-    margin: 0em;
-    border-top: 1px solid var(--topaz-border-grey);
-}
-details {
-    margin: 1rem 0rem;
-}
-details > summary {
-    box-sizing: border-box;
-    margin: 0em;
-    padding: 0em;
-    cursor: pointer;
-    list-style: none;
-    text-decoration: underline;
-    text-underline-offset: 0.3125em;
-    text-decoration-thickness: 0.0625em;
-    user-select: none;
-}
-details[open] > summary {
-    margin-bottom: 1em;
-}
-
-*/
-
-
-
 table {
     border-collapse: collapse;
     border-spacing: 0em;
@@ -950,6 +906,14 @@ section img {
 section.photo img,
 article.archive img {
     width: 100%;
+}
+div.traversal a:focus-visible,
+div.doaction a:focus-visible,
+div.tags a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+    outline: var(--topaz-pure-white) solid 0.125em;
+    outline-offset: -0.25em;
 }
 article > *:first-child,
 header > *:first-child,

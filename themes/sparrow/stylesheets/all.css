@@ -332,6 +332,7 @@ summary {
 summary:hover,
 summary:focus,
 summary:active {
+    outline: none;
     border-color: var(--sparrow-pure-black);
     background-color: var(--sparrow-pure-black);
 }
@@ -816,6 +817,13 @@ iframe.bandcamp_s_embed {
 iframe.bandcamp_l_embed {
     max-width: 700px;
     aspect-ratio: 2 / 3;
+}
+div.traversal a:focus-visible,
+div.doaction a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+    outline: var(--sparrow-quill-white) solid 0.125em;
+    outline-offset: -0.25em;
 }
 div#mast > *:first-child,
 article > *:first-child,
