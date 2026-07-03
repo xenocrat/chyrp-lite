@@ -1466,16 +1466,16 @@
                 # Descending order.
                 $ordering[] = $val." DESC";
             } else {
-                # Key => Val expression.
+                # Handle as key => value column filter.
                 $filters[$attr] = $val;
             }
         }
 
-        # Check the keywords are valid columns of the table.
+        # Add filters to WHERE if the keys are valid table columns.
         foreach ($filters as $attr => $val) {
             if (isset($columns[$attr])) {
-                # Column exists: add Key => Val expression.
                 $where[$attr] = $val;
+                unset($filters[$attr]);
             }
         }
 
@@ -1500,7 +1500,7 @@
             implode(", ", $ordering) ;
 
         $search = array($where, $params, $order);
-        $trigger->filter($search, "keyword_search", $query, $plain);
+        $trigger->filter($search, "keyword_search", $query, $plain, $table, $filters);
         return $search;
     }
 
