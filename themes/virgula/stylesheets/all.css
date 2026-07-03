@@ -566,9 +566,9 @@ article.audio audio {
 section.photo > a:focus,
 section a:has(img):focus,
 a:focus-visible,
-summary:focus-visible,
 div.doaction a:focus-visible,
-button:focus-visible {
+button:focus-visible,
+details:has(summary:focus-visible) {
     outline: var(--virgula-strong-yellow) solid 2px;
     outline-offset: 2px;
 }

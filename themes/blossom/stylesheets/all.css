@@ -624,11 +624,20 @@ div.comments_pagination {
 }
 div.tags {
     margin: 1rem 0rem 0rem 0rem;
-    font-size: 0.75em;
+    font-size: 0.75rem;
+    display: flex;
+    flex-flow: row wrap;
+    column-gap: 0.5em;
+    justify-content: flex-start;
 }
 div.doaction {
     font-family: inherit;
     margin: 1em 0em;
+    display: flex;
+    flex-flow: row wrap;
+    column-gap: 0.5em;
+    justify-content: flex-start;
+
 }
 div.admin {
     margin: 1em 0em 0em 0em;
@@ -928,9 +937,9 @@ div.traversal a:focus-visible,
 div.doaction a:focus-visible,
 div.tags a:focus-visible,
 button:focus-visible,
-summary:focus-visible {
-    outline: var(--blossom-pure-white) solid 0.125em;
-    outline-offset: -0.25em;
+details:has(summary:focus-visible) {
+    outline: var(--blossom-strong-pink) solid 2px;
+    outline-offset: 2px;
 }
 article > *:first-child,
 header > *:first-child,

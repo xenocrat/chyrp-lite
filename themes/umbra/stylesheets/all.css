@@ -363,7 +363,10 @@ form, fieldset {
 }
 form.search_box {
     width: auto;
-    display: block;
+    display: flex;
+    flex-flow: row wrap;
+    column-gap: 0.75em;
+    justify-content: center;
 }
 form.comment_edit {
     width: 100%;
@@ -557,6 +560,10 @@ div.tags {
 div.doaction {
     font-family: inherit;
     margin: 1em 0em;
+    display: flex;
+    flex-flow: row wrap;
+    column-gap: 0.75em;
+    justify-content: flex-start;
 }
 div.admin {
     margin: 1em 0em 0em 0em;
@@ -835,9 +842,9 @@ iframe.bandcamp_l_embed {
 div.traversal a:focus-visible,
 div.doaction a:focus-visible,
 button:focus-visible,
-summary:focus-visible {
-    outline: var(--umbra-pure-black) solid 0.125em;
-    outline-offset: -0.25em;
+details:has(summary:focus-visible) {
+    outline: var(--umbra-strong-mint) solid 2px;
+    outline-offset: 2px;
 }
 div#mast > *:first-child,
 article > *:first-child,
@@ -920,9 +927,6 @@ div.standalone > *:last-child {
     }
     input, select {
         width: 100%;
-    }
-    button#search_submit {
-        display: none;
     }
 }
 @media (prefers-reduced-motion) {

@@ -398,6 +398,12 @@ button[disabled], {
     cursor: not-allowed;
     opacity: 0.33;
 }
+select:focus,
+textarea:focus,
+input:focus,
+button:focus, {
+    outline: none;
+}
 select, input {
     box-sizing: border-box;
     display: block;
@@ -508,7 +514,7 @@ div.doaction {
     margin: 2rem 0rem;
     display: flex;
     flex-flow: row wrap;
-    column-gap: 0.5em;
+    column-gap: 1rem;
     justify-content: flex-start;
 }
 nav.traversal:not(:has(a)) {
@@ -553,19 +559,6 @@ ul.navigation > li a {
     color: var(--akarui-black);
     background-color: var(--akarui-medium);
 }
-div.doaction a:hover,
-button:hover,
-div.doaction a:focus,
-button:focus,
-ul.navigation > li a:focus,
-ul.navigation > li a:focus {
-    color: var(--akarui-black);
-}
-div.doaction a:active,
-button:active,
-ul.navigation > li a:active {
-    color: var(--akarui-black);
-}
 img {
     border-style: none;
     margin: 0em;
@@ -584,14 +577,13 @@ article.video video,
 article.audio audio {
     width: 100%;
 }
-*:focus,
+*:focus-visible,
 section.photo > a:focus,
 section a:has(img):focus,
 a:focus-visible,
-summary:focus-visible,
-div.doaction a:focus,
-button:focus,
-ul.navigation > li a:focus {
+div.doaction a:focus-visible,
+ul.navigation > li a:focus-visible,
+details:has(summary:focus-visible) {
     outline: var(--akarui-strong) solid 2px;
     outline-offset: 2px;
 }
