@@ -569,7 +569,7 @@
                     array(
                         "where" => $where,
                         "params" => $params,
-                        "order" => $order
+                        "order" => "parent_id ASC, id ASC"
                     )
                 );
             } else {
