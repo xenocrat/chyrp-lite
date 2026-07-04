@@ -1,0 +1,41 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block title %}{{ "Notify Settings" | translate("notify") }}{% endblock %}
+
+{% block content %}
+<h2>{{ "Notify Settings" | translate("notify") }}</h2>
+
+<form id="notify_settings" class="split" action="{{ url('notify_settings') }}" method="post" accept-charset="UTF-8">
+    <fieldset>
+        <h3>Ntfy.sh</h3>
+        <p>
+            <label for="ntfy_enabled">{{ "Enable Ntfy" | translate("notify") }}</label>
+            <input type="checkbox" id="ntfy_enabled" name="ntfy_enabled" {% if site.module_notify.ntfy_enabled %}checked{% endif %}>
+        </p>
+        <p>
+            <label for="ntfy_host">{{ "Host" | translate("notify") }}</label>
+            <input type="text" class="url" name="ntfy_host" id="ntfy_host" value="{{ site.module_notify.ntfy_host | fix(true, true) }}">
+        </p>
+        <p>
+            <label for="ntfy_topic">{{ "Topic" | translate("notify") }}</label>
+            <input type="text" class="text" name="ntfy_topic" id="ntfy_topic" value="{{ site.module_notify.ntfy_topic | fix(true, true) }}">
+        </p>
+    </fieldset>
+
+    <fieldset>
+        <h3>Events</h3>
+        {% for hook, data in hook_list %}
+        <p>
+            <label for="{{ hook }}">{{ data.text | translate("notify") | fix(true, true) }}</label>
+            <input type="checkbox" id="{{ hook }}" name="hooks[{{ hook }}]" {% if site.module_notify.hooks[hook] %}checked{% endif %}>
+        </p>
+        {% endfor %}
+    </fieldset>
+    <p class="buttons">
+        <button type="submit" class="yay">
+            {{ "Update" | translate }}
+        </button>
+    </p>
+    <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
+</form>
+{% endblock %}
