@@ -2479,6 +2479,23 @@
         );
 
         if (
+            defined('CURLOPT_PREREQFUNCTION') and
+            version_compare($cver["version"], "7.80", ">=")
+        ) {
+            $opts[CURLOPT_PREREQFUNCTION] = function (
+                $handle,
+                $dest_ip,
+                $local_ip,
+                $dest_port,
+                $local_port
+            ) {
+                return (is_unsafe_ip($dest_ip) and !GET_REMOTE_UNSAFE) ?
+                    CURL_PREREQFUNC_ABORT :
+                    CURL_PREREQFUNC_OK ;
+            };
+        }
+
+        if (
             defined('CURLSSLOPT_NATIVE_CA') and
             version_compare($cver["version"], "7.71", ">=")
         ) {
