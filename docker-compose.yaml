@@ -1,6 +1,9 @@
 services:
   chyrp-lite:
-    build: .
+    build:
+      context: .
+      args:
+        PHP_VERSION: "8.3"
     container_name: chyrp-lite
     restart: unless-stopped
     volumes:
