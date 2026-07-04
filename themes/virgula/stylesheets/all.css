@@ -458,7 +458,7 @@ div.doaction {
     margin: 2rem 0rem;
     display: flex;
     flex-flow: row wrap;
-    column-gap: 0.5em;
+    gap: 0.5em;
     justify-content: flex-start;
 }
 nav.traversal:not(:has(a)) {

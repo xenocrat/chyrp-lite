@@ -365,7 +365,7 @@ form.search_box {
     width: auto;
     display: flex;
     flex-flow: row wrap;
-    column-gap: 0.75em;
+    gap: 0.75em;
     justify-content: center;
 }
 form.comment_edit {
@@ -557,12 +557,20 @@ div.tags {
     margin: 1rem 0rem 0rem 0rem;
     font-size: 0.75em;
 }
+div.tag_cloud {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 0em 0.5em;
+    align-content: baseline;
+    align-items: baseline;
+    justify-content: flex-start;
+}
 div.doaction {
     font-family: inherit;
     margin: 1em 0em;
     display: flex;
     flex-flow: row wrap;
-    column-gap: 0.75em;
+    gap: 0.75em;
     justify-content: flex-start;
 }
 div.admin {
@@ -696,23 +704,6 @@ p a:focus-visible {
 }
 div.footnotes {
     font-size: 0.75em;
-}
-div.tag_cloud a.tag {
-    display: inline-block;
-    position: relative;
-    top: 0px;
-    padding: 0.25em 0.5em;
-    margin: 2px 0em;
-    color: var(--umbra-pure-white);
-    text-decoration: none;
-    border: 1px solid var(--umbra-pure-white);
-}
-div.tag_cloud a.tag:hover,
-div.tag_cloud a.tag:focus,
-div.tag_cloud a.tag:active {
-    color: var(--umbra-deep-black);
-    background-color: var(--umbra-strong-mint);
-    border-color: var(--umbra-strong-mint);
 }
 a.tag-size-0 {
     font-size: 100%;

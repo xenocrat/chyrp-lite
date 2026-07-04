@@ -581,7 +581,7 @@ div.next, div.prev_next {
 div.traversal {
     display: flex;
     flex-flow: row wrap;
-    column-gap: 1rem;
+    gap: 1rem;
     justify-content: center;
 }
 div.ribbon {
@@ -616,7 +616,16 @@ div.tags {
     font-size: 0.75rem;
     display: flex;
     flex-flow: row wrap;
-    column-gap: 0.5em;
+    gap: 0em 0.5em;
+    align-items: baseline;
+    justify-content: flex-start;
+}
+div.tag_cloud {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 0em 0.5em;
+    align-content: baseline;
+    align-items: baseline;
     justify-content: flex-start;
 }
 div.doaction {
@@ -625,7 +634,7 @@ div.doaction {
     margin: 1em 0em;
     display: flex;
     flex-flow: row wrap;
-    column-gap: 0.5em;
+    gap: 0.5em;
     justify-content: flex-start;
 }
 div.admin {
@@ -779,22 +788,18 @@ p a:focus-visible {
 div.footnotes {
     font-size: 0.75em;
 }
-div.tags a,
-div.tag_cloud a {
+a.tag {
     display: inline-block;
     padding: 0.25em 0.5em;
-    margin-bottom: 4px;
+    margin: 0.125em 0em;
     border-radius: 0.25em;
     border: 1px var(--topaz-border-grey) solid;
     color: var(--topaz-inky-black);
     text-decoration: none;
 }
-div.tags a:hover,
-div.tags a:focus,
-div.tags a:active,
-div.tag_cloud a:hover,
-div.tag_cloud a:focus,
-div.tag_cloud a:active {
+a.tag:hover,
+a.tag:focus,
+a.tag:active {
     color: var(--topaz-pure-black);
     background-color: var(--topaz-light-blue);
     border-color: var(--topaz-light-blue);
@@ -922,7 +927,7 @@ article.archive img {
 }
 div.traversal a:focus-visible,
 div.doaction a:focus-visible,
-div.tags a:focus-visible,
+a.tag:focus-visible,
 button:focus-visible,
 details:has(summary:focus-visible) {
     outline: var(--topaz-light-blue) solid 2px;

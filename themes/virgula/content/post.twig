@@ -23,7 +23,7 @@
 {% endif %}
 {% if (module_enabled("tags") and post.tags_link is not empty) %}
 <span class="tags">
-{{- "Tagged with %s." | translate | format(post.tags_link | join(", ")) -}}
+{{- "Tagged with %s." | translate | format(post.tags_link | join(" / ")) -}}
 </span>
 {% endif %}
 {% if module_enabled("likes") %}
