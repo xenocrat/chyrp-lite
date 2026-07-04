@@ -267,7 +267,7 @@ a:focus-visible {
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    column-gap: 4px;
+    gap: 0rem 0.5rem;
     bottom: 0em;
     left: 4rem;
     right: 4rem;
@@ -316,7 +316,7 @@ a:focus-visible {
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
-    column-gap: 4px;
+    gap: 0rem 0.25rem;
     margin: 4rem 4rem 0rem 4rem;
     overflow: hidden;
     border-bottom: 1px solid var(--chyrp-scottish-grey);
@@ -421,8 +421,7 @@ div.pagination {
     margin-top: 1rem;
     display: flex;
     flex-flow: row wrap;
-    column-gap: 2rem;
-    row-gap: 1rem;
+    gap: 1rem 2rem;
     justify-content: center;
 }
 span.pages {
@@ -685,7 +684,7 @@ body.monospace textarea {
 form.filters > fieldset {
     display: flex;
     flex-flow: row wrap;
-    column-gap: 4px;
+    gap: 0rem 0.5rem;
     justify-content: flex-start;
     align-items: baseline;
 }
@@ -1017,8 +1016,7 @@ div.more_options {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-auto-flow: row;
-    column-gap: 2rem;
-    row-gap: 1rem;
+    gap: 1rem 2rem;
     justify-content: space-between;
     padding: 1rem;
     background-color: var(--chyrp-inset-grey);
@@ -1126,7 +1124,7 @@ div.controls > form {
     display: flex;
     width: 100%;
     flex-flow: row wrap;
-    column-gap: 4px;
+    gap: 0rem 0.5rem;
     justify-content: flex-start;
     align-items: baseline;
 }
@@ -1143,7 +1141,7 @@ div.confirmation {
     margin-top: 1rem;
     display: flex;
     flex-flow: row nowrap;
-    column-gap: 2rem;
+    gap: 0rem 2rem;
     justify-content: space-between;
     padding: 1rem;
     background-color: var(--chyrp-inset-grey);
