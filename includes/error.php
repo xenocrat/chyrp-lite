@@ -165,6 +165,9 @@
                 case 413:
                     header($_SERVER['SERVER_PROTOCOL']." 413 Payload Too Large");
                     break;
+                case 414:
+                    header($_SERVER['SERVER_PROTOCOL']." 414 URI Too Long");
+                    break;
                 case 415:
                     header($_SERVER['SERVER_PROTOCOL']." 415 Unsupported Media Type");
                     break;
