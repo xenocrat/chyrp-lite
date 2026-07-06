@@ -3,13 +3,46 @@
 class Notify extends Modules {
     private function hooks(
     ): array {
-        return array(
-            'add_comment'  => array('class' => Comment::class,  'text' => __('New Comment')),
-            'add_like'     => array('class' => Like::class,     'text' => __('Like added')),
-            'add_post'     => array('class' => Post::class,     'text' => __('Post created')),
-            'add_pingback' => array('class' => Pingback::class, 'text' => __('Pingback recieved')),
-            'add_user'     => array('class' => User::class,     'text' => __('User created')),
-        );
+        static $hooks;
+
+        if (!isset($hooks)) {
+            $hooks = array(
+                'add_post'     => array(
+                    'class' => Post::class,
+                    'label' => __('New Post', 'notify'),
+                    'message' => __('Post created.', 'notify'),
+                ),
+                'add_page'     => array(
+                    'class' => Page::class,
+                    'label' => __('New Page', 'notify'),
+                    'message' => __('Page created.', 'notify'),
+                ),
+                'add_user'     => array(
+                    'class' => User::class,
+                    'label' => __('New User', 'notify'),
+                    'message' => __('User created.', 'notify'),
+                ),
+                'add_comment'  => array(
+                    'class' => Comment::class,
+                    'label' => __('Comment Added', 'notify'),
+                    'message' => __('Someone commented on a post.', 'notify'),
+                ),
+                'add_like'     => array(
+                    'class' => Like::class,
+                    'label' => __('Post Liked', 'notify'),
+                    'message' => __('Someone liked a post.', 'notify'),
+                ),
+                'add_pingback' => array(
+                    'class' => Pingback::class,
+                    'label' => __('Webmention Received', 'notify'),
+                    'message' => __('Someone sent a webmention.', 'notify'),
+                ),
+            );
+
+            Trigger::current()->filter($hooks, "notify_define_hooks");
+        }
+
+        return $hooks;
     }
 
     public static function __install(
@@ -120,7 +153,7 @@ class Notify extends Modules {
                 if (method_exists($model, 'url')) {
                     $url = htmlspecialchars_decode($model->url());
                 }
-                $this->send_message($data['text'], $url);
+                $this->send_message($data['message'], $url);
             }
         }
     }
