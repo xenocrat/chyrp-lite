@@ -29,11 +29,11 @@
 </p>
 <p>
 <label for="ntfy_host">{{ "Host" | translate("notify") }}</label>
-<input type="text" class="url" name="ntfy_host" id="ntfy_host" value="{{ site.module_notify.ntfy_host | fix(true, true) }}">
+<input type="url" class="text" name="ntfy_host" id="ntfy_host" value="{{ site.module_notify.ntfy_host | fix(true, true) }}">
 </p>
 <p>
 <label for="ntfy_topic">{{ "Topic" | translate("notify") }}</label>
-<input type="text" class="text" name="ntfy_topic" id="ntfy_topic" value="{{ site.module_notify.ntfy_topic | fix(true, true) }}">
+<input type="text" class="text" name="ntfy_topic" id="ntfy_topic" maxlength="64" pattern="^[\-_a-zA-Z0-9]{4,64}$" value="{{ site.module_notify.ntfy_topic | fix(true, true) }}">
 </p>
 </fieldset>
 <hr>

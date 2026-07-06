@@ -103,29 +103,33 @@ class Notify extends Modules {
                 __("Invalid authentication token.")
             );
 
-        $ntfy_enabled = isset($_POST['ntfy_enabled']) && $_POST['ntfy_enabled'] === 'on';
-
+        $ntfy_enabled = isset($_POST['ntfy_enabled']);
         $ntfy_host_selected = trim($_POST['ntfy_host'] ?? '');
+
         if ($ntfy_enabled && !is_url($ntfy_host_selected)) {
-            Flash::warning(
-                __("Invalid ntfy host URL!", "notify"),
-                "notify_settings"
+            error(
+                __("Error"),
+                __("Invalid ntfy host URL.", "notify"),
+                code:422
             );
         }
-        $ntfy_host_selected = add_scheme($ntfy_host_selected);
 
+        $ntfy_host_selected = add_scheme($ntfy_host_selected);
         $ntfy_topic_selected = trim($_POST['ntfy_topic'] ?? '');
-        if ($ntfy_enabled && !preg_match('/^[-_a-zA-Z0-9]{4,64}$/', $ntfy_topic_selected)) {
-            Flash::warning(
-                __("Invalid ntfy topic!", "notify"),
-                "notify_settings"
+
+        if ($ntfy_enabled && !preg_match('/^[\-_a-zA-Z0-9]{4,64}$/', $ntfy_topic_selected)) {
+            error(
+                __("Error"),
+                __("Invalid ntfy topic.", "notify"),
+                code:422
             );
         }
 
         $hooks_selected = $_POST['hooks'] ?? array();
         $hooks_config = array();
+
         foreach (array_keys($this->hooks()) as $hook) {
-            if (isset($hooks_selected[$hook]) && $hooks_selected[$hook] === 'on') {
+            if (isset($hooks_selected[$hook])) {
                 $hooks_config[$hook] = true;
             }
         }
