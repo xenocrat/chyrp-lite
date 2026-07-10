@@ -47,7 +47,7 @@ msgstr "Stuur meldingen na evenementen."
 
 #: modules/notify/notify.php:12
 msgid "New Post"
-msgstr "Nieuw blogpost "
+msgstr "Nieuw blogpost"
 
 #: modules/notify/notify.php:13
 msgid "Post created."
