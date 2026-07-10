@@ -53,6 +53,7 @@ visitors will see when they first arrive at your website.
 * Post Views: maintain a view count for your blog entries.
 * MathJax: a JavaScript display engine for mathematics.
 * Inject: use triggers and filters for content injection.
+* Notify: send notifications after events.
 
 ## Requirements
 
