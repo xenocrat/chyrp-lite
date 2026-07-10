@@ -1,0 +1,106 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: nl_NL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+#. This file is distributed under the same license as the Chyrp Lite package.
+#: modules/notify/admin/pages/notify_settings.twig:3
+#: modules/notify/admin/pages/notify_settings.twig:6
+msgid "Notify Settings"
+msgstr "Meldingsinstellingen"
+
+#: modules/notify/admin/pages/notify_settings.twig:9
+msgid "Events:"
+msgstr "Evenementen:"
+
+#: modules/notify/admin/pages/notify_settings.twig:19
+msgid "ntfy.sh"
+msgstr ""
+
+#: modules/notify/admin/pages/notify_settings.twig:23
+msgid "Enable Notifications"
+msgstr "Meldingen Inschakelen"
+
+#: modules/notify/admin/pages/notify_settings.twig:31
+msgid "Host"
+msgstr "Host"
+
+#: modules/notify/admin/pages/notify_settings.twig:35
+msgid "Topic"
+msgstr "Onderwerp"
+
+#: modules/notify/info.php:4
+msgid "Notify"
+msgstr "Melding"
+
+#: modules/notify/info.php:5
+msgid "Send notifications after events."
+msgstr "Stuur meldingen na evenementen."
+
+#: modules/notify/notify.php:12
+msgid "New Post"
+msgstr "Nieuw blogpost "
+
+#: modules/notify/notify.php:13
+msgid "Post created."
+msgstr "Blogpost aangemaakt."
+
+#: modules/notify/notify.php:17
+msgid "New Page"
+msgstr "Nieuwe pagina"
+
+#: modules/notify/notify.php:18
+msgid "Page created."
+msgstr "Pagina aangemaakt."
+
+#: modules/notify/notify.php:22
+msgid "New User"
+msgstr "Nieuwe gebruiker"
+
+#: modules/notify/notify.php:23
+msgid "User created."
+msgstr "Gebruiker aangemaakt."
+
+#: modules/notify/notify.php:27
+msgid "Comment Added"
+msgstr "Opmerking toegevoegd"
+
+#: modules/notify/notify.php:28
+msgid "Someone commented on a post."
+msgstr "Lemand hat einen Kommentar abgegeben."
+
+#: modules/notify/notify.php:32
+msgid "Post Liked"
+msgstr "Bericht is geliket"
+
+#: modules/notify/notify.php:33
+msgid "Someone liked a post."
+msgstr "Lemand heeft een blogpost geliket."
+
+#: modules/notify/notify.php:37
+msgid "Webmention Received"
+msgstr "Webmention ontvangen"
+
+#: modules/notify/notify.php:38
+msgid "Someone sent a webmention."
+msgstr "Lemand heeft een Webmention gestuurd."
+
+#: modules/notify/notify.php:112
+msgid "Invalid ntfy host URL."
+msgstr "Ongeldige ntfy host-URL."
+
+#: modules/notify/notify.php:123
+msgid "Invalid ntfy topic."
+msgstr "Ongeldig ntfy onderwerp."
+
+#: modules/notify/notify.php:192
+msgid "Notifications"
+msgstr "Meldingen"

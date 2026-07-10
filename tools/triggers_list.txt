@@ -374,7 +374,7 @@ Called from:
 webmention
 ----------
 Called from:
-	includes/helpers.php on line 2632
+	includes/helpers.php on line 2649
 
 Arguments:
 	$post
@@ -385,7 +385,7 @@ Arguments:
 before_delete_upload
 --------------------
 Called from:
-	includes/helpers.php on line 3497
+	includes/helpers.php on line 3514
 
 Arguments:
 	$filename
@@ -394,7 +394,7 @@ Arguments:
 delete_upload
 -------------
 Called from:
-	includes/helpers.php on line 3500
+	includes/helpers.php on line 3517
 
 Arguments:
 	$filename
@@ -403,19 +403,19 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 3759
+	includes/helpers.php on line 3776
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 3780
+	includes/helpers.php on line 3797
 
 
 correspond_activate_account
 ---------------------------
 Called from:
-	includes/helpers.php on line 4148
+	includes/helpers.php on line 4165
 
 Arguments:
 	$user
@@ -425,7 +425,7 @@ Arguments:
 correspond_reset_password
 -------------------------
 Called from:
-	includes/helpers.php on line 4190
+	includes/helpers.php on line 4207
 
 Arguments:
 	$user
@@ -435,7 +435,7 @@ Arguments:
 correspond_acknowledge_user
 ---------------------------
 Called from:
-	includes/helpers.php on line 4228
+	includes/helpers.php on line 4245
 
 Arguments:
 	$user
@@ -445,7 +445,7 @@ Arguments:
 correspond_admin_activation
 ---------------------------
 Called from:
-	includes/helpers.php on line 4266
+	includes/helpers.php on line 4283
 
 Arguments:
 	$user
@@ -1180,7 +1180,7 @@ Arguments:
 uploaded
 --------
 Called from:
-	includes/helpers.php on line 3181
+	includes/helpers.php on line 3198
 
 Target:
 	$upload_url
@@ -1192,7 +1192,7 @@ Arguments:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 4126
+	includes/helpers.php on line 4143
 
 Target:
 	$function
@@ -1497,3 +1497,12 @@ Called from:
 
 Target:
 	$this
+
+
+notify_define_hooks
+-------------------
+Called from:
+	modules/notify/notify.php on line 42
+
+Target:
+	$hooks
