@@ -44,6 +44,7 @@ Dzięki elastycznemu systemowi Feathers i Pages możesz uczynić swoją stronę 
 * Post Views: zlicza wyświetlenia wpisów.
 * MathJax: silnik JavaScript do wyświetlania matematyki.
 * Inject: używaj triggerów i filtrów do wstrzykiwania treści.
+* Notify: Wysyłaj powiadomienia po wydarzeniach.
 
 ## Wymagania
 

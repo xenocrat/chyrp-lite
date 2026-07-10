@@ -56,6 +56,7 @@ giunti sul tuo sito.
 * Visualizzazioni dei post: Contatore per la visualizzazione dei tuoi post.
 * MathJax: Un motore di visualizzazione JavaScript per la matematica.
 * Inject: Utilizzare trigger e filtri per l'inserimento dei contenuti.
+* Notifica: Invia notifiche dopo gli eventi.
 
 ## Requisiti
 

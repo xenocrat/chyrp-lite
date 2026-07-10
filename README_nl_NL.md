@@ -45,6 +45,7 @@ Met een flexibel system van feathers en paginas, kun je je website precies zó m
 * Post Views: een teller die de aantallen keren dat je blogposts gelezen zijn weergeeft.
 * MathJax: een JavaScript weergave-machine voor Wiskundige inhoud.
 * Inject: Voeg inhoud in met behulp van triggers en filters.
+* Melding: Stuur meldingen na evenementen.
 
 ## Benodigdheden
 
