@@ -19,7 +19,7 @@ use RuntimeException;
 abstract class Parser
 {
 	const VERSION_MAJOR = 4;
-	const VERSION_MINOR = 15;
+	const VERSION_MINOR = 16;
 	const VERSION_PATCH = 0;
 
 	/**
@@ -31,6 +31,16 @@ abstract class Parser
 	 * @var boolean - Throw if the maximum nesting level is exceeded.
 	 */
 	public $maximumNestingLevelThrow = false;
+
+	/**
+	 * @var float - The maximum execution time for parsing in seconds.
+	 */
+	public $maximumExecutionTime = 10.0;
+
+	/**
+	 * @var boolean - Throw if the maximum execution time is exceeded.
+	 */
+	public $maximumExecutionTimeThrow = false;
 
 	/**
 	 * @var boolean - Whether to convert all tabs into spaces.
@@ -72,6 +82,21 @@ abstract class Parser
 	private $_depth = 0;
 
 	/**
+	 * @var float - The execution start time: Unix timestamp with microseconds.
+	 */
+	private $_timer = 0.0;
+
+	/**
+	 * @var array - Prioritized list of block identifier methods.
+	 */
+	private $_blockTypes;
+
+	/**
+	 * @var array - Map of inline markers and corresponding parser methods.
+	 */
+	private $_inlineMarkers = [];
+
+	/**
 	 * @var string - Identifier for this rendering context.
 	 * 
 	 * Set this to output unique element IDs when traits render HTML anchors etc.
@@ -95,6 +120,7 @@ abstract class Parser
 
 		$text = $this->preprocess($text);
 
+		$this->resetTimer();
 		$this->prepareMarkers($text);
 
 		$absy = $this->parseBlocks(explode("\n", $text));
@@ -122,6 +148,7 @@ abstract class Parser
 
 		$text = $this->preprocess($text);
 
+		$this->resetTimer();
 		$this->prepareMarkers($text);
 
 		$absy = $this->parseInline($text);
@@ -130,6 +157,34 @@ abstract class Parser
 
 		$this->cleanup();
 		return $markup;
+	}
+
+	/**
+	 * Get the identifier for this rendering context.
+	 *
+	 * @return string - The identifier.
+	 */
+	public function getContextId(
+	): string {
+		return $this->_contextId;
+	}
+
+	/**
+	 * Set the identifier for this rendering context.
+	 *
+	 * @param string $string - Identifier to set.
+	 * @return string - The newly set identifier.
+	 */
+	public function setContextId(
+		$string
+	): string {
+		$id = str_replace(
+			['&', '<', '>', '"', ' '],
+			'',
+			strval($string)
+		);
+
+		return $this->_contextId = $id;
 	}
 
 	/**
@@ -167,31 +222,21 @@ abstract class Parser
 	}
 
 	/**
-	 * Get the identifier for this rendering context.
-	 *
-	 * @return string - The identifier.
+	 * Resets the execution timer.
 	 */
-	public function getContextId(
-	): string {
-		return $this->_contextId;
+	protected function resetTimer(
+	): void {
+		$this->_timer = microtime(true);
 	}
 
 	/**
-	 * Set the identifier for this rendering context.
+	 * Returns the elapsed execution time.
 	 *
-	 * @param string $string - Identifier to set.
-	 * @return string - The newly set identifier.
+	 * @return float - The elapsed time in seconds.
 	 */
-	public function setContextId(
-		$string
-	): string {
-		$id = str_replace(
-			['&', '<', '>', '"', ' '],
-			'',
-			strval($string)
-		);
-
-		return $this->_contextId = $id;
+	protected function checkTimer(
+	): float {
+		return microtime(true) - $this->_timer;
 	}
 
 	/**
@@ -213,8 +258,6 @@ abstract class Parser
 	#---------------------------------------------
 	# Block parsing
 	#---------------------------------------------
-
-	private $_blockTypes;
 
 	/**
 	 * Detect registered block types.
@@ -297,10 +340,20 @@ abstract class Parser
 		&$blanks = 0
 	): array {
 		if ($this->_depth >= $this->maximumNestingLevel) {
-		// Maximum depth is reached; do not parse input.
+		// Exceeded maximum depth; do not parse input.
 			if ($this->maximumNestingLevelThrow) {
                 throw new RuntimeException(
                     'Parser exceeded maximum nesting level'
+                );
+			}
+			return [['text', implode("\n", $lines)]];
+		}
+
+		if ($this->checkTimer() > $this->maximumExecutionTime) {
+		// Exceeded maximum execution time; do not parse input.
+			if ($this->maximumExecutionTimeThrow) {
+                throw new RuntimeException(
+                    'Parser exceeded maximum execution time'
                 );
 			}
 			return [['text', implode("\n", $lines)]];
@@ -421,8 +474,6 @@ abstract class Parser
 	# Inline parsing
 	#---------------------------------------------
 
-	private $_inlineMarkers = [];
-
 	/**
 	 * Returns a map of inline markers to the corresponding parser methods.
 	 *
@@ -517,10 +568,20 @@ abstract class Parser
 		$preceding = ''
 	): array {
 		if ($this->_depth >= $this->maximumNestingLevel) {
-		// Maximum depth is reached; do not parse input.
+		// Exceeded maximum depth; do not parse input.
 			if ($this->maximumNestingLevelThrow) {
                 throw new RuntimeException(
                     'Parser exceeded maximum nesting level'
+                );
+			}
+			return [['text', $text]];
+		}
+
+		if ($this->checkTimer() > $this->maximumExecutionTime) {
+		// Exceeded maximum execution time; do not parse input.
+			if ($this->maximumExecutionTimeThrow) {
+                throw new RuntimeException(
+                    'Parser exceeded maximum execution time'
                 );
 			}
 			return [['text', $text]];
