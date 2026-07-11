@@ -374,7 +374,7 @@ Called from:
 webmention
 ----------
 Called from:
-	includes/helpers.php on line 2649
+	includes/helpers.php on line 2647
 
 Arguments:
 	$post
@@ -385,7 +385,7 @@ Arguments:
 before_delete_upload
 --------------------
 Called from:
-	includes/helpers.php on line 3514
+	includes/helpers.php on line 3512
 
 Arguments:
 	$filename
@@ -394,7 +394,7 @@ Arguments:
 delete_upload
 -------------
 Called from:
-	includes/helpers.php on line 3517
+	includes/helpers.php on line 3515
 
 Arguments:
 	$filename
@@ -403,19 +403,19 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 3776
+	includes/helpers.php on line 3774
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 3797
+	includes/helpers.php on line 3795
 
 
 correspond_activate_account
 ---------------------------
 Called from:
-	includes/helpers.php on line 4165
+	includes/helpers.php on line 4163
 
 Arguments:
 	$user
@@ -425,7 +425,7 @@ Arguments:
 correspond_reset_password
 -------------------------
 Called from:
-	includes/helpers.php on line 4207
+	includes/helpers.php on line 4205
 
 Arguments:
 	$user
@@ -435,7 +435,7 @@ Arguments:
 correspond_acknowledge_user
 ---------------------------
 Called from:
-	includes/helpers.php on line 4245
+	includes/helpers.php on line 4243
 
 Arguments:
 	$user
@@ -445,7 +445,7 @@ Arguments:
 correspond_admin_activation
 ---------------------------
 Called from:
-	includes/helpers.php on line 4283
+	includes/helpers.php on line 4281
 
 Arguments:
 	$user
@@ -499,7 +499,7 @@ Arguments:
 add_post
 --------
 Called from:
-	includes/model/Post.php on line 328
+	includes/model/Post.php on line 329
 
 Arguments:
 	$post
@@ -509,7 +509,7 @@ Arguments:
 publish_post
 ------------
 Called from:
-	includes/model/Post.php on line 460
+	includes/model/Post.php on line 462
 
 Arguments:
 	$post
@@ -520,7 +520,7 @@ Arguments:
 update_post
 -----------
 Called from:
-	includes/model/Post.php on line 462
+	includes/model/Post.php on line 464
 
 Arguments:
 	$post
@@ -1165,7 +1165,7 @@ Target:
 keyword_search
 --------------
 Called from:
-	includes/helpers.php on line 1503
+	includes/helpers.php on line 1499
 
 Target:
 	$search
@@ -1180,7 +1180,7 @@ Arguments:
 uploaded
 --------
 Called from:
-	includes/helpers.php on line 3198
+	includes/helpers.php on line 3196
 
 Target:
 	$upload_url
@@ -1192,7 +1192,7 @@ Arguments:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 4143
+	includes/helpers.php on line 4141
 
 Target:
 	$function
@@ -1336,7 +1336,7 @@ Target:
 before_update_post
 ------------------
 Called from:
-	includes/model/Post.php on line 406
+	includes/model/Post.php on line 407
 
 Target:
 	$new_values
@@ -1345,7 +1345,7 @@ Target:
 before_update_post_attributes
 -----------------------------
 Called from:
-	includes/model/Post.php on line 415
+	includes/model/Post.php on line 416
 
 Target:
 	$attributes
@@ -1354,7 +1354,7 @@ Target:
 title_from_excerpt
 ------------------
 Called from:
-	includes/model/Post.php on line 771
+	includes/model/Post.php on line 773
 
 Target:
 	$excerpt
@@ -1363,7 +1363,7 @@ Target:
 title
 -----
 Called from:
-	includes/model/Post.php on line 796
+	includes/model/Post.php on line 798
 
 Target:
 	$title
@@ -1375,7 +1375,7 @@ Arguments:
 excerpt
 -------
 Called from:
-	includes/model/Post.php on line 815
+	includes/model/Post.php on line 817
 
 Target:
 	$excerpt
@@ -1387,7 +1387,7 @@ Arguments:
 feed_content
 ------------
 Called from:
-	includes/model/Post.php on line 834
+	includes/model/Post.php on line 836
 
 Target:
 	$feed_content
@@ -1399,7 +1399,7 @@ Arguments:
 filter_post
 -----------
 Called from:
-	includes/model/Post.php on line 920
+	includes/model/Post.php on line 922
 
 Target:
 	$this
