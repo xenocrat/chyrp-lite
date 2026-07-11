@@ -11,7 +11,8 @@ namespace xenocrat\markdown;
  * Markdown parser for CommonMark.
  *
  * @see https://spec.commonmark.org/
- * @author Carsten Brandt <mail@cebe.cc>
+ * @author Carsten Brandt
+ * @author Daniel Pimley
  */
 class Markdown extends Parser
 {
