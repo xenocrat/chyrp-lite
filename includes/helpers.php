@@ -1172,11 +1172,7 @@
     function timer_start(
     ): float {
         static $timer;
-
-        if (!isset($timer))
-            $timer = microtime(true);
-
-        return $timer;
+        return $timer ?? $timer = microtime(true);
     }
 
     /**
@@ -1816,6 +1812,8 @@
 
         if (!isset($parser)) {
             $parser = new \xenocrat\markdown\ChyrpMarkdown();
+            $parser->maximumNestingLevel = 32;
+            $parser->maximumExecutionTime = 1.0;
             $parser->convertTabsToSpaces = false;
             $parser->html5 = true;
             $parser->keepListStartNumber = true;
