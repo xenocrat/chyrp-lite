@@ -20,7 +20,7 @@ abstract class Parser
 {
 	const VERSION_MAJOR = 4;
 	const VERSION_MINOR = 16;
-	const VERSION_PATCH = 0;
+	const VERSION_PATCH = 1;
 
 	/**
 	 * @var integer - The maximum nesting level for language elements.
@@ -120,6 +120,7 @@ abstract class Parser
 
 		$text = $this->preprocess($text);
 
+		$this->_depth = 0;
 		$this->resetTimer();
 		$this->prepareMarkers($text);
 
@@ -148,6 +149,7 @@ abstract class Parser
 
 		$text = $this->preprocess($text);
 
+		$this->_depth = 0;
 		$this->resetTimer();
 		$this->prepareMarkers($text);
 
@@ -343,7 +345,7 @@ abstract class Parser
 		// Exceeded maximum depth; do not parse input.
 			if ($this->maximumNestingLevelThrow) {
                 throw new RuntimeException(
-                    'Parser exceeded maximum nesting level'
+                    'Parser exceeded maximum nesting level.'
                 );
 			}
 			return [['text', implode("\n", $lines)]];
@@ -353,7 +355,7 @@ abstract class Parser
 		// Exceeded maximum execution time; do not parse input.
 			if ($this->maximumExecutionTimeThrow) {
                 throw new RuntimeException(
-                    'Parser exceeded maximum execution time'
+                    'Parser exceeded maximum execution time.'
                 );
 			}
 			return [['text', implode("\n", $lines)]];
@@ -571,7 +573,7 @@ abstract class Parser
 		// Exceeded maximum depth; do not parse input.
 			if ($this->maximumNestingLevelThrow) {
                 throw new RuntimeException(
-                    'Parser exceeded maximum nesting level'
+                    'Parser exceeded maximum nesting level.'
                 );
 			}
 			return [['text', $text]];
@@ -581,7 +583,7 @@ abstract class Parser
 		// Exceeded maximum execution time; do not parse input.
 			if ($this->maximumExecutionTimeThrow) {
                 throw new RuntimeException(
-                    'Parser exceeded maximum execution time'
+                    'Parser exceeded maximum execution time.'
                 );
 			}
 			return [['text', $text]];

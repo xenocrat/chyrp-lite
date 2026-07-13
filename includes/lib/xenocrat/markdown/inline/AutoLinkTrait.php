@@ -14,14 +14,15 @@ trait AutoLinkTrait
 {
 	protected function parseAutoUrlMarkers(
 	): array {
-		return array('www.', 'http');
+		return array('www.', 'http://', 'https://');
 	}
 
 	/**
 	 * Parses urls and adds auto linking feature.
 	 *
 	 * @marker www.
-	 * @marker http
+	 * @marker http://
+	 * @marker https://
 	 */
 	protected function parseAutoUrl(
 		$markdown

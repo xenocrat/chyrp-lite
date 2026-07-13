@@ -34,7 +34,7 @@ trait SupSubTrait
 					(?!\+)
 					# Final capture char cannot be backslash or
 					# delimiter but can be an escaped delimiter:
-					(.*?([^\+\\\\]|(?<=\\\\)\+))
+					(.*?(?:[^\+\\\\]|(?<=\\\\)\+))
 					# Closing marker:
 					\1
 					# Next char must not be a delimiter.
@@ -120,7 +120,7 @@ trait SupSubTrait
 					(?!-)
 					# Final capture char cannot be backslash or
 					# delimiter but can be an escaped delimiter:
-					(.*?([^-\\\\]|(?<=\\\\)-))
+					(.*?(?:[^-\\\\]|(?<=\\\\)-))
 					# Closing marker:
 					\1
 					# Next char must not be a delimiter.

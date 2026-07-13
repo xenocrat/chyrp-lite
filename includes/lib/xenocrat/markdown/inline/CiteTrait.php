@@ -37,7 +37,7 @@ trait CiteTrait
 					(?![_\s\p{Zs}\p{Pe}\p{Pf}])
 					# Final capture char cannot be backslash or
 					# delimiter but can be an escaped delimiter:
-					(.*?([^_\\\\]|(?<=\\\\)_))
+					(.*?(?:[^_\\\\]|(?<=\\\\)_))
 					# Last char cannot be whitespace.
 					# Last char cannot be Unicode category Zs, Ps, Pi.
 					(?<![\s\p{Zs}\p{Ps}\p{Pi}])
