@@ -34,7 +34,7 @@ trait CodeTrait
 		$current
 	): array {
 		$content = [];
-		$pad = chr(29);
+		$pad = chr(26);
 
 		// Consume until end of markers...
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {

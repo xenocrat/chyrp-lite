@@ -19,8 +19,8 @@ use RuntimeException;
 abstract class Parser
 {
 	const VERSION_MAJOR = 4;
-	const VERSION_MINOR = 16;
-	const VERSION_PATCH = 1;
+	const VERSION_MINOR = 17;
+	const VERSION_PATCH = 0;
 
 	/**
 	 * @var integer - The maximum nesting level for language elements.
@@ -219,7 +219,9 @@ abstract class Parser
 		$safeChr = "\u{FFFD}";
 		$markup = rtrim($markup, "\n");
 		$markup = str_replace("\0", $safeChr, $markup);
-		$markup = preg_replace('/&\#[Xx]?0+;/', $safeChr, $markup);
+		$markup =
+			preg_replace('/&\#[Xx]?0+;/', $safeChr, $markup)
+			?? $markup;
 		return $markup;
 	}
 
@@ -344,9 +346,9 @@ abstract class Parser
 		if ($this->_depth >= $this->maximumNestingLevel) {
 		// Exceeded maximum depth; do not parse input.
 			if ($this->maximumNestingLevelThrow) {
-                throw new RuntimeException(
-                    'Parser exceeded maximum nesting level.'
-                );
+				throw new RuntimeException(
+					'Parser exceeded maximum nesting level.'
+				);
 			}
 			return [['text', implode("\n", $lines)]];
 		}
@@ -354,9 +356,9 @@ abstract class Parser
 		if ($this->checkTimer() > $this->maximumExecutionTime) {
 		// Exceeded maximum execution time; do not parse input.
 			if ($this->maximumExecutionTimeThrow) {
-                throw new RuntimeException(
-                    'Parser exceeded maximum execution time.'
-                );
+				throw new RuntimeException(
+					'Parser exceeded maximum execution time.'
+				);
 			}
 			return [['text', implode("\n", $lines)]];
 		}
@@ -572,9 +574,9 @@ abstract class Parser
 		if ($this->_depth >= $this->maximumNestingLevel) {
 		// Exceeded maximum depth; do not parse input.
 			if ($this->maximumNestingLevelThrow) {
-                throw new RuntimeException(
-                    'Parser exceeded maximum nesting level.'
-                );
+				throw new RuntimeException(
+					'Parser exceeded maximum nesting level.'
+				);
 			}
 			return [['text', $text]];
 		}
@@ -582,9 +584,9 @@ abstract class Parser
 		if ($this->checkTimer() > $this->maximumExecutionTime) {
 		// Exceeded maximum execution time; do not parse input.
 			if ($this->maximumExecutionTimeThrow) {
-                throw new RuntimeException(
-                    'Parser exceeded maximum execution time.'
-                );
+				throw new RuntimeException(
+					'Parser exceeded maximum execution time.'
+				);
 			}
 			return [['text', $text]];
 		}
@@ -852,21 +854,25 @@ abstract class Parser
 		}
 
 		$expanded = '';
-		$lines = preg_split(
-			"/(\n)/",
-			$text,
-			-1,
-			PREG_SPLIT_DELIM_CAPTURE
-		);
+		$lines =
+			preg_split(
+				"/(\n)/",
+				$text,
+				-1,
+				PREG_SPLIT_DELIM_CAPTURE
+			)
+			?: [$lines];
 
 		foreach ($lines as $line) {
 			$output = '';
-			$chunks = preg_split(
-				"/(\t)/",
-				$line,
-				-1,
-				PREG_SPLIT_DELIM_CAPTURE
-			);
+			$chunks =
+				preg_split(
+					"/(\t)/",
+					$line,
+					-1,
+					PREG_SPLIT_DELIM_CAPTURE
+				)
+				?: [$chunks];
 
 			foreach ($chunks as $chunk) {
 				if ($chunk === "\t") {
@@ -903,19 +909,19 @@ abstract class Parser
 
 		$c = preg_quote($chr, '/');
 		$collapsed = '';
-		$lines = preg_split(
-			"/(\n)/",
-			$text,
-			-1,
-			PREG_SPLIT_DELIM_CAPTURE
-		);
+		$lines =
+			preg_split(
+				"/(\n)/",
+				$text,
+				-1,
+				PREG_SPLIT_DELIM_CAPTURE
+			)
+			?: [$lines];
 
 		foreach ($lines as $line) {
 			$length = strlen(
-				preg_replace(
-					"/^([$c ]*).*$/u", '$1',
-					$line
-				)
+				preg_replace("/^([$c ]*).*$/u", '$1', $line)
+				?? $line
 			);
 			$indent = substr($line, 0, $length);
 			$output = substr($line, $length);
@@ -926,11 +932,9 @@ abstract class Parser
 					$chr => ' '
 				]
 			);
-			$output = preg_replace(
-				"/$c{1,4}/u",
-				"\t",
-				$output
-			);
+			$output =
+				preg_replace("/$c{1,4}/u", "\t", $output)
+				?? $output;
 			$collapsed .= $indent . $output;
 		}
 

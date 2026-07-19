@@ -30,30 +30,18 @@ trait MathTrait
 				'/^
 					# Opening marker:
 					\$`
-					# Final capture char cannot be a delimiter:
-					(.*?[^\\\\])
+					# First char cannot be a delimiter.
+					(?!`)
+					# Capture...
+					# any char except delimiter;
+					# or delimeter run that is not closing marker:
+					((?>(?:[^`]|(?!`\$)`+)+))
 					# Closing marker:
 					`\$/sx',
-				str_replace(
-					'\\\\',
-					'\\\\'.chr(31),
-					$markdown
-				),
+				$markdown,
 				$matches
 			)
 		) {
-			$matches[0] = str_replace(
-				'\\\\'.chr(31),
-				'\\\\',
-				$matches[0]
-			);
-
-			$matches[1] = str_replace(
-				'\\\\'.chr(31),
-				'\\\\',
-				$matches[1]
-			);
-
 			$math = str_replace("\n", ' ', $matches[1]);
 
 			if (

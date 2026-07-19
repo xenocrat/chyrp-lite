@@ -161,42 +161,44 @@ trait FootnoteTrait
 		$uncertaintyChr = "\u{2BD1}";
 
 		// Replace all footnote placeholder links with their sorted numbers.
-		return preg_replace_callback(
-			"/\u{FFFC}footnote-(refnum|num)(.*?)\u{FFFC}/",
-			function ($match) use ($footnotesSorted, $uncertaintyChr) {
-				$footnoteLabel = $this->footnoteLinks[$match[2]];
+		return
+			preg_replace_callback(
+				"/\u{FFFC}footnote-(refnum|num)((?:(?!\u{FFFC}).)*)\u{FFFC}/",
+				function ($match) use ($footnotesSorted, $uncertaintyChr) {
+					$footnoteLabel = $this->footnoteLinks[$match[2]];
 
-				if (!isset($footnotesSorted[$footnoteLabel])) {
-				// This is a link to a missing footnote.
-					// Return the uncertainty sign.
-					return $uncertaintyChr
-						. ($match[1] === 'refnum' ? '-' . $match[2] : '');
-				}
+					if (!isset($footnotesSorted[$footnoteLabel])) {
+					// This is a link to a missing footnote.
+						// Return the uncertainty sign.
+						return $uncertaintyChr
+							. ($match[1] === 'refnum' ? '-' . $match[2] : '');
+					}
 
-				if ($match[1] === 'num') {
-				// Replace only the footnote number.
-					return $footnotesSorted[$footnoteLabel]['num'];
-				}
+					if ($match[1] === 'num') {
+					// Replace only the footnote number.
+						return $footnotesSorted[$footnoteLabel]['num'];
+					}
 
-				if (count($footnotesSorted[$footnoteLabel]['refs']) > 1) {
-				// For backlinks:
-				// some have a footnote number and an additional link number.
-				// If footnote is referenced more than once, add `-n` suffix.
-					$linkNum = array_search(
-						$match[2],
-						$footnotesSorted[$footnoteLabel]['refs']
-					);
+					if (count($footnotesSorted[$footnoteLabel]['refs']) > 1) {
+					// For backlinks:
+					// some have a footnote number and an additional link number.
+					// If footnote is referenced more than once, add `-n` suffix.
+						$linkNum = array_search(
+							$match[2],
+							$footnotesSorted[$footnoteLabel]['refs']
+						);
 
-					return $footnotesSorted[$footnoteLabel]['num']
-						. '-'
-						. $linkNum;
-				} else {
-				// Otherwise, just the number.
-					return $footnotesSorted[$footnoteLabel]['num'];
-				}
-			},
-			$html
-		);
+						return $footnotesSorted[$footnoteLabel]['num']
+							. '-'
+							. $linkNum;
+					} else {
+					// Otherwise, just the number.
+						return $footnotesSorted[$footnoteLabel]['num'];
+					}
+				},
+				$html
+			)
+			?? $html;
 	}
 
 	protected function parseFootnoteLinkMarkers(
@@ -218,27 +220,11 @@ trait FootnoteTrait
 			// Link?
 			&& preg_match(
 				'/(?(R)\[|^\[\^)
-					((?>([^\[\]\\\\]|\\\\[\[\]]|\\\\)+|(?R))+)\]/x',
-				str_replace(
-					'\\\\',
-					'\\\\'.chr(31),
-					$text
-				),
+					((?>(?:\\\\.|[^\[\]\\\\])+|(?R))+)\]/x',
+				$text,
 				$matches
 			)
 		) {
-			$matches[0] = str_replace(
-				'\\\\'.chr(31),
-				'\\\\',
-				$matches[0]
-			);
-
-			$matches[1] = str_replace(
-				'\\\\'.chr(31),
-				'\\\\',
-				$matches[1]
-			);
-
 			$footnoteLabel = function_exists("mb_convert_case") ?
 				mb_convert_case($matches[1], MB_CASE_FOLD, 'UTF-8') :
 				strtolower($matches[1]);
@@ -306,13 +292,9 @@ trait FootnoteTrait
 	): bool {
 		return preg_match(
 			'/(?(R)\[|^[ ]{0,3}\[\^)
-				((?>(?:[^\[\]\\\\]|\\\\[\[\]]|\\\\)+|(?R))+)
+				((?>(?:\\\\.|[^\[\]\\\\])+|(?R))+)
 				(?(R)\]|\]:)/x',
-			str_replace(
-				'\\\\',
-				'\\\\'.chr(31),
-				$line
-			)
+			$line
 		);
 	}
 
@@ -326,36 +308,20 @@ trait FootnoteTrait
 		$footnotes = [];
 		$parsedFootnotes = [];
 		$mw = 0;
-		$pad = chr(29);
+		$pad = chr(26);
 
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
 			$line = $this->expandTabs($lines[$i], $pad);
 			$startsFootnote = preg_match(
 				'/(?(R)\[|^[ ]{0,3}\[\^)
-					((?>(?:[^\[\]\\\\]|\\\\[\[\]]|\\\\)+|(?R))+)
-					(?(R)\]|\]:[ \x1D]*)/x',
-				str_replace(
-					'\\\\',
-					'\\\\'.chr(31),
-					$line
-				),
+					((?>(?:\\\\.|[^\[\]\\\\])+|(?R))+)
+					(?(R)\]|\]:[ \x1A]*)/x',
+				$line,
 				$matches
 			);
 
 			if ($startsFootnote) {
 			// The start of a footnote.
-				$matches[0] = str_replace(
-					'\\\\'.chr(31),
-					'\\\\',
-					$matches[0]
-				);
-
-				$matches[1] = str_replace(
-					'\\\\'.chr(31),
-					'\\\\',
-					$matches[1]
-				);
-
 				$label = function_exists("mb_convert_case") ?
 					mb_convert_case($matches[1], MB_CASE_FOLD, 'UTF-8') :
 					strtolower($matches[1]);

@@ -159,43 +159,22 @@ trait LinkTrait
 			return false;
 		}
 
-		$regexable = str_replace(
-			'\\\\',
-			'\\\\'.chr(31),
-			$markdown
-		);
-
 		if (
 			preg_match(
 				'/(?(R)|^)
-					\[((?>(?:[^\[\]\\\\]|\\\\[\[\]]|\\\\)+|(?R))*)\]/x',
-				$regexable,
+					\[((?>(?:\\\\.|[^\[\]\\\\])+|(?R))*)\]/x',
+				$markdown,
 				$textMatches
 			)
 		) {
 			$offset = strlen($textMatches[0]);
-
-			$textMatches[0] = str_replace(
-				'\\\\'.chr(31),
-				'\\\\',
-				$textMatches[0]
-			);
-
-			$textMatches[1] = str_replace(
-				'\\\\'.chr(31),
-				'\\\\',
-				$textMatches[1]
-			);
-
 			$text = $textMatches[1];
-			$consumed = strlen($textMatches[0]);
-			$regexable = substr($regexable, $offset);
-
+			$substr = substr($markdown, $offset);
 			$context = array_shift($this->context);
 
 			$overrun = $this->detectInlineOverrun(
 				$markdown,
-				$consumed,
+				$offset,
 				['Lt', 'BracketedLink', 'InlineCode']
 			);
 
@@ -210,7 +189,7 @@ trait LinkTrait
 				preg_match(
 					'/(?(R)
 						# In case of pattern recursion match parentheses:
-						\(((?>[^\s\\\\(\[\])]|\\\\[(\[\])]|\\\\)|(?R))*\)
+						\(((?>\\\\[^\s]|[^\s\\\\(\[\])])|(?R))*\)
 						# Otherwise...
 						|
 						# Match opening parentheses:
@@ -218,36 +197,26 @@ trait LinkTrait
 						(?:
 						(
 						# Match a bracketed link:
-						<(?>[^\n\\\\\<\[\]>]|\\\\[<\[\]>]|\\\\)*(?<!\\\\)>
+						<(?>\\\\[^\n]|[^\n\\\\\<\[\]>])*>
 						# Or an unbracketed link:
-						|(?!<)(?:(?>[^ \t\n\\\\(\[\])]|\\\\[(\[\])]|\\\\)|(?R))+
+						|(?!<)(?:(?>\\\\[^ \t\n]|[^ \t\n\\\\(\[\])])|(?R))+
 						)
 						# Match an optional title:
 						(?:
-						[ \t\n]+([\'"]|(\())((?>\\\\.|.(?<!(?(4)\)|\3)))*)
-						(?<!\\\\)(?(4)\)|\3)
+						[ \t\n]+
+						([\'"]|(\())
+						((?>\\\\.|(?!(?(4)\)|\3))[^\\\\])*)
+						(?(4)\)|\3)
 						)?
 						)?
 						# Match closing parentheses:
-						\s*(?<!\\\\)\))/xs',
-					$regexable,
+						\s*\))/xs',
+					$substr,
 					$refMatches
 				)
 			) {
 			// Inline link.
-				$refMatches[0] = str_replace(
-					'\\\\'.chr(31),
-					'\\\\',
-					$refMatches[0]
-				);
-
-				$url = isset($refMatches[2]) ?
-					str_replace(
-						'\\\\'.chr(31),
-						'\\\\',
-						$refMatches[2]
-					) :
-					'';
+				$url = $refMatches[2] ?? '';
 
 				if (
 					str_starts_with($url, '<')
@@ -256,42 +225,28 @@ trait LinkTrait
 					$url = str_replace(' ', '%20', substr($url, 1, -1));
 				}
 
-				$title = empty($refMatches[5]) ?
-					null :
-					str_replace(
-						'\\\\'.chr(31),
-						'\\\\',
-						$refMatches[5]
-					);
+				$title = (isset($refMatches[5]) && $refMatches[5] !== '') ?
+					$refMatches[5] :
+					null;
 
 				return [
 					$text,
 					$url,
 					$title,
-					$consumed + strlen($refMatches[0]),
+					$offset + strlen($refMatches[0]),
 					null,
 				];
 			} elseif (
 				preg_match(
-					'/^(\[((?>[^\\\\\[\]]|\\\\[\[\]]|\\\\)*)(?<!\\\\)\])?/',
-					$regexable,
+					'/^(\[((?>\\\\.|[^\\\\\[\]])*)\])?/',
+					$substr,
 					$refMatches
 				)
 			) {
 			// Reference style link.
-				$refMatches[0] = str_replace(
-					'\\\\'.chr(31),
-					'\\\\',
-					$refMatches[0]
-				);
-
-				$label = empty($refMatches[2]) ?
-					$text :
-					str_replace(
-						'\\\\'.chr(31),
-						'\\\\',
-						$refMatches[2]
-					);
+				$label = (isset($refMatches[2]) && $refMatches[2] !== '') ?
+					$refMatches[2] :
+					$text;
 
 				$label = function_exists("mb_convert_case") ?
 					mb_convert_case($label, MB_CASE_FOLD, 'UTF-8') :
@@ -304,7 +259,7 @@ trait LinkTrait
 					$text,
 					$url,
 					$title,
-					$consumed + strlen($refMatches[0]),
+					$offset + strlen($refMatches[0]),
 					$label,
 				];
 			}
@@ -396,7 +351,9 @@ trait LinkTrait
 	protected function lookupReference(
 		$label
 	): array|false {
-		$normalizedKey = preg_replace('/\s+/', ' ', $label);
+		$normalizedKey =
+			preg_replace('/\s+/', ' ', $label)
+			?? $label;
 
 		if (
 			isset($this->references[$label])
@@ -539,32 +496,30 @@ trait LinkTrait
 			&& preg_match(
 					'/(?(R)
 						# In case of pattern recursion match parentheses:
-						\(((?>[^\s\\\\(\[\])]|\\\\[(\[\])]|\\\\)|(?R))*\)
+						\(((?>\\\\[^\s]|[^\s\\\\(\[\])])|(?R))*\)
 						# Otherwise...
 						|
 						# Match the link label:
 						^[ ]{0,3}
-						\[((?:[^\\\\\[\]]|\\\\[\[\]]|\\\\)+)(?<!\\\\)\]:\s*
+						\[((?:\\\\.|[^\\\\\[\]])+)\]:\s*
 						(?:
 						(
 						# Match a bracketed link:
-						<(?>[^\n\\\\\<\[\]>]|\\\\[<\[\]>]|\\\\)*(?<!\\\\)>
+						<(?>\\\\.|[^\\\\\<\[\]>]+)*>
 						# Or an unbracketed link:
-						|(?!<)(?:(?>[^ \t\n\\\\(\[\])]|\\\\[(\[\])]|\\\\)|(?R))+
+						|(?!<)(?:(?>\\\\[^ \t]|[^ \t\\\\(\[\])])|(?R))+
 						)
 						# Match an optional title:
 						(?:
-						[ \t\n]+([\'"]|(\())((?>\\\\.|.(?<!(?(5)\)|\4)))*)
-						(?<!\\\\)(?(5)\)|\4)
+						[ \t]+
+						([\'"]|(\())
+						((?>\\\\.|(?!(?(5)\)|\4))[^\\\\])*)
+						(?(5)\)|\4)
 						)?
 						)?
 						# Allow trailing space but nothing else:
 						\s*$)/x',
-				str_replace(
-					'\\\\',
-					'\\\\'.chr(31),
-					$line
-				)
+				$line
 			)
 		);
 	}
@@ -581,51 +536,38 @@ trait LinkTrait
 			&& preg_match(
 					'/(?(R)
 						# In case of pattern recursion match parentheses:
-						\(((?>[^\s\\\\(\[\])]|\\\\[(\[\])]|\\\\)|(?R))*\)
+						\(((?>\\\\[^\s]|[^\s\\\\(\[\])])|(?R))*\)
 						# Otherwise...
 						|
 						# Match the link label:
 						^[ ]{0,3}
-						\[((?:[^\\\\\[\]]|\\\\[\[\]]|\\\\)+)(?<!\\\\)\]:\s*
+						\[((?:\\\\.|[^\\\\\[\]])+)\]:\s*
 						(?:
 						(
 						# Match a bracketed link:
-						<(?>[^\n\\\\\<\[\]>]|\\\\[<\[\]>]|\\\\)*(?<!\\\\)>
+						<(?>\\\\.|[^\\\\\<\[\]>]+)*>
 						# Or an unbracketed link:
-						|(?!<)(?:(?>[^ \t\n\\\\(\[\])]|\\\\[(\[\])]|\\\\)|(?R))+
+						|(?!<)(?:(?>\\\\[^ \t]|[^ \t\\\\(\[\])])|(?R))+
 						)
 						# Match an optional title:
 						(?:
-						[ \t\n]+([\'"]|(\())((?>\\\\.|.(?<!(?(5)\)|\4)))*)
-						(?<!\\\\)(?(5)\)|\4)
+						[ \t]+
+						([\'"]|(\())
+						((?>\\\\.|(?!(?(5)\)|\4))[^\\\\])*)
+						(?(5)\)|\4)
 						)?
 						)?
 						# Allow trailing space but nothing else:
 						\s*$)/x',
-				str_replace(
-					'\\\\',
-					'\\\\'.chr(31),
-					$lines[$current]
-				),
+				$lines[$current],
 				$matches
 			)
 		) {
-			$matches[2] = str_replace(
-				'\\\\'.chr(31),
-				'\\\\',
-				$matches[2]
-			);
-
 			$label = function_exists("mb_convert_case") ?
 				mb_convert_case($matches[2], MB_CASE_FOLD, 'UTF-8') :
 				strtolower($matches[2]);
 
 			if (isset($matches[3])) {
-				$matches[3] = str_replace(
-					'\\\\'.chr(31),
-					'\\\\',
-					$matches[3]
-				);
 				$url = $matches[3];
 			} else {
 			// URL may be on the next line.
@@ -634,32 +576,24 @@ trait LinkTrait
 					&& preg_match(
 						'/(?(R)
 							# In case of pattern recursion match parentheses:
-							\(((?>[^\s\\\\(\[\])]|\\\\[(\[\])]|\\\\)|(?R))*\)
+							\(((?>\\\\[^\s]|[^\s\\\\(\[\])])|(?R))*\)
 							# Otherwise...
 							|
 							# Optional leading spaces:
 							^\s*
 							(
 							# Match a bracketed link:
-							<(?>[^\n\\\\\<\[\]>]|\\\\[<\[\]>]|\\\\)*(?<!\\\\)>
+							<(?>\\\\.|[^\\\\\<\[\]>])*>
 							# Or an unbracketed link:
-							|(?!<)(?:(?>[^\s\\\\(\[\])]|\\\\[(\[\])]|\\\\)|(?R))+
+							|(?!<)(?:(?>\\\\[^\s]|[^\s\\\\(\[\])])|(?R))+
 							)
 							# Allow trailing spaces but nothing else:
 							\s*$)/x',
-						str_replace(
-							'\\\\',
-							'\\\\'.chr(31),
-							$lines[$current + 1]
-						),
+						$lines[$current + 1],
 						$url_matches
 					)
 				) {
-					$url = str_replace(
-						'\\\\'.chr(31),
-						'\\\\',
-						$url_matches[2]
-					);
+					$url = $url_matches[2];
 					$current++;
 				} else {
 				// URL not found - consume lines as paragraph.
@@ -677,11 +611,6 @@ trait LinkTrait
 			$ref = ['url' => $url];
 
 			if (isset($matches[6])) {
-				$matches[6] = str_replace(
-					'\\\\'.chr(31),
-					'\\\\',
-					$matches[6]
-				);
 				$ref['title'] = $matches[6];
 			} else {
 			// Title may be on the next line.
@@ -691,24 +620,17 @@ trait LinkTrait
 						'/^\s*
 							# Match a title:
 							(?:
-							([\'"]|(\())((?>\\\\.|.(?<!(?(2)\)|\1)))*)
-							(?<!\\\\)(?(2)\)|\1)
+							([\'"]|(\())
+							((?>\\\\.|(?!(?(2)\)|\1))[^\\\\])*)
+							(?(2)\)|\1)
 							)
 							# Allow trailing space but nothing else:
 							\s*$/x',
-						str_replace(
-							'\\\\',
-							'\\\\'.chr(31),
-							$lines[$current + 1]
-						),
+						$lines[$current + 1],
 						$title_matches
 					)
 				) {
-					$ref['title'] = str_replace(
-						'\\\\'.chr(31),
-						'\\\\',
-						$title_matches[3]
-					);
+					$ref['title'] = $title_matches[3];
 					$current++;
 				}
 			}

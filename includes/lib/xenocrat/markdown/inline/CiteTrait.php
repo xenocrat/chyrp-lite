@@ -35,34 +35,21 @@ trait CiteTrait
 					# First char cannot be whitespace.
 					# First char cannot be Unicode category Zs, Pe, Pf.
 					(?![_\s\p{Zs}\p{Pe}\p{Pf}])
-					# Final capture char cannot be backslash or
-					# delimiter but can be an escaped delimiter:
-					(.*?(?:[^_\\\\]|(?<=\\\\)_))
+					# Capture...
+					# any backslash escaped char;
+					# or any char except backslash and delimiter;
+					# or delimeter run longer than opening marker;
+					# or delimiter run shorter than opening marker:
+					((?>(?:\\\\.|[^\\\\_]|\1_+|(?!\1\*)_+)+))
 					# Last char cannot be whitespace.
 					# Last char cannot be Unicode category Zs, Ps, Pi.
 					(?<![\s\p{Zs}\p{Ps}\p{Pi}])
 					# Closing marker:
 					\1\*/usx',
-				str_replace(
-					'\\\\',
-					'\\\\'.chr(31),
-					$markdown
-				),
+				$markdown,
 				$matches
 			)
 		) {
-			$matches[0] = str_replace(
-				'\\\\'.chr(31),
-				'\\\\',
-				$matches[0]
-			);
-
-			$matches[2] = str_replace(
-				'\\\\'.chr(31),
-				'\\\\',
-				$matches[2]
-			);
-
 			if (
 				// Inline HTML, link, image, or code takes precedence.
 				!$this->detectInlineOverrun(

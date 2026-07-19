@@ -40,11 +40,9 @@ trait AutoLinkTrait
 			)
 		) {
 			if (str_ends_with($matches[0], ';')) {
-				$matches[0] = preg_replace(
-					'/(&[a-z0-9]+;)+$/i',
-					'',
-					$matches[0]
-				);
+				$matches[0] =
+					preg_replace('/(&[a-z0-9]+;)+$/i', '', $matches[0])
+					?? $matches[0];
 			} else {
 				while (
 					str_ends_with($matches[0], ')')

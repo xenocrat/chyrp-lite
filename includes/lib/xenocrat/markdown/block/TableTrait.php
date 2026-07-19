@@ -30,16 +30,12 @@ trait TableTrait
 			)
 			&& (
 				preg_match_all(
-					'/(?<!^|\\\\)\|(?!$)/',
-					str_replace(
-						'\\\\',
-						'\\\\'.chr(31),
-						$line
-					)
+					'/(?>(?:^|\|)(?:\\\\.|[^\\\\\|])+(?=$|\|))/',
+					$line
 				)
 				===
 				preg_match_all(
-					'/(?<!^)\|(?!$)/',
+					'/(?>(?:^|\|)[^\|]+(?=$|\|))/',
 					$lines[$current + 1]
 				)
 			)
@@ -61,11 +57,8 @@ trait TableTrait
 
 		// Consume until blank line...
 		for ($i = $current, $count = count($lines); $i < $count; $i++) {
-			$line = str_replace(
-				'\\\\',
-				'\\\\'.chr(31),
-				trim($lines[$i])
-			);
+			$line = trim($lines[$i]);
+
 			// Extract alignment from second line.
 			if ($i === $current + 1) {
 				$cols = explode('|', trim($line, ' |'));
@@ -119,27 +112,37 @@ trait TableTrait
 				$line = substr($line, 0, -1);
 			}
 
-			$row = preg_split('/(?<!\\\\)\|/', $line);
 			$r = count($block['rows']);
 
-			foreach ($row as $c => $content) {
-				if ($i !== $current && !isset($cols[$c])) {
-					break;
+			if (
+				preg_match_all(
+					'/(?>(?:^|\|)(?:\\\\.|[^\\\\\|])+(?=$|\|))/',
+					$line,
+					$row,
+					PREG_PATTERN_ORDER
+				)
+			) {
+				foreach ($row[0] as $c => $content) {
+					if ($i !== $current && !isset($cols[$c])) {
+						break;
+					}
+
+					if (str_starts_with($content, '|')) {
+						$content = substr($content, 1);
+					}
+
+					$content = preg_replace_callback(
+						'/\\\\./',
+						function ($match) {
+							return str_ends_with($match[0], '|') ?
+								'|' :
+								$match[0];
+						},
+						$content
+					);
+
+					$block['rows'][$r][$c] = $this->parseInline($content);
 				}
-
-				$content = str_replace(
-					'\|',
-					'|',
-					$content
-				);
-
-				$content = str_replace(
-					'\\\\'.chr(31),
-					'\\\\',
-					$content
-				);
-
-				$block['rows'][$r][$c] = $this->parseInline($content);
 			}
 		}
 

@@ -299,13 +299,13 @@ trait HtmlTrait
 
 			if (
 				// Comment.
-				preg_match('/^<!--(-?>|.*?-->)/s', $markdown, $matches)
+				preg_match('/^<!--(-?>|(?:(?!-->).)*-->)/s', $markdown, $matches)
 				// Processor.
-				|| preg_match('/^<\?.*?\?>/s', $markdown, $matches)
+				|| preg_match('/^<\?(?:(?!\?>).)*\?>/s', $markdown, $matches)
 				// Declaration.
-				|| preg_match('/^<![a-z].*?>/is', $markdown, $matches)
+				|| preg_match('/^<![a-z](?:(?!>).)*>/is', $markdown, $matches)
 				// CDATA.
-				|| preg_match('/^<!\[CDATA\[.*?\]\]>/s', $markdown, $matches)
+				|| preg_match('/^<!\[CDATA\[(?:(?!\]\]).)*\]\]>/s', $markdown, $matches)
 			) {
 				return [['lt', $matches[0]], strlen($matches[0])];
 			}
