@@ -34,6 +34,7 @@ trait EmphStrongTrait
 
 		if (
 			($marker = $markdown[0]) == $markdown[1]
+			&& strspn($markdown, $marker) % 2 === 0
 			// Closing marker?
 			&& strpos($markdown, $marker . $marker, 2) !== false
 		) {
@@ -58,8 +59,9 @@ trait EmphStrongTrait
 				)
 				|| $marker === '_'
 				&& preg_match(
-					# Marker must be preceded by a non-word then 0+ delimeters.
-					'/(^|\W|\b_+)$/u', $preceding
+					# Marker must be preceded by a word break then 0+ delimeters.
+					'/(^|\W|\b_+)$/u',
+					$preceding
 				)
 				&& preg_match(
 					'/
@@ -73,8 +75,9 @@ trait EmphStrongTrait
 						)+?)
 						# Closing marker: cannot be preceded by whitespace.
 						# Cannot be preceded by Unicode category Zs, Ps, Pi.
-						# Must be followed by 0+ delimeters then a non-word.
-						(?(R)\1|(?<![\s\p{Zs}\p{Ps}\p{Pi}])__(?=_*\b))/usx',
+						(?(R)\1|(?<![\s\p{Zs}\p{Ps}\p{Pi}])__
+						# Marker must be followed by 0+ delimeters then a word break.
+						(?=_*\b))/usx',
 					$markdown,
 					$matches
 				)
@@ -115,15 +118,17 @@ trait EmphStrongTrait
 						)+?)
 						# Closing marker: cannot be preceded by whitespace.
 						# Cannot be preceded by Unicode category Zs, Ps, Pi.
-						# Emphasis closing marker cannot form a strong marker.
-						(?(R)\1|(?<![\s\p{Zs}\p{Ps}\p{Pi}])[*](?![*][^*]))/usx',
+						(?(R)\1|(?<![\s\p{Zs}\p{Ps}\p{Pi}])[*]
+						# Closing marker cannot resemble a strong opening marker.
+						(?![*][^*\s\p{Zs}\p{Pe}\p{Pf}][^*]*[*]{2}))/usx',
 					$markdown,
 					$matches
 				)
 				|| $marker === '_'
 				&& preg_match(
-					# Marker must be preceded by a non-word then 0+ delimeters.
-					'/(^|\W|\b_+)$/u', $preceding
+					# Marker must be preceded by a word break then 0+ delimeters.
+					'/(^|\W|\b_+)$/u',
+					$preceding
 				)
 				&& preg_match(
 					'/
@@ -137,8 +142,9 @@ trait EmphStrongTrait
 						)+?)
 						# Closing marker: cannot be preceded by whitespace.
 						# Cannot be preceded by Unicode category Zs, Ps, Pi.
-						# Must be followed by 0+ delimeters then a non-word.
-						(?(R)\1|(?<![\s\p{Zs}\p{Ps}\p{Pi}])_(?=_*\b))/usx',
+						(?(R)\1|(?<![\s\p{Zs}\p{Ps}\p{Pi}])_
+						# Marker must be followed by 0+ delimeters then a word break.
+						(?=_*\b))/usx',
 					$markdown,
 					$matches
 				)
