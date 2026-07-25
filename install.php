@@ -700,63 +700,83 @@
             'use strict';
 
             $(function() {
-                $("#password1").keyup(function(e) {
-                    var password = $(this).val();
+                $("#password1").on(
+                    "keyup input",
+                    function(e) {
+                        var password = $(this).val();
 
-                    if (passwordStrength(password) > 99)
-                        $(this).addClass("strong");
-                    else
-                        $(this).removeClass("strong");
-                });
-
-                $("#password1, #password2").keyup(function(e) {
-                    var password1 = $("#password1").val();
-                    var password2 = $("#password2").val();
-
-                    if (password1 != "" && password1 != password2)
-                        $("#password2").addClass("error");
-                    else
-                        $("#password2").removeClass("error");
-                });
-
-                $("#installer").on("submit", function(e) {
-                    var password1 = $("#password1").val();
-                    var password2 = $("#password2").val();
-
-                    if (password1 != password2) {
-                        e.preventDefault();
-                        alert('<?php echo __("Passwords do not match."); ?>');
+                        if (passwordStrength(password) > 99)
+                            $(this).addClass("strong");
+                        else
+                            $(this).removeClass("strong");
                     }
-                });
+                );
 
-                $("#url").keyup(function(e) {
-                    var text = $(this).val();
+                $("#password1, #password2").on(
+                    "keyup input",
+                    function(e) {
+                        var password1 = $("#password1").val();
+                        var password2 = $("#password2").val();
 
-                    if (text != "" && !isURL(text))
-                        $(this).addClass("error");
-                    else
-                        $(this).removeClass("error");
-                });
+                        if (password1 != "" && password1 != password2)
+                            $("#password2").addClass("error");
+                        else
+                            $("#password2").removeClass("error");
+                    }
+                );
 
-                $("#url").on("change", function(e) {
-                    var text = $(this).val();
+                $("#installer").on(
+                    "submit",
+                    function(e) {
+                        var password1 = $("#password1").val();
+                        var password2 = $("#password2").val();
 
-                    if (isURL(text))
-                        $(this).val(addScheme(text));
-                });
+                        if (password1 != password2) {
+                            e.preventDefault();
+                            alert('<?php echo __("Passwords do not match."); ?>');
+                        }
+                    }
+                );
 
-                $("#email").keyup(function(e) {
-                    var text = $(this).val();
+                $("#url").on(
+                    "keyup input",
+                    function(e) {
+                        var text = $(this).val();
 
-                    if (text != "" && !isEmail(text))
-                        $(this).addClass("error");
-                    else
-                        $(this).removeClass("error");
-                });
+                        if (text != "" && !isURL(text))
+                            $(this).addClass("error");
+                        else
+                            $(this).removeClass("error");
+                    }
+                );
 
-                $("#locale").change(function(e) {
-                    $("#installer").submit();
-                });
+                $("#url").on(
+                    "change",
+                    function(e) {
+                        var text = $(this).val();
+
+                        if (isURL(text))
+                            $(this).val(addScheme(text));
+                    }
+                );
+
+                $("#email").on(
+                    "keyup input",
+                    function(e) {
+                        var text = $(this).val();
+
+                        if (text != "" && !isEmail(text))
+                            $(this).addClass("error");
+                        else
+                            $(this).removeClass("error");
+                    }
+                );
+
+                $("#locale").change(
+                    function(e) {
+                        $("#installer").submit();
+                    }
+                );
             });
         </script>
     </head>
