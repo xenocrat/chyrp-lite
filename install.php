@@ -701,7 +701,7 @@
 
             $(function() {
                 $("#password1").on(
-                    "keyup input",
+                    "input",
                     function(e) {
                         var password = $(this).val();
 
@@ -713,7 +713,7 @@
                 );
 
                 $("#password1, #password2").on(
-                    "keyup input",
+                    "input",
                     function(e) {
                         var password1 = $("#password1").val();
                         var password2 = $("#password2").val();
@@ -739,7 +739,7 @@
                 );
 
                 $("#url").on(
-                    "keyup input",
+                    "input",
                     function(e) {
                         var text = $(this).val();
 
@@ -761,7 +761,7 @@
                 );
 
                 $("#email").on(
-                    "keyup input",
+                    "input",
                     function(e) {
                         var text = $(this).val();
 
@@ -772,7 +772,8 @@
                     }
                 );
 
-                $("#locale").change(
+                $("#locale").on(
+                    "change",
                     function(e) {
                         $("#installer").submit();
                     }
