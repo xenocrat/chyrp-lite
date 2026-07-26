@@ -63,7 +63,7 @@ msgstr "سلسلة الاستعلام"
 msgid "Parameters"
 msgstr "البارامترات"
 
-#: includes/class/Query.php:202 includes/class/SQL.php:156 install.php:852
+#: includes/class/Query.php:202 includes/class/SQL.php:156 install.php:873
 #, php-format
 msgid "Database error: %s"
 msgstr "خطأ في قاعدة البيانات: %s"
@@ -111,7 +111,7 @@ msgstr "المُتحكم بالمسار المُدخل غير صالح."
 #: includes/helpers.php:3358 includes/lib/ThumbnailFile.php:323
 #: includes/lib/ThumbnailFile.php:354 includes/lib/ThumbnailFile.php:408
 #: includes/lib/ThumbnailFile.php:469 includes/thumbnail.php:15
-#: install.php:1139 upgrade.php:181 upgrade.php:198 upgrade.php:215
+#: install.php:1160 upgrade.php:181 upgrade.php:198 upgrade.php:215
 #: upgrade.php:232 upgrade.php:249 upgrade.php:270 upgrade.php:316
 #: upgrade.php:333 upgrade.php:354 upgrade.php:371 upgrade.php:388
 #: upgrade.php:405 upgrade.php:426 upgrade.php:443 upgrade.php:577
@@ -411,7 +411,7 @@ msgid "Please enter a username for the account."
 msgstr "الرجاء إدخال اسم المستخدم لهذا الحساب."
 
 #: includes/controller/Admin.php:1070 includes/controller/Admin.php:1253
-#: includes/controller/Main.php:841 install.php:795
+#: includes/controller/Main.php:841 install.php:816
 msgid "Invalid username."
 msgstr "اسم مستخدم غير صالح."
 
@@ -421,13 +421,13 @@ msgid "That username is already in use."
 msgstr "اسم المستخدم هذا مُسجل مسبقاً."
 
 #: includes/controller/Admin.php:1086 includes/controller/Main.php:855
-#: includes/controller/Main.php:1280 install.php:798
+#: includes/controller/Main.php:1280 install.php:819
 msgid "Passwords cannot be blank."
 msgstr "لا يمكن أن تكون كلمات المرور فارغة."
 
 #: includes/controller/Admin.php:1093 includes/controller/Admin.php:1286
 #: includes/controller/Main.php:859 includes/controller/Main.php:1114
-#: includes/controller/Main.php:1284 install.php:728 install.php:800
+#: includes/controller/Main.php:1284 install.php:736 install.php:821
 msgid "Passwords do not match."
 msgstr "كلمة المرور غير متطابقة."
 
@@ -437,13 +437,13 @@ msgstr "الرجاء وضع كلمة مرور أقوى لهذا المستخدم
 
 #: includes/controller/Admin.php:1105 includes/controller/Admin.php:1305
 #: includes/controller/Admin.php:3430 includes/controller/Main.php:868
-#: includes/controller/Main.php:1127 install.php:803
+#: includes/controller/Main.php:1127 install.php:824
 msgid "Email address cannot be blank."
 msgstr "لا يمكن أن يكون عنوان البريد الإلكتروني فارغاً."
 
 #: includes/controller/Admin.php:1112 includes/controller/Admin.php:1312
 #: includes/controller/Admin.php:3437 includes/controller/Main.php:872
-#: includes/controller/Main.php:1131 install.php:805
+#: includes/controller/Main.php:1131 install.php:826
 msgid "Invalid email address."
 msgstr "عنوان البريد الإلكتروني غير صالح."
 
@@ -955,7 +955,7 @@ msgstr "التسجيل متوقف."
 msgid "You cannot register an account because you are already logged in."
 msgstr "لا يمكنك التسجيل لأنك بالفعل مُسجل الدخول."
 
-#: includes/controller/Main.php:834 install.php:790
+#: includes/controller/Main.php:834 install.php:811
 msgid "Please enter a username for your account."
 msgstr "الرجاء إدخال اسم المستخدم للحساب الخاص بك."
 
@@ -1469,39 +1469,39 @@ msgstr "يرجى منح إذن الكتابة CHMOD إلى <em>%s</em>."
 msgid "Chyrp Lite Installer"
 msgstr "مثبت Chyrp Lite"
 
-#: install.php:773
+#: install.php:794
 msgid "Database cannot be blank."
 msgstr "لا يمكن أن يكون حقل قاعدة البيانات فارغ."
 
-#: install.php:776
+#: install.php:797
 msgid "Chyrp URL cannot be blank."
 msgstr "لا يمكن أن يكون رابط Chyrp فارغاً."
 
-#: install.php:778
+#: install.php:799
 msgid "Invalid Chyrp URL."
 msgstr "رابط Chyrp غير صحيح."
 
-#: install.php:781
+#: install.php:802
 msgid "Please enter a name for your website."
 msgstr "الرجاء إدخال اسم لموقعك الإلكتروني."
 
-#: install.php:784
+#: install.php:805
 msgid "Time zone cannot be blank."
 msgstr "يجب إختيار المنطقة الزمنية."
 
-#: install.php:787
+#: install.php:808
 msgid "Language cannot be blank."
 msgstr "يجب إختيار اللغة."
 
-#: install.php:811
+#: install.php:832
 msgid "Could not determine the absolute path to the database."
 msgstr "تعذر تحديد المسار المطلق لقاعدة بيانات."
 
-#: install.php:818
+#: install.php:839
 msgid "Please make the database writable by the server."
 msgstr "الرجاء جعل قاعدة بيانات قابلة للكتابة بواسطة الخادم."
 
-#: install.php:1140 upgrade.php:182 upgrade.php:199 upgrade.php:216
+#: install.php:1161 upgrade.php:182 upgrade.php:199 upgrade.php:216
 #: upgrade.php:233 upgrade.php:250 upgrade.php:271 upgrade.php:317
 #: upgrade.php:334 upgrade.php:355 upgrade.php:372 upgrade.php:389
 #: upgrade.php:406 upgrade.php:427 upgrade.php:444 upgrade.php:578
@@ -1510,53 +1510,53 @@ msgstr "الرجاء جعل قاعدة بيانات قابلة للكتابة ب
 msgid "Could not write the configuration file."
 msgstr "تعذر إنشاء ملف الإعدادات."
 
-#: install.php:1164
+#: install.php:1185
 msgid "Database Setup"
 msgstr "إعداد قاعدة البيانات"
 
-#: install.php:1166
+#: install.php:1187
 msgid "Adapter"
 msgstr ""
 
-#: install.php:1180
+#: install.php:1201
 msgid "Host"
 msgstr "الخادم"
 
-#: install.php:1184
+#: install.php:1205
 msgid "Port"
 msgstr ""
 
-#: install.php:1184 install.php:1213
+#: install.php:1205 install.php:1234
 msgid "(optional)"
 msgstr "(اختياري)"
 
-#: install.php:1188 install.php:1251
+#: install.php:1209 install.php:1272
 msgid "Username"
 msgstr "اسم المستخدم"
 
-#: install.php:1192 install.php:1255 install.php:1259
+#: install.php:1213 install.php:1276 install.php:1280
 msgid "Password"
 msgstr "كلمة المرور"
 
-#: install.php:1196
+#: install.php:1217
 msgid "Database"
 msgstr "قاعدة البيانات"
 
-#: install.php:1198
+#: install.php:1219
 msgid "(absolute or relative path)"
 msgstr "(المسار المطلق أو النسبي)"
 
-#: install.php:1204
+#: install.php:1225
 msgid "Make sure your PostgreSQL database uses UTF-8 encoding."
 msgstr "تأكد من قاعدة بيانات PostgreSQL يستخدم الترميز UTF-8."
 
-#: install.php:1207
+#: install.php:1228
 msgid ""
 "The collation <code>utf8mb4_general_ci</code> is recommended for your MySQL "
 "database."
 msgstr "يوصى بالترتيب <code>utf8mb4_general_ci</code> لقاعدة بيانات MySQL."
 
-#: install.php:1210
+#: install.php:1231
 msgid ""
 "Be sure to put your SQLite database outside the document root directory, "
 "otherwise visitors will be able to download it."
@@ -1564,71 +1564,71 @@ msgstr ""
 "تأكد من وضع قاعدة بيانات SQLite خارج المجلد الأساسي، وإلا سيتمكن الزوار من "
 "تنزيلها."
 
-#: install.php:1213
+#: install.php:1234
 msgid "Table Prefix"
 msgstr "بادئة الجدول"
 
-#: install.php:1216
+#: install.php:1237
 msgid "Website Setup"
 msgstr "إعداد الموقع"
 
-#: install.php:1218
+#: install.php:1239
 msgid "Chyrp URL"
 msgstr "رابط Chyrp"
 
-#: install.php:1222
+#: install.php:1243
 msgid "Site Name"
 msgstr "اسم الموقع"
 
-#: install.php:1223
+#: install.php:1244
 msgid "My Awesome Site"
 msgstr "موقعي الرائع"
 
-#: install.php:1226
+#: install.php:1247
 msgid "Description"
 msgstr "الوصف"
 
-#: install.php:1230
+#: install.php:1251
 msgid "Time Zone"
 msgstr "المنطقة الزمنية"
 
-#: install.php:1240
+#: install.php:1261
 msgid "Language"
 msgstr "اللغة"
 
-#: install.php:1249
+#: install.php:1270
 msgid "Admin Account"
 msgstr "حساب المدير"
 
-#: install.php:1259
+#: install.php:1280
 msgid "(again)"
 msgstr "(مرة أخرى)"
 
-#: install.php:1263
+#: install.php:1284
 msgid "Email Address"
 msgstr "البريد الإلكتروني"
 
-#: install.php:1266
+#: install.php:1287
 msgid "Install me!"
 msgstr "قم بتثبيتي!"
 
-#: install.php:1269
+#: install.php:1290
 msgid "Installation Complete"
 msgstr "اكتمل التثبيت"
 
-#: install.php:1270 upgrade.php:1229
+#: install.php:1291 upgrade.php:1229
 msgid "What now?"
 msgstr "ماذا الآن؟"
 
-#: install.php:1272
+#: install.php:1293
 msgid "Delete <em>install.php</em>, you won't need it anymore."
 msgstr "احذف <em>install.php</em>، لن تحتاج إليه بعد الآن."
 
-#: install.php:1273
+#: install.php:1294
 msgid "Log in to your site and configure things to your liking."
 msgstr "سجّل الدخول إلى موقعك وقم بتهيئة الأشياء كيفما أحببت."
 
-#: install.php:1276 upgrade.php:1236
+#: install.php:1297 upgrade.php:1236
 msgid "Take me to my site!"
 msgstr "خذني إلى موقعي!"
 

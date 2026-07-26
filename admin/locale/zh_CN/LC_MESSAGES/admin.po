@@ -181,8 +181,8 @@ msgstr "结果"
 msgid "### Heading"
 msgstr ""
 
-#: admin/help/markdown.twig:20 admin/javascripts/admin.js.php:674
-#: admin/javascripts/admin.js.php:675
+#: admin/help/markdown.twig:20 admin/javascripts/admin.js.php:680
+#: admin/javascripts/admin.js.php:681
 msgid "Heading"
 msgstr ""
 
@@ -190,8 +190,8 @@ msgstr ""
 msgid "**Strong**"
 msgstr ""
 
-#: admin/help/markdown.twig:24 admin/javascripts/admin.js.php:693
-#: admin/javascripts/admin.js.php:694
+#: admin/help/markdown.twig:24 admin/javascripts/admin.js.php:699
+#: admin/javascripts/admin.js.php:700
 msgid "Strong"
 msgstr ""
 
@@ -199,8 +199,8 @@ msgstr ""
 msgid "*Emphasis*"
 msgstr ""
 
-#: admin/help/markdown.twig:28 admin/javascripts/admin.js.php:712
-#: admin/javascripts/admin.js.php:713
+#: admin/help/markdown.twig:28 admin/javascripts/admin.js.php:718
+#: admin/javascripts/admin.js.php:719
 msgid "Emphasis"
 msgstr ""
 
@@ -216,8 +216,8 @@ msgstr ""
 msgid "~~Strikethrough~~"
 msgstr ""
 
-#: admin/help/markdown.twig:36 admin/javascripts/admin.js.php:731
-#: admin/javascripts/admin.js.php:732
+#: admin/help/markdown.twig:36 admin/javascripts/admin.js.php:737
+#: admin/javascripts/admin.js.php:738
 msgid "Strikethrough"
 msgstr ""
 
@@ -225,8 +225,8 @@ msgstr ""
 msgid "`Code`"
 msgstr ""
 
-#: admin/help/markdown.twig:40 admin/javascripts/admin.js.php:750
-#: admin/javascripts/admin.js.php:751
+#: admin/help/markdown.twig:40 admin/javascripts/admin.js.php:756
+#: admin/javascripts/admin.js.php:757
 msgid "Code"
 msgstr ""
 
@@ -266,8 +266,8 @@ msgstr "新行"
 msgid "[title](URL)"
 msgstr ""
 
-#: admin/help/markdown.twig:61 admin/javascripts/admin.js.php:769
-#: admin/javascripts/admin.js.php:770
+#: admin/help/markdown.twig:61 admin/javascripts/admin.js.php:775
+#: admin/javascripts/admin.js.php:776
 msgid "Hyperlink"
 msgstr ""
 
@@ -275,8 +275,8 @@ msgstr ""
 msgid "![description](URL)"
 msgstr ""
 
-#: admin/help/markdown.twig:65 admin/javascripts/admin.js.php:845
-#: admin/javascripts/admin.js.php:846
+#: admin/help/markdown.twig:65 admin/javascripts/admin.js.php:851
+#: admin/javascripts/admin.js.php:852
 msgid "Image"
 msgstr "图像"
 
@@ -296,8 +296,8 @@ msgstr ""
 msgid "> Blockquote"
 msgstr ""
 
-#: admin/help/markdown.twig:77 admin/javascripts/admin.js.php:807
-#: admin/javascripts/admin.js.php:808
+#: admin/help/markdown.twig:77 admin/javascripts/admin.js.php:813
+#: admin/javascripts/admin.js.php:814
 msgid "Blockquote"
 msgstr ""
 
@@ -305,8 +305,8 @@ msgstr ""
 msgid "< Aside"
 msgstr ""
 
-#: admin/help/markdown.twig:81 admin/javascripts/admin.js.php:826
-#: admin/javascripts/admin.js.php:827
+#: admin/help/markdown.twig:81 admin/javascripts/admin.js.php:832
+#: admin/javascripts/admin.js.php:833
 msgid "Aside"
 msgstr ""
 
@@ -386,72 +386,72 @@ msgstr "表情符号"
 msgid "Toggle All"
 msgstr "全部切换"
 
-#: admin/javascripts/admin.js.php:178 admin/javascripts/admin.js.php:189
+#: admin/javascripts/admin.js.php:183 admin/javascripts/admin.js.php:194
 msgid "Are you sure you want to proceed?"
 msgstr "确定继续？"
 
-#: admin/javascripts/admin.js.php:254
+#: admin/javascripts/admin.js.php:259
 msgid "File upload failed."
 msgstr "文件上传失败。"
 
-#: admin/javascripts/admin.js.php:255
+#: admin/javascripts/admin.js.php:260
 msgid "File type not supported."
 msgstr "不支持文件类型。"
 
-#: admin/javascripts/admin.js.php:256
+#: admin/javascripts/admin.js.php:261
 #, php-format
 msgid "Maximum file size: %d Megabytes."
 msgstr "最大文件大小：%d兆字节。"
 
-#: admin/javascripts/admin.js.php:320 admin/javascripts/admin.js.php:467
-#: admin/javascripts/admin.js.php:1561
+#: admin/javascripts/admin.js.php:325 admin/javascripts/admin.js.php:473
+#: admin/javascripts/admin.js.php:1567
 msgid "Modal window"
 msgstr "模态窗口"
 
-#: admin/javascripts/admin.js.php:329 admin/pages/manage_uploads.twig:18
+#: admin/javascripts/admin.js.php:334 admin/pages/manage_uploads.twig:18
 msgid "Uploads"
 msgstr "上传"
 
-#: admin/javascripts/admin.js.php:355 admin/javascripts/admin.js.php:493
-#: admin/javascripts/admin.js.php:1593
+#: admin/javascripts/admin.js.php:360 admin/javascripts/admin.js.php:499
+#: admin/javascripts/admin.js.php:1599
 msgid "Close"
 msgstr "关闭"
 
-#: admin/javascripts/admin.js.php:476
+#: admin/javascripts/admin.js.php:482
 msgid "Help content"
 msgstr "帮助内容"
 
-#: admin/javascripts/admin.js.php:538 admin/javascripts/admin.js.php:539
+#: admin/javascripts/admin.js.php:544 admin/javascripts/admin.js.php:545
 #: admin/pages/manage_groups.twig:52 admin/pages/manage_pages.twig:69
 #: admin/pages/manage_posts.twig:57 admin/pages/manage_uploads.twig:73
 #: admin/pages/manage_users.twig:60
 msgid "Edit"
 msgstr "编辑"
 
-#: admin/javascripts/admin.js.php:559 admin/javascripts/admin.js.php:560
-#: admin/javascripts/admin.js.php:866 admin/javascripts/admin.js.php:867
+#: admin/javascripts/admin.js.php:565 admin/javascripts/admin.js.php:566
+#: admin/javascripts/admin.js.php:872 admin/javascripts/admin.js.php:873
 msgid "Insert"
 msgstr "插入"
 
-#: admin/javascripts/admin.js.php:605 admin/javascripts/admin.js.php:606
-#: admin/javascripts/admin.js.php:912 admin/javascripts/admin.js.php:913
+#: admin/javascripts/admin.js.php:611 admin/javascripts/admin.js.php:612
+#: admin/javascripts/admin.js.php:918 admin/javascripts/admin.js.php:919
 msgid "Upload"
 msgstr "上传"
 
-#: admin/javascripts/admin.js.php:788 admin/javascripts/admin.js.php:789
+#: admin/javascripts/admin.js.php:794 admin/javascripts/admin.js.php:795
 msgid "Horizontal rule"
 msgstr "水平规则"
 
-#: admin/javascripts/admin.js.php:986 admin/javascripts/admin.js.php:987
+#: admin/javascripts/admin.js.php:992 admin/javascripts/admin.js.php:993
 #: admin/pages/themes.twig:25
 msgid "Preview"
 msgstr "预览"
 
-#: admin/javascripts/admin.js.php:1041
+#: admin/javascripts/admin.js.php:1047
 msgid "Words:"
 msgstr "字数："
 
-#: admin/javascripts/admin.js.php:1571
+#: admin/javascripts/admin.js.php:1577
 msgid "Preview content"
 msgstr "预览内容"
 
