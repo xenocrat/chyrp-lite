@@ -73,7 +73,7 @@ function toggle_all(
 function validate_pattern(
 ) {
     $("input[pattern]").on(
-        "keyup input",
+        "input",
         function(e) {
             var value = $(this).val();
             var regexp = new RegExp($(this).attr("pattern"));
@@ -89,7 +89,7 @@ function validate_pattern(
 function validate_email(
 ) {
     $("input[type='email']").on(
-        "keyup input",
+        "input",
         function(e) {
             var text = $(this).val();
 
@@ -104,7 +104,7 @@ function validate_email(
 function validate_url(
 ) {
     $("input[type='url']").on(
-        "keyup input",
+        "input",
         function(e) {
             var text = $(this).val();
 
@@ -136,7 +136,7 @@ function validate_passwords(
     );
 
     passwords.first().on(
-        "keyup input",
+        "input",
         function(e) {
             var password = $(this).val();
 
@@ -148,7 +148,7 @@ function validate_passwords(
     );
 
     passwords.on(
-        "keyup input",
+        "input",
         function(e) {
             var password1 = passwords.first().val();
             var password2 = passwords.last().val();
@@ -421,7 +421,7 @@ var FileInput = {
             ).addClass(
                 "text"
             ).on(
-            "keyup input",
+            "input",
                 function(e) {
                     var value = $(this).val();
                     var regexp = new RegExp($(this).attr("pattern"));
