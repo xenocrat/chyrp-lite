@@ -118,11 +118,7 @@ blockquote, aside, figure, figcaption {
     --chyrp-fill-inset: var(--chyrp-summer-grey);
     --chyrp-fill-input: var(--chyrp-pure-white);
     --chyrp-text-black: var(--chyrp-inky-black);
-    --chyrp-text-black-pcl: var(--chyrp-winter-grey);
-    --chyrp-text-black-pcm: var(--chyrp-pure-black);
     --chyrp-text-white: var(--chyrp-pure-white);
-    --chyrp-text-white-pcl: var(--chyrp-irish-grey);
-    --chyrp-text-white-pcm: var(--chyrp-pure-white);
     --chyrp-text-default: var(--chyrp-text-black);
     --chyrp-text-active: var(--chyrp-strong-blue);
 }
@@ -1576,15 +1572,13 @@ input.toolbar.hidden::file-selector-button {
 /* Group: Contrast preferences */
 
 @media (prefers-contrast: less) {
-    :root {
-        --chyrp-text-black: var(--chyrp-text-black-pcl);
-        --chyrp-text-white: var(--chyrp-text-white-pcl);
+    html {
+        filter: contrast(80%);
     }
 }
 
 @media (prefers-contrast: more) {
-    :root {
-        --chyrp-text-black: var(--chyrp-text-black-pcm);
-        --chyrp-text-white: var(--chyrp-text-white-pcm);
+    html {
+        filter: contrast(120%);
     }
 }
