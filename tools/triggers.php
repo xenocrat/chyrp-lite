@@ -528,6 +528,7 @@
                 --chyrp-pure-white: #ffffff;
                 --chyrp-pure-black: #000000;
                 --chyrp-inky-black: #1f1f23;
+                --chyrp-coal-black: #101010;
                 --chyrp-summer-grey: #fbfbfb;
                 --chyrp-english-grey: #efefef;
                 --chyrp-welsh-grey: #dfdfdf;
@@ -536,10 +537,10 @@
                 --chyrp-winter-grey: #656565;
                 --chyrp-strong-yellow: #ffdd00;
                 --chyrp-strong-orange: #ff7f00;
-                --chyrp-strong-red: #c11600;
-                --chyrp-strong-green: #108600;
-                --chyrp-strong-blue: #1e57ba;
-                --chyrp-strong-purple: #ba1eba;
+                --chyrp-strong-red: #b21400;
+                --chyrp-strong-green: #0c6500;
+                --chyrp-strong-blue: #1e4ea0;
+                --chyrp-strong-purple: #911e91;
                 --chyrp-light-yellow: #fffde6;
                 --chyrp-light-red: #faebe4;
                 --chyrp-light-green: #ebfae4;
@@ -554,17 +555,24 @@
                 --chyrp-border-red: #cdaea5;
                 --chyrp-border-green: #aecda5;
                 --chyrp-border-blue: #a7c1d0;
-                --chyrp-border-purple: #cda5cd;
+                --chyrp-border-purple: #d392d3;
+                --chyrp-border-grey: var(--chyrp-irish-grey);
                 --chyrp-fill-yellow: var(--chyrp-light-yellow);
                 --chyrp-fill-red: var(--chyrp-light-red);
                 --chyrp-fill-green: var(--chyrp-light-green);
                 --chyrp-fill-blue: var(--chyrp-light-blue);
                 --chyrp-fill-purple: var(--chyrp-light-purple);
                 --chyrp-fill-grey: var(--chyrp-english-grey);
-                --chyrp-inset-grey: var(--chyrp-summer-grey);
-                --chyrp-border-grey: var(--chyrp-irish-grey);
+                --chyrp-fill-inset: var(--chyrp-summer-grey);
+                --chyrp-fill-input: var(--chyrp-pure-white);
                 --chyrp-text-black: var(--chyrp-inky-black);
+                --chyrp-text-black-pcl: var(--chyrp-winter-grey);
+                --chyrp-text-black-pcm: var(--chyrp-pure-black);
                 --chyrp-text-white: var(--chyrp-pure-white);
+                --chyrp-text-white-pcl: var(--chyrp-irish-grey);
+                --chyrp-text-white-pcm: var(--chyrp-pure-white);
+                --chyrp-text-default: var(--chyrp-text-black);
+                --chyrp-text-active: var(--chyrp-strong-blue);
             }
             *::selection {
                 color: var(--chyrp-text-black);
@@ -586,7 +594,7 @@
                 font-size: 1rem;
                 font-family: "Open Sans webfont", sans-serif;
                 line-height: 1.5;
-                color: var(--chyrp-text-black);
+                color: var(--chyrp-text-default);
                 tab-size: 4;
                 background: var(--chyrp-english-grey);
                 margin: 2rem;
@@ -615,7 +623,6 @@
             strong {
                 font: inherit;
                 font-weight: bold;
-                color: var(--chyrp-strong-red);
             }
             em, dfn, cite, var {
                 font: inherit;
@@ -666,7 +673,7 @@
             }
             a:link,
             a:visited {
-                color: var(--chyrp-text-black);
+                color: var(--chyrp-text-default);
                 text-decoration: underline;
                 text-underline-offset: 0.125em;
                 text-decoration-thickness: 0.0625em;
@@ -675,7 +682,7 @@
             a:focus,
             a:active {
                 outline: none;
-                color: var(--chyrp-strong-blue);
+                color: var(--chyrp-text-active);
                 text-decoration: underline;
                 text-underline-offset: 0.125em;
                 text-decoration-thickness: 0.0625em;
@@ -691,7 +698,7 @@
                 font: inherit;
                 font-size: 1.25em;
                 text-align: center;
-                color: var(--chyrp-text-black);
+                color: var(--chyrp-text-default);
                 text-decoration: none;
                 margin: 1rem 0rem;
                 padding: 0.5rem 1rem;
@@ -748,34 +755,35 @@
             }
             @media (prefers-color-scheme: dark) {
                 :root {
-                    --chyrp-fill-yellow: var(--chyrp-medium-yellow);
-                    --chyrp-fill-red: var(--chyrp-medium-red);
-                    --chyrp-fill-green: var(--chyrp-medium-green);
-                    --chyrp-fill-blue: var(--chyrp-medium-blue);
-                    --chyrp-fill-purple: var(--chyrp-medium-purple);
-                    --chyrp-fill-grey: var(--chyrp-welsh-grey);
-                    --chyrp-inset-grey: transparent;
-                    --chyrp-border-grey: var(--chyrp-scottish-grey);
+                    --chyrp-fill-yellow: var(--chyrp-coal-black);
+                    --chyrp-fill-red: var(--chyrp-coal-black);
+                    --chyrp-fill-green: var(--chyrp-coal-black);
+                    --chyrp-fill-blue: var(--chyrp-coal-black);
+                    --chyrp-fill-purple: var(--chyrp-coal-black);
+                    --chyrp-fill-grey: var(--chyrp-coal-black);
+                    --chyrp-fill-inset: var(--chyrp-coal-black);
+                    --chyrp-fill-input: var(--chyrp-inky-black);
+                    --chyrp-border-grey: var(--chyrp-winter-grey);
+                    --chyrp-text-default: var(--chyrp-text-white);
+                    --chyrp-text-active: var(--chyrp-strong-orange);
                 }
                 body {
-                    color: var(--chyrp-text-white);
-                    background-color: var(--chyrp-inky-black);
+                    background-color: var(--chyrp-winter-grey);
                 }
                 .window {
-                    color: var(--chyrp-text-black);
-                    background-color: var(--chyrp-english-grey);
+                    background-color: var(--chyrp-pure-black);
                 }
             }
             @media (prefers-contrast: less) {
                 :root {
-                    --chyrp-text-black: var(--chyrp-winter-grey);
-                    --chyrp-text-white: var(--chyrp-summer-grey);
+                    --chyrp-text-black: var(--chyrp-text-black-pcl);
+                    --chyrp-text-white: var(--chyrp-text-white-pcl);
                 }
             }
             @media (prefers-contrast: more) {
                 :root {
-                    --chyrp-border-grey: var(--chyrp-winter-grey);
-                    --chyrp-text-black: var(--chyrp-pure-black);
+                    --chyrp-text-black: var(--chyrp-text-black-pcm);
+                    --chyrp-text-white: var(--chyrp-text-white-pcm)
                 }
             }
         </style>

@@ -80,6 +80,7 @@ blockquote, aside, figure, figcaption {
     --chyrp-pure-white: #ffffff;
     --chyrp-pure-black: #000000;
     --chyrp-inky-black: #1f1f23;
+    --chyrp-coal-black: #101010;
     --chyrp-summer-grey: #fbfbfb;
     --chyrp-english-grey: #efefef;
     --chyrp-welsh-grey: #dfdfdf;
@@ -88,10 +89,10 @@ blockquote, aside, figure, figcaption {
     --chyrp-winter-grey: #656565;
     --chyrp-strong-yellow: #ffdd00;
     --chyrp-strong-orange: #ff7f00;
-    --chyrp-strong-red: #c11600;
-    --chyrp-strong-green: #108600;
-    --chyrp-strong-blue: #1e57ba;
-    --chyrp-strong-purple: #ba1eba;
+    --chyrp-strong-red: #b21400;
+    --chyrp-strong-green: #0c6500;
+    --chyrp-strong-blue: #1e4ea0;
+    --chyrp-strong-purple: #911e91;
     --chyrp-light-yellow: #fffde6;
     --chyrp-light-red: #faebe4;
     --chyrp-light-green: #ebfae4;
@@ -106,17 +107,24 @@ blockquote, aside, figure, figcaption {
     --chyrp-border-red: #cdaea5;
     --chyrp-border-green: #aecda5;
     --chyrp-border-blue: #a7c1d0;
-    --chyrp-border-purple: #cda5cd;
+    --chyrp-border-purple: #d392d3;
+    --chyrp-border-grey: var(--chyrp-irish-grey);
     --chyrp-fill-yellow: var(--chyrp-light-yellow);
     --chyrp-fill-red: var(--chyrp-light-red);
     --chyrp-fill-green: var(--chyrp-light-green);
     --chyrp-fill-blue: var(--chyrp-light-blue);
     --chyrp-fill-purple: var(--chyrp-light-purple);
     --chyrp-fill-grey: var(--chyrp-english-grey);
-    --chyrp-inset-grey: var(--chyrp-summer-grey);
-    --chyrp-border-grey: var(--chyrp-irish-grey);
+    --chyrp-fill-inset: var(--chyrp-summer-grey);
+    --chyrp-fill-input: var(--chyrp-pure-white);
     --chyrp-text-black: var(--chyrp-inky-black);
+    --chyrp-text-black-pcl: var(--chyrp-winter-grey);
+    --chyrp-text-black-pcm: var(--chyrp-pure-black);
     --chyrp-text-white: var(--chyrp-pure-white);
+    --chyrp-text-white-pcl: var(--chyrp-irish-grey);
+    --chyrp-text-white-pcm: var(--chyrp-pure-white);
+    --chyrp-text-default: var(--chyrp-text-black);
+    --chyrp-text-active: var(--chyrp-strong-blue);
 }
 *::selection {
     color: var(--chyrp-text-black);
@@ -129,7 +137,7 @@ body {
     font-family: "Open Sans webfont", sans-serif;
     font-size: 1rem;
     line-height: 1.5;
-    color: var(--chyrp-text-black);
+    color: var(--chyrp-text-default);
     tab-size: 4;
     background-color: var(--chyrp-english-grey);
     min-width: 320px;
@@ -179,8 +187,8 @@ del, s {
 }
 ins {
     font: inherit;
-    color: var(--chyrp-text-black);
-    background-color: var(--chyrp-fill-green);
+    color: var(--chyrp-text-white);
+    background-color: var(--chyrp-strong-green);
 }
 samp {
     font-family: "Cousine webfont", monospace;
@@ -219,7 +227,7 @@ ol {
 }
 a:link,
 a:visited {
-    color: var(--chyrp-text-black);
+    color: var(--chyrp-text-default);
     text-decoration: underline;
     text-underline-offset: 0.125em;
     text-decoration-thickness: 0.0625em;
@@ -228,7 +236,7 @@ a:hover,
 a:focus,
 a:active {
     outline: none;
-    color: var(--chyrp-strong-blue);
+    color: var(--chyrp-text-active);
     text-decoration: underline;
     text-underline-offset: 0.125em;
     text-decoration-thickness: 0.0625em;
@@ -452,7 +460,7 @@ span.pages {
     border-radius: 0.5em;
 }
 #content ul.extend > li {
-    background-color: var(--chyrp-inset-grey);
+    background-color: var(--chyrp-fill-inset);
     border: 1px solid var(--chyrp-border-grey);
 }
 #content ul#modules_enabled > li,
@@ -523,7 +531,7 @@ input[type="checkbox"],
 input[type="radio"] {
     appearance: none;
     box-sizing: border-box;
-    color: var(--chyrp-text-black);
+    color: var(--chyrp-text-default);
     font: inherit;
     font-size: 1.25rem;
     position: relative;
@@ -532,7 +540,7 @@ input[type="radio"] {
     height: 1em;
     border-radius: 0em;
     border: 1px solid var(--chyrp-border-grey);
-    background-color: var(--chyrp-pure-white);
+    background-color: var(--chyrp-fill-input);
 }
 input[type="radio"] {
     border-radius: 50%;
@@ -550,28 +558,28 @@ input[type="range"],
 input[type="password"] {
     box-sizing: border-box;
     width: 20ch;
-    color: var(--chyrp-text-black);
+    color: var(--chyrp-text-default);
     font: inherit;
     font-size: 1.25rem;
     padding: 0.5rem;
     border-radius: 0em;
     border: 1px solid var(--chyrp-border-grey);
-    background-color: var(--chyrp-pure-white);
+    background-color: var(--chyrp-fill-input);
 }
 input[type="file"] {
     box-sizing: border-box;
-    color: var(--chyrp-text-black);
+    color: var(--chyrp-text-default);
     font: inherit;
     font-size: 1.25rem;
     padding: 1rem;
     border-radius: 0em;
     border: 1px solid var(--chyrp-border-grey);
-    background-color: var(--chyrp-pure-white);
+    background-color: var(--chyrp-fill-input);
 }
 html[dir="ltr"] select:not([multiple]) {
     appearance: none;
     padding-right: 1em;
-    background-image: url(../images/icons/select.svg);
+    background-image: url(../images/gadgets/select.svg);
     background-size: 1rem;
     background-position: center right 0.1em;
     background-repeat: no-repeat;
@@ -579,19 +587,19 @@ html[dir="ltr"] select:not([multiple]) {
 html[dir="rtl"] select:not([multiple]) {
     appearance: none;
     padding-left: 1em;
-    background-image: url(../images/icons/select.svg);
+    background-image: url(../images/gadgets/select.svg);
     background-size: 1rem;
     background-position: center left 0.1em;
     background-repeat: no-repeat;
 }
 input[type="checkbox"]:checked {
-    background-image: url(../images/icons/checkbox.svg);
+    background-image: url(../images/gadgets/checkbox.svg);
     background-size: 1rem;
     background-position: center;
     background-repeat: no-repeat;
 }
 input[type="radio"]:checked {
-    background-image: url(../images/icons/radio.svg);
+    background-image: url(../images/gadgets/radio.svg);
     background-size: 1rem;
     background-position: center;
     background-repeat: no-repeat;
@@ -897,7 +905,7 @@ a.prev_page {
     display: inline-block;
     font: inherit;
     font-size: 1.25rem;
-    color: var(--chyrp-text-black);
+    color: var(--chyrp-text-default);
     text-align: center;
     margin: 0rem;
     padding: 0.5rem 1rem;
@@ -938,7 +946,7 @@ a.prev_page:focus-visible {
 }
 button.boo,
 a.button.boo {
-    color: var(--chyrp-text-black);
+    color: var(--chyrp-text-default);
     background-color: var(--chyrp-fill-red);
     border: 2px solid var(--chyrp-border-red);
 }
@@ -952,7 +960,7 @@ a.button.boo:active {
 }
 button.yay,
 a.button.yay {
-    color: var(--chyrp-text-black);
+    color: var(--chyrp-text-default);
     background-color: var(--chyrp-fill-green);
     border: 2px solid var(--chyrp-border-green);
 }
@@ -1019,7 +1027,7 @@ div.more_options {
     gap: 1rem 2rem;
     justify-content: space-between;
     padding: 1rem;
-    background-color: var(--chyrp-inset-grey);
+    background-color: var(--chyrp-fill-inset);
     border: 1px solid var(--chyrp-border-grey);
     border-radius: 0.25rem;
 }
@@ -1069,7 +1077,7 @@ span.options_toolbar {
     gap: 24px;
     justify-content: flex-start;
     width: 100%;
-    background-color: var(--chyrp-inset-grey);
+    background-color: var(--chyrp-fill-inset);
     border: 1px solid var(--chyrp-border-grey);
     border-bottom: none;
     padding: 0.5rem 0.75rem calc(0.5rem + 0.1875rem) 0.75rem;
@@ -1084,7 +1092,7 @@ span.options_tray {
     display: block;
     width: 100%;
     font-size: 0.75rem;
-    background-color: var(--chyrp-inset-grey);
+    background-color: var(--chyrp-fill-inset);
     border: 1px solid var(--chyrp-border-grey);
     border-top: none;
     padding: 0.25rem 0.5rem;
@@ -1102,7 +1110,7 @@ span.options_tray:empty {
     margin-top: 0.25rem;
     padding: 0em 0.25em;
     border-radius: 0.25em;
-    border: 1px solid var(--chyrp-border-grey);
+    border: 2px solid var(--chyrp-border-grey);
     background-color: var(--chyrp-fill-grey);
 }
 *.tag:link,
@@ -1115,7 +1123,7 @@ span.options_tray:empty {
     border-color: var(--chyrp-border-purple);
 }
 *.tag:focus-visible {
-    outline: var(--chyrp-strong-purple) solid 2px;
+    outline: var(--chyrp-strong-purple) solid 3px;
     outline-offset: -2px;
 }
 div.controls,
@@ -1144,7 +1152,7 @@ div.confirmation {
     gap: 0rem 2rem;
     justify-content: space-between;
     padding: 1rem;
-    background-color: var(--chyrp-inset-grey);
+    background-color: var(--chyrp-fill-inset);
     border: 1px solid var(--chyrp-border-grey);
     border-radius: 0.25rem;
 }
@@ -1162,7 +1170,7 @@ button.emblem {
     display: inline;
     font: inherit;
     font-size: 1em;
-    color: var(--chyrp-text-black);
+    color: var(--chyrp-text-default);
     margin: 0rem;
     padding: 0rem;
     background-color: transparent;
@@ -1205,7 +1213,7 @@ label.emblem:active,
 button.emblem:hover,
 button.emblem:focus,
 button.emblem:active {
-    color: var(--chyrp-strong-blue);
+    color: var(--chyrp-text-active);
 }
 a.emblem:focus-visible > svg,
 a.emblem:focus-visible > img,
@@ -1213,7 +1221,7 @@ button.emblem:focus-visible > svg,
 button.emblem:focus-visible > img,
 label.emblem.toolbar > input:focus-visible + svg,
 label.emblem.toolbar > input:focus-visible + img {
-    fill: var(--chyrp-strong-blue);
+    fill: var(--chyrp-text-active);
     outline: var(--chyrp-strong-orange) dashed 2px;
     outline-offset: 2px;
 }
@@ -1246,7 +1254,7 @@ input.toolbar.hidden::file-selector-button {
     left: 0px;
     /* Prevent other elements overlapping */
     z-index: 1;
-    backdrop-filter: blur(4px) contrast(33%);
+    backdrop-filter: blur(4px) contrast(50%)  brightness(50%);
 }
 .iframe_foreground {
     box-sizing: border-box;    
@@ -1494,17 +1502,19 @@ input.toolbar.hidden::file-selector-button {
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --chyrp-fill-yellow: var(--chyrp-medium-yellow);
-        --chyrp-fill-red: var(--chyrp-medium-red);
-        --chyrp-fill-green: var(--chyrp-medium-green);
-        --chyrp-fill-blue: var(--chyrp-medium-blue);
-        --chyrp-fill-purple: var(--chyrp-medium-purple);
-        --chyrp-fill-grey: var(--chyrp-welsh-grey);
-        --chyrp-inset-grey: transparent;
-        --chyrp-border-grey: var(--chyrp-scottish-grey);
+        --chyrp-fill-yellow: var(--chyrp-coal-black);
+        --chyrp-fill-red: var(--chyrp-coal-black);
+        --chyrp-fill-green: var(--chyrp-coal-black);
+        --chyrp-fill-blue: var(--chyrp-coal-black);
+        --chyrp-fill-purple: var(--chyrp-coal-black);
+        --chyrp-fill-grey: var(--chyrp-coal-black);
+        --chyrp-fill-inset: var(--chyrp-coal-black);
+        --chyrp-fill-input: var(--chyrp-inky-black);
+        --chyrp-border-grey: var(--chyrp-winter-grey);
+        --chyrp-text-default: var(--chyrp-text-white);
+        --chyrp-text-active: var(--chyrp-strong-orange);
     }
     body {
-        color: var(--chyrp-text-white);
         background-color: var(--chyrp-inky-black);
     }
     #header {
@@ -1512,8 +1522,7 @@ input.toolbar.hidden::file-selector-button {
     }
     #header #navigation li a:link,
     #header #navigation li a:visited {
-        color: var(--chyrp-text-white);
-        background-color: #2f2f2f;
+        background-color: var(--chyrp-pure-black);
     }
     #header #navigation li.selected a:link,
     #header #navigation li.selected a:visited,
@@ -1522,52 +1531,34 @@ input.toolbar.hidden::file-selector-button {
         background-color: var(--chyrp-inky-black);
     }
     #sub_nav {
-        border-bottom-color: var(--chyrp-pure-white);
+        border-bottom-color: var(--chyrp-winter-grey);
     }
-    #sub_nav li a {
-        border-color: var(--chyrp-pure-white);
+    #sub_nav li a:link,
+    #sub_nav li a:visited {
+        border-color: var(--chyrp-winter-grey);
+        background-color: var(--chyrp-inky-black);
     }
     #sub_nav li.selected a:link,
     #sub_nav li.selected a:visited,
     #sub_nav li a:hover,
     #sub_nav li a:focus {
-        background-color: var(--chyrp-english-grey);
+        background-color: var(--chyrp-pure-black);
     }
     #content {
-        color: var(--chyrp-text-black);
-        background-color: var(--chyrp-english-grey);
-        border-color: var(--chyrp-pure-white);
-    }
-    select,
-    textarea,
-    input[type="checkbox"],
-    input[type="radio"],
-    input[type="text"],
-    input[type="email"],
-    input[type="url"],
-    input[type="tel"],
-    input[type="date"],
-    input[type="time"],
-    input[type="number"],
-    input[type="range"],
-    input[type="password"],
-    input[type="file"] {
-        background-color: var(--chyrp-welsh-grey);
-    }
-    input:invalid {
-        border-color: var(--chyrp-strong-orange);
+        background-color: var(--chyrp-pure-black);
+        border-color: var(--chyrp-winter-grey);
     }
     table th {
-        background-color: var(--chyrp-irish-grey);
+        background-color: var(--chyrp-inky-black);
     }
     table tbody tr:nth-child(even) td {
-        background-color: var(--chyrp-welsh-grey);
+        background-color: var(--chyrp-coal-black);
     }
     .iframe_foreground {
-        background-color: var(--chyrp-english-grey);
+        background-color: var(--chyrp-pure-black);
     }
     .iframe_close_gadget svg {
-        fill: var(--chyrp-english-grey);
+        fill: var(--chyrp-pure-black);
     }
 }
 
@@ -1586,14 +1577,14 @@ input.toolbar.hidden::file-selector-button {
 
 @media (prefers-contrast: less) {
     :root {
-        --chyrp-text-black: var(--chyrp-winter-grey);
-        --chyrp-text-white: var(--chyrp-summer-grey);
+        --chyrp-text-black: var(--chyrp-text-black-pcl);
+        --chyrp-text-white: var(--chyrp-text-white-pcl);
     }
 }
 
 @media (prefers-contrast: more) {
     :root {
-        --chyrp-border-grey: var(--chyrp-winter-grey);
-        --chyrp-text-black: var(--chyrp-pure-black);
+        --chyrp-text-black: var(--chyrp-text-black-pcm);
+        --chyrp-text-white: var(--chyrp-text-white-pcm);
     }
 }

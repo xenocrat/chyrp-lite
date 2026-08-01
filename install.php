@@ -333,6 +333,7 @@
                 --chyrp-pure-white: #ffffff;
                 --chyrp-pure-black: #000000;
                 --chyrp-inky-black: #1f1f23;
+                --chyrp-coal-black: #101010;
                 --chyrp-summer-grey: #fbfbfb;
                 --chyrp-english-grey: #efefef;
                 --chyrp-welsh-grey: #dfdfdf;
@@ -341,10 +342,10 @@
                 --chyrp-winter-grey: #656565;
                 --chyrp-strong-yellow: #ffdd00;
                 --chyrp-strong-orange: #ff7f00;
-                --chyrp-strong-red: #c11600;
-                --chyrp-strong-green: #108600;
-                --chyrp-strong-blue: #1e57ba;
-                --chyrp-strong-purple: #ba1eba;
+                --chyrp-strong-red: #b21400;
+                --chyrp-strong-green: #0c6500;
+                --chyrp-strong-blue: #1e4ea0;
+                --chyrp-strong-purple: #911e91;
                 --chyrp-light-yellow: #fffde6;
                 --chyrp-light-red: #faebe4;
                 --chyrp-light-green: #ebfae4;
@@ -359,17 +360,24 @@
                 --chyrp-border-red: #cdaea5;
                 --chyrp-border-green: #aecda5;
                 --chyrp-border-blue: #a7c1d0;
-                --chyrp-border-purple: #cda5cd;
+                --chyrp-border-purple: #d392d3;
+                --chyrp-border-grey: var(--chyrp-irish-grey);
                 --chyrp-fill-yellow: var(--chyrp-light-yellow);
                 --chyrp-fill-red: var(--chyrp-light-red);
                 --chyrp-fill-green: var(--chyrp-light-green);
                 --chyrp-fill-blue: var(--chyrp-light-blue);
                 --chyrp-fill-purple: var(--chyrp-light-purple);
                 --chyrp-fill-grey: var(--chyrp-english-grey);
-                --chyrp-inset-grey: var(--chyrp-summer-grey);
-                --chyrp-border-grey: var(--chyrp-irish-grey);
+                --chyrp-fill-inset: var(--chyrp-summer-grey);
+                --chyrp-fill-input: var(--chyrp-pure-white);
                 --chyrp-text-black: var(--chyrp-inky-black);
+                --chyrp-text-black-pcl: var(--chyrp-winter-grey);
+                --chyrp-text-black-pcm: var(--chyrp-pure-black);
                 --chyrp-text-white: var(--chyrp-pure-white);
+                --chyrp-text-white-pcl: var(--chyrp-irish-grey);
+                --chyrp-text-white-pcm: var(--chyrp-pure-white);
+                --chyrp-text-default: var(--chyrp-text-black);
+                --chyrp-text-active: var(--chyrp-strong-blue);
             }
             *::selection {
                 color: var(--chyrp-text-black);
@@ -391,7 +399,7 @@
                 font-size: 1rem;
                 font-family: "Open Sans webfont", sans-serif;
                 line-height: 1.5;
-                color: var(--chyrp-text-black);
+                color: var(--chyrp-text-default);
                 tab-size: 4;
                 background: var(--chyrp-english-grey);
                 margin: 2rem;
@@ -420,7 +428,6 @@
             strong {
                 font: inherit;
                 font-weight: bold;
-                color: var(--chyrp-strong-red);
             }
             em, dfn, cite, var {
                 font: inherit;
@@ -439,32 +446,83 @@
                 display: block;
                 resize: vertical;
             }
-            input, select {
+            input,
+            select {
                 display: inline-block;
             }
+            textarea[readonly],
+            input[readonly],
+            select[readonly] {
+                cursor: not-allowed;
+            }
+            input[type="checkbox"],
+            input[type="radio"] {
+                appearance: none;
+                box-sizing: border-box;
+                color: var(--chyrp-text-default);
+                font: inherit;
+                font-size: 1.25rem;
+                position: relative;
+                top: 0.2em;
+                width: 1em;
+                height: 1em;
+                border-radius: 0em;
+                border: 1px solid var(--chyrp-border-grey);
+                background-color: var(--chyrp-fill-input);
+            }
+            input[type="radio"] {
+                border-radius: 50%;
+            }
+            select,
+            textarea,
             input[type="text"],
             input[type="email"],
             input[type="url"],
+            input[type="tel"],
+            input[type="date"],
+            input[type="time"],
             input[type="number"],
-            input[type="password"],
-            select,
-            textarea {
+            input[type="range"],
+            input[type="password"] {
                 box-sizing: border-box;
                 width: 100%;
                 margin: 0rem;
-                color: var(--chyrp-text-black);
+                color: var(--chyrp-text-default);
                 font: inherit;
                 font-size: 1.25em;
                 padding: 0.5rem;
                 border-radius: 0em;
                 border: 1px solid var(--chyrp-border-grey);
-                background-color: var(--chyrp-pure-white);
+                background-color: var(--chyrp-fill-input);
+            }
+            input[type="file"] {
+                box-sizing: border-box;
+                color: var(--chyrp-text-default);
+                font: inherit;
+                font-size: 1.25rem;
+                padding: 1rem;
+                border-radius: 0em;
+                border: 1px solid var(--chyrp-border-grey);
+                background-color: var(--chyrp-fill-input);
             }
             select {
                 appearance: none;
                 padding-right: 1em;
-                background-image: url(admin/images/icons/select.svg);
+                background-image: url(admin/images/gadgets/select.svg);
+                background-size: 1rem;
                 background-position: center right 0.1em;
+                background-repeat: no-repeat;
+            }
+            input[type="checkbox"]:checked {
+                background-image: url(admin/images/gadgets/checkbox.svg);
+                background-size: 1rem;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+            input[type="radio"]:checked {
+                background-image: url(admin/images/gadgets/radio.svg);
+                background-size: 1rem;
+                background-position: center;
                 background-repeat: no-repeat;
             }
             input::placeholder {
@@ -485,31 +543,51 @@
             textarea:invalid {
                 border-color: var(--chyrp-strong-orange);
             }
+            select:focus,
+            textarea:focus,
+            input[type="checkbox"]:focus,
             input[type="text"]:focus,
             input[type="email"]:focus,
             input[type="url"]:focus,
+            input[type="tel"]:focus,
+            input[type="date"]:focus,
+            input[type="time"]:focus,
             input[type="number"]:focus,
+            input[type="range"]:focus,
             input[type="password"]:focus,
-            select:focus,
-            textarea:focus {
+            input[type="file"]:focus {
                 border-color: var(--chyrp-strong-blue);
                 outline: var(--chyrp-strong-blue) solid 2px;
                 outline-offset: -2px;
             }
+            textarea.error,
+            input[type="checkbox"].error,
+            input[type="radio"].error,
             input[type="text"].error,
             input[type="email"].error,
             input[type="url"].error,
+            input[type="tel"].error,
+            input[type="date"].error,
+            input[type="time"].error,
             input[type="number"].error,
+            input[type="range"].error,
             input[type="password"].error,
-            textarea.error {
-                background-color: var(--chyrp-light-red);
+            input[type="file"].error {
+                background-color: var(--chyrp-fill-red);
             }
+            textarea.error:focus,
+            input[type="checkbox"].error:focus,
+            input[type="radio"].error:focus,
             input[type="text"].error:focus,
             input[type="email"].error:focus,
             input[type="url"].error:focus,
+            input[type="tel"].error:focus,
+            input[type="date"].error:focus,
+            input[type="time"].error:focus,
             input[type="number"].error:focus,
+            input[type="range"].error:focus,
             input[type="password"].error:focus,
-            textarea.error:focus {
+            input[type="file"].error:focus {
                 border: 1px solid var(--chyrp-strong-red);
                 outline-color: var(--chyrp-strong-red);
             }
@@ -569,7 +647,7 @@
             }
             a:link,
             a:visited {
-                color: var(--chyrp-text-black);
+                color: var(--chyrp-text-default);
                 text-decoration: underline;
                 text-underline-offset: 0.125em;
                 text-decoration-thickness: 0.0625em;
@@ -578,7 +656,7 @@
             a:focus,
             a:active {
                 outline: none;
-                color: var(--chyrp-strong-blue);
+                color: var(--chyrp-text-active);
                 text-decoration: underline;
                 text-underline-offset: 0.125em;
                 text-decoration-thickness: 0.0625em;
@@ -595,7 +673,7 @@
                 font: inherit;
                 font-size: 1.25em;
                 text-align: center;
-                color: var(--chyrp-text-black);
+                color: var(--chyrp-text-default);
                 text-decoration: none;
                 margin: 1rem 0rem;
                 padding: 0.5rem 1rem;
@@ -652,46 +730,35 @@
             }
             @media (prefers-color-scheme: dark) {
                 :root {
-                    --chyrp-fill-yellow: var(--chyrp-medium-yellow);
-                    --chyrp-fill-red: var(--chyrp-medium-red);
-                    --chyrp-fill-green: var(--chyrp-medium-green);
-                    --chyrp-fill-blue: var(--chyrp-medium-blue);
-                    --chyrp-fill-purple: var(--chyrp-medium-purple);
-                    --chyrp-fill-grey: var(--chyrp-welsh-grey);
-                    --chyrp-inset-grey: transparent;
-                    --chyrp-border-grey: var(--chyrp-scottish-grey);
+                    --chyrp-fill-yellow: var(--chyrp-coal-black);
+                    --chyrp-fill-red: var(--chyrp-coal-black);
+                    --chyrp-fill-green: var(--chyrp-coal-black);
+                    --chyrp-fill-blue: var(--chyrp-coal-black);
+                    --chyrp-fill-purple: var(--chyrp-coal-black);
+                    --chyrp-fill-grey: var(--chyrp-coal-black);
+                    --chyrp-fill-inset: var(--chyrp-coal-black);
+                    --chyrp-fill-input: var(--chyrp-inky-black);
+                    --chyrp-border-grey: var(--chyrp-winter-grey);
+                    --chyrp-text-default: var(--chyrp-text-white);
+                    --chyrp-text-active: var(--chyrp-strong-orange);
                 }
                 body {
-                    color: var(--chyrp-text-white);
-                    background-color: var(--chyrp-inky-black);
+                    background-color: var(--chyrp-winter-grey);
                 }
                 .window {
-                    color: var(--chyrp-text-black);
-                    background-color: var(--chyrp-english-grey);
-                }
-                select,
-                textarea,
-                input[type="text"],
-                input[type="email"],
-                input[type="url"],
-                input[type="number"],
-                input[type="password"] {
-                    background-color: var(--chyrp-welsh-grey);
-                }
-                input:invalid {
-                    border-color: var(--chyrp-strong-orange);
+                    background-color: var(--chyrp-pure-black);
                 }
             }
             @media (prefers-contrast: less) {
                 :root {
-                    --chyrp-text-black: var(--chyrp-winter-grey);
-                    --chyrp-text-white: var(--chyrp-summer-grey);
+                    --chyrp-text-black: var(--chyrp-text-black-pcl);
+                    --chyrp-text-white: var(--chyrp-text-white-pcl);
                 }
             }
             @media (prefers-contrast: more) {
                 :root {
-                    --chyrp-border-grey: var(--chyrp-winter-grey);
-                    --chyrp-text-black: var(--chyrp-pure-black);
+                    --chyrp-text-black: var(--chyrp-text-black-pcm);
+                    --chyrp-text-white: var(--chyrp-text-white-pcm);
                 }
             }
         </style>
