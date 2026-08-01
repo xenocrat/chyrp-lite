@@ -303,8 +303,6 @@ details {
     padding: 0rem 0.5em;
     border: 1px solid var(--umbra-medium-grey);
 }
-details:has(summary:hover),
-details:has(summary:focus),
 details:has(summary:active) {
     border-color: var(--umbra-strong-mint);
 }
@@ -322,10 +320,7 @@ summary {
     list-style: none;
     user-select: none;
 }
-summary:hover,
-summary:focus,
 summary:active {
-    outline: none;
     color: var(--umbra-pure-black);
     border-color: var(--umbra-strong-mint);
     background-color: var(--umbra-strong-mint);
@@ -409,9 +404,6 @@ html[dir="rtl"] select {
     background-position: center left 0.25em;
     background-repeat: no-repeat;
 }
-html select:focus {
-    background-image: url(../images/select_focus.svg);
-}
 input[type="checkbox"],
 input[type="radio"] {
     appearance: none;
@@ -428,17 +420,8 @@ input[type="checkbox"]:checked {
     background-position: center;
     background-repeat: no-repeat;
 }
-input[type="checkbox"]:checked:focus {
-    background-image: url(../images/checkbox_focus.svg);
-}
 input[type="radio"]:checked {
     background-image: url(../images/radio.svg);
-    background-size: 1rem;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-input[type="radio"]:checked:focus {
-    background-image: url(../images/radio_focus.svg);
     background-size: 1rem;
     background-position: center;
     background-repeat: no-repeat;
@@ -449,9 +432,7 @@ input:invalid {
     background-color: var(--umbra-medium-red);
     box-shadow: none;
 }
-select:focus,
-input:focus {
-    outline: none;
+input:not([type="checkbox"], [type="radio"]):focus {
     color: var(--umbra-pure-black);
     border: none;
     background-color: var(--umbra-pure-white);
@@ -484,7 +465,6 @@ textarea {
     resize: vertical;
 }
 textarea:focus {
-    outline: none;
     color: var(--umbra-pure-black);
     border: none;
     background-color: var(--umbra-pure-white);
@@ -493,9 +473,6 @@ button {
     font: inherit;
     font-size: inherit;
     cursor: pointer;
-}
-button:focus {
-    outline: none;
 }
 label {
     display: block;
@@ -666,20 +643,18 @@ div.traversal a {
     top: 0px;
     color: var(--umbra-pure-white);
     text-decoration: none;
-    background-color: var(--umbra-deep-grey);
+    background-color: var(--umbra-medium-grey);
     line-height: 1;
     border-radius: 50%;
 }
 div.traversal a:hover,
 div.traversal a:focus,
 div.traversal a:active {
-    color: var(--umbra-deep-black);
-    background-color: var(--umbra-strong-mint);
     animation: z_axis_boing 1s normal ease;
 }
-div.next a:hover,
-div.next a:active {
-    top: 1px;
+div.traversal a:active {
+    color: var(--umbra-deep-black);
+    background-color: var(--umbra-strong-mint);
 }
 section a:link,
 p a:link,
@@ -741,12 +716,8 @@ div.doaction a, button {
     border-radius: 0.25em;
     color: var(--umbra-pure-white);
     text-decoration: none;
-    background-color: var(--umbra-deep-grey);
+    background-color: var(--umbra-medium-grey);
 }
-div.doaction a:hover,
-button:hover,
-div.doaction a:focus,
-button:focus,
 div.doaction a:active,
 button:active {
     color: var(--umbra-pure-black);
@@ -830,10 +801,13 @@ iframe.bandcamp_l_embed {
     max-width: 700px;
     aspect-ratio: 2 / 3;
 }
-div.traversal a:focus-visible,
-div.doaction a:focus-visible,
-button:focus-visible,
-details:has(summary:focus-visible) {
+div.traversal a:focus,
+div.doaction a:focus,
+textarea:focus,
+input:focus,
+select:focus,
+button:focus,
+details:has(summary:focus) {
     outline: var(--umbra-strong-mint) solid 2px;
     outline-offset: 2px;
 }
