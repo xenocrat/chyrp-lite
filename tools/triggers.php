@@ -776,8 +776,9 @@
                 }
             }
             @media (prefers-contrast: more) {
-                html {
-                    filter: contrast(120%);
+                :root {
+                    --chyrp-text-black: var(--chyrp-pure-black);
+                    --chyrp-border-grey: var(--chyrp-text-normal);
                 }
             }
         </style>
