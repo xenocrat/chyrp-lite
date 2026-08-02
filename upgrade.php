@@ -929,8 +929,8 @@
                 --chyrp-fill-input: var(--chyrp-pure-white);
                 --chyrp-text-black: var(--chyrp-inky-black);
                 --chyrp-text-white: var(--chyrp-pure-white);
-                --chyrp-text-default: var(--chyrp-text-black);
-                --chyrp-text-active: var(--chyrp-strong-blue);
+                --chyrp-text-normal: var(--chyrp-text-black);
+                --chyrp-text-accent: var(--chyrp-strong-blue);
             }
             *::selection {
                 color: var(--chyrp-text-black);
@@ -952,7 +952,7 @@
                 font-size: 1rem;
                 font-family: "Open Sans webfont", sans-serif;
                 line-height: 1.5;
-                color: var(--chyrp-text-default);
+                color: var(--chyrp-text-normal);
                 tab-size: 4;
                 background: var(--chyrp-english-grey);
                 margin: 2rem;
@@ -1031,7 +1031,7 @@
             }
             a:link,
             a:visited {
-                color: var(--chyrp-text-default);
+                color: var(--chyrp-text-normal);
                 text-decoration: underline;
                 text-underline-offset: 0.125em;
                 text-decoration-thickness: 0.0625em;
@@ -1040,7 +1040,7 @@
             a:focus,
             a:active {
                 outline: none;
-                color: var(--chyrp-text-active);
+                color: var(--chyrp-text-accent);
                 text-decoration: underline;
                 text-underline-offset: 0.125em;
                 text-decoration-thickness: 0.0625em;
@@ -1056,7 +1056,7 @@
                 font: inherit;
                 font-size: 1.25em;
                 text-align: center;
-                color: var(--chyrp-text-default);
+                color: var(--chyrp-text-normal);
                 text-decoration: none;
                 margin: 1rem 0rem;
                 padding: 0.5rem 1rem;
@@ -1122,8 +1122,8 @@
                     --chyrp-fill-inset: var(--chyrp-coal-black);
                     --chyrp-fill-input: var(--chyrp-inky-black);
                     --chyrp-border-grey: var(--chyrp-winter-grey);
-                    --chyrp-text-default: var(--chyrp-text-white);
-                    --chyrp-text-active: var(--chyrp-strong-orange);
+                    --chyrp-text-normal: var(--chyrp-text-white);
+                    --chyrp-text-accent: var(--chyrp-strong-orange);
                 }
                 body {
                     background-color: var(--chyrp-winter-grey);
