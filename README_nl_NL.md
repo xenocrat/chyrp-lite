@@ -2,12 +2,12 @@
 
 ## Wat kan Chyrp Lite voor me doen?
 
-Chyrp Lite maakt het mogelijk een blog te hosten op je eigen webserver met zo weinig mogelijk gedoe. Je kunt een traditionele blog bijhouden of een Tumbleblog of je kunt diverse ingebouwde aanpassingen doen en een breed platform bouwen met blogfunctionaliteiten als aanvulling. Je krijgt 6 mooie themas en een gebruikersvriendelijke administratie-sectie, allemaal zeer goed te grbuiken op een scala van apparaten, dankzij de kracht van responsieve HTML5. Semantische code en uitgebreide ARIA toewijzingen, zorgen ervoor dat je blog ook zeer goed toegankelijk is voor mensen die hulptechnologieën gebruiken.
+Chyrp Lite maakt het mogelijk een blog te hosten op je eigen webserver met zo weinig mogelijk gedoe. Je kunt een traditionele blog bijhouden of een Tumbleblog of je kunt diverse ingebouwde aanpassingen doen en een breed platform bouwen met blogfunctionaliteiten als aanvulling. Je krijgt 6 mooie themas en een gebruikersvriendelijke administratie-sectie, allemaal zeer goed te gebruiken op een scala van apparaten, dankzij de kracht van responsieve HTML5. Semantische code en uitgebreide ARIA toewijzingen, zorgen ervoor dat je blog ook zeer goed toegankelijk is voor mensen die hulptechnologieën gebruiken.
 
-Met een flexibel system van feathers en paginas, kun je je website precies zó maken zoals je hem hebben wilt. Feathers maken verschillende types van blog-inhoud mogelijk - je kunt oom je blog minimalistisch en puur inhoudelijk houden, of je maakt er een multimedia-spektakel van. Paginas staan je toe om artikelen te schrijven naast je reguliere blogposts - dat kunnen eenvoudige naast elkaar staande paginas zijn of een hierarchische veelvoudige paginastructuur, optioneel inclusief een Homepagina die je bezoekers te zien krijgen wanneer ze voor het eerst op je website aanlanden.
+Met een flexibel system van feathers en pagina's, kun je je website precies zó maken zoals je hem hebben wilt. Feathers maken verschillende types van blog-inhoud mogelijk - je kunt oom je blog minimalistisch en puur inhoudelijk houden, of je maakt er een multimedia-spektakel van. Pagina's staan je toe om artikelen te schrijven naast je reguliere blogposts - dat kunnen eenvoudige naast elkaar staande pagina's zijn of een hiërarchische veelvoudige paginastructuur, optioneel inclusief een Homepagina die je bezoekers te zien krijgen wanneer ze voor het eerst op je website aanlanden.
 
 
-## Wat zijn de belanrijkste kenmerken?
+## Wat zijn de belangrijkste kenmerken?
 
 ### Centrale programma:
 * Eenvoudig te installeren, makkelijk te onderhouden, uitbreidbaar vanuit het ontwerp.
@@ -36,7 +36,7 @@ Met een flexibel system van feathers en paginas, kun je je website precies zó m
 * Vind-ik-leuks: sta je bezoekers toe om hun waardering te tonen.
 * Lees Meer: breek lange blogposts af op je voorpagina.
 * Rechten: bepaal toewijzing en kopijrechten voor je creaties.
-* Cascade: ajax-powered oneindig scrollen voor je blog.
+* Cascade: AJAX-powered oneindig scrollen voor je blog.
 * Lightbox: in-pagina afbeeldingsviewer met beschermingsoptie.
 * Sitemap: indexeer je blog voor zoekmachines.
 * MAPTCHA: gebruik eenvoudige rekensommen om spam te voorkomen.
