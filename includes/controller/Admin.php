@@ -202,7 +202,7 @@
         public function exempt(
             $action
         ): bool {
-            $exemptions = array("login", "logout");
+            $exemptions = array("help", "login", "logout");
             return in_array($action, $exemptions);
         }
 
