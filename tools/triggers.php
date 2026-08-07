@@ -47,9 +47,11 @@
     define('USE_GETTEXT_SHIM',              true);
     define('USE_OB',                        true);
     define('HTTP_ACCEPT_ZSTD',              false);
+    define('HTTP_ACCEPT_BROTLI',            false);
     define('HTTP_ACCEPT_DEFLATE',           false);
     define('HTTP_ACCEPT_GZIP',              false);
     define('CAN_USE_ZSTD',                  false);
+    define('CAN_USE_BROTLI',                false);
     define('CAN_USE_ZLIB',                  false);
     define('USE_COMPRESSION',               false);
     define('PREVIEWING',                    false);
