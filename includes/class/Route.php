@@ -95,8 +95,9 @@
                 if (
                     !empty($this->arg[0]) and
                     !preg_match("/[\W]/", $this->arg[0])
-                )
+                ) {
                     $this->try[] = $this->arg[0];
+                }
             }
         }
 
