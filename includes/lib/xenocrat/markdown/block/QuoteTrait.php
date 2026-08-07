@@ -19,14 +19,14 @@ trait QuoteTrait
 		$line
 	): bool {
 		if (
-			$line[0] === ' '
+			str_starts_with($line, ' ')
 			&& strspn($line, ' ') < 4
 		) {
 		// trim up to three spaces
 			$line = ltrim($line, ' ');
 		}
 
-		return $line[0] === '>';
+		return str_starts_with($line, '>');
 	}
 
 	/**

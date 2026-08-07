@@ -19,7 +19,7 @@ trait AsideTrait
 		$line
 	): bool {
 		if (
-			$line[0] === ' '
+			str_starts_with($line, ' ')
 			&& strspn($line, ' ') < 4
 		) {
 		// Trim up to three spaces.
@@ -27,8 +27,8 @@ trait AsideTrait
 		}
 
 		return (
-			$line[0] === '<'
-			&& (!isset($line[1]) || ($l1 = $line[1]) === ' ')
+			str_starts_with($line, '<')
+			&& (!isset($line[1]) || $line[1] === ' ')
 		);
 	}
 

@@ -19,7 +19,10 @@ trait RuleTrait
 		$line
 	): bool {
 		// At least 3 of -, * or _ on one line make a hr.
-		return preg_match('/^ {0,3}([\-\*_])\s*\1\s*\1(\1|\s)*$/', $line);
+		return preg_match(
+			'/^ {0,3}([\-\*_])\s*\1\s*\1(\1|\s)*$/',
+			$line
+		);
 	}
 
 	/**

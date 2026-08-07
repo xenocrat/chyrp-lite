@@ -23,7 +23,7 @@ trait FencedQuoteTrait
 		$line
 	): bool {
 		if (
-			$line[0] === ' '
+			str_starts_with($line, ' ')
 			&& strspn($line, ' ') < 4
 		) {
 		// trim up to three spaces

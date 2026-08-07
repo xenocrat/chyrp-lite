@@ -19,14 +19,14 @@ trait FigureTrait
 		$line
 	): bool {
 		if (
-			$line[0] === ' '
+			str_starts_with($line, ' ')
 			&& strspn($line, ' ') < 4
 		) {
 		// Trim up to three spaces.
 			$line = ltrim($line, ' ');
 		}
 
-		return $line[0] === ':';
+		return str_starts_with($line, ':');
 	}
 
 	/**
