@@ -54,7 +54,7 @@
             if (self::MO_SIZEOF_HEADER > $mo_length)
                 return false;
 
-            $magic_word = unpack("Nmagic", $mo)["magic"];
+            $magic_word = unpack("Nmagic", $mo_file)["magic"];
 
             switch ($magic_word) {
                 case self::MO_MAGIC_WORD_BE:
