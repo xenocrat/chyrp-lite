@@ -20,7 +20,7 @@ trait CodeTrait
 	): bool {
 		// Indentation by 4+ spaces and/or a tab is code.
 		return (
-			$line[0] === "\t"
+			str_starts_with($line, "\t")
 			|| str_starts_with($line, '    ')
 			|| str_starts_with(ltrim($line, ' '), "\t")
 		);

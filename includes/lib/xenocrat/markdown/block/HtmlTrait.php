@@ -19,14 +19,17 @@ trait HtmlTrait
 		$line
 	): bool {
 		if (
-			$line[0] === ' '
+			str_starts_with($line, ' ')
 			&& strspn($line, ' ') < 4
 		) {
 		// Trim up to three spaces.
 			$line = ltrim($line, ' ');
 		}
 
-		if ($line[0] !== '<' || isset($line[1]) && $line[1] == ' ') {
+		if (
+			!str_starts_with($line, '<')
+			|| str_starts_with($line, '< ')
+		) {
 		// No tag.
 			return false;
 		}
