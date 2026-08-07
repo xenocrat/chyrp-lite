@@ -10,7 +10,7 @@
 
     # Constant: CHYRP_VERSION
     # Version number for this release.
-    define('CHYRP_VERSION', "2026.02.01");
+    define('CHYRP_VERSION', "2026.02.02");
 
     # Constant: CHYRP_CODENAME
     # The codename for this version.
