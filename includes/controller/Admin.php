@@ -3094,10 +3094,10 @@
          */
         public function admin_themes(
         ): void {
-            if (!Visitor::current()->group->can("change_settings"))
+            if (!Visitor::current()->group->can("toggle_extensions"))
                 show_403(
                     __("Access Denied"),
-                    __("You do not have sufficient privileges to change settings.")
+                    __("You do not have sufficient privileges to toggle extensions.")
                 );
 
             if (!empty($_SESSION['theme']))
@@ -3358,10 +3358,10 @@
          */
         public function admin_preview_theme(
         ): never {
-            if (!Visitor::current()->group->can("change_settings"))
+            if (!Visitor::current()->group->can("toggle_extensions"))
                 show_403(
                     __("Access Denied"),
-                    __("You do not have sufficient privileges to change settings.")
+                    __("You do not have sufficient privileges to toggle extensions.")
                 );
 
             $trigger = Trigger::current();
