@@ -57,6 +57,10 @@
 <input class="text digits" type="number" min="1" name="uploads_limit" value="{{ site.uploads_limit | fix(true) }}" size="3" id="uploads_limit">
 <span class="sub">{{ "(Megabytes)" | translate }}</span>
 </p>
+<aside class="split_block small">
+{{ "Blog content is sometimes cached on the server." | translate }}
+<a href="{{ url('clear_caches') }}">{{ "Clear the caches." | translate }}</a>
+</aside>
 <p>
 <label for="feed_format">{{ "Feed Format" | translate }}</label>
 {#- -#}
