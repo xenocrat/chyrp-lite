@@ -3789,6 +3789,52 @@
         }
 
         /**
+         * Function: admin_clear_caches
+         * Recursively deletes the contents of all cache directories.
+         */
+        public function admin_clear_caches(
+        ): void {
+            fallback($_SESSION['admin_redirect_to'], "content_settings");
+
+            if (!Visitor::current()->group->can("change_settings"))
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to change settings.")
+                );
+
+            $caches = new DirectoryIterator(CACHES_DIR);
+
+            foreach ($caches as $cache) {
+                if ($cache->isDot() or !$cache->isDir())
+                    continue;
+
+                $items = new RecursiveIteratorIterator(
+                    new RecursiveDirectoryIterator(
+                        $cache->getRealPath(),
+                        RecursiveDirectoryIterator::SKIP_DOTS
+                    ),
+                    RecursiveIteratorIterator::CHILD_FIRST
+                );
+
+                foreach ($items as $item) {
+                    $action = $item->isDir() ? "rmdir" : "unlink" ;
+                    $result = @$action($item->getRealPath());
+
+                    if (!$result)
+                        Flash::warning(
+                            __("Failed to clear caches."),
+                            $_SESSION['admin_redirect_to']
+                        );
+                }
+            }
+
+            Flash::notice(
+                __("Caches cleared."),
+                $_SESSION['admin_redirect_to']
+            );
+        }
+
+        /**
          * Function: admin_login
          * Mask for MainController->login().
          */
