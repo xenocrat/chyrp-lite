@@ -59,7 +59,7 @@ trait EmphStrongTrait
 				)
 				|| $marker === '_'
 				&& preg_match(
-					# Marker must be preceded by a word break then 0+ delimeters.
+					# Marker must be preceded by a word break then 0+ delimiters.
 					'/(^|\W|\b_+)$/u',
 					$preceding
 				)
@@ -76,7 +76,7 @@ trait EmphStrongTrait
 						# Closing marker: cannot be preceded by whitespace.
 						# Cannot be preceded by Unicode category Zs, Ps, Pi.
 						(?(R)\1|(?<![\s\p{Zs}\p{Ps}\p{Pi}])__
-						# Marker must be followed by 0+ delimeters then a word break.
+						# Marker must be followed by 0+ delimiters then a word break.
 						(?=_*\b))/usx',
 					$markdown,
 					$matches
@@ -126,7 +126,7 @@ trait EmphStrongTrait
 				)
 				|| $marker === '_'
 				&& preg_match(
-					# Marker must be preceded by a word break then 0+ delimeters.
+					# Marker must be preceded by a word break then 0+ delimiters.
 					'/(^|\W|\b_+)$/u',
 					$preceding
 				)
@@ -143,7 +143,7 @@ trait EmphStrongTrait
 						# Closing marker: cannot be preceded by whitespace.
 						# Cannot be preceded by Unicode category Zs, Ps, Pi.
 						(?(R)\1|(?<![\s\p{Zs}\p{Ps}\p{Pi}])_
-						# Marker must be followed by 0+ delimeters then a word break.
+						# Marker must be followed by 0+ delimiters then a word break.
 						(?=_*\b))/usx',
 					$markdown,
 					$matches
