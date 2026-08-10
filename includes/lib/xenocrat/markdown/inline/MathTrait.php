@@ -34,7 +34,7 @@ trait MathTrait
 					(?!`)
 					# Capture...
 					# any char except delimiter;
-					# or delimeter run that is not closing marker:
+					# or delimiter run that is not closing marker:
 					((?>(?:[^`]|(?!`\$)`+)+))
 					# Closing marker:
 					`\$/sx',

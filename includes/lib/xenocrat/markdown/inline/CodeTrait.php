@@ -34,7 +34,7 @@ trait CodeTrait
 					(?!`)
 					# Capture...
 					# any char except delimiter;
-					# or delimeter run longer than opening marker;
+					# or delimiter run longer than opening marker;
 					# or delimiter run shorter than opening marker:
 					((?>(?:[^`]|\1`+|(?!\1)`+)+))
 					# Closing marker:
