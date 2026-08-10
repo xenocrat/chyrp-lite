@@ -625,8 +625,9 @@
             if (
                 (is_array($value) and in_array($test, $value)) or
                 ($test == $value)
-            )
+            ) {
                 return " selected";
+            }
         }
 
         return "";
@@ -650,8 +651,9 @@
             if (
                 (is_array($value) and in_array($test, $value)) or
                 ($test == $value)
-            )
+            ) {
                 return " disabled";
+            }
         }
 
         return "";
