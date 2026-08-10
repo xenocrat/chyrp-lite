@@ -2438,6 +2438,9 @@
         $data = null,
         $req_headers = array()
     ): string|false {
+        if (!is_url($url))
+            return false;
+
         $config = Config::current();
         $url = add_scheme($url);
         $host = parse_url($url, PHP_URL_HOST);
