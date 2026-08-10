@@ -3583,8 +3583,9 @@
         if (
             !is_string($string) and
             !$string instanceof Stringable
-        )
+        ) {
             return false;
+        }
 
         return (
             preg_match(
@@ -3654,8 +3655,9 @@
         if (
             !is_string($string) and
             !$string instanceof Stringable
-        )
+        ) {
             return false;
+        }
 
         return (
             preg_match(
@@ -3692,22 +3694,22 @@
         if (
             !is_string($string) and
             !$string instanceof Stringable
-        )
+        ) {
             return false;
+        }
 
-        if (preg_match('/^\[[a-fA-F0-9\:]{3,39}\]$/', $string))
+        if (str_starts_with($string, "[") and str_ends_with($string, "]"))
             $string = substr($string, 1, -1);
 
         if (!filter_var($string, FILTER_VALIDATE_IP))
             return false;
 
-        return (
-            !filter_var(
-                $string,
-                FILTER_VALIDATE_IP,
-                FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE
-            )
-        );
+        $flags = FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE;
+
+        if (defined('FILTER_FLAG_GLOBAL_RANGE'))
+            $flags |= FILTER_FLAG_GLOBAL_RANGE;
+
+        return !filter_var($string, FILTER_VALIDATE_IP, $flags);
     }
 
     /**
@@ -3726,8 +3728,9 @@
         if (
             !is_string($string) and
             !$string instanceof Stringable
-        )
+        ) {
             return false;
+        }
 
         foreach (SQL_DATETIME_ZERO_VARIANTS as $variant) {
             if (strcmp($variant, $string) === 0)
@@ -3756,8 +3759,9 @@
         if (
             !is_string($string) and
             !$string instanceof Stringable
-        )
+        ) {
             return false;
+        }
 
         return str_starts_with($string, "C:\\fakepath\\");
     }
