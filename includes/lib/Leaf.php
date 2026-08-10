@@ -106,6 +106,13 @@
             }
         }
 
+        if (file_exists(THEME_DIR.DIR."functions".DIR.$name.".php")) {
+            return new \Twig\TwigFunction(
+                $name,
+                include THEME_DIR.DIR."functions".DIR.$name.".php"
+            );
+        }
+
         return false;
     }
 
@@ -126,6 +133,13 @@
                     array($module, "twig_filter_".$name)
                 );
             }
+        }
+
+        if (file_exists(THEME_DIR.DIR."filters".DIR.$name.".php")) {
+            return new \Twig\TwigFunction(
+                $name,
+                include THEME_DIR.DIR."filters".DIR.$name.".php"
+            );
         }
 
         return false;
