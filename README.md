@@ -106,6 +106,15 @@ There's no need to run [upgrade.php](upgrade.php) if you're using Docker.
 
 By design Chyrp Lite allows authors to create posts and pages containing valid HTML, meaning that authored content may also contain JavaScript and CSS styles. This allows maximum freedom to authors, but it comes with a security risk if the blog administrator allows untrusted users to create posts and pages. If you want to allow untrusted users to create posts and pages, you should enable the __Content Security Policy__ module to apply a strong [Content Security Policy](https://w3c.github.io/webappsec-csp/) that disallows unsafe inline JavaScript and CSS.
 
+### Server-Side Request Forgery (SSRF)
+
+Chyrp Lite uses the PHP function `filter_var` to validate IP addresses with `FILTER_VALIDATE_IP` and the filter flags `FILTER_FLAG_NO_RES_RANGE`, `FILTER_FLAG_NO_PRIV_RANGE`, `FILTER_FLAG_GLOBAL_RANGE` (where available). This provides incomplete protection against SSRF. If SSRF is a concern in your deployment environment, you should configure firewall rules to prevent outbound connections to IP ranges defined in RFCs [RFC 3056], [RFC 4380], [RFC 6052], and [RFC 8215].
+
+[RFC 3056]: https://datatracker.ietf.org/doc/html/rfc3056
+[RFC 4380]: https://datatracker.ietf.org/doc/html/rfc4380
+[RFC 6052]: https://datatracker.ietf.org/doc/html/rfc6052
+[RFC 8215]: https://datatracker.ietf.org/doc/html/rfc8215
+
 ### Files accessible to visitors
 
 After installation, these files are accessible to visitors:
