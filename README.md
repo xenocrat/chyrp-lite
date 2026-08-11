@@ -108,7 +108,7 @@ By design Chyrp Lite allows authors to create posts and pages containing valid H
 
 ### Server-Side Request Forgery (SSRF)
 
-Chyrp Lite uses the PHP function [`filter_var`](https://www.php.net/manual/en/function.filter-var.php) to validate IP addresses as "safe" (non-internal) with `FILTER_VALIDATE_IP` and the filter flags `FILTER_FLAG_NO_RES_RANGE`, `FILTER_FLAG_NO_PRIV_RANGE`, `FILTER_FLAG_GLOBAL_RANGE` (PHP 8.2+). This provides incomplete protection against SSRF. If SSRF is a concern in your deployment environment, you should configure firewall rules to prevent outbound connections to IP ranges defined in [RFC 3056], [RFC 4380], [RFC 6052], and [RFC 8215].
+Chyrp Lite uses the PHP function [`filter_var`](https://www.php.net/manual/en/function.filter-var.php) to validate IP addresses as "safe" (non-internal) with `FILTER_VALIDATE_IP` and the filter flags `FILTER_FLAG_NO_RES_RANGE`, `FILTER_FLAG_NO_PRIV_RANGE`, `FILTER_FLAG_GLOBAL_RANGE` (PHP 8.2+). This provides incomplete protection against server-side request forgery. If SSRF is a concern in your deployment environment, you should configure firewall rules to prevent outbound connections to IP ranges defined in [RFC 3056], [RFC 4380], [RFC 6052], and [RFC 8215].
 
 [RFC 3056]: https://datatracker.ietf.org/doc/html/rfc3056
 [RFC 4380]: https://datatracker.ietf.org/doc/html/rfc4380
