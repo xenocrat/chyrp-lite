@@ -106,6 +106,12 @@
             }
         }
 
+        $name = str_replace(
+            array(DIR, "/", "<", ">"),
+            "",
+            $name
+        );
+
         if (file_exists(THEME_DIR.DIR."functions".DIR.$name.".php")) {
             return new \Twig\TwigFunction(
                 $name,
@@ -134,6 +140,12 @@
                 );
             }
         }
+
+        $name = str_replace(
+            array(DIR, "/", "<", ">"),
+            "",
+            $name
+        );
 
         if (file_exists(THEME_DIR.DIR."filters".DIR.$name.".php")) {
             return new \Twig\TwigFilter(
