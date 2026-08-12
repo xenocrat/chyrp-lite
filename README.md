@@ -114,7 +114,7 @@ Chyrp Lite uses [`filter_var`](https://www.php.net/manual/en/function.filter-var
 - `FILTER_FLAG_NO_PRIV_RANGE`
 - `FILTER_FLAG_GLOBAL_RANGE` (requires PHP 8.2+)
 
-Remote connections to "unsafe" IP addresses are terminated before any data is sent. This provides incomplete protection against [blind server-side request forgery](https://en.wikipedia.org/wiki/Server-side_request_forgery#Blind) attacks. Complete SSRF protection requires a combination of specially-configured DNS resolvers and recursive resolution, which cannot reasonably be achieved at the application layer. **Providing complete SSRF protection is considered out of scope for this project.** If exposure to blind SSRF is a concern in your deployment environment, you should configure firewall rules to prevent outbound connections to IP ranges defined in [RFC 3056], [RFC 4380], [RFC 6052], and [RFC 8215].
+Remote connections to "unsafe" IP addresses are denied or terminated before any data is sent. This provides incomplete protection against [server-side request forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery) attacks. Complete SSRF protection in an environment such as Chyrp Lite, that must allow remote connections to user-defined endpoints, cannot reasonably be achieved at the application layer. **Providing complete SSRF protection is considered out of scope for this project.** If exposure to SSRF is a concern in your deployment environment, you should configure firewall rules to prevent outbound connections to IP ranges defined in [RFC 3056], [RFC 4380], [RFC 6052], and [RFC 8215].
 
 [RFC 3056]: https://datatracker.ietf.org/doc/html/rfc3056
 [RFC 4380]: https://datatracker.ietf.org/doc/html/rfc4380
