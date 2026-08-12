@@ -44,8 +44,7 @@ trait FigureTrait
 			$line = $lines[$i];
 
 			if (
-				isset($line[0])
-				&& $line[0] === ' '
+				str_starts_with($line, ' ')
 				&& strspn($line, ' ') < 4
 			) {
 			// Trim up to three spaces.
