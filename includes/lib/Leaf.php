@@ -136,7 +136,7 @@
         }
 
         if (file_exists(THEME_DIR.DIR."filters".DIR.$name.".php")) {
-            return new \Twig\TwigFunction(
+            return new \Twig\TwigFilter(
                 $name,
                 include THEME_DIR.DIR."filters".DIR.$name.".php"
             );
