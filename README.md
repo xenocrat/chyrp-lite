@@ -106,7 +106,7 @@ There's no need to run [upgrade.php](upgrade.php) if you're using Docker.
 
 By design Chyrp Lite allows authors to create posts and pages containing valid HTML, meaning that authored content may also contain JavaScript and CSS styles. This allows maximum freedom to authors, but it comes with a security risk if the blog administrator allows untrusted users to create posts and pages. If you want to allow untrusted users to create posts and pages, you should enable the __Content Security Policy__ module to apply a strong [Content Security Policy](https://w3c.github.io/webappsec-csp/) that disallows unsafe inline JavaScript and CSS.
 
-### Server-Side Request Forgery (SSRF)
+### Server-side request forgery (SSRF)
 
 Chyrp Lite uses [`filter_var`](https://www.php.net/manual/en/function.filter-var.php) to categorize IP addresses as "safe" or "unsafe" using `FILTER_VALIDATE_IP` and the following flags:
 
@@ -114,7 +114,7 @@ Chyrp Lite uses [`filter_var`](https://www.php.net/manual/en/function.filter-var
 - `FILTER_FLAG_NO_PRIV_RANGE`
 - `FILTER_FLAG_GLOBAL_RANGE` (requires PHP 8.2+)
 
-Remote connections to "unsafe" IP addresses are denied or terminated before any data is sent. This provides incomplete protection against [server-side request forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery) attacks. Complete SSRF protection in an environment such as Chyrp Lite, that must allow remote connections to user-defined endpoints, cannot reasonably be achieved at the application layer. **Providing complete SSRF protection is considered out of scope for this project.** If exposure to SSRF is a concern in your deployment environment, you should configure firewall rules to prevent outbound connections to IP ranges defined in [RFC 3056], [RFC 4380], [RFC 6052], and [RFC 8215].
+Remote connections to "unsafe" IP addresses are denied or terminated before any data is sent, providing incomplete protection against [server-side request forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery) attacks. Complete SSRF protection in an environment such as Chyrp Lite, that must allow remote connections to user-defined endpoints, cannot reasonably be achieved at the application layer. **Providing complete SSRF protection is considered out of scope for this project.** If exposure to SSRF is a concern in your deployment environment, you should configure firewall rules to prevent outbound connections to IP ranges defined in [RFC 3056], [RFC 4380], [RFC 6052], and [RFC 8215].
 
 [RFC 3056]: https://datatracker.ietf.org/doc/html/rfc3056
 [RFC 4380]: https://datatracker.ietf.org/doc/html/rfc4380
