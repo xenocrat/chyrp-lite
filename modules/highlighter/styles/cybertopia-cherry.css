@@ -1,17 +1,10 @@
-pre code.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 1em
-}
-code.hljs {
-  padding: 3px 5px
-}
 /*
   Theme: Cybertopia Cherry
   Author: Alexandre ZANNI (noraj)
   Repository: https://github.com/noraj/cybertopia-highlightjs
 */
-:root {
+
+:root, :host {
   --hljs-bg: #101010;
   --hljs-mono-1: #abb2bf;
   --hljs-mono-3: #5c6370;
@@ -22,8 +15,9 @@ code.hljs {
   --hljs-hue-5: #02C584;
   --hljs-hue-6: #02C574;
   --hljs-hue-6-2: #02C563;
-  --hljs-hue-7: #C50233
+  --hljs-hue-7: #C50233;
 }
+
 .hljs {
   color: var(--hljs-mono-1);
   background: var(--hljs-bg)
@@ -96,8 +90,7 @@ code.hljs {
 .hljs-link {
   text-decoration: underline
 }
-.hljs-params,
-.hljs-operator,
+.hljs-params, .hljs-operator,
 .hljs-template-tag {
   color: var(--hljs-hue-7)
 }

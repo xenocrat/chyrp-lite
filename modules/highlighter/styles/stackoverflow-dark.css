@@ -1,11 +1,3 @@
-pre code.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 1em
-}
-code.hljs {
-  padding: 3px 5px
-}
 /*!
   Theme: StackOverflow Dark
   Description: Dark theme as used on stackoverflow.com
@@ -19,36 +11,43 @@ code.hljs {
   Code Blocks: /blob/v0.64.0/lib/css/components/_stacks-code-blocks.less
   Colors: /blob/v0.64.0/lib/css/exports/_stacks-constants-colors.less
 */
+
 .hljs {
   /* var(--highlight-color) */
   color: #ffffff;
   /* var(--highlight-bg) */
-  background: #1c1b1b
+  background: #1c1b1b;
 }
+
 .hljs-subst {
   /* var(--highlight-color) */
-  color: #ffffff
+  color: #ffffff;
 }
+
 .hljs-comment {
   /* var(--highlight-comment) */
-  color: #999999
+  color: #999999;
 }
+
 .hljs-keyword,
 .hljs-selector-tag,
 .hljs-meta .hljs-keyword,
 .hljs-doctag,
 .hljs-section {
   /* var(--highlight-keyword) */
-  color: #88aece
+  color: #88aece;
 }
+
 .hljs-attr {
   /* var(--highlight-attribute); */
-  color: #88aece
+  color: #88aece;
 }
+
 .hljs-attribute {
   /* var(--highlight-symbol) */
-  color: #c59bc1
+  color: #c59bc1;
 }
+
 .hljs-name,
 .hljs-type,
 .hljs-number,
@@ -56,12 +55,14 @@ code.hljs {
 .hljs-quote,
 .hljs-template-tag {
   /* var(--highlight-namespace) */
-  color: #f08d49
+  color: #f08d49;
 }
+
 .hljs-selector-class {
   /* var(--highlight-keyword) */
-  color: #88aece
+  color: #88aece;
 }
+
 .hljs-string,
 .hljs-regexp,
 .hljs-symbol,
@@ -70,42 +71,51 @@ code.hljs {
 .hljs-link,
 .hljs-selector-attr {
   /* var(--highlight-variable) */
-  color: #b5bd68
+  color: #b5bd68;
 }
+
 .hljs-meta,
 .hljs-selector-pseudo {
   /* var(--highlight-keyword) */
-  color: #88aece
+  color: #88aece;
 }
+
 .hljs-built_in,
 .hljs-title,
 .hljs-literal {
   /* var(--highlight-literal) */
-  color: #f08d49
+  color: #f08d49;
 }
+
 .hljs-bullet,
 .hljs-code {
   /* var(--highlight-punctuation) */
-  color: #cccccc
+  color: #cccccc;
 }
+
 .hljs-meta .hljs-string {
   /* var(--highlight-variable) */
-  color: #b5bd68
+  color: #b5bd68;
 }
+
 .hljs-deletion {
   /* var(--highlight-deletion) */
-  color: #de7176
+  color: #de7176;
 }
+
 .hljs-addition {
   /* var(--highlight-addition) */
-  color: #76c490
+  color: #76c490;
 }
+
 .hljs-emphasis {
-  font-style: italic
+  font-style: italic;
 }
+
 .hljs-strong {
-  font-weight: bold
+  font-weight: bold;
 }
+
 .hljs-formula,
 .hljs-operator,
 .hljs-params,
@@ -113,5 +123,4 @@ code.hljs {
 .hljs-punctuation,
 .hljs-tag {
   /* purposely ignored */
-  
 }

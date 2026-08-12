@@ -1,11 +1,3 @@
-pre code.hljs {
-  display: block;
-  overflow-x: auto;
-  padding: 1em
-}
-code.hljs {
-  padding: 3px 5px
-}
 /*!
   Theme: Tokyo-night-light
   origin: https://github.com/enkia/tokyo-night-vscode-theme
@@ -14,11 +6,13 @@ code.hljs {
   License: see project LICENSE
   Touched: 2022
 */
+
 /*  Comment */
 .hljs-meta,
 .hljs-comment {
-  color: #9699a3
+  color: #9699a3;
 }
+
 /* Red */
 /*INFO: This keyword, HTML elements, Regex group symbol, CSS units, Terminal Red */
 .hljs-tag,
@@ -31,8 +25,9 @@ code.hljs {
 .hljs-selector-attr,
 .hljs-variable.language_,
 .hljs-deletion {
-  color: #8c4351
+  color: #8c4351;
 }
+
 /*Orange */
 /*INFO: Number and Boolean constants, Language support constants */
 .hljs-variable,
@@ -42,35 +37,37 @@ code.hljs {
 .hljs-type,
 .hljs-params,
 .hljs-link {
-  color: #965027
+  color: #965027;
 }
+
+
 /*  Yellow */
 /* INFO:  	Function parameters, Regex character sets, Terminal Yellow */
-.hljs-built_in,
+.hljs-built_in, 
 .hljs-attribute {
-  color: #8f5e15
+  color: #8f5e15;
 }
 /* cyan */
 /* INFO: Language support functions, CSS HTML elements */
 .hljs-selector-tag {
-  color: #166775
+  color: #166775;
 }
+
 /* light blue */
 /* INFO: Object properties, Regex quantifiers and flags, Markdown headings, Terminal Cyan, Markdown code, Import/export keywords */
 .hljs-keyword,
-.hljs-title.function_,
+  .hljs-title.function_,
 .hljs-title,
 .hljs-title.class_,
 .hljs-title.class_.inherited__,
 .hljs-subst,
-.hljs-property {
-  color: #0f4b6e
-}
+.hljs-property {color: #0f4b6e;}
+
 /*Green*/
 /* INFO: Object literal keys, Markdown links, Terminal Green */
-.hljs-selector-tag {
-  color: #33635c
-}
+.hljs-selector-tag { color: #33635c;}
+
+
 /*Green(er) */
 /* INFO: Strings, CSS class names */
 .hljs-quote,
@@ -78,15 +75,19 @@ code.hljs {
 .hljs-symbol,
 .hljs-bullet,
 .hljs-addition {
-  color: #485e30
+  color: #485e30;
 }
+
 /* Blue */
 /* INFO:  	Function names, CSS property names, Terminal Blue */
 .hljs-code,
 .hljs-formula,
 .hljs-section {
-  color: #34548a
+  color: #34548a;
 }
+
+
+
 /* Magenta */
 /*INFO: Control Keywords, Storage Types, Regex symbols and operators, HTML Attributes, Terminal Magenta */
 .hljs-name,
@@ -95,20 +96,23 @@ code.hljs {
 .hljs-keyword,
 .hljs-char.escape_,
 .hljs-attr {
-  color: #5a4a78
+  color: #5a4a78;
 }
+
 /* white*/
 /* INFO: Variables, Class names, Terminal White */
-.hljs-punctuation {
-  color: #343b58
-}
+.hljs-punctuation {color: #343b58}
+
 .hljs {
   background: #d5d6db;
-  color: #565a6e
+  color: #565a6e;
 }
+
 .hljs-emphasis {
-  font-style: italic
+  font-style: italic;
 }
+
 .hljs-strong {
-  font-weight: bold
+  font-weight: bold;
 }
+
