@@ -1072,7 +1072,8 @@
                 "view_upload" => "View Uploads",
                 "add_upload" => "Add Uploads",
                 "edit_upload" => "Edit Uploads",
-                "delete_upload" => "Delete Uploads"
+                "delete_upload" => "Delete Uploads",
+                "manage_caches" => "Manage Caches"
             );
 
             # Delete all existing permissions.

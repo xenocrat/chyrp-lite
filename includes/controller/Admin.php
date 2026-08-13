@@ -2312,10 +2312,10 @@
          */
         public function admin_delete_caches(
         ): void {
-            if (!Visitor::current()->group->can("change_settings"))
+            if (!Visitor::current()->group->can("manage_caches"))
                 show_403(
                     __("Access Denied"),
-                    __("You do not have sufficient privileges to change settings.")
+                    __("You do not have sufficient privileges to manage caches.")
                 );
 
             $this->display(
@@ -2329,12 +2329,12 @@
          */
         public function admin_destroy_caches(
         ): void {
-            fallback($_SESSION['admin_redirect_to'], "content_settings");
+            fallback($_SESSION['admin_redirect_to'], "manage");
 
-            if (!Visitor::current()->group->can("change_settings"))
+            if (!Visitor::current()->group->can("manage_caches"))
                 show_403(
                     __("Access Denied"),
-                    __("You do not have sufficient privileges to change settings.")
+                    __("You do not have sufficient privileges to manage caches.")
                 );
 
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
@@ -4079,7 +4079,7 @@
             }
 
             if (
-                $visitor->group->can("change_settings")
+                $visitor->group->can("manage_caches")
             ) {
                 $manage["delete_caches"] = array(
                     "title" => __("Caches")

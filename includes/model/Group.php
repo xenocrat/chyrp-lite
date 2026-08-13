@@ -369,7 +369,8 @@
                 "view_upload"       => __("View Uploads"),
                 "add_upload"        => __("Add Uploads"),
                 "edit_upload"       => __("Edit Uploads"),
-                "delete_upload"     => __("Delete Uploads")
+                "delete_upload"     => __("Delete Uploads"),
+                "manage_caches"     => __("Manage Caches")
             );
 
             Trigger::current()->filter($names, "list_permissions");

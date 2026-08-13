@@ -816,6 +816,35 @@
         }
     }
 
+    /**
+     * Function: add_manage_caches
+     * Adds the manage_caches permission.
+     *
+     * Versions: 2026.02 => 2026.03
+     */
+    function add_manage_caches(
+    ): void {
+        $sql = SQL::current();
+
+        if (
+            !$sql->count(
+                "permissions",
+                array(
+                    "id" => "manage_caches",
+                    "group_id" => 0
+                )
+            )
+        )
+            $sql->insert(
+                "permissions",
+                array(
+                    "id" => "manage_caches",
+                    "name" => "Manage Caches",
+                    "group_id" => 0
+                )
+            );
+    }
+
     #---------------------------------------------
     # Output Starts
     #---------------------------------------------
@@ -1187,6 +1216,7 @@
         add_delete_upload();
         add_email_public();
         add_user_activation();
+        add_manage_caches();
 
         # Perform module upgrades.
         foreach ($config->enabled_modules as $module) {
