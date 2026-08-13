@@ -91,12 +91,10 @@ Chyrp Lite verwendet [`filter_var`](https://www.php.net/manual/en/function.filte
 - `FILTER_FLAG_NO_PRIV_RANGE`
 - `FILTER_FLAG_GLOBAL_RANGE`
 
-Fernverbindungen zu „unsicheren“ IP-Adressen werden verweigert oder beendet, bevor Daten übertragen werden; dies bietet jedoch nur einen unvollständigen Schutz gegen [Server-Side Request Forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery)-Angriffe. Ein vollständiger SSRF-Schutz lässt sich auf Anwendungsebene in einer Umgebung wie Chyrp Lite – die Fernverbindungen zu benutzerdefinierten Endpunkten zulassen muss – kaum sinnvoll realisieren. **Die Gewährleistung eines vollständigen SSRF-Schutzes liegt außerhalb des Projektumfangs.** Sollte das Risiko von SSRF-Angriffen in Ihrer Einsatzumgebung ein Anlass zur Sorge sein, empfiehlt sich die Konfiguration von Firewall-Regeln, die ausgehende Verbindungen zu den in [RFC 3056], [RFC 4380], [RFC 6052] und [RFC 8215] definierten IPv6-Adressbereichen unterbinden.
+Fernverbindungen zu „unsicheren“ IP-Adressen werden verweigert oder beendet, bevor Daten übertragen werden; dies bietet jedoch nur einen unvollständigen Schutz gegen [Server-Side Request Forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery)-Angriffe. Ein vollständiger SSRF-Schutz lässt sich auf Anwendungsebene in einer Umgebung wie Chyrp Lite – die Fernverbindungen zu benutzerdefinierten Endpunkten zulassen muss – kaum sinnvoll realisieren. **Die Gewährleistung eines vollständigen SSRF-Schutzes liegt außerhalb des Projektumfangs.** Wenn SSRF in Ihrer Bereitstellungsumgebung ein Risiko darstellt, sollten Sie Firewall-Regeln konfigurieren, die ausgehende Verbindungen zu IP-Bereichen aus den speziellen IANA-Registern für [IPv4] und [IPv6] unterbinden.
 
-[RFC 3056]: https://datatracker.ietf.org/doc/html/rfc3056
-[RFC 4380]: https://datatracker.ietf.org/doc/html/rfc4380
-[RFC 6052]: https://datatracker.ietf.org/doc/html/rfc6052
-[RFC 8215]: https://datatracker.ietf.org/doc/html/rfc8215
+[IPv4]: https://www.iana.org/assignments/iana-ipv4-special-registry
+[IPv6]: https://www.iana.org/assignments/iana-ipv6-special-registry
 
 ### Für Besucher zugängliche Dateien
 

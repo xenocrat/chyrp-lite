@@ -94,12 +94,10 @@ Chyrp Lite 使用 [`filter_var`](https://www.php.net/manual/en/function.filter-v
 - `FILTER_FLAG_NO_PRIV_RANGE`
 - `FILTER_FLAG_GLOBAL_RANGE`
 
-针对“不安全”IP地址的远程连接会在数据发送前被拒绝或终止，从而提供针对[服务端请求伪造 [server-side request forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery) 攻击的部分防护。在像 Chyrp Lite 这样必须允许连接至用户自定义端点的环境中，要在应用层实现完整的 SSRF 防护是不切实际的。**提供完整的 SSRF 防护不在本项目范围内。** 如果您的部署环境存在 SSRF 风险隐患，建议配置防火墙规则，以阻止向 [RFC 3056]、[RFC 4380]、[RFC 6052] 和 [RFC 8215] 中定义的 IPv6 地址段发起出站连接。
+针对“不安全”IP地址的远程连接会在数据发送前被拒绝或终止，从而提供针对[服务端请求伪造 [server-side request forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery) 攻击的部分防护。在像 Chyrp Lite 这样必须允许连接至用户自定义端点的环境中，要在应用层实现完整的 SSRF 防护是不切实际的。**提供完整的 SSRF 防护不在本项目范围内。** 如果您的部署环境存在 SSRF 风险隐患，您应当配置防火墙规则，以阻止向 IANA [IPv4] 和 [IPv6] 特殊地址注册表中列出的 IP 地址范围发起出站连接。
 
-[RFC 3056]: https://datatracker.ietf.org/doc/html/rfc3056
-[RFC 4380]: https://datatracker.ietf.org/doc/html/rfc4380
-[RFC 6052]: https://datatracker.ietf.org/doc/html/rfc6052
-[RFC 8215]: https://datatracker.ietf.org/doc/html/rfc8215
+[IPv4]: https://www.iana.org/assignments/iana-ipv4-special-registry
+[IPv6]: https://www.iana.org/assignments/iana-ipv6-special-registry
 
 ### 访客可访问的文件
 

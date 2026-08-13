@@ -101,12 +101,10 @@ Chyrp Lite utilizza [`filter_var`](https://www.php.net/manual/en/function.filter
 - `FILTER_FLAG_NO_PRIV_RANGE`
 - `FILTER_FLAG_GLOBAL_RANGE`
 
-Le connessioni remote verso indirizzi IP "non sicuri" vengono rifiutate o interrotte prima dell'invio di qualsiasi dato, offrendo una protezione parziale contro gli attacchi di tipo [Server-Side Request Forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery). In un ambiente come Chyrp Lite, che deve consentire connessioni remote verso endpoint definiti dall'utente, non è ragionevolmente possibile garantire una protezione completa contro l'SSRF a livello applicativo. **La fornitura di una protezione completa contro l'SSRF è considerata fuori dall'ambito di questo progetto.** Se l'esposizione all'SSRF rappresenta una preoccupazione per il proprio ambiente di distribuzione, è opportuno configurare regole firewall che impediscano le connessioni in uscita verso gli intervalli IPv6 definiti nelle RFC [RFC 3056], [RFC 4380], [RFC 6052] e [RFC 8215].
+Le connessioni remote verso indirizzi IP "non sicuri" vengono rifiutate o interrotte prima dell'invio di qualsiasi dato, offrendo una protezione parziale contro gli attacchi di tipo [Server-Side Request Forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery). In un ambiente come Chyrp Lite, che deve consentire connessioni remote verso endpoint definiti dall'utente, non è ragionevolmente possibile garantire una protezione completa contro l'SSRF a livello applicativo. **La fornitura di una protezione completa contro l'SSRF è considerata fuori dall'ambito di questo progetto.** Se l'esposizione a SSRF rappresenta una preoccupazione nel tuo ambiente di distribuzione, dovresti configurare regole firewall che impediscano le connessioni in uscita verso intervalli di indirizzi IP inclusi nei registri speciali IANA [IPv4] e [IPv6].
 
-[RFC 3056]: https://datatracker.ietf.org/doc/html/rfc3056
-[RFC 4380]: https://datatracker.ietf.org/doc/html/rfc4380
-[RFC 6052]: https://datatracker.ietf.org/doc/html/rfc6052
-[RFC 8215]: https://datatracker.ietf.org/doc/html/rfc8215
+[IPv4]: https://www.iana.org/assignments/iana-ipv4-special-registry
+[IPv6]: https://www.iana.org/assignments/iana-ipv6-special-registry
 
 ### File accessibili ai visitatori
 

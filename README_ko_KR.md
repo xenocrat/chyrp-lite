@@ -101,12 +101,10 @@ Chyrp Lite는 `FILTER_VALIDATE_IP`와 다음 플래그를 사용하여 IP 주소
 - `FILTER_FLAG_NO_PRIV_RANGE`
 - `FILTER_FLAG_GLOBAL_RANGE`
 
-"안전하지 않은" IP 주소로의 원격 연결은 데이터가 전송되기 전에 거부되거나 종료되므로, [server-side request forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery) 공격에 대해 부분적인 보호 기능만 제공합니다. 사용자가 정의한 엔드포인트로의 원격 연결을 허용해야 하는 Chyrp Lite와 같은 환경에서 완전한 SSRF 보호를 애플리케이션 계층에서 구현하는 것은 현실적으로 어렵습니다. **따라서 완전한 SSRF 보호를 제공하는 것은 이 프로젝트의 범위를 벗어나는 것으로 간주됩니다.** 배포 환경에서 SSRF 노출이 우려된다면, [RFC 3056], [RFC 4380], [RFC 6052] 및 [RFC 8215]에 정의된 IPv6 대역으로의 아웃바운드 연결을 차단하는 방화벽 규칙을 설정해야 합니다.
+"안전하지 않은" IP 주소로의 원격 연결은 데이터가 전송되기 전에 거부되거나 종료되므로, [server-side request forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery) 공격에 대해 부분적인 보호 기능만 제공합니다. 사용자가 정의한 엔드포인트로의 원격 연결을 허용해야 하는 Chyrp Lite와 같은 환경에서 완전한 SSRF 보호를 애플리케이션 계층에서 구현하는 것은 현실적으로 어렵습니다. **따라서 완전한 SSRF 보호를 제공하는 것은 이 프로젝트의 범위를 벗어나는 것으로 간주됩니다.** 배포 환경에서 SSRF 노출이 우려된다면, IANA의 [IPv4] 및 [IPv6] 특수 목적 주소 레지스트리에 정의된 IP 대역으로의 아웃바운드 연결을 차단하도록 방화벽 규칙을 설정해야 합니다.
 
-[RFC 3056]: https://datatracker.ietf.org/doc/html/rfc3056
-[RFC 4380]: https://datatracker.ietf.org/doc/html/rfc4380
-[RFC 6052]: https://datatracker.ietf.org/doc/html/rfc6052
-[RFC 8215]: https://datatracker.ietf.org/doc/html/rfc8215
+[IPv4]: https://www.iana.org/assignments/iana-ipv4-special-registry
+[IPv6]: https://www.iana.org/assignments/iana-ipv6-special-registry
 
 ### 방문자가 접근할 수 있는 파일
 
