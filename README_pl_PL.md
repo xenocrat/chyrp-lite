@@ -97,6 +97,21 @@ W przypadku korzystania z Dockera nie ma potrzeby uruchamiania [upgrade.php](upg
 
 Z założenia Chyrp Lite pozwala autorom tworzyć posty i strony zawierające poprawny kod HTML, co oznacza, że ich treści mogą również zawierać style JavaScript i CSS. Zapewnia to autorom maksymalną swobodę, ale wiąże się z ryzykiem bezpieczeństwa, jeśli administrator bloga zezwala niezaufanym użytkownikom na tworzenie postów i stron. Aby zezwolić niezaufanym użytkownikom na tworzenie postów i stron, należy włączyć moduł __Polityka bezpieczeństwa treści__, aby zastosować silną [Content Security Policy](https://w3c.github.io/webappsec-csp/), która blokuje niebezpieczny kod JavaScript i CSS inline.
 
+### Server-Side Request Forgery (SSRF)
+
+Chyrp Lite wykorzystuje [`filter_var`](https://www.php.net/manual/en/function.filter-var.php) do klasyfikowania adresów IP jako „bezpieczne” lub „niebezpieczne”, używając `FILTER_VALIDATE_IP` oraz następujących flag:
+
+- `FILTER_FLAG_NO_RES_RANGE`
+- `FILTER_FLAG_NO_PRIV_RANGE`
+- `FILTER_FLAG_GLOBAL_RANGE`
+
+Zdalne połączenia z „niebezpiecznymi” adresami IP są odrzucane lub przerywane przed wysłaniem jakichkolwiek danych, co zapewnia jedynie częściową ochronę przed atakami typu [Server-Side Request Forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery). Pełna ochrona przed SSRF w środowisku takim jak Chyrp Lite – które musi umożliwiać zdalne połączenia z punktami końcowymi zdefiniowanymi przez użytkownika – jest trudna do osiągnięcia na poziomie aplikacji. **Zapewnienie pełnej ochrony przed SSRF wykracza poza zakres tego projektu.** Jeśli w danym środowisku wdrożeniowym istnieje ryzyko ataków SSRF, należy skonfigurować reguły zapory sieciowej (firewall) blokujące połączenia wychodzące do zakresów adresów IPv6 określonych w dokumentach [RFC 3056], [RFC 4380], [RFC 6052] oraz [RFC 8215].
+
+[RFC 3056]: https://datatracker.ietf.org/doc/html/rfc3056
+[RFC 4380]: https://datatracker.ietf.org/doc/html/rfc4380
+[RFC 6052]: https://datatracker.ietf.org/doc/html/rfc6052
+[RFC 8215]: https://datatracker.ietf.org/doc/html/rfc8215
+
 ### Pliki dostępne dla odwiedzających
 
 Po instalacji następujące pliki są dostępne dla odwiedzających:

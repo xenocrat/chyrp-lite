@@ -93,6 +93,21 @@ Puoi aggiornare Chyrp Lyte in sei passaggi:
 
 Per impostazione predefinita, Chyrp Lite consente agli autori di creare post e pagine contenenti codice HTML valido, il che significa che i contenuti creati possono includere anche JavaScript e CSS. Questo offre la massima libertà agli autori, ma comporta un rischio per la sicurezza se l'amministratore del blog consente a utenti non attendibili di creare post e pagine. Se si desidera consentire a utenti non attendibili di creare post e pagine, è necessario abilitare il modulo __Politica di Sicurezza dei Contenuti__ per applicare una solida [Content Security Policy](https://w3c.github.io/webappsec-csp/) che impedisca l'utilizzo di JavaScript e CSS inline non sicuri.
 
+### Server-Side Request Forgery (SSRF)
+
+Chyrp Lite utilizza [`filter_var`](https://www.php.net/manual/en/function.filter-var.php) per classificare gli indirizzi IP come "sicuri" o "non sicuri" tramite `FILTER_VALIDATE_IP` e i seguenti flag:
+
+- `FILTER_FLAG_NO_RES_RANGE`
+- `FILTER_FLAG_NO_PRIV_RANGE`
+- `FILTER_FLAG_GLOBAL_RANGE`
+
+Le connessioni remote verso indirizzi IP "non sicuri" vengono rifiutate o interrotte prima dell'invio di qualsiasi dato, offrendo una protezione parziale contro gli attacchi di tipo [Server-Side Request Forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery). In un ambiente come Chyrp Lite, che deve consentire connessioni remote verso endpoint definiti dall'utente, non è ragionevolmente possibile garantire una protezione completa contro l'SSRF a livello applicativo. **La fornitura di una protezione completa contro l'SSRF è considerata fuori dall'ambito di questo progetto.** Se l'esposizione all'SSRF rappresenta una preoccupazione per il proprio ambiente di distribuzione, è opportuno configurare regole firewall che impediscano le connessioni in uscita verso gli intervalli IPv6 definiti nelle RFC [RFC 3056], [RFC 4380], [RFC 6052] e [RFC 8215].
+
+[RFC 3056]: https://datatracker.ietf.org/doc/html/rfc3056
+[RFC 4380]: https://datatracker.ietf.org/doc/html/rfc4380
+[RFC 6052]: https://datatracker.ietf.org/doc/html/rfc6052
+[RFC 8215]: https://datatracker.ietf.org/doc/html/rfc8215
+
 ### File accessibili ai visitatori
 
 Dopo l'installazione, questi file sono accessibili ai visitatori:

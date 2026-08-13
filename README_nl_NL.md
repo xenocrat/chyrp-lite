@@ -82,6 +82,21 @@ Je kunt Chyrp Lite in 6 stappen upgraden:
 
 Chyrp Lite is zo ontworpen dat auteurs berichten en pagina's kunnen maken met geldige HTML. Dit betekent dat de door auteurs gemaakte content ook JavaScript en CSS-stijlen kan bevatten. Dit geeft auteurs maximale vrijheid, maar brengt wel een beveiligingsrisico met zich mee als de blogbeheerder onbetrouwbare gebruikers toestaat berichten en pagina's te maken. Als u onbetrouwbare gebruikers wilt toestaan berichten en pagina's te maken, moet u de module __Inhoudsbeveiligingsbeleid__ inschakelen om een strikt [Content Security Policy](https://w3c.github.io/webappsec-csp/) toe te passen dat onveilige inline JavaScript en CSS blokkeert.
 
+### Server-Side Request Forgery (SSRF)
+
+Chyrp Lite gebruikt [`filter_var`](https://www.php.net/manual/en/function.filter-var.php) om IP-adressen te categoriseren als "veilig" of "onveilig" met behulp van `FILTER_VALIDATE_IP` en de volgende vlaggen:
+
+- `FILTER_FLAG_NO_RES_RANGE`
+- `FILTER_FLAG_NO_PRIV_RANGE`
+- `FILTER_FLAG_GLOBAL_RANGE`
+
+Externe verbindingen met "onveilige" IP-adressen worden geweigerd of verbroken voordat er gegevens worden verzonden; dit biedt echter slechts gedeeltelijke bescherming tegen [Server-Side Request Forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery)-aanvallen. Volledige SSRF-bescherming is in een omgeving als Chyrp Lite – waarin externe verbindingen met door de gebruiker gedefinieerde eindpunten mogelijk moeten zijn – redelijkerwijs niet te realiseren op applicatieniveau. **Het bieden van volledige SSRF-bescherming valt buiten de scope van dit project.** Als blootstelling aan SSRF een risico vormt in uw implementatieomgeving, dient u firewallregels te configureren die uitgaande verbindingen naar de IPv6-bereiken zoals gedefinieerd in [RFC 3056], [RFC 4380], [RFC 6052] en [RFC 8215] blokkeren.
+
+[RFC 3056]: https://datatracker.ietf.org/doc/html/rfc3056
+[RFC 4380]: https://datatracker.ietf.org/doc/html/rfc4380
+[RFC 6052]: https://datatracker.ietf.org/doc/html/rfc6052
+[RFC 8215]: https://datatracker.ietf.org/doc/html/rfc8215
+
 ### Bestanden die toegankelijk zijn voor bezoekers
 
 Na installatie zijn deze bestanden toegankelijk voor bezoekers:

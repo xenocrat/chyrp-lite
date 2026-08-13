@@ -93,6 +93,21 @@ Chyrp Lite를 사용하면 번거로움을 최소화하면서 자신의 웹 서�
 
 Chyrp Lite는 기본적으로 작성자가 유효한 HTML을 포함하는 게시물과 페이지를 생성할 수 있도록 설계되었습니다. 즉, 작성된 콘텐츠에 JavaScript 및 CSS 스타일이 포함될 수 있습니다. 이는 작성자에게 최대한의 자유를 제공하지만, 블로그 관리자가 신뢰할 수 없는 사용자가 게시물과 페이지를 생성하도록 허용하는 경우 보안 위험이 발생할 수 있습니다. 신뢰할 수 없는 사용자가 게시물과 페이지를 생성하도록 허용하려면, 안전하지 않은 인라인 JavaScript 및 CSS를 허용하지 않는 강력한 [Content Security Policy](https://w3c.github.io/webappsec-csp/) 적용하기 위해 __콘텐츠 보안 정책__ 모듈을 활성화해야 합니다.
 
+### Server-side request forgery (SSRF)
+
+Chyrp Lite는 `FILTER_VALIDATE_IP`와 다음 플래그를 사용하여 IP 주소를 "안전(safe)" 또는 "안전하지 않음(unsafe)" 으로 분류할 때 [`filter_var`](https://www.php.net/manual/en/function.filter-var.php)를 사용합니다.
+
+- `FILTER_FLAG_NO_RES_RANGE`
+- `FILTER_FLAG_NO_PRIV_RANGE`
+- `FILTER_FLAG_GLOBAL_RANGE`
+
+"안전하지 않은" IP 주소로의 원격 연결은 데이터가 전송되기 전에 거부되거나 종료되므로, [server-side request forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery) 공격에 대해 부분적인 보호 기능만 제공합니다. 사용자가 정의한 엔드포인트로의 원격 연결을 허용해야 하는 Chyrp Lite와 같은 환경에서 완전한 SSRF 보호를 애플리케이션 계층에서 구현하는 것은 현실적으로 어렵습니다. **따라서 완전한 SSRF 보호를 제공하는 것은 이 프로젝트의 범위를 벗어나는 것으로 간주됩니다.** 배포 환경에서 SSRF 노출이 우려된다면, [RFC 3056], [RFC 4380], [RFC 6052] 및 [RFC 8215]에 정의된 IPv6 대역으로의 아웃바운드 연결을 차단하는 방화벽 규칙을 설정해야 합니다.
+
+[RFC 3056]: https://datatracker.ietf.org/doc/html/rfc3056
+[RFC 4380]: https://datatracker.ietf.org/doc/html/rfc4380
+[RFC 6052]: https://datatracker.ietf.org/doc/html/rfc6052
+[RFC 8215]: https://datatracker.ietf.org/doc/html/rfc8215
+
 ### 방문자가 접근할 수 있는 파일
 
 설치 후 방문자가 다음 파일에 접근할 수 있습니다.

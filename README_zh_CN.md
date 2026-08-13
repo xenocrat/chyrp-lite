@@ -86,6 +86,21 @@ ARIA标签可确保您的博客可供使用辅助技术的访问者访问。
 
 Chyrp Lite 的设计允许作者创建包含有效 HTML 的文章和页面，这意味着作者创建的内容也可以包含 JavaScript 和 CSS 样式。这赋予了作者最大的创作自由，但如果博客管理员允许不受信任的用户创建文章和页面，则会带来安全风险。如果您希望允许不受信任的用户创建文章和页面，则应启用内容安全策略”模块，以应用严格的 [Content Security Policy](https://w3c.github.io/webappsec-csp/)，禁止使用不安全的内联 JavaScript 和 CSS。
 
+### Server-side request forgery (SSRF)
+
+Chyrp Lite 使用 [`filter_var`](https://www.php.net/manual/en/function.filter-var.php) 并结合 `FILTER_VALIDATE_IP` 及以下标志，将 IP 地址归类为“安全”或“不安全”：
+
+- `FILTER_FLAG_NO_RES_RANGE`
+- `FILTER_FLAG_NO_PRIV_RANGE`
+- `FILTER_FLAG_GLOBAL_RANGE`
+
+针对“不安全”IP地址的远程连接会在数据发送前被拒绝或终止，从而提供针对[服务端请求伪造 [server-side request forgery](https://owasp.org/www-community/attacks/Server_Side_Request_Forgery) 攻击的部分防护。在像 Chyrp Lite 这样必须允许连接至用户自定义端点的环境中，要在应用层实现完整的 SSRF 防护是不切实际的。**提供完整的 SSRF 防护不在本项目范围内。** 如果您的部署环境存在 SSRF 风险隐患，建议配置防火墙规则，以阻止向 [RFC 3056]、[RFC 4380]、[RFC 6052] 和 [RFC 8215] 中定义的 IPv6 地址段发起出站连接。
+
+[RFC 3056]: https://datatracker.ietf.org/doc/html/rfc3056
+[RFC 4380]: https://datatracker.ietf.org/doc/html/rfc4380
+[RFC 6052]: https://datatracker.ietf.org/doc/html/rfc6052
+[RFC 8215]: https://datatracker.ietf.org/doc/html/rfc8215
+
 ### 访客可访问的文件
 
 安装后，访问者可以访问这些文件：
