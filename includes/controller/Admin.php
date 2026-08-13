@@ -2307,6 +2307,83 @@
         }
 
         /**
+         * Function: admin_delete_caches
+         * Cache deletion (confirm page).
+         */
+        public function admin_delete_caches(
+        ): void {
+            if (!Visitor::current()->group->can("change_settings"))
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to change settings.")
+                );
+
+            $this->display(
+                "pages".DIR."delete_caches"
+            );
+        }
+
+        /**
+         * Function: admin_destroy_caches
+         * Recursively destroys the contents of all cache directories.
+         */
+        public function admin_destroy_caches(
+        ): void {
+            fallback($_SESSION['admin_redirect_to'], "content_settings");
+
+            if (!Visitor::current()->group->can("change_settings"))
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to change settings.")
+                );
+
+            if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
+                show_403(
+                    __("Access Denied"),
+                    __("Invalid authentication token.")
+                );
+
+            if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
+                redirect($_SESSION['admin_redirect_to']);
+
+            $caches = new DirectoryIterator(CACHES_DIR);
+            $result = true;
+
+            foreach ($caches as $cache) {
+                if ($cache->isDot() or !$cache->isDir())
+                    continue;
+
+                $items = new RecursiveIteratorIterator(
+                    new RecursiveDirectoryIterator(
+                        $cache->getRealPath(),
+                        RecursiveDirectoryIterator::SKIP_DOTS
+                    ),
+                    RecursiveIteratorIterator::CHILD_FIRST
+                );
+
+                foreach ($items as $item) {
+                    $action = $item->isDir() ? "rmdir" : "unlink" ;
+                    $result = @$action($item->getRealPath());
+
+                    if (!$result)
+                        break 2;
+                }
+            }
+
+            if ($result) {
+                Flash::notice(
+                    __("Caches cleared."),
+                    $_SESSION['admin_redirect_to']
+                );
+            } else {
+                Flash::warning(
+                    __("Failed to clear caches."),
+                    $_SESSION['admin_redirect_to']
+                );
+            }
+        }
+
+        /**
          * Function: admin_export
          * Export content from this installation.
          */
@@ -3789,52 +3866,6 @@
         }
 
         /**
-         * Function: admin_clear_caches
-         * Recursively deletes the contents of all cache directories.
-         */
-        public function admin_clear_caches(
-        ): void {
-            fallback($_SESSION['admin_redirect_to'], "content_settings");
-
-            if (!Visitor::current()->group->can("change_settings"))
-                show_403(
-                    __("Access Denied"),
-                    __("You do not have sufficient privileges to change settings.")
-                );
-
-            $caches = new DirectoryIterator(CACHES_DIR);
-
-            foreach ($caches as $cache) {
-                if ($cache->isDot() or !$cache->isDir())
-                    continue;
-
-                $items = new RecursiveIteratorIterator(
-                    new RecursiveDirectoryIterator(
-                        $cache->getRealPath(),
-                        RecursiveDirectoryIterator::SKIP_DOTS
-                    ),
-                    RecursiveIteratorIterator::CHILD_FIRST
-                );
-
-                foreach ($items as $item) {
-                    $action = $item->isDir() ? "rmdir" : "unlink" ;
-                    $result = @$action($item->getRealPath());
-
-                    if (!$result)
-                        Flash::warning(
-                            __("Failed to clear caches."),
-                            $_SESSION['admin_redirect_to']
-                        );
-                }
-            }
-
-            Flash::notice(
-                __("Caches cleared."),
-                $_SESSION['admin_redirect_to']
-            );
-        }
-
-        /**
          * Function: admin_login
          * Mask for MainController->login().
          */
@@ -3987,7 +4018,7 @@
 
             # Manage:
 
-            if (Post::any_editable() or Post::any_deletable())
+            if (Post::any_editable() or Post::any_deletable()) {
                 $manage["manage_posts"] = array(
                     "title" => __("Posts"),
                     "selected" => array(
@@ -3995,8 +4026,11 @@
                         "delete_post"
                     )
                 );
+            }
 
-            if ($visitor->group->can("edit_page", "delete_page"))
+            if (
+                $visitor->group->can("edit_page", "delete_page")
+            ) {
                 $manage["manage_pages"] = array(
                     "title" => __("Pages"),
                     "selected" => array(
@@ -4004,8 +4038,11 @@
                         "delete_page"
                     )
                 );
+            }
 
-            if ($visitor->group->can("add_user", "edit_user", "delete_user"))
+            if (
+                $visitor->group->can("add_user", "edit_user", "delete_user")
+            ) {
                 $manage["manage_users"] = array(
                     "title" => __("Users"),
                     "selected" => array(
@@ -4014,8 +4051,11 @@
                         "new_user"
                     )
                 );
+            }
 
-            if ($visitor->group->can("add_group", "edit_group", "delete_group"))
+            if (
+                $visitor->group->can("add_group", "edit_group", "delete_group")
+            ) {
                 $manage["manage_groups"] = array(
                     "title" => __("Groups"),
                     "selected" => array(
@@ -4024,8 +4064,11 @@
                         "new_group"
                     )
                 );
+            }
 
-            if ($visitor->group->can("view_upload", "edit_upload", "delete_upload"))
+            if (
+                $visitor->group->can("view_upload", "edit_upload", "delete_upload")
+            ) {
                 $manage["manage_uploads"] = array(
                     "title" => __("Uploads"),
                     "selected" => array(
@@ -4033,6 +4076,15 @@
                         "delete_upload"
                     )
                 );
+            }
+
+            if (
+                $visitor->group->can("change_settings")
+            ) {
+                $manage["delete_caches"] = array(
+                    "title" => __("Caches")
+                );
+            }
 
             $trigger->filter($manage, "manage_nav");
 
