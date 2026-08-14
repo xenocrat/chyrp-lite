@@ -2307,10 +2307,10 @@
         }
 
         /**
-         * Function: admin_delete_caches
+         * Function: admin_delete_cache
          * Cache deletion (confirm page).
          */
-        public function admin_delete_caches(
+        public function admin_delete_cache(
         ): void {
             if (!Visitor::current()->group->can("manage_caches"))
                 show_403(
@@ -2318,18 +2318,48 @@
                     __("You do not have sufficient privileges to manage caches.")
                 );
 
+            if (!isset($_GET['name']))
+                error(
+                    __("Error"),
+                    __("Missing argument."),
+                    code:400
+                );
+
+            $name = str_replace(
+                array(DIR, "/", "<", ">"),
+                "",
+                $_GET['name']
+            );
+
+            if ($name == "")
+                show_404(
+                    __("Not Found"),
+                    __("Directory not found.")
+                );
+
+            $path = CACHES_DIR.DIR.$name;
+
+            if (!is_readable($path) or !is_dir($path))
+                show_404(
+                    __("Not Found"),
+                    __("Directory not found.")
+                );
+
             $this->display(
-                "pages".DIR."delete_caches"
+                "pages".DIR."delete_cache",
+                array(
+                    "name" => $name
+                )
             );
         }
 
         /**
-         * Function: admin_destroy_caches
-         * Recursively destroys the contents of all cache directories.
+         * Function: admin_destroy_cache
+         * Recursively destroys the contents of a cache directory.
          */
-        public function admin_destroy_caches(
+        public function admin_destroy_cache(
         ): void {
-            fallback($_SESSION['admin_redirect_to'], "manage");
+            fallback($_SESSION['admin_redirect_to'], "manage_caches");
 
             if (!Visitor::current()->group->can("manage_caches"))
                 show_403(
@@ -2346,41 +2376,95 @@
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
                 redirect($_SESSION['admin_redirect_to']);
 
-            $caches = new DirectoryIterator(CACHES_DIR);
-            $result = true;
-
-            foreach ($caches as $cache) {
-                if ($cache->isDot() or !$cache->isDir())
-                    continue;
-
-                $items = new RecursiveIteratorIterator(
-                    new RecursiveDirectoryIterator(
-                        $cache->getRealPath(),
-                        RecursiveDirectoryIterator::SKIP_DOTS
-                    ),
-                    RecursiveIteratorIterator::CHILD_FIRST
+            if (!isset($_POST['name']))
+                error(
+                    __("Error"),
+                    __("Missing argument."),
+                    code:400
                 );
 
-                foreach ($items as $item) {
-                    $action = $item->isDir() ? "rmdir" : "unlink" ;
-                    $result = @$action($item->getRealPath());
+            $name = str_replace(
+                array(DIR, "/", "<", ">"),
+                "",
+                $_POST['name']
+            );
 
-                    if (!$result)
-                        break 2;
-                }
+            if ($name == "")
+                show_404(
+                    __("Not Found"),
+                    __("Directory not found.")
+                );
+
+            $path = CACHES_DIR.DIR.$name;
+
+            if (!is_readable($path) or !is_dir($path))
+                show_404(
+                    __("Not Found"),
+                    __("Directory not found.")
+                );
+
+            $items = new RecursiveIteratorIterator(
+                new RecursiveDirectoryIterator(
+                    $path,
+                    RecursiveDirectoryIterator::SKIP_DOTS
+                ),
+                RecursiveIteratorIterator::CHILD_FIRST
+            );
+
+            $result = true;
+
+            foreach ($items as $item) {
+                $action = $item->isDir() ? "rmdir" : "unlink" ;
+                $result = @$action($item->getRealPath());
+
+                if (!$result)
+                    break;
             }
 
             if ($result) {
                 Flash::notice(
-                    __("Caches cleared."),
+                    __("Cache cleared."),
                     $_SESSION['admin_redirect_to']
                 );
             } else {
                 Flash::warning(
-                    __("Failed to clear caches."),
+                    __("Failed to clear cache."),
                     $_SESSION['admin_redirect_to']
                 );
             }
+        }
+
+        /**
+         * Function: admin_manage_caches
+         * Cache management.
+         */
+        public function admin_manage_caches(
+        ): void {
+            if (!Visitor::current()->group->can("manage_caches"))
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to manage caches.")
+                );
+
+            $folder = new DirectoryIterator(CACHES_DIR);
+            $caches = array();
+
+            foreach ($folder as $item) {
+                if ($item->isDot() or !$item->isDir())
+                    continue;
+
+                $caches[] = array(
+                    "name" => $item->getFilename(),
+                    "path" => $item->getPathname()
+                );
+            }
+
+            $this->display(
+                "pages".DIR."manage_caches",
+                array(
+                    "caches" => $caches
+                )
+            );
         }
 
         /**
@@ -4081,8 +4165,11 @@
             if (
                 $visitor->group->can("manage_caches")
             ) {
-                $manage["delete_caches"] = array(
-                    "title" => __("Caches")
+                $manage["manage_caches"] = array(
+                    "title" => __("Caches"),
+                    "selected" => array(
+                        "delete_cache"
+                    )
                 );
             }
 
