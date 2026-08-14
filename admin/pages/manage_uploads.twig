@@ -29,7 +29,7 @@
 </thead>
 <tbody>
 {% for upload in uploads.paginated %}
-<tr id="uploads_{{ loop.index }}" class="uploads">
+<tr id="uploads_{{ loop.index }}" class="upload">
 <td class="uploads_name filename main">
 {% if ["gif", "jpeg", "jpg", "png", "webp"] | contains(upload.type) %}
 {{ upload.name | thumbnail("", false, ["max_width=70", "quality=60", "square=1"], "70px") }}
