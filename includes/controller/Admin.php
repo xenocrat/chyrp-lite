@@ -2423,12 +2423,12 @@
 
             if ($result) {
                 Flash::notice(
-                    __("Cache cleared."),
+                    __("Cache deleted."),
                     $_SESSION['admin_redirect_to']
                 );
             } else {
                 Flash::warning(
-                    __("Failed to clear cache."),
+                    __("Failed to delete cache."),
                     $_SESSION['admin_redirect_to']
                 );
             }
