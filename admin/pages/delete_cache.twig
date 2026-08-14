@@ -1,13 +1,13 @@
 {% extends "layouts" ~ DIR ~ "default.twig" %}
 
-{% block title %}{{ "Delete Caches?" | translate }}{% endblock %}
+{% block title %}{{ "Delete Cache?" | translate }}{% endblock %}
 
 {% block content %}
-<h2>{{ "Delete Caches?" | translate }}</h2>
-<form class="delete" action="{{ url('destroy_caches') }}" method="post" accept-charset="UTF-8">
+<h2>{{ "Delete Cache?" | translate }}</h2>
+<form class="delete" action="{{ url('destroy_cache') }}" method="post" accept-charset="UTF-8">
 <fieldset role="presentation">
 <p>
-{{ "The caches will be permanently deleted." | translate }}
+{{ "The cache directory &#8220;%s&#8221; will be permanently deleted." | translate | format(name | fix) }}
 </p>
 <div class="confirmation">
 <button name="destroy" value="indubitably" class="boo">
@@ -17,6 +17,7 @@
 {{ "Cancel" | translate }}
 </button>
 </div>
+<input type="hidden" name="name" value="{{ name | fix(true) }}" id="name">
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
 </fieldset>
 </form>

@@ -1,0 +1,38 @@
+{% extends "layouts" ~ DIR ~ "default.twig" %}
+
+{% block title %}{{ "Manage Groups" | translate }}{% endblock %}
+
+{% block content %}
+<h2>{{ "Caches" | translate }}</h2>
+<table>
+<thead>
+<tr class="head">
+<th class="cache_name name main">{{ "Path" | translate }}</th>
+{{ trigger.call("manage_caches_column_header") }}
+<th class="controls">{{ "Controls" | translate }}</th>
+</tr>
+</thead>
+<tbody>
+{% for cache in caches %}
+<tr id="cache_{{ cache.name | fix(true) }}" class="cache">
+<td class="cache_path filepath main">
+{{ cache.path | fix }}
+</td>
+{{ trigger.call("manage_caches_column", cache) }}
+<td class="controls">
+<a class="cache_delete_link delete_link emblem" href="{{ url('delete_cache/name/' ~ (cache.name | url_encode)) }}">
+{{ icon_svg("delete.svg", "Delete" | translate) }}
+</a>
+</td>
+</tr>
+{% else %}
+<tr>
+<td class="placeholder">
+{{ icon_svg("failure.svg", false, "emblem") }}
+{{ "No results" | translate }}
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}
