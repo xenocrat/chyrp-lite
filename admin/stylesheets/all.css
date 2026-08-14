@@ -784,7 +784,9 @@ table tbody tr td.name,
 table thead tr th.list,
 table tbody tr td.list,
 table thead tr th.filename,
-table tbody tr td.filename {
+table tbody tr td.filename,
+table thead tr th.filepath,
+table tbody tr td.filepath {
     text-align: start;
 }
 table thead tr th.date,
