@@ -7,7 +7,7 @@
             $config->set(
                 "module_highlighter",
                 array(
-                    "stylesheet" => "default.min.css",
+                    "stylesheet" => "default.css",
                     "copy_to_clipboard" => true
                 )
             );
@@ -75,7 +75,7 @@
                     __("Invalid authentication token.")
                 );
 
-            fallback($_POST['stylesheet'], "default.min.css");
+            fallback($_POST['stylesheet'], "default.css");
 
             $config->set(
                 "module_highlighter",
