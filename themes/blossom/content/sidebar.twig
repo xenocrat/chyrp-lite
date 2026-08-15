@@ -8,44 +8,44 @@
 <h2 class="menu_toggle"><a role="button" href="#" aria-label="{{ 'Close menu' | translate }}">{{ "Menu" | translate }}</a></h2>
 <ul class="navigation sidebar" aria-label="{{ 'Links' | translate }}">
 <li>
-<a href="{{ url('index') }}">{{ "Blog" | translate }}</a>
+<a class="navigation_index" href="{{ url('index') }}">{{ "Blog" | translate }}</a>
 </li>
 {% if site.email_public %}
 <li>
-<a href="{{ mailto(site.email) }}">{{ "Email" | translate }}</a>
+<a class="navigation_email" href="{{ mailto(site.email) }}">{{ "Email" | translate }}</a>
 </li>
 {% endif %}
 <li>
-<a href="{{ url('feed') }}" rel="alternate">{{ "Feed" | translate }}</a>
+<a class="navigation_feed" href="{{ url('feed') }}" rel="alternate">{{ "Feed" | translate }}</a>
 </li>
 {% if visitor.group.can("change_settings", "toggle_extensions") %}
 <li>
-<a href="{{ url('/', 'AdminController') }}">{{ "Admin" | translate }}</a>
+<a class="navigation_admin" href="{{ url('/', 'AdminController') }}">{{ "Admin" | translate }}</a>
 </li>
 {% elseif visitor.group.can("add_post") %}
 <li>
-<a href="{{ url('/', 'AdminController') }}">{{ "Write" | translate }}</a>
+<a class="navigation_write" href="{{ url('/', 'AdminController') }}">{{ "Write" | translate }}</a>
 </li>
 {% elseif visitor.group.can("add_draft") %}
 <li>
-<a href="{{ url('/', 'AdminController') }}">{{ "Draft" | translate }}</a>
+<a class="navigation_draft" href="{{ url('/', 'AdminController') }}">{{ "Draft" | translate }}</a>
 </li>
 {% endif %}
 {% if visitor.logged_in %}
 <li>
-<a href="{{ url('controls') }}">{{ "Controls" | translate }}</a>
+<a class="navigation_controls" href="{{ url('controls') }}">{{ "Controls" | translate }}</a>
 </li>
 <li>
-<a href="{{ url('logout') }}">{{ "Log out" | translate }}</a>
+<a class="navigation_logout" href="{{ url('logout') }}">{{ "Log out" | translate }}</a>
 </li>
 {% else %}
 {% if site.can_register %}
 <li>
-<a href="{{ url('register') }}">{{ "Register" | translate }}</a>
+<a class="navigation_register" href="{{ url('register') }}">{{ "Register" | translate }}</a>
 </li>
 {% endif %}
 <li>
-<a href="{{ url('login') }}">{{ "Log in" | translate }}</a>
+<a class="navigation_login" href="{{ url('login') }}">{{ "Log in" | translate }}</a>
 </li>
 {% endif %}
 </ul>
@@ -64,7 +64,7 @@
 <ul class="navigation sidebar my_pages" aria-labelledby="label_my_pages">
 {% for item in theme.pages_list() %}
 <li class="page">
-<a href="{{ item.url() }}">{{ item.title }}</a>
+<a class="navigation_page_{{ item.url | fix(true) }}" href="{{ item.url() }}">{{ item.title }}</a>
 </li>
 {% endfor %}
 </ul>

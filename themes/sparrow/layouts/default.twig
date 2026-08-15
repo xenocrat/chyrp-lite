@@ -47,49 +47,49 @@
 {% for more in theme.pages_list() %}
 {% if more.depth == 1 %}
 <li>
-<a href="{{ more.url() }}">{{ more.title }}</a>
+<a class="navigation_page_{{ more.url | fix(true) }}" href="{{ more.url() }}">{{ more.title }}</a>
 </li>
 {% endif %}
 {% endfor %}
 {% if site.email_public %}
 <li>
-<a href="{{ mailto(site.email) }}">{{ "Email" | translate }}</a>
+<a class="navigation_email" href="{{ mailto(site.email) }}">{{ "Email" | translate }}</a>
 </li>
 {% endif %}
 <li>
-<a href="{{ url('feed') }}">{{ "Feed" | translate }}</a>
+<a class="navigation_feed" href="{{ url('feed') }}">{{ "Feed" | translate }}</a>
 </li>
 <li>
-<a href="{{ url('archive') }}" rel="archives">{{ "Archive" | translate }}</a>
+<a class="navigation_archive" href="{{ url('archive') }}" rel="archives">{{ "Archive" | translate }}</a>
 </li>
 {% if visitor.group.can("change_settings", "toggle_extensions") %}
 <li>
-<a href="{{ url('/', 'AdminController') }}">{{ "Admin" | translate }}</a>
+<a class="navigation_admin" href="{{ url('/', 'AdminController') }}">{{ "Admin" | translate }}</a>
 </li>
 {% elseif visitor.group.can("add_post") %}
 <li>
-<a href="{{ url('/', 'AdminController') }}">{{ "Write" | translate }}</a>
+<a class="navigation_write" href="{{ url('/', 'AdminController') }}">{{ "Write" | translate }}</a>
 </li>
 {% elseif visitor.group.can("add_draft") %}
 <li>
-<a href="{{ url('/', 'AdminController') }}">{{ "Draft" | translate }}</a>
+<a class="navigation_draft" href="{{ url('/', 'AdminController') }}">{{ "Draft" | translate }}</a>
 </li>
 {% endif %}
 {% if visitor.logged_in %}
 <li>
-<a href="{{ url('controls') }}">{{ "Controls" | translate }}</a>
+<a class="navigation_controls" href="{{ url('controls') }}">{{ "Controls" | translate }}</a>
 </li>
 <li>
-<a href="{{ url('logout') }}">{{ "Log out" | translate }}</a>
+<a class="navigation_logout" href="{{ url('logout') }}">{{ "Log out" | translate }}</a>
 </li>
 {% else %}
 {% if site.can_register %}
 <li>
-<a href="{{ url('register') }}">{{ "Register" | translate }}</a>
+<a class="navigation_register" href="{{ url('register') }}">{{ "Register" | translate }}</a>
 </li>
 {% endif %}
 <li>
-<a href="{{ url('login') }}">{{ "Log in" | translate }}</a>
+<a class="navigation_login" href="{{ url('login') }}">{{ "Log in" | translate }}</a>
 </li>
 {% endif %}
 </ul>
