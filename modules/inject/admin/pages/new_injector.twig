@@ -5,7 +5,6 @@
 {% block content %}
 <h2>{{ "Add Injector" | translate("inject") }}</h2>
 <form id="edit_form" action="{{ url('add_injector') }}" method="post" accept-charset="UTF-8">
-<fieldset role="presentation">
 <p class="main_options">
 <label for="label">
 {{ "Label" | translate("inject") }}
@@ -51,6 +50,5 @@
 {{ "Add Injector" | translate("inject") }}
 </button>
 </div>
-</fieldset>
 </form>
 {% endblock %}

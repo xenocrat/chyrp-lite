@@ -5,7 +5,6 @@
 {% block content %}
 <h2>{{ "User Settings" | translate }}</h2>
 <form id="user_settings" class="split" action="{{ url('user_settings') }}" method="post" accept-charset="UTF-8">
-<fieldset role="presentation">
 <p>
 <label for="can_register">{{ "Registration" | translate }}</label>
 {#- -#}
@@ -77,6 +76,5 @@
 </button>
 </p>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
-</fieldset>
 </form>
 {% endblock %}

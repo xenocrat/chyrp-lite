@@ -4,14 +4,12 @@
 
 {% block content %}
 <form class="filters" action="{{ url('manage_injectors') }}" method="post" accept-charset="UTF-8" role="search">
-<fieldset role="presentation">
 <label for="search">{{ "Search&hellip;" | translate }}</label>
 <input class="text filter_text" type="text" name="search" value="{{ GET.search is defined ? GET.search | fix(true, true) : '' }}" id="search">
 <button type="submit">{{ "Search" | translate }}</button>
 <a href="{{ url('new_injector') }}" class="button yay">
 {{ icon_svg("add.svg") }}{{ "New Injector" | translate("inject") }}
 </a>
-</fieldset>
 </form>
 <h2>{{ GET.search is defined ? "Search Results" | translate : "Injectors" | translate("inject") }}</h2>
 <table>

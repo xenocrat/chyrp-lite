@@ -5,7 +5,6 @@
 {% block content %}
 <h2>WordPress</h2>
 <form id="import_wordpress_form" class="split" action="{{ url('import_wordpress') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
-<fieldset role="presentation">
 <p>
 <label for="wordpress_xml_file">{{ "eXtended .XML File" | translate("migrator") }}</label>
 {#- -#}
@@ -28,12 +27,10 @@
 </button>
 </p>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="wordpress_hash">
-</fieldset>
 </form>
 <hr>
 <h2>Tumblr</h2>
 <form id="import_tumblr_form" class="split" action="{{ url('import_tumblr') }}" method="post" accept-charset="UTF-8">
-<fieldset role="presentation">
 <p>
 <label for="tumblr_url">{{ "Your Tumblr URL" | translate("migrator") }}</label>
 {#- -#}
@@ -49,12 +46,10 @@
 </button>
 </p>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="tumblr_hash">
-</fieldset>
 </form>
 <hr>
 <h2>TextPattern</h2>
 <form id="import_textpattern_form" class="split" action="{{ url('import_textpattern') }}" method="post" accept-charset="UTF-8">
-<fieldset role="presentation">
 <p>
 <label for="textpattern_host">{{ "Host" | translate("migrator") }}</label>
 {#- -#}
@@ -100,12 +95,10 @@
 </button>
 </p>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="textpattern_hash">
-</fieldset>
 </form>
 <hr>
 <h2>MovableType</h2>
 <form id="import_movabletype_form" class="split" action="{{ url('import_movabletype') }}" method="post" accept-charset="UTF-8">
-<fieldset role="presentation">
 <p>
 <label for="movabletype_host">{{ "Host" | translate("migrator") }}</label>
 {#- -#}
@@ -143,6 +136,5 @@
 </button>
 </p>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="movabletype_hash">
-</fieldset>
 </form>
 {% endblock %}

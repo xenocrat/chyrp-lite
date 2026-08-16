@@ -4,7 +4,6 @@
 
 {% block content %}
 <form class="filters" action="{{ url('manage_tags') }}" method="post" accept-charset="UTF-8" role="search">
-<fieldset role="presentation">
 <label for="search">{{ "Search&hellip;" | translate }}</label>
 <input class="text filter_text" type="text" name="search" value="{{ GET.search is defined ? GET.search | fix(true, true) : '' }}" id="search">
 <button type="submit">{{ "Search" | translate }}</button>
@@ -13,7 +12,6 @@
 {{ icon_svg("add.svg") }}{{ "Add Tags" | translate("tags") }}
 </a>
 {% endif %}
-</fieldset>
 </form>
 <h2>{{ "Tags" | translate("tags") }}</h2>
 <table class="interactive{{ tag_cloud is empty ? ' empty' : '' }}">

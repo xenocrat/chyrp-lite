@@ -4,7 +4,6 @@
 
 {% block content %}
 <form class="filters" action="{{ url('manage_category') }}" method="post" accept-charset="UTF-8" role="search">
-<fieldset role="presentation">
 <label for="query">
 {{ "Search&hellip;" | translate }}
 <a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem">
@@ -16,7 +15,6 @@
 <a href="{{ url('new_category') }}" class="button yay"> 
 {{ icon_svg("add.svg") }}{{ "New Category" | translate("categorize") }}
 </a>
-</fieldset>
 </form>
 <h2>{{ GET.query is not empty ? "Search Results" | translate : "Categories" | translate("categorize") }}</h2>
 <table>

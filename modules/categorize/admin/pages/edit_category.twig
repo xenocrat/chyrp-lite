@@ -5,7 +5,6 @@
 {% block content %}
 <h2>{{ "Editing Category &#8220;%s&#8221;" | translate("categorize") | format(category.name | oneof("[Untitled]" | translate)) }}</h2>
 <form id="edit_category" class="split" action="{{ url('update_category') }}" method="post" accept-charset="UTF-8">
-<fieldset role="presentation">
 <p>
 <label for="name">{{ "Name" | translate("categorize") }}</label>
 {#- -#}
@@ -37,6 +36,5 @@
 </p>
 <input type="hidden" name="id" value="{{ category.id }}" id="id">
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
-</fieldset>
 </form>
 {% endblock %}

@@ -5,7 +5,6 @@
 {% block content %}
 <h2>{{ "Content Settings" | translate }}</h2>
 <form id="content_settings" class="split" action="{{ url('content_settings') }}" method="post" accept-charset="utf-8">
-<fieldset role="presentation">
 <p>
 <label for="posts_per_page">{{ "Posts Per Blog Page" | translate }}</label>
 {#- -#}
@@ -120,6 +119,5 @@
 </button>
 </p>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
-</fieldset>
 </form>
 {% endblock %}

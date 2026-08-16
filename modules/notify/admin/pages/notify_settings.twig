@@ -5,7 +5,6 @@
 {% block content %}
 <h2>{{ "Notify Settings" | translate("notify") }}</h2>
 <form id="notify_settings" class="split" action="{{ url('notify_settings') }}" method="post" accept-charset="UTF-8">
-<fieldset>
 <h3>{{ "Events:" | translate("notify") }}</h3>
 {% for trigger, hook in hook_list %}
 <p>
@@ -14,10 +13,8 @@
 <input type="checkbox" id="{{ trigger }}" name="hooks[{{ trigger }}]" {{ (site.module_notify.hooks[trigger] ?? false) | checked }}>
 </p>
 {% endfor %}
-</fieldset>
 <hr>
 <h2>{{ "ntfy.sh" | translate("notify") }}</h2>
-<fieldset>
 <p>
 <label for="ntfy_enabled">
 {{ "Enable Notifications" | translate("notify") }}
@@ -35,7 +32,6 @@
 <label for="ntfy_topic">{{ "Topic" | translate("notify") }}</label>
 <input type="text" class="text" name="ntfy_topic" id="ntfy_topic" maxlength="64" pattern="^[\-_a-zA-Z0-9]{4,64}$" value="{{ site.module_notify.ntfy_topic | fix(true, true) }}">
 </p>
-</fieldset>
 <hr>
 <p class="buttons">
 <button type="submit" class="yay">

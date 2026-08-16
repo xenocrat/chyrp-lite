@@ -4,7 +4,6 @@
 
 {% block content %}
 <form class="filters" action="{{ url('posts_tagged') }}" method="post" accept-charset="UTF-8" role="search">
-<fieldset role="presentation">
 <label for="query">
 {{ "Search&hellip;" | translate }}
 <a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem">
@@ -13,7 +12,6 @@
 </label>
 <input class="text filter_text" type="text" name="query" value="{{ GET.query | fix(true, true) }}" id="query">
 <button type="submit">{{ "Search" | translate }}</button>
-</fieldset>
 </form>
 <h2>
 {% if tag is not empty %}

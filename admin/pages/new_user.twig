@@ -5,7 +5,6 @@
 {% block content %}
 <h2>{{ "New User" | translate }}</h2>
 <form id="new_user" class="split" action="{{ url('add_user') }}" method="post" accept-charset="UTF-8">
-<fieldset role="presentation">
 <p>
 <label for="login">{{ "Login" | translate }}</label>
 {#- -#}
@@ -68,6 +67,5 @@
 </button>
 </p>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
-</fieldset>
 </form>
 {% endblock %}

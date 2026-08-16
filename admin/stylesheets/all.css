@@ -685,7 +685,7 @@ body.monospace textarea {
     font-family: "Cousine webfont", monospace;
     font-style: normal;
 }
-form.filters > fieldset {
+form.filters {
     display: flex;
     flex-flow: row wrap;
     gap: 0rem 0.5rem;

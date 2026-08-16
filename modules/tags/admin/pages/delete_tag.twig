@@ -5,7 +5,6 @@
 {% block content %}
 <h2>{{ "Delete Tag?" | translate("tags") }}</h2>
 <form class="delete" action="{{ url('destroy_tag') }}" method="post" accept-charset="UTF-8">
-<fieldset role="presentation">
 <p>
 {{ "&#8220;%s&#8221; will be permanently deleted." | translate("tags") | format(tag.name) }}
 </p>
@@ -19,6 +18,5 @@
 </div>
 <input type="hidden" name="name" value="{{ tag.name | fix(true) }}" id="name">
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
-</fieldset>
 </form>
 {% endblock %}

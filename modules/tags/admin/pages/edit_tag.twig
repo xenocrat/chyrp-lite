@@ -5,7 +5,6 @@
 {% block content %}
 <h2>{{ "Renaming Tag &#8220;%s&#8221;" | translate("tags") | format(tag.name) }}</h2>
 <form class="split" action="{{ url('update_tag') }}" method="post" accept-charset="UTF-8">
-<fieldset role="presentation">
 <p>
 <label for="name">{{ "Name" | translate("tags") }}</label>
 {#- -#}
@@ -18,6 +17,5 @@
 </p>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
 <input type="hidden" name="original" value="{{ tag.name | fix(true, true) }}" id="original">
-</fieldset>
 </form>
 {% endblock %}

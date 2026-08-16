@@ -5,7 +5,6 @@
 {% block content %}
 <h2>{{ "Editing Comment on &#8220;%s&#8221;" | translate("comments") | format(comment.post.title() | striptags | oneof("[Untitled]" | translate)) }}</h2>
 <form id="edit_form" action="{{ url('update_comment') }}" method="post" accept-charset="UTF-8">
-<fieldset role="presentation">
 {% set field_preview = ' data-preview="user_id:' ~ (comment.user_id | fix(true)) ~ '"' %}
 {% set comment_markdown = site.enable_markdown ? " data-markdown" : "" %}
 <p class="main_options">
@@ -73,6 +72,5 @@
 </button>
 {{ comment.delete_link("Delete" | translate("comments"), null, null, "button boo") }}
 </div>
-</fieldset>
 </form>
 {% endblock %}

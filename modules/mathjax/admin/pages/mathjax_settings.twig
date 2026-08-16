@@ -5,7 +5,6 @@
 {% block content %}
 <h2>{{ "MathJax Settings" | translate("mathjax") }}</h2>
 <form id="mathjax_settings" class="split" action="{{ url('mathjax_settings') }}" method="post" accept-charset="UTF-8">
-<fieldset role="presentation">
 <p>
 <label for="enable_latex">
 {{ "TeX and LaTeX Support" | translate("mathjax") }}
@@ -32,6 +31,5 @@
 </button>
 </p>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
-</fieldset>
 </form>
 {% endblock %}

@@ -4,7 +4,6 @@
 
 {% block content %}
 <form class="filters" action="{{ url('manage_pages') }}" method="post" accept-charset="UTF-8" role="search">
-<fieldset role="presentation">
 <label for="query">
 {{ "Search&hellip;" | translate }}
 <a href="{{ url('help/id/filtering_results') }}" rel="help" target="_blank" class="help emblem">
@@ -18,7 +17,6 @@
 {{ icon_svg("add.svg") }}{{ "New Page" | translate }}
 </a>
 {% endif %}
-</fieldset>
 </form>
 <h2>{{ GET.query is not empty ? "Search Results" | translate : "Pages" | translate }}</h2>
 <table>
