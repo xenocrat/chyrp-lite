@@ -66,22 +66,28 @@
 {% endfor %}
 </tbody>
 </table>
+{% if visitor.group.can("edit_comment", "delete_comment") %}
 <div class="controls">
 <label for="bulk_task">{{ "With selected:" | translate("comments") }}</label>
 <select name="task" id="bulk_task">
+{% if visitor.group.can("edit_comment") %}
 <option value="deny" selected>
 {{ "Deny" | translate("comments") }}
 </option>
 <option value="approve">
 {{ "Approve" | translate("comments") }}
 </option>
+{% endif %}
+{% if visitor.group.can("delete_comment") %}
 <option value="delete">
 {{ "Delete" | translate("comments") }}
 </option>
+{% endif %}
 </select>
 <button type="submit">{{ "Batch Process" | translate("comments") }}</button>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
 </div>
+{% endif %}
 </form>
 {% if comments.paginated is not empty and comments.pages > 1 %}
 <div class="pagination">

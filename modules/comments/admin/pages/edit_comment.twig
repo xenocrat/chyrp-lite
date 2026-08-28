@@ -70,7 +70,9 @@
 <button type="submit">
 {{ "Save" | translate("comments") }}
 </button>
-{{ comment.delete_link("Delete" | translate("comments"), null, null, "button boo") }}
+<button type="submit" class="boo" name="cancel" value="true" data-confirm="">
+{{ "Cancel" | translate }}
+</button>
 </div>
 </form>
 {% endblock %}

@@ -274,7 +274,7 @@
                     __("You do not have sufficient privileges to edit this comment.", "comments")
                 );
 
-            fallback($_POST['created_at']);
+            fallback($_POST['created_at'], $comment->created_at);
             fallback($_POST['status'], $comment->status);
             fallback($_POST['author_email'], $comment->author_email);
             fallback($_POST['author_url'], $comment->author_url);
@@ -342,6 +342,11 @@
 
         public function admin_update_comment(
         ): never {
+            fallback($_SESSION['admin_redirect_to'], "manage_pages");
+
+            if (isset($_POST['cancel']))
+                redirect($_SESSION['admin_redirect_to']);
+
             list($success, $message) = $this->update_comment();
 
             if (!$success)
@@ -353,7 +358,7 @@
 
             Flash::notice(
                 $message,
-                fallback($_SESSION['admin_redirect_to'], "manage_comments")
+                $_SESSION['admin_redirect_to']
             );
         }
 
@@ -507,7 +512,7 @@
 
             $visitor = Visitor::current();
 
-            if (!$visitor->group->can("edit_comment", "delete_comment", true))
+            if (!$visitor->group->can("edit_comment", "delete_comment"))
                 $where["user_id"] = $visitor->id;
 
             $admin->display(
@@ -531,7 +536,7 @@
         public function admin_manage_spam(
             $admin
         ): void {
-            if (!Visitor::current()->group->can("edit_comment", "delete_comment"))
+            if (!Comment::any_editable() and !Comment::any_deletable())
                 show_403(
                     __("Access Denied"),
                     __("You do not have sufficient privileges to manage any comments.", "comments")
@@ -558,6 +563,11 @@
 
             $where[] = "status = '".Comment::STATUS_SPAM."'";
             fallback($order, "created_at DESC, id DESC");
+
+            $visitor = Visitor::current();
+
+            if (!$visitor->group->can("edit_comment", "delete_comment"))
+                $where["user_id"] = $visitor->id;
 
             $admin->display(
                 "pages".DIR."manage_spam",
@@ -591,10 +601,19 @@
                     "manage_comments"
                 );
 
+            $visitor = Visitor::current();
             $trigger = Trigger::current();
             $false_positives = array();
             $false_negatives = array();
             $comments = array_keys($_POST['comment']);
+            $can_edit_comment = $visitor->group->can("edit_comment");
+            $can_delete_comment = $visitor->group->can("delete_comment");
+
+            if (!$can_edit_comment and !$can_delete_comment)
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to process comments.", "comments")
+                );
 
             switch (fallback($_POST['task'])) {
                 case "delete":
@@ -606,7 +625,7 @@
                             array("filter" => false)
                         );
 
-                        if (!$comment->deletable())
+                        if (!$can_delete_comment)
                             continue;
 
                         Comment::delete($comment->id);
@@ -629,7 +648,7 @@
                             array("filter" => false)
                         );
 
-                        if (!$comment->editable())
+                        if (!$can_edit_comment)
                             continue;
 
                         if ($comment->status == Comment::STATUS_PINGBACK)
@@ -665,7 +684,7 @@
                             array("filter" => false)
                         );
 
-                        if (!$comment->editable())
+                        if (!$can_edit_comment)
                             continue;
 
                         if ($comment->status == Comment::STATUS_PINGBACK)
@@ -701,7 +720,7 @@
                             array("filter" => false)
                         );
 
-                        if (!$comment->editable())
+                        if (!$can_edit_comment)
                             continue;
 
                         if ($comment->status == Comment::STATUS_PINGBACK)
@@ -733,7 +752,7 @@
             if (!empty($false_negatives))
                 $trigger->call("comments_false_negatives", $false_negatives);
 
-            redirect("manage_comments");
+            redirect(fallback($_SESSION['admin_redirect_to'], "manage_comments"));
         }
 
         public function admin_comment_settings(
@@ -814,8 +833,9 @@
             if (
                 $action == "manage" and
                 (Comment::any_editable() or Comment::any_deletable())
-            )
+            ) {
                 return "manage_comments";
+            }
 
             return null;
         }
@@ -852,10 +872,10 @@
                 "selected" => array("edit_comment", "delete_comment")
             );
 
-            if (Visitor::current()->group->can("edit_comment", "delete_comment"))
-                $navs["manage_spam"] = array(
-                    "title" => _f("Spam (%d)", $spam_count, "comments")
-                );
+            $navs["manage_spam"] = array(
+                "title" => _f("Spam (%d)", $spam_count, "comments"),
+                "selected" => array("edit_comment", "delete_comment")
+            );
 
             return $navs;
         }
