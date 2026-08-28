@@ -427,13 +427,16 @@
                 return false;
 
             fallback($user, Visitor::current());
+
+            # Can they edit all comments?
+            if ($user->group->can("edit_comment"))
+                return true;
+
+            # Can they edit this comment?
             return (
-                $user->group->can("edit_comment") or
-                (
-                    logged_in() and
-                    $user->group->can("edit_own_comment") and
-                    $user->id == $this->user_id
-                )
+                logged_in() and
+                $user->group->can("edit_own_comment") and
+                $user->id == $this->user_id
             );
         }
 
@@ -448,13 +451,16 @@
                 return false;
 
             fallback($user, Visitor::current());
+
+            # Can they delete all comments?
+            if ($user->group->can("delete_comment"))
+                return true;
+
+            # Can they delete this comment?
             return (
-                $user->group->can("delete_comment") or
-                (
-                    logged_in() and
-                    $user->group->can("delete_own_comment") and
-                    $user->id == $this->user_id
-                )
+                logged_in() and
+                $user->group->can("delete_own_comment") and
+                $user->id == $this->user_id
             );
         }
 
@@ -466,21 +472,18 @@
         ): bool {
             $visitor = Visitor::current();
 
-            # Can they edit comments?
+            # Can they edit all comments?
             if ($visitor->group->can("edit_comment"))
                 return true;
 
             # Can they edit their own comments, and do they have any?
-            if (
+            return (
                 $visitor->group->can("edit_own_comment") and
                 SQL::current()->count(
                     tables:"comments",
                     conds:array("user_id" => $visitor->id)
                 )
-            )
-                return true;
-
-            return false;
+            );
         }
 
         /**
@@ -491,21 +494,18 @@
         ): bool {
             $visitor = Visitor::current();
 
-            # Can they delete comments?
+            # Can they delete all comments?
             if ($visitor->group->can("delete_comment"))
                 return true;
 
             # Can they delete their own comments, and do they have any?
-            if (
+            return (
                 $visitor->group->can("delete_own_comment") and
                 SQL::current()->count(
                     tables:"comments",
                     conds:array("user_id" => $visitor->id)
                 )
-            )
-                return true;
-
-            return false;
+            );
         }
 
         /**
