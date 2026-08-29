@@ -1474,8 +1474,9 @@ input.toolbar.hidden::file-selector-button {
 
 @media screen and (max-width: 719px) {
     #header #navigation {
-        left: 0.5rem;
-        right: 0.5rem;
+        left: 0rem;
+        right: 0rem;
+        gap: 0rem 0.25rem;
     }
     #sub_nav, #content {
         margin-left: 0.5rem;
