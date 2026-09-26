@@ -48,5 +48,34 @@
             );
     }
 
+    /**
+     * Function: highlighter_update_min_theme
+     * Updates a minified theme to the non-minified version.
+     *
+     * Versions: 2026.02 => 2026.03
+     */
+    function highlighter_update_min_theme(
+    ): void {
+        $config = Config::current();
+        $array = $config->module_highlighter;
+
+        if (str_contains($array["stylesheet"], ".min.css")) {
+            $array["stylesheet"] = str_replace(
+                ".min.css",
+                ".css",
+                $array["stylesheet"]
+            );
+
+            $set = $config->set("module_highlighter", $array);
+
+            if ($set === false)
+                error(
+                    __("Error"),
+                    __("Could not write the configuration file.")
+                );
+            }
+    }
+
     highlighter_add_config();
     highlighter_add_copy_to_clipboard();
+    highlighter_update_min_theme();
