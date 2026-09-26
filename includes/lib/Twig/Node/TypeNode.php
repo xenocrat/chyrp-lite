@@ -14,17 +14,18 @@ namespace Twig\Node;
 use Twig\Attribute\YieldReady;
 
 /**
- * Represents a node that has global side effects but does not generate template code.
- *
- * Such nodes must be at the root level of the body of a template.
+ * Represents a type declaration node.
  *
  * @author Fabien Potencier <fabien@symfony.com>
  */
 #[YieldReady]
-class ConfigNode extends Node
+final class TypeNode extends Node
 {
-    public function __construct(int $lineno)
+    /**
+     * @internal
+     */
+    public function __construct(string $name, string $type, bool $optional, int $lineno)
     {
-        parent::__construct([], [], $lineno);
+        parent::__construct([], ['name' => $name, 'type' => $type, 'optional' => $optional], $lineno);
     }
 }
