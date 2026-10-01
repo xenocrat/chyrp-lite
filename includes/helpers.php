@@ -3545,21 +3545,25 @@
             return $score;
 
         # Calculate the frequency of each char in the password.
-        $frequency = array_count_values(str_split($password));
+        $frequency = array_count_values(
+            mb_str_split($password, 1, "UTF-8")
+        );
 
-        # Award each unique char and punish more than 10 occurrences.
+        # Reward each unique char; punish too much repetition.
         foreach ($frequency as $occurrences)
-            $score += (11 - $occurrences);
+            $score += (6 - $occurrences);
 
         # Award bonus points for different character types.
         $variations = array(
-            "digits" => preg_match("/\d/", $password),
-            "lower" => preg_match("/[a-z]/", $password),
-            "upper" => preg_match("/[A-Z]/", $password),
-            "nonWords" => preg_match("/\W/", $password)
+            "number" => preg_match("/\p{N}/u", $password),
+            "letter" => preg_match("/\p{L}/u", $password),
+            "symbol" => preg_match("/\p{S}/u", $password),
+            "separator" => preg_match("/\p{Z}/u", $password),
+            "punctuation" => preg_match("/\p{P}/u", $password)
         );
 
-        $score += (array_sum($variations) - 1) * 10;
+        # Reward two or more character types with a multiplier.
+        $score *= array_sum($variations);
 
         return intval($score);
     }

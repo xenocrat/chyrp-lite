@@ -24,19 +24,20 @@ function passwordStrength(
         return score;
 
     // Calculate the frequency of each char in the password.
-    for (var i = 0; i < password.length; i++)
-        frequency[password[i]] = (frequency[password[i]] || 0) + 1;
+    for (var char of [...password])
+    	frequency[char] = (frequency[char] ?? 0) + 1;
 
-    // Award each unique char and punish more than 10 occurrences.
-    for (var item in frequency)
-        score += (11 - frequency[item]);
+    // Reward each unique char; punish too much repetition.
+    for (var char in frequency)
+        score += (6 - frequency[char]);
 
     // Award bonus points for different character types.
     var variations = {
-        digits: /\d/.test(password),
-        lower: /[a-z]/.test(password),
-        upper: /[A-Z]/.test(password),
-        nonWords: /\W/.test(password)
+        number: /\p{N}/u.test(password),
+        letter: /\p{L}/u.test(password),
+        symbol: /\p{S}/u.test(password),
+        separator: /\p{Z}/u.test(password),
+        punctuation: /\p{P}/u.test(password)
     };
 
     var variationCount = 0;
@@ -44,7 +45,8 @@ function passwordStrength(
     for (var check in variations)
         variationCount += (variations[check] == true) ? 1 : 0 ;
 
-    score += (variationCount - 1) * 10;
+	// Reward two or more character types with a multiplier.
+    score *= variationCount;
 
     return parseInt(score);
 }
