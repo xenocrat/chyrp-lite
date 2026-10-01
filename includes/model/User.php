@@ -254,7 +254,7 @@
             $password
         ): string {
             $salt = random(16);
-            $prefix = '$6$rounds=50000$';
+            $prefix = '$6$rounds=100000$';
             $hash = crypt($password, $prefix.$salt);
 
             if (strlen($hash) < 13)
