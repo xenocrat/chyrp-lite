@@ -66,15 +66,15 @@
             $login,
             $password
         ): bool {
-            $check = new self(array("login" => $login));
+            $user = new self(array("login" => $login));
 
-            if ($check->no_results)
+            if ($user->no_results)
                 return false;
 
-            if (self::check_password($password, $check->password))
-                return true;
+            $result = self::check_password($password, $user->password);
 
-            return false;
+            Trigger::current()->call("authenticate_user", $user, $result);
+            return $result;
         }
 
         /**
