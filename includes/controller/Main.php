@@ -927,7 +927,7 @@
 
                             case User::ACTIVATION_NONE:
                                 Flash::notice(
-                                    __("Your account requires activation."),
+                                    __("Your account has been created."),
                                     "/"
                                 );
 
@@ -1053,14 +1053,6 @@
                             case User::ACTIVATION_ADMIN:
                                 Flash::notice(
                                     __("The blog administrator must activate your account."),
-                                    "/"
-                                );
-
-                                exit;
-
-                            case User::ACTIVATION_NONE:
-                                Flash::notice(
-                                    __("Your account requires activation."),
                                     "/"
                                 );
 
