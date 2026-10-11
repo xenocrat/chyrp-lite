@@ -9,6 +9,7 @@
 <label for="password">{{ "Password" | translate }}</label>
 <input type="password" name="password" value="" id="password">
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
+{{ generate_captcha() }}
 {{ trigger.call("user_login") }}
 <div class="doaction">
 <button name="submit" type="submit" id="submit">{{ "Log in" | translate }}</button>
