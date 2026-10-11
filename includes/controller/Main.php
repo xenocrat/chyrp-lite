@@ -830,6 +830,11 @@
                         __("Invalid authentication token.")
                     );
 
+                if (!check_captcha())
+                    Flash::warning(
+                        __("Incorrect captcha response.")
+                    );
+
                 if (empty($_POST['login']))
                     Flash::warning(
                         __("Please enter a username for your account.")
@@ -871,11 +876,6 @@
                 elseif (!is_email($_POST['email']))
                     Flash::warning(
                         __("Invalid email address.")
-                    );
-
-                if (!check_captcha())
-                    Flash::warning(
-                        __("Incorrect captcha response.")
                     );
 
                 if (!empty($_POST['website']) and !is_url($_POST['website']))
@@ -1020,6 +1020,11 @@
                 if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                     Flash::warning(
                         __("Invalid authentication token.")
+                    );
+
+                if (!check_captcha())
+                    Flash::warning(
+                        __("Incorrect captcha response.")
                     );
 
                 fallback($_POST['login']);
