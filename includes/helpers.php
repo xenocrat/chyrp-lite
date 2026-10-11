@@ -1019,16 +1019,17 @@
      * Salt and hash a unique token using the supplied data.
      *
      * Parameters:
-     *     $items - An array of items to hash.
+     *     $data - Mixed: any variable that can be serialized.
      *
      * Returns:
      *     A unique token salted with the site's secure hashkey.
      */
     function token(
-        $items
+        $data
     ): string {
-        return sha1(
-            implode((array) $items).
+        return hash_hmac(
+            "sha1",
+            serialize($data),
             Config::current()->secure_hashkey
         );
     }
