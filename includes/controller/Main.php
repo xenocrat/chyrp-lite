@@ -1256,11 +1256,15 @@
             $auth_token = fallback($pieces[1], "");
             $elapsed = time() - $created_at;
 
-            if ($elapsed > PASSWORD_RESET_TOKEN_LIFETIME)
+            if (
+                $elapsed < 0 or
+                $elapsed > PASSWORD_RESET_TOKEN_LIFETIME
+            ) {
                 Flash::notice(
                     __("The link has expired. Please try again."),
                     "lost_password"
                 );
+            }
 
             $user = new User(
                 array("login" => $_REQUEST['login'])
