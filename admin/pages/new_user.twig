@@ -15,6 +15,7 @@
 {#- -#}
 <input class="text" type="email" name="email" value="" id="email" maxlength="128" required>
 </p>
+{%- if visitor.group.can("edit_group") -%}
 <p>
 <label for="group">{{ "Group" | translate }}</label>
 {#- -#}
@@ -29,6 +30,7 @@
 {% endfor %}
 </select>
 </p>
+{%- endif -%}
 <p>
 <label for="password1">{{ "Password" | translate }}</label>
 {#- -#}
