@@ -1044,7 +1044,9 @@
          */
         public function admin_add_user(
         ): never {
-            if (!Visitor::current()->group->can("add_user"))
+            $visitor = Visitor::current();
+
+            if (!$visitor->group->can("add_user"))
                 show_403(
                     __("Access Denied"),
                     __("You do not have sufficient privileges to add users.")
@@ -1129,6 +1131,9 @@
             fallback($_POST['full_name'], "");
             fallback($_POST['website'], "");
             fallback($_POST['group'], $config->default_group);
+
+            if (!$visitor->group->can("edit_group"))
+                $_POST['group'] = $config->default_group;
 
             $group = new Group($_POST['group']);
 
@@ -1217,6 +1222,15 @@
          */
         public function admin_update_user(
         ): never {
+            $visitor = Visitor::current();
+            $config = Config::current();
+
+            if (!$visitor->group->can("edit_user"))
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to edit users.")
+                );
+
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
@@ -1228,15 +1242,6 @@
                     __("No ID Specified"),
                     __("An ID is required to edit a user."),
                     code:400
-                );
-
-            $visitor = Visitor::current();
-            $config = Config::current();
-
-            if (!$visitor->group->can("edit_user"))
-                show_403(
-                    __("Access Denied"),
-                    __("You do not have sufficient privileges to edit users.")
                 );
 
             if (empty($_POST['login']))
@@ -1326,7 +1331,10 @@
 
             fallback($_POST['full_name'], "");
             fallback($_POST['website'], "");
-            fallback($_POST['group'], $config->default_group);
+            fallback($_POST['group'], $user->group_id);
+
+            if (!$visitor->group->can("edit_group"))
+                $_POST['group'] = $user->group_id;
 
             $group = new Group($_POST['group']);
 
