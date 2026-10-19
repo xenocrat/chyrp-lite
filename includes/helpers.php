@@ -1028,7 +1028,7 @@
         $data
     ): string {
         return hash_hmac(
-            "sha1",
+            "sha512",
             serialize($data),
             Config::current()->secure_hashkey
         );
