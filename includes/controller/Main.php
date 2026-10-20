@@ -1033,12 +1033,10 @@
                 # You can block the login process with a Flash::warning().
                 $trigger->call("user_authenticating");
 
-                if (!Flash::exists("warning")) {
-                    if (!User::authenticate($_POST['login'], $_POST['password']))
-                        Flash::warning(
-                            __("Incorrect username and/or password.")
-                        );
-                }
+                if (!User::authenticate($_POST['login'], $_POST['password']))
+                    Flash::warning(
+                        __("Incorrect username and/or password.")
+                    );
 
                 if (!Flash::exists("warning")) {
                     $user = new User(
