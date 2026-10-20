@@ -219,10 +219,15 @@
             $throw_exceptions = false
         ): mixed {
             $build = QueryBuilder::build_count(
-                $this, $tables, $conds, $params
+                $this,
+                $tables,
+                $conds,
+                $params
             );
             $query = $this->query(
-                $build, $params, $throw_exceptions
+                $build,
+                $params,
+                $throw_exceptions
             );
 
             return isset($query->query) ?
@@ -271,7 +276,9 @@
                 $params
             );
             return $this->query(
-                $build, $params, $throw_exceptions
+                $build,
+                $params,
+                $throw_exceptions
             );
         }
 
@@ -292,10 +299,15 @@
             $throw_exceptions = false
         ): Query|false {
             $build = QueryBuilder::build_insert(
-                $this, $table, $data, $params
+                $this,
+                $table,
+                $data,
+                $params
             );
             return $this->query(
-                $build, $params, $throw_exceptions
+                $build,
+                $params,
+                $throw_exceptions
             );
         }
 
@@ -325,11 +337,18 @@
 
             if ($this->count($table, $match, $params))
                 return $this->update(
-                    $table, $match, $data, $params, $throw_exceptions
+                    $table,
+                    $match,
+                    $data,
+                    $params,
+                    $throw_exceptions
                 );
 
             return $this->insert(
-                $table, $data, $params, $throw_exceptions
+                $table,
+                $data,
+                $params,
+                $throw_exceptions
             );
         }
 
@@ -352,10 +371,16 @@
             $throw_exceptions = false
         ): Query|false {
             $build = QueryBuilder::build_update(
-                $this, $table, $conds, $data, $params
+                $this,
+                $table,
+                $conds,
+                $data,
+                $params
             );
             return $this->query(
-                $build, $params, $throw_exceptions
+                $build,
+                $params,
+                $throw_exceptions
             );
         }
 
@@ -376,10 +401,15 @@
             $throw_exceptions = false
         ): Query|false {
             $build = QueryBuilder::build_delete(
-                $this, $table, $conds, $params
+                $this,
+                $table,
+                $conds,
+                $params
             );
             return $this->query(
-                $build, $params, $throw_exceptions
+                $build,
+                $params,
+                $throw_exceptions
             );
         }
 
@@ -396,10 +426,13 @@
             $throw_exceptions = false
         ): Query|false {
             $build = QueryBuilder::build_drop(
-                $this, $table
+                $this,
+                $table
             );
             return $this->query(
-                $build, array(), $throw_exceptions
+                $build,
+                array(),
+                $throw_exceptions
             );
         }
 
@@ -418,10 +451,14 @@
             $throw_exceptions = false
         ): Query|false {
             $build = QueryBuilder::build_create(
-                $this, $table, $cols
+                $this,
+                $table,
+                $cols
             );
             return $this->query(
-                $build, array(), $throw_exceptions
+                $build,
+                array(),
+                $throw_exceptions
             );
         }
 
