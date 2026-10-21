@@ -1308,27 +1308,25 @@
             $sql->select($table)->fetch() :
             array() ;
 
-        $query = str_replace(
-            "||",
-            "||".chr(31),
-            $query
-        );
-
-        foreach (
-            preg_split("/\s(?=\w+:)|(?<!\|);/",
+        if (
+            preg_match_all(
+                "/(?:\|.|[^\|;])+(?=;|$)/",
                 $query,
-                -1,
-                PREG_SPLIT_NO_EMPTY
+                $fragments,
+                PREG_PATTERN_ORDER
             )
-        as $fragment) {
-            if (preg_match("/\w+:/", $fragment)) {
-                $keywords[] = str_replace(
-                    "||".chr(31),
-                    "||",
-                    $fragment
-                );
-            } else {
-                $strings[] = $fragment;
+        ) {
+            foreach ($fragments[0] as $fragment) {
+                if (
+                    preg_match(
+                        "/^\s*\w+:[^:]/",
+                        $fragment
+                    )
+                ) {
+                    $keywords[] = ltrim($fragment);
+                } else {
+                    $strings[] = $fragment;
+                }
             }
         }
 
