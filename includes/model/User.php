@@ -286,4 +286,58 @@
         ): bool {
             return password_verify($password, $stored);
         }
+
+        /**
+         * Function: editable
+         * Checks if a <User> can edit this user.
+         */
+        public function editable(
+            $user = null
+        ): bool {
+            if ($this->no_results)
+                return false;
+
+            fallback($user, Visitor::current());
+
+            if (!$user->group->can("edit_user"))
+                return false;
+
+            $config = Config::current();
+
+            return (
+                (
+                    $this->group->id != $config->admin_group
+                ) or
+                (
+                    $user->group->id == $config->admin_group
+                )
+            );
+        }
+
+        /**
+         * Function: deletable
+         * Checks if a <User> can delete this user.
+         */
+        public function deletable(
+            $user = null
+        ): bool {
+            if ($this->no_results)
+                return false;
+
+            fallback($user, Visitor::current());
+
+            if (!$user->group->can("delete_user"))
+                return false;
+
+            $config = Config::current();
+
+            return (
+                (
+                    $this->group->id != $config->admin_group
+                ) or
+                (
+                    $user->group->id == $config->admin_group
+                )
+            );
+        }
     }
