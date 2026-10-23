@@ -1119,9 +1119,18 @@
                         __("Invalid authentication token.")
                     );
 
-                if (!empty($_POST['new_password1'])) {
+                if (empty($_POST['new_password1'])) {
+                    $password = $visitor->password;
+                } else {
+                    $password = User::hash_password($_POST['new_password1']);
+
                     if (
-                        empty($_POST['new_password2']) or
+                        empty($_POST['new_password2'])
+                    ) {
+                        Flash::warning(
+                            __("Password not confirmed.")
+                        );
+                    } elseif (
                         $_POST['new_password1'] !== $_POST['new_password2']
                     ) {
                         Flash::warning(
@@ -1157,10 +1166,6 @@
                 fallback($_POST['website'], "");
 
                 if (!Flash::exists("warning")) {
-                    $password = (!empty($_POST['new_password1'])) ?
-                        User::hash_password($_POST['new_password1']) :
-                        $visitor->password ;
-
                     $visitor = $visitor->update(
                         login:$visitor->login,
                         password:$password,
