@@ -845,6 +845,35 @@
             );
     }
 
+    /**
+     * Function: add_admin_group
+     * Adds the admin_group configuration setting.
+     *
+     * Versions: 2026.02 => 2026.03
+     */
+    function add_admin_group(
+    ): void {
+        $config = Config::current();
+        $sql = SQL::current();
+
+        if (isset($config->admin_group))
+            return;
+
+        $group = $sql->select(
+            tables:"groups",
+            conds:array("name" => "Admin")
+        )->fetch();
+
+        $group_id = empty($group) ? 0 : (int) $group["id"] ;
+        $set = $config->set("admin_group", $group_id, true);
+
+        if ($set === false)
+            error(
+                __("Error"),
+                __("Could not write the configuration file.")
+            );
+    }
+
     #---------------------------------------------
     # Output Starts
     #---------------------------------------------
@@ -1217,6 +1246,7 @@
         add_email_public();
         add_user_activation();
         add_manage_caches();
+        add_admin_group();
 
         # Perform module upgrades.
         foreach ($config->enabled_modules as $module) {

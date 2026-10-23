@@ -1208,6 +1208,7 @@
                 $config->set("can_register", false),
                 $config->set("user_activation", "none"),
                 $config->set("email_correspondence", true),
+                $config->set("admin_group", $group_id["Admin"]),
                 $config->set("default_group", $group_id["Member"]),
                 $config->set("guest_group", $group_id["Guest"]),
                 $config->set("clean_urls", false),
