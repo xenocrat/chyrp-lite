@@ -1133,8 +1133,8 @@
             if ($visitor->group->id != $config->admin_group) {
                 if (isset($_POST['group']))
                     show_403(
-                        __("Forbidden"),
-                        __("You cannot specify a user group.")
+                        __("Access Denied"),
+                        __("You cannot modify the group of a user.")
                     );
 
                 $_POST['group'] = $config->default_group;
@@ -1213,6 +1213,13 @@
                     __("Not Found"),
                     __("User not found.")
                 );
+
+            if (!$user->editable()) {
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to edit this user.")
+                );
+            }
 
             $options = array(
                 "order" => "id ASC",
@@ -1294,19 +1301,19 @@
                     __("User not found.")
                 );
 
+            if (!$user->editable()) {
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to edit this user.")
+                );
+            }
+
             if (empty($_POST['new_password1'])) {
                 $password = $user->password;
             } else {
                 $password = User::hash_password($_POST['new_password1']);
 
                 if (
-                    $visitor->group->id != $config->admin_group
-                ) {
-                    show_403(
-                        __("Forbidden"),
-                        __("You cannot specify a password.")
-                    );
-                } elseif (
                     empty($_POST['new_password2'])
                 ) {
                     error(
@@ -1361,8 +1368,8 @@
             if ($visitor->group->id != $config->admin_group) {
                 if (isset($_POST['group']))
                     show_403(
-                        __("Forbidden"),
-                        __("You cannot specify a user group.")
+                        __("Access Denied"),
+                       __("You cannot modify the group of a user.")
                     );
 
                 $_POST['group'] = $user->group_id;
@@ -1444,6 +1451,13 @@
                     __("User not found.")
                 );
 
+            if (!$user->deletable()) {
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to edit this user.")
+                );
+            }
+
             if ($user->id == $visitor->id)
                 Flash::warning(
                     __("You cannot delete your own account."),
@@ -1499,6 +1513,13 @@
                     __("Not Found"),
                     __("User not found.")
                 );
+
+            if (!$user->deletable()) {
+                show_403(
+                    __("Access Denied"),
+                    __("You do not have sufficient privileges to edit this user.")
+                );
+            }
 
             if ($user->id == $visitor->id)
                 Flash::warning(
