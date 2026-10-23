@@ -15,7 +15,7 @@
 {#- -#}
 <input class="text" type="email" name="email" value="" id="email" maxlength="128" required>
 </p>
-{%- if visitor.group.can("edit_group") -%}
+{%- if visitor.group.id == site.admin_group -%}
 <p>
 <label for="group">{{ "Group" | translate }}</label>
 {#- -#}

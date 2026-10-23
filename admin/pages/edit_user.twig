@@ -15,7 +15,7 @@
 {#- -#}
 <input class="text" type="email" name="email" value="{{ user.email | fix(true, true) }}" id="email" maxlength="128" required>
 </p>
-{%- if visitor.group.can("edit_group") -%}
+{%- if visitor.group.id == site.admin_group -%}
 <p>
 <label for="group">{{ "Group" | translate }}</label>
 {#- -#}
@@ -27,7 +27,6 @@
 {% endfor %}
 </select>
 </p>
-{%- endif -%}
 <p>
 <label for="new_password1">{{ "New Password?" | translate }}</label>
 {#- -#}
@@ -38,6 +37,7 @@
 {#- -#}
 <input class="text" type="password" name="new_password2" value="" id="new_password2" maxlength="128">
 </p>
+{%- endif -%}
 <p>
 <label for="full_name">
 {{ "Full Name" | translate }}

@@ -49,6 +49,17 @@
 </small>
 </p>
 <p>
+<label for="admin_group">{{ "Administrator User Group" | translate }}</label>
+{#- -#}
+<select name="admin_group" id="admin_group">
+{% for group in groups %}
+<option value="{{ group.id }}"{{ group.id | selected(site.admin_group) }}>
+{{ group.name | fix(false, true) }}
+</option>
+{% endfor %}
+</select>
+</p>
+<p>
 <label for="default_group">{{ "Default User Group" | translate }}</label>
 {#- -#}
 <select name="default_group" id="default_group">
