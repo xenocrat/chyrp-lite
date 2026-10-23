@@ -1045,6 +1045,7 @@
         public function admin_add_user(
         ): never {
             $visitor = Visitor::current();
+            $config = Config::current();
 
             if (!$visitor->group->can("add_user"))
                 show_403(
@@ -1126,14 +1127,25 @@
             if (!empty($_POST['website']))
                 $_POST['website'] = add_scheme($_POST['website']);
 
-            $config = Config::current();
-
             fallback($_POST['full_name'], "");
             fallback($_POST['website'], "");
-            fallback($_POST['group'], $config->default_group);
 
-            if (!$visitor->group->can("edit_group"))
+            if ($visitor->group->id != $config->admin_group) {
+                if (isset($_POST['group']))
+                    show_403(
+                        __("Forbidden"),
+                        __("You cannot specify a user group.")
+                    );
+
                 $_POST['group'] = $config->default_group;
+            }
+
+            if (empty($_POST['group']))
+                error(
+                    __("Error"),
+                    __("User group must be specified."),
+                    code:422
+                );
 
             $group = new Group($_POST['group']);
 
@@ -1282,9 +1294,27 @@
                     __("User not found.")
                 );
 
-            if (!empty($_POST['new_password1'])) {
+            if (empty($_POST['new_password1'])) {
+                $password = $user->password;
+            } else {
+                $password = User::hash_password($_POST['new_password1']);
+
                 if (
-                    empty($_POST['new_password2']) or
+                    $visitor->group->id != $config->admin_group
+                ) {
+                    show_403(
+                        __("Forbidden"),
+                        __("You cannot specify a password.")
+                    );
+                } elseif (
+                    empty($_POST['new_password2'])
+                ) {
+                    error(
+                        __("Error"),
+                        __("Password not confirmed."),
+                        code:422
+                    );
+                } elseif (
                     $_POST['new_password1'] !== $_POST['new_password2']
                 ) {
                     error(
@@ -1300,10 +1330,6 @@
                     );
                 }
             }
-
-            $password = (!empty($_POST['new_password1'])) ?
-                User::hash_password($_POST['new_password1']) :
-                $user->password ;
 
             if (empty($_POST['email']))
                 error(
@@ -1331,10 +1357,23 @@
 
             fallback($_POST['full_name'], "");
             fallback($_POST['website'], "");
-            fallback($_POST['group'], $user->group_id);
 
-            if (!$visitor->group->can("edit_group"))
+            if ($visitor->group->id != $config->admin_group) {
+                if (isset($_POST['group']))
+                    show_403(
+                        __("Forbidden"),
+                        __("You cannot specify a user group.")
+                    );
+
                 $_POST['group'] = $user->group_id;
+            }
+
+            if (empty($_POST['group']))
+                error(
+                    __("Error"),
+                    __("User group must be specified."),
+                    code:422
+                );
 
             $group = new Group($_POST['group']);
 
@@ -1863,6 +1902,28 @@
             }
 
             $config = Config::current();
+
+            # Set new administrator group.
+            if ($config->admin_group == $group->id) {
+                if (!empty($_POST['admin_group'])) {
+                    $admin_group = new Group($_POST['admin_group']);
+
+                    if ($admin_group->no_results)
+                        error(
+                            __("Gone"),
+                            __("New administrator group does not exist."),
+                            code:410
+                        );
+
+                    $config->set("admin_group", $admin_group->id);
+                } else {
+                    error(
+                        __("Error"),
+                        __("New administrator group must be specified."),
+                        code:422
+                    );
+                }
+            }
 
             # Set new default group.
             if ($config->default_group == $group->id) {
@@ -3813,9 +3874,19 @@
                     __("Invalid authentication token.")
                 );
 
+            fallback($_POST['admin_group'], 0);
             fallback($_POST['default_group'], 0);
             fallback($_POST['guest_group'], 0);
             fallback($_POST['user_activation'], User::ACTIVATION_ADMIN);
+
+            $admin_group = new Group($_POST['admin_group']);
+
+            if ($admin_group->no_results)
+                error(
+                    __("Gone"),
+                    __("New administrator group does not exist."),
+                    code:410
+                );
 
             $default_group = new Group($_POST['default_group']);
 
@@ -3843,6 +3914,7 @@
             $config = Config::current();
             $config->set("can_register", !empty($_POST['can_register']));
             $config->set("email_correspondence", $email_correspondence);
+            $config->set("admin_group", (int) $admin_group->id);
             $config->set("default_group", (int) $default_group->id);
             $config->set("guest_group", (int) $guest_group->id);
             $config->set("user_activation", $_POST['user_activation']);
