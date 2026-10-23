@@ -1134,7 +1134,7 @@
                 if (isset($_POST['group']))
                     show_403(
                         __("Access Denied"),
-                        __("You cannot modify the group of a user.")
+                        __("You cannot specify the group of a user.")
                     );
 
                 $_POST['group'] = $config->default_group;
@@ -1369,7 +1369,7 @@
                 if (isset($_POST['group']))
                     show_403(
                         __("Access Denied"),
-                       __("You cannot modify the group of a user.")
+                       __("You cannot specify the group of a user.")
                     );
 
                 $_POST['group'] = $user->group_id;
