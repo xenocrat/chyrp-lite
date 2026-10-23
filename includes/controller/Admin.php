@@ -1421,7 +1421,9 @@
          */
         public function admin_delete_user(
         ): void {
-            if (!Visitor::current()->group->can("delete_user"))
+            $visitor = Visitor::current();
+
+            if (!$visitor->group->can("delete_user"))
                 show_403(
                     __("Access Denied"),
                     __("You do not have sufficient privileges to delete users.")
@@ -1442,7 +1444,7 @@
                     __("User not found.")
                 );
 
-            if ($user->id == Visitor::current()->id)
+            if ($user->id == $visitor->id)
                 Flash::warning(
                     __("You cannot delete your own account."),
                     "manage_users"
@@ -1465,9 +1467,10 @@
          */
         public function admin_destroy_user(
         ): never {
+            $visitor = Visitor::current();
             fallback($_SESSION['admin_redirect_to'], "manage_users");
 
-            if (!Visitor::current()->group->can("delete_user"))
+            if (!$visitor->group->can("delete_user"))
                 show_403(
                     __("Access Denied"),
                     __("You do not have sufficient privileges to delete users.")
@@ -1495,6 +1498,12 @@
                 show_404(
                     __("Not Found"),
                     __("User not found.")
+                );
+
+            if ($user->id == $visitor->id)
+                Flash::warning(
+                    __("You cannot delete your own account."),
+                    $_SESSION['admin_redirect_to']
                 );
 
             $sql = SQL::current();
@@ -1798,7 +1807,9 @@
          */
         public function admin_delete_group(
         ): void {
-            if (!Visitor::current()->group->can("delete_group"))
+            $visitor = Visitor::current();
+
+            if (!$visitor->group->can("delete_group"))
                 show_403(
                     __("Access Denied"),
                     __("You do not have sufficient privileges to delete groups.")
@@ -1819,7 +1830,7 @@
                     __("Group not found.")
                 );
 
-            if ($group->id == Visitor::current()->group->id)
+            if ($group->id == $visitor->group->id)
                 Flash::warning(
                     __("You cannot delete your own group."),
                     "manage_groups"
@@ -1845,9 +1856,10 @@
          */
         public function admin_destroy_group(
         ): never {
+            $visitor = Visitor::current();
             fallback($_SESSION['admin_redirect_to'], "manage_groups");
 
-            if (!Visitor::current()->group->can("delete_group"))
+            if (!$visitor->group->can("delete_group"))
                 show_403(
                     __("Access Denied"),
                     __("You do not have sufficient privileges to delete groups.")
@@ -1875,6 +1887,12 @@
                 show_404(
                     __("Not Found"),
                     __("Group not found.")
+                );
+
+            if ($group->id == $visitor->group->id)
+                Flash::warning(
+                    __("You cannot delete your own group."),
+                    $_SESSION['admin_redirect_to']
                 );
 
             # Assign users to new member group.
