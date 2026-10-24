@@ -1454,7 +1454,7 @@
             if (!$user->deletable()) {
                 show_403(
                     __("Access Denied"),
-                    __("You do not have sufficient privileges to edit this user.")
+                    __("You do not have sufficient privileges to delete this user.")
                 );
             }
 
@@ -1517,7 +1517,7 @@
             if (!$user->deletable()) {
                 show_403(
                     __("Access Denied"),
-                    __("You do not have sufficient privileges to edit this user.")
+                    __("You do not have sufficient privileges to delete this user.")
                 );
             }
 
