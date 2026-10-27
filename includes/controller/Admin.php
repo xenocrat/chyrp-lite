@@ -3741,7 +3741,6 @@
             $config->set("email_public", !empty($_POST['email_public']));
             $config->set("timezone", $_POST['timezone']);
             $config->set("locale", $_POST['locale']);
-            $config->set("monospace_font", !empty($_POST['monospace_font']));
             $config->set("check_updates", !empty($_POST['check_updates']));
             $config->set("check_updates_last", $check_updates_last);
 
@@ -3879,6 +3878,7 @@
             $config->set("send_pingbacks", !empty($_POST['send_pingbacks']));
             $config->set("enable_emoji", !empty($_POST['enable_emoji']));
             $config->set("enable_markdown", !empty($_POST['enable_markdown']));
+            $config->set("monospace_font", !empty($_POST['monospace_font']));
 
             Flash::notice(
                 __("Settings updated."),
