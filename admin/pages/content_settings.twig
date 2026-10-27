@@ -113,6 +113,16 @@
 {{ "Compose blog content using Markdown text formatting." | translate }}
 </small>
 </p>
+<p>
+<label for="monospace_font">
+{{ "Monospace Font" | translate }}
+</label>
+{#- -#}
+<input class="checkbox" type="checkbox" name="monospace_font" id="monospace_font"{{ site.monospace_font | checked }}>
+<small>
+{{ "Write with a monospace font." | translate }}
+</small>
+</p>
 <p class="buttons">
 <button type="submit" class="yay">
 {{ "Update" | translate }}
