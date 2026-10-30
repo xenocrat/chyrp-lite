@@ -57,6 +57,7 @@ giunti sul tuo sito.
 * MathJax: Un motore di visualizzazione JavaScript per la matematica.
 * Inject: Utilizzare trigger e filtri per l'inserimento dei contenuti.
 * Notifica: Invia notifiche dopo gli eventi.
+* Protezione con password: Impedisce gli attacchi con password agli account utente.
 
 ## Requisiti
 

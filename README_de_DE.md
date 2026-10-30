@@ -47,6 +47,7 @@ Feathern ermöglichen verschiedene Sorten von Blog-Inhalten – Sie können sich
 * MathJax: eine JavaScript-Anzeige-Engine für Mathematik.
 * Inject: Verwenden Sie Trigger und Filter für die Inhaltseinfügung.
 * Benachrichtigen: Senden Sie Benachrichtigungen nach Ereignissen.
+* Passwortschutz: Erschwert Passwortangriffe auf Benutzerkonten.
 
 ## Anforderungen
 

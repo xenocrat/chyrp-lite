@@ -50,6 +50,7 @@ ARIA标签可确保您的博客可供使用辅助技术的访问者访问。
 * MathJax: JavaScript的数学显示引擎。
 * Inject: 使用触发器和过滤器插入内容。
 * Notify: 事件结束后发送通知。
+* Password Protection: 阻止对用户账户的密码攻击。
 
 ## 安装要求
 

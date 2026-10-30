@@ -54,6 +54,7 @@ visitors will see when they first arrive at your website.
 * MathJax: a JavaScript display engine for mathematics.
 * Inject: use triggers and filters for content injection.
 * Notify: send notifications after events.
+* Password Protection: Impedes password attacks on user accounts.
 
 ## Requirements
 

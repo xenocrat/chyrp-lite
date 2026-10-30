@@ -57,6 +57,7 @@ Chyrp Lite를 사용하면 번거로움을 최소화하면서 자신의 웹 서�
 * MathJax: 수학용 JavaScript 디스플레이 엔진.
 * Inject: 트리거와 필터를 사용하여 콘텐츠를 삽입합니다.
 * Notify: 이벤트 발생 후 알림을 보냅니다.
+* Password Protection: 사용자 계정에 대한 비밀번호 공격을 저해합니다.
 
 ## 요구 사항
 

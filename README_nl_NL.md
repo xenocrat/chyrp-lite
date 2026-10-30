@@ -46,6 +46,7 @@ Met een flexibel system van feathers en pagina's, kun je je website precies zó 
 * MathJax: een JavaScript weergave-machine voor Wiskundige inhoud.
 * Inject: Voeg inhoud in met behulp van triggers en filters.
 * Melding: Stuur meldingen na evenementen.
+* Wachtwoord-beveiliging: Belemmert wachtwoordaanvallen op gebruikersaccounts.
 
 ## Benodigdheden
 
