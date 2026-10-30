@@ -27,6 +27,29 @@
                 SQL::current()->drop("logins");
         }
 
+        public function __init(
+        ): void {
+            $this->addAlias("user_registering", "enforce_pw_strength");
+            $this->addAlias("user_updating", "enforce_pw_strength");
+            $this->addAlias("user_resetting_password", "enforce_pw_strength");
+        }
+
+        public function enforce_pw_strength() {
+            if (!empty($_POST['password1'])) {
+                if (password_strength($_POST['password1']) < 100)
+                    Flash::warning(
+                        __("A stronger password is required.", "password_protection")
+                    );
+            }
+
+            if (!empty($_POST['new_password1'])) {
+                if (password_strength($_POST['new_password1']) < 100)
+                    Flash::warning(
+                        __("A stronger password is required.", "password_protection")
+                    );
+            }
+        }
+
         public function authenticate_user(
             $user,
             $result
