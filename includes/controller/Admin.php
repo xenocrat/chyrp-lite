@@ -940,9 +940,9 @@
                 );
 
             foreach ($page->children as $child)
-                if (isset($_POST['destroy_children']))
+                if (isset($_POST['destroy_children'])) {
                     Page::delete($child->id, true);
-                else
+                } else {
                     $child->update(
                         title:$child->title,
                         body:$child->body,
@@ -952,6 +952,7 @@
                         list_order:$child->list_order,
                         url:$child->url
                     );
+                }
 
             Page::delete($page->id);
 
@@ -3248,10 +3249,11 @@
 
                 load_translator($name, MODULES_DIR.DIR.$name.DIR."locale");
 
-                if (!isset($classes[$name]))
+                if (!isset($classes[$name])) {
                     $classes[$name] = array($name);
-                else
+                } else {
                     array_unshift($classes[$name], $name);
+                }
 
                 $info = load_info(MODULES_DIR.DIR.$name.DIR."info.php");
 
