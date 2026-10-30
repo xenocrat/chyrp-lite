@@ -109,11 +109,12 @@
             $timeout = round($latest + $delay);
 
             if ($time < $timeout) {
-                $when = _w("c", $timeout);
+                $secs = round($timeout - $time);
+                header("Retry-After: ".$secs);
 
                 error(
-                    __("Access Denied"),
-                    _f("You cannot log in until %s.", $when, "password_protection"),
+                    __("Too Many Requests", "password_protection"),
+                    _f("You must wait %d seconds to log in.", $secs, "password_protection"),
                     code:429
                 );
             }
@@ -137,11 +138,12 @@
             $timeout = round($latest + $delay);
 
             if ($time < $timeout) {
-                $when = _w("c", $timeout);
+                $secs = round($timeout - $time);
+                header("Retry-After: ".$secs);
 
                 error(
-                    __("Access Denied"),
-                    _f("You cannot log in until %s.", $when, "password_protection"),
+                    __("Too Many Requests", "password_protection"),
+                    _f("You must wait %d seconds to log in.", $secs, "password_protection"),
                     code:429
                 );
             }
@@ -170,11 +172,12 @@
             $timeout = round($latest + $delay);
 
             if ($time < $timeout) {
-                $when = _w("c", $timeout);
+                $secs = round($timeout - $time);
+                header("Retry-After: ".$secs);
 
                 error(
-                    __("Access Denied"),
-                    _f("You cannot log in until %s.", $when, "password_protection"),
+                    __("Too Many Requests", "password_protection"),
+                    _f("You must wait %d seconds to log in.", $secs, "password_protection"),
                     code:429
                 );
             }
