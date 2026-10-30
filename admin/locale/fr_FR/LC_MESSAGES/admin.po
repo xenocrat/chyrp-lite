@@ -14,7 +14,7 @@ msgstr ""
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: admin/help/canonical_url.twig:3 admin/help/canonical_url.twig:6
-#: admin/pages/general_settings.twig:35
+#: admin/pages/general_settings.twig:34
 msgid "Canonical URL"
 msgstr "URL canonique"
 
@@ -78,51 +78,51 @@ msgstr ""
 "exemple : <code>author:Foo;year:2016;</code> devrait filtrer le tableau des "
 "articles pour afficher uniquement ceux postés par Foo en 2016."
 
-#: admin/help/filtering_results.twig:17 admin/pages/route_settings.twig:46
+#: admin/help/filtering_results.twig:17 admin/pages/route_settings.twig:45
 msgid "Year created"
 msgstr "Année de création"
 
-#: admin/help/filtering_results.twig:17 admin/pages/route_settings.twig:46
+#: admin/help/filtering_results.twig:17 admin/pages/route_settings.twig:45
 msgid "(e.g. 2007)"
 msgstr "(exemple : 2007)"
 
-#: admin/help/filtering_results.twig:21 admin/pages/route_settings.twig:50
+#: admin/help/filtering_results.twig:21 admin/pages/route_settings.twig:49
 msgid "Month created"
 msgstr "Mois de création"
 
-#: admin/help/filtering_results.twig:21 admin/pages/route_settings.twig:50
+#: admin/help/filtering_results.twig:21 admin/pages/route_settings.twig:49
 msgid "(e.g. 12)"
 msgstr "(exemple : 12)"
 
-#: admin/help/filtering_results.twig:25 admin/pages/route_settings.twig:54
+#: admin/help/filtering_results.twig:25 admin/pages/route_settings.twig:53
 msgid "Day created"
 msgstr "Jour de création"
 
-#: admin/help/filtering_results.twig:25 admin/pages/route_settings.twig:54
+#: admin/help/filtering_results.twig:25 admin/pages/route_settings.twig:53
 msgid "(e.g. 25)"
 msgstr "(exemple : 25)"
 
-#: admin/help/filtering_results.twig:29 admin/pages/route_settings.twig:58
+#: admin/help/filtering_results.twig:29 admin/pages/route_settings.twig:57
 msgid "Hour created"
 msgstr "Heure de création"
 
-#: admin/help/filtering_results.twig:29 admin/pages/route_settings.twig:58
+#: admin/help/filtering_results.twig:29 admin/pages/route_settings.twig:57
 msgid "(e.g. 03)"
 msgstr "(exemple : 03)"
 
-#: admin/help/filtering_results.twig:33 admin/pages/route_settings.twig:62
+#: admin/help/filtering_results.twig:33 admin/pages/route_settings.twig:61
 msgid "Minute created"
 msgstr "Minute de création"
 
-#: admin/help/filtering_results.twig:33 admin/pages/route_settings.twig:62
+#: admin/help/filtering_results.twig:33 admin/pages/route_settings.twig:61
 msgid "(e.g. 59)"
 msgstr "(exemple : 59)"
 
-#: admin/help/filtering_results.twig:37 admin/pages/route_settings.twig:66
+#: admin/help/filtering_results.twig:37 admin/pages/route_settings.twig:65
 msgid "Second created"
 msgstr "Seconde de création"
 
-#: admin/help/filtering_results.twig:37 admin/pages/route_settings.twig:66
+#: admin/help/filtering_results.twig:37 admin/pages/route_settings.twig:65
 msgid "(e.g. 30)"
 msgstr "(exemple : 30)"
 
@@ -134,11 +134,11 @@ msgstr "Créé avant (datetime)"
 msgid "Created after (datetime)"
 msgstr "Créé après (datetime)"
 
-#: admin/help/filtering_results.twig:49 admin/pages/route_settings.twig:74
+#: admin/help/filtering_results.twig:49 admin/pages/route_settings.twig:73
 msgid "Author (login)"
 msgstr "Auteur (login)"
 
-#: admin/help/filtering_results.twig:49 admin/pages/route_settings.twig:74
+#: admin/help/filtering_results.twig:49 admin/pages/route_settings.twig:73
 msgid "(e.g. Alex)"
 msgstr "(exemple : Alex)"
 
@@ -175,7 +175,7 @@ msgstr ""
 "caractère d’échappement."
 
 #: admin/help/markdown.twig:3 admin/help/markdown.twig:6
-#: admin/help/markdown.twig:13 admin/pages/content_settings.twig:106
+#: admin/help/markdown.twig:13 admin/pages/content_settings.twig:105
 #: admin/partials/page_fields.twig:14 admin/partials/post_fields.twig:56
 msgid "Markdown"
 msgstr "Mardown"
@@ -375,7 +375,7 @@ msgstr ""
 "Un Slug est une URL pratique permettant de nommer un article ou une page."
 
 #: admin/help/unicode_emoticons.twig:3 admin/help/unicode_emoticons.twig:6
-#: admin/pages/content_settings.twig:93
+#: admin/pages/content_settings.twig:92
 msgid "Unicode Emoticons"
 msgstr "Émoticônes unicode"
 
@@ -424,7 +424,7 @@ msgstr "Taille maximale du fichier : %d mégaoctets."
 msgid "Modal window"
 msgstr "Fenêtre modale"
 
-#: admin/javascripts/admin.js.php:334 admin/pages/manage_uploads.twig:18
+#: admin/javascripts/admin.js.php:334 admin/pages/manage_uploads.twig:16
 msgid "Uploads"
 msgstr "Téléchargements"
 
@@ -438,9 +438,9 @@ msgid "Help content"
 msgstr "Contenu de l’aide"
 
 #: admin/javascripts/admin.js.php:544 admin/javascripts/admin.js.php:545
-#: admin/pages/manage_groups.twig:52 admin/pages/manage_pages.twig:69
-#: admin/pages/manage_posts.twig:57 admin/pages/manage_uploads.twig:73
-#: admin/pages/manage_users.twig:60
+#: admin/pages/manage_groups.twig:56 admin/pages/manage_pages.twig:67
+#: admin/pages/manage_posts.twig:55 admin/pages/manage_uploads.twig:71
+#: admin/pages/manage_users.twig:58
 msgid "Edit"
 msgstr "Modifier"
 
@@ -485,31 +485,31 @@ msgstr "Appelé depuis %s à la ligne %d à %s secondes."
 msgid "Content Settings"
 msgstr "Paramétrage"
 
-#: admin/pages/content_settings.twig:10
+#: admin/pages/content_settings.twig:9
 msgid "Posts Per Blog Page"
 msgstr "Articles par page de blog"
 
-#: admin/pages/content_settings.twig:15
+#: admin/pages/content_settings.twig:14
 msgid "Posts in Feed"
 msgstr "Articles dans le flux"
 
-#: admin/pages/content_settings.twig:20
+#: admin/pages/content_settings.twig:19
 msgid "Items Per Admin Page"
 msgstr "Items par page d'administration"
 
-#: admin/pages/content_settings.twig:25
+#: admin/pages/content_settings.twig:24
 msgid "Default Post Status"
 msgstr "État de la publication par défaut"
 
-#: admin/pages/content_settings.twig:36
+#: admin/pages/content_settings.twig:35
 msgid "Default Page Status"
 msgstr "Statut de la page par défaut"
 
-#: admin/pages/content_settings.twig:47
+#: admin/pages/content_settings.twig:46
 msgid "Uploads Path"
 msgstr "Chemin du téléchargement"
 
-#: admin/pages/content_settings.twig:51
+#: admin/pages/content_settings.twig:50
 msgid ""
 "The directory to which files are uploaded, relative to your installation "
 "directory."
@@ -517,112 +517,129 @@ msgstr ""
 "Le dossier dans lequel les fichiers sont téléchargés, relativement à votre "
 "dossier d'installation."
 
-#: admin/pages/content_settings.twig:55
+#: admin/pages/content_settings.twig:54
 msgid "Upload Size Limit"
 msgstr "Taille limite de téléchargement"
 
-#: admin/pages/content_settings.twig:58
+#: admin/pages/content_settings.twig:57
 msgid "(Megabytes)"
 msgstr "(Megabytes)"
 
-#: admin/pages/content_settings.twig:61
+#: admin/pages/content_settings.twig:60
 msgid "Feed Format"
 msgstr "Format du flux"
 
-#: admin/pages/content_settings.twig:73
+#: admin/pages/content_settings.twig:72
 msgid "Search Pages"
 msgstr "Pages de recherche"
 
-#: admin/pages/content_settings.twig:78
+#: admin/pages/content_settings.twig:77
 msgid "Include pages in search results."
 msgstr "Pages incluses dans les résultats de recherche."
 
-#: admin/pages/content_settings.twig:83
+#: admin/pages/content_settings.twig:82
 msgid "Webmentions"
 msgstr "Webmentions"
 
-#: admin/pages/content_settings.twig:88
+#: admin/pages/content_settings.twig:87
 msgid "Send and receive notifications when URLs are mentioned."
 msgstr "Envoyer et recevoir des notifications quand les URL sont mentionnées."
 
-#: admin/pages/content_settings.twig:95 admin/pages/content_settings.twig:108
-#: admin/pages/export.twig:21 admin/pages/export.twig:39
-#: admin/pages/export.twig:57 admin/pages/export.twig:75
-#: admin/pages/general_settings.twig:38 admin/pages/manage_pages.twig:11
-#: admin/pages/manage_posts.twig:11 admin/pages/manage_users.twig:11
-#: admin/pages/route_settings.twig:13 admin/partials/page_fields.twig:27
+#: admin/pages/content_settings.twig:94 admin/pages/content_settings.twig:107
+#: admin/pages/export.twig:20 admin/pages/export.twig:38
+#: admin/pages/export.twig:56 admin/pages/export.twig:74
+#: admin/pages/general_settings.twig:37 admin/pages/manage_pages.twig:10
+#: admin/pages/manage_posts.twig:10 admin/pages/manage_users.twig:10
+#: admin/pages/route_settings.twig:12 admin/partials/page_fields.twig:27
 #: admin/partials/post_fields.twig:32 admin/partials/post_fields.twig:129
 #: admin/partials/post_fields.twig:153
 msgid "Help"
 msgstr "Aider"
 
-#: admin/pages/content_settings.twig:101
+#: admin/pages/content_settings.twig:100
 msgid "Display emoticons as Unicode emoji."
 msgstr "Afficher les émoticônes comme des emoji Unicode."
 
-#: admin/pages/content_settings.twig:114
+#: admin/pages/content_settings.twig:113
 msgid "Compose blog content using Markdown text formatting."
 msgstr ""
 "Écrire le contenu du blog en utilisant le Markdown comme format de texte."
 
-#: admin/pages/content_settings.twig:119 admin/pages/edit_group.twig:27
-#: admin/pages/edit_upload.twig:20 admin/pages/edit_user.twig:64
-#: admin/pages/general_settings.twig:109 admin/pages/route_settings.twig:96
-#: admin/pages/user_settings.twig:76
+#: admin/pages/content_settings.twig:118
+msgid "Monospace Font"
+msgstr "Fonte Monospace"
+
+#: admin/pages/content_settings.twig:123
+msgid "Write with a monospace font."
+msgstr "Écrire avec une fonte monospace."
+
+#: admin/pages/content_settings.twig:128 admin/pages/edit_group.twig:26
+#: admin/pages/edit_upload.twig:19 admin/pages/edit_user.twig:65
+#: admin/pages/general_settings.twig:98 admin/pages/route_settings.twig:95
+#: admin/pages/user_settings.twig:86
 msgid "Update"
 msgstr "Mise à jour"
+
+#: admin/pages/delete_cache.twig:3 admin/pages/delete_cache.twig:6
+msgid "Delete Cache?"
+msgstr "Supprimer le cache ?"
+
+#: admin/pages/delete_cache.twig:9
+#, php-format
+msgid "The cache directory &#8220;%s&#8221; will be permanently deleted."
+msgstr "Le dossier cache &#171;%s&#187; sera supprimé définitivement."
+
+#: admin/pages/delete_cache.twig:13 admin/pages/delete_group.twig:52
+#: admin/pages/delete_page.twig:20 admin/pages/delete_post.twig:13
+#: admin/pages/delete_upload.twig:13 admin/pages/delete_user.twig:46
+msgid "Delete!"
+msgstr "Supprimé !"
+
+#: admin/pages/delete_cache.twig:16 admin/pages/delete_group.twig:55
+#: admin/pages/delete_page.twig:23 admin/pages/delete_post.twig:16
+#: admin/pages/delete_upload.twig:16 admin/pages/delete_user.twig:49
+#: admin/partials/page_fields.twig:100 admin/partials/post_fields.twig:198
+msgid "Cancel"
+msgstr "Cancel"
 
 #: admin/pages/delete_group.twig:3 admin/pages/delete_group.twig:6
 msgid "Delete Group?"
 msgstr "Supprimer le groupe ?"
 
-#: admin/pages/delete_group.twig:10 admin/pages/delete_post.twig:10
-#: admin/pages/delete_upload.twig:10 admin/pages/delete_user.twig:10
+#: admin/pages/delete_group.twig:9 admin/pages/delete_post.twig:9
+#: admin/pages/delete_upload.twig:9 admin/pages/delete_user.twig:9
 #, php-format
 msgid "&#8220;%s&#8221; will be permanently deleted."
 msgstr "&#171;%s&#187; sera supprimé de façon permanente."
 
-#: admin/pages/delete_group.twig:14
+#: admin/pages/delete_group.twig:13
 msgid "Move members to:"
 msgstr "Déplacer les membres vers :"
 
-#: admin/pages/delete_group.twig:27
+#: admin/pages/delete_group.twig:26
 msgid "New default group:"
 msgstr "Nouveau groupe par défaut :"
 
-#: admin/pages/delete_group.twig:40
+#: admin/pages/delete_group.twig:39
 msgid "New &#8220;guest&#8221; group:"
 msgstr "Nouveau groupe &#171;%s&#187; :"
-
-#: admin/pages/delete_group.twig:53 admin/pages/delete_page.twig:21
-#: admin/pages/delete_post.twig:14 admin/pages/delete_upload.twig:14
-#: admin/pages/delete_user.twig:47
-msgid "Delete!"
-msgstr "Supprimé !"
-
-#: admin/pages/delete_group.twig:56 admin/pages/delete_page.twig:24
-#: admin/pages/delete_post.twig:17 admin/pages/delete_upload.twig:17
-#: admin/pages/delete_user.twig:50 admin/partials/page_fields.twig:100
-#: admin/partials/post_fields.twig:198
-msgid "Cancel"
-msgstr "Cancel"
 
 #: admin/pages/delete_page.twig:3 admin/pages/delete_page.twig:6
 msgid "Delete Page?"
 msgstr "Supprimer la page ?"
 
-#: admin/pages/delete_page.twig:10 admin/pages/delete_post.twig:10
+#: admin/pages/delete_page.twig:9 admin/pages/delete_post.twig:9
 #: admin/pages/edit_page.twig:6 admin/pages/edit_post.twig:6
-#: admin/pages/manage_pages.twig:41 admin/pages/manage_posts.twig:39
+#: admin/pages/manage_pages.twig:39 admin/pages/manage_posts.twig:37
 msgid "[Untitled]"
 msgstr "[Sans titre]"
 
-#: admin/pages/delete_page.twig:10
+#: admin/pages/delete_page.twig:9
 #, php-format
 msgid "Are you sure you want to delete &#8220;%s&#8221;?"
 msgstr "Êtes-vous sûr de vouloir supprimer &#171;%s&#187; ?"
 
-#: admin/pages/delete_page.twig:14
+#: admin/pages/delete_page.twig:13
 msgid "Delete children?"
 msgstr "Supprimer les enfants ?"
 
@@ -638,19 +655,19 @@ msgstr "Supprimer le téléchargement ?"
 msgid "Delete User?"
 msgstr "Supprimer l'utilisateur ?"
 
-#: admin/pages/delete_user.twig:14
+#: admin/pages/delete_user.twig:13
 msgid "Attribute posts to:"
 msgstr "Attribuer l'article à :"
 
-#: admin/pages/delete_user.twig:17
+#: admin/pages/delete_user.twig:16
 msgid "[Delete Posts]"
 msgstr "[Articles supprimés]"
 
-#: admin/pages/delete_user.twig:30
+#: admin/pages/delete_user.twig:29
 msgid "Attribute pages to:"
 msgstr "Attribuer les pages à :"
 
-#: admin/pages/delete_user.twig:33
+#: admin/pages/delete_user.twig:32
 msgid "[Delete Pages]"
 msgstr "[Pages supprimées]"
 
@@ -667,12 +684,12 @@ msgstr "Groupe &#171;%s&#187; modifié"
 msgid "Are you sure you want to make these changes to your group?"
 msgstr "Êtes-vous sûr de vouloir réaliser ces changements sur ce groupe ?"
 
-#: admin/pages/edit_group.twig:10 admin/pages/manage_uploads.twig:22
-#: admin/pages/new_group.twig:10
+#: admin/pages/edit_group.twig:9 admin/pages/manage_uploads.twig:20
+#: admin/pages/new_group.twig:9
 msgid "Name"
 msgstr "Nom"
 
-#: admin/pages/edit_group.twig:14 admin/pages/new_group.twig:14
+#: admin/pages/edit_group.twig:13 admin/pages/new_group.twig:13
 msgid "Permissions"
 msgstr "Permissions"
 
@@ -698,11 +715,11 @@ msgstr "Modifier le téléchargement"
 msgid "Editing Upload &#8220;%s&#8221;"
 msgstr "Modification du téléchargement &#171;%s&#187;"
 
-#: admin/pages/edit_upload.twig:10
+#: admin/pages/edit_upload.twig:9
 msgid "New File"
 msgstr "Nouveau fichier"
 
-#: admin/pages/edit_upload.twig:14
+#: admin/pages/edit_upload.twig:13
 msgid "Some updates will not be noticeable immediately because of caching."
 msgstr ""
 "Certaines mises à jour ne seront pas perceptibles immédiatement en raison de "
@@ -721,51 +738,51 @@ msgstr "Utilisateur &#171;%s&#187; modifié"
 msgid "Are you sure you want to make these changes to your account?"
 msgstr "Êtes-vous sûr de vouloir effectuer ces changements sur ce compte ?"
 
-#: admin/pages/edit_user.twig:10 admin/pages/new_user.twig:10
+#: admin/pages/edit_user.twig:9 admin/pages/new_user.twig:9
 msgid "Login"
 msgstr "Connexion"
 
-#: admin/pages/edit_user.twig:15 admin/pages/new_user.twig:15
+#: admin/pages/edit_user.twig:14 admin/pages/new_user.twig:14
 msgid "Email"
 msgstr "Courriel"
 
-#: admin/pages/edit_user.twig:20 admin/pages/manage_groups.twig:22
-#: admin/pages/manage_users.twig:28 admin/pages/new_user.twig:20
+#: admin/pages/edit_user.twig:20 admin/pages/manage_groups.twig:20
+#: admin/pages/manage_users.twig:26 admin/pages/new_user.twig:20
 msgid "Group"
 msgstr "Groupe"
 
-#: admin/pages/edit_user.twig:31
+#: admin/pages/edit_user.twig:32
 msgid "New Password?"
 msgstr "Nouveau mot de passe ?"
 
-#: admin/pages/edit_user.twig:36 admin/pages/new_user.twig:39
+#: admin/pages/edit_user.twig:37 admin/pages/new_user.twig:40
 msgid "Confirm"
 msgstr "Confirmer"
 
-#: admin/pages/edit_user.twig:42 admin/pages/new_user.twig:45
+#: admin/pages/edit_user.twig:43 admin/pages/new_user.twig:46
 msgid "Full Name"
 msgstr "Nom complet"
 
-#: admin/pages/edit_user.twig:43 admin/pages/edit_user.twig:51
-#: admin/pages/export.twig:19 admin/pages/export.twig:37
-#: admin/pages/export.twig:55 admin/pages/export.twig:73
-#: admin/pages/export.twig:94 admin/pages/general_settings.twig:36
-#: admin/pages/import.twig:37 admin/pages/new_user.twig:46
-#: admin/pages/new_user.twig:54
+#: admin/pages/edit_user.twig:44 admin/pages/edit_user.twig:52
+#: admin/pages/export.twig:18 admin/pages/export.twig:36
+#: admin/pages/export.twig:54 admin/pages/export.twig:72
+#: admin/pages/export.twig:93 admin/pages/general_settings.twig:35
+#: admin/pages/import.twig:36 admin/pages/new_user.twig:47
+#: admin/pages/new_user.twig:55
 msgid "(optional)"
 msgstr "(optionnel)"
 
-#: admin/pages/edit_user.twig:50 admin/pages/manage_users.twig:30
-#: admin/pages/new_user.twig:53
+#: admin/pages/edit_user.twig:51 admin/pages/manage_users.twig:28
+#: admin/pages/new_user.twig:54
 msgid "Website"
 msgstr "Site"
 
-#: admin/pages/edit_user.twig:57 admin/pages/manage_users.twig:31
-#: admin/pages/new_user.twig:60
+#: admin/pages/edit_user.twig:58 admin/pages/manage_users.twig:29
+#: admin/pages/new_user.twig:61
 msgid "Activated?"
 msgstr "Activer ?"
 
-#: admin/pages/export.twig:3 admin/pages/export.twig:102
+#: admin/pages/export.twig:3 admin/pages/export.twig:101
 msgid "Export"
 msgstr "Exporter"
 
@@ -773,39 +790,39 @@ msgstr "Exporter"
 msgid "What would you like to export?"
 msgstr "Que souhaitez-vous exporter ?"
 
-#: admin/pages/export.twig:11 admin/pages/manage_posts.twig:23
+#: admin/pages/export.twig:10 admin/pages/manage_posts.twig:21
 msgid "Posts"
 msgstr "Articles"
 
-#: admin/pages/export.twig:18
+#: admin/pages/export.twig:17
 msgid "Filter Posts"
 msgstr "Filtrer les articles"
 
-#: admin/pages/export.twig:29 admin/pages/manage_pages.twig:23
+#: admin/pages/export.twig:28 admin/pages/manage_pages.twig:21
 msgid "Pages"
 msgstr "Pages"
 
-#: admin/pages/export.twig:36
+#: admin/pages/export.twig:35
 msgid "Filter Pages"
 msgstr "Filtrer les pages"
 
-#: admin/pages/export.twig:47 admin/pages/manage_groups.twig:18
+#: admin/pages/export.twig:46 admin/pages/manage_groups.twig:16
 msgid "Groups"
 msgstr "Groupes"
 
-#: admin/pages/export.twig:54
+#: admin/pages/export.twig:53
 msgid "Filter Groups"
 msgstr "Filtrer les groupes"
 
-#: admin/pages/export.twig:65 admin/pages/manage_users.twig:23
+#: admin/pages/export.twig:64 admin/pages/manage_users.twig:21
 msgid "Users"
 msgstr "Utilisateurs"
 
-#: admin/pages/export.twig:72
+#: admin/pages/export.twig:71
 msgid "Filter Users"
 msgstr "Filtrer les utilisateurs"
 
-#: admin/pages/export.twig:82
+#: admin/pages/export.twig:81
 msgid ""
 "Users export file will contain the hashed password for each user – keep it "
 "safe!"
@@ -813,11 +830,11 @@ msgstr ""
 "Le fichier d'export des utilisateurs contient le hash du mot de passe pour "
 "chaque utilisateur - gardez-le en sécurité !"
 
-#: admin/pages/export.twig:86
+#: admin/pages/export.twig:85
 msgid "Uploads Manifest"
 msgstr "Manifeste de téléchargement"
 
-#: admin/pages/export.twig:93
+#: admin/pages/export.twig:92
 msgid "Filter Uploads Manifest"
 msgstr "Filter le Manifeste de téléchargement"
 
@@ -855,62 +872,54 @@ msgstr "Activer"
 msgid "General Settings"
 msgstr "Paramètres généraux"
 
-#: admin/pages/general_settings.twig:11
+#: admin/pages/general_settings.twig:10
 msgid "Site Name"
 msgstr "Nom du site"
 
-#: admin/pages/general_settings.twig:18
+#: admin/pages/general_settings.twig:17
 msgid "Description"
 msgstr "Description"
 
-#: admin/pages/general_settings.twig:25
+#: admin/pages/general_settings.twig:24
 msgid "Chyrp URL"
 msgstr "URL de Chyrp"
 
-#: admin/pages/general_settings.twig:30
+#: admin/pages/general_settings.twig:29
 msgid "The base URL for your site."
 msgstr "L’URL de base de votre site."
 
-#: admin/pages/general_settings.twig:44
+#: admin/pages/general_settings.twig:43
 msgid "Have your site URLs point someplace other than your install directory."
 msgstr ""
 "Faites en sorte que l'URL de votre site pointe vers un autre emplacement que "
 "votre dossier d'installation."
 
-#: admin/pages/general_settings.twig:49
+#: admin/pages/general_settings.twig:48
 msgid "Contact Email Address"
 msgstr "Courriel de contact"
 
-#: admin/pages/general_settings.twig:56
+#: admin/pages/general_settings.twig:55
 msgid "Publish Contact Email Address"
 msgstr "Publier courriel de contact"
 
-#: admin/pages/general_settings.twig:63
+#: admin/pages/general_settings.twig:62
 msgid "Time Zone"
 msgstr "Time Zone"
 
-#: admin/pages/general_settings.twig:76
+#: admin/pages/general_settings.twig:75
 msgid "Language"
 msgstr "Langue"
 
-#: admin/pages/general_settings.twig:89
-msgid "Monospace Font"
-msgstr "Fonte Monospace"
-
-#: admin/pages/general_settings.twig:94
-msgid "Write with a monospace font."
-msgstr "Écrire avec une fonte monospace."
-
-#: admin/pages/general_settings.twig:99
+#: admin/pages/general_settings.twig:88
 msgid "Check for Updates"
 msgstr "Vérification des téléchargements"
 
-#: admin/pages/general_settings.twig:104
+#: admin/pages/general_settings.twig:93
 #, php-format
 msgid "Current version: %s."
 msgstr "Version en cours : %s."
 
-#: admin/pages/import.twig:3 admin/pages/import.twig:48
+#: admin/pages/import.twig:3 admin/pages/import.twig:47
 msgid "Import"
 msgstr "Importer"
 
@@ -918,99 +927,112 @@ msgstr "Importer"
 msgid "What would you like to import?"
 msgstr "Que souhaitez-vous importer ?"
 
-#: admin/pages/import.twig:10
+#: admin/pages/import.twig:9
 msgid "Posts .atom File"
 msgstr "Fichier .atom des articles"
 
-#: admin/pages/import.twig:15
+#: admin/pages/import.twig:14
 msgid "Pages .atom File"
 msgstr "Fichier .atom des pages"
 
-#: admin/pages/import.twig:20
+#: admin/pages/import.twig:19
 msgid "Groups .json File"
 msgstr "Fichier .json des groupes"
 
-#: admin/pages/import.twig:25
+#: admin/pages/import.twig:24
 msgid "Users .json File"
 msgstr "Fichier .json des utilisateurs"
 
-#: admin/pages/import.twig:30
+#: admin/pages/import.twig:29
 msgid "Bulk File Upload"
 msgstr "Téléchargement de fichiers en vrac"
 
-#: admin/pages/import.twig:36
+#: admin/pages/import.twig:35
 msgid "URL for Embedded Media"
 msgstr "URL pour les médias embarqués"
 
-#: admin/pages/import.twig:42
+#: admin/pages/import.twig:41
 #, php-format
 msgid "Usually something like <code>%s/uploads/</code>."
 msgstr "Habituellement, quelque chose comme <code>%s/uploads/</code>."
 
-#: admin/pages/manage_groups.twig:3
+#: admin/pages/manage_caches.twig:3 admin/pages/manage_groups.twig:3
 msgid "Manage Groups"
 msgstr "Gérer les groupes"
 
-#: admin/pages/manage_groups.twig:8
+#: admin/pages/manage_caches.twig:6
+msgid "Caches"
+msgstr "Caches"
+
+#: admin/pages/manage_caches.twig:10
+msgid "Path"
+msgstr "Chemin"
+
+#: admin/pages/manage_caches.twig:12 admin/pages/manage_groups.twig:26
+#: admin/pages/manage_pages.twig:32 admin/pages/manage_posts.twig:30
+#: admin/pages/manage_uploads.twig:25 admin/pages/manage_users.twig:31
+msgid "Controls"
+msgstr "Contrôles"
+
+#: admin/pages/manage_caches.twig:24 admin/pages/manage_groups.twig:63
+#: admin/pages/manage_pages.twig:74 admin/pages/manage_posts.twig:62
+#: admin/pages/manage_uploads.twig:80 admin/pages/manage_users.twig:65
+msgid "Delete"
+msgstr "Supprimer"
+
+#: admin/pages/manage_caches.twig:32 admin/pages/manage_groups.twig:73
+#: admin/pages/manage_pages.twig:84 admin/pages/manage_posts.twig:72
+#: admin/pages/manage_uploads.twig:91 admin/pages/manage_users.twig:75
+#: admin/partials/uploads_modal.twig:34
+msgid "No results"
+msgstr "Aucun résultat"
+
+#: admin/pages/manage_groups.twig:7
 msgid "Search all groups for user&hellip;"
 msgstr "Rechercher tous les groupes de l'utilisateur&hellip;"
 
-#: admin/pages/manage_groups.twig:10 admin/pages/manage_pages.twig:15
-#: admin/pages/manage_posts.twig:15 admin/pages/manage_uploads.twig:10
-#: admin/pages/manage_users.twig:15
+#: admin/pages/manage_groups.twig:9 admin/pages/manage_pages.twig:14
+#: admin/pages/manage_posts.twig:14 admin/pages/manage_uploads.twig:9
+#: admin/pages/manage_users.twig:14
 msgid "Search"
 msgstr "Rechercher"
 
-#: admin/pages/manage_groups.twig:13 admin/pages/new_group.twig:3
+#: admin/pages/manage_groups.twig:12 admin/pages/new_group.twig:3
 #: admin/pages/new_group.twig:6
 msgid "New Group"
 msgstr "Nouveau groupe"
 
-#: admin/pages/manage_groups.twig:18 admin/pages/manage_pages.twig:23
-#: admin/pages/manage_posts.twig:23 admin/pages/manage_uploads.twig:18
-#: admin/pages/manage_users.twig:23
+#: admin/pages/manage_groups.twig:16 admin/pages/manage_pages.twig:21
+#: admin/pages/manage_posts.twig:21 admin/pages/manage_uploads.twig:16
+#: admin/pages/manage_users.twig:21
 msgid "Search Results"
 msgstr "Résultats de la recherche"
 
-#: admin/pages/manage_groups.twig:23
+#: admin/pages/manage_groups.twig:21
 msgid "Members"
 msgstr "Membres"
 
-#: admin/pages/manage_groups.twig:24
+#: admin/pages/manage_groups.twig:22
+msgid "Administrator?"
+msgstr "Administrateur ?"
+
+#: admin/pages/manage_groups.twig:23
 msgid "Default?"
 msgstr "Défaut ?"
 
-#: admin/pages/manage_groups.twig:25
+#: admin/pages/manage_groups.twig:24
 msgid "Guests?"
 msgstr "Invité ?"
 
-#: admin/pages/manage_groups.twig:27 admin/pages/manage_pages.twig:34
-#: admin/pages/manage_posts.twig:32 admin/pages/manage_uploads.twig:27
-#: admin/pages/manage_users.twig:33
-msgid "Controls"
-msgstr "Contrôles"
-
-#: admin/pages/manage_groups.twig:41 admin/pages/manage_groups.twig:46
-#: admin/pages/manage_pages.twig:55 admin/pages/manage_pages.twig:60
-#: admin/pages/manage_users.twig:54
+#: admin/pages/manage_groups.twig:40 admin/pages/manage_groups.twig:45
+#: admin/pages/manage_groups.twig:50 admin/pages/manage_pages.twig:53
+#: admin/pages/manage_pages.twig:58 admin/pages/manage_users.twig:52
 msgid "Yes"
 msgstr "Oui"
 
-#: admin/pages/manage_groups.twig:59 admin/pages/manage_pages.twig:76
-#: admin/pages/manage_posts.twig:64 admin/pages/manage_uploads.twig:82
-#: admin/pages/manage_users.twig:67
-msgid "Delete"
-msgstr "Supprimer"
-
-#: admin/pages/manage_groups.twig:69 admin/pages/manage_pages.twig:86
-#: admin/pages/manage_posts.twig:74 admin/pages/manage_uploads.twig:93
-#: admin/pages/manage_users.twig:77 admin/partials/uploads_modal.twig:34
-msgid "No results"
-msgstr "Aucun résultat"
-
-#: admin/pages/manage_groups.twig:77 admin/pages/manage_pages.twig:94
-#: admin/pages/manage_posts.twig:82 admin/pages/manage_uploads.twig:114
-#: admin/pages/manage_users.twig:85
+#: admin/pages/manage_groups.twig:81 admin/pages/manage_pages.twig:92
+#: admin/pages/manage_posts.twig:80 admin/pages/manage_uploads.twig:112
+#: admin/pages/manage_users.twig:83
 #, php-format
 msgid "Page %d of %s"
 msgstr "Page %d sur %s"
@@ -1019,41 +1041,41 @@ msgstr "Page %d sur %s"
 msgid "Manage Pages"
 msgstr "Gérer les pages"
 
-#: admin/pages/manage_pages.twig:9 admin/pages/manage_posts.twig:9
-#: admin/pages/manage_uploads.twig:8 admin/pages/manage_users.twig:9
+#: admin/pages/manage_pages.twig:8 admin/pages/manage_posts.twig:8
+#: admin/pages/manage_uploads.twig:7 admin/pages/manage_users.twig:8
 msgid "Search&hellip;"
 msgstr "Rechercher&hellip;"
 
-#: admin/pages/manage_pages.twig:18
+#: admin/pages/manage_pages.twig:17
 msgid "New Page"
 msgstr "Nouvelle page"
 
-#: admin/pages/manage_pages.twig:27 admin/pages/manage_posts.twig:27
+#: admin/pages/manage_pages.twig:25 admin/pages/manage_posts.twig:25
 #: admin/partials/page_fields.twig:4
 msgid "Title"
 msgstr "Titre"
 
-#: admin/pages/manage_pages.twig:28
+#: admin/pages/manage_pages.twig:26
 msgid "Created"
 msgstr "Créé"
 
-#: admin/pages/manage_pages.twig:29
+#: admin/pages/manage_pages.twig:27
 msgid "Last Updated"
 msgstr "Dernière mise à jour"
 
-#: admin/pages/manage_pages.twig:30
+#: admin/pages/manage_pages.twig:28
 msgid "Public?"
 msgstr "Public ?"
 
-#: admin/pages/manage_pages.twig:31
+#: admin/pages/manage_pages.twig:29
 msgid "Listed?"
 msgstr "Listé ?"
 
-#: admin/pages/manage_pages.twig:32 admin/pages/manage_posts.twig:30
+#: admin/pages/manage_pages.twig:30 admin/pages/manage_posts.twig:28
 msgid "Author"
 msgstr "Auteur"
 
-#: admin/pages/manage_pages.twig:50
+#: admin/pages/manage_pages.twig:48
 msgid "Never"
 msgstr "Jamais"
 
@@ -1061,20 +1083,20 @@ msgstr "Jamais"
 msgid "Manage Posts"
 msgstr "Gérer les articles"
 
-#: admin/pages/manage_posts.twig:18
+#: admin/pages/manage_posts.twig:17
 msgid "New Post"
 msgstr "Nouvel article"
 
-#: admin/pages/manage_posts.twig:28
+#: admin/pages/manage_posts.twig:26
 msgid "Posted"
 msgstr "Posté"
 
-#: admin/pages/manage_posts.twig:29 admin/partials/page_fields.twig:33
+#: admin/pages/manage_posts.twig:27 admin/partials/page_fields.twig:33
 #: admin/partials/post_fields.twig:82
 msgid "Status"
 msgstr "Statut"
 
-#: admin/pages/manage_posts.twig:48 admin/partials/page_fields.twig:72
+#: admin/pages/manage_posts.twig:46 admin/partials/page_fields.twig:72
 msgid "[None]"
 msgstr "[Aucun]"
 
@@ -1082,31 +1104,31 @@ msgstr "[Aucun]"
 msgid "Manage Uploads"
 msgstr "Gérer les téléchargements"
 
-#: admin/pages/manage_uploads.twig:13
+#: admin/pages/manage_uploads.twig:12
 msgid "Add Files"
 msgstr "Ajouter des fichiers"
 
-#: admin/pages/manage_uploads.twig:23
+#: admin/pages/manage_uploads.twig:21
 msgid "Last Modified"
 msgstr "Dernières modifications"
 
-#: admin/pages/manage_uploads.twig:24
+#: admin/pages/manage_uploads.twig:22
 msgid "Size"
 msgstr "Taille"
 
-#: admin/pages/manage_uploads.twig:25
+#: admin/pages/manage_uploads.twig:23
 msgid "Type"
 msgstr "Type"
 
-#: admin/pages/manage_uploads.twig:67
+#: admin/pages/manage_uploads.twig:65
 msgid "Download"
 msgstr "Télécharger"
 
-#: admin/pages/manage_uploads.twig:101
+#: admin/pages/manage_uploads.twig:99
 msgid "Sort results by:"
 msgstr "Trier les résultats par:"
 
-#: admin/pages/manage_uploads.twig:109
+#: admin/pages/manage_uploads.twig:107
 msgid "Sort Results"
 msgstr "Trier les résultats"
 
@@ -1114,15 +1136,15 @@ msgstr "Trier les résultats"
 msgid "Manage Users"
 msgstr "Gérer les utilisateurs"
 
-#: admin/pages/manage_users.twig:18 admin/pages/new_user.twig:6
+#: admin/pages/manage_users.twig:17 admin/pages/new_user.twig:6
 msgid "New User"
 msgstr "Nouvel utilisateur"
 
-#: admin/pages/manage_users.twig:27
+#: admin/pages/manage_users.twig:25
 msgid "Login (name)"
 msgstr "Nom d'utilisateur (nom)"
 
-#: admin/pages/manage_users.twig:29
+#: admin/pages/manage_users.twig:27
 msgid "Joined"
 msgstr "Rejoint"
 
@@ -1138,15 +1160,15 @@ msgstr "Ce module est en conflit avec les modules suivants :"
 msgid "This module requires the following modules to be enabled:"
 msgstr "Ce module nécessite les modules suivants pour fonctionner :"
 
-#: admin/pages/new_group.twig:27
+#: admin/pages/new_group.twig:26
 msgid "Add Group"
 msgstr "Ajouter un groupe"
 
-#: admin/pages/new_user.twig:3 admin/pages/new_user.twig:67
+#: admin/pages/new_user.twig:3 admin/pages/new_user.twig:68
 msgid "Add User"
 msgstr "Ajouter un utilisateur"
 
-#: admin/pages/new_user.twig:34
+#: admin/pages/new_user.twig:35
 msgid "Password"
 msgstr "Mot de passe"
 
@@ -1154,71 +1176,71 @@ msgstr "Mot de passe"
 msgid "Route Settings"
 msgstr "Paramétrage des routes"
 
-#: admin/pages/route_settings.twig:11
+#: admin/pages/route_settings.twig:10
 msgid "Clean URLs"
 msgstr "Nettoyer les URLs"
 
-#: admin/pages/route_settings.twig:19
+#: admin/pages/route_settings.twig:18
 msgid "Gives your site prettier URLs."
 msgstr "Donnez à votre site des URLs plus jolies."
 
-#: admin/pages/route_settings.twig:20
+#: admin/pages/route_settings.twig:19
 msgid "Download the URL rewrite files."
 msgstr "Téléchargez les fichiers de réécriture d’URL."
 
-#: admin/pages/route_settings.twig:25
+#: admin/pages/route_settings.twig:24
 msgid "Homepage"
 msgstr "Accueil"
 
-#: admin/pages/route_settings.twig:30
+#: admin/pages/route_settings.twig:29
 msgid "Make the default route a homepage instead of the blog index."
 msgstr "Faire de l'accueil la route par défaut à la place de l'index du blog."
 
-#: admin/pages/route_settings.twig:35
+#: admin/pages/route_settings.twig:34
 msgid "Post View URL"
 msgstr "URL de visualisation de l'article"
 
-#: admin/pages/route_settings.twig:36
+#: admin/pages/route_settings.twig:35
 msgid "(requires clean URLs)"
 msgstr "(nécessite un nettoyage des URLs)"
 
-#: admin/pages/route_settings.twig:41
+#: admin/pages/route_settings.twig:40
 msgid "Syntax:"
 msgstr "Syntaxe :"
 
-#: admin/pages/route_settings.twig:70
+#: admin/pages/route_settings.twig:69
 msgid "Post ID"
 msgstr "Index de l'article"
 
-#: admin/pages/route_settings.twig:78
+#: admin/pages/route_settings.twig:77
 msgid "The non-unique slug"
 msgstr "Adresse non unique"
 
-#: admin/pages/route_settings.twig:78
+#: admin/pages/route_settings.twig:77
 msgid "(e.g. this_is_clean)"
 msgstr "(exemple : ceci_est_propre)"
 
-#: admin/pages/route_settings.twig:82
+#: admin/pages/route_settings.twig:81
 msgid "The unique form of (clean)"
 msgstr "L'unique formulaire de (propre)"
 
-#: admin/pages/route_settings.twig:82
+#: admin/pages/route_settings.twig:81
 msgid "(e.g. this_one_is_taken_2)"
 msgstr "(exemple : celui_ci_en_a_pris_2)"
 
-#: admin/pages/route_settings.twig:86
+#: admin/pages/route_settings.twig:85
 msgid "The post's feather"
 msgstr "La plume d'article"
 
-#: admin/pages/route_settings.twig:86
+#: admin/pages/route_settings.twig:85
 msgid "(e.g. text)"
 msgstr "(exemple : texte)"
 
-#: admin/pages/route_settings.twig:90
+#: admin/pages/route_settings.twig:89
 msgid "The plural form of the post's feather"
 msgstr "La forme plurielle de la plume d'article"
 
-#: admin/pages/route_settings.twig:90
+#: admin/pages/route_settings.twig:89
 msgid "(e.g. links)"
 msgstr "(exemple : liens)"
 
@@ -1238,53 +1260,57 @@ msgstr "Choisir"
 msgid "User Settings"
 msgstr "Paramètres utilisateur"
 
-#: admin/pages/user_settings.twig:10
+#: admin/pages/user_settings.twig:9
 msgid "Registration"
 msgstr "Enregistrement"
 
-#: admin/pages/user_settings.twig:14
+#: admin/pages/user_settings.twig:13
 msgid "Allow people to register."
 msgstr "Autoriser les gens à s'enregistrer."
 
-#: admin/pages/user_settings.twig:18
+#: admin/pages/user_settings.twig:17
 msgid "Email Correspondence"
 msgstr "Correspondance de couriel"
 
-#: admin/pages/user_settings.twig:22
+#: admin/pages/user_settings.twig:21
 msgid "Allow the site to send email correspondence to users?"
 msgstr ""
 "Autoriser le site à envoyer des courriels de correspondance aux "
 "utilisateurs ?"
 
-#: admin/pages/user_settings.twig:26
+#: admin/pages/user_settings.twig:25
 msgid "Automatic User Activation"
 msgstr "Activation automatique par l’utilisateur"
 
-#: admin/pages/user_settings.twig:31
+#: admin/pages/user_settings.twig:30
 msgid "New users can log in immediately."
 msgstr "Les nouveaux utilisateurs peuvent se connecter immédiatement."
 
-#: admin/pages/user_settings.twig:35
+#: admin/pages/user_settings.twig:34
 msgid "User Activation by Email"
 msgstr "Activation utilisateur par email"
 
-#: admin/pages/user_settings.twig:40
+#: admin/pages/user_settings.twig:39
 msgid "New users must respond to an activation email."
 msgstr "Les nouveaux utilisateurs doivent répondre à un email d’activation."
 
-#: admin/pages/user_settings.twig:44
+#: admin/pages/user_settings.twig:43
 msgid "User Activation by Administrator"
 msgstr "Activation utilisateur par l’administrateur"
 
-#: admin/pages/user_settings.twig:49
+#: admin/pages/user_settings.twig:48
 msgid "New users must be activated by an administrator."
 msgstr "Les nouveaux utilisateurs doivent être activés par un administrateur."
 
-#: admin/pages/user_settings.twig:53
+#: admin/pages/user_settings.twig:52
+msgid "Administrator User Group"
+msgstr "Groupe utilisateur par administrateurs"
+
+#: admin/pages/user_settings.twig:63
 msgid "Default User Group"
 msgstr "Groupe utilisateur par défaut"
 
-#: admin/pages/user_settings.twig:64
+#: admin/pages/user_settings.twig:74
 msgid "&#8220;Guest&#8221; Group"
 msgstr "Groupe &#171;%s&#187;"
 

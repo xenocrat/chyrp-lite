@@ -17,15 +17,15 @@ msgstr ""
 msgid "Syntax Highlighting Settings"
 msgstr "Instellingen voor syntaxismarkering"
 
-#: modules/highlighter/admin/pages/highlighter_settings.twig:10
+#: modules/highlighter/admin/pages/highlighter_settings.twig:9
 msgid "Stylesheet"
 msgstr "Stijlbestand"
 
-#: modules/highlighter/admin/pages/highlighter_settings.twig:22
+#: modules/highlighter/admin/pages/highlighter_settings.twig:21
 msgid "Copy Button"
 msgstr "Knop Kopiëren"
 
-#: modules/highlighter/admin/pages/highlighter_settings.twig:25
+#: modules/highlighter/admin/pages/highlighter_settings.twig:24
 msgid "Add a button for copying to the clipboard."
 msgstr "Voeg een knop toe om naar het klembord te kopiëren."
 

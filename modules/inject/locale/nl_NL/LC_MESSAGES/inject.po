@@ -57,7 +57,7 @@ msgstr ""
 msgid "Delete Injector?"
 msgstr "Injector verwijderen?"
 
-#: modules/inject/admin/pages/delete_injector.twig:10
+#: modules/inject/admin/pages/delete_injector.twig:9
 #, php-format
 msgid "&#8220;%s&#8221; will be permanently deleted."
 msgstr "&#8220;%s&#8221; wordt permanent verwijderd."
@@ -71,26 +71,26 @@ msgstr "Injector bewerken"
 msgid "Editing Injector &#8220;%s&#8221;"
 msgstr "Injector &#8220;%s&#8221; bewerken"
 
-#: modules/inject/admin/pages/edit_injector.twig:11
-#: modules/inject/admin/pages/manage_injectors.twig:20
-#: modules/inject/admin/pages/new_injector.twig:11
+#: modules/inject/admin/pages/edit_injector.twig:10
+#: modules/inject/admin/pages/manage_injectors.twig:18
+#: modules/inject/admin/pages/new_injector.twig:10
 msgid "Label"
 msgstr "Label"
 
-#: modules/inject/admin/pages/edit_injector.twig:20
-#: modules/inject/admin/pages/new_injector.twig:20
+#: modules/inject/admin/pages/edit_injector.twig:19
+#: modules/inject/admin/pages/new_injector.twig:19
 msgid "Content To Inject"
 msgstr "Inhoud om te injecteren"
 
-#: modules/inject/admin/pages/edit_injector.twig:26
-#: modules/inject/admin/pages/manage_injectors.twig:21
-#: modules/inject/admin/pages/new_injector.twig:26
+#: modules/inject/admin/pages/edit_injector.twig:25
+#: modules/inject/admin/pages/manage_injectors.twig:19
+#: modules/inject/admin/pages/new_injector.twig:25
 msgid "Type"
 msgstr "Type"
 
-#: modules/inject/admin/pages/edit_injector.twig:36
-#: modules/inject/admin/pages/manage_injectors.twig:22
-#: modules/inject/admin/pages/new_injector.twig:37
+#: modules/inject/admin/pages/edit_injector.twig:35
+#: modules/inject/admin/pages/manage_injectors.twig:20
+#: modules/inject/admin/pages/new_injector.twig:36
 msgid "Frequency"
 msgstr "Frequentie"
 
@@ -98,18 +98,18 @@ msgstr "Frequentie"
 msgid "Manage Injectors"
 msgstr "Injectoren beheren"
 
-#: modules/inject/admin/pages/manage_injectors.twig:12
+#: modules/inject/admin/pages/manage_injectors.twig:11
 msgid "New Injector"
 msgstr "Nieuwe injector"
 
-#: modules/inject/admin/pages/manage_injectors.twig:16
+#: modules/inject/admin/pages/manage_injectors.twig:14
 #: modules/inject/inject.php:471
 msgid "Injectors"
 msgstr "Injectoren"
 
 #: modules/inject/admin/pages/new_injector.twig:3
 #: modules/inject/admin/pages/new_injector.twig:6
-#: modules/inject/admin/pages/new_injector.twig:51
+#: modules/inject/admin/pages/new_injector.twig:50
 msgid "Add Injector"
 msgstr "Injector toevoegen"
 

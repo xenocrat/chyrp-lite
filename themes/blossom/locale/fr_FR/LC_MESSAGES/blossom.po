@@ -146,7 +146,7 @@ msgstr "Enregistrement"
 
 #: themes/blossom/content/sidebar.twig:48
 #: themes/blossom/forms/user/login.twig:5
-#: themes/blossom/forms/user/login.twig:14
+#: themes/blossom/forms/user/login.twig:15
 msgid "Log in"
 msgstr "Connexion"
 
@@ -323,7 +323,7 @@ msgstr "Nom d'utilisateur"
 msgid "Password"
 msgstr "Mot de passe"
 
-#: themes/blossom/forms/user/login.twig:15
+#: themes/blossom/forms/user/login.twig:16
 msgid "Help!"
 msgstr "Aide !"
 

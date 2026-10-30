@@ -202,7 +202,7 @@ msgstr "确认密码"
 msgid "Update"
 msgstr "更新"
 
-#: themes/umbra/forms/user/login.twig:5 themes/umbra/forms/user/login.twig:14
+#: themes/umbra/forms/user/login.twig:5 themes/umbra/forms/user/login.twig:15
 #: themes/umbra/layouts/default.twig:92
 msgid "Log in"
 msgstr "登陆"
@@ -218,7 +218,7 @@ msgstr "用户名"
 msgid "Password"
 msgstr "密码"
 
-#: themes/umbra/forms/user/login.twig:15
+#: themes/umbra/forms/user/login.twig:16
 msgid "Help!"
 msgstr "需要帮助！"
 

@@ -194,7 +194,7 @@ msgid "Update"
 msgstr "Mise à jour"
 
 #: themes/virgula/forms/user/login.twig:4
-#: themes/virgula/forms/user/login.twig:13
+#: themes/virgula/forms/user/login.twig:14
 #: themes/virgula/layouts/default.twig:73
 msgid "Log in"
 msgstr "Connexion"
@@ -211,7 +211,7 @@ msgstr "Nom d'utilisateur"
 msgid "Password"
 msgstr "Mot de passe"
 
-#: themes/virgula/forms/user/login.twig:14
+#: themes/virgula/forms/user/login.twig:15
 msgid "Help!"
 msgstr "Aide !"
 

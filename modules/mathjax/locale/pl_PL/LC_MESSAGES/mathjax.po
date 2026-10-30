@@ -17,11 +17,11 @@ msgstr ""
 msgid "MathJax Settings"
 msgstr "Ustawienia MathJax"
 
-#: modules/mathjax/admin/pages/mathjax_settings.twig:11
+#: modules/mathjax/admin/pages/mathjax_settings.twig:10
 msgid "TeX and LaTeX Support"
 msgstr "Obsługa TeX i LaTeX"
 
-#: modules/mathjax/admin/pages/mathjax_settings.twig:21
+#: modules/mathjax/admin/pages/mathjax_settings.twig:20
 msgid "MathML Support"
 msgstr "Obsługa MathML"
 

@@ -5,23 +5,23 @@
 msgid "Lightbox Settings"
 msgstr ""
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:10
+#: modules/lightbox/admin/pages/lightbox_settings.twig:9
 msgid "Background"
 msgstr ""
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:21
+#: modules/lightbox/admin/pages/lightbox_settings.twig:20
 msgid "Edge Spacing"
 msgstr ""
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:24
+#: modules/lightbox/admin/pages/lightbox_settings.twig:23
 msgid "(pixels)"
 msgstr ""
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:27
+#: modules/lightbox/admin/pages/lightbox_settings.twig:26
 msgid "Protect Images"
 msgstr ""
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:31
+#: modules/lightbox/admin/pages/lightbox_settings.twig:30
 msgid "Prevent visitors from saving images?"
 msgstr ""
 

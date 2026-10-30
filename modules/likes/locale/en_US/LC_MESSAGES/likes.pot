@@ -5,23 +5,23 @@
 msgid "Like Settings"
 msgstr ""
 
-#: modules/likes/admin/pages/like_settings.twig:10
+#: modules/likes/admin/pages/like_settings.twig:9
 msgid "Like Image"
 msgstr ""
 
-#: modules/likes/admin/pages/like_settings.twig:22
+#: modules/likes/admin/pages/like_settings.twig:21
 msgid "Like with Text"
 msgstr ""
 
-#: modules/likes/admin/pages/like_settings.twig:26
+#: modules/likes/admin/pages/like_settings.twig:25
 msgid "Enables text descriptions in like/unlike links."
 msgstr ""
 
-#: modules/likes/admin/pages/like_settings.twig:30
+#: modules/likes/admin/pages/like_settings.twig:29
 msgid "Show on Index Pages"
 msgstr ""
 
-#: modules/likes/admin/pages/like_settings.twig:34
+#: modules/likes/admin/pages/like_settings.twig:33
 msgid "Enables like functionality on blog index pages."
 msgstr ""
 

@@ -28,13 +28,13 @@ Called from:
 delete_user_form
 ----------------
 Called from:
-	admin/pages/delete_user.twig on line 44
+	admin/pages/delete_user.twig on line 43
 
 
 edit_upload_fields
 ------------------
 Called from:
-	admin/pages/edit_upload.twig on line 17
+	admin/pages/edit_upload.twig on line 16
 
 Arguments:
 	filename
@@ -43,7 +43,7 @@ Arguments:
 edit_user_fields
 ----------------
 Called from:
-	admin/pages/edit_user.twig on line 61
+	admin/pages/edit_user.twig on line 62
 
 Arguments:
 	user
@@ -52,40 +52,55 @@ Arguments:
 export_choose
 -------------
 Called from:
-	admin/pages/export.twig on line 99
+	admin/pages/export.twig on line 98
 
 
 import_choose
 -------------
 Called from:
-	admin/pages/import.twig on line 45
+	admin/pages/import.twig on line 44
+
+
+manage_caches_column_header
+---------------------------
+Called from:
+	admin/pages/manage_caches.twig on line 11
+
+
+manage_caches_column
+--------------------
+Called from:
+	admin/pages/manage_caches.twig on line 21
+
+Arguments:
+	cache
 
 
 manage_groups_column_header
 ---------------------------
 Called from:
-	admin/pages/manage_groups.twig on line 26
+	admin/pages/manage_groups.twig on line 25
 
 
 manage_groups_column
 --------------------
 Called from:
-	admin/pages/manage_groups.twig on line 49
+	admin/pages/manage_groups.twig on line 53
 
 Arguments:
-	groups
+	group
 
 
 manage_pages_column_header
 --------------------------
 Called from:
-	admin/pages/manage_pages.twig on line 33
+	admin/pages/manage_pages.twig on line 31
 
 
 manage_pages_column
 -------------------
 Called from:
-	admin/pages/manage_pages.twig on line 66
+	admin/pages/manage_pages.twig on line 64
 
 Arguments:
 	page
@@ -94,13 +109,13 @@ Arguments:
 manage_posts_column_header
 --------------------------
 Called from:
-	admin/pages/manage_posts.twig on line 31
+	admin/pages/manage_posts.twig on line 29
 
 
 manage_posts_column
 -------------------
 Called from:
-	admin/pages/manage_posts.twig on line 54
+	admin/pages/manage_posts.twig on line 52
 
 Arguments:
 	post
@@ -109,13 +124,13 @@ Arguments:
 manage_uploads_column_header
 ----------------------------
 Called from:
-	admin/pages/manage_uploads.twig on line 26
+	admin/pages/manage_uploads.twig on line 24
 
 
 manage_uploads_column
 ---------------------
 Called from:
-	admin/pages/manage_uploads.twig on line 64
+	admin/pages/manage_uploads.twig on line 62
 
 Arguments:
 	upload
@@ -124,13 +139,13 @@ Arguments:
 manage_users_column_header
 --------------------------
 Called from:
-	admin/pages/manage_users.twig on line 32
+	admin/pages/manage_users.twig on line 30
 
 
 manage_users_column
 -------------------
 Called from:
-	admin/pages/manage_users.twig on line 57
+	admin/pages/manage_users.twig on line 55
 
 Arguments:
 	user
@@ -139,7 +154,7 @@ Arguments:
 new_user_fields
 ---------------
 Called from:
-	admin/pages/new_user.twig on line 64
+	admin/pages/new_user.twig on line 65
 
 
 before_page_fields
@@ -245,7 +260,7 @@ Arguments:
 route_init
 ----------
 Called from:
-	includes/class/Route.php on line 112
+	includes/class/Route.php on line 113
 
 Arguments:
 	$this
@@ -254,13 +269,13 @@ Arguments:
 can_not_view_site
 -----------------
 Called from:
-	includes/class/Route.php on line 138
+	includes/class/Route.php on line 139
 
 
 route_done
 ----------
 Called from:
-	includes/class/Route.php on line 212
+	includes/class/Route.php on line 213
 
 Arguments:
 	$this
@@ -275,13 +290,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 2336
+	includes/controller/Admin.php on line 2607
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 2799
+	includes/controller/Admin.php on line 3070
 
 Arguments:
 	$group
@@ -290,7 +305,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2837
+	includes/controller/Admin.php on line 3108
 
 Arguments:
 	$user
@@ -299,7 +314,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2890
+	includes/controller/Admin.php on line 3161
 
 Arguments:
 	$entry
@@ -309,7 +324,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 2939
+	includes/controller/Admin.php on line 3210
 
 Arguments:
 	$entry
@@ -319,7 +334,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 2943
+	includes/controller/Admin.php on line 3214
 
 Arguments:
 	$imports
@@ -328,19 +343,19 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 3370
+	includes/controller/Admin.php on line 3642
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 3389
+	includes/controller/Admin.php on line 3661
 
 
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 683
+	includes/controller/Main.php on line 684
 
 
 user_registering
@@ -349,16 +364,28 @@ Called from:
 	includes/controller/Main.php on line 892
 
 
-user_authenticate
------------------
+user_authenticating
+-------------------
 Called from:
-	includes/controller/Main.php on line 1020
+	includes/controller/Main.php on line 1038
+
+
+user_updating
+-------------
+Called from:
+	includes/controller/Main.php on line 1169
+
+
+user_resetting_password
+-----------------------
+Called from:
+	includes/controller/Main.php on line 1316
 
 
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 1435
+	includes/controller/Main.php on line 1467
 
 Arguments:
 	$post
@@ -374,7 +401,7 @@ Called from:
 webmention
 ----------
 Called from:
-	includes/helpers.php on line 2647
+	includes/helpers.php on line 2649
 
 Arguments:
 	$post
@@ -385,7 +412,7 @@ Arguments:
 before_delete_upload
 --------------------
 Called from:
-	includes/helpers.php on line 3512
+	includes/helpers.php on line 3514
 
 Arguments:
 	$filename
@@ -394,7 +421,7 @@ Arguments:
 delete_upload
 -------------
 Called from:
-	includes/helpers.php on line 3515
+	includes/helpers.php on line 3517
 
 Arguments:
 	$filename
@@ -403,19 +430,19 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 3774
+	includes/helpers.php on line 3784
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 3795
+	includes/helpers.php on line 3805
 
 
 correspond_activate_account
 ---------------------------
 Called from:
-	includes/helpers.php on line 4163
+	includes/helpers.php on line 4173
 
 Arguments:
 	$user
@@ -425,7 +452,7 @@ Arguments:
 correspond_reset_password
 -------------------------
 Called from:
-	includes/helpers.php on line 4205
+	includes/helpers.php on line 4215
 
 Arguments:
 	$user
@@ -435,7 +462,7 @@ Arguments:
 correspond_acknowledge_user
 ---------------------------
 Called from:
-	includes/helpers.php on line 4243
+	includes/helpers.php on line 4253
 
 Arguments:
 	$user
@@ -445,7 +472,7 @@ Arguments:
 correspond_admin_activation
 ---------------------------
 Called from:
-	includes/helpers.php on line 4281
+	includes/helpers.php on line 4291
 
 Arguments:
 	$user
@@ -528,6 +555,16 @@ Arguments:
 	$options
 
 
+authenticate_user
+-----------------
+Called from:
+	includes/model/User.php on line 76
+
+Arguments:
+	$user
+	$result
+
+
 add_user
 --------
 Called from:
@@ -574,9 +611,9 @@ Called from:
 manage_comments_column_header
 -----------------------------
 Called from:
-	modules/categorize/admin/pages/manage_category.twig on line 28
-	modules/comments/admin/pages/manage_comments.twig on line 27
-	modules/comments/admin/pages/manage_spam.twig on line 26
+	modules/categorize/admin/pages/manage_category.twig on line 26
+	modules/comments/admin/pages/manage_comments.twig on line 25
+	modules/comments/admin/pages/manage_spam.twig on line 24
 
 
 add_category
@@ -610,7 +647,7 @@ Arguments:
 edit_comment_options
 --------------------
 Called from:
-	modules/comments/admin/pages/edit_comment.twig on line 66
+	modules/comments/admin/pages/edit_comment.twig on line 65
 
 Arguments:
 	comment
@@ -619,8 +656,8 @@ Arguments:
 manage_comments_column
 ----------------------
 Called from:
-	modules/comments/admin/pages/manage_comments.twig on line 52
-	modules/comments/admin/pages/manage_spam.twig on line 42
+	modules/comments/admin/pages/manage_comments.twig on line 50
+	modules/comments/admin/pages/manage_spam.twig on line 40
 
 Arguments:
 	comment
@@ -629,7 +666,7 @@ Arguments:
 comments_false_positives
 ------------------------
 Called from:
-	modules/comments/comments.php on line 731
+	modules/comments/comments.php on line 750
 
 Arguments:
 	$false_positives
@@ -638,7 +675,7 @@ Arguments:
 comments_false_negatives
 ------------------------
 Called from:
-	modules/comments/comments.php on line 734
+	modules/comments/comments.php on line 753
 
 Arguments:
 	$false_negatives
@@ -647,9 +684,9 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 1346
-	modules/comments/comments.php on line 1418
-	modules/comments/comments.php on line 1490
+	modules/comments/comments.php on line 1366
+	modules/comments/comments.php on line 1438
+	modules/comments/comments.php on line 1510
 
 Arguments:
 	$comment
@@ -659,7 +696,7 @@ Arguments:
 correspond_site_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1828
+	modules/comments/comments.php on line 1848
 
 Arguments:
 	$comment
@@ -668,7 +705,7 @@ Arguments:
 correspond_user_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1856
+	modules/comments/comments.php on line 1876
 
 Arguments:
 	$comment
@@ -678,7 +715,7 @@ Arguments:
 correspond_peer_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1889
+	modules/comments/comments.php on line 1909
 
 Arguments:
 	$comment
@@ -795,13 +832,13 @@ Arguments:
 manage_pingbacks_column_header
 ------------------------------
 Called from:
-	modules/pingable/admin/pages/manage_pingbacks.twig on line 25
+	modules/pingable/admin/pages/manage_pingbacks.twig on line 23
 
 
 manage_pingbacks_column
 -----------------------
 Called from:
-	modules/pingable/admin/pages/manage_pingbacks.twig on line 45
+	modules/pingable/admin/pages/manage_pingbacks.twig on line 43
 
 Arguments:
 	pingback
@@ -840,12 +877,12 @@ Called from:
 user_login
 ----------
 Called from:
-	themes/akarui/forms/user/login.twig on line 11
-	themes/blossom/forms/user/login.twig on line 12
-	themes/sparrow/forms/user/login.twig on line 12
-	themes/topaz/forms/user/login.twig on line 12
-	themes/umbra/forms/user/login.twig on line 12
-	themes/virgula/forms/user/login.twig on line 11
+	themes/akarui/forms/user/login.twig on line 12
+	themes/blossom/forms/user/login.twig on line 13
+	themes/sparrow/forms/user/login.twig on line 13
+	themes/topaz/forms/user/login.twig on line 13
+	themes/umbra/forms/user/login.twig on line 13
+	themes/virgula/forms/user/login.twig on line 12
 
 
 user_register
@@ -902,7 +939,7 @@ Called from:
 parse_urls
 ----------
 Called from:
-	includes/class/Route.php on line 259
+	includes/class/Route.php on line 260
 
 Target:
 	$urls
@@ -978,7 +1015,7 @@ Target:
 admin_determine_action
 ----------------------
 Called from:
-	includes/controller/Admin.php on line 186
+	includes/controller/Admin.php on line 187
 
 Target:
 	$route->action
@@ -987,7 +1024,7 @@ Target:
 write_post_options
 ------------------
 Called from:
-	includes/controller/Admin.php on line 250
+	includes/controller/Admin.php on line 251
 
 Target:
 	$options
@@ -1000,8 +1037,8 @@ Arguments:
 post_options
 ------------
 Called from:
-	includes/controller/Admin.php on line 251
-	includes/controller/Admin.php on line 350
+	includes/controller/Admin.php on line 252
+	includes/controller/Admin.php on line 351
 
 Target:
 	$options
@@ -1014,7 +1051,7 @@ Arguments:
 edit_post_options
 -----------------
 Called from:
-	includes/controller/Admin.php on line 349
+	includes/controller/Admin.php on line 350
 
 Target:
 	$options
@@ -1027,7 +1064,7 @@ Arguments:
 posts_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 2456
+	includes/controller/Admin.php on line 2727
 
 Target:
 	$posts_atom
@@ -1039,7 +1076,7 @@ Arguments:
 pages_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 2559
+	includes/controller/Admin.php on line 2830
 
 Target:
 	$pages_atom
@@ -1051,7 +1088,7 @@ Arguments:
 export
 ------
 Called from:
-	includes/controller/Admin.php on line 2645
+	includes/controller/Admin.php on line 2916
 
 Target:
 	$exports
@@ -1060,7 +1097,7 @@ Target:
 before_import
 -------------
 Called from:
-	includes/controller/Admin.php on line 2761
+	includes/controller/Admin.php on line 3032
 
 Target:
 	$imports
@@ -1069,7 +1106,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 3921
+	includes/controller/Admin.php on line 4204
 
 Target:
 	$write
@@ -1078,7 +1115,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 3990
+	includes/controller/Admin.php on line 4297
 
 Target:
 	$manage
@@ -1087,7 +1124,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 4020
+	includes/controller/Admin.php on line 4327
 
 Target:
 	$settings
@@ -1096,7 +1133,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 4043
+	includes/controller/Admin.php on line 4350
 
 Target:
 	$extend
@@ -1105,7 +1142,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 4139
+	includes/controller/Admin.php on line 4446
 
 Target:
 	$this->context
@@ -1146,7 +1183,7 @@ markup_text
 Called from:
 	includes/controller/Ajax.php on line 265
 	includes/model/Page.php on line 367
-	modules/comments/comments.php on line 1097
+	modules/comments/comments.php on line 1117
 	modules/comments/model/Comment.php on line 620
 
 Target:
@@ -1156,7 +1193,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 1558
+	includes/controller/Main.php on line 1590
 
 Target:
 	$this->context
@@ -1165,7 +1202,7 @@ Target:
 keyword_search
 --------------
 Called from:
-	includes/helpers.php on line 1499
+	includes/helpers.php on line 1498
 
 Target:
 	$search
@@ -1180,7 +1217,7 @@ Arguments:
 uploaded
 --------
 Called from:
-	includes/helpers.php on line 3196
+	includes/helpers.php on line 3198
 
 Target:
 	$upload_url
@@ -1192,7 +1229,7 @@ Arguments:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 4141
+	includes/helpers.php on line 4151
 
 Target:
 	$function
@@ -1201,7 +1238,7 @@ Target:
 javascripts_nonce
 -----------------
 Called from:
-	includes/lib/Leaf.php on line 347
+	includes/lib/Leaf.php on line 373
 
 Target:
 	$nonce
@@ -1210,7 +1247,7 @@ Target:
 stylesheets_nonce
 -----------------
 Called from:
-	includes/lib/Leaf.php on line 357
+	includes/lib/Leaf.php on line 383
 
 Target:
 	$nonce
@@ -1264,7 +1301,7 @@ Target:
 list_permissions
 ----------------
 Called from:
-	includes/model/Group.php on line 375
+	includes/model/Group.php on line 376
 
 Target:
 	$names
@@ -1462,7 +1499,7 @@ Target:
 markup_comment_text
 -------------------
 Called from:
-	modules/comments/comments.php on line 1097
+	modules/comments/comments.php on line 1117
 	modules/comments/model/Comment.php on line 620
 
 Target:

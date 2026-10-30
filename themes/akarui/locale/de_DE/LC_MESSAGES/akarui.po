@@ -194,7 +194,7 @@ msgstr "Bestätigen"
 msgid "Update"
 msgstr "Aktualisieren"
 
-#: themes/akarui/forms/user/login.twig:4 themes/akarui/forms/user/login.twig:13
+#: themes/akarui/forms/user/login.twig:4 themes/akarui/forms/user/login.twig:14
 #: themes/akarui/layouts/default.twig:73
 msgid "Log in"
 msgstr "Einloggen"
@@ -211,7 +211,7 @@ msgstr "Benutzername"
 msgid "Password"
 msgstr "Passwort"
 
-#: themes/akarui/forms/user/login.twig:14
+#: themes/akarui/forms/user/login.twig:15
 msgid "Help!"
 msgstr "Hilfe!"
 

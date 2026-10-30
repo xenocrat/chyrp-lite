@@ -18,15 +18,15 @@ msgstr ""
 msgid "Syntax Highlighting Settings"
 msgstr "语法高亮设置"
 
-#: modules/highlighter/admin/pages/highlighter_settings.twig:10
+#: modules/highlighter/admin/pages/highlighter_settings.twig:9
 msgid "Stylesheet"
 msgstr "样式表"
 
-#: modules/highlighter/admin/pages/highlighter_settings.twig:22
+#: modules/highlighter/admin/pages/highlighter_settings.twig:21
 msgid "Copy Button"
 msgstr "复制按钮"
 
-#: modules/highlighter/admin/pages/highlighter_settings.twig:25
+#: modules/highlighter/admin/pages/highlighter_settings.twig:24
 msgid "Add a button for copying to the clipboard."
 msgstr "添加用于复制到剪贴板的按钮。"
 

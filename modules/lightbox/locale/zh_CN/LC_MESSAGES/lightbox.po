@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/lightbox/admin/pages/lightbox_settings.twig:3
@@ -18,23 +18,23 @@ msgstr ""
 msgid "Lightbox Settings"
 msgstr "灯箱设置"
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:10
+#: modules/lightbox/admin/pages/lightbox_settings.twig:9
 msgid "Background"
 msgstr "背景"
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:21
+#: modules/lightbox/admin/pages/lightbox_settings.twig:20
 msgid "Edge Spacing"
 msgstr "边缘间距"
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:24
+#: modules/lightbox/admin/pages/lightbox_settings.twig:23
 msgid "(pixels)"
 msgstr "（像素）"
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:27
+#: modules/lightbox/admin/pages/lightbox_settings.twig:26
 msgid "Protect Images"
 msgstr "保护图像"
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:31
+#: modules/lightbox/admin/pages/lightbox_settings.twig:30
 msgid "Prevent visitors from saving images?"
 msgstr "防止访问者保存图像？"
 

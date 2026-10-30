@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/likes/admin/pages/like_settings.twig:3
@@ -18,23 +18,23 @@ msgstr ""
 msgid "Like Settings"
 msgstr "Impostazioni dei like"
 
-#: modules/likes/admin/pages/like_settings.twig:10
+#: modules/likes/admin/pages/like_settings.twig:9
 msgid "Like Image"
 msgstr "Like immagine"
 
-#: modules/likes/admin/pages/like_settings.twig:22
+#: modules/likes/admin/pages/like_settings.twig:21
 msgid "Like with Text"
 msgstr "Like con testo"
 
-#: modules/likes/admin/pages/like_settings.twig:26
+#: modules/likes/admin/pages/like_settings.twig:25
 msgid "Enables text descriptions in like/unlike links."
 msgstr "Abilita le descrizioni di testo nei collegamenti like/unlike."
 
-#: modules/likes/admin/pages/like_settings.twig:30
+#: modules/likes/admin/pages/like_settings.twig:29
 msgid "Show on Index Pages"
 msgstr "Mostra sulle pagine di indice"
 
-#: modules/likes/admin/pages/like_settings.twig:34
+#: modules/likes/admin/pages/like_settings.twig:33
 msgid "Enables like functionality on blog index pages."
 msgstr "Abilita la funzionalità like nelle pagine di indice del blog."
 

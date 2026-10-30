@@ -9,7 +9,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 "
+"|| n%100>14) ? 1 : 2);\n"
 "X-Generator: Poedit 3.6\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
@@ -18,23 +19,23 @@ msgstr ""
 msgid "Like Settings"
 msgstr "Ustawienia polubień"
 
-#: modules/likes/admin/pages/like_settings.twig:10
+#: modules/likes/admin/pages/like_settings.twig:9
 msgid "Like Image"
 msgstr "Ikona polubienia"
 
-#: modules/likes/admin/pages/like_settings.twig:22
+#: modules/likes/admin/pages/like_settings.twig:21
 msgid "Like with Text"
 msgstr "Polubienie z tekstem"
 
-#: modules/likes/admin/pages/like_settings.twig:26
+#: modules/likes/admin/pages/like_settings.twig:25
 msgid "Enables text descriptions in like/unlike links."
 msgstr "Włącza opisy tekstowe w linkach polubienia/odwołania polubienia."
 
-#: modules/likes/admin/pages/like_settings.twig:30
+#: modules/likes/admin/pages/like_settings.twig:29
 msgid "Show on Index Pages"
 msgstr "Pokaż na stronach indeksu"
 
-#: modules/likes/admin/pages/like_settings.twig:34
+#: modules/likes/admin/pages/like_settings.twig:33
 msgid "Enables like functionality on blog index pages."
 msgstr "Włącza funkcję polubiania na stronach indeksu bloga."
 

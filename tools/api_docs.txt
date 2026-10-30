@@ -1595,6 +1595,21 @@ Function: admin_manage_uploads
 Upload management.
 
 
+Function: admin_delete_cache
+----------------------------
+Cache deletion (confirm page).
+
+
+Function: admin_destroy_cache
+-----------------------------
+Recursively destroys the contents of a cache directory.
+
+
+Function: admin_manage_caches
+-----------------------------
+Cache management.
+
+
 Function: admin_export
 ----------------------
 Export content from this installation.
@@ -2281,7 +2296,7 @@ Function: token
 Salt and hash a unique token using the supplied data.
 
 Parameters:
-    $items - An array of items to hash.
+    $data - Mixed: any variable that can be serialized.
 
 Returns:
     A unique token salted with the site's secure hashkey.
@@ -4345,6 +4360,16 @@ Returns:
 
 Notes:
     Uses <password_verify> to mitigate timing attacks.
+
+
+Function: editable
+------------------
+Checks if a <User> can edit this user.
+
+
+Function: deletable
+-------------------
+Checks if a <User> can delete this user.
 
 
 ==============================================

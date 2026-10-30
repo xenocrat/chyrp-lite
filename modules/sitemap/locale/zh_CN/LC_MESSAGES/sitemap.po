@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/sitemap/admin/pages/sitemap_settings.twig:3
@@ -18,27 +18,27 @@ msgstr ""
 msgid "Sitemap Settings"
 msgstr "站点地图设置"
 
-#: modules/sitemap/admin/pages/sitemap_settings.twig:10
+#: modules/sitemap/admin/pages/sitemap_settings.twig:9
 msgid "Sitemap Path"
 msgstr "Sitemap 路径"
 
-#: modules/sitemap/admin/pages/sitemap_settings.twig:14
+#: modules/sitemap/admin/pages/sitemap_settings.twig:13
 msgid "The directory to which the sitemap is written."
 msgstr "Sitemap 写入的目录。"
 
-#: modules/sitemap/admin/pages/sitemap_settings.twig:18
+#: modules/sitemap/admin/pages/sitemap_settings.twig:17
 msgid "Blog is Updated"
 msgstr "博客已更新"
 
-#: modules/sitemap/admin/pages/sitemap_settings.twig:29
+#: modules/sitemap/admin/pages/sitemap_settings.twig:28
 msgid "Pages are Edited"
 msgstr "页面已编辑"
 
-#: modules/sitemap/admin/pages/sitemap_settings.twig:40
+#: modules/sitemap/admin/pages/sitemap_settings.twig:39
 msgid "Posts are Edited"
 msgstr "帖子已编辑"
 
-#: modules/sitemap/admin/pages/sitemap_settings.twig:52
+#: modules/sitemap/admin/pages/sitemap_settings.twig:51
 msgid ""
 "These values hint to search engines how frequently they should crawl your "
 "site."

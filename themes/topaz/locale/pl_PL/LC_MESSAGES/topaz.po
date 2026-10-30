@@ -145,7 +145,7 @@ msgid "Register"
 msgstr "Zarejestruj się"
 
 #: themes/topaz/content/sidebar.twig:48 themes/topaz/forms/user/login.twig:5
-#: themes/topaz/forms/user/login.twig:14
+#: themes/topaz/forms/user/login.twig:15
 msgid "Log in"
 msgstr "Zaloguj się"
 
@@ -328,7 +328,7 @@ msgstr "Nazwa użytkownika"
 msgid "Password"
 msgstr "Hasło"
 
-#: themes/topaz/forms/user/login.twig:15
+#: themes/topaz/forms/user/login.twig:16
 msgid "Help!"
 msgstr "Pomocy!"
 

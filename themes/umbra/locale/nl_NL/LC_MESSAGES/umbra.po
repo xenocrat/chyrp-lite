@@ -201,7 +201,7 @@ msgstr "Bevestig"
 msgid "Update"
 msgstr "Bijwerken"
 
-#: themes/umbra/forms/user/login.twig:5 themes/umbra/forms/user/login.twig:14
+#: themes/umbra/forms/user/login.twig:5 themes/umbra/forms/user/login.twig:15
 #: themes/umbra/layouts/default.twig:92
 msgid "Log in"
 msgstr "Log in"
@@ -217,7 +217,7 @@ msgstr "Gebruikersnaam"
 msgid "Password"
 msgstr "Wachtwoord"
 
-#: themes/umbra/forms/user/login.twig:15
+#: themes/umbra/forms/user/login.twig:16
 msgid "Help!"
 msgstr "Help!"
 

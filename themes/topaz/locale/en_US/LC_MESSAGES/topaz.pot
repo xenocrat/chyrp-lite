@@ -141,7 +141,7 @@ msgstr ""
 
 #: themes/topaz/content/sidebar.twig:48
 #: themes/topaz/forms/user/login.twig:5
-#: themes/topaz/forms/user/login.twig:14
+#: themes/topaz/forms/user/login.twig:15
 msgid "Log in"
 msgstr ""
 
@@ -334,7 +334,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: themes/topaz/forms/user/login.twig:15
+#: themes/topaz/forms/user/login.twig:16
 msgid "Help!"
 msgstr ""
 

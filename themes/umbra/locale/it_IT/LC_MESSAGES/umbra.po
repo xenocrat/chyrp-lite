@@ -202,7 +202,7 @@ msgstr "Conferma"
 msgid "Update"
 msgstr "Aggiorna"
 
-#: themes/umbra/forms/user/login.twig:5 themes/umbra/forms/user/login.twig:14
+#: themes/umbra/forms/user/login.twig:5 themes/umbra/forms/user/login.twig:15
 #: themes/umbra/layouts/default.twig:92
 msgid "Log in"
 msgstr "Accedi"
@@ -218,7 +218,7 @@ msgstr "Nome utente"
 msgid "Password"
 msgstr "Password"
 
-#: themes/umbra/forms/user/login.twig:15
+#: themes/umbra/forms/user/login.twig:16
 msgid "Help!"
 msgstr "Aiuto!"
 

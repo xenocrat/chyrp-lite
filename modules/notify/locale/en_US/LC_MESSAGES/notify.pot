@@ -5,23 +5,23 @@
 msgid "Notify Settings"
 msgstr ""
 
-#: modules/notify/admin/pages/notify_settings.twig:9
+#: modules/notify/admin/pages/notify_settings.twig:8
 msgid "Events:"
 msgstr ""
 
-#: modules/notify/admin/pages/notify_settings.twig:19
+#: modules/notify/admin/pages/notify_settings.twig:17
 msgid "ntfy.sh"
 msgstr ""
 
-#: modules/notify/admin/pages/notify_settings.twig:23
+#: modules/notify/admin/pages/notify_settings.twig:20
 msgid "Enable Notifications"
 msgstr ""
 
-#: modules/notify/admin/pages/notify_settings.twig:31
+#: modules/notify/admin/pages/notify_settings.twig:28
 msgid "Host"
 msgstr ""
 
-#: modules/notify/admin/pages/notify_settings.twig:35
+#: modules/notify/admin/pages/notify_settings.twig:32
 msgid "Topic"
 msgstr ""
 

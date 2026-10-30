@@ -17,37 +17,45 @@ msgstr ""
 msgid "Sitemap Settings"
 msgstr "Ustawienia mapy witryny"
 
-#: modules/sitemap/admin/pages/sitemap_settings.twig:10
+#: modules/sitemap/admin/pages/sitemap_settings.twig:9
 msgid "Sitemap Path"
 msgstr "Ścieżka mapy witryny"
 
-#: modules/sitemap/admin/pages/sitemap_settings.twig:14
+#: modules/sitemap/admin/pages/sitemap_settings.twig:13
 msgid "The directory to which the sitemap is written."
 msgstr "Katalog, do którego zapisywana jest mapa witryny."
 
-#: modules/sitemap/admin/pages/sitemap_settings.twig:18
+#: modules/sitemap/admin/pages/sitemap_settings.twig:17
 msgid "Blog is Updated"
 msgstr "Aktualizacja bloga"
 
-#: modules/sitemap/admin/pages/sitemap_settings.twig:29
+#: modules/sitemap/admin/pages/sitemap_settings.twig:28
 msgid "Pages are Edited"
 msgstr "Edycja stron"
 
-#: modules/sitemap/admin/pages/sitemap_settings.twig:40
+#: modules/sitemap/admin/pages/sitemap_settings.twig:39
 msgid "Posts are Edited"
 msgstr "Edycja wpisów"
 
-#: modules/sitemap/admin/pages/sitemap_settings.twig:52
-msgid "These values hint to search engines how frequently they should crawl your site."
-msgstr "Te wartości sugerują wyszukiwarkom, jak często powinny przeszukiwać Twoją witrynę."
+#: modules/sitemap/admin/pages/sitemap_settings.twig:51
+msgid ""
+"These values hint to search engines how frequently they should crawl your "
+"site."
+msgstr ""
+"Te wartości sugerują wyszukiwarkom, jak często powinny przeszukiwać Twoją "
+"witrynę."
 
 #: modules/sitemap/info.php:3
 msgid "Sitemap Generator"
 msgstr "Generator mapy witryny"
 
 #: modules/sitemap/info.php:6
-msgid "Creates a <em>sitemap.xml</em> file on your server to help search engines index your blog."
-msgstr "Tworzy plik <em>sitemap.xml</em> na serwerze, aby pomóc wyszukiwarkom zindeksować Twój blog."
+msgid ""
+"Creates a <em>sitemap.xml</em> file on your server to help search engines "
+"index your blog."
+msgstr ""
+"Tworzy plik <em>sitemap.xml</em> na serwerze, aby pomóc wyszukiwarkom "
+"zindeksować Twój blog."
 
 #: modules/sitemap/sitemap.php:39
 msgid "Sitemap"

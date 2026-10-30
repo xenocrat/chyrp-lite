@@ -39,7 +39,7 @@ msgstr ""
 msgid "Delete Tag?"
 msgstr "Tag löschen?"
 
-#: modules/tags/admin/pages/delete_tag.twig:10
+#: modules/tags/admin/pages/delete_tag.twig:9
 #, php-format
 msgid "&#8220;%s&#8221; will be permanently deleted."
 msgstr "&#8220;%s&#8221; würde permanent gelöscht."
@@ -53,12 +53,12 @@ msgstr "Tagname ändern"
 msgid "Renaming Tag &#8220;%s&#8221;"
 msgstr "Ändern Name Tag &#8220;%s&#8221;"
 
-#: modules/tags/admin/pages/edit_tag.twig:10
-#: modules/tags/admin/pages/manage_tags.twig:22 modules/tags/tags.php:323
+#: modules/tags/admin/pages/edit_tag.twig:9
+#: modules/tags/admin/pages/manage_tags.twig:20 modules/tags/tags.php:323
 msgid "Name"
 msgstr "Name"
 
-#: modules/tags/admin/pages/edit_tag.twig:16
+#: modules/tags/admin/pages/edit_tag.twig:15
 msgid "Rename"
 msgstr "Name ändern"
 
@@ -71,9 +71,9 @@ msgstr "Tags ändern"
 msgid "Editing Tags for &#8220;%s&#8221;"
 msgstr "Ändern von Tags für &#8220;%s&#8221;"
 
-#: modules/tags/admin/pages/edit_tags.twig:10
-#: modules/tags/admin/pages/manage_tags.twig:18
-#: modules/tags/admin/pages/posts_tagged.twig:31 modules/tags/tags.php:193
+#: modules/tags/admin/pages/edit_tags.twig:9
+#: modules/tags/admin/pages/manage_tags.twig:16
+#: modules/tags/admin/pages/posts_tagged.twig:29 modules/tags/tags.php:193
 #: modules/tags/tags.php:259 modules/tags/tags.php:274
 #: modules/tags/tags.php:836
 msgid "Tags"
@@ -83,26 +83,26 @@ msgstr "Tags (Etiketten)"
 msgid "Manage Tags"
 msgstr "Tags bearbeiten"
 
-#: modules/tags/admin/pages/manage_tags.twig:13
-#: modules/tags/admin/pages/posts_tagged.twig:81
+#: modules/tags/admin/pages/manage_tags.twig:12
+#: modules/tags/admin/pages/posts_tagged.twig:79
 msgid "Add Tags"
 msgstr "Tags hinzufügen"
 
-#: modules/tags/admin/pages/manage_tags.twig:23
+#: modules/tags/admin/pages/manage_tags.twig:21
 #: modules/tags/admin/pages/posts_tagged.twig:3 modules/tags/tags.php:324
 msgid "Posts Tagged"
 msgstr "Blogpost getagged"
 
-#: modules/tags/admin/pages/manage_tags.twig:59
+#: modules/tags/admin/pages/manage_tags.twig:57
 msgid "Sort results by:"
 msgstr "Sortieren Sie die Ergebnisse nach:"
 
-#: modules/tags/admin/pages/posts_tagged.twig:20 modules/tags/tags.php:826
+#: modules/tags/admin/pages/posts_tagged.twig:18 modules/tags/tags.php:826
 #, php-format
 msgid "Posts tagged with &#8220;%s&#8221;"
 msgstr "Blogposts getagged mit &#8220;%s&#8221;"
 
-#: modules/tags/admin/pages/posts_tagged.twig:78
+#: modules/tags/admin/pages/posts_tagged.twig:76
 msgid "Tag Selected Post(s) with:"
 msgstr "Taggen Sie die selektierten Blogpost(s) mit:"
 

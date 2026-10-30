@@ -5,11 +5,11 @@
 msgid "Read More Settings"
 msgstr ""
 
-#: modules/read_more/admin/pages/read_more_settings.twig:10
+#: modules/read_more/admin/pages/read_more_settings.twig:9
 msgid "Apply to Feeds"
 msgstr ""
 
-#: modules/read_more/admin/pages/read_more_settings.twig:16
+#: modules/read_more/admin/pages/read_more_settings.twig:15
 msgid "Default Text"
 msgstr ""
 

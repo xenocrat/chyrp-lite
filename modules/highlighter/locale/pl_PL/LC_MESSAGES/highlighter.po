@@ -17,15 +17,15 @@ msgstr ""
 msgid "Syntax Highlighting Settings"
 msgstr "Ustawienia podświetlania składni"
 
-#: modules/highlighter/admin/pages/highlighter_settings.twig:10
+#: modules/highlighter/admin/pages/highlighter_settings.twig:9
 msgid "Stylesheet"
 msgstr "Arkusz stylów"
 
-#: modules/highlighter/admin/pages/highlighter_settings.twig:22
+#: modules/highlighter/admin/pages/highlighter_settings.twig:21
 msgid "Copy Button"
 msgstr "Przycisk kopiowania"
 
-#: modules/highlighter/admin/pages/highlighter_settings.twig:25
+#: modules/highlighter/admin/pages/highlighter_settings.twig:24
 msgid "Add a button for copying to the clipboard."
 msgstr "Dodaj przycisk kopiowania do schowka."
 
@@ -34,9 +34,13 @@ msgid "Syntax Highlighting"
 msgstr "Podświetlanie składni"
 
 #: modules/highlighter/info.php:6
-msgid "Adds syntax highlighting to nested <code>&lt;pre&gt;&lt;code&gt;</code> blocks."
-msgstr "Dodaje podświetlanie składni do zagnieżdżonych bloków <code>&lt;pre&gt;&lt;code&gt;</code>."
+msgid ""
+"Adds syntax highlighting to nested <code>&lt;pre&gt;&lt;code&gt;</code> "
+"blocks."
+msgstr ""
+"Dodaje podświetlanie składni do zagnieżdżonych bloków "
+"<code>&lt;pre&gt;&lt;code&gt;</code>."
 
-#: modules/highlighter/javascript.php:73 modules/highlighter/javascript.php:74
+#: modules/highlighter/javascript.php:78 modules/highlighter/javascript.php:79
 msgid "Copy to clipboard"
 msgstr "Kopiuj do schowka"

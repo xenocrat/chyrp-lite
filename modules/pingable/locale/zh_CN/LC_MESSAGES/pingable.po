@@ -18,7 +18,7 @@ msgstr ""
 msgid "Delete Webmention?"
 msgstr "删除Webmention？"
 
-#: modules/pingable/admin/pages/delete_pingback.twig:10
+#: modules/pingable/admin/pages/delete_pingback.twig:9
 #, php-format
 msgid "&#8220;%s&#8221; will be permanently deleted."
 msgstr "&#8220;%s&#8221; 将被永久删除。"
@@ -32,12 +32,12 @@ msgstr "编辑Webmention"
 msgid "Editing Webmention to &#8220;%s&#8221;"
 msgstr "编辑Webmention为&#8220;%s&#8221;"
 
-#: modules/pingable/admin/pages/edit_pingback.twig:10
-#: modules/pingable/admin/pages/manage_pingbacks.twig:22
+#: modules/pingable/admin/pages/edit_pingback.twig:9
+#: modules/pingable/admin/pages/manage_pingbacks.twig:20
 msgid "Title"
 msgstr "标题"
 
-#: modules/pingable/admin/pages/edit_pingback.twig:16
+#: modules/pingable/admin/pages/edit_pingback.twig:15
 msgid "Update"
 msgstr "更新"
 
@@ -45,16 +45,16 @@ msgstr "更新"
 msgid "Manage Webmentions"
 msgstr "管理Webmention"
 
-#: modules/pingable/admin/pages/manage_pingbacks.twig:18
+#: modules/pingable/admin/pages/manage_pingbacks.twig:16
 #: modules/pingable/pingable.php:267 modules/pingable/pingable.php:294
 msgid "Webmentions"
 msgstr "引用"
 
-#: modules/pingable/admin/pages/manage_pingbacks.twig:23
+#: modules/pingable/admin/pages/manage_pingbacks.twig:21
 msgid "Post"
 msgstr "帖子"
 
-#: modules/pingable/admin/pages/manage_pingbacks.twig:24
+#: modules/pingable/admin/pages/manage_pingbacks.twig:22
 msgid "Added"
 msgstr "增加"
 

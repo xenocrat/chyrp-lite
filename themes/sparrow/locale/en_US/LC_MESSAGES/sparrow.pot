@@ -228,7 +228,7 @@ msgid "Update"
 msgstr ""
 
 #: themes/sparrow/forms/user/login.twig:5
-#: themes/sparrow/forms/user/login.twig:14
+#: themes/sparrow/forms/user/login.twig:15
 #: themes/sparrow/layouts/default.twig:92
 msgid "Log in"
 msgstr ""
@@ -245,7 +245,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: themes/sparrow/forms/user/login.twig:15
+#: themes/sparrow/forms/user/login.twig:16
 msgid "Help!"
 msgstr ""
 

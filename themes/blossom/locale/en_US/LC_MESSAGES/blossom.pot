@@ -141,7 +141,7 @@ msgstr ""
 
 #: themes/blossom/content/sidebar.twig:48
 #: themes/blossom/forms/user/login.twig:5
-#: themes/blossom/forms/user/login.twig:14
+#: themes/blossom/forms/user/login.twig:15
 msgid "Log in"
 msgstr ""
 
@@ -323,7 +323,7 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: themes/blossom/forms/user/login.twig:15
+#: themes/blossom/forms/user/login.twig:16
 msgid "Help!"
 msgstr ""
 

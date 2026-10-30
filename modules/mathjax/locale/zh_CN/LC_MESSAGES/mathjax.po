@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
 #: modules/mathjax/admin/pages/mathjax_settings.twig:3
@@ -18,11 +18,11 @@ msgstr ""
 msgid "MathJax Settings"
 msgstr "MathJax 设置"
 
-#: modules/mathjax/admin/pages/mathjax_settings.twig:11
+#: modules/mathjax/admin/pages/mathjax_settings.twig:10
 msgid "TeX and LaTeX Support"
 msgstr "TeX 和 LaTeX 支持"
 
-#: modules/mathjax/admin/pages/mathjax_settings.twig:21
+#: modules/mathjax/admin/pages/mathjax_settings.twig:20
 msgid "MathML Support"
 msgstr "MathML 支持"
 

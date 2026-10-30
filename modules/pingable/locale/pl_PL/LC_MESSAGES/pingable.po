@@ -17,7 +17,7 @@ msgstr ""
 msgid "Delete Webmention?"
 msgstr "Usunąć webmention?"
 
-#: modules/pingable/admin/pages/delete_pingback.twig:10
+#: modules/pingable/admin/pages/delete_pingback.twig:9
 #, php-format
 msgid "&#8220;%s&#8221; will be permanently deleted."
 msgstr "&#8222;%s&#8221; zostanie trwale usunięty."
@@ -31,12 +31,12 @@ msgstr "Edytuj webmention"
 msgid "Editing Webmention to &#8220;%s&#8221;"
 msgstr "Edycja webmention &#8222;%s&#8221;"
 
-#: modules/pingable/admin/pages/edit_pingback.twig:10
-#: modules/pingable/admin/pages/manage_pingbacks.twig:22
+#: modules/pingable/admin/pages/edit_pingback.twig:9
+#: modules/pingable/admin/pages/manage_pingbacks.twig:20
 msgid "Title"
 msgstr "Tytuł"
 
-#: modules/pingable/admin/pages/edit_pingback.twig:16
+#: modules/pingable/admin/pages/edit_pingback.twig:15
 msgid "Update"
 msgstr "Aktualizuj"
 
@@ -44,16 +44,16 @@ msgstr "Aktualizuj"
 msgid "Manage Webmentions"
 msgstr "Zarządzaj webmentionami"
 
-#: modules/pingable/admin/pages/manage_pingbacks.twig:18
+#: modules/pingable/admin/pages/manage_pingbacks.twig:16
 #: modules/pingable/pingable.php:267 modules/pingable/pingable.php:294
 msgid "Webmentions"
 msgstr "Webmentiony"
 
-#: modules/pingable/admin/pages/manage_pingbacks.twig:23
+#: modules/pingable/admin/pages/manage_pingbacks.twig:21
 msgid "Post"
 msgstr "Wpis"
 
-#: modules/pingable/admin/pages/manage_pingbacks.twig:24
+#: modules/pingable/admin/pages/manage_pingbacks.twig:22
 msgid "Added"
 msgstr "Dodano"
 

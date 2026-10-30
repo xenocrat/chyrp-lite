@@ -17,23 +17,23 @@ msgstr ""
 msgid "Lightbox Settings"
 msgstr "Ustawienia lightboxa"
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:10
+#: modules/lightbox/admin/pages/lightbox_settings.twig:9
 msgid "Background"
 msgstr "Tło"
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:21
+#: modules/lightbox/admin/pages/lightbox_settings.twig:20
 msgid "Edge Spacing"
 msgstr "Odstęp od krawędzi"
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:24
+#: modules/lightbox/admin/pages/lightbox_settings.twig:23
 msgid "(pixels)"
 msgstr "(piksele)"
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:27
+#: modules/lightbox/admin/pages/lightbox_settings.twig:26
 msgid "Protect Images"
 msgstr "Chroń obrazy"
 
-#: modules/lightbox/admin/pages/lightbox_settings.twig:31
+#: modules/lightbox/admin/pages/lightbox_settings.twig:30
 msgid "Prevent visitors from saving images?"
 msgstr "Zapobiec zapisywaniu obrazów przez odwiedzających?"
 

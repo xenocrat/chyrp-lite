@@ -12,60 +12,60 @@ msgstr ""
 "X-Generator: Poedit 3.6\n"
 
 #. This file is distributed under the same license as the Chyrp Lite package.
-#: modules/migrator/admin/pages/manage_migration.twig:10
+#: modules/migrator/admin/pages/manage_migration.twig:9
 msgid "eXtended .XML File"
 msgstr "eXtended .XML Bestand"
 
-#: modules/migrator/admin/pages/manage_migration.twig:16
-#: modules/migrator/admin/pages/manage_migration.twig:88
-#: modules/migrator/admin/pages/manage_migration.twig:131
+#: modules/migrator/admin/pages/manage_migration.twig:15
+#: modules/migrator/admin/pages/manage_migration.twig:83
+#: modules/migrator/admin/pages/manage_migration.twig:124
 msgid "URL for Embedded Media"
 msgstr "URL voor ingesloten media"
 
-#: modules/migrator/admin/pages/manage_migration.twig:22
+#: modules/migrator/admin/pages/manage_migration.twig:21
 #, php-format
 msgid "Usually something like <code>%s/wp-content/uploads/</code>."
 msgstr "Meestal zoiets als <code>%s/wp-content/uploads/</code>."
 
-#: modules/migrator/admin/pages/manage_migration.twig:38
+#: modules/migrator/admin/pages/manage_migration.twig:35
 msgid "Your Tumblr URL"
 msgstr "Jouw Tumblr URL"
 
-#: modules/migrator/admin/pages/manage_migration.twig:42
+#: modules/migrator/admin/pages/manage_migration.twig:39
 #, php-format
 msgid "Something like <code>https://%s.tumblr.com/</code>."
 msgstr "Zoiets als <code>https://%s.tumblr.com/</code>."
 
-#: modules/migrator/admin/pages/manage_migration.twig:43
+#: modules/migrator/admin/pages/manage_migration.twig:40
 msgid "Audio and Video cannot be imported."
 msgstr "Audio en video kunnen niet geïmporteerd worden."
 
-#: modules/migrator/admin/pages/manage_migration.twig:59
-#: modules/migrator/admin/pages/manage_migration.twig:110
+#: modules/migrator/admin/pages/manage_migration.twig:54
+#: modules/migrator/admin/pages/manage_migration.twig:103
 msgid "Host"
 msgstr "Host"
 
-#: modules/migrator/admin/pages/manage_migration.twig:64
-#: modules/migrator/admin/pages/manage_migration.twig:115
+#: modules/migrator/admin/pages/manage_migration.twig:59
+#: modules/migrator/admin/pages/manage_migration.twig:108
 msgid "Username"
 msgstr "Gebruikersnaam"
 
-#: modules/migrator/admin/pages/manage_migration.twig:69
-#: modules/migrator/admin/pages/manage_migration.twig:120
+#: modules/migrator/admin/pages/manage_migration.twig:64
+#: modules/migrator/admin/pages/manage_migration.twig:113
 msgid "Password"
 msgstr "Wachtwoord"
 
-#: modules/migrator/admin/pages/manage_migration.twig:74
-#: modules/migrator/admin/pages/manage_migration.twig:125
+#: modules/migrator/admin/pages/manage_migration.twig:69
+#: modules/migrator/admin/pages/manage_migration.twig:118
 msgid "Database"
 msgstr "Databasenaam"
 
-#: modules/migrator/admin/pages/manage_migration.twig:80
+#: modules/migrator/admin/pages/manage_migration.twig:75
 msgid "Table Prefix"
 msgstr "Tabel Prefix"
 
-#: modules/migrator/admin/pages/manage_migration.twig:94
-#: modules/migrator/admin/pages/manage_migration.twig:137
+#: modules/migrator/admin/pages/manage_migration.twig:89
+#: modules/migrator/admin/pages/manage_migration.twig:130
 #, php-format
 msgid "Usually something like <code>%s/images/</code>."
 msgstr "Meestal zoiets als <code>%s/images/</code>."

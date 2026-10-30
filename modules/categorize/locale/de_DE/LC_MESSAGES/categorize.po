@@ -45,7 +45,7 @@ msgstr ""
 msgid "Delete Category?"
 msgstr "Kategorie löschen?"
 
-#: modules/categorize/admin/pages/delete_category.twig:10
+#: modules/categorize/admin/pages/delete_category.twig:9
 #, php-format
 msgid "&#8220;%s&#8221; will be permanently deleted."
 msgstr "&#8220;%s&#8221; würde permanent gelöscht."
@@ -59,35 +59,35 @@ msgstr "Kategorie ändern"
 msgid "Editing Category &#8220;%s&#8221;"
 msgstr "Kategorie &#8220;%s&#8221; in bearbeitung;"
 
-#: modules/categorize/admin/pages/edit_category.twig:10
-#: modules/categorize/admin/pages/manage_category.twig:26
-#: modules/categorize/admin/pages/new_category.twig:10
+#: modules/categorize/admin/pages/edit_category.twig:9
+#: modules/categorize/admin/pages/manage_category.twig:24
+#: modules/categorize/admin/pages/new_category.twig:9
 msgid "Name"
 msgstr "Name"
 
-#: modules/categorize/admin/pages/edit_category.twig:16
-#: modules/categorize/admin/pages/new_category.twig:16
+#: modules/categorize/admin/pages/edit_category.twig:15
+#: modules/categorize/admin/pages/new_category.twig:15
 msgid "Slug"
 msgstr "Slug"
 
-#: modules/categorize/admin/pages/edit_category.twig:22
-#: modules/categorize/admin/pages/new_category.twig:22
+#: modules/categorize/admin/pages/edit_category.twig:21
+#: modules/categorize/admin/pages/new_category.twig:21
 msgid "The slug is the URL-friendly identifying name for this category."
 msgstr ""
 "Der Slug ist der URL-freundliche Identifikationsname für diese Kategorie."
 
-#: modules/categorize/admin/pages/edit_category.twig:26
-#: modules/categorize/admin/pages/manage_category.twig:25
-#: modules/categorize/admin/pages/new_category.twig:26
+#: modules/categorize/admin/pages/edit_category.twig:25
+#: modules/categorize/admin/pages/manage_category.twig:23
+#: modules/categorize/admin/pages/new_category.twig:25
 msgid "Listed?"
 msgstr "Aufgeführt?"
 
-#: modules/categorize/admin/pages/edit_category.twig:30
-#: modules/categorize/admin/pages/new_category.twig:30
+#: modules/categorize/admin/pages/edit_category.twig:29
+#: modules/categorize/admin/pages/new_category.twig:29
 msgid "Do you want to include this category in the categories list?"
 msgstr "Möchten Sie diese Kategorie in die Kategorienliste aufnehmen?"
 
-#: modules/categorize/admin/pages/edit_category.twig:35
+#: modules/categorize/admin/pages/edit_category.twig:34
 msgid "Update"
 msgstr "Aktualisieren"
 
@@ -96,22 +96,22 @@ msgstr "Aktualisieren"
 msgid "Manage Categories"
 msgstr "Kategorien steuern"
 
-#: modules/categorize/admin/pages/manage_category.twig:17
+#: modules/categorize/admin/pages/manage_category.twig:16
 #: modules/categorize/admin/pages/new_category.twig:3
 #: modules/categorize/admin/pages/new_category.twig:6
 msgid "New Category"
 msgstr "Neuer Kategorie"
 
-#: modules/categorize/admin/pages/manage_category.twig:21
+#: modules/categorize/admin/pages/manage_category.twig:19
 #: modules/categorize/categorize.php:257
 msgid "Categories"
 msgstr "Kategorien"
 
-#: modules/categorize/admin/pages/manage_category.twig:27
+#: modules/categorize/admin/pages/manage_category.twig:25
 msgid "Posts"
 msgstr "Blogposts"
 
-#: modules/categorize/admin/pages/new_category.twig:35
+#: modules/categorize/admin/pages/new_category.twig:34
 msgid "Add Category"
 msgstr "Kategorie Hinzufügen"
 
