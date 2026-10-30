@@ -732,14 +732,15 @@
         ): bool {
             $conds = array(Post::statuses());
 
-            if (isset($_GET['feather']))
+            if (isset($_GET['feather'])) {
                 $conds["feather"] = preg_replace(
                     "|[^a-z_\-]|i",
                     "",
                     $_GET['feather']
                 );
-            else
+            } else {
                 $conds[] = Post::feathers();
+            }
 
             $results = SQL::current()->select(
                 tables:"posts",
@@ -856,27 +857,25 @@
                         __("That username is already in use.")
                     );
 
-                if (empty($_POST['password1']) or empty($_POST['password2']))
+                if (empty($_POST['password1']) or empty($_POST['password2'])) {
                     Flash::warning(
                         __("Passwords cannot be blank.")
                     );
-                elseif ($_POST['password1'] != $_POST['password2'])
+                } elseif ($_POST['password1'] != $_POST['password2']) {
                     Flash::warning(
                         __("Passwords do not match.")
                     );
-                elseif (password_strength($_POST['password1']) < 100)
-                    Flash::message(
-                        __("Please consider setting a stronger password for your account.")
-                    );
+                }
 
-                if (empty($_POST['email']))
+                if (empty($_POST['email'])) {
                     Flash::warning(
                         __("Email address cannot be blank.")
                     );
-                elseif (!is_email($_POST['email']))
+                } elseif (!is_email($_POST['email'])) {
                     Flash::warning(
                         __("Invalid email address.")
                     );
+                }
 
                 if (!empty($_POST['website']) and !is_url($_POST['website']))
                     Flash::warning(
@@ -902,6 +901,11 @@
                         group_id:$config->default_group,
                         approved:($config->user_activation == User::ACTIVATION_NONE)
                     );
+
+                    if (password_strength($_POST['password1']) < 100)
+                        Flash::message(
+                            __("Please consider setting a stronger password for your account.")
+                        );
 
                     if (!$user->approved) {
                         switch ($config->user_activation) {
@@ -1106,6 +1110,7 @@
         public function main_controls(
         ): void {
             $visitor = Visitor::current();
+            $trigger = Trigger::current();
 
             if (!logged_in())
                 Flash::notice(
@@ -1136,23 +1141,18 @@
                         Flash::warning(
                             __("Passwords do not match.")
                         );
-                    } elseif (
-                        password_strength($_POST['new_password1']) < 100
-                    ) {
-                        Flash::message(
-                            __("Please consider setting a stronger password for your account.")
-                        );
                     }
                 }
 
-                if (empty($_POST['email']))
+                if (empty($_POST['email'])) {
                     Flash::warning(
                         __("Email address cannot be blank.")
                     );
-                elseif (!is_email($_POST['email']))
+                } elseif (!is_email($_POST['email'])) {
                     Flash::warning(
                         __("Invalid email address.")
                     );
+                }
 
                 if (!empty($_POST['website']) and !is_url($_POST['website']))
                     Flash::warning(
@@ -1164,6 +1164,9 @@
 
                 fallback($_POST['full_name'], "");
                 fallback($_POST['website'], "");
+
+                # You can block the update process with a Flash::warning().
+                $trigger->call("user_updating");
 
                 if (!Flash::exists("warning")) {
                     $visitor = $visitor->update(
@@ -1249,6 +1252,7 @@
         public function main_reset_password(
         ): void {
             $config = Config::current();
+            $trigger = Trigger::current();
 
             if (logged_in())
                 Flash::notice(
@@ -1298,18 +1302,18 @@
                         __("Invalid authentication token.")
                     );
 
-                if (empty($_POST['new_password1']) or empty($_POST['new_password2']))
+                if (empty($_POST['new_password1']) or empty($_POST['new_password2'])) {
                     Flash::warning(
                         __("Passwords cannot be blank.")
                     );
-                elseif ($_POST['new_password1'] !== $_POST['new_password2'])
+                } elseif ($_POST['new_password1'] !== $_POST['new_password2']) {
                     Flash::warning(
                         __("Passwords do not match.")
                     );
-                elseif (password_strength($_POST['new_password1']) < 100)
-                    Flash::message(
-                        __("Please consider setting a stronger password for your account.")
-                    );
+                }
+
+                # You can block the reset process with a Flash::warning().
+                $trigger->call("user_resetting_password");
 
                 if (!Flash::exists("warning")) {
                     $user->update(
@@ -1319,6 +1323,11 @@
                             $config->user_activation == User::ACTIVATION_EMAIL
                         )
                     );
+
+                    if (password_strength($_POST['new_password1']) < 100)
+                        Flash::message(
+                            __("Please consider setting a stronger password for your account.")
+                        );
 
                     Flash::notice(
                         __("Your profile has been updated."),
