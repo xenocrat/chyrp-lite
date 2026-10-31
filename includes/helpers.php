@@ -1476,18 +1476,7 @@
 
         if (!empty($strings)) {
             $where[] = $plain;
-            $queryString = implode(" ", $strings);
-
-            if (str_ends_with($queryString, "|"))
-                $queryString.= "|";
-
-            $queryString = str_replace(
-                "||".chr(31),
-                "||",
-                $queryString
-            );
-
-            $params[":query"] = "%".$queryString."%";
+            $params[":query"] = "%".implode(" ", $strings)."%";
         }
 
         $order = empty($ordering) ?
