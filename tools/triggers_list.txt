@@ -401,7 +401,7 @@ Called from:
 webmention
 ----------
 Called from:
-	includes/helpers.php on line 2649
+	includes/helpers.php on line 2638
 
 Arguments:
 	$post
@@ -412,7 +412,7 @@ Arguments:
 before_delete_upload
 --------------------
 Called from:
-	includes/helpers.php on line 3514
+	includes/helpers.php on line 3503
 
 Arguments:
 	$filename
@@ -421,7 +421,7 @@ Arguments:
 delete_upload
 -------------
 Called from:
-	includes/helpers.php on line 3517
+	includes/helpers.php on line 3506
 
 Arguments:
 	$filename
@@ -430,19 +430,19 @@ Arguments:
 before_generate_captcha
 -----------------------
 Called from:
-	includes/helpers.php on line 3784
+	includes/helpers.php on line 3773
 
 
 before_check_captcha
 --------------------
 Called from:
-	includes/helpers.php on line 3805
+	includes/helpers.php on line 3794
 
 
 correspond_activate_account
 ---------------------------
 Called from:
-	includes/helpers.php on line 4173
+	includes/helpers.php on line 4162
 
 Arguments:
 	$user
@@ -452,7 +452,7 @@ Arguments:
 correspond_reset_password
 -------------------------
 Called from:
-	includes/helpers.php on line 4215
+	includes/helpers.php on line 4204
 
 Arguments:
 	$user
@@ -462,7 +462,7 @@ Arguments:
 correspond_acknowledge_user
 ---------------------------
 Called from:
-	includes/helpers.php on line 4253
+	includes/helpers.php on line 4242
 
 Arguments:
 	$user
@@ -472,7 +472,7 @@ Arguments:
 correspond_admin_activation
 ---------------------------
 Called from:
-	includes/helpers.php on line 4291
+	includes/helpers.php on line 4280
 
 Arguments:
 	$user
@@ -1202,7 +1202,7 @@ Target:
 keyword_search
 --------------
 Called from:
-	includes/helpers.php on line 1498
+	includes/helpers.php on line 1487
 
 Target:
 	$search
@@ -1217,7 +1217,7 @@ Arguments:
 uploaded
 --------
 Called from:
-	includes/helpers.php on line 3198
+	includes/helpers.php on line 3187
 
 Target:
 	$upload_url
@@ -1229,7 +1229,7 @@ Arguments:
 send_mail
 ---------
 Called from:
-	includes/helpers.php on line 4151
+	includes/helpers.php on line 4140
 
 Target:
 	$function
