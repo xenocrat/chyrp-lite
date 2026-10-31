@@ -290,13 +290,13 @@ Called from:
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 2607
+	includes/controller/Admin.php on line 2620
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 3070
+	includes/controller/Admin.php on line 3083
 
 Arguments:
 	$group
@@ -305,7 +305,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 3108
+	includes/controller/Admin.php on line 3121
 
 Arguments:
 	$user
@@ -314,7 +314,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 3161
+	includes/controller/Admin.php on line 3174
 
 Arguments:
 	$entry
@@ -324,7 +324,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 3210
+	includes/controller/Admin.php on line 3223
 
 Arguments:
 	$entry
@@ -334,7 +334,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 3214
+	includes/controller/Admin.php on line 3227
 
 Arguments:
 	$imports
@@ -343,13 +343,13 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 3642
+	includes/controller/Admin.php on line 3655
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 3661
+	includes/controller/Admin.php on line 3674
 
 
 can_not_view_page
@@ -666,7 +666,7 @@ Arguments:
 comments_false_positives
 ------------------------
 Called from:
-	modules/comments/comments.php on line 750
+	modules/comments/comments.php on line 758
 
 Arguments:
 	$false_positives
@@ -675,7 +675,7 @@ Arguments:
 comments_false_negatives
 ------------------------
 Called from:
-	modules/comments/comments.php on line 753
+	modules/comments/comments.php on line 761
 
 Arguments:
 	$false_negatives
@@ -684,9 +684,9 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 1366
-	modules/comments/comments.php on line 1438
-	modules/comments/comments.php on line 1510
+	modules/comments/comments.php on line 1374
+	modules/comments/comments.php on line 1446
+	modules/comments/comments.php on line 1518
 
 Arguments:
 	$comment
@@ -696,7 +696,7 @@ Arguments:
 correspond_site_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1848
+	modules/comments/comments.php on line 1856
 
 Arguments:
 	$comment
@@ -705,7 +705,7 @@ Arguments:
 correspond_user_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1876
+	modules/comments/comments.php on line 1884
 
 Arguments:
 	$comment
@@ -715,7 +715,7 @@ Arguments:
 correspond_peer_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1909
+	modules/comments/comments.php on line 1917
 
 Arguments:
 	$comment
@@ -726,7 +726,7 @@ Arguments:
 add_comment
 -----------
 Called from:
-	modules/comments/model/Comment.php on line 293
+	modules/comments/model/Comment.php on line 296
 
 Arguments:
 	$comment
@@ -735,7 +735,7 @@ Arguments:
 update_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 398
+	modules/comments/model/Comment.php on line 401
 
 Arguments:
 	$comment
@@ -1064,7 +1064,7 @@ Arguments:
 posts_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 2727
+	includes/controller/Admin.php on line 2740
 
 Target:
 	$posts_atom
@@ -1076,7 +1076,7 @@ Arguments:
 pages_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 2830
+	includes/controller/Admin.php on line 2843
 
 Target:
 	$pages_atom
@@ -1088,7 +1088,7 @@ Arguments:
 export
 ------
 Called from:
-	includes/controller/Admin.php on line 2916
+	includes/controller/Admin.php on line 2929
 
 Target:
 	$exports
@@ -1097,7 +1097,7 @@ Target:
 before_import
 -------------
 Called from:
-	includes/controller/Admin.php on line 3032
+	includes/controller/Admin.php on line 3045
 
 Target:
 	$imports
@@ -1106,7 +1106,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 4204
+	includes/controller/Admin.php on line 4217
 
 Target:
 	$write
@@ -1115,7 +1115,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 4297
+	includes/controller/Admin.php on line 4310
 
 Target:
 	$manage
@@ -1124,7 +1124,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 4327
+	includes/controller/Admin.php on line 4340
 
 Target:
 	$settings
@@ -1133,7 +1133,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 4350
+	includes/controller/Admin.php on line 4363
 
 Target:
 	$extend
@@ -1142,7 +1142,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 4446
+	includes/controller/Admin.php on line 4459
 
 Target:
 	$this->context
@@ -1183,8 +1183,8 @@ markup_text
 Called from:
 	includes/controller/Ajax.php on line 265
 	includes/model/Page.php on line 367
-	modules/comments/comments.php on line 1117
-	modules/comments/model/Comment.php on line 620
+	modules/comments/comments.php on line 1125
+	modules/comments/model/Comment.php on line 623
 
 Target:
 	$content
@@ -1499,8 +1499,8 @@ Target:
 markup_comment_text
 -------------------
 Called from:
-	modules/comments/comments.php on line 1117
-	modules/comments/model/Comment.php on line 620
+	modules/comments/comments.php on line 1125
+	modules/comments/model/Comment.php on line 623
 
 Target:
 	$content
@@ -1518,7 +1518,7 @@ Target:
 comment_is_spam
 ---------------
 Called from:
-	modules/comments/model/Comment.php on line 134
+	modules/comments/model/Comment.php on line 137
 
 Target:
 	$spam
@@ -1530,7 +1530,7 @@ Arguments:
 filter_comment
 --------------
 Called from:
-	modules/comments/model/Comment.php on line 613
+	modules/comments/model/Comment.php on line 616
 
 Target:
 	$this
