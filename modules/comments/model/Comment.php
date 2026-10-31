@@ -125,7 +125,10 @@
 
             fallback($_SESSION['comments'], array());
             fallback($status,
-                ($post->user_id == $visitor->id) ?
+                (
+                    $post->user_id == $visitor->id or
+                    $visitor->group->id == $config->admin_group
+                ) ?
                     self::STATUS_APPROVED :
                     $config->module_comments["default_comment_status"]
             );
