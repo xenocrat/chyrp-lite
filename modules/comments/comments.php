@@ -247,6 +247,8 @@
 
         private function update_comment(
         ): array {
+            $visitor = Visitor::current();
+
             if (!isset($_POST['hash']) or !Session::check_token($_POST['hash']))
                 show_403(
                     __("Access Denied"),
@@ -274,10 +276,28 @@
                     __("You do not have sufficient privileges to edit this comment.", "comments")
                 );
 
+            if (!$visitor->group->can("edit_comment")) {
+                if (isset($_POST['status']))
+                    show_403(
+                        __("Access Denied"),
+                        __("You cannot specify the status of a comment.", "comments")
+                    );
+
+                if (isset($_POST['created_at']))
+                    show_403(
+                        __("Access Denied"),
+                        __("You cannot specify the timestamp of a comment.", "comments")
+                    );
+            }
+
             fallback($_POST['created_at'], $comment->created_at);
             fallback($_POST['status'], $comment->status);
             fallback($_POST['author_email'], $comment->author_email);
             fallback($_POST['author_url'], $comment->author_url);
+
+            $is_pingback = ($comment->status == Comment::STATUS_PINGBACK);
+            $status = ($is_pingback) ? $comment->status : $_POST['status'] ;
+            $notify = (!empty($_POST['notify']) and logged_in() and !$is_pingback);
 
             if (empty($_POST['body']))
                 return array(
@@ -291,7 +311,7 @@
                     __("Author can't be blank.", "comments")
                 );
 
-            if (empty($_POST['author_email']) and $_POST['status'] != Comment::STATUS_PINGBACK)
+            if (empty($_POST['author_email']) and !$is_pingback)
                 return array(
                     false,
                     __("Email address can't be blank.", "comments")
@@ -312,18 +332,6 @@
             if (!empty($_POST['author_url']))
                 $_POST['author_url'] = add_scheme($_POST['author_url']);
 
-            $notify = (!empty($_POST['notify']) and logged_in());
-            $can_edit_comment = Visitor::current()->group->can("edit_comment");
-
-            $status = ($can_edit_comment) ?
-                $_POST['status'] :
-                $comment->status ;
-
-
-            $created_at = ($can_edit_comment) ?
-                datetime($_POST['created_at']) :
-                $comment->created_at ;
-
             $comment = $comment->update(
                 body:$_POST['body'],
                 author:$_POST['author'],
@@ -331,7 +339,7 @@
                 author_email:$_POST['author_email'],
                 status:$status,
                 notify:$notify,
-                created_at:$created_at
+                created_at:$_POST['created_at']
             );
 
             return array(
