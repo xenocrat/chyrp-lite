@@ -339,7 +339,7 @@
                 author_email:$_POST['author_email'],
                 status:$status,
                 notify:$notify,
-                created_at:$_POST['created_at']
+                created_at:datetime($_POST['created_at'])
             );
 
             return array(
