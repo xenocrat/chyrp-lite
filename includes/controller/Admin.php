@@ -766,7 +766,9 @@
                     "page" => $page,
                     "pages" => Page::find(
                         array(
-                            "where" => array("id not" => $page->id)
+                            "where" => array(
+                                "id not" => $page->id
+                            )
                         )
                     )
                 )
@@ -1025,7 +1027,10 @@
             $config = Config::current();
             $options = array(
                 "where" => array(
-                    "id not" => array($config->guest_group, $config->default_group)
+                    "id not" => array(
+                        $config->guest_group,
+                        $config->default_group
+                    )
                 ),
                 "order" => "id DESC"
             );
@@ -1224,7 +1229,9 @@
 
             $options = array(
                 "order" => "id ASC",
-                "where" => array("id not" => Config::current()->guest_group)
+                "where" => array(
+                    "id not" => Config::current()->guest_group
+                )
             );
 
             $this->display(
@@ -1465,7 +1472,11 @@
                     "manage_users"
                 );
 
-            $options = array("where" => array("id not" => $user->id));
+            $options = array(
+                "where" => array(
+                    "id not" => $user->id
+                )
+            );
 
             $this->display(
                 "pages".DIR."delete_user",
@@ -1859,7 +1870,9 @@
                 );
 
             $options = array(
-                "where" => array("id not" => $group->id),
+                "where" => array(
+                    "id not" => $group->id
+                ),
                 "order" => "id ASC"
             );
 
