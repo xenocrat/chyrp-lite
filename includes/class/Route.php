@@ -256,8 +256,7 @@
                 return fix($base."/".$url, true);
 
             $urls = $controller->urls;
-
-            Trigger::current()->filter($urls, "parse_urls");
+            Trigger::current()->filter($urls, "parse_urls", $controller);
 
             # Generate a feed variant of all dirty translations
             # not native to the controller.
