@@ -91,13 +91,22 @@
         ): ?string {
             $config = Config::current();
 
-            # Serve the index if the first arg is empty and / is not a route.
-            if (empty($route->arg[0]) and !isset($config->routes["/"]))
-                return $route->action = "index";
-
-            # Serve the index if the first arg is a query and action is unset.
-            if (empty($route->action) and str_starts_with($route->arg[0], "?"))
-                return $route->action = "index";
+            # Serve the homepage or the index if the first arg is empty
+            # or if the first arg is a query and route action is unset.
+            if (
+                empty($route->arg[0]) or
+                (
+                    empty($route->action) and
+                    str_starts_with($route->arg[0], "?")
+                )
+            ) {
+                if ($config->enable_homepage) {
+                    $_GET['url'] = "home";
+                    return $route->action = "page";
+                } else {
+                    return $route->action = "index";
+                }
+            }
 
             # Discover feed requests.
             if (
@@ -200,7 +209,7 @@
             }
 
             # Custom route?
-            $route->custom();
+            Trigger::current()->call("main_determine_action", $route);
 
             # Are we viewing a post?
             Post::from_url(

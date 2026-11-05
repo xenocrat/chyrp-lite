@@ -4,16 +4,9 @@
         # Query caches for methods.
         private $caches = array();
 
-        public static function __install(
-        ): void {
-            Route::current()->add("tag/(name)/", "tag");
-        }
-
         public static function __uninstall(
             $confirm
         ): void {
-            Route::current()->remove("tag/(name)/");
-
             if ($confirm)
                 SQL::current()->delete(
                     table:"post_attributes",
@@ -245,10 +238,24 @@
         }
 
         public function parse_urls(
-            $urls
+            $urls,
+            $controller
         ): array {
-            $urls['|/tag/([^/]+)/|'] = '/?action=tag&amp;name=$1';
+            if ($controller instanceof MainController)
+                $urls['|/tag/([^/]+)/|'] = '/?action=tag&amp;name=$1';
+
             return $urls;
+        }
+
+        public function main_determine_action(
+            $route
+        ): void {
+            if ($route->arg[0] == "tag") {
+                if (isset($route->arg[1]))
+                    $_GET['name'] = $route->arg[1];
+
+                $route->action = "tag";
+            }
         }
 
         public function manage_nav(

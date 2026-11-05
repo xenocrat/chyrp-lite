@@ -7,6 +7,9 @@
         # Array: $urls
         # An array of clean URL => dirty URL translations.
         public $urls = array(
+                '|/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/$|'
+            =>  '/?action=$1&amp;$2=$3&amp;$4=$5&amp;$6',
+
                 '|/([^/]+)/([^/]+)/([^/]+)/([^/]+)/([^/]+)/$|'
             =>  '/?action=$1&amp;$2=$3&amp;$4=$5',
 
@@ -184,7 +187,7 @@
                     return $route->action = "modules";
             }
 
-            Trigger::current()->filter($route->action, "admin_determine_action");
+            Trigger::current()->call("admin_determine_action", $route);
 
             # Return 403 if we can't determine an allowed action for the visitor.
             if (!isset($route->action))
@@ -4011,9 +4014,7 @@
             # If clean URLs are already active then rewrite support must be ok.
             $rewrites_tested = $config->clean_urls;
 
-            if (!empty($_POST['enable_homepage']) and !$config->enable_homepage) {
-                $route->add("/", "page;url=home");
-
+            if (!empty($_POST['enable_homepage'])) {
                 if (Page::check_url("home") == "home" ) {
                     $page = Page::add(
                         title:__("My Awesome Homepage"),
@@ -4030,9 +4031,6 @@
                     );
                 }
             }
-
-            if (empty($_POST['enable_homepage']) and $config->enable_homepage)
-                $route->remove("/");
 
             fallback($_POST['post_url'], "(year)/(month)/(day)/(url)/");
 

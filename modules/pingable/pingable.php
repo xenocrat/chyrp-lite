@@ -275,17 +275,14 @@
         }
 
         public function admin_determine_action(
-            $action
-        ): ?string {
-            $visitor = Visitor::current();
-
+            $route
+        ): void {
             if (
-                $action == "manage" and 
-                $visitor->group->can("edit_pingback", "delete_pingback")
-            )
-                return "manage_pingbacks";
-
-            return null;
+                $route->action == "manage" and
+                Visitor::current()->group->can("edit_pingback", "delete_pingback")
+            ) {
+                $route->action = "manage_pingbacks";
+            }
         }
 
         public function manage_posts_column_header(

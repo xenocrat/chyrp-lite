@@ -40,8 +40,6 @@
             Group::add_permission("delete_comment", "Delete Comments");
             Group::add_permission("delete_own_comment", "Delete Own Comments");
             Group::add_permission("code_in_comments", "Use HTML in Comments");
-
-            Route::current()->add("comment/(id)/", "comment");
         }
 
         public static function __uninstall(
@@ -59,8 +57,6 @@
             Group::remove_permission("delete_comment");
             Group::remove_permission("delete_own_comment");
             Group::remove_permission("code_in_comments");
-
-            Route::current()->remove("comment/(id)/");
         }
 
         public function user_logged_in(
@@ -138,10 +134,24 @@
         }
 
         public function parse_urls(
-            $urls
+            $urls,
+            $controller
         ): array {
-            $urls['|/comment/([0-9]+)/|'] = '/?action=comment&amp;id=$1';
+            if ($controller instanceof MainController)
+                $urls['|/comment/([0-9]+)/|'] = '/?action=comment&amp;id=$1';
+
             return $urls;
+        }
+
+        public function main_determine_action(
+            $route
+        ): void {
+            if ($route->arg[0] == "comment") {
+                if (isset($route->arg[1]) and is_numeric($route->arg[1]))
+                    $_GET['id'] = $route->arg[1];
+
+                $route->action = "comment";
+            }
         }
 
         private function add_comment(
@@ -836,16 +846,14 @@
         }
 
         public function admin_determine_action(
-            $action
-        ): ?string {
+            $route
+        ): void {
             if (
-                $action == "manage" and
+                $route->action == "manage" and
                 (Comment::any_editable() or Comment::any_deletable())
             ) {
-                return "manage_comments";
+                $route->action = "manage_comments";
             }
-
-            return null;
         }
 
         public function settings_nav(

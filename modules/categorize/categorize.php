@@ -11,7 +11,6 @@
             Category::install();
 
             Group::add_permission("manage_categorize", "Manage Categories");
-            Route::current()->add("category/(name)/", "category");
         }
 
         public static function __uninstall(
@@ -21,7 +20,6 @@
                 Category::uninstall();
 
             Group::remove_permission("manage_categorize");
-            Route::current()->remove("category/(name)/");
         }
 
         public function list_permissions(
@@ -70,10 +68,24 @@
         }
 
         public function parse_urls(
-            $urls
+            $urls,
+            $controller
         ): array {
-            $urls['|/category/([^/]+)/|'] = '/?action=category&amp;name=$1';
+            if ($controller instanceof MainController)
+                $urls['|/category/([^/]+)/|'] = '/?action=category&amp;name=$1';
+
             return $urls;
+        }
+
+        public function main_determine_action(
+            $route
+        ): void {
+            if ($route->arg[0] == "category") {
+                if (isset($route->arg[1]))
+                    $_GET['name'] = $route->arg[1];
+
+                $route->action = "category";
+            }
         }
 
         public function manage_posts_column_header(
@@ -240,7 +252,10 @@
                 );
 
             $main->display(
-                array("pages".DIR."category", "pages".DIR."index"),
+                array(
+                    "pages".DIR."category",
+                    "pages".DIR."index"
+                ),
                 array(
                     "posts" => $posts,
                     "category" => $category->name
@@ -266,14 +281,14 @@
         }
 
         public function admin_determine_action(
-            $action
-        ): ?string {
-            $visitor = Visitor::current();
-
-            if ($action == "manage" and $visitor->group->can("manage_categorize"))
-                return "manage_category";
-
-            return null;
+            $route
+        ): void {
+            if (
+                $route->action == "manage" and
+                Visitor::current()->group->can("manage_categorize")
+            ) {
+                $route->action = "manage_category";
+            }
         }
 
         public function admin_manage_category(
