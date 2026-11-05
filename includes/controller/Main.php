@@ -262,7 +262,10 @@
         public function main_updated(
         ): void {
             $this->display(
-                array("pages".DIR."updated", "pages".DIR."index"),
+                array(
+                    "pages".DIR."updated",
+                    "pages".DIR."index"
+                ),
                 array(
                     "posts" => new Paginator(
                         Post::find(
@@ -308,7 +311,10 @@
             );
 
             $this->display(
-                array("pages".DIR."author", "pages".DIR."index"),
+                array(
+                    "pages".DIR."author",
+                    "pages".DIR."index"
+                ),
                 array(
                     "author" => $author,
                     "posts" => new Paginator(
@@ -578,7 +584,10 @@
             }
 
             $this->display(
-                array("pages".DIR."search", "pages".DIR."index"),
+                array(
+                    "pages".DIR."search",
+                    "pages".DIR."index"
+                ),
                 array(
                     "posts" => $posts,
                     "pages" => $pages,
@@ -615,7 +624,10 @@
             );
 
             $this->display(
-                array("pages".DIR."drafts", "pages".DIR."index"),
+                array(
+                    "pages".DIR."drafts",
+                    "pages".DIR."index"
+                ),
                 array("posts" => $posts),
                 __("Drafts")
             );
@@ -649,7 +661,7 @@
                 );
 
             $this->display(
-                array("pages".DIR."view"),
+                "pages".DIR."view",
                 array("post" => $post),
                 $post->title()
             );
@@ -689,7 +701,10 @@
             }
 
             $this->display(
-                array("pages".DIR."page_".$page->url, "pages".DIR."page"),
+                array(
+                    "pages".DIR."page_".$page->url,
+                    "pages".DIR."page"
+                ),
                 array("page" => $page),
                 $page->title
             );
@@ -891,7 +906,7 @@
                 # You can block the registration process with a Flash::warning().
                 $trigger->call("user_registering");
 
-                if (!Flash::exists("warning")) {
+                if (!Flash::exists(Flash::FLASH_WARNING)) {
                     $user = User::add(
                         login:$login,
                         password:User::hash_password($_POST['password1']),
@@ -1042,7 +1057,7 @@
                         __("Incorrect username and/or password.")
                     );
 
-                if (!Flash::exists("warning")) {
+                if (!Flash::exists(Flash::FLASH_WARNING)) {
                     $user = new User(
                         array("login" => $_POST['login'])
                     );
@@ -1168,7 +1183,7 @@
                 # You can block the update process with a Flash::warning().
                 $trigger->call("user_updating");
 
-                if (!Flash::exists("warning")) {
+                if (!Flash::exists(Flash::FLASH_WARNING)) {
                     $visitor = $visitor->update(
                         login:$visitor->login,
                         password:$password,
@@ -1223,7 +1238,7 @@
                         __("Please enter your username.")
                     );
 
-                if (!Flash::exists("warning")) {
+                if (!Flash::exists(Flash::FLASH_WARNING)) {
                     $user = new User(
                         array("login" => $_POST['login'])
                     );
@@ -1315,7 +1330,7 @@
                 # You can block the reset process with a Flash::warning().
                 $trigger->call("user_resetting_password");
 
-                if (!Flash::exists("warning")) {
+                if (!Flash::exists(Flash::FLASH_WARNING)) {
                     $user->update(
                         password:User::hash_password($_POST['new_password1']),
                         approved:(
