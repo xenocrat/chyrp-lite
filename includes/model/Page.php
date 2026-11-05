@@ -380,7 +380,13 @@
             $route = null
         ): self|array|false {
             # Dirty URL?
-            if (preg_match("/(\?|&)url=([^&#]+)/", $request, $slug)) {
+            if (
+                preg_match(
+                    "/(\?|&)url=([^&\#]+)/",
+                    $request,
+                    $slug
+                )
+            ) {
                 $page = new self(array("url" => $slug[2]));
 
                 return isset($route) ?
@@ -390,23 +396,33 @@
 
             $hierarchy = explode(
                 "/",
-                trim(str_replace(Config::current()->url, "/", $request), "/")
+                trim(
+                    str_replace(
+                        Config::current()->url,
+                        "/",
+                        $request
+                    ),
+                    "/"
+                )
             );
 
             $pages = self::find(
-                array("where" => array("url" => $hierarchy))
+                array(
+                    "where" => array("url" => $hierarchy)
+                )
             );
 
             # One of the URLs in the page hierarchy is invalid.
-            if (!(count($pages) == count($hierarchy)))
+            if (count($pages) != count($hierarchy))
                 return false;
 
             # Loop over the pages until we find the one we want.
             foreach ($pages as $page) {
-                if ($page->url == end($hierarchy))
+                if ($page->url == end($hierarchy)) {
                     return isset($route) ?
                         $route->try["page"] = array($page) :
                         $page ;
+                }
             }
         }
 
