@@ -22,7 +22,6 @@
             fallback($this->data["sql"],              array());
             fallback($this->data["enabled_modules"],  array());
             fallback($this->data["enabled_feathers"], array());
-            fallback($this->data["routes"],           array());
         }
 
         /**
@@ -44,6 +43,20 @@
             );
 
             return null;
+        }
+
+        /**
+         * Function __set
+         * Handles incorrect attempts to set configuration data.
+         */
+        public function __set(
+            $name,
+            $value
+        ): void {
+            trigger_error(
+                __("Use Config::set() to write configuration settings."),
+                E_USER_NOTICE
+            );
         }
 
         /**
