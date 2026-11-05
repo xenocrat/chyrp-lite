@@ -1216,7 +1216,6 @@
                 $config->set("post_url", "(year)/(month)/(day)/(url)/"),
                 $config->set("enabled_modules", array()),
                 $config->set("enabled_feathers", array("text")),
-                $config->set("routes", array()),
                 $config->set("secure_hashkey", random(32)),
                 $config->set("cacert_pem", $cacert_pem)
             );

@@ -874,6 +874,23 @@
             );
     }
 
+    /**
+     * Function: remove_routes
+     * Removes the routes config setting.
+     *
+     * Versions: 2026.03 => 2027.01
+     */
+    function remove_routes(
+    ): void {
+        $set = Config::current()->remove("routes");
+
+        if ($set === false)
+            error(
+                __("Error"),
+                __("Could not write the configuration file.")
+            );
+    }
+
     #---------------------------------------------
     # Output Starts
     #---------------------------------------------
@@ -1247,6 +1264,7 @@
         add_user_activation();
         add_manage_caches();
         add_admin_group();
+        remove_routes();
 
         # Perform module upgrades.
         foreach ($config->enabled_modules as $module) {
