@@ -54,7 +54,7 @@
             $value
         ): void {
             trigger_error(
-                __("Use Config::set() to write configuration settings."),
+                __("Use Config::set() to set the configuration."),
                 E_USER_NOTICE
             );
         }
