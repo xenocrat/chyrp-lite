@@ -143,7 +143,7 @@
             return $urls;
         }
 
-        public function main_determine_action(
+        public function parse_route_main(
             $route
         ): void {
             if ($route->arg[0] == "comment") {
@@ -845,7 +845,7 @@
             );
         }
 
-        public function admin_determine_action(
+        public function parse_route_admin(
             $route
         ): void {
             if (

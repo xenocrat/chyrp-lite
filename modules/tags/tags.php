@@ -247,7 +247,7 @@
             return $urls;
         }
 
-        public function main_determine_action(
+        public function parse_route_main(
             $route
         ): void {
             if ($route->arg[0] == "tag") {

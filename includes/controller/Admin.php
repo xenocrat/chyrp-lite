@@ -187,7 +187,7 @@
                     return $route->action = "modules";
             }
 
-            Trigger::current()->call("admin_determine_action", $route);
+            Trigger::current()->call("parse_route_admin", $route);
 
             # Return 403 if we can't determine an allowed action for the visitor.
             if (!isset($route->action))

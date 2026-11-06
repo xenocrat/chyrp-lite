@@ -209,7 +209,7 @@
             }
 
             # Custom route?
-            Trigger::current()->call("main_determine_action", $route);
+            Trigger::current()->call("parse_route_main", $route);
 
             # Are we viewing a post?
             Post::from_url(

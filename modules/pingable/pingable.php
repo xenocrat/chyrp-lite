@@ -274,7 +274,7 @@
             return $navs;
         }
 
-        public function admin_determine_action(
+        public function parse_route_admin(
             $route
         ): void {
             if (
