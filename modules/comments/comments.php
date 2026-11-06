@@ -630,7 +630,7 @@
             if (!$can_edit_comment and !$can_delete_comment)
                 show_403(
                     __("Access Denied"),
-                    __("You do not have sufficient privileges to process comments.", "comments")
+                    __("You do not have sufficient privileges to bulk process comments.", "comments")
                 );
 
             switch (fallback($_POST['task'])) {
