@@ -57,6 +57,9 @@
                     "hooks"             => [],
                     "ntfy_enabled"      => false,
                     "ntfy_topic"        => "",
+                    "gotify_enabled"    => false,
+                    "gotify_url"        => "",
+                    "gotify_token"      => "",
                     "pushover_enabled"  => false,
                     "pushover_token"    => "",
                     "pushover_user_key" => "",
@@ -118,6 +121,28 @@
                 }
             }
 
+            $gotify_enabled = !empty($_POST['gotify_enabled']);
+            $gotify_url = trim($_POST['gotify_url'] ?? "");
+            $gotify_token = trim($_POST['gotify_token'] ?? "");
+
+            if ($gotify_enabled) {
+                if (!is_url($gotify_url)) {
+                    error(
+                        __("Error"),
+                        __("Invalid Gotify URL.", "notify"),
+                        code:422
+                    );
+                }
+
+                if (empty($gotify_token)) {
+                    error(
+                        __("Error"),
+                        __("Invalid Gotify token.", "notify"),
+                        code:422
+                    );
+                }
+            }
+
             $pushover_enabled = !empty($_POST['pushover_enabled']);
             $pushover_token = trim($_POST['pushover_token'] ?? "");
             $pushover_user_key = trim($_POST['pushover_user_key'] ?? "");
@@ -155,6 +180,9 @@
                     "hooks"             => $hooks_config,
                     "ntfy_enabled"      => $ntfy_enabled,
                     "ntfy_topic"        => $ntfy_topic,
+                    "gotify_enabled"    => $gotify_enabled,
+                    "gotify_url"        => $gotify_url,
+                    "gotify_token"      => $gotify_token,
                     "pushover_enabled"  => $pushover_enabled,
                     "pushover_token"    => $pushover_token,
                     "pushover_user_key" => $pushover_user_key,
@@ -185,13 +213,9 @@
             string $message,
             string|false $url = false
         ): void {
-            $config = Config::current()->module_notify;
-
-            if ($config["ntfy_enabled"])
-                $this->send_ntfy($message, $url);
-
-            if ($config["pushover_enabled"])
-                $this->send_pushover($message, $url);
+            $this->send_ntfy($message, $url);
+            $this->send_gotify($message, $url);
+            $this->send_pushover($message, $url);
         }
 
         private function send_ntfy(
@@ -201,19 +225,47 @@
             $site = Config::current();
             $config = $site->module_notify;
 
-            if (empty($config["ntfy_topic"]))
+            if (!$config["ntfy_enabled"])
                 return;
 
-            $req_headers = ($url === false) ?
-                array() :
-                array("X-Click: ".$url) ;
+            $req_headers = array(
+                "X-Title: ".$site->name
+            );
 
-            $text = _f("[%s]: %s", array($site->name, $message), "notify");
+            if ($url !== false)
+                $req_headers[] = "X-Click: ".$url;
 
             get_remote(
                 self::NTFY_URL.$config["ntfy_topic"],
                 post: true,
-                data: urlencode($text),
+                data: urlencode($message),
+                req_headers: $req_headers
+            );
+        }
+
+        private function send_gotify(
+            string $message,
+            string|false $url = false
+        ): void {
+            $site = Config::current();
+            $config = $site->module_notify;
+
+            if (!$config["gotify_enabled"])
+                return;
+
+            $req_headers = array(
+                "X-Gotify-Key: ".$config["gotify_token"]
+            );
+
+            $data = array(
+                "title" => $site->name,
+                "message" => $message
+            );
+
+            get_remote(
+                self::$config["gotify_url"],
+                post: true,
+                data: $data,
                 req_headers: $req_headers
             );
         }
@@ -225,16 +277,14 @@
             $site = Config::current();
             $config = $site->module_notify;
 
-            if (empty($config["pushover_token"]))
-                return;
-
-            if (empty($config["pushover_user_key"]))
+            if (!$config["pushover_enabled"])
                 return;
 
             $data = array(
                 "token" => $config["pushover_token"],
                 "user" => $config["pushover_user_key"],
-                "message" => _f("[%s]: %s", array($site->name, $message), "notify")
+                "title" => $site->name,
+                "message" => $message
             );
 
             if ($url !== false)

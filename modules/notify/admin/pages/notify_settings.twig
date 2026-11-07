@@ -14,7 +14,7 @@
 </p>
 {% endfor %}
 <hr>
-<h2>{{ "ntfy.sh" | translate("notify") }}</h2>
+<h2>{{ "ntfy" | translate("notify") }}</h2>
 <p>
 <label for="ntfy_enabled">
 {{ "Enable Notifications" | translate("notify") }}
@@ -27,6 +27,25 @@
 <p>
 <label for="ntfy_topic">{{ "Topic" | translate("notify") }}</label>
 <input type="text" class="text" name="ntfy_topic" id="ntfy_topic" maxlength="64" pattern="^([\-_a-zA-Z0-9]{4,64})?$" value="{{ site.module_notify.ntfy_topic | fix(true, true) }}">
+</p>
+<hr>
+<h2>{{ "Gotify" | translate("notify") }}</h2>
+<p>
+<label for="gotify_enabled">
+{{ "Enable Notifications" | translate("notify") }}
+<a class="emblem" rel="external" href="https://gotify.net/" target="_blank">
+{{- icon_svg("info.svg", "Info" | translate) -}}
+</a>
+</label>
+<input type="checkbox" id="gotify_enabled" name="gotify_enabled" {{ site.module_notify.gotify_enabled | checked }}>
+</p>
+<p>
+<label for="gotify_url">{{ "URL" | translate("notify") }}</label>
+<input type="url" class="url" name="gotify_url" id="gotify_url" value="{{ site.module_notify.gotify_url | fix(true, true) }}">
+</p>
+<p>
+<label for="gotify_token">{{ "Token" | translate("notify") }}</label>
+<input type="text" class="text" name="gotify_token" id="gotify_token" value="{{ site.module_notify.gotify_token | fix(true, true) }}">
 </p>
 <hr>
 <h2>{{ "Pushover" | translate("notify") }}</h2>
