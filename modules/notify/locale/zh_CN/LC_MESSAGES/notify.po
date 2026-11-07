@@ -26,16 +26,25 @@ msgid "ntfy.sh"
 msgstr ""
 
 #: modules/notify/admin/pages/notify_settings.twig:20
+#: modules/notify/admin/pages/notify_settings.twig:35
 msgid "Enable Notifications"
 msgstr "开启通知"
 
 #: modules/notify/admin/pages/notify_settings.twig:28
-msgid "Host"
-msgstr "主机"
-
-#: modules/notify/admin/pages/notify_settings.twig:32
 msgid "Topic"
 msgstr "主题"
+
+#: modules/notify/admin/pages/notify_settings.twig:32
+msgid "Pushover"
+msgstr ""
+
+#: modules/notify/admin/pages/notify_settings.twig:43
+msgid "Token"
+msgstr "令牌"
+
+#: modules/notify/admin/pages/notify_settings.twig:47
+msgid "User Key"
+msgstr "用户密钥"
 
 #: modules/notify/info.php:4
 msgid "Notify"
@@ -45,62 +54,71 @@ msgstr "通知"
 msgid "Send notifications after events."
 msgstr "事件结束后发送通知。"
 
-#: modules/notify/notify.php:12
+#: modules/notify/notify.php:15
 msgid "New Post"
 msgstr "最新帖子"
 
-#: modules/notify/notify.php:13
+#: modules/notify/notify.php:16
 msgid "Post created."
 msgstr "文章创建。"
 
-#: modules/notify/notify.php:17
+#: modules/notify/notify.php:20
 msgid "New Page"
 msgstr "新页面"
 
-#: modules/notify/notify.php:18
+#: modules/notify/notify.php:21
 msgid "Page created."
 msgstr "页面已创建。"
 
-#: modules/notify/notify.php:22
+#: modules/notify/notify.php:25
 msgid "New User"
 msgstr "新用户"
 
-#: modules/notify/notify.php:23
+#: modules/notify/notify.php:26
 msgid "User created."
 msgstr "新用户已创建。"
 
-#: modules/notify/notify.php:27
+#: modules/notify/notify.php:30
 msgid "Comment Added"
 msgstr "评论已添加"
 
-#: modules/notify/notify.php:28
+#: modules/notify/notify.php:31
 msgid "Someone commented on a post."
 msgstr "有人在帖子下评论了。"
 
-#: modules/notify/notify.php:32
+#: modules/notify/notify.php:35
 msgid "Post Liked"
 msgstr "帖子被点赞"
 
-#: modules/notify/notify.php:33
+#: modules/notify/notify.php:36
 msgid "Someone liked a post."
 msgstr "有人点赞了一条帖子。"
 
-#: modules/notify/notify.php:37
+#: modules/notify/notify.php:40
 msgid "Webmention Received"
 msgstr "已收到 Webmention"
 
-#: modules/notify/notify.php:38
+#: modules/notify/notify.php:41
 msgid "Someone sent a webmention."
 msgstr "有人发送了一条 Webmention。"
 
-#: modules/notify/notify.php:112
-msgid "Invalid ntfy host URL."
-msgstr "ntfy主机网址无效。"
-
-#: modules/notify/notify.php:123
+#: modules/notify/notify.php:116
 msgid "Invalid ntfy topic."
 msgstr "无效的ntfy主题。"
 
-#: modules/notify/notify.php:192
+#: modules/notify/notify.php:130
+msgid "Invalid Pushover token."
+msgstr "无效的Pushover令牌。"
+
+#: modules/notify/notify.php:138
+msgid "Invalid Pushover user key."
+msgstr "Pushover用户密钥无效。"
+
+#: modules/notify/notify.php:212 modules/notify/notify.php:238
+#, php-format
+msgid "[%s]: %s"
+msgstr "&#12304;%s&#12305;：%s"
+
+#: modules/notify/notify.php:256
 msgid "Notifications"
 msgstr "通知"

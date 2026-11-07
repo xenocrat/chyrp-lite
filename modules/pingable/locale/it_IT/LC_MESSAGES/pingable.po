@@ -46,7 +46,7 @@ msgid "Manage Webmentions"
 msgstr "Gestisci Webmentions"
 
 #: modules/pingable/admin/pages/manage_pingbacks.twig:16
-#: modules/pingable/pingable.php:267 modules/pingable/pingable.php:294
+#: modules/pingable/pingable.php:267 modules/pingable/pingable.php:291
 msgid "Webmentions"
 msgstr "Webmention"
 

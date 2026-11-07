@@ -223,7 +223,7 @@ Arguments:
 change_setting
 --------------
 Called from:
-	includes/class/Config.php on line 124
+	includes/class/Config.php on line 137
 
 Arguments:
 	$setting
@@ -287,16 +287,25 @@ Called from:
 	includes/common.php on line 456
 
 
+parse_route_admin
+-----------------
+Called from:
+	includes/controller/Admin.php on line 190
+
+Arguments:
+	$route
+
+
 before_export
 -------------
 Called from:
-	includes/controller/Admin.php on line 2620
+	includes/controller/Admin.php on line 2623
 
 
 import_chyrp_group
 ------------------
 Called from:
-	includes/controller/Admin.php on line 3083
+	includes/controller/Admin.php on line 3086
 
 Arguments:
 	$group
@@ -305,7 +314,7 @@ Arguments:
 import_chyrp_user
 -----------------
 Called from:
-	includes/controller/Admin.php on line 3121
+	includes/controller/Admin.php on line 3124
 
 Arguments:
 	$user
@@ -314,7 +323,7 @@ Arguments:
 import_chyrp_post
 -----------------
 Called from:
-	includes/controller/Admin.php on line 3174
+	includes/controller/Admin.php on line 3177
 
 Arguments:
 	$entry
@@ -324,7 +333,7 @@ Arguments:
 import_chyrp_page
 -----------------
 Called from:
-	includes/controller/Admin.php on line 3223
+	includes/controller/Admin.php on line 3226
 
 Arguments:
 	$entry
@@ -334,7 +343,7 @@ Arguments:
 import
 ------
 Called from:
-	includes/controller/Admin.php on line 3227
+	includes/controller/Admin.php on line 3230
 
 Arguments:
 	$imports
@@ -343,49 +352,58 @@ Arguments:
 preview_theme_stopped
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 3655
+	includes/controller/Admin.php on line 3658
 
 
 preview_theme_started
 ---------------------
 Called from:
-	includes/controller/Admin.php on line 3674
+	includes/controller/Admin.php on line 3677
+
+
+parse_route_main
+----------------
+Called from:
+	includes/controller/Main.php on line 212
+
+Arguments:
+	$route
 
 
 can_not_view_page
 -----------------
 Called from:
-	includes/controller/Main.php on line 684
+	includes/controller/Main.php on line 705
 
 
 user_registering
 ----------------
 Called from:
-	includes/controller/Main.php on line 892
+	includes/controller/Main.php on line 916
 
 
 user_authenticating
 -------------------
 Called from:
-	includes/controller/Main.php on line 1038
+	includes/controller/Main.php on line 1062
 
 
 user_updating
 -------------
 Called from:
-	includes/controller/Main.php on line 1169
+	includes/controller/Main.php on line 1193
 
 
 user_resetting_password
 -----------------------
 Called from:
-	includes/controller/Main.php on line 1316
+	includes/controller/Main.php on line 1340
 
 
 feed_item
 ---------
 Called from:
-	includes/controller/Main.php on line 1467
+	includes/controller/Main.php on line 1491
 
 Arguments:
 	$post
@@ -666,7 +684,7 @@ Arguments:
 comments_false_positives
 ------------------------
 Called from:
-	modules/comments/comments.php on line 758
+	modules/comments/comments.php on line 768
 
 Arguments:
 	$false_positives
@@ -675,7 +693,7 @@ Arguments:
 comments_false_negatives
 ------------------------
 Called from:
-	modules/comments/comments.php on line 761
+	modules/comments/comments.php on line 771
 
 Arguments:
 	$false_negatives
@@ -684,9 +702,9 @@ Arguments:
 comments_feed_item
 ------------------
 Called from:
-	modules/comments/comments.php on line 1374
-	modules/comments/comments.php on line 1446
-	modules/comments/comments.php on line 1518
+	modules/comments/comments.php on line 1382
+	modules/comments/comments.php on line 1454
+	modules/comments/comments.php on line 1526
 
 Arguments:
 	$comment
@@ -696,7 +714,7 @@ Arguments:
 correspond_site_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1856
+	modules/comments/comments.php on line 1864
 
 Arguments:
 	$comment
@@ -705,7 +723,7 @@ Arguments:
 correspond_user_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1884
+	modules/comments/comments.php on line 1892
 
 Arguments:
 	$comment
@@ -715,7 +733,7 @@ Arguments:
 correspond_peer_new_comment
 ---------------------------
 Called from:
-	modules/comments/comments.php on line 1917
+	modules/comments/comments.php on line 1925
 
 Arguments:
 	$comment
@@ -939,10 +957,13 @@ Called from:
 parse_urls
 ----------
 Called from:
-	includes/class/Route.php on line 260
+	includes/class/Route.php on line 259
 
 Target:
 	$urls
+
+Arguments:
+	$controller
 
 
 related_posts
@@ -1012,19 +1033,10 @@ Target:
 	$links
 
 
-admin_determine_action
-----------------------
-Called from:
-	includes/controller/Admin.php on line 187
-
-Target:
-	$route->action
-
-
 write_post_options
 ------------------
 Called from:
-	includes/controller/Admin.php on line 251
+	includes/controller/Admin.php on line 254
 
 Target:
 	$options
@@ -1037,8 +1049,8 @@ Arguments:
 post_options
 ------------
 Called from:
-	includes/controller/Admin.php on line 252
-	includes/controller/Admin.php on line 351
+	includes/controller/Admin.php on line 255
+	includes/controller/Admin.php on line 354
 
 Target:
 	$options
@@ -1051,7 +1063,7 @@ Arguments:
 edit_post_options
 -----------------
 Called from:
-	includes/controller/Admin.php on line 350
+	includes/controller/Admin.php on line 353
 
 Target:
 	$options
@@ -1064,7 +1076,7 @@ Arguments:
 posts_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 2740
+	includes/controller/Admin.php on line 2743
 
 Target:
 	$posts_atom
@@ -1076,7 +1088,7 @@ Arguments:
 pages_export
 ------------
 Called from:
-	includes/controller/Admin.php on line 2843
+	includes/controller/Admin.php on line 2846
 
 Target:
 	$pages_atom
@@ -1088,7 +1100,7 @@ Arguments:
 export
 ------
 Called from:
-	includes/controller/Admin.php on line 2929
+	includes/controller/Admin.php on line 2932
 
 Target:
 	$exports
@@ -1097,7 +1109,7 @@ Target:
 before_import
 -------------
 Called from:
-	includes/controller/Admin.php on line 3045
+	includes/controller/Admin.php on line 3048
 
 Target:
 	$imports
@@ -1106,7 +1118,7 @@ Target:
 write_nav
 ---------
 Called from:
-	includes/controller/Admin.php on line 4217
+	includes/controller/Admin.php on line 4215
 
 Target:
 	$write
@@ -1115,7 +1127,7 @@ Target:
 manage_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 4310
+	includes/controller/Admin.php on line 4308
 
 Target:
 	$manage
@@ -1124,7 +1136,7 @@ Target:
 settings_nav
 ------------
 Called from:
-	includes/controller/Admin.php on line 4340
+	includes/controller/Admin.php on line 4338
 
 Target:
 	$settings
@@ -1133,7 +1145,7 @@ Target:
 extend_nav
 ----------
 Called from:
-	includes/controller/Admin.php on line 4363
+	includes/controller/Admin.php on line 4361
 
 Target:
 	$extend
@@ -1142,7 +1154,7 @@ Target:
 twig_context_admin
 ------------------
 Called from:
-	includes/controller/Admin.php on line 4459
+	includes/controller/Admin.php on line 4457
 
 Target:
 	$this->context
@@ -1183,7 +1195,7 @@ markup_text
 Called from:
 	includes/controller/Ajax.php on line 265
 	includes/model/Page.php on line 367
-	modules/comments/comments.php on line 1125
+	modules/comments/comments.php on line 1133
 	modules/comments/model/Comment.php on line 623
 
 Target:
@@ -1193,7 +1205,7 @@ Target:
 twig_context_main
 -----------------
 Called from:
-	includes/controller/Main.php on line 1590
+	includes/controller/Main.php on line 1614
 
 Target:
 	$this->context
@@ -1499,7 +1511,7 @@ Target:
 markup_comment_text
 -------------------
 Called from:
-	modules/comments/comments.php on line 1125
+	modules/comments/comments.php on line 1133
 	modules/comments/model/Comment.php on line 623
 
 Target:
@@ -1539,7 +1551,7 @@ Target:
 notify_define_hooks
 -------------------
 Called from:
-	modules/notify/notify.php on line 42
+	modules/notify/notify.php on line 45
 
 Target:
 	$hooks

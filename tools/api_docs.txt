@@ -20,6 +20,11 @@ Returns:
     @mixed@
 
 
+Function __set
+--------------
+Handles incorrect attempts to set configuration data.
+
+
 Function: __isset
 -----------------
 Handles access to the configuration data.
@@ -869,41 +874,6 @@ Parameters:
 Returns:
     An absolute clean or dirty URL, depending on value of
     <Config.clean_urls> and <Route.controller.clean_urls>.
-
-
-Function: add
--------------
-Adds a route to the blog.
-
-Parameters:
-    $path - The path to add. Wrap variables with () e.g. "tag/(name)/".
-    $action - The action. Add parameters with ; e.g "tag;foo=bar;baz=boo".
-
-Notes:
-    Required for actions that have more than one parameter.
-    For example, not needed for /tags/ but needed for /tag/(name)/.
-
-See Also:
-    <remove>
-
-
-Function: remove
-----------------
-Removes a route added by <add>.
-
-Parameters:
-    $path - The path to remove.
-
-See Also:
-    <add>
-
-
-Function: custom
-----------------
-Parses custom routes stored in the configuration.
-
-Notes:
-    The / path strictly requires no request args.
 
 
 Function: current
