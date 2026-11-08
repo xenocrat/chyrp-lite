@@ -122,7 +122,7 @@
             }
 
             $gotify_enabled = !empty($_POST['gotify_enabled']);
-            $gotify_url = trim($_POST['gotify_url'] ?? "");
+            $gotify_url = $_POST['gotify_url'] ?? "";
             $gotify_token = trim($_POST['gotify_token'] ?? "");
 
             if ($gotify_enabled) {
