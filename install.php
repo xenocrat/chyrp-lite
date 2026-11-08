@@ -7,8 +7,8 @@
     header("Content-Type: text/html; charset=UTF-8");
 
     define('DEBUG',                         true);
-    define('CHYRP_VERSION',                 "2026.03");
-    define('CHYRP_CODENAME',                "Sichuan");
+    define('CHYRP_VERSION',                 "2027.01");
+    define('CHYRP_CODENAME',                "Mountain");
     define('CHYRP_IDENTITY',                "Chyrp/".CHYRP_VERSION." (".CHYRP_CODENAME.")");
     define('CHYRP_ENVIRONMENT',             false);
     define('MAIN',                          false);
