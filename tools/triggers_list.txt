@@ -1551,7 +1551,7 @@ Target:
 notify_define_hooks
 -------------------
 Called from:
-	modules/notify/notify.php on line 45
+	modules/notify/notify.php on line 44
 
 Target:
 	$hooks

@@ -22,11 +22,12 @@ msgid "Events:"
 msgstr "活动："
 
 #: modules/notify/admin/pages/notify_settings.twig:17
-msgid "ntfy.sh"
+msgid "ntfy"
 msgstr ""
 
 #: modules/notify/admin/pages/notify_settings.twig:20
 #: modules/notify/admin/pages/notify_settings.twig:35
+#: modules/notify/admin/pages/notify_settings.twig:54
 msgid "Enable Notifications"
 msgstr "开启通知"
 
@@ -35,14 +36,23 @@ msgid "Topic"
 msgstr "主题"
 
 #: modules/notify/admin/pages/notify_settings.twig:32
-msgid "Pushover"
+msgid "Gotify"
 msgstr ""
 
 #: modules/notify/admin/pages/notify_settings.twig:43
+msgid "URL"
+msgstr ""
+
+#: modules/notify/admin/pages/notify_settings.twig:47
+#: modules/notify/admin/pages/notify_settings.twig:62
 msgid "Token"
 msgstr "令牌"
 
-#: modules/notify/admin/pages/notify_settings.twig:47
+#: modules/notify/admin/pages/notify_settings.twig:51
+msgid "Pushover"
+msgstr ""
+
+#: modules/notify/admin/pages/notify_settings.twig:66
 msgid "User Key"
 msgstr "用户密钥"
 
@@ -54,71 +64,78 @@ msgstr "通知"
 msgid "Send notifications after events."
 msgstr "事件结束后发送通知。"
 
-#: modules/notify/notify.php:15
+#: modules/notify/notify.php:14
 msgid "New Post"
 msgstr "最新帖子"
 
-#: modules/notify/notify.php:16
+#: modules/notify/notify.php:15
 msgid "Post created."
 msgstr "文章创建。"
 
-#: modules/notify/notify.php:20
+#: modules/notify/notify.php:19
 msgid "New Page"
 msgstr "新页面"
 
-#: modules/notify/notify.php:21
+#: modules/notify/notify.php:20
 msgid "Page created."
 msgstr "页面已创建。"
 
-#: modules/notify/notify.php:25
+#: modules/notify/notify.php:24
 msgid "New User"
 msgstr "新用户"
 
-#: modules/notify/notify.php:26
+#: modules/notify/notify.php:25
 msgid "User created."
 msgstr "新用户已创建。"
 
-#: modules/notify/notify.php:30
+#: modules/notify/notify.php:29
 msgid "Comment Added"
 msgstr "评论已添加"
 
-#: modules/notify/notify.php:31
+#: modules/notify/notify.php:30
 msgid "Someone commented on a post."
 msgstr "有人在帖子下评论了。"
 
-#: modules/notify/notify.php:35
+#: modules/notify/notify.php:34
 msgid "Post Liked"
 msgstr "帖子被点赞"
 
-#: modules/notify/notify.php:36
+#: modules/notify/notify.php:35
 msgid "Someone liked a post."
 msgstr "有人点赞了一条帖子。"
 
-#: modules/notify/notify.php:40
+#: modules/notify/notify.php:39
 msgid "Webmention Received"
 msgstr "已收到 Webmention"
 
-#: modules/notify/notify.php:41
+#: modules/notify/notify.php:40
 msgid "Someone sent a webmention."
 msgstr "有人发送了一条 Webmention。"
 
-#: modules/notify/notify.php:116
+#: modules/notify/notify.php:118
 msgid "Invalid ntfy topic."
 msgstr "无效的ntfy主题。"
 
-#: modules/notify/notify.php:130
+#: modules/notify/notify.php:132
+msgid "Invalid Gotify URL."
+msgstr "Gotify URL 无效。"
+
+#: modules/notify/notify.php:140
+msgid "Invalid Gotify token."
+msgstr "无效的Gotify令牌。"
+
+#: modules/notify/notify.php:154
 msgid "Invalid Pushover token."
 msgstr "无效的Pushover令牌。"
 
-#: modules/notify/notify.php:138
+#: modules/notify/notify.php:162
 msgid "Invalid Pushover user key."
 msgstr "Pushover用户密钥无效。"
 
-#: modules/notify/notify.php:212 modules/notify/notify.php:238
-#, php-format
-msgid "[%s]: %s"
-msgstr "&#12304;%s&#12305;：%s"
-
-#: modules/notify/notify.php:256
+#: modules/notify/notify.php:305
 msgid "Notifications"
 msgstr "通知"
+
+#, php-format
+#~ msgid "[%s]: %s"
+#~ msgstr "&#12304;%s&#12305;：%s"

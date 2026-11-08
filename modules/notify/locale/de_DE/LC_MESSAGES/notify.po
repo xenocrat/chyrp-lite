@@ -22,11 +22,12 @@ msgid "Events:"
 msgstr "Veranstaltungen:"
 
 #: modules/notify/admin/pages/notify_settings.twig:17
-msgid "ntfy.sh"
+msgid "ntfy"
 msgstr ""
 
 #: modules/notify/admin/pages/notify_settings.twig:20
 #: modules/notify/admin/pages/notify_settings.twig:35
+#: modules/notify/admin/pages/notify_settings.twig:54
 msgid "Enable Notifications"
 msgstr "Benachrichtigungen aktivieren"
 
@@ -35,14 +36,23 @@ msgid "Topic"
 msgstr "Thema"
 
 #: modules/notify/admin/pages/notify_settings.twig:32
-msgid "Pushover"
+msgid "Gotify"
 msgstr ""
 
 #: modules/notify/admin/pages/notify_settings.twig:43
-msgid "Token"
+msgid "URL"
 msgstr ""
 
 #: modules/notify/admin/pages/notify_settings.twig:47
+#: modules/notify/admin/pages/notify_settings.twig:62
+msgid "Token"
+msgstr ""
+
+#: modules/notify/admin/pages/notify_settings.twig:51
+msgid "Pushover"
+msgstr ""
+
+#: modules/notify/admin/pages/notify_settings.twig:66
 msgid "User Key"
 msgstr "Nutzer Key"
 
@@ -54,71 +64,74 @@ msgstr "Benachrichtigen"
 msgid "Send notifications after events."
 msgstr "Senden Sie Benachrichtigungen nach Ereignissen."
 
-#: modules/notify/notify.php:15
+#: modules/notify/notify.php:14
 msgid "New Post"
 msgstr "Neuer Post"
 
-#: modules/notify/notify.php:16
+#: modules/notify/notify.php:15
 msgid "Post created."
 msgstr "Post erstellt."
 
-#: modules/notify/notify.php:20
+#: modules/notify/notify.php:19
 msgid "New Page"
 msgstr "Neue Seite"
 
-#: modules/notify/notify.php:21
+#: modules/notify/notify.php:20
 msgid "Page created."
 msgstr "Seite erstellt."
 
-#: modules/notify/notify.php:25
+#: modules/notify/notify.php:24
 msgid "New User"
 msgstr "Neuer Benutzer"
 
-#: modules/notify/notify.php:26
+#: modules/notify/notify.php:25
 msgid "User created."
 msgstr "Benutzer wurde erstellt."
 
-#: modules/notify/notify.php:30
+#: modules/notify/notify.php:29
 msgid "Comment Added"
 msgstr "Kommentar hinzugefügt"
 
-#: modules/notify/notify.php:31
+#: modules/notify/notify.php:30
 msgid "Someone commented on a post."
 msgstr "Jemand hat einen Post kommentiert."
 
-#: modules/notify/notify.php:35
+#: modules/notify/notify.php:34
 msgid "Post Liked"
 msgstr "Post geliked"
 
-#: modules/notify/notify.php:36
+#: modules/notify/notify.php:35
 msgid "Someone liked a post."
 msgstr "Jemand hat einen Post geliked."
 
-#: modules/notify/notify.php:40
+#: modules/notify/notify.php:39
 msgid "Webmention Received"
 msgstr "Webmention erhalten"
 
-#: modules/notify/notify.php:41
+#: modules/notify/notify.php:40
 msgid "Someone sent a webmention."
 msgstr "Jemand hat eine Webmention geschickt."
 
-#: modules/notify/notify.php:116
+#: modules/notify/notify.php:118
 msgid "Invalid ntfy topic."
 msgstr "Ungültiges ntfy thema."
 
-#: modules/notify/notify.php:130
+#: modules/notify/notify.php:132
+msgid "Invalid Gotify URL."
+msgstr "Ungültiges Gotify-URL."
+
+#: modules/notify/notify.php:140
+msgid "Invalid Gotify token."
+msgstr "Ungültiges Gotify-Token."
+
+#: modules/notify/notify.php:154
 msgid "Invalid Pushover token."
 msgstr "Ungültiges Pushover-Token."
 
-#: modules/notify/notify.php:138
+#: modules/notify/notify.php:162
 msgid "Invalid Pushover user key."
 msgstr "Ungültiges Pushover-Benutzerschlüssel."
 
-#: modules/notify/notify.php:212 modules/notify/notify.php:238
-#, php-format
-msgid "[%s]: %s"
-msgstr ""
-
-#: modules/notify/notify.php:256
+#: modules/notify/notify.php:305
 msgid "Notifications"
 msgstr "Benachrichtigungen"
