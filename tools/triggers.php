@@ -615,6 +615,11 @@
                 margin: 1rem 0rem;
                 border-bottom: 1px solid var(--chyrp-border-grey);
             }
+            h4, h5, h6 {
+                font-size: 1em;
+                font-weight: 600;
+                margin: 1rem 0rem;
+            }
             p {
                 margin-bottom: 1rem;
             }

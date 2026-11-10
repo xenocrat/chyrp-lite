@@ -131,23 +131,30 @@ body {
     max-width: 1024px;
     background-color: var(--chyrp-pure-white);
 }
-h1, h2, h3, h4, h5, h6 {
-    font-weight: bold;
-    font-style: normal;
-    font-variant: normal;
-    margin: 1rem 0em;
-    padding: 0rem;
-}
 h1 {
     font-size: 2em;
+    font-weight: bold;
+    font-style: normal;
+    margin: 1rem 0rem;
 }
 h2 {
     font-size: 1.5em;
+    font-weight: bold;
+    font-style: normal;
+    margin: 1rem 0rem;
 }
-h3, h4, h5, h6 {
+h3 {
     font-size: 1em;
     font-weight: 600;
+    font-style: normal;
+    margin: 1rem 0rem;
     border-bottom: 1px solid var(--chyrp-border-grey);
+}
+h4, h5, h6 {
+    font-size: 1em;
+    font-weight: 600;
+    font-style: normal;
+    margin: 1rem 0rem;
 }
 sup, sub {
     line-height: 1;
