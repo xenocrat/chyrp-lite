@@ -901,13 +901,15 @@
                     );
                 }
 
-                if (!empty($_POST['website']) and !is_url($_POST['website']))
-                    Flash::warning(
-                        __("Invalid website URL.")
-                    );
-
-                if (!empty($_POST['website']))
-                    $_POST['website'] = add_scheme($_POST['website']);
+                if (!empty($_POST['website'])) {
+                    if (!is_url($_POST['website'])) {
+                        Flash::warning(
+                            __("Invalid website URL.")
+                        );
+                    } else {
+                        $_POST['website'] = add_scheme($_POST['website']);
+                    }
+                }
 
                 fallback($_POST['full_name'], "");
                 fallback($_POST['website'], "");
@@ -1178,19 +1180,27 @@
                     );
                 }
 
-                if (!empty($_POST['website']) and !is_url($_POST['website']))
-                    Flash::warning(
-                        __("Invalid website URL.")
-                    );
-
-                if (!empty($_POST['website']))
-                    $_POST['website'] = add_scheme($_POST['website']);
+                if (!empty($_POST['website'])) {
+                    if (!is_url($_POST['website'])) {
+                        Flash::warning(
+                            __("Invalid website URL.")
+                        );
+                    } else {
+                        $_POST['website'] = add_scheme($_POST['website']);
+                    }
+                }
 
                 fallback($_POST['full_name'], "");
                 fallback($_POST['website'], "");
+                fallback($_POST['password']);
 
                 # You can block the update process with a Flash::warning().
                 $trigger->call("user_updating");
+
+                if (!User::authenticate($visitor->login, $_POST['password']))
+                    Flash::warning(
+                        __("Incorrect password.")
+                    );
 
                 if (!Flash::exists(Flash::FLASH_WARNING)) {
                     $visitor = $visitor->update(
