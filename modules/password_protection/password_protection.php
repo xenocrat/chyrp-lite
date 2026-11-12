@@ -109,7 +109,7 @@
             $timeout = round($latest + $delay);
 
             if ($time < $timeout) {
-                $secs = round($timeout - $time);
+                $secs = $timeout - $time;
                 header("Retry-After: ".$secs);
 
                 error(
@@ -138,7 +138,7 @@
             $timeout = round($latest + $delay);
 
             if ($time < $timeout) {
-                $secs = round($timeout - $time);
+                $secs = $timeout - $time;
                 header("Retry-After: ".$secs);
 
                 error(
@@ -172,7 +172,7 @@
             $timeout = round($latest + $delay);
 
             if ($time < $timeout) {
-                $secs = round($timeout - $time);
+                $secs = $timeout - $time;
                 header("Retry-After: ".$secs);
 
                 error(
