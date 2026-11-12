@@ -3,9 +3,9 @@
 <label for="comment_body_field">{{ "%s's comment" | translate | format(visitor.full_name | oneof(visitor.login)) }}</label>
 {% else %}
 <label for="comment_author_field">{{ "Your name" | translate }}</label>
-<input type="text" name="author" value="{{ posted('author') | fix(true) }}" id="comment_author_field" class="text" maxlength="250">
+<input type="text" name="author" value="{{ posted('author') | fix(true) }}" id="comment_author_field" class="text" maxlength="250" required>
 <label for="comment_author_email_field">{{ "Your email" | translate }}</label>
-<input type="email" name="author_email" value="{{ posted('author_email') | fix(true) }}" id="comment_author_email_field" class="text" maxlength="128">
+<input type="email" name="author_email" value="{{ posted('author_email') | fix(true) }}" id="comment_author_email_field" class="text" maxlength="128" required>
 <label for="comment_author_url_field">{{ "Your website" | translate }}</label>
 <input type="url" name="author_url" value="{{ posted('author_url') | fix(true) }}" id="comment_author_url_field" class="text" maxlength="2048">
 <label for="comment_remember_me">{{ "Remember me" | translate }}</label>
@@ -13,7 +13,7 @@
 {{ generate_captcha() }}
 <label for="comment_body_field">{{ "Your comment" | translate }}</label>
 {% endif %}
-<textarea name="body" id="comment_body_field">{{ posted("body") | fix(false, true) }}</textarea>
+<textarea name="body" id="comment_body_field" required>{{ posted("body") | fix(false, true) }}</textarea>
 {% if visitor.group.can("code_in_comments") and site.module_comments.allowed_comment_html is not empty %}
 <small>
 {% if site.enable_markdown %}

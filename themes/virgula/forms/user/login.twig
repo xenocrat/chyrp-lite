@@ -4,9 +4,9 @@
 <h2>{{ "Log in" | translate }}</h2>
 <form action="{{ url('login') }}" method="post" accept-charset="UTF-8">
 <label for="login">{{ "Username" | translate }}</label>
-<input type="text" name="login" value="{{ posted('login') | fix(true, true) }}" id="login" autofocus>
+<input type="text" name="login" value="{{ posted('login') | fix(true, true) }}" id="login" autofocus required>
 <label for="password">{{ "Password" | translate }}</label>
-<input type="password" name="password" value="" id="password">
+<input type="password" name="password" value="" id="password" required>
 <input type="hidden" name="hash" value="{{ authenticate() }}" id="hash">
 {{ generate_captcha() }}
 {{ trigger.call("user_login") }}
