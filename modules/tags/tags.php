@@ -693,6 +693,8 @@
 
         public function admin_destroy_tag(
         ): never {
+            fallback($_SESSION['admin_redirect_to'], "manage_tags");
+
             if (!Post::any_editable())
                 show_403(
                     __("Access Denied"),
@@ -713,7 +715,7 @@
                 );
 
             if (!isset($_POST['destroy']) or $_POST['destroy'] != "indubitably")
-                redirect("manage_tags");
+                redirect($_SESSION['admin_redirect_to']);
 
             $tag = $this->tag_find_by_name($_POST['name']);
 
@@ -741,7 +743,7 @@
 
             Flash::notice(
                 __("Tag deleted.", "tags"),
-                fallback($_SESSION['admin_redirect_to'], "manage_tags")
+                $_SESSION['admin_redirect_to']
             );
         }
 
