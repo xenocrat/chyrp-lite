@@ -839,6 +839,12 @@
                 border-radius: 0.25em;
                 background-color: var(--chyrp-fill-yellow);
             }
+            @scope (aside) {
+                :scope * {
+                    margin-top: 0rem;
+                    margin-bottom: 0rem;
+                }
+            }
             .window {
                 width: 30rem;
                 background: var(--chyrp-pure-white);
