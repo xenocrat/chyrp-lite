@@ -447,7 +447,7 @@
         background-repeat: no-repeat;
     }
     input.error,
-    input:invalid {
+    input:user-invalid {
         border-color: var(--sparrow-medium-red);
         box-shadow: none;
     }
@@ -482,10 +482,18 @@
         border-radius: 0em;
         resize: vertical;
     }
+    textarea:user-invalid {
+        border-color: var(--sparrow-medium-red);
+        box-shadow: none;
+    }
     textarea:focus {
         border-color: var(--sparrow-pure-black);
         outline: var(--sparrow-pure-black) solid 2px;
         outline-offset: -2px;
+    }
+    textarea::placeholder {
+        color: var(--sparrow-inky-black);
+        opacity: 1;
     }
     button {
         font: inherit;

@@ -414,7 +414,7 @@
         color: var(--virgula-inky-black);
         opacity: 1;
     }
-    input:invalid {
+    input:user-invalid {
         border-color: var(--virgula-strong-red);
         box-shadow: none;
     }
@@ -431,6 +431,10 @@
         border: 2px solid var(--virgula-pure-black);
         border-radius: 0em;
         resize: vertical;
+    }
+    textarea:user-invalid {
+        border-color: var(--virgula-strong-red);
+        box-shadow: none;
     }
     button {
         font: inherit;

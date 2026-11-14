@@ -493,7 +493,7 @@
         opacity: 1;
     }
     input.error,
-    input:invalid {
+    input:user-invalid {
         background-color: var(--topaz-light-pink);
         box-shadow: none;
     }
@@ -522,6 +522,14 @@
         border-color: var(--topaz-strong-blue);
         outline: var(--topaz-strong-blue) solid 2px;
         outline-offset: -2px;
+    }
+    textarea::placeholder {
+        color: var(--topaz-inky-black);
+        opacity: 1;
+    }
+    textarea:user-invalid {
+        background-color: var(--topaz-light-pink);
+        box-shadow: none;
     }
     button {
         font: inherit;

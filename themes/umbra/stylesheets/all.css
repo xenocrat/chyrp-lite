@@ -431,7 +431,7 @@
         background-repeat: no-repeat;
     }
     input.error,
-    input:invalid {
+    input:user-invalid {
         color: var(--umbra-pure-white);
         background-color: var(--umbra-medium-red);
         box-shadow: none;
@@ -441,11 +441,13 @@
         border: none;
         background-color: var(--umbra-pure-white);
     }
-    input::placeholder {
+    input::placeholder,
+    textarea::placeholder {
         color: var(--umbra-pure-white);
         opacity: 1;
     }
-    input:focus::placeholder {
+    input:focus::placeholder,
+    textarea:focus::placeholder {
         color: var(--umbra-pure-black);
     }
     input#search_field {
@@ -467,6 +469,11 @@
         border-radius: 0.25em;
         background-color: var(--umbra-medium-grey);
         resize: vertical;
+    }
+    textarea:user-invalid {
+        color: var(--umbra-pure-white);
+        background-color: var(--umbra-medium-red);
+        box-shadow: none;
     }
     textarea:focus {
         color: var(--umbra-pure-black);

@@ -501,8 +501,9 @@
         opacity: 1;
     }
     input.error,
-    input:invalid {
+    input:user-invalid {
         background-color: var(--blossom-light-pink);
+        box-shadow: none;
     }
     input#sidebar_search_field {
         display: inline;
@@ -530,6 +531,14 @@
         border: 1px solid var(--blossom-strong-pink);
         outline: var(--blossom-strong-pink) solid 2px;
         outline-offset: -2px;
+    }
+    textarea::placeholder {
+        color: var(--blossom-inky-black);
+        opacity: 1;
+    }
+    textarea:user-invalid {
+        background-color: var(--blossom-light-pink);
+        box-shadow: none;
     }
     button {
         font: inherit;

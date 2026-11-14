@@ -462,8 +462,7 @@
         color: var(--akarui-strong);
         opacity: 1;
     }
-    input:invalid {
-        border-color: var(--akarui-strong);
+    input:user-invalid {
         box-shadow: inset 0px -4px 0px var(--akarui-strong);
     }
     textarea {
@@ -479,6 +478,13 @@
         border: 2px solid var(--akarui-strong);
         border-radius: 0em;
         resize: vertical;
+    }
+    textarea::placeholder {
+        color: var(--akarui-strong);
+        opacity: 1;
+    }
+    textarea:user-invalid {
+        box-shadow: inset 0px -4px 0px var(--akarui-strong);
     }
     button {
         font: inherit;
