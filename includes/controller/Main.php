@@ -1190,9 +1190,9 @@
                     }
                 }
 
+                fallback($_POST['password']);
                 fallback($_POST['full_name'], "");
                 fallback($_POST['website'], "");
-                fallback($_POST['password']);
 
                 # You can block the update process with a Flash::warning().
                 $trigger->call("user_updating");
