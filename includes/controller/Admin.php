@@ -4021,7 +4021,7 @@
                         body:__("Nothing here yet!"),
                         parent_id:0,
                         public:true,
-                        show_in_list:true,
+                        show_in_list:false,
                         clean:"home"
                     );
 
