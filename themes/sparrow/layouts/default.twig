@@ -51,6 +51,11 @@
 </li>
 {% endif %}
 {% endfor %}
+{% if site.enable_homepage %}
+<li>
+<a class="navigation_index" href="{{ url('index') }}">{{ "Blog" | translate }}</a>
+</li>
+{% endif %}
 {% if site.email_public %}
 <li>
 <a class="navigation_email" href="{{ mailto(site.email) }}">{{ "Email" | translate }}</a>
