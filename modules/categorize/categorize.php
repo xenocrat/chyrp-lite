@@ -313,7 +313,8 @@
                 );
 
             fallback($_GET['query'], "");
-            list($where, $params, $order) = keywords(
+
+            [$where, $params, $order] = keywords(
                 $_GET['query'],
                 "name LIKE :query",
                 "categorize"

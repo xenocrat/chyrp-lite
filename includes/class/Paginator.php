@@ -90,7 +90,7 @@
             );
 
             if ($model)
-                list($array, $model_name) = $this->array;
+                [$array, $model_name] = $this->array;
 
             $request = (isset($_GET[$name]) and is_numeric($_GET[$name])) ?
                 $_GET[$name] :

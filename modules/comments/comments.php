@@ -365,7 +365,7 @@
             if (isset($_POST['cancel']))
                 redirect($_SESSION['admin_redirect_to']);
 
-            list($success, $message) = $this->update_comment();
+            [$success, $message] = $this->update_comment();
 
             if (!$success)
                 error(
@@ -382,13 +382,13 @@
 
         public function ajax_add_comment(
         ): void {
-            list($success, $message) = $this->add_comment();
+            [$success, $message] = $this->add_comment();
             json_response($message, $success);
         }
 
         public function ajax_update_comment(
         ): void {
-            list($success, $message) = $this->update_comment();
+            [$success, $message] = $this->update_comment();
             json_response($message, $success);
         }
 
@@ -519,7 +519,8 @@
                 );
 
             fallback($_GET['query'], "");
-            list($where, $params, $order) = keywords(
+
+            [$where, $params, $order] = keywords(
                 $_GET['query'],
                 "body LIKE :query",
                 "comments"
@@ -573,7 +574,8 @@
                 );
 
             fallback($_GET['query'], "");
-            list($where, $params, $order) = keywords(
+
+            [$where, $params, $order] = keywords(
                 $_GET['query'],
                 "body LIKE :query",
                 "comments"
@@ -1225,7 +1227,7 @@
         ): bool {
             if (isset($_POST['action'])) {
                 if ($_POST['action'] == "add_comment") {
-                    list($success, $message) = $this->add_comment();
+                    [$success, $message] = $this->add_comment();
                     $type = ($success) ? "notice" : "warning" ;
                     Flash::$type($message);
 
@@ -1238,7 +1240,7 @@
                 }
 
                 if ($_POST['action'] == "update_comment") {
-                    list($success, $message) = $this->update_comment();
+                    [$success, $message] = $this->update_comment();
                     $type = ($success) ? "notice" : "warning" ;
                     Flash::$type($message);
 

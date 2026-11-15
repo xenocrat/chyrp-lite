@@ -116,7 +116,7 @@
                 array_unshift($this->try, $this->action);
 
             foreach ($this->try as $key => $val) {
-                list($method, $args) = is_numeric($key) ?
+                [$method, $args] = is_numeric($key) ?
                     array($val, array()) :
                     array($key, $val) ;
 

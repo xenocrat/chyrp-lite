@@ -528,7 +528,8 @@
                 );
 
             fallback($_GET['query'], "");
-            list($where, $params, $order) = keywords(
+
+            [$where, $params, $order] = keywords(
                 $_GET['query'],
                 "post_attributes.value LIKE :query OR url LIKE :query",
                 "posts"
@@ -994,7 +995,8 @@
                 );
 
             fallback($_GET['query'], "");
-            list($where, $params, $order) = keywords(
+
+            [$where, $params, $order] = keywords(
                 $_GET['query'],
                 "title LIKE :query OR body LIKE :query",
                 "pages"
@@ -1625,9 +1627,11 @@
                 );
 
             fallback($_GET['query'], "");
-            list($where, $params, $order) = keywords(
+
+            [$where, $params, $order] = keywords(
                 $_GET['query'],
-                "login LIKE :query OR full_name LIKE :query OR email LIKE :query OR website LIKE :query",
+                "login LIKE :query OR full_name LIKE :query".
+                " OR email LIKE :query OR website LIKE :query",
                 "users"
             );
 
@@ -2626,7 +2630,8 @@
 
             if (isset($_POST['posts'])) {
                 fallback($_POST['filter_posts'], "");
-                list($where, $params) = keywords(
+
+                [$where, $params] = keywords(
                     $_POST['filter_posts'],
                     "post_attributes.value LIKE :query OR url LIKE :query",
                     "posts"
@@ -2752,7 +2757,8 @@
 
             if (isset($_POST['pages'])) {
                 fallback($_POST['filter_pages'], "");
-                list($where, $params) = keywords(
+
+                [$where, $params] = keywords(
                     $_POST['filter_pages'],
                     "title LIKE :query OR body LIKE :query",
                     "pages"
@@ -2855,7 +2861,8 @@
 
             if (isset($_POST['groups'])) {
                 fallback($_POST['filter_groups'], "");
-                list($where, $params) = keywords(
+
+                [$where, $params] = keywords(
                     $_POST['filter_groups'],
                     "name LIKE :query",
                     "groups"
@@ -2882,9 +2889,11 @@
 
             if (isset($_POST['users'])) {
                 fallback($_POST['filter_users'], "");
-                list($where, $params) = keywords(
+
+                [$where, $params] = keywords(
                     $_POST['filter_users'],
-                    "login LIKE :query OR full_name LIKE :query OR email LIKE :query OR website LIKE :query",
+                    "login LIKE :query OR full_name LIKE :query".
+                    " OR email LIKE :query OR website LIKE :query",
                     "users"
                 );
 
