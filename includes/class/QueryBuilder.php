@@ -540,7 +540,11 @@
                     $cond = $val;
                 } else {
                     # Key => Val expression.
-                    if (is_string($val) and str_starts_with($val, ":")) {
+                    if (
+                        is_string($val) and
+                        str_starts_with($val, ":") and
+                        array_key_exists($val, $params)
+                    ) {
                         $cond = self::safecol($sql, $key)." = ".$val;
                     } else {
                         if (is_object($val) and !$val instanceof Stringable)
