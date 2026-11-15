@@ -2296,16 +2296,18 @@
 
             if ($post_count > 0)
                 Flash::message(
-                    __("A post is using this upload.").' <a href="'.
+                    _p("A post is using this upload.", "Posts are using this upload.", $post_count).
+                    ' <a href="'.
                     url("manage_posts/query/".urlencode($filename)).'">'.
-                    __("View post!").'</a>'
+                    _p("View post!", "View posts!", $post_count).'</a>'
                 );
 
             if ($page_count > 0)
                 Flash::message(
-                    __("A page is using this upload.").' <a href="'.
+                    _p("A page is using this upload.", "Pages are using this upload.", $page_count).
+                    ' <a href="'.
                     url("manage_pages/query/".urlencode($filename)).'">'.
-                    __("View page!").'</a>'
+                    _p("View page!", "View pages!", $page_count).'</a>'
                 );
 
             $this->display(
