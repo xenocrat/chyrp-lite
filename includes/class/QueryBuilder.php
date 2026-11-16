@@ -536,15 +536,16 @@
 
             foreach ($conds as $key => $val) {
                 if (is_int($key)) {
-                    # Full expression.
+                    # Full expression: use verbatim.
                     $cond = $val;
                 } else {
-                    # Key => Val expression.
+                    # Key => Val expression: parse it.
                     if (
                         is_string($val) and
-                        str_starts_with($val, ":") and
-                        array_key_exists($val, $params)
+                        array_key_exists($val, $params) and
+                        preg_match("/^:[a-zA-Z0-9_]+$/", $val)
                     ) {
+                        # Val is an existing parameter.
                         $cond = self::safecol($sql, $key)." = ".$val;
                     } else {
                         if (is_object($val) and !$val instanceof Stringable)
@@ -573,7 +574,7 @@
                                 $params[$param] = $val;
                             }
                         } elseif (substr($uck, -9) == " LIKE ALL" and is_array($val)) {
-                            # multiple LIKE (AND).
+                            # Multiple LIKE (AND).
                             $key = self::safecol($sql, substr($key, 0, -9));
                             $likes = array();
 
@@ -585,7 +586,7 @@
 
                             $cond = "(".implode(" AND ", $likes).")";
                         } elseif (substr($uck, -9) == " NOT LIKE" and is_array($val)) {
-                            # multiple NOT LIKE.
+                            # Multiple NOT LIKE.
                             $key = self::safecol($sql, substr($key, 0, -9));
                             $likes = array();
 
@@ -597,7 +598,7 @@
 
                             $cond = "(".implode(" AND ", $likes).")";
                         } elseif (substr($uck, -5) == " LIKE" and is_array($val)) {
-                            # multiple LIKE (OR).
+                            # Multiple LIKE (OR).
                             $key = self::safecol($sql, substr($key, 0, -5));
                             $likes = array();
 
@@ -674,12 +675,13 @@
             $name,
             &$params
         ): string {
-            $name = str_replace(
-                array("(", ")", "."),
-                "_",
-                $name
+            $strip = array(
+                " ", "&", "~", "`", "!", "@", "#", "$", "%", "^", "*",
+                "(", ")", "=", "+", "[", "{", "]", "}", "\\", "|", ";",
+                ":", "\"", "'", "—", "–", ",", "<", ".", ">", "/", "?"
             );
 
+            $name = str_replace($strip, "_", $name);
             $count = 1;
             $unique = ":".$name;
 
@@ -706,42 +708,41 @@
             $tables
         ): void {
             if (
-                !preg_match_all(
+                preg_match_all(
                     "/(\(|[\s]+|^)(?!__)([a-z0-9_\.\*]+)(\)|[\s]+|$)/",
                     $field,
                     $matches
                 )
-            )
-                return;
+            ) {
+                foreach ($matches[0] as $index => $full) {
+                    $before = $matches[1][$index];
+                    $name   = $matches[2][$index];
+                    $after  = $matches[3][$index];
 
-            foreach ($matches[0] as $index => $full) {
-                $before = $matches[1][$index];
-                $name   = $matches[2][$index];
-                $after  = $matches[3][$index];
+                    if (is_numeric($name))
+                        continue;
 
-                if (is_numeric($name))
-                    continue;
-
-                # Does it not already have a table specified?
-                if (!substr_count($full, ".")) {
-                    # Don't replace things that are already either prefixed or parameterized.
-                    $field = preg_replace(
-                        "/([^\.:'\"_]|^)".preg_quote($full, "/")."/",
-                        "\\1".$before."\"__".$tables[0]."\".".$name.$after,
-                        $field,
-                        1
-                    );
-                } else {
-                    $field = preg_replace(
-                        "/([^\.:'\"_]|^)".preg_quote($full, "/")."/",
-                        "\\1".$before."\"__".str_replace(".", "\".", $name).$after,
-                        $field,
-                        1
-                    );
+                    # Does it not already have a table specified?
+                    if (!substr_count($full, ".")) {
+                        # Don't replace things that are already prefixed or parameterized.
+                        $field = preg_replace(
+                            "/([^\.:'\"_]|^)".preg_quote($full, "/")."/",
+                            "\\1".$before."\"__".$tables[0]."\".".$name.$after,
+                            $field,
+                            1
+                        );
+                    } else {
+                        $field = preg_replace(
+                            "/([^\.:'\"_]|^)".preg_quote($full, "/")."/",
+                            "\\1".$before."\"__".str_replace(".", "\".", $name).$after,
+                            $field,
+                            1
+                        );
+                    }
                 }
-            }
 
-            $field = preg_replace("/AS ([^ ]+)\./i", "AS ", $field);
+                $field = preg_replace("/AS ([^ ]+)\./i", "AS ", $field);
+            }
         }
 
         /**
