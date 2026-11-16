@@ -820,6 +820,9 @@
          *     $sql - The SQL instance calling this method.
          *     $field - The field to "tablefy".
          *     $tables - An array of tables. The first one will be used for prepending.
+         *
+         * Notes:
+         *     Supplied field names must be lowercase and SQL keywords must be uppercase.
          */
         public static function tablefy(
             $sql,
@@ -848,7 +851,7 @@
                     if (!substr_count($full, ".")) {
                         # Don't replace things that are parameterized, prefixed, or quoted.
                         $field = preg_replace(
-                            "/([^\.:'\"_]|^)".preg_quote($full, "/")."/",
+                            "/([^\.:'\"_]|^)(?<! AS)(?! )".preg_quote($full, "/")."/",
                             "\\1".$before."\"__".$tables[0]."\".".$name.$after,
                             $field,
                             1
@@ -856,15 +859,13 @@
                     } else {
                         # Don't replace things that are parameterized, prefixed, or quoted.
                         $field = preg_replace(
-                            "/([^\.:'\"_]|^)".preg_quote($full, "/")."/",
+                            "/([^\.:'\"_]|^)(?<! AS)(?! )".preg_quote($full, "/")."/",
                             "\\1".$before."\"__".str_replace(".", "\".", $name).$after,
                             $field,
                             1
                         );
                     }
                 }
-
-                $field = preg_replace("/AS ([^ ]+)\./i", "AS ", $field);
             }
 
             return $field;
