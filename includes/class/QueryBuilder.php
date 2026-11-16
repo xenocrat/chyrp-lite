@@ -34,26 +34,67 @@
             $left_join = array(),
             &$params = array()
         ): string {
-            $query = "SELECT ".self::build_select_header($sql, $fields, $tables)."\n".
-                     "FROM ".self::build_from($sql, $tables)."\n";
+            $query = 
+                "SELECT ".
+                self::build_select_header(
+                    $sql,
+                    $fields,
+                    $tables
+                )."\n".
+                "FROM ".self::build_from(
+                    $sql,
+                    $tables
+                )."\n";
 
-            foreach ($left_join as $join)
-                $query.= "LEFT JOIN \"__".$join["table"].
-                         "\" ON ".
-                         self::build_where($sql, $join["where"], $join["table"], $params).
-                         "\n";
+            foreach ($left_join as $join) {
+                $query.=
+                    "LEFT JOIN \"__".$join["table"]."\" ON ".
+                    self::build_where(
+                        $sql,
+                        $join["where"],
+                        $join["table"],
+                        $params
+                    )."\n";
+            }
 
-            if ($conds)
-                $query.= "WHERE ".self::build_where($sql, $conds, $tables, $params)."\n";
+            if ($conds) {
+                $query.=
+                    "WHERE ".
+                    self::build_where(
+                        $sql,
+                        $conds,
+                        $tables,
+                        $params
+                    )."\n";
+            }
 
-            if ($group)
-                $query.= "GROUP BY ".self::build_group($sql, $group, $tables)."\n";
+            if ($group) {
+                $query.=
+                    "GROUP BY ".
+                    self::build_group(
+                        $sql,
+                        $group,
+                        $tables
+                    )."\n";
+            }
 
-            if ($order)
-                $query.= "ORDER BY ".self::build_order($sql, $order, $tables)."\n";
+            if ($order) {
+                $query.=
+                    "ORDER BY ".
+                    self::build_order(
+                        $sql,
+                        $order,
+                        $tables
+                    )."\n";
+            }
 
-            if (empty($left_join))
-                $query.= self::build_limits($sql, $offset, $limit);
+            if (empty($left_join)) {
+                $query.= self::build_limits(
+                    $sql,
+                    $offset,
+                    $limit
+                );
+            }
 
             return $query;
         }
@@ -98,10 +139,13 @@
                     $params[$param] = $val;
                 }
 
-            return "INSERT INTO \"__$table\"\n".
-                   self::build_insert_header($sql, $data)."\n".
-                   "VALUES\n".
-                   "(".implode(", ", array_keys($params)).")\n";
+            return
+                "INSERT INTO \"__$table\"\n".
+                self::build_insert_header(
+                    $sql,
+                    $data
+                )."\n".
+                "VALUES\n"."(".implode(", ", array_keys($params)).")\n";
         }
 
         /**
@@ -125,11 +169,25 @@
             $data,
             &$params = array()
         ): string {
-            $query = "UPDATE \"__$table\"\n".
-                     "SET ".self::build_update_values($sql, $data, $params)."\n";
+            $query =
+                "UPDATE \"__$table\"\n".
+                "SET ".
+                self::build_update_values(
+                    $sql,
+                    $data,
+                    $params
+                )."\n";
 
-            if ($conds)
-                $query.= "WHERE ".self::build_where($sql, $conds, $table, $params);
+            if ($conds) {
+                $query.=
+                    "WHERE ".
+                    self::build_where(
+                        $sql,
+                        $conds,
+                        $table,
+                        $params
+                    );
+            }
 
             return $query;
         }
@@ -155,8 +213,16 @@
         ): string {
             $query = "DELETE FROM \"__$table\"\n";
 
-            if ($conds)
-                $query.= "WHERE ".self::build_where($sql, $conds, $table, $params);
+            if ($conds) {
+                $query.=
+                    "WHERE ".
+                    self::build_where(
+                        $sql,
+                        $conds,
+                        $table,
+                        $params
+                    );
+            }
 
             return $query;
         }
@@ -196,8 +262,9 @@
             $table,
             $cols
         ): string {
-            $query = "CREATE TABLE IF NOT EXISTS \"__$table\" (\n  ".
-                     implode(",\n  ", $cols)."\n)";
+            $query = 
+                "CREATE TABLE IF NOT EXISTS \"__$table\" ".
+                "(\n  ".implode(",\n  ", $cols)."\n)";
 
             switch ($sql->adapter) {
                 case "sqlite":
@@ -254,7 +321,13 @@
             $data,
             &$params = array()
         ): string {
-            $set = self::build_conditions($sql, $data, $params, null, true);
+            $set = self::build_conditions(
+                $sql,
+                $data,
+                $params,
+                null,
+                true
+            );
             return implode(",\n    ", $set);
         }
 
@@ -342,11 +415,19 @@
             $conds,
             &$params = array()
         ): string {
-            $query = "SELECT COUNT(1) AS count\n".
-                     "FROM ".self::build_from($sql, $tables)."\n";
+            $query = 
+                "SELECT COUNT(1) AS count\n".
+                "FROM ".self::build_from($sql, $tables)."\n";
 
-            if ($conds)
-                $query.= "WHERE ".self::build_where($sql, $conds, $tables, $params);
+            if ($conds) {
+                $query.= 
+                    "WHERE ".self::build_where(
+                        $sql,
+                        $conds,
+                        $tables,
+                        $params
+                    );
+            }
 
             return $query;
         }
@@ -371,7 +452,7 @@
             $tables = (array) $tables;
 
             foreach ($fields as &$field) {
-                self::tablefy($sql, $field, $tables);
+                $field = self::tablefy($sql, $field, $tables);
                 $field = self::safecol($sql, $field);
             }
 
@@ -397,7 +478,12 @@
             $conds = (array) $conds;
             $tables = (array) $tables;
 
-            $conditions = self::build_conditions($sql, $conds, $params, $tables);
+            $conditions = self::build_conditions(
+                $sql,
+                $conds,
+                $params,
+                $tables
+            );
 
             return empty($conditions) ?
                 "" :
@@ -422,7 +508,7 @@
             $tables = (array) $tables;
 
             foreach ($by as &$column) {
-                self::tablefy($sql, $column, $tables);
+                $column = self::tablefy($sql, $column, $tables);
                 $column = self::safecol($sql, $column);
             }
 
@@ -454,7 +540,7 @@
             }
 
             foreach ($order as &$by) {
-                self::tablefy($sql, $by, $tables);
+                $by = self::tablefy($sql, $by, $tables);
                 $by = self::safecol($sql, $by);
             }
 
@@ -546,6 +632,7 @@
                         preg_match("/^:[a-zA-Z0-9_]+$/", $val)
                     ) {
                         # Val is an existing parameter.
+                        $key = self::tablefy($sql, $key, $tables);
                         $cond = self::safecol($sql, $key)." = ".$val;
                     } else {
                         if (is_object($val) and !$val instanceof Stringable)
@@ -559,9 +646,13 @@
 
                         $uck = strtoupper($key);
 
-                        if (substr($uck, -4) == " NOT") {
+                        if (
+                            substr($uck, -4) == " NOT"
+                        ) {
                             # Negation.
-                            $key = self::safecol($sql, substr($key, 0, -4));
+                            $key = substr($key, 0, -4);
+                            $key = self::tablefy($sql, $key, $tables);
+                            $key = self::safecol($sql, $key);
                             $param = self::paramify($key, $params);
 
                             if (is_array($val)) {
@@ -573,9 +664,14 @@
                                 $cond = $key." != ".$param;
                                 $params[$param] = $val;
                             }
-                        } elseif (substr($uck, -9) == " LIKE ALL" and is_array($val)) {
+                        } elseif (
+                            is_array($val) and
+                            substr($uck, -9) == " LIKE ALL"
+                        ) {
                             # Multiple LIKE (AND).
-                            $key = self::safecol($sql, substr($key, 0, -9));
+                            $key = substr($key, 0, -9);
+                            $key = self::tablefy($sql, $key, $tables);
+                            $key = self::safecol($sql, $key);
                             $likes = array();
 
                             foreach ($val as $index => $match) {
@@ -585,9 +681,15 @@
                             }
 
                             $cond = "(".implode(" AND ", $likes).")";
-                        } elseif (substr($uck, -9) == " NOT LIKE" and is_array($val)) {
+
+                        } elseif (
+                            is_array($val) and
+                            substr($uck, -9) == " NOT LIKE"
+                        ) {
                             # Multiple NOT LIKE.
-                            $key = self::safecol($sql, substr($key, 0, -9));
+                            $key = substr($key, 0, -9);
+                            $key = self::tablefy($sql, $key, $tables);
+                            $key = self::safecol($sql, $key);
                             $likes = array();
 
                             foreach ($val as $index => $match) {
@@ -597,9 +699,15 @@
                             }
 
                             $cond = "(".implode(" AND ", $likes).")";
-                        } elseif (substr($uck, -5) == " LIKE" and is_array($val)) {
+
+                        } elseif (
+                            is_array($val) and
+                            substr($uck, -5) == " LIKE"
+                        ) {
                             # Multiple LIKE (OR).
-                            $key = self::safecol($sql, substr($key, 0, -5));
+                            $key = substr($key, 0, -5);
+                            $key = self::tablefy($sql, $key, $tables);
+                            $key = self::safecol($sql, $key);
                             $likes = array();
 
                             foreach ($val as $index => $match) {
@@ -609,36 +717,50 @@
                             }
 
                             $cond = "(".implode(" OR ", $likes).")";
-                        } elseif (substr($uck, -9) == " NOT LIKE") {
+
+                        } elseif (
+                            substr($uck, -9) == " NOT LIKE"
+                        ) {
                             # NOT LIKE.
-                            $key = self::safecol($sql, substr($key, 0, -9));
+                            $key = substr($key, 0, -9);
+                            $key = self::tablefy($sql, $key, $tables);
+                            $key = self::safecol($sql, $key);
                             $param = self::paramify($key, $params);
                             $cond = $key.$text." NOT LIKE ".$param.$escape;
                             $params[$param] = $val;
-                        } elseif (substr($uck, -5) == " LIKE") {
+                        } elseif (
+                            substr($uck, -5) == " LIKE"
+                        ) {
                             # LIKE.
-                            $key = self::safecol($sql, substr($key, 0, -5));
+                            $key = substr($key, 0, -5);
+                            $key = self::tablefy($sql, $key, $tables);
+                            $key = self::safecol($sql, $key);
                             $param = self::paramify($key, $params);
                             $cond = $key.$text." LIKE ".$param.$escape;
                             $params[$param] = $val;
-                        } elseif (substr_count($key, " ")) {
+                        } elseif (
+                            substr_count($key, " ")
+                        ) {
                             # Custom operation, e.g. array("foo >" => $bar).
-                            list($param,) = explode(" ", $key);
+                            [$param,] = explode(" ", $key);
                             $param = self::paramify($param, $params);
                             $cond = self::safecol($sql, $key)." ".$param;
                             $params[$param] = $val;
                         } else {
                             # Equation.
+                            $key = self::tablefy($sql, $key, $tables);
+                            $key = self::safecol($sql, $key);
+
                             if (is_array($val)) {
-                                $cond = self::safecol($sql, $key)." IN ".
-                                        self::build_list($sql, $val, $params);
+                                $cond = $key." IN ".
+                                self::build_list($sql, $val, $params);
                             } elseif ($val === null and $insert) {
-                                $cond = self::safecol($sql, $key)." = ''";
+                                $cond = $key." = ''";
                             } elseif ($val === null) {
-                                $cond = self::safecol($sql, $key)." IS NULL";
+                                $cond = $key." IS NULL";
                             } else {
                                 $param = self::paramify($key, $params);
-                                $cond = self::safecol($sql, $key)." = ".$param;
+                                $cond = $key." = ".$param;
 
                                 if ($insert) {
                                     if (
@@ -653,9 +775,6 @@
                         }
                     }
                 }
-
-                if ($tables)
-                    self::tablefy($sql, $cond, $tables);
 
                 $conditions[] = $cond;
             }
@@ -678,10 +797,10 @@
             $strip = array(
                 " ", "&", "~", "`", "!", "@", "#", "$", "%", "^", "*",
                 "(", ")", "=", "+", "[", "{", "]", "}", "\\", "|", ";",
-                ":", "\"", "'", "—", "–", ",", "<", ".", ">", "/", "?"
+                ":", "\"", "'", "_", "-", ",", "<", ".", ">", "/", "?"
             );
 
-            $name = str_replace($strip, "_", $name);
+            $name = str_replace($strip, "", $name);
             $count = 1;
             $unique = ":".$name;
 
@@ -699,14 +818,17 @@
          *
          * Parameters:
          *     $sql - The SQL instance calling this method.
-         *     &$field - The field to "tablefy".
+         *     $field - The field to "tablefy".
          *     $tables - An array of tables. The first one will be used for prepending.
          */
         public static function tablefy(
             $sql,
-            &$field,
+            $field,
             $tables
-        ): void {
+        ): string {
+            if (!isset($tables))
+                return $field;
+
             if (
                 preg_match_all(
                     "/(\(|[\s]+|^)(?!__)([a-z0-9_\.\*]+)(\)|[\s]+|$)/",
@@ -724,7 +846,7 @@
 
                     # Does it not already have a table specified?
                     if (!substr_count($full, ".")) {
-                        # Don't replace things that are already prefixed or parameterized.
+                        # Don't replace things that are parameterized, prefixed, or quoted.
                         $field = preg_replace(
                             "/([^\.:'\"_]|^)".preg_quote($full, "/")."/",
                             "\\1".$before."\"__".$tables[0]."\".".$name.$after,
@@ -732,6 +854,7 @@
                             1
                         );
                     } else {
+                        # Don't replace things that are parameterized, prefixed, or quoted.
                         $field = preg_replace(
                             "/([^\.:'\"_]|^)".preg_quote($full, "/")."/",
                             "\\1".$before."\"__".str_replace(".", "\".", $name).$after,
@@ -743,6 +866,8 @@
 
                 $field = preg_replace("/AS ([^ ]+)\./i", "AS ", $field);
             }
+
+            return $field;
         }
 
         /**
@@ -768,7 +893,7 @@
 
             $pattern = implode("|", $keywords);
             return preg_replace(
-                "/(([^a-zA-Z0-9_]|^)($pattern)([^a-zA-Z0-9_]|$))/i",
+                "/(([^a-zA-Z0-9_\"]|^)($pattern)([^a-zA-Z0-9_\"]|$))/i",
                 '\\2"\\3"\\4',
                 $name
             );
