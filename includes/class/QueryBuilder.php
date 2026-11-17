@@ -832,43 +832,24 @@
             if (!isset($tables))
                 return $field;
 
-            if (
-                preg_match_all(
-                    "/(\(|[\s]+|^)(?!__)([a-z0-9_\.\*]+)(\)|[\s]+|$)/",
-                    $field,
-                    $matches
-                )
-            ) {
-                foreach ($matches[0] as $index => $full) {
-                    $before = $matches[1][$index];
-                    $name   = $matches[2][$index];
-                    $after  = $matches[3][$index];
+            return preg_replace_callback(
+                "/(?<!\sAS)(\(|[\s]+|^)(?!__|\.)([a-z0-9_\.\*]+)(\)|[\s]+|$)/",
+                function ($matches) use ($tables) {
+                    $before = $matches[1];
+                    $name   = $matches[2];
+                    $after  = $matches[3];
 
-                    if (is_numeric($name))
-                        continue;
-
-                    # Does it not already have a table specified?
-                    if (!substr_count($full, ".")) {
-                        # Don't replace things that are parameterized, prefixed, or quoted.
-                        $field = preg_replace(
-                            "/([^\.:'\"_]|^)(?<! AS)(?! )".preg_quote($full, "/")."/",
-                            "\\1".$before."\"__".$tables[0]."\".".$name.$after,
-                            $field,
-                            1
-                        );
+                    if (substr_count($name, ".")) {
+                        return $before."\"__".implode(
+                            "\".",
+                            explode(".", $name, 2)
+                        ).$after;
                     } else {
-                        # Don't replace things that are parameterized, prefixed, or quoted.
-                        $field = preg_replace(
-                            "/([^\.:'\"_]|^)(?<! AS)(?! )".preg_quote($full, "/")."/",
-                            "\\1".$before."\"__".str_replace(".", "\".", $name).$after,
-                            $field,
-                            1
-                        );
+                        return $before."\"__".$tables[0]."\".".$name.$after;
                     }
-                }
-            }
-
-            return $field;
+                },
+                $field
+            );
         }
 
         /**
