@@ -1715,7 +1715,7 @@
 
                 $counts = SQL::current()->select(
                     tables:"comments",
-                    fields:array("COUNT(user_id) AS total", "user_id as user_id"),
+                    fields:array("COUNT(user_id) AS total", "user_id AS user_id"),
                     conds:array(Comment::redactions()),
                     group:"user_id"
                 );
