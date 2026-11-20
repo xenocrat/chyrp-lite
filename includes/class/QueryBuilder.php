@@ -877,7 +877,7 @@
 
             $pattern = implode("|", $keywords);
             return preg_replace(
-                "/(\(|[\(\s\.,]|^)($pattern)([\)\s\.,]|$)/i",
+                "/([\(\s\.,]|^)($pattern)([\)\s\.,]|$)/i",
                 '\\1"\\2"\\3',
                 $name
             );
