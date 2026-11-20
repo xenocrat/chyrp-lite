@@ -623,7 +623,7 @@
             foreach ($conds as $key => $val) {
                 if (is_int($key)) {
                     # Full expression: use verbatim.
-                    $cond = $val;
+                    $cond = self::tablefy($sql, $val, $tables);
                 } else {
                     # Key => Val expression: parse it.
                     if (
@@ -822,7 +822,9 @@
          *     $tables - An array of tables. The first one will be used for prepending.
          *
          * Notes:
-         *     Supplied field names must be lowercase and SQL keywords must be uppercase.
+         *     Supplied field names MUST follow the pattern: [a-z\*][a-z0-9_\.]*
+         *     SQL keywords MUST be uppercase.
+         *     Parameterize string literals if they could be mistaken for table names.
          */
         public static function tablefy(
             $sql,
@@ -833,7 +835,7 @@
                 return $field;
 
             return preg_replace_callback(
-                "/(?<!\sAS)(\(|[\s]+|^)(?!__|\.)([a-z0-9_\.\*]+)(\)|[\s]+|$)/",
+                "/(\(|(?<!\sAS)[\s]+|^)([a-z\*][a-z0-9_\.]*)(\)|[\s]+|$)/",
                 function ($matches) use ($tables) {
                     $before = $matches[1];
                     $name   = $matches[2];
@@ -868,7 +870,7 @@
                 "between", "case", "check", "collate", "constraint", "create",
                 "default", "delete", "distinct", "drop", "except", "from",
                 "groups?", "having", "insert", "intersect", "into", "join",
-                "left", "like", "limit", "null", "offset", "order", "primary",
+                "key", "left", "like", "limit", "offset", "order", "primary",
                 "references", "select", "set", "table", "transaction", "union",
                 "unique", "update", "using", "values", "when", "where", "with"
             );
