@@ -867,18 +867,18 @@
             $name
         ): string|array|null {
             $keywords = array(
-                "between", "case", "check", "collate", "constraint", "create",
-                "default", "delete", "distinct", "drop", "except", "from",
-                "groups?", "having", "insert", "intersect", "into", "join",
-                "key", "left", "like", "limit", "offset", "order", "primary",
-                "references", "select", "set", "table", "transaction", "union",
-                "unique", "update", "using", "values", "when", "where", "with"
+                "BETWEEN", "CASE", "CHECK", "COLLATE", "CONSTRAINT", "CREATE",
+                "DEFAULT", "DELETE", "DISTINCT", "DROP", "EXCEPT", "FROM",
+                "GROUPS?", "HAVING", "INSERT", "INTERSECT", "INTO", "JOIN",
+                "KEY", "LEFT", "LIKE", "LIMIT", "OFFSET", "ORDER", "PRIMARY",
+                "REFERENCES", "SELECT", "SET", "TABLE", "TRANSACTION", "UNION",
+                "UNIQUE", "UPDATE", "USING", "VALUES", "WHEN", "WHERE", "WITH"
             );
 
             $pattern = implode("|", $keywords);
             return preg_replace(
-                "/(([^a-zA-Z0-9_\"]|^)($pattern)([^a-zA-Z0-9_\"]|$))/i",
-                '\\2"\\3"\\4',
+                "/(\(|[\(\s\.,]|^)($pattern)([\)\s\.,]|$)/i",
+                '\\1"\\2"\\3',
                 $name
             );
         }
