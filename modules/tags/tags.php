@@ -71,8 +71,8 @@
             $str2,
             $encoding = "UTF-8"
         ): int {
-            $str1 = preg_replace("/[[:punct:]]+/", "", $str1);
-            $str2 = preg_replace("/[[:punct:]]+/", "", $str2);
+            $str1 = preg_replace("/[^\p{L}\p{N}]+/u", "", $str1);
+            $str2 = preg_replace("/[^\p{L}\p{N}]+/u", "", $str2);
 
             return substr_compare(
                 mb_strtoupper($str1, $encoding),
