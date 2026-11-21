@@ -1353,7 +1353,7 @@
                     <input type="password" name="password1" value="<?php posted("password1"); ?>" id="password1" maxlength="128">
                 </p>
                 <p id="password2_field">
-                    <label for="password2"><?php echo __("Password"); ?> <span class="sub"><?php echo __("(again)"); ?></span></label>
+                    <label for="password2"><?php echo __("Confirm Password"); ?></label>
                     <input type="password" name="password2" value="<?php posted("password2"); ?>" id="password2" maxlength="128">
                 </p>
                 <p id="email_field">
