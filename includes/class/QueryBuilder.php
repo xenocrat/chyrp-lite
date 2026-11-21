@@ -766,8 +766,9 @@
                                     if (
                                         $key == "updated_at" and
                                         is_datetime_zero($val)
-                                    )
+                                    ) {
                                         $val = SQL_DATETIME_ZERO;
+                                    }
                                 }
 
                                 $params[$param] = $val;
@@ -824,7 +825,7 @@
          * Notes:
          *     Supplied field names MUST follow the pattern: [a-z\*][a-z0-9_\.]*
          *     SQL keywords MUST be uppercase.
-         *     Parameterize string literals if they could be mistaken for table names.
+         *     Parameterize string literals if they could be mistaken for field names.
          */
         public static function tablefy(
             $sql,
@@ -861,6 +862,9 @@
          * Parameters:
          *     $sql - The SQL instance calling this method.
          *     $name - Name of the column.
+         *
+         * Notes:
+         *     Parameterize string literals if they contain SQL keywords.
          */
         public static function safecol(
             $sql,
@@ -876,6 +880,7 @@
             );
 
             $pattern = implode("|", $keywords);
+
             return preg_replace(
                 "/([\(\s\.,]|^)($pattern)([\)\s\.,]|$)/i",
                 '\\1"\\2"\\3',
